@@ -62,8 +62,20 @@ const onRiver = (st) => st.facts.water?.kind === 'river' || st.facts.terrain ===
 
 /** The tests of the commodity rows that name a founder of their own (R2-CODE-A-12: tagged, so no row is copied). */
 const NAMING = new WeakSet();
-/** @param {(st: FoundingState) => boolean} test @returns {(st: FoundingState) => boolean} */
-const naming = (test) => (NAMING.add(test), test);
+/** R2-CODE-A-13 (ruling (4)): the founders a tagged commodity row agrees with (`FOUNDER_AGREES`), by its test. */
+const AGREES_BY_TEST = new WeakMap();
+/**
+ * @param {(st: FoundingState) => boolean} test
+ * @param {string[]} [founders] the "Founded by:" rows the row's own founder can be
+ * @returns {(st: FoundingState) => boolean}
+ */
+const naming = (test, founders) => (NAMING.add(test), founders && AGREES_BY_TEST.set(test, founders), test);
+
+/** The "Founded by:" rows an Origin row's own founder can be (`FOUNDERS_BY_TIER` in narrativeGenerator.js, as written). */
+const A_FAMILY = ['a single extended family who came and never left', 'a household that settled first and found others following it in'];
+const A_NOBLE = ['a noble granted lands by the crown and obligated to populate them', 'a noble granted lands by the crown with the resources to develop them'];
+const VETERANS = ['military veterans given land grants who brought their skills with them'];
+const MERCHANTS = ['merchants recognising economic potential before anyone else did'];
 
 /**
  * The Origin rows' tests, keyed by the row as written (`TERRAIN_NARRATIVE_HOOKS` and the commodity hooks).
@@ -105,8 +117,8 @@ export const FOUNDING_REASON_ADMITS = Object.freeze({
   // the commodity hooks: the first export's good, read against what the town has of its own
   'grew from a single logging operation whose owner refused to leave when the contract ended': naming((st) => near(st, TIMBER)),
   'was founded when foresters discovered that the surrounding woodland was three times richer than the maps showed': naming((st) => near(st, TIMBER)),
-  'began when a failed soldier received a land grant and discovered the soil was worth more than any battlefield': naming((st) => near(st, CROP)),
-  'was established on farmland that three generations of the same family refused to sell, and eventually others settled around them': naming((st) => near(st, CROP)), // R2-CODE-A-12
+  'began when a failed soldier received a land grant and discovered the soil was worth more than any battlefield': naming((st) => near(st, CROP), ['a discharged soldier who liked the view and had nowhere better to be']),
+  'was established on farmland that three generations of the same family refused to sell, and eventually others settled around them': naming((st) => near(st, CROP), A_FAMILY), // R2-CODE-A-12
   'started as a seasonal camp for deep-water fishers who stopped bothering to go home between seasons': atSea,
   'grew around a natural harbour that fish seemed to prefer. Nobody knows why, and nobody questions it': (st) => atSea(st) && isPort(st),
   'grew around fishing weirs and a sheltered barge landing where the river catch could be salted and sold': (st) => onRiver(st) && holds(st, 'institution: docks'),
@@ -117,13 +129,13 @@ export const FOUNDING_REASON_ADMITS = Object.freeze({
   "was established because the local stone cuts cleanly and doesn't crack in frost: a property worth more than it sounds": (st) => near(st, ['stone_quarry']),
   "was founded the day a shepherd's child found a stone in a streambed that turned out to be worth more than the flock": (st) => near(st, GEMS),
   "grew from a prospectors' camp into something permanent when the gems didn't run out as quickly as expected": (st) => near(st, GEMS),
-  'began when a merchant realised the local sheep produced finer wool than anything available on the open market': naming((st) => near(st, PASTURE)),
+  'began when a merchant realised the local sheep produced finer wool than anything available on the open market': naming((st) => near(st, PASTURE), MERCHANTS),
   'grew around a sheep run whose owner had the rare good sense to also build a mill and a market': naming((st) => near(st, PASTURE) && holds(st, 'institution: mill', 'market')),
   'began as a seasonal gathering point for cattle traders that became permanent when someone built an inn': (st) => holds(st, 'institution: tavern'),
-  'was established to control a salt deposit that the local lord considered more valuable than the surrounding farmland combined': naming((st) => near(st, SALT)),
+  'was established to control a salt deposit that the local lord considered more valuable than the surrounding farmland combined': naming((st) => near(st, SALT), A_NOBLE),
   'grew around salt workings that made everything they touched last longer: including the settlement itself': (st) => near(st, SALT),
   'began when a wandering alchemist settled here specifically because of what grows along the river margins': naming((st) => onRiver(st)),
-  'was founded when a group of skilled artisans pooled resources to build a permanent workshop district away from guild restrictions': naming((st) => holds(st, 'population: ≥ middling')),
+  'was founded when a group of skilled artisans pooled resources to build a permanent workshop district away from guild restrictions': naming((st) => holds(st, 'population: ≥ middling'), ['a community of tradespeople who left a larger settlement under contested circumstances']),
   "grew because the local clay and water made the finest ceramic work in the region: a reputation that preceded the settlement's name": (st) => near(st, ['river_clay']),
 });
 
@@ -146,6 +158,61 @@ export const NAMES_A_FOUNDER = Object.freeze(new Set([
   H.plains[1], H.forest[3], H.forest[5], H.crossroads[4], H.isolated[5],
   ...Object.keys(FOUNDING_REASON_ADMITS).filter((row) => NAMING.has(FOUNDING_REASON_ADMITS[row])),
 ]));
+
+/**
+ * ONE FOUNDER ON A PAGE (R2-CODE-A-13, the chair's ruling (4)): the founders each Origin row that names one AGREES
+ * with: the same founder told twice, in kind and in number. An Origin row in `NAMES_A_FOUNDER` stands only beside
+ * a "Founded by:" row listed for it here; a row not keyed here (the navigator, the foresters, the charcoal-burners,
+ * the herbalist, the logging owner, the smiths, the quarry workers, the sheep run's owner, the alchemist) agrees
+ * with no founder the tables hold. The Origin rows are read from their home by place; the commodity rows by their tests.
+ * @type {Array<[string, string[]]>}
+ */
+const AGREEMENTS = [
+  [H.river[4], A_FAMILY], // a family granted mill rights
+  [H.port[4], A_FAMILY], // a single family's shipwright operation
+  [H.isolated[5], A_FAMILY], // a single household that others joined
+  [H.isolated[4], ['three or four families who agreed to try wintering together and never stopped']], // families fleeing
+  [H.road[4], VETERANS], // a disbanded military unit
+  [H.plains[4], VETERANS], // veterans granted land
+  [H.road[5], ['a healer who stopped to treat a traveller and found the location too useful to leave']], // a healer
+  [H.isolated[0], ['a small religious community whose members drifted into secular life over two generations']], // religious hermits
+  [H.plains[1], A_NOBLE], // farmland granted to a favoured noble
+  [H.forest[3], A_NOBLE], // a noble's hunting lodge
+  [H.crossroads[4], [...MERCHANTS, 'a great trade house that outgrew every other settlement in the region']], // a merchant family's counting house
+  // the commodity rows (a family that would not sell, a failed soldier, a lord's salt, a merchant's wool, artisans), by their tagged tests
+  ...Object.keys(FOUNDING_REASON_ADMITS).filter((row) => AGREES_BY_TEST.has(FOUNDING_REASON_ADMITS[row]))
+    .map((row) => /** @type {[string, string[]]} */ ([row, AGREES_BY_TEST.get(FOUNDING_REASON_ADMITS[row])])),
+];
+/** @type {Map<string, ReadonlySet<string>>} */
+const AGREES = new Map();
+for (const [row, founders] of AGREEMENTS) AGREES.set(row, Object.freeze(new Set(founders)));
+/** The agreement table, keyed by the Origin row (read by `oneFounderRow` and its test). */
+export const FOUNDER_AGREES = /** @type {ReadonlyMap<string, ReadonlySet<string>>} */ (AGREES);
+
+/**
+ * The Origin row the page keeps beside its "Founded by:" row (R2-CODE-A-13, ruling (4)): a row that names no
+ * founder, or one that agrees with `foundedBy`, stands; a founder row that disagrees resolves DRAW-FREE, as a
+ * refused row does, to the next row of the same pool (onward from it, wrapping) whose own test holds and that names
+ * no founder; where none does, no row (null: silence is not a false sentence). No state in reach keeps the row.
+ * @param {readonly string[]} pool
+ * @param {string | null} reason the Origin row as `admittedRow` resolved it
+ * @param {string | null} foundedBy the "Founded by:" row
+ * @param {Readonly<Record<string, (st: FoundingState) => boolean>>} admits
+ * @param {FoundingState | null} state
+ * @returns {string | null}
+ */
+export const oneFounderRow = (pool, reason, foundedBy, admits, state) => {
+  if (!state || reason == null || !NAMES_A_FOUNDER.has(String(reason))) return reason;
+  if (FOUNDER_AGREES.get(String(reason))?.has(String(foundedBy))) return reason;
+  const at = pool.indexOf(reason);
+  for (let k = 1; k < pool.length; k++) {
+    const row = pool[(at + k) % pool.length];
+    const test = admits[String(row)];
+    if ((test && !test(state)) || NAMES_A_FOUNDER.has(String(row))) continue;
+    return row;
+  }
+  return null;
+};
 
 /**
  * The founders' tests (`FOUNDERS_BY_TIER`): a founder line that names a house reads the roster.

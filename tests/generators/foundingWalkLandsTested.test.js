@@ -98,7 +98,7 @@ describe('the Origin walk lands only on a row whose own test holds', () => {
 
   it('W3: the guard towns keep each cured row where the record makes it true (every row)', () => {
     expectNoSeedFailures(collectSeedFailures([
-      ['rr3x-metropolis-wartime-crossroads-1', /rich farmland granted/],
+      ['rr3x-town-mass_migration-crossroads-0', /rich farmland granted/], // R2-CODE-A-13 (ruling (4)): re-keyed by identity, the farmland row beside its own founder (a noble granted lands); the metropolis's founder is an imperial decree
       ['rr3x-metropolis-succession_void-river-2', /ferry crossing that became the first bridge/],
       ['rr3x-metropolis-religious_conversion-isolated-0', /^grew from a logging camp$/],
       ['rr3x-metropolis-plague_onset-crossroads-0', /herders gathered/],

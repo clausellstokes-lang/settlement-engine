@@ -152,7 +152,9 @@ describe('the founding rows read the record', () => {
     expect(admittedRow(['p', 'q'], 'p', { p: no, q: no }, st, new Set(['nav']))).toBe('p');
   });
 
-  it('A5: guard town r2r-city-16 — the navigator row DRAWN as such still prints', () => {
-    expect(born('r2r-city-16').history.founding.reason).toBe('grew because a famous navigator retired here and others followed');
+  // R2-CODE-A-13 (ruling (4)): re-keyed by identity — a founder row DRAWN as such still prints, now where it agrees with
+  // the "Founded by:" row (r2r-city-16's navigator beside a noble house is two founders; tests/generators/foundingOneFounder.test.js)
+  it('A5: guard town r2r-thorp-17 — a founder row DRAWN as such still prints', () => {
+    expect(born('r2r-thorp-17').history.founding.reason).toBe('grew from a single household that others joined over decades until it became permanent');
   });
 });
