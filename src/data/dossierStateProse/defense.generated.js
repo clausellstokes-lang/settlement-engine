@@ -4535,7 +4535,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "angle": "ledger",
           "marks": [
             "no crisis: under_siege",
-            "no crisis: wartime"
+            "no crisis: wartime",
+            "no crisis: occupied"
           ],
           "text": "{settlement} has no organized force. Defense here is individual armed citizens, with no command, no training and no way to coordinate a response.",
           "slots": [
@@ -4547,7 +4548,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "angle": "street",
           "marks": [
             "no crisis: under_siege",
-            "no crisis: wartime"
+            "no crisis: wartime",
+            "no crisis: occupied"
           ],
           "text": "If {settlement} were attacked, its people would fight with no leaders and no plan, each household for itself.",
           "slots": [
@@ -4559,7 +4561,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "angle": "visitor",
           "marks": [
             "no crisis: under_siege",
-            "no crisis: wartime"
+            "no crisis: wartime",
+            "no crisis: occupied"
           ],
           "text": "Nobody at {settlement} is responsible for defending the town; ask who is, and nobody can name anyone.",
           "slots": [

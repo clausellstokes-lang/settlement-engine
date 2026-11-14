@@ -55,8 +55,8 @@
   },
   "leaves": {
     "src/data/dossierStateProse/defense.generated.js": {
-      "raw": 262655,
-      "gzip": 35299,
+      "raw": 262760,
+      "gzip": 35307,
       "ceilingRaw": 488168,
       "ceilingGzip": 108482
     },
@@ -619,6 +619,14 @@
       "toRaw": 262655,
       "gzipAfter": 35299,
       "reason": "+73 B raw over the committed 262582 (gzip level 9: 35296 -> 35299): DS-DEF-2 plagued perimeter AND force v2: + no crisis: under_siege, occupied"
+    },
+    {
+      "car": "W2-WRITE-10 DS-DEF-5 occupied",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 262655,
+      "toRaw": 262760,
+      "gzipAfter": 35307,
+      "reason": "+105 B raw over the committed 262655 (gzip level 9: 35299 -> 35307): DS-DEF-5 NO organized force v1-v3: + no crisis: occupied"
     }
   ],
   "ceilingTransfersNewLeaves": [

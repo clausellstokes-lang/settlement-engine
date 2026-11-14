@@ -115,6 +115,9 @@ const GUARDS = [
   { seed: 'w5-city-occupied-102', pool: 'DS-DEF-2::Invasion & War: walls AND professional garrison', vid: 3, why: 'an occupation: "People ... believe the town could be held" while the occupiers hold it (v1\'s sibling)' },
   { seed: 'rww-city-under_siege-1', pool: 'DS-DEF-2::Beasts & Monsters: plagued, perimeter AND organized force', vid: 2, why: 'a siege: "the rotations run, the gates close on time, and nobody treats any of it as unusual" (the round\'s #645, Panteakra)' },
   { seed: 'w5-city-occupied-3', pool: 'DS-DEF-2::Beasts & Monsters: plagued, perimeter AND organized force', vid: 2, why: 'an occupation: the same week\'s routine of a town the occupiers hold (#645, Gankhuuiin)' },
+  { seed: 'w5-hamlet-occupied-1', pool: 'DS-DEF-5::NO organized force at all', vid: 1, why: 'an occupation: "Defense here is individual armed citizens" where the occupiers\' troops stand (HANDBACK-6, Ulfas)' },
+  { seed: 'w5-thorp-occupied-102', pool: 'DS-DEF-5::NO organized force at all', vid: 2, why: 'an occupation: "If X were attacked, its people would fight with no leaders" of a place already taken (v1\'s sibling)' },
+  { seed: 'w5-hamlet-occupied-104', pool: 'DS-DEF-5::NO organized force at all', vid: 3, why: 'an occupation: "Nobody ... is responsible for defending the town" beside the occupiers\' troops (HANDBACK-6, Ulfas, w5-hamlet-occupied-104)' },
 ];
 
 /** @param {string} seed */
