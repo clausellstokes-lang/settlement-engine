@@ -1,6 +1,6 @@
 # W2-FIX-DATA-14: the data lane, its own worklist by the census's command (kept current after every item)
 
-**State: IN WORK.** Every figure EXECUTED unless marked PLAUSIBLE.
+**State: IN WORK. Pushed to a7266c5ec: the merge, the table, LV-CATHEDRAL.** Every figure EXECUTED unless marked PLAUSIBLE.
 
 **Seat.** The fourteenth seat on `lane/w2-fix-data-2026-11-13`, from `6f70f3d04` (read back from origin first: the brief's tip, no stop). Chair: `session_01ACmDYZrFEVXyZEUg1NDxxC`. Brief: `origin/lane/chair-2026-11-08:docs/chair/2026-11-14/briefs/BRIEF-W2-FIX-DATA-14.md`. Nothing at or below 6f70f3d04 is rewritten.
 
@@ -49,3 +49,41 @@ The census's ONE COMMAND (CENSUS-3 probes by git archive of `origin/lane/census-
 | - | NAMED (r4), the EXPORT'S: the journal prints a house's `source` raw after its description, "(coherence_repair)", "(faction_boost)" | src/foundry/journalPages.js:371 | 166 towns in this lane's rows (157 dumps carry "(coherence_repair)") | the export's | the census's kind d, 82 of the widest row's 206 |
 
 The census's own widest row for this lane, `institutionDescColour.js :: DESC_VARIANT_COLOUR_DECLARATIONS` (206 towns), reads as: the banalité 76 and the church walk 32 STRUCK, the journal's raw source tag 82 NAMED (r4), fulling 21 (row 2), the siege cells 11 (row 6), the rest struck. A colour mark is silence to every draw: the writer of those texts is the catalogue and its variants, not the colour column.
+
+## 3. The rows as cured
+
+### 1 · LV-CATHEDRAL (the chair's r3): CURED, `a7266c5ec`
+
+- `src/data/economicData.js` TRADE_DEPENDENCY_NEEDS, "Cathedral (10,000+ only)" and "Great cathedral": `svcs` -> `["cathedral repairs"]` (the hoisted `RELIGIOUS_SERVICES` phrase, used by these two rows only, replaced by `CATHEDRAL_REPAIRS`). Holders by content: every differing copy of the file on the 75 lanes of 11-12..11-14 is a state of this lane's own.
+- Counts on the 720: the old line 100 towns -> 0; "Cathedral repairs here depend on stone ..." 100.
+- DECLARED MOVE: 100 births; `.economicState.tradeDependencies[].affectedServices[]` 100 and `.economicState.activeChains[].dependency.affectedServices[]` 100, nothing else; with them the Services tab's at-risk marks for the three old service names.
+- Read (CENSUS-3's render of every surface on the cured tree): r2r-city-23 (10,036, the smallest), r2s-under_siege-city-0 (the siege's form), r2s-occupied-city-2 (occupation; the shared clause), r2s-famine-metropolis-2 (famine; Great cathedral), r2r-metropolis-8 (344,689, the largest). The line prints on the Economics tab's chain card only. The re-renders differ from the tip's dumps in one more place, a "Patron deity" premium panel absent in two of them: a render-environment difference, not this cure's (PLAUSIBLE; the field diff moves no other family).
+- Guard: `tests/data/w2FixData14Rows.test.js` LV-CATHEDRAL, red 4 of 4 before; each of its three arms red 4 of 4 by a plant not committed. Doors: presumed-things walker red on 3 titles, identical at the merged base (ARM 1 153 rows, ARM 3 one strip in foodGenerator.js, ARM 2 two stale rows: the joined line's, no rise); grid 0 falls; domain-strict, type ratchet, eslint 0; the five test files naming economicData.js green.
+
+## 4. EVERY NEW OR CHANGED LINE, with the towns it was read in (the owner's veto list)
+
+- economicData.js, both cathedral rows: the service "cathedral repairs", printed "Cathedral repairs here depend on stone brought in[, which a siege, a closed road or a blockade would cut off]." / "... depend on stone from outside, which the siege has cut off." (r2r-city-23, r2s-under_siege-city-0, r2s-occupied-city-2, r2s-famine-metropolis-2, r2r-metropolis-8).
+
+## 5. NAMED for the surfaces lane (r4), and FOR THE JOIN
+
+- (r4) `src/foundry/journalPages.js:371` prints a house's `source` raw after its description ("(coherence_repair)", "(faction_boost)"): 157 of the 720 journals carry "(coherence_repair)"; 166 towns in this lane's rows. The one-line change: print `f.desc` without `f.source`.
+- (r4) the PDF prints the Underground city's sub-service "Black market bazaar: Full criminal marketplace ..." where no bazaar stands on the roster, absent on the tab: 22 metropolises (the census's count; not re-read).
+- FOR THE JOIN: `src/pdf/sections/IdentityDailyLife.jsx` "What is grown here and brought in falls short of what people eat each day ..." under a siege (31 towns; r2r-thorp-45 read): the file is the exports' and surfaces' lanes'. The one-line change: under a siege in force (`tradeStoppedHere`), the clause says what is grown and stored, not brought in.
+- Carried from HANDBACK-13 section 4 (HANDBACK-12 section 3, HANDBACK-11 section 9), unchanged.
+
+## 6. THE REGISTERS NAMED STALE (re-derived once, at the close; nothing banked here)
+
+- `tests/lint/.lighting-census-baseline.json`: the merge took JOIN-3's tuple; this lane's R3C-REVOLTNOTE guard title and this seat's new test file (`tests/data/w2FixData14Rows.test.js`, one title per cure) are not in it.
+- The generator golden master (`tests/property/generatorGoldenMaster.test.js`): the cathedral cure moves 100 births' `affectedServices` (carried red at the lane already).
+- The edge-shared bundles (`supabase/functions/_shared/*Bundle.js`): stale for every data cure here (carried, HANDBACK-13).
+
+## 7. WHAT IS LEFT, line by line (the table's order)
+
+2. FULLING (53): the Mills (2-5) texts of the town and the city (catalogue `institutionalCatalog.js` shared/town and the four variants in `institutionDescVariants.js` PAIRS) name fulling where no cloth trade stands. No vocabulary word names a cloth trade (and none may be added): the cure is SILENCE on fulling, the mills keep their grain; the colour column and the declaration ledger re-keyed by identity in the same commit.
+3. Dispute arbitration "before a magistrate" with no court (25, tab): read ten, then cure or strike.
+4. The siege and famine cells (23 by the census; HANDBACK-13's siege rows beside them, re-measure): crisis twins in the shape of 18fcc08ca / 43e80bfde.
+5. #158 the grain clause (19 prints), #36 the salt fish (18), #233 herbs and spices (12): re-read at this tip.
+6. The boatyard's "fishing boats" (14), the history's quarry lines (12), Offal (10, the reader's MEDIUM c), the reader's wharf (8) and sawmill district (3) (historyRouteContext.js: holders first).
+7. The generated state prose (dossierStateProse/*.generated.js): place by holder; their door is the generator.
+8. THE POOL GUARD'S TWO ROWS (plotHooks:succession_crisis, plotHooks:resource_scarcity): as HANDBACK-13 section 5 item 4.
+9. Parked and carried: HANDBACK-13 section 5 item 5.
