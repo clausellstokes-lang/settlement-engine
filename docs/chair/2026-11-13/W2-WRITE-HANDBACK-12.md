@@ -60,6 +60,18 @@ The grid (`page-census.mjs --grid`): exit 0, 8 falls at the base (not shrunk: no
 - The sawmill's two partial-pool lines; the frontier's deterrence lines; step 4(b) (16 corpus lines: the list is the
   presumed door's `--check`, base 23); the religious houses' pool; the two empty cases; the chair's 11:49 WALLED-QUIET row.
 
+- FROM THE CHAIR (13:04, read 13:16), the reader's verdict NOT CLEAR at 70e5e7468 (origin/lane/review-w2-write-2-2026-11-14 at
+  7eedabb18, docs/chair/2026-11-14/REVIEW-W2-WRITE-2-2026-11-14.md), NOT BEGUN, in the chair's order (HIGH, the three reds, #116,
+  then the list above): (1) THE LAW: A RE-GATE READS THE LINE THAT INHERITS ITS TOWNS (the sibling now printing in a cured town
+  is read there before the push; this seat's cures read the inheritors: #203 v1, #200 v4/v11, #205 v13, HIGH 1 none moved on
+  the 772). (2) The bar's #116 is still false (reworded only, 59 of 67 towns). (3) THREE RED TEST FILES of the stage's own:
+  tests/ui/generalDeskTabFlow.test.js, tests/ui/economicsTabFlow.test.js, the page census's grid: each to be traced, a pin
+  re-keyed by identity, a grid RISE cured. (4) 21 of 88 disqualifier cures have no guard: to be NAMED in this hand-back (not
+  done: the next seat reads them off the reader's findings table).
+- THE COUNT: get_session's `context_usage.used_tokens` read 268,194 at every waking (12:17, 13:01, 13:16) while the session's
+  usage figures did not move either: the field looks frozen at the first turn's end. This seat handed back on its own
+  estimate of its context (near the mark), not on the field.
+
 ## FOR THE JOIN
 - (the eleventh seat's two rows, carried) #259 `src/domain/magicReliance.js :: deriveMagicReliance` counts no magical food
   provision; `src/domain/display/stateProse/defenseStateProse.js :: defworkFill` prints the catalogue name.
