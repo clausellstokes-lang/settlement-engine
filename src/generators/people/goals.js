@@ -37,6 +37,7 @@ import { GOAL_FAMILY_LINES, PERSONALITY_CLUSTER_OF, TIE_TYPE_TO_GOAL_SUBKIND } f
 import { familyOfInstitution, isLawEnforcementInstitution, isNoPowerInstitution } from '../../data/institutionalCatalog.js';
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 import { chainPrintName } from '../../domain/display/chainPrintName.js';
+import { powerSentenceName } from '../../domain/display/powerSentenceName.js';
 import { filterDeclared, lineText, resolveSibling } from '../../domain/facts/drawDeclared.js';
 import { factsOf } from '../../domain/facts/factsOf.js';
 import { notePresumption, withPresumptionLedger } from '../../domain/facts/presumptionLedger.js';
@@ -345,6 +346,9 @@ function pursuitChances(card, ctx) {
   };
 }
 
+/** The slots that name a power (`{guild}` names one where the allegiance is to a power, else a house as a house). */
+const PROSE_SLOTS = new Set(['power', 'rival', 'guild']);
+
 /**
  * Every line of a cell the record fills and admits, unheld: the candidates of one sub-kind.
  * @param {string} family @param {string} kind @param {Vantage} vantage @param {Rec} slots @param {GoalContext} ctx
@@ -354,13 +358,17 @@ function pursuitChances(card, ctx) {
 function cellCandidates(family, kind, vantage, slots, ctx, held, extra = {}) {
   const cell = arr(rec(rec(/** @type {Rec} */ (GOAL_FAMILY_LINES)[family])[kind])[vantage]);
   if (!cell.length) return [];
+  // POWERS-16 (the chair's ruling (r2): a faction named in a sentence takes its prose form, from one leaf): the line
+  // prints a power slot through display/powerSentenceName.js ("Military/Guard" -> "The Guard"); the slots kept on the
+  // card (the keyed intent) keep the record's names, so every reader that matches a power by name still finds it.
+  const said = Object.fromEntries(Object.entries(slots).map(([k, v]) => [k, PROSE_SLOTS.has(k) && typeof v === 'string' && v ? powerSentenceName(v) : v]));
   const poolId = `goalFamilies:${family}.${kind}.${vantage}`;
   /** @type {Candidate[]} */
   const out = [];
   for (const line of cell) {
     const { result: kept, notes } = quiet(() => filterDeclared([line], { facts: ctx.facts, poolId, surface: 'npcs' }));
     if (!kept.length) continue;
-    const text = fillLine(templateOf(line), slots);
+    const text = fillLine(templateOf(line), said);
     if (!text) continue;
     if (held.has(text)) { ctx.refusals.n += 1; continue; }
     const used = Object.fromEntries(slotsIn(templateOf(line)).map((k) => [k, slots[k]]));
