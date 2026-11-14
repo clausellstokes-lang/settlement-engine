@@ -1,0 +1,10 @@
+== tip
+  bytes committed 2623961 · fresh 2623961 · delta 0
+  sections that would move: (none)
+  stamped shas that would move: (none) · candidate leaves unmoved
+  ROWS that would move: 0
+== base
+  bytes committed 2623961 · fresh 2623961 · delta 0
+  sections that would move: stamp
+  stamped shas that would move: src/domain/display/stateProse/defenseStateProse.js · candidate leaves unmoved
+  ROWS that would move: 0

@@ -1,0 +1,89 @@
+768	1024	World/NPCs :: (2-5)	r2r-city-0: Mills (2-5) · member of Merchan || r2r-city-1: Mills (2-5) · first of Noble Fa || r2r-city-10: Mills (2-5) · second of The Hig
+751	1365	World/NPCs :: (5-15)	r2r-city-0: Bakers (5-15) · member of Merchan || r2r-city-1: Carpenters (5-15) · member of Craft G || r2r-city-10: Bakers (5-15) · member of Craft G
+682	768	World/NPCs :: (3-8)	r2r-city-0: Butchers (3-8) · member of Merchan || r2r-city-1: Butchers (3-8) · member of Craft G || r2r-city-10: Butchers (3-8) · member of Craft G
+586	979	Systems/Economics :: (3-8)	r2r-city-1: Chandler · Ropemaker · Merchant guilds (3-8) || r2r-city-10: Merchant guilds (3-8) · Merchant guilds ( || r2r-city-11: Merchant guilds (3-8) · Merchant guilds (
+585	585	World/NPCs :: (3-10)	r2r-city-0: Blacksmiths (3-10) · member of Merchan || r2r-city-1: Blacksmiths (3-10) · member of Craft G || r2r-city-10: Blacksmiths (3-10) · second of Craft G
+290	290	Systems/Economics :: (15-40)	r2r-city-10: Luxury goods quarter · Merchant guilds (15-40) || r2r-city-11: Luxury goods quarter · Merchant guilds (15-40) || r2r-city-12: Luxury goods quarter · Merchant guilds (15-40)
+276	335	Systems/Power :: (5-15)	r2r-city-0: Karolina Aleksandrov, the master baker (Bakers (5-15)) · brings a place f || r2r-city-15: Noyans Qipchaq, the master baker (Bakers (5-15)) · brings a place f || r2r-city-17: Chinggis Qipchaq, the master baker (Bakers (5-15)) · brings a place f
+270	333	Systems/Power :: (2-5)	r2r-city-26: Polina Egorov, the miller (Mills (2-5)) · brings a place f || r2r-city-3: Charis Photeinopoulos, the miller (Mills (2-5)) · brings a place f || r2r-metropolis-21: Dorothea Engel, the miller (Mills (2-5)) · brings a place f
+256	256	Systems/Institutions :: (30-80)	r2r-city-0: Craft guilds (30-80)REQCrafts || r2r-city-1: Craft guilds (30-80)REQCrafts || r2r-city-10: Craft guilds (30-80)REQCrafts
+256	256	Systems/Institutions :: (10-30)	r2r-city-0: Houses of worship (10-30)REQReligious || r2r-city-1: Houses of worship (10-30)REQReligious || r2r-city-10: Houses of worship (10-30)REQReligious
+256	256	Systems/Institutions :: (500-4000 households)	r2r-city-0: Housing (500-4000 households)REQInfrastructure || r2r-city-1: Housing (500-4000 households)REQInfrastructure || r2r-city-10: Housing (500-4000 households)REQInfrastructure
+256	256	Systems/Services :: (30-80)	r2r-city-0: Craft guilds (30-80) || r2r-city-1: Craft guilds (30-80) || r2r-city-10: Craft guilds (30-80)
+256	256	Systems/Services :: (10-30)	r2r-city-0: Houses of worship (10-30) || r2r-city-1: Houses of worship (10-30) || r2r-city-10: Houses of worship (10-30)
+256	256	Systems/Services :: (500-4000 households)	r2r-city-0: Housing (500-4000 households) || r2r-city-1: Housing (500-4000 households) || r2r-city-10: Housing (500-4000 households)
+256	256	Systems/Power :: (500-4000 households)	r2r-city-0: Housing (500-4000 households) || r2r-city-1: Housing (500-4000 households) || r2r-city-10: Housing (500-4000 households)
+256	256	World/NPCs :: (30-80)	r2r-city-0: Craft guilds (30-80) · first of Merchant || r2r-city-1: Craft guilds (30-80) · first of Craft Gu || r2r-city-10: Craft guilds (30-80) · first of Craft Gu
+256	256	World/NPCs :: (10-30)	r2r-city-0: Parish churches (10-30) || r2r-city-1: Parish churches (10-30) || r2r-city-10: Parish churches (10-30) · first of Religiou
+256	256	Systems/Institutions :: (5-25)	r2r-hamlet-0: Dwellings (5-25)REQInfrastructure || r2r-hamlet-1: Dwellings (5-25)REQInfrastructure || r2r-hamlet-10: Dwellings (5-25)REQInfrastructure
+256	256	Systems/Services :: (5-25)	r2r-hamlet-0: Dwellings (5-25) || r2r-hamlet-1: Dwellings (5-25) || r2r-hamlet-10: Dwellings (5-25)
+256	256	Systems/Power :: (5-25)	r2r-hamlet-0: Dwellings (5-25) || r2r-hamlet-1: Dwellings (5-25) || r2r-hamlet-10: Dwellings (5-25)
+256	256	Systems/Institutions :: (100-150+)	r2r-metropolis-0: Craft guilds (100-150+)REQCrafts || r2r-metropolis-1: Craft guilds (100-150+)REQCraftsVulnerable || r2r-metropolis-10: Craft guilds (100-150+)REQCraftsVulnerable
+256	445	Systems/Institutions :: (5-10)	r2r-metropolis-0: District markets (5-10)REQEconomyVulnerable || r2r-metropolis-1: District markets (5-10)REQEconomyVulnerable || r2r-metropolis-10: District markets (5-10)REQEconomyVulnerable
+256	501	Systems/Institutions :: (50-100+)	r2r-metropolis-0: Houses of worship (50-100+)REQReligious || r2r-metropolis-1: Merchant guilds (50-100+)Economy || r2r-metropolis-10: Merchant guilds (50-100+)Economy
+256	256	Systems/Institutions :: (3500+ households)	r2r-metropolis-0: Housing (3500+ households)REQInfrastructure || r2r-metropolis-1: Housing (3500+ households)REQInfrastructure || r2r-metropolis-10: Housing (3500+ households)REQInfrastructure
+256	501	Systems/Services :: (50-100+)	r2r-metropolis-0: Houses of worship (50-100+) || r2r-metropolis-1: Merchant guilds (50-100+) || r2r-metropolis-10: Merchant guilds (50-100+)
+256	445	Systems/Services :: (5-10)	r2r-metropolis-0: Major monasteries (5-10) || r2r-metropolis-1: Major monasteries (5-10) || r2r-metropolis-10: District markets (5-10)
+256	256	Systems/Services :: (100-150+)	r2r-metropolis-0: Craft guilds (100-150+) || r2r-metropolis-1: Craft guilds (100-150+) || r2r-metropolis-10: Craft guilds (100-150+)
+256	256	Systems/Services :: (3500+ households)	r2r-metropolis-0: Housing (3500+ households) || r2r-metropolis-1: Housing (3500+ households) || r2r-metropolis-10: Housing (3500+ households)
+256	256	Systems/Power :: (3500+ households)	r2r-metropolis-0: Housing (3500+ households) || r2r-metropolis-1: Housing (3500+ households) || r2r-metropolis-10: Housing (3500+ households)
+256	501	World/NPCs :: (50-100+)	r2r-metropolis-0: Parish churches (50-100+) · first of Religiou || r2r-metropolis-1: Parish churches (50-100+) · Lord Protector of || r2r-metropolis-10: Merchant guilds (50-100+) · member of Merchan
+256	256	World/NPCs :: (100-150+)	r2r-metropolis-0: Craft guilds (100-150+) || r2r-metropolis-1: Craft guilds (100-150+) · first of Craft Gu || r2r-metropolis-10: Craft guilds (100-150+) · first of Craft Gu
+256	256	Systems/Institutions :: (1-8)	r2r-thorp-0: Dwellings (1-8)REQInfrastructure || r2r-thorp-1: Dwellings (1-8)REQInfrastructure || r2r-thorp-10: Dwellings (1-8)REQInfrastructure
+256	256	Systems/Power :: (1-8)	r2r-thorp-0: Dwellings (1-8) || r2r-thorp-1: Dwellings (1-8) || r2r-thorp-10: Dwellings (1-8)
+256	256	Systems/Institutions :: (5-15)	r2r-town-0: Craft guilds (5-15)REQCrafts || r2r-town-1: Craft guilds (5-15)REQCrafts || r2r-town-10: Craft guilds (5-15)REQCrafts
+256	256	Systems/Institutions :: (5-20)	r2r-town-0: Taverns (5-20)REQEconomyVulnerable || r2r-town-1: Taverns (5-20)REQEconomyVulnerable || r2r-town-10: Taverns (5-20)REQEconomyVulnerable
+256	256	Systems/Institutions :: (2-5)	r2r-town-0: Houses of worship (2-5)REQReligious || r2r-town-1: Houses of worship (2-5)REQReligious || r2r-town-10: Houses of worship (2-5)REQReligious
+256	256	Systems/Institutions :: (75-650 households)	r2r-town-0: Housing (75-650 households)REQInfrastructure || r2r-town-1: Housing (75-650 households)REQInfrastructure || r2r-town-10: Housing (75-650 households)REQInfrastructure
+256	256	Systems/Services :: (5-15)	r2r-town-0: Craft guilds (5-15) || r2r-town-1: Craft guilds (5-15) || r2r-town-10: Craft guilds (5-15)
+256	256	Systems/Services :: (5-20)	r2r-town-0: Taverns (5-20) || r2r-town-1: Taverns (5-20) || r2r-town-10: Taverns (5-20)
+256	256	Systems/Services :: (2-5)	r2r-town-0: Houses of worship (2-5) || r2r-town-1: Houses of worship (2-5) || r2r-town-10: Houses of worship (2-5)
+256	256	Systems/Services :: (75-650 households)	r2r-town-0: Housing (75-650 households) || r2r-town-1: Housing (75-650 households) || r2r-town-10: Housing (75-650 households)
+256	256	Systems/Economics :: (5-20)	r2r-town-0: Taverns (5-20) || r2r-town-1: Taverns (5-20) || r2r-town-10: Taverns (5-20)
+256	256	Systems/Power :: (75-650 households)	r2r-town-0: Housing (75-650 households) || r2r-town-1: Housing (75-650 households) || r2r-town-10: Housing (75-650 households)
+256	256	World/NPCs :: (5-20)	r2r-town-0: Taverns (5-20) · member of Merchan || r2r-town-1: Taverns (5-20) · member of Arcane  || r2r-town-10: Taverns (5-20) · member of Merchan
+256	256	Systems/Institutions :: (15-100)	r2r-village-0: Dwellings (15-100)REQInfrastructure || r2r-village-1: Dwellings (15-100)REQInfrastructure || r2r-village-10: Dwellings (15-100)REQInfrastructure
+256	256	Systems/Services :: (15-100)	r2r-village-0: Dwellings (15-100) || r2r-village-1: Dwellings (15-100) || r2r-village-10: Dwellings (15-100)
+256	256	Systems/Power :: (15-100)	r2r-village-0: Dwellings (15-100) || r2r-village-1: Dwellings (15-100) || r2r-village-10: Dwellings (15-100)
+251	455	Systems/Power :: (50-100+)	r2r-metropolis-0: Yong Bai, the dean (Parish churches (50-100+)) · brings protectio || r2r-metropolis-1: Houses of worship (50-100+) || r2r-metropolis-10: Houses of worship (50-100+)
+251	251	Systems/Services :: (1-8)	r2r-thorp-0: Dwellings (1-8) || r2r-thorp-1: Dwellings (1-8) || r2r-thorp-10: Dwellings (1-8)
+251	257	Systems/Power :: (5-20)	r2r-town-0: Taverns (5-20) || r2r-town-1: Taverns (5-20) || r2r-town-10: Taverns (5-20)
+239	362	Systems/Power :: (5-10)	r2r-metropolis-0: District markets (5-10) || r2r-metropolis-1: Major monasteries (5-10) || r2r-metropolis-10: District markets (5-10)
+236	250	Systems/Power :: (10-30)	r2r-city-0: Houses of worship (10-30) || r2r-city-1: Houses of worship (10-30) || r2r-city-10: Pooja Bakshi, the dean (Parish churches (10-30)) · brings protectio
+233	233	Systems/Institutions :: (15-40)	r2r-city-0: Merchant guilds (15-40)Economy || r2r-city-1: Merchant guilds (15-40)Economy || r2r-city-10: Merchant guilds (15-40)Economy
+233	233	Systems/Services :: (15-40)	r2r-city-0: Merchant guilds (15-40) || r2r-city-1: Merchant guilds (15-40) || r2r-city-10: Merchant guilds (15-40)
+233	233	World/NPCs :: (15-40)	r2r-city-0: Merchant guilds (15-40) · Lord Burgomaster, || r2r-city-1: Merchant guilds (15-40) · first of Merchant || r2r-city-10: Merchant guilds (15-40) · Acting Master of 
+210	224	Systems/Power :: (15-40)	r2r-city-0: Merchant guilds (15-40) || r2r-city-1: Merchant guilds (15-40) || r2r-city-10: Merchant guilds (15-40)
+207	248	Systems/Power :: (3-8)	r2r-city-25: Pulvillus Scipio, the master butcher (Butchers (3-8)) · brings a place f || r2r-city-26: Eva Kovalyov, the master butcher (Butchers (3-8)) · brings a place f || r2r-metropolis-39: Philippos Triakontaphyllos, the master butcher (Butchers (3-8)) · brings a place f
+189	189	Systems/Economics :: (5-10)	r2r-metropolis-0: Via:major monasteries (5-10) · great cathedral || r2r-metropolis-1: Via:major monasteries (5-10) · great cathedral || r2r-metropolis-11: Via:major monasteries (5-10) · great cathedral
+189	189	World/NPCs :: (5-10)	r2r-metropolis-0: Major monasteries (5-10) · first of The Devo || r2r-metropolis-1: Major monasteries (5-10) · first of Religiou || r2r-metropolis-11: Major monasteries (5-10) · first of Religiou
+186	205	Systems/Power :: (30-80)	r2r-city-0: Craft guilds (30-80) || r2r-city-12: Craft guilds (30-80) || r2r-city-13: Craft guilds (30-80)
+182	190	Systems/Economics :: (5-15)	r2r-city-20: Craft guilds (5-15) · Bowyers & fletche || r2r-city-22: Craft guilds (5-15) · Bowyers & fletche || r2r-city-26: Craft guilds (5-15) · Bowyers & fletche
+182	182	Systems/Institutions :: (3-8)	r2r-town-1: Merchant guilds (3-8)Economy || r2r-town-11: Merchant guilds (3-8)Economy || r2r-town-13: Merchant guilds (3-8)Economy
+182	182	Systems/Services :: (3-8)	r2r-town-1: Merchant guilds (3-8) || r2r-town-11: Merchant guilds (3-8) || r2r-town-13: Merchant guilds (3-8)
+112	136	Systems/Power :: (100-150+)	r2r-metropolis-0: Craft guilds (100-150+) || r2r-metropolis-10: ge Styrkarsson, the senior craft-guild master (Craft guilds (100-150+)) · brings a place f || r2r-metropolis-11: Craft guilds (100-150+)
+101	101	Summary/Crisis :: (2-5)	r2r-city-44: Mills (2-5) · held by Pankratio || r2r-town-13: Parish churches (2-5) · held by Vandansür || r2r-town-36: Parish churches (2-5) · held by Ix Chup U
+75	217	Systems/Institutions :: (high magic)	r2r-metropolis-11: Dream parlors (high magic)Exotic || r2r-metropolis-12: Airship docking (high magic)Exotic || r2r-metropolis-21: Airship docking (high magic)Exotic
+75	217	Systems/Services :: (high magic)	r2r-metropolis-11: Dream parlors (high magic) || r2r-metropolis-12: Dream parlors (high magic) || r2r-metropolis-21: Dream parlors (high magic)
+75	207	Systems/Power :: (high magic)	r2r-metropolis-11: Message network (high magic) || r2r-metropolis-12: Dream parlors (high magic) || r2r-metropolis-21: Airship docking (high magic)
+75	217	World/NPCs :: (high magic)	r2r-metropolis-11: Message network (high magic) · member of High Th || r2r-metropolis-12: Dream parlors (high magic) · member of The Enl || r2r-metropolis-21: Dream parlors (high magic) · member of Arcane 
+48	48	World/NPCs :: (10,000+ only)	r2r-city-1: Cathedral (10,000+ only) || r2r-city-11: Cathedral (10,000+ only) · third of Religiou || r2r-city-15: Cathedral (10,000+ only) · second of Religio
+39	39	Summary/Crisis :: (10-30)	r2r-city-19: Parish churches (10-30) · held by Seanchán  || r2r-city-3: Parish churches (10-30) · held by Eirenika  || r2r-city-37: Parish churches (10-30) · held by Ahuitzotl
+39	39	Summary/Crisis :: (50-100+)	r2r-metropolis-25: Parish churches (50-100+) · held by Ögedei Ta || r2r-metropolis-31: Parish churches (50-100+) · held by Bayasgala || r2r-metropolis-59: Parish churches (50-100+) · held by Myung Sas
+39	39	Summary/Crisis :: (5-15)	r2s-famine-city-2: Bakers (5-15) · held by Mönkhzul  || r2s-famine-city-3: Bakers (5-15) · held by Jayan Bor || r2s-famine-metropolis-0: Bakers (5-15) · held by Bodvar Ni
+30	30	Systems/Economics :: (naval route only)	r2r-village-21: Salted fish (naval route only)Smoked seafood (nava || r2s-under_siege-city-0: Ship passage (naval route only)Maritime trade acces || r2s-under_siege-metropolis-1: Ship passage (naval route only)Legal services (cont
+29	29	Summary/Crisis :: (3-10)	r2r-metropolis-4: Blacksmiths (3-10) · held by Alexandro || r2s-wartime-city-0: Blacksmiths (3-10) · held by Isa al-Gh || r2s-wartime-city-2: Blacksmiths (3-10) · held by Adela Wag
+29	29	Summary/Crisis :: (5-10)	r2r-metropolis-59: Major monasteries (5-10) · held by Xiangyu Y || r2s-famine-metropolis-0: District markets (5-10) || r2s-famine-metropolis-1: District markets (5-10)
+19	38	Systems/Power :: (3-10)	r2r-city-10: Gautam Verma, the master smith (Blacksmiths (3-10)) · brings a place f || r2r-metropolis-55: Moritz Steinberg, the master smith (Blacksmiths (3-10)) · brings a place f || r2s-mass_migration-city-0: Gunnar Ubbason, the master smith (Blacksmiths (3-10)) · brings a place f
+19	19	Systems/Outlook :: (5-20)	r2r-town-9: nly (isolated trade): Weekly market, Market square, Taverns (5-20), Town granary, Mill || r2s-mass_migration-town-2: nly (isolated trade): Weekly market, Market square, Taverns (5-20), Town granary, Mill || r2s-under_siege-town-0: 4 institutions critically impaired by siege: Taverns (5-20), Town granary, Mill
+18	18	Systems/Economics :: (high magic)	r2r-metropolis-11: Via:message network (high magic) || r2r-metropolis-21: Via:sage's quarter · message network (high magic) || r2r-metropolis-34: Via:sage's quarter · message network (high magic)
+13	13	Summary/Plot Hooks :: (50-100+)	r2r-metropolis-59: The conversion turns on the houses of worship (50-100+), run by Myung Sasak || r2s-religious_conversion-metropolis-0: The conversion turns on the houses of worship (50-100+), run by Zhen Yoon:  || r2s-religious_conversion-metropolis-1: The conversion turns on the houses of worship (50-100+), run by Astrid Vifi
+12	12	Systems/Defense :: (5-10)	r2r-metropolis-32: Major monasteries (5-10). Wounds and fevers  || r2r-metropolis-51: Major monasteries (5-10). Wounds and fevers  || r2s-indebted-metropolis-2: Major monasteries (5-10). Wounds and fevers 
+9	9	Systems/Outlook :: (5-10)	r2s-under_siege-metropolis-0: institutions critically impaired by siege: District markets (5-10), Multiple market sq || r2s-under_siege-metropolis-1: institutions critically impaired by siege: District markets (5-10), Multiple market sq || r2s-under_siege-metropolis-2: institutions critically impaired by siege: District markets (5-10), Multiple market sq
+2	2	Systems/Outlook :: (100-150+)	r2r-metropolis-14: , Carpenters, Weavers/Textile workers, Bakers, Craft guilds (100-150+), Great cathedral, H || rr3-metropolis-under_siege-rand-5: rs, Weavers/Textile workers, Butchers, Bakers, Craft guilds (100-150+), Great library, Pro
+2	2	Systems/Power :: (Cathedral (10,000+ only)	rr3-city-indebted-rand-4: Alexios II Makrembolites, the bishop (Cathedral (10,000+ only)) · brings protectio || rr3-city-under_siege-port-0: Noura ibn Tufayl, the bishop (Cathedral (10,000+ only)) · brings protectio
+1	1	Summary/Overview :: (5-20)	r2r-town-9: nly (isolated trade): Weekly market, Market square, Taverns (5-20), Town granary, Mill
+1	1	World/History :: (5-20)	r2r-town-9: nly (isolated trade): Weekly market, Market square, Taverns (5-20), Town granary, Mill
+1	1	Summary/Crisis :: (if walled)	r2s-monster_pressure-town-3: Gates (if walled)
+1	1	Summary/Crisis :: (10,000+ only)	rr3-city-religious_conversion-rand-5: Cathedral (10,000+ only) · held by Jabir al-
+pages 1536

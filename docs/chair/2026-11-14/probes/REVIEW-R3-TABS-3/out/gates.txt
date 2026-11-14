@@ -1,0 +1,3 @@
+[domain-strict] ✓ no strict-type regressions (1113 errors, ceiling 1113).
+[typecheck-ratchet] OK — no type regressions (167 error(s), ceiling 167).
+eslint on the 8 touched src/test files: exit 0

@@ -1,0 +1,10 @@
+tip 42, base 41
+tip-only: ["cause:occupation","row","src/domain/display/stateProse/defenseStateProse.js:936"]
+  ["economicGates.military","name","src/domain/display/stateProse/defenseStateProse.js:1003"]
+  ["economicGates.military","score","src/domain/display/stateProse/defenseStateProse.js:1003"]
+  ["system:defense_readiness","score","src/domain/display/stateProse/defenseStateProse.js:2277"]
+  ["system:food_security","blockaded","src/domain/display/stateProse/defenseStateProse.js:1949"]
+base-only: ["economicGates.military","name","src/domain/display/stateProse/defenseStateProse.js:980"]
+  ["economicGates.military","score","src/domain/display/stateProse/defenseStateProse.js:980"]
+  ["system:defense_readiness","score","src/domain/display/stateProse/defenseStateProse.js:2254"]
+  ["system:food_security","blockaded","src/domain/display/stateProse/defenseStateProse.js:1926"]

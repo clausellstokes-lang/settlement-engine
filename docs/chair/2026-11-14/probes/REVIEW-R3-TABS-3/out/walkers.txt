@@ -1,0 +1,9 @@
+tip 68e9e97b5 passed 243 failed 1
+  RED lint/writerReach.walker.test.js :: the surfaceReach grammar round-trips: parse(format(reach)) equals reach for every LIT identity
+base 30157258 passed 238 failed 6
+  RED data/dossierStateProseProjection.contract.test.js :: is not stale against the two authored annexes
+  RED data/dossierStateProseProjection.contract.test.js :: MUTANT: the sha interlock refuses a census taken over a composer that has since moved
+  RED lint/proseWiringCensus.walker.test.js :: the draft over the SHIPPED endpoints and read paths, with its evidence and its debt
+  RED lint/proseWiringCensus.walker.test.js :: ⭐ THE DRY READ: both modes, and the one that writes is not among them
+  RED lint/proseWiringCensus.walker.test.js :: the committed census is byte-identical to a fresh build, and the stamp is live
+  RED lint/writerReach.walker.test.js :: the surfaceReach grammar round-trips: parse(format(reach)) equals reach for every LIT identity
