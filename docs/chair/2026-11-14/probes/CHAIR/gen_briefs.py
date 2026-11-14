@@ -5026,6 +5026,136 @@ SEATS2['W2-C-LEAVES-12'] = dict(
 )
 
 
+SEATS2['UPKEEP-16'] = dict(
+    title="UPKEEP-16 · the defence lane goes on curing: the table's rest (the income lines, the gates under a siege, the crime summary), the court, one stored key",
+    branch='lane/coherence-upkeep-2026-11-12', tip='f4e9cd37', statement=False,
+    intro=("You are UPKEEP-16, the next seat on the defence lane of the settlement-engine integration program (lane/coherence-upkeep-2026-11-12). The "
+           "lane holds the derived defence rating, the money a town can spend on it, and the safety, economy and outlook lines that speak of them. "
+           "The fourteenth seat counted every open row on 972 births, cured the widest (the Foundry journal's chain names in 963 births; the "
+           "PDF's bracketed gate name; an enforcement sentence where no enforcer stands, 84; a town-sized safety line in thorps, 79) and "
+           "handed back at its count with the rest listed. The rating's ARITHMETIC is rebuilt on a side branch and is NOT yours. Yours: the "
+           "rest of the table, WIDEST FIRST, then the rows this lane's readers named. The lane goes on curing and lands later as a point of "
+           "its own on the joined line: NO whole suite, NO new statement, NOT the lane's close."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. On your lane, docs/chair/2026-11-12/UPKEEP-HANDBACK.md: ONLY the newest seat's part (the top of the file down to the first line of three "
+          "dashes: 104 lines, some very long: by script): THE CHAIR'S RULINGS (a) to (k), copied whole; ITEM 1's table (every row: false / "
+          "printing on the 972); what the seat did, in commit order (the form of a cure here); FOR THE JOIN; WHAT IS LEFT (your list); how the "
+          "instruments are re-made (`census14.mjs`, `rend.sh`, `pdiff.py`, `gates.sh`: re-make them from that description; the reader's "
+          "probes by git archive).\n"
+          "3. THE ROWS OTHER SEATS NAMED TO THIS LANE (`git fetch origin lane/chair-2026-11-08`; `git show "
+          "origin/lane/chair-2026-11-08:docs/chair/2026-11-14/join-rows/OPEN-coherence-upkeep.md`: six bullets, CANDIDATES as named).\n"
+          "4. The merge book's section 2m on origin/lane/merge-15-point-49-wip-2026-11-14 (the section headed \"## 2m.\"; by script), before the first "
+          "register you touch."),
+    work=("THE FENCES: you do not touch `src/generators/defenseGenerator.js`, `src/data/defenceWeights.js`, "
+          "`src/domain/institutions/defenseInstitutionBuckets.js`, `src/domain/institutions/houseScale.js` or `src/data/bandLadders.js` (the "
+          "rating's rebuild, on its side branch); nor `src/domain/display/defenseDisplay.js` (the leaves lane's seat); nor "
+          "`src/components/new/tabs/OverviewTab.jsx` and `src/pdf/lib/viewModelBodySlices.js :: economicsSlice` (a new lane cut from the "
+          "joined branch makes every surface read the tab's readers there); nor a pool of the corpus. A cure that lies in one of them is "
+          "NAMED with its measure, not made.\n"
+          "THE CHAIR'S RULINGS: (a) to (k) AS COPIED IN THE HAND-BACK, and these since (each vetoable by the owner; copy them into your part):\n"
+          "(l) THE COURT (the lane's reader: a court named in 133 towns with no court house): ONE FACT FOR THE COURT: a line that sends an "
+          "offender before a court, or names its hearings, prints only where a house that hears cases stands on the roster (a court, a "
+          "town hall that holds hearings, a magistrate, a manor's court). MEASURE FIRST which houses set the record's court flag in those "
+          "towns: where the flag is set with no such house, the flag's writer is the false side: say which file writes it, and STOP for "
+          "that part with the table.\n"
+          "(m) \"Money enough … laid by before the debt crisis\" (25 towns) and its like from the rebuild's reader (money \"enough for a long "
+          "crisis\" in Poor or Struggling towns; \"paid late\" where the defence is fully funded): A LINE ABOUT MONEY LAID BY OR OWED READS THE "
+          "RECORD'S PROSPERITY, ITS FUNDING AND THE CRISIS IN FORCE.\n"
+          "(n) THE STORED FOODWAYS LINE under a famine (66 births hand the composer the source that failed): the call in "
+          "foodGenerator.js :: generateFoodSecurity hands the sources less the failed one (grain and mill failing together): a DECLARED MOVE "
+          "of that stored line only. With it, in the same file, the Foundations tab's food word \"Import-dependent\" under a siege (6 towns "
+          "as named: the stored word reads the siege): measure it; if it moves more than the word, STOP with the table.\n"
+          "(o) THE INCOME ROWS WITH NO HOUSE (the fourteenth seat's table under (c): an income row for Iron & Metalwork in 198 towns, Stone "
+          "Quarrying 131, Timber 98, Fish 43, where no house of that trade stands): NOT YOURS: a measuring seat shows the chair the cures "
+          "first. You cure the LINES ((b), (c)'s \"is dug here\", (d)) and leave the rows and their shares as they are.\n"
+          "THE WORK, in this order, each cause its own commit, measured first with the fourteenth seat's census at your tip (the table "
+          "re-taken once, at the start), red first (a collected arm over births, each arm shown able to red by a plant you do not commit, "
+          "made in a tree no suite is running in; NEVER plant in a tree a render is running in), pushed as made:\n"
+          "1. WIDEST FIRST among: (n) 66; (c) the coal line 63; (b) managed felling 53; (d) the fish line 43; (e) the gates under a siege "
+          "29; (l); (m); item 5's carried rows (the barracks or the watch \"is all that stands guard\" beside another force, in a file no "
+          "lane holds: re-check; \"nobody organised to meet it\" beside a charter hall 22); (g) 11; (i) 11. ONE MESSAGE TO THE CHAIR after "
+          "the first four cures (the tip; each row's count before and after), then THE COUNT.\n"
+          "2. (k), the stored key `criminalPreStress`, as ruled.\n"
+          "3. The rows of OPEN-coherence-upkeep.md not answered above, each measured first.\n"
+          "FOR EVERY CURE: the births that move are EXACTLY the census's false births for that row (the fourteenth seat's standard: say "
+          "so, by count); EVERY LINE A CURE NOW PRINTS IN A NEW TOWN, OR NEWLY LEAVES SILENT, READ WHERE IT PRINTS ON EVERY SURFACE THAT "
+          "PRINTS IT: three towns of its cells, a siege, a famine or an occupation among them, the smallest and the largest size it "
+          "reaches; the towns and what printed in the commit body. A cure that moves a record leaf beyond the line it cures is a DECLARED "
+          "MOVE: say which families move, with counts; if a power, a person or a tie is re-drawn: STOP with the table.\n"
+          "AFTER EVERY CURE: the presumed-things walker (its rows compared with the base's); the strict-domain gate, the type ratchet and "
+          "eslint on the touched files; the twelve-birth grid (`node scripts/census/page-census.mjs --grid`: a rise is a stop); the test "
+          "files that name the files you touched; the lane's own derived-rating walker (tests/lint/defenceDerived.walker.test.js).\n"
+          "NOT YOURS: the lane's fifty-two lane-new red tests, the fork census's rows, the side branch's merge and the rest of the close "
+          "(a later seat, once); the scores; any golden's door in its writing mode.\n"
+          "THE HAND-BACK, kept current after every item: a new part at the TOP of docs/chair/2026-11-12/UPKEEP-HANDBACK.md (above the "
+          "fourteenth seat's, a line of three dashes between), in its form: the rulings since (l) to (o) copied; the table re-taken; each "
+          "row as cured; EVERY NEW OR CHANGED LINE with the towns read; the declared moves; FOR THE JOIN, carried forward; what is left, "
+          "line by line."),
+    merges='',
+    when="for a stop that blocks everything you have left, for the court flag's table under (l), after the first four cures (the tip; the counts), and with your hand-back",
+    turns='',
+)
+
+
+SEATS2['INCOME-MEASURE-1'] = dict(
+    title="INCOME-MEASURE-1 · an income row for a trade no house of the town works: measured, and the cures shown to the chair before any is built",
+    branch='lane/income-measure-2026-11-14', checkout='lane/coherence-upkeep-2026-11-12', tip='f4e9cd37', statement=False, mark='400,000',
+    intro=("You are INCOME-MEASURE-1, a MEASURING seat of the settlement-engine integration program. YOU BUILD NOTHING ON ANY LANE. A seat "
+           "counted, on 972 born towns, that the Economics tab's income table holds a ROW (a title and a share of income) for a trade "
+           "where no house of that trade stands on the town's roster: Iron & Metalwork in 198 towns (of 654 that print the row), Stone "
+           "Quarrying in 131 (of 182), Timber in 98 (of 220), Fish in 43. A first measure against the release bar ranked one such row "
+           "MEDIUM (\"names a house, a role or a force the town lacks\"); at these widths about one town in three carries one. The lines "
+           "UNDER the rows are being cured by a builder; the ROWS and their SHARES are the generator's, and a cure of them is a move of "
+           "every town's income. The chair will not rule it blind. Yours: MEASURE what makes each such row, SHOW the candidate cures with "
+           "what each would move, and RECOMMEND. Then the chair rules and a builder builds."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) at your checkout.\n"
+          "2. On the defence lane (your checkout, READ ONLY), docs/chair/2026-11-12/UPKEEP-HANDBACK.md: ONLY the newest seat's part (the top "
+          "of the file down to the first line of three dashes; by script): its ITEM 1 table's rows under (c) and (d) (the income rows "
+          "with no house, by title), and how its instruments are re-made (the 972 births, `rend.sh`, `census14.mjs`).\n"
+          "3. THE CODE THAT MAKES AN INCOME ROW, whole, before you measure: find it from the row's title strings "
+          "(src/generators/economy/economicState.js and what it calls: the income sources, their titles and shares, what reads them "
+          "afterwards). List every reader of the income sources (`git grep`): the Economics tab, the PDF, the journal, the exports, and "
+          "ANY GENERATOR STEP that reads a share after it is made (prosperity, the money a town can spend, a power's standing).\n"
+          "4. THE RELEASE BAR'S ROW that named the class (`git fetch origin lane/chair-2026-11-08`; `git show "
+          "origin/lane/chair-2026-11-08:docs/chair/2026-11-14/bar-0-rows/BAR-0-ROWS-defence.json`, the row numbered 273)."),
+    first=("FIRST ACT. FULL HISTORY (`git fetch --depth=2147483647 origin lane/coherence-upkeep-2026-11-12 lane/integration-2026-11-07`; `git "
+           "rev-parse --is-shallow-repository` prints false). Read the defence lane's tip back from origin: it was f4e9cd37 when this was "
+           "written; a later tip by its builder is not a stop: measure at f4e9cd37 and say so. YOUR OWN BRANCH: `git worktree add -b "
+           "lane/income-measure-2026-11-14 <scratch>/own f4e9cd37`: it holds your measure file and probes ONLY."),
+    work=("THE WORK:\n"
+          "1. WHAT MAKES THE ROW. For each income source the table can print: what in the record creates it (a house on the roster; a "
+          "resource in the town's country; an export; a chain; a trade route), by reading the code and by counting on the 972 births "
+          "(and on the larger corpus of 3,756 if the lane's probes hold it): for each title, the towns that print the row; of them, the "
+          "towns with a house of the trade, with only the raw resource, with only an export, with none of these. FIFTEEN TOWNS READ: for "
+          "five titles, three towns each where the row prints with no house: what the page says beside it (the roster, the Resources "
+          "tab, the exports, the chain cards): IS THE ROW FALSE THERE, or true in a sense the page supports (a raw good sold from "
+          "ground no house works)? Say plainly, town by town.\n"
+          "2. WHO READS A SHARE AFTERWARDS: every generator step and every surface: so that the chair knows what a change of the rows "
+          "would move beyond the table itself.\n"
+          "3. THE CANDIDATE CURES, each BUILT ONLY IN A SCRATCH TREE (never committed to a lane; its patch saved with your probes), each "
+          "MEASURED on the 972 and the census's 720 by a field diff against the lane's tip: (A) the row is not made where no house of "
+          "its trade stands, and its share is shared out among the rows that remain; (B) the row is kept and takes a TRUE TITLE AND LINE "
+          "for what it is where only the raw resource is sold (the raw good by name; no trade the town lacks is named); (C) the row is "
+          "made only where the page elsewhere bears it out (a house, OR an export of the raw good that the Resources tab shows worked); "
+          "and any better cure your reading of the code suggests. For each: the towns whose table changes; the shares that move (mean "
+          "and largest); EVERYTHING ELSE THAT MOVES (prosperity, a band, a power, a person, a line elsewhere), by family, with counts; "
+          "the false rows left (to 0?); and what the table then says in the fifteen towns you read.\n"
+          "4. YOUR RECOMMENDATION, with its cost in moved towns, and what you would NOT do and why. A cure that re-draws powers or "
+          "people is said so in the first line.\n"
+          "5. THE FILE: docs/chair/2026-11-14/INCOME-ROWS-MEASURE.md on your branch, with your probes and patches under "
+          "docs/chair/2026-11-14/probes/INCOME-MEASURE-1/. ONE MESSAGE TO THE CHAIR: your branch's tip read back from origin; the "
+          "count of false rows by title; each candidate's headline (towns moved; what else moves); your recommendation in one "
+          "sentence.\n"
+          "LAWS OF THIS SEAT: you commit nothing to any lane; a candidate's patch lives only in a scratch tree and in your probes; you "
+          "run no door in its writing mode and no golden's door; long runs write to files outside every repository tree; rendered pages "
+          "stay out of your context (a script prints counts and at most three quoted lines); EXECUTED is told from PLAUSIBLE in every "
+          "figure."),
+    merges='',
+    when="for something that blocks the whole measure, and with the measure (step 5)",
+    turns='',
+)
+
+
 def build2(seat):
     s = _r3c6() if seat == 'R3-CODE-C-6' else SEATS2[seat]
     head = (
