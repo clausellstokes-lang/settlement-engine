@@ -247,3 +247,10 @@ NONE, on the 3,756 and the 972 (the final measure equals UPKEEP-13's figures to 
   relationships and conflicts; the summaries compared birth by birth; the eight towns by a probe that births each seed
   at both trees and prints its scores, bands and parts (`defencePartsOf`); `dims`-style per-part dims by a debugging copy
   of the generator exporting `computeDefenseScores`, removed after.
+
+### HANDED BACK, COMPLETE (the chair, 13:24 UTC): the tip 0ca0bbe94
+The chair's ruling of 13:24 UTC (vetoable by the owner): the rebuild lands on the joined line AS A POINT OF ITS OWN, by
+the merge seat, straight from this branch at 0ca0bbe94 (not through the defence lane); the writer-reach door and the
+signatures are the close's, once, on the final tree; the page census's P4 rise at the lane's own tip is the lane's seat's
+to trace; a short reader for this stage is seated. WHAT IS LEFT, none of it this seat's: that reader's read; the merge
+seat's landing of 0ca0bbe94; the writer-reach door and the signatures at the close; P4 at the lane's tip.
