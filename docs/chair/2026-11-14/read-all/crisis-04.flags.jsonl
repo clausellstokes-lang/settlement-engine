@@ -1,0 +1,65 @@
+{"id":"07394","town":"r2s-occupied-village-3","sev":"MED","kind":"LACKS","why":"HOUSES has no inn, market or smith; more than one thing a traveller expects is missing","other":""}
+{"id":"22397","town":"r2s-occupied-village-3","sev":"MED","kind":"STATE","why":"says the village is poor; STATE prosperity is Struggling, not Poor","other":""}
+{"id":"14079","town":"r2s-occupied-village-3","sev":"MED","kind":"STATE","why":"imports are only salt and arrowheads; no market; exports and goods made are all local","other":""}
+{"id":"04639","town":"r2s-occupied-village-1","sev":"LOW","kind":"STATE","why":"rents beasts to travellers on the road; trade access is isolated","other":""}
+{"id":"07253","town":"r2s-occupied-village-1","sev":"MED","kind":"LACKS","why":"names cavalry; DEFENCE has no garrison, militia, watch or hired force","other":""}
+{"id":"00991","town":"r2s-occupied-village-1","sev":"HIGH","kind":"STATE","why":"says the town is fed; deficit 21%, imports cover only 14 of 81 short, viable False","other":"12961"}
+{"id":"15068","town":"r2s-occupied-village-1","sev":"HIGH","kind":"STATE","why":"says nothing is failing and rests on a road; viable False, deficit 21%, trade access isolated, under occupation","other":"12961"}
+{"id":"14550","town":"r2s-occupied-village-1","sev":"MED","kind":"STATE","why":"says no one works the herbs; TRADE made here lists medicinal herbs","other":""}
+{"id":"15458","town":"r2s-occupied-village-1","sev":"MED","kind":"STATE","why":"says it exports semi-finished goods; TRADE exports: none","other":""}
+{"id":"01022","town":"r2s-occupied-village-1","sev":"MED","kind":"STATE","why":"says the Household Council governs; under occupation the Occupation Authority is Dominant and the council does not rule freely","other":""}
+{"id":"22421","town":"r2s-occupied-village-1","sev":"MED","kind":"STATE","why":"calls its defence conventional throughout; DEFENCE is none in every kind, defence Undefended","other":""}
+{"id":"14605","town":"r2s-occupied-village-2","sev":"MED","kind":"PAIR","why":"says no guild runs the market; Merchant Guilds are a Strong power that set prices","other":"06725"}
+{"id":"23392","town":"r2s-occupied-village-2","sev":"MED","kind":"STATE","why":"says little of what leaves began here; exports are local fish, wool and livestock, transit only one of five","other":""}
+{"id":"09301","town":"r2s-occupied-village-2","sev":"MED","kind":"STATE","why":"says nobody takes the stone; TRADE made here lists stone","other":""}
+{"id":"HEADER","town":"r2s-occupied-town-2","sev":"MED","kind":"RECORD","why":"population 310 cannot hold Taverns (5-20), Craft guilds (5-15), multiple inns, 2-5 parish churches and 75-650 households","other":""}
+{"id":"00183","town":"r2s-occupied-town-2","sev":"MED","kind":"LACKS","why":"three guards lost in the same district; a town of 310 has no districts","other":""}
+{"id":"04548","town":"r2s-occupied-town-2","sev":"MED","kind":"LACKS","why":"disputes go before a magistrate; HOUSES has no courthouse or court","other":"06688"}
+{"id":"06688","town":"r2s-occupied-town-2","sev":"MED","kind":"PAIR","why":"disputes end in violence or bought protection; town watch and occupation curfew keep control, and 04548 sends disputes to a magistrate","other":"04548"}
+{"id":"10164","town":"r2s-occupied-town-2","sev":"MED","kind":"STATE","why":"Guild Council keeps order and collects taxes; under occupation the Occupation Authority extracts; also 'Religious Authorities tells' disagrees","other":""}
+{"id":"04421","town":"r2s-occupied-town-0","sev":"MED","kind":"STATE","why":"carts of cloth and wool leave; wool is imported and exports list no cloth or wool","other":""}
+{"id":"03522","town":"r2s-occupied-town-0","sev":"MED","kind":"PAIR","why":"says an informal council rules for want of formal authority; GOVERNMENT is Town Council with town hall and courthouse, Occupation Authority Strong","other":"03509"}
+{"id":"12681","town":"r2s-occupied-town-0","sev":"LOW","kind":"PAIR","why":"contrasts itself with an elected council; the town is governed by a Town Council","other":"03509"}
+{"id":"HEADER","town":"r2s-occupied-town-1","sev":"MED","kind":"RECORD","why":"founded by a merchant consortium needing a waypoint, yet the reason says a family granted mill rights established it","other":""}
+{"id":"10823","town":"r2s-occupied-town-1","sev":"LOW","kind":"TAG","why":"names city watch livery; this is a town and the tag reaches towns","other":""}
+{"id":"05068","town":"r2s-occupied-town-1","sev":"LOW","kind":"PAIR","why":"gives the clergy meaningful civic influence; Religious Authorities are Minor and 03048 calls theirs a small voice","other":"03048"}
+{"id":"15200","town":"r2s-occupied-town-1","sev":"MED","kind":"LACKS","why":"offenders are heard and each case recorded; HOUSES has no courthouse, only a small prison/stocks","other":""}
+{"id":"23463","town":"r2s-occupied-town-1","sev":"MED","kind":"PAIR","why":"visitors are not robbed and someone runs things; 15667/14654 say theft is persistent with no dominant organisation","other":"14654"}
+{"id":"03126","town":"r2s-occupied-town-3","sev":"LOW","kind":"LACKS","why":"names the bank; HOUSES has money changers but no bank","other":""}
+{"id":"11315","town":"r2s-occupied-town-3","sev":"MED","kind":"PAIR","why":"talks of the best places to hunt; game and hides are imported because the local hunting grounds are exhausted","other":"11958"}
+{"id":"HEADER","town":"r2s-occupied-city-3","sev":"LOW","kind":"RECORD","why":"exports raw wool and live sheep while importing wool; a mountain city exports reeds, peat and waterfowl","other":""}
+{"id":"12683","town":"r2s-occupied-city-3","sev":"LOW","kind":"PAIR","why":"says city affairs run without a formal council; GOVERNMENT is the Arcane Council","other":"19054"}
+{"id":"12416","town":"r2s-occupied-city-3","sev":"MED","kind":"LACKS","why":"offers kiln-fired bricks; HOUSES has a potter but no brickmaker","other":""}
+{"id":"10700","town":"r2s-occupied-city-3","sev":"LOW","kind":"PAIR","why":"calls the economy highly diversified; 00570 says it lives on two or three trades","other":"00570"}
+{"id":"01572","town":"r2s-occupied-city-3","sev":"MED","kind":"PAIR","why":"says the market sells little; HOUSES has daily markets, many squares, warehouse district, luxury quarter, and market taxes are a major revenue","other":"12976"}
+{"id":"16002","town":"r2s-occupied-city-3","sev":"LOW","kind":"STATE","why":"gives 4,628 imported; header food line says imports cover 4596","other":""}
+{"id":"00588","town":"r2s-occupied-city-3","sev":"MED","kind":"STATE","why":"says it grows a little less than it needs; it grows 5671 of 11210, about half","other":""}
+{"id":"03323","town":"r2s-occupied-city-3","sev":"LOW","kind":"LACKS","why":"names the charter hall; DEFENCE charter is Multiple adventurers' guilds, no charter hall","other":""}
+{"id":"02600","town":"r2s-occupied-city-0","sev":"MED","kind":"LACKS","why":"calls the merchant guilds a political force; GOVERNMENT powers list no Merchant Guilds","other":""}
+{"id":"11871","town":"r2s-occupied-city-0","sev":"MED","kind":"LACKS","why":"says local ore feeds the smithy; HOUSES has a smelter but no mine","other":""}
+{"id":"03456","town":"r2s-occupied-city-0","sev":"LOW","kind":"LACKS","why":"lists almshouse care as operational; HOUSES has no almshouse","other":""}
+{"id":"29070","town":"r2s-occupied-city-0","sev":"MED","kind":"PAIR","why":"says hide work stops half-way; HOUSES has tanners and a tailor's guild, and boots and shoes are made here","other":""}
+{"id":"20616","town":"r2s-occupied-city-0","sev":"LOW","kind":"BROKEN","why":"'the garrison and city watch walks': plural subject, singular verb","other":""}
+{"id":"12006","town":"r2s-occupied-city-0","sev":"LOW","kind":"LACKS","why":"names a chartered hall; DEFENCE charter is Multiple adventurers' guilds, no hall","other":""}
+{"id":"01569","town":"r2s-occupied-city-1","sev":"MED","kind":"PAIR","why":"says the market sells little; HOUSES has annual fairs, banks, caravan exchange, and 07232 says the entrepot profits enormously","other":"07232"}
+{"id":"29057","town":"r2s-occupied-city-1","sev":"LOW","kind":"STATE","why":"says cloth is sold across the region; TRADE exports list no cloth or textiles","other":""}
+{"id":"20614","town":"r2s-occupied-city-1","sev":"LOW","kind":"BROKEN","why":"'the garrison and city watch maintains': plural subject, singular verb","other":""}
+{"id":"20983","town":"r2s-occupied-city-2","sev":"MED","kind":"STATE","why":"fish market weighs fresh catch; TRADE imports salted fish because the local river fishery is exhausted","other":""}
+{"id":"02783","town":"r2s-occupied-city-2","sev":"LOW","kind":"PAIR","why":"calls the government a looser arrangement than a council; GOVERNMENT is the Corrupt City Council","other":""}
+{"id":"11426","town":"r2s-occupied-city-2","sev":"LOW","kind":"BROKEN","why":"four-item subject 'Identification, augury, message sending, and ... enchanting' takes singular 'brings'","other":""}
+{"id":"16004","town":"r2s-occupied-city-2","sev":"LOW","kind":"STATE","why":"gives 11,137 imported; header food line says imports cover 11057","other":""}
+{"id":"14649","town":"r2s-occupied-city-2","sev":"MED","kind":"PAIR","why":"says no salt reaches the salt works; 16838 says salt is won from local brine, and salt is not imported","other":"16838"}
+{"id":"28616","town":"r2s-occupied-city-2","sev":"MED","kind":"STATE","why":"watch keeps order and grows surer of its authority; GOVERNMENT has Military/Guard Suppressed under occupation","other":""}
+{"id":"15202","town":"r2s-occupied-city-2","sev":"LOW","kind":"BROKEN","why":"'the garrison and city watch catches': plural subject, singular verb","other":""}
+{"id":"16009","town":"r2s-occupied-city-2","sev":"LOW","kind":"PAIR","why":"names Quiahuitl Chi the master weaver; 05419 names Quiahuitl Chi the customs collector","other":"05419"}
+{"id":"HEADER","town":"r2s-occupied-metropolis-1","sev":"MED","kind":"RECORD","why":"founded by slow merger of three settlements, yet the reason says a merchant family's counting house founded it","other":""}
+{"id":"09761","town":"r2s-occupied-metropolis-1","sev":"MED","kind":"STATE","why":"says Grand Military Council governs; it is Minor, Religious Authorities Strong and Occupation Authority Significant","other":""}
+{"id":"28857","town":"r2s-occupied-metropolis-1","sev":"MED","kind":"STATE","why":"says the mine is why it grew; founding reason is a counting house, and iron ore is imported as local mines are exhausted","other":""}
+{"id":"03531","town":"r2s-occupied-city-1","sev":"LOW","kind":"STATE","why":"history says an occupation had ended; the city is under occupation now, Occupation Authority Significant","other":""}
+{"id":"18061","town":"r2s-occupied-metropolis-1","sev":"MED","kind":"STATE","why":"officers hold outsized political influence; Military/Guard and Garrison Bloc are Suppressed, Grand Military Council Minor","other":""}
+{"id":"04066","town":"r2s-occupied-metropolis-1","sev":"MED","kind":"PAIR","why":"one person gives the answer, nobody else to ask; a ruling three governs, legitimacy Contested, Religious Authorities Strong","other":"21789"}
+{"id":"13525","town":"r2s-occupied-metropolis-1","sev":"MED","kind":"STATE","why":"military commanders hold power and all waits on the army; Grand Military Council Minor, Military/Guard Suppressed, Religious Authorities Strong","other":""}
+{"id":"03325","town":"r2s-occupied-metropolis-1","sev":"LOW","kind":"LACKS","why":"names the charter hall; DEFENCE charter is Multiple adventurers' guilds, no charter hall","other":""}
+{"id":"28831","town":"r2s-occupied-metropolis-1","sev":"LOW","kind":"STATE","why":"history says the occupiers left; the metropolis is under occupation now, Occupation Authority Significant","other":""}
+{"id":"20485","town":"r2s-occupied-metropolis-1","sev":"MED","kind":"PAIR","why":"faithful hunt magic as heresy; HOUSES has an academy of magic, enchanter, scroll scribe, and it exports arcane services","other":"09347"}
+{"id":"DONE","lines":2546,"blocks":12,"flags":64}
