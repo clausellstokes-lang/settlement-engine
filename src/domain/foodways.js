@@ -130,20 +130,83 @@ export function composeFoodwaysLine(input) {
   return flavour ? `${line} ${flavour}` : line;
 }
 
+/** The composer's own sentence for a place no source of its own feeds (composeFoodwaysLine, above). */
+const NO_SOURCE_LINE = 'Meals follow the season and what the household has put by.';
+
+/**
+ * The sources a famine's failure stops (the food record's `failedSource`): the failed one, and grain and the mill
+ * together, one type (the mill grinds the grain: foodGenerator.js's one food-source count, resourceGenerator.js ::
+ * FAILED_SOURCE_CHAIN). @param {unknown} failed @returns {FoodSource[]}
+ */
+const stoppedBy = (failed) => (failed === 'grain' || failed === 'mill' ? ['grain', 'mill']
+  : typeof failed === 'string' && failed in SOURCE_PHRASES ? [/** @type {FoodSource} */ (failed)] : []);
+
+/**
+ * The composer's own sentence read back from a stored line: the frame's index and each slot's phrase, as
+ * composeFoodwaysLine wrote them over `sources` (largest first, three slots at most), and the culture's sentence after
+ * it. Null where the line is not the composer's (an old save, a hand-edited line). Pure: it tries the libraries' few
+ * phrases, no draw.
+ * @param {string} line @param {FoodSource[]} sources
+ * @returns {{ frameIndex: number, phrases: string[], flavour: string } | null}
+ */
+function readOwnSentence(line, sources) {
+  const slots = sources.slice(0, 3);
+  if (!slots.length) return null;
+  const frames = FRAMES[slots.length === 1 ? 'one' : slots.length === 2 ? 'two' : 'more'];
+  /** @type {string[][]} */
+  let combos = [[]];
+  for (const source of slots) combos = combos.flatMap((c) => SOURCE_PHRASES[source].filter((p) => !c.includes(p)).map((p) => [...c, p]));
+  for (let frameIndex = 0; frameIndex < frames.length; frameIndex += 1) {
+    for (const phrases of combos) {
+      const own = capital(frames[frameIndex].replace('{A}', phrases[0] || '').replace('{B}', phrases[1] || '').replace('{C}', phrases[2] || ''));
+      if (line === own) return { frameIndex, phrases, flavour: '' };
+      if (line.startsWith(`${own} `)) return { frameIndex, phrases, flavour: line.slice(own.length + 1).trim() };
+    }
+  }
+  return null;
+}
+
+/**
+ * R3-CODE-C-9 (the bar's n80; the chair's ruling of 2026-11-14, vetoable by the owner): A LINE THAT NAMES WHERE THE
+ * FOOD COMES FROM READS THE FOOD RECORD. A source a famine failed is not named as feeding the place: the line keeps the
+ * phrases it drew for the sources that still feed it, in its own frame at the smaller count (the same frame index), and
+ * the culture's sentence only where that names none of the failed sources; where no source still feeds it, the
+ * composer's own no-source answer (the culture's sentence if it claims no source, else NO_SOURCE_LINE). Agiospolis
+ * (bar0-city-under_siege+famine-rand-1): "The table rests on fish from the local waters." beside `failedSource: "fish"`
+ * (99 of the reader's 1,722 births: every famine). A line that does not name a failed source is returned as stored.
+ * @param {string} line @param {{ foodSources?: unknown, failedSource?: unknown }} record
+ * @returns {string}
+ */
+function fedLineOf(line, record) {
+  const stopped = stoppedBy(record.failedSource);
+  if (!stopped.length || !sourcesNamedIn(line).some((s) => stopped.includes(s))) return line;
+  const sources = /** @type {FoodSource[]} */ ((Array.isArray(record.foodSources) ? record.foodSources : []).filter((s) => s in SOURCE_PHRASES));
+  const read = readOwnSentence(line, sources);
+  const flavour = read && read.flavour && !sourcesNamedIn(read.flavour).some((s) => stopped.includes(s)) ? read.flavour : '';
+  const kept = read ? read.phrases.filter((_, slot) => !stopped.includes(sources[slot])) : [];
+  if (!kept.length) return flavour && sourcesNamedIn(flavour).length === 0 ? flavour : NO_SOURCE_LINE;
+  const frames = FRAMES[kept.length === 1 ? 'one' : kept.length === 2 ? 'two' : 'more'];
+  const own = capital(frames[/** @type {{ frameIndex: number }} */ (read).frameIndex % frames.length]
+    .replace('{A}', kept[0] || '').replace('{B}', kept[1] || '').replace('{C}', kept[2] || ''));
+  return flavour ? `${own} ${flavour}` : own;
+}
+
 /**
  * THE ONE READER of the foodways line (FOOD-4, lane food-exports, 2026-11-04). The line is
  * composed once, at generation (foodGenerator.js :: generateFoodSecurity → composeFoodwaysLine),
  * and carried on the food record; every surface that prints foodways reads it here — the
  * Economy tab, the PDF's Identity & Daily Life chapter, the Foundry journal's Identity & Daily
  * Life page — and none composes its own. A save older than the record yields null (the PDF then
- * prints the culture's authored line, lane WIRING-2's fallback).
+ * prints the culture's authored line, lane WIRING-2's fallback). It reads the same record's famine
+ * (fedLineOf, R3-CODE-C-9): a source the famine failed is not named as feeding the place.
  * @param {unknown} settlement
  * @returns {string | null}
  */
 export function foodwaysLineOf(settlement) {
-  const s = /** @type {{ economicState?: { foodSecurity?: { foodRecord?: { foodwaysLine?: unknown } | null } | null } | null } | null | undefined} */ (settlement);
-  const line = s?.economicState?.foodSecurity?.foodRecord?.foodwaysLine;
-  return typeof line === 'string' && line.trim() ? line.trim() : null;
+  const s = /** @type {{ economicState?: { foodSecurity?: { foodRecord?: { foodwaysLine?: unknown, foodSources?: unknown, failedSource?: unknown } | null } | null } | null } | null | undefined} */ (settlement);
+  const record = s?.economicState?.foodSecurity?.foodRecord;
+  const line = record?.foodwaysLine;
+  return typeof line === 'string' && line.trim() ? fedLineOf(line.trim(), record || {}) : null;
 }
 
 export default composeFoodwaysLine;
