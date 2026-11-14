@@ -1,0 +1,100 @@
+{"id":"HEADER","town":"r2r-thorp-58","sev":"MED","kind":"RECORD","why":"thorp of 7 makes gems and Education (basic) and lists imports (Grain, Salt, Iron) while exports none, brought-in 0% and under siege","other":""}
+{"id":"00323","town":"r2r-thorp-58","sev":"MED","kind":"LACKS","why":"two partners, accounts and a mediator in a courtyard; thorp of 7, one power, no QUARRELS, no trade house, and under siege","other":""}
+{"id":"03834","town":"r2r-thorp-58","sev":"LOW","kind":"LACKS","why":"'built around courtyards' (plural) in a thorp of seven people with only dwellings","other":""}
+{"id":"15078","town":"r2r-thorp-58","sev":"MED","kind":"LACKS","why":"names a 'Price regulators' power; GOVERNMENT lists only Elder Council, no market or trade house in HOUSES","other":""}
+{"id":"06203","town":"r2r-thorp-58","sev":"LOW","kind":"LACKS","why":"a 'Desperate poor' faction beside one power; thorp of 7 with no classes recorded in GOVERNMENT","other":""}
+{"id":"10271","town":"r2r-thorp-58","sev":"MED","kind":"STATE","why":"offers Hospitality as a service; no inn in HOUSES and under siege nothing comes in, so no guests","other":""}
+{"id":"16858","town":"r2r-thorp-58","sev":"MED","kind":"STATE","why":"Dwellings 'Services: Hospitality'; no inn in HOUSES and siege cuts all road traffic","other":""}
+{"id":"12039","town":"r2r-thorp-58","sev":"LOW","kind":"STATE","why":"'Lodging(1)' offered; no inn in HOUSES and siege bars all arrivals","other":""}
+{"id":"09837","town":"r2r-thorp-58","sev":"LOW","kind":"LACKS","why":"'Healing(3)' heading holds only burial and worship rites; HOUSES has no healer or herbalist","other":""}
+{"id":"16841","town":"r2r-thorp-58","sev":"LOW","kind":"STATE","why":"mill a day away listed as a service; siege cuts the road, and 27960 says grain is ground by hand","other":"27960"}
+{"id":"14026","town":"r2r-thorp-58","sev":"MED","kind":"PAIR","why":"says no rival and nobody asks who comes next, but legitimacy is a Crisis, score 5, and few accept its right to rule","other":"07254"}
+{"id":"01063","town":"r2r-thorp-58","sev":"LOW","kind":"LACKS","why":"'the few people who hold office' (plural); PEOPLE lists one person and GOVERNMENT one power","other":"07253"}
+{"id":"27792","town":"r2r-thorp-58","sev":"LOW","kind":"LACKS","why":"a split 'congregation' and 'temporal authorities' taking sides; thorp of 7 has no church of its own and one power, Elder Council","other":""}
+{"id":"19800","town":"r2r-thorp-58","sev":"LOW","kind":"BROKEN","why":"'The heresy trials is' - subject and verb disagree (plural subject)","other":""}
+{"id":"HEADER","town":"r2r-thorp-45","sev":"LOW","kind":"RECORD","why":"founder 'a discharged soldier who liked the view' cannot also be 'founded by foresters managing the woodland under charter'","other":""}
+{"id":"20574","town":"r2r-thorp-45","sev":"LOW","kind":"STATE","why":"says the question of who replaces the Council 'does not come up'; GOVERNMENT gives Legitimacy Crisis, score 13, under siege","other":""}
+{"id":"14537","town":"r2r-thorp-45","sev":"LOW","kind":"PAIR","why":"origin 'founded by foresters under charter' contradicts founder 'a discharged soldier who had nowhere better to be'","other":"08941"}
+{"id":"07041","town":"r2s-under_siege-thorp-1","sev":"MED","kind":"STATE","why":"History prints an 'External Debt' major event; PAST records only the Arcane Incident and the Migration","other":""}
+{"id":"20956","town":"r2s-under_siege-thorp-1","sev":"LOW","kind":"STATE","why":"states a debt to an external power as fact; PAST records no such event, and under siege no creditor can arrive","other":"07041"}
+{"id":"13773","town":"r2s-under_siege-thorp-1","sev":"LOW","kind":"STATE","why":"'about a month and a half' in stores; FOOD gives 1.3 months","other":""}
+{"id":"21230","town":"r2s-under_siege-thorp-1","sev":"LOW","kind":"STATE","why":"thorp 'would go on' without the arcane; FOOD has 27% of food made by magic and a 41% gap","other":"03067"}
+{"id":"02334","town":"r2s-under_siege-thorp-2","sev":"LOW","kind":"STATE","why":"blessing for 'travelers on the road'; trade access isolated and under siege nothing comes in or goes out by road","other":""}
+{"id":"27970","town":"r2s-under_siege-thorp-2","sev":"LOW","kind":"LACKS","why":"'Agioslimani's streets' in a thorp of 6 people","other":""}
+{"id":"HEADER","town":"r2s-under_siege-thorp-2","sev":"MED","kind":"RECORD","why":"thorp of 6 with no trade (exports and imports none) makes luxury goods, religious services and Education (basic)","other":""}
+{"id":"06680","town":"r2s-under_siege-thorp-0","sev":"MED","kind":"STATE","why":"'Economic Flows (2 active, 1 impaired)'; LAND gives Foraging & Smallholding running and Faith & Worship operational, no impaired chain","other":"10927"}
+{"id":"10927","town":"r2s-under_siege-thorp-0","sev":"MED","kind":"STATE","why":"'Impaired' flow state; LAND has Foraging & Smallholding running with its resource available, none impaired","other":"06680"}
+{"id":"22197","town":"r2s-under_siege-thorp-0","sev":"LOW","kind":"LACKS","why":"Traditionalists, Progressives and a Pragmatic middle as factions in a thorp of 9 with one power and no QUARRELS","other":""}
+{"id":"18606","town":"r2s-under_siege-thorp-0","sev":"LOW","kind":"LACKS","why":"'Long Charter Fair' tradition; no market or fair house, charter none, thorp of 9 under siege","other":""}
+{"id":"20286","town":"r2s-under_siege-thorp-0","sev":"MED","kind":"BROKEN","why":"'The plague years is years old' - number slot unfilled and verb disagrees; PAST gives the Plague Years as 5 years ago","other":""}
+{"id":"06648","town":"r2s-under_siege-thorp-3","sev":"LOW","kind":"LACKS","why":"'built around courtyards, ordered by lineage' in a thorp of 7 with only dwellings","other":""}
+{"id":"21654","town":"r2s-under_siege-thorp-3","sev":"LOW","kind":"STATE","why":"a traveller's parcel and two people 'come to collect it'; under siege nothing comes in or goes out","other":""}
+{"id":"17369","town":"r2s-under_siege-thorp-3","sev":"LOW","kind":"STATE","why":"a visitor who comes and stays away at will; under siege no visitors arrive","other":""}
+{"id":"21549","town":"r2s-under_siege-thorp-3","sev":"MED","kind":"STATE","why":"'Their family left last week'; under siege nothing goes out by road, gate or water","other":""}
+{"id":"HEADER","town":"r2s-under_siege-thorp-3","sev":"LOW","kind":"RECORD","why":"thorp of 7 makes iron and metalwork with no smith or mine house, while also importing Iron","other":""}
+{"id":"00314","town":"r2s-succession_void-thorp-1","sev":"MED","kind":"STATE","why":"'one of their most reliable suppliers'; TRADE imports none and trade access isolated, so no suppliers exist","other":"17377"}
+{"id":"17377","town":"r2s-succession_void-thorp-1","sev":"MED","kind":"STATE","why":"'Someone else is sending them'; imports none, isolated, famine with no inbound goods","other":"00314"}
+{"id":"03169","town":"r2s-succession_void-thorp-1","sev":"LOW","kind":"PAIR","why":"label 'Acting Elder'; the seat stands empty and PEOPLE gives Dominik Wagner the title 'the eldest'","other":"13727"}
+{"id":"01495","town":"r2s-succession_void-thorp-1","sev":"LOW","kind":"LACKS","why":"'several people are racing to take the seat' in a thorp of 11; PEOPLE names one person in the Elder Council","other":""}
+{"id":"14259","town":"r2s-succession_void-thorp-1","sev":"MED","kind":"STATE","why":"'Nothing has come for Schwarzdorf'; PAST records The Occupation, 153 years ago, catastrophic","other":"02192"}
+{"id":"11532","town":"r2s-succession_void-thorp-1","sev":"LOW","kind":"STATE","why":"'safety rests on nobody having wanted it'; PAST records a catastrophic Occupation 153 years ago","other":"02192"}
+{"id":"HEADER","town":"r2s-famine-thorp-1","sev":"LOW","kind":"RECORD","why":"thorp of 20 under famine exports five goods and makes Education (basic); exports Livestock though the failed source is livestock","other":""}
+{"id":"12001","town":"r2s-famine-thorp-1","sev":"MED","kind":"STATE","why":"lists Livestock as an export; FOOD gives livestock as the failed source and the town is in active famine","other":""}
+{"id":"29895","town":"r2s-famine-thorp-1","sev":"MED","kind":"STATE","why":"Livestock 'Fully exploited'; FOOD gives livestock as the failed source (herds failed, famine cut 65%)","other":"19797"}
+{"id":"29908","town":"r2s-famine-thorp-1","sev":"LOW","kind":"STATE","why":"'Wool and textiles' marked worked; LAND gaps say wool is raw and not being processed","other":""}
+{"id":"11311","town":"r2s-famine-thorp-1","sev":"LOW","kind":"LACKS","why":"'street kitchens' in a thorp of 20; HOUSES has no kitchen, inn or market","other":""}
+{"id":"02883","town":"r2s-famine-thorp-1","sev":"LOW","kind":"STATE","why":"'a rival crew'; QUARRELS and relations none, and only a lone fence is recorded: 'no boss, nobody running the streets'","other":"19392"}
+{"id":"20572","town":"r2s-famine-thorp-1","sev":"LOW","kind":"STATE","why":"'does not come up' who replaces the authority; GOVERNMENT gives Legitimacy Crisis, score 3","other":""}
+{"id":"19364","town":"r2s-famine-thorp-2","sev":"MED","kind":"PAIR","why":"'The crime wave is coordinated' and someone directs it; 21915 says things go missing with no gang behind it","other":"21915"}
+{"id":"17431","town":"r2s-famine-thorp-2","sev":"LOW","kind":"PAIR","why":"'Someone is directing it to create a pretext'; 21915 says no gang is behind the thefts, and only one fence is recorded","other":"21915"}
+{"id":"03015","town":"r2s-famine-thorp-2","sev":"LOW","kind":"LACKS","why":"crime 'overwhelmed the authorities' and vigilantes formed; DEFENCE has no watch, garrison or militia, and the thorp has only a household elder","other":""}
+{"id":"HEADER","town":"r2s-famine-thorp-3","sev":"LOW","kind":"RECORD","why":"thorp of 16 makes luxury goods and Education (basic) with no school or workshop house","other":""}
+{"id":"03614","town":"r2s-wartime-thorp-2","sev":"LOW","kind":"LACKS","why":"'built around courtyards' (plural) in a thorp of 9 with only dwellings","other":""}
+{"id":"21438","town":"r2s-wartime-thorp-2","sev":"LOW","kind":"STATE","why":"'trade suffers, a few grow rich on army contracts'; TRADE exports and imports none, isolated, thorp of 9 in famine","other":""}
+{"id":"15378","town":"r2s-wartime-thorp-2","sev":"LOW","kind":"STATE","why":"'Receives travellers'; trade access isolated, no inn in HOUSES, famine and war cut arrivals","other":""}
+{"id":"11174","town":"r2s-wartime-thorp-2","sev":"LOW","kind":"STATE","why":"'watches its roads'; DEFENCE watch none, trade access isolated, thorp of 9","other":""}
+{"id":"27552","town":"r2s-wartime-thorp-2","sev":"MED","kind":"LACKS","why":"'Wealthy families paying poorer ones' to send sons; thorp of 9 in famine, Struggling, with one household elder and no classes","other":""}
+{"id":"06200","town":"r2s-wartime-thorp-2","sev":"LOW","kind":"STATE","why":"deserters 'passing through' needing forged papers; trade access isolated, thorp of 9, no one to forge or hide them","other":""}
+{"id":"HEADER","town":"r2r-thorp-46","sev":"LOW","kind":"RECORD","why":"thorp of 26, isolated with no trade, makes glass, iron and metalwork with no workshop house; LAND gaps carry the raw key 'glass_sand'","other":""}
+{"id":"17266","town":"r2r-thorp-54","sev":"LOW","kind":"LACKS","why":"'honest traders carry the tax alone' and tax lists; thorp of 17, isolated, no market or trade house","other":""}
+{"id":"14842","town":"r2s-famine-thorp-0","sev":"MED","kind":"LACKS","why":"'Pilgrim hospitality' as an export/service; HOUSES has no inn or lodging house and pilgrimage was 113 years ago, under famine","other":""}
+{"id":"HEADER","town":"r2s-famine-thorp-0","sev":"LOW","kind":"RECORD","why":"thorp of 19 makes flour and processed textiles and exports bottled water, but HOUSES has only access to an external mill and no workshop","other":""}
+{"id":"20933","town":"r2s-occupied-thorp-1","sev":"LOW","kind":"PAIR","why":"'gets by on what it produces itself'; FOOD has 28% made by magic, and 14207 says some food is provided by spell or prayer","other":"14207"}
+{"id":"14349","town":"r2s-occupied-thorp-1","sev":"MED","kind":"STATE","why":"says Occupation Authority 'has grown stronger' than Elder Council; GOVERNMENT gives both Significant","other":""}
+{"id":"01327","town":"r2s-occupied-thorp-1","sev":"LOW","kind":"STATE","why":"an apprenticeship in 'the trade, the clients'; TRADE exports and imports none, isolated, and PEOPLE make one the occupying governor, the other the eldest","other":""}
+{"id":"00219","town":"r2s-occupied-thorp-1","sev":"LOW","kind":"STATE","why":"'Half of Anusaya Bhat's clients'; no trade or client base in a thorp of 17 with exports and imports none, and she is the occupying governor","other":""}
+{"id":"HEADER","town":"r2r-thorp-38","sev":"LOW","kind":"RECORD","why":"thorp of 26, 27 years old, isolated with no trade, makes gems and Education (basic) with no workshop, mine or school house","other":""}
+{"id":"03014","town":"r2r-thorp-38","sev":"MED","kind":"STATE","why":"'A supplier is providing goods'; imports none, trade access isolated, so there is no supplier","other":"20542"}
+{"id":"20542","town":"r2r-thorp-38","sev":"LOW","kind":"STATE","why":"'The price is too good'; no imports, no market in HOUSES and the thorp is isolated","other":"03014"}
+{"id":"09864","town":"r2r-thorp-38","sev":"MED","kind":"STATE","why":"a secret of engineering 'the original supply disruption' that triggered the famine; imports none, isolated, failed source None","other":""}
+{"id":"05384","town":"r2r-thorp-38","sev":"LOW","kind":"PAIR","why":"calls Walun Kiyad 'Outlaw Chief'; PEOPLE gives the title 'the outlaw host'","other":"29681"}
+{"id":"06646","town":"r2s-succession_void-thorp-0","sev":"LOW","kind":"LACKS","why":"'built around courtyards' in a thorp of 8 with only dwellings","other":""}
+{"id":"HEADER","town":"r2r-thorp-17","sev":"LOW","kind":"RECORD","why":"thorp of 11, isolated with no trade, makes stone and Education (basic) with no school or mason house","other":""}
+{"id":"08807","town":"r2r-thorp-24","sev":"HIGH","kind":"STATE","why":"prints Food Security 'Pressured'; FOOD word is Secure (grown 88%, gap 4%)","other":"08860"}
+{"id":"08860","town":"r2r-thorp-24","sev":"HIGH","kind":"STATE","why":"'Food: Pressured.'; FOOD word is Secure","other":"08807"}
+{"id":"08865","town":"r2r-thorp-24","sev":"HIGH","kind":"STATE","why":"Foundations 'Food Pressured'; FOOD word is Secure","other":"08807"}
+{"id":"15069","town":"r2r-thorp-24","sev":"HIGH","kind":"STATE","why":"Daily Life food word 'Pressured'; FOOD word is Secure","other":"08807"}
+{"id":"08799","town":"r2r-thorp-24","sev":"HIGH","kind":"STATE","why":"Tonight sheet 'Food Pressured.'; FOOD word is Secure","other":"08807"}
+{"id":"05887","town":"r2r-thorp-24","sev":"MED","kind":"STATE","why":"'Crisis Cutting the Food Supply'; food is Secure (grown 88%, gap 4%, famine cut 0%, failed source None)","other":""}
+{"id":"14966","town":"r2r-thorp-24","sev":"LOW","kind":"PAIR","why":"'Poverty and crime are the reason' for contested rule; crime is Contained and 21587 says ordinary theft has dropped under the occupation","other":"21587"}
+{"id":"01171","town":"r2r-thorp-24","sev":"MED","kind":"STATE","why":"the eldest householder named Fabia Varro successor; PEOPLE make Fabia Varro the occupying governor of Occupation Authority, not a Household Council member","other":"20164"}
+{"id":"00649","town":"r2r-thorp-24","sev":"LOW","kind":"STATE","why":"the occupying governor asks the eldest householder for a loan while the occupiers 'take what Sanctaminus earns'","other":"20164"}
+{"id":"01192","town":"r2r-thorp-27","sev":"MED","kind":"STATE","why":"the occupying governor 'owes their place' to the local boat-headman; PEOPLE make Photeine Botaneiates the occupier's governor, who holds her post by the occupiers","other":"00959"}
+{"id":"28050","town":"r2r-thorp-27","sev":"LOW","kind":"STATE","why":"the occupying governor 'paying back' a local boat-headman for a favour; the occupier answers to Occupation Authority, and the relation is tense","other":"01192"}
+{"id":"10781","town":"r2r-thorp-40","sev":"LOW","kind":"STATE","why":"'talks about the weather, the hills and the flocks'; terrain is Plains","other":""}
+{"id":"01287","town":"r2r-thorp-40","sev":"LOW","kind":"STATE","why":"the occupying governor 'taught Agata Pavlov everything'; PEOPLE make Dimitri Sidorov the occupier's governor and Agata Pavlov the local head shepherd","other":""}
+{"id":"03370","town":"r2s-occupied-thorp-2","sev":"MED","kind":"STATE","why":"a heresy accusation splitting the faithful; PAST records only The Pilgrimage and The Purge, no heresy trial","other":"09895"}
+{"id":"09895","town":"r2s-occupied-thorp-2","sev":"MED","kind":"STATE","why":"'Heresy Trial' plot hook and its relic and fabricated-evidence lines; PAST has no trial, only The Pilgrimage and The Purge","other":"03370"}
+{"id":"01182","town":"r2s-occupied-thorp-2","sev":"LOW","kind":"STATE","why":"the occupying governor 'owes Jiahao Yang a great deal'; PEOPLE make Hiroshi Wang the occupier's governor, in a tense, escalating relation with the local power","other":""}
+{"id":"09901","town":"r2s-occupied-thorp-2","sev":"MED","kind":"STATE","why":"History prints a 'Heresy trial' event; PAST records only The Pilgrimage (69 years ago) and The Purge","other":"09895"}
+{"id":"00439","town":"r2s-occupied-thorp-3","sev":"LOW","kind":"STATE","why":"the occupying governor 'borrowed' the local head shepherd's good name 'to win a post'; the governor is installed by the occupier","other":""}
+{"id":"03501","town":"r2s-occupied-thorp-0","sev":"MED","kind":"STATE","why":"a magic surge that marked 'the changed and their descendants'; PAST records only The Shortage and The Migration, no wild-magic event","other":"27913"}
+{"id":"27913","town":"r2s-occupied-thorp-0","sev":"MED","kind":"STATE","why":"History lists 'Wild magic' event; PAST has only The Shortage (68 years ago) and The Migration (5 years ago)","other":"03501"}
+{"id":"05184","town":"r2r-thorp-1","sev":"LOW","kind":"PAIR","why":"calls Nasidia Varro 'Captain'; PEOPLE gives her the title 'the outlaw host'","other":""}
+{"id":"03316","town":"r2r-thorp-1","sev":"LOW","kind":"STATE","why":"'All three still hold' incl. milling; HOUSES has only Access to external mill, and LAND's Mill Sites are unworked","other":"06884"}
+{"id":"14096","town":"r2s-plague_onset-thorp-3","sev":"MED","kind":"PAIR","why":"'Nobody comes into Dharmaghat and nobody leaves'; 21969 says not everyone keeps the quarantine, trade access is road and imports cover 1%","other":"21969"}
+{"id":"03075","town":"r2s-plague_onset-thorp-3","sev":"MED","kind":"STATE","why":"'a visitor would not guess at the trouble'; the town is in Plague with quarantine, a growing burial register and Dangerous safety","other":"19115"}
+{"id":"10211","town":"r2s-plague_onset-thorp-3","sev":"MED","kind":"STATE","why":"'a rival claims' the seat; GOVERNMENT lists one power, QUARRELS and relations are none, PEOPLE name no rival","other":""}
+{"id":"05459","town":"r2s-plague_onset-thorp-3","sev":"LOW","kind":"STATE","why":"constraint speaks of a rival winning supporters; no rival power or quarrel is recorded","other":"10211"}
+{"id":"10375","town":"r2s-plague_onset-thorp-3","sev":"LOW","kind":"STATE","why":"'Answers about the hills'; terrain is Plains","other":""}
+{"id":"DONE","lines":3027,"blocks":27,"flags":99}
