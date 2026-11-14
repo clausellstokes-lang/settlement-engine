@@ -106,6 +106,7 @@ export const DEFENSE_BUCKET_KEYWORDS = Object.freeze({
   magicDef: Object.freeze([
     'wizard', "mages' guild", 'mage', 'academy of magic',
     'golem workforce', // UPKEEP-CAPACITY C6 (the chair's G5): the alchemist's shop and quarter are a trade
+    'scroll scribe', "enchanter's shop", // UPKEEP-13 (the chair's ruling of 2026-11-14 10:40 on UPKEEP-12's M3/M5): both practise wards
   ]),
 });
 
