@@ -30,7 +30,9 @@ import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { guildOf } from '../../src/domain/facts/guild.js';
 
 /** The birth facts a history holds, as a double: only the guild atom is read from them here. */
-const factsWith = (/** @type {boolean} */ guild) => ({ guild });
+// RE-KEYED BY CAUSE (W2-FIX-DATA-HISTORY item A): the crash now needs the market it speaks of, so the fixture answers the
+// market home (a market stands); the guild's answer and every assertion are as they were.
+const factsWith = (/** @type {boolean} */ guild) => ({ guild, market: true });
 
 describe('W2-FIX-DATA-2 item 2: a tension the record\'s own power or purse makes false', () => {
   it('the leadership vacuum is refused under every settled band and admitted under every other one', () => {

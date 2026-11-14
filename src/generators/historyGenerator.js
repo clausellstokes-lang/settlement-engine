@@ -16,7 +16,7 @@ import { pick, random01, randInt } from './helpers.js';
 import { random as _rng, getActiveRng } from '../kernel/rngContext.js';
 
 import { genArrivalDetail } from './narrativeGenerator.js';
-import { AGE_BY_TIER, HISTORICAL_EVENTS_DATA, EVENT_TYPE_NAMES, historyDescription, historyDescVariantsOf, tensionDescription, HISTORY_QUARTER_WORDS, HISTORY_DESC_SIBLINGS } from '../data/historyData.js';
+import { AGE_BY_TIER, HISTORICAL_EVENTS_DATA, EVENT_TYPE_NAMES, historyDescription, historyDescVariantsOf, tensionDescription, HISTORY_QUARTER_WORDS, HISTORY_DESC_SIBLINGS, tensionHeldByTimeline, livelihoodLead, sizedResourceEvent } from '../data/historyData.js';
 import { resolveGenerationWorldLaw } from './generationContext.js'; import { defenseFactsOf } from '../domain/defense/defenseFacts.js'; import { crimeSignalOf } from '../domain/crimeSignal.js'; // R6 (and F4 unit 3b): one line, so no cited line moves
 import {
   STRESS_TO_TENSION,
@@ -445,7 +445,7 @@ const buildHistoricalEvent = (
         // W1 ECO second seat (the owner's style law, 2026-11-07): the lead names what the place lives
         // by (its first export) and says that trade is strained; the top issue that follows is the
         // evidence (on a migration it is the ARRIVALS food note; a departures record writes none).
-        const lead = commodity ? `Life here runs mostly on the ${commodity} trade, and that trade is under strain.` : '';
+        const lead = livelihoodLead(commodity, economicState?.incomeSources); // W2-FIX-DATA-HISTORY item L (the first cut's #267): the lead reads the income shares
         selected.push({
           ...tmpl,
           description: [lead, issueText].filter(Boolean).join(' ') || tmpl.description,
@@ -473,7 +473,7 @@ const buildHistoricalEvent = (
   // Priority-add: neighbor tension
   if (neighborTension && !usedTypes.has(neighborTension)) {
     const tmpl = HISTORICAL_EVENTS_DATA.find(e => e.type === neighborTension);
-    if (tmpl) {
+    if (tmpl && trueToRecordAt(tmpl, hookFacts, true)) { // W2-FIX-DATA-HISTORY item A: a trade dispute that touches every merchant needs the market it names
       selected.push({ ...tmpl });
       usedTypes.add(neighborTension);
     }
@@ -504,7 +504,7 @@ const buildHistoricalEvent = (
     const tensionType = STRESS_TO_TENSION[primaryStress];
     if (tensionType && !usedTypes.has(tensionType)) {
       const tmpl = HISTORICAL_EVENTS_DATA.find(e => e.type === tensionType);
-      if (tmpl && tensionAdmitted(tmpl, hookFacts) && trueToRecordAt(tmpl, hookFacts, true, context.stability, context.prosperity)) { // W2-FIX-DATA-2 item 2
+      if (tmpl && tensionAdmitted(tmpl, hookFacts) && trueToRecordAt(tmpl, hookFacts, true, context.stability, context.prosperity) && tensionHeldByTimeline(tmpl, timeline)) { // W2-FIX-DATA-2 item 2; W2-FIX-DATA-HISTORY item C: a legacy needs its own past on the timeline
         selected.push({ ...tmpl });
         usedTypes.add(tensionType);
       } else if (tmpl && HISTORY_TEMPLATE_RECORD_DECLARATIONS[tensionType]) {
@@ -550,7 +550,7 @@ const buildHistoricalEvent = (
     // the record says the place ends the year with money to spare, a guild war where no guild stands. Set aside
     // exactly as the crime signal's own above (R-Q: the template leaves the pool and the loop draws again; no draw is
     // added or re-mapped), so only those places' streams move.
-    if (!trueToRecordAt(candidate, hookFacts, true, context.stability, context.prosperity)) continue;
+    if (!trueToRecordAt(candidate, hookFacts, true, context.stability, context.prosperity) || !tensionHeldByTimeline(candidate, timeline)) continue; // W2-FIX-DATA-HISTORY item C
     selected.push({ ...candidate });
     usedTypes.add(candidate.type);
   }
@@ -859,7 +859,7 @@ const generateRelationshipEvent = (age, tier, config, context, worldLaw, hookFac
     if (Array.isArray(chosen.severity)) chosen.severity = pick(chosen.severity);
     // Strip plot hooks from ancient resource events (same ≤80y rule)
     if ((chosen.yearsAgo || 0) > 80) chosen.plotHooks = [];
-    if (resourceEventAdmitted(chosen, hookFacts)) events.push(chosen); // W2-FIX-DATA-5 (ww-25): none admitted, none written (the draws above are kept)
+    if (resourceEventAdmitted(chosen, hookFacts)) events.push(sizedResourceEvent(chosen, hookFacts)); // W2-FIX-DATA-5 (ww-25): none admitted, none written (the draws above are kept); W2-FIX-DATA-HISTORY item E: its texts resolved
     events.sort((a, b) => (b.yearsAgo || 0) - (a.yearsAgo || 0));
   }
 
@@ -1149,11 +1149,24 @@ import { declarationAdmits, declarationOf } from '../domain/facts/factVocabulary
  * description, both memory forms, its factions and its hooks), and the occupation's crisis maps to it
  * (`historyPolicyData.js :: STRESS_TO_TENSION`): under an occupation in force it is no tension of the town. The past
  * event keeps its account: a town may have been occupied before.
+ * W2-FIX-DATA-HISTORY item A (ROUND-3-CUT-INCREMENT ww-543, ww-572, ww-1524; CENSUS-2's economic_disparity writer): the
+ * Economic Divide is merchants against labourers (its description and both variants that name them, its hook of a
+ * merchant funding both sides, its merchant quarter walled apart), told of hamlets with no market; and the trade dispute
+ * "touched every merchant and every purse in town" where no market stands. Each needs the market home's answer
+ * (`facts/market.js`); the divide as a past event too (a refused pick resolves draw-free to the pool's next template, an
+ * anchor keeps the event's own words), the dispute as the current tension, at the neighbour's add as at the fill. The
+ * crash ("a speculative frenzy in {resource} and property collapsed") is the economic pool's next template where the
+ * divide gives way, and speaks of a market as surely: it needs one too, past and present.
  * @type {Readonly<Record<string, Readonly<{ needs?: ReadonlyArray<string>, excludes?: ReadonlyArray<string>, timeline: boolean }>>>}
  */
 export const HISTORY_TEMPLATE_RECORD_DECLARATIONS = Object.freeze({
   guild_conflict: Object.freeze({ needs: Object.freeze(['guild']), timeline: true }),
   occupation_legacy: Object.freeze({ excludes: Object.freeze(['crisis: occupied']), timeline: false }),
+  economic_disparity: Object.freeze({ needs: Object.freeze(['market']), timeline: true }), // W2-FIX-DATA-HISTORY item A: merchants against labourers, where a market stands
+  trade_dispute: Object.freeze({ needs: Object.freeze(['market']), timeline: false }), // W2-FIX-DATA-HISTORY item A: "every merchant and every purse", where a market stands
+  market_crash: Object.freeze({ needs: Object.freeze(['market']), timeline: true }), // W2-FIX-DATA-HISTORY item A: a speculative frenzy in goods and property, where a market stands
+  infiltration_fear: Object.freeze({ excludes: Object.freeze(['crisis: infiltrated']), timeline: false }), // W2-FIX-DATA-HISTORY item G (ww-1261): an open hunt for agents, not while the agents go unseen
+  pilgrimage_surge: Object.freeze({ needs: Object.freeze(['institution: temple']), timeline: false }), // W2-FIX-DATA-HISTORY item G (CENSUS-2): the temple's beneficiaries, where a temple stands
 });
 
 /** The stability bands that say the power is settled: a leadership vacuum is false under them (`labelBands.js`). */

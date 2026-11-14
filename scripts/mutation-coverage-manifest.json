@@ -3778,6 +3778,10 @@
     "tests/generators/churchNoteReadsFlag.test.js": {
       "kind": "rationale",
       "rationale": "W2-B-DECLARE item 5's cure pin (lane/w2-b-declare-2026-11-12, commit 1ae138b47): narrativeGenerator.js :: genCoherence sets churchControlsEcon from the generator's own flag (economicState.safetyProfile.flags.theocraticEconomy), never from the situation sentence, which an isolated place never prints. The test births r2r-town-54 (flag true, sentence silent on the church) and holds the note 'flows through religious institutions'. EXECUTED AT BUILD TIME, 2026-11-12: the inverse edit (churchControlsEcon = !!economicState.situationDesc?.toLowerCase().includes('church controls')) was planted from a cp backup, the test run, and the file restored by cp, verified byte-identical by cmp and sha256: RESULT 1 of 1 arm red, by title ('a theocratic economy whose situation sentence is suppressed still carries its note': expected false to be true). Not in scripts/mutation-sweep.sh because the plant is a one-line revert of the cure itself, which the commit's own red-first run already demonstrates; promote to a sweep plant when the sweep next touches narrativeGenerator.js."
+    },
+    "tests/generators/w2FixDataHistoryItems.test.js": {
+      "kind": "rationale",
+      "rationale": "THE HISTORY, CULTURE AND ARRIVAL SEAT OF THE DATA LANE (W2-FIX-DATA-HISTORY, 2026-11-13; ROUND-3-CUT-INCREMENT, the review of the data lane L4, CENSUS-2). Its catching power is EXECUTED in the test body, one describe an item: each pins the declaration or the reader it cures through the real door (historyGenerator.js :: trueToRecordAt, historyData.js :: tensionHeldByTimeline and livelihoodLead, cultureProfiles.js :: CULTURE_LINE_SIBLINGS) and reds when a declaration is dropped or turned, and each GUARD re-births a reader's own town in the app's shape and reds when the cured sentence prints again anywhere in its record (the history, the materialized culture detail, the arrival) or when the town loses what it must keep (a tension, a detail). Each member was RED at its item's parent commit and green at the cure (the commit bodies name the counts)."
     }
   },
   "meta": {

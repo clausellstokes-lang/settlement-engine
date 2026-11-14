@@ -1087,9 +1087,11 @@
      "lineId": "ARRIVAL_SENSES.timber.dominant[1]",
      "text": "Stacks of seasoning planks line the road in, taller than the carts that wait for them.",
      "needs": [],
-     "excludes": [],
-     "crisis": null,
-     "colour": true,
+     "excludes": [
+      "crisis: under_siege"
+     ],
+     "crisis": "any",
+     "colour": false,
      "stop": []
     },
     {
