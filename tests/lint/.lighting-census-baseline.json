@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "b47ba92626badacf6ea4a710ded007e30e2d7278",
+  "measuredAtSha": "a1a9b79bba6c72b1dfca8a52a6bf5f95065efdc7",
   "measuredBy": "R2-CODE-B-6",
   "date": "2026-11-14",
-  "note": "R2-CODE-B-6 item 0 (b47ba9262): four new titles in tests/generators/stressNarrativeDeclared.test.js (no caravans through an isolated place)",
+  "note": "R2-CODE-B-6 row 1d (fc7514261): one new title in tests/domain/settlementQuickGuide.test.js (the food word from foodBandOf)",
   "files": 3250,
   "parked": 398,
   "credited": 2852,
-  "titles": 29325,
+  "titles": 29326,
   "suiteTitles": 7942
 }
