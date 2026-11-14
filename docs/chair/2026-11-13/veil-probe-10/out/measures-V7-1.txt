@@ -1,0 +1,68 @@
+THE MEASURES BEHIND THE NAME SEARCH (COHERENCE-VEIL-10, V7-1), each run on the local scratch cluster (PostgreSQL 16.15, C.UTF-8, unix socket) or in Node 22.23 (Unicode 17.0). The scripts: ../measure/ and ../gen-name-tables.mjs.
+
+== alt-cost.sql (MEASURE FIRST: one alternation of 1,200 names; before anything was built)
+big text chars: 388893
+shared-prefix names: 1200 alt x 10000 strings: 0 hits, 1428 ms
+shared-prefix names: 1200 alt x one 388 KB text: hit 0, 3 ms
+  again (compiled regex cached): 2 ms
+random names pattern chars: 61225
+random names: 1200 alt x 10000 strings: 0 hits, 6208 ms
+random names: 1200 alt x one 388 KB text: hit 0, 145 ms
+  again: 118 ms
+
+== prep-cost.sql (what preparing one text costs)
+ascii 408892 chars, non-ascii 352892 chars, escaped 352892 chars
+ascii test on ascii: 2.5 ms
+backslash test: 1.8 ms
+backslash position(): 0.2 ms
+neutralise 42,000 escapes: 15.7 ms
+gapless, 20,000 tokens: 24.3 ms
+normalize NFKC non-ascii: 14.6 ms
+is nfkc normalized (yes): 4.1 ms
+strip marks (none): 1.5 ms
+fold by regexp_replace (ascii): 22.7 ms
+translate A-Z: 30.6 ms
+length: 0.6 ms
+
+== compile-cost.sql (every ASCII letter bracketed in the needle, against the text's A-Z lowered and plain needles; run while the needle still bracketed A-Z, which is its first figure)
+bracketed needles (123865 chars): first use on an empty text (the compile): 674.8 ms
+  then 188 KB of text: 141.5 ms
+  again: 134.7 ms
+plain lower-case needles (61231 chars): the compile: 40.1 ms
+  then the text: 136.2 ms
+  again: 133.7 ms
+
+== search-cost.sql, as built (the search built, the whole text asked, the walk)
+the case literal: 0.9 ms
+search, 1 name: 3.4 ms
+search, 1 name, again: 1.1 ms
+search, 600 names: 14.1 ms (pattern 10723 chars)
+the whole text asked, 600 names, 198 KB, no hit: 40.6 ms
+search, 1,200 names of three words, 300 open names: 91.2 ms (pattern 61231 chars)
+the whole text asked, 1,200 names, no hit: 171.5 ms
+the whole text asked, 1,200 names, ONE hit: 278.8 ms, hits 1
+the walk, one hit among 10,000 strings: 277.9 ms, strings back 9999
+
+== nfkd-skew.mjs (where PostgreSQL 16's NFKD and Node's differ, every code point)
+server 16.15 (Ubuntu 16.15-0ubuntu0.24.04.1) node unicode 17.0
+code points whose NFKD differs: 57 in the basic plane: 1
+a7f1 105c9 105e4 11383 11385 1138e 11391 113c5 113c7 113c8 16121 16122 16123 16124 16125 16126 16127 16128 16d68 16d69 16d6a 1ccd6 1ccd7 1ccd8 1ccd9 1ccda 1ccdb 1ccdc 1ccdd 1ccde 1ccdf 1cce0 1cce1 1cce2 1cce3 1cce4 1cce5 1cce6 1cce7 1cce8 1cce9 1ccea 1cceb 1ccec 1cced 1ccee 1ccef 1ccf0 1ccf1 1ccf2 1ccf3 1ccf4 1ccf5 1ccf6 1ccf7 1ccf8 1ccf9
+
+== the same measure of NFKC (the design's first form): 37 code points, a7f1 and 1ccd6..1ccf9
+
+== upper-miss.mjs (letters whose upper- or lower-cased copy folds apart from the letter, by a simple key: NFKC against NFKD)
+NFKC letters whose upper- or lower-cased copy folds apart: 97 df 131 1f0 390 3b0 1c80 1c81 1c82 1c83 1c84 1c85 1c86 1c87 1c88 1e96 1e97 1e98 1e99 1f50 1f52 1f54 1f56 1f80 1f81 1f82 1f83 1f84 1f85 1f86 1f87 1f88 1f89 1f8a 1f8b 1f8c 1f8d 1f8e 1f8f 1f90 1f91
+NFKD letters whose upper- or lower-cased copy folds apart: 74 df 131 1c80 1c81 1c82 1c83 1c84 1c85 1c86 1c87 1c88 1f80 1f81 1f82 1f83 1f84 1f85 1f86 1f87 1f88 1f89 1f8a 1f8b 1f8c 1f8d 1f8e 1f8f 1f90 1f91 1f92 1f93 1f94 1f95 1f96 1f97 1f98 1f99 1f9a 1f9b 1f9c
+
+== case-copies.mjs (the twin as built: a hidden name a<letter>b; its upper- and lower-cased copies asked)
+letters 145620 | a copy in another case not found: 63
+1f80-1faf 1fb2-1fb4 1fb7 1fbc 1fc2-1fc4 1fc7 1fcc 1ff2-1ff4 1ff7 1ffc
+
+== native-fold.mjs (PostgreSQL 16.15 against the twin, at 212 715009bd...: the fold for every code point, alone and inside a name; the pattern for every code point of planes 0 and 1 as a name)
+server 16.15 (Ubuntu 16.15-0ubuntu0.24.04.1) | node unicode 17.0 | probes 2224126 | the fold differs on 0 
+names 129023 | pattern chars 342481 | the same pattern true | the same names as written true 696
+
+== gen-name-tables.mjs
+unicode 17.0 | classes 1028 | members 2067 | skew 57
+letters whose other case is more than one code point, after the preparation: df>53+53
+QUOTE (made spaces before a text is normalised): U+FE68 U+FF02 U+FF3C

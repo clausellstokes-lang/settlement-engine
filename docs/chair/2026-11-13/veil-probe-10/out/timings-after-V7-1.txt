@@ -1,0 +1,12 @@
+hand/deep-cost.sql, the gallery read as anon, three runs each, nothing else running; 212 at 715009bd..., the chains x211 and x212 as run-all.sh built them
+600 houses hidden, 10,000 strings (the 300 KB row), no reveal | x211 | ok | houses listed 1 | exports back 10000 | 1315 ms | x212 | ok | houses listed 1 | exports back 10000 | 1354 ms
+600 houses hidden, 10,000 strings (the 300 KB row), no reveal | x211 | ok | houses listed 1 | exports back 10000 | 1160 ms | x212 | ok | houses listed 1 | exports back 10000 | 1180 ms
+600 houses hidden, 10,000 strings (the 300 KB row), no reveal | x211 | ok | houses listed 1 | exports back 10000 | 1293 ms | x212 | ok | houses listed 1 | exports back 10000 | 1489 ms
+3,000 deep, 5 houses, Reveal DM | x211 | ok | houses listed 1 | exports back 100 | 36 ms | x212 | ok | houses listed 1 | exports back 100 | 34 ms
+3,000 deep, 5 houses, Reveal DM | x211 | ok | houses listed 1 | exports back 100 | 34 ms | x212 | ok | houses listed 1 | exports back 100 | 40 ms
+3,000 deep, 5 houses, Reveal DM | x211 | ok | houses listed 1 | exports back 100 | 34 ms | x212 | ok | houses listed 1 | exports back 100 | 42 ms
+200 houses, 5,000 strings | x211 | ok | houses listed 1 | exports back 5000 | 445 ms | x212 | ok | houses listed 1 | exports back 5000 | 435 ms
+600 houses, 10,000 strings, Reveal DM | x211 | ok | houses listed 1 | exports back 10000 | 185 ms | x212 | ok | houses listed 1 | exports back 10000 | 270 ms
+300 deep, 5 houses, NO reveal | x211 | ok | houses listed 1 | exports back 100 | 76 ms | x212 | ok | houses listed 1 | exports back 100 | 44 ms
+400 deep, 5 houses, NO reveal | x211 | ok | houses listed 1 | exports back 100 | 57 ms | x212 | ok | houses listed 1 | exports back 100 | 63 ms
+3000 deep, 5 houses, NO reveal | x211 | ERROR stack depth limit exceeded | 51 ms | x212 | ERROR stack depth limit exceeded | 44 ms

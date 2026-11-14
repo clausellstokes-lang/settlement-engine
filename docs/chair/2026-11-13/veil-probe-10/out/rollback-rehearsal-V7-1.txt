@@ -1,0 +1,8 @@
+212 715009bdce20c719bef5139a2e08257d87b95e7ea44e1d3a7b464bfa4245e751, its rollback d99237b4b71e2c734f83b8b5cda15f201a85e4902ab05a7e4503d51620458a7b; a copy of the acceptance run's own chain 001..211, each file as one transaction (psql -1). The catalogue: every public function's signature, body (md5), volatility, definer flag, settings, ACL, owner, result.
+catalogue lines: 211 480, 212 505
+212 a second time over itself, lines that differ: 0
+212 then its down file, against the frozen 211's chain, lines that differ: 0
+the down file a second time: 0
+then 212 again, against 212: 0
+212 applied over the copy, against the chain 001..212 built file by file: 0
+_gallery_veil helpers on 212: 65, immutable 65, security definer 0, with an ACL that names anon, authenticated or public: 0

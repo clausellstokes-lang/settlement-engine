@@ -1,0 +1,18 @@
+THE LANE'S OTHER PINS at 212 715009bd... (run at 2fdc168d..., whose statements are the same: the two differ by one comment): tests/security/galleryVeilCures.pglite.test.js, galleryServerVeil.pglite.test.js, pgliteHookTimeoutRatchet.test.js, galleryMapMemberCount.pglite.test.js, gallerySanitizer.pglite.test.js, tests/lint/migrationSearchPathPin.test.js, migrationGrantPosturePin.test.js
+     × server-veil-village-3: nothing the page hides is sent; no page changes; 210 is red on the same rows 21927ms
+     × server-veil-town-2: nothing the page hides is sent; no page changes; 210 is red on the same rows 41465ms
+     × server-veil-city-2: nothing the page hides is sent; no page changes; 210 is red on the same rows 95732ms
+     × server-veil-city-infiltrated-0: nothing the page hides is sent; no page changes; 210 is red on the same rows 94956ms
+     × server-veil-metropolis-3: nothing the page hides is sent; no page changes; 210 is red on the same rows 125609ms
+     × server-veil-metropolis-7: nothing the page hides is sent; no page changes; 210 is red on the same rows 97164ms
+ Test Files  1 failed | 6 passed (7)
+      Tests  6 failed | 115 passed (121)
+exit 1
+
+galleryServerVeil: the same six arms as at 4f7c60cbb (run there too, the same day: 6 failed | 10 passed). Each arm prints the first three paths of a share whose page changed; every path printed is relationships[...].npc1Role or .npc2Role or its '(order or value)' line, at both commits (64 lines here). ONE path differs from 4f7c60cbb's print: in server-veil-town-2, tie_npc_mills_2_5.npc2Role stands where tie_npc_parish_churches_2_5.npc2Role stood. PLAUSIBLE, not read by the tie's id: it is the role "the fence", which the rebuilt search takes from two ties of that town on a Reveal-DM read (the hidden house "Fence (word of mouth)"; born-old-against-new-V7-1.txt: relationships[4].npc2Role, relationships[14].npc1Role). Not touched: the pin is the brief's item 3 (a).
+
+the paths printed at 4f7c60cbb and not here / here and not at 4f7c60cbb:
+> page changed: relationships[id=tie_npc_mills_2_5].npc2Role
+> page changed: relationships[id=tie_npc_mills_2_5].npc2Role: expected [ …(6) ] to deeply equal []
+< page changed: relationships[id=tie_npc_parish_churches_2_5].npc2Role
+< page changed: relationships[id=tie_npc_veiled_917f1b9c627b0afb].npc1Role: expected [ …(6) ] to deeply equal []

@@ -349,18 +349,29 @@ $$;
 revoke execute on function public.import_gallery_dossier(text) from public;
 grant execute on function public.import_gallery_dossier(text) to authenticated;
 
--- ── 2. the helpers 212 created, by signature (fourteen; COHERENCE-VEIL-8 added _fold, _folded_name, _tie_roles, _sweep) ──────────────────────────────────────────────────
+-- ── 2. the helpers 212 created, by signature (twenty-five: COHERENCE-VEIL-10 replaced the eighth seat's sweep, _folded_name, _names and _sweep, by the name search's fourteen, _name_* and _named) ──
 drop function if exists public._gallery_veil_embeds(jsonb, text[]);
 drop function if exists public._gallery_veil_fold(text);
-drop function if exists public._gallery_veil_folded_name(text, text, jsonb);
 drop function if exists public._gallery_veil_hidden_name(jsonb, jsonb, text[], jsonb);
 drop function if exists public._gallery_veil_member_revealed(jsonb, jsonb, boolean, boolean, boolean);
-drop function if exists public._gallery_veil_names(jsonb, jsonb);
+drop function if exists public._gallery_veil_name_case();
+drop function if exists public._gallery_veil_name_floor(jsonb, jsonb);
+drop function if exists public._gallery_veil_name_fold(text);
+drop function if exists public._gallery_veil_name_hit(text, jsonb, jsonb, jsonb);
+drop function if exists public._gallery_veil_name_hits(jsonb, jsonb);
+drop function if exists public._gallery_veil_name_near(jsonb, jsonb, jsonb, jsonb);
+drop function if exists public._gallery_veil_name_needle(text, jsonb);
+drop function if exists public._gallery_veil_name_prep(text);
+drop function if exists public._gallery_veil_name_ready(text, jsonb);
+drop function if exists public._gallery_veil_name_search(text[], text[]);
+drop function if exists public._gallery_veil_name_sep(boolean);
+drop function if exists public._gallery_veil_name_sweep(jsonb, jsonb, jsonb, jsonb);
+drop function if exists public._gallery_veil_name_taken(jsonb, jsonb, boolean, jsonb, jsonb, jsonb);
+drop function if exists public._gallery_veil_named(jsonb, jsonb, jsonb, jsonb);
 drop function if exists public._gallery_veil_pieces(jsonb);
 drop function if exists public._gallery_veil_roster_members(jsonb, jsonb, boolean, boolean, boolean);
 drop function if exists public._gallery_veil_roster_splice(jsonb, jsonb, boolean, boolean, boolean);
 drop function if exists public._gallery_veil_second_homes(jsonb, jsonb, jsonb);
 drop function if exists public._gallery_veil_sources(jsonb, jsonb, jsonb, jsonb);
-drop function if exists public._gallery_veil_sweep(jsonb, jsonb, text, boolean);
 drop function if exists public._gallery_veil_tie_pieces(jsonb);
 drop function if exists public._gallery_veil_tie_roles(jsonb, jsonb, jsonb, boolean, boolean, boolean);

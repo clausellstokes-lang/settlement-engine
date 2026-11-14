@@ -1,0 +1,22 @@
+GREEN at 212 715009bd..., the twin as committed: npx vitest run tests/security/galleryVeilHandRows.pglite.test.js tests/security/gallerySecondHomes.pglite.test.js --maxWorkers=3
+ Test Files  2 passed (2)
+      Tests  11 passed (11)
+   Duration  544.49s (transform 4.04s, setup 82ms, import 406ms, tests 552.86s, environment 0ms)
+exit 0
+
+THE BOUND arm, what it saw (pglite, PostgreSQL 18.3): the frozen 211 alone on a chain of its own, then this chain where 211 serves:
+3000 deep, Reveal DM on: 211 alone serves, this chain serves
+300 deep, Reveal DM on: 211 alone serves, this chain serves
+60 deep, Reveal DM off: 211 alone serves, this chain serves
+150 deep, Reveal DM off: 211 alone does not serve (no row)
+300 deep, Reveal DM off: 211 alone does not serve (ERRORDATA_STACK_SIZE exceeded)
+3000 deep, Reveal DM off: 211 alone does not serve (ERRORDATA_STACK_SIZE exceeded)
+(on the native cluster, PostgreSQL 16.15, with no reveal: 300 and 400 deep both chains serve; 3,000 deep both raise 'stack depth limit exceeded': timings-after-V7-1.txt)
+
+THE GATES, each through scripts/gate-tail.sh:
+[domain-strict] ✓ no strict-type regressions (1113 errors, ceiling 1113).
+[typecheck-ratchet] OK — no type regressions (167 error(s), ceiling 167).
+  [gate-tail] exit: 0 (the gate's own status, not a pipe's)
+  [gate-tail] exit: 0 (the gate's own status, not a pipe's)
+  [gate-tail] exit: 0 (the gate's own status, not a pipe's)
+npx eslint <the four source and test files touched, the five scripts added>: no problem printed, exit 0

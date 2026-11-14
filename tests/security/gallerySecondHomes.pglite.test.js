@@ -466,9 +466,9 @@ describe('COHERENCE-VEIL-6: a second home of a thing hidden by hand is never sen
     expect([...new Set(sent)]).toEqual([]);
   }, TOWN_TIMEOUT_MS);
 
-  it('THE TWO FOLDS ARE ONE (VEIL-9): the server\'s _gallery_veil_fold gives the client\'s foldName for every character of the basic plane, alone and inside a name, whatever the database\'s lower() does', async () => {
-    const { foldName } = await import('../../src/domain/display/gallerySecondHomes.js');
-    // the only characters outside A-Z whose JavaScript lower case holds a letter a-z (the SQL spells these out)
+  it('THE TWO FOLDS ARE ONE (VEIL-9; re-keyed by VEIL-10 to the name search): the server\'s _gallery_veil_name_fold gives the client\'s nameFold for every character of the basic plane, alone and inside a name, and both engines write the same needle for each; the catalogue identity\'s fold (_gallery_veil_fold, foldName) is one in both engines too, whatever the database\'s lower() does', async () => {
+    const { foldName, nameFold, buildNameSearch } = await import('../../src/domain/display/gallerySecondHomes.js');
+    // the only characters outside A-Z whose JavaScript lower case holds a letter a-z (the catalogue fold's SQL spells these out)
     const special = [];
     for (let cp = 1; cp <= 0x10ffff; cp += 1) {
       if (cp >= 0xd800 && cp <= 0xdfff) continue;
@@ -479,11 +479,30 @@ describe('COHERENCE-VEIL-6: a second home of a thing hidden by hand is never sen
     const probes = [];
     for (let cp = 1; cp <= 0xffff; cp += 1) if (cp < 0xd800 || cp > 0xdfff) probes.push(String.fromCodePoint(cp), `Ab${String.fromCodePoint(cp)}Cd q`);
     probes.push('\u0130lvark \u212Amarket', "Thieves' Guild (Powerful)", 'institution.thieves_guild_powerful', '\u{1F600}Zz\u{10400}');
+    const hex = (t) => [...t].map((c) => c.codePointAt(0).toString(16)).join(' ');
+    // (1) THE CATALOGUE IDENTITY'S FOLD (the positive account and the processor match compare with it): as VEIL-9 pinned it
     const r = await LIVE.db.query('select coalesce(jsonb_agg(public._gallery_veil_fold(t) order by o), \'[]\') as f from jsonb_array_elements_text($1::jsonb) with ordinality x(t, o)', [JSON.stringify(probes)]);
     const server = r.rows[0].f;
-    const differ = probes.filter((t, i) => server[i] !== foldName(t)).map((t) => [...t].map((c) => c.codePointAt(0).toString(16)).join(' '));
     expect(server.length).toBe(probes.length);
-    expect(differ).toEqual([]);
+    expect(probes.filter((t, i) => server[i] !== foldName(t)).map(hex)).toEqual([]);
+    // (2) THE NAME SEARCH'S FOLD (VEIL-10: the letters of every script kept; NFKD, the marks U+0300..U+036F removed, A-Z
+    // lowered by an explicit map, a run of separators one '_'): the same string in both engines for every probe
+    const r2 = await LIVE.db.query('select coalesce(jsonb_agg(public._gallery_veil_name_fold(t) order by o), \'[]\') as f from jsonb_array_elements_text($1::jsonb) with ordinality x(t, o)', [JSON.stringify(probes)]);
+    const server2 = r2.rows[0].f;
+    expect(server2.length).toBe(probes.length);
+    expect(probes.filter((t, i) => server2[i] !== nameFold(t)).map(hex)).toEqual([]);
+    // it is not the catalogue's fold: a letter outside ASCII is kept (in its case: case is the needle's; a mark is no
+    // part of a letter, so the short i is i), and no engine's lower() is asked
+    expect(nameFold('Гильдия теней')).toBe('Гильдия_тенеи');
+    expect(foldName('Гильдия теней')).toBe('');
+    expect(nameFold('\u0130lvark \u212Amarket')).toBe('ilvark_kmarket');
+    // (3) THE NEEDLE: every probe a hidden name of its own, ONE search: the two engines build the same pattern, character
+    // for character (each letter's case class from the one table both carry), and the same names searched as written
+    const r3 = await LIVE.db.query('select public._gallery_veil_name_search(array(select jsonb_array_elements_text($1::jsonb)), array[]::text[]) as j', [JSON.stringify(probes)]);
+    const client = buildNameSearch(probes, []);
+    expect(r3.rows[0].j.p === client.pattern).toBe(true);
+    expect(client.pattern.length).toBeGreaterThan(500000);
+    expect(r3.rows[0].j.raw).toEqual(client.raws);
     // and the database's own lower() is not the client's (the limit this cures)
     const low = (await LIVE.db.query('select lower($1) as l', ['\u0130\u212A'])).rows[0].l;
     expect(low === '\u0130\u212A'.toLowerCase()).toBe(false);
