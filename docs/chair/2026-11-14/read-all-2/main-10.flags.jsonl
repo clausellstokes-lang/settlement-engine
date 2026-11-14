@@ -1,0 +1,70 @@
+{"id":"07703","town":"r2r-town-12","sev":"LOW","kind":"STATE","why":"Flaw cruel paired with Temperament merciful: the two traits flatly contradict on one person","other":""}
+{"id":"08380","town":"r2s-mass_migration-town-3","sev":"LOW","kind":"STATE","why":"Flaw ruthless paired with Temperament fair-minded: contradictory traits on one person","other":""}
+{"id":"21016","town":"r2s-mass_migration-town-3","sev":"MED","kind":"STATE","why":"TOWN is 290 years old, siege 11 years ago; 'much of what stands... was built in the years after' cannot hold","other":""}
+{"id":"19810","town":"r2s-slave_revolt-town-0","sev":"LOW","kind":"LACKS","why":"'The hired company' while DEFENCE says hired: none and garrison none (only a Free company hall house)","other":""}
+{"id":"08410","town":"r2s-slave_revolt-town-0","sev":"LOW","kind":"STATE","why":"Flaw ruthless paired with Temperament warm-hearted: contradictory traits on one person","other":""}
+{"id":"07670","town":"r2s-succession_void-town-1","sev":"LOW","kind":"STATE","why":"Flaw cowardly paired with Temperament steadfast: contradictory traits on one person","other":""}
+{"id":"25374","town":"r2s-succession_void-town-1","sev":"LOW","kind":"BROKEN","why":"Bare name Quetzalli Chi is borne by two roster people (watch captain and granary reeve); reference is ambiguous","other":""}
+{"id":"25593","town":"r2s-succession_void-town-1","sev":"LOW","kind":"BROKEN","why":"Bare name Quetzalli Chi is borne by two roster people (watch captain and granary reeve); reference is ambiguous","other":""}
+{"id":"12116","town":"r2s-succession_void-town-1","sev":"LOW","kind":"LACKS","why":"names a 'temple district'; HOUSES has only parish churches, no temple, and a town of 1263 has no named districts","other":""}
+{"id":"19857","town":"r2r-town-11","sev":"MED","kind":"STATE","why":"Town hall 'run by Orla Nolan'; PEOPLE gives Orla as circle-keeper of the Teleportation circle and lists nobody at Town hall","other":""}
+{"id":"11088","town":"r2r-town-11","sev":"LOW","kind":"STATE","why":"Orla Nolan 'holds the seat'; roster gives her only the circle-keeper title; no head of Arcane Council or Town hall is listed","other":"19857"}
+{"id":"07672","town":"r2r-town-11","sev":"LOW","kind":"STATE","why":"Flaw cowardly paired with Temperament tenacious: contradictory traits on one person","other":""}
+{"id":"20285","town":"r2s-infiltrated-town-0","sev":"LOW","kind":"STATE","why":"Plague Years were 93 years ago in a 224-year-old town; 'much of what stands... was built in the years after' and 'older than anyone living' overclaim","other":""}
+{"id":"19587","town":"r2r-town-3","sev":"LOW","kind":"STATE","why":"'gap between them and Thieves' Guild is narrow' while GOVERNMENT has Thieves' Guild Strong and Merchant Council Minor","other":""}
+{"id":"14079","town":"r2r-town-3","sev":"LOW","kind":"PAIR","why":"'neither side pushes the other' while QUARRELS says Merchant Council ~ Thieves' Guild is tense, escalating","other":"12446"}
+{"id":"13256","town":"r2s-indebted-town-0","sev":"MED","kind":"STATE","why":"'Most of what it eats... arrives the same way [by water]': FOOD grown 82%, brought in only 18%","other":""}
+{"id":"02646","town":"r2s-indebted-town-0","sev":"MED","kind":"LACKS","why":"names 'the reform movement'; GOVERNMENT lists no Reform Movement power","other":""}
+{"id":"19858","town":"r2s-insurgency-town-0","sev":"MED","kind":"STATE","why":"Town hall 'run by Ghazi al-Rumi', who is the parish dean; roster has nobody at Town hall; Military/Guard is Suppressed and not the ruling power","other":""}
+{"id":"20495","town":"r2s-politically_fractured-town-1","sev":"LOW","kind":"STATE","why":"Merchant oligarchy labelled with 'church sway'; church influence belongs to Religious Authorities, not the Minor merchant power","other":""}
+{"id":"15874","town":"r2s-politically_fractured-town-1","sev":"MED","kind":"STATE","why":"claims arcane growth gives a food supplement; FOOD says by magic 0% and the Salt flats are depleted","other":""}
+{"id":"08019","town":"r2s-politically_fractured-town-1","sev":"LOW","kind":"STATE","why":"Flaw imperious paired with Temperament humble: contradictory traits on one person","other":""}
+{"id":"02506","town":"r2s-recently_betrayed-town-0","sev":"MED","kind":"STATE","why":"describes a town fire across whole districts; PAST records no fire, and a town of 2124 has no named lower districts","other":""}
+{"id":"09621","town":"r2s-recently_betrayed-town-0","sev":"MED","kind":"PAIR","why":"'leave each other alone' while QUARRELS has Guild Council vs Thieves' Guild an open moderate quarrel and relation tense","other":"19710"}
+{"id":"09633","town":"r2s-recently_betrayed-town-0","sev":"LOW","kind":"PAIR","why":"Guild Council 'leaves Thieves' Guild alone' while QUARRELS has an open moderate quarrel with it and the relation is tense","other":"19710"}
+{"id":"14073","town":"r2s-recently_betrayed-town-0","sev":"LOW","kind":"PAIR","why":"'neither side pushes the other' while QUARRELS has Guild Council vs Thieves' Guild an open moderate quarrel, relation tense","other":"19710"}
+{"id":"03507","town":"r2s-recently_betrayed-town-0","sev":"LOW","kind":"LACKS","why":"names a 'temple district'; HOUSES has only parish churches and a monastery, no temple or district","other":""}
+{"id":"16334","town":"r2s-mass_migration-town-3","sev":"LOW","kind":"BROKEN","why":"parenthetical lists three alternative causes '(a failed harvest, a war, a purge)' instead of one chosen; unfilled slot","other":""}
+{"id":"16340","town":"r2s-mass_migration-town-2","sev":"LOW","kind":"BROKEN","why":"parenthetical lists three alternative causes '(a failed harvest, a war, a purge)'; PAST records no war or purge","other":""}
+{"id":"02508","town":"r2s-mass_migration-town-1","sev":"MED","kind":"STATE","why":"fire across whole districts burning barges, wharf infrastructure; PAST records no fire, HOUSES has no docks or wharf, town of 2357 has no named quarter","other":""}
+{"id":"16338","town":"r2s-mass_migration-town-1","sev":"LOW","kind":"BROKEN","why":"parenthetical lists three alternative causes '(a failed harvest, a war, a purge)' instead of one; PAST records no war","other":""}
+{"id":"01044","town":"r2s-slave_revolt-town-2","sev":"MED","kind":"STATE","why":"'quiet' under a revolt: stability Unstable (revolt not contained), safety Critical — Slave Revolt","other":""}
+{"id":"06130","town":"r2s-wartime-town-0","sev":"MED","kind":"STATE","why":"defence 'nobody treats any of it as unusual', 'not an emergency arrangement'; CRISIS Wartime, stability Tense (requisition and conscription)","other":""}
+{"id": "03720", "town": "r2s-wartime-town-2", "sev": "MED", "kind": "LACKS", "why": "names an 'Arcane black market' institution; HOUSES (the whole list) has no such house", "other": ""}
+{"id": "08899", "town": "r2s-wartime-town-2", "sev": "MED", "kind": "LACKS", "why": "service line of an Arcane black market; HOUSES lists no such house (only Alchemist shop, Teleportation circle)", "other": ""}
+{"id": "15330", "town": "r2s-wartime-town-2", "sev": "MED", "kind": "LACKS", "why": "sells restricted magical ingredients as a house service; HOUSES has no Arcane black market", "other": ""}
+{"id": "12145", "town": "r2s-wartime-town-2", "sev": "MED", "kind": "LACKS", "why": "'Magical forgery' service of an Arcane black market absent from HOUSES", "other": ""}
+{"id": "10891", "town": "r2s-wartime-town-2", "sev": "MED", "kind": "LACKS", "why": "forged magical papers service of an Arcane black market absent from HOUSES", "other": ""}
+{"id": "22328", "town": "r2s-wartime-town-2", "sev": "MED", "kind": "LACKS", "why": "'Unlicensed enchantment' service of an Arcane black market absent from HOUSES", "other": ""}
+{"id": "15035", "town": "r2s-wartime-town-2", "sev": "MED", "kind": "LACKS", "why": "practitioners outside guild oversight: Arcane black market not in HOUSES", "other": ""}
+{"id": "03295", "town": "r2s-wartime-town-2", "sev": "MED", "kind": "LACKS", "why": "describes an underground market of illegal practitioners; HOUSES has no such house and GOVERNMENT lists no criminal power", "other": ""}
+{"id": "03065", "town": "r2s-wartime-town-2", "sev": "LOW", "kind": "LACKS", "why": "'the town's thieves and its mages do business'; GOVERNMENT lists no Thieves' Guild and HOUSES has no thieves' house or mage guild", "other": ""}
+{"id": "02354", "town": "r2s-monster_pressure-town-3", "sev": "LOW", "kind": "BROKEN", "why": "'A catastrophic or transformative event' is unresolved template wording; PAST gives an Arcane Incident (68 years ago); also names a 'district'", "other": ""}
+{"id":"05821","town":"r2s-insurgency-town-3","sev":"MED","kind":"STATE","why":"'Crime has left the Merchant Council's right to rule contested'; GOVERNMENT lists no criminal power, LAND has no organised-crime chain; cause here is the insurgency","other":""}
+{"id":"08203","town":"r2s-recently_betrayed-town-1","sev":"LOW","kind":"STATE","why":"Flaw overbearing paired with Temperament humble: contradictory traits on one person","other":""}
+{"id":"08054","town":"r2s-wartime-town-3","sev":"LOW","kind":"STATE","why":"Flaw lazy paired with Temperament diligent: contradictory traits on one person","other":""}
+{"id":"13388","town":"r2r-town-35","sev":"LOW","kind":"BROKEN","why":"'fine glass sand, fine glass sand': doubled item in the needed list","other":""}
+{"id":"HEADER","town":"r2r-town-43","sev":"MED","kind":"RECORD","why":"size word 'town' with population 366 yet HOUSES holds docks, harbour master's office, assay office, courthouse, boatyard, guild governance, 12-person roster","other":""}
+{"id":"13567","town":"r2r-town-55","sev":"LOW","kind":"BROKEN","why":"'fine glass sand, fine glass sand': doubled item in the needed list","other":""}
+{"id":"19981","town":"r2r-town-55","sev":"LOW","kind":"LACKS","why":"'The merchants have stopped attending the sessions'; GOVERNMENT lists no Merchant Guilds and HOUSES has no merchant guild","other":""}
+{"id":"00338","town":"r2r-town-46","sev":"MED","kind":"STATE","why":"'Two rival guilds are contesting control of the main trade route'; QUARRELS: none, CRISIS none, stability Stable, Approved","other":"13657"}
+{"id":"13657","town":"r2r-town-46","sev":"MED","kind":"STATE","why":"'Neither side will back down'; QUARRELS: none and stability Stable, legitimacy Approved","other":"00338"}
+{"id":"00718","town":"r2r-town-22","sev":"MED","kind":"STATE","why":"'little food of its own but its mill'; FOOD grown 104% of need, surplus 4%, brought in 0%","other":""}
+{"id":"01553","town":"r2r-town-0","sev":"LOW","kind":"STATE","why":"'ruler is old and the succession is disputed': CRISIS none and QUARRELS records only Corrupt Council vs Thieves' Guild over stolen goods","other":""}
+{"id":"05318","town":"r2r-town-0","sev":"LOW","kind":"PAIR","why":"prints 'Lord Mayor' for the mayor while PEOPLE and the other sentence give the title 'the mayor'","other":"02005"}
+{"id":"19685","town":"r2r-town-2","sev":"LOW","kind":"STATE","why":"Guild War was 49 years ago in a 265-year-old town; 'much of what stands... was built in the years after' overclaims","other":""}
+{"id":"19451","town":"r2r-town-4","sev":"MED","kind":"STATE","why":"Economic Divide was 7 years ago in a 72-year-old town; 'much of what stands in Jayagiri now... was built in the years after' cannot be so","other":""}
+{"id":"02983","town":"r2r-town-16","sev":"MED","kind":"STATE","why":"describes a speculative market collapse; PAST records only a Religious Conflict, Purge, Flood and Guild War, no crash","other":"12247"}
+{"id":"12247","town":"r2r-town-16","sev":"MED","kind":"STATE","why":"'Market crash' history entry; PAST records no economic crash (only the Guild War, 25 years ago)","other":"02983"}
+{"id":"19420","town":"r2r-town-16","sev":"MED","kind":"STATE","why":"'debts that survived the crash'; PAST records no crash in Birkhel","other":"02983"}
+{"id":"19600","town":"r2r-town-19","sev":"LOW","kind":"BROKEN","why":"'The garrison and town watch exists': plural subject with singular verb; also 'on paper' disagrees with DEFENCE listing Barracks and Town watch","other":""}
+{"id":"19601","town":"r2r-town-16","sev":"LOW","kind":"BROKEN","why":"'The garrison and town watch is disciplined': plural subject with singular verb","other":""}
+{"id":"05738","town":"r2r-town-18","sev":"LOW","kind":"LACKS","why":"stalls 'under the wardens' eye'; HOUSES has no Warden's Lodge","other":""}
+{"id":"15974","town":"r2r-town-18","sev":"MED","kind":"STATE","why":"'Bought the vineyard'; LAND gap says Vintner lacks access to grapes and lists no vineyard resource","other":""}
+{"id":"03388","town":"r2r-town-30","sev":"LOW","kind":"LACKS","why":"'auditor from the hired company'; DEFENCE hired: none and garrison none (only a Free company hall house)","other":""}
+{"id":"19878","town":"r2r-town-38","sev":"LOW","kind":"STATE","why":"Iron Dispute was a minor event 45 years ago in a 112-year-old town; 'much of what stands in Ormberg now... was built in the years after' overclaims","other":""}
+{"id":"27535","town":"r2r-town-41","sev":"LOW","kind":"BROKEN","why":"'Weak defences keeps Xochioatl': plural subject with singular verb","other":""}
+{"id":"19275","town":"r2r-town-50","sev":"MED","kind":"STATE","why":"'The condemned doctrine is quietly practised still'; PAST records no heresy or religious conflict, and no religious power is listed in GOVERNMENT","other":""}
+{"id":"05118","town":"r2r-town-6","sev":"MED","kind":"STATE","why":"claims conjured game supplements the fish; FOOD says by magic 0%","other":""}
+{"id":"07375","town":"r2r-town-6","sev":"MED","kind":"STATE","why":"'Conjured game produces fish; minor supplement'; FOOD says by magic 0%","other":""}
+{"id":"DONE","lines":2645,"blocks":41,"flags":69}
