@@ -286,6 +286,8 @@ food count re-taken on records born at it: every cell of item 1 still 0), 65dc92
 - The order: item 2 as the second seat wrote it (the PDF's food block, the journal's Economics "Food:" row); then (r3),
   (r4), (r5) measured first, (r6), the stores' unit, the connectivity row; THE SWEEP once at the end.
 
+## HANDED BACK at the count (327,467 at 15:34 UTC, before (r6): a cure with its gates would not fit inside the mark)
+
 ## Item 1: THE FOOD FIGURES ON THE PDF AND THE JOURNAL — DONE, c79217099 (1a) and 88dbe3059 (1b)
 
 - CAUSE: the PDF's FOOD SECURITY block (`EconomicsTrade.jsx :: FoodBalanceBlock`) printed the viability view's figures
@@ -340,6 +342,20 @@ food count re-taken on records born at it: every cell of item 1 still 0), 65dc92
   "Abundant"). Red first 3 of 3; the guard reds alone under a plant.
 - GATES: as item 1; the 5 test files naming the file: 0 reds, as the base.
 
+## Item 2 (r5): THE DEFENCE CHAPTER'S FORCE NAME AND CHIP — MEASURED, NO SURFACE FAULT (no commit)
+
+- THE NAME: the PDF's ARMED FORCES list prints `institutionDisplayName(force.name) || force.name` (UPKEEP-14, on the
+  line with `tests/pdf/defenseForceNamesLabelled.test.jsx`); the Defense tab's ForceCard prints `institutionDisplayName(i)`
+  (R3-TABS-5). The leaf reads an object's `name` or takes the string, so the two calls give one word by construction.
+- THE CHIP: struck on both (the PDF: COHERENCE-UPKEEP-7 item 3; the tab: R3-TABS b1). Nothing to cure.
+- THE MEDICAL LINE ("Major monasteries (5-10)."): NOT a disagreement between surfaces: the tab and the PDF print the same
+  `cap.note` from ONE writer, `src/domain/display/defenseDisplay.js :: deriveSupportingCapabilities`, Medical Readiness,
+  `${facts.healerName}. Wounds and fevers ...` (the catalogue name with its bracket). That file is also changed on
+  `lane/w2-c-leaves-2026-11-13` (27+/24-), so by the brief's law it is NAMED FOR THE JOIN, not cured here: the one-line
+  change is `${houseLabelsInText(facts.healerName)}` (or `institutionHouseLabel`, the seam the History PDF uses).
+  Not re-counted (SURFACES-1 counted 4 towns on the PDF: r2r-metropolis-32, -51, r2s-indebted-metropolis-2; the tab
+  prints the same note in the same towns).
+
 ## Every new or changed word on a surface (the owner's veto list)
 
 | surface | before | after | towns read |
@@ -357,15 +373,16 @@ food count re-taken on records born at it: every cell of item 1 still 0), 65dc92
 
 ## Found, not cured
 
+- FOR THE JOIN: `src/domain/display/defenseDisplay.js :: deriveSupportingCapabilities` (Medical Readiness note, the
+  healer's catalogue bracket on the tab and the PDF): `${houseLabelsInText(facts.healerName)}`; held by w2-c-leaves too.
+
 - The PDF block's `fb.summary` line (the view's food summary, EditableProse) is the view's words; not measured here.
 
 ## What is left, line by line
 
-1. (r5) the Defence chapter's force name and provenance chip: MEASURE FIRST (UPKEEP-14's
-   `tests/pdf/defenseForceNamesLabelled.test.jsx` is on the line).
-2. (r6) the tension rows' bracket ("Taverns (5-20)", History and Overview, through `houseLabelsInText`); the PDF's
-   medical line; the stores' unit (6 towns); the trade connectivity row (with a system state).
-3. THE CHAIR'S THREE ROWS (15:35 UTC; named by other seats; measure first, by false towns; one line back each when pushed):
+1. (r6) the tension rows' bracket ("Taverns (5-20)", History and Overview, through `houseLabelsInText`; check
+   OverviewTab.jsx's tension lines by content first: the coherence-upkeep lane holds them); the stores' unit (6 towns); the trade connectivity row (with a system state).
+2. THE CHAIR'S THREE ROWS (15:35 UTC; named by other seats; measure first, by false towns; one line back each when pushed):
    (a) the PDF's IdentityDailyLife prints "brought in falls short" in 31 besieged towns (under a siege nothing is
    brought in): the tab's reader or a twin; (b) "Underground city bazaar" prints on the PDF only, 22 towns: find its
    writer; the export's row prints what the tab's card prints; (c) `src/pdf/lib/viewModel.js`, the Overview's
@@ -373,7 +390,8 @@ food count re-taken on records born at it: every cell of item 1 still 0), 65dc92
    PDF's Overview where the town has neither grain nor mill: the Tonight caller's one-line cure of 600b9f743
    (`factsOf(source)`), red first on births. NOT MINE (the chair): the journal's provenance tag on a force (cured twice:
    r2-code-b a48cf4126, exports-b24 2779a3d6d).
-4. THE SWEEP, once, at the end.
+3. THE SWEEP, once, at the end, at the tip after the last merge of the joined line (the first seat's `measure.sh` +
+   `agg.mjs`, every fact of its table re-taken).
 
 HOW THE INSTRUMENTS ARE RE-MADE: `probes/SURFACES-3/run.sh <tree> <x.census.jsx> <out> <seeds> <workers> [VAR=val]`
 runs a census under vitest in shards. Records: `run.sh <tree> births.census.jsx <out> probes/SURFACES-2/seeds772.txt 4
