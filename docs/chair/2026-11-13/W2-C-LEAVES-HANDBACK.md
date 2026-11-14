@@ -800,6 +800,15 @@ Scratch worktree /home/user/wt5 (local branch w5-local); before-tree /home/user/
   through its own door in its own commit; re-take item 2's counts once and say the difference; item 5 reads
   defenceHoldsDivine and defenceHoldsDruidic. The side seat's later commits come with the second merge, on the chair's
   word, before the statement.
+- 2026-11-14 00:23 UTC, THE SECOND MERGE: the side branch FINAL at df51100b1, merged now (plain); FROM THAT MERGE THE WHOLE
+  LANE IS THIS SEAT'S. Four rows join the list after item 9, before the census: (a) #1013: where a town's ONLY criminal
+  house is a gambling house (12 of 720; no other criminal house, no capture, no criminal power) the structure note is not
+  printed and the structure label is left out with it (reader's town rw3-town-under_siege-1; a guard town; the twelve
+  read); (b) "Arcane Support · None · No arcane practitioners on the rolls" (9 towns beside a non-governing arcane power):
+  WIDENED: left out wherever the record holds an arcane power of any standing or a named mage; (c) the PDF's "Abundant"
+  kicker (src/pdf/sections/ResourcesProduction.jsx) in the 31 siege towns: the twin carries the condition, one line in a
+  shared file, named; (d) the charcoal burner's four "timber" pills: read the four; under a siege the raw-good rule applies.
+  The side seat's FOR THE JOIN note stands as written.
 
 ## Items (this seat)
 | item | commit | on the 720 (before → after) | fresh / readers | read | guard |
@@ -857,4 +866,6 @@ Scratch worktree /home/user/wt5 (local branch w5-local); before-tree /home/user/
   rest); classed in the final statement.
 
 ## STATUS (kept current)
-- Item 4 DONE fb3128664. The early merge DONE 1c36c1717. Item 5 DONE 56f73d7ec. Items 6 to 10: not started (item 6 carries the chair's added row).
+- Item 4 DONE fb3128664. The early merge DONE 1c36c1717. Item 5 DONE 56f73d7ec. The second merge DONE 6a42e039d (df51100b1;
+  three gates green; governing + tests/lint + the Economics tests: 20 red, the same files and counts as after the first merge).
+- Items 6 to 10, then rows (a) to (d): not started (item 6 carries the chair's added row).
