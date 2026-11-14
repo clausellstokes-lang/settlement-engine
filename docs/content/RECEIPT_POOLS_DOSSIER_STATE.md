@@ -2400,7 +2400,7 @@ and never an assertion that the feared thing is happening.
 **`theocracy`** {colour}
 1. `[ledger]` The {seat} at {settlement} rules by its faith: every decision is checked against doctrine first, and only then against what the town needs.
 2. `[street]` The town takes its quarrels over land and law to the same people it takes its prayers to.
-3. `[unfolding]` What threatens the {seat} at {settlement} is heresy more than any rival: a rival creed challenges its right to govern, and everybody involved knows it.
+3. `[unfolding]` Heresy is what the {seat} at {settlement} fears: its right to govern rests on the faith, and doubt about the faith is doubt about the {seat}.
 4. `[visitor]` At {settlement} the same people run the {institution} and the hall; only the hours differ.
 
 **`merchant_league`** {colour}

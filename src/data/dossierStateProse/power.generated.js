@@ -2122,7 +2122,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "What threatens the {seat} at {settlement} is heresy more than any rival: a rival creed challenges its right to govern, and everybody involved knows it.",
+          "text": "Heresy is what the {seat} at {settlement} fears: its right to govern rests on the faith, and doubt about the faith is doubt about the {seat}.",
           "slots": [
             "seat",
             "settlement"

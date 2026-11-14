@@ -35019,7 +35019,7 @@
       ],
       "hasBag": true,
       "variants": 4,
-      "grammars": 2,
+      "grammars": 3,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -71101,7 +71101,7 @@
       "subject": "theocracy",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "4 variant(s) · 2 grammar(s) · slots {institution, seat, settlement}"
+      "count": "4 variant(s) · 3 grammar(s) · slots {institution, seat, settlement}"
     },
     {
       "tier": "COVERED",
