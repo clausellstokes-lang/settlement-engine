@@ -175,11 +175,15 @@ function readOwnSentence(line, sources) {
  * composer's own no-source answer (the culture's sentence if it claims no source, else NO_SOURCE_LINE). Agiospolis
  * (bar0-city-under_siege+famine-rand-1): "The table rests on fish from the local waters." beside `failedSource: "fish"`
  * (99 of the reader's 1,722 births: every famine). A line that does not name a failed source is returned as stored.
+ * R3-CODE-C-10 (b) (the chair's ruling of 2026-11-14, vetoable by the owner): a water the record calls depleted is
+ * stopped the same way (`fishedOut`, read by foodwaysLineOf below).
  * @param {string} line @param {{ foodSources?: unknown, failedSource?: unknown }} record
+ * @param {boolean} [fishedOut] every fish water the place has is depleted
  * @returns {string}
  */
-function fedLineOf(line, record) {
-  const stopped = stoppedBy(record.failedSource);
+function fedLineOf(line, record, fishedOut = false) {
+  const failed = stoppedBy(record.failedSource);
+  const stopped = fishedOut && !failed.includes('fish') ? [...failed, /** @type {FoodSource} */ ('fish')] : failed;
   if (!stopped.length || !sourcesNamedIn(line).some((s) => stopped.includes(s))) return line;
   const sources = /** @type {FoodSource[]} */ ((Array.isArray(record.foodSources) ? record.foodSources : []).filter((s) => s in SOURCE_PHRASES));
   const read = readOwnSentence(line, sources);
@@ -199,15 +203,41 @@ function fedLineOf(line, record) {
  * Economy tab, the PDF's Identity & Daily Life chapter, the Foundry journal's Identity & Daily
  * Life page — and none composes its own. A save older than the record yields null (the PDF then
  * prints the culture's authored line, lane WIRING-2's fallback). It reads the same record's famine
- * (fedLineOf, R3-CODE-C-9): a source the famine failed is not named as feeding the place.
+ * (fedLineOf, R3-CODE-C-9): a source the famine failed is not named as feeding the place. And the economy's own
+ * production chains (R3-CODE-C-10 (b)): where every chain row that works one of the place's fish waters (the fishing
+ * grounds, the river fishery) calls that water `depleted` (`economicState.activeChains`: the resource's condition the
+ * chain carries, the Resources tab's "nothing left worth taking"), the line names no catch. r2r-metropolis-6 (216,641,
+ * its river fishery depleted): "Most meals start from the day's catch." (98 of the reader's 1,722 births). The
+ * economy is read because every caller hands it (the Economy tab, the PDF, the Foundry journal, the identity record at
+ * assembly), so the surfaces cannot disagree; a place with no chain row on its fished-out water is read by the famine
+ * alone, as before (2 of the 98: R3-CODE-C-HANDBACK, the tenth seat's FOR THE JOIN).
  * @param {unknown} settlement
  * @returns {string | null}
  */
 export function foodwaysLineOf(settlement) {
-  const s = /** @type {{ economicState?: { foodSecurity?: { foodRecord?: { foodwaysLine?: unknown, foodSources?: unknown, failedSource?: unknown } | null } | null } | null } | null | undefined} */ (settlement);
+  const s = /** @type {{ economicState?: { foodSecurity?: { foodRecord?: { foodwaysLine?: unknown, foodSources?: unknown, failedSource?: unknown } | null } | null, activeChains?: unknown } | null } | null | undefined} */ (settlement);
   const record = s?.economicState?.foodSecurity?.foodRecord;
   const line = record?.foodwaysLine;
-  return typeof line === 'string' && line.trim() ? fedLineOf(line.trim(), record || {}) : null;
+  return typeof line === 'string' && line.trim() ? fedLineOf(line.trim(), record || {}, fishedOut(s?.economicState?.activeChains)) : null;
+}
+
+/** The fish waters a place can have (the resource keys foodLand.js :: foodLandOf reads as fishing). */
+const FISH_WATERS = Object.freeze(['fishing_grounds', 'river_fish']);
+
+/**
+ * Is every fish water the economy's chains work fished out? Each chain row names its resource and its input with
+ * their conditions; false where no row works a fish water (a coast fished from a landing names no water the record
+ * calls depleted), or where any row finds one standing.
+ * @param {unknown} chains the economy's production chains @returns {boolean}
+ */
+function fishedOut(chains) {
+  /** @type {unknown[]} */
+  const conditions = [];
+  for (const row of Array.isArray(chains) ? chains : []) {
+    if (FISH_WATERS.includes(String(row?.resourceKey))) conditions.push(row?.resourceCondition);
+    if (FISH_WATERS.includes(String(row?.resourceInputKey))) conditions.push(row?.resourceInputCondition);
+  }
+  return conditions.length > 0 && conditions.every((condition) => condition === 'depleted');
 }
 
 export default composeFoodwaysLine;

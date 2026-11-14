@@ -67,8 +67,12 @@ const bear = (seed) => generateSettlementPipeline(cfgFor(seed), null, { seed, cu
  * (herds failed beside fish), and a city whose grain and mill both stop.
  */
 const FAMINE_TOWNS = ['bar0-city-under_siege+famine-rand-1', 'rr3p-thorp-famine-rand-0', 'r2s-famine-city-3', 'r2s-famine-metropolis-3', 'rr3-village-under_siege+famine-rand-3', 'rr3-city-under_siege+famine-rand-5'];
-/** Towns with no famine: their line is the record's, untouched. */
-const CALM_TOWNS = ['r2r-village-35', 'bar0-town-calm-rand-1'];
+/**
+ * Towns with no famine and no fished-out water: their line is the record's, untouched. (R3-CODE-C-10 (b): r2r-village-35,
+ * whose river fishery the record calls depleted, is now guarded in tests/domain/r3c10FoodLinesTrue.test.js; a village of
+ * the same size whose water stands, r2r-village-2, takes its place.)
+ */
+const CALM_TOWNS = ['r2r-village-2', 'bar0-town-calm-rand-1'];
 
 /** n240's towns: Gortfell, villages, towns and cities whose faith stood below half the hall, under siege and occupation. */
 const FAITH_TOWNS = ['bar0-town-calm-rand-1', 'r2r-village-12', 'r2r-village-15', 'r2s-occupied-town-1', 'rr3-town-under_siege-rand-0', 'rr3-city-under_siege-rand-2', 'r2r-metropolis-0'];
@@ -86,6 +90,12 @@ const grainRows = (s) => (s.resourceAnalysis?.exports || []).filter((/** @type {
 
 /** The sources a famine's failure stops: the failed one; grain and the mill together (the mill grinds the grain). @param {unknown} failed */
 const stoppedBy = (failed) => (failed === 'grain' || failed === 'mill' ? ['grain', 'mill'] : failed ? [String(failed)] : []);
+
+/** Every fish water the town has is depleted (R3-CODE-C-10 (b)). @param {any} s */
+const fishedOut = (s) => {
+  const waters = (s.resourceAnalysis?.resourceConditions || []).filter((/** @type {any} */ c) => ['fishing_grounds', 'river_fish'].includes(c.key));
+  return waters.length > 0 && waters.every((/** @type {any} */ c) => c.condition === 'depleted');
+};
 
 /** @type {Array<any>} */ let famineTowns = [];
 /** @type {Array<any>} */ let calmTowns = [];
@@ -114,7 +124,8 @@ describe('n80: the foodways line names no source the famine failed', () => {
         town: s.name, failed: record.failedSource, line,
         namesFailed: sourcesNamedIn(line).filter((src) => stopped.includes(src)),
         identityNamesFailed: sourcesNamedIn(identity).filter((src) => stopped.includes(src)),
-        stillFed: record.foodSources.filter((/** @type {string} */ src) => !stopped.includes(src)),
+        // R3-CODE-C-10 (b): a fish water the record calls depleted, every one the town has, does not still feed it.
+        stillFed: record.foodSources.filter((/** @type {string} */ src) => !stopped.includes(src) && !(src === 'fish' && fishedOut(s))),
       };
     });
     // The arm saw its famines and its lines.
