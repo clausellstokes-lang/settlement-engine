@@ -1,0 +1,184 @@
+{"id":"HEADER","town":"r2s-indebted-hamlet-1","sev":"MED","kind":"RECORD","why":"made here: iron, metalwork, Education (basic); HOUSES has no smith, mine or school","other":""}
+{"id":"11589","town":"r2s-indebted-hamlet-1","sev":"LOW","kind":"BROKEN","why":"'of Free Elder Council' lacks article; trailing ': holds the seat.' is a fragment","other":""}
+{"id":"HEADER","town":"r2s-monster_pressure-hamlet-1","sev":"MED","kind":"RECORD","why":"founded by a religious community, yet reason is farmland granted to a favoured noble; both cannot be the founding","other":""}
+{"id":"HEADER","town":"r2s-monster_pressure-hamlet-1","sev":"MED","kind":"RECORD","why":"hamlet of 64 with one part-time smith exports Quality tools and weapons and Advanced weapons and armor","other":""}
+{"id":"22080","town":"r2s-monster_pressure-hamlet-2","sev":"MED","kind":"LACKS","why":"'The smiths' plural; HOUSES has only one Resident smith (part-time)","other":""}
+{"id":"18245","town":"r2s-politically_fractured-hamlet-1","sev":"MED","kind":"STATE","why":"says country produces no livestock; HOUSES has Dairy farmer and Common grazing land","other":""}
+{"id":"22079","town":"r2s-politically_fractured-hamlet-1","sev":"MED","kind":"LACKS","why":"'The smiths are rationing' plural; HOUSES has one Resident smith (part-time)","other":""}
+{"id":"24505","town":"r2s-politically_fractured-hamlet-1","sev":"LOW","kind":"BROKEN","why":"'the work at the citizen militia' treats the militia as a workshop","other":""}
+{"id":"HEADER","town":"r2s-politically_fractured-hamlet-1","sev":"MED","kind":"RECORD","why":"founded by religious community yet reason a noble's hunting lodge; makes Religious services, Education with no church, shrine or school","other":""}
+{"id":"HEADER","town":"r2s-recently_betrayed-hamlet-3","sev":"MED","kind":"RECORD","why":"powers list Military/Guard (Strong) but DEFENCE has no garrison; made here salt with no salt works","other":""}
+{"id":"11538","town":"r2s-recently_betrayed-hamlet-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"13631","town":"r2s-recently_betrayed-hamlet-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name; also 'from Household Council' lacks article","other":""}
+{"id":"10840","town":"r2s-recently_betrayed-hamlet-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"13592","town":"r2s-recently_betrayed-hamlet-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"24205","town":"r2s-recently_betrayed-hamlet-3","sev":"LOW","kind":"BROKEN","why":"'spending at the citizen militia... keep the work going' treats a militia as a workshop","other":""}
+{"id":"06777","town":"r2s-recently_betrayed-hamlet-3","sev":"LOW","kind":"BROKEN","why":"ends mid-name 'Clothra Mac'; remainder 'Donald.' printed as its own sentence","other":"06806"}
+{"id":"HEADER","town":"r2s-religious_conversion-hamlet-0","sev":"MED","kind":"RECORD","why":"religious-community founder vs farmland-family reason; part-time smith makes Advanced weapons and armor; gems made with no jeweler","other":""}
+{"id":"20778","town":"r2s-religious_conversion-hamlet-0","sev":"MED","kind":"STATE","why":"says ore leaves unworked; TRADE says iron, metalwork and weapons are made here","other":""}
+{"id":"16778","town":"r2s-religious_conversion-hamlet-0","sev":"MED","kind":"LACKS","why":"presumes 'the bigger houses' taking trade; hamlet of 80 has one pawnbroker and no trading houses","other":""}
+{"id":"05716","town":"r2s-religious_conversion-hamlet-0","sev":"MED","kind":"LACKS","why":"'the big houses' do not exist in a hamlet of 80","other":"16778"}
+{"id":"HEADER","town":"r2r-hamlet-53","sev":"MED","kind":"RECORD","why":"exports Pilgrim hospitality and makes Hospitality for travellers with no inn; part-time smith exports Advanced weapons and armor","other":""}
+{"id":"22477","town":"r2r-hamlet-53","sev":"LOW","kind":"BROKEN","why":"house label '(part-time)' pasted into prose: 'the resident smith (part-time), run by'","other":""}
+{"id":"20750","town":"r2r-hamlet-53","sev":"MED","kind":"STATE","why":"says little food but fishing; HOUSES has Subsistence farming, Shepherd, Dairy farmer, grazing","other":""}
+{"id":"HEADER","town":"r2s-insurgency-hamlet-1","sev":"MED","kind":"RECORD","why":"religious-community founder vs logging-camp reason; Education (basic) made with no school","other":""}
+{"id":"11628","town":"r2s-insurgency-hamlet-1","sev":"LOW","kind":"BROKEN","why":"'of Free Elder Council: holds the seat' lacks article; fragment after colon","other":""}
+{"id":"20795","town":"r2s-insurgency-hamlet-1","sev":"LOW","kind":"BROKEN","why":"house label 'Smuggling waypoint' used as a proper name","other":""}
+{"id":"07363","town":"r2s-insurgency-hamlet-1","sev":"LOW","kind":"TAG","why":"'changes by street'; tag reaches hamlets of 5-25 dwellings with no streets","other":""}
+{"id":"15280","town":"r2s-insurgency-hamlet-1","sev":"MED","kind":"LACKS","why":"ordered a crackdown that killed people; DEFENCE has no garrison, militia or watch to do it","other":""}
+{"id":"HEADER","town":"r2s-wartime-hamlet-0","sev":"LOW","kind":"RECORD","why":"makes Religious services and Education (basic) with no shrine, church or school of its own","other":""}
+{"id":"09430","town":"r2s-indebted-hamlet-0","sev":"LOW","kind":"BROKEN","why":"both slots filled 'Free Elder Council', so the 'distinction' it claims is empty","other":""}
+{"id":"HEADER","town":"r2s-indebted-hamlet-0","sev":"LOW","kind":"RECORD","why":"religious-community founder vs herbalist founding reason; Education (basic) made with no school","other":""}
+{"id":"HEADER","town":"r2s-indebted-hamlet-2","sev":"MED","kind":"RECORD","why":"exports Quality tools and weapons, Advanced weapons and armor and makes metalwork; HOUSES has no smith at all","other":""}
+{"id":"22603","town":"r2s-indebted-hamlet-2","sev":"LOW","kind":"LACKS","why":"people 'whose whole trade is knowing things'; hamlet of 85, HOUSES has no such trade","other":""}
+{"id":"09420","town":"r2s-infiltrated-hamlet-0","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"13579","town":"r2s-infiltrated-hamlet-0","sev":"MED","kind":"STATE","why":"says Military/Guard could take the hall; GOVERNMENT has Free Elder Council Dominant over Guard Strong, balance 'stable'","other":"09420"}
+{"id":"18060","town":"r2s-infiltrated-hamlet-0","sev":"MED","kind":"LACKS","why":"'significant military force... the commander'; DEFENCE has no garrison, only a citizen militia","other":""}
+{"id":"26293","town":"r2s-infiltrated-hamlet-0","sev":"LOW","kind":"BROKEN","why":"'lay in iron at the citizen militia' treats the militia as a workshop","other":""}
+{"id":"HEADER","town":"r2s-infiltrated-hamlet-0","sev":"LOW","kind":"RECORD","why":"founder a retired tradesperson, reason a merchant's wool find; Education (basic) made with no school","other":""}
+{"id":"10054","town":"r2s-mass_migration-hamlet-1","sev":"MED","kind":"STATE","why":"'run by civic association'; GOVERNMENT is Headman's Authority; 'built around the harbour' with no landing or docks","other":""}
+{"id":"21611","town":"r2s-mass_migration-hamlet-1","sev":"MED","kind":"LACKS","why":"saws rasping 'from yard to yard'; hamlet of 60 has one part-time carpenter, no sawmill or woodcutter","other":""}
+{"id":"HEADER","town":"r2s-mass_migration-hamlet-1","sev":"MED","kind":"RECORD","why":"exports Shipbuilding timber with no woodcutter or shipwright; 'maritime access' listed as a made good","other":""}
+{"id":"20320","town":"r2s-politically_fractured-hamlet-0","sev":"MED","kind":"LACKS","why":"council hall and 'two taverns at opposite ends of town'; hamlet has one Alehouse, no hall, a headman not a council","other":""}
+{"id":"28873","town":"r2s-politically_fractured-hamlet-0","sev":"LOW","kind":"LACKS","why":"'which one you drink in' presumes two taverns; HOUSES has one Alehouse","other":"20320"}
+{"id":"HEADER","town":"r2s-politically_fractured-hamlet-0","sev":"LOW","kind":"RECORD","why":"made here stone with no quarry; Transit trade and Toll revenue with no toll house","other":""}
+{"id":"HEADER","town":"r2s-recently_betrayed-hamlet-0","sev":"MED","kind":"RECORD","why":"Military Party (Strong) with no garrison, militia or watch; exports Raw wool, Livestock with no shepherd; gems made with no jeweler","other":""}
+{"id":"03018","town":"r2r-hamlet-10","sev":"LOW","kind":"TAG","why":"'now in their warehouse'; tag reaches hamlets whose HOUSES have no warehouse","other":""}
+{"id":"11660","town":"r2r-hamlet-10","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"21597","town":"r2r-hamlet-10","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"19720","town":"r2r-hamlet-10","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"13627","town":"r2r-hamlet-10","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"09426","town":"r2r-hamlet-10","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"13590","town":"r2r-hamlet-10","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"01476","town":"r2r-hamlet-10","sev":"LOW","kind":"BROKEN","why":"house label 'palisade or earthworks' pasted into prose as if undecided which it has","other":""}
+{"id":"14941","town":"r2s-indebted-hamlet-0","sev":"LOW","kind":"BROKEN","why":"house label 'palisade or earthworks' pasted into prose as if undecided which it has","other":""}
+{"id":"22215","town":"r2r-hamlet-45","sev":"LOW","kind":"LACKS","why":"'the textile trade leans on him'; hamlet has no weaver or textile house","other":""}
+{"id":"HEADER","town":"r2r-hamlet-45","sev":"LOW","kind":"RECORD","why":"has Salt works yet imports Salt; makes game meat and furs with no hunter's lodge; gems with no jeweler","other":""}
+{"id":"00851","town":"r2s-succession_void-hamlet-0","sev":"LOW","kind":"TAG","why":"'left a copy with a notary'; tag x309 reaches hamlets with no notary or court","other":""}
+{"id":"HEADER","town":"r2s-succession_void-hamlet-0","sev":"MED","kind":"RECORD","why":"makes and exports flour, Milled lumber with only Access to external mill; processed textiles with no weaver","other":""}
+{"id":"20818","town":"r2s-succession_void-hamlet-0","sev":"LOW","kind":"BROKEN","why":"subject and verb disagree: 'The heresy trials is a generation old'","other":""}
+{"id":"22482","town":"r2r-hamlet-27","sev":"LOW","kind":"TAG","why":"'the ward on their vaults'; tag reaches hamlets of 5-25 dwellings with no vault or treasury","other":""}
+{"id":"04590","town":"r2r-hamlet-27","sev":"LOW","kind":"BROKEN","why":"slash-joined verbs 'Builds/repairs' printed in a sentence","other":""}
+{"id":"18147","town":"r2r-hamlet-27","sev":"LOW","kind":"LACKS","why":"'supplying local alehouses' plural; HOUSES has one Alehouse","other":""}
+{"id":"13624","town":"r2r-hamlet-27","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"07107","town":"r2r-hamlet-27","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"13578","town":"r2r-hamlet-27","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"13551","town":"r2r-hamlet-27","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"HEADER","town":"r2r-hamlet-27","sev":"MED","kind":"RECORD","why":"exports Shipbuilding timber, makes timber with no woodcutter; makes salt with no salt works","other":""}
+{"id":"HEADER","town":"r2r-hamlet-13","sev":"MED","kind":"RECORD","why":"GOVERNMENT is Headman's Authority but HOUSES has no Village headman; exports Sea salt with no salt works","other":""}
+{"id":"28559","town":"r2r-hamlet-13","sev":"LOW","kind":"BROKEN","why":"subject and verb disagree: 'Weak defences keeps'","other":""}
+{"id":"02464","town":"r2r-hamlet-31","sev":"MED","kind":"STATE","why":"'the current shortage' of grain; CRISIS none, grown 69 over need 54, exports Grain surplus","other":""}
+{"id":"HEADER","town":"r2r-hamlet-31","sev":"MED","kind":"RECORD","why":"exports Milled flour and Baked goods with no mill of its own or baker; makes stone with no quarry","other":""}
+{"id":"HEADER","town":"r2r-hamlet-37","sev":"LOW","kind":"RECORD","why":"makes game meat and furs with no hunter's lodge; logging-camp founding with no woodcutter","other":""}
+{"id":"HEADER","town":"r2r-hamlet-46","sev":"LOW","kind":"RECORD","why":"makes stone with no quarry in HOUSES; religious-community founder vs noble's hunting lodge reason","other":""}
+{"id":"HEADER","town":"r2r-hamlet-7","sev":"MED","kind":"RECORD","why":"made here iron, metalwork with no mine or smith; 22625 says nothing works the ore","other":"22625"}
+{"id":"HEADER","town":"r2r-hamlet-22","sev":"MED","kind":"RECORD","why":"exports Peat fuel, Reeds, Waterfowl and makes gems with no peat cutter, fisher or jeweler; waystation founding with no inn","other":""}
+{"id":"HEADER","town":"r2r-hamlet-43","sev":"MED","kind":"RECORD","why":"isolated hamlet makes Hospitality for travellers with no inn; defensive-stronghold founding with no walls; peat with no cutter","other":""}
+{"id":"HEADER","town":"r2r-hamlet-44","sev":"MED","kind":"RECORD","why":"pop 21 exports Milled flour, Coal with no mill or mine; makes Milled lumber, processed textiles with no sawyer or weaver","other":""}
+{"id":"10072","town":"r2r-hamlet-12","sev":"MED","kind":"STATE","why":"'run by civic association'; GOVERNMENT is Headman's Authority","other":""}
+{"id":"HEADER","town":"r2r-hamlet-12","sev":"MED","kind":"RECORD","why":"Headman's Authority but HOUSES has no Village headman; makes gems and coal with no mine","other":""}
+{"id":"04786","town":"r2r-hamlet-29","sev":"LOW","kind":"BROKEN","why":"name appears cut: 'Carthy, the boat-headman' (likely 'Mac Carthy' split)","other":""}
+{"id":"HEADER","town":"r2r-hamlet-29","sev":"MED","kind":"RECORD","why":"makes iron, metalwork with no smith or mine; flour, Milled lumber, Baked goods with no mill, sawyer or baker","other":""}
+{"id":"HEADER","town":"r2r-hamlet-30","sev":"LOW","kind":"RECORD","why":"exports Coal with no mine; makes game meat and furs with no hunter's lodge","other":""}
+{"id":"HEADER","town":"r2r-hamlet-39","sev":"MED","kind":"RECORD","why":"defence 'Lightly Defended' yet DEFENCE lists no wall or force of any kind","other":""}
+{"id":"28558","town":"r2r-hamlet-39","sev":"LOW","kind":"BROKEN","why":"subject and verb disagree: 'Weak defences keeps'","other":""}
+{"id":"HEADER","town":"r2r-hamlet-40","sev":"MED","kind":"RECORD","why":"pop 27 exports Quality tools and weapons, Advanced weapons and armor with no smith; makes gems with no jeweler","other":""}
+{"id":"HEADER","town":"r2r-hamlet-42","sev":"MED","kind":"RECORD","why":"founded to exploit mineral deposits and exports Alum, Sulfur with no mine; makes metalwork with no smith","other":""}
+{"id":"20996","town":"r2r-hamlet-51","sev":"LOW","kind":"TAG","why":"'the merchants... the labourers' as classes; tag reaches hamlets with only a periodic market","other":""}
+{"id":"HEADER","town":"r2r-hamlet-51","sev":"MED","kind":"RECORD","why":"founded by retired tradesperson vs merchant family's counting house (none in HOUSES); makes stone, flour with no quarry or mill","other":""}
+{"id":"16568","town":"r2r-hamlet-54","sev":"MED","kind":"LACKS","why":"'whoever controls their street'; hamlet of 39 in 5-25 dwellings has no streets to control","other":""}
+{"id":"14866","town":"r2r-hamlet-54","sev":"MED","kind":"LACKS","why":"warning about 'particular streets... all of them'; hamlet of 39 has no streets","other":""}
+{"id":"HEADER","town":"r2r-hamlet-54","sev":"LOW","kind":"RECORD","why":"makes game meat, furs with no hunter's lodge; stability Stable beside Legitimacy Crisis and safety Dangerous","other":""}
+{"id":"HEADER","town":"r2r-hamlet-1","sev":"MED","kind":"RECORD","why":"founded to control a salt deposit and exports Sea salt, yet HOUSES has no salt works; exports Recovered artefacts","other":""}
+{"id":"14359","town":"r2r-hamlet-14","sev":"LOW","kind":"BROKEN","why":"'livestock' listed twice; and says livestock not brought in beside a Dairy farmer","other":""}
+{"id":"12104","town":"r2r-hamlet-14","sev":"MED","kind":"STATE","why":"says food is grain and little else; HOUSES has Dairy farmer, date palms 'Running'","other":"06289"}
+{"id":"HEADER","town":"r2r-hamlet-14","sev":"MED","kind":"RECORD","why":"makes iron, metalwork, Rock salt with no smith or salt works; retired-tradesperson founder vs disbanded military unit","other":""}
+{"id":"HEADER","town":"r2r-hamlet-25","sev":"LOW","kind":"RECORD","why":"makes timber with no woodcutter; 'maritime access' listed as a made good","other":""}
+{"id":"20194","town":"r2r-hamlet-41","sev":"MED","kind":"LACKS","why":"church demands veto over 'council appointments'; no church of its own, government is Headman's Authority","other":""}
+{"id":"10299","town":"r2r-hamlet-41","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"HEADER","town":"r2r-hamlet-41","sev":"MED","kind":"RECORD","why":"Headman's Authority but HOUSES has no Village headman; makes salt, timber with no salt works or woodcutter","other":""}
+{"id":"HEADER","town":"r2r-hamlet-49","sev":"MED","kind":"RECORD","why":"Peat cutter and marshlands in Desert/Arid terrain; has Salt works yet imports Salt; gems with no jeweler","other":""}
+{"id":"21564","town":"r2r-hamlet-55","sev":"MED","kind":"LACKS","why":"priest and 'church court'; HOUSES has only Access to parish church, no church or court","other":""}
+{"id":"22394","town":"r2r-hamlet-55","sev":"LOW","kind":"TAG","why":"says 'The village'; town is a hamlet, tag reaches ha","other":""}
+{"id":"13563","town":"r2r-hamlet-55","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"HEADER","town":"r2r-hamlet-55","sev":"LOW","kind":"RECORD","why":"wintering-families founder vs disbanded military unit reason; gems and Baked goods with no jeweler or baker","other":""}
+{"id":"HEADER","town":"r2r-hamlet-57","sev":"MED","kind":"RECORD","why":"defence 'Lightly Defended' with no wall or force; makes iron, metalwork with no smith","other":""}
+{"id":"01041","town":"r2r-hamlet-57","sev":"LOW","kind":"LACKS","why":"horses 'shod' at every hour; HOUSES has no smith or farrier","other":""}
+{"id":"16774","town":"r2r-hamlet-57","sev":"MED","kind":"TAG","why":"'a smaller house behind the leading one'; tag x89 reaches hamlets with no trading houses","other":""}
+{"id":"05688","town":"r2r-hamlet-57","sev":"MED","kind":"TAG","why":"'the leading house's trade'; hamlets have no rival trading houses","other":"16774"}
+{"id":"HEADER","town":"r2r-hamlet-59","sev":"MED","kind":"RECORD","why":"Merchant Guilds (Strong) in a hamlet of 59 with no guild house; 'Lightly Defended' with no wall or force","other":""}
+{"id":"22409","town":"r2r-hamlet-59","sev":"MED","kind":"LACKS","why":"'The village reeve'; a hamlet ruled by Household Council has no reeve","other":""}
+{"id":"20738","town":"r2r-hamlet-59","sev":"LOW","kind":"LACKS","why":"'The halls' are better than needed; HOUSES has no hall","other":""}
+{"id":"18940","town":"r2r-hamlet-6","sev":"MED","kind":"LACKS","why":"'Temple beneficiaries' of a pilgrimage surge; HOUSES has only a wayside shrine, no temple","other":""}
+{"id":"16853","town":"r2r-hamlet-6","sev":"MED","kind":"LACKS","why":"table of salted fish and hunters' game; HOUSES has no fisher's landing, hunter's lodge or salt works","other":""}
+{"id":"HEADER","town":"r2r-hamlet-6","sev":"MED","kind":"RECORD","why":"makes fish, salt, furs with no fisher, salt works or hunter; exports Advanced weapons and armor with no smith","other":""}
+{"id":"12658","town":"r2r-hamlet-8","sev":"LOW","kind":"TAG","why":"'Legal class profiting from ambiguity'; tag reaches hamlets with no court or lawyers","other":""}
+{"id":"HEADER","town":"r2r-hamlet-8","sev":"LOW","kind":"RECORD","why":"wintering-families founder vs naval-base reason with no naval force; makes timber with no woodcutter","other":""}
+{"id":"20987","town":"r2r-hamlet-11","sev":"MED","kind":"LACKS","why":"merchant class outbuying noble landholdings; hamlet of 46 has neither merchants nor nobles","other":""}
+{"id":"00170","town":"r2r-hamlet-11","sev":"MED","kind":"LACKS","why":"'Three estates have changed hands'; a hamlet of 46 in 5-25 dwellings holds no estates","other":"20987"}
+{"id":"09472","town":"r2r-hamlet-11","sev":"LOW","kind":"BROKEN","why":"house label 'palisade or earthworks' pasted into prose","other":""}
+{"id":"HEADER","town":"r2r-hamlet-11","sev":"MED","kind":"RECORD","why":"founded to control a salt deposit, exports Sea salt, yet no salt works; religious-community founder vs lord's salt reason","other":""}
+{"id":"HEADER","town":"r2r-hamlet-15","sev":"MED","kind":"RECORD","why":"Merchant Guilds (Dominant) in a hamlet of 42 with no guild; 'Lightly Defended' with no wall or force","other":""}
+{"id":"06725","town":"r2r-hamlet-15","sev":"MED","kind":"LACKS","why":"'control warehousing, and fund the council'; no warehouse in HOUSES, government is a Feudal Stewardship","other":""}
+{"id":"04348","town":"r2r-hamlet-15","sev":"MED","kind":"STATE","why":"Merchant Guilds 'behind Feudal Stewardship by too much'; GOVERNMENT has both Dominant","other":"07674"}
+{"id":"06140","town":"r2r-hamlet-17","sev":"LOW","kind":"TAG","why":"criminal interests 'hold routes and territories'; tag reaches hamlets of 40","other":""}
+{"id":"HEADER","town":"r2r-hamlet-17","sev":"LOW","kind":"RECORD","why":"makes salt and Baked goods with no salt works or baker; flour with only Access to external mill","other":""}
+{"id":"HEADER","town":"r2r-hamlet-19","sev":"LOW","kind":"RECORD","why":"exports Sea salt with no salt works; exports Recovered artefacts with no salvage house","other":""}
+{"id":"21942","town":"r2r-hamlet-19","sev":"LOW","kind":"BROKEN","why":"house label 'Fence (word of mouth)' with its parenthesis used as a proper name","other":""}
+{"id":"07610","town":"r2r-hamlet-19","sev":"LOW","kind":"BROKEN","why":"house label 'Fence (word of mouth)' with its parenthesis used as a proper name","other":""}
+{"id":"HEADER","town":"r2r-hamlet-2","sev":"MED","kind":"RECORD","why":"part-time smith exports Advanced weapons and armor; Fine wool cloth with no weaver; peat with no cutter; Salt works yet imports Salt","other":""}
+{"id":"HEADER","town":"r2r-hamlet-23","sev":"MED","kind":"RECORD","why":"Military Party (Strong) with no garrison, militia or watch; gems with no jeweler; grain-depot founding with no granary","other":""}
+{"id":"HEADER","town":"r2r-hamlet-50","sev":"MED","kind":"RECORD","why":"makes flour, Milled lumber, processed textiles, stone with no mill, sawyer, weaver or quarry","other":""}
+{"id":"HEADER","town":"r2r-hamlet-18","sev":"MED","kind":"RECORD","why":"Headman's Authority with no Village headman; Pilgrim hospitality, Hospitality for travellers with no inn; pottery, metalwork with no potter or smith","other":""}
+{"id":"14649","town":"r2r-hamlet-18","sev":"MED","kind":"PAIR","why":"says no salt reaches the salt works (which makes salt); 25290 has the works running well","other":"25290"}
+{"id":"HEADER","town":"r2r-hamlet-20","sev":"MED","kind":"RECORD","why":"Merchant Guilds (Significant) in a hamlet of 99 with no guild; exports Coal with no mine or charcoal burner","other":""}
+{"id":"HEADER","town":"r2r-hamlet-47","sev":"MED","kind":"RECORD","why":"prosperity Wealthy for a hamlet exporting only Sea salt (no salt works) and furs; Merchant Guilds Dominant with no guild","other":""}
+{"id":"23230","town":"r2r-hamlet-47","sev":"MED","kind":"STATE","why":"'a subsistence living keeps everyone busy'; STATE prosperity is Wealthy","other":""}
+{"id":"11810","town":"r2r-hamlet-47","sev":"MED","kind":"TAG","why":"'International merchant houses controlling port licences'; tag reaches hamlets of 90 with no port authority","other":""}
+{"id":"HEADER","town":"r2r-hamlet-21","sev":"MED","kind":"RECORD","why":"Pilgrim hospitality and Hospitality for travellers with no inn; makes iron, metalwork with no smith","other":""}
+{"id":"HEADER","town":"r2r-hamlet-58","sev":"MED","kind":"RECORD","why":"exports Flour and meal, makes Milled lumber, processed textiles with only Access to external mill, no sawyer or weaver","other":""}
+{"id":"00423","town":"r2r-hamlet-48","sev":"LOW","kind":"TAG","why":"'the same council committee'; tag reaches hamlets whose elder council has no committees","other":""}
+{"id":"26108","town":"r2r-hamlet-26","sev":"LOW","kind":"BROKEN","why":"'keep the citizen militia working... if iron should fail' treats the militia as a workshop","other":""}
+{"id":"HEADER","town":"r2r-hamlet-26","sev":"LOW","kind":"RECORD","why":"makes salt with no salt works; Baked goods with no baker","other":""}
+{"id":"12941","town":"r2r-hamlet-56","sev":"LOW","kind":"LACKS","why":"'supplying the alehouses nearby' plural; HOUSES has one Alehouse","other":""}
+{"id":"13568","town":"r2r-hamlet-56","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"HEADER","town":"r2r-hamlet-56","sev":"MED","kind":"RECORD","why":"exports Hardwood beams and Charcoal, makes timber, with no woodcutter's camp; Timber & Lumber marked Running","other":""}
+{"id":"HEADER","town":"r2r-village-43","sev":"MED","kind":"RECORD","why":"Under Siege yet no walls or forces of any kind and isolated; makes stone and gems with no quarry or jeweler","other":""}
+{"id":"18410","town":"r2r-village-43","sev":"LOW","kind":"LACKS","why":"'someone moves goods without questions'; HOUSES has no fence or smuggling house; under siege roads closed","other":""}
+{"id":"09820","town":"r2r-village-43","sev":"MED","kind":"STATE","why":"grain sold by the sack; this town is under siege with a 71% food deficit, tag has F","other":""}
+{"id":"12650","town":"r2r-village-43","sev":"LOW","kind":"STATE","why":"'the village buys what it used to take'; under siege, imports cover None","other":""}
+{"id":"22666","town":"r2r-village-43","sev":"LOW","kind":"PAIR","why":"says nobody works the stone; TRADE says stone is made here","other":"HEADER"}
+{"id":"22421","town":"r2r-village-43","sev":"LOW","kind":"STATE","why":"'defense is conventional throughout'; DEFENCE lists no wall or force at all, defence Undefended","other":""}
+{"id":"HEADER","town":"r2r-village-21","sev":"MED","kind":"RECORD","why":"noble-grant founder vs fishers' camp reason; imports Master-crafted plate armour with no force; makes salt, coal with no salt works or mine","other":""}
+{"id":"21701","town":"r2r-village-21","sev":"LOW","kind":"LACKS","why":"'the religious houses' plural as big employers; HOUSES has one Parish church","other":""}
+{"id":"22386","town":"r2r-village-21","sev":"MED","kind":"STATE","why":"says little food but fishing; HOUSES has Farmland, Mill, grazing; 82 grown plus divine provision","other":"06711"}
+{"id":"HEADER","town":"r2r-village-55","sev":"MED","kind":"RECORD","why":"makes Guild-manufactured goods, Finished clothing with no guild or tailor; fair-founded with no market; Fish market in Hills with no fisher","other":""}
+{"id":"02696","town":"r2r-village-55","sev":"LOW","kind":"TAG","why":"journeyman denied mastership by a rigged exam; village has no guild to examine","other":""}
+{"id":"16625","town":"r2r-village-55","sev":"MED","kind":"PAIR","why":"'Rival guilds fought over who may sell'; 14605 says no guild runs the market, HOUSES has no guild","other":"14605"}
+{"id":"HEADER","town":"r2s-under_siege-village-1","sev":"MED","kind":"RECORD","why":"Headman's Authority with no Village headman house; makes iron, metalwork, stone, Hospitality for travellers with no smith, quarry or inn","other":""}
+{"id":"04797","town":"r2s-under_siege-village-1","sev":"MED","kind":"STATE","why":"carts, beasts and walkers queue at the ferry; town is Under Siege, nothing comes or goes; tag has S","other":""}
+{"id":"15042","town":"r2s-under_siege-village-1","sev":"LOW","kind":"BROKEN","why":"interface/system text 'Not available for a village: Goods & Crafts.' printed as prose","other":""}
+{"id":"07394","town":"r2s-under_siege-village-1","sev":"LOW","kind":"LACKS","why":"says all a traveller expects is here but one; HOUSES has no inn, alehouse or market; town under siege","other":""}
+{"id":"28737","town":"r2s-under_siege-village-1","sev":"LOW","kind":"LACKS","why":"'the religious houses' plural; HOUSES has one Parish church","other":""}
+{"id":"18941","town":"r2s-under_siege-village-1","sev":"LOW","kind":"LACKS","why":"'Temple fishing rites'; HOUSES has a Parish church, no temple","other":"16637"}
+{"id":"21582","town":"r2s-under_siege-village-1","sev":"MED","kind":"LACKS","why":"'quarry workers became a political force'; HOUSES has no quarry in a village of 95","other":"02887"}
+{"id":"HEADER","town":"r2s-under_siege-village-2","sev":"MED","kind":"RECORD","why":"founded where two rival mining operations shared infrastructure, yet HOUSES has no mine; refugee founders vs miners","other":""}
+{"id":"HEADER","town":"r2s-under_siege-village-3","sev":"LOW","kind":"RECORD","why":"escaped-serf founders vs grain-depot-for-a-city reason; makes coal with no mine","other":""}
+{"id":"11678","town":"r2s-under_siege-village-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"04005","town":"r2s-under_siege-village-3","sev":"LOW","kind":"TAG","why":"'the right tavern' presumes several taverns; village has one home-based Ale house","other":""}
+{"id":"07098","town":"r2s-under_siege-village-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"23484","town":"r2s-under_siege-village-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"HEADER","town":"r2s-under_siege-village-0","sev":"MED","kind":"RECORD","why":"refugee founders vs disbanded-military-unit reason; village blacksmith makes Advanced weapons and armor; peat and gems with no cutter or jeweler","other":""}
+{"id":"22419","town":"r2s-under_siege-village-0","sev":"LOW","kind":"STATE","why":"inn for 'traders, pilgrims, and wayfarers who pass'; town Under Siege, tag all S, nobody passes","other":""}
+{"id":"15707","town":"r2s-under_siege-village-0","sev":"MED","kind":"STATE","why":"income from 'visiting pilgrims'; town is Under Siege, nothing comes in by road","other":""}
+{"id":"HEADER","town":"r2r-village-58","sev":"MED","kind":"RECORD","why":"in Famine yet exports Oasis provisions, Dates and fruit; noble-grant founder vs disbanded military unit; Escorted caravan with no force","other":""}
+{"id":"18339","town":"r2r-village-58","sev":"MED","kind":"STATE","why":"someone baking since dawn, smell in the air; CRISIS Famine, grain short, no baker; tag all F","other":""}
+{"id":"11612","town":"r2r-village-58","sev":"LOW","kind":"BROKEN","why":"'one of the house the crisis hits' is ungrammatical; 'of Household Council' lacks article","other":""}
+{"id":"00714","town":"r2r-village-58","sev":"MED","kind":"PAIR","why":"Sudha Ghosh 'has food, enough to matter', yet 11612 says she takes the worst of the famine","other":"11612"}
+{"id":"HEADER","town":"r2s-famine-village-0","sev":"MED","kind":"RECORD","why":"grain harvest failed (Famine) yet exports Milled flour; makes Baked goods and gems with no baker or jeweler","other":""}
+{"id":"00666","town":"r2s-famine-village-0","sev":"LOW","kind":"BROKEN","why":"name 'Rory MacDonald' cut to 'Rory Mac' mid-sentence; rest printed as 06747 'Donald for a vote...'","other":"06747"}
+{"id":"06804","town":"r2s-famine-village-0","sev":"LOW","kind":"BROKEN","why":"name cut: 'Donald, the miller and Elder' for Rory MacDonald","other":"02078"}
+{"id":"00544","town":"r2s-famine-village-0","sev":"LOW","kind":"BROKEN","why":"ends mid-name 'controls a vote Rory Mac'; continues in 06768","other":"06768"}
+{"id":"01242","town":"r2s-famine-village-0","sev":"LOW","kind":"BROKEN","why":"ends mid-name 'paid Rory Mac'; continues in 06788","other":"06788"}
+{"id":"22384","town":"r2s-famine-village-0","sev":"LOW","kind":"STATE","why":"says the rest comes in from farms and trade; famine deficit 30% remains uncovered","other":""}
+{"id":"DONE","lines":3278,"blocks":72,"flags":183}
