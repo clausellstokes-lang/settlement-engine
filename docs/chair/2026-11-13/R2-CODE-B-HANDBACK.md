@@ -420,10 +420,29 @@ The patch (apply on 87c541620 with `git apply docs/chair/2026-11-13/R2-CODE-B-3-
 ## FOR THE JOIN (this seat, kept current)
 - THE QUICK GUIDE'S COMPOSER PRINTS NOWHERE ON THIS TREE (the chair's ruling of 03:02, as found): no file under src/ or supabase/functions calls `composeSettlementQuickGuide` (its identity sentence, its three truths with row 1d's food word, its pressure, people and entry point); only tests read it. What does print the quick guide's lines: `src/components/new/overviewIdentity.js` imports `cultureScopeLine` (the culture scope line: the side seat's item 5) and `governsLine` (who governs), the Overview's identity strip. The composer's header still names Summary, Table View, Session Mode and the PDF; none of them calls it here.
 
+## The chair's rulings received by this seat (notifications, copied)
+- 02:27 UTC: HOLD before writing; the predecessor went on by the chair's doing. 02:29: START FROM c962f8c28 (above).
+- 03:02: row 1 accepted; the price twin's "the road" in 2 isolated thorps is step 0's fault: cure it in step 0's form BEFORE row 2 if the writer is this lane's (it is: item 0b); and under FOR THE JOIN say what prints the quick guide's lines (done above).
+- 03:08: POINT 49 IS ON THE LINE: lane/integration-2026-11-07 = 976db5b19 (the chair's read-back at 03:08 UTC). Step 3's word is GIVEN: do not wait and do not ask; merge the line's tip as read back then (plain; say which commit and what conflicted), the instrument's page census on this lane's lines, then the ONE final statement. FOR THE INSTRUMENT: read the merge book's section 2m "FOR EVERY LANE THAT MERGES THE LINE AFTER POINT 49" (lane/merge-15-point-49-wip-2026-11-14, docs/INTEGRATION_STYLE_2_2026-11-09.md, by script) before touching a register after the merge.
+
+## ROW 2: CENSUS-2 ONCE ON THE MERGED TREE (lane/census-2-2026-11-13 at 2686272b1; `census2.sh <tree> <out> 2 --files <the lane's 37 src files, base to tip>`, the census's 720; both runs exit 0, read)
+- Trees: the lane's base e969a75b7 (frozen worktree) and the tip ba83c09da (clean worktree).
+- Kinds over the 720 (towns · distinct lines), base -> tip: a 716·619 -> 688·531; b 70·99 -> 70·99; c 292·296 -> 260·153; d 381·39 -> 349·14; e 60·20 -> 60·20; f 720·345 -> 306·52; g 720·14 -> 720·14; h 21·68 -> 2·2. NEW 0 on both (no cold lists joined: "unjoined").
+- The lane's files with hits, base -> tip: settlementQuickGuide.js c 158 / a 59 towns -> a 2; crisisCast.js a 18 -> 0; stressNarrative.js a 8 -> 0; crisisHooks.js f 6 -> 0; EconomicsTab.jsx a 498 -> 6, f 307 -> 206; InstitutionsTab.jsx f 720 -> 300; PowerStrata.jsx f 720 -> 296; WhoRunsThisTownPanel.jsx f 81 -> 13; traditionCorpus.js a 3 -> 3; institutionDisplayName.js f 0 -> 6 (its label now reaches the Outlook line; ruled-kept qualifier).
+- EVERY HIT AT THE TIP IN THE LANE'S FILES, READ (a hit is a candidate):
+  - f, all five writers (InstitutionsTab, PowerStrata, WhoRunsThisTownPanel, institutionDisplayName, EconomicFlowsSection): "Bowyers & fletchers (guild)", "Inns and taverns (district)": the ruled-KEPT in-world qualifiers (ruling (a)). Kept.
+  - traditionCorpus.js a, 3 towns: "The Fair of the First Landing" with no fair: the side seat's FAIR stop (FOR THE JOIN). Named.
+  - settlementQuickGuide.js a, 2 towns (r2s-indebted-village-3, r2s-mass_migration-hamlet-1): the Greek scope's "built around the harbour" on a coastal place whose roster holds no docks. The scope's harbour gate is the record's water (`navigable`, ruling 5); the census reads a harbour as a house. NAMED, NOT CURED (a ruled gate; whether a coast's harbour needs a docks house is a ruling).
+  - EconomicsTab.jsx (the third leaves lane's file, as the side seat's brief says: not this lane's to change): g 720 towns "Agriculture modifier: 69%" (machinery on the page); a 6 "ships bring in most of the rest" with no ships on the roster (r2r-thorp-24); b 25 "a bad season would bring real hunger" under a famine (shortWords; r2r-hamlet-16); b 1 "No recorded imports." while the roads are cut (r2s-under_siege-thorp-2). NAMED with their owner.
+- LIMITS: the dossier's page views only (no PDF, Foundry, Tonight, exports); it cannot see two lines disagreeing.
+
+## THE 720 FIELD DIFF, base e969a75b7 against the tip ba83c09da (the two censuses' own births, every leaf; /home/user/b6/m/fdiff.mjs)
+- 129 towns, 929 leaves, THREE families, each one this lane declares: `stress` 446 leaves / 129 towns and `stressors` 446 / 129 (the cast: roles' reason / id / name / kind / temporary, levers, stakes in 113 towns: item 4 and the least-say reasons; the summary in 53 towns: famine 42 (item 6's grain twin), wartime 13 (item 6's prosperity refusal, the fifth seat's market refusal, items 0 and 0b)); `npcs` 37 leaves / 37 towns (whole entries, item 4's). Nothing else moved.
+
 ## Rows NOT reached (line by line; kept current)
 1. (done: row 1 (a)-(d); the message to the chair with the tip follows this push.)
-2. Row 2: CENSUS-2 at e969a75b7 and at the tip over both seats' files; the 720 field diff by family.
-3. Row 3: one message, WAIT FOR POINT 49; the line's merge, the page census, THE ONE FINAL STATEMENT.
+2. (done: row 2, above.)
+3. Row 3, THE WORD GIVEN (03:08): merge lane/integration-2026-11-07 at its tip as read back (976db5b19 at 03:08; plain; say what conflicted); read section 2m of the merge book first; the instrument's page census on this lane's lines; THE ONE FINAL STATEMENT in the brief's form (the whole suite once in six shards, every red classed against the lane's base; ONE draft shift record; FOR THE JOIN; the edge bundles last, alone).
 
 ## Instruments (outside the tree; lost with the container; re-made as PART 5 says)
 - /home/user/b6: seeds800.txt; births-base (c962f8c28's code = 083dabdd2's) and births-i0 (item 0) corpora; m/war.mjs (caravans strings by route), m/fdiff.mjs (leaf diff by family and path), m/ghash.mjs (the golden's 525 hashes in a tree, read only).
