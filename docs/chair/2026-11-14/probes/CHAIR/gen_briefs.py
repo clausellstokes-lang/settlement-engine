@@ -4867,6 +4867,89 @@ SEATS2['W2-FIX-DATA-13'] = dict(
 )
 
 
+SEATS2['R2-CODE-A-12'] = dict(
+    title="R2-CODE-A-12 · round two's first code lane: the reader's three medium lines, two founders on one page, the bar's six rows",
+    branch='lane/r2-code-a-2026-11-13', tip='e6b636fd', statement=False,
+    intro=("You are R2-CODE-A-12, the twelfth seat on round two's first code lane of the settlement-engine integration program "
+           "(lane/r2-code-a-2026-11-13). The lane holds the town's told history and arrival: the founding rows, the crisis descriptions, "
+           "people's goals, ties and secrets as written in the narrative tables. An independent reader read its stage NOT CLEAR at f63b5d762 "
+           "on THREE MEDIUM lines of the stage's own and listed carried HIGH rows in this lane's files; the eleventh seat made THE LANE'S ONE "
+           "FINAL STATEMENT and handed back at its count with every ruled row unstarted. Nothing under src/ has changed since the reader's "
+           "tip. Yours: A NEW STAGE on top of the statement: the ruled rows, in order; then the release bar's six rows; then the rows other "
+           "seats named to this lane. The lane's test debts (bare negatives, manifest entries) are NOT yours: a later seat takes every "
+           "lane's together. NO whole suite, NO new statement: an ADDENDUM."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. THE READER'S VERDICT (`git fetch origin lane/review-r2-code-a-2026-11-14`; `git show "
+          "origin/lane/review-r2-code-a-2026-11-14:docs/chair/2026-11-14/REVIEW-R2-CODE-A-2026-11-14.md`): its \"Step 2\" (the rows still "
+          "false, with the builder's row for each), its \"Step 8\" (two founders) and \"THE VERDICT\" table: about sixty lines, by heading; and "
+          "in REVIEW-R2-CODE-A-LINES-READ.md beside it ONLY the section \"CARRIED\" (twenty lines). Its probes "
+          "(docs/chair/2026-11-14/probes/REVIEW-R2-CODE-A/: its 3,048 births) are yours to copy out with git archive and run from outside "
+          "every repository tree.\n"
+          "3. On your lane, docs/chair/2026-11-13/R2-CODE-A-HANDBACK.md: ONLY, in section 20, the last part headed \"HANDED BACK BY FILE at THE "
+          "COUNT\" (from that line to the end, by script): what is left, the instruments. Of the statement only S-rows your addendum brings "
+          "current, by heading.\n"
+          "4. THE BAR'S ROWS FOR THIS LANE (`git fetch origin lane/chair-2026-11-08`; `git show "
+          "origin/lane/chair-2026-11-08:docs/chair/2026-11-14/bar-0-rows/BAR-0-ROWS-r2a.json`): six MEDIUM rows (its one HIGH is cured); "
+          "the towns are re-born by the probes on origin/lane/review-bar-0-2026-11-14 (docs/chair/2026-11-14/probes/REVIEW-BAR-0/). AND THE "
+          "ROWS OTHER SEATS NAMED TO THIS LANE: `git show "
+          "origin/lane/chair-2026-11-08:docs/chair/2026-11-14/join-rows/OPEN-r2-code-a.md` (twelve bullets: CANDIDATES as named).\n"
+          "5. The merge book's section 2m on origin/lane/merge-15-point-49-wip-2026-11-14 (the section headed \"## 2m.\"; by script), before the first "
+          "register you touch."),
+    work=("THE CHAIR'S RULINGS (2026-11-14 11:26 UTC and after; each vetoable by the owner; copy them into the hand-back):\n"
+          "(1) L46, MEDIUM, the stage's own: the siege arrival \"…smoke from cookfires, the noise of a market…\" where all 18 records say "
+          "trade has stopped: UNDER A SIEGE NO LINE HEARS A MARKET TRADING: the market clause goes (cookfires and the shut gate alone).\n"
+          "(2) MEDIUM, the stage's own: THE ORIGIN WALK: \"THE NEXT ADMITTED ROW\" IS A ROW WHOSE OWN TEST HOLDS: every row a walk can land "
+          "on carries a test: \"was founded on rich farmland granted to a favoured noble\" takes the crop test (95 landings, 81 with no "
+          "crop); it names a grant, so it also joins the founder pass-over; the bar's #300 with it (\"…a ferry crossing that became the "
+          "first bridge…\" where no bridge stands: the row reads the roster's crossing).\n"
+          "(3) MEDIUM, the stage's own: \"… has two burial grounds now, one old and one new …\" prints in 77 towns, each with ONE burial "
+          "house: A COUNT WORD READS THE ROSTER: only where two burial houses stand; else a twin true of one, or silence.\n"
+          "(4) ONE FOUNDER ON A PAGE, AND ONE FOUNDING: 538 of 3,048 towns draw an Origin row that names a founder beside a different "
+          "\"Founded by:\" row: the pass-over list holds EVERY Origin row that names a founder (found by reading the whole table, not the "
+          "reader's eight), and such a row is drawn only where it agrees with the Founded-by row; else an Origin row that names none. The "
+          "bar's #159 with it: the Overview's founding sentence (\"Founded at a junction …\") reads the record's founding reason, not a "
+          "second draw.\n"
+          "(5) HIGH, carried, your touch: L05, the indebted row \"The merchant district of {S} looks prosperous…\" in villages with no "
+          "market: it gains the `market` condition its famine twin carries.\n"
+          "(6) #215, RE-RULED on the reader's measure: UNDER A SIEGE NOTHING COMES IN BY ROAD, GATE OR WATER; A MAGIC CHANNEL THE RECORD "
+          "HOLDS IS SAID: in the 9 of 48 besieged towns a magic channel feeds, the line names that channel; \"on its own stores\" only "
+          "where none does. The bar's #44 with it (a supplier's goods \"still arriving\" under a siege: declared off a siege).\n"
+          "(7) Ruling (f) RE-RULED: plural streets are out only in a thorp or a hamlet (`tier ≥ village`: 8 true village lines return); "
+          "QUARTERS AND DISTRICTS belong to a town or larger, whatever the head count (the reader's L07, L10, L08).\n"
+          "(8) HIGH, carried, in your files: \"…keeps the forges of {S} running day and night…\" with no smith (it reads the FINAL roster); "
+          "a craft line on a priest (L18: a line of one trade's pool is drawn only on a holder of that trade); the quarantine line on a "
+          "person who does not enforce it (L20).\n"
+          "(9) THE BAR'S OTHER ROWS: #167 (a tie's prose about backing a candidate and an alliance's majority in a thorp of one power: A "
+          "LINE ABOUT A VOTE OR A MAJORITY NEEDS TWO POWERS AND A BODY THAT VOTES); #281 (a secret that the holder \"helped engineer the "
+          "supply disruption that triggered the famine\" where the famine is a failed harvest: A SECRET THAT EXPLAINS A CRISIS READS THE "
+          "CRISIS'S OWN CAUSE); #155 (\"What little the place grows or makes is mostly used at home\" in a Prosperous exporter: the line "
+          "reads the record's exports and food).\n"
+          "THE WORK, in this order, each cause its own commit, measured first on the reader's 3,048 births (count before and after), red "
+          "first (a collected arm; a guard town for every line a condition takes off a town; each arm shown able to red by a plant you do "
+          "not commit, made in a tree no suite is running in), pushed as made: (1), (2), (3); ONE MESSAGE TO THE CHAIR (the tip; the three "
+          "counts), THE COUNT; then (4), (5), (6), (7), (8), (9); then the rows of OPEN-r2-code-a.md not answered above, each measured "
+          "first, widest first.\n"
+          "A CURE IN GENERATOR OR DATA CODE IS A DECLARED MOVE: its field diff on the census's 720 by family (prose families only; A DRAW "
+          "MOVED OUTSIDE THE ROW'S OWN POOL IS A STOP). EVERY LINE A CURE NOW PRINTS IN A NEW TOWN, OR NEWLY LEAVES SILENT, IS READ WHERE "
+          "IT PRINTS on every surface that prints it: three towns of its cells, a siege, a famine or an occupation among them, the "
+          "smallest and the largest size it reaches; the towns and what printed in the commit body.\n"
+          "AFTER EVERY CURE: the presumed-things walker; the strict-domain gate, the type ratchet and eslint on the touched files; the "
+          "twelve-birth grid (`node scripts/census/page-census.mjs --grid`: a rise is a stop; the two-founders row FALLS: lowered by the "
+          "door's shrink form); the test files that name the files you touched. THE SIX EDGE BUNDLES are rebuilt ONCE, LAST, committed "
+          "alone, after your last src commit.\n"
+          "NOT YOURS: the bare negatives and the manifest entries (a later seat, for every lane together); the arrival and culture tables "
+          "(the data lane's); the minted faces' secrets (another lane's).\n"
+          "THE HAND-BACK, kept current after every item: a part \"## 21. The twelfth seat\" at the end of the lane's hand-back file: the "
+          "rulings copied; each row: its cause, its cure and commit, its counts, its guard and plant, the towns read; EVERY NEW OR CHANGED "
+          "LINE with the towns it was read in (the owner's veto list, and the next reader's); the declared moves by family; THE ADDENDUM "
+          "to the statement (`git diff --stat f63b5d762..HEAD -- src/` file by file, each change tied to a row); FOR THE JOIN; what is "
+          "left, line by line."),
+    merges='',
+    when="for a stop that blocks everything you have left, after (1), (2) and (3) (the tip; the three counts), for a draw moved outside a row's own pool, and with your hand-back",
+    turns='',
+)
+
+
 def build2(seat):
     s = _r3c6() if seat == 'R3-CODE-C-6' else SEATS2[seat]
     head = (
