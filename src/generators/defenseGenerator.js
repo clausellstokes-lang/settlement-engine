@@ -39,7 +39,7 @@
 import { getInstFlags, getPriorities } from './helpers.js';
 import { computeEffectiveMagicPresence, neighbourMilitaryFactorOf } from './priorityHelpers.js';
 import { hasTradeRouteConnection } from '../domain/tradeRouteSemantics.js';
-import { partitionDefenseInstitutions, defenseTraditionNamesOf, defenseWallOf } from '../domain/institutions/defenseInstitutionBuckets.js';
+import { partitionDefenseInstitutions, defenseTraditionNamesOf, defenseWallOf, defenceHeldOf } from '../domain/institutions/defenseInstitutionBuckets.js';
 import { resolveGenerationWorldLaw } from './generationContext.js';
 import { readinessBandOf } from '../data/bandLadders.js';
 import { deriveMagicReliance } from '../domain/magicReliance.js';
@@ -602,12 +602,14 @@ export function generateDefenseProfile(settlement, upkeep = keepOf(undefined)) {
     magicDependency, traditions, ...(disasterScore !== undefined ? { disaster: disasterScore } : {}),
   };
 
-  const band = readinessBandOf(score);
+  // THE LABEL READS THE ROSTER (UPKEEP-12, ruling (a)): walls or a force are never "Undefended".
+  const defenceInstitutions = getDefenseInstitutions(s.institutions || []);
+  const band = readinessBandOf(score, defenceHeldOf(defenceInstitutions));
   const hasAnyDefense = r.inst.hasWalls || r.hasStanding || r.hired;
   return {
     scores,
     readiness: { score, label: band.label, color: band.color, background: band.background, border: band.border },
-    institutions: getDefenseInstitutions(s.institutions || []),
+    institutions: defenceInstitutions,
     magicDependency,
     traditions,
     // Informational: the chains' own readings, each also a part in the list.

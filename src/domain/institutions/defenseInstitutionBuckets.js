@@ -156,6 +156,25 @@ export function partitionDefenseInstitutions(institutions) {
 }
 
 /**
+ * THE BUCKETS THAT HOLD A PLACE (UPKEEP-12, the chair's ruling (a)): walls, or a force under arms (a
+ * garrison, a militia or levy, a watch, a contracted company). A town holding any of them is never
+ * labelled "Undefended" (`bandLadders.js :: readinessBandOf`). The charter hall and the arcane bucket
+ * are not in it: the ruling names walls and forces.
+ * @type {ReadonlyArray<string>}
+ */
+export const DEFENCE_HOLDING_BUCKETS = Object.freeze(['walls', 'garrison', 'militia', 'watch', 'mercenary']);
+
+/**
+ * Whether a partition (`partitionDefenseInstitutions`'s result, or the record's stored
+ * `defenseProfile.institutions`) holds walls or a force.
+ * @param {unknown} buckets @returns {boolean}
+ */
+export function defenceHeldOf(buckets) {
+  const b = /** @type {Record<string, unknown>} */ (buckets && typeof buckets === 'object' ? buckets : {});
+  return DEFENCE_HOLDING_BUCKETS.some((key) => Array.isArray(b[key]) && b[key].length > 0);
+}
+
+/**
  * One bucket's standing reading.
  * @typedef {object} StandingForce
  * @property {boolean} present whether the town has at least one STANDING member
