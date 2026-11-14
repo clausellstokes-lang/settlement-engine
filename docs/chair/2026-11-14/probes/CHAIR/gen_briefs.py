@@ -578,7 +578,10 @@ STATEMENT2 = (
     "not declared through a draw door: NOT banked, NOT keyed by hand, NOT reworded to slip the matcher, NOT re-routed now: it stays RED AND NAMED: the "
     "statement lists each under FOR THE DECLARATION PASS (file, the text, the code condition that gates it, the atom it would declare, any new word it "
     "needs): ONE DECLARATION PASS is made after the join, on the joined tree, for every lane at once; (4) a fresh hit on a line that is FALSE somewhere "
-    "is a cure, now; the same for a fact-layers rise that is only a reader's reworded condition (named, both contents given). The statement gives each "
+    "is a cure, now; the same for a fact-layers rise that is only a reader's reworded condition (named, both contents given); (5) A LITERAL NO PAGE "
+    "PRINTS (a matcher, an internal cause field) is not a page line: if no code reads it, it is removed or becomes a comment; if code reads it, it "
+    "stays RED AND NAMED under FOR THE DECLARATION PASS as NOT PRINTED, with the proof (every reader of the field; 0 on the rendered views, the PDF's "
+    "and the journal's text): the rule book's not-printed list is widened only by the chair's ruling at that pass, never by a lane. The statement gives each "
     "walker's exit and says which reds are the lane's, named. Also in it: `node scripts/implementation-packets.mjs validate` at the final tip, its exit "
     "(a symbol your lane retired that a landed packet requires takes a `retiredBy` on that one manifest row, citing the ledger section that authorized "
     "the change)."
@@ -1599,6 +1602,48 @@ SEATS2['W2-C-LEAVES-8'] = dict(
           "from d79ea4c70: leave it what it needs."),
     merges="; the merge of the integration line's tip named in step 6",
     when="for a stop that blocks everything you have left, when the list's time-box closes (one line: the tip; what was cured, what is left), when the line's merge and its registers are pushed, and with your final statement or hand-back",
+    turns='',
+)
+
+
+SEATS2['W2-C-LEAVES-9'] = dict(
+    title="W2-C-LEAVES-9 · the third leaves lane's close, finished: three declarations, the registers' falls, the final statement",
+    branch='lane/w2-c-leaves-2026-11-13', tip='3a425f2b', statement=True,
+    intro=("You are W2-C-LEAVES-9, the ninth seat on the third leaves lane of the settlement-engine integration program (lane/w2-c-leaves-2026-11-13). The "
+           "lane cures false lines the display leaves write: the Economics tab's chain cards, goods pills and food sentences, the PDF's and the Foundry "
+           "journal's trade lists, and the Defense tab's supporting rows. ITS LIST IS CLOSED AND THE INTEGRATION LINE IS MERGED INTO IT (baa4b707d): the "
+           "eighth seat answered most of the instrument's checks and handed back inside the close with what is left written line by line. Yours: the "
+           "rest of the close, whole, and the lane's ONE final statement. NO NEW CURE OF A PAGE LINE IS YOURS beyond what the list below names."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. On your lane, docs/chair/2026-11-13/W2-C-LEAVES-HANDBACK.md, BY LINE RANGE, BY SCRIPT (the file is 1,330 lines; open only these): PART 8 "
+          "WHOLE (from the line \"# PART 8\" to the end, about 180 lines: the rulings in force; what the eighth seat did; the merge and the checks; "
+          "\"HAND-BACK: WHAT IS LEFT, line by line\": THAT IS YOUR LIST; FOR THE DECLARATION PASS; FOR THE JOIN; LEFT FOR AFTER THE JOIN) and, in PART 7, "
+          "the section \"CENSUS-2, RUN\" (the base's counts and the command) and the instruments paragraph of its STATUS.\n"
+          "3. The merge book's section 2m on origin/lane/merge-15-point-49-wip-2026-11-14 (docs/INTEGRATION_STYLE_2_2026-11-09.md, the section headed "
+          "\"## 2m.\": about forty lines; by script), before the first register you touch."),
+    work=("THE WORK, in the hand-back's own order (PART 8, HAND-BACK, items 1 to 4), pushed as made:\n"
+          "1. THE THREE PRINTED LINES, each DECLARED through `filterDeclared` as the hand-back's item 1 gives it (the form; the atoms; the fresh hit and "
+          "the two rows banked against this lane with their hashes): (a) chainNeedShown.js's siege form; (b) defenseDisplay.js :: foodEnduranceLine, "
+          "\"under siege the outlying fields would be lost\"; (c) defenseDisplay.js's ring line with \"streets\": COUNT FIRST the thorps and hamlets "
+          "where a ring would draw it: there the line is FALSE (a size word in a small place) and its declaration takes it off them: a CURE, with its "
+          "guard town and the count; everywhere else the output is BYTE-IDENTICAL on the 720 and the fresh 180 (measure before and after, by town). Then "
+          "the door: `--check` shows the two banked rows STALE, `--shrink`, `--check` exit 0 but for the two NOT PRINTED matchers the hand-back names "
+          "(they stay red and named, by ruling), and tests/lint/presumedThings.walker.test.js: its exit in the statement.\n"
+          "2. THE PAGE CENSUS's two falls (P8any, P17): `node scripts/census/page-census.mjs --shrink` at the final code tip, its own register commit; "
+          "nothing may rise.\n"
+          "3. FOR THE TWO NOT PRINTED MATCHERS (tradeListDisplay.js :: SERVICE_OUTPUTS): THE PROOF the eighth seat did not run: 0 prints of either string "
+          "on the 720's rendered views, the PDF's text and the journal's: said with its instrument.\n"
+          "4. THE LANE'S ONE FINAL STATEMENT in the form below (the lane's base is 4534ea5e3; the stage a reader has not read begins at d79ea4c70): "
+          "CENSUS-2 per kind at the base (PART 7 holds its counts) and at your final tip; the first census's counter at both, its own exit read; the "
+          "whole suite ONCE at the tip in six shards, each red FILE re-run at the base to class it; the draft record "
+          "docs/chair/2026-11-13/W2-C-LEAVES-SHIFT-RECORD-DRAFT.md brought current; the new words of the whole lane; FOR THE JOIN gathered whole from "
+          "every part (the \"· covers\" run-on counted on the joined tree, 0 expected; the phone chrome floor's three rows re-measured at the join; the "
+          "house-label leaf's call sites; SupplyChainFlow.jsx's ChainRow; EconomicsTab.jsx's and EconomicsTrade.jsx's shared lines; the arcane "
+          "defence's two homes); FOR THE DECLARATION PASS; LEFT FOR AFTER THE JOIN as PART 8 gives it (the court rows, the four added rows, the census's "
+          "other hits). THE EDGE BUNDLES LAST (`npm run build:edge-shared`, committed alone if they differ). Then ONE message to the chair: the tip, the "
+          "suite's reds by class, where the statement is. A fresh reader then reads the lane from d79ea4c70: leave it what it needs."),
+    merges='',
+    when="for a stop that blocks everything you have left, when step 1 is pushed (one line: the ring line's count in small places; the door's exit), and with your final statement or hand-back",
     turns='',
 )
 
