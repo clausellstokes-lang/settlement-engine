@@ -1,4 +1,4 @@
-# W2-WRITE-SIDE-14 — the hand-back of the corpus lane's side seat, second seat (DS-ECO, DS-GEN, DS-SUP) — KEPT CURRENT AFTER EVERY POOL
+# W2-WRITE-SIDE-14 — the hand-back of the corpus lane's side seat, second seat (DS-ECO, DS-GEN, DS-SUP) — STOPPED at the chair's 16:45 mark (the chair, 16:00 UTC), the sweep's batch landed whole
 
 **Branch:** `lane/w2-write-side-13-2026-11-14`, read back from origin at the start: `6173c999c` (the brief's figure, no difference).
 Brief: `docs/chair/2026-11-14/briefs/BRIEF-W2-WRITE-SIDE-14.md` on the chair's lane (the chair session_01ACmDYZrFEVXyZEUg1NDxxC).
@@ -99,13 +99,14 @@ v2 -> v5 2, v4 -> v5 2. No state falls mute.
 |---|---|---|---|---|
 | DS-GEN-13 WAREHOUSES, COMMERCE: a bank | WAREHOUSES v2 109 -> 64, v5 0 -> 45 (all 45 besieged warehouse towns); bank v2 41 -> 35 | v2 + `no crisis: under_siege` (both); WAREHOUSES twin v5 | fba284bcf | corpusCureGuards WAREHOUSES v2 at w5-city-under_siege-1, bank v2 at w5-city-under_siege-104 (red on the base: "is eligible") |
 | DS-ECO-10 POSTURE: established | v7 33 -> 45, v8 21 -> 17, v9 21 -> 13 (12 besieged and starving towns) | v8 v9 + `no crisis: under_siege` | a89c224c6 | v8 at w5-town-under_siege+famine-2, v9 at w5-city-under_siege+famine-1 (red on the base) |
+| DS-ECO-11 EXPLOITATION: fullyExploited | v2 20 -> 18, v4 28 -> 26, v5 6 -> 10 (4 besieged towns) | v2 v4 + `no crisis: under_siege` (v4 drops `colour`) | 09b84f721 | v2 at w5-city-under_siege-6, v4 at w5-hamlet-under_siege-102 (red on the base) |
 
 ## New or changed lines (the owner's veto list, with the towns read)
 - DS-GEN-13 WAREHOUSES v5 (NEW, fba284bcf) `[ledger · crisis: under_siege]` "Since the siege began, nothing new has come in to be stored
   at {settlement}, and nothing stored there can be sent on." Prints on the Overview clipped: "Since the siege began, nothing new has
   come in to be stored at X." Read in w5-town-under_siege-3 Celotsy (the smallest it reaches: a town), w5-metropolis-under_siege-1
   Qal'atpatan (the largest), bar0-city-under_siege+famine-rand-1 Agiospolis (siege and famine).
-- Declarations only (text unchanged): WAREHOUSES v2, the bank v2 (+ `no crisis: under_siege`); DS-ECO-10 POSTURE established v8 v9 (+ `no crisis: under_siege`).
+- Declarations only (text unchanged): WAREHOUSES v2, the bank v2 (+ `no crisis: under_siege`); DS-ECO-10 POSTURE established v8 v9, DS-ECO-11 fullyExploited v2 v4 (+ `no crisis: under_siege`).
 
 ## THE INHERITORS READ
 - The bank v3 "Townsfolk at Vysokoin keep their savings at the bank ..." (w5-city-under_siege-104); v4 "A trader wanting credit at
@@ -133,10 +134,35 @@ v2 -> v5 2, v4 -> v5 2. No state falls mute.
   w5-city-under_siege-6).
 
 ## What is left (line by line, the brief's order)
-1. The sweep's batch: DS-GEN-13 LANDED (fba284bcf), DS-ECO-10 LANDED (a89c224c6); DS-ECO-11 fullyExploited v2 v4 next (measured, read: `sd.py eco11`; guards v2 at w5-city-under_siege-6, v4 at w5-hamlet-under_siege-102).
-2. The bar's rows: #275 entrepot (DS-ECO-10), #168 halls (DS-ECO-8 PROSPEROUS), #12 abandonment (DS-ECO-11 RESOURCE CONDITION),
-   #114 merchant guild where only a merchant oligarchy stands (DS-GEN-13 COMMERCE), #116 timber (find its pool). #39 is in the batch.
-3. The reader's rows still false; the slash label; the hand-back-13 list.
+THE SWEEP'S BATCH IS LANDED WHOLE: fba284bcf (DS-GEN-13), a89c224c6 (DS-ECO-10), 09b84f721 (DS-ECO-11); 67 draws moved, every
+inheritor read, 8 guard rows. Nothing of it is left as a patch. Rows read: all 129.
+1. DS-GEN-3's four declarations (R12, R64/R66, R74/R76, R87 with its owed siege twin, R125) and DS-GEN-7 R127: NAMED above, for
+   the day DS-GEN-3 / DS-GEN-7 are re-homed by a registry act (they print on no surface the render reads).
+2. THE BAR'S ROWS, NOT BEGUN (the chair, 16:00: not begun unless the batch is in; the batch went in at 16:20, too near the 16:45
+   stop to land one with its read): #275 DS-ECO-10 entrepot v1 v2 (87 of 89 drawn towns re-export nothing they import: reword to
+   transit; NAME `src/generators/economy/tradeGoods.js :: deriveIsEntrepot` for the join); #168 DS-ECO-8 PROSPEROUS v1 v2 v4 "halls"
+   (no hall atom: reword without halls; R93 R94 read the walls partition as true); #12 DS-ECO-11 RESOURCE CONDITION the abandonment
+   claim; #114 DS-GEN-13 COMMERCE merchant guild v1-v4 where only a merchant oligarchy stands (NAME `src/generators/priorityHelpers.js`
+   :: hasMerchantGuild); #116 the timber line beside a Sawmill (find its pool first). The chair's whole-population worklist
+   (economy.generated 85 flagged sentences, general.generated 22) supersedes the order for the next wave.
+3. SEEN, NOT CURED (pools that print nowhere, for the day they print): DS-ECO-2 FOOD deficit v1 "Food comes in from outside every
+   week" and v2 "which day the carts come" under a siege; DS-ECO-12 TRADE PROFILE v1 v2 "sends out and takes in" / "the same carts do
+   both" under a siege. In a printing pool, to read: DS-ECO-6 significant off-book v6 "Ask how to bring goods into X cheaply ... the
+   quieter way in" under a siege (smuggling: possibly true; not measured).
+4. Hand-back 13's list beyond the bar: the reader's rows (DS-ECO-9 DEFICIT v5, IMPORT-DEPENDENT v5 under a siege; DS-ECO-11
+   partiallyExploited v5 / unexploited v3; DS-ECO-12 CRITICAL IMPORT v1; DS-GEN-18 BOUGHT-IN v9), the slash label "gold/silver ore",
+   the sawmill partial-pool lines, the religious houses' pool, the presumed door's two economy.generated fresh hits.
+
+## How the instruments are re-made
+In `$S` (any scratch dir outside every tree): `git archive <tip> | tar -x -C base` (count files against `git ls-tree -r`),
+`node_modules` symlinked from a worktree after `npm ci`; W2-WRITE-5's `render.sh` + `render.w5.jsx` over `seeds-w5a.txt` + the ten
+`bar0-` seeds (names in sweep.525541b42.tsv) = 772 towns, 4 workers, ~45 minutes. W2-WRITE-13's `replay.mjs` (+ this seat's change:
+a NEW vid is eligible where its pool was reached and its declaration admits; `node replay2.mjs <tree> <render> x <baseTree> <out>`)
+and `moved.mjs`; `vtp.mjs` (the sweep's rows grouped by pool, every line of the pool printed once); `prints.mjs` (per pool and vid,
+towns whose owner page prints the drawn line); `sd.py` (the declarations and twins by unique text start, either source form);
+`things.mjs` (the registered things a sentence names: a new line that names a house with no factsOf getter goes fresh at the
+presumed door); `after.sh` (W2-WRITE-13's, local paths). The base fast set in an ARCHIVE reds 8 (the seven + "every exported
+sibling set ... is a channel", archive-only); in a git worktree the seven.
 
 ## The rulings this seat worked to
 BRIEF-W2-WRITE-SIDE-14 whole; copied: A TWIN TAKES ITS SIBLINGS' CONDITION, OR IS TRUE WITHOUT IT AND IS SAID SO. A RE-GATE READS THE
@@ -145,5 +171,8 @@ is answered by A TWIN TRUE IN THAT STATE. BATCH NOTHING AT THE PUSH: MEASURE as 
 NEEDS IN ORDER TO OPEN IS RE-TAKEN THROUGH ITS OWN DOOR, in its own commit; every other register stays NAMED to the close. UNDER A
 SIEGE NOTHING COMES IN OR GOES OUT BY ROAD, GATE OR WATER; UNDER A FAMINE NO LINE OFFERS THE FOOD THAT FAILED; A LINE THAT PRINTS
 CLIPPED SAYS ITS CRISIS BEFORE THE CLIP.
+THE CHAIR, 16:00 UTC (received 16:10): the program converges on the joined line; go on with the batch to 16:45, land pool by pool
+every pool measured and read; what is not landed stays a patch with its measures; the bar's six rows NOT begun unless the batch is
+in; hand-back current; stop at 16:45; one line with the tip.
 THIS SEAT'S CALL (vetoable): a sweep row whose pool PRINTS NOWHERE is read and NAMED, not declared: its line and its inheritor
 cannot be read where they print, and a declaration there moves no sentence a reader sees.
