@@ -86,9 +86,9 @@ export function settleStandingToRoster(powerStructure, annotated, force) {
   let moved = false;
   const next = factions.map((f) => {
     const name = String(f?.faction || '');
-    // COHERENCE-POWERS-7 (cold list REVIEW-W2A-3 #291): a density-law rival (`contestsNiche`) was minted as a copy of its
-    // host, its host's standing sentence included; it settles from that sentence to its own
-    const host = !before.get(name) && f?.contestsNiche ? String(f.contestsNiche) : null;
+    // COHERENCE-POWERS-7 (#291): a density-law rival is minted as a copy of its host, its host's standing sentence included;
+    // a power new to the roster whose description ends in another power's old sentence settles from it (POWERS-11: by desc)
+    const host = before.get(name) ? null : hostByStanding(String(f?.desc || ''), before);
     const old = before.get(name) || (host ? before.get(host) : undefined);
     const now = after.get(name);
     if (!old || !now || !old.standing || old.standing === now.standing) return f;
@@ -157,4 +157,19 @@ export function settleNarrativesToRoster(powerStructure, annotated) {
     return { ...row, narrative: MERCHANT_CRAFT_VOTE.sibling(merchants, craft) };
   });
   return moved ? { ...powerStructure, factionRelationships: next } : powerStructure;
+}
+
+/**
+ * The power whose old standing sentence a description ends in (or consists of): the host a density-law rival was minted
+ * from, read from the rival's own description, the settle's own test for a sentence at a description's end. Where
+ * several old sentences end it (two merchant powers share a closing sentence), the longest, the whole tail it carries.
+ * @param {string} desc @param {Map<string, { standing: string, rank: number }>} before @returns {string | null}
+ */
+function hostByStanding(desc, before) {
+  let host = null;
+  let best = 0;
+  for (const [name, { standing }] of before) {
+    if (standing && standing.length > best && (desc === standing || desc.endsWith(` ${standing}`))) { host = name; best = standing.length; }
+  }
+  return host;
 }
