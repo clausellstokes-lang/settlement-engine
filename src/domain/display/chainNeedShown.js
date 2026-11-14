@@ -30,6 +30,8 @@
 import { ACCESS_ONLY, liveInstitutionNames } from '../facts/institutions.js';
 import { houseDoesChainsWork, importsAsPrinted, needMetBy } from './tradeListDisplay.js';
 import { tradeStoppedHere } from './chainStateShown.js';
+import { filterDeclared, lineText } from '../facts/drawDeclared.js';
+import { factsOf } from '../facts/factsOf.js';
 
 /** The parts of a need label that are no good a cart or a ship brings in. */
 const NOT_BROUGHT = /\btrade access\b|\bcapital\b|\bharbou?r\b|\bwater power\b|\bknowledge\b|\bley lines?\b/i;
@@ -72,7 +74,14 @@ export function chainNeedLine(chain, record, first = true) {
   const svcs = listed(services, 'and'), Svcs = svcs.charAt(0).toUpperCase() + svcs.slice(1);
   const r = /** @type {{ name?: unknown, economicState?: { tradeAccess?: unknown } | null }} */ (record);
   const name = typeof r.name === 'string' && r.name ? r.name : 'the town';
-  if (tradeStoppedHere(record)) return `${Svcs} here depend on ${listed(goods, 'and')} from outside, which the siege has cut off.`;
+  if (tradeStoppedHere(record)) {
+    // W2-C-LEAVES-9 (the chair's ruling of 2026-11-14 05:28 (1)): the siege form names the siege, so it is DECLARED through
+    // the list door: it prints only where the vocabulary's own reader holds a siege in force (the same home
+    // `tradeStoppedHere` reads, `crisisOf`), byte-identical wherever it printed.
+    const [siege] = filterDeclared([{ text: `${Svcs} here depend on ${listed(goods, 'and')} from outside, which the siege has cut off.`,
+      needs: ['crisis: under_siege'] }], { facts: () => factsOf(/** @type {Parameters<typeof factsOf>[0]} */ (record)), poolId: 'chainNeedShown:siege', surface: 'economics', drawKind: 'A' });
+    return siege ? lineText(siege) : '';
+  }
   if (r.economicState?.tradeAccess === 'isolated') {
     return dep.severity === 'critical'
       ? `${Svcs} here run on stored ${listed(goods, 'and')}${first ? `: no trade road reaches ${name}` : ''}.`
