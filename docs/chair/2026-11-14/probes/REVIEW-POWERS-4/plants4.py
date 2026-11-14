@@ -62,6 +62,7 @@ def run(name):
     n = sum(1 for a in t['assertionResults'] if a['status'] == 'failed')
     if n or t['status'] == 'failed': red[os.path.relpath(t['name'], P)] = n
   return {'plant': name, 'exit': r.returncode, 'red': red, 'tests': j.get('numTotalTests'), 'failed': j.get('numFailedTests')}
+if os.environ.get('GUARDS'): GUARDS = os.environ['GUARDS'].split()
 names = sys.argv[1:] or list(PLANTS)
 res = [run(n) for n in names]
 for x in res: print(json.dumps(x))

@@ -1,0 +1,8 @@
+0
+exit 1
+generators/generationForkCensus.test.js | A1 — the instrument reaches the generator graph: mints split 4 direct  | AssertionError: the control row regenerated under both mocks: expected 'ffbd7cc0f6f3b69fd6a3046bacb2c6db512e5…' to be 'f4fc47a0ffe9036b899c2ce86a4fbb071857e…' // Object.is equality
+generators/generationForkCensus.test.js | A6 — the hash channel: 69 distinct pickVariant seeds, sixteen external | AssertionError: fnv1a32 EXTERNAL callers: expected 15 to be 16 // Object.is equality
+property/editCorpusRatchet.test.js | A3 no merged object mixes a taken leaf with a settled leaf outside a d | AssertionError: the instrument is not idle: expected 327 to be 332 // Object.is equality
+property/editCorpusRatchet.test.js | A7 the honesty figures are re-measured and the ride-along has its firs | AssertionError: the edits that DO reach a reading: expected [ 705, 275, 2167 ] to deeply equal [ 682, 269, 2181 ]
+
+[exited with code 0]

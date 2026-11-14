@@ -1,0 +1,32 @@
+{"plant": "none", "exit": 1, "red": {"tests/generators/people/mintedFaceUnderworld.test.js": 1}, "tests": 152, "failed": 1}
+{"plant": "alewife-male", "exit": 1, "red": {"tests/data/faceHonorifics.test.js": 1, "tests/data/faceHonorificsGender.test.js": 1, "tests/generators/people/mintedFaceUnderworld.test.js": 1}, "tests": 152, "failed": 3}
+{"plant": "midwife-first", "exit": 1, "red": {"tests/data/faceHonorificsGender.test.js": 1, "tests/data/midwifeHonorific.test.js": 2, "tests/generators/people/mintedFaceUnderworld.test.js": 1}, "tests": 152, "failed": 4}
+{"plant": "madam-male", "exit": 1, "red": {"tests/data/faceHonorificsGender.test.js": 1, "tests/generators/people/mintedFaceUnderworld.test.js": 1}, "tests": 152, "failed": 2}
+{"plant": "district-madam-male", "exit": 1, "red": {"tests/data/faceHonorificsGender.test.js": 1, "tests/generators/people/mintedFaceUnderworld.test.js": 1}, "tests": 152, "failed": 2}
+{"plant": "supply-siege-one", "exit": 1, "red": {"tests/data/goalChainWords.test.js": 1, "tests/generators/people/mintedFaceUnderworld.test.js": 1}, "tests": 152, "failed": 2}
+{"plant": "supply-famine-one", "exit": 1, "red": {"tests/data/goalChainWords.test.js": 2, "tests/generators/people/mintedFaceUnderworld.test.js": 1}, "tests": 152, "failed": 3}
+{"plant": "supply-chain-word", "exit": 1, "red": {"tests/data/goalChainWords.test.js": 1, "tests/generators/people/mintedFaceUnderworld.test.js": 1}, "tests": 152, "failed": 2}
+{"plant": "charter-refusal-off", "exit": 1, "red": {"tests/generators/people/goalCharterRefused.test.js": 1, "tests/generators/people/mintedFaceUnderworld.test.js": 1}, "tests": 152, "failed": 2}
+{"plant": "charter-crim-only", "exit": 1, "red": {"tests/generators/people/goalCharterRefused.test.js": 1, "tests/generators/people/mintedFaceUnderworld.test.js": 1}, "tests": 152, "failed": 2}
+{"plant": "charter-gov-only", "exit": 1, "red": {"tests/generators/people/goalCharterRefused.test.js": 1, "tests/generators/people/mintedFaceUnderworld.test.js": 1}, "tests": 152, "failed": 2}
+{"plant": "persons-some", "exit": 1, "red": {"tests/generators/people/mintedFaceUnderworld.test.js": 1, "tests/generators/people/personsHeldLines.test.js": 1}, "tests": 152, "failed": 2}
+{"plant": "persons-lanista-pres", "exit": 1, "red": {"tests/generators/people/mintedFaceUnderworld.test.js": 1, "tests/generators/people/personsHeldLines.test.js": 3}, "tests": 152, "failed": 4}
+{"plant": "persons-apprentice", "exit": 1, "red": {"tests/generators/people/mintedFaceUnderworld.test.js": 1, "tests/generators/people/personsHeldLines.test.js": 2}, "tests": 152, "failed": 3}
+{"plant": "under-military", "exit": 1, "red": {"tests/generators/npcStructureBody.test.js": 2, "tests/generators/people/mintedFaceUnderworld.test.js": 1}, "tests": 152, "failed": 3}
+{"plant": "body-off", "exit": 1, "red": {"tests/generators/npcStructureBody.test.js": 1, "tests/generators/people/mintedFaceUnderworld.test.js": 1, "tests/generators/people/mintedLordKeepsLines.test.js": 1}, "tests": 152, "failed": 3}
+{"plant": "body-noble-off", "exit": 1, "red": {"tests/generators/npcStructureBody.test.js": 1, "tests/generators/people/mintedFaceUnderworld.test.js": 1, "tests/generators/people/mintedLordKeepsLines.test.js": 1}, "tests": 152, "failed": 3}
+{"plant": "body-gov-off", "exit": 1, "red": {"tests/generators/npcStructureBody.test.js": 1, "tests/generators/people/mintedFaceUnderworld.test.js": 1}, "tests": 152, "failed": 2}
+{"plant": "merchant-rung-always-local", "exit": 1, "red": {"tests/generators/people/mintedFaceUnderworld.test.js": 1, "tests/generators/power/claimRungReadsRoster.test.js": 2}, "tests": 152, "failed": 3}
+{"plant": "noble-minor-unconditional", "exit": 1, "red": {"tests/generators/people/mintedFaceUnderworld.test.js": 1, "tests/generators/power/claimRungReadsRoster.test.js": 1}, "tests": 152, "failed": 2}
+{"plant": "noble-minor-competitive", "exit": 1, "red": {"tests/generators/people/mintedFaceUnderworld.test.js": 1, "tests/generators/power/claimRungReadsRoster.test.js": 1}, "tests": 152, "failed": 2}
+{"plant": "crim-council-unconditional", "exit": 1, "red": {"tests/generators/people/mintedFaceUnderworld.test.js": 1, "tests/generators/power/claimRungReadsRoster.test.js": 2}, "tests": 152, "failed": 3}
+{"plant": "major-church-off", "exit": 1, "red": {"tests/generators/people/mintedFaceUnderworld.test.js": 1, "tests/generators/power/claimRungsCommanding.test.js": 2}, "tests": 152, "failed": 3}
+{"plant": "ruling-class-off", "exit": 1, "red": {"tests/generators/people/mintedFaceUnderworld.test.js": 1, "tests/generators/power/claimRungsCommanding.test.js": 2}, "tests": 152, "failed": 3}
+{"plant": "army-watch-always", "exit": 1, "red": {"tests/generators/people/mintedFaceUnderworld.test.js": 1, "tests/generators/power/claimRungsCommanding.test.js": 1}, "tests": 152, "failed": 2}
+{"plant": "army-off", "exit": 1, "red": {"tests/generators/people/mintedFaceUnderworld.test.js": 1, "tests/generators/power/claimRungsCommanding.test.js": 2}, "tests": 152, "failed": 3}
+{"plant": "great-families-off", "exit": 1, "red": {"tests/generators/people/mintedFaceUnderworld.test.js": 1, "tests/generators/power/claimRungsCommanding.test.js": 2}, "tests": 152, "failed": 3}
+{"plant": "militarised-off", "exit": 1, "red": {"tests/generators/people/mintedFaceUnderworld.test.js": 1, "tests/generators/power/claimRungsCommanding.test.js": 2}, "tests": 152, "failed": 3}
+{"plant": "rung-roster-blind", "exit": 1, "red": {"tests/generators/people/mintedFaceUnderworld.test.js": 1, "tests/generators/power/claimRungsCommanding.test.js": 1}, "tests": 152, "failed": 2}
+{"plant": "sovereign-garrison", "exit": 1, "red": {"tests/generators/people/mintedFaceUnderworld.test.js": 1}, "tests": 152, "failed": 1}
+{"plant": "host-contests-only", "exit": 1, "red": {"tests/generators/people/mintedFaceUnderworld.test.js": 1}, "tests": 152, "failed": 1}
+{"plant": "host-off", "exit": 1, "red": {"tests/generators/people/mintedFaceUnderworld.test.js": 1, "tests/generators/power/standingAgainstFigure.test.js": 1}, "tests": 152, "failed": 2}

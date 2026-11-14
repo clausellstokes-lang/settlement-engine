@@ -13,3 +13,5 @@ Run from OUTSIDE every repository tree (copy out with `git archive`). Each probe
 - `fielddiff.mjs`: the earlier reader's REVIEW-POWERS-3 field diff, unchanged.
 - `plants4.py`: step 4's plants (run in a detached tip worktree used for nothing else).
 - `results/`: the outputs (`*.tip.*` at 3909655c3; `lines720.mid.json` at a5402c006 against the base; `fd.base-mid` = lane-only, `fd.mid-tip` = the merge).
+- `claims4.mjs`: the statement's headline counts at one tree (`TREE= CORPUS=`). `redclass4.mjs`: the named files' reds at the tip, the base and the line, classed.
+- `results/redclass4.txt`, `results/class.rerun.txt` (the two load timeouts, green alone), `results/plants*.summary.txt`, `results/c2.counts.{base,mid,tip}.txt`.
