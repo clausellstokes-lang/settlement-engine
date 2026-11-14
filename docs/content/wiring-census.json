@@ -5342,7 +5342,8 @@
       },
       "declares": [],
       "lineDeclares": {
-        "crisis: under_siege, wartime": 3,
+        "crisis: under_siege": 2,
+        "crisis: under_siege, wartime": 1,
         "no crisis: under_siege": 3,
         "no crisis: wartime": 3
       },

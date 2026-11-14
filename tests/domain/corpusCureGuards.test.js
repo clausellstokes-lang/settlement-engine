@@ -62,6 +62,8 @@ const GUARDS = [
   { seed: 'w5-city-under_siege-1', pool: 'DS-DEF-11::WALLED-STRAINED', vid: 3, why: 'a garrison: "had too few hands ... most of them are learning as they go" beside a standing garrison (LINES-READ, metropolis-under_siege-1; W2-WRITE-7 B, Tihono)' },
   { seed: 'w5-hamlet-occupied-104', pool: 'DS-DEF-11::WALLED-STRAINED', vid: 6, why: 'an occupation: "nobody in the town has the work of manning them" of defences the occupier holds (LINES-READ, thorp-24; W2-WRITE-7 B, Ulfås)' },
   { seed: 'w5-thorp-occupied-1', pool: 'DS-DEF-11::WALLED-STRAINED', vid: 7, why: 'an occupation: "the only people who would stand on them are the town\'s own" beside the occupiers\' troops (W2-WRITE-7 B, Shangou)' },
+  { seed: 'w5-village-wartime-1', pool: 'DS-DEF-5::NO organized force at all', vid: 4, why: 'a war with no front at the town: "the people defending it now are neighbours who stepped forward" where nobody attacks it (LINES-READ, hamlet-5, thorp-55; W2-WRITE-7 B, Nishidao)' },
+  { seed: 'w5-village-wartime-1', pool: 'DS-DEF-5::NO organized force at all', vid: 5, why: 'a war with no front at the town: "whoever leads the defence now is learning the work as the trouble goes on" (LINES-READ, hamlet-53; the sibling of v4, W2-WRITE-7 B, Nishidao)' },
 ];
 
 /** @param {string} seed */

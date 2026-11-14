@@ -48,7 +48,7 @@ seat itself; long runs never cross a turn's end, the suite in six shards; no pul
 | 14 | DS-DEF-3 COMPOUND: insurgency | v5 | struck (last row) | a17d14618 (sixth) | v2, v4 print, true |
 | 15 | DS-DEF-11 WALLED-STRAINED | v3 | declared `no soldiers`, the slot out | this seat | v4 prints where soldiers stand |
 | 16 | DS-DEF-11 WALLED-STRAINED | v7 | reworded, `no crisis: occupied` | this seat | v7 itself, read true in 22 towns |
-| 17 | DS-DEF-5 NO organized force at all | v4 | LEFT | | |
+| 17 | DS-DEF-5 NO organized force at all | v4 | declared off wartime (with v5) | this seat | under a war elsewhere v6 |
 | 18 | DS-DEF-8 override: ACTIVE SIEGE | v4 | struck (last row) | a17d14618 (sixth) | v1-v3 print, true |
 | 19 | DS-DEF-9 magicDependency true, with a NAMED dependent chain | v1 | LEFT | | |
 | 20 | DS-DEF-2 Invasion & War: neither walls nor force | v5 | declared off siege, occupation | 2d1832b7b (fifth) | |
@@ -68,7 +68,8 @@ Settled 17 (fifth seat 9, sixth seat 8); LEFT 10, and one style point (#27).
 | 0 | 7f4f3d339 | the table above | |
 | B #15, #26 | fe171885e | WALLED-STRAINED siege rows: v3 `no soldiers` (guard Tihono), v3 and v4 without `{defwork}` (the slot printed "palisade or earthworks" and broke agreement) | 62 STRAINED siege towns rendered: v3 at Prabhanagar (thorp 12), Hongguan, Zuuköl (siege+famine); v4 at Tihono, Hákonås (222,797), Belovich (thorp 5), Spitzplatz |
 | B #16, #21, #22 | 8c63fd2ed | WALLED-STRAINED v8 struck (last row); v6, v7 reworded without `{defwork}` (v6 printed it twice; v7 "pays anyone" and "stretched thin" beside volunteer militias), both `no crisis: occupied` (guards Ulfås, Shangou) | 50 STRAINED calm towns rendered: v7 at Tyrvik (thorp), Muulek (wartime), Loughbury (village 386, famine), 22 in all; v6 at Altgasse (plague), Beiguan (wartime), true in all 11 eligible |
-| B #11 | (this commit) | walls PRESENT v7 reworded: "Nothing closes the few ways through {settlement}'s wall, because it has no gate." (was contradicted by the guard line "The walls leave few ways in") | 64 towns rendered, drawn in 27: Tyrvik, Qaryatnagar (the reader's case, beside its guard line), Ulfås (occupied), Taipu (village 332) |
+| B #11 | 07f53f717 | walls PRESENT v7 reworded: "Nothing closes the few ways through {settlement}'s wall, because it has no gate." (was contradicted by the guard line "The walls leave few ways in") | 64 towns rendered, drawn in 27: Tyrvik, Qaryatnagar (the reader's case, beside its guard line), Ulfås (occupied), Taipu (village 332) |
+| B #17 | (this commit) | NO organized force at all v4, and v5 for the same fault, off a war with no front at the town (the `crisis: wartime` mark dropped; guards at Nishidao) | 53 towns rendered: v4 at Qaryatsaray (village 330), Goraino (siege+famine); v5 at Rundholz (thorp 7), Cnocton (village 185); wartime towns now print v6 (Nishidao, Nishitang, Varatala) |
 
 ## Named, not the corpus's (with the file)
 

@@ -4563,8 +4563,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "unfolding",
           "marks": [
-            "crisis: under_siege",
-            "crisis: wartime"
+            "crisis: under_siege"
           ],
           "text": "{settlement} kept no defenders of its own, and the people defending it now are neighbours who stepped forward when the trouble came.",
           "slots": [
@@ -4575,8 +4574,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "street",
           "marks": [
-            "crisis: under_siege",
-            "crisis: wartime"
+            "crisis: under_siege"
           ],
           "text": "There was never a force at {settlement}; whoever leads the defence now is learning the work as the trouble goes on.",
           "slots": [
