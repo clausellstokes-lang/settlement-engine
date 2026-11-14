@@ -1,0 +1,86 @@
+{"id":"C0005","town":"bar0-city-under_siege+famine-rand-1","sev":"LOW","kind":"LACKS","why":"'its house of worship' singular; HOUSES has 10-30 parish churches and multiple monasteries","other":""}
+{"id":"C0012","town":"bar0-city-under_siege+famine-rand-1","sev":"MED","kind":"STATE","why":"barrels of salt fish stacked for carts: plenty and outbound carting under siege and famine; salted fish is an import","other":""}
+{"id":"C0038","town":"bar0-city-under_siege+famine-rand-1","sev":"LOW","kind":"STATE","why":"market grew on 'the road's trade'; trade access is river and the town grew around a ferry crossing","other":""}
+{"id":"C0040","town":"bar0-city-under_siege+famine-rand-1","sev":"MED","kind":"STATE","why":"storing a cargo to sell when the price suits is ordinary trade; under siege nothing comes in (C0010, C0063)","other":"C0063"}
+{"id":"C0138","town":"bar0-city-under_siege+famine-rand-1","sev":"LOW","kind":"PAIR","why":"Defense readiness 'Adequate'; STATE defence is Well-Defended and C0031 says Well-defended","other":"C0031"}
+{"id":"C0194","town":"bar0-city-under_siege+famine-rand-1","sev":"MED","kind":"STATE","why":"a cousin arrives to stay; under siege gates are shut and nothing is let through (C0009-C0010)","other":"C0010"}
+{"id":"C0198","town":"bar0-city-under_siege+famine-rand-1","sev":"MED","kind":"STATE","why":"holding a parcel for a traveller; under siege no travellers come or go","other":"C0010"}
+{"id":"C0199","town":"bar0-city-under_siege+famine-rand-1","sev":"MED","kind":"STATE","why":"an unexpected shipment arrives at a warehouse; under siege nothing comes in by road, gate or water","other":"C0065"}
+{"id":"C0202","town":"bar0-city-under_siege+famine-rand-1","sev":"MED","kind":"STATE","why":"a load taken on the road; under siege no carts travel the roads","other":"C0065"}
+{"id":"C0224","town":"bar0-city-under_siege+famine-rand-1","sev":"MED","kind":"STATE","why":"a traveller passed through and was gone by morning; under siege gates are shut, nobody passes","other":"C0010"}
+{"id":"C0232","town":"bar0-city-under_siege+famine-rand-1","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"C0278","town":"bar0-city-under_siege+famine-rand-1","sev":"MED","kind":"STATE","why":"brewery brews for regional sale and is a heavy grain buyer; under siege nothing leaves, and grain has failed in famine","other":""}
+{"id":"C0423","town":"bar0-city-under_siege+famine-rand-1","sev":"LOW","kind":"LACKS","why":"garrison offers 'Mercenary hire'; DEFENCE lists hired: none","other":""}
+{"id":"C0069","town":"bar0-city-under_siege+famine-rand-1","sev":"LOW","kind":"PAIR","why":"Aikaterine Raoul 'leads the military'; she is Commander of the Watch, the garrison's captain is Alexandros Choniates","other":"C0420"}
+{"id":"C0442","town":"bar0-city-under_siege+famine-rand-1","sev":"MED","kind":"STATE","why":"barges run scheduled cargo and passenger runs along the river; under siege nothing moves by water","other":"C0065"}
+{"id":"C0452","town":"bar0-city-under_siege+famine-rand-1","sev":"MED","kind":"STATE","why":"caravan masters meet merchants to transact as usual; under siege no caravans come in or out","other":"C0065"}
+{"id":"C0470","town":"bar0-city-under_siege+famine-rand-1","sev":"MED","kind":"STATE","why":"coaches on a schedule and relay stabling; under siege no coaches travel, gates shut","other":"C0009"}
+{"id":"C0476","town":"bar0-city-under_siege+famine-rand-1","sev":"LOW","kind":"STATE","why":"levies charged on all trade in and out by road or harbour; under siege there is none","other":"C0063"}
+{"id":"C0089","town":"bar0-city-under_siege+famine-rand-1","sev":"LOW","kind":"PAIR","why":"'a granary'; HOUSES has City granaries and C0465 says multiple large grain stores","other":"C0465"}
+{"id":"C0481","town":"bar0-city-under_siege+famine-rand-1","sev":"MED","kind":"STATE","why":"daily markets offer fresh produce, trade that never closes; under famine and siege the food has failed","other":"C0252"}
+{"id":"C0490","town":"bar0-city-under_siege+famine-rand-1","sev":"MED","kind":"STATE","why":"morning's catch sold by weight; famine, siege, and TRADE says the local river fishery is exhausted","other":""}
+{"id":"C0494","town":"bar0-city-under_siege+famine-rand-1","sev":"LOW","kind":"STATE","why":"harbour master orders waterborne traffic and assigns berths; under siege nothing comes in by water","other":"C0065"}
+{"id":"C0503","town":"bar0-city-under_siege+famine-rand-1","sev":"LOW","kind":"STATE","why":"annual fairs of international merchants; under siege no merchants can arrive","other":"C0009"}
+{"id":"C0527","town":"bar0-city-under_siege+famine-rand-1","sev":"MED","kind":"STATE","why":"carts, beasts and walkers queue at the ferry; under siege the roads are closed (C0537)","other":"C0537"}
+{"id":"C0419","town":"bar0-city-under_siege+famine-rand-1","sev":"LOW","kind":"PAIR","why":"garrison 'kept by noble or crown'; city-state answers to no higher lord (C0555), ruled by council","other":"C0555"}
+{"id":"C0737","town":"bar0-city-under_siege+famine-rand-1","sev":"MED","kind":"STATE","why":"large-scale trading with merchants from distant regions, not marked impaired; under siege none arrive","other":"C0985"}
+{"id":"C0746","town":"bar0-city-under_siege+famine-rand-1","sev":"MED","kind":"STATE","why":"major livestock sales across all species, unimpaired; under siege and famine no herds come in","other":"C0985"}
+{"id":"C0786","town":"bar0-city-under_siege+famine-rand-1","sev":"MED","kind":"STATE","why":"bulk ale production unimpaired; famine with grain an unmet import, and brewing needs grain","other":"C0781"}
+{"id":"C0790","town":"bar0-city-under_siege+famine-rand-1","sev":"MED","kind":"STATE","why":"fish sold daily from the morning catch, unimpaired; famine, and TRADE says the river fishery is exhausted","other":""}
+{"id":"C0814","town":"bar0-city-under_siege+famine-rand-1","sev":"MED","kind":"STATE","why":"interment outside the gates; under siege the gates are shut and barred","other":"C0009"}
+{"id":"C0904","town":"bar0-city-under_siege+famine-rand-1","sev":"MED","kind":"STATE","why":"collection of import and export duties, unimpaired; the siege has stopped all trade (C0985)","other":"C0985"}
+{"id":"C0920","town":"bar0-city-under_siege+famine-rand-1","sev":"MED","kind":"STATE","why":"trade brokerage across regional markets, unimpaired; under siege trade has stopped (C0985)","other":"C0985"}
+{"id":"C0959","town":"bar0-city-under_siege+famine-rand-1","sev":"MED","kind":"STATE","why":"bulk cargo transport along rivers, unimpaired; under siege nothing moves by water","other":"C0985"}
+{"id":"C0963","town":"bar0-city-under_siege+famine-rand-1","sev":"MED","kind":"PAIR","why":"collect toll from all who cross, unimpaired; C0537 says the siege closed the roads and there are no tolls","other":"C0537"}
+{"id":"C0969","town":"bar0-city-under_siege+famine-rand-1","sev":"MED","kind":"STATE","why":"horses rented for journeys, unimpaired; C0967 says while the siege holds the roads none go out","other":"C0967"}
+{"id":"C0976","town":"bar0-city-under_siege+famine-rand-1","sev":"MED","kind":"STATE","why":"ferry carries foot travellers and goods, unimpaired; under siege no one travels","other":"C0537"}
+{"id":"C0044","town":"bar0-city-under_siege+famine-rand-1","sev":"LOW","kind":"PAIR","why":"shortfall ~6759 lbs/day; Food Security (C1021) gives 6,707 lbs/day short","other":"C1021"}
+{"id":"C1003","town":"bar0-city-under_siege+famine-rand-1","sev":"LOW","kind":"PAIR","why":"'earns most of its living from two or three trades'; C0980 says highly diversified, multiple major revenue streams","other":"C0980"}
+{"id":"C1026","town":"bar0-city-under_siege+famine-rand-1","sev":"LOW","kind":"STATE","why":"meals follow the season and what households put by: ordinary provisioning under active famine and siege","other":"C1024"}
+{"id":"C1029","town":"bar0-city-under_siege+famine-rand-1","sev":"MED","kind":"PAIR","why":"home-raised food all goes to fishing; C1225 says nobody fishes this year, the river fisheries are exhausted","other":"C1225"}
+{"id":"C1300","town":"bar0-city-under_siege+famine-rand-1","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"C1424","town":"bar0-city-under_siege+famine-rand-1","sev":"LOW","kind":"BROKEN","why":"subject-verb disagreement: 'The garrison and city watch keeps'","other":""}
+{"id":"C1426","town":"bar0-city-under_siege+famine-rand-1","sev":"MED","kind":"STATE","why":"everyone comes and goes by the gates; under siege the gates are shut and barred, and the city has docks besides","other":"C0009"}
+{"id":"C1452","town":"bar0-city-under_siege+famine-rand-1","sev":"LOW","kind":"PAIR","why":"'what is still harvested stretches it further'; same sentence says the siege took the fields, C1430 says field work stopped","other":"C1430"}
+{"id":"C1455","town":"bar0-city-under_siege+famine-rand-1","sev":"LOW","kind":"PAIR","why":"'the garrison keeps order'; C0129 says law and order collapsed, C1445 fines cannot be enforced","other":"C0129"}
+{"id":"C1504","town":"bar0-city-under_siege+famine-rand-1","sev":"LOW","kind":"PAIR","why":"garrison 'kept by noble or crown'; the sovereign city-state answers to no higher lord (C0555)","other":"C0555"}
+{"id":"C1562","town":"bar0-city-under_siege+famine-rand-1","sev":"LOW","kind":"PAIR","why":"shortfall ~6759 lbs/day; Food Security (C1021) gives 6,707 lbs/day","other":"C1021"}
+{"id":"C1773","town":"bar0-city-under_siege+famine-rand-1","sev":"MED","kind":"STATE","why":"knows every rider who came and went this month; C1516 says nothing has come through the gates since the siege began","other":"C1516"}
+{"id":"C1801","town":"bar0-city-under_siege+famine-rand-1","sev":"LOW","kind":"STATE","why":"toll-keeper knows who has passed and when; C0537 says the siege closed the roads and none cross","other":"C0537"}
+{"id":"C1886","town":"bar0-city-under_siege+famine-rand-1","sev":"MED","kind":"STATE","why":"their family left last week; under siege the gates are shut and nothing has gone through (C1516)","other":"C1516"}
+{"id":"C1925","town":"bar0-city-under_siege+famine-rand-1","sev":"LOW","kind":"PAIR","why":"reports to 'the regional authority'; the sovereign city-state answers to no higher lord (C0555)","other":"C0555"}
+{"id":"C2090","town":"bar0-city-under_siege+famine-rand-1","sev":"LOW","kind":"PAIR","why":"'paid Petros Iasites's bail'; C1526 says courts without detention, fines and exile only","other":"C1526"}
+{"id":"C2327","town":"bar0-city-under_siege+famine-rand-1","sev":"LOW","kind":"LACKS","why":"'its house of worship' singular; HOUSES has 10-30 parish churches and multiple monasteries","other":"C0005"}
+{"id":"C2330","town":"bar0-city-under_siege+famine-rand-1","sev":"LOW","kind":"PAIR","why":"shortfall ~6759 lbs/day; Food Security (C1021) gives 6,707 lbs/day","other":"C1021"}
+{"id":"C2409","town":"bar0-city-under_siege+famine-rand-1","sev":"LOW","kind":"PAIR","why":"'a granary'; HOUSES has City granaries and C0465 says multiple large grain stores","other":"C0465"}
+{"id":"C2413","town":"bar0-city-under_siege+famine-rand-1","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"HEADER","town":"bar0-city-wartime-rand-1","sev":"MED","kind":"RECORD","why":"TRADE makes ship construction, ocean-going vessels, river barges, potions and reagents; HOUSES has no shipyard, boatyard or alchemist","other":""}
+{"id":"HEADER","town":"bar0-city-wartime-rand-1","sev":"LOW","kind":"RECORD","why":"founded by a military command civilians followed, yet grew because a retired navigator drew followers: two origins","other":""}
+{"id":"C2457","town":"bar0-city-wartime-rand-1","sev":"MED","kind":"LACKS","why":"names the town's merchant guild; HOUSES has no merchant guild (only craft guilds; the power is a merchant oligarchy)","other":""}
+{"id":"C2490","town":"bar0-city-wartime-rand-1","sev":"LOW","kind":"PAIR","why":"Zuhuy Tun 'leads the military'; Zuhuy Tun is Commander of the Watch, the garrison's captain is Malinalxochitl Kab","other":"C2664"}
+{"id":"C2505","town":"bar0-city-wartime-rand-1","sev":"LOW","kind":"PAIR","why":"'a granary'; HOUSES has City granaries and C2679 says several large grain stores","other":"C2679"}
+{"id":"C2520","town":"bar0-city-wartime-rand-1","sev":"LOW","kind":"PAIR","why":"Labor capacity Adequate; C2434 says conscription hollowed out the skilled workforce, C2484 a third of working men taken","other":"C2434"}
+{"id":"C2964","town":"bar0-city-wartime-rand-1","sev":"LOW","kind":"PAIR","why":"'earns most of its living from two or three trades'; C2945 says highly diversified, multiple major revenue streams","other":"C2945"}
+{"id":"C3009","town":"bar0-city-wartime-rand-1","sev":"MED","kind":"PAIR","why":"intensive plots, terraces and raised fields; C2966 says the country produces no grain, C3013 little food but fishing","other":"C3013"}
+{"id":"C3007","town":"bar0-city-wartime-rand-1","sev":"LOW","kind":"PAIR","why":"'a granary'; HOUSES has City granaries and C2679 says several large grain stores","other":"C2679"}
+{"id":"C3416","town":"bar0-city-wartime-rand-1","sev":"LOW","kind":"PAIR","why":"a prisoner died 'in the cells'; C3334 says courts without detention, C3253 nowhere to hold the guilty","other":"C3334"}
+{"id":"C3270","town":"bar0-city-wartime-rand-1","sev":"LOW","kind":"PAIR","why":"fines cannot be enforced; C2529 rates Law & order Adequate with a professional watch","other":"C2529"}
+{"id":"C3321","town":"bar0-city-wartime-rand-1","sev":"LOW","kind":"PAIR","why":"every arrival goes through a gate; port city whose sea approaches any vessel may use (C3342)","other":"C3342"}
+{"id":"C3324","town":"bar0-city-wartime-rand-1","sev":"LOW","kind":"PAIR","why":"'retains no specialists'; C3327 says the wizard's tower answers threats beyond ordinary defences","other":"C3327"}
+{"id":"C3662","town":"bar0-city-wartime-rand-1","sev":"LOW","kind":"PAIR","why":"Acamapichtli Moo learned the work at Cuauhtemoc Kin's side; C3596 says Acna Lahun taught Acamapichtli Moo everything","other":"C3596"}
+{"id":"C3699","town":"bar0-city-wartime-rand-1","sev":"LOW","kind":"PAIR","why":"'paid Jaguar Claw Kin's bail'; C3334 says courts without detention, fines and exile only","other":"C3334"}
+{"id":"C3792","town":"bar0-city-wartime-rand-1","sev":"MED","kind":"PAIR","why":"'founded for trade and quiet growth'; FOUNDING says a military command built fortifications (C3789), early trial piracy","other":"C3789"}
+{"id":"C3862","town":"bar0-city-wartime-rand-1","sev":"LOW","kind":"PAIR","why":"'a granary'; HOUSES has City granaries and C2679 says several large grain stores","other":"C2679"}
+{"id":"HEADER","town":"bar0-hamlet-calm-rand-1","sev":"MED","kind":"RECORD","why":"isolated hamlet of 87 makes gems and coal with no mine, religious services with only access to a church, hospitality with no inn","other":""}
+{"id":"C3877","town":"bar0-hamlet-calm-rand-1","sev":"LOW","kind":"STATE","why":"seen as smoke on the horizon a long way off; terrain is Forest, no open view","other":""}
+{"id":"C3999","town":"bar0-hamlet-calm-rand-1","sev":"LOW","kind":"PAIR","why":"output 57/100 for a struggling subsistence hamlet; C3896 Economic Resilience Critical, C4133 cannot fund anything","other":"C3896"}
+{"id":"C4039","town":"bar0-hamlet-calm-rand-1","sev":"LOW","kind":"LACKS","why":"Pilgrimage & Holy Sites flow; isolated hamlet of 87 with no house of worship of its own, only access to one","other":""}
+{"id":"C4101","town":"bar0-hamlet-calm-rand-1","sev":"MED","kind":"PAIR","why":"people follow the elders out of respect and custom; legitimacy is Legitimacy Crisis, C4075 few accept their right to rule","other":"C4075"}
+{"id":"C4131","town":"bar0-hamlet-calm-rand-1","sev":"LOW","kind":"PAIR","why":"order kept by whoever is armed, and nothing keeps it after; C4139 says the place keeps order well enough by itself","other":"C4139"}
+{"id":"C4178","town":"bar0-hamlet-calm-rand-1","sev":"LOW","kind":"PAIR","why":"would go on 'more slowly and less comfortably' without magic; reliance on magic None, every role absent (C4173-C4176)","other":"C4172"}
+{"id":"C4184","town":"bar0-hamlet-calm-rand-1","sev":"LOW","kind":"PAIR","why":"what it raises covers an ordinary year; food short 6 lbs/day (C4023), C4180 says its land does not grow enough","other":"C4180"}
+{"id":"C3903","town":"bar0-hamlet-calm-rand-1","sev":"LOW","kind":"LACKS","why":"official corruption resisted by powerful figures; hamlet of 87, one power with one member, few hold office (C3900)","other":"C3900"}
+{"id":"C4223","town":"bar0-hamlet-calm-rand-1","sev":"LOW","kind":"LACKS","why":"official corruption resisted by powerful figures; hamlet of 87, one power with one member, few hold office (C3900)","other":"C3900"}
+{"id":"C4267","town":"bar0-hamlet-calm-rand-1","sev":"LOW","kind":"LACKS","why":"corruption 'goes higher'; the only power is an Elder Council of one member (C4099), nothing higher","other":"C4099"}
+{"id":"C3942","town":"bar0-hamlet-calm-rand-1","sev":"LOW","kind":"LACKS","why":"corruption goes higher than suspected; the only power is an Elder Council of one member (C4099), nothing higher","other":"C4099"}
+{"id":"DONE","lines":4355,"blocks":3,"flags":85}
