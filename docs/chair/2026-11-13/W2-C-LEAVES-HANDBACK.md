@@ -1200,5 +1200,50 @@ covers" is retired by this ruling (the pin re-keyed, not loosened: it now assert
   `node scripts/wiring-census.mjs --check` exit 0 (856 pools / 2779 variants / 165 relation rows, 7 stamped files).
   Nothing left to move.
 
+## Step 6: the line's merge and section 2m's checks (EXECUTED)
+- THE MERGE baa4b707d: lane/integration-2026-11-07 at 976db5b19 (read back 04:53 UTC), plain, into 8c5e90ff6; full
+  history; bases 817980b33 and 69b53decd. 11 conflicted files, exactly the chair's list. goods.schema.js by hand (each
+  side's one roster row stands; tests/joins/goods.test.js green); wiring-census.json from the line, re-derived by its
+  script (producerIndexFiles 1345 -> 1349), --check 0; phoneChromeFloor.census.test.js from the line, its three rows
+  re-measured by the census on the merged tree (620 / 863 / 665: the lane's +1, -3, and 56f73d7ec's -1 never recorded
+  before), green; the edge bundles from the line here, re-derived alone and last.
+- 2m's doors at baa4b707d, then cured:
+  · observed shapes: refused (journalPages.js NEW economicState on raw; viewModelBodySlices.js OVER on seven legacy
+    keys): CURED 10755758f, the door exit 0.
+  · fact layers: 2 RISES (EconomicsTab.jsx carriersOf, docks: the home's reader through an inline cast): CURED
+    0b49820c9, 0 rises 0 falls.
+  · writer reach: 1 stale bank member (resourceActive on activeChains, lit by this lane): folded out by --write
+    3598a6d5f (cohort 1378 -> 1377); the check exit 0; writerReach.walker 52 green.
+  · presumed things: REFUSED, NOT CURED: A STOP TO THE CHAIR (below).
+  · page census (the 720, --workers=2): running at 3598a6d5f.
+
+## STOP: the presumed-things door at baa4b707d (and unchanged by the three cures), its output verbatim
+```
+fresh	src/domain/display/chainNeedShown.js	siege	5d34d3194b63134f	" from outside, which the siege has cut off."
+fresh	src/domain/display/tradeListDisplay.js	bank	93b4989065b31dd8	"international banking services"
+fresh	src/domain/display/tradeListDisplay.js	market	f6c2f8cec0187fcb	"magical item market"
+fresh	src/domain/facts/chainWorking.js	house: citadel	df8280f77558896a	"a palisade, walls, gates or a citadel use dressed stone; they do not quarry or dress it (r2r-village-56, r2s-succession_"
+fresh	src/domain/facts/chainWorking.js	house: brickmaker	63592c0db4446373	"a brickmaker fires clay; it does not quarry stone (the Stone & Construction chain held by a Brickmaker alone)"
+fresh	src/domain/facts/chainWorking.js	clergy	697bb550bc4724e5	"clergy at the hot springs heal and receive pilgrims; they do not gather the herbs (r2r-village-38, r2r-town-43)"
+fresh	src/domain/facts/chainWorking.js	house: apothecary	5f13a446df156d67	"an apothecary's house works the medicinal herbs of the town's own ground into its remedies; the chain model takes the he"
+fresh	src/domain/facts/chainWorking.js	house: charcoal burner	60efc472006085e4	"a charcoal burner cuts and burns the wood of the town's own forest in its kilns (the catalogue: \"Operates kilns in nearb"
+fresh	src/domain/facts/chainWorking.js	war	60efc472006085e4	"a charcoal burner cuts and burns the wood of the town's own forest in its kilns (the catalogue: \"Operates kilns in nearb"
+fresh	src/domain/facts/chainWorking.js	house: carpenter	60efc472006085e4	"a charcoal burner cuts and burns the wood of the town's own forest in its kilns (the catalogue: \"Operates kilns in nearb"
+fresh	src/domain/facts/chainWorking.js	house: sawmill	60efc472006085e4	"a charcoal burner cuts and burns the wood of the town's own forest in its kilns (the catalogue: \"Operates kilns in nearb"
+fresh 11 · stale 0 · first-register stale 0 · banked 4720 · strips fresh 0 stale 0 banked 107
+```
+Read (PLAUSIBLE, from code; not cured, nothing banked): the chainWorking.js rows are the `cause` fields of
+NOT_WORKED_THROUGH / WORKED_BY_HOUSE, documentation strings no surface prints; the two tradeListDisplay.js rows are
+matchers of import names that are no goods ("international banking services", "magical item market"); the
+chainNeedShown.js row prints only under a siege in force (tradeStoppedHere). With them, 2m part (3)'s two rows banked
+against this lane (defenseDisplay.js: siege "under siege the outlying fields would be lost"; streets, the crime desk's
+ring line; `after-base: leaves-3`) are still banked: their cure (a declaration a draw door enforces, or a rewording,
+then --check stale, --shrink) is not made. `--bank` refuses every one (written after the widening's base).
+RECOMMENDATION: the printed three (chainNeedShown's siege line and the two defenseDisplay rows) declared through
+`filterDeclared` with their crisis atoms, by this seat or the next; the eight unprinted literals ruled by the chair
+(their home is a comment, or the walker's not-printed site list, which no lane may widen).
+
 ## STATUS (kept current)
-- Item 1 DONE a2eaf6a6a. Time-box closed after it. Row 5 DONE (verified, nothing moved). Next: the line's merge.
+- Item 1 DONE a2eaf6a6a. Time-box closed after it. Row 5 DONE (verified, nothing moved). The line's merge DONE
+  baa4b707d; 2m: three doors cured (10755758f, 0b49820c9, 3598a6d5f); presumed things STOPPED (above); page census
+  running. Count by this seat's estimate about 280,000 (get_session stale at 205,055 inside a turn).
