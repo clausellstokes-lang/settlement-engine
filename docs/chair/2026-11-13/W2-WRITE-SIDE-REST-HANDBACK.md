@@ -1,7 +1,7 @@
 # W2-WRITE-SIDE-REST: the side seat's hand-back (DS-POW, DS-GEN, DS-SUP, DS-STR, DS-WAR, DS-FTH, DS-REL, DS-POP, DS-CND, DS-HK)
 
 **Branch:** `lane/w2-write-side-rest-2026-11-13`, cut from the lane at `dcd4759b0` (code tip `d56c896f8`; both read back from origin at the start, no difference). Scratch worktree on local branch `wsr`; pushed by `push.sh` (refs and local config of the main checkout compared at every push: the same every time; the main checkout's status stayed empty).
-**Status: B DONE AND PUSHED (code tip `4a124b1c7`). C, D, E and F are not begun: the turn ends here for the chair's word.** This file is kept current after every part.
+**Status: B and C DONE AND PUSHED (code tip `bc81c24f8`). D begun with its HIGH rows (state below); D's rest, E and F are left for a successor seat (the chair's word of 00:36 UTC: a second seat takes the rest of D and E from this file).** This file is kept current after every commit.
 
 ## The rulings this seat works to (the chair's messages are not on the branch)
 The brief W2-WRITE-SIDE-REST (the chair, session_01FE9mEws7PXYRYdjQPbSX15, 2026-11-13), in substance. **Blocks:** every `### DS-` section except DS-DEF and DS-ECO; no text of those two changes. **Order:** B (the 16 lines of the strike table in my blocks) · C (the fourth seat's unreviewed rewordings in my blocks: W2-WRITE-HANDBACK-4 items 4 and 5, 30895bb67) · D (round three's rest in general, power, stressors, warFaith; the siege Overview road lines; MARKET-OPEN v3 in hamlets) · E (the increment's rows in my files, the measuring seat's candidates; for every pool touched, all its firing variants read; a line whose writer is not the corpus is named and left; #ww-468 is another lane's) · F (census2.sh on my generated files, every hit read, the count per kind at dcd4759b0 and at the tip). **The two notes:** (i) the crown named in self-governing wartime towns (sovereignty is PARKED: declare off by a registered condition if one exists, else list each line with three towns); (ii) seven faith pools that name a church or a temple wait for another lane's faith reading: named below, not touched. **The method** (record 386): read where it prints in three towns of the pool's cells, a siege, famine or occupation among them, the smallest and the largest tier; a twin carries its siblings' conditions; a line naming a house, role, force, good or place reads the record through a registered condition, and a slot never prints a catalogue label or breaks agreement; no line says how the model works; a line that cannot be made true is not written, and a line true somewhere is declared off where false; every disqualifier cure has a guard row, red first. **The calls the chair accepts:** a middle row is never struck (reworded or declared); only a pool's last rows are struck; the under-claim debt rises through its own door. **RULED:** parked rows stay parked; never "at peace" of a fighting town; a force is a garrison, a militia, a watch or a contracted company; under a siege nothing comes in or goes out by road; the size words; a power's rank word agrees with its label; plain words; no new key, no shape change, no draw added or moved. **Never:** another branch, `--no-verify`, a force push, an empty push, a pull request, master, a golden's door, a deploy, a hosted database. **Messages:** notifications after every commit; to the chair only for a stop that blocks everything, when B is pushed (one line), and for the hand-back (150 words); the turn ends after every part.
@@ -51,5 +51,44 @@ What prints after, by pool: crimeIsGovt v2, v3, v4 as before (no draw moved). AD
 - DS-GEN-18 BOUGHT-IN v8 "carts" at a port or an isolated village (the read's LOW; E).
 - The seven faith pools that name a church or a temple (note ii), as I read them; NOT touched: DS-FTH-4 `FLAG: crusaderSynthesis`, `FLAG: heresySuppression: hunted`, `FLAG: heresySuppression: preached`, `FLAG: religiousFraud`, `FLAG: mageTheocracy`, `ENDOWED`, and DS-GEN-17 `GREAT HOUSE: cathedral`.
 
-## C, D, E, F
-Not begun.
+## C: the fourth seat's unreviewed rewordings in my blocks (DONE)
+W2-WRITE-HANDBACK-4 items 4 and 5 and 30895bb67 name one line in my blocks: #1033 DS-GEN-17 GARRISONED v1 (1bbf89408). Re-read in the pool's cells (155 of the 762 births, village to metropolis): true beside a watch or garrison in calm, siege and famine towns; FALSE under an occupation ("The metropolis keeps people under arms for its defence" beside "nothing it decides stands until the occupiers agree"), and v2 the same way ("the money is found every season" beside "The occupiers take the revenue"). **Cured: v1 and v2 DECLARED `no crisis: occupied`** (bc81c24f8), guard rows `w5-metropolis-occupied-101` (v1) and `w5-city-occupied-101` (v2), red first, executed. The undeclared-lines register moved through its door (`RETAKE_DECLARATION_REGISTERS=1`: DS-GEN-17::GARRISONED gone). What prints after: GARRISONED silent in an occupied town, as before elsewhere. Found, for E: v2's "the money is found every season" in an indebted town.
+
+## D: round three's rest in my blocks (ROUND-3-CUT.json; 30 rows whose writer is power, general, stressors or warFaith)
+HIGH rows: #1075 DS-POW-5 FLAG: merchantArmy v2 (rr2s-city-occupied-rand-1); #514 DS-GEN-13 MARKET-OPEN v1 under a plague (the fourth seat's d24721b0c: v1, v2 `no crisis: plague_onset`; to be read again); #369 DS-GEN-18 STALLED v2 (the fifth seat's 329a77963). State of each: see the table "D's HIGH rows" below when filled.
+
+The MEDIUM rows by pool, the widest first (the cut's status at its own tip in brackets; "cured on a lane" rows are to be read at this tip, not re-cured):
+- DS-GEN-18 STALLED v2: #451, #556, #631, #706, #933, #1060, #1258 (cured on a lane: 329a77963 took the house out), #803 (no lane removes it; the same line, read again)
+- DS-GEN-18 BOUGHT-IN: v5 #134, #220 (reworded, still false: "unloading a cart" in a hamlet), v6 #177 (cured on a lane)
+- DS-GEN-13 MARKET-OPEN v2 #396 (cured on a lane); NO-MARKET v3 #151 (cured on a lane); COMMERCE a merchant guild, no bank v4 #861 (siege with famine)
+- DS-GEN-17 GARRISONED v1 #301 (not at the line tip), #515 (a plague town; v1 re-said by 1bbf89408, and C above); ADMINISTERED v1 #492 (reworded, still false)
+- DS-GEN-14 FOUNDED-YOUNG v3 #489 (a siege)
+- DS-POW-5 council v4 #72, #100 (thorps); FLAG: merchantArmy v2 #1075 HIGH
+- DS-POW-4 riskLabel: Contested v3 #1076 (an occupation)
+- DS-POW-6 operation role duty evasion v1 #564 (a plague town)
+- DS-POW-1 #1316 ("Public legitimacyCritical": a label run together, likely not the corpus's, like #ww-468)
+- DS-CND-1 DIRECTION: worsening, CRISIS: famine v2 #753
+- DS-STR-2 ORIGIN: temple_putsch v3 #79 (not at the line tip)
+- DS-WAR-5 aftermath siege_lifted v2 #1311; occupation unstable v3 #1169 ("The garrison and city watch exists on paper": a slot or a label)
+With them the fifth seat's found lines: the siege Overview road lines (DS-GEN-13 COMMERCE: a bank v1, WAREHOUSES, the guild newcomer: round two's #212) and MARKET-OPEN v3 in two hamlets (a size word).
+
+## E: the newly found lines in my blocks (ROUND-3-CUT-INCREMENT.json, class NEW: 29 rows), by pool, widest first
+- DS-POW-5 › council: ww#42 v2, ww#79 v3, ww#796 v1, ww#1433 v1, pf#75 v2, pf#91 v1, pf#220 v3, pf#569 v3
+- DS-POW-4 › riskLabel: Contested: ww#437 v1, ww#1050 HIGH v1, ww#1193 v1, pf#148 v1, pf#674 v1
+- DS-POW-6 › capture pressure ADVANCING (weak security, poor prosperity): pf#149 v2, pf#165 v3, pf#656 v1
+- DS-GEN-16 › LEGACY-UNRESOLVED: ww#56 v1, ww#316 v2
+- DS-GEN-13 › NO-MARKET: ww#248 v3
+-  › DS-POW-1: ww#468 HIGH v1
+- DS-GEN-13 › COMMERCE: a bank: ww#600 v1
+- DS-GEN-13 › COMMERCE: craft guilds, no merchant guild: ww#674 v1
+- DS-GEN-17 › GARRISONED: ww#824 v2
+- DS-GEN-13 › WAREHOUSES: ww#1071 HIGH v3
+- DS-POW-4 › riskLabel: Holding: pf#181 v3
+- DS-WAR-5 › a stream: true treaty term (the installment shape): pf#504 v3
+- DS-POW-5 › theocracy: pf#589 v3
+- DS-POW-6 › capture reached an AGENT of a faction: pf#675 v1
+- DS-POW-6 › capture pressure RECOVERING (strong security, prosperity): pf#784 v1
+With them the measuring seat's candidates: DS-POW-6 duty evasion v3; DS-GEN-13 COMMERCE "a market, no guild" v2, v3. For every pool touched, all its firing variants. #ww-468 (DS-POW-1, "Legitimacy crisismajorcatastrophic") is another lane's. The two notes from other lanes (the crown in self-governing wartime towns; the seven faith pools above) are E's too.
+
+## F
+Not begun: census2.sh on power, general, stressors, warFaith (and economy for DS-SUP-2's two lines), at dcd4759b0 and at the tip.
