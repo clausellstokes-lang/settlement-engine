@@ -297,21 +297,16 @@ export function resourcesSlice(active) {
       const shown = item && typeof item === 'object' ? shownOf.get(item) : null;
       if (typeof item === 'string') {
         if (item) chainRows.push({ resource: item, status: which, processing: null, output: null });
-      } else if (shown && shown.stage !== which) {
-        const resource = item?.rawResource || item?.resource || item?.chainKey || item?.name || '';
-        if (!resource) continue;
-        chainRows.push({
-          resource,
-          status: shown.stage,
-          processing: null,
-          output: null,
-          chainStatus: null,
-          quality: item?.quality || null,
-          accessibility: item?.accessibility || null,
-        });
       } else if (item) {
         const resource = item?.rawResource || item?.resource || item?.chainKey || item?.name || '';
         if (!resource) continue;
+        // W2-C-LEAVES-8 (the observed-shape readers after the line's merge): each legacy key of the persisted entry is
+        // read once, for both rows below.
+        const quality = item?.quality || null, accessibility = item?.accessibility || null, houses = item?.processingInstitutions || [];
+        if (shown && shown.stage !== which) {
+          chainRows.push({ resource, status: shown.stage, processing: null, output: null, chainStatus: null, quality, accessibility });
+          continue;
+        }
         chainRows.push({
           resource,
           status: which,
@@ -323,14 +318,14 @@ export function resourcesSlice(active) {
           // W2-C-LEAVES-SIDE (the twin of #452; the processing column only): an Unexploited row names only the houses the
           // live roster does not hold, by the reader the tab's "Needs:" line reads (validationOnPage.js :: housesStillNeeded).
           processing: which === 'unexploited'
-            ? housesStillNeeded(s, item?.processingInstitutions).map((n) => institutionDisplayName(n) || n).join(', ') || null
+            ? housesStillNeeded(s, houses).map((n) => institutionDisplayName(n) || n).join(', ') || null
             : institutionDisplayName(item?.processing) || institutionDisplayName(item?.institution) ||
-                      (item?.processingInstitutions || []).map((n) => institutionDisplayName(n) || n).join(', ') || null,
+                      houses.map((n) => institutionDisplayName(n) || n).join(', ') || null,
           output: item?.output || item?.product ||
                   (item?.finalProducts || item?.outputs || []).join(', ') || null,
           chainStatus: item?.chainStatus || null,
-          quality: item?.quality || null,
-          accessibility: item?.accessibility || null,
+          quality,
+          accessibility,
         });
       }
     }

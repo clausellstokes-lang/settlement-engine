@@ -309,9 +309,9 @@ function institutionsPage(vm) {
   );
 }
 
-function economicsPage(vm) {
+function economicsPage(vm, settlement = vm.raw) { // W2-C-LEAVES-8: the settlement handed in (tonightPage's idiom), not read off vm.raw
   const e = vm.economics;
-  const fb = e.foodBalance || {}; const trade = tradeListsAsPrinted(vm.raw); // W2-C-LEAVES-7 item 8: the tab's lists (a siege that stops trade: no Imports row)
+  const fb = e.foodBalance || {}; const trade = tradeListsAsPrinted(settlement); // W2-C-LEAVES-7 item 8: the tab's lists (a siege that stops trade: no Imports row)
   return md(
     lede(economicsHeadline(e)),
     '',
@@ -328,7 +328,7 @@ function economicsPage(vm) {
     // CENSUS-3c (R-P 2): the revenues that left the trade lists, where the record holds their fact.
     revenuesOffTheLists(vm.raw).length ? kv('Also earned (no share recorded)', revenuesOffTheLists(vm.raw).map((r) => r.text).join(', ')) : null,
     // W2-C-LEAVES-7 item 9: the state the tab's card prints (chainStateShown.js :: chainAsShown; none: no state written).
-    (e.chains || []).length ? md('', '## Supply chains', e.chains.map((c, i) => { const st = vm.raw?.economicState?.activeChains?.[i] ? String(chainAsShown(vm.raw.economicState.activeChains[i], vm.raw).status ?? '') : c.status;
+    (e.chains || []).length ? md('', '## Supply chains', e.chains.map((c, i) => { const rec = settlement?.economicState?.activeChains?.[i]; const st = rec ? String(chainAsShown(rec, settlement).status ?? '') : c.status;
       return `- **${esc(c.name)}**${st ? ` *(${esc(st.replace(/_/g, ' '))})*` : ''}${c.description ? `: ${esc(c.description)}` : ''}`; })) : null,
   );
 }
@@ -527,7 +527,7 @@ export function buildJournalPages(vm, { variant = 'canon_dossier', faithUnlocked
   if (inc('identityDailyLife'))   push('Identity & Daily Life', identityPage(vm, settlement));
   if (inc('services'))            push('Services', servicesPage(vm));
   if (inc('institutions'))        push('Institutions', institutionsPage(vm));
-  if (inc('economicsTrade'))      push('Economics & Trade', economicsPage(vm));
+  if (inc('economicsTrade'))      push('Economics & Trade', economicsPage(vm, settlement));
   if (inc('resourcesProduction')) push('Resources & Production', resourcesPage(vm));
   if (inc('defenseSecurity'))     push('Defense & Security', defensePage(vm));
   if (inc('historyFounding'))     push('History & Founding', historyPage(vm));
