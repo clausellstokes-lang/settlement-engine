@@ -1,6 +1,6 @@
 # W2-FIX-DATA-12: the data lane goes on curing (kept current after every item)
 
-**State: WORKING.** Items 1 and 2 DONE (pushed). Every figure EXECUTED unless marked PLAUSIBLE.
+**State: WORKING.** Items 1 and 2 DONE; the chair's 10:57 HIGH rows DONE (pushed). Every figure EXECUTED unless marked PLAUSIBLE.
 
 **Seat.** The twelfth seat on `lane/w2-fix-data-2026-11-13`, from `994733bcd` (read back from origin first: the brief's tip, no stop). Chair: `session_01ACmDYZrFEVXyZEUg1NDxxC`. Brief: `origin/lane/chair-2026-11-08:docs/chair/2026-11-14/briefs/BRIEF-W2-FIX-DATA-12.md`. Nothing at or below 994733bcd is rewritten.
 
@@ -14,6 +14,7 @@
 ## 1. The rulings this seat works to
 
 The brief (BRIEF-W2-FIX-DATA-12); the chair's 10:40 message: ONE ROW MORE for the ranked table, `src/data/institutionDescVariants.js`, the adventurers' charter hall's "...with no garrison to call on it musters the defence..." (4 births whose Beasts & Monsters band reads Critical, 2 Weak; measured on origin/lane/coherence-upkeep-2026-11-12 UPKEEP-HANDBACK.md "P5"). RULED: a house's description claims no verdict a band on its own page can deny; reworded to what the hall is and does (it takes contracts against what comes out of the wild), no claim that the defence is mustered or holds. MEDIUM, placed by its count after the two HIGH rows and the forge line; read where it prints, an occupied town among the three.
+ The chair's 10:57 message: SIX ROWS MORE in `src/data/arrivalProse.js` and `src/data/cultureProfiles.js` (REVIEW-R2-CODE-A-LINES-READ.md "CARRIED", "Neighbouring sentences of other writers", 3,048 births): THREE HIGH straight after the two HIGH rows (the waterfront line with no water; the wine shop in a thorp; the lanes of trades in a thorp: A LINE WRITTEN FOR A TOWN'S SIZE IS NOT PRINTED IN A THORP, and a house it names stands on the roster); THREE MEDIUM under a siege (the seasoning planks, the travellers offered water, the lanes of stalls: UNDER A SIEGE NO LINE HAS CARTS WAITING ON THE ROAD, TRAVELLERS ARRIVING OR A MARKET TRADING), joining the arrival's siege carts in the table.
 
 ## 2. The rows
 
@@ -37,6 +38,13 @@ The brief (BRIEF-W2-FIX-DATA-12); the chair's 10:40 message: ONE ROW MORE for th
 - Suites: the 66 files naming cultureProfiles, IdentityDailyLife or arrivalScene + the presumed-things walker: 11 failures, the same 11 at b7eaa6af1. Doors: presumed-things fresh 49 / stale 0; fact layers 0 rises; observed shapes red at the base too (six generated inputs: the merge seat's refreeze); grid 0; domain-strict, type ratchet, eslint 0.
 - The reader's A04 (a forge line beside an idle smelter) is the forge pool's line 4: cured with item 3.
 
+### The chair's 10:57 HIGH rows: DONE, `9b5acaa47` (lighting census `019517709`)
+
+- **The wine shop** ("A patron stands drinks at a wine shop, and makes sure everyone knows who is paying.", arrivalProse.js, the greek people pool): CURED by declaration `needs ['institution: tavern', 'tier: ≥ village']` (JUDGMENT, vetoable: village, not town, since a village's tavern makes it true; no village with a tavern drew it on these births). False (no tavern) 9 -> 0 (thorp 1, hamlet 6, village 2); true 14 -> 14. DECLARED MOVE: `.arrivalScene` in exactly the 9 (the beat's redraw: "A notice of the next assembly is chalked on a wall ..." 5, "Two citizens argue a point of law loudly enough for a crowd to gather." 2, none 1). Read: r2r-town-2 (town), r2s-occupied-metropolis-0 (occupation), bar0-city-under_siege+famine-rand-1 (siege, famine): printed with a tavern; r2r-thorp-27, r2s-recently_betrayed-hamlet-1, r2r-village-55: none. Guard: the third test, red 3 of 3. Suites naming arrivalProse: 114 passed, 5 skipped.
+- **The waterfront line**: ALREADY TRUE ON THIS LANE: the arrival holds the detail to its row's declaration (80b1672f0; the reporting lane's tree lacks it); r2r-hamlet-20 prints none; r2r-village-10 and -14 print it, navigable; the PDF's copy cured by item 2.
+- **The lanes of trades**: ALREADY TRUE: `tier: ≥ town` on this lane (W2-FIX-DATA-HISTORY item F); 15 towns print it, all town or larger.
+- A NOTE FOR THE NEXT READER (not cured, not this row): the redraw puts "Two citizens argue a point of law loudly enough for a crowd to gather." in two hamlets (r2s-politically_fractured-hamlet-3, r2s-insurgency-hamlet-0): a crowd in a hamlet, LOW at most (PLAUSIBLE).
+
 ## 3. FOR THE JOIN
 
 - `src/generators/resourceGenerator.js :: evaluateInstitutionChain` (held by many lanes): a partial chain's `missing` list is by exact name, so 'Sawmill' reads missing beside 'Sawmill (commercial)' (12 towns print "no sawmill ... finishes it"). The one-line change: `!institutions.some(i => i.name === name || String(i.name).startsWith(name + ' ('))`.
@@ -44,7 +52,8 @@ The brief (BRIEF-W2-FIX-DATA-12); the chair's 10:40 message: ONE ROW MORE for th
 
 ## 4. WHAT IS LEFT, line by line
 
-1. Item 3: the arrival's forge line (`src/data/arrivalProse.js:65`) and A04 (line 4 of the same pool), the cure of HANDBACK-11 section 5 item 1.
-2. Item 4: the message to the chair, then the count.
-3. Item 5: A06; the two guild lines.
-4. Item 6: the ranked table (HANDBACK-11 section 4), widest first, with the chair's 10:40 row (the charter hall) and the rows other lanes named (street kitchens; the arrival's carts under a siege; the great fire in a thorp; the pool guard's two rows).
+1. The chair's 10:57 MEDIUM rows, measured on this lane: the seasoning planks (`arrivalProse.js:214`) and the travellers offered water (`:314`) ALREADY carry `excludes: ['crisis: under_siege']` here; the lanes of stalls (`:346`, needs market only) does not: to declare off a siege, with the arrival's siege carts of the ranked table.
+2. Item 3: the arrival's forge line (`src/data/arrivalProse.js:65`) and A04 (line 4 of the same pool), the cure of HANDBACK-11 section 5 item 1. MEASURED at 184c68ba0 (the 730): the smiths' dominant pool prints line 1 "...the place plainly lives by its forges" in 16 towns and line 4 "{n} lives by its forges: the clang of iron is in every lane" in 7, false in all 23 (metal 3rd to 12th, 3 to 12%); line 2 "Forge smoke hangs over everything here..." 18, line 3 "Racks of new ironwork..." 6. Two towns print the pool with no smith (only a Smelter): r2r-town-26 (line 2), r2s-mass_migration-town-0 (line 4, the reader's A04). PLANNED (not made): reword lines 1 and 4 to claim no living (e.g. `The hammering of the forges echoes through all of ${n}.`) and give all four siblings `institution: smith` (a twin carries its siblings' conditions); guard towns r2s-infiltrated-metropolis-3, r2s-mass_migration-town-0, r2r-town-26.
+3. Item 4: the message to the chair, then the count.
+4. Item 5: A06; the two guild lines.
+5. Item 6: the ranked table (HANDBACK-11 section 4), widest first, with the chair's 10:40 row (the charter hall) and the rows other lanes named (street kitchens; the arrival's carts under a siege; the great fire in a thorp; the pool guard's two rows).
