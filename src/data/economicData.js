@@ -8,6 +8,7 @@
 
 // Shared phrases hoisted once (train EM-T15's worker buy-back, judgment 203): each is spelled here and referenced below; the exported tables are byte-identical.
 const ALCHEMICAL_COMPONENTS = "alchemical components";
+const CATHEDRAL_REPAIRS = "cathedral repairs";
 const COMMODITY_EXCHANGE = "commodity exchange";
 const CROSSROADS_POSITION = "crossroads_position";
 const EMERGENCY_RESERVES = "emergency reserves";
@@ -15,7 +16,6 @@ const FERTILE_FLOODPLAIN = "fertile_floodplain";
 const IRON_GRAIN_FUEL = "Iron + grain + fuel";
 const LONG_TERM_RECOVERY = "long-term recovery";
 const MEDICINAL_HERBS_SUPPLIES = "Medicinal herbs + supplies";
-const RELIGIOUS_SERVICES = "religious services";
 const SETTLEMENT_DEFENCE = "settlement defence";
 const SHIPBUILDING_TIMBER = "shipbuilding_timber";
 const TRADE_ACCESS_COMMODITIES = "Trade access + commodities";
@@ -408,10 +408,9 @@ export const TRADE_DEPENDENCY_NEEDS = {
         ],
         label: "Stone",
         detail: "quarried stone for cathedral maintenance",
+        // W2-FIX-DATA-14 (LV-CATHEDRAL, the chair's r3): the stone keeps the building up, not its worship or teaching
         svcs: [
-          RELIGIOUS_SERVICES,
-          "pilgrimage",
-          "theological education"
+          CATHEDRAL_REPAIRS
         ]
       },
       "Great cathedral": {
@@ -421,9 +420,7 @@ export const TRADE_DEPENDENCY_NEEDS = {
         label: "Stone",
         detail: "stone for metropolitan cathedral maintenance",
         svcs: [
-          RELIGIOUS_SERVICES,
-          "pilgrimage centre",
-          "diocesan administration"
+          CATHEDRAL_REPAIRS
         ]
       },
       "Carpenter (part-time)": {
