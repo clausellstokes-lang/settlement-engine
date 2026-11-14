@@ -591,3 +591,28 @@ instrument's findings on this lane's lines cured or declared, and THE LANE'S ONE
 item 5, whole suite in six shards). The census base and tip above serve the statement unless the merge changes the
 lane's files' prints (re-run CENSUS-2 after the merge if it does). crisisSummaryVantage.js (bbeb95b73, b0be6de8d) is a
 bundled source: the edge bundles re-emitted last and alone.
+
+## THE SIXTH SEAT (R3-CODE-C-6), kept current after every item
+
+The seat R3-CODE-C-6 (session_01ACmDYYocD6t8CuLFGeBduQ), for the chair session_01ACmDYZrFEVXyZEUg1NDxxC. Its
+assignment: BRIEF-R3-CODE-C-6.md (chair lane, docs/chair/2026-11-14/briefs/): point 49's merge, the instrument's
+findings on this lane's lines, the lane's ONE final statement. The tip read back from origin at the start: dbe379c13,
+as the brief said. Never rewrite a commit at or below dbe379c13. EXECUTED unless marked.
+
+### The chair's messages to this seat (copied: the messages are not on the branch)
+
+- 03:15Z, A HAZARD: a shallow clone can give a WRONG merge base, not a missing one (31 false conflict hunks seen by the
+  chair on another lane); with full history `git merge-base --all origin/lane/integration-2026-11-07 HEAD` is 9e57f5023.
+  The chair's in-memory merge of dbe379c13 with 976db5b19: 9 conflicted files, no code. (This seat's shallow clone gave
+  9e57f5023 and the same 9 files, no code: the base was right.)
+- 03:18Z: section 2m of the merge book is pushed (lane/merge-15-point-49-wip-2026-11-14 at d893d9289).
+- 03:35Z: the branch merged is the line (lane/integration-2026-11-07), never the chair lane. (It was: second parent
+  976db5b19.)
+
+### Items
+
+| item | outcome | commit |
+|---|---|---|
+| 1: the merge | lane/integration-2026-11-07 at 976db5b19 (read back from origin), a plain merge, base 9e57f5023 (100 commits of the line, 44 of the lane). Conflicted 9 files, none in src/: the eight edge bundles (taken from the line's side; re-emitted by `npm run build:edge-shared`, last and alone, at the statement) and tests/lint/presumedThings.register.json (taken from the line's side; re-derived by its door, below) | e5350ec8d |
+| 2a: presumed things, the starving set | `--check` at e5350ec8d: fresh 4, stale 9, first-register stale 1. outlookHookSiblings.js "The settlement is starving, and its hungriest are turning to banditry." was declared (`needs: ['food: ≤ deficit']`, drawn by resolveSibling) but its literal stood in a constant above the table; it moves into its member. Byte-identical | 92557fa6b |
+| 2b: presumed things, the registers | `--shrink` (9 widened + 1 first-register arm-1 rows: the OLD texts of lines this lane reworded) and `--shrink-arm2` (the sealed-walls arm-2 row). The first register now differs from the line's by exactly the lane's two removals (19d4a8506, 6fc505ea6). Walker: "no stale row" green | acee99f3a |
