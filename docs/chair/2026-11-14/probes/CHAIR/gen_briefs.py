@@ -2852,14 +2852,84 @@ SEATS2['R2-CODE-B-9'] = dict(
 )
 
 
+SEATS2['UPKEEP-MEASURE-2'] = dict(
+    title="UPKEEP-MEASURE-2 · the defence rating after its reader: adding a house must never lower a score: measured and shown, NOTHING BUILT",
+    branch='lane/upkeep-measure-2-2026-11-14', checkout='lane/coherence-upkeep-2026-11-12', tip='c56fd565', statement=False,
+    intro=("You are UPKEEP-MEASURE-2, a measuring seat of the settlement-engine integration program. The defence lane (lane/coherence-upkeep-2026-11-12) "
+           "holds the derived defence rating: readiness is a list of parts and their sum (the owner's design of 2026-11-13). At the owner's word (\"tier "
+           "or size/capacity should also be calculated for defense. A single alchemist should not have the same influence as an alchemist district\") a "
+           "capacity build made a house count by its size. AN INDEPENDENT READER READ THAT BUILD NOT CLEAR, and one of its findings goes to the design: "
+           "AS BUILT, ADDING A HOUSE CAN LOWER A SCORE (an Alchemist shop lowers Economic in 125 of 972 births), an alchemist quarter can read below "
+           "a shop, and a house on no ladder outweighs a ladder's least rung. YOUR JOB IS STAGE ONE OF THE CURE: MEASURED AND SHOWN, NOTHING BUILT, as "
+           "this lane has always changed its rating: the chair rules on your tables, and a builder builds what is ruled. YOUR CHECKOUT IS THE DEFENCE "
+           "LANE, READ ONLY; your own branch lane/upkeep-measure-2-2026-11-14 is cut from its tip by your first push and carries DOCUMENTS AND PROBES "
+           "ONLY: no commit of yours changes a file under src/ or tests/."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. THE READER'S VERDICT (`git fetch origin lane/review-upkeep-capacity-2026-11-14`; read with `git show "
+          "origin/lane/review-upkeep-capacity-2026-11-14:<path>`): docs/chair/2026-11-14/REVIEW-UPKEEP-CAPACITY-2026-11-14.md WHOLE (125 lines: H1 to "
+          "H3, M1 to M7, the lows; step 2's read of the statement's fifteen rulings; step 8(b) the monotonicity probe) and its probes under "
+          "docs/chair/2026-11-14/probes/REVIEW-UPKEEP-CAPACITY/ (mono.mjs, the ladders' dump, births and field diff: copy them out with git archive; "
+          "run them from outside every repository tree: they are your first instruments).\n"
+          "3. THE CODE YOU RULE ON, EACH READ WHOLE, ONCE (the owner's doctrine: a file you rule on is never judged from an excerpt): "
+          "src/generators/defenseGenerator.js, src/data/defenceWeights.js, src/domain/institutions/defenseInstitutionBuckets.js.\n"
+          "4. THE LANE'S OWN MEASURES, by heading, by script, only what an item needs: docs/chair/2026-11-13/UPKEEP-CAPACITY-MEASURE.md (the anchors A "
+          "and B; G1 to G5; \"limit 1\"; how its corpus of 3,756 births is re-born: corpus2.mjs, compare.py) and "
+          "docs/chair/2026-11-13/UPKEEP-DEFENCE-PARTS.md (the weight table; the limits; what the owner was shown) and "
+          "docs/chair/2026-11-13/UPKEEP-CAPACITY-EIGHT-TOWNS.md (the owner's eight towns)."),
+    first=("FIRST ACT. Read the defence lane's tip back from origin: it was c56fd565 when this was written; a later tip is NOT a stop (a builder seat is "
+           "closing the lane): say which tip you measure at and stay on it."),
+    work=("THE CHAIR'S RULINGS OF PRINCIPLE (2026-11-14 07:55 UTC; each vetoable by the owner; they are what your candidates must satisfy):\n"
+          "P1. MONOTONE. Adding a house to a town never lowers any of the five scores nor readiness; enlarging a house (a higher rung of its own "
+          "ladder) never lowers them. The owner's own example is the test: a quarter never reads below a shop, on any score, in any town.\n"
+          "P2. THE FIRST LIMIT KEEPS ITS MEANING AND LOSES ITS SIDE EFFECT. \"What sustains a force counts for no more than the force\" stands. But "
+          "today the sustaining parts are scaled TOGETHER, so one more sustaining part lowers every other one's score: that is the cause of the "
+          "reader's M4. THE CHAIR'S CANDIDATE, to be measured first: the hold is made SCORE BY SCORE (each score's sustaining points held to the "
+          "force, the parts of that one score scaled together), and readiness's sustaining TOTAL is held to the force by a limit line of its own. "
+          "Show beside it any other form that satisfies P1 and reads more truly; say plainly if the candidate fails P1 anywhere.\n"
+          "P3. ONE ORDER WITHIN A PART. Within a part that has a ladder, no house counts for more than a house the catalogue makes greater: a house "
+          "on no ladder is PLACED BY ITS SIZE, not left at the middle (the reader's rows: a first-level healer above a small hospital; a fish market "
+          "above a market square; a hireling hall above a charter hall; a monastery above several parish churches). List EVERY off-ladder house of "
+          "every laddered part with the tier the catalogue offers it at, and propose its place.\n"
+          "P4. A FORCE IS NO GREATER THAN ITS PEOPLE. A household levy in a thorp of six is not \"Strong\" against an invasion (the reader's M2: "
+          "military 49 to 71 in besieged thorps of six to nine people). Show where the levy's points come from, what bounds them today, and the "
+          "smallest change that makes the word true at every size.\n"
+          "P5. A SCORE'S WORD AND THE LINES BESIDE IT AGREE (M1: \"Monster Defense Critical\" beside a charter hall's \"effective for monster "
+          "incursions\"; monster 41 to 19 under the scale). Say whether that fall is the scale as designed or an artefact (a threshold, a limit "
+          "biting), and which side should move: the score or the line.\n"
+          "THE WORK: MEASURED AND SHOWN, NOTHING BUILT. Candidates live as patches in scratch worktrees (saved as .patch files under your probes), "
+          "never on a pushed branch:\n"
+          "1. REPRODUCE THE READER at the tip you measure at: mono.mjs over its 972 births: for every catalogue house added, and for every rung "
+          "raised, the births in which each score and readiness FALL, by house and by score (the table the reader summarised; it is your red).\n"
+          "2. FOR P2, P3 AND P4 EACH: the candidate (and any rival), measured on the lane's 3,756 births and on the census's 720: readiness changed "
+          "(how many, by how much), bands changed (by pair of bands), each of the five scores' bands changed, powers re-drawn, AI threats changed; "
+          "THE MONOTONICITY PROBE AGAIN (the target: 0 falls for every house and every rung); and the candidates TOGETHER, since they compose.\n"
+          "3. THE OWNER'S OWN EXAMPLE under each candidate: across every birth that holds an alchemist's house, the shop against the quarter on "
+          "each score and on readiness (the reader's M6: size shows in fewer than half today); and THE EIGHT TOWNS before and after, in the plain "
+          "words of the eight-towns file (no machinery).\n"
+          "4. P5: the mechanism, shown on the reader's towns (r2r-hamlet-21, r2r-hamlet-6, r2r-town-38), and your recommendation.\n"
+          "5. EVERY NUMBER a candidate would add to or change in the tuning table, listed (a value's change is the owner's to veto); every new word: "
+          "none is expected: say so.\n"
+          "6. THE DOCUMENT: docs/chair/2026-11-14/UPKEEP-MONOTONE-MEASURE.md on your branch: a first page a person can read in two minutes (what is "
+          "wrong today in one town's own figures; each candidate in one sentence; what each moves, in counts; your recommendation per item); then "
+          "the tables; then how every figure is re-made. EXECUTED told from PLAUSIBLE. ONE message to the chair: your branch's tip, the "
+          "recommendation per item in one line each, the count of bands the recommended set moves.\n"
+          "NOT YOURS: any build; the display findings (the label \"Undefended\" beside walls, the PDF's lines, the arcane lines: a builder seat has "
+          "them); any register, pin or golden."),
+    merges='',
+    when="for a stop that blocks the whole measure, and with your document (the tip; the recommendation per item; the bands the recommended set moves)",
+    turns='',
+)
+
+
 def build2(seat):
     s = _r3c6() if seat == 'R3-CODE-C-6' else SEATS2[seat]
     head = (
         "# BRIEF: %s\n\n"
         "The seat's assignment, written by the chair as a file on 2026-11-14 and named in the seat's first message. The chair is the Claude Code session "
-        "%s. Checked out at `%s`, which is also the seat's own branch; a clone of 1200 commits; effort high; the model as the chair's records of that day give "
+        "%s. Checked out at `%s`%s; a clone of 1200 commits; the effort and the model as the chair's records of that day give "
         "the mix. A SELF-CONTAINED brief of the second generation: it carries the laws and the forms itself. Rulings sent after it are in the chair's records.\n\n---\n\n"
-        % (s['title'], CHAIR, s['branch'])
+        % (s['title'], CHAIR, s.get('checkout', s['branch']),
+           (" (read only: you never push to it); the seat's own branch `%s`" % s['branch']) if s.get('checkout') else ", which is also the seat's own branch")
     )
     body = '\n\n'.join([
         s['intro'],
