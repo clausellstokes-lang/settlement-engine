@@ -6,6 +6,7 @@
  */
 import { describe, expect, test } from 'vitest';
 import { faithLinesOf, faithReadingOf } from '../../src/domain/dossier/faithReading.js';
+import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 
 const THORP = { tier: 'thorp', institutions: [{ name: 'Access to parish church' }, { name: 'Dwellings (1-8)' }] };
 const SIEGE = { ...THORP, stress: { type: 'under_siege', label: 'Under Siege' } };
@@ -14,7 +15,8 @@ describe('the access line and the siege', () => {
   test('under a siege the people do not walk to the next village', () => {
     const lines = faithLinesOf(faithReadingOf(SIEGE), { tierNoun: 'thorp' }).join(' ');
     expect(lines).toContain('no church of its own');
-    expect(lines).not.toMatch(/walk to the next village/);
+    // the removal anchored by its own calm thorp: the same access row, the walk said there, struck here
+    expectPresentThenAbsent(faithLinesOf(faithReadingOf(THORP), { tierNoun: 'thorp' }).join(' '), lines, 'walk to the next village', 'the siege bars the walk');
     expect(lines).toContain('the siege keeps its people from the next village’s parish church');
   });
   test('the guard: in calm the walk is said', () => {
@@ -23,6 +25,7 @@ describe('the access line and the siege', () => {
   });
   test('item 6b reaches a thorp with no access row (rww-thorp-famine-1): no walk is said', () => {
     const lines = faithLinesOf(faithReadingOf({ tier: 'thorp', institutions: [{ name: 'Access to external mill' }] }), { tierNoun: 'thorp' }).join(' ');
-    expect(lines).not.toMatch(/next village/);
+    // the removal anchored by the thorp that holds the access row: the next village said there, not here
+    expectPresentThenAbsent(faithLinesOf(faithReadingOf(THORP), { tierNoun: 'thorp' }).join(' '), lines, 'next village', 'no access row, no walk');
   });
 });

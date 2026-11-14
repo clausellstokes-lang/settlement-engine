@@ -7,6 +7,7 @@
  */
 import { describe, expect, test } from 'vitest';
 import { cultureScopeLine } from '../../src/domain/summary/settlementQuickGuide.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const town = (key, label, tier, population, names, extra = {}) => ({
   name: 'Testford', tier, population, culturalIdentity: { key, label },
@@ -20,7 +21,7 @@ describe('a clause that names a house reads the roster', () => {
     const line = cultureScopeLine(town('arabic', 'Arabic-inspired', 'thorp', 16,
       ['Subsistence farming', 'Access to external mill', 'Wayside shrine', 'Access to parish church', 'Burial ground', 'Water source']));
     expect(line).toContain('built around courtyards');
-    expect(line).not.toMatch(/waterworks|endowed/);
+    for (const word of ['waterworks', 'endowed']) expectAbsentWithAnchor(line, word, 'built around courtyards', '#1');
   });
   test('the guard: a town with an aqueduct and a parish church keeps both', () => {
     const line = cultureScopeLine(town('arabic', 'Arabic-inspired', 'town', 1800, ['Aqueduct or water system', 'Parish churches (2-5)', 'Market square']));
@@ -29,12 +30,12 @@ describe('a clause that names a house reads the roster', () => {
   test('#234: "under temple and guild" with no guild on the roster', () => {
     const line = cultureScopeLine(town('south_asian', 'South-Asian-inspired', 'town', 1500, ['Temple', 'Market square']));
     expect(line).toContain('under the temple');
-    expect(line).not.toMatch(/guild/);
+    expectAbsentWithAnchor(line, 'guild', 'under the temple', '#234');
   });
   test('a mesoamerican town with no waterworks: "tribute and market"', () => {
     const line = cultureScopeLine(town('mesoamerican', 'Mesoamerican-inspired', 'town', 900, ['Market square', 'Temple']));
     expect(line).toContain('tribute and market');
-    expect(line).not.toMatch(/waterworks/);
+    expectAbsentWithAnchor(line, 'waterworks', 'tribute and market', 'no waterworks');
   });
 });
 
@@ -42,7 +43,7 @@ describe('an office reads the roster, and is not printed in a small place', () =
   test('rww-hamlet-succession_void-1: no "bureau" in a hamlet of 31', () => {
     const line = cultureScopeLine(town('east_asian', 'East-Asian-inspired', 'hamlet', 31, ["Lord's steward", 'Dwellings (1-8)']));
     expect(line).toContain('ordered by lineage');
-    expect(line).not.toMatch(/bureau|wards/);
+    for (const word of ['bureau', 'wards']) expectAbsentWithAnchor(line, word, 'ordered by lineage', 'rww-hamlet-succession_void-1');
   });
   test('the guard: a town with a town hall keeps its bureaux', () => {
     const line = cultureScopeLine(town('east_asian', 'East-Asian-inspired', 'town', 2000, ['Town hall']));
@@ -50,21 +51,21 @@ describe('an office reads the roster, and is not printed in a small place', () =
   });
   test('#513: "run by civic association" under a lord\'s appointee', () => {
     const line = cultureScopeLine(town('greek', 'Greek-inspired', 'town', 1600, ['Market square'], { powerStructure: { government: 'Feudal Appointee', factions: [] } }));
-    expect(line).not.toMatch(/civic association/);
     expect(line).toContain('built around the agora');
+    expectAbsentWithAnchor(line, 'civic association', 'built around the agora', '#513');
   });
 });
 
 describe('the size rule reaches every frame: a village is small by its tier as well as its people', () => {
   test('a village of 372: no wards, no quarters', () => {
     const line = cultureScopeLine(town('south_asian', 'South-Asian-inspired', 'village', 372, ['Dwellings']));
-    expect(line).not.toMatch(/quarters/);
+    expectAbsentWithAnchor(line, 'quarters', 'built around the tank', 'a village of 372');
     const line2 = cultureScopeLine(town('east_asian', 'East-Asian-inspired', 'village', 391, ['Dwellings']));
-    expect(line2).not.toMatch(/wards|bureau/);
+    for (const word of ['wards', 'bureau']) expectAbsentWithAnchor(line2, word, 'ordered by lineage', 'a village of 391');
   });
   test('the Celtic thorp of 15: no assembly ground it lacks', () => {
     const line = cultureScopeLine(town('celtic', 'Celtic-inspired', 'thorp', 15, ['Subsistence farming', 'Informal elder consensus'], { config: { terrainType: 'forest', tradeRouteAccess: 'road', nearbyResources: [] } }));
-    expect(line).not.toMatch(/districts|assembly ground/);
     expect(line).toContain('built around kin');
+    for (const word of ['districts', 'assembly ground']) expectAbsentWithAnchor(line, word, 'built around kin', 'the Celtic thorp of 15');
   });
 });
