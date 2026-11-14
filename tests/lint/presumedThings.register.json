@@ -185,8 +185,6 @@
   "src/data/dossierStateProse/defense.generated.js": [
    ["court", "after-release", "You can see the courthouse and the gaol at {settlement} from the street, and the town means you to.", "f8aa86f5bf0ee11e"],
    ["docks", "after-release", "{settlement} has a harbour and nothing to hold it with; any vessel that wants the sea approaches has them.", "eb0eee027c212b6b"],
-   ["docks", "after-release", "You can sail into {settlement} unchallenged; nobody watches the harbour mouth.", "2d673ab17c0d8143"],
-   ["garrison", "after-release", "{settlement}'s garrison roll puts paid soldiers on every stretch of its walls, so raiders stay away and an army would pa", "a0136f7c15a9f92d"],
    ["garrison", "after-release", "DS-DEF-2: `Defense › Threat assessment (the five readiness rows)` · `defenseProfile.scores{monster,military,internal,eco", "8d9663583bb57c49"],
    ["garrison", "after-release", "DS-DEF-5: `Defense › Armed forces & fortifications` · `defenseProfile.institutions{walls,garrison,militia,watch,mercenar", "7f7529058e384742"],
    ["granary", "after-release", "Ask for the granary or the sick-house at {settlement} and you are pointed to neither, because there is neither.", "ac07b87933b446f4"],
@@ -212,7 +210,6 @@
    ["watch", "after-release", "There is very little street violence at {settlement}, and the watch is not the reason: the people who run the town's cri", "2d56d73ea40967d1"]
   ],
   "src/data/dossierStateProse/economy.generated.js": [
-   ["market", "after-release", "{settlement} sends several different goods out to market; if one trade fails, the others still go.", "7838162a4de02e4f"],
    ["market", "after-release", "DS-ECO-10: LADDER › export posture, market scarcity, and the freshness caveat · `deriveExportPosture(settlement){status,", "1aa74650a4595043"],
    ["market", "after-release", "DS-ECO-4: Economics › Market Prices · `deriveMarketPrices(...)` → `{exports[], imports[], highlight{label,tag,crierLine}", "992ac6f7fe67a7e0"],
    ["market", "after-release", "Loaded carts leave {settlement} for other markets. The town grows more food than it can eat.", "403415e3b52b4019"],
@@ -235,7 +232,6 @@
    ["market", "after-release", "No guild runs {settlement}'s market: the town's only hold on trade is the stall fee.", "6182a6c3b726a265"],
    ["market", "after-release", "Prices in {settlement} hold steady from one market to the next; the town is not living hand to mouth.", "6e4b0029752e1429"],
    ["market", "after-release", "The market stands where carts always stopped; stalls followed the carts, and {settlement} grew around them.", "c608d0c0609dcc27"],
-   ["market", "after-release", "Visitors find {settlement}'s market without asking; the busiest street through town leads straight to it.", "59c799aae108b099"],
    ["prison", "after-release", "{settlement} is visibly governed: a hall of justice, a gaol, and officers to staff them.", "0efcb879d014c5c9"],
    ["prison", "after-release", "{settlement} keeps its own court and its own gaol, and settles its own quarrels.", "ff40ea8e081673d3"],
    ["temple", "after-release", "{settlement} has an official ruler and a real one: the temple, whose say counts most in the market.", "aba70c0900e464db"]

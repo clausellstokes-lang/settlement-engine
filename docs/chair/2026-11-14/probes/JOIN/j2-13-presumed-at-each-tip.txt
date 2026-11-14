@@ -1,0 +1,10 @@
+line: fresh 0 · stale 0 · first-register stale 0 · banked 4720 · strips fresh 0 stale 0 banked 107
+r3-code-c: fresh 0 · stale 0 · first-register stale 0 · banked 4714 · strips fresh 0 stale 0 banked 107
+r3-tabs: fresh 0 · stale 0 · first-register stale 0 · banked 4720 · strips fresh 0 stale 0 banked 107
+r2-code-a: fresh 18 · stale 0 · first-register stale 0 · banked 4703 · strips fresh 0 stale 0 banked 107
+powers: fresh 10 · stale 0 · first-register stale 0 · banked 4719 · strips fresh 0 stale 0 banked 107
+data: fresh 49 · stale 0 · first-register stale 0 · banked 4663 · strips fresh 0 stale 0 banked 107
+corpus: fresh 23 · stale 0 · first-register stale 0 · banked 4688 · strips fresh 0 stale 0 banked 107
+leaves: fresh 2 · stale 0 · first-register stale 0 · banked 4719 · strips fresh 0 stale 0 banked 107
+r2-code-b: fresh 18 · stale 0 · first-register stale 0 · banked 4719 · strips fresh 0 stale 0 banked 107
+defence: fresh 28 · stale 0 · first-register stale 0 · banked 4714 · strips fresh 1 stale 0 banked 106
