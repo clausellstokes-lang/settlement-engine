@@ -1,0 +1,120 @@
+{"id":"HEADER","town":"r2s-occupied-metropolis-0","sev":"MED","kind":"RECORD","why":"Docks/port, harbour master and waterborne freight exports in a Forest town whose trade access is road only","other":""}
+{"id":"HEADER","town":"r2s-occupied-metropolis-0","sev":"LOW","kind":"RECORD","why":"Founded by imperial decree and forced relocation, yet the reason says founded by foresters under charter","other":""}
+{"id":"09758","town":"r2s-occupied-metropolis-0","sev":"MED","kind":"STATE","why":"Under Occupation the Consortium does not govern freely; Occupation Authority is equally Significant and stability is Suppressed","other":""}
+{"id":"21023","town":"r2s-occupied-metropolis-0","sev":"MED","kind":"STATE","why":"Under Occupation the court and gaol are not the town's own to keep; Occupation Authority holds power","other":""}
+{"id":"21114","town":"r2s-occupied-metropolis-0","sev":"MED","kind":"STATE","why":"Full house every night, yet safety is Controlled — Occupation Curfew","other":""}
+{"id":"16403","town":"r2s-occupied-metropolis-0","sev":"MED","kind":"LACKS","why":"Regulates port traffic; trade access is road only, Forest terrain, no waterway","other":""}
+{"id":"16397","town":"r2s-occupied-metropolis-0","sev":"MED","kind":"LACKS","why":"Registers vessels and berths; trade access is road only, no water route","other":""}
+{"id":"18054","town":"r2s-occupied-metropolis-0","sev":"MED","kind":"LACKS","why":"Dockside warehousing; trade access is road only, no water route","other":""}
+{"id":"10996","town":"r2s-occupied-metropolis-0","sev":"MED","kind":"LACKS","why":"Assigns berths to vessels; trade access is road only","other":""}
+{"id":"16953","town":"r2s-occupied-metropolis-0","sev":"MED","kind":"LACKS","why":"Closed the harbour to ships; trade access is road only, no harbour route","other":""}
+{"id":"17192","town":"r2s-occupied-metropolis-0","sev":"LOW","kind":"LACKS","why":"Names the wharf; trade access is road only","other":""}
+{"id":"03077","town":"r2s-occupied-metropolis-0","sev":"MED","kind":"LACKS","why":"Names the crown; GOVERNMENT is a Grand Guild Consortium with an Occupation Authority, no monarch","other":""}
+{"id":"20701","town":"r2s-occupied-metropolis-0","sev":"MED","kind":"STATE","why":"Consortium holds the real civic power, but under Occupation the Occupation Authority is equally Significant; tag is O-only","other":""}
+{"id":"02606","town":"r2s-occupied-metropolis-0","sev":"MED","kind":"STATE","why":"Consortium holds civic authority; under Occupation the town's own rulers do not rule freely","other":""}
+{"id":"18237","town":"r2s-occupied-metropolis-0","sev":"MED","kind":"STATE","why":"Says the country produces no grain; food ledger shows 27041 grown locally","other":""}
+{"id":"18583","town":"r2s-occupied-metropolis-2","sev":"MED","kind":"STATE","why":"Says the town is held by clan and caravan; it is a Ducal Governorship under an Occupation Authority","other":""}
+{"id":"19240","town":"r2s-occupied-metropolis-2","sev":"MED","kind":"STATE","why":"Ducal Governorship 'governs' plainly; under Occupation it does not rule freely, an Occupation Authority holds power","other":""}
+{"id":"02559","town":"r2s-occupied-metropolis-2","sev":"MED","kind":"STATE","why":"Duke governs by royal appointment as a calm fact; town is Under Occupation, stability Suppressed","other":""}
+{"id":"HEADER","town":"r2s-occupied-metropolis-2","sev":"LOW","kind":"RECORD","why":"'made here' lists 'trade access', 'Toll income' and 'Market taxes' as products","other":""}
+{"id":"29677","town":"r2s-occupied-metropolis-2","sev":"LOW","kind":"BROKEN","why":"Prints 'trade access' and 'crossroads position' as resource outputs, a stored label","other":""}
+{"id":"01225","town":"r2s-occupied-metropolis-2","sev":"LOW","kind":"BROKEN","why":"Name repeated where a pronoun belongs: 'Checheyigen Arlat ... in Checheyigen Arlat's keeping'","other":""}
+{"id":"00764","town":"r2s-occupied-metropolis-2","sev":"LOW","kind":"BROKEN","why":"Name repeated where a pronoun belongs: 'Yesukhei Önggirad ... if Yesukhei Önggirad refused'","other":""}
+{"id":"18459","town":"r2s-occupied-metropolis-3","sev":"MED","kind":"STATE","why":"Says the town lives 'under temple and guild'; it is a Merchant Oligarchy under Occupation, Craft Guilds Suppressed","other":""}
+{"id":"09279","town":"r2s-occupied-metropolis-3","sev":"MED","kind":"TAG","why":"Food handed out to anyone who asks, patient line; tag reaches S and F towns where food has failed","other":""}
+{"id":"02662","town":"r2s-occupied-metropolis-3","sev":"MED","kind":"LACKS","why":"Cartographers make sea charts; town is Hills at a crossroads with no coast or water access","other":""}
+{"id":"02668","town":"r2s-occupied-metropolis-3","sev":"MED","kind":"STATE","why":"Merchant houses 'monopolise power'; the town is Under Occupation with an Occupation Authority, stability Suppressed","other":""}
+{"id":"HEADER","town":"r2s-plague_onset-thorp-0","sev":"MED","kind":"RECORD","why":"A thorp of 14 with low magic makes gems and exports sacred wood and ritual components","other":""}
+{"id":"HEADER","town":"r2s-plague_onset-thorp-0","sev":"LOW","kind":"RECORD","why":"Founded by one extended family, yet reason says charcoal-burners founded it; no charcoal burner on HOUSES","other":""}
+{"id":"03507","town":"r2s-plague_onset-thorp-0","sev":"MED","kind":"STATE","why":"Elder quietly settles quarrels; GOVERNMENT has Legitimacy Crisis and Anxious stability, people ignore orders","other":"07693"}
+{"id":"16581","town":"r2s-plague_onset-thorp-0","sev":"MED","kind":"PAIR","why":"'Respected elders guide the community'; legitimacy is in crisis, few accept the Elder Council's right to rule","other":"07693"}
+{"id":"02383","town":"r2s-plague_onset-thorp-0","sev":"MED","kind":"STATE","why":"Offers travellers a shared table under Plague; tag reaches S towns where no traveller arrives","other":""}
+{"id":"03348","town":"r2s-plague_onset-thorp-0","sev":"MED","kind":"LACKS","why":"Revenue from tenant farmers' rents; HOUSES has only subsistence farming, no landlord or tenants","other":""}
+{"id":"02818","town":"r2s-plague_onset-thorp-0","sev":"MED","kind":"STATE","why":"Merchants come and leave with two or three goods; under Plague, thorp of 14 with no market","other":"14619"}
+{"id":"15533","town":"r2s-plague_onset-thorp-0","sev":"MED","kind":"LACKS","why":"Council 'safe in the hall'; HOUSES has no hall, only informal elder consensus; legitimacy in crisis","other":""}
+{"id":"09264","town":"r2s-plague_onset-thorp-0","sev":"MED","kind":"PAIR","why":"Household stores carry the thorp about two months; another line says about a month and a half","other":"14600"}
+{"id":"HEADER","town":"r2s-plague_onset-thorp-3","sev":"LOW","kind":"RECORD","why":"Thorp of 15 makes 'luxury'; founded by a healer, yet reason says farmland granted to a favoured noble","other":""}
+{"id":"02834","town":"r2s-plague_onset-thorp-3","sev":"MED","kind":"LACKS","why":"Names a moneylender with a queue; HOUSES has no lender, thorp of 15 under Plague where people do not gather","other":""}
+{"id":"20138","town":"r2s-plague_onset-thorp-3","sev":"MED","kind":"STATE","why":"Carts leave carrying several kinds of goods; under Plague travel is not as usual, thorp of 15 exports little","other":""}
+{"id":"11894","town":"r2s-plague_onset-thorp-3","sev":"LOW","kind":"TAG","why":"Names street kitchens; tag reaches thorps (this one of 15) with no streets or kitchens","other":""}
+{"id":"14859","town":"r2s-plague_onset-thorp-3","sev":"MED","kind":"STATE","why":"Council has no rival and nobody asks who comes next; legitimacy is Contested and stability Anxious","other":""}
+{"id":"HEADER","town":"r2s-plague_onset-thorp-2","sev":"MED","kind":"RECORD","why":"Town 21 years old grew round a ferry that became a bridge 'three generations ago'; exports tolls with no toll house; makes stone it never works","other":"14552"}
+{"id":"00107","town":"r2s-plague_onset-thorp-2","sev":"LOW","kind":"PAIR","why":"Records kept carefully, disputes settled by precedent; thorp of 9 settles by custom, not law","other":"21207"}
+{"id":"03195","town":"r2s-plague_onset-thorp-2","sev":"MED","kind":"STATE","why":"Work party heads out singing together; under Plague people do not gather as usual","other":""}
+{"id":"00186","town":"r2s-plague_onset-thorp-2","sev":"MED","kind":"STATE","why":"Everybody defers to the head of household; GOVERNMENT has Legitimacy Crisis, people ignore orders","other":""}
+{"id":"14950","town":"r2s-plague_onset-thorp-2","sev":"MED","kind":"STATE","why":"'Everybody defers to it anyway'; legitimacy is in crisis and stability Anxious","other":""}
+{"id":"21207","town":"r2s-plague_onset-thorp-2","sev":"MED","kind":"STATE","why":"People follow elders out of respect; GOVERNMENT has Legitimacy Crisis, people fear sickness more than orders","other":""}
+{"id":"04165","town":"r2s-plague_onset-thorp-2","sev":"MED","kind":"STATE","why":"Attendance at worship expected of all, a walk to another village; under Plague people do not gather or travel","other":""}
+{"id":"22618","town":"r2s-plague_onset-thorp-1","sev":"MED","kind":"STATE","why":"Always something going out; under Plague trade and travel are not as usual","other":""}
+{"id":"15536","town":"r2s-plague_onset-thorp-1","sev":"MED","kind":"LACKS","why":"Council 'safe in the hall'; HOUSES has no hall, only head-of-household consensus; legitimacy in crisis","other":"07686"}
+{"id":"23535","town":"r2s-plague_onset-thorp-1","sev":"MED","kind":"PAIR","why":"Palisade 'credible against raiders'; elsewhere it stops nothing determined; defence Vulnerable","other":"22826"}
+{"id":"11931","town":"r2s-plague_onset-thorp-1","sev":"LOW","kind":"STATE","why":"Says it could keep soldiers; prosperity Poor, thorp of 25","other":""}
+{"id":"HEADER","town":"r2r-thorp-41","sev":"MED","kind":"RECORD","why":"Thorp of 22 makes iron and metalwork with no smith or mine; exports pilgrim hospitality with no inn; soldier founder vs foresters' charter","other":""}
+{"id":"22583","town":"r2r-thorp-41","sev":"LOW","kind":"TAG","why":"Paying for drinks presumes a tavern; tag reaches thorps (this one of 22) with no inn","other":""}
+{"id":"04637","town":"r2r-thorp-41","sev":"MED","kind":"STATE","why":"Outside buyers come for many things; under Plague, Restricted safety, people do not travel as usual","other":""}
+{"id":"14550","town":"r2r-thorp-41","sev":"MED","kind":"STATE","why":"No one works the medicinal herbs; TRADE 'made here' lists medicinal herbs","other":""}
+{"id":"01518","town":"r2r-thorp-41","sev":"MED","kind":"STATE","why":"'Defences are sound'; STATE defence is Vulnerable","other":""}
+{"id":"06518","town":"r2r-thorp-41","sev":"MED","kind":"STATE","why":"Few miss a rite; under Plague people do not gather, and the thorp only has access to a church","other":""}
+{"id":"HEADER","town":"r2s-plague_onset-hamlet-0","sev":"MED","kind":"RECORD","why":"Hamlet of 25 exports transit trade and tolls with no toll house; makes flour, baked goods and luxury with no mill or bakery; tradesperson vs noble founding","other":""}
+{"id":"18164","town":"r2s-plague_onset-hamlet-0","sev":"MED","kind":"STATE","why":"Neighbours queue to bake together at a shared oven; under Plague people do not gather; no oven on HOUSES","other":""}
+{"id":"02519","town":"r2s-plague_onset-hamlet-0","sev":"LOW","kind":"STATE","why":"Every road brings it trade; under Plague travel is not as usual","other":""}
+{"id":"02463","town":"r2s-plague_onset-hamlet-0","sev":"MED","kind":"STATE","why":"'Current shortage' of grain; food ledger shows grown 50 of need 50, deficit 0%","other":""}
+{"id":"10025","town":"r2s-plague_onset-hamlet-0","sev":"MED","kind":"STATE","why":"Grazing offered to travellers' beasts; under Plague travel stops; tag reaches S towns","other":""}
+{"id":"06148","town":"r2s-plague_onset-hamlet-0","sev":"LOW","kind":"TAG","why":"Money goes to 'the criminals who run' fencing; hamlet of 25 has no criminal house; tag reaches thorps","other":""}
+{"id":"09714","town":"r2s-plague_onset-hamlet-0","sev":"MED","kind":"PAIR","why":"Names stalls that pay their fees; the hamlet has no market or fair","other":"14618"}
+{"id":"14852","town":"r2s-plague_onset-hamlet-0","sev":"MED","kind":"STATE","why":"No rival, nobody asks who comes next; GOVERNMENT has Legitimacy Crisis","other":""}
+{"id":"09262","town":"r2s-plague_onset-hamlet-0","sev":"LOW","kind":"STATE","why":"A month at full rations becomes three months on half; halving rations doubles, not triples, the time","other":""}
+{"id":"HEADER","town":"r2s-plague_onset-hamlet-2","sev":"MED","kind":"RECORD","why":"Hamlet of 24 makes gems, religious services and basic education with no church or school on HOUSES","other":""}
+{"id":"09400","town":"r2s-plague_onset-hamlet-2","sev":"LOW","kind":"STATE","why":"Day measured in traffic arriving and leaving; under Plague travel is not as usual","other":""}
+{"id":"03031","town":"r2s-plague_onset-hamlet-2","sev":"MED","kind":"PAIR","why":"Respected figure 'simply acknowledged'; few still accept the Headman's right to rule, Legitimacy Crisis","other":"07701"}
+{"id":"04080","town":"r2s-plague_onset-hamlet-2","sev":"MED","kind":"PAIR","why":"Business goes to 'the whole' Headman's Authority and is slow; it is one headman deciding without ceremony","other":"06316"}
+{"id":"14073","town":"r2s-plague_onset-hamlet-2","sev":"MED","kind":"STATE","why":"'Much of what it eats is brought in'; food ledger: grown 38 of 48, imports cover only 5","other":""}
+{"id":"HEADER","town":"r2s-plague_onset-hamlet-1","sev":"MED","kind":"RECORD","why":"Hamlet of 35 makes and exports coal with no mine or burner; makes religious services and education with no church or school","other":""}
+{"id":"09631","town":"r2s-plague_onset-hamlet-1","sev":"MED","kind":"STATE","why":"Says it is 'run by its estates'; GOVERNMENT is an Elder Council with no estates","other":""}
+{"id":"01516","town":"r2s-plague_onset-hamlet-1","sev":"MED","kind":"STATE","why":"'Defences are sound'; STATE defence is Vulnerable","other":""}
+{"id":"00661","town":"r2s-plague_onset-hamlet-1","sev":"LOW","kind":"STATE","why":"People come and go by gaps in the wall; safety is Quarantined — Plague Conditions","other":""}
+{"id":"06517","town":"r2s-plague_onset-hamlet-1","sev":"MED","kind":"STATE","why":"Rites set the rhythm of the week; under Quarantine and Plague people do not gather; church is a village miles off","other":""}
+{"id":"HEADER","town":"r2s-plague_onset-hamlet-3","sev":"MED","kind":"RECORD","why":"Hamlet makes luxury, leather goods, religious services and education with no tanner, church or school; religious founders vs toll-post reason","other":""}
+{"id":"21107","town":"r2s-plague_onset-hamlet-3","sev":"MED","kind":"STATE","why":"Neighbours turn out together to sweep the street; safety is Quarantined, under Plague people do not gather","other":""}
+{"id":"20336","town":"r2s-plague_onset-hamlet-3","sev":"MED","kind":"STATE","why":"'Produces no luxury goods'; TRADE 'made here' lists luxury","other":""}
+{"id":"30977","town":"r2s-plague_onset-hamlet-3","sev":"MED","kind":"LACKS","why":"Ticks Mining; HOUSES has no mine or quarry","other":""}
+{"id":"20769","town":"r2s-plague_onset-hamlet-3","sev":"MED","kind":"STATE","why":"Leaves its timber unworked; TRADE 'made here' lists timber and exports sacred wood","other":"14553"}
+{"id":"21587","town":"r2s-plague_onset-hamlet-3","sev":"MED","kind":"STATE","why":"Nobody asks who might replace the Stewardship; GOVERNMENT has Legitimacy Crisis","other":""}
+{"id":"HEADER","town":"r2s-plague_onset-village-1","sev":"LOW","kind":"RECORD","why":"Exports transit trade and toll revenue with no toll or customs house; makes 'luxury'; Elder Council named ruler while Religious Authorities are Dominant","other":""}
+{"id":"03974","town":"r2s-plague_onset-village-1","sev":"MED","kind":"STATE","why":"Says it is held by clan and caravan; powers are Religious Authorities and an Elder Council","other":""}
+{"id":"10784","town":"r2s-plague_onset-village-1","sev":"LOW","kind":"STATE","why":"Horse traders show animals where herders and townsfolk meet; under Plague people do not gather","other":""}
+{"id":"00350","town":"r2s-plague_onset-village-1","sev":"LOW","kind":"STATE","why":"Half the goods are passing through; under Plague travel is not as usual","other":""}
+{"id":"07231","town":"r2s-plague_onset-village-1","sev":"MED","kind":"LACKS","why":"Revenue from warehouse fees and transit duties; HOUSES has no warehouse, toll or customs house","other":""}
+{"id":"15707","town":"r2s-plague_onset-village-1","sev":"MED","kind":"STATE","why":"Revenue from visiting pilgrims; under Plague people do not travel; tag reaches S towns","other":""}
+{"id":"HEADER","town":"r2s-plague_onset-village-0","sev":"LOW","kind":"RECORD","why":"Founded by tradespeople who left a larger settlement, yet the reason says a disbanded military unit founded it","other":""}
+{"id":"18585","town":"r2s-plague_onset-village-0","sev":"MED","kind":"STATE","why":"Says it is held by clan and caravan; powers are Religious Authorities and an Elder Council","other":""}
+{"id":"02425","town":"r2s-plague_onset-village-0","sev":"MED","kind":"STATE","why":"Caravan broker shouting terms to laden animals; safety Quarantined under Plague, and the village has no market","other":"14620"}
+{"id":"09302","town":"r2s-plague_onset-village-0","sev":"MED","kind":"STATE","why":"Nobody has found the timber worth taking; TRADE makes timber and exports sacred wood","other":""}
+{"id":"HEADER","town":"r2s-plague_onset-village-2","sev":"MED","kind":"RECORD","why":"Imports 'none' yet imports cover 13 of food; isolated village with no inn makes hospitality for travellers, gems, potions","other":""}
+{"id":"15517","town":"r2s-plague_onset-village-2","sev":"MED","kind":"STATE","why":"People argue politics in the open and enjoy it; Plague Unrest, Anxious, not viable, 25% food deficit","other":""}
+{"id":"03095","town":"r2s-plague_onset-village-2","sev":"MED","kind":"STATE","why":"'Substantial part' of food bought; imports cover 13 of 282, and TRADE lists imports none","other":""}
+{"id":"15712","town":"r2s-plague_onset-village-2","sev":"MED","kind":"STATE","why":"Pilgrimage running; isolated village under Plague, no exports, people do not travel","other":""}
+{"id":"15551","town":"r2s-plague_onset-village-2","sev":"MED","kind":"PAIR","why":"'A good year is comfortable'; the village is not viable, 25% deficit, cannot last as things stand","other":"00537"}
+{"id":"HEADER","town":"r2r-village-50","sev":"MED","kind":"RECORD","why":"Exports barrels and dyed cloth with no cooper or dyer; Military/Guard Significant with no garrison or watch; serfs vs mining-camp founding","other":""}
+{"id":"00438","town":"r2r-village-50","sev":"LOW","kind":"LACKS","why":"Proposals at 'the next council session'; GOVERNMENT is a Headman's Authority, no council","other":""}
+{"id":"HEADER","town":"r2s-plague_onset-village-3","sev":"MED","kind":"RECORD","why":"Makes iron and metalwork with no smith; Thieves' Guild a Significant power with no thieves' house on HOUSES","other":"14549"}
+{"id":"04005","town":"r2s-plague_onset-village-3","sev":"LOW","kind":"LACKS","why":"'The right tavern' presumes several taverns; HOUSES has one travelers' inn","other":""}
+{"id":"14549","town":"r2s-plague_onset-village-3","sev":"MED","kind":"STATE","why":"No one works the iron ore; TRADE 'made here' lists iron and metalwork","other":""}
+{"id":"14654","town":"r2s-plague_onset-village-3","sev":"MED","kind":"STATE","why":"'No single dominant organisation' in crime; GOVERNMENT lists a Thieves' Guild of Significant strength","other":""}
+{"id":"HEADER","town":"r2s-plague_onset-town-3","sev":"LOW","kind":"RECORD","why":"Inland river town makes salt and smoked seafood; founded where river became navigable, yet trade access is road only","other":""}
+{"id":"16785","town":"r2s-plague_onset-town-3","sev":"MED","kind":"STATE","why":"Flour stacked to be carted out; town runs a 7% food deficit under Plague, travel not as usual","other":""}
+{"id":"02902","town":"r2s-plague_onset-town-3","sev":"MED","kind":"STATE","why":"Poet holds a crowd at the well; Plague Unrest, people do not gather","other":""}
+{"id":"03772","town":"r2s-plague_onset-town-3","sev":"MED","kind":"STATE","why":"Arcane Council 'keeps order'; Plague Unrest, Anxious stability, Legitimacy Crisis; also 'Religious Authorities tells' disagrees in number","other":"07688"}
+{"id":"HEADER","town":"r2s-plague_onset-town-1","sev":"LOW","kind":"RECORD","why":"Makes stone with no quarry; exports toll income with no customs or toll house","other":""}
+{"id":"02881","town":"r2s-plague_onset-town-1","sev":"MED","kind":"STATE","why":"Patron stands drinks for everyone at a wine shop; Plague Unrest, people do not gather; no wine shop on HOUSES","other":""}
+{"id":"02916","town":"r2s-plague_onset-town-1","sev":"MED","kind":"STATE","why":"Salt works 'a principal source of the town's trade'; salt is in neither exports nor made-here","other":""}
+{"id":"16004","town":"r2s-plague_onset-town-1","sev":"LOW","kind":"STATE","why":"Shows 736 imported; the food ledger says imports cover 725","other":""}
+{"id":"14649","town":"r2s-plague_onset-town-1","sev":"MED","kind":"PAIR","why":"No salt reaches the salt works, yet the works are called a principal source of the town's trade","other":"02916"}
+{"id":"20817","town":"r2s-plague_onset-town-1","sev":"LOW","kind":"BROKEN","why":"'The heresy trials is' — subject and verb disagree","other":""}
+{"id":"HEADER","town":"r2r-town-37","sev":"LOW","kind":"RECORD","why":"Coastal port with no river keeps a river ferry and makes river craft and barges; Thieves' Guild Significant with no guild house; 'maritime access' as a product","other":""}
+{"id":"28599","town":"r2r-town-37","sev":"LOW","kind":"LACKS","why":"Weapons go missing from the armoury; HOUSES has no armoury or garrison","other":""}
+{"id":"04796","town":"r2r-town-37","sev":"MED","kind":"STATE","why":"Carts, beasts and walkers queue at the ferry landing; Plague Unrest, people do not gather or travel as usual","other":""}
+{"id":"02794","town":"r2r-town-37","sev":"MED","kind":"PAIR","why":"Noble authority overrides all; the underworld controls vice and officials and the appointee has lost standing","other":"23334"}
+{"id":"07631","town":"r2r-town-37","sev":"MED","kind":"STATE","why":"Appointee 'keeps order'; Plague Unrest, Legitimacy Crisis, Thieves' Guild equally Significant; 'Religious Authorities tells' disagrees in number","other":"23334"}
+{"id":"01113","town":"r2r-town-37","sev":"MED","kind":"PAIR","why":"Every arrival passes a gate tally; the sea approaches are open to any vessel and a smuggling network runs through","other":"16886"}
+{"id":"DONE","lines":2587,"blocks":20,"flags":119}
