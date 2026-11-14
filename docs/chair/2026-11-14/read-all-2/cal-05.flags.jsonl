@@ -1,0 +1,26 @@
+{"id":"C11473","town":"bar0-village-famine-rand-1","sev":"MED","kind":"STATE","why":"market 'handles more than the village could ever use'; CRISIS is Famine, FOOD gap 14%, HOUSES has only a Fish market","other":"C11451"}
+{"id":"C11474","town":"bar0-village-famine-rand-1","sev":"MED","kind":"STATE","why":"strangers sell on 'the next market day'; HOUSES has no market, only a Fish market, and the town is in an active famine","other":""}
+{"id":"C11488","town":"bar0-village-famine-rand-1","sev":"MED","kind":"STATE","why":"exists because travellers stopped on the road; FOUNDING says it was founded on rich farmland granted to a noble to populate","other":""}
+{"id":"C11490","town":"bar0-village-famine-rand-1","sev":"LOW","kind":"STATE","why":"'lost its harvest for a second season'; PAST records no earlier famine or failed harvest, only the Plague Years 21 years ago","other":""}
+{"id":"C11542","town":"bar0-village-famine-rand-1","sev":"LOW","kind":"STATE","why":"hook gives the master fishmonger a novice with 'the gift'; a priest's hook on a Fish market keeper","other":""}
+{"id":"C11587","town":"bar0-village-famine-rand-1","sev":"MED","kind":"STATE","why":"Farmland offers 'Grain at harvest'; under Famine the grain harvest failed (failed source grain, famine cut 50%)","other":"C11623"}
+{"id":"C11623","town":"bar0-village-famine-rand-1","sev":"MED","kind":"STATE","why":"grain sold by the sack 'straight from the field at harvest'; CRISIS is Famine with the failed source grain and no granary","other":"C11587"}
+{"id":"C11589","town":"bar0-village-famine-rand-1","sev":"LOW","kind":"STATE","why":"fish market selling salted and smoked fish; LAND lists no fishery, terrain Plains","other":""}
+{"id":"C11666","town":"bar0-village-famine-rand-1","sev":"LOW","kind":"LACKS","why":"income from 'warehouse fees'; HOUSES has no warehouse","other":""}
+{"id":"C11667","town":"bar0-village-famine-rand-1","sev":"LOW","kind":"BROKEN","why":"'Coal Sales' income line printed with no description, unlike the other income sources","other":""}
+{"id":"C11669","town":"bar0-village-famine-rand-1","sev":"MED","kind":"PAIR","why":"says the village buys its timber; the trade page says timber is needed and not brought in, and TRADE imports no timber","other":"C11681"}
+{"id":"C11683","town":"bar0-village-famine-rand-1","sev":"MED","kind":"STATE","why":"'very little of what leaves began here'; TRADE exports coal, raw wool, livestock and flour, all made here","other":"C11672"}
+{"id":"C11687","town":"bar0-village-famine-rand-1","sev":"LOW","kind":"STATE","why":"prints 87 lbs/day imported; the header's FOOD ledger has imports covering 86","other":""}
+{"id":"C11725","town":"bar0-village-famine-rand-1","sev":"LOW","kind":"PAIR","why":"shadow trade 'does little harm'; the crime section describes black-market food at extortionate prices during the famine","other":"C11864"}
+{"id":"C11739","town":"bar0-village-famine-rand-1","sev":"MED","kind":"STATE","why":"grain shown 'fully exploited'; the grain harvest failed (failed source grain, famine cut 50%) and the Grain & Bread chain is impaired","other":"C11695"}
+{"id":"C11836","town":"bar0-village-famine-rand-1","sev":"MED","kind":"LACKS","why":"speaks of 'its defenders'; DEFENCE has no walls, garrison, militia, watch or hired force, and the page says nobody is paid to keep order","other":"C11829"}
+{"id":"C11837","town":"bar0-village-famine-rand-1","sev":"LOW","kind":"LACKS","why":"'what it spends on defence'; DEFENCE is none throughout and the village is Undefended","other":"C11829"}
+{"id":"C11844","town":"bar0-village-famine-rand-1","sev":"HIGH","kind":"STATE","why":"'Nothing has come for Zelenoki'; PAST records the Occupation 64 years ago (catastrophic) and the Plague Years","other":""}
+{"id":"C11845","town":"bar0-village-famine-rand-1","sev":"HIGH","kind":"STATE","why":"safety 'rests on nobody having wanted it'; PAST records a catastrophic Occupation 64 years ago","other":"C11844"}
+{"id":"C11903","town":"bar0-village-famine-rand-1","sev":"MED","kind":"PAIR","why":"town would be 'slower and less comfortable' without the arcane; reliance on magic is None, FOOD by magic 0%, Arcane Support None","other":"C11897"}
+{"id":"C11930","town":"bar0-village-famine-rand-1","sev":"LOW","kind":"PAIR","why":"the fishmonger haggles with pleasure and drops the price; the famine page says the haggling has gone out of people and food costs more each week","other":"C11453"}
+{"id":"C11945","town":"bar0-village-famine-rand-1","sev":"MED","kind":"STATE","why":"famine triggered by an engineered supply disruption; the record's failed source is the grain harvest (failed source grain, famine cut 50%)","other":"C11911"}
+{"id":"C11965","town":"bar0-village-famine-rand-1","sev":"MED","kind":"LACKS","why":"sold 'the settlement's emergency grain reserves'; HOUSES has no granary (granary False) and stores are a month in households","other":""}
+{"id":"C12091","town":"bar0-village-famine-rand-1","sev":"MED","kind":"LACKS","why":"priest sold 'emergency grain reserves' and reported a flood; no granary exists (granary False), only household stores","other":"C11965"}
+{"id":"C12062","town":"bar0-village-famine-rand-1","sev":"LOW","kind":"LACKS","why":"'the guilds' negotiated a compact in a village of 187 whose HOUSES list has no guild","other":""}
+{"id":"DONE","lines":700,"blocks":1,"flags":25}
