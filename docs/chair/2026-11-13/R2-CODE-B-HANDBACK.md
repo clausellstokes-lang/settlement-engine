@@ -1319,3 +1319,44 @@ How the instruments are re-made: a scratch worktree on the lane tip with npm ci;
 
 ## Instruments (outside the tree; lost with the container)
 <scratch>/tools: births.mjs (the reader's), load.mjs, holders.sh (the lanes whose copy of a file differs from the line's, three-way), svcMeasure/svcPeek (throw-away jsdom renders of ServicesTab), ab.mjs (rows (a)/(b) counts), fdiff.mjs (leaves by family), rdiff.mjs (cast rows changed; receipt judgments), surf.mjs (a needle on the Crisis tab, hooks, Tonight and the journal's three variants), peek.mjs, speak.mjs, bar.mjs (a bar0 town), co.mjs/fam.mjs. Re-made from this description in minutes.
+
+# PART 12 — R2-CODE-B-12, the twelfth seat (the stage goes on; an ADDENDUM at the end, the statement not rewritten)
+
+Brief: origin/lane/chair-2026-11-08:docs/chair/2026-11-14/briefs/BRIEF-R2-CODE-B-12.md. Tip read back from origin at the start: 3357f950c (as the brief named). Scratch worktree wt-b12 (branch b12, own node_modules by npm ci); the base tree wt-b12-base (detached at 3357f950c, node_modules symlinked). The reader's births.mjs and seeds1536.txt by git archive of origin/lane/review-r2-code-b-2026-11-14.
+
+## THE CHAIR'S RULINGS SINCE PART 11 (each vetoable by the owner), copied
+(i, settled) THE TONIGHT FAMINE CALLER IS NOT THIS LANE'S: both lines land together on the joined line, by another seat.
+(k, widened) No file under src/pdf/sections/; in src/foundry/journalPages.js only inside this lane's own hunks (`git diff -U0 $(git merge-base origin/lane/integration-2026-11-07 HEAD) HEAD -- src/foundry/journalPages.js`), never its economics page; a row needing more is NAMED under FOR THE JOIN with its measure.
+(o) R2B-LEASTSAY: re-measure at the tip; if it still prints where the person named is the house's head or its only member, the reason is said only where the house holds someone with more say.
+(p) BAR-130, BAR-131: A COUNT WORD READS THE ROSTER: the number is the count of the rows printed under it; measure how often the two differ, and why.
+(q) R2B-CARAVANS: no caravan passes through a town the record holds as isolated.
+(r) THE CHAIR, 12:52 UTC: REGISTERS ARE RE-DERIVED ONCE, AT THE CLOSE, ON THE FINAL TREE. After a cure no census or baseline is re-taken: the lighting census is NOT re-taken where a guard file is added, and the edge bundles are NOT rebuilt (item 9's "rebuilt LAST" withdrawn); a register a cure makes stale is NAMED here (file; the title that reds; the commit). Still run after every cure: the three fast gates, the presumed-things walker, the grid, the test files naming the touched files, castDerived's floor. A pin a cure moves is re-keyed BY IDENTITY in the same commit.
+(s) THE CHAIR, 13:06 UTC: "Gates (if walled)" still prints raw (1) in the Foundry journal with its provenance tag (the M10 line) and (2) on the Crisis tab's Levers list: RULED as (m): both through the house-label leaf ("Town gates", the Defense card's words); one commit with (m) where one cause serves; counted on the births before and after, each surface. The PDF's Defence chapter twin is another lane's.
+
+## (c) H2-14, H2-16, H1-3, M6's minted half — DONE (3a6de5c7b)
+- CAUSE: resolveCrisisCast.js's mint gave the stand-in an office word by lever kind (Healer / Grain Steward / Warden) where the record holds no such house or office-holder; tonightSheet.js :: SCARCE_OF_KIND gave the raids "guards" whatever the town keeps; the plague slot filled "{holder}, the healer who …" off the minted "Healer".
+- CURE: crisisCast.js :: STAND_IN_ROLE (by the crisis minted for): famine "Rations the food", plague "Tends the sick", migration "Takes charge of the migration", raids "Rallies the neighbours", fallback "Stepped in for the crisis"; tonightSheet.js :: scarceOf + castWantFactsOf (guards only where a garrison, watch, militia or free company stands, else shelter; the battery's re-derivation reads the same facts); crisisHooks.js: the plague slot's second fill "{holder}, who identified the outbreak first," for a stand-in.
+- COUNTS (1,536 births, 3357f950c → 3a6de5c7b): minted office roles 141 → 0; the want's "guards" 36 → 0 (shelter 23 → 59); plague hooks naming a stand-in "the healer" 20 → 0; want_not_role 0 → 0.
+- FIELD DIFF BY FAMILY: 141 towns, `npcs[minted].role` 141 leaves, nothing else.
+- GUARD AND PLANTS: tests/domain/crisisStandInWords.test.js (collected over 12 census towns; the want with its keep-guard; the hook with its keep-guard r2r-city-19). Six plants, each red on its arm, none committed. Pins re-keyed: crisisHooks.test.js, tonightOwnGoal.test.js.
+- TOWNS READ, six surfaces: rr3-thorp-monster_pressure-rand-0 (5), r2r-thorp-5, rr3-village-monster_pressure-rand-5 (383); rr3-thorp-under_siege+famine-rand-2 (a siege), r2s-wartime-thorp-2 (a war), r2r-hamlet-24; rr3-thorp-plague_onset-rand-5, r2s-plague_onset-thorp-0, rr3-hamlet-plague_onset-rand-5; r2s-mass_migration-thorp-3, -hamlet-0, -hamlet-1. All TRUE.
+
+## EVERY NEW OR CHANGED LINE (for the owner's veto)
+- The stand-in's role (NPCs tab card, PDF Notable Figures and Tonight, the journal's NPC Quick Reference and Tonight, the Tonight sheet): "Rations the food" (62 towns), "Tends the sick" (20), "Takes charge of the migration" (23), "Rallies the neighbours" (36); "Stepped in for the crisis" never printed.
+- The raids' lever want where no force stands: "decide who gets the shelter, and not be blamed by those who go without." / "share out the shelter without being crushed between those who want it." (36 towns).
+- The plague hook (Crisis tab, Plot Hooks, PDF, journal Overview): "{name}, who identified the outbreak first, has gone quiet. Their last message suggested the disease is not natural. …" (20 towns).
+
+## STALE REGISTERS, NAMED (ruling (r))
+- tests/lint/.lighting-census-baseline.json: sovereigntyLightingContract.walker "THE CENSUS IS AN ASSERTION, NOT A SENTENCE — every stated figure is executed" reds by the new file tests/domain/crisisStandInWords.test.js (3a6de5c7b).
+
+## REDS KNOWN AT THE TIP, CLASSED
+- tests/generators/pipelinePinnedChoosers.test.js A1 (the golden corpus, three golden-master-v3 rows): red identically at 3357f950c (the lane's known golden move, PART 10's S4 (a)).
+- The presumed-things walker ARM 1: fresh 18, the lane's 18.
+
+## FOR THE JOIN (carried)
+- (i) the Tonight famine line: both halves in one change at the join (PART 11).
+
+## WHAT IS LEFT, line by line
+1. (d) H2-15: the journal's power slot ("Member of: civic"), only inside this lane's hunks.
+2. (m) with (s): the catalogue brackets through the house-label leaf; "Gates (if walled)" on the journal and the Levers list.
+3. (e) H4-7; 4. (f) H1-1; 5. (g) H2-4; 6. (h) with M14; 7. (n): M10, M12, M11, M4, M6's other half, M13, M14, the two guards made able to red; 8. (o), (p), (q); 9. item 9 (the 720 field diff of the stage by family, the shift record's rows, the ADDENDUM; registers re-derived once at the close by ruling (r)).
