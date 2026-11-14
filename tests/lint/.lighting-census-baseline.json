@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "e06c1a429d6f2c2da43878a5c4dd47fbf4b710bf",
+  "measuredAtSha": "083dabdd2a0483f78e208bae3b6ea431c4d6ce44",
   "measuredBy": "R2-CODE-B-5",
   "date": "2026-11-14",
-  "note": "one new red-first title in tests/generators/stressSummaryDeclared.test.js (the wartime profit summary)",
-  "files": 3244,
+  "note": "the merge of the side branch (5975515ad): its six new test files join the count",
+  "files": 3250,
   "parked": 398,
-  "credited": 2846,
-  "titles": 29289,
-  "suiteTitles": 7931
+  "credited": 2852,
+  "titles": 29321,
+  "suiteTitles": 7941
 }
