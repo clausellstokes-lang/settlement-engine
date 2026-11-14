@@ -788,11 +788,27 @@ reviewed ceilings). Origin read back at the start: 303abbf67, documents only pas
 Scratch worktree /home/user/wt5 (local branch w5-local); before-tree /home/user/wt5b at 303abbf67. Corpora: the 720
 (SECOND-WAVE-CENSUS/births.mjs), the fresh 180 and the readers' 50 (probes/W2-C-LEAVES-4/birthsR.mjs), born at 303abbf67.
 
+## The chair's rulings to this seat by message (copied in; the messages are not on the branch)
+- 2026-11-13 23:40 UTC, item 6 ADDED ROW (#1152 of the first leaves lane's review): the bowyer's flow card carries the
+  craft guilds' dependency because the generator (computeActiveChains.js) joins onto a chain any dependency of any house
+  listed among its processing houses. RULED: a chain card states a need only where it is the need of a house WHOSE TRADE
+  IS THAT CHAIN'S, read through the lane's own readers of "which roster house does this work" (the goods pills' reader);
+  another trade's house's dependency is not printed on the card. Measure first on the 720 (cards printing another
+  trade's need), read ten after; NAME the generator's join with that count.
+- 2026-11-13 23:46 UTC, THE EARLY MERGE: merge lane/w2-c-leaves-side-2026-11-13 AT 777b81bdb now, a plain merge, after
+  the item in hand is pushed; after it the three gates and both sides' governing files; a register that reds re-made
+  through its own door in its own commit; re-take item 2's counts once and say the difference; item 5 reads
+  defenceHoldsDivine and defenceHoldsDruidic. The side seat's later commits come with the second merge, on the chair's
+  word, before the statement.
+
 ## Items (this seat)
 | item | commit | on the 720 (before → after) | fresh / readers | read | guard |
 |---|---|---|---|---|---|
 | pins | 7adbe1d3b | seven food-sentence pins item 3 left red at 303abbf67 (green at 1e72843b6), re-keyed by identity | — | each new word checked true of its fixture's figures | the pins themselves |
+| merge | 1c36c1717 | the side branch at 777b81bdb (plain; no file shared). After it: three gates green; 117 governing files + tests/lint: 25 red in 21 files, every one red with the same body at 303abbf67 (tests/lint the same 20 in 19 files; dossierPhoneFloorAllViews 2, dossierProseManifest 3) | item 2 re-taken (localProductionAsPrinted, exportsAsPrinted, importsAsPrinted, 303abbf67 → 1c36c1717): Produced locally gains "timber" in 4 of 720 (r2s-under_siege-village-0, r2s-indebted-hamlet-0, r2s-plague_onset-hamlet-2, r2s-wartime-hamlet-0: the side seat's charcoal burner), 2 of fresh 180 (fr4-hamlet-occupied-1, fr4-hamlet-calm-4), 0 of readers; Exports and Imports unchanged | DOUBTFUL, for the chair: r2s-under_siege-village-0 prints "timber" under a siege that has taken the outlying fields (a charcoal burner's woodland is outside the walls; the chain leaf is the side seat's) | — |
 | 4 the food balance row | fb3128664 | rows not adding up 12 → 4 (the rounding-only class, named); an import where the record has none 1 → 0; an import other than the record's 208 → 0; a provision other than the record's 76 → 0; 228 rows, 74 sentences changed; share words false of the printed figures 0 → 0 | fresh: not adding 8 → 1, import 70 → 0, provision 47 → 0; readers: 2 → 0, 17 → 0, 12 → 0 | thorp, village, siege town / metropolis / port, famine, occupation, the largest | economicsFoodBalanceRowOneHome.test.jsx (303abbf67: 4 of 4 red) |
+
+| 5 the clergy's provision | 56f73d7ec | notes of a tradition the town does not hold 64 printed in 30 towns → 0 (all divine; 215 held notes still print); "N% recovery" chips 375 in 129 towns → 0; the food row's kind named 138, denied 0 → 0 | fresh 8 in 4 → 0, chips 94 → 0; readers 3 in 2 → 0, chips 19 → 0 | a village, a famine city, a metropolis, a siege town; the guard rww-metropolis-calm-1 keeps "Temple fishing rites …" | economicsClergyProvision.test.jsx (1c36c1717: 4 of 4 red) |
 
 ## Calls taken without the chair (this seat)
 1. **The pins item 3 left red are re-keyed, in their own commit (7adbe1d3b).** Seven expectations in economicsTabFlow and
@@ -806,6 +822,13 @@ Scratch worktree /home/user/wt5 (local branch w5-local); before-tree /home/user/
    74 of 720); where it has none, a pound of rounding is not printed as one (4 of 720 then do not add up by one pound:
    the honest alternatives were a false import or a false shortfall).
 4. **Item 4, the provision's kind** (druidic, divine, arcane) is still read from the view's note: it is item 5's.
+5. **Item 5, where a kind is denied the row and sentence say "magical"** (the bar's own word for a provision of no named
+   kind; no new word), the figure standing as the record's; 0 towns of 950 reach it, the guard is a record with its
+   tradition taken away. **A denied chain note prints nothing in its place** (the card's state chip stands).
+6. **Item 5, the twins:** the arcane notes read defenceHoldsArcane too (0 denied on the 720); alchemy has no tradition
+   home and is not denied (4 alchemists' notes beside no arcane tradition, named).
+7. **Item 5, a new leaf** (domain/display/magicProvisionShown.js), not chainStateShown.js: the tradition facts sit at
+   layer 4 and chainStateShown.js is read by the layer-4 leaf importsAsPrinted (factLayers: nothing reads at its own layer).
 
 ## Found, not mine (this seat) — the record's disagreements, NAMED with counts (for the seat after the merges)
 - The food record's two homes (economicState.foodSecurity against economicViability.metrics.foodBalance) disagree on the
@@ -820,8 +843,13 @@ Scratch worktree /home/user/wt5 (local branch w5-local); before-tree /home/user/
 - The PDF's food block (src/pdf/lib/viewModelPrimitives.js :: foodCore, printed by EconomicsTrade.jsx) still prints the
   view: its deficit differs from the tab's Short in 223 of 720, its provision in 76. Not this lane's file.
 
+- The record writes a divine chain note where the defence holds no divine tradition on 91 chains of the 720 (fresh 15,
+  readers 3; chainMagicSubstitution.js), an alchemist's note beside no arcane tradition on 4.
+
 ## Registers moved, each through its own door (this seat)
-- docs/content/wiring-census.json: producerIndexFiles 1338 → 1339 (the new leaf), by `node scripts/wiring-census.mjs`.
+- docs/content/wiring-census.json: producerIndexFiles 1338 → 1339 → 1340 (the two new leaves), by `node scripts/wiring-census.mjs`.
+- tests/lint/.prose-numerics-baseline.json 188 → 186 (EconomicsTab.jsx 238's two rows, the recovery chip), regenerated by
+  the test's own scanner; REVIEWED ceilings lowered (total 186, floatInterpolation 127, percentToken 43).
 
 ## Red met, not this seat's (identical bodies at 303abbf67)
 - tests/lint: 20 reds in 19 files at 303abbf67 and at fb3128664 alike (domainAnyCastBaseline's five, factLayers.walker
@@ -829,4 +857,4 @@ Scratch worktree /home/user/wt5 (local branch w5-local); before-tree /home/user/
   rest); classed in the final statement.
 
 ## STATUS (kept current)
-- Item 4 DONE fb3128664. Items 5 to 10: not started.
+- Item 4 DONE fb3128664. The early merge DONE 1c36c1717. Item 5 DONE 56f73d7ec. Items 6 to 10: not started (item 6 carries the chair's added row).
