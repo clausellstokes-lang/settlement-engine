@@ -16,6 +16,9 @@ const dials = { tradeRouteAccess: 'random_trade', culture: 'random_culture', mon
 function cfgFor(seed) {
   let m = seed.match(/^r2r-(\w+)-(\d+)$/); if (m) return birthConfig({ ...DEFAULT_CONFIG, ...dials, settType: m[1] });
   m = seed.match(/^r2s-(\w+)-(thorp|hamlet|village|town|city|metropolis)-(\d+)$/); if (m) return birthConfig({ ...DEFAULT_CONFIG, ...dials, selectedStresses: [m[1]], selectedStressesRandom: false, settType: m[2] });
+  // the lane's corpus of 3,756 (corpus2.mjs's rows): cold-/fresh5-/fresh6-<tier>-<i> and <prefix>-<stress>-<tier>-<i>, the same dials
+  m = seed.match(/^(?:cold|fresh5|fresh6)-(thorp|hamlet|village|town|city|metropolis)-(\d+)$/); if (m) return birthConfig({ ...DEFAULT_CONFIG, ...dials, settType: m[1] });
+  m = seed.match(/^(?:cold|fresh5|fresh6)-([a-z_]+)-(thorp|hamlet|village|town|city|metropolis)-(\d+)$/); if (m) return birthConfig({ ...DEFAULT_CONFIG, ...dials, settType: m[2], selectedStresses: [m[1]], selectedStressesRandom: false });
   m = seed.match(/^rv5-([a-z_+]+)-(thorp|hamlet|village|town|city|metropolis)-(\d+)$/); if (m) return birthConfig({ ...DEFAULT_CONFIG, ...dials, settType: m[2], selectedStresses: m[1] === 'calm' ? [] : m[1].split('+'), selectedStressesRandom: false });
   throw new Error(seed);
 }

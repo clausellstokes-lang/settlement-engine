@@ -1,0 +1,56 @@
+== c2 census720: births 720; readiness moved 55 (up 0, down 55), mean -0.08, min -3, max +0; readiness bands changed 8: {'Lightly Defended->Vulnerable': 4, 'Defensible->Lightly Defended': 2, 'Well-Defended->Defensible': 1, 'Vulnerable->Undefended': 1}
+   military  moved    60 (up 16, down 44) mean -0.06 range -4..+3; bands 4: {'WEAK->CRITICAL': 2, 'CRITICAL->WEAK': 1, 'WEAK->ADEQUATE': 1}
+   monster   moved    15 (up 15, down 0) mean +0.04 range +0..+4; bands 2: {'CRITICAL->WEAK': 2}
+   internal  moved     0 (up 0, down 0) mean +0.00 range +0..+0; bands 0: {}
+   economic  moved    76 (up 75, down 1) mean +1.46 range -3..+30; bands 39: {'ADEQUATE->STRONG': 18, 'WEAK->ADEQUATE': 15, 'WEAK->STRONG': 2, 'CRITICAL->ADEQUATE': 2}
+   magical   moved    75 (up 75, down 0) mean +1.18 range +0..+31; bands 37: {'WEAK->ADEQUATE': 20, 'CRITICAL->WEAK': 12, 'ADEQUATE->STRONG': 4, 'CRITICAL->ADEQUATE': 1}
+   score bands changed (five scores) 82; powers re-drawn 8; a power gained or lost 0; AI threats changed 34
+== c2b census720: births 720; readiness moved 72 (up 72, down 0), mean +0.54, min +0, max +13; readiness bands changed 27: {'Vulnerable->Lightly Defended': 12, 'Lightly Defended->Defensible': 11, 'Undefended->Vulnerable': 4}
+   military  moved    60 (up 16, down 44) mean -0.06 range -4..+3; bands 4: {'WEAK->CRITICAL': 2, 'CRITICAL->WEAK': 1, 'WEAK->ADEQUATE': 1}
+   monster   moved    15 (up 15, down 0) mean +0.04 range +0..+4; bands 2: {'CRITICAL->WEAK': 2}
+   internal  moved     0 (up 0, down 0) mean +0.00 range +0..+0; bands 0: {}
+   economic  moved    76 (up 75, down 1) mean +1.46 range -3..+30; bands 39: {'ADEQUATE->STRONG': 18, 'WEAK->ADEQUATE': 15, 'WEAK->STRONG': 2, 'CRITICAL->ADEQUATE': 2}
+   magical   moved    75 (up 75, down 0) mean +1.29 range +0..+39; bands 37: {'WEAK->ADEQUATE': 19, 'CRITICAL->WEAK': 10, 'ADEQUATE->STRONG': 4, 'CRITICAL->ADEQUATE': 3}
+   score bands changed (five scores) 82; powers re-drawn 27; a power gained or lost 0; AI threats changed 35
+== c3 census720: births 720; readiness moved 56 (up 5, down 51), mean -0.10, min -4, max +1; readiness bands changed 4: {'Well-Defended->Defensible': 2, 'Defensible->Lightly Defended': 1, 'Lightly Defended->Vulnerable': 1}
+   military  moved    29 (up 0, down 29) mean -0.07 range -3..+0; bands 0: {}
+   monster   moved    50 (up 0, down 50) mean -0.30 range -8..+0; bands 8: {'WEAK->CRITICAL': 4, 'STRONG->ADEQUATE': 2, 'ADEQUATE->WEAK': 2}
+   internal  moved    44 (up 0, down 44) mean -0.06 range -2..+0; bands 0: {}
+   economic  moved    73 (up 16, down 57) mean -0.07 range -6..+2; bands 2: {'ADEQUATE->WEAK': 1, 'WEAK->CRITICAL': 1}
+   magical   moved    18 (up 10, down 8) mean -0.00 range -4..+1; bands 0: {}
+   score bands changed (five scores) 10; powers re-drawn 4; a power gained or lost 0; AI threats changed 1
+== c4 census720: births 720; readiness moved 77 (up 0, down 77), mean -0.48, min -14, max +0; readiness bands changed 25: {'Lightly Defended->Vulnerable': 13, 'Vulnerable->Undefended': 11, 'Defensible->Lightly Defended': 1}
+   military  moved    85 (up 0, down 85) mean -2.43 range -71..+0; bands 55: {'ADEQUATE->WEAK': 15, 'WEAK->CRITICAL': 13, 'ADEQUATE->CRITICAL': 10, 'STRONG->ADEQUATE': 8}
+   monster   moved     0 (up 0, down 0) mean +0.00 range +0..+0; bands 0: {}
+   internal  moved     0 (up 0, down 0) mean +0.00 range +0..+0; bands 0: {}
+   economic  moved     0 (up 0, down 0) mean +0.00 range +0..+0; bands 0: {}
+   magical   moved     0 (up 0, down 0) mean +0.00 range +0..+0; bands 0: {}
+   score bands changed (five scores) 55; powers re-drawn 15; a power gained or lost 0; AI threats changed 0
+== cx census720: births 720; readiness moved 101 (up 24, down 77), mean -0.11, min -4, max +6; readiness bands changed 9: {'Lightly Defended->Vulnerable': 5, 'Defensible->Lightly Defended': 1, 'Vulnerable->Lightly Defended': 1, 'Vulnerable->Undefended': 1, 'Lightly Defended->Defensible': 1}
+   military  moved   124 (up 20, down 104) mean -0.70 range -15..+8; bands 26: {'STRONG->ADEQUATE': 14, 'ADEQUATE->WEAK': 6, 'WEAK->CRITICAL': 4, 'ADEQUATE->STRONG': 1}
+   monster   moved    20 (up 2, down 18) mean -0.03 range -2..+2; bands 4: {'WEAK->CRITICAL': 4}
+   internal  moved    47 (up 43, down 4) mean +0.25 range -1..+14; bands 11: {'CRITICAL->WEAK': 6, 'WEAK->ADEQUATE': 5}
+   economic  moved    42 (up 13, down 29) mean -0.02 range -5..+8; bands 5: {'CRITICAL->WEAK': 2, 'ADEQUATE->STRONG': 1, 'STRONG->ADEQUATE': 1, 'ADEQUATE->WEAK': 1}
+   magical   moved    30 (up 9, down 21) mean -0.02 range -4..+9; bands 5: {'WEAK->CRITICAL': 2, 'ADEQUATE->WEAK': 2, 'CRITICAL->WEAK': 1}
+   score bands changed (five scores) 51; powers re-drawn 8; a power gained or lost 0; AI threats changed 8
+== c2x census720: births 720; readiness moved 125 (up 23, down 102), mean -0.19, min -5, max +5; readiness bands changed 18: {'Lightly Defended->Vulnerable': 10, 'Defensible->Lightly Defended': 3, 'Vulnerable->Undefended': 2, 'Well-Defended->Defensible': 1, 'Vulnerable->Lightly Defended': 1, 'Lightly Defended->Defensible': 1}
+   military  moved   147 (up 28, down 119) mean -0.76 range -15..+8; bands 30: {'STRONG->ADEQUATE': 14, 'ADEQUATE->WEAK': 7, 'WEAK->CRITICAL': 5, 'WEAK->ADEQUATE': 2}
+   monster   moved    26 (up 13, down 13) mean +0.01 range -2..+4; bands 2: {'CRITICAL->WEAK': 2}
+   internal  moved    47 (up 43, down 4) mean +0.25 range -1..+14; bands 11: {'CRITICAL->WEAK': 6, 'WEAK->ADEQUATE': 5}
+   economic  moved    79 (up 78, down 1) mean +1.45 range -3..+30; bands 39: {'ADEQUATE->STRONG': 18, 'WEAK->ADEQUATE': 14, 'CRITICAL->WEAK': 3, 'CRITICAL->ADEQUATE': 2}
+   magical   moved    75 (up 75, down 0) mean +1.17 range +0..+31; bands 37: {'WEAK->ADEQUATE': 20, 'CRITICAL->WEAK': 12, 'ADEQUATE->STRONG': 4, 'CRITICAL->ADEQUATE': 1}
+   score bands changed (five scores) 119; powers re-drawn 17; a power gained or lost 0; AI threats changed 39
+== call census720: births 720; readiness moved 208 (up 21, down 187), mean -0.70, min -14, max +5; readiness bands changed 44: {'Lightly Defended->Vulnerable': 22, 'Vulnerable->Undefended': 13, 'Defensible->Lightly Defended': 4, 'Well-Defended->Defensible': 3, 'Vulnerable->Lightly Defended': 1, 'Lightly Defended->Defensible': 1}
+   military  moved   209 (up 22, down 187) mean -2.87 range -71..+8; bands 72: {'ADEQUATE->WEAK': 19, 'WEAK->CRITICAL': 19, 'STRONG->ADEQUATE': 11, 'ADEQUATE->CRITICAL': 10}
+   monster   moved    56 (up 10, down 46) mean -0.27 range -8..+3; bands 6: {'STRONG->ADEQUATE': 2, 'ADEQUATE->WEAK': 2, 'CRITICAL->WEAK': 2}
+   internal  moved    87 (up 44, down 43) mean +0.19 range -2..+14; bands 11: {'CRITICAL->WEAK': 6, 'WEAK->ADEQUATE': 5}
+   economic  moved   129 (up 92, down 37) mean +1.38 range -3..+29; bands 40: {'ADEQUATE->STRONG': 18, 'WEAK->ADEQUATE': 13, 'CRITICAL->WEAK': 3, 'ADEQUATE->WEAK': 2}
+   magical   moved    75 (up 75, down 0) mean +1.17 range +0..+31; bands 37: {'WEAK->ADEQUATE': 20, 'CRITICAL->WEAK': 12, 'ADEQUATE->STRONG': 4, 'CRITICAL->ADEQUATE': 1}
+   score bands changed (five scores) 166; powers re-drawn 34; a power gained or lost 0; AI threats changed 39
+== c4b census720: births 720; readiness moved 31 (up 0, down 31), mean -0.22, min -12, max +0; readiness bands changed 12: {'Vulnerable->Undefended': 6, 'Lightly Defended->Vulnerable': 5, 'Defensible->Lightly Defended': 1}
+   military  moved    37 (up 0, down 37) mean -1.08 range -61..+0; bands 23: {'ADEQUATE->WEAK': 6, 'STRONG->WEAK': 4, 'ADEQUATE->CRITICAL': 4, 'WEAK->CRITICAL': 4}
+   monster   moved     0 (up 0, down 0) mean +0.00 range +0..+0; bands 0: {}
+   internal  moved     0 (up 0, down 0) mean +0.00 range +0..+0; bands 0: {}
+   economic  moved     0 (up 0, down 0) mean +0.00 range +0..+0; bands 0: {}
+   magical   moved     0 (up 0, down 0) mean +0.00 range +0..+0; bands 0: {}
+   score bands changed (five scores) 23; powers re-drawn 7; a power gained or lost 0; AI threats changed 0

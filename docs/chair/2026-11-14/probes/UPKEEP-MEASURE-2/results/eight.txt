@@ -1,0 +1,48 @@
+Sahlzamin (cold-town-116) pop 1226: tip readiness 62 Well-Defended; Invasion 62 ADEQUATE, Beasts 39 WEAK, Order 45 ADEQUATE, Supply 92 STRONG, Magic 60 ADEQUATE
+   c2    readiness 62->61; Supply 92->93; Magic 60->61
+   c3    readiness 62->61; Invasion 62->61; Beasts 39->38; Supply 92->91
+   c4    readiness same; scores same
+   c2x   readiness 62->59; Invasion 62->54; Order 45->50; Supply 92->93; Magic 60->61
+   call  readiness 62->59; Invasion 62->54; Order 45->50; Supply 92->93; Magic 60->61
+Dongguan (cold-city-227) pop 6653: tip readiness 72 Well-Defended; Invasion 100 STRONG, Beasts 100 STRONG, Order 48 ADEQUATE, Supply 100 STRONG, Magic 89 STRONG
+   c2    readiness same; scores same
+   c3    readiness same; scores same
+   c4    readiness same; scores same
+   c2x   readiness same; scores same
+   call  readiness same; scores same
+Fjordberg (cold-thorp-0) pop 26: tip readiness 21 Vulnerable; Invasion 25 WEAK, Beasts 4 CRITICAL, Order 31 WEAK, Supply 21 WEAK, Magic 0 CRITICAL
+   c2    readiness same; scores same
+   c3    readiness same; scores same
+   c4    readiness same; scores same
+   c2x   readiness same; scores same
+   call  readiness same; scores same
+Medinamela (cold-village-65) pop 226: tip readiness 17 Vulnerable; Invasion 24 WEAK, Beasts 29 WEAK, Order 0 CRITICAL, Supply 46 ADEQUATE, Magic 0 CRITICAL
+   c2    readiness same; scores same
+   c3    readiness same; scores same
+   c4    readiness same; scores same
+   c2x   readiness same; scores same
+   call  readiness same; scores same
+Gerasdion (fresh6-metropolis-30) pop 32716: tip readiness 96 Fortress; Invasion 100 STRONG, Beasts 100 STRONG, Order 81 STRONG, Supply 100 STRONG, Magic 99 STRONG
+   c2    readiness same; scores same
+   c3    readiness same; scores same
+   c4    readiness same; scores same
+   c2x   readiness same; scores same
+   call  readiness same; scores same
+Niederholz (cold-under_siege-town-52) pop 1897: tip readiness 46 Defensible; Invasion 99 STRONG, Beasts 61 ADEQUATE, Order 9 CRITICAL, Supply 56 ADEQUATE, Magic 28 WEAK
+   c2    readiness same; scores same
+   c3    readiness 46->45; Supply 56->55
+   c4    readiness same; scores same
+   c2x   readiness same; scores same
+   call  readiness 46->45; Supply 56->55
+Hongshan (cold-thorp-191) pop 13: tip readiness 29 Lightly Defended; Invasion 77 STRONG, Beasts 15 CRITICAL, Order 34 WEAK, Supply 33 WEAK, Magic 0 CRITICAL
+   c2    readiness same; scores same
+   c3    readiness same; scores same
+   c4    readiness 29->16 (Lightly Defended->Vulnerable); Invasion 77->13 (STRONG->CRITICAL)
+   c2x   readiness 29->26; Invasion 77->65
+   call  readiness 29->16 (Lightly Defended->Vulnerable); Invasion 77->13 (STRONG->CRITICAL)
+Chalmal (cold-hamlet-123) pop 70: tip readiness 15 Vulnerable; Invasion 2 CRITICAL, Beasts 0 CRITICAL, Order 7 CRITICAL, Supply 27 WEAK, Magic 0 CRITICAL
+   c2    readiness same; scores same
+   c3    readiness same; scores same
+   c4    readiness same; scores same
+   c2x   readiness same; scores same
+   call  readiness same; scores same

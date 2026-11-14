@@ -15,13 +15,15 @@ UTC, as the brief carries them; no later ruling has arrived (notifications read 
    Every candidate together (`call`): **0 falls on the reader's set**; on the widened set, falls only from the criminal
    houses (crime works against order, by design) and six renames across a function or a government.
 
-## Left (in order)
-- Item 2: each candidate on the lane's 3,756 births (corpus2.mjs) and the census's 720 (born.mjs): readiness, bands,
-  score bands, powers, AI threats; and together.
-- Item 3: the owner's example (shop against quarter) under each candidate; the eight towns before and after.
-- Item 4: P5 written up (mechanism measured on r2r-hamlet-21, r2r-hamlet-6, r2r-town-38 at DEF and tip).
-- Item 5: every number added or changed (P4 adds one: `people.milPerHead`); words (none new).
-- Item 6: the document, docs/chair/2026-11-14/UPKEEP-MONOTONE-MEASURE.md; one message to the chair.
+3. Items 2 to 6 done (EXECUTED; the document docs/chair/2026-11-14/UPKEEP-MONOTONE-MEASURE.md): every candidate on the
+   3,756 (born.mjs over corpus2.mjs's keys; corpus2.mjs itself was ~25x slower, stopped, and one key's record hash
+   checked equal) and on the census's 720; the owner's example over 158 holders; the eight towns; P5 at DEF and tip;
+   the numbers (one added: people.milPerHead); the holders by content (the defence lane's family only).
+
+## Left
+- Nothing of the brief's six items. Open for the chair: P1's scope (criminal houses; six renames across a function or a
+  government); P4's value (1 or 2 a person); anchor B's cross-ladder order (not P3's); P4 lands after H1's display cure.
+- Not measured: the suite against the patches; the pages; the golden-freeze surfaces; the NPC/relationship re-draws.
 
 ## Stops
 None.
