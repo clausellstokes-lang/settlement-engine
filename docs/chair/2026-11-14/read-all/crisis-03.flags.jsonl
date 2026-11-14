@@ -1,0 +1,98 @@
+{"id":"HEADER","town":"r2s-famine-city-1","sev":"MED","kind":"RECORD","why":"founder 'royal decree and a century of forced investment' contradicts reason: grew organically from a seasonal fair traders chose","other":""}
+{"id":"09363","town":"r2s-famine-city-1","sev":"LOW","kind":"BROKEN","why":"'told by Deception' prints a capitalised skill key as a noun in prose","other":""}
+{"id":"12921","town":"r2s-famine-city-1","sev":"MED","kind":"STATE","why":"major livestock sales of all species under Famine, with livestock imported because local grazing is depleted; tag also covers sieges","other":""}
+{"id":"10818","town":"r2s-famine-city-1","sev":"MED","kind":"STATE","why":"hot food sold freely to working people under Famine with 19% food deficit; tag also reaches sieges","other":""}
+{"id":"22361","town":"r2s-famine-city-1","sev":"MED","kind":"LACKS","why":"trading houses keep a private army; DEFENCE lists hired: none","other":""}
+{"id":"00339","town":"r2s-famine-city-1","sev":"MED","kind":"STATE","why":"'three powers almost level, no one leads': only two powers are Significant, rest Minor, and the Merchant Guild Council governs","other":""}
+{"id":"09370","town":"r2s-famine-city-3","sev":"MED","kind":"STATE","why":"founded at a road junction; FOUNDING says founded on rich farmland granted to a favoured noble","other":""}
+{"id":"20893","town":"r2s-famine-city-3","sev":"MED","kind":"LACKS","why":"iron carts expected; TRADE imports list no iron and HOUSES has no mine","other":""}
+{"id":"22125","town":"r2s-famine-city-3","sev":"MED","kind":"STATE","why":"bread offered as the ordinary staple under Famine, 17% deficit and grain imported","other":""}
+{"id":"11229","town":"r2s-famine-city-3","sev":"MED","kind":"STATE","why":"baker takes special orders as usual under Famine; grain is the failed food","other":""}
+{"id":"21800","town":"r2s-famine-city-3","sev":"MED","kind":"PAIR","why":"'ruling three' of a Noble Governorship whose seat one governor, Barlas Ba'arin, holds alone","other":"01905"}
+{"id":"HEADER","town":"r2s-famine-city-2","sev":"MED","kind":"RECORD","why":"founded by a military command building fortifications, yet reason says founded when foresters found rich woodland","other":""}
+{"id":"14069","town":"r2s-famine-city-2","sev":"MED","kind":"STATE","why":"quarry cuts much of the region's building stone, yet TRADE lists Stone among the city's imports","other":""}
+{"id":"00372","town":"r2s-famine-city-2","sev":"LOW","kind":"BROKEN","why":"'done by Deception' prints a capitalised skill key as a noun","other":""}
+{"id":"20593","town":"r2s-famine-city-2","sev":"MED","kind":"STATE","why":"gap to Merchant oligarchy 'narrow'; oligarchy is the only Significant power, every other power Minor","other":""}
+{"id":"09381","town":"r2s-famine-city-2","sev":"MED","kind":"PAIR","why":"founded by a military command building fortifications vs origin: founded when foresters found rich woodland","other":"15375"}
+{"id":"11407","town":"r2s-famine-city-3","sev":"MED","kind":"STATE","why":"'divine provision fills the gap' under Famine while STATE still shows a 17% food deficit","other":""}
+{"id":"09786","town":"r2s-famine-metropolis-2","sev":"MED","kind":"STATE","why":"Grain & Bread: 'divine provision fills the gap' under Famine; STATE shows 23% deficit, grain fields depleted","other":""}
+{"id":"17267","town":"r2s-famine-metropolis-2","sev":"MED","kind":"BROKEN","why":"sentence ends at 'Mac': a Mac- surname is cut mid-word and the clause never finishes","other":""}
+{"id":"01334","town":"r2s-famine-metropolis-2","sev":"MED","kind":"BROKEN","why":"sentence ends at 'Mac': a Mac- surname is cut mid-word and the clause never finishes","other":""}
+{"id":"01141","town":"r2s-famine-metropolis-2","sev":"MED","kind":"BROKEN","why":"sentence ends at 'Mac': a Mac- surname is cut mid-word and the clause never finishes","other":""}
+{"id":"20069","town":"r2s-famine-metropolis-2","sev":"MED","kind":"BROKEN","why":"sentence ends at 'Mac': a Mac- surname is cut mid-word and the clause never finishes","other":""}
+{"id":"00801","town":"r2s-famine-metropolis-2","sev":"MED","kind":"BROKEN","why":"sentence ends at 'Mac': a Mac- surname is cut mid-word and the clause never finishes","other":""}
+{"id":"00730","town":"r2s-famine-metropolis-2","sev":"MED","kind":"BROKEN","why":"sentence ends at 'Mac': a Mac- surname is cut mid-word and the clause never finishes","other":""}
+{"id":"02905","town":"r2s-famine-metropolis-2","sev":"MED","kind":"BROKEN","why":"sentence ends at 'Mac': a Mac- surname is cut mid-word and the clause never finishes","other":""}
+{"id":"01392","town":"r2s-famine-metropolis-2","sev":"MED","kind":"BROKEN","why":"sentence ends at 'Mac': a Mac- surname is cut mid-word and the clause never finishes","other":""}
+{"id":"01383","town":"r2s-famine-metropolis-2","sev":"MED","kind":"BROKEN","why":"sentence ends at 'Mac': a Mac- surname is cut mid-word and the clause never finishes","other":""}
+{"id":"18328","town":"r2s-famine-metropolis-2","sev":"MED","kind":"BROKEN","why":"sentence ends at 'Mac': a Mac- surname is cut mid-word and the clause never finishes","other":""}
+{"id":"00715","town":"r2s-famine-metropolis-2","sev":"MED","kind":"BROKEN","why":"sentence ends at 'Mac': a Mac- surname is cut mid-word and the clause never finishes","other":""}
+{"id":"HEADER","town":"r2s-famine-metropolis-3","sev":"MED","kind":"RECORD","why":"founded by dynastic decision at a 'crossroads' vs reason grew organically round a ferry; trade access is river, not crossroads","other":""}
+{"id":"HEADER","town":"r2s-famine-metropolis-3","sev":"MED","kind":"RECORD","why":"a famine town importing Grain yet exporting Milled flour","other":""}
+{"id":"05276","town":"r2s-famine-metropolis-3","sev":"MED","kind":"STATE","why":"brewery supplies the region and consumes grain in bulk under Famine, 15% deficit, grain imported","other":""}
+{"id":"14649","town":"r2s-famine-metropolis-3","sev":"MED","kind":"PAIR","why":"'no salt reaches the salt works' contradicts salt won from local brine in evaporation pans","other":"16838"}
+{"id":"04923","town":"r2s-famine-metropolis-3","sev":"MED","kind":"PAIR","why":"courts and temporal power 'all ecclesiastical' while the crown governs here at first hand under Royal Authority","other":"20402"}
+{"id":"11327","town":"r2s-famine-metropolis-3","sev":"MED","kind":"STATE","why":"baker knows every household by the bread it buys: ordinary bread trade under Famine","other":""}
+{"id":"09374","town":"r2s-famine-metropolis-3","sev":"MED","kind":"PAIR","why":"founded by dynastic decision at 'this crossroads' vs origin grew round a ferry crossing; trade access is river","other":"15330"}
+{"id":"HEADER","town":"r2s-famine-metropolis-1","sev":"MED","kind":"RECORD","why":"dynastic decision at a 'crossroads' vs reason: seasonal fishing camp that grew as traders stopped; trade access is road","other":""}
+{"id":"HEADER","town":"r2s-famine-metropolis-1","sev":"MED","kind":"RECORD","why":"famine town with 14% deficit exports river fish, salted fish, smoked seafood and game meat","other":""}
+{"id":"12852","town":"r2s-famine-metropolis-1","sev":"MED","kind":"STATE","why":"magic 'a trade like any other', signs openly offer enchanting; GOVERNMENT has Arcane Orders and Mages' Compact Suppressed","other":""}
+{"id":"28731","town":"r2s-famine-metropolis-1","sev":"MED","kind":"STATE","why":"practitioners' trade 'a large part of its business' while Arcane Orders and Mages' Compact are Suppressed","other":""}
+{"id":"18554","town":"r2s-famine-metropolis-1","sev":"LOW","kind":"LACKS","why":"'the council knows it'; GOVERNMENT is a Ducal Governorship and lists no council","other":""}
+{"id":"HEADER","town":"r2s-famine-metropolis-0","sev":"MED","kind":"RECORD","why":"dynastic decision at 'this crossroads' vs reason: mining camp made permanent by families; trade access is road","other":""}
+{"id":"HEADER","town":"r2s-famine-metropolis-0","sev":"MED","kind":"RECORD","why":"Harbour master's office on HOUSES in a Mountain town with road-only trade access and no docks","other":""}
+{"id":"13616","town":"r2s-famine-metropolis-0","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in prose","other":""}
+{"id":"13336","town":"r2s-famine-metropolis-0","sev":"LOW","kind":"BROKEN","why":"'Merchant Guilds works': plural subject with singular verb","other":""}
+{"id":"20600","town":"r2s-famine-metropolis-0","sev":"MED","kind":"STATE","why":"gap to Royal Authority 'narrow'; Royal Authority is the only Significant power, all others Minor or Suppressed","other":""}
+{"id":"HEADER","town":"r2s-occupied-thorp-1","sev":"MED","kind":"RECORD","why":"thorp of 17 with no mine or smith 'makes' iron and metalwork, with no imports","other":""}
+{"id":"HEADER","town":"r2s-occupied-thorp-1","sev":"LOW","kind":"RECORD","why":"'grew at a strategic mountain pass' yet trade access is isolated with no imports or exports","other":""}
+{"id":"02834","town":"r2s-occupied-thorp-1","sev":"MED","kind":"LACKS","why":"moneylender with a queue in a thorp of 17; HOUSES has no lender, and Famine leaves no coin","other":""}
+{"id":"14619","town":"r2s-occupied-thorp-1","sev":"LOW","kind":"STATE","why":"trade done 'on the road'; trade access isolated, no imports or exports, under Occupation curfew","other":""}
+{"id":"16294","town":"r2s-occupied-thorp-1","sev":"LOW","kind":"LACKS","why":"'the wealthy are hoarding' in a subsistence thorp of 17 with three named people","other":""}
+{"id":"02383","town":"r2s-occupied-thorp-1","sev":"MED","kind":"STATE","why":"a place at the shared table for any traveller, under Famine with 41% deficit and Occupation curfew","other":""}
+{"id":"15124","town":"r2s-occupied-thorp-1","sev":"MED","kind":"PAIR","why":"'nothing structural depends on arcane work', yet magical provision makes up about a third of what it eats","other":"12888"}
+{"id":"28742","town":"r2s-occupied-thorp-1","sev":"MED","kind":"PAIR","why":"'makes it with hands and ground, would go on without a practitioner', yet 12 of 24 lbs/day come by magical provision","other":"16000"}
+{"id":"11894","town":"r2s-occupied-thorp-1","sev":"LOW","kind":"LACKS","why":"'street kitchens' and tanks shaping supply in a thorp of 17 with eight houses","other":""}
+{"id":"14553","town":"r2s-occupied-thorp-1","sev":"LOW","kind":"STATE","why":"'no one works the timber'; TRADE says timber is made here","other":""}
+{"id":"19252","town":"r2s-occupied-thorp-1","sev":"MED","kind":"STATE","why":"'The Elder Council governs Amarkota' plainly, under Occupation with an Occupation Authority as strong and stability Suppressed","other":""}
+{"id":"15551","town":"r2s-occupied-thorp-1","sev":"MED","kind":"STATE","why":"'a good year is comfortable and a bad one lean' under Famine, 41% deficit, children visibly hungry, cannot last","other":"00537"}
+{"id":"HEADER","town":"r2r-thorp-24","sev":"LOW","kind":"RECORD","why":"food ledger 'imports cover 4' (page: '+4 imported') while TRADE says imports: none","other":""}
+{"id":"19516","town":"r2r-thorp-24","sev":"MED","kind":"STATE","why":"'The Household Council governs Sanctaminus' plainly, under Occupation with a Dominant Occupation Authority and stability Suppressed","other":""}
+{"id":"30931","town":"r2r-thorp-27","sev":"LOW","kind":"LACKS","why":"ticks Milling; HOUSES has only Access to external mill","other":""}
+{"id":"14552","town":"r2r-thorp-27","sev":"LOW","kind":"STATE","why":"'no one works the stone'; TRADE says stone is made here","other":""}
+{"id":"23535","town":"r2r-thorp-27","sev":"LOW","kind":"PAIR","why":"palisade 'credible against raiders' with 'townspeople'; defence Vulnerable and the stakes 'stop nothing determined'","other":"22826"}
+{"id":"HEADER","town":"r2r-thorp-40","sev":"MED","kind":"RECORD","why":"founded by a wandering healer vs reason: rich farmland granted to a favoured noble; thorp of 20 'makes' iron and metalwork with no smith","other":""}
+{"id":"09400","town":"r2r-thorp-40","sev":"MED","kind":"STATE","why":"'founded roadside', day measured in traffic; FOUNDING says farmland grant, and Occupation curfew holds","other":""}
+{"id":"20354","town":"r2r-thorp-40","sev":"MED","kind":"STATE","why":"'country produces no timber'; TRADE exports Sacred wood","other":""}
+{"id":"14543","town":"r2r-thorp-40","sev":"LOW","kind":"STATE","why":"'no one works the animal hides'; TRADE says animal hides are made here","other":""}
+{"id":"01008","town":"r2r-thorp-40","sev":"MED","kind":"STATE","why":"'governed by the Elder Council' plainly, under Occupation with a Dominant Occupation Authority and stability Suppressed","other":""}
+{"id":"17265","town":"r2r-thorp-40","sev":"LOW","kind":"STATE","why":"'a path over the hills'; terrain is Plains","other":""}
+{"id":"HEADER","town":"r2s-occupied-thorp-2","sev":"LOW","kind":"RECORD","why":"food ledger 'imports cover 3' while TRADE says imports: none","other":""}
+{"id":"HEADER","town":"r2s-occupied-thorp-3","sev":"MED","kind":"RECORD","why":"thorp of 18 'makes' gems and basic education with no mine or school; one family founded it vs veterans granted land","other":""}
+{"id":"HEADER","town":"r2r-thorp-1","sev":"MED","kind":"RECORD","why":"thorp of 30 'makes' iron, metalwork and flour with no mine, smith or mill","other":""}
+{"id":"30273","town":"r2r-thorp-1","sev":"LOW","kind":"LACKS","why":"lists 'river mills'; HOUSES has only Access to external mill","other":""}
+{"id":"11931","town":"r2r-thorp-1","sev":"MED","kind":"STATE","why":"'it could keep soldiers and does not': prosperity Poor, thorp of 30, under Occupation","other":""}
+{"id":"HEADER","town":"r2s-occupied-hamlet-0","sev":"MED","kind":"RECORD","why":"'established as a defensive stronghold' vs founded by a household others followed; DEFENCE has no walls or force at all","other":""}
+{"id":"18585","town":"r2s-occupied-hamlet-0","sev":"LOW","kind":"STATE","why":"'held by clan and caravan'; trade access isolated, no imports or exports","other":""}
+{"id":"14618","town":"r2s-occupied-hamlet-0","sev":"LOW","kind":"STATE","why":"trade done 'on the road'; trade access isolated, no imports or exports, Occupation curfew","other":""}
+{"id":"02892","town":"r2s-occupied-hamlet-0","sev":"LOW","kind":"LACKS","why":"petition signed by 'half their street' in a hamlet of 20","other":""}
+{"id":"20784","town":"r2s-occupied-hamlet-0","sev":"MED","kind":"STATE","why":"'defense is conventional throughout'; DEFENCE is none on every line and defence word is Undefended","other":""}
+{"id":"HEADER","town":"r2s-occupied-hamlet-1","sev":"MED","kind":"RECORD","why":"hamlet of 95 'makes' glass and gems with no glassworks or mine; retired tradesperson founder vs hidden refuge community","other":""}
+{"id":"30938","town":"r2s-occupied-hamlet-1","sev":"MED","kind":"PAIR","why":"ticks Glass and gems, yet the page says no one works the glass sand and the ore goes unworked","other":"14547"}
+{"id":"03543","town":"r2s-occupied-hamlet-1","sev":"LOW","kind":"LACKS","why":"'an old judge'; HOUSES has no court or judge, only a village headman","other":""}
+{"id":"19466","town":"r2s-occupied-hamlet-1","sev":"MED","kind":"STATE","why":"'The Headman's Authority governs Llanhurst' plainly, under Occupation with an equal Occupation Authority and stability Suppressed","other":""}
+{"id":"02676","town":"r2s-occupied-hamlet-1","sev":"MED","kind":"STATE","why":"headman 'gives the orders here' under Occupation; the Occupation Authority stands equal and stability Suppressed","other":""}
+{"id":"HEADER","town":"r2s-occupied-hamlet-2","sev":"MED","kind":"RECORD","why":"religious community founder vs a logging owner who stayed; hamlet of 59 'makes' gems and education with no mine or school","other":""}
+{"id":"03978","town":"r2s-occupied-hamlet-2","sev":"LOW","kind":"STATE","why":"'run by its estates'; GOVERNMENT is a Free Elder Council under Occupation","other":""}
+{"id":"20473","town":"r2s-occupied-hamlet-2","sev":"HIGH","kind":"STATE","why":"'no lord stands over them' under Occupation: a Dominant Occupation Authority does","other":""}
+{"id":"19333","town":"r2s-occupied-hamlet-2","sev":"MED","kind":"STATE","why":"'The Free Elder Council governs Dunkelstift' plainly, under Occupation with a Dominant Occupation Authority","other":""}
+{"id":"28830","town":"r2s-occupied-hamlet-2","sev":"MED","kind":"STATE","why":"'when the occupiers left' while the hamlet is Under Occupation now","other":""}
+{"id":"HEADER","town":"r2s-occupied-hamlet-3","sev":"MED","kind":"RECORD","why":"41 years old yet grew round a ferry that became a bridge 'three generations ago'; no ferry or bridge on HOUSES","other":""}
+{"id":"23205","town":"r2s-occupied-hamlet-3","sev":"LOW","kind":"STATE","why":"'trade flows in, people pass through' under Occupation curfew; tag also reaches plague towns","other":""}
+{"id":"14612","town":"r2s-occupied-hamlet-3","sev":"MED","kind":"PAIR","why":"'no livestock reaches the dairy farmer', yet the farmer keeps cattle or goats and the hamlet has common grazing","other":"12219"}
+{"id":"21791","town":"r2s-occupied-hamlet-3","sev":"MED","kind":"PAIR","why":"'ruling three' of a Headman's Authority whose seat one headman, Leonhard Weber, holds","other":"01769"}
+{"id":"HEADER","town":"r2s-occupied-village-0","sev":"MED","kind":"RECORD","why":"founded by settlers seeking opportunity vs reason: religious hermits seeking isolation","other":""}
+{"id":"09628","town":"r2s-occupied-village-0","sev":"LOW","kind":"STATE","why":"'run by its estates'; GOVERNMENT is an Elder Council under Occupation","other":""}
+{"id":"14620","town":"r2s-occupied-village-0","sev":"LOW","kind":"STATE","why":"trade done 'on the road'; trade access isolated, no exports, Occupation curfew","other":""}
+{"id":"28629","town":"r2s-occupied-village-0","sev":"LOW","kind":"STATE","why":"'covers an ordinary year': STATE shows grown 183 of 204 needed, a 3% deficit even with imports","other":""}
+{"id":"DONE","lines":2604,"blocks":20,"flags":97}
