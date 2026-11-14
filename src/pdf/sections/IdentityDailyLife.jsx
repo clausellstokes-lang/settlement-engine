@@ -26,6 +26,8 @@ import { foodwaysLineOf } from '../../domain/foodways.js';
 import { factsOf } from '../../domain/facts/factsOf.js';
 import { architecturalDetailRefused, resolveCultureProfileKey } from '../../data/cultureProfiles.js';
 import { foodWordShown } from '../../domain/display/foodWordShown.js';
+import { cultureOnPage } from '../lib/cultureOnPage.js';
+import { cultureScopeLine } from '../../domain/summary/settlementQuickGuide.js';
 
 export function IdentityDailyLife({ settlement, narrativeMode, vm, stateProse }) {
   const id = vm.identity;
@@ -34,6 +36,10 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm, stateProse })
   const culture = id.culturalIdentity;
   const accent = narrativeMode ? palette.ai : palette.gold;
   const foodWord = foodWordShown(settlement); // the food word's one home (SURFACES-2 item 1)
+  // EXPORTS-B24 · B2: the culture block's one reader (the scope line through the tab's reader; the six raw rows and the
+  // generated notes in a town or larger only, each held to its declarations; the user's own notes always).
+  const cultureBlock = cultureOnPage(settlement, a.culturalNotes);
+  const scopeLine = cultureScopeLine(settlement); // the Overview's identity line (ruling (i)), never the profile's raw scope
 
   const founded = foundingLabel(id.founding);
   const idRows = [
@@ -71,7 +77,7 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm, stateProse })
       <StateProse stateProse={stateProse} tab="faith" />
 
       {/* ── Anchor facts ─────────────────────────────────────── */}
-      {(a.governingName || a.prosperity || a.safety || a.culturalNotes ||
+      {(a.governingName || a.prosperity || a.safety || cultureBlock.notes ||
         foodWord || a.magicDependency || a.activeStress?.length > 0) && (
         <View
           style={{
@@ -131,14 +137,14 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm, stateProse })
               ))}
             </View>
           )}
-          {a.culturalNotes && (
+          {cultureBlock.notes && (
             <View style={{ marginTop: 3 }}>
               <Text style={{ ...type.label, fontSize: pt['7'], color: palette.muted, marginBottom: 1 }}>
                 CULTURAL NOTES
               </Text>
               <EditableText
                 name="daily.cultureNotes"
-                defaultValue={a.culturalNotes}
+                defaultValue={cultureBlock.notes}
                 style={{ ...type.body, fontSize: pt['8.5'], fontStyle: 'italic' }}
               />
             </View>
@@ -195,7 +201,7 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm, stateProse })
             </Text>
             {culture.label && <Tag tone="gold">{culture.label}</Tag>}
           </View>
-          {culture.scope && (
+          {scopeLine && (
             <Text
               style={{
                 ...type.body,
@@ -205,10 +211,10 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm, stateProse })
                 marginBottom: 3,
               }}
             >
-              {culture.scope}
+              {scopeLine}
             </Text>
           )}
-          <CultureRows culture={culture} foodwaysLine={foodwaysLineOf(settlement)} architectureLine={architectureLineOf(settlement, culture)} />
+          <CultureRows culture={culture} rawRows={cultureBlock.rows} foodwaysLine={foodwaysLineOf(settlement)} architectureLine={architectureLineOf(settlement, culture)} />
         </View>
       )}
 
@@ -296,15 +302,18 @@ function architectureLineOf(settlement, culture) {
   return architecturalDetailRefused(detail, profileKey, () => factsOf(settlement)) ? null : detail;
 }
 
-function CultureRows({ culture, foodwaysLine, architectureLine }) {
+// EXPORTS-B24 · B2: the six raw rows are the reader's (pdf/lib/cultureOnPage.js: a town or larger only, each held to its
+// declarations); Foodways and Architecture already pass their own readers and print at every size.
+function CultureRows({ culture, rawRows, foodwaysLine, architectureLine }) {
+  const raw = new Map(rawRows);
   const rows = [
-    ['Built form', culture.builtForm],
-    ['Civic pattern', culture.civicPattern],
-    ['Exchange', culture.exchangePattern],
+    ['Built form', raw.get('Built form')],
+    ['Civic pattern', raw.get('Civic pattern')],
+    ['Exchange', raw.get('Exchange')],
     ['Foodways', foodwaysLine || culture.foodways],
-    ['Sacred life', culture.sacredLife],
-    ['Defense', culture.defensePattern],
-    ['Social texture', culture.socialTexture],
+    ['Sacred life', raw.get('Sacred life')],
+    ['Defense', raw.get('Defense')],
+    ['Social texture', raw.get('Social texture')],
     ['Architecture', architectureLine],
   ].filter(([, value]) => value);
 
