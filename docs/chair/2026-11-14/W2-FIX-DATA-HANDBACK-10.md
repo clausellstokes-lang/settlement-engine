@@ -1,0 +1,96 @@
+# W2-FIX-DATA-10: THE LANE'S FINAL STATEMENT (the data lane's close; kept current after every item)
+
+**State: IN PROGRESS.** Sections marked PENDING are not yet measured. Every figure EXECUTED unless marked PLAUSIBLE.
+
+**Seat.** The tenth seat on `lane/w2-fix-data-2026-11-13`, from `34f48f48d` (read back from origin first; the brief's 46a91fa23 plus the ninth seat's one documents-only commit, as the chair's first message corrected). Chair: `session_01ACmDYZrFEVXyZEUg1NDxxC`. Brief: `origin/lane/chair-2026-11-08:docs/chair/2026-11-14/briefs/BRIEF-W2-FIX-DATA-10.md`, self-contained; the chair's 04:58 ruling on the instrument's fresh hits (four classes) is copied in HANDBACK-9 section 9 and governs section 3 below.
+
+**The lane's bases with the line:** 96d698de7 and 9d5d6e091 (`merge-base --all`). **The last read of the lane:** 4114cf5a6 (a diff-only reader reads from there).
+
+## 0. Instruments (re-made in minutes)
+
+- Scratch worktree `/home/user/w2fd10` on local branch `w2fd10`, `npm ci` there. Detached worktrees, `node_modules` linked: `w2fd10-base` (34f48f48d, the lane before the merge), `w2fd10-line` (976db5b19, the line), `w2fd10-m` (35bf691cb, the merge with its registers), `w2fd10-b96` (96d698de7, the lane's base), `w2fd10-t` (23bfefde3, the census tip). Pushes `git push origin w2fd10:refs/heads/lane/w2-fix-data-2026-11-13`, each after `test -n "$(git rev-list origin/<lane>..w2fd10)"`; the shared local config compared after every push (only npm ci's `core.hooksPath` and the branch's tracking keys).
+- Births: HANDBACK-8's `births.mjs` (census 720 via CENSUS-2's `seedcfg.mjs`/`seeds.txt`; fresh 720), its scratch path edited; `fielddiff.mjs` (the history branch's). This seat's queries, `probes/W2-FIX-DATA-10/` (paths written for `/home/user/w2fd10`; edit them): `qabs.mjs` (per fresh hit: the towns that print a sentence of it naming its thing, and those where the rule book's OWN reader, `REGISTERED_WORDS[id].absent`, says the thing is absent), `byhash.mjs` (a hit's literal and its declaration by hash), `qroster.mjs`, `qpath.mjs`, `qread.mjs`, `things.mjs` (a word's atoms, bands, kinds).
+
+## 1. The line's merge (EXECUTED, pushed)
+
+The line's tip read back: **976db5b19**. Merged plainly at **be4306956** onto 34f48f48d. CONFLICTED: exactly the chair's fifteen, NO CODE: `docs/content/wiring-census.json`, `scripts/.prose-byte-baseline.json`, `scripts/census/pool-dominance.register.json` (each from the LANE's side, re-derived by its own door, its own commit); `tests/lint/presumedThings.register.json` and `presumedThings.widened.register.json` (from the LINE's side); the edge bundles and meta files (from the line's side; rebuilt LAST, section 7). Nothing else conflicted.
+
+| commit | what | the door's reading |
+|---|---|---|
+| `6eb1cc194` | wiring census re-derived (`node scripts/wiring-census.mjs`) | `--check` refused (generalStateProse.js stamp stale; 1 row DS-DEF-5 would move) -> written -> `--check` exit 0, 856 pools / 2,841 variants / 165 relation rows |
+| `3fa3f5f25` | prose byte baseline: defense.generated.js raw 236,427 -> 236,425 (the line's own 2-byte shrink on the lane's content) | proseCorpusBytes "RAW is EXACT" red -> green; gzip 32,046 vs 32,042, inside the 1 % band, not lowered (a rise) |
+| `35bf691cb` | pool dominance: the line's one new pool by `--bank-new` (`NPC_STRUCTURE.magic__contested__dominant`, top1 1, 1 line, the line's own figures) | "1 new rows banked, no other row touched" |
+
+THE POOL GUARD after it, `poolDominance.walker.test.js`: 3 failed / 14 passed, the SAME three titles red at 34f48f48d (run there): over on both readings (resource_scarcity 0.3745 > 0.3359; succession_crisis 0.8208 > 0.6402, the history seat's STOP); stale rows (the three Elder Grove Council rows and `CULTURE_PROFILES.south_asian.architecturalDetails`, "no longer drawn"); the loose ceilings. RED AND NAMED, no hand edit, no ceiling raised: for the seat after the join.
+
+## 2. The presumed-things door after the merge (EXECUTED, pushed)
+
+At 35bf691cb `--check`: fresh 50 · stale 54 · first-register stale 26 · banked 4,720 (the ninth seat's 50, byte-equal). Now (3e0b6b610): **fresh 49 · stale 0 · banked 4,663 · strips 0/0/107**, exit 1 on the 49 below.
+
+| class (the chair's 04:58 ruling) | rows | commits |
+|---|---|---|
+| (1) stale, out by `--shrink` | 80 (the merge's: 54 widened + 26 first register) + 1 + 2 (the cures') = **83** | `338479f68`, `71b593200`, `23bfefde3` |
+| (2) a set already declaring the atom | **0**: every `house: …` and `resource: …` family's `atoms` is `[]` ("its atom waits for a factsOf getter", `registeredWords.js :: HOUSE_FAMILIES`, `RESOURCE_FAMILIES`), so no declaration can imply it; the band and keyed atoms that DO exist were checked line by line (the list below): none is declared beside its text in a form that is byte-identical | none |
+| (4) false somewhere: CURED | **2**: the Great Harvest Compact's "the merchant guilds" (6 of 38 printing towns with no merchant guild) -> "the guilds" (its gate `guild`); the Brewer's "After the bakers, no trade eats more grain" (4 of 4 printing villages with no baker) -> "Only bread takes more of the grain." Declared moves, field diffs confined (history descriptions 20 + 18 towns; institution descriptions 4 towns), read where they print (the commit bodies) | `71b593200`, `23bfefde3` |
+| (3) gated in code, not declared through a draw door | **48**, RED AND NAMED below | none |
+| the corpus lane's | **1**: `src/data/dossierStateProse/defense.generated.js` granary `7a07521d8484e089` ("no institution: granary", a `marks` string, printed in 0 of 1,440 births), NAMED for its owner, the corpus lane (written by `scripts/generate-dossier-state-prose.mjs`) | none |
+
+### FOR THE DECLARATION PASS (class 3; file, text, the code condition that gates it, the atom it would declare, any new word)
+
+Measured by `qabs.mjs` over the census 720 and a fresh 720 at 35bf691cb (`probes/W2-FIX-DATA-10/qabs-at-35bf691cb.txt`: "printed" = towns printing a sentence of it that names the thing; "reader-absent" = towns where the rule book's own reader says the thing is absent). The list of the 49 by hash: `probes/W2-FIX-DATA-10/presumed-fresh-49-at-23bfefde3.txt`.
+
+A. A house's OWN description naming that house, gated by the house's own presence (the line prints only on that house's card). The atom `house: <family>` waits for its `factsOf` getter: a NEW WORD (a getter) in each case, PARKED with its word for the owner's veto.
+1. The Mine: `institutionDescVariants.js` `25bb46e70236408f`, `7287909f4809b975`; `institutionalCatalog.js` `0373df797f2858ad` (printed 49, 71, 62; reader-absent 0). Atom `house: mine`.
+2. The Stone quarry: IDV `18425e5e902f9f93`, `159741114b9d0a37`, `c54b81aeb422d8d7`; catalogue `fa508fe2a2e6ac65`, `3e644ef0dd5c3418` (house reader-absent 0). Atom `house: stone quarry`. The SAME texts also read `resource: stone_quarry` (atom waits): reader-absent 4/7, 2/5, 51/76, 89/120, 3/9: the house stands where the record's `config.nearbyResources` does not list quarry stone: a PLACEMENT question (the catalogue admits the quarry without the resource), NAMED FOR THE JOIN, not a fault of the text.
+3. The Elder Grove Council: IDV `d7a110e6054be4fc`, `48bd27e576abfdeb`; catalogue `58ae82300e837074` (printed 4, 5, 135): `house: druid` reader-absent in EVERY printing town although the house stands: the family's stem "druid" does not read the name "Elder Grove Council" (a reader's gap, the rule book's). The same texts' `streets` (band `tier ≥ village`; reader-absent 0): gated by the catalogue's own tier placement; atom `tier: ≥ village` (no new word), but the texts are a plain variant array and a catalogue `desc`, neither handed to a draw door with a `needs`.
+4. The fishing house: IDV `67c1b4eb928e5da7` (printed 24, reader-absent 0). Atom `house: fishing`.
+5. The Mercenary company's twin "Organised bands of hired blades, a few score to a few hundred strong." IDV `058f2527f0e3fc48` (gated `needs` with `mercenary`; printed 47, reader-absent 24: the stem "hired blade" does not read the company's name). Atom `house: hired blade`.
+6. The River boatyard's "fishing boats" / "fishing craft": IDV `20db476059d1b418`, `e93309dab034221e`, `83d03ab88fd81eb6`, `58a543b49791411a` (printed 61, 19, 8, 9; reader-absent in each: the yard builds boats for whoever fishes the water): ACCEPTED by the chair (HANDBACK-9 row 4), left for after the merges. Atom `house: fishing`.
+7. The maltster's and the Brewer's "alehouses": IDV `a9cf19bb34fbbd00`, `736ab5d9380421e2`, and `aa4c1c8765d2f77f` (the Brewer's reworded original, `23bfefde3`): gated `needs: ['institution: tavern']`; reader-absent 3/5, 10/10 (the stem "alehouse" does not read a tavern). Atom `house: alehouse`.
+8. The Charcoal burner's originals naming its buyers: IDV `d38b7cb1d9f5c028` ("... to the smelters, smiths, and bakers", gated `terrain: forest`; printed in 0 of 1,440: UNREAD where it prints; things `smith`, `house: smelter`, `house: baker`) and `959ac324dde268f0` ("... fuel for smithing and baking ... forest and forge", gated `terrain: forest`, printed 0; `smith`). Atoms `institution: smith` (exists) and `house: smelter`, `house: baker` (wait). NOT READ IN PRINT: the declaration pass reads them where they print before declaring.
+B. A line gated by a band or a keyed atom that EXISTS, declared beside the text in another dimension (no new word):
+9. `historyData.js :: HISTORY_QUARTER_WORDS` and the history siblings' district texts: "the merchants' quarter" `0b20b35cf5d9f7e9`, "the residential district" `d21c40d805c216b2`, "the temple district" `3a3da5b46e268323` (also `temple`), the great fire's "across entire districts" `7130762978fa8f82`, the ley-line incident's "a district" `4f6fa1145b7e6e27`, "Affected district retains residual magical effects" `83dece505758b019`: gated `tier: ≥ town`; the word `quarters` reads the POPULATION band (middling, large): atom `population: ≥ middling`. The two readers disagree in ONE town of 1,440 (`r2s-succession_void-town-3`: tier town, population band small; "the residential district" prints): NOT byte-identical, so not declared here.
+10. The history's `temple`: "the temple district" `3a3da5b46e268323`, the Great Construction's "a cathedral" `cc27d2b3e3fca458`, `dc29bf0a6a243a34`: gated `institution: temple` (which a shrine satisfies); the word reads `church` (`faithReading.hasChurch`); reader-absent 0 of 44, 26, 2. Atom `church`.
+C. A line true by its own words that no atom can declare (the matcher's reading, the rule book's):
+11. The Granary's "Communal grain storage. Buffers harvests, prevents famine." IDV `b77abf521091f2db`: gated `excludes: ['crisis: famine']` (its twin under a famine says the store failed); the line names famine to say it is prevented; no atom implies it ("prevents" is not among the rule book's negations).
+12. The thorp burial ground's twins "A priest says the words when one can be brought in time ...", "A priest speaks when one can be fetched in time ...", "The rites wait for a priest when one can be fetched in time ..." IDV `3479ae839c1d669b`, `9a5d98d5f035bdb6`, `d7dfdecbc2dbc7de`, and the Last rites service "Funeral rites, said by the parish priest, who comes or is sent for." `institutionServices.js` `c0f3deced43ff3eb` (printed 86, 58, 96, 102; reader-absent in every one: no church here, and the line says the priest comes from elsewhere). `church` would be false; the rule book's elsewhere reading does not read "fetched", "brought", "comes or is sent for".
+13. The Charcoal burner's twins "the fuel that forge and oven need to run hot" `20b99d586add834d` and "charcoal for forge and oven" `ba0fe0508906c9bb` (gated `excludes: ['terrain: forest']`; printed 103, 105; `smith` reader-absent 19, 21): a statement of what charcoal is for, read true; `institution: smith` would take a true line off.
+
+## 3. Section 2m's checks at the tip (IN PROGRESS)
+
+| check | exit at the tip | at 34f48f48d (lane) | at 976db5b19 (line) | class |
+|---|---|---|---|---|
+| `node scripts/fact-layers-door.mjs` | 0 (0 rises, 0 falls); factLayers walker green | READERS arm red | green | cured by the merge |
+| `node scripts/check-writer-reach.mjs` | 0 (WRWALKER HOLD 12,345 judged) | | | green |
+| `tests/lint/tuningRegister.walker.test.js` | green | | green | green |
+| lighting census | red ("files 3264 vs 3245") -> RE-TAKEN by its ritual, `3e0b6b610`; 34 passed | red | green | the lane's, cured |
+| `node scripts/check-observed-shape-readers.mjs` | **1**: the execution INPUT changed (the six `dossierStateProse/*.generated.js`), and `--write` REFUSES: three NEW reads in `src/generators/steps/assembleInstitutions.js` (`selectedStresses`, `selectedStressesRandom`, `stressorEdits` on `config`: the lane's own `146ad0eab`, W2-FIX-DATA-3, the description reads the crisis "in the app's shape") | red (fails at the input change, before the reads) | 0 | **THE LANE'S, A STOP NAMED** (below) |
+| `tests/lint/observedShapeReaders.walker.test.js` | 3 red (SHRINK-ONLY; THE LIVE ESTATE INSTANCE no drift; A1/A7) | fails at load | green | the same cause |
+| `tests/lint/writerReach.walker.test.js` | 2 red (the frozen shapesDigest equals the in-process digest; the lit arm byte-identical) | fails at load | green | the same corpus: waits on the observed-shape re-freeze |
+| page census `--workers=2` (720) and `--grid` | PENDING | | | |
+
+**THE STOP (the observed shapes; for the chair, with a recommendation).** The three reads are true reads of keys the APP's config carries (the panel's `selectedStresses` with random off, an editor's `stressorEdits.added`) that the generation corpus never writes; the instrument's form for that is the EXPLAINED-WRITER BANK (`--raise-explained-writer <reason>` with its declaration in `tests/lint/observedShapeBank.literal.js`, `reason === ruling`). That is a ruling's, not a lane's door. RECOMMENDATION: the chair rules the three identities into the explained-writer bank (writer: the app's config, `src/store/configSlice.js` / `densityCreateBoundary.js :: birthConfig`), then `--write` on the committed tree re-freezes the input change and re-takes the shared corpus digest that writer reach pins; striking the reads would re-open the third seat's F1 (the description blind to a crisis the panel set).
+
+## 4. The census (CENSUS-2) at the tip: PENDING (base, at 96d698de7: HANDBACK-9 section 4)
+
+## 5. The 720-birth field diff by family, base 96d698de7 against the tip: PENDING
+
+## 6. The whole suite in six shards: PENDING
+
+## 7. The edge bundles: PENDING (`npm run build:edge-shared`, alone, last)
+
+## 8. LEFT FOR AFTER THE JOIN (HANDBACK-9 section 2, as it stands, with the history branch's rulings)
+
+HANDBACK-9 section 2 items 1 to 7, unchanged and not this lane's: row 5 (institutionServices.js under a siege or famine, measured, not cured); row 6 (finishedGoodsCategory.js :: importLabels, economicData.js :: IRON_GRAIN_FUEL, geographyData.js :: TERRAIN_DATA.mustImport, supplyChainData.js :: QUALITY_TOOLS_AND_WEAPONS: not read); row 7 (institutionBacking.js ww-798, informationBrokerageTuning.js pf-702: not read); the slave revolt's note (stressTypes.js, not measured); step 8's four PAIRS hits; the Mine's service twin and the parish churches' card one-liner; the history branch's rulings (a) the Succession Crisis's present-tense ruler lines in a council's town, (b) the succession hooks under a priest-ruled council, (c) "A would-be heir approaches outsiders" in three elders' towns. ADDED by this seat: the Compact's draw-time `guild` (2 towns print it with no guild in the final record: r2s-slave_revolt-hamlet-1, w2fd8s-under_siege-village-2; the writer is the history draw's fact timing); the Stone quarry's placement without its resource (section 2, A2); the pool guard's three carried reds (section 1).
+
+## 9. FOR THE JOIN
+
+- `scripts/lib/table-pools.mjs` is changed by the powers lane too: this lane's rows there are PENDING a by-script read.
+- `src/domain/display/institutionVocabulary.js`: the parish churches' card one-liner ("Hundreds of houses of worship across every district ..."), a display file outside the lane's files (named in 792b1d11f).
+- The Mine's service twin "Ore cut underground by the crews ..." (`institutionServices.js`, the cut's #1246; named in 383f1d9a7).
+- The observed-shape stop (section 3).
+- The declaration pass (section 2): 48 rows, 13 groups.
+
+## 10. The rulings this seat works to
+
+The brief (BRIEF-W2-FIX-DATA-10); the chair's first message (the tip 34f48f48d is not a stop); the chair's rulings of 04:15, 04:37, 04:46 to 04:48 and 04:58 as HANDBACK-9 section 9 copies them.
