@@ -17,6 +17,8 @@ ww#375: 128 → 0. #101: 6 → 0. Each is held by a guard that reds on its own p
 
 The generator move changes the stability label only. It moves no power, no legitimacy band and no person.
 
+**The chair ruled (12:22 UTC): M1 and M2 go to the lane's next seat (POWERS-15) as cures with guards, as does the PDF's raw modifier (C1). They hold this lane's next landing, not the join; the lane lands only after those cures are made and a reader has read that seat's range.**
+
 ## Findings, ranked
 
 | # | Rank | Whose | EXECUTED? | Town and sentence | The fact against it |
