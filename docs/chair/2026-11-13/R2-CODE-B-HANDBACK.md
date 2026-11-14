@@ -1438,3 +1438,23 @@ A SEVENTEENTH RED, found by the touched-files run of M10 (not in PART 12's list)
 - GUARD: tests/pdf/journalForceNoProvenance.test.js (collected, keep-guard, taken-off guard); three plants, each red on its arm, none committed.
 - TOWNS READ: r2r-thorp-1 (30), r2s-famine-village-3, r2s-under_siege-town-1, r2s-occupied-city-1, r2r-city-0, r2r-metropolis-8 (344,689). All true.
 - GATES: strict 0, ratchet 0, eslint 0, grid 0, castDerived 0; walker as at base (153/1/2); the 28 files naming journalPages.js: 27 green, houseLabelEverySurface (A, above).
+
+AN EIGHTEENTH RED, found by M12's touched-files run: tests/domain/r3c9ReaderLinesTrue.test.js "n15: … the account names no such rival and says no cost of it" (town Ainkarez): tip R, joined R, pre R: CLASS (A), carried (the r3-code-c lane's file; red at the base 3a4198e0f before M12). Counts with it: (A) 18, (B) 0, (C) 0.
+
+## M12 — DONE (939b605c9)
+- CAUSE: faithReading.js :: religiousFactionOf flagged `anotherGoverns` wherever another power governed (57395ee18): the true line left 148 towns where the contender outweighs the governor. This lane alone changes the file (by content).
+- CURE: the flag only where another power governs AND some other power matches or outweighs the contender. A FURTHER CONDITION THAN THE RULING'S WORDS, declared: the line says the weight RESTS with it, so a third power above it (rr3-town-religious_conversion-rand-3: Merchant Guilds 36 over its 33, Church Council governing at 31) keeps "A voice": 12 towns. For the owner's veto.
+- COUNTS (1,536 at 3a4198e0f): "Real political weight rests with …" 0 → 136 towns (village 67, town 38, city 23, metropolis 8; 22 over a religious-category governor), each "A voice …" before; 12 keep "A voice" (a third power above); 62 keep it (the governor matches or outweighs).
+- GUARD: tests/domain/faithContenderWeight.test.js (12 census towns; keep-guards for the governor and a third power; taken-off guard); three plants, each red on its arm, none committed.
+- TOWNS READ (the census renderer at the tip; Faith tab and PDF Identity): r2r-village-41 (81), r2s-slave_revolt-metropolis-0 (86,164), rr3-village-under_siege+famine-rand-1, r2s-famine-village-0, r2s-succession_void-village-0, r2s-succession_void-village-3, and the keep town. All true.
+- GATES: strict 0, ratchet 0, eslint 0, grid 0, castDerived 0; walker as at base (153/1/2); the 8 files naming faithReading.js: 7 green, r3c9 n15 (A, above).
+
+## ITEM 1's REMAINDER — THE PLAGUE TWIN READ (no code change)
+Read in the census's own dumps of every surface (the 720 at 3a4198e0f) and the plague+famine thorp rendered at the tip. The hook prints on three surfaces: the Crisis tab, the PDF Overview, the journal Overview (not on Plot Hooks, the NPCs tab or the Tonight sheet in these towns). The 720: roster healer 4 towns, stand-in 7, nobody 9.
+- A ROSTER HEALER ("{name}, the healer who first named the outbreak,"): r2s-plague_onset-village-2 (Decimia Flaccus, Master Apothecary), -town-0 (Anwar al-Masri, Master Apothecary), -metropolis-0 (Oyuntuya Kipchak, of the Apothecary district). TRUE: each a healer on the NPCs tab; no "No healer" line in those towns.
+- A STAND-IN ("{name}, the first to name the outbreak,"): r2s-plague_onset-thorp-0 (Jiahao Wu), -hamlet-0 (Daria Pavlov), -hamlet-2 (Archana Acharya): each "Tends the sick" on the NPCs tab beside "No healer is kept here" (2 lines each). TRUE: no office claimed.
+- NOBODY ("The first person to name the outbreak has gone quiet."): r2r-thorp-41, r2s-plague_onset-village-0, r2r-town-37, and rr3-thorp-plague_onset-rand-3 (16 souls, a plague under a FAMINE, rendered at the tip). TRUE.
+- A siege or an occupation under a plague: none among the 1,536 (the one combination born is the famine above).
+
+## (r3) THE CENSUS'S ONE COMMAND AT THE TIP (3a4198e0f, exit 0; births+render 1,220 s, count+trace 485 s; `--files` the lane's 40 src files)
+The lane's writers, by false towns (each a CANDIDATE, not yet read ten lines): src/pdf/sections/Services.jsx :: svcLabel 11.2 (12 towns, "Hot springs » Access to a house of worship"; FENCED by (k): the SURFACES-1 lane's, FOR THE JOIN); EconomicsTab.jsx :: EconomicFlowsSection 7.4 (8; "Stone Quarrying"; bar#235); traditionCorpus.js :: TRADITION_ELEMENTS 2.8 (3; "The Fair of the First Landing"); EconomicsTab.jsx :: EconomicsTab 2.8 (3; a siege's trade list); settlementQuickGuide.js :: scopeAtSize 1.9 (2; "built around a civic-ritual plaza …") and scopeAgainstRecord 0.9 (1; "built around the h[arbour]": M14). Their places by width: after M6's other half (21) and M4 (11).
