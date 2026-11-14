@@ -1767,3 +1767,57 @@ Rulings (1) and (2) DONE, pushed (0044e4f84, 9b5833232, ea37b0a67); the rest NOT
 `git diff --stat 92d36e5f9..HEAD -- src/`: src/domain/display/defenseDisplay.js +22 -1 (ruling 1); src/domain/display/
 validationOnPage.js +51 -5 (ruling 2). Two test files changed (no title added): noOneRingWhereRingsRival.test.js (ruling 1),
 economyDeskReadsTheCards.test.js (ruling 2).
+
+# PART 12 — the twelfth seat (W2-C-LEAVES-12, 2026-11-14, from f9db28270)
+
+**Seat:** the Claude Code session session_01ACmDYWZd2EbAz88UG1EfFL; the chair is session_01ACmDYZrFEVXyZEUg1NDxxC.
+Assignment: docs/chair/2026-11-14/briefs/BRIEF-W2-C-LEAVES-12.md on lane/chair-2026-11-08, with the chair's correction (the
+tip f9db28270, one docs commit after adbafd3c9: not a stop). Origin read back at the start: f9db28270. Scratch worktree
+<scratchpad>/wt (local branch w12). EXECUTED = run and read; PLAUSIBLE = read from code.
+
+## THE CHAIR'S RULINGS SINCE PART 11'S COPY (copied from the brief, 2026-11-14; each vetoable by the owner)
+(2b) THE HOUSE THAT FINISHES A GOOD MAKES THAT GOOD: the sentence names a house only where that house's own maker row holds
+the good it names (a mill makes flour, not beer); else the sentence is not printed. Cured with (3).
+(H) HIGH, carried: NO SURFACE PRINTS A CATALOGUE NAME'S BRACKET ("Major monasteries (5-10). Wounds and fevers …"): through
+the display label; every "(n-m)" the file prints, the same commit.
+(8, refined) UNDER A SIEGE NOTHING COMES IN OR GOES OUT BY ROAD, GATE OR WATER; A MAGIC CHANNEL THE RECORD HOLDS IS SAID.
+(10, refined) THREE "ARCANE" FACTS: MEASURE THEM SIDE BY SIDE first; THE PAGE'S ARCANE WORDS READ THE DEFENCE PROFILE'S OWN
+TRADITION (defenseProfile.traditions.hasArcane).
+(14) TWO WORDS IN ONE ROW SAY WHAT EACH MEASURES, or the row prints one (Internal Security beside Desperate / Critical).
+(15) NO SURFACE PRINTS A CATALOGUE LABEL WITH A SLASH ("gold/silver ore"): the plain name, through the pills' leaf.
+(16) ONE READER FOR ONE FACT ON EVERY SURFACE: the Magic tab calls the chain magic note reader.
+(17) TWO THINGS A PAGE SAYS ARE SET APART ("Medical treatmentSurgeryQuarantine"; unlabelled yield chips).
+CHANGED: (12) is no longer this lane's; NO FILE UNDER src/pdf/ OR src/foundry/ is changed here (a row needing one is named).
+(The chair, 12:52 UTC, for every lane's seat) REGISTERS ARE RE-DERIVED ONCE, AT THE CLOSE, ON THE FINAL TREE: a register a
+cure makes stale is NAMED here, never re-taken; the grid's falls are not lowered at the hand-back (named).
+
+## Items (this seat)
+| row | cause | cure, commit | counts (the reader's 1,824 births) | guard, plant |
+|---|---|---|---|---|
+| (3) HIGH pills + (2b) | `chainMakesHere`'s default passed any good with no maker row by a chain house's first word (52,603 card outputs, 2,624 exports, 5,478 local pills in 1,660 towns, MEASURED FIRST against an uncommitted plant) | no row, no maker; MADE_GOOD_ROWS grown per good; LAND_GOOD_ROWS for the land's own goods (their ground path and raw export kept); `houseMakesGoodNamed` + `fullRowAsHeld` (b9b4033e3) | mine-only "Master-crafted weapons" 21 -> 0; milled lumber with no sawyer 27 -> 3 (ground path); card outputs -5,192, exports -440 / +117 ("Preserved foods" transit -> made, read TRUE), local -645 / +7; ruling (2) re-measured: full row 92 -> 9 towns, all 83 silenced named a house that does not make the good | economicsChainOutputsBorneOut (unit + 5 silent, 2 guards), economyDeskReadsTheCards (2b unit, 6 towns moved silent), economicsGoodsPillsBorneOut anchor re-keyed: RED at f9db28270, GREEN |
+| (3) HIGH famine exports | `pillAsPrinted` returned a raw good with no maker unread | `rawCardStoppedByCrisis` (1ea5d0420) | 21 pills in exactly 12 towns (Raw wool 10, Livestock 9, two sieges), nothing else moved | economicsGoodsPillsBorneOut famine test (unit + 4 towns + guard): RED at b9b4033e3, GREEN |
+THE RECORD DOES NOT MOVE (EXECUTED, `pills.jsx` carries rec.jsx's leaves and blocks; `recdiff.mjs`): 1,824 of 1,824 records
+identical after each cure. STORED PUBLIC PROSE (declared): b9b4033e3 moves economy:economics, :services, :resources,
+:daily_life in exactly the 83 towns whose full row is no longer offered; 1ea5d0420 moves none.
+THE TRUE LINES THE SILENCES TOOK (b9b4033e3, reported for veto): "Rare spices and exotic dyes" on the Spices & Dyes card (507:
+the merchants carry them), "Caravan trade goods" / "Exotic imports" on the camel card (122 each), "Magical entertainment" at
+a bardic college (585: the detector does not call it arcane), "Divination and scrying" at a Sage's quarter (492).
+
+## FOR THE JOIN
+- tradeListDisplay.js, validationOnPage.js and the three test files: no other lane's copy differs but this lane's own
+  descendants (join-*, review-w2-c-leaves, review-bar-0, w2-c-leaves-side; holders.sh, by content and own commits).
+- defenseDisplay.js is held also by lane/coherence-upkeep-2026-11-12 and its upkeep lanes (foodEnduranceLine only).
+- REGISTERS NAMED (not re-taken, the chair's 12:52 ruling): the grid's 17 falls (P6need / P17 / P8any, identical to the tip).
+  Carried: the presumed-things walker's two named SERVICE_OUTPUTS hits (unchanged hashes); the tuning walker's six tables.
+
+## WHAT IS LEFT, line by line (the brief's order)
+1. (H) the Medical Readiness count range, then THE ONE MESSAGE of step 1 (with the 1,824 render once).
+2. By width: (15), (4) with #206, (7), (5), (16), (17), (10), (8), (6), (9), (3)'s medium pills (mostly cured by b9b4033e3:
+   re-count), (14), (11); then PART 11's carried medium rows.
+
+## INSTRUMENTS (docs/chair/2026-11-14/probes/W2-C-LEAVES-12/; replace <scratchpad>; with PART 11's run.sh, head.jsx, recdiff.mjs)
+- `run4.sh <tree> <probe> <outprefix> <seeds>` four parts in parallel (~12 min for the 1,824 on 4 cores); `pills.jsx`: per
+  birth the record's leaves and publicProse blocks hashed, the card outputs, exports, local pills, the full row, the roster;
+  `pilldiff.mjs <a> <b>` and `bygood.mjs <a> <b>` the pills gone and new; `pick.mjs` towns of a good; `ranges.jsx` every
+  "(n-m)" defenseDisplay prints; `one.jsx` one rww/rr2s town's chains of a good; `holders.sh <file>` the other holders.
+- Frozen trees <scratchpad>/fz-* (tar of wt without .git, node_modules linked) carry each measure; a plant is made only there.
