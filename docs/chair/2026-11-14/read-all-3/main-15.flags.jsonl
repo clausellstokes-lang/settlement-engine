@@ -1,0 +1,28 @@
+{"id":"00452","town":"r2r-city-31","sev":"MED","kind":"STATE","why":"garrison commander 'member of City Council'; PEOPLE brackets show Torvald holding no council seat","other":""}
+{"id":"00401","town":"r2r-city-45","sev":"MED","kind":"STATE","why":"blade captain 'member of Merchant Guilds' carrying most weight; that power is Suppressed and PEOPLE brackets show no seat","other":""}
+{"id":"05304","town":"r2r-city-49","sev":"MED","kind":"STATE","why":"innkeeper called 'Master of the Guilds, first of Merchant Guild Council'; PEOPLE shows only the inns post, no bracketed council seat","other":""}
+{"id":"14609","town":"r2r-city-24","sev":"MED","kind":"STATE","why":"says it sends out bread, animal feed, cut stone, stone blocks; TRADE exports only flour and quarried stone; gaps say stone leaves half-finished","other":"01825"}
+{"id":"27599","town":"r2r-city-45","sev":"LOW","kind":"STATE","why":"hook 'price is the same for both' does not fit the quarrel it is tagged with: a ruling one power refuses to obey","other":""}
+{"id":"27613","town":"r2r-city-49","sev":"LOW","kind":"STATE","why":"hook 'price is the same for both' does not fit its quarrel, a loan called in early","other":""}
+{"id":"14613","town":"r2r-city-57","sev":"MED","kind":"STATE","why":"says it sends out bread, beer, animal feed, cut stone; TRADE exports only flour and quarried stone; gaps say stone limited to intermediate products","other":""}
+{"id":"00425","town":"r2r-city-57","sev":"LOW","kind":"STATE","why":"company captain 'second of The Order of the Watch' carries most weight; that power is Suppressed and PEOPLE brackets show no seat","other":""}
+{"id":"06745","town":"r2r-city-8","sev":"LOW","kind":"STATE","why":"clay deposits via potter and brickmaker yield 'Barrels and containers'; barrels are not clay goods and the town has no cooper","other":""}
+{"id":"33068","town":"r2r-city-48","sev":"LOW","kind":"BROKEN","why":"quick-reference row prints an empty power cell for the blade captain; the column always carries a power","other":""}
+{"id":"14635","town":"r2r-city-54","sev":"MED","kind":"TAG","why":"says it sends out medicines and lumber; TRADE exports have neither, mountain timber is depleted and timber imported; tag reaches siege, when nothing goes out","other":""}
+{"id":"27618","town":"r2r-city-14","sev":"LOW","kind":"STATE","why":"hook 'price is the same for both' does not fit its quarrel, members leaving one power for the other","other":""}
+{"id":"15946","town":"r2r-city-14","sev":"MED","kind":"STATE","why":"says a magic controversy split the settlement; PAST records no such event, only a minor Arcane Incident 349 years ago; magic is low","other":""}
+{"id":"09798","town":"r2r-city-42","sev":"MED","kind":"STATE","why":"mills yield 'Grain export, Surplus food'; FOOD surplus 0%, grown 74% of need, 26% imported; TRADE exports no grain","other":"11359"}
+{"id":"11141","town":"r2r-city-34","sev":"LOW","kind":"STATE","why":"'kept the work alive through the shortage'; PAST records no shortage and FOOD is Secure with no failed source","other":""}
+{"id":"14610","town":"r2r-city-0","sev":"MED","kind":"STATE","why":"says it sends out bread and animal feed; TRADE exports have flour, furs, iron ore, weapons and tools, no bread or feed","other":""}
+{"id":"07707","town":"r2r-city-22","sev":"LOW","kind":"TAG","why":"prints 'pilgrimage traffic' though no pilgrimage chain or pilgrim export here; tag reaches siege towns, where nothing arrives by road","other":""}
+{"id":"31198","town":"r2r-city-22","sev":"MED","kind":"STATE","why":"cites a Wild Magic surge on the riverside wharves; PAST has no such event (only a minor Arcane Incident) and HOUSES has no docks or wharf","other":""}
+{"id":"14615","town":"r2r-city-50","sev":"MED","kind":"STATE","why":"says it sends out bread, beer, animal feed and lumber; TRADE exports list flour and milled timber, no bread, beer or animal feed","other":""}
+{"id":"25916","town":"r2r-city-23","sev":"MED","kind":"STATE","why":"describes The Merchant Bloc as craft guilds regulating apprenticeships, a reliable secondary presence; GOVERNMENT lists Craft Guilds separately and The Merchant Bloc as Suppressed","other":""}
+{"id":"25617","town":"r2r-city-43","sev":"MED","kind":"STATE","why":"describes The Commercial Circle as craft guilds, a reliable secondary presence; Craft Guilds is its own power in QUARRELS, in high conflict with it, and the Circle is Suppressed","other":""}
+{"id":"27620","town":"r2r-city-43","sev":"LOW","kind":"STATE","why":"hook 'price is the same for both' does not fit its quarrel, an unpaid debt between the two powers","other":""}
+{"id":"00455","town":"r2r-city-41","sev":"MED","kind":"STATE","why":"garrison commander 'member of Merchant Guild Council' carrying most weight; PEOPLE gives the post at Garrison with no bracketed council seat","other":""}
+{"id":"21332","town":"r2r-city-12","sev":"MED","kind":"LACKS","why":"names 'Vigilantes' as a party against the garrison and Thieves' Guild; GOVERNMENT lists no such power and HOUSES has no such group","other":"26756"}
+{"id":"26756","town":"r2r-city-12","sev":"LOW","kind":"LACKS","why":"slash-joined label names 'Vigilantes' as a party; GOVERNMENT and HOUSES list no vigilante group","other":"21332"}
+{"id":"00454","town":"r2r-city-12","sev":"MED","kind":"STATE","why":"garrison commander 'member of Merchant City Council' carrying most weight; PEOPLE gives the post at Garrison with no bracketed council seat","other":""}
+{"id":"16250","town":"r2r-city-12","sev":"MED","kind":"STATE","why":"cites a Market Crash in fish and property ruining fortunes for a generation; PAST has no crash, only a minor Guild War 23 years ago and a minor Shortage 449 years ago","other":""}
+{"id":"DONE","lines":2262,"blocks":39,"flags":27}
