@@ -98,11 +98,13 @@ describe('a chain card names the houses, never a rank the roster does not hold',
   const names = SETTLEMENT.institutions.map((i) => i.name);
   test('the pattern "Craft guilds (5-15)" over a roster of "Craft guilds (100-150+)" reads "Craft guilds"', () => {
     const facts = chainFlowFacts({ processingInstitutions: ['Craft guilds (5-15)', 'Bowyers & fletchers (guild)'] }, names);
-    expect(facts.institutions.map((h) => h.name)).toEqual(['Craft guilds', 'Bowyers & fletchers (guild)']);
+    // R2-CODE-B-SIDE item 3: a template name the roster does not hold is not named (this roster has no bowyers).
+    expect(facts.institutions.map((h) => h.name)).toEqual(['Craft guilds']);
     expect(facts.institutions[0].present).toBe(true);
   });
   test('two ranks of one house are one house', () => {
+    // R2-CODE-B-SIDE item 3: "Annual fair" is a template name this roster does not hold, so it is not named.
     expect(chainHousesOf(['Merchant guilds (3-8)', 'Merchant guilds (15-40)', 'Annual fair'], names).map((h) => h.name))
-      .toEqual(['Merchant guilds', 'Annual fair']);
+      .toEqual(['Merchant guilds']);
   });
 });

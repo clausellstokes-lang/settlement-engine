@@ -5,7 +5,6 @@ import { chromeFontSize } from '../../design/proseScale.js';
 import { SUPPLY_CHAIN_NEEDS } from '../../data/goods/chains.js';
 import { exactGoodId, goodText } from '../../domain/region/goodsCatalog.js';
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
-import { supplyChainNoteInWords } from '../../domain/display/engineKeysInText.js';
 import { chainHousesOf, chainSourceOf } from '../../domain/display/chainHouses.js';
 
 // ── Build a lookup: chainId → full chain definition ──────────────────────────
@@ -126,7 +125,7 @@ const OutputNode = ({ label, isExport }) => {
  * @param {ReadonlyArray<string>} instNames the settlement's institution names, raw
  * @returns {{resource: string|null, resourceDepleted: boolean,
  *   institutions: Array<{name: string, present: boolean}>, importedUpstream: string[],
- *   upstreamNote: string|null}}
+ *   upstreamNote: null}}
  */
 export function chainFlowFacts(chain, instNames = []) {
   return {
@@ -136,11 +135,20 @@ export function chainFlowFacts(chain, instNames = []) {
     // Which processing institutions are actually present? R2-CODE-B item 1: each named once, by the
     // seam's house label (domain/display/chainHouses.js), never a rank's count range the roster lacks.
     institutions: chainHousesOf(chain?.processingInstitutions, instNames),
-    // Upstream imports needed — the generator stores chain IDS; the reader gets labels.
-    importedUpstream: (chain?.upstreamMissing || []).map(uid => CHAIN_DEFS[uid]?.label || uid),
-    // The generator joins CHAIN IDS into this sentence, so the seam resolves them against
-    // the same table the labels above are drawn from.
-    upstreamNote: chain?.upstreamNote ? supplyChainNoteInWords(chain.upstreamNote, CHAIN_DEFS) : null,
+    // R2-CODE-B-SIDE item 2 (#366, #799 "Import: Food Processing" beside mills and a brewery; #699 "Precious
+    // metal veins · Import: Mining & Coinage"): `upstreamMissing` holds the CHAIN IDS the generator found not
+    // running here, and a chain's label is a category of work, not a good. The From line names a good or a
+    // ground the record holds, or nothing; the goods the town buys in are the trade list's, which this card
+    // is not handed, so it names none. The field stays so every reader of the facts keeps its shape.
+    importedUpstream: [],
+    // R2-CODE-B-SIDE item 1 (#1375 HIGH, #791, #1256, #448, #630, #793, #800, #1255, #367): the generator's
+    // upstream note leaves the card. It is written from the other chains' states and from which chain ids are
+    // active (generators/computeActiveChains.js), and this card is handed one chain and the roster's names: no
+    // read it holds makes the note true (on the census's 720: 337 of 432 "Needs imported X: no local source"
+    // beside the town's own source of X, 149 of 175 "Upstream X chain is impaired" over a chain that is only
+    // vulnerable). The card's status says the chain is vulnerable; the upstream chain's own card says why.
+    // The record keeps the note (no byte moves). The field stays so every reader of the facts keeps its shape.
+    upstreamNote: null,
   };
 }
 
@@ -148,7 +156,6 @@ export function chainFlowFacts(chain, instNames = []) {
 export function ChainRow({ chain, instNames, primaryExports, mobile }) {
   const st      = getStatus(chain.status);
   const def     = CHAIN_DEFS[chain.chainId] || {};
-  const missing = chain.upstreamMissing || [];
   const isExportable = chain.exportable && !chain.entrepot;
   const facts = chainFlowFacts(chain, instNames);
 
@@ -192,7 +199,6 @@ export function ChainRow({ chain, instNames, primaryExports, mobile }) {
         {chain.resourceIcon && <span style={{ fontSize: FS.sm }}>{chain.resourceIcon}</span>}
         <span style={{ fontSize: FS.sm, fontWeight: 700, color: st.color, flex: 1 }}>{chain.label}</span>
         {hasExport && <span style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800, color: swatch.success, background: swatch['#E8F5EC'], border: '1px solid #a8d8b0', padding: '1px 5px', textTransform: 'uppercase' }}>Export</span>}
-        {missing.length > 0 && <span style={{ fontSize: chromeFontSize(FS.micro, mobile), color: swatch.info, background: swatch['#FAF8F4'], border: '1px solid #a0b0d8', padding: '1px 5px' }}>imported</span>}
         <span style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 700, color: st.color }}>{st.dot}</span>
       </div>
     );
@@ -247,13 +253,6 @@ export function ChainRow({ chain, instNames, primaryExports, mobile }) {
         )}
       </div>
 
-      {/* Upstream note — the generator joins CHAIN IDS into this sentence, so the seam
-          resolves them against the same table the nodes above are drawn from. */}
-      {facts.upstreamNote && (
-        <div style={{ marginTop: 4, fontSize: chromeFontSize(FS.xxs, mobile), color: swatch.inkMag3, fontStyle: 'italic' }}>
-          ↑ {facts.upstreamNote}
-        </div>
-      )}
     </div>
   );
 }

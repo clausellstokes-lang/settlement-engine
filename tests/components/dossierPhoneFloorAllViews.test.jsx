@@ -644,7 +644,9 @@ const DESKTOP_BASELINE = Object.freeze({
   // its duplicates (Economy/Food tiles, the Supply Chains rows, the Resource Exploitation chips, the plot hooks).
   // 47 -> 48 (R2-CODE-B-3 item 2a, the stores' span contains its figure): no token moved; the fixture city's stores line
   // "Stores: a granary, nine months of grain." (40 characters) reads "about nine months" and crosses the measured length.
-  "Systems/Economics":   { measured: 48, sub14: 48 },
+  // then 48 -> 46 at the merge of the side branch (R2-CODE-B-5, 2026-11-14), the two moves composed: 47 -> 45 (2026-11-13, R2-CODE-B-SIDE items 1 and 2, 2ed36a430 and a245e05fb): the chain card's upstream note
+  // (47 -> 46, measured at 2ed36a430) and its From line of "Import: <a chain's label>" left the card; no token moved.
+  "Systems/Economics":   { measured: 46, sub14: 46 },
   // 28 -> 22 (2026-10-30, UX consolidation U5, T2-17..T2-19): Current Tensions, Active Conflicts and the
   // duplicate governing rows left the page; no token moved.
   "Systems/Power":       { measured: 34, sub14: 33 }, // 30 -> 29 OWNER-WORDS-DOSSIER item 3 (2026-11-09): the vignette line and the DS-POW-1/2 readings became one paragraph
@@ -794,7 +796,8 @@ const MOBILE_BASELINE = Object.freeze({
   // prose 39 -> 33 (2026-10-30, UX consolidation U1): the duplicate blocks left the page; no floor moved.
   // prose 39 -> 40 (R2-CODE-B-3 item 2a): the stores line "Stores: a granary, about nine months of grain." crosses the
   // measured length at the prose floor; chrome and both sub-floor counts hold.
-  "Systems/Economics":   { prose: 40, chrome: 8, sub14: 8, sub12: 0 },
+  // then 40/8 -> 39/7 at the merge of the side branch (R2-CODE-B-5, 2026-11-14), the two moves composed: 39/8 -> 38/7 (2026-11-13, R2-CODE-B-SIDE items 1 and 2, 2ed36a430 and a245e05fb): the chain card's upstream note (prose) and its From line of "Import: <a chain's label>" (chrome) left the card; no token moved.
+  "Systems/Economics":   { prose: 39, chrome: 7, sub14: 7, sub12: 0 },
   // prose 27 -> 21 (2026-10-30, UX consolidation U5): tensions, conflicts and the duplicate rows left.
   "Systems/Power":       { prose: 33, chrome: 1, sub14: 0, sub12: 0 }, // 29 -> 28 OWNER-WORDS-DOSSIER item 3 (2026-11-09): the governance block is one paragraph
   // prose 27 -> 25, chrome 1 -> 2 (2026-10-30, UX consolidation U6): the criminal faction is now one

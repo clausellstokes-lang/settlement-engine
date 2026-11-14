@@ -111,9 +111,10 @@ describe('composeSettlementQuickGuide', () => {
     // RE-KEYED (R2-CODE-B item 5, the chair's size ruling of 2026-11-13): a civic square (the civic-ritual
     // plaza) is a size error in a hamlet, so the hamlet's phrase is said at its size; the identity this
     // pin holds — the culture's design terms, never the filing word — is unchanged.
+    // RE-KEYED (R2-CODE-B-SIDE item 5, the chair's ruling: a frame that names an institution reads the roster):
+    // the roster holds a market and no waterworks, so the hamlet's phrase names the market alone.
     expect(guide.identitySentence).toBe(
-      'Edznaxochitl is a Mesoamerican-inspired hamlet of 130 people, built on tribute, '
-      + 'market and waterworks.',
+      'Edznaxochitl is a Mesoamerican-inspired hamlet of 130 people, built on tribute and market.',
     );
   });
 
@@ -162,9 +163,10 @@ describe('composeSettlementQuickGuide', () => {
       'Testholm is a Norse-inspired village of 400 people, built around the hall and the '
       + 'water, on assembly and what the season allows.',
     );
+    // RE-KEYED (R2-CODE-B-SIDE item 5): a village is a small place by its tier, so its phrase carries no wards and no
+    // bureau (the chair's size ruling reaches every frame); the stack this pin holds still reads whole.
     expect(say('east_asian')).toBe(
-      'Testholm is an East-Asian-inspired village of 400 people, built in wards and '
-      + 'courtyards, ordered by bureau and lineage.',
+      'Testholm is an East-Asian-inspired village of 400 people, built around courtyards, ordered by lineage.',
     );
     expect(say('steppe')).toBe(
       'Testholm is a Steppe-inspired village of 400 people, built for a pastoral life '

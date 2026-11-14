@@ -346,7 +346,10 @@ const ROUTE_BASELINE = Object.freeze({
   // 2026-11-13, R2-CODE-B item 1 (the page states facts and never the machinery): serviceComponents.jsx's chain-depth chip
   // ("2-order chain", one `chromeFontSize` site) leaves the service row — `floored` -1 on /create, /settlements, /gallery,
   // 623 -> 622, 866 -> 865, 668 -> 667; `bare` unmoved; re-measured by this census.
-  '/create':                { roots: 1, files: 162, floored: 622, ruled: 5, bare: 97, owner: 'lane 28 — the create page + the tier picker' },
+  // 2026-11-13, R2-CODE-B-SIDE items 1 and 2 (2ed36a430, a245e05fb): SupplyChainsPanel.jsx's ChainRow loses the generator's
+  // upstream note (one `chromeFontSize` site) and the phone row's "imported" pill (one `chromeFontSize` site) — `floored` -2 on
+  // /create, /settlements, /compendium, /gallery, 622 -> 620, 865 -> 863, 205 -> 203, 667 -> 665; `bare` unmoved; re-measured by this census.
+  '/create':                { roots: 1, files: 162, floored: 620, ruled: 5, bare: 97, owner: 'lane 28 — the create page + the tier picker' },
   '/home':                  { roots: 1, files: 19, floored: 8, ruled: 4, bare: 19, owner: 'lane 28 — the landing' },
   // The Realm lazily mounts the create flow's ClerkNote for its one advisory
   // line, so lane 28's file lands on a route it does not own. One site.
@@ -397,7 +400,7 @@ const ROUTE_BASELINE = Object.freeze({
   // 2026-11-10, LIBRARY-SIMPLE (owner: "No longer does it advance time."): floored 867 -> 864, the
   // campaign folder's three advance sites left with their controls — the "Advance by" micro-label,
   // the auto-resolve switch's label and the interval select, one `chromeFontSize` each; 0 bare.
-  '/settlements':           { roots: 1, files: 206, floored: 865, ruled: 4, bare: 0 },
+  '/settlements':           { roots: 1, files: 206, floored: 863, ruled: 4, bare: 0 },
   // /compendium files 51 -> 50 with the same T6 cut: the size grid's one helper module left the
   // compendium's import closure when ConfigurationPanel stopped importing it; floored 211 -> 206.
   // floored 208 -> 206 (2026-11-10, COMPENDIUM-HUB H1, the owner's word "Rather than a horizontal
@@ -414,7 +417,7 @@ const ROUTE_BASELINE = Object.freeze({
   // smaller than its fact lines"): the institution card's description now asks proseFontSize for FS.sm
   // (12 px, not below the chrome floor, so the census no longer counts it as floored); it still renders 14 px
   // on a phone and 12 px on desktop, never smaller than the 12 px fact lines. A fall, said here.
-  '/compendium':            { roots: 1, files: 50, floored: 205, ruled: 3, bare: 0 },
+  '/compendium':            { roots: 1, files: 50, floored: 203, ruled: 3, bare: 0 },
   '/about/what-this-is':    { roots: 1, files: 16, floored: 7, ruled: 1, bare: 0 },
   '/about/guide':           { roots: 1, files: 12, floored: 13, ruled: 3, bare: 0 },
   '/account':               { roots: 1, files: 46, floored: 107, ruled: 5, bare: 0 },
@@ -426,7 +429,7 @@ const ROUTE_BASELINE = Object.freeze({
   // 2026-11-07, PEOPLE-6 LINKS: the Institutions card's face row (one `proseFontSize` site, 0 bare) — +1; the
   // other +1 is red at the base bc4b6423 (the people car's lanes; /admin and /world's +1 there are left red, the base's).
   // PEOPLE-6 LINKS step 2: +1, the NPC card's role row (one `chromeFontSize` site, 0 bare).
-  '/gallery':               { roots: 1, files: 151, floored: 667, ruled: 4, bare: 0 },
+  '/gallery':               { roots: 1, files: 151, floored: 665, ruled: 4, bare: 0 },
   '/founders':              { roots: 1, files: 13, floored: 8, ruled: 1, bare: 0 },
   '/first-hundred':         { roots: 1, files: 6, floored: 4, ruled: 1, bare: 0 },
   '/roadmap':               { roots: 1, files: 6, floored: 3, ruled: 1, bare: 0 },

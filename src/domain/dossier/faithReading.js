@@ -33,6 +33,7 @@
  */
 
 import { liveInstitutions } from '../institutions/institutionRoster.js';
+import { isMaterializedCustomContent } from '../content/customContentSemanticAuthority.js';
 
 /**
  * @typedef {'cathedral'|'parish'|'monastery'|'temple'|'chapel'|'shrine'} ChurchKind
@@ -76,6 +77,7 @@ import { liveInstitutions } from '../institutions/institutionRoster.js';
  * @property {string} churchWords the houses in plain words ("a great cathedral, parish
  *   churches and monasteries"); empty when there are none
  * @property {boolean} accessOnly no church here, and the people have access to a neighbour's
+ * @property {boolean} roadBarred a siege is in force, so the road to a neighbour's church is barred (R2-CODE-B-SIDE item 7)
  * @property {boolean} shrine a wayside shrine stands here
  * @property {SeniorCleric|null} seniorCleric
  * @property {ReligiousFaction|null} religiousFaction
@@ -93,6 +95,7 @@ import { liveInstitutions } from '../institutions/institutionRoster.js';
  * @property {{ incomeSources?: ReadonlyArray<{ source?: unknown, percentage?: unknown }> }} [economicState]
  * @property {{ priorityReligion?: unknown }} [config]
  * @property {unknown} [tier]
+ * @property {unknown} [stress] the crisis container (one entry or a list)
  */
 
 /** @param {unknown} x @returns {string} */
@@ -108,6 +111,19 @@ const num = (x, fallback) => (typeof x === 'number' && Number.isFinite(x) ? x : 
  * by its catalogue key or the seam's label, never any "Access to …" row.
  */
 const ACCESS_RE = /^access to (?:a |the )?(?:parish church|house of worship)\b/i;
+
+/**
+ * A siege in force (R2-CODE-B-SIDE item 7): the record's crisis container, `stress` (one entry or a list), as the
+ * generator writes it. Read here rather than through canonicalAccessors.js :: canonStressors: importing the accessor
+ * moved the observed-shape ratchet's import graph (tests/lint/observedShapeReaders.walker.test.js), and this leaf
+ * reads one key.
+ * @param {FaithReadingSettlement} s @returns {boolean}
+ */
+function besieged(s) {
+  const c = s.stress;
+  const entries = Array.isArray(c) ? c : (c && typeof c === 'object' ? [c] : []);
+  return entries.some((e) => !!e && typeof e === 'object' && /** @type {Record<string, unknown>} */ (e).type === 'under_siege');
+}
 
 /**
  * The houses of worship, in the order the prose names them (the greatest first). A row
@@ -154,6 +170,23 @@ function kindOf(name) {
 }
 
 /**
+ * A HOUSE BY ITS NATIVE IDENTITY, NEVER BY A NAME A USER CAN TYPE (R2-CODE-B-SIDE item 7b; the chair's ruling of
+ * 2026-11-13 23:15, from the data lane's customContentPresentationClaims finding: a custom house named "... Cathedral
+ * ..." was read as a church). A stamped native house is read by its catalogue id, which a rename does not touch
+ * ('parish_church', 'access_to_parish_church', 'great_cathedral': the catalogue's own words); a custom house (its own
+ * provenance, content/customContentSemanticAuthority.js :: isMaterializedCustomContent, the boundary the roster's
+ * other native readers stop at) is no house of worship by its name, and custom content declares no kind this reading
+ * could take; an unstamped legacy house keeps the name it always had.
+ * @param {unknown} inst @returns {string}
+ */
+function nativeNameOf(inst) {
+  if (!inst || typeof inst !== 'object' || isMaterializedCustomContent(inst)) return '';
+  const r = /** @type {Record<string, unknown>} */ (/** @type {unknown} */ (inst));
+  const id = text(r.catalogId);
+  return id ? id.replace(/_/g, ' ') : text(r.name);
+}
+
+/**
  * @param {FaithReadingSettlement} s
  * @returns {{ houses: ChurchHouse[], access: boolean }}
  */
@@ -166,7 +199,7 @@ function housesOf(s) {
   /** @type {ReadonlyArray<{ name?: unknown }>} */
   const live = liveInstitutions(s);
   for (const inst of live) {
-    const name = text(inst?.name);
+    const name = nativeNameOf(inst);
     if (!name) continue;
     if (ACCESS_RE.test(name)) { access = true; continue; }
     const kind = kindOf(name);
@@ -275,6 +308,10 @@ export function faithReadingOf(settlement, { deity = null } = {}) {
     hasChurch: churches.length > 0,
     churchWords: wordsFor(churches),
     accessOnly: churches.length === 0 && access,
+    // R2-CODE-B-SIDE item 7 (the increment's rww-thorp-under_siege-1): under a siege nothing goes out by road, so no one
+    // walks to the next village's church. The crisis container is the canonical accessor's (the one facts/crisisKind.js
+    // :: crisisOf reads; not imported here, so this leaf's import graph stays as it was).
+    roadBarred: besieged(s),
     shrine: houses.some((h) => h.kind === 'shrine'),
     seniorCleric: seniorClericOf(s),
     religiousFaction: religiousFactionOf(s),
@@ -385,7 +422,9 @@ export function faithLinesOf(reading, { tierNoun = null } = {}) {
     out.push(`${cap(reading.churchWords)} ${single ? 'keeps' : 'keep'} the faith in ${place}.`);
     if (cleric) out.push(clericLead(cleric));
   } else if (reading.accessOnly) {
-    out.push(`${cap(place)} has no church of its own; its people walk to the next village’s parish church for the rites.`);
+    out.push(reading.roadBarred
+      ? `${cap(place)} has no church of its own, and the siege keeps its people from the next village’s parish church.`
+      : `${cap(place)} has no church of its own; its people walk to the next village’s parish church for the rites.`);
     const clericNoun = String(cleric?.role || '').replace(/^the\s+/i, ''); // M-1b: the role carries its article
     if (cleric) out.push(cleric.name ? `${cleric.name}, the ${clericNoun}, lives here.` : `A ${clericNoun} lives here.`);
   } else if (faithHasChurchEvidence(reading)) {
