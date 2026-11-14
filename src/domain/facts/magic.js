@@ -115,3 +115,30 @@ export function defenceHoldsDivine(record) {
 export function defenceHoldsDruidic(record) {
   return defenceTraditionsOf(record)?.hasDruid === true;
 }
+
+/** The economy's words for magic's goods and income (the record's export and income names: "Alchemical trade (potions,
+ * reagents)", "Potions and elixirs", "Alchemical reagents", "Arcane reagents", "Apothecary & Alchemy", "Arcane Industry",
+ * "Spellcasting Services"). */
+const MAGIC_ECONOMY = /alchem|\bmagic|\barcane|enchant|\bspell|potion|elixir|\bscroll/i;
+
+/**
+ * WHETHER THE ECONOMY SPEAKS OF MAGIC'S ECONOMIC ROLE (W2-C-LEAVES-SIDE item 7, 2026-11-13; the cut's #1086: "Economic
+ * role: absent" on the Magic tab beside an alchemical export and an Alchemist quarter). The chair's ruling: a role row
+ * reads the home that speaks of that role: the economy's exports (`economicState.primaryExports`) and income
+ * (`economicState.incomeSources[].source`) for the economic role. Read as stored.
+ * @param {unknown} record the settlement record
+ * @returns {boolean}
+ */
+export function economyShowsMagic(record) {
+  const es = record && typeof record === 'object'
+    ? /** @type {{ economicState?: { primaryExports?: unknown, incomeSources?: unknown } | null }} */ (record).economicState
+    : null;
+  const sold = es?.primaryExports; // read, never written (tradeListWriters)
+  const exportsOf = Array.isArray(sold) ? sold : [];
+  const incomeOf = Array.isArray(es?.incomeSources) ? es.incomeSources : [];
+  return exportsOf.some((x) => typeof x === 'string' && MAGIC_ECONOMY.test(x))
+    || incomeOf.some((x) => {
+      const source = /** @type {{ source?: unknown } | null} */ (x)?.source;
+      return typeof source === 'string' && MAGIC_ECONOMY.test(source);
+    });
+}

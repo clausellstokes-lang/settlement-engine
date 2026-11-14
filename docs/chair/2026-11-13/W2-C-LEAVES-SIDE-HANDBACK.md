@@ -42,8 +42,30 @@ Measure first on the 720; read ten.
 | 5 #937 no "Abundant" under a siege | 75a087b56 | 31 siege towns → 0 (the grounds print unlabelled, first) | 11 → 0 | the reader's town rendered | resourcesNoPlentyUnderSiege 1 of 1 red |
 | 5 verify #455 #560, rww-metropolis-infiltrated-1 | — | CURED at 408c2e30c (d2bcf0e3d; P1 9bcf0127a): none prints in its town | — | dumps read | — |
 | 5 the PDF's Unexploited processing column (twin of #452) | 36a903f28 | 229 rows; 4 move in 2 towns ("Carpenters' guild" beside Carpenters) | 0 | all 4 | resourcesPdfNeedsLikeTheTab 1 of 2 red |
+| 6 a charcoal burner works the timber (WORKED_BY_HOUSE, one entry with its cause) | eec44be0e | "No one here works the timber" out in exactly the 3 named towns; their timber card Unexploited → Partial; "Produced locally: timber" +4 (the 3 + r2s-indebted-hamlet-0); half-way 0; needs/Imports 0 | 0 | all 4 towns read | charcoalBurnerWorksTheTimber 2 of 2 red |
+| 6 the older list's validation lines | — | read at this tip: #106 #453 #630 "No grapes reach the vintner" TRUE by the record (grapes left the Imports at 48bfc15c0); #388 CURED (the woodcutter); #629 TRUE (no forest, no timber import); rww-city-recently_betrayed-1's "No one here works the stone" TRUE by R3 (the stone chain runs through a Brickmaker alone, the fortification through walls; no house quarries) | — | 5 towns born and read | — |
+| (the chair's word) defenceHoldsDivine, defenceHoldsDruidic | 777b81bdb | none (no caller here): hasDivine 339, hasDruid 84 | — | — | defenceTraditionReaders 2 of 2 red |
+| 7 the Magic tab's role rows | dc1523ed3 | "Economic role: absent" 150 → 118 (32 out, beside an alchemical export or income); military beside the defence's tradition 0 | 4 out | the reader's town rendered | magicRoleRowsReadTheirHomes 2 of 2 red |
+| 7 #1394 | — | read at this tip: the military home (traditions.hasArcane) is false there: "absent" agrees with the ruled home; Arcane Support gone since 30f3404ff; the "Arcane defense" group NAMED below | — | dump read | — |
 
-## CENSUS-2's hits in my files, read (at 408c2e30c; the tip run is item 8)
+## Item 8: CENSUS-2 over my files (lane/census-2 at its origin tip; EXECUTED, exit 0, the counter's rows present)
+Files: defenseDisplay.js, ResourcesTab.jsx, viewModelBodySlices.js, validationOnPage.js, MagicTab.jsx, facts/chainWorking.js,
+facts/magic.js. Kinds a–h whole-tree rows are identical at both ends (a 712 towns, b 48, c 301, d 381, e 53, f 720, g 718).
+| file · writer · kind | 408c2e30c (720 / readers' 80) | tip (720 / 80) |
+|---|---|---|
+| defenseDisplay.js · deriveSupportingCapabilities · a (court-generic) | 62 / 9 | 33 / 4 |
+| defenseDisplay.js · CRIM_STRUCTURE_DATA · a (guild) | 6 / 0 | 6 / 0 |
+| every other file of mine, every kind | 0 / 0 | 0 / 0 |
+The 33 left: each a "Court only" row whose house drew a court service (a Town hall's "Dispute arbitration", a Town
+council's "Dispute adjudication"; the census's word list knows no such house): true by the roster, by construction of
+courtOnRoster. The 6: read below. Its limits, said beside every zero: the dossier's views only (no PDF text, Foundry
+journal, Tonight sheet or export); it cannot see two lines disagreeing.
+**The field diff (EXECUTED, fdiff.mjs): 0 of 720 records differ, 408c2e30c against the tip; 0 of the readers' 80.**
+**tests/lint once (EXECUTED) at the tip:** 19 files red; the same 17 files and titles red at 408c2e30c, plus two of mine,
+cured in the last commit (negativeAssertionAnchor: my new tests' bare negatives, now anchored; tradeListWriters:
+facts/magic.js's read of primaryExports matched the writer pattern by a ternary colon, reworded). Re-run green.
+
+## CENSUS-2's hits in my files, read (at 408c2e30c)
 - deriveSupportingCapabilities, kind a, 62 (720) + 1 (readers): ALL "Courts without detention." (the court-generic word
   where the roster holds no court house): the chair's #575, CURED 391b39db0 in 29 of them; the rest name a house that
   holds a court (a Town hall that drew "Dispute arbitration", a Town council's "Dispute adjudication"): true.
@@ -72,6 +94,40 @@ Measure first on the 720; read ten.
   not govern ("Arcane Orders: Mages and arcane practitioners hold real influence…").
 - The PDF's "Abundant" kicker (pdf/sections/ResourcesProduction.jsx) still prints in the 31 siege towns (item 5's twin).
 - The Resources tab's DS-ECO lens under a siege: "This is the trade the city is actually built on" (rr2s-city-under_siege+famine-rand-1).
+- The economy desk's "CRITICAL IMPORT" pool ("Every load of grapes that …'s Vintner uses comes in from elsewhere",
+  economy.generated.js / economyStateProse) says the grapes are bought where the record imports none (#106 #453 #630's
+  towns): the false twin of the (true) idle-house line.
+- Income "Stone Quarrying" where no house quarries (rww-city-recently_betrayed-1): the record's income disagrees with
+  the roster (R3).
+- "Military role: absent" beside the Defense tab's "Arcane defense" group (arcaneDefenseOf, defenseProfile.institutions
+  .magicDef: "Mages' district", "Academy of magic") in 58 of 720: the defence profile's bucket and its own tradition
+  (traditions.hasArcane) disagree; the ruled military home is the tradition.
+
+## FOR THE JOIN (the house-label leaf, institutionDisplayName.js :: institutionHouseLabel, lane r2-code-b)
+- The line: Magic tab "Reliance on magic: … · supplied by …" (the increment's three metropolises: "Parish churches
+  (50-100+)"). AT 408c2e30c it prints no range on any of the 800 towns born (0 of 800 supply lines hold a parenthesis):
+  `dossierViewModel.js :: proseHouseName` strips it (`institutionDisplayName(house).replace(/\s*\([^)]*\)/g, '')`).
+- The call site: src/domain/display/dossierViewModel.js, function `deriveMagicSupplyView`, expression
+  `houses.map(proseHouseName)`. The one-line change once the leaf is present:
+  `const parts = houses.map((h) => institutionHouseLabel(h)).filter((n, i, all) => n && all.findIndex((p) => p.toLowerCase() === n.toLowerCase()) === i);`
+  (import `institutionHouseLabel` from './institutionDisplayName.js'); `proseHouseName` then has no other caller to check
+  (grep it). Not MagicTab.jsx (it prints `supply.supply` as given).
+- A test that reds once the leaf is present and the call site is not changed (tests/components/magicSupplyReadsHouseLabel.test.js):
+  ```js
+  import { expect, test } from 'vitest';
+  import * as leaf from '../../src/domain/display/institutionDisplayName.js';
+  import { deriveMagicSupplyView } from '../../src/domain/display/dossierViewModel.js';
+  test('the supply line names each house by the house-label leaf', () => {
+    expect(typeof leaf.institutionHouseLabel, 'the leaf is present').toBe('function');
+    const s = { name: 'T', population: 90000, config: { magicExists: true, magicLevel: 'high' },
+      institutions: [{ name: 'Parish churches (50-100+)', category: 'Religious' }, { name: "Mages' guild", category: 'Magic', tags: ['arcane'] }],
+      economicState: { activeChains: [{ chainId: 'divine_healing', status: 'running', magicNote: 'clergy' }] } };
+    const { supply } = deriveMagicSupplyView(s);
+    for (const h of s.institutions) if (supply) expect(supply).not.toContain(leaf.institutionDisplayName(h).replace(/ \(.*/, '') + ' (');
+    expect(supply ?? '').toContain(leaf.institutionHouseLabel("Mages' guild"));
+  });
+  ```
+  (red at 408c2e30c on its first line; its fixture must be read against magicSourceOf at the join: PLAUSIBLE, not run.)
 
 ## Registers moved (each through its own door)
 - tests/lint/ruinFilterRoster.walker.test.js: defenseDisplay.js's exempt row deleted (4bd24fc72; the walker asked).
@@ -83,11 +139,16 @@ Measure first on the 720; read ten.
   observedShapeReaders.walker (file-level).
 
 ## EconomicsTab (the main seat's): what my changes move there
-- (to be counted at item 8)
+- +4 "Produced locally: timber" pills (item 6, via tradeListDisplay.js :: localProductionAsPrinted reading the leaf):
+  r2s-plague_onset-hamlet-2, r2s-wartime-hamlet-0, r2s-under_siege-village-0 (under a siege: doubtful), r2s-indebted-hamlet-0.
+  Nothing else on the tab moves (pdiff.mjs: needs and Imports 0).
+- For the provision lines: facts/magic.js :: defenceHoldsDivine / defenceHoldsDruidic (777b81bdb).
 
 ## Config
 - `npm ci` wrote core.hooksPath=.husky/_ into the shared local config (snapshot compared after every push; refs: only my
   local branch `side-work` added).
 
-## STATUS (kept current)
-Items 1, 2, 3 (+#575), 5 DONE and pushed; 4 PARKED; 6, 7, 8 next.
+## STATUS AT THE HAND-BACK
+Items 1, 2, 3 (+#575), 5, 6, 7, 8 and the chair's twin readers DONE and pushed; 4 (#1013) PARKED above; the house-label
+line written FOR THE JOIN (no page change needed at 408c2e30c). No final statement (the main seat's). The edge bundles not
+touched. Config: core.hooksPath=.husky/_ left in the shared local config (written by npm ci; the lane hook needs it).
