@@ -476,6 +476,41 @@ SEATS['R3-CODE-C-5'] = dict(
 )
 
 
+SEATS['R3-TABS-3'] = dict(
+    title="R3-TABS-3 · round three's tabs lane: the close",
+    branch='lane/r3-tabs-2026-11-13', tip='a19a0ee1', base='fdfd471d9', pred='BRIEF-R3-TABS-2.md',
+    intro=("You are R3-TABS-3, the third seat on round three's tabs lane of the settlement-engine integration program (lane/r3-tabs-2026-11-13). The lane cures "
+           "the false lines and badges the Defense, History and Substrate tabs write themselves, and the defence posture's selector. The second seat did its "
+           "item 1 (the severity chips) and item 2 (the measuring seat's command), and then, on a ruling the old chair sent it (\"the port's two homes\": a line "
+           "of the sea or a harbour's approaches is offered only where the route is the sea, the defence desk's pool key too), cured the defence desk's naval "
+           "line with its register doors; its session then ended with the account. Yours: the lane's close and its ONE final statement."),
+    handbacks=("docs/chair/2026-11-13/R3-TABS-HANDBACK.md WHOLE (the first seat's part: every item, its stops, FOR THE JOIN, STATUS; THE SECOND SEAT's part, which "
+               "stops at its item 2); and the BODIES of the second seat's last four commits (9f95d404, 02a53907, 96c82245, a19a0ee1): the naval-line cure, the "
+               "wiring census re-taken over the moved defence composer, the walker's pins re-keyed by identity, the lighting census re-frozen: they are recorded "
+               "nowhere else"),
+    extra='',
+    state=("THE STATE, read by the chair from the commit subjects alone: after fdfd471d9 the second seat pushed the severity chips (b2682f74, d6b0526c), its "
+           "hand-back and the lighting census (58a7b648, 76641eda), the census's reading (2dc3fe61), then the naval line (9f95d404) and its three register "
+           "commits (02a53907, 96c82245, a19a0ee1). The lane holds the line at 9e57f5023 (point 48)."),
+    work=("THE WORK, in this order, pushed as made:\n"
+          "0. THE HAND-BACK, under a heading THE THIRD SEAT: first the naval-line cure written up from its four commit bodies and YOUR OWN RUN (what it changed; "
+          "its measure on the 720; its guard green; the lane's governing suites green at the tip; the births byte-identical to the base, or the difference "
+          "named).\n"
+          "1. THE FINAL STATEMENT'S PARTS THAT NEED NO SUITE, as BRIEF-R3-TABS-2's item 3 lists them: the first census's counter at the base aac79b808 against the "
+          "tip (re-run outside its pipe, its own exit read); the births byte-identical to the base (say how you measured); the reader's own instrument at the "
+          "tip for the acceptance figures (classes A, A1, B, D, E, F, K at the line and at your tip; the 22 left in class E named with their holder); ONE draft "
+          "shift record naming the six golden surfaces as moved or unmoved by measure.\n"
+          "2. THEN ONE MESSAGE TO THE CHAIR AND WAIT FOR POINT 49. " + POINT49 + " On that word: the merge of the line's tip (a plain merge; say which commit); the "
+          "instrument's page census on this lane's lines read, each hit cured or declared; the whole suite ONCE, in shards, every red classed against the base "
+          "(the five files the first seat left unclassed re-run at the base: siteCoherenceRatchet, undercitySewerDerivation, foundingWorldBones, "
+          "stressSummaryName, landingFixtureFreshness); the lighting census re-frozen through its door if you add a test file; the edge bundles checked last and "
+          "committed alone if they differ; THE LANE'S ONE FINAL STATEMENT. What is NOT this lane's stays as BRIEF-R3-TABS-2 lists it."),
+    merges="; on the chair's word, the merge of the integration line's tip",
+    when="for a first message of open stops (if any), for a stop that blocks everything you have left, when steps 0 and 1 are pushed and you wait for point 49, and for your final statement or hand-back",
+    turns="END YOUR TURN (by THE COUNT's way) after step 1 and after the final statement.",
+)
+
+
 QUOTED_FROM_OLD_DOCS = {'4534ea5e3', 'a59796dda'}  # hashes quoted from the old chair's documents, deeper than this clone
 
 def exact_hashes(text, seat):
