@@ -215,7 +215,8 @@ function ChainCard({ chain, town, instNames = [] }) { const shown = chainPrintNa
     // the screen's chain card's own read: no rank's count range the roster does not hold.
     // Ruling (e): the roster is read, so a house held only as a road to elsewhere is named as the page names it.
     chainHousesOf(chain.processingInstitutions, instNames).map((h) => humanize(h.name)).join(' + ') || null,
-    ((outputs) => (outputs && chainYieldRefused(chain) ? `${NORMALLY_YIELDS}: ${outputs}` : outputs))((chain.outputs || []).map(humanize).slice(0, 4).join(', ') || null),
+    // SURFACES-1 item 2: the outputs the tab's card prints (tradeListDisplay.js :: chainOutputsShown), as many as it prints
+    ((outputs) => (outputs && chainYieldRefused(chain) ? `${NORMALLY_YIELDS}: ${outputs}` : outputs))(chainOutputsShown(chain, town).map(humanize).slice(0, 3).join(', ') || null),
   ].filter(Boolean).join(' \u00bb ');
 
   const meta = [
@@ -277,3 +278,4 @@ export default Services;
 import { NORMALLY_YIELDS, chainYieldRefused } from '../../domain/chainYield.js';
 import { chainPrintName } from '../../domain/display/chainPrintName.js';
 import { chainStateOnPage } from '../lib/chainStateOnPage.js';
+import { chainOutputsShown } from '../../domain/display/tradeListDisplay.js';

@@ -85,7 +85,7 @@ function ChainRow({ chain, instNames, primaryExports, town }) { const shown = ch
   // web SupplyChainsPanel, or the PDF badge disagrees with the screen when
   // subsumption keeps a different alias spelling as the surviving export.
   const exportIds = new Set((primaryExports || []).map(exactGoodId).filter(Boolean));
-  const outputs = (chain.outputs || def.outputs || []).slice(0, 3).map((o) => {
+  const outputs = (town ? chainOutputsShown(chain, town) : (chain.outputs || def.outputs || [])).slice(0, 3).map((o) => { // SURFACES-1 item 2: the tab card's outputs (tradeListDisplay.js :: chainOutputsShown)
     const oid = exactGoodId(o);
     return {
       label: o,
@@ -283,3 +283,4 @@ export default SupplyChainFlow;
 import { NORMALLY_YIELDS, chainYieldRefused } from '../../domain/chainYield.js';
 import { chainPrintName } from '../../domain/display/chainPrintName.js';
 import { chainStateOnPage } from '../lib/chainStateOnPage.js';
+import { chainOutputsShown } from '../../domain/display/tradeListDisplay.js';

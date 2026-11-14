@@ -31,6 +31,7 @@ import { CHAIN_STATE_WORDS } from '../../src/pdf/lib/chainStateOnPage.js';
 import { buildJournalPages } from '../../src/foundry/journalPages.js';
 import { chainAsShown } from '../../src/domain/display/chainStateShown.js';
 import { chainPrintName } from '../../src/domain/display/chainPrintName.js';
+import { chainOutputsShown } from '../../src/domain/display/tradeListDisplay.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
@@ -87,6 +88,25 @@ const disagreements = (town) => {
   lines.forEach((l, i) => { const st = l.match(/^- \*\*.*?\*\*(?: \*\((.*?)\)\*)?/)?.[1] ?? ''; if (st !== tabWord(tab[i].key).toLowerCase()) out.push(`journal #${i}: ${st} / ${tabWord(tab[i].key)}`); });
   return out;
 };
+/** SURFACES-1 item 2: every output a PDF chain row or card prints that the tab's card does not (tradeListDisplay.js ::
+ * chainOutputsShown, its first three), as "<surface> <chain>: <output>". @param {any} town */
+const outputDisagreements = (town) => {
+  const vm = buildViewModel({ settlement: town });
+  const f = (/** @type {unknown} */ x) => String(x).toLowerCase().trim();
+  const tab = new Map(town.economicState.activeChains.map((/** @type {any} */ c) => [chainPrintName(c, town).label, chainOutputsShown(c, town).slice(0, 3).map(f)]));
+  /** @type {string[]} */ const out = [];
+  for (const row of find(EconomicsTrade({ settlement: town, narrativeMode: false, vm, stateProse: null }), (n) => typeof n.type === 'function' && n.type.name === 'ChainRow')) {
+    const label = chainPrintName(row.props.chain, town).label; const want = tab.get(label) || [];
+    const printed = find(row.type(row.props), (m) => typeof m.key === 'string' && m.key.startsWith('o-')).map((m) => f(leaves(m).join('').replace(/^Normally yields: /, '').replace(/\s+EXPORT$/, '')));
+    for (const o of printed) if (!want.includes(o)) out.push(`flow ${label}: ${o}`);
+  }
+  for (const card of find(Services({ settlement: town, narrativeMode: false, vm, stateProse: null }), (n) => n.type === StatusCard)) {
+    const want = tab.get(card.props.name) || []; const segs = String(card.props.description || '').split(' \u00bb ');
+    if (want.length === 0 || segs.length < 2) continue;
+    for (const o of segs[segs.length - 1].replace(/^Normally yields: /, '').split(', ').map(f)) if (!want.includes(o)) out.push(`card ${card.props.name}: ${o}`);
+  }
+  return out;
+};
 /** @param {any} town @param {string} label */
 const cardOf = (town, label) => find(Services({ settlement: town, narrativeMode: false, vm: buildViewModel({ settlement: town }), stateProse: null }), (n) => n.type === StatusCard)
   .find((n) => n.props.name === label)?.props;
@@ -121,6 +141,18 @@ describe('a chain\'s state is one fact on the tab, the PDF and the journal (SURF
     expect(md).not.toContain('*(entrepot)*');
     expect(disagreements(town)).toEqual([]);
   }, 120000);
+
+  test('the outputs the PDF\'s flow and cards print are the tab card\'s (SURFACES-1 item 2): a parish service with no church, a siege, a famine, the guard town', () => {
+    const seeds = ['r2r-thorp-0', 'r2r-hamlet-0', 'r2r-hamlet-16', 'r2r-metropolis-14', 'r2r-city-0'];
+    const thorp = birth720('r2r-thorp-0');
+    const faith = thorp.economicState.activeChains.find((/** @type {any} */ c) => chainPrintName(c, thorp).label === 'Faith & Worship');
+    expect(faith?.outputs, 'anchored: the record stores the parish outputs').toContain('Religious services');
+    expect(chainOutputsShown(faith, thorp), 'anchored: the tab prints none (no church here)').toEqual([]);
+    expect(seeds.map((seed) => ({ seed, out: outputDisagreements(birth720(seed)) }))).toEqual(seeds.map((seed) => ({ seed, out: [] })));
+    const city = birth720('r2r-city-0');
+    const printed = find(EconomicsTrade({ settlement: city, narrativeMode: false, vm: buildViewModel({ settlement: city }), stateProse: null }), (m) => typeof m.key === 'string' && m.key.startsWith('o-'));
+    expect(printed.length, 'the guard: the flow still prints the outputs the tab prints').toBeGreaterThan(10);
+  }, 180000);
 
   test('a chain run only through a neighbour\'s house prints no state on the card (r2r-thorp-0); the guard town agrees whole (r2r-city-0)', () => {
     const thorp = birth720('r2r-thorp-0');
