@@ -10,6 +10,10 @@
  * here is said only where its test holds; a refused pick resolves DRAW-FREE to the next admitted row of the same
  * pool (the drawn index, then onward, wrapping), so no draw is added or moved. A row not listed is admitted
  * everywhere; a caller with no roster in reach (`foundingStateOf` returns null) keeps the drawn row.
+ * R2-CODE-A-9 (the page census's P7a rise at 67d9acc59, banked 125, now 133): the resolution passes over an
+ * Origin row that names a founder of its own (`NAMES_A_FOUNDER`): the record keeps ONE founder, the "Founded
+ * by:" row, drawn apart, and a refused coastal row carried 22 of the 720 onto "a famous navigator retired here"
+ * beside a soldier, a noble or a religious house. A row DRAWN as one of them is the draw's and stands.
  *
  * THE HOMES READ (no new key, no new vocabulary word):
  *   - "this is a port": the route (`factsOf(record).route`, the route's one home; the #237 ruling);
@@ -23,6 +27,7 @@
 
 import { birthFactsOf } from '../../domain/facts/factsOf.js';
 import { declarationAdmits } from '../../domain/facts/factVocabulary.js';
+import { TERRAIN_NARRATIVE_HOOKS } from '../../data/narrativeData.js';
 
 /**
  * @typedef {object} FoundingState
@@ -104,6 +109,19 @@ export const FOUNDING_REASON_ADMITS = Object.freeze({
   "grew because the local clay and water made the finest ceramic work in the region: a reputation that preceded the settlement's name": (st) => near(st, ['river_clay']),
 });
 
+const H = TERRAIN_NARRATIVE_HOOKS;
+/**
+ * The Origin rows that name a founder of their own (the shapes the page census's pattern 7a reads: "was founded
+ * by", "was settled by", "was established by", "grew because a healer", "grew because a famous navigator", "was
+ * built around a single family"; `tests/generators/foundingRowsRead.test.js` A5 holds the list to the pools).
+ * A refused row never resolves onto one: the resolution would print a second founder beside the "Founded by:"
+ * row (the founder's one home, `domain/facts/founder.js`). The rows are read from their home by place, never copied.
+ * @type {ReadonlySet<string>}
+ */
+export const NAMES_A_FOUNDER = Object.freeze(new Set([
+  H.river[4], H.port[4], H.port[5], H.road[4], H.road[5], H.isolated[0], H.isolated[4], H.forest[1], H.forest[4], H.plains[4],
+]));
+
 /**
  * The founders' tests (`FOUNDERS_BY_TIER`): a founder line that names a house reads the roster.
  * @type {Readonly<Record<string, (st: FoundingState) => boolean>>}
@@ -135,22 +153,28 @@ export const foundingStateOf = (config, economicContext, worldLaw) => {
 
 /**
  * The row the founding state takes: the drawn row, or, where the state refuses it, the next admitted row of the
- * same pool (draw-free, wrapping). Where no row is admitted, or no state is in reach, the drawn row stands.
+ * same pool (draw-free, wrapping) that is not in `passOver`. Where no row is admitted, or no state is in reach,
+ * the drawn row stands; where the only admitted rows are passed over, no row is taken (null: silence is not a
+ * false sentence).
  * @template T
  * @param {readonly T[]} pool
  * @param {T} drawn
  * @param {Readonly<Record<string, (st: FoundingState) => boolean>>} admits
  * @param {FoundingState | null} state
- * @returns {T}
+ * @param {ReadonlySet<string> | null} [passOver] rows a resolution never lands on (a row DRAWN as one stands)
+ * @returns {T | null}
  */
-export const admittedRow = (pool, drawn, admits, state) => {
+export const admittedRow = (pool, drawn, admits, state, passOver = null) => {
   if (!state) return drawn;
   const at = pool.indexOf(drawn);
   if (at < 0) return drawn;
+  let passed = false;
   for (let k = 0; k < pool.length; k++) {
     const row = pool[(at + k) % pool.length];
     const test = admits[String(row)];
-    if (!test || test(state)) return row;
+    if (test && !test(state)) continue;
+    if (k > 0 && passOver?.has(String(row))) { passed = true; continue; }
+    return row;
   }
-  return drawn;
+  return passed ? null : drawn;
 };

@@ -10,6 +10,11 @@
  *   A3 the guard towns: the cured rows do not print where the record makes them false, and still print where it
  *      makes them true (the rule refuses only what it must);
  *   A4 a caller with no roster in reach keeps the drawn row.
+ *   A5 (R2-CODE-A-9; the page census's P7a rise at 67d9acc59, banked 125, now 133): a REFUSED row never resolves
+ *      onto a row that names a founder of its own (the record keeps one founder, the "Founded by:" row): the
+ *      towns the resolution carried onto "a famous navigator retired here" print no second founder; a row DRAWN
+ *      as one still prints (the resolution refuses only what it must); where every admitted row of the pool names
+ *      a founder, the Origin row is not written (silence is not a false sentence).
  */
 import { beforeAll, describe, expect, it } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
@@ -17,7 +22,7 @@ import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { TERRAIN_NARRATIVE_HOOKS } from '../../src/data/narrativeData.js';
 import { genArrivalDetail } from '../../src/generators/narrativeGenerator.js';
-import { FOUNDER_ADMITS, FOUNDING_REASON_ADMITS, admittedRow, foundingStateOf } from '../../src/generators/narrative/foundingRowAdmits.js';
+import { FOUNDER_ADMITS, FOUNDING_REASON_ADMITS, NAMES_A_FOUNDER, admittedRow, foundingStateOf } from '../../src/generators/narrative/foundingRowAdmits.js';
 import { setActiveRng, clearActiveRng } from '../../src/kernel/rngContext.js';
 import { createPRNG } from '../../src/kernel/prng.js';
 import { readFileSync } from 'node:fs';
@@ -90,5 +95,38 @@ describe('the founding rows read the record', () => {
     setActiveRng(createPRNG('bare-1'));
     try { expect(typeof genArrivalDetail({ terrainType: 'plains', tradeRouteAccess: 'road', tier: 'hamlet' })?.reason).toBe('string'); }
     finally { clearActiveRng(); }
+  });
+
+  it('A5: the rows that name a founder are the pools\' rows of the census\'s 7a shapes, each written once', () => {
+    // the shapes as pageCensusFindings.js :: FOUNDER reads them ("was founded as" is a kind of place, no founder)
+    const SHAPE = /^(was founded by|was settled by|was established by|grew because a healer|grew because a famous navigator|was built around a single family)/;
+    const src = readFileSync(new URL('../../src/generators/narrativeGenerator.js', import.meta.url), 'utf8');
+    const commodity = [...src.matchAll(/^\s*['"]((?:was|grew|began|started|developed|attracted)[^'"\n]*?)['"],?\s*$/gm)].map((m) => m[1]);
+    const rows = [...Object.values(TERRAIN_NARRATIVE_HOOKS).flat(), ...commodity];
+    expect(new Set(rows.filter((r) => SHAPE.test(r)))).toEqual(new Set(NAMES_A_FOUNDER));
+  });
+
+  it.each([
+    'r2r-thorp-22', 'r2r-thorp-59', 'r2r-hamlet-53', 'r2r-village-21', 'r2r-village-51', 'r2r-town-3',
+    'r2s-insurgency-city-0', 'r2s-religious_conversion-village-2',
+  ])('A5: %s — a refused coastal row resolves onto no second founder', (seed) => {
+    const plan = /^r2s-(\w+)-(\w+)-\d+$/.exec(seed);
+    const s = plan
+      ? /** @type {any} */ (generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...CENSUS_DIALS, settType: plan[2], selectedStresses: [plan[1]], selectedStressesRandom: false }), null, { seed, customContent: {} }))
+      : born(seed);
+    expect(NAMES_A_FOUNDER.has(String(s.history.founding.reason))).toBe(false);
+  });
+
+  it('A5: the resolution passes over a founder row, keeps one drawn, and falls silent where only such rows are admitted', () => {
+    const st = /** @type {any} */ ({ facts: {}, resources: new Set() });
+    const no = () => false;
+    expect(admittedRow(['p', 'nav', 'q'], 'p', { p: no }, st, new Set(['nav']))).toBe('q');
+    expect(admittedRow(['p', 'nav', 'q'], 'nav', { p: no }, st, new Set(['nav']))).toBe('nav');
+    expect(admittedRow(['p', 'nav'], 'p', { p: no }, st, new Set(['nav']))).toBe(null);
+    expect(admittedRow(['p', 'q'], 'p', { p: no, q: no }, st, new Set(['nav']))).toBe('p');
+  });
+
+  it('A5: guard town r2r-city-16 — the navigator row DRAWN as such still prints', () => {
+    expect(born('r2r-city-16').history.founding.reason).toBe('grew because a famous navigator retired here and others followed');
   });
 });

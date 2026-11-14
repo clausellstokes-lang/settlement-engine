@@ -74,14 +74,14 @@
    "reader": "GLANCE",
    "master": 128,
    "integration": 127,
-   "banked": 125
+   "banked": 116
   },
   "P7b": {
    "label": "7b a harbour origin where no wharf stands",
    "reader": "CROSS",
    "master": 0,
    "integration": 27,
-   "banked": 27
+   "banked": 0
   },
   "P8any": {
    "label": "8 no church, and worship in the economy",
@@ -130,7 +130,7 @@
    "reader": "SECOND",
    "master": 183,
    "integration": 167,
-   "banked": 167
+   "banked": 148
   },
   "P16three": {
    "label": "16a \"the ruling three\" over fewer",
