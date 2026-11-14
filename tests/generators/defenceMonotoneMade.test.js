@@ -13,11 +13,15 @@
  * teleport circle, the granary, the alchemists) is added, one at a time, to the place holding no relief, each
  * one, each two, and all but one. Defence is read by `generateDefenseProfile` at the record's own standing keep.
  *
+ * The law is asserted on the PRINTED figures (each score and readiness in whole points, the page's) and on the
+ * EXACT ones (the arithmetic's own, `defenceExactOf`, read at hundredths as the generator reads them before the
+ * whole point: the holds re-scale parts and leave float noise of 1e-14, which is not a fall).
+ *
  * Every change is tried and every fall collected; the assertion is on the whole collection, once (no loop
- * asserts). Red at the merged base b42be5de9 (279,136 score-falls), green at the build's tip.
+ * asserts). Red at the merged base b42be5de9 (279,136 printed score-falls), green at the build's tip.
  */
 import { describe, expect, test } from 'vitest';
-import { generateDefenseProfile } from '../../src/generators/defenseGenerator.js';
+import { generateDefenseProfile, defenceExactOf } from '../../src/generators/defenseGenerator.js';
 import { keepOfRecord } from '../../src/domain/facts/keep.js';
 import { DEFENCE_TUNING } from '../../src/data/defenceWeights.js';
 
@@ -45,10 +49,17 @@ for (const a of KINDS) HELD.push(KINDS.filter((x) => x !== a));
 const STRESSES = [[], ...CRISES.map((c) => [c])];
 
 const SCORES = ['military', 'monster', 'internal', 'economic', 'magical'];
-/** @param {any} s */
+/** Hundredths: the generator's own reading before the whole point (UPKEEP-MEASURE-2 X9). @param {number} v */
+const hundredths = (v) => Math.round(v * 100) / 100;
+/** The printed scores and readiness, and the same six exactly as the arithmetic holds them. @param {any} s */
 const readOf = (s) => {
-  const p = generateDefenseProfile(s, keepOfRecord(s.economicState));
-  return { ...Object.fromEntries(SCORES.map((k) => [k, p.scores[k]])), readiness: p.readiness.score };
+  const keep = keepOfRecord(s.economicState);
+  const p = generateDefenseProfile(s, keep);
+  const exact = defenceExactOf(s, keep);
+  return {
+    ...Object.fromEntries(SCORES.map((k) => [k, p.scores[k]])), readiness: p.readiness.score,
+    ...Object.fromEntries([...SCORES, 'readiness'].map((k) => [`${k} (exact)`, hundredths(exact[k])])),
+  };
 };
 /** A made record. @param {string} tier @param {string[]} stressTypes @param {any[]} institutions @param {{ magic: number, religion: number }} dial @param {boolean} stores */
 const made = (tier, stressTypes, institutions, dial, stores) => ({

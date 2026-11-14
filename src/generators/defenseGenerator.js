@@ -690,3 +690,16 @@ export function defencePartsOf(settlement, upkeep) {
   const s = /** @type {any} */ (settlement);
   return listOf(computeDefenseScores(s, upkeep ?? keepOfRecord(s.economicState))).list;
 }
+
+/**
+ * THE SCORES BEFORE THE WHOLE POINT (UPKEEP-15, for the monotone guard on made records, the chair's ruling (a)): the
+ * five scores and readiness exactly as the arithmetic holds them, before the page's whole point. Nothing stores or
+ * prints this; it is re-derived from the record, as the parts are. Pure in the record.
+ * @param {Object} settlement @param {{ bought: number, funded: number }} [upkeep] the standing keep
+ * @returns {Record<string, number>} military, monster, internal, economic, magical, readiness
+ */
+export function defenceExactOf(settlement, upkeep) {
+  const s = /** @type {any} */ (settlement);
+  const r = computeDefenseScores(s, upkeep ?? keepOfRecord(s.economicState));
+  return { ...Object.fromEntries(SCORE_KEYS.map((d) => [SCORE_NAMES[d], r.full[d] ?? 0])), readiness: r.total };
+}
