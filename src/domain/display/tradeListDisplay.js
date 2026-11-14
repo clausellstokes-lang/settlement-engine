@@ -288,6 +288,7 @@ export function localProductionAsPrinted(settlement) {
   return displayTradeList(kept, /** @type {Parameters<typeof factsOf>[0]} */ (settlement), { side: 'exports' });
 }
 import { RESOURCE_DATA } from '../../data/goods/identity.js';
+import { chainPrintName } from './chainPrintName.js';
 import { chainWorksResource, chainsWorking, WORKING_CHAIN_STATUSES } from '../facts/chainWorking.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
 /** The model's own identifiers in the local list (a position and the commodity categories): never a good. */
@@ -324,7 +325,7 @@ function madeHere(settlement) {
     ...(Array.isArray(eco.primaryExports) ? [...eco.primaryExports] : []),
     ...localProductionAsPrinted(settlement),
     ...chains.filter((c) => WORKING_CHAIN_STATUSES.includes(String(c.status)))
-      .flatMap((c) => [c.resource, ...(Array.isArray(c.outputs) ? c.outputs : []), c.label]),
+      .flatMap((c) => { const p = chainPrintName(c, /** @type {Parameters<typeof chainPrintName>[1]} */ (settlement)); return [p.resource, ...(Array.isArray(c.outputs) ? c.outputs : []), p.label]; }), // W2-C-LEAVES-8: the name and source through the leaf (chainPrintSites)
   ].filter((x) => typeof x === 'string' && x.trim() !== '').map(String);
 }
 
