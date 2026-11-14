@@ -6609,6 +6609,77 @@ SEATS2['W2-WRITE-SIDE-14'] = dict(
 )
 
 
+SEATS2['R2-CODE-A-14'] = dict(
+    title="R2-CODE-A-14 · round two's first code lane: the bloc line (one town in six) with a word granted for it, the market row's twin, two foundings on one page",
+    branch='lane/r2-code-a-2026-11-13', tip='20818111', statement=False, mark='250,000',
+    intro=("You are R2-CODE-A-14, the fourteenth seat on round two's first code lane of the settlement-engine integration program "
+           "(lane/r2-code-a-2026-11-13). The lane holds the town's told history and arrival: the founding rows, the crisis descriptions, "
+           "people's goals, ties and secrets as written in the narrative tables. The thirteenth seat merged the joined line into the lane "
+           "(no conflict, no composed red) and cured TWO FOUNDERS ON ONE PAGE (845 of 3,048 towns to 0), then handed back with two rows "
+           "STOPPED FOR THE CHAIR, each measured: the bloc line (false in 487 of its 1,101 prints on 3,048 births), parked for a word the "
+           "briefs did not let it write; and the indebted merchant-district row, whose cure as ruled moved a draw outside its pool. BOTH "
+           "ARE RULED BELOW. Yours: those two, then the list. The lane lands as points on the joined line: NO whole suite, NO new "
+           "statement: an ADDENDUM."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. On your lane, docs/chair/2026-11-13/R2-CODE-A-HANDBACK.md: ONLY its section 22 (the thirteenth seat: from the heading \"## "
+          "22.\" to the end, by script: fifty lines, some very long): the rulings copied; the merge; ruling (4) as cured (THE FORM OF A "
+          "CURE HERE); ITEM 2 (the bloc line: measured; the word it needs; THE CURE AS IT WOULD BE MADE, in one declaration and one "
+          "draw context); ITEM 3 (ruling (5): the stop, with its measure and its recommended twin); #159 (measured and sketched); WHAT "
+          "IS LEFT; the instruments. Of section 21 only the chair's rulings (1) to (9), by heading.\n"
+          "3. THE READER'S VERDICT, for a row you are curing (`git fetch origin lane/review-r2-code-a-2026-11-14`; "
+          "docs/chair/2026-11-14/REVIEW-R2-CODE-A-LINES-READ.md, only the section \"CARRIED\"); its probes (its 3,048 births) by git "
+          "archive, run from outside every repository tree.\n"
+          "4. THE VOCABULARY'S OWN DOOR, before you write a word in it: src/domain/facts/factVocabulary.js (how an atom is registered: "
+          "its reader, its context, its note) and the tests that hold the vocabulary whole (find them by `git grep -l factVocabulary "
+          "tests/`)."),
+    first=("FIRST ACT. FULL HISTORY (`git fetch --depth=2147483647 origin lane/r2-code-a-2026-11-13 lane/join-2026-11-14 "
+           "lane/integration-2026-11-07`; `git rev-parse --is-shallow-repository` prints false). Read your lane's tip back from origin: it "
+           "was 20818111b when this was written; any difference is a stop: tell the chair. Your lane ALREADY HOLDS the joined line as "
+           "merged at fe225f12a; in a SCRATCH WORKTREE (never the main checkout) merge its tip again ONLY if the merge is clean (a "
+           "register, a baseline, a generated file or a bundle that conflicts takes THE JOINED LINE'S side), and say which tip you hold."),
+    work=("THE CHAIR'S RULINGS ON THE THIRTEENTH SEAT'S TWO STOPS (2026-11-14; each vetoable by the owner; copy them into your part):\n"
+          "(s1) THE WORD IS GRANTED. A line about a pair needs a fact about the pair, and the vocabulary holds none: ONE ATOM IS ADDED, "
+          "`shared power` (context: a pair; its reader: the tie generator's own `sharesPower`), THROUGH THE VOCABULARY'S OWN DOOR: its "
+          "registration, its reader, its note naming this ruling, the vocabulary's tests green; the draw of a tie's prose hands the pair "
+          "as context, as the thirteenth seat's item 2 writes it. THEN THE BLOC LINE takes `needs: shared power` (A LINE ABOUT A BLOC "
+          "NEEDS THE PAIR TO SHARE A POWER): a refused line resolves within the draw's own pool; NO TIE IS RE-DRAWN (show it by the "
+          "field diff: ties unmoved; only the prose of the pairs that share no power). Targets, from its measure: false prints 487 of "
+          "1,101 on the 3,048 births to 0; the true 614 kept. The corruption row's \"holder that commands\": MEASURE it first: if it "
+          "needs a second word, PARK it with the measure: one word is granted, not a family.\n"
+          "(s2) THE MERCHANT-DISTRICT ROW IN A VILLAGE WITH NO MARKET (ruling (5), HIGH, carried): the cure as first ruled moved the "
+          "arrival scene's later beats in five towns: A DRAW IS NOT MOVED: THE SLOT IS KEPT AND TAKES A TWIN TRUE WITHOUT A MARKET (as "
+          "the besieged arrival line was cured): the twin names no merchant district, no quarter and no market; read in the five "
+          "towns; the veto list.\n"
+          "(s3) REGISTERS ARE RE-DERIVED ONCE, AT THE CLOSE (as section 22 has it): named stale, never re-taken; a pin a cure moves is "
+          "re-keyed BY IDENTITY; a register that a door needs in order to open is re-taken through its own door, in its own commit.\n"
+          "THE WORK, in this order, each cause its own commit, measured first on the reader's 3,048 births (count before and after), "
+          "red first (a collected arm; a keep-guard; each arm shown able to red by a plant you do not commit, made in a tree no suite "
+          "or render is running in), pushed as made:\n"
+          "1. (s1): the word through its door (its own commit), then the bloc line. ONE MESSAGE TO THE CHAIR (the tip; the counts; the "
+          "field diff: ties unmoved), then THE COUNT.\n"
+          "2. (s2) the twin.\n"
+          "3. The bar's #159, as the thirteenth seat sketched it (the founding sentence of the Overview composed AFTER the history is "
+          "drawn and reading its founding reason; a row that states a founding motive of its own admitted only where the reason "
+          "agrees): NO DRAW MOVED, shown by the field diff.\n"
+          "4. Ruling (8) (the forges with no smith; a craft line on a priest; the quarantine line on one who does not enforce it), "
+          "then (6), (7), (9) as copied in section 21; then the OPEN rows section 22 lists, measured first, widest first; then, if "
+          "your count allows, Origin rows true of ANY town of a tier (274 towns are silent now).\n"
+          "A CURE IN GENERATOR OR DATA CODE IS A DECLARED MOVE: its field diff on the census's 720 by family (prose families only). A "
+          "DRAW MOVED OUTSIDE THE ROW'S OWN POOL IS A STOP, AND THE ANSWER TO IT IS A TWIN IN THE SAME SLOT. EVERY LINE A CURE NOW "
+          "PRINTS IN A NEW TOWN, OR NEWLY LEAVES SILENT, IS READ WHERE IT PRINTS on every surface that prints it: three towns of its "
+          "cells, a siege, a famine or an occupation among them, the smallest and the largest size it reaches.\n"
+          "AFTER EVERY CURE: the presumed-things walker (a rise over the lane's rows is a stop); the strict-domain gate, the type "
+          "ratchet and eslint on the touched files; the twelve-birth grid (`node scripts/census/page-census.mjs --grid`: a rise is a "
+          "stop); the test files that name the files you touched (the nineteen files red at the joined tip itself are CARRIED: your "
+          "cure adds no red to them).\n"
+          "THE HAND-BACK, kept current after every item: a part \"## 23. The fourteenth seat\" at the end of the lane's hand-back file, "
+          "in section 22's form."),
+    merges='; a clean merge of the joined line into YOUR lane, in a scratch worktree, as the first act allows',
+    when="for a stop that blocks everything you have left, after (s1) (the tip; the counts; ties unmoved), for a draw moved outside a row's own pool, and with your hand-back",
+    turns='',
+)
+
+
 def build2(seat):
     s = _r3c6() if seat == 'R3-CODE-C-6' else SEATS2[seat]
     head = (
