@@ -865,6 +865,8 @@ describe('the demoted state dimension — the channel the kernel enforces', () =
         // record answers its own direction (the desk suite's banner arm proves every banner speaks).
         // + DS-DEF-2 Beasts & Monsters: settled, nothing organized :: threat=threat at W2-WRITE-5 A H4 (2026-11-13): its three threat twins declare `no guardPresence` ("nothing organised" is false beside a watch, the read's H4), and the calm admit-all double holds every presence, so the state admits no line under the double; a declared cause.
         'DS-DEF-2 :: Beasts & Monsters: settled, nothing organized :: threat=threat',
+        // + DS-DEF-2 Invasion & War: neither walls nor force :: threat=threat at W2-WRITE-12 (2026-11-14, REVIEW-W2-WRITE-2 HIGH 1): its threat lines declare `no mercenary` ("all the town has" is false beside a hired company), and the admit-all double holds every presence: the facts gate, the Beasts row's class.
+        'DS-DEF-2 :: Invasion & War: neither walls nor force :: threat=threat',
         'DS-STR-1 :: MASS MIGRATION :: walls=walls',
         'DS-STR-1 :: MASS MIGRATION :: walls=no walls',
         'DS-GEN-1 :: economic_disparity :: severity=minor with {"walls":"no walls"}',
@@ -980,6 +982,8 @@ describe('the demoted state dimension — the channel the kernel enforces', () =
     expect(silent.map(({ id, key, dimension, value }) => `${id} :: ${key} :: ${dimension}=${value}`)).toEqual([
       // + DS-DEF-2 Beasts & Monsters: settled, nothing organized :: threat=threat at W2-WRITE-5 A H4 (2026-11-13): its three threat twins declare `no guardPresence` ("nothing organised" is false beside a watch, the read's H4), and the calm admit-all double holds every presence, so the state admits no line under the double; a declared cause.
       'DS-DEF-2 :: Beasts & Monsters: settled, nothing organized :: threat=threat',
+      // + DS-DEF-2 Invasion & War: neither walls nor force :: threat=threat at W2-WRITE-12 (2026-11-14, REVIEW-W2-WRITE-2 HIGH 1): its threat lines declare `no mercenary`; the admit-all double holds every presence (the mute arm's own row, the same state).
+      'DS-DEF-2 :: Invasion & War: neither walls nor force :: threat=threat',
       'DS-STR-1 :: MASS MIGRATION :: walls=walls',
       'DS-STR-1 :: MASS MIGRATION :: walls=no walls',
       'DS-GEN-1 :: economic_disparity :: severity=minor',

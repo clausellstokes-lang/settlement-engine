@@ -1090,7 +1090,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "crisis: any",
             "no crisis: threat",
-            "no watch"
+            "no watch",
+            "no mercenary"
           ],
           "text": "{settlement} has no line and no force. Organized aggression cannot be resisted here; what preserves the town is distance, diplomacy, or being beneath notice.",
           "slots": [
@@ -1102,7 +1103,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "angle": "counterforce",
           "marks": [
             "no threat",
-            "crisis: any"
+            "crisis: any",
+            "no mercenary"
           ],
           "text": "Nothing has come for {settlement}, and nothing about the town would stop whatever did. Its safety rests on nobody having wanted it.",
           "slots": [
@@ -1126,7 +1128,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "threat",
             "crisis: any",
             "no watch",
-            "no crisis: occupied"
+            "no crisis: occupied",
+            "no mercenary"
           ],
           "text": "{settlement} has no line and no force, and danger is close at hand.",
           "slots": [
@@ -1141,7 +1144,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "crisis: any",
             "no watch",
             "no crisis: under_siege",
-            "no crisis: occupied"
+            "no crisis: occupied",
+            "no mercenary"
           ],
           "text": "With trouble at hand, {settlement} has no wall to close and nobody trained to send, and each household is deciding for itself whether to stay.",
           "slots": [
@@ -1156,7 +1160,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "crisis: any",
             "no watch",
             "no crisis: under_siege",
-            "no crisis: occupied"
+            "no crisis: occupied",
+            "no mercenary"
           ],
           "text": "You find {settlement} with no wall and nobody under arms, and its people keeping close to home until the danger passes.",
           "slots": [
@@ -1169,7 +1174,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "watch",
             "no threat",
-            "crisis: any"
+            "crisis: any",
+            "no mercenary"
           ],
           "text": "{settlement} has no wall and no soldiers; its watch keeps the peace in the streets and would be no answer to an army.",
           "slots": [
@@ -1183,7 +1189,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "watch",
             "threat",
             "crisis: any",
-            "no crisis: occupied"
+            "no crisis: occupied",
+            "no mercenary"
           ],
           "text": "{settlement} has no wall and only its watch, and danger is close at hand.",
           "slots": [
@@ -1197,7 +1204,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "watch",
             "threat",
             "crisis: any",
-            "no crisis: occupied"
+            "no crisis: occupied",
+            "no mercenary"
           ],
           "text": "With trouble at hand, {settlement}'s watch is all the town has to send, and there is no wall to send it to.",
           "slots": [
