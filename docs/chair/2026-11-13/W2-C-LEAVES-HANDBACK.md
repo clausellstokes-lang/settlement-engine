@@ -941,6 +941,35 @@ EXECUTED = run and read; PLAUSIBLE = read from code.
 - domainAnyCastBaseline: src/domain/display/chainStateShown.js holds one `any` (allowance 0) at beae4ef7e: the lane's own
   (W2-C-LEAVES-4); item 9 moves the crisis reader into that file and cures it there.
 
-## STATUS (kept current)
-- Item 6 DONE fc7cdafe0 + 16cf36a0c. Item 7 DONE 332061b5d.
-- Items 8 to 10, the added rows (a) to (d), item 3's registers: not started.
+## STATUS AT THE HAND-BACK (this seat read its own count after items 6 and 7: 427,106 tokens, over the brief's 350,000)
+- Item 6 DONE fc7cdafe0 + 16cf36a0c. Item 7 DONE 332061b5d. Pushed; nothing running.
+- NOT STARTED, for the successor, in the brief's order (BRIEF-W2-C-LEAVES-6 THE WORK):
+  1. Item 8: the PDF's (src/pdf/sections/EconomicsTrade.jsx) and the journal's (src/foundry/journalPages.js) trade lists
+     read the tab's ONE reader (tradeListDisplay.js: localProductionAsPrinted, exportsAsPrinted with the transit mark,
+     importsAsPrinted with #169's siege test, tradeStoppedHere), one call site each, every changed line named; the pills
+     counted on the 720 on the three surfaces before and after: they must agree after.
+  2. Item 9: the tab's crisis reader of a chain's state (EconomicsTab.jsx :: shownStateOf, near the file's end) moves
+     into chainStateShown.js, exported, no second reader; the journal's chain line reads it (one call site); the PDF's
+     chain flow (SupplyChainFlow.jsx) written FOR THE JOIN (file, function, expression, the one-line change, a test
+     that reds until it is made). Cure there the file's one `any` (domainAnyCastBaseline, allowance 0: the call
+     `liveInstitutionNames(/** @type {any} */ (record))` in runsOnlyThroughAccess). Read for item 9: r2r-hamlet-18 and
+     -29 print a River Mill card "✓ Running" whose only mill is "Access to external mill".
+  3. Item 10: CENSUS-2 at the tip and at 4534ea5e3 (the command in PART 4 item 9; the file list in
+     probes/W2-C-LEAVES-3/c2files.txt: add chainNeedShown.js), every hit on the lane's writers read, cured or named.
+     Name for the chair with it: record 422 says the page names a court only where a courthouse stands, and the side
+     seat's 33 "Legal Infrastructure · Court only" rows beside a Town hall that drew "Dispute arbitration" were judged
+     true before that record (defenseDisplay.js :: courtOnRoster counts a drawn court service).
+  4. The added rows (record 422, PART 5's wording): (a) #1013, the lone gambling house (12 towns); (b) Arcane "None"
+     beside an arcane power of any standing (9 more); (c) the PDF's "Abundant" kicker under a siege
+     (src/pdf/sections/ResourcesProduction.jsx, 31 towns, one line, named); (d) the four timber pills read.
+  5. Item 3: the second merge's registers: PART 5 shows the three gates green and 20 red after it, the same as after the
+     first merge; the side hand-back's two register moves (the ruin-filter row, the re-keyed pin) came with the merge:
+     verify by its doors, nothing found left at this seat's lint runs.
+  6. ONE message to the chair (tip, counts), then WAIT FOR POINT 49 and do the brief's point 4 on the chair's word.
+- Probes (docs/chair/2026-11-13/probes/W2-C-LEAVES-6/, each takes trees and corpora by path, writes nothing in a tree;
+  `load.mjs` beside them): need6.mjs (`TREE=<tree> node need6.mjs <corpus...>`: item 6's boxes, classes and forms),
+  read6.mjs (`SEEDS=a,b TREE=<tree> node read6.mjs <corpus...>`: each need sentence beside its house and imports),
+  out7.mjs (`BEFORE=<tree> TREE=<tree> node out7.mjs <corpus...>`: item 7's cards and the trade lists' pills),
+  read7.mjs (`WANT=chainId:Output,... TREE=<tree> node read7.mjs <corpus...>`), dep1-4.mjs (the dependency joins).
+- Config: npm ci wrote core.hooksPath=.husky/_ into the shared local config (kept for the lane hook); refs: only the
+  local branch w6-local added.
