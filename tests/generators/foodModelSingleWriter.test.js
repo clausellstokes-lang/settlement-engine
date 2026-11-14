@@ -430,7 +430,11 @@ describe('FIX-G1 — the viability summary counts the list the record publishes'
     // base → 274. An isolated town is fed from outside only as far as its support receipt carries,
     // so 31 golden isolated towns (receipt `untenable`) now carry an uncovered local food deficit
     // and read NOT VIABLE — the "has N operational dependencies" sentence is the VIABLE verdict's.
-    expect(stating, 'no row stated a dependency count — the sweep judged nothing').toBeGreaterThan(250);
+    // RE-KEYED 250 → 220 BY MEASUREMENT (STYLE-2-MERGE point 47, 2026-11-13; the COHERENCE-AGREE merge 22cc9ef7d, a figure its
+    // drafted record names for the merge seat: "272 rows state a count -> 241, the floor > 250; offenders 0"), one cause: 272 on
+    // the lane's base -> 241 at the merge (the seventh seat's (c) re-deal re-judges the re-dealt holders' viability). The floor keeps the
+    // FIX-FOOD-ISOLATION ratio under the measure (250 of 274; 220 of 241), and the offenders below stay 0: the invariant itself.
+    expect(stating, 'no row stated a dependency count — the sweep judged nothing').toBeGreaterThan(220);
     expect(offenders, `\n${offenders.join('\n')}\n`).toEqual([]);
   }, 120_000);
 });

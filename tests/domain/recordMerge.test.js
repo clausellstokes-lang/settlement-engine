@@ -263,7 +263,8 @@ describe('EM-R0c — the merge: the consequence of an edit is the difference of 
     // golden-master-v3) and U9 d207c8136 (the bottom end: the external mill is fabric) gives the two hamlets back. The row
     // that stays out is village|germanic|forest|isolated|civilized|golden-master-v3: the budget thins its optional draws
     // and it keeps one active chain where it kept seven at master a07ee4e0a.
-    expect(subjects.length, 'the rows whose active chains have an order to keep or to move').toBe(56);
+    // STYLE-2-MERGE point 47 (2026-11-13, the COHERENCE-AGREE merge 22cc9ef7d; a figure its drafted record names for the merge seat): 56 -> 61, the seventh seat's (c) re-deal (the draft: recordMerge A6 56 -> 61).
+    expect(subjects.length, 'the rows whose active chains have an order to keep or to move').toBe(61);
 
     const armOne = [];
     const armTwo = [];

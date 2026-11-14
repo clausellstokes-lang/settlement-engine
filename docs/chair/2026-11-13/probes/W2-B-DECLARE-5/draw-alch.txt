@@ -1,0 +1,41 @@
+word house: alchemist: 75 findings, 75 distinct (town, sentence), 74 towns; salt "w2b5-f7-alchemist-2026-11-13"
+
+1. r2s-succession_void-metropolis-0 · Systems/Defense · names
+   "Kulubtitlan buys its magical support from its alchemists by the batch, and the metropolis's accounts carry it as a purchase, not a defence."
+   {"tier":"metropolis","pop":16189,"crisis":"succession_void","market":true,"roster":"Fish market · District markets (5-10) · Multiple market squares · Major annual fairs · Apothecary district · Mages' district · Academy of magic","rosterSize":78,"magic":true}
+
+2. r2r-metropolis-45 · Systems/Defense · names
+   "Chandraganj buys its magical support from its alchemists by the batch, and the metropolis's accounts carry it as a purchase, not a defence."
+   {"tier":"metropolis","pop":198530,"crisis":"calm","market":true,"roster":"Fish market · District markets (5-10) · Multiple market squares · Major annual fairs · Apothecary district · Mages' district · Academy of magic · Whisper market · Black market bazaar","rosterSize":102,"magic":true}
+
+3. r2s-mass_migration-metropolis-1 · Systems/Defense · names
+   "The magical help at Unterthal comes from its alchemists, who brew for the defenders."
+   {"tier":"metropolis","pop":45896,"crisis":"mass_migration","market":true,"roster":"Fish market · District markets (5-10) · Multiple market squares · Major annual fairs · Apothecary district · Mages' district · Whisper market","rosterSize":86,"magic":true}
+
+4. r2r-village-54 · Systems/Economics · names
+   "The local alchemist supplements conventional trade."
+   {"tier":"village","pop":372,"crisis":"calm","market":false,"roster":"Apothecary","rosterSize":18,"magic":true}
+
+5. r2s-monster_pressure-metropolis-3 · Systems/Defense · names
+   "The magical help at Brahmabagh comes from its alchemists, who brew for the defenders."
+   {"tier":"metropolis","pop":37094,"crisis":"monster_pressure","market":true,"roster":"Fish market · District markets (5-10) · Multiple market squares · Major annual fairs · Apothecary district · Mages' district · Academy of magic","rosterSize":88,"magic":true}
+
+6. r2r-city-49 · Systems/Defense · names
+   "The magical help at Fontecivitas comes from its alchemists, who brew for the defenders."
+   {"tier":"city","pop":6341,"crisis":"calm","market":true,"roster":"Daily markets · Multiple market squares · Major annual fairs · Apothecary district · Hedge wizard","rosterSize":52,"magic":true}
+
+7. r2s-occupied-metropolis-2 · Systems/Defense · names
+   "Nokhoihan buys its magical support from its alchemists by the batch, and the metropolis's accounts carry it as a purchase, not a defence."
+   {"tier":"metropolis","pop":36400,"crisis":"occupied","market":true,"roster":"Fish market · District markets (5-10) · Multiple market squares · Major annual fairs · Apothecary district · Academy of magic · Whisper market · Black market bazaar · Mages' district","rosterSize":94,"magic":true}
+
+8. r2s-mass_migration-city-2 · Systems/Economics · names
+   "The local alchemist supplements conventional trade."
+   {"tier":"city","pop":7126,"crisis":"mass_migration","market":true,"roster":"Fish market · Daily markets · Multiple market squares · Major annual fairs · Apothecary district · Mages' guild · Whisper market","rosterSize":57,"magic":true}
+
+9. r2s-religious_conversion-metropolis-1 · Systems/Defense · names
+   "The magical help at Tyrhammer comes from its alchemists, who brew for the defenders."
+   {"tier":"metropolis","pop":42064,"crisis":"religious_conversion","market":true,"roster":"Fish market · District markets (5-10) · Multiple market squares · Major annual fairs · Apothecary district · Mages' district · Black market bazaar","rosterSize":88,"magic":true}
+
+10. r2r-metropolis-39 · Systems/Defense · names
+   "Lykopolis buys its magical support from its alchemists by the batch, and the metropolis's accounts carry it as a purchase, not a defence."
+   {"tier":"metropolis","pop":87995,"crisis":"politically_fractured","market":true,"roster":"Fish market · District markets (5-10) · Multiple market squares · Major annual fairs · Apothecary district · Mages' district · Academy of magic · Black market bazaar","rosterSize":95,"magic":true}

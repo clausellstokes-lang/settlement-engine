@@ -1,0 +1,47 @@
+diff --git a/src/generators/steps/resolveResources.js b/src/generators/steps/resolveResources.js
+index 1b89eefc2..1fa8b832b 100644
+--- a/src/generators/steps/resolveResources.js
++++ b/src/generators/steps/resolveResources.js
+@@ -201,7 +201,13 @@ registerStep('resolveResources', {
+     };
+     const held = new Set(nearbyResources);
+     const magicOn = generationContext.worldLaw.magicFunctions();
+-    const refillable = (key) => !held.has(key) && admitsAccess(key) && RARE_RESOURCES[key] === undefined
++    // COHERENCE-AGREE-6 (REVIEW-AGREE-2 F5 (b)): the refill never fills a slot with a member the town's terrain refuses
++    // (RESOURCE_DATA[key].requiresTerrain: the mountain pass on the mountains). The pool above does not read the key.
++    const admitsTerrain = (key) => {
++      const terrains = /** @type {{ requiresTerrain?: string[] } | undefined} */ (RESOURCE_DATA[key])?.requiresTerrain;
++      return !Array.isArray(terrains) || terrains.includes(String(terrainOverride));
++    };
++    const refillable = (key) => !held.has(key) && admitsAccess(key) && admitsTerrain(key) && RARE_RESOURCES[key] === undefined
+       && (magicOn || key !== 'magical_node');
+     const categoryOf = (key) => (RESOURCE_DATA[key]?.category) || 'land';
+     const slots = nearbyResources.map((key) => {
+diff --git a/tests/generators/coherenceAgreeCures.test.js b/tests/generators/coherenceAgreeCures.test.js
+index 4a97b4f85..b3c40f9b7 100644
+--- a/tests/generators/coherenceAgreeCures.test.js
++++ b/tests/generators/coherenceAgreeCures.test.js
+@@ -405,3 +405,23 @@ describe('F5 (a): the mountain pass says the terrain it requires, and the geogra
+     expect(RESOURCE_DATA.defended_pass.terrain).toBeUndefined();
+   });
+ });
++
++/**
++ * F5 (b) (COHERENCE-AGREE-6): THE REFILL never fills a slot with a member the town's terrain refuses. Each seed below is
++ * a crossroads holder off a crossroads whose refused slot the refill gave "Mountain Pass" off the mountains at
++ * 8866a0ddd (REVIEW-AGREE-2 F5: 46 of the reviewer's 54); it now holds a full roll with no pass.
++ */
++describe('F5 (b): a refilled slot never takes a member the terrain refuses', () => {
++  beforeAll(async () => { await loadGenerationLawPayloads(); });
++  test('refilled holders off the mountains hold no mountain pass, and keep their roll\'s size', () => {
++    const seeds = ['r2r-thorp-10', 'r2r-hamlet-22', 'agree-village-40', 'agree-town-0', 'agree-city-28', 'r2r-metropolis-2'];
++    expectNoSeedFailures(collectSeedFailures(seeds, (seed) => {
++      const settlement = birth(seed);
++      const roster = settlement.config.nearbyResources;
++      expect(settlement.config.terrainType, seed).not.toBe('mountain');
++      expect(roster.length, `anchored: ${seed} holds a roll`).toBeGreaterThan(2);
++      // anchored: the roster was just held to carry a full roll, so it is the live roster
++      expect(roster, seed).not.toContain('defended_pass');
++    }), 'a refilled slot takes a pass off the mountains');
++  });
++});

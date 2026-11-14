@@ -41,7 +41,14 @@ import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailur
 // that still hold (2, 38, 42, 90, 97, 114, 134) are kept; the next five seam settlements at the tip whose seat's own line is a
 // voiceable want overridden by the crisis secret (18, 27, 34, 36, 37) join them. Measured over soak1k-0..239: 30 seats voiced
 // with the secret and no separate keeper row (23 of them with a want overridden). Was [2, 31, 38, 42, 43, 62, 80, 90, 97, 114, 127, 134].
-const SEAM_SEEDS = [2, 18, 27, 34, 36, 37, 38, 42, 90, 97, 114, 134];
+// STYLE-2-MERGE point 47 (2026-11-13, re-keyed BY IDENTITY, the same idiom; ruling (e), the FIRST qualifying town in corpus
+// order, every assertion unchanged): the COHERENCE-AGREE merge 22cc9ef7d re-deals the cast over the dual hat (green at the line
+// f572d12b7 and at the lane's own tip 69b53decd; red only composed), so 1 of the twelve is no longer a seam, measured: 27 (the
+// crisis secret is kept by someone else, the bath-keeper: a separate `secret` row; the seat voices its want). The eleven that still
+// hold are kept (k of n = 11 of 12); the first seam settlement in corpus order not in the set whose seat's own line is a voiceable
+// want overridden by the crisis secret, 28, joins them. Measured over soak1k-0..239: 33 seats voiced with the secret and no separate
+// keeper row (26 of them with a want overridden). Was [2, 18, 27, 34, 36, 37, 38, 42, 90, 97, 114, 134].
+const SEAM_SEEDS = [2, 18, 28, 34, 36, 37, 38, 42, 90, 97, 114, 134];
 const FOUNDRY_SEED = 2;
 /** @type {Record<number, any>} */
 const born = {};

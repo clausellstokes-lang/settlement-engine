@@ -830,7 +830,9 @@ export const deriveSupplyRiskAnalysis = (population, terrain, institutions, conf
     )
     || hasTeleportationInfra(institutions, config);
   if (mustImport) {
+    const pick = Math.round(Number(population) || 0) + (institutions?.length || 0); // COHERENCE-AGREE: the event a place draws, by its size, no roll
     mustImport.forEach((resource) => {
+      if (liveMaterialFor(resource, availableNativeResourceKeys(config || {}))) return; // COHERENCE-AGREE: a live material is no import and no hook
       if (hasImportProcessor(institutions, resource, config)) {
         if (!hasExternalSupply) return;
         warnings.push({
@@ -842,17 +844,16 @@ export const deriveSupplyRiskAnalysis = (population, terrain, institutions, conf
           suggestedFixes: [`Establish stable trade relationship with ${resource} supplier`],
         });
         if (resource.toLowerCase().includes('timber'))
-          hooks.push({
-            category: 'Resource Conflict',
-            hook: "Something is killing the forest the timber comes from, and the settlement's building and shipbuilding trades stall without it. Find another supplier, or find out what is in those woods?",
-            severity: 'medium',
+          hooks.push({ category: 'Resource Conflict', severity: 'medium',
+            hook: ["Something is killing the forest the timber comes from, and the settlement's building and shipbuilding trades stall without it. Find another supplier, or find out what is in those woods?",
+              'The timber rafts stopped coming a month ago, and the shipwrights and builders are bidding against each other for what is left in the yards.'][pick % 2],
           });
         if (resource.toLowerCase().includes('metal') || resource.toLowerCase().includes('iron'))
-          hooks.push({
-            category: 'Strategic Resource',
-            hook: 'War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with. Work slows, and people are starting to complain.',
-            severity: 'medium',
-          });
+          hooks.push({ category: 'Strategic Resource', severity: 'medium', hook: (typeof facts === 'function' ? facts() : facts)?.warState !== 'peace' // the war line only where the record holds a war
+            ? 'War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with. Work slows, and people are starting to complain.'
+            : ['The iron merchants have doubled their price this season, and the smiths are mending tools with scrap. Work slows, and people are starting to complain.',
+              'The iron carts are three weeks late and the carters will not say why. The smiths are rationing what they have, and work waits on mended tools.',
+              'A new toll on the iron road has made metal dear. The smiths blame whoever set it, and the tools still need mending.'][pick % 3] });
       }
     });
   }
@@ -894,4 +895,4 @@ function moderateGapGrade(facts) {
   if (severity === undefined) return {};
   return { category: FOOD_SECURITY_BANDS[/** @type {keyof typeof FOOD_SECURITY_BANDS} */ (band)].label, severity };
 }
-import { MODERATE_GAP_TWIN, OUTLOOK_HOOK_SIBLINGS } from './outlookHookSiblings.js'; export { OUTLOOK_HOOK_SIBLINGS }; // LANDING-R2 (ODQ §934.105): the outlook hooks' declared siblings moved verbatim to economy/outlookHookSiblings.js, re-exported; below every cited line, so none moves
+import { MODERATE_GAP_TWIN, OUTLOOK_HOOK_SIBLINGS } from './outlookHookSiblings.js'; import { liveMaterialFor } from './localMaterials.js'; export { OUTLOOK_HOOK_SIBLINGS }; // LANDING-R2 (ODQ §934.105): the outlook hooks' declared siblings moved verbatim to economy/outlookHookSiblings.js, re-exported; below every cited line, so none moves

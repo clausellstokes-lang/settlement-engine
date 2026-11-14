@@ -36,6 +36,7 @@
 import { GOAL_FAMILY_LINES, PERSONALITY_CLUSTER_OF, TIE_TYPE_TO_GOAL_SUBKIND } from '../../data/people/goalFamilies.js';
 import { familyOfInstitution, isLawEnforcementInstitution, isNoPowerInstitution } from '../../data/institutionalCatalog.js';
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
+import { chainPrintName } from '../../domain/display/chainPrintName.js';
 import { filterDeclared, lineText, resolveSibling } from '../../domain/facts/drawDeclared.js';
 import { factsOf } from '../../domain/facts/factsOf.js';
 import { notePresumption, withPresumptionLedger } from '../../domain/facts/presumptionLedger.js';
@@ -433,9 +434,11 @@ export function familyCandidates(card, cards, ctx, vantage, held, opts = {}) {
         const others = [...new Set(own.flatMap((ch) => arr(ch.processingInstitutions).map((n) => ctx.rosterByFamily.get(ctx.famKey(n)))).filter((n) => n && n !== houseKey))];
         for (const other of others) { const of = houseFill(other); if (of) push(cellCandidates('INSTITUTION', 'takeover', vantage, { house: hf, otherHouse: of }, ctx, held, { target: { kind: 'house', id: other } })); }
       }
-      for (const ch of impaired) push(cellCandidates('SUPPLY', 'impaired', vantage, { chain: str(ch.label), house: hf }, ctx, held, { target: { kind: 'chain', id: str(ch.chainId || ch.label) } }));
+      // a chain's name in a goal is PRINTED words (the NPCs tab, the summary, the PDF, the Foundry journal): it is the
+      // name the page gives the chain (`chainPrintName`: the toll by the town's access); the target id stays the record's
+      for (const ch of impaired) push(cellCandidates('SUPPLY', 'impaired', vantage, { chain: str(chainPrintName(ch, ctx.view).label), house: hf }, ctx, held, { target: { kind: 'chain', id: str(ch.chainId || ch.label) } }));
       for (const d of ctx.depsByHouse.get(ctx.famKey(houseKey)) || []) { const rf = resourceFill(d.resource); if (rf) push(cellCandidates('SUPPLY', 'dependency', vantage, { resource: rf, house: hf }, ctx, held, { target })); }
-      if (TRADING_SHELVES.includes(shelf)) for (const ch of own.filter((x) => RUNNING_STATUSES.includes(str(x.status)))) push(cellCandidates('SUPPLY', 'expansion', vantage, { chain: str(ch.label), house: hf }, ctx, held, { target: { kind: 'chain', id: str(ch.chainId || ch.label) } }));
+      if (TRADING_SHELVES.includes(shelf)) for (const ch of own.filter((x) => RUNNING_STATUSES.includes(str(x.status)))) push(cellCandidates('SUPPLY', 'expansion', vantage, { chain: str(chainPrintName(ch, ctx.view).label), house: hf }, ctx, held, { target: { kind: 'chain', id: str(ch.chainId || ch.label) } }));
     }
   }
   if (ctx.isolation) {

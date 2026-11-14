@@ -112,16 +112,16 @@ const FIXED = Object.freeze([0, 21, 42]);
  */
 const PRE_CHANGE = Object.freeze({
   0: Object.freeze({
-    derived: '3acd72dd0e077d7e04f02036203120c0c55b35b679835710528fa2ea7309d7b8',
-    replay: '214e7d3c6964a28d706bf01dda0f672ce1001ca7c7e4bab3600b49aae7b514f5',
+    derived: '4e2e2dfbb830302a9f7ad93c17ccd39c4eb3bca0876e692d2668ffb112635f66',
+    replay: 'a4eebdfbb85f19af94cf1a7803a53d087a1e46859d5d8d259546b7ffde1701e7',
   }),
   21: Object.freeze({
-    derived: 'de99d51912d61b643bfd55b73f6bed4e28b360f67a9a3f7c3aaa69e1f451a753',
-    replay: '27d4e02a37b293fe5e7340abf5f45677a0ac148def0270e4f2eb02c53c65905f',
+    derived: 'f4fc47a0ffe9036b899c2ce86a4fbb071857e321eb222599108adc3f6ccea662',
+    replay: '69c46ce542681449b420576c69191385f3959f939a872e1aae9dcf54a6b70687',
   }),
   42: Object.freeze({
-    derived: '9e7c1127a769b26bcd48b0e64c9fd3d6b2d624672fdd2f38928ec13c1ef1e408',
-    replay: '3133bc6e3e0edd3f4384441b5f5ef02766fecce11388911bf5762d36d8dd237c',
+    derived: '6e83fa8a8459ff8b9ffd2ea42d4edc06c02d682bd9310c083a4e8c6a3930c6dd',
+    replay: 'f40acc529b4fd137982fdba6d60b754a9fe6ed6e2429b0e8ef43c9d159d614f3',
   }),
 });
 // ── RE-CAPTURED 2026-10-01, the urban band (ODQ §934.86), BY THE SAME PLANT AND NEVER FROM THE LIVE STEP ALONE ─────
@@ -264,6 +264,12 @@ describe('EM-B2b2 — the DM\'s nearby-resources word survives resolveResources'
 // ── RE-CAPTURED 2026-11-12, STYLE-2-MERGE point 46 (STYLE-2-MERGE-9), BY THE SAME PLANT ── Rows 0, 21, 42 moved by the COHERENCE-POWERS
 // merge 6aeaa4154 (docs/shift-records/2026-11-13-style-2-merge-46-coherence-powers.json: the dual hat re-deals the cast); the line before the merge reads all six green. Re-captured: the pre-EM-B2b2 step (12c437de4,
 // sha256 62e16d59...) planted over a COPY of the merged tree and the live step produced the SAME six digests (cmp-equal,
+// the live run twice and equal); on every row the fresh generation equals the dormant re-derivation.
+
+// ── RE-CAPTURED 2026-11-13, STYLE-2-MERGE point 47 (STYLE-2-MERGE-11), BY THE SAME PLANT ── Rows 0, 21, 42 moved by the COHERENCE-AGREE
+// merge 22cc9ef7d (docs/shift-records/2026-11-13-style-2-merge-47-coherence-agree.json: one fact, one answer: the resource roll's refused members refilled, the economy and defence read off the town's own record); the line before the merge reads all six green. Re-captured: THE LANE-ERA pre-EM-B2b2 step (the live
+// resolveResources.js less EM-B2b2's own 31 lines, sha256 adfd3ba4...; the same removal on the line's file reproduces 12c437de4's
+// blob, sha256 62e16d59..., byte for byte; COHERENCE-AGREE rewrote the step, so 12c437de4's copy would revert the lane) planted over a COPY of the merged tree and the live step produced the SAME six digests (cmp-equal,
 // the live run twice and equal); on every row the fresh generation equals the dormant re-derivation.
 
     const layer = layerOf([[ROOT_KEY, [...DM_ROSTER]]]);
