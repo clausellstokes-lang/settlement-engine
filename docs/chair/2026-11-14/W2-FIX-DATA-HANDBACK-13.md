@@ -1,6 +1,6 @@
 # W2-FIX-DATA-13: the data lane goes on curing (kept current after every item)
 
-**State: IN PROGRESS: DATA-SMELTER and the chair's 12:11 HIGH cured and pushed (the latter revised to the 12:50 ruling, `dda3ca111`).** Every figure EXECUTED unless marked PLAUSIBLE.
+**State: HANDED BACK BY FILE at the count (322,755 at 13:34; the next cure with its reads and gates would cross 400,000).** Cured and pushed: DATA-SMELTER; the chair's 12:11 HIGH (revised to the 12:50 ruling); R3C-REVOLTNOTE. The ONE MESSAGE after four cures not reached (three cures); the chair was told of the HIGH's push in one line as ruled. Every figure EXECUTED unless marked PLAUSIBLE.
 
 **Seat.** The thirteenth seat on `lane/w2-fix-data-2026-11-13`, from `c4d941895` (read back from origin first: the brief's tip, no stop). Chair: `session_01ACmDYZrFEVXyZEUg1NDxxC`. Brief: `origin/lane/chair-2026-11-08:docs/chair/2026-11-14/briefs/BRIEF-W2-FIX-DATA-13.md`. Nothing at or below c4d941895 is rewritten.
 
@@ -72,15 +72,33 @@
 - Guard: the second test of `tests/data/w2FixData13Rows.test.js` (four small towns, two arms: no district/quarter/ward; the event's effect in the twin's words; r2r-town-1, a town, keeps both originals): the district arm red 4 of 4 with the resolution planted out, the twin arm red 4 of 4 with the twins planted out, green after.
 - Doors: presumed-things fresh 49 / stale 0 (carried); fact layers 0 rises 0 falls; the wiring census is stale at c4d941895 by the same 131 bytes (tablePools), not moved here; grid 0; domain-strict, type ratchet, eslint 0 (the helpers moved out of historyGenerator.js for its max-lines rule; births byte-identical across the move).
 
+### 3 · R3C-REVOLTNOTE, the slave revolt's viability note (the chair's 13:01): CURED, `85322e82b` (lighting census `6f86693a5`)
+
+- `src/data/stressTypes.js` slave_revolt.viabilityNote and its twin in `stressTypesMeta.js`: "... less gets made, and everyone who keeps order is busy containing the revolt." -> "Owners keep their gangs only on work they can watch, and less gets made while the revolt lasts." (names no force; no condition). Holders: stressTypes.js this lane's alone; stressTypesMeta.js unchanged by any lane. The census-2d ledger arm lists the cell as REWORDED already.
+- Counts on the 730: 24 prints, 11 with no force -> "keeps order" 0. DECLARED MOVE: 24 births, only `.stress[].viabilityNote` / `.stressors[].viabilityNote`.
+- Read: r2s-slave_revolt-thorp-1 (thorp 15), r2s-slave_revolt-metropolis-2 (metropolis), bar0-town-slave_revolt+under_siege-rand-1 (a siege; none on the 730): Summary/Crisis, Systems/Defense, the PDF view model, the journal: true.
+- Guard: the third test, red 3 of 3 with the old note planted. Governing 92 files + walkers: 11 red, all red at c4d941895. Grid 0; gates 0.
+- A NOTE (not cured, not this row; PLAUSIBLE): r2s-slave_revolt-thorp-1's Outlook "Erdeniin keeps order and pays its way" under a revolt in force.
+
 ## 3. EVERY NEW OR CHANGED LINE, with the towns it was read in (the owner's veto list)
 
 - institutionalCatalog.js, Smelter: "Converts raw ore to refined metal using charcoal-fueled furnaces." (r2r-town-26, r2s-under_siege-city-2, r2s-occupied-metropolis-1).
 - historyData.js HISTORY_DESC_SIBLINGS: "Newcomers and the old families still keep apart" (r2r-thorp-58, r2s-occupied-thorp-0, r2s-under_siege-village-3, r2s-recently_betrayed-village-2); "The merchant families and the labouring families still keep apart" (r2r-hamlet-15, r2s-famine-village-2, r2r-village-2).
 
+- stressTypes.js / stressTypesMeta.js slave_revolt.viabilityNote: "Owners keep their gangs only on work they can watch, and less gets made while the revolt lasts." (r2s-slave_revolt-thorp-1, r2s-slave_revolt-metropolis-2, bar0-town-slave_revolt+under_siege-rand-1).
+
 ## 4. FOR THE JOIN
 
 - Carried from HANDBACK-12 section 3 and HANDBACK-11 section 9, unchanged.
 
-## 5. WHAT IS LEFT, line by line
+## 5. WHAT IS LEFT, line by line (re-measure each at the tip on the 730 before curing; section 1 has the counts at c4d941895)
 
-The table's rows, widest first in the brief's order.
+1. THE CHAIR'S 12:50 MEDIUM rows of the reader (REVIEW-W2-FIX-DATA-4, `origin/lane/review-w2-fix-data-4-2026-11-14` 486ed1b17, its verdict file's findings table): (a) the forge arrival still prints (Vatantash; rv4-any-metropolis-under_siege-7); (c) a wharf with no docks, a sawmill district with no sawmill, "chandlers and tanners" with neither (A LINE THAT NAMES A HOUSE READS THE ROSTER). (b) the wiring census: NAMED, NOT RE-TAKEN (stale at c4d941895 by 131 bytes, tablePools; re-derived once, at the close). Its four guard gaps: one arm each, last.
+2. THE CHAIR'S 13:01 LV-CATHEDRAL (100 of 720 as named; `src/data/economicData.js` TRADE_DEPENDENCY_NEEDS' two cathedral rows: the `svcs` name what the stone keeps up, not worship, pilgrimage, teaching): a DECLARED MOVE of `dependency.affectedServices` and the Services tab's at-risk marks; more moving is a stop. Check holders first.
+3. The table, widest first: "street kitchens" where no market stands (cultureProfiles.js, 30 of 73); #158 the compact's grain clause (historyGenerator.js, 18 of 20; this lane holds the file); the siege cells (one cause, crisis twins in the shape of 18fcc08ca / 43e80bfde; SERVICE_DESC_SIBLINGS and DESC_VARIANT_SIBLINGS): #68 14, BAR-248 11 (the Access to parish church's weekly rite under a siege) with BAR-247 4 (the hamlet's walk to the village church: institutionalCatalog.js, keyed in DESC_VARIANT_SIBLINGS as the fair's catalogue line is), #51 10, #73 10, #67 8, PAIRS vintner 5, #54 4, SVC caravans 4 (bar n250), #60 3, #59 3, PAIRS brewery ships 3, the fair's livestock auction 2, the stress opener's "gates are open but attended" 2; #36 the salt fish 6; #233 herbs and spices 12; the famine cells: fresh produce 5, street food 3, #71 5, #57 3; #156 7; #157 "His writ" 3 (name no sex); the two guild lines (guild_conflict 3, the compact's "the guilds negotiated" 2: historyGenerator/historyData, HISTORY_TEMPLATE_RECORD_DECLARATIONS already needs `guild` for guild_conflict, so find why 3 print); the charter hall (3, all hamlets; RULED: what the hall does).
+4. THE POOL GUARD'S TWO ROWS over their ceilings on the joined tree (plotHooks:succession_crisis 0.82 vs 0.64; plotHooks:resource_scarcity 0.37 vs 0.34): find which of this lane's cures declared the other lines off; widen with lines READ TRUE or narrow that cure; never raise a ceiling.
+5. PARKED, unchanged: #64/#191, #9. FOR THE JOIN, carried. Candidates: the forge pool's line 2; the crowd in two hamlets; r2s-under_siege-city-3's "sound of a market" opener; "Erdeniin keeps order" under a revolt.
+
+## 6. How the instruments are re-made
+
+Section 0, plus (all in the scratchpad's `q/`, re-made in minutes from section 0's sources): `rank13.mjs` (the table), `fdiff.mjs` (field diff by family), `descdiff.mjs`, `distr.mjs` / `tierc.mjs` / `effd.mjs` (the history's size words and lasting effects), `revolt.mjs`, `surf13.mjs <regex> <seed...>` (record, PDF view model paths, journal lines), `render13.sh` + `render13.jsx` (REVIEW-BAR-0's render2.sh / render.bar0.jsx with CENSUS-2's cfgFor: the rendered tabs to `r/<tag>/dumps`), `pdfr/pdfhist.test.jsx` (a PDF section's text by its function components; env TREE, SECTION, RE, SEEDS, OUTF). `holders.sh <file>` over the 64 lanes dated 2026-11-12 to -14 (a differing copy that is an earlier state of this lane's own file is this lane's). Base worktree `/home/user/wt13-base` at c4d941895 (node_modules linked) for classing reds. Births: `out/tip` (c4d941895), `c1` (989af877a), `c2`/`c2b` (05e98c31e), `c3` (dda3ca111), `c4` (85322e82b).
