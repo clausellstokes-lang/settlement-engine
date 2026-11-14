@@ -95,6 +95,7 @@ import { populationTrendBand } from '../../src/domain/display/trendLens.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { FOOD_SECURITY_BANDS, READINESS_BANDS } from '../../src/data/bandLadders.js';
 import { mustExtract } from '../helpers/sourceContract.js';
+import { factsOf } from '../../src/domain/facts/factsOf.js';
 import { fillShapeViolation, mergeSlotShapes, parseSlotShapes } from '../../scripts/lib/dossier-slot-shapes.mjs';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { drawnMember } from '../helpers/drawnProse.js';
@@ -1628,10 +1629,16 @@ describe('DS-GEN-18 — why these workshops, and the blocker that was in the wro
     // THE ORDER OF THE LIST IS NOT THE ORDER OF THE FILL: the first CONFORMING row wins, so
     // a roster whose first entry is plural still names its singular house.
     expect(craftInstitutionFill(['Glassmakers', 'Merchant guilds (3-8)', 'Smelter'])).toBe('Smelter');
-    // And where nothing conforms, both STALLED variants name the slot ⇒ the pool is SILENT.
+    // And where nothing conforms, the lines that name the slot are dropped. W2-WRITE-5 A, the read's M6 (2026-11-13),
+    // re-keyed by identity: STALLED's printing lines no longer name a house (the slot printed catalogue labels and
+    // said the house was "short of what it needs from upstream" where the chain model holds that it imports its
+    // feed), so a refused fill no longer silences the pool: it speaks through a line with no house in it, and the
+    // plural house still never reaches a singular seam.
     const withheld = { activeChains: [CHAIN({ upstreamMissing: ['stone'], processingInstitutions: ['Glassmakers'] })] };
     expect(craftReasonPoolKey(withheld), 'the KEY still resolves — the silence is the FILL\'s').toBe('STALLED');
-    expect(drawCraft(withheld), 'a plural house drew a singular sentence').toBeNull();
+    const spoken = drawCraft(withheld);
+    expectSentence(spoken, 'STALLED');
+    expect(spoken, 'a plural house drew a singular sentence').not.toMatch(/Glassmakers/);
     // Every fill this desk offers passes the ANNEX'S OWN shape checker, not a local twin.
     const shapes = mergedShapes();
     expect(fillShapeViolation(shapes.shapeOf('institution'), craftInstitutionFill(['Smelter']))).toBe('');
@@ -1655,6 +1662,9 @@ describe('DS-GEN-18 — why these workshops, and the blocker that was in the wro
     expect(line).toBe(drawnMember({
       leaf: 'general', blockId: 'DS-GEN-18', poolKey: 'STALLED', seed: 'craft',
       slots: { settlement: 'Thornwall', institution: 'Smelter' },
+      // W2-WRITE-5 A, the read's M6 (2026-11-13): STALLED's lines now declare the siege (a twin says the siege
+      // stopped the goods), so the anchor passes the facts the desk hands in (the drawnMember helper's cause 5).
+      facts: factsOf(TOWN),
     }));
     // The token itself must never reach a reader through any seam of this block.
     expect(fillShapeViolation(mergedShapes().shapeOf('resource'), 'warehouse_logistics')).toBe('ENGINE-TOKEN-IN-FILL');
