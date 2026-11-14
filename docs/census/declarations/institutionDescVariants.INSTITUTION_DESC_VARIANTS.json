@@ -1543,7 +1543,7 @@
     },
     {
       "id": "village|Crafts|Brewer#0",
-      "text": "Turns malted grain into ale by the barrel. After the bakers, no trade eats more grain. It supplies both alehouses and homes.",
+      "text": "Turns malted grain into ale by the barrel. Only bread takes more of the grain. It supplies both alehouses and homes.",
       "needs": [
         "institution: tavern"
       ],

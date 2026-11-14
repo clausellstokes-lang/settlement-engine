@@ -30,8 +30,8 @@ const servicesOf = (town, house) => Object.values(town.availableServices || {}).
 describe('W2-FIX-DATA-6: the census writers in the data lane\'s files', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); }, 120_000);
 
-  test('CENSUS-2 b: under a siege the coaching inn takes no traveller off the road and sends no relay out (r2s-under_siege-city-2); a calm town keeps both lines (r2r-town-2)', () => {
-    const besieged = servicesOf(bornCensus('r2s-under_siege-city-2'), 'Coaching inn').map((v) => String(v.desc));
+  test('CENSUS-2 b: under a siege the coaching inn takes no traveller off the road and sends no relay out (r2s-under_siege-town-1); a calm town keeps both lines (r2r-town-2)', () => {
+    const besieged = servicesOf(bornCensus('r2s-under_siege-town-1'), 'Coaching inn').map((v) => String(v.desc));
     expect(besieged.filter((t) => /for travelers on the road|Reduces travel time/.test(t))).toEqual([]);
     expect(besieged).toContain('Beds, meals, and stabling, though with the roads held the rooms stand mostly empty.');
     expect(besieged).toContain('Relay horses kept for coaches and dispatch riders; while the siege holds the roads, none go out.');
