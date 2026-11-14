@@ -1847,13 +1847,22 @@ export function navalDefensePoolKey(navy, port, blockaded) {
 }
 
 /**
+ * ⛔ THE ROUTE IS THE HOME OF "THIS IS A PORT" AND OF WHICH WATER IT STANDS ON (the chair's ruling to
+ * R3-TABS-2, 2026-11-14, "the port's two homes"). Every naval pool speaks of the SEA (its approaches, a
+ * harbour mouth, a fleet), and the key was offered wherever the roster's docks set `hasPort`: 61 river-route
+ * towns of the 720 and the 144 fresh births read "… has a harbour and nothing to hold it with; any vessel
+ * that wants the sea approaches has them". A naval line is now offered only where the route is the sea
+ * (`tradeRouteAccess` 'port', and the one water reading `waterAccessKind` says maritime, so an inland river
+ * port stays silent too); on a river or any other route the key offers nothing (the pool holds no line true
+ * of a river landing). A record with no config reads as before (A-11).
  * @param {{ config?: { terrainType?: unknown, tradeRouteAccess?: unknown } | null } | null | undefined} settlement
- * @returns {boolean} the record's own config says there is no water
+ * @returns {boolean} the record's own route is the sea (or the record carries no config)
  */
-const dryRecord = (settlement) => {
+const seaRoute = (settlement) => {
   const config = settlement?.config;
-  if (!config || typeof config !== 'object') return false;
-  return waterAccessKind(/** @type {string | null | undefined} */ (config.terrainType), /** @type {string | null | undefined} */ (config.tradeRouteAccess)) === 'none';
+  if (!config || typeof config !== 'object') return true;
+  return text(config.tradeRouteAccess) === 'port'
+    && waterAccessKind(/** @type {string | null | undefined} */ (config.terrainType), /** @type {string | null | undefined} */ (config.tradeRouteAccess)) === 'maritime';
 };
 
 /**
@@ -1900,7 +1909,7 @@ export function defenseSupportingProse(settlement, options = {}) {
     // override seats aerial docks in a dry city, which set `hasPort`; the port flag now also needs
     // `waterAccessKind` not 'none' (a record with no config reads as before).
     naval: rung(navalDefensePoolKey(
-      civicFlag(compound.hasNavy), civicFlag(compound.hasPort) && !dryRecord(settlement),
+      civicFlag(compound.hasNavy) && seaRoute(settlement), civicFlag(compound.hasPort) && seaRoute(settlement),
       stockpile ? stockpile.blockaded === true : false,
     )),
   });
