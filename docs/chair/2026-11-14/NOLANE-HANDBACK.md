@@ -146,7 +146,13 @@ None: LV-CAPITAL is display only.
 3. **LV-CANNOTPRODUCE:** 33 towns, and **BAR-274:** 19. `src/generators/economy/tradeGoods.js` (declared moves).
 4. **LV-MAGICNOTES:** ~28 towns. `src/generators/chainMagicSubstitution.js` (a declared move on `magicNote` only; `facts/magicSource.js :: MAGIC_NOTE_TRADITION` must carry any new note).
 5. **LV-PROCHOUSES:** 5, and **LV-OTHERNEED:** 5. `resourceChains.js` and `computeActiveChains.js`.
-6. **R2A-LEFT-GOVECON:** 30 to be read by eye (ruling 3). Its file, npcData.js, is r2-code-a's, so any cure is named.
+6. **R2A-LEFT-GOVECON: READ (ruling 3).** The first 30 printing towns of the 720 were read in census order, each tie's two people against their `memberships`.
+   - **The bloc line** ("share a council bloc and a list of enemies"), 29 read: **15 FALSE**. The two people share no power: one of them holds none, or they sit in different powers.
+     - The 15: r2r-village-31, r2r-town-2, -3, -6, -8, -13, -21, -25, -40, -47, r2r-city-0, -3, -5, -6, -7.
+     - The 14 TRUE: both sit in one power.
+   - **The loan line**, 1 read (r2r-town-51): TRUE. The asker stands outside the governing oligarchy, whose member the other is.
+   - **The false share: 15 of 30, half.** It is one condition: the bloc line needs the pair to share a power membership.
+   - **The file:** `src/data/npcData.js :: STRESS_ECONOMIC_EFFECTS.wary_alliance` (with the tie's draw in `people/ties.js :: drawTies`). The file is r2-code-a's by the file rule, so the row is NAMED FOR THE JOIN, not cured. The one-line change: the wary_alliance pair prose `needs` a power both people are members of, or the tie is drawn only for such a pair.
 7. **LV-PALISADEQUARRY:** 57 of 720. PARKED for the owner (ruling 2).
 8. **LV-ARCANENONE:** 9 of 720, FENCED (magicReliance.js feeds the defence rating). It is measured and named. Counting a magic power of any standing as a practitioner would move `deriveMagicReliance`, and with it the score.
 
