@@ -137,3 +137,24 @@ The lane's own account (PART 8, PART 9), its guards and its pack were not opened
 only (step 3 has its planted run). No rollback was run, no catalogue diffed (step 3). Timing on born towns was not
 taken (V7-6 is a constructed worst case). The page, the PDF and the exports were not drawn. Towns advanced by the
 world pulse or edited in the product's editor were not stored: V7-2's edit is mine, made in SQL.
+
+## 1.7 Asked by the chair after the cold pass: does the FROZEN 211, applied alone, make V7-1 or V7-3 worse than today?
+
+**No, by run.** Today is a chain at 203 (no server veil) under the deployed client (origin/master, db832c892), whose
+own veil cuts the page. Chains: `t203` (001..203) against `p211` (203 + the frozen 211). The four hand towns, each
+stored three times, read by gallery, link and import on both chains (`subset.mjs`); then the deployed client's page
+model built from each chain's gallery read exactly as master's `src/lib/gallery.js` builds it (`deployed.probe.jsx`).
+
+| | 203 (today) | 203 + 211 alone |
+|---|---|---|
+| on the wire: strings or keys that 211 sends and 203 does not, over 36 (town, share, read) responses | | **0 in each of the 36** |
+| the deployed page model: strings or keys it holds with 211 and not without, over 12 shares | | **0 in each of the 12** |
+| V7-1, `town-b`: the hidden name in the response (as written or lower-cased), veil / Reveal DM | 4 / 6 | 3 / 4 |
+| … in the deployed page model | 3 / 4 | 3 / 4 (the same strings) |
+| V7-3, `town-d`: houses the response lists | Thieves' guild (powerful), Hidden shrine of the Drowned, Fish market | Hidden shrine of the Drowned, Fish market |
+| … houses the deployed page model lists | Hidden shrine of the Drowned, Fish market | the same |
+
+The deployed client carries V7-3's rule already (`galleryVeil.js`, the same re-test after the eyes) and has no name
+sweep, so its page shows both today; 211 alone takes strings off the wire and puts none on the page. On these two
+findings the earlier review's sentence stands: 211 alone makes nothing worse. Limits: four hand rows; the page MODEL,
+not a browser.
