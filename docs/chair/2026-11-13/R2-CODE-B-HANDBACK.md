@@ -407,12 +407,16 @@ The patch (apply on 87c541620 with `git apply docs/chair/2026-11-13/R2-CODE-B-3-
 |---|---|---|
 | 0 no caravans through an isolated place at war | b47ba9262 | caravans strings 62 in 31 towns, isolated 8 in 4 (r2s-wartime-thorp-1, -2, -3, -hamlet-3) -> 54 in 27, isolated 0. The clause is LEFT OUT (no sentence is true there in its place). DECLARED MOVE: 4 towns, 8 leaves, `stress.summary` / `stressors.summary` only. The generator golden's 525 hashes are byte-identical with and without it. Red first 2/22 -> 22/22. |
 | register: the lighting census | 922dadd7f | titles 29321 -> 29325, suiteTitles 7941 -> 7942 (item 0's four titles); verified 34/34 |
+| row 1 (a)-(c): the raw-colour budget, the phone chrome floor routes, the dossier phone floors | none needed | re-read at the merged tip c962f8c28 (tests/lint/rawColorLiteral.test.js, tests/components/phoneChromeFloor.census.test.js, tests/components/dossierPhoneFloorAllViews.test.jsx): 29/29 green; the budget is EXACT, so the tip holds 1221; no door to run |
+| row 1 (d) the quick guide's food word onto foodBandOf | fc7514261 | stored label against foodBandOf on the 800: 634 agree, 166 disagree (Secure -> Pressured 160; Import-Dependent -> Deficit 6, under a siege) -> the composed "How it lives" line moves in 166 towns, 0 disagree after; a record with no food record keeps its label. SAID PLAINLY: on this tree no surface calls composeSettlementQuickGuide (the Overview reads only cultureScopeLine and governsLine), so no page moves today. Display-time: field diff 0 by construction. Red first 1/18 -> 18/18 |
+| register: the writer-reach dark register (a red new on the lane) | a1a9b79bb | tests/lint/writerReach.walker.test.js red at 083dabdd2 / c962f8c28, green at the base e969a75b7: `gapPct on foodRecord` LIT by the lane's d94638185 (foodBandOf). The row struck with cause; `check-writer-reach.mjs --write` (shrink-only: cohort 1363 -> 1363); both row-count pins 34 -> 33 with cause; 52/52 |
+| register: the lighting census | db10ddaef | titles 29325 -> 29326 (row 1d's title); verified 34/34 |
 
 ## Stops and parked items (with recommendation)
 - NAMED, NOT CURED (not this row): the wartime price line's CENSUS-2d twin "The army has the carts and the road, and the fields are short of hands." prints in two isolated thorps (r2s-wartime-thorp-1, -thorp-3), where "the road" presumes a route. RECOMMENDATION: that twin takes `excludes: ['route: isolated']` with a sibling true of an isolated place, or the crisis lane's ruling.
 
 ## Rows NOT reached (line by line; kept current)
-1. Row 1 (a)-(d) as the chair's message gives it (above); then ONE message to the chair with the tip.
+1. (done: row 1 (a)-(d); the message to the chair with the tip follows this push.)
 2. Row 2: CENSUS-2 at e969a75b7 and at the tip over both seats' files; the 720 field diff by family.
 3. Row 3: one message, WAIT FOR POINT 49; the line's merge, the page census, THE ONE FINAL STATEMENT.
 
