@@ -14,14 +14,14 @@
    "reader": "SECOND",
    "master": 0,
    "integration": 57,
-   "banked": 57
+   "banked": 0
   },
   "P1b": {
    "label": "1b \"a small margin\" beside a quarter or more bought in",
    "reader": "SECOND",
    "master": 64,
    "integration": 64,
-   "banked": 64
+   "banked": 0
   },
   "P2siege": {
    "label": "2 a siege figure in the indicative outside a siege",
@@ -95,7 +95,7 @@
    "reader": "GLANCE",
    "master": 148,
    "integration": 149,
-   "banked": 148
+   "banked": 134
   },
   "P10": {
    "label": "10 \"hold the gates\" with no walls",
@@ -123,7 +123,7 @@
    "reader": "GLANCE",
    "master": 173,
    "integration": 172,
-   "banked": 172
+   "banked": 0
   },
   "P14": {
    "label": "14 size words in small places",
