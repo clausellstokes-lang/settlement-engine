@@ -223,9 +223,9 @@ export function standingDefenseForces(settlement) {
 export const DEFENSE_TRADITION_KEYWORDS = Object.freeze({
   arcane: Object.freeze(['wizard', 'mages', 'arcane', 'enchant', 'spellcasting', 'academy of magic', "mages' district", 'mage', 'scroll scribe']), // UPKEEP-CAPACITY C6 (G5): the casters, with no alchemist
   arcaneGuild: Object.freeze(["mages' guild", "wizard's tower", 'arcane academy', "mages' district", 'academy of magic']),
-  divine: Object.freeze(['cathedral', 'monastery', 'great cathedral', 'parish church']),
+  divine: Object.freeze(['cathedral', 'monastery', 'monasteries', 'great cathedral', 'parish church']), // UPKEEP-MEASURE-2 X5: the monastery's ladder (L4)
   divineShrine: Object.freeze(['temple', 'friary']), // UPKEEP-CAPACITY C4b (the chair's G3s): a wayside shrine has no clergy
-  divineStrong: Object.freeze(['cathedral', 'monastery', 'great cathedral']),
+  divineStrong: Object.freeze(['cathedral', 'monastery', 'monasteries', 'great cathedral']),
   druid: Object.freeze(['druid circle', 'grove shrine', 'elder grove', 'sacred grove']),
   wardens: Object.freeze(["warden's lodge"]), // a ranger post, defence in every world (J31)
   alchemy: Object.freeze(['alchemist', 'apothecary district', 'alchemist quarter']),
@@ -233,7 +233,7 @@ export const DEFENSE_TRADITION_KEYWORDS = Object.freeze({
   teleport: Object.freeze(['teleportation', 'teleport']),
   elders: Object.freeze(['reeve', 'steward', 'elder', 'household council', 'free elder']),
   criminalDen: Object.freeze(['fence', 'smuggl', 'gang', 'outlaw']),
-  actualMagic: Object.freeze(['healer', 'monastery', 'cathedral', 'divine', 'healing', 'druid', 'wizard', 'mage', 'arcane', 'enchant']),
+  actualMagic: Object.freeze(['healer', 'monastery', 'monasteries', 'cathedral', 'divine', 'healing', 'druid', 'wizard', 'mage', 'arcane', 'enchant']),
 });
 
 /**
