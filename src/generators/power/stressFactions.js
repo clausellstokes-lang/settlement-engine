@@ -312,7 +312,7 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
             ((he.power = Math.round(he.power * 1.5)),
             (he.desc =
               (he.desc || '') +
-              (sovereign ? ' Wartime has transformed this power from a civic institution into a primary power centre. Authority flows through military channels now.' : ' Wartime has transformed this power from a civic institution into a primary power centre. Crown authority flows through military channels now.'))),
+              (sovereign ? WARTIME_SOVEREIGN_MILITARY.text : ' Wartime has transformed this power from a civic institution into a primary power centre. Crown authority flows through military channels now.'))),
             (he.faction.toLowerCase().includes('merchant') || he.faction.toLowerCase().includes('guild')) &&
               (ye
                 ? ((he.power = Math.round(he.power * 1.2)),
@@ -444,3 +444,13 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
           }));
       })());
 };
+
+/**
+ * THE SELF-GOVERNING TWIN OF THE WARTIME MILITARY LINE (COHERENCE-POWERS-7's crown cure, #709 #712; declared by POWERS-11
+ * for the reader's M4, presumedThings ARM 1): it is appended only under `ke('wartime')` in applyStressEventFactions, so it
+ * declares the crisis it names. Kept at the file's end so no cited line above it moves.
+ */
+const WARTIME_SOVEREIGN_MILITARY = Object.freeze({
+  text: ' Wartime has transformed this power from a civic institution into a primary power centre. Authority flows through military channels now.',
+  needs: Object.freeze(['crisis: wartime']),
+});
