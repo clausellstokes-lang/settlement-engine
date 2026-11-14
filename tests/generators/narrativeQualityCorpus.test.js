@@ -113,7 +113,9 @@ describe('history templates are total across the authored corpus', () => {
               tradeRouteAccess: route,
               magicExists: true,
             },
-            [],
+            // RE-KEYED BY CAUSE (W2-FIX-DATA-HISTORY item A): the crash, a token-bearing template, now needs a market, so
+            // the sweep's metropolis holds one; the sweep and both assertions are as they were.
+            [{ name: 'Market square', category: 'Economy', tags: ['market'] }],
             { issues: [], stability: 'Stable' },
             {
               primaryExports: ['Amber exports'],

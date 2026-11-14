@@ -13,7 +13,7 @@ const AUCTION =
 /** @type {Readonly<Record<string, string>>} */
 export const INLAND_DESCRIPTIONS = Object.freeze({
   'village|Economy|Fish market':
-    'An open stall or small roofed market selling salted and smoked fish brought in by cart. The barrels keep, so the price holds.',
+    'An open stall or small roofed shed selling salted and smoked fish. Packed in barrels, it keeps for months.', // W2-FIX-DATA-HISTORY item F (CENSUS-2 kind b): true under a siege too; was "... brought in by cart. The barrels keep, so the price holds." (the cart and the steady price a siege makes false; the sibling column that could twin it is institutionDescVariants.js's and its facts carry no crisis)
   'town|Economy|Auction house': AUCTION,
   'city|Economy|Auction house': AUCTION,
   'metropolis|Economy|Auction house': AUCTION,

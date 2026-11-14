@@ -119,21 +119,23 @@ describe('URBAN-FIX D-1 — a tension\'s words follow its own event\'s age', () 
     expect(differing).toBeGreaterThanOrEqual(FLAGGED.length);
   }, 300_000);
 
-  it('D-1b: a tension whose own event is ABSENT from the timeline names no past event (the template\'s lasting effects)', async () => {
+  it('D-1b: a tension whose own event is ABSENT from the timeline is not printed at all (the occupation\'s legacy)', async () => {
     await ensureLaws();
-    // births below city (and one city, one metropolis) holding an occupation tension with no Occupation on the timeline
+    // births below city (and one city, one metropolis) that held an occupation tension with no Occupation on the timeline
     // RE-KEYED BY IDENTITY (W2-FIX-DATA-5 item 1, ROUND-3 #1003): 37 and 27 held the tension under an occupation IN
     // FORCE, where it is now set aside; the hamlet 91 and the town 105 hold it unanchored under a siege.
+    // RE-KEYED BY CAUSE (W2-FIX-DATA-HISTORY item C, the chair's ruling of 2026-11-13: a history line speaks of an event only
+    // where the town's own timeline holds it; the review of the data lane, L4): the unanchored words still spoke of
+    // collaborators, resisters and seized property, a past the timeline does not hold. Such a tension is now set aside at the
+    // selection (`historyData.js :: tensionHeldByTimeline`), so these six hold none, and each still carries a tension.
     const UNANCHORED = [24, 91, 38, 105, 142, 71];
     const failures = collectSeedFailures(UNANCHORED, (i) => {
       const s = birth(i).settlement;
-      const t = s.history.currentTensions.find((x) => x.type === 'occupation_legacy');
-      expect(t, `soak1k-${i}: an occupation tension`).toBeTruthy();
       expect(s.history.historicalEvents.some((e) => e.templateType === 'occupation_legacy'), `soak1k-${i}: no Occupation on the timeline`).toBe(false);
-      // anchored: `t` is asserted present two lines above and toMatch throws on a non-string, so a drifted record cannot pass
-      expect(t.description, `soak1k-${i}: names no past event`).not.toMatch(/\boccupation\b|\bended\b/i);
-      expect(t.factions.filter((f) => /^Former\b/.test(f)), `soak1k-${i}: no former participants`).toEqual([]);
+      expect(s.history.currentTensions.map((x) => x.type), `soak1k-${i}: no occupation tension`).not.toContain('occupation_legacy');
+      expect(JSON.stringify(s.history.currentTensions), `soak1k-${i}: no collaborator or resister`).not.toMatch(/collaborat|resistance|occupier/i);
+      expect(s.history.currentTensions.length, `soak1k-${i}: the town still carries a current tension`).toBeGreaterThan(0);
     });
-    expectNoSeedFailures(failures, 'an unanchored tension names no past event');
+    expectNoSeedFailures(failures, 'no tension speaks of a past the timeline does not hold');
   }, 120_000);
 });
