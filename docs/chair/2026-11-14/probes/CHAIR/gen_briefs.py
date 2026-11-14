@@ -5935,6 +5935,94 @@ SEATS2['R2-CODE-A-13'] = dict(
 )
 
 
+SEATS2['EXPORTS-MEASURE-1'] = dict(
+    title="EXPORTS-MEASURE-1 · the PDF and the journal print raw catalogues the tabs no longer print: each block measured, and its cures shown to the chair before any is built",
+    branch='lane/exports-measure-2026-11-14', checkout='lane/join-surfaces-2026-11-14', tip='c6324170', statement=False, mark='400,000',
+    intro=("You are EXPORTS-MEASURE-1, a MEASURING seat of the settlement-engine integration program. YOU BUILD NOTHING ON ANY LANE. The program "
+           "cures false sentences on generated town pages; the release is held until thirty fresh towns read cold show no high and no "
+           "medium false sentence, ON THE TABS, THE PDF AND THE FOUNDRY JOURNAL. A script census of 720 towns (CENSUS-3, an hour old) found "
+           "that THE EXPORTS ARE NOW THE WIDEST FALSE SURFACE BY FAR: a line that names what the town lacks hits 380 towns on the tabs and "
+           "635 on the PDF; a size word in a small place 43 on the tabs and 259 on the PDF; a stored key 22 on the tabs and 166 in the "
+           "journal. ITS TEN WIDEST WRITERS ARE ALL PRINTS OF A RAW CATALOGUE that the tabs do not print, or print through a reader the "
+           "export skips: the PDF's Defence chapter (an old threat-assessment writer, 290 towns), its Identity & Daily Life (seven fields of "
+           "the culture profiles, 100 to 220 towns each: \"A ritual plaza at the centre…\" in a thorp of fifteen), the Resources & "
+           "Production tables of the PDF and the journal (a catalogue's processing houses, 200 towns). Those figures are a script's "
+           "candidates: PLAUSIBLE, not read. The chair will not order cures of a whole chapter blind. Yours: for each block, HOW THE "
+           "EXPORT PRESENTS IT, WHETHER IT IS FALSE AS PRESENTED, WHAT THE TAB PRINTS FOR THE SAME FACT, and THE CANDIDATE CURES with what "
+           "each would move; and a recommendation. Then the chair rules and builders build, block by block."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) at your checkout.\n"
+          "2. THE CENSUS'S REPORT (`git fetch origin lane/census-3-2026-11-14`; `git show "
+          "origin/lane/census-3-2026-11-14:docs/chair/2026-11-14/CENSUS-3-2026-11-14.md`, 208 lines, some long: by script): \"THE ONE "
+          "COMMAND\" (how the four surfaces' text of the 720 towns is made on any tree, in about 22 minutes: YOUR DUMPS), \"PRECISION, AS "
+          "READ\", \"Item 2\" (the four surfaces' table and what was read on sight) and \"Item 6\" (the writers' table: its first forty "
+          "rows: YOUR BLOCKS, with an example town and line each). Its probes (docs/chair/2026-11-14/probes/CENSUS-3/) by git archive, run "
+          "from outside every repository tree.\n"
+          "3. THE READERS' SCALE (`git fetch origin lane/round-3-cut-2026-11-13`): docs/chair/2026-11-13/probes/REVIEW-R2-STAGES/READER-BRIEF.md, "
+          "its section \"What you do\": the kinds, the three severities, what is NOT a fault: your reads use this scale.\n"
+          "4. THE SURFACES LANE'S LAW AND FORM (at your checkout): docs/chair/2026-11-14/SURFACES-HANDBACK.md: \"The law\" and one cure as "
+          "made (item 1 or the food word: one leaf, one call line a surface, a guard that renders every surface).\n"
+          "5. THE CODE OF EACH BLOCK, whole, before you measure it: the PDF's section file (src/pdf/sections/), the journal's page "
+          "builder (src/foundry/journalPages.js), the view model's slice that feeds them (src/pdf/lib/), and THE TAB that prints the same "
+          "fact (src/components/new/tabs/) with the reader it calls."),
+    first=("FIRST ACT. FULL HISTORY (`git fetch --depth=2147483647 origin lane/join-surfaces-2026-11-14 lane/join-2026-11-14 "
+           "lane/integration-2026-11-07`; `git rev-parse --is-shallow-repository` prints false). Read the surfaces lane's tip back from "
+           "origin: it was c63241707 when this was written (it holds the joined line as merged at 333f91edc and that lane's own cures); "
+           "ITS SEAT IS PUSHING ON IT: a later tip is not a stop: measure at the tip you read and say which. YOUR OWN BRANCH: `git "
+           "worktree add -b lane/exports-measure-2026-11-14 <scratch>/own <that tip>`: it holds your measure file and probes ONLY "
+           "(docs/chair/2026-11-14/EXPORTS-MEASURE.md; docs/chair/2026-11-14/probes/EXPORTS-MEASURE-1/): add BY NAME."),
+    work=("THE LAWS OF THIS SEAT: you commit nothing to any lane; a candidate cure is built ONLY in a scratch tree (its patch saved with "
+          "your probes); you run no door in its writing mode; long runs write to files outside every repository tree; rendered pages "
+          "and dumps stay OUT of your context (a script prints counts and at most three quoted lines a block); EXECUTED is told from "
+          "PLAUSIBLE in every figure. THE LAW THE CURES SERVE (the chair's; vetoable by the owner): ONE READER FOR ONE FACT ON EVERY "
+          "SURFACE: what a tab says of a fact, the PDF and the journal say through the same function the tab calls; A SURFACE WITH NO "
+          "ROOM PRINTS LESS, NEVER SOMETHING ELSE; no surface prints a raw catalogue, a stored key or a line that never passed a reader.\n"
+          "THE WORK, in this order:\n"
+          "0. THE DUMPS, once: the census's one command at your tree (the four surfaces of the 720 towns; `--count-only` or the full "
+          "trace, as you need). The table of its Item 2 re-taken at YOUR tree (the joined line as merged there holds six lanes' newer "
+          "cures): towns by kind and surface, beside the census's figures at c2c12792e. COMMIT AND PUSH it: one line to the chair.\n"
+          "1. THE BLOCKS, WIDEST FIRST, each measured the same way (a) to (e):\n"
+          "   B1 the PDF's Defence chapter: lines written by src/domain/display/threatAssessment.js :: buildThreatAssessment (290 towns as "
+          "counted: \"Clergy provide basic wound care…\" in a thorp).\n"
+          "   B2 the PDF's Identity & Daily Life (and the journal where it prints them): the culture profiles' fields "
+          "(src/data/cultureProfiles.js: keywords, civicPattern, exchangePattern, builtForm, defensePattern, socialTexture, sacredLife: 100 "
+          "to 220 towns each).\n"
+          "   B3 the Resources & Production tables of the PDF and the journal: a resource's catalogue of processing houses, tags and "
+          "final products (src/data/resourceChains.js: 200 towns; the untraced table rows \"Butcher, Tannery, Dairy farmer\" 95, "
+          "\"Fishmonger, Salters' guild\" 73, \"Stone quarry, Stonemasons' guild\" 55).\n"
+          "   B4 the journal's stored key \"(coherence_repair)\" after its Defence rows (166 towns), and any other stored key or state "
+          "word in brackets the journal prints.\n"
+          "   B5 the Institutions and Services chapters of the PDF and the journal: a house's catalogue description "
+          "(src/data/institutionalCatalog.js :: INSTITUTION_FAMILIES, 40 to 55 towns a tier) where the tab prints a cured variant; a "
+          "service's line naming a magistrate or a lord's mill (25 to 38 towns).\n"
+          "   B6 the PDF's History & Founding: lasting effects with a size word (60 towns: check whether the data lane's cure of its "
+          "\"districts\" rows, landed or not at your tree, already answers it).\n"
+          "   FOR EACH BLOCK: (a) THE PRESENTATION: under what heading and label the export prints the lines (does the page say \"the "
+          "wider culture\", \"what this resource can feed\", or does it speak of THE TOWN?): quote the heading and two lines in one "
+          "small place and one large. (b) TWELVE TOWNS READ on the readers' scale (three thorps or hamlets, three villages, three "
+          "towns, three cities or larger; a siege and a famine among them): of the block's lines in each, how many are FALSE AS "
+          "PRESENTED (HIGH, MEDIUM), how many true; the precision of the census's hits for the block. (c) THE TAB'S SIDE: which tab "
+          "prints the same fact, through which reader or condition, and what it prints in the same twelve towns (the same line cured? "
+          "a different line? nothing?). (d) THE CANDIDATE CURES, each built in a scratch tree and measured on the 720 by the census's "
+          "command with `--files`: (A) the export calls the tab's reader (one call line a surface: name the leaf and the call sites); "
+          "(B) the export's block is left out where the tab prints no such fact (prints less); (C) the catalogue's rows take the "
+          "conditions their lines need (a tier, a house on the roster, no crisis: say whose file that is and how many rows); and any "
+          "better cure the code suggests. For each: the towns whose export changes; the false lines left (to 0?); TRUE lines lost (read "
+          "ten); what else moves (it should be display only: say so by a field diff of the record, 0 families). (e) YOUR "
+          "RECOMMENDATION for the block, with the files a builder would touch and whether two builders could work on two blocks at "
+          "once without touching one file.\n"
+          "2. THE REPORT: docs/chair/2026-11-14/EXPORTS-MEASURE.md on your branch: a headline table (a row a block: towns false before; "
+          "precision; the recommended cure; towns false after it, measured; true lines lost; files), then each block's (a) to (e). ONE "
+          "MESSAGE TO THE CHAIR: your branch's tip read back from origin; the headline table in words; which blocks can be built side "
+          "by side.\n"
+          "IF YOUR COUNT RUNS SHORT: B1, B2 and B3 with their candidates come before B4 to B6; a block not reached is NAMED with the "
+          "census's figure. Push after every block: the account's usage window may halt every seat without notice; what is pushed "
+          "survives."),
+    merges='',
+    when="for something that blocks the whole measure, when step 0's table is pushed (one line), and with the report",
+    turns='',
+)
+
+
 def build2(seat):
     s = _r3c6() if seat == 'R3-CODE-C-6' else SEATS2[seat]
     head = (
