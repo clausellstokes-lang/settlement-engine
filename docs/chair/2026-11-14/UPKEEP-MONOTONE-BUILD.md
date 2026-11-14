@@ -132,9 +132,19 @@ Worked in a scratch worktree on the local branch `u15-own`, pushed by explicit r
   every PRINTED score with the divine added is at least the printed score without it; the made records assert the law on
   printed scores as well as exact ones.
 - (b) "a healthy economy ... meaningfully higher": trace first; if the people's bound, re-key by identity to a place it
-  does not bind and add an arm stating the bound's own case; else a finding.
+  does not bind and add an arm stating the bound's own case; else a finding. **12:01 UTC, on my finding:** ACCEPTED AS
+  TRACED: the cause is the off-ladder rule, not the bound. The fixture's identity is "a market house that counts at
+  today's points": re-keyed BY IDENTITY to a market house the catalogue reads at factor 1, the threshold unchanged; ONE
+  ARM ADDED keeping the Fish market and stating its own case as measured; a plant (the market's factor equal in both
+  economies) reds both arms, not committed.
 - (c) magicCountOnce: a larger rung of a named two-job house is the same house (re-key by identity) if the single
-  "Monastery or friary" is already named; else STOP with the table.
+  "Monastery or friary" is already named; else STOP with the table. **12:07 UTC, on my second cause:** the classifier
+  re-keyed BY IDENTITY to what the cap is (the traditions' counted monster points at the cap; the total asserted); the old
+  proxy goes; plants (i) and (ii). **12:16 UTC, on my stop (it corrects 12:07's "both sides"):** the cap is at work where
+  the counted points stand at the cap on AT LEAST ONE side of the drop; at the cap on both, the total equal; on one side
+  only, the cap with the house and no greater without it; under the cap on both, a second part moving is red; plant (iii).
+  FOR THE READER (the chair's line): under the shared cap, taking one tradition's house away can raise another
+  tradition's share while the score stands: the law is on scores, and it holds (the total; the printed score).
 - (d) the two base goldens stay RED AND NAMED; no golden's door in its writing mode.
 
 ### Item (a): done
@@ -153,3 +163,22 @@ Worked in a scratch worktree on the local branch `u15-own`, pushed by explicit r
 - NOTED: `tests/lint/sovereigntyLightingContract.walker.test.js` was already red at 8bd8e3078 (the estate's file count
   3,275 against 3,274: UPKEEP-13's guard file); my new file moves it again. Re-taken once through its ritual at the
   declaration, on the clean committed tree.
+
+### Items (b), (c), the kin, the merge and section 2m: done
+| commit | cause | births moved |
+|---|---|---|
+| fc328fccd | (b): the off-ladder rule (P3, bb0aaa3fe) places the fixture's Fish market at the market's least rung (0.8): margin 76/60 -> 74/59. Re-keyed to "Merchant guilds (15-40)" (rung 2 of 3, factor 1; the city's shelf: no market house of the town's shelf reads factor 1, each 0.8 or 0.93), 76/60, threshold unchanged; the Fish market's arm as measured (market 2 and 1.2, supply 74 and 59); the plant (market unpaid) reds both | none |
+| cee724f01 | (c) first cause: X5 (1f6cc23d0) gives the monastery's ladder the clergy's names: "Multiple monasteries" and "Major monasteries (5-10)" named beside the Monastery or friary among the two-job houses | none |
+| 9b7ef036b | (c) second cause: the cap classed by what it is, its total asserted by case; `defenceExactOf(...).traditionsMonster`; plants (i), (ii), (iii) red | none |
+| 007cb1c0a | merge of the defence lane's tip 9d48785a1 (no conflict; no arithmetic file on the lane's side) | the lane's own |
+| af0c4f6e1 | 2m, presumed things: P4's reason row said "the military" (the armedForce atom's word); reworded "a place's military score" (a weight's reason, read by no page) | none |
+| 90cc017e0 | 2m, fact layers: X2's line tested part ids with literals ("arcane"); read through `TRADITION_PARTS`, as `ARMED` is. ARITHMETIC FILE, NO FIGURE: the same predicate; both guards 0, the grid 0 rises | none |
+- THE KIN at fc328fccd (29 test files run, 608 tests): 4 red: the two BASE GOLDENS (generatorGoldenMaster "every config
+  produces byte-identical output"; espionageDormancyFence "THE DRIVEN GOLDEN: 360 settlements"), RED AND NAMED, not this
+  seat's door (ruling (d)); and the two (c) rows, since cured at 9b7ef036b.
+- SECTION 2m'S CHECKS after the merge, each classed against the lane's tip 9d48785a1 run the same way (EXECUTED): presumed
+  things exit 1, the lane's 28 fresh hits and one strip, equal to its tip's line for line (the build's one, cured above);
+  fact layers exit 1, the lane's 5 rises and 14 falls (the 14 falls are register rows for the generator's old code, the
+  lane's to shrink), equal to its tip's (the build's one rise, cured above); observed shapes exit 1 and writer reach exit 1,
+  each identical to the lane's tip (stale rows and stale bank members: the lane's; their doors' writing forms need a clean
+  committed tree and the writer-reach door is NOT written: the chair banks it at the close). NOT MINE: FOR THE JOIN.
