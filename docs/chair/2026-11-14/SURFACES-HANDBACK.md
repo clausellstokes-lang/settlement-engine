@@ -265,3 +265,137 @@ HOW THE INSTRUMENTS ARE RE-MADE: `probes/SURFACES-2/` (seeds772.txt: the first s
 says, rr3 crisis lines taken as NR%4==1); records by the first seat's `render.sh <tree> <out> seeds772.txt 3` (~35
 min at 3 workers); then `sh food.sh <tree> <records> <out> seeds772.txt` (~8 min) and `node foodagg.mjs
 <out>/food.jsonl`; `node foodlist.mjs <tree> <records>` lists the stored-label/band towns.
+
+# SURFACES-3
+
+Seat SURFACES-3, session session_01ACmDYagjWqZ7qwhc7fz4sa; chair session_01ACmDYZrFEVXyZEUg1NDxxC. Branch
+`lane/join-surfaces-2026-11-14`, read back at e6cb445db at the start (as the brief said). Merges of the joined line
+into the lane: 2166b7266 (600b9f743, the first act; clean), the merge of 9618e0319 before item 1's push (clean; the
+food count re-taken on records born at it: every cell of item 1 still 0), 65dc92af9 (clean), 474c5f966 before item 2's push
+(clean; records re-born at it, both counts re-taken: every cell of items 1 and 2 still 0).
+
+## The rulings this seat works to (the chair's brief of 2026-11-14; each vetoable by the owner)
+
+- (r1) to (r6) as copied by SURFACES-2 above: THEY STAND.
+- (r7) THREE CHAPTERS OF THE EXPORTS ARE BEING MEASURED AND ARE NOT YOURS: in `src/pdf/sections/DefenseSecurity.jsx`
+  every line written by the threat assessment; in `src/pdf/sections/IdentityDailyLife.jsx` the culture profile's
+  lines; in `src/pdf/sections/ResourcesProduction.jsx` and the journal's Resources & Production page the tables of
+  processing houses, tags and final products. In those files only what the list names (the force's name and chip in
+  the Defence chapter; the "Abundant" group in Resources), in the smallest hunk.
+- (r8) The second seat's finding on the Safety row stands: no fault; nothing to cure.
+- The order: item 2 as the second seat wrote it (the PDF's food block, the journal's Economics "Food:" row); then (r3),
+  (r4), (r5) measured first, (r6), the stores' unit, the connectivity row; THE SWEEP once at the end.
+
+## HANDED BACK at the count (327,467 at 15:34 UTC, before (r6): a cure with its gates would not fit inside the mark)
+
+## Item 1: THE FOOD FIGURES ON THE PDF AND THE JOURNAL — DONE, c79217099 (1a) and 88dbe3059 (1b)
+
+- CAUSE: the PDF's FOOD SECURITY block (`EconomicsTrade.jsx :: FoodBalanceBlock`) printed the viability view's figures
+  (`viewModelPrimitives.js :: foodCore`) where the tab's row prints `foodRowShown(s, !!carriersOf(s, eco))`;
+  `carriersOf` was a const of the tab file. The journal's Economics "Food:" row printed its own vocabulary off the view.
+- CURE 1a: `carriersOf` moved whole to `src/domain/display/foodCarrier.js` (the tab imports it back);
+  `foodBlockShown(town, viewFb)` feeds the block the tab's row in its own field names; one call line in
+  `EconomicsTrade.jsx`. CURE 1b: one call line in `journalPages.js :: economicsPage`, `kv('Food',
+  foodWordShown(settlement)?.label)`: the food word or no row.
+- COUNTS (772 births, records born at the merged base; `probes/SURFACES-3/foodblock.census.jsx`, the real tab, the real
+  PDF section, the journal's markdown): PDF DEFICIT vs the tab's Short 253 -> 0; PDF provision vs the tab's 92 -> 0;
+  "imports cover" under a siege whose row brings nothing in 7 -> 0; PRODUCED/NEEDED 0 -> 0; the journal row against the
+  food word 772 -> 0 (every one printed the second vocabulary: 195 "Surplus +N", 322 "Deficit −N (N% of need)", 255
+  "Balanced").
+- PRINTS LESS: the PDF's "imports cover N% of gap" prints only beside a DEFICIT, as it always did (198 towns import with
+  no deficit: the tab's row prints the import, the block nothing of it); the siege towns' provision line where the
+  tab's row credits none (r2s-under_siege-metropolis-0's "divine provision covers 211").
+- GUARD: `tests/pdf/foodFiguresEverySurface.test.jsx`. Red first 12 of 13 at the base; each cure out alone reds its own
+  six titles; the guard town (r2r-town-44) reds alone under a plant that drops the cover.
+- RE-KEYED BY IDENTITY: `tests/pdf/foodMagicChannelPrint.test.js` (its fixture's food record goes into the home the
+  block now reads; the town holds the druid tradition its Druid Circle premise gives; titles and assertions kept).
+- GATES: domain-strict 1113/1113; type ratchet 167/167; eslint clean; the presumed-things door prints the base's 155
+  lines byte-identical; the grid 0 rises, 0 falls; the 90 test files naming the touched files: the base's 18 reds
+  title for title.
+
+## Item 2 (r3): THE OTHER SPELLING — DONE, e31da7379
+
+- CAUSE: the tab prints an export as the list spells it and an import through the seam (`resourceDisplayName`); the
+  PDF's EXPORTS column (`EconomicsTrade.jsx :: renderedTradeLabel`) and the journal's Exports row sent exports through
+  the seam too.
+- CURE: `src/domain/display/tradePillWord.js` (an import through the seam, an export as the list spells it); the tab,
+  the PDF and the journal each call it. No match moves (ownership and terrain tests take the raw value).
+- COUNTS (`probes/SURFACES-3/trade.census.jsx` + `tradeagg.mjs`, records born at 9618e0319): PDF exports 83 -> 0
+  (38 "River fisheries", 30 "Precious metal veins", 15 "Coastal timber"); journal Exports 83 -> 0; imports 0 -> 0.
+  SURFACES-1's 165 was at 035159bc7. No export of the 772 is machine-shaped (the seam guarded nothing there).
+- GUARD: `tests/pdf/tradePillWordEverySurface.test.jsx`; each surface reds alone; the guard title (an import's raw key
+  still resolved) reds alone under a plant.
+- RE-KEYED BY IDENTITY: `tests/lint/resourceLabelSeam.census.test.js` (THREADED_VIA_PILL: the PDF, the journal and the
+  tab call the pill's leaf; the leaf joins THREADED; the lane-25 split pins its two re-keyed lines).
+- GATES: as item 1; the named tests: the base's 17 reds title for title.
+
+## Item 2 (r4): "ABUNDANT" UNDER A SIEGE — DONE, e99bf024d
+
+- CAUSE: the tab, under a siege in force (`chainStateShown.js :: tradeStoppedHere`), prints the grounds first and
+  unlabelled; the PDF's NEARBY RESOURCES printed them under "Abundant".
+- CURE ((r7) smallest hunk): `ResourcesProduction.jsx` calls the tab's reader: under a siege the grounds print first
+  with no kicker, before Depleted; "Abundant" only where no siege holds. The journal prints no such word ("Nearby
+  resources").
+- COUNTS (`probes/SURFACES-3/abundant.census.jsx`, records at 474c5f966): "Abundant" under a siege 56 of 56 -> 0; with no
+  siege 714 -> 714.
+- GUARD: `tests/pdf/abundantUnderSiegeEverySurface.test.jsx` (the tab rendered and the PDF; the guard: a calm thorp keeps
+  "Abundant"). Red first 3 of 3; the guard reds alone under a plant.
+- GATES: as item 1; the 5 test files naming the file: 0 reds, as the base.
+
+## Item 2 (r5): THE DEFENCE CHAPTER'S FORCE NAME AND CHIP — MEASURED, NO SURFACE FAULT (no commit)
+
+- THE NAME: the PDF's ARMED FORCES list prints `institutionDisplayName(force.name) || force.name` (UPKEEP-14, on the
+  line with `tests/pdf/defenseForceNamesLabelled.test.jsx`); the Defense tab's ForceCard prints `institutionDisplayName(i)`
+  (R3-TABS-5). The leaf reads an object's `name` or takes the string, so the two calls give one word by construction.
+- THE CHIP: struck on both (the PDF: COHERENCE-UPKEEP-7 item 3; the tab: R3-TABS b1). Nothing to cure.
+- THE MEDICAL LINE ("Major monasteries (5-10)."): NOT a disagreement between surfaces: the tab and the PDF print the same
+  `cap.note` from ONE writer, `src/domain/display/defenseDisplay.js :: deriveSupportingCapabilities`, Medical Readiness,
+  `${facts.healerName}. Wounds and fevers ...` (the catalogue name with its bracket). That file is also changed on
+  `lane/w2-c-leaves-2026-11-13` (27+/24-), so by the brief's law it is NAMED FOR THE JOIN, not cured here: the one-line
+  change is `${houseLabelsInText(facts.healerName)}` (or `institutionHouseLabel`, the seam the History PDF uses).
+  Not re-counted (SURFACES-1 counted 4 towns on the PDF: r2r-metropolis-32, -51, r2s-indebted-metropolis-2; the tab
+  prints the same note in the same towns).
+
+## Every new or changed word on a surface (the owner's veto list)
+
+| surface | before | after | towns read |
+|---|---|---|---|
+| PDF Economics, FOOD SECURITY block | the view's DEFICIT, share, cover, provision | the tab's row: DEFICIT = the tab's Short; its share; cover only where the row imports; the provision the row credits | r2s-famine-thorp-0 (10 -> 11), r2s-under_siege-metropolis-0 (80026 -> 80237, provision line gone), r2s-under_siege-city-2 ("imports cover 1%" gone), r2s-occupied-town-0 (228 -> 245), r2r-thorp-32 (2 -> 1) |
+| journal Economics "Food" | "Deficit −10 (26% of need)", "Surplus +1", "Balanced" | the food word: "Deficit — Active Famine", "Deficit", "Pressured", "Secure" | r2s-famine-thorp-0, r2s-under_siege-metropolis-0, r2s-occupied-town-0, r2r-thorp-32 |
+| PDF EXPORTS, journal Exports | "River fisheries", "Precious metal veins", "Coastal timber" | the tab's "River fish", "Precious metals", "Shipbuilding timber" | r2r-thorp-44, r2s-famine-city-2, r2s-wartime-metropolis-1, r2r-town-52 |
+| PDF NEARBY RESOURCES under a siege | "Abundant" before the grounds | the grounds first, unlabelled ("Depleted" kept) | r2s-under_siege-thorp-0, rr3-hamlet-under_siege+famine-rand-4, r2s-under_siege-metropolis-0, r2r-hamlet-0 |
+
+## Registers named stale (r1)
+
+- `tests/lint/sovereigntyLightingContract.walker.test.js` "THE CENSUS IS AN ASSERTION": red before me; my new test files
+  `tests/pdf/foodFiguresEverySurface.test.jsx`, `tests/pdf/tradePillWordEverySurface.test.jsx` and
+  `tests/pdf/abundantUnderSiegeEverySurface.test.jsx` add to what a re-take counts. Not re-taken.
+
+## Found, not cured
+
+- FOR THE JOIN: `src/domain/display/defenseDisplay.js :: deriveSupportingCapabilities` (Medical Readiness note, the
+  healer's catalogue bracket on the tab and the PDF): `${houseLabelsInText(facts.healerName)}`; held by w2-c-leaves too.
+
+- The PDF block's `fb.summary` line (the view's food summary, EditableProse) is the view's words; not measured here.
+
+## What is left, line by line
+
+1. (r6) the tension rows' bracket ("Taverns (5-20)", History and Overview, through `houseLabelsInText`; check
+   OverviewTab.jsx's tension lines by content first: the coherence-upkeep lane holds them); the stores' unit (6 towns); the trade connectivity row (with a system state).
+2. THE CHAIR'S THREE ROWS (15:35 UTC; named by other seats; measure first, by false towns; one line back each when pushed):
+   (a) the PDF's IdentityDailyLife prints "brought in falls short" in 31 besieged towns (under a siege nothing is
+   brought in): the tab's reader or a twin; (b) "Underground city bazaar" prints on the PDF only, 22 towns: find its
+   writer; the export's row prints what the tab's card prints; (c) `src/pdf/lib/viewModel.js`, the Overview's
+   `crisisSummaryForSurface(x, s?.name, 'overview')` hands no facts, so "has lost a second harvest" can print on the
+   PDF's Overview where the town has neither grain nor mill: the Tonight caller's one-line cure of 600b9f743
+   (`factsOf(source)`), red first on births. NOT MINE (the chair): the journal's provenance tag on a force (cured twice:
+   r2-code-b a48cf4126, exports-b24 2779a3d6d).
+3. THE SWEEP, once, at the end, at the tip after the last merge of the joined line (the first seat's `measure.sh` +
+   `agg.mjs`, every fact of its table re-taken).
+
+HOW THE INSTRUMENTS ARE RE-MADE: `probes/SURFACES-3/run.sh <tree> <x.census.jsx> <out> <seeds> <workers> [VAR=val]`
+runs a census under vitest in shards. Records: `run.sh <tree> births.census.jsx <out> probes/SURFACES-2/seeds772.txt 4
+RECORD_OUT=<records>` (39 s for the 772: births only, no render). The food figures: `run.sh <tree>
+foodblock.census.jsx <out> <seeds> 4 RECORDS=<records>` (45 s), then `node foodblockagg.mjs <out>`. The trade pills: `run.sh <tree> trade.census.jsx <out> <seeds> 4
+RECORDS=<records>`, then `node tradeagg.mjs <out>`. The siege groups:
+`run.sh <tree> abundant.census.jsx <out> <seeds> 4 RECORDS=<records>` (each line: siege, "Abundant" printed, the block).

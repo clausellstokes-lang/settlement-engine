@@ -82,11 +82,25 @@ const SETTLEMENT = generateSettlementPipeline(
   { seed: 'food-magic-channel-2026', customContent: {} },
 );
 
-/** The real chapter, with only the food record swapped for the fixture. */
-function printed(fb) {
-  const vm = buildViewModel({ settlement: SETTLEMENT });
+/**
+ * The real chapter, with only the food record swapped for the fixture. RE-KEYED BY IDENTITY (SURFACES-3 item 1): the
+ * block prints the Economics tab's row (`domain/display/foodCarrier.js :: foodBlockShown`, the food record's own pounds),
+ * so the writer's record goes into the home the row reads (`economicState.foodSecurity`, and the viability's note), and
+ * the town holds the tradition its Druid Circle gives (the row names a kind of provision only where the town holds it).
+ * @param {any} fb the view model's food balance @param {any} record the writer's record
+ */
+function printed(fb, record) {
+  const eco = SETTLEMENT.economicState;
+  const town = {
+    ...SETTLEMENT,
+    defenseProfile: { ...SETTLEMENT.defenseProfile, traditions: { ...SETTLEMENT.defenseProfile?.traditions, hasDruid: true } },
+    economicState: { ...eco, foodSecurity: { ...eco.foodSecurity, dailyProduction: record.dailyProduction, dailyNeed: record.dailyNeed,
+      importCoverage: record.importCoverage, magicOffset: record.magicFoodOffset ?? 0, deficit: record.deficit, deficitPct: record.deficitPercent } },
+    economicViability: { ...SETTLEMENT.economicViability, metrics: { ...SETTLEMENT.economicViability?.metrics, foodBalance: record } },
+  };
+  const vm = buildViewModel({ settlement: town });
   vm.economics = { ...vm.economics, foodBalance: fb };
-  return joined(EconomicsTrade({ settlement: SETTLEMENT, vm, narrativeMode: false, stateProse: null }));
+  return joined(EconomicsTrade({ settlement: town, vm, narrativeMode: false, stateProse: null }));
 }
 
 describe('THE FIXTURE — the state really is reachable, and the view model publishes it', () => {
@@ -108,7 +122,8 @@ describe('THE FIXTURE — the state really is reachable, and the view model publ
 
 describe('THE PRINT — the channel is named whether or not a gap survives it', () => {
   it('a gap CLOSED by magic still prints the channel and the figure', () => {
-    const text = printed(asViewModel(writtenRecord()));
+    const record = writtenRecord();
+    const text = printed(asViewModel(record), record);
     expect(text, 'the section did not render its food block at all').toContain('FOOD SECURITY');
     expect(text, 'the print credits a channel the reader is never told about')
       .toContain('druidic provision covers 60');
@@ -117,18 +132,18 @@ describe('THE PRINT — the channel is named whether or not a gap survives it', 
   it('CONTROL: a town with a real deficit prints exactly what it printed before', () => {
     // deficitPct 4 leaves a residual the reader can see, so the DEFICIT column renders
     // and the magic line sits under it — the arrangement §934.20 shipped.
-    const fb = asViewModel(writtenRecord({ deficitPct: 4 }));
+    const record = writtenRecord({ deficitPct: 4 }); const fb = asViewModel(record);
     expect(fb.deficit, 'the control fixture has no deficit').toBeGreaterThan(0);
-    const text = printed(fb);
+    const text = printed(fb, record);
     expect(text).toContain('DEFICIT');
     expect(text).toContain('% of need');
     expect(text).toContain('druidic provision covers');
   });
 
   it('CONTROL: with no caster credited, nothing is invented', () => {
-    const fb = asViewModel(writtenRecord({ magicOffset: 0, deficitPct: 4 }));
+    const record = writtenRecord({ magicOffset: 0, deficitPct: 4 }); const fb = asViewModel(record);
     expect(fb.magicOffset, 'the no-magic control still credits a caster').toBeNull();
-    const text = printed(fb);
+    const text = printed(fb, record);
     expect(text).toContain('DEFICIT');
     // anchored: the line above proves this very fixture still prints its DEFICIT column, so the chapter is live and the absence below is a real absence.
     expect(text, 'a channel was named with nothing behind it').not.toContain('provision covers');

@@ -1,0 +1,21 @@
+commit f0ce831b547c3515864c33620de0d01ffe6aa658
+Merge: 608b39bfa f9d40e3de
+Author: Claude <noreply@anthropic.com>
+Date:   Sat Nov 14 16:12:20 2026 +0000
+
+    join(JOIN-5 · 7): merge lane/join-surfaces-2026-11-14 at f9d40e3de — the third landing
+    
+    Tip read back from origin at 16:12 UTC: f9d40e3defa7d92d2ea0d7a55730a9ca904638f9
+    (JOIN-4 landed e6cb445db at its point 4; merge base e5b421802).
+    No conflict. Merged clean though both sides moved them (each read in both
+    sides' diffs from the base; independent lines; both stand):
+    - src/foundry/journalPages.js: the joined side's R2-CODE-B-13 M10 (defensePage:
+      the force printed without its provenance tag); the lane's SURFACES-3
+      (economicsPage: tradePillWord for the trade rows, foodWordShown for Food).
+    - src/components/new/tabs/EconomicsTab.jsx: the joined side's W2-C-LEAVES-13
+      (NeedsNotMet: plainGoodName); the lane's SURFACES-3 (tradePillWord on the
+      pills; carriersOf moved whole to domain/display/foodCarrier.js).
+    Verify: 19 files changed; the 17 the joined line had not moved equal the lane's blob.
+    
+    Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_01ACmDYazSdYC8v2Fj1WVnzT
