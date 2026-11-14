@@ -172,8 +172,52 @@ const situationDescOf = (config, _tier, institutions, foodSecurity, prosperityLa
 };
 
 
+/**
+ * The config a place would carry with NO crisis in force (COHERENCE-UPKEEP-5, the chair's R3): the
+ * standing label's reading. Every crisis field is emptied, nothing else is touched.
+ * @param {any} config
+ */
+export const standingConfigOf = (config) => ({ ...config, stressTypes: [], stressType: undefined, intendedStressTypes: [] });
+
+/** The Subsistence draw: 40% Struggling, 30% Poor, 30% luckier (capped at Poor by the label). */
+const drawSubsistence = () => (_rng() < 0.4 ? 0 : _rng() < 0.5 ? 1 : 2);
+
 // deriveProsperityLabel
-export const deriveProsperityLabel = (prosperity, config = {}, institutions = []) => {
+export const deriveProsperityLabel = (prosperity, config = {}, institutions = []) =>
+  labelFromBase(prosperity, config, institutions, prosperity === 'Subsistence' ? drawSubsistence() : undefined);
+
+/**
+ * THE TWO LABELS, ONE DRAW (R3). `prosperity` is the printed label, exactly as
+ * `deriveProsperityLabel` reads it; `prosperityStanding` is the label from the base read with no
+ * crisis (`standingBase`, from `standingBaseProsperity`) under `standingConfigOf(config)`, with the
+ * SAME Subsistence draw replayed. A base is Subsistence only for an isolated thorp or hamlet,
+ * whatever the crisis, so the two bases are Subsistence together and the draw is taken once, where
+ * the printed label always took it.
+ * @param {string} prosperity @param {string} standingBase @param {any} [config] @param {any[]} [institutions]
+ * @returns {{ prosperity: string, prosperityStanding: string }}
+ */
+export const deriveProsperityLabels = (prosperity, standingBase, config = {}, institutions = []) => {
+  const subsistence = prosperity === 'Subsistence' ? drawSubsistence() : undefined;
+  return {
+    prosperity: labelFromBase(prosperity, config, institutions, subsistence),
+    prosperityStanding: labelFromBase(standingBase, standingConfigOf(config), institutions, subsistence),
+  };
+};
+
+/**
+ * The base prosperity with no crisis in force (R3): the food record and the base read under
+ * `standingConfigOf(config)`. Draw-free (the food record's only draw is a label-keyed fork).
+ * @param {string} tier @param {string} tradeRoute @param {any[]} institutions @param {any} config
+ * @param {any} instNames @param {any[]} incomeNormalized @returns {string}
+ */
+export const standingBaseProsperity = (tier, tradeRoute, institutions, config, instNames, incomeNormalized) => {
+  const standing = standingConfigOf(config);
+  const food = generateFoodSecurity(tier, institutions, { ...standing, tradeRouteAccess: tradeRoute });
+  return computeBaseProsperity(tier, tradeRoute, institutions, standing, instNames, incomeNormalized, food).label;
+};
+
+/** The label from a base, the Subsistence index handed in (drawn once by the caller). */
+const labelFromBase = (prosperity, config, institutions, subsistenceIdx) => {
   const flags = getInstFlags(config, institutions);
   const econOut = flags.economyOutput;
   const stresses = config.stressTypes?.length ? config.stressTypes : config.stressType ? [config.stressType] : [];
@@ -182,7 +226,7 @@ export const deriveProsperityLabel = (prosperity, config = {}, institutions = []
   let idx = BASE[prosperity] !== undefined ? BASE[prosperity] : 2;
   // Subsistence isolated settlements can still struggle further — 35% chance of Struggling
   if (prosperity === 'Subsistence') {
-    idx = _rng() < 0.4 ? 0 : _rng() < 0.5 ? 1 : 2; // 40% Struggling, 30% Poor, 30% luckier
+    idx = subsistenceIdx ?? idx; // the caller's one draw (unreachable without one: see deriveProsperityLabels)
     idx = Math.max(0, Math.min(1, idx)); // cap at Poor — subsistence can never be Moderate+
   }
   // Economy output adjustments — calibrated for truly random sliders (5-95 uniform)

@@ -87,7 +87,7 @@ export const DEFENSE_BUCKET_KEYWORDS = Object.freeze({
   ]),
   garrison: Object.freeze([
     'garrison', 'barracks', 'professional guard',
-    'professional city watch', 'multiple garrison',
+    'multiple garrison', // UPKEEP-CAPACITY C2 (the chair's G1): the professional city watch is the watch only
   ]),
   militia: Object.freeze([
     'citizen militia', 'militia', 'household levy', // 'household levy': the thorp's militia row (lane DEFENSE-2)
@@ -105,7 +105,7 @@ export const DEFENSE_BUCKET_KEYWORDS = Object.freeze({
   ]),
   magicDef: Object.freeze([
     'wizard', "mages' guild", 'mage', 'academy of magic',
-    'golem workforce', 'alchemist',
+    'golem workforce', // UPKEEP-CAPACITY C6 (the chair's G5): the alchemist's shop and quarter are a trade
   ]),
 });
 
@@ -190,4 +190,74 @@ export function standingDefenseForces(settlement) {
     });
   }
   return Object.freeze(out);
+}
+
+/**
+ * THE DEFENCE TRADITIONS' AND THE SMALL PLACE'S NAME QUESTIONS (COHERENCE-UPKEEP-5, the addendum's
+ * SOURCE table): moved VERBATIM from `defenseGenerator.js :: computeDefenseScores`, where they were
+ * a second reading of the roster outside its home. Same keywords, same substring test over the
+ * same lowered native semantic name, so every answer is the answer the generator gave. The
+ * dials that open a tradition (the magic and religion sliders) are defence's own weights, not
+ * names, and stay with defence.
+ * @type {Readonly<Record<string, ReadonlyArray<string>>>}
+ */
+export const DEFENSE_TRADITION_KEYWORDS = Object.freeze({
+  arcane: Object.freeze(['wizard', 'mages', 'arcane', 'enchant', 'spellcasting', 'academy of magic', "mages' district", 'mage', 'scroll scribe']), // UPKEEP-CAPACITY C6 (G5): the casters, with no alchemist
+  arcaneGuild: Object.freeze(["mages' guild", "wizard's tower", 'arcane academy', "mages' district", 'academy of magic']),
+  divine: Object.freeze(['cathedral', 'monastery', 'great cathedral', 'parish church']),
+  divineShrine: Object.freeze(['temple', 'friary']), // UPKEEP-CAPACITY C4b (the chair's G3s): a wayside shrine has no clergy
+  divineStrong: Object.freeze(['cathedral', 'monastery', 'great cathedral']),
+  druid: Object.freeze(['druid circle', 'grove shrine', 'elder grove', 'sacred grove']),
+  wardens: Object.freeze(["warden's lodge"]), // a ranger post, defence in every world (J31)
+  alchemy: Object.freeze(['alchemist', 'apothecary district', 'alchemist quarter']),
+  tower: Object.freeze(["wizard's tower"]),
+  teleport: Object.freeze(['teleportation', 'teleport']),
+  elders: Object.freeze(['reeve', 'steward', 'elder', 'household council', 'free elder']),
+  criminalDen: Object.freeze(['fence', 'smuggl', 'gang', 'outlaw']),
+  actualMagic: Object.freeze(['healer', 'monastery', 'cathedral', 'divine', 'healing', 'druid', 'wizard', 'mage', 'arcane', 'enchant']),
+});
+
+/**
+ * Whether the roster holds a house of each defence tradition (and the small place's elders and
+ * criminal den, and the houses that count as actual magic), by name. RUIN-BLIND, as the
+ * partition: the generator hands the roster as built. One name reading per institution.
+ * @param {unknown} institutions
+ * @returns {Readonly<Record<string, boolean>>} one answer per key of DEFENSE_TRADITION_KEYWORDS
+ */
+export function defenseTraditionNamesOf(institutions) {
+  /** @type {ReadonlyArray<unknown>} */
+  const list = Array.isArray(institutions) ? institutions : [];
+  const lowered = list.map((inst) => nativeSemanticName(inst).toLowerCase());
+  /** @type {Record<string, boolean>} */
+  const out = {};
+  for (const [key, keywords] of Object.entries(DEFENSE_TRADITION_KEYWORDS)) {
+    out[key] = lowered.some((name) => keywords.some((kw) => name.includes(kw)));
+  }
+  return Object.freeze(out);
+}
+
+/**
+ * THE WALL'S KIND (the chair's R17, optional): read from the walls row's name by the same keyword
+ * discipline, stone by default. NO term of the defence profile reads it, and no record stores it;
+ * it is the home's answer, ready for a later reader.
+ * @type {Readonly<Record<string, ReadonlyArray<string>>>}
+ */
+export const WALL_KIND_KEYWORDS = Object.freeze({
+  // An earthwork reads as a palisade (the chair's ruling of 2026-11-13 13:1x, COHERENCE-UPKEEP-6): no roster row
+  // names an earthwork of its own, so defence weighs no kind it cannot reach; the facts home reads it the same way.
+  palisade: Object.freeze(['palisade', 'earthwork']),
+});
+
+/**
+ * Whether the roster holds a wall, and of which kind ('stone' or 'palisade'; an earthwork reads as a palisade),
+ * read from the first walls row. RUIN-BLIND, as the partition.
+ * @param {unknown} institutions
+ * @returns {Readonly<{ present: boolean, kind: 'stone' | 'palisade' | null }>}
+ */
+export function defenseWallOf(institutions) {
+  const walls = partitionDefenseInstitutions(institutions).walls;
+  if (!walls.length) return Object.freeze({ present: false, kind: null });
+  const name = nativeSemanticName(walls[0]).toLowerCase();
+  const hit = Object.entries(WALL_KIND_KEYWORDS).find(([, keywords]) => keywords.some((kw) => name.includes(kw)));
+  return Object.freeze({ present: true, kind: /** @type {'palisade' | 'stone'} */ (hit ? hit[0] : 'stone') });
 }

@@ -65,6 +65,7 @@ export const generateAvailableServices = (
   opts = {},
   config = {},
   generationContext = null,
+  upkeep = null,
 ) => {
   const worldLaw = resolveGenerationWorldLaw(
     generationContext,
@@ -90,6 +91,7 @@ export const generateAvailableServices = (
     opts,
     config,
     worldLaw,
+    upkeep,
   });
   const roster = { institutions };
   const fenceAskLine = hasInstitution(roster, 'tavern') // R3-CODE-C-3: the tavern only where one stands

@@ -237,6 +237,13 @@ const CENSUS_ROW = {
 /** The seed the mint census sees minted FOUR times, and the vias that convict a blind wrapper. */
 const REPEATED_SEED = `${CENSUS_ROW._seed}::generatePower::power-structure`;
 const REPEATED_VIAS = ['fork', 'direct', 'direct', 'direct'];
+// RE-KEYED 2026-11-12 (COHERENCE-UPKEEP, ruling 6, 05ec9b601): the stores are laid by at the label's share on a
+// SECOND call of the stores' writer after prosperity (economicState.js :: generateEconomicState), and that writer's one
+// draw is the label-keyed fork `food.cropFortune`, so the probe row mints it twice, both by fork: the second call draws
+// the same crop fortune BY DESIGN (no stream moves). Measured by A5: repeatedSeeds = cropFortune x2 [fork|fork] ;
+// power-structure x4. The power-structure quartet is unmoved.
+const STORES_SEED = `${CENSUS_ROW._seed}::generateEconomy::food.cropFortune`;
+const STORES_VIAS = ['fork', 'fork'];
 // 2026-10-01, the urban band (ODQ §934.86): 96 -> 107 pickVariant calls on the probe row (+11, measured; the institution
 // registry rebuild changed what the same seed assembles); every call is still a real choice with its own seed.
 // 2026-10-31, tension variety (GS-1, ODQ §934.101): 107 -> 69 pickVariant calls and 6 -> 15 external fnv1a32 calls
@@ -288,6 +295,15 @@ const PICK_VARIANT_CALLS = 31;
 // RE-KEYED 2026-11-11 (COHERENCE-QUARREL cure 2): 15 -> 17, MEASURED. The probe row's two quarrels each
 // take one fnv1a32 for their plot hook (power/conflicts.js :: buildConflictPlotHooks: one hash of the seed, the
 // parties and the issue picks the hook and the offer's wording, draw-free). The register's fnv1a32External moves with it.
+// RE-KEYED 2026-11-12 (COHERENCE-UPKEEP, ruling 6, 05ec9b601): 17 -> 18, MEASURED by A6 and traced: the stores' second
+// call (above, STORES_SEED) composes the foodways line again, one more fnv1a32 (domain/foodways.js ::
+// composeFoodwaysLine, `foodways|<identity>`). The register's fnv1a32External moves with it.
+// RE-KEYED 2026-11-12 (COHERENCE-UPKEEP, ruling 4 under (A), c19e96e23): 18 -> 42, MEASURED by A6 and traced: the
+// services keep each bought row by a draw-free roll after the seeded ones, one fnv1a32 of
+// `<seed>|upkeep|<institution>|<service>` per bought row evaluated while the place's share is below 1
+// (services/serviceRollMaterialization.js :: upkeepRoll). The probe row is Comfortable, so every bought row rolls:
+// 24 calls, counted on the probe row by a counter in a scratch tree (lodging 3, food 4, equipment 9, healing 3,
+// transport 3, commercial legal 2; every row kept). The register's fnv1a32External moves with it.
 // RE-KEYED 2026-11-13 (STYLE-2-MERGE point 46, the COHERENCE-POWERS merge, the chair's ruling on STOP 46b): 17 -> 16,
 // MEASURED by A6 and CONFIRMED caller by caller (a probe recording each external fnv1a32 caller's first src frame on
 // this probe row, at 3575cf061 against the merge): buildConflictPlotHooks 2 = 2, composeFoodwaysLine 1 = 1,
@@ -296,7 +312,14 @@ const PICK_VARIANT_CALLS = 31;
 // 1 -> 0: the base's 'mutual_leverage::npc_town_watch>npc_town_hall' tie key is no longer resolved, the dual hat having
 // re-dealt the probe row's cast and ties. No call site left the code (no changed line under src names fnv1a32); the
 // figure is the probe row's runtime count. The register's fnv1a32External moves with it.
-const FNV_EXTERNAL_CALLS = 16;
+// RE-KEYED 2026-11-14 (UPKEEP-10, THE MERGE of lane/integration-2026-11-07 at 976db5b19 into the defence lane): 24,
+// MEASURED by A6 at the merged tree and attributed caller by caller (a scratch dump of the hashed strings): foodways 3,
+// fingerprintPowerEconomyInput 6, upkeep rolls 6, the tie prose 7, the faction conflicts 2. THE TWO SIDES' CAUSES: the
+// line's 17 -> 16 above (resolveTieKey 1 -> 0); the lane's own 42 was never re-keyed after it moved, and measures 25 at
+// the lane's tip f943c9772, bisected on its first parent: 42 -> 24 at 44cddb372 (UPKEEP-5 F2: a house's own service is
+// never scaled, so 18 bought rows no longer roll: upkeep 24 -> 6), 24 -> 25 at 0c950f06c (UPKEEP-5 R3: one more
+// composeFoodwaysLine, foodways 2 -> 3). The merge: 25 - 1 = 24, no third cause. The register moves with it.
+const FNV_EXTERNAL_CALLS = 24;
 /** The fork law A1 pins: the mint wrapper's equivalence rests on this line and nothing else. */
 const FORK_LAW = 'fork: (label) => createPRNG(`${seed}::${label}`),';
 /** §6.4's off-corpus block: a wizard-reachable switch, the keys it moves, and 24 seeds. */
@@ -687,7 +710,8 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     // [direct|direct|direct]; the fork-minted member of the quartet is exactly what the
     // re-implementation buys, so the via list alone convicts a mock that did not take.
     expect(bySeed.get(REPEATED_SEED), `${REPEATED_SEED} vias`).toEqual(REPEATED_VIAS);
-    expect(repeated.map(([seed]) => seed), 'exactly one seed is minted more than once').toEqual([REPEATED_SEED]);
+    expect(bySeed.get(STORES_SEED), `${STORES_SEED} vias`).toEqual(STORES_VIAS);
+    expect(repeated.map(([seed]) => seed), 'exactly these two seeds are minted more than once').toEqual([STORES_SEED, REPEATED_SEED]);
   }, 120_000);
 
   it('A6 — the hash channel: 69 distinct pickVariant seeds, sixteen external fnv1a32 calls, and two censuses disjoint by construction', () => {
