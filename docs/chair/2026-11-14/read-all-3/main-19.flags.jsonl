@@ -1,0 +1,10 @@
+{"id":"28960","town":"r2r-metropolis-23","sev":"MED","kind":"STATE","why":"labels Thieves' Guild Powerful and in control of the criminal hierarchy; GOVERNMENT lists Thieves' Guild as Suppressed, QUARRELS has it declining","other":""}
+{"id":"00511","town":"r2r-metropolis-0","sev":"LOW","kind":"STATE","why":"mine captain Zixuan Deng is 'second of Noble Houses' and heaviest weight; PEOPLE shows only Mine, no bracketed seat; Noble Houses is Minor under Shadow Senate","other":""}
+{"id":"09234","town":"r2r-metropolis-9","sev":"MED","kind":"LACKS","why":"exports waterborne freight (cargo, pilotage); header trade access is isolated and terrain Hills, so no water route","other":""}
+{"id":"00835","town":"r2r-metropolis-9","sev":"MED","kind":"STATE","why":"says mountain trade flowed through the metropolis; header gives trade access isolated and Hills terrain","other":""}
+{"id":"33736","town":"r2r-metropolis-22","sev":"MED","kind":"STATE","why":"gives Abu Said Bukhara the title foundling-mother; PEOPLE has Abu Said Bukhara as (m)","other":""}
+{"id":"HEADER","town":"r2r-metropolis-9","sev":"LOW","kind":"RECORD","why":"isolated Hills town with Docks/port facilities, Harbour master's office and Toll bridge in HOUSES; trade access isolated gives no route","other":""}
+{"id":"24578","town":"r2r-metropolis-16","sev":"MED","kind":"STATE","why":"prints stability as militant theocracy; GOVERNMENT is a Democratic assembly with Religious Authorities only Minor, and safety Very Safe","other":""}
+{"id":"09214","town":"r2r-metropolis-56","sev":"MED","kind":"LACKS","why":"exports waterborne freight (cargo, pilotage); header trade access isolated, Mountain terrain; no water route","other":""}
+{"id":"09212","town":"r2r-metropolis-43","sev":"LOW","kind":"LACKS","why":"exports waterborne freight; Mountain terrain, trade access road, LAND lists no water resource; only a stray Docks house supports it","other":""}
+{"id":"DONE","lines":2357,"blocks":39,"flags":9}
