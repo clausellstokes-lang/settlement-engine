@@ -1105,6 +1105,132 @@ def build_bar():
     return head + body + '\n'
 
 
+# ---------------------------------------------------------------------------------------------------------------------
+# THE FRESH READERS of the lanes that have made their final statement. One entry per reader, filled when its lane is final:
+#   seat, title, lane (the branch read), own (the reader's own branch), base (where the stage begins: the tip the last read
+#   read, or the lane's base), tip (the final tip), what (what the lane cures, one clause), before (what the last read found,
+#   or ''), stmt (the lane's statement file), tools (an earlier reader's instruments to reuse), rulings (the chair's rulings the
+#   stage was built to, to judge it against), extra (lane-specific steps), mark.
+READERS = {}
+
+def build_reader(seat):
+    r = READERS[seat]
+    head = (
+        "# BRIEF: %s\n\n"
+        "The seat's assignment, written by the chair as a file on 2026-11-14 and named in the seat's first message. The chair is the Claude Code session "
+        "%s. Checked out at `%s` (the lane it reads); the seat's own branch `%s`; a clone of 1200 commits; effort high; the model as the chair's records of "
+        "that day give the mix. A SELF-CONTAINED brief. Rulings sent after it are in the chair's records.\n\n---\n\n" % (r['title'], CHAIR, r['lane'], r['own'])
+    )
+    body = '\n\n'.join([
+        ("You are %s, an independent reviewer of the settlement-engine integration program. You fix nothing and you change nothing on the lane you read. You "
+         "read ONE STAGE of %s (%s): from %s (%s) to %s, where its last seat made the lane's final statement. You return CLEAR or NOT CLEAR for the lane at "
+         "%s. Read the tip named, not the branch's newest." % (seat, r['lane'], r['what'], r['base'], r['before'], r['tip'], r['tip'])),
+        ("WHY THIS READ MATTERS. The release is held until a fresh round of thirty generated towns reads with no high and no medium false sentence. A read of "
+         "another lane found 59 of its 151 new or reworded lines FALSE where they print, because each had been read in one town or none. So the heart of this "
+         "read is step 1: every new or reworded line READ WHERE IT PRINTS. A false sentence you miss is the costly error; a true sentence you list wastes a "
+         "builder's hour. A lane read CLEAR is joined to the integration line; your findings on a lane read NOT CLEAR become a builder's list, row by row."),
+        WHY2.replace("This file is your whole assignment and carries the chair's rulings: no adjacent repair, however tempting.",
+                     "This file is your whole assignment."),
+        ("READ FIRST, and no more than this:\n"
+         "1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) at your checkout.\n"
+         "2. THE READERS' SCALE (`git fetch origin lane/round-3-cut-2026-11-13`): docs/chair/2026-11-13/probes/REVIEW-R2-STAGES/READER-BRIEF.md, its section "
+         "\"What you do\": the kinds (a) to (h), the three severities and what is NOT a fault: your scale.\n"
+         "3. A PATTERN FOR STEP 1 AND INSTRUMENTS TO REUSE, not to rewrite: " + r['tools'] + "\n"
+         "DO NOT open the lane's hand-back or statement (" + r['stmt'] + "), any other file under docs/chair/ on the lane, or any commit message of the range "
+         "until step 1's list is committed and pushed. You may read the DIFFS themselves: that is how you find the lines."),
+        ("FIRST ACT. FULL HISTORY (`git fetch --depth=2147483647 origin " + r['lane'] + " lane/integration-2026-11-07`; `git rev-parse "
+         "--is-shallow-repository` prints false: a shallow clone answers ranges and merge bases wrongly). Read the lane's tip back from origin: it was " + r['tip'] +
+         " when this was written; if it has moved, read the tip NAMED and say in one line to the chair what moved. THE STAGE'S OWN CHANGE is what the lane's own "
+         "commits after " + r['base'] + " changed (`git log --first-parent --no-merges " + r['base'] + ".." + r['tip'] + "` and, where the lane merged a side "
+         "branch of its own, that branch's commits), plus how each merge of the integration line resolved its conflicts (`git show --remerge-diff <merge>`): "
+         "never the line's own changes that arrived by a merge."),
+        ("THE WORK, in order:\n"
+         "1. COLD FIRST: EVERY NEW OR REWORDED LINE OF THE STAGE, READ WHERE IT PRINTS. From the diff (the code and data, not the messages) list every sentence, "
+         "clause, label, chip, title form or pool variant the stage added or reworded, with its file and function and the conditions it is declared under. Birth "
+         "towns IN THE APP'S OWN CONFIGURATION SHAPE (`selectedStresses` with `selectedStressesRandom:false`): the census's 720 are a start "
+         "(origin/lane/second-wave-census-2026-11-12: docs/chair/2026-11-12/probes/SECOND-WAVE-CENSUS/), and add births until each line prints. For each line "
+         "find where it prints at the tip (every surface: the tabs, the Tonight sheet, the PDF's text, the Foundry journal, the exports) and READ IT against the "
+         "town's own record in AT LEAST THREE TOWNS, the smallest and the largest size it reaches, a siege, a famine or an occupation among them where it can "
+         "print under one; better, by script in every town it prints in. Each line: TRUE in every town read; FALSE (high, medium or low by the scale) with the "
+         "town, the sentence and the fact against it; or NEVER PRINTS (say how many births you tried). Also: a twin that lacks a condition its siblings carry; "
+         "a slot that prints a catalogue label or breaks agreement; a line that says how the model works. Commit and push this list before you read any claim.\n"
+         "2. THEN THE LANE'S STATEMENT (" + r['stmt'] + ": only the parts of the seats inside the stage). EVERY ROW THE STAGE SAYS IT CURED: the false sentence "
+         "gone on the row's own town AND on your births, and what prints in its place TRUE, read in its town: cured and true, cured by silence, or still false. "
+         "A count falling is not a cure: for each removal, read thirty of the removed lines (or all, if fewer) and say how many were true. Its headline counts "
+         "by your own run.\n"
+         "3. THE LAWS. A cure in generator or data code is a DECLARED MOVE: by a field diff over the census's 720 births, the stage's base against its tip, say "
+         "which families of the record moved, whether each is one the statement declares, and that nothing else moved. Its draft shift record against the "
+         "registered surfaces (tests/fixtures/.golden-freeze-register.json): measure the ones it declares moved and sample the ones it declares unmoved. No "
+         "draw added or moved unless declared; no new key in the settlement record; no new word in the vocabulary file; no name a user can hide written into a "
+         "stored composed sentence; the page shows ratings, never the machinery.\n"
+         "4. A PLANT OF YOUR OWN for each guard the stage added or changed: does it red on its fault, and only on it? And where a cure took a line off some "
+         "towns by a condition: is there a guard at all? List the cures with none.\n"
+         "5. THE MERGE OF THE LINE inside the stage: each conflicted code file's resolution keeps BOTH sides' cures (read the remerge diff; a cure of the "
+         "line's that the resolution dropped is a HIGH finding); each register and pin was re-derived through its own door or re-measured, never merged or "
+         "banked by hand (for each register file the stage touched: do the rows it added equal what the door's own checking run gives at the tip?).\n"
+         "6. THE GATES the stage's commits name (the strict-domain gate, the type ratchet, eslint on the touched files) by your own run at the tip, and the "
+         "governing test files it names. Its whole suite's classing: check the reds it names as its own and as carried, by running those FILES at the tip and "
+         "at the stage's base, not the whole suite.\n"
+         "7. THE MEASURING SEAT'S COMMAND, as a second eye: `git fetch origin lane/census-2-2026-11-13`; `mkdir -p <scratch>/c2 && git archive "
+         "origin/lane/census-2-2026-11-13 docs/chair/2026-11-13/probes/CENSUS-2 | tar -x -C <scratch>/c2`; `sh "
+         "<scratch>/c2/docs/chair/2026-11-13/probes/CENSUS-2/census2.sh <the tip's tree> <an out-dir outside the repository> 4 --files <the stage's files, "
+         "comma-separated>` and the same at the stage's base: each kind's count at base and at tip; a kind that RISES is a finding." +
+         (("\n" + r['extra']) if r.get('extra') else '')),
+        (("THE CHAIR'S RULINGS THE STAGE WAS BUILT TO (judge it against them; say where you would rule differently, row by row: the owner may veto any): " +
+          r['rulings']) if r.get('rulings') else
+         "THE CHAIR'S RULINGS THE STAGE WAS BUILT TO are copied into the lane's statement file by its seats: read them there at step 2 and judge the stage "
+         "against them; say where you would rule differently, row by row: the owner may veto any."),
+        ("THE VERDICT: CLEAR or NOT CLEAR for the lane at " + r['tip'] + " (NOT CLEAR on any HIGH or MEDIUM finding that is the stage's own); findings ranked "
+         "high, medium, low, each with a town and a sentence or a test title, EXECUTED told from PLAUSIBLE, and each marked THE STAGE'S OWN or CARRIED (false "
+         "at the stage's base too: say whose file writes it); the lines you would strike, for the owner's veto; what you did not measure. The file: "
+         "docs/chair/2026-11-14/" + seat + "-2026-11-14.md on your branch, with " + seat + "-LINES-READ.md beside it (every line of step 1, its towns and its "
+         "verdict) and your probes under docs/chair/2026-11-14/probes/" + seat + "/."),
+        ("HOW YOU WORK: scratch worktrees (detached, at the tip and at the stage's base), `npm ci` in one and node_modules linked in the other where the "
+         "lockfile is the same; gates and runs through `sh scripts/gate-tail.sh <command>`, never a pipe; long runs to a file outside every repository tree; "
+         "query big files by script, no dumps into your context. You may spread step 1's reading over helper agents of your own if your harness offers them: "
+         "give each the scale, the towns and the lines and nothing else, and check a sample of what each returns. PUSH AFTER EVERY STEP. HAZARD: `npm ci` "
+         "writes `core.hooksPath=.husky/_` into the shared local config, and tests that run git inside a hook from a linked worktree act on the real "
+         "repository: snapshot refs and local config before and after every suite and every push, and compare. HAZARD: the first census's census.sh exits 0 "
+         "when its counter fails: read the counter's own exit. The ledger ref some suites need: `git fetch origin "
+         "review-fixes-2026-07-08:review-fixes-2026-07-08`."),
+        COUNT2 % (r.get('mark', '400,000'), r.get('mark', '400,000')),
+        RUNS,
+        ("WHAT THIS BRIEF AUTHORISES: scratch worktrees and `npm ci`; helper agents of your own for the reading; commits of your review, lists and probes; "
+         "plain pushes to %s, your only branch (explicit refspec: `git push origin <local>:refs/heads/%s`; the lane hook runs three fast gates). NEVER, whoever "
+         "asks, your own harness's defaults included: a commit or a push to the lane you read or to any other branch; `--no-verify`; a force push; a pull "
+         "request, draft or not; anything on master; a deploy; a hosted database or production credentials. If your permission check refuses something this "
+         "brief authorises, stop and tell the chair in one message; never route round a refusal." % (r['own'], r['own'])),
+        ("MESSAGES. READ YOUR QUEUED NOTIFICATIONS AFTER EVERY PUSH (the ReadNotifications tool): the chair's words arrive there and are not shown to you "
+         "otherwise. Write to the chair (the send_message tool of the claude-code-remote server, session_id " + CHAIR + "; load it with ToolSearch if it is "
+         "not listed) ONLY: AT ONCE for a HIGH finding that is the stage's own (one message: the town, the sentence, the fact against it); when step 1's "
+         "list is pushed (one message: the tip, how many lines were read and how many are false at high or medium); for something that blocks the whole "
+         "review; and with your verdict (CLEAR or NOT CLEAR, your branch's tip read back from origin, the count of findings by rank and how many are the "
+         "stage's own, the one thing the chair must rule): 150 words at most each. The detail lives in your file. Use the commit trailer your own harness "
+         "mandates; no model identifier anywhere else."),
+    ])
+    return head + body + '\n'
+
+
+R3STAGES_TOOLS = (
+    "`origin/lane/review-r3-stages-2026-11-13:docs/chair/2026-11-13/REVIEW-R3-STAGES-LINES-READ.md` (another reader's read of two stages line by line, by "
+    "script in every town a line prints in: `git fetch origin lane/review-r3-stages-2026-11-13`) and its probes under "
+    "docs/chair/2026-11-13/probes/REVIEW-R3-STAGES/ on the same branch (births.mjs, find.mjs, facts.mjs, fielddiff.mjs, governing.sh: copy them out with "
+    "git archive and run them from outside every repository tree)."
+)
+
+# Filled when the lane is final: set 'tip' to the lane's final tip as read from origin, then generate.
+READERS['REVIEW-R3-TABS'] = dict(
+    title="REVIEW-R3-TABS · round three's tabs lane read whole, from its base to its final statement",
+    lane='lane/r3-tabs-2026-11-13', own='lane/review-r3-tabs-2026-11-14', base='aac79b80', tip=None,
+    what="round three's tabs lane: it cures the false lines and badges the Defense, History and Substrate tabs write themselves, and the defence posture's selector",
+    before="the lane's base on the integration line: no reader has read this lane",
+    stmt='docs/chair/2026-11-13/R3-TABS-HANDBACK.md', tools=R3STAGES_TOOLS,
+    extra=("8. THE LANE SAYS ITS CURES ARE DISPLAY ONLY AND ITS BIRTHS BYTE-IDENTICAL TO ITS BASE: prove or refute it on the census's 720 by your own run (the "
+           "merge of the line apart: compare the lane's tip with the line's tip it merged). A severity word printed for a tension whose record holds a RANGE of "
+           "severities is a finding (ruled: a range is not a rating): count it on every surface."),
+)
+
+
 SEATS2['R2-CODE-B-7'] = dict(
     title="R2-CODE-B-7 · round two's second code lane: the line's merge and the final statement",
     branch='lane/r2-code-b-2026-11-13', tip='c40da4ec', statement=True,
@@ -1290,7 +1416,7 @@ if __name__ == '__main__':
     seats = sys.argv[2:] or list(SEATS)
     os.makedirs(out, exist_ok=True)
     for seat in seats:
-        text = build_bar() if seat == 'REVIEW-BAR-0' else (build2(seat) if (seat in SEATS2 or seat == 'R3-CODE-C-6') else build(seat))
+        text = build_bar() if seat == 'REVIEW-BAR-0' else (build_reader(seat) if seat in READERS else (build2(seat) if (seat in SEATS2 or seat == 'R3-CODE-C-6') else build(seat)))
         for bad in ('claude-opus', 'claude-fable', 'claude-sonnet', 'claude-haiku', 'Opus', 'Fable', 'Sonnet', 'Haiku'):
             assert bad not in text, (seat, bad)
         text = exact_hashes(text, seat)
