@@ -451,3 +451,68 @@ branch at that tip (`npm ci` there); every measurement after the cure is of a CO
   and row 20 "siege text, no siege" 689 → 0 (the line's: 689 → 0 base → line); every other row OLD.
 - **Its limits, beside every zero above:** the dossier's views only (no PDF, journal, export, Tonight); it cannot see two
   lines of a page disagreeing; a hit is a candidate until read.
+
+---
+
+# THE THIRD SEAT (R3-TABS-3, 2026-11-14)
+
+The chair is now the Claude Code session session_01ACmDYZrFEVXyZEUg1NDxxC (the program moved accounts on 2026-11-14;
+every earlier session is ended). The assignment is the chair's file `docs/chair/2026-11-14/briefs/BRIEF-R3-TABS-3.md`
+on lane/chair-2026-11-08: BRIEF-R3-TABS-2 binds as written with that file's changes. Read the lane's tip back from
+origin at the start: **a19a0ee1b**, as the brief has it. Worked in a scratch worktree on a local branch at that tip
+(`npm ci` there); the base, the line and 2dc3fe61b measured in integrity-counted `git archive`s of their shas.
+
+## The rulings this seat works to (the chair's file, copied: the chair's messages are not on the branch)
+- The second seat's brief binds as written (its reading, work, method, hazards, authorities and prohibitions); point
+  49 is not on the line: work that waits on it waits. NEVER: a push to any other branch, `--no-verify`, a force
+  push, a push with nothing to send, a pull request, master, a golden's door in its writing mode, a deploy, a hosted
+  database or production credentials. Never rewrite a commit at or below a19a0ee1b. No adjacent repair.
+- The order: 0 this hand-back (the naval cure, by its four bodies and this seat's own run); 1 the final statement's
+  parts that need no suite; 2 one message to the chair, then wait for point 49; on the chair's word the merge of the
+  line's tip, the instrument's page census, the whole suite once in six vitest shards with every red classed against
+  the base, the lighting census, the edge bundles, the lane's ONE final statement.
+- The naval cure was made to record 422 (CHAIR-HANDOFF-FOURTH §4): "A line of the sea or a harbour's approaches is
+  offered only where the route is the sea, on every surface (the defence desk's pool key too)."
+
+## The first act: where the second seat stopped (EXECUTED: every commit after fdfd471d9 read against this file)
+b2682f748, d6b0526cb (the severity chips; this file's item 1), 58a7b6484, 76641edaf, 2dc3fe61b (item 2), then the naval
+line 9f95d404c and its three register commits 02a539072, 96c822457, a19a0ee1b, recorded only in their bodies until
+now. No stop and no question to the old chair stands without its ruling copied in: the chips are ruled (407, item
+1); the Services, Origin, founder, endurance and Court rows are passed on (BRIEF-R3-TABS-2, WHAT IS NOT YOURS); the
+naval line is record 422. So no first message was sent.
+
+## Item 0 — the naval line (9f95d404c and its registers), written up from its bodies and this seat's own run — DONE
+- **What it changed:** `defenseStateProse.js :: defenseSupportingProse` keyed DS-DEF-6's naval rung
+  (`navalDefensePoolKey`) by the roster's docks (`compound.hasPort`) and the navy flag, not by the route, so river
+  towns drew lines of the sea. The port and navy flags now also need `seaRoute`: `tradeRouteAccess` 'port' and
+  `waterAccessKind` maritime; a record with no config reads as before (A-11). `navalDefensePoolKey` is unchanged.
+  Registers by their doors: the wiring census's stamp on the composer re-taken (02a539072: only the stamp moves; no
+  pool, row or reading); the wiring-census walker's measured figures re-keyed by identity to the first seat's L1 and
+  L2 with their causes (96c822457: the walker was 11 red at the lane's tip since eaca79fcd, green at the line; the
+  naval cure moves none of its figures); the lighting census re-frozen for the guard file (a19a0ee1b: 3253 -> 3254).
+- **Its measure on the 720, by this seat's own run** (`probes/R3-TABS/naval.mjs`: the desk's own output, tree
+  2dc3fe61b against the tip, on the census's 720 and the 144 fresh births, born in the app's shape): the 720 lose 57
+  naval lines, every one off a route that is not the sea (56 river, 1 crossroads), all `Naval Defense: Port only`;
+  the 48 sea ports keep theirs WORD FOR WORD; no line gained or reworded; the logistics rung unmoved on every birth.
+  The fresh 144: 6 lost (5 river, 1 crossroads), the 40 sea ports keep theirs. EQUAL to the commit body's figures.
+  NAMED, not touched: the cure's own docblock says "61 river-route towns of the 720 and the 144 fresh births"; by
+  the body and by this run it is 57 and 6 (63), 2 of them crossroads. A comment only; rewording it moves the
+  wiring census's stamp on the composer, so it is left for the corpus lane's next pass over the file.
+- **Its guard green:** tests/domain/defenseNavalLineReadsRoute.test.js 5 of 5 at the tip (with the lighting census,
+  the wiring-census walker and the projection contract: 197 of 197).
+- **The lane's governing suites at the tip** (every test file naming any src module the lane's own commits change:
+  DefenseTab, HistoryTab, SubstrateTab, defense.generated.js, defenseStateProse, postureLineDisqualifiers, viewModel,
+  HistoryFounding; 134 files): at a19a0ee1b **133 green, 1 red**: `dossierMountRegistry.walker` › "THE SHIPPED
+  TABLE": "defense.publicOrder: the row declares visibility 'closed-section' and every host that encloses it is open
+  on first paint — a stale exemption". CLASSED BY EXECUTION: green at the base aac79b808, the line 9e57f5023, the
+  lane's merge de0872aa5 and 66fd07e91; red from **87d361dae** (the first seat's crime-rows cure) on. The second
+  seat had classed it "not this lane's" against fdfd471d9, which is a lane commit: it is this lane's. CURED by
+  **6ed610479**: `DefenseTab.jsx :: wholeSentencesWithin` spelled its closing quotes bare in a regex literal, which
+  the walker's source scan reads as a string opening (so it lost the fold's `defaultOpen={…}` host); the literal now
+  spells them `\x22` `\x27`, the same regex (old and new give the same matches on all 3,432,667 strings of the 884
+  births' records: 0 differ; `probes/R3-TABS/crimeeq.mjs`). After: the 44 files naming DefenseTab or the mount
+  registry 1,146 of 1,146 green; the registers' and the crime guard's 223 of 223; the gates at the ceiling (1113,
+  167, eslint 0). NAMED, not touched: the walker's scan reading a quote inside a regex literal as a string.
+- **The births at the tip byte-identical to the base** (sha256 of the decoded ndjson, `probes/R3-TABS/births.mjs` at
+  aac79b808 and a19a0ee1b): census 720 a65d30b2…, reader 20 2997a853…, fresh 144 666d7793…, each equal at both and
+  equal to the first seat's own figures. Every change of the lane is a read-time display or desk line.
