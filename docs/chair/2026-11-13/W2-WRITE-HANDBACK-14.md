@@ -32,13 +32,16 @@ main clone's refs and local config compared before and after (no change but the 
   regex>` adds the patch's guard rows for that pool; `ctx.sh <seed> <fragment>` prints the page lines around a print
   (the old line's place, where the inheritor will stand); `movers.js` the moved towns by size. `after.sh` as HANDBACK-13.
 
-## THE BATCH, POOL BY POOL (34 declarations in the patch; landed so far: 8)
+## THE BATCH, POOL BY POOL (34 declarations in the patch; landed so far: 11)
 | pool · vids | declaration | moves (772, replay) | inheritor read | guard | commit |
 |---|---|---|---|---|---|
 | DS-DEF-5 walls PRESENT v1 v3 | + `no crisis: under_siege` | v1->v6 20, v3->v6 13 (town-metropolis, all sieges) | v6 TRUE: Izammul (town), Athenaeia (city, siege+famine), Naranjotepec (metropolis) | 2 rows green | 62f223e19 |
 | DS-DEF-5 FIXTURE gates v4 | + `no crisis: under_siege` | v4->v5 26 (town 7, city 11, metropolis 8) | v5 TRUE beside v6: Uaymche (town), Athenaeia, Tarkhannuur (metropolis) | 1 row green | 1d7d243af |
 | DS-DEF-2 Beasts frontier v1 v2 · v4 | + `no crisis: threat` · + `no crisis: occupied` | v1->v4 14, v2->v4 13, -> silent 7 (all occupied) | v4 TRUE: Katoarion (town, siege), Jómsmark, Vysokoin (cities), the metropolis towns; silent in Markaztappa (occupied) | 3 rows green | 1796fe3ae |
 | DS-DEF-8 INTERNAL PRESSURE v3 (#278) | + `guardPresence` (was colour) | v3->v4 8, v3->v5 3 (thorp-village, no force) | v5 TRUE Mingkou (thorp), Katochori (village); v4 TRUE Vallepagus (hamlet) | 1 row green; the presumed register's stale `armedForce` row out through `--shrink` (its own commit) | 4d0d78142 |
+| DS-DEF-8 UNDER TRIBUTE v1 | + `guardPresence` (was colour) | v1->v3 6, v1->v4 2 (thorp-village) | v3 TRUE Caersike (hamlet), Yeketash (village), Xochihuitz (thorp) | 1 row green | 4447ebb91 |
+| DS-DEF-8 INSURGENCY v3 | + `guardPresence` (was colour) | v3->v1 3, v3->v4 3 (hamlet, village) | v1 TRUE (LOW: "its defence" of a no-force town, as the page's posture line says it) Dongyuan (hamlet), Lundtun (village) | 1 row green | f034cbc8b |
+| DS-DEF-8 SECURITY COMPROMISED v1 | + `guardPresence` (was colour) | v1->v3 1 (Malono, village) | v3 TRUE at Malono | 1 row green | 502629c2d |
 
 MEASURED, NOT YET LANDED (replay of the whole patch on the merged base): frontier v1/v2 -> v4 27, silent 7 occupied;
 CRITICAL v3 -> v4 1 (CRITICAL v1 v4, WEAK v1 under an occupation: 0 moves now, the readiness row is silent there on the
