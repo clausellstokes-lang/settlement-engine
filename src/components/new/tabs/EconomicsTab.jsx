@@ -169,8 +169,8 @@ function EconomicFlowsSection({ chains: chainsAsRead, institutionalServices = []
           const shown = chainPrintName(chain, town), facts = chainFlowFacts({ ...chain, ...shown }, instNames); // COHERENCE-AGREE-6 (F1): what a chain prints reads the town's access; the income keyword above stays on the record's label (logic)
           // X-50 (BOILERPLATE ONCE): generation gives every chain of a settlement the same impact
           // sentence, so it prints on the first card that carries it; each card keeps its need.
-          const impact = chain.dependency?.impact || '';
-          const impactShown = !!impact && filtered.slice(0, i).some(prev => prev?.dependency?.impact === impact);
+          const needFirst = !filtered.slice(0, i).some(prev => chainNeedLine(prev, town)); // the shared clause on the first card only
+          const needLine = chainNeedLine(chain, town, needFirst); // W2-C-LEAVES-6 item 6: ONE sentence of consequence (chainNeedShown.js)
 
           return (
             <div key={i} style={{
@@ -190,7 +190,7 @@ function EconomicFlowsSection({ chains: chainsAsRead, institutionalServices = []
               </div>
 
               {/* Resource + upstream imports + institutions + outputs */}
-              <div style={{display:'flex',gap:10,flexWrap:'wrap',marginBottom:chain.dependency||chain.entrepotNote||facts.upstreamNote?6:0}}>
+              <div style={{display:'flex',gap:10,flexWrap:'wrap',marginBottom:needLine||chain.entrepotNote||facts.upstreamNote?6:0}}>
                 {(facts.resource||facts.importedUpstream.length>0)&&<div style={{flex:'1 1 140px'}}>
                   <div style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:MUTED,marginBottom:2}}>From</div>
                   <div data-sf-chrome="" style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,lineHeight:1.3}}>
@@ -217,10 +217,10 @@ function EconomicFlowsSection({ chains: chainsAsRead, institutionalServices = []
               )}
 
               {/* Impairment detail */}
-              {chain.dependency && (
+              {needLine && (
                 <div style={{fontSize:proseFontSize(FS.xs, mobile),color:st.color,background:`${st.color}08`,padding:'4px 8px',marginTop:4,lineHeight:1.4}}>
-                  <strong>Needs {chain.dependency.resource}</strong>{impact && !impactShown && <> - {impact}</>}
-                  {chain.dependency.affectedServices.length > 0 && <span style={{color:MUTED}}> · affects: {chain.dependency.affectedServices.slice(0, 3).join(', ')}</span>}
+                  {needLine}
+                  {/* W2-C-LEAVES-6 item 6 (#920 #1044 #1047 #1049; #1152): the need's label and its service keys gave way to ONE sentence */}
                 </div>
               )}
 
@@ -847,6 +847,7 @@ function NeedsNotMet({ needs, mobile }) {
  * record is not touched. At the end of the file, so no line-keyed row above moves.
  */
 import { chainStateShown, serviceStateShown } from '../../../domain/display/chainStateShown.js';
+import { chainNeedLine } from '../../../domain/display/chainNeedShown.js'; // W2-C-LEAVES-6 item 6
 import { magicNoteShown } from '../../../domain/display/magicProvisionShown.js'; // W2-C-LEAVES-5 item 5
 import { computeChainSets } from '../tabHelpers.js';
 /** @param {any} chain @param {unknown} town @returns {any} the chain with the state its card prints */

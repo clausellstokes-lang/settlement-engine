@@ -502,3 +502,31 @@ export function exportsAsPrinted(settlement) {
 }
 import { chainStateShown, failedGroundsOf } from './chainStateShown.js';
 import { chainCarrierOf } from '../facts/chainCarrier.js';
+
+/**
+ * THE HOUSES WHOSE TRADE IS NO ONE CHAIN'S (W2-C-LEAVES-6 item 6; the chair's ruling of 2026-11-13 23:40 UTC on the first
+ * leaves lane's #1152, the bowyer's card carrying the craft guilds' "Metal ore + gems · affects: … fine jewellery"). A
+ * closed list, each entry its cause: a guild of many crafts and a market are listed among the houses of several chains
+ * (`data/supplyChainData.js`), and the generator joins such a house's one need onto every one of those cards
+ * (`computeActiveChains.js`); the need row names the house's own trade, not the chain's.
+ *   · craft guilds: the row's need and services are the jewellers' (metal ore and gems; luxury goods, fine jewellery),
+ *     printed on the bowyer's and the potter's cards (25 of the 720);
+ *   · a market (a weekly market, a market square, several): the row's are the market day's (trade access and grain or goods;
+ *     market day trade, commodity exchange), printed on the fishers' and the date growers' cards (42 of the 720).
+ */
+const NO_ONE_CHAINS_TRADE = /^craft guilds\b|^weekly market\b|\bmarket squares?\b/i;
+
+/**
+ * WHETHER A ROSTER HOUSE DOES A CHAIN'S WORK, by the goods pills' own reading of a chain's houses (`pillAsPrinted ::
+ * heads`: a house's name holds the first word of one of the chain's houses), a house of no one chain's trade apart.
+ * @param {{ processingInstitutions?: unknown } | null | undefined} chain one of `economicState.activeChains`
+ * @param {string} house the house's native name
+ * @returns {boolean}
+ */
+export function houseDoesChainsWork(chain, house) {
+  const name = String(house || '').toLowerCase();
+  if (!name || NO_ONE_CHAINS_TRADE.test(name)) return false;
+  const heads = (Array.isArray(chain?.processingInstitutions) ? chain.processingInstitutions : [])
+    .map((h) => String(h).toLowerCase().split(/[\s(]/)[0]).filter(Boolean);
+  return heads.some((h) => name.includes(h));
+}
