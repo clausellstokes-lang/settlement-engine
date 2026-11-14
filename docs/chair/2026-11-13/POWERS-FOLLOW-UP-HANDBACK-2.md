@@ -933,6 +933,18 @@ executed). Scratch worktree `/home/user/wt/p11` on a local branch `p11` at the l
   (a title that can only be made there is PARKED with its word); a title the card shares with a styled-title leaf goes
   through that leaf, never beside it.
 
+- THE CHAIR, 02:21 UTC: THE COUNT's mark is 400,000 (not 350,000), checked AFTER EVERY ITEM (each pushed cure; each of
+  M4's titles an item), never more than forty-five minutes apart. At a hand-back this file says WHAT IS LEFT line by line
+  and how the instruments are re-made.
+- THE CHAIR, 02:24 UTC, one row added to step 3 (from round two B's fifth seat's page re-count): the Power tab's SEAT
+  line prints a title twice where a minted face's stored name already carries it ("The seat Vachir Merv (the senior
+  guild master), the senior guild master and Alderman", r2r-town-50; "Rania ibn Hajar (the dean), the dean and Lord
+  Protector of the Faith", r2s-monster_pressure-metropolis-2; 4 lines in 2 towns of its 800); writer by that seat's
+  read src/domain/display/governanceAccount.js (`${who} holds the seat of ...`) and the seat head on the Power tab.
+  RULED: the title is added only where the name lacks it, through the styled-title leaf; if governanceAccount.js is not
+  a file this lane holds by its own commits, it is not touched: the call site goes under FOR THE JOIN (file, function,
+  the one-line change, a test that reds until it is made). After M4 and M1, in its turn.
+
 ## P5.1 M4 at ec72918d4, the nine files run at both trees (executed, `--maxWorkers=3`, through the mutex)
 - At 714381934: 2 red titles (observedShapeReaders "the producers ran and the corpus is not empty";
   sovereigntyLightingContract "THE CENSUS IS AN ASSERTION, NOT A SENTENCE"): red at both trees, CARRIED.
