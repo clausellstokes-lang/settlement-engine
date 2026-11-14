@@ -7389,7 +7389,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "unfolding",
           "marks": [
-            "colour"
+            "guardPresence"
           ],
           "text": "Each crackdown on the insurgents at {settlement} turns more of its people to their side.",
           "slots": [

@@ -3729,7 +3729,7 @@ street, the unfolding).
 **override: INSURGENCY ACTIVE**
 1. `[ledger · colour]` {settlement} is defending itself against its own people, and its defence was never built for that.
 2. `[street · guardPresence]` The guards at {settlement} walk streets where they are not welcome, and that is more dangerous to them than any ambush outside.
-3. `[unfolding · colour]` Each crackdown on the insurgents at {settlement} turns more of its people to their side.
+3. `[unfolding · guardPresence]` Each crackdown on the insurgents at {settlement} turns more of its people to their side.
 4. `[street · no guardPresence · crisis: insurgency]` {settlement} has nobody to send against the insurgents, and each household decides for itself what to keep quiet about.
 
 **override: RELIGIOUS UPHEAVAL** {colour}
