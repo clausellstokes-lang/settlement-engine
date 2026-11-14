@@ -364,6 +364,11 @@ describe('stacking famine mitigation never worsens the penalty', () => {
     const starving = mk(['famine']);
     return { econ: fed.economic - starving.economic, mil: fed.military - starving.military };
   };
+  /** The famine's own toll on the parts, in whole tenths: the sum of every part's famine crisis line. */
+  const famineToll = ({ priorityReligion }) => defencePartsOf(town({
+    magicExists: true, priorityMagic: 40, priorityReligion,
+    institutions: FAITHFUL_GROVE, stressTypes: ['famine'],
+  }), keepOf(undefined)).reduce((a, x) => a + Math.round((x.crisis?.famine || 0) * 10), 0);
 
   test('divine + druid famine mitigation is at least as good as druid alone', () => {
     const druidOnly = faminePenalties({ priorityReligion: 30 }); // parish present, relPri too low for divine
@@ -372,10 +377,32 @@ describe('stacking famine mitigation never worsens the penalty', () => {
     expect(druidAndDivine.mil).toBeLessThanOrEqual(druidOnly.mil);
     // Divine caps at -12/-6, above the druid -8/-5 floor: layering it changes
     // nothing, so the two profiles lose exactly the same amount to famine.
-    // (Both diffs also carry famine's shared upstream economy degradation,
-    // which is identical across the two configs and cancels out.)
-    expect(druidAndDivine.econ).toBe(druidOnly.econ);
+    // ⭐ RE-KEYED BY IDENTITY (UPKEEP-15, the chair's ruling (a) of 2026-11-14): the economic claim is read on
+    // the famine's own toll, the parts' crisis lines, EXACTLY equal (no tolerance). The cause: the build reads
+    // each score at hundredths before the whole point (UPKEEP-MEASURE-2 X9), over limit 1 held score by score
+    // (P2), so a score is a fraction before it prints: the famine takes the same 27.33 economic points from
+    // both places, and the difference of two printed scores (60 - 32 against 76 - 49) rounds that one toll to
+    // 28 and to 27. The difference of two printed figures no longer carries the claim; the toll does.
+    expect(famineToll({ priorityReligion: 70 })).toBe(famineToll({ priorityReligion: 30 }));
+    expect(famineToll({ priorityReligion: 30 }), 'anchored: the famine takes something').toBeLessThan(0);
     expect(druidAndDivine.mil).toBe(druidOnly.mil);
+  });
+
+  test('every printed score with the divine added is at least the printed score without it, fed and starving (UPKEEP-15)', () => {
+    // The owner's rule is about the figures the page PRINTS (the chair's ruling (a)): the divine added to the
+    // druid never lowers a whole-point score or readiness, in either fixture.
+    const read = (priorityReligion, stressTypes) => {
+      const p = generateDefenseProfile(town({
+        magicExists: true, priorityMagic: 40, priorityReligion, institutions: FAITHFUL_GROVE, stressTypes,
+      }));
+      return { ...Object.fromEntries(['military', 'monster', 'internal', 'economic', 'magical'].map((k) => [k, p.scores[k]])), readiness: p.readiness.score };
+    };
+    const fell = [[], ['famine']].flatMap((stressTypes) => {
+      const without = read(30, stressTypes);
+      const withDivine = read(70, stressTypes);
+      return Object.keys(without).filter((k) => withDivine[k] < without[k]).map((k) => `${stressTypes.join() || 'fed'} ${k}: ${without[k]} -> ${withDivine[k]}`);
+    });
+    expect(fell).toEqual([]);
   });
 });
 
