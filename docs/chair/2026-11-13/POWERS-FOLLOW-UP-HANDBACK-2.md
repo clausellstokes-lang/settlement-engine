@@ -1096,3 +1096,187 @@ executed). Scratch worktree `/home/user/wt/p11` on a local branch `p11` at the l
   fast-forward, push `p11:refs/heads/lane/powers-follow-up-2026-11-13`, compare the shared config.
 - The M4 walker dumps: a copy of sovereigntyLightingContract.walker.test.js writing `eachOnly` to a file (the park
   debt's population at a tree); pool-dominance's measure of named pools (`import { measureDominance }`).
+
+# PART 6 — POWERS-12, the lane's seventh seat: M1, the line's merge and the stage's statement (FINAL for the join)
+
+The lane was read back from origin at **57cdd3415** before the first act, equal to the brief's. The builder was POWERS-12 (the chair is
+session_01ACmDYZrFEVXyZEUg1NDxxC; brief docs/chair/2026-11-14/briefs/BRIEF-POWERS-12.md on the chair's lane). Worktrees: the scratch
+worktree /home/user/wt/p12 (branch p12, `npm ci` once; it wrote `core.hookspath=.husky/_`, kept as for every seat before), the merge
+worktree /home/user/wt/p12m (branch p12m, from a5402c006), and detached /home/user/wt/base96 (96a6ced46) and /home/user/wt/line
+(976db5b19), each with node_modules linked from p12. Long runs went to /home/user/runs/. Pushes were plain:
+`git push origin p12:refs/heads/...` and later `p12m:refs/heads/lane/powers-follow-up-2026-11-13`.
+
+## P6.0 The rulings, copied in
+- THE BRIEF: the close comes first. The list is time-boxed at 180,000 of context: finish the item in hand, then go STRAIGHT to THE CLOSE.
+  Rows not reached go under LEFT FOR AFTER THE JOIN. Step 6 (#312, ww#656) only under 300,000. The design of M1 (P5.10 item 1) is
+  accepted as the form of the cure. A modifier prints in plain words only where the town's record bears it out, else nothing; the cure
+  is at DISPLAY unless nothing else reads it. Never rewrite a commit at or below 57cdd3415.
+- THE CHAIR, 04:58 UTC: M1 ACCEPTED at a5402c006 (the lowest noble rung at both labels, for the reason given).
+- THE CHAIR, 04:58 UTC, RULED ONCE FOR EVERY CLOSING LANE (vetoable by the owner), on THE INSTRUMENT'S FRESH HITS AFTER THE MERGE OF
+  THE LINE:
+  - (1) A stale row leaves by the door's shrink form.
+  - (2) A fresh hit where a set or table ALREADY DECLARES the atom, and the text only stands apart from it (a constant, a moved literal),
+    takes the SHAPE CURE: the literal goes into its declaring member, the output byte-identical.
+  - (3) A fresh hit on a line that is GATED IN CODE (true wherever it prints, by a condition the code tests) but not declared through a
+    draw door is NOT banked, NOT keyed by hand, NOT reworded to slip the matcher and NOT re-routed now. It stays RED AND NAMED under FOR
+    THE DECLARATION PASS: the file, the text, the code condition that gates it, the atom it would declare, and any new word it needs.
+    ONE DECLARATION PASS is made after the join, on the joined tree, for every lane at once.
+  - (4) A fresh hit on a line that is FALSE somewhere is a cure, now.
+  - THE SAME applies to a fact-layers rise that is only a reader's reworded condition.
+  - The three rows banked against this lane stay the lane's, as 2m gives them.
+  - The statement gives each walker's exit and says these reds are the lane's, named. No stop to the chair is needed for classes 1 to 3.
+
+## P6.1 Item by item
+- **M1 (REVIEW-POWERS-3 M1): DONE, a5402c006** (the chair accepted it at 04:58).
+  - The cure is five rows of claimStanding.js :: CLAIM_RUNGS on L2's RungContext.
+  - The 720: the class went 122 -> 0. The 4,305: 870 -> 0.
+  - L2's four rows did not move: on the 720 they read 31, 4, 12 and 5; on the 4,305, 156, 31, 106 and 28.
+  - DECLARED MOVE: on the 720, 87 births change, powerStructure.factions[].desc only. On the 4,305, 566 births change, the same family only.
+  - One change from the design, found by reading where the line prints. The great families and the militarised nobles take the ladder's
+    lowest rung at both labels. The reason is the density law's fold (rulerKin.js :: settleHouselessPowers): it runs after the call and
+    drops a merchant power no house stands behind (r2s-occupied-metropolis-1). That would leave "competitive with merchant capital"
+    naming a power the page does not show.
+  - The guard is claimRungsCommanding.test.js (5 of 5 red at 57cdd3415).
+  - The 47 governing test files: the same 6 reds as at 57cdd3415 (carried goldens).
+- **The raw modifier (P4.8 ww#639 ww#980 pf#1 pf#23) and L4: NOT REACHED** (the time box: the count read 198,892 by get_session after M1,
+  past 180,000). Both are under LEFT FOR AFTER THE JOIN below.
+- **CENSUS-2 at the stage's base 96a6ced46 and at a5402c006 (step 4): DONE**, under P6.3.
+- **THE MERGE OF THE LINE (step 5): DONE, 835cce92c**, under P6.2.
+- **Step 6 (#312, ww#656): NOT RUN.** By this seat's own estimate the count was past 300,000 at the merge (get_session still read 198,892,
+  the same twice running, so the brief's rule to trust the seat's own estimate applied). Both are under LEFT FOR AFTER THE JOIN.
+
+## P6.2 THE MERGE OF THE LINE (step 5), each step its own commit
+- Full history first: `git rev-parse --is-shallow-repository` printed false, and `git merge-base --all` printed e969a75b7. The line read
+  back at 976db5b19.
+- **835cce92c**, a plain merge of 976db5b19 into a5402c006. It CONFLICTED in 10 files, NO CODE, exactly the chair's trial merge:
+  wiring-census.json, pool-dominance.register.json, and 8 edge bundle and meta files. Each was taken whole from the line's side. Two
+  files merged with both sides' changes: table-pools.mjs and goals.js.
+- **10d4ba08a**: the wiring census, re-taken by its writer. The stamp only; --check exits 0.
+- **81a05b14c**: pool-dominance, by its door `--tighten`. 6 rows banked, 12 stale rows out, 55 ceilings tightened; the check after
+  reads 0 over, 0 unregistered, 0 stale.
+- **e770da592**: presumed things `--shrink`. One stale row went out: stressFactions.js powersCount, the infiltrator line this lane
+  cured at f628cab05.
+- **2ccba2906**: THE TUNING INVENTORY, by its ritual, at the point the chair named. The six corruption.js rows gain the dependent
+  powerSupport.js (cause 59f877e58). Three declaration lines moved by the lane's own edits. The plain run passes 76.
+- **06759aa7b**: the lighting census, by its ritual. files 3245 -> 3273, titles 29407 -> 29478; the plain run passes 34.
+- **d0bc03e08 / d11dfde95 / dd7269149**: the edge bundles by `npm run build:edge-shared`, alone, last. ORIGIN, this seat's: the
+  first two builds ran in the merge worktree, whose symlinked node_modules leaked "../p12/node_modules" into three bundles. The whole
+  suite found it (edgeSharedBundleReproducibility, 9 red). dd7269149 rebuilt them in a real checkout: 29 of 29 green.
+- **b655ef4f7**: sovereignNoCrown's guard town re-keyed by identity (rw3-city-wartime-1 -> -2). After the merge the old seed stands no
+  City-state government. Red first by a plant.
+- **41f886d0c**: three walker reds of the lane's own files, cured:
+  - noLegacyFactionReaders: the RungContext field `factions` is now `roster`, byte-identical output.
+  - negativeAssertionAnchor: one bare negative struck.
+  - seedLoopTotality: the guard towns now run through collectSeedFailures.
+
+## P6.3 THE STAGE'S STATEMENT (96a6ced46 -> the final tip; the code tip for the measures is a5402c006 before the merge)
+- **CENSUS-2** (the measuring seat's command, `census2.sh <tree> <out> 4 --files <the lane's 29 files>`, both exits 0). The counts at
+  96a6ced46 and at a5402c006 are EQUAL in every pattern but one: pattern a's distinct lines went 615 -> 614.
+  - Hits in the lane's files: 328 -> 327. One is gone (goalFamilies.js, r2s-succession_void-town-1: "Look for a way to do more for
+    Mining & Coinage with the same hands."); NONE is new.
+  - Read: claimStanding.js's 3 hits. These are rulingStructure.js's own ladder line "Church institutions hold direct temporal power;
+    tithes, land, and courts are all ecclesiastical." (pattern a, "courts" with no court on the roster) in r2r-town-8, r2r-town-54 and
+    r2s-under_siege-town-0. Each is beside a Strong or Dominant church, so not M1's class. The hit is a candidate, CARRIED from the base.
+  - LIMITS: the dossier's views only; the census cannot see two lines disagreeing.
+- **The 720-birth field diff, 96a6ced46 -> a5402c006** (POWERS-9's fdiff.mjs): 593 births. By family:
+  - goals: goal.short 391, goal.long 389, intent kinds 206/186, targets 10/3. POWERS-9's 8ae50a069 and f87e9c419, declared at P4.3.
+  - the structural rows: structuralPosition and activeConstraint 348, settlementCondition 279. POWERS-9's f733e450e.
+  - secrets: what and stakes 116. POWERS-9's 5ed0f7fa8.
+  - presentation: 32. The same.
+  - powerStructure.factions[].desc: 128. L2 (b889007c8), M4's vignettes and twin (70b3d4677, aaab72958), and M1 (a5402c006; 87 of
+    the 720 alone).
+  - No other leaf moved.
+- **L5 CLOSED, THE DECLARATION**: R1's tie re-deal (91a3a9623) moves, inside the re-dealt towns and only there:
+  - conflicts[]: parties in 12 towns, stakes 11, intensity 4, hooks 11.
+  - prominentRelationship: 15 towns.
+  - pressureSentence: 4 towns.
+  These are the reader's counts (fielddiff.mjs, 714381934 -> 91a3a9623), not re-measured by this seat. The quarrels are drawn from the
+  rival ties. DECLARED.
+- **L7 CLOSED**: the draft record's `_measurePOWERS12`. At this tip the generator golden master differs in 513 of 525 configurations
+  (513 at a5402c006 as well), and the Herald desk hash is 0a90db40... against the pinned 5ae8bc12.... Both are MOVED, for the merge
+  seat's re-record.
+- **L1, L3, L6: LOW, LEFT** (the reader's sections stand).
+- **THE WHOLE SUITE, IN SIX SHARDS**, on the merged tree (shard 1 at d0bc03e08; 2 to 6 at b655ef4f7):
+  - 72 red titles in 40 files. Run again at the line's tip 976db5b19, those files show 14 titles red on the line itself: the line's own
+    failing set (landingFixtureFreshness x2, foundingWorldBones, newsHeadline/newsVoice contracts, proseFamilyContract x5,
+    siteCoherenceRatchet C1, dossierProseManifest x3).
+  - 59 are red on the lane only:
+    - CURED after the suite: sovereignNoCrown, noLegacyFactionReaders, negativeAssertionAnchor x2, seedLoopTotality x2, and
+      edgeSharedBundleReproducibility x9 (each re-run green).
+    - THE LANE'S, NAMED (the chair's 04:58 ruling):
+      - presumedThings walker (the 10 fresh hits, P6.4).
+      - factLayers READERS (crimeSignal.js and castPowers.js: the reader's reworded condition).
+      - writerReach x9: the door refuses 16 new dark identities. They are the lane's re-deal moving `weakness` and `proud` onto other
+        NPC ids of the corpus (osr005 to osr015). The only growth door is `--rebank --charter=§NNN`, chair-signed: NOT RUN, THE CHAIR'S.
+        Its 8 stale bank members fold out only with it.
+      - observedShapeReaders "the producers ran" (red at 714381934 too, CARRIED).
+      - pageCensus.walker's grid. The 720 door was NOT RUN by this seat (time box): FOR THE NEXT SEAT.
+    - MOVED WITH THE LANE'S DECLARED GENERATOR MOVES, for the merge seat's re-record (PLAUSIBLE by kind; each one's figure not read):
+      generatorGoldenMaster, heraldKnowledgeDeskGolden, espionageDormancyFence, dmLayerGoldenIsolation, pdf goldenViewModel,
+      editCorpusRatchet A3 A7, pipelinePinnedChoosers A1, pipelinePinnedMode x3, generationForkCensus x2, worldFactRederive A7,
+      editWorldFactResources x2, intentAtlasSoakDistiller, presetLightingWitness, x46NpcBand, rosterFinalUnderHeldRoster,
+      nameHeldThroughAssembly, institutionBudgetPromise, hookThemeDraws, powerEconomyFreshness, tollNamePrintedEverywhere x3,
+      dossierPhoneFloorAllViews x2, mutationCoverageManifest.
+    - THE LANE'S OWN TESTS RED AFTER THE MERGE, NOT CURED: styledTitleOnRows ("expected 9 to be >= 10", a corpus floor) and
+      mintedFaceUnderworld (r2s-succession_void-city-2, "the lord": no underworld payroll line). FOR THE NEXT SEAT, by the lane's way
+      (check at the tip in its own town first).
+- **NEW WORDS for the owner's veto**: none this seat. Every M1 rung is the ladder's own line.
+
+## P6.4 FOR THE DECLARATION PASS (the chair's 04:58 ruling, classes 2 and 3; presumed-things `--check` at the tip: fresh 10, stale 0)
+- src/generators/power/claimStanding.js, "Well-funded city watch; ..." and "City watch; law enforcement ..." (watch).
+  - The gate in code: watchStands (DEFENSE_BUCKET_KEYWORDS.watch on the roster).
+  - The atom: `watch`, already declared on these texts in src/data/powerSiblings.js :: FACTION_DESC_SIBLINGS.
+  - CLASS 2 by shape. The declaring member is in a file this lane does not hold; the cure is to export the two members and read them.
+- claimStanding.js, "Clergy are present but operate at the margins ..." and "The local clergy serve a real pastoral role ..." (clergy).
+  - The gate: the rung is chosen only for a church power's own claim.
+  - The atom: clergy. No new word.
+- claimStanding.js, "Mages and arcane practitioners hold real influence ..." and "Magical practitioners are consulted ..." (practitioner).
+  - The gate: only for the arcane power's own claim.
+- claimStanding.js, the MATCH KEYS "Wizard towers and mage guilds hold genuine political weight ..." (house: wizard's tower, mages'
+  guild) and "Underworld effectively controls vice, smuggling, ..." (house: smuggling).
+  - These are never printed by this file: they are rulingStructure.js's lines, matched to be replaced.
+- src/generators/power/stressFactions.js, WARTIME_SOVEREIGN_MILITARY " Wartime has transformed this power ... Authority flows through
+  military channels now." (war).
+  - The gate: `ke('wartime')`.
+  - It declares `needs: ['crisis: wartime']`, but no draw door reads it.
+- THE THREE ROWS BANKED AGAINST THIS LANE (2m part 3): NOT CURED, still banked, nothing banked by hand.
+  - dmPowerLines.js :: rulingHeadOf "The ruling three of " / "The ruling two of ". Gated by the number of names the block prints, but
+    registeredWords.js's `rulingFaces` has `atoms: []`: there is no atom to declare, and a new one is the vocabulary file's.
+  - rulerKin.js :: BASE_ROSTER_NAMES `FACTION_LABEL_SIBLINGS['Military/Guard'].map((sibling) => sibling.text)`. A set-membership list
+    of every label, not a print; the draw door draws one line. Its form is the declaration pass's.
+- factLayers: the two READERS rises (crimeSignal.js's "thie|criminal guild" test, castPowers.js's crime row): a reader's reworded
+  condition.
+
+## P6.5 FOR THE JOIN (gathered whole)
+- P4.2b as it stands (#312 and ww#656 on the chain leaf; seatKeeperStyledNameOf's call sites in tonightSheet.js and npcComponents.jsx;
+  a house's name through the display leaf in patronage.js, PowerStrata.jsx and allegiance.js).
+- The seat line's doubled title (P5.0, 02:24 UTC): governanceAccount.js `${who} holds the seat of ...`. The title is added only where
+  the name lacks it, through the styled-title leaf.
+- scripts/lib/table-pools.mjs: this lane's ONE row, NOT_TABLE_CHANNELS.TITLE_LINE_DECLARATIONS (d942ff36b). It merged cleanly at 835cce92c.
+- The writer-reach `--rebank` (P6.3): the chair's.
+
+## P6.6 LEFT FOR AFTER THE JOIN (no longer this lane's)
+- THE RAW MODIFIER on the Power tab (P4.8 ww#639 ww#980 pf#1 pf#23; writer rulingStructure.js's modifier key, printed on the Power tab):
+  NOT STARTED, not counted. The ruling for it is in BRIEF-POWERS-12 item 2.
+- L4 (refreshRelationshipProjections styles the role words with no guard; plant `refresh-role`): NOT STARTED.
+- #312 and ww#656 (P5.0): NOT STARTED (step 6, over the count).
+- P4.8's 40 other lines, by file as they stand there. This seat's cures took NONE of them (M1 touches only the five claims; none of the
+  40 is a claim beside Minor or Suppressed).
+- P4.7's rows, as they stand there. The card's title on a man ("the alewife", "the midwife", "the madam"): needs the owner's words.
+- P5.10's rows not reached: item 3's named rows and item 4's lines, as above.
+- The census's carried candidate: rulingStructure.js "... and courts are all ecclesiastical" in a town with no court (r2r-town-8,
+  r2r-town-54, r2s-under_siege-town-0).
+- The page census's 720 door (`node scripts/census/page-census.mjs --workers=2`) at the tip, and the two lane tests red after the merge
+  (styledTitleOnRows, mintedFaceUnderworld).
+
+## P6.7 Hazard log (this seat)
+- `npm ci` wrote `core.hookspath=.husky/_` (kept). The shared config and the refs were compared after every push and the whole suite:
+  unchanged.
+- 05:41-05:51 UTC, A PLANT DURING THE SUITE. A red-first plant (stressFactions.js's sovereign twin off) was put in the merge worktree
+  while the whole suite ran there; the plant's own run waited on the suite's exclusive lock. Shards 2 and 3 of that run read the
+  planted file. Both were killed, the file restored, and shards 2 to 6 run again from b655ef4f7: the first run's shard 2 log is kept
+  as shard.2.contaminated.log and not counted. RECOMMENDATION: never plant in a tree a suite is running in.
+- A worktree with a SYMLINKED node_modules builds edge bundles carrying "../<worktree>/node_modules" paths (P6.2, dd7269149). Build the
+  bundles only in a checkout with its own node_modules.
+- A main-checkout fast-forward (`git merge --ff-only` in /home/user/settlement-engine) was refused by this session's permission check.
+  The seat worked in its scratch worktrees only, and the main checkout stays at ec72918d4.
