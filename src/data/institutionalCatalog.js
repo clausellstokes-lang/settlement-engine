@@ -698,7 +698,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       },
     },
     {
-      shared: { front: 'front', name: 'Sawmill (commercial)', face: 'the sawyer', desc: 'A water- or ox-powered mill producing planks and beams for the construction trade. Employs a permanent crew.', tags: ['trade'], priorityCategory: 'crafts' },
+      shared: { front: 'front', name: 'Sawmill (commercial)', face: 'the sawyer', desc: 'A water- or ox-powered mill producing planks and beams for the construction trade. Employs a permanent crew.', tags: ['trade', 'timber'], priorityCategory: 'crafts' },
       at: {
         village: { name: 'Sawmill', baseChance: 0.35, desc: 'Water- or ox-powered saw. Converts raw logs to planks and beams. Expands construction and furniture output.' },
         town: { baseChance: 0.28, desc: "A water- or ox-powered mill producing planks and beams for the construction trade. A town near timber can supply an entire region's building needs. Employs a permanent crew." },
