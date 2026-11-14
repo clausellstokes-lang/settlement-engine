@@ -1565,10 +1565,13 @@ describe('SEAM car 4 — the three leaves, at their floors', () => {
     expect(META_ROWS.length - keys.length).toBe(unfired);
   });
 
-  it('⛔ RELATIONS: 165 rows with a direction, three ratified aliases, and a join of ZERO', () => {
-    expect(Object.keys(DOSSIER_RELATIONS).length).toBe(165);
+  // 165 → 169 at THE JOIN (JOIN-2, 2026-11-14): the defence lane's fundedGate and upkeep relations on the economicGates rows of
+  // src/generators/defenseGenerator.js (coherence-upkeep 94c5d408f..83883baaa), re-projected by the generator at the joined tree
+  // (that lane never regenerated the leaf); measured, re-keyed by identity.
+  it('⛔ RELATIONS: 169 rows with a direction, three ratified aliases, and a join of ZERO', () => {
+    expect(Object.keys(DOSSIER_RELATIONS).length).toBe(169);
     const rows = Object.values(DOSSIER_RELATIONS).flat();
-    expect(rows.length).toBe(165);
+    expect(rows.length).toBe(169);
     const directions = new Set(rows.map((r) => r.direction));
     expect([...directions]).toEqual(['a→b']);
     expect([...new Set(rows.map((r) => r.relation))]).toEqual(['consequence']);
@@ -1596,7 +1599,9 @@ describe('SEAM car 4 — the three leaves, at their floors', () => {
     // Non-vacuity: the resolver CAN resolve — ten rows join on exactly one endpoint.
     const half = Object.keys(DOSSIER_RELATIONS)
       .filter((key) => key.split('|').some((endpoint) => resolves(endpoint))).length;
-    expect(half).toBe(10);
+    // 10 → 11 at THE JOIN (JOIN-2, 2026-11-14): the defence lane's re-keyed relations put two keys on the aliased endpoint
+    // economicGates.military (fundedGate| and upkeep|) where the line had one (econOutput|); measured at the joined tree.
+    expect(half).toBe(11);
     expect(deskRoots.size).toBeGreaterThanOrEqual(60);
   });
 
@@ -2231,7 +2236,7 @@ describe('SEAM car 4d — the seat licence, computed where the census is visible
     const lands = (endpoint) => readPaths.some((p) => endpointReads(endpoint, p, ALIAS_OF));
     const joining = CENSUS.relations.rows.filter((r) => lands(r.a) && lands(r.b));
     const oneSide = CENSUS.relations.rows.filter((r) => lands(r.a) !== lands(r.b));
-    expect(CENSUS.relations.rows).toHaveLength(165);
+    expect(CENSUS.relations.rows).toHaveLength(169); // 165 → 169 at the join: the defence lane's relations (above)
     expect(joining, 'no row joins on both endpoints').toEqual([]);
     // THE NON-VACUITY CONTROL: the walk is not simply blind — rows DO land on one side.
     expect(oneSide.length, 'rows landing on exactly one endpoint').toBeGreaterThan(0);
