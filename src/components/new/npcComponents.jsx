@@ -438,7 +438,9 @@ export function NPCInlineCard({
           )}
           {publicTraits.length > 0 && (
             <div style={{display:'flex',gap:4,flexWrap:'wrap',marginBottom:6,marginTop:6}}>
-              {publicTraits.map((t,i) => <span key={`${t.key}-${i}`} title={t.value} style={{fontSize:chromeFontSize(FS.xxs, mobile),color:swatch.inkMag3,background:swatch['#EDE3CC'],padding:'0 5px'}}>{t.label}: {t.value}</span>)}
+              {/* R2-CODE-B-5 (the third seat's note: "Flaw: vainTemperament: clever"): two chips are two things; a space the
+                  copied text keeps between them. A whitespace text node between flex items does not move the layout. */}
+              {publicTraits.map((t,i) => <Fragment key={`${t.key}-${i}`}>{i > 0 && ' '}<span title={t.value} style={{fontSize:chromeFontSize(FS.xxs, mobile),color:swatch.inkMag3,background:swatch['#EDE3CC'],padding:'0 5px'}}>{t.label}: {t.value}</span></Fragment>)}
             </div>
           )}
           {(allegiance || npc.ousted) && (

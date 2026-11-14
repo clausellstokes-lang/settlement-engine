@@ -5,9 +5,11 @@
  *
  *   HEADER — the NPCs tab's tally prints "1 high influence" alone, never "1 high influence ·" with nothing after it
  *            (the increment's rpf-hamlet-succession_void-13).
+ *   CHIPS  — the card's trait chips are two things: the copied text keeps a space between them ("Flaw: vain
+ *            Temperament: clever", never "Flaw: vainTemperament: clever"; the third seat's note).
  */
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
-import { cleanup, render } from '@testing-library/react';
+import { cleanup, fireEvent, render } from '@testing-library/react';
 
 vi.mock('../../src/lib/saves.js', () => ({
   saves: { update: vi.fn(() => Promise.resolve()), isConfigured: false },
@@ -16,6 +18,7 @@ vi.mock('../../src/lib/saves.js', () => ({
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { useStore } from '../../src/store/index.js';
 import { NPCsTab } from '../../src/components/new/tabs/NPCsTab.jsx';
+import { NPCInlineCard } from '../../src/components/new/npcComponents.jsx';
 
 const townOf = (npcs) => ({
   id: 'town-1',
@@ -52,3 +55,20 @@ describe('HEADER — the tally\'s separator stands only between two counts', () 
   });
 });
 
+describe('CHIPS — two trait chips are two things', () => {
+  const openCard = (npc) => {
+    const { container } = render(<NPCInlineCard npc={npc} pinnedIds={new Set()} />);
+    fireEvent.click(container.querySelector('button[aria-expanded]'));
+    return container.textContent;
+  };
+  test('a flaw and a temperament: a space the copied text keeps between them', () => {
+    const text = openCard({ id: 'npc_0', name: 'Alda Reeve', role: 'reeve', influence: 'low', personality: { flaw: 'vain', dominant: 'clever' } });
+    expect(text).toContain('Flaw: vain Temperament: clever');
+    expectAbsentWithAnchor(text, 'vainTemperament', 'Flaw: vain', 'two chips run together');
+  });
+  test('one chip: no space added before it', () => {
+    const text = openCard({ id: 'npc_1', name: 'Bran Smith', role: 'smith', influence: 'low', personality: { flaw: 'proud' } });
+    expect(text).toContain('Flaw: proud');
+    expectAbsentWithAnchor(text, ' Flaw: proud', 'Flaw: proud', 'a space before the first chip');
+  });
+});
