@@ -369,7 +369,8 @@ function defensePage(vm) {
     kv('Safety', d.safetyLabel),
     d.militaryStress ? kv('Military status', d.militaryStress.label || humanize(d.militaryStress.type)) : null,
     forces.length ? md('', '## Armed forces', forces.map(f =>
-      bullet(typeof f === 'string' ? institutionHouseLabel(f) : `${institutionHouseLabel(f.name || '')}${f.desc ? `: ${f.desc}` : ''}${f.source ? ` (${f.source})` : ''}`)) ) : null,
+      // EXPORTS-B24 · B4: no provenance bracket ("(required)", "(generated)"…): the generator's key is not a fact of the town; the PDF's force row prints none.
+      bullet(typeof f === 'string' ? institutionHouseLabel(f) : `${institutionHouseLabel(f.name || '')}${f.desc ? `: ${f.desc}` : ''}`)) ) : null,
     (d.criminalOps || []).length ? md('', '## Criminal operations', d.criminalOps.map(o =>
       `- **${esc(o.name)}**${o.note ? `: ${esc(o.note)}` : ''}`)) : null,
     (d.vulnerabilities || []).length ? md('', '## Vulnerabilities',
