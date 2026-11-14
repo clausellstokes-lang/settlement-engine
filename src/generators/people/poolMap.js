@@ -378,7 +378,7 @@ export function titleLinesFor(title) {
  * A TITLE LINE THE TOWN MAKES FALSE, RESOLVED DRAW-FREE (COHERENCE-POWERS-7; the cold list REVIEW-W2A-3 #478 #488 #489 #534
  * #719 #1026 #1071): after the face's secret and presentation are drawn from its title's own lines, a line its declaration
  * refuses (data/people/titleSecretsPresentations.js :: TITLE_LINE_DECLARATIONS: a water the town lacks, a content topic its
- * settings forbid) takes the title's NEXT admitted line in the table's order, wrapping round; a secret skips a line the
+ * settings forbid, a crisis in force that makes the line false, POWERS-14) takes the title's NEXT admitted line in the table's order, wrapping round; a secret skips a line the
  * roster already holds. No draw is added or moved: the draw has happened. A card whose every line is refused keeps its
  * own (none is: each title keeps an admitted line in every case). Mutates the card; returns it.
  * @template {{ secret?: { what?: string, stakes?: string } | null, presentation?: Record<string, unknown> | null }} C
@@ -389,9 +389,9 @@ export function titleLinesFor(title) {
 export function settleTitleLines(card, title, town) {
   const lines = titleLinesFor(title);
   if (!lines || !card) return card;
-  const admits = (/** @type {Readonly<{ needs?: readonly string[], topic?: string | readonly string[] }> | undefined} */ d) => !d
+  const admits = (/** @type {Readonly<{ needs?: readonly string[], excludes?: readonly string[], topic?: string | readonly string[] }> | undefined} */ d) => !d
     || ((/** @type {readonly string[]} */ ([])).concat(d.topic || []).every((t) => town.boundaries?.[t] === true)
-      && declarationAdmits(declarationOf({ needs: d.needs || [] }), town.facts).admitted);
+      && declarationAdmits(declarationOf({ needs: d.needs || [], excludes: d.excludes || [] }), town.facts).admitted);
   const nextAdmitted = (/** @type {readonly any[]} */ rows, /** @type {number} */ at, /** @type {(r: any) => string} */ keyOf, /** @type {Record<string, any>} */ table, /** @type {(r: any) => boolean} */ free) => {
     for (let k = 1; k < rows.length; k += 1) { const r = rows[(at + k) % rows.length]; if (admits(table[keyOf(r)]) && free(r)) return r; }
     return null;
