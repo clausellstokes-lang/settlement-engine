@@ -2273,6 +2273,49 @@ READERS['REVIEW-UPKEEP-MONOTONE'] = dict(
 )
 
 
+READERS['REVIEW-R3-TABS-3'] = dict(
+    at="where the lane's fifth seat handed back with nothing left of its assignment",
+    mark='300,000',
+    title="REVIEW-R3-TABS-3 · round three's tabs lane: the fifth seat's cures read cold (a short stage: three display cures, three pins re-keyed, two censuses)",
+    lane='lane/r3-tabs-2026-11-13', own='lane/review-r3-tabs-3-2026-11-14', base='30157258', tip='68e9e97b',
+    what="round three's tabs lane: cures at display on the Defense, History, Substrate and Magic tabs; the lane moves no record",
+    before=("the tip the second reader read: NOT CLEAR there on two findings (R1: an \"adequate\" posture line under an occupation; R2: registers not "
+            "re-derived) with rows beside them; a fifth seat answered each under the chair's rulings and says nothing of its assignment is left: "
+            "check each cured AND what prints in its place true"),
+    stmt='docs/chair/2026-11-13/R3-TABS-HANDBACK.md (ONLY the part headed THE FIFTH SEAT: from that line to the end, about a hundred lines)',
+    tools=("`origin/lane/review-r3-tabs-2-2026-11-14` (fb29b5a97: `git fetch origin lane/review-r3-tabs-2-2026-11-14`): "
+           "docs/chair/2026-11-14/REVIEW-R3-TABS-2-2026-11-14.md (the second read: its \"Findings, ranked\", each of which you check cured; its step "
+           "4's plants; what it did not measure) and its probes under docs/chair/2026-11-14/probes/REVIEW-R3-TABS-2/ with the first reader's under "
+           "docs/chair/2026-11-14/probes/REVIEW-R3-TABS/ on origin/lane/review-r3-tabs-2026-11-14 (births.mjs with seeds1536.txt, render.sh, "
+           "desk.mjs, deskdiff.mjs, fielddiff.mjs, plants.py, pagecheck.mjs): copy them out with git archive and run them from outside every "
+           "repository tree: the SAME 1,536 births make your counts comparable with both reads. These files are READERS', not the lane's: you "
+           "may open them at once."),
+    extra=("8. THIS IS A SHORT STAGE, AND YOUR READ IS SIZED TO IT: `git diff --stat 30157258..68e9e97b -- src/` is two files "
+           "(src/components/new/tabs/DefenseTab.jsx; src/domain/display/stateProse/defenseStateProse.js). The steps the earlier readers ran on "
+           "the lane's whole stage STAND: you do not repeat them. YOURS, on 30157258..68e9e97b only: (i) every line that now prints in a new "
+           "town, and EVERY SILENCE, read where it prints: the force card's house label (14 towns: \"Town gates\"); the posture row SILENT under "
+           "an occupation (64 towns: the adequate 12, the weak 32, the critical 20); the Invasion row's sentence SILENT beside its own Critical "
+           "band (7 towns). A CURE BY SILENCE IS READ TOO: for the 52 weak and critical posture lines the cure silenced under an occupation, and "
+           "for the one line the seat itself declares TRUE AND LOST (r2s-succession_void-town-0): was each line false there, or was a true "
+           "line lost? Say how many true lines the two silences take, and whether a narrower condition would have kept them without keeping a "
+           "false one. (ii) The counts the seat states, re-taken by your own run on the 1,536 (14 to 0; 64 to 0; 6 to 0), and a sweep of the "
+           "Defense, History and Foundations pages for any bracketed catalogue name it left (it names \"Major monasteries (5-10)\" in 12 "
+           "metropolises and one History tension for other lanes: confirm those are in files this lane does not hold). (iii) A plant for each "
+           "guard the seat added or changed (the force card's label; the occupation arm; the Critical-band arm; the 'no walls' made record): "
+           "does each red on its own fault and only on it? (iv) THE THREE PINS RE-KEYED (the provenance file's by-name pin; Ingili's ADEQUATE pin "
+           "to silence; the militia keeper to rr3-thorp-famine-rand-0) AND the alias draft's count 39 to 42: each re-keyed BY IDENTITY with its "
+           "cause, or LOOSENED? Read each diff. (v) The registers the seat took through their doors (the wiring census; the lighting census, "
+           "five times): re-derive each by its own door at the tip: no row by hand. (vi) The three gates by your own run at the tip. 9. THE "
+           "CHAIR'S RULINGS THE SEAT WORKED TO (judge the cure against them; say where you would rule differently): UNDER AN OCCUPATION THE "
+           "POSTURE ROW IS SILENT; A LINE CLAIMS NO VERDICT THAT A BAND ON ITS OWN PAGE CAN DENY (the Invasion row beside Critical); NO SURFACE "
+           "PRINTS A CATALOGUE NAME'S BRACKET. 10. ONE THING MORE, MEASURE ONLY: the defence rating is being rebuilt on a side branch "
+           "(origin/lane/upkeep-monotone-2026-11-14), and its reader found a thorp's Invasion chip Critical beside \"would see off a raid\" in "
+           "12 births of its 972: the seat's cure (h) is meant to answer it once both land. Do NOT merge anything: say only, by reading the "
+           "cure's key, whether it reads the band the chip prints (so that it follows a moved band without a change), or a stored value that "
+           "the rebuild would leave behind."),
+)
+
+
 SEATS2['R2-CODE-B-7'] = dict(
     title="R2-CODE-B-7 · round two's second code lane: the line's merge and the final statement",
     branch='lane/r2-code-b-2026-11-13', tip='c40da4ec', statement=True,
