@@ -391,3 +391,30 @@ The patch (apply on 87c541620 with `git apply docs/chair/2026-11-13/R2-CODE-B-3-
 - A page render: census2.sh with `--seeds <the 800> --count-only` (~11 min on 4 cores); the corpus is <out>/corpus.ndjson.gz, the dumps <out>/dumps/<seed>.txt, one block line per row under `== Group/Tab ==`.
 - A record count: a node script importing the tree's own module by absolute path over the corpus (as the commit bodies of 2e905f036..e06c1a429 describe each count).
 - The golden hash identity: run the tree's tests/helpers/goldenMasterCorpus.js configs through generateSettlementPipeline in both trees (a vitest config outside the tree whose `include` names the script) and diff the sha256 per keyOf(config).
+
+# PART 6 — R2-CODE-B-6, the sixth seat (step 0; what PART 5 leaves; the final statement)
+
+**Seat:** R2-CODE-B-6 (session_01ACmDYXHSyAUotEDbwYB3M6); **the chair:** session_01ACmDYZrFEVXyZEUg1NDxxC. **Tip read back from origin at start:** 083dabdd2, not the brief's 14be74cfc. Stopped and told the chair. The chair's word: the fifth seat went on by the chair's own doing and has ended; START FROM c962f8c28 (read back: 14be74cfc, the merge 083dabdd2, the lighting census dc718a8e5, the hand-back c962f8c28); never rewrite a commit at or below it; the side branch's merge is DONE.
+
+## The brief's rulings, copied (docs/chair/2026-11-14/briefs/BRIEF-R2-CODE-B-6.md on lane/chair-2026-11-08)
+- STEP 0, ruled now: the wartime LOSS text's "Supply caravans pass through on crown requisition" in the isolated wartime towns. The cure is a declared twin off an isolated route, true of the town, or the clause left out; a DECLARED MOVE of the stored summary only (with counts); a guard town.
+- Then PART 5's rows (the chair's message of 02:29 UTC, exactly): row 1 (a) the raw-colour budget and (b) the phone chrome floor routes re-read at the merged tip, each through its own door if it reds; (c) the dossier phone floors confirmed; (d) the quick guide's food line onto tonightSheet.js :: foodBandOf. Row 2: CENSUS-2 once on the merged tree over both seats' files at the lane's base and at the tip; the 720 field diff by family. Row 3: one message, WAIT FOR POINT 49, then the line's merge, the page census, THE ONE FINAL STATEMENT.
+- FOR THE JOIN names, not built: the side seat's stops (the fair's act and the Traditions tab's ELEMENT_NEEDS; the PDF's Traditions chapter; the chain card's items 1 and 2); THE STORES' SPAN'S TWO HOMES (storesSpanWords / defenseDisplay.js :: monthsInWords: one home at the join, measured on the 720 first); the wartime summary's one path through the data lane's rerenderStressSummary; the Power tab's seat line that prints a title twice (governanceAccount.js: the powers lane's).
+- THE COUNT: after every pushed item, a send_later COUNT CHECK and end the turn; hand back at 400,000.
+
+## Items (this seat)
+| item | commit | measured (the 800: CENSUS-2's 720 + the readers' 80, births by CENSUS-2's births.mjs) |
+|---|---|---|
+| 0 no caravans through an isolated place at war | b47ba9262 | caravans strings 62 in 31 towns, isolated 8 in 4 (r2s-wartime-thorp-1, -2, -3, -hamlet-3) -> 54 in 27, isolated 0. The clause is LEFT OUT (no sentence is true there in its place). DECLARED MOVE: 4 towns, 8 leaves, `stress.summary` / `stressors.summary` only. The generator golden's 525 hashes are byte-identical with and without it. Red first 2/22 -> 22/22. |
+| register: the lighting census | 922dadd7f | titles 29321 -> 29325, suiteTitles 7941 -> 7942 (item 0's four titles); verified 34/34 |
+
+## Stops and parked items (with recommendation)
+- NAMED, NOT CURED (not this row): the wartime price line's CENSUS-2d twin "The army has the carts and the road, and the fields are short of hands." prints in two isolated thorps (r2s-wartime-thorp-1, -thorp-3), where "the road" presumes a route. RECOMMENDATION: that twin takes `excludes: ['route: isolated']` with a sibling true of an isolated place, or the crisis lane's ruling.
+
+## Rows NOT reached (line by line; kept current)
+1. Row 1 (a)-(d) as the chair's message gives it (above); then ONE message to the chair with the tip.
+2. Row 2: CENSUS-2 at e969a75b7 and at the tip over both seats' files; the 720 field diff by family.
+3. Row 3: one message, WAIT FOR POINT 49; the line's merge, the page census, THE ONE FINAL STATEMENT.
+
+## Instruments (outside the tree; lost with the container; re-made as PART 5 says)
+- /home/user/b6: seeds800.txt; births-base (c962f8c28's code = 083dabdd2's) and births-i0 (item 0) corpora; m/war.mjs (caravans strings by route), m/fdiff.mjs (leaf diff by family and path), m/ghash.mjs (the golden's 525 hashes in a tree, read only).
