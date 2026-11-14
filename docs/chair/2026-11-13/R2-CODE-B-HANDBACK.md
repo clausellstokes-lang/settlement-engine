@@ -318,3 +318,53 @@ The patch (apply on 87c541620 with `git apply docs/chair/2026-11-13/R2-CODE-B-3-
 3. The lighting census re-freeze (own commit).
 4. CENSUS-2 at the tip and at 62e30c7e7 over the lane's files.
 5. The message to the chair; then, on the chair's word, the merge, the quick guide's food line, THE FINAL STATEMENT.
+
+
+# PART 5 — R2-CODE-B-5, the fifth seat (both branches: the rows left, the side branch's merge, the final statement)
+
+**Seat:** R2-CODE-B-5 (session_01ACmDYWXYWK8GnFZ2AehCjo), on the new account; **the chair:** session_01ACmDYZrFEVXyZEUg1NDxxC. Every earlier session is ended. **Tip read back from origin at start:** 5063298a2 (as the brief gave it). Scratch worktree on a local branch; frozen worktrees at 5063298a2, 0570b3441 and each measured tip; plain pushes with the explicit refspec. **First act:** the four commits after db61f66fc read against PART 4 and their bodies: no stop and no question put to the old chair without its ruling copied in; so no first message was sent.
+
+## The brief's rulings, copied (docs/chair/2026-11-14/briefs/BRIEF-R2-CODE-B-5.md on lane/chair-2026-11-08)
+- The predecessor's brief (BRIEF-R2-CODE-B-4) binds as written, with these changes: THERE IS NO SIDE SEAT: this seat takes both branches. Never rewrite a commit at or below 5063298a2.
+- THE WORK: (1) what PART 4 leaves (the two small tabs; the trait chips apart; the page re-count; the lighting census); (2) THE CHAIR'S WORD FOR THE SIDE BRANCH IS GIVEN: merge origin/lane/r2-code-b-side-2026-11-13 at 5975515ad (plain; say what conflicted); re-make through their own doors the raw-colour budget, the phone chrome floor routes, the dossier phone floors and the lighting census; then the quick guide's food line onto tonightSheet.js :: foodBandOf; (3) the measuring seat's command ONCE on the merged tree over both seats' files at the lane's base and at the tip, every hit read, cured or named; the 720 field diff base against tip by family; (4) one message to the chair and WAIT FOR POINT 49 (the chair names the line's tip); then the merge of the line's tip, the instrument's page census on this lane's lines, THE ONE FINAL STATEMENT (the whole suite once, six vitest shards). The side seat's stops (the fair's act; the PDF's Traditions chapter; items 1 and 2 at the join) are NAMED under FOR THE JOIN, not built.
+- THE COUNT: at each turn's end, and after about two hours, with nothing running and everything pushed: a send_later COUNT CHECK, then end the turn; at or over 350,000 tokens, hand back. End the turn after steps 1, 2, 3 and the final statement.
+- LONG RUNS to files outside every tree; never end a turn while a needed run is in flight; the whole suite in six shards, a killed shard re-run alone.
+- NEVER: a push to any other branch, `--no-verify`, a force push, an empty push, a pull request, master, a golden's door in its writing mode, a deploy, a hosted database or production credentials.
+
+## The chair's rulings received by this seat (notifications)
+- 01:30 UTC: ONE ROW ADDED to step 1, from the defence lane's hand-back (its eighth seat): tonightSheet.js :: foodStoresWords "a few weeks in the larder" under ten days (101 births by that lane's count). RULED, item 2a's law: the stores' span in words contains its figure; measure first on the 720; red first, one commit; days said as days. Read the defence lane's endurance-line span words (defenseDisplay.js, on that lane) only to say under FOR THE JOIN whether the two homes should become one; do not touch that file.
+
+## Instruments (outside the tree; lost with the container)
+- /home/user/seeds800.txt (CENSUS-2's seeds.txt + seeds.readers.txt); CENSUS-2's census2.sh `--count-only` renders: /home/user/r-t0 (5063298a2), /home/user/r-tb (0570b3441), /home/user/r-t1 (e2c446851).
+- /home/user/m: q2.mjs (dmPowerViewOf's rows and the NPCs tally over the records), q3.mjs (every Tonight stores span against its months), pc.mjs / pc2.mjs (the page forms of items 3-5, lines and towns, with the empty-seat condition from people/seatKeeper.js).
+
+## Items (this seat)
+| item | commit | measured (800 = census's 720 + readers' 80, app shape; page dumps at 5063298a2) |
+|---|---|---|
+| 5 NPCsTab: the tally's separator only between two counts | 2e905f036 | "1 high influence ·" dangling: 85 towns (thorp 9, hamlet 51, village 8, town 15, city 2) -> 0 |
+| 5 RelationshipsTab | none needed | rpf-thorp-calm-13 prints "No neighbours or ties between people are recorded …" beside its recorded tension (the first seat's cure reaches it); the full line, denying conflicts: 0 of 800 |
+| 5 the trait chips apart | 846f2bcef | two chips run together in the copied text: 9,279 card lines in 693 towns -> 0 |
+| the chair's added row: the DM view's title twice, page and PDF | af8045386 | 10 rows in 10 towns (ruling three 4, handler 2, agent 4; 14 page lines) -> 0; a title the name lacks still prints |
+| fix-forward: the fourth seat's ruling-(c) negative anchored | 81be8a6b1 | negativeAssertionAnchor.walker red at 5063298a2 on crisisCastSeatAndAccess.test.js (1 bare not.toMatch) -> green |
+| the chair's added row: the Tonight stores' span under ten days | none needed | MEASURED at 5063298a2 over the 800 records (q3.mjs): 800 stores lines; "a few weeks" 0; 36 under ten days, all said in days ("about N days"); every span contains its figure (764 months, 36 days). The defence lane's 101 were counted on its own tree, whose tonightSheet.js predates this lane's aaf314475 (the span's one home) and f719dbb38 (item 2a). No red to make: no commit. |
+| the lighting census re-frozen through its door | e2c446851 | 3239 -> 3244 files (tonightOwnGoal, storesSpanFigure, npcCardAllegianceHandler, crisisCastSeatAndAccess, peopleRowsApart); 34/34 green |
+
+## FOR THE JOIN (this seat)
+- THE STORES' SPAN HAS TWO HOMES that disagree on one figure: this lane's `tonightSheet.js :: storesSpanWords` ("about N days" to ten days, "about N weeks", months to the half below three: "about a month and a half") and the defence lane's `defenseDisplay.js :: monthsInWords` on lane/coherence-upkeep-2026-11-12 ("a day or two", "a few days", "a week or two", "a few weeks" to 31 days, "about a month" to six weeks, then the nearest whole month: 1.5 months reads "about two months", the words item 2a ruled false). RECOMMENDATION: ONE HOME at the join: the endurance line's span reads `storesSpanWords` (its own comment already names that switch as owed); the join seat measures both on the 720 first. On this lane's tree the Defence tab's older monthsInWords prints "a few weeks" in 36 towns (the defence lane's file; cured on its lane).
+
+## THE PAGE RE-COUNT (items 3 to 5 of the third, fourth and fifth seats; one render each of the 800 by CENSUS-2's own census2.sh `--count-only`, exit 0, 800 dumps, at 0570b3441 (the third seat's base) and at the frozen tip e2c446851; pc2.mjs)
+| form (page, lines / towns) | 0570b3441 | e2c446851 |
+|---|---|---|
+| i3 the allegiance badge run into its line | 830 / 236 | 0 / 0 |
+| i3 a conflict's pill run into its parties | 630 / 381 | 0 / 0 |
+| i3 allegiance lines naming a go-between (the 274 dropped are the other house's handlers; 556 keep their own house's) | 830 / 236 | 556 / 188 |
+| i4 "whoever holds the seat" where the seat is EMPTY (people/seatKeeper.js :: isSeatVacant; 40 such towns) | 48 / 25 | 0 / 0 |
+| i4 the same words where the seat is held (true; kept) | 210 / 99 | 210 / 99 |
+| i4 an "Access to …" row as a lever | 57 / 53 | 0 / 0 |
+| i4 "holds what the crisis makes scarce" | 14 / 14 | 0 / 0 |
+| i5 the NPCs tally's dangling separator | 85 / 85 | 0 / 0 |
+| i5 two trait chips run together | 9,279 / 693 | 0 / 0 |
+| i5 the DM view's title twice | 14 / 10 | 4 / 2 (below) |
+| i5 the Relationships line denying conflicts | 0 / 0 | 0 / 0 |
+- NAMED, NOT CURED (not this lane's file): the 4 lines left of "a title twice" are the Power tab's SEAT line, not the DM view: "The seat Vachir Merv (the senior guild master), the senior guild master and Alderman" and "… holds the seat of the Guild Council" (r2r-town-50; r2s-monster_pressure-metropolis-2 "Rania ibn Hajar (the dean), the dean and Lord Protector of the Faith"), composed by src/domain/display/governanceAccount.js (`${who} holds the seat of …`) and the seat head on the Power tab. A minted face's stored name carries its title; the same rule (add the title only where the name lacks it) is the switch. RECOMMENDATION: the powers lane, or the seat after the merges.
+- Limits: the page only (CENSUS-2's render; no PDF, Foundry or Tonight). The PDF twin of the DM view is proven by its test (the same rule, the same rows).
