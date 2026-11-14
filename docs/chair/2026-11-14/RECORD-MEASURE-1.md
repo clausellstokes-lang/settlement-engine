@@ -85,9 +85,24 @@ titles, relationships, the crisis cast, the pressure sentence). The hired-house 
 **h · land (167) instead of a fifth cure.** Named in the brief's spirit ("cannot be so"): it can be so, by the row's own
 text. The strict desert/mountain 37 are the chair's.
 
-## WHAT THE PAGE GAINS AND LOSES (the AFTER census: C1-A + C2-A + FA + DA together)
+## WHAT THE PAGE GAINS AND LOSES (the AFTER census: C1-A + C2-A + FA + DA together, `census3.sh` exit 0)
 
-(filled from `inventory_diff.py` on the BEFORE and AFTER runs; see the section below)
+`inventory_diff.py` BEFORE → AFTER (whole output: `probes/RECORD-MEASURE-1/AFTER.inventory_diff.txt`): distinct
+sentences 29,939 → 29,876. 124 gone, 61 new, 227 in fewer towns, 306 in more, 93 moved. By class, on the AFTER pages
+(`pageprint.mjs`): **a printed 154 → 0; c2 302 → 0; c1 452 → 403; c3 52 → 12; d 153 → 123**. Every other class is
+unchanged (b 16/12, f 24, g 60, h 167, i 106, j 367; k 246 → 245).
+- **Lost (DA):** "Governed by Headman's Authority" and its family drop from 70 to 32 towns. The headman's seat line, the
+  power card, the succession and temper sentences and the "Headman's Authority vs Military/Guard" tensions all go.
+- **Gained (DA's inheritors):** the same sentences under "Elder Council", e.g. "Elder Council vs Military/Guard" (3),
+  "The power Elder Council (dominant) armed backing" (4). The power keeps its armed-backing line under the new name, so
+  a military-minded thorp now reads as an Elder Council with armed backing. That is not false, but it is the new shape
+  a reader meets.
+- **FA:** "Origin: was built where two rival mining operations agreed…" leaves 11 towns. The inheritors are rows of the
+  town's own pool: the pass guides (+18, all mountain towns), the soil (+15, all with a crop resource), the overland
+  route (+11). 48 towns print no Origin line.
+- **C1-A / C2-A:** the made list prints as pills, which the inventory folds into the neighbouring token ("water dates" →
+  "dates", 4 towns). The class counts above are their measure.
+
 
 ## WHAT IT COSTS ELSEWHERE (eleven focused files run in the AFTER tree; NAMED, nothing re-taken)
 

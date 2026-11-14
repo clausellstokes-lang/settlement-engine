@@ -1,0 +1,79 @@
+sentences: before 29939 after 29876 · gone 124 · new 61 · in fewer towns 227 · in more towns 306 · moved 93
+ GONE (widest):
+     11 ->    0  Origin:was built where # rival mining operations agreed to share infrastructure
+      5 ->    0  The powerHeadman's Authority (strong)armed backing
+      4 ->    0  The powerHeadman's Authority (dominant)armed backing
+      4 ->    0  The question of who might replace the Headman's Authority at <N> does not come up, because there is nobody the thorp would name if it did.
+      4 ->    0  waterdates
+      3 ->    0  The Headman's Authority at <N> watches the thorp's temper closely: what it fears is the thorp turning on it.
+      3 ->    0  People at <N> grumble, but nobody in the thorp stands ready to lead them, so Headman's Authority is safe in the hall.
+      3 ->    0  At <N> the thorp's business goes to the whole Headman's Authority, and everybody has learned how long the answer takes.
+      3 ->    0  Headman's Authority vs Military/GuardModerate
+      3 ->    0  Headman's Authority vs Military/Guard
+      3 ->    0  Moderate tension Headman's Authority vs Military/Guard
+      3 ->    0  Headman's Authority×Military/Guardescalating
+ IN FEWER TOWNS (largest loss):
+     70 ->   32  Governed by Headman's Authority
+     70 ->   32  BacksHeadman's Authority
+     70 ->   32  Headman's Authority
+     71 ->   33  A headman settles disputes and gives the orders here.
+     70 ->   32  Nobody at the head of Headman's Authority answers to a criminal house, and no criminal power here is strong enough to push it.
+     70 ->   32  Headman's Authority (#)▲
+     60 ->   27  Headman, first of Headman's Authority
+     63 ->   30  Headman
+     54 ->   26  The Headman's Authority governs <N>.
+     45 ->   21  The ruling # of Headman's Authority
+     45 ->   21  second of Headman's Authority
+     42 ->   19  Headman's Authority loses
+ NEW (widest):
+      0 ->    4  The powerElder Council (dominant)armed backing
+      0 ->    4  The powerElder Council (significant)armed backing
+      0 ->    4  dates
+      0 ->    3  Elder Council vs Military/GuardModerate
+      0 ->    3  Elder Council vs Military/Guard
+      0 ->    3  Moderate tension Elder Council vs Military/Guard
+      0 ->    2  <N> serves Elder Council and The Guard at once.
+      0 ->    2  <N>, second in Elder Council, also holds a # share in The Guard, and that lends The Guard weight it would not have on its own.
+      0 ->    2  Word came into <N> # days ago that the relief column had turned back; <N>, the Elder, has not made it public, and the effort of not making it public is beginning to show.
+      0 ->    2  The powerElder Council (strong)armed backing
+      0 ->    2  The powerElder Council (minor)armed backing
+      0 ->    2  Every capable pair of hands <N> could spare, and several it could not, has gone to the war; what remains is losing people and resources by attrition (a trade left without
+ IN MORE TOWNS (largest gain):
+    132 ->  170  Governed by Elder Council
+    132 ->  170  BacksElder Council
+    132 ->  170  Elder Council
+    128 ->  166  Nobody at the head of Elder Council answers to a criminal house, and no criminal power here is strong enough to push it.
+    132 ->  170  Elder Council (#)▲
+    108 ->  146  The oldest heads of the community decide things together; people follow them out of respect and custom, not law.
+    104 ->  137  Elder, first of Elder Council
+    158 ->  191  Elder
+     87 ->  115  The Elder Council governs <N>.
+     65 ->   89  The ruling # of Elder Council
+     65 ->   89  second of Elder Council
+     72 ->   95  Elder Council loses
+ THE INHERITORS (print now, and did not, in a town that lost a sentence): 459 sentences
+   + 38 towns (e.g. r2r-hamlet-12)  Governed by Elder Council
+   + 38 towns (e.g. r2r-hamlet-12)  BacksElder Council
+   + 38 towns (e.g. r2r-hamlet-12)  Elder Council
+   + 38 towns (e.g. r2r-hamlet-12)  Nobody at the head of Elder Council answers to a criminal house, and no criminal power here is strong enough to push it.
+   + 38 towns (e.g. r2r-hamlet-12)  Elder Council (#)▲
+   + 38 towns (e.g. r2r-hamlet-12)  The oldest heads of the community decide things together; people follow them out of respect and custom, not law.
+   + 33 towns (e.g. r2r-hamlet-12)  Elder, first of Elder Council
+   + 33 towns (e.g. r2r-hamlet-12)  Elder
+   + 28 towns (e.g. r2r-hamlet-12)  The Elder Council governs <N>.
+   + 24 towns (e.g. r2r-hamlet-12)  The ruling # of Elder Council
+   + 24 towns (e.g. r2r-hamlet-12)  second of Elder Council
+   + 23 towns (e.g. r2r-hamlet-35)  Elder Council loses
+   + 18 towns (e.g. r2r-city-54)  Origin:grew because the pass could only be crossed safely with local guides
+   + 18 towns (e.g. r2r-hamlet-12)  # of Elder Council
+   + 17 towns (e.g. r2r-hamlet-35)  Few in <N> still accept the Elder Council's right to rule.
+   + 15 towns (e.g. r2r-hamlet-0)  Origin:grew because the local soil produces something that cannot easily be grown elsewhere
+   + 14 towns (e.g. r2r-hamlet-13)  Connection: Elder <N>, the boat-headman
+   + 14 towns (e.g. r2r-hamlet-13)  The seat<N>, the boat-headman and Elder
+   + 14 towns (e.g. r2r-hamlet-13)  Who leads Elder Council
+   + 14 towns (e.g. r2r-hamlet-12)  The Elder Council at <N> has left obvious decisions untaken because its members cannot agree on them.
+   + 13 towns (e.g. r2r-hamlet-18)  member of Elder Council
+   + 12 towns (e.g. r2r-hamlet-12)  The powerElder Council (dominant)
+   + 11 towns (e.g. r2r-hamlet-20)  Origin:grew along a major overland trade route
+   + 11 towns (e.g. r2r-hamlet-18)  <N> is no longer sure the hall belongs to Elder Council, and Elder Council governs as though it is not sure either.
+   + 10 towns (e.g. r2r-hamlet-18)  <N> is governed by the Elder Council.
