@@ -43,3 +43,69 @@ measured further here (it is not one of this seat's blocks). The writers' table 
 ## The blocks
 
 (Written block by block, widest first; pushed after each.)
+
+### Instruments (every figure below names one)
+
+- **CENSUS**: the census's one command. At the base, the full run (step 0, `c720`). At a candidate tree, `census3.sh` with
+  `CENSUS_RENDER=render.lean.jsx` (`probes/EXPORTS-MEASURE-1/render.lean.jsx`): the same births, the PDF and the journal
+  rendered in the candidate tree, the tabs and the Tonight sheet taken from the base's dumps (a cure in the PDF's or the
+  journal's files does not move them; B1's reader is also the Defense tab's, whose row prints it only behind a fold the
+  census's walk does not open, so the tab's dump holds none of its sentences either way). Counted and traced in full.
+- **FAST**: a script that calls the tree's own reader on the 720 records (`b1false.mjs`, `b1fast.mjs`, `b3fast.mjs`):
+  it counts a class of false line the census's patterns do not see, by the roster.
+- **FIELD DIFF**: `fielddiff.mjs` on the base's and the candidate's births (`corpus.ndjson.gz`).
+- **READ**: twelve towns read on the readers' scale (the same twelve for every block where the block prints): r2r-thorp-0
+  (11), r2r-thorp-14 (19), r2r-hamlet-0 (22, SIEGE); r2r-village-6 (291), r2r-village-23 (271), r2s-famine-village-0
+  (114, FAMINE); r2r-town-1 (1,590, debt), r2r-town-6 (1,614), r2s-under_siege-town-0 (2,137, SIEGE); r2r-city-48
+  (10,560), r2r-metropolis-0 (28,304), r2s-famine-city-0 (2,909, FAMINE). The reading tool: `blk.mjs <out> <block> <seeds>`.
+- Candidate trees (detached at 3c30fdeb4, `npm ci`; the patches in the probes): **X** = B1-C + B2-A/B + B3-A + B4;
+  **Y** = B2-C' + B3-C. FIELD DIFF of X against the base: **0 towns, 0 families** (EXECUTED): every cure in X is display only.
+
+## B1 — the PDF's Defence chapter: `threatAssessment.js :: buildThreatAssessment`
+
+**(a) Presentation.** Chapter "Defense & Security", sub-heading "THREAT ASSESSMENT", caption "Each bar shows how ready the
+settlement is for that threat…"; five rows, each a label, a band and one sentence that speaks of THE TOWN. Small place
+(r2r-thorp-0, 11 people, "Access to parish church", no force): "Disasters & Famine · Adequate: Clergy provide basic wound
+care: better than nothing, worse than a hospital." / "Economic Survival · Weak: The defenders are already paid late; a
+long crisis would empty the reserves and wear down the people who defend the place." Large (r2r-city-48): "Invasion &
+War · Strong: Walls and professional garrison provide meaningful deterrence…" / "The hospital can isolate the sick…".
+
+**(b) Twelve towns READ** (60 sentences): **4 false, all in the three small places**: r2r-thorp-0 the clergy line
+(MED: the clergy are the neighbour's) and the defenders line (HIGH: no force stands); r2r-thorp-14 the defenders line
+(HIGH); r2r-hamlet-0 (siege) the clergy line (MED). 56 true (the "No court and no gaol; order rests on whoever is armed"
+of a thorp read LOW, not counted). **The census's precision for this writer, as read: about 0.76 by town.** Its 290 towns
+are the clergy line 221 (false: every one is a town whose only sacred row is "Access to parish church", a "Wayside shrine"
+or both; FAST), "There is a court but almost nowhere to hold anyone" 62 (NOT false as read: r2r-town-4 and r2r-town-6
+hold a Town hall, which the defence home's court atom counts; a town hall that sits as a court is LOW at most) and "The
+monastic infirmary treats the sick…" 9 (true: a monastery or friary stands). **The census is blind to the widest false
+line of the block**: "The defenders are already paid late…" where no force stands, **156 towns** (52 thorps, 48 hamlets,
+56 villages; FAST). Towns with a false B1 line: **284** (FAST, EXECUTED).
+
+**(c) The tab's side.** The Defense tab prints THE SAME FUNCTION'S sentence (`DefenseTab.jsx` calls
+`buildThreatAssessment(r)`; the PDF reaches it through `defenseDisplay.js :: deriveDefenseReadiness`): the tab shows it
+under the bar when the row is opened, so the census's walk (which opens only `aria-expanded` disclosures) never reads it.
+One reader, one fact, already: **the false line is the reader's, on both surfaces.** The tab's opened row therefore says what the PDF
+says, word for word (PLAUSIBLE by the code: one call; not rendered opened here).
+
+**(d) Candidates.**
+- (A) the export calls the tab's reader: ALREADY SO; moves nothing.
+- (B) the export leaves the block out: NOT JUSTIFIED (the tab prints the fact); it would lose 56 of 60 true sentences in
+  the twelve.
+- (C) **the reader's two branches take the conditions their words need** (tree X; patch in the probes, 7 lines): the clergy
+  line only where a house with clergy stands on the live roster (`facts/institutions.js :: liveInstitutionNames`, not an
+  `ACCESS_ONLY` row, not a shrine alone), in place of the economy compound's `hasChurch` (which counts "Access to parish
+  church" and a wayside shrine); the "defenders paid late" branch only where a force stands (`forceStands`, the file's own),
+  with a twin for the rest: **"Money is already short; a long crisis would empty the reserves."** (NEW WORDS: the owner's
+  veto), and "the defenders kept paid" → "the place kept going" where no force stands (0 towns today).
+  Measured: towns whose rows change **284** (FAST); false lines left **0 of both classes** (FAST: clergy 221 → 0, defenders
+  156 → 0); the CENSUS's hits for the writer **290 → 69** (the 69: the court line 60 and the infirmary 9, both read not
+  false); TRUE LINES LOST **0** (FAST: every town whose roster holds a house with clergy keeps the clergy, hospital or healer
+  line; the only moves are the three false classes); FIELD DIFF 0 families. Read where it prints: r2r-thorp-0 ("Money is
+  already short…" / "Nobody here treats the sick…"), r2r-hamlet-0 (siege), r2s-famine-thorp-0 (famine: "In famine. … Nobody
+  here treats the sick…"), and the guard town r2s-under_siege-village-0, whose parish church keeps the clergy line.
+
+**(e) Recommendation: (C).** One file, `src/domain/display/threatAssessment.js` (the reader both surfaces call), and its
+guard: a test rendering the Defense tab's opened row and the PDF's row for a thorp with "Access to parish church" and no
+force, a famine thorp, a siege hamlet and the guard village (PLAUSIBLE: the thorp's and the famine thorp's arms red at the base, the guard green). Holder: no lane
+holds the file by content beyond the joined line (the census's holders: up, uc, um, shared commits only). It shares no
+file with B2, B3 or B4: **a builder can take B1 beside any other block.**
