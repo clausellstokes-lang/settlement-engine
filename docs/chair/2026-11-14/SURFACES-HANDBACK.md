@@ -84,6 +84,26 @@ The trade connectivity row (UPK-869) is not in this table: the PDF's FOUNDATIONS
 - LEFT IN ITEM 2: the other spelling of a good (165 towns: the PDF and the journal print `resourceDisplayName`'s
   "River fisheries" where the tab prints the record's "River fish"): not begun.
 
+## THE FOOD WORD: MEASURED, NOT BEGUN (handed back at the count, before starting it, as the chair ruled 12:39Z)
+
+Every place a surface prints a food status word (grep of src/pdf, src/foundry, src/components, src/domain/summary for the
+stored label `economicState.foodSecurity.label` and for a band word), with its count on the 772 at 035159bc7:
+
+| site | what it prints | reads | towns differing from the one home (`tonightSheet.js :: foodBandOf(eco.foodSecurity?.foodRecord)`) |
+|---|---|---|---|
+| Overview, Systems-health "Food Security" (`OverviewTab.jsx` ~431-438) | the stored label and its colour | the record raw | **159** ("Secure" / band "Pressured": r2r-thorp-4, -10, -16) |
+| PDF Identity block "Food" (`pdf/sections/IdentityDailyLife.jsx` ~105-111) | its own word: Deficit / Surplus / Balanced from the view's deficit and surplus | the view | **729** (r2r-thorp-0 "Surplus" / band "Secure"; r2r-thorp-1 "Balanced"; 662 against the PDF's own Tonight page) |
+| Substrate tab, Foundations "Food security" (`SubstrateTab.jsx :: foodRecordWord`, ~105) | the stored label, cased as the Overview | the record raw | the Overview's set (same stored word): not separately counted |
+| `components/new/generalDeskRead.js:251` (`foodSecurityLabel`) | a desk's input, the stored label | the record raw | a prose input, not counted |
+| Daily Life (`DailyLifeTab.jsx:132`), the Tonight sheet, the quick guide (`settlementQuickGuide.js:895`) | the band | the one home (the quick guide falls back to the stored label) | 0 by construction |
+
+THE CURE, as I would make it (not begun): one display leaf of my lane, `foodWordShown(record)` = `foodBandOf(...)` with the
+stored label as fallback (the brief's words), called by ONE line at each of the Overview row, the Substrate row and the
+PDF Identity block (the Identity's own Deficit/Surplus/Balanced is a second vocabulary: it prints the band's label, or
+nothing). Holders by content before each file: OverviewTab.jsx is the coherence-upkeep lane's too (its tensions lines;
+nothing since its join commit at my reading). The guard: a sibling of `chainStateThreeSurfaces.test.jsx`, the
+Overview, the Substrate row, the PDF Identity and the Tonight sheet agreeing in a siege, a famine, an occupation town.
+
 ## Found, not cured (file, holder)
 
 - **The lighting census is red at the joined tip 035159bc7** (`tests/lint/sovereigntyLightingContract.walker.test.js`,
@@ -94,8 +114,34 @@ The trade connectivity row (UPK-869) is not in this table: the PDF's FOUNDATIONS
   `presumedThings.walker` (door `--check`: 153 fresh, 1 strip fresh), `factLayers.walker`, `observedShapeReaders.walker`,
   `writerReach.walker`. Not mine.
 
-## What is left
+## What is left, line by line (the next seat)
 
-Item 2's other spelling (165); item 3 (food deficit, the food word on every surface incl. the PDF Identity
-block); "Abundant" under a siege; the bracketed names; the stores' unit in 6 towns; the trade connectivity row
-measured at its item.
+0. FIRST ACT (the chair, 12:39Z): merge the joined line's tip (b6a5f97ab or later) into this lane; re-take the lighting
+   census ONCE through its ritual with every test file both seats added (mine: `tests/pdf/chainStateThreeSurfaces.test.jsx`).
+   Until then it is a NAMED RED, class "refreeze".
+1. THE FOOD WORD on every surface (above: Overview 159, PDF Identity 729, the Substrate row), BEFORE anything narrower;
+   one line to the chair when pushed with the three counts.
+2. Item 3's deficit: the PDF's food block (`EconomicsTrade.jsx :: FoodBalanceBlock`, fed `vm.economics.foodBalance`
+   from `viewModelPrimitives.js :: foodCore`) prints the view's deficit where the tab's row prints `foodRowShown`'s
+   Short: 253 towns (r2r-thorp-32 pdf 2 / tab 1). The tab calls `foodRowShown(s, !!carriersOf(s, eco))`
+   (EconomicsTab.jsx:330); the PDF's block reads the same leaf.
+3. Item 2's other spelling: 165 towns, the PDF and the journal print `resourceDisplayName(x)` ("River fisheries") where
+   the tab prints the record's spelling ("River fish"): which side is the house's word is to be ruled first (the
+   reader called the PDF the false side).
+4. "Abundant" under a siege (`ResourcesProduction.jsx` ~167, `r.nearbyAbundant`): 56 of 56 siege towns; the tab's
+   Resources prints no Abundant group.
+5. The bracketed names: the tab's one (r2r-town-9, "Taverns (5-20)", History and Overview tension rows, through
+   `houseLabelsInText` as the PDF's History does; check OverviewTab.jsx's tension lines by content first) and the PDF's
+   medical line ("Major monasteries (5-10).", 4 towns: r2r-metropolis-32, -51, r2s-indebted-metropolis-2).
+6. The stores' unit: 6 of 630 towns (Defense "would carry … for a few weeks", Tonight "a month…": r2r-hamlet-28,
+   r2s-famine-hamlet-0, -2).
+7. The trade connectivity row (UPK-869): the PDF FOUNDATIONS grid (`SystemStateSnapshot.jsx :: CausalSubstrate`) prints
+   `causalBandWord` where the Substrate tab prints `siegeCrisisWord` (and `foodRecordWord` for food); measure with a
+   system state (the Campaign State export).
+8. The power key (PWR-MODPDF, PWR-MODLEGEND): RULED the powers lane's; not mine.
+
+HOW THE INSTRUMENTS ARE RE-MADE: copy the reader's probes out (`git archive origin/lane/review-w2-c-leaves-2026-11-14
+docs/chair/2026-11-14/probes/REVIEW-W2-C-LEAVES`); seeds = `seeds-all.txt`'s r2r/r2s lines + every 4th rr3 line of
+famine, occupied, under_siege, under_siege+famine + `seeds-extra.txt` (772); `render.sh <tree> <out> <seeds> 3` (~18
+min), `surfaces.sh`, then my `measure.sh <tree> <records> <out> <seeds>` + `RECS=<records> node agg.mjs <facts> <dumps> <surfaces> <seeds>` (they are in this file's sibling directory
+`docs/chair/2026-11-14/probes/SURFACES-1/`).
