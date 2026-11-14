@@ -785,7 +785,7 @@ const generateRelationshipEvent = (age, tier, config, context, worldLaw, hookFac
     resourceEvents.push({
       name: 'The Great Harvest Compact',
       description:
-        'After years of disputed grain prices, the major farming families and the merchant guilds negotiated a formal compact regulating grain sale and storage. It held for a generation.',
+        'After years of disputed grain prices, the major farming families and the guilds negotiated a formal compact regulating grain sale and storage. It held for a generation.',
       lastingEffects: [
         'Grain price regulation persists in modified form',
         "Compact signatories' families still hold first call on the grain sales",

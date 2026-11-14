@@ -1720,9 +1720,9 @@ export const HISTORY_DESC_SIBLINGS = Object.freeze({
     Object.freeze({ text: "Quarrymen's guild retains unusual civic influence", needs: Object.freeze(['guild']) }),
     Object.freeze({ text: "The quarrymen's families retain unusual civic influence", twinOf: "Quarrymen's guild retains unusual civic influence", excludes: Object.freeze(['guild']) }),
   ]),
-  "After years of disputed grain prices, the major farming families and the merchant guilds negotiated a formal compact regulating grain sale and storage. It held for a generation.": Object.freeze([
-    Object.freeze({ text: "After years of disputed grain prices, the major farming families and the merchant guilds negotiated a formal compact regulating grain sale and storage. It held for a generation.", needs: Object.freeze(['guild']) }),
-    Object.freeze({ text: "After years of disputed grain prices, the major farming families agreed a formal compact regulating grain sale and storage. It held for a generation.", twinOf: "After years of disputed grain prices, the major farming families and the merchant guilds negotiated a formal compact regulating grain sale and storage. It held for a generation.", excludes: Object.freeze(['guild']) }),
+  "After years of disputed grain prices, the major farming families and the guilds negotiated a formal compact regulating grain sale and storage. It held for a generation.": Object.freeze([
+    Object.freeze({ text: "After years of disputed grain prices, the major farming families and the guilds negotiated a formal compact regulating grain sale and storage. It held for a generation.", needs: Object.freeze(['guild']) }),
+    Object.freeze({ text: "After years of disputed grain prices, the major farming families agreed a formal compact regulating grain sale and storage. It held for a generation.", twinOf: "After years of disputed grain prices, the major farming families and the guilds negotiated a formal compact regulating grain sale and storage. It held for a generation.", excludes: Object.freeze(['guild']) }),
   ]),
   "A catastrophic or transformative event tied to the local ley line concentration occurred, permanently altering a district of the settlement and the lives of its inhabitants.": Object.freeze([
     Object.freeze({ text: "A catastrophic or transformative event tied to the local ley line concentration occurred, permanently altering a district of the settlement and the lives of its inhabitants.", needs: Object.freeze(['tier: ≥ town']) }),

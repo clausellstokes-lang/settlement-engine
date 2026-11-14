@@ -230,7 +230,7 @@ describe('W2-FIX-DATA-HISTORY item E: the resource events and two timeline hooks
   // GUARDS: the readers' towns that printed them at the base
   for (const [seed, words] of /** @type {const} */ ([
     ['rww-village-religious_conversion-1', /Civic buildings or a cathedral|Quarrymen's guild/], // ww-90, a village of 89
-    ['rw3-thorp-famine-1', /the merchant guilds negotiated/],
+    ['rw3-thorp-famine-1', /the guilds negotiated/],
     ['rww-hamlet-succession_void-1', /controls extraction|original mining contract|Fortified extraction sites|affected district/],
     ['rpf-village-occupied-13', /A healer who profited/],
   ])) {
