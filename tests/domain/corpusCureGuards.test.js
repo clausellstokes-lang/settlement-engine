@@ -64,6 +64,10 @@ const GUARDS = [
   { seed: 'w5-thorp-occupied-1', pool: 'DS-DEF-11::WALLED-STRAINED', vid: 7, why: 'an occupation: "the only people who would stand on them are the town\'s own" beside the occupiers\' troops (W2-WRITE-7 B, Shangou)' },
   { seed: 'w5-village-wartime-1', pool: 'DS-DEF-5::NO organized force at all', vid: 4, why: 'a war with no front at the town: "the people defending it now are neighbours who stepped forward" where nobody attacks it (LINES-READ, hamlet-5, thorp-55; W2-WRITE-7 B, Nishidao)' },
   { seed: 'w5-village-wartime-1', pool: 'DS-DEF-5::NO organized force at all', vid: 5, why: 'a war with no front at the town: "whoever leads the defence now is learning the work as the trouble goes on" (LINES-READ, hamlet-53; the sibling of v4, W2-WRITE-7 B, Nishidao)' },
+  { seed: 'w5-thorp-famine-2', pool: 'DS-DEF-12::CAPACITY: enough', vid: 1, why: 'a famine: "the town gets by on its own: enough for an ordinary year" beside a food record in famine (W2-WRITE-8 C, #58\'s pool)' },
+  { seed: 'w5-thorp-famine-2', pool: 'DS-DEF-12::CAPACITY: enough', vid: 2, why: 'a famine: "What X raises covers an ordinary year ... one bad harvest would leave it short" where it is short now (W2-WRITE-8 C, #58)' },
+  { seed: 'w5-village-under_siege-6', pool: 'DS-DEF-12::CAPACITY: enough', vid: 1, why: 'a siege with a food deficit: "enough for an ordinary year" (W2-WRITE-8 C)' },
+  { seed: 'w5-thorp-plague_onset-2', pool: 'DS-DEF-12::CAPACITY: enough', vid: 2, why: 'a food record that depends on imports: "What X raises covers an ordinary year" (W2-WRITE-8 C)' },
 ];
 
 /** @param {string} seed */

@@ -3998,9 +3998,9 @@ rows — the arm and the town. Both stand; **one per page, never both.**
 3. `[street]` Traders seldom reach {settlement}, and people there seldom miss them: the town has more than enough to get through a hard year.
 
 **CAPACITY: enough** {colour}
-1. `[visitor]` No dependable road, river or port reaches {settlement}, and the town gets by on its own: enough for an ordinary year, with little to spare.
-2. `[ledger]` What {settlement} raises covers an ordinary year and no more, so one bad harvest would leave it short before spring.
-3. `[street]` People at {settlement} make do with what the town raises and keeps for itself; a good year is comfortable and a bad one is lean.
+1. `[visitor · food: ≥ pressured]` No dependable road, river or port reaches {settlement}, and the town gets by on its own: enough for an ordinary year, with little to spare.
+2. `[ledger · food: ≥ pressured]` What {settlement} raises covers an ordinary year and no more, so one bad harvest would leave it short before spring.
+3. `[street]` People at {settlement} make do with what they have; a good year is comfortable and a bad one is lean.
 
 **CAPACITY: short** {colour}
 1. `[visitor]` With no dependable road, river or port, {settlement} cannot quite keep itself supplied: the goods it cannot make are scarce, and little is put by for a bad year.

@@ -11151,7 +11151,9 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
+      "lineDeclares": {
+        "food: ≥ pressured": 2
+      },
       "undeclared": 0,
       "crisisScoped": false
     },

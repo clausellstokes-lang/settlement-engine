@@ -9275,6 +9275,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "CAPACITY: enough": [
         {
           "angle": "visitor",
+          "marks": [
+            "food: ≥ pressured"
+          ],
           "text": "No dependable road, river or port reaches {settlement}, and the town gets by on its own: enough for an ordinary year, with little to spare.",
           "slots": [
             "settlement"
@@ -9283,6 +9286,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
+          "marks": [
+            "food: ≥ pressured"
+          ],
           "text": "What {settlement} raises covers an ordinary year and no more, so one bad harvest would leave it short before spring.",
           "slots": [
             "settlement"
@@ -9291,7 +9297,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "People at {settlement} make do with what the town raises and keeps for itself; a good year is comfortable and a bad one is lean.",
+          "text": "People at {settlement} make do with what they have; a good year is comfortable and a bad one is lean.",
           "slots": [
             "settlement"
           ],
