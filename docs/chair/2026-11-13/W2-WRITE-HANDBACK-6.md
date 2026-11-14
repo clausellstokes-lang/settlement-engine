@@ -8,7 +8,7 @@ origin at the start: `2f1ff0e78`, as the brief names it (no difference). Scratch
 `w2w7`; pushed by `git push origin w2w7:refs/heads/lane/w2-write-2026-11-13`. No commit at or below
 `2f1ff0e78` rewritten.
 
-**Status:** item 0 done. B in progress.
+**Status: HANDED BACK BY FILE at the count (384,959 read at 02:32 UTC, then one item: past the 400,000 mark).** Item 0 done; B: 8 of the 10 left rows cured and pushed (tip 24a8ebb42); LEFT in B: #19 DS-DEF-9 NAMED chain v1 and #27 the style point; then C to G (not begun). Nothing running; the main checkout's status empty; its local config restored (core.hooksPath unset after `npm ci`).
 
 **The chair:** session_01ACmDYZrFEVXyZEUg1NDxxC (from 2026-11-14). The brief binds this seat to
 BRIEF-W2-WRITE-6 as written (its reading, its work in order, its METHOD, its RULED list, its HOW YOU WORK, its
@@ -71,7 +71,7 @@ Settled 17 (fifth seat 9, sixth seat 8); LEFT 10, and one style point (#27).
 | B #11 | 07f53f717 | walls PRESENT v7 reworded: "Nothing closes the few ways through {settlement}'s wall, because it has no gate." (was contradicted by the guard line "The walls leave few ways in") | 64 towns rendered, drawn in 27: Tyrvik, Qaryatnagar (the reader's case, beside its guard line), Ulfås (occupied), Taipu (village 332) |
 | B #17 | 217693af2 | NO organized force at all v4, and v5 for the same fault, off a war with no front at the town (the `crisis: wartime` mark dropped; guards at Nishidao) | 53 towns rendered: v4 at Qaryatsaray (village 330), Goraino (siege+famine); v5 at Rundholz (thorp 7), Cnocton (village 185); wartime towns now print v6 (Nishidao, Nishitang, Varatala) |
 | B #23 | 3f5da151e | ARCANE: alchemists v2 reworded (not struck: the pool has two rows), v1 reworded off "Part of the magical help" where alchemy is the only arcane defence (the read's r2r-city-16) | 55 towns rendered: v1 at Saltocolonia (town 505), Prabhavalli (siege), Tikalmul (158,207, famine); v2 at Muultzal (town 615), Capovetum (siege), Markaztappa (occupied) |
-| B #12 | (this commit) | Moderate v1 reworded: "the law is present, so is crime, and neither has the upper hand" (a declaration `no organised crime` was refused by the layer walker: DS-DEF-3 may not read a layer-3 atom; not routed round) | 56 towns rendered, drawn in 7: Aqualitus (the reader's syndicate town), Somakota, Polako, Brahmakund (syndicates), Grudka (semi-organised), Tyrvik (thorp 20), Huashan |
+| B #12 | 24a8ebb42 | Moderate v1 reworded: "the law is present, so is crime, and neither has the upper hand" (a declaration `no organised crime` was refused by the layer walker: DS-DEF-3 may not read a layer-3 atom; not routed round) | 56 towns rendered, drawn in 7: Aqualitus (the reader's syndicate town), Somakota, Polako, Brahmakund (syndicates), Grudka (semi-organised), Tyrvik (thorp 20), Huashan |
 
 ## What is left (line by line) and how the instruments are re-made
 - B: #19 DS-DEF-9 NAMED chain v1 (plan: reworded off "cannot be made without arcane work": the chain's magicNote is a PARTIAL supplement and is divine, druidic or arcane; v2, v3 read with it); #27 DS-DEF-2 neither walls nor force v8, the style point. Then one line to the chair (B pushed).
