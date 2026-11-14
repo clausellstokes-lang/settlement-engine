@@ -471,6 +471,9 @@ origin at the start: **a19a0ee1b**, as the brief has it. Worked in a scratch wor
   parts that need no suite; 2 one message to the chair, then wait for point 49; on the chair's word the merge of the
   line's tip, the instrument's page census, the whole suite once in six vitest shards with every red classed against
   the base, the lighting census, the edge bundles, the lane's ONE final statement.
+- **THE COUNT, changed by the chair's message (2026-11-14, read at 02:35 UTC):** the mark is 400,000, not 350,000, and
+  the check is AFTER EVERY ITEM, never more than forty-five minutes apart. At a hand-back this file says WHAT IS LEFT line
+  by line and how the instruments are re-made, so a successor opens only this part.
 - The naval cure was made to record 422 (CHAIR-HANDOFF-FOURTH §4): "A line of the sea or a harbour's approaches is
   offered only where the route is the sea, on every surface (the defence desk's pool key too)."
 
@@ -580,3 +583,14 @@ from the base to the tip). Helpers and outputs in `probes/R3-TABS/reader/`.
 | item 0 the naval line written up, its measure, its guard, the governing suites, the births | DONE | 6ed610479 (the lane's mount-walker red cured), e43bacae8 |
 | item 1 the census counter, the births, the reader's classes, the draft shift record | DONE | this commit |
 | item 2 the merge of point 49, the page census, the whole suite in six shards, the lighting census, the edge bundles, THE FINAL STATEMENT | WAITS ON POINT 49 (the chair's word names the tip) | — |
+
+## How this seat's instruments are re-made (for a successor)
+- Trees: `git archive <sha> | tar -x -C <dir>` outside the repository, `ln -s <a worktree after npm ci>/node_modules <dir>/node_modules`
+  (the lock is byte-identical base to tip); count `git ls-tree -r <sha> | wc -l` against the files.
+- The instrument lanes, extracted unchanged: `git archive origin/lane/second-wave-census-2026-11-12 docs/chair/2026-11-12/probes/SECOND-WAVE-CENSUS`,
+  `origin/lane/review-upkeep-2026-11-13 docs/chair/2026-11-13/probes/REVIEW-UPKEEP-2 …/REVIEW-UPKEEP-3`, `origin/lane/review-r2-stages-2026-11-13
+  docs/chair/2026-11-13/probes/REVIEW-R2-STAGES` (seeds20.txt) into one directory outside the repository.
+- `probes/R3-TABS/reader/run-census1.sh` (census.sh per tree, then count.mjs outside its pipe), `run-reader.sh <tree>…` (render4 in four
+  shards, scan4, classes3; the 1,440 seeds are REVIEW-UPKEEP-2 seeds.all.txt + fresh.seeds + REVIEW-UPKEEP-3 own.seeds); paths inside are
+  this container's (/home/user/wt/<tree>, /home/user/inst, /home/user/runs): edit them to yours. `probes/R3-TABS/naval.mjs <pre> <tip> <out> <births.gz>…`;
+  `births.mjs` (TREE, OUT, SET, SEEDS). Census ~17 min a tree, render4 ~12 min a tree, on 4 cores.
