@@ -23,7 +23,7 @@
   "totals": {
     "pools": 856,
     "blocks": 69,
-    "variants": 2959,
+    "variants": 2958,
     "resolved": 488,
     "unresolved": 368,
     "resolvedWithPredicate": 317,
@@ -37,8 +37,8 @@
     "syntheticTableFields": 174,
     "tiers": {
       "MISSING": 33,
-      "THIN": 612,
-      "COVERED": 244,
+      "THIN": 611,
+      "COVERED": 245,
       "MISSING-AT-TIER": 45
     },
     "tierSilences": 352,
@@ -19478,8 +19478,8 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 4,
-      "grammars": 1,
+      "variants": 3,
+      "grammars": 3,
       "predicate": [],
       "branchReads": [
         "criticalRow",
@@ -19535,7 +19535,7 @@
       "declares": [],
       "lineDeclares": {
         "colour": 2,
-        "no imports": 2
+        "no imports": 1
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -68918,12 +68918,12 @@
       "count": "3 variant(s) · 2 grammar(s) · slots {good, settlement}"
     },
     {
-      "tier": "THIN",
+      "tier": "COVERED",
       "block": "DS-ECO-12",
       "subject": "CRITICAL IMPORT: the land cannot give it",
       "fields": [],
       "readingFunction": "criticalImportPoolKey",
-      "count": "4 variant(s) · 1 grammar(s) · slots {good, settlement}"
+      "count": "3 variant(s) · 3 grammar(s) · slots {good, settlement}"
     },
     {
       "tier": "THIN",

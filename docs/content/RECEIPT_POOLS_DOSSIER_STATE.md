@@ -1829,10 +1829,9 @@ shape.
 3. `[ledger · crisis: under_siege · stores: < 6]` Since the siege closed the roads, none of the {good} that {settlement}'s work needs has reached it, and that work has stopped or soon will.
 
 **CRITICAL IMPORT: the land cannot give it** *(the `reasons` entry names the terrain alone)*
-1. `[ledger · colour]` The country around {settlement} produces no {good}: whatever the town has of it comes from outside.
-2. `[street · colour]` None of the {good} used at {settlement} comes from the country here; it is brought in or done without.
-3. `[ledger · no imports]` The country around {settlement} produces no {good}, and nothing comes in from outside to make up for it, so the town does without.
-4. `[street · no imports]` {settlement} neither grows nor buys any {good}; people there do without.
+1. `[ledger · colour]` The country around {settlement} produces no {good}, so the town has none but what it buys.
+2. `[street · colour]` None of the {good} used at {settlement} comes from the country here; the town brings in what it uses, or goes without.
+3. `[ledger · no imports]` The country around {settlement} produces no {good}, so the town must look elsewhere for whatever it uses.
 
 **INCOME WEIGHT: the religious houses** *(`compound.religionInfluence` high)*
 1. `[ledger · sacredHouse]` Faith carries real weight in {settlement}'s money. What the religious houses take in and spend is a large part of the town's business.
