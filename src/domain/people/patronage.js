@@ -26,6 +26,7 @@
  * public page reads the base strengths only. Pure, draw-free, total over any input.
  */
 import { governingFactionOf, nameOf } from '../rulingPower.js';
+import { factsOf } from '../facts/factsOf.js';
 import { membershipsOf } from './membership.js';
 import { allegianceOf, criminalPowersOf, hiddenMembershipOf, isCriminalPower } from './allegiance.js';
 import { CAPTURE_LINES, CAPTURE_RUNG_LABELS, PATRONAGE_LINES } from '../../data/people/dmPowerLines.js';
@@ -214,8 +215,15 @@ function hallOf(s, ruler, three) {
     .map((x) => ({ name: String(x.card.name ?? ''), rank: /** @type {1 | 2 | 3} */ (x.rank), guild: String(x.a?.power || x.a?.house || '') }));
   const facts = { ruler, agents, rulerCriminal: isCriminalPower(governing), underworld };
   // variant 0 is the receipt in rank words (§9's example); every 'capture' variant but the last names an
-  // agent, so a capture the stored classifier reads with no agent in the three takes the last
-  const variant = rung === 'capture' && !agents.length ? 2 : 0;
+  // agent, so a capture the stored classifier reads with no agent in the three takes the last. POWERS-14 (ww#375,
+  // read on the page): the none rung's first line also denies that any criminal power here is strong enough to push
+  // the hall, which is false where the town stands an organized syndicate (factsOf(record).crime, the Defense tab's
+  // "Criminal structure"; a semi-organized network "lacks a single controlling authority", a diffuse presence has "no
+  // boss": both read true beside it). There the hall takes the line that claims only the hall: the second, which names
+  // the head, the second and the third, where all three stand; else the third, which counts no rank
+  const syndicate = rung === 'none' && factsOf(s).crime === 'organized';
+  const ranks = new Set(three.map((x) => x.rank));
+  const variant = rung === 'capture' && !agents.length ? 2 : syndicate ? (ranks.has(2) && ranks.has(3) ? 1 : 2) : 0;
   return { rung, label: CAPTURE_RUNG_LABELS[rung], line: CAPTURE_LINES[rung][variant](facts), source: 'hallCapture.js :: writeHallCapture' };
 }
 
