@@ -553,7 +553,17 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     // 2026-11-09, MERGE-TRAIN record 9 (the ALLEGIANCE-CAR4 merge, this arm's census at the merged tree): 118 -> 138, car 4's A9
     // (03ff59084, people/goals.js :: dealGoals): one `people-goals` family fork and one keyed fork per card on this row (+20);
     // direct 4, foreign 0. Re-keyed to the measured figure, never above it.
-    expect(seen.mints.length, 'total mints is row-dependent but bounded').toBeLessThanOrEqual(138);
+    // 2026-11-14, POWERS-15 on the powers lane (the chair's ruling: a fork a lane adds is declared or it is a finding; a
+    // RISE goes back to the lane, the merge book's 2h.7 (c)): 138 -> 139, measured by this arm at the lane's tip 0eb30242f
+    // (the line at 976db5b19 reads 134 under the same bound). DECLARED by COHERENCE-POWERS-6 item 1 (9fae351e1, the
+    // chair's ruling of 2026-11-13: a noble power that does not govern is faced by a lord of that body, minted and
+    // named), whose commit names the five: the row's Landed Gentry is faced by a minted lord, and the five new mints are
+    // all keyed to that card, none lost and no other moved (line -> tip, seed by seed): people-powers::mint::landed_gentry
+    // (the lord's own mint), people-powers::people-hooks::npc_power_landed_gentry (its hook),
+    // people-allegiance::npc_power_landed_gentry (its allegiance), people-ties::npc_power_landed_gentry (its tie),
+    // people-goals::npc_power_landed_gentry (its goals). Total 139, direct 4, via fork 135, foreign 0. The control hash
+    // (C1) moves with the generator master's re-record through the signed door at the join, not on this lane.
+    expect(seen.mints.length, 'total mints is row-dependent but bounded').toBeLessThanOrEqual(139);
     expect(viaFork.length, 'STOP-6: mints via the re-implemented fork').toBeGreaterThanOrEqual(31);
     expect(foreign.map((record) => record.seed), 'every minted seed is root-prefixed').toEqual([]);
   }, 120_000);
