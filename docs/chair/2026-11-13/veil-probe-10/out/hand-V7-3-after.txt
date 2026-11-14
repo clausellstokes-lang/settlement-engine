@@ -1,0 +1,9 @@
+
+ RUN  v4.1.8 /var/tmp/v10/wt
+
+
+ Test Files  1 passed (1)
+      Tests  1 passed (1)
+   Start at  01:26:49
+   Duration  3.87s (transform 331ms, setup 38ms, import 78ms, tests 3.64s, environment 0ms)
+

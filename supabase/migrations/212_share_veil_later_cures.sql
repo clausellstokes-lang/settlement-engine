@@ -58,6 +58,10 @@
 --       the share does not reveal is sent as the public card, which carries no role where the face is veiled (206);
 --       the ties' copies of that role (relationships[].npc1Role, .npc2Role) now go with it (_gallery_veil_tie_roles,
 --       called by _gallery_veil_roster_splice), as 206's root pass does on a public projection.
+--   (18) A HOUSE HIDDEN WHOLE IS REMOVED WHOLE, BY ITS ID ALONE (COHERENCE-VEIL-10; REVIEW-VEIL-7's V7-3, the chair's
+--       record 418): the set of ids is decided before the eyes trim anything and is not tested again (_gallery_veil_apply).
+--       211's statement tested the class a second time on the trimmed card, so a house in the class by a declared facet
+--       or as an illegal brokerage alone stayed listed (by name on 211 alone). 211's two files are not touched.
 --   (10) A PERSON HIDDEN BY THE PER-PERSON SWITCH IS NOT SENT IN A ROSTER COPY EITHER (COHERENCE-VEIL-6; the fifth
 --       review's V5-4, ruled by the chair): _gallery_apply_member_overrides now reduces each roster copy
 --       (factions[].members[], powerStructure.factions[].members[]) of a person the share does not reveal to the
@@ -590,10 +594,14 @@ begin
       from jsonb_each(s -> 'availableServices') y(k, v)));
   end if;
 
-  -- X-21e: a house removed whole leaves the institutions list
+  -- X-21e: a house removed whole leaves the institutions list. COHERENCE-VEIL-10 (REVIEW-VEIL-7's V7-3; the chair's
+  -- ruling, record 418): BY ITS ID ALONE. The set was decided above, before any eye trimmed anything, and is not tested
+  -- again: 211's statement asked the class a second time here, of a card whose `function` eye (shut by the default veil
+  -- with the card) had already taken the tags, facets and service keys that put it in the class, so a house in the
+  -- class by a declared facet or as an illegal brokerage alone stayed listed. An id is the card's floor: no eye moves it.
   if gone_ids <> '{}' and jsonb_typeof(s -> 'institutions') = 'array' then
     s := jsonb_set(s, '{institutions}', coalesce((select jsonb_agg(e order by o) from jsonb_array_elements(s -> 'institutions') with ordinality x(e, o)
-      where not (jsonb_typeof(e) = 'object' and gone_ids ? public._gallery_veil_inst_id(e) and public._gallery_veil_house(e))), '[]'));
+      where not (jsonb_typeof(e) = 'object' and gone_ids ? public._gallery_veil_inst_id(e))), '[]'));
   end if;
 
   -- an institution's people, and every reference to a house removed whole

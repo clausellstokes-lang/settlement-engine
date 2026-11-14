@@ -729,10 +729,12 @@ export function applyVeil(publicSettlement, veil) {
       if (peopleOf.has(npcHouseOf(npc))) delete npc.institution;
     }
   }
-  // X-21e: a house removed whole takes its card and every membership reference to it.
+  // X-21e: a house removed whole takes its card and every membership reference to it. BY ITS ID ALONE (COHERENCE-VEIL-10;
+  // REVIEW-VEIL-7's V7-3): the set was decided above, before any eye trimmed anything, and is not tested again (the
+  // `function` eye has by now taken the tags, facets and service keys that put a house in the class; an id is floor).
   if (goneHouses.size || goneIds.size) {
     if (Array.isArray(s.institutions)) {
-      s.institutions = s.institutions.filter(i => !(isRec(i) && goneIds.has(instKind.idOf(i)) && isHideableHouse(i)));
+      s.institutions = s.institutions.filter(i => !(isRec(i) && goneIds.has(instKind.idOf(i))));
     }
     for (const npc of cardsOf(s, 'npc')) {
       if (goneHouses.has(npcHouseOf(npc))) delete npc.institution;
