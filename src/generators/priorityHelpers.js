@@ -100,7 +100,8 @@ const getInstitutionNames = (institutions = []) => {
     hasThievesGuild:  hasAny(names, ["thieves' guild chapter","thieves' guild (powerful)"]),
     hasBlackMarket:   hasAny(names, ['black market','black market bazaar']),
     hasSmuggling:     hasAny(names, ['smuggling network','smuggling operation']),
-    hasGangInfra:     hasAny(names, ['street gang','multiple criminal factions','front business']),
+    // UPKEEP-9 (#1082): a gang is a gang house (the two GANG_HOUSES_OF counts); a criminal front is not a gang.
+    hasGangInfra:     hasAny(names, ['street gang','multiple criminal factions']),
     names,
   };
 };
