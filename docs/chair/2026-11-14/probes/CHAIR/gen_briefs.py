@@ -2987,6 +2987,68 @@ SEATS2['R2-CODE-A-10'] = dict(
 )
 
 
+SEATS2['R3-CODE-C-8'] = dict(
+    title="R3-CODE-C-8 · round three's code lane: the reader's three medium findings cured, a guard made to red, then the bar's rows",
+    branch='lane/r3-code-c-2026-11-13', tip='__R3C_TIP__', statement=False,
+    intro=("You are R3-CODE-C-8, the eighth seat on round three's code lane of the settlement-engine integration program (lane/r3-code-c-2026-11-13). The "
+           "lane cures false lines in domain, generator and display files. Its statement is made and its four red walkers are answered (the sixth and "
+           "seventh seats). A FRESH READER READ ITS STAGE (fb8b24fbe to b6bd3a3c1) AND FOUND THREE MEDIUM FALSE SENTENCES THAT ARE THE STAGE'S OWN, no "
+           "high one, and one guard that does not red on its fault. THE ORDER (the chair, 2026-11-14 07:11 UTC): the true join has begun on "
+           "lane/join-2026-11-14, this lane is merged there, and A LANE GOES ON CURING and lands again later as a point of its own. Yours: the "
+           "reader's findings, then the rows a first measure against the release bar put on this lane's files. NO whole suite, NO new statement: a "
+           "hand-back the next reader can read your stage from."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. THE READER'S FILE (`git fetch origin lane/review-r3-code-c-2026-11-14`; `git show "
+          "origin/lane/review-r3-code-c-2026-11-14:docs/chair/2026-11-14/REVIEW-R3-CODE-C-2026-11-14.md`): WHOLE (41 lines, long ones: the findings "
+          "ranked, each with its town, its sentence and the fact against it; how its instruments are re-made); in REVIEW-R3-CODE-C-LINES-READ.md beside "
+          "it the rows L01, L05 and L14 (by script, by row label). Its probes (docs/chair/2026-11-14/probes/REVIEW-R3-CODE-C/) are yours to copy out "
+          "with git archive and run from outside every repository tree.\n"
+          "3. On your lane, docs/chair/2026-11-13/R3-CODE-C-HANDBACK.md: ONLY \"THE SEVENTH SEAT\" (from that heading to the end, by script): what "
+          "it did with the four walkers and what it named.\n"
+          "4. THE BAR'S ROWS FOR THIS LANE (`git fetch origin lane/chair-2026-11-08`; `git show "
+          "origin/lane/chair-2026-11-08:docs/chair/2026-11-14/bar-0-rows/BAR-0-ROWS-r3c.json`, with the README.md beside it): 7 MEDIUM rows; the towns "
+          "are re-born by the probes on origin/lane/review-bar-0-2026-11-14 (docs/chair/2026-11-14/probes/REVIEW-BAR-0/).\n"
+          "5. The merge book's section 2m on origin/lane/merge-15-point-49-wip-2026-11-14 (the section headed \"## 2m.\"; by script), before the first "
+          "register you touch."),
+    work=("THE CHAIR'S RULINGS ON THE READER'S FINDINGS (2026-11-14 08:06 UTC; vetoable by the owner; copy them into the hand-back):\n"
+          "(a) L01: \"OLDER THAN ANYONE LIVING\" IS SAID ONLY OF AN EVENT OLDER THAN EVERY PERSON THE RECORD HOLDS, and never of one under ninety "
+          "years old. An event sixty to ninety years back takes words true of it (what only the oldest remember): NEW WORDS, by the style law, "
+          "listed for the owner's veto with the towns they were read in; or the band's other predicate where one is true. A guard holds the band's "
+          "floor against the ages printed on the same tab.\n"
+          "(b) L05, with the reader's carried row 5 (the #457 class): \"COMPLETE PRODUCTION CHAIN IN PLACE\" IS SAID ONLY WHERE EVERY HOUSE THE CHAIN "
+          "NEEDS STANDS ON THE ROSTER AND NO CRISIS IN FORCE HAS STOPPED ITS SOURCE (the herds that failed feed no cheese and no preserved meat). "
+          "Elsewhere the row says what is missing, in the words its siblings already use, or the good is not listed. Count before and after on the "
+          "reader's births: the 8 of 82 under a famine, the 21 with no butcher, dairy or herding house, the 51 with no tanner.\n"
+          "(c) L14: the noble subordinate line (\"still have their titles, but the hall's offices have taken most of their power\") is not drawn "
+          "where the same record gives that body a say in the seat's decisions: it reads the relationship's own standing, the fact the Power tab "
+          "prints beside it.\n"
+          "(d) THE CARRIED TWIN (\"street kitchens\" in 63 towns with no market: src/data/cultureProfiles.js): if no other lane holds that file (check "
+          "BY CONTENT), the lane's seller gate takes it as it took vendors, stalls and hawkers; else FOR THE JOIN with the count.\n"
+          "(e) THE GUARD THAT DOES NOT RED (tests/generators/r3cRekeyedLinesTrue.test.js, the war arm): its births must draw a famine town in that "
+          "column so that the war line planted in the famine pool REDS; prove it by that plant.\n"
+          "THE WORK, in this order, each finding its own commit, measured first on the reader's births (its seeds, its render), red first (a "
+          "collected arm, never a bare seed loop; each arm shown able to red by a plant you do not commit, made in a tree no suite is running in), "
+          "pushed as made:\n"
+          "1. (a), (b), (c), then (d) and (e). For each: the count before and after; the guard; EVERY LINE A CURE NOW PRINTS IN A NEW TOWN, OR NEWLY "
+          "LEAVES SILENT, READ WHERE IT PRINTS: three towns of its cells, a famine, a siege or an occupation among them, the smallest and the largest "
+          "size it reaches; the towns and what printed in the commit body. A cure in generator code is a DECLARED MOVE: its field diff on the "
+          "census's 720, confined to the family you name.\n"
+          "2. ONE MESSAGE TO THE CHAIR (the tip; each finding's count before and after), then THE COUNT.\n"
+          "3. THE BAR'S SEVEN MEDIUM ROWS (the rows file), each READ IN ITS TOWN at your tip first (a row is a candidate), counted on your births, "
+          "cured widest first, one cause a commit, until your count's mark.\n"
+          "AFTER EVERY CURE: the presumed-things walker (it reads every literal under src/); the strict-domain gate, the type ratchet and eslint on "
+          "the touched files; the twelve-birth grid (`node scripts/census/page-census.mjs --grid`: a rise is a stop); the test files that name the "
+          "files you touched.\n"
+          "THE HAND-BACK, kept current after every item: a new heading \"THE EIGHTH SEAT\" at the end of the lane's hand-back file: the rulings "
+          "above copied; each finding and row: its cause, its cure and commit, its counts, its guard and plant, the towns read; EVERY NEW OR CHANGED "
+          "LINE with the towns it was read in (the owner's veto list, and the next reader's); the declared moves with their field diff by family; "
+          "FOR THE JOIN; what is left; what a fresh reader needs: your range, and the first reader's steps it did not finish (its file lists them)."),
+    merges='',
+    when="for a stop that blocks everything you have left, at step 2 (the tip; each finding's count before and after), and with your hand-back",
+    turns='',
+)
+
+
 def build2(seat):
     s = _r3c6() if seat == 'R3-CODE-C-6' else SEATS2[seat]
     head = (
