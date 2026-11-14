@@ -1,0 +1,8 @@
+{"id":"28461","town":"r2r-metropolis-15","sev":"MED","kind":"STATE","why":"lists salt as produced; HOUSES has no Salt works and LAND has no salt resource; honey/herbs with Wild Foraging depleted","other":""}
+{"id":"29168","town":"r2r-metropolis-15","sev":"MED","kind":"STATE","why":"lists salt as produced; HOUSES has no Salt works and LAND has no salt resource at all","other":""}
+{"id":"28974","town":"r2r-metropolis-37","sev":"LOW","kind":"STATE","why":"lists honey and medicinal herbs as produced; LAND has no foraging resource (Foraging areas absent, Ancient Grove depleted)","other":""}
+{"id":"28998","town":"r2r-metropolis-41","sev":"MED","kind":"STATE","why":"lists gems as produced; LAND has no Gemstone Deposits (only Precious Metal Veins, Ancient Grove); honey with Wild foraging absent","other":""}
+{"id":"28183","town":"r2r-metropolis-41","sev":"MED","kind":"STATE","why":"lists gems as produced; LAND has no Gemstone Deposits (only Precious Metal Veins, Ancient Grove, grain)","other":""}
+{"id":"29749","town":"r2r-metropolis-55","sev":"LOW","kind":"STATE","why":"lists medicinal herbs as produced; LAND has no foraging or grove resource at all","other":""}
+{"id":"29354","town":"r2r-metropolis-55","sev":"LOW","kind":"STATE","why":"lists medicinal herbs as produced; LAND has no foraging or grove resource at all","other":""}
+{"id":"DONE","lines":459,"blocks":12,"flags":7}
