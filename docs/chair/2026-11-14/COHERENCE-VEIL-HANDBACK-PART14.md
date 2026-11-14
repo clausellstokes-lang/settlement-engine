@@ -59,7 +59,7 @@ deploy, no golden's door, no pull request. **Nothing is applied anywhere but tho
 | `supabase/migrations/211_server_side_share_veil.sql` (FROZEN, untouched) | `eface6d093933170b9541fe630068c26e5bd41477e95e913ae7168e373be0b01` |
 | `supabase/rollback/211_server_side_share_veil.down.sql` (FROZEN, untouched) | `ce8474ffc251b4c4bd6005d5a409d4a15bd20fef6b507534ef6338d3bd49712f` |
 | 212 at 2937f9ac9 (PART 13's last) | `949fed809db32e19151ca0d1ff5e7d45e88894e54a84d5ed2d01aa18658bd459` / down `15c91a3e5e20c172fbdf2c0b905e28794c23be94993d40972a6b223edbd617fd` |
-| 212 after ruling (5) (the commit carrying this row; section 3) | `1caa9691a3cb891140fe0dc0ef59fa0b1954602ac370adf00b302b65ce666747` / down `ebf68fe8594c98c0cef31d986bbb3d5d2ea0ff6da98aa6c2b9dcd7a71483a781` |
+| 212 after ruling (5) (f2bffdbf0; section 3) | `1caa9691a3cb891140fe0dc0ef59fa0b1954602ac370adf00b302b65ce666747` / down `ebf68fe8594c98c0cef31d986bbb3d5d2ea0ff6da98aa6c2b9dcd7a71483a781` |
 
 **Not final. The owner's pack `docs/chair/2026-11-13/veil-212/` describes old bytes: do not use it.**
 
@@ -77,7 +77,7 @@ deploy, no golden's door, no pull request. **Nothing is applied anywhere but tho
 
 | Item | 212 (server) | Client twin | Red first -> green | Commit |
 |---|---|---|---|---|
-| **Ruling (5)** THE COVERT TIE'S FOUR STRINGS (the chair's ruling (5) and its 04:55 addition; CALL V13-1; the seat's review of 380a933fd) | `_gallery_apply_member_overrides` restated: ONE CASE around the splice (three laterals; no helper added, none re-signed), the identity judged IN ONE SPELLING, the full town's own copy and sentence against its own ties; on a public read the dropped ties are the full town's ties whose `covert` is JSON true (the sanitiser's own condition): the projection's `prominentRelationship` goes WHOLE where the full town's copy is a dropped tie's (the same two ends and type, or a copy equal to its text); its `pressureSentence` where the full town's sentence names both ends of a dropped tie (position, as rule (1)) or holds its words (`_gallery_veil_embeds`: the tie's description and tension, and the copy's stored `full`/`tension`); both where `dm_full` is not an object, its `relationships[]` is there and not an array, or a dropped tie's end has no name; a projection that is not an object holding either key: `{}`. `get_unlisted_dossier` restated (211's statement; `dm_full` = `pub.j` with the live `relationships[]`, `prominentRelationship`, `pressureSentence`). Rollback: `get_unlisted_dossier` at 211's statement verbatim; still 29 helpers, 69 revoked | `gallerySecondHomes.js :: withholdCovertCopies`, rule for rule, run by `galleryVeil.js :: galleryPayloadFor` on the raw town against itself | `galleryVeilHandRows`, new arm VEIL-13 RULING 5 (14 plants, 4 controls, a stored array; every share, every read): RED at 2937f9ac9 780 sends, 0 losses, 1 engine difference; RED at 380a933fd 108 sends (two of the three two-spellings plants), 0 engine differences (`veil-probe-13/out/R5-red-at-2937f9ac9.txt`); GREEN; guards 51 of 51 (14, 5, 32; base 13, 5, 32); `gallerySanitizer.pglite.test.js` 36 of 36 (`out/R5-green.txt`) | the commit carrying this row |
+| **Ruling (5)** THE COVERT TIE'S FOUR STRINGS (the chair's ruling (5) and its 04:55 addition; CALL V13-1; the seat's review of 380a933fd) | `_gallery_apply_member_overrides` restated: ONE CASE around the splice (three laterals; no helper added, none re-signed), the identity judged IN ONE SPELLING, the full town's own copy and sentence against its own ties; on a public read the dropped ties are the full town's ties whose `covert` is JSON true (the sanitiser's own condition): the projection's `prominentRelationship` goes WHOLE where the full town's copy is a dropped tie's (the same two ends and type, or a copy equal to its text); its `pressureSentence` where the full town's sentence names both ends of a dropped tie (position, as rule (1)) or holds its words (`_gallery_veil_embeds`: the tie's description and tension, and the copy's stored `full`/`tension`); both where `dm_full` is not an object, its `relationships[]` is there and not an array, or a dropped tie's end has no name; a projection that is not an object holding either key: `{}`. `get_unlisted_dossier` restated (211's statement; `dm_full` = `pub.j` with the live `relationships[]`, `prominentRelationship`, `pressureSentence`). Rollback: `get_unlisted_dossier` at 211's statement verbatim; still 29 helpers, 69 revoked | `gallerySecondHomes.js :: withholdCovertCopies`, rule for rule, run by `galleryVeil.js :: galleryPayloadFor` on the raw town against itself | `galleryVeilHandRows`, new arm VEIL-13 RULING 5 (14 plants, 4 controls, a stored array; every share, every read): RED at 2937f9ac9 780 sends, 0 losses, 1 engine difference; RED at 380a933fd 108 sends (two of the three two-spellings plants), 0 engine differences (`veil-probe-13/out/R5-red-at-2937f9ac9.txt`); GREEN; guards 51 of 51 (14, 5, 32; base 13, 5, 32); `gallerySanitizer.pglite.test.js` 36 of 36 (`out/R5-green.txt`) | f2bffdbf0 |
 
 Ruling (5), by run (`veil-probe-13/out/R5-born.txt`, `R5-green.txt`; the probe `veil-probe-13/measure/r5-born.probe.jsx`):
 - BORN, server and twin, the 240 towns PART 12 section 5 counted, both stored shapes, three shares, four reads: towns told
@@ -103,8 +103,11 @@ Ruling (5), by run (`veil-probe-13/out/R5-born.txt`, `R5-green.txt`; the probe `
 ## 4. WHAT IS LEFT, in order (line by line, for the next seat)
 
 1. ~~Ruling (5) on all four strings (PART 12 section 7, first bullet).~~ DONE: section 3, its first row (CALL V13-1).
-2. The impression by a shared run of twelve (section 0).
-3. R2 (PART 12 section 7, second bullet).
+2. The impression by a shared run of twelve (section 0). The seat's written sub-brief, ready, not started:
+   `veil-probe-13/briefs/SUB-BRIEF-IMPRESSION-RUN.md` (base f2bffdbf0; its design: the sets of 12-code-point windows
+   of the two folded strings meet, O(length) in both engines, a 300 KB plant; OVER 23 born chance runs is a STOP).
+3. R2 (PART 12 section 7, second bullet). The seat's written sub-brief, ready, not started:
+   `veil-probe-13/briefs/SUB-BRIEF-R2.md` (its base: the tip after item 2; first the premise proved over every plane).
 4. V8-3, V8-9; then V8-2, V8-4, V8-5 (each one commit by identity, else the pack's WHAT 212 DOES NOT CLOSE).
 5. B (V7-5, a07; count what it also drops), C (V7-8, d06; R3 with it), D (the income row by its house).
 6. E, the acceptance run at ONE checksum; ONE message to the chair; 212 unchanged until the chair answers.
@@ -138,7 +141,29 @@ this builder's); it is not in the test-ratchet census. This item neither caused 
   where it holds either key at any depth (before: the unmarked gallery read and the import sent the array, its covert
   copy inside); where it holds neither, the server still sends it and the twin projects `{}` (as at the base).
 
-## 5. How the instruments are re-made (this container's are gone with it)
+## 5. HANDED BACK AT THE COUNT (2026-11-14 10:30 UTC, after ruling (5))
+
+The count was read at the brief's point after the first pushed item (`get_session`: external_metadata.context_usage.used_tokens):
+**269,594**, under the mark of 300,000 by about 30,000 (the fixed context, the reading list, the builder's executed stop on
+the link and CALL V13-1, the seat's review that found THE IDENTITY ACROSS TWO SPELLINGS, the consumer set run twice, all
+in one turn). Item 2 changes 212's impression arm, the twin, two helpers' removal and THE FIVE HOMES' re-key: it cannot be
+built AND read line by line inside the mark, so the seat hands back here, as the brief allows no half-built item to be
+pushed. Nothing is running; nothing is half built; every commit is pushed. The chair was sent item 1's line (the
+checksums; the born count) after the push.
+
+**DONE:** the first act; ruling (5) on all four strings (f2bffdbf0; section 3; CALL V13-1, section 0a).
+**WHAT IS LEFT:** section 4, items 2 to 7, in order; items 2 and 3 have written sub-briefs ready.
+
+**THE SEAT'S OWN EXECUTION AT f2bffdbf0 (not the builder's):** the acceptance run exit 1, 35 of 37, a07 and d06 the only
+FAIL rows, the twin 15 of 15; the reader's town-g through `hand/run.sh`: gcov1 to gcov3 on no public read (only the
+Reveal-DM gallery and import, beside the tie itself); THE CONSUMER SET (the 33 test files that read the migrations folder
+and the gallery functions, listed by `grep -rln "_gallery_apply_member_overrides\|get_unlisted_dossier\|readMigration\|migrations/21[12]\|MIGRATIONS_DIR\|supabase/migrations" tests | xargs grep -ln "gallery\|veil\|unlisted"`,
+less tests/fixtures and tests/build, plus tests/docs/migrationRollbackDiscipline.test.js and tests/ops/postDeployVerify.test.js):
+at 2937f9ac9 6 failed, 402 passed; at f2bffdbf0 6 failed, 403 passed, 0 skipped: the same failing set (galleryServerVeil,
+section 4, FOR THE CHAIR); typecheck domain-strict 1113 (ceiling 1113), ratchet 167 (ceiling 167); eslint 0 errors on
+the touched files. Config and local refs snapshotted before and after the push: unchanged.
+
+## 6. How the instruments are re-made (this container's are gone with it)
 
 - Cluster: `mkdir -p /var/tmp/v13pg /var/tmp/rv7 /var/tmp/v13log; chown postgres:postgres` all three; `su postgres -c
   "/usr/lib/postgresql/16/bin/initdb -D /var/tmp/v13pg --locale=C.UTF-8 -E UTF8 --auth=trust -U postgres"`; append
@@ -150,3 +175,7 @@ this builder's); it is not in the test-ratchet census. This item neither caused 
   /var/tmp/v13/lib`. The acceptance run: `cd /var/tmp/v13 && RV6_PGMOD=/var/tmp/v13/pgmod sh
   lib/docs/chair/2026-11-13/probes/REVIEW-VEIL-7/run-all.sh <worktree> <outdir>` (about 30 s).
 - The scratch worktree: `git worktree add -b veil13 /home/user/wt/veil13 origin/lane/coherence-veil-2026-11-11`, `npm ci`.
+- A red run on the base's bytes: `git archive <base> | tar -x -C /var/tmp/v13/red-<b>`, `node_modules` symlinked in
+  (integrity-counted: `git ls-tree -r <base> | wc -l` against `find -type f`).
+- HAZARDS met: the builder's harness ran a sub-agent background; the seat kept its turn alive by bounded foreground waits
+  on the worktree's HEAD; the mutex refused the shared tier, so targeted vitest runs went through `scripts/gate-tail.sh`.
