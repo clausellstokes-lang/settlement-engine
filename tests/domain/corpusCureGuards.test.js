@@ -58,6 +58,7 @@ const GUARDS = [
   { seed: 'w5-city-slave_revolt-102', pool: 'DS-POW-6::capture pressure ADVANCING (weak security, poor prosperity)', vid: 7, by: 'record', why: 'a slave revolt: "its watch keeps the streets" while the revolt holds them (LINES-READ, slave_revolt-town-3)' },
   { seed: 'w5-city-slave_revolt-102', pool: 'DS-POW-6::capture pressure ADVANCING (weak security, poor prosperity)', vid: 8, by: 'record', why: 'a slave revolt: "A watch walks X\'s streets" (v7\'s twin)' },
   { seed: 'rww-metropolis-under_siege-1', pool: 'DS-GEN-18::STALLED', vid: 2, why: 'a siege: "depends on goods brought in from outside" as if they still came (the read\'s M6; the siege twin is v4)' },
+  { seed: 'w5-city-famine-6', pool: 'DS-DEF-2::CHAIN: food trades working', vid: 1, why: 'a famine: "the town would not run short at once if it were cut off" of a town already short of food (W2-WRITE-6 B, Wadikot)' },
 ];
 
 /** @param {string} seed */

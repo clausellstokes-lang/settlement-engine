@@ -1623,9 +1623,10 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "no crisis: under_siege"
+            "no crisis: under_siege",
+            "no crisis: famine"
           ],
-          "text": "The tally of salted and preserved food at {settlement} is kept up by its working food trades, so the town would not run short at once if it were cut off.",
+          "text": "{settlement}'s food trades are working, and what they put by means the town would not run short at once if it were cut off.",
           "slots": [
             "settlement"
           ],
@@ -1636,7 +1637,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no crisis: under_siege"
           ],
-          "text": "The people who salt, dry and preserve food at {settlement} are working steadily, which matters a great deal if the town is ever cut off.",
+          "text": "The food trades at {settlement} are working, which would matter a great deal if the town were ever cut off.",
           "slots": [
             "settlement"
           ],
@@ -1647,7 +1648,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no crisis: under_siege"
           ],
-          "text": "As long as {settlement}'s food trades keep salting and drying, the town has provisions to fall back on if it is cut off.",
+          "text": "As long as {settlement}'s food trades keep working, the town has some provisions to fall back on if it is cut off.",
           "slots": [
             "settlement"
           ],
@@ -1659,7 +1660,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "crisis: under_siege",
             "food: > famine"
           ],
-          "text": "{settlement} is cut off now, and what its food trades salted and dried before the siege is what stands between the town and hunger.",
+          "text": "{settlement} is cut off now, and what its food trades put by before the siege is helping to keep the town fed.",
           "slots": [
             "settlement"
           ],
@@ -1671,7 +1672,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "crisis: under_siege",
             "food: famine"
           ],
-          "text": "{settlement} is cut off and already hungry, and what its food trades salted and dried before the siege is being eked out.",
+          "text": "{settlement} is cut off and already hungry, and what its food trades put by before the siege is being eked out.",
           "slots": [
             "settlement"
           ],
@@ -1683,7 +1684,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "crisis: under_siege",
             "food: famine"
           ],
-          "text": "The siege has brought hunger to {settlement}, and the salted and dried stores its food trades put by are rationed now.",
+          "text": "The siege has brought hunger to {settlement}, and what its food trades put by is rationed now.",
           "slots": [
             "settlement"
           ],
@@ -1696,7 +1697,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no crisis: under_siege"
           ],
-          "text": "The tally of preserved food at {settlement} is falling, because the trades that salt and dry it are failing; if the town were cut off, it would run short quickly.",
+          "text": "{settlement}'s food trades are failing, so little food is being put by; if the town were cut off, it would have less to fall back on.",
           "slots": [
             "settlement"
           ],
@@ -1707,7 +1708,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no crisis: under_siege"
           ],
-          "text": "The people who salt and dry food at {settlement} cannot keep up, and everyone knows the stores would empty fast if the town were cut off.",
+          "text": "The food trades at {settlement} are struggling to keep up, and little is being put by against the town being cut off.",
           "slots": [
             "settlement"
           ],
@@ -1718,7 +1719,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no crisis: under_siege"
           ],
-          "text": "{settlement}'s salting and drying trades are failing, and each season they fail the town has less preserved food to fall back on if it is cut off.",
+          "text": "{settlement}'s food trades are failing, and each season they fail the town has less put by to fall back on if it is cut off.",
           "slots": [
             "settlement"
           ],
@@ -1729,7 +1730,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "crisis: under_siege"
           ],
-          "text": "{settlement} is cut off now, and the trades that salt and dry its food were failing before the siege began, so there is less put by than the town will need.",
+          "text": "{settlement} is cut off now, and its food trades were failing before the siege began, so less was put by than there should have been.",
           "slots": [
             "settlement"
           ],
@@ -1740,7 +1741,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "crisis: under_siege"
           ],
-          "text": "With {settlement} cut off, people count the salted and dried stores every week, and they were thin before the siege began.",
+          "text": "With {settlement} cut off, people count the stores every week, and the food trades that should have filled them were failing before the siege began.",
           "slots": [
             "settlement"
           ],

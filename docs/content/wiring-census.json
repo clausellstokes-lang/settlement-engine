@@ -2229,6 +2229,7 @@
         "crisis: under_siege": 3,
         "food: > famine": 1,
         "food: famine": 2,
+        "no crisis: famine": 1,
         "no crisis: under_siege": 3
       },
       "undeclared": 0,
