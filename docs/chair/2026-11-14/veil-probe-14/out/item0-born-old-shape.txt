@@ -1,0 +1,17 @@
+towns 240, reads 12480, errors 0
+150	DROPHID | gallery | dm=false
+180	DROPHID | gallery | dm=true
+150	DROPHID | import | dm=false
+180	DROPHID | import | dm=true
+175	DROPHID | link | dm=false
+175	DROPHID | link | dm=true
+100	DROPHID | twin | dm=false
+120	DROPHID | twin | dm=true
+90892	KEPT | gallery | dm=false
+93998	KEPT | gallery | dm=true
+90892	KEPT | import | dm=false
+93998	KEPT | import | dm=true
+90867	KEPT | link | dm=false
+90867	KEPT | link | dm=true
+64930	KEPT | twin | dm=false
+67150	KEPT | twin | dm=true

@@ -1,0 +1,17 @@
+towns 240, reads 24960, errors 0
+5532	DROPHID | gallery | dm=false
+4084	DROPHID | gallery | dm=true
+5532	DROPHID | import | dm=false
+4084	DROPHID | import | dm=true
+5544	DROPHID | link | dm=false
+5544	DROPHID | link | dm=true
+3948	DROPHID | twin | dm=false
+2102	DROPHID | twin | dm=true
+138388	KEPT | gallery | dm=false
+184272	KEPT | gallery | dm=true
+138388	KEPT | import | dm=false
+184272	KEPT | import | dm=true
+138376	KEPT | link | dm=false
+138376	KEPT | link | dm=true
+98852	KEPT | twin | dm=false
+132438	KEPT | twin | dm=true

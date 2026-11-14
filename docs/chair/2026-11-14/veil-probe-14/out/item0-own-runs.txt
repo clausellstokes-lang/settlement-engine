@@ -1,0 +1,28 @@
+VEIL-14's own runs, item 0 (verdict lines; logs outside the tree)
+== guards
+ Test Files  3 passed (3)
+      Tests  52 passed (52)
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)
+== serverveil
+ Test Files  1 passed (1)
+      Tests  16 passed (16)
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)
+== sv-red
+ Test Files  1 failed (1)
+      Tests  7 failed | 10 passed (17)
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
+== sv-green
+ Test Files  1 passed (1)
+      Tests  17 passed (17)
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)
+== master
+ Test Files  1 passed (1)
+      Tests  1 passed (1)
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)
+== run-all
+bytes: 212 1caa9691a3cb8911… 211 eface6d093933170… at 2da90b732
+FAIL | a07 | V7-5 | a renamed hidden house's birth name (list, trace target, trace cause)
+FAIL | d06 | V7-8 (for a ruling) | hasGuild and hasChurch not true (only hidden houses raise them)
+checks 37 | PASS 35 | FAIL 2
+(all 15 equal)
+RUNALL EXIT 1

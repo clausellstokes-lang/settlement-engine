@@ -1,0 +1,18 @@
+master 001..203 | head 203_gallery_scanner_client_mirror_totality.sql | migrations failed 0
+  server-veil-village-3 | house-record faces 0 of 8 | response tells 0 | page tells 0 
+  server-veil-village-0 | house-record faces 0 of 6 | response tells 0 | page tells 0 
+  server-veil-town-2 | house-record faces 0 of 10 | response tells 0 | page tells 0 
+  server-veil-town-0 | house-record faces 0 of 7 | response tells 0 | page tells 0 
+  server-veil-city-2 | house-record faces 0 of 14 | response tells 0 | page tells 0 
+  server-veil-metropolis-3 | house-record faces 0 of 18 | response tells 0 | page tells 0 
+  server-veil-metropolis-7 | house-record faces 0 of 17 | response tells 0 | page tells 0 
+  PLANT (the line's stored shape: a house record) | house-record faces 2 of 3 | response tells 0 | page tells 0 
+the line 001..210 | head 210_public_prose_text_projection.sql | migrations failed 0
+  server-veil-village-3 | house-record faces 0 of 8 | response tells 0 | page tells 0 
+  server-veil-village-0 | house-record faces 0 of 6 | response tells 0 | page tells 0 
+  server-veil-town-2 | house-record faces 0 of 10 | response tells 0 | page tells 0 
+  server-veil-town-0 | house-record faces 0 of 7 | response tells 0 | page tells 0 
+  server-veil-city-2 | house-record faces 0 of 14 | response tells 0 | page tells 0 
+  server-veil-metropolis-3 | house-record faces 0 of 18 | response tells 0 | page tells 0 
+  server-veil-metropolis-7 | house-record faces 0 of 17 | response tells 0 | page tells 0 
+  PLANT (the line's stored shape: a house record) | house-record faces 2 of 3 | response tells 2 | page tells 2 ["npc1Role=ROLEMARK İß ✦","npc1Role=ΡΟΛΟΣ"]
