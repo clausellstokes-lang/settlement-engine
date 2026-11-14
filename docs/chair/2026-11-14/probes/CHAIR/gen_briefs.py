@@ -567,7 +567,59 @@ STATEMENT2 = (
     "alone if they differ. Signing is the merge seat's: you run no golden's door in its writing mode."
 )
 
+COUNT2 = (
+    "THE COUNT. You cannot read your own context count inside a turn, and seats on these lanes have run far past their mark in one unbroken turn. So AFTER "
+    "EVERY ITEM (every pushed cure), and never more than forty-five minutes apart, with nothing running and everything pushed: schedule a message to yourself "
+    "(the send_later tool of the claude-code-remote server; load it with ToolSearch; delay_minutes 1; message \"COUNT CHECK: read your own count, then go on or "
+    "hand back\") and END YOUR TURN with a one-line status. When it wakes you, call get_session of the same server with no session_id and read "
+    "external_metadata.context_usage.used_tokens: under %s, go on with the next item; at or over %s, bring your hand-back file current (what is done with its "
+    "commits and counts; WHAT IS LEFT, line by line; how your instruments are re-made), push, send the chair ONE message (HAND BACK: the tip, what is left) and "
+    "end your turn. If you have no such tool, or the field is absent or reads 0, say so in ONE line to the chair and end your turn: the chair reads your count "
+    "and wakes you."
+)
+
+
 SEATS2 = {}
+
+SEATS2['R2-CODE-A-7'] = dict(
+    title="R2-CODE-A-7 · round two's first code lane: the nine rows left, its own reds, the final statement",
+    branch='lane/r2-code-a-2026-11-13', tip='7175ec17', statement=True,
+    intro=("You are R2-CODE-A-7, the seventh seat on round two's first code lane of the settlement-engine integration program (lane/r2-code-a-2026-11-13). The lane "
+           "cures false lines in the founding paragraph, the history's origin, the arrival scenes, the pressure sentences and the people data: a line a page "
+           "prints that the town's own record makes false (it names a house, a role, a force or a good the town lacks; it speaks of streets in a thorp; it buys "
+           "by road under a siege). The sixth seat cured three writers and handed back at its context mark with its list written out. Yours: that list, the "
+           "lane's own reds, and the lane's ONE final statement."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. On your lane, docs/chair/2026-11-13/R2-CODE-A-HANDBACK.md: SECTION 15 WHOLE (the sixth seat: its three commits with their measures and guards; its "
+          "miss; the siblings its redraw exposed; \"Step 1 — NOT YET DONE\", items 1 to 9: THAT IS YOUR LIST; how the instruments are re-made) and, only where "
+          "section 15 points you: section 12's list of MEDIUM rows (your item 9) and section 13's paragraphs on the census's writers and on the lane's own reds. "
+          "The file is long: read those sections by line range, by script.\n"
+          "3. THE LISTS the row numbers refer to: `git fetch origin lane/round-3-cut-2026-11-13`: docs/chair/2026-11-13/ROUND-3-CUT.json and "
+          "ROUND-3-CUT-INCREMENT.json (key `lines`: each line's number, town, sentence, fact, writer; query by script, never print)."),
+    work=("THE WORK, in this order, each writer its own commit, MEASURED FIRST on births in the app's own shape (section 15 says how the sixth seat built its 764 "
+          "and its 160 crisis pairs), red first (a collected arm, never a bare seed loop), pushed as made:\n"
+          "1. SECTION 15's ITEMS 1 TO 9, in its order, with these rulings: (item 1) THE PAGE NAMES A COURT ONLY WHERE A COURTHOUSE STANDS ON THE ROSTER (a line "
+          "speaks of the town hall or the council, or is not written); a magistrate likewise. (item 3, the reeve row) if the row's own data in powerSiblings.js "
+          "can carry the condition, cure it there; if the cure needs governanceNarrative.js, do NOT touch that file: write it under FOR THE JOIN (file, function, "
+          "the one-line change, a test that reds until it is made) and go on: it is not a stop. (item 4) the roster's sanitiser, npcGenerator.js :: mergeNPCLists, "
+          "beside the informant rule the fifth seat put there: a secret names merchants, a market or a guild only where the roster holds them. (item 7) under a "
+          "siege nothing is brought in by road. THE SIBLINGS THE SIXTH SEAT'S REDRAW EXPOSED (\"They signed an order … whose seal is on it\" in three thorps; \"A "
+          "petition … half their street\" in a hamlet of 20): RULED: a twin carries every condition its siblings carry: the same tier condition, in the item's own "
+          "commit that touches that pool. (item 9) section 12's MEDIUM rows by file, then the increment's rows in the lane's files.\n"
+          "A HAZARD THE SIXTH SEAT MET: the presumed-things walker reads EVERY literal under src/, not the files a governing set names: run "
+          "tests/lint/presumedThings.walker.test.js at every commit that adds, splits or rewords a literal, and move its register only through its own door.\n"
+          "2. THE LANE'S OWN TWO REDS through their doors (the wiring census's alias draft; a new pool's row), as section 13 names them. The two golden surfaces "
+          "the fifth seat's founding cure moved are the merge seat's doors: NAME them with their measured figures in the draft shift record; open no golden's "
+          "door.\n"
+          "3. THEN ONE MESSAGE TO THE CHAIR (the tip; the counts) AND WAIT FOR POINT 49. " + POINT49 + " On that word: the merge of the line's tip (a plain "
+          "merge; say which commit); the instrument's page census on this lane's lines read, each hit cured or declared; THE LANE'S ONE FINAL STATEMENT in the "
+          "form below. PARKED and not yours: the six mentor rows (the powers lane); four lines that never print; the wayside shrine as a house of worship (ruled: "
+          "the line stays; section 15 holds its FOR THE JOIN row)."),
+    merges="; on the chair's word, the merge of the integration line's tip",
+    when="for a stop that blocks everything you have left, when steps 1 and 2 are pushed and you wait for point 49 (the tip; the counts), and for your final statement or hand-back",
+    turns='',
+)
+
 
 def build2(seat):
     s = SEATS2[seat]
@@ -587,7 +639,7 @@ def build2(seat):
         LAWS2,
         how2(s['branch']),
     ] + ([STATEMENT2] if s.get('statement') else []) + [
-        COUNT + ' ' + s['turns'],
+        COUNT2 % (s.get('mark', '400,000'), s.get('mark', '400,000')),
         RUNS,
         never(s['branch'], s['merges']),
         messages(s['when']),
