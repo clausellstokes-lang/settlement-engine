@@ -74,11 +74,18 @@ The order of work (the brief: (j) first, it is HIGH; the chair: the two HIGH add
 
 | Commit | Item | Measure (the 972) | Guard and plant | Moved |
 |---|---|---|---|---|
+| afc90dc96 | the chair's (1) HIGH: the PDF's defence list prints a force under the roster's label | **18** births, the PDF only: "Gates (if walled)" -> "Town gates" (18 lines) | `tests/pdf/defenseForceNamesLabelled.test.jsx` (r2r-town-11, census shape); plant (the file as it was) reds it | `DefenseSecurity.jsx`: `institutionDisplayName(force.name) \|\| force.name` |
 | 364c2313d | (j) HIGH: the Foundry journal names each supply chain by its record | the journal's chain list in **963** births: **12,983** lines "- **Chain** *(…)*" -> the record's label; every other surface and the record byte-identical | `tests/pdf/journalChainNames.test.js` (three born towns; the nameless chain); plant (the file as it was) reds 4 of 4 | `viewModelBodySlices.js :: economicsSlice` reads `chainPrintName(c, s).label`; the chain-print walker reclasses the file EXEMPT -> PRINT_SITES (a narrowing: it must import the leaf) |
 
 ## FOR THE JOIN (this seat's, gathered)
 
+1. The chair's (1), the tab's twin: `src/components/new/tabs/DefenseTab.jsx` prints `force.name` raw ("Gates (if walled)" on the Defense tab of the same 18 births); held by lane/r3-tabs-2026-11-13 by content. The one-line change: `{institutionDisplayName(force.name) || force.name}`.
+2. The chair's (2): `OverviewTab.jsx`'s stored tensions print "Taverns (5-20)" (1 of the 972: r2r-town-9). The pass the reader names (`houseLabelsInText`, `institutionDisplayName.js`) is NOT on this lane's tree (r2-code-b's stage, H3-18); on this tree the roster itself prints "Taverns (5-20)" (Institutions, Services, Economics tabs and the PDF), so the Overview agrees with this tree's roster. The change, once that function is joined: `{houseLabelsInText(typeof t==='object'?t.description:t, r.institutions)}` in the Tensions block (and HistoryTab.jsx's twin).
+3. The chair's (3): the Overview's Food Security row: ruled to SURFACES-1 (the chair, 11:42).
+
 ## WHAT IS LEFT, line by line
+
+- The chair's rows of 11:43 (the lane's reader REVIEW-UPKEEP-4): a court named in 133 towns with no court house (measure which houses set the court flag first); "Money enough … laid by before the debt crisis" (25 towns); "nobody organised to meet it" (in item 5).
 
 ---
 
