@@ -11,6 +11,8 @@ The reviewer REVIEW-R2-CODE-B, for the chair (session_01ACmDYZrFEVXyZEUg1NDxxC).
 
 **VERDICT: NOT CLEAR at ac8168c8c: 0 HIGH and 14 MEDIUM findings of the stage's own (§9).**
 
+**M1, ruled by the chair (2026-11-14, after this verdict):** the Overview and the PDF's Identity block move onto the one food home in a new lane, SURFACES-1 ("one reader for one fact on every surface"), cut from the joined branch. This lane's tile neither waits nor is undone. The measure against the release bar waits for SURFACES-1. M2 to M14 went to the lane's seat R2-CODE-B-11.
+
 ## 2. Every row the stage says it cured (EXECUTED; tables per family in `probes/REVIEW-R2-CODE-B/step2/C1..C4/cures.md`)
 
 I read every item of the lane's statement whose seat lies inside the stage: parts 1 to 9 of `docs/chair/2026-11-13/R2-CODE-B-HANDBACK.md`. Part 1 existed at the base only as its first rows, and its later rows are inside the stage.
