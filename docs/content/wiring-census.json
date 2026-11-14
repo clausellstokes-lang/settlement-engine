@@ -2,7 +2,7 @@
   "schema": "wiring-census/1",
   "stamp": {
     "files": {
-      "src/domain/display/stateProse/generalStateProse.js": "3ed396f7ef5d6f42fca58446646f1b7591120505df425f816909b5c856454218",
+      "src/domain/display/stateProse/generalStateProse.js": "42dae5a46fae776296e499465519fec29b3322ec12f7b7d3fcb49c68aed79ef9",
       "src/domain/display/stateProse/powerStateProse.js": "37ca798950bfde97c2e406ae72bab3856dcb97c22d6595b6ad12744d18568a2e",
       "src/domain/display/stateProse/economyStateProse.js": "3480fa792f166d77aa7de7129bf1fe404d1b2e1e86823d9923b119134c118fb2",
       "src/domain/display/stateProse/defenseStateProse.js": "63b984f0669f9c3b58f7f0141c3393a8343f338efa3a7c769fc8e40d88d21818",
@@ -18,7 +18,7 @@
       "src/domain/display/stateProse/stressorsStateProseCandidates.js": "ee0548fc8b662da76e4bf85a1fae30433e9f738277c774e16c6a7abd7fb93552",
       "src/domain/display/stateProse/warFaithStateProseCandidates.js": "b5b193dd2a2c83d077da5f82fd4a5fc5f5ad15a3b6a214725daf41ede442324b"
     },
-    "producerIndexFiles": 1341
+    "producerIndexFiles": 1349
   },
   "totals": {
     "pools": 856,

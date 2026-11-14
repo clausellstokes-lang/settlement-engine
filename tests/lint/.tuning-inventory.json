@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "08c9f15bdcfbdc14c0afd571169ef31bc6744acb",
-  "measuredBy": "W2-A-LEAVES-2",
+  "measuredAtSha": "19dd60303f9a1fb2d1cf6966f3ddff8dda638fb7",
+  "measuredBy": "STYLE-2-MERGE-13",
   "date": "2026-11-13",
-  "note": "ALLEGIANCE_TUNING gains one dependent: src/domain/facts/officialsInPay.js reads allegianceOf (the leaf an official in a criminal pay, REVIEW-W2A F3); no value moved",
+  "note": "point 49: W2-B-DECLARE (5657a229c) merged — RULING_PATRONAGE_TUNING gains the dependent src/domain/facts/registeredWords.js (F2 third seat: the ruling faces read dmPowerViewOf); no value moved",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -1062,7 +1062,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 987,
+      "line": 990,
       "spanDigest": "d8ad20f683ec92a4a0b123ebd6748169b8712e96577f567cd56d3cdd08f76113",
       "leaves": {
         "value": 0.05
@@ -1289,7 +1289,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 4,
-      "line": 55,
+      "line": 56,
       "spanDigest": "9acdd8bbb6d33f13f0160b4fb859db40ed62562fc613d4cd950fa2f3358584d1",
       "leaves": {
         "byRank.1": 0.15,
@@ -1301,6 +1301,7 @@
       },
       "dependents": [
         "src/components/new/tabs/WhoRunsThisTownPanel.jsx",
+        "src/domain/facts/registeredWords.js",
         "src/pdf/lib/viewModel.js"
       ],
       "namedDependents": []
@@ -5049,7 +5050,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 7,
-      "line": 83,
+      "line": 84,
       "spanDigest": "d3c62cf5484d9ffcb88f33ab78dcf1cb7bafe07335e8da5d00ad37c5c63747d6",
       "leaves": {
         "thresholds.prosperous": 0.62,
@@ -8260,7 +8261,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 2,
-      "line": 68,
+      "line": 73,
       "spanDigest": "27e8cae7f714b6255ed46d5145a6bb53f4257fda9c347798c877bf6108baa529",
       "leaves": {
         "RANKS": 3,
@@ -8275,7 +8276,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 4,
-      "line": 86,
+      "line": 91,
       "spanDigest": "a163ac8776fc0929e33ec0597e5327711e48c4ce474f669233879f93a30401d7",
       "leaves": {
         "strength": 0.6,
@@ -8292,7 +8293,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 3,
-      "line": 65,
+      "line": 66,
       "spanDigest": "9ce244b1dbb17502d5534d5ea33f9f9bafe8cec4c191d4f934be6e6673dbba1e",
       "leaves": {
         "base.RANK": 1,
@@ -8330,7 +8331,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 5,
-      "line": 90,
+      "line": 91,
       "spanDigest": "9959eec349933f6bf2320b936780466dfea07d1f4bedbbed8da671fd806ce7ab",
       "leaves": {
         "strengthFull": 30,

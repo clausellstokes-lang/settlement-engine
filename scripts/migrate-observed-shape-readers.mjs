@@ -197,7 +197,12 @@
  *     roster 10 -> 13, the bank 69/45 -> 76/50), and ADMITS the window's other rows with
  *     attribution. Its full rationale lives beside `WINDOW_RUNG1_TARGET_SCHEMA` (RETIRED).
  *
- *   schema 40 -> 41 (LIVE)   THE PLAYED-WORLDS WRITER'S ADMISSION (STYLE-2-MERGE closing act 5, the chair's FINAL
+ *   schema 41 -> 42 (LIVE)   THE AGREEMENT LANE'S TIER SEED (STYLE-2-MERGE point 47, the chair's ruling on STOP
+ *     47a): one rung, one cause — producer 2b's tier seed re-searched by its own rule (osr-tier-14 -> osr-tier-19)
+ *     after COHERENCE-AGREE moved osr-tier-14's town out of the overlap; topology, tag law, roster and bank
+ *     (78/52) unchanged. Its full rationale lives beside `AGREE_TIER_SEED_TARGET_SCHEMA`.
+ *
+ *   schema 40 -> 41 (RETIRED) THE PLAYED-WORLDS WRITER'S ADMISSION (STYLE-2-MERGE closing act 5, the chair's FINAL
  *     RULING of 2026-11-09 21:2x): one rung, one cause — a NEW writer class, `played-worlds-writer` (a writer that
  *     runs only in campaign time and is dormant in the birth corpus), and its first declaration, `outcome on
  *     outcome` (writer worldPulse/convergence.js), its one row tagged; the roster 15 -> 16, the bank 77/51 ->
@@ -377,6 +382,7 @@ import {
   validateSchema38Baseline,
   validateSchema39Baseline,
   validateSchema40Baseline,
+  validateSchema41Baseline,
 } from './lib/observed-shape-baseline.mjs';
 
 export const MIGRATION_REPORT_SCHEMA = 2;
@@ -1786,6 +1792,21 @@ export const PUBLIC_PROSE_TARGET_SCHEMA = 40;
  *  holds as at every rung: this rung lands walker-red, and its re-freeze lands next. */
 export const PLAYED_WORLDS_TARGET_SCHEMA = 41;
 
+/* ⭐⭐ THE SCHEMA 41 → 42 RUNG — THE AGREEMENT LANE'S TIER SEED (STYLE-2-MERGE point 47, COHERENCE-AGREE; the
+ *  chair's ruling on STOP 47a, 2026-11-13 10:20 UTC: "(B), MIGRATE NOW", one package, a row and not a branch).
+ *
+ *  THE CAUSE: the agreement lane's generation moved the tier seed's town out of the overlap. Producer 2b's
+ *  `osr-tier-14` under CONFIGS[0] no longer lands in the town/city overlap, so its pulse minted no tier candidate
+ *  in twelve intervals and the corpus builder THREW (observedShapeReaders, writerReach and proseFamilyContract
+ *  failed at load). Re-searched by producer 2b's own rule over `osr-tier-0..39` under CONFIGS[0]: the minters are
+ *  osr-tier-19 (pop 2477, interval 5), -25 (2394) and -28 (2282); the lowest, osr-tier-19, is taken. The corpus
+ *  builder is a DETECTOR SOURCE, so the seed is re-governed here: schema 41's topology, tag law, roster and bank
+ *  UNCHANGED; the reconciliation (every moved row classed WITNESSED / BINDING LOST, read by the chair before the
+ *  re-freeze) is recorded in the re-freeze commit. The delta is FOUR paths — the corpus builder and the three
+ *  bookkeeping paths; see `AGREE_TIER_SEED_SCANNER_DELTA_PATHS`. The commit pair holds as at every rung: this
+ *  rung lands walker-red, and its re-freeze lands next. */
+export const AGREE_TIER_SEED_TARGET_SCHEMA = 42;
+
 export const DECLARED_BANK_BY_TARGET = Object.freeze({
   [EXEMPTION_RETIREMENT_TARGET_SCHEMA]: Object.freeze({ bankedReads: 60, taggedRows: 39 }),
   [BANK_FENCE_TARGET_SCHEMA]: Object.freeze({ bankedReads: 60, taggedRows: 39 }),
@@ -1870,6 +1891,7 @@ export const DECLARED_BANK_BY_TARGET = Object.freeze({
   // GROWN at 41 (STYLE-2-MERGE closing act 5, 21:2x): one declaration of the new played-worlds-writer class,
   // `outcome on outcome`, one address (newsBody.js) and one read.
   [PLAYED_WORLDS_TARGET_SCHEMA]: Object.freeze({ bankedReads: 78, taggedRows: 52 }),
+  [AGREE_TIER_SEED_TARGET_SCHEMA]: Object.freeze({ bankedReads: 78, taggedRows: 52 }),
 });
 
 /** The declared post-bank of a target, or `null` for a rung that predates the law. */
@@ -2518,6 +2540,14 @@ export const PLAYED_WORLDS_SCANNER_DELTA_PATHS = Object.freeze([
   'scripts/migrate-observed-shape-readers.mjs',
 ]);
 
+/** The schema-41 → 42 delta: FOUR paths — the corpus builder (producer 2b's tier seed) and the three bookkeeping paths. */
+export const AGREE_TIER_SEED_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/lib/observed-shape-corpus.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
 export const BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS = Object.freeze([
   'package-lock.json',
   'package.json',
@@ -2596,6 +2626,8 @@ const PUBLIC_PROSE_SCANNER_TRANSITION_POLICY =
   'schema-39-to-40-public-prose-writer-v1';
 const PLAYED_WORLDS_SCANNER_TRANSITION_POLICY =
   'schema-40-to-41-played-worlds-writer-v1';
+const AGREE_TIER_SEED_SCANNER_TRANSITION_POLICY =
+  'schema-41-to-42-tier-seed-v1';
 const CORPUS_COVERAGE_SCANNER_TRANSITION_POLICY =
   'schema-7-to-8-exact-scanner-transition-v1';
 const EPOCH_DARK_CORPUS_SCANNER_TRANSITION_POLICY =
@@ -2655,6 +2687,7 @@ export const LEAF_MIGRATION_PREDECESSOR = Object.freeze({
   [TRAIN_CAR4_TARGET_SCHEMA]: TRAIN_CAR3_TARGET_SCHEMA,
   [PUBLIC_PROSE_TARGET_SCHEMA]: TRAIN_CAR4_TARGET_SCHEMA,
   [PLAYED_WORLDS_TARGET_SCHEMA]: PUBLIC_PROSE_TARGET_SCHEMA,
+  [AGREE_TIER_SEED_TARGET_SCHEMA]: PLAYED_WORLDS_TARGET_SCHEMA,
 });
 
 /**
@@ -2768,6 +2801,7 @@ const LEAF_PREDECESSOR_VALIDATOR = Object.freeze({
   [TRAIN_CAR4_TARGET_SCHEMA]: validateSchema39Baseline,
   // The schema-41 rung's own predecessor (SW-B7b, the public prose writer), validated as schema 40.
   [PUBLIC_PROSE_TARGET_SCHEMA]: validateSchema40Baseline,
+  [PLAYED_WORLDS_TARGET_SCHEMA]: validateSchema41Baseline,
 });
 
 const RETIRED_EXACT_MIGRATION_KIND = `observed-shape-schema-2-to-${RETIRED_EXACT_TARGET_SCHEMA}-migration`;
@@ -3291,6 +3325,12 @@ const SCANNER_TRANSITION_BY_TARGET = new Map([
     // governed execution inputs (the dossier-state prose, the institution service keys, the prose
     // norms, …) by their documented commands after the predecessor was frozen, and the report
     // records that movement for the review's decision.
+    reviewableUnscannedMovement: true,
+  })],
+  [AGREE_TIER_SEED_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: AGREE_TIER_SEED_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: AGREE_TIER_SEED_SCANNER_TRANSITION_POLICY,
     reviewableUnscannedMovement: true,
   })],
   [PLAYED_WORLDS_TARGET_SCHEMA, Object.freeze({
@@ -4492,7 +4532,7 @@ export function run(argv = process.argv.slice(2)) {
   // any mismatch into a refusal rather than a silent mode switch.
   const targetSchema = command.targetSchema
     ? Number(command.targetSchema)
-    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : PLAYED_WORLDS_TARGET_SCHEMA);
+    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : AGREE_TIER_SEED_TARGET_SCHEMA);
   if (![RETIRED_EXACT_TARGET_SCHEMA, HEURISTIC_TARGET_SCHEMA, FILTERED_TARGET_SCHEMA,
     SURFACE_FILTERED_TARGET_SCHEMA, BANKED_EXPLAINED_WRITER_TARGET_SCHEMA,
     CORPUS_COVERAGE_TARGET_SCHEMA, EPOCH_DARK_CORPUS_TARGET_SCHEMA,
@@ -4508,8 +4548,10 @@ export function run(argv = process.argv.slice(2)) {
     MIGRATION_DIRECTION_TARGET_SCHEMA, PEOPLE_CAST_TARGET_SCHEMA,
     PEOPLE_LANDING_TARGET_SCHEMA, CAR_MERGE_TARGET_SCHEMA, WAVE_W2_TARGET_SCHEMA, WAVE_FOOD_TARGET_SCHEMA, WAVE_VEIL_TARGET_SCHEMA,
     TRAIN_CAR1_TARGET_SCHEMA, TRAIN_CAR2_TARGET_SCHEMA, TRAIN_CAR3_TARGET_SCHEMA,
-    TRAIN_CAR4_TARGET_SCHEMA, PUBLIC_PROSE_TARGET_SCHEMA, PLAYED_WORLDS_TARGET_SCHEMA].includes(targetSchema)) {
-    throw new Error(`observed-shape --target-schema must be ${PLAYED_WORLDS_TARGET_SCHEMA} (live played-worlds leaf),`
+    TRAIN_CAR4_TARGET_SCHEMA, PUBLIC_PROSE_TARGET_SCHEMA, PLAYED_WORLDS_TARGET_SCHEMA,
+    AGREE_TIER_SEED_TARGET_SCHEMA].includes(targetSchema)) {
+    throw new Error(`observed-shape --target-schema must be ${AGREE_TIER_SEED_TARGET_SCHEMA} (live tier-seed leaf),`
+      + ` ${PLAYED_WORLDS_TARGET_SCHEMA} (retired played-worlds leaf),`
       + ` ${PUBLIC_PROSE_TARGET_SCHEMA} (retired public-prose leaf),`
       + ` ${TRAIN_CAR4_TARGET_SCHEMA} (retired allegiance-car4 leaf),`
       + ` ${TRAIN_CAR3_TARGET_SCHEMA} (retired allegiance-car3 leaf),`

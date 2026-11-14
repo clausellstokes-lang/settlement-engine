@@ -105,6 +105,7 @@
  * R | l | identity+chains | surface | src/domain/display/validationOnPage.js
  * R | l | identity        | direct  | src/domain/edit/pools.js
  * R | l | identity        | surface | src/domain/facts/chainWorking.js
+ * R | l | identity        | direct  | src/domain/facts/registeredWords.js
  * R | l | identity        | surface | src/domain/resourceSites.js
  * R | l | none            | member  | src/domain/undercity/monotoneComponents.js
  * R | l | identity+chains | surface | src/domain/worldPulse/institutionLifecycle.js

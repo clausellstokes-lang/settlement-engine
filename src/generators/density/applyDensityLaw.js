@@ -66,6 +66,8 @@ import { rollDensityPlan } from './densityRoll.js';
 import { clamp01 } from '../../kernel/math.js';
 import { prosperityRank01 } from '../../domain/prosperityRank.js';
 import { renormalizeFactionPower } from '../power/rulingStructure.js';
+import { settleHouselessPowers } from '../power/rulerKin.js';
+import { stressPowerRowOf } from '../../domain/people/stressPowerFaces.js';
 
 /** The stressor family that may lift the seat floor (§810.3 R13 / §810.5). ONE
  *  closed vocabulary serves birth and play; `succession_void` already exists in
@@ -194,6 +196,9 @@ function planFor(input, mode = {}) {
       : null,
     seatAll: mode.seatAll,
     massOverride: mode.massOverride ?? null,
+    // COHERENCE-POWERS-3 (the chair's rulings (1), (2)): the powers a crisis seats (data/stressPowerFaces.js's `seated`)
+    crisisSeatKeys: (input.powerStructure?.factions || [])
+      .filter((seat) => stressPowerRowOf({ stress: input.stress }, seat)?.seated === true).map(seatKey),
   });
 }
 
@@ -234,6 +239,7 @@ export function rollNamedMass(input) {
  *   powerStructure?: {factions?: Array<Record<string, unknown>>}|null,
  *   economicState?: Record<string, unknown>|null,
  *   massOverride?: number|null,
+ *   institutions?: unknown,
  *   rng: {random: () => number, fork: (l: string) => any},
  * }} input
  */
@@ -243,11 +249,30 @@ export function resizePoliticalRoster(input) {
   }
   const plan = planFor(input, { massOverride: input.massOverride ?? null });
   return {
-    powerStructure: resizeSeats(
+    powerStructure: foldKin(resizeSeats(
       input.powerStructure, plan, input.rng.fork('density-law').fork('niche-mint'),
-    ),
+    ), input.institutions),
     plan,
   };
+}
+
+/**
+ * COHERENCE-POWERS 2B, THE FOLD (A-plus) and THE POWER WITH NO ONE ON THE PAGE, at the roster's last build: a
+ * power that no face-bearing house stands behind after the doubled-niche deal is not a power. The ruler's own
+ * kind folds its figure into the ruler; any other kinded power is not built (power/rulerKin.js ::
+ * settleHouselessPowers), and a relationship naming either goes with it (pruneToRoster). The
+ * houses here are final, the faction boost's included. No draw. A roster with nothing to fold is returned by
+ * reference; otherwise its seats are copied, so no seat object another holder shares is written.
+ * @param {{factions?: Array<Record<string, unknown>>, factionRelationships?: unknown}|null|undefined} powerStructure
+ * @param {unknown} institutions the settlement's final roster of houses
+ */
+function foldKin(powerStructure, institutions) {
+  if (!powerStructure || !Array.isArray(powerStructure.factions) || !Array.isArray(institutions)) return powerStructure;
+  const factions = powerStructure.factions.map(seat => ({ ...seat }));
+  const { folded, dropped } = settleHouselessPowers(factions, institutions);
+  if (!folded.length && !dropped.length) return powerStructure;
+  const settled = { ...powerStructure, factions };
+  return pruneToRoster(settled, new Set([...folded, ...dropped]));
 }
 
 /**

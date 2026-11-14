@@ -508,6 +508,21 @@
  *   definitions): DUPLICATES.permille 117/202/47/62/45/53 -> 117/202/47/62/45/54 (derived ceilings
  *   270/465/109/143/104/122 -> 270/465/109/143/104/125). CORPUS_ROWS stays 504; the throw census stays 0.
  *
+ *   2026-11-13 — STYLE-2-MERGE RECORD 47, THE COHERENCE-AGREE MERGE, THROUGH THE SIGNED DOOR (ODQ §934.105, THE
+ *   STYLE WAVE'S MERGE; record docs/shift-records/2026-11-13-style-2-merge-47-coherence-agree.json; the chair
+ *   signs by the owner's delegation, vetoable; its FIFTH surface by the chair's ruling (a) on STOP 47b, the draft
+ *   having named this suite's W2 pin and not the surface). Written from the staged tree S47 (9e2ae9035 with the door
+ *   paths carried from the branch). 107 of 504 rows move (the lane's own tip moves the identical 107; the line 0).
+ *   The per-tier maximum roster reads 11/16/24/46/90/104, so CARTOGRAPHY_CALIBRATION does not move, nor
+ *   CARTOGRAPHY_HEADROOM_PERMILLE (the chair's ruling on STOP 47c). Re-keyed by measurement over the recorded corpus
+ *   (the suite's own definitions): DUPLICATES.permille 117/202/47/62/45/54 -> 109/199/42/64/48/57 (derived ceilings
+ *   270/465/109/143/104/125 -> 251/458/97/148/111/132). THE RISE, SAID (a tuning-pass input for the closing acts):
+ *   town 62 -> 64, city 45 -> 48 and metropolis 54 -> 57 repeat shapes MORE, their derived ceilings rising with them
+ *   (143 -> 148, 104 -> 111, 125 -> 132); thorp 117 -> 109, hamlet 202 -> 199 and village 47 -> 42 repeat LESS. THE
+ *   FALSIFIER's per-tier refusals 36/21/6/32/36/34 -> 38/20/8/29/37/33, its total 165 unchanged. WHAT DID NOT MOVE,
+ *   each checked: EXACT duplication stays 0 at every tier; the throw census stays 0 of 504; CORPUS_ROWS stays 504;
+ *   every reading under its derived ceiling; W2's live re-measure reproduces every sampled row (12 drifted before).
+ *
  * To re-record after an INTENTIONAL change, run:
  *   UPDATE_CARTOGRAPHY_CALIBRATION=1 npx vitest run tests/domain/townCartographyCalibration.test.js
  * and add a row above before committing. Re-recording without adding a row is a
@@ -625,12 +640,12 @@ const FROZEN = Object.freeze({
  * those, which is the evidence that the census measures the cure rather than nothing.
  */
 const DUPLICATES = Object.freeze({
-  thorp: Object.freeze({ permille: 117 }),
-  hamlet: Object.freeze({ permille: 202 }),
-  village: Object.freeze({ permille: 47 }),
-  town: Object.freeze({ permille: 62 }),
-  city: Object.freeze({ permille: 45 }),
-  metropolis: Object.freeze({ permille: 54 }),
+  thorp: Object.freeze({ permille: 109 }),
+  hamlet: Object.freeze({ permille: 199 }),
+  village: Object.freeze({ permille: 42 }),
+  town: Object.freeze({ permille: 64 }),
+  city: Object.freeze({ permille: 48 }),
+  metropolis: Object.freeze({ permille: 57 }),
 });
 
 /**
@@ -1251,7 +1266,9 @@ describe('W7 a corpus that outgrows the derived caps is LOUD', () => {
     // roster counts alone. The four tiers are the four that could not draw. ⚠ FIVE SINCE
     // 2026-09-30 (the urban band, ODQ §934.86): complete city blocks put 68 of the corpus's
     // cities over the superseded city binding (64), which no city reached before.
-    expect(refused).toEqual({ thorp: 36, hamlet: 21, village: 6, town: 32, city: 36, metropolis: 34 });
+    // 2026-11-13 (STYLE-2-MERGE RECORD 47, THE COHERENCE-AGREE MERGE; header): the re-dealt rosters move the per-tier
+    // refusals 36/21/6/32/36/34 -> 38/20/8/29/37/33; the total 165 HOLDS.
+    expect(refused).toEqual({ thorp: 38, hamlet: 20, village: 8, town: 29, city: 37, metropolis: 33 });
     expect(Object.values(refused).reduce((sum, count) => sum + count, 0)).toBe(165);
     // And the superseded per-row byte band is below what the corpus really produces,
     // which is the second premise the cap change alone could never have reached.
@@ -1330,7 +1347,8 @@ describe('W8 the drawn corpus does not repeat itself', () => {
     // 188/324/76/100/72/85 -> 270/465/109/143/104/122 on 2026-11-05: CARTOGRAPHY_HEADROOM_PERMILLE 1600 -> 2300 (the chair's
     // ruling 2, LANDING-4's addendum; header). The readings do not move; the ceilings are the same operator at the new headroom.
     // 270/465/109/143/104/122 -> 270/465/109/143/104/125 on 2026-11-04: MERGE-WAVE RECORD 7, THE FIX-FOOD-ISOLATION MERGE (header), the same operator.
-    expect(CARTOGRAPHY_TIERS.map(duplicateCeilingPermille)).toEqual([270, 465, 109, 143, 104, 125]);
+    // 270/465/109/143/104/125 -> 251/458/97/148/111/132 on 2026-11-13: STYLE-2-MERGE RECORD 47, THE COHERENCE-AGREE MERGE (header), the same operator.
+    expect(CARTOGRAPHY_TIERS.map(duplicateCeilingPermille)).toEqual([251, 458, 97, 148, 111, 132]);
     // And the derivation is live — a hypothetical reading derives its own ceiling.
     expect(Math.ceil((100 * CARTOGRAPHY_HEADROOM_PERMILLE) / 1000)).toBe(230);
   });

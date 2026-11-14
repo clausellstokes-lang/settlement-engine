@@ -319,13 +319,13 @@
   },
   {
     "path": "src/components/new/npcComponents.jsx",
-    "line": 155,
+    "line": 157,
     "category": "floatInterpolation",
     "snippet": "{rel.strength}"
   },
   {
     "path": "src/components/new/npcComponents.jsx",
-    "line": 161,
+    "line": 163,
     "category": "floatInterpolation",
     "snippet": "{rel.tension}"
   },
@@ -421,25 +421,25 @@
   },
   {
     "path": "src/components/new/tabs/power/PowerStrata.jsx",
-    "line": 276,
+    "line": 277,
     "category": "floatInterpolation",
     "snippet": "`${r.name}: ${pct} percent (power ${r.power})`"
   },
   {
     "path": "src/components/new/tabs/power/PowerStrata.jsx",
-    "line": 276,
+    "line": 277,
     "category": "percentToken",
     "snippet": "`${r.name}: ${pct} percent (power ${r.power})`"
   },
   {
     "path": "src/components/new/tabs/power/PowerStrata.jsx",
-    "line": 278,
+    "line": 279,
     "category": "floatInterpolation",
     "snippet": "{pct}"
   },
   {
     "path": "src/components/new/tabs/power/PowerStrata.jsx",
-    "line": 328,
+    "line": 331,
     "category": "floatInterpolation",
     "snippet": "{r.power}"
   },

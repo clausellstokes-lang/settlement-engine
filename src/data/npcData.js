@@ -1951,7 +1951,7 @@ export const STRESS_ECONOMIC_EFFECTS = {
       { line: (r, s) =>
         `${r.name} owes ${s.name} more than the settlement collects in two years of taxes. ${s.name} is paid first, every quarter.`, colour: true },
       { line: (r, s) =>
-        `${s.name} lends and ${r.name} spends. The council's decisions are made in ${r.name}'s chamber and approved in ${s.name}'s counting-house.`, excludes: ["ruler: lord","ruler: occupier"] },
+        `${s.name} lends and ${r.name} spends. The council's decisions are made in ${r.name}'s chamber and approved in ${s.name}'s counting-house.`, needs: ["institution: bank"], excludes: ["ruler: lord","ruler: occupier"] }, // COHERENCE-POWERS-2: no counting-house where the town has no bank
       { line: (r, s) => `${r.name} governs on ${s.name}'s credit. Every loan renewed adds one more condition to the next.`, colour: true },
     ], ['government', 'economy']),
     tension: pairProse('t', [

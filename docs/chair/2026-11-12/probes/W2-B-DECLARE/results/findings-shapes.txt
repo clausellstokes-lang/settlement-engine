@@ -1,0 +1,103 @@
+347	20 | unattributed | P | siege | - | N endurance: N siege the outlying fields are lost;	«r2r-town-0»
+342	20 | written in code | P | siege | src/domain/display/defenseDisplay.js | N endurance: N granary: under siege the outlying fields are lost;	«r2r-thorp-0»
+262	16a | written in code | S | powersCount | src/components/new/tabs/WhoRunsThisTownPanel.jsx | N ruling three of N	«r2r-thorp-0»
+86	11 | generator pool | P | mercenary | src/generators/computeActiveChains.js | N escort & mercenary hire	«r2r-city-2»
+56	16a | written in code | S | powersCount | src/components/new/tabs/WhoRunsThisTownPanel.jsx | N ruling three of N's N	«r2r-thorp-6»
+34	NEW-V7 | written in code | P | war | src/domain/display/conditionWords.js | N reading includes the current condition: wartime pressure.	«r2r-thorp-5»
+28	14 | generator pool | P | quarters | src/data/cultureProfiles.js | N waterworks, fermentation, and intensive garden production structure urban food supply.	«r2r-thorp-16»
+20	14c | generator code | P | quarters | src/generators/safetyProfile.js | which power controls a district determines what rules apply.	«r2r-hamlet-4»
+16	14c | unattributed | P | quarters | - | N merchant district of N looks prosperous.	«r2r-hamlet-32»
+16	14c | written in code | P | quarters | src/components/map/RealmComparisons.jsx | N rest of the settlement, visible further in, looks like it has been waiting for the merchant distri	«r2r-hamlet-32»
+15	8 | generator pool | P | temple | src/data/powerSiblings.js | N church wants approval rights over who may trade and when.	«r2r-thorp-0»
+12	14c | generator code | P | quarters | src/generators/safetyProfile.js | N districts are closed off, and nobody is sure whose side a neighbour is on.	«r2r-thorp-22»
+12	14c | generator code | P | quarters | src/generators/safetyProfile.js | N armed conflict between revolt participants and security forces in contested districts.	«r2s-slave_revolt-thorp-0»
+12	14c | generator code | P | quarters | src/generators/safetyProfile.js | N and improvised weapons circulating in the revolt-held districts.	«r2s-slave_revolt-thorp-0»
+11	NEW-V8 | written in code | P | occupation | src/domain/crisis/crisisCast.js | the occupier's local face: no occupying power on the roster	«r2r-thorp-1»
+11	NEW-V4 | generator code | P | market | src/data/stressTypes.js | N people come to market, travel is discouraged, and some goods stop arriving.	«r2r-thorp-41»
+11	14b | generator code | P | quarters | src/generators/historyGenerator.js | A catastrophic or transformative event tied to the local ley line concentration occurred, permanentl	«r2r-thorp-53»
+10	14c | generator code | P | quarters | src/generators/safetyProfile.js | N rebels hold some districts.	«r2s-slave_revolt-thorp-0»
+8	NEW-V3 | corpus pool | P | mill | src/data/dossierStateProse/economy.generated.js | N grain in N's country is worked all the way through: the ground gives it, N finishes it, and it lea	«r2r-thorp-30»
+8	11 | generator pool | P | mill | src/data/supplyChainData.js | NRaw materials & fuel✓ N	«r2r-hamlet-18»
+8	14c | generator code | P | quarters | src/generators/steps/stepMetadata.js | controls a distinct district or institution.	«r2r-village-30»
+7	14c | unattributed | P | quarters | - | N-inspired, built around kin districts and an assembly ground, on pasture.	«r2r-thorp-5»
+7	14c | generator pool | P | quarters | src/data/npcData.js | N've been quietly buying up property in a district that hasn't been announced as a development site.	«r2r-thorp-56»
+6	14c | unattributed | P | quarters | - | N courts and covered lanes make movement through the merchant quarter deliberate.	«r2r-thorp-9»
+6	14b | generator pool | P | quarters | src/data/historyData.js | N rose with little warning and reshaped the lower districts, drowning livelihoods and redrawing who 	«r2r-thorp-28»
+6	14c | corpus pool | P | quarters | src/data/dossierStateProse/defense.generated.js | N power holds a district of N decides which rules apply there.	«r2r-hamlet-4»
+6	14c | corpus pool | P | quarters | src/data/dossierStateProse/defense.generated.js | N power at N keeps its own list of offences, so a wrong punished in one district goes unpunished in 	«r2r-village-42»
+6	4 | generator code | S | powersCount | src/generators/power/factionStanding.js | N powers stand almost level here, and no one leads;	«r2r-village-56»
+6	NEW-V5 | generator pool | P | granary | src/generators/narrativeText.js | N is being run, for the moment, by whoever holds the keys, the seals, and the granary: three things 	«r2r-village-57»
+6	11 | unattributed | P | mercenary | - | N hire N#-order chain	«r2r-city-7»
+5	8 | unattributed | P | temple | - | N powerPriestly N (dominant)church-guided	«r2r-thorp-2»
+5	14b | generator pool | P | quarters | src/data/historyData.js | A fire that began in the lower districts consumed wooden buildings and merchant stalls across whole 	«r2r-thorp-9»
+5	14c | unattributed | P | quarters | - | people here live in a place built around kin districts and an assembly ground, on pasture.	«r2r-thorp-19»
+5	14c | corpus pool | P | quarters | src/data/dossierStateProse/defense.generated.js | N districts of N are closed off now, and whatever happens there goes unrecorded and unpunished.	«r2r-thorp-22»
+5	14c | unattributed | P | quarters | - | N-inspired: built around kin districts and an assembly ground, on pasture.	«r2r-thorp-36»
+5	14c | written in code | P | quarters | src/domain/summary/settlementQuickGuide.js | N-inspired, and it shows: built around kin districts and an assembly ground, on pasture.	«r2r-thorp-37»
+5	14b | generator pool | P | quarters | src/data/historyData.js | A fire that began in the riverside quarter consumed barges, warehouses, and wharf infrastructure acr	«r2r-thorp-45»
+5	NEW-V1 | unattributed | S | powersCount | - | N or three powers each run part of N, and none will give way.	«r2r-hamlet-4»
+5	NEW-V6 | generator pool | P | succession | src/generators/power/conflictIssues.js | N vote on the empty seat is in four days, and two of the voters have not been seen since the last me	«r2r-town-12»
+4	14c | generator code | P | quarters | src/generators/safetyProfile.js | N have changed their routes, some districts are closed off, and nobody is sure whose side a neighbou	«r2r-thorp-25»
+4	14b | generator pool | P | quarters | src/data/historyDescVariants.js | A fire out of the lower districts spread through wooden buildings and merchant stalls across entire 	«r2r-thorp-34»
+4	NEW-V1 | generator pool | S | powersCount | src/generators/narrativeText.js | N the harvest failed, whoever holds the food in N holds the power, and at least three powers are fig	«r2r-hamlet-16»
+4	14b | generator pool | P | quarters | src/data/historyData.js | N affected district is slowly spreading its strangeness, and the authorities are pretending otherwis	«r2r-village-16»
+4	14b | generator pool | P | quarters | src/generators/narrativeText.js | N revolt in N is too big to put down by force alone: the enslaved hold whole districts and are organ	«r2s-slave_revolt-hamlet-0»
+3	14b | generator pool | P | quarters | src/data/historyDescVariants.js | N water came up with almost no warning and remade the lower districts, drowning livelihoods and unse	«r2r-thorp-4»
+3	14c | written in code | P | quarters | src/components/map/RealmComparisons.jsx | N and managed water divide the settlement into organized neighborhoods.	«r2r-thorp-44»
+3	14b | generator pool | P | quarters | src/data/historyDescVariants.js | N broke loose over the merchants' quarter and the people who lived there, and the traces it left hav	«r2r-hamlet-14»
+3	14b | generator pool | P | quarters | src/data/historyData.js | N uncontrolled surge of magic left its mark on the merchants' quarter and on the people who were the	«r2r-village-16»
+3	14c | generator pool | P | quarters | src/data/npcData.js | N guards have gone missing in the same district on night patrol.	«r2s-occupied-town-2»
+3	8 | unattributed | P | temple | - | N powerPriestly N (strong)church-guided	«r2s-plague_onset-hamlet-1»
+3	14b | generator code | P | quarters | src/generators/history/historyRouteContext.js | you can hear it, somewhere in the lower districts, still going on.	«r2s-slave_revolt-hamlet-0»
+2	14b | generator pool | P | quarters | src/data/historyData.js | N rose with little warning and reshaped the mill and lumber district, drowning livelihoods and redra	«r2r-thorp-15»
+2	NEW-V4 | generator pool | P | market | src/generators/narrativeText.js | N market still opens, the queues still form, but the haggling has gone out of people.	«r2r-thorp-17»
+2	14b | generator pool | P | quarters | src/data/historyDescVariants.js | N broke loose over the temple district and the people who lived there, and the traces it left have l	«r2r-thorp-30»
+2	14b | generator pool | P | quarters | src/data/historyDescVariants.js | N in the lower districts, the blaze took wooden buildings and merchant stalls street by street until	«r2r-thorp-39»
+2	14b | generator pool | P | quarters | src/data/historyDescVariants.js | A surge of magic no one could contain marked the residential district and everyone caught in it, and	«r2r-thorp-50»
+2	14c | written in code | P | quarters | src/domain/summary/settlementQuickGuide.js | N about the place and you are told it is built around kin districts and an assembly ground, on pastu	«r2r-hamlet-18»
+2	14b | generator pool | P | quarters | src/data/historyDescVariants.js | A flood rose fast across the harbour and coastal districts, carrying off livelihoods and leaving the	«r2r-hamlet-53»
+2	14c | written in code | P | quarters | src/domain/summary/settlementQuickGuide.js | N-inspired, and it shows: built around kin districts and an assembly ground, on pasture and earthwor	«r2r-village-46»
+2	NEW-V1 | generator pool | S | powersCount | src/generators/narrativeText.js | N powers in N are each waiting for one of the others to slip, and meanwhile nothing gets mended and 	«r2s-politically_fractured-thorp-1»
+2	NEW-V1 | generator pool | S | powersCount | src/data/stressInstitutionEffects.js | N: N been playing both powers simultaneously, feeding each the other's plans	«r2s-politically_fractured-thorp-2»
+2	8 | unattributed | P | temple | - | N powerPriestly N (significant)church-guided	«r2s-politically_fractured-thorp-3»
+2	14c | written in code | P | quarters | src/domain/summary/settlementQuickGuide.js | N-inspired, built around kin districts and an assembly ground, on pasture and earthwork.	«r2s-politically_fractured-village-2»
+2	14b | generator pool | P | quarters | src/data/historyData.js | N rose with little warning and reshaped the harbour and coastal districts, drowning livelihoods and 	«r2s-infiltrated-thorp-2»
+2	14c | corpus pool | P | quarters | src/data/dossierStateProse/defense.generated.js | N at N have changed their routes, and some districts are closed to anyone without business there.	«r2s-insurgency-thorp-0»
+2	14c | generator code | P | quarters | src/generators/safetyProfile.js | N and guards are fighting in the contested districts.	«r2s-slave_revolt-village-3»
+1	NEW-V3 | generator pool | P | mill | src/generators/narrativeText.js | N has drawn its edges inward (fields left unworked, a mill standing idle) trading the medicinal herb	«r2r-thorp-5»
+1	14b | generator pool | P | quarters | src/data/historyDescVariants.js | N in the mill and lumber district, the blaze took timber stockpiles and workshop buildings street by	«r2r-thorp-8»
+1	14b | generator pool | P | quarters | src/generators/historyGenerator.js | A letter found this year tells it this way: the affected district is slowly spreading its strangenes	«r2r-thorp-47»
+1	14b | generator pool | P | quarters | src/data/historyData.js | N uncontrolled surge of magic left its mark on the residential district and on the people who were t	«r2r-thorp-47»
+1	NEW-V1 | unattributed | S | powersCount | - | N powers have stopped coming to N's N meetings.	«r2r-hamlet-4»
+1	14b | generator pool | P | quarters | src/data/historyDescVariants.js | A fire out of the riverside quarter spread through barges, warehouses, and wharf infrastructure acro	«r2r-hamlet-18»
+1	NEW-V4 | generator code | P | market | src/data/powerSiblings.js | N has been debating market levies for three months.	«r2r-hamlet-23»
+1	NEW-V1 | generator pool | S | powersCount | src/generators/narrativeText.js | N, the headman, is the only person all three powers will still speak to, which makes them either the	«r2r-hamlet-35»
+1	8 | generator code | P | temple | src/generators/power/governanceNarrative.js | N church is demanding veto power over council appointments.	«r2r-hamlet-41»
+1	NEW-V9 | generator code | P | law | src/generators/safetyProfile.js | N is effectively no law enforcement.	«r2r-hamlet-54»
+1	14b | generator pool | P | quarters | src/data/historyDescVariants.js | A surge of magic no one could contain marked the merchants' quarter and everyone caught in it, and w	«r2r-hamlet-54»
+1	8 | generator code | P | temple | src/generators/power/governanceNarrative.js | N priest has summoned someone before the church court.	«r2r-hamlet-55»
+1	NEW-V4 | unattributed | P | market | - | N has been debating market levies for three months.	«r2r-village-4»
+1	14c | written in code | P | quarters | src/domain/summary/settlementQuickGuide.js | people here live in a place built around kin districts and an assembly ground, on pasture and earthw	«r2r-village-6»
+1	NEW-V1 | generator pool | S | powersCount | src/generators/narrativeText.js | N, the bloc's speaker, is the only person all three powers will still speak to, which makes them eit	«r2r-village-30»
+1	NEW-V1 | generator pool | S | powersCount | src/generators/narrativeText.js | N, the priest, is the only person all three powers will still speak to, which makes them either the 	«r2r-village-42»
+1	14c | generator code | P | quarters | src/data/institutionDescColour.js | A few keep city gardens or concealed urban groves.	«r2r-village-44»
+1	14b | generator pool | P | quarters | src/data/historyDescVariants.js | N in the harbour and coastal districts, the blaze took ships, warehouses, and dock infrastructure st	«r2r-village-45»
+1	14b | generator pool | P | quarters | src/data/historyData.js | N uncontrolled surge of magic left its mark on the lumber yards and sawmill district and on the peop	«r2r-village-49»
+1	14b | generator pool | P | quarters | src/data/historyData.js | A fire that began in the harbour and coastal districts consumed ships, warehouses, and dock infrastr	«r2s-famine-hamlet-0»
+1	14c | unattributed | P | quarters | - | N looks prosperous in the merchant quarter: new paint, loaded carts, a market stall with produce.	«r2s-famine-village-2»
+1	NEW-V1 | generator pool | S | powersCount | src/generators/narrativeText.js | N, the household elder, is the only person all three powers will still speak to, which makes them ei	«r2s-politically_fractured-thorp-2»
+1	8 | unattributed | P | temple | - | N powerPriestly N (minor)church-guided	«r2s-politically_fractured-hamlet-1»
+1	NEW-V1 | generator code | S | powersCount | src/data/powerSiblings.js | N powers have stopped coming to N meetings.	«r2s-politically_fractured-hamlet-2»
+1	NEW-V1 | generator pool | S | powersCount | src/generators/narrativeText.js | N, the village elder, is the only person all three powers will still speak to, which makes them eith	«r2s-politically_fractured-village-0»
+1	NEW-V1 | generator pool | S | powersCount | src/generators/narrativeText.js | N al-N, the priest, is the only person all three powers will still speak to, which makes them either	«r2s-politically_fractured-village-3»
+1	14b | generator pool | P | quarters | src/generators/historyGenerator.js | N who lived through it tell it this way: the affected district is slowly spreading its strangeness, 	«r2s-recently_betrayed-hamlet-1»
+1	14b | generator pool | P | quarters | src/generators/historyGenerator.js | N records of that time say: the affected district is slowly spreading its strangeness, and the autho	«r2s-infiltrated-thorp-2»
+1	14c | written in code | P | quarters | src/domain/summary/settlementQuickGuide.js | N-inspired: built around kin districts and an assembly ground, on pasture and earthwork.	«r2s-infiltrated-hamlet-0»
+1	14b | generator pool | P | quarters | src/data/historyDescVariants.js | N broke loose over the residential district and the people who lived there, and the traces it left h	«r2s-succession_void-town-3»
+1	NEW-V3 | generator pool | P | mill | src/generators/narrativeText.js | N has drawn its edges inward (fields left unworked, a mill standing idle) trading the reeds it needs	«r2s-monster_pressure-thorp-3»
+1	NEW-V3 | generator pool | P | mill | src/generators/narrativeText.js | N has drawn its edges inward (fields left unworked, a mill standing idle) trading the wool it needs 	«r2s-monster_pressure-hamlet-0»
+1	14c | generator code | P | quarters | src/data/institutionalCatalog.js | N circles tend city gardens or hidden urban groves.	«r2s-monster_pressure-village-2»
+1	14b | generator pool | P | quarters | src/data/historyDescVariants.js | N water came up with almost no warning and remade the harbour and coastal districts, drowning liveli	«r2s-religious_conversion-village-1»
+1	NEW-V2 | unattributed | P | housesCount | - | N temples face each other across N's central square, and only one has a queue.	«r2s-religious_conversion-town-2»
+1	14c | unattributed | P | quarters | - | N about the place and you are told it is built around kin districts and an assembly ground, on pastu	«r2s-wartime-hamlet-3»
+1	NEW-V9 | generator code | P | law | src/data/faceHonorifics.js | N is no law at N but what the gang bosses enforce.	«r2s-wartime-town-3»

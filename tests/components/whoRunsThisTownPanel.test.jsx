@@ -17,9 +17,15 @@ import { dmPowerViewOf } from '../../src/domain/people/patronage.js';
 
 afterEach(cleanup);
 
-/** soak1k-785: a metropolis whose second and third answer to criminal powers, with a hidden boost. */
+/**
+ * soak1k-5 (Suryanagar): a metropolis whose ruling three hold a face that answers to a guild, with a hidden boost.
+ * Re-keyed BY IDENTITY birth(785) -> birth(5) (COHERENCE-POWERS-4, 2026-11-12), as the sibling whoRunsThisTownDm pin was by
+ * the third seat (F11, db6f17dc5): the dual hat re-deals Silberbach's ruling three and it carries no answering face. Scanned
+ * birth(0..) in order for a metropolis meeting this file's premise (an answering face in the ruling three, a hidden boost,
+ * a handler): 5, 167, 209, 491; 5 is the first. Its assertions unchanged.
+ */
 let s;
-beforeAll(async () => { await ensureLaws(); s = birth(785).settlement; });
+beforeAll(async () => { await ensureLaws(); s = birth(5).settlement; });
 
 const tab = (props) => render(<PowerTab powerStructure={s.powerStructure} settlement={s} narrativeNote={null} {...props} />).container;
 

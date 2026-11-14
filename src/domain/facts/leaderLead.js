@@ -24,7 +24,7 @@ export function leaderLeadOf(factions) {
   const leadOverSecond = powers.length >= 2 ? powers[0] - powers[1] : null;
   const leadOverThird = powers.length >= 3 ? powers[0] - powers[2] : null;
   return {
-    leader: rows.length ? String(rows[0].faction ?? rows[0].name ?? '') || null : null,
+    leader: rows.length ? String(rows[0].faction ?? '') || null : null,
     powers,
     leadOverSecond,
     leadOverThird,

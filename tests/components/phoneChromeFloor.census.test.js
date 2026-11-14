@@ -340,13 +340,15 @@ const ROUTE_BASELINE = Object.freeze({
   // 2026-11-09, STYLE-2-MERGE-3 at SW-6 CRISIS-SURFACES' point (point 22): SW-6's R5 faith hint (one `proseFontSize` row) — the lane's
   // +2 on /create, /settlements, /gallery was FaithSection's hint row and FaithTab's; FaithTab's fell with the honest-absence block
   // TIER-PARITY-FIX V2 retired (642e76af8), so the composed tree measures +1 on each: 620 -> 621, 866 -> 867, 665 -> 666; `bare` unmoved.
-  // 2026-11-13, W2-C-LEAVES item 4(b): the Economics tab's "Needed, and not brought in" line (one `proseFontSize` site,
-  // EconomicsTab.jsx :: NeedsNotMet) — `floored` +1 on /create, /settlements and /gallery: 621 -> 622, 864 -> 865,
-  // 666 -> 667; `bare` unmoved; re-measured by this census.
-  // 2026-11-13, W2-C-LEAVES item 4(c): the Economics food card's machinery row left (three `chromeFontSize` sites:
-  // "Agriculture modifier", "Stress penalty", "Trade covers") — `floored` -3 on /create, /settlements and /gallery:
-  // 622 -> 619, 865 -> 862, 667 -> 664; `bare` unmoved; re-measured by this census.
-  '/create':                { roots: 1, files: 162, floored: 619, ruled: 5, bare: 97, owner: 'lane 28 — the create page + the tier picker' },
+  // 2026-11-12, COHERENCE-POWERS-2 item 3: PowerStrata.jsx's FactionRow gains the leaderless line of a power a stress brings
+  // (one `chromeFontSize` and one `proseFontSize` row, both floored) — `floored` +2 on /create, /settlements, /gallery,
+  // 621 -> 623, 864 -> 866, 666 -> 668; `bare` unmoved; re-measured by this census.
+  // 2026-11-14, W2-C-LEAVES-8 at the merge of the line (976db5b19) into the third leaves lane: the lane's three moves on
+  // /create, /settlements and /gallery, re-measured by this census on the merged tree: item 4(b) "Needed, and not brought
+  // in" +1 (EconomicsTab.jsx :: NeedsNotMet); item 4(c) the food card's machinery row -3; W2-C-LEAVES-5 item 5 (56f73d7ec)
+  // the magic note's "N% recovery" chip -1 (unrecorded on the lane until now) — `floored` -3: 623 -> 620, 866 -> 863,
+  // 668 -> 665; `bare` unmoved.
+  '/create':                { roots: 1, files: 162, floored: 620, ruled: 5, bare: 97, owner: 'lane 28 — the create page + the tier picker' },
   '/home':                  { roots: 1, files: 19, floored: 8, ruled: 4, bare: 19, owner: 'lane 28 — the landing' },
   // The Realm lazily mounts the create flow's ClerkNote for its one advisory
   // line, so lane 28's file lands on a route it does not own. One site.
@@ -397,7 +399,7 @@ const ROUTE_BASELINE = Object.freeze({
   // 2026-11-10, LIBRARY-SIMPLE (owner: "No longer does it advance time."): floored 867 -> 864, the
   // campaign folder's three advance sites left with their controls — the "Advance by" micro-label,
   // the auto-resolve switch's label and the interval select, one `chromeFontSize` each; 0 bare.
-  '/settlements':           { roots: 1, files: 206, floored: 862, ruled: 4, bare: 0 },
+  '/settlements':           { roots: 1, files: 206, floored: 863, ruled: 4, bare: 0 },
   // /compendium files 51 -> 50 with the same T6 cut: the size grid's one helper module left the
   // compendium's import closure when ConfigurationPanel stopped importing it; floored 211 -> 206.
   // floored 208 -> 206 (2026-11-10, COMPENDIUM-HUB H1, the owner's word "Rather than a horizontal
@@ -426,7 +428,7 @@ const ROUTE_BASELINE = Object.freeze({
   // 2026-11-07, PEOPLE-6 LINKS: the Institutions card's face row (one `proseFontSize` site, 0 bare) — +1; the
   // other +1 is red at the base bc4b6423 (the people car's lanes; /admin and /world's +1 there are left red, the base's).
   // PEOPLE-6 LINKS step 2: +1, the NPC card's role row (one `chromeFontSize` site, 0 bare).
-  '/gallery':               { roots: 1, files: 151, floored: 664, ruled: 4, bare: 0 },
+  '/gallery':               { roots: 1, files: 151, floored: 665, ruled: 4, bare: 0 },
   '/founders':              { roots: 1, files: 13, floored: 8, ruled: 1, bare: 0 },
   '/first-hundred':         { roots: 1, files: 6, floored: 4, ruled: 1, bare: 0 },
   '/roadmap':               { roots: 1, files: 6, floored: 3, ruled: 1, bare: 0 },

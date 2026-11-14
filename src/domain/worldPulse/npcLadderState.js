@@ -15,7 +15,7 @@ import { halfLifeFactor } from './bandedStock.js';
 import { npcId } from './npcAgency.js';
 import { clamp, clamp01 } from '../../kernel/math.js';
 import { isOffStage } from '../roads/state.js';
-import { ladderFactionKey, npcInFaction } from './npcLadderFactionMembership.js';
+import { factionName, ladderFactionKey, npcInFaction } from './npcLadderFactionMembership.js';
 
 /** @param {unknown} v @param {number} fallback @returns {number} */
 export function num(v, fallback) {
@@ -126,11 +126,28 @@ function structuralRankScore(npc) {
 }
 
 /**
+ * The card's rank in this power (its membership's 1, 2 or 3), else 4: a card ranked nowhere in it sorts after its three. Reads the membership by the power's display
+ * name, the one chokepoint npcInFaction matches by (npcLadderFactionMembership.js :: factionName). @param {Record<string, unknown>} n @param {unknown} faction @returns {number}
+ */
+function powerRankIn(n, faction) {
+  const name = factionName(asObject(faction));
+  const m = Array.isArray(n.memberships) ? n.memberships.map(asObject).find((x) => x.power === name) : null;
+  return m && Number.isInteger(m.rank) ? /** @type {number} */ (m.rank) : 4;
+}
+
+/**
  * The ladder-eligible members of a faction, ORDERED top-rung first, derived from the
  * settlement's roster + existing structural-position indicators (deterministic; no
- * stored migration). Order key (descending): importance weight, structural rank,
+ * stored migration). Order key: the card's rank in THIS power first (1, 2, 3; a card
+ * ranked nowhere in it after), then (descending) importance weight, structural rank,
  * then npcId codepoint (byte-stable tiebreak). Stasis NPCs and below-floor extras are
  * excluded. Returns [{ npcId, name }].
+ *
+ * COHERENCE-POWERS item 4 (the chair's ruling of 2026-11-12, vetoable by the owner): ONE PERSON, ONE FACE carried
+ * into the simulation. Importance is a card's best rank in ANY power, so every rank-1 card tied at the top band
+ * and the codepoint chose the ruler; the power's own rank now seats its first on the top rung at first light (the
+ * town's leader, for the governing power). A persisted ladder is reconciled, never re-derived (npcLadderKernel.js:
+ * kept rungs keep their order, newcomers append at the floor), so a world already lit keeps its rulers.
  *
  * ⚠ A `dots` TIEBREAK WAS DELETED FROM THIS ORDER, NOT DISABLED (2026-08-11). It
  * sat second, as `num(n.dots, 0)` on the row and `(b.dots - a.dots)` in the
@@ -145,7 +162,7 @@ function structuralRankScore(npc) {
  */
 export function eligibleMembersOf(sid, settlement, faction, fkey, { excludeDead = false } = {}) {
   const npcs = Array.isArray(asObject(settlement).npcs) ? /** @type {Record<string, unknown>[]} */ (asObject(settlement).npcs) : [];
-  /** @type {Array<{ npcId: string, name: string, w: number, rank: number }>} */
+  /** @type {Array<{ npcId: string, name: string, w: number, rank: number, powerRank: number }>} */
   const rows = [];
   npcs.forEach((npc, index) => {
     const n = asObject(npc);
@@ -159,9 +176,9 @@ export function eligibleMembersOf(sid, settlement, faction, fkey, { excludeDead 
     const w = importanceWeight(/** @type {Parameters<typeof importanceWeight>[0]} */ (/** @type {unknown} */ (n)));
     if (w < LADDER_TUNING.RUNG_ELIGIBLE_FLOOR) return;
     const nid = npcId(sid, n, index);
-    rows.push({ npcId: nid, name: String(n.name || n.label || nid), w, rank: structuralRankScore(n) });
+    rows.push({ npcId: nid, name: String(n.name || n.label || nid), w, rank: structuralRankScore(n), powerRank: powerRankIn(n, faction) });
   });
-  rows.sort((a, b) => (b.w - a.w) || (b.rank - a.rank) || compareCodepoint(a.npcId, b.npcId));
+  rows.sort((a, b) => (a.powerRank - b.powerRank) || (b.w - a.w) || (b.rank - a.rank) || compareCodepoint(a.npcId, b.npcId));
   return rows.map((r) => ({ npcId: r.npcId, name: r.name }));
 }
 

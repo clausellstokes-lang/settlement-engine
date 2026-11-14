@@ -18,6 +18,16 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-13 — STYLE-2-MERGE RECORD 47, THE COHERENCE-AGREE MERGE OVER THE INTEGRATION BRANCH, THROUGH THE SIGNED DOOR (ODQ §934.105, THE STYLE WAVE'S MERGE, STYLE-2-MERGE;
+ *   record docs/shift-records/2026-11-13-style-2-merge-47-coherence-agree.json; the chair signs under the owner's delegation, vetoable).
+ *   525 of 525 rows (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84) against record 46's post-state. THE CAUSE, ONE (first-parent step 22cc9ef7d): the COHERENCE-AGREE merge (lane/coherence-agree-2026-11-11 at 69b53decd; one fact, one answer: the town's own drawn record overrides a terrain or institution table, and a fact has one reader). LAW 2's SECOND CASE (the lane cut from 3575cf061): measured at the merge, the draft's '525 of 525' exactly. FIELD-DIFFED: resourceAnalysis and config's rolled resources, simulationTrace, economicState, economicViability, defenseProfile, culturalIdentity, the re-dealt holders' institutions, npcs, relationships, services, quarters, powers, conflicts, stress casts, history and arrival scene, activeConditions, the pressure line, and the derived coherence receipt, isolation support and structural violations; every family the draft declares.
+ *   Written from the staged tree S47 (the tree of 9e2ae9035 with the door paths carried from the branch). 5ef18089.. -> 7b7089fd..
+ *
+ * 2026-11-13 — STYLE-2-MERGE RECORD 46, THE COHERENCE-POWERS MERGE OVER THE INTEGRATION BRANCH, THROUGH THE SIGNED DOOR (ODQ §934.105, THE STYLE WAVE'S MERGE, STYLE-2-MERGE;
+ *   record docs/shift-records/2026-11-13-style-2-merge-46-coherence-powers.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   393 of 525 rows (thorp 24, hamlet 12, village 84, town 105, city 84, metropolis 84) against record 43's post-state. THE CAUSE, ONE (first-parent step 6aeaa4154): the COHERENCE-POWERS merge (lane/coherence-powers-2026-11-11 at 313c67e2b; the owner's dual-hat law: the leader comes from a house of the town and keeps its hat, the powers stand on the houses). FIELD-DIFFED: npcs, relationships, conflicts, capture states, the stress casts, the coherence receipt, the trace, the prominent relationship and the pressure line, the families the draft declares.
+ *   Written from the staged tree S46 (the tree of 6aeaa4154 with the door paths carried from the branch). 083542bb.. -> 5ef18089..
+ *
  * 2026-11-12 — STYLE-2-MERGE RECORD 43, THE COHERENCE-PRESUME MERGE OVER THE INTEGRATION BRANCH, THROUGH THE SIGNED DOOR (ODQ §934.105, THE STYLE WAVE'S MERGE, STYLE-2-MERGE;
  *   record docs/shift-records/2026-11-12-style-2-merge-43-coherence-presume.json; the cloud chair signs under the owner's delegation, vetoable).
  *   505 of 525 rows (thorp 78, hamlet 84, village 84, town 105, city 76, metropolis 78) against record 42's post-state. THE CAUSE, ONE (first-parent step f922124d0): the COHERENCE-PRESUME merge (lane/coherence-presume-2026-11-11 at 02c5f8fbd; a line names a thing the town does not have, its components named in the record). FIELD-DIFFED: text leaves only (culture, NPC names and roles and the ties that read them, quarters, history, institution texts, arrival, pressure, criminal services); no band, label or score.
