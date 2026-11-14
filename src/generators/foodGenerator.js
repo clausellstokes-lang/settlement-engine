@@ -16,7 +16,8 @@
  *   - Economics tab UI
  */
 
-import { textOf } from '../domain/facts/textOf.js';
+import { filterDeclared, lineText } from '../domain/facts/drawDeclared.js';
+import { factsOf } from '../domain/facts/factsOf.js';
 import { getActiveRng } from '../kernel/rngContext.js';
 import { migrationDirectionOfConfig } from '../domain/migrationDirection.js';
 import { FOOD_IMPORT_RATES, SIEGE_PRODUCTION_KEPT } from '../data/foodImportRates.js';
@@ -394,7 +395,7 @@ export function generateFoodSecurity(tier, institutions, config, storesShare = 1
     famineCutPct: stressFamine ? Math.round((1 - famineKeeps) * 100) : 0,
     foodwaysLine: composeFoodwaysLine({
       sources: foodSources,
-      cultureLines: CULTURE_PROFILES[/** @type {keyof typeof CULTURE_PROFILES} */ (config.cultureProfileKey)]?.foodways?.map(textOf) || null, // R-C: a declared row gives back its text (CENSUS-2d)
+      cultureLines: cultureFoodwaysOf(config.cultureProfileKey, { tier, population, institutions, config }), // UPKEEP-9: a declared row is kept only where it holds
       identity: `${tier}|${population}|${terrain}|${route}|${config.cultureProfileKey || ''}`,
       market: hasMarket, // COHERENCE-AGREE-3 (F6): the market home (facts/market.js), read by foodLandOf
     }),
@@ -517,6 +518,22 @@ export function foodProsperityModOf(f) {
     return { type: 'bonus', value: 0.4, reason: 'Agricultural surplus with reserves provides modest prosperity bonus' };
   }
   return null;
+}
+
+/**
+ * THE CULTURE'S FOODWAYS LINES, READ WHERE THE LINE IS CHOSEN (UPKEEP-9, step 2(a)): a declared row (`{ text, needs }`,
+ * cultureProfiles.js) is kept only where the place makes its declaration true (`filterDeclared`, the one reading of a
+ * declaration), then gives back its text; the composer picks among what is left, as it did. It used to hand every row's
+ * bare text on (`textOf`), so "… support dense populations." (`population: ≥ middling`) printed in thorps, hamlets
+ * and villages. Pure: no draw.
+ * @param {unknown} key the culture profile's key @param {object} record the fields the facts read (tier, population,
+ *   roster, config) @returns {string[] | null}
+ */
+function cultureFoodwaysOf(key, record) {
+  const rows = CULTURE_PROFILES[/** @type {keyof typeof CULTURE_PROFILES} */ (key)]?.foodways;
+  if (!rows) return null;
+  return filterDeclared([...rows], { facts: () => factsOf(record), poolId: `cultureProfiles:${String(key)}.foodways`, surface: 'economy', drawKind: 'A' })
+    .map((row) => String(lineText(row)));
 }
 
 /** The middle of the tier's band in the one population table (constants.js :: POPULATION_RANGES). */
