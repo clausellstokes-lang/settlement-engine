@@ -300,6 +300,11 @@ export const CRISIS_HOOK_SLOTS = Object.freeze({
     // identified the outbreak first" beside "No healer is kept here"): the person minted to stand in, whose role is
     // what they do in lay words (`STAND_IN_ROLE`), is named without the word "healer"; the town keeps none.
     Object.freeze({ role: /** @type {CrisisRole} */ ('lever'), phrase: 'The healer who identified the outbreak first', fill: '{holder}, who identified the outbreak first,', kinds: Object.freeze(/** @type {const} */ (['npc'])), holds: STAND_IN_ROLE_RE }),
+    // THE CHAIR'S RULING AT THE LANDING (2026-11-14, 13:38): both cures stand, each in its own case. Where no healer stands
+    // the stored hook is the data lane's slot-less twin (stressTypes.js, `needs: ['healer']`; 745c05a1f); a stand-in the
+    // cast minted is still named there, without "healer"; the twin keeps its own words only where the cast holds nobody.
+    Object.freeze({ role: /** @type {CrisisRole} */ ('lever'), phrase: 'The first person to name the outbreak', fill: '{holder}, the healer who first named the outbreak,', kinds: Object.freeze(/** @type {const} */ (['npc'])), holds: /\b(?:healers?|apothecar(?:y|ies)|midwi(?:fe|ves)|hospitallers?|physicians?)\b/i }),
+    Object.freeze({ role: /** @type {CrisisRole} */ ('lever'), phrase: 'The first person to name the outbreak', fill: '{holder}, the first to name the outbreak,', kinds: Object.freeze(/** @type {const} */ (['npc'])), holds: STAND_IN_ROLE_RE }),
   ]),
 });
 

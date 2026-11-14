@@ -78,7 +78,7 @@ describe('(2) the lever\'s want names a scarce thing the town has', () => {
 describe('(3) the plague hook names a stand-in without calling them a healer', () => {
   const plagueHookOf = (s) => crisisHookFor(s, entriesOf(s).find((e) => e?.type === 'plague_onset'));
   it('r2s-plague_onset-thorp-0 (no healer is kept here): the stand-in is named, the word "healer" is not', () => {
-    expect(plagueHookOf(born('r2s-plague_onset-thorp-0'))).toMatch(/^Jiahao Wu, who identified the outbreak first, has gone quiet\./);
+    expect(plagueHookOf(born('r2s-plague_onset-thorp-0'))).toMatch(/^Jiahao Wu, the first to name the outbreak, has gone quiet\./); // no healer stands: the twin, the stand-in named
   }, 60_000);
   it('keep-guard: r2r-city-19\'s apothecary, a healer, keeps the word', () => {
     expect(plagueHookOf(born('r2r-city-19'))).toMatch(/^Una Murray, the healer who identified the outbreak first, has gone quiet\./);

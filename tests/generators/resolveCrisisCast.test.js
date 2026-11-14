@@ -154,11 +154,13 @@ describe('a generated crisis adds the hooks its cast derives', () => {
     // and a DM's edit to ANOTHER HEALER renames the holder (slot-plague_onset-5: the apothecary's lever, a hospitaller beside)
     const t = gen('slot-plague_onset-5', 'town', ['plague_onset']);
     const plague = entriesOf(t)[0];
-    expect(plague.crisisHook).toBe(STRESS_TYPE_MAP.plague_onset.crisisHook);
+    // re-keyed at the landing (the chair, 13:38): this town keeps no healer HOUSE, so it stores the slot-less twin; the
+    // apothecary on its roster is a healer and is still named, in the twin's own words
+    expect(plague.crisisHook).toBe('The first person to name the outbreak has gone quiet. Their last message suggested the disease is not natural. Reaching them means crossing a quarantine that is not being enforced consistently.');
     const first = plague.cast.roles.find((r) => r.role === 'lever');
     const healer = t.npcs.find((n) => !n.temporary && n.name && n.name !== first.name && heals.test(String(n.role)));
     applyUserEdit(plague, CAST_EDIT_PATH, formatCastRoles([{ role: 'lever', kind: 'npc', id: healer.id || healer.name }]), { editedAt: '2026-11-04T00:00:00Z' });
-    const named = `${healer.name}, the healer who identified the outbreak first,`;
+    const named = `${healer.name}, the healer who first named the outbreak,`;
     expect(composeCrisisPage(t)[0].hook).toContain(named);
     const tvm = JSON.stringify(buildViewModel({ settlement: t }));
     expect(tvm).toContain(named);

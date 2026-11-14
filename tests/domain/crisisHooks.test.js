@@ -13,7 +13,7 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { CAST_REASONS, CRISIS_NATURE, STAKE_REASONS } from '../../src/domain/crisis/crisisCast.js';
-import { STRESS_TYPE_MAP } from '../../src/data/stressTypes.js';
+import { STRESS_TYPE_MAP, STRESS_TYPE_SIBLINGS } from '../../src/data/stressTypes.js';
 import { hookTruthViolations, settlementHookFacts } from '../../src/domain/coherence/hookTruth.js';
 
 const npcRow = (role, id, name, reason) => ({ role, kind: 'npc', id, name, reason, temporary: false });
@@ -106,8 +106,14 @@ describe('crisisHooksOf: one hook bound to the cast, one bound to the lever', ()
 describe('slotCrisisHook: the catalog sentence gains a {holder} slot only where it names a role the cast holds', () => {
   it('every slot\'s phrase occurs exactly once in its catalog sentence (a slot in the sentence, never a second sentence)', () => {
     for (const [kind, slots] of Object.entries(CRISIS_HOOK_SLOTS)) {
-      const text = STRESS_TYPE_MAP[kind].crisisHook;
-      for (const slot of slots) expect(text.split(slot.phrase).length - 1, `${kind}: ${slot.phrase}`).toBe(1);
+      // re-keyed at the landing (the chair, 13:38): a phrase stands once in the catalog sentence OR in one of its
+      // declared twins (STRESS_TYPE_SIBLINGS: the plague's slot-less twin where no healer stands), never twice in one.
+      const texts = [STRESS_TYPE_MAP[kind].crisisHook, ...(STRESS_TYPE_SIBLINGS[STRESS_TYPE_MAP[kind].crisisHook] || []).map((t) => t.text)];
+      for (const slot of slots) {
+        const counts = [...new Set(texts)].map((t) => t.split(slot.phrase).length - 1);
+        expect(counts.filter((c) => c === 1).length, `${kind}: ${slot.phrase}`).toBe(1);
+        expect(Math.max(...counts), `${kind}: ${slot.phrase}`).toBe(1);
+      }
     }
   });
 
@@ -262,13 +268,14 @@ describe('the plague slot on born towns: the dean is not named the healer, the h
   it('r2r-town-37: the dean holds the lever and the sentence keeps its own words', () => {
     const s = born('r2r-town-37');
     const hook = plagueHookOf(s);
-    expect(hook).toBe(STRESS_TYPE_MAP.plague_onset.crisisHook);
+    // re-keyed at the landing: town-37 keeps no healer, so it stores the data lane's twin (745c05a1f), its own words kept
+    expect(hook).toBe('The first person to name the outbreak has gone quiet. Their last message suggested the disease is not natural. Reaching them means crossing a quarantine that is not being enforced consistently.');
   });
 
   it('r2s-plague_onset-thorp-0 and r2r-city-19: a lever who is a healer is still named', () => {
     // R2-CODE-B-12, ruling (c): thorp-0's lever is the minted stand-in ("Tends the sick"; no healer is kept there), named
     // without the word (tests/domain/crisisStandInWords.test.js); the apothecary is a healer and keeps it.
-    expect(plagueHookOf(born('r2s-plague_onset-thorp-0'))).toMatch(/^Jiahao Wu, who identified the outbreak first, has gone quiet\./);
+    expect(plagueHookOf(born('r2s-plague_onset-thorp-0'))).toMatch(/^Jiahao Wu, the first to name the outbreak, has gone quiet\./); // the twin, the stand-in named (the landing)
     expect(plagueHookOf(born('r2r-city-19'))).toMatch(/^Una Murray, the healer who identified the outbreak first, has gone quiet\./);
   });
 });
