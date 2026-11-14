@@ -1,0 +1,57 @@
+diff --git a/src/pdf/lib/viewModelBodySlices.js b/src/pdf/lib/viewModelBodySlices.js
+index ca23d1d5a..6d075138b 100644
+--- a/src/pdf/lib/viewModelBodySlices.js
++++ b/src/pdf/lib/viewModelBodySlices.js
+@@ -327,10 +327,12 @@ export function resourcesSlice(active) {
+           // live roster does not hold, by the reader the tab's "Needs:" line reads (validationOnPage.js :: housesStillNeeded).
+           processing: which === 'unexploited'
+             ? housesStillNeeded(s, houses).map((n) => institutionDisplayName(n) || n).join(', ') || null
+-            : institutionDisplayName(item?.processing) || institutionDisplayName(item?.institution) ||
+-                      houses.map((n) => institutionDisplayName(n) || n).join(', ') || null,
+-          output: item?.output || item?.product ||
+-                  (item?.finalProducts || item?.outputs || []).join(', ') || null,
++            // CANDIDATE (EXPORTS-MEASURE-1 B3-C): a worked row names only the chain's houses the live roster holds (the
++            // complement of the tab's "Needs:" reader), never the catalogue's whole list.
++            : houses.filter((n) => !housesStillNeeded(s, [n]).length).map((n) => institutionDisplayName(n) || n).join(', ') || null,
++          output: which === 'unexploited'
++            ? ((item?.finalProducts || item?.outputs || []).slice(0, 2).join(', ') || null)
++            : null,
+           chainStatus: item?.chainStatus || null,
+           quality,
+           accessibility,
+diff --git a/src/pdf/sections/IdentityDailyLife.jsx b/src/pdf/sections/IdentityDailyLife.jsx
+index 338fc9b0b..1e04bd4fe 100644
+--- a/src/pdf/sections/IdentityDailyLife.jsx
++++ b/src/pdf/sections/IdentityDailyLife.jsx
+@@ -26,6 +26,22 @@ import { foodwaysLineOf } from '../../domain/foodways.js';
+ import { factsOf } from '../../domain/facts/factsOf.js';
+ import { architecturalDetailRefused, resolveCultureProfileKey } from '../../data/cultureProfiles.js';
+ import { foodWordShown } from '../../domain/display/foodWordShown.js';
++import { CULTURE_PROFILES } from '../../data/cultureProfiles.js';
++import { declarationAdmits, declarationOf } from '../../domain/facts/factVocabulary.js';
++import { textOf } from '../../domain/facts/textOf.js';
++
++// CANDIDATE (EXPORTS-MEASURE-1 B2-C'): every culture row is held to its own row's declaration against the whole record,
++// as the Architecture row already is (architecturalDetailRefused): a declared row the record refuses prints nothing.
++const LIST_OF = { builtForm: 'builtForm', civicPattern: 'civicPattern', exchangePattern: 'exchangePattern', sacredLife: 'sacredLife', defensePattern: 'defensePattern', socialTexture: 'socialTexture' };
++function cultureRowShown(settlement, culture, field) {
++  const text = typeof culture?.[field] === 'string' ? culture[field].trim() : '';
++  if (!text) return null;
++  const key = resolveCultureProfileKey(culture.key || settlement?.config?.culture || 'germanic');
++  const list = CULTURE_PROFILES[key]?.[LIST_OF[field]] || [];
++  const row = list.find((d) => typeof d === 'object' && d !== null && String(textOf(d)).trim() === text);
++  if (row === undefined) return text;
++  return declarationAdmits(declarationOf(row), /** @type {any} */ (factsOf(settlement)), { crisisScoped: false }).admitted ? text : null;
++}
+ 
+ export function IdentityDailyLife({ settlement, narrativeMode, vm, stateProse }) {
+   const id = vm.identity;
+@@ -208,7 +224,7 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm, stateProse })
+               {culture.scope}
+             </Text>
+           )}
+-          <CultureRows culture={culture} foodwaysLine={foodwaysLineOf(settlement)} architectureLine={architectureLineOf(settlement, culture)} />
++          <CultureRows culture={Object.fromEntries(Object.entries(culture).map(([k, v]) => [k, LIST_OF[k] ? cultureRowShown(settlement, culture, k) : v]))} foodwaysLine={foodwaysLineOf(settlement)} architectureLine={architectureLineOf(settlement, culture)} />
+         </View>
+       )}
+ 

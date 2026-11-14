@@ -1,0 +1,148 @@
+diff --git a/src/domain/display/threatAssessment.js b/src/domain/display/threatAssessment.js
+index e75fafb4a..30d118991 100644
+--- a/src/domain/display/threatAssessment.js
++++ b/src/domain/display/threatAssessment.js
+@@ -38,6 +38,11 @@ import { defenseFactsOf } from '../defense/defenseFacts.js';
+ import { SCORE_BAND_CUTS, economicSurvivalBandOf, scoreBand } from './defenseScoreBands.js';
+ import { laidByBeforeCrisis } from './prosperityInCrisis.js';
+ import { standingDefenseForces } from '../institutions/defenseInstitutionBuckets.js';
++import { liveInstitutionNames, ACCESS_ONLY } from '../facts/institutions.js';
++
++/** CANDIDATE (EXPORTS-MEASURE-1 B1-C): a house whose clergy tend the sick stands on the live roster (a shrine alone, or ACCESS to a neighbour's church, keeps none). */
++const CLERGY_HOUSE_RE = /\btemple|\bchurch|\bcathedral|\bchapel|\babbey|\bmonaster|\bfriary|\bpriory/i;
++const clergyStand = (r) => liveInstitutionNames(r).some((n) => !ACCESS_ONLY.test(n) && CLERGY_HOUSE_RE.test(n));
+ 
+ /**
+  * A FORCE STANDS (UPKEEP-8, F3, the chair's ruling (a)): a garrison, a militia (a household levy is one), a watch or a
+@@ -304,10 +309,13 @@ export function buildThreatAssessment(r) {
+   const laidClause = laid ? `, ${laid}` : '';
+   if (money === 'long') {
+     econA = `Money enough to ride out a long crisis${laidClause}: emergency measures can be paid for, and `
+-      + (hasGarrison ? 'the garrison kept paid' : 'the defenders kept paid')
++      + (hasGarrison ? 'the garrison kept paid' : force ? 'the defenders kept paid' : 'the place kept going')
+       + ' while it lasts.';
+   } else if (money === 'short') {
+     econA = `Money enough for a short crisis${laidClause}; a long siege would start eating the reserves within months.`;
++  } else if (money === 'late' && !force) {
++    // CANDIDATE (EXPORTS-MEASURE-1 B1-C): where no force stands there are no defenders to pay late (the owner's veto on the words)
++    econA = 'Money is already short; a long crisis would empty the reserves.';
+   } else if (money === 'late') {
+     econA = 'The defenders are already paid late; a long crisis would empty the reserves and '
+       + (hasGarrison ? 'wear out the garrison\'s patience.' : 'wear down the people who defend the place.');
+@@ -328,7 +336,7 @@ export function buildThreatAssessment(r) {
+     ? 'The hospital can isolate the sick and keep an outbreak from spreading.'
+     : facts.hasHealer
+       ? healerSubject(facts.healerName) + ' treats the sick one at a time; an outbreak would outrun it.'
+-      : f.hasChurch
++      : clergyStand(r)
+         ? 'Clergy provide basic wound care: better than nothing, worse than a hospital.'
+         : 'Nobody here treats the sick, and a plague would run until it burned out.';
+   const disA = inActiveFamine(r) ? `${FAMINE_SENTENCE} ${care}` : care;
+diff --git a/src/foundry/journalPages.js b/src/foundry/journalPages.js
+index 214d61f23..a62d08ca2 100644
+--- a/src/foundry/journalPages.js
++++ b/src/foundry/journalPages.js
+@@ -272,7 +272,6 @@ function identityPage(vm, settlement = vm.raw) {
+     kv('Age', id.age),
+     kv('Trade access', id.tradeAccess ? humanize(id.tradeAccess) : null),
+     kv('Governing power', id.anchor.governingName),
+-    kv('Cultural notes', id.anchor.culturalNotes),
+     // FOOD-4: the food record's foodways line, through the one reader — the PDF chapter's row.
+     kv('Foodways', foodwaysLineOf(settlement)),
+     // ⛔ No '## Quarters' section before the plat (X-47); the view model keeps `id.quarters`.
+@@ -368,7 +367,7 @@ function defensePage(vm) {
+     kv('Safety', d.safetyLabel),
+     d.militaryStress ? kv('Military status', d.militaryStress.label || humanize(d.militaryStress.type)) : null,
+     forces.length ? md('', '## Armed forces', forces.map(f =>
+-      bullet(typeof f === 'string' ? institutionHouseLabel(f) : `${institutionHouseLabel(f.name || '')}${f.desc ? `: ${f.desc}` : ''}${f.source ? ` (${f.source})` : ''}`)) ) : null,
++      bullet(typeof f === 'string' ? institutionHouseLabel(f) : `${institutionHouseLabel(f.name || '')}${f.desc ? `: ${f.desc}` : ''}`)) ) : null, // CANDIDATE (EXPORTS-MEASURE-1 B4): the PDF's force row prints no provenance
+     (d.criminalOps || []).length ? md('', '## Criminal operations', d.criminalOps.map(o =>
+       `- **${esc(o.name)}**${o.note ? `: ${esc(o.note)}` : ''}`)) : null,
+     (d.vulnerabilities || []).length ? md('', '## Vulnerabilities',
+diff --git a/src/pdf/lib/viewModelBodySlices.js b/src/pdf/lib/viewModelBodySlices.js
+index ca23d1d5a..81d520044 100644
+--- a/src/pdf/lib/viewModelBodySlices.js
++++ b/src/pdf/lib/viewModelBodySlices.js
+@@ -325,12 +325,15 @@ export function resourcesSlice(active) {
+           // an unmapped name passes through as itself.
+           // W2-C-LEAVES-SIDE (the twin of #452; the processing column only): an Unexploited row names only the houses the
+           // live roster does not hold, by the reader the tab's "Needs:" line reads (validationOnPage.js :: housesStillNeeded).
++          // CANDIDATE (EXPORTS-MEASURE-1 B3-A): the row prints what the tab's card prints and no more: a worked chain
++          // names no houses and no goods (the tab's Full and Partial cards print neither); an unexploited one names the
++          // houses it still needs, as the tab's "Needs:" line, and the first two goods the tab's card shows.
+           processing: which === 'unexploited'
+-            ? housesStillNeeded(s, houses).map((n) => institutionDisplayName(n) || n).join(', ') || null
+-            : institutionDisplayName(item?.processing) || institutionDisplayName(item?.institution) ||
+-                      houses.map((n) => institutionDisplayName(n) || n).join(', ') || null,
+-          output: item?.output || item?.product ||
+-                  (item?.finalProducts || item?.outputs || []).join(', ') || null,
++            ? (housesStillNeeded(s, houses).map((n) => institutionDisplayName(n) || n).join(', ') || null)
++            : null,
++          output: which === 'unexploited'
++            ? ((item?.finalProducts || item?.outputs || []).slice(0, 2).join(', ') || null)
++            : null,
+           chainStatus: item?.chainStatus || null,
+           quality,
+           accessibility,
+diff --git a/src/pdf/sections/IdentityDailyLife.jsx b/src/pdf/sections/IdentityDailyLife.jsx
+index 338fc9b0b..c034d016b 100644
+--- a/src/pdf/sections/IdentityDailyLife.jsx
++++ b/src/pdf/sections/IdentityDailyLife.jsx
+@@ -26,6 +26,7 @@ import { foodwaysLineOf } from '../../domain/foodways.js';
+ import { factsOf } from '../../domain/facts/factsOf.js';
+ import { architecturalDetailRefused, resolveCultureProfileKey } from '../../data/cultureProfiles.js';
+ import { foodWordShown } from '../../domain/display/foodWordShown.js';
++import { cultureScopeLine } from '../../domain/summary/settlementQuickGuide.js';
+ 
+ export function IdentityDailyLife({ settlement, narrativeMode, vm, stateProse }) {
+   const id = vm.identity;
+@@ -71,7 +72,7 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm, stateProse })
+       <StateProse stateProse={stateProse} tab="faith" />
+ 
+       {/* ── Anchor facts ─────────────────────────────────────── */}
+-      {(a.governingName || a.prosperity || a.safety || a.culturalNotes ||
++      {(a.governingName || a.prosperity || a.safety ||
+         foodWord || a.magicDependency || a.activeStress?.length > 0) && (
+         <View
+           style={{
+@@ -131,7 +132,7 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm, stateProse })
+               ))}
+             </View>
+           )}
+-          {a.culturalNotes && (
++          {false && a.culturalNotes && (
+             <View style={{ marginTop: 3 }}>
+               <Text style={{ ...type.label, fontSize: pt['7'], color: palette.muted, marginBottom: 1 }}>
+                 CULTURAL NOTES
+@@ -195,7 +196,7 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm, stateProse })
+             </Text>
+             {culture.label && <Tag tone="gold">{culture.label}</Tag>}
+           </View>
+-          {culture.scope && (
++          {cultureScopeLine(settlement) && (
+             <Text
+               style={{
+                 ...type.body,
+@@ -205,7 +206,7 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm, stateProse })
+                 marginBottom: 3,
+               }}
+             >
+-              {culture.scope}
++              {cultureScopeLine(settlement)}
+             </Text>
+           )}
+           <CultureRows culture={culture} foodwaysLine={foodwaysLineOf(settlement)} architectureLine={architectureLineOf(settlement, culture)} />
+@@ -298,13 +299,7 @@ function architectureLineOf(settlement, culture) {
+ 
+ function CultureRows({ culture, foodwaysLine, architectureLine }) {
+   const rows = [
+-    ['Built form', culture.builtForm],
+-    ['Civic pattern', culture.civicPattern],
+-    ['Exchange', culture.exchangePattern],
+     ['Foodways', foodwaysLine || culture.foodways],
+-    ['Sacred life', culture.sacredLife],
+-    ['Defense', culture.defensePattern],
+-    ['Social texture', culture.socialTexture],
+     ['Architecture', architectureLine],
+   ].filter(([, value]) => value);
+ 
