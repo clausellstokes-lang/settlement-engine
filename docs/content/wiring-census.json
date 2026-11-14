@@ -36943,8 +36943,9 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 3,
-        "commander": 2
+        "colour": 2,
+        "commander": 2,
+        "no crisis: occupied": 1
       },
       "undeclared": 0,
       "crisisScoped": false

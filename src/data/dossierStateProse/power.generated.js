@@ -3490,7 +3490,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "angle": "ledger",
           "marks": [
             "dm-only",
-            "colour"
+            "no crisis: occupied"
           ],
           "text": "{faction} answers to the {seat} at {settlement} in name only: whatever the {seat} plans needs its consent, and that consent is bargained for.",
           "slots": [
