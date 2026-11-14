@@ -109,3 +109,128 @@ guard: a test rendering the Defense tab's opened row and the PDF's row for a tho
 force, a famine thorp, a siege hamlet and the guard village (PLAUSIBLE: the thorp's and the famine thorp's arms red at the base, the guard green). Holder: no lane
 holds the file by content beyond the joined line (the census's holders: up, uc, um, shared commits only). It shares no
 file with B2, B3 or B4: **a builder can take B1 beside any other block.**
+
+## B2 — the PDF's Identity & Daily Life: the culture profile's raw fields (and the journal's "Cultural notes")
+
+**(a) Presentation.** Under "CULTURAL IDENTITY" and the culture's tag ("Germanic-inspired"): the profile's `scope` in italics
+(the census's "keywords" writer), then labelled rows Built form, Civic pattern, Exchange, Foodways, Sacred life, Defense,
+Social texture, Architecture; above them the anchor panel's "CULTURAL NOTES" (`culturalNotes` = socialTexture +
+builtForm), which the journal prints as "Cultural notes". Nothing says "the wider culture": the rows are stated in the
+present tense of THE PLACE (the Architecture row says "the settlement center"). Small (r2r-thorp-0, 11 people): "A ritual
+plaza at the centre, tribute coming in, and waterworks and gardens around it." / "Ward levies reinforce trained warrior
+societies and palace guards." Large (r2r-city-48): "Temple tanks and bazaars, with a quarter for each trade and guilds to
+run them." / "Bazaars, merchant houses, craft corporations, credit… support exchange." (true there).
+
+**(b) Twelve towns READ** (the scope and the six raw rows: 84 lines; Foodways and Architecture already pass their
+readers and are not counted): **30 false** (12 HIGH, 18 MED): r2r-thorp-0 7 of 7 (plaza, market plaza, markets,
+professional merchants, neighbourhood temples, palace guards: HIGH; wards: MED), r2r-thorp-14 6 (guild officers, merchant
+associations: HIGH), r2r-hamlet-0 (siege) 6, r2r-village-23 6 (bazaars and guilds in 271 people, craft corporations:
+HIGH), r2r-village-6 1, r2s-famine-village-0 1, r2r-town-6 1 ("A lordly court…" under an Arcane Council: the row DECLARES
+`ruler: lord` and the print does not read it), r2s-under_siege-town-0 2 (a chieftain under a Town Council; "Maritime trade,
+seasonal voyaging" under a siege), the two cities and the metropolis 0. **Small places 26 of 42 false; towns and larger
+4 of 42.** The census's precision for the block, as read: high in small places (its 336 small towns), about one line in
+ten in the large (its 72). Towns hit (CENSUS, base): **408** (PDF 408, journal 256).
+
+**(c) The tab's side.** The tabs print ONE of these facts: the scope, as the Overview's identity line through its reader
+(`settlementQuickGuide.js :: cultureScopeLine`: its own phrase table held to the roster, the terrain and the size;
+r2r-thorp-14 "…built in timber and stone, and run by its estates" where the PDF says "run by guilds and estates"). In the
+twelve its line was true in all twelve (r2r-thorp-0 "built on tribute and the ritual calendar": LOW). The six raw rows and
+the cultural notes print on NO tab (`dailyLifeLogic.js` computes `cultureCtx` from socialTexture and nothing renders it).
+
+**(d) Candidates.**
+- **(A+B) the scope through the tab's reader; the six rows and the cultural notes left out** (tree X; `IdentityDailyLife.jsx`
+  three edits, `journalPages.js` one line). CENSUS: the culture writer's towns **408 → 8** (the 8: the Architecture row's
+  "whitewashed courts and stone steps…", read: courtyards, not law courts: NOT false). False lines left in the twelve: **0**.
+  TRUE LINES LOST: 48 of the 72 row-lines read were true (38 of them in the six towns and cities): every town loses six
+  rows of flavour, and the PDF loses its one editable culture box (`daily.cultureNotes`). FIELD DIFF 0.
+- **(C') the existing declarations enforced at print** (tree Y: each row held to its own `needs`, as the Architecture row
+  is): CENSUS **408 → 369**. Most rows declare nothing, so this alone moves little.
+- **(C) the profile's rows take the conditions their words need**: `src/data/cultureProfiles.js` (the fd lane's): 11
+  profiles × 6 fields, about 140 rows and 11 scopes to declare (a market, a guild, a temple, a ruler, a tier), with small-
+  place twins where a row has none true, AND the print-side check of (C'). NOT built (data authoring, the owner's words);
+  measured bound: (C') shows the mechanism moves only what is declared.
+- **(B'') a tier gate** (the six rows at town and larger only), read from the base's hits: the culture writer's towns
+  408 → 72 (CENSUS, by tier); about one line in ten false there as read: NOT to 0.
+
+**(e) Recommendation: (A+B)**, as the law reads ("a surface with no room prints less"; "no surface prints a raw
+catalogue"): files `src/pdf/sections/IdentityDailyLife.jsx` and one line of `src/foundry/journalPages.js :: identityPage`.
+FOR THE OWNER: the six rows are TRUE flavour in towns and cities and the editable notes box goes; if the owner wants
+them kept, the cure is (C) in the fd lane's data file plus (C')'s check, a larger build. Shares `journalPages.js` with
+B4 (another function): two builders can work side by side, merging one file.
+
+## B3 — the Resources & Production tables of the PDF and the journal (`viewModelBodySlices.js :: resourcesSlice`)
+
+**(a) Presentation.** PDF: "RESOURCE CHAINS", groups "FULLY EXPLOITED" / "PARTIALLY EXPLOITED" / "UNEXPLOITED", each row
+"resource » houses » goods [status]". Journal: "## Exploitation", `| Resource | Status | Processing | Output |`. A worked
+row's houses are the catalogue's `processingInstitutions` whole, its goods the catalogue's `finalProducts` whole: the row
+says the town's chain runs through those houses. Small (r2r-thorp-14, 19 people, a shepherd collective): "| Livestock |
+full | Butcher, Tannery, Dairy farmer | leather goods, cheese, preserved meat |". Large (r2r-town-1): "| medicinal herbs |
+full | Apothecary, Alchemist shop | healing potions, antidotes |" (both houses stand: true).
+
+**(b) Twelve towns READ** (17 rows in nine towns; town-6, city-48 and the metropolis print none): **7 false** (4 HIGH:
+r2r-thorp-14 livestock, r2r-hamlet-0 grain "Mill, Bakers, Access to external mill" under a siege with neither, r2r-village-6
+livestock, r2r-village-23 "Jewelers' guild"; 3 MED: a missing Bakers or Salters' guild, r2s-famine-village-0,
+r2s-under_siege-town-0, r2s-famine-city-0). 6 worked rows true. The 5 unexploited rows name the houses the town LACKS,
+unlabelled, under "Unexploited" (LOW as read: the status says nothing works it; the tab labels the same list "Needs:").
+FAST: towns with a worked row naming a house the roster lacks (the tab's own reader, `housesStillNeeded`): **310**; with a
+worked row naming only held houses (true): 149. CENSUS (base): kind a in the Resources views of the PDF and the journal,
+**381 towns**.
+
+**(c) The tab's side** (`ResourcesTab.jsx :: ResourceChainCard`): a Fully exploited card prints the resource and its
+value, NO houses, NO goods; a Partial card the resource and its intermediate goods; an Unexploited card the resource, its
+first two goods and "Needs: <housesStillNeeded>". The export's unexploited houses already read that reader; its worked rows
+print a fact the tab does not.
+
+**(d) Candidates.**
+- **(A) the row prints what the tab's card prints** (tree X): worked rows no houses and no goods; unexploited rows the
+  needed houses and the first two goods. FAST: worked rows naming a lacking house **310 → 0**. CENSUS: **381 → 230** towns
+  (the 230: the unexploited "needs" rows, read LOW, and the "Mining" category heading, WEAK by the census's own ruling).
+  TRUE LOST: the 149 towns' worked rows that named only held houses, and the worked rows' goods (towns printing goods
+  492 → 163). FIELD DIFF 0.
+- **(C) worked rows name only the houses the roster holds** (tree Y): CENSUS 381 → **312**; still false, because the tab's
+  reader counts a NEED met ("Access to external mill" meets the mill) where the row would claim a HOUSE held: "Mill,
+  Access to external mill" prints in a thorp with access only (r2r-thorp-12, FAST). Rejected.
+- The unexploited rows: the tab's own word "Needs:" before the houses (PLAUSIBLE: the census skips a line opening
+  "Needs:", its `LIST_LINE`; not run).
+
+**(e) Recommendation: (A), with the "Needs:" label.** One file, `src/pdf/lib/viewModelBodySlices.js :: resourcesSlice`
+(the PDF and the journal both read its `chainRows`); guard: a thorp with a full livestock card and a shepherd collective
+only, a siege hamlet's grain, a town whose apothecary and alchemist stand (the guard), on the PDF and the journal. Shares
+no file with B1, B2 or B4: **side by side with any of them.**
+
+## B4 — the journal's stored keys after its Defence rows (`journalPages.js :: defensePage`)
+
+**(a)** "## Armed forces" bullets print `name: desc (source)`: "(generated)", "(required)", "(coherence_repair)",
+"(cascade)", "(faction_boost)", "(forced)". **(b)** Every one is the generator's provenance key (kind h, broken/internal
+text, HIGH by the scale's "a provenance tag"): **480 towns** (FAST over the dumps: required 360, generated 366,
+coherence_repair 157, cascade 103, faction_boost 13, forced 6). The census counted only "(coherence_repair)" (kind d, 166).
+**(c)** The PDF's force rows and the tab's force cards print no provenance. **(d) (B) the bracket left out** (tree X, one
+line): FAST 480 → **0**; CENSUS kind d in the journal's Defense page 166 → 0, L2 210 → 45 (the 45: "Thieves' Guild
+(Powerful)", a criminal operation's strength word, not this block). TRUE LOST 0. FIELD DIFF 0. **(e) Recommend (B)**: one
+line of `src/foundry/journalPages.js`; side by side with B2 (same file, another function).
+
+## B5, B6 — NOT REACHED (named with their figures)
+
+- **B5** Institutions and Services of the PDF and the journal: the census at 3c30fdeb4 (worklist rows): the catalogue
+  families `institutionalCatalog.js :: INSTITUTION_FAMILIES` hamlet 55 towns, town 48, shared 47, thorp 42, village 15;
+  `INSTITUTION_SERVICES` "Dispute arbitration" 25 and "Underground city" 22; `computeActiveChains` (the lord's mill) 38.
+  Read on sight only: the tab's card and the PDF both print `inst.desc` first (`InstitutionsTab.jsx :: institutionDescription`,
+  `viewModelBodySlices.js` line 237); why the hamlet family prints on the PDF and not the tab is NOT read.
+- **B6** History & Founding lasting effects: `historyData.js :: HISTORICAL_EVENTS_DATA.lastingEffects` (census at
+  c2c12792e: 60 towns). The History tab prints the same `lastingEffects` (behind its fold), so a cure is the data's (fd),
+  not the export's. Not re-measured at this tip.
+
+## THE HEADLINE TABLE
+
+| block | towns false before | precision (as read) | recommended cure | towns false after (measured) | true lines lost | files |
+|---|---|---|---|---|---|---|
+| B1 Defence threat rows | 284 (FAST; census 290) | census ≈0.76 by town; it misses the widest line (156) | C: the reader's two branches read the roster | 0 (FAST); census 290 → 69, the 69 read not false | 0 | `domain/display/threatAssessment.js` |
+| B2 Identity culture rows | census 408; read 30 of 84 lines (small 26/42, large 4/42) | high small, ≈0.1 large | A+B: scope via `cultureScopeLine`; six rows and notes left out | census 408 → 8, the 8 read not false | 48 of 72 row-lines read (most in towns+), the notes box | `pdf/sections/IdentityDailyLife.jsx`, `foundry/journalPages.js` (1 line) |
+| B3 Resources tables | 310 (FAST); census 381 | 7 of 17 rows; the 5 unexploited LOW | A + "Needs:": the tab's card | worked rows 0 (FAST); census 381 → 230, the rest LOW/WEAK | 149 towns' true worked-row houses; worked rows' goods | `pdf/lib/viewModelBodySlices.js` |
+| B4 journal provenance keys | 480 (FAST); census 166 | 1.00 | B: bracket left out | 0 | 0 | `foundry/journalPages.js` (1 line) |
+| B5, B6 | census 25–55 a family; 60 | not read | — | — | — | not reached |
+
+**Side by side:** B1 and B3 share no file with anything; B2 and B4 share `journalPages.js` (two functions). Four builders
+can start at once; B2 and B4 merge one file. **Everything here is display only (FIELD DIFF of trees X and Y: 0 towns,
+0 families).** The push hook did not run on this branch's worktree (it has no `node_modules`, so `.husky/_` is absent):
+docs only, no gate skipped by flag.
