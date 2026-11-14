@@ -102,7 +102,7 @@
    "reader": "SECOND",
    "master": 18,
    "integration": 17,
-   "banked": 17
+   "banked": 0
   },
   "P11": {
    "label": "11 a flow card naming a resource the town lacks",
@@ -123,14 +123,14 @@
    "reader": "GLANCE",
    "master": 173,
    "integration": 172,
-   "banked": 172
+   "banked": 0
   },
   "P14": {
    "label": "14 size words in small places",
    "reader": "SECOND",
    "master": 183,
    "integration": 167,
-   "banked": 167
+   "banked": 96
   },
   "P16three": {
    "label": "16a \"the ruling three\" over fewer",
@@ -192,7 +192,6 @@
  "grid": {
   "r2r-thorp-0": [
    "F4",
-   "P13",
    "P14",
    "P6need",
    "P8any",
@@ -200,7 +199,6 @@
   ],
   "r2s-under_siege-thorp-0": [
    "F4",
-   "P13",
    "P17",
    "P6need",
    "P8any"
@@ -243,7 +241,6 @@
   ],
   "r2r-city-0": [
    "P11",
-   "P13",
    "P16powers",
    "P17",
    "P18",
