@@ -800,8 +800,8 @@ function foodSentence(s, eco, fb, fbal, foodBar, foodDeficit, foodSurplus) {
  * '' (the sentence says no food comes in by trade, beside the siege's own note).
  * @type {(s: unknown, eco: { tradeAccess?: unknown } | null | undefined) => string} the carriers and their verb
  */
-const carriersOf = (s, eco) => (eco?.tradeAccess === 'port' && hasInstitution(/** @type {any} */ (s), 'docks') ? 'ships bring' : tradeStoppedHere(s) ? '' : eco?.tradeAccess === 'port' ? 'trade brings' : eco?.tradeAccess !== 'river' ? 'carts bring'
-  : hasInstitution(/** @type {any} */ (s), 'docks') || liveInstitutionNames(/** @type {any} */ (s)).some((n) => /\bferry|\bbarge|\bboat/i.test(n)) ? 'boats bring' : 'trade brings');
+const carriersOf = (s, eco, r = /** @type {any} */ (s)) => (eco?.tradeAccess === 'port' && hasInstitution(r, 'docks') ? 'ships bring' : tradeStoppedHere(s) ? '' : eco?.tradeAccess === 'port' ? 'trade brings' : eco?.tradeAccess !== 'river' ? 'carts bring'
+  : hasInstitution(r, 'docks') || liveInstitutionNames(r).some((n) => /\bferry|\bbarge|\bboat/i.test(n)) ? 'boats bring' : 'trade brings');
 import { hasInstitution, liveInstitutionNames } from '../../../domain/facts/institutions.js';
 
 export default React.memo(EconomicsTab);
