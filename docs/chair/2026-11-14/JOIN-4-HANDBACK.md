@@ -19,6 +19,8 @@ Seat JOIN-4 (session `session_01ACmDYZUoeEdTG4RGs1hdRD`), brief `docs/chair/2026
 | 2 | r3-tabs-2026-11-13 | 68e9e97b5 (13:02) | 6b74eb2aa | 4ebe3d6cb | 2 registers, 1 pin hunk | `docs/content/wiring-census.json`, `tests/lint/.lighting-census-baseline.json`; pin `proseWiringCensus.walker` docblockReports |
 | 3 | r2-code-a-2026-11-13 | bc9194bf7 (13:06) | 52932a0c2 | 0bab56f3b | 5 registers/baselines/bundles | `scripts/.writer-reach-baseline.json`, `engineBundle.js`, `engineBundle.meta.json`, `.lighting-census-baseline.json`, `.tuning-inventory.json`; clean-both: `presumedThings.register.json` |
 | 4 | powers-follow-up-2026-11-13 | 30b03024f (13:11) | 77d7bcace | 2cc812f4c | 2 registers | `page-census.register.json`, `.lighting-census-baseline.json`; clean-both: `SummaryTab.jsx`, `restoredSubsections.test.js`, `generationForkCensus.test.js` |
+| 5 | w2-fix-data-2026-11-13 | 8e814883c (13:20) | 8d2aa98b1 | e7e1c2e8c | 3 registers | `pool-dominance.register.json`, `.lighting-census-baseline.json`, `presumedThings.register.json`; clean-both: `institutionalCatalog.js`, `presumedThings.widened.register.json` |
+| 6 | w2-write-2026-11-13 | 525541b42 (13:24) | fdae163f3 | 1c01bdda0 | 2 registers/baselines | `wiring-census.json`, `.prose-byte-baseline.json`; clean-both: `RECEIPT_POOLS_DOSSIER_STATE.md`, `defense.generated.js`, `dossierStateProseProjection.contract.test.js`, both presumedThings registers, `proseComposed.walker.test.js`, `proseWiringCensus.walker.test.js`, `economicsTabFlow.test.js` |
 
 Every merge: `verify.sh` no mismatch; lint-staged changed nothing; the hook's gates green at every push (type ratchet 167/167, strict-domain 1113/1113, eslint 0 errors).
 
@@ -27,22 +29,27 @@ Every merge: `verify.sh` no mismatch; lint-staged changed nothing; the hook's ga
 No code conflict met so far. Merged clean though both sides moved them (each read in both sides' diffs from the merge base; independent lines; both stand):
 - `src/components/new/SummaryTab.jsx` (merge 4): the joined side's `prosperityInCrisisLine` (the Economy row and its tile sentence); the lane's `governingModifierWordsOf` passed to `FactionBar` (the governing chip in the Power tab's words).
 - `tests/pdf/restoredSubsections.test.js` (merge 4): the joined side's `institutionHouseLabel` arm; the lane's governing-modifier arm.
+- `src/data/institutionalCatalog.js` (merge 5): the joined side's Elder Grove successor (UPKEEP-CAPACITY C5); the lane's Sawmill `timber` tag and the Smelter's default desc (W2-FIX-DATA-13).
+- Tests merged clean at merge 6, each pin moved by ONE side at its own line (so each stands by (d); the close measures): `proseComposed.walker` (joined: relations 165 -> 169; lane: corpus 2948 -> 2950); `proseWiringCensus.walker` (joined: resolved 492, unresolved 364 and their kin; lane: variants 2950, mean 3.45, the histogram); `dossierStateProseProjection.contract` (joined: relations 169, present/absent 492/364; lane: one DS-DEF-2 key in two lists); `economicsTabFlow` (joined: the W2-C-LEAVES and R2-CODE-B re-keys; lane: the export posture anchor in the record's noun).
 - `tests/generators/generationForkCensus.test.js` (merge 4): the joined side's A6 re-keys (FNV_EXTERNAL_CALLS 23, drawingSteps 13, STORES_SEED); the lane's mint bound `toBeLessThanOrEqual(138 -> 139)` (a pin only the lane moved: stands by (d); JOIN-3 measured 141 at the join).
 
 ## 4. THE LIST FOR THE CLOSE (registers, baselines, generated files, bundles, pins; each with the lanes whose side was not taken)
 
 | file | lanes whose side was not taken (merge #) |
 |---|---|
-| `tests/lint/.lighting-census-baseline.json` | r3-code-c (1), r3-tabs (2), r2-code-a (3), powers (4) |
-| `docs/content/wiring-census.json` | r3-tabs (2) |
+| `tests/lint/.lighting-census-baseline.json` | r3-code-c (1), r3-tabs (2), r2-code-a (3), powers (4), w2-fix-data (5) |
+| `docs/content/wiring-census.json` | r3-tabs (2), w2-write (6) |
 | `scripts/.writer-reach-baseline.json` | r2-code-a (3) (a door: banked once at the close, record 440) |
 | `supabase/functions/_shared/engineBundle.js`, `engineBundle.meta.json` | r2-code-a (3) |
 | `tests/lint/.tuning-inventory.json` | r2-code-a (3) |
 | `scripts/census/page-census.register.json` | powers (4) |
+| `scripts/census/pool-dominance.register.json` | w2-fix-data (5) |
+| `tests/lint/presumedThings.register.json` | w2-fix-data (5) (and clean-both at 3, 6) |
+| `scripts/.prose-byte-baseline.json` | w2-write (6) |
 
 Pins (joined side kept inside the hunk): `tests/lint/proseWiringCensus.walker.test.js` `draft.docblockReports.length`: joined 43, r3-tabs 42 (merge 2; the lane's only change in the file).
 
-Merged clean though both sides moved them (for the close to re-derive or measure by its door): `tests/lint/presumedThings.register.json` (3); `tests/generators/generationForkCensus.test.js` (4, the mint bound A1).
+Merged clean though both sides moved them (for the close to re-derive or measure by its door): `tests/lint/presumedThings.register.json` (3, 6); `tests/lint/presumedThings.widened.register.json` (5, 6); `tests/generators/generationForkCensus.test.js` (4, the mint bound A1); `src/data/dossierStateProse/defense.generated.js` (6, generated); `docs/content/RECEIPT_POOLS_DOSSIER_STATE.md` (6); the pins of merge 6's four tests (§3). `docs/content/prose-shift-register.json` moved by w2-write alone (6): taken from the lane.
 
 ## 5. The count (CENSUS-2, `census2.sh <tree> <out> 4`, 720 seeds)
 
@@ -72,4 +79,4 @@ A worktree at origin's tip (`git worktree add /home/user/j4wt -b join4 <tip>`, `
 
 ## 9. WHAT IS LEFT (line by line)
 
-Merges 5 to 9 (w2-fix-data, w2-write, w2-c-leaves, r2-code-b, coherence-upkeep); join-nolane at 3ccdc0711; join-surfaces at its tip; the build, the grid, the conflict files' tests and the count at the landed tip; item 4 (the Tonight sheet's famine line) if both halves are in; the remerge patches; the message to the chair.
+Merges 7 to 9 (w2-c-leaves, r2-code-b, coherence-upkeep); join-nolane at 3ccdc0711; join-surfaces at its tip; the build, the grid, the conflict files' tests and the count at the landed tip; item 4 (the Tonight sheet's famine line) if both halves are in; the remerge patches; the message to the chair.
