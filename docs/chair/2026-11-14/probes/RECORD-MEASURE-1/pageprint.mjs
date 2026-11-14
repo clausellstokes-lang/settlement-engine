@@ -20,6 +20,8 @@ const W = {
   g_stability_word: (s, d) => [[String(s.powerStructure.stability).split(';')[0].slice(0, 30)]],
   h_land_cannot: (s, d) => d.map((x) => [x.split(/,| in /)[0]]),
   i_made_and_imported: (s, d) => d.map((x) => [x]),
+  j_office_empty: (s, d) => d.map((x) => [x]),
+  k_gendered_title: (s, d) => d.map((x) => [x.replace(/^(male|female) /, '')]),
 };
 for (const [id, r] of Object.entries(K)) {
   let printed = 0; const sec = {};

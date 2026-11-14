@@ -12,6 +12,12 @@ are now narrow (water: 16 towns) or no longer printed (the ranged house counts: 
 remains is a different set of pairs from the ones the readers quoted ("a disbanded military unit", "a famous
 navigator" no longer occur at the base). Every count below is the base's, by script, not the flags'.
 
+**The second read (the chair, 23:02 UTC: the list grew to 614).** The 81 new flags were grouped by the same script.
+They show two classes the first list did not: an office with nobody in it (j) and a gendered title against its holder
+(k), both added to the table. The rest fall into a–i. Their founder pairs again quote rows R2-CODE-A-13 already holds
+(a counting-house merchant family, a shipwright family, foresters, a favoured noble's farmland). That confirms the
+same tip: those pairs do not occur at the base.
+
 ## THE TABLE
 
 "Printed": towns of the class whose dump holds the class's witness (the good, the house, the power, both founding
@@ -30,6 +36,8 @@ it says the page can show the fault, not that a reader will call it so.
 | **f** "Lightly Defended" with every line empty | `defenseProfile.readiness.label` above Vulnerable while walls, garrison, militia, watch and mercenary are all empty | 24 | 17·4·3·0·0·0 | `defenseGenerator.js` → `bandLadders.js :: readinessBandOf`: UPKEEP-12 floors a HELD roster above Undefended; nothing caps an EMPTY one | 24: Summary/Overview, Systems/Defense | none tried (the mirror of UPKEEP-12: an empty roster reads at most Vulnerable; moves the label only) | measured only |
 | **b** water where none is | water home none, and the roster holds docks, a harbour master, a shipyard, a boatyard, a fisher's landing, a river ferry or a barge company (b1), or a waterborne good is made or sold (b2) | b1 **16**, b2 12 | metropolis only (b2: one village) | the metropolis roster: the Docks and Harbour master rows carry `tradeRouteRequired: ['port','river']`, held anyway in 16 dry metropolises (the path that seats them was not traced) | 16 / 12: Systems/Institutions, Economics | none tried | measured only: the class the readers saw in towns and hills is gone at the base |
 | **c3** too fine for the size | Education in a thorp (52); luxury in a thorp/hamlet (40); advanced arms in a thorp/hamlet or beside only a part-time smith (13) | 94 | 61·33·0·0·0·0 | as c1 / c2 | 52 | C1-A + C2-A → **30** | rides on C1-A/C2-A |
+| **j** an office with nobody in it (NEW at the second read) | a Government-category house (not "Access to …") that no NPC holds (`npcs[].institution.key/family`) | 367 (thorp–village 140) | 50·45·45·62·83·82 | the people step seats faces for a capped few houses (`generators/people/`); the roster's government rows are not among those it must fill | 367: Systems/Institutions, Systems/Power (the house is named; its empty seat is what the reader infers) | none tried | measured only; in a city with eight NPCs an unseated "City administration" (48) is weaker than an unseated Village elder or headman in a thorp |
+| **k** a gendered title against its holder (NEW at the second read) | an NPC `female` whose title holds "-man", "lord", "king", "brother", "father", or `male` whose title holds "woman", "mistress", "lady", "queen", "sister", "mother" | 268 | 26·28·31·38·77·68 | the house's `face` (`institutionalCatalog.js`: "the ferryman", "the front man", "the boat-headman", "the camp foreman", "the foundling-mother") and `people/mintTitles.js` ("the headman", "the lord"), minted with no reading of the drawn gender | 246: World/Relationships 186, Systems/Power 127 | none tried | measured only: the title is a page fact with one maker; a gender-paired face table is the natural cure and moves titles only |
 | **e** a house the size cannot hold | a ranged house whose lower bound, at a declared people-a-unit (guilds 60, parish churches 250, taverns 50, mills 100), exceeds the population | 17 (threshold-bound) | 0·0·0·13·4·0 | the tier's fixed roster labels | **0**: the ranges no longer print at the base | none | the page already says nothing false |
 
 ## THE FIVE CURED CLASSES, a paragraph each
@@ -71,9 +79,15 @@ text. The strict desert/mountain 37 are the chair's.
 
 (filled from `inventory_diff.py` on the BEFORE and AFTER runs; see the section below)
 
-## WHAT IT COSTS ELSEWHERE
+## WHAT IT COSTS ELSEWHERE (eleven focused files run in the AFTER tree; NAMED, nothing re-taken)
 
-(filled from the focused tests run in the AFTER tree; NAMED, never re-taken)
+`vitest run` over the founding, made-here, chains, power-card, ruler-kind, pay and golden-master files: 7 failed of
+126. None of the five is banked in `scripts/.test-ratchet-baseline.json`.
+- `tests/property/generatorGoldenMaster.test.js`: 525 configs move (all four cures together). The golden is the owner's door, never re-taken here.
+- `tests/components/economicsProducedLocally.test.jsx` (2): "a thorp that walks to a neighbour's church" and "a hamlet with no potter, no sawmill and no church … its smith's iron stays". Both are anchors on the made list's current content, and **C1-A's**. The second is a real objection: iron with a smith and no mine is held as made by design (the smith works bought iron). C1-A's extraction gate for `iron_deposits` (mine, smelter, blacksmith, forge) should admit it, so the failure needs a builder's reading before C1-A is built.
+- `tests/generators/foundingWalkLandsTested.test.js` W3 (1 of 5 guard towns): a cured row moves; **FA's**.
+- `tests/generators/powerCardOrderReads.test.js` SW-B1 · P50: "a thorp seated by priorityMilitary 80 … expected 'Headman's Authority'". **DA CONTRADICTS A PIN**: the priority-seated headman is DECIDED (the government line is the seat's own). DA is therefore a re-decision, the chair's, not a repair. Its made-whole twin (seat a headman where the power is named) does not contradict the pin.
+- `tests/generators/coherenceAgreeCures.test.js` (2, the gate tally): **RED AT THE BASE ALREADY** (2 failed at 06f36ad36, unbanked), not the cures'. Reported, not touched.
 
 ## HOW THE INSTRUMENTS ARE RE-MADE
 

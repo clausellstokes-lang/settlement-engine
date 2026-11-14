@@ -178,6 +178,16 @@ function madeAndImported(s) {
   return out;
 }
 
+
+// ── (j) an office with nobody in it; (k) a gendered title against the holder ────────────────────────────────
+function officeEmpty(s) {
+  const held = new Set((s.npcs || []).flatMap((n) => [n.institution?.key, n.institution?.family].filter(Boolean).map(String)));
+  return (s.institutions || []).filter((i) => i.category === 'Government' && !/^access to/i.test(String(i.name)) && !held.has(String(i.name))).map((i) => String(i.name));
+}
+function genderedTitle(s) {
+  return (s.npcs || []).filter((n) => (n.gender === 'female' && /(?<!wo)man\b|\b(lord|king|brother|father)\b/i.test(String(n.title))) || (n.gender === 'male' && /\b(woman|mistress|lady|queen|sister|mother)\b/i.test(String(n.title)))).map((n) => `${n.gender} ${n.title}`);
+}
+
 const CLASSES = {
   a_founder_vs_origin: founderVsOrigin,
   b1_dry_water_house: (s) => dryWater(s).house,
@@ -191,6 +201,8 @@ const CLASSES = {
   g_stability_word: stabilityWord,
   h_land_cannot: landCannot,
   i_made_and_imported: madeAndImported,
+  j_office_empty: officeEmpty,
+  k_gendered_title: genderedTitle,
 };
 const res = {};
 for (const [id, fn] of Object.entries(CLASSES)) res[id] = { towns: [], byTier: {}, byCrisis: {}, detail: {}, members: {} };
