@@ -40,6 +40,7 @@ THE CHAIR'S RULINGS SENT AFTER THE BRIEF:
 | 9 | exports-b3-2026-11-14 | a6dc3d16d (16:17) | — (base c66333f0c) | f4bb5f70c | none | — |
 | 10 | exports-b24-2026-11-14 | 34d1880ae (16:22; final, the chair 16:16) | — (base c66333f0c) | d81721e1e | 1 code (law (h)): `journalPages.js` the comment above the force bullet; the lane's stands | — (guard `tests/foundry/journalForcesNoProvenance.test.js` kept: green) |
 | 11 | join-nolane-2-2026-11-14 | 1b78763ae (16:28; final) | — (base 9618e0319) | 6d4b9cfa1 | none | — |
+| P1 | w2-fix-data-2026-11-13 | 78dd629bd (16:31; equal to the lane's tip) | e6e1893f4 (merge 2) | 3b873a03a | none | — |
 
 ## 3. Every code resolution
 
