@@ -654,6 +654,16 @@ export function defenceSupplyPoolKey(chainModifiers, force) {
   return null;
 }
 
+/**
+ * ⛔ R3-TABS-4 (the chair's ruling (d) of 2026-11-14 on the fresh reader's F6, a carried class): the supply line
+ * that says the defenders are well supplied ("busy and well stocked", "kept supplied", "will not go short", "the
+ * supply book … balances") is NOT DRAWN under a siege or a famine in force: every line of its pool is false there
+ * (27 towns of the reader's 1,536 at the line's tip 976db5b19) and none is true, so the clause is silent.
+ * @param {string|null} poolKey @param {unknown} stress @returns {string|null}
+ */
+const noSupplyUnderACrisis = (poolKey, stress) => (poolKey === 'CHAIN: defence supplied'
+  && stressList(stress).some((entry) => entry?.type === 'under_siege' || entry?.type === 'famine') ? null : poolKey);
+
 /** @param {{economic?: unknown}|null|undefined} chainModifiers @returns {string|null} */
 export function foodTradesPoolKey(chainModifiers) {
   if (!chainModifiers || typeof chainModifiers !== 'object') return null;
@@ -693,7 +703,7 @@ function chainArm(chainModifiers, arm) {
  * re-derives from `settlement.institutions` through the canonical live filter, which is
  * why a ruined citadel does not read here as standing walls.
  *
- * @param {{name?: string, config?: {monsterThreat?: unknown}|null, institutions?: unknown,
+ * @param {{name?: string, config?: {monsterThreat?: unknown}|null, institutions?: unknown, stress?: unknown,
  *   defenseProfile?: {scores?: {economic?: unknown, military?: unknown}|null, chainModifiers?: {military?: unknown, economic?: unknown}|null}|null,
  *   economicState?: {compound?: {inst?: Record<string, unknown>}|null}|null}|null|undefined} settlement
  * @param {{seed?: string, audience?: string, tierNoun?: string|null}} [options]
@@ -773,7 +783,7 @@ export function defenseThreatProse(settlement, options = {}) {
     beasts: rung(noHeldPerimeterByAWatch(beastsRowPoolKey(settlement?.config?.monsterThreat, walls, force), watchOnly)),
     invasion: rungWith(
       withinTheBar(watchOnly ? null : invasionRowPoolKey(walls, garrison || contracted, militia), dp.scores?.military),
-      defenceSupplyPoolKey(settlement?.defenseProfile?.chainModifiers, force),
+      noSupplyUnderACrisis(defenceSupplyPoolKey(settlement?.defenseProfile?.chainModifiers, force), settlement?.stress),
     ),
     internal: rung(internalRowPoolKey(
       civicFlag(compound.hasCourtSystem), civicFlag(compound.hasPrison),
