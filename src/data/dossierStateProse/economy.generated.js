@@ -4634,7 +4634,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no hunger"
           ],
-          "text": "{settlement} sends several different goods out to market; if one trade fails, the others still go.",
+          "text": "{settlement} sells more than one thing beyond the town.",
           "slots": [
             "settlement"
           ],
@@ -4657,7 +4657,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
             "no crisis: under_siege",
             "no crisis: famine"
           ],
-          "text": "There is always something going out. If one trade is quiet, another is not.",
+          "text": "There is always something going out, and not always the same thing.",
           "slots": [],
           "vid": 3
         },
@@ -4676,9 +4676,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         {
           "angle": "local",
           "marks": [
-            "colour"
+            "no crisis: under_siege"
           ],
-          "text": "People in {settlement} work at more than one trade that sells beyond the town.",
+          "text": "Buyers from outside come to {settlement} for more than one thing.",
           "slots": [
             "settlement"
           ],

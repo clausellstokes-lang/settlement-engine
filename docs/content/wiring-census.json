@@ -16984,11 +16984,10 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 1,
         "crisis: famine": 2,
         "crisis: under_siege": 1,
         "no crisis: famine": 4,
-        "no crisis: under_siege": 4,
+        "no crisis: under_siege": 5,
         "no hunger": 1,
         "tier: ≥ village": 1
       },

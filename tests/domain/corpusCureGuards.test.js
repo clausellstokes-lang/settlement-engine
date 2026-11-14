@@ -61,6 +61,7 @@ const GUARDS = [
   { seed: 'rww-metropolis-under_siege-1', pool: 'DS-ECO-12::CRITICAL IMPORT: a house needs what the land lacks', vid: 3, why: 'a siege over fifteen months of grain in the granary: "none of the grain ... has reached it, and that work has stopped or soon will" (the read\'s reason for v4, struck; v3 takes its draws)' },
   { seed: 'w5-city-plague_onset-3', pool: 'DS-ECO-1::COMBINATION C4: a low rung on a working approach', vid: 1, why: 'a plague\'s quarantine: "Trade comes and goes by X\'s river" beside "Nobody comes into X and nobody leaves" (the defence page\'s QUARANTINE ACTIVE override)' },
   { seed: 'rww-metropolis-under_siege-1', pool: 'DS-ECO-11::EXPLOITATION: fullyExploited', vid: 3, why: 'a siege: "carried through here from start to finish, from what the country gives" of a town whose fields and trade have stopped (v1, its twin, carries `no crisis: under_siege`)' },
+  { seed: 'rww-city-under_siege-1', pool: 'DS-ECO-10::POSTURE: established', vid: 5, why: 'a siege: "More than one of X\'s goods finds a buyer beyond the town" where nothing goes out by road (its siblings v2-v4, v6 carry `no crisis: under_siege`; v7 is the siege row)' },
 ];
 
 /** @param {string} seed */

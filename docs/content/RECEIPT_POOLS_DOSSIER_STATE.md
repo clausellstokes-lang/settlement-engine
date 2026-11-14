@@ -1567,11 +1567,11 @@ note that carries it on the six wired surfaces.
 3. `[threshold]` The outward trade does not cover the inward. It works while there is something to pay with.
 
 **POSTURE: `established`**
-1. `[ledger · no hunger]` {settlement} sends several different goods out to market; if one trade fails, the others still go.
+1. `[ledger · no hunger]` {settlement} sells more than one thing beyond the town.
 2. `[visitor · tier: ≥ village · no crisis: under_siege · no crisis: famine]` The yards here are full of goods bound out and no two of them are the same. This is a town that sells.
-3. `[street · no crisis: under_siege · no crisis: famine]` There is always something going out. If one trade is quiet, another is not.
+3. `[street · no crisis: under_siege · no crisis: famine]` There is always something going out, and not always the same thing.
 4. `[trade · no crisis: under_siege · no crisis: famine]` The carts that leave {settlement} carry several kinds of goods, not one.
-5. `[local · colour]` People in {settlement} work at more than one trade that sells beyond the town.
+5. `[local · no crisis: under_siege]` Buyers from outside come to {settlement} for more than one thing.
 6. `[newcomer · no crisis: under_siege · no crisis: famine]` A merchant who comes to {settlement} for one thing usually leaves with two or three.
 7. `[ledger · crisis: under_siege]` {settlement} had several trades selling outward before the siege, and none of them can reach a buyer now.
 8. `[unfolding · crisis: famine]` {settlement} has more than one trade sending goods out, and the famine has made every one of them harder to keep going.
