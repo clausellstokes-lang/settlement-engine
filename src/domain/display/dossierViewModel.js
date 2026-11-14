@@ -252,7 +252,7 @@ export function deriveViability(settlement) {
     // "Magical provision" is only honest when magic actually closes part
     // of the gap (magicFoodOffset > 0) — a mundane caravan trickle in a
     // magicExists:false world must not read as magically fed.
-    const magicFed = (food.magicFoodOffset || 0) > 0;
+    const magicFed = (food.magicFoodOffset || 0) > 0 && recordHoldsMagicFood(settlement); // UPKEEP-12 (#216): and the record holds it
     let line;
     if (access === 'isolated') {
       // Legacy saves carry importCoverage without importChannel — the imports are real (Economics
@@ -864,4 +864,17 @@ import { institutionDisplayName } from './institutionDisplayName.js';
  */
 function proseHouseName(house) {
   return institutionDisplayName(house).replace(/\s*\([^)]*\)/g, '').replace(/\s+/g, ' ').trim();
+}
+
+/**
+ * UPKEEP-12 (#216, the chair's step 3): the Outlook names magic only where the RECORD's food home holds a magic supply
+ * (the food generator's `magicOffset`, or the food record's share): the viability balance can carry a divine provision
+ * the food record never counted, and the page then says "Reliance on magic: None" beside "…and from magic". At the END
+ * of the file so no cited line moves.
+ * @param {DossierSettlementView | null | undefined} settlement @returns {boolean}
+ */
+function recordHoldsMagicFood(settlement) {
+  const supply = /** @type {{ magicOffset?: number, foodRecord?: { magicPct?: number } } | undefined} */ (
+    /** @type {unknown} */ (settlement?.economicState?.foodSecurity));
+  return (supply?.magicOffset || 0) > 0 || (supply?.foodRecord?.magicPct || 0) > 0;
 }
