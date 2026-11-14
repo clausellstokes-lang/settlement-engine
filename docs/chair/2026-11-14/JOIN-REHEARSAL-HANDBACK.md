@@ -99,7 +99,20 @@ Reds met in the governing files of the EconomicsTab resolution (45 files naming 
 
 ## 6. The count (CENSUS-2's eight kinds), the line against the joined tree
 
-CENSUS_TABLE_PENDING
+`sh census2.sh <joined tree> /home/user/c2out 4` (CENSUS-2 from `lane/census-2-2026-11-13` at 2686272b1), on the joined tree d8b7a5fde + the hand-back (docs only), 720 births, 0 errors, exit 0, 04:57–05:12 UTC (births+render 769 s, count+trace 105 s). THE LINE'S figures are CENSUS-2's own (docs/chair/2026-11-13/CENSUS-2-2026-11-13.md on the chair's lane), taken at **9e57f5023 (point 48)**, NOT at 976db5b19 (point 49): the line at 976db5b19 was not counted by this seat. Each pattern FINDS CANDIDATES (a hit is a line to read, not yet a fault); a count falling is not a cure.
+
+| kind | what it finds | the line 9e57f5023: towns · lines · writers | the joined tree: towns · lines · writers |
+|---|---|---|---|
+| a | a house, role or force named the roster lacks | 712 · 611 · 103 | **517 · 212 · 63** (22 untraced) |
+| b | trade, travel, plenty under a siege, famine or occupation | 70 · 101 · 39 | **46 · 42 · 20** |
+| c | a size word against the tier and population | 301 · 298 · 43 | **64 · 22 · 13** (1 untraced) |
+| d | broken text, engine words, raw keys | 382 · 40 · 11 | **22 · 8 · 2** (5 untraced) |
+| e | a denial the roster or powers contradict | 60 · 20 · 5 | **15 · 14 · 3** |
+| f | a house name with a count range or condition | 720 · 344 · 14 | **309 · 53 · 9** (15 untraced; ServicesTab 305 towns, InstitutionsTab 303, PowerStrata 298) |
+| g | machinery (breakdowns, modifiers, sliders) | 720 · 14 · 3 | **0 · 0 · 0** (no row: zero hits by count2.mjs over every dossier view of the 720) |
+| h | a vacant seat's acting holder given the bare title | 20 · 63 · 15 | **2 · 2 · 1** |
+
+The census's outputs (hits.json, hits.by-file.json, counts.txt, the dumps) are in the container at /home/user/c2out (lost with it; re-made by the command above in about fifteen minutes).
 
 ## 7. Hazards
 
