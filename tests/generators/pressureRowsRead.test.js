@@ -7,6 +7,9 @@
  * - succession_void[5] "whoever the merchants and the creditors decide" where the roster holds no market: `market`.
  * - insurgency (criminal)[1] "The streets of X have gone quiet" and slave_revolt[0] "the enslaved hold whole
  *   districts" below the middling band: `population: ≥ middling` (the chair's ruling (f)).
+ * - R2-CODE-A-7 (the hand-back's step 1 item 1; record 422): religious_conversion[1] "the courts are not equipped"
+ *   in a town with no courthouse. RULED: the page names a court only where a courthouse stands on the roster; elsewhere
+ *   the line speaks of the governing council (genPressureDetail's hasCourt; a branch inside the drawn row).
  * A declared row refused resolves draw-free to the next admitted one (generatePressureSentence).
  */
 import { beforeAll, describe, expect, it } from 'vitest';
@@ -32,6 +35,15 @@ describe('A1 the rows declare what they name', () => {
   });
 });
 
+describe('A1b the courts only where a courthouse stands', () => {
+  it('the court is named only on a roster that holds one', () => {
+    expect(String(/** @type {any} */ (PRESSURE_SENTENCES.religious_conversion({ name: 'X', hasCourt: true })[1]).text)).toContain('that the courts are not equipped');
+    const none = String(/** @type {any} */ (PRESSURE_SENTENCES.religious_conversion({ name: 'X', hasCourt: false, govFaction: 'Town Council' })[1]).text);
+    expect(none).not.toMatch(/court/i);
+    expect(none).toContain('that Town Council is not equipped to resolve quickly');
+  });
+});
+
 describe('A2 the census towns, born in the census shape', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
   const dials = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -42,6 +54,7 @@ describe('A2 the census towns, born in the census shape', () => {
     ['r2s-succession_void-thorp-2', /merchants/],
     ['r2s-insurgency-thorp-0', /streets/],
     ['r2s-slave_revolt-hamlet-3', /districts/],
+    ['r2s-religious_conversion-town-2', /courts/],
   ])('guard town %s: the line does not say what the town lacks', (seed, words) => {
     expect(born(seed).pressureSentence).not.toMatch(words);
   });
@@ -50,6 +63,7 @@ describe('A2 the census towns, born in the census shape', () => {
     ['r2s-succession_void-metropolis-3', /the merchants and the creditors/],
     ['r2s-insurgency-city-3', /^The streets of/],
     ['r2s-slave_revolt-metropolis-0', /whole districts/],
+    ['r2s-religious_conversion-city-0', /the courts are not equipped/],
   ])('%s keeps its row where the record bears it out', (seed, words) => {
     expect(born(seed).pressureSentence).toMatch(words);
   });

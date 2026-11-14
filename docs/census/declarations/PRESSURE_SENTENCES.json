@@ -1231,7 +1231,7 @@
         },
         {
           "lineId": "PRESSURE_SENTENCES.religious_conversion[1]",
-          "text": "${name}'s religious community has formally split. Both sides hold services, keep records, and claim the legitimate succession. Every legal document that required religious sanction is now in a grey zone that the courts are not equipped to resolve quickly.",
+          "text": "${name}'s religious community has formally split. Both sides hold services, keep records, and claim the legitimate succession. Every legal document that required religious sanction is now in a grey zone that ${court ? 'the courts are' : govFaction + ' is'} not equipped to resolve quickly.",
           "needs": [
             "institution: temple"
           ],

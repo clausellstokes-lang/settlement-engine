@@ -45,7 +45,7 @@ import { resolvePrimaryStress } from './stressPriority.js';
 import { migrationDirectionOfStress, migrationDirectionOfConfig } from '../domain/migrationDirection.js';
 import { pick, pickRandom, pickRandom2, random01 } from './helpers.js';
 import { resolveTerrain } from '../domain/resolveTerrain.js';
-import { deriveTradeCommodity } from './tradeCommodity.js';
+import { deriveTradeCommodity } from './tradeCommodity.js'; import { catalogIdForName } from '../data/institutionalCatalog.js'; const COURT_IDS = new Set(['Courthouse', 'Multiple courthouses', 'Multiple court buildings'].map(catalogIdForName)); // R2-CODE-A-7: the roster's courthouses (record 422)
 
 import {
   TERRAIN_NARRATIVE_HOOKS,
@@ -526,7 +526,7 @@ const genPressureDetail = settlement => {
     // WIRING-W0 (R-W7 e): the migration direction the record declares; the mass_migration pressure
     // lines read it (narrativeText.js), never a score of their own.
     migrationDirection: migrationDirectionOfStress(stress),
-    commodity, foodRecord: economicState?.foodSecurity?.foodRecord ?? null, powerCount: factions.length, hasBakery: hasInst('baker'), hasWorkshop: (institutions || []).some(i => i?.category === 'Crafts' && !/^access to\b/i.test(String(i?.name || ''))), // R2-CODE-A-6: a house of craft on the roster (an "Access to" row is not one: record 375) // R2-CODE-A-3: the powers the record holds (#48); the bakers the roster holds (the increment's ww-28) // R2-CODE-A P1: the food record, for the lines that mean food (narrativeText.js :: PRESSURE_SENTENCES, through foodBalance.js :: foodStoreWord)
+    commodity, foodRecord: economicState?.foodSecurity?.foodRecord ?? null, powerCount: factions.length, hasBakery: hasInst('baker'), hasWorkshop: (institutions || []).some(i => i?.category === 'Crafts' && !/^access to\b/i.test(String(i?.name || ''))), hasCourt: (institutions || []).some(i => COURT_IDS.has(i?.catalogId ?? catalogIdForName(i?.name))), // R2-CODE-A-7 (record 422): a courthouse on the roster, by catalog id (the label-join freeze), for the line that names the courts // R2-CODE-A-6: a house of craft on the roster (an "Access to" row is not one: record 375) // R2-CODE-A-3: the powers the record holds (#48); the bakers the roster holds (the increment's ww-28) // R2-CODE-A P1: the food record, for the lines that mean food (narrativeText.js :: PRESSURE_SENTENCES, through foodBalance.js :: foodStoreWord)
     // compound: the economic/military/criminal effectiveness triplet the
     // wartime/mass_migration/insurgency PRESSURE_SENTENCES closures branch on
     // (r.compound?.economyOutput / militaryEffective / criminalEffective). Without
