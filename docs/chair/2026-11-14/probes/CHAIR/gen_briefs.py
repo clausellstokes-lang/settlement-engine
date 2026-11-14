@@ -6422,6 +6422,126 @@ SEATS2['W2-WRITE-14'] = dict(
 )
 
 
+SEATS2['EXPORTS-B1'] = dict(
+    title="EXPORTS-B1 · the threat assessment's two false lines (284 towns): the clergy who are the neighbour's, the defenders paid late where no force stands",
+    branch='lane/exports-b1-2026-11-14', checkout='lane/join-surfaces-2026-11-14', tip='3c30fdeb', statement=False, mark='250,000',
+    intro=("You are EXPORTS-B1, a builder seat of the settlement-engine integration program, on your own branch cut from the surfaces "
+           "lane. A measuring seat sized the exports' widest false blocks and BUILT AND MEASURED each cure in a scratch tree before the "
+           "chair ruled. YOUR BLOCK (B1): the Defence chapter's THREAT ASSESSMENT rows, written by one reader that the Defense tab's "
+           "opened row and the PDF both call: two of its sentences are false in 284 of 720 towns: \"Clergy provide basic wound care…\" "
+           "where the town's only sacred row is access to a neighbour's church or a wayside shrine (221 towns), and \"The defenders are "
+           "already paid late…\" where no force stands (156 towns). THE CHAIR HAS RULED ITS CANDIDATE C. Yours: build it, red first, "
+           "measure it against the measure, read it where it prints, push."),
+    read='1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n2. THE MEASURE (`git fetch origin lane/exports-measure-2026-11-14`; `git show origin/lane/exports-measure-2026-11-14:docs/chair/2026-11-14/EXPORTS-MEASURE.md`, 236 lines, some long: by script): "Instruments" (how each figure is made: the census\'s one command, the FAST scripts) and ONLY THE SECTION OF YOUR BLOCK (B1): its (a) to (e): how the export presents the lines, the twelve towns as read, the tab\'s side, the candidates as built and measured, the recommendation, the guard\'s towns. Its probes (docs/chair/2026-11-14/probes/EXPORTS-MEASURE-1/: the FAST scripts and `candX.B1C-B2AB-B3A-B4.patch`, ONE patch holding all four blocks\' cures as measured: you take ONLY your block\'s files from it: `git apply --include=<path>`), by git archive, run from outside every repository tree.\n3. THE SURFACES LANE\'S FORM OF A CURE (at your checkout): docs/chair/2026-11-14/SURFACES-HANDBACK.md: "The law" and one cure as made (a guard that renders every surface, each arm red alone); tests/pdf/chainStateThreeSurfaces.test.jsx (the working extraction of the tab\'s, the PDF\'s and the journal\'s text for a town).\n4. THE FILES OF YOUR BLOCK, whole, before you change one.',
+    first="FIRST ACT. FULL HISTORY (`git fetch --depth=2147483647 origin lane/join-surfaces-2026-11-14 lane/join-2026-11-14 lane/integration-2026-11-07`; `git rev-parse --is-shallow-repository` prints false). Read the surfaces lane's tip back from origin: the measure was taken at 3c30fdeb4; ITS SEAT IS PUSHING ON IT: a later tip is not a stop: cut from the tip you read and say which. YOUR OWN BRANCH: `git worktree add -b lane/exports-b1-2026-11-14 <scratch>/own <that tip>`; `npm ci` there. You never commit on, or push to, the surfaces lane, and YOU MERGE NOTHING, by any command: a merge seat lands your branch.",
+    work=("THE LAW THE CURE SERVES (the chair's; vetoable by the owner): ONE READER FOR ONE FACT ON EVERY SURFACE: what a tab says of a fact, the PDF and the Foundry journal say through the same function the tab calls; A SURFACE WITH NO ROOM PRINTS LESS, NEVER SOMETHING ELSE; no surface prints a raw catalogue, a stored key or a line that never passed a reader. THE MEASURE WAS TAKEN BEFORE THE RULING, SO THAT THE BUILD IS SHORT: its figures are your targets: where your own count differs from the measure's, STOP and say so with both figures.\nYOU CHANGE ONLY THE FILES YOUR BLOCK NAMES (three other seats are building the other blocks and the surfaces lane's own seat is at work: a file outside your block is NAMED, not changed). THE RECORD DOES NOT MOVE: display only: a field diff of the record over the census's 720, base against tip, shows 0 families: say so by your own run.\nREGISTERS ARE RE-DERIVED ONCE, AT THE CLOSE: you re-take no census and no baseline and rebuild no bundle: a register your cure leaves stale is NAMED in your hand-back; nothing is banked, raised or hand-edited; a pin your cure moves is re-keyed BY IDENTITY in the same commit, its cause in the note.\n" +
+          "THE RULING (B1, CANDIDATE C): THE READER'S TWO BRANCHES TAKE THE CONDITIONS THEIR WORDS NEED: the clergy line prints only "
+          "where a house with clergy stands on the live roster (not an access-only row, not a shrine alone); the \"defenders paid "
+          "late\" line prints only where a force stands; where none does, its twin: \"Money is already short; a long crisis would "
+          "empty the reserves.\" (new words: read in three towns; the owner's veto list); \"the defenders kept paid\" becomes \"the "
+          "place kept going\" where no force stands. ONE FILE: src/domain/display/threatAssessment.js, and its guard.\n"
+          "THE WORK: (1) the guard FIRST, red at your base: a test rendering the Defense tab's OPENED row and the PDF's row for the "
+          "measure's towns (a thorp with access to a parish church and no force; a famine thorp; a siege hamlet) and its keep-guard "
+          "(the village whose parish church keeps the clergy line): each arm red alone by its own fault. (2) the cure: your block's "
+          "file from the patch, read whole against the ruling before it is applied. (3) THE COUNTS, by the measure's FAST scripts and "
+          "by the census's command with `--files`: towns with a false line of the block 284 to 0 (clergy 221 to 0; defenders 156 to "
+          "0); the census's hits for the writer 290 to 69, the 69 read not false; TRUE LINES LOST 0. (4) READ WHERE IT PRINTS, on the "
+          "tab's opened row AND the PDF: the measure's four towns, and three more of each cell (a siege, a famine, an occupation "
+          "among them; the smallest and the largest size).\n"
+          "NAMED BY THE MEASURE, NOT YOURS: \"There is a court but almost nowhere to hold anyone\" where a Town hall alone sets the "
+          "court flag (62 towns: ruled elsewhere: the line names the hall: another seat's leaf).\n" +
+          "AFTER THE CURE: the strict-domain gate, the type ratchet and eslint on the touched files; the presumed-things walker against your base (a rise is a stop); the twelve-birth grid (`node scripts/census/page-census.mjs --grid`: a rise is a stop; a fall is NAMED); the test files that name the files you touched (a test red at your tip and green at your base is YOURS: a pin re-keyed by identity, never loosened).\nTHE HAND-BACK: docs/chair/2026-11-14/EXPORTS-B1-HANDBACK.md on your branch: the ruling copied; the cure and its commit; the counts before and after beside the measure's; EVERY NEW OR CHANGED LINE with the towns it was read in (the owner's veto list, and the next reader's); the true lines lost, counted; the registers named stale; what is left. ONE MESSAGE TO THE CHAIR when the cure is pushed: your branch's tip read back from origin; the counts; the new words.\nTHIS IS A SHORT SEAT: one block, measured already. Hand back by file at 250,000."),
+    merges='',
+    when="for a count that differs from the measure's, for a stop that blocks the build, and when the cure is pushed (the tip; the counts; the new words)",
+    turns='',
+)
+
+
+SEATS2['EXPORTS-B3'] = dict(
+    title="EXPORTS-B3 · the Resources & Production tables of the PDF and the journal (310 towns): a worked row prints what the tab's card prints",
+    branch='lane/exports-b3-2026-11-14', checkout='lane/join-surfaces-2026-11-14', tip='3c30fdeb', statement=False, mark='250,000',
+    intro=("You are EXPORTS-B3, a builder seat of the settlement-engine integration program, on your own branch cut from the surfaces "
+           "lane. A measuring seat sized the exports' widest false blocks and BUILT AND MEASURED each cure in a scratch tree before the "
+           "chair ruled. YOUR BLOCK (B3): the RESOURCE CHAINS table of the PDF and the journal's Exploitation table: a worked row "
+           "prints the catalogue's processing houses and final products WHOLE, so that a thorp of nineteen with a shepherd collective "
+           "reads \"Livestock | full | Butcher, Tannery, Dairy farmer | leather goods, cheese, preserved meat\": a worked row names a "
+           "house the roster lacks in 310 of 720 towns. The Resources tab's card prints neither houses nor goods for a worked "
+           "resource. THE CHAIR HAS RULED ITS CANDIDATE A. Yours: build it, red first, measure it against the measure, read it where "
+           "it prints, push."),
+    read='1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n2. THE MEASURE (`git fetch origin lane/exports-measure-2026-11-14`; `git show origin/lane/exports-measure-2026-11-14:docs/chair/2026-11-14/EXPORTS-MEASURE.md`, 236 lines, some long: by script): "Instruments" (how each figure is made: the census\'s one command, the FAST scripts) and ONLY THE SECTION OF YOUR BLOCK (B3): its (a) to (e): how the export presents the lines, the twelve towns as read, the tab\'s side, the candidates as built and measured, the recommendation, the guard\'s towns. Its probes (docs/chair/2026-11-14/probes/EXPORTS-MEASURE-1/: the FAST scripts and `candX.B1C-B2AB-B3A-B4.patch`, ONE patch holding all four blocks\' cures as measured: you take ONLY your block\'s files from it: `git apply --include=<path>`), by git archive, run from outside every repository tree.\n3. THE SURFACES LANE\'S FORM OF A CURE (at your checkout): docs/chair/2026-11-14/SURFACES-HANDBACK.md: "The law" and one cure as made (a guard that renders every surface, each arm red alone); tests/pdf/chainStateThreeSurfaces.test.jsx (the working extraction of the tab\'s, the PDF\'s and the journal\'s text for a town).\n4. THE FILES OF YOUR BLOCK, whole, before you change one.',
+    first="FIRST ACT. FULL HISTORY (`git fetch --depth=2147483647 origin lane/join-surfaces-2026-11-14 lane/join-2026-11-14 lane/integration-2026-11-07`; `git rev-parse --is-shallow-repository` prints false). Read the surfaces lane's tip back from origin: the measure was taken at 3c30fdeb4; ITS SEAT IS PUSHING ON IT: a later tip is not a stop: cut from the tip you read and say which. YOUR OWN BRANCH: `git worktree add -b lane/exports-b3-2026-11-14 <scratch>/own <that tip>`; `npm ci` there. You never commit on, or push to, the surfaces lane, and YOU MERGE NOTHING, by any command: a merge seat lands your branch.",
+    work=("THE LAW THE CURE SERVES (the chair's; vetoable by the owner): ONE READER FOR ONE FACT ON EVERY SURFACE: what a tab says of a fact, the PDF and the Foundry journal say through the same function the tab calls; A SURFACE WITH NO ROOM PRINTS LESS, NEVER SOMETHING ELSE; no surface prints a raw catalogue, a stored key or a line that never passed a reader. THE MEASURE WAS TAKEN BEFORE THE RULING, SO THAT THE BUILD IS SHORT: its figures are your targets: where your own count differs from the measure's, STOP and say so with both figures.\nYOU CHANGE ONLY THE FILES YOUR BLOCK NAMES (three other seats are building the other blocks and the surfaces lane's own seat is at work: a file outside your block is NAMED, not changed). THE RECORD DOES NOT MOVE: display only: a field diff of the record over the census's 720, base against tip, shows 0 families: say so by your own run.\nREGISTERS ARE RE-DERIVED ONCE, AT THE CLOSE: you re-take no census and no baseline and rebuild no bundle: a register your cure leaves stale is NAMED in your hand-back; nothing is banked, raised or hand-edited; a pin your cure moves is re-keyed BY IDENTITY in the same commit, its cause in the note.\n" +
+          "THE RULING (B3, CANDIDATE A, WITH THE TAB'S OWN LABEL): THE EXPORT'S ROW PRINTS WHAT THE TAB'S CARD PRINTS: a worked row: "
+          "the resource and its status, NO houses and NO goods; a partly worked row: what the tab's Partial card prints; an "
+          "unexploited row: the houses still needed UNDER THE TAB'S WORD \"Needs:\" and its first two goods. ONE FILE: "
+          "src/pdf/lib/viewModelBodySlices.js :: resourcesSlice (the PDF and the journal both read its rows), with the section and "
+          "page code only where the label must be printed, and its guard.\n"
+          "THE WORK: (1) the guard FIRST, red at your base: the PDF's and the journal's table for the measure's towns (a thorp with a "
+          "full livestock card and a shepherd collective only; a siege hamlet's grain) and its keep-guard (a town whose apothecary "
+          "and alchemist stand): each arm red alone. (2) the cure: your block's file from the patch, read whole against the ruling "
+          "before it is applied; the \"Needs:\" label made (the measure did not run it). (3) THE COUNTS: worked rows naming a house "
+          "the roster lacks 310 towns to 0; the census's hits in the Resources views 381 to about 230, the rest READ (twenty lines): "
+          "the unexploited rows under \"Needs:\" and a category heading: say what each is. TRUE LINES LOST, counted and said plainly: "
+          "the 149 towns whose worked rows named only houses that stand, and the worked rows' goods (492 towns to 163). (4) READ "
+          "WHERE IT PRINTS, on the PDF AND the journal beside the Resources tab: the measure's towns and three more of each cell (a "
+          "siege, a famine, an occupation among them; the smallest and the largest size).\n"
+          "ONE THING MORE, MEASURE ONLY, in your hand-back: the journal's Economics & Trade page now prints \"Black market "
+          "(operational)\" in about 250 towns (a script's hit in 110 where no such house stands): which reader writes that row, since "
+          "which commit, and does the Economics tab print that chain in those towns? Three towns read. Not cured by you.\n" +
+          "AFTER THE CURE: the strict-domain gate, the type ratchet and eslint on the touched files; the presumed-things walker against your base (a rise is a stop); the twelve-birth grid (`node scripts/census/page-census.mjs --grid`: a rise is a stop; a fall is NAMED); the test files that name the files you touched (a test red at your tip and green at your base is YOURS: a pin re-keyed by identity, never loosened).\nTHE HAND-BACK: docs/chair/2026-11-14/EXPORTS-B3-HANDBACK.md on your branch: the ruling copied; the cure and its commit; the counts before and after beside the measure's; EVERY NEW OR CHANGED LINE with the towns it was read in (the owner's veto list, and the next reader's); the true lines lost, counted; the registers named stale; what is left. ONE MESSAGE TO THE CHAIR when the cure is pushed: your branch's tip read back from origin; the counts; the new words.\nTHIS IS A SHORT SEAT: one block, measured already. Hand back by file at 250,000."),
+    merges='',
+    when="for a count that differs from the measure's, for a stop that blocks the build, and when the cure is pushed (the tip; the counts; the true lines lost)",
+    turns='',
+)
+
+
+SEATS2['EXPORTS-B24'] = dict(
+    title="EXPORTS-B24 · the culture rows of the PDF and the journal (408 towns), and the journal's provenance keys (480 towns)",
+    branch='lane/exports-b24-2026-11-14', checkout='lane/join-surfaces-2026-11-14', tip='3c30fdeb', statement=False, mark='250,000',
+    intro=("You are EXPORTS-B24, a builder seat of the settlement-engine integration program, on your own branch cut from the surfaces "
+           "lane. A measuring seat sized the exports' widest false blocks and BUILT AND MEASURED each cure in a scratch tree before the "
+           "chair ruled. YOUR TWO BLOCKS share one file. B4: the journal's Armed forces bullets print the generator's provenance key "
+           "after each force (\"(required)\", \"(generated)\", \"(coherence_repair)\"…) in 480 of 720 towns: one line. B2: the PDF's "
+           "CULTURAL IDENTITY prints the culture profile's raw fields in the present tense of THE PLACE (a thorp of eleven: \"A ritual "
+           "plaza at the centre, tribute coming in, and waterworks and gardens around it\"; \"Ward levies reinforce trained warrior "
+           "societies and palace guards\"): 408 towns hit; of 84 lines read, 26 of 42 are false in small places and 4 of 42 in towns "
+           "and larger. THE CHAIR HAS RULED B4 AS MEASURED AND B2 DIFFERENTLY FROM THE MEASURE'S RECOMMENDATION. Yours: B4 first (one "
+           "line), then B2 as ruled, each red first, measured, read where it prints, pushed."),
+    read='1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n2. THE MEASURE (`git fetch origin lane/exports-measure-2026-11-14`; `git show origin/lane/exports-measure-2026-11-14:docs/chair/2026-11-14/EXPORTS-MEASURE.md`, 236 lines, some long: by script): "Instruments" (how each figure is made: the census\'s one command, the FAST scripts) and ONLY THE SECTION OF YOUR BLOCK (B2 and B4): its (a) to (e): how the export presents the lines, the twelve towns as read, the tab\'s side, the candidates as built and measured, the recommendation, the guard\'s towns. Its probes (docs/chair/2026-11-14/probes/EXPORTS-MEASURE-1/: the FAST scripts and `candX.B1C-B2AB-B3A-B4.patch`, ONE patch holding all four blocks\' cures as measured: you take ONLY your block\'s files from it: `git apply --include=<path>`), by git archive, run from outside every repository tree.\n3. THE SURFACES LANE\'S FORM OF A CURE (at your checkout): docs/chair/2026-11-14/SURFACES-HANDBACK.md: "The law" and one cure as made (a guard that renders every surface, each arm red alone); tests/pdf/chainStateThreeSurfaces.test.jsx (the working extraction of the tab\'s, the PDF\'s and the journal\'s text for a town).\n4. THE FILES OF YOUR BLOCK, whole, before you change one.',
+    first="FIRST ACT. FULL HISTORY (`git fetch --depth=2147483647 origin lane/join-surfaces-2026-11-14 lane/join-2026-11-14 lane/integration-2026-11-07`; `git rev-parse --is-shallow-repository` prints false). Read the surfaces lane's tip back from origin: the measure was taken at 3c30fdeb4; ITS SEAT IS PUSHING ON IT: a later tip is not a stop: cut from the tip you read and say which. YOUR OWN BRANCH: `git worktree add -b lane/exports-b24-2026-11-14 <scratch>/own <that tip>`; `npm ci` there. You never commit on, or push to, the surfaces lane, and YOU MERGE NOTHING, by any command: a merge seat lands your branch.",
+    work=("THE LAW THE CURE SERVES (the chair's; vetoable by the owner): ONE READER FOR ONE FACT ON EVERY SURFACE: what a tab says of a fact, the PDF and the Foundry journal say through the same function the tab calls; A SURFACE WITH NO ROOM PRINTS LESS, NEVER SOMETHING ELSE; no surface prints a raw catalogue, a stored key or a line that never passed a reader. THE MEASURE WAS TAKEN BEFORE THE RULING, SO THAT THE BUILD IS SHORT: its figures are your targets: where your own count differs from the measure's, STOP and say so with both figures.\nYOU CHANGE ONLY THE FILES YOUR BLOCK NAMES (three other seats are building the other blocks and the surfaces lane's own seat is at work: a file outside your block is NAMED, not changed). THE RECORD DOES NOT MOVE: display only: a field diff of the record over the census's 720, base against tip, shows 0 families: say so by your own run.\nREGISTERS ARE RE-DERIVED ONCE, AT THE CLOSE: you re-take no census and no baseline and rebuild no bundle: a register your cure leaves stale is NAMED in your hand-back; nothing is banked, raised or hand-edited; a pin your cure moves is re-keyed BY IDENTITY in the same commit, its cause in the note.\n" +
+          "THE RULING ON B4 (CANDIDATE B, AS MEASURED): the provenance bracket is left out of the journal's Armed forces bullets: one "
+          "line of src/foundry/journalPages.js :: defensePage; 480 towns to 0; a strength word that is not a provenance key (\"Thieves' "
+          "Guild (Powerful)\") is not this block: NAMED with its count. Its own commit, red first.\n"
+          "THE RULING ON B2 (NOT the measure's A+B, which leaves out all six rows and loses 48 true lines of 72, most of them in "
+          "towns and cities, and the PDF's one editable box): THREE PARTS, ONE CAUSE: (i) THE SCOPE LINE prints through the tab's "
+          "reader on every surface (settlementQuickGuide.js :: cultureScopeLine: the measure's part A, as built); (ii) THE SIX RAW "
+          "ROWS (Built form, Civic pattern, Exchange, Sacred life, Defense, Social texture) AND THE GENERATED CULTURAL NOTES PRINT "
+          "ONLY IN A TOWN OR LARGER (QUARTERS, GUILDS AND BAZAARS BELONG TO A TOWN OR LARGER: a thorp, a hamlet and a village print "
+          "the scope line and the two rows that already pass their readers, Foodways and Architecture, and no more); (iii) IN A TOWN "
+          "OR LARGER EACH ROW IS HELD TO ITS OWN DECLARATIONS AT PRINT (the measure's C': a row that declares `ruler: lord` is not "
+          "printed under an Arcane Council); (iv) WHAT THE USER WROTE ALWAYS PRINTS: if the notes box holds the user's own text "
+          "(daily.cultureNotes edited), it prints at every size: only the GENERATED default obeys (ii) and (iii). Files: "
+          "src/pdf/sections/IdentityDailyLife.jsx and src/foundry/journalPages.js :: identityPage, and their guard.\n"
+          "THE WORK: (1) B4: the guard, the line, the count (480 to 0), three towns read; push. (2) B2: MEASURE (ii) FIRST, since the "
+          "measure did not build it: at your base, the culture rows' hits by tier (the census's command with `--files` and the "
+          "measure's scripts): the towns the gate takes the rows from, and the towns that keep them (the measure's bound: 408 to 72). "
+          "Then the guard, red at your base: the PDF's and the journal's culture block in a thorp, a village (both: no raw row), a "
+          "town under an Arcane Council (the lordly-court row not printed), a city (the rows printed), and a town whose notes box "
+          "the user has edited (the user's text printed whole). Then the cure. (3) THE COUNTS: the culture writer's towns before and "
+          "after, by tier; THE LINES LEFT IN TOWNS AND LARGER READ: every distinct culture line the census still hits there (about "
+          "one in ten was false as the measure read them): each read in its towns: FALSE ones LISTED with the row of "
+          "src/data/cultureProfiles.js that writes them and the condition it lacks (the data lane's seat declares them: you do not "
+          "change that file). TRUE LINES LOST: the rows in small places that read true in the measure's twelve, counted. (4) READ "
+          "WHERE IT PRINTS, the PDF AND the journal: the measure's towns and three more of each cell (a siege, a famine, an "
+          "occupation among them; the smallest and the largest size).\n" +
+          "AFTER THE CURE: the strict-domain gate, the type ratchet and eslint on the touched files; the presumed-things walker against your base (a rise is a stop); the twelve-birth grid (`node scripts/census/page-census.mjs --grid`: a rise is a stop; a fall is NAMED); the test files that name the files you touched (a test red at your tip and green at your base is YOURS: a pin re-keyed by identity, never loosened).\nTHE HAND-BACK: docs/chair/2026-11-14/EXPORTS-B24-HANDBACK.md on your branch: the ruling copied; the cure and its commit; the counts before and after beside the measure's; EVERY NEW OR CHANGED LINE with the towns it was read in (the owner's veto list, and the next reader's); the true lines lost, counted; the registers named stale; what is left. ONE MESSAGE TO THE CHAIR when the cure is pushed: your branch's tip read back from origin; the counts; the new words.\nTHIS IS A SHORT SEAT: one block, measured already. Hand back by file at 250,000."),
+    merges='',
+    when="for a count that differs from the measure's, for a stop that blocks the build, when B4 is pushed (one line), and when B2 is pushed (the tip; the counts by tier; the false lines left, listed)",
+    turns='',
+)
+
+
 def build2(seat):
     s = _r3c6() if seat == 'R3-CODE-C-6' else SEATS2[seat]
     head = (
