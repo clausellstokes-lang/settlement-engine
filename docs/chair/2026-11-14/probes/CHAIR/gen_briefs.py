@@ -6248,6 +6248,96 @@ SEATS2['R2-CODE-B-13'] = dict(
 )
 
 
+SEATS2['W2-C-LEAVES-13'] = dict(
+    title="W2-C-LEAVES-13 · the third leaves lane: two true outputs given back their makers, the slash label, the court line that names the hall, then by width",
+    branch='lane/w2-c-leaves-2026-11-13', tip='3285d328', statement=False,
+    intro=("You are W2-C-LEAVES-13, the thirteenth seat on the third leaves lane of the settlement-engine integration program "
+           "(lane/w2-c-leaves-2026-11-13). The lane cures false lines at display: the Economics tab's chain cards, goods pills and food "
+           "sentences, the Resources tab's cards, the Defense tab's supporting rows; it moves no record. Its reader read its stage NOT "
+           "CLEAR. The twelfth seat found the class's cause (a default branch passing 52,603 card outputs by a loose match of first "
+           "words), replaced it with a maker table (no maker row, no print), cured two HIGH pills, the false \"finishes it\" sentences, "
+           "exports of the food a famine failed and a catalogue count range, and handed back at its count. Its new rule ALSO SILENCED TWO "
+           "OUTPUTS THAT ARE OFTEN TRUE (spices on 507 cards; the bards' \"Magical entertainment\" on 585): the chair did not accept "
+           "those silences. Yours: those two FIRST, then the list by width. The lane lands as points on the joined line: NO whole suite, "
+           "NO new statement."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. On your lane, docs/chair/2026-11-13/W2-C-LEAVES-HANDBACK.md: ONLY \"# PART 12\" (from that line to the end, by script): THE "
+          "CHAIR'S RULINGS copied (with PART 11's (1) to (17) it points to: THEY STAND); the default branch as measured and the maker "
+          "table as made (THE FORM OF A CURE HERE: a unit and a collected arm, the record proved unmoved leaf by leaf); the veto list; "
+          "FOR THE JOIN; WHAT IS LEFT, with ITS CAUTION ON MAKER ROWS (a made row also turns carried exports and local pills into "
+          "\"made\": the first cut made 219 spice exports false: a carried good needs a table only the card reads); THE INSTRUMENTS. Of "
+          "PART 11 only the chair's rulings (1) to (17) and its list, by heading.\n"
+          "3. THE READER'S RANKED LIST, for a row you are curing (`git fetch origin lane/review-w2-c-leaves-2026-11-14`; `git show "
+          "origin/lane/review-w2-c-leaves-2026-11-14:docs/chair/2026-11-14/REVIEW-W2-C-LEAVES-LINES-READ.md`: the section \"The false "
+          "lines, ranked\", by script); its probes by git archive.\n"
+          "4. THE CENSUS'S ONE COMMAND (`git fetch origin lane/census-3-2026-11-14`; `git show "
+          "origin/lane/census-3-2026-11-14:docs/chair/2026-11-14/CENSUS-3-2026-11-14.md`: ONLY \"THE ONE COMMAND\" and \"PRECISION, AS "
+          "READ\"); its probes by git archive. AND TWO MEASURES OTHER SEATS MADE IN YOUR LEAVES' FACTS: `git fetch origin "
+          "lane/coherence-upkeep-2026-11-12 lane/income-measure-2026-11-14`; `git show "
+          "origin/lane/coherence-upkeep-2026-11-12:docs/chair/2026-11-12/UPKEEP-HANDBACK.md` (ONLY, in its top part, WHAT IS LEFT item 3: "
+          "THE COURT, measured); `git show origin/lane/income-measure-2026-11-14:docs/chair/2026-11-14/INCOME-ROWS-MEASURE.md` (ONLY the "
+          "last paragraph of Item 4: \"PARKED FOR THE CHAIR\")."),
+    first=("FIRST ACT. FULL HISTORY (`git fetch --depth=2147483647 origin lane/w2-c-leaves-2026-11-13 lane/join-2026-11-14 "
+           "lane/integration-2026-11-07`; `git rev-parse --is-shallow-repository` prints false). Read your lane's tip back from origin: it "
+           "was 3285d3280 when this was written; any difference is a stop: tell the chair. (1) MERGE THE JOINED LINE'S TIP INTO YOUR LANE "
+           "(`git merge --no-ff origin/lane/join-2026-11-14`: say which tip): every lane's cures are landed there; from this merge on "
+           "your lane holds them. A code conflict in a file of yours keeps BOTH sides' cures (read the file whole); a register, a "
+           "baseline, a generated file or a bundle that conflicts takes THE JOINED LINE'S side. After it: the three fast gates and the "
+           "test files that name this lane's files: a test red after the merge and green on both sides before it is A COMPOSED RED: "
+           "one message to the chair with the two intents in a sentence each; go on meanwhile. (2) YOUR WORKLIST: the census's one "
+           "command at your merged tip (about 22 minutes of machine time, to a directory outside every tree) with `--files` for this "
+           "lane's display leaves (every file under src/domain/display/ and src/components/new/tabs/ your lane has changed since its "
+           "merge base with origin/lane/integration-2026-11-07): the writers of your files by false towns."),
+    work=("THE CHAIR'S RULINGS SINCE PART 12'S COPY (2026-11-14; each vetoable by the owner; copy them into your part):\n"
+          "(r1) REGISTERS ARE RE-DERIVED ONCE, AT THE CLOSE: you re-take no census and no baseline and rebuild no bundle; the grid's "
+          "falls are NAMED, not lowered; a register your cure or your merge leaves stale is NAMED; a pin your cure moves is re-keyed BY "
+          "IDENTITY in the same commit.\n"
+          "(r2) THE TWO WIDE SILENCES ARE NOT ACCEPTED WHERE A MAKER STANDS: A LINE IS IN ITS POOL UNLESS THE TOWN MAKES IT FALSE: "
+          "spices (507 cards) and the bards' \"Magical entertainment\" (585) each print where a house that truly makes or carries them "
+          "stands: BY THE TWELFTH SEAT'S CAUTION: a carried good takes a table ONLY THE CARD READS, so that no export or local pill "
+          "turns \"made\": read three towns for each (the smallest and the largest), count before and after on the reader's 1,824, and "
+          "show the exports and local pills unmoved.\n"
+          "(r3) THE COURT LINE NAMES THE HALL (ruling (4) of PART 11, now measured by another seat: in all 100 towns that print a "
+          "court-positive line with no court house, A TOWN HALL ALONE sets the court flag; the catalogue's Town hall is \"Meeting place "
+          "and administrative center\"): THE FLAG IS NOT MOVED (it stands in the defence rating's own facts). WHERE A HALL ALONE HEARS "
+          "CASES, THE LINE NAMES THE HALL: the Defense tab's supporting row (\"Courts without detention.\", \"Court only\", \"Court + "
+          "Prison\", the bar's #206) prints through one leaf that reads which house sets the flag: a court house: \"court\"; a town "
+          "hall, a city hall or an assembly alone: hearings at that house by its display label. New words read in three towns and on "
+          "the veto list. The PDF's twin of the row is another lane's: NAME it with the leaf to call.\n"
+          "(r4) THREE ROWS A MEASURING SEAT PARKED IN YOUR LEAVES' FACTS: the Economics tab's \"Produced locally\" list names a trade "
+          "(\"iron metalwork\", \"stone\") where no house of it stands (the income rows of the same class are cured on the defence "
+          "lane: 402 towns to 0: measure what the list still says at your merged tip); the Resources tab's \"Fully exploited\" Fish "
+          "with no fisher (35 towns: a granary, a butcher or a baker counted as a fisher); a town whose exports sell timber while its "
+          "Resources tab calls the timber \"Unexploited\". Each measured first; cured where it is your leaf; else NAMED with its writer.\n"
+          "THE WORK, in this order, each cause its own commit, measured first, red first (a unit and a collected arm over births; each "
+          "arm shown able to red by a plant you do not commit, made in a tree no suite or render is running in), pushed as made:\n"
+          "1. (r2), the two maker rows. ONE MESSAGE TO THE CHAIR (the tip; each count before and after; the exports and pills "
+          "unmoved), then THE COUNT.\n"
+          "2. ONE TABLE in your hand-back: PART 12's list, (r3), (r4) and the census's rows for your files (TEN hit lines of a writer "
+          "READ where they print before it is cured: a hit is a candidate, not a fault), SORTED BY FALSE TOWNS; then the cures in the "
+          "table's order. As the counts stood when this was written: (15) the slash label \"gold/silver ore\" in \"Needed, and not "
+          "brought in\" (93 towns: the good's plain name through the leaf your pills use); (r3) the court line (100); (7) the counts "
+          "of the Economic Flows header; (5) the re-filed prose families; (16) the Magic tab calls your chain-note reader (43); (r4); "
+          "(17) outputs run together (31); (10) the arcane words read the defence profile's own tradition; (8) the besieged port's "
+          "food sentence; (6); (9); (3)'s medium pills; (14); (11).\n"
+          "THE RECORD DOES NOT MOVE: prove it leaf by leaf after each cure; a cure that moves a record leaf outside the stored public "
+          "prose is a STOP. EVERY LINE A CURE NOW PRINTS IN A NEW TOWN, OR NEWLY LEAVES SILENT, IS READ WHERE IT PRINTS on the tab: "
+          "three towns of its cells, a siege, a famine or an occupation among them, the smallest and the largest size it reaches. "
+          "SILENCE IS TRUE, AND A SILENCE THAT TAKES TRUE LINES IN MORE THAN TWENTY TOWNS IS TOLD TO THE CHAIR BEFORE IT IS PUSHED.\n"
+          "You change no file under src/pdf/ or src/foundry/: a row of yours that needs one is NAMED for the exports' seats with the "
+          "leaf to call.\n"
+          "AFTER EVERY CURE: the presumed-things walker (red only for what PART 12 names); the strict-domain gate, the type ratchet and "
+          "eslint on the touched files; the twelve-birth grid (`node scripts/census/page-census.mjs --grid`: a rise is a stop); the "
+          "test files that name the files you touched.\n"
+          "TO SPEND LESS OF YOUR COUNT: count on the census's 720 and the row's own towns; render the reader's whole 1,824 once, "
+          "before the hand-back; never a render's output or a dump in your context.\n"
+          "THE HAND-BACK, kept current after every item: a new \"# PART 13\" at the end of the lane's hand-back file, in PART 12's form."),
+    merges='; the merge of the joined line into YOUR lane that the first act names',
+    when="for a stop that blocks everything you have left, for a composed red after the merge, after (r2) (the tip; the counts), for a silence that takes true lines in more than twenty towns, and with your hand-back",
+    turns='',
+)
+
+
 def build2(seat):
     s = _r3c6() if seat == 'R3-CODE-C-6' else SEATS2[seat]
     head = (
