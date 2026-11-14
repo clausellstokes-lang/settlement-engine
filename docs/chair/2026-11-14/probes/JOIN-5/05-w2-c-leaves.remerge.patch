@@ -1,0 +1,15 @@
+commit 770e20190d11c74cfbf846ff62b7d0c648dd9f26
+Merge: 6920d174b 5f95bf473
+Author: Claude <noreply@anthropic.com>
+Date:   Sat Nov 14 16:04:11 2026 +0000
+
+    join(JOIN-5 · 5): merge lane/w2-c-leaves-2026-11-13 at 5f95bf473 — the third landing
+    
+    Tip read back from origin at 16:04 UTC: 5f95bf47364a81a21439e6c2848e9b37aaea3f2f
+    (JOIN-4 merged 9ac076d5e at its merge 7; the lane has since merged the
+    joined line at 600b9f743, the merge base).
+    No conflict; nothing moved by both sides.
+    Verify: 15 files changed, each equal to the lane's blob.
+    
+    Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_01ACmDYazSdYC8v2Fj1WVnzT
