@@ -3227,7 +3227,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no hunger"
           ],
-          "text": "{settlement} feeds itself with a small margin. The counts come out ahead by a little, every season, without much drama.",
+          "text": "In an ordinary season {settlement} has enough to eat, or near enough.",
           "slots": [
             "settlement"
           ],
@@ -3248,7 +3248,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
             "no hunger",
             "stores: < 12"
           ],
-          "text": "{settlement} is fed, but only just. A poor harvest is felt at every table; a good one means a little put by.",
+          "text": "{settlement} is fed, but what it keeps put by is not deep: a run of poor harvests would reach its tables.",
           "slots": [
             "settlement"
           ],
