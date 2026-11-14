@@ -61,6 +61,13 @@ const BANDS = Object.freeze(['STRONG', 'ADEQUATE', 'WEAK', 'CRITICAL']);
 const trueUnder = (lines, band) => (lines.find(([, bands]) => bands.includes(band)) || [''])[0];
 
 /**
+ * C-L7: a threat bar's colour is the band its row prints (UPKEEP-8 for Economic Survival; UPKEEP-9 for Invasion & War
+ * and Internal Security, the chair's ruling of 2026-11-14): green where Strong, amber where Adequate, red below.
+ * @param {string | null} band @returns {string}
+ */
+const bandBarColor = (band) => (band === 'STRONG' ? '#1a4a2a' : band === 'ADEQUATE' ? '#7a5010' : '#8b1a1a');
+
+/**
  * WHAT MONEY THE PLACE HAS TO MEET A CRISIS: the Economic Survival row's own band, read from its ONE home
  * (`defenseScoreBands.js :: economicSurvivalBandOf`, COHERENCE-UPKEEP-6, the chair's ruling A), the band its
  * badge, its colour, the screen's row and the guard's purse clauses read. Its score is paid at the standing label.
@@ -228,12 +235,9 @@ export function buildThreatAssessment(r) {
     assess: mon, // '' where no sentence is true of what stands under the band: the row prints its band alone
   });
 
-  const milScore = scores.military || 0;
-  const milColor = milScore >= 60
-    ? '#1a4a2a'
-    : milScore >= 35
-      ? '#7a5010'
-      : '#8b1a1a';
+  // C-L7 (UPKEEP-9, the chair's ruling of 2026-11-14 01:30): the bar's colour reads the band its row prints, as the
+  // Economic Survival bar does, not cuts of its own (60/35 against the band's 65/40).
+  const milColor = bandBarColor(milBand);
   /** @type {Array<[string, ReadonlyArray<string>]>} */
   let milLines = [];
   if (hasWalls && hasGarrison) {
@@ -267,12 +271,7 @@ export function buildThreatAssessment(r) {
     assess: mil,
   });
 
-  const intScore = scores.internal || 0;
-  const intColor = intScore >= 60
-    ? '#1a4a2a'
-    : intScore >= 35
-      ? '#7a5010'
-      : '#8b1a1a';
+  const intColor = bandBarColor(scoreBand(scores.internal || 0)); // C-L7 (UPKEEP-9): the band its row prints
   const sl = sp.safetyLabel || 'Moderate';
   let intA = 'Internal security: ' + sl + '. ';
   if (sl.includes('Dangerous')) {
@@ -295,11 +294,7 @@ export function buildThreatAssessment(r) {
 
   // C-L7 (UPKEEP-8): the bar's colour reads the band its row prints (the Economic Survival band's ONE home), not cuts of its own.
   const econBand = economicSurvivalBandOf(r);
-  const econColor = econBand === 'STRONG'
-    ? '#1a4a2a'
-    : econBand === 'ADEQUATE'
-      ? '#7a5010'
-      : '#8b1a1a';
+  const econColor = bandBarColor(econBand);
   let econA;
   const money = moneyRungOf(r);
   // Where the crisis has lowered the word the page prints, the money that can pay was laid by before it: one clause,

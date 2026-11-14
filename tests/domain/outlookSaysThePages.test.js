@@ -73,4 +73,19 @@ describe('step 6: the glance chip and the Economic Survival colour', () => {
     }));
     expect(edges, 'scores between the old cuts and the band\'s were read (rv2-calm-thorp-3: 37, Weak)').toBeGreaterThan(0);
   });
+  // UPKEEP-9 (the chair's ruling of 2026-11-14 01:30 on C-L7's other two bars): one home for a bar's colour is its own
+  // band. Measured first on the 1,490 at 06818b064: the military bar disagreed with the band printed beside it in 94
+  // births, the internal bar in 162 (scores from 35 to 39 and from 60 to 64). Red at 06818b064.
+  test('C-L7: the Invasion & War and Internal Security bars are coloured by the band their rows print', () => {
+    const COLOR = { STRONG: '#1a4a2a', ADEQUATE: '#7a5010', WEAK: '#8b1a1a', CRITICAL: '#8b1a1a' };
+    const edges = { 'Invasion & War': 0, 'Internal Security': 0 };
+    expectNoSeedFailures(collectSeedFailures(seeds, (seed) => {
+      for (const row of deriveDefenseReadiness(birth(seed)).filter((r) => r.label in edges)) {
+        if ((row.score >= 60 && row.score < 65) || (row.score >= 35 && row.score < 40)) edges[row.label] += 1;
+        expect(row.barColor, `${seed} ${row.label} ${row.score} ${row.status}`).toBe(COLOR[row.status]);
+      }
+    }));
+    expect(edges['Invasion & War'], 'military scores between the old cuts and the band\'s were read').toBeGreaterThan(0);
+    expect(edges['Internal Security'], 'internal scores between the old cuts and the band\'s were read').toBeGreaterThan(0);
+  });
 });
