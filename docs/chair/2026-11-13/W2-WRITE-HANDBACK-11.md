@@ -1,10 +1,12 @@
-# W2-WRITE — the hand-back of the eleventh seat (IN PROGRESS: kept current after every item)
+# W2-WRITE — the hand-back of the eleventh seat (HANDED BACK BY FILE near the count's mark)
 
 **Lane:** `lane/w2-write-2026-11-13`. Brief: `docs/chair/2026-11-14/briefs/BRIEF-W2-WRITE-11.md` on the chair's lane
 (the chair session_01ACmDYZrFEVXyZEUg1NDxxC). The lane's tip read back from origin at the start: `70e5e7468`, as the
 brief names it (no difference). Scratch worktree on local branch `w2w11`; pushed by
 `git push origin w2w11:refs/heads/lane/w2-write-2026-11-13` (push.sh), each push non-empty (`git rev-list` tested),
-the main clone's refs and local config compared before and after (same every time).
+the main clone's refs and local config compared before and after (same every time). No commit at or below
+`70e5e7468` rewritten. HANDED BACK at get_session 355,866 (last waking) plus two small items: step 4(b) (23 hits,
+each read in its towns) cannot be done inside what is left before 400,000, so it is handed back whole rather than begun.
 
 **Measured at the start:** the owner-page render (`render.sh`) at `70e5e7468` over `seeds-w5a.txt` and the bar's ten
 `bar0-` seeds (772 towns, 4 workers, every shard exit 0); the page census over the 720 (`page-census.mjs --out`,
@@ -31,6 +33,7 @@ staying is the pattern's structure, not a red.
 | step 2 designed row | DS-DEF-11 WALLED-STRAINED v2 under an occupation, {defwork} a catalogue label; v1 v5 the same once v2 was off | 772: drawn under an occupation v1 5, v2 17, v5 1 -> 0; v2 elsewhere 106 towns, now without the label | v1 v2 v5 + `no crisis: occupied` (their siblings v6 v7 carry it); v2 "to man them" (slot out) | 440f40cfc | w5-city-occupied-1 v2 v1, w5-hamlet-occupied-104 v5 |
 | CHAIR row of 11:01 (MEDIUM) | DS-DEF-1 readiness ADEQUATE v3 under an occupation; v1 v2 v4 read under one: each says the town holds | 772: 7 occupied towns eligible, drawn v1 2, v2 1, v3 1, v4 3 -> 0 | v1-v4 + `no crisis: occupied` | 9b0af88f7 | w5-metropolis-occupied-1 v3, w5-town-occupied-3 v1, w5-city-occupied-104 v2, w5-city-occupied-2 v4 |
 | step 4a, the lane's red | tests/ui/economicsTabFlow.test.js exportPosture liveness anchor ("beyond the town" expected, "beyond the village" printed) | file 1 failed -> 36 passed | "village" is right for GROUND (a village): the anchor re-keyed by identity, spoken in the record's noun as onPage() speaks the others | 38a195d5b | (a test) |
+| step 4a, the lane's red | tests/ui/generalDeskTabFlow.test.js FAILED TO LOAD (DS-GEN-18 STALLED, forge_town, "0 eligible ... no facts") | load failure -> 37 passed | FOUND: no source commit emptied the case; the spec answered no crisis dimension and v2 v3 declare `no crisis: under_siege` (read fail-closed), v1 names `{resource}` (not in the bag), v4 is siege-only. The spec hands in FORGE's crisis dimensions and facts (as economicsTabFlow's GROUND spec does): re-keyed by identity, no line changed | ecc5c4ded | (a test) |
 
 ## New or changed lines (the owner's veto list, with the towns read)
 - DS-DEF-2 Beasts settled, nothing organized v1: "{settlement} has no wall against the country, and the settled heartland around it sends little that would call for one." (Hisnabad w5-thorp-famine-4, Palaioeia w5-hamlet-calm-110, Veliko w5-town-wartime-4 watch, Flachmoor w5-village-succession_void-1 Weak)
@@ -49,7 +52,7 @@ staying is the pattern's structure, not a red.
 
 ## What is left (line by line, in the brief's order)
 - Step 3: the message to the chair SENT (11:1x UTC): the tip 9b0af88f7 and each row's count before and after.
-- Step 4 (a): economicsTabFlow DONE (38a195d5b). generalDeskTabFlow (DS-GEN-18 STALLED, seed forge_town, "NOTHING DRAWS ... 0 eligible") NOT REACHED: the commit that emptied the case is still to be found (HANDBACK-9: not in the source's four STALLED lines; look between b5206acd3 and 143d51c5d, and outside the source: a fact read that now refuses on "no facts"); then a line true in that case read in three towns, or the seed re-keyed by identity to a town the pool serves.
+- Step 4 (a): DONE, both files (38a195d5b, ecc5c4ded).
 - Step 4 (b), NOT REACHED: (b) the 23 fresh presumed-things hits (unchanged at 23 through every item of this seat): 7 declaration literals for the declaration pass, 16 corpus lines to read and declare or cure.
 - Step 5, NOT REACHED: the 15 MEDIUM rows of BAR-0-ROWS-corpus.json (#297 is cured by 9a3cf623f; #259 is for the join; the rest unread).
 - Step 6, NOT REACHED.
@@ -61,6 +64,9 @@ staying is the pattern's structure, not a red.
 - #259 DS-DEF-9 magicDependency FALSE v2 ("nothing it lives by would stop without it") and v1 ("Nothing structural ... depends on arcane work"): 74 of the 772 false-pool towns have magical food provision (economicState.foodSecurity.magicOffset > 0; 28-37% of the need under sieges: bar0-hamlet-under_siege-rand-1 Torriplenum, rww-town-under_siege-1, w5-city-under_siege+famine-102). No atom reads magicOffset. The writer: `src/domain/magicReliance.js :: deriveMagicReliance` counts no magical food provision; the one-line change: a magicOffset share of the daily need above a floor raises the reading to relied-upon (then the true pool, reworded here, prints). The false v3 is the data lane's text (lane/w2-fix-data-2026-11-13 holds it).
 
 - `src/domain/display/stateProse/defenseStateProse.js :: defworkFill` prints the first wall-class institution's catalogue name lowercased ("city walls and gates", "palisade or earthworks") in every {defwork} line (WALLED-STRAINED v1 v5, WALLED-THREATENED v1-v3, WALLED-QUIET v1 v3-v5): the one-line change: fill from a plain-word map of the wall class (wall, palisade, earthwork, citadel), never the catalogue name.
+
+## The reds at this seat's tip
+The fast set (iterate.sh) at every item: only the lane's known reds: tests/domain/powerStateProseDesk.test.js DS-POW-6 "5a RE-RULED" and "ALIVENESS" (measured red at 6fdff4abd by the tenth seat, not this seat's), and presumedThings ARM 1 (the 23 fresh hits, base-reds.txt). The two UI files: green. Not run: the whole suite (not this seat's).
 
 ## How the instruments are re-made
 As HANDBACK-10's section of that name; this seat's helpers (re-make from these descriptions): `magic.py <dumps>` (per DS-DEF-9 pool and vid: towns drawn by the page's reliance line, all-roles-absent, no-arcane-practitioner); `beasts.py <dumps> '<pool word>'` (per Beasts settled vid, towns drawn by the bar's band); `after.sh "<cause>" "<car>" "<why>" <files>` (doors.sh, iterate.sh, bytes.mjs, presumed --check, the grid, gates.sh).
