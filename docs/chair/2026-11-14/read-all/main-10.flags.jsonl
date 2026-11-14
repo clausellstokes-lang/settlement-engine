@@ -1,0 +1,94 @@
+{"id":"05276","town":"r2s-under_siege-city-0","sev":"MED","kind":"STATE","why":"brewery supplies ships across the region; under siege nothing goes out by road or water","other":""}
+{"id":"17648","town":"r2s-under_siege-city-0","sev":"MED","kind":"STATE","why":"offers sending surveyors out to map regions; under siege nobody leaves by road","other":""}
+{"id":"17955","town":"r2s-under_siege-city-0","sev":"MED","kind":"TAG","why":"grain stores 'feed the city'; tag has F, and here food deficit 20% under siege","other":""}
+{"id":"12921","town":"r2s-under_siege-city-0","sev":"MED","kind":"STATE","why":"major livestock sales across all species; under siege nothing comes in by road; no livestock market in HOUSES","other":""}
+{"id":"16285","town":"r2s-under_siege-city-0","sev":"MED","kind":"PAIR","why":"rare medications available through district sourcing, yet herbs cut off by siege and being made to last","other":"00453"}
+{"id":"00615","town":"r2s-under_siege-city-0","sev":"MED","kind":"PAIR","why":"ships bring in a third of the rest; siege shut the water route and 'since the siege nothing has come in'","other":"00453"}
+{"id":"HEADER","town":"r2s-under_siege-city-0","sev":"LOW","kind":"RECORD","why":"need 26504, grown 5041, imports 6422 leaves 57% short, but header says deficit 20%","other":""}
+{"id":"18036","town":"r2s-under_siege-city-0","sev":"MED","kind":"PAIR","why":"timber 'magically sustained', yet shipbuilding timber imported (stands cleared) and cut off by siege","other":"18027"}
+{"id":"13614","town":"r2s-under_siege-city-0","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"07361","town":"r2s-under_siege-city-0","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"HEADER","town":"r2s-famine-city-0","sev":"LOW","kind":"RECORD","why":"a 'city' of 2909 holding Craft guilds (30-80), Merchant guilds (15-40), Parish churches (10-30) and a royal seat","other":""}
+{"id":"09828","town":"r2s-famine-city-0","sev":"LOW","kind":"LACKS","why":"fulling mills along every watercourse; HOUSES has Mills (2-5) and no fuller","other":""}
+{"id":"15765","town":"r2s-famine-city-0","sev":"MED","kind":"LACKS","why":"merchant guilds called a political power; GOVERNMENT lists no guild power","other":""}
+{"id":"04187","town":"r2s-famine-city-0","sev":"MED","kind":"STATE","why":"fruit, vegetables, dairy and eggs 'available every morning' under Famine","other":""}
+{"id":"20719","town":"r2s-famine-city-0","sev":"MED","kind":"PAIR","why":"hall 'at odds with' Military/Guard, but the relation reads Royal Authority~Military/Guard stable; slash label as a name","other":"16737"}
+{"id":"14680","town":"r2s-famine-city-0","sev":"MED","kind":"STATE","why":"Noble Families 'has the strength', Royal Authority only office; GOVERNMENT gives both Significant","other":""}
+{"id":"10748","town":"r2s-famine-city-0","sev":"MED","kind":"STATE","why":"decisions made by Noble Families; GOVERNMENT names Royal Authority governing, both Significant","other":""}
+{"id":"20616","town":"r2s-famine-city-0","sev":"MED","kind":"PAIR","why":"'garrison and city watch walks the usual rounds' (verb disagrees) while the garrison spends its days guarding the food","other":"20636"}
+{"id":"HEADER","town":"r2r-city-44","sev":"MED","kind":"RECORD","why":"founded by royal decree and forced investment, yet began as a fishers' seasonal camp that grew on its own","other":""}
+{"id":"09739","town":"r2r-city-44","sev":"LOW","kind":"STATE","why":"'governance by bureaucratic inertia'; GOVERNMENT is an Ecclesiastical Council","other":""}
+{"id":"13623","town":"r2r-city-44","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"13588","town":"r2r-city-44","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence, twice","other":""}
+{"id":"17652","town":"r2r-city-44","sev":"MED","kind":"LACKS","why":"names elected aldermen; GOVERNMENT lists no aldermen or elected council, only clergy, guard and Ecclesiastical Council","other":""}
+{"id":"20612","town":"r2r-city-44","sev":"MED","kind":"STATE","why":"garrison and watch well paid and patrolling properly; safety Unsafe, prosperity Struggling, monsters on the roads","other":""}
+{"id":"HEADER","town":"r2s-famine-city-1","sev":"MED","kind":"RECORD","why":"exports Dates and fruit while importing dates because local orchards are unproductive; fish market in a desert crossroads town","other":""}
+{"id":"HEADER","town":"r2s-famine-city-1","sev":"MED","kind":"RECORD","why":"founded by royal decree and forced investment, yet grew from a seasonal fair as traders chose to winter","other":""}
+{"id":"03960","town":"r2s-famine-city-1","sev":"LOW","kind":"LACKS","why":"governed 'on kin, oath and the assembly'; GOVERNMENT is a Merchant Guild Council, no assembly","other":""}
+{"id":"12196","town":"r2s-famine-city-1","sev":"MED","kind":"STATE","why":"warehouses 'fill after the harvest'; under Famine the city grows 1255 of 6804 needed","other":""}
+{"id":"02663","town":"r2s-famine-city-1","sev":"LOW","kind":"LACKS","why":"cartographers turn out sea charts; desert crossroads town with no coast or river","other":""}
+{"id":"28863","town":"r2s-famine-city-1","sev":"MED","kind":"LACKS","why":"the guards usually beat the Council; GOVERNMENT lists no Military/Guard power","other":""}
+{"id":"01479","town":"r2s-famine-city-1","sev":"LOW","kind":"BROKEN","why":"'city walls and gates ... asks little of it': pronoun does not agree","other":""}
+{"id":"01624","town":"r2s-famine-city-1","sev":"MED","kind":"LACKS","why":"a hired company of soldiers under contract; DEFENCE hired: none and HOUSES has no mercenaries or hired blades","other":""}
+{"id":"02650","town":"r2s-famine-city-1","sev":"MED","kind":"LACKS","why":"a guard from a hired company; DEFENCE hired: none, no mercenary house","other":""}
+{"id":"HEADER","town":"r2s-famine-city-3","sev":"LOW","kind":"RECORD","why":"Fish market in a plains crossroads city with no river, coast, or fish in TRADE","other":""}
+{"id":"01563","town":"r2s-famine-city-3","sev":"LOW","kind":"STATE","why":"market 'handles more than the city could ever use' under Famine, growing 9228 of 23636","other":""}
+{"id":"02643","town":"r2s-famine-city-3","sev":"MED","kind":"PAIR","why":"governor 'holds sway', city runs as noble fief; Noble Governorship is Minor and has 'only the office'","other":"16435"}
+{"id":"19722","town":"r2s-famine-city-3","sev":"MED","kind":"PAIR","why":"Religious Authorities 'at odds with' the Governorship, but relation reads Noble Governorship~Religious Authorities stable","other":"14760"}
+{"id":"13613","town":"r2s-famine-city-3","sev":"MED","kind":"STATE","why":"Military/Guard 'about as strong as' Noble Governorship; GOVERNMENT has Military Significant, Governorship Minor; slash label as name","other":""}
+{"id":"HEADER","town":"r2s-famine-city-2","sev":"LOW","kind":"RECORD","why":"founded by a military command building forts, yet reason is foresters finding rich woodland; fish market in a hills road town","other":""}
+{"id":"HEADER","town":"r2s-occupied-city-3","sev":"MED","kind":"RECORD","why":"founded by royal decree and forced investment, yet began as a mining camp made permanent when families arrived","other":""}
+{"id":"03798","town":"r2s-occupied-city-3","sev":"MED","kind":"PAIR","why":"Arcane Council~Occupation Authority 'stable', yet the same pair is High tension","other":"03790"}
+{"id":"HEADER","town":"r2s-occupied-city-0","sev":"LOW","kind":"RECORD","why":"Fish market in a plains crossroads city; no river, coast, or fish in TRADE","other":""}
+{"id":"20218","town":"r2s-occupied-city-0","sev":"LOW","kind":"PAIR","why":"city run by officials 'less formally constituted than a council'; GOVERNMENT is a Military City Council that still meets","other":"01071"}
+{"id":"04064","town":"r2s-occupied-city-0","sev":"MED","kind":"PAIR","why":"one audience with the Council gets a final decision, none to appeal; under Occupation nothing it decides stands until occupiers agree","other":"01071"}
+{"id":"07358","town":"r2s-occupied-city-0","sev":"MED","kind":"PAIR","why":"Occupation Authority 'has not yet moved to take' the hall; it already occupies and decides what is enforced","other":"15179"}
+{"id":"HEADER","town":"r2s-occupied-city-1","sev":"LOW","kind":"RECORD","why":"Fish market in a plains crossroads city with no river or coast, no fish in TRADE","other":""}
+{"id":"15175","town":"r2s-occupied-city-1","sev":"MED","kind":"STATE","why":"Occupation Authority 'could now take the hall'; GOVERNMENT has Merchant oligarchy Strong, Occupation Authority only Significant","other":""}
+{"id":"28829","town":"r2s-occupied-city-2","sev":"MED","kind":"STATE","why":"history says 'when the occupiers left'; CRISIS is Under Occupation now, occupiers' flags over the gate","other":"20532"}
+{"id":"HEADER","town":"r2s-plague_onset-city-3","sev":"LOW","kind":"RECORD","why":"fish market in a mountain road town; founded by a military command yet grew around a sheep run with mill and market","other":""}
+{"id":"27539","town":"r2s-plague_onset-city-3","sev":"LOW","kind":"BROKEN","why":"'who goes in and out of the contract killer's people': a house slot filled with a group, reads wrong","other":""}
+{"id":"22662","town":"r2s-plague_onset-city-0","sev":"MED","kind":"STATE","why":"says nobody works the stone; TRADE 'made here' lists stone and resources list a stone quarry","other":""}
+{"id":"13556","town":"r2s-plague_onset-city-0","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"13314","town":"r2s-plague_onset-city-0","sev":"LOW","kind":"BROKEN","why":"'Merchant Guilds works': plural subject with a singular verb","other":""}
+{"id":"20362","town":"r2s-plague_onset-city-0","sev":"MED","kind":"STATE","why":"craft guilds 'carry more weight' than the merchants; GOVERNMENT has Craft Guilds Suppressed, Merchant Guilds Minor","other":""}
+{"id":"04168","town":"r2s-plague_onset-city-1","sev":"MED","kind":"STATE","why":"cathedral 'attracts pilgrims from across the region' under Plague; tag is all P, people do not travel as usual","other":""}
+{"id":"04478","town":"r2s-plague_onset-city-1","sev":"MED","kind":"LACKS","why":"a bowyer & fletcher, magically sustained; HOUSES has no bowyers or fletchers","other":""}
+{"id":"04093","town":"r2s-plague_onset-city-1","sev":"MED","kind":"LACKS","why":"usual work no longer yields enough bows and crossbows; HOUSES has no bowyer, TRADE makes no bows","other":""}
+{"id":"23039","town":"r2s-plague_onset-city-1","sev":"MED","kind":"PAIR","why":"timber 'magically sustained' by druidic regrowth, yet TRADE imports timber because local managed woodland is cleared","other":"23037"}
+{"id":"03156","town":"r2s-plague_onset-city-1","sev":"MED","kind":"STATE","why":"'would not guess at the trouble from the streets'; safety Dangerous, Plague Unrest; bedding burned in the street","other":"18163"}
+{"id":"13616","town":"r2s-plague_onset-city-1","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"HEADER","town":"r2s-plague_onset-city-2","sev":"LOW","kind":"RECORD","why":"fish market in a plains road town; founded by a military command yet began as another city's grain depot","other":""}
+{"id":"23021","town":"r2s-plague_onset-city-2","sev":"MED","kind":"STATE","why":"'the present peace asks nothing of its defences'; under Plague with safety Dangerous, Plague Unrest; tag is all P","other":""}
+{"id":"HEADER","town":"r2r-city-19","sev":"MED","kind":"RECORD","why":"makes ocean-going vessels, ship construction and river barges with no shipyard or boatyard in HOUSES; a coastal port has no river","other":""}
+{"id":"10131","town":"r2r-city-19","sev":"LOW","kind":"BROKEN","why":"Mac- names split mid-name ('Gregor, the monarch'; 'Brennan Mac' / 'Gregor and has...'); verify whether the page or the dump splits them","other":"02096"}
+{"id":"13598","town":"r2r-city-19","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"13575","town":"r2r-city-19","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"HEADER","town":"r2r-city-51","sev":"MED","kind":"RECORD","why":"royal decree and forced investment vs grew from a single household; makes gems while local gem deposits exhausted","other":""}
+{"id":"20335","town":"r2r-city-51","sev":"MED","kind":"STATE","why":"'produces no luxury goods'; resources list precious metals, luxury, gems, and TRADE makes luxury goods and gems","other":""}
+{"id":"05730","town":"r2r-city-51","sev":"LOW","kind":"LACKS","why":"names barrel making; HOUSES has no cooper","other":""}
+{"id":"20234","town":"r2r-city-51","sev":"MED","kind":"STATE","why":"'leaves its stone unworked'; TRADE makes stone and resources list a stone quarry","other":""}
+{"id":"04474","town":"r2r-city-51","sev":"MED","kind":"LACKS","why":"bowyer & fletcher supplied by arcane fabrication; HOUSES has no bowyer or fletcher","other":""}
+{"id":"HEADER","town":"r2s-wartime-city-1","sev":"LOW","kind":"RECORD","why":"exports Higher education with no college; River ferry, river craft and barges in a coastal port with no river","other":""}
+{"id":"01079","town":"r2s-wartime-city-1","sev":"MED","kind":"PAIR","why":"city 'is prospering' on the war; prosperity Moderate, and it was 'Wealthy before the war'","other":"28577"}
+{"id":"20626","town":"r2s-wartime-city-1","sev":"MED","kind":"LACKS","why":"'the crown pays its bills'; GOVERNMENT is a Merchant oligarchy, no royal power listed","other":""}
+{"id":"HEADER","town":"r2s-recently_betrayed-city-0","sev":"MED","kind":"RECORD","why":"makes Coin minting and exports Bows and crossbows with no Mint and no bowyer in HOUSES","other":""}
+{"id":"15009","town":"r2s-recently_betrayed-city-0","sev":"LOW","kind":"LACKS","why":"built 'on kin, oath and the assembly'; GOVERNMENT is an Ecclesiastical Council, no assembly","other":""}
+{"id":"30964","town":"r2s-recently_betrayed-city-0","sev":"MED","kind":"LACKS","why":"Mining shown running; HOUSES has no mine","other":""}
+{"id":"30953","town":"r2s-recently_betrayed-city-0","sev":"MED","kind":"LACKS","why":"gold/silver ore 'fully exploited'; HOUSES has no mine","other":""}
+{"id":"13561","town":"r2s-recently_betrayed-city-0","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"HEADER","town":"r2r-city-25","sev":"LOW","kind":"RECORD","why":"fish market in a forest road town; merchant coalition founder vs foresters under charter; exports precious metals with no mine","other":""}
+{"id":"HEADER","town":"r2s-slave_revolt-city-2","sev":"LOW","kind":"RECORD","why":"fish market in a hills road town; royal decree and forced investment vs a disbanded unit that simply stayed","other":""}
+{"id":"14987","town":"r2s-slave_revolt-city-2","sev":"MED","kind":"STATE","why":"'none of the luxury goods comes from the country here'; TRADE makes luxury and exports raw gemstones; resources list gemstone deposits","other":""}
+{"id":"20720","town":"r2s-slave_revolt-city-2","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"HEADER","town":"r2s-recently_betrayed-city-3","sev":"LOW","kind":"RECORD","why":"fish market in a plains crossroads town; merchant coalition founder vs settled by veterans granted land","other":""}
+{"id":"03508","town":"r2s-recently_betrayed-city-3","sev":"MED","kind":"PAIR","why":"'an elected council' governs; GOVERNMENT is a Military City Council seated by the watch commander and Lord Marshal","other":"02210"}
+{"id":"23195","town":"r2s-indebted-city-1","sev":"MED","kind":"STATE","why":"'Trade connectivity Collapsed'; prosperity Prosperous, river docks, caravan exchange and exports all running","other":""}
+{"id":"13559","town":"r2s-indebted-city-1","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"14717","town":"r2s-insurgency-city-2","sev":"MED","kind":"PAIR","why":"Governorship and Thieves' Guild 'leave each other alone'; the pair is High tension and escalating, Thieves' Guild Strong and could take the hall","other":"14761"}
+{"id":"28625","town":"r2s-insurgency-city-2","sev":"MED","kind":"PAIR","why":"forces 'in good order', hard to threaten; safety Dangerous under Insurgency, garrison patrols in daylight only","other":"20634"}
+{"id":"11683","town":"r2s-politically_fractured-city-2","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"13620","town":"r2s-politically_fractured-city-2","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"15793","town":"r2s-politically_fractured-city-2","sev":"HIGH","kind":"STATE","why":"'only 1 craft institution'; HOUSES lists Craft guilds (30-80), blacksmiths, tanner, dyer, potter, brewery, fuller, ropemaker and more","other":""}
+{"id":"30890","town":"r2s-politically_fractured-city-2","sev":"MED","kind":"STATE","why":"advises adding smiths and tanners; HOUSES already has Blacksmiths (3-10), Tanner and Craft guilds (30-80)","other":""}
+{"id":"DONE","lines":2961,"blocks":24,"flags":93}
