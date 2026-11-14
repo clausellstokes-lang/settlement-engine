@@ -21,6 +21,9 @@ Seat JOIN-4 (session `session_01ACmDYZUoeEdTG4RGs1hdRD`), brief `docs/chair/2026
 | 4 | powers-follow-up-2026-11-13 | 30b03024f (13:11) | 77d7bcace | 2cc812f4c | 2 registers | `page-census.register.json`, `.lighting-census-baseline.json`; clean-both: `SummaryTab.jsx`, `restoredSubsections.test.js`, `generationForkCensus.test.js` |
 | 5 | w2-fix-data-2026-11-13 | 8e814883c (13:20) | 8d2aa98b1 | e7e1c2e8c | 3 registers | `pool-dominance.register.json`, `.lighting-census-baseline.json`, `presumedThings.register.json`; clean-both: `institutionalCatalog.js`, `presumedThings.widened.register.json` |
 | 6 | w2-write-2026-11-13 | 525541b42 (13:24) | fdae163f3 | 1c01bdda0 | 2 registers/baselines | `wiring-census.json`, `.prose-byte-baseline.json`; clean-both: `RECEIPT_POOLS_DOSSIER_STATE.md`, `defense.generated.js`, `dossierStateProseProjection.contract.test.js`, both presumedThings registers, `proseComposed.walker.test.js`, `proseWiringCensus.walker.test.js`, `economicsTabFlow.test.js` |
+| 7 | w2-c-leaves-2026-11-13 | 9ac076d5e (13:32) | da7a567f4 | fe6386f83 | none | clean-both: `src/domain/display/defenseDisplay.js` |
+| 8 | r2-code-b-2026-11-13 | b23b48613 (13:36) | 30ed925ee (JOIN-1; JOIN-2 skipped it) | **ABORTED: STOP** (§6) | 9 bundles/metas + lighting (text kept ours, then aborted) | — (nothing landed) |
+| 9 | coherence-upkeep-2026-11-12 | 660cb0893 (13:38) | 26474cda9 | 0537f92f3 | none | clean-both: `src/pdf/lib/viewModelBodySlices.js` |
 
 Every merge: `verify.sh` no mismatch; lint-staged changed nothing; the hook's gates green at every push (type ratchet 167/167, strict-domain 1113/1113, eslint 0 errors).
 
@@ -31,6 +34,8 @@ No code conflict met so far. Merged clean though both sides moved them (each rea
 - `tests/pdf/restoredSubsections.test.js` (merge 4): the joined side's `institutionHouseLabel` arm; the lane's governing-modifier arm.
 - `src/data/institutionalCatalog.js` (merge 5): the joined side's Elder Grove successor (UPKEEP-CAPACITY C5); the lane's Sawmill `timber` tag and the Smelter's default desc (W2-FIX-DATA-13).
 - Tests merged clean at merge 6, each pin moved by ONE side at its own line (so each stands by (d); the close measures): `proseComposed.walker` (joined: relations 165 -> 169; lane: corpus 2948 -> 2950); `proseWiringCensus.walker` (joined: resolved 492, unresolved 364 and their kin; lane: variants 2950, mean 3.45, the histogram); `dossierStateProseProjection.contract` (joined: relations 169, present/absent 492/364; lane: one DS-DEF-2 key in two lists); `economicsTabFlow` (joined: the W2-C-LEAVES and R2-CODE-B re-keys; lane: the export posture anchor in the record's noun).
+- `src/domain/display/defenseDisplay.js` (merge 7): the joined side's UPKEEP-8 `monthsInWords` and `foodEnduranceLine`; the lane's W2-C-LEAVES-11 `oneOrganisationRules` in `rivalRingsHere`.
+- `src/pdf/lib/viewModelBodySlices.js` (merge 9): the joined side's W2-C-LEAVES `resourcesSlice` rows; the lane's UPKEEP-14 `chainPrintName` in `economicsSlice`.
 - `tests/generators/generationForkCensus.test.js` (merge 4): the joined side's A6 re-keys (FNV_EXTERNAL_CALLS 23, drawingSteps 13, STORES_SEED); the lane's mint bound `toBeLessThanOrEqual(138 -> 139)` (a pin only the lane moved: stands by (d); JOIN-3 measured 141 at the join).
 
 ## 4. THE LIST FOR THE CLOSE (registers, baselines, generated files, bundles, pins; each with the lanes whose side was not taken)
@@ -66,7 +71,7 @@ Merged clean though both sides moved them (for the close to re-derive or measure
 
 ## 6. Stops
 
-None so far.
+- **r2-code-b at b23b48613 (merge 8, 13:36): STOPPED, `git merge --abort`, message to the chair 13:37.** The text merged clean (nine edge bundles/metas and the lighting census conflicted, kept ours), but A COMPOSED RED, EXECUTED: `tests/domain/crisisHooks.test.js` ×2 ("r2r-town-37: the dean holds the lever…", "r2s-plague_onset-thorp-0 and r2r-city-19: a lever who is a healer is still named") and `tests/generators/resolveCrisisCast.test.js` ×1 ("a DM's cast edit renames the holder…") red in the staged merge (31/34); 34/34 green at the lane's tip (in `/home/user/j4base`). File `src/domain/crisis/crisisHooks.js` :: `CRISIS_HOOK_SLOTS` / `slotCrisisHook`. The lane (R2-CODE-B-9/-12): the plague slot fills only a holder whose roster role is a healer; a stand-in is named without "healer". The joined side (W2-FIX-DATA-7 row 2, 745c05a1f): the stored plague hook resolves through its declared set (`needs: ['healer']`, `src/data/stressTypes.js`), so a town with no healer stores the slot-less twin "The first person to name the outbreak has gone quiet…"; the lane's pins expect the template on those towns. Both cure the same false healer from two ends; no one line keeps both; nothing re-keyed. RECOMMENDATION: the r2-code-b seat merges the joined line (or 745c05a1f) and re-keys its three pins by identity to towns that keep a healer (its own arm for a healer-less town then reads the twin), then lands as a point. Its other cures (incl. `src/domain/summary/tonightSheet.js`) wait with it.
 
 ## 7. Hazards
 
@@ -79,4 +84,4 @@ A worktree at origin's tip (`git worktree add /home/user/j4wt -b join4 <tip>`, `
 
 ## 9. WHAT IS LEFT (line by line)
 
-Merges 7 to 9 (w2-c-leaves, r2-code-b, coherence-upkeep); join-nolane at 3ccdc0711; join-surfaces at its tip; the build, the grid, the conflict files' tests and the count at the landed tip; item 4 (the Tonight sheet's famine line) if both halves are in; the remerge patches; the message to the chair.
+r2-code-b (stopped, §6) waits on the chair; join-nolane at 3ccdc0711; join-surfaces at its tip; the build, the grid, the conflict files' tests and the count at the landed tip; item 4 (the Tonight sheet's famine line) if both halves are in; the remerge patches; the message to the chair.
