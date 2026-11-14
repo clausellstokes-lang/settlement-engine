@@ -817,6 +817,55 @@ SEATS2['W2-WRITE-SIDE-REST-3'] = dict(
 )
 
 
+SEATS2['W2-WRITE-SIDE-ECO-3'] = dict(
+    title="W2-WRITE-SIDE-ECO-3 · the corpus lane's DS-ECO block: what is left of D and E, the three notes, the census",
+    branch='lane/w2-write-side-eco-2026-11-13', tip='e0c1f8b6', statement=False,
+    intro=("You are W2-WRITE-SIDE-ECO-3, the third seat on the corpus lane's DS-ECO side branch of the settlement-engine integration program "
+           "(lane/w2-write-side-eco-2026-11-13, cut from the corpus lane at dcd4759b0). The lane cures the false lines an independent reader found in the "
+           "dossier's written corpus. It is split by block among three seats; YOUR BLOCK is DS-ECO and nothing else (the `### DS-ECO-…` sections of the source "
+           "document and the generated twin economy.generated.js). The second seat finished parts B and C, cured part D's high rows and handed back at its "
+           "context mark with every row left written out. Yours: those rows, the three notes and the census; then you hand your tip to the chair. You make no "
+           "statement: the main seat merges your branch."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. On your branch, docs/chair/2026-11-13/W2-WRITE-SIDE-ECO-HANDBACK.md WHOLE (64 lines: the rulings; B's and C's tables with what prints after; "
+          "\"Named, not the corpus's\"; \"What is left, line by line\": THAT IS YOUR LIST; \"How the instruments are re-made\"; the shared files moved, for the "
+          "merge) and docs/chair/2026-11-13/probes/W2-WRITE-5/README.md (the instruments).\n"
+          "3. THE LISTS: `git fetch origin lane/round-3-cut-2026-11-13`: docs/chair/2026-11-13/ROUND-3-CUT.json and ROUND-3-CUT-INCREMENT.json (key `lines`: each "
+          "line's town, sentence, fact, writer; query by script, never print): a row is YOURS where its writer's file is "
+          "src/data/dossierStateProse/economy.generated.js, or where its true writer is a DS-ECO pool."),
+    work=("THE WORK, in this order, each cause its own commit, red first, pushed as made:\n"
+          "1. E's TWO HIGH ROWS FIRST: ww500 (DS-ECO-10 POSTURE vulnerable v3 under a siege) and ww1298 (DS-ECO-11 unexploited medium v2 beside a running timber "
+          "chain): for each pool you touch, ALL its firing variants are read.\n"
+          "2. D LEFT: the cut's MEDIUM rows by pool, the widest pool first, as the hand-back lists them (DS-ECO-9 SECURE v1 v3; DS-ECO-11 STRATEGIC v3; DS-ECO-11 "
+          "unexploited medium v1 to v3; DS-ECO-12 INCOME WEIGHT religious v1, the house case; DS-ECO-10 entrepot v2; DS-ECO-12 house needs v2, re-read; "
+          "DS-ECO-1 C5 v2 under a famine; DS-ECO-8 WEALTHY v1, STRUGGLING v3, MODERATE v4; DS-ECO-9 ACTIVE FAMINE v1 v3).\n"
+          "3. E LEFT: the increment's other rows in economy.generated.js (about 23), and the measuring seat's candidates: DS-ECO-10 established v6 and none v2 "
+          "(\"merchant\" with none on the roster), DS-ECO-12 INCOME WEIGHT religious v2, DS-ECO-11 fullyExploited v1. The cut's writer is a script's trace: find "
+          "the true writer first; a line whose true writer is not the corpus (a selector, a renderer, a slot filler, the generator) is NAMED with its file "
+          "under \"Named, not the corpus's\" and left.\n"
+          "4. THE THREE NOTES: (i) DS-ECO-11, the exploitation pool: fullyExploited v2 and v4 under a siege (v1 and v3 are declared off it now): declare them "
+          "off the crises that make them false, or re-say them; \"what it lacks is {institution}\" naming a house the town keeps, and \"takes the easy half\" "
+          "beside a fuller, a dyer and weavers (partially v4: \"this trade\" has no referent): read them at your tip, cure what is false there, and say what "
+          "can only be seen when the lanes are joined (another lane changed which variants the selector offers); (ii) THE CAN-PAY ROW BESIDE A DOOM LINE (the "
+          "Defense tab's row \"… can pay its way through it\" beside \"may not come through this crisis\"; the defence lane counted it): FIND THE POOL. If it "
+          "is DS-ECO's it is yours under the ruling \"every sentence that says what a town can pay reads ONE home, the economic survival row's band\"; if it "
+          "is another block's, write its pool and variants under a heading FOR THE MAIN SEAT in the hand-back and leave it; (iii) DS-ECO-12's house-needs pool "
+          "reads a false premise wherever the critical import's reason is itself false: do not write round a generator's fault: declare the pool off where its "
+          "premise can be read false from the record, or leave it and say so.\n"
+          "5. The measuring seat's command over economy.generated.js at dcd4759b0 and at your tip (`git fetch origin lane/census-2-2026-11-13`; `mkdir -p "
+          "<scratch>/c2 && git archive origin/lane/census-2-2026-11-13 docs/chair/2026-11-13/probes/CENSUS-2 | tar -x -C <scratch>/c2`; `sh "
+          "<scratch>/c2/docs/chair/2026-11-13/probes/CENSUS-2/census2.sh <tree root> <an out-dir outside the repository> 4 --files "
+          "src/data/dossierStateProse/economy.generated.js`, to a file, about twelve minutes each): every hit read against its town (a hit is a candidate), "
+          "cured or named; the count per kind at both.\n"
+          "LAST: bring the hand-back current under a heading SEAT 3 (every row with what prints after; what is left; the shared files your branch moved, for the "
+          "merge) and send the chair ONE message: your tip, the counts, no statement. THE MAIN SEAT WAITS ON YOUR TIP TO MERGE THE THREE: if your count nears "
+          "its mark with rows of step 2 or 3 unread, the hand-back says which, and the chair decides whether they travel with the merge.\n" + CORPUS2),
+    merges='',
+    when="for a stop that blocks everything you have left, when your block is done (the tip, the counts), and for a hand-back",
+    turns='',
+)
+
+
 # R3-CODE-C-6 is seated only when point 49 is on the line: LINE49 is then set to the line's tip (read from origin) and the brief generated.
 LINE49 = '976db5b1'  # the line's tip with point 49, read from origin by the chair at 03:08 UTC on 2026-11-14
 
