@@ -1,0 +1,15 @@
+{"id":"15126","town":"r2s-plague_onset-metropolis-1","sev":"LOW","kind":"STATE","why":"Vintner produces and ages wine from local grapes; LAND gap says the Vintner lacks access to grapes","other":"03062"}
+{"id":"22006","town":"r2s-plague_onset-metropolis-1","sev":"MED","kind":"STATE","why":"ticketed passenger airship service on scheduled routes as usual; CRISIS Plague, Dangerous safety, people do not travel as usual","other":""}
+{"id":"01461","town":"r2s-plague_onset-metropolis-1","sev":"MED","kind":"STATE","why":"defenders are better off for the trades behind them; LAND has Standing Garrison vulnerable, Fortifications impaired, Weapons & Armor vulnerable","other":""}
+{"id":"01216","town":"r2s-plague_onset-metropolis-1","sev":"MED","kind":"STATE","why":"Shanti Kapoor sells patrol schedules and raid warnings; PEOPLE gives Shanti Kapoor as castellan of the Citadel, the watch commander is Shyam Goswami","other":""}
+{"id":"02765","town":"r2s-plague_onset-metropolis-1","sev":"MED","kind":"STATE","why":"Shanti Kapoor questioned over how few arrests are made; PEOPLE gives Shanti Kapoor as castellan of the Citadel, the watch commander is Shyam Goswami","other":"01216"}
+{"id":"11731","town":"r2s-plague_onset-metropolis-1","sev":"MED","kind":"STATE","why":"festival kept as usual; CRISIS Plague, Dangerous safety, people fear sickness and do not gather as usual","other":""}
+{"id":"11711","town":"r2s-plague_onset-metropolis-1","sev":"MED","kind":"STATE","why":"festival kept as usual; CRISIS Plague, Dangerous safety, people fear sickness and do not gather as usual","other":""}
+{"id":"11670","town":"r2s-plague_onset-metropolis-1","sev":"MED","kind":"STATE","why":"festival kept as usual; CRISIS Plague, Dangerous safety, people fear sickness and do not gather as usual","other":""}
+{"id":"11653","town":"r2s-plague_onset-metropolis-1","sev":"MED","kind":"STATE","why":"festival kept as usual; CRISIS Plague, Dangerous safety, people fear sickness and do not gather as usual","other":""}
+{"id":"11664","town":"r2s-plague_onset-metropolis-1","sev":"MED","kind":"STATE","why":"festival kept as usual; CRISIS Plague, Dangerous safety, people fear sickness and do not gather as usual","other":""}
+{"id":"03365","town":"r2s-plague_onset-metropolis-3","sev":"MED","kind":"STATE","why":"wool trade under strain; LAND has Livestock, Textiles and Cloth Finishing running on available grazing, failed source None, raw wool exported","other":""}
+{"id":"02922","town":"r2s-plague_onset-metropolis-3","sev":"MED","kind":"STATE","why":"mine shaft driven into the deposits with ore carts; LAND gives Iron Ore Deposits depleted, no other ore, trade says iron mines exhausted","other":""}
+{"id":"11737","town":"r2s-plague_onset-metropolis-3","sev":"MED","kind":"STATE","why":"festival kept as usual; CRISIS Plague, Dangerous safety, people fear sickness and do not gather as usual","other":""}
+{"id":"11686","town":"r2s-plague_onset-metropolis-3","sev":"MED","kind":"STATE","why":"festival kept as usual; CRISIS Plague, Dangerous safety, people fear sickness and do not gather as usual","other":""}
+{"id":"DONE","lines":441,"blocks":2,"flags":14}

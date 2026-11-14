@@ -1,0 +1,49 @@
+{"id":"19260","town":"r2s-plague_onset-city-3","sev":"MED","kind":"STATE","why":"common people rose against rulers over wages; PAST records no uprising (Purge, Succession Crisis, Pilgrimage only)","other":""}
+{"id":"02689","town":"r2s-plague_onset-city-3","sev":"MED","kind":"STATE","why":"list of informers on the rebels; PAST records no rebellion or uprising","other":""}
+{"id":"21354","town":"r2s-plague_onset-city-3","sev":"MED","kind":"STATE","why":"uprising funded by outside hand; PAST records no uprising","other":""}
+{"id":"02414","town":"r2s-plague_onset-city-3","sev":"MED","kind":"STATE","why":"concession won in a revolt; PAST records no revolt","other":""}
+{"id":"13260","town":"r2s-plague_onset-city-3","sev":"MED","kind":"STATE","why":"Brickmaker moulds and fires bricks; LAND gaps say Brickmaker lacks access to clay","other":""}
+{"id":"06417","town":"r2s-plague_onset-city-3","sev":"MED","kind":"STATE","why":"Potter throws and fires domestic ware; LAND gaps say Potter lacks access to clay","other":""}
+{"id":"02989","town":"r2s-plague_onset-city-3","sev":"MED","kind":"STATE","why":"Garrison in noble or royal pay; government is a Corrupt City Council, no noble or royal power listed","other":""}
+{"id":"06916","town":"r2s-plague_onset-city-3","sev":"LOW","kind":"LACKS","why":"every district has a temple; HOUSES list parish churches and monasteries, no temple","other":""}
+{"id":"11692","town":"r2s-plague_onset-city-3","sev":"MED","kind":"STATE","why":"harvest festival kept as usual; CRISIS is Plague, people fear sickness and do not gather as usual","other":""}
+{"id":"11679","town":"r2s-plague_onset-city-3","sev":"MED","kind":"STATE","why":"festival kept in Harvest weeks as usual; CRISIS is Plague, gatherings do not go on as normal","other":""}
+{"id":"27511","town":"r2s-plague_onset-city-0","sev":"MED","kind":"STATE","why":"a flood reshaped the riverside quarter; PAST records no flood (only The Siege as its disaster)","other":""}
+{"id":"19522","town":"r2s-plague_onset-city-0","sev":"MED","kind":"STATE","why":"a flood uncovered an old foundation; PAST records no flood (Siege, Occupation, Purge, Migration etc. only)","other":""}
+{"id":"04629","town":"r2s-plague_onset-city-0","sev":"MED","kind":"STATE","why":"charcoal kilns tended day and night; LAND gap: Charcoal burner lacks access to mountain timber","other":"13831"}
+{"id":"27728","town":"r2s-plague_onset-city-0","sev":"MED","kind":"STATE","why":"charcoal feeds the hottest fires; LAND gap says the Charcoal burner has no timber input","other":"13831"}
+{"id":"19912","town":"r2s-plague_onset-city-0","sev":"MED","kind":"STATE","why":"largest trading event of the year offered as usual; CRISIS Plague and safety Quarantined stop gatherings and travel","other":""}
+{"id":"12194","town":"r2s-plague_onset-city-0","sev":"MED","kind":"STATE","why":"major performances and public spectacles offered; Plague with Quarantined safety, people do not gather as usual","other":""}
+{"id":"10676","town":"r2s-plague_onset-city-0","sev":"MED","kind":"STATE","why":"Charcoal burner sells charcoal by the sack; LAND gap says it lacks access to mountain timber","other":"13831"}
+{"id":"16239","town":"r2s-plague_onset-city-0","sev":"MED","kind":"PAIR","why":"walls let go unrepaired and repair money pocketed; contradicts fresh repairs on the city walls and gates","other":"09038"}
+{"id":"11666","town":"r2s-plague_onset-city-0","sev":"MED","kind":"STATE","why":"festival kept in Deepwinter as usual; CRISIS Plague with Quarantined safety, people do not gather as usual","other":""}
+{"id":"11695","town":"r2s-plague_onset-city-0","sev":"MED","kind":"STATE","why":"festival kept in Highsun as usual; CRISIS Plague with Quarantined safety, people do not gather as usual","other":""}
+{"id":"11678","town":"r2s-plague_onset-city-0","sev":"MED","kind":"STATE","why":"festival kept in Harvest as usual; CRISIS Plague with Quarantined safety, people do not gather as usual","other":""}
+{"id":"11665","town":"r2s-plague_onset-city-1","sev":"MED","kind":"STATE","why":"festival kept in Deepwinter as usual; CRISIS Plague, people fear sickness and do not gather as usual","other":""}
+{"id":"11650","town":"r2s-plague_onset-city-1","sev":"MED","kind":"STATE","why":"festival kept in Deepwinter as usual; CRISIS Plague, people fear sickness and do not gather as usual","other":""}
+{"id":"11682","town":"r2s-plague_onset-city-1","sev":"MED","kind":"STATE","why":"festival kept in Harvest as usual; CRISIS Plague, people fear sickness and do not gather as usual","other":""}
+{"id":"12199","town":"r2s-plague_onset-city-2","sev":"MED","kind":"STATE","why":"Vintner makes and ages wine; LAND gap says Vintner lacks access to grapes, and none reach it","other":"13775"}
+{"id":"15974","town":"r2s-plague_onset-city-2","sev":"LOW","kind":"STATE","why":"vineyard bought and run; LAND gap says the Vintner lacks access to grapes, none reach it","other":"13775"}
+{"id":"11669","town":"r2s-plague_onset-city-2","sev":"MED","kind":"STATE","why":"festival kept in Harvest as usual; CRISIS Plague, people fear sickness and do not gather as usual","other":""}
+{"id":"01427","town":"r2r-city-19","sev":"MED","kind":"STATE","why":"gives Rónnat MacKenzie an arrest record; PEOPLE has Rónnat MacKenzie as lodge master of the Veteran's lodge, the watch commander is Killian Nolan","other":""}
+{"id":"11718","town":"r2r-city-19","sev":"MED","kind":"STATE","why":"festival kept in Seedtime as usual; CRISIS Plague, people fear sickness and do not gather as usual","other":""}
+{"id":"11671","town":"r2r-city-19","sev":"MED","kind":"STATE","why":"festival kept in Harvest as usual; CRISIS Plague, people fear sickness and do not gather as usual","other":""}
+{"id":"11693","town":"r2r-city-19","sev":"MED","kind":"STATE","why":"festival kept in Highsun as usual; CRISIS Plague, people fear sickness and do not gather as usual","other":""}
+{"id":"19529","town":"r2s-plague_onset-metropolis-2","sev":"MED","kind":"STATE","why":"little is being put by against being cut off; FOOD shows stores 15 months with a granary standing","other":""}
+{"id":"04586","town":"r2s-plague_onset-metropolis-2","sev":"LOW","kind":"STATE","why":"casks are 'all his making'; PEOPLE gives the cooper Organa Balkar as (f)","other":""}
+{"id":"05316","town":"r2s-plague_onset-metropolis-2","sev":"LOW","kind":"STATE","why":"'Lord Chancellor' for Borchigid Jalayir; PEOPLE gives the chancellor as (f)","other":""}
+{"id":"15257","town":"r2s-plague_onset-metropolis-2","sev":"MED","kind":"STATE","why":"tickets for scheduled performances offered as usual; CRISIS Plague with Restricted safety, people do not gather as usual","other":""}
+{"id":"04045","town":"r2s-plague_onset-metropolis-2","sev":"MED","kind":"STATE","why":"athletics, chariot races and team competitions offered as usual; CRISIS Plague with Restricted safety, gatherings do not go on","other":""}
+{"id":"12183","town":"r2s-plague_onset-metropolis-2","sev":"MED","kind":"STATE","why":"major feast days and state occasions as usual; CRISIS Plague with Restricted safety, people do not gather as usual","other":""}
+{"id":"05019","town":"r2s-plague_onset-metropolis-2","sev":"LOW","kind":"STATE","why":"comedy, tragedy, opera and spectacle across venues as usual; CRISIS Plague with Restricted safety, gatherings do not go on","other":""}
+{"id":"11654","town":"r2s-plague_onset-metropolis-2","sev":"MED","kind":"STATE","why":"festival kept in Deepwinter as usual; CRISIS Plague with Restricted safety, people do not gather as usual","other":""}
+{"id":"11660","town":"r2s-plague_onset-metropolis-2","sev":"MED","kind":"STATE","why":"festival kept in Deepwinter as usual; CRISIS Plague with Restricted safety, people do not gather as usual","other":""}
+{"id":"11663","town":"r2s-plague_onset-metropolis-2","sev":"MED","kind":"STATE","why":"festival kept in Deepwinter as usual; CRISIS Plague with Restricted safety, people do not gather as usual","other":""}
+{"id":"11645","town":"r2s-plague_onset-metropolis-2","sev":"MED","kind":"STATE","why":"festival kept in Deepwinter as usual; CRISIS Plague with Restricted safety, people do not gather as usual","other":""}
+{"id":"11732","town":"r2s-plague_onset-metropolis-0","sev":"MED","kind":"STATE","why":"festival kept as usual; CRISIS Plague with Quarantined safety, people do not gather as usual","other":""}
+{"id":"11673","town":"r2s-plague_onset-metropolis-0","sev":"MED","kind":"STATE","why":"festival kept as usual; CRISIS Plague with Quarantined safety, people do not gather as usual","other":""}
+{"id":"00871","town":"r2s-plague_onset-metropolis-0","sev":"MED","kind":"STATE","why":"Dokuz Salji'ud hunts an operation street by street; PEOPLE gives Dokuz Salji'ud as lanista of the Gladiatorial school, the watch commander is Ariun Ba'arin","other":""}
+{"id":"21428","town":"r2s-plague_onset-metropolis-0","sev":"MED","kind":"STATE","why":"war of raids between Dokuz Salji'ud and the thieves' guildmaster; PEOPLE gives Dokuz Salji'ud as a lanista, no law-enforcement office","other":""}
+{"id":"17413","town":"r2s-plague_onset-metropolis-0","sev":"MED","kind":"STATE","why":"someone in Dokuz Salji'ud's command reports to the thieves' master; PEOPLE gives Dokuz Salji'ud as lanista with no command","other":""}
+{"id":"00671","town":"r2s-plague_onset-metropolis-0","sev":"MED","kind":"STATE","why":"Dokuz Salji'ud ordered to stand down against a criminal operation; PEOPLE gives Dokuz Salji'ud as lanista, not an enforcer","other":""}
+{"id":"DONE","lines":1880,"blocks":7,"flags":48}
