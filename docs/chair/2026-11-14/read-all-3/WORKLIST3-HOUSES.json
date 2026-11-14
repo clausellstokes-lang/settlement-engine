@@ -1,0 +1,1772 @@
+[
+{
+"id": "12239",
+"sev": "MED",
+"n": 113,
+"town": "r2r-hamlet-28",
+"section": "PDF/ResourcesProduction",
+"fold": "High - controls sea routes and naval access",
+"text": "High - controls sea routes and naval access",
+"why": "hamlet of 23 with no force, defence Vulnerable, cannot control sea routes or naval access",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/geographyData.js",
+"line": 126,
+"fn": "TERRAIN_DATA.economicStrengths"
+}
+},
+{
+"id": "25084",
+"sev": "MED",
+"n": 113,
+"town": "r2r-hamlet-28",
+"section": "Journal/Resources & Production",
+"fold": "Strategic value: High - controls sea routes and naval access",
+"text": "Strategic value: High - controls sea routes and naval access",
+"why": "hamlet of 23 with no force, defence Vulnerable, cannot control sea routes or naval access",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/geographyData.js",
+"line": 126,
+"fn": "TERRAIN_DATA.economicStrengths"
+}
+},
+{
+"id": "05998",
+"sev": "MED",
+"n": 105,
+"town": "r2s-famine-town-3",
+"section": "Journal/Institutions",
+"fold": "Brickmaker: Moulds and fires clay bricks for construction.",
+"text": "Brickmaker: Moulds and fires clay bricks for construction.",
+"why": "Brickmaker moulds and fires clay bricks; LAND gaps say the Brickmaker lacks access to clay",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionalCatalog.js",
+"line": 779,
+"fn": "INSTITUTION_FAMILIES.shared"
+}
+},
+{
+"id": "21727",
+"sev": "MED",
+"n": 105,
+"town": "r2s-famine-town-1",
+"section": "Journal/Institutions",
+"fold": "Potter: Wheel-thrown pottery for domestic use.",
+"text": "Potter: Wheel-thrown pottery for domestic use.",
+"why": "Potter makes wheel-thrown pottery; LAND gaps say the Potter lacks access to clay",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionalCatalog.js",
+"line": 770,
+"fn": "INSTITUTION_FAMILIES.shared"
+}
+},
+{
+"id": "04687",
+"sev": "MED",
+"n": 99,
+"town": "r2r-thorp-58",
+"section": "PDF/Services",
+"fold": "Ancient grove » Subsistence farming » Honey and beeswax, Foraged goods",
+"text": "Ancient grove » Subsistence farming » Honey and beeswax, Foraged goods",
+"why": "chain run from Ancient grove; LAND says chain Foraging & Smallholding draws on Foraging areas, absent, and is vulnerable, not active",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 115,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "24070",
+"sev": "MED",
+"n": 96,
+"town": "r2s-plague_onset-city-1",
+"section": "Journal/Institutions",
+"fold": "Smelter: Converts raw ore to refined metal using charcoal-fueled furnaces.",
+"text": "Smelter: Converts raw ore to refined metal using charcoal-fueled furnaces.",
+"why": "smelter converts raw ore to refined metal; LAND gaps: Smelter lacks access to iron and copper ore, runs on imported gold/silver",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionalCatalog.js",
+"line": 822,
+"fn": "INSTITUTION_FAMILIES.shared"
+}
+},
+{
+"id": "29818",
+"sev": "MED",
+"n": 93,
+"town": "r2s-occupied-city-2",
+"section": "PDF/Services",
+"fold": "Vintner + Brewery » Meals and drink, Preserved foods",
+"text": "Vintner + Brewery » Meals and drink, Preserved foods",
+"why": "Vintner + Brewery » Meals and drink; gaps: Vintner exists but lacks access to grapes",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/supplyChainData.js",
+"line": 101,
+"fn": "SUPPLY_CHAIN_NEEDS.outputs"
+}
+},
+{
+"id": "21725",
+"sev": "MED",
+"n": 90,
+"town": "r2s-famine-city-1",
+"section": "Journal/Institutions",
+"fold": "Potter: Domestic ware thrown on the wheel: plates, jugs, and storage jars, all fired in a modest kiln.",
+"text": "Potter: Domestic ware thrown on the wheel: plates, jugs, and storage jars, all fired in a modest kiln.",
+"why": "Potter fires plates and jugs in its kiln; LAND gaps say the Potter lacks access to clay",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 155,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "14229",
+"sev": "MED",
+"n": 84,
+"town": "r2s-under_siege-city-1",
+"section": "Journal/Institutions",
+"fold": "Inns and taverns (district): Multiple inn districts catering to merchants, travelers, and long-term visitors.",
+"text": "Inns and taverns (district): Multiple inn districts catering to merchants, travelers, and long-term visitors.",
+"why": "inn districts catering to travelers and visitors; false in tagged towns under siege (S), occupation or plague, where no one arrives",
+"kinds": [
+"TAG"
+],
+"writer": {
+"file": "src/data/institutionalCatalog.js",
+"line": 350,
+"fn": "INSTITUTION_FAMILIES.shared"
+}
+},
+{
+"id": "32564",
+"sev": "MED",
+"n": 76,
+"town": "r2r-thorp-58",
+"section": "PDF/EconomicsTrade",
+"fold": "stone (for major construction)",
+"text": "stone (for major construction)",
+"why": "stone for major construction as critical dependency; TRADE imports list no stone; thorp of 7",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/geographyData.js",
+"line": 191,
+"fn": "TERRAIN_DATA.mustImport"
+}
+},
+{
+"id": "21726",
+"sev": "MED",
+"n": 74,
+"town": "r2s-occupied-town-0",
+"section": "Journal/Institutions",
+"fold": "Potter: Throws pottery at the wheel for the household (plates, jugs, vessels for storage) and fires it in a small kiln.",
+"text": "Potter: Throws pottery at the wheel for the household (plates, jugs, vessels for storage) and fires it in a small kiln.",
+"why": "says the Potter throws and fires pottery; LAND gaps say Potter exists but lacks access to clay",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 154,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "16376",
+"sev": "MED",
+"n": 67,
+"town": "r2s-famine-thorp-1",
+"section": "PDF/ResourcesProduction",
+"fold": "Medium - agricultural heartland, but exposed to raids",
+"text": "Medium - agricultural heartland, but exposed to raids",
+"why": "'agricultural heartland'; Famine, grown 45% of need, LAND lists only grazing, grove and coal, no farmland",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/geographyData.js",
+"line": 523,
+"fn": "TERRAIN_DATA.economicStrengths"
+}
+},
+{
+"id": "25093",
+"sev": "MED",
+"n": 67,
+"town": "r2s-famine-thorp-1",
+"section": "Journal/Resources & Production",
+"fold": "Strategic value: Medium - agricultural heartland, but exposed to raids",
+"text": "Strategic value: Medium - agricultural heartland, but exposed to raids",
+"why": "'agricultural heartland'; Famine, grown 45% of need, no farmland in LAND",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/geographyData.js",
+"line": 523,
+"fn": "TERRAIN_DATA.economicStrengths"
+}
+},
+{
+"id": "06896",
+"sev": "MED",
+"n": 64,
+"town": "r2r-village-55",
+"section": "Journal/Economics & Trade",
+"fold": "Cloth Finishing & Clothing (impaired)",
+"text": "Cloth Finishing & Clothing (impaired)",
+"why": "says Cloth Finishing & Clothing is impaired; LAND gives that chain as running",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/supplyChainData.js",
+"line": 664,
+"fn": "SUPPLY_CHAIN_NEEDS.upstreamChains"
+}
+},
+{
+"id": "16007",
+"sev": "MED",
+"n": 63,
+"town": "r2s-under_siege-metropolis-0",
+"section": "Journal/Institutions",
+"fold": "Major annual fairs: Merchants from abroad.",
+"text": "Major annual fairs: Merchants from abroad.",
+"why": "annual fairs draw merchants from abroad; CRISIS is Active Siege, nothing comes in by road or gate",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 352,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "05997",
+"sev": "MED",
+"n": 63,
+"town": "r2s-plague_onset-town-1",
+"section": "Journal/Institutions",
+"fold": "Brickmaker: Clay is moulded and fired into building brick here, which allows sturdier, more lasting construction.",
+"text": "Brickmaker: Clay is moulded and fired into building brick here, which allows sturdier, more lasting construction.",
+"why": "brickmaker moulds and fires clay into brick; LAND gap says Brickmaker lacks access to clay",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 157,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "05999",
+"sev": "MED",
+"n": 60,
+"town": "r2s-famine-city-3",
+"section": "Journal/Institutions",
+"fold": "Brickmaker: Shapes and fires clay into bricks for building.",
+"text": "Brickmaker: Shapes and fires clay into bricks for building.",
+"why": "Brickmaker shapes and fires clay into bricks; LAND gaps say the Brickmaker lacks access to clay",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 156,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "06472",
+"sev": "MED",
+"n": 60,
+"town": "r2s-occupied-metropolis-3",
+"section": "Journal/Institutions",
+"fold": "Charcoal burner: Charcoal kilns, tended day and night while a burn lasts.",
+"text": "Charcoal burner: Charcoal kilns, tended day and night while a burn lasts.",
+"why": "kilns 'tended day and night'; gaps: Charcoal burner lacks access to mountain_timber; coal or peat depleted",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescVariants.js",
+"line": 1948,
+"fn": "DESC_VARIANT_SIBLINGS"
+}
+},
+{
+"id": "16005",
+"sev": "MED",
+"n": 59,
+"town": "r2s-plague_onset-metropolis-0",
+"section": "Journal/Institutions",
+"fold": "Major annual fairs: Foreign traders attend, and credit by letter is taken.",
+"text": "Major annual fairs: Foreign traders attend, and credit by letter is taken.",
+"why": "foreign traders attend annual fairs; safety Quarantined — Plague Conditions, no arrivals as usual",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 353,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "32789",
+"sev": "MED",
+"n": 58,
+"town": "r2r-thorp-24",
+"section": "PDF/EconomicsTrade",
+"fold": "timber (for large vessels)",
+"text": "timber (for large vessels)",
+"why": "timber for large vessels as critical dependency; TRADE imports none, no shipyard in HOUSES, thorp of 20",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/geographyData.js",
+"line": 111,
+"fn": "TERRAIN_DATA.mustImport"
+}
+},
+{
+"id": "06909",
+"sev": "MED",
+"n": 56,
+"town": "r2s-plague_onset-metropolis-0",
+"section": "Journal/Institutions",
+"fold": "Coaching inn: Built for the road: relay stabling, coaches on a schedule, meals at set hours, and a room for waiting passengers.",
+"text": "Coaching inn: Built for the road: relay stabling, coaches on a schedule, meals at set hours, and a room for waiting passengers.",
+"why": "coaches on a schedule and room for waiting passengers as usual; city Quarantined — Plague Conditions",
+"kinds": [
+"STATE",
+"TAG"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 214,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "16006",
+"sev": "MED",
+"n": 55,
+"town": "r2s-plague_onset-city-1",
+"section": "Journal/Institutions",
+"fold": "Major annual fairs: International merchants.",
+"text": "Major annual fairs: International merchants.",
+"why": "annual fairs bring international merchants; plague conditions, Dangerous safety",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionalCatalog.js",
+"line": 308,
+"fn": "INSTITUTION_FAMILIES.shared"
+}
+},
+{
+"id": "29823",
+"sev": "MED",
+"n": 54,
+"town": "r2s-under_siege-metropolis-2",
+"section": "Journal/Institutions",
+"fold": "Vintner: Wine pressed and matured, from local fruit or imported must, sold in bulk to the taverns and direct to wealthy houses.",
+"text": "Vintner: Wine pressed and matured, from local fruit or imported must, sold in bulk to the taverns and direct to wealthy houses.",
+"why": "wine pressed and sold in bulk from local fruit or imported must; Vintner lacks grapes (LAND gaps), imports cover none under siege",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescVariants.js",
+"line": 663,
+"fn": "PAIRS"
+}
+},
+{
+"id": "24068",
+"sev": "MED",
+"n": 54,
+"town": "r2s-famine-city-3",
+"section": "Journal/Institutions",
+"fold": "Smelter: Charcoal furnaces reduce raw ore to refined metal, cast in bars for whoever will buy them.",
+"text": "Smelter: Charcoal furnaces reduce raw ore to refined metal, cast in bars for whoever will buy them.",
+"why": "Smelter reduces raw ore to refined metal; LAND gaps say the Smelter lacks access to iron ore and copper ore",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescVariants.js",
+"line": 694,
+"fn": "PAIRS"
+}
+},
+{
+"id": "06286",
+"sev": "MED",
+"n": 54,
+"town": "r2s-plague_onset-city-0",
+"section": "PDF/Services",
+"fold": "Caravan masters' exchange » Overland cargo transport, Escorted caravan, Pack animal hire",
+"text": "Caravan masters' exchange » Overland cargo transport, Escorted caravan, Pack animal hire",
+"why": "overland cargo transport, escorted caravans and pack animals as usual; safety Quarantined — Plague Conditions, monsters on the roads",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/supplyChainData.js",
+"line": 853,
+"fn": "SUPPLY_CHAIN_NEEDS.outputs"
+}
+},
+{
+"id": "15808",
+"sev": "MED",
+"n": 54,
+"town": "r2r-thorp-45",
+"section": "PDF/ResourcesProduction",
+"fold": "Low-Medium - difficult to besiege",
+"text": "Low-Medium - difficult to besiege",
+"why": "'difficult to besiege' while Active Siege, defence Vulnerable, palisade and levy only",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/geographyData.js",
+"line": 418,
+"fn": "TERRAIN_DATA.economicStrengths"
+}
+},
+{
+"id": "25089",
+"sev": "MED",
+"n": 54,
+"town": "r2r-thorp-45",
+"section": "Journal/Resources & Production",
+"fold": "Strategic value: Low-Medium - difficult to besiege",
+"text": "Strategic value: Low-Medium - difficult to besiege",
+"why": "'difficult to besiege' while Active Siege, defence Vulnerable, palisade and levy only",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/geographyData.js",
+"line": 418,
+"fn": "TERRAIN_DATA.economicStrengths"
+}
+},
+{
+"id": "06910",
+"sev": "MED",
+"n": 52,
+"town": "r2s-under_siege-town-1",
+"section": "Journal/Institutions",
+"fold": "Coaching inn: Purpose-built for road travellers: stabling for relay horses, scheduled coach departures, meals served at fixed hours, and a passenger waiting room.",
+"text": "Coaching inn: Purpose-built for road travellers: stabling for relay horses, scheduled coach departures, meals served at fixed hours, and a passenger waiting room.",
+"why": "coaching inn runs scheduled coach departures; tag has S, under siege no coach arrives or leaves by road",
+"kinds": [
+"TAG"
+],
+"writer": {
+"file": "src/data/institutionalCatalog.js",
+"line": 370,
+"fn": "INSTITUTION_FAMILIES.shared"
+}
+},
+{
+"id": "14363",
+"sev": "MED",
+"n": 47,
+"town": "r2s-famine-city-0",
+"section": "PDF/Services",
+"fold": "Iron ore deposits » Smelter + Specialized metalworkers » Refined iron ingots, Pig iron, Cast iron goods",
+"text": "Iron ore deposits » Smelter + Specialized metalworkers » Refined iron ingots, Pig iron, Cast iron goods",
+"why": "iron ingots and pig iron from Smelter; LAND gaps say the Smelter lacks access to copper ore and gold/silver ore, chain vulnerable",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/supplyChainData.js",
+"line": 329,
+"fn": "SUPPLY_CHAIN_NEEDS.outputs"
+}
+},
+{
+"id": "11342",
+"sev": "MED",
+"n": 46,
+"town": "r2s-famine-city-3",
+"section": "PDF/Services",
+"fold": "Grain fields » Bakers + Butchers » Baked goods, Preserved foods",
+"text": "Grain fields » Bakers + Butchers » Baked goods, Preserved foods",
+"why": "grain fields feed bakers and baked goods; famine's failed source is grain, stores of grain short",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/supplyChainData.js",
+"line": 101,
+"fn": "SUPPLY_CHAIN_NEEDS.outputs"
+}
+},
+{
+"id": "06454",
+"sev": "MED",
+"n": 44,
+"town": "r2s-occupied-metropolis-1",
+"section": "Journal/Institutions",
+"fold": "Cemetery network: # central roll now holds what the local grounds can no longer track.",
+"text": "Cemetery network: One central roll now holds what the local grounds can no longer track.",
+"why": "says local grounds can no longer track their dead (plague-style record loss); CRISIS is occupation, PAST has no plague",
+"kinds": [
+"STATE",
+"TAG"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 473,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "23260",
+"sev": "MED",
+"n": 43,
+"town": "r2s-plague_onset-town-1",
+"section": "Journal/Institutions",
+"fold": "Salt works: Evaporation pans or brine processing along the coast or riverbank.",
+"text": "Salt works: Evaporation pans or brine processing along the coast or riverbank.",
+"why": "salt works on pans or brine; gaps: Salt works lacks access to desert_salt, salt flats absent",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionalCatalog.js",
+"line": 263,
+"fn": "INSTITUTION_FAMILIES.shared"
+}
+},
+{
+"id": "07705",
+"sev": "MED",
+"n": 43,
+"town": "r2s-plague_onset-city-3",
+"section": "Journal/Institutions",
+"fold": "Daily markets: Standing markets in more than #, open every day.",
+"text": "Daily markets: Standing markets in more than one quarter, open every day.",
+"why": "markets in more than one quarter open every day; city is under plague, safety Plague Unrest — Plague Conditions",
+"kinds": [
+"STATE",
+"TAG"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 349,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "06139",
+"sev": "MED",
+"n": 42,
+"town": "r2s-famine-town-2",
+"section": "Journal/Institutions",
+"fold": "Burial grounds: Ground beside each house of worship, with burial beyond the gate where a ground has filled its own.",
+"text": "Burial grounds: Ground beside each house of worship, with burial beyond the gate where a ground has filled its own.",
+"why": "burial beyond the gate; DEFENCE walls none, HOUSES has no gates",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/institutionDescVariants.js",
+"line": 730,
+"fn": "PAIRS"
+}
+},
+{
+"id": "16266",
+"sev": "MED",
+"n": 42,
+"town": "r2s-plague_onset-town-0",
+"section": "Journal/Institutions",
+"fold": "Market square: A broad open square given over to market days and fairs.",
+"text": "Market square: A broad open square given over to market days and fairs.",
+"why": "square given over to market days and fairs; plague quarantine (safety Quarantined) stops gatherings",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 207,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "06456",
+"sev": "MED",
+"n": 42,
+"town": "r2s-under_siege-metropolis-2",
+"section": "Journal/Institutions",
+"fold": "Cemetery network: Burial has left the walls: grounds beyond every gate, each with its road and its gatekeepers, and a trade in plots the revenue office keeps an eye on.",
+"text": "Cemetery network: Burial has left the walls: grounds beyond every gate, each with its road and its gatekeepers, and a trade in plots the revenue office keeps an eye on.",
+"why": "burial grounds beyond every gate with roads and gatekeepers in use; CRISIS Under Siege, nothing goes out by gate (tag also covers famine, occupation)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescVariants.js",
+"line": 1246,
+"fn": "PAIRS"
+}
+},
+{
+"id": "07706",
+"sev": "MED",
+"n": 40,
+"town": "r2s-plague_onset-city-1",
+"section": "Journal/Institutions",
+"fold": "Daily markets: Trade that never closes, spread across several sites.",
+"text": "Daily markets: Trade that never closes, spread across several sites.",
+"why": "trade that never closes at several sites; plague, Dangerous safety, Plague Unrest",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 348,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "16377",
+"sev": "MED",
+"n": 34,
+"town": "r2s-occupied-hamlet-1",
+"section": "PDF/ResourcesProduction",
+"fold": "Medium - controls caravan routes, water sources are strategic",
+"text": "Medium - controls caravan routes, water sources are strategic",
+"why": "says it controls caravan routes; trade access isolated, exports and imports none, hamlet under Occupation Curfew",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/geographyData.js",
+"line": 720,
+"fn": "TERRAIN_DATA.economicStrengths"
+}
+},
+{
+"id": "22250",
+"sev": "MED",
+"n": 34,
+"town": "r2r-thorp-46",
+"section": "PDF/EconomicsTrade",
+"fold": "Quality textiles and cloth",
+"text": "Quality textiles and cloth",
+"why": "quality textiles and cloth; TRADE made here lists none, HOUSES has no weaver, imports none, isolated",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/geographyData.js",
+"line": 704,
+"fn": "TERRAIN_DATA.mustImport"
+}
+},
+{
+"id": "25094",
+"sev": "MED",
+"n": 34,
+"town": "r2r-thorp-46",
+"section": "Journal/Resources & Production",
+"fold": "Strategic value: Medium - controls caravan routes, water sources are strategic",
+"text": "Strategic value: Medium - controls caravan routes, water sources are strategic",
+"why": "controls caravan routes; trade access isolated, exports and imports none",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/geographyData.js",
+"line": 720,
+"fn": "TERRAIN_DATA.economicStrengths"
+}
+},
+{
+"id": "06455",
+"sev": "MED",
+"n": 34,
+"town": "r2r-metropolis-14",
+"section": "Journal/Institutions",
+"fold": "Cemetery network: Burial has left the walls entirely: grounds beyond every gate, each with its own road, its own gatekeepers, and a trade in plots that the revenue office watches.",
+"text": "Cemetery network: Burial has left the walls entirely: grounds beyond every gate, each with its own road, its own gatekeepers, and a trade in plots that the revenue office watches.",
+"why": "burial grounds beyond every gate, with roads and gatekeepers, as present fact; CRISIS Under Siege, nothing goes out by gate",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionalCatalog.js",
+"line": 950,
+"fn": "INSTITUTION_FAMILIES.metropolis"
+}
+},
+{
+"id": "10230",
+"sev": "MED",
+"n": 33,
+"town": "r2s-occupied-city-2",
+"section": "Journal/Institutions",
+"fold": "Fish market: The market wardens keep a roofed fish market where fresh catch and salted barrels are weighed out and inspected before sale.",
+"text": "Fish market: The market wardens keep a roofed fish market where fresh catch and salted barrels are weighed out and inspected before sale.",
+"why": "fish market weighs 'fresh catch'; LAND: River Fisheries depleted, imports salted fish because the local fishery is exhausted",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescVariants.js",
+"line": 507,
+"fn": "PAIRS"
+}
+},
+{
+"id": "04157",
+"sev": "MED",
+"n": 33,
+"town": "r2r-under_siege-thorp-0",
+"section": "Journal/Institutions",
+"fold": "Access to a house of worship: The nearest house of worship is the village's, a walk of a few miles away for services.",
+"text": "Access to a house of worship: The nearest house of worship is the village's, a walk of a few miles away for services.",
+"why": "church a walk of miles away for services; HOUSES only access, roads cut by the siege",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 35,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "04165",
+"sev": "MED",
+"n": 32,
+"town": "r2s-recently_betrayed-hamlet-2",
+"section": "Journal/Institutions",
+"fold": "Access to external mill: The lord's mill, and by banalité the only # grain may lawfully be ground at.",
+"text": "Access to external mill: The lord's mill, and by banalité the only one grain may lawfully be ground at.",
+"why": "presumes a lord and banalite mill; GOVERNMENT is Headman's Authority only, no lord listed",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 82,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "10228",
+"sev": "MED",
+"n": 32,
+"town": "r2s-famine-city-0",
+"section": "Journal/Institutions",
+"fold": "Fish market: Covered stalls under the wardens' eye, selling the morning's catch or the week's salted barrels by weight, each checked for rot.",
+"text": "Fish market: Covered stalls under the wardens' eye, selling the morning's catch or the week's salted barrels by weight, each checked for rot.",
+"why": "stalls sell the morning's catch and salted barrels; famine's failed source is fish",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescVariants.js",
+"line": 506,
+"fn": "PAIRS"
+}
+},
+{
+"id": "29206",
+"sev": "MED",
+"n": 29,
+"town": "r2r-thorp-10",
+"section": "PDF/EconomicsTrade",
+"fold": "Timber and building wood",
+"text": "Timber and building wood",
+"why": "timber and building wood as a trade good; desert thorp, LAND has no woodland, TRADE made here and imports list no timber",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/geographyData.js",
+"line": 703,
+"fn": "TERRAIN_DATA.mustImport"
+}
+},
+{
+"id": "23261",
+"sev": "MED",
+"n": 21,
+"town": "r2s-famine-metropolis-3",
+"section": "Journal/Institutions",
+"fold": "Salt works: Salt is won from local brine in broad evaporation pans.",
+"text": "Salt works: Salt is won from local brine in broad evaporation pans.",
+"why": "salt won from local brine in pans; LAND gaps say the Salt works lacks access to its salt (desert_salt) and Salt & Preservation has no salt flats",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 120,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "15713",
+"sev": "MED",
+"n": 21,
+"town": "r2r-thorp-46",
+"section": "PDF/EconomicsTrade",
+"fold": "Livestock for meat and draft",
+"text": "Livestock for meat and draft",
+"why": "livestock for meat and draft; LAND has no grazing, TRADE made here lists no livestock, desert thorp",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/geographyData.js",
+"line": 705,
+"fn": "TERRAIN_DATA.mustImport"
+}
+},
+{
+"id": "16720",
+"sev": "MED",
+"n": 21,
+"town": "r2s-under_siege-town-3",
+"section": "Journal/Institutions",
+"fold": "Merchant guilds: Each holds a grip on the trade in its particular wares.",
+"text": "Merchant guilds: Each holds a grip on the trade in its particular wares.",
+"why": "each merchant guild holds a grip on trade; GOVERNMENT lists Merchant Guilds as Suppressed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 208,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "14320",
+"sev": "MED",
+"n": 21,
+"town": "r2s-under_siege-metropolis-2",
+"section": "Journal/Institutions",
+"fold": "International trade center: A centre for overseas trade representatives, the settling of commercial disputes, and dealing in commodities.",
+"text": "International trade center: A centre for overseas trade representatives, the settling of commercial disputes, and dealing in commodities.",
+"why": "names overseas trade representatives; trade access is road only, no port, and the town is besieged so nothing comes by road",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 462,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "22797",
+"sev": "MED",
+"n": 19,
+"town": "r2r-village-56",
+"section": "Journal/Institutions",
+"fold": "River ferry: The river is crossed here by a flat-bottomed ferry, worked by a family that has held the right to it for generations.",
+"text": "River ferry: The river is crossed here by a flat-bottomed ferry, worked by a family that has held the right to it for generations.",
+"why": "ferry 'held the right to it for generations'; the village is only 42 years old",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescVariants.js",
+"line": 335,
+"fn": "PAIRS"
+}
+},
+{
+"id": "07711",
+"sev": "MED",
+"n": 18,
+"town": "r2s-famine-hamlet-2",
+"section": "Journal/Institutions",
+"fold": "Dairy farmer: Keeps cattle or goats for milk, butter, and cheese.",
+"text": "Dairy farmer: Keeps cattle or goats for milk, butter, and cheese.",
+"why": "says the dairy farmer keeps cattle or goats for milk; LAND gaps say it lacks livestock",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionalCatalog.js",
+"line": 196,
+"fn": "INSTITUTION_FAMILIES.hamlet"
+}
+},
+{
+"id": "05868",
+"sev": "MED",
+"n": 15,
+"town": "r2s-under_siege-metropolis-3",
+"section": "Journal/Economics & Trade",
+"fold": "Boatbuilding & River Transport (impaired)",
+"text": "Boatbuilding & River Transport (impaired)",
+"why": "Boatbuilding & River Transport (impaired); LAND gives the chain running, Managed woodland available",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/supplyChainData.js",
+"line": 360,
+"fn": "SUPPLY_CHAIN_NEEDS.services"
+}
+},
+{
+"id": "10250",
+"sev": "MED",
+"n": 14,
+"town": "r2s-plague_onset-thorp-2",
+"section": "Journal/Institutions",
+"fold": "Fishing community: The nets, the traps, the drying racks: what the water gives, the fishing households take.",
+"text": "Fishing community: The nets, the traps, the drying racks: what the water gives, the fishing households take.",
+"why": "fishing households take what the water gives; LAND gives River Fisheries as depleted",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 27,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "16785",
+"sev": "MED",
+"n": 14,
+"town": "r2s-occupied-town-1",
+"section": "Journal/Institutions",
+"fold": "Merchant oligarchy: Civic power belongs solely to the wealthy merchant families, and office is bought in all but name.",
+"text": "Merchant oligarchy: Civic power belongs solely to the wealthy merchant families, and office is bought in all but name.",
+"why": "civic power belongs solely to merchant families; under occupation Occupation Authority is Significant and gives orders",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 292,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "15809",
+"sev": "MED",
+"n": 13,
+"town": "r2r-thorp-41",
+"section": "PDF/ResourcesProduction",
+"fold": "Low-Medium - provides game, difficult to besiege",
+"text": "Low-Medium - provides game, difficult to besiege",
+"why": "'difficult to besiege'; defence Vulnerable, palisade and levy only, and PAST records a catastrophic siege 61 years ago",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/geographyData.js",
+"line": 418,
+"fn": "TERRAIN_DATA.economicStrengths"
+}
+},
+{
+"id": "25090",
+"sev": "MED",
+"n": 13,
+"town": "r2r-thorp-41",
+"section": "Journal/Resources & Production",
+"fold": "Strategic value: Low-Medium - provides game, difficult to besiege",
+"text": "Strategic value: Low-Medium - provides game, difficult to besiege",
+"why": "'difficult to besiege'; defence Vulnerable, and PAST records a catastrophic siege 61 years ago",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/geographyData.js",
+"line": 418,
+"fn": "TERRAIN_DATA.economicStrengths"
+}
+},
+{
+"id": "16297",
+"sev": "MED",
+"n": 12,
+"town": "r2s-succession_void-thorp-1",
+"section": "PDF/Services",
+"fold": "Marshlands » Subsistence farming » Honey and beeswax, Foraged goods",
+"text": "Marshlands » Subsistence farming » Honey and beeswax, Foraged goods",
+"why": "Marshlands feeding a chain to honey and foraged goods; LAND: Foraging & Smallholding vulnerable, Foraging areas absent; famine cut 65%",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 115,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "07712",
+"sev": "MED",
+"n": 11,
+"town": "r2s-under_siege-village-0",
+"section": "Journal/Institutions",
+"fold": "Dairy farmer: Keeps cattle or goats for milk, butter, and soft cheese.",
+"text": "Dairy farmer: Keeps cattle or goats for milk, butter, and soft cheese.",
+"why": "dairy farmer 'keeps cattle or goats'; LAND gaps say the dairy farmer exists but lacks access to livestock",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionalCatalog.js",
+"line": 196,
+"fn": "INSTITUTION_FAMILIES.hamlet"
+}
+},
+{
+"id": "29353",
+"sev": "MED",
+"n": 11,
+"town": "r2s-plague_onset-town-1",
+"section": "Journal/Institutions",
+"fold": "Town council: Where nothing official exists, the town's notable men gather and govern by consensus.",
+"text": "Town council: Where nothing official exists, the town's notable men gather and govern by consensus.",
+"why": "council governs where nothing official exists; GOVERNMENT has Corrupt Council as the governing power, with Quarantine Council",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescVariants.js",
+"line": 759,
+"fn": "PAIRS"
+}
+},
+{
+"id": "06310",
+"sev": "MED",
+"n": 10,
+"town": "r2r-village-58",
+"section": "PDF/Services",
+"fold": "Caravanserai » Overland cargo transport, Escorted caravan, Pack animal hire",
+"text": "Caravanserai » Overland cargo transport, Escorted caravan, Pack animal hire",
+"why": "caravanserai offers cargo transport, escorted caravans, pack animal hire; LAND gaps: it lacks camel herds (depleted); caravan trade vulnerable",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/supplyChainData.js",
+"line": 853,
+"fn": "SUPPLY_CHAIN_NEEDS.outputs"
+}
+},
+{
+"id": "29820",
+"sev": "MED",
+"n": 9,
+"town": "r2s-occupied-metropolis-3",
+"section": "PDF/Services",
+"fold": "Vintner » Meals and drink, Preserved foods",
+"text": "Vintner » Meals and drink, Preserved foods",
+"why": "Vintner » Meals and drink, Preserved foods; gaps: Vintner exists but lacks access to grapes",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/supplyChainData.js",
+"line": 101,
+"fn": "SUPPLY_CHAIN_NEEDS.outputs"
+}
+},
+{
+"id": "14179",
+"sev": "MED",
+"n": 9,
+"town": "r2s-occupied-hamlet-2",
+"section": "Journal/Institutions",
+"fold": "Informal elder consensus: A free hamlet with no lord's representative.",
+"text": "Informal elder consensus: A free hamlet with no lord's representative.",
+"why": "calls it 'a free hamlet'; GOVERNMENT has Occupation Authority Dominant, stability Suppressed under occupation",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionalCatalog.js",
+"line": 1027,
+"fn": "INSTITUTION_FAMILIES.hamlet"
+}
+},
+{
+"id": "29533",
+"sev": "MED",
+"n": 8,
+"town": "r2s-plague_onset-village-3",
+"section": "Journal/Institutions",
+"fold": "Travelers' inn: A lone inn catering to whoever the road brings: merchants, pilgrims, travellers.",
+"text": "Travelers' inn: A lone inn catering to whoever the road brings: merchants, pilgrims, travellers.",
+"why": "inn caters to 'whoever the road brings: merchants, pilgrims, travellers'; plague conditions and tag reaches famine towns",
+"kinds": [
+"STATE",
+"TAG"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 126,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "04705",
+"sev": "MED",
+"n": 8,
+"town": "r2s-plague_onset-town-0",
+"section": "Journal/Institutions",
+"fold": "Annual fair: Merchants from across the region, and luxuries to be had.",
+"text": "Annual fair: Merchants from across the region, and luxuries to be had.",
+"why": "annual fair brings merchants from across the region; tag has P, under plague people do not gather or travel as usual",
+"kinds": [
+"TAG"
+],
+"writer": {
+"file": "src/data/institutionDescVariants.js",
+"line": 530,
+"fn": "PAIRS"
+}
+},
+{
+"id": "29354",
+"sev": "MED",
+"n": 8,
+"town": "r2s-mass_migration-town-0",
+"section": "Journal/Institutions",
+"fold": "Town council: With no formal government in place, a loose council of leading citizens runs the town.",
+"text": "Town council: With no formal government in place, a loose council of leading citizens runs the town.",
+"why": "'no formal government in place'; GOVERNMENT names Church Council as governing power with Dominant strength",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescVariants.js",
+"line": 758,
+"fn": "PAIRS"
+}
+},
+{
+"id": "06381",
+"sev": "MED",
+"n": 7,
+"town": "r2r-village-24",
+"section": "Journal/Institutions",
+"fold": "Cartographer's workshop: A mapmaker who draws and sells his work: road maps of the region, property surveys, and rough sketches of the wilds pieced from travellers' tales.",
+"text": "Cartographer's workshop: A mapmaker who draws and sells his work: road maps of the region, property surveys, and rough sketches of the wilds pieced from travellers' tales.",
+"why": "cartographer draws and sells 'his' work; PEOPLE gives the cartographer Qiong Liang as f",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescVariants.js",
+"line": 422,
+"fn": "PAIRS"
+}
+},
+{
+"id": "25383",
+"sev": "MED",
+"n": 7,
+"town": "r2s-plague_onset-village-2",
+"section": "Journal/Institutions",
+"fold": "Tannery: Converts hides into leather using oak bark.",
+"text": "Tannery: Converts hides into leather using oak bark.",
+"why": "Tannery converts hides into leather; gaps: Tannery lacks access to livestock and animal hides",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionalCatalog.js",
+"line": 729,
+"fn": "INSTITUTION_FAMILIES.village"
+}
+},
+{
+"id": "29542",
+"sev": "MED",
+"n": 7,
+"town": "r2r-town-36",
+"section": "Journal/Institutions",
+"fold": "Traveling performers: Bards, jugglers, and acrobats, come for the fairs.",
+"text": "Traveling performers: Bards, jugglers, and acrobats, come for the fairs.",
+"why": "performers 'come for the fairs'; HOUSES has no Annual fair, only a weekly market",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/institutionDescVariants.js",
+"line": 878,
+"fn": "PAIRS"
+}
+},
+{
+"id": "29543",
+"sev": "MED",
+"n": 7,
+"town": "r2s-succession_void-town-2",
+"section": "Journal/Institutions",
+"fold": "Traveling performers: The fairs bring bards, jugglers, and acrobats through.",
+"text": "Traveling performers: The fairs bring bards, jugglers, and acrobats through.",
+"why": "'The fairs bring bards, jugglers, and acrobats'; HOUSES has no Annual fair, only a weekly market",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/institutionDescVariants.js",
+"line": 879,
+"fn": "PAIRS"
+}
+},
+{
+"id": "13074",
+"sev": "MED",
+"n": 6,
+"town": "r2s-under_siege-town-1",
+"section": "Journal/Institutions",
+"fold": "Hunter's lodge: Sends out hunting parties over the surrounding country and brings venison, pelts, and game to sell.",
+"text": "Hunter's lodge: Sends out hunting parties over the surrounding country and brings venison, pelts, and game to sell.",
+"why": "hunting parties sent out over the country and game brought to sell; Active Siege, LAND lists no hunting grounds",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 122,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "15791",
+"sev": "MED",
+"n": 6,
+"town": "r2r-town-37",
+"section": "Journal/Institutions",
+"fold": "Lord's appointee: A man of the lord's choosing governs, and noble authority overrides whatever the town was accustomed to.",
+"text": "Lord's appointee: A man of the lord's choosing governs, and noble authority overrides whatever the town was accustomed to.",
+"why": "'A man of the lord's choosing governs'; PEOPLE: the lord's appointee Nada ibn Zuhr is female (f)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 286,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "29535",
+"sev": "MED",
+"n": 6,
+"town": "r2s-under_siege-village-0",
+"section": "Journal/Institutions",
+"fold": "Travelers' inn: The village's # inn for the traders, pilgrims, and wayfarers who pass.",
+"text": "Travelers' inn: The village's one inn for the traders, pilgrims, and wayfarers who pass.",
+"why": "inn serves 'traders, pilgrims, and wayfarers who pass'; CRISIS Under Siege, nothing comes in or goes out by road",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 125,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "29541",
+"sev": "MED",
+"n": 6,
+"town": "r2s-politically_fractured-town-0",
+"section": "Journal/Institutions",
+"fold": "Traveling performers: Bards, jugglers, acrobats visit during fairs.",
+"text": "Traveling performers: Bards, jugglers, acrobats visit during fairs.",
+"why": "performers 'visit during fairs'; HOUSES has no Annual fair, only a weekly market",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/institutionalCatalog.js",
+"line": 1584,
+"fn": "INSTITUTION_FAMILIES.town"
+}
+},
+{
+"id": "29352",
+"sev": "MED",
+"n": 5,
+"town": "r2s-occupied-town-0",
+"section": "Journal/Institutions",
+"fold": "Town council: An informal council of prominent citizens manages town affairs in the absence of formal authority.",
+"text": "Town council: An informal council of prominent citizens manages town affairs in the absence of formal authority.",
+"why": "says an informal council acts without formal authority; GOVERNMENT has Town Council governing, with a Mayor",
+"kinds": [
+"PAIR",
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionalCatalog.js",
+"line": 1076,
+"fn": "INSTITUTION_FAMILIES.town"
+}
+},
+{
+"id": "11211",
+"sev": "MED",
+"n": 5,
+"town": "r2s-occupied-town-3",
+"section": "Journal/Institutions",
+"fold": "Glassblower: A modest glassworks making bottles, panes, and goblets, dependent on silica sand, potash, and a practised furnace operator.",
+"text": "Glassblower: A modest glassworks making bottles, panes, and goblets, dependent on silica sand, potash, and a practised furnace operator.",
+"why": "says the Glassblower makes bottles, panes and goblets; LAND gaps say Glassblower exists but lacks access to glass sand",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 267,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "21555",
+"sev": "MED",
+"n": 5,
+"town": "r2s-plague_onset-hamlet-1",
+"section": "Journal/Institutions",
+"fold": "Periodic market: Monthly or seasonal trading day.",
+"text": "Periodic market: Monthly or seasonal trading day.",
+"why": "Periodic market holds a trading day; safety is Quarantined, plague conditions, so people do not gather or trade as usual",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionalCatalog.js",
+"line": 292,
+"fn": "INSTITUTION_FAMILIES.hamlet"
+}
+},
+{
+"id": "10509",
+"sev": "MED",
+"n": 5,
+"town": "r2r-under_siege-thorp-0",
+"section": "Journal/Economics & Trade",
+"fold": "Foraging & Smallholding (impaired)",
+"text": "Foraging & Smallholding (impaired)",
+"why": "chain printed impaired; LAND gives Foraging & Smallholding running, its resource Foraging areas available",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/supplyChainData.js",
+"line": 133,
+"fn": "SUPPLY_CHAIN_NEEDS.resourceSubstitutes"
+}
+},
+{
+"id": "21584",
+"sev": "MED",
+"n": 4,
+"town": "r2s-under_siege-hamlet-1",
+"section": "Journal/Economics & Trade",
+"fold": "Pilgrimage & Holy Sites (impaired)",
+"text": "Pilgrimage & Holy Sites (impaired)",
+"why": "prints Pilgrimage & Holy Sites as impaired; LAND gives the chain as running on available hot springs",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/supplyChainData.js",
+"line": 1298,
+"fn": "SUPPLY_CHAIN_NEEDS.services"
+}
+},
+{
+"id": "11352",
+"sev": "MED",
+"n": 4,
+"town": "r2s-religious_conversion-village-0",
+"section": "PDF/Services",
+"fold": "Grain fields » Dairy farmer » Baked goods, Preserved foods",
+"text": "Grain fields » Dairy farmer » Baked goods, Preserved foods",
+"why": "Dairy farmer made to yield baked goods and preserved foods from grain fields; gaps say the dairy farmer lacks livestock; no bakery in HOUSES",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/supplyChainData.js",
+"line": 101,
+"fn": "SUPPLY_CHAIN_NEEDS.outputs"
+}
+},
+{
+"id": "13072",
+"sev": "MED",
+"n": 3,
+"town": "r2s-under_siege-town-0",
+"section": "Journal/Institutions",
+"fold": "Hunter's lodge: Musters hunting parties across the lands about the settlement, selling venison, pelts, and game at market.",
+"text": "Hunter's lodge: Musters hunting parties across the lands about the settlement, selling venison, pelts, and game at market.",
+"why": "hunting parties sell venison, pelts, game; LAND Hunting Grounds depleted, TRADE imports game, Active Siege",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 121,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "15796",
+"sev": "MED",
+"n": 3,
+"town": "r2s-mass_migration-thorp-0",
+"section": "Journal/Institutions",
+"fold": "Lord's reeve: Placed by a lord who never visits, he holds official charge of the settlement.",
+"text": "Lord's reeve: Placed by a lord who never visits, he holds official charge of the settlement.",
+"why": "says 'he holds official charge'; the Lord's reeve Lkhagvajav Taichiud is (f) in PEOPLE",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 41,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "20868",
+"sev": "MED",
+"n": 3,
+"town": "r2s-wartime-hamlet-1",
+"section": "PDF/Services",
+"fold": "Oasis and Water Rights » Caravanserai » Water trade, Dates and fruit, Caravan resupply",
+"text": "Oasis and Water Rights » Caravanserai » Water trade, Dates and fruit, Caravan resupply",
+"why": "shows the Caravanserai producing water trade and caravan resupply; LAND gap says it lacks access to camel herds",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/supplyChainData.js",
+"line": 497,
+"fn": "SUPPLY_CHAIN_NEEDS.outputs"
+}
+},
+{
+"id": "06314",
+"sev": "MED",
+"n": 3,
+"town": "r2s-wartime-hamlet-1",
+"section": "Journal/Institutions",
+"fold": "Caravanserai: A walled waystation offering merchants, their beasts, and their goods a safe night's rest.",
+"text": "Caravanserai: A walled waystation offering merchants, their beasts, and their goods a safe night's rest.",
+"why": "calls the caravanserai a 'walled' waystation; DEFENCE walls: none",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 75,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "06309",
+"sev": "MED",
+"n": 3,
+"town": "r2s-under_siege-town-1",
+"section": "PDF/Services",
+"fold": "Caravanserai + Carriers' guild » Overland cargo transport, Escorted caravan, Pack animal hire",
+"text": "Caravanserai + Carriers' guild » Overland cargo transport, Escorted caravan, Pack animal hire",
+"why": "caravanserai and carriers move cargo, escort caravans; under siege nothing goes by road and LAND says caravanserai lacks camels",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/supplyChainData.js",
+"line": 853,
+"fn": "SUPPLY_CHAIN_NEEDS.outputs"
+}
+},
+{
+"id": "14635",
+"sev": "MED",
+"n": 2,
+"town": "r2s-under_siege-metropolis-0",
+"section": "Journal/Resources & Production",
+"fold": "It sends out medicines, restorative treatments, mineral salts and lumber.",
+"text": "It sends out medicines, restorative treatments, mineral salts and lumber.",
+"why": "sends out medicines, mineral salts and lumber; TRADE exports are finance, legal, military, tourism, scholarly, alchemical only; Active Siege",
+"kinds": [
+"STATE",
+"TAG"
+],
+"writer": {
+"file": "src/data/resourceChains.js",
+"line": 265,
+"fn": "RESOURCE_CHAINS.finalProducts"
+}
+},
+{
+"id": "10518",
+"sev": "MED",
+"n": 2,
+"town": "r2s-plague_onset-hamlet-2",
+"section": "PDF/Services",
+"fold": "Foraging areas (depleted) » Subsistence farming » Honey and beeswax, Foraged goods",
+"text": "Foraging areas (depleted) » Subsistence farming » Honey and beeswax, Foraged goods",
+"why": "foraging areas (depleted) given as feeding honey and foraged goods with no 'normally'; LAND: Wild Foraging Areas depleted",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 115,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "19207",
+"sev": "MED",
+"n": 2,
+"town": "r2s-under_siege-town-2",
+"section": "PDF/Services",
+"fold": "Mountain Pass » Customs house » Strategic control, Trade access fees",
+"text": "Mountain Pass » Customs house » Strategic control, Trade access fees",
+"why": "Customs house yields trade access fees from the pass; under siege nothing comes in or goes out by road",
+"kinds": [
+"TAG"
+],
+"writer": {
+"file": "src/data/supplyChainData.js",
+"line": 900,
+"fn": "SUPPLY_CHAIN_NEEDS.outputs"
+}
+},
+{
+"id": "19204",
+"sev": "MED",
+"n": 2,
+"town": "r2s-under_siege-town-2",
+"section": "Journal/Economics & Trade",
+"fold": "Mountain Pass Control (impaired)",
+"text": "Mountain Pass Control (impaired)",
+"why": "Mountain Pass Control printed impaired; LAND gives that chain as running",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/supplyChainData.js",
+"line": 895,
+"fn": "SUPPLY_CHAIN_NEEDS.services"
+}
+},
+{
+"id": "06275",
+"sev": "MED",
+"n": 2,
+"town": "r2s-under_siege-town-0",
+"section": "Journal/Economics & Trade",
+"fold": "Caravan & Overland Trade (impaired)",
+"text": "Caravan & Overland Trade (impaired)",
+"why": "Caravan & Overland Trade printed impaired; LAND gives it as running",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/supplyChainData.js",
+"line": 836,
+"fn": "SUPPLY_CHAIN_NEEDS.upstreamChains"
+}
+},
+{
+"id": "25069",
+"sev": "MED",
+"n": 2,
+"town": "r2s-under_siege-town-0",
+"section": "Journal/Economics & Trade",
+"fold": "Strategic Crossroads Toll (impaired)",
+"text": "Strategic Crossroads Toll (impaired)",
+"why": "Strategic Crossroads Toll printed impaired; LAND gives it as running",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/supplyChainData.js",
+"line": 860,
+"fn": "SUPPLY_CHAIN_NEEDS.services"
+}
+},
+{
+"id": "11602",
+"sev": "MED",
+"n": 2,
+"town": "r2s-plague_onset-town-1",
+"section": "PDF/Services",
+"fold": "Grazing land (depleted) » Tanner (established) » Boots and shoes, Saddles and harness, Leather armour",
+"text": "Grazing land (depleted) » Tanner (established) » Boots and shoes, Saddles and harness, Leather armour",
+"why": "tanner yields boots, saddles, leather armour from grazing land; LAND gives grazing land as depleted and Leatherworking vulnerable",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/supplyChainData.js",
+"line": 686,
+"fn": "SUPPLY_CHAIN_NEEDS.outputs"
+}
+},
+{
+"id": "08266",
+"sev": "MED",
+"n": 1,
+"town": "r2s-under_siege-village-1",
+"section": "Journal/Economics & Trade",
+"fold": "Divine & Magical Healing (impaired)",
+"text": "Divine & Magical Healing (impaired)",
+"why": "says Divine & Magical Healing is impaired; LAND gives that chain as running, its hot springs available",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/supplyChainData.js",
+"line": 1048,
+"fn": "SUPPLY_CHAIN_NEEDS.services"
+}
+},
+{
+"id": "25384",
+"sev": "MED",
+"n": 1,
+"town": "r2s-wartime-village-2",
+"section": "Journal/Institutions",
+"fold": "Tannery: Hides become leather here, cured with oak bark.",
+"text": "Tannery: Hides become leather here, cured with oak bark.",
+"why": "'Hides become leather here' but LAND gaps say the Tannery lacks access to livestock and animal hides",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescVariants.js",
+"line": 383,
+"fn": "PAIRS"
+}
+},
+{
+"id": "14624",
+"sev": "MED",
+"n": 1,
+"town": "r2r-village-0",
+"section": "Journal/Resources & Production",
+"fold": "It sends out gold/silver bars.",
+"text": "It sends out gold/silver bars.",
+"why": "says it sends out gold/silver bars; TRADE exports none and LAND gap says gold/silver ore cannot produce final goods",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/resourceChains.js",
+"line": 114,
+"fn": "RESOURCE_CHAINS.intermediateGoods"
+}
+},
+{
+"id": "14634",
+"sev": "MED",
+"n": 1,
+"town": "r2s-infiltrated-town-0",
+"section": "Journal/Resources & Production",
+"fold": "It sends out medicines, restorative treatments, mineral salts and cut gems.",
+"text": "It sends out medicines, restorative treatments, mineral salts and cut gems.",
+"why": "says it sends out cut gems; TRADE exports list no gems, HOUSES has no gem-cutter, and LAND says gemstones cannot make final goods",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/resourceChains.js",
+"line": 265,
+"fn": "RESOURCE_CHAINS.finalProducts"
+}
+},
+{
+"id": "19869",
+"sev": "MED",
+"n": 1,
+"town": "r2r-town-42",
+"section": "Journal/Resources & Production",
+"fold": "Nearby resources: Mountain Timber, Alpine Pasture, Hunting Grounds, Defended Pass, Iron Deposits",
+"text": "Nearby resources: Mountain Timber, Alpine Pasture, Hunting Grounds, Defended Pass, Iron Deposits",
+"why": "lists a Defended Pass; DEFENCE has no wall, garrison, militia or hired force, only a Town watch; defence word is Lightly Defended",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/geographyData.js",
+"line": 408,
+"fn": "TERRAIN_DATA.naturalFeatures"
+}
+},
+{
+"id": "09159",
+"sev": "MED",
+"n": 1,
+"town": "r2s-famine-metropolis-3",
+"section": "Journal/Economics & Trade",
+"fold": "Exports: Milled flour, Fulled cloth, Roof tiles, Luxury manufactured goods, Fine metalwork and jewelry, Glassware, Books and manuscripts, Rare spices and exotic dyes (transit), Fine textiles, Legal services (contracts, notarial), Pilgrimage & religious tourism, Military contract services, Waterborne freight services (cargo, pilotage), Scholarly services (research access, rare texts), Alchemical trade (potions, reagents)",
+"text": "Exports: Milled flour, Fulled cloth, Roof tiles, Luxury manufactured goods, Fine metalwork and jewelry, Glassware, Books and manuscripts, Rare spices and exotic dyes (transit), Fine textiles, Legal services (contracts, notarial), Pilgrimage & religious tourism, Military contract services, Waterborne freight services (cargo, pilotage), Scholarly services (research access, rare texts), Alchemical trade (potions, reagents)",
+"why": "lists Milled flour first among exports; CRISIS Famine, FOOD failed source grain, famine cut 33%, so a grain product cannot be offered out",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/supplyChainData.js",
+"line": 741,
+"fn": "SUPPLY_CHAIN_NEEDS.outputs"
+}
+}
+]

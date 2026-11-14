@@ -1,0 +1,2788 @@
+[
+{
+"packet": "crisis-01",
+"id": "24318",
+"rwhy": "hook rests on a Crime Wave; PAST records no crime wave here",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-under_siege-town-2",
+"in_the_record": [
+"Crime Wave"
+],
+"text": "Someone is directing it to create a pretext (Crime Wave)",
+"why": "hook rests on a Crime Wave; PAST records no crime wave here"
+},
+{
+"packet": "crisis-01",
+"id": "31197",
+"rwhy": "Wild Magic surge left its mark; PAST records no magical event (magic low); no me",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-under_siege-city-1",
+"in_the_record": [
+"Wild Magic"
+],
+"text": "Wild Magic: An uncontrolled surge of magic left its mark on the merchants' quarter and on the people who were there, and the effects have never fully faded",
+"why": "Wild Magic surge left its mark; PAST records no magical event (magic low); no merchants' quarter in HOUSES"
+},
+{
+"packet": "crisis-01",
+"id": "04472",
+"rwhy": "hook rests on a Wild Magic event; PAST records none here",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-under_siege-city-1",
+"in_the_record": [
+"Wild Magic"
+],
+"text": "An experiment went wrong, and the notes were hidden, not destroyed (Wild Magic)",
+"why": "hook rests on a Wild Magic event; PAST records none here"
+},
+{
+"packet": "crisis-01",
+"id": "11672",
+"rwhy": "Great Flood reshaped the lower districts; PAST records no flood",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-under_siege-metropolis-2",
+"in_the_record": [
+"Great Flood"
+],
+"text": "Great Flood: Waters rose with little warning and reshaped the lower districts, drowning livelihoods and redrawing who owned what",
+"why": "Great Flood reshaped the lower districts; PAST records no flood"
+},
+{
+"packet": "crisis-03",
+"id": "25144",
+"rwhy": "lists Succession Crisis as a power/crisis; CRISIS is Famine only, GOVERNMENT pow",
+"sev": "HIGH",
+"kind": "LACKS",
+"town": "r2s-famine-metropolis-1",
+"in_the_record": [
+"Succession Crisis"
+],
+"text": "Succession Crisis: The ruler of the time was aging or ill, and potential heirs jockeyed for position",
+"why": "lists Succession Crisis as a power/crisis; CRISIS is Famine only, GOVERNMENT powers do not list it, PAST records no succession crisis"
+},
+{
+"packet": "crisis-03",
+"id": "04057",
+"rwhy": "hook is tagged to a Succession Crisis the town lacks: CRISIS is Famine and PAST ",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2s-famine-metropolis-1",
+"in_the_record": [
+"Succession Crisis"
+],
+"text": "A would-be heir approaches outsiders to investigate a rival's past (Succession Crisis)",
+"why": "hook is tagged to a Succession Crisis the town lacks: CRISIS is Famine and PAST records none"
+},
+{
+"packet": "crisis-03",
+"id": "26140",
+"rwhy": "hook is tagged to a Succession Crisis the town lacks: CRISIS is Famine and PAST ",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2s-famine-metropolis-1",
+"in_the_record": [
+"Succession Crisis"
+],
+"text": "The ailing ruler wants a final errand completed before naming a successor (Succession Crisis)",
+"why": "hook is tagged to a Succession Crisis the town lacks: CRISIS is Famine and PAST records none"
+},
+{
+"packet": "crisis-03",
+"id": "24332",
+"rwhy": "hook is tagged to a Succession Crisis the town lacks: CRISIS is Famine and PAST ",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2s-famine-metropolis-1",
+"in_the_record": [
+"Succession Crisis"
+],
+"text": "Someone is poisoning the ruler slowly, and someone in the household knows (Succession Crisis)",
+"why": "hook is tagged to a Succession Crisis the town lacks: CRISIS is Famine and PAST records none"
+},
+{
+"packet": "crisis-03",
+"id": "04923",
+"rwhy": "says Arcane Orders are 'consulted'; GOVERNMENT has Arcane Orders Suppressed, not",
+"sev": "LOW",
+"kind": "STATE",
+"town": "r2s-famine-metropolis-1",
+"in_the_record": [
+"Arcane Orders"
+],
+"text": "Arcane Orders: Magical practitioners are consulted but not formally empowered.",
+"why": "says Arcane Orders are 'consulted'; GOVERNMENT has Arcane Orders Suppressed, not consulted"
+},
+{
+"packet": "crisis-03",
+"id": "08243",
+"rwhy": "presents Disputed Land as a power/issue; GOVERNMENT, QUARRELS and PAST list no l",
+"sev": "HIGH",
+"kind": "LACKS",
+"town": "r2s-famine-metropolis-0",
+"in_the_record": [
+"Disputed Land"
+],
+"text": "Disputed Land: A land claim from an old charter contradicts current occupation, with both sides legally plausible",
+"why": "presents Disputed Land as a power/issue; GOVERNMENT, QUARRELS and PAST list no land dispute, CRISIS is Famine"
+},
+{
+"packet": "crisis-03",
+"id": "27494",
+"rwhy": "hook tagged Disputed Land over an original charter; the town has no land dispute",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2s-famine-metropolis-0",
+"in_the_record": [
+"Disputed Land"
+],
+"text": "The original charter is held in a private archive whose owner has gone missing (Disputed Land)",
+"why": "hook tagged Disputed Land over an original charter; the town has no land dispute in CRISIS, QUARRELS or PAST"
+},
+{
+"packet": "crisis-03",
+"id": "24420",
+"rwhy": "hook tagged Disputed Land; the town has no land dispute in CRISIS, QUARRELS or P",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2s-famine-metropolis-0",
+"in_the_record": [
+"Disputed Land"
+],
+"text": "Something of value was found on the disputed land, which is why the claim is suddenly being pressed (Disputed Land)",
+"why": "hook tagged Disputed Land; the town has no land dispute in CRISIS, QUARRELS or PAST"
+},
+{
+"packet": "crisis-03",
+"id": "03127",
+"rwhy": "hook tagged Disputed Land over forged evidence; the town has no land dispute in ",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2s-famine-metropolis-0",
+"in_the_record": [
+"Disputed Land"
+],
+"text": "A forged document is about to be introduced as evidence; someone knows it's fake (Disputed Land)",
+"why": "hook tagged Disputed Land over forged evidence; the town has no land dispute in CRISIS, QUARRELS or PAST"
+},
+{
+"packet": "crisis-03",
+"id": "07439",
+"rwhy": "a Crime Wave that overwhelmed authorities and formed vigilantes; CRISIS is Occup",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2r-thorp-40",
+"in_the_record": [
+"Crime Wave"
+],
+"text": "Crime Wave: A surge in criminal activity overwhelmed the authorities; vigilantes began to form",
+"why": "a Crime Wave that overwhelmed authorities and formed vigilantes; CRISIS is Occupation only, PAST records none, no authorities or vigilantes exist"
+},
+{
+"packet": "crisis-03",
+"id": "24318",
+"rwhy": "hook tagged Crime Wave; the town has no crime wave in CRISIS or PAST and no vigi",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2r-thorp-40",
+"in_the_record": [
+"Crime Wave"
+],
+"text": "Someone is directing it to create a pretext (Crime Wave)",
+"why": "hook tagged Crime Wave; the town has no crime wave in CRISIS or PAST and no vigilantes or authorities"
+},
+{
+"packet": "crisis-03",
+"id": "24255",
+"rwhy": "hook tagged Resource Scarcity: FOOD band is secure (gap 2%, grown 95%), CRISIS i",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2s-occupied-thorp-3",
+"in_the_record": [
+"Resource Scarcity"
+],
+"text": "Someone destroyed the competing supply route. (Resource Scarcity)",
+"why": "hook tagged Resource Scarcity: FOOD band is secure (gap 2%, grown 95%), CRISIS is Occupation only; no competing supply route (road trade, imports salt only)"
+},
+{
+"packet": "crisis-03",
+"id": "07353",
+"rwhy": "presents a Corruption Scandal as a power/stress; CRISIS is Occupation only, QUAR",
+"sev": "HIGH",
+"kind": "LACKS",
+"town": "r2s-occupied-hamlet-2",
+"in_the_record": [
+"Corruption Scandal"
+],
+"text": "Corruption Scandal: Evidence of official corruption has surfaced but powerful figures resist investigation",
+"why": "presents a Corruption Scandal as a power/stress; CRISIS is Occupation only, QUARRELS none, PAST records no scandal, GOVERNMENT lists none"
+},
+{
+"packet": "crisis-03",
+"id": "27026",
+"rwhy": "hook tagged Corruption Scandal the town does not have: CRISIS Occupation only, P",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2s-occupied-hamlet-2",
+"in_the_record": [
+"Corruption Scandal"
+],
+"text": "The investigator who uncovered the corruption has received a death threat (Corruption Scandal)",
+"why": "hook tagged Corruption Scandal the town does not have: CRISIS Occupation only, PAST and QUARRELS record none"
+},
+{
+"packet": "crisis-03",
+"id": "03260",
+"rwhy": "hook tagged Corruption Scandal the town does not have: CRISIS Occupation only, P",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2s-occupied-hamlet-2",
+"in_the_record": [
+"Corruption Scandal"
+],
+"text": "A key witness can be found, but won't speak without protection (Corruption Scandal)",
+"why": "hook tagged Corruption Scandal the town does not have: CRISIS Occupation only, PAST and QUARRELS record none"
+},
+{
+"packet": "crisis-03",
+"id": "26437",
+"rwhy": "hook tagged Corruption Scandal the town does not have: CRISIS Occupation only, P",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2s-occupied-hamlet-2",
+"in_the_record": [
+"Corruption Scandal"
+],
+"text": "The corruption goes higher than anyone yet suspects; the reformers are being used (Corruption Scandal)",
+"why": "hook tagged Corruption Scandal the town does not have: CRISIS Occupation only, PAST and QUARRELS record none"
+},
+{
+"packet": "crisis-03",
+"id": "11762",
+"rwhy": "records a Guild Conflict among rival guilds; PAST and QUARRELS have none (QUARRE",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2s-occupied-town-1",
+"in_the_record": [
+"Guild Conflict"
+],
+"text": "Guild Conflict: Rival guilds fought over who may sell what, and over a say in how the place is run",
+"why": "records a Guild Conflict among rival guilds; PAST and QUARRELS have none (QUARRELS is oligarchy vs Religious Authorities; PAST has no guild war)"
+},
+{
+"packet": "crisis-03",
+"id": "03200",
+"rwhy": "hook tagged Guild Conflict; PAST and QUARRELS record no guild conflict",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2s-occupied-town-1",
+"in_the_record": [
+"Guild Conflict"
+],
+"text": "A guild master's records have gone missing ahead of an audit (Guild Conflict)",
+"why": "hook tagged Guild Conflict; PAST and QUARRELS record no guild conflict"
+},
+{
+"packet": "crisis-03",
+"id": "03258",
+"rwhy": "hook tagged Guild Conflict; PAST and QUARRELS record no guild conflict",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2s-occupied-town-1",
+"in_the_record": [
+"Guild Conflict"
+],
+"text": "A journeyman denied mastership has proof the exam was rigged (Guild Conflict)",
+"why": "hook tagged Guild Conflict; PAST and QUARRELS record no guild conflict"
+},
+{
+"packet": "crisis-03",
+"id": "15945",
+"rwhy": "presents a Magical Controversy as a power/stress that split the community; CRISI",
+"sev": "HIGH",
+"kind": "LACKS",
+"town": "r2s-occupied-town-3",
+"in_the_record": [
+"Magical Controversy"
+],
+"text": "Magical Controversy: Debate over the role and regulation of magic divided the community",
+"why": "presents a Magical Controversy as a power/stress that split the community; CRISIS is Occupation only, PAST and QUARRELS record no magic dispute"
+},
+{
+"packet": "crisis-03",
+"id": "03662",
+"rwhy": "hook tagged Magical Controversy; PAST and QUARRELS record no magic dispute, CRIS",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2s-occupied-town-3",
+"in_the_record": [
+"Magical Controversy"
+],
+"text": "A recent magical accident was covered up and the victims silenced (Magical Controversy)",
+"why": "hook tagged Magical Controversy; PAST and QUARRELS record no magic dispute, CRISIS is Occupation only"
+},
+{
+"packet": "crisis-03",
+"id": "04443",
+"rwhy": "hook tagged Magical Controversy; PAST and QUARRELS record no magic dispute",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2s-occupied-town-3",
+"in_the_record": [
+"Magical Controversy"
+],
+"text": "An anti-magic agitator is secretly using magic themselves (Magical Controversy)",
+"why": "hook tagged Magical Controversy; PAST and QUARRELS record no magic dispute"
+},
+{
+"packet": "crisis-03",
+"id": "24428",
+"rwhy": "hook tagged Magical Controversy; PAST and QUARRELS record no magic dispute",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2s-occupied-town-3",
+"in_the_record": [
+"Magical Controversy"
+],
+"text": "Something was sealed away using magic years ago and the seal is weakening (Magical Controversy)",
+"why": "hook tagged Magical Controversy; PAST and QUARRELS record no magic dispute"
+},
+{
+"packet": "crisis-03",
+"id": "03192",
+"rwhy": "hook tagged Crime Wave; no crime wave in CRISIS, PAST or QUARRELS, no criminal-n",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2s-occupied-town-3",
+"in_the_record": [
+"Crime Wave"
+],
+"text": "A guard captain is on the payroll of the criminal network (Crime Wave)",
+"why": "hook tagged Crime Wave; no crime wave in CRISIS, PAST or QUARRELS, no criminal-network power in GOVERNMENT"
+},
+{
+"packet": "crisis-03",
+"id": "28252",
+"rwhy": "hook tagged Resource Conflict with timber carts stopped; no resource conflict in",
+"sev": "LOW",
+"kind": "LACKS",
+"town": "r2s-occupied-city-0",
+"in_the_record": [
+"Resource Conflict"
+],
+"text": "The timber carts stopped coming a month ago, and the builders are bidding against each other for what is left in the yards. (Resource Conflict)",
+"why": "hook tagged Resource Conflict with timber carts stopped; no resource conflict in CRISIS (Occupation only), PAST or QUARRELS"
+},
+{
+"packet": "crisis-03",
+"id": "16716",
+"rwhy": "says merchant guilds are a force in politics; GOVERNMENT lists no Merchant Guild",
+"sev": "LOW",
+"kind": "STATE",
+"town": "r2s-occupied-city-0",
+"in_the_record": [
+"Merchant"
+],
+"text": "Merchant guilds: A force to be reckoned with in politics.",
+"why": "says merchant guilds are a force in politics; GOVERNMENT lists no Merchant Guilds power"
+},
+{
+"packet": "crisis-03",
+"id": "28352",
+"rwhy": "hook tagged Tyranny with a tyrant's records; no tyrant or tyranny in CRISIS (Occ",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2s-occupied-city-1",
+"in_the_record": [
+"Tyranny"
+],
+"text": "The tyrant's private records survived, and they implicate respectable families in the worst of it (Tyranny)",
+"why": "hook tagged Tyranny with a tyrant's records; no tyrant or tyranny in CRISIS (Occupation only), GOVERNMENT or PAST"
+},
+{
+"packet": "crisis-03",
+"id": "03149",
+"rwhy": "hook tagged Tyranny about a confiscating regime; no tyranny in CRISIS (Occupatio",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2s-occupied-city-1",
+"in_the_record": [
+"Tyranny"
+],
+"text": "A fortune the regime confiscated was never returned, and the rightful heirs have surfaced (Tyranny)",
+"why": "hook tagged Tyranny about a confiscating regime; no tyranny in CRISIS (Occupation only), GOVERNMENT or PAST"
+},
+{
+"packet": "crisis-03",
+"id": "24316",
+"rwhy": "hook tagged Tyranny about rehabilitating a tyrant; no tyranny in CRISIS (Occupat",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2s-occupied-city-1",
+"in_the_record": [
+"Tyranny"
+],
+"text": "Someone is deliberately rehabilitating the tyrant’s reputation, and profiting from it (Tyranny)",
+"why": "hook tagged Tyranny about rehabilitating a tyrant; no tyranny in CRISIS (Occupation only), GOVERNMENT or PAST"
+},
+{
+"packet": "crisis-04",
+"id": "27566",
+"rwhy": "hook cites a plague pit from 'Plague Years'; PAST records no plague",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-occupied-metropolis-1",
+"in_the_record": [
+"Plague Years"
+],
+"text": "The plague pit holds a body that matches no one on the list of the dead (Plague Years)",
+"why": "hook cites a plague pit from 'Plague Years'; PAST records no plague"
+},
+{
+"packet": "crisis-04",
+"id": "27659",
+"rwhy": "hook cites a quarantine from 'Plague Years'; PAST records no plague or quarantin",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-occupied-metropolis-1",
+"in_the_record": [
+"Plague Years"
+],
+"text": "The quarantine was used to settle old scores, and the survivors remember exactly who (Plague Years)",
+"why": "hook cites a quarantine from 'Plague Years'; PAST records no plague or quarantine"
+},
+{
+"packet": "crisis-04",
+"id": "16960",
+"rwhy": "names factions Military/Guard vs Vigilantes vs criminal network; QUARRELS has on",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-occupied-metropolis-0",
+"in_the_record": [
+"Guard",
+"Military",
+"Vigilantes"
+],
+"text": "Military/Guard / Vigilantes / the criminal network",
+"why": "names factions Military/Guard vs Vigilantes vs criminal network; QUARRELS has only Consortium vs Craft Guilds; Resistance Network not named"
+},
+{
+"packet": "crisis-04",
+"id": "21312",
+"rwhy": "Parties Military/Guard vs Vigilantes vs criminal network: not in QUARRELS (Conso",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-occupied-metropolis-0",
+"in_the_record": [
+"Guard",
+"Military",
+"Parties",
+"Vigilantes"
+],
+"text": "Parties: Military/Guard vs Vigilantes vs the criminal network",
+"why": "Parties Military/Guard vs Vigilantes vs criminal network: not in QUARRELS (Consortium vs Craft Guilds only); Military/Guard is Suppressed"
+},
+{
+"packet": "crisis-04",
+"id": "29432",
+"rwhy": "describes a 'Trade Dispute' with a partner settlement that touched every merchan",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-occupied-metropolis-0",
+"in_the_record": [
+"Trade Dispute"
+],
+"text": "Trade Dispute: A dispute over the terms of trade with a partner settlement soured into something that touched every merchant and every purse in town",
+"why": "describes a 'Trade Dispute' with a partner settlement that touched every merchant; PAST records no such event"
+},
+{
+"packet": "crisis-04",
+"id": "21304",
+"rwhy": "Parties over an old trade partner; no such dispute in PAST or QUARRELS",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-occupied-metropolis-0",
+"in_the_record": [
+"Parties"
+],
+"text": "Parties: Merchants tied to the old partner vs Those who want new partners vs Authorities caught between them",
+"why": "Parties over an old trade partner; no such dispute in PAST or QUARRELS"
+},
+{
+"packet": "crisis-04",
+"id": "21835",
+"rwhy": "names parties Prepare for war / Seek diplomacy / Flee/hide over an external thre",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-occupied-metropolis-3",
+"in_the_record": [
+"Prepare",
+"Seek diplomacy"
+],
+"text": "Prepare for war / Seek diplomacy / Flee/hide",
+"why": "names parties Prepare for war / Seek diplomacy / Flee/hide over an external threat; PAST and QUARRELS record none, and the occupation is already here"
+},
+{
+"packet": "crisis-04",
+"id": "21317",
+"rwhy": "Parties: Prepare for war vs Seek diplomacy vs Flee/hide; no external threat in P",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-occupied-metropolis-3",
+"in_the_record": [
+"Parties",
+"Prepare",
+"Seek diplomacy"
+],
+"text": "Parties: Prepare for war vs Seek diplomacy vs Flee/hide",
+"why": "Parties: Prepare for war vs Seek diplomacy vs Flee/hide; no external threat in PAST or QUARRELS; occupier already rules"
+},
+{
+"packet": "crisis-04",
+"id": "28243",
+"rwhy": "hook about an exaggerated external threat and wartime contracts; no External Thr",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-occupied-metropolis-3",
+"in_the_record": [
+"External Threat"
+],
+"text": "The threat is being exaggerated by someone who profits from wartime contracts (External Threat)",
+"why": "hook about an exaggerated external threat and wartime contracts; no External Threat in PAST; CRISIS is occupation"
+},
+{
+"packet": "crisis-04",
+"id": "28237",
+"rwhy": "hook says a threat has an agent inside; no External Threat recorded in PAST or Q",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-occupied-metropolis-3",
+"in_the_record": [
+"External Threat"
+],
+"text": "The threat has an agent already inside the settlement (External Threat)",
+"why": "hook says a threat has an agent inside; no External Threat recorded in PAST or QUARRELS"
+},
+{
+"packet": "crisis-04",
+"id": "22686",
+"rwhy": "describes a Resource Scarcity event of hoarding and price gouging; PAST has only",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-plague_onset-hamlet-2",
+"in_the_record": [
+"Resource Scarcity"
+],
+"text": "Resource Scarcity: A critical resource became scarce, causing hoarding and price gouging",
+"why": "describes a Resource Scarcity event of hoarding and price gouging; PAST has only Siege, Succession Crisis, Purge"
+},
+{
+"packet": "crisis-04",
+"id": "03890",
+"rwhy": "hook about scarce goods kept off the market (Resource Scarcity); PAST records on",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-plague_onset-hamlet-1",
+"in_the_record": [
+"Resource Scarcity"
+],
+"text": "A store of the scarce goods is being kept off the market on purpose (Resource Scarcity)",
+"why": "hook about scarce goods kept off the market (Resource Scarcity); PAST records only a Siege, no scarcity event"
+},
+{
+"packet": "crisis-04",
+"id": "07353",
+"rwhy": "Corruption Scandal described as a live event; PAST records only The Pilgrimage, ",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-plague_onset-village-1",
+"in_the_record": [
+"Corruption Scandal"
+],
+"text": "Corruption Scandal: Evidence of official corruption has surfaced but powerful figures resist investigation",
+"why": "Corruption Scandal described as a live event; PAST records only The Pilgrimage, QUARRELS none"
+},
+{
+"packet": "crisis-04",
+"id": "08654",
+"rwhy": "factions Reformers and Complicit beneficiaries named; PAST has only a Pilgrimage",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-plague_onset-village-1",
+"in_the_record": [
+"Complicit beneficiaries",
+"Reformers"
+],
+"text": "Elder Council / Reformers / Complicit beneficiaries",
+"why": "factions Reformers and Complicit beneficiaries named; PAST has only a Pilgrimage, QUARRELS none"
+},
+{
+"packet": "crisis-04",
+"id": "03512",
+"rwhy": "merchant funding reform movement and its suppression (Economic Disparity); PAST ",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-plague_onset-town-3",
+"in_the_record": [
+"Economic Disparity"
+],
+"text": "A merchant is funding both the reform movement and the suppression of it (Economic Disparity)",
+"why": "merchant funding reform movement and its suppression (Economic Disparity); PAST records no such event, QUARRELS none"
+},
+{
+"packet": "crisis-04",
+"id": "08603",
+"rwhy": "Economic Disparity event described; PAST has only Arcane Incident, Purge, Siege",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-plague_onset-town-3",
+"in_the_record": [
+"Economic Disparity"
+],
+"text": "Economic Disparity: The merchants are getting richer and the labourers are not, and the labourers have noticed",
+"why": "Economic Disparity event described; PAST has only Arcane Incident, Purge, Siege"
+},
+{
+"packet": "crisis-04",
+"id": "07439",
+"rwhy": "Crime Wave event overwhelming the authorities; PAST records no crime wave, QUARR",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-plague_onset-town-1",
+"in_the_record": [
+"Crime Wave"
+],
+"text": "Crime Wave: A surge in criminal activity overwhelmed the authorities; vigilantes began to form",
+"why": "Crime Wave event overwhelming the authorities; PAST records no crime wave, QUARRELS none"
+},
+{
+"packet": "crisis-04",
+"id": "29792",
+"rwhy": "names Vigilantes vs the criminal network; QUARRELS is Corrupt Council vs Quarant",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-plague_onset-town-1",
+"in_the_record": [
+"Vigilantes"
+],
+"text": "Vigilantes / the criminal network",
+"why": "names Vigilantes vs the criminal network; QUARRELS is Corrupt Council vs Quarantine Council, no vigilantes or crime wave in PAST"
+},
+{
+"packet": "crisis-04",
+"id": "21343",
+"rwhy": "Parties: Vigilantes vs the criminal network; QUARRELS and PAST record no such pa",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-plague_onset-town-1",
+"in_the_record": [
+"Parties",
+"Vigilantes"
+],
+"text": "Parties: Vigilantes vs the criminal network",
+"why": "Parties: Vigilantes vs the criminal network; QUARRELS and PAST record no such parties or crime wave"
+},
+{
+"packet": "crisis-04",
+"id": "03192",
+"rwhy": "hook about a guard captain on the criminal network's payroll under a Crime Wave;",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-plague_onset-town-1",
+"in_the_record": [
+"Crime Wave"
+],
+"text": "A guard captain is on the payroll of the criminal network (Crime Wave)",
+"why": "hook about a guard captain on the criminal network's payroll under a Crime Wave; PAST has none"
+},
+{
+"packet": "crisis-04",
+"id": "00060",
+"rwhy": "Trade Monopoly hook: one importer brings in all the grain at quadrupled price; P",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-plague_onset-town-1",
+"in_the_record": [
+"Trade Monopoly"
+],
+"text": "One importer now brings in all the grain and has quadrupled the price; the locals are arguing over whether to pay, find another supplier, or take the grain. (Trade Monopoly)",
+"why": "Trade Monopoly hook: one importer brings in all the grain at quadrupled price; PAST has no such event, HOUSES has a granary and mills"
+},
+{
+"packet": "crisis-04",
+"id": "03939",
+"rwhy": "River Control hook: grain shipments stuck by an upstream dam; PAST records no su",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-plague_onset-town-1",
+"in_the_record": [
+"River Control"
+],
+"text": "A town upstream has dammed the river or turned it: the water is low here, the grain shipments are stuck, and the town must choose between talking and fighting. (River Control)",
+"why": "River Control hook: grain shipments stuck by an upstream dam; PAST records no such event"
+},
+{
+"packet": "crisis-04",
+"id": "31505",
+"rwhy": "'Strategic Resource' work slowdown hook; PAST records no such event and LAND has",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-plague_onset-town-1",
+"in_the_record": [
+"Strategic Resource"
+],
+"text": "Work slows, and people are starting to complain. (Strategic Resource)",
+"why": "'Strategic Resource' work slowdown hook; PAST records no such event and LAND has no strategic resource shortfall"
+},
+{
+"packet": "crisis-05",
+"id": "21317",
+"rwhy": "war/diplomacy/flee parties imply an external threat; CRISIS is plague only, QUAR",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-plague_onset-town-0",
+"in_the_record": [
+"Flee/hide"
+],
+"text": "Parties: Prepare for war vs Seek diplomacy vs Flee/hide",
+"why": "war/diplomacy/flee parties imply an external threat; CRISIS is plague only, QUARRELS none; also slash-joined label 'Flee/hide'"
+},
+{
+"packet": "crisis-05",
+"id": "03053",
+"rwhy": "a war party and a diplomatic channel over an External Threat; CRISIS is Plague, ",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-plague_onset-town-0",
+"in_the_record": [
+"External Threat"
+],
+"text": "A diplomatic channel exists that the war party is suppressing (External Threat)",
+"why": "a war party and a diplomatic channel over an External Threat; CRISIS is Plague, no external threat in header"
+},
+{
+"packet": "crisis-05",
+"id": "04472",
+"rwhy": "hook about an experiment gone wrong (Wild Magic); no wild-magic event in header ",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-plague_onset-town-2",
+"in_the_record": [
+"Wild Magic"
+],
+"text": "An experiment went wrong, and the notes were hidden, not destroyed (Wild Magic)",
+"why": "hook about an experiment gone wrong (Wild Magic); no wild-magic event in header or PAST, CRISIS is Plague"
+},
+{
+"packet": "crisis-05",
+"id": "03422",
+"rwhy": "informers on the rebels (Popular Uprising): PAST records no uprising",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-plague_onset-city-3",
+"in_the_record": [
+"Popular Uprising"
+],
+"text": "A list of everyone who informed on the rebels survived, and it names people still in office (Popular Uprising)",
+"why": "informers on the rebels (Popular Uprising): PAST records no uprising"
+},
+{
+"packet": "crisis-05",
+"id": "21681",
+"rwhy": "Popular Uprising over guild recognition: no such event in PAST (Purge, Successio",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-plague_onset-city-3",
+"in_the_record": [
+"Popular Uprising"
+],
+"text": "Popular Uprising: The common people rose against the ruling powers over guild recognition and fair wages, and the settlement has never entirely closed the account",
+"why": "Popular Uprising over guild recognition: no such event in PAST (Purge, Succession Crisis, Pilgrimage)"
+},
+{
+"packet": "crisis-05",
+"id": "16723",
+"rwhy": "Merchant guilds called a powerful political force; GOVERNMENT powers list no Mer",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-plague_onset-city-3",
+"in_the_record": [
+"Merchant guilds"
+],
+"text": "Merchant guilds: Powerful political force.",
+"why": "Merchant guilds called a powerful political force; GOVERNMENT powers list no Merchant Guilds (Religious Authorities, Council, Thieves' Guild, Devout Circle, Hidden Hand)"
+},
+{
+"packet": "crisis-05",
+"id": "21312",
+"rwhy": "parties Military/Guard vs Vigilantes vs criminal network: no such conflict in QU",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-plague_onset-city-0",
+"in_the_record": [
+"Guard",
+"Military",
+"Vigilantes"
+],
+"text": "Parties: Military/Guard vs Vigilantes vs the criminal network",
+"why": "parties Military/Guard vs Vigilantes vs criminal network: no such conflict in QUARRELS or CRISIS (Plague); Military/Guard is Suppressed"
+},
+{
+"packet": "crisis-05",
+"id": "27438",
+"rwhy": "old property boundaries washed away (Great Flood): PAST records no flood",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-plague_onset-city-0",
+"in_the_record": [
+"Great Flood"
+],
+"text": "The old property boundaries washed away, and the new map favours whoever drew it (Great Flood)",
+"why": "old property boundaries washed away (Great Flood): PAST records no flood"
+},
+{
+"packet": "crisis-05",
+"id": "03899",
+"rwhy": "a structure meant to hold back the water left to rot (Great Flood): PAST records",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-plague_onset-city-0",
+"in_the_record": [
+"Great Flood"
+],
+"text": "A structure meant to hold back the water had been quietly left to rot, and someone knew (Great Flood)",
+"why": "a structure meant to hold back the water left to rot (Great Flood): PAST records no flood"
+},
+{
+"packet": "crisis-05",
+"id": "11673",
+"rwhy": "Great Flood reshaped the riverside quarter: PAST lists no flood (Heresy Trials, ",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-plague_onset-city-0",
+"in_the_record": [
+"Great Flood"
+],
+"text": "Great Flood: Waters rose with little warning and reshaped the riverside quarter, drowning livelihoods and redrawing who owned what",
+"why": "Great Flood reshaped the riverside quarter: PAST lists no flood (Heresy Trials, Siege, Religious Conflict, Succession, Purge, Occupation, Economic Divide, Migration)"
+},
+{
+"packet": "crisis-05",
+"id": "22272",
+"rwhy": "Quarrymen's guild with civic influence: no such guild on HOUSES or among GOVERNM",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2s-plague_onset-city-1",
+"in_the_record": [
+"Quarrymen"
+],
+"text": "Quarrymen's guild retains unusual civic influence",
+"why": "Quarrymen's guild with civic influence: no such guild on HOUSES or among GOVERNMENT powers"
+},
+{
+"packet": "crisis-05",
+"id": "03200",
+"rwhy": "hook on a Guild Conflict: PAST has no guild war, QUARRELS no guild conflict; CRI",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-plague_onset-city-1",
+"in_the_record": [
+"Guild Conflict"
+],
+"text": "A guild master's records have gone missing ahead of an audit (Guild Conflict)",
+"why": "hook on a Guild Conflict: PAST has no guild war, QUARRELS no guild conflict; CRISIS is Plague"
+},
+{
+"packet": "crisis-05",
+"id": "03258",
+"rwhy": "hook on a rigged mastership exam in a Guild Conflict: none in PAST or QUARRELS",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-plague_onset-city-1",
+"in_the_record": [
+"Guild Conflict"
+],
+"text": "A journeyman denied mastership has proof the exam was rigged (Guild Conflict)",
+"why": "hook on a rigged mastership exam in a Guild Conflict: none in PAST or QUARRELS"
+},
+{
+"packet": "crisis-05",
+"id": "27358",
+"rwhy": "newcomers who fled something (Population Friction): PAST records no migration or",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-plague_onset-city-1",
+"in_the_record": [
+"Population Friction"
+],
+"text": "The newcomers fled something, and that something has sent agents after them (Population Friction)",
+"why": "newcomers who fled something (Population Friction): PAST records no migration or friction"
+},
+{
+"packet": "crisis-05",
+"id": "03768",
+"rwhy": "accidents targeting newcomers (Population Friction): PAST records no such fricti",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-plague_onset-city-1",
+"in_the_record": [
+"Population Friction"
+],
+"text": "A series of 'accidents' targeting newcomers is being attributed to chance (Population Friction)",
+"why": "accidents targeting newcomers (Population Friction): PAST records no such friction"
+},
+{
+"packet": "crisis-05",
+"id": "04518",
+"rwhy": "old family inflaming tensions against a newcomer: no Population Friction in PAST",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-plague_onset-city-1",
+"in_the_record": [
+"Population Friction"
+],
+"text": "An old family is deliberately inflaming tensions to drive out a newcomer who knows something (Population Friction)",
+"why": "old family inflaming tensions against a newcomer: no Population Friction in PAST or QUARRELS"
+},
+{
+"packet": "crisis-05",
+"id": "11762",
+"rwhy": "Guild Conflict history entry: PAST lists no guild war or conflict (Succession, C",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-plague_onset-city-1",
+"in_the_record": [
+"Guild Conflict"
+],
+"text": "Guild Conflict: Rival guilds fought over who may sell what, and over a say in how the place is run",
+"why": "Guild Conflict history entry: PAST lists no guild war or conflict (Succession, Crash, Great Construction, Purge, Wild Magic, Siege, Religious Conflict)"
+},
+{
+"packet": "crisis-05",
+"id": "21685",
+"rwhy": "Population Friction history entry: PAST lists no migration or friction event",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-plague_onset-city-1",
+"in_the_record": [
+"Population Friction"
+],
+"text": "Population Friction: A recently arrived group and the established population fell into sustained, low-level conflict",
+"why": "Population Friction history entry: PAST lists no migration or friction event"
+},
+{
+"packet": "main-01",
+"id": "21089",
+"rwhy": "'Outside Debt' tension of three factions; CRISIS lists only the siege; thorp of ",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-under_siege-thorp-1",
+"in_the_record": [
+"Outside Debt"
+],
+"text": "Outside Debt",
+"why": "'Outside Debt' tension of three factions; CRISIS lists only the siege; thorp of 16 with one named person"
+},
+{
+"packet": "main-01",
+"id": "26389",
+"rwhy": "Heresy Trial hook; PAST records only the Pilgrimage and the Purge, no heresy tri",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-occupied-thorp-2",
+"in_the_record": [
+"Heresy Trial"
+],
+"text": "The condemned doctrine is quietly practised still, by more of the thorp's leaders than would admit it (Heresy Trial)",
+"why": "Heresy Trial hook; PAST records only the Pilgrimage and the Purge, no heresy trial"
+},
+{
+"packet": "main-01",
+"id": "12223",
+"rwhy": "Heresy Trial named as a tension; PAST records no heresy trial",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-occupied-thorp-2",
+"in_the_record": [
+"Heresy Trial"
+],
+"text": "Heresy Trial: An accusation of heresy against a prominent figure split the faithful and drew in the secular authorities on both sides",
+"why": "Heresy Trial named as a tension; PAST records no heresy trial"
+},
+{
+"packet": "main-01",
+"id": "31194",
+"rwhy": "Wild Magic surge named as a tension; PAST records only The Shortage and The Migr",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-occupied-thorp-0",
+"in_the_record": [
+"Wild Magic"
+],
+"text": "Wild Magic: An uncontrolled surge of magic left its mark on the houses nearest the river and on the people who were there, and the effects have never fully faded",
+"why": "Wild Magic surge named as a tension; PAST records only The Shortage and The Migration"
+},
+{
+"packet": "main-01",
+"id": "04472",
+"rwhy": "Wild Magic experiment hook; PAST records no wild-magic event",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-occupied-thorp-0",
+"in_the_record": [
+"Wild Magic"
+],
+"text": "An experiment went wrong, and the notes were hidden, not destroyed (Wild Magic)",
+"why": "Wild Magic experiment hook; PAST records no wild-magic event"
+},
+{
+"packet": "main-01",
+"id": "22595",
+"rwhy": "Religious Tension named; PAST records only the Purge, Debt Crisis and Succession",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-infiltrated-thorp-3",
+"in_the_record": [
+"Religious Tension"
+],
+"text": "Religious Tension: Different faiths or interpretations competed for influence and converts",
+"why": "Religious Tension named; PAST records only the Purge, Debt Crisis and Succession Crisis, CRISIS is Infiltrated"
+},
+{
+"packet": "main-01",
+"id": "03680",
+"rwhy": "relic claimed by both sides (Religious Tension); no religious event in PAST, no ",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-infiltrated-thorp-3",
+"in_the_record": [
+"Religious Tension"
+],
+"text": "A relic claimed by both sides has resurfaced in a private collection (Religious Tension)",
+"why": "relic claimed by both sides (Religious Tension); no religious event in PAST, no church in HOUSES"
+},
+{
+"packet": "main-01",
+"id": "27808",
+"rwhy": "reformist leader blackmailed (Religious Tension); no religious event in PAST, th",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-infiltrated-thorp-3",
+"in_the_record": [
+"Religious Tension"
+],
+"text": "The reformist leader is being blackmailed into silence (Religious Tension)",
+"why": "reformist leader blackmailed (Religious Tension); no religious event in PAST, thorp of 6 with one named person"
+},
+{
+"packet": "main-01",
+"id": "24350",
+"rwhy": "staged miracles for one side (Religious Tension); no religious event in PAST, no",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-infiltrated-thorp-3",
+"in_the_record": [
+"Religious Tension"
+],
+"text": "Someone is staging miracles for one side, and whoever is paying for them has not been named (Religious Tension)",
+"why": "staged miracles for one side (Religious Tension); no religious event in PAST, no church in HOUSES"
+},
+{
+"packet": "main-02",
+"id": "08654",
+"rwhy": "names Reformers and Complicit beneficiaries as parties; GOVERNMENT lists only El",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2r-thorp-51",
+"in_the_record": [
+"Complicit beneficiaries",
+"Elder Council",
+"Reformers"
+],
+"text": "Elder Council / Reformers / Complicit beneficiaries",
+"why": "names Reformers and Complicit beneficiaries as parties; GOVERNMENT lists only Elder Council, roster has one person"
+},
+{
+"packet": "main-02",
+"id": "21269",
+"rwhy": "Reformers and Complicit beneficiaries as parties vs Elder Council; GOVERNMENT li",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2r-thorp-51",
+"in_the_record": [
+"Complicit beneficiaries",
+"Elder Council",
+"Reformers"
+],
+"text": "Parties: Elder Council vs Reformers vs Complicit beneficiaries",
+"why": "Reformers and Complicit beneficiaries as parties vs Elder Council; GOVERNMENT lists one power only, population 11, roster of one"
+},
+{
+"packet": "main-02",
+"id": "27026",
+"rwhy": "investigator not on roster of one; Corruption Scandal not in CRISIS (Recently Be",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2r-thorp-51",
+"in_the_record": [
+"Corruption Scandal"
+],
+"text": "The investigator who uncovered the corruption has received a death threat (Corruption Scandal)",
+"why": "investigator not on roster of one; Corruption Scandal not in CRISIS (Recently Betrayed) nor PAST"
+},
+{
+"packet": "main-02",
+"id": "03260",
+"rwhy": "key witness not on roster of one; Corruption Scandal not in CRISIS nor PAST",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2r-thorp-51",
+"in_the_record": [
+"Corruption Scandal"
+],
+"text": "A key witness can be found, but won't speak without protection (Corruption Scandal)",
+"why": "key witness not on roster of one; Corruption Scandal not in CRISIS nor PAST"
+},
+{
+"packet": "main-02",
+"id": "20948",
+"rwhy": "names Old families, Newcomers, Merchants as parties; GOVERNMENT lists Elder Coun",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2s-infiltrated-thorp-0",
+"in_the_record": [
+"Merchants",
+"Newcomers"
+],
+"text": "Old families / Newcomers / Merchants who benefit from cheap newcomer labour",
+"why": "names Old families, Newcomers, Merchants as parties; GOVERNMENT lists Elder Council only; no merchants or market in HOUSES, roster of one"
+},
+{
+"packet": "main-02",
+"id": "21314",
+"rwhy": "parties Old families, Newcomers, Merchants: GOVERNMENT lists only Elder Council;",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2s-infiltrated-thorp-0",
+"in_the_record": [
+"Merchants",
+"Newcomers"
+],
+"text": "Parties: Old families vs Newcomers vs Merchants who benefit from cheap newcomer labour",
+"why": "parties Old families, Newcomers, Merchants: GOVERNMENT lists only Elder Council; no market in HOUSES; population 14"
+},
+{
+"packet": "main-02",
+"id": "21313",
+"rwhy": "parties 'Multiple weak claimants' etc; GOVERNMENT lists two powers only, Indepen",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2s-politically_fractured-thorp-1",
+"in_the_record": [
+"Multiple weak claimants"
+],
+"text": "Parties: Multiple weak claimants vs Pragmatists who want stability vs Those who prefer the vacuum",
+"why": "parties 'Multiple weak claimants' etc; GOVERNMENT lists two powers only, Independent Bloc Dominant, Council Strong"
+},
+{
+"packet": "main-02",
+"id": "01035",
+"rwhy": "names a 'Popular candidate' party; GOVERNMENT lists Household Council only; rost",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2s-succession_void-thorp-2",
+"in_the_record": [
+"Household Council",
+"Popular candidate"
+],
+"text": "Household Council / Popular candidate",
+"why": "names a 'Popular candidate' party; GOVERNMENT lists Household Council only; roster of one"
+},
+{
+"packet": "main-02",
+"id": "08668",
+"rwhy": "Bloc 'pressing close behind' Elder Council; GOVERNMENT has The Independent Bloc ",
+"sev": "LOW",
+"kind": "STATE",
+"town": "r2s-politically_fractured-thorp-0",
+"in_the_record": [
+"Elder Council",
+"Independent"
+],
+"text": "Elder Council governs, with The Independent Bloc pressing close behind.",
+"why": "Bloc 'pressing close behind' Elder Council; GOVERNMENT has The Independent Bloc Dominant, Elder Council only Significant"
+},
+{
+"packet": "main-02",
+"id": "12958",
+"rwhy": "Bloc 'pressing close behind' Household Council; GOVERNMENT has The Independent B",
+"sev": "LOW",
+"kind": "STATE",
+"town": "r2s-politically_fractured-thorp-1",
+"in_the_record": [
+"Household Council",
+"Independent"
+],
+"text": "Household Council governs, with The Independent Bloc pressing close behind.",
+"why": "Bloc 'pressing close behind' Household Council; GOVERNMENT has The Independent Bloc Dominant, Council only Strong"
+},
+{
+"packet": "main-02",
+"id": "12947",
+"rwhy": "names Reformers and Complicit beneficiaries as parties; GOVERNMENT lists Househo",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2s-recently_betrayed-thorp-2",
+"in_the_record": [
+"Complicit beneficiaries",
+"Household Council",
+"Reformers"
+],
+"text": "Household Council / Reformers / Complicit beneficiaries",
+"why": "names Reformers and Complicit beneficiaries as parties; GOVERNMENT lists Household Council only; roster of one, population 13"
+},
+{
+"packet": "main-02",
+"id": "21294",
+"rwhy": "Reformers and Complicit beneficiaries as parties; GOVERNMENT lists one power onl",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2s-recently_betrayed-thorp-2",
+"in_the_record": [
+"Complicit beneficiaries",
+"Reformers"
+],
+"text": "Parties: Household Council vs Reformers vs Complicit beneficiaries",
+"why": "Reformers and Complicit beneficiaries as parties; GOVERNMENT lists one power only, population 13"
+},
+{
+"packet": "main-02",
+"id": "08230",
+"rwhy": "names Displaced traders, Workers, Rivals as parties; GOVERNMENT lists Headman's ",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2r-thorp-26",
+"in_the_record": [
+"Displaced traders",
+"Rivals",
+"Workers"
+],
+"text": "Displaced traders / Workers left without wages / Rivals who profited from the diversion",
+"why": "names Displaced traders, Workers, Rivals as parties; GOVERNMENT lists Headman's Authority only; roster of one, no market"
+},
+{
+"packet": "main-02",
+"id": "21261",
+"rwhy": "parties Displaced traders vs Workers vs Rivals; GOVERNMENT lists Headman's Autho",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2r-thorp-26",
+"in_the_record": [
+"Displaced traders",
+"Rivals",
+"Workers"
+],
+"text": "Parties: Displaced traders vs Workers left without wages vs Rivals who profited from the diversion",
+"why": "parties Displaced traders vs Workers vs Rivals; GOVERNMENT lists Headman's Authority only; population 15"
+},
+{
+"packet": "main-02",
+"id": "27883",
+"rwhy": "route closed hook labelled Trade Collapse; PAST records no trade collapse",
+"sev": "LOW",
+"kind": "STATE",
+"town": "r2r-thorp-26",
+"in_the_record": [
+"Trade Collapse"
+],
+"text": "The route could be reopened, but someone with power prefers it stay closed. (Trade Collapse)",
+"why": "route closed hook labelled Trade Collapse; PAST records no trade collapse"
+},
+{
+"packet": "main-02",
+"id": "04514",
+"rwhy": "contract obliges a partner to trade (Trade Collapse); PAST records no trade coll",
+"sev": "LOW",
+"kind": "STATE",
+"town": "r2r-thorp-26",
+"in_the_record": [
+"Trade Collapse"
+],
+"text": "An old contract still obliges a distant partner to trade here, if anyone can enforce it. (Trade Collapse)",
+"why": "contract obliges a partner to trade (Trade Collapse); PAST records no trade collapse"
+},
+{
+"packet": "main-02",
+"id": "27881",
+"rwhy": "route closed hook labelled Trade Collapse; PAST records no trade collapse",
+"sev": "LOW",
+"kind": "STATE",
+"town": "r2r-thorp-26",
+"in_the_record": [
+"Trade Collapse"
+],
+"text": "The route could be reopened, but someone with power prefers it stay closed (Trade Collapse)",
+"why": "route closed hook labelled Trade Collapse; PAST records no trade collapse"
+},
+{
+"packet": "main-02",
+"id": "04511",
+"rwhy": "contract obliges a partner to trade (Trade Collapse); PAST records no trade coll",
+"sev": "LOW",
+"kind": "STATE",
+"town": "r2r-thorp-26",
+"in_the_record": [
+"Trade Collapse"
+],
+"text": "An old contract still obliges a distant partner to trade here, if anyone can enforce it (Trade Collapse)",
+"why": "contract obliges a partner to trade (Trade Collapse); PAST records no trade collapse"
+},
+{
+"packet": "main-02",
+"id": "22265",
+"rwhy": "plague factions as parties (Quarantine hardliners, Healers); CRISIS none, PAST r",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2r-thorp-14",
+"in_the_record": [
+"Healers",
+"Quarantine hardliners"
+],
+"text": "Quarantine hardliners / The bereaved and the blamed / Healers and charlatans alike",
+"why": "plague factions as parties (Quarantine hardliners, Healers); CRISIS none, PAST records no plague, GOVERNMENT lists Feudal Stewardship only"
+},
+{
+"packet": "main-02",
+"id": "10541",
+"rwhy": "Former rebels/restored order/changed sides as parties; CRISIS none, PAST has no ",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2r-thorp-23",
+"in_the_record": [
+"Former rebels"
+],
+"text": "Former rebels / The restored order / Those who changed sides at the right moment",
+"why": "Former rebels/restored order/changed sides as parties; CRISIS none, PAST has no uprising, GOVERNMENT lists Household Council only"
+},
+{
+"packet": "main-02",
+"id": "21277",
+"rwhy": "parties Former rebels vs The restored order; CRISIS none, PAST has no uprising, ",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2r-thorp-23",
+"in_the_record": [
+"Former rebels"
+],
+"text": "Parties: Former rebels vs The restored order vs Those who changed sides at the right moment",
+"why": "parties Former rebels vs The restored order; CRISIS none, PAST has no uprising, one power only"
+},
+{
+"packet": "main-02",
+"id": "23542",
+"rwhy": "Security hardliners/Civil libertarians/Actual agents as parties; CRISIS none, GO",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2r-thorp-36",
+"in_the_record": [
+"Actual agents",
+"Civil libertarians",
+"Security hardliners"
+],
+"text": "Security hardliners / Civil libertarians / Actual agents exploiting the confusion",
+"why": "Security hardliners/Civil libertarians/Actual agents as parties; CRISIS none, GOVERNMENT lists Elder Council only, population 5, roster of one"
+},
+{
+"packet": "main-02",
+"id": "08229",
+"rwhy": "Displaced families/Landowners/profiteers as parties from a redrawing; CRISIS non",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2r-thorp-37",
+"in_the_record": [
+"Displaced families",
+"Landowners"
+],
+"text": "Displaced families / Landowners pressing newly-convenient claims / Those who profited from the redrawing",
+"why": "Displaced families/Landowners/profiteers as parties from a redrawing; CRISIS none, PAST has no flood, GOVERNMENT one power, population 6"
+},
+{
+"packet": "main-02",
+"id": "21260",
+"rwhy": "parties Displaced families vs Landowners vs Those who profited; CRISIS none, PAS",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2r-thorp-37",
+"in_the_record": [
+"Displaced families",
+"Landowners",
+"Those"
+],
+"text": "Parties: Displaced families vs Landowners pressing newly-convenient claims vs Those who profited from the redrawing",
+"why": "parties Displaced families vs Landowners vs Those who profited; CRISIS none, PAST has no flood, population 6"
+},
+{
+"packet": "main-02",
+"id": "11671",
+"rwhy": "a Great Flood reshaped the low ground; PAST records Pilgrimage, Succession Crisi",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2r-thorp-37",
+"in_the_record": [
+"Great Flood"
+],
+"text": "Great Flood: Waters rose with little warning and reshaped the low ground, drowning livelihoods and redrawing who owned what",
+"why": "a Great Flood reshaped the low ground; PAST records Pilgrimage, Succession Crisis, Migration only"
+},
+{
+"packet": "main-02",
+"id": "25186",
+"rwhy": "fire factions as parties (Survivors, Rebuilders, Those accused); CRISIS none, PA",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2r-thorp-9",
+"in_the_record": [
+"Rebuilders",
+"Survivors",
+"Those accused"
+],
+"text": "Survivors seeking someone to blame / Rebuilders and profiteers / Those accused of setting it",
+"why": "fire factions as parties (Survivors, Rebuilders, Those accused); CRISIS none, PAST records no fire, GOVERNMENT lists one power"
+},
+{
+"packet": "main-02",
+"id": "11663",
+"rwhy": "a Great Fire burned the houses; PAST records only The Uprising 113 years ago",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2r-thorp-9",
+"in_the_record": [
+"Great Fire"
+],
+"text": "Great Fire: A fire that began in the low ground burned through the houses and their outbuildings before it could be checked",
+"why": "a Great Fire burned the houses; PAST records only The Uprising 113 years ago"
+},
+{
+"packet": "main-02",
+"id": "20951",
+"rwhy": "regime factions as parties (Old loyalists, Those who suffered, Beneficiaries); C",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2r-thorp-20",
+"in_the_record": [
+"Beneficiaries",
+"Those"
+],
+"text": "Old loyalists / Those who suffered under the regime / Beneficiaries who kept their gains",
+"why": "regime factions as parties (Old loyalists, Those who suffered, Beneficiaries); CRISIS none, PAST has no tyranny, GOVERNMENT one power"
+},
+{
+"packet": "main-03",
+"id": "21293",
+"rwhy": "names rival party 'Popular candidate' against Household Council; GOVERNMENT list",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2r-thorp-48",
+"in_the_record": [
+"Household Council",
+"Popular candidate"
+],
+"text": "Parties: Household Council vs Popular candidate",
+"why": "names rival party 'Popular candidate' against Household Council; GOVERNMENT lists only Household Council as a power and QUARRELS is none"
+},
+{
+"packet": "main-03",
+"id": "12946",
+"rwhy": "'Popular candidate' is not a power in GOVERNMENT (only Household Council); no qu",
+"sev": "LOW",
+"kind": "STATE",
+"town": "r2r-thorp-48",
+"in_the_record": [
+"Household Council",
+"Popular candidate"
+],
+"text": "Household Council / Popular candidate",
+"why": "'Popular candidate' is not a power in GOVERNMENT (only Household Council); no quarrel or relation recorded"
+},
+{
+"packet": "main-03",
+"id": "14168",
+"rwhy": "states Infiltration Fear caused denunciations here; PAST lists only Religious Co",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2r-thorp-12",
+"in_the_record": [
+"Infiltration Fear"
+],
+"text": "Infiltration Fear: Rumours (some true) of enemy agents within the settlement caused suspicion and denunciations",
+"why": "states Infiltration Fear caused denunciations here; PAST lists only Religious Conflict, Migration, Succession Crisis"
+},
+{
+"packet": "main-03",
+"id": "10617",
+"rwhy": "lists Reformers and Complicit beneficiaries as powers; GOVERNMENT lists only Fre",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2s-occupied-hamlet-2",
+"in_the_record": [
+"Complicit beneficiaries",
+"Free Elder Council",
+"Reformers"
+],
+"text": "Free Elder Council / Reformers / Complicit beneficiaries",
+"why": "lists Reformers and Complicit beneficiaries as powers; GOVERNMENT lists only Free Elder Council and Occupation Authority; QUARRELS none"
+},
+{
+"packet": "main-03",
+"id": "22479",
+"rwhy": "names Reformists and Secular camp as parties; GOVERNMENT lists only Elder Counci",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2s-infiltrated-hamlet-3",
+"in_the_record": [
+"Reformists",
+"Secular camp"
+],
+"text": "Reformists / Secular camp",
+"why": "names Reformists and Secular camp as parties; GOVERNMENT lists only Elder Council as a power, QUARRELS none"
+},
+{
+"packet": "main-03",
+"id": "12111",
+"rwhy": "Headman's Authority 'governs' with the Bloc 'close behind'; GOVERNMENT gives the",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2r-hamlet-35",
+"in_the_record": [
+"Authority",
+"Headman"
+],
+"text": "Headman's Authority governs, with The Independent Bloc pressing close behind.",
+"why": "Headman's Authority 'governs' with the Bloc 'close behind'; GOVERNMENT gives the Bloc Strong over Significant and stability Fractured, no governing authority"
+},
+{
+"packet": "main-04",
+"id": "10621",
+"rwhy": "says Independent Bloc presses 'close behind' Free Elder Council; GOVERNMENT give",
+"sev": "LOW",
+"kind": "STATE",
+"town": "r2s-politically_fractured-hamlet-2",
+"in_the_record": [
+"Free Elder Council",
+"Independent Bloc"
+],
+"text": "Free Elder Council governs, with The Independent Bloc pressing close behind.",
+"why": "says Independent Bloc presses 'close behind' Free Elder Council; GOVERNMENT gives Bloc Significant and the Council only Minor"
+},
+{
+"packet": "main-04",
+"id": "09846",
+"rwhy": "says Revolt Leadership presses 'close behind' Feudal Stewardship; GOVERNMENT giv",
+"sev": "LOW",
+"kind": "STATE",
+"town": "r2s-slave_revolt-hamlet-2",
+"in_the_record": [
+"Feudal Stewardship",
+"Revolt Leadership"
+],
+"text": "Feudal Stewardship governs, with Revolt Leadership pressing close behind.",
+"why": "says Revolt Leadership presses 'close behind' Feudal Stewardship; GOVERNMENT gives Revolt Leadership Strong, Stewardship only Significant"
+},
+{
+"packet": "main-04",
+"id": "09843",
+"rwhy": "says Military Party presses 'close behind' Feudal Stewardship; GOVERNMENT has Mi",
+"sev": "LOW",
+"kind": "STATE",
+"town": "r2s-recently_betrayed-hamlet-0",
+"in_the_record": [
+"Feudal Stewardship",
+"Military Party"
+],
+"text": "Feudal Stewardship governs, with Military Party pressing close behind.",
+"why": "says Military Party presses 'close behind' Feudal Stewardship; GOVERNMENT has Military Party Strong and Stewardship only Minor"
+},
+{
+"packet": "main-04",
+"id": "21275",
+"rwhy": "lists parties as Feudal Stewardship vs Reformers vs Complicit beneficiaries; GOV",
+"sev": "LOW",
+"kind": "STATE",
+"town": "r2s-recently_betrayed-hamlet-0",
+"in_the_record": [
+"Complicit beneficiaries",
+"Feudal Stewardship",
+"Reformers"
+],
+"text": "Parties: Feudal Stewardship vs Reformers vs Complicit beneficiaries",
+"why": "lists parties as Feudal Stewardship vs Reformers vs Complicit beneficiaries; GOVERNMENT powers are Military Party and Feudal Stewardship, no Reformers"
+},
+{
+"packet": "main-04",
+"id": "01244",
+"rwhy": "says Highborn Circle presses 'close behind' Free Elder Council; GOVERNMENT has t",
+"sev": "LOW",
+"kind": "STATE",
+"town": "r2s-succession_void-hamlet-0",
+"in_the_record": [
+"Free Elder Council",
+"Highborn Circle"
+],
+"text": "Free Elder Council governs, with The Highborn Circle pressing close behind.",
+"why": "says Highborn Circle presses 'close behind' Free Elder Council; GOVERNMENT has the Circle Strong, the Council only Significant"
+},
+{
+"packet": "main-04",
+"id": "08653",
+"rwhy": "heads the town with a three-way contest (Elder Council / Popular candidate / mer",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2r-hamlet-31",
+"in_the_record": [
+"Elder Council",
+"Popular candidate"
+],
+"text": "Elder Council / Popular candidate / the merchant class",
+"why": "heads the town with a three-way contest (Elder Council / Popular candidate / merchant class); CRISIS none, one power only, QUARRELS none, stability Stable"
+},
+{
+"packet": "main-04",
+"id": "21268",
+"rwhy": "names 'the merchant class' and a popular candidate as parties; GOVERNMENT lists ",
+"sev": "LOW",
+"kind": "LACKS",
+"town": "r2r-hamlet-31",
+"in_the_record": [
+"Elder Council"
+],
+"text": "Parties: Elder Council vs Popular candidate vs the merchant class",
+"why": "names 'the merchant class' and a popular candidate as parties; GOVERNMENT lists only Elder Council, HOUSES has no trade house, population 27"
+},
+{
+"packet": "main-04",
+"id": "12103",
+"rwhy": "heads the town with a three-way contest (Headman's Authority / Popular candidate",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2r-hamlet-22",
+"in_the_record": [
+"Authority",
+"Headman",
+"Popular candidate"
+],
+"text": "Headman's Authority / Popular candidate / the merchant class",
+"why": "heads the town with a three-way contest (Headman's Authority / Popular candidate / merchant class); CRISIS none, one power only, QUARRELS none, stability Stable"
+},
+{
+"packet": "main-04",
+"id": "21288",
+"rwhy": "names 'the merchant class' and a popular candidate as parties; GOVERNMENT lists ",
+"sev": "LOW",
+"kind": "LACKS",
+"town": "r2r-hamlet-22",
+"in_the_record": [
+"Authority",
+"Headman"
+],
+"text": "Parties: Headman's Authority vs Popular candidate vs the merchant class",
+"why": "names 'the merchant class' and a popular candidate as parties; GOVERNMENT lists only Headman's Authority, HOUSES has no trade house"
+},
+{
+"packet": "main-04",
+"id": "11662",
+"rwhy": "recounts a Great Fire; PAST records only The Migration",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2r-hamlet-44",
+"in_the_record": [
+"Great Fire"
+],
+"text": "Great Fire: A fire that began in the houses nearest the river burned through the houses and their outbuildings before it could be checked",
+"why": "recounts a Great Fire; PAST records only The Migration"
+},
+{
+"packet": "main-04",
+"id": "10616",
+"rwhy": "heads the town with a contest (Free Elder Council / Popular candidate); CRISIS n",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2r-hamlet-39",
+"in_the_record": [
+"Free Elder Council",
+"Popular candidate"
+],
+"text": "Free Elder Council / Popular candidate",
+"why": "heads the town with a contest (Free Elder Council / Popular candidate); CRISIS none, one power only, QUARRELS none, stability Stable"
+},
+{
+"packet": "main-04",
+"id": "21278",
+"rwhy": "names a Popular candidate as a party against Free Elder Council; GOVERNMENT list",
+"sev": "LOW",
+"kind": "LACKS",
+"town": "r2r-hamlet-39",
+"in_the_record": [
+"Free Elder Council",
+"Popular candidate"
+],
+"text": "Parties: Free Elder Council vs Popular candidate",
+"why": "names a Popular candidate as a party against Free Elder Council; GOVERNMENT lists only the Council"
+},
+{
+"packet": "main-05",
+"id": "21589",
+"rwhy": "Pilgrimage Surge flood of coin and strangers changed town for good; PAST records",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2r-hamlet-6",
+"in_the_record": [
+"Pilgrimage Surge"
+],
+"text": "Pilgrimage Surge: A claimed miracle or relic drew pilgrims in numbers the settlement was never built to hold, and the flood of coin and strangers changed it for good",
+"why": "Pilgrimage Surge flood of coin and strangers changed town for good; PAST records no pilgrimage or miracle, CRISIS none"
+},
+{
+"packet": "main-05",
+"id": "21328",
+"rwhy": "'Temple beneficiaries' party; HOUSES has no temple, only a wayside shrine; the m",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2r-hamlet-6",
+"in_the_record": [
+"Temple beneficiaries"
+],
+"text": "Parties: Temple beneficiaries vs Overwhelmed old residents vs Sceptics who doubt the miracle",
+"why": "'Temple beneficiaries' party; HOUSES has no temple, only a wayside shrine; the miracle/pilgrim dispute is in neither PAST nor QUARRELS"
+},
+{
+"packet": "main-05",
+"id": "21077",
+"rwhy": "'Legal class profiting from ambiguity' in a hamlet of 57; HOUSES has no court, l",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2r-hamlet-8",
+"in_the_record": [
+"Legal class profiting from ambiguity"
+],
+"text": "Original claimants / Current occupants / Legal class profiting from ambiguity",
+"why": "'Legal class profiting from ambiguity' in a hamlet of 57; HOUSES has no court, legal or guild house; QUARRELS none"
+},
+{
+"packet": "main-05",
+"id": "21316",
+"rwhy": "party 'Legal class profiting from ambiguity'; no legal house or office in HOUSES",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2r-hamlet-8",
+"in_the_record": [
+"Legal class profiting from ambiguity"
+],
+"text": "Parties: Original claimants vs Current occupants vs Legal class profiting from ambiguity",
+"why": "party 'Legal class profiting from ambiguity'; no legal house or office in HOUSES/GOVERNMENT; a land dispute is in neither PAST nor QUARRELS"
+},
+{
+"packet": "main-05",
+"id": "08243",
+"rwhy": "presents a live Disputed Land claim between two sides; QUARRELS none and PAST re",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2r-hamlet-8",
+"in_the_record": [
+"Disputed Land"
+],
+"text": "Disputed Land: A land claim from an old charter contradicts current occupation, with both sides legally plausible",
+"why": "presents a live Disputed Land claim between two sides; QUARRELS none and PAST records no land dispute"
+},
+{
+"packet": "main-05",
+"id": "08783",
+"rwhy": "gives Entrepôt Trade a 13% share; CRISIS Under Siege, TRADE exports none, nothin",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2r-village-55",
+"in_the_record": [
+"Trade"
+],
+"text": "Entrepôt Trade: 13%",
+"why": "gives Entrepôt Trade a 13% share; CRISIS Under Siege, TRADE exports none, nothing comes in or goes out"
+},
+{
+"packet": "main-05",
+"id": "21580",
+"rwhy": "gives Pilgrim Trade an 8% share; CRISIS Under Siege, exports none, nothing comes",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-under_siege-village-0",
+"in_the_record": [
+"Pilgrim Trade"
+],
+"text": "Pilgrim Trade: 8%",
+"why": "gives Pilgrim Trade an 8% share; CRISIS Under Siege, exports none, nothing comes in by road"
+},
+{
+"packet": "main-05",
+"id": "08704",
+"rwhy": "reeve works 'under noble oversight'; GOVERNMENT lists only Religious Authorities",
+"sev": "LOW",
+"kind": "STATE",
+"town": "r2s-plague_onset-village-2",
+"in_the_record": [
+"Elected Reeve"
+],
+"text": "Elected Reeve (governing): A reeve elected from the peasantry manages labour and mediates disputes under noble oversight.",
+"why": "reeve works 'under noble oversight'; GOVERNMENT lists only Religious Authorities and Elected Reeve, no noble power"
+},
+{
+"packet": "main-06",
+"id": "21285",
+"rwhy": "names a 'Popular candidate' party; GOVERNMENT powers list only Merchant Guilds a",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2r-village-1",
+"in_the_record": [
+"Authority",
+"Headman",
+"Popular candidate"
+],
+"text": "Parties: Headman's Authority vs Popular candidate",
+"why": "names a 'Popular candidate' party; GOVERNMENT powers list only Merchant Guilds and Headman's Authority, and the Guild War was guilds against guilds"
+},
+{
+"packet": "main-06",
+"id": "12100",
+"rwhy": "'Popular candidate' is not a power in GOVERNMENT (Merchant Guilds, Headman's Aut",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2r-village-1",
+"in_the_record": [
+"Authority",
+"Headman",
+"Popular candidate"
+],
+"text": "Headman's Authority / Popular candidate",
+"why": "'Popular candidate' is not a power in GOVERNMENT (Merchant Guilds, Headman's Authority); crisis is debt, no seat contest"
+},
+{
+"packet": "main-06",
+"id": "21287",
+"rwhy": "'Popular candidate' party is not among GOVERNMENT powers; it also omits The Inde",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2s-infiltrated-village-2",
+"in_the_record": [
+"Popular candidate"
+],
+"text": "Parties: Headman's Authority vs Popular candidate vs Religious Authorities",
+"why": "'Popular candidate' party is not among GOVERNMENT powers; it also omits The Independent Bloc, a listed power"
+},
+{
+"packet": "main-06",
+"id": "29428",
+"rwhy": "describes a Trade Collapse; PAST records only The Migration (20 years ago), and ",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-insurgency-village-0",
+"in_the_record": [
+"Trade Collapse"
+],
+"text": "Trade Collapse: The mountain trade the settlement was built upon failed, and the wealth it once carried drained away within a few hard years",
+"why": "describes a Trade Collapse; PAST records only The Migration (20 years ago), and founding was a mining camp"
+},
+{
+"packet": "main-06",
+"id": "22500",
+"rwhy": "names 'Reformists' and 'Secular camp'; GOVERNMENT powers are only Religious Auth",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2r-village-44",
+"in_the_record": [
+"Reformists",
+"Religious Authorities",
+"Secular camp"
+],
+"text": "Religious Authorities / Reformists / Secular camp",
+"why": "names 'Reformists' and 'Secular camp'; GOVERNMENT powers are only Religious Authorities and Headman's Authority"
+},
+{
+"packet": "main-06",
+"id": "21322",
+"rwhy": "parties 'Reformists' and 'Secular camp' are not in GOVERNMENT, and Headman's Aut",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2r-village-44",
+"in_the_record": [
+"Reformists",
+"Secular camp"
+],
+"text": "Parties: Religious Authorities vs Reformists vs Secular camp",
+"why": "parties 'Reformists' and 'Secular camp' are not in GOVERNMENT, and Headman's Authority is left out"
+},
+{
+"packet": "main-07",
+"id": "22272",
+"rwhy": "'Quarrymen's guild retains civic influence'; GOVERNMENT powers are Elder Council",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2r-village-31",
+"in_the_record": [
+"Quarrymen"
+],
+"text": "Quarrymen's guild retains unusual civic influence",
+"why": "'Quarrymen's guild retains civic influence'; GOVERNMENT powers are Elder Council and Merchant Guilds only; HOUSES has no quarry or guild"
+},
+{
+"packet": "main-07",
+"id": "29432",
+"rwhy": "describes a Trade Dispute with a partner settlement; CRISIS none, QUARRELS names",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2r-village-11",
+"in_the_record": [
+"Trade Dispute"
+],
+"text": "Trade Dispute: A dispute over the terms of trade with a partner settlement soured into something that touched every merchant and every purse in town",
+"why": "describes a Trade Dispute with a partner settlement; CRISIS none, QUARRELS names only a broken promise between two powers, PAST has no trade dispute"
+},
+{
+"packet": "main-07",
+"id": "21304",
+"rwhy": "parties of a dispute with an 'old partner' and 'new partners'; CRISIS none, QUAR",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2r-village-11",
+"in_the_record": [
+"Merchant"
+],
+"text": "Parties: Merchants tied to the old partner vs Those who want new partners vs Authorities caught between them",
+"why": "parties of a dispute with an 'old partner' and 'new partners'; CRISIS none, QUARRELS lists only Headman's Authority vs Merchant Guilds over a broken promise"
+},
+{
+"packet": "main-07",
+"id": "11670",
+"rwhy": "describes a Great Flood that reshaped the houses; PAST records only The Successi",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2r-village-14",
+"in_the_record": [
+"Great Flood"
+],
+"text": "Great Flood: Waters rose with little warning and reshaped the houses nearest the river, drowning livelihoods and redrawing who owned what",
+"why": "describes a Great Flood that reshaped the houses; PAST records only The Succession Crisis, 18 years ago"
+},
+{
+"packet": "main-07",
+"id": "03899",
+"rwhy": "hook about a flood barrier left to rot (Great Flood); PAST records no flood, onl",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2r-village-14",
+"in_the_record": [
+"Great Flood"
+],
+"text": "A structure meant to hold back the water had been quietly left to rot, and someone knew (Great Flood)",
+"why": "hook about a flood barrier left to rot (Great Flood); PAST records no flood, only the Succession Crisis"
+},
+{
+"packet": "main-07",
+"id": "26687",
+"rwhy": "hook says the flood uncovered a foundation (Great Flood); PAST records no flood,",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2r-village-14",
+"in_the_record": [
+"Great Flood"
+],
+"text": "The flood uncovered an old foundation under the mud, and someone has been digging there at night (Great Flood)",
+"why": "hook says the flood uncovered a foundation (Great Flood); PAST records no flood, only the Succession Crisis"
+},
+{
+"packet": "main-07",
+"id": "26140",
+"rwhy": "present-tense hook: ailing ruler to name a successor (Succession Crisis); CRISIS",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2r-village-46",
+"in_the_record": [
+"Succession Crisis"
+],
+"text": "The ailing ruler wants a final errand completed before naming a successor (Succession Crisis)",
+"why": "present-tense hook: ailing ruler to name a successor (Succession Crisis); CRISIS none, stability Ordered, PAST succession crisis was 163 years ago"
+},
+{
+"packet": "main-07",
+"id": "24332",
+"rwhy": "hook says someone is poisoning the ruler now (Succession Crisis); CRISIS none, s",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2r-village-46",
+"in_the_record": [
+"Succession Crisis"
+],
+"text": "Someone is poisoning the ruler slowly, and someone in the household knows (Succession Crisis)",
+"why": "hook says someone is poisoning the ruler now (Succession Crisis); CRISIS none, stability Ordered; the PAST succession crisis was 163 years ago"
+},
+{
+"packet": "main-08",
+"id": "31196",
+"rwhy": "a Wild Magic surge marked the lumber yards and sawmill district; PAST records no",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-plague_onset-town-2",
+"in_the_record": [
+"Wild Magic"
+],
+"text": "Wild Magic: An uncontrolled surge of magic left its mark on the lumber yards and sawmill district and on the people who were there, and the effects have never fully faded",
+"why": "a Wild Magic surge marked the lumber yards and sawmill district; PAST records no magical event and HOUSES has no sawmill"
+},
+{
+"packet": "main-08",
+"id": "26113",
+"rwhy": "an affected district slowly spreading strangeness from Wild Magic; PAST records ",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-plague_onset-town-2",
+"in_the_record": [
+"Wild Magic"
+],
+"text": "The affected district is slowly spreading its strangeness, and the authorities are pretending otherwise (Wild Magic)",
+"why": "an affected district slowly spreading strangeness from Wild Magic; PAST records no magical event for this town"
+},
+{
+"packet": "main-09",
+"id": "31197",
+"rwhy": "'Wild Magic' event/power with a 'merchants' quarter'; PAST records no Wild Magic",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2r-town-36",
+"in_the_record": [
+"Wild Magic"
+],
+"text": "Wild Magic: An uncontrolled surge of magic left its mark on the merchants' quarter and on the people who were there, and the effects have never fully faded",
+"why": "'Wild Magic' event/power with a 'merchants' quarter'; PAST records no Wild Magic (only an Arcane Incident), GOVERNMENT lists no such power"
+},
+{
+"packet": "main-09",
+"id": "11672",
+"rwhy": "'Great Flood ... reshaped the lower districts': PAST records no flood (Arcane In",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-religious_conversion-town-2",
+"in_the_record": [
+"Great Flood"
+],
+"text": "Great Flood: Waters rose with little warning and reshaped the lower districts, drowning livelihoods and redrawing who owned what",
+"why": "'Great Flood ... reshaped the lower districts': PAST records no flood (Arcane Incident, Succession Crisis, Occupation, Siege); a mountain pass town has no lower districts"
+},
+{
+"packet": "main-10",
+"id": "21336",
+"rwhy": "names Vigilantes as a party; GOVERNMENT lists only Thieves' Guild, Corrupt Counc",
+"sev": "LOW",
+"kind": "LACKS",
+"town": "r2r-town-12",
+"in_the_record": [
+"Guild",
+"Thieves",
+"Vigilantes"
+],
+"text": "Parties: The watch vs Vigilantes vs Thieves' Guild",
+"why": "names Vigilantes as a party; GOVERNMENT lists only Thieves' Guild, Corrupt Council, Merchant Guilds as powers"
+},
+{
+"packet": "main-10",
+"id": "28489",
+"rwhy": "slash-joined label names Vigilantes; GOVERNMENT lists no such power",
+"sev": "LOW",
+"kind": "LACKS",
+"town": "r2r-town-12",
+"in_the_record": [
+"Vigilantes"
+],
+"text": "The watch / Vigilantes / Thieves' Guild",
+"why": "slash-joined label names Vigilantes; GOVERNMENT lists no such power"
+},
+{
+"packet": "main-10",
+"id": "21311",
+"rwhy": "names Vigilantes as a party; GOVERNMENT lists no Vigilantes power",
+"sev": "LOW",
+"kind": "LACKS",
+"town": "r2s-mass_migration-town-3",
+"in_the_record": [
+"Vigilantes"
+],
+"text": "Parties: Military/Guard vs Vigilantes vs Thieves' Guild",
+"why": "names Vigilantes as a party; GOVERNMENT lists no Vigilantes power"
+},
+{
+"packet": "main-10",
+"id": "21341",
+"rwhy": "names Vigilantes as the only party; GOVERNMENT lists no Vigilantes power, and a ",
+"sev": "LOW",
+"kind": "LACKS",
+"town": "r2s-infiltrated-town-0",
+"in_the_record": [
+"Vigilantes"
+],
+"text": "Parties: Vigilantes",
+"why": "names Vigilantes as the only party; GOVERNMENT lists no Vigilantes power, and a single party is no list of parties"
+},
+{
+"packet": "main-10",
+"id": "11664",
+"rwhy": "prints a Great Fire as the town's history; PAST records no fire (Wild Magic, Deb",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-recently_betrayed-town-0",
+"in_the_record": [
+"Great Fire"
+],
+"text": "Great Fire: A fire that began in the lower districts consumed wooden buildings and merchant stalls across whole districts before it could be checked",
+"why": "prints a Great Fire as the town's history; PAST records no fire (Wild Magic, Debt Crisis, Migration, Religious Conflict, Occupation, Purge, Siege, Succession Crisis)"
+},
+{
+"packet": "main-10",
+"id": "11665",
+"rwhy": "prints a Great Fire as the town's history; PAST records only the Purge, the Migr",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-mass_migration-town-1",
+"in_the_record": [
+"Great Fire"
+],
+"text": "Great Fire: A fire that began in the riverside quarter consumed barges, warehouses, and wharf infrastructure across whole districts before it could be checked",
+"why": "prints a Great Fire as the town's history; PAST records only the Purge, the Migration and the Religious Conflict"
+},
+{
+"packet": "main-10",
+"id": "30469",
+"rwhy": "slash-joined label names Vigilantes as a party; GOVERNMENT lists only Guild Coun",
+"sev": "LOW",
+"kind": "LACKS",
+"town": "r2s-wartime-town-3",
+"in_the_record": [
+"Guild",
+"Thieves",
+"Vigilantes",
+"War Council"
+],
+"text": "War Council / Vigilantes / Thieves' Guild",
+"why": "slash-joined label names Vigilantes as a party; GOVERNMENT lists only Guild Council, Merchant Guilds, War Council, Thieves' Guild"
+},
+{
+"packet": "main-10",
+"id": "21344",
+"rwhy": "names Vigilantes as a party; GOVERNMENT lists no Vigilantes power",
+"sev": "LOW",
+"kind": "LACKS",
+"town": "r2s-wartime-town-3",
+"in_the_record": [
+"Vigilantes"
+],
+"text": "Parties: War Council vs Vigilantes vs Thieves' Guild",
+"why": "names Vigilantes as a party; GOVERNMENT lists no Vigilantes power"
+},
+{
+"packet": "main-10",
+"id": "28490",
+"rwhy": "slash-joined label names Vigilantes and a criminal network; GOVERNMENT lists onl",
+"sev": "LOW",
+"kind": "LACKS",
+"town": "r2r-town-22",
+"in_the_record": [
+"Vigilantes"
+],
+"text": "The watch / Vigilantes / the criminal network",
+"why": "slash-joined label names Vigilantes and a criminal network; GOVERNMENT lists only Merchant oligarchy, Religious Authorities, Merchant Guilds"
+},
+{
+"packet": "main-10",
+"id": "16254",
+"rwhy": "prints a Market Crash in the town's history; PAST lists no crash (its economic e",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2r-town-16",
+"in_the_record": [
+"Market Crash"
+],
+"text": "Market Crash: A speculative frenzy in timber and property collapsed almost overnight, ruining fortunes and hardening class resentment for a generation",
+"why": "prints a Market Crash in the town's history; PAST lists no crash (its economic event is the Guild War, 25 years ago)"
+},
+{
+"packet": "main-10",
+"id": "03273",
+"rwhy": "hook rests on a Market Crash and a collapse; PAST records no crash, only the Gui",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2r-town-16",
+"in_the_record": [
+"Market Crash"
+],
+"text": "A ledger names who was warned to sell before the collapse, and who was not (Market Crash)",
+"why": "hook rests on a Market Crash and a collapse; PAST records no crash, only the Guild War as its economic event"
+},
+{
+"packet": "main-10",
+"id": "03737",
+"rwhy": "hook about a ruined family and an engineered panic after a Market Crash; PAST re",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2r-town-16",
+"in_the_record": [
+"Market Crash"
+],
+"text": "A ruined family blames a rival for engineering the panic, and wants proof (Market Crash)",
+"why": "hook about a ruined family and an engineered panic after a Market Crash; PAST records no crash"
+},
+{
+"packet": "main-10",
+"id": "26592",
+"rwhy": "hook about debts surviving the crash; PAST records no Market Crash",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2r-town-16",
+"in_the_record": [
+"Market Crash"
+],
+"text": "The debts that survived the crash were quietly bought up by a single hidden buyer (Market Crash)",
+"why": "hook about debts surviving the crash; PAST records no Market Crash"
+},
+{
+"packet": "main-11",
+"id": "26757",
+"rwhy": "names Vigilantes; not in HOUSES, DEFENCE (militia none) or GOVERNMENT powers (on",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2r-town-19",
+"in_the_record": [
+"Vigilantes"
+],
+"text": "The garrison / Vigilantes / the criminal network",
+"why": "names Vigilantes; not in HOUSES, DEFENCE (militia none) or GOVERNMENT powers (only Religious Authorities, Church Council)"
+},
+{
+"packet": "main-11",
+"id": "21333",
+"rwhy": "lists Vigilantes as a party; not a house or power here; QUARRELS is none, so no ",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2r-town-19",
+"in_the_record": [
+"Vigilantes"
+],
+"text": "Parties: The garrison vs Vigilantes vs the criminal network",
+"why": "lists Vigilantes as a party; not a house or power here; QUARRELS is none, so no conflict between parties"
+},
+{
+"packet": "main-11",
+"id": "26392",
+"rwhy": "hook of a condemned doctrine (Heresy Trial); PAST records no religious or heresy",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2r-town-50",
+"in_the_record": [
+"Heresy Trial"
+],
+"text": "The condemned doctrine is quietly practised still, by more of the town's leaders than would admit it (Heresy Trial)",
+"why": "hook of a condemned doctrine (Heresy Trial); PAST records no religious or heresy event here"
+},
+{
+"packet": "main-11",
+"id": "09814",
+"rwhy": "names Reformers and Complicit beneficiaries as parties; GOVERNMENT lists only Fe",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2r-town-17",
+"in_the_record": [
+"Complicit beneficiaries",
+"Feudal Appointee",
+"Reformers"
+],
+"text": "Feudal Appointee / Reformers / Complicit beneficiaries",
+"why": "names Reformers and Complicit beneficiaries as parties; GOVERNMENT lists only Feudal Appointee, Merchant Guilds, Landed Gentry, Religious Authorities, Craft Guilds"
+},
+{
+"packet": "main-11",
+"id": "21273",
+"rwhy": "lists Reformers and Complicit beneficiaries as parties; GOVERNMENT has no such p",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2r-town-17",
+"in_the_record": [
+"Complicit beneficiaries",
+"Feudal Appointee",
+"Reformers"
+],
+"text": "Parties: Feudal Appointee vs Reformers vs Complicit beneficiaries",
+"why": "lists Reformers and Complicit beneficiaries as parties; GOVERNMENT has no such powers; QUARRELS names only Feudal Appointee vs Merchant Guilds"
+},
+{
+"packet": "main-11",
+"id": "11673",
+"rwhy": "Great Flood drowned the riverside quarter; PAST records no flood or disaster, on",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2r-town-31",
+"in_the_record": [
+"Great Flood"
+],
+"text": "Great Flood: Waters rose with little warning and reshaped the riverside quarter, drowning livelihoods and redrawing who owned what",
+"why": "Great Flood drowned the riverside quarter; PAST records no flood or disaster, only Arcane Incident, Economic Divide, Occupation, Succession Crisis"
+},
+{
+"packet": "main-11",
+"id": "16521",
+"rwhy": "names a Popular candidate as a party; GOVERNMENT lists no such power; PAST recor",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2r-town-29",
+"in_the_record": [
+"Popular candidate"
+],
+"text": "Merchant Council / Popular candidate / Merchant Guilds",
+"why": "names a Popular candidate as a party; GOVERNMENT lists no such power; PAST records only a siege"
+},
+{
+"packet": "main-11",
+"id": "21299",
+"rwhy": "lists a Popular candidate as a party; GOVERNMENT has no such power; QUARRELS pai",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2r-town-29",
+"in_the_record": [
+"Merchant Council",
+"Merchant Guilds",
+"Popular candidate"
+],
+"text": "Parties: Merchant Council vs Popular candidate vs Merchant Guilds",
+"why": "lists a Popular candidate as a party; GOVERNMENT has no such power; QUARRELS pairs only Merchant Council, Merchant Guilds, Craft Guilds"
+},
+{
+"packet": "main-11",
+"id": "04865",
+"rwhy": "names Reformers and Complicit beneficiaries as parties; GOVERNMENT lists only Ar",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2r-town-49",
+"in_the_record": [
+"Arcane Council",
+"Complicit beneficiaries",
+"Reformers"
+],
+"text": "Arcane Council / Reformers / Complicit beneficiaries",
+"why": "names Reformers and Complicit beneficiaries as parties; GOVERNMENT lists only Arcane Council, Military/Guard, Merchant Guilds, Religious Authorities"
+},
+{
+"packet": "main-11",
+"id": "21248",
+"rwhy": "lists Reformers and Complicit beneficiaries as parties; not powers in GOVERNMENT",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2r-town-49",
+"in_the_record": [
+"Arcane Council",
+"Complicit beneficiaries",
+"Reformers"
+],
+"text": "Parties: Arcane Council vs Reformers vs Complicit beneficiaries",
+"why": "lists Reformers and Complicit beneficiaries as parties; not powers in GOVERNMENT; QUARRELS has Arcane Council vs Merchant Guilds"
+},
+{
+"packet": "main-11",
+"id": "16716",
+"rwhy": "says merchant guilds are a force in politics; GOVERNMENT lists no Merchant Guild",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-under_siege-city-1",
+"in_the_record": [
+"Merchant"
+],
+"text": "Merchant guilds: A force to be reckoned with in politics.",
+"why": "says merchant guilds are a force in politics; GOVERNMENT lists no Merchant Guilds power, only Military/Guard, Ecclesiastical Council, The Martial Alliance"
+},
+{
+"packet": "main-12",
+"id": "29427",
+"rwhy": "records a Trade Collapse; PAST lists no such event (Heresy Trials, Religious Con",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2r-city-44",
+"in_the_record": [
+"Trade Collapse"
+],
+"text": "Trade Collapse: The coastal trade the settlement was built upon failed, and the wealth it once carried drained away within a few hard years",
+"why": "records a Trade Collapse; PAST lists no such event (Heresy Trials, Religious Conflict, Great Construction, Purge, Siege, Succession Crisis, Occupation)"
+},
+{
+"packet": "main-12",
+"id": "26381",
+"rwhy": "hook cites a Heresy Trial; PAST lists Siege, Purge, Arcane Incident, Religious C",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-famine-city-2",
+"in_the_record": [
+"Heresy Trial"
+],
+"text": "The condemned doctrine is quietly practised still, by more of the city's leaders than would admit it (Heresy Trial)",
+"why": "hook cites a Heresy Trial; PAST lists Siege, Purge, Arcane Incident, Religious Conflict, Debt Crisis only, no Heresy Trial"
+},
+{
+"packet": "main-12",
+"id": "29577",
+"rwhy": "prints a Tyranny event; PAST lists no Tyranny (Succession Crisis, Economic Divid",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-occupied-city-1",
+"in_the_record": [
+"Tyranny"
+],
+"text": "Tyranny: A single figure seized power through economic pressure and ruled without check for a time, and the memory still shapes who is trusted with authority",
+"why": "prints a Tyranny event; PAST lists no Tyranny (Succession Crisis, Economic Divide, Wild Magic, Arcane Incident, Occupation, Purge, Siege, Migration)"
+},
+{
+"packet": "main-12",
+"id": "21321",
+"rwhy": "'Parties: Religious Authorities vs Poor workers vs Moderate reformers'; no such ",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-plague_onset-city-3",
+"in_the_record": [
+"Moderate reformers",
+"Parties",
+"Poor workers",
+"Religious Authorities"
+],
+"text": "Parties: Religious Authorities vs Poor workers vs Moderate reformers",
+"why": "'Parties: Religious Authorities vs Poor workers vs Moderate reformers'; no such powers in GOVERNMENT and QUARRELS has only Council vs Hidden Hand"
+},
+{
+"packet": "main-13",
+"id": "11669",
+"rwhy": "prints a Great Flood as the town's history; PAST records no flood (plague, purge",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-wartime-city-1",
+"in_the_record": [
+"Great Flood"
+],
+"text": "Great Flood: Waters rose with little warning and reshaped the harbour and coastal districts, drowning livelihoods and redrawing who owned what",
+"why": "prints a Great Flood as the town's history; PAST records no flood (plague, purge, religious conflict, siege, crash, succession)"
+},
+{
+"packet": "main-13",
+"id": "16251",
+"rwhy": "prints a 'Market Crash' in iron and property; PAST records no crash (Economic Di",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2r-city-25",
+"in_the_record": [
+"Market Crash"
+],
+"text": "Market Crash: A speculative frenzy in iron and property collapsed almost overnight, ruining fortunes and hardening class resentment for a generation",
+"why": "prints a 'Market Crash' in iron and property; PAST records no crash (Economic Divide, Debt Crisis, Shortage, Trade Collapse)"
+},
+{
+"packet": "main-14",
+"id": "16857",
+"rwhy": "names Vigilantes as a side; GOVERNMENT lists no such power and DEFENCE has no mi",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2s-indebted-city-0",
+"in_the_record": [
+"Vigilantes"
+],
+"text": "Military City Council / Vigilantes / the criminal network",
+"why": "names Vigilantes as a side; GOVERNMENT lists no such power and DEFENCE has no militia; slash-joined list used as a label"
+},
+{
+"packet": "main-14",
+"id": "21306",
+"rwhy": "names Vigilantes as a party; GOVERNMENT lists no such power, DEFENCE has no mili",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2s-indebted-city-0",
+"in_the_record": [
+"Military City Council",
+"Vigilantes"
+],
+"text": "Parties: Military City Council vs Vigilantes vs the criminal network",
+"why": "names Vigilantes as a party; GOVERNMENT lists no such power, DEFENCE has no militia; the quarrel is Military City Council vs Military/Guard"
+},
+{
+"packet": "main-14",
+"id": "07884",
+"rwhy": "names Reformers as a side; GOVERNMENT lists no Reformers power (powers are Milit",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2s-recently_betrayed-city-2",
+"in_the_record": [
+"Reformers"
+],
+"text": "Democratic assembly / Reformers / Complicit beneficiaries",
+"why": "names Reformers as a side; GOVERNMENT lists no Reformers power (powers are Military/Guard, assembly, guilds, compacts); slash-joined list used as a label"
+},
+{
+"packet": "main-14",
+"id": "21259",
+"rwhy": "names Reformers as a party; GOVERNMENT lists no Reformers power; quarrel on file",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2s-recently_betrayed-city-2",
+"in_the_record": [
+"Reformers"
+],
+"text": "Parties: Democratic assembly vs Reformers vs Complicit beneficiaries",
+"why": "names Reformers as a party; GOVERNMENT lists no Reformers power; quarrel on file is Craft Guilds vs Noble Families"
+},
+{
+"packet": "main-14",
+"id": "16497",
+"rwhy": "names Reformers and Complicit beneficiaries as sides; crisis is Beast & Raider T",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-monster_pressure-city-3",
+"in_the_record": [
+"Complicit beneficiaries",
+"Council",
+"Reformers"
+],
+"text": "Merchant City Council / Reformers / Complicit beneficiaries",
+"why": "names Reformers and Complicit beneficiaries as sides; crisis is Beast & Raider Threat, GOVERNMENT has no Reformers power; quarrels are Council vs Craft Guilds"
+},
+{
+"packet": "main-14",
+"id": "21298",
+"rwhy": "names Reformers and Complicit beneficiaries as parties; crisis is Beast & Raider",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-monster_pressure-city-3",
+"in_the_record": [
+"Complicit beneficiaries",
+"Council",
+"Reformers"
+],
+"text": "Parties: Merchant City Council vs Reformers vs Complicit beneficiaries",
+"why": "names Reformers and Complicit beneficiaries as parties; crisis is Beast & Raider Threat, GOVERNMENT has no Reformers power; quarrels are Council vs Craft Guilds"
+},
+{
+"packet": "main-14",
+"id": "01039",
+"rwhy": "names a 'Popular candidate' as a side; GOVERNMENT lists no such power; slash-joi",
+"sev": "LOW",
+"kind": "LACKS",
+"town": "r2s-succession_void-city-0",
+"in_the_record": [
+"Popular candidate"
+],
+"text": "Ecclesiastical Council / Popular candidate / Military/Guard",
+"why": "names a 'Popular candidate' as a side; GOVERNMENT lists no such power; slash-joined list used as a label"
+},
+{
+"packet": "main-14",
+"id": "21242",
+"rwhy": "names a 'Popular candidate' as a party; GOVERNMENT lists no such power; quarrels",
+"sev": "LOW",
+"kind": "LACKS",
+"town": "r2s-succession_void-city-0",
+"in_the_record": [
+"Popular candidate"
+],
+"text": "Parties: Ecclesiastical Council vs Popular candidate vs Military/Guard",
+"why": "names a 'Popular candidate' as a party; GOVERNMENT lists no such power; quarrels on file are Religious Authorities vs Merchant Guilds and Merchant Guilds vs Noble Families"
+},
+{
+"packet": "main-14",
+"id": "26081",
+"rwhy": "describes The Trade Compact as the 'Dominant' commercial class; GOVERNMENT lists",
+"sev": "LOW",
+"kind": "STATE",
+"town": "r2s-recently_betrayed-city-2",
+"in_the_record": [
+"Compact",
+"Dominant",
+"Trade"
+],
+"text": "The Trade Compact: Dominant commercial class at a trade nexus; they set prices, control warehousing, and fund the council.",
+"why": "describes The Trade Compact as the 'Dominant' commercial class; GOVERNMENT lists it as Significant, not Dominant"
+},
+{
+"packet": "main-15",
+"id": "31198",
+"rwhy": "cites a Wild Magic surge on the riverside wharves; PAST has no such event (only ",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2r-city-22",
+"in_the_record": [
+"Wild Magic"
+],
+"text": "Wild Magic: An uncontrolled surge of magic left its mark on the riverside wharves and on the people who were there, and the effects have never fully faded",
+"why": "cites a Wild Magic surge on the riverside wharves; PAST has no such event (only a minor Arcane Incident) and HOUSES has no docks or wharf"
+},
+{
+"packet": "main-15",
+"id": "21332",
+"rwhy": "names 'Vigilantes' as a party against the garrison and Thieves' Guild; GOVERNMEN",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2r-city-12",
+"in_the_record": [
+"Guild",
+"Thieves",
+"Vigilantes"
+],
+"text": "Parties: The garrison vs Vigilantes vs Thieves' Guild",
+"why": "names 'Vigilantes' as a party against the garrison and Thieves' Guild; GOVERNMENT lists no such power and HOUSES has no such group"
+},
+{
+"packet": "main-15",
+"id": "26756",
+"rwhy": "slash-joined label names 'Vigilantes' as a party; GOVERNMENT and HOUSES list no ",
+"sev": "LOW",
+"kind": "LACKS",
+"town": "r2r-city-12",
+"in_the_record": [
+"Vigilantes"
+],
+"text": "The garrison / Vigilantes / Thieves' Guild",
+"why": "slash-joined label names 'Vigilantes' as a party; GOVERNMENT and HOUSES list no vigilante group"
+},
+{
+"packet": "main-15",
+"id": "16250",
+"rwhy": "cites a Market Crash in fish and property ruining fortunes for a generation; PAS",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2r-city-12",
+"in_the_record": [
+"Market Crash"
+],
+"text": "Market Crash: A speculative frenzy in fish and property collapsed almost overnight, ruining fortunes and hardening class resentment for a generation",
+"why": "cites a Market Crash in fish and property ruining fortunes for a generation; PAST has no crash, only a minor Guild War 23 years ago and a minor Shortage 449 years ago"
+},
+{
+"packet": "main-16",
+"id": "23011",
+"rwhy": "Overview triad names Reformers and Complicit beneficiaries; not among GOVERNMENT",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2r-city-18",
+"in_the_record": [
+"Complicit beneficiaries",
+"Reformers"
+],
+"text": "Royal Authority / Reformers / Complicit beneficiaries",
+"why": "Overview triad names Reformers and Complicit beneficiaries; not among GOVERNMENT powers; legitimacy Endorsed 95. Slash-joined label used as a name"
+},
+{
+"packet": "main-16",
+"id": "08410",
+"rwhy": "names a 'Popular candidate' as a party; GOVERNMENT lists no such power; QUARRELS",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2s-famine-metropolis-1",
+"in_the_record": [
+"Ducal Governorship",
+"Popular candidate"
+],
+"text": "Ducal Governorship / Popular candidate / Military/Guard",
+"why": "names a 'Popular candidate' as a party; GOVERNMENT lists no such power; QUARRELS pairs Ducal Governorship with Merchant Guilds; slash-joined label"
+},
+{
+"packet": "main-16",
+"id": "21263",
+"rwhy": "names a 'Popular candidate' as a party; GOVERNMENT lists no such power; slash-jo",
+"sev": "MED",
+"kind": "LACKS",
+"town": "r2s-famine-metropolis-1",
+"in_the_record": [
+"Military/Guard",
+"Popular candidate"
+],
+"text": "Parties: Ducal Governorship vs Popular candidate vs Military/Guard",
+"why": "names a 'Popular candidate' as a party; GOVERNMENT lists no such power; slash-joined 'Military/Guard' used as a name"
+},
+{
+"packet": "main-16",
+"id": "29038",
+"rwhy": "calls the Thieves' guild a dominant underworld power; GOVERNMENT lists no Thieve",
+"sev": "LOW",
+"kind": "STATE",
+"town": "r2s-famine-metropolis-1",
+"in_the_record": [
+"Thieves"
+],
+"text": "Thieves' guild: A dominant underworld power the city tolerates, the alternative being the bloodshed of rival gangs.",
+"why": "calls the Thieves' guild a dominant underworld power; GOVERNMENT lists no Thieves' Guild among its powers though HOUSES has it"
+},
+{
+"packet": "main-16",
+"id": "29040",
+"rwhy": "calls the Thieves' guild the ruling criminal syndicate; GOVERNMENT lists no Thie",
+"sev": "LOW",
+"kind": "STATE",
+"town": "r2s-occupied-metropolis-0",
+"in_the_record": [
+"Thieves"
+],
+"text": "Thieves' guild: The ruling criminal syndicate, suffered because open gang war would be worse.",
+"why": "calls the Thieves' guild the ruling criminal syndicate; GOVERNMENT lists no Thieves' Guild among its powers though HOUSES has it"
+},
+{
+"packet": "main-16",
+"id": "29039",
+"rwhy": "calls the Thieves' guild a dominant criminal syndicate; GOVERNMENT lists no Thie",
+"sev": "LOW",
+"kind": "STATE",
+"town": "r2s-plague_onset-metropolis-0",
+"in_the_record": [
+"Thieves"
+],
+"text": "Thieves' guild: Dominant criminal syndicate.",
+"why": "calls the Thieves' guild a dominant criminal syndicate; GOVERNMENT lists no Thieves' Guild among its powers though HOUSES has it"
+},
+{
+"packet": "main-16",
+"id": "20377",
+"rwhy": "says the council works alongside the Noble Houses; GOVERNMENT is Royal Authority",
+"sev": "LOW",
+"kind": "LACKS",
+"town": "r2s-plague_onset-metropolis-0",
+"in_the_record": [
+"Noble Houses"
+],
+"text": "Noble Houses: Hereditary landowners whose land rights and military obligations are structurally embedded in governance here; the council works alongside them, not over them.",
+"why": "says the council works alongside the Noble Houses; GOVERNMENT is Royal Authority and lists no council, only a Suppressed Quarantine Council"
+},
+{
+"packet": "main-17",
+"id": "01242",
+"rwhy": "Noble Houses are Strong and Ducal Governorship only Minor, so they are not 'clos",
+"sev": "MED",
+"kind": "STATE",
+"town": "r2s-succession_void-metropolis-0",
+"in_the_record": [
+"Ducal Governorship",
+"Noble Houses"
+],
+"text": "Ducal Governorship governs, with Noble Houses pressing close behind.",
+"why": "Noble Houses are Strong and Ducal Governorship only Minor, so they are not 'close behind'; and CRISIS says no one holds the seat"
+},
+{
+"packet": "main-18",
+"id": "26051",
+"rwhy": "The Shield Compact described as 'Crown-appointed'; GOVERNMENT is a Democratic as",
+"sev": "LOW",
+"kind": "STATE",
+"town": "r2s-wartime-metropolis-3",
+"in_the_record": [
+"Compact",
+"Crown-appointed",
+"Shield"
+],
+"text": "The Shield Compact: Crown-appointed emergency body coordinating supply, conscription, and military contracting.",
+"why": "The Shield Compact described as 'Crown-appointed'; GOVERNMENT is a Democratic assembly and lists no crown"
+}
+]

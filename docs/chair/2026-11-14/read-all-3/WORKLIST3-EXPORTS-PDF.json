@@ -1,0 +1,2486 @@
+[
+{
+"id": "05842",
+"sev": "MED",
+"n": 720,
+"town": "r2s-succession_void-thorp-1",
+"section": "PDF/EconomicsTrade",
+"fold": "Black market capture: #% of economy",
+"text": "Black market capture: 2% of economy",
+"why": "black market captures 2% of economy; HOUSES (6) has no black market, thorp of 11, isolated",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/pdf/sections/EconomicsTrade.jsx",
+"line": 352,
+"fn": "EconomicsTrade"
+}
+},
+{
+"id": "32399",
+"sev": "MED",
+"n": 420,
+"town": "r2r-thorp-58",
+"section": "PDF/EconomicsTrade",
+"fold": "luxury goods",
+"text": "luxury goods",
+"why": "luxury goods as critical dependency; TRADE imports are only Grain, Salt, Iron; thorp of 7 under siege",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "14590",
+"sev": "MED",
+"n": 289,
+"town": "r2s-under_siege-village-1",
+"section": "Journal/Defense & Security",
+"fold": "It leans on magic to hold.",
+"text": "It leans on magic to hold.",
+"why": "defence leans on magic; DEFENCE magic none, defence word Undefended",
+"kinds": [
+"LACKS",
+"STATE"
+],
+"writer": {
+"file": "src/pdf/lib/headlines.js",
+"line": 261,
+"fn": "defenseHeadline"
+}
+},
+{
+"id": "10661",
+"sev": "MED",
+"n": 274,
+"town": "r2s-under_siege-town-3",
+"section": "PDF/Institutions",
+"fold": "Fresh meat: Beef, pork, mutton.",
+"text": "Fresh meat: Beef, pork, mutton.",
+"why": "fresh beef, pork, mutton on offer; LAND grazing depleted, imports None, siege and 76% food deficit",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "10652",
+"sev": "MED",
+"n": 262,
+"town": "r2s-under_siege-town-2",
+"section": "PDF/Institutions",
+"fold": "Fresh bread: Daily bread.",
+"text": "Fresh bread: Daily bread.",
+"why": "daily bread offered; tag has S and F, grain imports cut and FOOD deficit 40%, bakers run on imported grain",
+"kinds": [
+"TAG"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "32248",
+"sev": "MED",
+"n": 255,
+"town": "r2s-under_siege-town-2",
+"section": "PDF/EconomicsTrade",
+"fold": "imports cover #% of gap",
+"text": "imports cover 15% of gap",
+"why": "imports cover 15% of gap; header imports cover 587 of need 4906 (12% of need, 30% of gap), isolated, under siege",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "07849",
+"sev": "MED",
+"n": 240,
+"town": "r2s-succession_void-thorp-1",
+"section": "PDF/DefenseSecurity",
+"fold": "Defense relies on armed citizens.",
+"text": "Defense relies on armed citizens.",
+"why": "defense relies on armed citizens; DEFENCE militia none, watch none, and the block says no one under arms",
+"kinds": [
+"PAIR",
+"STATE"
+],
+"writer": {
+"file": "src/pdf/sections/DefenseSecurity.jsx",
+"line": 207,
+"fn": "DefenseSecurity"
+}
+},
+{
+"id": "26502",
+"sev": "MED",
+"n": 220,
+"town": "r2r-thorp-27",
+"section": "PDF/Overview",
+"fold": "The criminals outmatch those who keep order.",
+"text": "The criminals outmatch those who keep order.",
+"why": "names criminals and those who keep order; thorp of 25, HOUSES has no criminal house, DEFENCE has watch none, only a household levy",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/pdf/sections/Overview.jsx",
+"line": 582,
+"fn": "enforcementWords"
+}
+},
+{
+"id": "22724",
+"sev": "MED",
+"n": 192,
+"town": "r2r-hamlet-0",
+"section": "PDF/EconomicsTrade",
+"fold": "Rich farmland: the fields yield well over the usual.",
+"text": "Rich farmland: the fields yield well over the usual.",
+"why": "fields yield well over usual; FOOD grown only 39% of need, 61% deficit under siege",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/pdf/sections/EconomicsTrade.jsx",
+"line": 579,
+"fn": "farmlandWords"
+}
+},
+{
+"id": "10343",
+"sev": "MED",
+"n": 173,
+"town": "r2s-famine-thorp-0",
+"section": "PDF/EconomicsTrade",
+"fold": "Flour",
+"text": "Flour",
+"why": "flour milled here; HOUSES has only Access to external mill (no mill of its own)",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "12337",
+"sev": "MED",
+"n": 165,
+"town": "r2s-succession_void-thorp-1",
+"section": "PDF/Overview",
+"fold": "Hoarders / Desperate poor / Price regulators",
+"text": "Hoarders / Desperate poor / Price regulators",
+"why": "slash-joined party label 'Hoarders / Desperate poor / Price regulators' printed as a name; QUARRELS none, pop 11",
+"kinds": [
+"BROKEN",
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "21292",
+"sev": "MED",
+"n": 165,
+"town": "r2s-succession_void-thorp-1",
+"section": "PDF/HistoryFounding",
+"fold": "Parties: Hoarders vs Desperate poor vs Price regulators",
+"text": "Parties: Hoarders vs Desperate poor vs Price regulators",
+"why": "three opposed parties incl. price regulators in a thorp of 11; QUARRELS none, one power, no market or house for regulators",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "08499",
+"sev": "MED",
+"n": 148,
+"town": "r2r-under_siege-thorp-0",
+"section": "PDF/EconomicsTrade",
+"fold": "ENTREPÔT",
+"text": "ENTREPÔT",
+"why": "ENTREPÔT role; thorp of 9, exports none, imports only three staples, under siege",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "24552",
+"sev": "MED",
+"n": 144,
+"town": "r2r-under_siege-thorp-2",
+"section": "PDF/EconomicsTrade",
+"fold": "Spices",
+"text": "Spices",
+"why": "spices named as a trade good; imports none, trade access isolated, thorp of 6",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "31993",
+"sev": "MED",
+"n": 144,
+"town": "r2r-under_siege-thorp-2",
+"section": "PDF/EconomicsTrade",
+"fold": "fine textiles",
+"text": "fine textiles",
+"why": "fine textiles named as a trade good; imports none, isolated, thorp of 6, no textile house",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "21359",
+"sev": "MED",
+"n": 143,
+"town": "r2s-famine-city-3",
+"section": "PDF/Institutions",
+"fold": "Pastries: Pies, tarts, and pastries.",
+"text": "Pastries: Pies, tarts, and pastries.",
+"why": "offers pies, tarts and pastries as a line; famine's failed source is grain",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "08830",
+"sev": "MED",
+"n": 128,
+"town": "r2s-occupied-town-1",
+"section": "PDF/Overview",
+"fold": "Established guilds / Upstart guilds / Non-guild workers",
+"text": "Established guilds / Upstart guilds / Non-guild workers",
+"why": "names established and upstart guilds as parties; no guild conflict in PAST or QUARRELS",
+"kinds": [
+"LACKS",
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "21270",
+"sev": "MED",
+"n": 128,
+"town": "r2s-occupied-town-1",
+"section": "PDF/HistoryFounding",
+"fold": "Parties: Established guilds vs Upstart guilds vs Non-guild workers",
+"text": "Parties: Established guilds vs Upstart guilds vs Non-guild workers",
+"why": "names established guilds against upstart guilds as parties; no guild conflict in PAST or QUARRELS",
+"kinds": [
+"LACKS",
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "29174",
+"sev": "MED",
+"n": 126,
+"town": "r2s-famine-village-1",
+"section": "PDF/Overview",
+"fold": "Those who keep order clearly outmatch the criminals.",
+"text": "Those who keep order clearly outmatch the criminals.",
+"why": "says order clearly outmatches criminals; stability Desperate with order eroding by hunger, safety Strained, defence Vulnerable, monsters on roads",
+"kinds": [
+"LACKS",
+"STATE"
+],
+"writer": {
+"file": "src/pdf/sections/Overview.jsx",
+"line": 580,
+"fn": "enforcementWords"
+}
+},
+{
+"id": "07370",
+"sev": "MED",
+"n": 124,
+"town": "r2s-under_siege-town-0",
+"section": "PDF/DefenseSecurity",
+"fold": "Court only",
+"text": "Court only",
+"why": "Court only label for justice; HOUSES lists no court, prison or stocks",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "10665",
+"sev": "MED",
+"n": 116,
+"town": "r2s-famine-city-0",
+"section": "PDF/Institutions",
+"fold": "Fresh produce: Fruit, vegetables, dairy, and eggs.",
+"text": "Fresh produce: Fruit, vegetables, dairy, and eggs.",
+"why": "offers fruit, vegetables, dairy, eggs as available; tag has F, Weizhen's grain fields are depleted and famine cut is 50%",
+"kinds": [
+"TAG"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "11233",
+"sev": "MED",
+"n": 101,
+"town": "r2s-famine-thorp-0",
+"section": "PDF/EconomicsTrade",
+"fold": "Good farmland: the fields yield more than the usual.",
+"text": "Good farmland: the fields yield more than the usual.",
+"why": "fields yield more than the usual; FOOD grown 45% of need, Active Famine, famine cut 65%",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/pdf/sections/EconomicsTrade.jsx",
+"line": 578,
+"fn": "farmlandWords"
+}
+},
+{
+"id": "29175",
+"sev": "MED",
+"n": 101,
+"town": "r2s-succession_void-thorp-0",
+"section": "PDF/Overview",
+"fold": "Those who keep order roughly match the criminals.",
+"text": "Those who keep order roughly match the criminals.",
+"why": "those who keep order roughly match the criminals; no criminals, black market or watch in HOUSES (9), pop 8",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/pdf/sections/Overview.jsx",
+"line": 581,
+"fn": "enforcementWords"
+}
+},
+{
+"id": "17065",
+"sev": "MED",
+"n": 91,
+"town": "r2s-mass_migration-hamlet-1",
+"section": "PDF/EconomicsTrade",
+"fold": "Milled lumber EXPORT",
+"text": "Milled lumber EXPORT",
+"why": "lists Milled lumber as an EXPORT; TRADE exports are only Shipbuilding timber and Barrels and containers",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "21835",
+"sev": "MED",
+"n": 89,
+"town": "r2s-plague_onset-town-0",
+"section": "PDF/Overview",
+"fold": "Prepare for war / Seek diplomacy / Flee/hide",
+"text": "Prepare for war / Seek diplomacy / Flee/hide",
+"why": "'Prepare for war / Seek diplomacy' factions: header records no external threat, only a plague; slash-joined 'Flee/hide'",
+"kinds": [
+"BROKEN",
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "10234",
+"sev": "MED",
+"n": 77,
+"town": "r2r-hamlet-16",
+"section": "PDF/EconomicsTrade",
+"fold": "Fish oil EXPORT",
+"text": "Fish oil EXPORT",
+"why": "Fish oil EXPORT; TRADE exports lists no fish oil, and FOOD failed source is fish",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "21452",
+"sev": "MED",
+"n": 76,
+"town": "r2s-religious_conversion-hamlet-2",
+"section": "PDF/EconomicsTrade",
+"fold": "Peat fuel EXPORT",
+"text": "Peat fuel EXPORT",
+"why": "lists Peat fuel as an EXPORT; TRADE exports are Sacred wood, Ritual components, Coal, Flour and meal only",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "26504",
+"sev": "MED",
+"n": 75,
+"town": "r2r-thorp-58",
+"section": "PDF/EconomicsTrade",
+"fold": "The crisis has left about a # of the usual local food production.",
+"text": "The crisis has left about a third of the usual local food production.",
+"why": "crisis cut production to a third; FOOD famine cut 0%, the crisis is siege not famine",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/pdf/sections/EconomicsTrade.jsx",
+"line": 592,
+"fn": "crisisYieldWords"
+}
+},
+{
+"id": "25228",
+"sev": "MED",
+"n": 70,
+"town": "r2s-under_siege-hamlet-3",
+"section": "PDF/PowerStructure",
+"fold": "THE RULING # OF ELDER COUNCIL",
+"text": "THE RULING THREE OF ELDER COUNCIL",
+"why": "names a ruling three of Elder Council; PEOPLE brackets show no person sitting on Elder Council",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "11357",
+"sev": "MED",
+"n": 68,
+"town": "r2s-famine-town-1",
+"section": "PDF/Services",
+"fold": "Grain fields » Mills » Baked goods",
+"text": "Grain fields » Mills » Baked goods",
+"why": "grain fields mill baked goods; FOOD failed source is grain under famine, no line should offer the failed food",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "16334",
+"sev": "MED",
+"n": 58,
+"town": "r2s-infiltrated-village-1",
+"section": "PDF/EconomicsTrade",
+"fold": "Master-crafted weapons EXPORT",
+"text": "Master-crafted weapons EXPORT",
+"why": "'Master-crafted weapons EXPORT'; TRADE exports list weapons and armour, quality tools and advanced weapons, none master-crafted",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "17068",
+"sev": "MED",
+"n": 50,
+"town": "r2s-famine-thorp-0",
+"section": "PDF/ResourcesProduction",
+"fold": "Milling",
+"text": "Milling",
+"why": "milling as local production; HOUSES has only Access to external mill, no mill",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "19353",
+"sev": "MED",
+"n": 47,
+"town": "r2s-under_siege-village-0",
+"section": "PDF/Overview",
+"fold": "Multiple weak claimants / Pragmatists who want stability / Those who prefer the vacuum",
+"text": "Multiple weak claimants / Pragmatists who want stability / Those who prefer the vacuum",
+"why": "slash-joined party label 'Multiple weak claimants / Pragmatists / Those who prefer the vacuum' as a name; no vacuum in PAST",
+"kinds": [
+"BROKEN",
+"LACKS",
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "21313",
+"sev": "MED",
+"n": 47,
+"town": "r2s-under_siege-village-0",
+"section": "PDF/HistoryFounding",
+"fold": "Parties: Multiple weak claimants vs Pragmatists who want stability vs Those who prefer the vacuum",
+"text": "Parties: Multiple weak claimants vs Pragmatists who want stability vs Those who prefer the vacuum",
+"why": "parties over a vacuum; QUARRELS none, GOVERNMENT shows a governing Household Council",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "06926",
+"sev": "MED",
+"n": 44,
+"town": "r2s-religious_conversion-hamlet-2",
+"section": "PDF/Services",
+"fold": "Coal or peat deposits » Charcoal burner » Coal, Peat fuel",
+"text": "Coal or peat deposits » Charcoal burner » Coal, Peat fuel",
+"why": "presents Charcoal burner as producing coal and peat fuel; LAND gaps say the burner lacks its timber input",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "31963",
+"sev": "MED",
+"n": 40,
+"town": "r2s-wartime-village-0",
+"section": "PDF/EconomicsTrade",
+"fold": "druidic provision covers #",
+"text": "druidic provision covers 28",
+"why": "'druidic provision covers 28'; FOOD ledger shows only 5% of food made by magic",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/pdf/sections/EconomicsTrade.jsx",
+"line": 504,
+"fn": "FoodBalanceBlock"
+}
+},
+{
+"id": "23255",
+"sev": "MED",
+"n": 36,
+"town": "r2s-occupied-city-2",
+"section": "PDF/Services",
+"fold": "Salt works » Preserved foods",
+"text": "Salt works » Preserved foods",
+"why": "Salt works » Preserved foods, but LAND gaps: Salt works lacks access to desert_salt; salt flats absent",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "10827",
+"sev": "MED",
+"n": 35,
+"town": "r2s-famine-town-1",
+"section": "PDF/Institutions",
+"fold": "Game meat: Venison, boar, rabbit.",
+"text": "Game meat: Venison, boar, rabbit.",
+"why": "offers game meat from the hunt; LAND gives Hunting grounds absent for the Furs & Pelts chain",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "08832",
+"sev": "MED",
+"n": 32,
+"town": "r2s-mass_migration-thorp-3",
+"section": "PDF/Overview",
+"fold": "Established residents / The newly arrived or departing / Those profiting from the churn",
+"text": "Established residents / The newly arrived or departing / Those profiting from the churn",
+"why": "three factions named incl. those profiting from the churn; GOVERNMENT lists Headman's Authority only; population 7",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "21271",
+"sev": "MED",
+"n": 32,
+"town": "r2s-mass_migration-thorp-3",
+"section": "PDF/HistoryFounding",
+"fold": "Parties: Established residents vs The newly arrived or departing vs Those profiting from the churn",
+"text": "Parties: Established residents vs The newly arrived or departing vs Those profiting from the churn",
+"why": "three parties vs each other; GOVERNMENT lists Headman's Authority only; population 7",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "16958",
+"sev": "MED",
+"n": 28,
+"town": "r2s-occupied-city-2",
+"section": "PDF/Overview",
+"fold": "Military/Guard / Vigilantes",
+"text": "Military/Guard / Vigilantes",
+"why": "'Military/Guard / Vigilantes' slash-joined; QUARRELS lists only Council vs Craft Guilds and Merchant Guilds vs Craft Guilds, no Vigilantes conflict",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "21310",
+"sev": "MED",
+"n": 28,
+"town": "r2s-occupied-city-2",
+"section": "PDF/HistoryFounding",
+"fold": "Parties: Military/Guard vs Vigilantes",
+"text": "Parties: Military/Guard vs Vigilantes",
+"why": "'Parties: Military/Guard vs Vigilantes'; QUARRELS has no such conflict and no Vigilantes power in GOVERNMENT",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "08229",
+"sev": "MED",
+"n": 25,
+"town": "r2s-under_siege-city-3",
+"section": "PDF/Overview",
+"fold": "Displaced families / Landowners pressing newly-convenient claims / Those who profited from the redrawing",
+"text": "Displaced families / Landowners pressing newly-convenient claims / Those who profited from the redrawing",
+"why": "slash-joined party label 'Displaced families / Landowners... / Those who profited...' printed as a name",
+"kinds": [
+"BROKEN",
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "21260",
+"sev": "MED",
+"n": 25,
+"town": "r2s-plague_onset-city-0",
+"section": "PDF/HistoryFounding",
+"fold": "Parties: Displaced families vs Landowners pressing newly-convenient claims vs Those who profited from the redrawing",
+"text": "Parties: Displaced families vs Landowners pressing newly-convenient claims vs Those who profited from the redrawing",
+"why": "displaced families / landowners / those who profited from redrawing: no such conflict in header; CRISIS is plague",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "21900",
+"sev": "MED",
+"n": 23,
+"town": "r2s-under_siege-hamlet-0",
+"section": "PDF/Overview",
+"fold": "Pro Magic / Anti Magic / Regulation advocates",
+"text": "Pro Magic / Anti Magic / Regulation advocates",
+"why": "slash-joined label 'Pro Magic / Anti Magic / Regulation advocates' used as a name; one power only, QUARRELS none",
+"kinds": [
+"BROKEN",
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "21318",
+"sev": "MED",
+"n": 23,
+"town": "r2s-under_siege-hamlet-0",
+"section": "PDF/HistoryFounding",
+"fold": "Parties: Pro Magic vs Anti Magic vs Regulation advocates",
+"text": "Parties: Pro Magic vs Anti Magic vs Regulation advocates",
+"why": "lists live parties vs one another; QUARRELS none, GOVERNMENT one power; magic event was 69 years ago",
+"kinds": [
+"LACKS",
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "10541",
+"sev": "MED",
+"n": 20,
+"town": "r2s-plague_onset-city-3",
+"section": "PDF/Overview",
+"fold": "Former rebels / The restored order / Those who changed sides at the right moment",
+"text": "Former rebels / The restored order / Those who changed sides at the right moment",
+"why": "parties 'former rebels / the restored order' imply an uprising; PAST has none (Purge, Succession Crisis, Pilgrimage); CRISIS is Plague",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "21277",
+"sev": "MED",
+"n": 20,
+"town": "r2s-plague_onset-city-3",
+"section": "PDF/HistoryFounding",
+"fold": "Parties: Former rebels vs The restored order vs Those who changed sides at the right moment",
+"text": "Parties: Former rebels vs The restored order vs Those who changed sides at the right moment",
+"why": "rebels vs restored order parties: no uprising or revolt in PAST or CRISIS (Plague)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "16959",
+"sev": "MED",
+"n": 20,
+"town": "r2r-city-19",
+"section": "PDF/Overview",
+"fold": "Military/Guard / Vigilantes / Thieves' Guild",
+"text": "Military/Guard / Vigilantes / Thieves' Guild",
+"why": "Military/Guard vs Vigilantes vs Thieves' Guild parties: QUARRELS has Religious Authorities vs Royal Authority; Thieves' Guild Suppressed; slash-joined label",
+"kinds": [
+"LACKS",
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "21311",
+"sev": "MED",
+"n": 20,
+"town": "r2r-city-19",
+"section": "PDF/HistoryFounding",
+"fold": "Parties: Military/Guard vs Vigilantes vs Thieves' Guild",
+"text": "Parties: Military/Guard vs Vigilantes vs Thieves' Guild",
+"why": "parties Military/Guard vs Vigilantes vs Thieves' Guild: not the header's quarrel (Religious Authorities vs Royal Authority); CRISIS is Plague",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "22265",
+"sev": "MED",
+"n": 19,
+"town": "r2s-under_siege-village-0",
+"section": "PDF/Overview",
+"fold": "Quarantine hardliners / The bereaved and the blamed / Healers and charlatans alike",
+"text": "Quarantine hardliners / The bereaved and the blamed / Healers and charlatans alike",
+"why": "quarantine hardliners and the bereaved; PAST records no plague, crisis is siege; also slash-joined label as a name",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "21319",
+"sev": "MED",
+"n": 19,
+"town": "r2s-under_siege-village-0",
+"section": "PDF/HistoryFounding",
+"fold": "Parties: Quarantine hardliners vs The bereaved and the blamed vs Healers and charlatans alike",
+"text": "Parties: Quarantine hardliners vs The bereaved and the blamed vs Healers and charlatans alike",
+"why": "parties over quarantine; PAST records no plague, QUARRELS none",
+"kinds": [
+"LACKS",
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "21077",
+"sev": "MED",
+"n": 19,
+"town": "r2s-famine-metropolis-1",
+"section": "PDF/Overview",
+"fold": "Original claimants / Current occupants / Legal class profiting from ambiguity",
+"text": "Original claimants / Current occupants / Legal class profiting from ambiguity",
+"why": "names claimants/occupants over a disputed land claim; CRISIS is Famine only, QUARRELS is the levy, PAST records no land dispute",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "21316",
+"sev": "MED",
+"n": 19,
+"town": "r2s-famine-metropolis-0",
+"section": "PDF/HistoryFounding",
+"fold": "Parties: Original claimants vs Current occupants vs Legal class profiting from ambiguity",
+"text": "Parties: Original claimants vs Current occupants vs Legal class profiting from ambiguity",
+"why": "names parties to a land claim; no such dispute in CRISIS (Famine), QUARRELS or PAST",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "25218",
+"sev": "MED",
+"n": 18,
+"town": "r2s-under_siege-city-3",
+"section": "PDF/PowerStructure",
+"fold": "THE RULING # OF ARCANE COUNCIL",
+"text": "THE RULING THREE OF ARCANE COUNCIL",
+"why": "ruling three of Arcane Council; PEOPLE brackets show no person sitting on Arcane Council",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "25433",
+"sev": "MED",
+"n": 18,
+"town": "r2s-under_siege-city-2",
+"section": "PDF/Overview",
+"fold": "Temple beneficiaries / Overwhelmed old residents / Sceptics who doubt the miracle",
+"text": "Temple beneficiaries / Overwhelmed old residents / Sceptics who doubt the miracle",
+"why": "slash-joined party label 'Temple beneficiaries / Overwhelmed old residents / Sceptics...' printed as a name",
+"kinds": [
+"BROKEN",
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "20948",
+"sev": "MED",
+"n": 18,
+"town": "r2s-plague_onset-city-1",
+"section": "PDF/Overview",
+"fold": "Old families / Newcomers / Merchants who benefit from cheap newcomer labour",
+"text": "Old families / Newcomers / Merchants who benefit from cheap newcomer labour",
+"why": "old families vs newcomers over cheap newcomer labour: PAST records no migration; QUARRELS has no such conflict",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "21314",
+"sev": "MED",
+"n": 18,
+"town": "r2s-plague_onset-city-1",
+"section": "PDF/HistoryFounding",
+"fold": "Parties: Old families vs Newcomers vs Merchants who benefit from cheap newcomer labour",
+"text": "Parties: Old families vs Newcomers vs Merchants who benefit from cheap newcomer labour",
+"why": "old families vs newcomers party: PAST records no migration or friction, QUARRELS has none",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "04302",
+"sev": "MED",
+"n": 18,
+"town": "r2r-village-1",
+"section": "PDF/EconomicsTrade",
+"fold": "Agricultural surplus EXPORT",
+"text": "Agricultural surplus EXPORT",
+"why": "'Agricultural surplus' marked EXPORT; TRADE exports lists Grain surplus, Milled flour, Baked goods only (Journal 09401 agrees)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "06925",
+"sev": "MED",
+"n": 17,
+"town": "r2s-religious_conversion-hamlet-2",
+"section": "PDF/Services",
+"fold": "Coal or peat deposits » Charcoal burner » Coal",
+"text": "Coal or peat deposits » Charcoal burner » Coal",
+"why": "presents Charcoal burner as producing coal; LAND gaps say the burner lacks access to its timber input",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "07554",
+"sev": "MED",
+"n": 17,
+"town": "r2s-politically_fractured-village-1",
+"section": "PDF/EconomicsTrade",
+"fold": "Crossbow bolts EXPORT",
+"text": "Crossbow bolts EXPORT",
+"why": "'Crossbow bolts EXPORT'; TRADE exports lists Bows and crossbows but no bolts (Journal 09209 omits it)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "21325",
+"sev": "MED",
+"n": 16,
+"town": "r2s-under_siege-city-1",
+"section": "PDF/HistoryFounding",
+"fold": "Parties: Security hardliners vs Civil libertarians vs Actual agents exploiting the confusion",
+"text": "Parties: Security hardliners vs Civil libertarians vs Actual agents exploiting the confusion",
+"why": "parties over infiltration; PAST has no purge or infiltration event, QUARRELS gives one unrelated pair",
+"kinds": [
+"LACKS",
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "21330",
+"sev": "MED",
+"n": 15,
+"town": "r2s-under_siege-city-1",
+"section": "PDF/HistoryFounding",
+"fold": "Parties: The changed and their descendants vs Those who fear them vs Scholars studying the residue",
+"text": "Parties: The changed and their descendants vs Those who fear them vs Scholars studying the residue",
+"why": "parties of the changed and those who fear them; PAST has no magical event, magic low, QUARRELS gives one other pair",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "21327",
+"sev": "MED",
+"n": 15,
+"town": "r2r-thorp-9",
+"section": "PDF/HistoryFounding",
+"fold": "Parties: Survivors seeking someone to blame vs Rebuilders and profiteers vs Those accused of setting it",
+"text": "Parties: Survivors seeking someone to blame vs Rebuilders and profiteers vs Those accused of setting it",
+"why": "fire factions as parties; CRISIS none, PAST records only an Uprising, GOVERNMENT one power",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "11208",
+"sev": "MED",
+"n": 13,
+"town": "r2s-occupied-town-1",
+"section": "PDF/Institutions",
+"fold": "Glass vessels: Bottles, flasks, and cups.",
+"text": "Glass vessels: Bottles, flasks, and cups.",
+"why": "offers glass vessels as a working service; LAND gaps say Glassblower exists but lacks access to glass sand",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "21315",
+"sev": "MED",
+"n": 13,
+"town": "r2r-thorp-20",
+"section": "PDF/HistoryFounding",
+"fold": "Parties: Old loyalists vs Those who suffered under the regime vs Beneficiaries who kept their gains",
+"text": "Parties: Old loyalists vs Those who suffered under the regime vs Beneficiaries who kept their gains",
+"why": "regime factions as parties; CRISIS none, PAST records no tyranny, GOVERNMENT lists Household Council only",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "10246",
+"sev": "MED",
+"n": 13,
+"town": "r2r-village-41",
+"section": "PDF/EconomicsTrade",
+"fold": "Fishing boats EXPORT",
+"text": "Fishing boats EXPORT",
+"why": "'Fishing boats EXPORT'; TRADE exports lists River craft and Cargo barges but not Fishing boats (Journal 09448 omits it too)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "14345",
+"sev": "MED",
+"n": 13,
+"town": "r2s-indebted-village-0",
+"section": "PDF/Services",
+"fold": "Iron ore deposits (depleted) » Charcoal burner » Coal",
+"text": "Iron ore deposits (depleted) » Charcoal burner » Coal",
+"why": "Charcoal burner shown drawing on iron ore (depleted) to yield coal; gaps say it lacks mountain timber, its real input",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "11346",
+"sev": "MED",
+"n": 12,
+"town": "r2s-famine-town-1",
+"section": "PDF/Services",
+"fold": "Grain fields » Brewery » Ale (barrel), Beer (barrel), Malt",
+"text": "Grain fields » Brewery » Ale (barrel), Beer (barrel), Malt",
+"why": "grain fields feed the brewery for ale, beer, malt; FOOD failed source is grain under famine",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "21728",
+"sev": "MED",
+"n": 11,
+"town": "r2r-thorp-27",
+"section": "PDF/EconomicsTrade",
+"fold": "Pottery",
+"text": "Pottery",
+"why": "pottery as local production; LAND gives clay raw and not processed, HOUSES has no potter",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "15728",
+"sev": "MED",
+"n": 10,
+"town": "r2r-thorp-40",
+"section": "PDF/Overview",
+"fold": "Local enforcement / Vigilantes / the criminal network",
+"text": "Local enforcement / Vigilantes / the criminal network",
+"why": "names local enforcement, vigilantes and a criminal network as parties; DEFENCE has no enforcement, HOUSES has only one fence",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "21296",
+"sev": "MED",
+"n": 10,
+"town": "r2r-thorp-40",
+"section": "PDF/HistoryFounding",
+"fold": "Parties: Local enforcement vs Vigilantes vs the criminal network",
+"text": "Parties: Local enforcement vs Vigilantes vs the criminal network",
+"why": "parties include local enforcement and vigilantes; DEFENCE has no force of any kind, no crime wave in CRISIS or PAST",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "10863",
+"sev": "MED",
+"n": 10,
+"town": "r2s-religious_conversion-thorp-2",
+"section": "PDF/ResourcesProduction",
+"fold": "Gemcutting",
+"text": "Gemcutting",
+"why": "Gemcutting as production; LAND gap says gemstones raw resource available but not being processed; no gem house in HOUSES",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "00464",
+"sev": "MED",
+"n": 9,
+"town": "r2s-famine-metropolis-1",
+"section": "Journal/NPC Quick Reference",
+"fold": "# people worth knowing; <N>, the guild archmage, first of Arcane Orders, carries the most weight.",
+"text": "83 people worth knowing; Hana Zhan, the guild archmage, first of Arcane Orders, carries the most weight.",
+"why": "archmage of Arcane Orders 'carries the most weight' but GOVERNMENT has Arcane Orders Suppressed and the governor Long Yoon leads",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/pdf/lib/headlines.js",
+"line": 401,
+"fn": "npcsHeadline"
+}
+},
+{
+"id": "01243",
+"sev": "MED",
+"n": 9,
+"town": "r2r-village-9",
+"section": "Journal/Power",
+"fold": "<N> governs, with Religious Authorities pressing close behind.",
+"text": "Elder Council governs, with Religious Authorities pressing close behind.",
+"why": "Elder Council is Minor and the seat is empty; Religious Authorities are Dominant, not 'close behind'",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/pdf/lib/headlines.js",
+"line": 169,
+"fn": "powerHeadline"
+}
+},
+{
+"id": "25018",
+"sev": "MED",
+"n": 8,
+"town": "r2r-thorp-32",
+"section": "PDF/ResourcesProduction",
+"fold": "Stoneworking",
+"text": "Stoneworking",
+"why": "Stoneworking presented as production; LAND gap says stone raw resource available but not being processed, no stone house in HOUSES",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "10709",
+"sev": "MED",
+"n": 8,
+"town": "r2s-insurgency-village-2",
+"section": "PDF/EconomicsTrade",
+"fold": "Fuel wood EXPORT",
+"text": "Fuel wood EXPORT",
+"why": "'Fuel wood EXPORT' but TRADE exports list names no fuel wood",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "11772",
+"sev": "MED",
+"n": 8,
+"town": "r2s-under_siege-town-1",
+"section": "Journal/Power",
+"fold": "Guild Council governs, with Religious Authorities pressing close behind.",
+"text": "Guild Council governs, with Religious Authorities pressing close behind.",
+"why": "Religious Authorities pressing close behind; GOVERNMENT has them Dominant, above Guild Council which is only Significant",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/pdf/lib/headlines.js",
+"line": 169,
+"fn": "powerHeadline"
+}
+},
+{
+"id": "22454",
+"sev": "MED",
+"n": 8,
+"town": "r2r-city-51",
+"section": "PDF/EconomicsTrade",
+"fold": "Refined ingots EXPORT",
+"text": "Refined ingots EXPORT",
+"why": "prints refined ingots as an export; TRADE exports list no ingots, and the Smelter lacks copper ore (gaps)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "00567",
+"sev": "MED",
+"n": 7,
+"town": "r2s-indebted-thorp-3",
+"section": "Journal/NPC Quick Reference",
+"fold": "# person worth knowing: <N>, the boat-headman, Household Elder, first of Household Council.",
+"text": "One person worth knowing: Pulvillus Varro, the boat-headman, Household Elder, first of Household Council.",
+"why": "Pulvillus titled Household Elder; PEOPLE first title boat-headman @ Fishing community; no household elder in HOUSES",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/pdf/lib/headlines.js",
+"line": 397,
+"fn": "npcsHeadline"
+}
+},
+{
+"id": "05243",
+"sev": "MED",
+"n": 7,
+"town": "r2r-hamlet-47",
+"section": "Journal/NPC Quick Reference",
+"fold": "Ask who matters here and you hear # names; <N>, the boat-headman, Headman, first of Headman's Authority, comes first.",
+"text": "Ask who matters here and you hear four names; Severus Aquila, the boat-headman, Headman, first of Headman's Authority, comes first.",
+"why": "calls Severus Aquila 'Headman'; PEOPLE gives only boat-headman, and the Village headman house has nobody in it; title doubled 'boat-headman, Headman'",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/pdf/lib/headlines.js",
+"line": 403,
+"fn": "npcsHeadline"
+}
+},
+{
+"id": "01239",
+"sev": "MED",
+"n": 7,
+"town": "r2r-village-57",
+"section": "Journal/Power",
+"fold": "<N> governs, with Merchant Guilds pressing close behind.",
+"text": "Elected Reeve governs, with Merchant Guilds pressing close behind.",
+"why": "Elected Reeve is only Minor and Merchant Guilds Strong; leadership void. Reeve cannot 'govern' with the stronger power 'close behind'",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/pdf/lib/headlines.js",
+"line": 169,
+"fn": "powerHeadline"
+}
+},
+{
+"id": "07328",
+"sev": "MED",
+"n": 7,
+"town": "r2s-plague_onset-town-1",
+"section": "Journal/Power",
+"fold": "Corrupt Council governs, with Religious Authorities pressing close behind.",
+"text": "Corrupt Council governs, with Religious Authorities pressing close behind.",
+"why": "Religious Authorities pressing close behind; GOVERNMENT gives them Dominant, above the Significant governing Corrupt Council",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/pdf/lib/headlines.js",
+"line": 169,
+"fn": "powerHeadline"
+}
+},
+{
+"id": "26756",
+"sev": "MED",
+"n": 6,
+"town": "r2s-plague_onset-metropolis-1",
+"section": "PDF/Overview",
+"fold": "The garrison / Vigilantes / Thieves' Guild",
+"text": "The garrison / Vigilantes / Thieves' Guild",
+"why": "parties the garrison vs Vigilantes vs Thieves' Guild: QUARRELS are Duke vs Craft Guilds, Arcane vs Craft Guilds, Duke vs Thieves; no vigilante or garrison dispute; CRISIS Plague",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "21332",
+"sev": "MED",
+"n": 6,
+"town": "r2s-plague_onset-metropolis-1",
+"section": "PDF/HistoryFounding",
+"fold": "Parties: The garrison vs Vigilantes vs Thieves' Guild",
+"text": "Parties: The garrison vs Vigilantes vs Thieves' Guild",
+"why": "parties the garrison vs Vigilantes vs Thieves' Guild: not any QUARREL in header; CRISIS is Plague",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "10202",
+"sev": "MED",
+"n": 6,
+"town": "r2s-slave_revolt-village-3",
+"section": "PDF/EconomicsTrade",
+"fold": "Fired brick EXPORT",
+"text": "Fired brick EXPORT",
+"why": "'Fired brick EXPORT'; TRADE exports has no brick (Journal 09175 omits it)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "22983",
+"sev": "MED",
+"n": 6,
+"town": "r2s-slave_revolt-village-3",
+"section": "PDF/EconomicsTrade",
+"fold": "Roof tiles EXPORT",
+"text": "Roof tiles EXPORT",
+"why": "'Roof tiles EXPORT'; TRADE exports has no tiles (Journal 09175 omits it)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "08661",
+"sev": "MED",
+"n": 6,
+"town": "r2s-recently_betrayed-village-3",
+"section": "Journal/Power",
+"fold": "Elder Council governs, with Merchant Guilds pressing close behind.",
+"text": "Elder Council governs, with Merchant Guilds pressing close behind.",
+"why": "Merchant Guilds are Strong and Elder Council only Significant; the guilds are ahead of the governing council, not 'close behind'",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/pdf/lib/headlines.js",
+"line": 169,
+"fn": "powerHeadline"
+}
+},
+{
+"id": "12107",
+"sev": "MED",
+"n": 5,
+"town": "r2s-famine-village-1",
+"section": "Journal/Power",
+"fold": "Headman's Authority governs, with Military/Guard pressing close behind.",
+"text": "Headman's Authority governs, with Military/Guard pressing close behind.",
+"why": "Military/Guard 'pressing close behind' the headman; GOVERNMENT has Military/Guard Dominant above Headman's Authority Significant",
+"kinds": [
+"BROKEN",
+"STATE"
+],
+"writer": {
+"file": "src/pdf/lib/headlines.js",
+"line": 169,
+"fn": "powerHeadline"
+}
+},
+{
+"id": "16891",
+"sev": "MED",
+"n": 5,
+"town": "r2s-plague_onset-town-0",
+"section": "Journal/Power",
+"fold": "Military Council governs, with Military/Guard pressing close behind.",
+"text": "Military Council governs, with Military/Guard pressing close behind.",
+"why": "Military Council governs with Military/Guard close behind; GOVERNMENT gives Military/Guard Strong, above the Significant Military Council; slash-joined label used as a name",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/pdf/lib/headlines.js",
+"line": 169,
+"fn": "powerHeadline"
+}
+},
+{
+"id": "00570",
+"sev": "MED",
+"n": 4,
+"town": "r2s-religious_conversion-thorp-3",
+"section": "Journal/NPC Quick Reference",
+"fold": "# person worth knowing: <N>, the camp foreman, Household Elder, first of Household Council.",
+"text": "One person worth knowing: Calvus Corvinus, the camp foreman, Household Elder, first of Household Council.",
+"why": "Calvus titled Household Elder; PEOPLE first title camp foreman @ Woodcutter's camp; no household elder in HOUSES",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/pdf/lib/headlines.js",
+"line": 397,
+"fn": "npcsHeadline"
+}
+},
+{
+"id": "21320",
+"sev": "MED",
+"n": 4,
+"town": "r2s-infiltrated-hamlet-3",
+"section": "PDF/HistoryFounding",
+"fold": "Parties: Reformists vs Secular camp",
+"text": "Parties: Reformists vs Secular camp",
+"why": "Parties: Reformists vs Secular camp; neither is a power in GOVERNMENT, and QUARRELS is none",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "25129",
+"sev": "MED",
+"n": 4,
+"town": "r2s-insurgency-village-2",
+"section": "PDF/EconomicsTrade",
+"fold": "Structural timber EXPORT",
+"text": "Structural timber EXPORT",
+"why": "'Structural timber EXPORT' but TRADE exports list has no structural timber (hewn timber, pine planks, charcoal...); tag reaches towns",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "01055",
+"sev": "MED",
+"n": 4,
+"town": "r2r-town-34",
+"section": "PDF/EconomicsTrade",
+"fold": "<N> Trade",
+"text": "Pilgrim Trade",
+"why": "names Pilgrim Trade; TRADE lists no pilgrimage trade and LAND has no pilgrimage chain",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "08662",
+"sev": "MED",
+"n": 3,
+"town": "r2s-under_siege-village-3",
+"section": "Journal/Power",
+"fold": "Elder Council governs, with Military/Guard pressing close behind.",
+"text": "Elder Council governs, with Military/Guard pressing close behind.",
+"why": "slash-joined label 'Military/Guard' used as a name in a sentence",
+"kinds": [
+"BROKEN",
+"STATE"
+],
+"writer": {
+"file": "src/pdf/lib/headlines.js",
+"line": 169,
+"fn": "powerHeadline"
+}
+},
+{
+"id": "32723",
+"sev": "MED",
+"n": 3,
+"town": "r2s-infiltrated-thorp-3",
+"section": "PDF/Overview",
+"fold": "the orthodox clergy / Reformists / Secular camp",
+"text": "the orthodox clergy / Reformists / Secular camp",
+"why": "orthodox clergy, reformists, secular camp; HOUSES has no church or clergy, PAST records no religious event, thorp of 6",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "21345",
+"sev": "MED",
+"n": 3,
+"town": "r2s-infiltrated-thorp-3",
+"section": "PDF/HistoryFounding",
+"fold": "Parties: the orthodox clergy vs Reformists vs Secular camp",
+"text": "Parties: the orthodox clergy vs Reformists vs Secular camp",
+"why": "orthodox clergy vs reformists vs secular camp; no clergy in HOUSES, PAST has no religious event, thorp of 6",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "00468",
+"sev": "MED",
+"n": 3,
+"town": "r2s-politically_fractured-thorp-1",
+"section": "Journal/NPC Quick Reference",
+"fold": "# people worth knowing; <N>, the head shepherd, Household Elder, first of Household Council, carries the most weight.",
+"text": "Two people worth knowing; Citlali Caan, the head shepherd, Household Elder, first of Household Council, carries the most weight.",
+"why": "Citlali titled Household Elder; PEOPLE title is head shepherd; HOUSES has no household elder",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/pdf/lib/headlines.js",
+"line": 401,
+"fn": "npcsHeadline"
+}
+},
+{
+"id": "05244",
+"sev": "MED",
+"n": 3,
+"town": "r2s-insurgency-thorp-3",
+"section": "Journal/NPC Quick Reference",
+"fold": "Ask who matters here and you hear # names; <N>, the boat-headman, Household Elder, first of Household Council, comes first.",
+"text": "Ask who matters here and you hear two names; Mechthild Becker, the boat-headman, Household Elder, first of Household Council, comes first.",
+"why": "Mechthild titled Household Elder; PEOPLE title boat-headman @ Fishing community; no household elder in HOUSES",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/pdf/lib/headlines.js",
+"line": 403,
+"fn": "npcsHeadline"
+}
+},
+{
+"id": "30854",
+"sev": "MED",
+"n": 3,
+"town": "r2r-hamlet-16",
+"section": "Journal/Economics & Trade",
+"fold": "What goes out of here is mostly river fish; it grows less food than it eats, and imports make up about # of the gap.",
+"text": "What goes out of here is mostly river fish; it grows less food than it eats, and imports make up about half of the gap.",
+"why": "says what goes out is mostly river fish; FOOD failed source is fish and the town is in active famine",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/pdf/lib/headlines.js",
+"line": 214,
+"fn": "economicsHeadline"
+}
+},
+{
+"id": "17048",
+"sev": "MED",
+"n": 3,
+"town": "r2r-village-42",
+"section": "PDF/Services",
+"fold": "Mill Sites » Mill + Sawmill » Flour and meal, Milled lumber",
+"text": "Mill Sites » Mill + Sawmill » Flour and meal, Milled lumber",
+"why": "shows Mill + Sawmill yielding Milled lumber; LAND gaps say the Sawmill exists but lacks access to timber",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "04300",
+"sev": "MED",
+"n": 3,
+"town": "r2r-village-27",
+"section": "PDF/EconomicsTrade",
+"fold": "Agricultural produce EXPORT",
+"text": "Agricultural produce EXPORT",
+"why": "'Agricultural produce EXPORT' but TRADE exports list names no agricultural produce (flour, grain export, livestock, baked goods...)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "16735",
+"sev": "MED",
+"n": 3,
+"town": "r2s-famine-town-1",
+"section": "Journal/Power",
+"fold": "Merchant oligarchy governs, with Religious Authorities pressing close behind.",
+"text": "Merchant oligarchy governs, with Religious Authorities pressing close behind.",
+"why": "Religious Authorities pressing close behind; GOVERNMENT has them Strong, above the Significant governing Merchant oligarchy",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/pdf/lib/headlines.js",
+"line": 169,
+"fn": "powerHeadline"
+}
+},
+{
+"id": "31610",
+"sev": "MED",
+"n": 3,
+"town": "r2s-succession_void-metropolis-0",
+"section": "Journal/Overview",
+"fold": "You reach <N>, a metropolis of # and it shows at once: no # holds the seat of power, and those who want it are counting their friends.",
+"text": "You reach Kulubtitlan, a metropolis of 16,189, and it shows at once: no one holds the seat of power, and those who want it are counting their friends.",
+"why": "'no one holds the seat of power' contradicts 'Ducal Governorship governs' in the power structure; the governor Tepeu Zo is on the roster",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/pdf/lib/headlines.js",
+"line": 87,
+"fn": "CRISIS_SEEN"
+}
+},
+{
+"id": "23017",
+"sev": "MED",
+"n": 2,
+"town": "r2s-famine-metropolis-3",
+"section": "Journal/Power",
+"fold": "Royal Authority governs, with Religious Authorities pressing close behind.",
+"text": "Royal Authority governs, with Religious Authorities pressing close behind.",
+"why": "Royal Authority governs with Religious Authorities 'close behind'; GOVERNMENT has Religious Authorities Strong above Royal Authority Significant",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/pdf/lib/headlines.js",
+"line": 169,
+"fn": "powerHeadline"
+}
+},
+{
+"id": "09844",
+"sev": "MED",
+"n": 2,
+"town": "r2s-mass_migration-hamlet-3",
+"section": "Journal/Power",
+"fold": "Feudal Stewardship governs, with Military/Guard pressing close behind.",
+"text": "Feudal Stewardship governs, with Military/Guard pressing close behind.",
+"why": "Feudal Stewardship 'governs' with Military/Guard 'close behind'; GOVERNMENT gives Military/Guard Dominant over Strong, so it is ahead; slash-joined label used as a name",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/pdf/lib/headlines.js",
+"line": 169,
+"fn": "powerHeadline"
+}
+},
+{
+"id": "06927",
+"sev": "MED",
+"n": 2,
+"town": "r2s-insurgency-hamlet-1",
+"section": "PDF/Services",
+"fold": "Coal or peat deposits » Peat cutter + Charcoal burner » Coal",
+"text": "Coal or peat deposits » Peat cutter + Charcoal burner » Coal",
+"why": "presents Charcoal burner as producing coal; LAND gaps say the burner lacks access to its timber input",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "06924",
+"sev": "MED",
+"n": 2,
+"town": "r2s-insurgency-hamlet-1",
+"section": "PDF/Services",
+"fold": "Coal or peat deposits » Charcoal burner + Peat cutter » Coal, Peat fuel",
+"text": "Coal or peat deposits » Charcoal burner + Peat cutter » Coal, Peat fuel",
+"why": "presents Charcoal burner as producing coal and peat fuel; LAND gaps say the burner lacks its timber input",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "06946",
+"sev": "MED",
+"n": 2,
+"town": "r2r-village-5",
+"section": "PDF/Services",
+"fold": "Coastal timber » River ferry » Ferries",
+"text": "Coastal timber » River ferry » Ferries",
+"why": "coastal timber turned into ferries by the river ferry; LAND gaps say the timber is raw but not being processed, boatbuilding chain vulnerable",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "12953",
+"sev": "MED",
+"n": 2,
+"town": "r2r-village-18",
+"section": "Journal/Power",
+"fold": "Household Council governs, with Military Party pressing close behind.",
+"text": "Household Council governs, with Military Party pressing close behind.",
+"why": "Military Party is Strong and Household Council only Significant; the Military Party is ahead, not 'close behind'",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/pdf/lib/headlines.js",
+"line": 169,
+"fn": "powerHeadline"
+}
+},
+{
+"id": "05888",
+"sev": "MED",
+"n": 2,
+"town": "r2r-village-52",
+"section": "PDF/EconomicsTrade",
+"fold": "Boots and shoes EXPORT",
+"text": "Boots and shoes EXPORT",
+"why": "'Boots and shoes EXPORT'; TRADE exports lists Leather goods only, no boots",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "23156",
+"sev": "MED",
+"n": 2,
+"town": "r2r-village-52",
+"section": "PDF/EconomicsTrade",
+"fold": "Saddles and harness EXPORT",
+"text": "Saddles and harness EXPORT",
+"why": "'Saddles and harness EXPORT'; TRADE exports lists Leather goods only",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "15575",
+"sev": "MED",
+"n": 2,
+"town": "r2r-village-52",
+"section": "PDF/EconomicsTrade",
+"fold": "Leather armour EXPORT",
+"text": "Leather armour EXPORT",
+"why": "'Leather armour EXPORT'; TRADE exports lists Leather goods only, and imports plate armour",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "09845",
+"sev": "MED",
+"n": 2,
+"town": "r2s-wartime-village-1",
+"section": "Journal/Power",
+"fold": "Feudal Stewardship governs, with Religious Authorities pressing close behind.",
+"text": "Feudal Stewardship governs, with Religious Authorities pressing close behind.",
+"why": "Feudal Stewardship is only Minor; Religious Authorities is Strong, so cannot be 'close behind' the governing power",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/pdf/lib/headlines.js",
+"line": 169,
+"fn": "powerHeadline"
+}
+},
+{
+"id": "17282",
+"sev": "MED",
+"n": 2,
+"town": "r2r-village-33",
+"section": "Journal/Economics & Trade",
+"fold": "Most of what it sells is mineral salts; it grows less food than it eats, and imports make up most of the gap.",
+"text": "Most of what it sells is mineral salts; it grows less food than it eats, and imports make up most of the gap.",
+"why": "says most of what it sells is mineral salts; LAND gaps say hot_springs_mineral is available but not being processed, and no house makes salts",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/pdf/lib/headlines.js",
+"line": 208,
+"fn": "economicsHeadline"
+}
+},
+{
+"id": "25173",
+"sev": "MED",
+"n": 2,
+"town": "r2r-village-27",
+"section": "PDF/EconomicsTrade",
+"fold": "Surplus food EXPORT",
+"text": "Surplus food EXPORT",
+"why": "'Surplus food EXPORT' but TRADE exports list names no surplus food",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "09822",
+"sev": "MED",
+"n": 2,
+"town": "r2s-plague_onset-town-2",
+"section": "Journal/Power",
+"fold": "Feudal Appointee governs, with Religious Authorities pressing close behind.",
+"text": "Feudal Appointee governs, with Religious Authorities pressing close behind.",
+"why": "Religious Authorities pressing close behind; GOVERNMENT gives them Strong, above the Minor governing Feudal Appointee",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/pdf/lib/headlines.js",
+"line": 169,
+"fn": "powerHeadline"
+}
+},
+{
+"id": "07329",
+"sev": "MED",
+"n": 2,
+"town": "r2r-town-12",
+"section": "Journal/Power",
+"fold": "Corrupt Council governs, with Thieves' Guild pressing close behind.",
+"text": "Corrupt Council governs, with Thieves' Guild pressing close behind.",
+"why": "says Thieves' Guild presses close behind; GOVERNMENT has Thieves' Guild Strong above Corrupt Council Significant, and 28969 says it outweighs the seat-holder",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/pdf/lib/headlines.js",
+"line": 169,
+"fn": "powerHeadline"
+}
+},
+{
+"id": "10860",
+"sev": "MED",
+"n": 2,
+"town": "r2r-town-53",
+"section": "PDF/EconomicsTrade",
+"fold": "Gem appraisal EXPORT",
+"text": "Gem appraisal EXPORT",
+"why": "says gem appraisal is exported; TRADE exports list only Cut gemstones; gem appraisal is not in exports or made here",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "01241",
+"sev": "MED",
+"n": 2,
+"town": "r2s-succession_void-city-2",
+"section": "Journal/Power",
+"fold": "<N> governs, with Noble Families pressing close behind.",
+"text": "Noble Governorship governs, with Noble Families pressing close behind.",
+"why": "says Noble Governorship governs; crisis is Succession Void, leadership void, all powers Minor, and other sentence says no one holds the seat",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/pdf/lib/headlines.js",
+"line": 169,
+"fn": "powerHeadline"
+}
+},
+{
+"id": "00568",
+"sev": "MED",
+"n": 1,
+"town": "r2s-succession_void-thorp-3",
+"section": "Journal/NPC Quick Reference",
+"fold": "# person worth knowing: <N>, the camp foreman, Acting Household Elder, first of <N>.",
+"text": "One person worth knowing: Nabila ibn Ahmed, the camp foreman, Acting Household Elder, first of Household Council.",
+"why": "gives Nabila title Acting Household Elder; PEOPLE title camp foreman; HOUSES has no household elder",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/pdf/lib/headlines.js",
+"line": 397,
+"fn": "npcsHeadline"
+}
+},
+{
+"id": "14754",
+"sev": "MED",
+"n": 1,
+"town": "r2r-village-21",
+"section": "Journal/Economics & Trade",
+"fold": "Its income rests on salted fish; it grows less food than it eats, and nothing comes in to make up the gap.",
+"text": "Its income rests on salted fish; it grows less food than it eats, and nothing comes in to make up the gap.",
+"why": "'income rests on salted fish'; under siege nothing is exported by water, and the same line says nothing comes in",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/pdf/lib/headlines.js",
+"line": 200,
+"fn": "economicsHeadline"
+}
+},
+{
+"id": "08708",
+"sev": "MED",
+"n": 1,
+"town": "r2r-village-30",
+"section": "Journal/Power",
+"fold": "Elected Reeve governs, with The Independent Bloc pressing close behind.",
+"text": "Elected Reeve governs, with The Independent Bloc pressing close behind.",
+"why": "The Independent Bloc is Dominant and Elected Reeve only Significant, with no stable authority; the Bloc is not 'close behind' the Reeve",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/pdf/lib/headlines.js",
+"line": 169,
+"fn": "powerHeadline"
+}
+},
+{
+"id": "12102",
+"sev": "MED",
+"n": 1,
+"town": "r2s-infiltrated-village-2",
+"section": "PDF/Overview",
+"fold": "Headman's Authority / Popular candidate / Religious Authorities",
+"text": "Headman's Authority / Popular candidate / Religious Authorities",
+"why": "lists a 'Popular candidate' power; GOVERNMENT has Headman's Authority, Religious Authorities, Independent Bloc; crisis is infiltration, no seat contest",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "21874",
+"sev": "MED",
+"n": 1,
+"town": "r2r-village-42",
+"section": "Journal/Power",
+"fold": "Priestly Guidance governs, with The Independent Bloc pressing close behind.",
+"text": "Priestly Guidance governs, with The Independent Bloc pressing close behind.",
+"why": "Priestly Guidance is Minor and The Independent Bloc Significant, with no stable authority; the Bloc is ahead, not 'close behind'",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/pdf/lib/headlines.js",
+"line": 169,
+"fn": "powerHeadline"
+}
+},
+{
+"id": "09841",
+"sev": "MED",
+"n": 1,
+"town": "r2s-mass_migration-village-2",
+"section": "Journal/Power",
+"fold": "Feudal Stewardship governs, with <N> pressing close behind.",
+"text": "Feudal Stewardship governs, with Religious Authorities pressing close behind.",
+"why": "Religious Authorities are Dominant, Feudal Stewardship only Strong; the church is ahead, not 'close behind'",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/pdf/lib/headlines.js",
+"line": 169,
+"fn": "powerHeadline"
+}
+},
+{
+"id": "09847",
+"sev": "MED",
+"n": 1,
+"town": "r2s-politically_fractured-village-2",
+"section": "Journal/Power",
+"fold": "Feudal Stewardship governs, with The Independent Bloc pressing close behind.",
+"text": "Feudal Stewardship governs, with The Independent Bloc pressing close behind.",
+"why": "Feudal Stewardship is Minor, The Independent Bloc Strong, with no stable authority; the Bloc is ahead, not 'close behind'",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/pdf/lib/headlines.js",
+"line": 169,
+"fn": "powerHeadline"
+}
+},
+{
+"id": "29786",
+"sev": "MED",
+"n": 1,
+"town": "r2r-village-0",
+"section": "Journal/Viability Assessment",
+"fold": "Viable, but it cannot feed itself: some of the food it lacks comes in by minor routes and sanctioned caravans.",
+"text": "Viable, but it cannot feed itself: some of the food it lacks comes in by minor routes and sanctioned caravans.",
+"why": "food 'comes in by minor routes and sanctioned caravans'; trade access isolated and TRADE imports none",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/pdf/lib/headlines.js",
+"line": 348,
+"fn": "viabilityHeadline"
+}
+},
+{
+"id": "29320",
+"sev": "MED",
+"n": 1,
+"town": "r2s-occupied-town-0",
+"section": "Journal/Power",
+"fold": "Town Council governs, with Occupation Authority pressing close behind.",
+"text": "Town Council governs, with Occupation Authority pressing close behind.",
+"why": "Town Council governs with Occupation Authority close behind; GOVERNMENT gives Occupation Authority Strong, above the Significant Town Council, under occupation",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/pdf/lib/headlines.js",
+"line": 169,
+"fn": "powerHeadline"
+}
+},
+{
+"id": "16524",
+"sev": "MED",
+"n": 1,
+"town": "r2r-town-3",
+"section": "Journal/Power",
+"fold": "Merchant Council governs, with Thieves' Guild pressing close behind.",
+"text": "Merchant Council governs, with Thieves' Guild pressing close behind.",
+"why": "puts Thieves' Guild close behind Merchant Council; GOVERNMENT has Thieves' Guild Strong above Merchant Council Minor, so the guild is ahead",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/pdf/lib/headlines.js",
+"line": 169,
+"fn": "powerHeadline"
+}
+},
+{
+"id": "29819",
+"sev": "MED",
+"n": 1,
+"town": "r2r-town-22",
+"section": "PDF/Services",
+"fold": "Vintner » Meals and drink",
+"text": "Vintner » Meals and drink",
+"why": "shows the Vintner yielding meals and drink with no caveat; LAND gaps say the Vintner lacks access to grapes",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "22340",
+"sev": "MED",
+"n": 1,
+"town": "r2r-town-53",
+"section": "PDF/EconomicsTrade",
+"fold": "Raw gemstones EXPORT",
+"text": "Raw gemstones EXPORT",
+"why": "says raw gemstones are exported; TRADE exports only Cut gemstones, raw gemstones appear only under made here",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "30855",
+"sev": "MED",
+"n": 1,
+"town": "r2s-famine-city-0",
+"section": "Journal/Economics & Trade",
+"fold": "What goes out of here is mostly river fish; it grows less food than it eats, and imports make up most of the gap.",
+"text": "What goes out of here is mostly river fish; it grows less food than it eats, and imports make up most of the gap.",
+"why": "'What goes out of here is mostly river fish'; FOOD failed source is fish and the famine cut is 50%",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/pdf/lib/headlines.js",
+"line": 214,
+"fn": "economicsHeadline"
+}
+},
+{
+"id": "20306",
+"sev": "MED",
+"n": 1,
+"town": "r2s-politically_fractured-city-0",
+"section": "Journal/Power",
+"fold": "Noble Governorship governs, with Noble Families pressing close behind.",
+"text": "Noble Governorship governs, with Noble Families pressing close behind.",
+"why": "says Noble Governorship governs with Noble Families close behind; Governorship is Suppressed, Families Significant, stability 'no stable governing authority'",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/pdf/lib/headlines.js",
+"line": 169,
+"fn": "powerHeadline"
+}
+},
+{
+"id": "06586",
+"sev": "MED",
+"n": 1,
+"town": "r2s-slave_revolt-city-1",
+"section": "Journal/Power",
+"fold": "City Council governs, with Religious Authorities pressing close behind.",
+"text": "City Council governs, with Religious Authorities pressing close behind.",
+"why": "Religious Authorities pressing close behind City Council; GOVERNMENT has Religious Authorities Strong, above City Council Significant",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/pdf/lib/headlines.js",
+"line": 169,
+"fn": "powerHeadline"
+}
+},
+{
+"id": "14828",
+"sev": "MED",
+"n": 1,
+"town": "r2s-under_siege-metropolis-1",
+"section": "Journal/Economics & Trade",
+"fold": "Its people make their living from ship passage; it grows less food than it eats, and nothing comes in to make up the gap.",
+"text": "Its people make their living from ship passage; it grows less food than it eats, and nothing comes in to make up the gap.",
+"why": "says people live from ship passage; CRISIS Under Siege, nothing comes in or goes out by water",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/pdf/lib/headlines.js",
+"line": 210,
+"fn": "economicsHeadline"
+}
+},
+{
+"id": "08417",
+"sev": "MED",
+"n": 1,
+"town": "r2s-slave_revolt-metropolis-1",
+"section": "Journal/Power",
+"fold": "Ducal Governorship governs, with Military/Guard pressing close behind.",
+"text": "Ducal Governorship governs, with Military/Guard pressing close behind.",
+"why": "Military/Guard is Strong, Ducal Governorship only Minor, so Military/Guard is not 'close behind' the governing power",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/pdf/lib/headlines.js",
+"line": 169,
+"fn": "powerHeadline"
+}
+}
+]

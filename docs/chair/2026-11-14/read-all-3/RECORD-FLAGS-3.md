@@ -1,0 +1,87 @@
+# READ-ALL · the record itself cannot be so: every flag a reader put on a town's header (83)
+
+Each line: the town, the severity, what the reader said. These are faults of the generated RECORD (the page prints them faithfully): a cure moves the record and is a declared move: MEASURE FIRST.
+
+- r2r-city-38 · MED · population 2853 cannot hold Parish churches (10-30), Craft guilds (30-80), Merchant guilds (15-40), Multiple courthouses: counts sized for a far larger city
+- r2r-city-39 · MED · population 2866 cannot hold Parish churches (10-30), Craft guilds (30-80), Merchant guilds (15-40), Multiple monasteries, Multiple courthouses: counts sized for a far larger city
+- r2r-city-44 · LOW · FOUNDING 'by royal decree and a century of forced investment' cannot also be 'a seasonal camp for deep-water fishers' that grew on its own
+- r2r-city-44 · LOW · founded by royal decree and a century of forced investment, yet the reason is a seasonal fishers' camp that grew by itself; the two cannot both be true
+- r2r-city-46 · MED · population 2578 cannot hold Parish churches (10-30), Craft guilds (30-80), Merchant guilds (15-40), Multiple monasteries, Multiple courthouses: counts sized for a far larger city
+- r2r-hamlet-15 · LOW · hamlet of 42 with Merchant Guilds as a Dominant power; HOUSES has no guild or warehouse, only a periodic market
+- r2r-hamlet-18 · LOW · exports Pilgrim hospitality and bottled healing waters, but HOUSES has no inn, hostel, spa or shrine; also exports flour with no mill of its own
+- r2r-hamlet-2 · MED · hamlet of 76 with a part-time smith and no school exports advanced weapons and armor and makes Education (basic)
+- r2r-hamlet-39 · MED · STATE says defence 'Lightly Defended'; DEFENCE lists no walls, garrison, militia, watch, hired, charter or magic
+- r2r-hamlet-57 · MED · STATE says defence 'Lightly Defended'; DEFENCE lists no walls, garrison, militia, watch, hired, charter or magic
+- r2r-hamlet-59 · MED · STATE says defence 'Lightly Defended'; DEFENCE lists no walls, garrison, militia, watch, hired, charter or magic
+- r2r-hamlet-6 · LOW · hamlet of 57 with only a mine captain and militia exports advanced weapons and armor; no smith or forge in HOUSES
+- r2r-hamlet-8 · LOW · 'began as a naval base' for a hamlet of 57 founded by families wintering together; DEFENCE has no garrison, militia or watch
+- r2r-hamlet-8 · LOW · founder 'three or four families wintering together' cannot sit with reason 'began as a naval base protecting the coast'; no force at all in DEFENCE
+- r2r-metropolis-44 · MED · exports waterborne freight and pilgrimage tourism; trade access is isolated and raids close the roads, so nothing comes or goes
+- r2r-metropolis-51 · MED · Hills town on trade access road lists Docks/port facilities and Harbour master's office with a wharfinger and harbour master; no water access
+- r2r-metropolis-9 · LOW · isolated Hills town with Docks/port facilities, Harbour master's office and Toll bridge in HOUSES; trade access isolated gives no route
+- r2r-thorp-1 · MED · thorp makes flour, textiles, iron and metalwork; HOUSES has only Access to external mill, no weaver or smith
+- r2r-thorp-10 · MED · thorp of 10 makes glass and gives basic education; LAND says glass sand is raw and not processed; no glassworks or school in HOUSES
+- r2r-thorp-17 · MED · thorp of 11 gives basic education and makes stone; LAND says stone is raw and not processed; no school in HOUSES
+- r2r-thorp-22 · MED · thorp of 11 makes iron, metalwork and timber; HOUSES has no smith or woodcutter, LAND gives timber as not processed
+- r2r-thorp-27 · MED · TRADE says flour, textiles, clay and pottery made here; HOUSES has only Access to external mill, LAND says clay and stone are not processed
+- r2r-thorp-38 · MED · thorp of 26 makes gems and basic education; LAND says gold/silver ore not processed; no school or lapidary in HOUSES
+- r2r-thorp-40 · MED · thorp of 20 makes iron and metalwork; HOUSES has no smith or forge, LAND lists iron ore deposits only
+- r2r-thorp-41 · MED · thorp of 22 exports bottled healing waters and pilgrim hospitality and makes iron and metalwork; HOUSES has no smithy, bottler or lodging, only a wayside shrine
+- r2r-thorp-41 · MED · thorp of 22 makes iron and metalwork; HOUSES has no smith or forge, LAND lists only iron ore
+- r2r-thorp-46 · MED · thorp of 26 with no glassworks or smith makes glass, iron, metalwork and basic education; LAND says glass sand not processed
+- r2r-thorp-58 · MED · thorp of 7 makes gems and gives basic education (TRADE made here) with only access to a neighbour's church and mill
+- r2r-town-27 · LOW · DEFENCE walls and HOUSES carry the template label 'Gates (if walled)' as if it were a house or gate the town has
+- r2r-town-28 · LOW · title 'madam' given to Floki Dagsson (m); title does not fit the person's sex
+- r2r-town-31 · LOW · FOUNDING reason is None: an unfilled slot
+- r2r-town-37 · MED · makes and exports salt and salted fish; LAND Salt Flats depleted and TRADE imports salt (local flats exhausted)
+- r2r-town-47 · LOW · title 'madam' given to Manish Khanna (m); title does not fit the person's sex
+- r2r-town-57 · LOW · walls and HOUSES carry the template label 'Gates (if walled)' as if it were a gate the town has
+- r2r-under_siege-thorp-2 · MED · thorp of 6 makes luxury goods and gives basic education; isolated, no church or school of its own
+- r2r-under_siege-thorp-3 · MED · thorp of 7 makes iron and metalwork; HOUSES has no smith or forge, only farming, fishing, woodcutting
+- r2r-village-5 · LOW · exports River craft and Cargo barges and makes them, but HOUSES has no boatyard or shipwright, only a ferry
+- r2r-village-55 · LOW · a Fish market and smoked-fish output in a Hills village; LAND lists no fishing grounds or water resource
+- r2s-famine-city-1 · LOW · FOUNDING by royal decree cannot also be 'a seasonal fair that became year-round'; and a desert town has a Fish market and no fishing resource
+- r2s-famine-city-1 · LOW · founded by royal decree and a century of forced investment, yet the reason is a seasonal fair that became year-round as traders chose to winter; the two cannot both be true
+- r2s-famine-thorp-0 · MED · thorp of 19 makes flour, textiles, iron and metalwork; HOUSES has only Access to external mill, no weaver or smith
+- r2s-famine-thorp-1 · MED · thorp of 20 with only a wayside shrine makes religious services and basic education; no school or church of its own
+- r2s-famine-thorp-2 · MED · TRADE says iron and metalwork made here; LAND says iron ore is raw and not processed; HOUSES has no smith
+- r2s-famine-thorp-3 · MED · thorp of 16 with only access to a church makes luxury goods and gives basic education; HOUSES has no school
+- r2s-famine-town-1 · MED · TRADE exports Milled flour, Meals and drink, Preserved foods while FOOD failed source is grain under Active Famine, grown 28%
+- r2s-infiltrated-village-1 · LOW · exports iron ore and advanced weapons, yet HOUSES has no mine, only one blacksmith, and 117 people
+- r2s-infiltrated-village-3 · LOW · safety 'Very Safe' while defence Vulnerable, monsters on the roads, a plagued monster setting and an infiltration crisis
+- r2s-insurgency-metropolis-3 · MED · DEFENCE says hired: none, yet HOUSES lists Hired blades and PEOPLE has a blade captain of Hired blades
+- r2s-mass_migration-metropolis-3 · MED · Plains town on trade access road lists a Harbour master's office with a harbour master; no docks, coast or river
+- r2s-monster_pressure-metropolis-2 · MED · Hills town on trade access road lists Docks/port facilities and Harbour master's office with wharfinger and harbour master; no water access
+- r2s-monster_pressure-thorp-1 · MED · thorp of 18 makes flour, textiles and baked goods; HOUSES has only Access to external mill, no weaver or baker
+- r2s-monster_pressure-town-2 · LOW · DEFENCE says hired: none, yet HOUSES lists a Free company hall with a company captain in PEOPLE
+- r2s-occupied-metropolis-0 · MED · trade access is road, yet HOUSES has Docks/port facilities and Harbour master's office and TRADE exports waterborne freight; forest town
+- r2s-occupied-thorp-0 · MED · TRADE says clay and pottery made here; LAND says clay is not processed; HOUSES has no potter
+- r2s-occupied-thorp-1 · MED · thorp of 17 makes iron and metalwork; HOUSES has no smith or forge; LAND says its raw resources are not processed
+- r2s-occupied-thorp-3 · MED · thorp of 18 makes gems and gives basic education; no school or lapidary in HOUSES
+- r2s-plague_onset-hamlet-0 · MED · hamlet of 25 makes flour, baked goods and 'luxury' and exports toll revenue; HOUSES has no mill, bakery or toll, Hunting grounds absent yet furs exported
+- r2s-plague_onset-hamlet-2 · MED · hamlet of 24 'makes' gems, religious services and basic education; HOUSES has only access to a parish church, no school or gem works
+- r2s-plague_onset-hamlet-3 · MED · makes leather goods, preserved foods, religious services, education and 'luxury'; HOUSES has only an alehouse, shrine access and steward; gaps say wool and timber unworked
+- r2s-plague_onset-metropolis-3 · LOW · founder 'trade house that outgrew every other settlement' vs reason 'grew from a logging camp': a house cannot grow from a camp
+- r2s-plague_onset-metropolis-3 · LOW · same founder phrase: a trade house 'outgrew every other settlement' contradicts reason 'grew from a logging camp'
+- r2s-plague_onset-thorp-0 · MED · thorp of 14 makes 'gems' while LAND has precious metal veins and no gemstones; a woodcutter's thorp exporting sacred wood and ritual components
+- r2s-plague_onset-thorp-1 · LOW · exports 'Recovered artefacts' and Sea salt while HOUSES has no ruin-working or salt works; LAND chains none
+- r2s-plague_onset-thorp-2 · MED · thorp of 9 'makes' flour, baked goods and stone and exports toll revenue and transit trade; HOUSES has no mill, bakery, quarry or toll, and LAND says stone is unworked
+- r2s-plague_onset-thorp-2 · MED · thorp of 9 makes flour and baked goods; HOUSES has only Access to external mill, no mill or bakery
+- r2s-plague_onset-thorp-3 · LOW · thorp of 15 'makes luxury' goods with only farming, a shepherd collective and a root cellar in HOUSES
+- r2s-plague_onset-town-2 · LOW · FOUNDING reason is None: founder given but no reason, an unfilled slot
+- r2s-plague_onset-town-3 · MED · makes salt, salted fish and smoked seafood; LAND says Fishing grounds absent, no salt resource and HOUSES has no fishery, salt works or smokehouse
+- r2s-plague_onset-village-1 · LOW · TRADE both exports and imports Medicinal herbs, and lists them as made here
+- r2s-plague_onset-village-2 · MED · TRADE says exports none and imports none but FOOD shows 5% brought in and imports cover 13; isolated village makes gems and 'hospitality for travellers'
+- r2s-plague_onset-village-3 · MED · makes iron and metalwork, but LAND gap says iron ore is not processed and HOUSES has no smith or smelter; a village makes 'luxury'
+- r2s-politically_fractured-metropolis-1 · MED · Hills town on trade access road lists Docks/port facilities and Harbour master's office with a wharfinger and harbour master; no water access
+- r2s-politically_fractured-town-2 · LOW · DEFENCE says hired: none, yet HOUSES lists Hired blades and a Hireling hall with a blade captain in PEOPLE
+- r2s-recently_betrayed-town-3 · LOW · LAND has grain fields depleted and Grain & Bread impaired, yet FOOD says grown 100% with imports None
+- r2s-religious_conversion-town-2 · LOW · walls and HOUSES carry the template label 'Gates (if walled)'; DEFENCE says hired: none yet HOUSES lists Hired blades and a Free company hall
+- r2s-slave_revolt-metropolis-0 · MED · Plains town on trade access road lists a Harbour master's office with a harbour master; no docks, coast or river
+- r2s-succession_void-metropolis-2 · MED · Plains town on crossroads trade access lists Docks/port facilities and Harbour master's office with a wharfinger and harbour master; no water access
+- r2s-succession_void-thorp-0 · MED · thorp of 8 makes gems and gives basic education; no school or lapidary in HOUSES
+- r2s-succession_void-town-3 · MED · DEFENCE says hired: none, yet HOUSES lists Hired blades and PEOPLE has a blade captain at Hired blades
+- r2s-under_siege-town-0 · MED · QUARRELS has Town Council vs War Council in high conflict (unpaid debt) while relations say symbiotic; the header contradicts itself
+- r2s-under_siege-village-2 · LOW · founded by war refugees who found it defensible, yet reason is two rival mining operations sharing infrastructure; both cannot be the origin
+- r2s-under_siege-village-2 · MED · founders are refugees who found the place defensible, but the reason is two rival mining operations sharing infrastructure; no mine in HOUSES
+- r2s-wartime-town-1 · LOW · DEFENCE says hired: none, yet HOUSES lists Hired blades and PEOPLE gives a blade captain

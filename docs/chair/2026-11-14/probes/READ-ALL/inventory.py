@@ -4,7 +4,8 @@
 # usage: inventory.py <census out-dir (corpus.ndjson.gz, dumps/)> <out.json>
 import io,re,collections,os,json,gzip,sys
 OUT,DEST=sys.argv[1],sys.argv[2]
-TABS=('World','Systems','Summary','Table')
+import os as _os
+TABS=tuple((_os.environ.get('SURFACES') or 'World,Systems,Summary,Table').split(','))   # SURFACES=PDF,Journal takes the exports' inventory
 rec={}
 for l in gzip.open(OUT+'/corpus.ndjson.gz','rt',encoding='utf-8'):
     o=json.loads(l); rec[o['seed']]=o['s']

@@ -51,10 +51,30 @@ for p in packets:
     status[p] = '%d flags%s%s' % (n, (' · %d unparsed lines' % bad) if bad else '', ' · ' + done if done else ' · NOT DONE')
 json.dump(flags, io.open(OUT + '/flags.all.json', 'w', encoding='utf-8'), ensure_ascii=False, indent=0)
 print('PACKETS:'); [print('  %-10s %s' % (p, status[p])) for p in packets]
+# COVERAGE: where in its packet each reader's flags fall. A read that stopped early or skimmed its end shows as empty tenths:
+# a fast read is checked here before it is believed (2026-11-14: a 2,236-line packet came back in four and a half minutes).
+order = collections.defaultdict(list)
+for (p_, i_) in shown: order[p_].append(i_)
+print('COVERAGE (which tenths of each packet hold a flag; where the last flag falls):')
+for p in packets:
+    pos = {i_: k for k, i_ in enumerate(order[p])}; n_ = len(pos) or 1
+    fl = [pos[str(f['id'])] for f in flags if f['packet'] == p and str(f['id']) in pos]
+    if not fl: continue
+    tenths = sorted(set(min(9, x * 10 // n_) for x in fl))
+    print('  %-10s lines %5d · flags %4d · tenths %s%s · last flag at %d%%' % (p, n_, len(fl), ''.join(str(t) for t in tenths), '' if len(tenths) >= 8 else '  <-- THIN', max(fl) * 100 // n_))
 art = [f for f in flags if f['artifact']]
 print('ARTIFACTS OF THE PACKET BUILDER (BROKEN flags on a name it cut): %d, left out below' % len(art))
 flags = [f for f in flags if not f['artifact']]
 json.dump(art, io.open(OUT + '/artifacts.json', 'w', encoding='utf-8'), ensure_ascii=False, indent=0)
+# flags struck, or set apart, BY THE RECORD (verify3.py: a limit of the readers' header checked against the town's own record):
+# STRIKES / ECHOES name json lists of {packet, id, rwhy (the reader's reason, its first 80 characters)}
+drop = set()
+for env_ in ('STRIKES', 'ECHOES'):
+    if os.environ.get(env_):
+        for x in json.load(io.open(os.environ[env_], encoding='utf-8')): drop.add((x['packet'], str(x['id']), x.get('rwhy', '')))
+if drop:
+    n0 = len(flags); flags = [f for f in flags if (f['packet'], str(f['id']), str(f.get('why', ''))[:80]) not in drop]
+    print('STRUCK OR SET APART BY THE RECORD (verify3.py): %d flags, left out below' % (n0 - len(flags)))
 main = [f for f in flags if not f['packet'].startswith('cal')]
 print('FLAGS on the 720: %d · by severity %s · by kind %s · ids unknown %d' % (len(main), dict(collections.Counter(f['sev'] for f in main)), dict(collections.Counter(f['kind'] for f in main)), sum(1 for f in main if not f['known_id'])))
 # ---- one row a sentence
@@ -85,6 +105,7 @@ with io.open(OUT + '/TOP.md', 'w', encoding='utf-8') as fh:
 # ---- calibration: the bar's rows that still print word for word, and whether a reader flagged them
 def norm(s): return re.sub(r'\s+', ' ', str(s).replace('‘', "'").replace('’', "'").replace('“', '"').replace('”', '"')).strip()
 def fig(s): return re.sub(r'\d[\d,.]*', '#', s)
+if not os.path.exists(BARLIST): print('NO CALIBRATION: no bar list for this read'); sys.exit(0)
 L = json.load(io.open(BARLIST, encoding='utf-8'))
 pages = {}
 def page(seed):

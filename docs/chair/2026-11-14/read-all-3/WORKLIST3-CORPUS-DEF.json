@@ -1,0 +1,20 @@
+[
+{
+"id": "26310",
+"sev": "MED",
+"n": 18,
+"town": "r2s-under_siege-city-1",
+"section": "PDF/DefenseSecurity",
+"fold": "The city has nowhere to hold an offender, so the penalties its hearings can hand down are money and exile, and both of them fall unevenly.",
+"text": "The city has nowhere to hold an offender, so the penalties its hearings can hand down are money and exile, and both of them fall unevenly.",
+"why": "exile as a penalty; CRISIS is a siege, so nobody can leave by gate or road",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 1262,
+"fn": "DS-DEF-2 › Internal Security: court without detention · v1"
+}
+}
+]

@@ -1,0 +1,20 @@
+[
+{
+"id": "29296",
+"sev": "MED",
+"n": 1,
+"town": "r2r-village-21",
+"section": "PDF/Cover",
+"fold": "Top export: Salted fish (naval route only)",
+"text": "Top export: Salted fish (naval route only)",
+"why": "names a top export by sea; CRISIS Under Siege, so nothing goes out by road, gate or water",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/tradeListDisplay.js",
+"line": 8,
+"fn": ""
+}
+}
+]
