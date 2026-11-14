@@ -368,7 +368,10 @@ function defensePage(vm) {
     kv('Safety', d.safetyLabel),
     d.militaryStress ? kv('Military status', d.militaryStress.label || humanize(d.militaryStress.type)) : null,
     forces.length ? md('', '## Armed forces', forces.map(f =>
-      bullet(typeof f === 'string' ? institutionHouseLabel(f) : `${institutionHouseLabel(f.name || '')}${f.desc ? `: ${f.desc}` : ''}${f.source ? ` (${f.source})` : ''}`)) ) : null,
+      // ⛔ NO PROVENANCE TAG (R2-CODE-B-13, the reader's M10): the force's `source` ('required', 'generated',
+      // 'coherence_repair', …) is the generator's machinery, which the page never shows (the Defense tab's card
+      // dropped its badge by R3-TABS ruling b1); the line prints the house and what it is. @enforced-by tests/pdf/journalForceNoProvenance.test.js
+      bullet(typeof f === 'string' ? institutionHouseLabel(f) : `${institutionHouseLabel(f.name || '')}${f.desc ? `: ${f.desc}` : ''}`)) ) : null,
     (d.criminalOps || []).length ? md('', '## Criminal operations', d.criminalOps.map(o =>
       `- **${esc(o.name)}**${o.note ? `: ${esc(o.note)}` : ''}`)) : null,
     (d.vulnerabilities || []).length ? md('', '## Vulnerabilities',

@@ -1391,3 +1391,70 @@ Brief: origin/lane/chair-2026-11-08:docs/chair/2026-11-14/briefs/BRIEF-R2-CODE-B
 ## HAND BACK (2026-11-14 ~14:25 UTC, at the count's mark: get_session read 342,054 at 13:57, and the landing stop took the rest). Nothing running; everything pushed.
 DONE (this seat, each pushed): (c) 3a6de5c7b; (d) stopped and named for the join; (m) with (s) 1a3505705; the landing stop e4520f77c + a412fc3b2; the hand-back 9c4ef0b93, b23b48613, ba87ebe2d and this commit. WHAT IS LEFT is the list above, in its order.
 
+
+# PART 13 — R2-CODE-B-13, the thirteenth seat (the reds classed; M10; the reader's rows; an ADDENDUM at the end, the statement not rewritten)
+
+Brief: origin/lane/chair-2026-11-08:docs/chair/2026-11-14/briefs/BRIEF-R2-CODE-B-13.md. Tip read back from origin at the start: a86646b84 (as the brief named). Full history fetched (`git rev-parse --is-shallow-repository` false). Scratch worktree wt-b13 (branch b13, own node_modules by npm ci); detached wt-join (600b9f743, the joined line's tip) and wt-pre (ba87ebe2d, the first parent of the merge e4520f77c), node_modules linked (one lockfile, db637c28d).
+
+## FIRST ACT — the joined line's tip merged, clean (08e43c072)
+origin/lane/join-2026-11-14 had moved 0a296575c → 600b9f743 (fe225f12a docs; 600b9f743 the Tonight famine caller hands the vantage its facts, item (i) landed at the join). `git merge-tree` clean; merged `--no-ff` as 08e43c072; the lane now holds 600b9f743. tests/domain/summary/tonightFamineLineReadsGrain.test.js green at the tip.
+
+## THE CHAIR'S RULINGS SINCE PART 12'S COPY (2026-11-14; each vetoable by the owner), copied
+(r1) THE FIFTEEN REDS ARE CLASSED BEFORE ANYTHING IS CURED: each red file run in three trees (the seat's tip; the joined line's tip held; the lane's own tip before the merge). (A) red on the joined line too: carried, named, not this lane's; (B) red at the lane's own tip before the merge: the lane's own, cured or re-keyed BY IDENTITY; (C) green on both, red together: composed: both cures stand each in its own case, else STOP with the two intents. The table here; one message to the chair with the counts by class.
+(r2) REGISTERS ARE RE-DERIVED ONCE, AT THE CLOSE: a red that is a stale register is (A) or NAMED, never re-taken, banked or hand-edited. A pin a cure moves is re-keyed BY IDENTITY in the same commit.
+(r3) THE SEAT'S OWN WORKLIST BY WIDTH: the census's one command at the tip with `--files` for this lane's files; ten hit lines of a writer READ where they print before it is cured (a hit is a candidate); the rows take their place by FALSE towns.
+(r4) (d) STAYS STOPPED AS NAMED (the journal's power slot; its writer is the view model, 4,395 cards): the exports' seats', not this lane's.
+
+## (r1) THE REDS CLASSED (each of the eight files run whole in the three trees; vitest JSON per tree, outside the tree)
+Columns: tip 08e43c072 · joined 600b9f743 · pre-merge ba87ebe2d (— = the file is not in that tree).
+
+| file | title | tip | joined | pre | class | what was done |
+|---|---|---|---|---|---|---|
+| tests/generators/generationForkCensus.test.js | A1 the instrument reaches the generator graph | R | R | G | A | carried (the control row's hash; a register of the joined line's) |
+| tests/generators/generationForkCensus.test.js | A3e the classification re-executed | R | R | R | A | carried (red in all three; not in PART 12's 15) |
+| tests/generators/generationForkCensus.test.js | A4 both landing triples re-executed | R | R | G | A | carried |
+| tests/generators/generationForkCensus.test.js | A5 the mint channel | R | R | G | A | carried (food.cropFortune vias) |
+| tests/property/editCorpusRatchet.test.js | A3 no merged object mixes a taken leaf | R | R | G | A | carried (327 vs 332, same on both) |
+| tests/property/editCorpusRatchet.test.js | A4 the town keeps its invariants | R | R | G | A | carried (E7 19 vs 21, same on both) |
+| tests/property/editCorpusRatchet.test.js | A7 the honesty figures are re-measured | R | R | R | A | carried; the figure differs by tree (tip 695, joined 697, pre 672, pin 682): a register, re-derived at the close |
+| tests/property/editCorpusRatchet.test.js | A8 the family declared instruments hold | R | R | G | A | carried; the message differs (tip: scores [26,33] vs [20,32]; joined: two rows) |
+| tests/generators/pipelinePinnedChoosers.test.js | A1 the null change | R | R | R | A | carried (tip and joined 41 moved rows, pre 3: the golden corpus) |
+| tests/generators/pipelinePinnedChoosers.test.js | A6 the pin bag is never written through | R | R | G | A | carried (50 vs 38) |
+| tests/domain/editWorldFactResources.test.js | A2 the no-edit path is unmoved | R | R | G | A | carried |
+| tests/domain/editWorldFactResources.test.js | A6 the mark is not the echo | R | R | G | A | carried |
+| tests/property/generatorGoldenMaster.test.js | every config byte-identical | R | R | R | A | carried (525 rows on tip and joined; 36 pre): the owner-signed golden, never re-taken |
+| tests/domain/worldFactRederive.test.js | A7 the goldens cannot see any of it | R | R | G | A | carried |
+| tests/domain/people/hallDecidesUnderOccupation.test.js | r2s-infiltrated-metropolis-3 | R | R | — | A | carried (the file came with the joined line) |
+| tests/data/w2FixData6Rows.test.js | ww-1416 the brewer sells barrels | R | R | — | A | carried (the data lane's file) |
+
+COUNTS: 16 red titles at the tip in the eight files (PART 12's 15 and generationForkCensus A3e, red in all three trees): (A) 16, (B) 0, (C) 0. Every failure message at the tip is the joined line's own, byte for byte, except editCorpusRatchet A7 and A8 (the honesty figures; registers). One title is red on the joined line and GREEN at the tip: editCorpusRatchet A1 (joined: "61 to be 63").
+
+A SEVENTEENTH RED, found by the touched-files run of M10 (not in PART 12's list): tests/components/houseLabelEverySurface.test.jsx "rr2s-town-under_siege-rand-1: every surface" ("page Systems/Defense: allowed 1, found 0" and the two PDF variants): tip R, joined R, pre G: CLASS (A), carried. Its cause: this lane's allowance for the Defense tab's raw healer line ((m)'s FOR THE JOIN row, defenseDisplay.js) now finds 0: the joined line cured that row. NAMED, not touched: the allowance is to be struck BY IDENTITY by the seat or the join that lands with it (the brief's no-adjacent-repair). Counts with it: (A) 17, (B) 0, (C) 0.
+
+## M10 — DONE (a48cf4126)
+- CAUSE: src/foundry/journalPages.js :: defensePage, this lane's line (2af8bdfa9; no other lane's copy changes it, every lane read by content), kept `(${f.source})`: the generator's provenance after every force.
+- CURE: the tag off the line; label and description kept. Display only.
+- COUNTS (1,536 re-born at 3a4198e0f): towns 1,017 → 0; lines 4,406 → 0 (generated 1,955, required 1,792, coherence_repair 407, cascade 216, forced 11); bullets 6,127 → 6,127. A CLAIM OF ZERO on every surface: the journal by m10.mjs on the 1,536; the Defense tab carries no badge (R3-TABS b1); the PDF's DefenseSecurity.jsx reads no `source`; no other exporter prints a force's source (grep of src/ for a printed `.source`).
+- GUARD: tests/pdf/journalForceNoProvenance.test.js (collected, keep-guard, taken-off guard); three plants, each red on its arm, none committed.
+- TOWNS READ: r2r-thorp-1 (30), r2s-famine-village-3, r2s-under_siege-town-1, r2s-occupied-city-1, r2r-city-0, r2r-metropolis-8 (344,689). All true.
+- GATES: strict 0, ratchet 0, eslint 0, grid 0, castDerived 0; walker as at base (153/1/2); the 28 files naming journalPages.js: 27 green, houseLabelEverySurface (A, above).
+
+AN EIGHTEENTH RED, found by M12's touched-files run: tests/domain/r3c9ReaderLinesTrue.test.js "n15: … the account names no such rival and says no cost of it" (town Ainkarez): tip R, joined R, pre R: CLASS (A), carried (the r3-code-c lane's file; red at the base 3a4198e0f before M12). Counts with it: (A) 18, (B) 0, (C) 0.
+
+## M12 — DONE (939b605c9)
+- CAUSE: faithReading.js :: religiousFactionOf flagged `anotherGoverns` wherever another power governed (57395ee18): the true line left 148 towns where the contender outweighs the governor. This lane alone changes the file (by content).
+- CURE: the flag only where another power governs AND some other power matches or outweighs the contender. A FURTHER CONDITION THAN THE RULING'S WORDS, declared: the line says the weight RESTS with it, so a third power above it (rr3-town-religious_conversion-rand-3: Merchant Guilds 36 over its 33, Church Council governing at 31) keeps "A voice": 12 towns. For the owner's veto.
+- COUNTS (1,536 at 3a4198e0f): "Real political weight rests with …" 0 → 136 towns (village 67, town 38, city 23, metropolis 8; 22 over a religious-category governor), each "A voice …" before; 12 keep "A voice" (a third power above); 62 keep it (the governor matches or outweighs).
+- GUARD: tests/domain/faithContenderWeight.test.js (12 census towns; keep-guards for the governor and a third power; taken-off guard); three plants, each red on its arm, none committed.
+- TOWNS READ (the census renderer at the tip; Faith tab and PDF Identity): r2r-village-41 (81), r2s-slave_revolt-metropolis-0 (86,164), rr3-village-under_siege+famine-rand-1, r2s-famine-village-0, r2s-succession_void-village-0, r2s-succession_void-village-3, and the keep town. All true.
+- GATES: strict 0, ratchet 0, eslint 0, grid 0, castDerived 0; walker as at base (153/1/2); the 8 files naming faithReading.js: 7 green, r3c9 n15 (A, above).
+
+## ITEM 1's REMAINDER — THE PLAGUE TWIN READ (no code change)
+Read in the census's own dumps of every surface (the 720 at 3a4198e0f) and the plague+famine thorp rendered at the tip. The hook prints on three surfaces: the Crisis tab, the PDF Overview, the journal Overview (not on Plot Hooks, the NPCs tab or the Tonight sheet in these towns). The 720: roster healer 4 towns, stand-in 7, nobody 9.
+- A ROSTER HEALER ("{name}, the healer who first named the outbreak,"): r2s-plague_onset-village-2 (Decimia Flaccus, Master Apothecary), -town-0 (Anwar al-Masri, Master Apothecary), -metropolis-0 (Oyuntuya Kipchak, of the Apothecary district). TRUE: each a healer on the NPCs tab; no "No healer" line in those towns.
+- A STAND-IN ("{name}, the first to name the outbreak,"): r2s-plague_onset-thorp-0 (Jiahao Wu), -hamlet-0 (Daria Pavlov), -hamlet-2 (Archana Acharya): each "Tends the sick" on the NPCs tab beside "No healer is kept here" (2 lines each). TRUE: no office claimed.
+- NOBODY ("The first person to name the outbreak has gone quiet."): r2r-thorp-41, r2s-plague_onset-village-0, r2r-town-37, and rr3-thorp-plague_onset-rand-3 (16 souls, a plague under a FAMINE, rendered at the tip). TRUE.
+- A siege or an occupation under a plague: none among the 1,536 (the one combination born is the famine above).
+
+## (r3) THE CENSUS'S ONE COMMAND AT THE TIP (3a4198e0f, exit 0; births+render 1,220 s, count+trace 485 s; `--files` the lane's 40 src files)
+The lane's writers, by false towns (each a CANDIDATE, not yet read ten lines): src/pdf/sections/Services.jsx :: svcLabel 11.2 (12 towns, "Hot springs » Access to a house of worship"; FENCED by (k): the SURFACES-1 lane's, FOR THE JOIN); EconomicsTab.jsx :: EconomicFlowsSection 7.4 (8; "Stone Quarrying"; bar#235); traditionCorpus.js :: TRADITION_ELEMENTS 2.8 (3; "The Fair of the First Landing"); EconomicsTab.jsx :: EconomicsTab 2.8 (3; a siege's trade list); settlementQuickGuide.js :: scopeAtSize 1.9 (2; "built around a civic-ritual plaza …") and scopeAgainstRecord 0.9 (1; "built around the h[arbour]": M14). Their places by width: after M6's other half (21) and M4 (11).
