@@ -1,0 +1,105 @@
+{"id":"00899","town":"r2s-wartime-town-3","sev":"MED","kind":"LACKS","why":"Hedwig hires Ignatz Schröder's company; DEFENCE hired: none, and Ignatz runs the town watch, not a company","other":""}
+{"id":"20323","town":"r2s-wartime-town-3","sev":"MED","kind":"PAIR","why":"wants Ignatz Schröder's company put under the watch, but Ignatz Schröder runs the town watch","other":"22479"}
+{"id":"14478","town":"r2s-wartime-town-3","sev":"MED","kind":"PAIR","why":"says neither pushes hard enough to fight, under a Thieves' Guild~War Council rivalry marked escalating","other":"22925"}
+{"id":"08486","town":"r2s-wartime-town-3","sev":"LOW","kind":"PAIR","why":"flaw lazy and temperament diligent contradict each other in one character line","other":""}
+{"id":"03133","town":"r2r-town-35","sev":"MED","kind":"LACKS","why":"names the town's bank; HOUSES has money changers, no bank","other":""}
+{"id":"14215","town":"r2r-town-35","sev":"LOW","kind":"BROKEN","why":"doubled item: fine glass sand, fine glass sand","other":""}
+{"id":"HEADER","town":"r2r-town-35","sev":"LOW","kind":"RECORD","why":"HOUSES lists Hired blades while DEFENCE says hired: none","other":""}
+{"id":"HEADER","town":"r2r-town-43","sev":"MED","kind":"RECORD","why":"'town' of 366 holds Craft guilds (5-15), Taverns (5-20), Parish churches (2-5), Mills (2-5): more than 366 people can hold","other":""}
+{"id":"02684","town":"r2r-town-43","sev":"MED","kind":"LACKS","why":"names a workers' quarter in a place of 366 people","other":""}
+{"id":"14394","town":"r2r-town-55","sev":"LOW","kind":"BROKEN","why":"doubled item: fine glass sand, fine glass sand","other":""}
+{"id":"04456","town":"r2r-town-55","sev":"LOW","kind":"STATE","why":"both sides acting as if the other has lost, but stability is Stable","other":""}
+{"id":"HEADER","town":"r2r-town-46","sev":"MED","kind":"RECORD","why":"'town' of 384 holds Craft guilds (5-15), Merchant guilds (3-8), Taverns (5-20), Parish churches (2-5): more than 384 people hold","other":""}
+{"id":"19016","town":"r2r-town-23","sev":"MED","kind":"LACKS","why":"a third of the council answers to Street gang; GOVERNMENT lists no Street gang power; 'The third of' reads wrong","other":""}
+{"id":"18705","town":"r2r-town-23","sev":"MED","kind":"LACKS","why":"gives Street gang a voice in Town Council; GOVERNMENT powers list no Street gang","other":""}
+{"id":"HEADER","town":"r2r-town-23","sev":"LOW","kind":"RECORD","why":"HOUSES lists Free company hall while DEFENCE says hired: none","other":""}
+{"id":"28485","town":"r2r-town-4","sev":"MED","kind":"LACKS","why":"chandlers crowd the waterfront; HOUSES has no chandler","other":""}
+{"id":"21057","town":"r2r-town-16","sev":"MED","kind":"LACKS","why":"commanders push for authority over civilian courts; HOUSES has no courthouse","other":""}
+{"id":"20618","town":"r2r-town-16","sev":"LOW","kind":"BROKEN","why":"subject and verb disagree: 'The garrison and town watch is'","other":""}
+{"id":"02598","town":"r2r-town-16","sev":"MED","kind":"LACKS","why":"names a mill and lumber district; HOUSES has no sawmill or lumber trade, and 996 people hold no district","other":""}
+{"id":"08541","town":"r2r-town-20","sev":"LOW","kind":"PAIR","why":"flaw manipulative and temperament honest contradict each other in one character line","other":""}
+{"id":"00448","town":"r2r-town-44","sev":"LOW","kind":"BROKEN","why":"the name Irial MacDonald is split mid-name across sentences ('Irial Mac' / 'Donald's good name'), here and in 06753, 01149, 06799","other":"06793"}
+{"id":"04685","town":"r2r-town-10","sev":"MED","kind":"LACKS","why":"names caravan courts and a merchant quarter; 754 people hold no quarter and HOUSES has no caravan post","other":""}
+{"id":"20617","town":"r2r-town-19","sev":"LOW","kind":"BROKEN","why":"subject and verb disagree: 'The garrison and town watch exists'","other":""}
+{"id":"02578","town":"r2r-town-19","sev":"MED","kind":"LACKS","why":"fire through barges, warehouses and wharf infrastructure; HOUSES has no docks, warehouses or boatyard","other":""}
+{"id":"HEADER","town":"r2r-town-30","sev":"LOW","kind":"RECORD","why":"HOUSES lists Free company hall (and 03505 names the hired company) while DEFENCE says hired: none","other":""}
+{"id":"01832","town":"r2r-town-38","sev":"LOW","kind":"PAIR","why":"calls Birkir Egilsson the council's fixer; other lines make him the head of Corrupt Council","other":"22887"}
+{"id":"28562","town":"r2r-town-41","sev":"LOW","kind":"BROKEN","why":"subject and verb disagree: 'Weak defences keeps'","other":""}
+{"id":"08029","town":"r2r-town-41","sev":"LOW","kind":"PAIR","why":"flaw corrupt and temperament equitable contradict each other in one character line","other":""}
+{"id":"HEADER","town":"r2r-town-50","sev":"LOW","kind":"RECORD","why":"HOUSES lists Free company hall and Hireling hall while DEFENCE says hired: none","other":""}
+{"id":"11426","town":"r2r-town-6","sev":"LOW","kind":"BROKEN","why":"subject and verb disagree: 'Identification, augury, message sending, and contract-grade enchanting brings'","other":""}
+{"id":"HEADER","town":"r2r-town-21","sev":"LOW","kind":"RECORD","why":"HOUSES lists Hireling hall while DEFENCE says hired: none","other":""}
+{"id":"21060","town":"r2r-town-59","sev":"MED","kind":"PAIR","why":"Feudal Appointee 'losing ground' to commanders, yet stability Stable, Endorsed, and 07637 says it outweighs everyone","other":"07637"}
+{"id":"04727","town":"r2r-town-59","sev":"LOW","kind":"BROKEN","why":"the name Maolmhuire MacCarthy is split mid-name across sentences ('Mac' / 'Carthy'), also 04743, 01334, 04774, 04773","other":"04743"}
+{"id":"HEADER","town":"r2r-town-33","sev":"MED","kind":"RECORD","why":"governed by a Military Council (Dominant), yet DEFENCE has no garrison and no Military/Guard power: only a town watch","other":""}
+{"id":"04729","town":"r2r-town-33","sev":"LOW","kind":"BROKEN","why":"Mac- surnames split mid-name across sentences ('Carthy are rivals', 'Donald has asked', 'Cormack needs, and Eithne Mac'), also 04751, 06748, 11993, 05874","other":"05874"}
+{"id":"00948","town":"r2r-town-56","sev":"LOW","kind":"BROKEN","why":"'holds a large share in The Guard': a share template meant for a guild applied to Military/Guard, a force","other":"01686"}
+{"id":"HEADER","town":"r2r-town-26","sev":"LOW","kind":"RECORD","why":"HOUSES lists Hireling hall while DEFENCE says hired: none","other":""}
+{"id":"20821","town":"r2r-town-17","sev":"LOW","kind":"BROKEN","why":"subject and verb disagree: 'The heresy trials is older'","other":""}
+{"id":"HEADER","town":"r2r-town-39","sev":"LOW","kind":"RECORD","why":"HOUSES lists Free company hall while DEFENCE says hired: none","other":""}
+{"id":"24488","town":"r2r-town-39","sev":"LOW","kind":"BROKEN","why":"treats the single office Town Mayor as a body: 'those who lead Town Mayor', 'duties in Town Mayor'","other":"27425"}
+{"id":"HEADER","town":"r2r-town-48","sev":"LOW","kind":"RECORD","why":"HOUSES lists Hireling hall while DEFENCE says hired: none","other":""}
+{"id":"08064","town":"r2r-town-31","sev":"LOW","kind":"PAIR","why":"flaw cowardly and temperament brave contradict each other in one character line","other":""}
+{"id":"HEADER","town":"r2r-town-9","sev":"MED","kind":"RECORD","why":"trade access isolated and desert, yet HOUSES has Fish market, Caravanserai, Carriers' guild and TRADE lists wide exports and imports","other":""}
+{"id":"22015","town":"r2r-town-9","sev":"MED","kind":"PAIR","why":"shortfall met by 'the caravans that still come', but 12563 says no trade road reaches the isolated town","other":"12563"}
+{"id":"20620","town":"r2r-town-9","sev":"LOW","kind":"BROKEN","why":"subject and verb disagree: 'The garrison and town watch keeps'","other":""}
+{"id":"20819","town":"r2r-town-9","sev":"LOW","kind":"BROKEN","why":"subject and verb disagree: 'The heresy trials is older'","other":""}
+{"id":"20825","town":"r2r-town-58","sev":"LOW","kind":"BROKEN","why":"subject and verb disagree: 'The heresy trials is older'","other":""}
+{"id":"00954","town":"r2r-town-29","sev":"LOW","kind":"BROKEN","why":"'holds a large share in Religious Authorities': share template meant for a guild applied to a religious power","other":"01692"}
+{"id":"22864","town":"r2r-town-40","sev":"MED","kind":"STATE","why":"Thieves' Guild decides taxes, arrests and offices with Town Mayor a front; GOVERNMENT has Town Mayor Dominant, Thieves' Guild Minor","other":"23127"}
+{"id":"20806","town":"r2r-town-40","sev":"LOW","kind":"BROKEN","why":"gives the single office Town Mayor a head, a second and a third (also 22892, 03698)","other":"22892"}
+{"id":"18781","town":"r2r-town-54","sev":"MED","kind":"PAIR","why":"survival rests on 'the caravans that still come', but 14569 says no camels reach the caravanserai and 04483 no road reaches","other":"14569"}
+{"id":"17541","town":"r2r-town-54","sev":"LOW","kind":"PAIR","why":"tells a band on the road which caravans carry gold, but no road reaches the town and no camels reach it","other":"14569"}
+{"id":"01710","town":"r2r-town-54","sev":"LOW","kind":"BROKEN","why":"'second in Feudal Appointee': a single appointee treated as a body with ranks","other":""}
+{"id":"HEADER","town":"r2r-town-54","sev":"MED","kind":"RECORD","why":"isolated desert town with Fish market, Caravanserai, Carriers' guild, Stable district and exports of hardwood beams","other":""}
+{"id":"HEADER","town":"r2r-town-49","sev":"MED","kind":"RECORD","why":"governed by an Arcane Council (Dominant), yet DEFENCE magic: none and HOUSES has no wizard's tower or mage house","other":""}
+{"id":"21063","town":"r2r-town-15","sev":"MED","kind":"LACKS","why":"commanders push for authority over civilian courts; HOUSES has no courthouse","other":""}
+{"id":"00946","town":"r2r-town-15","sev":"LOW","kind":"BROKEN","why":"'holds a third share in The Guard': share template meant for a guild applied to Military/Guard","other":"01684"}
+{"id":"HEADER","town":"r2r-town-15","sev":"LOW","kind":"RECORD","why":"HOUSES lists Free company hall and Veteran's lodge while DEFENCE says hired: none","other":""}
+{"id":"21067","town":"r2r-town-28","sev":"MED","kind":"LACKS","why":"commanders push against civilian courts and the Military Council 'loses ground' to them; the Military Council IS the military, and HOUSES has no courthouse","other":""}
+{"id":"03925","town":"r2r-town-28","sev":"MED","kind":"STATE","why":"describes artisan guilds in 'a thin economy'; prosperity is Prosperous","other":""}
+{"id":"HEADER","town":"r2r-town-28","sev":"LOW","kind":"RECORD","why":"HOUSES lists Hireling hall while DEFENCE says hired: none","other":""}
+{"id":"14216","town":"r2r-town-51","sev":"LOW","kind":"BROKEN","why":"doubled item: fine glass sand appears twice in one list","other":""}
+{"id":"14155","town":"r2r-town-51","sev":"LOW","kind":"BROKEN","why":"Mac- names split mid-name (Hector Mac/Donald, Orlaith Mac/Cormack, Ivor Mac/Carthy) while 01634 prints 'Vortigen MacCarthy' whole","other":"01634"}
+{"id":"00958","town":"r2r-town-45","sev":"LOW","kind":"BROKEN","why":"'holds a third share in The Guard': share template meant for a guild applied to Military/Guard","other":"01696"}
+{"id":"HEADER","town":"r2r-town-45","sev":"LOW","kind":"RECORD","why":"HOUSES lists Free company hall and Veteran's lodge while DEFENCE says hired: none","other":""}
+{"id":"HEADER","town":"r2r-town-34","sev":"LOW","kind":"RECORD","why":"stability 'Ordered (strong military presence)' with garrison none; HOUSES lists Free company hall while DEFENCE says hired: none","other":""}
+{"id":"HEADER","town":"r2s-under_siege-city-1","sev":"MED","kind":"RECORD","why":"'city' of 2679 holds Craft guilds (30-80), Merchant guilds (15-40), Parish churches (10-30), many districts; and HOUSES has Mayor and council under an Ecclesiastical Council","other":""}
+{"id":"02808","town":"r2s-under_siege-city-1","sev":"MED","kind":"STATE","why":"a merchant stores cargo and sells when the price suits; under siege nothing comes in and 15088 says nothing has come in","other":"15088"}
+{"id":"18556","town":"r2s-under_siege-city-1","sev":"MED","kind":"STATE","why":"standing markets open every day, under an active siege with an 82% food deficit","other":""}
+{"id":"15704","town":"r2s-under_siege-city-1","sev":"MED","kind":"STATE","why":"offers pies, stews and roasted meats as street food under siege; food deficit 82% and fresh produce gone by mid-morning","other":"28806"}
+{"id":"14115","town":"r2s-under_siege-city-1","sev":"MED","kind":"STATE","why":"inn districts cater to merchants and travellers; under siege no one arrives by road; also districts in a place of 2679","other":""}
+{"id":"12916","town":"r2s-under_siege-city-1","sev":"MED","kind":"STATE","why":"mercenary forces of hundreds to thousands in a city of 2679 people","other":""}
+{"id":"02600","town":"r2s-under_siege-city-1","sev":"MED","kind":"LACKS","why":"calls the guild a force to be reckoned with in politics; GOVERNMENT lists only Military/Guard, Ecclesiastical Council, Martial Alliance","other":""}
+{"id":"02461","town":"r2s-under_siege-city-1","sev":"MED","kind":"PAIR","why":"describes a civic council elected by vote; the city is governed by an Ecclesiastical Council","other":"09751"}
+{"id":"15641","town":"r2s-under_siege-city-1","sev":"MED","kind":"LACKS","why":"performers, games and music at multiple venues nightly; HOUSES has no theatre or performers, and the city is under siege","other":""}
+{"id":"12206","town":"r2s-under_siege-city-1","sev":"MED","kind":"STATE","why":"offers luxury goods and spices from across the world; under siege nothing has come in","other":"15088"}
+{"id":"11805","town":"r2s-under_siege-city-1","sev":"MED","kind":"PAIR","why":"interment outside the gates; under siege 20179 says the charnel house now holds the newly dead because the roads are cut","other":"20179"}
+{"id":"01456","town":"r2s-under_siege-city-1","sev":"LOW","kind":"BROKEN","why":"subject and verb disagree: 'Banking houses is open'","other":""}
+{"id":"06254","town":"r2s-under_siege-city-1","sev":"MED","kind":"STATE","why":"customs checks and toll collection at the gates; under siege nothing comes in or goes out","other":""}
+{"id":"12523","town":"r2s-under_siege-city-1","sev":"MED","kind":"STATE","why":"large-scale commercial facilitation across regional markets, under a siege that closed the roads","other":"15088"}
+{"id":"10700","town":"r2s-under_siege-city-1","sev":"MED","kind":"STATE","why":"'highly diversified, multiple major revenue streams'; TRADE exports only three services, the city is Struggling and besieged","other":""}
+{"id":"02622","town":"r2s-under_siege-city-1","sev":"MED","kind":"PAIR","why":"a full council of aldermen and guild masters governs; 19243 and GOVERNMENT say the Ecclesiastical Council governs","other":"19243"}
+{"id":"19242","town":"r2s-under_siege-city-1","sev":"MED","kind":"STATE","why":"'no rival yet outweighs' the Ecclesiastical Council (Significant), but Military/Guard and The Martial Alliance are both Strong","other":""}
+{"id":"28616","town":"r2s-under_siege-city-1","sev":"MED","kind":"PAIR","why":"well-funded watch keeps order reliably; under siege 12556 marks law enforcement Impaired and 20613 says supplies are cut off","other":"12556"}
+{"id":"20613","town":"r2s-under_siege-city-1","sev":"LOW","kind":"BROKEN","why":"subject and verb disagree: 'The garrison and city watch keeps'","other":""}
+{"id":"07371","town":"r2s-under_siege-city-1","sev":"MED","kind":"STATE","why":"'everyone comes and goes by the gates'; under siege nothing comes in or goes out","other":""}
+{"id":"17122","town":"r2s-under_siege-city-1","sev":"MED","kind":"STATE","why":"sells grain from the stores to merchants in another market, under a siege with roads closed and an 82% food deficit","other":"15088"}
+{"id":"HEADER","town":"r2s-under_siege-city-3","sev":"MED","kind":"RECORD","why":"'city' of 5059 holds Craft guilds (30-80), Parish churches (10-30), Merchant guilds (15-40); HOUSES lists Hired blades while DEFENCE says hired: none","other":""}
+{"id":"04423","town":"r2s-under_siege-city-3","sev":"MED","kind":"STATE","why":"bonded freight and armed convoy assembly conducted at the caravan exchange, under a siege that closed the roads","other":"18102"}
+{"id":"16534","town":"r2s-under_siege-city-3","sev":"MED","kind":"STATE","why":"reports arrive from several roads; under siege the roads are closed (18102)","other":"18102"}
+{"id":"15650","town":"r2s-under_siege-city-3","sev":"MED","kind":"STATE","why":"permanent market activity in multiple locations, under an active siege with a 47% food deficit","other":""}
+{"id":"17954","town":"r2s-under_siege-city-3","sev":"MED","kind":"STATE","why":"inn districts given over to merchants and travellers; under siege no one arrives by road","other":""}
+{"id":"15890","town":"r2s-under_siege-city-3","sev":"MED","kind":"LACKS","why":"merchant guilds called a powerful political force; GOVERNMENT lists no Merchant Guilds power","other":""}
+{"id":"02783","town":"r2s-under_siege-city-3","sev":"MED","kind":"PAIR","why":"city run by a looser arrangement than a council, by paperwork; GOVERNMENT is an Arcane Council","other":"05381"}
+{"id":"14103","town":"r2s-under_siege-city-3","sev":"MED","kind":"LACKS","why":"Multiple criminal factions given a voice in Arcane Council (and 21940 its second); GOVERNMENT lists no criminal power; 'factions has' disagrees","other":"21940"}
+{"id":"20614","town":"r2s-under_siege-city-3","sev":"LOW","kind":"BROKEN","why":"subject and verb disagree: 'The garrison and city watch maintains'; 'standard patrol coverage' also sits oddly under an active siege","other":""}
+{"id":"20245","town":"r2s-under_siege-city-3","sev":"MED","kind":"STATE","why":"city went into the trouble with money in hand and pays defenders on time; prosperity is Struggling","other":""}
+{"id":"26926","town":"r2s-under_siege-city-3","sev":"MED","kind":"PAIR","why":"wants every hand at the undead labor paid in full; 14629 says the undead get no pay","other":"14629"}
+{"id":"HEADER","town":"r2s-under_siege-city-2","sev":"LOW","kind":"RECORD","why":"under siege yet food imports cover 95; HOUSES lists Hireling hall and Hired blades while DEFENCE says hired: none","other":""}
+{"id":"05285","town":"r2s-under_siege-city-2","sev":"MED","kind":"STATE","why":"ale and beer supply regional distribution, under a siege where nothing is let through the gates (20696)","other":"20696"}
+{"id":"09333","town":"r2s-under_siege-city-2","sev":"MED","kind":"STATE","why":"foreign traders attend the fairs, under a siege where the gates are shut and nothing is let through","other":"01551"}
+{"id":"15651","town":"r2s-under_siege-city-2","sev":"MED","kind":"STATE","why":"permanent markets in every quarter, under an active siege with a 76% food deficit","other":""}
+{"id":"13413","town":"r2s-under_siege-city-2","sev":"MED","kind":"STATE","why":"the fair draws merchants from distant regions; under siege 29018 says every way in is closed","other":"29018"}
+{"id":"13583","town":"r2s-under_siege-city-2","sev":"MED","kind":"STATE","why":"Military/Guard could now take the hall; GOVERNMENT has Military/Guard Significant below Noble Governorship Strong","other":""}
+{"id":"DONE","lines":3185,"blocks":50,"flags":104}
