@@ -5365,6 +5365,83 @@ SEATS2['JOIN-4'] = dict(
 )
 
 
+SEATS2['POWERS-16'] = dict(
+    title="POWERS-16 · the powers lane goes on curing: a HIGH cure's crisis read, a faction's name in prose, the title word on a man, then the table by width",
+    branch='lane/powers-follow-up-2026-11-13', tip='30b03024', statement=False,
+    intro=("You are POWERS-16, the next seat on the powers lane of the settlement-engine integration program "
+           "(lane/powers-follow-up-2026-11-13). The lane holds who governs a town and how the page says it: the Power tab, the ruling "
+           "structure's words, the faces of the powers, their titles, secrets and presentations. An independent reader read its stage "
+           "NOT CLEAR at 0ea65f574 on one HIGH carried and two MEDIUM of the stage's own; the fifteenth seat cured all three (the PDF's "
+           "Power chapter and the Summary legend now print the Power tab's reader's words in place of a stored key; the \"criminal sway\" "
+           "chip reads the hall's own rung; the hall's syndicate lines), re-keyed the toll's test and the fork pin by identity, and handed "
+           "back at its count with its list in order. Yours: that list, BY WIDTH. The lane goes on curing and lands as points on the joined "
+           "line: NO whole suite, NO new statement."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. On your lane, docs/chair/2026-11-13/POWERS-FOLLOW-UP-HANDBACK-2.md (1,843 lines: BY SCRIPT, BY HEADING, never whole): "
+          "\"# PART 9\" from that line to the end (about 160 lines): the rulings worked to (P9.0: the chair's, copied: THEY STAND), item by "
+          "item (P9.1: the form of a cure here), every new or changed line (P9.2), FOR THE JOIN (P9.3), WHAT IS LEFT (P9.5: YOUR LIST), "
+          "how the instruments are re-made (P9.5a); and of PART 8 only P8.4 (the table) and P8.5 (what each left row is and where its "
+          "writer lives).\n"
+          "3. THE READER'S FILE, for a row you are curing (`git fetch origin lane/review-powers-5-2026-11-14`; `git show "
+          "origin/lane/review-powers-5-2026-11-14:docs/chair/2026-11-14/REVIEW-POWERS-5-2026-11-14.md`, by heading); its probes by git "
+          "archive, run from outside every repository tree.\n"
+          "4. The merge book's section 2m on origin/lane/merge-15-point-49-wip-2026-11-14 (the section headed \"## 2m.\"; by script), ONLY "
+          "if a cure of yours needs a door: see the law on registers below first."),
+    work=("THE CHAIR'S RULINGS SINCE P9.0's COPY (2026-11-14; each vetoable by the owner; copy them into your part):\n"
+          "(r1) REGISTERS ARE RE-DERIVED ONCE, AT THE CLOSE, ON THE FINAL TREE. From now a lane's seat does NOT re-take a census or a "
+          "baseline after a cure (the lighting census, the wiring census, the byte baseline, the bundles): a register your cure makes "
+          "stale is NAMED in your hand-back (file; the title that reds; your commit), never banked, never raised, never hand-edited. The "
+          "three fast gates, the presumed-things walker and the test files that name your touched files are still run after every cure. "
+          "A PIN you move by a cure is re-keyed BY IDENTITY in the same commit, as before.\n"
+          "(r2) \"Military/Guard\" INSIDE A SENTENCE (200 towns as named; the corpus lane's reader found the same label reaching its "
+          "lines through a slot in 36): A FACTION NAMED IN A SENTENCE TAKES ITS PROSE FORM, FROM ONE LEAF. Find where the power's name "
+          "is turned into words for a sentence on this lane; make ONE reader for it (beside the governing modifier's reader), used by "
+          "every sentence of this lane that names a power; list every power name that carries a slash, a bracket or a count and what "
+          "each prints as. THE WORDS YOU CHOOSE GO TO THE CHAIR IN YOUR FIRST MESSAGE (the corpus lane's seat must print the same words "
+          "from its own filler until the two lanes meet).\n"
+          "(r3) L3, as ruled: the title word follows the honorific through the same leaf: A LINE NAMES NO SEX THE RECORD DOES NOT HOLD "
+          "(31 male alewives, 52 madams, 80 district madams on the census's 720: read which of these are false of the person as the "
+          "record holds them, and count the false ones).\n"
+          "THE WORK, in this order, each cause its own commit, measured first at your tip on the census's 720 and the reader's births "
+          "(count before and after), red first (a collected arm; a keep-guard and a taken-off guard; each arm shown able to red by a "
+          "plant you do not commit, made in a tree no suite or render is running in), pushed as made:\n"
+          "1. THE FIFTEENTH SEAT'S HIGH CURE, READ WHERE IT WAS NOT (P9.5's first line): the PDF's GOVERNING box and the Summary legend "
+          "at your tip in a siege town, a famine town and an occupied town of the 720, and the smallest and the largest town that "
+          "prints a governing modifier: do the words read true there, beside the Power tab? A false print is cured before anything "
+          "else. ONE LINE in your hand-back with the towns and what printed.\n"
+          "2. BY WIDTH OF THE FALSE COUNT (measure all of these first, ONE TABLE in your hand-back, then cure in the table's order): "
+          "(r2) the faction's name in prose; (r3) L3; the table's ww#850 (\"Holds the title; the decisions that matter are made by "
+          "…\": read whether the rival out-ranks the holder on the page), ww#440 (\"Merchants with local reach\"), bar #17 (\"Well-funded "
+          "city watch\" beside a resource-constrained guard, and on a body that is not the watch); the chair's (4) the \"(Smuggling "
+          "network)\" bracket in a sentence (66: through the house-label leaf); pf#520; bar #26 (\"Sells ore by the cart\" where every "
+          "deposit is depleted); the chair's (2) the ruling chain block run together (28: re-measure first: the block prints words "
+          "now); the chair's (3) a \"Merchant Guilds\" power with no guild on the roster (24: a generator move: STOP with the table if "
+          "a power is re-drawn beyond those towns); the reader's E3 (the coaching-inn keeper's two coach secrets under a siege, 16: "
+          "the declaration as P9.5 writes it); T2 with T1 and T3 where the cure is the same; then the table's narrower rows. ONE "
+          "MESSAGE TO THE CHAIR after the first three cures (the tip; the table; the prose words of (r2); each count before and "
+          "after), then THE COUNT.\n"
+          "3. P9.5's last lines (L4, L5, the courts candidate, the two coaching-inn candidates), each measured first; a candidate that "
+          "reads true in its towns is SAID TRUE with the towns.\n"
+          "A CURE IN GENERATOR OR DATA CODE IS A DECLARED MOVE: its field diff on the 720 by family; a power, a person or a tie re-drawn "
+          "outside the row's own towns is a STOP with the table. EVERY LINE A CURE NOW PRINTS IN A NEW TOWN, OR NEWLY LEAVES SILENT, IS "
+          "READ WHERE IT PRINTS on every surface that prints it (the Power tab, the Overview, the NPCs tab, the PDF, the journal) before "
+          "it is pushed: three towns of its cells, a siege, a famine or an occupation among them, the smallest and the largest size it "
+          "reaches; the towns and what printed in the commit body. A TWIN TAKES ITS SIBLINGS' CONDITION.\n"
+          "AFTER EVERY CURE: the presumed-things walker (a rise is a stop); the strict-domain gate, the type ratchet and eslint on the "
+          "touched files; the twelve-birth grid (`node scripts/census/page-census.mjs --grid`: a rise is a stop; a fall is NAMED for the "
+          "close); the test files that name the files you touched.\n"
+          "TO SPEND LESS OF YOUR COUNT: count by script on the 720; render only the towns you read; never bring a render's output or a "
+          "dump into your context: a script prints the counts and at most three quoted lines.\n"
+          "THE HAND-BACK, kept current after every item: a new \"# PART 10\" at the end of the lane's hand-back file, in PART 9's form: "
+          "the rulings since copied; the table; each row as cured; EVERY NEW OR CHANGED LINE with the towns it was read in (the owner's "
+          "veto list, and the next reader's); the declared moves by family; THE REGISTERS NAMED STALE; FOR THE JOIN, carried forward; "
+          "what is left, line by line."),
+    merges='',
+    when="for a stop that blocks everything you have left, after the first three cures of step 2 (the tip; the table; the prose words; the counts), for a power re-drawn beyond a row's towns, and with your hand-back",
+    turns='',
+)
+
+
 def build2(seat):
     s = _r3c6() if seat == 'R3-CODE-C-6' else SEATS2[seat]
     head = (
