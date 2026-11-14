@@ -7097,7 +7097,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "colour"
+            "guardPresence"
           ],
           "text": "{settlement} pays its creditors first and its defence with what is left, and what is left shrinks each year.",
           "slots": [

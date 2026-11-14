@@ -3691,7 +3691,7 @@ street, the unfolding).
 4. `[street · no guardPresence]` {settlement} has no standing force to command, and the quarrel over who would command one is louder for it.
 
 **override: UNDER TRIBUTE**
-1. `[ledger · colour]` {settlement} pays its creditors first and its defence with what is left, and what is left shrinks each year.
+1. `[ledger · guardPresence]` {settlement} pays its creditors first and its defence with what is left, and what is left shrinks each year.
 2. `[street · guardPresence]` At {settlement} the debt is paid before the guards are, and every guard knows it.
 3. `[unfolding · colour]` Every year the debt stands, less of {settlement}'s money reaches its defence.
 4. `[street · no guardPresence]` {settlement} keeps no defenders to pay, and the debt is one more reason it never will.
