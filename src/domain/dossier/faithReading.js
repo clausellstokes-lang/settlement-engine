@@ -33,6 +33,7 @@
  */
 
 import { liveInstitutions } from '../institutions/institutionRoster.js';
+import { isMaterializedCustomContent } from '../content/customContentSemanticAuthority.js';
 
 /**
  * @typedef {'cathedral'|'parish'|'monastery'|'temple'|'chapel'|'shrine'} ChurchKind
@@ -169,6 +170,23 @@ function kindOf(name) {
 }
 
 /**
+ * A HOUSE BY ITS NATIVE IDENTITY, NEVER BY A NAME A USER CAN TYPE (R2-CODE-B-SIDE item 7b; the chair's ruling of
+ * 2026-11-13 23:15, from the data lane's customContentPresentationClaims finding: a custom house named "... Cathedral
+ * ..." was read as a church). A stamped native house is read by its catalogue id, which a rename does not touch
+ * ('parish_church', 'access_to_parish_church', 'great_cathedral': the catalogue's own words); a custom house (its own
+ * provenance, content/customContentSemanticAuthority.js :: isMaterializedCustomContent, the boundary the roster's
+ * other native readers stop at) is no house of worship by its name, and custom content declares no kind this reading
+ * could take; an unstamped legacy house keeps the name it always had.
+ * @param {unknown} inst @returns {string}
+ */
+function nativeNameOf(inst) {
+  if (!inst || typeof inst !== 'object' || isMaterializedCustomContent(inst)) return '';
+  const r = /** @type {Record<string, unknown>} */ (/** @type {unknown} */ (inst));
+  const id = text(r.catalogId);
+  return id ? id.replace(/_/g, ' ') : text(r.name);
+}
+
+/**
  * @param {FaithReadingSettlement} s
  * @returns {{ houses: ChurchHouse[], access: boolean }}
  */
@@ -181,7 +199,7 @@ function housesOf(s) {
   /** @type {ReadonlyArray<{ name?: unknown }>} */
   const live = liveInstitutions(s);
   for (const inst of live) {
-    const name = text(inst?.name);
+    const name = nativeNameOf(inst);
     if (!name) continue;
     if (ACCESS_RE.test(name)) { access = true; continue; }
     const kind = kindOf(name);
