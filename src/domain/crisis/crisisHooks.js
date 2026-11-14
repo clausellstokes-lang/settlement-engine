@@ -284,7 +284,14 @@ export function crisisHooksOf(settlement, entry, facts = settlementHookFacts(set
  * own open rows, so they are a proposal in the lane's report. A test
  * holds every phrase to occur exactly once in its catalog sentence, so this is a slot in the
  * sentence, never a second one.
- * @type {Readonly<Record<string, ReadonlyArray<{ role: CrisisRole, phrase: string, fill: string, kinds: ReadonlyArray<'npc' | 'faction' | 'institution'> }>>>}
+ *
+ * ⛔ A FILL THAT NAMES A ROLE READS THE ROSTER (R2-CODE-B-9; CENSUS-2 at the lane's tip, r2r-town-37:
+ * "Maisa ibn Battuta, the healer who identified the outbreak first, has gone quiet." of the dean of
+ * the parish churches). `holds` is the holder's OWN roster role the fill's words name: the slot fills
+ * only a holder whose card's `role` it matches, and a holder of another role leaves the sentence's own
+ * words. Of the five slots only the plague's fill keeps a role word ("the healer"); the others replace
+ * their phrase with the name and print no role, so they carry no `holds`.
+ * @type {Readonly<Record<string, ReadonlyArray<{ role: CrisisRole, phrase: string, fill: string, kinds: ReadonlyArray<'npc' | 'faction' | 'institution'>, holds?: RegExp }>>>}
  */
 export const CRISIS_HOOK_SLOTS = Object.freeze({
   under_siege: Object.freeze([
@@ -298,26 +305,34 @@ export const CRISIS_HOOK_SLOTS = Object.freeze({
     Object.freeze({ role: /** @type {CrisisRole} */ ('collaborator'), phrase: 'someone the players will recognise', fill: '{holder}, someone the players will recognise', kinds: Object.freeze(/** @type {const} */ (['npc'])) }),
   ]),
   plague_onset: Object.freeze([
-    Object.freeze({ role: /** @type {CrisisRole} */ ('lever'), phrase: 'The healer who identified the outbreak first', fill: '{holder}, the healer who identified the outbreak first,', kinds: Object.freeze(/** @type {const} */ (['npc'])) }),
+    // `holds`: the healers' roles the roster carries (the 720: the apothecary, the midwife, Healer, the hospitaller,
+    // the healer) and the physician; an office of a house (the dean, the priest, the hospital's master) is not one.
+    Object.freeze({ role: /** @type {CrisisRole} */ ('lever'), phrase: 'The healer who identified the outbreak first', fill: '{holder}, the healer who identified the outbreak first,', kinds: Object.freeze(/** @type {const} */ (['npc'])), holds: /\b(?:healers?|apothecar(?:y|ies)|midwi(?:fe|ves)|hospitallers?|physicians?)\b/i }),
   ]),
 });
 
 /**
  * The entry's crisis hook with its slots filled from the cast by name. A slot with no fitting
  * holder leaves the sentence's own words; a sentence that does not carry the phrase (a custom
- * kind, a DM's own text) is returned as it is.
+ * kind, a DM's own text) is returned as it is. A slot that `holds` a role fills only a holder
+ * whose own card on `roster` carries it (no card read, no role known: the sentence as written).
  * @param {string} kind @param {unknown} text @param {CrisisCast | null | undefined} cast
+ * @param {unknown} [roster] the record's `npcs`, where a slot's holder's own role is read
  * @returns {string}
  */
-export function slotCrisisHook(kind, text, cast) {
+export function slotCrisisHook(kind, text, cast, roster = []) {
   let line = str(text);
   const slots = CRISIS_HOOK_SLOTS[/** @type {keyof typeof CRISIS_HOOK_SLOTS} */ (kind)];
   if (!line || !slots || !cast) return line;
   const roles = Array.isArray(cast.roles) ? cast.roles : [];
+  const cards = /** @type {Array<{ id?: unknown, name?: unknown, role?: unknown }>} */ (Array.isArray(roster) ? roster : []);
+  /** @param {CastRow} row @returns {string} the holder's own roster role, the same card holderWords reads */
+  const rosterRoleOf = (row) => str(cards.find((n) => !!n && (str(n.id) || str(n.name)) === row.id)?.role);
   /** @type {Set<string>} one person fills one slot: two slots of one sentence name two people */
   const named = new Set();
   for (const slot of slots) {
-    const row = roles.find((r) => r.role === slot.role && slot.kinds.includes(r.kind) && !!str(r.name));
+    const row = roles.find((r) => r.role === slot.role && slot.kinds.includes(r.kind) && !!str(r.name)
+      && (!slot.holds || slot.holds.test(rosterRoleOf(r))));
     if (!row || named.has(`${row.kind}:${row.id}`) || !line.includes(slot.phrase)) continue;
     named.add(`${row.kind}:${row.id}`);
     const filled = slot.fill.split('{holder}').join(row.name);
@@ -337,6 +352,7 @@ export function slotCrisisHook(kind, text, cast) {
  */
 export function crisisHookFor(settlement, entry) {
   if (!entry || typeof entry !== 'object') return '';
-  const { cast } = effectiveCastOf(/** @type {never} */ (settlement && typeof settlement === 'object' ? settlement : {}), /** @type {never} */ (entry));
-  return slotCrisisHook(str(entry.type), entry.crisisHook, cast);
+  const s = /** @type {HookSettlement} */ (settlement && typeof settlement === 'object' ? settlement : {});
+  const { cast } = effectiveCastOf(/** @type {never} */ (s), /** @type {never} */ (entry));
+  return slotCrisisHook(str(entry.type), entry.crisisHook, cast, s.npcs);
 }
