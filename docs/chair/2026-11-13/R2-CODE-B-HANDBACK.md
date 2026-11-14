@@ -1428,3 +1428,13 @@ Columns: tip 08e43c072 · joined 600b9f743 · pre-merge ba87ebe2d (— = the fil
 | tests/data/w2FixData6Rows.test.js | ww-1416 the brewer sells barrels | R | R | — | A | carried (the data lane's file) |
 
 COUNTS: 16 red titles at the tip in the eight files (PART 12's 15 and generationForkCensus A3e, red in all three trees): (A) 16, (B) 0, (C) 0. Every failure message at the tip is the joined line's own, byte for byte, except editCorpusRatchet A7 and A8 (the honesty figures; registers). One title is red on the joined line and GREEN at the tip: editCorpusRatchet A1 (joined: "61 to be 63").
+
+A SEVENTEENTH RED, found by the touched-files run of M10 (not in PART 12's list): tests/components/houseLabelEverySurface.test.jsx "rr2s-town-under_siege-rand-1: every surface" ("page Systems/Defense: allowed 1, found 0" and the two PDF variants): tip R, joined R, pre G: CLASS (A), carried. Its cause: this lane's allowance for the Defense tab's raw healer line ((m)'s FOR THE JOIN row, defenseDisplay.js) now finds 0: the joined line cured that row. NAMED, not touched: the allowance is to be struck BY IDENTITY by the seat or the join that lands with it (the brief's no-adjacent-repair). Counts with it: (A) 17, (B) 0, (C) 0.
+
+## M10 — DONE (a48cf4126)
+- CAUSE: src/foundry/journalPages.js :: defensePage, this lane's line (2af8bdfa9; no other lane's copy changes it, every lane read by content), kept `(${f.source})`: the generator's provenance after every force.
+- CURE: the tag off the line; label and description kept. Display only.
+- COUNTS (1,536 re-born at 3a4198e0f): towns 1,017 → 0; lines 4,406 → 0 (generated 1,955, required 1,792, coherence_repair 407, cascade 216, forced 11); bullets 6,127 → 6,127. A CLAIM OF ZERO on every surface: the journal by m10.mjs on the 1,536; the Defense tab carries no badge (R3-TABS b1); the PDF's DefenseSecurity.jsx reads no `source`; no other exporter prints a force's source (grep of src/ for a printed `.source`).
+- GUARD: tests/pdf/journalForceNoProvenance.test.js (collected, keep-guard, taken-off guard); three plants, each red on its arm, none committed.
+- TOWNS READ: r2r-thorp-1 (30), r2s-famine-village-3, r2s-under_siege-town-1, r2s-occupied-city-1, r2r-city-0, r2r-metropolis-8 (344,689). All true.
+- GATES: strict 0, ratchet 0, eslint 0, grid 0, castDerived 0; walker as at base (153/1/2); the 28 files naming journalPages.js: 27 green, houseLabelEverySurface (A, above).
