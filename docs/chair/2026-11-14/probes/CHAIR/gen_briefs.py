@@ -2998,7 +2998,7 @@ SEATS2['R2-CODE-A-10'] = dict(
 
 SEATS2['R3-CODE-C-8'] = dict(
     title="R3-CODE-C-8 · round three's code lane: the reader's three medium findings cured, a guard made to red, then the bar's rows",
-    branch='lane/r3-code-c-2026-11-13', tip='__R3C_TIP__', statement=False,
+    branch='lane/r3-code-c-2026-11-13', tip='70d92ed0', statement=False,
     intro=("You are R3-CODE-C-8, the eighth seat on round three's code lane of the settlement-engine integration program (lane/r3-code-c-2026-11-13). The "
            "lane cures false lines in domain, generator and display files. Its statement is made and its four red walkers are answered (the sixth and "
            "seventh seats). A FRESH READER READ ITS STAGE (fb8b24fbe to b6bd3a3c1) AND FOUND THREE MEDIUM FALSE SENTENCES THAT ARE THE STAGE'S OWN, no "
@@ -3120,7 +3120,7 @@ SEATS2['W2-FIX-DATA-11'] = dict(
 
 SEATS2['UPKEEP-12'] = dict(
     title="UPKEEP-12 · the defence lane: the reader's display findings (\"Undefended\" beside walls first), the bar's two HIGH rows, then the medium rows",
-    branch='lane/coherence-upkeep-2026-11-12', tip='__UPKEEP_TIP__', statement=False,
+    branch='lane/coherence-upkeep-2026-11-12', tip='26474cda', statement=False,
     intro=("You are UPKEEP-12, the twelfth seat on the defence lane of the settlement-engine integration program (lane/coherence-upkeep-2026-11-12). The "
            "lane holds the derived defence rating, the money a town can spend on it, and the safety, economy and outlook lines that speak of them. AN "
            "INDEPENDENT READER READ ITS CAPACITY BUILD (a house counts by its size) NOT CLEAR: three HIGH false sentences on writers the build moved "
@@ -3143,7 +3143,7 @@ SEATS2['UPKEEP-12'] = dict(
           "towns are re-born by the probes on origin/lane/review-bar-0-2026-11-14 (docs/chair/2026-11-14/probes/REVIEW-BAR-0/).\n"
           "5. The merge book's section 2m on origin/lane/merge-15-point-49-wip-2026-11-14 (the section headed \"## 2m.\"; by script), before the first "
           "register you touch."),
-    work=("THE CHAIR'S RULINGS (2026-11-14 08:20 UTC; each vetoable by the owner; copy them into the hand-back):\n"
+    work=("THE CHAIR'S RULINGS (2026-11-14 08:28 UTC; each vetoable by the owner; copy them into the hand-back):\n"
           "(a) H1, HIGH: THE READINESS LABEL READS THE ROSTER. \"Undefended\" means, on every surface that reads it, no walls, no garrison and no watch "
           "(the Daily Life text says exactly that). A TOWN WHOSE ROSTER HOLDS WALLS OR A FORCE (a garrison, a militia or levy, a watch, a contracted "
           "company) IS NEVER LABELLED UNDEFENDED: its lowest label is \"Vulnerable\". THE SCORE IS NOT MOVED. The cure is made in ONE HOME, where "
@@ -3163,7 +3163,7 @@ SEATS2['UPKEEP-12'] = dict(
           "(e) M7: the capacity build's re-draws of whole persons, ties and quarrels (8, 8 and 5 births, following its power re-draws) are DECLARED "
           "in your hand-back with their counts by your own field diff, and the build's draft shift record names every registered surface MOVED or "
           "UNMOVED by measure.\n"
-          "(f) NOT YOURS: M1, M2, M4 and M6 (the scores themselves: the measuring seat's); the carried medium templates the reader lists whose "
+          "(f) NOT YOURS: M1, M2, M4 and M6 (the scores themselves: the measuring seat's); THE ELEVENTH SEAT'S FIFTY-TWO LANE-NEW RED TESTS AND THE REST OF ITS CLOSE (the seat after you: the close is made once, after your cures: you run only the test files that name the files you touch); the carried medium templates the reader lists whose "
           "writers are the corpus's pools or another lane's files: NAMED in your hand-back with the reader's counts, for the join.\n"
           "THE WORK, in this order, each cause its own commit, measured first, red first (a collected arm over births, each arm shown able to red "
           "by a plant you do not commit, made in a tree no suite is running in), pushed as made:\n"
