@@ -1,0 +1,212 @@
+{"id":"HEADER","town":"r2s-monster_pressure-thorp-1","sev":"MED","kind":"RECORD","why":"thorp of 18 exports Pilgrim hospitality and bottled healing waters; HOUSES has no inn, shrine or bathhouse","other":""}
+{"id":"00172","town":"r2s-monster_pressure-thorp-1","sev":"MED","kind":"LACKS","why":"three farmsteads abandoned 'in the last month' and 'the authorities' in a thorp of 18 with Dwellings (1-8) and a household council","other":""}
+{"id":"18434","town":"r2s-monster_pressure-thorp-1","sev":"MED","kind":"TAG","why":"'caravans go missing'; tag reaches th, and this thorp of 18 imports none on river access","other":""}
+{"id":"12078","town":"r2s-monster_pressure-thorp-1","sev":"MED","kind":"PAIR","why":"'its defences were built for quieter times'; DEFENCE is none on every line and 01147 says it kept no defence","other":"01147"}
+{"id":"11654","town":"r2s-monster_pressure-thorp-1","sev":"LOW","kind":"BROKEN","why":"garbled: 'holds the key to it: nobody here could, so this one stepped in'; 'it' and 'could' have nothing to refer to","other":""}
+{"id":"30929","town":"r2s-monster_pressure-thorp-1","sev":"MED","kind":"LACKS","why":"ticks Milling and Brewing; HOUSES has only Access to external mill, and brewing is not made here","other":""}
+{"id":"20063","town":"r2s-monster_pressure-thorp-1","sev":"MED","kind":"LACKS","why":"'the lookouts are beginning to see it'; DEFENCE: watch none, militia none","other":""}
+{"id":"28015","town":"r2s-monster_pressure-thorp-1","sev":"LOW","kind":"LACKS","why":"'decide who gets the shelter'; HOUSES lists no shelter","other":""}
+{"id":"HEADER","town":"r2r-thorp-10","sev":"MED","kind":"RECORD","why":"founder 'single extended family who came and never left' vs reason 'founded by a disbanded military unit'; both cannot be true","other":""}
+{"id":"HEADER","town":"r2r-thorp-10","sev":"MED","kind":"RECORD","why":"thorp of 10 makes glass and luxury, gives Religious services and Education with no church (Access to parish church) or school","other":""}
+{"id":"18124","town":"r2r-thorp-10","sev":"MED","kind":"PAIR","why":"built in timber compounds in Desert/Arid terrain, while 14369 says timber is needed and not brought in","other":"14369"}
+{"id":"17123","town":"r2r-thorp-10","sev":"MED","kind":"LACKS","why":"sells 'patrol schedules'; DEFENCE: garrison, militia, watch all none, so there are no patrols","other":""}
+{"id":"17124","town":"r2r-thorp-10","sev":"MED","kind":"LACKS","why":"sells 'patrol schedules'; DEFENCE: garrison, militia, watch all none, so there are no patrols","other":""}
+{"id":"05663","town":"r2r-thorp-32","sev":"MED","kind":"LACKS","why":"'farms and workshops are short-handed'; thorp of 8 whose HOUSES list no workshop","other":""}
+{"id":"14648","town":"r2r-thorp-32","sev":"MED","kind":"PAIR","why":"'the fighting across the thorp'; 01039 says the front is somewhere Hochsee will never see; also 'take Household Council's place' lacks 'the'","other":"01039"}
+{"id":"20558","town":"r2r-thorp-32","sev":"MED","kind":"PAIR","why":"'The founders built a place to trade'; founding reason (15372) was to exploit rich mineral deposits","other":"15372"}
+{"id":"18128","town":"r2r-thorp-51","sev":"MED","kind":"LACKS","why":"built in timber compounds; terrain Desert/Arid and nothing made here is timber","other":""}
+{"id":"07400","town":"r2r-thorp-51","sev":"MED","kind":"TAG","why":"'official corruption... powerful figures resist investigation'; tag reaches th, here a thorp of 11 with one household elder and roster of 1","other":""}
+{"id":"11545","town":"r2r-thorp-51","sev":"LOW","kind":"BROKEN","why":"'it is aimed at Tomislav... : holds the seat' — 'it' has no antecedent and the clause after the colon has no subject","other":""}
+{"id":"HEADER","town":"r2r-thorp-51","sev":"LOW","kind":"RECORD","why":"thorp of 11 makes glass and luxury goods with no workshop on HOUSES","other":""}
+{"id":"01440","town":"r2r-thorp-51","sev":"LOW","kind":"LACKS","why":"'its defence is being rearranged'; DEFENCE has only a palisade, no force of any kind to rearrange","other":""}
+{"id":"22973","town":"r2r-thorp-51","sev":"MED","kind":"PAIR","why":"'began as a promise between a few families'; FOUNDING: a single extended family, grown at a crossroads (15339)","other":"15339"}
+{"id":"HEADER","town":"r2r-thorp-52","sev":"MED","kind":"RECORD","why":"defence word Lightly Defended while DEFENCE lists walls, garrison, militia, watch, hired all none","other":""}
+{"id":"HEADER","town":"r2r-thorp-52","sev":"MED","kind":"RECORD","why":"founded by two wandering siblings, yet reason is farmland granted to a favoured noble; both cannot be true","other":""}
+{"id":"12720","town":"r2r-thorp-52","sev":"MED","kind":"LACKS","why":"'Lightly defended'; DEFENCE: no walls and no force of any kind","other":""}
+{"id":"10848","town":"r2r-thorp-52","sev":"MED","kind":"LACKS","why":"'the first power leader to offer something better' presumes a rival power; GOVERNMENT lists Household Council alone; 'power leader' reads garbled","other":""}
+{"id":"11632","town":"r2r-thorp-52","sev":"LOW","kind":"BROKEN","why":"'it is aimed at Varg Olafsson...: holds the seat' — 'it' has no antecedent and the clause after the colon has no subject","other":""}
+{"id":"22640","town":"r2r-thorp-52","sev":"MED","kind":"LACKS","why":"'officials who will not act' in a thorp of 25 governed by head-of-household consensus; no officials on HOUSES","other":""}
+{"id":"22983","town":"r2r-thorp-52","sev":"MED","kind":"LACKS","why":"'one of its strongest powers is defying them'; GOVERNMENT lists only Household Council","other":""}
+{"id":"HEADER","town":"r2s-indebted-thorp-0","sev":"LOW","kind":"RECORD","why":"thorp of 12 makes glass, iron and metalwork; HOUSES has no smith or workshop","other":""}
+{"id":"11588","town":"r2s-indebted-thorp-0","sev":"LOW","kind":"BROKEN","why":"'is the one who would come to terms: holds the seat.' — clause after colon has no subject","other":""}
+{"id":"15534","town":"r2s-indebted-thorp-0","sev":"LOW","kind":"LACKS","why":"'Feudal Stewardship is safe in the hall'; HOUSES has no hall (and 'the' is missing before Feudal Stewardship)","other":""}
+{"id":"HEADER","town":"r2s-indebted-thorp-1","sev":"MED","kind":"RECORD","why":"founded by a healer who stopped for a traveller, yet reason is farmland granted to a favoured noble; both cannot be true","other":""}
+{"id":"HEADER","town":"r2s-indebted-thorp-1","sev":"MED","kind":"RECORD","why":"thorp of 14 gives Religious services and Education and makes luxury; HOUSES has only Access to parish church, no school","other":""}
+{"id":"15013","town":"r2s-indebted-thorp-1","sev":"MED","kind":"LACKS","why":"'built around the hall... and the assembly'; HOUSES has no hall","other":""}
+{"id":"10849","town":"r2s-indebted-thorp-1","sev":"LOW","kind":"BROKEN","why":"'Household Council took the loans and Household Council is repaying them: a distinction' — same name filled in both slots, no distinction","other":""}
+{"id":"11595","town":"r2s-indebted-thorp-1","sev":"LOW","kind":"BROKEN","why":"'is the one who would come to terms: holds the seat.' — clause after colon has no subject","other":""}
+{"id":"HEADER","town":"r2s-infiltrated-thorp-0","sev":"MED","kind":"RECORD","why":"founded by a discharged soldier, yet reason is farmland granted to a favoured noble; also Shepherd collective but no wool or livestock made","other":""}
+{"id":"13420","town":"r2s-infiltrated-thorp-0","sev":"MED","kind":"TAG","why":"'Merchants who benefit from cheap newcomer labour'; tag reaches th, here a thorp of 14 with no market or merchant house","other":""}
+{"id":"16110","town":"r2s-infiltrated-thorp-0","sev":"MED","kind":"PAIR","why":"'Public legitimacy Adequate'; GOVERNMENT legitimacy is Tolerated, and 00369 prints Tolerated","other":"00369"}
+{"id":"28556","town":"r2s-infiltrated-thorp-0","sev":"LOW","kind":"BROKEN","why":"subject-verb disagreement: 'Weak defences keeps'","other":""}
+{"id":"21252","town":"r2s-infiltrated-thorp-0","sev":"MED","kind":"PAIR","why":"the trade that made the place collapsed and its prosperity bled away; STATE prosperity Comfortable and 00577 says it pays its own way","other":"00577"}
+{"id":"HEADER","town":"r2s-mass_migration-thorp-3","sev":"MED","kind":"RECORD","why":"thorp of 7 makes iron, metalwork, Religious services, Education with no smith, church or school; founded by a soldier on land granted to a noble","other":""}
+{"id":"11635","town":"r2s-mass_migration-thorp-3","sev":"LOW","kind":"BROKEN","why":"garbled: 'holds the key to it: nobody here could, so this one stepped in'","other":""}
+{"id":"06324","town":"r2s-mass_migration-thorp-3","sev":"MED","kind":"LACKS","why":"'the whole Headman's Authority must agree'; it is one headman's rule (Fuad ibn Ahmed), not a body that agrees","other":""}
+{"id":"15535","town":"r2s-mass_migration-thorp-3","sev":"LOW","kind":"LACKS","why":"'Headman's Authority is safe in the hall'; HOUSES has no hall","other":""}
+{"id":"09343","town":"r2s-mass_migration-thorp-3","sev":"MED","kind":"TAG","why":"forged residence documents, unofficial lodging, underground routes past 'authorities'; tag reaches th, here a thorp of 7 under one headman","other":""}
+{"id":"00338","town":"r2s-politically_fractured-thorp-1","sev":"MED","kind":"LACKS","why":"'Three powers in Mayanek'; GOVERNMENT lists two: The Independent Bloc and Household Council","other":""}
+{"id":"19529","town":"r2s-politically_fractured-thorp-1","sev":"LOW","kind":"LACKS","why":"'no longer comes to the hall's meetings'; HOUSES has no hall","other":""}
+{"id":"05049","town":"r2s-politically_fractured-thorp-1","sev":"MED","kind":"TAG","why":"'controls a distinct district or institution'; tag reaches th, here a thorp of 10 with Dwellings (1-8)","other":""}
+{"id":"17103","town":"r2s-politically_fractured-thorp-1","sev":"MED","kind":"TAG","why":"'shorting investments they publicly recommend'; tag reaches th, here a thorp of 10 with no bank, exchange or merchant house","other":""}
+{"id":"21981","town":"r2s-politically_fractured-thorp-1","sev":"MED","kind":"PAIR","why":"'founded by people who agreed on its purpose'; FOUNDING: siblings who disagreed about which way to keep walking","other":""}
+{"id":"HEADER","town":"r2s-politically_fractured-thorp-1","sev":"LOW","kind":"RECORD","why":"thorp of 10 gives Religious services and Education; HOUSES has only Access to parish church, no school","other":""}
+{"id":"HEADER","town":"r2s-recently_betrayed-thorp-1","sev":"MED","kind":"RECORD","why":"founded by wandering siblings vs established as a frontier outpost; isolated thorp of 27 makes gems yet exports none","other":""}
+{"id":"03970","town":"r2s-recently_betrayed-thorp-1","sev":"MED","kind":"LACKS","why":"'built around the hall... and the assembly'; HOUSES has no hall","other":""}
+{"id":"15516","town":"r2s-recently_betrayed-thorp-1","sev":"MED","kind":"LACKS","why":"'as freely as they trade'; trade access isolated, exports none, imports none","other":""}
+{"id":"22668","town":"r2s-recently_betrayed-thorp-1","sev":"MED","kind":"PAIR","why":"'timber... nobody has ever thought it worth the trouble'; TRADE made here lists timber and 30011 shows managed forest","other":"30011"}
+{"id":"25199","town":"r2s-recently_betrayed-thorp-1","sev":"LOW","kind":"BROKEN","why":"'Get the informal elder consensus through the season without borrowing' — a governance custom slotted in as if a business","other":""}
+{"id":"28135","town":"r2s-recently_betrayed-thorp-1","sev":"LOW","kind":"BROKEN","why":"'get the informal elder consensus through the season without borrowing' — a governance custom slotted in as if a business","other":""}
+{"id":"21980","town":"r2s-recently_betrayed-thorp-1","sev":"MED","kind":"PAIR","why":"'founded by a few families who trusted each other'; FOUNDING: a pair of siblings, a frontier outpost (15356)","other":"15356"}
+{"id":"HEADER","town":"r2s-religious_conversion-thorp-2","sev":"MED","kind":"RECORD","why":"founded by a healer who stopped for a traveller, yet reason is two rival mining operations sharing infrastructure; also gives Religious services with Access to parish church only","other":""}
+{"id":"10044","town":"r2s-religious_conversion-thorp-2","sev":"MED","kind":"LACKS","why":"'run by civic association'; GOVERNMENT is an Elder Council alone, informal elder consensus","other":""}
+{"id":"00649","town":"r2s-religious_conversion-thorp-2","sev":"MED","kind":"LACKS","why":"'two burial grounds now, one old and one new'; HOUSES lists one Burial ground","other":""}
+{"id":"20302","town":"r2s-religious_conversion-thorp-2","sev":"MED","kind":"PAIR","why":"conversion accepted within the week with nobody asking; 22121 says the split is open with two priests and two congregations","other":"22121"}
+{"id":"22121","town":"r2s-religious_conversion-thorp-2","sev":"MED","kind":"LACKS","why":"'two priests, two congregations, two registers' in a thorp of 21 whose HOUSES have only Access to parish church","other":""}
+{"id":"16495","town":"r2s-religious_conversion-thorp-2","sev":"MED","kind":"LACKS","why":"'Religious buildings, land, and endowments' contested; HOUSES has no church or shrine, only Access to parish church","other":""}
+{"id":"11563","town":"r2s-religious_conversion-thorp-2","sev":"LOW","kind":"BROKEN","why":"'it is aimed at Laskaris...: holds the seat' — 'it' has no antecedent and the clause after the colon has no subject","other":""}
+{"id":"12542","town":"r2s-religious_conversion-thorp-3","sev":"MED","kind":"LACKS","why":"'run by patronage and law'; GOVERNMENT is a Household Council by head-of-household consensus","other":""}
+{"id":"11569","town":"r2s-religious_conversion-thorp-3","sev":"LOW","kind":"BROKEN","why":"'it is aimed at Calvus Corvinus...: holds the seat' — 'it' has no antecedent and the clause after the colon has no subject","other":""}
+{"id":"23379","town":"r2s-religious_conversion-thorp-3","sev":"MED","kind":"LACKS","why":"'its defenders will not act as one'; DEFENCE: garrison, militia, watch, hired all none","other":""}
+{"id":"03340","town":"r2s-religious_conversion-thorp-3","sev":"MED","kind":"TAG","why":"'the major farming families agreed a formal compact regulating grain sale and storage'; tag reaches th, here 11 people on subsistence farming, no market or granary","other":""}
+{"id":"HEADER","town":"r2s-slave_revolt-thorp-2","sev":"MED","kind":"RECORD","why":"defence word Lightly Defended while DEFENCE lists every force none; slave revolt in a thorp of 21 whose HOUSES hold no slaving or estate house","other":""}
+{"id":"11668","town":"r2s-slave_revolt-thorp-2","sev":"LOW","kind":"BROKEN","why":"'it is aimed at Tianmei Wu...: holds the seat' — 'it' has no antecedent and the clause after the colon has no subject","other":""}
+{"id":"28958","town":"r2s-slave_revolt-thorp-2","sev":"MED","kind":"TAG","why":"'Whole work gangs have downed tools'; tag reaches th, here a thorp of 21 with Dwellings (1-8)","other":""}
+{"id":"21621","town":"r2s-slave_revolt-thorp-2","sev":"MED","kind":"TAG","why":"'The rebels' buildings are marked, and some streets are contested'; tag reaches th, a thorp of 21 has no streets to divide","other":""}
+{"id":"09482","town":"r2s-slave_revolt-thorp-2","sev":"MED","kind":"PAIR","why":"'From its first season this place ran on enslaved hands'; FOUNDING: two wandering siblings at a harbour fish preferred (15331)","other":"15331"}
+{"id":"28824","town":"r2s-slave_revolt-thorp-2","sev":"MED","kind":"PAIR","why":"the coastal trade it depended on failed and wealth dried up; 11977 says its one trade does well enough now, prosperity Moderate","other":"11977"}
+{"id":"15119","town":"r2s-succession_void-thorp-2","sev":"MED","kind":"PAIR","why":"'its own land does not grow enough; the rest comes from its stores and from magic'; 14584 says it gets by on its own, enough for an ordinary year","other":"14584"}
+{"id":"HEADER","town":"r2s-succession_void-thorp-2","sev":"LOW","kind":"RECORD","why":"isolated thorp of 30 makes iron and metalwork, with no smith on HOUSES and nothing exported","other":""}
+{"id":"03095","town":"r2s-wartime-thorp-3","sev":"MED","kind":"STATE","why":"'a substantial part of what it eats is bought'; trade access isolated, imports none, imports cover None","other":""}
+{"id":"22253","town":"r2s-wartime-thorp-3","sev":"MED","kind":"STATE","why":"'The thorp's food is a trade item, and the trade is not optional'; isolated, exports none, imports none","other":""}
+{"id":"20644","town":"r2s-wartime-thorp-3","sev":"LOW","kind":"BROKEN","why":"subject-verb disagreement: 'The gemstones... goes unworked; no house takes it up'","other":""}
+{"id":"HEADER","town":"r2s-wartime-thorp-3","sev":"LOW","kind":"RECORD","why":"founding reason 'grew at a strategic mountain pass' while trade access is isolated","other":""}
+{"id":"22986","town":"r2r-thorp-29","sev":"MED","kind":"LACKS","why":"'trust fewer of their own officers each week'; thorp of 11 under informal elder consensus, no officers, DEFENCE all none","other":""}
+{"id":"02892","town":"r2r-thorp-29","sev":"MED","kind":"TAG","why":"'gathered names from half their street'; tag reaches th, here a thorp of 11 with Dwellings (1-8)","other":""}
+{"id":"00020","town":"r2r-thorp-29","sev":"LOW","kind":"LACKS","why":"'its house of worship survived, but the congregation...'; HOUSES has only a Wayside shrine and Access to parish church","other":""}
+{"id":"HEADER","town":"r2r-thorp-29","sev":"LOW","kind":"RECORD","why":"thorp of 11 makes gems, gives Religious services and Education with no church or school on HOUSES","other":""}
+{"id":"HEADER","town":"r2s-indebted-thorp-2","sev":"MED","kind":"RECORD","why":"founded by two wandering siblings, yet reason is two rival mining operations sharing infrastructure; both cannot be true","other":""}
+{"id":"12110","town":"r2s-indebted-thorp-2","sev":"MED","kind":"STATE","why":"'food comes from its hunting and little else'; TRADE made here lists livestock and dairy and it exports live sheep","other":""}
+{"id":"15481","town":"r2s-indebted-thorp-2","sev":"MED","kind":"LACKS","why":"'before you meet its own officials'; thorp of 8 under head-of-household consensus has no officials","other":""}
+{"id":"24813","town":"r2s-indebted-thorp-2","sev":"LOW","kind":"BROKEN","why":"'Find the head-of-household consensus one more source of money' — a governance custom slotted in as if a business","other":""}
+{"id":"20366","town":"r2s-indebted-thorp-3","sev":"MED","kind":"LACKS","why":"creditor takes 'a warehouse here, a toll right there'; HOUSES has no warehouse","other":""}
+{"id":"HEADER","town":"r2s-infiltrated-thorp-1","sev":"LOW","kind":"RECORD","why":"HOUSES has a Fishing community and the table rests on fish, yet TRADE made here lists no fish","other":""}
+{"id":"28554","town":"r2s-infiltrated-thorp-1","sev":"LOW","kind":"BROKEN","why":"subject-verb disagreement: 'Weak defences is the reason'","other":""}
+{"id":"18381","town":"r2s-infiltrated-thorp-1","sev":"MED","kind":"PAIR","why":"'Someone inside Padmapeta's defence works for the other side'; DEFENCE all none and 00782 says nobody keeps the peace","other":"00782"}
+{"id":"HEADER","town":"r2s-infiltrated-thorp-2","sev":"MED","kind":"RECORD","why":"founded by 'a single extended family who came and never left', yet grew because a navigator retired here 'and others followed'","other":""}
+{"id":"07715","town":"r2s-insurgency-thorp-1","sev":"MED","kind":"TAG","why":"'Fewer merchants pay what the government asks, and more pay its rivals'; tag reaches th, here 10 people, no merchants, one power on GOVERNMENT","other":""}
+{"id":"06949","town":"r2s-insurgency-thorp-1","sev":"MED","kind":"LACKS","why":"'Each crackdown on the insurgents'; DEFENCE all none, nobody to crack down","other":""}
+{"id":"21315","town":"r2s-insurgency-thorp-1","sev":"MED","kind":"LACKS","why":"'The power defying Ulfset's government'; GOVERNMENT lists Household Council alone","other":""}
+{"id":"HEADER","town":"r2s-insurgency-thorp-1","sev":"LOW","kind":"RECORD","why":"HOUSES has a Shepherd collective but TRADE makes no wool or livestock","other":""}
+{"id":"HEADER","town":"r2s-insurgency-thorp-2","sev":"MED","kind":"RECORD","why":"founded by a healer vs by foresters under charter; thorp of 9 exports Pilgrim hospitality with no inn and makes metalwork with no smith","other":""}
+{"id":"07115","town":"r2s-insurgency-thorp-2","sev":"MED","kind":"LACKS","why":"'the first power leader to offer something better' presumes a rival power; GOVERNMENT lists Elder Council alone; 'power leader' reads garbled","other":""}
+{"id":"11471","town":"r2s-insurgency-thorp-2","sev":"MED","kind":"LACKS","why":"'the power that defies it'; GOVERNMENT lists Elder Council alone","other":""}
+{"id":"17413","town":"r2s-insurgency-thorp-2","sev":"LOW","kind":"LACKS","why":"'tokens that buy only from the foreman's own store'; HOUSES has no store","other":""}
+{"id":"21746","town":"r2s-insurgency-thorp-2","sev":"MED","kind":"PAIR","why":"'The river trade the settlement was built upon failed'; FOUNDING: by foresters managing woodland under charter","other":""}
+{"id":"HEADER","town":"r2s-insurgency-thorp-3","sev":"MED","kind":"RECORD","why":"defence word Lightly Defended while every DEFENCE line is none; two powers both listed Dominant","other":""}
+{"id":"20149","town":"r2s-insurgency-thorp-3","sev":"MED","kind":"LACKS","why":"challenge 'comes from its own officials: taxes held back, decisions left unsigned'; thorp of 16 by head-of-household consensus has no officials or taxes","other":""}
+{"id":"15215","town":"r2s-insurgency-thorp-3","sev":"MED","kind":"TAG","why":"'Officials drag their feet... taxes are collected but not handed over'; tag reaches th, here no officials in a thorp of 16","other":""}
+{"id":"20815","town":"r2s-insurgency-thorp-3","sev":"LOW","kind":"BROKEN","why":"subject-verb disagreement: 'The herds feeds Hochkirche first'","other":""}
+{"id":"09301","town":"r2s-insurgency-thorp-3","sev":"MED","kind":"PAIR","why":"'its stone... nobody has found it worth the trouble'; TRADE made here lists stone and 30248 shows a stone quarry","other":"30248"}
+{"id":"01345","town":"r2s-insurgency-thorp-3","sev":"LOW","kind":"BROKEN","why":"name repeated for a pronoun: 'Mechthild Becker thinks the newcomer would take Mechthild Becker's place'","other":""}
+{"id":"02425","town":"r2s-mass_migration-thorp-0","sev":"MED","kind":"TAG","why":"'A caravan broker shouts terms to a line of laden animals'; tag reaches th, here a port thorp of 21 exporting only transit contraband","other":""}
+{"id":"HEADER","town":"r2s-mass_migration-thorp-1","sev":"MED","kind":"RECORD","why":"defence word Lightly Defended with every DEFENCE line none; founded by a healer vs by foresters who found rich woodland","other":""}
+{"id":"28783","town":"r2s-monster_pressure-thorp-0","sev":"MED","kind":"LACKS","why":"'the lookouts count the days between attacks'; DEFENCE: watch none, militia none","other":""}
+{"id":"23004","town":"r2s-monster_pressure-thorp-0","sev":"LOW","kind":"LACKS","why":"'Those who answer for Umabagh's safety spend more on it every season'; DEFENCE all none, nothing is spent","other":""}
+{"id":"HEADER","town":"r2s-monster_pressure-thorp-0","sev":"LOW","kind":"RECORD","why":"HOUSES has a Fishing community but TRADE makes no fish","other":""}
+{"id":"HEADER","town":"r2s-monster_pressure-thorp-3","sev":"MED","kind":"RECORD","why":"founded by a healer vs farmland granted to a noble; exports coal that is not made here; Religious services with Access to parish church only","other":""}
+{"id":"20355","town":"r2s-monster_pressure-thorp-3","sev":"MED","kind":"PAIR","why":"'produces no timber'; TRADE exports Sacred wood and 30017 lists an ancient grove","other":"30017"}
+{"id":"06807","town":"r2s-monster_pressure-thorp-3","sev":"LOW","kind":"TAG","why":"'the edge of town' in a thorp of 10; the tag reaches th","other":""}
+{"id":"22818","town":"r2s-monster_pressure-thorp-3","sev":"MED","kind":"LACKS","why":"'They sent a patrol into that territory'; DEFENCE: garrison, militia, watch, hired all none","other":""}
+{"id":"07290","town":"r2s-monster_pressure-thorp-3","sev":"MED","kind":"STATE","why":"'Every cart that fails to reach Chalmul is food... it goes without'; imports none, grown 27 over need 20","other":""}
+{"id":"01050","town":"r2s-politically_fractured-thorp-0","sev":"LOW","kind":"LACKS","why":"'no longer sure the hall belongs to Elder Council'; HOUSES has no hall","other":""}
+{"id":"14024","town":"r2s-politically_fractured-thorp-0","sev":"MED","kind":"LACKS","why":"'More than one power claims to command its defence, and orders are given twice'; DEFENCE all none","other":""}
+{"id":"HEADER","town":"r2s-politically_fractured-thorp-0","sev":"LOW","kind":"RECORD","why":"thorp of 9 makes gems, gives Religious services and Education with no church or school on HOUSES","other":""}
+{"id":"04039","town":"r2s-politically_fractured-thorp-3","sev":"MED","kind":"TAG","why":"'a different answer in every street'; tag reaches th, here a thorp of 15 with Dwellings (1-8)","other":""}
+{"id":"03015","town":"r2s-politically_fractured-thorp-3","sev":"MED","kind":"PAIR","why":"'A shared purpose held the founders together'; FOUNDING: siblings who disagreed about which way to keep walking","other":""}
+{"id":"11549","town":"r2s-recently_betrayed-thorp-2","sev":"LOW","kind":"BROKEN","why":"'it is aimed at Atotoztli Caan...: holds the seat' — 'it' has no antecedent and the clause after the colon has no subject","other":""}
+{"id":"28745","town":"r2s-recently_betrayed-thorp-3","sev":"MED","kind":"LACKS","why":"'What the thorp's practitioners charge for... is a large part of its business'; HOUSES has no practitioner, DEFENCE magic none, no magic made","other":""}
+{"id":"07658","town":"r2s-religious_conversion-thorp-0","sev":"LOW","kind":"BROKEN","why":"subject-verb disagreement: 'Feudal Stewardship... backed... and now find'","other":""}
+{"id":"11565","town":"r2s-religious_conversion-thorp-0","sev":"LOW","kind":"BROKEN","why":"'it is aimed at Coatlicue Batab...: holds the seat' — 'it' has no antecedent and the clause after the colon has no subject","other":""}
+{"id":"21190","town":"r2s-religious_conversion-thorp-0","sev":"MED","kind":"LACKS","why":"'The old faith has the building, the records, the donations'; HOUSES has no church, only Access to parish church","other":""}
+{"id":"HEADER","town":"r2s-religious_conversion-thorp-0","sev":"LOW","kind":"RECORD","why":"thorp of 15 gives Religious services and Education with only Access to parish church and no school","other":""}
+{"id":"HEADER","town":"r2s-slave_revolt-thorp-0","sev":"MED","kind":"RECORD","why":"defence word Lightly Defended while every DEFENCE line is none; thorp of 28 makes gems, Religious services, Education with no house for them","other":""}
+{"id":"01529","town":"r2s-slave_revolt-thorp-0","sev":"MED","kind":"TAG","why":"'field gangs work without overseers'; tag reaches th, here a thorp of 28 with Dwellings (1-8)","other":""}
+{"id":"11669","town":"r2s-slave_revolt-thorp-0","sev":"LOW","kind":"BROKEN","why":"'it is aimed at Samarkand Kiyad...: holds the seat' — 'it' has no antecedent and the clause after the colon has no subject","other":""}
+{"id":"11671","town":"r2s-slave_revolt-thorp-3","sev":"LOW","kind":"BROKEN","why":"'it is aimed at Badr ibn Rashid...: holds the seat' — 'it' has no antecedent and the clause after the colon has no subject","other":""}
+{"id":"HEADER","town":"r2s-slave_revolt-thorp-3","sev":"LOW","kind":"RECORD","why":"thorp of 23 makes gems, gives Religious services and Education with no church or school on HOUSES","other":""}
+{"id":"09279","town":"r2s-wartime-thorp-0","sev":"MED","kind":"TAG","why":"'Food is being handed out to anyone who asks'; tag has F, so famine towns print free food; here too a 3% deficit","other":""}
+{"id":"25305","town":"r2s-wartime-thorp-0","sev":"LOW","kind":"BROKEN","why":"'Get the outlaw shelter through the season without borrowing' — a hiding place slotted in as if a business","other":""}
+{"id":"HEADER","town":"r2r-thorp-25","sev":"MED","kind":"RECORD","why":"founded by a discharged soldier vs grew because a renowned healer settled and people followed; two powers both Dominant","other":""}
+{"id":"30930","town":"r2r-thorp-56","sev":"LOW","kind":"LACKS","why":"ticks Brewing; nothing brewed is made here","other":""}
+{"id":"HEADER","town":"r2r-thorp-56","sev":"LOW","kind":"RECORD","why":"thorp of 24 makes iron and metalwork, gives Religious services and Education with no smith, church or school on HOUSES","other":""}
+{"id":"HEADER","town":"r2s-mass_migration-thorp-2","sev":"LOW","kind":"RECORD","why":"thorp of 24 makes iron and metalwork, gives Religious services and Education with no smith, church or school on HOUSES","other":""}
+{"id":"21756","town":"r2s-monster_pressure-thorp-2","sev":"MED","kind":"LACKS","why":"'between new watchtowers: timber, hasty, manned'; DEFENCE: watch none, HOUSES has a palisade and no towers","other":""}
+{"id":"11661","town":"r2s-monster_pressure-thorp-2","sev":"LOW","kind":"BROKEN","why":"'the palisade holds the key to it: whoever runs it' — a wall slotted in where a person or house belongs","other":""}
+{"id":"21599","town":"r2s-monster_pressure-thorp-2","sev":"LOW","kind":"BROKEN","why":"'whoever wins it over' said of the palisade — a wall slotted in where a person or house belongs","other":""}
+{"id":"24820","town":"r2s-monster_pressure-thorp-2","sev":"LOW","kind":"BROKEN","why":"'Find the informal elder consensus one more source of money' — a governance custom slotted in as if a business","other":""}
+{"id":"03987","town":"r2s-recently_betrayed-thorp-0","sev":"MED","kind":"LACKS","why":"'run by civic association'; GOVERNMENT is a Household Council by head-of-household consensus","other":""}
+{"id":"07397","town":"r2s-recently_betrayed-thorp-0","sev":"MED","kind":"PAIR","why":"'still does the job it began with'; it began as a grain depot for a city that no longer exists (15315), and HOUSES has no depot","other":"15315"}
+{"id":"HEADER","town":"r2s-recently_betrayed-thorp-0","sev":"LOW","kind":"RECORD","why":"thorp of 11 makes iron and metalwork, gives Religious services and Education with no smith, church or school","other":""}
+{"id":"07103","town":"r2s-religious_conversion-thorp-1","sev":"LOW","kind":"BROKEN","why":"subject-verb disagreement: 'Elder Council... backed... and now find'","other":""}
+{"id":"28925","town":"r2s-religious_conversion-thorp-1","sev":"LOW","kind":"LACKS","why":"'Who may command Mironitsa's defence... every order is questioned'; DEFENCE has a palisade and no force to command","other":""}
+{"id":"21712","town":"r2s-slave_revolt-thorp-1","sev":"MED","kind":"TAG","why":"'spreads to more work gangs each week'; tag reaches th, here a thorp of 15 with Dwellings (1-8)","other":""}
+{"id":"11478","town":"r2s-slave_revolt-thorp-1","sev":"MED","kind":"LACKS","why":"'without destroying the timber that made it worth holding'; TRADE makes no timber here","other":""}
+{"id":"09300","town":"r2s-slave_revolt-thorp-1","sev":"MED","kind":"PAIR","why":"'its clay... nobody has found it worth the trouble'; TRADE made here lists clay and pottery, as 30300 shows","other":"30300"}
+{"id":"14072","town":"r2s-slave_revolt-thorp-1","sev":"MED","kind":"STATE","why":"'Much of what Erdeniin eats is brought in by river'; deficit 3%, imports none","other":""}
+{"id":"HEADER","town":"r2s-slave_revolt-thorp-1","sev":"LOW","kind":"RECORD","why":"thorp of 15 makes iron, metalwork, pottery, textiles, Religious services, Education with no house for any","other":""}
+{"id":"03917","town":"r2s-wartime-thorp-1","sev":"LOW","kind":"BROKEN","why":"slash-joined label used as a noun: 'the gold/silver ore'","other":""}
+{"id":"28629","town":"r2s-wartime-thorp-1","sev":"MED","kind":"STATE","why":"'covers an ordinary year and no more'; food grown 36 against need 42, deficit 10%","other":""}
+{"id":"HEADER","town":"r2s-wartime-thorp-1","sev":"LOW","kind":"RECORD","why":"'grew at a strategic mountain pass' while trade access is isolated; makes gems, Religious services, Education with no house for them","other":""}
+{"id":"00014","town":"r2r-thorp-11","sev":"MED","kind":"LACKS","why":"'the local clergy and the civic authority'; HOUSES has a wayside shrine and Access to parish church, no clergy; head-of-household consensus","other":""}
+{"id":"HEADER","town":"r2r-thorp-11","sev":"MED","kind":"RECORD","why":"founded by two wandering siblings, yet reason is farmland granted to a favoured noble; both cannot be true","other":""}
+{"id":"HEADER","town":"r2r-thorp-26","sev":"MED","kind":"RECORD","why":"founded by two wandering siblings, yet reason is farmland granted to a favoured noble; makes iron and metalwork with no smith","other":""}
+{"id":"28656","town":"r2r-thorp-26","sev":"LOW","kind":"LACKS","why":"'What is said in Bregya's councils'; GOVERNMENT is a Headman's Authority, no council","other":""}
+{"id":"HEADER","town":"r2r-thorp-5","sev":"MED","kind":"RECORD","why":"defence word Lightly Defended while every DEFENCE line is none (29125: nothing organised); makes metalwork, Religious services, Education with no house","other":""}
+{"id":"HEADER","town":"r2r-thorp-55","sev":"MED","kind":"RECORD","why":"defence word Lightly Defended while every DEFENCE line is none; makes iron and metalwork with no smith","other":""}
+{"id":"11631","town":"r2s-insurgency-thorp-0","sev":"LOW","kind":"BROKEN","why":"'it is aimed at Rónán Ryan...: holds the seat' — 'it' has no antecedent and the clause after the colon has no subject","other":""}
+{"id":"15102","town":"r2s-succession_void-thorp-3","sev":"MED","kind":"TAG","why":"'merchants deal season to season'; tag reaches th, here a thorp of 14 with no market or merchant house","other":""}
+{"id":"20685","town":"r2r-thorp-16","sev":"MED","kind":"LACKS","why":"'The guard captain has a file'; DEFENCE: garrison none, watch none; only a household levy","other":""}
+{"id":"22757","town":"r2r-thorp-16","sev":"MED","kind":"LACKS","why":"'someone who works for the guard captain'; DEFENCE has no garrison or watch, so no guard captain","other":""}
+{"id":"11706","town":"r2r-thorp-16","sev":"LOW","kind":"BROKEN","why":"'the palisade leads the defence: the defence of the place, with no one named to lead it' — a wall slotted in as a leader, label doubled","other":""}
+{"id":"01722","town":"r2s-politically_fractured-thorp-2","sev":"MED","kind":"LACKS","why":"'the only person all three powers will still speak to'; GOVERNMENT lists two powers","other":""}
+{"id":"21280","town":"r2s-politically_fractured-thorp-2","sev":"MED","kind":"TAG","why":"'rich enough to buy the office that authenticates relics'; tag reaches th, here a thorp of 9 with no such office","other":""}
+{"id":"20158","town":"r2s-politically_fractured-thorp-2","sev":"LOW","kind":"LACKS","why":"'could now take the hall'; HOUSES has no hall","other":""}
+{"id":"HEADER","town":"r2s-politically_fractured-thorp-2","sev":"LOW","kind":"RECORD","why":"thorp of 9 makes gems, gives Religious services and Education with no church or school on HOUSES","other":""}
+{"id":"HEADER","town":"r2r-thorp-44","sev":"LOW","kind":"RECORD","why":"Household Council governs but HOUSES lists no council or consensus house; thorp of 12 makes iron and metalwork with no smith","other":""}
+{"id":"03978","town":"r2r-thorp-14","sev":"MED","kind":"LACKS","why":"'run by its estates'; GOVERNMENT is a Feudal Stewardship under a lord's reeve, no estates","other":""}
+{"id":"21748","town":"r2r-thorp-14","sev":"MED","kind":"TAG","why":"'The road becomes a street... the settlement grows around you gradually'; tag reaches th, here a thorp of 19 with Dwellings (1-8)","other":""}
+{"id":"HEADER","town":"r2r-thorp-14","sev":"LOW","kind":"RECORD","why":"thorp of 19 makes iron and metalwork with no smith; began as a grain depot with no granary on HOUSES","other":""}
+{"id":"HEADER","town":"r2r-thorp-23","sev":"MED","kind":"RECORD","why":"defence word Lightly Defended while every DEFENCE line is none; stability Stable with a Legitimacy Crisis","other":""}
+{"id":"20647","town":"r2r-thorp-23","sev":"MED","kind":"LACKS","why":"'The goods on offer are mostly second-hand'; isolated thorp of 20, no market, exports and imports none","other":""}
+{"id":"HEADER","town":"r2r-thorp-36","sev":"MED","kind":"RECORD","why":"thorp of 5 makes processed textiles, coal, Religious services, Education; Elder Council governs with no elder house on HOUSES","other":""}
+{"id":"03543","town":"r2r-thorp-36","sev":"MED","kind":"LACKS","why":"'An old judge listens to two neighbours'; thorp of 5 with no court or judge on HOUSES or GOVERNMENT","other":""}
+{"id":"HEADER","town":"r2r-thorp-37","sev":"MED","kind":"RECORD","why":"founded by two wandering siblings vs settled by veterans granted land; thorp of 6 makes gems, Religious services, Education","other":""}
+{"id":"07020","town":"r2r-thorp-37","sev":"MED","kind":"LACKS","why":"'between newer halls'; a thorp of 6 whose HOUSES list no hall","other":""}
+{"id":"05894","town":"r2r-thorp-42","sev":"LOW","kind":"LACKS","why":"'the permanent halls'; HOUSES lists no hall","other":""}
+{"id":"00583","town":"r2r-thorp-42","sev":"MED","kind":"STATE","why":"'gets by on a thin margin, and little in its trade is spare'; STATE prosperity Comfortable","other":""}
+{"id":"28560","town":"r2r-thorp-42","sev":"LOW","kind":"BROKEN","why":"subject-verb disagreement: 'Weak defences keeps'","other":""}
+{"id":"20824","town":"r2r-thorp-42","sev":"LOW","kind":"BROKEN","why":"subject-verb disagreement: 'The heresy trials is older'","other":""}
+{"id":"00010","town":"r2r-thorp-59","sev":"MED","kind":"LACKS","why":"'the practitioners who work here'; thorp of 7, magic low, DEFENCE magic none, no practitioner on HOUSES","other":""}
+{"id":"HEADER","town":"r2r-thorp-59","sev":"MED","kind":"RECORD","why":"thorp of 7 exports Pilgrim hospitality and bottled healing waters with no inn or shrine; makes metalwork with no smith","other":""}
+{"id":"HEADER","town":"r2r-thorp-9","sev":"LOW","kind":"RECORD","why":"isolated thorp of 20 makes iron and metalwork, gives Religious services and Education with no house for them","other":""}
+{"id":"02493","town":"r2r-thorp-9","sev":"LOW","kind":"TAG","why":"'the real arsonist still lives in town'; tag reaches th, here a thorp of 20","other":""}
+{"id":"HEADER","town":"r2r-thorp-18","sev":"MED","kind":"RECORD","why":"founded by 'a single extended family', yet reason is a disbanded military unit that stayed; both cannot be true","other":""}
+{"id":"00363","town":"r2r-thorp-18","sev":"MED","kind":"TAG","why":"'Half-timbered upper floors project above the busier lanes'; tag reaches th, here 30 people with Dwellings (1-8)","other":""}
+{"id":"22229","town":"r2r-thorp-18","sev":"MED","kind":"PAIR","why":"'has the iron ore; what it lacks is Smelter' — TRADE made here lists iron and metalwork; also missing article before 'Smelter'","other":""}
+{"id":"HEADER","town":"r2r-thorp-20","sev":"MED","kind":"RECORD","why":"defence word Lightly Defended while every DEFENCE line is none","other":""}
+{"id":"HEADER","town":"r2r-thorp-28","sev":"MED","kind":"RECORD","why":"defence word Lightly Defended while every DEFENCE line is none; founded by a discharged soldier vs by two rival mining operations","other":""}
+{"id":"HEADER","town":"r2r-thorp-3","sev":"MED","kind":"RECORD","why":"defence word Lightly Defended while every DEFENCE line is none; thorp of 12 exports Pilgrim hospitality with no inn or shrine","other":""}
+{"id":"18669","town":"r2r-thorp-3","sev":"MED","kind":"LACKS","why":"'Storehouses and caravan yards mark the boundary'; HOUSES has no storehouse, river access and no caravan trade","other":""}
+{"id":"00155","town":"r2r-thorp-31","sev":"MED","kind":"LACKS","why":"'One broad street leading up to the hall'; HOUSES has no hall","other":""}
+{"id":"28082","town":"r2r-thorp-31","sev":"LOW","kind":"BROKEN","why":"'find the head-of-household consensus one more source of money' — a governance custom slotted in as if a business","other":""}
+{"id":"HEADER","town":"r2r-thorp-31","sev":"LOW","kind":"RECORD","why":"thorp of 26 exports Pilgrim hospitality with no inn, makes textiles and metalwork with no workshop or smith","other":""}
+{"id":"HEADER","town":"r2r-thorp-35","sev":"LOW","kind":"RECORD","why":"thorp of 20 gives Religious services and Education with only Access to parish church and no school","other":""}
+{"id":"HEADER","town":"r2r-thorp-47","sev":"MED","kind":"RECORD","why":"founded by a healer who stopped for a traveller vs established as a defensive stronghold; both cannot be true","other":""}
+{"id":"HEADER","town":"r2r-thorp-48","sev":"MED","kind":"RECORD","why":"defence word Lightly Defended while every DEFENCE line is none; stability Stable with a Legitimacy Crisis","other":""}
+{"id":"20269","town":"r2r-thorp-53","sev":"MED","kind":"STATE","why":"the coastal trade collapsed and its prosperity bled away; STATE prosperity Comfortable","other":""}
+{"id":"HEADER","town":"r2r-thorp-57","sev":"MED","kind":"RECORD","why":"defence word Lightly Defended while every DEFENCE line is none; thorp of 11 makes iron, metalwork, Religious services, Education with no house","other":""}
+{"id":"21299","town":"r2r-thorp-7","sev":"LOW","kind":"BROKEN","why":"subject-verb disagreement: 'The plague years is a generation old'","other":""}
+{"id":"HEADER","town":"r2r-thorp-7","sev":"LOW","kind":"RECORD","why":"thorp of 9 gives Religious services and Education with only a Wayside shrine and no school","other":""}
+{"id":"HEADER","town":"r2r-thorp-0","sev":"MED","kind":"RECORD","why":"defence word Lightly Defended while every DEFENCE line is none; exports Pilgrim hospitality with no inn; Fishing community but no fish made","other":""}
+{"id":"DONE","lines":3080,"blocks":75,"flags":211}
