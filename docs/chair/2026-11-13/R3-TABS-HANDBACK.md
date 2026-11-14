@@ -721,3 +721,107 @@ or door reads git). The lane's base aac79b808; the line merged in at 976db5b19 (
   lines make the manifest's −250 cells (attributed by commit, not read cell by cell).
 - **Left:** nothing of this lane's assignment. The PR's merge, the deploy and the manifest's re-record are not this
   lane's.
+
+# THE FOURTH SEAT (R3-TABS-4, 2026-11-14): the fresh reader's findings cured
+The seat's brief: `docs/chair/2026-11-14/briefs/BRIEF-R3-TABS-4.md` on lane/chair-2026-11-08. The reader:
+`docs/chair/2026-11-14/REVIEW-R3-TABS-2026-11-14.md` on lane/review-r3-tabs-2026-11-14 (NOT CLEAR at bb2bf91c5).
+First act: the lane's tip read back from origin, 5f8602371, as the brief named it. Range: **bb2bf91c5..<the tip below>**.
+EXECUTED unless marked. Instrument: the reader's 1,536 births (`probes/REVIEW-R3-TABS/births.mjs`, seeds1536.txt;
+sha256 of the stream 391ab147… at the tip and at the line's tip 976db5b19, equal), every desk sentence by the tab's
+own caller (`defenseDeskRead`) at each commit, diffed cell by cell; pages by the reader's `render.sh` (the real
+OutputContainer, every tab opened) for the towns read.
+
+## The rulings this seat worked to (copied; vetoable by the owner)
+- **(a) F1, HIGH:** the strong posture pool is struck under an occupation, as under a siege or a war; and the reverse
+  guard: no strong posture line beside a Weak or Critical Invasion & War bar; beside such a bar the posture draws no
+  higher than the pool the line's tip 976db5b19 drew for the town.
+- **(b) F3, MEDIUM:** a posture variant that names works is struck where the record holds no walls; one that names a
+  watch on the approaches where it holds neither watch nor garrison. A line that names a thing reads the roster.
+- **(c) F2 MEDIUM and F7 LOW:** the chair's earlier note WITHDRAWN: a watch is not the townspeople in arms and not a
+  force that holds a perimeter. `militia || watch` leaves the citizen-militia key and the beasts row's held-perimeter
+  lines. The watch-only town hears no sentence saying it has no force and none naming townspeople in arms; where no
+  pool the key can select is true of it, the row's sentence is silent (the bar and its word print). FOR THE JOIN: the
+  corpus owes a pool for "walls and a watch only" and "a watch only".
+- **(d) F6, MEDIUM:** measure what (c) does first; then the supply line that says the defenders are well supplied is
+  not drawn under a siege or a famine in force (silence), with a guard town each.
+- **(e) F8, LOW:** plotHooks.js :: EVENT_LABELS takes History's two names, read where Plot Hooks and the PDF print.
+- **(f)** F4, F5, F9, F10 not this seat's: FOR THE JOIN below.
+- **The chair's added ruling (07:32 UTC, on this seat's own measure at F1):** a strong posture line beside the Guard
+  assessment "exists on paper. Chronically underpaid and poorly equipped" is two places on one page that disagree;
+  the strong pool is not drawn at that tier, read from the same fact the assessment reads (its tier, never its
+  sentence); count 31 -> 0 with the line's own 9 among them.
+
+## Each finding: cause, cure, counts, guard, plant, towns read
+| finding | cause (lane commit) | cure | counts on the 1,536 | guard · plant that reds it |
+|---|---|---|---|---|
+| F1 | L1 + the disqualifiers (posture reads the badge; strong struck only under siege/war) | 44dc0d5f9 | strong beside Weak/Critical bar 2 -> 0; strong under an occupation 14 -> 0 (10 at the line); 33 of the 34 newly-v2 towns keep it | `tests/domain/defensePostureAgainstItsFacts.test.js` (red first at 5f8602371, 4 of 6) · occupation strike off; reverse guard off (Ingili with its occupation lifted); L2 off |
+| guard on paper | L1 (9 -> 32) | 9118466d3 | strong beside "exists on paper" 31 -> 0 (the line's 9 among them); the fact agrees with the sentence 1,536/1,536 | same file, third arm (red first at 853188dcf) · `guardOnPaper` off the strike |
+| F3 | L1 | 0b38bfbde | the works line in an unwalled town 3 at bb2bf91c5 -> 2 after F1 -> 0; walled with no watch or garrison 0 | same file, F3 arm (red first at 44dc0d5f9) · 'no walls' off (Yunxian, Deirmandi); 'no watch or garrison' off (Al-kot with its watch and garrison taken off the roster) |
+| F2 + F7 | L0 (`militia \|\| watch`; `force` in the beasts key) | 2b7f61994 | citizen-militia pool with no militia 139 -> 0; held-perimeter beside the watch's line 38 -> 0 (the reader's instrument 42); held-perimeter in any watch-only town 135 -> 0; no-force beside a watch 0 kept; 155 militia towns byte-identical | `tests/domain/defenseWatchIsNotTheLevy.test.js` (red first at fe7eaaf09, 4 of 4) · the old key restored; the held-perimeter filter off. L0's walled arm in `defenseNoForceReadsEveryBody.test.js` RE-KEYED to the ruling |
+| F6 | carried (the supply key reads no crisis); +6 by L0 | 04853bde0 | supplied line under siege/famine 27 at the line, 33 at fe7eaaf09, 27 after F2 (the watch towns left) -> 0 | `tests/domain/defenseSupplyUnderACrisis.test.js` (red first at e24d244f2, 3 of 3) · the hold matched to no pool |
+| F8 | carried twin of the History rename | c931076a5 | "Exile & Return Event" 209 -> 0, "Occupation Event" 307 -> 0 (collectPlotHooks, the tab's and the PDF's collector) | `tests/domain/plotHooksEventLabelsHistory.test.js` (red first at c75fa4f9e, 4 of 4) |
+Each cure's commit body names the towns read on the rendered page and what printed (an occupation, a siege and a
+famine wherever the cell reaches one; the smallest and largest size). Each new test file's titles re-took the
+lighting census by its ritual, in its own commit (5efbfde7e, 853188dcf, fe7eaaf09, e24d244f2, c75fa4f9e, 6b74eb2aa).
+
+## Every sentence that now prints in a new town or is newly silent (for the owner's veto)
+- **Newly prints:** "People at {S} expect to hold against the usual trouble, and they claim no more than that."
+  (adequate v3, the line's own pool) in Muulcoba and Ingili, both occupied, beside "Military status · Under
+  occupation · … the arms in the town are theirs": the ruling's "no higher than the line's pool"; this seat reads it as
+  in tension with the occupation and would accept silence instead. Yunxian (r2r-town-52, unwalled, garrison): "What
+  Yunxian can field and what Yunxian has built are both in good order…"; Deirmandi (unwalled): "The town does not
+  spend much time thinking about being attacked: its defences are in good order…".
+- **Newly silent:** the posture line in 12 occupied strong-badge towns and in the 31 guard-on-paper towns (the
+  badge and the assessment print); the Invasion row's sentence and its supply clause in every watch-only town (220:
+  the bar and its word print); the beasts row in 135 walled watch-only frontier/plagued towns; the supply clause
+  in 27 towns under a siege or a famine (the row's sentence stays).
+- **Kept, for the veto:** the beasts row's "force without a perimeter" lines in 9 unwalled watch-only frontier
+  villages ("{S} keeps armed people on an open frontier…", "You see spears at {S} and no wall…", "…before its
+  fighters get there": L0's; "fighters" stretches a watch); "defenses beyond the need" in 4 walled settled
+  watch-only towns (the line's own, force-blind).
+
+## FOR THE JOIN (not this lane's files, or not ruled)
+- **(c)** the corpus lane owes a pool for "walls and a watch only" and for "a watch only" (Invasion & War), and a
+  held-perimeter-free beasts line for a walled watch-only town (135 towns silent now).
+- **(f) F4** (the reader's count): 13 medium corpus lines newly voiced in the 14 towns whose names open with a
+  non-ASCII capital (L3 right; the lines are the corpus's, false in any town). **F5:** the weak/critical posture
+  against an Invasion row that sees raiders off, 82 towns (80 at the line): the one ladder, the defence lane's.
+  **F9:** the naval line lost in 115 river towns, 22 on coastal terrain: after the join. **F10:** the Substrate food
+  word "Import-dependent" under a siege, 18 towns: the food generator's label.
+- **Found by this seat, not ruled:** a strong posture beside the supply clause "defenders go short / make do /
+  worse off" (CHAIN: defence short): 168 towns at the line, 240 at bb2bf91c5 (L1), 232 after F3, the class
+  unmeasured after the guard-on-paper cure; the cure would be a disqualifier in postureLineDisqualifiers.js (this
+  lane's file) reading `chainModifiers.military < 0`: for the chair.
+- The readiness badge "Well-defended" still stands over "exists on paper" in the 31 guard-on-paper towns:
+  `defenseGenerator.js :: computeDefenseReadiness`, the defence lane's.
+- plotHooks.js's other copy: lane/rung2-shadow-2026-11-07 changed the file after its merge base (a rung-1 merge
+  landing of 2026-11-07; its diff touches no label): named, not a holder of F8.
+
+## What a fresh reader needs
+The range bb2bf91c5..<the tip below>; the first reader's steps 3 to 7, which it did not run (the field diff by
+family; plants for each guard; the remerge diffs; the gates and governing tests at tip and base; CENSUS-2). This
+seat's instruments: `/home/user/wt/tools/measure.mjs` (per town: the facts and every desk sentence) and `diffm.mjs`
+(cell diff between two measures), re-made from the reader's `desk.mjs` in a few lines; the plants are in each
+commit body.
+
+## The close (step 7), at 6b74eb2aa (code) — EXECUTED
+- **Births:** the reader's births.mjs at the tip, 1,536 births, 0 errors: sha256 391ab147… EQUAL to the line's tip
+  976db5b19 (and to 5f8602371): the lane moves no record.
+- **Section 2m's doors**, at every commit that touched src/: the presumed-things door `--check` exit 0 (fresh 0,
+  stale 0) at each; observed-shape readers, fact layers (0 rises), writer reach exit 0 from the guard-on-paper cure on
+  (the first cure to add a read). **The page census of the 720** (`page-census.mjs --workers=2`) at the tip: exit 0,
+  25 rows, none rose and none fell (no `--shrink` owed). The lighting census re-taken by its ritual after each new
+  test file (six commits, listed above); the walker plain green each time.
+- **The three fast gates** at every src commit: eslint on the touched files exit 0; typecheck:domain:strict 1113 at
+  its ceiling; typecheck:ratchet 167 at its ceiling. The lane hook passed on six pushes.
+- **The governing test files** of defenseStateProse.js, postureLineDisqualifiers.js and plotHooks.js
+  (+ tests/components/defense*), JSON to files: at the tip 49 files, 598 passed, 0 failed; at bb2bf91c5 39 files
+  (the guards this seat added are absent there), 565 passed, 0 failed. No red, new or carried, on these files.
+- **The edge bundles**, last: `validate:edge` exit 0; nothing written.
+- The whole suite was NOT run again, as the brief says.
+
+## The final statement of the fourth seat
+Tip <read back in the message to the chair>. Every finding the chair ruled is cured, with the counts above:
+F1 2 -> 0 and 14 -> 0; the guard on paper 31 -> 0; F3 -> 0; F2 139 -> 0; F7 38 (reader 42) -> 0; F6 27 -> 0;
+F8 209/307 -> 0. Left: nothing of this seat's assignment. For the chair: the strong posture beside a short
+defence supply (FOR THE JOIN above). The PR's merge, the deploy and the manifest's re-record are not this lane's.
