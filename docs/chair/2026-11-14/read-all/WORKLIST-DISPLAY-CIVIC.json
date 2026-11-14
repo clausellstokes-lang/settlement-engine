@@ -1,0 +1,2558 @@
+[
+{
+"id": "16764",
+"sev": "MED",
+"n": 343,
+"town": "r2r-thorp-58",
+"section": "Summary/Foundations",
+"fold": "Ruling authorityAdequate",
+"text": "Ruling authorityAdequate",
+"why": "Ruling authority Adequate while stability Critical, legitimacy crisis, governance fractured",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "07065",
+"sev": "MED",
+"n": 314,
+"town": "r2s-under_siege-town-0",
+"section": "Summary/Overview",
+"fold": "Economic ResilienceStrong",
+"text": "Economic ResilienceStrong",
+"why": "Economic Resilience Strong; under siege, prosperity Struggling, deficit 44%, viable False",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "10722",
+"sev": "MED",
+"n": 165,
+"town": "r2r-thorp-58",
+"section": "Summary/Overview",
+"fold": "Hoarders",
+"text": "Hoarders",
+"why": "'Price regulators' faction in a thorp of 7 with no market and few offices",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "16110",
+"sev": "MED",
+"n": 149,
+"town": "r2s-infiltrated-thorp-0",
+"section": "Summary/Foundations",
+"fold": "Public legitimacyAdequate",
+"text": "Public legitimacyAdequate",
+"why": "'Public legitimacy Adequate'; GOVERNMENT legitimacy is Tolerated, and 00369 prints Tolerated",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B11922",
+"sev": "MED",
+"n": 124,
+"town": "r2s-under_siege-town-0",
+"section": "Systems/Defense",
+"fold": "Legal InfrastructureCourt only",
+"text": "Legal InfrastructureCourt only",
+"why": "'Court only' legal infrastructure; HOUSES has no court (only Town hall, Mayor and council)",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "16767",
+"sev": "MED",
+"n": 114,
+"town": "r2s-plague_onset-thorp-3",
+"section": "Summary/Foundations",
+"fold": "Ruling authoritySurplus",
+"text": "Ruling authoritySurplus",
+"why": "Ruling authority 'Surplus': legitimacy Contested, a rival claims the seat, stability Anxious",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "05688",
+"sev": "MED",
+"n": 89,
+"town": "r2r-hamlet-57",
+"section": "World/NPCs",
+"fold": "Constraint: Growing into the leading house's trade invites a reply; staying out of it means staying small.",
+"text": "Constraint: Growing into the leading house's trade invites a reply; staying out of it means staying small.",
+"why": "'the leading house's trade'; hamlets have no rival trading houses",
+"kinds": [
+"TAG"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B12521",
+"sev": "MED",
+"n": 89,
+"town": "r2s-famine-town-1",
+"section": "Summary/Crisis",
+"fold": "Merchant Guilds no stake yet",
+"text": "Merchant Guilds no stake yet",
+"why": "says Merchant Guilds have no stake yet; QUARRELS has Merchant Guilds as the opposing party in a high-intensity quarrel with the ruling oligarchy, amid famine",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "19252",
+"sev": "MED",
+"n": 87,
+"town": "r2s-occupied-thorp-1",
+"section": "Systems/Power",
+"fold": "The Elder Council governs <N>.",
+"text": "The Elder Council governs Amarkota.",
+"why": "Elder Council governs; under occupation, Occupation Authority holds equal power and stability Suppressed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "13341",
+"sev": "MED",
+"n": 73,
+"town": "r2s-occupied-town-3",
+"section": "Systems/Power",
+"fold": "Merchant Guilds~Craft Guildsstable",
+"text": "Merchant Guilds~Craft Guildsstable",
+"why": "marks Merchant Guilds~Craft Guilds stable; 13269 and 10624 give High tension, 16773 a sustained dispute",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B07041",
+"sev": "MED",
+"n": 60,
+"town": "r2s-under_siege-thorp-1",
+"section": "World/History",
+"fold": "External Debtmajor",
+"text": "External Debtmajor",
+"why": "History prints an 'External Debt' major event; PAST records only the Arcane Incident and the Migration",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B11732",
+"sev": "MED",
+"n": 58,
+"town": "r2s-plague_onset-metropolis-0",
+"section": "World/Traditions",
+"fold": "Kept in Seedtime, the second week.",
+"text": "Kept in Seedtime, the second week.",
+"why": "festival kept as usual; CRISIS Plague with Quarantined safety, people do not gather as usual",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "14552",
+"sev": "MED",
+"n": 55,
+"town": "r2r-thorp-17",
+"section": "Systems/Resources",
+"fold": "No # here works the stone near <N>.",
+"text": "No one here works the stone near Chichich.",
+"why": "no one works the stone; TRADE made here lists stone",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/validationOnPage.js",
+"line": 487,
+"fn": "exploitationGroupsShown"
+}
+},
+{
+"id": "19466",
+"sev": "MED",
+"n": 54,
+"town": "r2s-occupied-hamlet-1",
+"section": "Systems/Power",
+"fold": "The Headman's Authority governs <N>.",
+"text": "The Headman's Authority governs Llanhurst.",
+"why": "'The Headman's Authority governs Llanhurst' plainly, under Occupation with an equal Occupation Authority and stability Suppressed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B05826",
+"sev": "MED",
+"n": 52,
+"town": "r2s-mass_migration-town-0",
+"section": "Systems/Power",
+"fold": "Crime is the reason.",
+"text": "Crime is the reason.",
+"why": "'Crime is the reason' for contested legitimacy; no criminal power, house or chain here; crisis is migration, stability 'people arriving'",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "19516",
+"sev": "MED",
+"n": 50,
+"town": "r2r-thorp-24",
+"section": "Systems/Power",
+"fold": "The Household Council governs <N>.",
+"text": "The Household Council governs Sanctaminus.",
+"why": "'The Household Council governs Sanctaminus' plainly, under Occupation with a Dominant Occupation Authority and stability Suppressed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B15436",
+"sev": "MED",
+"n": 48,
+"town": "r2r-thorp-51",
+"section": "Summary/Overview",
+"fold": "Reformers",
+"text": "Reformers",
+"why": "a 'Reformers' camp; GOVERNMENT lists only Elder Council, QUARRELS none, thorp of 11",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B05720",
+"sev": "MED",
+"n": 48,
+"town": "r2r-thorp-51",
+"section": "World/History",
+"fold": "Corruption scandalmajor",
+"text": "Corruption scandalmajor",
+"why": "a major corruption scandal in the history; PAST lists Migration, Succession Crisis, Debt Crisis only",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B11731",
+"sev": "MED",
+"n": 31,
+"town": "r2s-plague_onset-metropolis-1",
+"section": "World/Traditions",
+"fold": "Kept in Seedtime, the second and # weeks.",
+"text": "Kept in Seedtime, the second and third weeks.",
+"why": "festival kept as usual; CRISIS Plague, Dangerous safety, people fear sickness and do not gather as usual",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B11718",
+"sev": "MED",
+"n": 29,
+"town": "r2r-city-19",
+"section": "World/Traditions",
+"fold": "Kept in Seedtime, the # and fourth weeks.",
+"text": "Kept in Seedtime, the third and fourth weeks.",
+"why": "festival kept in Seedtime as usual; CRISIS Plague, people fear sickness and do not gather as usual",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B11664",
+"sev": "MED",
+"n": 26,
+"town": "r2s-plague_onset-metropolis-1",
+"section": "World/Traditions",
+"fold": "Kept in Deepwinter, the sixth week.",
+"text": "Kept in Deepwinter, the sixth week.",
+"why": "festival kept as usual; CRISIS Plague, Dangerous safety, people fear sickness and do not gather as usual",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B07353",
+"sev": "MED",
+"n": 25,
+"town": "r2s-occupied-town-1",
+"section": "World/NPCs",
+"fold": "First Magnate, first of Merchant oligarchy",
+"text": "First Magnate, first of Merchant oligarchy",
+"why": "names a 'First Magnate' leading Merchant oligarchy; PEOPLE has nobody at Merchant oligarchy and no such title anywhere on the roster",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B09553",
+"sev": "MED",
+"n": 25,
+"town": "r2r-thorp-37",
+"section": "Summary/Plot Hooks",
+"fold": "Great Flood",
+"text": "Great Flood",
+"why": "flood/redrawn boundaries; PAST lists Pilgrimage, Succession Crisis, Migration, no flood",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B09557",
+"sev": "MED",
+"n": 25,
+"town": "r2r-thorp-37",
+"section": "World/History",
+"fold": "Great flood",
+"text": "Great flood",
+"why": "flood/redrawn boundaries; PAST lists Pilgrimage, Succession Crisis, Migration, no flood",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B00530",
+"sev": "MED",
+"n": 24,
+"town": "r2s-famine-city-2",
+"section": "World/Relationships",
+"fold": "<N> commands the patrols and <N> pays for their routes.",
+"text": "Enkhbold Qipchaq commands the patrols and Yesüi Samarkand the Younger pays for their routes.",
+"why": "says Enkhbold Qipchaq commands the patrols; PEOPLE: he is blade captain of Hired blades; watch and garrison commanders are others",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B11737",
+"sev": "MED",
+"n": 23,
+"town": "r2s-plague_onset-metropolis-3",
+"section": "World/Traditions",
+"fold": "Kept in Seedtime, the thirteenth week, into Highsun.",
+"text": "Kept in Seedtime, the thirteenth week, into Highsun.",
+"why": "festival kept as usual; CRISIS Plague, Dangerous safety, people fear sickness and do not gather as usual",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B15115",
+"sev": "MED",
+"n": 23,
+"town": "r2r-thorp-53",
+"section": "Summary/Overview",
+"fold": "Pro-magic",
+"text": "Pro-magic",
+"why": "magical controversy/accident/sealed thing; PAST records only The Trade Collapse",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B03548",
+"sev": "MED",
+"n": 23,
+"town": "r2r-thorp-53",
+"section": "Summary/Overview",
+"fold": "Anti-magic",
+"text": "Anti-magic",
+"why": "magical controversy/accident/sealed thing; PAST records only The Trade Collapse",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B13860",
+"sev": "MED",
+"n": 22,
+"town": "r2s-famine-city-0",
+"section": "Summary/Crisis",
+"fold": "Noble Families no stake yet",
+"text": "Noble Families no stake yet",
+"why": "says Noble Families have no stake yet; QUARRELS has Noble Families as a party to the open quarrel with Royal Authority, amid famine",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "00587",
+"sev": "MED",
+"n": 20,
+"town": "r2s-plague_onset-city-0",
+"section": "World/Relationships",
+"fold": "<N> governs on <N>'s credit.",
+"text": "Uglješa Ivanov governs on Slobodan Marković's credit.",
+"why": "says the mint master governs; GOVERNMENT is a City-State Council and he is named only as mint master",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B08924",
+"sev": "MED",
+"n": 20,
+"town": "r2r-thorp-23",
+"section": "Summary/Overview",
+"fold": "Former rebels",
+"text": "Former rebels",
+"why": "popular uprising/rebels; PAST lists Migration, Succession Crisis, Religious Conflict, no uprising",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B02506",
+"sev": "MED",
+"n": 20,
+"town": "r2s-recently_betrayed-town-0",
+"section": "Summary/Overview",
+"fold": "A fire that began in the lower districts consumed wooden buildings and merchant stalls across whole districts before it could be checked",
+"text": "A fire that began in the lower districts consumed wooden buildings and merchant stalls across whole districts before it could be checked",
+"why": "describes a town fire across whole districts; PAST records no fire, and a town of 2124 has no named lower districts",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B14868",
+"sev": "MED",
+"n": 19,
+"town": "r2r-thorp-14",
+"section": "Summary/Plot Hooks",
+"fold": "Plague Years",
+"text": "Plague Years",
+"why": "plague/quarantine history; PAST lists only Arcane Incident, Occupation, Trade Collapse, no plague",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B14869",
+"sev": "MED",
+"n": 19,
+"town": "r2r-thorp-14",
+"section": "World/History",
+"fold": "Plague years",
+"text": "Plague years",
+"why": "plague/quarantine history; PAST lists only Arcane Incident, Occupation, Trade Collapse, no plague",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "19333",
+"sev": "MED",
+"n": 18,
+"town": "r2s-occupied-hamlet-2",
+"section": "Systems/Power",
+"fold": "The Free Elder Council governs <N>.",
+"text": "The Free Elder Council governs Dunkelstift.",
+"why": "'The Free Elder Council governs Dunkelstift' plainly, under Occupation with a Dominant Occupation Authority",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "19954",
+"sev": "MED",
+"n": 18,
+"town": "r2s-famine-town-2",
+"section": "Systems/Power",
+"fold": "The Thieves' Guild is at odds with it.",
+"text": "The Thieves' Guild is at odds with it.",
+"why": "says Thieves' Guild is at odds with the Mayor; 23123 and 14920 say they leave each other alone",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B11650",
+"sev": "MED",
+"n": 18,
+"town": "r2s-plague_onset-city-1",
+"section": "World/Traditions",
+"fold": "Kept in Deepwinter, the eighth week.",
+"text": "Kept in Deepwinter, the eighth week.",
+"why": "festival kept in Deepwinter as usual; CRISIS Plague, people fear sickness and do not gather as usual",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B11660",
+"sev": "MED",
+"n": 18,
+"town": "r2s-plague_onset-metropolis-2",
+"section": "World/Traditions",
+"fold": "Kept in Deepwinter, the second week.",
+"text": "Kept in Deepwinter, the second week.",
+"why": "festival kept in Deepwinter as usual; CRISIS Plague with Restricted safety, people do not gather as usual",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B11686",
+"sev": "MED",
+"n": 18,
+"town": "r2s-plague_onset-metropolis-3",
+"section": "World/Traditions",
+"fold": "Kept in Harvest, the seventh week.",
+"text": "Kept in Harvest, the seventh week.",
+"why": "festival kept as usual; CRISIS Plague, Dangerous safety, people fear sickness and do not gather as usual",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B09552",
+"sev": "MED",
+"n": 18,
+"town": "r2r-thorp-9",
+"section": "Summary/Plot Hooks",
+"fold": "Great Fire",
+"text": "Great Fire",
+"why": "fire and rebuilding; PAST records only The Uprising, no fire",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B09556",
+"sev": "MED",
+"n": 18,
+"town": "r2r-thorp-9",
+"section": "World/History",
+"fold": "Great fire",
+"text": "Great fire",
+"why": "fire and rebuilding; PAST records only The Uprising, no fire",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B14848",
+"sev": "MED",
+"n": 18,
+"town": "r2r-hamlet-6",
+"section": "Summary/Plot Hooks",
+"fold": "Pilgrimage Surge",
+"text": "Pilgrimage Surge",
+"why": "'Pilgrimage Surge' hook; PAST records no pilgrimage (Religious Conflict, Iron Dispute, Siege, Migration only)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B14855",
+"sev": "MED",
+"n": 18,
+"town": "r2r-hamlet-6",
+"section": "World/History",
+"fold": "Pilgrimage surge",
+"text": "Pilgrimage surge",
+"why": "history line 'Pilgrimage surge'; PAST records no pilgrimage event",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B20892",
+"sev": "MED",
+"n": 17,
+"town": "r2s-famine-town-0",
+"section": "Systems/Power",
+"fold": "The seat<N>, the senior guild master and Alderman",
+"text": "The seatFastrada Wolf, the senior guild master and Alderman",
+"why": "calls Fastrada Wolf (f) Alderman and seat-holder; PEOPLE gives her only senior guild master @ Merchant guilds; no alderman office",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "09758",
+"sev": "MED",
+"n": 16,
+"town": "r2s-occupied-metropolis-0",
+"section": "Summary/Overview",
+"fold": "Governed by Grand Guild Consortium",
+"text": "Governed by Grand Guild Consortium",
+"why": "Under Occupation the Consortium does not govern freely; Occupation Authority is equally Significant and stability is Suppressed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B11692",
+"sev": "MED",
+"n": 15,
+"town": "r2s-plague_onset-city-3",
+"section": "World/Traditions",
+"fold": "Kept in Harvest, the twelfth week.",
+"text": "Kept in Harvest, the twelfth week.",
+"why": "harvest festival kept as usual; CRISIS is Plague, people fear sickness and do not gather as usual",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B11682",
+"sev": "MED",
+"n": 15,
+"town": "r2s-plague_onset-city-1",
+"section": "World/Traditions",
+"fold": "Kept in Harvest, the ninth week.",
+"text": "Kept in Harvest, the ninth week.",
+"why": "festival kept in Harvest as usual; CRISIS Plague, people fear sickness and do not gather as usual",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B09895",
+"sev": "MED",
+"n": 15,
+"town": "r2s-occupied-thorp-2",
+"section": "Summary/Plot Hooks",
+"fold": "Heresy Trial",
+"text": "Heresy Trial",
+"why": "'Heresy Trial' plot hook and its relic and fabricated-evidence lines; PAST has no trial, only The Pilgrimage and The Purge",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B09901",
+"sev": "MED",
+"n": 15,
+"town": "r2s-occupied-thorp-2",
+"section": "World/History",
+"fold": "Heresy trial",
+"text": "Heresy trial",
+"why": "History prints a 'Heresy trial' event; PAST records only The Pilgrimage (69 years ago) and The Purge",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B27913",
+"sev": "MED",
+"n": 15,
+"town": "r2s-occupied-thorp-0",
+"section": "World/History",
+"fold": "Wild magic",
+"text": "Wild magic",
+"why": "History lists 'Wild magic' event; PAST has only The Shortage (68 years ago) and The Migration (5 years ago)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B22268",
+"sev": "MED",
+"n": 15,
+"town": "r2r-thorp-20",
+"section": "Summary/Plot Hooks",
+"fold": "Tyranny",
+"text": "Tyranny",
+"why": "tyrant/regime history; PAST lists only Succession Crisis (minor) and Migration, no tyranny",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B11665",
+"sev": "MED",
+"n": 14,
+"town": "r2s-plague_onset-city-1",
+"section": "World/Traditions",
+"fold": "Kept in Deepwinter, the thirteenth week, into Seedtime.",
+"text": "Kept in Deepwinter, the thirteenth week, into Seedtime.",
+"why": "festival kept in Deepwinter as usual; CRISIS Plague, people fear sickness and do not gather as usual",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B22149",
+"sev": "MED",
+"n": 14,
+"town": "r2r-thorp-26",
+"section": "World/History",
+"fold": "Trade collapsemajor",
+"text": "Trade collapsemajor",
+"why": "history lists a major trade collapse; PAST records Succession Crisis, Siege and Shortage only",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B20909",
+"sev": "MED",
+"n": 13,
+"town": "r2s-under_siege-metropolis-1",
+"section": "Systems/Power",
+"fold": "The seat<N>, the watch commander and Lord Marshal",
+"text": "The seatCaecilia Severus, the watch commander and Lord Marshal",
+"why": "'Lord Marshal' title not in PEOPLE roster; Caecilia Severus is listed only as watch commander",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B11679",
+"sev": "MED",
+"n": 13,
+"town": "r2s-plague_onset-city-3",
+"section": "World/Traditions",
+"fold": "Kept in Harvest, the fourth and # weeks.",
+"text": "Kept in Harvest, the fourth and fifth weeks.",
+"why": "festival kept in Harvest weeks as usual; CRISIS is Plague, gatherings do not go on as normal",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B11666",
+"sev": "MED",
+"n": 13,
+"town": "r2s-plague_onset-city-0",
+"section": "World/Traditions",
+"fold": "Kept in Deepwinter, the thirteenth week.",
+"text": "Kept in Deepwinter, the thirteenth week.",
+"why": "festival kept in Deepwinter as usual; CRISIS Plague with Quarantined safety, people do not gather as usual",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B11673",
+"sev": "MED",
+"n": 13,
+"town": "r2s-plague_onset-metropolis-0",
+"section": "World/Traditions",
+"fold": "Kept in Harvest, the eighth and ninth weeks.",
+"text": "Kept in Harvest, the eighth and ninth weeks.",
+"why": "festival kept as usual; CRISIS Plague with Quarantined safety, people do not gather as usual",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B11711",
+"sev": "MED",
+"n": 13,
+"town": "r2s-plague_onset-metropolis-1",
+"section": "World/Traditions",
+"fold": "Kept in Highsun, the sixth and seventh weeks.",
+"text": "Kept in Highsun, the sixth and seventh weeks.",
+"why": "festival kept as usual; CRISIS Plague, Dangerous safety, people fear sickness and do not gather as usual",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B11653",
+"sev": "MED",
+"n": 13,
+"town": "r2s-plague_onset-metropolis-1",
+"section": "World/Traditions",
+"fold": "Kept in Deepwinter, the first and second weeks.",
+"text": "Kept in Deepwinter, the first and second weeks.",
+"why": "festival kept as usual; CRISIS Plague, Dangerous safety, people fear sickness and do not gather as usual",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B14403",
+"sev": "MED",
+"n": 13,
+"town": "r2r-thorp-20",
+"section": "Summary/Overview",
+"fold": "Old loyalists",
+"text": "Old loyalists",
+"why": "tyrant/regime history; PAST lists only Succession Crisis (minor) and Migration, no tyranny",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B11695",
+"sev": "MED",
+"n": 12,
+"town": "r2s-plague_onset-city-0",
+"section": "World/Traditions",
+"fold": "Kept in Highsun, the # and sixth weeks.",
+"text": "Kept in Highsun, the fifth and sixth weeks.",
+"why": "festival kept in Highsun as usual; CRISIS Plague with Quarantined safety, people do not gather as usual",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B22144",
+"sev": "MED",
+"n": 12,
+"town": "r2r-village-11",
+"section": "Summary/Plot Hooks",
+"fold": "Trade Dispute",
+"text": "Trade Dispute",
+"why": "prints a trade dispute with a partner settlement; CRISIS none, PAST lists no trade dispute, only the Headman vs Merchant Guilds broken promise quarrel",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B22175",
+"sev": "MED",
+"n": 12,
+"town": "r2r-village-11",
+"section": "World/History",
+"fold": "Trade dispute",
+"text": "Trade dispute",
+"why": "prints a trade dispute with a partner settlement; CRISIS none, PAST lists no trade dispute, only the Headman vs Merchant Guilds broken promise quarrel",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B11693",
+"sev": "MED",
+"n": 11,
+"town": "r2r-city-19",
+"section": "World/Traditions",
+"fold": "Kept in Highsun, the # and eleventh weeks.",
+"text": "Kept in Highsun, the tenth and eleventh weeks.",
+"why": "festival kept in Highsun as usual; CRISIS Plague, people fear sickness and do not gather as usual",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B11670",
+"sev": "MED",
+"n": 11,
+"town": "r2s-plague_onset-metropolis-1",
+"section": "World/Traditions",
+"fold": "Kept in Harvest, the # and fourth weeks.",
+"text": "Kept in Harvest, the third and fourth weeks.",
+"why": "festival kept as usual; CRISIS Plague, Dangerous safety, people fear sickness and do not gather as usual",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B15437",
+"sev": "MED",
+"n": 11,
+"town": "r2s-infiltrated-thorp-3",
+"section": "Summary/Overview",
+"fold": "Reformists",
+"text": "Reformists",
+"why": "a 'Reformists' camp; GOVERNMENT lists only Elder Council, QUARRELS none, thorp of 6",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B16654",
+"sev": "MED",
+"n": 11,
+"town": "r2s-infiltrated-thorp-3",
+"section": "Summary/Overview",
+"fold": "Secular camp",
+"text": "Secular camp",
+"why": "a 'Secular camp'; no such power listed, no church house, thorp of 6",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "19240",
+"sev": "MED",
+"n": 10,
+"town": "r2s-occupied-metropolis-2",
+"section": "Systems/Power",
+"fold": "The Ducal Governorship governs <N>.",
+"text": "The Ducal Governorship governs Nokhoihan.",
+"why": "Ducal Governorship 'governs' plainly; under Occupation it does not rule freely, an Occupation Authority holds power",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B11645",
+"sev": "MED",
+"n": 10,
+"town": "r2s-plague_onset-metropolis-2",
+"section": "World/Traditions",
+"fold": "Kept in Deepwinter, the # and eleventh weeks.",
+"text": "Kept in Deepwinter, the tenth and eleventh weeks.",
+"why": "festival kept in Deepwinter as usual; CRISIS Plague with Restricted safety, people do not gather as usual",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "23301",
+"sev": "MED",
+"n": 9,
+"town": "r2s-succession_void-thorp-1",
+"section": "Systems/Power",
+"fold": "Uncontested▲",
+"text": "Uncontested▲",
+"why": "'Uncontested' while succession is contested and several race for the seat",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "10196",
+"sev": "MED",
+"n": 9,
+"town": "r2s-famine-town-0",
+"section": "Systems/Power",
+"fold": "Guild Council↔Merchant Guildsstable",
+"text": "Guild Council↔Merchant Guildsstable",
+"why": "marks Guild Council-Merchant Guilds stable; 10175 gives High tension",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B20834",
+"sev": "MED",
+"n": 9,
+"town": "r2r-city-44",
+"section": "Systems/Power",
+"fold": "The seat<N>, the dean and Lord Warden",
+"text": "The seatMelanthi Kantakouzenos, the dean and Lord Warden",
+"why": "gives Melanthi Kantakouzenos (f) the title Lord Warden; PEOPLE lists her only as dean of Parish churches",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B11663",
+"sev": "MED",
+"n": 9,
+"town": "r2s-plague_onset-metropolis-2",
+"section": "World/Traditions",
+"fold": "Kept in Deepwinter, the sixth and seventh weeks.",
+"text": "Kept in Deepwinter, the sixth and seventh weeks.",
+"why": "festival kept in Deepwinter as usual; CRISIS Plague with Restricted safety, people do not gather as usual",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "20721",
+"sev": "MED",
+"n": 8,
+"town": "r2r-village-14",
+"section": "Systems/Power",
+"fold": "The hall is at odds with the Military/Guard.",
+"text": "The hall is at odds with the Military/Guard.",
+"why": "hall at odds with the Military/Guard; 07126 gives the Elder Council~Military/Guard relation as stable",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/components/organic/samples/fixtures.js",
+"line": 25,
+"fn": "dossierFixture"
+}
+},
+{
+"id": "B11462",
+"sev": "MED",
+"n": 8,
+"town": "r2r-thorp-53",
+"section": "Summary/Overview",
+"fold": "It stands on the shore; it was founded to trade by water.",
+"text": "It stands on the shore; it was founded to trade by water.",
+"why": "'founded to trade by water': FOUNDING reason is a seasonal camp for deep-water fishers",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "04908",
+"sev": "MED",
+"n": 7,
+"town": "r2s-politically_fractured-town-3",
+"section": "Systems/Power",
+"fold": "Church Council~Religious Authoritiesstable",
+"text": "Church Council~Religious Authoritiesstable",
+"why": "marks Church Council~Religious Authorities stable; 15604 says the two keep quarrelling",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B18039",
+"sev": "MED",
+"n": 7,
+"town": "r2s-famine-metropolis-2",
+"section": "Summary/Crisis",
+"fold": "The Arcane Circle no stake yet",
+"text": "The Arcane Circle no stake yet",
+"why": "says The Arcane Circle has no stake yet; QUARRELS has it in a high quarrel with City-State Council over an unpaid debt",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "09761",
+"sev": "MED",
+"n": 6,
+"town": "r2s-occupied-metropolis-1",
+"section": "Summary/Overview",
+"fold": "Governed by Grand Military Council",
+"text": "Governed by Grand Military Council",
+"why": "says Grand Military Council governs; it is Minor, Religious Authorities Strong and Occupation Authority Significant",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "13403",
+"sev": "MED",
+"n": 6,
+"town": "r2s-famine-town-1",
+"section": "Systems/Power",
+"fold": "Merchant oligarchy↔Merchant Guildsstable",
+"text": "Merchant oligarchy↔Merchant Guildsstable",
+"why": "marks oligarchy-Merchant Guilds stable; 13377 and 10637 give High tension",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B11669",
+"sev": "MED",
+"n": 6,
+"town": "r2s-plague_onset-city-2",
+"section": "World/Traditions",
+"fold": "Kept in Harvest, the # and eleventh weeks.",
+"text": "Kept in Harvest, the tenth and eleventh weeks.",
+"why": "festival kept in Harvest as usual; CRISIS Plague, people fear sickness and do not gather as usual",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B11671",
+"sev": "MED",
+"n": 6,
+"town": "r2r-city-19",
+"section": "World/Traditions",
+"fold": "Kept in Harvest, the # and sixth weeks.",
+"text": "Kept in Harvest, the fifth and sixth weeks.",
+"why": "festival kept in Harvest as usual; CRISIS Plague, people fear sickness and do not gather as usual",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B12247",
+"sev": "MED",
+"n": 6,
+"town": "r2r-town-16",
+"section": "World/History",
+"fold": "Market crash",
+"text": "Market crash",
+"why": "'Market crash' history entry; PAST records no economic crash (only the Guild War, 25 years ago)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "12547",
+"sev": "MED",
+"n": 5,
+"town": "r2s-famine-thorp-3",
+"section": "Summary/Overview",
+"fold": "Latin-inspired; people here live in a place run by patronage and law.",
+"text": "Latin-inspired; people here live in a place run by patronage and law.",
+"why": "'run by patronage and law': governed by head-of-household consensus, no court or patron",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "10188",
+"sev": "MED",
+"n": 5,
+"town": "r2s-under_siege-town-1",
+"section": "Systems/Power",
+"fold": "Guild Council~Religious Authoritiesstable",
+"text": "Guild Council~Religious Authoritiesstable",
+"why": "Guild Council~Religious Authorities stable; 20730 says the hall is at odds with them and 15618 says the two keep quarrelling",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B20852",
+"sev": "MED",
+"n": 4,
+"town": "r2s-mass_migration-thorp-3",
+"section": "Systems/Power",
+"fold": "The seat<N>, the head shepherd and Headman",
+"text": "The seatFuad ibn Ahmed, the head shepherd and Headman",
+"why": "gives Fuad ibn Ahmed the title Headman; PEOPLE roster gives only head shepherd at the Shepherd collective",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B20819",
+"sev": "MED",
+"n": 4,
+"town": "r2s-religious_conversion-thorp-3",
+"section": "Systems/Power",
+"fold": "The seat<N>, the camp foreman and Household Elder",
+"text": "The seatCalvus Corvinus, the camp foreman and Household Elder",
+"why": "title Household Elder for the camp foreman; HOUSES has no Household elder and roster gives camp foreman only",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B11070",
+"sev": "MED",
+"n": 4,
+"town": "r2r-hamlet-16",
+"section": "Summary/Plot Hooks",
+"fold": "In the famine, <N> of Elder Council takes the worst of it: the # with the least say in the house the crisis hits.",
+"text": "In the famine, Jade Ek of Elder Council takes the worst of it: the one with the least say in the house the crisis hits.",
+"why": "'Jade Ek of Elder Council': PEOPLE places Jade Ek (f) at Citizen militia; nobody on the roster belongs to Elder Council",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B00937",
+"sev": "MED",
+"n": 4,
+"town": "r2r-hamlet-51",
+"section": "Systems/Defense",
+"fold": "<N> is a quiet hamlet.",
+"text": "Velipol is a quiet hamlet.",
+"why": "'a quiet hamlet' contradicts stability 'Tense — regional monster threat' and the incursion sentence",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "21394",
+"sev": "MED",
+"n": 3,
+"town": "r2r-thorp-34",
+"section": "Systems/Power",
+"fold": "The powerElder Council (dominant)church guidance",
+"text": "The powerElder Council (dominant)church guidance",
+"why": "names church guidance as a power; GOVERNMENT lists only the Elder Council, and the thorp has only access to a parish church",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "23115",
+"sev": "MED",
+"n": 3,
+"town": "r2s-occupied-town-0",
+"section": "Systems/Power",
+"fold": "Town Council↓Merchant Guildsstable",
+"text": "Town Council↓Merchant Guildsstable",
+"why": "marks Town Council-Merchant Guilds stable; 23107 and 10687 give High tension",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "09930",
+"sev": "MED",
+"n": 3,
+"town": "r2s-religious_conversion-metropolis-1",
+"section": "Summary/Plot Hooks",
+"fold": "Grand Merchant Oligarchy vs Military/Guard",
+"text": "Grand Merchant Oligarchy vs Military/Guard",
+"why": "plot hook of Oligarchy vs Military/Guard conflict; 09948 says the pair is stable",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B01702",
+"sev": "MED",
+"n": 3,
+"town": "r2s-plague_onset-thorp-1",
+"section": "Systems/Power",
+"fold": "<N>, the boat-headman and Household Elder, holds the seat of the Household Council.",
+"text": "Pavithra Banerjee, the boat-headman and Household Elder, holds the seat of the Household Council.",
+"why": "title Household Elder for Pavithra; roster gives only boat-headman and HOUSES has no Household elder",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B01911",
+"sev": "MED",
+"n": 3,
+"town": "r2s-infiltrated-thorp-0",
+"section": "Systems/Power",
+"fold": "<N>, the head shepherd and Elder, holds the seat of the Elder Council.",
+"text": "Messalina Severus, the head shepherd and Elder, holds the seat of the Elder Council.",
+"why": "gives Messalina Severus the title Elder; roster gives head shepherd only, and the Household elder house has nobody",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B11113",
+"sev": "MED",
+"n": 3,
+"town": "r2s-plague_onset-village-3",
+"section": "Summary/Plot Hooks",
+"fold": "In the outbreak, <N> holds the key to it: runs the office that decides how the crisis goes.",
+"text": "In the outbreak, Sorcha Tobin holds the key to it: runs the office that decides how the crisis goes.",
+"why": "says the priest runs the office deciding the crisis; GOVERNMENT lists only Elder Council and Thieves' Guild, no religious power",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B20985",
+"sev": "MED",
+"n": 3,
+"town": "r2r-town-25",
+"section": "World/History",
+"fold": "The shortage is older than all but the oldest alive, and its legacy is much of what stands in <N> now: it was built in the years after.",
+"text": "The shortage is older than all but the oldest alive, and its legacy is much of what stands in Brahmamandal now: it was built in the years after.",
+"why": "says the town 'was built in the years after' the Shortage (61 years ago); the town is 137 years old, older than the Shortage",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/heraldCausalGrammar.js",
+"line": 360,
+"fn": "LIVING_FLOOR"
+}
+},
+{
+"id": "B21022",
+"sev": "MED",
+"n": 3,
+"town": "r2r-town-57",
+"section": "World/History",
+"fold": "The siege is older than all but the oldest alive, and its legacy is much of what stands in <N> now: it was built in the years after.",
+"text": "The siege is older than all but the oldest alive, and its legacy is much of what stands in Pianoium now: it was built in the years after.",
+"why": "says the town 'was built in the years after' the Siege (64 years ago); the town is 196 years old, older than the Siege",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/heraldCausalGrammar.js",
+"line": 360,
+"fn": "LIVING_FLOOR"
+}
+},
+{
+"id": "B21327",
+"sev": "MED",
+"n": 3,
+"town": "r2s-infiltrated-city-1",
+"section": "World/History",
+"fold": "The trade collapse is older than anyone living, and its legacy is much of what stands in <N> now: it was built in the years after.",
+"text": "The trade collapse is older than anyone living, and its legacy is much of what stands in Olympagio now: it was built in the years after.",
+"why": "says the town was built in the years after the trade collapse; it is 223 years old and the collapse was 181 years ago",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/heraldCausalGrammar.js",
+"line": 327,
+"fn": "CHAIN_END_BANNED"
+}
+},
+{
+"id": "B05840",
+"sev": "MED",
+"n": 3,
+"town": "r2s-mass_migration-city-1",
+"section": "Systems/Power",
+"fold": "Crime keeps <N> from more than tolerating the Merchant Guild Council.",
+"text": "Crime keeps Benheath from more than tolerating the Merchant Guild Council.",
+"why": "crime blamed for weak legitimacy; HOUSES has no smuggling/criminal house, GOVERNMENT lists no criminal power; legitimacy is Tolerated",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "13395",
+"sev": "MED",
+"n": 2,
+"town": "r2s-famine-town-1",
+"section": "Systems/Power",
+"fold": "Merchant oligarchy~Religious Authoritiesstable",
+"text": "Merchant oligarchy~Religious Authoritiesstable",
+"why": "marks oligarchy~Religious Authorities stable; 15622 and 26193 say the two keep quarrelling",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "07646",
+"sev": "MED",
+"n": 2,
+"town": "r2r-town-37",
+"section": "Systems/Power",
+"fold": "Feudal Appointee~Thieves' Guildescalating",
+"text": "Feudal Appointee~Thieves' Guildescalating",
+"why": "marks Feudal Appointee~Thieves' Guild escalating; 07626 and 14888 say they leave each other alone",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "23195",
+"sev": "MED",
+"n": 2,
+"town": "r2s-indebted-city-1",
+"section": "Summary/Foundations",
+"fold": "Trade connectivityCollapsed",
+"text": "Trade connectivityCollapsed",
+"why": "'Trade connectivity Collapsed'; prosperity Prosperous, river docks, caravan exchange and exports all running",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "06098",
+"sev": "MED",
+"n": 2,
+"town": "r2s-recently_betrayed-city-1",
+"section": "Systems/Power",
+"fold": "Crime keeps <N> from more than tolerating the Ecclesiastical Council.",
+"text": "Crime keeps Weicheng from more than tolerating the Ecclesiastical Council.",
+"why": "blames crime for mere toleration; header's cause is the betrayal: stability 'nobody trusts those in charge', safety Aftermath of Betrayal",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "13199",
+"sev": "MED",
+"n": 2,
+"town": "r2s-mass_migration-city-1",
+"section": "Summary/Crisis",
+"fold": "Merchant Guild Council no stake yet",
+"text": "Merchant Guild Council no stake yet",
+"why": "ruling Merchant Guild Council has 'no stake yet' in the migration; stability 'Strained (people arriving)' is its own, and 14504 says it must decide",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "06464",
+"sev": "MED",
+"n": 2,
+"town": "r2s-mass_migration-city-3",
+"section": "Summary/Crisis",
+"fold": "Democratic assembly no stake yet",
+"text": "Democratic assembly no stake yet",
+"why": "crisis tab says assembly has no stake; 06457 and 04645 make it the body bearing the migration choice",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "16740",
+"sev": "MED",
+"n": 2,
+"town": "r2s-famine-metropolis-3",
+"section": "Systems/Power",
+"fold": "Royal Authority~Thieves' Guildescalating",
+"text": "Royal Authority~Thieves' Guildescalating",
+"why": "Royal Authority and Thieves' Guild escalating; same page says they leave each other alone, neither pushes",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "06925",
+"sev": "MED",
+"n": 2,
+"town": "r2s-famine-metropolis-1",
+"section": "Systems/Power",
+"fold": "Ducal Governorship↔Merchant Guildsstable",
+"text": "Ducal Governorship↔Merchant Guildsstable",
+"why": "Ducal Governorship and Merchant Guilds relation stable; same page gives them High tension",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "09967",
+"sev": "MED",
+"n": 2,
+"town": "r2s-monster_pressure-metropolis-0",
+"section": "Summary/Plot Hooks",
+"fold": "Grand Merchant Senate vs Military/Guard",
+"text": "Grand Merchant Senate vs Military/Guard",
+"why": "plot hook of Senate vs Military/Guard conflict; 09980 says the pair is stable and cooperating",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "09931",
+"sev": "MED",
+"n": 2,
+"town": "r2s-religious_conversion-metropolis-1",
+"section": "Summary/Overview",
+"fold": "Grand Merchant Oligarchy vs Military/GuardHigh",
+"text": "Grand Merchant Oligarchy vs Military/GuardHigh",
+"why": "High tension Oligarchy vs Military/Guard; 09948/09914 call the pair stable, Guard carrying out orders",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "10594",
+"sev": "MED",
+"n": 2,
+"town": "r2s-religious_conversion-metropolis-1",
+"section": "World/Relationships",
+"fold": "High tension Grand Merchant Oligarchy vs Military/Guard",
+"text": "High tension Grand Merchant Oligarchy vs Military/Guard",
+"why": "High tension Oligarchy vs Military/Guard; 09914 says Guard carries out its orders, each needing the other",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "06903",
+"sev": "MED",
+"n": 2,
+"town": "r2s-insurgency-metropolis-3",
+"section": "Summary/Overview",
+"fold": "Ducal Governorship vs Military/GuardHigh",
+"text": "Ducal Governorship vs Military/GuardHigh",
+"why": "High tension Ducal Governorship vs Military/Guard; 06928/06881 call the pair stable, Guard carrying out orders",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "10575",
+"sev": "MED",
+"n": 2,
+"town": "r2s-insurgency-metropolis-3",
+"section": "World/Relationships",
+"fold": "High tension Ducal Governorship vs Military/Guard",
+"text": "High tension Ducal Governorship vs Military/Guard",
+"why": "High tension Ducal Governorship vs Military/Guard; 06881 says each needs the other and Guard obeys",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "06102",
+"sev": "MED",
+"n": 2,
+"town": "r2r-metropolis-58",
+"section": "Systems/Power",
+"fold": "Crime keeps <N> from more than tolerating the Grand Military Council.",
+"text": "Crime keeps Eldmark from more than tolerating the Grand Military Council.",
+"why": "blames crime for mere toleration; GOVERNMENT lists no criminal power and stability blames the creditors",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B12623",
+"sev": "MED",
+"n": 2,
+"town": "r2s-famine-city-2",
+"section": "Systems/Power",
+"fold": "Merchant oligarchy and Thieves' Guild leave each other alone.",
+"text": "Merchant oligarchy and Thieves' Guild leave each other alone.",
+"why": "says Merchant oligarchy and Thieves' Guild leave each other alone; QUARRELS has them tense, escalating",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B14083",
+"sev": "MED",
+"n": 2,
+"town": "r2s-famine-city-2",
+"section": "Systems/Power",
+"fold": "Nobody at the head of Merchant oligarchy answers to Thieves' Guild, and neither side pushes the other.",
+"text": "Nobody at the head of Merchant oligarchy answers to Thieves' Guild, and neither side pushes the other.",
+"why": "says neither side pushes the other; QUARRELS has Merchant oligarchy and Thieves' Guild tense, escalating",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B05843",
+"sev": "MED",
+"n": 2,
+"town": "r2s-monster_pressure-town-1",
+"section": "Systems/Power",
+"fold": "Crime keeps <N> from more than tolerating the Military Council.",
+"text": "Crime keeps Al-mandi from more than tolerating the Military Council.",
+"why": "blames crime for weak legitimacy; header has no criminal power, house or chain; legitimacy is Tolerated and the crisis is beast raids",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B11121",
+"sev": "MED",
+"n": 2,
+"town": "r2s-monster_pressure-metropolis-3",
+"section": "Summary/Plot Hooks",
+"fold": "In the raids, <N> of Merchant Guilds takes the worst of it: its people stand on the walls.",
+"text": "In the raids, Anusaya Mishra of Merchant Guilds takes the worst of it: its people stand on the walls.",
+"why": "Anusaya Mishra is the blade captain @ Hired blades, not of Merchant Guilds; PEOPLE gives her no Merchant Guilds office",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "21466",
+"sev": "MED",
+"n": 1,
+"town": "r2s-slave_revolt-hamlet-0",
+"section": "Systems/Power",
+"fold": "The powerHeadman's Authority (significant)church sway",
+"text": "The powerHeadman's Authority (significant)church sway",
+"why": "names church sway as a power; GOVERNMENT lists only the Headman's Authority and the hamlet has only a wayside shrine",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "07168",
+"sev": "MED",
+"n": 1,
+"town": "r2s-slave_revolt-village-0",
+"section": "Systems/Power",
+"fold": "Elected Reeve~Religious Authoritiesstable",
+"text": "Elected Reeve~Religious Authoritiesstable",
+"why": "Reeve and Religious Authorities 'stable'; 19894 says the Religious Authorities are at odds with it",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "07174",
+"sev": "MED",
+"n": 1,
+"town": "r2r-village-45",
+"section": "Systems/Power",
+"fold": "Elected Reeve⇌Military/Guardstable",
+"text": "Elected Reeve⇌Military/Guardstable",
+"why": "Reeve and Military/Guard 'stable'; 07166 and 10582 give their tension as High",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "23138",
+"sev": "MED",
+"n": 1,
+"town": "r2s-famine-town-2",
+"section": "Systems/Power",
+"fold": "Town Mayor~Thieves' Guildescalating",
+"text": "Town Mayor~Thieves' Guildescalating",
+"why": "marks Mayor~Thieves' Guild escalating; 23123 and 14920 say neither pushes the other",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "03799",
+"sev": "MED",
+"n": 1,
+"town": "r2s-famine-town-3",
+"section": "Systems/Power",
+"fold": "Arcane Council~Thieves' Guildescalating",
+"text": "Arcane Council~Thieves' Guildescalating",
+"why": "marks Arcane Council~Thieves' Guild escalating; 03763 and 14872 say they leave each other alone",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "10187",
+"sev": "MED",
+"n": 1,
+"town": "r2s-occupied-town-2",
+"section": "Systems/Power",
+"fold": "Guild Council~Occupation Authoritystable",
+"text": "Guild Council~Occupation Authoritystable",
+"why": "marks Guild Council~Occupation Authority stable; 00381 says the Occupation Authority is at odds with it, 10155 a protest",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "20796",
+"sev": "MED",
+"n": 1,
+"town": "r2s-monster_pressure-town-0",
+"section": "Systems/Power",
+"fold": "The head of Church Council answers to Street gang.",
+"text": "The head of Church Council answers to Street gang.",
+"why": "head of the ruling Church Council answers to Street gang; GOVERNMENT lists no gang among its powers",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "20609",
+"sev": "MED",
+"n": 1,
+"town": "r2s-mass_migration-town-2",
+"section": "Summary/Overview",
+"fold": "The gap is closed through the tracks in a good season — at a price the settlement feels.",
+"text": "The gap is closed through the tracks in a good season — at a price the settlement feels.",
+"why": "says the food gap is closed; STATE food deficit 27% and viable False",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "15073",
+"sev": "MED",
+"n": 1,
+"town": "r2s-wartime-town-2",
+"section": "Systems/Power",
+"fold": "Nothing at <N> protects the Feudal Appointee now.",
+"text": "Nothing at Shivapalli protects the Feudal Appointee now.",
+"why": "says nothing protects the Feudal Appointee; it is the strongest power (Significant), every rival Minor",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "26926",
+"sev": "MED",
+"n": 1,
+"town": "r2s-under_siege-city-3",
+"section": "World/NPCs",
+"fold": "Wants Pay every hand at the undead labor in full and on time this season.",
+"text": "Wants Pay every hand at the undead labor in full and on time this season.",
+"why": "wants every hand at the undead labor paid in full; 14629 says the undead get no pay",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "20719",
+"sev": "MED",
+"n": 1,
+"town": "r2s-famine-city-0",
+"section": "Systems/Power",
+"fold": "The hall is at odds with the Military/Guard and the Noble Families.",
+"text": "The hall is at odds with the Military/Guard and the Noble Families.",
+"why": "hall 'at odds with' Military/Guard, but the relation reads Royal Authority~Military/Guard stable; slash label as a name",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/components/organic/samples/fixtures.js",
+"line": 25,
+"fn": "dossierFixture"
+}
+},
+{
+"id": "19722",
+"sev": "MED",
+"n": 1,
+"town": "r2s-famine-city-3",
+"section": "Systems/Power",
+"fold": "The Military/Guard, the Religious Authorities and the Noble Families are at odds with it.",
+"text": "The Military/Guard, the Religious Authorities and the Noble Families are at odds with it.",
+"why": "Religious Authorities 'at odds with' the Governorship, but relation reads Noble Governorship~Religious Authorities stable",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "03798",
+"sev": "MED",
+"n": 1,
+"town": "r2s-occupied-city-3",
+"section": "Systems/Power",
+"fold": "Arcane Council~Occupation Authoritystable",
+"text": "Arcane Council~Occupation Authoritystable",
+"why": "Arcane Council~Occupation Authority 'stable', yet the same pair is High tension",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "13370",
+"sev": "MED",
+"n": 1,
+"town": "r2s-mass_migration-city-2",
+"section": "Summary/Crisis",
+"fold": "Merchant oligarchy no stake yet",
+"text": "Merchant oligarchy no stake yet",
+"why": "ruling Merchant oligarchy has 'no stake yet'; 13362 says it is being asked to choose between residents and arrivals; stability Strained (people arriving)",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "09976",
+"sev": "MED",
+"n": 1,
+"town": "r2s-under_siege-metropolis-3",
+"section": "Systems/Power",
+"fold": "Grand Merchant Senate↓Merchant Guildsstable",
+"text": "Grand Merchant Senate↓Merchant Guildsstable",
+"why": "Senate and Merchant Guilds relation called stable; same page gives them High tension",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "09968",
+"sev": "MED",
+"n": 1,
+"town": "r2s-monster_pressure-metropolis-0",
+"section": "Summary/Overview",
+"fold": "Grand Merchant Senate vs Military/GuardHigh",
+"text": "Grand Merchant Senate vs Military/GuardHigh",
+"why": "High tension Grand Merchant Senate vs Military/Guard; 09980/09953 call the pair stable, each needing the other",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "10600",
+"sev": "MED",
+"n": 1,
+"town": "r2s-monster_pressure-metropolis-0",
+"section": "World/Relationships",
+"fold": "High tension Grand Merchant Senate vs Military/Guard",
+"text": "High tension Grand Merchant Senate vs Military/Guard",
+"why": "High tension Grand Merchant Senate vs Military/Guard; 09980/09953 call the pair stable and mutually reliant",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "06101",
+"sev": "MED",
+"n": 1,
+"town": "r2s-religious_conversion-metropolis-1",
+"section": "Systems/Power",
+"fold": "Crime keeps <N> from more than tolerating the Grand Merchant Oligarchy.",
+"text": "Crime keeps Tyrhammer from more than tolerating the Grand Merchant Oligarchy.",
+"why": "blames crime for mere toleration; GOVERNMENT lists no criminal power and stability blames the contested creed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "09883",
+"sev": "MED",
+"n": 1,
+"town": "r2s-religious_conversion-metropolis-3",
+"section": "Summary/Overview",
+"fold": "Grand Guild Consortium vs Military/GuardHigh",
+"text": "Grand Guild Consortium vs Military/GuardHigh",
+"why": "High tension Consortium vs Military/Guard; 09893 calls the pair stable",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "10588",
+"sev": "MED",
+"n": 1,
+"town": "r2s-religious_conversion-metropolis-3",
+"section": "World/Relationships",
+"fold": "High tension Grand Guild Consortium vs Military/Guard",
+"text": "High tension Grand Guild Consortium vs Military/Guard",
+"why": "High tension Consortium vs Military/Guard; 09893 calls the pair stable",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "06043",
+"sev": "MED",
+"n": 1,
+"town": "r2s-succession_void-metropolis-1",
+"section": "Systems/Power",
+"fold": "Crime and hunger keep <N> from more than tolerating the <N>.",
+"text": "Crime and hunger keep Filoprion from more than tolerating the Grand Guild Consortium.",
+"why": "blames crime for mere toleration; GOVERNMENT lists no criminal power and stability blames the succession void",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B01913",
+"sev": "MED",
+"n": 1,
+"town": "r2r-thorp-26",
+"section": "Systems/Power",
+"fold": "<N>, the head shepherd and Headman, holds the seat of the Headman's Authority.",
+"text": "Daria Lebedev, the head shepherd and Headman, holds the seat of the Headman's Authority.",
+"why": "title Headman for Daria Lebedev; roster gives head shepherd only, and the Household elder house has nobody",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B01667",
+"sev": "MED",
+"n": 1,
+"town": "r2r-hamlet-30",
+"section": "Systems/Power",
+"fold": "<N>, the alewife and Elder, holds the seat of the Free Elder Council.",
+"text": "Sameer ibn Rashid, the alewife and Elder, holds the seat of the Free Elder Council.",
+"why": "calls Sameer ibn Rashid 'the alewife' (female-coded title) but PEOPLE gives him sex m",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B20135",
+"sev": "MED",
+"n": 1,
+"town": "r2s-insurgency-village-2",
+"section": "World/History",
+"fold": "The occupation is older than all but the oldest alive, and it left a legacy of trouble in <N> that has never been fully put right.",
+"text": "The occupation is older than all but the oldest alive, and it left a legacy of trouble in Xiji that has never been fully put right.",
+"why": "'older than all but the oldest alive'; PAST has the Occupation only 62 years ago, within living memory of many",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/heraldCausalGrammar.js",
+"line": 360,
+"fn": "LIVING_FLOOR"
+}
+},
+{
+"id": "B14249",
+"sev": "MED",
+"n": 1,
+"town": "r2s-famine-town-1",
+"section": "Systems/Power",
+"fold": "Nothing at <N> protects the Merchant oligarchy now.",
+"text": "Nothing at Hongcheng protects the Merchant oligarchy now.",
+"why": "says nothing protects the oligarchy; Military/Guard is symbiotic with it, DEFENCE has walls, Citadel, watch, defence Well-Defended",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B28204",
+"sev": "MED",
+"n": 1,
+"town": "r2s-infiltrated-metropolis-1",
+"section": "Systems/Power",
+"fold": "answers to Underground city through <N>",
+"text": "answers to Underground city through Yellow Corn Xiu",
+"why": "Yellow Corn Xiu is the guildmaster of thieves @ Thieves' guild; Underground city's head is Kan Chan, so 'through Yellow Corn Xiu' is wrong",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+}
+]

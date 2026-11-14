@@ -54,6 +54,24 @@
 }
 },
 {
+"id": "18208",
+"sev": "MED",
+"n": 242,
+"town": "r2s-wartime-thorp-2",
+"section": "Systems/Economics",
+"fold": "Some goods change hands here without a licence or a duty paid.",
+"text": "Some goods change hands here without a licence or a duty paid.",
+"why": "goods traded without licence or duty; isolated thorp of 9 with no trade and no licensing office",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/safetyProfile.js",
+"line": 700,
+"fn": "generateSafetyProfile"
+}
+},
+{
 "id": "03905",
 "sev": "MED",
 "n": 240,
@@ -69,6 +87,24 @@
 "file": "src/generators/computeActiveChains.js",
 "line": 944,
 "fn": "INSTITUTIONAL_SERVICE_MAP"
+}
+},
+{
+"id": "B13779",
+"sev": "MED",
+"n": 240,
+"town": "r2s-plague_onset-thorp-0",
+"section": "Systems/Defense",
+"fold": "No healer is kept here; the sick are tended by their own families.",
+"text": "No healer is kept here; the sick are tended by their own families.",
+"why": "says no healer is kept; PEOPLE lists Jiahao Wu who 'tends the sick' and holds the plague lever",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/defenseDisplay.js",
+"line": 417,
+"fn": "deriveSupportingCapabilities"
 }
 },
 {
@@ -88,6 +124,24 @@
 "file": "src/generators/economy/prosperity.js",
 "line": 412,
 "fn": "complexityByExports"
+}
+},
+{
+"id": "B11404",
+"sev": "MED",
+"n": 206,
+"town": "r2s-wartime-thorp-2",
+"section": "Systems/Economics",
+"fold": "It is noticed, and so far it does little harm.",
+"text": "It is noticed, and so far it does little harm.",
+"why": "continues unlicensed-dealing claim; no fence or black market exists here (HOUSES, LAND chains)",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/safetyProfile.js",
+"line": 700,
+"fn": "generateSafetyProfile"
 }
 },
 {
@@ -164,6 +218,42 @@
 }
 },
 {
+"id": "B02441",
+"sev": "MED",
+"n": 132,
+"town": "r2s-occupied-city-3",
+"section": "Systems/Defense",
+"fold": "A criminal operation with a hold on part of the place or its trade.",
+"text": "A criminal operation with a hold on part of the place or its trade.",
+"why": "a criminal operation holding part of the place; GOVERNMENT lists no criminal power and HOUSES no criminal house",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/display/defenseDisplay.js",
+"line": 159,
+"fn": "criminalOpNote"
+}
+},
+{
+"id": "B05733",
+"sev": "MED",
+"n": 124,
+"town": "r2s-under_siege-town-0",
+"section": "Systems/Defense",
+"fold": "Courts without detention.",
+"text": "Courts without detention.",
+"why": "'Courts without detention'; HOUSES lists no court",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/display/defenseDisplay.js",
+"line": 407,
+"fn": "deriveSupportingCapabilities"
+}
+},
+{
 "id": "09274",
 "sev": "MED",
 "n": 111,
@@ -179,6 +269,42 @@
 "file": "src/domain/display/defenseDisplay.js",
 "line": 625,
 "fn": "foodEnduranceLine"
+}
+},
+{
+"id": "B03371",
+"sev": "MED",
+"n": 108,
+"town": "r2s-under_siege-metropolis-2",
+"section": "Systems/Defense",
+"fold": "An active overland smuggling operation moves contraband through the settlement.",
+"text": "An active overland smuggling operation moves contraband through the settlement.",
+"why": "an active overland smuggling operation moves contraband through the settlement; tag has S: under siege nothing moves through gate or road",
+"kinds": [
+"TAG"
+],
+"writer": {
+"file": "src/generators/safetyProfile.js",
+"line": 524,
+"fn": "generateSafetyProfile"
+}
+},
+{
+"id": "B05887",
+"sev": "MED",
+"n": 106,
+"town": "r2s-plague_onset-thorp-0",
+"section": "Systems/Outlook",
+"fold": "Crisis Cutting the Food Supply",
+"text": "Crisis Cutting the Food Supply",
+"why": "'Crisis Cutting the Food Supply' under a plague; FOOD failed source None, famine cut 0%",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/economy/foodBalance.js",
+"line": 609,
+"fn": "deriveFoodBalanceAnalysis"
 }
 },
 {
@@ -237,6 +363,43 @@
 }
 },
 {
+"id": "11426",
+"sev": "MED",
+"n": 83,
+"town": "r2s-under_siege-city-3",
+"section": "Systems/Economics",
+"fold": "Identification, augury, message sending, and contract-grade enchanting brings steady coin.",
+"text": "Identification, augury, message sending, and contract-grade enchanting brings steady coin.",
+"why": "four-item subject 'Identification, augury, message sending, and ... enchanting' takes singular 'brings'",
+"kinds": [
+"BROKEN",
+"STATE"
+],
+"writer": {
+"file": "src/generators/economy/economicState.js",
+"line": 298,
+"fn": "generateEconomicState"
+}
+},
+{
+"id": "B17543",
+"sev": "MED",
+"n": 83,
+"town": "r2s-under_siege-city-3",
+"section": "Systems/Economics",
+"fold": "Spellcasting Services A busy market for spell services.",
+"text": "Spellcasting Services A busy market for spell services.",
+"why": "'a busy market for spell services'; LAND: Spellcasting Services chain is impaired, and the town is under siege",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/economy/economicState.js",
+"line": 298,
+"fn": "generateEconomicState"
+}
+},
+{
 "id": "11871",
 "sev": "MED",
 "n": 79,
@@ -253,6 +416,42 @@
 "file": "src/generators/economy/incomeLineSiblings.js",
 "line": 54,
 "fn": "LOCAL_ORE_LINE"
+}
+},
+{
+"id": "B05884",
+"sev": "MED",
+"n": 78,
+"town": "r2s-occupied-town-1",
+"section": "Systems/Economics",
+"fold": "CriminalSmuggling Network Revenue Smuggling, contraband and protection rackets bring money in here, but it goes to the criminals who run them and the treasury sees none of it.",
+"text": "CriminalSmuggling Network Revenue Smuggling, contraband and protection rackets bring money in here, but it goes to the criminals who run them and the treasury sees none of it.",
+"why": "names Smuggling Network revenue; HOUSES has no smuggling network and GOVERNMENT lists no criminal power (only Front businesses, Gambling den)",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/economy/economicState.js",
+"line": 366,
+"fn": "generateEconomicState"
+}
+},
+{
+"id": "B14842",
+"sev": "MED",
+"n": 77,
+"town": "r2s-famine-thorp-0",
+"section": "Systems/Economics",
+"fold": "Pilgrim hospitality",
+"text": "Pilgrim hospitality",
+"why": "'Pilgrim hospitality' as an export/service; HOUSES has no inn or lodging house and pilgrimage was 113 years ago, under famine",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/resourceData.js",
+"line": 250,
+"fn": "RESOURCE_DATA.tradeGoods"
 }
 },
 {
@@ -289,6 +488,25 @@
 "file": "src/generators/economy/tradeGoods.js",
 "line": 143,
 "fn": "generateTradeIncomeStreams"
+}
+},
+{
+"id": "B14103",
+"sev": "MED",
+"n": 72,
+"town": "r2s-occupied-thorp-1",
+"section": "Systems/Defense",
+"fold": "Nobody here is paid to keep order.",
+"text": "Nobody here is paid to keep order.",
+"why": "nobody paid to keep order; here an Occupation Authority with a governor runs a curfew (safety Controlled), so someone does keep order",
+"kinds": [
+"STATE",
+"TAG"
+],
+"writer": {
+"file": "src/generators/safetyProfile.js",
+"line": 316,
+"fn": "generateSafetyProfile"
 }
 },
 {
@@ -346,6 +564,43 @@
 }
 },
 {
+"id": "B11289",
+"sev": "MED",
+"n": 61,
+"town": "r2r-village-55",
+"section": "Systems/Economics",
+"fold": "Iron & Metalwork Metal is smelted or worked here.",
+"text": "Iron & Metalwork Metal is smelted or worked here.",
+"why": "says metal is smelted or worked here; LAND: Iron & Metalwork chain impaired, iron ore deposits depleted",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/economy/incomeLineSiblings.js",
+"line": 56,
+"fn": "METAL_WORKED_LINE"
+}
+},
+{
+"id": "B00188",
+"sev": "MED",
+"n": 60,
+"town": "r2s-under_siege-city-0",
+"section": "Summary/Plot Hooks",
+"fold": "# importer now brings in all the grain and has quadrupled the price; the locals are arguing over whether to pay, find another supplier, or take the grain.",
+"text": "One importer now brings in all the grain and has quadrupled the price; the locals are arguing over whether to pay, find another supplier, or take the grain.",
+"why": "one importer now brings in all the grain; tag has S: under siege nothing comes in by road, gate or water, and FOOD brought in is only 24%",
+"kinds": [
+"STATE",
+"TAG"
+],
+"writer": {
+"file": "src/generators/economy/foodBalance.js",
+"line": 796,
+"fn": "deriveSupplyRiskAnalysis"
+}
+},
+{
 "id": "07373",
 "sev": "MED",
 "n": 50,
@@ -379,6 +634,60 @@
 "file": "src/generators/economy/economicState.js",
 "line": 153,
 "fn": "generateEconomicState"
+}
+},
+{
+"id": "B11428",
+"sev": "MED",
+"n": 48,
+"town": "r2s-plague_onset-village-3",
+"section": "Systems/Defense",
+"fold": "It keeps the streets quiet because trouble brings the law, lives on protection money and on whatever official it can pay, and anyone who needs something from it can bargain.",
+"text": "It keeps the streets quiet because trouble brings the law, lives on protection money and on whatever official it can pay, and anyone who needs something from it can bargain.",
+"why": "guild 'keeps the streets quiet'; STATE safety is Dangerous, Plague Unrest; a village of 197 has no streets of consequence",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/defenseDisplay.js",
+"line": 682,
+"fn": "ORGANIZED_RING_NOTES"
+}
+},
+{
+"id": "B07361",
+"sev": "MED",
+"n": 47,
+"town": "r2s-famine-city-0",
+"section": "Systems/Economics",
+"fold": "Fish & Preserved Produce Fish is sold here, fresh or preserved.",
+"text": "Fish & Preserved Produce Fish is sold here, fresh or preserved.",
+"why": "says fish is sold here fresh or preserved; FOOD gives fish as the failed source of the famine",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/economy/incomeLineSiblings.js",
+"line": 65,
+"fn": "FISH_SOLD_LINE"
+}
+},
+{
+"id": "B07357",
+"sev": "MED",
+"n": 45,
+"town": "r2r-city-44",
+"section": "Systems/Economics",
+"fold": "Fish & Maritime Produce Fish is sold here, fresh or preserved.",
+"text": "Fish & Maritime Produce Fish is sold here, fresh or preserved.",
+"why": "says fish is sold here fresh or preserved; FOOD gives fish as the failed source of the famine",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/economy/incomeLineSiblings.js",
+"line": 65,
+"fn": "FISH_SOLD_LINE"
 }
 },
 {
@@ -546,6 +855,24 @@
 }
 },
 {
+"id": "B27552",
+"sev": "MED",
+"n": 33,
+"town": "r2s-wartime-thorp-2",
+"section": "Systems/Defense",
+"fold": "Wealthy families paying poorer ones to send sons in their place.",
+"text": "Wealthy families paying poorer ones to send sons in their place.",
+"why": "'Wealthy families paying poorer ones' to send sons; thorp of 9 in famine, Struggling, with one household elder and no classes",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/safetyProfile.js",
+"line": 637,
+"fn": "generateSafetyProfile"
+}
+},
+{
 "id": "09343",
 "sev": "MED",
 "n": 32,
@@ -579,6 +906,42 @@
 "file": "src/generators/safetyProfile.js",
 "line": 627,
 "fn": "generateSafetyProfile"
+}
+},
+{
+"id": "B00521",
+"sev": "MED",
+"n": 28,
+"town": "r2r-thorp-16",
+"section": "Systems/Outlook",
+"fold": "<N> cannot feed itself: part of its food comes in by road.",
+"text": "Beizhou cannot feed itself: part of its food comes in by road.",
+"why": "'cannot feed itself' contradicts FOOD word Secure (and band secure); tag also reaches towns where food is not import-fed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/dossierViewModel.js",
+"line": 271,
+"fn": "deriveViability"
+}
+},
+{
+"id": "B07355",
+"sev": "MED",
+"n": 27,
+"town": "r2r-hamlet-28",
+"section": "Systems/Economics",
+"fold": "Fish & Maritime Produce Catch landed and sold fresh or preserved; salt fish are a major regional export commodity.",
+"text": "Fish & Maritime Produce Catch landed and sold fresh or preserved; salt fish are a major regional export commodity.",
+"why": "fish sold fresh or preserved as a major export; FOOD failed source is fish, Active Famine, fish trade under strain",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/economy/incomeLineSiblings.js",
+"line": 63,
+"fn": "FISH_EXPORT_LINE"
 }
 },
 {
@@ -618,6 +981,24 @@
 }
 },
 {
+"id": "B03720",
+"sev": "MED",
+"n": 26,
+"town": "r2s-wartime-town-2",
+"section": "Systems/Defense",
+"fold": "Arcane black market",
+"text": "Arcane black market",
+"why": "names an 'Arcane black market' institution; HOUSES (the whole list) has no such house",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/safetyProfile.js",
+"line": 452,
+"fn": "generateSafetyProfile"
+}
+},
+{
 "id": "20616",
 "sev": "MED",
 "n": 25,
@@ -652,6 +1033,60 @@
 "file": "src/domain/display/defenseDisplay.js",
 "line": 625,
 "fn": "foodEnduranceLine"
+}
+},
+{
+"id": "B00162",
+"sev": "MED",
+"n": 25,
+"town": "r2s-occupied-town-1",
+"section": "Systems/Defense",
+"fold": "# criminal ring decides what crime is allowed here.",
+"text": "One criminal ring decides what crime is allowed here.",
+"why": "one criminal ring decides what crime is allowed; GOVERNMENT lists no criminal power (Merchant oligarchy, Occupation Authority, Merchant Guilds, Religious Authorities)",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/display/defenseDisplay.js",
+"line": 170,
+"fn": "CRIM_STRUCTURE_DATA"
+}
+},
+{
+"id": "B11531",
+"sev": "MED",
+"n": 25,
+"town": "r2s-occupied-town-1",
+"section": "Systems/Defense",
+"fold": "Its rules are predictable and it can be bargained with; it puts down random violence because that brings the law, and it lives on protection money and on any official it can buy.",
+"text": "Its rules are predictable and it can be bargained with; it puts down random violence because that brings the law, and it lives on protection money and on any official it can buy.",
+"why": "a criminal ring with predictable rules and bought officials; no criminal power in GOVERNMENT's list",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/display/defenseDisplay.js",
+"line": 170,
+"fn": "CRIM_STRUCTURE_DATA"
+}
+},
+{
+"id": "B27952",
+"sev": "MED",
+"n": 24,
+"town": "r2s-slave_revolt-thorp-2",
+"section": "Systems/Outlook",
+"fold": "With the enslaved workers in revolt, the outlying fields lie idle and nobody is bringing in the harvest.",
+"text": "With the enslaved workers in revolt, the outlying fields lie idle and nobody is bringing in the harvest.",
+"why": "nobody brings in the harvest and fields idle; FOOD word Secure, 86% grown, stores 1.7 months",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/economy/foodBalance.js",
+"line": 247,
+"fn": "deriveFoodBalanceAnalysis"
 }
 },
 {
@@ -709,6 +1144,24 @@
 }
 },
 {
+"id": "B07356",
+"sev": "MED",
+"n": 15,
+"town": "r2s-famine-hamlet-2",
+"section": "Systems/Economics",
+"fold": "Fish & Maritime Produce Catch landed here and sold fresh or preserved.",
+"text": "Fish & Maritime Produce Catch landed here and sold fresh or preserved.",
+"why": "catch landed and sold fresh or preserved; FOOD failed source is fish, no fishing chain in LAND, exports none",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/economy/economicState.js",
+"line": 496,
+"fn": "generateEconomicState"
+}
+},
+{
 "id": "16403",
 "sev": "MED",
 "n": 14,
@@ -760,6 +1213,24 @@
 "writer": {
 "file": "src/generators/economy/economicState.js",
 "line": 334,
+"fn": "generateEconomicState"
+}
+},
+{
+"id": "B07359",
+"sev": "MED",
+"n": 11,
+"town": "r2r-hamlet-16",
+"section": "Systems/Economics",
+"fold": "Fish & Preserved Produce Catch landed and sold fresh or preserved; salt fish are a major regional export commodity.",
+"text": "Fish & Preserved Produce Catch landed and sold fresh or preserved; salt fish are a major regional export commodity.",
+"why": "'catch landed and sold fresh or preserved': FOOD failed source is fish under famine; no line should offer the failed food",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/economy/economicState.js",
+"line": 497,
 "fn": "generateEconomicState"
 }
 },
@@ -908,6 +1379,42 @@
 }
 },
 {
+"id": "B03295",
+"sev": "MED",
+"n": 3,
+"town": "r2s-wartime-town-2",
+"section": "Systems/Defense",
+"fold": "Alchemists and other magical practitioners who operate outside legal channels supply a sophisticated underground market for forbidden components, illegal rituals, and undetectable forgeries.",
+"text": "Alchemists and other magical practitioners who operate outside legal channels supply a sophisticated underground market for forbidden components, illegal rituals, and undetectable forgeries.",
+"why": "describes an underground market of illegal practitioners; HOUSES has no such house and GOVERNMENT lists no criminal power",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/safetyProfile.js",
+"line": 447,
+"fn": "generateSafetyProfile"
+}
+},
+{
+"id": "B10921",
+"sev": "MED",
+"n": 3,
+"town": "r2s-politically_fractured-city-0",
+"section": "Systems/Outlook",
+"fold": "Impact: Its banks find little business to do.",
+"text": "Impact: Its banks find little business to do.",
+"why": "says its banks find little business; TRADE exports 'Financial services (letters of credit)' and 'Coin minting', and Banking houses and Mint both stand",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/economy/viability.js",
+"line": 423,
+"fn": "generatePowerDynamics"
+}
+},
+{
 "id": "09257",
 "sev": "MED",
 "n": 2,
@@ -980,6 +1487,60 @@
 }
 },
 {
+"id": "B11285",
+"sev": "MED",
+"n": 2,
+"town": "r2s-wartime-hamlet-0",
+"section": "Systems/Economics",
+"fold": "Iron & Metalwork Coal is dug here and sold on to other towns, so this income stream leans on the trade route.",
+"text": "Iron & Metalwork Coal is dug here and sold on to other towns, so this income stream leans on the trade route.",
+"why": "Iron & Metalwork income stream from coal; LAND has no Iron & Metalwork chain and iron ore is absent",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/economy/incomeLineSiblings.js",
+"line": 21,
+"fn": "LOCAL_COAL_SOLD_LINE"
+}
+},
+{
+"id": "B29907",
+"sev": "MED",
+"n": 2,
+"town": "r2r-village-4",
+"section": "Systems/Resources",
+"fold": "✓ Grain production✓ Livestock✓ Wool and textiles",
+"text": "✓ Grain production✓ Livestock✓ Wool and textiles",
+"why": "ticks 'Wool and textiles' as working; LAND gap: wool raw resource available but not being processed; no textile chain or weaver listed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/resourceGenerator.js",
+"line": 62,
+"fn": "STRENGTH_SUPPORT"
+}
+},
+{
+"id": "B27712",
+"sev": "MED",
+"n": 2,
+"town": "r2s-indebted-town-3",
+"section": "Systems/Defense",
+"fold": "What the settlement makes for itself and what comes over the rough tracks cover part of its needs, but not enough without the wizard.",
+"text": "What the settlement makes for itself and what comes over the rough tracks cover part of its needs, but not enough without the wizard.",
+"why": "says supply is 'not enough without the wizard'; FOOD gives by magic 0%, shortfall brought in 20%",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/isolationGenerator.js",
+"line": 26,
+"fn": "MAINTAINER_DESC"
+}
+},
+{
 "id": "30890",
 "sev": "MED",
 "n": 1,
@@ -994,6 +1555,43 @@
 "writer": {
 "file": "src/generators/economy/viability.js",
 "line": 255,
+"fn": "generatePowerDynamics"
+}
+},
+{
+"id": "11705",
+"sev": "MED",
+"n": 1,
+"town": "r2s-wartime-village-2",
+"section": "Summary/Plot Hooks",
+"fold": "In the war, the adventurers' charter hall leads the defence: the defence of the place, with no # named to lead it.",
+"text": "In the war, the adventurers' charter hall leads the defence: the defence of the place, with no one named to lead it.",
+"why": "'leads the defence: the defence of the place, with no one named to lead it' repeats itself and contradicts 'leads'",
+"kinds": [
+"BROKEN",
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/defenseDisplay.js",
+"line": 456,
+"fn": "deriveSupportingCapabilities"
+}
+},
+{
+"id": "B04151",
+"sev": "MED",
+"n": 1,
+"town": "r2s-politically_fractured-city-0",
+"section": "Systems/Outlook",
+"fold": "Banks stand here, but the city does little trade.",
+"text": "Banks stand here, but the city does little trade.",
+"why": "says the city does little trade; TRADE lists ~25 exports and 10 imports incl. financial services, coin minting, iron ore, coal, on a road trade access",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/economy/viability.js",
+"line": 422,
 "fn": "generatePowerDynamics"
 }
 }

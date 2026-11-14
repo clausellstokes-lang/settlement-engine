@@ -1,0 +1,2812 @@
+[
+{
+"id": "B10927",
+"sev": "MED",
+"n": 302,
+"town": "r2s-under_siege-thorp-0",
+"section": "Systems/Economics",
+"fold": "Impaired",
+"text": "Impaired",
+"why": "'Impaired' flow state; LAND has Foraging & Smallholding running with its resource available, none impaired",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B06680",
+"sev": "MED",
+"n": 297,
+"town": "r2s-under_siege-thorp-0",
+"section": "Systems/Economics",
+"fold": "Economic Flows (# active",
+"text": "Economic Flows (2 active",
+"why": "'Economic Flows (2 active, 1 impaired)'; LAND gives Foraging & Smallholding running and Faith & Worship operational, no impaired chain",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/components/new/tabs/EconomicsTab.jsx",
+"line": 132,
+"fn": "EconomicFlowsSection"
+}
+},
+{
+"id": "16001",
+"sev": "MED",
+"n": 138,
+"town": "r2s-famine-thorp-1",
+"section": "Systems/Economics",
+"fold": "Production: # lbs/day+ # imported",
+"text": "Production: 18 lbs/day+ 8 imported",
+"why": "'+ 8 imported': header says imports cover 7",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "15124",
+"sev": "MED",
+"n": 135,
+"town": "r2s-occupied-thorp-1",
+"section": "Systems/Magic",
+"fold": "Nothing structural at <N> depends on arcane work.",
+"text": "Nothing structural at Amarkota depends on arcane work.",
+"why": "'nothing structural depends on arcane work', yet magical provision makes up about a third of what it eats",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/components/new/tabs/MagicTab.jsx",
+"line": 102,
+"fn": "MagicTab"
+}
+},
+{
+"id": "B12001",
+"sev": "MED",
+"n": 130,
+"town": "r2s-famine-thorp-1",
+"section": "Systems/Economics",
+"fold": "Livestock",
+"text": "Livestock",
+"why": "lists Livestock as an export; FOOD gives livestock as the failed source and the town is in active famine",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B14840",
+"sev": "MED",
+"n": 126,
+"town": "r2s-under_siege-town-1",
+"section": "Systems/Economics",
+"fold": "Pig iron",
+"text": "Pig iron",
+"why": "offers pig iron; Smelting & Refining impaired, iron ore depleted, TRADE makes no iron",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B15067",
+"sev": "MED",
+"n": 99,
+"town": "r2s-monster_pressure-village-2",
+"section": "Systems/Economics",
+"fold": "Preserved foodsLeather goods",
+"text": "Preserved foodsLeather goods",
+"why": "preserved foods and leather goods named as products; TRADE made-here lists neither; Tannery lacks hides, Leatherworking chain impaired",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B29895",
+"sev": "MED",
+"n": 95,
+"town": "r2s-famine-thorp-1",
+"section": "Systems/Resources",
+"fold": "✓ Fully exploitedLivestockmedium value",
+"text": "✓ Fully exploitedLivestockmedium value",
+"why": "Livestock 'Fully exploited'; FOOD gives livestock as the failed source (herds failed, famine cut 65%)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "05780",
+"sev": "MED",
+"n": 94,
+"town": "r2s-famine-town-1",
+"section": "Systems/Economics",
+"fold": "Contributes to Grain Sales - #% of income",
+"text": "Contributes to Grain Sales - 4% of income",
+"why": "counts grain sales as income; CRISIS famine, grain imported, granary shut (18670)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "30975",
+"sev": "MED",
+"n": 87,
+"town": "r2s-under_siege-thorp-2",
+"section": "Systems/Resources",
+"fold": "✓ Mining",
+"text": "✓ Mining",
+"why": "Mining marked exploited: no mine in HOUSES, population 6, exports none",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "00600",
+"sev": "MED",
+"n": 75,
+"town": "r2r-hamlet-16",
+"section": "Systems/Economics",
+"fold": "<N> grows about # parts in # of what it eats, and carts bring in about # parts in # of the rest.",
+"text": "Oxteha grows about two parts in five of what it eats, and carts bring in about two parts in three of the rest.",
+"why": "grows two fifths of what it eats; eats 30 (16 grown + 14 imported), so grows over half",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B09326",
+"sev": "MED",
+"n": 75,
+"town": "r2s-famine-town-1",
+"section": "Systems/Economics",
+"fold": "Grain Sales",
+"text": "Grain Sales",
+"why": "grain sales as income under famine whose failed source is grain; town is in grain deficit",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "05779",
+"sev": "MED",
+"n": 70,
+"town": "r2s-under_siege-town-0",
+"section": "Systems/Economics",
+"fold": "Contributes to Entrepôt Trade - #% of income",
+"text": "Contributes to Entrepôt Trade - 11% of income",
+"why": "entrepot trade brings 11% of income; Under Siege nothing comes in or goes out to redistribute",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "13120",
+"sev": "MED",
+"n": 59,
+"town": "r2s-plague_onset-town-0",
+"section": "Systems/Economics",
+"fold": "Mercenary ForcesDefense & security○ Operational",
+"text": "Mercenary ForcesDefense & security○ Operational",
+"why": "Mercenary Forces shown Operational in defense; DEFENCE says hired: none",
+"kinds": [
+"LACKS",
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "12560",
+"sev": "MED",
+"n": 58,
+"town": "r2s-famine-town-2",
+"section": "Systems/Economics",
+"fold": "Law enforcement, patrol and gate control here depend on iron brought in, which a siege, a closed road or a blockade would cut off.",
+"text": "Law enforcement, patrol and gate control here depend on iron brought in, which a siege, a closed road or a blockade would cut off.",
+"why": "names gate control; DEFENCE walls none, no gates on HOUSES",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/display/chainNeedShown.js",
+"line": 90,
+"fn": "chainNeedLine"
+}
+},
+{
+"id": "14553",
+"sev": "MED",
+"n": 49,
+"town": "r2s-famine-thorp-2",
+"section": "Systems/Resources",
+"fold": "No # here works the timber near <N>.",
+"text": "No one here works the timber near Benham.",
+"why": "no one works the timber; TRADE made here lists timber and founding was a logging operation",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/tradeListDisplay.js",
+"line": 246,
+"fn": "needMetBy"
+}
+},
+{
+"id": "16003",
+"sev": "MED",
+"n": 43,
+"town": "r2r-city-44",
+"section": "Systems/Economics",
+"fold": "Production: # lbs/day+ # imported+ # by divine provision",
+"text": "Production: 1,076 lbs/day+ 2,178 imported+ 625 by divine provision",
+"why": "2,178 lbs imported; header food ledger says imports cover 2195",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/foodBalanceBar.js",
+"line": 61,
+"fn": "clampPct"
+}
+},
+{
+"id": "B09873",
+"sev": "MED",
+"n": 41,
+"town": "r2r-metropolis-14",
+"section": "Systems/Magic",
+"fold": "Herbalism & Remedies: Divine healing supplements mundane medicine",
+"text": "Herbalism & Remedies: Divine healing supplements mundane medicine",
+"why": "divine healing supplementing medicine in Herbalism chain; LAND gives it vulnerable, not magically sustained, foraging areas depleted, magic low",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/facts/magicSource.js",
+"line": 43,
+"fn": "MAGIC_NOTE_TRADITION"
+}
+},
+{
+"id": "30931",
+"sev": "MED",
+"n": 40,
+"town": "r2r-thorp-27",
+"section": "Systems/Resources",
+"fold": "✓ Agriculture✓ Milling✓ River trade",
+"text": "✓ Agriculture✓ Milling✓ River trade",
+"why": "ticks Milling; HOUSES has only Access to external mill",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "05224",
+"sev": "MED",
+"n": 40,
+"town": "r2s-recently_betrayed-town-0",
+"section": "Systems/Economics",
+"fold": "Coin minting",
+"text": "Coin minting",
+"why": "names coin minting as the town's work; HOUSES has no Mint",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B28006",
+"sev": "MED",
+"n": 39,
+"town": "r2r-hamlet-48",
+"section": "Systems/Resources",
+"fold": "Wool→cloth→dyed fabric",
+"text": "Wool→cloth→dyed fabric",
+"why": "'Wool→cloth→dyed fabric' presumes cloth and dye work; HOUSES has no weaver or dyer and LAND gap says wool cannot make final goods",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B28222",
+"sev": "MED",
+"n": 39,
+"town": "r2r-hamlet-48",
+"section": "Systems/Resources",
+"fold": "cloth, dyed fabric",
+"text": "cloth, dyed fabric",
+"why": "'cloth, dyed fabric' as output; HOUSES has no weaver or dyer; LAND gap: wool limited to intermediate products",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "14073",
+"sev": "MED",
+"n": 38,
+"town": "r2s-plague_onset-hamlet-2",
+"section": "Systems/Outlook",
+"fold": "Much of what <N> eats is brought in by road; its own land does not produce enough.",
+"text": "Much of what Jayaagam eats is brought in by road; its own land does not produce enough.",
+"why": "'Much of what it eats is brought in'; food ledger: grown 38 of 48, imports cover only 5",
+"kinds": [
+"PAIR",
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "16004",
+"sev": "MED",
+"n": 37,
+"town": "r2s-under_siege-city-0",
+"section": "Systems/Economics",
+"fold": "Production: # lbs/day+ # imported+ # by druidic provision",
+"text": "Production: 5,041 lbs/day+ 6,439 imported+ 9,766 by druidic provision",
+"why": "'6,439 imported'; STATE gives imports cover 6422",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B06484",
+"sev": "MED",
+"n": 35,
+"town": "r2s-monster_pressure-village-2",
+"section": "Systems/Economics",
+"fold": "Druidic cultivation supplements depleted farmland",
+"text": "Druidic cultivation supplements depleted farmland",
+"why": "druids supplement 'depleted farmland'; the depleted resource is grazing land, and FOOD gives by magic 0%",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/facts/magicSource.js",
+"line": 38,
+"fn": "MAGIC_NOTE_TRADITION"
+}
+},
+{
+"id": "B03722",
+"sev": "MED",
+"n": 34,
+"town": "r2s-under_siege-metropolis-3",
+"section": "Systems/Economics",
+"fold": "Arcane fabrication and stone-shaping partially offset depleted extraction",
+"text": "Arcane fabrication and stone-shaping partially offset depleted extraction",
+"why": "arcane fabrication offsets depleted extraction; iron chains are vulnerable and only Bowyer and Reed chains are magically sustained",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/facts/magicSource.js",
+"line": 47,
+"fn": "MAGIC_NOTE_TRADITION"
+}
+},
+{
+"id": "04405",
+"sev": "MED",
+"n": 28,
+"town": "r2s-under_siege-town-0",
+"section": "Systems/Economics",
+"fold": "Blessed stores; divine provision fills the gap",
+"text": "Blessed stores; divine provision fills the gap",
+"why": "'divine provision fills the gap'; food deficit 44% with imports cover None, the gap is unfilled",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/magicProvisionShown.js",
+"line": 3,
+"fn": ""
+}
+},
+{
+"id": "03456",
+"sev": "MED",
+"n": 27,
+"town": "r2s-occupied-city-0",
+"section": "Systems/Economics",
+"fold": "Almshouse CareHealing & medicine○ Operational",
+"text": "Almshouse CareHealing & medicine○ Operational",
+"why": "lists almshouse care as operational; HOUSES has no almshouse",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "14649",
+"sev": "MED",
+"n": 25,
+"town": "r2s-famine-metropolis-3",
+"section": "Systems/Resources",
+"fold": "No salt reaches the salt works.",
+"text": "No salt reaches the salt works.",
+"why": "'no salt reaches the salt works' contradicts salt won from local brine in evaporation pans",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "30978",
+"sev": "MED",
+"n": 25,
+"town": "r2r-thorp-17",
+"section": "Systems/Resources",
+"fold": "✓ Mining✓ Stone quarrying",
+"text": "✓ Mining✓ Stone quarrying",
+"why": "Mining and Stone quarrying marked exploited: no mine or quarry in HOUSES",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "12736",
+"sev": "MED",
+"n": 23,
+"town": "r2r-metropolis-14",
+"section": "Systems/Magic",
+"fold": "Livestock & Dairy: Blessed stores; divine provision fills the gap",
+"text": "Livestock & Dairy: Blessed stores; divine provision fills the gap",
+"why": "'divine provision fills the gap'; food deficit 83% with imports None, the gap is not filled (also 10776)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/magicProvisionShown.js",
+"line": 3,
+"fn": ""
+}
+},
+{
+"id": "30974",
+"sev": "MED",
+"n": 23,
+"town": "r2s-occupied-thorp-1",
+"section": "Systems/Resources",
+"fold": "✓ Metalworking✓ Mining",
+"text": "✓ Metalworking✓ Mining",
+"why": "Metalworking and Mining marked exploited: no mine or smithy in HOUSES",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "22206",
+"sev": "MED",
+"n": 22,
+"town": "r2s-under_siege-hamlet-3",
+"section": "Systems/Economics",
+"fold": "The table rests on the hunters' game.",
+"text": "The table rests on the hunters' game.",
+"why": "the table rests on hunters' game; Under Siege the hunters cannot leave the hamlet",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "14551",
+"sev": "MED",
+"n": 22,
+"town": "r2s-under_siege-town-2",
+"section": "Systems/Resources",
+"fold": "No # here works the mineral hot springs near <N>.",
+"text": "No one here works the mineral hot springs near Yekehiid.",
+"why": "nobody works the hot springs; the other says the town draws on the hot spring source and its properties",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/domain/facts/chainWorking.js",
+"line": 34,
+"fn": "WORKING_CHAIN_STATUSES"
+}
+},
+{
+"id": "04329",
+"sev": "MED",
+"n": 22,
+"town": "r2r-metropolis-14",
+"section": "Systems/Magic",
+"fold": "Beekeeping & Wax: Blessed stores; divine provision fills the gap",
+"text": "Beekeeping & Wax: Blessed stores; divine provision fills the gap",
+"why": "'divine provision fills the gap'; food deficit 83% with imports None, the gap is not filled",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/magicProvisionShown.js",
+"line": 3,
+"fn": ""
+}
+},
+{
+"id": "13751",
+"sev": "MED",
+"n": 22,
+"town": "r2s-recently_betrayed-town-0",
+"section": "Systems/Economics",
+"fold": "Mining & CoinageRaw materials & fuel✓ Running",
+"text": "Mining & CoinageRaw materials & fuel✓ Running",
+"why": "says Mining & Coinage is running; HOUSES has no Mine and no Mint, and TRADE says iron mines and gem deposits exhausted",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B10244",
+"sev": "MED",
+"n": 21,
+"town": "r2r-metropolis-14",
+"section": "Systems/Magic",
+"fold": "Horse & Animal Trade: Blessed stores; divine provision fills the gap",
+"text": "Horse & Animal Trade: Blessed stores; divine provision fills the gap",
+"why": "'divine provision fills the gap': FOOD by magic 0%, deficit 83%, and Horse & Animal Trade is vulnerable, not magically sustained",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/magicProvisionShown.js",
+"line": 3,
+"fn": ""
+}
+},
+{
+"id": "B12005",
+"sev": "MED",
+"n": 21,
+"town": "r2s-monster_pressure-village-2",
+"section": "Systems/Magic",
+"fold": "Livestock & Dairy: Druidic cultivation supplements depleted farmland",
+"text": "Livestock & Dairy: Druidic cultivation supplements depleted farmland",
+"why": "druidic supplements to 'depleted farmland'; depleted resource is grazing land, FOOD by magic 0%, grown 109%",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/facts/magicSource.js",
+"line": 38,
+"fn": "MAGIC_NOTE_TRADITION"
+}
+},
+{
+"id": "16002",
+"sev": "MED",
+"n": 19,
+"town": "r2s-occupied-city-3",
+"section": "Systems/Economics",
+"fold": "Production: # lbs/day+ # imported+ # by arcane provision",
+"text": "Production: 5,671 lbs/day+ 4,628 imported+ 273 by arcane provision",
+"why": "gives 4,628 imported; header food line says imports cover 4596",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/foodBalanceBar.js",
+"line": 11,
+"fn": ""
+}
+},
+{
+"id": "11407",
+"sev": "MED",
+"n": 18,
+"town": "r2s-famine-city-3",
+"section": "Systems/Magic",
+"fold": "Hunting & Trapping: Blessed stores; divine provision fills the gap",
+"text": "Hunting & Trapping: Blessed stores; divine provision fills the gap",
+"why": "'divine provision fills the gap' under Famine while STATE still shows a 17% food deficit",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/magicProvisionShown.js",
+"line": 3,
+"fn": ""
+}
+},
+{
+"id": "09786",
+"sev": "MED",
+"n": 18,
+"town": "r2s-famine-metropolis-2",
+"section": "Systems/Magic",
+"fold": "Grain & Bread: Blessed stores; divine provision fills the gap",
+"text": "Grain & Bread: Blessed stores; divine provision fills the gap",
+"why": "Grain & Bread: 'divine provision fills the gap' under Famine; STATE shows 23% deficit, grain fields depleted",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/magicProvisionShown.js",
+"line": 3,
+"fn": ""
+}
+},
+{
+"id": "B11290",
+"sev": "MED",
+"n": 18,
+"town": "r2s-under_siege-metropolis-3",
+"section": "Systems/Magic",
+"fold": "Iron & Metalwork: Arcane fabrication and stone-shaping partially offset depleted extraction",
+"text": "Iron & Metalwork: Arcane fabrication and stone-shaping partially offset depleted extraction",
+"why": "arcane fabrication offsets depleted extraction in Iron & Metalwork; LAND gives it vulnerable, not magically sustained",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/facts/magicSource.js",
+"line": 47,
+"fn": "MAGIC_NOTE_TRADITION"
+}
+},
+{
+"id": "B17206",
+"sev": "MED",
+"n": 18,
+"town": "r2s-under_siege-metropolis-3",
+"section": "Systems/Magic",
+"fold": "Smelting & Refining: Arcane fabrication and stone-shaping partially offset depleted extraction",
+"text": "Smelting & Refining: Arcane fabrication and stone-shaping partially offset depleted extraction",
+"why": "arcane fabrication offsets depleted extraction in Smelting & Refining; LAND gives it vulnerable, not magically sustained",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/facts/magicSource.js",
+"line": 47,
+"fn": "MAGIC_NOTE_TRADITION"
+}
+},
+{
+"id": "14404",
+"sev": "MED",
+"n": 17,
+"town": "r2r-hamlet-0",
+"section": "Systems/Economics",
+"fold": "Needed, and not brought in: timber, stone, metals.",
+"text": "Needed, and not brought in: timber, stone, metals.",
+"why": "says metals are not brought in; TRADE imports Iron (weapons)",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "30977",
+"sev": "MED",
+"n": 17,
+"town": "r2s-plague_onset-hamlet-3",
+"section": "Systems/Resources",
+"fold": "✓ Mining✓ Sheep herding✓ Wool production",
+"text": "✓ Mining✓ Sheep herding✓ Wool production",
+"why": "Ticks Mining; HOUSES has no mine or quarry",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "04478",
+"sev": "MED",
+"n": 17,
+"town": "r2s-plague_onset-city-1",
+"section": "Systems/Economics",
+"fold": "Bowyer & fletcherManufacturing & crafts✦ Magically Sustained",
+"text": "Bowyer & fletcherManufacturing & crafts✦ Magically Sustained",
+"why": "a bowyer & fletcher, magically sustained; HOUSES has no bowyers or fletchers",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "23037",
+"sev": "MED",
+"n": 16,
+"town": "r2s-under_siege-metropolis-2",
+"section": "Systems/Magic",
+"fold": "Timber & Lumber: Druidic forest management accelerates regrowth and sustainable yield",
+"text": "Timber & Lumber: Druidic forest management accelerates regrowth and sustainable yield",
+"why": "druidic forest management sustains timber yield; TRADE imports Timber because local managed woodland is cleared (also 23039 'Magically Sustained')",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/domain/facts/magicSource.js",
+"line": 39,
+"fn": "MAGIC_NOTE_TRADITION"
+}
+},
+{
+"id": "14550",
+"sev": "MED",
+"n": 16,
+"town": "r2r-village-24",
+"section": "Systems/Resources",
+"fold": "No # here works the medicinal herbs near <N>.",
+"text": "No one here works the medicinal herbs near Shandao.",
+"why": "no one works the medicinal herbs; TRADE made here lists medicinal herbs",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "23039",
+"sev": "MED",
+"n": 16,
+"town": "r2s-plague_onset-city-1",
+"section": "Systems/Economics",
+"fold": "Timber & LumberRaw materials & fuel✦ Magically Sustained",
+"text": "Timber & LumberRaw materials & fuel✦ Magically Sustained",
+"why": "timber 'magically sustained' by druidic regrowth, yet TRADE imports timber because local managed woodland is cleared",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "30946",
+"sev": "MED",
+"n": 15,
+"town": "r2r-city-19",
+"section": "Systems/Resources",
+"fold": "✓ Fishing industry✓ Maritime trade✓ Salt production✓ Shipbuilding",
+"text": "✓ Fishing industry✓ Maritime trade✓ Salt production✓ Shipbuilding",
+"why": "Shipbuilding ticked as a resource; HOUSES has no shipyard or boatyard",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "30945",
+"sev": "MED",
+"n": 15,
+"town": "r2r-thorp-24",
+"section": "Systems/Resources",
+"fold": "✓ Fishing industry✓ Maritime trade✓ Salt production",
+"text": "✓ Fishing industry✓ Maritime trade✓ Salt production",
+"why": "Fishing industry and Maritime trade marked exploited: no fishing community or docks in HOUSES",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B29875",
+"sev": "MED",
+"n": 15,
+"town": "r2r-thorp-52",
+"section": "Systems/Resources",
+"fold": "✓ Central trade hub✓ Livestock✓ Wool and textiles",
+"text": "✓ Central trade hub✓ Livestock✓ Wool and textiles",
+"why": "wool and textiles shown as worked; LAND gaps: wool and animal hides available but not being processed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "11782",
+"sev": "MED",
+"n": 14,
+"town": "r2s-plague_onset-town-3",
+"section": "Systems/Magic",
+"fold": "Institutional controlguild_controlled",
+"text": "Institutional controlguild_controlled",
+"why": "stored key 'guild_controlled' printed in prose",
+"kinds": [
+"BROKEN"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "30947",
+"sev": "MED",
+"n": 13,
+"town": "r2s-famine-hamlet-0",
+"section": "Systems/Resources",
+"fold": "✓ Fishing industry✓ Maritime trade✓ Shipbuilding",
+"text": "✓ Fishing industry✓ Maritime trade✓ Shipbuilding",
+"why": "ticks Shipbuilding as an industry; HOUSES has a fisher's landing only, no shipyard",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "14543",
+"sev": "MED",
+"n": 13,
+"town": "r2r-thorp-40",
+"section": "Systems/Resources",
+"fold": "No # here works the animal hides near <N>.",
+"text": "No one here works the animal hides near Malotsy.",
+"why": "'no one works the animal hides'; TRADE says animal hides are made here",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "11963",
+"sev": "MED",
+"n": 13,
+"town": "r2s-plague_onset-thorp-2",
+"section": "Systems/Resources",
+"fold": "It has worked out its river fisheries.",
+"text": "It has worked out its river fisheries.",
+"why": "river fisheries worked out; it has a Fishing community and fish on the table",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "30972",
+"sev": "MED",
+"n": 13,
+"town": "r2s-famine-hamlet-2",
+"section": "Systems/Resources",
+"fold": "✓ Maritime trade✓ Salt production✓ Shipbuilding",
+"text": "✓ Maritime trade✓ Salt production✓ Shipbuilding",
+"why": "claims Shipbuilding; HOUSES has only a Fisher's landing, no shipyard",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B13482",
+"sev": "MED",
+"n": 13,
+"town": "r2s-famine-city-2",
+"section": "Systems/Economics",
+"fold": "Needed, and not brought in: spices.",
+"text": "Needed, and not brought in: spices.",
+"why": "says spices are needed and not brought in; LAND gaps name only copper ore (smelter) and clay/iron imports, no spice chain or house",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "12961",
+"sev": "MED",
+"n": 12,
+"town": "r2s-under_siege-hamlet-2",
+"section": "Systems/Economics",
+"fold": "Many households go short, and a bad season would bring real hunger.",
+"text": "Many households go short, and a bad season would bring real hunger.",
+"why": "'a bad season would bring real hunger'; Under Siege with 35% deficit and imports None, hunger is already here",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/components/new/tabs/EconomicsTab.jsx",
+"line": 768,
+"fn": "shortWords"
+}
+},
+{
+"id": "30973",
+"sev": "MED",
+"n": 12,
+"town": "r2s-under_siege-thorp-1",
+"section": "Systems/Resources",
+"fold": "✓ Maritime trade✓ Shipbuilding",
+"text": "✓ Maritime trade✓ Shipbuilding",
+"why": "maritime trade and shipbuilding marked exploited: thorp of 16, no shipyard or docks, exports none, besieged",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B12337",
+"sev": "MED",
+"n": 12,
+"town": "r2s-indebted-town-3",
+"section": "Systems/Economics",
+"fold": "Meals, ale and lodging here depend on grain brought in by magic.",
+"text": "Meals, ale and lodging here depend on grain brought in by magic.",
+"why": "grain 'brought in by magic'; FOOD gives by magic 0% (20% brought in by tracks)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "13538",
+"sev": "MED",
+"n": 11,
+"town": "r2s-famine-town-3",
+"section": "Systems/Magic",
+"fold": "Military role: common",
+"text": "Military role: common",
+"why": "says magic's military role is common; DEFENCE magic: none",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "30928",
+"sev": "MED",
+"n": 10,
+"town": "r2s-plague_onset-thorp-2",
+"section": "Systems/Resources",
+"fold": "✓ Agriculture✓ Brewing",
+"text": "✓ Agriculture✓ Brewing",
+"why": "Brewing marked exploited: no brewery in HOUSES",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "30929",
+"sev": "MED",
+"n": 10,
+"town": "r2s-monster_pressure-thorp-1",
+"section": "Systems/Resources",
+"fold": "✓ Agriculture✓ Brewing✓ Milling✓ River trade",
+"text": "✓ Agriculture✓ Brewing✓ Milling✓ River trade",
+"why": "ticks Milling and Brewing; HOUSES has only Access to external mill, and brewing is not made here",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "04474",
+"sev": "MED",
+"n": 10,
+"town": "r2r-city-51",
+"section": "Systems/Magic",
+"fold": "Bowyer & fletcher: Arcane fabrication provides processed goods from alternative sources",
+"text": "Bowyer & fletcher: Arcane fabrication provides processed goods from alternative sources",
+"why": "bowyer & fletcher supplied by arcane fabrication; HOUSES has no bowyer or fletcher",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/facts/magicSource.js",
+"line": 46,
+"fn": "MAGIC_NOTE_TRADITION"
+}
+},
+{
+"id": "12888",
+"sev": "MED",
+"n": 9,
+"town": "r2r-thorp-54",
+"section": "Systems/Economics",
+"fold": "Magical provision makes up about a # of what it eats.",
+"text": "Magical provision makes up about a quarter of what it eats.",
+"why": "magic a quarter of what it eats; 9 of 21 lbs eaten (12 grown + 9) is over two fifths",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "14549",
+"sev": "MED",
+"n": 9,
+"town": "r2s-plague_onset-village-3",
+"section": "Systems/Resources",
+"fold": "No # here works the iron ore near <N>.",
+"text": "No one here works the iron ore near Loughmere.",
+"why": "No one works the iron ore; TRADE 'made here' lists iron and metalwork",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "14072",
+"sev": "MED",
+"n": 9,
+"town": "r2s-slave_revolt-thorp-1",
+"section": "Systems/Outlook",
+"fold": "Much of what <N> eats is brought in by river; its own land does not produce enough.",
+"text": "Much of what Erdeniin eats is brought in by river; its own land does not produce enough.",
+"why": "'Much of what Erdeniin eats is brought in by river'; deficit 3%, imports none",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B06493",
+"sev": "MED",
+"n": 9,
+"town": "r2s-under_siege-metropolis-1",
+"section": "Systems/Economics",
+"fold": "Druids call fish and bless the waters",
+"text": "Druids call fish and bless the waters",
+"why": "druids 'call fish' but Fishing Grounds are depleted and local sea fisheries exhausted",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/facts/magicSource.js",
+"line": 33,
+"fn": "MAGIC_NOTE_TRADITION"
+}
+},
+{
+"id": "B29918",
+"sev": "MED",
+"n": 8,
+"town": "r2r-thorp-32",
+"section": "Systems/Resources",
+"fold": "✓ Mining✓ Stoneworking",
+"text": "✓ Mining✓ Stoneworking",
+"why": "stoneworking shown as worked; LAND gaps say stone and timber are available but not being processed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B29904",
+"sev": "MED",
+"n": 8,
+"town": "r2s-religious_conversion-thorp-2",
+"section": "Systems/Resources",
+"fold": "✓ Gemcutting✓ Mining",
+"text": "✓ Gemcutting✓ Mining",
+"why": "gemcutting shown as worked; LAND gaps: gemstones available but not being processed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "30938",
+"sev": "MED",
+"n": 7,
+"town": "r2s-occupied-hamlet-1",
+"section": "Systems/Resources",
+"fold": "✓ Exotic goods✓ Glass and gems",
+"text": "✓ Exotic goods✓ Glass and gems",
+"why": "ticks Glass and gems, yet the page says no one works the glass sand and the ore goes unworked",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "18036",
+"sev": "MED",
+"n": 6,
+"town": "r2s-under_siege-city-0",
+"section": "Systems/Economics",
+"fold": "Shipbuilding and TimberRaw materials & fuel✦ Magically Sustained",
+"text": "Shipbuilding and TimberRaw materials & fuel✦ Magically Sustained",
+"why": "timber 'magically sustained', yet shipbuilding timber imported (stands cleared) and cut off by siege",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "30930",
+"sev": "MED",
+"n": 6,
+"town": "r2r-thorp-56",
+"section": "Systems/Resources",
+"fold": "✓ Agriculture✓ Brewing✓ River trade",
+"text": "✓ Agriculture✓ Brewing✓ River trade",
+"why": "ticks Brewing; nothing brewed is made here",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B05118",
+"sev": "MED",
+"n": 6,
+"town": "r2r-town-6",
+"section": "Systems/Economics",
+"fold": "Conjured game produces fish; minor supplement",
+"text": "Conjured game produces fish; minor supplement",
+"why": "claims conjured game supplements the fish; FOOD says by magic 0%",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/facts/magicSource.js",
+"line": 44,
+"fn": "MAGIC_NOTE_TRADITION"
+}
+},
+{
+"id": "B17929",
+"sev": "MED",
+"n": 6,
+"town": "r2s-succession_void-metropolis-0",
+"section": "Systems/Economics",
+"fold": "Temple stores supplement grain shortage",
+"text": "Temple stores supplement grain shortage",
+"why": "Claims a grain shortage met from temple stores; FOOD word is Secure with 15.3 months stored and HOUSES has no temple",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/facts/magicSource.js",
+"line": 41,
+"fn": "MAGIC_NOTE_TRADITION"
+}
+},
+{
+"id": "23075",
+"sev": "MED",
+"n": 5,
+"town": "r2s-under_siege-thorp-0",
+"section": "Systems/Economics",
+"fold": "Toll Revenue",
+"text": "Toll Revenue",
+"why": "Toll Revenue under siege: nothing moves by road; no toll house in HOUSES",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "14545",
+"sev": "MED",
+"n": 5,
+"town": "r2r-thorp-27",
+"section": "Systems/Resources",
+"fold": "No # here works the clay near <N>.",
+"text": "No one here works the clay near Olympnea.",
+"why": "nobody works the clay; TRADE makes clay and pottery",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "20768",
+"sev": "MED",
+"n": 5,
+"town": "r2s-wartime-hamlet-3",
+"section": "Systems/Resources",
+"fold": "The hamlet leaves its stone unworked.",
+"text": "The hamlet leaves its stone unworked.",
+"why": "says it leaves its stone unworked; TRADE lists stone made here",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "30976",
+"sev": "MED",
+"n": 5,
+"town": "r2s-indebted-town-1",
+"section": "Systems/Resources",
+"fold": "✓ Mining✓ Sheep herding✓ Stone quarrying✓ Wool production",
+"text": "✓ Mining✓ Sheep herding✓ Stone quarrying✓ Wool production",
+"why": "ticks Mining and Stone quarrying running; HOUSES has no mine or quarry, gem deposits exhausted, 22665 says the stone is untouched",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "20234",
+"sev": "MED",
+"n": 5,
+"town": "r2r-city-51",
+"section": "Systems/Resources",
+"fold": "The city leaves its stone unworked.",
+"text": "The city leaves its stone unworked.",
+"why": "'leaves its stone unworked'; TRADE makes stone and resources list a stone quarry",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "30953",
+"sev": "MED",
+"n": 5,
+"town": "r2s-recently_betrayed-city-0",
+"section": "Systems/Resources",
+"fold": "✓ Fully exploitedGold/silver orevery high value",
+"text": "✓ Fully exploitedGold/silver orevery high value",
+"why": "gold/silver ore 'fully exploited'; HOUSES has no mine",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B29880",
+"sev": "MED",
+"n": 5,
+"town": "r2s-wartime-hamlet-1",
+"section": "Systems/Resources",
+"fold": "✓ Exotic goods✓ Salt trade",
+"text": "✓ Exotic goods✓ Salt trade",
+"why": "checks Salt trade; LAND gap says desert_salt is raw resource not being processed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B15876",
+"sev": "MED",
+"n": 5,
+"town": "r2s-wartime-metropolis-3",
+"section": "Systems/Magic",
+"fold": "Salt & Preservation: Druidic cultivation supplements depleted farmland",
+"text": "Salt & Preservation: Druidic cultivation supplements depleted farmland",
+"why": "Salt & Preservation chain draws on depleted salt flats; no farmland or grain fields in LAND; sentence says druidic cultivation supplements depleted farmland, tag x5 reaches towns lacking any",
+"kinds": [
+"TAG"
+],
+"writer": {
+"file": "src/domain/facts/magicSource.js",
+"line": 38,
+"fn": "MAGIC_NOTE_TRADITION"
+}
+},
+{
+"id": "29070",
+"sev": "MED",
+"n": 4,
+"town": "r2s-occupied-city-0",
+"section": "Systems/Resources",
+"fold": "Work on the animal hides here stops #-way: no leatherworkers' guild finishes it.",
+"text": "Work on the animal hides here stops half-way: no leatherworkers' guild finishes it.",
+"why": "says hide work stops half-way; HOUSES has tanners and a tailor's guild, and boots and shoes are made here",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "20769",
+"sev": "MED",
+"n": 4,
+"town": "r2s-plague_onset-hamlet-3",
+"section": "Systems/Resources",
+"fold": "The hamlet leaves its timber unworked.",
+"text": "The hamlet leaves its timber unworked.",
+"why": "Leaves its timber unworked; TRADE 'made here' lists timber and exports sacred wood",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "22241",
+"sev": "MED",
+"n": 4,
+"town": "r2s-under_siege-thorp-0",
+"section": "Systems/Resources",
+"fold": "The thorp leaves its stone unworked.",
+"text": "The thorp leaves its stone unworked.",
+"why": "says stone left unworked; TRADE lists stone as made here",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "23340",
+"sev": "MED",
+"n": 4,
+"town": "r2s-occupied-thorp-1",
+"section": "Systems/Resources",
+"fold": "UnexploitedAlpine pastureshigh value",
+"text": "UnexploitedAlpine pastureshigh value",
+"why": "alpine pastures unexploited; TRADE makes wool, livestock and dairy",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "14542",
+"sev": "MED",
+"n": 4,
+"town": "r2s-occupied-thorp-1",
+"section": "Systems/Resources",
+"fold": "No # here works the alpine pastures near <N>.",
+"text": "No one here works the alpine pastures near Amarkota.",
+"why": "nobody works the alpine pastures; TRADE makes wool, livestock and dairy",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B29879",
+"sev": "MED",
+"n": 4,
+"town": "r2r-thorp-51",
+"section": "Systems/Resources",
+"fold": "✓ Exotic goods✓ Glass and gems✓ Trade hub",
+"text": "✓ Exotic goods✓ Glass and gems✓ Trade hub",
+"why": "glass and gems shown as worked; LAND gaps: glass sand and gemstones available but not being processed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B29902",
+"sev": "MED",
+"n": 4,
+"town": "r2r-village-29",
+"section": "Systems/Resources",
+"fold": "✓ Fur trade✓ Hunting✓ Timber trade✓ Woodcraft",
+"text": "✓ Fur trade✓ Hunting✓ Timber trade✓ Woodcraft",
+"why": "ticks a fur trade and timber trade; TRADE exports none, access isolated, and the timber gap says it cannot produce final goods",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B15874",
+"sev": "MED",
+"n": 4,
+"town": "r2s-politically_fractured-town-1",
+"section": "Systems/Magic",
+"fold": "Salt & Preservation: Arcane quickening of growth provides minor food supplement",
+"text": "Salt & Preservation: Arcane quickening of growth provides minor food supplement",
+"why": "claims arcane growth gives a food supplement; FOOD says by magic 0% and the Salt flats are depleted",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/facts/magicSource.js",
+"line": 45,
+"fn": "MAGIC_NOTE_TRADITION"
+}
+},
+{
+"id": "B07375",
+"sev": "MED",
+"n": 4,
+"town": "r2r-town-6",
+"section": "Systems/Magic",
+"fold": "Fishing & Seafood: Conjured game produces fish; minor supplement",
+"text": "Fishing & Seafood: Conjured game produces fish; minor supplement",
+"why": "'Conjured game produces fish; minor supplement'; FOOD says by magic 0%",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/facts/magicSource.js",
+"line": 44,
+"fn": "MAGIC_NOTE_TRADITION"
+}
+},
+{
+"id": "B15685",
+"sev": "MED",
+"n": 4,
+"town": "r2r-town-29",
+"section": "Systems/Magic",
+"fold": "River Fishing: Druids call fish and bless the waters",
+"text": "River Fishing: Druids call fish and bless the waters",
+"why": "River Fishing shown as worked with druids calling fish; LAND gives River Fisheries depleted, chain vulnerable, local fishery exhausted",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/facts/magicSource.js",
+"line": 33,
+"fn": "MAGIC_NOTE_TRADITION"
+}
+},
+{
+"id": "B11520",
+"sev": "MED",
+"n": 4,
+"town": "r2s-infiltrated-metropolis-1",
+"section": "Systems/Economics",
+"fold": "Its own food comes from its grain harvest and little else, so # bad year for the grain harvest would cost the whole metropolis dear.",
+"text": "Its own food comes from its grain harvest and little else, so one bad year for the grain harvest would cost the whole metropolis dear.",
+"why": "Says food comes from own grain 'and little else'; FOOD shows 44% brought in, 14.6 months stored, word Secure, so one bad year would not cost dear",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "14075",
+"sev": "MED",
+"n": 3,
+"town": "r2s-plague_onset-thorp-1",
+"section": "Systems/Outlook",
+"fold": "Much of what <N> eats is brought in from outside; its own land does not produce enough.",
+"text": "Much of what Somathal eats is brought in from outside; its own land does not produce enough.",
+"why": "'much of what it eats is brought in': grows 41 of 50, imports cover 6",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "04499",
+"sev": "MED",
+"n": 3,
+"town": "r2s-religious_conversion-city-1",
+"section": "Systems/Magic",
+"fold": "Brewing & Malting: Arcane quickening of growth provides minor food supplement",
+"text": "Brewing & Malting: Arcane quickening of growth provides minor food supplement",
+"why": "names a Brewing & Malting trade; HOUSES has no brewery (only Vintner)",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/facts/magicSource.js",
+"line": 45,
+"fn": "MAGIC_NOTE_TRADITION"
+}
+},
+{
+"id": "07801",
+"sev": "MED",
+"n": 3,
+"town": "r2s-slave_revolt-city-0",
+"section": "Systems/Economics",
+"fold": "Fish oilFreshwater catch",
+"text": "Fish oilFreshwater catch",
+"why": "lists Fish oil; TRADE exports and made-here have no fish oil (River fish, Freshwater catch only)",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B28568",
+"sev": "MED",
+"n": 3,
+"town": "r2s-under_siege-city-2",
+"section": "Systems/Economics",
+"fold": "gems",
+"text": "gems",
+"why": "lists gems as produced here; LAND gives Gemstone Deposits depleted and TRADE imports gemstones because local deposits are exhausted",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "14547",
+"sev": "MED",
+"n": 2,
+"town": "r2r-thorp-46",
+"section": "Systems/Resources",
+"fold": "No # here works the glass sand near <N>.",
+"text": "No one here works the glass sand near Erdenserai.",
+"why": "says nobody works the glass sand; TRADE makes glass and 30938 marks Glass and gems exploited",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "16853",
+"sev": "MED",
+"n": 2,
+"town": "r2r-hamlet-6",
+"section": "Systems/Economics",
+"fold": "Salted fish and the hunters' game anchor the table.",
+"text": "Salted fish and the hunters' game anchor the table.",
+"why": "table of salted fish and hunters' game; HOUSES has no fisher's landing, hunter's lodge or salt works",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "30964",
+"sev": "MED",
+"n": 2,
+"town": "r2s-recently_betrayed-city-0",
+"section": "Systems/Resources",
+"fold": "✓ Gemcutting✓ Metalworking✓ Mining",
+"text": "✓ Gemcutting✓ Metalworking✓ Mining",
+"why": "Mining shown running; HOUSES has no mine",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "04674",
+"sev": "MED",
+"n": 2,
+"town": "r2s-infiltrated-city-1",
+"section": "Systems/Economics",
+"fold": "Candles and waxMead",
+"text": "Candles and waxMead",
+"why": "lists Mead among goods; TRADE exports and made-here list no mead (only Wild honey, Candles and wax)",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B29878",
+"sev": "MED",
+"n": 2,
+"town": "r2s-slave_revolt-hamlet-3",
+"section": "Systems/Resources",
+"fold": "✓ Exotic goods✓ Glass and gems✓ Salt trade",
+"text": "✓ Exotic goods✓ Glass and gems✓ Salt trade",
+"why": "checks Glass and gems and Salt trade; LAND gaps say gemstones and desert salt are raw, not processed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B28789",
+"sev": "MED",
+"n": 2,
+"town": "r2r-hamlet-42",
+"section": "Systems/Resources",
+"fold": "hot springs mineralmedicinal herbsmanaged foresttimberdefended passtrade accessiron depositsironmetalwork",
+"text": "hot springs mineralmedicinal herbsmanaged foresttimberdefended passtrade accessiron depositsironmetalwork",
+"why": "names a 'defended pass'; DEFENCE is none throughout (no walls, force or watch); LAND lists only Mountain Pass (available)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B15904",
+"sev": "MED",
+"n": 2,
+"town": "r2s-famine-town-2",
+"section": "Systems/Economics",
+"fold": "Salted fishSmoked seafood",
+"text": "Salted fishSmoked seafood",
+"why": "salted and smoked seafood as a product; Fishing Grounds depleted, Fishing & Seafood impaired, TRADE makes none",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B28997",
+"sev": "MED",
+"n": 2,
+"town": "r2r-metropolis-2",
+"section": "Systems/Economics",
+"fold": "medicinal herbshoneygems",
+"text": "medicinal herbshoneygems",
+"why": "lists gems as made; LAND has no Gemstone Deposits at all; honey/herbs with Wild foraging areas absent and Beekeeping vulnerable",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "22240",
+"sev": "MED",
+"n": 1,
+"town": "r2r-thorp-27",
+"section": "Systems/Resources",
+"fold": "The thorp leaves its clay unworked.",
+"text": "The thorp leaves its clay unworked.",
+"why": "leaves its clay unworked; TRADE makes clay and pottery",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "12110",
+"sev": "MED",
+"n": 1,
+"town": "r2s-indebted-thorp-2",
+"section": "Systems/Economics",
+"fold": "Its own food comes from its hunting and little else, so # bad year for the hunting would cost the whole thorp dear.",
+"text": "Its own food comes from its hunting and little else, so one bad year for the hunting would cost the whole thorp dear.",
+"why": "'food comes from its hunting and little else'; TRADE made here lists livestock and dairy and it exports live sheep",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "22229",
+"sev": "MED",
+"n": 1,
+"town": "r2r-thorp-18",
+"section": "Systems/Resources",
+"fold": "The thorp has the iron ore; what it lacks is Smelter to start the work.",
+"text": "The thorp has the iron ore; what it lacks is Smelter to start the work.",
+"why": "'has the iron ore; what it lacks is Smelter' — TRADE made here lists iron and metalwork; also missing article before 'Smelter'",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "20767",
+"sev": "MED",
+"n": 1,
+"town": "r2s-religious_conversion-hamlet-2",
+"section": "Systems/Resources",
+"fold": "The hamlet leaves its clay unworked.",
+"text": "The hamlet leaves its clay unworked.",
+"why": "says it leaves its clay unworked; TRADE makes clay and pottery",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "12104",
+"sev": "MED",
+"n": 1,
+"town": "r2r-hamlet-14",
+"section": "Systems/Economics",
+"fold": "Its own food comes from its grain harvest and little else, so # bad year for the grain harvest would cost the whole hamlet dear.",
+"text": "Its own food comes from its grain harvest and little else, so one bad year for the grain harvest would cost the whole hamlet dear.",
+"why": "says food is grain and little else; HOUSES has Dairy farmer, date palms 'Running'",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "16360",
+"sev": "MED",
+"n": 1,
+"town": "r2r-village-24",
+"section": "Systems/Economics",
+"fold": "Reeds and thatchWaterfowl",
+"text": "Reeds and thatchWaterfowl",
+"why": "lists reeds and thatch, waterfowl as trade goods; TRADE exports only Sacred wood and Ritual components",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "22405",
+"sev": "MED",
+"n": 1,
+"town": "r2s-occupied-village-0",
+"section": "Systems/Resources",
+"fold": "The village leaves its timber unworked.",
+"text": "The village leaves its timber unworked.",
+"why": "says timber is left unworked; TRADE made here lists timber",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "01192",
+"sev": "MED",
+"n": 1,
+"town": "r2s-succession_void-village-1",
+"section": "Systems/Economics",
+"fold": "<N> lives on a surplus farm trade and ends each year with money to spare, and the traffic on its port keeps it that way.",
+"text": "Chrissoeia lives on a surplus farm trade and ends each year with money to spare, and the traffic on its port keeps it that way.",
+"why": "says it lives on a surplus farm trade; exports are fish and boats only, grown 393 against need 390",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "14395",
+"sev": "MED",
+"n": 1,
+"town": "r2s-monster_pressure-village-2",
+"section": "Systems/Economics",
+"fold": "Needed, and not brought in: timber, stone, luxury goods, fish.",
+"text": "Needed, and not brought in: timber, stone, luxury goods, fish.",
+"why": "fish needed and not brought in, yet HOUSES has a Fishmonger who holds the seat (05516)",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "14400",
+"sev": "MED",
+"n": 1,
+"town": "r2s-religious_conversion-village-0",
+"section": "Systems/Economics",
+"fold": "Needed, and not brought in: timber, stone, metals, luxury goods, fish.",
+"text": "Needed, and not brought in: timber, stone, metals, luxury goods, fish.",
+"why": "fish needed and not brought in; HOUSES has a Fisher's landing and a Fishmonger",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "14242",
+"sev": "MED",
+"n": 1,
+"town": "r2r-village-49",
+"section": "Systems/Economics",
+"fold": "Needed, and not brought in: luxury goods, spices, fine textiles, clay, fish.",
+"text": "Needed, and not brought in: luxury goods, spices, fine textiles, clay, fish.",
+"why": "fish needed and not brought in, yet HOUSES has a Fishmonger (17260 keeps the best of the catch)",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "12111",
+"sev": "MED",
+"n": 1,
+"town": "r2r-village-23",
+"section": "Systems/Economics",
+"fold": "Its own food comes from its hunting and little else, so # bad year for the hunting would cost the whole village dear.",
+"text": "Its own food comes from its hunting and little else, so one bad year for the hunting would cost the whole village dear.",
+"why": "food from hunting and little else; HOUSES has Farmland, grazing and a Mill (grown 477 of 542), and no hunter",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "12562",
+"sev": "MED",
+"n": 1,
+"town": "r2s-under_siege-town-1",
+"section": "Systems/Economics",
+"fold": "Law enforcement, patrol and gate control here depend on iron from outside, which the siege has cut off.",
+"text": "Law enforcement, patrol and gate control here depend on iron from outside, which the siege has cut off.",
+"why": "names gate control; DEFENCE walls none and 00979 says the town lies open",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/display/chainNeedShown.js",
+"line": 81,
+"fn": "chainNeedLine"
+}
+},
+{
+"id": "09824",
+"sev": "MED",
+"n": 1,
+"town": "r2s-recently_betrayed-town-1",
+"section": "Systems/Economics",
+"fold": "Grain storage and emergency reserves here depend on grain brought in.",
+"text": "Grain storage and emergency reserves here depend on grain brought in.",
+"why": "says grain stores depend on grain brought in; food ledger: grown 4910 of 4718 needed, imports cover None",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "00615",
+"sev": "MED",
+"n": 1,
+"town": "r2s-under_siege-city-0",
+"section": "Systems/Economics",
+"fold": "<N> grows about a # of what it eats, and ships bring in about a # of the rest.",
+"text": "Bellaurbs grows about a fifth of what it eats, and ships bring in about a third of the rest.",
+"why": "ships bring in a third of the rest; siege shut the water route and 'since the siege nothing has come in'",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "14219",
+"sev": "MED",
+"n": 1,
+"town": "r2r-city-5",
+"section": "Systems/Economics",
+"fold": "Needed, and not brought in: gold/silver ore.",
+"text": "Needed, and not brought in: gold/silver ore.",
+"why": "lists only gold/silver ore as needed and not brought in; 14609 says no iron or copper ore reaches the smelter either; TRADE imports no iron",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B29920",
+"sev": "MED",
+"n": 1,
+"town": "r2s-slave_revolt-hamlet-1",
+"section": "Systems/Resources",
+"fold": "✓ Salt trade",
+"text": "✓ Salt trade",
+"why": "checks Salt trade; LAND gap says desert_salt raw resource is not being processed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B28521",
+"sev": "MED",
+"n": 1,
+"town": "r2s-plague_onset-village-3",
+"section": "Systems/Resources",
+"fold": "foraging areashoneymedicinal herbsgemstone depositsluxuryiron depositsironmetalworkmarshlandspeatancient grove",
+"text": "foraging areashoneymedicinal herbsgemstone depositsluxuryiron depositsironmetalworkmarshlandspeatancient grove",
+"why": "lists iron and metalwork as produced; LAND gaps say iron ore not processed and HOUSES has no smith",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B19491",
+"sev": "MED",
+"n": 1,
+"town": "r2r-village-39",
+"section": "Systems/Economics",
+"fold": "The field grain and salted fish anchor the table; flour from the mill fills the winter.",
+"text": "The field grain and salted fish anchor the table; flour from the mill fills the winter.",
+"why": "salted fish anchor the table; LAND gap says the Salt works lacks its input (desert_salt) and TRADE makes no fish or salt",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B28788",
+"sev": "MED",
+"n": 1,
+"town": "r2r-village-57",
+"section": "Systems/Resources",
+"fold": "hot springs mineralmedicinal herbsmanaged foresttimberdefended passtrade accesscoal depositscoal",
+"text": "hot springs mineralmedicinal herbsmanaged foresttimberdefended passtrade accesscoal depositscoal",
+"why": "'defended pass'; DEFENCE is none on every line and STATE says Undefended",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B29905",
+"sev": "MED",
+"n": 1,
+"town": "r2s-wartime-village-1",
+"section": "Systems/Resources",
+"fold": "✓ Glass and gems✓ Salt trade",
+"text": "✓ Glass and gems✓ Salt trade",
+"why": "ticks 'Glass and gems' and 'Salt trade' as working; LAND gaps: glass sand and desert salt 'available but not being processed'; no glass or salt chain; no gem resource",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B28930",
+"sev": "MED",
+"n": 1,
+"town": "r2s-under_siege-city-2",
+"section": "Systems/Resources",
+"fold": "managed foresttimberancient grovemedicinal herbshoneycoal depositscoalprecious metalsluxurygemsstone quarrystoneforaging areas",
+"text": "managed foresttimberancient grovemedicinal herbshoneycoal depositscoalprecious metalsluxurygemsstone quarrystoneforaging areas",
+"why": "resource chips credit gems to the land; LAND gives Gemstone Deposits depleted, TRADE imports gemstones (local gem deposits exhausted)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B28405",
+"sev": "MED",
+"n": 1,
+"town": "r2s-slave_revolt-metropolis-3",
+"section": "Systems/Resources",
+"fold": "fishing groundsfishsaltdeep harbourmaritime access",
+"text": "fishing groundsfishsaltdeep harbourmaritime access",
+"why": "lists salt as a product; LAND gives Salt Flats depleted and TRADE notes local salt flats exhausted",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B28639",
+"sev": "MED",
+"n": 1,
+"town": "r2s-monster_pressure-metropolis-2",
+"section": "Systems/Economics",
+"fold": "grainflourgems",
+"text": "grainflourgems",
+"why": "lists gems as produced; LAND gives Gemstone Deposits depleted",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B28606",
+"sev": "MED",
+"n": 1,
+"town": "r2s-monster_pressure-metropolis-2",
+"section": "Systems/Resources",
+"fold": "grain fieldsgrainflourcoal depositscoalprecious metalsluxurygems",
+"text": "grain fieldsgrainflourcoal depositscoalprecious metalsluxurygems",
+"why": "lists gems as produced; LAND gives Gemstone Deposits depleted",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B28489",
+"sev": "MED",
+"n": 1,
+"town": "r2s-slave_revolt-metropolis-2",
+"section": "Systems/Economics",
+"fold": "flourprocessed textilesmedicinal herbshoneyironmetalwork",
+"text": "flourprocessed textilesmedicinal herbshoneyironmetalwork",
+"why": "lists honey and processed textiles as products; LAND gives Wild foraging areas absent and no grazing resource at all, Beekeeping chain vulnerable",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B29208",
+"sev": "MED",
+"n": 1,
+"town": "r2s-slave_revolt-metropolis-2",
+"section": "Systems/Resources",
+"fold": "river millsflourprocessed textilesancient grovemedicinal herbshoneyiron depositsironmetalwork",
+"text": "river millsflourprocessed textilesancient grovemedicinal herbshoneyiron depositsironmetalwork",
+"why": "lists honey as produced; LAND gives Wild foraging areas absent, Beekeeping & Wax vulnerable",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B29206",
+"sev": "MED",
+"n": 1,
+"town": "r2s-mass_migration-metropolis-0",
+"section": "Systems/Resources",
+"fold": "river millsflourprocessed textiles",
+"text": "river millsflourprocessed textiles",
+"why": "lists processed textiles as produced; TRADE made-here omits them, grazing land depleted, Textiles & Cloth impaired, wool imported",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B29755",
+"sev": "MED",
+"n": 1,
+"town": "r2r-metropolis-51",
+"section": "Systems/Economics",
+"fold": "timbermedicinal herbshoneylivestockwooldairyanimal hidesgrainflour",
+"text": "timbermedicinal herbshoneylivestockwooldairyanimal hidesgrainflour",
+"why": "lists honey and medicinal herbs as products; LAND gives Foraging areas and Wild foraging areas absent, Beekeeping vulnerable",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B28935",
+"sev": "MED",
+"n": 1,
+"town": "r2r-metropolis-51",
+"section": "Systems/Resources",
+"fold": "managed foresttimberancient grovemedicinal herbshoneygrazing landlivestockwooldairyanimal hidesgrain fieldsgrainflour",
+"text": "managed foresttimberancient grovemedicinal herbshoneygrazing landlivestockwooldairyanimal hidesgrain fieldsgrainflour",
+"why": "lists honey as produced; LAND gives Wild foraging areas absent, Beekeeping & Wax vulnerable",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B28634",
+"sev": "MED",
+"n": 1,
+"town": "r2s-succession_void-metropolis-1",
+"section": "Systems/Economics",
+"fold": "graindatestimber",
+"text": "graindatestimber",
+"why": "lists grain as produced; LAND has no grain fields (Brewing and Food Processing chains: Grain fields absent); FOOD Pressured with 54% imported",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B28273",
+"sev": "MED",
+"n": 1,
+"town": "r2s-succession_void-metropolis-1",
+"section": "Systems/Resources",
+"fold": "date palmsgraindatesmanaged foresttimber",
+"text": "date palmsgraindatesmanaged foresttimber",
+"why": "lists grain as produced; LAND has no grain fields (Grain fields absent in Brewing and Food Processing chains)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B29368",
+"sev": "MED",
+"n": 1,
+"town": "r2s-mass_migration-metropolis-3",
+"section": "Systems/Economics",
+"fold": "stonepeathoneymedicinal herbs",
+"text": "stonepeathoneymedicinal herbs",
+"why": "lists peat, honey and medicinal herbs as produced; LAND gives Coal or Peat depleted, Foraging areas absent; Fuel chain vulnerable",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B29367",
+"sev": "MED",
+"n": 1,
+"town": "r2s-mass_migration-metropolis-3",
+"section": "Systems/Resources",
+"fold": "stone quarrystonemarshlandspeathoneymedicinal herbsgemstone depositsluxury",
+"text": "stone quarrystonemarshlandspeathoneymedicinal herbsgemstone depositsluxury",
+"why": "lists honey and medicinal herbs as produced; LAND has no foraging resource (Foraging areas absent) and Ancient Grove depleted",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B29743",
+"sev": "MED",
+"n": 1,
+"town": "r2r-metropolis-38",
+"section": "Systems/Economics",
+"fold": "timbergrainflourgems",
+"text": "timbergrainflourgems",
+"why": "lists gems as produced; LAND has no Gemstone Deposits (only Precious Metal Veins)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B29109",
+"sev": "MED",
+"n": 1,
+"town": "r2r-metropolis-38",
+"section": "Systems/Resources",
+"fold": "mountain timbertimbergrain fieldsgrainflourdefended passtrade accessprecious metalsluxurygems",
+"text": "mountain timbertimbergrain fieldsgrainflourdefended passtrade accessprecious metalsluxurygems",
+"why": "lists gems as produced; LAND has no Gemstone Deposits (only Precious Metal Veins)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B29151",
+"sev": "MED",
+"n": 1,
+"town": "r2r-metropolis-9",
+"section": "Systems/Resources",
+"fold": "precious metalsluxurygemshot springsmedicinal herbs",
+"text": "precious metalsluxurygemshot springsmedicinal herbs",
+"why": "lists gems as produced; LAND has no Gemstone Deposits (precious metal veins and hot springs only)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B28477",
+"sev": "MED",
+"n": 1,
+"town": "r2r-metropolis-22",
+"section": "Systems/Economics",
+"fold": "flourmedicinal herbsironmetalworkfishsalt",
+"text": "flourmedicinal herbsironmetalworkfishsalt",
+"why": "lists salt as produced; HOUSES has no Salt works and LAND has no salt resource at all",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B29230",
+"sev": "MED",
+"n": 1,
+"town": "r2r-metropolis-22",
+"section": "Systems/Resources",
+"fold": "river millsflourprocessed textileshot springsmedicinal herbsiron depositsironmetalworkriver fishfishsalt",
+"text": "river millsflourprocessed textileshot springsmedicinal herbsiron depositsironmetalworkriver fishfishsalt",
+"why": "lists salt and processed textiles as produced; no Salt works in HOUSES, no salt resource, grazing land depleted and Textiles chain impaired",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B29171",
+"sev": "MED",
+"n": 1,
+"town": "r2r-metropolis-35",
+"section": "Systems/Resources",
+"fold": "river fishfishsaltcrossroads positiontrade accessgemstone depositsluxury",
+"text": "river fishfishsaltcrossroads positiontrade accessgemstone depositsluxury",
+"why": "lists salt as produced; HOUSES has no Salt works and LAND has no salt resource at all",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B28991",
+"sev": "MED",
+"n": 1,
+"town": "r2r-metropolis-48",
+"section": "Systems/Economics",
+"fold": "medicinal herbsfishsalt",
+"text": "medicinal herbsfishsalt",
+"why": "lists salt as produced; HOUSES has no Salt works and LAND gives Salt Flats depleted (salt imported); medicinal herbs have no foraging resource",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B28283",
+"sev": "MED",
+"n": 1,
+"town": "r2r-metropolis-48",
+"section": "Systems/Resources",
+"fold": "deep harbourmaritime accessmagical nodemedicinal herbsfishing groundsfishsalt",
+"text": "deep harbourmaritime accessmagical nodemedicinal herbsfishing groundsfishsalt",
+"why": "lists salt as produced; HOUSES has no Salt works and LAND gives Salt Flats depleted",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B28182",
+"sev": "MED",
+"n": 1,
+"town": "r2r-metropolis-40",
+"section": "Systems/Resources",
+"fold": "ancient grovemedicinal herbshoneyprecious metalsluxurygemsforaging areas",
+"text": "ancient grovemedicinal herbshoneyprecious metalsluxurygemsforaging areas",
+"why": "lists gems as produced; LAND has no Gemstone Deposits (only Precious Metal Veins, Ancient Grove, foraging)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B04742",
+"sev": "MED",
+"n": 1,
+"town": "r2r-metropolis-56",
+"section": "Systems/Economics",
+"fold": "City defence, armed response and riot control here depend on iron and grain brought in by magic.",
+"text": "City defence, armed response and riot control here depend on iron and grain brought in by magic.",
+"why": "says iron and grain are brought in by magic; FOOD gives by magic 1%, brought in 53% by imports",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B28581",
+"sev": "MED",
+"n": 1,
+"town": "r2r-metropolis-19",
+"section": "Systems/Resources",
+"fold": "glass sandglassdesert saltsaltancient grovemedicinal herbshoneygemstone depositsluxurymarshlandspeat",
+"text": "glass sandglassdesert saltsaltancient grovemedicinal herbshoneygemstone depositsluxurymarshlandspeat",
+"why": "lists salt as produced; LAND gaps say desert salt is a raw resource available but not being processed and HOUSES has no Salt works; honey with Wild foraging absent",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B28461",
+"sev": "MED",
+"n": 1,
+"town": "r2r-metropolis-15",
+"section": "Systems/Economics",
+"fold": "fishsaltmedicinal herbshoneytimberlivestockwooldairyanimal hidescoal",
+"text": "fishsaltmedicinal herbshoneytimberlivestockwooldairyanimal hidescoal",
+"why": "lists salt as produced; HOUSES has no Salt works and LAND has no salt resource; honey/herbs with Wild Foraging depleted",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B29168",
+"sev": "MED",
+"n": 1,
+"town": "r2r-metropolis-15",
+"section": "Systems/Resources",
+"fold": "river fishfishsaltancient grovemedicinal herbshoneymanaged foresttimbergrazing landlivestockwooldairyanimal hidescoal depositscoal",
+"text": "river fishfishsaltancient grovemedicinal herbshoneymanaged foresttimbergrazing landlivestockwooldairyanimal hidescoal depositscoal",
+"why": "lists salt as produced; HOUSES has no Salt works and LAND has no salt resource at all",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B28998",
+"sev": "MED",
+"n": 1,
+"town": "r2r-metropolis-41",
+"section": "Systems/Economics",
+"fold": "medicinal herbshoneygemsgrainflour",
+"text": "medicinal herbshoneygemsgrainflour",
+"why": "lists gems as produced; LAND has no Gemstone Deposits (only Precious Metal Veins, Ancient Grove); honey with Wild foraging absent",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B28183",
+"sev": "MED",
+"n": 1,
+"town": "r2r-metropolis-41",
+"section": "Systems/Resources",
+"fold": "ancient grovemedicinal herbshoneyprecious metalsluxurygemsgrain fieldsgrainflour",
+"text": "ancient grovemedicinal herbshoneyprecious metalsluxurygemsgrain fieldsgrainflour",
+"why": "lists gems as produced; LAND has no Gemstone Deposits (only Precious Metal Veins, Ancient Grove, grain)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+}
+]

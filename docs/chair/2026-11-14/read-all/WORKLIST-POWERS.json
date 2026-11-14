@@ -109,6 +109,25 @@
 }
 },
 {
+"id": "B10797",
+"sev": "MED",
+"n": 93,
+"town": "r2s-famine-city-1",
+"section": "World/NPCs",
+"fold": "How they deal Talks while working; shows how a pot is thrown and lets visitors try.",
+"text": "How they deal Talks while working; shows how a pot is thrown and lets visitors try.",
+"why": "potter shows visitors how a pot is thrown; LAND gaps say the Potter lacks access to clay",
+"kinds": [
+"STATE",
+"TAG"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 198,
+"fn": "ROWS"
+}
+},
+{
 "id": "11315",
 "sev": "MED",
 "n": 89,
@@ -123,6 +142,42 @@
 "writer": {
 "file": "src/data/people/titleSecretsPresentations.js",
 "line": 172,
+"fn": "ROWS"
+}
+},
+{
+"id": "B10668",
+"sev": "MED",
+"n": 89,
+"town": "r2s-occupied-town-0",
+"section": "World/NPCs",
+"fold": "How they deal Sells by the # and the cart; quick to quote and slow to deliver.",
+"text": "How they deal Sells by the thousand and the cart; quick to quote and slow to deliver.",
+"why": "brickmaker sells bricks by the thousand and the cart; LAND gaps: Brickmaker lacks access to clay, and 'No clay reaches the brickmaker'",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 228,
+"fn": "ROWS"
+}
+},
+{
+"id": "B16523",
+"sev": "MED",
+"n": 88,
+"town": "r2r-city-44",
+"section": "World/NPCs",
+"fold": "Secret: Sells yesterday's fish as this morning's, washed and packed in fresh ice, and has made people sick more than once",
+"text": "Secret: Sells yesterday's fish as this morning's, washed and packed in fresh ice, and has made people sick more than once",
+"why": "fishmonger sells yesterday's fish packed in ice as fresh; FOOD failed source is fish, so a fish trade at ordinary volume is off",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 130,
 "fn": "ROWS"
 }
 },
@@ -142,6 +197,24 @@
 "file": "src/generators/power/factionStanding.js",
 "line": 229,
 "fn": "annotateFactionStanding"
+}
+},
+{
+"id": "B16083",
+"sev": "MED",
+"n": 85,
+"town": "r2s-famine-town-1",
+"section": "World/NPCs",
+"fold": "Secret: Has been digging clay from land that belongs to someone else and paying nothing for it",
+"text": "Secret: Has been digging clay from land that belongs to someone else and paying nothing for it",
+"why": "secret has the potter digging clay now; LAND gap and 13747 say no clay reaches the potter",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 192,
+"fn": "ROWS"
 }
 },
 {
@@ -217,6 +290,24 @@
 }
 },
 {
+"id": "B16204",
+"sev": "MED",
+"n": 71,
+"town": "r2s-famine-city-3",
+"section": "World/NPCs",
+"fold": "Secret: Has been taking children to tread the clay for a few coppers a day, and # of them was hurt badly",
+"text": "Secret: Has been taking children to tread the clay for a few coppers a day, and one of them was hurt badly",
+"why": "secret has someone treading clay for pay now; LAND gaps say Brickmaker and Potter both lack access to clay",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 222,
+"fn": "ROWS"
+}
+},
+{
 "id": "11176",
 "sev": "MED",
 "n": 68,
@@ -253,6 +344,24 @@
 }
 },
 {
+"id": "17190",
+"sev": "MED",
+"n": 61,
+"town": "r2s-plague_onset-city-0",
+"section": "World/NPCs",
+"fold": "Secret: Has let the walls go unrepaired and pocketed the money that was granted for the work",
+"text": "Secret: Has let the walls go unrepaired and pocketed the money that was granted for the work",
+"why": "walls left unrepaired, money pocketed; another line says fresh repairs show on the walls and gates",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 582,
+"fn": "ROWS"
+}
+},
+{
 "id": "11202",
 "sev": "MED",
 "n": 60,
@@ -271,6 +380,24 @@
 }
 },
 {
+"id": "B15974",
+"sev": "MED",
+"n": 58,
+"town": "r2s-occupied-metropolis-2",
+"section": "World/NPCs",
+"fold": "Secret: Bought the vineyard by lending its old owner money at a rate that could never be paid back",
+"text": "Secret: Bought the vineyard by lending its old owner money at a rate that could never be paid back",
+"why": "vintner bought a vineyard by lending to its owner; LAND gaps: Vintner exists but lacks access to grapes, and no vineyard or grape resource is listed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 659,
+"fn": "ROWS"
+}
+},
+{
 "id": "17122",
 "sev": "MED",
 "n": 57,
@@ -285,6 +412,42 @@
 "writer": {
 "file": "src/data/people/titleSecretsPresentations.js",
 "line": 310,
+"fn": "ROWS"
+}
+},
+{
+"id": "B02464",
+"sev": "MED",
+"n": 57,
+"town": "r2s-infiltrated-thorp-3",
+"section": "Summary/Overview",
+"fold": "A dispute over grazing rights and water access has run for # seasons, and the families on each side no longer speak to # another.",
+"text": "A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.",
+"why": "a grazing and water dispute between families 'on each side'; QUARRELS none; thorp of 6, no grazing resource",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/governanceNarrative.js",
+"line": 509,
+"fn": "deriveBaselineConflict"
+}
+},
+{
+"id": "B10758",
+"sev": "MED",
+"n": 56,
+"town": "r2s-famine-metropolis-1",
+"section": "World/NPCs",
+"fold": "How they deal Talks about the common wines freely; the rare ones are for buyers they know.",
+"text": "How they deal Talks about the common wines freely; the rare ones are for buyers they know.",
+"why": "vintner talks of common and rare wines; GAPS: Vintner lacks access to grapes, and grapes are needed and not brought in",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 667,
 "fn": "ROWS"
 }
 },
@@ -343,6 +506,24 @@
 }
 },
 {
+"id": "B10693",
+"sev": "MED",
+"n": 52,
+"town": "r2r-metropolis-14",
+"section": "World/NPCs",
+"fold": "How they deal Sells stone by the block and the cart; wants # paid before cutting begins.",
+"text": "How they deal Sells stone by the block and the cart; wants half paid before cutting begins.",
+"why": "quarry master sells stone by block and cart; Stone quarry is depleted, local quarry depleted per TRADE",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 858,
+"fn": "ROWS"
+}
+},
+{
 "id": "07269",
 "sev": "MED",
 "n": 51,
@@ -377,6 +558,24 @@
 "file": "src/generators/power/rulingStructure.js",
 "line": 627,
 "fn": "generatePowerStructure"
+}
+},
+{
+"id": "B10687",
+"sev": "MED",
+"n": 47,
+"town": "r2s-plague_onset-village-2",
+"section": "World/NPCs",
+"fold": "How they deal Sells leather to anyone; cash only.",
+"text": "How they deal Sells leather to anyone; cash only.",
+"why": "tanner 'sells leather to anyone'; LAND gaps: Tannery exists but lacks access to livestock and animal hides, so it has no input",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 920,
+"fn": "ROWS"
 }
 },
 {
@@ -417,6 +616,42 @@
 }
 },
 {
+"id": "B10676",
+"sev": "MED",
+"n": 40,
+"town": "r2s-occupied-metropolis-1",
+"section": "World/NPCs",
+"fold": "How they deal Sells charcoal by the sack to anyone who can carry it away.",
+"text": "How they deal Sells charcoal by the sack to anyone who can carry it away.",
+"why": "charcoal sold by the sack; LAND gaps: Charcoal burner lacks access to mountain_timber, and 13831 says no timber reaches it",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 680,
+"fn": "ROWS"
+}
+},
+{
+"id": "B10713",
+"sev": "MED",
+"n": 39,
+"town": "r2r-town-48",
+"section": "World/NPCs",
+"fold": "How they deal Shows off the training yard and invites you to the next games.",
+"text": "How they deal Shows off the training yard and invites you to the next games.",
+"why": "tag has S,O,P: inviting you to the next games presumes ordinary gatherings and arrivals, false under siege, occupation or plague",
+"kinds": [
+"TAG"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 1042,
+"fn": "ROWS"
+}
+},
+{
 "id": "00339",
 "sev": "MED",
 "n": 37,
@@ -453,6 +688,24 @@
 }
 },
 {
+"id": "B19695",
+"sev": "MED",
+"n": 37,
+"town": "r2r-hamlet-5",
+"section": "Systems/Power",
+"fold": "The hall asks for the commander's agreement instead of giving orders, and less and less is decided without it.",
+"text": "The hall asks for the commander's agreement instead of giving orders, and less and less is decided without it.",
+"why": "names a commander whose agreement the hall seeks; 29842 says the War Council has no one captain and PEOPLE lists no commander",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 409,
+"fn": "computeFactionRelationships"
+}
+},
+{
 "id": "11289",
 "sev": "MED",
 "n": 36,
@@ -467,6 +720,24 @@
 "writer": {
 "file": "src/data/people/titleSecretsPresentations.js",
 "line": 873,
+"fn": "ROWS"
+}
+},
+{
+"id": "B10741",
+"sev": "MED",
+"n": 36,
+"town": "r2s-under_siege-metropolis-2",
+"section": "World/NPCs",
+"fold": "How they deal Takes letters at the posted rate; urgent ones cost more and leave sooner.",
+"text": "How they deal Takes letters at the posted rate; urgent ones cost more and leave sooner.",
+"why": "takes letters at the posted rate that 'leave sooner'; tag has S: under siege no post leaves by road",
+"kinds": [
+"TAG"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 1128,
 "fn": "ROWS"
 }
 },
@@ -577,6 +848,42 @@
 "file": "src/generators/power/governingStressVignettes.js",
 "line": 49,
 "fn": "buildWartimeNarrative"
+}
+},
+{
+"id": "B01040",
+"sev": "MED",
+"n": 27,
+"town": "r2s-famine-metropolis-2",
+"section": "Summary/Overview",
+"fold": "<N> is praised in public for speaking out against crime.",
+"text": "Maeve MacGillivray is praised in public for speaking out against crime.",
+"why": "has Maeve MacGillivray praised for speaking out against crime; PEOPLE gives her as the potter, who holds no public office",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/handlerTieLines.js",
+"line": 94,
+"fn": "HANDLER_TIE_LINES"
+}
+},
+{
+"id": "B00562",
+"sev": "MED",
+"n": 27,
+"town": "r2s-famine-metropolis-2",
+"section": "Summary/Overview",
+"fold": "<N> finds it useful, and expects <N> to remember who chooses which criminals are caught.",
+"text": "Cara Forbes finds it useful, and expects Maeve MacGillivray to remember who chooses which criminals are caught.",
+"why": "says Maeve MacGillivray remembers who chooses which criminals are caught; PEOPLE has her as the potter, with no part in policing",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/handlerTieLines.js",
+"line": 94,
+"fn": "HANDLER_TIE_LINES"
 }
 },
 {
@@ -743,6 +1050,60 @@
 }
 },
 {
+"id": "B14921",
+"sev": "MED",
+"n": 20,
+"town": "r2r-thorp-23",
+"section": "Summary/Plot Hooks",
+"fold": "Popular Uprising",
+"text": "Popular Uprising",
+"why": "popular uprising/rebels; PAST lists Migration, Succession Crisis, Religious Conflict, no uprising",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/factionProfile.js",
+"line": 158,
+"fn": "ARCHETYPE_TEMPLATES"
+}
+},
+{
+"id": "B14924",
+"sev": "MED",
+"n": 20,
+"town": "r2r-thorp-23",
+"section": "World/History",
+"fold": "Popular uprising",
+"text": "Popular uprising",
+"why": "popular uprising/rebels; PAST lists Migration, Succession Crisis, Religious Conflict, no uprising",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/factionProfile.js",
+"line": 158,
+"fn": "ARCHETYPE_TEMPLATES"
+}
+},
+{
+"id": "B00397",
+"sev": "MED",
+"n": 20,
+"town": "r2s-politically_fractured-hamlet-3",
+"section": "Summary/Overview",
+"fold": "<N> and <N> are rivals in the same line of work.",
+"text": "Eirenaion Chrysoberges and Kallistrate Chomatenos are rivals in the same line of work.",
+"why": "rivals in same line of work; PEOPLE: one is the carpenter, the other the bloc's speaker",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/settlementNarrative.js",
+"line": 48,
+"fn": "TIE_GLOSS"
+}
+},
+{
 "id": "02622",
 "sev": "MED",
 "n": 18,
@@ -848,6 +1209,60 @@
 "file": "src/generators/power/governanceNarrative.js",
 "line": 464,
 "fn": "deriveBaselineConflict"
+}
+},
+{
+"id": "B16114",
+"sev": "MED",
+"n": 16,
+"town": "r2r-metropolis-14",
+"section": "World/NPCs",
+"fold": "Secret: Has been keeping back ore from the tally and selling it to a smelter elsewhere",
+"text": "Secret: Has been keeping back ore from the tally and selling it to a smelter elsewhere",
+"why": "mine captain selling ore to a smelter elsewhere; iron ore and coal depleted, siege shuts gates (imports cover None)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 1017,
+"fn": "ROWS"
+}
+},
+{
+"id": "B10584",
+"sev": "MED",
+"n": 16,
+"town": "r2s-under_siege-hamlet-3",
+"section": "World/NPCs",
+"fold": "How they deal Offers a cup and talk of the herd and the weather.",
+"text": "How they deal Offers a cup and talk of the herd and the weather.",
+"why": "dairy farmer's herd: LAND gap says Dairy farmer lacks access to livestock",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 1623,
+"fn": "ROWS"
+}
+},
+{
+"id": "B10633",
+"sev": "MED",
+"n": 15,
+"town": "r2s-under_siege-hamlet-1",
+"section": "World/NPCs",
+"fold": "How they deal Polite enough; keeps you away from the byre.",
+"text": "How they deal Polite enough; keeps you away from the byre.",
+"why": "'keeps you away from the byre': Dairy farmer has no livestock per LAND gap",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 1627,
+"fn": "ROWS"
 }
 },
 {
@@ -977,6 +1392,60 @@
 }
 },
 {
+"id": "B00382",
+"sev": "MED",
+"n": 13,
+"town": "r2s-occupied-town-0",
+"section": "Summary/Overview",
+"fold": "<N> and <N> are allies of convenience.",
+"text": "Licinia Strabo and Decimia Tacitus are allies of convenience.",
+"why": "occupying governor and mine captain/mayor 'allies of convenience'; header has Town Council and Occupation Authority competitive, escalating, legitimacy crisis",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/settlementNarrative.js",
+"line": 51,
+"fn": "TIE_GLOSS"
+}
+},
+{
+"id": "B13714",
+"sev": "MED",
+"n": 13,
+"town": "r2s-succession_void-thorp-2",
+"section": "Systems/Power",
+"fold": "No # has stepped forward to take that role.",
+"text": "No one has stepped forward to take that role.",
+"why": "'no one has stepped forward'; PEOPLE lists the household elder in office and another sentence names her Acting Elder",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/power/governanceNarrative.js",
+"line": 623,
+"fn": "buildStressNarratives"
+}
+},
+{
+"id": "B21342",
+"sev": "MED",
+"n": 13,
+"town": "r2s-insurgency-thorp-3",
+"section": "Systems/Power",
+"fold": "The trouble is inside the government, not in the streets.",
+"text": "The trouble is inside the government, not in the streets.",
+"why": "trouble 'not in the streets'; safety Dangerous - Insurgency, households openly defy the government, and a thorp of 16 has no streets",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/power/governingStressVignettes.js",
+"line": 24,
+"fn": "buildInsurgencyNarrative"
+}
+},
+{
 "id": "03925",
 "sev": "MED",
 "n": 12,
@@ -992,6 +1461,24 @@
 "file": "src/generators/power/rulingStructure.js",
 "line": 631,
 "fn": "generatePowerStructure"
+}
+},
+{
+"id": "B01698",
+"sev": "MED",
+"n": 12,
+"town": "r2s-famine-hamlet-0",
+"section": "Systems/Power",
+"fold": "<N>, the boat-headman and Elder, holds its seat.",
+"text": "Piso Caesar, the boat-headman and Elder, holds its seat.",
+"why": "seat held by 'Elder'; PEOPLE gives Piso Caesar only as boat-headman @ Fisher's landing; no elder office in roster",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/governanceAccount.js",
+"line": 286,
+"fn": "governanceAccountOf"
 }
 },
 {
@@ -1028,6 +1515,24 @@
 "file": "src/generators/power/rulingStructure.js",
 "line": 455,
 "fn": "generatePowerStructure"
+}
+},
+{
+"id": "B11535",
+"sev": "MED",
+"n": 10,
+"town": "r2s-slave_revolt-thorp-2",
+"section": "Systems/Power",
+"fold": "Its seat is held by <N>, the boat-headman and Elder.",
+"text": "Its seat is held by Tianmei Wu, the boat-headman and Elder.",
+"why": "title Elder for Tianmei Wu; roster gives boat-headman only and HOUSES has no elder house",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/governanceAccount.js",
+"line": 288,
+"fn": "governanceAccountOf"
 }
 },
 {
@@ -1121,6 +1626,42 @@
 }
 },
 {
+"id": "B16106",
+"sev": "MED",
+"n": 9,
+"town": "r2s-under_siege-hamlet-3",
+"section": "World/NPCs",
+"fold": "Secret: Has been grazing the herd on a neighbour's land at night",
+"text": "Secret: Has been grazing the herd on a neighbour's land at night",
+"why": "dairy farmer's herd: LAND gap says Dairy farmer lacks access to livestock",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 1617,
+"fn": "ROWS"
+}
+},
+{
+"id": "B16648",
+"sev": "MED",
+"n": 9,
+"town": "r2s-indebted-hamlet-2",
+"section": "World/NPCs",
+"fold": "Secret: Waters the milk before it goes to market and has done so for years",
+"text": "Secret: Waters the milk before it goes to market and has done so for years",
+"why": "waters the milk before market; LAND gap says Dairy farmer lacks access to livestock, and HOUSES has no market",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 1615,
+"fn": "ROWS"
+}
+},
+{
 "id": "10164",
 "sev": "MED",
 "n": 8,
@@ -1154,6 +1695,24 @@
 "file": "src/generators/power/rulingStructure.js",
 "line": 349,
 "fn": "generatePowerStructure"
+}
+},
+{
+"id": "B10689",
+"sev": "MED",
+"n": 8,
+"town": "r2s-religious_conversion-hamlet-1",
+"section": "World/NPCs",
+"fold": "How they deal Sells milk, butter and cheese at the posted price.",
+"text": "How they deal Sells milk, butter and cheese at the posted price.",
+"why": "dairy farmer sells milk, butter and cheese; LAND gap says Dairy farmer lacks access to livestock",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 1625,
+"fn": "ROWS"
 }
 },
 {
@@ -1207,6 +1766,96 @@
 "writer": {
 "file": "src/generators/power/governanceNarrative.js",
 "line": 424,
+"fn": "deriveBaselineConflict"
+}
+},
+{
+"id": "B11586",
+"sev": "MED",
+"n": 7,
+"town": "r2s-famine-town-0",
+"section": "Systems/Power",
+"fold": "Its seat is held by <N>, the senior guild master and Alderman.",
+"text": "Its seat is held by Fastrada Wolf, the senior guild master and Alderman.",
+"why": "gives Fastrada Wolf (f) the title Alderman; PEOPLE lists her only as senior guild master of Merchant guilds",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/governanceAccount.js",
+"line": 288,
+"fn": "governanceAccountOf"
+}
+},
+{
+"id": "B11562",
+"sev": "MED",
+"n": 7,
+"town": "r2r-thorp-25",
+"section": "Systems/Power",
+"fold": "Its seat is held by <N>, the head shepherd and Elder.",
+"text": "Its seat is held by Xoc Caan, the head shepherd and Elder.",
+"why": "title Elder for Xoc Caan; roster gives head shepherd only and HOUSES has no Household elder",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/governanceAccount.js",
+"line": 288,
+"fn": "governanceAccountOf"
+}
+},
+{
+"id": "B19612",
+"sev": "MED",
+"n": 7,
+"town": "r2r-city-18",
+"section": "Summary/Overview",
+"fold": "The garrison is mobilizing.",
+"text": "The garrison is mobilizing.",
+"why": "'The garrison is mobilizing' but CRISIS none, safety Very Safe, no event of mobilisation recorded; claims an active alert the header does not hold",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/governanceNarrative.js",
+"line": 424,
+"fn": "deriveBaselineConflict"
+}
+},
+{
+"id": "B16543",
+"sev": "MED",
+"n": 6,
+"town": "r2s-politically_fractured-hamlet-0",
+"section": "World/NPCs",
+"fold": "Secret: Sold butter from a sick cow and a child fell ill",
+"text": "Secret: Sold butter from a sick cow and a child fell ill",
+"why": "sold butter from a sick cow; LAND gap says Dairy farmer lacks access to livestock",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 1619,
+"fn": "ROWS"
+}
+},
+{
+"id": "B02757",
+"sev": "MED",
+"n": 6,
+"town": "r2r-hamlet-51",
+"section": "Summary/Overview",
+"fold": "A monster incursion last season destroyed outlying farms.",
+"text": "A monster incursion last season destroyed outlying farms.",
+"why": "incursion last season destroyed outlying farms; STATE safety is Safe, food surplus 15%, PAST records no monster incursion",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/governanceNarrative.js",
+"line": 496,
 "fn": "deriveBaselineConflict"
 }
 },
@@ -1279,6 +1928,96 @@
 "writer": {
 "file": "src/generators/power/governanceNarrative.js",
 "line": 434,
+"fn": "deriveBaselineConflict"
+}
+},
+{
+"id": "B12633",
+"sev": "MED",
+"n": 5,
+"town": "r2s-famine-city-2",
+"section": "Systems/Power",
+"fold": "Merchant oligarchy keeps order and collects the taxes; Religious Authorities tells people that both are right and ordained.",
+"text": "Merchant oligarchy keeps order and collects the taxes; Religious Authorities tells people that both are right and ordained.",
+"why": "has Religious Authorities endorsing Merchant oligarchy's rule; QUARRELS has them in a high quarrel over public money",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 475,
+"fn": "computeFactionRelationships"
+}
+},
+{
+"id": "B10688",
+"sev": "MED",
+"n": 5,
+"town": "r2s-under_siege-hamlet-1",
+"section": "World/NPCs",
+"fold": "How they deal Sells malt to anyone who pays; brewers get a better price.",
+"text": "How they deal Sells malt to anyone who pays; brewers get a better price.",
+"why": "maltster 'sells malt to anyone who pays': under siege nobody arrives; FOOD Deficit, no grain to malt",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 1970,
+"fn": "ROWS"
+}
+},
+{
+"id": "B29842",
+"sev": "MED",
+"n": 5,
+"town": "r2r-hamlet-5",
+"section": "Systems/Power",
+"fold": "↳It has no # captain: the able-bodied householders sit on it by turns and decide together.",
+"text": "↳It has no one captain: the able-bodied householders sit on it by turns and decide together.",
+"why": "War Council sat by householders in turns; 05914 calls it a crown-appointed emergency body",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/stressPowerFaces.js",
+"line": 40,
+"fn": "STRESS_POWER_FACES"
+}
+},
+{
+"id": "B14785",
+"sev": "MED",
+"n": 5,
+"town": "r2s-under_siege-town-1",
+"section": "Systems/Power",
+"fold": "People take their marriages, inheritances and hard times to Religious Authorities, not to Guild Council, and the # keep quarrelling over who decides what.",
+"text": "People take their marriages, inheritances and hard times to Religious Authorities, not to Guild Council, and the two keep quarrelling over who decides what.",
+"why": "says the two powers keep quarrelling; QUARRELS is none, relation is tense but stable",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 472,
+"fn": "computeFactionRelationships"
+}
+},
+{
+"id": "B00338",
+"sev": "MED",
+"n": 5,
+"town": "r2r-town-46",
+"section": "Summary/Overview",
+"fold": "# rival guilds are contesting control of the main trade route.",
+"text": "Two rival guilds are contesting control of the main trade route.",
+"why": "'Two rival guilds are contesting control of the main trade route'; QUARRELS: none, CRISIS none, stability Stable, Approved",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/governanceNarrative.js",
+"line": 487,
 "fn": "deriveBaselineConflict"
 }
 },
@@ -1424,6 +2163,60 @@
 "file": "src/generators/factionDynamics.js",
 "line": 406,
 "fn": "computeFactionRelationships"
+}
+},
+{
+"id": "B11564",
+"sev": "MED",
+"n": 4,
+"town": "r2s-politically_fractured-thorp-1",
+"section": "Systems/Power",
+"fold": "Its seat is held by <N>, the head shepherd and Household Elder.",
+"text": "Its seat is held by Citlali Caan, the head shepherd and Household Elder.",
+"why": "gives Citlali Caan the title Household Elder; roster gives head shepherd only and HOUSES has no Household elder",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/governanceAccount.js",
+"line": 288,
+"fn": "governanceAccountOf"
+}
+},
+{
+"id": "B00215",
+"sev": "MED",
+"n": 4,
+"town": "r2s-religious_conversion-village-3",
+"section": "Systems/Power",
+"fold": "# of # rival sides claiming the legitimate succession: legal standing of their records is contested.",
+"text": "One of two rival sides claiming the legitimate succession: legal standing of their records is contested.",
+"why": "'two rival sides claiming the legitimate succession' in present tense; crisis is Religious Conversion; the only Succession Crisis is 30 years past, minor",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/stressFactions.js",
+"line": 370,
+"fn": "applyStressEventFactions"
+}
+},
+{
+"id": "B09621",
+"sev": "MED",
+"n": 4,
+"town": "r2s-recently_betrayed-town-0",
+"section": "Systems/Power",
+"fold": "Guild Council and Thieves' Guild leave each other alone.",
+"text": "Guild Council and Thieves' Guild leave each other alone.",
+"why": "'leave each other alone' while QUARRELS has Guild Council vs Thieves' Guild an open moderate quarrel and relation tense",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 227,
+"fn": "CAPTURE_LINES"
 }
 },
 {
@@ -1625,6 +2418,115 @@
 }
 },
 {
+"id": "B12634",
+"sev": "MED",
+"n": 3,
+"town": "r2s-famine-city-2",
+"section": "Systems/Power",
+"fold": "Merchant oligarchy leaves Thieves' Guild alone because stamping it out would cost more than it saves.",
+"text": "Merchant oligarchy leaves Thieves' Guild alone because stamping it out would cost more than it saves.",
+"why": "says Merchant oligarchy tolerates Thieves' Guild; QUARRELS relation is tense, escalating",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 259,
+"fn": "govCriminalRelation"
+}
+},
+{
+"id": "B04763",
+"sev": "MED",
+"n": 3,
+"town": "r2s-famine-metropolis-2",
+"section": "Systems/Power",
+"fold": "City-State Council leaves Thieves' Guild alone because stamping it out would cost more than it saves.",
+"text": "City-State Council leaves Thieves' Guild alone because stamping it out would cost more than it saves.",
+"why": "says City-State Council leaves Thieves' Guild alone; QUARRELS relation is tense, escalating",
+"kinds": [
+"PAIR",
+"STATE"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 259,
+"fn": "govCriminalRelation"
+}
+},
+{
+"id": "B01914",
+"sev": "MED",
+"n": 3,
+"town": "r2s-insurgency-thorp-1",
+"section": "Systems/Power",
+"fold": "<N>, the head shepherd and Household Elder, holds its seat.",
+"text": "Asgaut Olafsson, the head shepherd and Household Elder, holds its seat.",
+"why": "title Household Elder for Asgaut Olafsson; roster gives head shepherd only and HOUSES has no Household elder",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/governanceAccount.js",
+"line": 286,
+"fn": "governanceAccountOf"
+}
+},
+{
+"id": "B13899",
+"sev": "MED",
+"n": 3,
+"town": "r2s-insurgency-city-2",
+"section": "Systems/Power",
+"fold": "Noble Governorship leaves Thieves' Guild alone because stamping it out would cost more than it saves.",
+"text": "Noble Governorship leaves Thieves' Guild alone because stamping it out would cost more than it saves.",
+"why": "says governorship leaves Thieves' Guild alone; QUARRELS has a high open conflict with it over legitimacy, relation tense and escalating",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 259,
+"fn": "govCriminalRelation"
+}
+},
+{
+"id": "B14087",
+"sev": "MED",
+"n": 3,
+"town": "r2s-insurgency-city-2",
+"section": "Systems/Power",
+"fold": "Nobody at the head of Noble Governorship answers to Thieves' Guild, and neither side pushes the other.",
+"text": "Nobody at the head of Noble Governorship answers to Thieves' Guild, and neither side pushes the other.",
+"why": "says neither side pushes the other; QUARRELS has Thieves' Guild vs Noble Governorship high and escalating, insurgency contesting authority",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 227,
+"fn": "CAPTURE_LINES"
+}
+},
+{
+"id": "B14050",
+"sev": "MED",
+"n": 3,
+"town": "r2s-infiltrated-city-1",
+"section": "Systems/Power",
+"fold": "Nobody at the head of City Council answers to a criminal house, and no criminal power here is strong enough to push it.",
+"text": "Nobody at the head of City Council answers to a criminal house, and no criminal power here is strong enough to push it.",
+"why": "says no criminal power is strong enough to push the council; stability line says decisions are shaped from outside, crisis Infiltrated by regional criminal pressure",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 210,
+"fn": "CAPTURE_LINES"
+}
+},
+{
 "id": "03254",
 "sev": "MED",
 "n": 2,
@@ -1748,6 +2650,204 @@
 "file": "src/generators/power/governanceNarrative.js",
 "line": 258,
 "fn": "deriveBaselineStability"
+}
+},
+{
+"id": "22394",
+"sev": "MED",
+"n": 2,
+"town": "r2r-hamlet-55",
+"section": "Summary/Overview",
+"fold": "The village is divided on whether they deserved it.",
+"text": "The village is divided on whether they deserved it.",
+"why": "says 'The village'; town is a hamlet, tag reaches ha",
+"kinds": [
+"TAG"
+],
+"writer": {
+"file": "src/generators/power/governanceNarrative.js",
+"line": 437,
+"fn": "deriveBaselineConflict"
+}
+},
+{
+"id": "B11563",
+"sev": "MED",
+"n": 2,
+"town": "r2s-mass_migration-thorp-3",
+"section": "Systems/Power",
+"fold": "Its seat is held by <N>, the head shepherd and Headman.",
+"text": "Its seat is held by Fuad ibn Ahmed, the head shepherd and Headman.",
+"why": "gives Fuad ibn Ahmed the title Headman; PEOPLE roster gives only head shepherd at the Shepherd collective",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/governanceAccount.js",
+"line": 288,
+"fn": "governanceAccountOf"
+}
+},
+{
+"id": "B01715",
+"sev": "MED",
+"n": 2,
+"town": "r2s-insurgency-thorp-2",
+"section": "Systems/Power",
+"fold": "<N>, the camp foreman and Elder, holds its seat.",
+"text": "Yohualli Balam, the camp foreman and Elder, holds its seat.",
+"why": "title Elder for Yohualli Balam; roster gives camp foreman only, and the Household elder house has nobody in it",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/governanceAccount.js",
+"line": 286,
+"fn": "governanceAccountOf"
+}
+},
+{
+"id": "B11541",
+"sev": "MED",
+"n": 2,
+"town": "r2s-recently_betrayed-thorp-3",
+"section": "Systems/Power",
+"fold": "Its seat is held by <N>, the camp foreman and Household Elder.",
+"text": "Its seat is held by Cassius Aquila, the camp foreman and Household Elder.",
+"why": "title Household Elder for the camp foreman; HOUSES has no Household elder and roster gives camp foreman only",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/governanceAccount.js",
+"line": 288,
+"fn": "governanceAccountOf"
+}
+},
+{
+"id": "B14789",
+"sev": "MED",
+"n": 2,
+"town": "r2s-famine-town-1",
+"section": "Systems/Power",
+"fold": "People take their marriages, inheritances and hard times to Religious Authorities, not to Merchant oligarchy, and the # keep quarrelling over who decides what.",
+"text": "People take their marriages, inheritances and hard times to Religious Authorities, not to Merchant oligarchy, and the two keep quarrelling over who decides what.",
+"why": "says Religious Authorities and Merchant oligarchy keep quarrelling; QUARRELS lists no such quarrel, relation is tense but stable",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 472,
+"fn": "computeFactionRelationships"
+}
+},
+{
+"id": "B07201",
+"sev": "MED",
+"n": 2,
+"town": "r2r-town-37",
+"section": "Systems/Power",
+"fold": "Feudal Appointee leaves Thieves' Guild alone because stamping it out would cost more than it saves.",
+"text": "Feudal Appointee leaves Thieves' Guild alone because stamping it out would cost more than it saves.",
+"why": "says Feudal Appointee leaves Thieves' Guild alone; QUARRELS has them tense and escalating",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 259,
+"fn": "govCriminalRelation"
+}
+},
+{
+"id": "B07194",
+"sev": "MED",
+"n": 2,
+"town": "r2r-town-37",
+"section": "Systems/Power",
+"fold": "Feudal Appointee and Thieves' Guild leave each other alone.",
+"text": "Feudal Appointee and Thieves' Guild leave each other alone.",
+"why": "says the two leave each other alone; relation is tense, escalating",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 227,
+"fn": "CAPTURE_LINES"
+}
+},
+{
+"id": "B14061",
+"sev": "MED",
+"n": 2,
+"town": "r2r-town-37",
+"section": "Systems/Power",
+"fold": "Nobody at the head of Feudal Appointee answers to Thieves' Guild, and neither side pushes the other.",
+"text": "Nobody at the head of Feudal Appointee answers to Thieves' Guild, and neither side pushes the other.",
+"why": "says neither side pushes the other; relation is tense, escalating",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 227,
+"fn": "CAPTURE_LINES"
+}
+},
+{
+"id": "B13657",
+"sev": "MED",
+"n": 2,
+"town": "r2r-town-46",
+"section": "Summary/Overview",
+"fold": "Neither side will back down and Merchant Council is avoiding the question.",
+"text": "Neither side will back down and Merchant Council is avoiding the question.",
+"why": "'Neither side will back down'; QUARRELS: none and stability Stable, legitimacy Approved",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/governanceNarrative.js",
+"line": 487,
+"fn": "deriveBaselineConflict"
+}
+},
+{
+"id": "B12464",
+"sev": "MED",
+"n": 2,
+"town": "r2s-famine-city-1",
+"section": "Systems/Power",
+"fold": "Merchant Guild Council leaves Thieves' Guild alone because stamping it out would cost more than it saves.",
+"text": "Merchant Guild Council leaves Thieves' Guild alone because stamping it out would cost more than it saves.",
+"why": "says council leaves Thieves' Guild alone; QUARRELS has them in a high open conflict over prices",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 259,
+"fn": "govCriminalRelation"
+}
+},
+{
+"id": "B06497",
+"sev": "MED",
+"n": 2,
+"town": "r2s-occupied-metropolis-2",
+"section": "Systems/Power",
+"fold": "Ducal Governorship and Thieves' Guild leave each other alone.",
+"text": "Ducal Governorship and Thieves' Guild leave each other alone.",
+"why": "leave each other alone, but QUARRELS has an open moderate quarrel, relation tense; 00374 and 17354 have the guild at odds and holding proof",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 227,
+"fn": "CAPTURE_LINES"
 }
 },
 {
@@ -2353,6 +3453,479 @@
 "fold": "The military commanders are pushing for expanded authority over civilian courts, and Grand Merchant Oligarchy is losing ground.",
 "text": "The military commanders are pushing for expanded authority over civilian courts, and Grand Merchant Oligarchy is losing ground.",
 "why": "Grand Merchant Oligarchy 'losing ground' to military commanders; GOVERNMENT has it Strong, Endorsed, and Military/Guard only Minor",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/governanceNarrative.js",
+"line": 469,
+"fn": "deriveBaselineConflict"
+}
+},
+{
+"id": "19010",
+"sev": "MED",
+"n": 1,
+"town": "r2r-village-10",
+"section": "Systems/Power",
+"fold": "The # of Elder Council answers to Fence (word of mouth), but the head does not.",
+"text": "The third of Elder Council answers to Fence (word of mouth), but the head does not.",
+"why": "house label used as a name: 'answers to Fence (word of mouth)'",
+"kinds": [
+"BROKEN",
+"LACKS"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 226,
+"fn": "CAPTURE_LINES"
+}
+},
+{
+"id": "07609",
+"sev": "MED",
+"n": 1,
+"town": "r2r-village-10",
+"section": "Systems/Power",
+"fold": "Fence (word of mouth) has a voice in Elder Council, not the last word.",
+"text": "Fence (word of mouth) has a voice in Elder Council, not the last word.",
+"why": "house label used as a name: 'Fence (word of mouth) has a voice'",
+"kinds": [
+"BROKEN",
+"LACKS"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 226,
+"fn": "CAPTURE_LINES"
+}
+},
+{
+"id": "19011",
+"sev": "MED",
+"n": 1,
+"town": "r2r-village-4",
+"section": "Systems/Power",
+"fold": "The # of Elder Council answers to Smuggling waypoint, but the head does not.",
+"text": "The third of Elder Council answers to Smuggling waypoint, but the head does not.",
+"why": "house label used as a power: 'answers to Smuggling waypoint'; GOVERNMENT lists only Elder Council",
+"kinds": [
+"BROKEN",
+"LACKS"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 226,
+"fn": "CAPTURE_LINES"
+}
+},
+{
+"id": "18181",
+"sev": "MED",
+"n": 1,
+"town": "r2r-village-4",
+"section": "Systems/Power",
+"fold": "Smuggling waypoint has a voice in Elder Council, not the last word.",
+"text": "Smuggling waypoint has a voice in Elder Council, not the last word.",
+"why": "house label used as a power: 'Smuggling waypoint has a voice in Elder Council'",
+"kinds": [
+"BROKEN",
+"LACKS"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 226,
+"fn": "CAPTURE_LINES"
+}
+},
+{
+"id": "17541",
+"sev": "MED",
+"n": 1,
+"town": "r2r-town-54",
+"section": "World/NPCs",
+"fold": "Secret: Tells a band on the road which caravans carry gold and when they leave",
+"text": "Secret: Tells a band on the road which caravans carry gold and when they leave",
+"why": "tells a band on the road which caravans carry gold, but no road reaches the town and no camels reach it",
+"kinds": [
+"PAIR",
+"STATE"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 1255,
+"fn": "ROWS"
+}
+},
+{
+"id": "B01720",
+"sev": "MED",
+"n": 1,
+"town": "r2s-religious_conversion-thorp-3",
+"section": "Systems/Power",
+"fold": "<N>, the camp foreman and Household Elder, holds its seat.",
+"text": "Calvus Corvinus, the camp foreman and Household Elder, holds its seat.",
+"why": "title Household Elder for the camp foreman; HOUSES has no Household elder and roster gives camp foreman only",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/governanceAccount.js",
+"line": 286,
+"fn": "governanceAccountOf"
+}
+},
+{
+"id": "B16107",
+"sev": "MED",
+"n": 1,
+"town": "r2s-religious_conversion-hamlet-1",
+"section": "Table/Tonight sheet",
+"fold": "Secret: Has been grazing the herd on a neighbour's land at night.",
+"text": "Secret: Has been grazing the herd on a neighbour's land at night.",
+"why": "grazing the herd at night; LAND gap says the dairy farmer lacks access to livestock",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 1617,
+"fn": "ROWS"
+}
+},
+{
+"id": "B16461",
+"sev": "MED",
+"n": 1,
+"town": "r2s-insurgency-hamlet-3",
+"section": "Table/Tonight sheet",
+"fold": "Secret: Pays the cutters in tokens that buy only from the foreman's own store, at the foreman's prices.",
+"text": "Secret: Pays the cutters in tokens that buy only from the foreman's own store, at the foreman's prices.",
+"why": "tokens that buy only from the foreman's own store; HOUSES lists no store or shop",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 1664,
+"fn": "ROWS"
+}
+},
+{
+"id": "B22098",
+"sev": "MED",
+"n": 1,
+"town": "r2s-famine-town-2",
+"section": "Systems/Power",
+"fold": "Town Mayor and Thieves' Guild leave each other alone.",
+"text": "Town Mayor and Thieves' Guild leave each other alone.",
+"why": "says Town Mayor and Thieves' Guild leave each other alone; QUARRELS has them tense and escalating",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 227,
+"fn": "CAPTURE_LINES"
+}
+},
+{
+"id": "B14093",
+"sev": "MED",
+"n": 1,
+"town": "r2s-famine-town-2",
+"section": "Systems/Power",
+"fold": "Nobody at the head of Town Mayor answers to Thieves' Guild, and neither side pushes the other.",
+"text": "Nobody at the head of Town Mayor answers to Thieves' Guild, and neither side pushes the other.",
+"why": "says neither side pushes the other; relation is tense, escalating",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 227,
+"fn": "CAPTURE_LINES"
+}
+},
+{
+"id": "B22104",
+"sev": "MED",
+"n": 1,
+"town": "r2s-famine-town-2",
+"section": "Systems/Power",
+"fold": "Town Mayor leaves Thieves' Guild alone because stamping it out would cost more than it saves.",
+"text": "Town Mayor leaves Thieves' Guild alone because stamping it out would cost more than it saves.",
+"why": "Mayor leaves Thieves' Guild alone; relation is tense, escalating",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 259,
+"fn": "govCriminalRelation"
+}
+},
+{
+"id": "B03654",
+"sev": "MED",
+"n": 1,
+"town": "r2s-famine-town-3",
+"section": "Systems/Power",
+"fold": "Arcane Council leaves Thieves' Guild alone because stamping it out would cost more than it saves.",
+"text": "Arcane Council leaves Thieves' Guild alone because stamping it out would cost more than it saves.",
+"why": "says Arcane Council leaves Thieves' Guild alone; QUARRELS has an open moderate quarrel and a tense, escalating relation",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 259,
+"fn": "govCriminalRelation"
+}
+},
+{
+"id": "B03644",
+"sev": "MED",
+"n": 1,
+"town": "r2s-famine-town-3",
+"section": "Systems/Power",
+"fold": "Arcane Council and Thieves' Guild leave each other alone.",
+"text": "Arcane Council and Thieves' Guild leave each other alone.",
+"why": "says the two leave each other alone; QUARRELS open moderate quarrel, tense and escalating",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 227,
+"fn": "CAPTURE_LINES"
+}
+},
+{
+"id": "B14045",
+"sev": "MED",
+"n": 1,
+"town": "r2s-famine-town-3",
+"section": "Systems/Power",
+"fold": "Nobody at the head of Arcane Council answers to Thieves' Guild, and neither side pushes the other.",
+"text": "Nobody at the head of Arcane Council answers to Thieves' Guild, and neither side pushes the other.",
+"why": "says neither side pushes the other; relation is tense, escalating, with an informer planted",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 227,
+"fn": "CAPTURE_LINES"
+}
+},
+{
+"id": "B05808",
+"sev": "MED",
+"n": 1,
+"town": "r2s-insurgency-town-1",
+"section": "Systems/Power",
+"fold": "Crime and weak defences have left the Merchant oligarchy's right to rule contested in <N>.",
+"text": "Crime and weak defences have left the Merchant oligarchy's right to rule contested in Tzulxochitl.",
+"why": "blames crime for contested rule; no criminal power, house or chain in header; the contest comes from the insurgency (legitimacy score 36)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/governanceAccount.js",
+"line": 133,
+"fn": "standingSentence"
+}
+},
+{
+"id": "B05816",
+"sev": "MED",
+"n": 1,
+"town": "r2s-succession_void-town-0",
+"section": "Systems/Power",
+"fold": "Crime has left the <N>'s right to rule contested in <N>.",
+"text": "Crime has left the Feudal Appointee's right to rule contested in Shivamandal.",
+"why": "blames crime for contested rule; header has no criminal power, house or chain; the contest is the leadership void and legitimacy score 38",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/governanceAccount.js",
+"line": 133,
+"fn": "standingSentence"
+}
+},
+{
+"id": "B05822",
+"sev": "MED",
+"n": 1,
+"town": "r2r-town-13",
+"section": "Systems/Power",
+"fold": "Crime has left the Military Council's right to rule contested in <N>.",
+"text": "Crime has left the Military Council's right to rule contested in Vatankher.",
+"why": "blames crime for contested rule; header has no criminal power, house or chain; the contest follows the migration (stability 'people arriving')",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/governanceAccount.js",
+"line": 133,
+"fn": "standingSentence"
+}
+},
+{
+"id": "B05802",
+"sev": "MED",
+"n": 1,
+"town": "r2r-town-57",
+"section": "Systems/Power",
+"fold": "Crime and weak defences have left the Church Council's right to rule contested in <N>.",
+"text": "Crime and weak defences have left the Church Council's right to rule contested in Pianoium.",
+"why": "blames crime for contested rule; header has no criminal power, house or chain; the contest follows the betrayal (stability 'nobody trusts those in charge')",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/governanceAccount.js",
+"line": 133,
+"fn": "standingSentence"
+}
+},
+{
+"id": "B05801",
+"sev": "MED",
+"n": 1,
+"town": "r2s-wartime-town-1",
+"section": "Systems/Power",
+"fold": "Crime and weak defences have left the Arcane Council's right to rule contested in <N>.",
+"text": "Crime and weak defences have left the Arcane Council's right to rule contested in Stredpol.",
+"why": "blames crime for contested rule; header has no criminal power, house or chain; the strain is wartime requisition (stability) and legitimacy score 36",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/governanceAccount.js",
+"line": 133,
+"fn": "standingSentence"
+}
+},
+{
+"id": "B05821",
+"sev": "MED",
+"n": 1,
+"town": "r2s-insurgency-town-3",
+"section": "Systems/Power",
+"fold": "Crime has left the Merchant Council's right to rule contested in <N>.",
+"text": "Crime has left the Merchant Council's right to rule contested in Langdorf.",
+"why": "'Crime has left the Merchant Council's right to rule contested'; GOVERNMENT lists no criminal power, LAND has no organised-crime chain; cause here is the insurgency",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/governanceAccount.js",
+"line": 133,
+"fn": "standingSentence"
+}
+},
+{
+"id": "B04756",
+"sev": "MED",
+"n": 1,
+"town": "r2s-plague_onset-city-1",
+"section": "Systems/Power",
+"fold": "City-State Council and Thieves' Guild leave each other alone.",
+"text": "City-State Council and Thieves' Guild leave each other alone.",
+"why": "says council and Thieves' Guild leave each other alone; QUARRELS has an open moderate conflict over stolen goods sold openly, relation tense",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 227,
+"fn": "CAPTURE_LINES"
+}
+},
+{
+"id": "B11556",
+"sev": "MED",
+"n": 1,
+"town": "r2s-insurgency-metropolis-0",
+"section": "Systems/Power",
+"fold": "Its seat is held by <N>, the exchange master and Lord Mayor.",
+"text": "Its seat is held by Nada al-Dawla, the exchange master and Lord Mayor.",
+"why": "Nada al-Dawla (f) is only the exchange master on PEOPLE; 'Lord Mayor' is no roster office and the title does not fit her sex",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/governanceAccount.js",
+"line": 288,
+"fn": "governanceAccountOf"
+}
+},
+{
+"id": "B17765",
+"sev": "MED",
+"n": 1,
+"town": "r2s-recently_betrayed-metropolis-1",
+"section": "Systems/Power",
+"fold": "Strong defences and prosperity have earned the City-State Council the approval of <N>.",
+"text": "Strong defences and prosperity have earned the City-State Council the approval of Vatanserai.",
+"why": "Council said to have earned the town's approval; stability line says 'Shaken — nobody trusts those in charge' after a betrayal",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/governanceAccount.js",
+"line": 143,
+"fn": "standingSentence"
+}
+},
+{
+"id": "B09963",
+"sev": "MED",
+"n": 1,
+"town": "r2r-metropolis-2",
+"section": "Systems/Power",
+"fold": "High Theocratic Council needs the taxes and loans of Merchant Guilds, and Merchant Guilds needs High Theocratic Council to enforce its contracts and keep the law.",
+"text": "High Theocratic Council needs the taxes and loans of Merchant Guilds, and Merchant Guilds needs High Theocratic Council to enforce its contracts and keep the law.",
+"why": "presents High Theocratic Council and Merchant Guilds as mutually needed partners; QUARRELS has them in high conflict over an unpaid debt",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 442,
+"fn": "computeFactionRelationships"
+}
+},
+{
+"id": "B09516",
+"sev": "MED",
+"n": 1,
+"town": "r2r-metropolis-58",
+"section": "Systems/Power",
+"fold": "Grand Military Council needs the taxes and loans of Merchant Guilds, and Merchant Guilds needs Grand Military Council to enforce its contracts and keep the law.",
+"text": "Grand Military Council needs the taxes and loans of Merchant Guilds, and Merchant Guilds needs Grand Military Council to enforce its contracts and keep the law.",
+"why": "presents Grand Military Council and Merchant Guilds as mutually dependent; QUARRELS has them in high conflict over raw materials, relation declining",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 442,
+"fn": "computeFactionRelationships"
+}
+},
+{
+"id": "B20041",
+"sev": "MED",
+"n": 1,
+"town": "r2r-metropolis-13",
+"section": "Systems/Power",
+"fold": "The military commanders are pushing for expanded authority over civilian courts, and City-State Council is losing ground.",
+"text": "The military commanders are pushing for expanded authority over civilian courts, and City-State Council is losing ground.",
+"why": "says City-State Council is losing ground to military commanders; GOVERNMENT has CSC Dominant, Military/Guard subordinate and stable; QUARRELS' dispute is about speaking for the place",
 "kinds": [
 "STATE"
 ],

@@ -36,6 +36,60 @@
 }
 },
 {
+"id": "10714",
+"sev": "HIGH",
+"n": 7,
+"town": "r2s-mass_migration-hamlet-0",
+"section": "Systems/Institutions",
+"fold": "Hiring hall",
+"text": "Hiring hall",
+"why": "lists a Hiring hall finding workers and mercenaries; HOUSES has no hiring hall",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B10271",
+"sev": "MED",
+"n": 369,
+"town": "r2r-thorp-58",
+"section": "Systems/Institutions",
+"fold": "Hospitality",
+"text": "Hospitality",
+"why": "offers Hospitality as a service; no inn in HOUSES and under siege nothing comes in, so no guests",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B16858",
+"sev": "MED",
+"n": 364,
+"town": "r2r-thorp-58",
+"section": "Systems/Institutions",
+"fold": "ServicesHospitality",
+"text": "ServicesHospitality",
+"why": "Dwellings 'Services: Hospitality'; no inn in HOUSES and siege cuts all road traffic",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
 "id": "02383",
 "sev": "MED",
 "n": 356,
@@ -87,6 +141,24 @@
 "file": "src/data/institutionServices.js",
 "line": 1765,
 "fn": "INSTITUTION_SERVICES.Pasturage"
+}
+},
+{
+"id": "B17202",
+"sev": "MED",
+"n": 238,
+"town": "r2s-under_siege-town-1",
+"section": "Systems/Services",
+"fold": "Smelt raw ore into pig iron and refined ingots ready for smithing.",
+"text": "Smelt raw ore into pig iron and refined ingots ready for smithing.",
+"why": "says smelter turns raw ore to ingots; chain impaired, iron ore depleted, gaps say it lacks ore",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 644,
+"fn": "INSTITUTION_SERVICES.Iron refining"
 }
 },
 {
@@ -162,6 +234,24 @@
 }
 },
 {
+"id": "B19912",
+"sev": "MED",
+"n": 177,
+"town": "r2s-plague_onset-city-0",
+"section": "Systems/Services",
+"fold": "The largest trading event of the year.",
+"text": "The largest trading event of the year.",
+"why": "largest trading event of the year offered as usual; CRISIS Plague and safety Quarantined stop gatherings and travel",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 1084,
+"fn": "INSTITUTION_SERVICES.Large-scale trading"
+}
+},
+{
 "id": "15641",
 "sev": "MED",
 "n": 161,
@@ -217,6 +307,78 @@
 }
 },
 {
+"id": "B05939",
+"sev": "MED",
+"n": 157,
+"town": "r2s-under_siege-city-2",
+"section": "Systems/Services",
+"fold": "Curved and flat clay tiles.",
+"text": "Curved and flat clay tiles.",
+"why": "clay tiles made; gaps: Brickmaker and Potter run on imported clay, no clay resource, imports brought in 0% under siege",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 396,
+"fn": "INSTITUTION_SERVICES.Roof tiles"
+}
+},
+{
+"id": "B17588",
+"sev": "MED",
+"n": 156,
+"town": "r2s-under_siege-city-3",
+"section": "Systems/Services",
+"fold": "Standard-size fired clay bricks by the cartload.",
+"text": "Standard-size fired clay bricks by the cartload.",
+"why": "bricks by the cartload; gap: Brickmaker runs on imported clay, no clay resource in LAND, siege imports cover None",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 395,
+"fn": "INSTITUTION_SERVICES.Fired brick"
+}
+},
+{
+"id": "B09249",
+"sev": "MED",
+"n": 149,
+"town": "r2r-town-33",
+"section": "Systems/Services",
+"fold": "Goods move past checkpoints.",
+"text": "Goods move past checkpoints.",
+"why": "tag has S: under siege nothing comes in or goes out; goods cannot move past checkpoints",
+"kinds": [
+"TAG"
+],
+"writer": {
+"file": "src/generators/servicesGenerator.js",
+"line": 345,
+"fn": "generateAvailableServices"
+}
+},
+{
+"id": "B19452",
+"sev": "MED",
+"n": 144,
+"town": "r2s-under_siege-town-2",
+"section": "Systems/Services",
+"fold": "The economic heartbeat of the week.",
+"text": "The economic heartbeat of the week.",
+"why": "weekly market as 'economic heartbeat of the week'; tag has S: under siege nothing comes in or goes out, ordinary market days cannot run",
+"kinds": [
+"TAG"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 550,
+"fn": "INSTITUTION_SERVICES.General trade"
+}
+},
+{
 "id": "07802",
 "sev": "MED",
 "n": 142,
@@ -233,6 +395,42 @@
 "file": "src/data/institutionServices.js",
 "line": 952,
 "fn": "INSTITUTION_SERVICES.Fresh fish retail"
+}
+},
+{
+"id": "B15121",
+"sev": "MED",
+"n": 141,
+"town": "r2s-insurgency-town-1",
+"section": "Systems/Services",
+"fold": "Processed textiles from compulsory pauper labour.",
+"text": "Processed textiles from compulsory pauper labour.",
+"why": "workhouse makes processed textiles; LAND gap says raw wool is not being processed and made-here lists no textiles",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 536,
+"fn": "INSTITUTION_SERVICES.Textile labour"
+}
+},
+{
+"id": "B12194",
+"sev": "MED",
+"n": 139,
+"town": "r2s-plague_onset-city-0",
+"section": "Systems/Services",
+"fold": "Major performances, competitions, and public spectacles.",
+"text": "Major performances, competitions, and public spectacles.",
+"why": "major performances and public spectacles offered; Plague with Quarantined safety, people do not gather as usual",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 1086,
+"fn": "INSTITUTION_SERVICES.Entertainment and spectacle"
 }
 },
 {
@@ -264,6 +462,24 @@
 "why": "offers wine wholesale to taverns; 14392 says grapes are needed and not brought in, TRADE makes no wine",
 "kinds": [
 "PAIR"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 490,
+"fn": "INSTITUTION_SERVICES.Wine wholesale"
+}
+},
+{
+"id": "B17807",
+"sev": "MED",
+"n": 127,
+"town": "r2r-city-44",
+"section": "Systems/Services",
+"fold": "Supply to taverns and inns.",
+"text": "Supply to taverns and inns.",
+"why": "says the vintner supplies taverns and inns; LAND gaps say Vintner lacks access to grapes (13775: no grapes reach the vintner)",
+"kinds": [
+"STATE"
 ],
 "writer": {
 "file": "src/data/institutionServices.js",
@@ -326,6 +542,24 @@
 }
 },
 {
+"id": "B06916",
+"sev": "MED",
+"n": 120,
+"town": "r2s-occupied-city-3",
+"section": "Systems/Services",
+"fold": "Every district has a temple.",
+"text": "Every district has a temple.",
+"why": "names a temple in every district; HOUSES has Parish churches (10-30) and no temple",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 1204,
+"fn": "INSTITUTION_SERVICES.Full religious coverage"
+}
+},
+{
 "id": "04603",
 "sev": "MED",
 "n": 119,
@@ -341,6 +575,24 @@
 "file": "src/data/institutionServices.js",
 "line": 953,
 "fn": "INSTITUTION_SERVICES.Wholesale trade"
+}
+},
+{
+"id": "17769",
+"sev": "MED",
+"n": 119,
+"town": "r2s-under_siege-town-2",
+"section": "Systems/Institutions",
+"fold": "ServicesFresh bread",
+"text": "ServicesFresh bread",
+"why": "offers fresh bread as a service; tag has F (famine towns) and here a 40% food deficit under siege",
+"kinds": [
+"TAG"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
 }
 },
 {
@@ -381,6 +633,24 @@
 }
 },
 {
+"id": "B14644",
+"sev": "MED",
+"n": 110,
+"town": "r2s-under_siege-metropolis-2",
+"section": "Systems/Services",
+"fold": "Pass dispatches and letters along the relay chain.",
+"text": "Pass dispatches and letters along the relay chain.",
+"why": "passes dispatches along the relay chain as ongoing; tag has S: under siege no road relay can run",
+"kinds": [
+"TAG"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 632,
+"fn": "INSTITUTION_SERVICES.Message relay"
+}
+},
+{
 "id": "12523",
 "sev": "MED",
 "n": 107,
@@ -396,6 +666,24 @@
 "file": "src/data/institutionServices.js",
 "line": 583,
 "fn": "INSTITUTION_SERVICES.Trade brokerage"
+}
+},
+{
+"id": "B06437",
+"sev": "MED",
+"n": 106,
+"town": "r2s-famine-metropolis-3",
+"section": "Systems/Services",
+"fold": "Drainage and sewer systems reduce disease and improve sanitation.",
+"text": "Drainage and sewer systems reduce disease and improve sanitation.",
+"why": "names drainage and sewer systems; HOUSES has Advanced water infrastructure but no Sewage system",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 691,
+"fn": "INSTITUTION_SERVICES.Wastewater removal"
 }
 },
 {
@@ -435,6 +723,60 @@
 }
 },
 {
+"id": "B12183",
+"sev": "MED",
+"n": 95,
+"town": "r2s-plague_onset-metropolis-2",
+"section": "Systems/Services",
+"fold": "Major feast days and state occasions.",
+"text": "Major feast days and state occasions.",
+"why": "major feast days and state occasions as usual; CRISIS Plague with Restricted safety, people do not gather as usual",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 999,
+"fn": "INSTITUTION_SERVICES.High religious ceremony"
+}
+},
+{
+"id": "B06897",
+"sev": "MED",
+"n": 94,
+"town": "r2s-under_siege-village-3",
+"section": "Systems/Services",
+"fold": "Evaporation, boiling, or mining to produce raw salt.",
+"text": "Evaporation, boiling, or mining to produce raw salt.",
+"why": "says the works produce raw salt; LAND: salt flats absent, Salt works runs on imported salt, imports cover None under siege",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 655,
+"fn": "INSTITUTION_SERVICES.Salt production"
+}
+},
+{
+"id": "B15735",
+"sev": "MED",
+"n": 90,
+"town": "r2r-metropolis-14",
+"section": "Systems/Services",
+"fold": "Rough stone for road beds and fill.",
+"text": "Rough stone for road beds and fill.",
+"why": "quarry output offered; LAND gives Stone quarry depleted and TRADE imports dressed stone (local quarry depleted)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 661,
+"fn": "INSTITUTION_SERVICES.Rubble and aggregate"
+}
+},
+{
 "id": "12416",
 "sev": "MED",
 "n": 89,
@@ -468,6 +810,79 @@
 "file": "src/data/institutionServices.js",
 "line": 841,
 "fn": "INSTITUTION_SERVICES.Survey expeditions"
+}
+},
+{
+"id": "B04045",
+"sev": "MED",
+"n": 88,
+"town": "r2s-plague_onset-metropolis-2",
+"section": "Systems/Services",
+"fold": "Athletics, chariot races, and team competitions.",
+"text": "Athletics, chariot races, and team competitions.",
+"why": "athletics, chariot races and team competitions offered as usual; CRISIS Plague with Restricted safety, gatherings do not go on",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 877,
+"fn": "INSTITUTION_SERVICES.Sporting events"
+}
+},
+{
+"id": "B03934",
+"sev": "MED",
+"n": 78,
+"town": "r2s-under_siege-town-1",
+"section": "Systems/Services",
+"fold": "Assemble merchants with compatible routes into shared caravans for safety and economy.",
+"text": "Assemble merchants with compatible routes into shared caravans for safety and economy.",
+"why": "carriers assemble merchants into shared caravans as ongoing work; tag has S: under siege nothing leaves by road",
+"kinds": [
+"STATE",
+"TAG"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 813,
+"fn": "INSTITUTION_SERVICES.Caravan masters' exchange"
+}
+},
+{
+"id": "B17196",
+"sev": "MED",
+"n": 78,
+"town": "r2s-under_siege-metropolis-0",
+"section": "Systems/Services",
+"fold": "Small parcels transported between relay points.",
+"text": "Small parcels transported between relay points.",
+"why": "parcels transported between relay points as ongoing; tag has S: under siege roads are closed",
+"kinds": [
+"TAG"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 633,
+"fn": "INSTITUTION_SERVICES.Parcel forwarding"
+}
+},
+{
+"id": "B15257",
+"sev": "MED",
+"n": 77,
+"town": "r2s-plague_onset-metropolis-2",
+"section": "Systems/Services",
+"fold": "Purchase tickets for scheduled performances.",
+"text": "Purchase tickets for scheduled performances.",
+"why": "tickets for scheduled performances offered as usual; CRISIS Plague with Restricted safety, people do not gather as usual",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 1661,
+"fn": "INSTITUTION_SERVICES.Performance tickets"
 }
 },
 {
@@ -562,6 +977,42 @@
 }
 },
 {
+"id": "15704",
+"sev": "MED",
+"n": 51,
+"town": "r2s-under_siege-city-1",
+"section": "Systems/Services",
+"fold": "Pies, stews, roasted meats.",
+"text": "Pies, stews, roasted meats.",
+"why": "offers pies, stews and roasted meats as street food under siege; food deficit 82% and fresh produce gone by mid-morning",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B11325",
+"sev": "MED",
+"n": 48,
+"town": "r2s-under_siege-city-1",
+"section": "Systems/Services",
+"fold": "Issue letters of credit honored across the entire trade network.",
+"text": "Issue letters of credit honored across the entire trade network.",
+"why": "tag has S: letters of credit honoured across the whole trade network cannot hold when siege closes every road and gate",
+"kinds": [
+"TAG"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 584,
+"fn": "INSTITUTION_SERVICES.Credit letters"
+}
+},
+{
 "id": "18410",
 "sev": "MED",
 "n": 47,
@@ -634,6 +1085,24 @@
 }
 },
 {
+"id": "B09031",
+"sev": "MED",
+"n": 42,
+"town": "r2s-under_siege-hamlet-1",
+"section": "Systems/Institutions",
+"fold": "Fresh milk",
+"text": "Fresh milk",
+"why": "fresh milk service: LAND gap says Dairy farmer lacks access to livestock",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
 "id": "07253",
 "sev": "MED",
 "n": 34,
@@ -652,6 +1121,24 @@
 }
 },
 {
+"id": "B15386",
+"sev": "MED",
+"n": 33,
+"town": "r2s-plague_onset-thorp-2",
+"section": "Systems/Institutions",
+"fold": "Record of custom",
+"text": "Record of custom",
+"why": "names a record-keeping institution; HOUSES lists none",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 41,
+"fn": "INSTITUTION_SERVICES.Record of custom"
+}
+},
+{
 "id": "15244",
 "sev": "MED",
 "n": 32,
@@ -667,6 +1154,42 @@
 "file": "src/data/institutionServices.js",
 "line": 719,
 "fn": "INSTITUTION_SERVICES.Seasonal trading"
+}
+},
+{
+"id": "B14466",
+"sev": "MED",
+"n": 31,
+"town": "r2s-plague_onset-town-0",
+"section": "Systems/Services",
+"fold": "Organised road transport for goods between towns.",
+"text": "Organised road transport for goods between towns.",
+"why": "organised road transport between towns as usual; STATE safety Quarantined under plague",
+"kinds": [
+"TAG"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 829,
+"fn": "INSTITUTION_SERVICES.Freight haulage"
+}
+},
+{
+"id": "B07070",
+"sev": "MED",
+"n": 31,
+"town": "r2r-town-8",
+"section": "Systems/Services",
+"fold": "False prophecy",
+"text": "False prophecy",
+"why": "false prophecy, readings, relics services (07070-19436) belong to a charlatan/fraud house; HOUSES (whole list) has no fortune teller, relic seller or fraud house",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/servicesGenerator.js",
+"line": 274,
+"fn": "generateAvailableServices"
 }
 },
 {
@@ -703,6 +1226,168 @@
 "file": "src/generators/servicesGenerator.js",
 "line": 30,
 "fn": "THERE_IS_NO_OFFICIAL_RECOURSE_HERE_DISPUTES_END_WITH_WHOEVER_CAN_APPLY_MORE_VIOLENCE_OR_PAY_MORE_FOR_PROTECTION"
+}
+},
+{
+"id": "B15064",
+"sev": "MED",
+"n": 26,
+"town": "r2s-famine-hamlet-0",
+"section": "Systems/Services",
+"fold": "Preserved fish for travel or winter.",
+"text": "Preserved fish for travel or winter.",
+"why": "preserved fish offered: FOOD failed source is fish; no line should offer the food that failed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 356,
+"fn": "INSTITUTION_SERVICES.Salted fish"
+}
+},
+{
+"id": "B08899",
+"sev": "MED",
+"n": 26,
+"town": "r2s-wartime-town-2",
+"section": "Systems/Services",
+"fold": "Forbidden components",
+"text": "Forbidden components",
+"why": "service line of an Arcane black market; HOUSES lists no such house (only Alchemist shop, Teleportation circle)",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/servicesGenerator.js",
+"line": 243,
+"fn": "generateAvailableServices"
+}
+},
+{
+"id": "B15330",
+"sev": "MED",
+"n": 26,
+"town": "r2s-wartime-town-2",
+"section": "Systems/Services",
+"fold": "Rare and restricted magical ingredients available to those who do not ask where they come from.",
+"text": "Rare and restricted magical ingredients available to those who do not ask where they come from.",
+"why": "sells restricted magical ingredients as a house service; HOUSES has no Arcane black market",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/servicesGenerator.js",
+"line": 244,
+"fn": "generateAvailableServices"
+}
+},
+{
+"id": "B12145",
+"sev": "MED",
+"n": 26,
+"town": "r2s-wartime-town-2",
+"section": "Systems/Services",
+"fold": "Magical forgery",
+"text": "Magical forgery",
+"why": "'Magical forgery' service of an Arcane black market absent from HOUSES",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/servicesGenerator.js",
+"line": 251,
+"fn": "generateAvailableServices"
+}
+},
+{
+"id": "B10891",
+"sev": "MED",
+"n": 26,
+"town": "r2s-wartime-town-2",
+"section": "Systems/Services",
+"fold": "Identification papers, writs, and seals with genuine magical authentication: fraudulently applied.",
+"text": "Identification papers, writs, and seals with genuine magical authentication: fraudulently applied.",
+"why": "forged magical papers service of an Arcane black market absent from HOUSES",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/servicesGenerator.js",
+"line": 252,
+"fn": "generateAvailableServices"
+}
+},
+{
+"id": "B22328",
+"sev": "MED",
+"n": 26,
+"town": "r2s-wartime-town-2",
+"section": "Systems/Services",
+"fold": "Unlicensed enchantment",
+"text": "Unlicensed enchantment",
+"why": "'Unlicensed enchantment' service of an Arcane black market absent from HOUSES",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/servicesGenerator.js",
+"line": 247,
+"fn": "generateAvailableServices"
+}
+},
+{
+"id": "B15035",
+"sev": "MED",
+"n": 26,
+"town": "r2s-wartime-town-2",
+"section": "Systems/Services",
+"fold": "Practitioners working outside guild oversight: cheaper, harder to trace, and against the law.",
+"text": "Practitioners working outside guild oversight: cheaper, harder to trace, and against the law.",
+"why": "practitioners outside guild oversight: Arcane black market not in HOUSES",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/servicesGenerator.js",
+"line": 248,
+"fn": "generateAvailableServices"
+}
+},
+{
+"id": "B09848",
+"sev": "MED",
+"n": 24,
+"town": "r2s-plague_onset-town-1",
+"section": "Systems/Services",
+"fold": "Hears civil pleas in the town court",
+"text": "Hears civil pleas in the town court",
+"why": "'Hears civil pleas in the town court'; HOUSES has a town council and hall but no court",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 58,
+"fn": "INSTITUTION_SERVICES.Dispute adjudication"
+}
+},
+{
+"id": "B16820",
+"sev": "MED",
+"n": 22,
+"town": "r2s-under_siege-hamlet-1",
+"section": "Systems/Institutions",
+"fold": "ServicesFresh milk",
+"text": "ServicesFresh milk",
+"why": "fresh milk service: LAND gap says Dairy farmer lacks access to livestock",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
 }
 },
 {
@@ -760,6 +1445,132 @@
 }
 },
 {
+"id": "B22006",
+"sev": "MED",
+"n": 16,
+"town": "r2s-plague_onset-metropolis-1",
+"section": "Systems/Services",
+"fold": "Ticketed passenger service on scheduled and charter airship routes.",
+"text": "Ticketed passenger service on scheduled and charter airship routes.",
+"why": "ticketed passenger airship service on scheduled routes as usual; CRISIS Plague, Dangerous safety, people do not travel as usual",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 697,
+"fn": "INSTITUTION_SERVICES.Passenger boarding"
+}
+},
+{
+"id": "B04655",
+"sev": "MED",
+"n": 13,
+"town": "r2s-occupied-hamlet-3",
+"section": "Systems/Institutions",
+"fold": "Cheese",
+"text": "Cheese",
+"why": "cheese offered: LAND gap says Dairy farmer lacks access to livestock",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B03260",
+"sev": "MED",
+"n": 13,
+"town": "r2s-occupied-hamlet-3",
+"section": "Systems/Services",
+"fold": "Aged or fresh cheese.",
+"text": "Aged or fresh cheese.",
+"why": "cheese offered: LAND gap says Dairy farmer lacks access to livestock",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 912,
+"fn": "INSTITUTION_SERVICES.Cheese"
+}
+},
+{
+"id": "B04346",
+"sev": "MED",
+"n": 13,
+"town": "r2s-famine-town-1",
+"section": "Systems/Services",
+"fold": "Bottles, flasks, and cups.",
+"text": "Bottles, flasks, and cups.",
+"why": "offers bottles, flasks and cups; gaps say the Glassblower lacks glass sand and no glass sand reaches it",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B07162",
+"sev": "MED",
+"n": 12,
+"town": "r2s-under_siege-hamlet-3",
+"section": "Systems/Services",
+"fold": "Feed and shelter for traveler's horses during stays.",
+"text": "Feed and shelter for traveler's horses during stays.",
+"why": "'traveler's horses during stays': under siege no travellers arrive",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 1304,
+"fn": "INSTITUTION_SERVICES.Basic horse care"
+}
+},
+{
+"id": "B04703",
+"sev": "MED",
+"n": 12,
+"town": "r2s-indebted-hamlet-0",
+"section": "Systems/Services",
+"fold": "Churned butter for cooking and table use.",
+"text": "Churned butter for cooking and table use.",
+"why": "churned butter on offer; LAND gap says Dairy farmer lacks access to livestock",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 913,
+"fn": "INSTITUTION_SERVICES.Butter"
+}
+},
+{
+"id": "10708",
+"sev": "MED",
+"n": 11,
+"town": "r2s-plague_onset-town-3",
+"section": "Systems/Services",
+"fold": "Hired muscle",
+"text": "Hired muscle",
+"why": "offers hired muscle for coin; HOUSES has no gang or criminal house, DEFENCE hired: none",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
 "id": "14634",
 "sev": "MED",
 "n": 11,
@@ -778,6 +1589,42 @@
 }
 },
 {
+"id": "B11973",
+"sev": "MED",
+"n": 11,
+"town": "r2s-plague_onset-town-0",
+"section": "Systems/Services",
+"fold": "Levy on goods and travelers passing through the gates.",
+"text": "Levy on goods and travelers passing through the gates.",
+"why": "levy on goods and travellers passing the gates; STATE safety Quarantined under plague, so no ordinary passing traffic",
+"kinds": [
+"TAG"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 1594,
+"fn": "INSTITUTION_SERVICES.Toll collection"
+}
+},
+{
+"id": "B22433",
+"sev": "MED",
+"n": 11,
+"town": "r2s-plague_onset-town-3",
+"section": "Systems/Services",
+"fold": "Violence available for coin to those who know where to ask.",
+"text": "Violence available for coin to those who know where to ask.",
+"why": "violence for hire; DEFENCE hired none and HOUSES has no hireling hall, gang or company",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/servicesGenerator.js",
+"line": 22,
+"fn": "INFORMAL_NO_CONTRACT_VIOLENCE_AVAILABLE_FOR_COIN_TO_THOSE_WHO_KNOW_WHERE_TO_ASK"
+}
+},
+{
 "id": "15825",
 "sev": "MED",
 "n": 9,
@@ -793,6 +1640,60 @@
 "file": "src/data/institutionServices.js",
 "line": 714,
 "fn": "INSTITUTION_SERVICES.Basic food"
+}
+},
+{
+"id": "B05324",
+"sev": "MED",
+"n": 9,
+"town": "r2r-city-44",
+"section": "Systems/Institutions",
+"fold": "Connection: Lord Warden <N>, the dean",
+"text": "Connection: Lord Warden Melanthi Kantakouzenos, the dean",
+"why": "gives Melanthi Kantakouzenos (f) the title Lord Warden; PEOPLE lists her only as dean of Parish churches; no warden office in GOVERNMENT",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "B11642",
+"sev": "MED",
+"n": 8,
+"town": "r2s-plague_onset-thorp-2",
+"section": "Systems/Services",
+"fold": "Keeps the memory of boundaries, debts, and old agreements",
+"text": "Keeps the memory of boundaries, debts, and old agreements",
+"why": "an office keeping debts and agreements; HOUSES (8) has no such house, thorp of 9",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 41,
+"fn": "INSTITUTION_SERVICES.Record of custom"
+}
+},
+{
+"id": "B17195",
+"sev": "MED",
+"n": 6,
+"town": "r2s-occupied-town-1",
+"section": "Systems/Services",
+"fold": "Small panes for shuttered windows.",
+"text": "Small panes for shuttered windows.",
+"why": "offers small window panes; gaps say the Glassblower lacks glass sand, and the Economics line itself says that work cannot go on",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 461,
+"fn": "INSTITUTION_SERVICES.Window glass"
 }
 },
 {

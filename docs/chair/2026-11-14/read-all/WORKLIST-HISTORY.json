@@ -73,6 +73,42 @@
 }
 },
 {
+"id": "B19364",
+"sev": "MED",
+"n": 181,
+"town": "r2s-famine-thorp-2",
+"section": "Summary/Plot Hooks",
+"fold": "The crime wave is coordinated.",
+"text": "The crime wave is coordinated.",
+"why": "'The crime wave is coordinated' and someone directs it; 21915 says things go missing with no gang behind it",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1229,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "B15078",
+"sev": "MED",
+"n": 165,
+"town": "r2r-thorp-58",
+"section": "Summary/Overview",
+"fold": "Price regulators",
+"text": "Price regulators",
+"why": "names a 'Price regulators' power; GOVERNMENT lists only Elder Council, no market or trade house in HOUSES",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1208,
+"fn": "HISTORICAL_EVENTS_DATA.factions"
+}
+},
+{
 "id": "16625",
 "sev": "MED",
 "n": 139,
@@ -127,6 +163,25 @@
 }
 },
 {
+"id": "11894",
+"sev": "MED",
+"n": 73,
+"town": "r2s-occupied-thorp-1",
+"section": "Systems/Economics",
+"fold": "Irrigation, tanks, street kitchens, preservation, and ritual food rules shape supply and consumption.",
+"text": "Irrigation, tanks, street kitchens, preservation, and ritual food rules shape supply and consumption.",
+"why": "'street kitchens' and tanks shaping supply in a thorp of 17 with eight houses",
+"kinds": [
+"LACKS",
+"TAG"
+],
+"writer": {
+"file": "src/data/cultureProfiles.js",
+"line": 420,
+"fn": "CULTURE_PROFILES.foodways"
+}
+},
+{
 "id": "07400",
 "sev": "MED",
 "n": 62,
@@ -141,6 +196,24 @@
 "writer": {
 "file": "src/data/historyData.js",
 "line": 1267,
+"fn": "HISTORICAL_EVENTS_DATA.severity"
+}
+},
+{
+"id": "B19917",
+"sev": "MED",
+"n": 61,
+"town": "r2s-famine-city-3",
+"section": "Summary/Overview",
+"fold": "The last strong leader died or left, and no # has yet consolidated their position",
+"text": "The last strong leader died or left, and no one has yet consolidated their position",
+"why": "says no one has yet consolidated power after the last strong leader; the Noble Governorship holds the seat and the Interregnum was 319 years ago",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1386,
 "fn": "HISTORICAL_EVENTS_DATA.severity"
 }
 },
@@ -164,6 +237,204 @@
 }
 },
 {
+"id": "B19428",
+"sev": "MED",
+"n": 57,
+"town": "r2s-occupied-hamlet-3",
+"section": "Summary/Plot Hooks",
+"fold": "The departed leader left a sealed document designating a successor, and someone wants it destroyed before it's read",
+"text": "The departed leader left a sealed document designating a successor, and someone wants it destroyed before it's read",
+"why": "a departed leader left a sealed successor document; PAST records no death or succession, and the headman holds the seat",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1397,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "B02619",
+"sev": "MED",
+"n": 54,
+"town": "r2r-thorp-51",
+"section": "Summary/Plot Hooks",
+"fold": "A key witness can be found, but won't speak without protection",
+"text": "A key witness can be found, but won't speak without protection",
+"why": "a key witness to a corruption scandal; no such person on PEOPLE, crisis is a betrayal",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1275,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "B02938",
+"sev": "MED",
+"n": 52,
+"town": "r2s-occupied-metropolis-1",
+"section": "Summary/Overview",
+"fold": "A sickness moved through the settlement for # seasons, thinning families and testing every institution to its limit",
+"text": "A sickness moved through the settlement for three seasons, thinning families and testing every institution to its limit",
+"why": "a sickness thinned families for three seasons; PAST records no plague or sickness (CRISIS is Occupation)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1445,
+"fn": "HISTORICAL_EVENTS_DATA.severity"
+}
+},
+{
+"id": "B19302",
+"sev": "MED",
+"n": 51,
+"town": "r2r-thorp-51",
+"section": "Summary/Plot Hooks",
+"fold": "The corruption goes higher than anyone yet suspects; the reformers are being used",
+"text": "The corruption goes higher than anyone yet suspects; the reformers are being used",
+"why": "'the reformers are being used'; no reformer power exists, QUARRELS none, one power",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1276,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "B21356",
+"sev": "MED",
+"n": 50,
+"town": "r2s-occupied-hamlet-3",
+"section": "Summary/Plot Hooks",
+"fold": "The vacuum is being maintained deliberately by an outside power that benefits from the instability",
+"text": "The vacuum is being maintained deliberately by an outside power that benefits from the instability",
+"why": "a leadership vacuum is maintained by an outside power; header has a sitting headman, Headman's Authority Dominant, no vacuum",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1399,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "B05104",
+"sev": "MED",
+"n": 48,
+"town": "r2r-thorp-51",
+"section": "Summary/Overview",
+"fold": "Complicit beneficiaries",
+"text": "Complicit beneficiaries",
+"why": "'Complicit beneficiaries' as a group; one power only, QUARRELS none, thorp of 11",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1268,
+"fn": "HISTORICAL_EVENTS_DATA.factions"
+}
+},
+{
+"id": "B19874",
+"sev": "MED",
+"n": 48,
+"town": "r2r-thorp-51",
+"section": "Summary/Plot Hooks",
+"fold": "The investigator who uncovered the corruption has received a death threat",
+"text": "The investigator who uncovered the corruption has received a death threat",
+"why": "an investigator who uncovered corruption; PEOPLE roster has only Tomislav Lebedev, and no scandal is recorded",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1274,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "B02853",
+"sev": "MED",
+"n": 48,
+"town": "r2r-thorp-53",
+"section": "Summary/Plot Hooks",
+"fold": "A recent magical accident was covered up and the victims silenced",
+"text": "A recent magical accident was covered up and the victims silenced",
+"why": "magical controversy/accident/sealed thing; PAST records only The Trade Collapse",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1244,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "B13350",
+"sev": "MED",
+"n": 47,
+"town": "r2s-politically_fractured-thorp-1",
+"section": "Summary/Overview",
+"fold": "Multiple weak claimants",
+"text": "Multiple weak claimants",
+"why": "'multiple weak claimants'; GOVERNMENT has two powers, The Independent Bloc Dominant and Household Council Strong",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1388,
+"fn": "HISTORICAL_EVENTS_DATA.factions"
+}
+},
+{
+"id": "B03370",
+"sev": "MED",
+"n": 45,
+"town": "r2s-occupied-thorp-2",
+"section": "Summary/Overview",
+"fold": "An accusation of heresy against a prominent figure split the faithful and drew in the secular authorities on both sides",
+"text": "An accusation of heresy against a prominent figure split the faithful and drew in the secular authorities on both sides",
+"why": "a heresy accusation splitting the faithful; PAST records only The Pilgrimage and The Purge, no heresy trial",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1467,
+"fn": "HISTORICAL_EVENTS_DATA.severity"
+}
+},
+{
+"id": "B21815",
+"sev": "MED",
+"n": 44,
+"town": "r2s-occupied-thorp-1",
+"section": "Summary/Crisis",
+"fold": "They will sell it, but their price is not money.",
+"text": "They will sell it, but their price is not money.",
+"why": "a hidden holder will sell food; FOOD shows 0.1 months in store, no granary, no imports, 0% surplus: no stock to sell during famine",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/stressTypes.js",
+"line": 41,
+"fn": "STRESS_TYPE_MAP.famine"
+}
+},
+{
 "id": "18890",
 "sev": "MED",
 "n": 37,
@@ -182,6 +453,186 @@
 }
 },
 {
+"id": "B20278",
+"sev": "MED",
+"n": 37,
+"town": "r2s-occupied-metropolis-1",
+"section": "Summary/Plot Hooks",
+"fold": "The plague pit holds a body that matches no # on the list of the dead",
+"text": "The plague pit holds a body that matches no one on the list of the dead",
+"why": "plague pit and list of the dead presume a plague; PAST has no plague event",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1449,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "B20557",
+"sev": "MED",
+"n": 37,
+"town": "r2s-occupied-metropolis-1",
+"section": "Summary/Plot Hooks",
+"fold": "The quarantine was used to settle old scores, and the survivors remember exactly who",
+"text": "The quarantine was used to settle old scores, and the survivors remember exactly who",
+"why": "a quarantine used to settle scores presumes a plague; PAST has no plague event",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1450,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "B15314",
+"sev": "MED",
+"n": 36,
+"town": "r2s-famine-hamlet-0",
+"section": "Summary/Overview",
+"fold": "Racks of drying fish line the way in, and the smell of salt and catch is everywhere.",
+"text": "Racks of drying fish line the way in, and the smell of salt and catch is everywhere.",
+"why": "racks of drying fish and catch everywhere; FOOD failed source is fish and the town is in Active Famine",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 141,
+"fn": "ARRIVAL_SENSES.dominant"
+}
+},
+{
+"id": "B17445",
+"sev": "MED",
+"n": 35,
+"town": "r2s-plague_onset-thorp-2",
+"section": "Summary/Plot Hooks",
+"fold": "Someone is staging miracles for # side, and whoever is paying for them has not been named",
+"text": "Someone is staging miracles for one side, and whoever is paying for them has not been named",
+"why": "'for one side' presumes opposed sides; one power only, QUARRELS none",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1171,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "B15373",
+"sev": "MED",
+"n": 35,
+"town": "r2r-thorp-9",
+"section": "Summary/Plot Hooks",
+"fold": "Rebuilding uncovered something in the ashes that predates the settlement",
+"text": "Rebuilding uncovered something in the ashes that predates the settlement",
+"why": "fire and rebuilding; PAST records only The Uprising, no fire",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1439,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "B02863",
+"sev": "MED",
+"n": 34,
+"town": "r2s-infiltrated-thorp-3",
+"section": "Summary/Plot Hooks",
+"fold": "A relic claimed by both sides has resurfaced in a private collection",
+"text": "A relic claimed by both sides has resurfaced in a private collection",
+"why": "a relic claimed by 'both sides'; one power, QUARRELS none, no religious house",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1169,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "B17488",
+"sev": "MED",
+"n": 33,
+"town": "r2r-thorp-53",
+"section": "Summary/Plot Hooks",
+"fold": "Something was sealed away using magic years ago and the seal is weakening",
+"text": "Something was sealed away using magic years ago and the seal is weakening",
+"why": "magical controversy/accident/sealed thing; PAST records only The Trade Collapse",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1246,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "B15248",
+"sev": "MED",
+"n": 32,
+"town": "r2s-occupied-town-0",
+"section": "Systems/Economics",
+"fold": "Public ovens, market vendors, and shared dining customs make food distribution visibly civic.",
+"text": "Public ovens, market vendors, and shared dining customs make food distribution visibly civic.",
+"why": "names public ovens and market vendors making food distribution civic; HOUSES has no oven or bakehouse; Pressured food, 6% gap",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/cultureProfiles.js",
+"line": 119,
+"fn": "CULTURE_PROFILES.foodways"
+}
+},
+{
+"id": "B21149",
+"sev": "MED",
+"n": 32,
+"town": "r2s-plague_onset-town-2",
+"section": "Summary/Plot Hooks",
+"fold": "The surge was no accident.",
+"text": "The surge was no accident.",
+"why": "'The surge was no accident' presumes a magical surge; PAST lists no magical event (guild war, religion, purge, migration, succession, occupation, siege)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1515,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "B20649",
+"sev": "MED",
+"n": 32,
+"town": "r2s-plague_onset-thorp-2",
+"section": "Summary/Plot Hooks",
+"fold": "The reformist leader is being blackmailed into silence",
+"text": "The reformist leader is being blackmailed into silence",
+"why": "presumes a reformist leader; GOVERNMENT lists only Elder Council and PEOPLE has two others",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1170,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
 "id": "04385",
 "sev": "MED",
 "n": 31,
@@ -197,6 +648,42 @@
 "file": "src/data/stressTypes.js",
 "line": 114,
 "fn": "STRESS_TYPE_MAP.succession_void"
+}
+},
+{
+"id": "B13252",
+"sev": "MED",
+"n": 30,
+"town": "r2s-famine-metropolis-3",
+"section": "Systems/Economics",
+"fold": "Most meals start from the day's catch.",
+"text": "Most meals start from the day's catch.",
+"why": "says most meals start from the day's catch; FOOD gives 38% grown, 48% brought in, grain failed; LAND lists no fishery",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/foodways.js",
+"line": 210,
+"fn": "fedLineOf"
+}
+},
+{
+"id": "B20744",
+"sev": "MED",
+"n": 29,
+"town": "r2s-indebted-thorp-0",
+"section": "Summary/Plot Hooks",
+"fold": "The route could be reopened, but someone with power prefers it stay closed",
+"text": "The route could be reopened, but someone with power prefers it stay closed",
+"why": "a route that is closed; LAND has Strategic Crossroads available and TRADE exports transit trade and tolls",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1426,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
 }
 },
 {
@@ -233,6 +720,24 @@
 "file": "src/data/historyDescVariants.js",
 "line": 65,
 "fn": "HISTORY_DESC_VARIANTS.occupation_legacy"
+}
+},
+{
+"id": "B02689",
+"sev": "MED",
+"n": 26,
+"town": "r2s-plague_onset-city-3",
+"section": "Summary/Plot Hooks",
+"fold": "A list of everyone who informed on the rebels survived, and it names people still in office",
+"text": "A list of everyone who informed on the rebels survived, and it names people still in office",
+"why": "list of informers on the rebels; PAST records no rebellion or uprising",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1492,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
 }
 },
 {
@@ -273,6 +778,96 @@
 }
 },
 {
+"id": "B21987",
+"sev": "MED",
+"n": 25,
+"town": "r2s-famine-metropolis-2",
+"section": "Summary/Overview",
+"fold": "Those who profited from the redrawing",
+"text": "Those who profited from the redrawing",
+"why": "label for those who profited from a flood's redrawing; PAST records no flood",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1457,
+"fn": "HISTORICAL_EVENTS_DATA.factions"
+}
+},
+{
+"id": "B17409",
+"sev": "MED",
+"n": 25,
+"town": "r2s-occupied-thorp-1",
+"section": "Summary/Crisis",
+"fold": "Someone here still has food put by, enough to matter.",
+"text": "Someone here still has food put by, enough to matter.",
+"why": "someone has food put by enough to matter; FOOD stores 0.1 months, no granary, nothing imported, famine; no one holds a surplus",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/stressTypes.js",
+"line": 220,
+"fn": "STRESS_TYPE_SIBLINGS"
+}
+},
+{
+"id": "B06235",
+"sev": "MED",
+"n": 25,
+"town": "r2r-thorp-37",
+"section": "Summary/Overview",
+"fold": "Displaced families",
+"text": "Displaced families",
+"why": "flood/redrawn boundaries; PAST lists Pilgrimage, Succession Crisis, Migration, no flood",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1457,
+"fn": "HISTORICAL_EVENTS_DATA.factions"
+}
+},
+{
+"id": "B11823",
+"sev": "MED",
+"n": 25,
+"town": "r2r-thorp-37",
+"section": "Summary/Overview",
+"fold": "Landowners pressing newly-convenient claims",
+"text": "Landowners pressing newly-convenient claims",
+"why": "flood/redrawn boundaries; PAST lists Pilgrimage, Succession Crisis, Migration, no flood",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1457,
+"fn": "HISTORICAL_EVENTS_DATA.factions"
+}
+},
+{
+"id": "B21354",
+"sev": "MED",
+"n": 24,
+"town": "r2s-famine-town-1",
+"section": "Summary/Plot Hooks",
+"fold": "The uprising was funded by an outside hand that has come back to collect on the favour",
+"text": "The uprising was funded by an outside hand that has come back to collect on the favour",
+"why": "hook names an uprising funded from outside; PAST records no revolt or uprising (Succession Crisis, Harvest Compact, Arcane Incident only)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1493,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
 "id": "20265",
 "sev": "MED",
 "n": 23,
@@ -288,6 +883,24 @@
 "file": "src/data/arrivalProse.js",
 "line": 155,
 "fn": "ARRIVAL_SENSES.dominant"
+}
+},
+{
+"id": "B15453",
+"sev": "MED",
+"n": 23,
+"town": "r2r-thorp-53",
+"section": "Summary/Overview",
+"fold": "Regulation advocates",
+"text": "Regulation advocates",
+"why": "magical controversy/accident/sealed thing; PAST records only The Trade Collapse",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1238,
+"fn": "HISTORICAL_EVENTS_DATA.factions"
 }
 },
 {
@@ -364,6 +977,24 @@
 }
 },
 {
+"id": "B02944",
+"sev": "MED",
+"n": 22,
+"town": "r2r-thorp-20",
+"section": "Summary/Overview",
+"fold": "A single figure seized power through legal maneuvering and ruled without check for a time, and the memory still shapes who is trusted with authority",
+"text": "A single figure seized power through legal maneuvering and ruled without check for a time, and the memory still shapes who is trusted with authority",
+"why": "tyrant/regime history; PAST lists only Succession Crisis (minor) and Migration, no tyranny",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1500,
+"fn": "HISTORICAL_EVENTS_DATA.severity"
+}
+},
+{
 "id": "02470",
 "sev": "MED",
 "n": 21,
@@ -434,6 +1065,42 @@
 "file": "src/data/historyData.js",
 "line": 1725,
 "fn": "HISTORY_DESC_SIBLINGS"
+}
+},
+{
+"id": "B02414",
+"sev": "MED",
+"n": 21,
+"town": "r2s-famine-town-1",
+"section": "Summary/Plot Hooks",
+"fold": "A concession won in the revolt is being quietly rolled back, and the old anger is stirring again",
+"text": "A concession won in the revolt is being quietly rolled back, and the old anger is stirring again",
+"why": "hook names a revolt and a concession won in it; PAST records no revolt",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1494,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "B00323",
+"sev": "MED",
+"n": 21,
+"town": "r2r-thorp-58",
+"section": "Summary/Overview",
+"fold": "# partners go over their accounts in a courtyard with a mediator sitting between them.",
+"text": "Two partners go over their accounts in a courtyard with a mediator sitting between them.",
+"why": "two partners, accounts and a mediator in a courtyard; thorp of 7, one power, no QUARRELS, no trade house, and under siege",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 315,
+"fn": "ARRIVAL_PEOPLE.arabic"
 }
 },
 {
@@ -527,6 +1194,78 @@
 }
 },
 {
+"id": "B02313",
+"sev": "MED",
+"n": 20,
+"town": "r2s-under_siege-city-1",
+"section": "Summary/Plot Hooks",
+"fold": "A bloodline touched by the surge is now manifesting something the family cannot conceal",
+"text": "A bloodline touched by the surge is now manifesting something the family cannot conceal",
+"why": "a bloodline touched by 'the surge'; PAST records no magical event (siege, occupation, religious, economic, succession only) and magic is low",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1516,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "B20687",
+"sev": "MED",
+"n": 20,
+"town": "r2r-thorp-23",
+"section": "Summary/Overview",
+"fold": "The restored order",
+"text": "The restored order",
+"why": "popular uprising/rebels; PAST lists Migration, Succession Crisis, Religious Conflict, no uprising",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1490,
+"fn": "HISTORICAL_EVENTS_DATA.factions"
+}
+},
+{
+"id": "B21980",
+"sev": "MED",
+"n": 20,
+"town": "r2r-thorp-23",
+"section": "Summary/Overview",
+"fold": "Those who changed sides at the right moment",
+"text": "Those who changed sides at the right moment",
+"why": "popular uprising/rebels; PAST lists Migration, Succession Crisis, Religious Conflict, no uprising",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1490,
+"fn": "HISTORICAL_EVENTS_DATA.factions"
+}
+},
+{
+"id": "B02524",
+"sev": "MED",
+"n": 20,
+"town": "r2r-hamlet-8",
+"section": "Summary/Plot Hooks",
+"fold": "A forged document is about to be introduced as evidence; someone knows it's fake",
+"text": "A forged document is about to be introduced as evidence; someone knows it's fake",
+"why": "forged document introduced 'as evidence' presumes a court; HOUSES has none and QUARRELS/PAST record no land dispute",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1359,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
 "id": "15806",
 "sev": "MED",
 "n": 19,
@@ -580,6 +1319,97 @@
 "file": "src/data/arrivalProse.js",
 "line": 307,
 "fn": "ARRIVAL_PEOPLE.celtic"
+}
+},
+{
+"id": "12658",
+"sev": "MED",
+"n": 19,
+"town": "r2r-hamlet-8",
+"section": "Summary/Overview",
+"fold": "Legal class profiting from ambiguity",
+"text": "Legal class profiting from ambiguity",
+"why": "'Legal class profiting from ambiguity'; tag reaches hamlets with no court or lawyers",
+"kinds": [
+"LACKS",
+"TAG"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1350,
+"fn": "HISTORICAL_EVENTS_DATA.factions"
+}
+},
+{
+"id": "B19069",
+"sev": "MED",
+"n": 19,
+"town": "r2s-occupied-metropolis-1",
+"section": "Summary/Overview",
+"fold": "The bereaved and the blamed",
+"text": "The bereaved and the blamed",
+"why": "'the bereaved and the blamed' belong to a plague; PAST records none",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1446,
+"fn": "HISTORICAL_EVENTS_DATA.factions"
+}
+},
+{
+"id": "B02462",
+"sev": "MED",
+"n": 19,
+"town": "r2s-plague_onset-thorp-1",
+"section": "Table/Tonight sheet",
+"fold": "A diplomatic channel exists that the war party is suppressing.",
+"text": "A diplomatic channel exists that the war party is suppressing.",
+"why": "a 'war party'; only Household Council listed, no quarrels",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1200,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "B15297",
+"sev": "MED",
+"n": 19,
+"town": "r2r-thorp-14",
+"section": "Summary/Overview",
+"fold": "Quarantine hardliners",
+"text": "Quarantine hardliners",
+"why": "plague/quarantine history; PAST lists only Arcane Incident, Occupation, Trade Collapse, no plague",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1446,
+"fn": "HISTORICAL_EVENTS_DATA.factions"
+}
+},
+{
+"id": "B09823",
+"sev": "MED",
+"n": 19,
+"town": "r2r-thorp-14",
+"section": "Summary/Overview",
+"fold": "Healers and charlatans alike",
+"text": "Healers and charlatans alike",
+"why": "plague/quarantine history; PAST lists only Arcane Incident, Occupation, Trade Collapse, no plague",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1446,
+"fn": "HISTORICAL_EVENTS_DATA.factions"
 }
 },
 {
@@ -709,6 +1539,96 @@
 }
 },
 {
+"id": "B15372",
+"sev": "MED",
+"n": 18,
+"town": "r2r-thorp-9",
+"section": "Summary/Overview",
+"fold": "Rebuilders and profiteers",
+"text": "Rebuilders and profiteers",
+"why": "fire and rebuilding; PAST records only The Uprising, no fire",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1435,
+"fn": "HISTORICAL_EVENTS_DATA.factions"
+}
+},
+{
+"id": "B21951",
+"sev": "MED",
+"n": 18,
+"town": "r2r-thorp-9",
+"section": "Summary/Overview",
+"fold": "Those accused of setting it",
+"text": "Those accused of setting it",
+"why": "fire and rebuilding; PAST records only The Uprising, no fire",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1435,
+"fn": "HISTORICAL_EVENTS_DATA.factions"
+}
+},
+{
+"id": "B21347",
+"sev": "MED",
+"n": 18,
+"town": "r2r-thorp-20",
+"section": "Summary/Plot Hooks",
+"fold": "The tyrant's private records survived, and they implicate respectable families in the worst of it",
+"text": "The tyrant's private records survived, and they implicate respectable families in the worst of it",
+"why": "tyrant/regime history; PAST lists only Succession Crisis (minor) and Migration, no tyranny",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1504,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "B14575",
+"sev": "MED",
+"n": 18,
+"town": "r2r-hamlet-6",
+"section": "Summary/Overview",
+"fold": "Overwhelmed old residents",
+"text": "Overwhelmed old residents",
+"why": "'Overwhelmed old residents' of a pilgrim surge; PAST has no pilgrimage and the town is not overwhelmed (safety Safe, food Secure)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1479,
+"fn": "HISTORICAL_EVENTS_DATA.factions"
+}
+},
+{
+"id": "B15917",
+"sev": "MED",
+"n": 18,
+"town": "r2r-hamlet-6",
+"section": "Summary/Overview",
+"fold": "Sceptics who doubt the miracle",
+"text": "Sceptics who doubt the miracle",
+"why": "'Sceptics who doubt the miracle'; PAST records no miracle or pilgrimage event",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1479,
+"fn": "HISTORICAL_EVENTS_DATA.factions"
+}
+},
+{
 "id": "18331",
 "sev": "MED",
 "n": 17,
@@ -724,6 +1644,78 @@
 "file": "src/data/stressTypes.js",
 "line": 30,
 "fn": "STRESS_TYPE_MAP.under_siege"
+}
+},
+{
+"id": "07323",
+"sev": "MED",
+"n": 17,
+"town": "r2s-occupied-village-3",
+"section": "Summary/Overview",
+"fold": "Every other doorway seems to sell a remedy for something.",
+"text": "Every other doorway seems to sell a remedy for something.",
+"why": "'every other doorway sells a remedy' in a village of 134 with one apothecary",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 268,
+"fn": "ARRIVAL_SENSES.dominant"
+}
+},
+{
+"id": "B13250",
+"sev": "MED",
+"n": 17,
+"town": "r2r-hamlet-0",
+"section": "Systems/Economics",
+"fold": "Most meals start from porridge and bread of the local grain.",
+"text": "Most meals start from porridge and bread of the local grain.",
+"why": "says most meals come from local grain; FOOD: Deficit, grown 39%, gap 61%, imports 0%, siege",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/foodways.js",
+"line": 24,
+"fn": "SOURCE_PHRASES"
+}
+},
+{
+"id": "B17578",
+"sev": "MED",
+"n": 17,
+"town": "r2s-under_siege-metropolis-1",
+"section": "Summary/Overview",
+"fold": "Stalls sell reagents in stoppered jars, and the buyers know exactly what they want.",
+"text": "Stalls sell reagents in stoppered jars, and the buyers know exactly what they want.",
+"why": "stalls selling reagents under siege; reagents are import-only (ley node depleted, TRADE imports) and imports cover None",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 282,
+"fn": "ARRIVAL_SENSES.dominant"
+}
+},
+{
+"id": "B02537",
+"sev": "MED",
+"n": 17,
+"town": "r2r-thorp-20",
+"section": "Summary/Plot Hooks",
+"fold": "A fortune the regime confiscated was never returned, and the rightful heirs have surfaced",
+"text": "A fortune the regime confiscated was never returned, and the rightful heirs have surfaced",
+"why": "tyrant/regime history; PAST lists only Succession Crisis (minor) and Migration, no tyranny",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1505,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
 }
 },
 {
@@ -764,6 +1756,42 @@
 }
 },
 {
+"id": "B19260",
+"sev": "MED",
+"n": 16,
+"town": "r2s-plague_onset-city-3",
+"section": "Summary/Overview",
+"fold": "The common people rose against the ruling powers over guild recognition and fair wages, and the settlement has never entirely closed the account",
+"text": "The common people rose against the ruling powers over guild recognition and fair wages, and the settlement has never entirely closed the account",
+"why": "common people rose against rulers over wages; PAST records no uprising (Purge, Succession Crisis, Pilgrimage only)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1489,
+"fn": "HISTORICAL_EVENTS_DATA.severity"
+}
+},
+{
+"id": "B17430",
+"sev": "MED",
+"n": 16,
+"town": "r2r-thorp-20",
+"section": "Summary/Plot Hooks",
+"fold": "Someone is deliberately rehabilitating the tyrant’s reputation, and profiting from it",
+"text": "Someone is deliberately rehabilitating the tyrant’s reputation, and profiting from it",
+"why": "tyrant/regime history; PAST lists only Succession Crisis (minor) and Migration, no tyranny",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1506,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
 "id": "03543",
 "sev": "MED",
 "n": 15,
@@ -779,6 +1807,42 @@
 "file": "src/data/arrivalProse.js",
 "line": 310,
 "fn": "ARRIVAL_PEOPLE.celtic"
+}
+},
+{
+"id": "B19008",
+"sev": "MED",
+"n": 15,
+"town": "r2s-under_siege-city-1",
+"section": "Summary/Plot Hooks",
+"fold": "The affected district is slowly spreading its strangeness, and the authorities are pretending otherwise",
+"text": "The affected district is slowly spreading its strangeness, and the authorities are pretending otherwise",
+"why": "an 'affected district' spreading strangeness; PAST has no magical event, magic low, and no district fits that record",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1517,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "B17828",
+"sev": "MED",
+"n": 15,
+"town": "r2r-thorp-9",
+"section": "Summary/Overview",
+"fold": "Survivors seeking someone to blame",
+"text": "Survivors seeking someone to blame",
+"why": "fire and rebuilding; PAST records only The Uprising, no fire",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1435,
+"fn": "HISTORICAL_EVENTS_DATA.factions"
 }
 },
 {
@@ -854,6 +1918,114 @@
 }
 },
 {
+"id": "B22143",
+"sev": "MED",
+"n": 14,
+"town": "r2r-thorp-26",
+"section": "Summary/Plot Hooks",
+"fold": "Trade Collapse",
+"text": "Trade Collapse",
+"why": "a trade collapse hook; PAST records Succession Crisis, Siege and Shortage only, and CRISIS is Infiltrated",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1594,
+"fn": "EVENT_TYPE_NAMES"
+}
+},
+{
+"id": "B06236",
+"sev": "MED",
+"n": 14,
+"town": "r2r-thorp-26",
+"section": "Summary/Overview",
+"fold": "Displaced traders",
+"text": "Displaced traders",
+"why": "'displaced traders' of a diverted trade; no trade collapse in PAST, exports are transit trade and tolls",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1424,
+"fn": "HISTORICAL_EVENTS_DATA.factions"
+}
+},
+{
+"id": "B28028",
+"sev": "MED",
+"n": 14,
+"town": "r2r-thorp-26",
+"section": "Summary/Overview",
+"fold": "Workers left without wages",
+"text": "Workers left without wages",
+"why": "workers left without wages from a trade loss; no trade collapse in PAST, Strategic Crossroads available",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1424,
+"fn": "HISTORICAL_EVENTS_DATA.factions"
+}
+},
+{
+"id": "B15678",
+"sev": "MED",
+"n": 14,
+"town": "r2r-thorp-26",
+"section": "Summary/Overview",
+"fold": "Rivals who profited from the diversion",
+"text": "Rivals who profited from the diversion",
+"why": "rivals who 'profited from the diversion'; no trade diversion or collapse recorded in PAST",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1424,
+"fn": "HISTORICAL_EVENTS_DATA.factions"
+}
+},
+{
+"id": "B02526",
+"sev": "MED",
+"n": 14,
+"town": "r2s-under_siege-village-3",
+"section": "World/History",
+"fold": "A forgotten charter and the present occupation contradict each other, each side with law on its side",
+"text": "A forgotten charter and the present occupation contradict each other, each side with law on its side",
+"why": "'the present occupation'; CRISIS is Under Siege and PAST records no occupation here",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyDescVariants.js",
+"line": 73,
+"fn": "HISTORY_DESC_VARIANTS.disputed_land"
+}
+},
+{
+"id": "B27509",
+"sev": "MED",
+"n": 14,
+"town": "r2s-religious_conversion-town-2",
+"section": "Summary/Overview",
+"fold": "Waters rose with little warning and reshaped the lower districts, drowning livelihoods and redrawing who owned what",
+"text": "Waters rose with little warning and reshaped the lower districts, drowning livelihoods and redrawing who owned what",
+"why": "describes floodwaters reshaping lower districts; PAST records no flood or water disaster, only Arcane Incident, Succession Crisis, Occupation and Siege; terrain Mountain",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1456,
+"fn": "HISTORICAL_EVENTS_DATA.severity"
+}
+},
+{
 "id": "12852",
 "sev": "MED",
 "n": 13,
@@ -870,6 +2042,60 @@
 "file": "src/data/arrivalProse.js",
 "line": 280,
 "fn": "ARRIVAL_SENSES.dominant"
+}
+},
+{
+"id": "B19522",
+"sev": "MED",
+"n": 13,
+"town": "r2s-famine-metropolis-2",
+"section": "Summary/Plot Hooks",
+"fold": "The flood uncovered an old foundation under the mud, and someone has been digging there at night",
+"text": "The flood uncovered an old foundation under the mud, and someone has been digging there at night",
+"why": "hook says the flood uncovered a foundation; PAST records no flood",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1461,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "B21989",
+"sev": "MED",
+"n": 13,
+"town": "r2r-thorp-20",
+"section": "Summary/Overview",
+"fold": "Those who suffered under the regime",
+"text": "Those who suffered under the regime",
+"why": "tyrant/regime history; PAST lists only Succession Crisis (minor) and Migration, no tyranny",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1501,
+"fn": "HISTORICAL_EVENTS_DATA.factions"
+}
+},
+{
+"id": "B04252",
+"sev": "MED",
+"n": 13,
+"town": "r2r-thorp-20",
+"section": "Summary/Overview",
+"fold": "Beneficiaries who kept their gains",
+"text": "Beneficiaries who kept their gains",
+"why": "tyrant/regime history; PAST lists only Succession Crisis (minor) and Migration, no tyranny",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1501,
+"fn": "HISTORICAL_EVENTS_DATA.factions"
 }
 },
 {
@@ -906,6 +2132,204 @@
 "file": "src/data/arrivalProse.js",
 "line": 267,
 "fn": "ARRIVAL_SENSES.dominant"
+}
+},
+{
+"id": "B03008",
+"sev": "MED",
+"n": 12,
+"town": "r2s-famine-metropolis-2",
+"section": "Summary/Plot Hooks",
+"fold": "A structure meant to hold back the water had been quietly left to rot, and someone knew",
+"text": "A structure meant to hold back the water had been quietly left to rot, and someone knew",
+"why": "hook about a flood barrier left to rot; PAST records no flood or disaster except the Siege",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1460,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "B21181",
+"sev": "MED",
+"n": 12,
+"town": "r2r-thorp-31",
+"section": "Systems/Economics",
+"fold": "The table rests on porridge and bread of the local grain.",
+"text": "The table rests on porridge and bread of the local grain.",
+"why": "'bread of the local grain': LAND gives Grain & Bread vulnerable with its resource Grain fields absent; no mill of its own",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/foodways.js",
+"line": 24,
+"fn": "SOURCE_PHRASES"
+}
+},
+{
+"id": "B02465",
+"sev": "MED",
+"n": 12,
+"town": "r2r-village-11",
+"section": "Summary/Overview",
+"fold": "A dispute over the terms of trade with a partner settlement soured into something that touched every merchant and every purse in town",
+"text": "A dispute over the terms of trade with a partner settlement soured into something that touched every merchant and every purse in town",
+"why": "prints a trade dispute with a partner settlement; CRISIS none, PAST lists no trade dispute, only the Headman vs Merchant Guilds broken promise quarrel",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1559,
+"fn": "HISTORICAL_EVENTS_DATA.severity"
+}
+},
+{
+"id": "B12687",
+"sev": "MED",
+"n": 12,
+"town": "r2r-village-11",
+"section": "Summary/Overview",
+"fold": "Merchants tied to the old partner",
+"text": "Merchants tied to the old partner",
+"why": "prints a trade dispute with a partner settlement; CRISIS none, PAST lists no trade dispute, only the Headman vs Merchant Guilds broken promise quarrel",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1560,
+"fn": "HISTORICAL_EVENTS_DATA.factions"
+}
+},
+{
+"id": "B21991",
+"sev": "MED",
+"n": 12,
+"town": "r2r-village-11",
+"section": "Summary/Overview",
+"fold": "Those who want new partners",
+"text": "Those who want new partners",
+"why": "prints a trade dispute with a partner settlement; CRISIS none, PAST lists no trade dispute, only the Headman vs Merchant Guilds broken promise quarrel",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1560,
+"fn": "HISTORICAL_EVENTS_DATA.factions"
+}
+},
+{
+"id": "B04055",
+"sev": "MED",
+"n": 12,
+"town": "r2r-village-11",
+"section": "Summary/Overview",
+"fold": "Authorities caught between them",
+"text": "Authorities caught between them",
+"why": "prints a trade dispute with a partner settlement; CRISIS none, PAST lists no trade dispute, only the Headman vs Merchant Guilds broken promise quarrel",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1560,
+"fn": "HISTORICAL_EVENTS_DATA.factions"
+}
+},
+{
+"id": "B19434",
+"sev": "MED",
+"n": 12,
+"town": "r2r-village-11",
+"section": "Summary/Plot Hooks",
+"fold": "The dispute is being kept alive by someone who profits from the uncertainty on both sides",
+"text": "The dispute is being kept alive by someone who profits from the uncertainty on both sides",
+"why": "prints a trade dispute with a partner settlement; CRISIS none, PAST lists no trade dispute, only the Headman vs Merchant Guilds broken promise quarrel",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1562,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "B02421",
+"sev": "MED",
+"n": 12,
+"town": "r2r-village-11",
+"section": "Summary/Plot Hooks",
+"fold": "A contract clause that could end the dispute has been deliberately misfiled",
+"text": "A contract clause that could end the dispute has been deliberately misfiled",
+"why": "prints a trade dispute with a partner settlement; CRISIS none, PAST lists no trade dispute, only the Headman vs Merchant Guilds broken promise quarrel",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1563,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "B20238",
+"sev": "MED",
+"n": 12,
+"town": "r2r-village-11",
+"section": "Summary/Plot Hooks",
+"fold": "The partner settlement is applying pressure through a debt no # here wants to acknowledge",
+"text": "The partner settlement is applying pressure through a debt no one here wants to acknowledge",
+"why": "prints a trade dispute with a partner settlement; CRISIS none, PAST lists no trade dispute, only the Headman vs Merchant Guilds broken promise quarrel",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1564,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "B27511",
+"sev": "MED",
+"n": 11,
+"town": "r2s-famine-metropolis-2",
+"section": "Summary/Overview",
+"fold": "Waters rose with little warning and reshaped the riverside #, drowning livelihoods and redrawing who owned what",
+"text": "Waters rose with little warning and reshaped the riverside quarter, drowning livelihoods and redrawing who owned what",
+"why": "describes a flood that reshaped the riverside quarter; PAST records only Harvest Compact, Succession Crisis, Occupation and Siege, no flood",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1456,
+"fn": "HISTORICAL_EVENTS_DATA.severity"
+}
+},
+{
+"id": "B21358",
+"sev": "MED",
+"n": 11,
+"town": "r2s-infiltrated-thorp-2",
+"section": "Table/Tonight sheet",
+"fold": "The vigilantes have begun targeting innocents based on bad information.",
+"text": "The vigilantes have begun targeting innocents based on bad information.",
+"why": "vigilantes as an armed group; DEFENCE is none in every kind, one power only, thorp of 25",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1231,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
 }
 },
 {
@@ -963,6 +2387,60 @@
 }
 },
 {
+"id": "B27508",
+"sev": "MED",
+"n": 10,
+"town": "r2r-thorp-37",
+"section": "Summary/Overview",
+"fold": "Waters rose with little warning and reshaped the low ground, drowning livelihoods and redrawing who owned what",
+"text": "Waters rose with little warning and reshaped the low ground, drowning livelihoods and redrawing who owned what",
+"why": "flood/redrawn boundaries; PAST lists Pilgrimage, Succession Crisis, Migration, no flood",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1456,
+"fn": "HISTORICAL_EVENTS_DATA.severity"
+}
+},
+{
+"id": "B12116",
+"sev": "MED",
+"n": 9,
+"town": "r2s-occupied-city-1",
+"section": "World/History",
+"fold": "Magic broke loose over the temple district and the people who lived there, and the traces it left have lingered ever since",
+"text": "Magic broke loose over the temple district and the people who lived there, and the traces it left have lingered ever since",
+"why": "names a temple district; HOUSES has no temple district (Parish churches only); the Wild Magic and Arcane Incident are 297 and 289 years ago",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyDescVariants.js",
+"line": 121,
+"fn": "HISTORY_DESC_VARIANTS.wild_magic"
+}
+},
+{
+"id": "B19875",
+"sev": "MED",
+"n": 9,
+"town": "r2r-thorp-51",
+"section": "Table/Tonight sheet",
+"fold": "The investigator who uncovered the corruption has received a death threat.",
+"text": "The investigator who uncovered the corruption has received a death threat.",
+"why": "an investigator who uncovered corruption; PEOPLE roster has only Tomislav Lebedev, PAST has no scandal",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1274,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
 "id": "28830",
 "sev": "MED",
 "n": 8,
@@ -996,6 +2474,42 @@
 "file": "src/data/arrivalProse.js",
 "line": 136,
 "fn": "ARRIVAL_SENSES.lines"
+}
+},
+{
+"id": "B17446",
+"sev": "MED",
+"n": 8,
+"town": "r2s-infiltrated-thorp-3",
+"section": "Table/Tonight sheet",
+"fold": "Someone is staging miracles for # side, and whoever is paying for them has not been named.",
+"text": "Someone is staging miracles for one side, and whoever is paying for them has not been named.",
+"why": "'for one side' presumes opposed sides; one power only, QUARRELS none",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1171,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "B02508",
+"sev": "MED",
+"n": 8,
+"town": "r2s-mass_migration-town-1",
+"section": "Summary/Overview",
+"fold": "A fire that began in the riverside # consumed barges, warehouses, and wharf infrastructure across whole districts before it could be checked",
+"text": "A fire that began in the riverside quarter consumed barges, warehouses, and wharf infrastructure across whole districts before it could be checked",
+"why": "fire across whole districts burning barges, wharf infrastructure; PAST records no fire, HOUSES has no docks or wharf, town of 2357 has no named quarter",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/history/historyRouteContext.js",
+"line": 58,
+"fn": "deriveHistoryRouteContext"
 }
 },
 {
@@ -1035,6 +2549,132 @@
 }
 },
 {
+"id": "05894",
+"sev": "MED",
+"n": 7,
+"town": "r2r-thorp-42",
+"section": "Summary/Overview",
+"fold": "Corrals and open assembly ground occupy as much space as the permanent halls.",
+"text": "Corrals and open assembly ground occupy as much space as the permanent halls.",
+"why": "'the permanent halls'; HOUSES lists no hall",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/cultureProfiles.js",
+"line": 478,
+"fn": "CULTURE_PROFILES.architecturalDetails"
+}
+},
+{
+"id": "B06477",
+"sev": "MED",
+"n": 7,
+"town": "r2s-famine-thorp-3",
+"section": "Summary/Overview",
+"fold": "Drovers push their herds along the road, and the whole place smells of the pens.",
+"text": "Drovers push their herds along the road, and the whole place smells of the pens.",
+"why": "drovers' herds and pens as normal life; FOOD failed source is livestock, Active Famine",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 169,
+"fn": "ARRIVAL_SENSES.dominant"
+}
+},
+{
+"id": "B03507",
+"sev": "MED",
+"n": 7,
+"town": "r2s-occupied-city-0",
+"section": "World/History",
+"fold": "An uncontrolled surge of magic left its mark on the temple district and on the people who were there, and the effects have never fully faded",
+"text": "An uncontrolled surge of magic left its mark on the temple district and on the people who were there, and the effects have never fully faded",
+"why": "names a temple district; HOUSES has no temple district (Parish churches only); PAST records The Wild Magic as minor, 65 years ago, not effects never faded",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1512,
+"fn": "HISTORICAL_EVENTS_DATA.severity"
+}
+},
+{
+"id": "B03020",
+"sev": "MED",
+"n": 7,
+"town": "r2s-occupied-metropolis-3",
+"section": "World/History",
+"fold": "A surge of magic no # could contain marked the temple district and everyone caught in it, and what it did has never entirely worn away",
+"text": "A surge of magic no one could contain marked the temple district and everyone caught in it, and what it did has never entirely worn away",
+"why": "names a 'temple district'; HOUSES has parish churches, cathedral, monasteries but no temple district",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyDescVariants.js",
+"line": 120,
+"fn": "HISTORY_DESC_VARIANTS.wild_magic"
+}
+},
+{
+"id": "B02854",
+"sev": "MED",
+"n": 7,
+"town": "r2r-thorp-53",
+"section": "Table/Tonight sheet",
+"fold": "A recent magical accident was covered up and the victims silenced.",
+"text": "A recent magical accident was covered up and the victims silenced.",
+"why": "magical controversy/accident/sealed thing; PAST records only The Trade Collapse",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1244,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "B21055",
+"sev": "MED",
+"n": 7,
+"town": "r2r-village-42",
+"section": "Summary/Overview",
+"fold": "The smell of sawn timber is everywhere in <N>, and so is the sawdust.",
+"text": "The smell of sawn timber is everywhere in Rossholme, and so is the sawdust.",
+"why": "smell of sawn timber and sawdust everywhere; LAND gaps say the Sawmill lacks access to timber and mountain timber",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 213,
+"fn": "ARRIVAL_SENSES.dominant"
+}
+},
+{
+"id": "B19420",
+"sev": "MED",
+"n": 7,
+"town": "r2r-town-16",
+"section": "Summary/Plot Hooks",
+"fold": "The debts that survived the crash were quietly bought up by a single hidden buyer",
+"text": "The debts that survived the crash were quietly bought up by a single hidden buyer",
+"why": "'debts that survived the crash'; PAST records no crash in Birkhel",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1417,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
 "id": "12415",
 "sev": "MED",
 "n": 6,
@@ -1050,6 +2690,78 @@
 "file": "src/data/arrivalProse.js",
 "line": 227,
 "fn": "ARRIVAL_SENSES.dominant"
+}
+},
+{
+"id": "B19248",
+"sev": "MED",
+"n": 6,
+"town": "r2r-metropolis-14",
+"section": "Summary/Overview",
+"fold": "The clang of iron from the smithies carries down the lanes of <N>.",
+"text": "The clang of iron from the smithies carries down the lanes of Prabhapeta.",
+"why": "clang of busy smithies: iron ore depleted, iron imports cut by siege (imports cover None), Weapons & Armor and Iron & Metalwork impaired",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 68,
+"fn": "ARRIVAL_SENSES.dominant"
+}
+},
+{
+"id": "B19898",
+"sev": "MED",
+"n": 6,
+"town": "r2s-famine-city-1",
+"section": "Summary/Overview",
+"fold": "The kilns are lit all through the day, and the heat of them is in every lane.",
+"text": "The kilns are lit all through the day, and the heat of them is in every lane.",
+"why": "kilns lit all day, heat in every lane; HOUSES has one Potter and LAND gaps say it lacks clay (13382: clay not brought in)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 229,
+"fn": "ARRIVAL_SENSES.dominant"
+}
+},
+{
+"id": "B21162",
+"sev": "MED",
+"n": 6,
+"town": "r2s-plague_onset-thorp-2",
+"section": "Systems/Economics",
+"fold": "The table is porridge and bread of the local grain, with fish from the local waters beside it.",
+"text": "The table is porridge and bread of the local grain, with fish from the local waters beside it.",
+"why": "fish from the local waters; LAND gives River Fisheries as depleted",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/foodways.js",
+"line": 24,
+"fn": "SOURCE_PHRASES"
+}
+},
+{
+"id": "B02600",
+"sev": "MED",
+"n": 6,
+"town": "r2s-occupied-metropolis-1",
+"section": "Summary/Plot Hooks",
+"fold": "A healer who profited enormously during the plague is being asked how they stayed untouched",
+"text": "A healer who profited enormously during the plague is being asked how they stayed untouched",
+"why": "refers to 'the plague' a healer profited from; PAST records no plague here and CRISIS is occupation",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1448,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
 }
 },
 {
@@ -1107,6 +2819,114 @@
 }
 },
 {
+"id": "B03365",
+"sev": "MED",
+"n": 5,
+"town": "r2s-plague_onset-metropolis-3",
+"section": "Summary/Overview",
+"fold": "Among the trades the place lives by, the wool trade is under strain.",
+"text": "Among the trades the place lives by, the wool trade is under strain.",
+"why": "wool trade under strain; LAND has Livestock, Textiles and Cloth Finishing running on available grazing, failed source None, raw wool exported",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1811,
+"fn": "livelihoodLead"
+}
+},
+{
+"id": "B20650",
+"sev": "MED",
+"n": 5,
+"town": "r2s-infiltrated-thorp-3",
+"section": "Table/Tonight sheet",
+"fold": "The reformist leader is being blackmailed into silence.",
+"text": "The reformist leader is being blackmailed into silence.",
+"why": "presumes a reformist leader; only Elder Council listed, roster is Hademar Meyer the eldest",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1170,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "B20279",
+"sev": "MED",
+"n": 5,
+"town": "r2r-thorp-14",
+"section": "Table/Tonight sheet",
+"fold": "The plague pit holds a body that matches no # on the list of the dead.",
+"text": "The plague pit holds a body that matches no one on the list of the dead.",
+"why": "plague/quarantine history; PAST lists only Arcane Incident, Occupation, Trade Collapse, no plague",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1449,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "B20558",
+"sev": "MED",
+"n": 5,
+"town": "r2r-thorp-14",
+"section": "Table/Tonight sheet",
+"fold": "The quarantine was used to settle old scores, and the survivors remember exactly who.",
+"text": "The quarantine was used to settle old scores, and the survivors remember exactly who.",
+"why": "plague/quarantine history; PAST lists only Arcane Incident, Occupation, Trade Collapse, no plague",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1450,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "B20181",
+"sev": "MED",
+"n": 5,
+"town": "r2r-thorp-37",
+"section": "Table/Tonight sheet",
+"fold": "The old property boundaries washed away, and the new map favours whoever drew it.",
+"text": "The old property boundaries washed away, and the new map favours whoever drew it.",
+"why": "flood/redrawn boundaries; PAST lists Pilgrimage, Succession Crisis, Migration, no flood",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1459,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "B17489",
+"sev": "MED",
+"n": 5,
+"town": "r2r-thorp-53",
+"section": "Table/Tonight sheet",
+"fold": "Something was sealed away using magic years ago and the seal is weakening.",
+"text": "Something was sealed away using magic years ago and the seal is weakening.",
+"why": "magical controversy/accident/sealed thing; PAST records only The Trade Collapse",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1246,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
 "id": "00363",
 "sev": "MED",
 "n": 4,
@@ -1158,6 +2978,96 @@
 "file": "src/generators/historyGenerator.js",
 "line": 1268,
 "fn": "noteByTemplateRow"
+}
+},
+{
+"id": "B02864",
+"sev": "MED",
+"n": 4,
+"town": "r2s-infiltrated-thorp-3",
+"section": "Table/Tonight sheet",
+"fold": "A relic claimed by both sides has resurfaced in a private collection.",
+"text": "A relic claimed by both sides has resurfaced in a private collection.",
+"why": "a relic claimed by 'both sides'; one power, QUARRELS none, no religious house",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1169,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "B20745",
+"sev": "MED",
+"n": 4,
+"town": "r2r-thorp-26",
+"section": "Table/Tonight sheet",
+"fold": "The route could be reopened, but someone with power prefers it stay closed.",
+"text": "The route could be reopened, but someone with power prefers it stay closed.",
+"why": "a route that is closed; LAND has Strategic Crossroads available and TRADE exports transit trade and tolls",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1426,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "B19259",
+"sev": "MED",
+"n": 4,
+"town": "r2r-thorp-23",
+"section": "Summary/Overview",
+"fold": "The common people rose against the ruling powers over better working conditions, and the settlement has never entirely closed the account",
+"text": "The common people rose against the ruling powers over better working conditions, and the settlement has never entirely closed the account",
+"why": "popular uprising/rebels; PAST lists Migration, Succession Crisis, Religious Conflict, no uprising",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1489,
+"fn": "HISTORICAL_EVENTS_DATA.severity"
+}
+},
+{
+"id": "B19499",
+"sev": "MED",
+"n": 4,
+"town": "r2r-thorp-9",
+"section": "Table/Tonight sheet",
+"fold": "The fire spared exactly the houses # power wanted cleared, and nobody believes it was chance.",
+"text": "The fire spared exactly the houses one power wanted cleared, and nobody believes it was chance.",
+"why": "fire and rebuilding; PAST records only The Uprising, no fire",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1437,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "B14754",
+"sev": "MED",
+"n": 4,
+"town": "r2s-recently_betrayed-hamlet-1",
+"section": "World/History",
+"fold": "People in <N> still remember the succession crisis, and it weighs on the quarrels the hamlet is having now.",
+"text": "People in Olymplathra still remember the succession crisis, and it weighs on the quarrels the hamlet is having now.",
+"why": "succession crisis weighs on the quarrels the hamlet is having now; QUARRELS: none",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1571,
+"fn": "EVENT_TYPE_NAMES"
 }
 },
 {
@@ -1269,6 +3179,60 @@
 }
 },
 {
+"id": "B02620",
+"sev": "MED",
+"n": 3,
+"town": "r2r-thorp-51",
+"section": "Table/Tonight sheet",
+"fold": "A key witness can be found, but won't speak without protection.",
+"text": "A key witness can be found, but won't speak without protection.",
+"why": "a key witness to a corruption scandal; no such person on PEOPLE, PAST has no scandal",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1275,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "B02690",
+"sev": "MED",
+"n": 3,
+"town": "r2r-thorp-23",
+"section": "Table/Tonight sheet",
+"fold": "A list of everyone who informed on the rebels survived, and it names people still in office.",
+"text": "A list of everyone who informed on the rebels survived, and it names people still in office.",
+"why": "popular uprising/rebels; PAST lists Migration, Succession Crisis, Religious Conflict, no uprising",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1492,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "B21355",
+"sev": "MED",
+"n": 3,
+"town": "r2r-thorp-23",
+"section": "Table/Tonight sheet",
+"fold": "The uprising was funded by an outside hand that has come back to collect on the favour.",
+"text": "The uprising was funded by an outside hand that has come back to collect on the favour.",
+"why": "popular uprising/rebels; PAST lists Migration, Succession Crisis, Religious Conflict, no uprising",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1493,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
 "id": "01041",
 "sev": "MED",
 "n": 2,
@@ -1356,6 +3320,187 @@
 "file": "src/data/historyDescVariants.js",
 "line": 101,
 "fn": "HISTORY_DESC_VARIANTS.great_flood"
+}
+},
+{
+"id": "02493",
+"sev": "MED",
+"n": 2,
+"town": "r2r-thorp-9",
+"section": "Table/Tonight sheet",
+"fold": "A confession was extracted from a scapegoat; the real arsonist still lives in town.",
+"text": "A confession was extracted from a scapegoat; the real arsonist still lives in town.",
+"why": "'the real arsonist still lives in town'; tag reaches th, here a thorp of 20",
+"kinds": [
+"STATE",
+"TAG"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1438,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "B14755",
+"sev": "MED",
+"n": 2,
+"town": "r2s-plague_onset-thorp-3",
+"section": "World/History",
+"fold": "People in <N> still remember the succession crisis, and it weighs on the quarrels the thorp is having now.",
+"text": "People in Dharmaghat still remember the succession crisis, and it weighs on the quarrels the thorp is having now.",
+"why": "says the succession crisis weighs on 'the quarrels the thorp is having now'; QUARRELS is none, no relations between powers",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1571,
+"fn": "EVENT_TYPE_NAMES"
+}
+},
+{
+"id": "B02351",
+"sev": "MED",
+"n": 2,
+"town": "r2r-thorp-26",
+"section": "Table/Tonight sheet",
+"fold": "A caravan master swears the collapse was arranged, and kept the correspondence to prove it.",
+"text": "A caravan master swears the collapse was arranged, and kept the correspondence to prove it.",
+"why": "'the collapse was arranged'; PAST has no trade collapse",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1427,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "B21348",
+"sev": "MED",
+"n": 2,
+"town": "r2r-thorp-20",
+"section": "Table/Tonight sheet",
+"fold": "The tyrant's private records survived, and they implicate respectable families in the worst of it.",
+"text": "The tyrant's private records survived, and they implicate respectable families in the worst of it.",
+"why": "tyrant/regime history; PAST lists only Succession Crisis (minor) and Migration, no tyranny",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1504,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "B02538",
+"sev": "MED",
+"n": 2,
+"town": "r2r-thorp-20",
+"section": "Table/Tonight sheet",
+"fold": "A fortune the regime confiscated was never returned, and the rightful heirs have surfaced.",
+"text": "A fortune the regime confiscated was never returned, and the rightful heirs have surfaced.",
+"why": "tyrant/regime history; PAST lists only Succession Crisis (minor) and Migration, no tyranny",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1505,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "B19397",
+"sev": "MED",
+"n": 2,
+"town": "r2r-thorp-47",
+"section": "Table/Tonight sheet",
+"fold": "The debt could be voided, if someone can prove it was obtained through fraud.",
+"text": "The debt could be voided, if someone can prove it was obtained through fraud.",
+"why": "'The debt': PAST records no debt or credit event (Trade Collapse, Religious Conflict, Wild Magic)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1295,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "B04630",
+"sev": "MED",
+"n": 2,
+"town": "r2r-hamlet-9",
+"section": "Summary/Overview",
+"fold": "Charcoal smoke lingers in the lane, thick and sweetish.",
+"text": "Charcoal smoke lingers in the lane, thick and sweetish.",
+"why": "charcoal smoke lingers; LAND gap says the charcoal burner lacks access to mountain timber and 13441 says it is not brought in",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 223,
+"fn": "ARRIVAL_SENSES.lines"
+}
+},
+{
+"id": "B19794",
+"sev": "MED",
+"n": 2,
+"town": "r2s-politically_fractured-hamlet-2",
+"section": "Summary/Overview",
+"fold": "The heat of a working kiln reaches you from across the lane.",
+"text": "The heat of a working kiln reaches you from across the lane.",
+"why": "a working kiln's heat; LAND gap says the charcoal burner lacks access to mountain_timber, and 13576 says timber is not brought in",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 224,
+"fn": "ARRIVAL_SENSES.lines"
+}
+},
+{
+"id": "B02983",
+"sev": "MED",
+"n": 2,
+"town": "r2r-town-16",
+"section": "Summary/Overview",
+"fold": "A speculative frenzy in timber and property collapsed almost overnight, ruining fortunes and hardening class resentment for a generation",
+"text": "A speculative frenzy in timber and property collapsed almost overnight, ruining fortunes and hardening class resentment for a generation",
+"why": "describes a speculative market collapse; PAST records only a Religious Conflict, Purge, Flood and Guild War, no crash",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1412,
+"fn": "HISTORICAL_EVENTS_DATA.severity"
+}
+},
+{
+"id": "B19275",
+"sev": "MED",
+"n": 2,
+"town": "r2r-town-50",
+"section": "Summary/Plot Hooks",
+"fold": "The condemned doctrine is quietly practised still, by more of the town's leaders than would admit it",
+"text": "The condemned doctrine is quietly practised still, by more of the town's leaders than would admit it",
+"why": "'The condemned doctrine is quietly practised still'; PAST records no heresy or religious conflict, and no religious power is listed in GOVERNMENT",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1471,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
 }
 },
 {
@@ -1536,6 +3681,132 @@
 "file": "src/data/historyData.js",
 "line": 1230,
 "fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "B03501",
+"sev": "MED",
+"n": 1,
+"town": "r2s-occupied-thorp-0",
+"section": "Summary/Overview",
+"fold": "An uncontrolled surge of magic left its mark on the houses nearest the river and on the people who were there, and the effects have never fully faded",
+"text": "An uncontrolled surge of magic left its mark on the houses nearest the river and on the people who were there, and the effects have never fully faded",
+"why": "a magic surge that marked 'the changed and their descendants'; PAST records only The Shortage and The Migration, no wild-magic event",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1512,
+"fn": "HISTORICAL_EVENTS_DATA.severity"
+}
+},
+{
+"id": "B15374",
+"sev": "MED",
+"n": 1,
+"town": "r2r-thorp-9",
+"section": "Table/Tonight sheet",
+"fold": "Rebuilding uncovered something in the ashes that predates the settlement.",
+"text": "Rebuilding uncovered something in the ashes that predates the settlement.",
+"why": "fire and rebuilding; PAST records only The Uprising, no fire",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1439,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "B02415",
+"sev": "MED",
+"n": 1,
+"town": "r2r-thorp-50",
+"section": "Table/Tonight sheet",
+"fold": "A concession won in the revolt is being quietly rolled back, and the old anger is stirring again.",
+"text": "A concession won in the revolt is being quietly rolled back, and the old anger is stirring again.",
+"why": "'concession won in the revolt': PAST lists Occupation, Religious Conflict, Wild Magic; no revolt or uprising",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1494,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "B02314",
+"sev": "MED",
+"n": 1,
+"town": "r2r-hamlet-2",
+"section": "Table/Tonight sheet",
+"fold": "A bloodline touched by the surge is now manifesting something the family cannot conceal.",
+"text": "A bloodline touched by the surge is now manifesting something the family cannot conceal.",
+"why": "'a bloodline touched by the surge'; PAST records only a Succession Crisis, no magical surge or wild-magic event",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1516,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "B02525",
+"sev": "MED",
+"n": 1,
+"town": "r2r-hamlet-21",
+"section": "Table/Tonight sheet",
+"fold": "A forged document is about to be introduced as evidence; someone knows it's fake.",
+"text": "A forged document is about to be introduced as evidence; someone knows it's fake.",
+"why": "forged document introduced 'as evidence' presumes a court or tribunal; HOUSES has none and PAST/QUARRELS record no land dispute",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1359,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "B11109",
+"sev": "MED",
+"n": 1,
+"town": "r2r-metropolis-31",
+"section": "Summary/Plot Hooks",
+"fold": "In the migration, <N> of Royal Authority holds the key to it: runs the office that decides how the crisis goes.",
+"text": "In the migration, Khishigbayar Zunghar of Royal Authority holds the key to it: runs the office that decides how the crisis goes.",
+"why": "Khishigbayar Zunghar is the innkeeper @ Inns and taverns, not of Royal Authority and runs no office deciding the migration",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1621,
+"fn": "EVENT_TYPE_NAMES"
+}
+},
+{
+"id": "B11103",
+"sev": "MED",
+"n": 1,
+"town": "r2s-mass_migration-metropolis-1",
+"section": "Summary/Plot Hooks",
+"fold": "In the migration, <N> of Grand Guild Consortium holds the key to it: runs the office that decides how the crisis goes.",
+"text": "In the migration, Tangmar Herrmann of Grand Guild Consortium holds the key to it: runs the office that decides how the crisis goes.",
+"why": "Tangmar Herrmann is the innkeeper @ Inns and taverns, not of Grand Guild Consortium; an innkeeper runs no office deciding the migration",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1621,
+"fn": "EVENT_TYPE_NAMES"
 }
 }
 ]

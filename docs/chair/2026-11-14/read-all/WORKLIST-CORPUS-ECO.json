@@ -73,6 +73,24 @@
 }
 },
 {
+"id": "B21289",
+"sev": "HIGH",
+"n": 2,
+"town": "r2r-town-58",
+"section": "World/Daily Life",
+"fold": "The town supports itself and has a little in hand.",
+"text": "The town supports itself and has a little in hand.",
+"why": "says town supports itself with a little in hand; FOOD is Pressured: grown 71%, brought in 24%, gap 5%, surplus 0%",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 2732,
+"fn": "DS-ECO-8 › MODERATE · v3"
+}
+},
+{
 "id": "01181",
 "sev": "HIGH",
 "n": 1,
@@ -88,6 +106,42 @@
 "file": "src/data/dossierStateProse/economy.generated.js",
 "line": 223,
 "fn": "DS-ECO-1 › COMBINATION C5: a low rung on a narrow approach · v2"
+}
+},
+{
+"id": "B13238",
+"sev": "MED",
+"n": 170,
+"town": "r2s-occupied-hamlet-0",
+"section": "Systems/Economics",
+"fold": "More than # of what <N> earns comes from a single trade, and most households depend on it # way or another.",
+"text": "More than half of what Qarahiid earns comes from a single trade, and most households depend on it one way or another.",
+"why": "says over half of earnings come from a single trade; TRADE has exports none, imports none, isolated access; there is no trade to earn from",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 6039,
+"fn": "DS-ECO-12 › INCOME MIX: one source carries the town · v1"
+}
+},
+{
+"id": "B03337",
+"sev": "MED",
+"n": 158,
+"town": "r2s-occupied-thorp-1",
+"section": "Systems/Economics",
+"fold": "Almost everyone's living at <N> depends on # trade, whether or not they work in it.",
+"text": "Almost everyone's living at Amarkota depends on one trade, whether or not they work in it.",
+"why": "says almost everyone's living depends on one trade; TRADE has exports none, imports none, isolated, 8 houses, none a trade",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 6050,
+"fn": "DS-ECO-12 › INCOME MIX: one source carries the town · v2"
 }
 },
 {
@@ -235,6 +289,24 @@
 }
 },
 {
+"id": "B21281",
+"sev": "MED",
+"n": 66,
+"town": "r2s-under_siege-town-0",
+"section": "Summary/Overview",
+"fold": "The town keeps people under arms for its defence.",
+"text": "The town keeps people under arms for its defence.",
+"why": "says the town keeps people under arms; DEFENCE has no garrison, militia or hired force, only a town watch",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/general.generated.js",
+"line": 11049,
+"fn": "DS-GEN-17 › GARRISONED · v1"
+}
+},
+{
 "id": "22545",
 "sev": "MED",
 "n": 52,
@@ -304,6 +376,24 @@
 "file": "src/data/dossierStateProse/economy.generated.js",
 "line": 2774,
 "fn": "DS-ECO-8 › COMFORTABLE · v3"
+}
+},
+{
+"id": "B12119",
+"sev": "MED",
+"n": 39,
+"town": "r2s-wartime-hamlet-3",
+"section": "Systems/Economics",
+"fold": "Magic carries real weight in <N>'s money.",
+"text": "Magic carries real weight in Caercross's money.",
+"why": "magic weighs in the town's money; FOOD by magic 0%, TRADE exports none, no magic house, defence magic none, made-here has no magical goods",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 6478,
+"fn": "DS-ECO-12 › INCOME WEIGHT: the practice of magic · v1"
 }
 },
 {
@@ -451,6 +541,42 @@
 }
 },
 {
+"id": "B02776",
+"sev": "MED",
+"n": 24,
+"town": "r2r-village-43",
+"section": "Systems/Resources",
+"fold": "A newcomer to <N> soon hears what its ground is worth to the powers around it, and how little of that worth stays in the village.",
+"text": "A newcomer to Uaxachuitz soon hears what its ground is worth to the powers around it, and how little of that worth stays in the village.",
+"why": "a newcomer 'soon hears' of the place; under siege (CRISIS) nothing and nobody arrives by road, trade access isolated",
+"kinds": [
+"TAG"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 5440,
+"fn": "DS-ECO-11 › STRATEGIC VALUE: the generator's assessment, framed · v4"
+}
+},
+{
+"id": "B21598",
+"sev": "MED",
+"n": 23,
+"town": "r2r-thorp-32",
+"section": "Systems/Economics",
+"fold": "There is enough food in <N>, mostly.",
+"text": "There is enough food in Hochsee, mostly.",
+"why": "'enough food, mostly'; FOOD word Pressured with a 13% gap and stores of 1.5 months",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 3319,
+"fn": "DS-ECO-9 › PRESSURED · v2"
+}
+},
+{
 "id": "00588",
 "sev": "MED",
 "n": 22,
@@ -466,6 +592,24 @@
 "file": "src/data/dossierStateProse/economy.generated.js",
 "line": 3308,
 "fn": "DS-ECO-9 › PRESSURED · v1"
+}
+},
+{
+"id": "B02771",
+"sev": "MED",
+"n": 22,
+"town": "r2s-under_siege-city-1",
+"section": "Systems/Resources",
+"fold": "A newcomer to <N> soon hears what its ground is worth to the powers around it, and how little of that worth stays in the city.",
+"text": "A newcomer to Torrivilla soon hears what its ground is worth to the powers around it, and how little of that worth stays in the city.",
+"why": "a newcomer soon hears about the town; CRISIS is Under Siege, nothing comes in or goes out, so no newcomers arrive",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 5440,
+"fn": "DS-ECO-11 › STRATEGIC VALUE: the generator's assessment, framed · v4"
 }
 },
 {
@@ -612,6 +756,24 @@
 "file": "src/data/dossierStateProse/economy.generated.js",
 "line": 6777,
 "fn": "DS-SUP-3 › ONE EXPECTED CATEGORY MISSING · v2"
+}
+},
+{
+"id": "B01502",
+"sev": "MED",
+"n": 18,
+"town": "r2s-occupied-metropolis-1",
+"section": "Summary/Overview",
+"fold": "<N>'s market handles more than the metropolis could ever use.",
+"text": "Dionpetra's market handles more than the metropolis could ever use.",
+"why": "claims the market handles more than the metropolis could ever use; STATE prosperity Poor, food Pressured, and occupation taxes its exports (vassal extraction)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/general.generated.js",
+"line": 9504,
+"fn": "DS-GEN-13 › ENTREPOT · v1"
 }
 },
 {
@@ -887,6 +1049,42 @@
 }
 },
 {
+"id": "B00791",
+"sev": "MED",
+"n": 12,
+"town": "r2r-thorp-44",
+"section": "World/Daily Life",
+"fold": "<N> has reserves deep enough to ride out most of what could happen to it.",
+"text": "Tikalahau has reserves deep enough to ride out most of what could happen to it.",
+"why": "'reserves deep enough to ride out most of what could happen': FOOD stores 2 months, no granary; defence Vulnerable",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 2829,
+"fn": "DS-ECO-8 › WEALTHY · v1"
+}
+},
+{
+"id": "B03005",
+"sev": "MED",
+"n": 12,
+"town": "r2r-hamlet-51",
+"section": "Summary/Overview",
+"fold": "A stranger can set up and sell at <N> on the next market day with nobody's leave but the stall-keeper's.",
+"text": "A stranger can set up and sell at Velipol on the next market day with nobody's leave but the stall-keeper's.",
+"why": "offers market-day selling; tag reaches famine (F) towns and hamlets with no market on HOUSES",
+"kinds": [
+"TAG"
+],
+"writer": {
+"file": "src/data/dossierStateProse/general.generated.js",
+"line": 9785,
+"fn": "DS-GEN-13 › COMMERCE: a market, no guild · v4"
+}
+},
+{
 "id": "20354",
 "sev": "MED",
 "n": 11,
@@ -1050,6 +1248,43 @@
 }
 },
 {
+"id": "28994",
+"sev": "MED",
+"n": 8,
+"town": "r2r-thorp-41",
+"section": "Systems/Economics",
+"fold": "With more than its fishing to rely on, <N> can take a bad season in # source without going hungry.",
+"text": "With more than its fishing to rely on, Xinyuan can take a bad season in one source without going hungry.",
+"why": "takes a bad season without going hungry; it cannot feed itself, deficit 7%",
+"kinds": [
+"PAIR",
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 3778,
+"fn": "DS-ECO-9 › FOOD SOURCES: several, the largest named · v3"
+}
+},
+{
+"id": "B27697",
+"sev": "MED",
+"n": 8,
+"town": "r2s-occupied-hamlet-0",
+"section": "Systems/Economics",
+"fold": "What the hamlet makes, the hamlet uses, and the accounts have no export column at all.",
+"text": "What the hamlet makes, the hamlet uses, and the accounts have no export column at all.",
+"why": "what the hamlet makes it uses; CRISIS is Vassal extraction under occupation, so the occupier takes a share of its output",
+"kinds": [
+"TAG"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 4489,
+"fn": "DS-ECO-10 › POSTURE: none · v1"
+}
+},
+{
 "id": "00473",
 "sev": "MED",
 "n": 7,
@@ -1173,6 +1408,24 @@
 "file": "src/data/dossierStateProse/general.generated.js",
 "line": 9671,
 "fn": "DS-GEN-13 › COMMERCE: a merchant guild, no bank · v2"
+}
+},
+{
+"id": "B21024",
+"sev": "MED",
+"n": 6,
+"town": "r2s-infiltrated-thorp-0",
+"section": "World/History",
+"fold": "The siege is older than anyone living, and its legacy is much of what stands in <N> now: it was built in the years after.",
+"text": "The siege is older than anyone living, and its legacy is much of what stands in Pratolitus now: it was built in the years after.",
+"why": "says the town was built after the siege; it is 233 years old and the siege was 133 years ago",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/general.generated.js",
+"line": 10797,
+"fn": "DS-GEN-16 › LEGACY-RECOVERED · v2"
 }
 },
 {
@@ -1357,6 +1610,60 @@
 }
 },
 {
+"id": "B03874",
+"sev": "MED",
+"n": 4,
+"town": "r2r-thorp-19",
+"section": "World/History",
+"fold": "Ask about the thorp's present quarrels in <N> and the siege comes up before long.",
+"text": "Ask about the thorp's present quarrels in Doireworth and the siege comes up before long.",
+"why": "'the thorp's present quarrels'; QUARRELS none, one power only",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/general.generated.js",
+"line": 10754,
+"fn": "DS-GEN-16 › LIVING-MEMORY · v2"
+}
+},
+{
+"id": "B21019",
+"sev": "MED",
+"n": 4,
+"town": "r2r-hamlet-46",
+"section": "World/History",
+"fold": "The siege is a generation old, and its legacy is much of what stands in <N> now: it was built in the years after.",
+"text": "The siege is a generation old, and its legacy is much of what stands in Celogorod now: it was built in the years after.",
+"why": "hamlet built in the years after the siege; hamlet is 108 years old and the siege was 39 years ago",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/general.generated.js",
+"line": 10797,
+"fn": "DS-GEN-16 › LEGACY-RECOVERED · v2"
+}
+},
+{
+"id": "B27928",
+"sev": "MED",
+"n": 4,
+"town": "r2s-recently_betrayed-village-3",
+"section": "Systems/Economics",
+"fold": "With a little left over each year, <N> gets by on a mix of field and market, and every year people argue over how to spend it.",
+"text": "With a little left over each year, Novasinum gets by on a mix of field and market, and every year people argue over how to spend it.",
+"why": "'a little left over each year'; FOOD word is Pressured, grown 85%, gap 5%, surplus 0%",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 96,
+"fn": "DS-ECO-1 › COMBINATION C3: the middle rungs · v1"
+}
+},
+{
 "id": "20984",
 "sev": "MED",
 "n": 3,
@@ -1462,6 +1769,24 @@
 "file": "src/data/dossierStateProse/economy.generated.js",
 "line": 5687,
 "fn": "DS-ECO-11 › RESOURCE CONDITION: worked out, recovers only with work · v1"
+}
+},
+{
+"id": "B14264",
+"sev": "MED",
+"n": 3,
+"town": "r2s-under_siege-town-2",
+"section": "Systems/Economics",
+"fold": "Nothing has come into <N> since the siege closed the roads, and what the town can still grow is not near enough.",
+"text": "Nothing has come into Yekehiid since the siege closed the roads, and what the town can still grow is not near enough.",
+"why": "'Nothing has come into' the town; FOOD says brought in 12% and imports cover 587 of daily need 4906",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 3460,
+"fn": "DS-ECO-9 › DEFICIT · v5"
 }
 },
 {
@@ -1696,6 +2021,78 @@
 "file": "src/data/dossierStateProse/economy.generated.js",
 "line": 4347,
 "fn": "DS-SUP-2 › UPSTREAM WEAK: a chain the town's work draws on is failing · v2"
+}
+},
+{
+"id": "21304",
+"sev": "MED",
+"n": 2,
+"town": "r2s-under_siege-thorp-0",
+"section": "World/History",
+"fold": "The plague years is years old, and it left a legacy of trouble in <N> that has never been fully put right.",
+"text": "The plague years is years old, and it left a legacy of trouble in Qaradavan that has never been fully put right.",
+"why": "'The plague years is years old': agreement error and empty age",
+"kinds": [
+"BROKEN"
+],
+"writer": {
+"file": "src/data/dossierStateProse/general.generated.js",
+"line": 10765,
+"fn": "DS-GEN-16 › LEGACY-UNRESOLVED · v1"
+}
+},
+{
+"id": "28726",
+"sev": "MED",
+"n": 2,
+"town": "r2s-wartime-hamlet-3",
+"section": "Systems/Economics",
+"fold": "What the hamlet's practitioners charge for, and what they buy, is a large part of its business.",
+"text": "What the hamlet's practitioners charge for, and what they buy, is a large part of its business.",
+"why": "practitioners' charges are a large part of its business; HOUSES has no practitioner and DEFENCE magic none",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 6478,
+"fn": "DS-ECO-12 › INCOME WEIGHT: the practice of magic · v1"
+}
+},
+{
+"id": "B14751",
+"sev": "MED",
+"n": 2,
+"town": "r2s-plague_onset-thorp-1",
+"section": "World/History",
+"fold": "People in <N> still remember the siege, and it weighs on the quarrels the thorp is having now.",
+"text": "People in Somathal still remember the siege, and it weighs on the quarrels the thorp is having now.",
+"why": "siege weighs on 'the quarrels the thorp is having now'; QUARRELS none",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/general.generated.js",
+"line": 10745,
+"fn": "DS-GEN-16 › LIVING-MEMORY · v1"
+}
+},
+{
+"id": "B19451",
+"sev": "MED",
+"n": 2,
+"town": "r2r-town-4",
+"section": "World/History",
+"fold": "The economic divide is years old, and its legacy is much of what stands in <N> now: it was built in the years after.",
+"text": "The economic divide is years old, and its legacy is much of what stands in Jayagiri now: it was built in the years after.",
+"why": "Economic Divide was 7 years ago in a 72-year-old town; 'much of what stands in Jayagiri now... was built in the years after' cannot be so",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/general.generated.js",
+"line": 10797,
+"fn": "DS-GEN-16 › LEGACY-RECOVERED · v2"
 }
 },
 {
@@ -2146,6 +2543,132 @@
 "file": "src/data/dossierStateProse/general.generated.js",
 "line": 11478,
 "fn": "DS-GEN-18 › BOUGHT-IN · v4"
+}
+},
+{
+"id": "B14745",
+"sev": "MED",
+"n": 1,
+"town": "r2r-hamlet-33",
+"section": "World/History",
+"fold": "People in <N> still remember the plague years, and it weighs on the quarrels the hamlet is having now.",
+"text": "People in Puripuram still remember the plague years, and it weighs on the quarrels the hamlet is having now.",
+"why": "plague years weigh on quarrels the hamlet is having now; QUARRELS: none",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/general.generated.js",
+"line": 10745,
+"fn": "DS-GEN-16 › LIVING-MEMORY · v1"
+}
+},
+{
+"id": "B14746",
+"sev": "MED",
+"n": 1,
+"town": "r2s-mass_migration-hamlet-1",
+"section": "World/History",
+"fold": "People in <N> still remember the purge, and it weighs on the quarrels the hamlet is having now.",
+"text": "People in Eleftakra still remember the purge, and it weighs on the quarrels the hamlet is having now.",
+"why": "the purge weighs on the quarrels the hamlet is having now; QUARRELS: none",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/general.generated.js",
+"line": 10745,
+"fn": "DS-GEN-16 › LIVING-MEMORY · v1"
+}
+},
+{
+"id": "B03823",
+"sev": "MED",
+"n": 1,
+"town": "r2s-recently_betrayed-hamlet-0",
+"section": "World/History",
+"fold": "Ask about the hamlet's present quarrels in <N> and the land dispute comes up before long.",
+"text": "Ask about the hamlet's present quarrels in Ioannodion and the land dispute comes up before long.",
+"why": "the hamlet's present quarrels raise the land dispute; QUARRELS: none and PAST gives the dispute as 20 years ago",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/general.generated.js",
+"line": 10754,
+"fn": "DS-GEN-16 › LIVING-MEMORY · v2"
+}
+},
+{
+"id": "B00464",
+"sev": "MED",
+"n": 1,
+"town": "r2r-village-11",
+"section": "World/History",
+"fold": "<N> came through the debt crisis, which is older than all but the oldest alive now; its legacy is what the village built in answer to it, and that still stands.",
+"text": "Milonick came through the debt crisis, which is older than all but the oldest alive now; its legacy is what the village built in answer to it, and that still stands.",
+"why": "debt crisis 68 years ago said to be 'older than all but the oldest alive'; many living people were alive for it",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/general.generated.js",
+"line": 10787,
+"fn": "DS-GEN-16 › LEGACY-RECOVERED · v1"
+}
+},
+{
+"id": "B21016",
+"sev": "MED",
+"n": 1,
+"town": "r2s-mass_migration-town-3",
+"section": "World/History",
+"fold": "The siege is a decade old, and its legacy is much of what stands in <N> now: it was built in the years after.",
+"text": "The siege is a decade old, and its legacy is much of what stands in Breitenbrunn now: it was built in the years after.",
+"why": "TOWN is 290 years old, siege 11 years ago; 'much of what stands... was built in the years after' cannot hold",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/general.generated.js",
+"line": 10797,
+"fn": "DS-GEN-16 › LEGACY-RECOVERED · v2"
+}
+},
+{
+"id": "B00718",
+"sev": "MED",
+"n": 1,
+"town": "r2r-town-22",
+"section": "Systems/Economics",
+"fold": "<N> has little food of its own but its mill, so a bad season for the mill is felt at every table.",
+"text": "Altaiköl has little food of its own but its mill, so a bad season for the mill is felt at every table.",
+"why": "'little food of its own but its mill'; FOOD grown 104% of need, surplus 4%, brought in 0%",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 3740,
+"fn": "DS-ECO-9 › FOOD SOURCES: one source · v3"
+}
+},
+{
+"id": "B11498",
+"sev": "MED",
+"n": 1,
+"town": "r2r-metropolis-8",
+"section": "Systems/Economics",
+"fold": "Its food comes from more than # source, the fishing most of all, so a poor year in # does not empty the metropolis's tables.",
+"text": "Its food comes from more than one source, the fishing most of all, so a poor year in one does not empty the metropolis's tables.",
+"why": "Says food comes mostly from fishing; LAND lists no fishery or fishing ground and TRADE lists no fish, so fishing cannot be the largest source",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 3754,
+"fn": "DS-ECO-9 › FOOD SOURCES: several, the largest named · v1"
 }
 }
 ]

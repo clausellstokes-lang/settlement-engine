@@ -90,6 +90,24 @@
 }
 },
 {
+"id": "B01171",
+"sev": "MED",
+"n": 312,
+"town": "r2s-occupied-hamlet-1",
+"section": "World/Relationships",
+"fold": "<N> named <N> as successor in front of witnesses.",
+"text": "Étaín Walsh named Fiona Sullivan as successor in front of witnesses.",
+"why": "occupying governor Étaín Walsh names the local headman Fiona Sullivan as 'successor'; they head rival powers (tense, escalating), not one office",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/npcData.js",
+"line": 2059,
+"fn": "STRESS_ECONOMIC_EFFECTS.mentor_legacy"
+}
+},
+{
 "id": "00699",
 "sev": "MED",
 "n": 307,
@@ -141,6 +159,96 @@
 "file": "src/data/npcData.js",
 "line": 2055,
 "fn": "STRESS_ECONOMIC_EFFECTS.mentor_legacy"
+}
+},
+{
+"id": "B01192",
+"sev": "MED",
+"n": 294,
+"town": "r2r-thorp-27",
+"section": "World/Relationships",
+"fold": "<N> owes their place to <N> and has kept others from climbing the same way.",
+"text": "Photeine Botaneiates owes their place to Zosime Alexios and has kept others from climbing the same way.",
+"why": "the occupying governor 'owes their place' to the local boat-headman; PEOPLE make Photeine Botaneiates the occupier's governor, who holds her post by the occupiers",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/npcData.js",
+"line": 2050,
+"fn": "STRESS_ECONOMIC_EFFECTS.mentor_legacy"
+}
+},
+{
+"id": "B00706",
+"sev": "MED",
+"n": 286,
+"town": "r2s-politically_fractured-hamlet-3",
+"section": "Summary/Overview",
+"fold": "<N> has hired away <N>'s best assistant.",
+"text": "Eirenaion Chrysoberges has hired away Kallistrate Chomatenos's best assistant.",
+"why": "carpenter hiring away a political speaker's best assistant; their roles are different trades",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/npcData.js",
+"line": 2035,
+"fn": "STRESS_ECONOMIC_EFFECTS.peer_rivalry"
+}
+},
+{
+"id": "B00404",
+"sev": "MED",
+"n": 286,
+"town": "r2s-politically_fractured-hamlet-3",
+"section": "World/Relationships",
+"fold": "<N> and <N> bid for the same contracts and sit at the same tables.",
+"text": "Eirenaion Chrysoberges and Kallistrate Chomatenos bid for the same contracts and sit at the same tables.",
+"why": "bid for same contracts; one is a political speaker, not a contractor; PEOPLE roles differ",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/npcData.js",
+"line": 2021,
+"fn": "STRESS_ECONOMIC_EFFECTS.peer_rivalry"
+}
+},
+{
+"id": "B00422",
+"sev": "MED",
+"n": 269,
+"town": "r2s-occupied-village-1",
+"section": "World/Relationships",
+"fold": "<N> and <N> signed a pact after their last quarrel cost them both.",
+"text": "Dimitri Kovalev and Borislav Klimov signed a pact after their last quarrel cost them both.",
+"why": "occupying governor and Household Elder 'signed a pact', keep its terms; header has Household Council and Occupation Authority competitive, escalating",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/npcData.js",
+"line": 2123,
+"fn": "STRESS_ECONOMIC_EFFECTS.wary_alliance"
+}
+},
+{
+"id": "B21732",
+"sev": "MED",
+"n": 269,
+"town": "r2s-occupied-village-1",
+"section": "World/Relationships",
+"fold": "They keep to its terms exactly.",
+"text": "They keep to its terms exactly.",
+"why": "the two keep exactly to a pact; header has the occupier and Household Council competitive, escalating, legitimacy crisis",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/npcData.js",
+"line": 2123,
+"fn": "STRESS_ECONOMIC_EFFECTS.wary_alliance"
 }
 },
 {
@@ -271,6 +379,60 @@
 }
 },
 {
+"id": "B00314",
+"sev": "MED",
+"n": 160,
+"town": "r2s-succession_void-thorp-1",
+"section": "Summary/Plot Hooks",
+"fold": "# of their most reliable suppliers has gone dark.",
+"text": "One of their most reliable suppliers has gone dark.",
+"why": "'one of their most reliable suppliers'; TRADE imports none and trade access isolated, so no suppliers exist",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/hookThemes.js",
+"line": 210,
+"fn": "AUTHORED_HOOK_THEMES"
+}
+},
+{
+"id": "B17377",
+"sev": "MED",
+"n": 160,
+"town": "r2s-succession_void-thorp-1",
+"section": "Summary/Plot Hooks",
+"fold": "Someone else is sending them.",
+"text": "Someone else is sending them.",
+"why": "'Someone else is sending them'; imports none, isolated, famine with no inbound goods",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/hookThemes.js",
+"line": 210,
+"fn": "AUTHORED_HOOK_THEMES"
+}
+},
+{
+"id": "B03014",
+"sev": "MED",
+"n": 139,
+"town": "r2r-thorp-38",
+"section": "Summary/Plot Hooks",
+"fold": "A supplier is providing goods of uncertain provenance.",
+"text": "A supplier is providing goods of uncertain provenance.",
+"why": "'A supplier is providing goods'; imports none, trade access isolated, so there is no supplier",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/hookThemes.js",
+"line": 218,
+"fn": "AUTHORED_HOOK_THEMES"
+}
+},
+{
 "id": "03018",
 "sev": "MED",
 "n": 137,
@@ -287,6 +449,24 @@
 "file": "src/domain/hookThemes.js",
 "line": 208,
 "fn": "AUTHORED_HOOK_THEMES"
+}
+},
+{
+"id": "B00665",
+"sev": "MED",
+"n": 126,
+"town": "r2s-famine-town-3",
+"section": "Summary/Overview",
+"fold": "<N> has been appointed to judge a case in which <N> is a party.",
+"text": "Shahd al-Jabbar has been appointed to judge a case in which Ola al-Jazari is a party.",
+"why": "Shahd al-Jabbar appointed to judge a case; PEOPLE gives her as the network's spider, and HOUSES has no court or judge",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/npcData.js",
+"line": 2266,
+"fn": "STRESS_ECONOMIC_EFFECTS.bitter_history"
 }
 },
 {
@@ -325,6 +505,24 @@
 "file": "src/data/powerSiblings.js",
 "line": 87,
 "fn": "FACTION_DESC_SIBLINGS"
+}
+},
+{
+"id": "B17460",
+"sev": "MED",
+"n": 90,
+"town": "r2s-occupied-town-3",
+"section": "Summary/Plot Hooks",
+"fold": "Someone tried to rob # of their fronts, and did it like a professional: no noise, the lock picked, nothing touched but the strongbox.",
+"text": "Someone tried to rob one of their fronts, and did it like a professional: no noise, the lock picked, nothing touched but the strongbox.",
+"why": "robbery of 'one of their fronts'; HOUSES has no Front businesses (only Smuggling operation, Rookery, Gambling den)",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/hookThemes.js",
+"line": 240,
+"fn": "AUTHORED_HOOK_THEMES"
 }
 },
 {
@@ -436,6 +634,24 @@
 }
 },
 {
+"id": "B05718",
+"sev": "MED",
+"n": 48,
+"town": "r2r-thorp-51",
+"section": "Summary/Plot Hooks",
+"fold": "Corruption Scandal",
+"text": "Corruption Scandal",
+"why": "a corruption scandal; CRISIS is Recently Betrayed and no scandal or reformers exist in the header",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/dossier/plotHooks.js",
+"line": 29,
+"fn": "TENSION_LABELS"
+}
+},
+{
 "id": "28599",
 "sev": "MED",
 "n": 46,
@@ -469,6 +685,42 @@
 "file": "src/domain/hookThemes.js",
 "line": 214,
 "fn": "AUTHORED_HOOK_THEMES"
+}
+},
+{
+"id": "B15824",
+"sev": "MED",
+"n": 44,
+"town": "r2r-hamlet-9",
+"section": "World/NPCs",
+"fold": "Runs a smaller house behind the leading # in the trade while the seat fails.",
+"text": "Runs a smaller house behind the leading one in the trade while the seat fails.",
+"why": "says the seat fails; Elder Council is Dominant and the threat is monsters, no seat failing or QUARRELS",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/npcStructure.js",
+"line": 260,
+"fn": "reg"
+}
+},
+{
+"id": "B10211",
+"sev": "MED",
+"n": 42,
+"town": "r2s-plague_onset-thorp-3",
+"section": "World/NPCs",
+"fold": "Holds the seat, but a rival claims it, and the matter is not settled.",
+"text": "Holds the seat, but a rival claims it, and the matter is not settled.",
+"why": "'a rival claims' the seat; GOVERNMENT lists one power, QUARRELS and relations are none, PEOPLE name no rival",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/npcStructure.js",
+"line": 186,
+"fn": "reg"
 }
 },
 {
@@ -526,6 +778,168 @@
 }
 },
 {
+"id": "B16645",
+"sev": "MED",
+"n": 28,
+"town": "r2s-mass_migration-hamlet-3",
+"section": "World/NPCs",
+"fold": "Secret: Was the informant whose report triggered a purge that destroyed innocent lives",
+"text": "Secret: Was the informant whose report triggered a purge that destroyed innocent lives",
+"why": "informant whose report triggered a purge; PAST records only an Occupation 5 years ago, no purge",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/npcData.js",
+"line": 1005,
+"fn": "NPC_CRIMINAL_SECRETS_BY_HOLDER.historical"
+}
+},
+{
+"id": "B01427",
+"sev": "MED",
+"n": 24,
+"town": "r2s-famine-metropolis-2",
+"section": "World/Relationships",
+"fold": "<N>'s arrest record looks good because <N> chooses which crimes get solved, and <N>'s silver pays for the favour.",
+"text": "Fódla O'Brien's arrest record looks good because Quinn Nolan chooses which crimes get solved, and Quinn Nolan's silver pays for the favour.",
+"why": "gives Fódla O'Brien an arrest record; PEOPLE has her as blade captain of Hired blades; watch commander and garrison commander are others",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/npcData.js",
+"line": 1731,
+"fn": "STRESS_ECONOMIC_EFFECTS.mil_crim_corruption"
+}
+},
+{
+"id": "B01285",
+"sev": "MED",
+"n": 24,
+"town": "r2s-famine-metropolis-2",
+"section": "World/Relationships",
+"fold": "<N> takes <N>'s silver every # day and keeps certain doors unwatched in return.",
+"text": "Teague O'Mahony takes Quinn Nolan's silver every quarter day and keeps certain doors unwatched in return.",
+"why": "has Teague O'Mahony keeping doors unwatched; PEOPLE has him as lanista of the Gladiatorial school, not watch or garrison",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/npcData.js",
+"line": 1733,
+"fn": "STRESS_ECONOMIC_EFFECTS.mil_crim_corruption"
+}
+},
+{
+"id": "B27789",
+"sev": "MED",
+"n": 23,
+"town": "r2s-famine-metropolis-3",
+"section": "World/Relationships",
+"fold": "When <N>'s crew needs a prisoner released, <N> signs the order.",
+"text": "When Thodoros Bryennios's crew needs a prisoner released, Euphrosyne Phakrases signs the order.",
+"why": "has Euphrosyne Phakrases signing prisoner releases; PEOPLE has her as lanista of the Gladiatorial school; the warden and magistrate are others",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/npcData.js",
+"line": 1739,
+"fn": "STRESS_ECONOMIC_EFFECTS.mil_crim_corruption"
+}
+},
+{
+"id": "B27787",
+"sev": "MED",
+"n": 23,
+"town": "r2s-famine-metropolis-3",
+"section": "World/Relationships",
+"fold": "When <N> needs an arrest, <N> supplies the culprit.",
+"text": "When Euphrosyne Phakrases needs an arrest, Thodoros Bryennios supplies the culprit.",
+"why": "says Euphrosyne Phakrases orders arrests; PEOPLE has her as lanista of the Gladiatorial school, with no policing office",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/npcData.js",
+"line": 1739,
+"fn": "STRESS_ECONOMIC_EFFECTS.mil_crim_corruption"
+}
+},
+{
+"id": "B12134",
+"sev": "MED",
+"n": 23,
+"town": "r2r-thorp-53",
+"section": "Summary/Plot Hooks",
+"fold": "Magical Controversy",
+"text": "Magical Controversy",
+"why": "magical controversy/accident/sealed thing; PAST records only The Trade Collapse",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/dossier/plotHooks.js",
+"line": 20,
+"fn": "TENSION_LABELS"
+}
+},
+{
+"id": "B03387",
+"sev": "MED",
+"n": 22,
+"town": "r2s-famine-city-2",
+"section": "Summary/Overview",
+"fold": "An auditor from the garrison is counting <N>'s arrest records against the coin in <N>'s house.",
+"text": "An auditor from the garrison is counting Enkhbold Qipchaq's arrest records against the coin in Enkhbold Qipchaq's house.",
+"why": "gives Enkhbold Qipchaq arrest records; PEOPLE has him as blade captain of Hired blades, not watch or garrison",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/npcData.js",
+"line": 1757,
+"fn": "STRESS_ECONOMIC_EFFECTS.mil_crim_corruption"
+}
+},
+{
+"id": "B21428",
+"sev": "MED",
+"n": 21,
+"town": "r2s-plague_onset-metropolis-0",
+"section": "World/Relationships",
+"fold": "The war between <N> and <N> is fought in raids, informants, and paperwork.",
+"text": "The war between Dokuz Salji'ud and Güchlüg Dörbete is fought in raids, informants, and paperwork.",
+"why": "war of raids between Dokuz Salji'ud and the thieves' guildmaster; PEOPLE gives Dokuz Salji'ud as a lanista, no law-enforcement office",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/npcData.js",
+"line": 1766,
+"fn": "STRESS_ECONOMIC_EFFECTS.mil_crim_suppression"
+}
+},
+{
+"id": "B17413",
+"sev": "MED",
+"n": 21,
+"town": "r2s-plague_onset-metropolis-0",
+"section": "World/Relationships",
+"fold": "Someone in <N>'s command reports to <N>.",
+"text": "Someone in Dokuz Salji'ud's command reports to Güchlüg Dörbete.",
+"why": "someone in Dokuz Salji'ud's command reports to the thieves' master; PEOPLE gives Dokuz Salji'ud as lanista with no command",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/npcData.js",
+"line": 1780,
+"fn": "STRESS_ECONOMIC_EFFECTS.mil_crim_suppression"
+}
+},
+{
 "id": "21114",
 "sev": "MED",
 "n": 20,
@@ -541,6 +955,24 @@
 "file": "src/data/personHooksByTitle.js",
 "line": 78,
 "fn": "PERSON_HOOKS_BY_TITLE.the theatre manager"
+}
+},
+{
+"id": "B26623",
+"sev": "MED",
+"n": 20,
+"town": "r2s-under_siege-metropolis-3",
+"section": "World/NPCs",
+"fold": "Wants Win # more people in Merchant Guilds over to their side before <N> notices.",
+"text": "Wants Win two more people in Merchant Guilds over to their side before Ioannikios Xiphilinos notices.",
+"why": "names Ioannikios Xiphilinos as head of Merchant Guilds; PEOPLE gives him as senior craft-guild master, Vranas Alexios is senior guild master",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/goalFamilies.js",
+"line": 197,
+"fn": "GOAL_FAMILY_LINES"
 }
 },
 {
@@ -616,6 +1048,78 @@
 }
 },
 {
+"id": "B00871",
+"sev": "MED",
+"n": 17,
+"town": "r2s-plague_onset-metropolis-0",
+"section": "World/Relationships",
+"fold": "<N> hunts <N>'s operation street by street, and <N> moves it # street ahead.",
+"text": "Dokuz Salji'ud hunts Lkhagvajav Ongirad's operation street by street, and Lkhagvajav Ongirad moves it one street ahead.",
+"why": "Dokuz Salji'ud hunts an operation street by street; PEOPLE gives Dokuz Salji'ud as lanista of the Gladiatorial school, the watch commander is Ariun Ba'arin",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/npcData.js",
+"line": 1775,
+"fn": "STRESS_ECONOMIC_EFFECTS.mil_crim_suppression"
+}
+},
+{
+"id": "B00671",
+"sev": "MED",
+"n": 17,
+"town": "r2s-plague_onset-metropolis-0",
+"section": "World/Relationships",
+"fold": "<N> has been ordered to stand down against <N> by someone above <N>.",
+"text": "Dokuz Salji'ud has been ordered to stand down against Lkhagvajav Ongirad by someone above Dokuz Salji'ud.",
+"why": "Dokuz Salji'ud ordered to stand down against a criminal operation; PEOPLE gives Dokuz Salji'ud as lanista, not an enforcer",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/npcData.js",
+"line": 1790,
+"fn": "STRESS_ECONOMIC_EFFECTS.mil_crim_suppression"
+}
+},
+{
+"id": "B01216",
+"sev": "MED",
+"n": 16,
+"town": "r2s-plague_onset-metropolis-1",
+"section": "World/Relationships",
+"fold": "<N> receives regular payments from <N>'s organization in exchange for patrol schedules and advance notice of raids.",
+"text": "Shanti Kapoor receives regular payments from Geetha Iyengar's organization in exchange for patrol schedules and advance notice of raids.",
+"why": "Shanti Kapoor sells patrol schedules and raid warnings; PEOPLE gives Shanti Kapoor as castellan of the Citadel, the watch commander is Shyam Goswami",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/npcData.js",
+"line": 1727,
+"fn": "STRESS_ECONOMIC_EFFECTS.mil_crim_corruption"
+}
+},
+{
+"id": "B02765",
+"sev": "MED",
+"n": 16,
+"town": "r2s-plague_onset-metropolis-1",
+"section": "Summary/Overview",
+"fold": "A new superior has started asking <N> awkward questions about how few arrests are made.",
+"text": "A new superior has started asking Shanti Kapoor awkward questions about how few arrests are made.",
+"why": "Shanti Kapoor questioned over how few arrests are made; PEOPLE gives Shanti Kapoor as castellan of the Citadel, the watch commander is Shyam Goswami",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/npcData.js",
+"line": 1745,
+"fn": "STRESS_ECONOMIC_EFFECTS.mil_crim_corruption"
+}
+},
+{
 "id": "21278",
 "sev": "MED",
 "n": 15,
@@ -631,6 +1135,78 @@
 "file": "src/domain/hookThemes.js",
 "line": 314,
 "fn": "AUTHORED_HOOK_THEMES"
+}
+},
+{
+"id": "16777",
+"sev": "MED",
+"n": 13,
+"town": "r2r-hamlet-32",
+"section": "World/NPCs",
+"fold": "Runs a smaller house that sells to both sides in the fight for the seat.",
+"text": "Runs a smaller house that sells to both sides in the fight for the seat.",
+"why": "sells to both sides in the fight for the seat; the crisis is debt, the council holds its seat (19512)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/npcStructure.js",
+"line": 292,
+"fn": "reg"
+}
+},
+{
+"id": "B07126",
+"sev": "MED",
+"n": 11,
+"town": "r2r-thorp-41",
+"section": "Summary/Plot Hooks",
+"fold": "Family accounts passed down from that time tell it this way: a diplomatic channel exists that the war party is suppressing",
+"text": "Family accounts passed down from that time tell it this way: a diplomatic channel exists that the war party is suppressing",
+"why": "a 'war party'; only Elder Council listed, QUARRELS none",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/dossier/plotHooks.js",
+"line": 200,
+"fn": "ECHO_PREFIXES"
+}
+},
+{
+"id": "B27667",
+"sev": "MED",
+"n": 9,
+"town": "r2r-thorp-19",
+"section": "Summary/Plot Hooks",
+"fold": "What survives from that time says: someone is staging miracles for # side, and whoever is paying for them has not been named",
+"text": "What survives from that time says: someone is staging miracles for one side, and whoever is paying for them has not been named",
+"why": "'for one side' presumes opposed sides; one power only, QUARRELS none",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/dossier/plotHooks.js",
+"line": 200,
+"fn": "ECHO_PREFIXES"
+}
+},
+{
+"id": "B20641",
+"sev": "MED",
+"n": 9,
+"town": "r2r-thorp-11",
+"section": "Summary/Plot Hooks",
+"fold": "The records of that time say: the reformist leader is being blackmailed into silence",
+"text": "The records of that time say: the reformist leader is being blackmailed into silence",
+"why": "presumes a reformist leader; only Household Council listed, roster is one head shepherd",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/dossier/plotHooks.js",
+"line": 199,
+"fn": "ECHO_PREFIXES"
 }
 },
 {
@@ -688,6 +1264,60 @@
 }
 },
 {
+"id": "B01249",
+"sev": "MED",
+"n": 6,
+"town": "r2r-city-3",
+"section": "World/Relationships",
+"fold": "<N> signs the import papers and <N> decides what is actually in the crates.",
+"text": "Constantinos Kontostephanos signs the import papers and Nikomedissa Akropolites decides what is actually in the crates.",
+"why": "gives Constantinos Kontostephanos import papers; PEOPLE has him as quarry master (warehouse factor is Xristos Kurtikios) and HOUSES has no Customs house",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/npcData.js",
+"line": 1661,
+"fn": "STRESS_ECONOMIC_EFFECTS.econ_crim_blur"
+}
+},
+{
+"id": "B01375",
+"sev": "MED",
+"n": 6,
+"town": "r2r-city-3",
+"section": "World/Relationships",
+"fold": "<N> wants to move a larger cargo through <N>'s warehouse next month.",
+"text": "Nikomedissa Akropolites wants to move a larger cargo through Constantinos Kontostephanos's warehouse next month.",
+"why": "calls it Constantinos Kontostephanos's warehouse; PEOPLE has him as quarry master @ Stone quarry, warehouse factor is Xristos Kurtikios",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/npcData.js",
+"line": 1676,
+"fn": "STRESS_ECONOMIC_EFFECTS.econ_crim_blur"
+}
+},
+{
+"id": "B26373",
+"sev": "MED",
+"n": 5,
+"town": "r2s-under_siege-city-2",
+"section": "World/NPCs",
+"fold": "Wants Take over # of <N>'s duties in Noble Governorship this season, and be seen to do it well.",
+"text": "Wants Take over one of Kallinikos Bryennios's duties in Noble Governorship this season, and be seen to do it well.",
+"why": "Kallinikos Bryennios is the senior guild master @ Merchant guilds in PEOPLE, not an officer of Noble Governorship",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/goalFamilies.js",
+"line": 196,
+"fn": "GOAL_FAMILY_LINES"
+}
+},
+{
 "id": "03038",
 "sev": "MED",
 "n": 4,
@@ -703,6 +1333,24 @@
 "file": "src/data/powerSiblings.js",
 "line": 91,
 "fn": "FACTION_DESC_SIBLINGS"
+}
+},
+{
+"id": "B24263",
+"sev": "MED",
+"n": 4,
+"town": "r2r-hamlet-18",
+"section": "World/NPCs",
+"fold": "Wants Get the most out of the work at the salt works while it runs well, and put the gains by.",
+"text": "Wants Get the most out of the work at the salt works while it runs well, and put the gains by.",
+"why": "salt works 'runs well'; LAND gaps say the salt works exists but lacks access to desert_salt",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/goalFamilies.js",
+"line": 473,
+"fn": "GOAL_FAMILY_LINES"
 }
 },
 {
@@ -778,6 +1426,24 @@
 }
 },
 {
+"id": "B20642",
+"sev": "MED",
+"n": 3,
+"town": "r2r-thorp-11",
+"section": "Table/Tonight sheet",
+"fold": "The records of that time say: the reformist leader is being blackmailed into silence.",
+"text": "The records of that time say: the reformist leader is being blackmailed into silence.",
+"why": "presumes a reformist leader; only Household Council listed, roster is one head shepherd",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/dossier/plotHooks.js",
+"line": 199,
+"fn": "ECHO_PREFIXES"
+}
+},
+{
 "id": "22409",
 "sev": "MED",
 "n": 2,
@@ -786,6 +1452,60 @@
 "fold": "The village reeve disagrees.",
 "text": "The village reeve disagrees.",
 "why": "'The village reeve'; a hamlet ruled by Household Council has no reeve",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/powerSiblings.js",
+"line": 43,
+"fn": "BASELINE_CONFLICT_SIBLINGS"
+}
+},
+{
+"id": "B26610",
+"sev": "MED",
+"n": 2,
+"town": "r2s-slave_revolt-thorp-0",
+"section": "World/NPCs",
+"fold": "Wants Win # more people in Feudal Stewardship over to their side before <N> notices.",
+"text": "Wants Win two more people in Feudal Stewardship over to their side before Samarkand Kiyad notices.",
+"why": "'two more people in Feudal Stewardship' to win over; the roster has one person of it, the reeve, and one power only",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/people/goalFamilies.js",
+"line": 197,
+"fn": "GOAL_FAMILY_LINES"
+}
+},
+{
+"id": "B02678",
+"sev": "MED",
+"n": 2,
+"town": "r2r-thorp-23",
+"section": "Table/Tonight sheet",
+"fold": "A letter found this year tells it this way: the reformist leader is being blackmailed into silence.",
+"text": "A letter found this year tells it this way: the reformist leader is being blackmailed into silence.",
+"why": "popular uprising/rebels; PAST lists Migration, Succession Crisis, Religious Conflict, no uprising",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/dossier/plotHooks.js",
+"line": 197,
+"fn": "ECHO_PREFIXES"
+}
+},
+{
+"id": "B19180",
+"sev": "MED",
+"n": 2,
+"town": "r2r-hamlet-59",
+"section": "Systems/Power",
+"fold": "The church wants approval rights over market day activities.",
+"text": "The church wants approval rights over market day activities.",
+"why": "the church as a power wanting approval rights; GOVERNMENT lists no church power and HOUSES has only 'Access to parish church' (none of its own)",
 "kinds": [
 "LACKS"
 ],
@@ -847,6 +1567,78 @@
 "file": "src/domain/dossier/plotHooks.js",
 "line": 198,
 "fn": "ECHO_PREFIXES"
+}
+},
+{
+"id": "B25166",
+"sev": "MED",
+"n": 1,
+"town": "r2s-famine-town-1",
+"section": "World/NPCs",
+"fold": "Wants Keep the quarrel between Merchant oligarchy and Religious Authorities from turning into open trouble this season.",
+"text": "Wants Keep the quarrel between Merchant oligarchy and Religious Authorities from turning into open trouble this season.",
+"why": "names a quarrel between Merchant oligarchy and Religious Authorities; QUARRELS' only open quarrel is oligarchy vs Merchant Guilds",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/goalFamilies.js",
+"line": 259,
+"fn": "GOAL_FAMILY_LINES"
+}
+},
+{
+"id": "B02646",
+"sev": "MED",
+"n": 1,
+"town": "r2s-indebted-town-0",
+"section": "Summary/Plot Hooks",
+"fold": "A letter found this year tells it this way: a merchant is funding both the reform movement and the suppression of it",
+"text": "A letter found this year tells it this way: a merchant is funding both the reform movement and the suppression of it",
+"why": "names 'the reform movement'; GOVERNMENT lists no Reform Movement power",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/dossier/plotHooks.js",
+"line": 197,
+"fn": "ECHO_PREFIXES"
+}
+},
+{
+"id": "B26398",
+"sev": "MED",
+"n": 1,
+"town": "r2r-town-39",
+"section": "World/NPCs",
+"fold": "Wants Take over # of <N>'s duties in Town Mayor this season, and be seen to do it well.",
+"text": "Wants Take over one of Penelope Komnenos's duties in Town Mayor this season, and be seen to do it well.",
+"why": "Penelope Komnenos is the mine captain @ Mine in PEOPLE, not an officer of Town Mayor; no Town Mayor holder is on the roster",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/goalFamilies.js",
+"line": 196,
+"fn": "GOAL_FAMILY_LINES"
+}
+},
+{
+"id": "B11591",
+"sev": "MED",
+"n": 1,
+"town": "r2r-city-17",
+"section": "Systems/Power",
+"fold": "Its seat is held by <N>, the senior guild master and Speaker of the Assembly.",
+"text": "Its seat is held by Samarkand Besud, the senior guild master and Speaker of the Assembly.",
+"why": "names Samarkand Besud 'Speaker' holding the Assembly seat; PEOPLE gives him only senior guild master, and Merchant Guilds are in HIGH quarrel with the Assembly",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/faceHonorifics.js",
+"line": 98,
+"fn": "FACE_HONORIFICS.the senior guild master"
 }
 }
 ]

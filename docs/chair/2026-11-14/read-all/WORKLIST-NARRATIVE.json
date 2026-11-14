@@ -18,6 +18,24 @@
 }
 },
 {
+"id": "B00096",
+"sev": "HIGH",
+"n": 4,
+"town": "r2r-thorp-9",
+"section": "Summary/Overview",
+"fold": "\"Little has happened here worth writing down, and the people here are proud of it: keeping a place quiet takes work, and nobody thanks them for it\"",
+"text": "\"Little has happened here worth writing down, and the people here are proud of it: keeping a place quiet takes work, and nobody thanks them for it\"",
+"why": "'Little has happened here worth writing down' contradicts PAST: The Uprising, catastrophic, 113 years ago",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/narrativeText.js",
+"line": 446,
+"fn": "POLITICAL_FLAVOR"
+}
+},
+{
 "id": "20438",
 "sev": "HIGH",
 "n": 3,
@@ -88,6 +106,78 @@
 "file": "src/generators/narrative/settlementOriginProse.js",
 "line": 91,
 "fn": "ORIGIN_POOLS"
+}
+},
+{
+"id": "B20740",
+"sev": "MED",
+"n": 56,
+"town": "r2s-occupied-city-3",
+"section": "Summary/Overview",
+"fold": "The road was here first.",
+"text": "The road was here first.",
+"why": "says settlement grew along the road's verge; FOUNDING says a mining camp by royal decree that became permanent when families arrived",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/narrative/settlementOriginProse.js",
+"line": 92,
+"fn": "ORIGIN_POOLS"
+}
+},
+{
+"id": "B20939",
+"sev": "MED",
+"n": 56,
+"town": "r2s-plague_onset-thorp-0",
+"section": "Summary/Overview",
+"fold": "The settlement grew along its verge, and most of what it owns arrived on somebody else's cart.",
+"text": "The settlement grew along its verge, and most of what it owns arrived on somebody else's cart.",
+"why": "'most of what it owns arrived on somebody else's cart'; FOOD grown 71%, brought in 10%; imports only salt and herbs; plague travel",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/narrative/settlementOriginProse.js",
+"line": 92,
+"fn": "ORIGIN_POOLS"
+}
+},
+{
+"id": "B27632",
+"sev": "MED",
+"n": 43,
+"town": "r2s-plague_onset-thorp-1",
+"section": "Summary/Overview",
+"fold": "What little the place grows or makes is mostly used at home; there is not much left to sell.",
+"text": "What little the place grows or makes is mostly used at home; there is not much left to sell.",
+"why": "'not much left to sell'; TRADE exports five goods (salted fish, fish oil, sea salt, artefacts) and 07355 calls salt fish a major export",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/narrativeGenerator.js",
+"line": 753,
+"fn": "SMALL_PLACE_TIER_LINES"
+}
+},
+{
+"id": "B00015",
+"sev": "MED",
+"n": 38,
+"town": "r2s-recently_betrayed-hamlet-2",
+"section": "Summary/Overview",
+"fold": "\"<N> is why this place looks as it does: it stood here before, but what stands today was rebuilt afterwards\"",
+"text": "\"The Siege is why this place looks as it does: it stood here before, but what stands today was rebuilt afterwards\"",
+"why": "'it stood here before' the Siege; PAST dates the Siege 41 years ago and the hamlet is 41 years old",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/narrativeText.js",
+"line": 377,
+"fn": "POLITICAL_FLAVOR"
 }
 },
 {
@@ -163,6 +253,24 @@
 }
 },
 {
+"id": "B08943",
+"sev": "MED",
+"n": 24,
+"town": "r2s-plague_onset-metropolis-3",
+"section": "World/History",
+"fold": "Founded by:a great trade house that outgrew every other settlement in the region",
+"text": "Founded by:a great trade house that outgrew every other settlement in the region",
+"why": "FOUNDING says trade house founder yet reason is a noble's hunting lodge settlement; founder and reason cannot both be so",
+"kinds": [
+"RECORD"
+],
+"writer": {
+"file": "src/domain/facts/founder.js",
+"line": 48,
+"fn": "FOUNDER_KIND"
+}
+},
+{
 "id": "17123",
 "sev": "MED",
 "n": 20,
@@ -196,6 +304,24 @@
 "file": "src/data/stressInstitutionEffects.js",
 "line": 348,
 "fn": "STRESS_INSTITUTION_EFFECTS.monster_pressure"
+}
+},
+{
+"id": "17102",
+"sev": "MED",
+"n": 19,
+"town": "r2s-succession_void-hamlet-3",
+"section": "World/NPCs",
+"fold": "Secret: Has been quietly removing records from the archive that would complicate the succession in ways they prefer not to see complicated",
+"text": "Secret: Has been quietly removing records from the archive that would complicate the succession in ways they prefer not to see complicated",
+"why": "removing records from the archive; hamlet of 28 has no archive on HOUSES",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/stressInstitutionEffects.js",
+"line": 340,
+"fn": "STRESS_INSTITUTION_EFFECTS.succession_void"
 }
 },
 {
@@ -361,6 +487,24 @@
 }
 },
 {
+"id": "B11654",
+"sev": "MED",
+"n": 14,
+"town": "r2s-plague_onset-metropolis-2",
+"section": "World/Traditions",
+"fold": "Kept in Deepwinter, the first week.",
+"text": "Kept in Deepwinter, the first week.",
+"why": "festival kept in Deepwinter as usual; CRISIS Plague with Restricted safety, people do not gather as usual",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/stressInstitutionEffects.js",
+"line": 113,
+"fn": "STRESS_INSTITUTION_EFFECTS.occupied"
+}
+},
+{
 "id": "01626",
 "sev": "MED",
 "n": 13,
@@ -394,6 +538,24 @@
 "file": "src/data/stressInstitutionEffects.js",
 "line": 525,
 "fn": "STRESS_INSTITUTION_EFFECTS.slave_revolt"
+}
+},
+{
+"id": "B11678",
+"sev": "MED",
+"n": 13,
+"town": "r2s-plague_onset-city-0",
+"section": "World/Traditions",
+"fold": "Kept in Harvest, the first week.",
+"text": "Kept in Harvest, the first week.",
+"why": "festival kept in Harvest as usual; CRISIS Plague with Quarantined safety, people do not gather as usual",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/stressInstitutionEffects.js",
+"line": 113,
+"fn": "STRESS_INSTITUTION_EFFECTS.occupied"
 }
 },
 {
@@ -469,6 +631,42 @@
 }
 },
 {
+"id": "B20803",
+"sev": "MED",
+"n": 11,
+"town": "r2s-under_siege-metropolis-1",
+"section": "Summary/Overview",
+"fold": "The sea gives the settlement its living and sets the terms of it.",
+"text": "The sea gives the settlement its living and sets the terms of it.",
+"why": "sea 'gives its living': fishing grounds depleted, sea fisheries exhausted, siege blocks water trade; imports cover None",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/narrative/settlementOriginProse.js",
+"line": 144,
+"fn": "ORIGIN_POOLS"
+}
+},
+{
+"id": "B14330",
+"sev": "MED",
+"n": 11,
+"town": "r2s-succession_void-hamlet-0",
+"section": "World/History",
+"fold": "Now the seat is empty, and rivals are fighting over it.",
+"text": "Now the seat is empty, and rivals are fighting over it.",
+"why": "says the seat is empty and fought over; 03174 says Acting Elder Titia Caesar keeps the seat meanwhile",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/narrativeData.js",
+"line": 448,
+"fn": "STRESS_NOTES.succession_void"
+}
+},
+{
 "id": "21980",
 "sev": "MED",
 "n": 10,
@@ -484,6 +682,24 @@
 "file": "src/data/narrativeData.js",
 "line": 432,
 "fn": "STRESS_NOTES.recently_betrayed"
+}
+},
+{
+"id": "B13256",
+"sev": "MED",
+"n": 9,
+"town": "r2s-under_siege-city-0",
+"section": "Summary/Overview",
+"fold": "Most of what it eats, sells, and fears arrives the same way.",
+"text": "Most of what it eats, sells, and fears arrives the same way.",
+"why": "most of what it eats arrives by water; FOOD: brought in only 24%, grown 19%, by magic 37%; and under siege nothing arrives by water",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/narrative/settlementOriginProse.js",
+"line": 145,
+"fn": "ORIGIN_POOLS"
 }
 },
 {
@@ -649,6 +865,24 @@
 }
 },
 {
+"id": "B00101",
+"sev": "MED",
+"n": 7,
+"town": "r2r-hamlet-8",
+"section": "Summary/Overview",
+"fold": "\"Nothing has ever forced this place to change much.",
+"text": "\"Nothing has ever forced this place to change much.",
+"why": "'Nothing has ever forced this place to change'; PAST records a Purge, a catastrophic Arcane Incident and a Siege 8 years ago",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/narrativeText.js",
+"line": 442,
+"fn": "POLITICAL_FLAVOR"
+}
+},
+{
 "id": "15081",
 "sev": "MED",
 "n": 6,
@@ -700,6 +934,24 @@
 "file": "src/data/narrativeData.js",
 "line": 401,
 "fn": "STRESS_DESCS.slave_revolt"
+}
+},
+{
+"id": "B21058",
+"sev": "MED",
+"n": 6,
+"town": "r2r-thorp-35",
+"section": "Summary/Overview",
+"fold": "The smell of the river reaches you before the settlement does: clean water, reeds, the particular mud of a working waterfront.",
+"text": "The smell of the river reaches you before the settlement does: clean water, reeds, the particular mud of a working waterfront.",
+"why": "'working waterfront': HOUSES has no docks or fishing community; forest woodcutters' camp only",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/narrativeData.js",
+"line": 27,
+"fn": "ARRIVAL_SCENES.river"
 }
 },
 {
@@ -862,6 +1114,42 @@
 "file": "src/data/stressInstitutionEffects.js",
 "line": 525,
 "fn": "STRESS_INSTITUTION_EFFECTS.slave_revolt"
+}
+},
+{
+"id": "B09729",
+"sev": "MED",
+"n": 4,
+"town": "r2s-succession_void-hamlet-3",
+"section": "Table/Tonight sheet",
+"fold": "Has been quietly removing records from the archive that would complicate the succession in ways they prefer not to see complicated.",
+"text": "Has been quietly removing records from the archive that would complicate the succession in ways they prefer not to see complicated.",
+"why": "records removed from the archive; HOUSES has no archive",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/stressInstitutionEffects.js",
+"line": 340,
+"fn": "STRESS_INSTITUTION_EFFECTS.succession_void"
+}
+},
+{
+"id": "B06988",
+"sev": "MED",
+"n": 4,
+"town": "r2s-succession_void-hamlet-2",
+"section": "Summary/Overview",
+"fold": "Everyone can see the seat is empty, and every claimant is buying support with promises that will have to be paid.",
+"text": "Everyone can see the seat is empty, and every claimant is buying support with promises that will have to be paid.",
+"why": "says the seat is empty; 03208 says Acting Steward Berta Braun keeps the seat meanwhile",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/narrativeText.js",
+"line": 162,
+"fn": "PRESSURE_SENTENCES"
 }
 },
 {
@@ -1081,6 +1369,42 @@
 }
 },
 {
+"id": "B21549",
+"sev": "MED",
+"n": 3,
+"town": "r2s-under_siege-thorp-3",
+"section": "Table/Tonight sheet",
+"fold": "Their family left last week.",
+"text": "Their family left last week.",
+"why": "'Their family left last week'; under siege nothing goes out by road, gate or water",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/stressInstitutionEffects.js",
+"line": 44,
+"fn": "STRESS_INSTITUTION_EFFECTS.excludes"
+}
+},
+{
+"id": "B01044",
+"sev": "MED",
+"n": 3,
+"town": "r2s-slave_revolt-town-2",
+"section": "Summary/Overview",
+"fold": "<N> is quiet in the way a held breath is quiet.",
+"text": "Ripaplenum is quiet in the way a held breath is quiet.",
+"why": "'quiet' under a revolt: stability Unstable (revolt not contained), safety Critical — Slave Revolt",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/narrativeData.js",
+"line": 395,
+"fn": "STRESS_DESCS.slave_revolt"
+}
+},
+{
 "id": "22030",
 "sev": "MED",
 "n": 2,
@@ -1204,6 +1528,24 @@
 "file": "src/data/narrativeData.js",
 "line": 41,
 "fn": "ARRIVAL_SCENES.port"
+}
+},
+{
+"id": "B01036",
+"sev": "MED",
+"n": 2,
+"town": "r2s-famine-town-2",
+"section": "Summary/Overview",
+"fold": "<N> is orderly in the way that a settlement is orderly when order is being enforced.",
+"text": "Vatanserai is orderly in the way that a settlement is orderly when order is being enforced.",
+"why": "calls the town orderly; stability reads Desperate, hunger eroding order, legitimacy crisis, safety Dangerous",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/narrativeData.js",
+"line": 191,
+"fn": "STRESS_DESCS.famine"
 }
 },
 {
@@ -1582,6 +1924,240 @@
 "file": "src/generators/narrativeText.js",
 "line": 228,
 "fn": "PRESSURE_SENTENCES"
+}
+},
+{
+"id": "B09864",
+"sev": "MED",
+"n": 1,
+"town": "r2r-thorp-38",
+"section": "Table/Tonight sheet",
+"fold": "Helped engineer the original supply disruption that triggered the famine, believing it would only last a week.",
+"text": "Helped engineer the original supply disruption that triggered the famine, believing it would only last a week.",
+"why": "a secret of engineering 'the original supply disruption' that triggered the famine; imports none, isolated, failed source None",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/stressInstitutionEffects.js",
+"line": 97,
+"fn": "STRESS_INSTITUTION_EFFECTS.needs"
+}
+},
+{
+"id": "B19088",
+"sev": "MED",
+"n": 1,
+"town": "r2s-recently_betrayed-thorp-0",
+"section": "Summary/Overview",
+"fold": "The betrayal's consequences are still unfolding; <N>, the Household Elder, knows more than they've disclosed about what was sold and to whom.",
+"text": "The betrayal's consequences are still unfolding; Theophano Akropolites, the Household Elder, knows more than they've disclosed about what was sold and to whom.",
+"why": "title Household Elder for Theophano Akropolites; roster gives boat-headman only and HOUSES has no Household elder",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/narrativeText.js",
+"line": 135,
+"fn": "PRESSURE_SENTENCES"
+}
+},
+{
+"id": "B10954",
+"sev": "MED",
+"n": 1,
+"town": "r2s-insurgency-hamlet-1",
+"section": "Summary/Overview",
+"fold": "In <N> the rents go uncollected, the summons go unanswered, and the men Free Elder Council sends to enforce either turn back or turn coat.",
+"text": "In Neuhof the rents go uncollected, the summons go unanswered, and the men Free Elder Council sends to enforce either turn back or turn coat.",
+"why": "rents uncollected and men sent to enforce; DEFENCE has no garrison, militia, watch or hired force, HOUSES has no landlord or steward",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/narrativeText.js",
+"line": 188,
+"fn": "PRESSURE_SENTENCES"
+}
+},
+{
+"id": "B17142",
+"sev": "MED",
+"n": 1,
+"town": "r2s-famine-town-1",
+"section": "Summary/Overview",
+"fold": "Since the harvest failed, whoever holds the food in <N> holds the power, and at least # powers are fighting over the stores.",
+"text": "Since the harvest failed, whoever holds the food in Hongcheng holds the power, and at least three powers are fighting over the stores.",
+"why": "says three or more powers fight over the stores; QUARRELS has one open conflict, between two powers (oligarchy and Merchant Guilds)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/narrativeText.js",
+"line": 87,
+"fn": "famineFoodIsPower"
+}
+},
+{
+"id": "B00999",
+"sev": "MED",
+"n": 1,
+"town": "r2s-indebted-town-1",
+"section": "Summary/Overview",
+"fold": "<N> is in reasonable shape.",
+"text": "Xiaba is in reasonable shape.",
+"why": "says Xiaba is in reasonable shape; prosperity Struggling, stability Strained with creditors steering decisions, legitimacy crisis",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/narrativeData.js",
+"line": 233,
+"fn": "STRESS_DESCS.indebted"
+}
+},
+{
+"id": "B20992",
+"sev": "MED",
+"n": 1,
+"town": "r2s-indebted-town-3",
+"section": "Summary/Overview",
+"fold": "The shortfall is met through carriage by magic or the tracks in a good season, and every season the terms are bargained again.",
+"text": "The shortfall is met through carriage by magic or the tracks in a good season, and every season the terms are bargained again.",
+"why": "says the food shortfall is met by magical carriage; FOOD gives 'by magic 0%'",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/narrative/settlementOriginProse.js",
+"line": 210,
+"fn": "ORIGIN_POOLS"
+}
+},
+{
+"id": "B27626",
+"sev": "MED",
+"n": 1,
+"town": "r2s-politically_fractured-town-2",
+"section": "Summary/Overview",
+"fold": "What is missing comes in through carriage by magic, the tracks in a good season, or the favour of a patron — when it comes at all.",
+"text": "What is missing comes in through carriage by magic, the tracks in a good season, or the favour of a patron — when it comes at all.",
+"why": "says the missing supply comes in 'by magic'; FOOD gives by magic 0%, 16% brought in by tracks and trade",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/narrative/settlementOriginProse.js",
+"line": 207,
+"fn": "ORIGIN_POOLS"
+}
+},
+{
+"id": "B04491",
+"sev": "MED",
+"n": 1,
+"town": "r2r-city-37",
+"section": "Summary/Overview",
+"fold": "By Merchant Guild Council, which can neither turn people away nor keep them fed, and by the old residents, who are keeping a private account of who arrived.",
+"text": "By Merchant Guild Council, which can neither turn people away nor keep them fed, and by the old residents, who are keeping a private account of who arrived.",
+"why": "says Merchant Guild Council cannot keep the arrivals fed; FOOD word is Secure, 9 months in store, granary stands, gap only 3%",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/narrativeText.js",
+"line": 220,
+"fn": "PRESSURE_SENTENCES"
+}
+},
+{
+"id": "B04486",
+"sev": "MED",
+"n": 1,
+"town": "r2r-city-3",
+"section": "Summary/Overview",
+"fold": "By City-State Council, which can neither turn people away nor keep them fed, and by the old residents, who are keeping a private account of who arrived.",
+"text": "By City-State Council, which can neither turn people away nor keep them fed, and by the old residents, who are keeping a private account of who arrived.",
+"why": "says City-State Council cannot keep arrivals fed; FOOD word is Secure, 8.5 months in store, granary stands, gap only 2%",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/narrativeText.js",
+"line": 220,
+"fn": "PRESSURE_SENTENCES"
+}
+},
+{
+"id": "B14267",
+"sev": "MED",
+"n": 1,
+"town": "r2s-infiltrated-metropolis-3",
+"section": "Summary/Overview",
+"fold": "Nothing in <N> is out of place.",
+"text": "Nothing in Vatantash is out of place.",
+"why": "'Nothing is out of place' contradicts stability Vulnerable (decisions shaped from outside), monsters on roads, and the infiltrator sentence in the same block",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/narrativeData.js",
+"line": 269,
+"fn": "STRESS_DESCS.infiltrated"
+}
+},
+{
+"id": "B01841",
+"sev": "MED",
+"n": 1,
+"town": "r2s-politically_fractured-metropolis-2",
+"section": "Summary/Overview",
+"fold": "<N>, the governor, is the only person all # powers will still speak to, which makes them either the key to resolution or the next target.",
+"text": "Eun Lu, the governor, is the only person all three powers will still speak to, which makes them either the key to resolution or the next target.",
+"why": "Says 'all three powers' but GOVERNMENT lists six powers (QUARRELS names two); the number is not so",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/narrativeText.js",
+"line": 120,
+"fn": "PRESSURE_SENTENCES"
+}
+},
+{
+"id": "B19424",
+"sev": "MED",
+"n": 1,
+"town": "r2s-monster_pressure-metropolis-2",
+"section": "Summary/Overview",
+"fold": "The defences of <N> were built for quieter years than these, as <N>, the watch commander, warned at the last muster.",
+"text": "The defences of Qasrmela were built for quieter years than these, as Harun al-Zahir, the watch commander, warned at the last muster.",
+"why": "says defences built for quieter years; DEFENCE is Fortress with massive walls, citadel, garrisons; 05971 says strongly defended",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/narrativeText.js",
+"line": 170,
+"fn": "PRESSURE_SENTENCES"
+}
+},
+{
+"id": "B00042",
+"sev": "MED",
+"n": 1,
+"town": "r2r-metropolis-34",
+"section": "Summary/Overview",
+"fold": "\"Authority here has a provisional quality, as though everyone is still waiting for the arrangement that followed the Land Dispute to be replaced by a permanent # that never comes\"",
+"text": "\"Authority here has a provisional quality, as though everyone is still waiting for the arrangement that followed the Land Dispute to be replaced by a permanent one that never comes\"",
+"why": "says authority is provisional and everyone awaits a permanent arrangement; STATE/GOVERNMENT give Stable, legitimacy Approved, City-State Council Dominant, no crisis",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/narrativeText.js",
+"line": 303,
+"fn": "POLITICAL_FLAVOR"
 }
 }
 ]

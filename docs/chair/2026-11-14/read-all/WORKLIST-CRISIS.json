@@ -73,6 +73,42 @@
 }
 },
 {
+"id": "B19735",
+"sev": "MED",
+"n": 115,
+"town": "r2s-plague_onset-hamlet-0",
+"section": "World/Faith",
+"fold": "The hamlet has no church of its own; its people walk to the next village’s parish church for the rites.",
+"text": "The hamlet has no church of its own; its people walk to the next village’s parish church for the rites.",
+"why": "people walk to the next village's church for rites; under plague they do not travel or gather as usual",
+"kinds": [
+"TAG"
+],
+"writer": {
+"file": "src/domain/dossier/faithReading.js",
+"line": 427,
+"fn": "faithLinesOf"
+}
+},
+{
+"id": "B21207",
+"sev": "MED",
+"n": 93,
+"town": "r2s-plague_onset-thorp-2",
+"section": "World/Faith",
+"fold": "The thorp has no church of its own; its people walk to the next village’s parish church for the rites.",
+"text": "The thorp has no church of its own; its people walk to the next village’s parish church for the rites.",
+"why": "people walk to the next village's church for rites; under plague people do not travel or gather as usual",
+"kinds": [
+"TAG"
+],
+"writer": {
+"file": "src/domain/dossier/faithReading.js",
+"line": 427,
+"fn": "faithLinesOf"
+}
+},
+{
 "id": "06518",
 "sev": "MED",
 "n": 81,
@@ -271,6 +307,42 @@
 }
 },
 {
+"id": "B15536",
+"sev": "MED",
+"n": 15,
+"town": "r2s-infiltrated-thorp-3",
+"section": "Summary/Plot Hooks",
+"fold": "Religious Tension",
+"text": "Religious Tension",
+"why": "religious tension; PAST has no religious event, no religious house, one power, QUARRELS none",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/activeConditions.js",
+"line": 421,
+"fn": "CONDITION_ARCHETYPE_TEMPLATES"
+}
+},
+{
+"id": "B15562",
+"sev": "MED",
+"n": 15,
+"town": "r2s-infiltrated-thorp-3",
+"section": "World/History",
+"fold": "Religious tension",
+"text": "Religious tension",
+"why": "religious tension in the history; PAST lists Purge, Debt Crisis, Succession Crisis only",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/activeConditions.js",
+"line": 421,
+"fn": "CONDITION_ARCHETYPE_TEMPLATES"
+}
+},
+{
 "id": "22640",
 "sev": "MED",
 "n": 14,
@@ -377,6 +449,43 @@
 "file": "src/domain/summary/settlementQuickGuide.js",
 "line": 733,
 "fn": "SCOPE_PHRASE"
+}
+},
+{
+"id": "B14649",
+"sev": "MED",
+"n": 10,
+"town": "r2s-insurgency-hamlet-0",
+"section": "Systems/Defense",
+"fold": "Passing through <N>, you would see nothing amiss unless you asked who is really in charge.",
+"text": "Passing through Dioneia, you would see nothing amiss unless you asked who is really in charge.",
+"why": "'nothing amiss' on passing through; stability Desperate (hunger eroding order), Rebellion and Active Famine are live",
+"kinds": [
+"PAIR",
+"STATE"
+],
+"writer": {
+"file": "src/domain/crisis/crisisSummaryVantage.js",
+"line": 347,
+"fn": "CRISIS_SUMMARY_POOLS"
+}
+},
+{
+"id": "B27943",
+"sev": "MED",
+"n": 10,
+"town": "r2s-succession_void-hamlet-2",
+"section": "Systems/Defense",
+"fold": "With no # in <N>'s seat, nobody can give the order that calls everyone to its defence.",
+"text": "With no one in Weichturm's seat, nobody can give the order that calls everyone to its defence.",
+"why": "no one in the seat so nobody can order defence; 03208 has an Acting Steward and the militia captain exists",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/domain/crisis/crisisSummaryVantage.js",
+"line": 293,
+"fn": "CRISIS_SUMMARY_POOLS"
 }
 },
 {
@@ -544,6 +653,24 @@
 }
 },
 {
+"id": "B01051",
+"sev": "MED",
+"n": 8,
+"town": "r2r-hamlet-35",
+"section": "Systems/Defense",
+"fold": "<N> is split between rival powers, and a quarrel where their ground meets can turn into a brawl.",
+"text": "Sundoy is split between rival powers, and a quarrel where their ground meets can turn into a brawl.",
+"why": "'split between rival powers, a quarrel can turn into a brawl': QUARRELS none, relations none",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/crisis/crisisSummaryVantage.js",
+"line": 162,
+"fn": "CRISIS_SUMMARY_POOLS"
+}
+},
+{
 "id": "09633",
 "sev": "MED",
 "n": 7,
@@ -595,6 +722,24 @@
 "file": "src/domain/crisis/crisisSummaryVantage.js",
 "line": 346,
 "fn": "CRISIS_SUMMARY_POOLS"
+}
+},
+{
+"id": "B03858",
+"sev": "MED",
+"n": 7,
+"town": "r2s-occupied-city-0",
+"section": "Summary/Overview",
+"fold": "Ask about the place and you are told it is built in timber and stone, and run by guild and estate.",
+"text": "Ask about the place and you are told it is built in timber and stone, and run by guild and estate.",
+"why": "says the place is 'run by guild and estate'; GOVERNMENT is Military City Council under a Strong Occupation Authority; no estate power listed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/summary/settlementQuickGuide.js",
+"line": 235,
+"fn": "SCOPE_LINE_FRAMES"
 }
 },
 {
@@ -670,6 +815,42 @@
 }
 },
 {
+"id": "B11090",
+"sev": "MED",
+"n": 6,
+"town": "r2r-thorp-22",
+"section": "Summary/Plot Hooks",
+"fold": "In the insurgency, it is aimed at <N> of Elder Council: holds the seat, and the right to it is already in dispute.",
+"text": "In the insurgency, it is aimed at Akna Balam of Elder Council: holds the seat, and the right to it is already in dispute.",
+"why": "puts Akna Balam on the Elder Council; PEOPLE gives her only as boat-headman at the Fishing community",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/crisis/crisisCast.js",
+"line": 181,
+"fn": "CAST_REASONS"
+}
+},
+{
+"id": "B03437",
+"sev": "MED",
+"n": 6,
+"town": "r2s-monster_pressure-thorp-3",
+"section": "Summary/Plot Hooks",
+"fold": "An old story from that time: a diplomatic channel exists that the war party is suppressing",
+"text": "An old story from that time: a diplomatic channel exists that the war party is suppressing",
+"why": "a 'war party'; only Elder Council listed, QUARRELS none, thorp of 10",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/coherence/hookTruth.js",
+"line": 122,
+"fn": "VILLAGER_TIERS"
+}
+},
+{
 "id": "09632",
 "sev": "MED",
 "n": 5,
@@ -739,6 +920,43 @@
 "file": "src/domain/summary/settlementQuickGuide.js",
 "line": 737,
 "fn": "SCOPE_PHRASE"
+}
+},
+{
+"id": "11595",
+"sev": "MED",
+"n": 5,
+"town": "r2s-indebted-thorp-1",
+"section": "Summary/Plot Hooks",
+"fold": "In the debt crisis, <N> of Household Council is the # who would come to terms: holds the seat.",
+"text": "In the debt crisis, Eir Ragnarsson of Household Council is the one who would come to terms: holds the seat.",
+"why": "'is the one who would come to terms: holds the seat.' — clause after colon has no subject",
+"kinds": [
+"BROKEN",
+"STATE"
+],
+"writer": {
+"file": "src/domain/crisis/crisisHooks.js",
+"line": 89,
+"fn": "LINE_ROLE_CLAUSE"
+}
+},
+{
+"id": "B03478",
+"sev": "MED",
+"n": 5,
+"town": "r2s-slave_revolt-thorp-3",
+"section": "Summary/Plot Hooks",
+"fold": "An old story from that time: the reformist leader is being blackmailed into silence",
+"text": "An old story from that time: the reformist leader is being blackmailed into silence",
+"why": "presumes a reformist leader; only Household Council listed, roster is one head shepherd",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/coherence/hookTruth.js",
+"line": 122,
+"fn": "VILLAGER_TIERS"
 }
 },
 {
@@ -814,6 +1032,25 @@
 }
 },
 {
+"id": "11549",
+"sev": "MED",
+"n": 4,
+"town": "r2s-recently_betrayed-thorp-2",
+"section": "Summary/Plot Hooks",
+"fold": "In the betrayal, it is aimed at <N> of Household Council: holds the seat, and the right to it is already in dispute.",
+"text": "In the betrayal, it is aimed at Atotoztli Caan of Household Council: holds the seat, and the right to it is already in dispute.",
+"why": "'it is aimed at Atotoztli Caan...: holds the seat' — 'it' has no antecedent and the clause after the colon has no subject",
+"kinds": [
+"BROKEN",
+"STATE"
+],
+"writer": {
+"file": "src/domain/crisis/crisisCast.js",
+"line": 181,
+"fn": "CAST_REASONS"
+}
+},
+{
 "id": "03970",
 "sev": "MED",
 "n": 3,
@@ -847,6 +1084,61 @@
 "file": "src/domain/summary/settlementQuickGuide.js",
 "line": 737,
 "fn": "SCOPE_PHRASE"
+}
+},
+{
+"id": "11671",
+"sev": "MED",
+"n": 3,
+"town": "r2s-slave_revolt-thorp-3",
+"section": "Summary/Plot Hooks",
+"fold": "In the revolt, it is aimed at <N> of Household Council: holds the seat, and the right to it is already in dispute.",
+"text": "In the revolt, it is aimed at Badr ibn Rashid of Household Council: holds the seat, and the right to it is already in dispute.",
+"why": "'it is aimed at Badr ibn Rashid...: holds the seat' — 'it' has no antecedent and the clause after the colon has no subject",
+"kinds": [
+"BROKEN",
+"STATE"
+],
+"writer": {
+"file": "src/domain/crisis/crisisCast.js",
+"line": 181,
+"fn": "CAST_REASONS"
+}
+},
+{
+"id": "B19085",
+"sev": "MED",
+"n": 3,
+"town": "r2s-recently_betrayed-town-3",
+"section": "Summary/Plot Hooks",
+"fold": "The betrayal turns on the town hall, run by <N>: whoever wins it over decides how the betrayal goes.",
+"text": "The betrayal turns on the town hall, run by Teodora Gusev: whoever wins it over decides how the betrayal goes.",
+"why": "Town hall 'run by Teodora Gusev'; PEOPLE has her as watch captain of the Town watch, and nobody is listed for the Town hall",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/crisis/crisisHooks.js",
+"line": 190,
+"fn": "leverSentence"
+}
+},
+{
+"id": "B11061",
+"sev": "MED",
+"n": 3,
+"town": "r2s-indebted-town-1",
+"section": "Summary/Plot Hooks",
+"fold": "In the debt crisis, <N> of Merchant Guilds is the # who would come to terms: a member of the merchants' power, with the seat itself in dispute.",
+"text": "In the debt crisis, Reiko Inoue of Merchant Guilds is the one who would come to terms: a member of the merchants' power, with the seat itself in dispute.",
+"why": "puts Reiko Inoue 'of Merchant Guilds'; PEOPLE has her as senior craft-guild master of Craft guilds, and HOUSES has no Merchant guilds",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/crisis/crisisHooks.js",
+"line": 89,
+"fn": "LINE_ROLE_CLAUSE"
 }
 },
 {
@@ -919,6 +1211,81 @@
 "file": "src/domain/summary/settlementQuickGuide.js",
 "line": 297,
 "fn": "scopeAgainstRecord"
+}
+},
+{
+"id": "11569",
+"sev": "MED",
+"n": 2,
+"town": "r2s-religious_conversion-thorp-3",
+"section": "Summary/Plot Hooks",
+"fold": "In the conversion, it is aimed at <N> of Household Council: holds the seat, and the right to it is already in dispute.",
+"text": "In the conversion, it is aimed at Calvus Corvinus of Household Council: holds the seat, and the right to it is already in dispute.",
+"why": "'it is aimed at Calvus Corvinus...: holds the seat' — 'it' has no antecedent and the clause after the colon has no subject",
+"kinds": [
+"BROKEN",
+"STATE"
+],
+"writer": {
+"file": "src/domain/crisis/crisisCast.js",
+"line": 181,
+"fn": "CAST_REASONS"
+}
+},
+{
+"id": "11668",
+"sev": "MED",
+"n": 2,
+"town": "r2s-slave_revolt-thorp-2",
+"section": "Summary/Plot Hooks",
+"fold": "In the revolt, it is aimed at <N> of Elder Council: holds the seat, and the right to it is already in dispute.",
+"text": "In the revolt, it is aimed at Tianmei Wu of Elder Council: holds the seat, and the right to it is already in dispute.",
+"why": "'it is aimed at Tianmei Wu...: holds the seat' — 'it' has no antecedent and the clause after the colon has no subject",
+"kinds": [
+"BROKEN",
+"STATE"
+],
+"writer": {
+"file": "src/domain/crisis/crisisCast.js",
+"line": 181,
+"fn": "CAST_REASONS"
+}
+},
+{
+"id": "10071",
+"sev": "MED",
+"n": 2,
+"town": "r2s-indebted-village-3",
+"section": "Summary/Overview",
+"fold": "Greek-inspired; people here live in a place built around the harbour, on the coast, and run by civic association.",
+"text": "Greek-inspired; people here live in a place built around the harbour, on the coast, and run by civic association.",
+"why": "'built around the harbour'; HOUSES has no harbour or docks",
+"kinds": [
+"LACKS",
+"STATE"
+],
+"writer": {
+"file": "src/domain/summary/settlementQuickGuide.js",
+"line": 294,
+"fn": "scopeAgainstRecord"
+}
+},
+{
+"id": "B11043",
+"sev": "MED",
+"n": 2,
+"town": "r2s-famine-town-1",
+"section": "Summary/Plot Hooks",
+"fold": "In the crisis, <N> of Merchant oligarchy takes the worst of it: the blame falls on the house, and its good name pays for the crisis.",
+"text": "In the crisis, Wen Ma of Merchant oligarchy takes the worst of it: the blame falls on the house, and its good name pays for the crisis.",
+"why": "puts Wen Ma 'of Merchant oligarchy'; PEOPLE has Wen Ma as magistrate of the Courthouse",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/crisis/crisisCast.js",
+"line": 154,
+"fn": "CAST_REASONS"
 }
 },
 {
@@ -1081,6 +1448,187 @@
 "file": "src/domain/dossier/faithReading.js",
 "line": 403,
 "fn": "factionLine"
+}
+},
+{
+"id": "10046",
+"sev": "MED",
+"n": 1,
+"town": "r2s-politically_fractured-hamlet-3",
+"section": "Summary/Overview",
+"fold": "Greek-inspired, and it shows: built on the open plain, and run by civic association.",
+"text": "Greek-inspired, and it shows: built on the open plain, and run by civic association.",
+"why": "says run by civic association; GOVERNMENT is a Headman's Authority against an Independent Bloc",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/summary/settlementQuickGuide.js",
+"line": 245,
+"fn": "SCOPE_GROUND"
+}
+},
+{
+"id": "20875",
+"sev": "MED",
+"n": 1,
+"town": "r2s-insurgency-town-0",
+"section": "Summary/Plot Hooks",
+"fold": "The insurgency turns on the town hall, run by <N>: if it gives way, Military/Guard loses most, because its own people feel the crisis first.",
+"text": "The insurgency turns on the town hall, run by Ghazi al-Rumi: if it gives way, Military/Guard loses most, because its own people feel the crisis first.",
+"why": "slash-joined label 'Military/Guard' used as a name in a sentence",
+"kinds": [
+"BROKEN",
+"STATE"
+],
+"writer": {
+"file": "src/domain/crisis/crisisCast.js",
+"line": 237,
+"fn": "STAKE_REASONS"
+}
+},
+{
+"id": "B03438",
+"sev": "MED",
+"n": 1,
+"town": "r2s-monster_pressure-thorp-3",
+"section": "Table/Tonight sheet",
+"fold": "An old story from that time: a diplomatic channel exists that the war party is suppressing.",
+"text": "An old story from that time: a diplomatic channel exists that the war party is suppressing.",
+"why": "a 'war party'; only Elder Council listed, QUARRELS none, thorp of 10",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/coherence/hookTruth.js",
+"line": 122,
+"fn": "VILLAGER_TIERS"
+}
+},
+{
+"id": "B03479",
+"sev": "MED",
+"n": 1,
+"town": "r2s-slave_revolt-thorp-3",
+"section": "Table/Tonight sheet",
+"fold": "An old story from that time: the reformist leader is being blackmailed into silence.",
+"text": "An old story from that time: the reformist leader is being blackmailed into silence.",
+"why": "presumes a reformist leader; only Household Council listed, roster is one head shepherd",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/coherence/hookTruth.js",
+"line": 122,
+"fn": "VILLAGER_TIERS"
+}
+},
+{
+"id": "B11046",
+"sev": "MED",
+"n": 1,
+"town": "r2s-famine-town-2",
+"section": "Summary/Plot Hooks",
+"fold": "In the crisis, <N> of Town Mayor takes the worst of it: the blame falls on the house, and its good name pays for the crisis.",
+"text": "In the crisis, Güchlüg Jirgin of Town Mayor takes the worst of it: the blame falls on the house, and its good name pays for the crisis.",
+"why": "puts Güchlüg Jirgin 'of Town Mayor'; PEOPLE has them as granary reeve of the Town granary, not in the Mayor's ruling three",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/crisis/crisisCast.js",
+"line": 154,
+"fn": "CAST_REASONS"
+}
+},
+{
+"id": "B11037",
+"sev": "MED",
+"n": 1,
+"town": "r2s-famine-town-3",
+"section": "Summary/Plot Hooks",
+"fold": "In the crisis, <N> of Arcane Council takes the worst of it: the blame falls on the house, and its good name pays for the crisis.",
+"text": "In the crisis, Maisa al-Qadir of Arcane Council takes the worst of it: the blame falls on the house, and its good name pays for the crisis.",
+"why": "puts Maisa al-Qadir 'of Arcane Council'; PEOPLE has her as granary reeve of the Town granary, not among the council's three",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/crisis/crisisCast.js",
+"line": 154,
+"fn": "CAST_REASONS"
+}
+},
+{
+"id": "B11041",
+"sev": "MED",
+"n": 1,
+"town": "r2s-famine-town-0",
+"section": "Summary/Plot Hooks",
+"fold": "In the crisis, <N> of Guild Council takes the worst of it: the blame falls on the house, and its good name pays for the crisis.",
+"text": "In the crisis, Christoph Fischbach of Guild Council takes the worst of it: the blame falls on the house, and its good name pays for the crisis.",
+"why": "puts Christoph Fischbach 'of Guild Council'; PEOPLE has him as magistrate of the Courthouse",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/crisis/crisisCast.js",
+"line": 154,
+"fn": "CAST_REASONS"
+}
+},
+{
+"id": "B19857",
+"sev": "MED",
+"n": 1,
+"town": "r2r-town-11",
+"section": "Summary/Plot Hooks",
+"fold": "The insurgency turns on the town hall, run by <N>: if it gives way, Arcane Council loses most, because its own people feel the crisis first.",
+"text": "The insurgency turns on the town hall, run by Orla Nolan: if it gives way, Arcane Council loses most, because its own people feel the crisis first.",
+"why": "Town hall 'run by Orla Nolan'; PEOPLE gives Orla as circle-keeper of the Teleportation circle and lists nobody at Town hall",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/crisis/crisisCast.js",
+"line": 237,
+"fn": "STAKE_REASONS"
+}
+},
+{
+"id": "B21139",
+"sev": "MED",
+"n": 1,
+"town": "r2r-city-2",
+"section": "Summary/Plot Hooks",
+"fold": "The succession crisis turns on the city hall, run by <N>: if it gives way, <N> loses most, because its own people feel the crisis first.",
+"text": "The succession crisis turns on the city hall, run by Enlai Kwon: if it gives way, Arcane Council loses most, because its own people feel the crisis first.",
+"why": "says city hall is run by Enlai Kwon; PEOPLE places Enlai Kwon at Mages' guild and gives city hall nobody",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/crisis/crisisCast.js",
+"line": 237,
+"fn": "STAKE_REASONS"
+}
+},
+{
+"id": "B11151",
+"sev": "MED",
+"n": 1,
+"town": "r2s-politically_fractured-metropolis-2",
+"section": "Summary/Plot Hooks",
+"fold": "In the split between the powers, <N> of Noble Houses is stirring it: speaks for the power that gains from the crisis, from a house that power backs.",
+"text": "In the split between the powers, Yan Kimura of Noble Houses is stirring it: speaks for the power that gains from the crisis, from a house that power backs.",
+"why": "Yan Kimura is the impresario @ Opera house, not of Noble Houses; PEOPLE lists no one belonging to Noble Houses",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/crisis/crisisCast.js",
+"line": 177,
+"fn": "CAST_REASONS"
 }
 }
 ]

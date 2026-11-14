@@ -19,6 +19,42 @@
 }
 },
 {
+"id": "B27765",
+"sev": "HIGH",
+"n": 31,
+"town": "r2r-village-21",
+"section": "Systems/Magic",
+"fold": "Whatever magic reaches <N>, the village does not rest on it: nothing it lives by would stop without it.",
+"text": "Whatever magic reaches Rotbrücke, the village does not rest on it: nothing it lives by would stop without it.",
+"why": "'nothing it lives by would stop without' magic; FOOD says 29% of food is made by magic (deficit 43%), and 14209 says the village would go shorter without it",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 8079,
+"fn": "DS-DEF-9 › magicDependency false · v2"
+}
+},
+{
+"id": "B14258",
+"sev": "HIGH",
+"n": 26,
+"town": "r2s-plague_onset-hamlet-2",
+"section": "Systems/Defense",
+"fold": "Nothing has come for <N>, and nothing about the hamlet would stop whatever did.",
+"text": "Nothing has come for Jayaagam, and nothing about the hamlet would stop whatever did.",
+"why": "'Nothing has come for Jayaagam'; PAST records The Siege (74 years ago, major) and The Purge (15 years ago, infiltration)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 1113,
+"fn": "DS-DEF-2 › Invasion & War: neither walls nor force · v2"
+}
+},
+{
 "id": "20690",
 "sev": "HIGH",
 "n": 6,
@@ -145,6 +181,24 @@
 }
 },
 {
+"id": "B04388",
+"sev": "MED",
+"n": 83,
+"town": "r2s-famine-metropolis-1",
+"section": "Systems/Defense",
+"fold": "Bring a complaint at <N> and it gets a hearing, not a favour.",
+"text": "Bring a complaint at Hongji and it gets a hearing, not a favour.",
+"why": "says complaints get a fair hearing; header shows Legitimacy Crisis (score 10), Desperate stability, order eroding. Tag covers towns of sound legitimacy only if true",
+"kinds": [
+"TAG"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 1249,
+"fn": "DS-DEF-2 › Internal Security: full legal chain (court AND prison) · v3"
+}
+},
+{
 "id": "29122",
 "sev": "MED",
 "n": 82,
@@ -160,6 +214,24 @@
 "file": "src/data/dossierStateProse/defense.generated.js",
 "line": 4819,
 "fn": "DS-DEF-5 › FIXTURE: gates · v3"
+}
+},
+{
+"id": "B11532",
+"sev": "MED",
+"n": 77,
+"town": "r2s-plague_onset-hamlet-2",
+"section": "Systems/Defense",
+"fold": "Its safety rests on nobody having wanted it.",
+"text": "Its safety rests on nobody having wanted it.",
+"why": "safety rests on 'nobody having wanted it'; PAST records a siege and an infiltration purge, so it was wanted and attacked",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 1113,
+"fn": "DS-DEF-2 › Invasion & War: neither walls nor force · v2"
 }
 },
 {
@@ -255,6 +327,42 @@
 }
 },
 {
+"id": "B19765",
+"sev": "MED",
+"n": 43,
+"town": "r2s-under_siege-hamlet-2",
+"section": "Systems/Magic",
+"fold": "The hamlet would go on if the arcane went away, more slowly and less comfortably.",
+"text": "The hamlet would go on if the arcane went away, more slowly and less comfortably.",
+"why": "'would go on if the arcane went away': FOOD by magic 23%, Import-Dependent; contradicts 14205 'would go shorter without it'",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 8090,
+"fn": "DS-DEF-9 › magicDependency false · v3"
+}
+},
+{
+"id": "B19191",
+"sev": "MED",
+"n": 40,
+"town": "r2s-under_siege-city-1",
+"section": "Systems/Defense",
+"fold": "The city has a wall and arranges its day around the gates without noticing that it does.",
+"text": "The city has a wall and arranges its day around the gates without noticing that it does.",
+"why": "city arranges its day around the gates without noticing; under siege the gates are shut against an enemy and everyone notices",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 4379,
+"fn": "DS-DEF-5 › walls PRESENT · v3"
+}
+},
+{
 "id": "01111",
 "sev": "MED",
 "n": 39,
@@ -270,6 +378,24 @@
 "file": "src/data/dossierStateProse/defense.generated.js",
 "line": 4368,
 "fn": "DS-DEF-5 › walls PRESENT · v2"
+}
+},
+{
+"id": "B14309",
+"sev": "MED",
+"n": 39,
+"town": "r2s-plague_onset-hamlet-2",
+"section": "Systems/Defense",
+"fold": "Nothing unseen is known to have come at <N>, but the hamlet keeps no wards or seers that would notice if it had.",
+"text": "Nothing unseen is known to have come at Jayaagam, but the hamlet keeps no wards or seers that would notice if it had.",
+"why": "'Nothing unseen is known to have come at Jayaagam'; PAST records The Purge, an occupation-infiltration 15 years ago, rated major",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 4784,
+"fn": "DS-DEF-5 › arcane defense ABSENT · v3"
 }
 },
 {
@@ -310,6 +436,24 @@
 }
 },
 {
+"id": "B01461",
+"sev": "MED",
+"n": 32,
+"town": "r2s-plague_onset-metropolis-1",
+"section": "Systems/Defense",
+"fold": "<N>'s defenders are better off for the trades behind them, and they know it.",
+"text": "Chandrapur's defenders are better off for the trades behind them, and they know it.",
+"why": "defenders are better off for the trades behind them; LAND has Standing Garrison vulnerable, Fortifications impaired, Weapons & Armor vulnerable",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 1599,
+"fn": "DS-DEF-2 › CHAIN: defence supplied · v2"
+}
+},
+{
 "id": "01113",
 "sev": "MED",
 "n": 28,
@@ -346,6 +490,24 @@
 }
 },
 {
+"id": "B14259",
+"sev": "MED",
+"n": 27,
+"town": "r2s-succession_void-thorp-1",
+"section": "Systems/Defense",
+"fold": "Nothing has come for <N>, and nothing about the thorp would stop whatever did.",
+"text": "Nothing has come for Schwarzdorf, and nothing about the thorp would stop whatever did.",
+"why": "'Nothing has come for Schwarzdorf'; PAST records The Occupation, 153 years ago, catastrophic",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 1113,
+"fn": "DS-DEF-2 › Invasion & War: neither walls nor force · v2"
+}
+},
+{
 "id": "03161",
 "sev": "MED",
 "n": 25,
@@ -354,6 +516,24 @@
 "fold": "A visitor to <N> would not guess at the trouble from the streets; the village is shaken but standing.",
 "text": "A visitor to Erdenordu would not guess at the trouble from the streets; the village is shaken but standing.",
 "why": "says a visitor would not guess the trouble; safety Dangerous — Plague Unrest",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 7602,
+"fn": "DS-DEF-8 › override active, viability intact · v3"
+}
+},
+{
+"id": "B03075",
+"sev": "MED",
+"n": 25,
+"town": "r2s-plague_onset-thorp-3",
+"section": "Systems/Defense",
+"fold": "A visitor to <N> would not guess at the trouble from the streets; the thorp is shaken but standing.",
+"text": "A visitor to Dharmaghat would not guess at the trouble from the streets; the thorp is shaken but standing.",
+"why": "'a visitor would not guess at the trouble'; the town is in Plague with quarantine, a growing burial register and Dangerous safety",
 "kinds": [
 "STATE"
 ],
@@ -379,6 +559,24 @@
 "file": "src/data/dossierStateProse/power.generated.js",
 "line": 2273,
 "fn": "DS-POW-5 › economicBase: agrarian · v1"
+}
+},
+{
+"id": "B14260",
+"sev": "MED",
+"n": 24,
+"town": "r2r-village-58",
+"section": "Systems/Defense",
+"fold": "Nothing has come for <N>, and nothing about the village would stop whatever did.",
+"text": "Nothing has come for Umamala, and nothing about the village would stop whatever did.",
+"why": "'Nothing has come for Umamala'; PAST records a Purge, a Trade Collapse and an Occupation 56 years ago",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 1113,
+"fn": "DS-DEF-2 › Invasion & War: neither walls nor force · v2"
 }
 },
 {
@@ -437,6 +635,24 @@
 }
 },
 {
+"id": "B11985",
+"sev": "MED",
+"n": 22,
+"town": "r2s-indebted-village-3",
+"section": "Systems/Defense",
+"fold": "Life in the village goes on through the crisis: people work, eat and sleep, and the defence makes do with what is left over.",
+"text": "Life in the village goes on through the crisis: people work, eat and sleep, and the defence makes do with what is left over.",
+"why": "speaks of 'the defence' making do; STATE is Undefended and DEFENCE lists no force of any kind",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 7593,
+"fn": "DS-DEF-8 › override active, viability intact · v2"
+}
+},
+{
 "id": "03158",
 "sev": "MED",
 "n": 21,
@@ -452,6 +668,42 @@
 "file": "src/data/dossierStateProse/defense.generated.js",
 "line": 7602,
 "fn": "DS-DEF-8 › override active, viability intact · v3"
+}
+},
+{
+"id": "B14709",
+"sev": "MED",
+"n": 21,
+"town": "r2s-famine-city-3",
+"section": "Systems/Magic",
+"fold": "People at <N> know that part of the city's work now holds up only with help beyond ordinary labour.",
+"text": "People at Vatanabad know that part of the city's work now holds up only with help beyond ordinary labour.",
+"why": "says work holds up only with help beyond ordinary labour; FOOD by magic 0%, DEFENCE magic none, no arcane house in HOUSES",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 8055,
+"fn": "DS-DEF-9 › magicDependency true, with a NAMED dependent chain · v3"
+}
+},
+{
+"id": "B21189",
+"sev": "MED",
+"n": 21,
+"town": "r2s-under_siege-city-1",
+"section": "Systems/Defense",
+"fold": "The tally of raids at <N> is short for a frontier city: with a wall and armed people behind it, most of what comes out of the wild country turns back before it reaches the houses.",
+"text": "The tally of raids at Torrivilla is short for a frontier city: with a wall and armed people behind it, most of what comes out of the wild country turns back before it reaches the houses.",
+"why": "calls the tally of raids short and the city untroubled; CRISIS is Under Siege, stability Critical, safety Tense, Active Siege",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 656,
+"fn": "DS-DEF-2 › Beasts & Monsters: frontier, credible deterrence · v1"
 }
 },
 {
@@ -560,6 +812,24 @@
 "file": "src/data/dossierStateProse/defense.generated.js",
 "line": 4920,
 "fn": "DS-DEF-5 › ARCANE: alchemists · v1"
+}
+},
+{
+"id": "04098",
+"sev": "MED",
+"n": 17,
+"town": "r2s-infiltrated-village-0",
+"section": "Systems/Magic",
+"fold": "At <N> the usual work no longer yields enough preserved foods, and part of the shortfall is made up by means beyond it.",
+"text": "At Khirbetserai the usual work no longer yields enough preserved foods, and part of the shortfall is made up by means beyond it.",
+"why": "says ordinary work no longer yields enough preserved foods; grown 410 against need 324, and TRADE lists no preserved foods",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 8037,
+"fn": "DS-DEF-9 › magicDependency true, with a NAMED dependent chain · v1"
 }
 },
 {
@@ -836,6 +1106,43 @@
 }
 },
 {
+"id": "B10908",
+"sev": "MED",
+"n": 13,
+"town": "r2s-famine-city-1",
+"section": "Systems/Magic",
+"fold": "If the help beyond ordinary work failed at <N>, its preserved foods would fall further short than it already does.",
+"text": "If the help beyond ordinary work failed at Skaldhammer, its preserved foods would fall further short than it already does.",
+"why": "names the town's preserved foods; TRADE lists no preserved foods made or imported here",
+"kinds": [
+"LACKS",
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 8046,
+"fn": "DS-DEF-9 › magicDependency true, with a NAMED dependent chain · v2"
+}
+},
+{
+"id": "B07294",
+"sev": "MED",
+"n": 13,
+"town": "r2s-politically_fractured-thorp-2",
+"section": "Summary/Overview",
+"fold": "Fights between <N>'s powers break out more often now, and each side keeps its own people close at hand.",
+"text": "Fights between Ripavetum's powers break out more often now, and each side keeps its own people close at hand.",
+"why": "says fights between powers break out; QUARRELS none and relations between powers none",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/stressors.generated.js",
+"line": 3070,
+"fn": "DS-CND-1 › DIRECTION: worsening · CRISIS: politically_fractured · v4"
+}
+},
+{
 "id": "00779",
 "sev": "MED",
 "n": 12,
@@ -869,6 +1176,42 @@
 "file": "src/data/dossierStateProse/defense.generated.js",
 "line": 9639,
 "fn": "DS-DEF-11 › WALLED-STRAINED · v2"
+}
+},
+{
+"id": "B14026",
+"sev": "MED",
+"n": 12,
+"town": "r2r-thorp-58",
+"section": "Systems/Power",
+"fold": "Nobody at <N> is in a position to take Elder Council's place; it has no rival, and nobody in the thorp is asking who comes next.",
+"text": "Nobody at Tallpatan is in a position to take Elder Council's place; it has no rival, and nobody in the thorp is asking who comes next.",
+"why": "says no rival and nobody asks who comes next, but legitimacy is a Crisis, score 5, and few accept its right to rule",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 1517,
+"fn": "DS-POW-4 › riskLabel: Stable (no challengers) · v1"
+}
+},
+{
+"id": "B00729",
+"sev": "MED",
+"n": 12,
+"town": "r2s-mass_migration-hamlet-0",
+"section": "Systems/Defense",
+"fold": "<N> has more people than it was built for, and quarrels between old residents and newcomers are common.",
+"text": "Albafossae has more people than it was built for, and quarrels between old residents and newcomers are common.",
+"why": "says quarrels between old residents and newcomers are common; QUARRELS: none and relations between powers: none",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 3203,
+"fn": "DS-DEF-3 › COMPOUND: mass migration, arrivals · v1"
 }
 },
 {
@@ -941,6 +1284,42 @@
 "file": "src/data/dossierStateProse/defense.generated.js",
 "line": 1460,
 "fn": "DS-DEF-2 › Economic Survival: STRONG · v12"
+}
+},
+{
+"id": "B20295",
+"sev": "MED",
+"n": 11,
+"town": "r2r-town-37",
+"section": "Systems/Defense",
+"fold": "The port is <N>'s living and its open door, and nothing hostile has come through it yet.",
+"text": "The port is Hadithaserai's living and its open door, and nothing hostile has come through it yet.",
+"why": "'nothing hostile has come through it yet'; PAST records The Siege (100 years ago) and The Occupation (21 years ago, catastrophic)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 5942,
+"fn": "DS-DEF-6 › Naval Defense: Port only · v2"
+}
+},
+{
+"id": "B14096",
+"sev": "MED",
+"n": 11,
+"town": "r2s-plague_onset-thorp-3",
+"section": "Systems/Defense",
+"fold": "Nobody comes into <N> and nobody leaves.",
+"text": "Nobody comes into Dharmaghat and nobody leaves.",
+"why": "'Nobody comes into Dharmaghat and nobody leaves'; 21969 says not everyone keeps the quarantine, trade access is road and imports cover 1%",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 7246,
+"fn": "DS-DEF-8 › override: QUARANTINE ACTIVE · v2"
 }
 },
 {
@@ -1250,6 +1629,42 @@
 }
 },
 {
+"id": "B21649",
+"sev": "MED",
+"n": 9,
+"town": "r2s-under_siege-town-0",
+"section": "Systems/Defense",
+"fold": "There is very little street violence at <N>, and the watch is not the reason: the people who run the town's crime put down anything that would bring the law on them.",
+"text": "There is very little street violence at Ulffoss, and the watch is not the reason: the people who run the town's crime put down anything that would bring the law on them.",
+"why": "criminals run the street order, but Thieves' Guild is Suppressed and Town Council is winning against it",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 3798,
+"fn": "DS-DEF-4 › structure organized · v4"
+}
+},
+{
+"id": "B03973",
+"sev": "MED",
+"n": 9,
+"town": "r2r-town-49",
+"section": "Systems/Magic",
+"fold": "At <N> the usual work no longer yields enough baked goods, and part of the shortfall is made up by means beyond it.",
+"text": "At Kashithal the usual work no longer yields enough baked goods, and part of the shortfall is made up by means beyond it.",
+"why": "says part of the baked-goods shortfall is made up by magic; FOOD by magic 0% and no chain is magically sustained",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 8037,
+"fn": "DS-DEF-9 › magicDependency true, with a NAMED dependent chain · v1"
+}
+},
+{
 "id": "20485",
 "sev": "MED",
 "n": 8,
@@ -1301,6 +1716,43 @@
 "file": "src/data/dossierStateProse/power.generated.js",
 "line": 1580,
 "fn": "DS-POW-4 › riskLabel: Stable (no challengers) · v6"
+}
+},
+{
+"id": "15531",
+"sev": "MED",
+"n": 8,
+"town": "r2s-under_siege-hamlet-0",
+"section": "Systems/Power",
+"fold": "People at <N> grumble, but nobody in the hamlet stands ready to lead them, so Headman's Authority is safe in the hall.",
+"text": "People at Sanctaurbs grumble, but nobody in the hamlet stands ready to lead them, so Headman's Authority is safe in the hall.",
+"why": "Headman's Authority safe in the hall; HOUSES has no hall, stability Desperate",
+"kinds": [
+"LACKS",
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 1543,
+"fn": "DS-POW-4 › riskLabel: Stable (no challengers) · v3"
+}
+},
+{
+"id": "B06130",
+"sev": "MED",
+"n": 8,
+"town": "r2s-wartime-town-0",
+"section": "Systems/Defense",
+"fold": "Defense at <N> is not an emergency arrangement, it is the week's work: the rotations run, the gates close on time, and nobody treats any of it as unusual.",
+"text": "Defense at Skálthorpe is not an emergency arrangement, it is the week's work: the rotations run, the gates close on time, and nobody treats any of it as unusual.",
+"why": "defence 'nobody treats any of it as unusual', 'not an emergency arrangement'; CRISIS Wartime, stability Tense (requisition and conscription)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 562,
+"fn": "DS-DEF-2 › Beasts & Monsters: plagued, perimeter AND organized force · v2"
 }
 },
 {
@@ -1374,6 +1826,24 @@
 "file": "src/data/dossierStateProse/power.generated.js",
 "line": 1517,
 "fn": "DS-POW-4 › riskLabel: Stable (no challengers) · v1"
+}
+},
+{
+"id": "B20559",
+"sev": "MED",
+"n": 7,
+"town": "r2r-hamlet-35",
+"section": "Summary/Overview",
+"fold": "The quarrel among <N>'s powers grows sharper each week, and neighbours who took different sides have stopped speaking.",
+"text": "The quarrel among Sundoy's powers grows sharper each week, and neighbours who took different sides have stopped speaking.",
+"why": "'quarrel among Sundoy's powers grows sharper': QUARRELS none and relations between powers none",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/stressors.generated.js",
+"line": 3046,
+"fn": "DS-CND-1 › DIRECTION: worsening · CRISIS: politically_fractured · v1"
 }
 },
 {
@@ -1468,6 +1938,60 @@
 }
 },
 {
+"id": "15476",
+"sev": "MED",
+"n": 6,
+"town": "r2s-plague_onset-thorp-2",
+"section": "Systems/Defense",
+"fold": "Parts of <N> are closed off against the sickness, and people cross the street to avoid anyone who coughs.",
+"text": "Parts of Miropol are closed off against the sickness, and people cross the street to avoid anyone who coughs.",
+"why": "'parts of Miropol' closed off and crossing the street: thorp of 9",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 2890,
+"fn": "DS-DEF-3 › COMPOUND: plague · v2"
+}
+},
+{
+"id": "B19529",
+"sev": "MED",
+"n": 6,
+"town": "r2s-plague_onset-metropolis-2",
+"section": "Systems/Defense",
+"fold": "The food trades at <N> are struggling to keep up, and little is being put by against the metropolis being cut off.",
+"text": "The food trades at Zoltansaray are struggling to keep up, and little is being put by against the metropolis being cut off.",
+"why": "little is being put by against being cut off; FOOD shows stores 15 months with a granary standing",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 1762,
+"fn": "DS-DEF-2 › CHAIN: food trades failing · v2"
+}
+},
+{
+"id": "B05859",
+"sev": "MED",
+"n": 6,
+"town": "r2r-town-25",
+"section": "Systems/Power",
+"fold": "Criminal money finds little purchase at <N>: the town is doing well, and its officials have little reason to sell.",
+"text": "Criminal money finds little purchase at Brahmamandal: the town is doing well, and its officials have little reason to sell.",
+"why": "says criminal money finds little purchase; CRISIS is Infiltrated (regional criminal pressure) and another line says the same new faces are seen everywhere",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 3194,
+"fn": "DS-POW-6 › capture pressure RECOVERING (strong security, prosperity) · v4"
+}
+},
+{
 "id": "28629",
 "sev": "MED",
 "n": 5,
@@ -1519,6 +2043,42 @@
 "file": "src/data/dossierStateProse/stressors.generated.js",
 "line": 3624,
 "fn": "DS-CND-1 › DIRECTION: stable · CRISIS: religious_conversion · v1"
+}
+},
+{
+"id": "B27760",
+"sev": "MED",
+"n": 5,
+"town": "r2s-plague_onset-city-3",
+"section": "Systems/Magic",
+"fold": "Whatever magic reaches <N>, the city does not rest on it: nothing it lives by would stop without it.",
+"text": "Whatever magic reaches Xochiucan, the city does not rest on it: nothing it lives by would stop without it.",
+"why": "says nothing the city lives by would stop without magic; FOOD shows 7% of food made by magic",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 8079,
+"fn": "DS-DEF-9 › magicDependency false · v2"
+}
+},
+{
+"id": "B14310",
+"sev": "MED",
+"n": 5,
+"town": "r2s-plague_onset-metropolis-0",
+"section": "Systems/Defense",
+"fold": "Nothing unseen is known to have come at <N>, but the metropolis keeps no wards or seers that would notice if it had.",
+"text": "Nothing unseen is known to have come at Tarkhanshari, but the metropolis keeps no wards or seers that would notice if it had.",
+"why": "'Nothing unseen is known to have come' but PAST records The Arcane Incident (317 years ago, magical, major)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 4784,
+"fn": "DS-DEF-5 › arcane defense ABSENT · v3"
 }
 },
 {
@@ -1702,6 +2262,60 @@
 }
 },
 {
+"id": "B22476",
+"sev": "MED",
+"n": 4,
+"town": "r2s-under_siege-village-2",
+"section": "Systems/Power",
+"fold": "Visitors to <N> are quietly told to stay polite to Religious Authorities as well as to Headman's Authority, and nobody says why.",
+"text": "Visitors to Dionpyrgos are quietly told to stay polite to Religious Authorities as well as to Headman's Authority, and nobody says why.",
+"why": "visitors are told to stay polite; under siege (isolated, roads closed, nothing comes in) no visitors arrive",
+"kinds": [
+"TAG"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 1648,
+"fn": "DS-POW-4 › riskLabel: Contested · v4"
+}
+},
+{
+"id": "B03983",
+"sev": "MED",
+"n": 4,
+"town": "r2s-indebted-village-1",
+"section": "Systems/Magic",
+"fold": "At <N> the usual work no longer yields enough salted fish, and part of the shortfall is made up by means beyond it.",
+"text": "At Olympnea the usual work no longer yields enough salted fish, and part of the shortfall is made up by means beyond it.",
+"why": "part of the salted-fish shortfall made up by magic; FOOD says by magic 0%, gap 0%, grown 100%",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 8037,
+"fn": "DS-DEF-9 › magicDependency true, with a NAMED dependent chain · v1"
+}
+},
+{
+"id": "B01477",
+"sev": "MED",
+"n": 4,
+"town": "r2s-occupied-city-0",
+"section": "Systems/Defense",
+"fold": "<N>'s food trades are failing, so little food is being put by; if the city were cut off, it would have less to fall back on.",
+"text": "Breitgrund's food trades are failing, so little food is being put by; if the city were cut off, it would have less to fall back on.",
+"why": "says little food is put by; FOOD word is Secure with 8.8 months in store and a granary standing",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 1751,
+"fn": "DS-DEF-2 › CHAIN: food trades failing · v1"
+}
+},
+{
 "id": "04089",
 "sev": "MED",
 "n": 3,
@@ -1789,6 +2403,114 @@
 "file": "src/data/dossierStateProse/power.generated.js",
 "line": 1591,
 "fn": "DS-POW-4 › riskLabel: Holding · v1"
+}
+},
+{
+"id": "B14349",
+"sev": "MED",
+"n": 3,
+"town": "r2s-occupied-thorp-1",
+"section": "Systems/Power",
+"fold": "Occupation Authority has grown stronger than the Elder Council at <N>, and both know it; the Elder Council keeps the title while Occupation Authority decides what is enforced.",
+"text": "Occupation Authority has grown stronger than the Elder Council at Amarkota, and both know it; the Elder Council keeps the title while Occupation Authority decides what is enforced.",
+"why": "says Occupation Authority 'has grown stronger' than Elder Council; GOVERNMENT gives both Significant",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 3553,
+"fn": "DS-POW-6 › GM ADVISORY: the commander is a political actor · v5"
+}
+},
+{
+"id": "B21191",
+"sev": "MED",
+"n": 3,
+"town": "r2s-plague_onset-thorp-1",
+"section": "Systems/Defense",
+"fold": "The tally of raids at <N> is short for a frontier thorp: with a wall and armed people behind it, most of what comes out of the wild country turns back before it reaches the houses.",
+"text": "The tally of raids at Somathal is short for a frontier thorp: with a wall and armed people behind it, most of what comes out of the wild country turns back before it reaches the houses.",
+"why": "most raids turn back; defence Vulnerable and PAST records a catastrophic siege 7 years ago",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 656,
+"fn": "DS-DEF-2 › Beasts & Monsters: frontier, credible deterrence · v1"
+}
+},
+{
+"id": "B06984",
+"sev": "MED",
+"n": 3,
+"town": "r2s-slave_revolt-hamlet-3",
+"section": "Systems/Defense",
+"fold": "Everyone at <N> who could keep order has gone to fight the revolt, so the rest of the hamlet keeps its own order.",
+"text": "Everyone at Breitenwiese who could keep order has gone to fight the revolt, so the rest of the hamlet keeps its own order.",
+"why": "people who could keep order have gone to fight; DEFENCE has no garrison, militia, watch or hired force",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 2980,
+"fn": "DS-DEF-3 › COMPOUND: slave revolt · v3"
+}
+},
+{
+"id": "B19177",
+"sev": "MED",
+"n": 3,
+"town": "r2s-under_siege-town-1",
+"section": "World/Faith",
+"fold": "The church in <N> preaches that magic is heresy against the faith, and a newcomer seen working a spell will be reported to the priests.",
+"text": "The church in Fengling preaches that magic is heresy against the faith, and a newcomer seen working a spell will be reported to the priests.",
+"why": "church says magic is heresy and reports spell-workers; town keeps a Wizard's tower and gets 31% of food by magic",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/warFaith.generated.js",
+"line": 6504,
+"fn": "DS-FTH-4 › FLAG: heresySuppression: preached · v1"
+}
+},
+{
+"id": "B01479",
+"sev": "MED",
+"n": 3,
+"town": "r2s-insurgency-town-2",
+"section": "Systems/Defense",
+"fold": "<N>'s food trades are failing, so little food is being put by; if the town were cut off, it would have less to fall back on.",
+"text": "Cathham's food trades are failing, so little food is being put by; if the town were cut off, it would have less to fall back on.",
+"why": "says little food is put by and less to fall back on; FOOD gives stores 6.5 months, granary standing, word Secure",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 1751,
+"fn": "DS-DEF-2 › CHAIN: food trades failing · v1"
+}
+},
+{
+"id": "B19528",
+"sev": "MED",
+"n": 3,
+"town": "r2s-insurgency-city-2",
+"section": "Systems/Defense",
+"fold": "The food trades at <N> are struggling to keep up, and little is being put by against the city being cut off.",
+"text": "The food trades at Jalalkul are struggling to keep up, and little is being put by against the city being cut off.",
+"why": "says little food is put by and food trades struggle; FOOD word is Secure, 8.5 months in store, granary standing",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 1762,
+"fn": "DS-DEF-2 › CHAIN: food trades failing · v2"
 }
 },
 {
@@ -2059,6 +2781,42 @@
 "file": "src/data/dossierStateProse/defense.generated.js",
 "line": 8046,
 "fn": "DS-DEF-9 › magicDependency true, with a NAMED dependent chain · v2"
+}
+},
+{
+"id": "B14699",
+"sev": "MED",
+"n": 2,
+"town": "r2s-famine-hamlet-3",
+"section": "Systems/Power",
+"fold": "People at <N> grumble, but nobody in the hamlet stands ready to lead them, so Household Council is safe in the hall.",
+"text": "People at Malosk grumble, but nobody in the hamlet stands ready to lead them, so Household Council is safe in the hall.",
+"why": "'Household Council is safe in the hall': legitimacy score 1, Legitimacy Crisis, stability Desperate; HOUSES has no hall",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 1543,
+"fn": "DS-POW-4 › riskLabel: Stable (no challengers) · v3"
+}
+},
+{
+"id": "B14695",
+"sev": "MED",
+"n": 2,
+"town": "r2r-hamlet-16",
+"section": "Systems/Power",
+"fold": "People at <N> grumble, but nobody in the hamlet stands ready to lead them, so Elder Council is safe in the hall.",
+"text": "People at Oxteha grumble, but nobody in the hamlet stands ready to lead them, so Elder Council is safe in the hall.",
+"why": "'Elder Council is safe in the hall': legitimacy score 3, Legitimacy Crisis, stability Desperate; HOUSES has no hall",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 1543,
+"fn": "DS-POW-4 › riskLabel: Stable (no challengers) · v3"
 }
 },
 {
@@ -2545,6 +3303,169 @@
 "file": "src/data/dossierStateProse/power.generated.js",
 "line": 1620,
 "fn": "DS-POW-4 › riskLabel: Contested · v1"
+}
+},
+{
+"id": "09250",
+"sev": "MED",
+"n": 1,
+"town": "r2s-famine-hamlet-1",
+"section": "Summary/Overview",
+"fold": "Food costs more in <N> each week, and less of it comes in than the hamlet needs.",
+"text": "Food costs more in Vedaganj each week, and less of it comes in than the hamlet needs.",
+"why": "says some food comes in; trade access isolated and imports cover None",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/stressors.generated.js",
+"line": 2922,
+"fn": "DS-CND-1 › DIRECTION: worsening · CRISIS: famine · v3"
+}
+},
+{
+"id": "23484",
+"sev": "MED",
+"n": 1,
+"town": "r2s-under_siege-village-3",
+"section": "Systems/Power",
+"fold": "Visitors to <N> are quietly told to stay polite to Military/Guard as well as to Elder Council, and nobody says why.",
+"text": "Visitors to Tenohuacan are quietly told to stay polite to Military/Guard as well as to Elder Council, and nobody says why.",
+"why": "slash-joined label 'Military/Guard' used as a name in a sentence",
+"kinds": [
+"BROKEN",
+"TAG"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 1648,
+"fn": "DS-POW-4 › riskLabel: Contested · v4"
+}
+},
+{
+"id": "B19310",
+"sev": "MED",
+"n": 1,
+"town": "r2s-religious_conversion-thorp-1",
+"section": "Systems/Defense",
+"fold": "The country around <N> holds very little in the way of creatures; whatever the thorp's works are for, it is not them.",
+"text": "The country around Mironitsa holds very little in the way of creatures; whatever the thorp's works are for, it is not them.",
+"why": "country 'holds very little in the way of creatures'; TOWN monsters are heartland",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 729,
+"fn": "DS-DEF-2 › Beasts & Monsters: settled, defenses beyond the need · v1"
+}
+},
+{
+"id": "B01444",
+"sev": "MED",
+"n": 1,
+"town": "r2s-occupied-hamlet-0",
+"section": "Systems/Defense",
+"fold": "<N>'s defence answers to its occupiers now: the arms in the hamlet are theirs, and whatever the townsfolk could raise themselves would be small beside them.",
+"text": "Qarahiid's defence answers to its occupiers now: the arms in the hamlet are theirs, and whatever the townsfolk could raise themselves would be small beside them.",
+"why": "'the arms in the hamlet are theirs': DEFENCE lists no garrison or other force at all",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 7019,
+"fn": "DS-DEF-8 › override: UNDER OCCUPATION · v1"
+}
+},
+{
+"id": "B14615",
+"sev": "MED",
+"n": 1,
+"town": "r2s-slave_revolt-hamlet-0",
+"section": "Systems/Defense",
+"fold": "Part of <N>'s own people have risen, and the hamlet's arms are turned inward against them.",
+"text": "Part of Velikoichi's own people have risen, and the hamlet's arms are turned inward against them.",
+"why": "the hamlet's arms turned inward against the risen; DEFENCE has no garrison, militia, watch or hired force",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 7434,
+"fn": "DS-DEF-8 › override: REVOLT ACTIVE · v1"
+}
+},
+{
+"id": "B14704",
+"sev": "MED",
+"n": 1,
+"town": "r2s-plague_onset-village-3",
+"section": "Systems/Power",
+"fold": "People at <N> grumble, but nobody in the village stands ready to lead them, so Elder Council is safe in the hall.",
+"text": "People at Loughmere grumble, but nobody in the village stands ready to lead them, so Elder Council is safe in the hall.",
+"why": "says Elder Council is safe and nobody can lead; header has Legitimacy Crisis, score 5, escalating tension with a Significant Thieves' Guild",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 1543,
+"fn": "DS-POW-4 › riskLabel: Stable (no challengers) · v3"
+}
+},
+{
+"id": "B13293",
+"sev": "MED",
+"n": 1,
+"town": "r2s-indebted-town-3",
+"section": "Systems/Outlook",
+"fold": "Much of what <N> needs arrives by magic now, and if that magic failed the town would be cut off with too little of its own.",
+"text": "Much of what Kamalabari needs arrives by magic now, and if that magic failed the town would be cut off with too little of its own.",
+"why": "claims much arrives by magic and the town would be cut off if it failed; FOOD says by magic 0%",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 9296,
+"fn": "DS-DEF-12 › MAGIC-DEPENDENT · v2"
+}
+},
+{
+"id": "B03980",
+"sev": "MED",
+"n": 1,
+"town": "r2s-politically_fractured-metropolis-1",
+"section": "Systems/Magic",
+"fold": "At <N> the usual work no longer yields enough quality tools and weapons, and part of the shortfall is made up by means beyond it.",
+"text": "At Nokhoiobo the usual work no longer yields enough quality tools and weapons, and part of the shortfall is made up by means beyond it.",
+"why": "says magic makes up a shortfall of quality tools and weapons; Weapons & Armor chain is impaired, not magically_sustained, and TRADE does not list them as made here",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 8037,
+"fn": "DS-DEF-9 › magicDependency true, with a NAMED dependent chain · v1"
+}
+},
+{
+"id": "B20021",
+"sev": "MED",
+"n": 1,
+"town": "r2r-metropolis-56",
+"section": "Systems/Outlook",
+"fold": "The metropolis's accounts at <N> balance only because supplies arrive by magic; if that magic failed, the metropolis could not keep itself supplied by its own paths.",
+"text": "The metropolis's accounts at Albastagnum balance only because supplies arrive by magic; if that magic failed, the metropolis could not keep itself supplied by its own paths.",
+"why": "says accounts balance only because supplies arrive by magic; FOOD gives by magic 1% and brought in 53%, so magic is not what balances the ledger",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 9288,
+"fn": "DS-DEF-12 › MAGIC-DEPENDENT · v1"
 }
 }
 ]
