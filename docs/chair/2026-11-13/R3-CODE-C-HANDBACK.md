@@ -796,3 +796,51 @@ lighting census was not re-taken. sovereigntyLightingContract.walker and mutatio
 **FOR THE JOIN (added by this seat):** (4) the poolDominance `--tighten`, above, at the chair's ruling; (5) the dossier
 prose manifest's fixture re-record (the line's 1038 rows with the lane's 752 among them) and the golden pins of the
 sixth seat's class of 18: the merge seat's signed acts.
+
+## THE EIGHTH SEAT (R3-CODE-C-8, 2026-11-14; brief docs/chair/2026-11-14/briefs/BRIEF-R3-CODE-C-8.md on the chair's lane; EXECUTED unless marked)
+
+**The tip.** On origin it read 70d92ed06, as the brief wrote. Scratch worktree /tmp/claude-0/wt8 (local branch c8); the
+lane tip in a second worktree /tmp/claude-0/wtbase for the red-first runs. Births: the reader's 1,722
+(REVIEW-R3-STAGES seeds720 + seeds-app + seeds-plagued + REVIEW-R3-CODE-C seeds-extra.txt, its births.mjs unchanged).
+
+### The chair's rulings this seat works to (2026-11-14 08:06 UTC; vetoable by the owner; copied from the brief)
+(a) L01: "OLDER THAN ANYONE LIVING" IS SAID ONLY OF AN EVENT OLDER THAN EVERY PERSON THE RECORD HOLDS, and never of one
+under ninety years old. An event sixty to ninety years back takes words true of it (what only the oldest remember): NEW
+WORDS, by the style law, listed for the owner's veto with the towns they were read in; or the band's other predicate
+where one is true. A guard holds the band's floor against the ages printed on the same tab.
+(b) L05, with the reader's carried row 5 (the #457 class): "COMPLETE PRODUCTION CHAIN IN PLACE" IS SAID ONLY WHERE EVERY
+HOUSE THE CHAIN NEEDS STANDS ON THE ROSTER AND NO CRISIS IN FORCE HAS STOPPED ITS SOURCE (the herds that failed feed no
+cheese and no preserved meat). Elsewhere the row says what is missing, in the words its siblings already use, or the
+good is not listed. Count before and after on the reader's births: the 8 of 82 under a famine, the 21 with no butcher,
+dairy or herding house, the 51 with no tanner.
+(c) L14: the noble subordinate line ("still have their titles, but the hall's offices have taken most of their power")
+is not drawn where the same record gives that body a say in the seat's decisions: it reads the relationship's own
+standing, the fact the Power tab prints beside it.
+(d) THE CARRIED TWIN ("street kitchens" in 63 towns with no market: src/data/cultureProfiles.js): if no other lane holds
+that file (check BY CONTENT), the lane's seller gate takes it as it took vendors, stalls and hawkers; else FOR THE JOIN
+with the count.
+(e) THE GUARD THAT DOES NOT RED (tests/generators/r3cRekeyedLinesTrue.test.js, the war arm): its births must draw a famine
+town in that column so that the war line planted in the famine pool REDS; prove it by that plant.
+
+### Items
+1. **L01, be7f5a208.** Cause: TIME_BANDS' sixth band starts at sixty years and its one predicate said "older than anyone
+   living" of what is 61 years old; the record's people reach "seventies" (npcData.js elder ages). Cure in
+   heraldCausalGrammar.js only (this lane's; no other lane's copy differs from the line's): `LIVING_FLOOR` (ninety years,
+   "older than all but the oldest alive"); `timeBandOf` returns the sixth band, same id and null columns, with the floor's
+   predicate under ninety. Display only (the 720 re-born at the cure: 0 records differ). Count (generalDeskLines over the
+   1,722): before 743 towns, 288 naming 60-89 years; after, the old words 455 (all >= 90, oldest person <= 79), the new
+   words 288 (all 60-89). Guard: tests/domain/r3c8ReaderLinesTrue.test.js (L01 arms), red at 70d92ed06 3/3, plant
+   floorWeeks 52*60 red 3/3. Re-keyed by identity: heraldCausalVoice.test.js's own R3-CODE-C-2 pin of the false words at
+   77 years.
+
+### EVERY NEW OR CHANGED LINE, with the towns it was read in (the owner's veto list, and the next reader's)
+- **"older than all but the oldest alive"** (NEW WORDS; heraldCausalGrammar.js :: LIVING_FLOOR, the History tab's
+  timeband_age fill): r2r-city-44 (city of 2,408; the siege 61y), rr3-thorp-slave_revolt-rand-5 (thorp of 5, smallest;
+  74y), rr3-thorp-under_siege+famine-rand-3 (siege and famine; 79y), r2s-wartime-thorp-2 (war and famine; 67y),
+  r2r-thorp-0 (73y), r2s-mass_migration-metropolis-3 (metropolis of 248,369, largest; 78y). The sentences are in be7f5a208's body.
+
+### FOR THE JOIN (this seat)
+1. The lighting census re-take for the new test file (this seat's own commit, at the end of its items).
+2. The dossier prose manifest's re-record (red at the lane tip already; seventh seat's item 4) now carries the L01 words.
+3. NAMED, the corpus lane's file: DS-GEN-16 ANCHORED-OLD "Nobody now in {settlement} saw the {calamity}" is keyed on the
+   sixth band's id and prints from sixty years (src/data/dossierStateProse/general.generated.js).
