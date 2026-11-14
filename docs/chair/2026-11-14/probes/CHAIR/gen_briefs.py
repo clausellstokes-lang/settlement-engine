@@ -6542,6 +6542,73 @@ SEATS2['EXPORTS-B24'] = dict(
 )
 
 
+SEATS2['W2-WRITE-SIDE-14'] = dict(
+    title="W2-WRITE-SIDE-14 · the corpus's side seat, the ECONOMY and GENERAL pools: the sweep's 129 rows as a measured batch landed pool by pool, then the bar's six rows",
+    branch='lane/w2-write-side-13-2026-11-14', tip='6173c999', statement=False, mark='250,000',
+    intro=("You are W2-WRITE-SIDE-14, the second seat on a SIDE BRANCH of the corpus lane of the settlement-engine integration program "
+           "(lane/w2-write-side-13-2026-11-14, cut from the corpus lane at 525541b42). The corpus holds the dossier's written lines: ONE "
+           "source document (docs/content/RECEIPT_POOLS_DOSSIER_STATE.md) from which src/data/dossierStateProse/*.generated.js are "
+           "generated; a line is cured by a declaration or by rewording, never by striking a middle row. YOURS are the pools whose ids "
+           "begin DS-ECO, DS-GEN and DS-SUP (the corpus lane's own seat holds DS-DEF, DS-POW, DS-FTH and DS-CND: you edit none of those "
+           "sections). The seat before you cured three families (fifteen legacy lines that broke agreement, 38 towns to 0; the market "
+           "lines whose crisis never reached the page, 48 and 50 towns to 0; a stalled-trade line) and handed back. A SWEEP OF A WHOLE "
+           "CLASS (a condition some variants of a pool carry and a sibling lacks) LISTS 129 LIVE ROWS IN YOUR POOLS, with nearly ten "
+           "thousand draws where the condition fails. Yours: that class as ONE MEASURED BATCH, landed pool by pool; then the bar's six "
+           "rows. Your branch lands on the joined line as a point: NO whole suite, NO merge by you."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. On your branch, docs/chair/2026-11-14/W2-WRITE-SIDE-HANDBACK-13.md WHOLE (by script): the three families as cured (THE FORM "
+          "OF A CURE HERE; the guards); the registers named stale; WHAT IS LEFT, line by line (the bar's six rows with their plans; the "
+          "reader's rows; the slash label; THE SWEEP'S 129 ROWS RANKED); how the instruments are re-made.\n"
+          "3. THE SWEEP AND ITS METHOD, from the corpus lane (`git fetch origin lane/w2-write-2026-11-13`): `git show "
+          "origin/lane/w2-write-2026-11-13:docs/chair/2026-11-13/W2-WRITE-HANDBACK-13.md`, ONLY the section \"THE SWEEP OF THE CLASS\" "
+          "(how a row is read, declared, measured by REPLAY and guarded; the two gates that stopped its batch), and its probes by git "
+          "archive (docs/chair/2026-11-14/probes/W2-WRITE-13/: sweep.mjs, vt.mjs, declare.py, replay.mjs, moved.mjs, after.sh, and "
+          "sweep-side-seat-rows.525541b42.tsv: YOUR 129 ROWS), run from outside every repository tree.\n"
+          "4. THE READER'S FILE, for a row you are curing (`git fetch origin lane/review-w2-write-2-2026-11-14`): "
+          "docs/chair/2026-11-14/REVIEW-W2-WRITE-2-LINES-READ.md, only the sections of YOUR pools."),
+    work=("THE CHAIR'S RULINGS IN FORCE (2026-11-14; each vetoable by the owner; copy the new ones into your hand-back): A TWIN TAKES ITS "
+          "SIBLINGS' CONDITION, OR IS TRUE WITHOUT IT AND IS SAID SO. A RE-GATE READS THE LINE THAT INHERITS ITS TOWNS. NO CEILING IS "
+          "RAISED, AND A FALSE LINE IS NOT PARKED BEHIND ONE: a state a declaration would leave MUTE (no line of the pool admitted) is "
+          "answered by A TWIN TRUE IN THAT STATE (read in three towns; the veto list), never by a raised ceiling on the count of mute "
+          "states and never by leaving the false line. BATCH NOTHING AT THE PUSH: the other seat's batch of 34 declarations stopped whole "
+          "at two gates: MEASURE as a batch, LAND POOL BY POOL: one pool's declarations, its guard rows, the fast set, the push. A "
+          "REGISTER THAT A DOOR NEEDS IN ORDER TO OPEN IS RE-TAKEN THROUGH ITS OWN DOOR, in its own commit (if the corpus's build door "
+          "refuses for a stale wiring census: `node scripts/wiring-census.mjs`, its body saying what moved); every other register (the "
+          "byte baseline, the shift register) stays NAMED to the close. UNDER A SIEGE NOTHING COMES IN OR GOES OUT BY ROAD, GATE OR "
+          "WATER; UNDER A FAMINE NO LINE OFFERS THE FOOD THAT FAILED; A LINE THAT PRINTS CLIPPED SAYS ITS CRISIS BEFORE THE CLIP.\n"
+          "THE WORK, in this order:\n"
+          "1. THE SWEEP'S ROWS, AS ONE MEASURED BATCH. (a) READ: for each of the 129 rows, widest by draws first: the lacking sibling's "
+          "text under the failed condition (vt.mjs): it TAKES the condition, or it is TRUE WITHOUT IT (said so, with one town), or the "
+          "state would fall MUTE (a twin). STOP READING AT YOUR JUDGMENT OF YOUR COUNT: sixty rows well read are worth more than 129 "
+          "skimmed: say how many you read. (b) DECLARE the batch in a scratch tree (declare.py's form). (c) MEASURE BY REPLAY (every "
+          "pool re-drawn from the render's own eligible lists: no render): per variant before and after, the moves, the inheritors. "
+          "(d) THE INHERITORS READ in the towns the declarations move (three a pool: a siege, a famine or an occupation among them). "
+          "(e) LAND POOL BY POOL, widest moves first, each with its guard rows red on the base for the right reason. ONE MESSAGE TO "
+          "THE CHAIR when the first ten pools are in (the tip; rows read; declarations landed; twins written; draws moved), then THE "
+          "COUNT.\n"
+          "2. THE BAR'S SIX ROWS, as the hand-back plans each: #39 (WAREHOUSES v2 under a siege, 45 towns), #275 (the entrepot lines: "
+          "87 of 89 drawn towns re-export nothing they import: reworded to transit), #168 (\"halls\" where no hall stands), #12 (the "
+          "abandonment claim), #114 (the merchant guild lines where only a merchant oligarchy stands), #116 if its pool is yours.\n"
+          "3. The reader's rows still false in your pools, by width; the slash label \"gold/silver ore\" through slots (the good's "
+          "plain words as the Economics tab's pill prints them); the rest of the hand-back's list.\n"
+          "FOR EVERY DECLARATION: the pool's draws per variant before and after (replay); the inheritor read; a guard row on a town of "
+          "the case (where no born town of the guard's seed shape holds it: GUARD OWED, with the reason). A new or reworded line is "
+          "read where it prints on every surface in three towns, the smallest and the largest size it reaches, and listed for the veto.\n"
+          "AFTER EVERY POOL: after.sh (the generated pools rebuilt and checked; the presumed door's `--check`: a rise over your "
+          "branch's 17 is a stop; the pool guard: a row over its ceiling is a stop; the grid; the three fast gates; the fast set: your "
+          "base's 7 known reds and no more).\n"
+          "YOU RENDER NOTHING WHOLE unless a line's read needs its page: the seat before you rendered the 772 births: its out-directory "
+          "is gone with its container: re-make it ONCE (about twelve minutes of machine time) for the replay's eligible lists, and "
+          "never bring a render's output into your context.\n"
+          "THE HAND-BACK, kept current after every pool: docs/chair/2026-11-14/W2-WRITE-SIDE-HANDBACK-14.md on your branch, in the "
+          "form of the thirteenth's: the rulings copied; the rows read (taken / true without / twin); the pools landed; EVERY NEW OR "
+          "CHANGED LINE with the towns it was read in; the registers named stale; the guards owed; what is left, line by line."),
+    merges='',
+    when="for a stop that blocks everything you have left, when the first ten pools are in (the tip; the counts), for a row whose pool is the other seat's, and with your hand-back",
+    turns='',
+)
+
+
 def build2(seat):
     s = _r3c6() if seat == 'R3-CODE-C-6' else SEATS2[seat]
     head = (
