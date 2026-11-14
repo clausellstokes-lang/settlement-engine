@@ -4950,6 +4950,82 @@ SEATS2['R2-CODE-A-12'] = dict(
 )
 
 
+SEATS2['W2-C-LEAVES-12'] = dict(
+    title="W2-C-LEAVES-12 · the third leaves lane: two HIGH pills and a count range, then its reader's medium families",
+    branch='lane/w2-c-leaves-2026-11-13', tip='adbafd3c', statement=False,
+    intro=("You are W2-C-LEAVES-12, the twelfth seat on the third leaves lane of the settlement-engine integration program (lane/w2-c-leaves-2026-11-13). "
+           "The lane cures false lines at display: the Economics tab's chain cards, goods pills and food sentences, the Resources tab's cards, "
+           "the Defense tab's supporting rows; it moves no record. An independent reader read its stage NOT CLEAR on 1,824 towns: two HIGH of "
+           "the stage's own, seven MEDIUM families, carried HIGH rows. The eleventh seat cured the two HIGH of the stage's own (the rival "
+           "rings in towns one criminal power runs: 36 to 0; the \"worked all the way through\" sentence: 153 to 20, every slot now read from "
+           "the record) and handed back at its count with THE REST NOT BEGUN. Yours: the rest, HIGH first. The lane goes on curing and "
+           "lands later as a point of its own on the joined line: NO whole suite, NO new statement."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. On your lane, docs/chair/2026-11-13/W2-C-LEAVES-HANDBACK.md: ONLY \"# PART 11\" (from that line to the end, by script: about 115 "
+          "lines): THE CHAIR'S RULINGS (1) to (13), copied whole; the two items as cured (their form: a unit and a collected arm, the "
+          "record proved unmoved leaf by leaf, the stored public prose's move declared); the veto list; FOR THE JOIN; WHAT IS LEFT (your "
+          "list, with what to measure first); THE INSTRUMENTS (under docs/chair/2026-11-14/probes/W2-C-LEAVES-11/).\n"
+          "3. THE READER'S RANKED LIST, for a row you are curing (`git fetch origin lane/review-w2-c-leaves-2026-11-14`; `git show "
+          "origin/lane/review-w2-c-leaves-2026-11-14:docs/chair/2026-11-14/REVIEW-W2-C-LEAVES-LINES-READ.md`: the section \"The false lines, "
+          "ranked\", by script: its numbers are the square-bracketed ones in the rulings); its probes "
+          "(docs/chair/2026-11-14/probes/REVIEW-W2-C-LEAVES/) copied out with git archive, run from outside every repository tree.\n"
+          "4. The merge book's section 2m on origin/lane/merge-15-point-49-wip-2026-11-14 (the section headed \"## 2m.\"; by script), before the first "
+          "register you touch."),
+    work=("THE CHAIR'S RULINGS SINCE PART 11'S COPY (2026-11-14; each vetoable by the owner; copy them into your part), beside its (1) to "
+          "(13), which stand:\n"
+          "(2b) ON THE ELEVENTH SEAT'S VETO ROWS: \"… Fish market finishes it, and it leaves as fish oil\" (12 towns) and \"… Mill finishes "
+          "it, and it leaves as beer\" (3): THE HOUSE THAT FINISHES A GOOD MAKES THAT GOOD: the sentence names a house only where that "
+          "house's own maker row holds the good it names (a mill makes flour, not beer); else the sentence is not printed. It is cured "
+          "with (3), which grows the same maker table.\n"
+          "(H) HIGH, carried: the Medical Readiness line prints the healer's catalogue name with its count range (\"Major monasteries "
+          "(5-10). Wounds and fevers treated one at a time…\", 12 metropolises): NO SURFACE PRINTS A CATALOGUE NAME'S BRACKET: through the "
+          "display label; grep your births for every \"(n-m)\" this file prints: the same cure, the same commit.\n"
+          "(8, refined) UNDER A SIEGE NOTHING COMES IN OR GOES OUT BY ROAD, GATE OR WATER; A MAGIC CHANNEL THE RECORD HOLDS IS SAID: the "
+          "besieged port's food sentence and its stat row name no import by ship, road or cart; where the food record names a magic "
+          "channel, the sentence may name it and its share.\n"
+          "(10, refined) THREE \"ARCANE\" FACTS STAND IN THE RECORD (the practitioners' census; the defence bucket's houses; the defence "
+          "profile's own tradition, defenseProfile.traditions.hasArcane: what the rating counted): MEASURE THEM SIDE BY SIDE first. THE "
+          "PAGE'S ARCANE WORDS READ THE DEFENCE PROFILE'S OWN TRADITION: the Arcane Support row says Present, and the \"Arcane defense\" "
+          "force group prints, only where the profile holds it (the force group prints without it in 52 of 720 as named).\n"
+          "(14) \"Internal Security Strong\" beside \"Desperate / Dangerous / Critical\" in one row (12 towns): TWO WORDS IN ONE ROW SAY WHAT "
+          "EACH MEASURES, or the row prints one; new words on the veto list.\n"
+          "(15) \"Needed, and not brought in: … gold/silver ore\" (93 towns on the joined tree): NO SURFACE PRINTS A CATALOGUE LABEL WITH A "
+          "SLASH: the good's plain name, through the leaf your pills use.\n"
+          "(16) THE MAGIC TAB PRINTS A CHAIN'S MAGIC NOTE RAW (43 towns: a divine note where no divine tradition is held) while your "
+          "Economics card reads it through your own reader: ONE READER FOR ONE FACT ON EVERY SURFACE: the Magic tab calls that reader.\n"
+          "(17) A chain card's outputs run together (\"Medical treatmentSurgeryQuarantine\", 31 towns), and yield chips printed with no "
+          "label on an impaired chain: TWO THINGS A PAGE SAYS ARE SET APART, on the page and in the text taken from it.\n"
+          "CHANGED: (12) IS NO LONGER YOURS, not even to measure: a new lane cut from the joined branch makes the PDF and the Foundry "
+          "journal print through YOUR readers (it calls them; it does not change them): you change no file under src/pdf/ or src/foundry/ "
+          "from now, and a row of yours that would need one is NAMED. (9) stays yours where the fault is your readers' own rule (the local "
+          "production list against the exports list).\n"
+          "THE WORK, in this order, each cause its own commit, measured first, red first (a unit and a collected arm over births; each arm "
+          "shown able to red by a plant you do not commit, made in a tree no suite is running in), pushed as made:\n"
+          "1. (3)'s two HIGH pills WITH (2b), as PART 11's list says (MEASURE FIRST how many pills pass by the default branch, since the "
+          "ruling may silence many, and re-measure (2) after); then (H). ONE MESSAGE TO THE CHAIR (the tip; each row's count before and "
+          "after; what the default branch was passing), then THE COUNT.\n"
+          "2. BY WIDTH: (15), (4) the court row with the release bar's #206, (7) the counts of the Economic Flows header, (5) the rest of "
+          "the re-filed prose families, (16), (17), (10), (8), (6), (9), (3)'s medium pills, (14), (11).\n"
+          "3. Then PART 11's carried medium rows, widest first, until your count's mark.\n"
+          "TO SPEND LESS OF YOUR COUNT THAN THE SEAT BEFORE YOU (two cures took it all): count on the census's 720 and the reader's towns "
+          "of the row; render the reader's whole 1,824 ONCE, before the message of step 1, and once before the hand-back; never bring a "
+          "render's output or a dump into your context: a script prints the counts and at most three quoted lines.\n"
+          "THE RECORD DOES NOT MOVE: prove it leaf by leaf after each cure, as the eleventh seat did; a cure that moves a record leaf "
+          "outside the stored public prose is a STOP. EVERY LINE A CURE NOW PRINTS IN A NEW TOWN, OR NEWLY LEAVES SILENT, IS READ WHERE IT "
+          "PRINTS on the tab (and on the PDF and the journal where it reaches them unchanged by you): three towns of its cells, a siege, a "
+          "famine or an occupation among them, the smallest and the largest size it reaches. Silence is true; report the true lines a "
+          "silence takes.\n"
+          "AFTER EVERY CURE: the presumed-things walker (red ONLY for the two matcher words named for the declaration pass); the "
+          "strict-domain gate, the type ratchet and eslint on the touched files; the twelve-birth grid (`node "
+          "scripts/census/page-census.mjs --grid`: a rise is a stop; the falls are lowered by the door's shrink form once, at your "
+          "hand-back); the test files that name the files you touched.\n"
+          "THE HAND-BACK, kept current after every item: a new \"# PART 12\" at the end of the lane's hand-back file, in PART 11's form."),
+    merges='',
+    when="for a stop that blocks everything you have left, at step 1 (the tip; the counts; what the default branch passed), for a town list under ruling (4), and with your hand-back",
+    turns='',
+)
+
+
 def build2(seat):
     s = _r3c6() if seat == 'R3-CODE-C-6' else SEATS2[seat]
     head = (
