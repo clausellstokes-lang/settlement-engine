@@ -5747,6 +5747,115 @@ SEATS2['NOLANE-2'] = dict(
 )
 
 
+SEATS2['W2-WRITE-13'] = dict(
+    title="W2-WRITE-13 · the corpus lane, the DEFENCE, POWER and FAITH pools: a HIGH line under hunger and the sweep of its class, the council in a headman's town, three red tests",
+    branch='lane/w2-write-2026-11-13', tip='525541b4', statement=False,
+    intro=("You are W2-WRITE-13, the thirteenth seat on the corpus lane of the settlement-engine integration program (lane/w2-write-2026-11-13). The "
+           "lane holds the dossier's written lines: ONE source document (docs/content/RECEIPT_POOLS_DOSSIER_STATE.md) from which "
+           "src/data/dossierStateProse/*.generated.js are generated; a line is cured by a declaration (the facts it needs, the crises it is "
+           "declared off) or by rewording, never by striking a middle row. An independent reader read the lane NOT CLEAR at 70e5e7468: of "
+           "207 lines read on 905 towns, 62 false at high or medium. The twelfth seat cured four families and one of the reader's two HIGH "
+           "of the stage's own, and handed back at its count with a long list. THE LIST IS NOW DIVIDED BETWEEN TWO SEATS BY POOL, so that "
+           "neither edits the other's pools: YOURS are the pools whose ids begin DS-DEF, DS-POW, DS-FTH and DS-CND; a second seat on a "
+           "side branch holds DS-ECO, DS-GEN and DS-SUP. The lane goes on curing and lands as points on the joined line: NO whole suite, "
+           "NO new statement."),
+    read='1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n2. On the corpus lane, docs/chair/2026-11-13/W2-WRITE-HANDBACK-12.md WHOLE (110 lines, some very long: by script): the items as made (THE FORM OF A CURE HERE: a declaration or a rewording in the one source document, the pool\'s draws counted per variant before and after, the inheriting line read in the cured towns, a guard row); the veto list; WHAT IS LEFT (the list both seats now share, DIVIDED BELOW); FOR THE JOIN; the reds; how the instruments are re-made; the rulings copied. And of W2-WRITE-HANDBACK-10.md ONLY the section "How the instruments are re-made" (the owner-page render over 772 towns; the helpers; after.sh).\n3. THE READER\'S FILES (`git fetch origin lane/review-w2-write-2-2026-11-14`): docs/chair/2026-11-14/REVIEW-W2-WRITE-2-2026-11-14.md (the verdict: its findings table, by script) and REVIEW-W2-WRITE-2-LINES-READ.md ("The result", the table of the last read\'s 59 rows, and under "Every line" ONLY the sections of the pools that are YOURS, each when you cure it).\n4. THE BAR\'S ROWS FOR THIS LANE, for a row you are curing (`git fetch origin lane/chair-2026-11-08`; `git show origin/lane/chair-2026-11-08:docs/chair/2026-11-14/bar-0-rows/BAR-0-ROWS-corpus.json`).',
+    work=('THE CHAIR\'S RULINGS IN FORCE (2026-11-14; each vetoable by the owner; the hand-back copies the earlier ones; copy these into your part): A TWIN TAKES ITS SIBLINGS\' CONDITION. A RE-GATE READS THE LINE THAT INHERITS ITS TOWNS: when a condition takes a line off a town, the sibling that now prints there is read IN THAT TOWN before the push. A LINE ABOUT A BODY THAT MUST AGREE NEEDS A BODY OF MORE THAN ONE. A SLOT IS NOT MADE THE SUBJECT OF A VERB IT DOES NOT AGREE WITH. A LINE THAT PRINTS CLIPPED SAYS ITS CRISIS BEFORE THE CLIP (the overview\'s rungs print a line to its first comma or semicolon). NO LINE PRINTS A SLASH LABEL THROUGH A SLOT ("gold/silver ore", "Military/Guard"): plain words by the lane\'s own slot filler; the words for the powers come from the powers lane\'s seat through the chair: until they come, list the lines and do not choose words for a power. UNDER A SIEGE NOTHING COMES IN OR GOES OUT BY ROAD, GATE OR WATER; UNDER A FAMINE NO LINE OFFERS THE FOOD THAT FAILED; UNDER AN OCCUPATION no line says the town decides or keeps its own revenue. REGISTERS ARE RE-DERIVED ONCE, AT THE CLOSE: the generated pools are built through the corpus\'s own door after every change (they are the product); the byte baseline, the wiring census and the shift register are NOT re-taken: a register your cure makes stale is NAMED in your hand-back; nothing is banked, raised or hand-edited; the pool guard is still run where a pool is touched (a row over its ceiling is a stop); a pin your cure moves is re-keyed BY IDENTITY in the same commit.\n' +
+          "THE WORK, in this order, each cause its own commit, measured first, red first where a guard town exists, pushed as made:\n"
+          "1. THE READER'S HIGH 2 (the stage's own; NOT BEGUN): DS-DEF-12 CAPACITY: enough v3 (\"make do … a good year is comfortable and a "
+          "bad one is lean\") under a famine or a siege (26 of 47 towns): v3 takes its siblings' food condition; where no line is then "
+          "admitted under hunger the row is silent. WITH IT, THE SWEEP OF THE CLASS, AS ONE SCRIPT KEPT WITH YOUR PROBES: for EVERY pool "
+          "of the source document (all blocks), every condition that some variants of the pool carry and a sibling lacks: the list "
+          "(pool, the condition, the variants lacking it, how many of your births draw a lacking variant in a town where the condition "
+          "fails). The rows of YOUR pools are read and cured in this step (each lacking sibling read under the condition: it takes the "
+          "condition, or is true without it and is SAID so); the rows of the other seat's pools go to the chair in your message. ONE "
+          "MESSAGE TO THE CHAIR (the tip; the 26 before and after; the sweep's counts by block; the other blocks' rows as a file path on "
+          "your lane), then THE COUNT.\n"
+          "2. THE HIGH CARRIED: DS-POW-5 council v1, v2, v4 in a headman's town (\"slow because the whole Headman's Authority must "
+          "agree\" beside \"A headman settles disputes and gives the orders here\" and one member): the lines need a body of more than "
+          "one; v4 is the stage's own in two more towns. And DS-DEF-2 neither walls nor force v7 at the reader's town (r2r-town-50): "
+          "the twelfth seat's `no mercenary` should answer it: READ it there. And HIGH 1's GUARD ROW, owed: teach the guard's births "
+          "the reader's town (r2s-monster_pressure-town-2) by identity; and the sister-pool sweep for \"all the town has\", \"only\", "
+          "\"nothing but\" a force.\n"
+          "3. THE THREE RED TEST FILES of the stage's own (tests/ui/generalDeskTabFlow.test.js, tests/ui/economicsTabFlow.test.js, the "
+          "page census's grid): each traced to the commit that reds it; a pin re-keyed BY IDENTITY, never loosened; a grid RISE is a "
+          "line to cure (if the line is in the other seat's pools: tell the chair with the line).\n"
+          "4. THE READER'S MEDIUM OF THE STAGE'S OWN in your pools: DS-DEF-2 neither walls nor force v4 (\"no force\" beside a charter "
+          "hall that musters the defence) and v6 as reworded (\"nobody under arms\" beside \"people arming themselves\"); DS-DEF-2 Economic "
+          "Survival STRONG v3 as reworded and v12 (\"its defenders are still paid on time\" beside \"The occupiers take the revenue\" or "
+          "\"Chronically underpaid\": the twelfth seat's occupation cure may have answered part: re-measure first).\n"
+          "5. THE LAST READ'S ROWS STILL FALSE in your pools, by width: DS-DEF-1 readiness CRITICAL v4; DS-DEF-2 walls with NO force v5, "
+          "neither walls nor force v6 (through its replacement), WEAK v5; DS-DEF-3 Moderate v1; DS-DEF-8 UNDER TRIBUTE v4, SECURITY "
+          "COMPROMISED v4; DS-DEF-9 magicDependency v4; DS-FTH-4 heresy preached v3 and v5, hunted v4 and v5. Then the hand-back's own "
+          "rows in your pools: #278 (DS-DEF-8 INTERNAL PRESSURE v3), #279 (DS-DEF-2 v2), the frontier's deterrence lines, the chair's "
+          "WALLED-QUIET row, the slash label \"Military/Guard\" in DS-POW-4 and DS-POW-6 (LIST the lines; the words come from the chair).\n"
+          "6. The 21 disqualifier cures with no guard (the reader's findings table): NAME the ones in your pools in your hand-back; do "
+          "not write 21 arms.\n" +
+          "FOR EVERY CURE: the pool's draws per variant before and after on your births (the twelfth seat's helper), all and in the towns of each crisis the cure names; THE INHERITOR READ in three of the towns the cure moves, a siege, a famine or an occupation among them, the smallest and the largest size the line reaches; a guard row on a town of the case (where no born town of the guard's seed shape holds the case: teach the guard's births the reader's town BY IDENTITY, or say GUARD OWED with the reason); a new or reworded line is read where it prints on every surface that prints it and goes on the veto list with its towns.\nAFTER EVERY CURE: the corpus's doors (the generated pools rebuilt and byte-identical to a fresh build of the source document); the presumed-things door's `--check` (its fresh count against the lane's 23: a rise is a stop); the pool guard; the three fast gates on the touched files; the twelve-birth grid (`node scripts/census/page-census.mjs --grid`: a rise is a stop; a fall is NAMED); the test files that name the files you touched.\nTHE COUNT'S FIELD read frozen for the seat before you: if `used_tokens` reads the same at two wakings although you worked between, say so to the chair in one line (the chair reads it) and go on.\n" +
+          "THE HAND-BACK, kept current after every item: docs/chair/2026-11-13/W2-WRITE-HANDBACK-13.md in the form of the twelfth's: the "
+          "rulings copied; the sweep's table; each row as cured; EVERY NEW OR CHANGED LINE with the towns it was read in; THE REGISTERS "
+          "NAMED STALE; the guards owed; FOR THE JOIN, carried forward; what is left, line by line."),
+    merges='',
+    when="for a stop that blocks everything you have left, after step 1 (the tip; the counts; the sweep), for a grid rise in a pool that is not yours, and with your hand-back",
+    turns='',
+)
+
+
+SEATS2['W2-WRITE-SIDE-13'] = dict(
+    title="W2-WRITE-SIDE-13 · the corpus lane's side seat, the ECONOMY and GENERAL pools: six legacy lines that broke agreement, the clipped market lines, the warehouses under a siege, the entrepot",
+    branch='lane/w2-write-side-13-2026-11-14', checkout='lane/w2-write-2026-11-13', tip='525541b4', statement=False,
+    intro=("You are W2-WRITE-SIDE-13, a seat on a SIDE BRANCH of the corpus lane of the settlement-engine integration program. The corpus lane "
+           "(lane/w2-write-2026-11-13) holds the dossier's written lines: ONE source document (docs/content/RECEIPT_POOLS_DOSSIER_STATE.md) "
+           "from which src/data/dossierStateProse/*.generated.js are generated; a line is cured by a declaration (the facts it needs, the "
+           "crises it is declared off) or by rewording, never by striking a middle row. An independent reader read the lane NOT CLEAR at "
+           "70e5e7468: of 207 lines read on 905 towns, 62 false at high or medium. The twelfth seat handed back at its count with a long "
+           "list. THE LIST IS NOW DIVIDED BETWEEN TWO SEATS BY POOL, so that neither edits the other's pools: YOURS are the pools whose "
+           "ids begin DS-ECO, DS-GEN and DS-SUP; the lane's own seat holds DS-DEF, DS-POW, DS-FTH and DS-CND. You work on YOUR OWN BRANCH, "
+           "cut from the lane's tip; it lands on the joined line as a point of its own: NO whole suite, NO new statement."),
+    read='1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n2. On the corpus lane, docs/chair/2026-11-13/W2-WRITE-HANDBACK-12.md WHOLE (110 lines, some very long: by script): the items as made (THE FORM OF A CURE HERE: a declaration or a rewording in the one source document, the pool\'s draws counted per variant before and after, the inheriting line read in the cured towns, a guard row); the veto list; WHAT IS LEFT (the list both seats now share, DIVIDED BELOW); FOR THE JOIN; the reds; how the instruments are re-made; the rulings copied. And of W2-WRITE-HANDBACK-10.md ONLY the section "How the instruments are re-made" (the owner-page render over 772 towns; the helpers; after.sh).\n3. THE READER\'S FILES (`git fetch origin lane/review-w2-write-2-2026-11-14`): docs/chair/2026-11-14/REVIEW-W2-WRITE-2-2026-11-14.md (the verdict: its findings table, by script) and REVIEW-W2-WRITE-2-LINES-READ.md ("The result", the table of the last read\'s 59 rows, and under "Every line" ONLY the sections of the pools that are YOURS, each when you cure it).\n4. THE BAR\'S ROWS FOR THIS LANE, for a row you are curing (`git fetch origin lane/chair-2026-11-08`; `git show origin/lane/chair-2026-11-08:docs/chair/2026-11-14/bar-0-rows/BAR-0-ROWS-corpus.json`).',
+    first=("FIRST ACT. FULL HISTORY (`git fetch --depth=2147483647 origin lane/w2-write-2026-11-13 lane/integration-2026-11-07`; `git "
+           "rev-parse --is-shallow-repository` prints false). Read the corpus lane's tip back from origin: it was 525541b42 when this was "
+           "written; THE LANE'S OWN SEAT IS PUSHING ON IT: a later tip is not a stop: cut from the tip you read and say which. YOUR OWN "
+           "BRANCH: `git worktree add -b lane/w2-write-side-13-2026-11-14 <scratch>/own <that tip>`. You never commit on, or push to, the "
+           "corpus lane; you do not merge it again unless the chair says. IN THE SOURCE DOCUMENT YOU EDIT ONLY THE SECTIONS OF YOUR "
+           "POOLS (DS-ECO, DS-GEN, DS-SUP), so that the two branches merge without a conflict."),
+    work=('THE CHAIR\'S RULINGS IN FORCE (2026-11-14; each vetoable by the owner; the hand-back copies the earlier ones; copy these into your part): A TWIN TAKES ITS SIBLINGS\' CONDITION. A RE-GATE READS THE LINE THAT INHERITS ITS TOWNS: when a condition takes a line off a town, the sibling that now prints there is read IN THAT TOWN before the push. A LINE ABOUT A BODY THAT MUST AGREE NEEDS A BODY OF MORE THAN ONE. A SLOT IS NOT MADE THE SUBJECT OF A VERB IT DOES NOT AGREE WITH. A LINE THAT PRINTS CLIPPED SAYS ITS CRISIS BEFORE THE CLIP (the overview\'s rungs print a line to its first comma or semicolon). NO LINE PRINTS A SLASH LABEL THROUGH A SLOT ("gold/silver ore", "Military/Guard"): plain words by the lane\'s own slot filler; the words for the powers come from the powers lane\'s seat through the chair: until they come, list the lines and do not choose words for a power. UNDER A SIEGE NOTHING COMES IN OR GOES OUT BY ROAD, GATE OR WATER; UNDER A FAMINE NO LINE OFFERS THE FOOD THAT FAILED; UNDER AN OCCUPATION no line says the town decides or keeps its own revenue. REGISTERS ARE RE-DERIVED ONCE, AT THE CLOSE: the generated pools are built through the corpus\'s own door after every change (they are the product); the byte baseline, the wiring census and the shift register are NOT re-taken: a register your cure makes stale is NAMED in your hand-back; nothing is banked, raised or hand-edited; the pool guard is still run where a pool is touched (a row over its ceiling is a stop); a pin your cure moves is re-keyed BY IDENTITY in the same commit.\n' +
+          "THE WORK, in this order, each cause its own commit, measured first, red first where a guard town exists, pushed as made:\n"
+          "1. THE READER'S MEDIUM OF THE STAGE'S OWN in your pools, widest first: DS-GEN-16 LEGACY, six lines as reworded (61 towns): "
+          "\"The plague years is a generation old\", \"came through the plague years, which is older than its bearers\": the slot "
+          "`{calamity}` is not made the subject of a singular verb: reworded so that every calamity the slot can hold reads true and "
+          "grammatical (LIST the slot's values first and read each line with each). DS-GEN-13 MARKET-OPEN: its siege and plague twins "
+          "print WITHOUT their crisis clause, because the overview prints a line only to its first comma or semicolon: each twin says "
+          "its crisis BEFORE the clip; v3 takes the `no crisis: plague_onset` its siblings carry (2 plague towns); the hand-back's #38 "
+          "(v5, 48 towns) with it, as planned there. DS-GEN-18 STALLED v3 (new: \"always bought in\" beside \"No recorded imports\"). ONE "
+          "MESSAGE TO THE CHAIR after these (the tip; each count before and after), then THE COUNT.\n"
+          "2. THE BAR'S ROWS in your pools, as the hand-back plans each: #39 (DS-ECO WAREHOUSES v2 under a siege, 45 towns); #275 "
+          "(DS-ECO-10 entrepot v2 and v1: 87 of 89 drawn towns re-export nothing they import: reworded to transit; the flag's writer "
+          "NAMED for the join); #168 (DS-ECO-8 PROSPEROUS: \"halls\" where no hall stands); #12 (DS-ECO-11 RESOURCE CONDITION: the "
+          "abandonment claim); #114 (DS-GEN-13 COMMERCE merchant guild v1 to v4 where only a merchant oligarchy stands); #116 if its "
+          "pool is yours (reworded only and still false in 59 of 67 towns: find its pool first; if it is the other seat's, tell the "
+          "chair).\n"
+          "3. THE LAST READ'S ROWS STILL FALSE in your pools, by width: DS-ECO-9 DEFICIT v5 and IMPORT-DEPENDENT v5 (under a siege); "
+          "DS-ECO-11 partiallyExploited v5 through its replacement (unexploited v3: \"nobody has found it worth the trouble\" beside "
+          "Carpenters, a Sawmill and a running Timber chain); DS-ECO-12 CRITICAL IMPORT the land cannot give it v1; DS-GEN-18 BOUGHT-IN "
+          "v9. Then: the slash label \"gold/silver ore\" through slots (DS-ECO-12 a house needs v1 and v2; DS-ECO-11 unexploited-high "
+          "v2: 47 towns): the good's plain words by the lane's own slot filler (\"gold and silver ore\" unless the page's own pill "
+          "prints another plain form: read the Economics tab's pill and print the same); the sawmill's two partial-pool lines; the "
+          "religious houses' pool; the hand-back's step 4(b) lines in your pools; the two empty cases.\n"
+          "4. THE SWEEP'S ROWS: the lane's own seat is listing, for every pool, each condition some variants carry and a sibling "
+          "lacks; the rows of YOUR pools reach you through the chair: each lacking sibling read under the condition: it takes the "
+          "condition, or is true without it and is SAID so.\n"
+          "5. The disqualifier cures with no guard in your pools (the reader's findings table): NAMED in your hand-back.\n" +
+          "FOR EVERY CURE: the pool's draws per variant before and after on your births (the twelfth seat's helper), all and in the towns of each crisis the cure names; THE INHERITOR READ in three of the towns the cure moves, a siege, a famine or an occupation among them, the smallest and the largest size the line reaches; a guard row on a town of the case (where no born town of the guard's seed shape holds the case: teach the guard's births the reader's town BY IDENTITY, or say GUARD OWED with the reason); a new or reworded line is read where it prints on every surface that prints it and goes on the veto list with its towns.\nAFTER EVERY CURE: the corpus's doors (the generated pools rebuilt and byte-identical to a fresh build of the source document); the presumed-things door's `--check` (its fresh count against the lane's 23: a rise is a stop); the pool guard; the three fast gates on the touched files; the twelve-birth grid (`node scripts/census/page-census.mjs --grid`: a rise is a stop; a fall is NAMED); the test files that name the files you touched.\nTHE COUNT'S FIELD read frozen for the seat before you: if `used_tokens` reads the same at two wakings although you worked between, say so to the chair in one line (the chair reads it) and go on.\n" +
+          "THE HAND-BACK, kept current after every item: docs/chair/2026-11-14/W2-WRITE-SIDE-HANDBACK-13.md on YOUR branch, in the form "
+          "of the twelfth seat's: the rulings copied; each row as cured; EVERY NEW OR CHANGED LINE with the towns it was read in; THE "
+          "REGISTERS NAMED STALE; the guards owed; FOR THE JOIN; what is left, line by line."),
+    merges='',
+    when="for a stop that blocks everything you have left, after step 1 (the tip; the counts), for a row whose pool is the other seat's, and with your hand-back",
+    turns='',
+)
+
+
 def build2(seat):
     s = _r3c6() if seat == 'R3-CODE-C-6' else SEATS2[seat]
     head = (
