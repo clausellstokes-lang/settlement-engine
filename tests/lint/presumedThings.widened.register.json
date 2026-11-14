@@ -12163,12 +12163,6 @@
    [
     "war",
     "root",
-    "Those who keep {name} safe have fewer hands than before, with men called away to the war.",
-    "8059513c6e5dbfbe"
-   ],
-   [
-    "war",
-    "root",
     "In wartime {name}'s trade follows the army: what the war needs sells, and the rest waits.",
     "fccbb77b9c7d2b3c"
    ],
@@ -12189,12 +12183,6 @@
     "word",
     "Newcomers to {name} are questioned by the occupiers' officials before any local will say a word to them.",
     "a13f285e5bf20641"
-   ],
-   [
-    "occupation",
-    "word",
-    "Everything sold in {name} pays the occupiers their due first, and the merchants keep their prices and their opinions to ",
-    "b934ea0f127cb9f8"
    ],
    [
     "occupation",
@@ -12315,48 +12303,6 @@
     "family",
     "Anyone new inside {name} is another mouth to feed and perhaps a spy for the besiegers, and is treated as both.",
     "050d2d3627066975"
-   ],
-   [
-    "armedForce",
-    "family",
-    "In {name} the food stores are under guard, and the guards are as hungry as everyone else.",
-    "7fc28a00e7f9150b"
-   ],
-   [
-    "streets",
-    "family",
-    "People in {name} avoid the streets where one power's ground meets another's, most of all after dark.",
-    "b419f415cc33afb5"
-   ],
-   [
-    "streets",
-    "family",
-    "The creditor's agents walk {name}'s streets as if they owned them, and in a way they do: the place owes more than it can",
-    "a9630f0a8cc79c3b"
-   ],
-   [
-    "streets",
-    "family",
-    "The quarantine in {name} is kept in some streets and ignored in others, and the sickness goes where it likes.",
-    "2ab6283007a9281f"
-   ],
-   [
-    "streets",
-    "family",
-    "There is no fighting in {name}'s streets; the danger is quieter, officials who will not act and orders that go nowhere.",
-    "f7fcde2bc90d0af4"
-   ],
-   [
-    "streets",
-    "family",
-    "{name}'s faith is in dispute: you hear two kinds of prayer in its streets, and people are careful which one they join.",
-    "68348afaef26a3c9"
-   ],
-   [
-    "streets",
-    "family",
-    "With so many gone from {name}, whole streets are dark at night and nobody watches them.",
-    "d54c1121d5b3e1d8"
    ]
   ],
   "src/domain/customContentSchema.js": [
