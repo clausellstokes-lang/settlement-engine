@@ -10624,10 +10624,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "ANCHORED-RECENT": [
         {
           "angle": "street",
-          "text": "The {calamity} is recent enough that people in {settlement} still say 'before' and 'after' it.",
+          "text": "People in {settlement} still say 'before' and 'after' the {calamity}.",
           "slots": [
-            "calamity",
-            "settlement"
+            "settlement",
+            "calamity"
           ],
           "vid": 1
         },
@@ -10642,7 +10642,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "{settlement} has been careful since the {calamity}; people still remember how bad it was.",
+          "text": "{settlement} has been careful since the {calamity}; people still remember how bad that time was.",
           "slots": [
             "settlement",
             "calamity"
@@ -10653,11 +10653,11 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "ANCHORED-OLD": [
         {
           "angle": "elder",
-          "text": "The {calamity} is {timeband_age}, and {settlement} still keeps habits from that time that nobody can now explain.",
+          "text": "{settlement} still keeps habits nobody can now explain, from the time of the {calamity}; that time is {timeband_age}.",
           "slots": [
+            "settlement",
             "calamity",
-            "timeband_age",
-            "settlement"
+            "timeband_age"
           ],
           "vid": 1
         },
@@ -10672,7 +10672,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "Nobody now in {settlement} saw the {calamity}, and everybody here lives in the town it made.",
+          "text": "Nobody now in {settlement} saw the {calamity}, and everybody here lives in the town that time made.",
           "slots": [
             "settlement",
             "calamity"
@@ -10701,7 +10701,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "RECORDED-UNANCHORED": [
         {
           "angle": "ledger",
-          "text": "The {calamity} happened here, but {settlement} has moved on; nothing in the town today turns on it.",
+          "text": "The {calamity} happened here, but {settlement} has moved on; nothing in the town today turns on that time.",
           "slots": [
             "calamity",
             "settlement"
@@ -10742,7 +10742,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "LIVING-MEMORY": [
         {
           "angle": "street",
-          "text": "People in {settlement} still remember the {calamity}, and it weighs on the quarrels the town is having now.",
+          "text": "People in {settlement} still remember the {calamity}, and the memory weighs on the quarrels the town is having now.",
           "slots": [
             "settlement",
             "calamity"
@@ -10751,7 +10751,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "Ask about the town's present quarrels in {settlement} and the {calamity} comes up before long.",
+          "text": "Ask about the town's present quarrels in {settlement} and before long somebody brings up the {calamity}.",
           "slots": [
             "settlement",
             "calamity"
@@ -10762,21 +10762,21 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "LEGACY-UNRESOLVED": [
         {
           "angle": "ledger",
-          "text": "The {calamity} is {timeband_age}, and it left a legacy of trouble in {settlement} that has never been fully put right.",
+          "text": "The {calamity} left a legacy of trouble in {settlement} that has never been fully put right, and that legacy is {timeband_age}.",
           "slots": [
             "calamity",
-            "timeband_age",
-            "settlement"
+            "settlement",
+            "timeband_age"
           ],
           "vid": 1
         },
         {
           "angle": "street",
-          "text": "The {calamity} is {timeband_age}, and nobody in {settlement} has finished putting right the legacy it left.",
+          "text": "Nobody in {settlement} has finished putting right the legacy the {calamity} left, and that legacy is {timeband_age}.",
           "slots": [
+            "settlement",
             "calamity",
-            "timeband_age",
-            "settlement"
+            "timeband_age"
           ],
           "vid": 2
         }
@@ -10784,7 +10784,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "LEGACY-RECOVERED": [
         {
           "angle": "ledger",
-          "text": "{settlement} came through the {calamity}, which is {timeband_age} now; its legacy is what the town built in answer to it, and that still stands.",
+          "text": "{settlement} came through the {calamity}, and what the town built in answer still stands; that legacy is {timeband_age}.",
           "slots": [
             "settlement",
             "calamity",
@@ -10794,11 +10794,11 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The {calamity} is {timeband_age}, and its legacy is much of what stands in {settlement} now: it was built in the years after.",
+          "text": "Much of what stands in {settlement} now was built after the {calamity}; that legacy is {timeband_age}.",
           "slots": [
+            "settlement",
             "calamity",
-            "timeband_age",
-            "settlement"
+            "timeband_age"
           ],
           "vid": 2
         }
@@ -10806,21 +10806,21 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "LEGACY-SHIFTED": [
         {
           "angle": "ledger",
-          "text": "The {calamity} is {timeband_age}; what {settlement} settled in its wake is a legacy that still shapes the town, though much has changed since.",
+          "text": "What {settlement} settled in the wake of the {calamity} still shapes the town, though much has changed since; that legacy is {timeband_age}.",
           "slots": [
+            "settlement",
             "calamity",
-            "timeband_age",
-            "settlement"
+            "timeband_age"
           ],
           "vid": 1
         },
         {
           "angle": "street",
-          "text": "The {calamity} is {timeband_age}, and {settlement} still carries the shape it took after it; that legacy holds, though the times have moved on.",
+          "text": "{settlement} still keeps the shape the town took after the {calamity}, though the times have moved on; that legacy is {timeband_age}.",
           "slots": [
+            "settlement",
             "calamity",
-            "timeband_age",
-            "settlement"
+            "timeband_age"
           ],
           "vid": 2
         }
@@ -10828,7 +10828,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "LEGACY-LINKED": [
         {
           "angle": "ledger",
-          "text": "The {calamity} is {timeband_age}, and its legacy still bears on how {settlement} lives.",
+          "text": "What the {calamity} left behind is {timeband_age}, and that legacy still bears on how {settlement} lives.",
           "slots": [
             "calamity",
             "timeband_age",
@@ -10838,7 +10838,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "{settlement} still lives with the legacy of the {calamity}, which is {timeband_age}.",
+          "text": "{settlement} still lives with what the {calamity} left, and that legacy is {timeband_age}.",
           "slots": [
             "settlement",
             "calamity",

@@ -7131,21 +7131,21 @@ compass word, no real-world place, no named analogy.*
 **PROVENANCE:** **`anchored` IS THE GATE, AND THIS BLOCK IS BUILT AROUND IT.** `DS-GEN-9` rules that `anchored: true` is the record's own assertion that an event still bears on the present and is therefore the licence for an "and it still" clause, that an unanchored event "gets described and NOT connected forward", and that this is "the sharpest line in the shape and the easiest to blur". A block whose entire subject is an event's PRESENT REMAINDER blurs that line by construction unless the gate is keyed, so it is keyed: every forward-connecting pool below requires `anchored`, and `RECORDED-UNANCHORED` exists precisely so that the unanchored case has somewhere lawful to go instead of borrowing an anchored sentence. Its two variants describe the event and decline to carry it forward, which is the ruling rendered as prose. **Non-redundancy, twice over (`R-DST-A`):** `DS-GEN-9` renders the event rows AS A TIMELINE and owns the founding and the record itself; this block renders what the record says REMAINS, and only where `anchored` or `lastingEffects` actually asserts a remainder. `DS-GEN-15` reads the fabric mirror, which is what the STONES show; this block reads the history table, which is what the RECORD says. The two cite different fields and may compose together, since neither restates the other's cell. No variant carries a year: `DS-GEN-9` records that the surface prints a numeral beside its own band ladder, and `R-DST-D` keeps the prose banded.
 
 **`ANCHORED-RECENT`** {colour}
-1. `[street]` The {calamity} is recent enough that people in {settlement} still say 'before' and 'after' it.
+1. `[street]` People in {settlement} still say 'before' and 'after' the {calamity}.
 2. `[unfolding]` What the {calamity} took from {settlement} is still being counted, and some of the counting is done aloud.
-3. `[visitor]` {settlement} has been careful since the {calamity}; people still remember how bad it was.
+3. `[visitor]` {settlement} has been careful since the {calamity}; people still remember how bad that time was.
 
 **`ANCHORED-OLD`** {colour}
-1. `[elder]` The {calamity} is {timeband_age}, and {settlement} still keeps habits from that time that nobody can now explain.
+1. `[elder]` {settlement} still keeps habits nobody can now explain, from the time of the {calamity}; that time is {timeband_age}.
 2. `[ledger]` {settlement} still does things differently because of the {calamity}, a long-past event.
-3. `[street]` Nobody now in {settlement} saw the {calamity}, and everybody here lives in the town it made.
+3. `[street]` Nobody now in {settlement} saw the {calamity}, and everybody here lives in the town that time made.
 
 **`LAYERED-ANCHORED`** {colour}
 1. `[elder]` One hard season after another has passed over {settlement}, and each still shapes the town.
 2. `[visitor]` {settlement} has been knocked down and has answered more than once, and the answering shows; this is a town with practice.
 
 **`RECORDED-UNANCHORED`** {colour}
-1. `[ledger]` The {calamity} happened here, but {settlement} has moved on; nothing in the town today turns on it.
+1. `[ledger]` The {calamity} happened here, but {settlement} has moved on; nothing in the town today turns on that time.
 2. `[elder]` {settlement} remembers the {calamity} as an event that happened, not something that still matters.
 
 **`UNMARKED`** {crisis-scoped}
@@ -7153,24 +7153,24 @@ compass word, no real-world place, no named analogy.*
 2. `[ledger · crisis: any]` {settlement} has never had a disaster worth the name.
 
 **`LIVING-MEMORY`** {colour}
-1. `[street]` People in {settlement} still remember the {calamity}, and it weighs on the quarrels the town is having now.
-2. `[visitor]` Ask about the town's present quarrels in {settlement} and the {calamity} comes up before long.
+1. `[street]` People in {settlement} still remember the {calamity}, and the memory weighs on the quarrels the town is having now.
+2. `[visitor]` Ask about the town's present quarrels in {settlement} and before long somebody brings up the {calamity}.
 
 **`LEGACY-UNRESOLVED`** {colour}
-1. `[ledger]` The {calamity} is {timeband_age}, and it left a legacy of trouble in {settlement} that has never been fully put right.
-2. `[street]` The {calamity} is {timeband_age}, and nobody in {settlement} has finished putting right the legacy it left.
+1. `[ledger]` The {calamity} left a legacy of trouble in {settlement} that has never been fully put right, and that legacy is {timeband_age}.
+2. `[street]` Nobody in {settlement} has finished putting right the legacy the {calamity} left, and that legacy is {timeband_age}.
 
 **`LEGACY-RECOVERED`** {colour}
-1. `[ledger]` {settlement} came through the {calamity}, which is {timeband_age} now; its legacy is what the town built in answer to it, and that still stands.
-2. `[street]` The {calamity} is {timeband_age}, and its legacy is much of what stands in {settlement} now: it was built in the years after.
+1. `[ledger]` {settlement} came through the {calamity}, and what the town built in answer still stands; that legacy is {timeband_age}.
+2. `[street]` Much of what stands in {settlement} now was built after the {calamity}; that legacy is {timeband_age}.
 
 **`LEGACY-SHIFTED`** {colour}
-1. `[ledger]` The {calamity} is {timeband_age}; what {settlement} settled in its wake is a legacy that still shapes the town, though much has changed since.
-2. `[street]` The {calamity} is {timeband_age}, and {settlement} still carries the shape it took after it; that legacy holds, though the times have moved on.
+1. `[ledger]` What {settlement} settled in the wake of the {calamity} still shapes the town, though much has changed since; that legacy is {timeband_age}.
+2. `[street]` {settlement} still keeps the shape the town took after the {calamity}, though the times have moved on; that legacy is {timeband_age}.
 
 **`LEGACY-LINKED`** {colour}
-1. `[ledger]` The {calamity} is {timeband_age}, and its legacy still bears on how {settlement} lives.
-2. `[street]` {settlement} still lives with the legacy of the {calamity}, which is {timeband_age}.
+1. `[ledger]` What the {calamity} left behind is {timeband_age}, and that legacy still bears on how {settlement} lives.
+2. `[street]` {settlement} still lives with what the {calamity} left, and that legacy is {timeband_age}.
 
 ---
 
