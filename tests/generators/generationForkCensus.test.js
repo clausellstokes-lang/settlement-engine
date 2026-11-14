@@ -578,7 +578,10 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     expect(fresh.rows.length, 'anti-vacuity: the pair set is real before any equality is claimed').toBeGreaterThan(70);
     expect(fresh.steps.length, 'every registered step was perturbed').toBe(getStepOrder().length);
     // ALLEGIANCE-CAR1 (2026-11-08, J-2): 13 -> 12, MEASURED — corruptionPass, a drawing step, retired (its roll is the seam's)
-    expect(fresh.drawingSteps.length, 'steps that draw at all').toBe(12);
+    // R2-CODE-B-4 (ROUND THREE item 4, a DECLARED MOVE): 12 -> 13, MEASURED — resolveCrisisCast draws where an "Access to …"
+    // row was a famine's only lever house (record 375: never a lever): the cast's own rule mints its one temporary person,
+    // named on the step's own fork (rng.fork('resolveCrisisCast')), so no other step's stream moves.
+    expect(fresh.drawingSteps.length, 'steps that draw at all').toBe(13);
     process.stdout.write(`\n[A3e] corpus=${fresh.corpusRows} pairs=${fresh.rows.length}`
       + ` wall=${fresh.wallMs}ms drawingSteps=${fresh.drawingSteps.length}\n`);
 
