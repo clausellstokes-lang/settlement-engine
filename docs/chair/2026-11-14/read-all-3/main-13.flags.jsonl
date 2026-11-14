@@ -1,0 +1,27 @@
+{"id":"20049","town":"r2r-city-19","sev":"MED","kind":"PAIR","why":"'Neither has refused yet' for Religious vs Royal; QUARRELS and 22559 say rites are already refused to the other power's members","other":"22559"}
+{"id":"33627","town":"r2r-city-19","sev":"LOW","kind":"BROKEN","why":"NPC table power cell blank for Brigid Brennan; every other row names a power","other":""}
+{"id":"22454","town":"r2r-city-51","sev":"MED","kind":"STATE","why":"prints refined ingots as an export; TRADE exports list no ingots, and the Smelter lacks copper ore (gaps)","other":""}
+{"id":"33729","town":"r2r-city-51","sev":"MED","kind":"STATE","why":"Teague Treacy is (m) but titled 'the foundling-mother' in PEOPLE","other":""}
+{"id":"35022","town":"r2r-city-51","sev":"LOW","kind":"BROKEN","why":"NPC table power cell blank for Aifric Tobin; other rows name a power","other":""}
+{"id":"11669","town":"r2s-wartime-city-1","sev":"MED","kind":"STATE","why":"prints a Great Flood as the town's history; PAST records no flood (plague, purge, religious conflict, siege, crash, succession)","other":""}
+{"id":"25719","town":"r2r-city-25","sev":"MED","kind":"STATE","why":"describes The Free Alliance as the creditor's resident agent; GOVERNMENT lists a separate Creditor's Representative, and the Alliance has its own convenor","other":""}
+{"id":"16251","town":"r2r-city-25","sev":"MED","kind":"STATE","why":"prints a 'Market Crash' in iron and property; PAST records no crash (Economic Divide, Debt Crisis, Shortage, Trade Collapse)","other":""}
+{"id":"16712","town":"r2s-recently_betrayed-city-3","sev":"LOW","kind":"STATE","why":"merchant guilds yield luxury manufactured goods; TRADE lists no luxury goods among exports or goods made here","other":""}
+{"id":"33594","town":"r2s-slave_revolt-city-2","sev":"MED","kind":"STATE","why":"Anand Sinha is (m) in PEOPLE but printed with the female title 'district madam'","other":""}
+{"id":"00956","town":"r2s-indebted-city-3","sev":"MED","kind":"STATE","why":"Franz Lehmann is (m) in PEOPLE but printed with the female title 'the foundling-mother'","other":""}
+{"id":"33590","town":"r2s-slave_revolt-city-3","sev":"MED","kind":"STATE","why":"Naoise MacCulloch is (m) in PEOPLE but printed with the female title 'district madam'","other":""}
+{"id":"16602","town":"r2s-slave_revolt-city-3","sev":"LOW","kind":"BROKEN","why":"'claimed under whether to suppress, contain, or negotiate...' puts a clause into a noun slot; the sentence does not parse","other":""}
+{"id":"34196","town":"r2s-religious_conversion-city-1","sev":"MED","kind":"STATE","why":"Ivo Zaytsev is (m) in PEOPLE but printed with the female title 'the madam'","other":""}
+{"id":"13582","town":"r2s-mass_migration-city-1","sev":"LOW","kind":"BROKEN","why":"imports list names 'Precious metal veins' (a land resource); TRADE imports say 'Precious metals'","other":"09493"}
+{"id":"34101","town":"r2s-recently_betrayed-city-1","sev":"LOW","kind":"BROKEN","why":"NPC table power cell blank for Kazuko Sato; other rows name a power","other":""}
+{"id":"13466","town":"r2s-recently_betrayed-city-1","sev":"LOW","kind":"BROKEN","why":"imports list names 'Precious metal veins' (a land resource); TRADE imports say 'Precious metals'","other":""}
+{"id":"15847","town":"r2r-city-2","sev":"LOW","kind":"STATE","why":"luxury goods quarter yields luxury goods and master-crafted weapons; TRADE lists neither, and the Luxury Goods chain has no metal veins","other":""}
+{"id":"33574","town":"r2r-city-2","sev":"MED","kind":"STATE","why":"Dong Wu is (m) in PEOPLE but printed with the female title 'the district madam'","other":""}
+{"id":"14616","town":"r2r-city-47","sev":"MED","kind":"STATE","why":"says it sends out bread, beer, animal feed and tools; TRADE exports list none of bread, beer or animal feed, and the raids close the roads","other":""}
+{"id":"14045","town":"r2s-monster_pressure-city-2","sev":"MED","kind":"BROKEN","why":"'one of the house the crisis hits; next in line, the first choice already holding a role that contradicts this one' is unfilled template text, not a sentence","other":""}
+{"id":"33578","town":"r2s-religious_conversion-city-3","sev":"MED","kind":"STATE","why":"Torghil Jirgin is (m) in PEOPLE but printed with the female title 'the district madam'","other":""}
+{"id":"33599","town":"r2r-city-33","sev":"MED","kind":"STATE","why":"Kukulcan Uoc is (m) in PEOPLE but printed with the female title 'the district madam'","other":""}
+{"id":"33734","town":"r2s-slave_revolt-city-0","sev":"MED","kind":"STATE","why":"Volker Krause is (m) in PEOPLE but printed with the female title 'the foundling-mother'","other":""}
+{"id":"13238","town":"r2s-slave_revolt-city-0","sev":"LOW","kind":"BROKEN","why":"imports list names 'Precious metal veins' (a land resource); TRADE imports say 'Precious metals'","other":""}
+{"id":"13405","town":"r2s-wartime-city-3","sev":"LOW","kind":"BROKEN","why":"imports list names 'Precious metal veins' (a land resource); TRADE imports say 'Precious metals'","other":""}
+{"id":"DONE","lines":2187,"blocks":29,"flags":26}
