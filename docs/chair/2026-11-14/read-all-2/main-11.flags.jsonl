@@ -1,0 +1,54 @@
+{"id":"07195","town":"r2r-town-59","sev":"LOW","kind":"BROKEN","why":"slash-joined label \"Military/Guard\" used as a name in a sentence","other":""}
+{"id":"09249","town":"r2r-town-33","sev":"MED","kind":"TAG","why":"tag has S: under siege nothing comes in or goes out; goods cannot move past checkpoints","other":""}
+{"id":"07203","town":"r2r-town-17","sev":"LOW","kind":"BROKEN","why":"subject-verb disagreement: \"Merchant Guilds needs\" (plural name with singular verb)","other":""}
+{"id":"19804","town":"r2r-town-17","sev":"LOW","kind":"BROKEN","why":"subject-verb disagreement: \"The heresy trials is older than anyone living\"","other":""}
+{"id":"22100","town":"r2r-town-39","sev":"LOW","kind":"BROKEN","why":"slash-joined label \"Military/Guard\" used as a name in a sentence","other":""}
+{"id":"26398","town":"r2r-town-39","sev":"MED","kind":"STATE","why":"Penelope Komnenos is the mine captain @ Mine in PEOPLE, not an officer of Town Mayor; no Town Mayor holder is on the roster","other":""}
+{"id":"10713","town":"r2r-town-48","sev":"MED","kind":"TAG","why":"tag has S,O,P: inviting you to the next games presumes ordinary gatherings and arrivals, false under siege, occupation or plague","other":""}
+{"id":"09624","town":"r2r-town-9","sev":"LOW","kind":"BROKEN","why":"slash-joined label \"Military/Guard\" used as a name in a sentence","other":""}
+{"id":"19603","town":"r2r-town-9","sev":"LOW","kind":"BROKEN","why":"compound subject \"The garrison and town watch\" takes singular verb \"keeps\"","other":""}
+{"id":"19802","town":"r2r-town-9","sev":"LOW","kind":"BROKEN","why":"subject-verb disagreement: \"The heresy trials is older than all but the oldest alive\"","other":""}
+{"id":"25160","town":"r2r-town-58","sev":"LOW","kind":"STATE","why":"names a quarrel between Merchant Council and Thieves' Guild; QUARRELS lists none for that pair (relation is only tense, stable)","other":""}
+{"id":"21289","town":"r2r-town-58","sev":"HIGH","kind":"STATE","why":"says town supports itself with a little in hand; FOOD is Pressured: grown 71%, brought in 24%, gap 5%, surplus 0%","other":""}
+{"id":"19808","town":"r2r-town-58","sev":"LOW","kind":"BROKEN","why":"subject-verb disagreement: \"The heresy trials is older than anyone living\"","other":""}
+{"id":"17196","town":"r2r-town-29","sev":"MED","kind":"TAG","why":"tag has S: under siege nothing goes out by road or water; parcels cannot be transported between relay points","other":""}
+{"id":"10741","town":"r2r-town-29","sev":"MED","kind":"TAG","why":"tag has S,O,P: takes letters and sends urgent ones sooner presumes ordinary dispatch, false under siege","other":""}
+{"id":"06493","town":"r2r-town-29","sev":"MED","kind":"STATE","why":"druids call fish from the waters; LAND gives River Fisheries depleted and TRADE imports salted fish because the local fishery is exhausted","other":"15685"}
+{"id":"15685","town":"r2r-town-29","sev":"MED","kind":"STATE","why":"River Fishing shown as worked with druids calling fish; LAND gives River Fisheries depleted, chain vulnerable, local fishery exhausted","other":"06493"}
+{"id":"08883","town":"r2r-town-54","sev":"MED","kind":"STATE","why":"\"he\" shapes sacred images; the woodcarver Oghul Fergana is (f) in PEOPLE","other":""}
+{"id":"16588","town":"r2r-town-54","sev":"MED","kind":"STATE","why":"caravans carrying gold leave on the road; trade access is isolated, no trade road reaches the town and no camels reach the caravanserai","other":"13742"}
+{"id":"03973","town":"r2r-town-49","sev":"MED","kind":"STATE","why":"says part of the baked-goods shortfall is made up by magic; FOOD by magic 0% and no chain is magically sustained","other":""}
+{"id":"15838","town":"r2r-town-14","sev":"LOW","kind":"BROKEN","why":"compound subject \"hive-tending and flower-calling\" takes singular verb \"maintains\"","other":""}
+{"id":"04211","town":"r2r-town-14","sev":"LOW","kind":"BROKEN","why":"compound subject \"hive-tending and flower-calling\" takes singular verb \"maintains\"","other":""}
+{"id":"13389","town":"r2r-town-51","sev":"LOW","kind":"BROKEN","why":"doubled item: \"fine glass sand\" appears twice in the same list","other":""}
+{"id":"12841","town":"r2r-town-51","sev":"LOW","kind":"BROKEN","why":"slash-joined label \"Military/Guard\" used as a name in a sentence","other":""}
+{"id":"HEADER","town":"r2r-town-45","sev":"LOW","kind":"RECORD","why":"PEOPLE lists two people both named \"Anuradha Basu\" with the role written into the name in brackets (the tavern keeper / the lodge master)","other":""}
+{"id":"02399","town":"r2s-under_siege-city-1","sev":"MED","kind":"STATE","why":"apothecaries trade in medicines brought from abroad; CRISIS is Under Siege, nothing comes in by road or gate, imports cover None","other":""}
+{"id":"06916","town":"r2s-under_siege-city-1","sev":"LOW","kind":"LACKS","why":"says every district has a temple; HOUSES lists Parish churches (10-30), no temple","other":""}
+{"id":"01394","town":"r2s-under_siege-city-1","sev":"LOW","kind":"BROKEN","why":"subject-verb disagreement: \"Banking houses is open\"","other":""}
+{"id":"11325","town":"r2s-under_siege-city-1","sev":"MED","kind":"TAG","why":"tag has S: letters of credit honoured across the whole trade network cannot hold when siege closes every road and gate","other":""}
+{"id":"02771","town":"r2s-under_siege-city-1","sev":"MED","kind":"STATE","why":"a newcomer soon hears about the town; CRISIS is Under Siege, nothing comes in or goes out, so no newcomers arrive","other":""}
+{"id":"12873","town":"r2s-under_siege-city-1","sev":"LOW","kind":"BROKEN","why":"slash-joined label \"Military/Guard\" used as a name in a sentence","other":""}
+{"id":"19596","town":"r2s-under_siege-city-1","sev":"LOW","kind":"BROKEN","why":"compound subject \"The garrison and city watch\" takes singular verb \"keeps\"","other":""}
+{"id":"14374","town":"r2s-under_siege-city-1","sev":"LOW","kind":"BROKEN","why":"compound subject \"the garrison and city watch\" takes singular verb \"catches\"","other":""}
+{"id":"21189","town":"r2s-under_siege-city-1","sev":"MED","kind":"STATE","why":"calls the tally of raids short and the city untroubled; CRISIS is Under Siege, stability Critical, safety Tense, Active Siege","other":""}
+{"id":"19191","town":"r2s-under_siege-city-1","sev":"MED","kind":"STATE","why":"city arranges its day around the gates without noticing; under siege the gates are shut against an enemy and everyone notices","other":""}
+{"id":"25141","town":"r2s-under_siege-city-1","sev":"LOW","kind":"STATE","why":"names a quarrel between Ecclesiastical Council and The Guard; QUARRELS lists only Military/Guard vs The Martial Alliance","other":""}
+{"id":"HEADER","town":"r2s-under_siege-city-3","sev":"LOW","kind":"RECORD","why":"PEOPLE lists two people both named \"Luitgard Uhl\" with the role written into the name in brackets (the master baker / the fuller)","other":""}
+{"id":"00206","town":"r2s-under_siege-city-3","sev":"MED","kind":"STATE","why":"a third apothecary trades in imported medicines; CRISIS is Under Siege, imports cover None, nothing comes in","other":""}
+{"id":"17798","town":"r2s-under_siege-city-3","sev":"MED","kind":"STATE","why":"bowyers supply the caravans; CRISIS is Under Siege and Caravan & Overland Trade is impaired, no caravans can reach or leave the city","other":""}
+{"id":"19597","town":"r2s-under_siege-city-3","sev":"LOW","kind":"BROKEN","why":"compound subject \"The garrison and city watch\" takes singular verb \"maintains\"; also calls patrol coverage standard under an active siege","other":""}
+{"id":"03239","town":"r2s-under_siege-city-3","sev":"LOW","kind":"LACKS","why":"names \"the charter hall\"; HOUSES and DEFENCE give only Multiple adventurers' guilds, no charter hall","other":""}
+{"id":"17254","town":"r2s-under_siege-city-2","sev":"MED","kind":"STATE","why":"apothecaries trade in imported medicines; CRISIS is Under Siege, brought in 0%, gates shut and barred","other":"01488"}
+{"id":"28568","town":"r2s-under_siege-city-2","sev":"MED","kind":"STATE","why":"lists gems as produced here; LAND gives Gemstone Deposits depleted and TRADE imports gemstones because local deposits are exhausted","other":""}
+{"id":"28930","town":"r2s-under_siege-city-2","sev":"MED","kind":"STATE","why":"resource chips credit gems to the land; LAND gives Gemstone Deposits depleted, TRADE imports gemstones (local gem deposits exhausted)","other":"28568"}
+{"id":"13897","town":"r2s-under_siege-city-2","sev":"LOW","kind":"BROKEN","why":"subject-verb disagreement: \"Religious Authorities tells people\"","other":""}
+{"id":"26373","town":"r2s-under_siege-city-2","sev":"MED","kind":"STATE","why":"Kallinikos Bryennios is the senior guild master @ Merchant guilds in PEOPLE, not an officer of Noble Governorship","other":""}
+{"id":"12882","town":"r2s-under_siege-city-0","sev":"LOW","kind":"BROKEN","why":"slash-joined label \"Military/Guard\" used as a name in a sentence","other":""}
+{"id":"15752","town":"r2s-under_siege-city-0","sev":"LOW","kind":"BROKEN","why":"subject-verb disagreement: \"Religious Authorities tells people\"","other":"13897"}
+{"id":"06979","town":"r2s-under_siege-city-0","sev":"LOW","kind":"BROKEN","why":"slash-joined label \"Military/Guard\" used as a name in a sentence","other":""}
+{"id":"25187","town":"r2s-under_siege-city-0","sev":"LOW","kind":"STATE","why":"names a quarrel between Royal Authority and The Guard; QUARRELS lists only Royal Authority vs Craft Guilds and Noble Families vs Craft Guilds","other":""}
+{"id":"12891","town":"r2r-city-44","sev":"LOW","kind":"BROKEN","why":"slash-joined label \"Military/Guard\" used as a name in a sentence","other":""}
+{"id":"06968","town":"r2r-city-44","sev":"LOW","kind":"BROKEN","why":"subject-verb disagreement: \"Religious Authorities has not yet moved\"; also slash-free but plural name with singular verb","other":""}
+{"id":"12856","town":"r2r-city-44","sev":"LOW","kind":"BROKEN","why":"slash-joined label \"Military/Guard\" used as a name twice in one sentence","other":""}
+{"id":"DONE","lines":2774,"blocks":32,"flags":53}
