@@ -1,0 +1,2056 @@
+[
+ {
+  "id": "DS-ECO-11::EXPLOITATION: unexploited, exportValue: high::v1",
+  "verdict": "FALSE",
+  "printsIn": 8,
+  "eyeReads": [
+   {
+    "town": "r2s-famine-thorp-2",
+    "size": "thorp",
+    "crisis": "famine",
+    "printed": "There is iron ore in Benham's country worth real money and nothing in the thorp works it.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "same Economics tab, Income: 'Iron & Metalwork Local ore feeds the smithy directly' (10%)"
+   },
+   {
+    "town": "r2s-insurgency-town-2",
+    "size": "town",
+    "crisis": "insurgency",
+    "printed": "There is wool in Cathham's country worth real money and nothing in the town works it.",
+    "true": false,
+    "severity": "MED",
+    "kind": "b",
+    "fact": "chains 'Textiles & Cloth' and 'Cloth Finishing & Clothing' running; exports Processed textiles, Finished clothing, Dyed cloth"
+   },
+   {
+    "town": "r2r-village-55",
+    "size": "village",
+    "crisis": "under_siege",
+    "printed": "There is wool in Megaikon's country worth real money and nothing in the village works it.",
+    "true": false,
+    "severity": "MED",
+    "kind": "b",
+    "fact": "Dyer house; flows 'Textiles & Cloth ✓ Running', 'Cloth Finishing & Clothing ✓ Running'"
+   }
+  ],
+  "script": {
+   "tests": "resource is in exploitation.unexploited, and the town has NO processing house for it (sawmill/carpenters/shipyard; quarry/mason; potter/brick; weaver/fuller/dyer; smelter/mine; glass), NO running chain on it with its house present, NO income source on it (Timber Trade / Stone Quarrying / Iron & Metalwork), NO worked export (milled lumber, glass blanks, textiles) naming its working (Stoneworking, Stone quarrying) and no worked local product (pottery); raw-only local production/export = LOW",
+   "true": 4,
+   "false": 4,
+   "falseTowns": [
+    "r2r-hamlet-7",
+    "r2r-village-55",
+    "r2s-famine-thorp-2",
+    "r2s-insurgency-town-2"
+   ],
+   "lowTowns": [
+    "r2s-insurgency-town-1",
+    "r2s-monster_pressure-hamlet-0",
+    "r2s-politically_fractured-village-1",
+    "r2s-politically_fractured-village-3"
+   ]
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "exploitation.unexploited is computed by tag/exact-name match and disagrees with the town's own income, chains and houses; raw-wool-only towns kept LOW"
+ },
+ {
+  "id": "DS-ECO-11::EXPLOITATION: unexploited, exportValue: high::v2",
+  "verdict": "FALSE",
+  "printsIn": 6,
+  "eyeReads": [
+   {
+    "town": "r2r-thorp-21",
+    "size": "thorp",
+    "crisis": "calm",
+    "printed": "Around Ulaankhurel the iron ore lies unworked, and anyone who knows its price elsewhere will want to change that.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "g",
+    "fact": "no smith, no iron income; only 'Produced locally: iron, metalwork' commodity tokens"
+   },
+   {
+    "town": "r2r-village-30",
+    "size": "village",
+    "crisis": "politically_fractured",
+    "printed": "Around Celono the iron ore lies unworked, and anyone who knows its price elsewhere will want to change that.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "Income: 'Iron & Metalwork Local ore feeds the smithy directly' 11%"
+   },
+   {
+    "town": "r2r-thorp-46",
+    "size": "thorp",
+    "crisis": "famine",
+    "printed": "Around Erdenserai the glass sand lies unworked, and anyone who knows its price elsewhere will want to change that.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "no glass house, no glass income/export"
+   },
+   {
+    "town": "rv2-village-mass_migration-1",
+    "size": "village",
+    "crisis": "mass_migration",
+    "printed": "Around Velikoin the glass sand lies unworked, and anyone who knows its price elsewhere will want to change that.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "same tab Exports: 'Raw sand, Glass blanks'"
+   }
+  ],
+  "script": {
+   "tests": "resource is in exploitation.unexploited, and the town has NO processing house for it (sawmill/carpenters/shipyard; quarry/mason; potter/brick; weaver/fuller/dyer; smelter/mine; glass), NO running chain on it with its house present, NO income source on it (Timber Trade / Stone Quarrying / Iron & Metalwork), NO worked export (milled lumber, glass blanks, textiles) naming its working (Stoneworking, Stone quarrying) and no worked local product (pottery); raw-only local production/export = LOW",
+   "true": 4,
+   "false": 2,
+   "falseTowns": [
+    "r2r-village-30",
+    "rv2-village-mass_migration-1"
+   ],
+   "lowTowns": [
+    "r2r-thorp-21",
+    "r2r-thorp-46",
+    "r2s-occupied-hamlet-1",
+    "r2s-wartime-thorp-1"
+   ]
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "2 of 6 contradicted by the town's own income/exports"
+ },
+ {
+  "id": "DS-ECO-11::EXPLOITATION: unexploited, exportValue: medium or low::v1",
+  "verdict": "FALSE",
+  "printsIn": 59,
+  "eyeReads": [
+   {
+    "town": "r2s-plague_onset-thorp-2",
+    "size": "thorp",
+    "crisis": "plague_onset",
+    "printed": "The thorp leaves its stone unworked. It would fetch barely enough to pay for the work.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "Income: 'Stone Quarrying Local quarry provides dressed stone to regional builders'"
+   },
+   {
+    "town": "rv2-metropolis-mass_migration-1",
+    "size": "metropolis",
+    "crisis": "mass_migration",
+    "printed": "The metropolis leaves its timber unworked. It would fetch barely enough to pay for the work.",
+    "true": false,
+    "severity": "MED",
+    "kind": "b",
+    "fact": "Sawmill (commercial), Carpenters (5-15), Shipyard, Woodcarver; exports 'Milled lumber'; Timber Trade 2%"
+   },
+   {
+    "town": "r2s-under_siege-metropolis-0",
+    "size": "metropolis",
+    "crisis": "under_siege",
+    "printed": "The metropolis leaves its timber unworked. It would fetch barely enough to pay for the work.",
+    "true": false,
+    "severity": "MED",
+    "kind": "b",
+    "fact": "Sawmill (commercial), Carpenters (5-15), Cooper, Bowyers; chain Timber & Lumber; Timber Trade 3%"
+   }
+  ],
+  "script": {
+   "tests": "resource is in exploitation.unexploited, and the town has NO processing house for it (sawmill/carpenters/shipyard; quarry/mason; potter/brick; weaver/fuller/dyer; smelter/mine; glass), NO running chain on it with its house present, NO income source on it (Timber Trade / Stone Quarrying / Iron & Metalwork), NO worked export (milled lumber, glass blanks, textiles) naming its working (Stoneworking, Stone quarrying) and no worked local product (pottery); raw-only local production/export = LOW",
+   "true": 4,
+   "false": 55,
+   "falseTowns": [
+    "r2r-city-14",
+    "r2r-city-20",
+    "r2r-city-34",
+    "r2r-city-50",
+    "r2r-city-51",
+    "r2r-city-52",
+    "r2r-hamlet-31",
+    "r2r-hamlet-4",
+    "r2r-hamlet-50",
+    "r2r-hamlet-51",
+    "r2r-metropolis-42",
+    "r2r-metropolis-52",
+    "r2r-thorp-12",
+    "r2r-thorp-22",
+    "r2r-thorp-6",
+    "r2r-town-13",
+    "r2r-town-19",
+    "r2r-town-28",
+    "r2r-town-42",
+    "r2r-town-50",
+    "r2r-town-52",
+    "r2r-village-41",
+    "r2s-famine-city-2",
+    "r2s-famine-hamlet-0",
+    "r2s-famine-hamlet-2",
+    "r2s-infiltrated-city-3",
+    "r2s-infiltrated-thorp-2",
+    "r2s-insurgency-metropolis-0",
+    "r2s-mass_migration-city-0",
+    "r2s-mass_migration-city-3",
+    "r2s-mass_migration-hamlet-1",
+    "r2s-mass_migration-town-3",
+    "r2s-monster_pressure-town-1",
+    "r2s-plague_onset-hamlet-3",
+    "r2s-plague_onset-thorp-2",
+    "r2s-politically_fractured-town-1",
+    "r2s-religious_conversion-city-2",
+    "r2s-religious_conversion-village-3",
+    "r2s-succession_void-city-2",
+    "r2s-succession_void-hamlet-1",
+    "r2s-under_siege-metropolis-0",
+    "r2s-under_siege-thorp-0",
+    "r2s-under_siege-thorp-1",
+    "r2s-under_siege-village-0",
+    "r2s-wartime-city-1",
+    "r2s-wartime-hamlet-0",
+    "rv2-city-famine-1",
+    "rv2-city-insurgency-1",
+    "rv2-city-mass_migration-2",
+    "rv2-hamlet-wartime-1",
+    "rv2-metropolis-mass_migration-1",
+    "rv2-village-insurgency-1",
+    "rv2-village-under_siege+famine-1",
+    "rw3-village-insurgency-1",
+    "rww-town-calm-1"
+   ],
+   "lowTowns": [
+    "r2r-thorp-27",
+    "r2s-occupied-village-0",
+    "r2s-religious_conversion-hamlet-2",
+    "r2s-wartime-hamlet-3"
+   ]
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "false in 55 of 59: every timber/stone town that earns 'Timber Trade'/'Stone Quarrying' or keeps a sawmill/shipyard"
+ },
+ {
+  "id": "DS-ECO-11::EXPLOITATION: unexploited, exportValue: medium or low::v3",
+  "verdict": "FALSE",
+  "printsIn": 61,
+  "eyeReads": [
+   {
+    "town": "r2s-slave_revolt-thorp-1",
+    "size": "thorp",
+    "crisis": "slave_revolt",
+    "printed": "For as long as Erdeniin has stood, its clay has been there to take, and nobody has found it worth the trouble.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "g",
+    "fact": "no potter; only 'Produced locally: clay, pottery' commodity tokens"
+   },
+   {
+    "town": "rv2-metropolis-wartime-1",
+    "size": "metropolis",
+    "crisis": "wartime",
+    "printed": "For as long as Dunfield has stood, its timber has been there to take, and nobody has found it worth the trouble.",
+    "true": false,
+    "severity": "MED",
+    "kind": "b",
+    "fact": "Sawmill (commercial), Carpenters (5-15); Timber & Lumber running; exports 'Milled timber'"
+   },
+   {
+    "town": "r2s-under_siege-city-3",
+    "size": "city",
+    "crisis": "under_siege",
+    "printed": "For as long as Weichhof has stood, its timber has been there to take, and nobody has found it worth the trouble.",
+    "true": false,
+    "severity": "MED",
+    "kind": "b",
+    "fact": "Carpenters (5-15), Sawmill (commercial), Bowyers; Timber & Lumber running; Timber Trade 3%"
+   },
+   {
+    "town": "r2r-village-2",
+    "size": "village",
+    "crisis": "calm",
+    "printed": "For as long as Staroka has stood, its timber has been there to take, and nobody has found it worth the trouble.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "same page Income: 'Timber Trade ... managed felling and sawmilling' 10%; River boatyard"
+   }
+  ],
+  "script": {
+   "tests": "resource is in exploitation.unexploited, and the town has NO processing house for it (sawmill/carpenters/shipyard; quarry/mason; potter/brick; weaver/fuller/dyer; smelter/mine; glass), NO running chain on it with its house present, NO income source on it (Timber Trade / Stone Quarrying / Iron & Metalwork), NO worked export (milled lumber, glass blanks, textiles) naming its working (Stoneworking, Stone quarrying) and no worked local product (pottery); raw-only local production/export = LOW",
+   "true": 3,
+   "false": 58,
+   "falseTowns": [
+    "r2r-city-12",
+    "r2r-city-16",
+    "r2r-city-19",
+    "r2r-city-44",
+    "r2r-city-49",
+    "r2r-city-9",
+    "r2r-hamlet-1",
+    "r2r-hamlet-11",
+    "r2r-hamlet-25",
+    "r2r-hamlet-27",
+    "r2r-hamlet-28",
+    "r2r-hamlet-41",
+    "r2r-metropolis-30",
+    "r2r-metropolis-37",
+    "r2r-metropolis-51",
+    "r2r-metropolis-55",
+    "r2r-thorp-39",
+    "r2r-town-16",
+    "r2r-town-2",
+    "r2r-town-27",
+    "r2r-town-57",
+    "r2r-village-10",
+    "r2r-village-16",
+    "r2r-village-2",
+    "r2r-village-31",
+    "r2r-village-49",
+    "r2r-village-5",
+    "r2s-famine-city-0",
+    "r2s-indebted-city-1",
+    "r2s-infiltrated-town-1",
+    "r2s-insurgency-city-2",
+    "r2s-insurgency-thorp-3",
+    "r2s-monster_pressure-metropolis-3",
+    "r2s-monster_pressure-village-3",
+    "r2s-occupied-thorp-2",
+    "r2s-occupied-town-0",
+    "r2s-occupied-village-2",
+    "r2s-plague_onset-city-1",
+    "r2s-plague_onset-hamlet-2",
+    "r2s-plague_onset-village-0",
+    "r2s-politically_fractured-city-1",
+    "r2s-religious_conversion-city-3",
+    "r2s-religious_conversion-metropolis-3",
+    "r2s-slave_revolt-city-1",
+    "r2s-slave_revolt-town-1",
+    "r2s-succession_void-village-1",
+    "r2s-under_siege-city-3",
+    "r2s-under_siege-village-1",
+    "rv2-hamlet-occupied-1",
+    "rv2-metropolis-wartime-1",
+    "rv2-thorp-indebted-2",
+    "rv2-thorp-occupied-2",
+    "rv2-town-insurgency-2",
+    "rv2-town-occupied-2",
+    "rv2-town-wartime-1",
+    "rw3-hamlet-under_siege-1",
+    "rww-city-recently_betrayed-1",
+    "rww-town-slave_revolt-1"
+   ],
+   "lowTowns": [
+    "r2r-hamlet-18",
+    "r2s-slave_revolt-thorp-1",
+    "rww-village-famine-1"
+   ]
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "false in 58 of 61, same cause as v1"
+ },
+ {
+  "id": "DS-ECO-11::EXPLOITATION: partiallyExploited::v2",
+  "verdict": "FALSE",
+  "printsIn": 20,
+  "eyeReads": [
+   {
+    "town": "r2r-hamlet-16",
+    "size": "hamlet",
+    "crisis": "famine",
+    "printed": "It sends its stone out half-finished, and nobody in the hamlet is troubled by it.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Stone quarry, no masons; Export Potential 'cut stone ... Partial processing - exports semi-finished goods'"
+   },
+   {
+    "town": "rv2-metropolis-indebted-1",
+    "size": "metropolis",
+    "crisis": "indebted",
+    "printed": "It sends its stone out half-finished, and nobody in the metropolis is troubled by it.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Stone quarry, no stonemasons; exports Quarried stone"
+   },
+   {
+    "town": "r2s-politically_fractured-city-0",
+    "size": "city",
+    "crisis": "politically_fractured",
+    "printed": "It sends its wool out half-finished, and nobody in the city is troubled by it.",
+    "true": false,
+    "severity": "MED",
+    "kind": "b",
+    "fact": "Weavers/Textile workers, Fuller, Dyer all present; no wool export"
+   },
+   {
+    "town": "r2r-city-5",
+    "size": "city",
+    "crisis": "calm",
+    "printed": "It sends its wool out half-finished, and nobody in the city is troubled by it.",
+    "true": false,
+    "severity": "MED",
+    "kind": "b",
+    "fact": "Weavers, Fuller, Dyer; exports Processed textiles, Finished clothing"
+   }
+  ],
+  "script": {
+   "tests": "resource is partially exploited AND the town does not hold the full finishing set (wool: weaver+fuller+dyer = MED false); a finished-goods export with no half-finished one (pottery) = LOW",
+   "true": 18,
+   "false": 2,
+   "falseTowns": [
+    "r2r-city-5",
+    "r2s-politically_fractured-city-0"
+   ],
+   "lowTowns": [
+    "r2r-metropolis-59",
+    "r2s-insurgency-town-0",
+    "r2s-slave_revolt-village-3"
+   ]
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "wool towns with the full weave-full-dye set are read as half-finished"
+ },
+ {
+  "id": "DS-ECO-11::EXPLOITATION: partiallyExploited::v5",
+  "verdict": "TRUE",
+  "printsIn": 7,
+  "eyeReads": [
+   {
+    "town": "rv2-hamlet-under_siege+famine-1",
+    "size": "hamlet",
+    "crisis": "under_siege+famine",
+    "printed": "With the roads cut by the siege, Goldfeld can no longer send out its stone, and what it has stays in the hamlet.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "stress under_siege; Stone quarry; stone partially exploited"
+   },
+   {
+    "town": "rv2-metropolis-under_siege+famine-1",
+    "size": "metropolis",
+    "crisis": "under_siege+famine",
+    "printed": "With the roads cut by the siege, Purigarh can no longer send out its stone, and what it has stays in the metropolis.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "under_siege; Stone quarry"
+   },
+   {
+    "town": "r2s-under_siege-town-3",
+    "size": "town",
+    "crisis": "under_siege",
+    "printed": "With the roads cut by the siege, Rathwell can no longer send out its iron ore, and what it has stays in the town.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "c",
+    "fact": "exports are 'Quality tools and weapons', not ore; 'no longer send out its iron ore' implies it did"
+   }
+  ],
+  "script": {
+   "tests": "under_siege is in force (record stress) and the resource is in partiallyExploited",
+   "true": 7,
+   "false": 0,
+   "falseTowns": [],
+   "lowTowns": []
+  },
+  "prior": [
+   {
+    "town": "rww-city-under_siege-1",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": null,
+    "fact": "new text claims only that wool cannot leave under siege"
+   },
+   {
+    "town": "r2s-under_siege-city-3",
+    "state": "CURED-BY-SILENCE",
+    "nowPrints": "For as long as Weichhof has stood, its timber has been there to take, and nobody has found it worth the trouble.",
+    "nowTrue": false,
+    "severity": "MED",
+    "fact": "Carpenters (5-15), Sawmill (commercial); Timber & Lumber running; Timber Trade 3%"
+   },
+   {
+    "town": "r2s-under_siege-town-3",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": "LOW",
+    "fact": "under siege; exports were tools, not ore"
+   }
+  ],
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "new wording drops the false 'nobody here can finish it'"
+ },
+ {
+  "id": "DS-ECO-11::EXPLOITATION: fullyExploited::v3",
+  "verdict": "FALSE",
+  "printsIn": 81,
+  "eyeReads": [
+   {
+    "town": "rv2-thorp-indebted-1",
+    "size": "thorp",
+    "crisis": "indebted",
+    "printed": "One of Indrawadi's trades is carried through here from start to finish, from what the country gives to the finished thing.",
+    "true": false,
+    "severity": "MED",
+    "kind": "a",
+    "fact": "only grain is fully exploited, via 'Subsistence farming' + 'Access to external mill': no mill, baker or brewer in the thorp"
+   },
+   {
+    "town": "r2r-metropolis-13",
+    "size": "metropolis",
+    "crisis": "calm",
+    "printed": "One of Athenapetra's trades is carried through here from start to finish, from what the country gives to the finished thing.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "c",
+    "fact": "fully exploited = fish; Fish market but no fishmonger/salters named"
+   },
+   {
+    "town": "rv2-hamlet-famine-1",
+    "size": "hamlet",
+    "crisis": "famine",
+    "printed": "One of Dunkelhain's trades is carried through here from start to finish, from what the country gives to the finished thing.",
+    "true": false,
+    "severity": "MED",
+    "kind": "a",
+    "fact": "grain only, via 'Access to external mill'; no mill or bakers"
+   }
+  ],
+  "script": {
+   "tests": "a fullyExploited resource whose finishing house is in the town (grain: mill/baker/brewer, not 'Access to external mill'; fish: fishmonger/salter/fish market); grain milled only outside = MED false; fish with only a fishing community = LOW",
+   "true": 73,
+   "false": 8,
+   "falseTowns": [
+    "r2r-hamlet-52",
+    "r2r-hamlet-55",
+    "r2r-thorp-13",
+    "r2s-monster_pressure-hamlet-3",
+    "r2s-religious_conversion-hamlet-3",
+    "r2s-slave_revolt-thorp-3",
+    "rv2-hamlet-famine-1",
+    "rv2-thorp-indebted-1"
+   ],
+   "lowTowns": [
+    "r2r-hamlet-17",
+    "r2r-hamlet-19",
+    "r2r-hamlet-5",
+    "r2r-hamlet-6",
+    "r2r-thorp-24",
+    "r2r-village-12",
+    "r2s-insurgency-thorp-0",
+    "r2s-plague_onset-thorp-1",
+    "r2s-recently_betrayed-thorp-2",
+    "r2s-slave_revolt-city-0",
+    "r2s-slave_revolt-thorp-2",
+    "r2s-slave_revolt-town-2",
+    "rv2-hamlet-occupied-2",
+    "rv2-thorp-mass_migration-1"
+   ]
+  },
+  "prior": [
+   {
+    "town": "rww-hamlet-under_siege-1",
+    "state": "CURED-BY-SILENCE",
+    "nowPrints": "With the siege on, none of Miroko's grain can go out to buyers; whatever the hamlet works, the hamlet must use.",
+    "nowTrue": true,
+    "severity": null,
+    "fact": "under_siege; grain fully exploited"
+   }
+  ],
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "8 grain-via-external-mill thorps/hamlets false; fish with only a fishing community LOW"
+ },
+ {
+  "id": "DS-ECO-12::CRITICAL IMPORT: a house needs what the land lacks::v1",
+  "verdict": "FALSE",
+  "printsIn": 193,
+  "eyeReads": [
+   {
+    "town": "r2s-politically_fractured-hamlet-1",
+    "size": "hamlet",
+    "crisis": "politically_fractured",
+    "printed": "Some of Karakistan's work cannot go on without livestock, and the country around the hamlet produces none, so the hamlet buys from outside or that work stops.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Dairy farmer; flows 'No livestock reaches the dairy farmer'"
+   },
+   {
+    "town": "r2r-metropolis-8",
+    "size": "metropolis",
+    "crisis": "succession_void",
+    "printed": "Some of Langenberg's work cannot go on without grapes, and the country around the metropolis produces none, so the metropolis buys from outside or that work stops.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "reason 'Required by Vintner but not available'; Vintner present"
+   },
+   {
+    "town": "rww-town-famine-1",
+    "size": "town",
+    "crisis": "famine",
+    "printed": "Some of Kitaxian's work cannot go on without clay, and the country around the town produces none, so the town buys from outside or that work stops.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Required by Potter; no clay locally"
+   },
+   {
+    "town": "r2r-metropolis-18",
+    "size": "metropolis",
+    "crisis": "calm",
+    "printed": "Some of Víkthorpe's work cannot go on without gold/silver ore, and the country around the metropolis produces none, so the metropolis buys from outside or that work stops.",
+    "true": false,
+    "severity": "MED",
+    "kind": "h",
+    "fact": "slot prints the catalogue label 'gold/silver ore' (26 towns)"
+   }
+  ],
+  "script": {
+   "tests": "the critical import's reason names a house (Required by X), the good is not produced locally (localProduction, live nearbyResources), no siege in force; slot printing the catalogue label 'gold/silver ore' = MED (h)",
+   "true": 167,
+   "false": 26,
+   "falseTowns": [
+    "r2r-city-0",
+    "r2r-city-1",
+    "r2r-city-49",
+    "r2r-city-5",
+    "r2r-city-50",
+    "r2r-city-57",
+    "r2r-metropolis-18",
+    "r2r-metropolis-26",
+    "r2r-metropolis-37",
+    "r2r-metropolis-4",
+    "r2r-metropolis-51",
+    "r2r-metropolis-59",
+    "r2s-indebted-city-2",
+    "r2s-indebted-city-3",
+    "r2s-infiltrated-city-3",
+    "r2s-insurgency-metropolis-2",
+    "r2s-monster_pressure-town-1",
+    "r2s-occupied-metropolis-1",
+    "r2s-occupied-metropolis-2",
+    "r2s-plague_onset-metropolis-1",
+    "r2s-politically_fractured-metropolis-1",
+    "r2s-wartime-metropolis-0",
+    "r2s-wartime-metropolis-2",
+    "rv2-city-famine-2",
+    "rv2-metropolis-insurgency-1",
+    "rww-metropolis-famine-1"
+   ],
+   "lowTowns": [
+    "r2r-hamlet-53"
+   ]
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": "{good} prints the catalogue key 'gold/silver ore' in 26 towns",
+  "machinery": null,
+  "note": "claim true; the slash label is the defect"
+ },
+ {
+  "id": "DS-ECO-12::CRITICAL IMPORT: a house needs what the land lacks::v2",
+  "verdict": "FALSE",
+  "printsIn": 197,
+  "eyeReads": [
+   {
+    "town": "r2r-hamlet-12",
+    "size": "hamlet",
+    "crisis": "calm",
+    "printed": "Whatever livestock Aristoburg's work uses must come from elsewhere; when none comes, that work stands idle.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "livestock critical import required by Butcher; no grazing resource"
+   },
+   {
+    "town": "r2s-occupied-metropolis-3",
+    "size": "metropolis",
+    "crisis": "occupied",
+    "printed": "Whatever gold/silver ore Rajigarh's work uses must come from elsewhere; when none comes, that work stands idle.",
+    "true": false,
+    "severity": "MED",
+    "kind": "h",
+    "fact": "catalogue label 'gold/silver ore' in the slot"
+   },
+   {
+    "town": "r2s-famine-hamlet-2",
+    "size": "hamlet",
+    "crisis": "famine",
+    "printed": "Whatever livestock Velipol's work uses must come from elsewhere; when none comes, that work stands idle.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "livestock not produced locally"
+   }
+  ],
+  "script": {
+   "tests": "the critical import's reason names a house (Required by X), the good is not produced locally (localProduction, live nearbyResources), no siege in force; slot printing the catalogue label 'gold/silver ore' = MED (h)",
+   "true": 177,
+   "false": 20,
+   "falseTowns": [
+    "r2r-city-17",
+    "r2r-city-29",
+    "r2r-city-3",
+    "r2r-metropolis-27",
+    "r2r-metropolis-30",
+    "r2r-metropolis-53",
+    "r2s-indebted-metropolis-2",
+    "r2s-mass_migration-city-0",
+    "r2s-monster_pressure-city-1",
+    "r2s-occupied-metropolis-3",
+    "r2s-plague_onset-city-1",
+    "r2s-politically_fractured-town-2",
+    "r2s-recently_betrayed-metropolis-1",
+    "r2s-slave_revolt-metropolis-1",
+    "r2s-succession_void-city-2",
+    "r2s-wartime-city-0",
+    "rv2-city-indebted-1",
+    "rv2-metropolis-indebted-1",
+    "rww-city-insurgency-1",
+    "rww-city-recently_betrayed-1"
+   ],
+   "lowTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": "'gold/silver ore' in 20 towns",
+  "machinery": null,
+  "note": "claim true; slash label defect"
+ },
+ {
+  "id": "DS-ECO-12::CRITICAL IMPORT: a house needs what the land lacks::v3",
+  "verdict": "TRUE",
+  "printsIn": 6,
+  "eyeReads": [
+   {
+    "town": "r2r-village-43",
+    "size": "village",
+    "crisis": "under_siege",
+    "printed": "Since the siege closed the roads, none of the clay that Uaxachuitz's work needs has reached it, and that work has stopped or soon will.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "under_siege; clay required by Potter"
+   },
+   {
+    "town": "rv2-metropolis-under_siege+famine-1",
+    "size": "metropolis",
+    "crisis": "under_siege+famine",
+    "printed": "Since the siege closed the roads, none of the grain that Purigarh's work needs has reached it, and that work has stopped or soon will.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "under_siege; grain required by Mill"
+   },
+   {
+    "town": "rww-village-under_siege-1",
+    "size": "village",
+    "crisis": "under_siege",
+    "printed": "Since the siege closed the roads, none of the fish that Qaryatsaray's work needs has reached it, and that work has stopped or soon will.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "under_siege; fish required by Fishmonger"
+   }
+  ],
+  "script": {
+   "tests": "under_siege in force, the good is a house-required critical import",
+   "true": 6,
+   "false": 0,
+   "falseTowns": [],
+   "lowTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "true in all 6"
+ },
+ {
+  "id": "DS-ECO-12::CRITICAL IMPORT: the land cannot give it::v1",
+  "verdict": "FALSE",
+  "printsIn": 152,
+  "eyeReads": [
+   {
+    "town": "r2r-thorp-36",
+    "size": "thorp",
+    "crisis": "calm",
+    "printed": "The country around Cnocbridge produces no metals, so the thorp has none but what it buys.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "no metal resource or produce"
+   },
+   {
+    "town": "rww-town-calm-1",
+    "size": "town",
+    "crisis": "calm",
+    "printed": "The country around Drumton produces no grain, so the town has none but what it buys.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "same tab Imports: 'Grain (a little, beside its own harvest)'; 'Agriculture modifier: 89%'"
+   },
+   {
+    "town": "r2r-hamlet-48",
+    "size": "hamlet",
+    "crisis": "calm",
+    "printed": "The country around Markazmela produces no luxury goods, so the hamlet has none but what it buys.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "same tab 'Produced locally: ... luxury ...' (gemstone deposits)"
+   },
+   {
+    "town": "r2s-under_siege-thorp-2",
+    "size": "thorp",
+    "crisis": "under_siege",
+    "printed": "The country around Agioslimani produces no luxury goods, so the thorp has none but what it buys.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "'Produced locally: ... luxury'; also buying presumed under a siege (LOW)"
+   }
+  ],
+  "script": {
+   "tests": "the good is not in localProduction (luxury goods vs 'luxury'/'Luxury manufactured goods' produced locally = MED), the grain import row does not say 'beside its own harvest' (= MED); Sacred wood exported for timber, or buying presumed under siege = LOW",
+   "true": 136,
+   "false": 16,
+   "falseTowns": [
+    "r2r-city-51",
+    "r2r-hamlet-48",
+    "r2r-hamlet-54",
+    "r2r-town-13",
+    "r2r-town-6",
+    "r2r-village-15",
+    "r2s-famine-thorp-3",
+    "r2s-insurgency-town-1",
+    "r2s-mass_migration-hamlet-3",
+    "r2s-plague_onset-hamlet-3",
+    "r2s-plague_onset-village-3",
+    "r2s-religious_conversion-hamlet-1",
+    "r2s-under_siege-thorp-2",
+    "rv2-hamlet-famine-1",
+    "rv2-hamlet-monster_pressure-2",
+    "rww-town-calm-1"
+   ],
+   "lowTowns": [
+    "r2r-hamlet-23",
+    "r2r-hamlet-40",
+    "r2r-hamlet-45",
+    "r2r-hamlet-52",
+    "r2r-hamlet-59",
+    "r2r-thorp-40",
+    "r2r-thorp-45",
+    "r2r-thorp-58",
+    "r2r-village-32",
+    "r2r-village-44",
+    "r2r-village-55",
+    "r2r-village-7",
+    "r2s-famine-hamlet-3",
+    "r2s-famine-thorp-1",
+    "r2s-mass_migration-thorp-3",
+    "r2s-occupied-thorp-3",
+    "r2s-politically_fractured-thorp-2",
+    "r2s-politically_fractured-thorp-3",
+    "r2s-politically_fractured-village-0",
+    "r2s-recently_betrayed-town-3",
+    "r2s-slave_revolt-thorp-3",
+    "r2s-under_siege-hamlet-2",
+    "r2s-under_siege-hamlet-3",
+    "r2s-under_siege-thorp-3",
+    "r2s-under_siege-town-0",
+    "r2s-under_siege-village-0",
+    "rv2-thorp-under_siege-1",
+    "rww-hamlet-calm-1",
+    "rww-hamlet-succession_void-1"
+   ]
+  },
+  "prior": [
+   {
+    "town": "rww-town-calm-1",
+    "state": "STILL-FALSE",
+    "nowPrints": null,
+    "nowTrue": false,
+    "severity": "MED",
+    "fact": "Imports 'Grain (a little, beside its own harvest)'; Agriculture modifier 89%"
+   }
+  ],
+  "twinMissingCondition": "no siege mark, unlike its 'a house needs' sibling pool; under siege it presumes buying (LOW only)",
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "luxury-goods towns that list 'luxury'/'Luxury manufactured goods' as produced locally; grain beside own harvest"
+ },
+ {
+  "id": "DS-ECO-12::CRITICAL IMPORT: the land cannot give it::v2",
+  "verdict": "FALSE",
+  "printsIn": 184,
+  "eyeReads": [
+   {
+    "town": "r2r-thorp-37",
+    "size": "thorp",
+    "crisis": "calm",
+    "printed": "None of the timber used at Cnocton comes from the country here; the thorp brings in what it uses, or goes without.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "no timber resource"
+   },
+   {
+    "town": "r2r-city-47",
+    "size": "city",
+    "crisis": "monster_pressure",
+    "printed": "None of the luxury goods used at Dagfjord comes from the country here; the city brings in what it uses, or goes without.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "Produced locally: 'Luxury manufactured goods', 'Fine metalwork and jewelry'"
+   },
+   {
+    "town": "r2s-under_siege-thorp-0",
+    "size": "thorp",
+    "crisis": "under_siege",
+    "printed": "None of the metals used at Qaradavan comes from the country here; the thorp brings in what it uses, or goes without.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "c",
+    "fact": "under siege; 'or goes without' covers it"
+   }
+  ],
+  "script": {
+   "tests": "the good is not in localProduction (luxury goods vs 'luxury'/'Luxury manufactured goods' produced locally = MED), the grain import row does not say 'beside its own harvest' (= MED); Sacred wood exported for timber, or buying presumed under siege = LOW",
+   "true": 173,
+   "false": 11,
+   "falseTowns": [
+    "r2r-city-47",
+    "r2r-hamlet-9",
+    "r2r-thorp-13",
+    "r2r-village-25",
+    "r2s-famine-village-3",
+    "r2s-monster_pressure-hamlet-0",
+    "r2s-monster_pressure-thorp-2",
+    "r2s-recently_betrayed-village-1",
+    "r2s-slave_revolt-city-2",
+    "rv2-thorp-indebted-1",
+    "rv2-thorp-monster_pressure-2"
+   ],
+   "lowTowns": [
+    "r2r-hamlet-0",
+    "r2r-hamlet-30",
+    "r2r-thorp-14",
+    "r2r-thorp-37",
+    "r2r-thorp-5",
+    "r2r-thorp-55",
+    "r2r-thorp-8",
+    "r2r-town-36",
+    "r2r-village-1",
+    "r2s-indebted-hamlet-2",
+    "r2s-infiltrated-thorp-0",
+    "r2s-infiltrated-village-3",
+    "r2s-monster_pressure-town-3",
+    "r2s-plague_onset-thorp-3",
+    "r2s-politically_fractured-hamlet-2",
+    "r2s-politically_fractured-thorp-0",
+    "r2s-religious_conversion-town-1",
+    "r2s-succession_void-village-2",
+    "r2s-under_siege-hamlet-0",
+    "r2s-under_siege-hamlet-1",
+    "r2s-under_siege-thorp-0",
+    "r2s-under_siege-village-1",
+    "r2s-under_siege-village-3",
+    "rv2-city-under_siege-8",
+    "rv2-hamlet-under_siege+famine-1",
+    "rv2-hamlet-under_siege+famine-2",
+    "rv2-hamlet-under_siege-1",
+    "rv2-thorp-under_siege-2",
+    "rv2-town-under_siege-2",
+    "rv2-village-under_siege+famine-1",
+    "rv2-village-under_siege+famine-2",
+    "rww-hamlet-under_siege-1",
+    "rww-thorp-famine-1"
+   ]
+  },
+  "prior": null,
+  "twinMissingCondition": "no siege mark, unlike its 'a house needs' sibling pool; under siege it presumes buying (LOW only)",
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "same luxury-token contradiction"
+ },
+ {
+  "id": "DS-ECO-12::CRITICAL IMPORT: the land cannot give it::v3",
+  "verdict": "TRUE",
+  "printsIn": 12,
+  "eyeReads": [
+   {
+    "town": "r2s-monster_pressure-thorp-3",
+    "size": "thorp",
+    "crisis": "monster_pressure",
+    "printed": "The country around Chalmul produces no timber, so the thorp must look elsewhere for whatever it uses.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "no timber; no imports"
+   },
+   {
+    "town": "r2s-wartime-hamlet-3",
+    "size": "hamlet",
+    "crisis": "wartime+famine",
+    "printed": "The country around Caercross produces no luxury goods, so the hamlet must look elsewhere for whatever it uses.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "no luxury produce"
+   },
+   {
+    "town": "r2s-succession_void-thorp-1",
+    "size": "thorp",
+    "crisis": "succession_void+famine",
+    "printed": "The country around Schwarzdorf produces no metals, so the thorp must look elsewhere for whatever it uses.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "no metals; isolated"
+   }
+  ],
+  "script": {
+   "tests": "the good is not in localProduction (luxury goods vs 'luxury'/'Luxury manufactured goods' produced locally = MED), the grain import row does not say 'beside its own harvest' (= MED); Sacred wood exported for timber, or buying presumed under siege = LOW",
+   "true": 12,
+   "false": 0,
+   "falseTowns": [],
+   "lowTowns": [
+    "r2s-monster_pressure-thorp-3",
+    "r2s-recently_betrayed-thorp-0"
+   ]
+  },
+  "prior": [
+   {
+    "town": "r2r-thorp-23",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": null,
+    "fact": "'must look elsewhere' no longer denies imports"
+   }
+  ],
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "new wording no longer says nothing comes in"
+ },
+ {
+  "id": "DS-ECO-12::INCOME WEIGHT: the religious houses::v3",
+  "verdict": "TRUE",
+  "printsIn": 40,
+  "eyeReads": [
+   {
+    "town": "r2r-thorp-36",
+    "size": "thorp",
+    "crisis": "calm",
+    "printed": "It keeps no house for its faith, so none of the thorp's money passes through one.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "institutions: no church/shrine"
+   },
+   {
+    "town": "r2r-hamlet-58",
+    "size": "hamlet",
+    "crisis": "calm",
+    "printed": "It keeps no house for its faith, so none of the hamlet's money passes through one.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "only 'Access to parish church'"
+   },
+   {
+    "town": "r2s-succession_void-thorp-1",
+    "size": "thorp",
+    "crisis": "succession_void+famine",
+    "printed": "It keeps no house for its faith, so none of the thorp's money passes through one.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "no religious house; no faith income"
+   }
+  ],
+  "script": {
+   "tests": "no religious house in institutions (only 'Access to parish church'/burial ground), no faith income source, no siege",
+   "true": 40,
+   "false": 0,
+   "falseTowns": [],
+   "lowTowns": []
+  },
+  "prior": [
+   {
+    "town": "rw3-hamlet-plague_onset-1",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": null,
+    "fact": "no religious house (only 'Access to a house of worship'); no faith income share"
+   },
+   {
+    "town": "r2r-hamlet-30",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": null,
+    "fact": "no religious house (only 'Access to a house of worship'); no faith income share"
+   },
+   {
+    "town": "r2r-hamlet-46",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": null,
+    "fact": "no religious house (only 'Access to a house of worship'); no faith income share"
+   }
+  ],
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "true in all 40"
+ },
+ {
+  "id": "DS-ECO-12::INCOME WEIGHT: the religious houses::v4",
+  "verdict": "TRUE",
+  "printsIn": 40,
+  "eyeReads": [
+   {
+    "town": "r2r-thorp-37",
+    "size": "thorp",
+    "crisis": "calm",
+    "printed": "Whatever Cnocton's people give for their faith is given elsewhere, or not at all: the place keeps no house to take it.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "no religious house"
+   },
+   {
+    "town": "r2r-hamlet-24",
+    "size": "hamlet",
+    "crisis": "famine",
+    "printed": "Whatever Jayakota's people give for their faith is given elsewhere, or not at all: the place keeps no house to take it.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Access to a house of worship only"
+   },
+   {
+    "town": "r2s-politically_fractured-hamlet-1",
+    "size": "hamlet",
+    "crisis": "politically_fractured",
+    "printed": "Whatever Karakistan's people give for their faith is given elsewhere, or not at all: the place keeps no house to take it.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "'Access to parish church'"
+   }
+  ],
+  "script": {
+   "tests": "no religious house in institutions (only 'Access to parish church'/burial ground), no faith income source, no siege",
+   "true": 40,
+   "false": 0,
+   "falseTowns": [],
+   "lowTowns": []
+  },
+  "prior": [
+   {
+    "town": "rw3-hamlet-under_siege-1",
+    "state": "CURED-BY-SILENCE",
+    "nowPrints": "Almost everyone's living at Lidostagnum depends on one trade, whether or not they work in it.",
+    "nowTrue": true,
+    "severity": null,
+    "fact": "no faith line under siege now; income dominated by one source"
+   }
+  ],
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "true in all 40"
+ },
+ {
+  "id": "DS-GEN-14::FOUNDED-YOUNG::v3",
+  "verdict": "TRUE",
+  "printsIn": 33,
+  "eyeReads": [
+   {
+    "town": "rww-thorp-under_siege-1",
+    "size": "thorp",
+    "crisis": "under_siege",
+    "printed": "Belovich has not stood long enough to forget why it was started.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "history.age 50 ('50 years old')"
+   },
+   {
+    "town": "rv2-town-mass_migration-2",
+    "size": "town",
+    "crisis": "mass_migration",
+    "printed": "Baimen has not stood long enough to forget why it was started.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "age 54"
+   },
+   {
+    "town": "r2s-plague_onset-thorp-2",
+    "size": "thorp",
+    "crisis": "plague_onset",
+    "printed": "Miropol has not stood long enough to forget why it was started.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "age 21"
+   }
+  ],
+  "script": {
+   "tests": "history.founding present and history.age in the young band (21-60 years, page 'N years old'); no 'centuries' in the History tab",
+   "true": 33,
+   "false": 0,
+   "falseTowns": [],
+   "lowTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "ages 21-60 in all 33"
+ },
+ {
+  "id": "DS-GEN-18::STALLED::v2",
+  "verdict": "TRUE",
+  "printsIn": 144,
+  "eyeReads": [
+   {
+    "town": "r2s-infiltrated-village-3",
+    "size": "village",
+    "crisis": "infiltrated",
+    "printed": "Some of the work at Yaxchtitlan depends on goods brought in from outside, because nothing here makes them.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "row above: 'Needs imported cartography'; imports 'Route maps and intelligence'"
+   },
+   {
+    "town": "r2s-succession_void-metropolis-3",
+    "size": "metropolis",
+    "crisis": "succession_void",
+    "printed": "Some of the work at Erdenbalik depends on goods brought in from outside, because nothing here makes them.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Glass & Print needs imported clay; clay not produced"
+   },
+   {
+    "town": "r2r-village-58",
+    "size": "village",
+    "crisis": "famine",
+    "printed": "Some of the work at Umamala depends on goods brought in from outside, because nothing here makes them.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "upstreamMissing present; imports listed"
+   }
+  ],
+  "script": {
+   "tests": "a chain row with upstreamMissing[] exists; the town has imports on its page (primaryImports or critical imports); stalled feed actually produced locally (stone with quarry, livestock in localProduction, mills+bakers for food_processing) = LOW",
+   "true": 144,
+   "false": 0,
+   "falseTowns": [],
+   "lowTowns": [
+    "r2r-city-23",
+    "r2r-city-3",
+    "r2r-city-32",
+    "r2r-city-56",
+    "r2r-metropolis-41",
+    "r2r-town-0",
+    "r2r-town-19",
+    "r2r-town-20",
+    "r2r-town-3",
+    "r2r-town-33",
+    "r2r-town-43",
+    "r2r-town-49",
+    "r2r-village-16",
+    "r2r-village-42",
+    "r2r-village-44",
+    "r2s-famine-village-3",
+    "r2s-infiltrated-village-3",
+    "r2s-monster_pressure-city-3",
+    "r2s-monster_pressure-town-3",
+    "r2s-occupied-metropolis-0",
+    "r2s-politically_fractured-city-3",
+    "r2s-politically_fractured-town-0",
+    "r2s-recently_betrayed-town-3",
+    "r2s-recently_betrayed-village-2",
+    "r2s-religious_conversion-city-3",
+    "r2s-religious_conversion-town-2",
+    "r2s-religious_conversion-village-0",
+    "r2s-religious_conversion-village-3",
+    "r2s-slave_revolt-metropolis-2",
+    "r2s-slave_revolt-town-1",
+    "r2s-succession_void-city-0",
+    "r2s-succession_void-town-3",
+    "r2s-succession_void-village-3",
+    "rv2-city-indebted-1",
+    "rv2-city-mass_migration-1",
+    "rv2-town-insurgency-2",
+    "rv2-town-monster_pressure-1",
+    "rv2-village-indebted-1",
+    "rw3-village-insurgency-1",
+    "rww-town-slave_revolt-1"
+   ]
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "generic and true; 40 LOW where the stalled feed is in fact made locally"
+ },
+ {
+  "id": "DS-GEN-18::STALLED::v3",
+  "verdict": "FALSE",
+  "printsIn": 202,
+  "eyeReads": [
+   {
+    "town": "r2r-hamlet-16",
+    "size": "hamlet",
+    "crisis": "famine",
+    "printed": "No trade at Oxteha makes what some of its work needs, so that much is always bought in.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "g",
+    "fact": "flows 'Fortifications ... Needs imported stone' beside a Stone quarry; imports listed"
+   },
+   {
+    "town": "r2r-metropolis-8",
+    "size": "metropolis",
+    "crisis": "succession_void",
+    "printed": "No trade at Langenberg makes what some of its work needs, so that much is always bought in.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "imports 10"
+   },
+   {
+    "town": "r2s-succession_void-hamlet-2",
+    "size": "hamlet",
+    "crisis": "succession_void",
+    "printed": "No trade at Weichturm makes what some of its work needs, so that much is always bought in.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "same tab: 'Imports: No recorded imports'; 'the road in is too poor to bring anything extra'; Produced locally includes stone"
+   }
+  ],
+  "script": {
+   "tests": "a chain row with upstreamMissing[] exists; the town has imports on its page (primaryImports or critical imports); stalled feed actually produced locally (stone with quarry, livestock in localProduction, mills+bakers for food_processing) = LOW",
+   "true": 201,
+   "false": 1,
+   "falseTowns": [
+    "r2s-succession_void-hamlet-2"
+   ],
+   "lowTowns": [
+    "r2r-city-26",
+    "r2r-city-30",
+    "r2r-city-31",
+    "r2r-city-39",
+    "r2r-city-40",
+    "r2r-city-45",
+    "r2r-city-49",
+    "r2r-city-59",
+    "r2r-hamlet-16",
+    "r2r-hamlet-51",
+    "r2r-metropolis-0",
+    "r2r-metropolis-18",
+    "r2r-town-13",
+    "r2r-town-14",
+    "r2r-town-32",
+    "r2r-town-34",
+    "r2r-town-46",
+    "r2r-town-51",
+    "r2r-town-52",
+    "r2r-town-59",
+    "r2r-village-24",
+    "r2r-village-27",
+    "r2r-village-39",
+    "r2r-village-56",
+    "r2s-famine-town-3",
+    "r2s-famine-village-2",
+    "r2s-indebted-city-3",
+    "r2s-infiltrated-city-2",
+    "r2s-infiltrated-city-3",
+    "r2s-infiltrated-village-1",
+    "r2s-insurgency-city-3",
+    "r2s-insurgency-metropolis-1",
+    "r2s-insurgency-town-2",
+    "r2s-mass_migration-city-0",
+    "r2s-monster_pressure-metropolis-0",
+    "r2s-occupied-city-1",
+    "r2s-plague_onset-village-0",
+    "r2s-recently_betrayed-city-1",
+    "r2s-recently_betrayed-city-3",
+    "r2s-religious_conversion-town-3",
+    "r2s-slave_revolt-city-3",
+    "r2s-slave_revolt-town-0",
+    "r2s-succession_void-hamlet-0",
+    "r2s-succession_void-hamlet-1",
+    "r2s-succession_void-village-2",
+    "r2s-wartime-town-0",
+    "r2s-wartime-town-2",
+    "r2s-wartime-village-2",
+    "rv2-city-wartime-1",
+    "rv2-town-famine-2",
+    "rv2-town-indebted-2",
+    "rv2-village-wartime-2",
+    "rww-city-recently_betrayed-1",
+    "rww-town-calm-1",
+    "rww-village-calm-1"
+   ]
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "one town with no imports at all"
+ },
+ {
+  "id": "DS-GEN-18::STALLED::v4",
+  "verdict": "TRUE",
+  "printsIn": 36,
+  "eyeReads": [
+   {
+    "town": "rv2-village-under_siege-2",
+    "size": "village",
+    "crisis": "under_siege",
+    "printed": "Some of the work at Tighbridge depended on goods brought in from outside, and the siege has stopped them coming.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "under_siege; imports Iron, Raw cloth, Grain"
+   },
+   {
+    "town": "r2r-metropolis-14",
+    "size": "metropolis",
+    "crisis": "under_siege",
+    "printed": "Some of the work at Prabhapeta depended on goods brought in from outside, and the siege has stopped them coming.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "under_siege"
+   },
+   {
+    "town": "r2s-under_siege-village-0",
+    "size": "village",
+    "crisis": "under_siege",
+    "printed": "Some of the work at Izamtzal depended on goods brought in from outside, and the siege has stopped them coming.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "g",
+    "fact": "stalled feed cartography, but a Cartographer house is present"
+   }
+  ],
+  "script": {
+   "tests": "a chain row with upstreamMissing[] exists; the town has imports on its page (primaryImports or critical imports); under_siege in force; stalled feed actually produced locally (stone with quarry, livestock in localProduction, mills+bakers for food_processing) = LOW",
+   "true": 36,
+   "false": 0,
+   "falseTowns": [],
+   "lowTowns": [
+    "r2s-under_siege-village-0",
+    "rv2-city-under_siege+famine-2",
+    "rv2-city-under_siege-4",
+    "rv2-town-under_siege+famine-1",
+    "rv2-town-under_siege+famine-2",
+    "rv2-town-under_siege-2"
+   ]
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "true in all 36"
+ },
+ {
+  "id": "DS-GEN-18::BOUGHT-IN::v1",
+  "verdict": "TRUE",
+  "printsIn": 107,
+  "eyeReads": [
+   {
+    "town": "r2r-thorp-37",
+    "size": "thorp",
+    "crisis": "calm",
+    "printed": "Cnocton brings in salt from outside.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "primaryImports Salt"
+   },
+   {
+    "town": "rww-metropolis-calm-1",
+    "size": "metropolis",
+    "crisis": "calm",
+    "printed": "Temürger brings in stone from outside.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "g",
+    "fact": "imports 'Stone' though it keeps a Stone quarry"
+   },
+   {
+    "town": "rv2-thorp-famine-1",
+    "size": "thorp",
+    "crisis": "famine",
+    "printed": "Altaihiid brings in salt from outside.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "imports Salt"
+   }
+  ],
+  "script": {
+   "tests": "the {good} is a row of primaryImports; also produced locally = LOW",
+   "true": 107,
+   "false": 0,
+   "falseTowns": [],
+   "lowTowns": [
+    "r2r-city-28",
+    "r2r-city-55",
+    "r2r-hamlet-2",
+    "r2r-metropolis-31",
+    "r2s-famine-village-1",
+    "r2s-insurgency-town-3",
+    "r2s-mass_migration-city-3",
+    "r2s-religious_conversion-town-0",
+    "r2s-wartime-city-3",
+    "rv2-hamlet-plague_onset-2",
+    "rv2-village-plague_onset-2",
+    "rww-hamlet-calm-1",
+    "rww-metropolis-calm-1",
+    "rww-thorp-plague_onset-1"
+   ]
+  },
+  "prior": [
+   {
+    "town": "rww-hamlet-calm-1",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": "LOW",
+    "fact": "Salt is an import row (Salt works runs on imported desert salt)"
+   },
+   {
+    "town": "rww-metropolis-calm-1",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": "LOW",
+    "fact": "Stone is an import row; Stone quarry also present"
+   },
+   {
+    "town": "rww-thorp-plague_onset-1",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": "LOW",
+    "fact": "Medicinal herbs is an import row; also produced locally"
+   }
+  ],
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "new wording true wherever the good is an import row"
+ },
+ {
+  "id": "DS-GEN-18::BOUGHT-IN::v4",
+  "verdict": "FALSE",
+  "printsIn": 106,
+  "eyeReads": [
+   {
+    "town": "r2s-mass_migration-thorp-3",
+    "size": "thorp",
+    "crisis": "mass_migration",
+    "printed": "Ask where Qal'atqala gets its salt and you are pointed at the carts, not at anyone in the thorp.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "imports Salt; no salt works"
+   },
+   {
+    "town": "r2r-metropolis-20",
+    "size": "metropolis",
+    "crisis": "calm",
+    "printed": "Ask where Anba gets its stone and you are pointed at the carts, not at anyone in the metropolis.",
+    "true": false,
+    "severity": "MED",
+    "kind": "b",
+    "fact": "Institutions: 'Stone quarry'"
+   },
+   {
+    "town": "r2r-hamlet-49",
+    "size": "hamlet",
+    "crisis": "calm",
+    "printed": "Ask where Vishnugram gets its salt and you are pointed at the carts, not at anyone in the hamlet.",
+    "true": false,
+    "severity": "MED",
+    "kind": "b",
+    "fact": "Salt works with 'Saltmaster Prakash Chaudhary'; 'Salt production' service"
+   },
+   {
+    "town": "r2s-famine-thorp-3",
+    "size": "thorp",
+    "crisis": "famine",
+    "printed": "Ask where Monteminus gets its salt and you are pointed at the carts, not at anyone in the thorp.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "no salt works"
+   }
+  ],
+  "script": {
+   "tests": "the {good} is imported AND no house or local product in the town makes it (Salt works, Stone quarry, 'medicinal herbs'/'grain' produced locally = MED); subsistence farming only = LOW",
+   "true": 100,
+   "false": 6,
+   "falseTowns": [
+    "r2r-hamlet-45",
+    "r2r-hamlet-49",
+    "r2r-metropolis-20",
+    "r2r-thorp-41",
+    "rv2-hamlet-plague_onset-1",
+    "rv2-thorp-famine-2"
+   ],
+   "lowTowns": [
+    "r2r-hamlet-28",
+    "rww-thorp-famine-1"
+   ]
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "names no one in town where a salt works/quarry/local herbs exist"
+ },
+ {
+  "id": "DS-GEN-18::BOUGHT-IN::v9",
+  "verdict": "FALSE",
+  "printsIn": 113,
+  "eyeReads": [
+   {
+    "town": "r2r-thorp-32",
+    "size": "thorp",
+    "crisis": "wartime",
+    "printed": "Much of what changes hands at Hochsee came from somewhere else first.",
+    "true": false,
+    "severity": "MED",
+    "kind": "c",
+    "fact": "Imports 'Charcoal and fuel, Salt'; exports its own Mineral salts, Alum, Sulfur, Raw wool, Livestock; 8 local products"
+   },
+   {
+    "town": "r2r-metropolis-46",
+    "size": "metropolis",
+    "crisis": "calm",
+    "printed": "Much of what changes hands at Beiguan came from somewhere else first.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "10+ imports, river trade"
+   },
+   {
+    "town": "r2s-famine-thorp-0",
+    "size": "thorp",
+    "crisis": "famine",
+    "printed": "Much of what changes hands at Makronea came from somewhere else first.",
+    "true": false,
+    "severity": "MED",
+    "kind": "c",
+    "fact": "4 imports vs 8 local products; not an entrepot"
+   }
+  ],
+  "script": {
+   "tests": "town is an entrepot, or its imports (primary + critical) are more than 3 or at least half its local-production list; a non-entrepot with <=3 imports against twice as many local products = MED false",
+   "true": 72,
+   "false": 41,
+   "falseTowns": [
+    "r2r-hamlet-18",
+    "r2r-hamlet-23",
+    "r2r-hamlet-26",
+    "r2r-hamlet-29",
+    "r2r-hamlet-32",
+    "r2r-hamlet-36",
+    "r2r-hamlet-40",
+    "r2r-hamlet-8",
+    "r2r-thorp-10",
+    "r2r-thorp-14",
+    "r2r-thorp-16",
+    "r2r-thorp-32",
+    "r2r-thorp-47",
+    "r2r-thorp-55",
+    "r2r-village-10",
+    "r2r-village-18",
+    "r2r-village-34",
+    "r2r-village-37",
+    "r2r-village-52",
+    "r2r-village-8",
+    "r2s-famine-hamlet-0",
+    "r2s-famine-thorp-0",
+    "r2s-indebted-hamlet-1",
+    "r2s-infiltrated-hamlet-0",
+    "r2s-mass_migration-hamlet-2",
+    "r2s-mass_migration-village-3",
+    "r2s-monster_pressure-hamlet-1",
+    "r2s-recently_betrayed-hamlet-0",
+    "r2s-recently_betrayed-hamlet-3",
+    "r2s-recently_betrayed-thorp-3",
+    "r2s-religious_conversion-village-2",
+    "r2s-succession_void-hamlet-3",
+    "r2s-succession_void-village-1",
+    "rv2-hamlet-calm-1",
+    "rv2-hamlet-mass_migration-1",
+    "rv2-thorp-occupied-1",
+    "rv2-village-famine-1",
+    "rv2-village-plague_onset-1",
+    "rww-hamlet-mass_migration-1",
+    "rww-village-famine-1",
+    "rww-village-indebted-1"
+   ],
+   "lowTowns": []
+  },
+  "prior": [
+   {
+    "town": "rww-hamlet-mass_migration-1",
+    "state": "STILL-FALSE",
+    "nowPrints": null,
+    "nowTrue": false,
+    "severity": "MED",
+    "fact": "few imports against a long local-production list; chains run on own resources (unchanged since the earlier read)"
+   },
+   {
+    "town": "rww-village-famine-1",
+    "state": "STILL-FALSE",
+    "nowPrints": null,
+    "nowTrue": false,
+    "severity": "MED",
+    "fact": "few imports against a long local-production list; chains run on own resources (unchanged since the earlier read)"
+   },
+   {
+    "town": "rww-village-indebted-1",
+    "state": "STILL-FALSE",
+    "nowPrints": null,
+    "nowTrue": false,
+    "severity": "MED",
+    "fact": "few imports against a long local-production list; chains run on own resources (unchanged since the earlier read)"
+   }
+  ],
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "over-claims in small non-entrepot towns whose trade is their own produce"
+ },
+ {
+  "id": "DS-CND-1::DIRECTION: worsening · CRISIS: famine::v2",
+  "verdict": "TRUE",
+  "printsIn": 10,
+  "eyeReads": [
+   {
+    "town": "rww-thorp-calm-1",
+    "size": "thorp",
+    "crisis": "famine",
+    "printed": "Each week more people in Cnocholme go hungry, and those in charge have not stopped it.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "famine critical, worsening; Elder Council"
+   },
+   {
+    "town": "rv2-metropolis-famine-2",
+    "size": "metropolis",
+    "crisis": "famine",
+    "printed": "Each week more people in Serrastagnum go hungry, and those in charge have not stopped it.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "famine worsening"
+   },
+   {
+    "town": "r2r-hamlet-24",
+    "size": "hamlet",
+    "crisis": "famine",
+    "printed": "Each week more people in Jayakota go hungry, and those in charge have not stopped it.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "famine critical, worsening"
+   }
+  ],
+  "script": {
+   "tests": "activeConditions holds famine with direction worsening; foodSecurity 'Deficit — Active Famine'",
+   "true": 10,
+   "false": 0,
+   "falseTowns": [],
+   "lowTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "true in all 10"
+ },
+ {
+  "id": "DS-ECO-12::INCOME WEIGHT: the religious houses::v1",
+  "verdict": "FALSE",
+  "printsIn": 120,
+  "eyeReads": [
+   {
+    "town": "r2s-infiltrated-village-3",
+    "size": "village",
+    "crisis": "infiltrated",
+    "printed": "Faith carries real weight in Yaxchtitlan's money. What the religious houses take in and spend is a large part of the village's business.",
+    "true": false,
+    "severity": "MED",
+    "kind": "e",
+    "fact": "one religious house: 'Parish church' (Church Tithes 17%)"
+   },
+   {
+    "town": "r2r-metropolis-8",
+    "size": "metropolis",
+    "crisis": "succession_void",
+    "printed": "Faith carries real weight in Langenberg's money. What the religious houses take in and spend is a large part of the metropolis's business.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "g",
+    "fact": "Income Sources: Church Tithes 6%, 7th of the sources"
+   },
+   {
+    "town": "r2s-under_siege-village-1",
+    "size": "village",
+    "crisis": "under_siege",
+    "printed": "Faith carries real weight in Neaddale's money. What the religious houses take in and spend is a large part of the village's business.",
+    "true": false,
+    "severity": "MED",
+    "kind": "e",
+    "fact": "one 'Parish church'"
+   }
+  ],
+  "script": {
+   "tests": "the town holds more than one religious house (plural 'the religious houses'); faith income on the same tab >= 8% (else LOW)",
+   "true": 97,
+   "false": 23,
+   "falseTowns": [
+    "r2r-village-19",
+    "r2r-village-23",
+    "r2r-village-34",
+    "r2r-village-36",
+    "r2r-village-37",
+    "r2r-village-44",
+    "r2r-village-9",
+    "r2s-indebted-village-2",
+    "r2s-infiltrated-village-3",
+    "r2s-mass_migration-village-0",
+    "r2s-plague_onset-village-2",
+    "r2s-politically_fractured-village-3",
+    "r2s-succession_void-village-0",
+    "r2s-succession_void-village-2",
+    "r2s-under_siege-village-0",
+    "r2s-under_siege-village-1",
+    "rv2-village-insurgency-1",
+    "rv2-village-insurgency-2",
+    "rv2-village-monster_pressure-1",
+    "rv2-village-under_siege-1",
+    "rww-village-calm-1",
+    "rww-village-famine-1",
+    "rww-village-religious_conversion-1"
+   ],
+   "lowTowns": [
+    "r2r-city-3",
+    "r2r-city-52",
+    "r2r-metropolis-20",
+    "r2r-metropolis-30",
+    "r2r-metropolis-42",
+    "r2r-metropolis-45",
+    "r2r-metropolis-49",
+    "r2r-metropolis-8",
+    "r2s-mass_migration-city-3",
+    "r2s-mass_migration-metropolis-3",
+    "r2s-politically_fractured-metropolis-3",
+    "r2s-religious_conversion-metropolis-2",
+    "rv2-city-indebted-1",
+    "rv2-city-plague_onset-2",
+    "rv2-metropolis-calm-2",
+    "rv2-metropolis-mass_migration-1",
+    "rv2-metropolis-mass_migration-2",
+    "rv2-metropolis-monster_pressure-1",
+    "rv2-metropolis-under_siege+famine-1",
+    "rww-metropolis-under_siege-1"
+   ]
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "'the religious houses' plural over a village's single parish church in 23 towns"
+ },
+ {
+  "id": "DS-ECO-12::INCOME WEIGHT: the religious houses::v2",
+  "verdict": "FALSE",
+  "printsIn": 114,
+  "eyeReads": [
+   {
+    "town": "r2s-plague_onset-village-0",
+    "size": "village",
+    "crisis": "plague_onset",
+    "printed": "The religious houses at Bayankhurel are among its biggest buyers and employers, and a bad year for them is a bad year for the village.",
+    "true": false,
+    "severity": "MED",
+    "kind": "e",
+    "fact": "one 'Parish church'"
+   },
+   {
+    "town": "r2r-metropolis-14",
+    "size": "metropolis",
+    "crisis": "under_siege",
+    "printed": "The religious houses at Prabhapeta are among its biggest buyers and employers, and a bad year for them is a bad year for the metropolis.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "several religious houses"
+   },
+   {
+    "town": "r2r-village-21",
+    "size": "village",
+    "crisis": "under_siege",
+    "printed": "The religious houses at Rotbrücke are among its biggest buyers and employers, and a bad year for them is a bad year for the village.",
+    "true": false,
+    "severity": "MED",
+    "kind": "e",
+    "fact": "one 'Parish church'"
+   }
+  ],
+  "script": {
+   "tests": "the town holds more than one religious house (plural 'the religious houses'); faith income on the same tab >= 8% (else LOW)",
+   "true": 88,
+   "false": 26,
+   "falseTowns": [
+    "r2r-village-18",
+    "r2r-village-21",
+    "r2r-village-25",
+    "r2r-village-28",
+    "r2r-village-3",
+    "r2r-village-42",
+    "r2r-village-46",
+    "r2r-village-49",
+    "r2r-village-5",
+    "r2s-infiltrated-village-1",
+    "r2s-infiltrated-village-2",
+    "r2s-insurgency-village-0",
+    "r2s-mass_migration-village-1",
+    "r2s-monster_pressure-village-3",
+    "r2s-plague_onset-village-0",
+    "r2s-plague_onset-village-1",
+    "r2s-recently_betrayed-village-0",
+    "r2s-succession_void-village-1",
+    "r2s-succession_void-village-3",
+    "r2s-under_siege-village-2",
+    "r2s-wartime-village-1",
+    "r2s-wartime-village-2",
+    "rv2-village-calm-1",
+    "rv2-village-famine-2",
+    "rv2-village-plague_onset-2",
+    "rv2-village-under_siege+famine-1"
+   ],
+   "lowTowns": [
+    "r2r-city-13",
+    "r2r-city-30",
+    "r2r-city-9",
+    "r2r-metropolis-52",
+    "r2s-famine-metropolis-3",
+    "r2s-monster_pressure-metropolis-1",
+    "r2s-slave_revolt-metropolis-3",
+    "r2s-wartime-metropolis-0",
+    "rv2-city-under_siege+famine-1",
+    "rv2-city-under_siege-2",
+    "rv2-metropolis-famine-2",
+    "rv2-metropolis-indebted-2",
+    "rv2-metropolis-monster_pressure-2"
+   ]
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "same plural defect in 26 villages"
+ },
+ {
+  "id": "DS-GEN-18::BOUGHT-IN::v5",
+  "verdict": "FALSE",
+  "printsIn": 23,
+  "eyeReads": [
+   {
+    "town": "r2r-village-25",
+    "size": "village",
+    "crisis": "politically_fractured",
+    "printed": "Much of the work in Lagosinum's workshops begins with unloading a cart.",
+    "true": false,
+    "severity": "MED",
+    "kind": "c",
+    "fact": "workshops are Mill and Blacksmith on local iron ('Produced locally: iron, metalwork'); imports only Salt, Incense, Parchment"
+   },
+   {
+    "town": "r2r-metropolis-48",
+    "size": "metropolis",
+    "crisis": "calm",
+    "printed": "Much of the work in Sundaker's workshops begins with unloading a cart.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "entrepot, 10 imports incl. iron, timber"
+   },
+   {
+    "town": "r2s-famine-town-2",
+    "size": "town",
+    "crisis": "famine",
+    "printed": "Much of the work in Vatanserai's workshops begins with unloading a cart.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "imports Iron, Grain, Salt"
+   }
+  ],
+  "script": {
+   "tests": "the town's workshops' inputs are among its imports (iron, wool, timber, cordage, grain for its crafts); a village whose crafts all run on local feed and imports none of their inputs = MED",
+   "true": 21,
+   "false": 2,
+   "falseTowns": [
+    "r2r-village-14",
+    "r2r-village-25"
+   ],
+   "lowTowns": [
+    "r2r-village-45",
+    "r2r-village-53"
+   ]
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "villages with no guild-named house and local-fed crafts"
+ }
+]

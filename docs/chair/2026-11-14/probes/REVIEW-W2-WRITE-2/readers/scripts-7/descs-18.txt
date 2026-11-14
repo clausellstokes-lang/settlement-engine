@@ -1,0 +1,13 @@
+     28 Elder Council || The oldest heads of the community decide things together; people follow them out of respect and custom, not la
+     20 Household Council || Settlement governed by heads of household; decisions by informal consensus among property owners.
+     18 Headman's Authority || A headman settles disputes and gives the orders here.
+     10 Free Elder Council || The elders of the hamlet decide things together, and no lord stands over them.
+      8 Elder Council || Respected elders guide the community; authority is moral and traditional rather than formal.
+      7 City-State Council || A city-state council governs with considerable autonomy; camps within it compete for control of policy.
+      5 City Council || A full council governs the city: aldermen, guild masters and appointed officials see to its taxes, its laws an
+      4 Democratic assembly || An assembly of citizens votes on major decisions; the powers lobby for influence rather than seizing control.
+      1 Town Council || An elected or appointed council governs; merchants, guilds, and prominent families compete for seats. Close en
+      1 Town Council || An elected or appointed council governs; merchants, guilds, and prominent families compete for seats.
+      1 Household Council || Settlement governed by heads of household; decisions by informal consensus among property owners. Under pressu
+      1 Headman's Authority || A headman settles disputes and gives the orders here. Says in public that the revolt is under control; in priv
+      1 Grand Council || A grand council of senior officials, guild masters, and appointed magnates governs the metropolis; the council

@@ -1,0 +1,2 @@
+TRUE 30 FALSE 9
+["r2s-occupied-city-0","r2s-occupied-city-1","r2s-occupied-metropolis-0","r2s-occupied-town-0","r2s-occupied-town-1","rv2-city-occupied-1","rv2-metropolis-occupied-2","rv2-town-occupied-2","rww-town-occupied-1"]

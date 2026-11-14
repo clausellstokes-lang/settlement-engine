@@ -1,0 +1,107 @@
+T r2r-city-22 city  | seat City-State Council members 14 single false pop 8277 st 
+T r2r-city-28 city  | seat Democratic assembly members 11 single false pop 6009 st 
+T r2r-city-52 city  | seat City-State Council members 29 single false pop 8878 st 
+T r2r-city-8 city  | seat City Council members 24 single false pop 10739 st 
+F r2r-hamlet-1 hamlet  | seat Headman's Authority members 2 single true pop 90 st 
+T r2r-hamlet-10 hamlet monster_pressure | seat Free Elder Council members 5 single false pop 90 st monster_pressure
+T r2r-hamlet-11 hamlet  | seat Household Council members 3 single false pop 46 st 
+F r2r-hamlet-12 hamlet  | seat Headman's Authority members 3 single true pop 27 st 
+T r2r-hamlet-17 hamlet  | seat Elder Council members 3 single false pop 40 st 
+F r2r-hamlet-18 hamlet  | seat Headman's Authority members 4 single true pop 56 st 
+F r2r-hamlet-2 hamlet  | seat Headman's Authority members 2 single true pop 76 st 
+T r2r-hamlet-28 hamlet famine | seat Elder Council members 1 single false pop 23 st famine
+F r2r-hamlet-29 hamlet  | seat Headman's Authority members 1 single true pop 83 st 
+F r2r-hamlet-35 hamlet politically_fractured | seat Headman's Authority members 1 single true pop 36 st politically_fractured
+T r2r-hamlet-37 hamlet  | seat Elder Council members 1 single false pop 46 st 
+T r2r-hamlet-39 hamlet  | seat Free Elder Council members 1 single false pop 85 st 
+F r2r-hamlet-4 hamlet politically_fractured | seat Headman's Authority members 3 single true pop 41 st politically_fractured
+F r2r-hamlet-56 hamlet  | seat Headman's Authority members 7 single true pop 74 st 
+T r2r-metropolis-25 metropolis mass_migration | seat Democratic assembly members 19 single false pop 43657 st mass_migration
+T r2r-metropolis-29 metropolis infiltrated | seat City-State Council members 21 single false pop 23730 st infiltrated
+T r2r-metropolis-39 metropolis politically_fractured | seat Grand Council members 16 single false pop 87995 st politically_fractured
+T r2r-metropolis-54 metropolis  | seat City-State Council members 27 single false pop 55265 st 
+T r2r-metropolis-59 metropolis religious_conversion | seat Democratic assembly members 21 single false pop 34208 st religious_conversion
+T r2r-metropolis-6 metropolis succession_void | seat Grand Council members 20 single false pop 216641 st succession_void
+T r2r-thorp-10 thorp monster_pressure | seat Elder Council members 1 single false pop 10 st monster_pressure
+F r2r-thorp-12 thorp  | seat Headman's Authority members 1 single true pop 23 st 
+T r2r-thorp-15 thorp  | seat Elder Council members 1 single false pop 23 st 
+T r2r-thorp-20 thorp  | seat Household Council members 1 single false pop 27 st 
+T r2r-thorp-23 thorp  | seat Household Council members 1 single false pop 20 st 
+T r2r-thorp-27 thorp occupied | seat Household Council members 1 single false pop 25 st occupied
+T r2r-thorp-3 thorp  | seat Elder Council members 1 single false pop 12 st 
+T r2r-thorp-37 thorp  | seat Household Council members 1 single false pop 6 st 
+T r2r-thorp-41 thorp plague_onset | seat Elder Council members 2 single false pop 22 st plague_onset
+T r2r-thorp-56 thorp wartime | seat Household Council members 1 single false pop 24 st wartime
+T r2r-thorp-59 thorp  | seat Elder Council members 1 single false pop 7 st 
+T r2r-thorp-7 thorp  | seat Elder Council members 1 single false pop 9 st 
+T r2r-thorp-9 thorp  | seat Household Council members 1 single false pop 20 st 
+F r2r-village-16 village  | seat Headman's Authority members 4 single true pop 157 st 
+F r2r-village-21 village under_siege | seat Headman's Authority members 2 single true pop 144 st under_siege
+T r2r-village-24 village famine | seat Elder Council members 5 single false pop 275 st famine
+T r2r-village-29 village insurgency | seat Elder Council members 4 single false pop 137 st insurgency
+T r2r-village-31 village  | seat Elder Council members 4 single false pop 234 st 
+T r2r-village-32 village  | seat Elder Council members 5 single false pop 268 st 
+T r2r-village-35 village politically_fractured | seat Elder Council members 4 single false pop 180 st politically_fractured
+T r2r-village-41 village monster_pressure | seat Elder Council members 4 single false pop 81 st monster_pressure
+T r2r-village-43 village under_siege | seat Elder Council members 2 single false pop 149 st under_siege
+F r2r-village-44 village infiltrated | seat Headman's Authority members 4 single true pop 182 st infiltrated
+T r2r-village-47 village indebted | seat Household Council members 10 single false pop 375 st indebted
+T r2r-village-55 village under_siege | seat Household Council members 2 single false pop 102 st under_siege
+T r2r-village-56 village succession_void | seat Elder Council members 4 single false pop 117 st succession_void
+T r2r-village-9 village succession_void | seat Elder Council members 4 single false pop 95 st succession_void
+F r2s-famine-thorp-1 thorp famine | seat Headman's Authority members 1 single true pop 20 st famine
+T r2s-famine-village-3 village famine | seat Elder Council members 4 single false pop 257 st famine
+T r2s-indebted-city-2 city indebted | seat City Council members 23 single false pop 13996 st indebted
+F r2s-indebted-hamlet-3 hamlet indebted | seat Headman's Authority members 2 single true pop 65 st indebted
+F r2s-indebted-village-2 village indebted | seat Headman's Authority members 6 single true pop 318 st indebted
+T r2s-infiltrated-hamlet-0 hamlet infiltrated | seat Free Elder Council members 5 single false pop 83 st infiltrated
+T r2s-infiltrated-thorp-0 thorp infiltrated | seat Elder Council members 1 single false pop 14 st infiltrated
+T r2s-infiltrated-village-0 village infiltrated | seat Elder Council members 5 single false pop 162 st infiltrated
+F r2s-infiltrated-village-2 village infiltrated | seat Headman's Authority members 4 single true pop 388 st infiltrated
+F r2s-insurgency-village-0 village insurgency | seat Headman's Authority members 2 single true pop 323 st insurgency
+T r2s-insurgency-village-1 village insurgency | seat Elder Council members 9 single false pop 200 st insurgency
+T r2s-mass_migration-hamlet-2 hamlet mass_migration | seat Free Elder Council members 2 single false pop 53 st mass_migration
+T r2s-mass_migration-thorp-2 thorp mass_migration | seat Elder Council members 1 single false pop 24 st mass_migration
+T r2s-monster_pressure-thorp-1 thorp monster_pressure | seat Household Council members 1 single false pop 18 st monster_pressure
+T r2s-occupied-hamlet-0 hamlet occupied+famine | seat Elder Council members 1 single false pop 20 st occupied,famine
+T r2s-occupied-village-1 village occupied | seat Household Council members 5 single false pop 132 st occupied
+T r2s-plague_onset-thorp-1 thorp plague_onset | seat Household Council members 1 single false pop 25 st plague_onset
+T r2s-plague_onset-village-0 village plague_onset | seat Elder Council members 3 single false pop 110 st plague_onset
+T r2s-plague_onset-village-1 village plague_onset | seat Elder Council members 3 single false pop 214 st plague_onset
+T r2s-politically_fractured-hamlet-1 hamlet politically_fractured | seat Household Council members 4 single false pop 63 st politically_fractured
+F r2s-politically_fractured-hamlet-3 hamlet politically_fractured | seat Headman's Authority members 1 single true pop 49 st politically_fractured
+T r2s-politically_fractured-village-0 village politically_fractured | seat Elder Council members 4 single false pop 187 st politically_fractured
+T r2s-politically_fractured-village-3 village politically_fractured | seat Elder Council members 1 single false pop 78 st politically_fractured
+T r2s-recently_betrayed-thorp-2 thorp recently_betrayed | seat Household Council members 1 single false pop 13 st recently_betrayed
+T r2s-recently_betrayed-thorp-3 thorp recently_betrayed | seat Household Council members 1 single false pop 16 st recently_betrayed
+T r2s-recently_betrayed-village-0 village recently_betrayed | seat Elder Council members 5 single false pop 321 st recently_betrayed
+T r2s-recently_betrayed-village-1 village recently_betrayed | seat Elder Council members 5 single false pop 174 st recently_betrayed
+T r2s-religious_conversion-hamlet-1 hamlet religious_conversion | seat Free Elder Council members 1 single false pop 56 st religious_conversion
+T r2s-religious_conversion-thorp-1 thorp religious_conversion | seat Elder Council members 1 single false pop 26 st religious_conversion
+T r2s-religious_conversion-thorp-2 thorp religious_conversion | seat Elder Council members 1 single false pop 21 st religious_conversion
+T r2s-religious_conversion-town-2 town religious_conversion | seat Town Council members 13 single false pop 1575 st religious_conversion
+F r2s-religious_conversion-village-3 village religious_conversion | seat Headman's Authority members 10 single true pop 351 st religious_conversion
+T r2s-slave_revolt-hamlet-1 hamlet slave_revolt | seat Household Council members 2 single false pop 36 st slave_revolt
+F r2s-slave_revolt-village-3 village slave_revolt | seat Headman's Authority members 5 single true pop 171 st slave_revolt
+T r2s-succession_void-thorp-1 thorp succession_void+famine | seat Elder Council members 1 single false pop 11 st succession_void,famine
+F r2s-under_siege-hamlet-2 hamlet under_siege | seat Headman's Authority members 2 single true pop 94 st under_siege
+T r2s-under_siege-thorp-0 thorp under_siege | seat Elder Council members 1 single false pop 9 st under_siege
+T r2s-under_siege-town-0 town under_siege | seat Town Council members 20 single false pop 2137 st under_siege
+T r2s-under_siege-village-0 village under_siege | seat Household Council members 5 single false pop 281 st under_siege
+F r2s-wartime-hamlet-2 hamlet wartime | seat Headman's Authority members 2 single true pop 25 st wartime
+T r2s-wartime-thorp-0 thorp wartime | seat Household Council members 1 single false pop 18 st wartime
+T r2s-wartime-village-2 village wartime | seat Elder Council members 3 single false pop 370 st wartime
+T r2s-wartime-village-3 village wartime | seat Elder Council members 4 single false pop 213 st wartime
+T rv2-city-under_siege+famine-2 city under_siege+famine | seat City-State Council members 28 single false pop 14707 st under_siege,famine
+F rv2-hamlet-calm-2 hamlet  | seat Headman's Authority members 1 single true pop 50 st 
+T rv2-hamlet-plague_onset-2 hamlet plague_onset | seat Household Council members 2 single false pop 29 st plague_onset
+T rv2-thorp-calm-1 thorp  | seat Elder Council members 1 single false pop 29 st 
+T rv2-thorp-famine-1 thorp famine | seat Elder Council members 1 single false pop 14 st famine
+T rv2-thorp-under_siege-1 thorp under_siege | seat Elder Council members 1 single false pop 17 st under_siege
+T rv2-thorp-wartime-2 thorp wartime | seat Elder Council members 1 single false pop 27 st wartime
+T rv2-town-monster_pressure-1 town monster_pressure | seat Town Council members 11 single false pop 791 st monster_pressure
+F rv2-village-calm-1 village  | seat Headman's Authority members 3 single true pop 375 st 
+T rv2-village-under_siege-2 village under_siege | seat Elder Council members 4 single false pop 188 st under_siege
+T rww-thorp-calm-1 thorp famine | seat Elder Council members 1 single false pop 15 st famine
+TRUE 81 FALSE 24
+["r2r-hamlet-1","r2r-hamlet-12","r2r-hamlet-18","r2r-hamlet-2","r2r-hamlet-29","r2r-hamlet-35","r2r-hamlet-4","r2r-hamlet-56","r2r-thorp-12","r2r-village-16","r2r-village-21","r2r-village-44","r2s-famine-thorp-1","r2s-indebted-hamlet-3","r2s-indebted-village-2","r2s-infiltrated-village-2","r2s-insurgency-village-0","r2s-politically_fractured-hamlet-3","r2s-religious_conversion-village-3","r2s-slave_revolt-village-3","r2s-under_siege-hamlet-2","r2s-wartime-hamlet-2","rv2-hamlet-calm-2","rv2-village-calm-1"]

@@ -1,0 +1,2 @@
+import * as L from './lib.mjs';
+for(const i of [0,1,18,20]){ const l=L.LINES[i]; for(const p of l.prints){ const f=L.facts(p.town); console.log(i,p.town,JSON.stringify(f.crisis.types),JSON.stringify(f.crisis.kinds), f.famine.band, 'stores',f.stores, JSON.stringify(p.page.map(v=>v.printed))); console.log('   t.stress=',JSON.stringify(f.t.stress)?.slice(0,200),' activeConditions=',JSON.stringify(f.t.activeConditions)?.slice(0,300)); } }

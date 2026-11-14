@@ -1,0 +1,10 @@
+import {stresses} from './stress.mjs';
+const df=await import('/tmp/claude-0/-home-user-settlement-engine/b820d610-fd3f-5b2e-a6a5-c562b3a50edf/scratchpad/wt/tip/src/domain/defense/defenseFacts.js');
+const THREAT=['under_siege','occupied','monster_pressure'];
+export default (t,p,{page})=>{const b=t.powerStructure.publicLegitimacy?.breakdown||{};const st=stresses(t);const d=df.defenseFactsOf(t);
+const mode=process.env.MODE;const thr=st.some(s=>THREAT.includes(s));
+let ok=b.safety<0&&b.prosperity<0&&!['corrupted','capture'].includes(t.powerStructure.criminalCaptureState)&&['village','town','city','metropolis'].includes(t.tier);
+if(mode==='nowatch')ok=ok&&!d.hasWatch&&!thr&&!st.includes('wartime');
+if(mode==='watch')ok=ok&&d.hasWatch&&!thr&&!st.some(s=>['wartime','insurgency','slave_revolt'].includes(s));
+if(mode==='threat')ok=ok&&thr;
+return {ok,why:`st ${st} watch ${d.hasWatch} garrison ${d.hasGarrison} militia ${d.hasMilitia} b ${b.safety}/${b.prosperity} pros ${t.economicState.prosperity} cap ${t.powerStructure.criminalCaptureState}`};};

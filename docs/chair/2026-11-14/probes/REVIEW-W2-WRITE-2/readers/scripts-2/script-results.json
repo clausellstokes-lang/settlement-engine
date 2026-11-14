@@ -1,0 +1,162 @@
+{
+ "0": {
+  "tests": "siege+famine in force, food_processing chain present and not impaired (econ chain mod>0)",
+  "true": 1,
+  "false": 0,
+  "falseTowns": []
+ },
+ "1": {
+  "tests": "siege+famine in force, food_processing chain present and not impaired (econ chain mod>0)",
+  "true": 1,
+  "false": 0,
+  "falseTowns": []
+ },
+ "2": {
+  "tests": "food_processing chain impaired (econ chain mod<0) and no siege",
+  "true": 20,
+  "false": 0,
+  "falseTowns": []
+ },
+ "3": {
+  "tests": "food_processing chain impaired (econ chain mod<0) and no siege",
+  "true": 13,
+  "false": 0,
+  "falseTowns": []
+ },
+ "4": {
+  "tests": "food_processing chain impaired (econ chain mod<0) and no siege",
+  "true": 16,
+  "false": 0,
+  "falseTowns": []
+ },
+ "5": {
+  "tests": "siege in force and food_processing chain impaired",
+  "true": 2,
+  "false": 0,
+  "falseTowns": []
+ },
+ "6": {
+  "tests": "siege in force and food_processing chain impaired",
+  "true": 11,
+  "false": 0,
+  "falseTowns": []
+ },
+ "7": {
+  "tests": "monsterThreat plagued, live walls, gate, garrison or militia, no siege/occupation, and no beast crisis in force (the page then says the beasts give no rest and people grow afraid)",
+  "true": 9,
+  "false": 1,
+  "falseTowns": [
+   "r2s-monster_pressure-city-0"
+  ]
+ },
+ "8": {
+  "tests": "heartland country, monster_pressure crisis, no walls, no watch/garrison/militia/mercenary, no charter",
+  "true": 3,
+  "false": 0,
+  "falseTowns": []
+ },
+ "9": {
+  "tests": "heartland country, monster_pressure crisis, no walls, no watch/garrison/militia/mercenary, no charter",
+  "true": 5,
+  "false": 0,
+  "falseTowns": []
+ },
+ "10": {
+  "tests": "heartland country, monster_pressure crisis, no walls, no watch/garrison/militia/mercenary, no charter",
+  "true": 1,
+  "false": 0,
+  "falseTowns": []
+ },
+ "11": {
+  "tests": "live walls and live garrison, no siege/occupation",
+  "true": 80,
+  "false": 0,
+  "falseTowns": []
+ },
+ "12": {
+  "tests": "live walls and live garrison, no occupation",
+  "true": 126,
+  "false": 0,
+  "falseTowns": []
+ },
+ "13": {
+  "tests": "live walls; no garrison, militia, watch or mercenary; no siege/occupation",
+  "true": 7,
+  "false": 0,
+  "falseTowns": []
+ },
+ "14": {
+  "tests": "live walls; no garrison, militia, watch or mercenary; no siege/occupation",
+  "true": 4,
+  "false": 0,
+  "falseTowns": []
+ },
+ "15": {
+  "tests": "live walls; no garrison, militia, watch or mercenary; no siege/occupation",
+  "true": 5,
+  "false": 0,
+  "falseTowns": []
+ },
+ "16": {
+  "tests": "live walls and watch; no garrison, militia or mercenary; no siege/occupation",
+  "true": 24,
+  "false": 0,
+  "falseTowns": []
+ },
+ "17": {
+  "tests": "live walls and watch; no garrison, militia or mercenary; no siege/occupation; and the page does not say the patrols have stopped/abandoned",
+  "true": 27,
+  "false": 1,
+  "falseTowns": [
+   "rww-town-slave_revolt-1"
+  ]
+ },
+ "18": {
+  "tests": "siege in force, live walls, no garrison/militia/watch/mercenary",
+  "true": 1,
+  "false": 0,
+  "falseTowns": []
+ },
+ "19": {
+  "tests": "threat crisis (not siege/occupation), no walls, no garrison/militia/watch/mercenary, no adventurers charter hall (nobody trained to send)",
+  "true": 7,
+  "false": 1,
+  "falseTowns": [
+   "rv2-village-monster_pressure-2"
+  ]
+ },
+ "20": {
+  "tests": "threat crisis, no walls, watch present, no garrison/militia/mercenary/charter hall (so the watch IS all it has)",
+  "true": 3,
+  "false": 1,
+  "falseTowns": [
+   "r2s-monster_pressure-town-2"
+  ]
+ },
+ "21": {
+  "tests": "no crisis, economic defence score band STRONG",
+  "true": 34,
+  "false": 0,
+  "falseTowns": []
+ },
+ "22": {
+  "tests": "no walls, no garrison/mercenary (soldiers), no militia, watch present, no threat crisis, ruler not a military council",
+  "true": 12,
+  "false": 3,
+  "falseTowns": [
+   "r2r-town-33",
+   "r2r-town-50",
+   "rv2-town-wartime-1"
+  ]
+ },
+ "23": {
+  "tests": "econ band WEAK, no watch/garrison/militia/mercenary, no charter/bounty house (nobody paid to defend)",
+  "true": 40,
+  "false": 3,
+  "falseTowns": [
+   "r2r-hamlet-4",
+   "r2r-village-13",
+   "r2s-recently_betrayed-hamlet-0"
+  ]
+ }
+}

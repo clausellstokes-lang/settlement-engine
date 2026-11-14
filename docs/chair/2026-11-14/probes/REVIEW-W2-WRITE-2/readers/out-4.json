@@ -1,0 +1,1818 @@
+[
+ {
+  "id": "DS-ECO-1::COMBINATION C3: the middle rungs::v2",
+  "verdict": "TRUE",
+  "printsIn": 40,
+  "eyeReads": [
+   {
+    "town": "r2r-thorp-0",
+    "size": "thorp",
+    "crisis": "calm",
+    "printed": "Izamitza gets by on a thin margin, and little in its trade is spare.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "prosperity Comfortable, Output 28/100"
+   },
+   {
+    "town": "r2r-metropolis-22",
+    "size": "metropolis",
+    "crisis": "calm",
+    "printed": "Vatanshari gets by on a thin margin, and little in its trade is spare.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Comfortable, Output 11/100"
+   },
+   {
+    "town": "r2r-city-12",
+    "size": "city",
+    "crisis": "calm",
+    "printed": "Markaztappa gets by on a thin margin, and little in its trade is spare.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "g",
+    "fact": "header reads 'Comfortable' and 'Output 65/100' just above 'gets by on a thin margin'"
+   }
+  ],
+  "script": {
+   "tests": "prosperity is a middle rung (Moderate/Comfortable) and no crisis in force",
+   "true": 40,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "24 of 40 are Comfortable; 'thin margin' under a Comfortable header with a high Output is a LOW stretch only"
+ },
+ {
+  "id": "DS-ECO-1::COMBINATION C4: a low rung on a working approach::v1",
+  "verdict": "TRUE",
+  "printsIn": 97,
+  "eyeReads": [
+   {
+    "town": "r2r-thorp-36",
+    "size": "thorp",
+    "crisis": "calm",
+    "printed": "Trade comes and goes by Cnocbridge's river, and the thorp stays poor all the same.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Poor, river; Iron & Metalwork 11% 'leans on the trade route'"
+   },
+   {
+    "town": "r2s-occupied-metropolis-3",
+    "size": "metropolis",
+    "crisis": "occupied",
+    "printed": "Trade comes and goes by Rajigarh's crossroads, and the metropolis stays poor all the same.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Poor, crossroads, Entrepôt Trade 11%; occupation takes revenue, does not stop trade"
+   },
+   {
+    "town": "rww-metropolis-famine-1",
+    "size": "metropolis",
+    "crisis": "famine",
+    "printed": "Trade comes and goes by Kilwell's crossroads, and the metropolis stays poor all the same.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Struggling, crossroads"
+   }
+  ],
+  "script": {
+   "tests": "prosperity low rung (Poor/Struggling), access not isolated/mountain_pass, no siege/plague",
+   "true": 97,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": [
+   {
+    "town": "rww-metropolis-famine-1",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": null,
+    "fact": "new text no longer says little money stays; Struggling = poor; entrepôt income no longer denied"
+   }
+  ],
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "true everywhere"
+ },
+ {
+  "id": "DS-ECO-1::COMBINATION C4: a low rung on a working approach::v4",
+  "verdict": "FALSE",
+  "printsIn": 27,
+  "eyeReads": [
+   {
+    "town": "rww-thorp-under_siege-1",
+    "size": "thorp",
+    "crisis": "under_siege",
+    "printed": "With the siege closing every way in, Belovich has lost what passing trade used to leave behind, and the thorp feels the loss.",
+    "true": true,
+    "severity": "LOW",
+    "kind": null,
+    "fact": "pop 5, Agricultural Rents 90%: 'passing trade' a stretch for 5 souls"
+   },
+   {
+    "town": "rww-metropolis-under_siege-1",
+    "size": "metropolis",
+    "crisis": "under_siege",
+    "printed": "With the siege closing every way in, Naranjotepec has lost what passing trade used to leave behind, and the metropolis feels the loss.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Struggling, road, importCoverage 0"
+   },
+   {
+    "town": "r2s-under_siege-city-0",
+    "size": "city",
+    "crisis": "under_siege",
+    "printed": "With the siege closing every way in, Bellaurbs has lost what passing trade used to leave behind, and the city feels the loss.",
+    "true": false,
+    "severity": "MED",
+    "kind": "c",
+    "fact": "record economicViability.foodBalance.importCoverage=6422, importChannel 'teleportation circle'; page 'Production ... + 6,422 imported' and 'ships bring in a little of the rest': not every way in is closed"
+   }
+  ],
+  "script": {
+   "tests": "siege in force and no import channel still carrying >=1% of daily need (economicViability.metrics.foodBalance.importCoverage/importChannel)",
+   "true": 25,
+   "false": 2,
+   "falseTowns": [
+    "r2s-under_siege-city-0",
+    "r2s-under_siege-metropolis-3"
+   ]
+  },
+  "prior": [
+   {
+    "town": "rww-metropolis-under_siege-1",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": null,
+    "fact": "'the little that' is gone; 'lost what passing trade used to leave' fits a market-heavy metropolis"
+   }
+  ],
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "false only where a teleportation circle still carries ~24% of food through the siege; root is the siege leaving a magic import channel open"
+ },
+ {
+  "id": "DS-ECO-1::COMBINATION C4: a low rung on a working approach::v5",
+  "verdict": "FALSE",
+  "printsIn": 22,
+  "eyeReads": [
+   {
+    "town": "rv2-thorp-under_siege+famine-2",
+    "size": "thorp",
+    "crisis": "under_siege+famine",
+    "printed": "The siege has stopped Miroya's trade moving at all, and the money that trade brought in has stopped with it.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Struggling, crossroads, Output 1/100, importCoverage 0"
+   },
+   {
+    "town": "r2r-metropolis-14",
+    "size": "metropolis",
+    "crisis": "under_siege",
+    "printed": "The siege has stopped Prabhapeta's trade moving at all, and the money that trade brought in has stopped with it.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Struggling, crossroads, no import channel"
+   },
+   {
+    "town": "rv2-metropolis-under_siege-22",
+    "size": "metropolis",
+    "crisis": "under_siege",
+    "printed": "The siege has stopped Innisheath's trade moving at all, and the money that trade brought in has stopped with it.",
+    "true": false,
+    "severity": "MED",
+    "kind": "c",
+    "fact": "importCoverage 10,833/43,278 via 'teleportation circle'; page '+ 10,833 imported', 'carts bring in a little of the rest': trade has not stopped 'at all'"
+   }
+  ],
+  "script": {
+   "tests": "siege in force and no import channel carrying >=1% of need",
+   "true": 21,
+   "false": 1,
+   "falseTowns": [
+    "rv2-metropolis-under_siege-22"
+   ]
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "one metropolis keeps a teleport import channel open"
+ },
+ {
+  "id": "DS-ECO-1::COMBINATION C4: a low rung on a working approach::v7",
+  "verdict": "TRUE",
+  "printsIn": 22,
+  "eyeReads": [
+   {
+    "town": "r2r-thorp-58",
+    "size": "thorp",
+    "crisis": "under_siege",
+    "printed": "Since the siege began, no passing traffic brings money into Tallpatan, and nothing has taken its place.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Struggling, road, no imports"
+   },
+   {
+    "town": "rv2-metropolis-under_siege-28",
+    "size": "metropolis",
+    "crisis": "under_siege",
+    "printed": "Since the siege began, no passing traffic brings money into Morkvik, and nothing has taken its place.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Entrepôt 11%/Toll 9% pre-siege, no import channel"
+   },
+   {
+    "town": "rv2-metropolis-under_siege-24",
+    "size": "metropolis",
+    "crisis": "under_siege",
+    "printed": "Since the siege began, no passing traffic brings money into Pratomunicipium, and nothing has taken its place.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "g",
+    "fact": "teleportation circle carries 18,273 lbs/day; 'nothing has taken its place' a stretch, though that is bought food, not passing traffic"
+   }
+  ],
+  "script": {
+   "tests": "siege in force and no import channel carrying >=1% of need",
+   "true": 21,
+   "false": 1,
+   "falseTowns": [
+    "rv2-metropolis-under_siege-24"
+   ]
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "the one script miss reads LOW: passing traffic has stopped; teleport food is not transit money. The 2 Defense-view hits in prints are another line matched by the head"
+ },
+ {
+  "id": "DS-ECO-6::TIER: a large share off the books (≥30)::v2",
+  "verdict": "TRUE",
+  "printsIn": 29,
+  "eyeReads": [
+   {
+    "town": "r2s-slave_revolt-village-0",
+    "size": "village",
+    "crisis": "slave_revolt",
+    "printed": "A good share of the business of this village is done quietly, and the quiet part is not hiding especially hard.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "blackMarketCapture 34"
+   },
+   {
+    "town": "r2s-mass_migration-metropolis-0",
+    "size": "metropolis",
+    "crisis": "mass_migration",
+    "printed": "A good share of the business of this metropolis is done quietly, and the quiet part is not hiding especially hard.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "capture 37, 7 criminal institutions"
+   },
+   {
+    "town": "rv2-city-under_siege-4",
+    "size": "city",
+    "crisis": "under_siege",
+    "printed": "A good share of the business of this city is done quietly, and the quiet part is not hiding especially hard.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "capture 44"
+   }
+  ],
+  "script": {
+   "tests": "safetyProfile.blackMarketCapture >= 30",
+   "true": 29,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "dm-only colour; true"
+ },
+ {
+  "id": "DS-ECO-9::SECURE::v1",
+  "verdict": "TRUE",
+  "printsIn": 233,
+  "eyeReads": [
+   {
+    "town": "r2r-thorp-36",
+    "size": "thorp",
+    "crisis": "calm",
+    "printed": "In an ordinary season Cnocbridge has enough to eat, or near enough.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "band secure, grows more than it eats"
+   },
+   {
+    "town": "r2r-metropolis-58",
+    "size": "metropolis",
+    "crisis": "calm",
+    "printed": "In an ordinary season Eldmark has enough to eat, or near enough.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "secure, trade covers 98% of gap"
+   },
+   {
+    "town": "r2s-occupied-town-1",
+    "size": "town",
+    "crisis": "occupied",
+    "printed": "In an ordinary season Sundnes has enough to eat, or near enough.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "secure, gap<=5"
+   }
+  ],
+  "script": {
+   "tests": "foodRecord.band secure, gapPct<=5, no siege/famine",
+   "true": 233,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "true"
+ },
+ {
+  "id": "DS-ECO-9::SECURE::v3",
+  "verdict": "TRUE",
+  "printsIn": 170,
+  "eyeReads": [
+   {
+    "town": "r2s-infiltrated-thorp-3",
+    "size": "thorp",
+    "crisis": "calm",
+    "printed": "Kaltenwiese is fed, but what it keeps put by is not deep: a run of poor harvests would reach its tables.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "secure, two months in household stores"
+   },
+   {
+    "town": "r2s-plague_onset-city-1",
+    "size": "city",
+    "crisis": "plague_onset",
+    "printed": "Sundbø is fed, but what it keeps put by is not deep: a run of poor harvests would reach its tables.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "secure, granary nine months"
+   },
+   {
+    "town": "r2s-occupied-city-2",
+    "size": "city",
+    "crisis": "occupied",
+    "printed": "Petenxochitl is fed, but what it keeps put by is not deep: a run of poor harvests would reach its tables.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "secure, nine months"
+   }
+  ],
+  "script": {
+   "tests": "band secure, gap<=5, storageMonths<12, no siege/famine",
+   "true": 170,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "true"
+ },
+ {
+  "id": "DS-ECO-9::SECURE::v6",
+  "verdict": "TRUE",
+  "printsIn": 28,
+  "eyeReads": [
+   {
+    "town": "r2s-plague_onset-metropolis-1",
+    "size": "metropolis",
+    "crisis": "plague_onset",
+    "printed": "Chandrapur eats, and what it keeps put by would carry it through a bad harvest and well beyond.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "granary 15 months"
+   },
+   {
+    "town": "r2r-metropolis-8",
+    "size": "metropolis",
+    "crisis": "calm",
+    "printed": "Langenberg eats, and what it keeps put by would carry it through a bad harvest and well beyond.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "g",
+    "fact": "line just above: 'covers each day's food, with nothing to spare against a bad year' (then 'Stores: a granary, 15 months')"
+   },
+   {
+    "town": "rv2-metropolis-occupied-1",
+    "size": "metropolis",
+    "crisis": "occupied",
+    "printed": "Mönkhiin eats, and what it keeps put by would carry it through a bad harvest and well beyond.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "15 months"
+   }
+  ],
+  "script": {
+   "tests": "band secure, storageMonths>=12",
+   "true": 28,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "18/28 pages carry the generator's 'nothing to spare against a bad year' two lines above: that sentence, not this one, misleads (LOW)"
+ },
+ {
+  "id": "DS-ECO-9::SECURE::v7",
+  "verdict": "TRUE",
+  "printsIn": 35,
+  "eyeReads": [
+   {
+    "town": "r2r-metropolis-16",
+    "size": "metropolis",
+    "crisis": "calm",
+    "printed": "Nobody at Dunkelkirche worries much about one poor harvest: the stores would cover it.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "g",
+    "fact": "'nothing to spare against a bad year' two lines above; record storageMonths 15"
+   },
+   {
+    "town": "r2s-succession_void-metropolis-3",
+    "size": "metropolis",
+    "crisis": "succession_void",
+    "printed": "Nobody at Erdenbalik worries much about one poor harvest: the stores would cover it.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "g",
+    "fact": "same"
+   },
+   {
+    "town": "r2r-metropolis-6",
+    "size": "metropolis",
+    "crisis": "calm",
+    "printed": "Nobody at Becanatl worries much about one poor harvest: the stores would cover it.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "15 months"
+   }
+  ],
+  "script": {
+   "tests": "band secure, storageMonths>=12",
+   "true": 35,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "25/35 pages carry the contradicting generator line above it (LOW, this line is the true one)"
+ },
+ {
+  "id": "DS-ECO-9::HOW THE NEED IS MET: much of it brought in::v3",
+  "verdict": "TRUE",
+  "printsIn": 92,
+  "eyeReads": [
+   {
+    "town": "r2s-famine-thorp-3",
+    "size": "thorp",
+    "crisis": "famine",
+    "printed": "A good part of what Monteminus eats is brought in, and everyone knows when the next load is due.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "normalImportPct 31, live 31%"
+   },
+   {
+    "town": "r2r-metropolis-13",
+    "size": "metropolis",
+    "crisis": "calm",
+    "printed": "A good part of what Athenapetra eats is brought in, and everyone knows when the next load is due.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "g",
+    "fact": "line above: 'It is not a subject anyone raises unprompted' vs 'everyone knows when the next load is due'"
+   },
+   {
+    "town": "rww-city-famine-1",
+    "size": "city",
+    "crisis": "famine",
+    "printed": "A good part of what Megaousa eats is brought in, and everyone knows when the next load is due.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "imports 46% of need"
+   }
+  ],
+  "script": {
+   "tests": "normalImportPct>=20 and live importCoverage>=20% of need, no plague",
+   "true": 92,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "true"
+ },
+ {
+  "id": "DS-ECO-9::HOW THE NEED IS MET: part of it by magic::v1",
+  "verdict": "FALSE",
+  "printsIn": 74,
+  "eyeReads": [
+   {
+    "town": "r2s-indebted-thorp-2",
+    "size": "thorp",
+    "crisis": "indebted",
+    "printed": "Not all of Kamalaganj's food is grown or bought: some of what the thorp eats is provided by spell or by prayer, and the thorp would go shorter without it.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "'+ 1 by divine provision' of 16"
+   },
+   {
+    "town": "rw3-metropolis-under_siege-1",
+    "size": "metropolis",
+    "crisis": "under_siege",
+    "printed": "Not all of Hochfurt's food is grown or bought: some of what the metropolis eats is provided by spell or by prayer, and the metropolis would go shorter without it.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "'+ 117,018 by arcane provision'"
+   },
+   {
+    "town": "r2s-insurgency-thorp-2",
+    "size": "thorp",
+    "crisis": "insurgency",
+    "printed": "Not all of Uaymkin's food is grown or bought: some of what the thorp eats is provided by spell or by prayer, and the thorp would go shorter without it.",
+    "true": false,
+    "severity": "MED",
+    "kind": "c",
+    "fact": "foodRecord.magicPct=1 but foodSecurity.magicOffset=0, magicSupplement=0; page 'Production: 17 lbs/day+ 1 importedNeed: 18' - no provision at all"
+   }
+  ],
+  "script": {
+   "tests": "magicPct>0 AND a magic food offset >0 (record) / provision row on page",
+   "true": 72,
+   "false": 2,
+   "falseTowns": [
+    "r2s-insurgency-thorp-2",
+    "r2s-occupied-thorp-0"
+   ]
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "magicPct=1 rounding ghost with zero magic food in two thorps"
+ },
+ {
+  "id": "DS-ECO-9::HOW THE NEED IS MET: part of it by magic::v2",
+  "verdict": "FALSE",
+  "printsIn": 46,
+  "eyeReads": [
+   {
+    "town": "r2s-wartime-thorp-3",
+    "size": "thorp",
+    "crisis": "wartime",
+    "printed": "Part of Madinatsaray's food is neither grown nor bought, and the table would be thinner without it.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "'+ 1 by divine provision'"
+   },
+   {
+    "town": "rv2-metropolis-wartime-1",
+    "size": "metropolis",
+    "crisis": "wartime",
+    "printed": "Part of Dunfield's food is neither grown nor bought, and the table would be thinner without it.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "'+ 9,746 by arcane provision'"
+   },
+   {
+    "town": "r2s-famine-metropolis-0",
+    "size": "metropolis",
+    "crisis": "famine",
+    "printed": "Part of Ormvoll's food is neither grown nor bought, and the table would be thinner without it.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "'+ 16,722 by druidic provision'"
+   },
+   {
+    "town": "r2s-occupied-thorp-2",
+    "size": "thorp",
+    "crisis": "occupied",
+    "printed": "Part of Shanxian's food is neither grown nor bought, and the table would be thinner without it.",
+    "true": false,
+    "severity": "MED",
+    "kind": "c",
+    "fact": "magicPct=1, magicOffset=0; page 'Production: 63 lbs/day+ 3 importedNeed: 67' - nothing is neither grown nor bought"
+   }
+  ],
+  "script": {
+   "tests": "magicPct>0 AND magic food offset >0",
+   "true": 45,
+   "false": 1,
+   "falseTowns": [
+    "r2s-occupied-thorp-2"
+   ]
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "same magicPct ghost"
+ },
+ {
+  "id": "DS-ECO-9::HOW THE NEED IS MET: part of it by magic::v3",
+  "verdict": "TRUE",
+  "printsIn": 55,
+  "eyeReads": [
+   {
+    "town": "r2s-under_siege-thorp-2",
+    "size": "thorp",
+    "crisis": "under_siege",
+    "printed": "A visitor may not see it, but some of the food on Agioslimani's tables was never grown or bought: it came by spell or by prayer.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "'+ 3 by divine provision' of 12"
+   },
+   {
+    "town": "r2s-succession_void-metropolis-3",
+    "size": "metropolis",
+    "crisis": "succession_void",
+    "printed": "A visitor may not see it, but some of the food on Erdenbalik's tables was never grown or bought: it came by spell or by prayer.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "'+ 3,801 by druidic provision'"
+   },
+   {
+    "town": "r2s-occupied-hamlet-1",
+    "size": "hamlet",
+    "crisis": "occupied+famine",
+    "printed": "A visitor may not see it, but some of the food on Llanhurst's tables was never grown or bought: it came by spell or by prayer.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "'+ 66 by divine provision'"
+   }
+  ],
+  "script": {
+   "tests": "magicPct>0 AND magic food offset >0",
+   "true": 55,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "true"
+ },
+ {
+  "id": "DS-ECO-9::FOOD SOURCES: one source::v1",
+  "verdict": "TRUE",
+  "printsIn": 140,
+  "eyeReads": [
+   {
+    "town": "r2r-thorp-37",
+    "size": "thorp",
+    "crisis": "calm",
+    "printed": "Cnocton's own food comes from its herds and little else, so one bad year for the herds would cost the whole thorp dear.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "foodSources [livestock] -> herds"
+   },
+   {
+    "town": "rv2-metropolis-under_siege-21",
+    "size": "metropolis",
+    "crisis": "under_siege",
+    "printed": "Its own food comes from its grain harvest and little else, so one bad year for the grain harvest would cost the whole metropolis dear.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "foodSources [grain]"
+   },
+   {
+    "town": "r2s-insurgency-town-0",
+    "size": "town",
+    "crisis": "insurgency",
+    "printed": "Al-para's own food comes from its mill and little else, so one bad year for the mill would cost the whole town dear.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "h",
+    "fact": "foodSources ['mill']: 'one bad year for the mill' - a mill is not a harvest"
+   }
+  ],
+  "script": {
+   "tests": "foodSources has exactly one entry and the printed good matches it",
+   "true": 140,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": "{good}='mill' in 1 town reads 'a bad year for the mill' (LOW)",
+  "machinery": null,
+  "note": "true"
+ },
+ {
+  "id": "DS-ECO-9::FOOD SOURCES: one source::v2",
+  "verdict": "TRUE",
+  "printsIn": 192,
+  "eyeReads": [
+   {
+    "town": "r2r-metropolis-58",
+    "size": "metropolis",
+    "crisis": "calm",
+    "printed": "The food Eldmark raises for itself all goes back to the fishing, and after a poor season for the fishing there is less to go round.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "foodSources [fish]"
+   },
+   {
+    "town": "r2s-famine-metropolis-1",
+    "size": "metropolis",
+    "crisis": "famine",
+    "printed": "The food Hongji raises for itself all goes back to the fishing, and after a poor season for the fishing there is less to go round.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "c",
+    "fact": "just before: 'The fishing failed this year and took most of Hongji's own food'; 'after a poor season ... less to go round' understates a failed source"
+   },
+   {
+    "town": "rv2-thorp-under_siege+famine-1",
+    "size": "thorp",
+    "crisis": "under_siege+famine",
+    "printed": "The food Mingtian raises for itself all goes back to the fishing, and after a poor season for the fishing there is less to go round.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "c",
+    "fact": "'With the fishing gone...' then 'less to go round'"
+   }
+  ],
+  "script": {
+   "tests": "foodSources has one entry and the printed good matches it",
+   "true": 192,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": "lacks 'no crisis: famine' (both siblings carry it); prints in 31 famine towns, where it reads as an understatement right after the famine line (LOW, not false)",
+  "slotOrAgreement": "{good}='mill' in 5 towns ('goes back to the mill', LOW)",
+  "machinery": null,
+  "note": "true; the missing famine guard matters only as tone"
+ },
+ {
+  "id": "DS-ECO-9::FOOD SOURCES: one source::v3",
+  "verdict": "TRUE",
+  "printsIn": 116,
+  "eyeReads": [
+   {
+    "town": "rww-thorp-under_siege-1",
+    "size": "thorp",
+    "crisis": "under_siege",
+    "printed": "Belovich has little food of its own but its fishing, so a bad season for the fishing is felt at every table.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "foodSources [fish]"
+   },
+   {
+    "town": "r2r-metropolis-13",
+    "size": "metropolis",
+    "crisis": "calm",
+    "printed": "The metropolis has little food of its own but its fishing, so a bad season for the fishing is felt at every table.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "foodSources [fish]"
+   },
+   {
+    "town": "r2s-under_siege-city-0",
+    "size": "city",
+    "crisis": "under_siege",
+    "printed": "The city has little food of its own but its fishing, so a bad season for the fishing is felt at every table.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "foodSources [fish]"
+   }
+  ],
+  "script": {
+   "tests": "foodSources has one entry and the printed good matches it",
+   "true": 116,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": [
+   {
+    "town": "rww-city-insurgency-1",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": "LOW",
+    "fact": "now 'has little food of its own but its grain harvest' (own food = grain only); grows 9,104 of 13,852, so a hasty reader could take 'little food of its own' literally (LOW)"
+   },
+   {
+    "town": "rww-metropolis-under_siege-1",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": null,
+    "fact": "herds 4,758 lbs/day is its only own food; no longer contradicts the provision line"
+   }
+  ],
+  "twinMissingCondition": null,
+  "slotOrAgreement": "{good}='mill' in 2 towns (LOW)",
+  "machinery": null,
+  "note": "true"
+ },
+ {
+  "id": "DS-SUP-2::UPSTREAM WEAK: a chain the town's work draws on is failing::v1",
+  "verdict": "TRUE",
+  "printsIn": 90,
+  "eyeReads": [
+   {
+    "town": "r2r-town-42",
+    "size": "town",
+    "crisis": "calm",
+    "printed": "Some of Navaabad's work draws on its smelting, which is in trouble itself, so the work that depends on it is at risk too.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "c",
+    "fact": "upstream smelting status 'vulnerable' (dependency 'would impair' under siege), not failing; weapons_armor upstreamNote says 'impaired'"
+   },
+   {
+    "town": "r2s-succession_void-metropolis-3",
+    "size": "metropolis",
+    "crisis": "succession_void",
+    "printed": "Some of Erdenbalik's work draws on its cartography, which is in trouble itself, so the work that depends on it is at risk too.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "c",
+    "fact": "cartography status vulnerable"
+   },
+   {
+    "town": "r2r-metropolis-14",
+    "size": "metropolis",
+    "crisis": "under_siege",
+    "printed": "Some of Prabhapeta's work draws on its livestock, which is in trouble itself, so the work that depends on it is at risk too.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "livestock vulnerable under a siege that took the outlying fields"
+   }
+  ],
+  "script": {
+   "tests": "the named {chain} is the first activeChains[].upstreamWeak token and that chain's status is not running/operational",
+   "true": 90,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "75/90 named chains are only 'vulnerable'; 'in trouble itself' is a stretch there (LOW)"
+ },
+ {
+  "id": "DS-SUP-2::UPSTREAM WEAK: a chain the town's work draws on is failing::v2",
+  "verdict": "TRUE",
+  "printsIn": 81,
+  "eyeReads": [
+   {
+    "town": "rww-metropolis-calm-1",
+    "size": "metropolis",
+    "crisis": "calm",
+    "printed": "Trouble in Temürger's cartography puts what depends on it at risk.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "c",
+    "fact": "cartography 'Vulnerable' on page; 'Trouble in ... cartography' overstates"
+   },
+   {
+    "town": "rww-metropolis-wartime-1",
+    "size": "metropolis",
+    "crisis": "wartime",
+    "printed": "Trouble in Jalaliin's precious metals mining puts what depends on it at risk.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "c",
+    "fact": "cartography vulnerable"
+   },
+   {
+    "town": "rww-city-recently_betrayed-1",
+    "size": "city",
+    "crisis": "recently_betrayed",
+    "printed": "Trouble in Qaryatqala's smelting puts what depends on it at risk.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "food processing is the upstream, now named as such"
+   }
+  ],
+  "script": {
+   "tests": "named chain is the upstreamWeak token and its status is not running/operational",
+   "true": 81,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": [
+   {
+    "town": "rww-city-recently_betrayed-1",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": "LOW",
+    "fact": "now names food processing as the troubled upstream, not as short of its own upstream; status 'vulnerable'"
+   },
+   {
+    "town": "rww-metropolis-calm-1",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": "LOW",
+    "fact": "cartography is now the upstream whose trouble puts dependents at risk; status vulnerable"
+   },
+   {
+    "town": "rww-metropolis-wartime-1",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": "LOW",
+    "fact": "same"
+   }
+  ],
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "72/81 'vulnerable' (LOW stretch)"
+ },
+ {
+  "id": "DS-ECO-10::POSTURE: entrepot::v4",
+  "verdict": "TRUE",
+  "printsIn": 5,
+  "eyeReads": [
+   {
+    "town": "r2s-under_siege-city-0",
+    "size": "city",
+    "crisis": "under_siege",
+    "printed": "Some of Bellaurbs's trade was in other towns' goods passing through, and the siege has stopped that trade.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "isEntrepot true, 8 entrepôt chains, Port Duties 16%"
+   },
+   {
+    "town": "rv2-metropolis-under_siege-28",
+    "size": "metropolis",
+    "crisis": "under_siege",
+    "printed": "Some of Morkvik's trade was in other towns' goods passing through, and the siege has stopped that trade.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Entrepôt Trade 11%"
+   },
+   {
+    "town": "r2r-metropolis-14",
+    "size": "metropolis",
+    "crisis": "under_siege",
+    "printed": "Some of Prabhapeta's trade was in other towns' goods passing through, and the siege has stopped that trade.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Entrepôt Trade 10%, Toll 8%"
+   }
+  ],
+  "script": {
+   "tests": "isEntrepot true and siege in force",
+   "true": 5,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": [
+   {
+    "town": "r2s-under_siege-city-0",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": null,
+    "fact": "'Some of ... trade was in other towns' goods' fits isEntrepot with 8 entrepôt chains"
+   }
+  ],
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "true"
+ },
+ {
+  "id": "DS-ECO-10::POSTURE: established::v1",
+  "verdict": "TRUE",
+  "printsIn": 95,
+  "eyeReads": [
+   {
+    "town": "r2s-infiltrated-thorp-3",
+    "size": "thorp",
+    "crisis": "calm",
+    "printed": "Kaltenwiese sells more than one thing beyond the thorp.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "d",
+    "fact": "pop 6 with 6 listed exports"
+   },
+   {
+    "town": "r2r-metropolis-8",
+    "size": "metropolis",
+    "crisis": "calm",
+    "printed": "Langenberg sells more than one thing beyond the metropolis.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "exports >=2"
+   },
+   {
+    "town": "r2s-occupied-city-3",
+    "size": "city",
+    "crisis": "occupied",
+    "printed": "Muulchihua sells more than one thing beyond the city.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "exports >=2"
+   }
+  ],
+  "script": {
+   "tests": "posture established: exports>=2, not entrepôt, not isolated, no siege",
+   "true": 95,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": "lacks 'no crisis: under_siege'; never prints under a siege (its 'no hunger' keeps it out) - does not matter now",
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "true"
+ },
+ {
+  "id": "DS-ECO-10::POSTURE: established::v3",
+  "verdict": "TRUE",
+  "printsIn": 100,
+  "eyeReads": [
+   {
+    "town": "r2r-thorp-59",
+    "size": "thorp",
+    "crisis": "calm",
+    "printed": "There is always something going out, and not always the same thing.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "7 exports"
+   },
+   {
+    "town": "r2s-mass_migration-metropolis-3",
+    "size": "metropolis",
+    "crisis": "mass_migration",
+    "printed": "There is always something going out, and not always the same thing.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "many exports"
+   },
+   {
+    "town": "r2s-occupied-town-0",
+    "size": "town",
+    "crisis": "occupied",
+    "printed": "There is always something going out, and not always the same thing.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "exports>=2"
+   }
+  ],
+  "script": {
+   "tests": "established posture, no siege/famine",
+   "true": 100,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "true"
+ },
+ {
+  "id": "DS-ECO-10::POSTURE: established::v5",
+  "verdict": "TRUE",
+  "printsIn": 110,
+  "eyeReads": [
+   {
+    "town": "r2r-thorp-36",
+    "size": "thorp",
+    "crisis": "calm",
+    "printed": "Buyers from outside come to Cnocbridge for more than one thing.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "d",
+    "fact": "pop 5: 'buyers from outside come' is a stretch, but 5 exports listed"
+   },
+   {
+    "town": "rv2-metropolis-indebted-1",
+    "size": "metropolis",
+    "crisis": "indebted",
+    "printed": "Buyers from outside come to Weigang for more than one thing.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "exports>=2"
+   },
+   {
+    "town": "r2s-famine-metropolis-0",
+    "size": "metropolis",
+    "crisis": "famine",
+    "printed": "Buyers from outside come to Ormvoll for more than one thing.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "famine does not stop buyers"
+   }
+  ],
+  "script": {
+   "tests": "established posture, no siege",
+   "true": 110,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "true"
+ },
+ {
+  "id": "DS-ECO-10::POSTURE: established::v7",
+  "verdict": "TRUE",
+  "printsIn": 24,
+  "eyeReads": [
+   {
+    "town": "rw3-hamlet-under_siege-1",
+    "size": "hamlet",
+    "crisis": "under_siege",
+    "printed": "Lidostagnum had several trades selling outward before the siege, and none of them can reach a buyer now.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "e",
+    "fact": "exports are three fish products (one trade) - 'several trades' a stretch"
+   },
+   {
+    "town": "r2r-village-21",
+    "size": "village",
+    "crisis": "under_siege",
+    "printed": "Rotbrücke had several trades selling outward before the siege, and none of them can reach a buyer now.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "exports>=2"
+   },
+   {
+    "town": "r2s-under_siege-metropolis-3",
+    "size": "metropolis",
+    "crisis": "under_siege",
+    "printed": "Andronrion had several trades selling outward before the siege, and none of them can reach a buyer now.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "c",
+    "fact": "teleportation circle (impaired) still runs"
+   }
+  ],
+  "script": {
+   "tests": "established posture and siege in force",
+   "true": 24,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "true"
+ },
+ {
+  "id": "DS-ECO-1::COMBINATION C4: a low rung on a working approach::v2",
+  "verdict": "TRUE",
+  "printsIn": 110,
+  "eyeReads": [
+   {
+    "town": "r2s-politically_fractured-thorp-0",
+    "size": "thorp",
+    "crisis": "calm",
+    "printed": "Some trade comes past Langhof, and little of it stops.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Poor/Struggling on a working approach"
+   },
+   {
+    "town": "r2s-wartime-metropolis-2",
+    "size": "metropolis",
+    "crisis": "wartime",
+    "printed": "Some trade comes past Nanwan, and little of it stops.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "low rung"
+   },
+   {
+    "town": "r2s-famine-metropolis-0",
+    "size": "metropolis",
+    "crisis": "famine",
+    "printed": "Some trade comes past Ormvoll, and little of it stops.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "low rung"
+   }
+  ],
+  "script": {
+   "tests": "low rung, working access, no siege/plague",
+   "true": 110,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "true"
+ },
+ {
+  "id": "DS-ECO-1::COMBINATION C4: a low rung on a working approach::v3",
+  "verdict": "FALSE",
+  "printsIn": 41,
+  "eyeReads": [
+   {
+    "town": "rv2-hamlet-mass_migration-1",
+    "size": "hamlet",
+    "crisis": "mass_migration",
+    "printed": "Mayantepec's market sells little, though the river is busy; most of the traffic does not stop, and the traders here are poor.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "one 'Periodic market'"
+   },
+   {
+    "town": "r2s-occupied-metropolis-1",
+    "size": "metropolis",
+    "crisis": "occupied",
+    "printed": "Dionpetra's market sells little, though the crossroads is busy; most of the traffic does not stop, and the traders here are poor.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "record: District markets (5-10), Multiple market squares, Major annual fairs; first Income line right below: 'Market Taxes 21% ... a major civic revenue stream across the urban districts'"
+   },
+   {
+    "town": "r2s-famine-city-1",
+    "size": "city",
+    "crisis": "famine",
+    "printed": "Skaldhammer's market sells little, though the crossroads is busy; most of the traffic does not stop, and the traders here are poor.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "Daily markets, Multiple market squares, Major annual fairs; Market Taxes 20%, the largest income"
+   }
+  ],
+  "script": {
+   "tests": "market present, low rung, no siege/plague; FALSE where tier is city/metropolis and Market Taxes is the top income line (one small market that 'sells little' against many markets and a leading market revenue)",
+   "true": 25,
+   "false": 16,
+   "falseTowns": [
+    "r2r-city-44",
+    "r2s-famine-city-1",
+    "r2s-famine-city-2",
+    "r2s-famine-metropolis-2",
+    "r2s-occupied-city-1",
+    "r2s-occupied-city-2",
+    "r2s-occupied-city-3",
+    "r2s-occupied-metropolis-0",
+    "r2s-occupied-metropolis-1",
+    "r2s-politically_fractured-city-0",
+    "r2s-politically_fractured-city-2",
+    "rv2-city-occupied-2",
+    "rv2-metropolis-famine-1",
+    "rv2-metropolis-occupied-1",
+    "rv2-metropolis-occupied-2",
+    "rww-city-famine-1"
+   ]
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "true for towns/villages/hamlets with one weekly/periodic market; false in cities and metropolises"
+ },
+ {
+  "id": "DS-ECO-1::COMBINATION C4: a low rung on a working approach::v6",
+  "verdict": "TRUE",
+  "printsIn": 84,
+  "eyeReads": [
+   {
+    "town": "r2r-thorp-37",
+    "size": "thorp",
+    "crisis": "calm",
+    "printed": "There is no market at Cnocton to hold the trade that passes by, and the thorp stays poor while the trade goes on its way.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "no market; page 'No market or fair stands in Cnocton'"
+   },
+   {
+    "town": "r2s-infiltrated-village-2",
+    "size": "village",
+    "crisis": "calm",
+    "printed": "There is no market at Bayarserai to hold the trade that passes by, and the village stays poor while the trade goes on its way.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "no market institution"
+   },
+   {
+    "town": "rv2-hamlet-famine-1",
+    "size": "hamlet",
+    "crisis": "famine",
+    "printed": "There is no market at Dunkelhain to hold the trade that passes by, and the hamlet stays poor while the trade goes on its way.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "no market"
+   }
+  ],
+  "script": {
+   "tests": "no market/fair institution, low rung, no siege/plague",
+   "true": 84,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "agrees with the page's 'No market or fair stands' line"
+ },
+ {
+  "id": "DS-ECO-6::TIER: minor shadow activity (≥3)::v0",
+  "verdict": "TRUE",
+  "printsIn": 54,
+  "eyeReads": [
+   {
+    "town": "r2r-thorp-16",
+    "size": "thorp",
+    "crisis": "calm",
+    "printed": "Some petty theft goes on here, and some trading without a licence.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "b",
+    "fact": "record has 'Outlaw shelter' and 'Local fence', black_market chain Operational - 'nothing more' a stretch"
+   },
+   {
+    "town": "r2s-wartime-town-1",
+    "size": "town",
+    "crisis": "wartime",
+    "printed": "Some petty theft goes on here, and some trading without a licence.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "capture 6%, no criminal institutions"
+   },
+   {
+    "town": "rww-town-occupied-1",
+    "size": "town",
+    "crisis": "occupied",
+    "printed": "Some petty theft goes on here, and some trading without a licence.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "capture 7%"
+   }
+  ],
+  "script": {
+   "tests": "blackMarketCapture 3-14, no criminal institutions, no famine/siege",
+   "true": 50,
+   "false": 4,
+   "falseTowns": [
+    "r2r-thorp-16",
+    "r2s-slave_revolt-hamlet-3",
+    "r2s-succession_void-hamlet-3",
+    "rv2-thorp-monster_pressure-1"
+   ]
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "the 4 script misses hold only a fence or an outlaw shelter: LOW"
+ },
+ {
+  "id": "DS-ECO-9::HOW THE NEED IS MET: much of it brought in::v1",
+  "verdict": "TRUE",
+  "printsIn": 80,
+  "eyeReads": [
+   {
+    "town": "rw3-thorp-famine-1",
+    "size": "thorp",
+    "crisis": "famine",
+    "printed": "Food carts come into Chichek most days, and they matter: a good part of what the thorp eats is grown elsewhere and brought in.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "imports 40% of need; 'carts bring in most of the rest'"
+   },
+   {
+    "town": "r2s-mass_migration-metropolis-3",
+    "size": "metropolis",
+    "crisis": "mass_migration",
+    "printed": "Food carts come into Balgill most days, and they matter: a good part of what the metropolis eats is grown elsewhere and brought in.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "imports >=20%"
+   },
+   {
+    "town": "r2s-occupied-metropolis-1",
+    "size": "metropolis",
+    "crisis": "occupied",
+    "printed": "Food carts come into Dionpetra most days, and they matter: a good part of what the metropolis eats is grown elsewhere and brought in.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "imports >=20%"
+   }
+  ],
+  "script": {
+   "tests": "normalImportPct>=20 and live import share>=20%, no plague",
+   "true": 80,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "13 port towns say 'Food carts' while the food line says ships - LOW at most"
+ },
+ {
+  "id": "DS-ECO-9::HOW THE NEED IS MET: much of it brought in::v2",
+  "verdict": "FALSE",
+  "printsIn": 79,
+  "eyeReads": [
+   {
+    "town": "rv2-thorp-famine-1",
+    "size": "thorp",
+    "crisis": "famine",
+    "printed": "The thorp grows only part of what it eats; the rest comes in from the farms around it and from trade.",
+    "true": false,
+    "severity": "MED",
+    "kind": "c",
+    "fact": "gapPct 29: 'Many households go short' vs 'the rest comes in'"
+   },
+   {
+    "town": "r2r-village-24",
+    "size": "village",
+    "crisis": "famine",
+    "printed": "Shandao grows only part of what it eats; the rest comes in from the farms around it and from trade.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "line above: 'carts bring in a little of the rest. Most households go short'; 'Short: 231 lbs/day' of 550"
+   },
+   {
+    "town": "r2r-metropolis-10",
+    "size": "metropolis",
+    "crisis": "calm",
+    "printed": "Ulfgarde grows only part of what it eats; the rest comes in from the farms around it and from trade.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "gap 0, imports cover the rest"
+   }
+  ],
+  "script": {
+   "tests": "normalImportPct>=20, no plague, and gapPct<10 (the rest really does come in)",
+   "true": 70,
+   "false": 9,
+   "falseTowns": [
+    "r2r-hamlet-16",
+    "r2r-village-24",
+    "r2r-village-58",
+    "r2s-famine-thorp-0",
+    "r2s-famine-thorp-2",
+    "r2s-famine-town-2",
+    "r2s-famine-village-0",
+    "rv2-city-famine-2",
+    "rv2-thorp-famine-1"
+   ]
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "false under famine where a fifth to two-fifths of need goes unmet"
+ },
+ {
+  "id": "DS-ECO-10::POSTURE: vulnerable::v1",
+  "verdict": "FALSE",
+  "printsIn": 8,
+  "eyeReads": [
+   {
+    "town": "r2r-town-54",
+    "size": "town",
+    "crisis": "calm",
+    "printed": "Erdenbuurt has goods to sell and no dependable way to move them. The exports are real and the road they leave by is not.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "same tab: 'carts bring in most of the rest' (1,029 lbs/day, via teleportation circle) vs 'no dependable way to move them'"
+   },
+   {
+    "town": "r2r-metropolis-9",
+    "size": "metropolis",
+    "crisis": "calm",
+    "printed": "Satyagarh has goods to sell and no dependable way to move them. The exports are real and the road they leave by is not.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "c",
+    "fact": "isolated, but airship traffic carries 45% of food"
+   },
+   {
+    "town": "r2s-mass_migration-town-2",
+    "size": "town",
+    "crisis": "mass_migration",
+    "printed": "Shivanand has goods to sell and no dependable way to move them. The exports are real and the road they leave by is not.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "isolated, minor routes only"
+   }
+  ],
+  "script": {
+   "tests": "posture vulnerable (isolated, exports>=1, no siege); FALSE where the page's food line says carts bring in most/nearly all/about half the rest",
+   "true": 7,
+   "false": 1,
+   "falseTowns": [
+    "r2r-town-54"
+   ]
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "isolated towns with teleport/airship channels; only one page also claims carts"
+ },
+ {
+  "id": "DS-ECO-10::POSTURE: vulnerable::v2",
+  "verdict": "NEVER PRINTS",
+  "printsIn": 0,
+  "eyeReads": [],
+  "script": {
+   "tests": "none",
+   "true": 0,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "no prints"
+ },
+ {
+  "id": "DS-ECO-10::POSTURE: vulnerable::v3",
+  "verdict": "FALSE",
+  "printsIn": 9,
+  "eyeReads": [
+   {
+    "town": "r2r-town-12",
+    "size": "town",
+    "crisis": "recently_betrayed",
+    "printed": "Qasrtappa has goods to sell, but the way out is unreliable, and a trader never knows whether a load will get through.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "same tab: 'carts bring in most of the rest' vs 'a trader never knows whether a load will get through'"
+   },
+   {
+    "town": "r2r-city-48",
+    "size": "city",
+    "crisis": "calm",
+    "printed": "Vishnumala has goods to sell, but the way out is unreliable, and a trader never knows whether a load will get through.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "'carts bring in nearly all the rest' (7,726 lbs/day) on the same tab"
+   },
+   {
+    "town": "r2r-metropolis-54",
+    "size": "metropolis",
+    "crisis": "calm",
+    "printed": "Izamtepec has goods to sell, but the way out is unreliable, and a trader never knows whether a load will get through.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "c",
+    "fact": "airship traffic carries 52% of food; no cart line on the page"
+   }
+  ],
+  "script": {
+   "tests": "posture vulnerable, no siege; FALSE where the page's food line says carts bring in most/nearly all/about half the rest",
+   "true": 2,
+   "false": 7,
+   "falseTowns": [
+    "r2r-city-20",
+    "r2r-city-48",
+    "r2r-metropolis-56",
+    "r2r-town-12",
+    "r2r-town-9",
+    "rv2-metropolis-plague_onset-2",
+    "rv2-metropolis-wartime-1"
+   ]
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "these isolated towns are fed by teleport/airship and the food line calls it carts; that line or this one must go"
+ },
+ {
+  "id": "DS-ECO-9::DEFICIT::v5",
+  "verdict": "FALSE",
+  "printsIn": 22,
+  "eyeReads": [
+   {
+    "town": "r2s-under_siege-thorp-3",
+    "size": "thorp",
+    "crisis": "under_siege",
+    "printed": "Nothing has come into Tailing since the siege closed the roads, and what the thorp can still grow is not near enough.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Production 4, Need 14, no imports"
+   },
+   {
+    "town": "r2s-under_siege-city-1",
+    "size": "city",
+    "crisis": "under_siege",
+    "printed": "Nothing has come into Torrivilla since the siege closed the roads, and what the city can still grow is not near enough.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "no import channel"
+   },
+   {
+    "town": "rw3-metropolis-under_siege-1",
+    "size": "metropolis",
+    "crisis": "under_siege",
+    "printed": "Nothing has come into Hochfurt since the siege closed the roads, and what the metropolis can still grow is not near enough.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "importCoverage 68,834 via 'airship runs (impaired by siege)'; page '+ 68,834 imported' and 'carts bring in a little of the rest' just above"
+   }
+  ],
+  "script": {
+   "tests": "siege and no import channel carrying >=1% of need",
+   "true": 18,
+   "false": 4,
+   "falseTowns": [
+    "r2s-under_siege-town-2",
+    "rv2-metropolis-under_siege-22",
+    "rv2-metropolis-under_siege-24",
+    "rw3-metropolis-under_siege-1"
+   ]
+  },
+  "prior": [
+   {
+    "town": "rw3-metropolis-under_siege-1",
+    "state": "STILL-FALSE",
+    "nowPrints": null,
+    "nowTrue": false,
+    "severity": "MED",
+    "fact": "'+ 68,834 imported', 'carts bring in a little of the rest' two lines above; importChannel airship runs"
+   }
+  ],
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "same root as the C4 siege lines: a magic import channel open through the siege"
+ },
+ {
+  "id": "DS-ECO-9::IMPORT-DEPENDENT::v5",
+  "verdict": "FALSE",
+  "printsIn": 3,
+  "eyeReads": [
+   {
+    "town": "r2s-under_siege-hamlet-2",
+    "size": "hamlet",
+    "crisis": "under_siege",
+    "printed": "Whatever Kilshaw used to buy for its table, none of it has come since the siege closed the roads.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "no imports in Production row"
+   },
+   {
+    "town": "r2s-under_siege-city-0",
+    "size": "city",
+    "crisis": "under_siege",
+    "printed": "Whatever Bellaurbs used to buy for its table, none of it has come since the siege closed the roads.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "'+ 6,422 imported', 'ships bring in a little of the rest' two lines above; channel teleportation circle"
+   },
+   {
+    "town": "r2s-under_siege-metropolis-3",
+    "size": "metropolis",
+    "crisis": "under_siege",
+    "printed": "Whatever Andronrion used to buy for its table, none of it has come since the siege closed the roads.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "'+ 22,719 imported', 'boats bring in a little of the rest'"
+   }
+  ],
+  "script": {
+   "tests": "siege and no import channel carrying >=1% of need",
+   "true": 1,
+   "false": 2,
+   "falseTowns": [
+    "r2s-under_siege-city-0",
+    "r2s-under_siege-metropolis-3"
+   ]
+  },
+  "prior": [
+   {
+    "town": "r2s-under_siege-city-0",
+    "state": "STILL-FALSE",
+    "nowPrints": null,
+    "nowTrue": false,
+    "severity": "MED",
+    "fact": "'+ 6,422 imported' / 'ships bring in a little of the rest'"
+   },
+   {
+    "town": "r2s-under_siege-metropolis-3",
+    "state": "STILL-FALSE",
+    "nowPrints": null,
+    "nowTrue": false,
+    "severity": "MED",
+    "fact": "'+ 22,719 imported' / 'boats bring in a little of the rest'"
+   }
+  ],
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "unchanged text, unchanged fault"
+ }
+]

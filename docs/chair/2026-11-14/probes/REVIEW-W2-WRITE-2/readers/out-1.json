@@ -1,0 +1,1237 @@
+[
+ {
+  "id": "DS-DEF-2::Beasts & Monsters: plagued, perimeter AND organized force::v3",
+  "verdict": "TRUE",
+  "printsIn": 46,
+  "eyeReads": [
+   {
+    "town": "r2s-under_siege-thorp-2",
+    "size": "thorp 6",
+    "crisis": "under_siege",
+    "printed": "Agioslimani's walls and fighters face the creatures season after season.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "a",
+    "fact": "palisade + household levy of 6 called \"walls and fighters\"; lattice rule: a palisade is never called walls"
+   },
+   {
+    "town": "r2r-metropolis-12",
+    "size": "metropolis 142760",
+    "crisis": "calm",
+    "printed": "Kaltenplatz's walls and fighters face the creatures season after season.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Massive walls, Citadel, Multiple garrisons; plagued"
+   },
+   {
+    "town": "r2r-thorp-1",
+    "size": "thorp 30",
+    "crisis": "occupied",
+    "printed": "Terrapolis's walls and fighters face the creatures season after season.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "c",
+    "fact": "occupied: page \"the arms in the thorp are theirs [occupiers]\"; palisade called walls"
+   }
+  ],
+  "script": {
+   "tests": "walls (any enclosure, via defenseFactsOf) AND garrison|militia AND monsterThreat plagued; LOW flag where the enclosure is a palisade (line says \"walls\")",
+   "true": 46,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": "\"walls\" printed for a palisade-only enclosure (26 towns)",
+  "machinery": null,
+  "note": "True structurally; \"walls\" for a palisade in 26 of 46 towns (LOW)."
+ },
+ {
+  "id": "DS-DEF-2::Beasts & Monsters: plagued, perimeter AND organized force::v4",
+  "verdict": "TRUE",
+  "printsIn": 47,
+  "eyeReads": [
+   {
+    "town": "rww-thorp-under_siege-1",
+    "size": "thorp 5",
+    "crisis": "under_siege",
+    "printed": "Belovich keeps its wall against the creatures, and nobody walks out past it unarmed.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "c",
+    "fact": "thorp of 5, palisade + levy; siege: besiegers \"let nobody through\" - nobody walks out at all"
+   },
+   {
+    "town": "r2s-occupied-metropolis-1",
+    "size": "metropolis 105466",
+    "crisis": "occupied",
+    "printed": "Dionpetra keeps its wall against the creatures, and nobody walks out past it unarmed.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "c",
+    "fact": "occupied: \"locals are not trusted to help\"; armed exits in a metropolis of 105k a stretch"
+   },
+   {
+    "town": "r2r-hamlet-16",
+    "size": "hamlet 20",
+    "crisis": "famine",
+    "printed": "Oxteha keeps its wall against the creatures, and nobody walks out past it unarmed.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "hamlet of 20, palisade + citizen militia, famine"
+   }
+  ],
+  "script": {
+   "tests": "wall AND garrison|militia AND plagued; LOW flag under siege/occupation",
+   "true": 47,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": [
+   {
+    "town": "rww-thorp-under_siege-1",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": "LOW",
+    "fact": "new text drops \"manned day and night\"; palisade exists; same page still \"needs specialists against the creatures\" (not contradicted)"
+   }
+  ],
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "Reword cured the \"manned day and night\" claim."
+ },
+ {
+  "id": "DS-DEF-2::Invasion & War: walls AND professional garrison::v1",
+  "verdict": "TRUE",
+  "printsIn": 96,
+  "eyeReads": [
+   {
+    "town": "r2r-town-13",
+    "size": "town 1671",
+    "crisis": "mass_migration",
+    "printed": "Vatankher keeps paid soldiers behind its walls, so raiders keep their distance and an army would pay dearly; a long siege would be another matter.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Town walls, Citadel, Barracks; mass_migration"
+   },
+   {
+    "town": "r2s-succession_void-metropolis-3",
+    "size": "metropolis 295750",
+    "crisis": "succession_void",
+    "printed": "Erdenbalik keeps paid soldiers behind its walls, so raiders keep their distance and an army would pay dearly; a long siege would be another matter.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "pop 295750, Massive walls, Multiple garrisons"
+   },
+   {
+    "town": "r2s-famine-city-0",
+    "size": "city 2909",
+    "crisis": "famine",
+    "printed": "Weizhen keeps paid soldiers behind its walls, so raiders keep their distance and an army would pay dearly; a long siege would be another matter.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "g",
+    "fact": "same row: \"people who would have to hold Weizhen ... are already owed\" vs \"keeps paid soldiers\""
+   }
+  ],
+  "script": {
+   "tests": "stone walls AND garrison AND no siege/occupation; LOW flag where the Defense tab says pay is late/owed/underpaid",
+   "true": 96,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "\"Paid soldiers\" reads as professionals; 26 towns print pay trouble nearby (LOW)."
+ },
+ {
+  "id": "DS-DEF-2::Invasion & War: neither walls nor force::v2",
+  "verdict": "TRUE",
+  "printsIn": 106,
+  "eyeReads": [
+   {
+    "town": "r2r-thorp-59",
+    "size": "thorp 7",
+    "crisis": "calm",
+    "printed": "Nothing has come for Prabhapura, and nothing about the thorp would stop whatever did.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "thorp of 7, heartland, no defence"
+   },
+   {
+    "town": "r2r-town-58",
+    "size": "town 2468",
+    "crisis": "calm",
+    "printed": "Nothing has come for Ainkarez, and nothing about the town would stop whatever did.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "b",
+    "fact": "Town watch present; line says nothing would stop whatever came (watch twin v7 exists)"
+   },
+   {
+    "town": "rww-hamlet-famine-1",
+    "size": "hamlet 51",
+    "crisis": "famine",
+    "printed": "Nothing has come for Ulfset, and nothing about the hamlet would stop whatever did.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "c",
+    "fact": "famine; tab \"The hamlet may not come through this crisis\" beside \"Its safety rests on...\" (row is Invasion & War)"
+   }
+  ],
+  "script": {
+   "tests": "no walls, no garrison, no militia, no threat-family crisis; LOW flag watch present or wartime",
+   "true": 106,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": [
+   {
+    "town": "rww-hamlet-famine-1",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": "LOW",
+    "fact": "\"Nothing threatens X now\" became \"Nothing has come for X\" - true of the Invasion row; famine is not an attacker"
+   },
+   {
+    "town": "rww-hamlet-mass_migration-1",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": null,
+    "fact": "migrants have come, none came \"for\" the hamlet; no attack in record"
+   }
+  ],
+  "twinMissingCondition": "v2 lacks \"no watch\" (v1/v4/v5/v6 carry it, v7 is the watch twin): prints in 9 watch towns; LOW",
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "LOW: 9 watch towns, 4 wartime towns."
+ },
+ {
+  "id": "DS-DEF-2::Invasion & War: neither walls nor force::v4",
+  "verdict": "FALSE",
+  "printsIn": 32,
+  "eyeReads": [
+   {
+    "town": "r2r-thorp-58",
+    "size": "thorp 7",
+    "crisis": "under_siege",
+    "printed": "Tallpatan has no line and no force, and danger is close at hand.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "c",
+    "fact": "thorp of 7 under siege: \"Every able body ... takes a turn at the lookout\"; \"close at hand\" understates a siege"
+   },
+   {
+    "town": "rv2-village-under_siege+famine-1",
+    "size": "village 374",
+    "crisis": "under_siege+famine",
+    "printed": "Edznacoatl has no line and no force, and danger is close at hand.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "c",
+    "fact": "siege+famine: \"Everyone ... who can hold a weapon has a place in the defence\" vs \"no force\""
+   },
+   {
+    "town": "rw3-hamlet-under_siege-1",
+    "size": "hamlet 41",
+    "crisis": "under_siege",
+    "printed": "Lidostagnum has no line and no force, and danger is close at hand.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "roster: Adventurers' charter hall - \"with no garrison to call on it musters the defence\"; line: \"no force\""
+   }
+  ],
+  "script": {
+   "tests": "no walls/garrison/militia/watch AND no charter hall (page: charter hall \"musters the defence\") AND threat crisis",
+   "true": 31,
+   "false": 1,
+   "falseTowns": [
+    "rw3-hamlet-under_siege-1"
+   ]
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "MED in rw3-hamlet-under_siege-1 (charter hall musters the defence); siege understatement LOW elsewhere."
+ },
+ {
+  "id": "DS-DEF-2::Invasion & War: neither walls nor force::v6",
+  "verdict": "FALSE",
+  "printsIn": 8,
+  "eyeReads": [
+   {
+    "town": "r2s-monster_pressure-thorp-3",
+    "size": "thorp 10",
+    "crisis": "monster_pressure",
+    "printed": "You find Chalmul with no wall and nobody under arms, and its people keeping close to home until the danger passes.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "thorp of 10, no defence; \"every household watches its own edge\""
+   },
+   {
+    "town": "r2s-monster_pressure-village-0",
+    "size": "village 267",
+    "crisis": "monster_pressure",
+    "printed": "You find Dharmagiri with no wall and nobody under arms, and its people keeping close to home until the danger passes.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "village of 267; \"has nobody whose work is to stand against the beasts\""
+   },
+   {
+    "town": "r2r-thorp-5",
+    "size": "thorp 23",
+    "crisis": "monster_pressure",
+    "printed": "You find Glenburn with no wall and nobody under arms, and its people keeping close to home until the danger passes.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "line directly above (Beasts row): \"people arming themselves with whatever is at hand\" vs \"nobody under arms\""
+   }
+  ],
+  "script": {
+   "tests": "no walls/garrison/militia AND Defense tab does not say people are \"arming themselves\"",
+   "true": 7,
+   "false": 1,
+   "falseTowns": [
+    "r2r-thorp-5"
+   ]
+  },
+  "prior": [
+   {
+    "town": "rww-hamlet-under_siege-1",
+    "state": "CURED-BY-SILENCE",
+    "nowPrints": "Miroko has no line and no force, and danger is close at hand.",
+    "nowTrue": true,
+    "severity": "LOW",
+    "fact": "v6 now excludes siege; v4 prints; \"close at hand\" understates the siege"
+   },
+   {
+    "town": "rw3-hamlet-under_siege-1",
+    "state": "CURED-BY-SILENCE",
+    "nowPrints": "Lidostagnum has no line and no force, and danger is close at hand.",
+    "nowTrue": false,
+    "severity": "MED",
+    "fact": "roster Adventurers' charter hall \"musters the defence\"; \"Everyone ... who can hold a weapon has a place in the defence\""
+   },
+   {
+    "town": "r2r-hamlet-0",
+    "state": "CURED-BY-SILENCE",
+    "nowPrints": "Spitzsteig has no line and no force, and danger is close at hand.",
+    "nowTrue": true,
+    "severity": "LOW",
+    "fact": "besieged hamlet of 22, no defence; understated"
+   }
+  ],
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "Prints only under monster_pressure now; 1 adjacent contradiction."
+ },
+ {
+  "id": "DS-DEF-2::Invasion & War: neither walls nor force::v8",
+  "verdict": "TRUE",
+  "printsIn": 3,
+  "eyeReads": [
+   {
+    "town": "rv2-town-monster_pressure-1",
+    "size": "town 791",
+    "crisis": "monster_pressure",
+    "printed": "Uaxaccoba has no wall and only its watch, and danger is close at hand.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Town watch only, no wall; beast pressure"
+   },
+   {
+    "town": "r2s-under_siege-town-0",
+    "size": "town 2137",
+    "crisis": "under_siege",
+    "printed": "Ulffoss has no wall and only its watch, and danger is close at hand.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "c",
+    "fact": "siege: \"danger is close at hand\" understates an encirclement"
+   },
+   {
+    "town": "r2s-under_siege-town-1",
+    "size": "town 1339",
+    "crisis": "under_siege",
+    "printed": "Fengling has no wall and only its watch, and danger is close at hand.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "c",
+    "fact": "siege, watch only"
+   }
+  ],
+  "script": {
+   "tests": "no walls/garrison/militia, watch present, threat crisis",
+   "true": 3,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "All 3 true; siege understatement LOW."
+ },
+ {
+  "id": "DS-DEF-2::Internal Security: full legal chain (court AND prison)::v1",
+  "verdict": "TRUE",
+  "printsIn": 91,
+  "eyeReads": [
+   {
+    "town": "r2r-town-0",
+    "size": "town 708",
+    "crisis": "calm",
+    "printed": "Offenders at Farosaltus are arrested, heard and held, and each case is written down, so people expect a hearing, not a beating.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "town 708; page \"A wrong done here goes before the court, and the guilty can be locked up\""
+   },
+   {
+    "town": "r2s-succession_void-metropolis-3",
+    "size": "metropolis 295750",
+    "crisis": "succession_void",
+    "printed": "Offenders at Erdenbalik are arrested, heard and held, and each case is written down, so people expect a hearing, not a beating.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "court + prison"
+   },
+   {
+    "town": "r2s-occupied-town-1",
+    "size": "town 1994",
+    "crisis": "occupied",
+    "printed": "Offenders at Sundnes are arrested, heard and held, and each case is written down, so people expect a hearing, not a beating.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "c",
+    "fact": "occupied: officials \"not from here\"; court and cells still on page"
+   }
+  ],
+  "script": {
+   "tests": "live roster has court AND prison",
+   "true": 91,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "Court and prison in all 91."
+ },
+ {
+  "id": "DS-DEF-2::Internal Security: full legal chain (court AND prison)::v3",
+  "verdict": "TRUE",
+  "printsIn": 103,
+  "eyeReads": [
+   {
+    "town": "r2s-insurgency-town-1",
+    "size": "town 648",
+    "crisis": "insurgency",
+    "printed": "Bring a complaint at Tzulxochitl and it gets a hearing, not a favour.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "town 648; \"A functioning court and prison\""
+   },
+   {
+    "town": "r2r-metropolis-8",
+    "size": "metropolis 344689",
+    "crisis": "succession_void",
+    "printed": "Bring a complaint at Langenberg and it gets a hearing, not a favour.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "pop 344689; tried at court, held in prison"
+   },
+   {
+    "town": "r2s-occupied-city-1",
+    "size": "city 10359",
+    "crisis": "occupied",
+    "printed": "Bring a complaint at Qaranuur and it gets a hearing, not a favour.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "c",
+    "fact": "occupied; court and prison on page"
+   }
+  ],
+  "script": {
+   "tests": "live roster has court AND prison; LOW flag occupied",
+   "true": 103,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "Court and prison in all 103."
+ },
+ {
+  "id": "DS-DEF-2::Internal Security: court without detention::v1",
+  "verdict": "TRUE",
+  "printsIn": 68,
+  "eyeReads": [
+   {
+    "town": "r2s-slave_revolt-town-1",
+    "size": "town 343",
+    "crisis": "slave_revolt",
+    "printed": "Sübeteikotan has nowhere to hold an offender, so the penalties its hearings can hand down are money and exile, and both of them fall unevenly.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "c",
+    "fact": "enslaved \"work under watch\" - held people, though not offenders"
+   },
+   {
+    "town": "r2s-recently_betrayed-city-2",
+    "size": "city 11727",
+    "crisis": "recently_betrayed",
+    "printed": "Gortwick has nowhere to hold an offender, so the penalties its hearings can hand down are money and exile, and both of them fall unevenly.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "b",
+    "fact": "roster Workhouse: \"Not quite a gaol, but the line blurs\""
+   },
+   {
+    "town": "r2s-under_siege-city-1",
+    "size": "city 2679",
+    "crisis": "under_siege",
+    "printed": "Torrivilla has nowhere to hold an offender, so the penalties its hearings can hand down are money and exile, and both of them fall unevenly.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "c",
+    "fact": "siege: exile as a penalty impossible while surrounded"
+   }
+  ],
+  "script": {
+   "tests": "court present, no prison; LOW flag workhouse (\"not quite a gaol\") or siege (exile impossible)",
+   "true": 68,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "Court without prison in all 68; LOW workhouse/siege."
+ },
+ {
+  "id": "DS-DEF-2::Internal Security: court without detention::v3",
+  "verdict": "TRUE",
+  "printsIn": 59,
+  "eyeReads": [
+   {
+    "town": "r2s-succession_void-town-3",
+    "size": "town 321",
+    "crisis": "succession_void",
+    "printed": "The fines Skaldtun hands down cannot be enforced, so each unpaid fine makes the next one easier to ignore.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "c",
+    "fact": "town watch + court, no prison; \"cannot be enforced\" a stretch"
+   },
+   {
+    "town": "r2r-city-58",
+    "size": "city 12733",
+    "crisis": "calm",
+    "printed": "The fines Oxtechihua hands down cannot be enforced, so each unpaid fine makes the next one easier to ignore.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "c",
+    "fact": "city 12733 with garrison and watch; fines unenforceable is a stretch"
+   },
+   {
+    "town": "rv2-city-under_siege-1",
+    "size": "city 3733",
+    "crisis": "under_siege",
+    "printed": "The fines Kaliburg hands down cannot be enforced, so each unpaid fine makes the next one easier to ignore.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "c",
+    "fact": "siege; \"A court exists, though there is nowhere to hold the guilty\""
+   }
+  ],
+  "script": {
+   "tests": "court present, no prison; whole claim LOW stretch in towns with watch/garrison",
+   "true": 59,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "Inference from no prison; LOW stretch where a garrison stands."
+ },
+ {
+  "id": "DS-DEF-2::Internal Security: no legal infrastructure::v3",
+  "verdict": "TRUE",
+  "printsIn": 147,
+  "eyeReads": [
+   {
+    "town": "r2r-thorp-36",
+    "size": "thorp 5",
+    "crisis": "calm",
+    "printed": "If you are wronged at Cnocbridge, there is no court to take it to, and no local is surprised.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "thorp of 5, no court/gaol"
+   },
+   {
+    "town": "r2r-village-4",
+    "size": "village 391",
+    "crisis": "calm",
+    "printed": "If you are wronged at Huaji, there is no court to take it to, and no local is surprised.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "village 391, no court/gaol"
+   },
+   {
+    "town": "r2s-occupied-hamlet-0",
+    "size": "hamlet 20",
+    "crisis": "occupied+famine",
+    "printed": "If you are wronged at Qarahiid, there is no court to take it to, and no local is surprised.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "occupied hamlet; no court in roster"
+   }
+  ],
+  "script": {
+   "tests": "no court, no prison; LOW flag page has an NPC \"appointed to judge a case\"",
+   "true": 147,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "LOW in 2 towns where an NPC is \"appointed to judge a case\"."
+ },
+ {
+  "id": "DS-DEF-2::Economic Survival: STRONG::v3",
+  "verdict": "FALSE",
+  "printsIn": 29,
+  "eyeReads": [
+   {
+    "town": "r2r-town-24",
+    "size": "town 423",
+    "crisis": "recently_betrayed",
+    "printed": "Anorema had money laid by before this trouble began, and its defenders are still paid from it.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "town 423, eco 77, watch"
+   },
+   {
+    "town": "r2s-mass_migration-metropolis-2",
+    "size": "metropolis 139708",
+    "crisis": "mass_migration",
+    "printed": "Lagomonte had money laid by before this trouble began, and its defenders are still paid from it.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "pop 139708, eco 100"
+   },
+   {
+    "town": "rv2-metropolis-occupied-2",
+    "size": "metropolis 100209",
+    "crisis": "occupied",
+    "printed": "Svetoko had money laid by before this trouble began, and its defenders are still paid from it.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "same tab: \"The occupiers take the revenue\" and \"its defence is someone else's to order\" vs \"its defenders are still paid from it\""
+   },
+   {
+    "town": "r2s-famine-metropolis-1",
+    "size": "metropolis 35674",
+    "crisis": "famine",
+    "printed": "Hongji had money laid by before this trouble began, and its defenders are still paid from it.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "g",
+    "fact": "famine: page \"every coin goes on food\" vs defenders paid from reserves"
+   }
+  ],
+  "script": {
+   "tests": "economic score >= 65, a non-debt crisis, guard presence, AND Defense tab does not say \"occupiers take the revenue\"/underpaid/irregular pay",
+   "true": 27,
+   "false": 2,
+   "falseTowns": [
+    "rv2-metropolis-occupied-2",
+    "rww-town-occupied-1"
+   ]
+  },
+  "prior": null,
+  "twinMissingCondition": "lacks \"no crisis: famine\" (v9, v12 carry it; famine has its own v4/v10/v11): prints in 1 famine town, LOW",
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "MED under occupation (2 towns); LOW famine/Poor prosperity."
+ },
+ {
+  "id": "DS-DEF-2::Economic Survival: STRONG::v6",
+  "verdict": "TRUE",
+  "printsIn": 2,
+  "eyeReads": [
+   {
+    "town": "r2s-indebted-city-1",
+    "size": "city 3289",
+    "crisis": "indebted",
+    "printed": "People in Darhanordu complain of what the creditor takes, but the city still meets its payments.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "stress: \"Much of what is earned here goes straight to the creditor\"; eco 76"
+   },
+   {
+    "town": "r2s-indebted-metropolis-2",
+    "size": "metropolis 36564",
+    "crisis": "indebted",
+    "printed": "People in Fenghu complain of what the creditor takes, but the metropolis still meets its payments.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "same; eco 81"
+   }
+  ],
+  "script": {
+   "tests": "economic score >= 65 under indebted",
+   "true": 2,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "Debt is serviced; consistent."
+ },
+ {
+  "id": "DS-DEF-2::Economic Survival: STRONG::v9",
+  "verdict": "TRUE",
+  "printsIn": 40,
+  "eyeReads": [
+   {
+    "town": "r2s-infiltrated-town-1",
+    "size": "town 319",
+    "crisis": "infiltrated",
+    "printed": "Whatever the present trouble costs Waldstadt, the town is paying it from money it had put by.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "town 319, eco 78"
+   },
+   {
+    "town": "r2s-occupied-metropolis-3",
+    "size": "metropolis 262531",
+    "crisis": "occupied",
+    "printed": "Whatever the present trouble costs Rajigarh, the metropolis is paying it from money it had put by.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "c",
+    "fact": "occupied: \"occupiers take the revenue\"; paying from savings plausible"
+   },
+   {
+    "town": "r2s-under_siege-metropolis-2",
+    "size": "metropolis 33734",
+    "crisis": "under_siege",
+    "printed": "Whatever the present trouble costs Raassaray, the metropolis is paying it from money it had put by.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "siege, eco 67"
+   }
+  ],
+  "script": {
+   "tests": "economic score >= 65, non-debt non-famine crisis; LOW flag occupied",
+   "true": 40,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "LOW under occupation (5)."
+ },
+ {
+  "id": "DS-DEF-2::Economic Survival: STRONG::v12",
+  "verdict": "FALSE",
+  "printsIn": 31,
+  "eyeReads": [
+   {
+    "town": "r2s-politically_fractured-town-0",
+    "size": "town 843",
+    "crisis": "politically_fractured",
+    "printed": "The town went into this trouble with money in hand, and its defenders are still paid on time.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "town 843, eco 68, watch"
+   },
+   {
+    "town": "r2s-succession_void-metropolis-3",
+    "size": "metropolis 295750",
+    "crisis": "succession_void",
+    "printed": "The metropolis went into this trouble with money in hand, and its defenders are still paid on time.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "pop 295750, eco 100"
+   },
+   {
+    "town": "r2s-occupied-city-1",
+    "size": "city 10359",
+    "crisis": "occupied",
+    "printed": "The city went into this trouble with money in hand, and its defenders are still paid on time.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "same tab: \"The occupiers take the revenue, and local offices work only under their eye\" vs \"defenders are still paid on time\""
+   },
+   {
+    "town": "r2r-metropolis-39",
+    "size": "metropolis 87995",
+    "crisis": "politically_fractured",
+    "printed": "The metropolis went into this trouble with money in hand, and its defenders are still paid on time.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "Guard assessment: \"exists on paper. Chronically underpaid\" vs \"still paid on time\""
+   }
+  ],
+  "script": {
+   "tests": "economic score >= 65, non-debt non-famine crisis, AND Defense tab does not say \"occupiers take the revenue\"/\"Chronically underpaid\"/\"irregular pay\"",
+   "true": 26,
+   "false": 5,
+   "falseTowns": [
+    "r2r-metropolis-39",
+    "r2s-occupied-city-1",
+    "r2s-religious_conversion-metropolis-1",
+    "r2s-succession_void-metropolis-0",
+    "rv2-city-occupied-2"
+   ]
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "MED in 5: 2 occupied, 3 where the guard text says underpaid/irregular pay."
+ },
+ {
+  "id": "DS-DEF-2::CHAIN: defence supplied::v1",
+  "verdict": "TRUE",
+  "printsIn": 31,
+  "eyeReads": [
+   {
+    "town": "r2r-village-56",
+    "size": "village 117",
+    "crisis": "succession_void",
+    "printed": "What Treford's trades supply counts in its defence's favour: the village is better able to defend itself for them.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "village 117, fortification chain +6"
+   },
+   {
+    "town": "r2s-mass_migration-metropolis-3",
+    "size": "metropolis 248369",
+    "crisis": "mass_migration",
+    "printed": "What Balgill's trades supply counts in its defence's favour: the metropolis is better able to defend itself for them.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "garrison well paid and equipped"
+   },
+   {
+    "town": "r2r-city-10",
+    "size": "city 8293",
+    "crisis": "succession_void",
+    "printed": "What Dharmamandal's trades supply counts in its defence's favour: the city is better able to defend itself for them.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "military chain modifier > 0"
+   }
+  ],
+  "script": {
+   "tests": "chainModifiers.military > 0 AND garrison|militia; LOW flag pay trouble on page",
+   "true": 31,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": "\"counts in its defence's favour\" reads as the score bonus; LOW",
+  "note": "True by chain modifier; phrasing near machinery."
+ },
+ {
+  "id": "DS-DEF-2::CHAIN: defence supplied::v2",
+  "verdict": "TRUE",
+  "printsIn": 36,
+  "eyeReads": [
+   {
+    "town": "r2s-succession_void-hamlet-1",
+    "size": "hamlet 52",
+    "crisis": "succession_void",
+    "printed": "Skalddal's defenders are better off for the trades behind them, and they know it.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "hamlet 52, fortification chain +6"
+   },
+   {
+    "town": "r2s-politically_fractured-metropolis-2",
+    "size": "metropolis 160904",
+    "crisis": "politically_fractured",
+    "printed": "Xinwan's defenders are better off for the trades behind them, and they know it.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "g",
+    "fact": "Guard: \"Chronically underpaid and poorly equipped\" beside \"better off for the trades\""
+   },
+   {
+    "town": "r2r-city-3",
+    "size": "city 8371",
+    "crisis": "mass_migration",
+    "printed": "Androntopia's defenders are better off for the trades behind them, and they know it.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "mod +, garrison"
+   }
+  ],
+  "script": {
+   "tests": "chainModifiers.military > 0 AND garrison|militia; LOW flag pay trouble on page",
+   "true": 36,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "LOW where guard text says poorly equipped (8)."
+ },
+ {
+  "id": "DS-DEF-2::CHAIN: defence supplied::v3",
+  "verdict": "TRUE",
+  "printsIn": 38,
+  "eyeReads": [
+   {
+    "town": "r2r-hamlet-51",
+    "size": "hamlet 68",
+    "crisis": "calm",
+    "printed": "You can see that the trades behind Velipol's defence do it more good than harm.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "g",
+    "fact": "militia \"exists on paper\"; pay book behind; net chain +6"
+   },
+   {
+    "town": "r2s-succession_void-metropolis-3",
+    "size": "metropolis 295750",
+    "crisis": "succession_void",
+    "printed": "You can see that the trades behind Erdenbalik's defence do it more good than harm.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "pop 295750"
+   },
+   {
+    "town": "r2r-city-14",
+    "size": "city 5381",
+    "crisis": "calm",
+    "printed": "You can see that the trades behind Serrasinum's defence do it more good than harm.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "mod +"
+   }
+  ],
+  "script": {
+   "tests": "chainModifiers.military > 0 AND garrison|militia; LOW flag pay trouble on page",
+   "true": 38,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "Net-positive wording matches the modifier."
+ },
+ {
+  "id": "DS-DEF-2::CHAIN: defence supplied::v5",
+  "verdict": "TRUE",
+  "printsIn": 20,
+  "eyeReads": [
+   {
+    "town": "r2r-hamlet-16",
+    "size": "hamlet 20",
+    "crisis": "famine",
+    "printed": "Food is short at Oxteha, but the trades behind its defence still do it more good than harm.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "famine hamlet of 20; food band famine"
+   },
+   {
+    "town": "rv2-metropolis-under_siege-2",
+    "size": "metropolis 59185",
+    "crisis": "under_siege",
+    "printed": "Food is short at Nokhoiiin, but the trades behind its defence still do it more good than harm.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "siege, food band deficit gap 81%"
+   },
+   {
+    "town": "r2s-under_siege-city-2",
+    "size": "city 11745",
+    "crisis": "under_siege",
+    "printed": "Food is short at Andronarion, but the trades behind its defence still do it more good than harm.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "siege, deficit; net mod +11"
+   }
+  ],
+  "script": {
+   "tests": "chainModifiers.military > 0, force present, hunger crisis, AND page/food record shows food short (deficit/famine band or \"households go short\")",
+   "true": 20,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": [
+   {
+    "town": "r2s-famine-metropolis-2",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": null,
+    "fact": "gear claim gone; \"more good than harm\" matches military mod +5; guard \"poorly equipped\" no longer contradicted"
+   }
+  ],
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "Food short holds in all 20."
+ },
+ {
+  "id": "DS-DEF-2::CHAIN: food trades working::v1",
+  "verdict": "TRUE",
+  "printsIn": 19,
+  "eyeReads": [
+   {
+    "town": "r2s-succession_void-town-3",
+    "size": "town 321",
+    "crisis": "succession_void",
+    "printed": "Skaldtun's food trades are working, and what they put by means the town would not run short at once if it were cut off.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "town 321, 6.3 months stored, chain running"
+   },
+   {
+    "town": "r2r-metropolis-20",
+    "size": "metropolis 46328",
+    "crisis": "calm",
+    "printed": "Anba's food trades are working, and what they put by means the metropolis would not run short at once if it were cut off.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "15.3 months stored"
+   },
+   {
+    "town": "r2s-occupied-town-1",
+    "size": "town 1994",
+    "crisis": "occupied",
+    "printed": "Sundnes's food trades are working, and what they put by means the town would not run short at once if it were cut off.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "occupied, 6.3 months, chain vulnerable"
+   }
+  ],
+  "script": {
+   "tests": "chainModifiers.economic > 0, food_processing chain not impaired, stored food >= 1 month, no famine/siege",
+   "true": 19,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "Stores 6-15 months in all."
+ },
+ {
+  "id": "DS-DEF-2::CHAIN: food trades working::v2",
+  "verdict": "TRUE",
+  "printsIn": 22,
+  "eyeReads": [
+   {
+    "town": "r2r-village-16",
+    "size": "village 157",
+    "crisis": "calm",
+    "printed": "The food trades at Flachbrücke are working, which would matter a great deal if the village were ever cut off.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "village 157, chain running"
+   },
+   {
+    "town": "rv2-metropolis-insurgency-2",
+    "size": "metropolis 62371",
+    "crisis": "insurgency",
+    "printed": "The food trades at Medinahaven are working, which would matter a great deal if the metropolis were ever cut off.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "chain vulnerable, mod +5"
+   },
+   {
+    "town": "rv2-city-occupied-1",
+    "size": "city 14034",
+    "crisis": "occupied",
+    "printed": "The food trades at Roccasaltus are working, which would matter a great deal if the city were ever cut off.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "occupied; chain running"
+   }
+  ],
+  "script": {
+   "tests": "chainModifiers.economic > 0, food_processing not impaired, no siege",
+   "true": 22,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "Hypothetical; true."
+ },
+ {
+  "id": "DS-DEF-2::CHAIN: food trades working::v3",
+  "verdict": "TRUE",
+  "printsIn": 39,
+  "eyeReads": [
+   {
+    "town": "r2s-religious_conversion-village-0",
+    "size": "village 264",
+    "crisis": "religious_conversion",
+    "printed": "As long as Steinfeld's food trades keep working, the village has some provisions to fall back on if it is cut off.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "village, 2.1 months, chain running"
+   },
+   {
+    "town": "r2s-mass_migration-metropolis-2",
+    "size": "metropolis 139708",
+    "crisis": "mass_migration",
+    "printed": "As long as Lagomonte's food trades keep working, the metropolis has some provisions to fall back on if it is cut off.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "15.5 months"
+   },
+   {
+    "town": "r2s-famine-city-3",
+    "size": "city 11818",
+    "crisis": "famine",
+    "printed": "As long as Vatanabad's food trades keep working, the city has some provisions to fall back on if it is cut off.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "c",
+    "fact": "famine in force; granary ~9 months but \"the hall will not open it\""
+   }
+  ],
+  "script": {
+   "tests": "chainModifiers.economic > 0, food_processing not impaired, stores > 0, no siege; LOW flag famine in force",
+   "true": 39,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "LOW in 3 famine towns (silent on famine)."
+ },
+ {
+  "id": "DS-DEF-2::CHAIN: food trades working::v4",
+  "verdict": "TRUE",
+  "printsIn": 4,
+  "eyeReads": [
+   {
+    "town": "rv2-city-under_siege-9",
+    "size": "city 6055",
+    "crisis": "under_siege",
+    "printed": "Balness is cut off now, and what its food trades put by before the siege is helping to keep the city fed.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "g",
+    "fact": "Economy: \"Most households go short, and hunger is already here\" beside \"helping to keep the city fed\""
+   },
+   {
+    "town": "rv2-metropolis-under_siege-11",
+    "size": "metropolis 23940",
+    "crisis": "under_siege",
+    "printed": "Khutulunhiid is cut off now, and what its food trades put by before the siege is helping to keep the metropolis fed.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "siege, chain running, importDependent"
+   },
+   {
+    "town": "rv2-city-under_siege-4",
+    "size": "city 7118",
+    "crisis": "under_siege",
+    "printed": "Taigang is cut off now, and what its food trades put by before the siege is helping to keep the city fed.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "siege, deficit, chain running"
+   }
+  ],
+  "script": {
+   "tests": "chainModifiers.economic > 0, food_processing not impaired, under siege, food band above famine",
+   "true": 4,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": "twinHint false alarm: v4 carries \"food: > famine\", the complement of v5/v6 \"food: famine\"",
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "True in all 4."
+ }
+]

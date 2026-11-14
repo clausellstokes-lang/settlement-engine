@@ -1,0 +1,16 @@
+{
+ "DS-GEN-13::NO-MARKET::v1": [],
+ "DS-GEN-13::NO-MARKET::v2": [],
+ "DS-ECO-10::POSTURE: vulnerable::v2": [],
+ "DS-ECO-10::POSTURE: vulnerable::v1": [
+  "rv2-town-calm-43",
+  "rv2-town-calm-68",
+  "rv2-town-calm-81",
+  "rv2-town-calm-87",
+  "rv2-town-monster_pressure-43",
+  "rv2-town-monster_pressure-82",
+  "rv2-town-monster_pressure-100",
+  "rv2-town-indebted-56",
+  "rv2-town-indebted-93"
+ ]
+}

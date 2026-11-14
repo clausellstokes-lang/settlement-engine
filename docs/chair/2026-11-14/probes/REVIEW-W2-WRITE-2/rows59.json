@@ -1,0 +1,1235 @@
+[
+ {
+  "id": "DS-DEF-1::readiness STRONG::v5",
+  "state": "REWORDED",
+  "priorTowns": [
+   "r2s-monster_pressure-city-2 [MED]",
+   "r2s-monster_pressure-metropolis-1 [MED]",
+   "r2s-monster_pressure-metropolis-3 [MED]"
+  ],
+  "verdict": "CURED AND TRUE",
+  "prior": [
+   {
+    "town": "r2s-monster_pressure-city-2",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": null,
+    "fact": "new text claims only 'strongly defended' (Fortress 76); no longer says people under arms in good order"
+   },
+   {
+    "town": "r2s-monster_pressure-metropolis-1",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": null,
+    "fact": "Fortress 94"
+   },
+   {
+    "town": "r2s-monster_pressure-metropolis-3",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": null,
+    "fact": "Fortress 84"
+   }
+  ]
+ },
+ {
+  "id": "DS-DEF-2::Invasion & War: walls with NO force::v5",
+  "state": "MARKS",
+  "priorTowns": [
+   "rww-town-slave_revolt-1 [MED]"
+  ],
+  "verdict": "STILL FALSE (rww-town-slave_revolt-1)",
+  "prior": [
+   {
+    "town": "rww-town-slave_revolt-1",
+    "state": "STILL-FALSE",
+    "severity": "MED",
+    "fact": "same tab: \"the regular patrols have stopped\"; \"The watch has abandoned normal patrol patterns\""
+   }
+  ]
+ },
+ {
+  "id": "DS-DEF-2::Invasion & War: neither walls nor force::v5",
+  "state": "MARKS",
+  "priorTowns": [
+   "rww-village-under_siege-1 [MED]"
+  ],
+  "verdict": "CURED (true, or by silence with a true replacement)",
+  "prior": [
+   {
+    "town": "rww-village-under_siege-1",
+    "state": "CURED-BY-SILENCE",
+    "nowPrints": "Qaryatsaray has no line and no force, and danger is close at hand.",
+    "nowTrue": true,
+    "severity": null,
+    "fact": "no walls, no watch/force, siege"
+   }
+  ]
+ },
+ {
+  "id": "DS-DEF-2::CHAIN: defence supplied::v6",
+  "state": "GONE",
+  "priorTowns": [
+   "rww-city-famine-1 [MED]",
+   "r2r-hamlet-16 [MED]"
+  ],
+  "verdict": "CURED-BY-SILENCE (v5 in its place; LOW doubt at rww-city-famine-1)",
+  "prior": null
+ },
+ {
+  "id": "DS-DEF-3::COMPOUND: insurgency::v5",
+  "state": "GONE",
+  "priorTowns": [
+   "r2s-insurgency-thorp-0 [MED]"
+  ],
+  "verdict": "CURED-BY-SILENCE (v2, true)",
+  "prior": null
+ },
+ {
+  "id": "DS-DEF-8::override: MIGRATION, arrivals::v4",
+  "state": "GONE",
+  "priorTowns": [
+   "r2r-city-37 [MED]",
+   "r2r-metropolis-25 [MED]",
+   "r2s-mass_migration-city-2 [MED]"
+  ],
+  "verdict": "CURED-BY-SILENCE (v1/v3, true)",
+  "prior": null
+ },
+ {
+  "id": "DS-DEF-11::WALLED-STRAINED::v3",
+  "state": "REWORDED",
+  "priorTowns": [
+   "r2s-under_siege-metropolis-2 [MED]"
+  ],
+  "verdict": "CURED (true, or by silence with a true replacement)",
+  "prior": [
+   {
+    "town": "r2s-under_siege-metropolis-2",
+    "state": "CURED-BY-SILENCE",
+    "nowPrints": "The siege has put more people on Raassaray's defences than the metropolis could ever find for them in quieter seasons.",
+    "nowTrue": true,
+    "severity": null,
+    "fact": "v3 now gated to no soldiers; its sibling v4 prints there and makes no shortage claim"
+   }
+  ]
+ },
+ {
+  "id": "DS-DEF-11::WALLED-STRAINED::v7",
+  "state": "REWORDED",
+  "priorTowns": [
+   "r2r-hamlet-18 [MED]"
+  ],
+  "verdict": "CURED AND TRUE",
+  "prior": [
+   {
+    "town": "r2r-hamlet-18",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": null,
+    "fact": "new text drops 'stretched thin'"
+   }
+  ]
+ },
+ {
+  "id": "DS-ECO-10::POSTURE: entrepot::v4",
+  "state": "REWORDED",
+  "priorTowns": [
+   "r2s-under_siege-city-0 [MED]"
+  ],
+  "verdict": "CURED AND TRUE",
+  "prior": [
+   {
+    "town": "r2s-under_siege-city-0",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": null,
+    "fact": "'Some of ... trade was in other towns' goods' fits isEntrepot with 8 entrepôt chains"
+   }
+  ]
+ },
+ {
+  "id": "DS-ECO-12::INCOME WEIGHT: the religious houses::v4",
+  "state": "REWORDED",
+  "priorTowns": [
+   "rw3-hamlet-under_siege-1 [HIGH]"
+  ],
+  "verdict": "CURED (true, or by silence with a true replacement)",
+  "prior": [
+   {
+    "town": "rw3-hamlet-under_siege-1",
+    "state": "CURED-BY-SILENCE",
+    "nowPrints": "Almost everyone's living at Lidostagnum depends on one trade, whether or not they work in it.",
+    "nowTrue": true,
+    "severity": null,
+    "fact": "no faith line under siege now; income dominated by one source"
+   }
+  ]
+ },
+ {
+  "id": "DS-POW-5::FLAG: crimeIsGovt::v4",
+  "state": "REWORDED",
+  "priorTowns": [
+   "r2s-mass_migration-town-2 [MED]",
+   "r2s-slave_revolt-town-3 [MED]"
+  ],
+  "verdict": "CURED AND TRUE",
+  "prior": [
+   {
+    "town": "r2s-mass_migration-town-2",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": null,
+    "fact": "new \"keep their own order alongside them\" matches \"Competes with the watch\""
+   },
+   {
+    "town": "r2s-slave_revolt-town-3",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": null,
+    "fact": "same; no longer claims the watch keeps the bosses' order"
+   }
+  ]
+ },
+ {
+  "id": "DS-POW-6::capture pressure ADVANCING (weak security, poor prosperity)::v7",
+  "state": "REWORDED",
+  "priorTowns": [
+   "r2r-town-37 [MED]",
+   "r2s-slave_revolt-town-3 [MED]"
+  ],
+  "verdict": "CURED (true, or by silence with a true replacement)",
+  "prior": [
+   {
+    "town": "r2r-town-37",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": null,
+    "fact": "\"has a watch\" no longer claims it keeps the streets"
+   },
+   {
+    "town": "r2s-slave_revolt-town-3",
+    "state": "CURED-BY-SILENCE",
+    "nowPrints": "Officials at Zhongba are paid little and watched less, and a purse offered in the right doorway would not be turned away.",
+    "nowTrue": true,
+    "severity": null,
+    "fact": "safety -20, prosperity -20; claims nothing about the watch's patrols"
+   }
+  ]
+ },
+ {
+  "id": "DS-FTH-4::FLAG: heresySuppression: preached::v3",
+  "state": "REWORDED",
+  "priorTowns": [
+   "r2r-metropolis-25 [MED]"
+  ],
+  "verdict": "STILL FALSE (r2r-metropolis-25)",
+  "prior": [
+   {
+    "town": "r2r-metropolis-25",
+    "state": "STILL-FALSE",
+    "nowPrints": null,
+    "nowTrue": false,
+    "severity": "MED",
+    "fact": "\"most people\" -> \"the faithful\" changes nothing where devotion is universal and the city is integral on magic"
+   }
+  ]
+ },
+ {
+  "id": "DS-DEF-1::readiness CRITICAL::v4",
+  "state": "SAME",
+  "priorTowns": [
+   "rww-city-famine-1 [MED]"
+  ],
+  "verdict": "STILL FALSE (rww-city-famine-1)",
+  "prior": [
+   {
+    "town": "rww-city-famine-1",
+    "state": "STILL-FALSE",
+    "nowPrints": null,
+    "nowTrue": false,
+    "severity": "MED",
+    "fact": "Invasion & War row still reads 'an army would pay dearly'"
+   }
+  ]
+ },
+ {
+  "id": "DS-DEF-2::Beasts & Monsters: settled, nothing organized::v6",
+  "state": "MARKS",
+  "priorTowns": [
+   "r2r-thorp-40 [HIGH]",
+   "r2s-monster_pressure-town-2 [HIGH]"
+  ],
+  "verdict": "CURED (true, or by silence with a true replacement)",
+  "prior": [
+   {
+    "town": "r2r-thorp-40",
+    "state": "CURED-BY-SILENCE",
+    "nowPrints": "(Beasts & Monsters row shows badge \"Critical\" and no sentence)",
+    "nowTrue": null,
+    "severity": null,
+    "fact": "occupied thorp: no variant drawn"
+   },
+   {
+    "town": "r2s-monster_pressure-town-2",
+    "state": "CURED-BY-SILENCE",
+    "nowPrints": "(Beasts & Monsters row shows badge \"Critical\" and no sentence)",
+    "nowTrue": null,
+    "severity": null,
+    "fact": "has Town watch + Free company hall; no-guardPresence mark now bars it"
+   }
+  ]
+ },
+ {
+  "id": "DS-DEF-2::Invasion & War: walls with NO force::v6",
+  "state": "MARKS",
+  "priorTowns": [
+   "r2s-under_siege-town-3 [HIGH]"
+  ],
+  "verdict": "CURED (true, or by silence with a true replacement)",
+  "prior": [
+   {
+    "town": "r2s-under_siege-town-3",
+    "state": "CURED-BY-SILENCE",
+    "nowPrints": "Since the siege began, Rathwell's walls are manned by whoever can be spared from everything else.",
+    "nowTrue": true,
+    "severity": null,
+    "fact": "walls + Town watch under siege; no-watch mark now bars v6"
+   }
+  ]
+ },
+ {
+  "id": "DS-DEF-2::Invasion & War: neither walls nor force::v6",
+  "state": "REWORDED",
+  "priorTowns": [
+   "rww-hamlet-under_siege-1 [HIGH]",
+   "rw3-hamlet-under_siege-1 [HIGH]",
+   "r2r-hamlet-0 [HIGH]"
+  ],
+  "verdict": "STILL FALSE (rw3-hamlet-under_siege-1 via its replacement)",
+  "prior": [
+   {
+    "town": "rww-hamlet-under_siege-1",
+    "state": "CURED-BY-SILENCE",
+    "nowPrints": "Miroko has no line and no force, and danger is close at hand.",
+    "nowTrue": true,
+    "severity": "LOW",
+    "fact": "v6 now excludes siege; v4 prints; \"close at hand\" understates the siege"
+   },
+   {
+    "town": "rw3-hamlet-under_siege-1",
+    "state": "CURED-BY-SILENCE",
+    "nowPrints": "Lidostagnum has no line and no force, and danger is close at hand.",
+    "nowTrue": false,
+    "severity": "MED",
+    "fact": "roster Adventurers' charter hall \"musters the defence\"; \"Everyone ... who can hold a weapon has a place in the defence\""
+   },
+   {
+    "town": "r2r-hamlet-0",
+    "state": "CURED-BY-SILENCE",
+    "nowPrints": "Spitzsteig has no line and no force, and danger is close at hand.",
+    "nowTrue": true,
+    "severity": "LOW",
+    "fact": "besieged hamlet of 22, no defence; understated"
+   }
+  ]
+ },
+ {
+  "id": "DS-DEF-2::Invasion & War: neither walls nor force::v10",
+  "state": "GONE",
+  "priorTowns": [
+   "rw3-town-under_siege+famine-1 [HIGH]",
+   "r2s-under_siege-town-1 [HIGH]"
+  ],
+  "verdict": "CURED-BY-SILENCE (v8/v9, true; v8 \"danger is close at hand\" under siege LOW)",
+  "prior": null
+ },
+ {
+  "id": "DS-DEF-2::CHAIN: food trades failing::v3",
+  "state": "REWORDED",
+  "priorTowns": [
+   "r2r-metropolis-16 [MED]",
+   "r2r-metropolis-22 [MED]"
+  ],
+  "verdict": "CURED AND TRUE",
+  "prior": [
+   {
+    "town": "r2r-metropolis-16",
+    "state": "CURED-TRUE",
+    "nowTrue": true,
+    "severity": null,
+    "fact": "reworded to \"food trades\"; Food Processing impaired on Economics; the Salt works chain is no longer named"
+   },
+   {
+    "town": "r2r-metropolis-22",
+    "state": "CURED-TRUE",
+    "nowTrue": true,
+    "severity": null,
+    "fact": "Food Processing and Grain & Bread both Impaired; river fishing no longer contradicted"
+   }
+  ]
+ },
+ {
+  "id": "DS-DEF-3::COMPOUND: political fracture::v4",
+  "state": "SAME",
+  "priorTowns": [
+   "r2s-politically_fractured-hamlet-3 [MED]"
+  ],
+  "verdict": "CURED AND TRUE",
+  "prior": [
+   {
+    "town": "r2s-politically_fractured-hamlet-3",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": null,
+    "fact": "record now holds 2 factions; Power tab 'The Powers (2)'"
+   }
+  ]
+ },
+ {
+  "id": "DS-DEF-5::garrison PRESENT::v4",
+  "state": "GONE",
+  "priorTowns": [
+   "rww-metropolis-under_siege-1 [HIGH]",
+   "rw3-city-calm-1 [MED]"
+  ],
+  "verdict": "CURED-BY-SILENCE (v2, true)",
+  "prior": null
+ },
+ {
+  "id": "DS-DEF-9::magicDependency true::v4",
+  "state": "SAME",
+  "priorTowns": [
+   "rww-city-calm-1 [MED]"
+  ],
+  "verdict": "STILL FALSE (rww-city-calm-1)",
+  "prior": [
+   {
+    "town": "rww-city-calm-1",
+    "state": "STILL-FALSE",
+    "nowPrints": null,
+    "nowTrue": false,
+    "severity": "MED",
+    "fact": "'The city is well off, the road keeps it that way'"
+   }
+  ]
+ },
+ {
+  "id": "DS-ECO-1::COMBINATION C4: a low rung on a working approach::v1",
+  "state": "REWORDED",
+  "priorTowns": [
+   "rww-metropolis-famine-1 [MED]"
+  ],
+  "verdict": "CURED AND TRUE",
+  "prior": [
+   {
+    "town": "rww-metropolis-famine-1",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": null,
+    "fact": "new text no longer says little money stays; Struggling = poor; entrepôt income no longer denied"
+   }
+  ]
+ },
+ {
+  "id": "DS-ECO-9::DEFICIT::v5",
+  "state": "SAME",
+  "priorTowns": [
+   "rw3-metropolis-under_siege-1 [MED]"
+  ],
+  "verdict": "STILL FALSE (rw3-metropolis-under_siege-1)",
+  "prior": [
+   {
+    "town": "rw3-metropolis-under_siege-1",
+    "state": "STILL-FALSE",
+    "nowPrints": null,
+    "nowTrue": false,
+    "severity": "MED",
+    "fact": "'+ 68,834 imported', 'carts bring in a little of the rest' two lines above; importChannel airship runs"
+   }
+  ]
+ },
+ {
+  "id": "DS-ECO-10::POSTURE: established::v10",
+  "state": "GONE",
+  "priorTowns": [
+   "rww-city-under_siege-1 [MED]",
+   "r2s-under_siege-city-2 [MED]"
+  ],
+  "verdict": "CURED-BY-SILENCE (v7, true)",
+  "prior": null
+ },
+ {
+  "id": "DS-ECO-11::EXPLOITATION: fullyExploited::v3",
+  "state": "REWORDED",
+  "priorTowns": [
+   "rww-hamlet-under_siege-1 [MED]"
+  ],
+  "verdict": "CURED (true, or by silence with a true replacement)",
+  "prior": [
+   {
+    "town": "rww-hamlet-under_siege-1",
+    "state": "CURED-BY-SILENCE",
+    "nowPrints": "With the siege on, none of Miroko's grain can go out to buyers; whatever the hamlet works, the hamlet must use.",
+    "nowTrue": true,
+    "severity": null,
+    "fact": "under_siege; grain fully exploited"
+   }
+  ]
+ },
+ {
+  "id": "DS-ECO-12::CRITICAL IMPORT: the land cannot give it::v3",
+  "state": "REWORDED",
+  "priorTowns": [
+   "r2r-thorp-23 [MED]"
+  ],
+  "verdict": "CURED AND TRUE",
+  "prior": [
+   {
+    "town": "r2r-thorp-23",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": null,
+    "fact": "'must look elsewhere' no longer denies imports"
+   }
+  ]
+ },
+ {
+  "id": "DS-FTH-4::FLAG: heresySuppression: hunted::v3",
+  "state": "REWORDED",
+  "priorTowns": [
+   "r2r-metropolis-29 [MED]",
+   "r2r-metropolis-46 [MED]"
+  ],
+  "verdict": "CURED AND TRUE",
+  "prior": [
+   {
+    "town": "r2r-metropolis-29",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": null,
+    "fact": "\"against the faith\" no longer covers the workshop's arcane trade"
+   },
+   {
+    "town": "r2r-metropolis-46",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": null,
+    "fact": "Wizard's tower and Wenhao Kato are not \"against the faith\""
+   }
+  ]
+ },
+ {
+  "id": "DS-DEF-2::Invasion & War: neither walls nor force::v7",
+  "state": "SAME",
+  "priorTowns": [
+   "r2r-town-33 [MED]"
+  ],
+  "verdict": "STILL FALSE (r2r-town-33)",
+  "prior": [
+   {
+    "town": "r2r-town-33",
+    "state": "STILL-FALSE",
+    "severity": "MED",
+    "fact": "Military Council; Power tab: \"Military commanders hold direct political authority; civic life is subordinate to defence\""
+   }
+  ]
+ },
+ {
+  "id": "DS-DEF-2::Economic Survival: WEAK::v5",
+  "state": "SAME",
+  "priorTowns": [
+   "r2r-hamlet-4 [MED]"
+  ],
+  "verdict": "STILL FALSE (r2r-hamlet-4)",
+  "prior": [
+   {
+    "town": "r2r-hamlet-4",
+    "state": "STILL-FALSE",
+    "severity": "MED",
+    "fact": "Adventurers' charter hall posts bounties and takes up the local defence (it already pays people to defend it)"
+   }
+  ]
+ },
+ {
+  "id": "DS-DEF-5::walls PRESENT::v7",
+  "state": "REWORDED",
+  "priorTowns": [
+   "rw3-village-insurgency-1 [MED]",
+   "r2r-hamlet-10 [MED]",
+   "r2r-hamlet-11 [MED]"
+  ],
+  "verdict": "CURED AND TRUE",
+  "prior": [
+   {
+    "town": "rw3-village-insurgency-1",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": null,
+    "fact": "new text says 'few ways through', matching 'The walls leave few ways in'"
+   },
+   {
+    "town": "r2r-hamlet-10",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": null,
+    "fact": "same"
+   },
+   {
+    "town": "r2r-hamlet-11",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": null,
+    "fact": "same"
+   }
+  ]
+ },
+ {
+  "id": "DS-DEF-5::NO organized force at all::v4",
+  "state": "MARKS",
+  "priorTowns": [
+   "r2r-hamlet-5 [MED]",
+   "r2r-thorp-55 [MED]"
+  ],
+  "verdict": "CURED (true, or by silence with a true replacement)",
+  "prior": [
+   {
+    "town": "r2r-hamlet-5",
+    "state": "CURED-BY-SILENCE",
+    "nowPrints": "With trouble at hand and no force to meet it, Achilpolis leans on whoever owns a weapon and is willing to use it.",
+    "nowTrue": true,
+    "severity": null,
+    "fact": "wartime, no force; true"
+   },
+   {
+    "town": "r2r-thorp-55",
+    "state": "CURED-BY-SILENCE",
+    "nowPrints": "With trouble at hand and no force to meet it, Yekekum leans on whoever owns a weapon and is willing to use it.",
+    "nowTrue": true,
+    "severity": null,
+    "fact": "wartime, no force; true"
+   }
+  ]
+ },
+ {
+  "id": "DS-DEF-8::override: ACTIVE SIEGE::v4",
+  "state": "GONE",
+  "priorTowns": [
+   "r2r-hamlet-0 [MED]"
+  ],
+  "verdict": "CURED-BY-SILENCE (v3, true)",
+  "prior": null
+ },
+ {
+  "id": "DS-DEF-8::override: UNDER TRIBUTE::v4",
+  "state": "SAME",
+  "priorTowns": [
+   "rww-village-indebted-1 [MED]"
+  ],
+  "verdict": "STILL FALSE (rww-village-indebted-1)",
+  "prior": [
+   {
+    "town": "rww-village-indebted-1",
+    "state": "STILL-FALSE",
+    "nowPrints": null,
+    "nowTrue": false,
+    "severity": "MED",
+    "fact": "'charter hall ... Chronically underpaid' vs 'keeps no defenders to pay'"
+   }
+  ]
+ },
+ {
+  "id": "DS-DEF-9::magicDependency true, with a NAMED dependent chain::v1",
+  "state": "REWORDED",
+  "priorTowns": [
+   "rw3-metropolis-calm-1 [MED]",
+   "r2r-city-2 [MED]"
+  ],
+  "verdict": "CURED AND TRUE",
+  "prior": [
+   {
+    "town": "rw3-metropolis-calm-1",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": null,
+    "fact": "'means beyond it' no longer claims arcane work or few people; divine provision fills a depleted-livestock gap"
+   },
+   {
+    "town": "r2r-city-2",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": null,
+    "fact": "salt depleted; 'part of the shortfall' matches 'minor food supplement'"
+   }
+  ]
+ },
+ {
+  "id": "DS-ECO-9::IMPORT-DEPENDENT::v5",
+  "state": "SAME",
+  "priorTowns": [
+   "r2s-under_siege-city-0 [MED]",
+   "r2s-under_siege-metropolis-3 [MED]"
+  ],
+  "verdict": "STILL FALSE (r2s-under_siege-city-0, r2s-under_siege-metropolis-3)",
+  "prior": [
+   {
+    "town": "r2s-under_siege-city-0",
+    "state": "STILL-FALSE",
+    "nowPrints": null,
+    "nowTrue": false,
+    "severity": "MED",
+    "fact": "'+ 6,422 imported' / 'ships bring in a little of the rest'"
+   },
+   {
+    "town": "r2s-under_siege-metropolis-3",
+    "state": "STILL-FALSE",
+    "nowPrints": null,
+    "nowTrue": false,
+    "severity": "MED",
+    "fact": "'+ 22,719 imported' / 'boats bring in a little of the rest'"
+   }
+  ]
+ },
+ {
+  "id": "DS-ECO-9::FOOD SOURCES: one source::v3",
+  "state": "REWORDED",
+  "priorTowns": [
+   "rww-city-insurgency-1 [MED]",
+   "rww-metropolis-under_siege-1 [MED]"
+  ],
+  "verdict": "CURED AND TRUE",
+  "prior": [
+   {
+    "town": "rww-city-insurgency-1",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": "LOW",
+    "fact": "now 'has little food of its own but its grain harvest' (own food = grain only); grows 9,104 of 13,852, so a hasty reader could take 'little food of its own' literally (LOW)"
+   },
+   {
+    "town": "rww-metropolis-under_siege-1",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": null,
+    "fact": "herds 4,758 lbs/day is its only own food; no longer contradicts the provision line"
+   }
+  ]
+ },
+ {
+  "id": "DS-SUP-2::UPSTREAM WEAK: a chain the town's work draws on is failing::v2",
+  "state": "REWORDED",
+  "priorTowns": [
+   "rww-city-recently_betrayed-1 [MED]",
+   "rww-metropolis-calm-1 [MED]",
+   "rww-metropolis-wartime-1 [MED]"
+  ],
+  "verdict": "CURED AND TRUE",
+  "prior": [
+   {
+    "town": "rww-city-recently_betrayed-1",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": "LOW",
+    "fact": "now names food processing as the troubled upstream, not as short of its own upstream; status 'vulnerable'"
+   },
+   {
+    "town": "rww-metropolis-calm-1",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": "LOW",
+    "fact": "cartography is now the upstream whose trouble puts dependents at risk; status vulnerable"
+   },
+   {
+    "town": "rww-metropolis-wartime-1",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": "LOW",
+    "fact": "same"
+   }
+  ]
+ },
+ {
+  "id": "DS-ECO-11::EXPLOITATION: partiallyExploited::v5",
+  "state": "REWORDED",
+  "priorTowns": [
+   "rww-city-under_siege-1 [MED]",
+   "r2s-under_siege-city-3 [MED]",
+   "r2s-under_siege-town-3 [MED]"
+  ],
+  "verdict": "STILL FALSE (r2s-under_siege-city-3 via its replacement)",
+  "prior": [
+   {
+    "town": "rww-city-under_siege-1",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": null,
+    "fact": "new text claims only that wool cannot leave under siege"
+   },
+   {
+    "town": "r2s-under_siege-city-3",
+    "state": "CURED-BY-SILENCE",
+    "nowPrints": "For as long as Weichhof has stood, its timber has been there to take, and nobody has found it worth the trouble.",
+    "nowTrue": false,
+    "severity": "MED",
+    "fact": "Carpenters (5-15), Sawmill (commercial); Timber & Lumber running; Timber Trade 3%"
+   },
+   {
+    "town": "r2s-under_siege-town-3",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": "LOW",
+    "fact": "under siege; exports were tools, not ore"
+   }
+  ]
+ },
+ {
+  "id": "DS-ECO-12::CRITICAL IMPORT: a house needs what the land lacks::v4",
+  "state": "GONE",
+  "priorTowns": [
+   "rw3-metropolis-under_siege-1 [MED]",
+   "r2s-under_siege-city-0 [MED]"
+  ],
+  "verdict": "CURED-BY-SILENCE (pool silent; income lines true)",
+  "prior": null
+ },
+ {
+  "id": "DS-ECO-12::CRITICAL IMPORT: the land cannot give it::v4",
+  "state": "GONE",
+  "priorTowns": [
+   "r2r-thorp-27 [MED]"
+  ],
+  "verdict": "CURED-BY-SILENCE (v2, true beside Imports: Metals)",
+  "prior": null
+ },
+ {
+  "id": "DS-GEN-17::GREAT HOUSE: monastery::v1",
+  "state": "MARKS",
+  "priorTowns": [
+   "r2r-metropolis-14 [HIGH]"
+  ],
+  "verdict": "CURED (true, or by silence with a true replacement)",
+  "prior": [
+   {
+    "town": "r2r-metropolis-14",
+    "state": "CURED-BY-SILENCE",
+    "nowPrints": "The monks answer to their own order before they answer to whoever governs Prabhapeta.",
+    "nowTrue": true,
+    "severity": null,
+    "fact": "under_siege; Major monasteries live; no arrival claim"
+   }
+  ]
+ },
+ {
+  "id": "DS-GEN-18::BOUGHT-IN::v1",
+  "state": "REWORDED",
+  "priorTowns": [
+   "rww-hamlet-calm-1 [MED]",
+   "rww-metropolis-calm-1 [MED]",
+   "rww-thorp-plague_onset-1 [MED]"
+  ],
+  "verdict": "CURED AND TRUE",
+  "prior": [
+   {
+    "town": "rww-hamlet-calm-1",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": "LOW",
+    "fact": "Salt is an import row (Salt works runs on imported desert salt)"
+   },
+   {
+    "town": "rww-metropolis-calm-1",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": "LOW",
+    "fact": "Stone is an import row; Stone quarry also present"
+   },
+   {
+    "town": "rww-thorp-plague_onset-1",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": "LOW",
+    "fact": "Medicinal herbs is an import row; also produced locally"
+   }
+  ]
+ },
+ {
+  "id": "DS-GEN-18::BOUGHT-IN::v9",
+  "state": "REWORDED",
+  "priorTowns": [
+   "rww-hamlet-mass_migration-1 [MED]",
+   "rww-village-famine-1 [MED]",
+   "rww-village-indebted-1 [MED]"
+  ],
+  "verdict": "STILL FALSE (rww-hamlet-mass_migration-1, rww-village-famine-1, rww-village-indebted-1)",
+  "prior": [
+   {
+    "town": "rww-hamlet-mass_migration-1",
+    "state": "STILL-FALSE",
+    "nowPrints": null,
+    "nowTrue": false,
+    "severity": "MED",
+    "fact": "few imports against a long local-production list; chains run on own resources (unchanged since the earlier read)"
+   },
+   {
+    "town": "rww-village-famine-1",
+    "state": "STILL-FALSE",
+    "nowPrints": null,
+    "nowTrue": false,
+    "severity": "MED",
+    "fact": "few imports against a long local-production list; chains run on own resources (unchanged since the earlier read)"
+   },
+   {
+    "town": "rww-village-indebted-1",
+    "state": "STILL-FALSE",
+    "nowPrints": null,
+    "nowTrue": false,
+    "severity": "MED",
+    "fact": "few imports against a long local-production list; chains run on own resources (unchanged since the earlier read)"
+   }
+  ]
+ },
+ {
+  "id": "DS-FTH-4::FLAG: heresySuppression: hunted::v4",
+  "state": "REWORDED",
+  "priorTowns": [
+   "rww-city-calm-1 [MED]"
+  ],
+  "verdict": "STILL FALSE (rww-city-calm-1)",
+  "prior": [
+   {
+    "town": "rww-city-calm-1",
+    "state": "STILL-FALSE",
+    "nowPrints": null,
+    "nowTrue": false,
+    "severity": "MED",
+    "fact": "\"shunned\" replaces \"leaves\" but any open charm is still punished in a city whose economy runs on its Wizard's tower"
+   }
+  ]
+ },
+ {
+  "id": "DS-FTH-4::FLAG: heresySuppression: preached::v5",
+  "state": "REWORDED",
+  "priorTowns": [
+   "r2s-wartime-hamlet-2 [MED]"
+  ],
+  "verdict": "STILL FALSE (r2s-wartime-hamlet-2)",
+  "prior": [
+   {
+    "town": "r2s-wartime-hamlet-2",
+    "state": "STILL-FALSE",
+    "nowPrints": null,
+    "nowTrue": false,
+    "severity": "MED",
+    "fact": "\"the faithful count magic a heresy\" contradicts the faith's own acceptance \"indifferent\""
+   }
+  ]
+ },
+ {
+  "id": "DS-DEF-2::Beasts & Monsters: plagued, perimeter AND organized force::v4",
+  "state": "REWORDED",
+  "priorTowns": [
+   "rww-thorp-under_siege-1 [MED]"
+  ],
+  "verdict": "CURED AND TRUE",
+  "prior": [
+   {
+    "town": "rww-thorp-under_siege-1",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": "LOW",
+    "fact": "new text drops \"manned day and night\"; palisade exists; same page still \"needs specialists against the creatures\" (not contradicted)"
+   }
+  ]
+ },
+ {
+  "id": "DS-DEF-2::Invasion & War: walls with NO force::v4",
+  "state": "MARKS",
+  "priorTowns": [
+   "rww-town-occupied-1 [HIGH]"
+  ],
+  "verdict": "CURED (true, or by silence with a true replacement)",
+  "prior": [
+   {
+    "town": "rww-town-occupied-1",
+    "state": "CURED-BY-SILENCE",
+    "nowPrints": "(Invasion & War row shows badge \"Critical\" and no sentence)",
+    "nowTrue": null,
+    "severity": null,
+    "fact": "no-occupied mark now bars it"
+   }
+  ]
+ },
+ {
+  "id": "DS-DEF-2::Invasion & War: neither walls nor force::v2",
+  "state": "REWORDED",
+  "priorTowns": [
+   "rww-hamlet-famine-1 [HIGH]",
+   "rww-hamlet-mass_migration-1 [MED]"
+  ],
+  "verdict": "CURED AND TRUE",
+  "prior": [
+   {
+    "town": "rww-hamlet-famine-1",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": "LOW",
+    "fact": "\"Nothing threatens X now\" became \"Nothing has come for X\" - true of the Invasion row; famine is not an attacker"
+   },
+   {
+    "town": "rww-hamlet-mass_migration-1",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": null,
+    "fact": "migrants have come, none came \"for\" the hamlet; no attack in record"
+   }
+  ]
+ },
+ {
+  "id": "DS-DEF-2::CHAIN: defence supplied::v5",
+  "state": "REWORDED",
+  "priorTowns": [
+   "r2s-famine-metropolis-2 [MED]"
+  ],
+  "verdict": "CURED AND TRUE",
+  "prior": [
+   {
+    "town": "r2s-famine-metropolis-2",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": null,
+    "fact": "gear claim gone; \"more good than harm\" matches military mod +5; guard \"poorly equipped\" no longer contradicted"
+   }
+  ]
+ },
+ {
+  "id": "DS-DEF-3::Moderate::v1",
+  "state": "REWORDED",
+  "priorTowns": [
+   "rww-metropolis-infiltrated-1 [MED]",
+   "r2r-city-12 [MED]"
+  ],
+  "verdict": "STILL FALSE (r2r-city-12)",
+  "prior": [
+   {
+    "town": "rww-metropolis-infiltrated-1",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": "LOW",
+    "fact": "'so is crime' now admits the syndicate; IS Adequate; a strong embedded guild still makes 'neither has the upper hand' a stretch"
+   },
+   {
+    "town": "r2r-city-12",
+    "state": "STILL-FALSE",
+    "nowPrints": null,
+    "nowTrue": false,
+    "severity": "MED",
+    "fact": "'Public law enforcement is largely a formality'; Internal Security Critical"
+   }
+  ]
+ },
+ {
+  "id": "DS-DEF-8::override: SECURITY COMPROMISED::v4",
+  "state": "SAME",
+  "priorTowns": [
+   "r2s-recently_betrayed-thorp-1 [MED]",
+   "r2s-recently_betrayed-village-1 [MED]"
+  ],
+  "verdict": "STILL FALSE (r2s-recently_betrayed-thorp-1, r2s-recently_betrayed-village-1)",
+  "prior": [
+   {
+    "town": "r2s-recently_betrayed-thorp-1",
+    "state": "STILL-FALSE",
+    "nowPrints": null,
+    "nowTrue": false,
+    "severity": "MED",
+    "fact": "'Those who keep Grímberg safe are questioning everyone' directly above 'has no defenders'"
+   },
+   {
+    "town": "r2s-recently_betrayed-village-1",
+    "state": "STILL-FALSE",
+    "nowPrints": null,
+    "nowTrue": false,
+    "severity": "MED",
+    "fact": "'Those who keep Hongan safe are questioning everyone'"
+   }
+  ]
+ },
+ {
+  "id": "DS-DEF-11::WALLED-STRAINED::v6",
+  "state": "REWORDED",
+  "priorTowns": [
+   "r2r-thorp-24 [MED]"
+  ],
+  "verdict": "CURED (true, or by silence with a true replacement)",
+  "prior": [
+   {
+    "town": "r2r-thorp-24",
+    "state": "CURED-BY-SILENCE",
+    "nowPrints": "Sanctaminus keeps its palisade in repair and pays nobody to stand guard there.",
+    "nowTrue": true,
+    "severity": "LOW",
+    "fact": "occupied: same tab 'The occupiers' troops at Sanctaminus protect it'; the thorp itself pays no guard, so true, though a GM may miss the troops"
+   }
+  ]
+ },
+ {
+  "id": "DS-ECO-1::COMBINATION C4: a low rung on a working approach::v4",
+  "state": "REWORDED",
+  "priorTowns": [
+   "rww-metropolis-under_siege-1 [MED]"
+  ],
+  "verdict": "CURED AND TRUE",
+  "prior": [
+   {
+    "town": "rww-metropolis-under_siege-1",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": null,
+    "fact": "'the little that' is gone; 'lost what passing trade used to leave' fits a market-heavy metropolis"
+   }
+  ]
+ },
+ {
+  "id": "DS-ECO-9::FOOD SOURCES: one source::v4",
+  "state": "GONE",
+  "priorTowns": [
+   "rw3-thorp-famine-1 [MED]",
+   "r2s-famine-hamlet-2 [MED]"
+  ],
+  "verdict": "CURED-BY-SILENCE (v2, true)",
+  "prior": null
+ },
+ {
+  "id": "DS-ECO-12::CRITICAL IMPORT: the land cannot give it::v1",
+  "state": "REWORDED",
+  "priorTowns": [
+   "rww-town-calm-1 [MED]"
+  ],
+  "verdict": "STILL FALSE (rww-town-calm-1)",
+  "prior": [
+   {
+    "town": "rww-town-calm-1",
+    "state": "STILL-FALSE",
+    "nowPrints": null,
+    "nowTrue": false,
+    "severity": "MED",
+    "fact": "Imports 'Grain (a little, beside its own harvest)'; Agriculture modifier 89%"
+   }
+  ]
+ },
+ {
+  "id": "DS-ECO-12::INCOME WEIGHT: the religious houses::v3",
+  "state": "REWORDED",
+  "priorTowns": [
+   "rw3-hamlet-plague_onset-1 [MED]",
+   "r2r-hamlet-30 [MED]",
+   "r2r-hamlet-46 [MED]"
+  ],
+  "verdict": "CURED AND TRUE",
+  "prior": [
+   {
+    "town": "rw3-hamlet-plague_onset-1",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": null,
+    "fact": "no religious house (only 'Access to a house of worship'); no faith income share"
+   },
+   {
+    "town": "r2r-hamlet-30",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": null,
+    "fact": "no religious house (only 'Access to a house of worship'); no faith income share"
+   },
+   {
+    "town": "r2r-hamlet-46",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": null,
+    "fact": "no religious house (only 'Access to a house of worship'); no faith income share"
+   }
+  ]
+ },
+ {
+  "id": "DS-GEN-17::GREAT HOUSE: monastery::v3",
+  "state": "MARKS",
+  "priorTowns": [
+   "rww-metropolis-under_siege-1 [MED]",
+   "rww-town-under_siege-1 [MED]"
+  ],
+  "verdict": "CURED (true, or by silence with a true replacement)",
+  "prior": [
+   {
+    "town": "rww-metropolis-under_siege-1",
+    "state": "CURED-BY-SILENCE",
+    "nowPrints": "The monks keep their own hours.",
+    "nowTrue": true,
+    "severity": null,
+    "fact": "under_siege; Major monasteries live"
+   },
+   {
+    "town": "rww-town-under_siege-1",
+    "state": "CURED-BY-SILENCE",
+    "nowPrints": "The monks answer to their own order before they answer to whoever governs Sanctavallis.",
+    "nowTrue": true,
+    "severity": null,
+    "fact": "under_siege; Monastery or friary live"
+   }
+  ]
+ },
+ {
+  "id": "DS-FTH-4::FLAG: heresySuppression: hunted::v5",
+  "state": "SAME",
+  "priorTowns": [
+   "r2r-metropolis-15 [MED]"
+  ],
+  "verdict": "STILL FALSE (r2r-metropolis-15)",
+  "prior": [
+   {
+    "town": "r2r-metropolis-15",
+    "state": "STILL-FALSE",
+    "nowPrints": null,
+    "nowTrue": false,
+    "severity": "LOW",
+    "fact": "text unchanged; arcane factions and \"deliberately unresolved\" on Power tab, but Magic tab shows no open magic economy - downgraded to LOW"
+   }
+  ]
+ }
+]

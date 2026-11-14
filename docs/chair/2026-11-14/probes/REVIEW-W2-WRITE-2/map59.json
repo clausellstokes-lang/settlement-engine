@@ -1,0 +1,1330 @@
+[
+ {
+  "id": "DS-DEF-1::readiness STRONG::v5",
+  "state": "REWORDED",
+  "oldText": "The danger at {settlement} is real, and so is what the town has to meet it: its people under arms and its works are both in good order.",
+  "oldMarks": [
+   "threat",
+   "crisis: any",
+   "no crisis: occupied",
+   "guardPresence"
+  ],
+  "nowText": "Danger has come to {settlement}, and the town meets it strongly defended.",
+  "nowMarks": [
+   "threat",
+   "crisis: any",
+   "no crisis: occupied",
+   "guardPresence"
+  ],
+  "falseReads": [
+   {
+    "town": "r2s-monster_pressure-city-2",
+    "sev": "MED",
+    "why": "Same Defense tab: 'The defenders at Aryapura make do: the city's workshops cannot keep them properly fed and equipped' and 'the city loses guards and gear to them faster than it replaces them' — people under arms not 'in good order'"
+   },
+   {
+    "town": "r2s-monster_pressure-metropolis-1",
+    "sev": "MED",
+    "why": "Same tab: 'The defenders at Stormaker make do: the metropolis's workshops cannot keep them properly fed and equipped'; 'loses guards and gear ... faster than it replaces them'"
+   },
+   {
+    "town": "r2s-monster_pressure-metropolis-3",
+    "sev": "MED",
+    "why": "Same tab: 'The trades that should supply Brahmabagh's defenders are struggling, and the defenders go short of food or gear'; 'each one costs the metropolis something it cannot quickly replace'"
+   }
+  ]
+ },
+ {
+  "id": "DS-DEF-2::Invasion & War: walls with NO force::v5",
+  "state": "MARKS",
+  "oldText": "The only people on {settlement}'s walls are the watch on their rounds, and everyone knows that would not stop an army.",
+  "oldMarks": [
+   "watch",
+   "no crisis: under_siege"
+  ],
+  "nowText": "The only people on {settlement}'s walls are the watch on their rounds, and everyone knows that would not stop an army.",
+  "nowMarks": [
+   "watch",
+   "no mercenary",
+   "no crisis: under_siege",
+   "no crisis: occupied"
+  ],
+  "falseReads": [
+   {
+    "town": "rww-town-slave_revolt-1",
+    "sev": "MED",
+    "why": "Same tab under revolt: 'the regular patrols have stopped', 'The watch has abandoned normal patrol patterns', watch 'exists on paper' — not 'on their rounds' on the walls"
+   }
+  ]
+ },
+ {
+  "id": "DS-DEF-2::Invasion & War: neither walls nor force::v5",
+  "state": "MARKS",
+  "oldText": "With trouble at hand, {settlement} has no wall to close and nobody trained to send, and each household is deciding for itself whether to stay.",
+  "oldMarks": [
+   "threat",
+   "crisis: any",
+   "no watch"
+  ],
+  "nowText": "With trouble at hand, {settlement} has no wall to close and nobody trained to send, and each household is deciding for itself whether to stay.",
+  "nowMarks": [
+   "threat",
+   "crisis: any",
+   "no watch",
+   "no crisis: under_siege",
+   "no crisis: occupied"
+  ],
+  "falseReads": [
+   {
+    "town": "rww-village-under_siege-1",
+    "sev": "MED",
+    "why": "Active siege; same tab: 'Everyone at Qaryatsaray who can hold a weapon has a place in the defence' — households are not 'deciding for itself whether to stay' inside a siege"
+   }
+  ]
+ },
+ {
+  "id": "DS-DEF-2::CHAIN: defence supplied::v6",
+  "state": "GONE",
+  "oldText": "You can see that {settlement}'s defenders are armed and equipped from the town's own trades; you can also see that they eat no better than anyone else.",
+  "oldMarks": [
+   "crisis: hunger"
+  ],
+  "falseReads": [
+   {
+    "town": "rww-city-famine-1",
+    "sev": "MED",
+    "why": "Same tab: 'The garrison and city watch exists on paper. Chronically underpaid and poorly equipped' — not 'armed and equipped from the city's own trades'"
+   },
+   {
+    "town": "r2r-hamlet-16",
+    "sev": "MED",
+    "why": "pop 20 hamlet (farming, fishing, quarry, no smith); primaryImports includes 'Replacement arms and basic equipment'; Vulnerabilities: 'poor equipment'"
+   }
+  ]
+ },
+ {
+  "id": "DS-DEF-3::COMPOUND: insurgency::v5",
+  "state": "GONE",
+  "oldText": "Those who keep order at {settlement} walk in pairs now, and there are lanes they no longer walk at all.",
+  "oldMarks": [
+   "guardPresence"
+  ],
+  "falseReads": [
+   {
+    "town": "r2s-insurgency-thorp-0",
+    "sev": "MED",
+    "why": "thorp pop 22; only a Household levy that musters 'when danger reaches the fields'; 'Nobody here is paid to keep order'; 'Passing through Llanheath, you would see nothing amiss' — no patrols, no lanes to abandon"
+   }
+  ]
+ },
+ {
+  "id": "DS-DEF-8::override: MIGRATION, arrivals::v4",
+  "state": "GONE",
+  "oldText": "At {settlement} you find the guards posted where the newcomers camp, not at the edges of the place.",
+  "oldMarks": [
+   "guardPresence"
+  ],
+  "falseReads": [
+   {
+    "town": "r2r-city-37",
+    "sev": "MED",
+    "why": "Same tab: 'Everyone comes and goes by the gates, so smugglers have to get past the garrison', 'every arrival goes through a gate and into the gate tally' — guards are at the edges"
+   },
+   {
+    "town": "r2r-metropolis-25",
+    "sev": "MED",
+    "why": "Same tab: 'the gates shut ... You come into Mönkhköl by a gate, and someone at the gate sees you come'"
+   },
+   {
+    "town": "r2s-mass_migration-city-2",
+    "sev": "MED",
+    "why": "Same tab: 'Everyone comes and goes by the gates ...'; 'the gate tolls are counted there; a gate left unwatched is a toll lost'"
+   }
+  ]
+ },
+ {
+  "id": "DS-DEF-11::WALLED-STRAINED::v3",
+  "state": "REWORDED",
+  "oldText": "{settlement}'s {defwork} was short of hands before the siege; now everyone who can hold a weapon has a place on it, and most of them are learning as they go.",
+  "oldMarks": [
+   "crisis: under_siege"
+  ],
+  "nowText": "{settlement} had too few hands for its defences before the siege; now everyone who can hold a weapon has a place on them, and most of them are learning as they go.",
+  "nowMarks": [
+   "no soldiers",
+   "crisis: under_siege"
+  ],
+  "falseReads": [
+   {
+    "town": "r2s-under_siege-metropolis-2",
+    "sev": "MED",
+    "why": "Same tab: 'The garrison and city watch is well paid, well equipped and patrols properly'; readiness 74 Well-defended — not 'short of hands before the siege'"
+   }
+  ]
+ },
+ {
+  "id": "DS-DEF-11::WALLED-STRAINED::v7",
+  "state": "REWORDED",
+  "oldText": "{settlement} keeps its {defwork} in repair before it pays anyone to stand guard there, and the few who do turn out are stretched thin.",
+  "oldMarks": [
+   "guardPresence",
+   "no watch",
+   "no crisis: under_siege"
+  ],
+  "nowText": "{settlement}'s defences are sound, and the only people who would stand on them are the town's own.",
+  "nowMarks": [
+   "guardPresence",
+   "no watch",
+   "no crisis: under_siege",
+   "no crisis: occupied"
+  ],
+  "falseReads": [
+   {
+    "town": "r2r-hamlet-18",
+    "sev": "MED",
+    "why": "stability 'Ordered (strong military presence)', military 77; tab: 'The citizen militia is well organised and willing' — not 'the few who do turn out are stretched thin'"
+   }
+  ]
+ },
+ {
+  "id": "DS-ECO-10::POSTURE: entrepot::v4",
+  "state": "REWORDED",
+  "oldText": "{settlement} lived by moving other people's goods, and the siege has stopped the moving.",
+  "oldMarks": [
+   "crisis: under_siege"
+  ],
+  "nowText": "Some of {settlement}'s trade was in other towns' goods passing through, and the siege has stopped that trade.",
+  "nowMarks": [
+   "crisis: under_siege"
+  ],
+  "falseReads": [
+   {
+    "town": "r2s-under_siege-city-0",
+    "sev": "MED",
+    "why": "Same Economics tab: 'Bellaurbs has lost even the little that passing trade used to leave behind' and 'it lives on many small ones'; no entrepot line in income sources"
+   }
+  ]
+ },
+ {
+  "id": "DS-ECO-12::INCOME WEIGHT: the religious houses::v4",
+  "state": "REWORDED",
+  "oldText": "At {settlement} the feast days set the calendar of buying and selling, and the offerings leave the place with the people who carry them.",
+  "oldMarks": [
+   "no sacredHouse"
+  ],
+  "nowText": "Whatever {settlement}'s people give for their faith is given elsewhere, or not at all: the place keeps no house to take it.",
+  "nowMarks": [
+   "no sacredHouse",
+   "no crisis: under_siege"
+  ],
+  "falseReads": [
+   {
+    "town": "rw3-hamlet-under_siege-1",
+    "sev": "HIGH",
+    "why": "Under siege: situationDesc 'The caravans have stopped coming and nothing is bought or sold'; 'No food comes into Lidostagnum by trade' — normal feast-day trade and offerings carried out of a besieged hamlet"
+   }
+  ]
+ },
+ {
+  "id": "DS-POW-5::FLAG: crimeIsGovt::v4",
+  "state": "REWORDED",
+  "oldText": "{settlement} has people paid to keep order, and they keep the order the gang bosses want; a complaint against the bosses goes nowhere.",
+  "oldMarks": [
+   "guardPresence"
+  ],
+  "nowText": "{settlement} has people paid to keep order, but the gang bosses keep their own order alongside them, and charge the town for it.",
+  "nowMarks": [
+   "guardPresence"
+  ],
+  "falseReads": [
+   {
+    "town": "r2s-mass_migration-town-2",
+    "sev": "MED",
+    "why": "record crimeIsGovt true, but Defense tab: 'Thieves here know that the court sits and the cells are real', Street Gang 'Competes with the watch for street-level authority', 'A thing done wrong at Shivanand goes somewhere'"
+   },
+   {
+    "town": "r2s-slave_revolt-town-3",
+    "sev": "MED",
+    "why": "crimeIsGovt true, captureState 'equilibrium'; Defense tab: Street Gang 'Competes with the watch', watch 'busy containing the revolt', 'The court can try a case'"
+   }
+  ]
+ },
+ {
+  "id": "DS-POW-6::capture pressure ADVANCING (weak security, poor prosperity)::v7",
+  "state": "REWORDED",
+  "oldText": "{settlement}'s watch keeps the streets, but nobody keeps an eye on the officials, and they are paid too little to refuse a purse.",
+  "oldMarks": [
+   "dm-only",
+   "tier: ≥ village",
+   "watch",
+   "no threat",
+   "no crisis: wartime"
+  ],
+  "nowText": "{settlement} has a watch, but nobody keeps an eye on the officials, and they are paid too little to refuse a purse.",
+  "nowMarks": [
+   "dm-only",
+   "tier: ≥ village",
+   "watch",
+   "no crisis: threat",
+   "no crisis: wartime",
+   "no crisis: insurgency",
+   "no crisis: slave_revolt"
+  ],
+  "falseReads": [
+   {
+    "town": "r2r-town-37",
+    "sev": "MED",
+    "why": "plague town; Guard assessment: 'The town watch exists on paper. Chronically underpaid and poorly equipped' — it does not keep the streets"
+   },
+   {
+    "town": "r2s-slave_revolt-town-3",
+    "sev": "MED",
+    "why": "rebellion: 'everyone set to keep order is busy containing them', 'The watch has abandoned normal patrol patterns'"
+   }
+  ]
+ },
+ {
+  "id": "DS-FTH-4::FLAG: heresySuppression: preached::v3",
+  "state": "REWORDED",
+  "oldText": "Most people at {settlement} hold that magic offends the faith, and a neighbour who works it is talked about, though not yet turned in.",
+  "oldMarks": [
+   "colour"
+  ],
+  "nowText": "The faithful at {settlement} hold that magic offends their faith, and a neighbour who works it is talked about, though not yet turned in.",
+  "nowMarks": [
+   "colour"
+  ],
+  "falseReads": [
+   {
+    "town": "r2r-metropolis-25",
+    "sev": "MED",
+    "why": "Systems/Magic: availability common, 'Religious acceptance: wary', 'Reliance on magic: Integral' (Academy of magic, Mages' district); no heresy flag found in the record — 'most people hold that magic offends the faith' overstates"
+   }
+  ]
+ },
+ {
+  "id": "DS-DEF-1::readiness CRITICAL::v4",
+  "state": "SAME",
+  "oldText": "{settlement} has people under arms, but too few and too badly placed to hold off a serious attack for long.",
+  "oldMarks": [
+   "crisis: any",
+   "guardPresence"
+  ],
+  "nowText": "{settlement} has people under arms, but too few and too badly placed to hold off a serious attack for long.",
+  "nowMarks": [
+   "crisis: any",
+   "guardPresence"
+  ],
+  "falseReads": [
+   {
+    "town": "rww-city-famine-1",
+    "sev": "MED",
+    "why": "Megaousa city 3116 with City walls, Garrison, Professional city watch; same tab Invasion & War: \"garrison roll puts paid soldiers on every stretch of its walls ... an army would pay dearly\""
+   }
+  ]
+ },
+ {
+  "id": "DS-DEF-2::Beasts & Monsters: settled, nothing organized::v6",
+  "state": "MARKS",
+  "oldText": "You find {settlement} with nothing organised against what has come out of the country, and people arming themselves with whatever is at hand.",
+  "oldMarks": [
+   "threat",
+   "crisis: any"
+  ],
+  "nowText": "You find {settlement} with nothing organised against what has come out of the country, and people arming themselves with whatever is at hand.",
+  "nowMarks": [
+   "threat",
+   "crisis: any",
+   "no crisis: under_siege",
+   "no crisis: occupied",
+   "no guardPresence"
+  ],
+  "falseReads": [
+   {
+    "town": "r2r-thorp-40",
+    "sev": "HIGH",
+    "why": "stress.type=occupied, config.monsterThreat=heartland; no beast crisis anywhere on page; Defense: \"the arms in the thorp are theirs\" (occupiers)"
+   },
+   {
+    "town": "r2s-monster_pressure-town-2",
+    "sev": "HIGH",
+    "why": "institutions include Town watch and Free company hall; same page: \"The free company at Velipol keeps its own muster roll\", \"1 force\""
+   }
+  ]
+ },
+ {
+  "id": "DS-DEF-2::Invasion & War: walls with NO force::v6",
+  "state": "MARKS",
+  "oldText": "{settlement} had nobody to put on its walls until the siege came; the people on them now are townsfolk who have never held a wall before.",
+  "oldMarks": [
+   "crisis: under_siege"
+  ],
+  "nowText": "{settlement} had nobody to put on its walls until the siege came; the people on them now are townsfolk who have never held a wall before.",
+  "nowMarks": [
+   "no watch",
+   "no mercenary",
+   "crisis: under_siege"
+  ],
+  "falseReads": [
+   {
+    "town": "r2s-under_siege-town-3",
+    "sev": "HIGH",
+    "why": "institutions include Town watch (\"1 force\"); Guard assessment: \"Everyone comes and goes by the gates, so smugglers have to get past the town watch\""
+   }
+  ]
+ },
+ {
+  "id": "DS-DEF-2::Invasion & War: neither walls nor force::v6",
+  "state": "REWORDED",
+  "oldText": "You find {settlement} open on every side, with nobody posted anywhere, while the danger everyone talks about is close.",
+  "oldMarks": [
+   "threat",
+   "crisis: any",
+   "no watch"
+  ],
+  "nowText": "You find {settlement} with no wall and nobody under arms, and its people keeping close to home until the danger passes.",
+  "nowMarks": [
+   "threat",
+   "crisis: any",
+   "no watch",
+   "no crisis: under_siege",
+   "no crisis: occupied"
+  ],
+  "falseReads": [
+   {
+    "town": "rww-hamlet-under_siege-1",
+    "sev": "HIGH",
+    "why": "stress under_siege; Military status: \"Miroko is surrounded. Everyone who can keep a lookout is keeping one\""
+   },
+   {
+    "town": "rw3-hamlet-under_siege-1",
+    "sev": "HIGH",
+    "why": "stress under_siege; \"Every able body in Lidostagnum takes a turn at the lookout\"; also has Adventurers' charter hall mustering the defence"
+   },
+   {
+    "town": "r2r-hamlet-0",
+    "sev": "HIGH",
+    "why": "stress under_siege; \"the siege is being held by householders taking turns\""
+   }
+  ]
+ },
+ {
+  "id": "DS-DEF-2::Invasion & War: neither walls nor force::v10",
+  "state": "GONE",
+  "oldText": "{settlement} lies open on every side; its watch keeps to its rounds while the danger everyone talks about is close.",
+  "oldMarks": [
+   "watch",
+   "threat",
+   "crisis: any"
+  ],
+  "falseReads": [
+   {
+    "town": "rw3-town-under_siege+famine-1",
+    "sev": "HIGH",
+    "why": "stressors under_siege+famine; \"With an army outside ... every guard and every store is counted\"; danger is not \"close\", it is outside the gates"
+   },
+   {
+    "town": "r2s-under_siege-town-1",
+    "sev": "HIGH",
+    "why": "stress under_siege; \"To reach Fengling you would have to cross the besiegers' lines\""
+   }
+  ]
+ },
+ {
+  "id": "DS-DEF-2::CHAIN: food trades failing::v3",
+  "state": "REWORDED",
+  "oldText": "{settlement}'s salting and drying trades are failing, and each season they fail the town has less preserved food to fall back on if it is cut off.",
+  "oldMarks": [
+   "no crisis: under_siege"
+  ],
+  "nowText": "{settlement}'s food trades are failing, and each season they fail the town has less put by to fall back on if it is cut off.",
+  "nowMarks": [
+   "no crisis: under_siege"
+  ],
+  "falseReads": [
+   {
+    "town": "r2r-metropolis-16",
+    "sev": "MED",
+    "why": "food_processing impaired (bakers/butchers) but Salt works present, chain salt=entrepot; Economics page: \"Salt & Preservation ... Salt works · Preserved foods\" healthy"
+   },
+   {
+    "town": "r2r-metropolis-22",
+    "sev": "MED",
+    "why": "food_processing impaired (bakers/butchers) but river_fishing=running and page Produced locally lists \"Salted fish, Smoked seafood\""
+   }
+  ]
+ },
+ {
+  "id": "DS-DEF-3::COMPOUND: political fracture::v4",
+  "state": "SAME",
+  "oldText": "At {settlement} a quarrel is settled by whichever power the quarrelling households look to, and the answers seldom match.",
+  "oldMarks": [
+   "colour"
+  ],
+  "nowText": "At {settlement} a quarrel is settled by whichever power the quarrelling households look to, and the answers seldom match.",
+  "nowMarks": [
+   "colour"
+  ],
+  "falseReads": [
+   {
+    "town": "r2s-politically_fractured-hamlet-3",
+    "sev": "MED",
+    "why": "powerStructure.factions has 1; Power tab: \"The Powers (1)\" and the split is \"Two households are not speaking\", not rival powers"
+   }
+  ]
+ },
+ {
+  "id": "DS-DEF-5::garrison PRESENT::v4",
+  "state": "GONE",
+  "oldText": "{settlement}'s soldiers are paid by the season and drilled by the week, whether or not anything comes.",
+  "oldMarks": [
+   "colour"
+  ],
+  "falseReads": [
+   {
+    "town": "rww-metropolis-under_siege-1",
+    "sev": "HIGH",
+    "why": "stress under_siege; same paragraph: \"gates are shut and barred ... since the siege began\"; something has come"
+   },
+   {
+    "town": "rw3-city-calm-1",
+    "sev": "MED",
+    "why": "same tab Vulnerabilities: \"Fortification and forces are present but chronically underfunded: poor equipment, low morale\""
+   }
+  ]
+ },
+ {
+  "id": "DS-DEF-9::magicDependency true::v4",
+  "state": "SAME",
+  "oldText": "{settlement} does better than its ground and roads would explain, and the reason is the arcane work done here.",
+  "oldMarks": [],
+  "nowText": "{settlement} does better than its ground and roads would explain, and the reason is the arcane work done here.",
+  "nowMarks": [],
+  "falseReads": [
+   {
+    "town": "rww-city-calm-1",
+    "sev": "MED",
+    "why": "Economics tab: \"The city is well off, the road keeps it that way\"; traditions.hasArcane=false (Wizard's tower only)"
+   }
+  ]
+ },
+ {
+  "id": "DS-ECO-1::COMBINATION C4: a low rung on a working approach::v1",
+  "state": "REWORDED",
+  "oldText": "Traffic moves along {settlement}'s {access} every day, and little of its money stays behind.",
+  "oldMarks": [
+   "no crisis: under_siege"
+  ],
+  "nowText": "Trade comes and goes by {settlement}'s {access}, and the town stays poor all the same.",
+  "nowMarks": [
+   "no crisis: under_siege",
+   "no crisis: plague_onset"
+  ],
+  "falseReads": [
+   {
+    "town": "rww-metropolis-famine-1",
+    "sev": "MED",
+    "why": "Income: \"Entrepôt Trade 9% Transit duties, warehouse fees ... from goods passing through the crossroads\", plus Toll Revenue"
+   }
+  ]
+ },
+ {
+  "id": "DS-ECO-9::DEFICIT::v5",
+  "state": "SAME",
+  "oldText": "Nothing has come into {settlement} since the siege closed the roads, and what the town can still grow is not near enough.",
+  "oldMarks": [
+   "crisis: under_siege"
+  ],
+  "nowText": "Nothing has come into {settlement} since the siege closed the roads, and what the town can still grow is not near enough.",
+  "nowMarks": [
+   "crisis: under_siege"
+  ],
+  "falseReads": [
+   {
+    "town": "rw3-metropolis-under_siege-1",
+    "sev": "MED",
+    "why": "foodSecurity.importCoverage=68868 (13%); line just above: \"+ 68,834 imported\" and \"carts bring in a little of the rest\""
+   }
+  ]
+ },
+ {
+  "id": "DS-ECO-10::POSTURE: established::v10",
+  "state": "GONE",
+  "oldText": "{settlement} has several kinds of goods to sell outward, and the siege has shut every one of them in.",
+  "oldMarks": [
+   "crisis: under_siege"
+  ],
+  "falseReads": [
+   {
+    "town": "rww-city-under_siege-1",
+    "sev": "MED",
+    "why": "primaryExports are all services: letters of credit, legal, military contract, arcane services; no goods"
+   },
+   {
+    "town": "r2s-under_siege-city-2",
+    "sev": "MED",
+    "why": "exports legal services, pilgrimage, military contracts, cultural tourism, alchemical trade: mostly services, not goods to shut in"
+   }
+  ]
+ },
+ {
+  "id": "DS-ECO-11::EXPLOITATION: fullyExploited::v3",
+  "state": "REWORDED",
+  "oldText": "The town has taken this trade as far as it goes, from the ground to the finished thing.",
+  "oldMarks": [
+   "colour"
+  ],
+  "nowText": "One of {settlement}'s trades is carried through here from start to finish, from what the country gives to the finished thing.",
+  "nowMarks": [
+   "no crisis: under_siege"
+  ],
+  "falseReads": [
+   {
+    "town": "rww-hamlet-under_siege-1",
+    "sev": "MED",
+    "why": "fullyExploited grain via \"Access to external mill\" (no mill or bakers in the hamlet); grain is not taken to the finished thing here"
+   }
+  ]
+ },
+ {
+  "id": "DS-ECO-12::CRITICAL IMPORT: the land cannot give it::v3",
+  "state": "REWORDED",
+  "oldText": "The country around {settlement} produces no {good}, and nothing comes in from outside to make up for it, so the town does without.",
+  "oldMarks": [
+   "no imports"
+  ],
+  "nowText": "The country around {settlement} produces no {good}, so the town must look elsewhere for whatever it uses.",
+  "nowMarks": [
+   "no imports"
+  ],
+  "falseReads": [
+   {
+    "town": "r2r-thorp-23",
+    "sev": "MED",
+    "why": "same Economics tab, Imports: \"Metals Salt / Terrain cannot produce\"; line says nothing comes in"
+   }
+  ]
+ },
+ {
+  "id": "DS-FTH-4::FLAG: heresySuppression: hunted::v3",
+  "state": "REWORDED",
+  "oldText": "Anyone at {settlement} suspected of working magic is named aloud and shunned, and those who have the art keep it even from their kin.",
+  "oldMarks": [
+   "colour"
+  ],
+  "nowText": "Anyone at {settlement} suspected of working magic against the faith is named aloud and shunned.",
+  "nowMarks": [
+   "colour"
+  ],
+  "falseReads": [
+   {
+    "town": "r2r-metropolis-29",
+    "sev": "MED",
+    "why": "Alchemist quarter; Magic tab: \"passes through a workshop that could not run without the arcane, and everybody in the trade knows which workshop\""
+   },
+   {
+    "town": "r2r-metropolis-46",
+    "sev": "MED",
+    "why": "Wizard's tower and Alchemist quarter; reliance Integral, supplied by Wizard's tower and named practitioner Wenhao Kato"
+   }
+  ]
+ },
+ {
+  "id": "DS-DEF-2::Invasion & War: neither walls nor force::v7",
+  "state": "SAME",
+  "oldText": "{settlement} has no wall and no soldiers; its watch keeps the peace in the streets and would be no answer to an army.",
+  "oldMarks": [
+   "watch",
+   "no threat",
+   "crisis: any"
+  ],
+  "nowText": "{settlement} has no wall and no soldiers; its watch keeps the peace in the streets and would be no answer to an army.",
+  "nowMarks": [
+   "watch",
+   "no threat",
+   "crisis: any"
+  ],
+  "falseReads": [
+   {
+    "town": "r2r-town-33",
+    "sev": "MED",
+    "why": "record walls=[] garrison=[], but powerStructure.governingName=Military Council; Power tab: 'Military commanders hold direct political authority; civic life is subordinate to defence' (a town ruled by officers told it has 'no soldiers')"
+   }
+  ]
+ },
+ {
+  "id": "DS-DEF-2::Economic Survival: WEAK::v5",
+  "state": "SAME",
+  "oldText": "If {settlement} ever had to hire people to defend it, it would have to borrow the money first.",
+  "oldMarks": [
+   "no guardPresence"
+  ],
+  "nowText": "If {settlement} ever had to hire people to defend it, it would have to borrow the money first.",
+  "nowMarks": [
+   "no guardPresence"
+  ],
+  "falseReads": [
+   {
+    "town": "r2r-hamlet-4",
+    "sev": "MED",
+    "why": "defenseProfile.institutions.charter=[Adventurers' charter hall]; same tab: 'The charter hall at Gantulgaiin keeps a book of the bounties the hamlet has posted' (it already pays people to defend it)"
+   }
+  ]
+ },
+ {
+  "id": "DS-DEF-5::walls PRESENT::v7",
+  "state": "REWORDED",
+  "oldText": "{settlement} put its labour into a wall and none into a gate; the wall marks the edge of the town more than it closes it.",
+  "oldMarks": [
+   "no gate",
+   "no crisis: under_siege"
+  ],
+  "nowText": "Nothing closes the few ways through {settlement}'s wall, because it has no gate.",
+  "nowMarks": [
+   "no gate",
+   "no crisis: under_siege"
+  ],
+  "falseReads": [
+   {
+    "town": "rw3-village-insurgency-1",
+    "sev": "MED",
+    "why": "walls=[Palisade or earthworks], no gate institution; same tab Guard assessment: 'The walls leave few ways in, so smugglers have to get past the citizen militia'"
+   },
+   {
+    "town": "r2r-hamlet-10",
+    "sev": "MED",
+    "why": "walls=[Palisade or earthworks]; same tab: 'The walls leave few ways in, so smugglers have to get past the citizen militia'"
+   },
+   {
+    "town": "r2r-hamlet-11",
+    "sev": "MED",
+    "why": "walls=[Palisade or earthworks]; same tab: 'The walls leave few ways in, and the guard watches them'"
+   }
+  ]
+ },
+ {
+  "id": "DS-DEF-5::NO organized force at all::v4",
+  "state": "MARKS",
+  "oldText": "{settlement} kept no defenders of its own, and the people defending it now are neighbours who stepped forward when the trouble came.",
+  "oldMarks": [
+   "crisis: under_siege",
+   "crisis: wartime"
+  ],
+  "nowText": "{settlement} kept no defenders of its own, and the people defending it now are neighbours who stepped forward when the trouble came.",
+  "nowMarks": [
+   "crisis: under_siege"
+  ],
+  "falseReads": [
+   {
+    "town": "r2r-hamlet-5",
+    "sev": "MED",
+    "why": "stress=wartime (no attack); same tab: 'A visitor to Achilpolis would not guess at the trouble from the streets' and 'The hamlet's plan for an army is to not be interesting to one'"
+   },
+   {
+    "town": "r2r-thorp-55",
+    "sev": "MED",
+    "why": "stress=wartime; same tab: 'Nobody ever thought Yekekum worth a wall, and nothing has yet given it cause to want one', 'A visitor... would not guess at the trouble'"
+   }
+  ]
+ },
+ {
+  "id": "DS-DEF-8::override: ACTIVE SIEGE::v4",
+  "state": "GONE",
+  "oldText": "{settlement} had nobody whose work was its defence before the army came, so the siege is being held by householders taking turns.",
+  "oldMarks": [
+   "no guardPresence"
+  ],
+  "falseReads": [
+   {
+    "town": "r2r-hamlet-0",
+    "sev": "MED",
+    "why": "stress=under_siege, no force; same tab Invasion & War: 'You find Spitzsteig open on every side, with nobody posted anywhere'"
+   }
+  ]
+ },
+ {
+  "id": "DS-DEF-8::override: UNDER TRIBUTE::v4",
+  "state": "SAME",
+  "oldText": "{settlement} keeps no defenders to pay, and the debt is one more reason it never will.",
+  "oldMarks": [
+   "no guardPresence"
+  ],
+  "nowText": "{settlement} keeps no defenders to pay, and the debt is one more reason it never will.",
+  "nowMarks": [
+   "no guardPresence"
+  ],
+  "falseReads": [
+   {
+    "town": "rww-village-indebted-1",
+    "sev": "MED",
+    "why": "defenseProfile.institutions.charter=[Adventurers' charter hall]; same tab: 'The adventurers' charter hall exists on paper. Chronically underpaid' and the hall posts bounties"
+   }
+  ]
+ },
+ {
+  "id": "DS-DEF-9::magicDependency true, with a NAMED dependent chain::v1",
+  "state": "REWORDED",
+  "oldText": "The {good} made at {settlement} cannot be made without arcane work, which puts the whole line behind a very small number of people.",
+  "oldMarks": [],
+  "nowText": "At {settlement} the usual work no longer yields enough {good}, and part of the shortfall is made up by means beyond it.",
+  "nowMarks": [],
+  "falseReads": [
+   {
+    "town": "rw3-metropolis-calm-1",
+    "sev": "MED",
+    "why": "the livestock chain's magicNote is 'Blessed stores; divine provision fills the gap' from Parish churches (50-100+) and the Great cathedral; Magic tab: 'Economic role: absent', availability limited (divine, not arcane, and not a few people)"
+   },
+   {
+    "town": "r2r-city-2",
+    "sev": "MED",
+    "why": "salt chain magicNote 'Arcane quickening of growth provides minor food supplement' (recovery 0.3), printed just below as a minor supplement, not something the work cannot do without"
+   }
+  ]
+ },
+ {
+  "id": "DS-ECO-9::IMPORT-DEPENDENT::v5",
+  "state": "SAME",
+  "oldText": "Whatever {settlement} used to buy for its table, none of it has come since the siege closed the roads.",
+  "oldMarks": [
+   "crisis: under_siege"
+  ],
+  "nowText": "Whatever {settlement} used to buy for its table, none of it has come since the siege closed the roads.",
+  "nowMarks": [
+   "crisis: under_siege"
+  ],
+  "falseReads": [
+   {
+    "town": "r2s-under_siege-city-0",
+    "sev": "MED",
+    "why": "foodSecurity.importCoverage=6439 lbs/day; same block: '+ 6,422 imported', 'ships bring in a little of the rest', two lines above it"
+   },
+   {
+    "town": "r2s-under_siege-metropolis-3",
+    "sev": "MED",
+    "why": "foodSecurity.importCoverage=22760; same block: '+ 22,719 imported', 'boats bring in a little of the rest'"
+   }
+  ]
+ },
+ {
+  "id": "DS-ECO-9::FOOD SOURCES: one source::v3",
+  "state": "REWORDED",
+  "oldText": "With only its {good} to fall back on, {settlement} feels every bad season there at every table.",
+  "oldMarks": [
+   "no crisis: famine"
+  ],
+  "nowText": "{settlement} has little food of its own but its {good}, so a bad season for the {good} is felt at every table.",
+  "nowMarks": [
+   "no crisis: famine"
+  ],
+  "falseReads": [
+   {
+    "town": "rww-city-insurgency-1",
+    "sev": "MED",
+    "why": "foodRecord.foodSources=[grain], but the sentence just before it says 'Food carts come into Eisenberg most days... a good part of what the city eats is grown elsewhere'; '+ 4,748 imported'"
+   },
+   {
+    "town": "rww-metropolis-under_siege-1",
+    "sev": "MED",
+    "why": "herds give 4,758 lbs/day against '+ 12,065 by divine provision'; the sentence before it: 'some of what the metropolis eats is made or kept by magic'"
+   }
+  ]
+ },
+ {
+  "id": "DS-SUP-2::UPSTREAM WEAK: a chain the town's work draws on is failing::v2",
+  "state": "REWORDED",
+  "oldText": "Work is slowing at {settlement} for a fault that is not all its own: its {chain} is short of what it needs from upstream.",
+  "oldMarks": [
+   "colour"
+  ],
+  "nowText": "Trouble in {settlement}'s {chain} puts what depends on it at risk.",
+  "nowMarks": [
+   "colour"
+  ],
+  "falseReads": [
+   {
+    "town": "rww-city-recently_betrayed-1",
+    "sev": "MED",
+    "why": "{chain} is the failing upstream chain (pool key 'a chain the town's work draws on is failing'); food_processing's own upstream (grain) status=running, and the page reads 'Upstream Food Processing chain is impaired'"
+   },
+   {
+    "town": "rww-metropolis-calm-1",
+    "sev": "MED",
+    "why": "the cartography chain has upstreamChains=[]; the page says 'Upstream cartography chain is impaired' under the news chain, so cartography is the upstream, not the one short"
+   },
+   {
+    "town": "rww-metropolis-wartime-1",
+    "sev": "MED",
+    "why": "cartography upstreamChains=[]; the page reads 'Upstream cartography chain is impaired' under News"
+   }
+  ]
+ },
+ {
+  "id": "DS-ECO-11::EXPLOITATION: partiallyExploited::v5",
+  "state": "REWORDED",
+  "oldText": "{settlement} used to send its {resource} out half-worked; with the roads cut by the siege it piles up instead, and nobody here can finish it.",
+  "oldMarks": [
+   "crisis: under_siege"
+  ],
+  "nowText": "With the roads cut by the siege, {settlement} can no longer send out its {resource}, and what it has stays in the town.",
+  "nowMarks": [
+   "crisis: under_siege"
+  ],
+  "falseReads": [
+   {
+    "town": "rww-city-under_siege-1",
+    "sev": "MED",
+    "why": "institutions include Weavers/Textile workers, Fuller, Dyer; Economics 'Produced locally: Processed textiles, Finished clothing, Dyed cloth' (people here can finish wool)"
+   },
+   {
+    "town": "r2s-under_siege-city-3",
+    "sev": "MED",
+    "why": "institutions include Weavers/Textile workers and Fuller, so wool is worked here"
+   },
+   {
+    "town": "r2s-under_siege-town-3",
+    "sev": "MED",
+    "why": "institutions include Blacksmiths (3-10); primaryExports include 'Quality tools and weapons' (iron is finished here)"
+   }
+  ]
+ },
+ {
+  "id": "DS-ECO-12::CRITICAL IMPORT: a house needs what the land lacks::v4",
+  "state": "GONE",
+  "oldText": "{settlement} has no {good} of its own, and the siege lets none in, so the work that needs it is stopping.",
+  "oldMarks": [
+   "crisis: under_siege"
+  ],
+  "falseReads": [
+   {
+    "town": "rw3-metropolis-under_siege-1",
+    "sev": "MED",
+    "why": "Economics: 'Stores: a granary, 15 months of grain'; Defense: 'the granary carries the metropolis for more than a year' (work that needs grain is not stopping)"
+   },
+   {
+    "town": "r2s-under_siege-city-0",
+    "sev": "MED",
+    "why": "'Stores: a granary, nine months of grain'; Defense: 'the granary carries the city for about eleven months'"
+   }
+  ]
+ },
+ {
+  "id": "DS-ECO-12::CRITICAL IMPORT: the land cannot give it::v4",
+  "state": "GONE",
+  "oldText": "{settlement} neither grows nor buys any {good}; people there do without.",
+  "oldMarks": [
+   "no imports"
+  ],
+  "falseReads": [
+   {
+    "town": "r2r-thorp-27",
+    "sev": "MED",
+    "why": "Trade Profile on the same tab, five lines below: 'Imports: Metals'"
+   }
+  ]
+ },
+ {
+  "id": "DS-GEN-17::GREAT HOUSE: monastery::v1",
+  "state": "MARKS",
+  "oldText": "Robed monks and nuns are a common sight on the way into {settlement}.",
+  "oldMarks": [
+   "institution: monastery"
+  ],
+  "nowText": "Robed monks and nuns are a common sight on the way into {settlement}.",
+  "nowMarks": [
+   "institution: monastery",
+   "no crisis: under_siege"
+  ],
+  "falseReads": [
+   {
+    "town": "r2r-metropolis-14",
+    "sev": "HIGH",
+    "why": "stress.type=under_siege; Defense: 'Prabhapeta's gates are shut and barred, and nothing has come through them since the siege began' (nobody is on the way in)"
+   }
+  ]
+ },
+ {
+  "id": "DS-GEN-18::BOUGHT-IN::v1",
+  "state": "REWORDED",
+  "oldText": "{settlement} cannot produce its own {good}, so it buys it in.",
+  "oldMarks": [
+   "no crisis: under_siege"
+  ],
+  "nowText": "{settlement} brings in {good} from outside.",
+  "nowMarks": [
+   "no crisis: under_siege"
+  ],
+  "falseReads": [
+   {
+    "town": "rww-hamlet-calm-1",
+    "sev": "MED",
+    "why": "institutions include 'Salt works' (Institutions tab: 'Salt worksEconomy'), yet it says 'cannot produce its own salt'"
+   },
+   {
+    "town": "rww-metropolis-calm-1",
+    "sev": "MED",
+    "why": "institutions include 'Stone quarry' ('Builds the walls and churches of half the region'), yet 'cannot produce its own stone'"
+   },
+   {
+    "town": "rww-thorp-plague_onset-1",
+    "sev": "MED",
+    "why": "economicState.localProduction includes 'medicinal herbs'; Resources 'Commodities available: ... medicinal herbs'"
+   }
+  ]
+ },
+ {
+  "id": "DS-GEN-18::BOUGHT-IN::v9",
+  "state": "REWORDED",
+  "oldText": "What {settlement}'s trades use comes in from elsewhere more often than from its own ground.",
+  "oldMarks": [
+   "no crisis: under_siege"
+  ],
+  "nowText": "Much of what changes hands at {settlement} came from somewhere else first.",
+  "nowMarks": [
+   "no crisis: under_siege"
+  ],
+  "falseReads": [
+   {
+    "town": "rww-hamlet-mass_migration-1",
+    "sev": "MED",
+    "why": "primaryImports=['Incense and votive candles'] only; the river_fishing and pilgrimage chains run on its own resources"
+   },
+   {
+    "town": "rww-village-famine-1",
+    "sev": "MED",
+    "why": "tradeRouteAccess=isolated; primaryImports=['Incense and votive candles'] only; the timber, mountain timber and alpine wool chains run on local resources"
+   },
+   {
+    "town": "rww-village-indebted-1",
+    "sev": "MED",
+    "why": "livestock and textiles chains status=running on local Grazing land; imports are only salt, arms, feathers and jade"
+   }
+  ]
+ },
+ {
+  "id": "DS-FTH-4::FLAG: heresySuppression: hunted::v4",
+  "state": "REWORDED",
+  "oldText": "A charm worked in the open at {settlement} is reported before nightfall, and the faithful see to it that whoever worked it leaves.",
+  "oldMarks": [
+   "colour"
+  ],
+  "nowText": "A charm worked in the open at {settlement} is reported before nightfall, and whoever worked it is shunned by the faithful.",
+  "nowMarks": [
+   "colour"
+  ],
+  "falseReads": [
+   {
+    "town": "rww-city-calm-1",
+    "sev": "MED",
+    "why": "safetyProfile.flags.heresySuppression=true, but the institutions include a Wizard's tower; Magic tab 'Economic role: common', 'Vysokoko does better... the reason is the arcane work done here'"
+   }
+  ]
+ },
+ {
+  "id": "DS-FTH-4::FLAG: heresySuppression: preached::v5",
+  "state": "REWORDED",
+  "oldText": "A newcomer at {settlement} soon hears that magic is heresy here, and is watched until the neighbours are sure of them.",
+  "oldMarks": [
+   "colour"
+  ],
+  "nowText": "A newcomer at {settlement} soon hears that the faithful count magic a heresy, and is watched until the neighbours are sure of them.",
+  "nowMarks": [
+   "colour"
+  ],
+  "falseReads": [
+   {
+    "town": "r2s-wartime-hamlet-2",
+    "sev": "MED",
+    "why": "safetyProfile.flags.heresySuppression=true, but Magic tab: 'Religious acceptance: indifferent', 'Legality: regulated', availability moderate"
+   }
+  ]
+ },
+ {
+  "id": "DS-DEF-2::Beasts & Monsters: plagued, perimeter AND organized force::v4",
+  "state": "REWORDED",
+  "oldText": "The wall at {settlement} is manned day and night against the creatures, and nobody walks out past it unarmed.",
+  "oldMarks": [
+   "colour"
+  ],
+  "nowText": "{settlement} keeps its wall against the creatures, and nobody walks out past it unarmed.",
+  "nowMarks": [
+   "colour"
+  ],
+  "falseReads": [
+   {
+    "town": "rww-thorp-under_siege-1",
+    "sev": "MED",
+    "why": "thorp of 5, palisade + household levy, scores.monster 10; same page: \"The thorp knows it needs specialists against the creatures, and has none\"; besiegers let nobody out anyway"
+   }
+  ]
+ },
+ {
+  "id": "DS-DEF-2::Invasion & War: walls with NO force::v4",
+  "state": "MARKS",
+  "oldText": "{settlement}'s walls are kept by its watch and nobody else, which is enough to see who comes and goes and nothing like enough to hold them.",
+  "oldMarks": [
+   "watch",
+   "no crisis: under_siege"
+  ],
+  "nowText": "{settlement}'s walls are kept by its watch and nobody else, which is enough to see who comes and goes and nothing like enough to hold them.",
+  "nowMarks": [
+   "watch",
+   "no mercenary",
+   "no crisis: under_siege",
+   "no crisis: occupied"
+  ],
+  "falseReads": [
+   {
+    "town": "rww-town-occupied-1",
+    "sev": "HIGH",
+    "why": "stress occupied; same tab Military status: \"The occupiers' troops at Tulumtzal protect it from everyone except the people who sent them\" - so not \"its watch and nobody else\""
+   }
+  ]
+ },
+ {
+  "id": "DS-DEF-2::Invasion & War: neither walls nor force::v2",
+  "state": "REWORDED",
+  "oldText": "Nothing threatens {settlement} now, and nothing about the town would stop it if something did. Its safety rests on nobody wanting it.",
+  "oldMarks": [
+   "no threat",
+   "crisis: any"
+  ],
+  "nowText": "Nothing has come for {settlement}, and nothing about the town would stop whatever did. Its safety rests on nobody having wanted it.",
+  "nowMarks": [
+   "no threat",
+   "crisis: any"
+  ],
+  "falseReads": [
+   {
+    "town": "rww-hamlet-famine-1",
+    "sev": "HIGH",
+    "why": "famine/critical; same tab \"The hamlet may not come through this crisis\"; monsterThreat frontier, page \"needs specialists against the creatures\" - \"Nothing threatens Ulfset now\" is wrong"
+   },
+   {
+    "town": "rww-hamlet-mass_migration-1",
+    "sev": "MED",
+    "why": "mass_migration/high and monsterThreat frontier; same tab \"Every quarrel over a roof or a meal is a fight no one is placed to stop\""
+   }
+  ]
+ },
+ {
+  "id": "DS-DEF-2::CHAIN: defence supplied::v5",
+  "state": "REWORDED",
+  "oldText": "Food is short at {settlement}, but the trades that arm its defenders are still working, so the defence is not short of gear.",
+  "oldMarks": [
+   "crisis: hunger"
+  ],
+  "nowText": "Food is short at {settlement}, but the trades behind its defence still do it more good than harm.",
+  "nowMarks": [
+   "crisis: hunger"
+  ],
+  "falseReads": [
+   {
+    "town": "r2s-famine-metropolis-2",
+    "sev": "MED",
+    "why": "same tab Guard assessment: \"The garrison and city watch exists on paper. Chronically underpaid and poorly equipped\" against \"the defence is not short of gear\""
+   }
+  ]
+ },
+ {
+  "id": "DS-DEF-3::Moderate::v1",
+  "state": "REWORDED",
+  "oldText": "{settlement} keeps a working balance: the law is present, and nobody has the run of the town.",
+  "oldMarks": [
+   "guardPresence"
+  ],
+  "nowText": "{settlement} keeps a working balance: the law is present, so is crime, and neither has the upper hand.",
+  "nowMarks": [
+   "guardPresence"
+  ],
+  "falseReads": [
+   {
+    "town": "rww-metropolis-infiltrated-1",
+    "sev": "MED",
+    "why": "next lines: \"Criminal structure: Organized syndicate\", \"Thieves' Guild (Powerful) ... Deeply embedded in civic life\", \"the people who run the metropolis's crime\"; stress infiltrated"
+   },
+   {
+    "town": "r2r-city-12",
+    "sev": "MED",
+    "why": "Guard assessment: \"Public law enforcement is largely a formality\"; Internal Security rated Critical; next line one ring runs crime"
+   }
+  ]
+ },
+ {
+  "id": "DS-DEF-8::override: SECURITY COMPROMISED::v4",
+  "state": "SAME",
+  "oldText": "{settlement} has no defenders to reorganize after the betrayal, only households that now bar their doors and keep their own counsel.",
+  "oldMarks": [
+   "no guardPresence"
+  ],
+  "nowText": "{settlement} has no defenders to reorganize after the betrayal, only households that now bar their doors and keep their own counsel.",
+  "nowMarks": [
+   "no guardPresence"
+  ],
+  "falseReads": [
+   {
+    "town": "r2s-recently_betrayed-thorp-1",
+    "sev": "MED",
+    "why": "the line before it: \"Those who keep Grímberg safe are questioning everyone who could have reached what was sold\" - says there are keepers"
+   },
+   {
+    "town": "r2s-recently_betrayed-village-1",
+    "sev": "MED",
+    "why": "line before: \"Those who keep Hongan safe are questioning everyone...\" against \"no defenders\""
+   }
+  ]
+ },
+ {
+  "id": "DS-DEF-11::WALLED-STRAINED::v6",
+  "state": "REWORDED",
+  "oldText": "{settlement} has nobody whose work it is to stand on its {defwork}, though the town keeps the {defwork} in repair.",
+  "oldMarks": [
+   "no guardPresence",
+   "no crisis: under_siege"
+  ],
+  "nowText": "{settlement}'s defences still stand sound, though nobody in the town has the work of manning them.",
+  "nowMarks": [
+   "no guardPresence",
+   "no crisis: under_siege",
+   "no crisis: occupied"
+  ],
+  "falseReads": [
+   {
+    "town": "r2r-thorp-24",
+    "sev": "MED",
+    "why": "stress occupied; same tab: \"The occupiers' troops at Sanctaminus protect it\""
+   }
+  ]
+ },
+ {
+  "id": "DS-ECO-1::COMBINATION C4: a low rung on a working approach::v4",
+  "state": "REWORDED",
+  "oldText": "With the siege closing every way in, {settlement} has lost even the little that passing trade used to leave behind.",
+  "oldMarks": [
+   "crisis: under_siege"
+  ],
+  "nowText": "With the siege closing every way in, {settlement} has lost what passing trade used to leave behind, and the town feels the loss.",
+  "nowMarks": [
+   "crisis: under_siege"
+  ],
+  "falseReads": [
+   {
+    "town": "rww-metropolis-under_siege-1",
+    "sev": "MED",
+    "why": "metropolis of 17,524 with district markets, major annual fairs and Market Taxes 24% of income: \"the little that passing trade used to leave\" undersells it"
+   }
+  ]
+ },
+ {
+  "id": "DS-ECO-9::FOOD SOURCES: one source::v4",
+  "state": "GONE",
+  "oldText": "{settlement} lived off its {good} and little else, and the {good} has failed; there is nothing else to turn to.",
+  "oldMarks": [
+   "crisis: famine"
+  ],
+  "falseReads": [
+   {
+    "town": "rw3-thorp-famine-1",
+    "sev": "MED",
+    "why": "same paragraph: \"Chichek grows about a third of what it eats, and carts bring in most of the rest\"; \"whatever it can buy\" - so not \"little else ... nothing else to turn to\""
+   },
+   {
+    "town": "r2s-famine-hamlet-2",
+    "sev": "MED",
+    "why": "same paragraph: \"ships bring in most of the rest\" and \"some of what the hamlet eats is made or kept by magic\""
+   }
+  ]
+ },
+ {
+  "id": "DS-ECO-12::CRITICAL IMPORT: the land cannot give it::v1",
+  "state": "REWORDED",
+  "oldText": "The country around {settlement} produces no {good}: whatever the town has of it comes from outside.",
+  "oldMarks": [
+   "colour"
+  ],
+  "nowText": "The country around {settlement} produces no {good}, so the town has none but what it buys.",
+  "nowMarks": [
+   "colour"
+  ],
+  "falseReads": [
+   {
+    "town": "rww-town-calm-1",
+    "sev": "MED",
+    "why": "same page Imports: \"Grain (a little, beside its own harvest)\"; Mills (2-5); \"Herding and mixed farming\" - it does grow grain"
+   }
+  ]
+ },
+ {
+  "id": "DS-ECO-12::INCOME WEIGHT: the religious houses::v3",
+  "state": "REWORDED",
+  "oldText": "Faith carries real weight in {settlement}'s money, though the place keeps no house for it: what its people give for their faith leaves with them on the feast days.",
+  "oldMarks": [
+   "no sacredHouse"
+  ],
+  "nowText": "{settlement} keeps no house for its faith, so none of the town's money passes through one.",
+  "nowMarks": [
+   "no sacredHouse",
+   "no crisis: under_siege"
+  ],
+  "falseReads": [
+   {
+    "town": "rw3-hamlet-plague_onset-1",
+    "sev": "MED",
+    "why": "Income Sources on the same page: Agricultural Rents 89%, Iron & Metalwork 11%, no faith share; Economic Flows prints \"House of worship\""
+   },
+   {
+    "town": "r2r-hamlet-30",
+    "sev": "MED",
+    "why": "Income: Agricultural Rents 89%, Iron 11%; flows row \"House of worship\""
+   },
+   {
+    "town": "r2r-hamlet-46",
+    "sev": "MED",
+    "why": "Income: Agricultural Rents 92%, Stone 8%; flows row \"House of worship ✓ Running\""
+   }
+  ]
+ },
+ {
+  "id": "DS-GEN-17::GREAT HOUSE: monastery::v3",
+  "state": "MARKS",
+  "oldText": "Anyone new to {settlement} who needs a meal or a bed is sent to the monks.",
+  "oldMarks": [
+   "institution: monastery"
+  ],
+  "nowText": "Anyone new to {settlement} who needs a meal or a bed is sent to the monks.",
+  "nowMarks": [
+   "institution: monastery",
+   "no crisis: under_siege"
+  ],
+  "falseReads": [
+   {
+    "town": "rww-metropolis-under_siege-1",
+    "sev": "MED",
+    "why": "under_siege; Defense: \"To reach Naranjotepec you would have to cross the besiegers' lines first, and they let nobody through\" - nobody new arrives"
+   },
+   {
+    "town": "rww-town-under_siege-1",
+    "sev": "MED",
+    "why": "under_siege; \"Field work and trade have stopped\" - newcomers sent to the monks is normal times"
+   }
+  ]
+ },
+ {
+  "id": "DS-FTH-4::FLAG: heresySuppression: hunted::v5",
+  "state": "SAME",
+  "oldText": "The faithful of {settlement} treat magic as heresy and hunt it as such: a suspicion is enough to bring the neighbours to the door.",
+  "oldMarks": [
+   "colour"
+  ],
+  "nowText": "The faithful of {settlement} treat magic as heresy and hunt it as such: a suspicion is enough to bring the neighbours to the door.",
+  "nowMarks": [
+   "colour"
+  ],
+  "falseReads": [
+   {
+    "town": "r2r-metropolis-15",
+    "sev": "MED",
+    "why": "Alchemist quarter \"organised into a guild\" is its arcane defence; Elder Grove Council; Magic tab Risk low and \"Relied upon\" - not a place that hunts magic on suspicion"
+   }
+  ]
+ }
+]

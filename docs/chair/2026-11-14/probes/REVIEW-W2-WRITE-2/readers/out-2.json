@@ -1,0 +1,1230 @@
+[
+ {
+  "id": "DS-DEF-2::CHAIN: food trades working::v5",
+  "verdict": "TRUE",
+  "printsIn": 1,
+  "eyeReads": [
+   {
+    "town": "rv2-metropolis-under_siege+famine-2",
+    "size": "metropolis",
+    "crisis": "under_siege+famine",
+    "printed": "Ononkhurel is cut off and already hungry, and what its food trades put by before the siege is being eked out.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "siege+famine in force; food_processing=running (econ chain +5); Disasters row: granary held but \"the hall will not open it\""
+   }
+  ],
+  "script": {
+   "tests": "siege+famine in force, food_processing chain present and not impaired (econ chain mod>0)",
+   "true": 1,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "Siege+famine clause; true in its one town."
+ },
+ {
+  "id": "DS-DEF-2::CHAIN: food trades working::v6",
+  "verdict": "TRUE",
+  "printsIn": 1,
+  "eyeReads": [
+   {
+    "town": "rv2-city-under_siege+famine-1",
+    "size": "city",
+    "crisis": "under_siege+famine",
+    "printed": "The siege has brought hunger to Longhu, and what its food trades put by is rationed now.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "siege+famine; food_processing=vulnerable not impaired (econ +5); famine band=famine"
+   }
+  ],
+  "script": {
+   "tests": "siege+famine in force, food_processing chain present and not impaired (econ chain mod>0)",
+   "true": 1,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "True in its one town."
+ },
+ {
+  "id": "DS-DEF-2::CHAIN: food trades failing::v1",
+  "verdict": "TRUE",
+  "printsIn": 20,
+  "eyeReads": [
+   {
+    "town": "r2r-town-3",
+    "size": "town",
+    "crisis": "insurgency",
+    "printed": "Llanthwaite's food trades are failing, so little food is being put by; if the town were cut off, it would have less to fall back on.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "food_processing=impaired, econ chain -8, insurgency (no siege)"
+   },
+   {
+    "town": "r2r-metropolis-6",
+    "size": "metropolis",
+    "crisis": "succession_void",
+    "printed": "Becanatl's food trades are failing, so little food is being put by; if the metropolis were cut off, it would have less to fall back on.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "food_processing=impaired; Economics \"Food Processing ... Impaired\""
+   },
+   {
+    "town": "r2s-occupied-city-0",
+    "size": "city",
+    "crisis": "occupied",
+    "printed": "Breitgrund's food trades are failing, so little food is being put by; if the city were cut off, it would have less to fall back on.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "occupied, food_processing=impaired; hypothetical \"if cut off\" fits"
+   }
+  ],
+  "script": {
+   "tests": "food_processing chain impaired (econ chain mod<0) and no siege",
+   "true": 20,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "True; \"little food put by\" sits beside multi-month granary figures (relative claim, not listed)."
+ },
+ {
+  "id": "DS-DEF-2::CHAIN: food trades failing::v2",
+  "verdict": "TRUE",
+  "printsIn": 13,
+  "eyeReads": [
+   {
+    "town": "r2s-religious_conversion-city-1",
+    "size": "city",
+    "crisis": "religious_conversion",
+    "printed": "The food trades at Divonick are struggling to keep up, and little is being put by against the city being cut off.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "food_processing=impaired"
+   },
+   {
+    "town": "rv2-metropolis-occupied-2",
+    "size": "metropolis",
+    "crisis": "occupied",
+    "printed": "The food trades at Svetoko are struggling to keep up, and little is being put by against the metropolis being cut off.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "occupied; food_processing=impaired"
+   },
+   {
+    "town": "rv2-city-famine-2",
+    "size": "city",
+    "crisis": "famine",
+    "printed": "The food trades at Chrissoeia are struggling to keep up, and little is being put by against the city being cut off.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "famine; food_processing=impaired; Economic Survival Critical"
+   }
+  ],
+  "script": {
+   "tests": "food_processing chain impaired (econ chain mod<0) and no siege",
+   "true": 13,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "True."
+ },
+ {
+  "id": "DS-DEF-2::CHAIN: food trades failing::v3",
+  "verdict": "TRUE",
+  "printsIn": 16,
+  "eyeReads": [
+   {
+    "town": "rv2-city-calm-2",
+    "size": "city",
+    "crisis": "none",
+    "printed": "Goldhausen's food trades are failing, and each season they fail the city has less put by to fall back on if it is cut off.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "food_processing=impaired, grain=impaired"
+   },
+   {
+    "town": "r2r-metropolis-8",
+    "size": "metropolis",
+    "crisis": "succession_void",
+    "printed": "Langenberg's food trades are failing, and each season they fail the metropolis has less put by to fall back on if it is cut off.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "food_processing=impaired"
+   },
+   {
+    "town": "r2r-metropolis-53",
+    "size": "metropolis",
+    "crisis": "none",
+    "printed": "Gantulgashari's food trades are failing, and each season they fail the metropolis has less put by to fall back on if it is cut off.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "food_processing=impaired"
+   },
+   {
+    "town": "r2r-metropolis-16",
+    "size": "metropolis",
+    "crisis": "none",
+    "printed": "Dunkelkirche's food trades are failing, and each season they fail the metropolis has less put by to fall back on if it is cut off.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "prior town: Economics \"Food ProcessingManufacturing & craftsImpaired\"; new text names no salting/drying"
+   },
+   {
+    "town": "r2r-metropolis-22",
+    "size": "metropolis",
+    "crisis": "none",
+    "printed": "Vatanshari's food trades are failing, and each season they fail the metropolis has less put by to fall back on if it is cut off.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "prior town: Food Processing Impaired, Grain & Bread Impaired"
+   }
+  ],
+  "script": {
+   "tests": "food_processing chain impaired (econ chain mod<0) and no siege",
+   "true": 16,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": [
+   {
+    "town": "r2r-metropolis-16",
+    "state": "CURED-TRUE",
+    "nowTrue": true,
+    "severity": null,
+    "fact": "reworded to \"food trades\"; Food Processing impaired on Economics; the Salt works chain is no longer named"
+   },
+   {
+    "town": "r2r-metropolis-22",
+    "state": "CURED-TRUE",
+    "nowTrue": true,
+    "severity": null,
+    "fact": "Food Processing and Grain & Bread both Impaired; river fishing no longer contradicted"
+   }
+  ],
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "Rewording cures both prior reads."
+ },
+ {
+  "id": "DS-DEF-2::CHAIN: food trades failing::v4",
+  "verdict": "TRUE",
+  "printsIn": 2,
+  "eyeReads": [
+   {
+    "town": "rv2-metropolis-under_siege-1",
+    "size": "metropolis",
+    "crisis": "under_siege",
+    "printed": "Khanobo is cut off now, and its food trades were failing before the siege began, so less was put by than there should have been.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "siege, food_processing=impaired"
+   },
+   {
+    "town": "rv2-metropolis-under_siege-2",
+    "size": "metropolis",
+    "crisis": "under_siege",
+    "printed": "Nokhoiiin is cut off now, and its food trades were failing before the siege began, so less was put by than there should have been.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "siege, food_processing=impaired"
+   }
+  ],
+  "script": {
+   "tests": "siege in force and food_processing chain impaired",
+   "true": 2,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "True."
+ },
+ {
+  "id": "DS-DEF-2::CHAIN: food trades failing::v5",
+  "verdict": "TRUE",
+  "printsIn": 11,
+  "eyeReads": [
+   {
+    "town": "rv2-town-under_siege-3",
+    "size": "town",
+    "crisis": "under_siege",
+    "printed": "With Wuzhou cut off, people count the stores every week, and the food trades that should have filled them were failing before the siege began.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "siege, food_processing=impaired; smallest"
+   },
+   {
+    "town": "rv2-metropolis-under_siege-28",
+    "size": "metropolis",
+    "crisis": "under_siege",
+    "printed": "With Morkvik cut off, people count the stores every week, and the food trades that should have filled them were failing before the siege began.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "siege, food_processing=impaired; largest"
+   },
+   {
+    "town": "rv2-city-under_siege-8",
+    "size": "city",
+    "crisis": "under_siege",
+    "printed": "With Villalitus cut off, people count the stores every week, and the food trades that should have filled them were failing before the siege began.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "siege, food_processing=impaired"
+   }
+  ],
+  "script": {
+   "tests": "siege in force and food_processing chain impaired",
+   "true": 11,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "True."
+ },
+ {
+  "id": "DS-DEF-2::Beasts & Monsters: plagued, perimeter AND organized force::v2",
+  "verdict": "FALSE",
+  "printsIn": 10,
+  "eyeReads": [
+   {
+    "town": "r2s-wartime-town-0",
+    "size": "town",
+    "crisis": "wartime",
+    "printed": "Defense at Skálthorpe is not an emergency arrangement, it is the week's work: the rotations run, the gates close on time, and nobody treats any of it as unusual.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "plagued, walls+gate+garrison; wartime is not a beast crisis"
+   },
+   {
+    "town": "rw3-metropolis-calm-1",
+    "size": "metropolis",
+    "crisis": "none",
+    "printed": "Defense at Vatannuur is not an emergency arrangement, it is the week's work: the rotations run, the gates close on time, and nobody treats any of it as unusual.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "plagued, walls, gate, garrison, calm"
+   },
+   {
+    "town": "r2s-monster_pressure-city-0",
+    "size": "city",
+    "crisis": "monster_pressure",
+    "printed": "Defense at Burjmandi is not an emergency arrangement, it is the week's work: the rotations run, the gates close on time, and nobody treats any of it as unusual.",
+    "true": false,
+    "severity": "MED",
+    "kind": "c",
+    "fact": "monster_pressure in force; same tab Military status: \"The beasts give Burjmandi no rest between attacks\" / \"more is spent on defence, and people grow afraid\" vs \"nobody treats any of it as unusual\""
+   }
+  ],
+  "script": {
+   "tests": "monsterThreat plagued, live walls, gate, garrison or militia, no siege/occupation, and no beast crisis in force (the page then says the beasts give no rest and people grow afraid)",
+   "true": 9,
+   "false": 1,
+   "falseTowns": [
+    "r2s-monster_pressure-city-0"
+   ]
+  },
+  "prior": null,
+  "twinMissingCondition": "lacks \"no crisis: monster_pressure\" (or \"no threat\"): it carries no-siege/no-occupation but speaks routine calm under a beast crisis",
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "Routine-calm wording under an active beast crisis (1 town)."
+ },
+ {
+  "id": "DS-DEF-2::Beasts & Monsters: settled, nothing organized::v4",
+  "verdict": "TRUE",
+  "printsIn": 3,
+  "eyeReads": [
+   {
+    "town": "r2s-monster_pressure-thorp-1",
+    "size": "thorp",
+    "crisis": "monster_pressure",
+    "printed": "Llanbeck kept no defence because the country never asked for one, and the country is asking now; the thorp is improvising what it never built.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "heartland, monster_pressure, no walls, no watch/force/charter"
+   },
+   {
+    "town": "r2s-monster_pressure-village-1",
+    "size": "village",
+    "crisis": "monster_pressure",
+    "printed": "Ulaankher kept no defence because the country never asked for one, and the country is asking now; the village is improvising what it never built.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "same; largest"
+   },
+   {
+    "town": "r2s-monster_pressure-hamlet-3",
+    "size": "hamlet",
+    "crisis": "monster_pressure",
+    "printed": "Makrophoros kept no defence because the country never asked for one, and the country is asking now; the hamlet is improvising what it never built.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "same; Hunter's lodge is an economy house"
+   }
+  ],
+  "script": {
+   "tests": "heartland country, monster_pressure crisis, no walls, no watch/garrison/militia/mercenary, no charter",
+   "true": 3,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "True."
+ },
+ {
+  "id": "DS-DEF-2::Beasts & Monsters: settled, nothing organized::v5",
+  "verdict": "TRUE",
+  "printsIn": 5,
+  "eyeReads": [
+   {
+    "town": "rv2-thorp-monster_pressure-1",
+    "size": "thorp",
+    "crisis": "monster_pressure",
+    "printed": "Nothing at Ulanbulag was organized against the country, and the threat now at hand has found the gap.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "heartland, monster_pressure, no defence"
+   },
+   {
+    "town": "r2s-monster_pressure-village-0",
+    "size": "village",
+    "crisis": "monster_pressure",
+    "printed": "Nothing at Dharmagiri was organized against the country, and the threat now at hand has found the gap.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "same; largest"
+   },
+   {
+    "town": "r2s-monster_pressure-hamlet-1",
+    "size": "hamlet",
+    "crisis": "monster_pressure",
+    "printed": "Nothing at Zlatoovo was organized against the country, and the threat now at hand has found the gap.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "same"
+   }
+  ],
+  "script": {
+   "tests": "heartland country, monster_pressure crisis, no walls, no watch/garrison/militia/mercenary, no charter",
+   "true": 5,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "True."
+ },
+ {
+  "id": "DS-DEF-2::Beasts & Monsters: settled, nothing organized::v6",
+  "verdict": "TRUE",
+  "printsIn": 1,
+  "eyeReads": [
+   {
+    "town": "r2r-thorp-5",
+    "size": "thorp",
+    "crisis": "monster_pressure",
+    "printed": "You find Glenburn with nothing organised against what has come out of the country, and people arming themselves with whatever is at hand.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "heartland, monster_pressure, no watch/force/charter"
+   }
+  ],
+  "script": {
+   "tests": "heartland country, monster_pressure crisis, no walls, no watch/garrison/militia/mercenary, no charter",
+   "true": 1,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": [
+   {
+    "town": "r2r-thorp-40",
+    "state": "CURED-BY-SILENCE",
+    "nowPrints": "(Beasts & Monsters row shows badge \"Critical\" and no sentence)",
+    "nowTrue": null,
+    "severity": null,
+    "fact": "occupied thorp: no variant drawn"
+   },
+   {
+    "town": "r2s-monster_pressure-town-2",
+    "state": "CURED-BY-SILENCE",
+    "nowPrints": "(Beasts & Monsters row shows badge \"Critical\" and no sentence)",
+    "nowTrue": null,
+    "severity": null,
+    "fact": "has Town watch + Free company hall; no-guardPresence mark now bars it"
+   }
+  ],
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "True; both prior towns silenced."
+ },
+ {
+  "id": "DS-DEF-2::Invasion & War: walls AND professional garrison::v2",
+  "verdict": "TRUE",
+  "printsIn": 80,
+  "eyeReads": [
+   {
+    "town": "r2r-town-16",
+    "size": "town",
+    "crisis": "none",
+    "printed": "Approaching Birkhel, you see the walls and the soldiers who belong on them, and any attacker would think again about the cost.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "walls+garrison, calm; smallest"
+   },
+   {
+    "town": "r2r-metropolis-8",
+    "size": "metropolis",
+    "crisis": "succession_void",
+    "printed": "Approaching Langenberg, you see the walls and the soldiers who belong on them, and any attacker would think again about the cost.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "walls+garrison; largest"
+   },
+   {
+    "town": "rv2-city-famine-1",
+    "size": "city",
+    "crisis": "famine",
+    "printed": "Approaching Becanha, you see the walls and the soldiers who belong on them, and any attacker would think again about the cost.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "famine; walls+garrison+mercenary"
+   }
+  ],
+  "script": {
+   "tests": "live walls and live garrison, no siege/occupation",
+   "true": 80,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "True; LOW page disagreement with the posture block in 5 towns. LOW: In 5 towns the posture line (overall readiness) says e.g. \"Lykotion could deal with a brawl or a thief, but the town could not hold off a raid\" (r2r-town-39, r2r-town-18, r2r-metropolis-7, r2s-politically_fractured-metropolis-2, rv2-metropolis-plague_onset-1): the two blocks disagree (g, LOW). The record backs this line."
+ },
+ {
+  "id": "DS-DEF-2::Invasion & War: walls AND professional garrison::v3",
+  "verdict": "TRUE",
+  "printsIn": 126,
+  "eyeReads": [
+   {
+    "town": "r2s-infiltrated-town-2",
+    "size": "town",
+    "crisis": "infiltrated",
+    "printed": "People at Buyankher believe the town could be held, and the soldiers on the walls give them good reason to.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "walls+garrison; smallest; LOW: posture \"Much of Buyankher's perimeter has nobody on it\" disagrees (g)"
+   },
+   {
+    "town": "r2r-metropolis-14",
+    "size": "metropolis",
+    "crisis": "under_siege",
+    "printed": "People at Prabhapeta believe the metropolis could be held, and the soldiers on the walls give them good reason to.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "under_siege; walls+garrison; military score holds; largest"
+   },
+   {
+    "town": "rv2-town-under_siege+famine-1",
+    "size": "town",
+    "crisis": "under_siege+famine",
+    "printed": "People at Pratocolonia believe the town could be held, and the soldiers on the walls give them good reason to.",
+    "true": false,
+    "severity": "LOW",
+    "kind": "g",
+    "fact": "siege+famine, stores 0.1 months; posture \"too few and too badly placed to hold off a serious attack for long\" vs \"good reason\" to believe it could be held; military score 59 (Adequate) backs the line"
+   }
+  ],
+  "script": {
+   "tests": "live walls and live garrison, no occupation",
+   "true": 126,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": "twinHint: lacks \"no crisis: under_siege\". It matters little: under a siege \"could be held\" is a live belief, not a peacetime presumption, and the military scores back it. At most LOW where the posture line disagrees.",
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "True; LOW page disagreements. LOW: 13 of 126 towns carry a posture line that disagrees (7 under siege: r2s-under_siege-city-1, rv2-city-under_siege-25, rv2-city-under_siege-4, rv2-metropolis-under_siege-24, rv2-metropolis-under_siege-8, rv2-town-under_siege+famine-1, rv2-town-under_siege+famine-2). Military scores 56-92 back the line; the posture block reads the overall readiness."
+ },
+ {
+  "id": "DS-DEF-2::Invasion & War: walls with NO force::v1",
+  "verdict": "TRUE",
+  "printsIn": 7,
+  "eyeReads": [
+   {
+    "town": "rv2-thorp-indebted-1",
+    "size": "thorp",
+    "crisis": "indebted",
+    "printed": "Indrawadi has walls and nobody to put on them. A determined attacker takes this thorp with ladders and patience, and requires nothing else.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "palisade walls, no watch/force; pop 11"
+   },
+   {
+    "town": "r2r-village-17",
+    "size": "village",
+    "crisis": "none",
+    "printed": "Cnocbury has walls and nobody to put on them. A determined attacker takes this village with ladders and patience, and requires nothing else.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "palisade, no watch/force; largest"
+   },
+   {
+    "town": "r2r-thorp-43",
+    "size": "thorp",
+    "crisis": "recently_betrayed",
+    "printed": "Burjpatan has walls and nobody to put on them. A determined attacker takes this thorp with ladders and patience, and requires nothing else.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "palisade, no watch/force"
+   }
+  ],
+  "script": {
+   "tests": "live walls; no garrison, militia, watch or mercenary; no siege/occupation",
+   "true": 7,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "True; \"walls\" = palisade."
+ },
+ {
+  "id": "DS-DEF-2::Invasion & War: walls with NO force::v2",
+  "verdict": "TRUE",
+  "printsIn": 4,
+  "eyeReads": [
+   {
+    "town": "r2r-thorp-50",
+    "size": "thorp",
+    "crisis": "none",
+    "printed": "You can walk the length of Tlalatl's walls and meet nobody on them.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "palisade, no watch/force"
+   },
+   {
+    "town": "r2s-politically_fractured-village-2",
+    "size": "village",
+    "crisis": "politically_fractured",
+    "printed": "You can walk the length of Inverheath's walls and meet nobody on them.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "largest"
+   },
+   {
+    "town": "rww-thorp-famine-1",
+    "size": "thorp",
+    "crisis": "famine",
+    "printed": "You can walk the length of Kolbø's walls and meet nobody on them.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "famine; palisade, no watch/force"
+   }
+  ],
+  "script": {
+   "tests": "live walls; no garrison, militia, watch or mercenary; no siege/occupation",
+   "true": 4,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "True."
+ },
+ {
+  "id": "DS-DEF-2::Invasion & War: walls with NO force::v3",
+  "verdict": "TRUE",
+  "printsIn": 5,
+  "eyeReads": [
+   {
+    "town": "r2s-indebted-thorp-2",
+    "size": "thorp",
+    "crisis": "indebted",
+    "printed": "People at Kamalaganj admit it when asked: the thorp has walls and nobody to stand on them.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "pop 8, palisade, no watch/force"
+   },
+   {
+    "town": "rv2-hamlet-mass_migration-1",
+    "size": "hamlet",
+    "crisis": "mass_migration",
+    "printed": "People at Mayantepec admit it when asked: the hamlet has walls and nobody to stand on them.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "hamlet"
+   },
+   {
+    "town": "r2s-religious_conversion-thorp-1",
+    "size": "thorp",
+    "crisis": "religious_conversion",
+    "printed": "People at Mironitsa admit it when asked: the thorp has walls and nobody to stand on them.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "thorp"
+   }
+  ],
+  "script": {
+   "tests": "live walls; no garrison, militia, watch or mercenary; no siege/occupation",
+   "true": 5,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "True."
+ },
+ {
+  "id": "DS-DEF-2::Invasion & War: walls with NO force::v4",
+  "verdict": "TRUE",
+  "printsIn": 24,
+  "eyeReads": [
+   {
+    "town": "r2s-infiltrated-town-1",
+    "size": "town",
+    "crisis": "infiltrated",
+    "printed": "Waldstadt's walls are kept by its watch and nobody else, which is enough to see who comes and goes and nothing like enough to hold them.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "stone walls, watch only; smallest"
+   },
+   {
+    "town": "r2r-town-20",
+    "size": "town",
+    "crisis": "none",
+    "printed": "Sübeteikhurel's walls are kept by its watch and nobody else, which is enough to see who comes and goes and nothing like enough to hold them.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "walls, watch only; largest"
+   },
+   {
+    "town": "r2r-town-37",
+    "size": "town",
+    "crisis": "plague_onset",
+    "printed": "Hadithaserai's walls are kept by its watch and nobody else, which is enough to see who comes and goes and nothing like enough to hold them.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "plague_onset; watch only"
+   },
+   {
+    "town": "r2s-slave_revolt-town-1",
+    "size": "town",
+    "crisis": "slave_revolt",
+    "printed": "Sübeteikotan's walls are kept by its watch and nobody else, which is enough to see who comes and goes and nothing like enough to hold them.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "revolt stops street patrols, but the same tab says \"someone at the gate sees you come\": consistent"
+   }
+  ],
+  "script": {
+   "tests": "live walls and watch; no garrison, militia or mercenary; no siege/occupation",
+   "true": 24,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": [
+   {
+    "town": "rww-town-occupied-1",
+    "state": "CURED-BY-SILENCE",
+    "nowPrints": "(Invasion & War row shows badge \"Critical\" and no sentence)",
+    "nowTrue": null,
+    "severity": null,
+    "fact": "no-occupied mark now bars it"
+   }
+  ],
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "True."
+ },
+ {
+  "id": "DS-DEF-2::Invasion & War: walls with NO force::v5",
+  "verdict": "FALSE",
+  "printsIn": 28,
+  "eyeReads": [
+   {
+    "town": "r2r-village-40",
+    "size": "village",
+    "crisis": "none",
+    "printed": "The only people on Kripapeta's walls are the watch on their rounds, and everyone knows that would not stop an army.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "palisade, village watch; smallest"
+   },
+   {
+    "town": "r2s-mass_migration-town-1",
+    "size": "town",
+    "crisis": "mass_migration",
+    "printed": "The only people on Archopolis's walls are the watch on their rounds, and everyone knows that would not stop an army.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "walls, watch; largest"
+   },
+   {
+    "town": "r2s-famine-town-3",
+    "size": "town",
+    "crisis": "famine",
+    "printed": "The only people on Shattkarez's walls are the watch on their rounds, and everyone knows that would not stop an army.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "famine; walls, watch"
+   },
+   {
+    "town": "rww-town-slave_revolt-1",
+    "size": "town",
+    "crisis": "slave_revolt",
+    "printed": "The only people on Tarkhanörtöö's walls are the watch on their rounds, and everyone knows that would not stop an army.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "same tab: \"the regular patrols have stopped\" / \"The watch has abandoned normal patrol patterns\" / \"everyone who keeps order is busy containing the revolt\" vs \"the watch on their rounds\""
+   }
+  ],
+  "script": {
+   "tests": "live walls and watch; no garrison, militia or mercenary; no siege/occupation; and the page does not say the patrols have stopped/abandoned",
+   "true": 27,
+   "false": 1,
+   "falseTowns": [
+    "rww-town-slave_revolt-1"
+   ]
+  },
+  "prior": [
+   {
+    "town": "rww-town-slave_revolt-1",
+    "state": "STILL-FALSE",
+    "severity": "MED",
+    "fact": "same tab: \"the regular patrols have stopped\"; \"The watch has abandoned normal patrol patterns\""
+   }
+  ],
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "False in the one revolt town where the page says patrols stopped. LOW: \"The town watch exists on paper\" (guard grade) in 3 more towns (r2r-town-8, r2s-insurgency-town-2, r2s-plague_onset-town-1): not a contradiction."
+ },
+ {
+  "id": "DS-DEF-2::Invasion & War: walls with NO force::v6",
+  "verdict": "TRUE",
+  "printsIn": 1,
+  "eyeReads": [
+   {
+    "town": "rv2-thorp-under_siege+famine-1",
+    "size": "thorp",
+    "crisis": "under_siege+famine",
+    "printed": "Mingtian had nobody to put on its walls until the siege came; the people on them now are townsfolk who have never held a wall before.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "d",
+    "fact": "siege, palisade, no watch/force: true; \"townsfolk\" for a thorp of 19 is a mild size word"
+   }
+  ],
+  "script": {
+   "tests": "siege in force, live walls, no garrison/militia/watch/mercenary",
+   "true": 1,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": [
+   {
+    "town": "r2s-under_siege-town-3",
+    "state": "CURED-BY-SILENCE",
+    "nowPrints": "Since the siege began, Rathwell's walls are manned by whoever can be spared from everything else.",
+    "nowTrue": true,
+    "severity": null,
+    "fact": "walls + Town watch under siege; no-watch mark now bars v6"
+   }
+  ],
+  "twinMissingCondition": null,
+  "slotOrAgreement": "\"townsfolk\" in a thorp (LOW)",
+  "machinery": null,
+  "note": "True."
+ },
+ {
+  "id": "DS-DEF-2::Invasion & War: neither walls nor force::v5",
+  "verdict": "FALSE",
+  "printsIn": 8,
+  "eyeReads": [
+   {
+    "town": "r2r-thorp-10",
+    "size": "thorp",
+    "crisis": "monster_pressure",
+    "printed": "With trouble at hand, Tihogorod has no wall to close and nobody trained to send, and each household is deciding for itself whether to stay.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "pop 10, frontier, monster_pressure, no defence"
+   },
+   {
+    "town": "r2r-hamlet-36",
+    "size": "hamlet",
+    "crisis": "monster_pressure",
+    "printed": "With trouble at hand, Nahrmandi has no wall to close and nobody trained to send, and each household is deciding for itself whether to stay.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "monster_pressure, no defence"
+   },
+   {
+    "town": "rv2-village-monster_pressure-2",
+    "size": "village",
+    "crisis": "monster_pressure",
+    "printed": "With trouble at hand, Becanche has no wall to close and nobody trained to send, and each household is deciding for itself whether to stay.",
+    "true": false,
+    "severity": "MED",
+    "kind": "b",
+    "fact": "record: Adventurers' charter hall; same tab Guard assessment: \"The adventurers' charter hall coordinates emergency response to threats. Effective for monster incursions\" under a beast crisis vs \"nobody trained to send\""
+   }
+  ],
+  "script": {
+   "tests": "threat crisis (not siege/occupation), no walls, no garrison/militia/watch/mercenary, no adventurers charter hall (nobody trained to send)",
+   "true": 7,
+   "false": 1,
+   "falseTowns": [
+    "rv2-village-monster_pressure-2"
+   ]
+  },
+  "prior": [
+   {
+    "town": "rww-village-under_siege-1",
+    "state": "CURED-BY-SILENCE",
+    "nowPrints": "Qaryatsaray has no line and no force, and danger is close at hand.",
+    "nowTrue": true,
+    "severity": null,
+    "fact": "no walls, no watch/force, siege"
+   }
+  ],
+  "twinMissingCondition": "lacks a \"no charter\" condition: a charter hall is a trained monster-response body the line denies",
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "False in the one town with a charter hall."
+ },
+ {
+  "id": "DS-DEF-2::Invasion & War: neither walls nor force::v9",
+  "verdict": "FALSE",
+  "printsIn": 4,
+  "eyeReads": [
+   {
+    "town": "rww-town-under_siege-1",
+    "size": "town",
+    "crisis": "under_siege",
+    "printed": "With trouble at hand, Sanctavallis's watch is all the town has to send, and there is no wall to send it to.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "siege; no walls; watch only"
+   },
+   {
+    "town": "rw3-town-under_siege+famine-1",
+    "size": "town",
+    "crisis": "under_siege+famine",
+    "printed": "With trouble at hand, Cobapan's watch is all the town has to send, and there is no wall to send it to.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "b",
+    "fact": "roster holds \"Hired blades\" (private hire, Adventuring) and a Military Council; not a town force"
+   },
+   {
+    "town": "r2s-monster_pressure-town-2",
+    "size": "town",
+    "crisis": "monster_pressure",
+    "printed": "With trouble at hand, Velipol's watch is all the town has to send, and there is no wall to send it to.",
+    "true": false,
+    "severity": "HIGH",
+    "kind": "b",
+    "fact": "facts: mercenary=true (Free company hall); same tab: \"A mercenary company provides enforcement\" / \"The free company at Velipol keeps its own muster roll\" vs \"the watch is all the town has to send\""
+   }
+  ],
+  "script": {
+   "tests": "threat crisis, no walls, watch present, no garrison/militia/mercenary/charter hall (so the watch IS all it has)",
+   "true": 3,
+   "false": 1,
+   "falseTowns": [
+    "r2s-monster_pressure-town-2"
+   ]
+  },
+  "prior": null,
+  "twinMissingCondition": "lacks \"no mercenary\" (the walls-with-NO-force siblings all carry it)",
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "Denies a hired company in 1 of 4 towns."
+ },
+ {
+  "id": "DS-DEF-2::Economic Survival: STRONG::v2",
+  "verdict": "TRUE",
+  "printsIn": 34,
+  "eyeReads": [
+   {
+    "town": "r2r-town-10",
+    "size": "town",
+    "crisis": "none",
+    "printed": "The town could go through a bad season with its arrangements intact, and the people who would have to be paid through one know it.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "STRONG (84), calm, Wealthy; smallest"
+   },
+   {
+    "town": "r2r-metropolis-10",
+    "size": "metropolis",
+    "crisis": "none",
+    "printed": "The metropolis could go through a bad season with its arrangements intact, and the people who would have to be paid through one know it.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "STRONG (80), calm; largest"
+   },
+   {
+    "town": "r2r-city-41",
+    "size": "city",
+    "crisis": "none",
+    "printed": "The city could go through a bad season with its arrangements intact, and the people who would have to be paid through one know it.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "STRONG (100), calm"
+   }
+  ],
+  "script": {
+   "tests": "no crisis, economic defence score band STRONG",
+   "true": 34,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "True; all 34 calm, prosperity Comfortable or above."
+ },
+ {
+  "id": "DS-DEF-2::Invasion & War: neither walls nor force::v7",
+  "verdict": "FALSE",
+  "printsIn": 15,
+  "eyeReads": [
+   {
+    "town": "r2r-village-25",
+    "size": "village",
+    "crisis": "politically_fractured",
+    "printed": "Lagosinum has no wall and no soldiers; its watch keeps the peace in the streets and would be no answer to an army.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "no wall, watch only, politically_fractured"
+   },
+   {
+    "town": "rv2-town-plague_onset-1",
+    "size": "town",
+    "crisis": "plague_onset",
+    "printed": "Leontpetra has no wall and no soldiers; its watch keeps the peace in the streets and would be no answer to an army.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "no wall, watch only"
+   },
+   {
+    "town": "r2s-famine-town-2",
+    "size": "town",
+    "crisis": "famine",
+    "printed": "Vatanserai has no wall and no soldiers; its watch keeps the peace in the streets and would be no answer to an army.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "famine; no wall, watch only"
+   },
+   {
+    "town": "r2r-town-50",
+    "size": "town",
+    "crisis": "none",
+    "printed": "Saraibuurt has no wall and no soldiers; its watch keeps the peace in the streets and would be no answer to an army.",
+    "true": false,
+    "severity": "HIGH",
+    "kind": "b",
+    "fact": "facts: mercenary=true (Free company hall); same tab: \"A mercenary company provides enforcement\" / \"The free company at Saraibuurt keeps its own muster roll ... its fighters\" vs \"no soldiers\""
+   },
+   {
+    "town": "r2r-town-33",
+    "size": "town",
+    "crisis": "none",
+    "printed": "Kilby has no wall and no soldiers; its watch keeps the peace in the streets and would be no answer to an army.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "governingName=Military Council; Power tab: \"Military commanders hold direct political authority\" vs \"no soldiers\""
+   }
+  ],
+  "script": {
+   "tests": "no walls, no garrison/mercenary (soldiers), no militia, watch present, no threat crisis, ruler not a military council",
+   "true": 12,
+   "false": 3,
+   "falseTowns": [
+    "r2r-town-33",
+    "r2r-town-50",
+    "rv2-town-wartime-1"
+   ]
+  },
+  "prior": [
+   {
+    "town": "r2r-town-33",
+    "state": "STILL-FALSE",
+    "severity": "MED",
+    "fact": "Military Council; Power tab: \"Military commanders hold direct political authority; civic life is subordinate to defence\""
+   }
+  ],
+  "twinMissingCondition": "lacks \"no mercenary\" (soldiers = garrison or hired company)",
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "Denies a hired company (HIGH, 1 town); two Military Council towns (MED)."
+ },
+ {
+  "id": "DS-DEF-2::Economic Survival: WEAK::v5",
+  "verdict": "FALSE",
+  "printsIn": 43,
+  "eyeReads": [
+   {
+    "town": "r2r-thorp-10",
+    "size": "thorp",
+    "crisis": "monster_pressure",
+    "printed": "If Tihogorod ever had to hire people to defend it, it would have to borrow the money first.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "WEAK, nobody paid to defend; pop 10"
+   },
+   {
+    "town": "r2r-village-4",
+    "size": "village",
+    "crisis": "none",
+    "printed": "If Huaji ever had to hire people to defend it, it would have to borrow the money first.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "WEAK, no watch/force; largest"
+   },
+   {
+    "town": "r2s-occupied-thorp-3",
+    "size": "thorp",
+    "crisis": "occupied",
+    "printed": "If Víkberg ever had to hire people to defend it, it would have to borrow the money first.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "occupied; hypothetical hire stands"
+   },
+   {
+    "town": "r2r-hamlet-4",
+    "size": "hamlet",
+    "crisis": "politically_fractured",
+    "printed": "If Gantulgaiin ever had to hire people to defend it, it would have to borrow the money first.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "defenseProfile charter=[Adventurers' charter hall]; page: \"It posts bounties, houses monster hunters, and takes up the local defence no garrison is here to keep\""
+   }
+  ],
+  "script": {
+   "tests": "econ band WEAK, no watch/garrison/militia/mercenary, no charter/bounty house (nobody paid to defend)",
+   "true": 40,
+   "false": 3,
+   "falseTowns": [
+    "r2r-hamlet-4",
+    "r2r-village-13",
+    "r2s-recently_betrayed-hamlet-0"
+   ]
+  },
+  "prior": [
+   {
+    "town": "r2r-hamlet-4",
+    "state": "STILL-FALSE",
+    "severity": "MED",
+    "fact": "Adventurers' charter hall posts bounties and takes up the local defence (it already pays people to defend it)"
+   }
+  ],
+  "twinMissingCondition": "\"no guardPresence\" does not cover a charter hall (bounty-paid defence)",
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "False in 3 charter-hall towns (MED)."
+ }
+]

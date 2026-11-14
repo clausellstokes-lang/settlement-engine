@@ -1,0 +1,8 @@
+DS-DEF-2::Economic Survival: STRONG::v3 [crisis · no crisis: debt] lacks no crisis: famine (all 2 same-scope siblings carry it)
+DS-DEF-2::CHAIN: food trades working::v4 [crisis: under_siege · food: > famine] lacks food: famine (all 2 same-scope siblings carry it)
+DS-DEF-12::CAPACITY: enough::v3 [] lacks food: ≥ pressured (all 2 same-scope siblings carry it)
+DS-ECO-9::FOOD SOURCES: one source::v2 [colour] lacks no crisis: famine (all 2 same-scope siblings carry it)
+DS-ECO-10::POSTURE: established::v1 [no hunger] lacks no crisis: under_siege (all 5 same-scope siblings carry it)
+DS-POW-5::council::v3 [no crisis: succession] lacks no ruler: lord (all 3 same-scope siblings carry it)
+DS-DEF-2::Invasion & War: walls AND professional garrison::v3 [no crisis: occupied] lacks no crisis: under_siege (all 2 same-scope siblings carry it)
+DS-GEN-13::NO-MARKET::v3 [no crisis: under_siege] lacks gate, institution: tavern (all 2 same-scope siblings carry it)

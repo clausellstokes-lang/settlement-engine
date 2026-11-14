@@ -1,0 +1,84 @@
+
+### DS-DEF-2::CHAIN: defence supplied::v6
+ OLD: You can see that {settlement}'s defenders are armed and equipped from the town's own trades; you can also see that they eat no better than anyone else.
+  rww-city-famine-1 [MED] prior why: Same tab: 'The garrison and city watch exists on paper. Chronically underpaid and poorly equipped' — not 'armed and equipped from the city's own trades'
+    pool drawn now: DS-DEF-2::CHAIN: defence supplied::v5
+    mount now: Megaousa is comfortably over-provided against beasts. The pressures that matter to this city are internal, and its defensive spending does not reflect that. The city keeps paid soldiers behind its walls, so raiders keep their distance and an army would pay dearly; a long siege would be another matter. Food is short at Megaousa, but the trades behind its defence still do it more good than harm. The
+  r2r-hamlet-16 [MED] prior why: pop 20 hamlet (farming, fishing, quarry, no smith); primaryImports includes 'Replacement arms and basic equipment'; Vulnerabilities: 'poor equipment'
+    pool drawn now: DS-DEF-2::CHAIN: defence supplied::v5
+    mount now: Oxteha keeps its wall against the creatures, and nobody walks out past it unarmed. The walls and townsfolk of Oxteha would see off a raid but not a proper army, and nothing now under way will change that. Food is short at Oxteha, but the trades behind its defence still do it more good than harm. The hamlet keeps no court and no gaol, and no wrong done there is written down; order is kept by whoeve
+
+### DS-DEF-3::COMPOUND: insurgency::v5
+ OLD: Those who keep order at {settlement} walk in pairs now, and there are lanes they no longer walk at all.
+  r2s-insurgency-thorp-0 [MED] prior why: thorp pop 22; only a Household levy that musters 'when danger reaches the fields'; 'Nobody here is paid to keep order'; 'Passing through Llanheath, you would se
+    pool drawn now: DS-DEF-3::COMPOUND: insurgency::v2
+    mount now: Nobody at Llanheath will say whose side they are on, and visitors are asked their business at every turn.
+
+### DS-DEF-8::override: MIGRATION, arrivals::v4
+ OLD: At {settlement} you find the guards posted where the newcomers camp, not at the edges of the place.
+  r2r-city-37 [MED] prior why: Same tab: 'Everyone comes and goes by the gates, so smugglers have to get past the garrison', 'every arrival goes through a gate and into the gate tally' — guar
+    pool drawn now: DS-DEF-8::override: MIGRATION, arrivals::v1
+    mount now: More people are arriving at Tikalac than its guards can keep in order, so they spend their days on the crowds, not on the roads. The city should come through this crisis if nothing else goes wrong, though its defence has had to change to meet it.
+  r2r-metropolis-25 [MED] prior why: Same tab: 'the gates shut ... You come into Mönkhköl by a gate, and someone at the gate sees you come'
+    pool drawn now: DS-DEF-8::override: MIGRATION, arrivals::v3
+    mount now: Each week more newcomers arrive at Mönkhköl, and every quarrel over a roof or a meal is one more thing to keep in order. Life in the metropolis goes on through the crisis: people work, eat and sleep, and the defence makes do with what is left over.
+  r2s-mass_migration-city-2 [MED] prior why: Same tab: 'Everyone comes and goes by the gates ...'; 'the gate tolls are counted there; a gate left unwatched is a toll lost'
+    pool drawn now: DS-DEF-8::override: MIGRATION, arrivals::v1
+    mount now: More people are arriving at Megalrema than its guards can keep in order, so they spend their days on the crowds, not on the roads. A visitor to Megalrema would not guess at the trouble from the streets; the city is shaken but standing.
+
+### DS-DEF-2::Invasion & War: neither walls nor force::v10
+ OLD: {settlement} lies open on every side; its watch keeps to its rounds while the danger everyone talks about is close.
+  rw3-town-under_siege+famine-1 [HIGH] prior why: stressors under_siege+famine; "With an army outside ... every guard and every store is counted"; danger is not "close", it is outside the gates
+    pool drawn now: DS-DEF-2::Invasion & War: neither walls nor force::v9
+    mount now: With trouble at hand, Cobapan's watch is all the town has to send, and there is no wall to send it to. Offenders at Cobapan are arrested, heard and held, and each case is written down, so people expect a hearing, not a beating. It has no money to meet trouble, so each misfortune goes unmended and leaves the town weaker for the next.
+  r2s-under_siege-town-1 [HIGH] prior why: stress under_siege; "To reach Fengling you would have to cross the besiegers' lines"
+    pool drawn now: DS-DEF-2::Invasion & War: neither walls nor force::v8
+    mount now: Fengling has no wall and only its watch, and danger is close at hand. The town has nowhere to hold an offender, so the penalties its hearings can hand down are money and exile, and both of them fall unevenly. The people who would have to hold Fengling through something are already owed, and they have not forgotten it.
+
+### DS-DEF-5::garrison PRESENT::v4
+ OLD: {settlement}'s soldiers are paid by the season and drilled by the week, whether or not anything comes.
+  rww-metropolis-under_siege-1 [HIGH] prior why: stress under_siege; same paragraph: "gates are shut and barred ... since the siege began"; something has come
+    pool drawn now: DS-DEF-5::garrison PRESENT::v2
+    mount now: The metropolis has a wall and arranges its day around the gates without noticing that it does. Naranjotepec's gates are shut and barred, and nothing has come through them since the siege began. Its soldiers serve all year, not for a season; the metropolis relies on them and grumbles about them in equal measure. The metropolis pays for some of its soldiers and knows which ones, and treats them acco
+  rw3-city-calm-1 [MED] prior why: same tab Vulnerabilities: "Fortification and forces are present but chronically underfunded: poor equipment, low morale"
+    pool drawn now: DS-DEF-5::garrison PRESENT::v2
+    mount now: There is a line around Shanmen and it is kept: the gates shut, the works are repaired, and a stranger enters where the city intends him to. You come into Shanmen by a gate, and someone at the gate sees you come. Its soldiers serve all year, not for a season; the city relies on them and grumbles about them in equal measure. The city pays for some of its soldiers and knows which ones, and treats the
+
+### DS-ECO-10::POSTURE: established::v10
+ OLD: {settlement} has several kinds of goods to sell outward, and the siege has shut every one of them in.
+  rww-city-under_siege-1 [MED] prior why: primaryExports are all services: letters of credit, legal, military contract, arcane services; no goods
+    pool drawn now: DS-ECO-10::POSTURE: established::v7
+    mount now: Panteakra had several trades selling outward before the siege, and none of them can reach a buyer now.
+  r2s-under_siege-city-2 [MED] prior why: exports legal services, pilgrimage, military contracts, cultural tourism, alchemical trade: mostly services, not goods to shut in
+    pool drawn now: DS-ECO-10::POSTURE: established::v7
+    mount now: Andronarion had several trades selling outward before the siege, and none of them can reach a buyer now.
+
+### DS-DEF-8::override: ACTIVE SIEGE::v4
+ OLD: {settlement} had nobody whose work was its defence before the army came, so the siege is being held by householders taking turns.
+  r2r-hamlet-0 [MED] prior why: stress=under_siege, no force; same tab Invasion & War: 'You find Spitzsteig open on every side, with nobody posted anywhere'
+    pool drawn now: DS-DEF-8::override: ACTIVE SIEGE::v3
+    mount now: Each week the siege lasts, Spitzsteig has less to hold out with, and its defence is a race against its stores. Nobody at Spitzsteig argues about the defences any more. The talk now is whether there will be a place left to defend.
+
+### DS-ECO-12::CRITICAL IMPORT: a house needs what the land lacks::v4
+ OLD: {settlement} has no {good} of its own, and the siege lets none in, so the work that needs it is stopping.
+  rw3-metropolis-under_siege-1 [MED] prior why: Economics: 'Stores: a granary, 15 months of grain'; Defense: 'the granary carries the metropolis for more than a year' (work that needs grain is not stopping)
+    pool drawn now: none
+    mount now: Hochfurt lives on many small trades, and none of them brings in a real portion of its income. Some of Hochfurt's money is made by people who keep it off the tax lists, so the metropolis collects nothing on it and honest traders carry the tax alone. Magic carries real weight in Hochfurt's money. What the metropolis's practitioners charge for, and what they buy, is a large part of its business.
+  r2s-under_siege-city-0 [MED] prior why: 'Stores: a granary, nine months of grain'; Defense: 'the granary carries the city for about eleven months'
+    pool drawn now: none
+    mount now: Bellaurbs is not known for any one trade; it lives on many small ones. Some of the money in Bellaurbs is made outside the law, and honest traders compete against it without knowing whom they are up against. The religious houses at Bellaurbs are among its biggest buyers and employers, and a bad year for them is a bad year for the city.
+
+### DS-ECO-12::CRITICAL IMPORT: the land cannot give it::v4
+ OLD: {settlement} neither grows nor buys any {good}; people there do without.
+  r2r-thorp-27 [MED] prior why: Trade Profile on the same tab, five lines below: 'Imports: Metals'
+    pool drawn now: DS-ECO-12::CRITICAL IMPORT: the land cannot give it::v2
+    mount now: Almost everyone's living at Olympnea depends on one trade, whether or not they work in it. None of the metals used at Olympnea comes from the country here; the thorp brings in what it uses, or goes without.
+
+### DS-ECO-9::FOOD SOURCES: one source::v4
+ OLD: {settlement} lived off its {good} and little else, and the {good} has failed; there is nothing else to turn to.
+  rw3-thorp-famine-1 [MED] prior why: same paragraph: "Chichek grows about a third of what it eats, and carts bring in most of the rest"; "whatever it can buy" - so not "little else ... nothing else
+    pool drawn now: DS-ECO-9::FOOD SOURCES: one source::v2
+    mount now: With the grain harvest gone, Chichek faces the season ahead on its stores and whatever it can buy, and neither will last long. Food carts come into Chichek most days, and they matter: a good part of what the thorp eats is grown elsewhere and brought in. The food Chichek raises for itself all goes back to the grain harvest, and after a poor season for the grain harvest there is less to go round.
+  r2s-famine-hamlet-2 [MED] prior why: same paragraph: "ships bring in most of the rest" and "some of what the hamlet eats is made or kept by magic"
+    pool drawn now: DS-ECO-9::FOOD SOURCES: one source::v2
+    mount now: The families who lived off the fishing have lost most of what they eat, and the rest of Velipol is sharing what little it has left. Not all of Velipol's food is grown or bought: some of what the hamlet eats is provided by spell or by prayer, and the hamlet would go shorter without it. The food Velipol raises for itself all goes back to the fishing, and after a poor season for the fishing there is 

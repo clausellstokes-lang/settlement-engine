@@ -1,0 +1,1794 @@
+[
+ {
+  "id": "DS-POW-4::riskLabel: Holding::v3",
+  "verdict": "FALSE",
+  "printsIn": 93,
+  "eyeReads": [
+   {
+    "town": "r2r-hamlet-15",
+    "size": "hamlet 42",
+    "crisis": "calm",
+    "printed": "The Feudal Stewardship at Sübeteiordu holds because no rival yet outweighs Feudal Stewardship, and the weighing is done again every season.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "coup: Feudal Stewardship amplified 67.85 vs Merchant Guilds 38.95; page 59 vs 41"
+   },
+   {
+    "town": "r2s-under_siege-city-1",
+    "size": "city 2679",
+    "crisis": "under_siege",
+    "printed": "The Ecclesiastical Council at Torrivilla holds because no rival yet outweighs Ecclesiastical Council, and the weighing is done again every season.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Ecclesiastical Council 36 vs Military/Guard 32.5 weighted; Web \"about as strong as\" consistent"
+   },
+   {
+    "town": "rv2-town-occupied-2",
+    "size": "town 994",
+    "crisis": "occupied",
+    "printed": "The Church Council at Villaminus holds because no rival yet outweighs Church Council, and the weighing is done again every season.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "Crisis tab: \"The occupiers take the revenue, and local offices work only under their eye\"; \"the occupier's orders come through Aemilia Cato\" - the council does not hold against the occupier"
+   },
+   {
+    "town": "r2r-city-18",
+    "size": "city 11492",
+    "crisis": "calm",
+    "printed": "The Royal Authority at Hvaliya holds because no rival yet outweighs Royal Authority, and the weighing is done again every season.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Royal Authority 39 vs Noble Families 19.8"
+   }
+  ],
+  "script": {
+   "tests": "coupRiskLabel(coupContenders(record))===\"Holding\", incumbent amplified weight > top challenger weight, and no occupation in force",
+   "true": 92,
+   "false": 1,
+   "falseTowns": [
+    "rv2-town-occupied-2"
+   ]
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": "\"no rival yet outweighs Feudal Stewardship\" - faction name without article (awkward, true)",
+  "machinery": null,
+  "note": "True by the weighing everywhere; under occupation the page says the occupier rules, so \"holds because no rival outweighs\" misstates the state."
+ },
+ {
+  "id": "DS-POW-4::riskLabel: Contested::v1",
+  "verdict": "TRUE",
+  "printsIn": 64,
+  "eyeReads": [
+   {
+    "town": "r2s-occupied-thorp-0",
+    "size": "thorp 13",
+    "crisis": "occupied",
+    "printed": "Occupation Authority could now take the hall from Household Council at Warmstadt; Household Council keeps it only because the office is still its own.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "coup Contested: Occupation Authority 61.25 vs Household Council 40.8 (thorp 13, occupied)"
+   },
+   {
+    "town": "r2s-occupied-thorp-1",
+    "size": "thorp 17",
+    "crisis": "occupied+famine",
+    "printed": "Occupation Authority could now take the hall from Elder Council at Amarkota; Elder Council keeps it only because the office is still its own.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Web: \"Occupation Authority no longer takes orders from Elder Council. Elder Council keeps the title\""
+   },
+   {
+    "town": "r2s-occupied-metropolis-3",
+    "size": "metropolis 262531",
+    "crisis": "occupied",
+    "printed": "Occupation Authority could now take the hall from Grand Merchant Oligarchy at Rajigarh; Grand Merchant Oligarchy keeps it only because the office is still its own.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Contested by weight"
+   },
+   {
+    "town": "r2s-under_siege-metropolis-1",
+    "size": "metropolis 70862",
+    "crisis": "under_siege",
+    "printed": "Military/Guard could now take the hall from Grand Military Council at Torriplenum; Grand Military Council keeps it only because the office is still its own.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Contested by weight"
+   }
+  ],
+  "script": {
+   "tests": "coupRiskLabel=Contested, {counterpart} is the top challenger and outweighs incumbent amplified weight, {faction} is the incumbent",
+   "true": 64,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "LOW: in 31/64 towns the challenger's displayed power bar is below the incumbent's (the weighing applies the legitimacy multiplier, page shows Collapsed/Critical legitimacy); \"could now take\" is the weighted reading."
+ },
+ {
+  "id": "DS-POW-4::riskLabel: Contested::v3",
+  "verdict": "TRUE",
+  "printsIn": 74,
+  "eyeReads": [
+   {
+    "town": "r2s-politically_fractured-thorp-2",
+    "size": "thorp 9",
+    "crisis": "politically_fractured",
+    "printed": "The challenger at Ripavetum could now take the hall, but the Elder Council has not changed hands yet.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Independent Bloc 52.2 vs Elder Council 33.6; page 58 vs 42"
+   },
+   {
+    "town": "r2r-village-43",
+    "size": "village 149",
+    "crisis": "under_siege",
+    "printed": "The challenger at Uaxachuitz could now take the hall, but the Elder Council has not changed hands yet.",
+    "true": true,
+    "severity": "LOW",
+    "kind": null,
+    "fact": "page bars Elder Council 58 \"Holds power\" vs War Council 42, Web \"gives the orders\"; weighting by Collapsed legitimacy (x0.6) makes it Contested"
+   },
+   {
+    "town": "r2r-metropolis-39",
+    "size": "metropolis 87995",
+    "crisis": "politically_fractured",
+    "printed": "The challenger at Lykopolis could now take the hall, but the Grand Council has not changed hands yet.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Contested by weight"
+   }
+  ],
+  "script": {
+   "tests": "coupRiskLabel=Contested, top challenger weight > incumbent amplified weight, {seat}=incumbent name",
+   "true": 74,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": "\"the Elected Reeve has not changed hands\" - seat filled with the body name (readable)",
+  "machinery": null,
+  "note": "27/74 show the challenger with lower raw power than the incumbent; LOW only."
+ },
+ {
+  "id": "DS-POW-5::council::v3",
+  "verdict": "TRUE",
+  "printsIn": 229,
+  "eyeReads": [
+   {
+    "town": "r2r-thorp-0",
+    "size": "thorp 11",
+    "crisis": "calm",
+    "printed": "The Elder Council at Izamitza watches the thorp's temper closely: what it fears is the thorp turning on it.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Elder Council, government category -> council lens (nerve: unrest); legitimacy Adequate"
+   },
+   {
+    "town": "rw3-metropolis-under_siege-1",
+    "size": "metropolis 267907",
+    "crisis": "under_siege",
+    "printed": "The Ducal Governorship at Hochfurt watches the metropolis's temper closely: what it fears is the metropolis turning on it.",
+    "true": true,
+    "severity": "LOW",
+    "kind": null,
+    "fact": "Ducal Governorship (lord); next line \"Ducal Governorship could lose the hall, and Military/Guard has not yet moved\" - a coup, not the town, is the visible danger"
+   },
+   {
+    "town": "r2r-thorp-40",
+    "size": "thorp 20",
+    "crisis": "occupied",
+    "printed": "The Elder Council at Malotsy watches the thorp's temper closely: what it fears is the thorp turning on it.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "occupied; disposition only"
+   },
+   {
+    "town": "r2r-hamlet-16",
+    "size": "hamlet 20",
+    "crisis": "famine",
+    "printed": "The Elder Council at Oxteha watches the hamlet's temper closely: what it fears is the hamlet turning on it.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "famine; Elder Council"
+   }
+  ],
+  "script": {
+   "tests": "governing faction category in government/civic/labor (council lens) and no succession_void",
+   "true": 229,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": "Lacks \"no ruler: lord\" (109/229 prints are lord-kind seats: Royal Authority, Ducal/Noble Governorship, Feudal Stewardship). It does not matter for truth: v3 asserts no collective decision, only a disposition; LOW stretch for a lord seat facing a military challenger.",
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "Disposition line; true by the record's lens."
+ },
+ {
+  "id": "DS-POW-5::theocracy::v3",
+  "verdict": "TRUE",
+  "printsIn": 16,
+  "eyeReads": [
+   {
+    "town": "r2r-town-19",
+    "size": "town 1590",
+    "crisis": "calm",
+    "printed": "Heresy is what the Church Council at Altaikum fears: its right to govern rests on the faith, and doubt about the faith is doubt about the Church Council.",
+    "true": true,
+    "severity": "LOW",
+    "kind": null,
+    "fact": "Web: \"the hall rules because the faith says it may\"; but the Church Council card lower on the Power tab reads \"An elected or appointed council governs; merchants, guilds, and prominent families compete for seats\""
+   },
+   {
+    "town": "rv2-village-insurgency-1",
+    "size": "village 145",
+    "crisis": "insurgency",
+    "printed": "Heresy is what the Priestly Guidance at Buyankul fears: its right to govern rests on the faith, and doubt about the faith is doubt about the Priestly Guidance.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Priestly Guidance, \"The priest guides the community\""
+   },
+   {
+    "town": "rv2-metropolis-mass_migration-1",
+    "size": "metropolis 89637",
+    "crisis": "mass_migration",
+    "printed": "Heresy is what the High Theocratic Council at Qal'atmandi fears: its right to govern rests on the faith, and doubt about the faith is doubt about the High Theocratic Council.",
+    "true": true,
+    "severity": "LOW",
+    "kind": null,
+    "fact": "High Theocratic Council card: \"A grand council of senior officials, guild masters, and appointed magnates governs\""
+   }
+  ],
+  "script": {
+   "tests": "governing faction category religious (theocracy lens)",
+   "true": 16,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "LOW in 5 towns (r2r-metropolis-40, r2r-town-19, r2s-mass_migration-town-0, rv2-metropolis-mass_migration-1, rv2-town-insurgency-2) whose seat card carries a secular council description; name and category back the line."
+ },
+ {
+  "id": "DS-POW-5::FLAG: crimeIsGovt::v4",
+  "verdict": "TRUE",
+  "printsIn": 3,
+  "eyeReads": [
+   {
+    "town": "r2s-mass_migration-town-2",
+    "size": "town 1901",
+    "crisis": "mass_migration",
+    "printed": "It has people paid to keep order, but the gang bosses keep their own order alongside them, and charge the town for it.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Street Gang \"Competes with the watch for street-level authority\"; \"Extortion (structured): The rate is posted. Everyone pays.\""
+   },
+   {
+    "town": "r2s-slave_revolt-town-3",
+    "size": "town 1271",
+    "crisis": "slave_revolt",
+    "printed": "It has people paid to keep order, but the gang bosses keep their own order alongside them, and charge the town for it.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "same; watch busy with the revolt, gang order alongside"
+   },
+   {
+    "town": "rv2-town-indebted-2",
+    "size": "town 891",
+    "crisis": "indebted",
+    "printed": "It has people paid to keep order, but the gang bosses keep their own order alongside them, and charge the town for it.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "\"Shopkeepers here pay one ring for protection\""
+   }
+  ],
+  "script": {
+   "tests": "flags.crimeIsGovt, a gang/thieves operation, a watch institution, extortion/protection on the page",
+   "true": 3,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": [
+   {
+    "town": "r2s-mass_migration-town-2",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": null,
+    "fact": "new \"keep their own order alongside them\" matches \"Competes with the watch\""
+   },
+   {
+    "town": "r2s-slave_revolt-town-3",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": null,
+    "fact": "same; no longer claims the watch keeps the bosses' order"
+   }
+  ],
+  "twinMissingCondition": null,
+  "slotOrAgreement": "{settlement} prints as \"It\" after a sentence about the seat (\"The Feudal Appointee ... answers to one person ... It has people paid\") - antecedent reads as the seat; LOW",
+  "machinery": null,
+  "note": "Reword cures the prior page conflict."
+ },
+ {
+  "id": "DS-POW-6::capture pressure ADVANCING (weak security, poor prosperity)::v6",
+  "verdict": "TRUE",
+  "printsIn": 6,
+  "eyeReads": [
+   {
+    "town": "r2s-wartime-village-3",
+    "size": "village 213",
+    "crisis": "wartime",
+    "printed": "With the war taking everyone's attention, Zelenonick's officials are left to themselves, and on what they are paid a purse is hard to refuse.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "breakdown safety -12, prosperity -20 (Struggling); wartime"
+   },
+   {
+    "town": "r2s-wartime-metropolis-2",
+    "size": "metropolis 160267",
+    "crisis": "wartime",
+    "printed": "With the war taking everyone's attention, Nanwan's officials are left to themselves, and on what they are paid a purse is hard to refuse.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "prosperity Poor; \"accounts... fall short on the watch's wages\""
+   },
+   {
+    "town": "r2r-town-27",
+    "size": "town 1310",
+    "crisis": "wartime",
+    "printed": "With the war taking everyone's attention, Markazzamin's officials are left to themselves, and on what they are paid a purse is hard to refuse.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "wartime, Poor"
+   }
+  ],
+  "script": {
+   "tests": "wartime in force, legitimacy breakdown safety<0 and prosperity<0, capture below corrupted",
+   "true": 6,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "True."
+ },
+ {
+  "id": "DS-POW-6::capture pressure ADVANCING (weak security, poor prosperity)::v7",
+  "verdict": "TRUE",
+  "printsIn": 13,
+  "eyeReads": [
+   {
+    "town": "r2s-recently_betrayed-town-3",
+    "size": "town 322",
+    "crisis": "recently_betrayed",
+    "printed": "Milopol has a watch, but nobody keeps an eye on the officials, and they are paid too little to refuse a purse.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Town watch; safety -12, prosperity -20"
+   },
+   {
+    "town": "r2s-indebted-metropolis-3",
+    "size": "metropolis 44209",
+    "crisis": "indebted",
+    "printed": "Lidocastra has a watch, but nobody keeps an eye on the officials, and they are paid too little to refuse a purse.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Professional city watch; prosperity Poor"
+   },
+   {
+    "town": "r2s-famine-town-2",
+    "size": "town 407",
+    "crisis": "famine",
+    "printed": "Vatanserai has a watch, but nobody keeps an eye on the officials, and they are paid too little to refuse a purse.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "famine; Town watch"
+   },
+   {
+    "town": "r2r-town-37",
+    "size": "town 1272",
+    "crisis": "plague_onset",
+    "printed": "Hadithaserai has a watch, but nobody keeps an eye on the officials, and they are paid too little to refuse a purse.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "\"The town watch exists on paper. Chronically underpaid\" - a watch exists"
+   }
+  ],
+  "script": {
+   "tests": "a watch institution, safety<0 and prosperity<0, no threat/wartime/insurgency/slave_revolt crisis, capture below corrupted",
+   "true": 13,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": [
+   {
+    "town": "r2r-town-37",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": null,
+    "fact": "\"has a watch\" no longer claims it keeps the streets"
+   },
+   {
+    "town": "r2s-slave_revolt-town-3",
+    "state": "CURED-BY-SILENCE",
+    "nowPrints": "Officials at Zhongba are paid little and watched less, and a purse offered in the right doorway would not be turned away.",
+    "nowTrue": true,
+    "severity": null,
+    "fact": "safety -20, prosperity -20; claims nothing about the watch's patrols"
+   }
+  ],
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "True."
+ },
+ {
+  "id": "DS-POW-6::capture reached an AGENT of a faction::v1",
+  "verdict": "TRUE",
+  "printsIn": 18,
+  "eyeReads": [
+   {
+    "town": "r2s-slave_revolt-hamlet-3",
+    "size": "hamlet 48",
+    "crisis": "slave_revolt",
+    "printed": "Someone in Elder Council at Breitenwiese is being paid to pass on what they hear. Whoever it is, they hear a great deal.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "criminalCaptureState corrupted; Black market operational"
+   },
+   {
+    "town": "rv2-village-famine-1",
+    "size": "village 258",
+    "crisis": "famine",
+    "printed": "Someone in Elected Reeve at Sübeteishari is being paid to pass on what they hear. Whoever it is, they hear a great deal.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "h",
+    "fact": "seat \"Elected Reeve\" is one office: \"Someone in Elected Reeve\" reads oddly"
+   },
+   {
+    "town": "rv2-metropolis-calm-1",
+    "size": "metropolis 39732",
+    "crisis": "calm",
+    "printed": "Someone in Shadow Senate at Divovich is being paid to pass on what they hear. Whoever it is, they hear a great deal.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "corrupted; \"Some of the Shadow Senate's people... in Thieves' Guild's pocket\""
+   },
+   {
+    "town": "r2s-under_siege-town-3",
+    "size": "town 2192",
+    "crisis": "under_siege",
+    "printed": "Someone in Guild Council at Rathwell is being paid to pass on what they hear. Whoever it is, they hear a great deal.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "corrupted"
+   }
+  ],
+  "script": {
+   "tests": "criminalCaptureState===\"corrupted\" and {faction} = governing name",
+   "true": 18,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": "\"Someone in Elected Reeve\" (rv2-village-famine-1) - a one-person office as a body; LOW",
+  "machinery": null,
+  "note": "True (page only, dm)."
+ },
+ {
+  "id": "DS-POW-6::capture reached an AGENT of a faction::v3",
+  "verdict": "TRUE",
+  "printsIn": 20,
+  "eyeReads": [
+   {
+    "town": "r2s-slave_revolt-town-1",
+    "size": "town 343",
+    "crisis": "slave_revolt",
+    "printed": "Someone has bought a member of Corrupt Council at Sübeteikotan: news of Corrupt Council's business now goes where it should not.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "corrupted"
+   },
+   {
+    "town": "r2s-infiltrated-metropolis-0",
+    "size": "metropolis 108073",
+    "crisis": "infiltrated",
+    "printed": "Someone has bought a member of Shadow Senate at Xibu: news of Shadow Senate's business now goes where it should not.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "corrupted; officials with Thieves' Guild understanding"
+   },
+   {
+    "town": "rv2-city-under_siege-25",
+    "size": "city 13109",
+    "crisis": "under_siege",
+    "printed": "Someone has bought a member of Corrupt City Council at Mayantitlan: news of Corrupt City Council's business now goes where it should not.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "corrupted"
+   },
+   {
+    "town": "r2s-occupied-town-3",
+    "size": "town 2018",
+    "crisis": "occupied",
+    "printed": "Someone has bought a member of Corrupt Council at Lykopetra: news of Corrupt Council's business now goes where it should not.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "corrupted"
+   }
+  ],
+  "script": {
+   "tests": "criminalCaptureState===\"corrupted\" and {faction} = governing name",
+   "true": 20,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "True."
+ },
+ {
+  "id": "DS-POW-6::operation role duty evasion::v1",
+  "verdict": "TRUE",
+  "printsIn": 50,
+  "eyeReads": [
+   {
+    "town": "r2r-town-18",
+    "size": "town 1095",
+    "crisis": "calm",
+    "printed": "Goods reach Vedakota unrecorded: the cargo lists are false, and the dues owed on them are never paid.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "first op Smuggling operation \"Move restricted goods across borders and through customs\""
+   },
+   {
+    "town": "r2r-metropolis-8",
+    "size": "metropolis 344689",
+    "crisis": "succession_void",
+    "printed": "Goods reach Langenberg unrecorded: the cargo lists are false, and the dues owed on them are never paid.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Smuggling Network"
+   },
+   {
+    "town": "r2s-occupied-metropolis-1",
+    "size": "metropolis 105466",
+    "crisis": "occupied",
+    "printed": "Goods reach Dionpetra unrecorded: the cargo lists are false, and the dues owed on them are never paid.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Smuggling network \"Customs bypass\""
+   },
+   {
+    "town": "r2r-city-20",
+    "size": "city 12918",
+    "crisis": "calm",
+    "printed": "Goods reach Teotiucan unrecorded: the cargo lists are false, and the dues owed on them are never paid.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "isolated but \"the caravans that still come\"; Customs house"
+   }
+  ],
+  "script": {
+   "tests": "first criminal op is a smuggling op, no siege, imports exist",
+   "true": 50,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "True."
+ },
+ {
+  "id": "DS-POW-6::operation role duty evasion::v3",
+  "verdict": "TRUE",
+  "printsIn": 67,
+  "eyeReads": [
+   {
+    "town": "r2s-infiltrated-town-2",
+    "size": "town 660",
+    "crisis": "infiltrated",
+    "printed": "A good share of the goods that reach Buyankher pays none of the dues owed on it.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Smuggling Operation"
+   },
+   {
+    "town": "r2r-metropolis-13",
+    "size": "metropolis 328486",
+    "crisis": "calm",
+    "printed": "A good share of the goods that reach Athenapetra pays none of the dues owed on it.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Smuggling Network"
+   },
+   {
+    "town": "r2s-occupied-metropolis-2",
+    "size": "metropolis 36400",
+    "crisis": "occupied",
+    "printed": "A good share of the goods that reach Nokhoihan pays none of the dues owed on it.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "occupied; smuggling"
+   },
+   {
+    "town": "rv2-metropolis-wartime-1",
+    "size": "metropolis 152574",
+    "crisis": "wartime",
+    "printed": "A good share of the goods that reach Dunfield pays none of the dues owed on it.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "wartime; smuggling"
+   }
+  ],
+  "script": {
+   "tests": "first criminal op is a smuggling op, no siege, imports exist",
+   "true": 67,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "True."
+ },
+ {
+  "id": "DS-POW-6::GM ADVISORY: the commander is a political actor::v4",
+  "verdict": "TRUE",
+  "printsIn": 23,
+  "eyeReads": [
+   {
+    "town": "r2s-famine-village-1",
+    "size": "village 90",
+    "crisis": "famine",
+    "printed": "Nothing the Headman's Authority orders at Humen goes ahead if Military/Guard refuses it, and whoever can win Military/Guard over can steer the place.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Military/Guard 64 vs Headman's Authority 36; dmNote \"military commander is a political actor\""
+   },
+   {
+    "town": "r2s-occupied-village-3",
+    "size": "village 134",
+    "crisis": "occupied",
+    "printed": "Nothing the Elder Council orders at Grudka goes ahead if Occupation Authority refuses it, and whoever can win Occupation Authority over can steer the place.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Occupation Authority 68 vs Elder Council 32"
+   },
+   {
+    "town": "rv2-metropolis-under_siege-8",
+    "size": "metropolis 31938",
+    "crisis": "under_siege",
+    "printed": "Nothing the Grand Guild Consortium orders at Bhagapur goes ahead if Military/Guard refuses it, and whoever can win Military/Guard over can steer the place.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Military/Guard 36 vs 14"
+   }
+  ],
+  "script": {
+   "tests": "advised relation competitive with no captureState, {faction} = the non-governing party, its power >= 0.6x seat's (all exceed it)",
+   "true": 23,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "True."
+ },
+ {
+  "id": "DS-FTH-4::FLAG: heresySuppression: hunted::v1",
+  "verdict": "TRUE",
+  "printsIn": 3,
+  "eyeReads": [
+   {
+    "town": "r2r-metropolis-28",
+    "size": "metropolis 49859",
+    "crisis": "calm",
+    "printed": "The church in Yekeobo hunts heresy openly: anyone suspected of working magic against the faith is denounced from the pulpit and handed to the authorities.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "heresyIntensity 0.55 (hunted), Great cathedral, Religious acceptance hostile"
+   },
+   {
+    "town": "r2r-metropolis-3",
+    "size": "metropolis 26807",
+    "crisis": "calm",
+    "printed": "The church in Dionnea hunts heresy openly: anyone suspected of working magic against the faith is denounced from the pulpit and handed to the authorities.",
+    "true": true,
+    "severity": "LOW",
+    "kind": null,
+    "fact": "Wizard's tower, reliance Integral, acceptance wary; \"against the faith\" carves out the tower's work"
+   },
+   {
+    "town": "rv2-metropolis-calm-2",
+    "size": "metropolis 155442",
+    "crisis": "calm",
+    "printed": "The church in Ráðmark hunts heresy openly: anyone suspected of working magic against the faith is denounced from the pulpit and handed to the authorities.",
+    "true": true,
+    "severity": "LOW",
+    "kind": null,
+    "fact": "\"Ráðmark runs on arcane work\" (Academy of magic); qualifier keeps it true"
+   }
+  ],
+  "script": {
+   "tests": "heresySuppression, intensity>=0.5, a church/temple institution",
+   "true": 3,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "True; all three towns rely on arcane work, reconciled only by \"against the faith\" (LOW)."
+ },
+ {
+  "id": "DS-FTH-4::FLAG: heresySuppression: hunted::v3",
+  "verdict": "TRUE",
+  "printsIn": 11,
+  "eyeReads": [
+   {
+    "town": "r2r-hamlet-55",
+    "size": "hamlet 73",
+    "crisis": "calm",
+    "printed": "Anyone at Xiaqiao suspected of working magic against the faith is named aloud and shunned.",
+    "true": true,
+    "severity": "LOW",
+    "kind": null,
+    "fact": "Magic tab \"Religious acceptance: indifferent\"; qualified by \"against the faith\""
+   },
+   {
+    "town": "r2r-metropolis-46",
+    "size": "metropolis 131927",
+    "crisis": "calm",
+    "printed": "Anyone at Beiguan suspected of working magic against the faith is named aloud and shunned.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Wizard's tower integral; line now restricted to magic against the faith"
+   },
+   {
+    "town": "r2r-metropolis-29",
+    "size": "metropolis 23730",
+    "crisis": "infiltrated",
+    "printed": "Anyone at Nokhoiserai suspected of working magic against the faith is named aloud and shunned.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "crusader garrison; acceptance wary"
+   },
+   {
+    "town": "rv2-metropolis-under_siege-19",
+    "size": "metropolis 19812",
+    "crisis": "under_siege",
+    "printed": "Anyone at Nokhoikotan suspected of working magic against the faith is named aloud and shunned.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "siege; acceptance hostile, intensity 1.0"
+   }
+  ],
+  "script": {
+   "tests": "heresySuppression, intensity>=0.5, a church reachable",
+   "true": 11,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": [
+   {
+    "town": "r2r-metropolis-29",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": null,
+    "fact": "\"against the faith\" no longer covers the workshop's arcane trade"
+   },
+   {
+    "town": "r2r-metropolis-46",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": null,
+    "fact": "Wizard's tower and Wenhao Kato are not \"against the faith\""
+   }
+  ],
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "LOW in r2r-hamlet-55, r2s-succession_void-hamlet-0, rv2-town-indebted-1 (acceptance indifferent) and r2s-insurgency-town-0 (legality regulated)."
+ },
+ {
+  "id": "DS-FTH-4::FLAG: heresySuppression: hunted::v4",
+  "verdict": "FALSE",
+  "printsIn": 10,
+  "eyeReads": [
+   {
+    "town": "rww-city-calm-1",
+    "size": "city 13800",
+    "crisis": "calm",
+    "printed": "A charm worked in the open at Vysokoko is reported before nightfall, and whoever worked it is shunned by the faithful.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "Magic tab: Wizard's tower (Jiri Vorobev), \"Economic role: common\", \"Vysokoko does better than its ground and roads would explain, and the reason is the arcane work done here\""
+   },
+   {
+    "town": "r2s-insurgency-city-1",
+    "size": "city 14488",
+    "crisis": "insurgency",
+    "printed": "A charm worked in the open at Qaracaravansarai is reported before nightfall, and whoever worked it is shunned by the faithful.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "Magic \"Availability common\", \"Legality regulated\", \"Reliance on magic: Integral\", Wizard's tower"
+   },
+   {
+    "town": "r2s-plague_onset-hamlet-1",
+    "size": "hamlet 35",
+    "crisis": "plague_onset",
+    "printed": "A charm worked in the open at Weichsee is reported before nightfall, and whoever worked it is shunned by the faithful.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "Magic tab \"Religious acceptance: indifferent\""
+   },
+   {
+    "town": "r2r-metropolis-40",
+    "size": "metropolis 44114",
+    "crisis": "calm",
+    "printed": "A charm worked in the open at Hongtian is reported before nightfall, and whoever worked it is shunned by the faithful.",
+    "true": true,
+    "severity": "LOW",
+    "kind": null,
+    "fact": "acceptance hostile; Arcane Orders \"work around [the clergy]\"; Power tab \"what is sanctioned magic and what is heresy remain deliberately unresolved\""
+   }
+  ],
+  "script": {
+   "tests": "heresySuppression and the page shows no open/accepted magic (not econ role common, not reliance Integral, no Wizard's tower/Mages' guild/Academy, legality not regulated/legal, acceptance not indifferent)",
+   "true": 6,
+   "false": 4,
+   "falseTowns": [
+    "r2s-insurgency-city-1",
+    "r2s-plague_onset-hamlet-1",
+    "r2s-wartime-city-3",
+    "rww-city-calm-1"
+   ]
+  },
+  "prior": [
+   {
+    "town": "rww-city-calm-1",
+    "state": "STILL-FALSE",
+    "nowPrints": null,
+    "nowTrue": false,
+    "severity": "MED",
+    "fact": "\"shunned\" replaces \"leaves\" but any open charm is still punished in a city whose economy runs on its Wizard's tower"
+   }
+  ],
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "Unqualified \"a charm\" (no \"against the faith\"); false wherever the page shows open, common arcane work or indifferent faith. LOW also in r2r-metropolis-16, r2s-wartime-metropolis-1 (wary, \"deliberately unresolved\")."
+ },
+ {
+  "id": "DS-FTH-4::FLAG: heresySuppression: preached::v3",
+  "verdict": "FALSE",
+  "printsIn": 1,
+  "eyeReads": [
+   {
+    "town": "r2r-metropolis-25",
+    "size": "metropolis 43657",
+    "crisis": "mass_migration",
+    "printed": "The faithful at Mönkhköl hold that magic offends their faith, and a neighbour who works it is talked about, though not yet turned in.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "Magic tab: availability common, Legality regulated, acceptance wary, Reliance Integral (Academy of magic, Mages' district, druids feed hunting/timber); Faith: \"Devotion runs through every part of life\" so \"the faithful\" = everyone"
+   }
+  ],
+  "script": {
+   "tests": "same openness test as v4",
+   "true": 0,
+   "false": 1,
+   "falseTowns": [
+    "r2r-metropolis-25"
+   ]
+  },
+  "prior": [
+   {
+    "town": "r2r-metropolis-25",
+    "state": "STILL-FALSE",
+    "nowPrints": null,
+    "nowTrue": false,
+    "severity": "MED",
+    "fact": "\"most people\" -> \"the faithful\" changes nothing where devotion is universal and the city is integral on magic"
+   }
+  ],
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "Only print; still false."
+ },
+ {
+  "id": "DS-FTH-4::FLAG: heresySuppression: preached::v5",
+  "verdict": "FALSE",
+  "printsIn": 1,
+  "eyeReads": [
+   {
+    "town": "r2s-wartime-hamlet-2",
+    "size": "hamlet 25",
+    "crisis": "wartime",
+    "printed": "A newcomer at Kaankin soon hears that the faithful count magic a heresy, and is watched until the neighbours are sure of them.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "Magic tab: \"Religious acceptance: indifferent\", \"Legality: regulated\", availability moderate"
+   }
+  ],
+  "script": {
+   "tests": "same openness test as v4",
+   "true": 0,
+   "false": 1,
+   "falseTowns": [
+    "r2s-wartime-hamlet-2"
+   ]
+  },
+  "prior": [
+   {
+    "town": "r2s-wartime-hamlet-2",
+    "state": "STILL-FALSE",
+    "nowPrints": null,
+    "nowTrue": false,
+    "severity": "MED",
+    "fact": "\"the faithful count magic a heresy\" contradicts the faith's own acceptance \"indifferent\""
+   }
+  ],
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "Only print; still false."
+ },
+ {
+  "id": "DS-POW-5::council::v1",
+  "verdict": "FALSE",
+  "printsIn": 105,
+  "eyeReads": [
+   {
+    "town": "r2r-hamlet-24",
+    "size": "hamlet 100",
+    "crisis": "famine",
+    "printed": "Decisions at Jayakota are slow because the whole Headman's Authority must agree, and once made they are rarely undone.",
+    "true": false,
+    "severity": "HIGH",
+    "kind": "d",
+    "fact": "Power tab: Headman's Authority \"↳1 member · first Vinod Deshpande\", \"A headman settles disputes and gives the orders here.\""
+   },
+   {
+    "town": "rww-thorp-under_siege-1",
+    "size": "thorp 5",
+    "crisis": "under_siege",
+    "printed": "Decisions at Belovich are slow because the whole Household Council must agree, and once made they are rarely undone.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "d",
+    "fact": "thorp of 5, Household Council \"↳1 member\"; desc: heads of household by consensus"
+   },
+   {
+    "town": "r2r-metropolis-13",
+    "size": "metropolis 328486",
+    "crisis": "calm",
+    "printed": "Decisions at Athenapetra are slow because the whole City-State Council must agree, and once made they are rarely undone.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "City-State Council"
+   },
+   {
+    "town": "r2s-succession_void-village-1",
+    "size": "village 195",
+    "crisis": "succession_void",
+    "printed": "Decisions at Chrissoeia are slow because the whole Elder Council must agree, and once made they are rarely undone.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "seat vacant; council still deliberates"
+   }
+  ],
+  "script": {
+   "tests": "seat is a body that decides together: governing desc does not name a single ruler (headman/steward/governor/crown) and government is not lord-kind",
+   "true": 86,
+   "false": 19,
+   "falseTowns": [
+    "r2r-hamlet-24",
+    "r2r-hamlet-41",
+    "r2r-hamlet-43",
+    "r2r-village-34",
+    "r2s-infiltrated-village-3",
+    "r2s-insurgency-hamlet-0",
+    "r2s-insurgency-thorp-0",
+    "r2s-mass_migration-thorp-3",
+    "r2s-monster_pressure-hamlet-3",
+    "r2s-politically_fractured-hamlet-0",
+    "r2s-slave_revolt-village-1",
+    "r2s-under_siege-hamlet-1",
+    "r2s-under_siege-village-1",
+    "r2s-under_siege-village-2",
+    "rv2-hamlet-monster_pressure-1",
+    "rv2-hamlet-occupied-2",
+    "rv2-village-calm-2",
+    "rv2-village-mass_migration-1",
+    "rww-village-calm-1"
+   ]
+  },
+  "prior": null,
+  "twinMissingCondition": "All three council siblings lack a \"not a headman\" condition: rulerKind maps \"Headman's Authority\" to elder, so \"no ruler: lord\" does not exclude it",
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "False at HIGH in every Headman's Authority town (19): desc \"A headman settles disputes and gives the orders here\", page \"↳1 member\". LOW: many Household/Elder Councils show \"↳1 member\" (thorps of 5-8)."
+ },
+ {
+  "id": "DS-POW-5::council::v2",
+  "verdict": "FALSE",
+  "printsIn": 117,
+  "eyeReads": [
+   {
+    "town": "r2r-thorp-36",
+    "size": "thorp 5",
+    "crisis": "calm",
+    "printed": "At Cnocbridge the thorp's business goes to the whole Elder Council, and everybody has learned how long the answer takes.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "d",
+    "fact": "thorp of 5; Elder Council \"↳1 member · first Clothra O'Connor\", \"the boat-headman\""
+   },
+   {
+    "town": "rv2-metropolis-wartime-1",
+    "size": "metropolis 152574",
+    "crisis": "wartime",
+    "printed": "At Dunfield the metropolis's business goes to the whole Democratic assembly, and everybody has learned how long the answer takes.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Democratic assembly"
+   },
+   {
+    "town": "r2r-thorp-1",
+    "size": "thorp 30",
+    "crisis": "occupied",
+    "printed": "At Terrapolis the thorp's business goes to the whole Elder Council, and everybody has learned how long the answer takes.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "occupied; Elder Council"
+   },
+   {
+    "town": "r2s-famine-village-1",
+    "size": "village 90",
+    "crisis": "famine",
+    "printed": "At Humen the village's business goes to the whole Headman's Authority, and everybody has learned how long the answer takes.",
+    "true": false,
+    "severity": "HIGH",
+    "kind": "d",
+    "fact": "Headman's Authority: \"A headman settles disputes and gives the orders here.\""
+   }
+  ],
+  "script": {
+   "tests": "seat is a body that decides together: governing desc does not name a single ruler (headman/steward/governor/crown) and government is not lord-kind",
+   "true": 97,
+   "false": 20,
+   "falseTowns": [
+    "r2r-hamlet-22",
+    "r2r-hamlet-33",
+    "r2r-hamlet-45",
+    "r2r-hamlet-54",
+    "r2r-thorp-26",
+    "r2r-thorp-30",
+    "r2r-village-11",
+    "r2r-village-38",
+    "r2r-village-50",
+    "r2s-famine-village-1",
+    "r2s-insurgency-village-3",
+    "r2s-plague_onset-hamlet-2",
+    "r2s-politically_fractured-village-1",
+    "r2s-recently_betrayed-hamlet-2",
+    "r2s-succession_void-hamlet-1",
+    "r2s-wartime-thorp-2",
+    "rv2-hamlet-famine-2",
+    "rv2-hamlet-under_siege-2",
+    "rv2-thorp-calm-2",
+    "rw3-hamlet-plague_onset-1"
+   ]
+  },
+  "prior": null,
+  "twinMissingCondition": "All three council siblings lack a \"not a headman\" condition: rulerKind maps \"Headman's Authority\" to elder, so \"no ruler: lord\" does not exclude it",
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "False at HIGH in every Headman's Authority town (20): desc \"A headman settles disputes and gives the orders here\", page \"↳1 member\". LOW: many Household/Elder Councils show \"↳1 member\" (thorps of 5-8)."
+ },
+ {
+  "id": "DS-POW-5::council::v4",
+  "verdict": "FALSE",
+  "printsIn": 105,
+  "eyeReads": [
+   {
+    "town": "r2r-village-21",
+    "size": "village 144",
+    "crisis": "under_siege",
+    "printed": "The Headman's Authority at Rotbrücke has left obvious decisions untaken because its members cannot agree on them.",
+    "true": false,
+    "severity": "HIGH",
+    "kind": "d",
+    "fact": "siege village; Headman's Authority \"its members cannot agree\" vs \"A headman ... gives the orders here\""
+   },
+   {
+    "town": "r2r-thorp-37",
+    "size": "thorp 6",
+    "crisis": "calm",
+    "printed": "The Household Council at Cnocton has left obvious decisions untaken because its members cannot agree on them.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "d",
+    "fact": "thorp of 6; Household Council \"↳1 member · first Murdoch Sullivan\""
+   },
+   {
+    "town": "r2r-metropolis-6",
+    "size": "metropolis 216641",
+    "crisis": "succession_void",
+    "printed": "The Grand Council at Becanatl has left obvious decisions untaken because its members cannot agree on them.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Grand Council, 20 members"
+   },
+   {
+    "town": "r2r-thorp-27",
+    "size": "thorp 25",
+    "crisis": "occupied",
+    "printed": "The Household Council at Olympnea has left obvious decisions untaken because its members cannot agree on them.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "occupied; Household Council"
+   }
+  ],
+  "script": {
+   "tests": "seat is a body that decides together: governing desc does not name a single ruler (headman/steward/governor/crown) and government is not lord-kind",
+   "true": 81,
+   "false": 24,
+   "falseTowns": [
+    "r2r-hamlet-1",
+    "r2r-hamlet-12",
+    "r2r-hamlet-18",
+    "r2r-hamlet-2",
+    "r2r-hamlet-29",
+    "r2r-hamlet-35",
+    "r2r-hamlet-4",
+    "r2r-hamlet-56",
+    "r2r-thorp-12",
+    "r2r-village-16",
+    "r2r-village-21",
+    "r2r-village-44",
+    "r2s-famine-thorp-1",
+    "r2s-indebted-hamlet-3",
+    "r2s-indebted-village-2",
+    "r2s-infiltrated-village-2",
+    "r2s-insurgency-village-0",
+    "r2s-politically_fractured-hamlet-3",
+    "r2s-religious_conversion-village-3",
+    "r2s-slave_revolt-village-3",
+    "r2s-under_siege-hamlet-2",
+    "r2s-wartime-hamlet-2",
+    "rv2-hamlet-calm-2",
+    "rv2-village-calm-1"
+   ]
+  },
+  "prior": null,
+  "twinMissingCondition": "All three council siblings lack a \"not a headman\" condition: rulerKind maps \"Headman's Authority\" to elder, so \"no ruler: lord\" does not exclude it",
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "False at HIGH in every Headman's Authority town (24): desc \"A headman settles disputes and gives the orders here\", page \"↳1 member\". LOW: many Household/Elder Councils show \"↳1 member\" (thorps of 5-8)."
+ },
+ {
+  "id": "DS-POW-5::FLAG: merchantArmy::v1",
+  "verdict": "TRUE",
+  "printsIn": 12,
+  "eyeReads": [
+   {
+    "town": "r2s-religious_conversion-town-1",
+    "size": "town 909",
+    "crisis": "religious_conversion",
+    "printed": "The trading houses at Pantelimani pay for their own armed guards, a private army that keeps order wherever the houses do business.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Defense: \"The merchant guilds maintain their own private security\""
+   },
+   {
+    "town": "r2s-under_siege-metropolis-3",
+    "size": "metropolis 46730",
+    "crisis": "under_siege",
+    "printed": "The trading houses at Andronrion pay for their own armed guards, a private army that keeps order wherever the houses do business.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "g",
+    "fact": "Defense: \"The garrison keeps order, and more harshly as the food runs down\" - \"wherever the houses do business\" survives"
+   },
+   {
+    "town": "rv2-metropolis-calm-2",
+    "size": "metropolis 155442",
+    "crisis": "calm",
+    "printed": "The trading houses at Ráðmark pay for their own armed guards, a private army that keeps order wherever the houses do business.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Mercenary quarter; \"Public law enforcement is largely a formality\""
+   }
+  ],
+  "script": {
+   "tests": "flags.merchantArmy (no higher flag), not occupied; page grep for \"The garrison keeps order\"",
+   "true": 11,
+   "false": 1,
+   "falseTowns": [
+    "r2s-under_siege-metropolis-3 (LOW)"
+   ]
+  },
+  "prior": null,
+  "twinMissingCondition": "Neither merchantArmy twin carries \"no crisis: under_siege\"; under siege the page gives order to the garrison",
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "True; LOW under siege."
+ },
+ {
+  "id": "DS-POW-5::FLAG: merchantArmy::v2",
+  "verdict": "FALSE",
+  "printsIn": 7,
+  "eyeReads": [
+   {
+    "town": "rv2-city-under_siege-4",
+    "size": "city 7118",
+    "crisis": "under_siege",
+    "printed": "Order at Taigang is kept by a private army of hired swords on the trading houses' pay. They answer to whoever pays them, not to the Merchant City Council.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "Defense, under siege: \"The garrison keeps order, and more harshly as the food runs down.\""
+   },
+   {
+    "town": "r2r-metropolis-30",
+    "size": "metropolis 48077",
+    "crisis": "calm",
+    "printed": "Order at Ulfoy is kept by a private army of hired swords on the trading houses' pay. They answer to whoever pays them, not to the Royal Authority.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "\"Public law enforcement is largely a formality. The merchant guilds maintain their own mercenary companies\""
+   },
+   {
+    "town": "rw3-city-calm-1",
+    "size": "city 2614",
+    "crisis": "calm",
+    "printed": "Order at Shanmen is kept by a private army of hired swords on the trading houses' pay. They answer to whoever pays them, not to the Merchant Guild Council.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Mercenary quarter"
+   },
+   {
+    "town": "rv2-metropolis-under_siege-16",
+    "size": "metropolis 44121",
+    "crisis": "under_siege",
+    "printed": "Order at Altaiörtöö is kept by a private army of hired swords on the trading houses' pay. They answer to whoever pays them, not to the Grand Merchant Senate.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "\"The garrison keeps order, and more harshly as the food runs down.\""
+   }
+  ],
+  "script": {
+   "tests": "flags.merchantArmy, mercenary present, not occupied, and the page does not give order to the garrison",
+   "true": 5,
+   "false": 2,
+   "falseTowns": [
+    "rv2-city-under_siege-4",
+    "rv2-metropolis-under_siege-16"
+   ]
+  },
+  "prior": null,
+  "twinMissingCondition": "Lacks \"no crisis: under_siege\" (siege hands order to the garrison)",
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "\"Order at X is kept by a private army\" contradicts the siege page."
+ },
+ {
+  "id": "DS-POW-6::capture pressure ADVANCING (weak security, poor prosperity)::v1",
+  "verdict": "TRUE",
+  "printsIn": 2,
+  "eyeReads": [
+   {
+    "town": "r2s-mass_migration-village-2",
+    "size": "village 219",
+    "crisis": "mass_migration",
+    "printed": "Criminal money would go a long way with the officials of Hisnistan: the village is poor, its streets are badly watched, and nobody has shut the door.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "\"There is no watch\"; safety/prosperity negative"
+   },
+   {
+    "town": "r2s-slave_revolt-village-0",
+    "size": "village 386",
+    "crisis": "slave_revolt",
+    "printed": "Criminal money would go a long way with the officials of Novafundus: the village is poor, its streets are badly watched, and nobody has shut the door.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "no watch; poor"
+   }
+  ],
+  "script": {
+   "tests": "no watch (defenseFactsOf.hasWatch false), safety<0 & prosperity<0, no threat/wartime, tier>=village, capture below corrupted",
+   "true": 2,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "True."
+ },
+ {
+  "id": "DS-POW-6::capture pressure ADVANCING (weak security, poor prosperity)::v2",
+  "verdict": "TRUE",
+  "printsIn": 68,
+  "eyeReads": [
+   {
+    "town": "r2s-indebted-village-3",
+    "size": "village 75",
+    "crisis": "indebted",
+    "printed": "Each season it gets easier to buy an official at Chrissonea: the village stays poor, the streets stay badly guarded, and nobody in the Elder Council is mending either.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "village 75, no watch, poor"
+   },
+   {
+    "town": "r2s-recently_betrayed-village-2",
+    "size": "village 394",
+    "crisis": "recently_betrayed",
+    "printed": "Each season it gets easier to buy an official at Megakastro: the village stays poor, the streets stay badly guarded, and nobody in the Elder Council is mending either.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "village 394"
+   },
+   {
+    "town": "r2r-village-24",
+    "size": "village 275",
+    "crisis": "famine",
+    "printed": "Each season it gets easier to buy an official at Shandao: the village stays poor, the streets stay badly guarded, and nobody in the Elder Council is mending either.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "famine; no watch"
+   }
+  ],
+  "script": {
+   "tests": "as v1",
+   "true": 68,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "\"Each season it gets easier\" is the ADVANCING pool reading; no change band in the record (LOW at most)."
+ },
+ {
+  "id": "DS-POW-6::capture pressure ADVANCING (weak security, poor prosperity)::v5",
+  "verdict": "FALSE",
+  "printsIn": 29,
+  "eyeReads": [
+   {
+    "town": "r2s-occupied-village-0",
+    "size": "village 85",
+    "crisis": "occupied",
+    "printed": "Whoever holds Spitzfeld's streets now, nobody is watching its officials, and they are paid poorly enough to be bought.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "every occupied page: \"The occupiers take the revenue, and local offices work only under their eye.\""
+   },
+   {
+    "town": "r2s-occupied-metropolis-3",
+    "size": "metropolis 262531",
+    "crisis": "occupied",
+    "printed": "Whoever holds Rajigarh's streets now, nobody is watching its officials, and they are paid poorly enough to be bought.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "same line on the page"
+   },
+   {
+    "town": "r2s-under_siege-city-0",
+    "size": "city 13252",
+    "crisis": "under_siege",
+    "printed": "Whoever holds Bellaurbs's streets now, nobody is watching its officials, and they are paid poorly enough to be bought.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "siege; garrison keeps order, officials unwatched plausible"
+   }
+  ],
+  "script": {
+   "tests": "threat crisis, safety<0 & prosperity<0, and the page does not say local offices work under the occupiers' eye",
+   "true": 19,
+   "false": 10,
+   "falseTowns": [
+    "r2s-occupied-city-3",
+    "r2s-occupied-metropolis-3",
+    "r2s-occupied-town-2",
+    "r2s-occupied-village-0",
+    "r2s-occupied-village-1",
+    "r2s-occupied-village-2",
+    "r2s-occupied-village-3",
+    "rv2-town-occupied-1",
+    "rv2-village-occupied-1",
+    "rv2-village-occupied-2"
+   ]
+  },
+  "prior": null,
+  "twinMissingCondition": "\"crisis: threat\" includes occupied; needs \"no crisis: occupied\"",
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "\"nobody is watching its officials\" is false under occupation in all 10 occupied towns."
+ },
+ {
+  "id": "DS-POW-6::capture pressure ADVANCING (weak security, poor prosperity)::v8",
+  "verdict": "TRUE",
+  "printsIn": 27,
+  "eyeReads": [
+   {
+    "town": "r2r-village-25",
+    "size": "village 255",
+    "crisis": "politically_fractured",
+    "printed": "A watch walks Lagosinum's streets, but the danger is in the hall, where officials paid next to nothing are worth buying.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "\"its watch keeps the peace in the streets\""
+   },
+   {
+    "town": "rv2-metropolis-famine-1",
+    "size": "metropolis 47045",
+    "crisis": "famine",
+    "printed": "A watch walks Fengmiao's streets, but the danger is in the hall, where officials paid next to nothing are worth buying.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "famine; garrison and city watch patrol"
+   },
+   {
+    "town": "r2s-famine-city-0",
+    "size": "city 2909",
+    "crisis": "famine",
+    "printed": "A watch walks Weizhen's streets, but the danger is in the hall, where officials paid next to nothing are worth buying.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "famine; watch"
+   }
+  ],
+  "script": {
+   "tests": "watch present, safety<0 & prosperity<0, no threat/wartime/insurgency/slave_revolt",
+   "true": 27,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "True."
+ },
+ {
+  "id": "DS-POW-6::capture pressure ADVANCING (weak security, poor prosperity)::v9",
+  "verdict": "FALSE",
+  "printsIn": 39,
+  "eyeReads": [
+   {
+    "town": "rv2-town-occupied-2",
+    "size": "town 994",
+    "crisis": "occupied",
+    "printed": "With everyone's mind on the present danger, nobody at Villaminus is watching its officials, and they are paid little enough to be bought.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "\"The occupiers take the revenue, and local offices work only under their eye.\""
+   },
+   {
+    "town": "r2r-village-41",
+    "size": "village 81",
+    "crisis": "monster_pressure",
+    "printed": "With everyone's mind on the present danger, nobody at Hukou is watching its officials, and they are paid little enough to be bought.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "monster_pressure, no watch"
+   },
+   {
+    "town": "rw3-metropolis-under_siege-1",
+    "size": "metropolis 267907",
+    "crisis": "under_siege",
+    "printed": "With everyone's mind on the present danger, nobody at Hochfurt is watching its officials, and they are paid little enough to be bought.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "siege"
+   },
+   {
+    "town": "r2r-village-21",
+    "size": "village 144",
+    "crisis": "under_siege",
+    "printed": "With everyone's mind on the present danger, nobody at Rotbrücke is watching its officials, and they are paid little enough to be bought.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "siege village"
+   }
+  ],
+  "script": {
+   "tests": "as v5",
+   "true": 30,
+   "false": 9,
+   "falseTowns": [
+    "r2s-occupied-city-0",
+    "r2s-occupied-city-1",
+    "r2s-occupied-metropolis-0",
+    "r2s-occupied-town-0",
+    "r2s-occupied-town-1",
+    "rv2-city-occupied-1",
+    "rv2-metropolis-occupied-2",
+    "rv2-town-occupied-2",
+    "rww-town-occupied-1"
+   ]
+  },
+  "prior": null,
+  "twinMissingCondition": "\"crisis: threat\" includes occupied; needs \"no crisis: occupied\"",
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "False in all 9 occupied towns."
+ },
+ {
+  "id": "DS-POW-6::operation role duty evasion::v2",
+  "verdict": "TRUE",
+  "printsIn": 66,
+  "eyeReads": [
+   {
+    "town": "r2s-occupied-town-3",
+    "size": "town 2018",
+    "crisis": "occupied",
+    "printed": "A share of what arrives at Lykopetra never appears at the gate, and the share is not small.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "\"Masonry walls pierced by gates\"; smuggling"
+   },
+   {
+    "town": "r2s-occupied-metropolis-3",
+    "size": "metropolis 262531",
+    "crisis": "occupied",
+    "printed": "A share of what arrives at Rajigarh never appears at the gate, and the share is not small.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "gatehouses"
+   },
+   {
+    "town": "rv2-city-famine-1",
+    "size": "city 2094",
+    "crisis": "famine",
+    "printed": "A share of what arrives at Becanha never appears at the gate, and the share is not small.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "\"City walls and gates\""
+   }
+  ],
+  "script": {
+   "tests": "first op smuggling, no siege, defenseFactsOf.hasGate and a wall institution",
+   "true": 66,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "True."
+ },
+ {
+  "id": "DS-POW-6::GM ADVISORY: the commander is a political actor::v3",
+  "verdict": "TRUE",
+  "printsIn": 9,
+  "eyeReads": [
+   {
+    "town": "r2r-hamlet-27",
+    "size": "hamlet 96",
+    "crisis": "monster_pressure",
+    "printed": "Military/Guard answers to the Elder Council at Jabalistan in name only: whatever the Elder Council plans needs its consent, and that consent is bargained for.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Military/Guard 57 (citizen militia) vs Elder Council 43"
+   },
+   {
+    "town": "rv2-city-wartime-1",
+    "size": "city 13995",
+    "crisis": "wartime",
+    "printed": "Military/Guard answers to the Ecclesiastical Council at Saltoaltum in name only: whatever the Ecclesiastical Council plans needs its consent, and that consent is bargained for.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Military/Guard 23 vs 19; garrison"
+   },
+   {
+    "town": "rw3-village-insurgency-1",
+    "size": "village 371",
+    "crisis": "insurgency",
+    "printed": "Military/Guard answers to the Elder Council at Ioannolimani in name only: whatever the Elder Council plans needs its consent, and that consent is bargained for.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Military/Guard 43 vs 22"
+   }
+  ],
+  "script": {
+   "tests": "advised competitive relation, {faction} the other party and stronger than the seat",
+   "true": 9,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "True."
+ },
+ {
+  "id": "DS-FTH-4::FLAG: heresySuppression: hunted::v5",
+  "verdict": "FALSE",
+  "printsIn": 8,
+  "eyeReads": [
+   {
+    "town": "r2s-occupied-metropolis-1",
+    "size": "metropolis 105466",
+    "crisis": "occupied",
+    "printed": "The faithful of Dionpetra treat magic as heresy and hunt it as such: a suspicion is enough to bring the neighbours to the door.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "Magic: Reliance Integral (Academy of magic, Enchanter's shop), Economic role common"
+   },
+   {
+    "town": "r2s-slave_revolt-metropolis-3",
+    "size": "metropolis 88966",
+    "crisis": "slave_revolt",
+    "printed": "The faithful of Anoarion treat magic as heresy and hunt it as such: a suspicion is enough to bring the neighbours to the door.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "Wizard's tower, Integral, common"
+   },
+   {
+    "town": "r2r-hamlet-45",
+    "size": "hamlet 85",
+    "crisis": "politically_fractured",
+    "printed": "The faithful of Staroovo treat magic as heresy and hunt it as such: a suspicion is enough to bring the neighbours to the door.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "Magic tab \"Religious acceptance: indifferent\""
+   },
+   {
+    "town": "r2r-metropolis-15",
+    "size": "metropolis 34901",
+    "crisis": "calm",
+    "printed": "The faithful of Nandamala treat magic as heresy and hunt it as such: a suspicion is enough to bring the neighbours to the door.",
+    "true": false,
+    "severity": "LOW",
+    "kind": "g",
+    "fact": "Arcane Orders \"hold real influence through monopoly on magical services\"; \"what is sanctioned magic and what is heresy remain deliberately unresolved\"; but magic econ absent, wary"
+   }
+  ],
+  "script": {
+   "tests": "same openness test as v4",
+   "true": 5,
+   "false": 3,
+   "falseTowns": [
+    "r2r-hamlet-45",
+    "r2s-occupied-metropolis-1",
+    "r2s-slave_revolt-metropolis-3"
+   ]
+  },
+  "prior": [
+   {
+    "town": "r2r-metropolis-15",
+    "state": "STILL-FALSE",
+    "nowPrints": null,
+    "nowTrue": false,
+    "severity": "LOW",
+    "fact": "text unchanged; arcane factions and \"deliberately unresolved\" on Power tab, but Magic tab shows no open magic economy - downgraded to LOW"
+   }
+  ],
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "Unqualified \"magic as heresy\"; false where magic is integral/common or the faith indifferent."
+ }
+]

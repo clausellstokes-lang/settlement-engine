@@ -1,0 +1,2029 @@
+[
+ {
+  "id": "DS-DEF-1::readiness STRONG::v5",
+  "verdict": "TRUE",
+  "printsIn": 5,
+  "eyeReads": [
+   {
+    "town": "r2s-monster_pressure-city-2",
+    "size": "city",
+    "crisis": "monster_pressure",
+    "printed": "Danger has come to Aryapura, and the city meets it strongly defended.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "readiness 76 Fortress; walls, garrison, watch"
+   },
+   {
+    "town": "r2s-monster_pressure-metropolis-1",
+    "size": "metropolis",
+    "crisis": "monster_pressure",
+    "printed": "Danger has come to Stormaker, and the metropolis meets it strongly defended.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "readiness 94 Fortress"
+   },
+   {
+    "town": "r2s-under_siege-metropolis-3",
+    "size": "metropolis",
+    "crisis": "under_siege",
+    "printed": "Danger has come to Andronrion, and the metropolis meets it strongly defended.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "c",
+    "fact": "siege; readiness 70 Well-Defended; same tab 'The metropolis may not come through this crisis'"
+   }
+  ],
+  "script": {
+   "tests": "readiness label Fortress/Well-Defended, crisis present not occupied, a garrison/watch on record",
+   "true": 5,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": [
+   {
+    "town": "r2s-monster_pressure-city-2",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": null,
+    "fact": "new text claims only 'strongly defended' (Fortress 76); no longer says people under arms in good order"
+   },
+   {
+    "town": "r2s-monster_pressure-metropolis-1",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": null,
+    "fact": "Fortress 94"
+   },
+   {
+    "town": "r2s-monster_pressure-metropolis-3",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": null,
+    "fact": "Fortress 84"
+   }
+  ],
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "Rating-level claim matches readiness in all five."
+ },
+ {
+  "id": "DS-DEF-1::readiness STRONG::v6",
+  "verdict": "TRUE",
+  "printsIn": 2,
+  "eyeReads": [
+   {
+    "town": "r2s-monster_pressure-town-1",
+    "size": "town",
+    "crisis": "monster_pressure",
+    "printed": "People at Al-mandi take the danger seriously, and they trust the town's defences to hold.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "readiness 82 Fortress; town walls, citadel, barracks"
+   },
+   {
+    "town": "rv2-metropolis-monster_pressure-1",
+    "size": "metropolis",
+    "crisis": "monster_pressure",
+    "printed": "People at Kashipeta take the danger seriously, and they trust the metropolis's defences to hold.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "readiness 79 Fortress"
+   }
+  ],
+  "script": {
+   "tests": "readiness Fortress/Well-Defended under a crisis not occupied",
+   "true": 2,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "Only two towns print; both Fortress."
+ },
+ {
+  "id": "DS-DEF-3::Moderate::v1",
+  "verdict": "FALSE",
+  "printsIn": 27,
+  "eyeReads": [
+   {
+    "town": "r2r-thorp-26",
+    "size": "thorp",
+    "crisis": "infiltrated",
+    "printed": "Bregya keeps a working balance: the law is present, so is crime, and neither has the upper hand.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "thorp of 15; Guard assessment 'Nobody here is paid to keep order'; 'there is no court'; Internal Security Critical"
+   },
+   {
+    "town": "r2r-city-12",
+    "size": "city",
+    "crisis": "calm",
+    "printed": "Markaztappa keeps a working balance: the law is present, so is crime, and neither has the upper hand.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "Guard assessment 'Public law enforcement is largely a formality'; Internal Security Critical; Organized syndicate"
+   },
+   {
+    "town": "rww-metropolis-infiltrated-1",
+    "size": "metropolis",
+    "crisis": "infiltrated",
+    "printed": "Aqualitus keeps a working balance: the law is present, so is crime, and neither has the upper hand.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "c",
+    "fact": "infiltrated; Thieves' Guild (Powerful) 'Deeply embedded in civic life', but Internal Security Adequate and watch on rounds"
+   }
+  ],
+  "script": {
+   "tests": "false if Guard assessment says law is a formality / nobody paid to keep order / no watch, or page says no court, or Internal Security rated Critical",
+   "true": 17,
+   "false": 10,
+   "falseTowns": [
+    "r2r-city-12",
+    "r2r-city-30",
+    "r2r-thorp-26",
+    "r2r-thorp-6",
+    "r2r-village-19",
+    "r2r-village-23",
+    "r2s-infiltrated-thorp-3",
+    "r2s-infiltrated-town-2",
+    "rv2-metropolis-calm-2",
+    "rv2-thorp-calm-2"
+   ]
+  },
+  "prior": [
+   {
+    "town": "rww-metropolis-infiltrated-1",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": "LOW",
+    "fact": "'so is crime' now admits the syndicate; IS Adequate; a strong embedded guild still makes 'neither has the upper hand' a stretch"
+   },
+   {
+    "town": "r2r-city-12",
+    "state": "STILL-FALSE",
+    "nowPrints": null,
+    "nowTrue": false,
+    "severity": "MED",
+    "fact": "'Public law enforcement is largely a formality'; Internal Security Critical"
+   }
+  ],
+  "twinMissingCondition": "guardPresence is met by a household levy or militia where the page says nobody keeps order; the line needs a law-present test, not guardPresence",
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "'the law is present' is false where the page says no watch/no court/law a formality."
+ },
+ {
+  "id": "DS-DEF-5::walls PRESENT::v7",
+  "verdict": "TRUE",
+  "printsIn": 42,
+  "eyeReads": [
+   {
+    "town": "r2r-thorp-24",
+    "size": "thorp",
+    "crisis": "occupied",
+    "printed": "Nothing closes the few ways through Sanctaminus's wall, because it has no gate.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Palisade; no gate institution; occupied (checkpoints, not gates)"
+   },
+   {
+    "town": "rw3-village-insurgency-1",
+    "size": "village",
+    "crisis": "insurgency",
+    "printed": "Nothing closes the few ways through Ioannolimani's wall, because it has no gate.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Palisade or earthworks, no gate; same tab 'The walls leave few ways in' agrees with 'few ways'"
+   },
+   {
+    "town": "r2r-hamlet-11",
+    "size": "hamlet",
+    "crisis": "calm",
+    "printed": "Nothing closes the few ways through Riparipa's wall, because it has no gate.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "'The walls leave few ways in, and the guard watches them' agrees"
+   }
+  ],
+  "script": {
+   "tests": "walls on record and no gate institution",
+   "true": 42,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": [
+   {
+    "town": "rw3-village-insurgency-1",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": null,
+    "fact": "new text says 'few ways through', matching 'The walls leave few ways in'"
+   },
+   {
+    "town": "r2r-hamlet-10",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": null,
+    "fact": "same"
+   },
+   {
+    "town": "r2r-hamlet-11",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": null,
+    "fact": "same"
+   }
+  ],
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "Earthworks called a 'wall' is acceptable."
+ },
+ {
+  "id": "DS-DEF-5::arcane defense PRESENT::v1",
+  "verdict": "FALSE",
+  "printsIn": 99,
+  "eyeReads": [
+   {
+    "town": "r2s-indebted-hamlet-2",
+    "size": "hamlet",
+    "crisis": "indebted",
+    "printed": "Its defence is not all arms: some of what protects the hamlet is magic.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Traveling hedge wizard; Arcane Support Present"
+   },
+   {
+    "town": "r2s-famine-city-3",
+    "size": "city",
+    "crisis": "famine",
+    "printed": "Its defence is not all arms: some of what protects the city is magic.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "magicDef = Alchemist quarter only; next block 'Arcane Support None: No arcane practitioners on the rolls. Wards, detection and counterspell are beyond this settlement.'"
+   },
+   {
+    "town": "rv2-metropolis-under_siege-16",
+    "size": "metropolis",
+    "crisis": "under_siege",
+    "printed": "Its defence is not all arms: some of what protects the metropolis is magic.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "siege; Alchemist quarter only; 'Arcane SupportNone'"
+   }
+  ],
+  "script": {
+   "tests": "magic defence on record AND the page's Arcane Support row is Present (not None)",
+   "true": 86,
+   "false": 13,
+   "falseTowns": [
+    "r2r-city-29",
+    "r2r-metropolis-40",
+    "r2r-town-57",
+    "r2s-famine-city-3",
+    "r2s-infiltrated-metropolis-1",
+    "r2s-insurgency-town-0",
+    "r2s-monster_pressure-metropolis-0",
+    "r2s-slave_revolt-metropolis-2",
+    "rv2-metropolis-plague_onset-1",
+    "rv2-metropolis-under_siege-16",
+    "rv2-metropolis-under_siege-19",
+    "rv2-town-monster_pressure-1",
+    "rw3-metropolis-calm-1"
+   ]
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "Alchemy-only towns: 'some of what protects the town is magic' against 'Arcane Support None' a line below."
+ },
+ {
+  "id": "DS-DEF-5::arcane defense PRESENT::v2",
+  "verdict": "TRUE",
+  "printsIn": 82,
+  "eyeReads": [
+   {
+    "town": "r2s-monster_pressure-town-1",
+    "size": "town",
+    "crisis": "monster_pressure",
+    "printed": "Whoever keeps Al-mandi's gate has more than steel to call on.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "g",
+    "fact": "Alchemist shop only; 'Arcane SupportNone' below; alchemical preparations are still 'more than steel'"
+   },
+   {
+    "town": "rv2-town-under_siege-3",
+    "size": "town",
+    "crisis": "under_siege",
+    "printed": "Whoever keeps Wuzhou's gate has more than steel to call on.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "g",
+    "fact": "siege; Alchemist shop only; Arcane Support None"
+   },
+   {
+    "town": "r2r-metropolis-1",
+    "size": "metropolis",
+    "crisis": "calm",
+    "printed": "Whoever keeps Varapeth's gate has more than steel to call on.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Mages' district, Academy; Arcane Support Present Strong; gates on page"
+   }
+  ],
+  "script": {
+   "tests": "magic defence on record, a gate/walls, a guard force; LOW where Arcane Support row reads None (alchemy only)",
+   "true": 82,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "LOW in 10 alchemy-only towns: r2r-city-40, r2r-metropolis-26, r2s-monster_pressure-town-1, r2s-religious_conversion-city-0, r2s-religious_conversion-metropolis-0, r2s-succession_void-city-0, r2s-under_siege-metropolis-0, rv2-town-famine-2, rv2-town-under_siege+famine-1, rv2-town-under_siege-3"
+ },
+ {
+  "id": "DS-DEF-5::arcane defense PRESENT::v3",
+  "verdict": "TRUE",
+  "printsIn": 131,
+  "eyeReads": [
+   {
+    "town": "r2r-hamlet-27",
+    "size": "hamlet",
+    "crisis": "monster_pressure",
+    "printed": "People at Jabalistan know the hamlet's defence does not end with its weapons.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Traveling hedge wizard; Arcane Support Present"
+   },
+   {
+    "town": "rv2-city-under_siege-1",
+    "size": "city",
+    "crisis": "under_siege",
+    "printed": "People at Kaliburg know the city's defence does not end with its weapons.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "siege; Wizard's tower; Arcane Support Present"
+   },
+   {
+    "town": "r2r-metropolis-13",
+    "size": "metropolis",
+    "crisis": "calm",
+    "printed": "People at Athenapetra know the metropolis's defence does not end with its weapons.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "g",
+    "fact": "Alchemist quarter only; 'Arcane SupportNone'; alchemy is still not 'weapons'"
+   },
+   {
+    "town": "r2s-occupied-metropolis-0",
+    "size": "metropolis",
+    "crisis": "occupied",
+    "printed": "People at Chrissopetra know the metropolis's defence does not end with its weapons.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "occupied; Mages' district/Academy"
+   }
+  ],
+  "script": {
+   "tests": "magic defence on record; LOW where Arcane Support row reads None",
+   "true": 131,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "LOW in 24 alchemy-only towns (Arcane Support None): r2r-city-16, r2r-city-4, r2r-metropolis-10, r2r-metropolis-13, r2r-metropolis-15, r2r-metropolis-23, r2r-metropolis-29, r2r-metropolis-8, r2r-town-19, r2r-town-36, r2r-town-38, r2r-town-49, r2r-town-52, r2s-famine-metropolis-3, r2s-famine-town-3, r2s-infiltrated-city-1, r2s-insurgency-town-2, r2s-mass_migration-city-1, r2s-religious_conversion-town-2, r2s-under_siege-city-2, rv2-city-insurgency-2, rv2-metropolis-indebted-1, rv2-metropolis-wartime-2, rv2-town-mass_migration-1"
+ },
+ {
+  "id": "DS-DEF-5::ARCANE: mages' guild::v1",
+  "verdict": "TRUE",
+  "printsIn": 54,
+  "eyeReads": [
+   {
+    "town": "r2r-city-17",
+    "size": "city",
+    "crisis": "calm",
+    "printed": "The mages at Jalaldavan keep the city's wards and answer hostile spells.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Mages' guild; Arcane Support Present Strong"
+   },
+   {
+    "town": "r2s-under_siege-city-0",
+    "size": "city",
+    "crisis": "under_siege",
+    "printed": "The mages at Bellaurbs keep the city's wards and answer hostile spells.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "siege; Mages' guild"
+   },
+   {
+    "town": "r2r-metropolis-27",
+    "size": "metropolis",
+    "crisis": "calm",
+    "printed": "The mages at Yekeiin keep the metropolis's wards and answer hostile spells.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Academy of magic; Arcane Support Present"
+   }
+  ],
+  "script": {
+   "tests": "a mages' guild/district/academy in magic defence AND Arcane Support Present",
+   "true": 54,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "Smallest tier reached is city."
+ },
+ {
+  "id": "DS-DEF-5::ARCANE: mages' guild::v2",
+  "verdict": "TRUE",
+  "printsIn": 64,
+  "eyeReads": [
+   {
+    "town": "r2r-town-45",
+    "size": "town",
+    "crisis": "calm",
+    "printed": "Varanand's wards are the mages' work, and they hold only as long as the mages keep them up.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Mages' guild; Arcane Support Present"
+   },
+   {
+    "town": "rv2-city-under_siege-4",
+    "size": "city",
+    "crisis": "under_siege",
+    "printed": "Taigang's wards are the mages' work, and they hold only as long as the mages keep them up.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "siege; Mages' guild"
+   },
+   {
+    "town": "rw3-metropolis-under_siege-1",
+    "size": "metropolis",
+    "crisis": "under_siege",
+    "printed": "Hochfurt's wards are the mages' work, and they hold only as long as the mages keep them up.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "siege metropolis; Mages' district, Academy"
+   }
+  ],
+  "script": {
+   "tests": "mages' institution in magic defence AND Arcane Support Present",
+   "true": 64,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": ""
+ },
+ {
+  "id": "DS-DEF-5::ARCANE: alchemists::v1",
+  "verdict": "TRUE",
+  "printsIn": 55,
+  "eyeReads": [
+   {
+    "town": "rv2-town-famine-2",
+    "size": "town",
+    "crisis": "famine",
+    "printed": "Alchemy is practised at Chernomir, and some of what it makes goes to the town's defenders.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "famine; Alchemist shop"
+   },
+   {
+    "town": "r2s-under_siege-city-2",
+    "size": "city",
+    "crisis": "under_siege",
+    "printed": "Alchemy is practised at Andronarion, and some of what it makes goes to the city's defenders.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "siege; Alchemist quarter"
+   },
+   {
+    "town": "r2r-metropolis-1",
+    "size": "metropolis",
+    "crisis": "calm",
+    "printed": "Alchemy is practised at Varapeth, and some of what it makes goes to the metropolis's defenders.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "no alchemist in defence, but 'Apothecary & Alchemy' trade on page (apothecary district)"
+   }
+  ],
+  "script": {
+   "tests": "an alchemist shop/quarter or apothecary district on the roster",
+   "true": 55,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "Where Arcane Support reads None the alchemy claim itself stays true."
+ },
+ {
+  "id": "DS-DEF-5::ARCANE: alchemists::v2",
+  "verdict": "TRUE",
+  "printsIn": 62,
+  "eyeReads": [
+   {
+    "town": "r2s-famine-town-3",
+    "size": "town",
+    "crisis": "famine",
+    "printed": "Alchemical preparations made at Shattkarez are among what its defenders can call on.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "famine; Alchemist shop"
+   },
+   {
+    "town": "rv2-town-under_siege-3",
+    "size": "town",
+    "crisis": "under_siege",
+    "printed": "Alchemical preparations made at Wuzhou are among what its defenders can call on.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "siege; Alchemist shop"
+   },
+   {
+    "town": "r2r-metropolis-14",
+    "size": "metropolis",
+    "crisis": "under_siege",
+    "printed": "Alchemical preparations made at Prabhapeta are among what its defenders can call on.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "siege metropolis; apothecary district on roster"
+   }
+  ],
+  "script": {
+   "tests": "an alchemist shop/quarter or apothecary district on the roster",
+   "true": 62,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": ""
+ },
+ {
+  "id": "DS-DEF-9::magicDependency true, with a NAMED dependent chain::v1",
+  "verdict": "TRUE",
+  "printsIn": 75,
+  "eyeReads": [
+   {
+    "town": "r2r-village-11",
+    "size": "village",
+    "crisis": "calm",
+    "printed": "At Milonick the usual work no longer yields enough salted fish, and part of the shortfall is made up by means beyond it.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Fishing & Seafood depleted; 'Temple fishing rites improve depleted catch'"
+   },
+   {
+    "town": "rw3-metropolis-calm-1",
+    "size": "metropolis",
+    "crisis": "calm",
+    "printed": "At Vatannuur the usual work no longer yields enough preserved foods, and part of the shortfall is made up by means beyond it.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Livestock depleted; 'Blessed stores; divine provision fills the gap'; 'means beyond it' fits divine"
+   },
+   {
+    "town": "rv2-city-under_siege-24",
+    "size": "city",
+    "crisis": "under_siege",
+    "printed": "At Palaiocastron the usual work no longer yields enough barrels and containers, and part of the shortfall is made up by means beyond it.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "c",
+    "fact": "siege; Timber resource 'absent' (substitute), not depleted: 'no longer yields' presumes it once did"
+   }
+  ],
+  "script": {
+   "tests": "{good} is an output of a chain with a magicNote whose resource is depleted/absent or status not running",
+   "true": 75,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": [
+   {
+    "town": "rw3-metropolis-calm-1",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": null,
+    "fact": "'means beyond it' no longer claims arcane work or few people; divine provision fills a depleted-livestock gap"
+   },
+   {
+    "town": "r2r-city-2",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": null,
+    "fact": "salt depleted; 'part of the shortfall' matches 'minor food supplement'"
+   }
+  ],
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "LOW: rv2-city-under_siege-24."
+ },
+ {
+  "id": "DS-DEF-9::magicDependency true, with a NAMED dependent chain::v2",
+  "verdict": "TRUE",
+  "printsIn": 69,
+  "eyeReads": [
+   {
+    "town": "r2s-under_siege-village-1",
+    "size": "village",
+    "crisis": "under_siege",
+    "printed": "If the help beyond ordinary work failed at Neaddale, its river fish would fall further short than it already does.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "River Fishing depleted, temple rites"
+   },
+   {
+    "town": "r2s-famine-city-0",
+    "size": "city",
+    "crisis": "famine",
+    "printed": "If the help beyond ordinary work failed at Weizhen, its baked goods would fall further short than it already does.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Grain depleted; arcane quickening"
+   },
+   {
+    "town": "r2r-metropolis-15",
+    "size": "metropolis",
+    "crisis": "calm",
+    "printed": "If the help beyond ordinary work failed at Nandamala, its herbal remedies would fall further short than it already does.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Herbalism depleted; divine healing supplements"
+   }
+  ],
+  "script": {
+   "tests": "{good} matches a depleted chain carrying a magicNote",
+   "true": 69,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": ""
+ },
+ {
+  "id": "DS-DEF-9::magicDependency true, with a NAMED dependent chain::v3",
+  "verdict": "TRUE",
+  "printsIn": 84,
+  "eyeReads": [
+   {
+    "town": "rv2-village-famine-2",
+    "size": "village",
+    "crisis": "famine",
+    "printed": "People at Shattabad know that part of the village's work now holds up only with help beyond ordinary labour.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Livestock depleted; divine provision"
+   },
+   {
+    "town": "r2s-famine-town-0",
+    "size": "town",
+    "crisis": "famine",
+    "printed": "People at Gründorf know that part of the town's work now holds up only with help beyond ordinary labour.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "c",
+    "fact": "only 'minor food supplement' to beekeeping: 'holds up only with help' overstates"
+   },
+   {
+    "town": "r2r-metropolis-0",
+    "size": "metropolis",
+    "crisis": "calm",
+    "printed": "People at Baigang know that part of the metropolis's work now holds up only with help beyond ordinary labour.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Grain, Hunting depleted; blessed stores"
+   }
+  ],
+  "script": {
+   "tests": "some chain with a magicNote is depleted or not running",
+   "true": 84,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": ""
+ },
+ {
+  "id": "DS-DEF-9::magicDependency false::v2",
+  "verdict": "TRUE",
+  "printsIn": 157,
+  "eyeReads": [
+   {
+    "town": "r2r-thorp-15",
+    "size": "thorp",
+    "crisis": "calm",
+    "printed": "Whatever magic reaches Buyanshari, the thorp does not rest on it: nothing it lives by would stop without it.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "magicDependency false; Reliance None; Economic role absent; no magicNote chain"
+   },
+   {
+    "town": "r2s-slave_revolt-metropolis-2",
+    "size": "metropolis",
+    "crisis": "slave_revolt",
+    "printed": "Whatever magic reaches Weichfeld, the metropolis does not rest on it: nothing it lives by would stop without it.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Reliance None"
+   },
+   {
+    "town": "rww-village-under_siege-1",
+    "size": "village",
+    "crisis": "under_siege",
+    "printed": "Whatever magic reaches Qaryatsaray, the village does not rest on it: nothing it lives by would stop without it.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "c",
+    "fact": "siege; 'Reliance on magic: Present', Economic and Infrastructure role 'common', availability pervasive"
+   }
+  ],
+  "script": {
+   "tests": "magicDependency false, no chain with a magicNote, reliance not Relied upon/Integral",
+   "true": 157,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "LOW where reliance reads Present with common roles: r2r-town-11, r2s-insurgency-village-2, rv2-town-indebted-2, rww-village-under_siege-1"
+ },
+ {
+  "id": "DS-DEF-12::CAPACITY: enough::v2",
+  "verdict": "FALSE",
+  "printsIn": 6,
+  "eyeReads": [
+   {
+    "town": "r2r-thorp-23",
+    "size": "thorp",
+    "crisis": "calm",
+    "printed": "What Zelenosk raises covers an ordinary year and no more, so one bad harvest would leave it short before spring.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "Outlook: 'Zelenosk grows less than it eats, and nothing from outside makes up the difference'; food ratio 0.93"
+   },
+   {
+    "town": "r2s-wartime-thorp-1",
+    "size": "thorp",
+    "crisis": "wartime",
+    "printed": "What Breitgate raises covers an ordinary year and no more, so one bad harvest would leave it short before spring.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "wartime; Outlook: 'its own land does not grow enough; the rest comes from its stores and from magic'"
+   },
+   {
+    "town": "r2s-occupied-village-0",
+    "size": "village",
+    "crisis": "occupied",
+    "printed": "What Spitzfeld raises covers an ordinary year and no more, so one bad harvest would leave it short before spring.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "occupied; Outlook: 'some of its food comes in by caravan, magic supplies a share'"
+   },
+   {
+    "town": "rv2-village-calm-2",
+    "size": "village",
+    "crisis": "calm",
+    "printed": "What Olymplathra raises covers an ordinary year and no more, so one bad harvest would leave it short before spring.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "ratio 1.09; 'Nothing Olymplathra needs ... has to come from outside'"
+   }
+  ],
+  "script": {
+   "tests": "false if food ratio < 0.95 or the Outlook line says it grows less than it eats / food comes in",
+   "true": 3,
+   "false": 3,
+   "falseTowns": [
+    "r2r-thorp-23",
+    "r2s-occupied-village-0",
+    "r2s-wartime-thorp-1"
+   ]
+  },
+  "prior": null,
+  "twinMissingCondition": "the 'food: >= pressured' gate admits Pressured towns whose own production is below need",
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "'What X raises covers an ordinary year' where the Outlook says it grows less than it eats."
+ },
+ {
+  "id": "DS-DEF-12::CAPACITY: enough::v3",
+  "verdict": "FALSE",
+  "printsIn": 47,
+  "eyeReads": [
+   {
+    "town": "r2r-thorp-17",
+    "size": "thorp",
+    "crisis": "famine",
+    "printed": "People at Chichich make do with what they have; a good year is comfortable and a bad one is lean.",
+    "true": false,
+    "severity": "HIGH",
+    "kind": "c",
+    "fact": "famine; 'Food: Deficit — Active Famine'; next block 'The winter ahead will be hungry'"
+   },
+   {
+    "town": "rww-town-under_siege-1",
+    "size": "town",
+    "crisis": "under_siege",
+    "printed": "People at Sanctavallis make do with what they have; a good year is comfortable and a bad one is lean.",
+    "true": false,
+    "severity": "HIGH",
+    "kind": "c",
+    "fact": "siege; 'The siege has cut every road in'; Food Deficit"
+   },
+   {
+    "town": "r2r-village-40",
+    "size": "village",
+    "crisis": "calm",
+    "printed": "People at Kripapeta make do with what they have; a good year is comfortable and a bad one is lean.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Secure 1.09; 'grows what it eats'"
+   }
+  ],
+  "script": {
+   "tests": "false if food label is Deficit/Active Famine or a siege/famine flag is set",
+   "true": 21,
+   "false": 26,
+   "falseTowns": [
+    "r2r-hamlet-24",
+    "r2r-thorp-17",
+    "r2r-thorp-38",
+    "r2r-thorp-46",
+    "r2r-thorp-54",
+    "r2r-village-43",
+    "r2s-famine-hamlet-1",
+    "r2s-insurgency-hamlet-0",
+    "r2s-insurgency-hamlet-2",
+    "r2s-occupied-hamlet-0",
+    "r2s-occupied-hamlet-1",
+    "r2s-occupied-thorp-1",
+    "r2s-recently_betrayed-hamlet-2",
+    "r2s-succession_void-thorp-0",
+    "r2s-succession_void-thorp-1",
+    "r2s-under_siege-thorp-2",
+    "r2s-under_siege-village-2",
+    "r2s-wartime-hamlet-3",
+    "r2s-wartime-thorp-2",
+    "rv2-hamlet-famine-2",
+    "rv2-hamlet-under_siege-2",
+    "rv2-village-famine-1",
+    "rww-hamlet-famine-1",
+    "rww-thorp-calm-1",
+    "rww-town-under_siege-1",
+    "rww-village-famine-1"
+   ]
+  },
+  "prior": null,
+  "twinMissingCondition": "YES, it matters: lacks 'food: >= pressured' that both siblings carry, so it prints 'a good year is comfortable and a bad one is lean' under active famine and siege",
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "Normal-times sentence under famine/siege in 26 of 47 towns."
+ },
+ {
+  "id": "DS-DEF-11::WALLED-STRAINED::v3",
+  "verdict": "TRUE",
+  "printsIn": 5,
+  "eyeReads": [
+   {
+    "town": "r2s-under_siege-thorp-0",
+    "size": "thorp",
+    "crisis": "under_siege",
+    "printed": "Qaradavan had too few hands for its defences before the siege; now everyone who can hold a weapon has a place on them, and most of them are learning as they go.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "thorp of 9 under siege; Household levy, no soldiers; Vulnerable 13"
+   },
+   {
+    "town": "r2s-under_siege-thorp-2",
+    "size": "thorp",
+    "crisis": "under_siege",
+    "printed": "Agioslimani had too few hands for its defences before the siege; now everyone who can hold a weapon has a place on them, and most of them are learning as they go.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "thorp of 6; levy only"
+   },
+   {
+    "town": "rv2-thorp-under_siege+famine-1",
+    "size": "thorp",
+    "crisis": "under_siege+famine",
+    "printed": "Mingtian had too few hands for its defences before the siege; now everyone who can hold a weapon has a place on them, and most of them are learning as they go.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "no force at all; palisade"
+   }
+  ],
+  "script": {
+   "tests": "under siege, no garrison/mercenary, readiness Vulnerable/Undefended",
+   "true": 5,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": [
+   {
+    "town": "r2s-under_siege-metropolis-2",
+    "state": "CURED-BY-SILENCE",
+    "nowPrints": "The siege has put more people on Raassaray's defences than the metropolis could ever find for them in quieter seasons.",
+    "nowTrue": true,
+    "severity": null,
+    "fact": "v3 now gated to no soldiers; its sibling v4 prints there and makes no shortage claim"
+   }
+  ],
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "Only thorps reach it."
+ },
+ {
+  "id": "DS-DEF-11::WALLED-STRAINED::v4",
+  "verdict": "TRUE",
+  "printsIn": 43,
+  "eyeReads": [
+   {
+    "town": "r2r-thorp-45",
+    "size": "thorp",
+    "crisis": "under_siege",
+    "printed": "The siege has put more people on Weißgasse's defences than the thorp could ever find for them in quieter seasons.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "thorp of 20 under siege; levy musters"
+   },
+   {
+    "town": "r2r-metropolis-14",
+    "size": "metropolis",
+    "crisis": "under_siege",
+    "printed": "The siege has put more people on Prabhapeta's defences than the metropolis could ever find for them in quieter seasons.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "metropolis 271k under siege"
+   },
+   {
+    "town": "r2s-under_siege-metropolis-2",
+    "size": "metropolis",
+    "crisis": "under_siege",
+    "printed": "The siege has put more people on Raassaray's defences than the metropolis could ever find for them in quieter seasons.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "siege; garrisons and mercenaries; extra hands in a siege plausible"
+   }
+  ],
+  "script": {
+   "tests": "under siege and a wall on record",
+   "true": 43,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": ""
+ },
+ {
+  "id": "DS-DEF-11::WALLED-STRAINED::v6",
+  "verdict": "TRUE",
+  "printsIn": 5,
+  "eyeReads": [
+   {
+    "town": "r2r-thorp-43",
+    "size": "thorp",
+    "crisis": "recently_betrayed",
+    "printed": "Burjpatan's defences still stand sound, though nobody in the thorp has the work of manning them.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Palisade; no force; 'No organized force' below"
+   },
+   {
+    "town": "r2s-politically_fractured-village-2",
+    "size": "village",
+    "crisis": "politically_fractured",
+    "printed": "Inverheath's defences still stand sound, though nobody in the village has the work of manning them.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Palisade or earthworks; no force"
+   },
+   {
+    "town": "r2s-indebted-thorp-2",
+    "size": "thorp",
+    "crisis": "indebted",
+    "printed": "Kamalaganj's defences still stand sound, though nobody in the thorp has the work of manning them.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "no force"
+   }
+  ],
+  "script": {
+   "tests": "wall on record, no garrison/militia/watch/mercenary, not siege/occupied",
+   "true": 5,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": [
+   {
+    "town": "r2r-thorp-24",
+    "state": "CURED-BY-SILENCE",
+    "nowPrints": "Sanctaminus keeps its palisade in repair and pays nobody to stand guard there.",
+    "nowTrue": true,
+    "severity": "LOW",
+    "fact": "occupied: same tab 'The occupiers' troops at Sanctaminus protect it'; the thorp itself pays no guard, so true, though a GM may miss the troops"
+   }
+  ],
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": ""
+ },
+ {
+  "id": "DS-DEF-11::WALLED-STRAINED::v7",
+  "verdict": "TRUE",
+  "printsIn": 26,
+  "eyeReads": [
+   {
+    "town": "r2r-thorp-12",
+    "size": "thorp",
+    "crisis": "calm",
+    "printed": "Nahrhaven's defences are sound, and the only people who would stand on them are the thorp's own.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Household levy, palisade"
+   },
+   {
+    "town": "r2r-hamlet-18",
+    "size": "hamlet",
+    "crisis": "calm",
+    "printed": "Caerwick's defences are sound, and the only people who would stand on them are the hamlet's own.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "militia 'well organised and willing'; nothing stated about thinness now"
+   },
+   {
+    "town": "r2r-hamlet-3",
+    "size": "hamlet",
+    "crisis": "calm",
+    "printed": "Breitenmoor's defences are sound, and the only people who would stand on them are the hamlet's own.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "g",
+    "fact": "Adventurers' charter hall printed just below 'takes up the local defence no garrison is here to keep' vs 'only ... the hamlet's own'"
+   },
+   {
+    "town": "r2s-famine-village-3",
+    "size": "village",
+    "crisis": "famine",
+    "printed": "Jabalkhel's defences are sound, and the only people who would stand on them are the village's own.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "famine; militia"
+   }
+  ],
+  "script": {
+   "tests": "guard force is militia/levy only (no garrison, watch, mercenary), wall on record, not siege/occupied; LOW where a charter hall stands",
+   "true": 26,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": [
+   {
+    "town": "r2r-hamlet-18",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": null,
+    "fact": "new text drops 'stretched thin'"
+   }
+  ],
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "LOW with charter hall: r2r-hamlet-3, r2r-hamlet-41, r2r-village-23, r2r-village-46; Power tab 'weak defences' vs 'sound' is a nuance."
+ },
+ {
+  "id": "DS-DEF-11::UNWALLED-SMALL::v4",
+  "verdict": "TRUE",
+  "printsIn": 88,
+  "eyeReads": [
+   {
+    "town": "r2s-wartime-thorp-0",
+    "size": "thorp",
+    "crisis": "wartime",
+    "printed": "Amarghat has no wall, and nothing has yet come against it that a wall would have stopped.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "no wall; wartime levy, no attack on the place"
+   },
+   {
+    "town": "r2r-village-24",
+    "size": "village",
+    "crisis": "famine",
+    "printed": "Shandao has no wall, and nothing has yet come against it that a wall would have stopped.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "famine; no wall"
+   },
+   {
+    "town": "r2r-hamlet-19",
+    "size": "hamlet",
+    "crisis": "calm",
+    "printed": "Deirkala has no wall, and nothing has yet come against it that a wall would have stopped.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "g",
+    "fact": "History 'Early trial: piracy and coastal raids'"
+   }
+  ],
+  "script": {
+   "tests": "no walls on record; history/page not naming a raid or attack on the town",
+   "true": 88,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "LOW (founding 'piracy and coastal raids'): r2r-hamlet-19, r2r-hamlet-4, r2s-mass_migration-thorp-0. No monster_pressure/siege/occupied town reaches it."
+ },
+ {
+  "id": "DS-DEF-3::Moderate::v3",
+  "verdict": "TRUE",
+  "printsIn": 38,
+  "eyeReads": [
+   {
+    "town": "r2s-infiltrated-village-1",
+    "size": "village",
+    "crisis": "infiltrated",
+    "printed": "Visitors to Al-pur are told which few streets to avoid, and the advice turns out to be right.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "village 117; same block 'Residents know which corners to avoid'"
+   },
+   {
+    "town": "r2r-village-16",
+    "size": "village",
+    "crisis": "calm",
+    "printed": "Visitors to Flachbrücke are told which few streets to avoid, and the advice turns out to be right.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "village 157; same"
+   },
+   {
+    "town": "r2r-metropolis-28",
+    "size": "metropolis",
+    "crisis": "calm",
+    "printed": "Visitors to Yekeobo are told which few streets to avoid, and the advice turns out to be right.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "metropolis; same"
+   }
+  ],
+  "script": {
+   "tests": "tier >= village and the Criminal Architecture block says a mix of safer and exposed areas / corners to avoid",
+   "true": 38,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": ""
+ },
+ {
+  "id": "DS-DEF-5::garrison PRESENT::v3",
+  "verdict": "TRUE",
+  "printsIn": 80,
+  "eyeReads": [
+   {
+    "town": "r2s-infiltrated-town-2",
+    "size": "town",
+    "crisis": "infiltrated",
+    "printed": "Everyone entering Buyankher is counted at the gate by a soldier whose job it is, and counted again on the way out.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Town walls, Barracks; 'gate tally' on page"
+   },
+   {
+    "town": "r2s-occupied-city-2",
+    "size": "city",
+    "crisis": "occupied",
+    "printed": "Everyone entering Petenxochitl is counted at the gate by a soldier whose job it is, and counted again on the way out.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "occupied; garrison; gates"
+   },
+   {
+    "town": "r2s-mass_migration-metropolis-3",
+    "size": "metropolis",
+    "crisis": "mass_migration",
+    "printed": "Everyone entering Balgill is counted at the gate by a soldier whose job it is, and counted again on the way out.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "d",
+    "fact": "metropolis 248k: everyone counted in and out is a stretch"
+   }
+  ],
+  "script": {
+   "tests": "garrison/barracks on record, walls on record, page never says nobody counts or no gate",
+   "true": 80,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "Agrees with the page's 'gate tally' lines."
+ },
+ {
+  "id": "DS-DEF-5::NO organized force at all::v1",
+  "verdict": "TRUE",
+  "printsIn": 83,
+  "eyeReads": [
+   {
+    "town": "r2s-indebted-thorp-2",
+    "size": "thorp",
+    "crisis": "indebted",
+    "printed": "The thorp has no organized force. Defense here is individual armed citizens, with no command, no training and no way to coordinate a response.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "thorp of 8; no force on record"
+   },
+   {
+    "town": "r2s-recently_betrayed-village-2",
+    "size": "village",
+    "crisis": "recently_betrayed",
+    "printed": "The village has no organized force. Defense here is individual armed citizens, with no command, no training and no way to coordinate a response.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "village 394; no force"
+   },
+   {
+    "town": "r2r-hamlet-24",
+    "size": "hamlet",
+    "crisis": "famine",
+    "printed": "The hamlet has no organized force. Defense here is individual armed citizens, with no command, no training and no way to coordinate a response.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "famine; no force"
+   },
+   {
+    "town": "r2s-recently_betrayed-village-1",
+    "size": "village",
+    "crisis": "recently_betrayed",
+    "printed": "The village has no organized force. Defense here is individual armed citizens, with no command, no training and no way to coordinate a response.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "g",
+    "fact": "'Those who keep Hongan safe are questioning everyone' implies some coordinated keepers"
+   }
+  ],
+  "script": {
+   "tests": "no garrison/militia/watch/mercenary on record; LOW where the page names 'Those who keep X safe'",
+   "true": 83,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "LOW: r2s-monster_pressure-thorp-1, r2s-recently_betrayed-thorp-3, r2s-recently_betrayed-village-1."
+ },
+ {
+  "id": "DS-DEF-5::NO organized force at all::v2",
+  "verdict": "FALSE",
+  "printsIn": 81,
+  "eyeReads": [
+   {
+    "town": "r2r-thorp-37",
+    "size": "thorp",
+    "crisis": "calm",
+    "printed": "If Cnocton were attacked, its people would fight with no leaders and no plan, each household for itself.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "thorp of 6; no force, calm"
+   },
+   {
+    "town": "r2s-infiltrated-village-2",
+    "size": "village",
+    "crisis": "infiltrated",
+    "printed": "If Bayarserai were attacked, its people would fight with no leaders and no plan, each household for itself.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "village 388; no force"
+   },
+   {
+    "town": "r2r-hamlet-36",
+    "size": "hamlet",
+    "crisis": "monster_pressure",
+    "printed": "If Nahrmandi were attacked, its people would fight with no leaders and no plan, each household for itself.",
+    "true": false,
+    "severity": "MED",
+    "kind": "c",
+    "fact": "monster_pressure: same tab 'The beasts give Nahrmandi no rest between attacks' and 'the attackers seem to know it' — 'If Nahrmandi were attacked' presumes it is not"
+   }
+  ],
+  "script": {
+   "tests": "no force on record; false where monster_pressure is in force and the page reports attacks",
+   "true": 73,
+   "false": 8,
+   "falseTowns": [
+    "r2r-hamlet-36",
+    "r2r-hamlet-9",
+    "r2r-thorp-10",
+    "r2r-village-41",
+    "r2s-monster_pressure-village-1",
+    "r2s-monster_pressure-village-3",
+    "rv2-hamlet-monster_pressure-1",
+    "rv2-village-monster_pressure-1"
+   ]
+  },
+  "prior": null,
+  "twinMissingCondition": "lacks 'no crisis: monster_pressure' (the conditional 'if it were attacked' is false while beasts attack it)",
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "LOW also: r2s-recently_betrayed-hamlet-2, r2s-recently_betrayed-thorp-1 ('Those who keep X safe')."
+ },
+ {
+  "id": "DS-DEF-5::NO organized force at all::v3",
+  "verdict": "FALSE",
+  "printsIn": 92,
+  "eyeReads": [
+   {
+    "town": "r2r-thorp-36",
+    "size": "thorp",
+    "crisis": "calm",
+    "printed": "Nobody at Cnocbridge is responsible for defending the thorp; ask who is, and nobody can name anyone.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "thorp of 5; no force"
+   },
+   {
+    "town": "r2r-village-48",
+    "size": "village",
+    "crisis": "infiltrated",
+    "printed": "Nobody at Amarthal is responsible for defending the village; ask who is, and nobody can name anyone.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "village 387; no force"
+   },
+   {
+    "town": "r2r-thorp-38",
+    "size": "thorp",
+    "crisis": "famine",
+    "printed": "Nobody at Khanabad is responsible for defending the thorp; ask who is, and nobody can name anyone.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "famine; no force"
+   },
+   {
+    "town": "r2s-recently_betrayed-village-0",
+    "size": "village",
+    "crisis": "recently_betrayed",
+    "printed": "Nobody at Dawan is responsible for defending the village; ask who is, and nobody can name anyone.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "same tab Military status: 'Those who keep Dawan safe are questioning everyone who could have reached what was sold'"
+   }
+  ],
+  "script": {
+   "tests": "no force on record; false where the same page says 'Those who keep X safe ...'",
+   "true": 89,
+   "false": 3,
+   "falseTowns": [
+    "r2s-monster_pressure-hamlet-0",
+    "r2s-monster_pressure-village-0",
+    "r2s-recently_betrayed-village-0"
+   ]
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "'nobody can name anyone' beside 'Those who keep X safe'. LOW: r2s-religious_conversion-hamlet-0, r2s-religious_conversion-village-1 ('its defenders will not act as one')."
+ },
+ {
+  "id": "DS-DEF-5::NO organized force at all::v4",
+  "verdict": "TRUE",
+  "printsIn": 6,
+  "eyeReads": [
+   {
+    "town": "rv2-thorp-under_siege-2",
+    "size": "thorp",
+    "crisis": "under_siege",
+    "printed": "The thorp kept no defenders of its own, and the people defending it now are neighbours who stepped forward when the trouble came.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "siege; no force"
+   },
+   {
+    "town": "rww-village-under_siege-1",
+    "size": "village",
+    "crisis": "under_siege",
+    "printed": "The village kept no defenders of its own, and the people defending it now are neighbours who stepped forward when the trouble came.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "siege; 'Those who answer for ... safety' agrees"
+   },
+   {
+    "town": "r2s-under_siege-hamlet-2",
+    "size": "hamlet",
+    "crisis": "under_siege",
+    "printed": "The hamlet kept no defenders of its own, and the people defending it now are neighbours who stepped forward when the trouble came.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "siege; no force"
+   }
+  ],
+  "script": {
+   "tests": "under siege and no force on record",
+   "true": 6,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": [
+   {
+    "town": "r2r-hamlet-5",
+    "state": "CURED-BY-SILENCE",
+    "nowPrints": "With trouble at hand and no force to meet it, Achilpolis leans on whoever owns a weapon and is willing to use it.",
+    "nowTrue": true,
+    "severity": null,
+    "fact": "wartime, no force; true"
+   },
+   {
+    "town": "r2r-thorp-55",
+    "state": "CURED-BY-SILENCE",
+    "nowPrints": "With trouble at hand and no force to meet it, Yekekum leans on whoever owns a weapon and is willing to use it.",
+    "nowTrue": true,
+    "severity": null,
+    "fact": "wartime, no force; true"
+   }
+  ],
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "Now siege-only."
+ },
+ {
+  "id": "DS-DEF-5::NO organized force at all::v5",
+  "verdict": "TRUE",
+  "printsIn": 9,
+  "eyeReads": [
+   {
+    "town": "rv2-thorp-under_siege-1",
+    "size": "thorp",
+    "crisis": "under_siege",
+    "printed": "There was never a force at Jómsli; whoever leads the defence now is learning the work as the trouble goes on.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "siege; no force"
+   },
+   {
+    "town": "rv2-thorp-under_siege+famine-1",
+    "size": "thorp",
+    "crisis": "under_siege+famine",
+    "printed": "There was never a force at Mingtian; whoever leads the defence now is learning the work as the trouble goes on.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "siege+famine; no force"
+   },
+   {
+    "town": "r2r-village-21",
+    "size": "village",
+    "crisis": "under_siege",
+    "printed": "There was never a force at Rotbrücke; whoever leads the defence now is learning the work as the trouble goes on.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "siege village 144; no force"
+   }
+  ],
+  "script": {
+   "tests": "under siege and no force on record",
+   "true": 9,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": ""
+ },
+ {
+  "id": "DS-DEF-12::CAPACITY: enough::v1",
+  "verdict": "FALSE",
+  "printsIn": 8,
+  "eyeReads": [
+   {
+    "town": "r2s-succession_void-thorp-2",
+    "size": "thorp",
+    "crisis": "succession_void",
+    "printed": "No dependable road, river or port reaches Tulummal, and the thorp gets by on its own: enough for an ordinary year, with little to spare.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "Outlook: 'its own land does not grow enough; the rest comes from its stores and from magic'"
+   },
+   {
+    "town": "r2r-village-34",
+    "size": "village",
+    "crisis": "insurgency",
+    "printed": "No dependable road, river or port reaches Lagoorum, and the village gets by on its own: enough for an ordinary year, with little to spare.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "Outlook: 'works well enough, as long as nobody cuts it off from the bulk grain and flour it buys in'"
+   },
+   {
+    "town": "rv2-village-occupied-2",
+    "size": "village",
+    "crisis": "occupied",
+    "printed": "No dependable road, river or port reaches Kaltenberg, and the village gets by on its own: enough for an ordinary year, with little to spare.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "occupied; 'grows less than it eats ... what it lacks comes in by caravan and by magic'"
+   },
+   {
+    "town": "rv2-hamlet-monster_pressure-1",
+    "size": "hamlet",
+    "crisis": "monster_pressure",
+    "printed": "No dependable road, river or port reaches Kalimir, and the hamlet gets by on its own: enough for an ordinary year, with little to spare.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "'its own land does not grow enough'; ratio 0.89"
+   }
+  ],
+  "script": {
+   "tests": "'gets by on its own' against the Outlook line: false if it says food comes in / is bought in / own land does not grow enough, or ratio < 0.95",
+   "true": 0,
+   "false": 8,
+   "falseTowns": [
+    "r2r-village-0",
+    "r2r-village-34",
+    "r2r-village-47",
+    "r2r-village-8",
+    "r2s-succession_void-thorp-2",
+    "rv2-hamlet-monster_pressure-1",
+    "rv2-village-monster_pressure-1",
+    "rv2-village-occupied-2"
+   ]
+  },
+  "prior": null,
+  "twinMissingCondition": "'food: >= pressured' admits towns that buy food in; the line needs a self-sufficiency test",
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "Every town: Outlook says it buys or receives food (caravan, magic, stores) while this says it gets by on its own."
+ },
+ {
+  "id": "DS-DEF-1::readiness CRITICAL::v4",
+  "verdict": "FALSE",
+  "printsIn": 28,
+  "eyeReads": [
+   {
+    "town": "rww-thorp-under_siege-1",
+    "size": "thorp",
+    "crisis": "under_siege",
+    "printed": "Belovich has people under arms, but too few and too badly placed to hold off a serious attack for long.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "thorp of 5, siege; levy; Undefended 7"
+   },
+   {
+    "town": "rww-city-famine-1",
+    "size": "city",
+    "crisis": "famine",
+    "printed": "Megaousa has people under arms, but too few and too badly placed to hold off a serious attack for long.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "same tab Invasion & War: 'Megaousa keeps paid soldiers behind its walls, so raiders keep their distance and an army would pay dearly'"
+   },
+   {
+    "town": "r2r-thorp-1",
+    "size": "thorp",
+    "crisis": "occupied",
+    "printed": "Terrapolis has people under arms, but too few and too badly placed to hold off a serious attack for long.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "c",
+    "fact": "occupied; the occupiers hold it: 'Terrapolis's defence answers to' the occupiers"
+   }
+  ],
+  "script": {
+   "tests": "guard force on record and readiness Vulnerable/Undefended; false where the page says an army would pay dearly / soldiers on every stretch",
+   "true": 27,
+   "false": 1,
+   "falseTowns": [
+    "rww-city-famine-1"
+   ]
+  },
+  "prior": [
+   {
+    "town": "rww-city-famine-1",
+    "state": "STILL-FALSE",
+    "nowPrints": null,
+    "nowTrue": false,
+    "severity": "MED",
+    "fact": "Invasion & War row still reads 'an army would pay dearly'"
+   }
+  ],
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "LOW under occupation: r2r-thorp-1, r2r-thorp-27, r2s-occupied-thorp-0, r2s-occupied-town-0, r2s-occupied-town-2, rv2-town-occupied-1, rv2-village-occupied-2"
+ },
+ {
+  "id": "DS-DEF-3::COMPOUND: political fracture::v4",
+  "verdict": "TRUE",
+  "printsIn": 5,
+  "eyeReads": [
+   {
+    "town": "r2s-politically_fractured-hamlet-3",
+    "size": "hamlet",
+    "crisis": "politically_fractured",
+    "printed": "At Achillathra a quarrel is settled by whichever power the quarrelling households look to, and the answers seldom match.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "factions 2; 'The Powers (2)'"
+   },
+   {
+    "town": "r2r-village-30",
+    "size": "village",
+    "crisis": "politically_fractured",
+    "printed": "At Celono a quarrel is settled by whichever power the quarrelling households look to, and the answers seldom match.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "factions 2"
+   },
+   {
+    "town": "r2r-hamlet-4",
+    "size": "hamlet",
+    "crisis": "politically_fractured",
+    "printed": "At Gantulgaiin a quarrel is settled by whichever power the quarrelling households look to, and the answers seldom match.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "factions 2"
+   }
+  ],
+  "script": {
+   "tests": "politically_fractured with >= 2 factions on record and 'The Powers (n>=2)'",
+   "true": 5,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": [
+   {
+    "town": "r2s-politically_fractured-hamlet-3",
+    "state": "CURED-TRUE",
+    "nowPrints": null,
+    "nowTrue": true,
+    "severity": null,
+    "fact": "record now holds 2 factions; Power tab 'The Powers (2)'"
+   }
+  ],
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "Neighbouring Criminal Architecture line says 'which power controls a district' in a hamlet of 49 (not this line)."
+ },
+ {
+  "id": "DS-DEF-9::magicDependency true::v4",
+  "verdict": "FALSE",
+  "printsIn": 37,
+  "eyeReads": [
+   {
+    "town": "r2r-village-14",
+    "size": "village",
+    "crisis": "calm",
+    "printed": "Skaldaker does better than its ground and roads would explain, and the reason is the arcane work done here.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "Economics: 'The village is poor, and its people say so'; Magic: 'supplied by House of worship', 'Economic role: absent'"
+   },
+   {
+    "town": "rww-city-calm-1",
+    "size": "city",
+    "crisis": "calm",
+    "printed": "Vysokoko does better than its ground and roads would explain, and the reason is the arcane work done here.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "Economics: 'The city is well off, the road keeps it that way'"
+   },
+   {
+    "town": "r2s-indebted-metropolis-0",
+    "size": "metropolis",
+    "crisis": "indebted",
+    "printed": "Darhannuur does better than its ground and roads would explain, and the reason is the arcane work done here.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "'The metropolis is poor'; prosperity Poor"
+   },
+   {
+    "town": "r2r-city-22",
+    "size": "city",
+    "crisis": "calm",
+    "printed": "Qaryatbazaar does better than its ground and roads would explain, and the reason is the arcane work done here.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Prosperous; mages' guild, enchanter; Economic role common"
+   }
+  ],
+  "script": {
+   "tests": "false if prosperity Poor/Struggling, Magic 'Economic role: absent', reliance supplied only by houses of worship/healer (not arcane), or Economics credits the road",
+   "true": 17,
+   "false": 20,
+   "falseTowns": [
+    "r2r-metropolis-13",
+    "r2r-town-17",
+    "r2r-town-5",
+    "r2r-village-14",
+    "r2r-village-23",
+    "r2r-village-26",
+    "r2r-village-27",
+    "r2s-indebted-metropolis-0",
+    "r2s-occupied-city-1",
+    "r2s-occupied-town-3",
+    "r2s-occupied-village-1",
+    "r2s-recently_betrayed-village-2",
+    "r2s-slave_revolt-city-3",
+    "r2s-slave_revolt-town-3",
+    "rv2-city-plague_onset-2",
+    "rv2-city-under_siege-4",
+    "rv2-city-wartime-2",
+    "rv2-town-insurgency-2",
+    "rv2-village-famine-1",
+    "rww-city-calm-1"
+   ]
+  },
+  "prior": [
+   {
+    "town": "rww-city-calm-1",
+    "state": "STILL-FALSE",
+    "nowPrints": null,
+    "nowTrue": false,
+    "severity": "MED",
+    "fact": "'The city is well off, the road keeps it that way'"
+   }
+  ],
+  "twinMissingCondition": "needs prosperity above its ground and an arcane (not divine) supplier; it prints in Poor/Struggling towns and where only a house of worship supplies the reliance",
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "Says the town does better than its ground explains in towns the page calls poor."
+ },
+ {
+  "id": "DS-DEF-8::override: UNDER TRIBUTE::v4",
+  "verdict": "FALSE",
+  "printsIn": 11,
+  "eyeReads": [
+   {
+    "town": "r2s-indebted-thorp-2",
+    "size": "thorp",
+    "crisis": "indebted",
+    "printed": "Kamalaganj keeps no defenders to pay, and the debt is one more reason it never will.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "thorp of 8; no force"
+   },
+   {
+    "town": "rww-village-indebted-1",
+    "size": "village",
+    "crisis": "indebted",
+    "printed": "Quirigek keeps no defenders to pay, and the debt is one more reason it never will.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "Guard assessment just above: 'The adventurers' charter hall exists on paper. Chronically underpaid and poorly equipped'"
+   },
+   {
+    "town": "r2r-village-1",
+    "size": "village",
+    "crisis": "indebted",
+    "printed": "Prabhathal keeps no defenders to pay, and the debt is one more reason it never will.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "g",
+    "fact": "charter hall 'coordinates emergency response to threats'"
+   }
+  ],
+  "script": {
+   "tests": "no force on record; false where the Guard assessment names a chronically underpaid force",
+   "true": 10,
+   "false": 1,
+   "falseTowns": [
+    "rww-village-indebted-1"
+   ]
+  },
+  "prior": [
+   {
+    "town": "rww-village-indebted-1",
+    "state": "STILL-FALSE",
+    "nowPrints": null,
+    "nowTrue": false,
+    "severity": "MED",
+    "fact": "'charter hall ... Chronically underpaid' vs 'keeps no defenders to pay'"
+   }
+  ],
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": ""
+ },
+ {
+  "id": "DS-DEF-8::override: SECURITY COMPROMISED::v4",
+  "verdict": "FALSE",
+  "printsIn": 4,
+  "eyeReads": [
+   {
+    "town": "r2s-recently_betrayed-thorp-2",
+    "size": "thorp",
+    "crisis": "recently_betrayed",
+    "printed": "Oxtemul has no defenders to reorganize after the betrayal, only households that now bar their doors and keep their own counsel.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "thorp 13; 'neighbours watch one another now'"
+   },
+   {
+    "town": "r2s-recently_betrayed-village-2",
+    "size": "village",
+    "crisis": "recently_betrayed",
+    "printed": "Megakastro has no defenders to reorganize after the betrayal, only households that now bar their doors and keep their own counsel.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "village 394; 'still looking for whoever betrayed it'"
+   },
+   {
+    "town": "r2s-recently_betrayed-thorp-1",
+    "size": "thorp",
+    "crisis": "recently_betrayed",
+    "printed": "Grímberg has no defenders to reorganize after the betrayal, only households that now bar their doors and keep their own counsel.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "line before: 'Those who keep Grímberg safe are questioning everyone who could have reached what was sold'"
+   }
+  ],
+  "script": {
+   "tests": "no force on record; false where the paragraph above says 'Those who keep X safe'",
+   "true": 2,
+   "false": 2,
+   "falseTowns": [
+    "r2s-recently_betrayed-thorp-1",
+    "r2s-recently_betrayed-village-1"
+   ]
+  },
+  "prior": [
+   {
+    "town": "r2s-recently_betrayed-thorp-1",
+    "state": "STILL-FALSE",
+    "nowPrints": null,
+    "nowTrue": false,
+    "severity": "MED",
+    "fact": "'Those who keep Grímberg safe are questioning everyone' directly above 'has no defenders'"
+   },
+   {
+    "town": "r2s-recently_betrayed-village-1",
+    "state": "STILL-FALSE",
+    "nowPrints": null,
+    "nowTrue": false,
+    "severity": "MED",
+    "fact": "'Those who keep Hongan safe are questioning everyone'"
+   }
+  ],
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "The fault is the Military-status sibling naming keepers; this line is true of the record."
+ }
+]

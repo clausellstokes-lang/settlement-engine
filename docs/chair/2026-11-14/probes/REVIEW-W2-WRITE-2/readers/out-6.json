@@ -1,0 +1,1856 @@
+[
+ {
+  "id": "DS-GEN-13::MARKET-OPEN::v3",
+  "verdict": "FALSE",
+  "printsIn": 87,
+  "eyeReads": [
+   {
+    "town": "r2s-plague_onset-hamlet-1",
+    "size": "hamlet 35",
+    "crisis": "plague_onset",
+    "printed": "Visitors find Weichsee's market without asking.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "plague_onset; Defense: \"Weichsee is closed against the sickness, not an army: the guards turn back travellers and traders alike\""
+   },
+   {
+    "town": "r2s-succession_void-metropolis-3",
+    "size": "metropolis 295750",
+    "crisis": "succession_void",
+    "printed": "Visitors find Erdenbalik's market without asking.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "live Multiple market squares, District markets; access road"
+   },
+   {
+    "town": "rv2-town-famine-1",
+    "size": "town 1754",
+    "crisis": "famine",
+    "printed": "Visitors find Tikalcoatl's market without asking.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Weekly market, Market square live; famine does not shut the road"
+   },
+   {
+    "town": "r2s-occupied-city-2",
+    "size": "city 13152",
+    "crisis": "occupied",
+    "printed": "Visitors find Petenxochitl's market without asking.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Daily markets live; occupation page shuts no road"
+   },
+   {
+    "town": "r2r-town-37",
+    "size": "town 1272",
+    "crisis": "plague_onset",
+    "printed": "Visitors find Hadithaserai's market without asking.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "plague_onset; Defense: \"Hadithaserai is closed against the sickness... the guards turn back travellers and traders alike\""
+   }
+  ],
+  "script": {
+   "tests": "live market-tagged institution; open access; not under siege; under plague, page Defense says guards turn back travellers and traders (visitors cannot come)",
+   "true": 80,
+   "false": 7,
+   "falseTowns": [
+    "r2r-town-37",
+    "r2s-plague_onset-hamlet-1",
+    "r2s-plague_onset-metropolis-3",
+    "r2s-plague_onset-town-0",
+    "r2s-plague_onset-town-1",
+    "rv2-city-plague_onset-2",
+    "rv2-town-plague_onset-2"
+   ]
+  },
+  "prior": null,
+  "twinMissingCondition": "Lacks \"no crisis: plague_onset\" that siblings v1 and v2 carry; it matters: all 7 plague towns it prints in are closed to travellers",
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "Market is real everywhere; false only under plague quarantine (v6 is the plague variant). Worst: MED."
+ },
+ {
+  "id": "DS-GEN-13::MARKET-OPEN::v6",
+  "verdict": "TRUE",
+  "printsIn": 5,
+  "eyeReads": [
+   {
+    "town": "rv2-city-plague_onset-1",
+    "size": "city 2676",
+    "crisis": "plague_onset",
+    "printed": "The sickness has thinned Nahrbazaar's market: the stalls still open.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "plague_onset; Daily markets live; Crisis: \"Fewer people come to market\""
+   },
+   {
+    "town": "rv2-metropolis-plague_onset-1",
+    "size": "metropolis 37934",
+    "crisis": "plague_onset",
+    "printed": "The sickness has thinned Fortelitus's market: the stalls still open.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "plague_onset; District markets live"
+   },
+   {
+    "town": "r2s-plague_onset-city-1",
+    "size": "city 14812",
+    "crisis": "plague_onset",
+    "printed": "The sickness has thinned Sundbø's market: the stalls still open.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "plague_onset; Daily markets live"
+   }
+  ],
+  "script": {
+   "tests": "plague_onset in force; live market",
+   "true": 5,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "Prints only under plague, city/metropolis only."
+ },
+ {
+  "id": "DS-GEN-13::NO-MARKET::v4",
+  "verdict": "TRUE",
+  "printsIn": 13,
+  "eyeReads": [
+   {
+    "town": "r2s-under_siege-thorp-3",
+    "size": "thorp 7",
+    "crisis": "under_siege",
+    "printed": "No market or fair stands in Tailing.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "no market-tagged or fair institution; siege clause clipped"
+   },
+   {
+    "town": "rv2-village-under_siege+famine-1",
+    "size": "village 374",
+    "crisis": "under_siege+famine",
+    "printed": "No market or fair stands in Edznacoatl.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "siege+famine; no market institution"
+   },
+   {
+    "town": "r2r-hamlet-0",
+    "size": "hamlet 22",
+    "crisis": "under_siege",
+    "printed": "No market or fair stands in Spitzsteig.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "no market institution (isEntrepot true but no market row)"
+   }
+  ],
+  "script": {
+   "tests": "no live market-tagged institution and no market/fair/bazaar/exchange/trading-post name on roster; siege in force",
+   "true": 13,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "Overview clips the siege clause; the clipped sentence is true in all."
+ },
+ {
+  "id": "DS-GEN-13::NO-MARKET::v5",
+  "verdict": "TRUE",
+  "printsIn": 13,
+  "eyeReads": [
+   {
+    "town": "rv2-thorp-under_siege-2",
+    "size": "thorp 9",
+    "crisis": "under_siege",
+    "printed": "Palenqxochitl keeps no market.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "no market institution; siege"
+   },
+   {
+    "town": "r2s-under_siege-village-2",
+    "size": "village 224",
+    "crisis": "under_siege",
+    "printed": "Dionpyrgos keeps no market.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "no market institution; isolated; siege"
+   },
+   {
+    "town": "rv2-hamlet-under_siege+famine-1",
+    "size": "hamlet 80",
+    "crisis": "under_siege+famine",
+    "printed": "Goldfeld keeps no market.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "siege+famine; no market institution"
+   }
+  ],
+  "script": {
+   "tests": "same as v4",
+   "true": 13,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "Clipped; true."
+ },
+ {
+  "id": "DS-GEN-13::NO-MARKET::v6",
+  "verdict": "TRUE",
+  "printsIn": 4,
+  "eyeReads": [
+   {
+    "town": "rww-thorp-under_siege-1",
+    "size": "thorp 5",
+    "crisis": "under_siege",
+    "printed": "There is no market at Belovich to find.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "no market; siege"
+   },
+   {
+    "town": "r2s-under_siege-hamlet-2",
+    "size": "hamlet 94",
+    "crisis": "under_siege",
+    "printed": "There is no market at Kilshaw to find.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "no market; siege"
+   },
+   {
+    "town": "r2r-thorp-58",
+    "size": "thorp 7",
+    "crisis": "under_siege",
+    "printed": "There is no market at Tallpatan to find.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "no market; siege"
+   }
+  ],
+  "script": {
+   "tests": "same as v4",
+   "true": 4,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "Clipped; true."
+ },
+ {
+  "id": "DS-GEN-16::LEGACY-UNRESOLVED::v1",
+  "verdict": "FALSE",
+  "printsIn": 227,
+  "eyeReads": [
+   {
+    "town": "r2s-infiltrated-thorp-3",
+    "size": "thorp 6",
+    "crisis": "infiltrated",
+    "printed": "The succession crisis is a generation old, and it left a legacy of trouble in Kaltenwiese that has never been fully put right.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "legacyAnnotations[0]: Succession Crisis 52y \"left trouble that has never been put right\""
+   },
+   {
+    "town": "r2r-metropolis-8",
+    "size": "metropolis 344689",
+    "crisis": "succession_void",
+    "printed": "The pilgrimage is older than its bearers, and it left a legacy of trouble in Langenberg that has never been fully put right.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Pilgrimage 98y, unresolved"
+   },
+   {
+    "town": "r2r-hamlet-0",
+    "size": "hamlet 22",
+    "crisis": "under_siege",
+    "printed": "The great harvest compact is a generation old, and it left a legacy of trouble in Spitzsteig that has never been fully put right.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "c",
+    "fact": "Compact 49y; annotation says unresolved but the event row has anchored:false"
+   },
+   {
+    "town": "r2r-city-44",
+    "size": "city 2408",
+    "crisis": "famine",
+    "printed": "The siege is older than its bearers, and it left a legacy of trouble in Kallition that has never been fully put right.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Siege 61y catastrophic, famine town"
+   },
+   {
+    "town": "rv2-town-occupied-1",
+    "size": "town 593",
+    "crisis": "occupied",
+    "printed": "The plague years is a generation old, and it left a legacy of trouble in Padmanand that has never been fully put right.",
+    "true": false,
+    "severity": "MED",
+    "kind": "h",
+    "fact": "\"The plague years is\": plural event name with singular verb"
+   }
+  ],
+  "script": {
+   "tests": "calamity word = legacyAnnotations[0].eventName; time band matches yearsAgo (>60 older than its bearers, 16-60 generation, 11-15 decade, 2-10 years); event exists with same yearsAgo; relation clause matches pool; agreement of plural names",
+   "true": 213,
+   "false": 14,
+   "falseTowns": [
+    "r2r-hamlet-26",
+    "r2r-hamlet-33",
+    "r2r-hamlet-39",
+    "r2r-thorp-58",
+    "r2r-thorp-7",
+    "r2r-village-10",
+    "r2s-infiltrated-hamlet-3",
+    "r2s-monster_pressure-hamlet-0",
+    "r2s-plague_onset-town-1",
+    "r2s-under_siege-thorp-0",
+    "rv2-city-wartime-2",
+    "rv2-hamlet-under_siege+famine-1",
+    "rv2-metropolis-under_siege-8",
+    "rv2-town-occupied-1"
+   ]
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": "{calamity} is: \"The plague years is\" / \"The heresy trials is\" (plural names, singular verb)",
+  "machinery": null,
+  "note": "Facts true everywhere; false only on agreement. LOW: in 12 besieged towns \"The siege is a generation old\" names a past siege while one is in force; ~24 towns event row anchored:false. Worst: MED."
+ },
+ {
+  "id": "DS-GEN-16::LEGACY-UNRESOLVED::v2",
+  "verdict": "FALSE",
+  "printsIn": 198,
+  "eyeReads": [
+   {
+    "town": "r2s-under_siege-thorp-2",
+    "size": "thorp 6",
+    "crisis": "under_siege",
+    "printed": "The succession crisis is a generation old, and nobody in Agioslimani has finished putting right the legacy it left.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Succession Crisis 31y unresolved"
+   },
+   {
+    "town": "rv2-metropolis-under_siege+famine-1",
+    "size": "metropolis 122862",
+    "crisis": "under_siege+famine",
+    "printed": "The siege is years old, and nobody in Purigarh has finished putting right the legacy it left.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "g",
+    "fact": "Siege 9y on record; a siege is also in force now: two sieges, page timeline separates them"
+   },
+   {
+    "town": "r2r-thorp-1",
+    "size": "thorp 30",
+    "crisis": "occupied",
+    "printed": "The uprising is a generation old, and nobody in Terrapolis has finished putting right the legacy it left.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Uprising 39y unresolved; occupied town"
+   },
+   {
+    "town": "r2r-hamlet-16",
+    "size": "hamlet 20",
+    "crisis": "famine",
+    "printed": "The siege is a generation old, and nobody in Oxteha has finished putting right the legacy it left.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Siege 21y; famine"
+   }
+  ],
+  "script": {
+   "tests": "as v1",
+   "true": 189,
+   "false": 9,
+   "falseTowns": [
+    "r2r-town-27",
+    "r2r-village-13",
+    "r2s-politically_fractured-city-2",
+    "r2s-succession_void-hamlet-0",
+    "r2s-wartime-hamlet-3",
+    "r2s-wartime-town-0",
+    "rv2-city-under_siege-15",
+    "rv2-hamlet-wartime-2",
+    "rv2-thorp-under_siege+famine-1"
+   ]
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": "\"The plague years is\" / \"The heresy trials is\"",
+  "machinery": null,
+  "note": "False only on agreement (9 towns). Worst: MED."
+ },
+ {
+  "id": "DS-GEN-16::LEGACY-RECOVERED::v1",
+  "verdict": "FALSE",
+  "printsIn": 76,
+  "eyeReads": [
+   {
+    "town": "r2r-thorp-44",
+    "size": "thorp 12",
+    "crisis": "calm",
+    "printed": "Tikalahau came through the plague years, which is older than its bearers now; its legacy is what the thorp built in answer to it, and that still stands.",
+    "true": false,
+    "severity": "MED",
+    "kind": "h",
+    "fact": "\"the plague years, which is\": agreement; annotation 156y \"hit the settlement hard, and it has since recovered\""
+   },
+   {
+    "town": "r2r-metropolis-45",
+    "size": "metropolis 198530",
+    "crisis": "calm",
+    "printed": "Chandraganj came through the debt crisis, which is older than its bearers now; its legacy is what the metropolis built in answer to it, and that still stands.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Debt Crisis 203y recovered"
+   },
+   {
+    "town": "r2r-city-36",
+    "size": "city 14784",
+    "crisis": "calm",
+    "printed": "Schwarzmoor came through the great harvest compact, which is older than its bearers now; its legacy is what the city built in answer to it, and that still stands.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "c",
+    "fact": "a compact is not a blow one \"comes through\"; annotation says it hit hard and was recovered from"
+   }
+  ],
+  "script": {
+   "tests": "as v1",
+   "true": 70,
+   "false": 6,
+   "falseTowns": [
+    "r2r-thorp-44",
+    "r2r-town-39",
+    "r2s-mass_migration-city-3",
+    "r2s-slave_revolt-metropolis-2",
+    "r2s-wartime-city-0",
+    "r2s-wartime-village-0"
+   ]
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": "\"the plague years, which is\"",
+  "machinery": null,
+  "note": "Prints in no siege/famine/occupation town. False only on agreement (6). Worst: MED."
+ },
+ {
+  "id": "DS-GEN-16::LEGACY-RECOVERED::v2",
+  "verdict": "FALSE",
+  "printsIn": 67,
+  "eyeReads": [
+   {
+    "town": "r2s-politically_fractured-thorp-2",
+    "size": "thorp 9",
+    "crisis": "politically_fractured",
+    "printed": "The siege is older than its bearers, and its legacy is much of what stands in Ripavetum now: it was built in the years after.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Siege 134y recovered"
+   },
+   {
+    "town": "r2s-politically_fractured-metropolis-2",
+    "size": "metropolis 160904",
+    "crisis": "politically_fractured",
+    "printed": "The plague years is older than its bearers, and its legacy is much of what stands in Xinwan now: it was built in the years after.",
+    "true": false,
+    "severity": "MED",
+    "kind": "h",
+    "fact": "\"The plague years is\": agreement"
+   },
+   {
+    "town": "r2s-succession_void-city-2",
+    "size": "city 12883",
+    "crisis": "succession_void",
+    "printed": "The iron dispute is older than its bearers, and its legacy is much of what stands in Polaburg now: it was built in the years after.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "c",
+    "fact": "Iron Dispute 74y recovered; event row anchored:false"
+   }
+  ],
+  "script": {
+   "tests": "as v1",
+   "true": 62,
+   "false": 5,
+   "falseTowns": [
+    "r2r-city-3",
+    "r2s-infiltrated-town-0",
+    "r2s-insurgency-city-3",
+    "r2s-plague_onset-metropolis-0",
+    "r2s-politically_fractured-metropolis-2"
+   ]
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": "\"The plague years is\"",
+  "machinery": null,
+  "note": "False only on agreement (5). Worst: MED."
+ },
+ {
+  "id": "DS-GEN-16::LEGACY-SHIFTED::v1",
+  "verdict": "FALSE",
+  "printsIn": 133,
+  "eyeReads": [
+   {
+    "town": "r2r-thorp-59",
+    "size": "thorp 7",
+    "crisis": "calm",
+    "printed": "The iron dispute is older than its bearers; what Prabhapura settled in its wake is a legacy that still shapes the thorp, though much has changed since.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "c",
+    "fact": "Iron Dispute 83y \"set up ways of doing things that have since changed\"; event anchored:false"
+   },
+   {
+    "town": "r2s-succession_void-metropolis-3",
+    "size": "metropolis 295750",
+    "crisis": "succession_void",
+    "printed": "The religious conflict is older than its bearers; what Erdenbalik settled in its wake is a legacy that still shapes the metropolis, though much has changed since.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Religious Conflict 211y shifted"
+   },
+   {
+    "town": "r2r-metropolis-14",
+    "size": "metropolis 271164",
+    "crisis": "under_siege",
+    "printed": "The religious conflict is older than its bearers; what Prabhapeta settled in its wake is a legacy that still shapes the metropolis, though much has changed since.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "258y shifted; under siege, no conflict"
+   },
+   {
+    "town": "r2s-famine-thorp-2",
+    "size": "thorp 28",
+    "crisis": "famine",
+    "printed": "The iron dispute is older than its bearers; what Benham settled in its wake is a legacy that still shapes the thorp, though much has changed since.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "99y shifted; famine"
+   },
+   {
+    "town": "r2r-thorp-27",
+    "size": "thorp 25",
+    "crisis": "occupied",
+    "printed": "The schism is older than its bearers; what Olympnea settled in its wake is a legacy that still shapes the thorp, though much has changed since.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "136y shifted; occupied"
+   }
+  ],
+  "script": {
+   "tests": "as v1",
+   "true": 121,
+   "false": 12,
+   "falseTowns": [
+    "r2r-city-16",
+    "r2r-city-32",
+    "r2r-city-43",
+    "r2r-city-45",
+    "r2r-metropolis-16",
+    "r2r-thorp-42",
+    "r2r-town-58",
+    "r2s-plague_onset-metropolis-3",
+    "r2s-slave_revolt-metropolis-1",
+    "r2s-wartime-metropolis-1",
+    "r2s-wartime-metropolis-3",
+    "rv2-town-insurgency-2"
+   ]
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": "\"The heresy trials is\"",
+  "machinery": null,
+  "note": "False only on agreement (12). Worst: MED."
+ },
+ {
+  "id": "DS-GEN-16::LEGACY-SHIFTED::v2",
+  "verdict": "FALSE",
+  "printsIn": 147,
+  "eyeReads": [
+   {
+    "town": "r2r-thorp-37",
+    "size": "thorp 6",
+    "crisis": "calm",
+    "printed": "The pilgrimage is older than its bearers, and Cnocton still carries the shape it took after it; that legacy holds, though the times have moved on.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Pilgrimage 214y shifted"
+   },
+   {
+    "town": "r2r-metropolis-13",
+    "size": "metropolis 328486",
+    "crisis": "calm",
+    "printed": "The religious conflict is older than its bearers, and Athenapetra still carries the shape it took after it; that legacy holds, though the times have moved on.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "150y shifted"
+   },
+   {
+    "town": "r2s-under_siege-metropolis-2",
+    "size": "metropolis 33734",
+    "crisis": "under_siege",
+    "printed": "The succession crisis is older than its bearers, and Raassaray still carries the shape it took after it; that legacy holds, though the times have moved on.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "197y; siege, no conflict"
+   },
+   {
+    "town": "r2r-thorp-17",
+    "size": "thorp 11",
+    "crisis": "famine",
+    "printed": "The great construction is older than its bearers, and Chichich still carries the shape it took after it; that legacy holds, though the times have moved on.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "125y; famine"
+   },
+   {
+    "town": "r2r-thorp-40",
+    "size": "thorp 20",
+    "crisis": "occupied",
+    "printed": "The iron dispute is older than its bearers, and Malotsy still carries the shape it took after it; that legacy holds, though the times have moved on.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "72y; occupied"
+   }
+  ],
+  "script": {
+   "tests": "as v1",
+   "true": 132,
+   "false": 15,
+   "falseTowns": [
+    "r2r-city-11",
+    "r2r-city-18",
+    "r2r-city-41",
+    "r2r-city-5",
+    "r2r-city-54",
+    "r2r-metropolis-42",
+    "r2r-metropolis-59",
+    "r2r-town-17",
+    "r2r-town-9",
+    "r2s-mass_migration-metropolis-1",
+    "r2s-monster_pressure-city-3",
+    "r2s-politically_fractured-metropolis-1",
+    "rv2-metropolis-monster_pressure-1",
+    "rv2-town-monster_pressure-2",
+    "rww-metropolis-infiltrated-1"
+   ]
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": "\"The heresy trials is\"",
+  "machinery": null,
+  "note": "False only on agreement (15). Worst: MED."
+ },
+ {
+  "id": "DS-GEN-16::LEGACY-LINKED::v1",
+  "verdict": "NEVER PRINTS",
+  "printsIn": 0,
+  "eyeReads": [],
+  "script": null,
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "No town draws it at the tip."
+ },
+ {
+  "id": "DS-GEN-16::LEGACY-LINKED::v2",
+  "verdict": "NEVER PRINTS",
+  "printsIn": 0,
+  "eyeReads": [],
+  "script": null,
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "No town draws it at the tip."
+ },
+ {
+  "id": "DS-GEN-17::GARRISONED::v1",
+  "verdict": "FALSE",
+  "printsIn": 107,
+  "eyeReads": [
+   {
+    "town": "r2r-village-25",
+    "size": "village 255",
+    "crisis": "politically_fractured",
+    "printed": "The village keeps people under arms for its defence.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "force = Town watch only; Defense: \"Lagosinum has no wall and no soldiers; its watch keeps the peace in the streets and would be no answer to an army\""
+   },
+   {
+    "town": "r2s-recently_betrayed-city-2",
+    "size": "city 11727",
+    "crisis": "recently_betrayed",
+    "printed": "The city keeps people under arms for its defence.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "garrison, watch, mercenaries live; \"keeps paid soldiers behind its walls\""
+   },
+   {
+    "town": "r2s-under_siege-town-0",
+    "size": "town 2137",
+    "crisis": "under_siege",
+    "printed": "The town keeps people under arms for its defence.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "g",
+    "fact": "watch only; Defense: \"Ulffoss has no wall and only its watch\""
+   },
+   {
+    "town": "r2s-famine-city-0",
+    "size": "city 2909",
+    "crisis": "famine",
+    "printed": "The city keeps people under arms for its defence.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "garrison live; famine"
+   },
+   {
+    "town": "r2r-town-33",
+    "size": "town 1471",
+    "crisis": "calm",
+    "printed": "The town keeps people under arms for its defence.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "watch only; Defense: \"Kilby has no wall and no soldiers; its watch ... would be no answer to an army\""
+   }
+  ],
+  "script": {
+   "tests": "live paid force (garrison/watch/mercenary/navy); tier word = record tier; not occupied; page Defense does not deny soldiers",
+   "true": 94,
+   "false": 13,
+   "falseTowns": [
+    "r2r-town-33",
+    "r2r-town-4",
+    "r2r-town-48",
+    "r2r-town-50",
+    "r2r-village-25",
+    "r2s-famine-town-2",
+    "r2s-indebted-town-3",
+    "r2s-politically_fractured-town-3",
+    "r2s-slave_revolt-town-3",
+    "r2s-wartime-town-2",
+    "rv2-town-calm-2",
+    "rv2-town-wartime-1",
+    "rww-town-famine-1"
+   ]
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "Reword lets a watch-only town (57 of 107) qualify; 13 of them print \"has no wall and no soldiers ... no answer to an army\" on Defense. Other watch-only towns LOW. Worst: MED."
+ },
+ {
+  "id": "DS-GEN-13::MARKET-OPEN::v1",
+  "verdict": "TRUE",
+  "printsIn": 27,
+  "eyeReads": [
+   {
+    "town": "r2r-hamlet-4",
+    "size": "hamlet 41",
+    "crisis": "politically_fractured",
+    "printed": "Market day is when Gantulgaiin fills: the roads bring buyers.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Periodic market; port; tier ≤ town"
+   },
+   {
+    "town": "r2r-town-20",
+    "size": "town 2443",
+    "crisis": "calm",
+    "printed": "Market day is when Sübeteikhurel fills: the roads bring buyers.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Weekly market, Market square"
+   },
+   {
+    "town": "r2s-famine-town-2",
+    "size": "town 407",
+    "crisis": "famine",
+    "printed": "Market day is when Vatanserai fills: the roads bring buyers.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "c",
+    "fact": "famine: \"No one can earn a normal living while the famine lasts\""
+   },
+   {
+    "town": "rv2-town-occupied-2",
+    "size": "town 994",
+    "crisis": "occupied",
+    "printed": "Market day is when Villaminus fills: the roads bring buyers.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "occupation shuts no road"
+   }
+  ],
+  "script": {
+   "tests": "live market; tier ≤ town; no siege/plague; open access",
+   "true": 27,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "LOW: one famine town; one monster_pressure town (\"carts stop coming\")."
+ },
+ {
+  "id": "DS-GEN-13::MARKET-OPEN::v2",
+  "verdict": "TRUE",
+  "printsIn": 97,
+  "eyeReads": [
+   {
+    "town": "r2r-hamlet-20",
+    "size": "hamlet 99",
+    "crisis": "calm",
+    "printed": "Jómsmark's market lives off through-traffic.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "c",
+    "fact": "Periodic market in a hamlet of 99; economicState.transit is empty in every record: record cannot settle \"lives off\""
+   },
+   {
+    "town": "r2s-mass_migration-metropolis-3",
+    "size": "metropolis 248369",
+    "crisis": "mass_migration",
+    "printed": "Balgill's market lives off through-traffic.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "markets live; road"
+   },
+   {
+    "town": "r2s-famine-city-0",
+    "size": "city 2909",
+    "crisis": "famine",
+    "printed": "Weizhen's market lives off through-traffic.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "famine; market live"
+   },
+   {
+    "town": "r2s-occupied-town-3",
+    "size": "town 2018",
+    "crisis": "occupied",
+    "printed": "Lykopetra's market lives off through-traffic.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "occupied; road not shut"
+   }
+  ],
+  "script": {
+   "tests": "live market; open access; no siege/plague",
+   "true": 97,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "True; through-traffic itself is not recorded (transit [] everywhere)."
+ },
+ {
+  "id": "DS-GEN-13::MARKET-OPEN::v4",
+  "verdict": "TRUE",
+  "printsIn": 99,
+  "eyeReads": [
+   {
+    "town": "rv2-hamlet-mass_migration-1",
+    "size": "hamlet 37",
+    "crisis": "mass_migration",
+    "printed": "The market stands where carts always stopped.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Periodic market; river"
+   },
+   {
+    "town": "r2r-metropolis-8",
+    "size": "metropolis 344689",
+    "crisis": "succession_void",
+    "printed": "The market stands where carts always stopped.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "markets live"
+   },
+   {
+    "town": "r2r-city-44",
+    "size": "city 2408",
+    "crisis": "famine",
+    "printed": "The market stands where carts always stopped.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "famine; a siting claim, not a trade-state claim"
+   },
+   {
+    "town": "r2s-occupied-city-3",
+    "size": "city 4671",
+    "crisis": "occupied",
+    "printed": "The market stands where carts always stopped.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "occupied"
+   },
+   {
+    "town": "r2s-plague_onset-metropolis-0",
+    "size": "metropolis 27650",
+    "crisis": "plague_onset",
+    "printed": "The market stands where carts always stopped.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "plague closure does not falsify a siting claim"
+   }
+  ],
+  "script": {
+   "tests": "live market; open access; no siege",
+   "true": 99,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "Historic siting; true under every crisis it reaches."
+ },
+ {
+  "id": "DS-GEN-13::ENTREPOT::v1",
+  "verdict": "FALSE",
+  "printsIn": 67,
+  "eyeReads": [
+   {
+    "town": "r2r-hamlet-15",
+    "size": "hamlet 42",
+    "crisis": "calm",
+    "printed": "Sübeteiordu's market handles more than the hamlet could ever use.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "isEntrepot true; Periodic market"
+   },
+   {
+    "town": "r2r-metropolis-13",
+    "size": "metropolis 328486",
+    "crisis": "calm",
+    "printed": "Athenapetra's market handles more than the metropolis could ever use.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "isEntrepot; port"
+   },
+   {
+    "town": "r2s-famine-city-3",
+    "size": "city 11818",
+    "crisis": "famine",
+    "printed": "Vatanabad's market handles more than the city could ever use.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "famine; entrepot"
+   },
+   {
+    "town": "r2s-occupied-city-0",
+    "size": "city 5170",
+    "crisis": "occupied",
+    "printed": "Breitgrund's market handles more than the city could ever use.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "occupied; Economics \"Entrepôt Trade\" income"
+   },
+   {
+    "town": "r2s-plague_onset-city-0",
+    "size": "city 6139",
+    "crisis": "plague_onset",
+    "printed": "Novono's market handles more than the city could ever use.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "Defense: \"Nobody comes into Novono and nobody leaves\""
+   }
+  ],
+  "script": {
+   "tests": "isEntrepot true; live market; no siege; plague closure on page",
+   "true": 66,
+   "false": 1,
+   "falseTowns": [
+    "r2s-plague_onset-city-0"
+   ]
+  },
+  "prior": null,
+  "twinMissingCondition": "No ENTREPOT sibling carries a plague exclusion; matters in 1 town",
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "One false under plague quarantine. Worst: MED."
+ },
+ {
+  "id": "DS-GEN-13::NO-MARKET::v1",
+  "verdict": "NEVER PRINTS",
+  "printsIn": 0,
+  "eyeReads": [],
+  "script": null,
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "No town draws it at the tip."
+ },
+ {
+  "id": "DS-GEN-13::NO-MARKET::v2",
+  "verdict": "NEVER PRINTS",
+  "printsIn": 0,
+  "eyeReads": [],
+  "script": null,
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "No town draws it at the tip."
+ },
+ {
+  "id": "DS-GEN-13::NO-MARKET::v3",
+  "verdict": "TRUE",
+  "printsIn": 361,
+  "eyeReads": [
+   {
+    "town": "r2r-thorp-36",
+    "size": "thorp 5",
+    "crisis": "calm",
+    "printed": "No market or fair stands in Cnocbridge: what trade the thorp does is done house to house and on the road.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "no market institution; tier thorp"
+   },
+   {
+    "town": "r2s-recently_betrayed-village-2",
+    "size": "village 394",
+    "crisis": "recently_betrayed",
+    "printed": "No market or fair stands in Megakastro: what trade the village does is done house to house and on the road.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "no market; isolated access"
+   },
+   {
+    "town": "r2r-hamlet-16",
+    "size": "hamlet 20",
+    "crisis": "famine",
+    "printed": "No market or fair stands in Oxteha: what trade the hamlet does is done house to house and on the road.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "famine; no market"
+   },
+   {
+    "town": "r2r-thorp-1",
+    "size": "thorp 30",
+    "crisis": "occupied",
+    "printed": "No market or fair stands in Terrapolis: what trade the thorp does is done house to house and on the road.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "occupied; no market"
+   },
+   {
+    "town": "r2r-thorp-17",
+    "size": "thorp 11",
+    "crisis": "famine",
+    "printed": "No market or fair stands in Chichich: what trade the thorp does is done house to house and on the road.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "g",
+    "fact": "same Overview famine vignette: \"The market still opens, the queues still form\" (the vignette is the false sentence; roster has no market)"
+   }
+  ],
+  "script": {
+   "tests": "no live market-tagged institution, no market/fair/bazaar/exchange/trading-post name; tier word matches; not under siege",
+   "true": 361,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": "twinHint (gate, tavern) does not matter: this text names neither a gate nor an inn",
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "True. LOW: 4 famine towns print \"The market still opens\" on the same Overview (that vignette is wrong); 131 towns keep a festival named \"The ... Fair\" in Traditions."
+ },
+ {
+  "id": "DS-GEN-13::COMMERCE: a bank::v1",
+  "verdict": "TRUE",
+  "printsIn": 52,
+  "eyeReads": [
+   {
+    "town": "r2r-town-35",
+    "size": "town 2149",
+    "crisis": "recently_betrayed",
+    "printed": "A traveller passing through Olympnea can change coin, borrow or settle a debt at the town's bank without carrying the silver home.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "a",
+    "fact": "the \"bank\" is Money changers"
+   },
+   {
+    "town": "r2s-mass_migration-metropolis-3",
+    "size": "metropolis 248369",
+    "crisis": "mass_migration",
+    "printed": "A traveller passing through Balgill can change coin, borrow or settle a debt at the metropolis's bank without carrying the silver home.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Banking district live"
+   },
+   {
+    "town": "r2s-famine-metropolis-1",
+    "size": "metropolis 35674",
+    "crisis": "famine",
+    "printed": "A traveller passing through Hongji can change coin, borrow or settle a debt at the metropolis's bank without carrying the silver home.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "famine; Banking district"
+   },
+   {
+    "town": "r2s-occupied-city-2",
+    "size": "city 13152",
+    "crisis": "occupied",
+    "printed": "A traveller passing through Petenxochitl can change coin, borrow or settle a debt at the city's bank without carrying the silver home.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "occupied; Banking houses"
+   },
+   {
+    "town": "r2s-plague_onset-metropolis-2",
+    "size": "metropolis 17253",
+    "crisis": "plague_onset",
+    "printed": "A traveller passing through Zoltansaray can change coin, borrow or settle a debt at the metropolis's bank without carrying the silver home.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "plague; no closure line on this page"
+   }
+  ],
+  "script": {
+   "tests": "live bank/banking/money-changer institution; tier word; no siege; plague closure on page",
+   "true": 52,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "True."
+ },
+ {
+  "id": "DS-GEN-13::COMMERCE: a merchant guild, no bank::v1",
+  "verdict": "FALSE",
+  "printsIn": 40,
+  "eyeReads": [
+   {
+    "town": "r2s-recently_betrayed-town-3",
+    "size": "town 322",
+    "crisis": "recently_betrayed",
+    "printed": "A merchant who wants to sell at Milopol goes first to its merchant guild to learn where, when and for what fee.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Merchant guilds (3-8) live; no bank"
+   },
+   {
+    "town": "r2s-politically_fractured-metropolis-2",
+    "size": "metropolis 160904",
+    "crisis": "politically_fractured",
+    "printed": "A merchant who wants to sell at Xinwan goes first to its merchant guild to learn where, when and for what fee.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Merchant guilds live"
+   },
+   {
+    "town": "r2s-occupied-town-1",
+    "size": "town 1994",
+    "crisis": "occupied",
+    "printed": "A merchant who wants to sell at Sundnes goes first to its merchant guild to learn where, when and for what fee.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "a",
+    "fact": "no merchant guild on the roster (hasMerchantGuild from Merchant oligarchy); Power has a \"Merchant Guilds\" contender faction"
+   },
+   {
+    "town": "r2s-plague_onset-city-1",
+    "size": "city 14812",
+    "crisis": "plague_onset",
+    "printed": "A merchant who wants to sell at Sundbø goes first to its merchant guild to learn where, when and for what fee.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "Defense: \"Nobody comes into Sundbø and nobody leaves\""
+   }
+  ],
+  "script": {
+   "tests": "live merchant guild; no live bank; no siege; plague closure on page",
+   "true": 38,
+   "false": 2,
+   "falseTowns": [
+    "r2s-plague_onset-city-1",
+    "rv2-town-plague_onset-2"
+   ]
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "2 false under plague quarantine. Worst: MED."
+ },
+ {
+  "id": "DS-GEN-13::COMMERCE: a merchant guild, no bank::v2",
+  "verdict": "TRUE",
+  "printsIn": 41,
+  "eyeReads": [
+   {
+    "town": "r2s-infiltrated-town-1",
+    "size": "town 319",
+    "crisis": "infiltrated",
+    "printed": "Its merchant guild sets the terms of trade and its members carry the town's dealings outward.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Merchant guilds (3-8)"
+   },
+   {
+    "town": "r2s-wartime-metropolis-0",
+    "size": "metropolis 49155",
+    "crisis": "wartime",
+    "printed": "Its merchant guild sets the terms of trade and its members carry the metropolis's dealings outward.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Merchant guilds live"
+   },
+   {
+    "town": "r2s-famine-metropolis-0",
+    "size": "metropolis 39834",
+    "crisis": "famine",
+    "printed": "Its merchant guild sets the terms of trade and its members carry the metropolis's dealings outward.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "famine"
+   },
+   {
+    "town": "r2s-plague_onset-town-0",
+    "size": "town 830",
+    "crisis": "plague_onset",
+    "printed": "Its merchant guild sets the terms of trade and its members carry the town's dealings outward.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "g",
+    "fact": "plague closure; \"carry dealings outward\" is standing custom"
+   }
+  ],
+  "script": {
+   "tests": "live merchant guild; no bank; tier word; no siege",
+   "true": 41,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "True."
+ },
+ {
+  "id": "DS-GEN-13::COMMERCE: a merchant guild, no bank::v4",
+  "verdict": "TRUE",
+  "printsIn": 22,
+  "eyeReads": [
+   {
+    "town": "rv2-town-calm-1",
+    "size": "town 640",
+    "crisis": "calm",
+    "printed": "An outside trader at Donggou either accepts its merchant guild's terms or sells to the guild's members at their price.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Merchant guilds (3-8)"
+   },
+   {
+    "town": "r2r-metropolis-22",
+    "size": "metropolis 170997",
+    "crisis": "calm",
+    "printed": "An outside trader at Vatanshari either accepts its merchant guild's terms or sells to the guild's members at their price.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Merchant guilds live"
+   },
+   {
+    "town": "r2r-city-44",
+    "size": "city 2408",
+    "crisis": "famine",
+    "printed": "An outside trader at Kallition either accepts its merchant guild's terms or sells to the guild's members at their price.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "famine"
+   },
+   {
+    "town": "r2s-insurgency-town-1",
+    "size": "town 648",
+    "crisis": "insurgency",
+    "printed": "An outside trader at Tzulxochitl either accepts its merchant guild's terms or sells to the guild's members at their price.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "a",
+    "fact": "no merchant guild row (Merchant oligarchy rules); Power lists \"Merchant Guilds\" contender"
+   }
+  ],
+  "script": {
+   "tests": "as v1",
+   "true": 22,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "True."
+ },
+ {
+  "id": "DS-GEN-13::COMMERCE: craft guilds, no merchant guild::v4",
+  "verdict": "TRUE",
+  "printsIn": 15,
+  "eyeReads": [
+   {
+    "town": "r2s-indebted-town-1",
+    "size": "town 357",
+    "crisis": "indebted",
+    "printed": "A newcomer with a trade at Xiaba must be taken on by its guild before they can work here.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Craft guilds (5-15); no merchant guild, no bank"
+   },
+   {
+    "town": "r2r-metropolis-9",
+    "size": "metropolis 37281",
+    "crisis": "calm",
+    "printed": "A newcomer with a trade at Satyagarh must be taken on by its guild before they can work here.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Craft guilds (100-150+)"
+   },
+   {
+    "town": "rv2-town-famine-1",
+    "size": "town 1754",
+    "crisis": "famine",
+    "printed": "A newcomer with a trade at Tikalcoatl must be taken on by its guild before they can work here.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "famine"
+   },
+   {
+    "town": "rv2-town-occupied-2",
+    "size": "town 994",
+    "crisis": "occupied",
+    "printed": "A newcomer with a trade at Villaminus must be taken on by its guild before they can work here.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "occupied"
+   },
+   {
+    "town": "r2s-plague_onset-town-2",
+    "size": "town 1264",
+    "crisis": "plague_onset",
+    "printed": "A newcomer with a trade at Tarkhankul must be taken on by its guild before they can work here.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "plague"
+   }
+  ],
+  "script": {
+   "tests": "live craft guild; no merchant guild; no bank; no siege",
+   "true": 15,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "True."
+ },
+ {
+  "id": "DS-GEN-13::WAREHOUSES::v1",
+  "verdict": "TRUE",
+  "printsIn": 84,
+  "eyeReads": [
+   {
+    "town": "r2s-famine-town-3",
+    "size": "town 737",
+    "crisis": "famine",
+    "printed": "Goods wait in Shattkarez's warehouses between the road and the buyer until the price is right.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Merchant warehouses; famine: \"the wealthy are hoarding\" agrees"
+   },
+   {
+    "town": "rv2-metropolis-indebted-1",
+    "size": "metropolis 180654",
+    "crisis": "indebted",
+    "printed": "Goods wait in Weigang's warehouses between the road and the buyer until the price is right.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Warehouse district"
+   },
+   {
+    "town": "r2s-occupied-city-0",
+    "size": "city 5170",
+    "crisis": "occupied",
+    "printed": "Goods wait in Breitgrund's warehouses between the road and the buyer until the price is right.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "occupied; Warehouse district"
+   },
+   {
+    "town": "r2r-city-19",
+    "size": "city 14810",
+    "crisis": "plague_onset",
+    "printed": "Goods wait in Dunbury's warehouses between the road and the buyer until the price is right.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "plague"
+   }
+  ],
+  "script": {
+   "tests": "live warehouse; no siege; plague closure",
+   "true": 84,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "True; LOW in 2 sealed plague cities (\"Nobody comes into X\")."
+ },
+ {
+  "id": "DS-GEN-13::WAREHOUSES::v3",
+  "verdict": "FALSE",
+  "printsIn": 83,
+  "eyeReads": [
+   {
+    "town": "r2s-religious_conversion-town-1",
+    "size": "town 909",
+    "crisis": "religious_conversion",
+    "printed": "Its warehouses fill after the harvest and empty through the year as the town trades out of them.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Merchant warehouses"
+   },
+   {
+    "town": "r2r-metropolis-6",
+    "size": "metropolis 216641",
+    "crisis": "succession_void",
+    "printed": "Its warehouses fill after the harvest and empty through the year as the metropolis trades out of them.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Warehouse district"
+   },
+   {
+    "town": "r2s-famine-city-1",
+    "size": "city 3402",
+    "crisis": "famine",
+    "printed": "Its warehouses fill after the harvest and empty through the year as the city trades out of them.",
+    "true": false,
+    "severity": "MED",
+    "kind": "c",
+    "fact": "famine; Overview: \"The crops failed, and only about a third of the usual harvest will come in\"; Crisis: \"lost its harvest for a second season\""
+   },
+   {
+    "town": "rv2-city-occupied-2",
+    "size": "city 7941",
+    "crisis": "occupied",
+    "printed": "Its warehouses fill after the harvest and empty through the year as the city trades out of them.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "occupied"
+   }
+  ],
+  "script": {
+   "tests": "live warehouse; no siege; not famine (harvest lost)",
+   "true": 78,
+   "false": 5,
+   "falseTowns": [
+    "r2s-famine-city-1",
+    "r2s-famine-metropolis-2",
+    "r2s-famine-metropolis-3",
+    "r2s-famine-town-0",
+    "rww-metropolis-famine-1"
+   ]
+  },
+  "prior": null,
+  "twinMissingCondition": "Lacks a famine exclusion; matters in 5 famine towns",
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "False in every famine town it reaches; LOW in 5 plague towns (\"face a short harvest\"). Worst: MED."
+ },
+ {
+  "id": "DS-GEN-13::WAREHOUSES::v4",
+  "verdict": "FALSE",
+  "printsIn": 72,
+  "eyeReads": [
+   {
+    "town": "r2s-plague_onset-metropolis-0",
+    "size": "metropolis 27650",
+    "crisis": "plague_onset",
+    "printed": "A trader at Tarkhanshari can rent warehouse space and leave goods there between journeys.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "\"X is closed against the sickness, not an army: the guards turn back travellers and traders alike\" (Defense)"
+   },
+   {
+    "town": "r2r-metropolis-13",
+    "size": "metropolis 328486",
+    "crisis": "calm",
+    "printed": "A trader at Athenapetra can rent warehouse space and leave goods there between journeys.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Warehouse district"
+   },
+   {
+    "town": "r2s-famine-metropolis-0",
+    "size": "metropolis 39834",
+    "crisis": "famine",
+    "printed": "A trader at Ormvoll can rent warehouse space and leave goods there between journeys.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "famine"
+   },
+   {
+    "town": "r2s-occupied-city-2",
+    "size": "city 13152",
+    "crisis": "occupied",
+    "printed": "A trader at Petenxochitl can rent warehouse space and leave goods there between journeys.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "occupied"
+   }
+  ],
+  "script": {
+   "tests": "live warehouse; no siege; plague closure",
+   "true": 69,
+   "false": 3,
+   "falseTowns": [
+    "r2s-plague_onset-metropolis-0",
+    "r2s-plague_onset-metropolis-3",
+    "rv2-metropolis-plague_onset-1"
+   ]
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "3 false under plague quarantine. Worst: MED."
+ },
+ {
+  "id": "DS-GEN-17::GARRISONED::v2",
+  "verdict": "TRUE",
+  "printsIn": 73,
+  "eyeReads": [
+   {
+    "town": "r2s-infiltrated-town-1",
+    "size": "town 319",
+    "crisis": "infiltrated",
+    "printed": "The town pays wages for its defense as well as keeping its walls.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "stone walls; paid watch: \"Waldstadt's walls are kept by its watch\""
+   },
+   {
+    "town": "r2r-city-58",
+    "size": "city 12733",
+    "crisis": "calm",
+    "printed": "The city pays wages for its defense as well as keeping its walls.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "garrison, watch, mercenaries; stone walls"
+   },
+   {
+    "town": "r2s-under_siege-city-1",
+    "size": "city 2679",
+    "crisis": "under_siege",
+    "printed": "The city pays wages for its defense as well as keeping its walls.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "siege; \"soldiers on the walls\""
+   },
+   {
+    "town": "r2r-city-44",
+    "size": "city 2408",
+    "crisis": "famine",
+    "printed": "The city pays wages for its defense as well as keeping its walls.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "famine; garrison; walls"
+   }
+  ],
+  "script": {
+   "tests": "live walls (all stone); paid force; tier word; not occupied; page does not deny walls",
+   "true": 73,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": null,
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "True. Spells \"defense\" where v1 spells \"defence\"."
+ },
+ {
+  "id": "DS-GEN-17::GREAT HOUSE: monastery::v1",
+  "verdict": "TRUE",
+  "printsIn": 27,
+  "eyeReads": [
+   {
+    "town": "r2s-mass_migration-town-0",
+    "size": "town 649",
+    "crisis": "mass_migration",
+    "printed": "Robed monks and nuns are a common sight on the way into Zelenotsy.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Monastery or friary"
+   },
+   {
+    "town": "r2r-metropolis-13",
+    "size": "metropolis 328486",
+    "crisis": "calm",
+    "printed": "Robed monks and nuns are a common sight on the way into Athenapetra.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Major monasteries"
+   },
+   {
+    "town": "r2s-famine-metropolis-1",
+    "size": "metropolis 35674",
+    "crisis": "famine",
+    "printed": "Robed monks and nuns are a common sight on the way into Hongji.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "famine"
+   },
+   {
+    "town": "r2s-occupied-metropolis-3",
+    "size": "metropolis 262531",
+    "crisis": "occupied",
+    "printed": "Robed monks and nuns are a common sight on the way into Rajigarh.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "occupied: \"Travellers ... are stopped and asked their business\": people still come in"
+   },
+   {
+    "town": "rv2-metropolis-plague_onset-2",
+    "size": "metropolis 21138",
+    "crisis": "plague_onset",
+    "printed": "Robed monks and nuns are a common sight on the way into Yujin.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "plague; no closure line"
+   }
+  ],
+  "script": {
+   "tests": "live monastery; no siege; plague closure",
+   "true": 27,
+   "false": 0,
+   "falseTowns": []
+  },
+  "prior": [
+   {
+    "town": "r2r-metropolis-14",
+    "state": "CURED-BY-SILENCE",
+    "nowPrints": "The monks answer to their own order before they answer to whoever governs Prabhapeta.",
+    "nowTrue": true,
+    "severity": null,
+    "fact": "under_siege; Major monasteries live; no arrival claim"
+   }
+  ],
+  "twinMissingCondition": null,
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "True."
+ },
+ {
+  "id": "DS-GEN-17::GREAT HOUSE: monastery::v3",
+  "verdict": "FALSE",
+  "printsIn": 33,
+  "eyeReads": [
+   {
+    "town": "r2r-town-44",
+    "size": "town 776",
+    "crisis": "calm",
+    "printed": "Anyone new to Rathcombe who needs a meal or a bed is sent to the monks.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "Monastery or friary"
+   },
+   {
+    "town": "rv2-metropolis-famine-2",
+    "size": "metropolis 108413",
+    "crisis": "famine",
+    "printed": "Anyone new to Serrastagnum who needs a meal or a bed is sent to the monks.",
+    "true": true,
+    "severity": "LOW",
+    "kind": "c",
+    "fact": "famine: monks feeding newcomers"
+   },
+   {
+    "town": "r2s-occupied-metropolis-1",
+    "size": "metropolis 105466",
+    "crisis": "occupied",
+    "printed": "Anyone new to Dionpetra who needs a meal or a bed is sent to the monks.",
+    "true": true,
+    "severity": null,
+    "kind": null,
+    "fact": "occupied; curfew, but arrivals continue"
+   },
+   {
+    "town": "r2s-plague_onset-metropolis-1",
+    "size": "metropolis 15873",
+    "crisis": "plague_onset",
+    "printed": "Anyone new to Chandrapur who needs a meal or a bed is sent to the monks.",
+    "true": false,
+    "severity": "MED",
+    "kind": "g",
+    "fact": "Defense: \"Nobody comes into Chandrapur and nobody leaves\""
+   }
+  ],
+  "script": {
+   "tests": "live monastery; no siege; plague closure (nobody new arrives)",
+   "true": 32,
+   "false": 1,
+   "falseTowns": [
+    "r2s-plague_onset-metropolis-1"
+   ]
+  },
+  "prior": [
+   {
+    "town": "rww-metropolis-under_siege-1",
+    "state": "CURED-BY-SILENCE",
+    "nowPrints": "The monks keep their own hours.",
+    "nowTrue": true,
+    "severity": null,
+    "fact": "under_siege; Major monasteries live"
+   },
+   {
+    "town": "rww-town-under_siege-1",
+    "state": "CURED-BY-SILENCE",
+    "nowPrints": "The monks answer to their own order before they answer to whoever governs Sanctavallis.",
+    "nowTrue": true,
+    "severity": null,
+    "fact": "under_siege; Monastery or friary live"
+   }
+  ],
+  "twinMissingCondition": "Lacks a plague exclusion (same reason as its siege exclusion); matters in 1 town",
+  "slotOrAgreement": null,
+  "machinery": null,
+  "note": "One false under plague quarantine. Worst: MED."
+ }
+]

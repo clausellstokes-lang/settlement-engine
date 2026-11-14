@@ -1,0 +1,64 @@
+DS-DEF-1::readiness STRONG reworded 2 struck 
+DS-DEF-2::Beasts & Monsters: plagued, perimeter AND organized force reworded 2 struck 
+DS-DEF-2::Invasion & War: walls AND professional garrison reworded 1 struck 
+DS-DEF-2::Invasion & War: neither walls nor force reworded 4 struck v10
+DS-DEF-2::Internal Security: full legal chain (court AND prison) reworded 2 struck 
+DS-DEF-2::Internal Security: court without detention reworded 2 struck 
+DS-DEF-2::Internal Security: no legal infrastructure reworded 1 struck 
+DS-DEF-2::Economic Survival: STRONG reworded 3 struck 
+DS-DEF-2::CHAIN: defence supplied reworded 4 struck v6
+DS-DEF-2::CHAIN: food trades working reworded 4 struck 
+DS-DEF-2::CHAIN: food trades failing reworded 5 struck 
+DS-DEF-3::Moderate reworded 1 struck 
+DS-DEF-3::COMPOUND: insurgency reworded 0 struck v5
+DS-DEF-5::walls PRESENT reworded 1 struck 
+DS-DEF-5::garrison PRESENT reworded 0 struck v4
+DS-DEF-5::arcane defense PRESENT reworded 3 struck 
+DS-DEF-5::ARCANE: mages' guild reworded 2 struck 
+DS-DEF-5::ARCANE: alchemists reworded 2 struck 
+DS-DEF-8::override: ACTIVE SIEGE reworded 0 struck v4
+DS-DEF-8::override: MIGRATION, arrivals reworded 0 struck v4
+DS-DEF-9::magicDependency true, with a NAMED dependent chain reworded 3 struck 
+DS-DEF-9::magicDependency false reworded 1 struck 
+DS-DEF-12::CAPACITY: enough reworded 2 struck 
+DS-DEF-11::WALLED-STRAINED reworded 4 struck v8
+DS-DEF-11::UNWALLED-SMALL reworded 1 struck 
+DS-DEF-11::UNWALLED-LARGE reworded 0 struck v3
+DS-ECO-1::COMBINATION C3: the middle rungs reworded 1 struck 
+DS-ECO-1::COMBINATION C4: a low rung on a working approach reworded 4 struck 
+DS-ECO-6::TIER: a large share off the books (≥30) reworded 1 struck 
+DS-ECO-9::SECURE reworded 2 struck 
+DS-ECO-9::HOW THE NEED IS MET: much of it brought in reworded 1 struck 
+DS-ECO-9::HOW THE NEED IS MET: part of it by magic reworded 3 struck 
+DS-ECO-9::FOOD SOURCES: one source reworded 3 struck v4
+DS-SUP-2::UPSTREAM WEAK: a chain the town's work draws on is failing reworded 2 struck 
+DS-ECO-10::POSTURE: entrepot reworded 1 struck 
+DS-ECO-10::POSTURE: established reworded 4 struck v10
+DS-ECO-11::EXPLOITATION: unexploited, exportValue: high reworded 2 struck 
+DS-ECO-11::EXPLOITATION: unexploited, exportValue: medium or low reworded 2 struck 
+DS-ECO-11::EXPLOITATION: partiallyExploited reworded 2 struck v6
+DS-ECO-11::EXPLOITATION: fullyExploited reworded 1 struck 
+DS-ECO-12::CRITICAL IMPORT: a house needs what the land lacks reworded 3 struck v4
+DS-ECO-12::CRITICAL IMPORT: the land cannot give it reworded 3 struck v4
+DS-ECO-12::INCOME WEIGHT: the religious houses reworded 2 struck v5
+DS-GEN-13::MARKET-OPEN reworded 1 struck 
+DS-GEN-14::FOUNDED-YOUNG reworded 1 struck 
+DS-GEN-16::LEGACY-UNRESOLVED reworded 2 struck 
+DS-GEN-16::LEGACY-RECOVERED reworded 2 struck 
+DS-GEN-16::LEGACY-SHIFTED reworded 2 struck 
+DS-GEN-16::LEGACY-LINKED reworded 2 struck 
+DS-GEN-17::GARRISONED reworded 1 struck 
+DS-GEN-18::STALLED reworded 1 struck 
+DS-GEN-18::BOUGHT-IN reworded 3 struck v10
+DS-POW-4::riskLabel: Holding reworded 1 struck 
+DS-POW-4::riskLabel: Contested reworded 2 struck 
+DS-POW-5::council reworded 1 struck 
+DS-POW-5::theocracy reworded 1 struck 
+DS-POW-5::FLAG: crimeIsGovt reworded 1 struck 
+DS-POW-6::capture pressure ADVANCING (weak security, poor prosperity) reworded 2 struck 
+DS-POW-6::capture reached an AGENT of a faction reworded 2 struck 
+DS-POW-6::operation role duty evasion reworded 2 struck 
+DS-POW-6::GM ADVISORY: the commander is a political actor reworded 1 struck 
+DS-CND-1::DIRECTION: worsening · CRISIS: famine reworded 1 struck 
+DS-FTH-4::FLAG: heresySuppression: hunted reworded 3 struck 
+DS-FTH-4::FLAG: heresySuppression: preached reworded 2 struck 

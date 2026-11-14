@@ -1,0 +1,22 @@
+     40 Feudal Stewardship || A lord's steward administers the settlement; authority flows downward from the noble, not upward from resident
+     34 Elder Council || The oldest heads of the community decide things together; people follow them out of respect and custom, not la
+     27 Royal Authority || The crown rules here directly. How far its word carries depends on the monarch's strength and on whether the n
+     24 Household Council || Settlement governed by heads of household; decisions by informal consensus among property owners.
+     21 Noble Governorship || A noble governor rules by hereditary or royal appointment; the settlement has little self-governance.
+     19 Headman's Authority || A headman settles disputes and gives the orders here.
+     18 Ducal Governorship || A duke or duchess governs the metropolis by royal appointment; the city is the administrative capital of a lar
+     14 Elder Council || Respected elders guide the community; authority is moral and traditional rather than formal.
+      9 Free Elder Council || The elders of the hamlet decide things together, and no lord stands over them.
+      6 City-State Council || A city-state council governs with considerable autonomy; camps within it compete for control of policy.
+      5 Democratic assembly || An assembly of citizens votes on major decisions; the powers lobby for influence rather than seizing control.
+      2 Noble Governorship || A noble governor rules by hereditary or royal appointment; the settlement has little self-governance. Says in 
+      1 Town Council || An elected or appointed council governs; merchants, guilds, and prominent families compete for seats. Three po
+      1 Town Council || An elected or appointed council governs; merchants, guilds, and prominent families compete for seats.
+      1 Noble Governorship || A noble governor rules by hereditary or royal appointment; the settlement has little self-governance. Under pr
+      1 Household Council || Settlement governed by heads of household; decisions by informal consensus among property owners. Under pressu
+      1 Household Council || Settlement governed by heads of household; decisions by informal consensus among property owners. Three powers
+      1 Household Council || Settlement governed by heads of household; decisions by informal consensus among property owners. Says in publ
+      1 Headman's Authority || A headman settles disputes and gives the orders here. Under pressure from both sides of the faith to make a fo
+      1 Headman's Authority || A headman settles disputes and gives the orders here. Says in public that the revolt is under control; in priv
+      1 Grand Council || A grand council of senior officials, guild masters, and appointed magnates governs the metropolis; the council
+      1 City Council || A full council governs the city: aldermen, guild masters and appointed officials see to its taxes, its laws an
