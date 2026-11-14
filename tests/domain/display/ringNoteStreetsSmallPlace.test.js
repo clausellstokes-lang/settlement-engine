@@ -22,8 +22,7 @@ describe('the ring note says "the streets" only where a place has streets', () =
       const st = deriveCriminalStructure(place(tier));
       expect(st?.key).toBe('organized');
       expect(st?.label).toBe('Organized Syndicate');
-      expect(st?.note).toMatch(/^One criminal ring decides what crime is allowed here\./);
-      expect(st?.note).not.toMatch(/\bstreets\b/);
+      expect(st?.note).toBe('One criminal ring decides what crime is allowed here. Its rules are predictable and it can be bargained with; it puts down random violence because that brings the law, and it lives on protection money and on any official it can buy.');
     }
   });
 
