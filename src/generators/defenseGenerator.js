@@ -122,8 +122,10 @@ const crisisPointsOf = (has, t, magPri) => {
   const out = [];
   if (has('under_siege')) {
     const c = C.under_siege; let e = c.sup, i = c.int;
+    // UPKEEP-MEASURE-2 X3: each relief is its own (a teleport circle eases supply, a guild eases order); one never
+    // takes the other's away, so adding the circle to a guild town never raises what the siege takes from order.
     if (t.hasArcane && magPri >= c.teleportFrom && t.hasTeleport) e = Math.round(e * c.teleportEco);
-    else if (t.hasArcaneGuild && magPri >= c.guildFrom) i = Math.round(i * c.guildInt);
+    if (t.hasArcaneGuild && magPri >= c.guildFrom) i = Math.round(i * c.guildInt);
     if (t.hasDivineStrong) i = Math.round(i * c.strongInt);
     if (t.hasDruid && magPri >= c.druidFrom) e = Math.round(e * c.druidEco);
     out.push(['under_siege', { sup: e, int: i }]);
