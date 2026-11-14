@@ -531,14 +531,21 @@ const computeDefenseScores = (settlement, keep, instead = null) => {
   const dims = {};
   for (const q of parts) for (const [d, v] of Object.entries(q.dims)) if (!(d === 'mag' && !magicExists)) dims[d] = (dims[d] || 0) + v;
   // R1: each score full at 100 (the rest held in reserve) and never below nothing.
-  const full = Object.fromEntries(Object.entries(dims).map(([d, v]) => [d, Math.min(100, Math.max(0, v))]));
+  // UPKEEP-MEASURE-2 P4: A FORCE IS NO GREATER THAN ITS PEOPLE. The military score is full at its people's measure (the
+  // people times `W.people.milPerHead`, and never above 100); what stands and is built beyond it is held in reserve, on
+  // the fullness line's own words. A record with no population keeps the 100.
+  const pop = Number(settlement.population);
+  /** @type {Record<string, number>} */
+  const top = { mil: Number.isFinite(pop) && pop > 0 ? Math.min(100, pop * W.people.milPerHead) : 100 };
+  const topOf = (/** @type {string} */ d) => (Object.hasOwn(top, d) ? top[d] : 100);
+  const full = Object.fromEntries(Object.entries(dims).map(([d, v]) => [d, Math.min(topOf(d), Math.max(0, v))]));
   const size = Object.hasOwn(W.size, tier) ? W.size[tier] : 0;
   const danger = Object.hasOwn(W.threat.penalty, threat) ? W.threat.penalty[threat] : 0;
   // P2's second hold: READINESS's sustaining total counts for no more than the force. The scores' sum (each full at 100)
   // is held to the same sum without what sustains, plus the force; both sides only rise when a house is added, so their
   // least only rises. It is carried on limit 1's own line (no new word).
   const fullSum = Object.values(full).reduce((a, v) => a + v, 0) / n;
-  const bare = Object.entries(dims).reduce((a, [d, v]) => a + Math.min(100, Math.max(0, v - (sustPos[d] || 0))), 0) / n;
+  const bare = Object.entries(dims).reduce((a, [d, v]) => a + Math.min(topOf(d), Math.max(0, v - (sustPos[d] || 0))), 0) / n;
   const readinessHeld = Math.max(0, fullSum - (bare + Math.max(0, force)));
   sustainsHeld -= readinessHeld;
   const raw = fullSum - readinessHeld + size - danger;
