@@ -1559,7 +1559,7 @@ note that carries it on the six wired surfaces.
 1. `[ledger · no crisis: under_siege]` {settlement} sells on goods it never made: some of what leaves the town entered it as imports the same season.
 2. `[visitor · no crisis: under_siege]` The trade here is in the moving of things. Very little of what leaves began here.
 3. `[street · no crisis: under_siege]` The town's living is the road. Goods come, goods go, and the town takes its part of both.
-4. `[ledger · crisis: under_siege]` {settlement} lived by moving other people's goods, and the siege has stopped the moving.
+4. `[ledger · crisis: under_siege]` Some of {settlement}'s trade was in other towns' goods passing through, and the siege has stopped that trade.
 5. `[visitor · crisis: under_siege]` Goods that were only passing through {settlement} are stuck there now, with the roads closed and nowhere for them to go.
 
 **POSTURE: `import_dependent`**
