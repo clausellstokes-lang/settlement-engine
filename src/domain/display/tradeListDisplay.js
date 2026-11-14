@@ -428,7 +428,10 @@ function pillAsPrinted(raw, side, settlement) {
 function rawCardStoppedByCrisis(good, chains, settlement) {
   const grounds = [...(TRADE_GOOD_GROUNDS.get(good) || []), ...(RESOURCES_YIELDING.get(good) || [])];
   const own = chains.filter((c) => grounds.includes(String(c.resourceInputKey)));
-  return own.length > 0 && own.every((c) => WORKING_CHAIN_STATUSES.includes(String(c.status)) && chainCrisisStateShown(c, settlement) === 'impaired');
+  // W2-C-LEAVES-12 (the chair, 14:10 UTC): where no card works the good's ground, a famine that failed every such ground of
+  // the town's own (`landFailed`) stops it too (r2s-famine-thorp-1: grazing land, no herd card, "Raw wool, Livestock")
+  if (own.length === 0) return grounds.length > 0 && landFailed(settlement, grounds);
+  return own.every((c) => WORKING_CHAIN_STATUSES.includes(String(c.status)) && chainCrisisStateShown(c, settlement) === 'impaired');
 }
 
 /**
