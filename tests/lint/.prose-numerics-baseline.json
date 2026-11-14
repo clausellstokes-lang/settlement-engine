@@ -337,7 +337,7 @@
   },
   {
     "path": "src/components/new/tabs/EconomicsGlance.jsx",
-    "line": 128,
+    "line": 134,
     "category": "floatInterpolation",
     "snippet": "{ecoScore}"
   },
@@ -721,13 +721,13 @@
   },
   {
     "path": "src/domain/magicProfile.js",
-    "line": 156,
+    "line": 172,
     "category": "floatInterpolation",
     "snippet": "`${religious.name} (power ${religious.power}) restricts arcane practice.`"
   },
   {
     "path": "src/domain/magicProfile.js",
-    "line": 164,
+    "line": 180,
     "category": "floatInterpolation",
     "snippet": "`${arcane.name} (power ${arcane.power}) normalizes arcane practice.`"
   },
@@ -979,37 +979,37 @@
   },
   {
     "path": "src/pdf/sections/EconomicsTrade.jsx",
-    "line": 312,
+    "line": 317,
     "category": "floatInterpolation",
     "snippet": "{flow}"
   },
   {
     "path": "src/pdf/sections/EconomicsTrade.jsx",
-    "line": 381,
+    "line": 386,
     "category": "floatInterpolation",
     "snippet": "{iss.severity}"
   },
   {
     "path": "src/pdf/sections/EconomicsTrade.jsx",
-    "line": 480,
+    "line": 485,
     "category": "floatInterpolation",
     "snippet": "{fb.deficitPct}"
   },
   {
     "path": "src/pdf/sections/EconomicsTrade.jsx",
-    "line": 480,
+    "line": 485,
     "category": "percentToken",
     "snippet": "{fb.deficitPct}"
   },
   {
     "path": "src/pdf/sections/EconomicsTrade.jsx",
-    "line": 485,
+    "line": 490,
     "category": "floatInterpolation",
     "snippet": "{fb.coveragePct}"
   },
   {
     "path": "src/pdf/sections/EconomicsTrade.jsx",
-    "line": 485,
+    "line": 490,
     "category": "percentToken",
     "snippet": "{fb.coveragePct}"
   },
@@ -1075,19 +1075,19 @@
   },
   {
     "path": "src/pdf/sections/Overview.jsx",
-    "line": 542,
+    "line": 548,
     "category": "floatInterpolation",
     "snippet": "` · imports cover ${fb.coveragePct}% of gap`"
   },
   {
     "path": "src/pdf/sections/Overview.jsx",
-    "line": 542,
+    "line": 548,
     "category": "floatInterpolation",
     "snippet": "{fb.coveragePct != null ? ` · imports cover ${fb.coveragePct}% of gap` : ''}"
   },
   {
     "path": "src/pdf/sections/Overview.jsx",
-    "line": 542,
+    "line": 548,
     "category": "percentToken",
     "snippet": "` · imports cover ${fb.coveragePct}% of gap`"
   },
