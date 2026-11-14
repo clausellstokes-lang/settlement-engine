@@ -21,9 +21,15 @@
 | 4 | the Mine's service twin "Ore cut underground by the crews ..." (institutionServices.js, the cut's #1246, the same shape) | NAMED, not in this lane's rows: LEFT FOR AFTER THE JOIN | none |
 | 5 to 7, the slave revolt's note, step 8, the merges, the final statement | | NOT STARTED | |
 
-## 2. WHAT IS LEFT, line by line
+## 2. LEFT FOR AFTER THE JOIN (the chair's change of order, 04:15 and 04:19: not lost, no longer this lane's; row, writer, what is known)
 
-1. Row 5, row 6, row 7, the slave revolt's note, step 8, the history merge, the line's merge, the final statement (the brief's order).
+1. Row 5, `institutionServices.js` under a siege or famine, MEASURED at 1c0ce22db (census 720, `qsvc.mjs`), NOT CURED: the Annual fair's "Livestock auction" under a siege (2: r2s-under_siege-town-0, -2); the Major annual fairs' "Large-scale trading" and "Livestock auctions" under a siege (7 each: r2r-metropolis-14, r2s-under_siege-city-0, -2; "Merchants from distant regions" with the roads held: the same shape the fifth seat cured in "Seasonal trading"); "Caravan organization" (Caravan masters' exchange, Caravanserai) under a siege (2: r2s-under_siege-city-3, -town-1; read true under a famine); Daily markets "Fresh produce" under a famine (5: r2r-city-44, r2s-famine-city-0, -1; its siege twin exists, and the twin mechanism takes ONE twin per text, so a famine twin means one twin true under both, `crisis: [under_siege, famine]`, the crisis dimension being a disjunction) and "Street food" ("roasted meats") under a famine (2). This seat's READING, for the next: "Fresh fish retail" under a siege READ TRUE (a siege holds the roads, the boats still go out; 7 towns, one with its fishing grounds depleted: r2s-under_siege-metropolis-1, a thinner catch, still a catch); "Weekly market" / the Weekly market's "General trade" under a siege or a famine READ TRUE (no outside trader named; the town's own produce and beasts change hands).
+2. Row 6, `finishedGoodsCategory.js :: importLabels` (a 9, b 6, d 1), `economicData.js :: IRON_GRAIN_FUEL` (d 1), `geographyData.js :: TERRAIN_DATA.mustImport` (b 1), `supplyChainData.js :: QUALITY_TOOLS_AND_WEAPONS` (b 1): NOT READ (HANDBACK-6 section 8 row 6 holds the cases).
+3. Row 7, `institutionBacking.js` ww-798, `informationBrokerageTuning.js` pf-702: NOT READ.
+4. The slave revolt's note, `stressTypes.js` ("everyone who keeps order is busy containing the revolt"): NOT MEASURED; the form is the brief's (through `assembleSettlement.js :: rerenderStressSummary` only; that lane's guard town r2s-slave_revolt-thorp-70).
+5. Step 8's four PAIRS hits not in any row (HANDBACK-8 section 1): the vintner's "must brought in" under a siege, the commercial brewery's "taverns and ships", the smuggling waypoint's "customs checks" (reads true), the city mills' "fulling" (PARKED, a cloth word).
+6. The Mine's service twin "Ore cut underground by the crews ..." (`institutionServices.js`, the cut's #1246) and the parish churches' card one-liner (`src/domain/display/institutionVocabulary.js`, "Hundreds of houses of worship ..."): named in 383f1d9a7 and 792b1d11f.
+7. The history branch's rulings (a) to (c) (the Succession Crisis's present-tense ruler lines in a council's town; the succession hooks under a priest-ruled council; "A would-be heir approaches outsiders" in three elders' towns): the merge is the close's; the reading is after the join.
 
 ## 9. The rulings this seat works to, copied
 
