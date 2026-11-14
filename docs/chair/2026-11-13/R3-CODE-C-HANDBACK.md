@@ -378,6 +378,12 @@ pre-push gates; refs and config compared before and after every push since.
 | #ww-15, #pf-85, #pf-667, CENSUS-2 c36 (2 towns) | crisisSummaryVantage.js :: CRISIS_SUMMARY_POOLS (famine.defence.official, famine.tonight.watch, succession_void.tonight.trade, politically_fractured.defence.local); the call sites (tonightSheet.js rb, the PDF view model up/uc/wc, DefenseTab.jsx rt) pass only the entry and the name | CURED by rewording to what the kind guarantees (the file's own law): "Those who answer for {name} spend their days settling quarrels over food, and every week there are more of them."; "In {name} what food is left is watched day and night, and those watching it are as hungry as everyone else."; "…, and those waiting on one are losing patience."; "People in {name} keep away from where one power's ground meets another's, most of all after dark." Display only; read in 9 rendered towns (thorp of 5 to metropolis of 142,726); guards rww-thorp-calm-1, rpf-thorp-succession_void-13 | b6208d93a |
 | #ww-702, #ww-1263 | crisisPage.js :: CRISIS_PAGE_COPY (noLevers, nobody), printed by the Crisis tab, the PDF chapter and the Foundry journal | CURED: "No house here holds what this crisis turns on." (the levers are institutions; the cast's lever role is a person's); "no one yet named" (an empty cast is an infiltration, its people the roster's secrets, or a war with no defender: 31 + 21 of 960). Display only; read in 6 rendered towns; guards the two readers' towns. NAMED to rb: crisisCast.js takes no cast role for an infiltration's infiltrator and recruits, whose secrets the roster holds (rww-metropolis-infiltrated-1: Caecilia Hispallus, Antonia Varus) | 2ce44a973 |
 | THE CHAIR'S ROW of 23:40Z (servicesGenerator.js: a service under a house's name) | servicesGenerator.js's criminal fallback names its fence row FENCE_WORD_OF_MOUTH, "Fence (word of mouth)", a catalogue house (the only house name among its 23) | CURED: the house's name only where the roster holds it (6 rows), else "Fencing stolen goods" (139); 102 of 720, 37 of 240, availableServices only; read in ten towns, thorp to metropolis, two sieges. "Black market bazaar" (22 towns here with no such house) is a catalogue SERVICE of the Underground city house, src/data/institutionServices.js: NAMED to the data lane | 06fe8a86b |
+| #ww-339 (rww-metropolis-famine-1), #ww-1357 (rww-city-recently_betrayed-1): GRAIN_OWN_FIELDS_LINE | the text is incomeLineSiblings.js's; the CHOICE is economicState.js :: generateEconomicState (`if (entry.desc === GRAIN_SURPLUS_LINE && !offersFoodSurplus(_foodRecord)) entry.desc = GRAIN_OWN_FIELDS_LINE`), which reads neither a failed grain harvest nor a flour export | NAMED to the defence lane (economicState.js; the ruling of this brief): EXECUTED at this tip, both towns print the line; #ww-339 beside foodRecord failedSource "grain" (and Milled flour exported), #ww-1357 beside primaryExports "Milled flour". The text is true where local fields bear and no grain good is sold on, so a condition makes it true: no twin appended here | — |
+| CENSUS-2 LOCAL_COAL_LINE (r2s-under_siege-city-2), LOCAL_COAL_SOLD_LINE (3: r2r-thorp-45 and two more) | economicState.js :: generateEconomicState (the Iron & Metalwork branch picks the coal lines on coal_deposit and FORGE_HOUSE_WORDS alone; it reads no siege) | NAMED to the defence lane, as the first seat named #501/#1301: "leans on the trade route", "bought in", "sold to the forges of other towns" are true off a siege; a siege condition at the site makes them so. No twin appended | — |
+| #ww-707 (rww-thorp-monster_pressure-1) | the flavour is src/data/cultureProfiles.js's (fd's, undeclared); the choice is foodways.js :: composeFoodwaysLine's filter | CURED: a culture line naming sellers (vendors, stalls, hawkers) stands only where the market home says a market does; 29 of 720 and 5 of 240 (every market-less thorp, hamlet and village that printed it), the foodways line and its culturalIdentity copy only. NAMED: "neighborhood" in 2 market hamlets (the composer is not told the tier: foodGenerator.js is up/uc's); fd's "Shared waterworks … urban food supply", "… dense populations" (CENSUS-2 a17/c: 40, 30, 21 towns) | c61b61434 |
+| #ww-1362 (chainYield.js) | — | NOT THIS LANE'S NOW (the brief): another lane cures the note where it prints; the writer left alone | — |
+| #pf-260 (rpf-city-succession_void+politically_fractured-13) | governanceAccount.js :: governanceAccountOf (read beside people/seatKeeper.js :: seatKeeperOf, not changed) | CURED: "governs without a head" only where no one keeps the empty seat; display only; 47 keeper towns of 960; read in a thorp under a famine and two metropolises; the chair's condition (b) pin re-keyed by identity (its planted cast holds a keeper) | 4ba5449e6 |
+| CENSUS-2 r2s-plague_onset-town-0 ("Landed Gentry … keep enough rights of their own (land, courts, levies)") | factionDynamics.js :: computeFactionRelationships (the dependent noble row) | READ in its town (EXECUTED; no court house on the roster, Landed Gentry 23 under a Military Council 32): the parenthesis names RIGHTS a landed house keeps (its land, its own court, its levies), not houses or forces the town holds. Judged TRUE; not changed (the chair may overrule) | — |
 
 ### FOR THE JOIN (the 21:51Z ruling)
 
@@ -412,3 +418,50 @@ pre-push gates; refs and config compared before and after every push since.
   aging or ill, and potential heirs jockeyed for position" is drawn in council-governed towns too (e.g.
   rpf-hamlet-occupied-13, a Household Council). The ruler rows are refused now (6e658915a); the event's own selection
   is fd's.
+
+### Item 6: the stage read's four LOW findings and the lines that never reach the page (REVIEW-R3-STAGES, 34c0d13f9)
+
+Named, no cure asked: (4) the plural possessive leaf gives "Noble Houses's" (8 metropolises), AI grounding only
+(powerSentenceName.js :: powerPossessive, read not changed by this lane); (6) #1074's declaration counted towns, not
+goals: 126 goals re-dealt in the 9 census towns (595 in 30 of 1,536), 28 of 30 read true, 2 LOW; (7) the
+"Competitive" heading over an obedience line in 15 of 76 occupier towns (the ruled bands kept above subordinate);
+(10) C01's quarantine line in a thorp of 6 (a stretch). FIVE of the first stage's lines never reach the page: the
+daily-life slots C02-C05 go only to the AI grounding payload and the regeneration-delta card, and the error-band
+embattled reason C10 never printed in 1,626 births.
+
+### STOP AT THE CONTEXT LIMIT — what the successor takes (not started; nothing changed for them)
+
+The code tip is 4ba5449e6 (this file's commit is the one after it); the merge of the line is DONE (8e9046124, the line
+at 9e57f5023; if the line has moved since, merge its new tip the same way). Still to do, in order:
+1. **The command's rule (record 403)**: `sh <scratch>/c2/docs/chair/2026-11-13/probes/CENSUS-2/census2.sh <tree> <out> 4
+   --files <the lane's files>` at aac79b808 and at the tip; every hit in the lane's files read against its town, cured
+   or named; the count per kind at base and tip; its limits beside any zero. The lane's files: crisisHooks.js,
+   resourceSemantics.js, goodsCatalog.js, characterEditView.js, treasury.js, foodWordsFindings.js, stressNarrative.js,
+   structuralValidator.js, resourceGenerator.js, factionDynamics.js, chainMagicSubstitution.js, incomeLineSiblings.js,
+   engineKeysInText.js, conditionWords.js, landingFixture.js, crisisSummaryVantage.js, dailyLife.js, threatProfile.js,
+   outlookHookSiblings.js, hookTruth.js, heraldCausalGrammar.js, plotHooks.js, hookThemes.js, magicSource.js,
+   servicesGenerator.js, officialsInPay.js, crisisPage.js, foodways.js, governanceAccount.js (the hand-back's tables
+   name each; check against `git diff --name-only aac79b808 <tip> -- src` minus the merge's files).
+2. **The two mutation-coverage manifest entries** the first seat owes (tests/generators/embattledReasonNoSlider.test.js,
+   occupierRelationLine.test.js) through the manifest's own door (scripts/mutation-coverage-manifest.json). This seat's
+   new test file tests/generators/fenceWordOfMouthTavern.test.js avoids the manifest's name pattern; it adds one file
+   to the lighting census's count (the census's door, at the merge).
+3. **THE FINAL STATEMENT** for the whole lane at its final tip, as the brief gives it: the whole suite once
+   (`npx vitest run --maxWorkers=2`, to a file), every red classed (known so far, EXECUTED by governing runs: the
+   generator golden master 139 configurations at 6622bcdbf and 199 from the merge 8e9046124 on, unchanged by this
+   seat's later commits; espionageDormancyFence's driven golden; generationForkCensus A1, identical before and after
+   this seat's commits; worldFactRederive A7 and pipelinePinnedChoosers A1 per the second seat; all the merge seat's
+   doors); the first census's counter base aac79b808 against tip, its own exit read; the 720 field diff by family base
+   against tip, each family declared (this seat's: history 85 towns, availableServices 11 then 102,
+   economicState.foodSecurity.foodRecord.foodwaysLine and culturalIdentity.foodways 29; display-only commits 0; the
+   merge brings the line's own families); ONE draft shift record naming every moved golden surface; the new words; the
+   edge bundles re-emitted last and alone (`npm run build:edge-shared`: hookTruth.js, crisisSummaryVantage.js,
+   crisisPage.js, foodways.js, governanceAccount.js and servicesGenerator.js are this seat's changed sources).
+
+**New wording for the owner's veto, this seat** (each read where it prints, towns in its commit): "Ask around quietly.
+Someone moves goods without questions." (33b473879); "Fencing stolen goods" (06fe8a86b, a catalogue service name
+already); "Those who answer for {name} spend their days settling quarrels over food, and every week there are more of
+them."; "In {name} what food is left is watched day and night, and those watching it are as hungry as everyone else.";
+"…, and those waiting on one are losing patience."; "People in {name} keep away from where one power's ground meets
+another's, most of all after dark." (b6208d93a); "No house here holds what this crisis turns on."; "no one yet named"
+(2ce44a973).
