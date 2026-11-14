@@ -47,8 +47,6 @@ export const MODERATE_GAP_TWIN = 'The settlement grows less food than it eats, a
 const STARVING_HOOK = 'The settlement is starving. Its hungriest are turning to banditry, and a merchant has offered to supply food at a price the settlement cannot pay in coin.';
 /** Where no merchant can come: an isolated route, or a siege on the roads (R3-CODE-C-2, CENSUS-2 kind a). */
 const NO_MERCHANT_COMES = Object.freeze(['route: isolated', 'crisis: under_siege']);
-/** The famine line where no merchant can come: the same famine, no merchant in it. */
-export const STARVING_SHUT_TWIN = 'The settlement is starving, and its hungriest are turning to banditry.';
 export const OUTLOOK_HOOK_SIBLINGS = Object.freeze({
   "Something is killing the forest the timber comes from, and the settlement's building and shipbuilding trades stall without it. Find another supplier, or find out what is in those woods?": declaredSet(
     "Something is killing the forest the timber comes from, and the settlement's building and shipbuilding trades stall without it. Find another supplier, or find out what is in those woods?", ['navigable'],
@@ -89,7 +87,11 @@ export const OUTLOOK_HOOK_SIBLINGS = Object.freeze({
       text: MODERATE_GAP_TWIN,
       twinOf: STARVING_HOOK, excludes: Object.freeze(['food: ≤ deficit', ...NO_MERCHANT_COMES]), needs: Object.freeze(['food: ≤ pressured']),
     }),
-    // not a twin: drawDeclared tries one twin, then the admitted members; this one is reached only when both refuse
-    Object.freeze({ text: STARVING_SHUT_TWIN, needs: Object.freeze(['food: ≤ deficit']) }),
+    // not a twin: drawDeclared tries one twin, then the admitted members; this one is reached only when both refuse.
+    // The famine line where no merchant can come: the same famine, no merchant in it. Its text stands in the member
+    // that declares it (R3-CODE-C-6: the presumed-things walker credits a declaration only around its literal).
+    Object.freeze({ text: 'The settlement is starving, and its hungriest are turning to banditry.', needs: Object.freeze(['food: ≤ deficit']) }),
   ]),
 });
+/** The famine line where no merchant can come (the starving set's third member, read from where it is declared). */
+export const STARVING_SHUT_TWIN = OUTLOOK_HOOK_SIBLINGS[STARVING_HOOK][2].text;
