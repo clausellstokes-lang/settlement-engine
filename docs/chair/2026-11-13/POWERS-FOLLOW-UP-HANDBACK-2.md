@@ -1711,6 +1711,17 @@ Pushes by probes/POWERS-15/push.sh (POWERS-14's, pointed at p15: fetch, fast-for
   SAYS THE HALL DECIDES FOR ITSELF; (3) CARRIED: the coaching-inn keeper's coach secrets under a siege (16): UNDER A SIEGE NO
   COACH RUNS. One line to the chair after (1) and (2).
 - THE CHAIR, 2026-11-14 11:43 UTC: the count read 236,227 by the chair; a 0 is a read too soon; hand back at 380,000.
+- THE CHAIR, 2026-11-14 12:11 UTC: REVIEW-POWERS-5's HIGH row is this lane's: the PDF's Power chapter printed the stored
+  modifier key raw, the Summary legend the key as a chip: RULED ONE READER FOR ONE FACT ON EVERY SURFACE (the Power tab's
+  reader); FIRST, before the two MEDIUM rows; display only; one line when pushed.
+- THE CHAIR, 2026-11-14 12:19 UTC: FOUR ROWS MORE from the join's no-lane seat (origin/lane/join-nolane-2026-11-14,
+  docs/chair/2026-11-14/NOLANE-HANDBACK.md, "Still false: A LANE'S", rows marked powers-follow-up), each measured at this
+  lane's tip first: (1) "Military/Guard" inside prose (200 towns): a faction named in a sentence takes its prose form;
+  (2) BAR-198 the ruling chain block runs things together ("The powerMerchant oligarchy (strong)corruption-riddled", 28):
+  two things a page says are set apart, on the page and in the text taken from it; (3) PWR-1432 a "Merchant Guilds" power
+  with no guild on the roster (24): a power named for a house reads the roster (a generator move: STOP with the table if a
+  power is re-drawn beyond these towns); (4) "handled by ..., the network's head (Smuggling network)" (66): a catalogue
+  bracket in a sentence, through the house-label leaf. After the PDF row and the two MEDIUM rows; widest first.
 
 ## P9.1 Item by item
 - **THE TOLL: RE-KEYED BY IDENTITY, 0eb30242f (tests only).** MEASURED FIRST (probes/POWERS-15/toll.mjs over the 720 born at
@@ -1765,10 +1776,21 @@ Pushes by probes/POWERS-15/push.sh (POWERS-14's, pointed at p15: fetch, fast-for
   decisions" reds 5); hallLineReadsCrime HALL_ONLY and criminalSwayReadsHall r2r-city-3 re-keyed to the same line's words.
   Display only: no record field moves.
 
+- **REVIEW-POWERS-5 A7 (HIGH), THE STORED MODIFIER KEY ON THE PDF AND THE SUMMARY: CURED, 5e511271f** (the lighting census
+  re-taken, 301108e7f: files 3279 -> 3280). PowerStructure.jsx's GOVERNING box and SummaryTab.jsx :: FactionBar call
+  governingModifierWordsOf (the Summary chip for the governing faction only: the one faction storing a key, 395 of 395 on the
+  720). Measured (modsurf.mjs, the 720): 395 keys; the reader prints words in 184, silent in 211. Guard
+  tests/components/governingModifierSurfaces.test.jsx (four calm towns, hamlet to metropolis: the three surfaces agree, no key):
+  red 4 of 4 at 69521bf72's code; each surface's old line put back alone reds 4. restoredSubsections STOP-1 re-keyed by
+  identity (it pinned the raw key). NOT DONE: the 720's PDF and Summary re-render (the agreement holds by construction, one
+  call; CONFIRMED on the four); no siege, famine or occupation town rendered for this row.
+
 ## P9.2 EVERY NEW OR CHANGED LINE, with the towns it was read in
 - REWORDED (D1, 2557ea1ef): "None of the head, the second and the third of <ruler> takes orders from the criminals." (307 towns;
   read in r2s-occupied-town-1, r2s-under_siege-metropolis-0, r2s-infiltrated-metropolis-3, r2r-city-0); "No criminal house gives
   <ruler> its orders. One that wants something from it has to ask, pay or wait like anyone else." (0 towns; read composed).
+- RE-ROUTED (A7, 5e511271f): the PDF's GOVERNING box and the Summary legend print the Power tab's words ("mage counsel", "armed
+  sway", ...) in place of the stored key in 184 towns of the 720, and nothing in 211 (read in the guard's four towns only).
 - NEWLY SILENT (A5, de53b4b58): the chip "criminal sway" in 59 towns of 1,716 (read in r2r-thorp-8, r2r-metropolis-52,
   r2s-occupied-metropolis-2); kept in 36 (r2r-town-0).
 
@@ -1780,12 +1802,42 @@ Pushes by probes/POWERS-15/push.sh (POWERS-14's, pointed at p15: fetch, fast-for
 ## P9.4 THE TABLE (P8.4 brought current)
 - Unchanged from P8.4 so far.
 
-## P9.5 WHAT IS LEFT, line by line
-- REVIEW-POWERS-5 E3 (CARRIED): the coaching-inn keeper's two coach secrets under a siege (16 keepers;
-  TITLE_LINE_DECLARATIONS.secret, the twin of #101's presentation rows): the same `excludes: crisis: under_siege` cure.
-- L3 (faceHonorifics.js :: styledTitleOf: the title word through the honorific's leaf); T2 (rulingStructure.js) with T1/T3 where
-  the same cure; then P8.4's rows left, widest first by false count (ww#850, ww#440, bar #17, pf#520, bar #26, then the rest);
-  then P8.5's L4, the last reader's L5 and L4, the courts candidate, the two coaching-inn candidates.
+## P9.5 WHAT IS LEFT, line by line (HAND BACK at the count's mark; in the chair's order)
+- A7's follow-up: render a siege, a famine and an occupation town of the 720 at 5e511271f and read the PDF's GOVERNING box and
+  the Summary legend (census2.sh --seeds; the PDF text by tests/generators/tollNamePrintedEverywhere.test.js's collectText).
+- REVIEW-POWERS-5 E3 (CARRIED, MEDIUM, 16 keepers): the coaching-inn keeper's two coach secrets under a siege ("Changes tired
+  horses for fresh ones ...", "Tells a band on the road which coaches carry money ..."): data/people/titleSecretsPresentations.js
+  TITLE_LINE_DECLARATIONS.secret takes `excludes: ['crisis: under_siege']` as #101's presentation rows did (de125480f; the rule
+  is poolMap.js :: settleTitleLines); a declared move of npcs[].secret (and what reads it) in the siege towns only.
+- THE CHAIR'S FOUR (12:19), widest first, each measured at this tip first: (1) "Military/Guard" in prose (200); (4) the
+  "(Smuggling network)" bracket (66); (2) BAR-198 the chain block run together (28: note PowerTab.jsx's chain block now prints
+  the words, not the key: re-measure); (3) PWR-1432 "Merchant Guilds" with no guild (24; a generator move: STOP with the table
+  if any power is re-drawn beyond those towns).
+- L3 (faceHonorifics.js :: styledTitleOf: the title word through the honorific's leaf; 31 male alewives, 52 madams, 80 district
+  madams on the 720); T2 (rulingStructure.js, "outpaced by merchant capital" beside "still ahead of merchant interests";
+  r2r-metropolis-57) with T1/T3 where the same cure.
+- P8.4's rows left, widest first by false count: ww#850 (120), ww#440 (104), bar #17 (100), pf#520 (52), bar #26 (49), pf#164,
+  bar #18, ww#377, the courts candidate, pf#234, pf#524, pf#486, ww#1048, pf#481/#474/#488; bar #62/#98 PARKED.
+- P8.5's L4 (refresh-role); the last reader's L5 (the vignette's guard) and L4; the courts candidate; the two #101 candidates.
+- FOR THE JOIN (P9.3) stands: the fork bound re-measured at the joined tree.
+
+## P9.5a HOW THE INSTRUMENTS ARE RE-MADE (docs/chair/2026-11-14/probes/POWERS-15/)
+- Births: b15.sh <tree> <out> [seeds] [n] (POWERS-14's b14 with SEEDCFG=<a seedcfg.mjs> for the reader's own seeds:
+  REVIEW-POWERS-5's seedcfg.mjs and seeds.own.txt, archived from origin/lane/review-powers-5-2026-11-14 to /home/user/probes/rp5/);
+  the CENSUS-2 and REVIEW-BAR-0 probe dirs archived to /home/user/probes/. q.mjs (POWERS-14's) for queries.
+- toll.mjs (goals naming a toll house against the roster); forkmeasure.test.js.txt + mintdiff.mjs (the fork census's mint
+  seeds at two trees); chip.mjs (the crime chip by rung); hallv.mjs (the none rung's lines by state); modsurf.mjs (the stored
+  key against the reader's words). Pages: CENSUS-2's census2.sh <tree> <out> 4 --seeds <file>, the dumps in <out>/dumps.
+- push.sh (fetch, fast-forward, the rev-list test, refs and config compared: CFG-SAME / REFS-SAME at every push of this seat);
+  holders.sh (fetch +refs/heads/lane/*:refs/remotes/origin/lane/* first); POWERS-14's gates.sh.
 
 ## P9.6 `git diff --stat 0ea65f574..HEAD -- src/`
-- src/data/people/dmPowerLines.js (D1); src/domain/display/governingModifierWords.js (A5). (Kept current: re-run at each item.)
+- src/components/new/SummaryTab.jsx (A7) | 5 ++++-
+- src/data/people/dmPowerLines.js (D1) | 7 +++++--
+- src/domain/display/governingModifierWords.js (A5) | 13 +++++++++++--
+- src/pdf/sections/PowerStructure.jsx (A7) | 6 ++++--
+
+## P9.7 HAND BACK (the count past 300,000 at 12:05, the chair's mark 380,000)
+- Tip: this file's commit on 301108e7f. Done: the toll re-keyed (0eb30242f), the six titles green, the fork pin re-keyed
+  (60b89e5ce), the conflict issue found cured (527198c17), A5 (de53b4b58), D1 (2557ea1ef), A7 (5e511271f); each red first,
+  plant-proven, read on its page (A7: four calm towns only). Left: P9.5, in that order.
