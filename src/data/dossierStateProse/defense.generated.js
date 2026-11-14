@@ -551,7 +551,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "{settlement}'s walls and fighters are holding against the creatures, and every season of it wears on them.",
+          "text": "{settlement}'s walls and fighters face the creatures season after season.",
           "slots": [
             "settlement"
           ],
@@ -562,7 +562,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "The wall at {settlement} is manned day and night against the creatures, and nobody walks out past it unarmed.",
+          "text": "{settlement} keeps its wall against the creatures, and nobody walks out past it unarmed.",
           "slots": [
             "settlement"
           ],
