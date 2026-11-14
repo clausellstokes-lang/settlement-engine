@@ -235,6 +235,8 @@ AT THE JOIN, where the ruled one home is `seatKeeper.js :: seatKeeperStyledNameO
 | ADDED HIGH: "Needs X" apart from its sentence | cut #163 #427 #497 #891 | e878a1367 | need lines 444; run together 30 (30 towns) -> 0; only those 30 change; PDF/Foundry print no service need line (0/0); "· covers" 0 on 800 page dumps |
 | 2a stores' span contains its figure | inc #472 #668 #769 | f719dbb38 | stores lines 800: off figure 127 -> 0; bare above a month 758 -> 0; 759 towns' line changes |
 | 2b food label, one home | cut #843 #1102 #1297; inc #197 #941 #995 #1329 #1516, #472 #668 #769 | d94638185 (+bc2860a35 tuning door) | Secure->Pressured 160, Import-Dependent->Deficit 6; plenty beside a deficit 160 -> 0; tile = sheet word 800/800 |
+| 3 NPC card: allegiance handler; badge and conflict pill apart | cut #967 #968 #1097, #389 (the pill only) | 87c541620 | hidden-allegiance lines 923: 284 (105 towns) named a handler of another house -> none; 639 keep theirs; the page re-count was owed to the tip render (not run) |
+| 4 crisis cast and hooks | inc (rpf-town/village-succession_void-13), cut #864, CENSUS-2 "Access to …" levers | NOT COMMITTED: docs/chair/2026-11-13/R2-CODE-B-3-ITEM4.patch | measured, see below; 5 governing reds NOT classed |
 
 ## FOR THE JOIN (this seat)
 - ServicesTab.jsx's `impactCovers` (the X-50 plan's `covers` list) is read by nothing once this lane's ServiceItem is in: it goes at the join (the tabs lane's file).
@@ -246,5 +248,32 @@ AT THE JOIN, where the ruled one home is `seatKeeper.js :: seatKeeperStyledNameO
 - Item 2b: none (the band ladder's own "Pressured" and "Deficit"); the Daily Life tile's own words "Severe/Serious/Strained/Tightening/Adequate" print only for a record with no band.
 - Item 1 and the added HIGH: none.
 
+## Item 3: named, not cured (writers outside this lane's files)
+- #389's words "A ruling one power refuses to obey": src/generators/power/conflictIssues.js (powers lane). Item 3 took only the run-together pill.
+- #693 "Burgomaster, first of Merchant Council · first of Merchant Guilds" (rpf-town-occupied-13): the record ranks the seat-holder first of both; composed by src/domain/people/cardPowers.js :: cardPowerLine (powers lane). PARKED: which is false — the membership or the Power tab's "Contests the seat" — is the powers lane's ruling.
+- inc #14 "Mill · second of The Highborn Circle": the miller HAS a house (key "Mill", on the roster, "Backs The Highborn Circle"); the rank is the people car's backing membership. PARKED with #191 #192 #624 #625 #749-#752 (craft faces ranked in noble powers): the powers lane's memberships.
+- #979 "Disposition established": the influence word folded into the disposition by src/domain/display/npcInteriorityRead.js :: npcInteriority (INFLUENCE_WORD).
+- #510: no longer prints at 0570b3441; the fill survives in a goal ("Secure enough legal reserves to outlast the blockade", rr2s-town-under_siege-rand-1): the goal writer's. #978: 0 at 0570b3441.
+- Seen, not cured (same run-together class, not named to me): trait chips "Flaw: vainTemperament: clever" on the card.
+
+## Item 4 — BUILT AND MEASURED, NOT COMMITTED (the worker restarted mid-classification at the seat's context mark)
+The patch (apply on 87c541620 with `git apply docs/chair/2026-11-13/R2-CODE-B-3-ITEM4.patch`): crisisCast.js — `instigatorRival` -> `instigatorGains` and stake `gainsRival` -> `gainsClaim` where people/seatKeeper.js :: isSeatVacant; stake `gainsHolds` only where a member of the power faces a house of the scarce kind (institution.key), never by name; `deriveLevers` drops "Access to …" rows (record 375). crisisHooks.js :: holderWords prints an institution holder through houseInProse. New test tests/domain/crisisCastSeatAndAccess.test.js: 4/5 red at 0570b3441, 5/5 green with the patch.
+- MEASURED (800 = census's 720 + readers' 80, app shape, base 0570b3441 vs the patch): empty-seat "whoever holds the seat" roles 12 -> 0, stakes 25 -> 0, hooks 12 -> 0; "Access to" levers 56 -> 0, hooks naming one 57 (53 towns) -> 0; name-only "holds what the crisis makes scarce" 14 -> 0 (Grain Holders in r2s-famine-city-1 now "no stake yet · it could side with either camp"). Hooks 884 -> 831; no crisis left with none (558 crises; 53 lose only the Access-to lever hook).
+- DECLARED MOVE (field diff, the reader's fielddiff.mjs): 94 of 800 towns; families stress/stressors (`cast.levers[]`, `cast.roles[].{reason,id,name,kind,temporary}`, `cast.stakes[].{reason,stake}`) and npcs (47 towns: exactly ONE temporary person added — a Grain Steward or a Healer, the cast's own rule for a natural crisis with no lever house — no existing person changed). No other family.
+- READ: rpf-town-succession_void-13 / rpf-village-succession_void-13 "… is stirring it: its power gains from the crisis." and stake "a rival claim to govern gains by it"; r2r-thorp-17 famine lever "Ehecatl Chel · nobody here could, so this one stepped in for the crisis". GUARD r2s-politically_fractured-thorp-0 (held, contested seat) keeps "already carries more weight …".
+- THE FIVE REDS TO CLASS (governing run, 43 files, 392 passed): tests/domain/crisisHooks.test.js ("the tier noun is spoken through the estate's one rewrite"); tests/generators/generationForkCensus.test.js (A3e — the classification re-executed; suspect the temporary mint as a new draw site: CHECK that it moves no draw); tests/generators/institutionBudgetPromise.test.js and tests/generators/pipelinePinnedChoosers.test.js (A1) — both known reds at 62e30c7e7 (part 2), re-check at 0570b3441; tests/generators/people/castDerived.test.js ("every person a cast names is on the roster" — likely the added temporary). The base-side run was killed by the restart. Do not commit the patch until each is classed (origin, or a pin re-keyed by identity) and the gates run.
+- Named twin (0 in 800 births): a PLURAL institution holding a hook's line role reads "the houses of worship is stirring it" (LINE_ROLE_CLAUSE's verbs are singular).
+
+## Rows NOT reached by this seat (line by line)
+1. Item 4: class the five reds above, then commit the patch (one commit), gates, push.
+2. Item 5: RelationshipsTab.jsx "No neighbours, ties between people or conflicts are recorded" on rpf-thorp-calm-13 (check item 4a's cure reaches it: base dump); NPCsTab.jsx "1 high influence ·" dangling separator (rpf-hamlet-succession_void-13).
+3. Item 6: the second seat's FOR THE JOIN note (0570b3441) read; nothing to add.
+4. The page re-count of items 3–5 on the 800 (one tip render: CENSUS-2's census2.sh --count-only on a frozen tip worktree).
+5. The lighting census re-freeze through its own door at a clean tip (LIGHTING_CENSUS_REFREEZE; the estate's file count 3239 -> 3242 by this seat's new test files: tonightOwnGoal, storesSpanFigure, npcCardAllegianceHandler, + crisisCastSeatAndAccess with item 4); the sovereignty walker reds until then.
+6. Item 7: CENSUS-2 at the final tip and at 62e30c7e7 (--files the lane's files; read the counter's own exit and counts.txt).
+7. Item 8 (on the chair's word only): merge the side branch; THE ONE FINAL STATEMENT as part 2's EXACT NEXT STEP item 2 gives it.
+
 ## Stops and parked items (with recommendation)
-- (none yet)
+- #693 and inc #14 (and the craft-in-noble-power rows): PARK to the powers lane (memberships / the Power tab's contender label).
+- #389's words, #979, #510's goal fill: name to their writers' lanes (above).
+- The Overview and Quick Guide food labels: FOR THE JOIN (above).
