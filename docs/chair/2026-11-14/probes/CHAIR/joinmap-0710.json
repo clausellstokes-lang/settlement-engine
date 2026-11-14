@@ -1,0 +1,372 @@
+{
+ "tips": {
+  "r3-code": "0ccf3ff24",
+  "r3-tabs": "5f8602371",
+  "r2a": "2d6d605be",
+  "powers": "b655ef4f7",
+  "data": "166d8b789",
+  "corpus": "f2eb7950a",
+  "leaves": "7efa2e094",
+  "r2b": "364a69a58",
+  "defence": "c56fd565e"
+ },
+ "pairs": {
+  "r3-code + r3-tabs": {
+   "clean": false,
+   "files": [
+    "tests/lint/.lighting-census-baseline.json"
+   ]
+  },
+  "r3-code + r2a": {
+   "clean": true,
+   "files": []
+  },
+  "r3-code + powers": {
+   "clean": false,
+   "files": [
+    "supabase/functions/_shared/aiCharterBundle.meta.json",
+    "supabase/functions/_shared/aiGroundingBundle.js",
+    "supabase/functions/_shared/aiGroundingBundle.meta.json",
+    "supabase/functions/_shared/aiOutputSchemaBundle.meta.json",
+    "supabase/functions/_shared/analyticsEventsBundle.meta.json",
+    "supabase/functions/_shared/engineBundle.js",
+    "supabase/functions/_shared/engineBundle.meta.json",
+    "supabase/functions/_shared/intentAtlasBundle.meta.json",
+    "tests/lint/.lighting-census-baseline.json"
+   ]
+  },
+  "r3-code + data": {
+   "clean": false,
+   "files": [
+    "tests/lint/.lighting-census-baseline.json"
+   ]
+  },
+  "r3-code + corpus": {
+   "clean": true,
+   "files": []
+  },
+  "r3-code + leaves": {
+   "clean": true,
+   "files": []
+  },
+  "r3-code + r2b": {
+   "clean": false,
+   "files": [
+    "tests/lint/.lighting-census-baseline.json"
+   ]
+  },
+  "r3-code + defence": {
+   "clean": false,
+   "files": [
+    "tests/lint/.lighting-census-baseline.json"
+   ]
+  },
+  "r3-tabs + r2a": {
+   "clean": false,
+   "files": [
+    "tests/lint/proseWiringCensus.walker.test.js"
+   ]
+  },
+  "r3-tabs + powers": {
+   "clean": false,
+   "files": [
+    "tests/components/phoneChromeFloor.census.test.js",
+    "tests/lint/.lighting-census-baseline.json"
+   ]
+  },
+  "r3-tabs + data": {
+   "clean": false,
+   "files": [
+    "docs/content/wiring-census.json",
+    "scripts/.prose-byte-baseline.json",
+    "scripts/census/page-census.register.json",
+    "tests/lint/.lighting-census-baseline.json"
+   ]
+  },
+  "r3-tabs + corpus": {
+   "clean": false,
+   "files": [
+    "docs/content/wiring-census.json",
+    "scripts/.prose-byte-baseline.json"
+   ]
+  },
+  "r3-tabs + leaves": {
+   "clean": false,
+   "files": [
+    "docs/content/wiring-census.json",
+    "tests/components/phoneChromeFloor.census.test.js"
+   ]
+  },
+  "r3-tabs + r2b": {
+   "clean": false,
+   "files": [
+    "tests/components/phoneChromeFloor.census.test.js",
+    "tests/lint/.lighting-census-baseline.json"
+   ]
+  },
+  "r3-tabs + defence": {
+   "clean": false,
+   "files": [
+    "docs/content/wiring-census.json",
+    "tests/lint/.lighting-census-baseline.json",
+    "tests/lint/proseWiringCensus.walker.test.js"
+   ]
+  },
+  "r2a + powers": {
+   "clean": false,
+   "files": [
+    "scripts/census/pool-dominance.register.json"
+   ]
+  },
+  "r2a + data": {
+   "clean": false,
+   "files": [
+    "scripts/census/page-census.register.json",
+    "scripts/census/pool-dominance.register.json",
+    "tests/domain/facts/textOf.test.js"
+   ]
+  },
+  "r2a + corpus": {
+   "clean": true,
+   "files": []
+  },
+  "r2a + leaves": {
+   "clean": false,
+   "files": [
+    "docs/content/wiring-census.json"
+   ]
+  },
+  "r2a + r2b": {
+   "clean": true,
+   "files": []
+  },
+  "r2a + defence": {
+   "clean": false,
+   "files": [
+    "docs/content/wiring-census.json",
+    "tests/lint/proseWiringCensus.walker.test.js"
+   ]
+  },
+  "powers + data": {
+   "clean": false,
+   "files": [
+    "scripts/census/pool-dominance.register.json",
+    "scripts/lib/table-pools.mjs",
+    "tests/lint/.lighting-census-baseline.json"
+   ]
+  },
+  "powers + corpus": {
+   "clean": true,
+   "files": []
+  },
+  "powers + leaves": {
+   "clean": false,
+   "files": [
+    "docs/content/wiring-census.json",
+    "tests/components/phoneChromeFloor.census.test.js"
+   ]
+  },
+  "powers + r2b": {
+   "clean": false,
+   "files": [
+    "tests/components/phoneChromeFloor.census.test.js",
+    "tests/lint/.lighting-census-baseline.json",
+    "tests/lint/.tuning-inventory.json",
+    "tests/lint/rawColorLiteral.test.js"
+   ]
+  },
+  "powers + defence": {
+   "clean": false,
+   "files": [
+    "docs/content/wiring-census.json",
+    "tests/lint/.lighting-census-baseline.json",
+    "tests/lint/.tuning-inventory.json"
+   ]
+  },
+  "data + corpus": {
+   "clean": false,
+   "files": [
+    "docs/content/wiring-census.json",
+    "scripts/.prose-byte-baseline.json",
+    "tests/lint/presumedThings.widened.register.json"
+   ]
+  },
+  "data + leaves": {
+   "clean": false,
+   "files": [
+    "docs/content/wiring-census.json"
+   ]
+  },
+  "data + r2b": {
+   "clean": false,
+   "files": [
+    "scripts/census/page-census.register.json",
+    "tests/lint/.lighting-census-baseline.json"
+   ]
+  },
+  "data + defence": {
+   "clean": false,
+   "files": [
+    "docs/content/wiring-census.json",
+    "scripts/census/page-census.register.json",
+    "tests/lint/.lighting-census-baseline.json"
+   ]
+  },
+  "corpus + leaves": {
+   "clean": true,
+   "files": []
+  },
+  "corpus + r2b": {
+   "clean": true,
+   "files": []
+  },
+  "corpus + defence": {
+   "clean": true,
+   "files": []
+  },
+  "leaves + r2b": {
+   "clean": false,
+   "files": [
+    "docs/content/wiring-census.json",
+    "scripts/.writer-reach-baseline.json",
+    "scripts/census/page-census.register.json",
+    "src/components/new/tabs/EconomicsTab.jsx",
+    "tests/components/phoneChromeFloor.census.test.js"
+   ]
+  },
+  "leaves + defence": {
+   "clean": false,
+   "files": [
+    "docs/content/wiring-census.json",
+    "tests/lint/proseNumerics.test.js"
+   ]
+  },
+  "r2b + defence": {
+   "clean": false,
+   "files": [
+    "docs/content/wiring-census.json",
+    "tests/lint/.lighting-census-baseline.json",
+    "tests/lint/.prose-numerics-baseline.json",
+    "tests/lint/.tuning-inventory.json"
+   ]
+  }
+ },
+ "files": {
+  "tests/lint/.lighting-census-baseline.json": [
+   "r3-code + r3-tabs",
+   "r3-code + powers",
+   "r3-code + data",
+   "r3-code + r2b",
+   "r3-code + defence",
+   "r3-tabs + powers",
+   "r3-tabs + data",
+   "r3-tabs + r2b",
+   "r3-tabs + defence",
+   "powers + data",
+   "powers + r2b",
+   "powers + defence",
+   "data + r2b",
+   "data + defence",
+   "r2b + defence"
+  ],
+  "supabase/functions/_shared/aiCharterBundle.meta.json": [
+   "r3-code + powers"
+  ],
+  "supabase/functions/_shared/aiGroundingBundle.js": [
+   "r3-code + powers"
+  ],
+  "supabase/functions/_shared/aiGroundingBundle.meta.json": [
+   "r3-code + powers"
+  ],
+  "supabase/functions/_shared/aiOutputSchemaBundle.meta.json": [
+   "r3-code + powers"
+  ],
+  "supabase/functions/_shared/analyticsEventsBundle.meta.json": [
+   "r3-code + powers"
+  ],
+  "supabase/functions/_shared/engineBundle.js": [
+   "r3-code + powers"
+  ],
+  "supabase/functions/_shared/engineBundle.meta.json": [
+   "r3-code + powers"
+  ],
+  "supabase/functions/_shared/intentAtlasBundle.meta.json": [
+   "r3-code + powers"
+  ],
+  "tests/lint/proseWiringCensus.walker.test.js": [
+   "r3-tabs + r2a",
+   "r3-tabs + defence",
+   "r2a + defence"
+  ],
+  "tests/components/phoneChromeFloor.census.test.js": [
+   "r3-tabs + powers",
+   "r3-tabs + leaves",
+   "r3-tabs + r2b",
+   "powers + leaves",
+   "powers + r2b",
+   "leaves + r2b"
+  ],
+  "docs/content/wiring-census.json": [
+   "r3-tabs + data",
+   "r3-tabs + corpus",
+   "r3-tabs + leaves",
+   "r3-tabs + defence",
+   "r2a + leaves",
+   "r2a + defence",
+   "powers + leaves",
+   "powers + defence",
+   "data + corpus",
+   "data + leaves",
+   "data + defence",
+   "leaves + r2b",
+   "leaves + defence",
+   "r2b + defence"
+  ],
+  "scripts/.prose-byte-baseline.json": [
+   "r3-tabs + data",
+   "r3-tabs + corpus",
+   "data + corpus"
+  ],
+  "scripts/census/page-census.register.json": [
+   "r3-tabs + data",
+   "r2a + data",
+   "data + r2b",
+   "data + defence",
+   "leaves + r2b"
+  ],
+  "scripts/census/pool-dominance.register.json": [
+   "r2a + powers",
+   "r2a + data",
+   "powers + data"
+  ],
+  "tests/domain/facts/textOf.test.js": [
+   "r2a + data"
+  ],
+  "scripts/lib/table-pools.mjs": [
+   "powers + data"
+  ],
+  "tests/lint/.tuning-inventory.json": [
+   "powers + r2b",
+   "powers + defence",
+   "r2b + defence"
+  ],
+  "tests/lint/rawColorLiteral.test.js": [
+   "powers + r2b"
+  ],
+  "tests/lint/presumedThings.widened.register.json": [
+   "data + corpus"
+  ],
+  "scripts/.writer-reach-baseline.json": [
+   "leaves + r2b"
+  ],
+  "src/components/new/tabs/EconomicsTab.jsx": [
+   "leaves + r2b"
+  ],
+  "tests/lint/proseNumerics.test.js": [
+   "leaves + defence"
+  ],
+  "tests/lint/.prose-numerics-baseline.json": [
+   "r2b + defence"
+  ]
+ }
+}
