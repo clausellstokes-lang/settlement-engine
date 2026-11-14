@@ -2720,7 +2720,7 @@ SEATS2['VEIL-13'] = dict(
 
 SEATS2['JOIN-2'] = dict(
     title="JOIN-2 · the true join's first refreeze: every register through its door once on the joined tree, the whole check, every red classed",
-    branch='lane/join-2026-11-14', tip='__JOIN_TIP__', statement=False,
+    branch='lane/join-2026-11-14', tip='216eeb41', statement=False,
     intro=("You are JOIN-2, the second merge seat of THE TRUE JOIN of the settlement-engine integration program. Nine builder lanes cure false lines on the "
            "generated town pages; JOIN-1 merged all nine onto lane/join-2026-11-14 (started at the integration line's tip 976db5b19), resolved the code "
            "by hand, took every conflicted register from one side and LISTED it, and re-derived nothing. YOU ARE NOW THE ONLY WRITER OF THAT BRANCH. "
@@ -2739,7 +2739,7 @@ SEATS2['JOIN-2'] = dict(
           "origin/lane/join-rehearsal-2026-11-14:docs/chair/2026-11-14/JOIN-REHEARSAL-HANDBACK.md`): SECTION 3 (the doors the book does not give, "
           "found; the order that really ran; the pins it measured) and section 7 (hazards)."),
     first=("FIRST ACT. FULL HISTORY (`git fetch --depth=2147483647 origin lane/join-2026-11-14 lane/integration-2026-11-07` and the nine lanes; `git "
-           "rev-parse --is-shallow-repository` prints false). Read your branch's tip back from origin: it was __JOIN_TIP__ when this was written; a later "
+           "rev-parse --is-shallow-repository` prints false). Read your branch's tip back from origin: it was 216eeb41 when this was written; a later "
            "tip by JOIN-1 is not a stop: say so and start from it."),
     work=("THE WORK, in this order, pushed as made, every door through `sh scripts/gate-tail.sh`, never a pipe, its output to a file under "
           "docs/chair/2026-11-14/probes/JOIN/ (short ones) or outside the tree (long ones):\n"
