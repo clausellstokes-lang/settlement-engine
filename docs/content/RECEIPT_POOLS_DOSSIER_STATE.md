@@ -3297,9 +3297,9 @@ may not say the contract is failing unless the economic arm supplies that.
 **PDF PARITY:** parity.
 
 **walls PRESENT**
-1. `[visitor · gate]` There is a line around {settlement} and it is kept: the gates shut, the works are repaired, and a stranger enters where the town intends him to.
+1. `[visitor · gate · no crisis: under_siege]` There is a line around {settlement} and it is kept: the gates shut, the works are repaired, and a stranger enters where the town intends him to.
 2. `[ledger · gate · guardPresence · no crisis: under_siege]` {settlement} is walled, and every arrival goes through a gate and into the gate tally; trouble can only get in where the town decides.
-3. `[street · gate]` The town has a wall and arranges its day around the gates without noticing that it does.
+3. `[street · gate · no crisis: under_siege]` The town has a wall and arranges its day around the gates without noticing that it does.
 4. `[visitor · no gate · no crisis: under_siege]` {settlement} has a wall but no proper gate in it: people come and go by gaps everyone knows, and the wall slows trouble more than it stops it.
 5. `[street · no gate · no crisis: under_siege]` The wall around {settlement} turns back a wandering beast and slows a raid; nobody counts who comes in, because there is no gate to count them at.
 6. `[ledger · crisis: under_siege]` {settlement}'s wall is all that stands between the town and the siege, and every stretch of it is watched now.

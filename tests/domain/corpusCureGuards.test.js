@@ -139,6 +139,8 @@ const GUARDS = [
   { seed: 'w5-town-occupied-3', pool: 'DS-DEF-2::Economic Survival: STRONG', vid: 3, why: 'an occupation: "its defenders are still paid from it" of a defence the occupiers hold' },
   { seed: 'w5-city-occupied-101', pool: 'DS-DEF-2::Economic Survival: STRONG', vid: 12, why: 'an occupation: "its defenders are still paid on time" (v3\'s twin)' },
   { seed: 'w5-city-under_siege-103', pool: 'DS-DEF-2::Economic Survival: STRONG', vid: 9, why: 'a Struggling town: "paying it from money it had put by" off the two lowest prosperity rungs (the chair\'s ruling on BAR-0 #205)' },
+  { seed: 'w5-city-under_siege+famine-1', pool: 'DS-DEF-5::walls PRESENT', vid: 1, why: 'a siege: "a stranger enters where the town intends him to" (v2 v4 v5 v7\'s condition) (W2-WRITE-13, the class sweep: a twin takes its siblings\' condition)' },
+  { seed: 'rww-metropolis-under_siege-1', pool: 'DS-DEF-5::walls PRESENT', vid: 3, why: 'a siege: "arranges its day around the gates without noticing that it does" beside "gates are shut and barred" (W2-WRITE-13, the class sweep: a twin takes its siblings\' condition)' },
 ];
 
 /** @param {string} seed */

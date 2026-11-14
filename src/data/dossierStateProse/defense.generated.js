@@ -4350,7 +4350,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "visitor",
           "marks": [
-            "gate"
+            "gate",
+            "no crisis: under_siege"
           ],
           "text": "There is a line around {settlement} and it is kept: the gates shut, the works are repaired, and a stranger enters where the town intends him to.",
           "slots": [
@@ -4374,7 +4375,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "street",
           "marks": [
-            "gate"
+            "gate",
+            "no crisis: under_siege"
           ],
           "text": "The town has a wall and arranges its day around the gates without noticing that it does.",
           "slots": [],
