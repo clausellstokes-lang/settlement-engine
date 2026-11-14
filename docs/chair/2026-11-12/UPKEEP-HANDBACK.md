@@ -1,3 +1,68 @@
+# COHERENCE-UPKEEP: the hand-back (the ninth seat, UPKEEP-9, 2026-11-14) — IN PROGRESS: step 7 pushed (the capacity merge and its rows)
+
+**The lane:** `lane/coherence-upkeep-2026-11-12`. **Base of this seat:** 6b5a1c5a9 (the eighth seat's lighting census), read back from origin before any work; the capacity branch read back at 9354d792a FINAL. **The probes:** `docs/chair/2026-11-14/probes/UPKEEP-9/` (README there). **The births:** the eighth seat's 1,490 (`docs/chair/2026-11-13/probes/UPKEEP-8/seeds.all.txt`, its `cfgFor`), born whole by `birthgz.mjs`; and CENSUS-2's 720 (`lane/census-2-2026-11-13`'s `census2.sh`, run from a scratch copy). The eighth seat's part and every earlier one are kept below, unchanged.
+
+## The brief and the rulings this seat works to (the chair's messages are not on the branch)
+
+- **Who asks:** the chair is now the Claude Code session `session_01ACmDYZrFEVXyZEUg1NDxxC` (the program moved account on 2026-11-14 ~00:55 UTC; every earlier session, the old chair `session_01FE9mEws7PXYRYdjQPbSX15` and the eighth seat among them, is ended). The owner, in that chair's chat on 2026-11-14: "Continue with the pending work! ... I defer all decisions to you and give you all permissions you may require." The brief: `origin/lane/chair-2026-11-08:docs/chair/2026-11-14/briefs/BRIEF-UPKEEP-9.md`; BRIEF-UPKEEP-8 binds as written with its changes. Merging the pull request and the deploy stay the owner's. No commit at or below 6b5a1c5a9 is rewritten.
+- **The work, in order:** (1) step 7: the plain merge of the capacity branch, then #598 (RULED, record 422: the model may count a town hall as the least kind of court; the page names a court only where a courthouse stands on the roster), #1082's flag, viability.js's rows (the increment's line, round two B's rows), #869 (measure first what reads that band). (2) The rows routed after the eighth seat's brief and its LEFT list: (a) `foodGenerator.js :: generateFoodSecurity` strips the culture lines' declarations; (b) MEASURE ONLY the defence profile's two homes for arcane defence (58 of 720); (c) W5's figure at the tip. (3) One message to the chair and THE COUNT check. (4) Step 8 waits for point 49 (the chair names the integration line's tip).
+- **THE CHAIR'S RULINGS ON THE FOUR OPEN QUESTIONS (its message of 2026-11-14 01:30 UTC; each vetoable by the owner):** (1) **#608 STANDS AS BUILT**: the word alone only where figure and word stand two bands apart (the Output chip printed once is the owner's own T2-1 ruling). The statement gives the count of births where figure and word stand ONE band apart, and lists "the word alone everywhere" for the owner's veto as an open choice. (2) **THE INCOME LABELS**: the stored labels stay (no record moves). MEASURE ONLY the towns where "Apothecary & Alchemy" prints on a page with no alchemist's house on the roster; FOR THE JOIN (one display leaf for an income source's printed label, reading the roster). Build nothing. (3) `tonightSheet.js :: foodStoresWords` is round two B's file: sent there; not this lane's. (4) **C-L7, THE OTHER TWO BARS**: one home for a bar's colour is its own band. MEASURE FIRST the births where the military or the internal bar's colour class disagrees with the band printed beside it; if none, say so with the instrument; if any, the same cure as the economic bar, display only, its own commit, after step 7's rows.
+
+## What this seat did, in commit order
+
+| Commit | Step | Measure | Moved |
+|---|---|---|---|
+| c448bb3a0 | 7, THE MERGE of `lane/upkeep-capacity-2026-11-13` at 9354d792a (a plain merge; base 6e61d042a) | **Nothing conflicted.** One path on both sides since the base, `docs/content/wiring-census.json`, merged textually; package files byte-identical | the capacity branch's C0 to C6 (its cumulative move against 8ef42a051 on the 3,756: readiness in 2,939, 542 bands, 481 power structures re-drawn, 7 births gain or lose a power) |
+| c0b31f935 | the wiring census re-taken by its door (the textual merge was one producer file short: the capacity branch's new `houseScale.js`) | `--check` 1 -> 0 | producerIndexFiles 1,331 -> 1,332 |
+| 33acecd6d | the lighting census re-taken by its door (the capacity branch added two test files without a refreeze) | the walker red -> 34/34 | files 3,245 -> 3,247 |
+| 7515c2abb | 7, #1082: the gang flag reads the gang houses (`priorityHelpers.js :: getInstFlags`, the flag's own line) | the street-gang line with no gang house: 6 -> 0 on the 1,490 | DECLARED MOVE: the stored flag in 250 births; the gang row and its "(street gang)" services leave in 6 (the existing background-crime row and word-of-mouth fence take their place in 5) |
+| ef13e06cd | the lighting census (the #1082 test file) | 34/34 | files 3,247 -> 3,248 |
+| 06818b064 | 7, viability.js's rows (#576 #823 #824 #825, #ww-522, the hedge suggestion; and the magic row's denial) | the machinery rows on the 1,490: 4 births -> 0; "no arcane house" beside a Teleportation circle: 10 of 13 extreme-dial towns -> 0 | DECLARED MOVE: `economicViability` in 4 births of the 1,490 |
+| e8e6d98ac | the lighting census (the viability test file) | 34/34 | files 3,248 -> 3,249 |
+
+### #598, MEASURED: no line of this lane's prints a court off a town hall; the flag stands by ruling 422
+
+- At the merge (33acecd6d), on the 1,490: the court flag (`defenseFactsOf.hasCourt`, which takes a town hall) stands with no courthouse in 185 births; the safety profile's sentences name a court in **0** of them (48ad4da91's reading of `hasCourthouse` holds). The economy's Court Fees reads `hasCourthouse` too.
+- On CENSUS-2's 720 at the merge (`court598.mjs`): 76 towns hold the flag with no courthouse; 73 print a line naming a court, **none written by this lane**: the Defense tab's "Legal Infrastructure · Court only" / "Courts without detention. Fines and exile only." (62) and "Court + Prison" (14) (`defenseDisplay.js :: deriveSupportingCapabilities`, cured on lane/w2-c-leaves-side at 391b39db0, not on this lane); the defence desk's "…'s court passes sentences it cannot enforce", "Offenders at … are arrested, tried and held, and each case is written into the court's lists", "Bring a complaint at … and it goes to a court" (the corpus, `dossierStateProse/defense.generated.js`); the Overview's "The town keeps its own court and its own gaol." (the corpus, `general.generated.js`); the Services tab's town-hall row "Hears civil pleas in the town court" (18; `src/data/institutionServices.js`, "Dispute adjudication"); three figures of speech ("Commercial disputes resolved outside the courts", "tithes, land, and courts are all ecclesiastical", "(land, courts, levies)"). **FOR THE JOIN**, each with its writer above.
+- The flag itself is not changed: by ruling 422 the model may count a town hall as the least kind of court.
+
+### #869, A STOP BY THE BRIEF'S OWN RULE (measured; nothing built)
+
+- `causalState.js :: deriveTradeConnectivity` reads no siege at birth: on the 1,490 at the merge, of the 273 besieged births the trade-connectivity band reads **adequate 70, surplus 5**, strained 177, critical 18, collapsed 3 (`m7.mjs`). The siege reaches it only as a world-pulse condition (`applyConditions(... 'trade_connectivity', { effect: ['restored', 'cut'] })`).
+- **A SCORE READS IT**, so the brief's rule makes this a stop: `domain/worldPulse/demographicsRisk.js` (plague transmission, `scores.trade_connectivity / 100`), `domain/worldPulse/causeVocabulary.js` (the chain-starved cause, `bandLowGood(ctx.scores.trade_connectivity)`), `domain/worldPulse/npcLadderGoals.js` (the merchant's and the outsider's goals), the autonomy signals (`domain/autonomy/signalRegistry.js`, via the world snapshot's causal scores), `lib/structuralFingerprint.js`, `domain/regenerationDelta.js` (the ripple), and the display (`SubstrateTab.jsx`, `explanation.js`).
+- **Recommendation:** the siege is read at birth as the condition it already is (a cut), in the deriver, as a declared move of the causal state, measured on the world pulse's readers above; or the page alone reads the siege's truth beside the band (a second home: not recommended). The chair rules.
+
+### FOR THE JOIN (this seat's rows; the house-label leaf `institutionDisplayName.js :: institutionHouseLabel` is on lane r2-code-b)
+
+- **The stored siege / stockpile sentence** (`viability.js :: generateEconomicViability`, the trade-dependency branch: `critical.map((d) => institutionDisplayName(d.institution))`): catalogue ranges print ("Taverns (5-20)", "District markets (…)": the range as the catalogue writes it) in **82 births of the 1,490**. The cure is that leaf in that `.map` (records move: `economicViability.issues[].description` and the copy `historyGenerator.js` makes into `history.currentTensions[]`).
+- **The resource-chain suggestions** (`viability.js :: deriveResourceChainAnalysis`: `reachable…map(institutionDisplayName)` and `missing.map(institutionDisplayName)` in the descriptions, and the raw `missing.join(' and ')` in `suggestedFixes`): "Merchant guilds (3-8)" in **21 births of the 1,490** (counted in the records). The same leaf at the three call sites.
+- **#598's writers** (above): the corpus desk and the general pool, `defenseDisplay.js` (391b39db0 on the side lane), `institutionServices.js`'s town-hall row.
+
+## Calls taken (each vetoable)
+
+- **The merge's two registers re-taken by their doors in their own commits** (the wiring census, the lighting census), as the capacity branch did after its own merges.
+- **#1082 at the flag**, not at the line: the line already reads the gang houses for its wording (48ad4da91); the flag is the one place the false opening lives, and its only other reader (the merchant army) moves in no birth.
+- **viability.js: the priority notes leave** rather than being reworded (each repeated its row's description with the dial's figure). The magic row's house test reads the defence traditions' home (its casters and teleport circle) and keeps the alchemist, so the row says "no arcane house" only where none stands.
+- **The isolation note is left out** beside a town that is not viable or under a siege (silence, not a false sentence); the two dependency rows print on no tab, so their wording was only cleared of figures.
+
+## Incidents
+
+- My first probe read the safety profile at `s.safetyProfile` (it lives at `economicState.safetyProfile`) and reported 0 gang and court lines; corrected the same hour, re-run: 6 gang lines, 0 court sentences.
+- A shell-backgrounded births run (`&`) died with its shell; re-run as a tracked task.
+- **A CORRECTION, by name:** 06818b064's body gives "Merchant guilds (15-40)" as the chain suggestions' range; the 21 births print "Merchant guilds (3-8)" (counted in the records after the push). The count stands; the example was wrong. A pushed commit is not rewritten.
+- The first #1082 test used `test.each`, which parks the file in the lighting census (the each-family debt only shrinks); rewritten as plain loops before the push, red-first proved again (2 of 3 red with the old line).
+- CENSUS-2 at the merge (`c2-merge`) rendered from the merge's src; only its final writer-tracing step ran after this seat's first edit, so its writer attribution is not used: the court lines were traced by `git grep` above.
+- `npm ci` wrote `core.hooksPath=.husky/_` into the shared local config (twice: two worktrees): removed at once each time; the lane's pre-push hook is run per push by `git -c core.hooksPath=.husky/_ push …`. Local config compared after every push: unchanged.
+
+## LEFT (in order)
+
+- Step 7's governing suites at the merge (33acecd6d, tests/generators lint joins copy pdf domain) are running; every red to be classed against the eighth seat's list at 7403ee457.
+- The chair's 01:30 measures: #608 one band apart; "Apothecary & Alchemy" without an alchemist; C-L7's other two bars (a cure after step 7's rows if any disagree).
+- Step 2: (a) the culture lines' declarations (`foodGenerator.js`, through `drawDeclared.js :: filterDeclared`); (b) arcane's two homes, MEASURE ONLY; (c) W5's figure. And the eighth seat's LEFT: the grain line (#ww-339, #ww-1357), the coal lines under a siege, the safety lines' court off a town hall on the side lane's 720 (measured above: 0 of this lane's).
+- Step 8 on the chair's word (point 49).
+
+---
+
 # COHERENCE-UPKEEP: the hand-back (the eighth seat, UPKEEP-8, 2026-11-13) — STEPS 1 TO 6 DONE; the seat stops here for the chair (2026-11-14)
 
 **The lane:** `lane/coherence-upkeep-2026-11-12`. **Base of this seat:** 995293e81 (the seventh seat's hand-back), read back from origin before any work. **The probes:** `docs/chair/2026-11-13/probes/UPKEEP-8/`. **The births** (`births.mjs`): 1,490 in the app's own shape — the seventh seat's 1,440 (REVIEW-UPKEEP-2 `seeds.all.txt` + `fresh.seeds`, REVIEW-UPKEEP-3 `own.seeds`; `birthConfig({...DEFAULT_CONFIG, settType, selectedStresses, selectedStressesRandom:false})`), the round-three readers' twenty (`rr2s-*`, REVIEW-R2-STAGES `seeds20.txt`, + `_randomizePriorities:true` and the route select) and the increment's thirty (`rww-*`, ROUND-3-CUT/increment `seeds.ww.txt`, + `_randomizePriorities:true`); `seeds.all.txt` beside the probes. The seventh seat's part and every earlier one are kept below, unchanged.
