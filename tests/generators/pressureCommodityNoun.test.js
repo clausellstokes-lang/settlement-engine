@@ -24,6 +24,7 @@ describe("the reader's indebted port, born as the app births it", () => {
   it('Qal\'atqala (#601): the debt line names no first word of an export', () => {
     const s = /** @type {any} */ (generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, tradeRouteAccess: 'port', settType: 'town', selectedStressesRandom: false, selectedStresses: ['indebted'], _randomizePriorities: true }), null, { seed: 'rr2s-town-indebted-port-1', customContent: {} }));
     expect(s.economicState.primaryExports[0]).toBe('Recovered artefacts');
+    // anchored: the next line asserts the same sentence printed its debt clause
     expect(s.pressureSentence).not.toMatch(/\bthe recovered\b/);
     expect(s.pressureSentence).toMatch(/outpaces what the trade can bring in/);
   });
