@@ -411,9 +411,14 @@ The patch (apply on 87c541620 with `git apply docs/chair/2026-11-13/R2-CODE-B-3-
 | row 1 (d) the quick guide's food word onto foodBandOf | fc7514261 | stored label against foodBandOf on the 800: 634 agree, 166 disagree (Secure -> Pressured 160; Import-Dependent -> Deficit 6, under a siege) -> the composed "How it lives" line moves in 166 towns, 0 disagree after; a record with no food record keeps its label. SAID PLAINLY: on this tree no surface calls composeSettlementQuickGuide (the Overview reads only cultureScopeLine and governsLine), so no page moves today. Display-time: field diff 0 by construction. Red first 1/18 -> 18/18 |
 | register: the writer-reach dark register (a red new on the lane) | a1a9b79bb | tests/lint/writerReach.walker.test.js red at 083dabdd2 / c962f8c28, green at the base e969a75b7: `gapPct on foodRecord` LIT by the lane's d94638185 (foodBandOf). The row struck with cause; `check-writer-reach.mjs --write` (shrink-only: cohort 1363 -> 1363); both row-count pins 34 -> 33 with cause; 52/52 |
 | register: the lighting census | db10ddaef | titles 29325 -> 29326 (row 1d's title); verified 34/34 |
+| 0b the price line's twin ("the army has the carts and the road") left out where isolated and fed (the chair's ruling of 03:02) | ed308fdd8 | the road twin 29 towns, 2 isolated (r2s-wartime-thorp-1, -3, both fed) -> 27, isolated 0. The resolver reaches one twin only, so the line is left out in the renderer (item 0's form). DECLARED MOVE: 2 towns, 4 leaves, `stress.summary` / `stressors.summary` only; golden 525 identical. Red first 1/24 -> 24/24 |
+| register: the lighting census | 5f62d1087 | titles 29326 -> 29328 (item 0b's two titles); verified 34/34 |
 
 ## Stops and parked items (with recommendation)
-- NAMED, NOT CURED (not this row): the wartime price line's CENSUS-2d twin "The army has the carts and the road, and the fields are short of hands." prints in two isolated thorps (r2s-wartime-thorp-1, -thorp-3), where "the road" presumes a route. RECOMMENDATION: that twin takes `excludes: ['route: isolated']` with a sibling true of an isolated place, or the crisis lane's ruling.
+- (cured: the price line's twin "the road" in two isolated thorps, item 0b, on the chair's ruling of 03:02.)
+
+## FOR THE JOIN (this seat, kept current)
+- THE QUICK GUIDE'S COMPOSER PRINTS NOWHERE ON THIS TREE (the chair's ruling of 03:02, as found): no file under src/ or supabase/functions calls `composeSettlementQuickGuide` (its identity sentence, its three truths with row 1d's food word, its pressure, people and entry point); only tests read it. What does print the quick guide's lines: `src/components/new/overviewIdentity.js` imports `cultureScopeLine` (the culture scope line: the side seat's item 5) and `governsLine` (who governs), the Overview's identity strip. The composer's header still names Summary, Table View, Session Mode and the PDF; none of them calls it here.
 
 ## Rows NOT reached (line by line; kept current)
 1. (done: row 1 (a)-(d); the message to the chair with the tip follows this push.)
