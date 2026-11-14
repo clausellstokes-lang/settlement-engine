@@ -11,6 +11,13 @@
  * Before the cure, at the lane's base 714381934 (the census's 720 births, app shape): four minted faces carry the line —
  * r2r-metropolis-39 (the lord of Noble Houses), r2s-politically_fractured-city-1 (the bloc's speaker),
  * r2s-indebted-city-0 and r2s-succession_void-city-2 (the lord of The Peerage). Every expected word is a literal.
+ *
+ * RE-KEYED BY IDENTITY (POWERS-13): the line's merge (835cce92c) re-dealt r2s-succession_void-city-2's roster (The
+ * Peerage and The Landed Bloc are no longer minted there; its minted lords draw other secrets), so the town no longer
+ * carries the exposure. Its row is now r2r-metropolis-213 (the lord of Noble Houses), the first town of a scan of fresh
+ * seeds at 3909655c3 (r2r-city/metropolis-71..250, r2s-<crisis>-city/metropolis-10..19) whose minted face draws the
+ * payroll line in a town with no thieves' or criminal guild; the scan read exposure only. On the 720 at 3909655c3 the
+ * other three towns are the only such faces.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
 import { collectSeedFailures, expectNoSeedFailures } from '../../helpers/seedFailures.js';
@@ -65,7 +72,7 @@ describe('COHERENCE-POWERS-7 leftover 1 · the four minted faces of the census\'
     ['r2r-metropolis-39', 'the lord'],
     ['r2s-politically_fractured-city-1', "the bloc's speaker"],
     ['r2s-indebted-city-0', 'the lord'],
-    ['r2s-succession_void-city-2', 'the lord'],
+    ['r2r-metropolis-213', 'the lord'],
   ], ([seed, title]) => {
     const s = born(seed);
     expect(hasGuild(s)).toBe(false);
