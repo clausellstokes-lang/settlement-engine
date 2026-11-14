@@ -79,6 +79,8 @@ const GUARDS = [
   { seed: 'w5-city-insurgency-1', pool: 'DS-POW-5::council', vid: 1, why: 'a Royal Authority: "the whole {seat} must agree" of a seat that is one person (the increment\'s ww#796, pf#91)' },
   { seed: 'w5-city-occupied-4', pool: 'DS-POW-5::council', vid: 2, why: 'a Royal Authority: "the town\'s business goes to the whole {seat}" of one person (the increment\'s ww#42, a Feudal Stewardship)' },
   { seed: 'w5-metropolis-religious_conversion-1', pool: 'DS-POW-5::council', vid: 4, why: 'a Royal Authority: "its members cannot agree" of a seat that is one person' },
+  { seed: 'w5-hamlet-succession_void-101', pool: 'DS-POW-5::council', vid: 3, why: 'a succession void: "worries less about rivals" while the seat itself is in question (the increment\'s pf#220, pf#569)' },
+  { seed: 'w5-hamlet-politically_fractured-101', pool: 'DS-POW-5::council', vid: 3, why: 'a fractured town: "worries less about rivals" where a rival dominates or contests the seat (pf#220, pf#569)' },
 ];
 
 /** @param {string} seed */

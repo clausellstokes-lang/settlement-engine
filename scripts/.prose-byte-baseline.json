@@ -73,8 +73,8 @@
       "ceilingGzip": 177058
     },
     "src/data/dossierStateProse/power.generated.js": {
-      "raw": 129946,
-      "gzip": 18267,
+      "raw": 130016,
+      "gzip": 18283,
       "ceilingRaw": 357097,
       "ceilingGzip": 79355
     },
@@ -915,6 +915,14 @@
       "toRaw": 129946,
       "gzipAfter": 18267,
       "reason": "+189 B raw over the committed 129757 (gzip level 9: 18245 -> 18267): DS-POW-5 council v1, v2, v4 declared off a seat that is one person (no ruler: lord; the increment's ww#796, pf#91, ww#42)"
+    },
+    {
+      "car": "W2-WRITE-SIDE-REST-3",
+      "leaf": "src/data/dossierStateProse/power.generated.js",
+      "fromRaw": 129946,
+      "toRaw": 130016,
+      "gzipAfter": 18283,
+      "reason": "+70 B raw over the committed 129946 (gzip level 9: 18267 -> 18283): DS-POW-5 council v3 declared off a succession crisis (the increment's pf#220, pf#569)"
     }
   ],
   "ceilingTransfersNewLeaves": [

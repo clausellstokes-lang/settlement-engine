@@ -2081,6 +2081,9 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
+          "marks": [
+            "no crisis: succession"
+          ],
           "text": "The {seat} at {settlement} worries less about rivals than about the town turning on it.",
           "slots": [
             "seat",
