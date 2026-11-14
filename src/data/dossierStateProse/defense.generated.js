@@ -4826,6 +4826,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
+          "marks": [
+            "no crisis: under_siege"
+          ],
           "text": "Whatever reaches {settlement} by road reaches it at a gate, and the town can close them against it.",
           "slots": [
             "settlement"
