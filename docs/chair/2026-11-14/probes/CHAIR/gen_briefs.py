@@ -1648,6 +1648,50 @@ SEATS2['W2-C-LEAVES-9'] = dict(
 )
 
 
+SEATS2['R2-CODE-A-9'] = dict(
+    title="R2-CODE-A-9 · round two's first code lane's close, finished: the two-founders rise, the instrument's hits read, the final statement",
+    branch='lane/r2-code-a-2026-11-13', tip='da4b904f', statement=True,
+    intro=("You are R2-CODE-A-9, the ninth seat on round two's first code lane of the settlement-engine integration program (lane/r2-code-a-2026-11-13). The "
+           "lane cures false lines in the founding paragraph, the history's origin, the arrival scenes, the pressure sentences and the people data. ITS LIST "
+           "IS CLOSED AND THE INTEGRATION LINE IS MERGED INTO IT (16e5184bf): the eighth seat re-derived the registers and handed back inside the close with "
+           "ONE STOP measured and not cured: the page census RISES on this lane's own lines. Yours: that rise first, then the rest of the close and the "
+           "lane's ONE final statement. NO OTHER NEW CURE OF A PAGE LINE IS YOURS beyond what the checks ask."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. On your lane, docs/chair/2026-11-13/R2-CODE-A-HANDBACK.md, BY LINE RANGE, BY SCRIPT (the file is long; open only this): SECTION 17 WHOLE (from "
+          "the line \"## 17.\" to the end, about fifty-five long lines: the rulings in force; item 7's two cures; LEFT FOR AFTER THE JOIN; THE CLOSE step by "
+          "step; the eighteen fresh hits and the five rises, each with its gate; \"HANDED BACK\": LEFT, in order: THAT IS YOUR LIST; the instruments; THE "
+          "PAGE CENSUS's rise and its FIRST ACT).\n"
+          "3. The merge book's section 2m on origin/lane/merge-15-point-49-wip-2026-11-14 (docs/INTEGRATION_STYLE_2_2026-11-09.md, the section headed "
+          "\"## 2m.\": about forty lines; by script), before the first register you touch."),
+    work=("THE WORK, in this order, pushed as made:\n"
+          "1. THE RISE ON P7a, \"two founders\" (the page census of the 720 at 67d9acc59: banked 125, now 133: the Settlement Origin sentence names a "
+          "founder of another kind than the \"Founded by:\" line). A RISE ON A LANE'S OWN LINES IS CURED BEFORE THE LANE LANDS. As section 17's FIRST ACT "
+          "gives it: list the 133 against the banked 125 from the door's per-row towns; read the new eight's Origin and Founded-by lines; find which "
+          "founding row names the other founder (the fifth seat's founding cure, the merge's composition with the line's draw, or the line's own "
+          "founder kind); cure it at its cause, red first (a collected arm), read where it prints in three towns; re-run the door: P7a at or under 125; "
+          "then the shrink form for P7b's fall (27 -> 0) and any other fall, in the same register commit. If the cure needs a file another lane holds: "
+          "STOP to the chair with the eight towns and the cause.\n"
+          "2. THE EIGHTEEN FRESH PRESUMED-THINGS HITS READ WHERE THEY PRINT (section 17 lists each with its gate): three towns each, a crisis among them: "
+          "a line FALSE somewhere is cured now (class 4 of the ruling in the statement's form below); the rest stay RED AND NAMED under FOR THE "
+          "DECLARATION PASS (file, text, gate, atom). The five fact-layer rises likewise: named, both contents given.\n"
+          "3. THE LIGHTING CENSUS for the eighth seat's two new test files (and any of yours), by its ritual on the clean committed tree, as section 2m's "
+          "part (4) gives it; the tuning register's walker once.\n"
+          "4. THE LANE'S ONE FINAL STATEMENT in the form below, as section 17's LEFT item 4 lists its parts (the base is e969a75b7; the stage a reader "
+          "has not read begins at 0d3972d8f): the measuring command at the base and at your final tip; the 720-birth field diff by family; the whole suite "
+          "once in six shards classed against the line's failing set; ONE draft shift record (generationForkCensus A1 and worldFactRederive A7 named as "
+          "the merge seat's doors, with their measured figures); the declared re-deals and the new words of every seat gathered from the hand-back's "
+          "sections by script; FOR THE JOIN gathered whole from sections 13, 15, 16 and 17; FOR THE DECLARATION PASS; LEFT FOR AFTER THE JOIN (section "
+          "17's list: the rank not made, item 4's market read, the row beside a teleportation circle); the packet validator's exit; the edge bundles "
+          "last. Then ONE message to the chair: the tip, the suite's reds by class, where the statement is. A fresh reader then reads the lane from "
+          "0d3972d8f: leave it what it needs.\n"
+          "A HAZARD THE SIXTH SEAT MET: the presumed-things walker reads EVERY literal under src/: run tests/lint/presumedThings.walker.test.js at every "
+          "commit that adds, splits or rewords a literal."),
+    merges='',
+    when="for a stop that blocks everything you have left, when step 1 is pushed (one line: the cause, P7a's figure after), and with your final statement or hand-back",
+    turns='',
+)
+
+
 SEATS2['R2-CODE-A-8'] = dict(
     title="R2-CODE-A-8 · round two's first code lane's close: the widest rows left, its own reds, the line's merge, the final statement",
     branch='lane/r2-code-a-2026-11-13', tip='ae12d68d', statement=True,
