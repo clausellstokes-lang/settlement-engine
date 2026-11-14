@@ -1963,6 +1963,158 @@ R3STAGES_TOOLS = (
     "git archive and run them from outside every repository tree)."
 )
 
+R2STAGES_TOOLS = (
+    "`origin/lane/review-r2-stages-2026-11-13` (be53f933b: `git fetch origin lane/review-r2-stages-2026-11-13`): "
+    "docs/chair/2026-11-13/REVIEW-R2-STAGES-2026-11-13.md (the last read of this lane's earlier stage: its findings, each of which you check cured) and "
+    "its probes under docs/chair/2026-11-13/probes/REVIEW-R2-STAGES/ (births, renders, the cold merge); and, for reading every line by script in every "
+    "town it prints in, " + R3STAGES_TOOLS
+)
+
+# The entries below wait for their lanes' final statements: set 'tip', then generate.
+READERS['REVIEW-R3-CODE-C'] = dict(
+    title="REVIEW-R3-CODE-C · round three's code lane read from its last read to its final statement",
+    lane='lane/r3-code-c-2026-11-13', own='lane/review-r3-code-c-2026-11-14', base='fb8b24fb', tip=None,
+    what="round three's code lane: cures in domain, generator and display files of the false lines round three's readers found",
+    before="the tip the last reader read: NOT CLEAR there on one medium line of the stage, since given to the lane's seats: check it cured",
+    stmt='docs/chair/2026-11-13/R3-CODE-C-HANDBACK.md', tools=R3STAGES_TOOLS,
+    extra=("8. THREE ROWS WERE RE-KEYED BY HAND on this lane by the chair's ruling, by name (tests/lint/presumedThings.widened.register.json, reason "
+           "`after-base: r3-code-c`: crisisSummaryVantage.js's wartime and occupied lines; structuralValidator.js's plagued-threat reason), on four "
+           "conditions the statement copies: READ each of the three where it prints: true wherever its key or branch lets it print? Plant against its "
+           "guard test. And prove NOTHING ELSE was added to either presumed-things register by hand (every row the stage added against the door's own "
+           "output)."),
+)
+
+READERS['REVIEW-R2-CODE-B'] = dict(
+    title="REVIEW-R2-CODE-B · round two's second code lane read from its last read to its final statement",
+    lane='lane/r2-code-b-2026-11-13', own='lane/review-r2-code-b-2026-11-14', base='80b96017', tip=None,
+    what=("round two's second code lane: the Tonight sheet, the cast cards, the crisis cast and hooks, the NPCs, Relationships, Services and Daily Life tabs, "
+          "the chain card's facts, the quick guide, the traditions, the faith reading and the stress summaries"),
+    before="the tip the last reader read: NOT CLEAR there on one medium and one low finding: check each cured",
+    stmt='docs/chair/2026-11-13/R2-CODE-B-HANDBACK.md', tools=R2STAGES_TOOLS,
+    extra=("8. THE STAGE IS LARGE (some forty-seven commits touching src/, a side branch of the lane's own merged in among them): spread step 1 over helper "
+           "agents of your own, by file family, and check a sample of each; say at step 1's push how many lines you listed. The lane's statement names "
+           "eighteen literals and one reader's row that stay RED AND NAMED for a declaration pass after the join (lines gated in code, not declared "
+           "through a draw door): for EACH, read it where it prints: is it true wherever its gate lets it print? A false one is a finding of the stage."),
+)
+
+READERS['REVIEW-R2-CODE-A'] = dict(
+    title="REVIEW-R2-CODE-A · round two's first code lane read from its last read to its final statement",
+    lane='lane/r2-code-a-2026-11-13', own='lane/review-r2-code-a-2026-11-14', base='0d3972d8', tip=None,
+    what=("round two's first code lane: the founding paragraph, the history's origin, the arrival scenes, the pressure sentences and the people data"),
+    before=("the tip the last reader read: NOT CLEAR there on two medium lines (a plague note's \"still at sea\" in inland towns; a famine hook's "
+            "merchants with no market): check each cured"),
+    stmt='docs/chair/2026-11-13/R2-CODE-A-HANDBACK.md', tools=R3STAGES_TOOLS,
+    extra=("8. THE PAGE CENSUS ROSE on this lane's own lines at its merge of the line (\"two founders\": the origin sentence against the Founded-by line, "
+           "banked 125, then 133) and its last seat cured it: by your own run of `node scripts/census/page-census.mjs --workers=2` at the tip, is that row "
+           "at or under its banked figure, and does the cure hold on births the seat did not use? The statement names literals that stay RED AND NAMED "
+           "for a declaration pass: read each where it prints: true wherever its gate lets it print?"),
+)
+
+READERS['REVIEW-W2-C-LEAVES'] = dict(
+    title="REVIEW-W2-C-LEAVES · the third leaves lane read from its last read to its final statement",
+    lane='lane/w2-c-leaves-2026-11-13', own='lane/review-w2-c-leaves-2026-11-14', base='d79ea4c7', tip=None,
+    what=("the third leaves lane: the Economics tab's chain cards, goods pills and food sentences, the PDF's and the Foundry journal's trade lists, the "
+          "Defense tab's supporting rows"),
+    before="the tip the last reader read: NOT CLEAR there on two high, one medium and one low finding: check each cured",
+    stmt='docs/chair/2026-11-13/W2-C-LEAVES-HANDBACK.md', tools=R2STAGES_TOOLS,
+    extra=("8. THE STAGE IS LARGE (some forty commits touching src/, a side branch of the lane's own merged in among them): spread step 1 over helper "
+           "agents of your own, by surface (the tab, the PDF's text, the journal), and check a sample of each. THE LANE SAYS the PDF, the journal and the "
+           "tab print ONE trade list and ONE chain state (towns where a surface disagreed: 363, 115 and 640 of 720, then 0): prove or refute it on births "
+           "of your own, a siege and a famine among them. One commit of the stage (a2eaf6a6a) changed another lane's files and was REVERTED (bb2002626): "
+           "confirm the revert is whole."),
+)
+
+READERS['REVIEW-POWERS-4'] = dict(
+    title="REVIEW-POWERS-4 · the powers lane read as a diff from 96a6ced46 to its stage's statement",
+    lane='lane/powers-follow-up-2026-11-13', own='lane/review-powers-4-2026-11-14', base='96a6ced4', tip=None,
+    what=("the powers lane: who holds power in a town, the powers' standing and claims, titles and honorifics, people's goals, ties and secrets"),
+    before=("the tip the last reader read: NOT CLEAR there on four medium and seven low findings (M1, the commanding claims beside Minor or Suppressed, 122 "
+            "towns of 720; M4, eleven red test titles; the lows): the stage answers M1, M4, L2, L4, L5 and L7 and lists the rest: check each"),
+    stmt='docs/chair/2026-11-13/POWERS-FOLLOW-UP-HANDBACK-2.md',
+    tools=("`origin/lane/review-powers-fu-2026-11-13` (b42f752c5: `git fetch origin lane/review-powers-fu-2026-11-13`): "
+           "docs/chair/2026-11-13/REVIEW-POWERS-96a6ced46-2026-11-13.md (the last read: its findings and how each was measured), "
+           "REVIEW-POWERS-3-LINES-READ.md (its line list: the pattern for step 1) and its probes under docs/chair/2026-11-13/probes/REVIEW-POWERS-3/ "
+           "(rungcount.mjs among them: copy them out with git archive and run them from outside every repository tree)."),
+    extra=("8. THE RE-DEAL OF GOALS AND TIES BY THE MINT IS ACCEPTED AS DECLARED: say its counts by your own field diff and that nothing outside the "
+           "declared families moved. THE WRITER-REACH DOOR refused sixteen new dark identities on this lane and the lane did NOT re-bank them (the merge "
+           "seat's act at the join): for each of the sixteen, is its writer NEW code of this stage (a finding) or an existing writer whose draw the "
+           "re-deal moved?"),
+)
+
+READERS['REVIEW-UPKEEP-4'] = dict(
+    title="REVIEW-UPKEEP-4 · the defence lane's own commits read from its last read to its final statement",
+    lane='lane/coherence-upkeep-2026-11-12', own='lane/review-upkeep-4-2026-11-14', base='0a07f98c', tip=None,
+    what=("the defence lane: the derived defence rating, the money a town can spend on it, and the safety, economy and outlook lines that speak of them"),
+    before=("the tip the last reader read: its findings are in its file: check each cured. THIS READ IS OF THE LANE'S OWN COMMITS ONLY: the capacity "
+            "branch the lane merged at c448bb3a0 (a house counts by its size) is ANOTHER READER'S stage: leave its commits out of step 1"),
+    stmt='docs/chair/2026-11-12/UPKEEP-HANDBACK.md',
+    tools=("`origin/lane/review-upkeep-2026-11-13` (1e7ba20a1: `git fetch origin lane/review-upkeep-2026-11-13`): "
+           "docs/chair/2026-11-13/REVIEW-UPKEEP-0a07f98c7-2026-11-13.md (the last read) and the reader's own instrument under "
+           "docs/chair/2026-11-13/probes/REVIEW-UPKEEP-3/ and REVIEW-UPKEEP-2/ (render4.mjs, scan4.mjs, classes3.py: the classes A to K; its 1,200 births "
+           "`rv2-<crisis>-<size>-<i>` and 210 fresh): copy them out with git archive and run them from outside every repository tree."),
+    extra=("8. THE RATING: every move of the rating the stage declares (the statement gathers them), by your own field diff over the reader's 1,200 "
+           "births: only the declared families move, and no rating falls where the stage says it only rises. TWO MEASURED PINS were re-keyed at the "
+           "lane's merge of the line (the fork census's outside hash calls: 24; the institution table's service rows: 1,837): measure both yourself. The "
+           "statement names literals that stay RED AND NAMED for a declaration pass, measured by the lane on 1,490 births with none false: draw thirty "
+           "of those prints on births of your own and read them."),
+)
+
+READERS['REVIEW-UPKEEP-CAPACITY'] = dict(
+    title="REVIEW-UPKEEP-CAPACITY · a house's size in defence: the capacity branch read as its own stage",
+    lane='lane/upkeep-capacity-2026-11-13', own='lane/review-upkeep-capacity-2026-11-14', base='8ef42a05', tip='9354d792',
+    what=("the capacity branch of the defence lane: a house counts in defence by its size (a barracks for less than a garrison, a village watch for less "
+          "than a city's; an alchemist is a tradesman, not a hired spell-caster), by the owner's own request"),
+    before="where the branch began, a merge of the defence lane's tip: no reader has read this branch",
+    stmt='docs/chair/2026-11-13/UPKEEP-CAPACITY-MEASURE.md (with UPKEEP-CAPACITY-EIGHT-TOWNS.md beside it, the owner\'s eight example towns)',
+    tools=("`origin/lane/review-upkeep-2026-11-13` (1e7ba20a1: `git fetch origin lane/review-upkeep-2026-11-13`): the defence lane's reader's instrument "
+           "under docs/chair/2026-11-13/probes/REVIEW-UPKEEP-3/ and REVIEW-UPKEEP-2/ (render4.mjs, scan4.mjs, classes3.py; its 1,200 births and 210 "
+           "fresh): copy them out with git archive and run them from outside every repository tree."),
+    extra=("8. THE BRANCH MERGED THE DEFENCE LANE'S TIP INTO ITSELF inside this range (and the integration line never): those merged commits are "
+           "ANOTHER READER's: read only the branch's own (`git log --first-parent --no-merges 8ef42a05..9354d792`). YOUR FIRST ACTS AFTER STEP 1: (a) THE WALKER CHANGE 1dac1ca25 (a walker's negative arm that had lost its evidence now reports its candidate "
+           "UNTESTED BY NAME on a pinned shrink-only list): is any guard LOOSENED by it? Plant against it. (b) THE MONOTONICITY CLAIMS: a larger house "
+           "never counts for less than a smaller one of its kind; adding a house never lowers a score it feeds: prove or refute each on births of your "
+           "own, by adding and enlarging houses one at a time. (c) THE CUMULATIVE MOVE the branch declares against 8ef42a051 on 3,756 births (readiness "
+           "moves in 2,939; 542 bands; 481 power structures re-drawn; 7 births gain or lose a power): by your own field diff. (d) THE EIGHT TOWNS file: "
+           "each town's before and after by your own births: is every figure and every \"why\" true? It is written for the owner."),
+)
+
+READERS['REVIEW-W2-FIX-DATA-3'] = dict(
+    title="REVIEW-W2-FIX-DATA-3 · the data lane read as a diff from 4114cf5a6 to its final statement",
+    lane='lane/w2-fix-data-2026-11-13', own='lane/review-w2-fix-data-3-2026-11-14', base='4114cf5a', tip=None,
+    what=("the data lane: false lines written in the data tables (a house's description, a service's text, a history line), with its history branch merged in"),
+    before="the tip the last reader read: its findings are in its file: check each cured",
+    stmt='docs/chair/2026-11-14/W2-FIX-DATA-HANDBACK-9.md and the lane\'s statement file beside it',
+    tools=("`origin/lane/review-w2-fix-data-2026-11-13` (9f31fd20d: `git fetch origin lane/review-w2-fix-data-2026-11-13`): "
+           "docs/chair/2026-11-13/REVIEW-W2-FIX-DATA-4114cf5a6-2026-11-13.md (the last read) and its probes under "
+           "docs/chair/2026-11-13/probes/REVIEW-W2-FIX-DATA-2/ and REVIEW-W2-FIX-DATA/: copy them out with git archive and run them from outside every "
+           "repository tree."),
+    extra=("8. A DATA ROW PRINTS ON MANY SURFACES (a house's card, the Services tab, the PDF, the journal): for each reworded row, every surface. The "
+           "lane's history branch (lane/w2-fix-data-history-2026-11-13, merged at 38c93321d) is part of the stage. THE POOL GUARD's three red titles are "
+           "carried red and named (two ceilings exceeded): say by your own run that no ceiling was raised and no row re-based. The statement names 48 "
+           "literals RED AND NAMED for a declaration pass (most a house's own description naming that house): draw thirty of their prints and read them."),
+)
+
+READERS['REVIEW-W2-WRITE-2'] = dict(
+    title="REVIEW-W2-WRITE-2 · the corpus lane's new and reworded lines read whole, from the last read to its final statement",
+    lane='lane/w2-write-2026-11-13', own='lane/review-w2-write-2-2026-11-14', base='b5206acd', tip=None,
+    what=("the corpus lane: the dossier's written lines (one source document, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md, from which "
+          "src/data/dossierStateProse/*.generated.js are generated), three branches by block merged into one"),
+    before=("the tip the last reader read: NOT CLEAR there: 59 of the lane's 151 new or reworded lines were FALSE where they print. Every line the lane "
+            "has written or reworded since is yours, and each of the 59 is checked: cured and true, cured by silence, or still false"),
+    stmt='docs/chair/2026-11-13/W2-WRITE-HANDBACK-8.md and the lane\'s statement beside it (its list of new and changed lines with their towns)',
+    tools=("`origin/lane/review-w2-write-2026-11-13` (f07529c3e: `git fetch origin lane/review-w2-write-2026-11-13`): "
+           "docs/chair/2026-11-13/REVIEW-W2-WRITE-b5206acd3-2026-11-13.md (the last read: its 59 false lines, each with its towns) and its probes under "
+           "docs/chair/2026-11-13/probes/REVIEW-W2-WRITE/ (its renders of the owner's page and its eligibility counts per pool): copy them out with git "
+           "archive and run them from outside every repository tree."),
+    extra=("8. THE CORPUS'S OWN LAWS: a middle row of a pool is never struck (the kernel pins ids to rows): prove no id moved (every pool's ids and draws "
+           "at the tip against the base, for pools the stage did not mean to re-deal); every disqualifier cure has its guard row in "
+           "tests/domain/corpusCureGuards.test.js: plant against a sample of thirty; a line is read ON THE OWNER'S PAGE, where a slot is filled: a slot "
+           "that prints a catalogue label or breaks agreement is a finding. THE STAGE IS LARGE: spread step 1 over helper agents of your own, by block "
+           "(DS-DEF, DS-ECO, the rest), and check a sample of each. The lane merged three branches: prove each block's lines at the tip equal the branch "
+           "that held the block."),
+)
+
+
 # Filled when the lane is final: set 'tip' to the lane's final tip as read from origin, then generate.
 READERS['REVIEW-R3-TABS'] = dict(
     title="REVIEW-R3-TABS · round three's tabs lane read whole, from its base to its final statement",
