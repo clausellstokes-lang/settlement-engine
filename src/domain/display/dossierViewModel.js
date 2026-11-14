@@ -801,7 +801,7 @@ function outlookFactsOf(settlement) {
   /** @type {string[]} */
   const recorded = Array.isArray(eco.primaryImports) ? eco.primaryImports.map(String) : [];
   const imports = lower(displayTradeList([...recorded, ...terrain.filter((t) => !recorded.some((imp) => imp.toLowerCase().includes(t)))],
-    settlement, { side: 'imports', exports: Array.isArray(eco.primaryExports) ? eco.primaryExports : [] }));
+    settlement, { side: 'imports', exports: Array.isArray(eco.primaryExports) ? [...eco.primaryExports] : [] })); // a copy read (tradeListWriters)
   return {
     keepsOrder: law !== 'critical' && law !== 'collapsed',
     paysItsWay: !['Subsistence', ...PROSPERITY_LABELS.slice(0, PROSPERITY_LABELS.indexOf('Poor') + 1)].includes(String(eco.prosperity ?? '')),
