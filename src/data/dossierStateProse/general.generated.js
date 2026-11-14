@@ -9498,7 +9498,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "crisis: any"
+            "crisis: any",
+            "no crisis: under_siege"
           ],
           "text": "{settlement}'s market handles more than the town could ever use; the difference is the town's living.",
           "slots": [
@@ -9608,7 +9609,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "visitor",
           "marks": [
-            "colour"
+            "no crisis: under_siege"
           ],
           "text": "A traveller passing through {settlement} can change coin, borrow or settle a debt at the town's bank without carrying the silver home.",
           "slots": [
@@ -9654,7 +9655,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "visitor",
           "marks": [
-            "colour"
+            "no crisis: under_siege"
           ],
           "text": "A merchant who wants to sell at {settlement} goes first to its merchant guild to learn where, when and for what fee.",
           "slots": [
@@ -9665,7 +9666,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "colour"
+            "no crisis: under_siege"
           ],
           "text": "{settlement}'s merchant guild sets the terms of trade and its members carry the town's dealings outward.",
           "slots": [
@@ -9687,7 +9688,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "threshold",
           "marks": [
-            "colour"
+            "no crisis: under_siege"
           ],
           "text": "An outside trader at {settlement} either accepts its merchant guild's terms or sells to the guild's members at their price.",
           "slots": [
@@ -9733,7 +9734,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "threshold",
           "marks": [
-            "colour"
+            "no crisis: under_siege"
           ],
           "text": "A newcomer with a trade at {settlement} must be taken on by its guild before they can work here.",
           "slots": [
@@ -9792,7 +9793,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "visitor",
           "marks": [
-            "colour"
+            "no crisis: under_siege"
           ],
           "text": "Goods wait in {settlement}'s warehouses between the road and the buyer until the price is right.",
           "slots": [
@@ -9814,7 +9815,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "street",
           "marks": [
-            "colour"
+            "no crisis: under_siege"
           ],
           "text": "{settlement}'s warehouses fill after the harvest and empty through the year as the town trades out of them.",
           "slots": [
@@ -9825,7 +9826,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "threshold",
           "marks": [
-            "colour"
+            "no crisis: under_siege"
           ],
           "text": "A trader at {settlement} can rent warehouse space and leave goods there between journeys.",
           "slots": [

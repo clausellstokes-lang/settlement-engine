@@ -63,6 +63,15 @@ const GUARDS = [
   { seed: 'w5-city-occupied-101', pool: 'DS-GEN-17::GARRISONED', vid: 2, why: 'an occupation: "the money is found every season" beside "The occupiers take the revenue" (W2-WRITE-SIDE-REST C)' },
   { seed: 'w5-city-occupied-101', pool: 'DS-POW-5::FLAG: merchantArmy', vid: 1, why: 'an occupation: "a private army that keeps order ... the guards usually win" beside "Keeping order in X is the occupiers\' business now" (W2-WRITE-SIDE-REST-2 D, round three #1075)' },
   { seed: 'w5-city-occupied-101', pool: 'DS-POW-5::FLAG: merchantArmy', vid: 2, why: 'an occupation: "Order at X is kept by a private army of hired swords" where the occupiers keep it (round three #1075, HIGH)' },
+  { seed: 'w5-hamlet-under_siege-102', pool: 'DS-GEN-13::ENTREPOT', vid: 1, why: 'a siege: "X\'s market handles more than the hamlet could ever use" of a market the siege has cut off (W2-WRITE-SIDE-REST-2 D, the siege Overview\'s road lines)' },
+  { seed: 'rww-city-under_siege-1', pool: 'DS-GEN-13::COMMERCE: a bank', vid: 1, why: 'a siege: "A traveller passing through X can change coin" where nobody passes through (the increment\'s ww#600; the fifth seat\'s found line)' },
+  { seed: 'w5-city-under_siege+famine-102', pool: 'DS-GEN-13::COMMERCE: a merchant guild, no bank', vid: 1, why: 'a siege: "A merchant who wants to sell at X goes first to its merchant guild" where no merchant comes in' },
+  { seed: 'w5-city-under_siege+famine-102', pool: 'DS-GEN-13::COMMERCE: a merchant guild, no bank', vid: 2, why: 'a siege: "its members carry the town\'s dealings outward" where nothing goes out (round three #492)' },
+  { seed: 'w5-city-under_siege+famine-102', pool: 'DS-GEN-13::COMMERCE: a merchant guild, no bank', vid: 4, why: 'a siege: "An outside trader at X either accepts its merchant guild\'s terms" where no outside trader arrives (round three #861)' },
+  { seed: 'w5-city-under_siege-4', pool: 'DS-GEN-13::COMMERCE: craft guilds, no merchant guild', vid: 4, why: 'a siege: "A newcomer with a trade at X must be taken on by its guild" where nobody new arrives (round two #212)' },
+  { seed: 'w5-city-under_siege-1', pool: 'DS-GEN-13::WAREHOUSES', vid: 1, why: 'a siege: "Goods wait in X\'s warehouses between the road and the buyer" of a road the siege has closed' },
+  { seed: 'w5-city-under_siege+famine-102', pool: 'DS-GEN-13::WAREHOUSES', vid: 3, why: 'a siege: "fill after the harvest and empty ... as the town trades out of them" (the increment\'s ww#1071, HIGH)' },
+  { seed: 'rww-city-under_siege-1', pool: 'DS-GEN-13::WAREHOUSES', vid: 4, why: 'a siege: "leave goods there between journeys" where nobody journeys (the fifth seat\'s found line)' },
 ];
 
 /** @param {string} seed */

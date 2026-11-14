@@ -6908,7 +6908,7 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 3. `[counterforce]` No great road feeds {settlement}'s market; it serves the town itself, no more.
 
 **`ENTREPOT`** {crisis-scoped · market}
-1. `[ledger · crisis: any]` {settlement}'s market handles more than the town could ever use; the difference is the town's living.
+1. `[ledger · crisis: any · no crisis: under_siege]` {settlement}'s market handles more than the town could ever use; the difference is the town's living.
 2. `[visitor · no crisis: under_siege · crisis: any]` Half the goods traded in {settlement} are only passing through, and the town lives off their passing.
 3. `[street · no crisis: under_siege · crisis: any]` In {settlement} the {good} on the stalls has usually seen more of the world than the people selling it.
 
@@ -6921,22 +6921,22 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 6. `[visitor · crisis: under_siege]` There is no market at {settlement} to find, and with the siege across the road, nobody comes in to sell.
 
 **`COMMERCE: a bank`** *(the commercial houses on the live roster, `compound.inst`: `hasBank`)*
-1. `[visitor · colour]` A traveller passing through {settlement} can change coin, borrow or settle a debt at the town's bank without carrying the silver home.
+1. `[visitor · no crisis: under_siege]` A traveller passing through {settlement} can change coin, borrow or settle a debt at the town's bank without carrying the silver home.
 2. `[ledger · colour]` {settlement}'s larger dealings, from cargoes to building work, are paid for through its bank.
 3. `[street · colour]` Townsfolk at {settlement} keep their savings at the bank and go there when they need to borrow.
 4. `[threshold · colour]` A trader wanting credit at {settlement} must satisfy the bank about who they are before it lends.
 
 **`COMMERCE: a merchant guild, no bank`** *(`hasMerchantGuild`, not `hasBank`)*
-1. `[visitor · colour]` A merchant who wants to sell at {settlement} goes first to its merchant guild to learn where, when and for what fee.
-2. `[ledger · colour]` {settlement}'s merchant guild sets the terms of trade and its members carry the town's dealings outward.
+1. `[visitor · no crisis: under_siege]` A merchant who wants to sell at {settlement} goes first to its merchant guild to learn where, when and for what fee.
+2. `[ledger · no crisis: under_siege]` {settlement}'s merchant guild sets the terms of trade and its members carry the town's dealings outward.
 3. `[street · colour]` Members of {settlement}'s merchant guild do most of the buying and selling that matters.
-4. `[threshold · colour]` An outside trader at {settlement} either accepts its merchant guild's terms or sells to the guild's members at their price.
+4. `[threshold · no crisis: under_siege]` An outside trader at {settlement} either accepts its merchant guild's terms or sells to the guild's members at their price.
 
 **`COMMERCE: craft guilds, no merchant guild`** *(`hasGuild`, neither `hasMerchantGuild` nor `hasBank`)*
 1. `[visitor · colour]` A buyer at {settlement} deals with each craft guild on its own, with no merchant guild above them.
 2. `[ledger · colour]` Each craft at {settlement} keeps a guild of its own that sets the rules for its work.
 3. `[street · colour]` Craftspeople at {settlement} answer to their guilds and the guilds settle their quarrels among themselves.
-4. `[threshold · colour]` A newcomer with a trade at {settlement} must be taken on by its guild before they can work here.
+4. `[threshold · no crisis: under_siege]` A newcomer with a trade at {settlement} must be taken on by its guild before they can work here.
 
 **`COMMERCE: a market, no guild`** *(`hasMarket`, none of the other three)*
 1. `[visitor · colour]` Anyone with goods and the stall fee can sell at {settlement}'s market without a guild's leave.
@@ -6945,10 +6945,10 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 4. `[threshold · no crisis: under_siege]` A stranger can set up and sell at {settlement} on the next market day with nobody's leave but the stall-keeper's.
 
 **`WAREHOUSES`** *(`hasWarehouse`, R-W3: one clause, only when true)*
-1. `[visitor · colour]` Goods wait in {settlement}'s warehouses between the road and the buyer until the price is right.
+1. `[visitor · no crisis: under_siege]` Goods wait in {settlement}'s warehouses between the road and the buyer until the price is right.
 2. `[ledger · colour]` A merchant at {settlement} can store a cargo in the town's warehouses and sell it when the price suits.
-3. `[street · colour]` {settlement}'s warehouses fill after the harvest and empty through the year as the town trades out of them.
-4. `[threshold · colour]` A trader at {settlement} can rent warehouse space and leave goods there between journeys.
+3. `[street · no crisis: under_siege]` {settlement}'s warehouses fill after the harvest and empty through the year as the town trades out of them.
+4. `[threshold · no crisis: under_siege]` A trader at {settlement} can rent warehouse space and leave goods there between journeys.
 ---
 
 ### DS-GEN-14 · History › Founded once, grown since (the first cause, and the accretion over it) · `history.founding` presence × `history.age` banded

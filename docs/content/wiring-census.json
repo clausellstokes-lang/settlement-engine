@@ -30071,7 +30071,7 @@
       ],
       "lineDeclares": {
         "crisis: any": 3,
-        "no crisis: under_siege": 2
+        "no crisis: under_siege": 3
       },
       "undeclared": 0,
       "crisisScoped": true
@@ -30223,7 +30223,8 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 4
+        "colour": 3,
+        "no crisis: under_siege": 1
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -30313,7 +30314,8 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 4
+        "colour": 1,
+        "no crisis: under_siege": 3
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -30398,7 +30400,8 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 4
+        "colour": 3,
+        "no crisis: under_siege": 1
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -30550,7 +30553,8 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 4
+        "colour": 1,
+        "no crisis: under_siege": 3
       },
       "undeclared": 0,
       "crisisScoped": false
