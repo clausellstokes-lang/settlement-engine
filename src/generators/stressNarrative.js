@@ -220,10 +220,17 @@ const RENDERERS = {
   // at `prosperity: ≥ moderate` (the vocabulary's band, read by `atomHolds` at this print site); refused,
   // the pick resolves to the next row, the loss text (no line added, the coin's draw unchanged). The loss
   // text stands as it always did; an unread record keeps the coin's text.
+  // R2-CODE-B-5 (the chair's ruling, routed from round three's code lane: "merchants with the right friends are getting rich"
+  // in small places with no merchant, and "army contracts pay" in an isolated one): the profit text names merchants, so it
+  // needs a market or a merchant house on the live roster (`market`, facts/market.js: a house the catalogue tags 'market',
+  // or 'guild' and 'trade'); and an isolated place (`route: isolated`) is not said to do well on army contracts. Refused, the
+  // pick resolves as before to the loss text (no line added, the coin's draw unchanged).
   wartime: (name, roll, facts) => {
     const s = name || "the settlement";
     const [profit, loss] = WARTIME_VARIANTS(s);
-    const refused = facts ? atomHolds('prosperity: ≥ moderate', facts) === false : false;
+    const refused = facts
+      ? atomHolds('prosperity: ≥ moderate', facts) === false || atomHolds('market', facts) === false || atomHolds('route: isolated', facts) === true
+      : false;
     return roll?.profit && !refused ? profit.text : loss.text;
   },
 

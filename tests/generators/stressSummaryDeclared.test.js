@@ -10,12 +10,21 @@ import { renderStressSummary } from '../../src/generators/stressNarrative.js';
 import { factsOf } from '../../src/domain/facts/factsOf.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 
-const rec = (prosperity, foodSources) => ({ tier: 'city', economicState: { prosperity, foodSecurity: { foodRecord: { foodSources, band: 'famine' } } } });
+const rec = (prosperity, foodSources, extra = {}) => ({ tier: 'city', economicState: { prosperity, foodSecurity: { foodRecord: { foodSources, band: 'famine' } } }, ...extra });
+// R2-CODE-B-5: the profit text names merchants, so a town that may do well out of the war keeps a market on its roster.
+const MARKET = { institutions: [{ name: 'Weekly market' }] };
 
 describe('the famine and wartime summaries read the record', () => {
   test('a poor town at war is not doing well out of it; a prosperous one may be', () => {
     expect(renderStressSummary('wartime', 'Lundsund', { profit: true }, undefined, factsOf(rec('Poor', ['grain'])))).toMatch(/^Lundsund is in a kingdom fighting a war it may not win\./);
-    expect(renderStressSummary('wartime', 'Lundsund', { profit: true }, undefined, factsOf(rec('Prosperous', ['grain'])))).toMatch(/doing well out of it/);
+    expect(renderStressSummary('wartime', 'Lundsund', { profit: true }, undefined, factsOf(rec('Prosperous', ['grain'], MARKET)))).toMatch(/doing well out of it/); // RE-KEYED BY IDENTITY (R2-CODE-B-5): the prosperous town keeps a market, the profit text's new need
+  });
+  test('R2-CODE-B-5: no merchants getting rich where no market or merchant house stands, and no army contracts in an isolated place', () => {
+    const loss = /^Muulcoba is in a kingdom fighting a war it may not win\./;
+    expect(renderStressSummary('wartime', 'Muulcoba', { profit: true }, undefined, factsOf(rec('Comfortable', ['grain'])))).toMatch(loss);
+    expect(renderStressSummary('wartime', 'Muulcoba', { profit: true }, undefined, factsOf(rec('Comfortable', ['grain'], { ...MARKET, tradeRouteAccess: 'isolated' })))).toMatch(loss);
+    // the guard town: a comfortable market town on a road keeps the coin's profit text
+    expect(renderStressSummary('wartime', 'Muulcoba', { profit: true }, undefined, factsOf(rec('Comfortable', ['grain'], { ...MARKET, tradeRouteAccess: 'road' })))).toMatch(/^Muulcoba is in a kingdom at war and doing well out of it/);
   });
   test('a town that grows no grain has not lost a harvest; a grain town has', () => {
     expect(renderStressSummary('famine', 'Cobapan', null, undefined, factsOf(rec('Poor', ['fish'])))).toMatch(/^Cobapan has gone short of food for a second season\./);
