@@ -256,3 +256,44 @@ M1, M2, M5 and M7, with a guard row each; and with the rule in §2 that a re-gat
   tip.
 - **Scratch worktrees,** all detached at 70e5e7468, b5206acd3 and 976db5b19: `undo` and `plant` (each plant restored with
   `git checkout`), outside the repository tree. They are not committed.
+
+## HAND BACK (the count read 502,174 at 13:02 UTC, past the 400,000 mark)
+**Done.** Steps 1–8 and the verdict are complete:
+- e5b2deaae: step 1, the cold list.
+- 7eedabb18: steps 2–8 and the verdict.
+
+Nothing is running. Every scratch worktree is outside the repository and uncommitted.
+
+**What is left, line by line** (none of it changes the verdict):
+1. **The whole suite in six shards**, `--shard=<i>/6`, each to its own file, every red file classed at the base. The
+   governing 32 files are already classed (§6).
+2. **The page census door's full 720 run**, `node scripts/census/page-census.mjs --workers=3` at the tip. Only its grid
+   was read, through its walker test.
+3. **A re-read by hand of the readers' MED lines** I did not check myself (§"What I did not measure"). Each has its
+   town, sentence and fact in `probes/REVIEW-W2-WRITE-2/lines-read.json` and `readers/out-*.json`.
+4. **The side branches' own hand-backs** (W2-WRITE-SIDE-ECO-HANDBACK, W2-WRITE-SIDE-REST-HANDBACK): their cure rows read
+   against `lines-read.json`.
+
+**How the instruments are re-made.** Every script is under `probes/REVIEW-W2-WRITE-2/`. Extract it with
+`git archive origin/lane/review-w2-write-2-2026-11-14 docs/chair/2026-11-14/probes/REVIEW-W2-WRITE-2 | tar -x -C <scratch>`,
+then:
+- **Trees.** Make detached worktrees at 70e5e7468 (tip), b5206acd3 (base) and 976db5b19 (int). Run `npm ci` in tip, then
+  `git config --local --unset core.hookspath` in the main clone. Link node_modules into the others; the lockfile is the
+  same.
+- **The tip with the base's corpus (`undo`):** a worktree at 70e5e7468 with the six
+  `src/data/dossierStateProse/*.generated.js` files written from `git show b5206acd3:<path>`.
+- **The render:** `sh render.sh <tree> <out> <seedsfile> 4`, with seeds from `seedsfresh.txt`, `seedsprev.txt`,
+  `seedshunt.txt` and the census's `seeds.txt` from lane/second-wave-census-2026-11-12.
+- **The other surfaces:** `node pdftext.mjs <tree> <out>/records <out>/pdf <out>/pp` writes the PDF and stored-prose
+  text.
+- **Where each line prints:** `node drawn.mjs <tree> <records> <out.json>` reads the kernel's draw ledger. Run it with the
+  tip and with `undo` to get own or carried.
+- **The line list:** `node attach.mjs items.json drawn.json <renderRoot> lines.json`, then
+  `node linesread.mjs <work> <readersDir> <md> <json>`.
+- **Lines that never print:** `node hunt.mjs <tree> <seedsfile> "<ids>" <out.json>`, by the ledger alone.
+- **Removals:** `node removals.mjs removals.json <undo pdf> <tip pdf> drawn-tip.json mounts.txt <outDir>`.
+- **Guard plants:** in a scratch worktree, `node plant.mjs <tree> <file> <block> <pool> <vid> <mark>`, run the guard file,
+  then `git checkout -- src/data/dossierStateProse/`.
+- **The laws:** `idlaw.mjs` (ids and rows), `fielddiff.mjs` (the census births, `births.mjs`, at int and tip) and
+  `twins.mjs`.
+- **The readers' briefs:** `LINES-READER-BRIEF.md` and `REMOVALS-READER-BRIEF.md`.
