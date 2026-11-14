@@ -1013,6 +1013,12 @@ fresh 180 and the readers' 50 (probes/W2-C-LEAVES-4/birthsR.mjs). EXECUTED = run
   conflict outside this list means the base is wrong or the lane moved: look before resolving. FOR THE JOIN, measured:
   this lane and round two B both change EconomicsTab.jsx and src/pdf/sections/EconomicsTrade.jsx: keep item 8's change
   there to ONE call site and name the lines (done: 3bbcacae8's message names them).
+- 03:18 UTC: SECTION 2m IS PUSHED: `git fetch origin lane/merge-15-point-49-wip-2026-11-14` (d893d9289), then
+  docs/INTEGRATION_STYLE_2_2026-11-09.md, the section headed "## 2m. FOR EVERY LANE THAT MERGES THE LINE AFTER POINT 49"
+  (about forty lines; by script, by range). Its part (3) names the two rows banked against this lane
+  (src/domain/display/defenseDisplay.js: the siege line "under siege the outlying fields would be lost" and the crime
+  desk's ring line with "streets", reason `after-base: leaves-3`) and exactly how a holder cures one and shrinks it out.
+  Read it before the first register touched after the merge of the line. (NOT read by this seat.)
 
 ## Items (this seat)
 | item | commits | measured (before c22530310 → after) | guard |
@@ -1070,10 +1076,33 @@ src/domain/coherence/foodWordsFindings.js 82 and a constant after the function (
   at f5f372aec (the unattributed-overrun row: commercialReasons.js's introducedAt sha absent from this shallow clone;
   red at the base); sovereigntyLightingContract's EACH-FAMILY red was this lane's (3bbcacae8's test.each), cured add4184ea.
 
+## CENSUS-2, RUN (item 10's first half; EXECUTED; the reading of the hits NOT done)
+The measuring seat's command at lane/census-2-2026-11-13 2686272b1, `census2.sh <tree> <out> 4 --files <c2files.txt>`
+(probes/W2-C-LEAVES-3/c2files.txt + chainNeedShown.js; the list as run: probes/W2-C-LEAVES-7/c2files.txt), exit 0 at
+both; counts in probes/W2-C-LEAVES-7/census2.{base-4534ea5e3,tip-71624aad0}.counts.txt. No cold lists were fetched
+(every line "unjoined"). Its limits: the dossier's views only (no PDF, no journal), and it cannot see two lines disagreeing.
+| kind | 4534ea5e3 towns / lines | 71624aad0 towns / lines |
+|---|---|---|
+| a names what the town lacks | 712 / 607 | 712 / 606 |
+| b normal times under a crisis | 70 / 101 | 48 / 59 |
+| c a size word in a small place | 301 / 296 | 301 / 296 |
+| d broken text | 381 / 35 | 381 / 35 |
+| e denies what the town has | 81 / 24 | 53 / 21 |
+| f the house's label | 720 / 304 | 720 / 304 |
+| g machinery on the page | 720 / 14 | 718 / 10 |
+On the lane's files (base → tip): EconomicsTab.jsx g 720/4 → 0, a 498/14 → 496/12, b 29/21 → 3/3, f 309/36 → 309/36
+(the flow card's house labels, r2-code-b's); defenseDisplay.js a 266/3 → 39/2; computeActiveChains.js b 5/5 → 5/5 (a
+generator: named, not cured here); chainNeedShown.js d 0 → 13 towns / 13 lines: A RISING ROW OF THIS LANE'S OWN ORIGIN
+(the sixth seat's item 6 leaf): every hit a siege town (r2r-metropolis-14, r2s-under_siege-town-0, -1, ...), the line
+"Operating at minimal capacity or shut down.· covers Grain, Livestock / game, ..." (no space before "· covers"; the
+record's impact string beside a label): READ IT WHERE IT PRINTS FIRST (a dump join or a real one), cure or declare.
+Out dirs (container-local, lost on restart): /home/user/c7/c2tip, /home/user/c7/c2base (hits.json, hits.by-file.json).
+
 ## STATUS (kept current)
-- Item 8 DONE 3bbcacae8 (+ f8ae10519, add4184ea). Item 9 DONE f5f372aec. Pushed; nothing running.
+- Item 8 DONE 3bbcacae8 (+ f8ae10519, add4184ea). Item 9 DONE f5f372aec. CENSUS-2 RUN at both ends (above). HANDED BACK
+  at the count (351,022 after item 9: the census's reading and the court rows do not fit under 400,000). Nothing running.
 - WHAT IS LEFT, line by line (the brief's order; each measured first on the 720 and the fresh 180, red first, pushed):
-  1. ITEM 10: CENSUS-2 at the tip and at 4534ea5e3 (`git fetch origin lane/census-2-2026-11-13`; archive its
+  1. ITEM 10 (the census is RUN, above: re-run only at a new tip): CENSUS-2 at the tip and at 4534ea5e3 (`git fetch origin lane/census-2-2026-11-13`; archive its
      docs/chair/2026-11-13/probes/CENSUS-2 to a scratch dir; `sh census2.sh <tree> <out outside the repo> 4 --files
      <probes/W2-C-LEAVES-3/c2files.txt joined by commas, + src/domain/display/chainNeedShown.js>` to a file, ~12 min
      each); every hit on the lane's writers read against its town, cured or named. WITH IT the court rows (record 422):
