@@ -4,8 +4,8 @@
   "census": {
     "_note": "Figures for the second wave, never a red: re-written by every door.",
     "pools": 931,
-    "printOneLine": 670,
-    "measuredUnder30Draws": 144,
+    "printOneLine": 673,
+    "measuredUnder30Draws": 146,
     "highestSharesOver150Draws": [
       {
         "pool": "ledger:institutionServices:Access to external mill.Grain milling (a day away)",
@@ -16,37 +16,37 @@
       },
       {
         "pool": "ledger:institutionServices:Annual fair.Seasonal trading",
-        "top1": 0.9496,
+        "top1": 0.9492,
         "top5": 1,
-        "draws": 238,
+        "draws": 236,
         "lines": 2
       },
       {
         "pool": "ledger:institutionServices:Carriers' guild.Freight haulage",
-        "top1": 0.9464,
+        "top1": 0.9472,
         "top5": 1,
-        "draws": 205,
+        "draws": 208,
         "lines": 2
       },
       {
         "pool": "ledger:institutionServices:Coaching inn.Lodging",
-        "top1": 0.9101,
+        "top1": 0.9084,
         "top5": 1,
-        "draws": 545,
+        "draws": 513,
         "lines": 2
       },
       {
         "pool": "ledger:institutionServices:Coaching inn.Horse change",
-        "top1": 0.9042,
+        "top1": 0.9066,
         "top5": 1,
-        "draws": 386,
+        "draws": 364,
         "lines": 2
       },
       {
         "pool": "ledger:safetyProfile:SAFETY_LINE_SIBLINGS",
-        "top1": 0.8805,
+        "top1": 0.8818,
         "top5": 1,
-        "draws": 2092,
+        "draws": 2098,
         "lines": 2
       },
       {
@@ -57,10 +57,17 @@
         "lines": 2
       },
       {
-        "pool": "ledger:institutionServices:River boatyard.Boat repair",
-        "top1": 0.8155,
+        "pool": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:succession_crisis",
+        "top1": 0.8208,
         "top5": 1,
-        "draws": 168,
+        "draws": 809,
+        "lines": 3
+      },
+      {
+        "pool": "ledger:institutionServices:River boatyard.Boat repair",
+        "top1": 0.8122,
+        "top5": 1,
+        "draws": 165,
         "lines": 2
       },
       {
@@ -72,23 +79,16 @@
       },
       {
         "pool": "ledger:institutionServices:Mine (open cast).Raw extraction",
-        "top1": 0.8057,
+        "top1": 0.8063,
         "top5": 1,
-        "draws": 283,
-        "lines": 2
-      },
-      {
-        "pool": "ledger:historyData:HISTORY_DESC_SIBLINGS",
-        "top1": 0.7926,
-        "top5": 1,
-        "draws": 458,
+        "draws": 289,
         "lines": 2
       },
       {
         "pool": "ledger:npcGenerator:NPC_GOAL_SIBLINGS",
-        "top1": 0.787,
+        "top1": 0.7904,
         "top5": 1,
-        "draws": 230,
+        "draws": 229,
         "lines": 2
       }
     ],
@@ -5754,6 +5754,12 @@
       "top1": 0.5122,
       "top5": 1,
       "lines": 4,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:NPC_STRUCTURE.magic__contested__dominant": {
+      "top1": 1,
+      "top5": 1,
+      "lines": 1,
       "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
     }
   }
