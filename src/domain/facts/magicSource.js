@@ -20,6 +20,7 @@ import { MAGIC_TRADITION_HOUSES } from '../../data/magicTraditionHouses.js';
 import { institutionMatchesKeyword } from '../institutions/institutionCategory.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { chainNeedsMagic, isPractisingNpc, magicWorksAt, practisingInstitutions } from '../magicReliance.js';
+import { liveHouseOf } from './presence.js';
 
 /** @typedef {'druid'|'divine'|'arcane'|'alchemy'} MagicTradition */
 
@@ -69,7 +70,9 @@ function traditionHouses(settlement, tradition) {
 /**
  * @typedef {Object} MagicSource
  * @property {string[]} houses  the houses that practise (the practitioner census's houses), then the houses here
- *   that supply a dependent chain's magic, in chain order, once each
+ *   that supply a dependent chain's magic, in chain order, once each — every one a ROSTER house's own name (a
+ *   chain's catalogue name is resolved to the live house it answers to, `presence.js :: liveHouseOf`, and is
+ *   never printed itself: W2-A-LEAVES-2, REVIEW-W2A F2)
  * @property {string[]} people  the people who practise (the practitioner census's people)
  */
 
@@ -91,8 +94,15 @@ export function magicSourceOf(settlement) {
     const c = obj(chain);
     if (chainNeedsMagic(c)) {
       // the chain row's own houses: already the matched subset (the chain step records only the processing
-      // houses the roster has; `generalStateProse.js :: craftInstitutionFill` reads them the same way)
-      for (const house of Array.isArray(c.processingInstitutions) ? c.processingInstitutions : []) add(str(house));
+      // patterns the roster answers), in the CATALOGUE's words ("Parish churches (10-30)"); each is printed as the
+      // roster house it answers to (REVIEW-W2A F2: the catalogue name beside the roster's was one house twice):
+      // by name (`presence.js :: liveHouseOf`), else by the catalogue's own keyword join, id-first
+      // (`institutionMatchesKeyword`: the pattern "Parish church" is the roster's "Parish churches (2-5)")
+      for (const house of Array.isArray(c.processingInstitutions) ? c.processingInstitutions : []) {
+        const here = liveHouseOf(rec, house) || liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (rec))
+          .find((inst) => institutionMatchesKeyword(/** @type {import('../institutions/institutionCategory.js').InstitutionLike} */ (inst), str(house)));
+        if (here) add(str(obj(here).name));
+      }
     }
     const tradition = MAGIC_NOTE_TRADITION[str(c.magicNote)];
     if (tradition) for (const house of traditionHouses(rec, tradition)) add(house);

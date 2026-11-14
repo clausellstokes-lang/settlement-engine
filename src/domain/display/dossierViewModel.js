@@ -748,7 +748,7 @@ export function deriveMagicSupplyView(settlement) {
   const reliance = deriveMagicRelianceView(settlement);
   if (!reliance.reliesOnMagic) return { supply: null, statable: true };
   const { houses, people } = magicSourceOf(settlement);
-  const parts = [...houses];
+  const parts = houses.map(proseHouseName).filter((n, i, all) => n && all.findIndex((p) => p.toLowerCase() === n.toLowerCase()) === i);
   if (people.length === 1) parts.push(people[0]);
   else if (people.length > 1) parts.push(`${people.length} practitioners`);
   if (parts.length === 0) return { supply: null, statable: false };
@@ -778,3 +778,16 @@ export function magicRelianceDeskSettlement(settlement) {
 // W2-A-LEAVES (row 3): the leaf the Magic tab's reliance line names its source from (an import at the foot, so the
 // lines the prose wiring census cites above keep their numbers).
 import { magicSourceOf } from '../facts/magicSource.js';
+import { institutionDisplayName } from './institutionDisplayName.js';
+
+/**
+ * A house as running prose names it (W2-A-LEAVES-2, 2026-11-13; REVIEW-W2A F2: 73 of 289 reliance lines printed a
+ * catalogue count range or condition — "Cathedral (10,000+ only)", "Dream parlors (high magic)"). Its display
+ * label (`institutionDisplayName`, the one seam for a house's label), with any bracketed count or note struck: in
+ * a sentence a house is named, never counted or qualified.
+ * @param {string} house a roster house's name
+ * @returns {string}
+ */
+function proseHouseName(house) {
+  return institutionDisplayName(house).replace(/\s*\([^)]*\)/g, '').replace(/\s+/g, ' ').trim();
+}

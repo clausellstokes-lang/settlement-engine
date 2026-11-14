@@ -23,7 +23,9 @@ afterEach(cleanup);
 describe('row 3: the reliance line names its source, or does not print', () => {
   test('relied upon with no practitioner: the houses that supply the dependent chain are named', () => {
     const line = relianceOf(town({ institutions: [{ name: 'Parish churches (10-30)' }, { name: 'Multiple monasteries' }], economicState: { activeChains: [HEALING] } }));
-    expect(line?.textContent).toBe('Reliance on magic: Relied upon · supplied by Parish church and Multiple monasteries');
+    // re-keyed (W2-A-LEAVES-2, REVIEW-W2A F2): each house is the ROSTER's ("Parish churches (10-30)") through the
+    // display seam, its count struck — no longer the chain's catalogue pattern ("Parish church")
+    expect(line?.textContent).toBe('Reliance on magic: Relied upon · supplied by Houses of worship and Multiple monasteries');
   });
   test('nothing on the record supplies it: the reliance line does not print, and the roles still do', () => {
     const settlement = town({ institutions: [{ name: 'Subsistence farming' }], economicState: { activeChains: [{ chainId: 'spellcasting', label: 'Spellcasting Services' }] } });
@@ -38,7 +40,9 @@ describe('row 3: the reliance line names its source, or does not print', () => {
       .toBe(' · supplied by 4 practitioners');
     cleanup();
     expect(relianceOf(town({ npcs: npcs.slice(0, 1), institutions: [{ name: 'Parish churches (10-30)' }], economicState: { activeChains: [HEALING, chain] } }))?.querySelector('[data-testid="magic-reliance-source"]')?.textContent)
-      .toBe(' · supplied by Parish church, Multiple monasteries and Ada');
+      // re-keyed (W2-A-LEAVES-2, REVIEW-W2A F2): this roster has no monastery, and the chain's catalogue pattern
+      // "Multiple monasteries" is no longer printed as if it stood here; the roster's house through the display seam
+      .toBe(' · supplied by Houses of worship and Ada');
   });
   test('no reliance: the word alone, no source clause', () => {
     const line = relianceOf(town({ institutions: [], npcs: [{ name: 'Ada', role: 'Hedge Witch' }], economicState: { activeChains: [] } }));

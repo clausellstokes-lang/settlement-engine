@@ -642,24 +642,24 @@
    "src": "map:inferred"
   },
   "DS-DEF-4::capture adversarial": {
-   "layer": 4,
-   "src": "map:inferred"
+   "layer": 5,
+   "src": "placed: its key reads the capture climate (powerStructure.criminalCaptureState, layer 4); was 4 by map:inferred (W2-A-LEAVES-2, REVIEW-W2A F5)"
   },
   "DS-DEF-4::capture capture": {
-   "layer": 4,
-   "src": "map:inferred"
+   "layer": 5,
+   "src": "placed: its key reads the capture climate (powerStructure.criminalCaptureState, layer 4); was 4 by map:inferred (W2-A-LEAVES-2, REVIEW-W2A F5)"
   },
   "DS-DEF-4::capture corrupted": {
-   "layer": 4,
-   "src": "map:inferred"
+   "layer": 5,
+   "src": "placed: its key reads the capture climate (powerStructure.criminalCaptureState, layer 4); was 4 by map:inferred (W2-A-LEAVES-2, REVIEW-W2A F5)"
   },
   "DS-DEF-4::capture equilibrium": {
-   "layer": 4,
-   "src": "map:inferred"
+   "layer": 5,
+   "src": "placed: its key reads the capture climate (powerStructure.criminalCaptureState, layer 4); was 4 by map:inferred (W2-A-LEAVES-2, REVIEW-W2A F5)"
   },
   "DS-DEF-4::capture none": {
-   "layer": 4,
-   "src": "map:inferred"
+   "layer": 5,
+   "src": "placed: its key reads the capture climate (powerStructure.criminalCaptureState, layer 4); was 4 by map:inferred (W2-A-LEAVES-2, REVIEW-W2A F5)"
   },
   "DS-DEF-4::structure diffuse": {
    "layer": 3,
@@ -2618,20 +2618,20 @@
    "src": "map:inferred"
   },
   "DS-POW-6::capture pressure ADVANCING (weak security, poor prosperity)": {
-   "layer": 3,
-   "src": "map:inferred"
+   "layer": 5,
+   "src": "placed: its key reads the capture climate (powerStructure.criminalCaptureState, layer 4); was 3 by map:inferred (W2-A-LEAVES-2, REVIEW-W2A F5)"
   },
   "DS-POW-6::capture pressure RECOVERING (strong security, prosperity)": {
-   "layer": 3,
-   "src": "map:inferred"
+   "layer": 5,
+   "src": "placed: its key reads the capture climate (powerStructure.criminalCaptureState, layer 4); was 3 by map:inferred (W2-A-LEAVES-2, REVIEW-W2A F5)"
   },
   "DS-POW-6::capture reached a LEADER": {
-   "layer": 3,
-   "src": "map:inferred"
+   "layer": 5,
+   "src": "placed: its key reads the capture climate (powerStructure.criminalCaptureState, layer 4); was 3 by map:inferred (W2-A-LEAVES-2, REVIEW-W2A F5)"
   },
   "DS-POW-6::capture reached an AGENT of a faction": {
-   "layer": 3,
-   "src": "map:inferred"
+   "layer": 5,
+   "src": "placed: its key reads the capture climate (powerStructure.criminalCaptureState, layer 4); was 3 by map:inferred (W2-A-LEAVES-2, REVIEW-W2A F5)"
   },
   "DS-POW-6::neutral baseline (nothing pulling either way)": {
    "layer": 3,

@@ -128,10 +128,11 @@ const CHAIN_INPUTS = Object.freeze({
 const ROUTE_HOUSE_TAGS = Object.freeze(['market', 'transport']);
 
 /**
- * The record's own goods, as one searchable text: what the economy produces, the imports AS THE PAGE PRINTS
- * THEM (`tradeListDisplay.js :: importsAsPrinted`, W2-A-LEAVES 6: the Imports line is the record's imports and
- * the terrain's critical imports as one list, and a gap that ignored the second named a good the page shows
- * arriving), the exports, and the nearby resources that are not depleted (their keys and their commodities).
+ * The record's own goods, as one searchable text: what the economy produces, what TRADE BRINGS IN
+ * (`tradeListDisplay.js :: importsAsPrinted(s).arriving`), the exports, and the nearby resources that are not
+ * depleted (their keys and their commodities). A good the terrain needs and no trade brings (`.needed`) is NOT a
+ * good the town has: the record's own gap kind for its house is `missing`, so the gap line prints (W2-A-LEAVES-2,
+ * REVIEW-W2A F1: the first seat read the need list as arrivals and silenced 445 true gaps).
  * @param {PageRecord} s
  */
 function recordGoods(s) {
@@ -139,7 +140,7 @@ function recordGoods(s) {
   const keys = availableNativeResourceKeys(s?.config || {});
   /** @type {string[]} */
   const goods = [
-    ...arr(es.localProduction), ...importsAsPrinted(/** @type {Parameters<typeof importsAsPrinted>[0]} */ (s)), ...arr(es.primaryExports),
+    ...arr(es.localProduction), ...importsAsPrinted(/** @type {Parameters<typeof importsAsPrinted>[0]} */ (s)).arriving, ...arr(es.primaryExports),
     ...keys, ...keys.flatMap((/** @type {string} */ k) => arr(/** @type {Readonly<Record<string, { commodities?: unknown } | undefined>>} */ (RESOURCE_DATA)[k]?.commodities)),
   ].map(str);
   return goods.map(norm).join('|');

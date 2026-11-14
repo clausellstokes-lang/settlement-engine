@@ -31,11 +31,11 @@ const TIMBER_KEYS = ['timber', 'managed_forest', 'mountain_timber', 'shipbuildin
 const GRAIN_KEYS = ['grain_fields', 'fertile_floodplain'];
 const HERD_KEYS = ['grazing_land', 'alpine_pasture', 'camel_herds'];
 const MINING_KEYS = ['iron_deposits', 'coal_deposits', 'precious_metals', 'gemstone_deposits', 'stone_quarry'];
-const support = (keys, routes = []) => Object.freeze({ keys: Object.freeze(keys), routes: Object.freeze(routes) });
+const support = (keys, routes = [], record = {}) => Object.freeze({ keys: Object.freeze(keys), routes: Object.freeze(routes), ...Object.freeze(record) });
 /**
  * What a terrain strength stands on: any one of these resources, or the route. A strength with
  * none of them is the terrain's, not the town's, and is not the town's to claim.
- * @type {Readonly<Record<string, Readonly<{ keys: ReadonlyArray<string>, routes?: ReadonlyArray<string> }>>>}
+ * @type {Readonly<Record<string, Readonly<{ keys: ReadonlyArray<string>, routes?: ReadonlyArray<string>, income?: ReadonlyArray<string>, foodChains?: ReadonlyArray<string> }>>>}
  */
 export const STRENGTH_SUPPORT = Object.freeze({
   'Maritime trade': support(['deep_harbour', 'maritime_access'], ['port']),
@@ -43,7 +43,7 @@ export const STRENGTH_SUPPORT = Object.freeze({
   'Salt production': support(['salt_flats', 'desert_salt']),
   'Salt trade': support(['salt_flats', 'desert_salt']),
   Shipbuilding: support(['shipbuilding_timber']),
-  Agriculture: support([...GRAIN_KEYS, 'grazing_land']),
+  Agriculture: support([...GRAIN_KEYS, 'grazing_land'], [], { income: ['Agricultural Rents'], foodChains: ['Grain & agriculture'] }), // COHERENCE-AGREE-8 (T6): or the town's own record of farming
   Milling: support(['river_mills']),
   'River trade': support([], ['river']),
   Brewing: support(GRAIN_KEYS),
@@ -93,9 +93,9 @@ export const townStrategicValue = (terrainKey, available) => (STRATEGIC_CLAUSES[
   String(TERRAIN_DATA[/** @type {keyof typeof TERRAIN_DATA} */ (terrainKey)]?.strategicValue || ''),
 );
 
-/** @param {ReadonlyArray<string>} available @param {Readonly<{ keys: ReadonlyArray<string>, routes?: ReadonlyArray<string> }>} rule @param {string} [route] */
-export const townSupports = (available, rule, route = '') => (
-  rule.keys.some((key) => available.includes(key)) || (rule.routes || []).includes(route)
+/** @param {ReadonlyArray<string>} available @param {Readonly<{ keys: ReadonlyArray<string>, routes?: ReadonlyArray<string>, income?: ReadonlyArray<string>, foodChains?: ReadonlyArray<string> }>} rule @param {string} [route] @param {any} [economicState] the record: an income it earns, a food chain it runs (COHERENCE-AGREE-8 T6) */
+export const townSupports = (available, rule, route = '', economicState = null) => (
+  rule.keys.some((key) => available.includes(key)) || (rule.routes || []).includes(route) || (rule.income || []).some((i) => (economicState?.incomeSources || []).some((/** @type {any} */ e) => e?.source === i)) || (rule.foodChains || []).some((c) => (economicState?.foodSecurity?.activeChains || []).includes(c))
 );
 
 
@@ -629,7 +629,7 @@ export const generateResourceAnalysis = (
     // strength only where its own resources or route stand under it, and a yield clause likewise.
     economicStrengths: (terrain.economicStrengths || []).filter(strength => {
       const rule = STRENGTH_SUPPORT[/** @type {keyof typeof STRENGTH_SUPPORT} */ (strength)];
-      return Boolean(rule) && townSupports(nearbyResources || [], rule, config.tradeRouteAccess);
+      return Boolean(rule) && townSupports(nearbyResources || [], rule, config.tradeRouteAccess, economicState);
     }),
     strategicValue:   townStrategicValue(terrainType, nearbyResources || []),
     priorityNotes,

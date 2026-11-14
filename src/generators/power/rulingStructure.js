@@ -14,6 +14,7 @@ import {
   computePublicLegitimacy,
 } from '../factionDynamics.js';
 import { inferFactionCategory } from './factionCategories.js';
+import { drawCouncilOfAKind } from './rulerKin.js'; // COHERENCE-POWERS 2B
 import { applyStressEventFactions } from './stressFactions.js';
 import { annotateFactionStanding } from './factionStanding.js';
 import { buildGovernanceLabels } from './governanceNarrative.js';
@@ -25,23 +26,9 @@ import {
 import { resolveGenerationWorldLaw } from '../generationContext.js'; import { hasMarketInstitution } from '../economy/viability.js'; import { defenseFactsOf, forceWordsOf } from '../../domain/defense/defenseFacts.js'; import { resolveSibling } from '../../domain/facts/drawDeclared.js'; import { factsOf } from '../../domain/facts/factsOf.js'; import { textOf } from '../../domain/facts/textOf.js'; import { MILITARY_GUARD_LABEL } from '../../data/factionLabelSiblings.js'; import { FACTION_DESC_SIBLINGS, GOV_DESC_OF_UNNAMED_SEAT } from '../../data/powerSiblings.js'; export { FACTION_DESC_SIBLINGS }; // SIZE-3, R6, F1, F10, CENSUS-1c, CENSUS-4f, CENSUS-5c and CENSUS-5e (R-AB: the tables moved to data/powerSiblings.js, re-exported): one line, so no cited line moves
 
 import { renormalizeFactionPower } from './renormalizeFactionPower.js'; export { renormalizeFactionPower }; // LANDING-R2 (ODQ §934.105): moved verbatim to power/renormalizeFactionPower.js, re-exported for its importers
+import { normalizeAndAnnotateFactions } from './normalizeAndAnnotateFactions.js';
+export { normalizeAndAnnotateFactions }; // COHERENCE-POWERS-3 (F12): moved verbatim to power/normalizeAndAnnotateFactions.js, re-exported for its importers
 
-// normalizeAndAnnotateFactions — renormalise faction powers to percentages,
-// sort governing-first then by descending power, and append inter-faction
-// standing colour to each faction's description in place. Guard the degenerate
-// empty / all-zero-power roster: without it `f.power / 0` is NaN and
-// Math.round(NaN) = NaN corrupts every share, the sort, and the standing
-// annotation — it degrades to 0 shares instead. Byte-identical on the normal
-// path (totalPower > 0). Exported for the focused degenerate-roster test.
-export const normalizeAndAnnotateFactions = (factions, force, { annotate = true } = {}) => { // SW-B1 (P51): generatePowerStructure annotates after its last power write
-  const totalPower = factions.reduce((sum, faction) => sum + (faction.power || 0), 0);
-  factions.forEach((faction) => {
-    faction.power = totalPower > 0 ? Math.round(((faction.power || 0) / totalPower) * 100) : 0;
-  });
-  factions.sort((a, b) => (a.isGoverning ? -1 : b.isGoverning ? 1 : b.power - a.power));
-  if (annotate) annotateFactionStanding(factions, force);
-  return factions;
-};
 
 export const generatePowerStructure = (
   tier,
@@ -163,6 +150,9 @@ export const generatePowerStructure = (
     },
     topCategory = Object.entries(priorityByCategory).reduce((best, entry) => (best[1] > entry[1] ? best : entry))[0],
     topPriority = priorityByCategory[topCategory];
+  // COHERENCE-POWERS 2B: the governing name and its modifier from one category and its priority, drawn through
+  // rulerKin.js :: drawCouncilOfAKind
+  const chooseGoverning = (/** @type {string} */ topCategory, /** @type {number} */ topPriority) => {
   let governingFaction,
     govModifier = null;
   if (govBody) {
@@ -310,6 +300,9 @@ export const generatePowerStructure = (
                             magic: 'Arcane Council',
                           }[topCategory]) ||
                         'Town Council');
+  return /** @type {[any, any]} */ ([governingFaction, govModifier]);
+  };
+  const [governingFaction, govModifier] = drawCouncilOfAKind(chooseGoverning, topCategory, topPriority, priorityByCategory, govBody, nativeInstitutions);
   let informalModifier = null;
   govBody ||
     (['thorp', 'hamlet', 'village'].includes(tier) && topPriority > 65

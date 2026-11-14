@@ -18,6 +18,8 @@ import { governingFactionOf, nameOf } from '../../../src/domain/rulingPower.js';
 import { seatHolderFindings } from '../../../src/domain/coherence/seatHolderFindings.js';
 import { SEAT_TITLES, TIER_HEAD } from '../../../src/domain/dossier/seatHolder.js';
 import { readFileSync } from 'node:fs';
+import { leaderHouseOf, officeLiteralOf } from '../../helpers/dualHatOracle.js'; // COHERENCE-POWERS-3 (F9): the expectation's own oracle, literals
+import { backingArchetypeOf } from '../../../src/domain/dossier/powerSupport.js';
 
 const TIERS = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
 /** @type {Array<{ seed: string, tier: string, s: any }>} */
@@ -91,12 +93,18 @@ describe('the seat over 120 generated settlements (twenty per tier, fixed seeds)
     const small = corpus.filter(({ tier, s }) => (tier === 'thorp' || tier === 'hamlet') && !isClaimantVacancy(s));
     expect(small.length).toBeGreaterThan(30);
     const misses = [];
-    for (const { seed, s } of small) {
+    for (const { seed, tier, s } of small) {
       const gov = nameOf(governingFactionOf(s));
       const npc = rulingChainOf(s).npc;
       const card = npc ? (s.npcs || []).find((n) => n.name === npc.name) : null;
       if (!card) { misses.push(`${seed}: nobody seated`); continue; }
-      if (card.role !== card.title) misses.push(`${seed}: role ${card.role} is not the title ${card.title}`);
+      // RE-KEYED BY IDENTITY 2026-11-12, COHERENCE-POWERS (the owner's dual-hat law, 2026-11-11: "whoever leads teh town
+      // ... come from an institution, and are elevated yet still tied to an institution"): where a house of the town leads
+      // (representatives.js :: dualHatHouseOf names it), the leader keeps its house's title and its role is the OFFICE
+      // (officeTitleFor, the chair's ruled table: 'Elder', 'Reeve', 'Headman'); everywhere else the role is still the title.
+      const hat = leaderHouseOf(s.institutions || [], nameOf(governingFactionOf(s)), backingArchetypeOf(governingFactionOf(s)));
+      const role = hat && card.institution?.key === hat ? officeLiteralOf(gov, tier) : card.title;
+      if (card.role !== role) misses.push(`${seed}: role ${card.role} is not ${role}`);
       if (!(card.memberships || []).some((m) => m.power === gov && m.rank === 1)) misses.push(`${seed}: ${card.name} is not ${gov}'s first`);
     }
     expect(misses).toEqual([]);

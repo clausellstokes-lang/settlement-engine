@@ -16,6 +16,7 @@ import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { dirname, join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { codeOf, resolveNameConstants } from './defenceFactReaders.shared.mjs';
+import { INSTITUTION_KINDS } from '../../src/domain/facts/institutions.js';
 
 export const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const SRC = join(ROOT, 'src');
@@ -233,6 +234,58 @@ export async function poolArm(pools, poolTable) {
   return { violations, unplaced, unlayered: [...new Set(unlayered)] };
 }
 
+// ── THE KEY-READ ARM (W2-A-LEAVES-2, REVIEW-W2A F5) ───────────────────────────────────────────────────
+/**
+ * The pool arm sees only what a pool's LINES declare; a pool is also drawn by its KEY, and a key that reads a fact
+ * at or above the pool's layer is the same fault (`DS-POW-6`'s capture lens sat at layer 3 and `DS-DEF-4`'s at 4,
+ * both keyed on the capture climate, a layer-4 stratum). Each row names a key site in source — the call that hands
+ * the stored field to the key function — and the pools that key draws; the arm reds a site that is gone (the
+ * declaration has rotted) and a pool whose key reads at or above its layer. The crime desk's struck lines
+ * (`crimeLineDisqualifiers.js`) are read the same way: a pool whose lines a declared fact strikes reads that
+ * fact's leaf.
+ */
+export const KEY_SITES = Object.freeze([
+  Object.freeze({
+    file: 'src/domain/display/stateProse/powerStateProse.js', site: /capturePoolKey\(power\.criminalCaptureState\b/, reads: ['powerStructure.criminalCaptureState'],
+    pools: ['DS-POW-6::capture pressure ADVANCING (weak security, poor prosperity)', 'DS-POW-6::capture pressure RECOVERING (strong security, prosperity)',
+      'DS-POW-6::capture reached an AGENT of a faction', 'DS-POW-6::capture reached a LEADER'],
+  }),
+  Object.freeze({
+    file: 'src/domain/display/stateProse/defenseStateProse.js', site: /criminalCapturePoolKey\(power\.criminalCaptureState\b/, reads: ['powerStructure.criminalCaptureState'],
+    pools: ['DS-DEF-4::capture none', 'DS-DEF-4::capture adversarial', 'DS-DEF-4::capture equilibrium', 'DS-DEF-4::capture corrupted', 'DS-DEF-4::capture capture'],
+  }),
+]);
+/** The leaf each crime-line fact is read from. */
+const CRIME_FACT_LEAF = Object.freeze({ 'no official in pay': 'officialsInPay', 'an official in pay': 'officialsInPay', 'no agent in the hall': 'captureClimate' });
+
+/**
+ * @param {Record<string, { layer: number|'W', src: string }>} poolTable
+ * @param {ReadonlyArray<{ file: string, site: RegExp, reads: string[], pools: string[] }>} [sites]
+ * @returns {Promise<{ violations: Record<string, string[]>, rotted: string[] }>}
+ */
+export async function keyReadArm(poolTable, sites = KEY_SITES) {
+  const { STRATA, LEAVES } = await import(join(SRC, 'domain/facts/factLayers.js'));
+  const { CRIME_LINE_DISQUALIFIERS } = await import(join(SRC, 'domain/display/stateProse/crimeLineDisqualifiers.js'));
+  /** @type {Record<string, Set<string>>} */ const found = {};
+  /** @type {string[]} */ const rotted = [];
+  /** @param {string} id @param {string} what @param {number} layer */
+  const check = (id, what, layer) => {
+    const row = poolTable[id];
+    if (row && row.layer !== 'W' && layer >= row.layer) (found[id] ||= new Set()).add(`${what} (layer ${layer})`);
+  };
+  for (const k of sites) {
+    if (!k.site.test(readFileSync(join(ROOT, k.file), 'utf8'))) { rotted.push(`${k.file} ${k.site}`); continue; }
+    for (const id of k.pools) for (const r of k.reads) check(id, `key reads ${r}`, STRATA[r]);
+  }
+  for (const [id, byVid] of Object.entries(CRIME_LINE_DISQUALIFIERS)) {
+    for (const d of Object.values(/** @type {Record<string, { falseWhere: string }>} */ (byVid))) {
+      const leaf = CRIME_FACT_LEAF[/** @type {keyof typeof CRIME_FACT_LEAF} */ (d.falseWhere)];
+      check(id, `lines struck by ${leaf}`, LEAVES[leaf].layer);
+    }
+  }
+  return { violations: Object.fromEntries(Object.entries(found).map(([k, v]) => [k, [...v].sort()])), rotted };
+}
+
 // ── THE READER ARM (the defence-reader walker, generalised) ──────────────────────────────────────
 /**
  * Each homed fact's house words, and the home(s) where a name test of them is the fact's own reading.
@@ -265,11 +318,24 @@ const LITERALS = Object.fromEntries(Object.entries(FAMILIES).map(([k, v]) => [k,
 export const readsFamily = (family, line) => CALL.test(line) && LITERALS[family].test(line);
 
 /**
- * The roots and exclusions: the fact homes' folder, the data tables, generated files and each family's own homes are
- * not counted; nor the page battery's instruments (`src/domain/coherence/`), which test the PRINTED page's words
- * against the record by design and derive no fact (W2-A-LEAVES's call, 2026-11-12: three banked lines fell).
+ * A CALL OF THE HOME'S OWN READER is the home's reading, not a second derivation (W2-A-LEAVES-2, REVIEW-W2A F6):
+ * `hasInstitution(record, 'temple')` or `facts.hasInstitution('tavern')` with ONE quoted kind of the institutions
+ * home (`facts/institutions.js :: INSTITUTION_KINDS`) asks the home. Such a call is struck from the line before
+ * the name test is read; a private helper over a list of words (`hasInstitution(['mill', 'farm'])`) is not a call
+ * of the home and still counts.
  */
-const EXCLUDED = /^src\/(?:domain\/facts|domain\/coherence|data)\//;
+const HOME_CALL = new RegExp(String.raw`\b(?:\w+\.)?hasInstitution\(\s*(?:\w+\s*,\s*)?'(?:${INSTITUTION_KINDS.join('|')})'\s*\)`, 'g');
+/** The line as the name test reads it: calls of the home's own reader struck. @param {string} line */
+export const outsideHomeCalls = (line) => line.replace(HOME_CALL, '');
+
+/**
+ * The roots and exclusions: the data tables, generated files and EACH FAMILY'S OWN HOMES are not counted; nor the
+ * page battery's instruments (`src/domain/coherence/`), which test the PRINTED page's words against the record by
+ * design and derive no fact (W2-A-LEAVES's call, 2026-11-12: three banked lines fell). The fact homes' folder is
+ * NOT excluded as a whole (REVIEW-W2A F6: a name test planted in `facts/leaderLead.js` stayed green): a file there
+ * that is no family's home is read like any other.
+ */
+const EXCLUDED = /^src\/(?:domain\/coherence|data)\//;
 
 /** @param {string} dir @param {string[]} [out] @returns {string[]} */
 const walk = (dir, out = []) => {
@@ -280,25 +346,37 @@ const walk = (dir, out = []) => {
   return out;
 };
 
+/** A banked line's form: the code line as the arm reads it, its whitespace collapsed. @param {string} line */
+export const lineKey = (line) => line.trim().replace(/\s+/g, ' ');
+
 /**
- * Per file, per family: the lines that answer a homed fact by a name test.
+ * Per file, per family: THE LINES (by content, sorted) that answer a homed fact by a name test. Banked by content,
+ * not by count (REVIEW-W2A F6): a banked line swapped for a new one in the same file and family is red.
  * @param {(family: string, line: string) => boolean} [test]
- * @returns {Record<string, Record<string, number>>}
+ * @returns {Record<string, Record<string, string[]>>}
  */
 export function readerArm(test = readsFamily) {
-  /** @type {Record<string, Record<string, number>>} */ const out = {};
+  /** @type {Record<string, Record<string, string[]>>} */ const out = {};
   for (const path of walk(SRC)) {
     const rel = relative(ROOT, path).replace(/\\/g, '/');
     if (!/\.(js|jsx)$/.test(rel) || /\.generated\.js$/.test(rel) || EXCLUDED.test(rel)) continue;
-    const lines = resolveNameConstants(codeOf(readFileSync(path, 'utf8'))).split('\n');
+    const lines = resolveNameConstants(codeOf(readFileSync(path, 'utf8'))).split('\n').map(outsideHomeCalls);
     for (const [family, def] of Object.entries(FAMILIES)) {
       if (def.homes.includes(rel)) continue;
-      const n = lines.filter((line) => test(family, line)).length;
-      if (n) (out[rel] ||= {})[family] = n;
+      const hit = lines.filter((line) => test(family, line)).map(lineKey).sort();
+      if (hit.length) (out[rel] ||= {})[family] = hit;
     }
   }
   return out;
 }
+
+/**
+ * The register's readers in the arm's shape (each banked row is `{ line, reason }`).
+ * @param {Record<string, Record<string, Array<{ line: string, reason: string }>>>} banked
+ * @returns {Record<string, Record<string, string[]>>}
+ */
+export const bankedReaderLines = (banked) => Object.fromEntries(Object.entries(banked).map(([file, fams]) => [file,
+  Object.fromEntries(Object.entries(fams).map(([fam, rows]) => [fam, rows.map((r) => r.line).sort()]))]));
 
 /** Read a JSON file under the root. @param {string} rel */
 export const readJson = (rel) => JSON.parse(readFileSync(join(ROOT, rel), 'utf8'));

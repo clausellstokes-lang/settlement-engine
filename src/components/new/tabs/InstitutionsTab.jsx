@@ -57,8 +57,9 @@ import { entityAnchor, entityIdFor, serviceEntityOf } from '../../../domain/doss
 import { formatBacksValue, houseBacksOf } from '../../../domain/dossier/powerSupport.js';
 import { walkUserEdits } from '../../../domain/userEdits.js';
 import { factionIdFromName } from '../../../lib/entities.js';
-import { facesByHouse } from '../../../domain/people/cardPowers.js';
-import { faceNameOf } from '../../../domain/people/cardDoor.js';
+import { cardOfficeOf, facesByHouse } from '../../../domain/people/cardPowers.js';
+import { seatHouseFaceOf } from '../../../domain/dossier/seatHolder.js';
+import { connectionOf } from '../../../domain/people/seatKeeperDisplay.js';
 import { nameOf } from '../../../domain/rulingPower.js';
 import { useEntityFocus } from '../../dossier/useEntityFocus.js';
 import { MentionText } from '../../ProseParagraph.jsx';
@@ -147,7 +148,10 @@ export function institutionsWithServices(settlement) {
         services: byInstitution.get(key) || [],
         backs: backers.get(key) || [],
         // PEOPLE-6 LINKS: the house's representative (null for a house with no face)
-        face: faces.get(key) || null,
+        // COHERENCE-POWERS (cure (i)): the seat's house where a house leads is faced by the leader
+        face: faces.get(key) || seatHouseFaceOf(/** @type {never} */ (settlement), key) || null,
+        // COHERENCE-POWERS: the face is the seat holder's, not this house's own (it names both hats)
+        seatFaced: !faces.get(key) && !!seatHouseFaceOf(/** @type {never} */ (settlement), key),
         // X-45: the DM spoke, even to say nobody (the mark outlives an emptied list)
         authored: spoken.has(i),
         // X-46 car 3: the place, not a house (its own group at the foot of the tab)
@@ -230,8 +234,12 @@ function BacksEditor({ label, powers, selected, authored, onDone, onRevert, onCl
  * is the house's list from `houseBacksOf`; `canAuthor` and `index` arm the editor. `fabric` (X-46
  * car 3) marks the place rather than a house: no Backs line and no editor.
  */
-export function InstitutionCard({ inst, category, label, services, sets, backs = [], authored = false, canAuthor = false, index = -1, powers = [], fabric = false, face = null, settlement = null }) {
+export function InstitutionCard({ inst, category, label, services, sets, backs = [], authored = false, canAuthor = false, index = -1, powers = [], fabric = false, face = null, seatFaced: seatFacedRow = false, settlement = null }) {
   const mobile = useIsMobile();
+  // COHERENCE-POWERS: a face that is not this house's own (the seat's house, faced by the dual-hat leader)
+  const seatFaced = seatFacedRow && !!face && !!cardOfficeOf(face);
+  // COHERENCE-POWERS-3 (F7): the empty seat's keeper in the caretaker's form; a disambiguated name's title once
+  const connection = face && face.name ? connectionOf(face, settlement, seatFaced) : { name: '', tail: '' };
   const isCustom = inst.source === 'custom' || inst.isCustom === true;
   const badge = institutionBadge(inst);
   // X-20 (c): the card is always open; a link to the house scrolls it to the top.
@@ -274,7 +282,9 @@ export function InstitutionCard({ inst, category, label, services, sets, backs =
       {face && face.name && (
         <div data-testid="institution-face" style={{ marginTop: 4, fontSize: proseFontSize(FS.xs, mobile), color: swatch.inkMag3 }}>
           <span data-testid="institution-face-label">Connection:</span>{' '}
-          <EntityLink id={entityIdFor('npc', face, String(face.name))} type="npc" fallback={faceNameOf(face, settlement)} verbatim style={{ color: swatch.inkMag, fontWeight: 600 }} />
+          {/* COHERENCE-POWERS: the seat's house faced by the dual-hat leader names both hats: "Reeve Egilbert Neumann, the miller" */}
+          <EntityLink id={entityIdFor('npc', face, String(face.name))} type="npc" fallback={connection.name} verbatim style={{ color: swatch.inkMag, fontWeight: 600 }} />
+          {connection.tail}
         </div>
       )}
       {/* THE BACKS LINE (X-40, X-45): who the house contributes to, each name a door to the Power
@@ -346,9 +356,9 @@ export default function InstitutionsTab({ settlement, canAuthor = false }) {
       </div>
       {/* THE FLUSH RULE (X-44): the houses sit edge to edge, parted by their own hairlines. */}
       <div data-testid="institutions-stack" style={FLUSH_STACK}>
-        {houses.map(({ inst, category, label, services, backs, authored, face }, i) => (
+        {houses.map(({ inst, category, label, services, backs, authored, face, seatFaced }, i) => (
           <InstitutionCard key={`${inst.name}-${i}`} inst={inst} category={category} label={label} services={services} backs={backs} authored={authored} sets={sets}
-            canAuthor={canAuthor} index={roster.indexOf(inst)} powers={powers} face={face} settlement={settlement} />
+            canAuthor={canAuthor} index={roster.indexOf(inst)} powers={powers} face={face} seatFaced={seatFaced} settlement={settlement} />
         ))}
       </div>
       {/* THE FABRIC OF THE PLACE (X-46 car 3): the dwellings, the well, the church walk — the place

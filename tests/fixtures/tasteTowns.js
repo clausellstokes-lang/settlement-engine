@@ -80,9 +80,15 @@ export const INTERESTED_TOWNS = Object.freeze([
     // reads 'equilibrium' at most, and rate-69-0's did. The same rule re-applied in rateGrid's order at the car's tip names
     // rate-105-2 (index 422; road/frontier/south_asian/desert) first of two (rate-165-1) holding every captured
     // precondition. The control is unchanged.
-    seed: 'rate-105-2',
+    // rate-105-2 -> rate-33-1 on 2026-11-13 (STYLE-2-MERGE point 46, the COHERENCE-POWERS merge 6aeaa4154; the chair's ruling on
+    // STOP 46c), by identity with its cause: under the dual hat rate-105-2's seat is held by Supriya Prasad, the senior guild
+    // master (house Merchant guilds (3-8)), no agent, so its hall reads 'equilibrium'; at 3575cf061 it was Bhavana Khanna, the
+    // mayor (house Mayor and council), a Thieves' Guild agent via the office. THE RULE OF CHOICE: the first rateGrid town cell
+    // captured at birth, in the grid's own order: rate-33-1 (index 133; isolated/random_threat/latin/hills). k of n: 2 of 3
+    // (rate-33-1 and rate-69-0 pass every other assertion of both tests unchanged; rate-135-2 reads the treasury LICENSED).
+    seed: 'rate-33-1',
     config: Object.freeze({
-      settType: 'town', tradeRouteAccess: 'road', monsterThreat: 'frontier', culture: 'south_asian', terrainOverride: 'desert',
+      settType: 'town', tradeRouteAccess: 'isolated', monsterThreat: 'random_threat', culture: 'latin', terrainOverride: 'hills',
     }),
   }),
   Object.freeze({
@@ -91,9 +97,15 @@ export const INTERESTED_TOWNS = Object.freeze([
     // is kept by its Weekly market, so the pair would not differ by the capture alone. rate-9-2 is
     // the FIRST grid town (index 38) uncaptured, a town, interested on nothing, Town hall keeping
     // the treasury.
-    seed: 'rate-9-2',
+    // rate-9-2 -> rate-15-0 on 2026-11-13 (STYLE-2-MERGE point 47, the COHERENCE-AGREE merge 22cc9ef7d; a fixture its drafted
+    // record names for the merge seat, re-taken by the rule above, ruling (e)), by identity with its cause: the lane re-deals
+    // rate-9-2's ruling three, so its hall reads 'equilibrium' (no longer uncaptured) and its treasury reads INTERESTED. THE RULE
+    // OF CHOICE: the first rateGrid town cell, in the grid's own order, uncaptured, a town, interested on nothing, its Town hall
+    // keeping the treasury: rate-15-0 (index 60; river/random_threat/norse/hills). 66 of the grid's 112 uncaptured towns meet the
+    // rule; the first passes every other assertion of both tests unchanged. PAIRED_TOWN keeps rate-9-2 (its own arm, unmoved).
+    seed: 'rate-15-0',
     config: Object.freeze({
-      settType: 'town', tradeRouteAccess: 'road', monsterThreat: 'random_threat', culture: 'germanic', terrainOverride: 'hills',
+      settType: 'town', tradeRouteAccess: 'river', monsterThreat: 'random_threat', culture: 'norse', terrainOverride: 'hills',
     }),
   }),
 ]);

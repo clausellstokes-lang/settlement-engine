@@ -27,7 +27,7 @@ function asObject(v) {
  *  legacy shape uses `.name`/`.label`. Without the `.faction` arm every real faction
  *  slugified to `fac.unknown` and the ladder merged them into one — THE FACTION-KEY BUG.
  *  Single chokepoint for both the key and the membership match. @param {Record<string, unknown>} f @returns {string} */
-function factionName(f) {
+export function factionName(f) {
   const canonical = factionDisplayNameOf(f);
   if (canonical) return canonical;
   if (typeof f.label === 'string' && f.label) return f.label;

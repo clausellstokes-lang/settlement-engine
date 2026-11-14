@@ -10,11 +10,21 @@
  *   --bank-strip <reason> <file> --base <rev>
  *                              bank the fresh strip sites of one file under <reason> (`strip-before-draw`,
  *                              `not-a-draw`) — only a site whose receiver already stood in the file at <rev>
- *   --shrink                   remove every stale row (a row nothing matches); never adds
+ *   --shrink                   remove every stale row (a row nothing matches) of the widened register AND of the
+ *                              first register's arm 1 (both registers are shrink-only); never adds
  *   --bank <reason> --base <rev>
  *                              bank the fresh hits under <reason> — ONLY hits whose literal already stood in
  *                              its file at <rev> (the widening's base). A fresh hit whose text is not at <rev>
  *                              is a NEW line: nothing is written and the door exits 1, naming it.
+ *   --shrink-arm2              remove every first-register arm-2 row that covers no printed line of the corpus (the
+ *                              360 births the walker's arm 2 reads, born here the same way); never adds
+ *   --rekey-whole              F4 of REVIEW-W2B's second read: give every row of both registers that has no hash the
+ *                              hash of the WHOLE literal it banks (the hits its old key, the first 120 characters,
+ *                              matched). Rows before equal rows after: it refuses if a row matches no hit; never adds
+ *                              or drops a row (a row whose prefix covered several literals keeps them all, as a list)
+ *   --bank <reason> --base <rev> --thing <id>
+ *                              the same, for the fresh hits of ONE registered word only (a re-key by identity
+ *                              and a narrowed implication are banked under their two reasons, W2-B-DECLARE F4)
  *
  * Run from the tree root. Writes nothing in --check.
  */
@@ -22,7 +32,7 @@ import { execFileSync } from 'node:child_process';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
-import { WIDENED_REGISTER_REL, bankedKeys, hitKey, scanTree, stripKey, stripTree } from '../tests/lint/presumedThings.shared.mjs';
+import { REGISTER_REL, WIDENED_REGISTER_REL, bankRow, bankedKeys, corpusConfig, corpusSeeds, literalHash, printedAbsent, rowCovers, rowKeys, hitKey, scanTree, stripKey, stripTree } from '../tests/lint/presumedThings.shared.mjs';
 
 const ROOT = process.cwd();
 const args = process.argv.slice(2);
@@ -30,11 +40,14 @@ const mode = args.find((a) => a.startsWith('--') && a !== '--base');
 const reg = JSON.parse(readFileSync(join(ROOT, WIDENED_REGISTER_REL), 'utf8'));
 const main = JSON.parse(readFileSync(join(ROOT, 'tests/lint/presumedThings.register.json'), 'utf8'));
 
-const hits = scanTree(ROOT);
+// arm 1's walk is the slow half: --bank-strip reads only the strip ban, so it skips it
+const hits = mode === '--bank-strip' ? [] : scanTree(ROOT);
 const banked = new Set([...bankedKeys(main), ...bankedKeys(reg)]);
 const found = new Set(hits.map((h) => hitKey(h.file, h.thing, h.text)));
 const fresh = hits.filter((h) => !banked.has(hitKey(h.file, h.thing, h.text)));
 const stale = [...bankedKeys(reg)].filter((k) => !found.has(k));
+// the first register's arm-1 rows nothing matches (a re-key by identity leaves them; the walker reds them as stale)
+const mainStale = [...bankedKeys(main)].filter((k) => !found.has(k));
 reg.strips ||= [];
 const strips = stripTree(ROOT);
 const stripFound = new Set(strips.map((x) => stripKey(x.file, x.receiver)));
@@ -48,21 +61,60 @@ const write = () => {
   reg.arm1 = arm1;
   writeFileSync(join(ROOT, WIDENED_REGISTER_REL), `${JSON.stringify(reg, null, 1)}\n`);
 };
+// the first register keeps its own layout (one row per line): only its arm-1 section is re-written, byte-identical
+// where nothing changes
+const writeMain = () => {
+  for (const f of Object.keys(main.arm1)) if (!main.arm1[f].length) delete main.arm1[f];
+  const text = readFileSync(join(ROOT, REGISTER_REL), 'utf8');
+  const start = text.indexOf('\n "arm1": {\n'); const end = text.indexOf('\n }', start + 1);
+  const body = Object.keys(main.arm1).map((f) => `  ${JSON.stringify(f)}: [\n${main.arm1[f].map((r) => `   [${r.map((x) => JSON.stringify(x)).join(', ')}]`).join(',\n')}\n  ]`).join(',\n');
+  writeFileSync(join(ROOT, REGISTER_REL), `${text.slice(0, start)}\n "arm1": {\n${body}${text.slice(end)}`);
+};
+/** a row's hashes after a shrink: those still found; null when none is (the row leaves) */
+const keepFound = (f, r, staleSet) => {
+  const left = rowKeys(f, r).filter((k) => !staleSet.has(k)).map((k) => k.split('\t')[2]);
+  if (!left.length) return null;
+  return [r[0], r[1], r[2], left.length === 1 ? left[0] : left];
+};
 
 if (mode === '--check' || mode === undefined) {
-  for (const h of fresh) console.log(`fresh\t${hitKey(h.file, h.thing, h.text)}`);
+  for (const h of fresh) console.log(`fresh\t${hitKey(h.file, h.thing, h.text)}\t${JSON.stringify(h.text.slice(0, 120))}`);
   for (const k of stale) console.log(`stale\t${k}`);
+  for (const k of mainStale) console.log(`stale (first register)\t${k}`);
   for (const x of stripFresh) console.log(`strip fresh\t${stripKey(x.file, x.receiver)}`);
   for (const k of stripStale) console.log(`strip stale\t${k}`);
-  console.log(`fresh ${fresh.length} · stale ${stale.length} · banked ${bankedKeys(reg).size} · strips fresh ${stripFresh.length} stale ${stripStale.length} banked ${stripBanked.size}`);
-  process.exit(fresh.length || stale.length || stripFresh.length || stripStale.length ? 1 : 0);
+  console.log(`fresh ${fresh.length} · stale ${stale.length} · first-register stale ${mainStale.length} · banked ${bankedKeys(reg).size} · strips fresh ${stripFresh.length} stale ${stripStale.length} banked ${stripBanked.size}`);
+  process.exit(fresh.length || stale.length || mainStale.length || stripFresh.length || stripStale.length ? 1 : 0);
 } else if (mode === '--shrink') {
   const staleSet = new Set(stale);
-  for (const f of Object.keys(reg.arm1)) reg.arm1[f] = reg.arm1[f].filter((r) => !staleSet.has(hitKey(f, r[0], r[2])));
+  for (const f of Object.keys(reg.arm1)) reg.arm1[f] = reg.arm1[f].map((r) => keepFound(f, r, staleSet)).filter(Boolean);
   const stripStaleSet = new Set(stripStale);
   reg.strips = reg.strips.filter((r) => !stripStaleSet.has(stripKey(r[0], r[1])));
   write();
-  console.log(`removed ${stale.length} stale rows and ${stripStale.length} stale strip sites`);
+  const mainSet = new Set(mainStale);
+  for (const f of Object.keys(main.arm1)) main.arm1[f] = main.arm1[f].map((r) => keepFound(f, r, mainSet)).filter(Boolean);
+  if (mainStale.length) writeMain();
+  console.log(`removed ${stale.length} stale rows, ${mainStale.length} stale rows of the first register and ${stripStale.length} stale strip sites`);
+} else if (mode === '--shrink-arm2') {
+  const { generateSettlementPipeline } = await import('../src/generators/generateSettlementPipeline.js');
+  const { factsOf } = await import('../src/domain/facts/factsOf.js');
+  const { liveInstitutionNames } = await import('../src/domain/facts/institutions.js');
+  /** @type {Array<{ thing: string, path: string, sentence: string }>} */ const listed = [];
+  for (const { tier, seed } of corpusSeeds()) {
+    const record = generateSettlementPipeline({ ...corpusConfig(tier) }, null, { seed, customContent: {} });
+    listed.push(...printedAbsent(record, factsOf(record), liveInstitutionNames(record)));
+  }
+  const stale2 = main.arm2.filter((r) => !listed.some((h) => rowCovers(r, h)));
+  if (stale2.length) {
+    // the first register keeps its layout (one arm-2 row per line): only the stale rows' lines are removed
+    const text = readFileSync(join(ROOT, REGISTER_REL), 'utf8');
+    const drop = new Set(stale2.map((r) => JSON.stringify(r)));
+    const lines = text.split('\n').filter((l) => { const t = l.trim().replace(/,$/, ''); if (!t.startsWith('{"thing"')) return true; try { return !drop.has(JSON.stringify(JSON.parse(t))); } catch { return true; } });
+    const out = lines.join('\n').replace(/,(\n \],?\n)/g, '$1');
+    writeFileSync(join(ROOT, REGISTER_REL), out);
+  }
+  for (const r of stale2) console.log(`removed arm-2\t${r.thing}\t${r.path}\t${r.text}`);
+  console.log(`removed ${stale2.length} stale arm-2 rows`);
 } else if (mode === '--bank') {
   const reason = args[args.indexOf('--bank') + 1];
   const base = args[args.indexOf('--base') + 1];
@@ -77,20 +129,49 @@ if (mode === '--check' || mode === undefined) {
   };
   // a literal's text against its source at the base: escapes and runs of white space folded on both sides
   const fold = (/** @type {string} */ x) => x.replace(/\\[nrt]/g, ' ').replace(/\\(.)/g, '$1').replace(/\s+/g, ' ');
-  const novel = fresh.filter((h) => !fold(srcAt(h.file)).includes(fold(h.text).trim().slice(0, 60)));
+  const only = args.indexOf('--thing') >= 0 ? args[args.indexOf('--thing') + 1] : null;
+  if (args.indexOf('--thing') >= 0 && !only) { console.error('--thing needs a registered word id'); process.exit(2); }
+  const mine = only ? fresh.filter((h) => h.thing === only) : fresh;
+  const novel = mine.filter((h) => !fold(srcAt(h.file)).includes(fold(h.text).trim().slice(0, 60)));
   if (novel.length) {
-    for (const h of novel) console.error(`NEW LINE (not at ${base}): ${hitKey(h.file, h.thing, h.text)}`);
+    for (const h of novel) console.error(`NEW LINE (not at ${base}): ${hitKey(h.file, h.thing, h.text)}\t${JSON.stringify(h.text.slice(0, 120))}`);
     process.exit(1);
   }
   const once = new Set();
-  for (const h of fresh) {
+  for (const h of mine) {
     const k = hitKey(h.file, h.thing, h.text);
-    if (once.has(k)) continue; // two literals sharing their first 120 characters are one row
+    if (once.has(k)) continue; // one row per whole literal (F4)
     once.add(k);
-    (reg.arm1[h.file] ||= []).push([h.thing, reason, h.text.slice(0, 120)]);
+    (reg.arm1[h.file] ||= []).push(bankRow(h, reason));
   }
   write();
-  console.log(`banked ${fresh.length} rows under '${reason}' (each stood at ${base})`);
+  console.log(`banked ${once.size} rows under '${reason}'${only ? ` for '${only}'` : ''} (each stood at ${base})`);
+} else if (mode === '--rekey-whole') {
+  // the old key, read only here to find what each row banked: file, thing, the literal's first 120 characters
+  const oldKey = (f, t, x) => `${f}\t${t}\t${String(x).slice(0, 120)}`;
+  /** @type {Map<string, Set<string>>} */ const byOld = new Map();
+  for (const h of hits) { const k = oldKey(h.file, h.thing, h.text); if (!byOld.has(k)) byOld.set(k, new Set()); byOld.get(k).add(h.text); }
+  const count = (r) => Object.values(r.arm1).reduce((n, rows) => n + rows.length, 0);
+  const before = [count(main), count(reg)];
+  const unmatched = []; let several = 0; let rekeyed = 0;
+  for (const r of [main, reg]) {
+    for (const [f, rows] of Object.entries(r.arm1)) {
+      r.arm1[f] = rows.map((row) => {
+        if (row.length > 3) return row;
+        const texts = byOld.get(oldKey(f, row[0], row[2]));
+        if (!texts) { unmatched.push(oldKey(f, row[0], row[2])); return row; }
+        const hashes = [...texts].map(literalHash).sort();
+        rekeyed += 1; if (hashes.length > 1) several += 1;
+        return [row[0], row[1], row[2], hashes.length === 1 ? hashes[0] : hashes];
+      });
+    }
+  }
+  if (unmatched.length) { for (const k of unmatched) console.error(`UNMATCHED (a stale row: --shrink first): ${k}`); process.exit(1); }
+  const after = [count(main), count(reg)];
+  if (before.join() !== after.join()) { console.error(`REFUSED: rows before ${before} != after ${after}`); process.exit(1); }
+  write();
+  writeMain();
+  console.log(`re-keyed ${rekeyed} rows by the whole literal (${several} cover several literals that share their first 120 characters); rows before ${before.join(' + ')} = after ${after.join(' + ')}`);
 } else if (mode === '--bank-strip') {
   const at = args.indexOf('--bank-strip'); const reason = args[at + 1]; const file = args[at + 2];
   const base = args[args.indexOf('--base') + 1];
@@ -100,13 +181,14 @@ if (mode === '--check' || mode === undefined) {
   let atBase = ''; try { atBase = execFileSync('git', ['show', `${base}:${file}`], { encoding: 'utf8', maxBuffer: 1 << 28 }); } catch { /* absent */ }
   const fold = (/** @type {string} */ x) => x.replace(/\s+/g, ' ');
   const mine = stripFresh.filter((x) => x.file === file);
-  const novel = mine.filter((x) => !fold(atBase).includes(x.receiver));
+  // the receiver stood at the base (its ordinal, ` #n`, counts the sites of one receiver: the count must have stood too)
+  const novel = mine.filter((x) => { const r = x.receiver.replace(/ #(\d+)$/, ''); const n = Number(x.receiver.match(/ #(\d+)$/)?.[1] || 1); return fold(atBase).split(r).length - 1 < n; });
   if (novel.length) { for (const x of novel) console.error(`NEW STRIP (not at ${base}): ${stripKey(x.file, x.receiver)}`); process.exit(1); }
   for (const x of mine) reg.strips.push([x.file, x.receiver, reason]);
   reg.strips.sort((p, q) => stripKey(p[0], p[1]).localeCompare(stripKey(q[0], q[1])));
   write();
   console.log(`banked ${mine.length} strip sites of ${file} under '${reason}'`);
 } else {
-  console.error('usage: --check | --shrink | --bank <reason> --base <rev> | --bank-strip <reason> <file> --base <rev>');
+  console.error('usage: --check | --shrink | --shrink-arm2 | --rekey-whole | --bank <reason> --base <rev> [--thing <id>] | --bank-strip <reason> <file> --base <rev>');
   process.exit(2);
 }

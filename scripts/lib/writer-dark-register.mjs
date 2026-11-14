@@ -180,14 +180,16 @@ export const WRITER_DARK_REGISTER = Object.freeze([
     writer: 'src/generators/economy/economicState.js',
     reason: 'engine-internal',
     consumer: Object.freeze({
-      file: 'src/generators/narrativeGenerator.js',
-      symbol: 'the church-controls test, which reads the situation description to find a church-run economy',
+      file: 'src/generators/generationCoherence.js',
+      symbol: 'the coherence battery, whose market and prosperity findings read the situation description',
     }),
     why: 'The generator\'s one-line economic situation was the public Economics lead only while the economy desk was '
       + 'silent on a shared page. The desk now speaks there (the owner\'s player-view draw, shipped at the save), and '
       + 'no owner view reached the line (0 of 300 towns), so the page reads DS-ECO-1 everywhere. The key stays written '
-      + 'for the engine: the narrative generator reads it for the church-run economy, and the coherence battery '
-      + 'reads it, both inside src/generators behind the closure STOP. Retiring the writer is its own lane\'s act.',
+      + 'for the engine: the coherence battery reads it, inside src/generators behind the closure STOP. The narrative '
+      + 'generator\'s church-controls read LEFT with W2-B-DECLARE item 5 (1ae138b47: the church note reads the stored '
+      + 'flag safetyProfile.flags.theocraticEconomy, not this sentence); the consumer was re-pointed by identity at '
+      + 'STYLE-2-MERGE point 49 (the chair\'s ruling on STOP 49c, record 405). Retiring the writer is its own lane\'s act.',
     charter: 'ODQ §885.3 as lifted by STYLE-RULINGS-2 B10(a) (the chair, 2026-11-09 12:5x; SW-B7b item 6: the legacy fallbacks leave in their desks\' causes)',
   }),
   // W2 DEF (2026-11-07, construction C3–C5, the third seat): the three §12 WRW-2 pending-surface rows —

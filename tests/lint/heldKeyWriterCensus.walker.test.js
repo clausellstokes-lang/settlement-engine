@@ -179,6 +179,13 @@ const ROSTER = Object.freeze([
   // child), keyed per card, and BOTH call sites consult the `relationships` pin: the family's second
   // lawful SKIP, lawful for the reason the first is (a child never created moves no sibling).
   { symbol: 'drawTies', file: 'src/generators/people/ties.js', cls: 'producer', stream: NAMED_CHILD, via: ASSEMBLY_STEP },
+  // ⭐ 20 -> 22 (COHERENCE-POWERS-3 F2, 28c93c9da; classed by COHERENCE-POWERS-4, 2026-11-12, each read from its own body):
+  // every text that names a power reads the final roster. `settleStandingToRoster` re-words the standing sentences and
+  // `settleNarrativesToRoster` the narratives inside `powerStructure` where the density law moved the roster; both return
+  // a new powerStructure (copy-on-write), draw nothing, and are called in the assembly body under the same
+  // `chooseOrPin(pins, 'powerStructure', …)` gate as conserveSeatPower, so a held roster is never re-written. MUTATORS.
+  { symbol: 'settleStandingToRoster', file: 'src/generators/power/rosterText.js', cls: 'mutator', stream: SHARED, via: ASSEMBLY_STEP },
+  { symbol: 'settleNarrativesToRoster', file: 'src/generators/power/rosterText.js', cls: 'mutator', stream: SHARED, via: ASSEMBLY_STEP },
 ]);
 
 /**
@@ -237,6 +244,11 @@ const DISCOVERY_EXEMPT = Object.freeze([
   { symbol: 'resolveSibling', reason: 'W2-FIX-DATA-7: resolves a stress entry\'s stored catalogue hook and note through their declared sets (stressTypes.js :: STRESS_TYPE_SIBLINGS), draw-free; touches `stress`, a READING, never a held key.' },
   // URBAN-FIX C-1 (935c961fd), composed at STYLE-2-MERGE point 25: the food record's composed line, read for the stored foodways.
   { symbol: 'foodwaysLineOf', reason: 'a pure READ of economicState.foodSecurity.foodRecord.foodwaysLine (trimmed, or null); it writes nothing at all.' },
+  // COHERENCE-POWERS-3 (F1, F2), classed by COHERENCE-POWERS-4 (2026-11-12), each read from its own body.
+  { symbol: 'seatFacesFoldedByDualHat', reason: 'a pure READ over the record (0 or 1: the seat\'s face the dual hat folded), handed to the density law as part of the mass; it writes nothing at all.' },
+  { symbol: 'standingRosterOf', reason: 'a pure READ: the roster the standing sentences were written on, copied before the resize; it returns a new array and writes nothing.' },
+  { symbol: 'standingForceOf', reason: 'a pure READ of the institutions for the standing sentence\'s force word; it returns a new object and writes nothing.' },
+  { symbol: 'settleTensionsToRoster', reason: 're-names a tension\'s parties inside `history` for the final roster (copy-on-write, no draw); `history` is not a held key.' },
 ]);
 
 /** The held denominator, DERIVED from its producers and never re-typed. */
@@ -551,7 +563,7 @@ describe('EM-R1 — the writer census of every held key', () => {
       if (!cache.has(row.file)) cache.set(row.file, declaredSymbols(rawSource(row.file)));
       if (cache.get(row.file).get(row.symbol) !== 1) unresolved.push(`${row.file} :: ${row.symbol}`);
     }
-    expect(ROSTER).toHaveLength(20); // ALLEGIANCE-CAR1 (2026-11-08): 17 -> 20, assignCastPowers -> landMemberships, rankPowers, dealAllegiances, assignHandlers (measured at the seam); 18 + 15 -> 17 (MERGE-CAR): the union of both sides less fitFactionRoster (CENSUS-4 R12, retired by the chair's SC-1 ruling): the car's 15 plus the rung-2 landing's resolveFactionLabelsAtClose and fishTradeTwinned; 16 -> 15 (PEOPLE-LAND): relinkFactionMembers and generateFactions left (M-2), truePersonHooks joined (lane 3's); with the grouping; 15 -> 16 (PEOPLE-4 TIES): drawTies; 11 -> 13 at the GS-2 merge (lane G2): generateFactions, generateConflicts; 13 -> 14 rung 1 N1 (2026-11-04): conserveSeatPower; 14 -> 15: storeTrueHooksOnly (lane RUNG1-TRUTH unit A; the union of both lanes' rows, composed on the window branch)
+    expect(ROSTER).toHaveLength(22); // COHERENCE-POWERS-4 (2026-11-12): 20 -> 22, settleStandingToRoster and settleNarrativesToRoster (the third seat's F2, measured at the assembly body); ALLEGIANCE-CAR1 (2026-11-08): 17 -> 20, assignCastPowers -> landMemberships, rankPowers, dealAllegiances, assignHandlers (measured at the seam); 18 + 15 -> 17 (MERGE-CAR): the union of both sides less fitFactionRoster (CENSUS-4 R12, retired by the chair's SC-1 ruling): the car's 15 plus the rung-2 landing's resolveFactionLabelsAtClose and fishTradeTwinned; 16 -> 15 (PEOPLE-LAND): relinkFactionMembers and generateFactions left (M-2), truePersonHooks joined (lane 3's); with the grouping; 15 -> 16 (PEOPLE-4 TIES): drawTies; 11 -> 13 at the GS-2 merge (lane G2): generateFactions, generateConflicts; 13 -> 14 rung 1 N1 (2026-11-04): conserveSeatPower; 14 -> 15: storeTrueHooksOnly (lane RUNG1-TRUTH unit A; the union of both lanes' rows, composed on the window branch)
     expect(unresolved, 'a roster row names a symbol its file no longer declares exactly once').toEqual([]);
 
     // (b) DISCOVERY, both directions, over the assembly step's OWN body.
@@ -649,7 +661,8 @@ describe('EM-R1 — the writer census of every held key', () => {
     const shared = ROSTER.filter((row) => row.stream === SHARED).map((row) => row.symbol).sort();
     expect(shared).toEqual([
       'conserveSeatPower', 'ensureFactionStructuralNpcs', 'fishTradeTwinned', 'generateCoherence', 'generateSettlementName',
-      'reconcilePowerStructure', 'resizePoliticalRoster', 'resolveFactionLabelsAtClose', 'storeTrueHooksOnly', 'truePersonHooks',
+      'reconcilePowerStructure', 'resizePoliticalRoster', 'resolveFactionLabelsAtClose', 'settleNarrativesToRoster', 'settleStandingToRoster',
+      'storeTrueHooksOnly', 'truePersonHooks',
     ]);
     // ⛔ generateSettlementName is the row this rule exists for: the mint draws on the assembly
     // step's own shared stream, so a held name is CONSUMED AND DISCARDED, never skipped.

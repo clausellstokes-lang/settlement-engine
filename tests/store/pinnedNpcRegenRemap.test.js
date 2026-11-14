@@ -40,7 +40,7 @@ vi.mock('../../src/lib/saves.js', () => ({
 // The reroll mints its seed through generateSeed() (the sanctioned wall-clock
 // seam, generateSettlementPipeline.js:416), which would turn the slot-moves
 // guard below into a coin flip per run. Pin the mint: under this fixed reroll
-// seed, paired with the FIXTURE seed below, the npcs[9] keeper provably moves
+// seed, paired with the FIXTURE seed below, the npcs[3] keeper provably moves
 // npc_inn_multiple → npc_carriers_guild since PEOPLE-1 CAST (it was npc_6 → npc_8, re-probed 2026-08-01, and
 // npc_7 → npc_8 on the pre-I1 tree).
 vi.mock('../../src/kernel/prng.js', async (importOriginal) => ({
@@ -111,9 +111,10 @@ describe('REGEN — a pin follows its subject through the roster reroll', () => 
     // Re-seated `-3`/npcs[2] to `-50`/npcs[9] on 2026-11-07 (PEOPLE-1 CAST dc655f712): ids are the houses' `npc_<slug>`,
     // stable across a reroll, so a keeper moves only when chooseSlot lands it on another house; of -0..-60 -50's innkeeper is the first
     // move off the leader's slot (npc_inn_multiple → npc_carriers_guild; also -13 at npcs[0], -53 at npcs[6]).
+    // The keeper re-keyed BY IDENTITY npcs[9] -> npcs[3] on 2026-11-12 (COHERENCE-POWERS-4): the same seed and the same keeper, -50's innkeeper (npc_inn_multiple -> npc_carriers_guild, the first of -0..-60 under this mint still), moved in the roster's order by the COHERENCE-POWERS lane's deal (rule A, 23a2015d4: 9 -> 2; cure (i), 04334d6ef: 2 -> 3), measured at each commit.
     const town = reloaded(generateSettlementPipeline(CFG, null, { seed: 'pins-store-regen-50', customContent: {} }));
-    town.npcs[9]._authored = true;
-    const target = town.npcs[9];
+    town.npcs[3]._authored = true;
+    const target = town.npcs[3];
     store.setState({
       settlement: town,
       config: town.config,

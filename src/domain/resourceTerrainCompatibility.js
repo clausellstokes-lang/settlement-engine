@@ -48,6 +48,23 @@ const CATALOG = /** @type {Record<string, ResourceTerrainRow & Record<string, un
   /** @type {unknown} */ (RESOURCE_DATA));
 
 /**
+ * THE TERRAIN A ROW REQUIRES, AND THE WORDS FOR ITS ABSENCE (COHERENCE-AGREE-7, P4: one home for the wizard's reason
+ * and the structural validator's warning). Null where the row names no terrain law or the terrain meets it; a
+ * terrain left unknown (null or undefined) is answered `unknownRefuses` (the wizard dims an unknown terrain, the
+ * validator makes no claim either way).
+ * @param {string} key a catalogue resource key
+ * @param {string|null|undefined} terrain the settlement's terrain
+ * @param {{ unknownRefuses?: boolean }} [options]
+ * @returns {string|null} "Only available in mountain terrain", or null
+ */
+export const requiredTerrainRefusal = (key, terrain, { unknownRefuses = true } = {}) => {
+  const required = Object.hasOwn(CATALOG, key) ? CATALOG[key].requiresTerrain : undefined;
+  if (!Array.isArray(required)) return null;
+  if (terrain === null || terrain === undefined) return unknownRefuses ? `Only available in ${required.join(' or ')} terrain` : null;
+  return required.includes(String(terrain)) ? null : `Only available in ${required.join(' or ')} terrain`;
+};
+
+/**
  * @param {string} route
  * @param {string|null} [terrain]
  * @returns {Array<{ key: string, compatible: boolean, offered: boolean, incompatibleReason: (string|null) } & Record<string, unknown>>}
@@ -112,9 +129,9 @@ export const getCompatibleResources = (route, terrain = null) =>
     // COHERENCE-AGREE-6 (REVIEW-AGREE-2 F5 (d)): the terrain a row requires (`requiresTerrain`: the mountain pass) is
     // read as its access is: the pool (`compatible`) is unchanged, the wizard does not offer it elsewhere, and a
     // person may still force it.
-    const terrainMissing = Array.isArray(r.requiresTerrain) && !r.requiresTerrain.includes(String(terrain));
-    const offered = compatible && !accessMissing && !terrainMissing;
+    const terrainRefusal = requiredTerrainRefusal(key, terrain);
+    const offered = compatible && !accessMissing && terrainRefusal === null;
     if (compatible && accessMissing) incompatibleReason = r.warning || 'Not compatible with ' + route + ' access.';
-    else if (compatible && terrainMissing) incompatibleReason = `Only available in ${(r.requiresTerrain || []).join(' or ')} terrain`;
+    else if (compatible && terrainRefusal !== null) incompatibleReason = terrainRefusal;
     return { key, ...r, compatible, offered, incompatibleReason };
   });

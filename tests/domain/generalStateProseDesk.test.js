@@ -1249,7 +1249,10 @@ describe('the history chapter', () => {
       expect(eventRecordPoolKey([{ ...blow(true, 5), severity }])).toBe('ANCHORED-RECENT');
       expect(eventRecordPoolKey([{ ...blow(false, 5), severity }])).toBe('RECORDED-UNANCHORED');
     }
-    expect(eventAnchorDimension(undefined)).toBeNull();
+    // re-keyed by the chair's ruling of 2026-11-13 (W2-B-DECLARE second seat): an absent flag is "not anchored" — the
+    // generator's own timeline reads it `e.anchored || false`; an unknown type still answers nothing
+    expect(eventAnchorDimension(undefined)).toBe('not anchored');
+    expect(eventAnchorDimension('yes')).toBeNull();
     expect(eventAnchorDimension(true)).toBe('anchored');
     expect(eventAnchorDimension(false)).toBe('not anchored');
     // The marker SELECTION is stated, not left to array order: the nearest ANCHORED row wins.

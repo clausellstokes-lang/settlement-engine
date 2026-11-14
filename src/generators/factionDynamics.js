@@ -333,6 +333,19 @@ export function withCaptureRelations(powerStructure, state) {
  *   the line unconditional for a caller that holds no roster
  * @returns {Array} relationship objects
  */
+
+/**
+ * THE MERCHANTS' AND CRAFTSMEN'S VOTE, A DECLARED PAIR (COHERENCE-POWERS-3, F2; the chair's ruling (a)). `against` names
+ * the landholding power and NEEDS it on the page; `sibling` names no third power. The relationship is drawn here, at the
+ * power step; the density law may trim the landholding power afterwards, and the assembly's settling pass
+ * (power/rosterText.js :: settleNarrativesToRoster) then takes the sibling by the refused-winner rule, with no roll.
+ */
+export const MERCHANT_CRAFT_VOTE = Object.freeze({
+  needs: 'the landholding power it names',
+  against: (/** @type {string} */ merchants, /** @type {string} */ craft, /** @type {string} */ landholders) => `${merchants} and ${craft} vote together against ${landholders}, then fight over who keeps the profit.`,
+  sibling: (/** @type {string} */ merchants, /** @type {string} */ craft) => `${merchants} and ${craft} vote together whenever trade is at stake, then fight over who keeps the profit.`,
+});
+
 export function computeFactionRelationships(factions, tier, instFlags, publicLeg, stressTypes = [], defenseFacts = null) {
   const rels = [];
   const stressed = t => stressTypes.includes(t);
@@ -470,8 +483,8 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
       // STYLE-2 B7 (SW-7, P9): "the landlords" was a fixed noun the roster did not hold; the line names the
       // landholding power when one stands, and otherwise names none.
       narrative = noble && noble !== merc && noble !== craft
-        ? `${merc.faction} and ${craft.faction} vote together against ${noble.faction}, then fight over who keeps the profit.`
-        : `${merc.faction} and ${craft.faction} vote together whenever trade is at stake, then fight over who keeps the profit.`;
+        ? MERCHANT_CRAFT_VOTE.against(merc.faction, craft.faction, noble.faction)
+        : MERCHANT_CRAFT_VOTE.sibling(merc.faction, craft.faction);
     } else {
       type = 'tense';
       narrative = `Only the masters of ${craft.faction} know how to make what ${merc.faction} sells, so the merchants pay their price.`;

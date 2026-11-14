@@ -3715,7 +3715,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "colour"
+            "gate"
           ],
           "text": "{settlement} is walled, and every arrival goes through a gate and into the gate tally; trouble can only get in where the town decides.",
           "slots": [

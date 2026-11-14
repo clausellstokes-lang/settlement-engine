@@ -303,6 +303,17 @@ export function poolFor(title, shelf) {
 }
 
 /**
+ * THE POWER BANDS (COHERENCE-POWERS-5, N2): the three bands a role's keywords place it in (npcGenerator.js ::
+ * powerBandOfRole), each the card's `influence` word and its `power` span on the 1-10 scale the card and the PDF print —
+ * the spans `generateNPCPowerLevel` has always drawn within (high 8-10, moderate 4-7, low 1-3), lowest first.
+ */
+export const POWER_BANDS = Object.freeze({
+  low: Object.freeze({ level: 'low', floor: 1, span: 3, order: 0 }),
+  moderate: Object.freeze({ level: 'moderate', floor: 4, span: 4, order: 1 }),
+  high: Object.freeze({ level: 'high', floor: 8, span: 3, order: 2 }),
+});
+
+/**
  * The seat's pool row at a tier: the tier's seat role, the government pools.
  * @param {string | null | undefined} tier
  * @returns {PoolRow & { fallback: boolean, via: 'seat' }}

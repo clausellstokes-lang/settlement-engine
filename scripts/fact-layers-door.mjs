@@ -44,16 +44,23 @@ for (const arm of /** @type {const} */ (['leaves', 'pools'])) {
     for (const x of list) if (!(tree[arm][id] || []).includes(x)) falls.push(`${arm} ${id}: ${x}`);
   }
 }
+// readers: BY LINE (REVIEW-W2A F6) — a line the tree reads that the register does not bank is a rise; a banked
+// line the tree no longer reads is a fall (its reason goes with it)
+/** @type {Record<string, Record<string, Array<{ line: string, reason: string }>>>} */ const keptReaders = {};
 for (const [file, fams] of Object.entries(tree.readers)) {
-  for (const [fam, n] of Object.entries(fams)) {
-    const banked = reg.readers[file]?.[fam] ?? 0;
-    if (n > banked) rises.push(`readers ${file} ${fam}: ${banked} → ${n}`);
+  for (const [fam, lines] of Object.entries(fams)) {
+    const pool = [...(reg.readers[file]?.[fam] || [])];
+    for (const line of lines) {
+      const at = pool.findIndex((r) => r.line === line);
+      if (at < 0) { rises.push(`readers ${file} ${fam}: ${line}`); continue; }
+      ((keptReaders[file] ||= {})[fam] ||= []).push(pool[at]); pool.splice(at, 1);
+    }
   }
 }
 for (const [file, fams] of Object.entries(reg.readers)) {
-  for (const [fam, n] of Object.entries(/** @type {Record<string, number>} */ (fams))) {
-    const m = tree.readers[file]?.[fam] ?? 0;
-    if (m < n) falls.push(`readers ${file} ${fam}: ${n} → ${m}`);
+  for (const [fam, rows] of Object.entries(/** @type {Record<string, Array<{ line: string }>>} */ (fams))) {
+    const lines = [...(tree.readers[file]?.[fam] || [])];
+    for (const r of rows) { const at = lines.indexOf(r.line); if (at < 0) falls.push(`readers ${file} ${fam}: ${r.line}`); else lines.splice(at, 1); }
   }
 }
 for (const r of rises) console.log(`RISE  ${r}`);
@@ -64,6 +71,6 @@ if (rises.length) {
   process.exit(1);
 }
 if (shrink && falls.length) {
-  writeFileSync(join(ROOT, REGISTER_REL), `${JSON.stringify({ ...reg, ...tree }, null, 1)}\n`);
+  writeFileSync(join(ROOT, REGISTER_REL), `${JSON.stringify({ ...reg, leaves: tree.leaves, pools: tree.pools, readers: keptReaders }, null, 1)}\n`);
   console.log(`written: ${REGISTER_REL}`);
 }

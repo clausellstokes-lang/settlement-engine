@@ -44,6 +44,7 @@ import {
   RETIRED_TRAIN_CAR3_BASELINE_SCHEMA,
   RETIRED_TRAIN_CAR4_BASELINE_SCHEMA,
   RETIRED_PUBLIC_PROSE_BASELINE_SCHEMA,
+  RETIRED_PLAYED_WORLDS_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA,
   validateSchema3Baseline,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
@@ -87,6 +88,7 @@ import {
   validateSchema39Baseline,
   validateSchema40Baseline,
   validateSchema41Baseline,
+  validateSchema42Baseline,
 } from '../../scripts/lib/observed-shape-baseline.mjs';
 import {
   digestOf,
@@ -399,7 +401,9 @@ describe('observed-shape schema-3 baseline envelope', () => {
     // ⭐ SCHEMA 39: MERGE-TRAIN at the ALLEGIANCE-CAR4 merge (one rung, two causes: the goals rebuilt — 7 admitted, 4 repaired, 16 uncured instrument erosion — and the fingerprint re-based, 1 admitted).
     // ⭐ SCHEMA 40: THE PUBLIC PROSE WRITER'S ADMISSION (lane SW-B7b PROJECTION, the chair's grant of 2026-11-09 13:5x): ONE save-time-writer declaration, `publicProse on settlement` (the roster 14 -> 15, the bank 77/51); its one new row is admitted tagged and nothing else moves.
     // ⭐ SCHEMA 41: THE PLAYED-WORLDS WRITER'S ADMISSION (STYLE-2-MERGE closing act 5, the chair's FINAL RULING of 2026-11-09 21:2x): a NEW writer class, played-worlds-writer, and its first declaration, `outcome on outcome` (the roster 15 -> 16, the bank 78/52); its one row, admitted ordinary at 40, is tagged and nothing else moves.
-    expect(BASELINE_SCHEMA).toBe(41);
+    // ⭐ SCHEMA 42: the agreement lane's tier seed (STYLE-2-MERGE point 47, STOP 47a) — producer 2b's seed re-searched (osr-tier-14 -> osr-tier-19); topology, tag law, roster and bank unchanged.
+    expect(BASELINE_SCHEMA).toBe(42);
+    expect(RETIRED_PLAYED_WORLDS_BASELINE_SCHEMA).toBe(41);
     expect(RETIRED_PUBLIC_PROSE_BASELINE_SCHEMA).toBe(40);
     expect(RETIRED_TRAIN_CAR4_BASELINE_SCHEMA).toBe(39);
     expect(RETIRED_TRAIN_CAR3_BASELINE_SCHEMA).toBe(38);
@@ -805,6 +809,13 @@ function validSchema40Baseline_fixture() {
   return baseline;
 }
 
+/** The RETIRED schema-41 envelope, pinned to its own LITERAL number (the tier-seed rung). */
+function validSchema41Baseline_fixture() {
+  const baseline = validSchema7Baseline();
+  baseline.schema = RETIRED_PLAYED_WORLDS_BASELINE_SCHEMA;
+  return baseline;
+}
+
 /** The LIVE envelope, whatever number is in force. */
 function validLiveBaseline() {
   const baseline = validSchema7Baseline();
@@ -1155,9 +1166,14 @@ describe('observed-shape schema-7 bank-by-rule envelope', () => {
     // ⭐ 40 IS RETIRED at the schema-41 rung (STYLE-2-MERGE closing act 5, the played-worlds writer) and validates its OWN literal.
     const publicProse = validSchema40Baseline_fixture();
     expect(validateSchema40Baseline(publicProse)).toBe(publicProse);
-    expect(validateSchema41Baseline(live)).toBe(live);
     expect(() => validateSchema40Baseline(live)).toThrow(/is not schema 40/);
     expect(() => validateSchema41Baseline(publicProse)).toThrow(/is not schema 41/);
+    // ⭐ 41 IS RETIRED at the schema-42 rung (the agreement lane's tier seed (STYLE-2-MERGE point 47, STOP 47a)) and validates its OWN literal.
+    const playedWorlds = validSchema41Baseline_fixture();
+    expect(validateSchema41Baseline(playedWorlds)).toBe(playedWorlds);
+    expect(validateSchema42Baseline(live)).toBe(live);
+    expect(() => validateSchema41Baseline(live)).toThrow(/is not schema 41/);
+    expect(() => validateSchema42Baseline(playedWorlds)).toThrow(/is not schema 42/);
     expect(() => validateSchema30Baseline(live)).toThrow(/is not schema 30/);
     expect(() => validateSchema31Baseline(peopleCast)).toThrow(/is not schema 31/);
     expect(() => validateSchema29Baseline(live)).toThrow(/is not schema 29/);

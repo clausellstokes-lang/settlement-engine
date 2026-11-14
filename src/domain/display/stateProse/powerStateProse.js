@@ -84,6 +84,7 @@ import { legibilityRung } from './legibilityRung.js';
 import { wallsAnswered } from '../../defense/defenseFacts.js';
 import { crisisAnswered } from '../../crisis/crisisFacts.js';
 import { factsAnswered } from '../../facts/factsAnswered.js';
+import { corpusAdmittingCrimeLines, crimeLineFactsOf } from './crimeLineDisqualifiers.js';
 
 /**
  * The desk's corpus, typed at the import boundary. The generated leaves stay PURE DATA
@@ -441,11 +442,10 @@ export function capturePoolKey(captureState, breakdown) {
   const state = text(captureState);
   if (state === 'capture') return 'capture reached a LEADER';
   if (state === 'corrupted') return 'capture reached an AGENT of a faction';
-  // 5a (W2-A-LEAVES, 2026-11-12; the second wave's ruling: THE DESK READS THE STORED STATE). At 'none' the hall card
-  // prints "Free of the criminals" off this same stored state, and both pressure pools assert the criminals' reach
-  // (money reaching the officials; a grip being lost). The pressure pools are drawn only at a state that has met
-  // the criminals; at none the desk says nothing. An absent state (an older record) reads as before.
-  if (state === 'none') return null;
+  // 5a, RE-RULED (W2-A-LEAVES-2, 2026-11-13; REVIEW-W2A F3: "the blanket silence is withdrawn"). The first seat
+  // returned null here at 'none', and 288 lines left the page, most of them true. The pressure pools are drawn
+  // at every rung below `corrupted` again; each of their lines that presumes a bought official, or a grip on the
+  // hall, is struck where the town makes it false (`crimeLineDisqualifiers.js`, enforced at the draw below).
   if (!breakdown) return null;
   const safety = contribution(breakdown.safety);
   const prosperity = contribution(breakdown.prosperity);
@@ -1055,9 +1055,12 @@ export function powerStateProse(settlement, readings = {}, options = {}) {
       candidates: powerStateProseCandidates('DS-POW-4', readings),
     })
     : null);
+  // W2-A-LEAVES-2 (REVIEW-W2A F3): the crime desk's lines are drawn among those no declared disqualifier strikes
+  // for this town (an official in a criminal's pay, or none; the hall's stored rung).
+  const corpus6 = corpusAdmittingCrimeLines(CORPUS, 'DS-POW-6', crimeLineFactsOf(settlement, options.audience));
   /** @param {string|null} poolKey */
   const line6 = (poolKey) => (poolKey
-    ? composeStateProse(CORPUS, 'DS-POW-6', {
+    ? composeStateProse(corpus6, 'DS-POW-6', {
       ...options,
       slots: { settlement: town, seat: governing, faction: governing },
       spineKey: poolKey,

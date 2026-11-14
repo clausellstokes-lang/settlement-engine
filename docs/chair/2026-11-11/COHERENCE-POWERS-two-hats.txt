@@ -1,0 +1,132 @@
+Ulfsund — a hamlet, ruled by Feudal Stewardship
+  Power tab, seat row: Kjara Ragnarsson, the steward
+  The person's card:   Kjara Ragnarsson · Steward · first of Feudal Stewardship
+  The seat's house (Lord's steward): Connection: Steward Kjara Ragnarsson
+Rotfeld — a village, ruled by Elected Reeve
+  Power tab, seat row: Hans Walter, the innkeeper and Reeve
+  The person's card:   Hans Walter · Innkeeper · Reeve, first of Elected Reeve · first of Merchant Guilds
+  The seat's house (Village reeve): Connection: Reeve Hans Walter, the innkeeper
+Gankhuubuurt — a village, ruled by Household Council
+  Power tab, seat row: Mongke Tayichi'ud, the master fishmonger and Household Elder
+  The person's card:   Mongke Tayichi'ud · Master Fishmonger · Household Elder, first of Household Council · first of Merchant Guilds
+  The seat's house (none): Connection: (no seat house)
+Kamendvor — a village, ruled by Elder Council
+  Power tab, seat row: (Stands empty; the succession is unsettled.)
+  The person's card:   (none)
+  The seat's house (none): Connection: (no seat house)
+Caermere — a village, ruled by Headman's Authority
+  Power tab, seat row: Moira Flaherty, the innkeeper and Headman
+  The person's card:   Moira Flaherty · Innkeeper · Headman, first of Headman's Authority
+  The seat's house (none): Connection: (no seat house)
+Quirigmul — a village, ruled by Priestly Guidance
+  Power tab, seat row: Dzuna Coh, the priest and Elder Priest
+  The person's card:   Dzuna Coh · Tlamacazqui · Elder Priest, first of Priestly Guidance
+  The seat's house (none): Connection: (no seat house)
+Saraikhand — a town, ruled by Military Council
+  Power tab, seat row: Nomun Noyakin, the castellan and Captain-Mayor
+  The person's card:   Nomun Noyakin · Constable · Captain-Mayor, first of Military Council
+  The seat's house (Town hall): Connection: Captain-Mayor Nomun Noyakin, the castellan
+Ögedeigol — a town, ruled by Town Mayor
+  Power tab, seat row: Naiman Arlat, the smelt master and Mayor
+  The person's card:   Naiman Arlat · Master Smelter · Mayor, first of Town Mayor
+  The seat's house (Town hall): Connection: Mayor Naiman Arlat, the smelt master
+Dioncastron — a town, ruled by Church Council
+  Power tab, seat row: Barbara Limniotes, the dean and Warden of the Council
+  The person's card:   Barbara Limniotes · Dean · Warden of the Council, first of Church Council
+  The seat's house (Town hall): Connection: Warden of the Council Barbara Limniotes, the dean
+Dunkelfurt — a town, ruled by Corrupt Council
+  Power tab, seat row: Margarete Maier, the council's fixer
+  The person's card:   Margarete Maier · Fixer · first of Corrupt Council
+  The seat's house (Town hall): Connection: Fixer Margarete Maier
+Altavilla — a town, ruled by Merchant oligarchy
+  Power tab, seat row: Quintus Brutus, the senior guild master and First Magnate
+  The person's card:   Quintus Brutus · Master of the Guild · First Magnate, first of Merchant oligarchy · first of Merchant Guilds
+  The seat's house (Merchant oligarchy): Connection: First Magnate Quintus Brutus, the senior guild master
+Tallganj — a town, ruled by Feudal Appointee
+  Power tab, seat row: Safiya al-Jabbar, the lord's appointee
+  The person's card:   Safiya al-Jabbar · Bailiff · first of Landed Gentry · first of Feudal Appointee
+  The seat's house (Lord's appointee): Connection: Bailiff Safiya al-Jabbar
+Tzulha — a town, ruled by Merchant Council
+  Power tab, seat row: Patli May, the senior guild master and Burgomaster
+  The person's card:   Patli May · Master of the Guild · Burgomaster, first of Merchant Council · first of Merchant Guilds
+  The seat's house (Town hall): Connection: Burgomaster Patli May, the senior guild master
+Tlalitza — a town, ruled by Arcane Council
+  Power tab, seat row: Coatlicue Cohuoh, the alchemist and Archmage of the Council
+  The person's card:   Coatlicue Cohuoh · Alchemist · Archmage of the Council, first of Arcane Council
+  The seat's house (Mayor and council): Connection: Archmage of the Council Coatlicue Cohuoh, the alchemist
+Xiaguan — a town, ruled by Guild Council
+  Power tab, seat row: Wu Yang, the senior guild master and Alderman
+  The person's card:   Wu Yang · Master of the Guild · Alderman, first of Guild Council
+  The seat's house (Guild governance): Connection: Alderman Wu Yang, the senior guild master
+Muulatl — a town, ruled by Town Council
+  Power tab, seat row: Tochtli Xoc, the senior craft-guild master and Mayor
+  The person's card:   Tochtli Xoc · Guildmaster · Mayor, first of Town Council
+  The seat's house (Town council): Connection: Mayor Tochtli Xoc, the senior craft-guild master
+Celoki — a city, ruled by Merchant Guild Council
+  Power tab, seat row: Alexei Davydov, the senior guild master and Master of the Guilds
+  The person's card:   Alexei Davydov · Warden of the Guild · Master of the Guilds, first of Merchant Guild Council
+  The seat's house (Guild consortium): Connection: Master of the Guilds Alexei Davydov, the senior guild master
+Qasrnala — a city, ruled by City-State Council
+  Power tab, seat row: Fadl al-Amin, the senior craft-guild master and First Councillor
+  The person's card:   Fadl al-Amin · Guildmaster · First Councillor, first of City-State Council
+  The seat's house (City-state government): Connection: First Councillor Fadl al-Amin, the senior craft-guild master
+Naranjoek — a city, ruled by Merchant City Council
+  Power tab, seat row: Daniyya Nauat, the senior guild master and Lord Burgomaster
+  The person's card:   Daniyya Nauat · Warden of the Guild · Lord Burgomaster, first of Merchant City Council
+  The seat's house (City hall): Connection: Lord Burgomaster Daniyya Nauat, the senior guild master
+Fontemare — a city, ruled by Noble Governorship
+  Power tab, seat row: Ursus Albinus, the governor
+  The person's card:   Ursus Albinus · Governor · first of Noble Families · first of Noble Governorship
+  The seat's house (Noble governor): Connection: Governor Ursus Albinus
+Erdenbulag — a city, ruled by Military City Council
+  Power tab, seat row: Khubilai Urgench, the watch commander and Lord Marshal
+  The person's card:   Khubilai Urgench · Commander of the Watch · Lord Marshal, first of Military City Council
+  The seat's house (Mayor and council): Connection: Lord Marshal Khubilai Urgench, the watch commander
+Ingistad — a city, ruled by Ecclesiastical Council
+  Power tab, seat row: Kráka Sigurðarson, the dean and Lord Warden
+  The person's card:   Kráka Sigurðarson · Dean · Lord Warden, first of Ecclesiastical Council
+  The seat's house (City hall): Connection: Lord Warden Kráka Sigurðarson, the dean
+Tenomal — a city, ruled by Royal Authority
+  Power tab, seat row: Tlacochcalco Balam, the monarch
+  The person's card:   Tlacochcalco Balam · Huey Tlatoani · first of Royal Authority · second of Noble Families
+  The seat's house (Royal seat): Connection: Huey Tlatoani Tlacochcalco Balam
+Navanagar — a city, ruled by Corrupt City Council
+  Power tab, seat row: Daksha Deshpande, the chief administrator
+  The person's card:   Daksha Deshpande · Chief Administrator · first of Corrupt City Council
+  The seat's house (City administration): Connection: Chief Administrator Daksha Deshpande
+Hochheim — a city, ruled by City Council
+  Power tab, seat row: Cunigund Schneider, the senior guild master and Lord Mayor
+  The person's card:   Cunigund Schneider · Warden of the Guild · Lord Mayor, first of City Council · first of Merchant Guilds
+  The seat's house (City administration): Connection: Lord Mayor Cunigund Schneider, the senior guild master
+Vatanbalik — a city, ruled by Democratic assembly
+  Power tab, seat row: Purevdulam Geniges, the senior guild master and Speaker of the Assembly
+  The person's card:   Purevdulam Geniges · Warden of the Guild · Speaker of the Assembly, first of Democratic assembly · first of Merchant Guilds
+  The seat's house (Democratic assembly): Connection: Speaker of the Assembly Purevdulam Geniges, the senior guild master
+Yekebash — a metropolis, ruled by Grand Guild Consortium
+  Power tab, seat row: Urangua Naiman, the exchange master and Master of the Guilds
+  The person's card:   Urangua Naiman · Master of the Exchange · Master of the Guilds, first of Grand Guild Consortium · first of Merchant Guilds
+  The seat's house (Guild consortium): Connection: Master of the Guilds Urangua Naiman, the exchange master
+Rotmark — a metropolis, ruled by Grand Military Council
+  Power tab, seat row: Gebhard Friedmann, the watch commander and Lord Marshal
+  The person's card:   Gebhard Friedmann · Commander of the Watch · Lord Marshal, first of Grand Military Council
+  The seat's house (City administration): Connection: Lord Marshal Gebhard Friedmann, the watch commander
+Vallevilla — a metropolis, ruled by Grand Merchant Oligarchy
+  Power tab, seat row: Iulia Strabo, the exchange master and First Magnate
+  The person's card:   Iulia Strabo · Master of the Exchange · First Magnate, first of Grand Merchant Oligarchy · first of Merchant Guilds
+  The seat's house (Merchant oligarchy): Connection: First Magnate Iulia Strabo, the exchange master
+Langengasse — a metropolis, ruled by Ducal Governorship
+  Power tab, seat row: Luise Zimmerer, the governor
+  The person's card:   Luise Zimmerer · Governor · first of Noble Houses · first of Ducal Governorship
+  The seat's house (Noble governor): Connection: Governor Luise Zimmerer
+Evangeskala — a metropolis, ruled by Shadow Senate
+  Power tab, seat row: Gregorios Mosele, the chief administrator
+  The person's card:   Gregorios Mosele · Chief Administrator · first of Shadow Senate
+  The seat's house (City administration): Connection: Chief Administrator Gregorios Mosele
+Schwarzbrücke — a metropolis, ruled by Grand Council
+  Power tab, seat row: Uta Kaiser, the senior craft-guild master and Lord Mayor
+  The person's card:   Uta Kaiser · Master of the Guild · Lord Mayor, first of Grand Council
+  The seat's house (City administration): Connection: Lord Mayor Uta Kaiser, the senior craft-guild master
+Lipomir — a metropolis, ruled by Grand Merchant Senate
+  Power tab, seat row: (Stands empty; the succession is unsettled.)
+  The person's card:   (none)
+  The seat's house (Mayor and council): Connection: Doge Xeno Matić, the exchange master
