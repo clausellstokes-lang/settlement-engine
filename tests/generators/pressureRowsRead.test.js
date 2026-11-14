@@ -96,3 +96,14 @@ describe('A3 the history\'s character, born in the census shape', () => {
     expect(born('r2s-famine-town-0').history.historicalCharacter).toMatch(/didn't create the merchant class/);
   });
 });
+
+describe('A4 a famine with fewer than two powers says no one eats well (R2-CODE-A-10, CENSUS-2 b/famine:plenty)', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  it('the census\'s thorps and hamlets at a third of their need are not told someone eats well (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures([['r2s-famine-thorp-0', 'thorp'], ['r2s-famine-hamlet-0', 'hamlet']], ([seed, size]) => {
+      const s = /** @type {any} */ (generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded', settType: size, selectedStresses: ['famine'], selectedStressesRandom: false }), null, { seed, customContent: {} }));
+      expect(String(s.pressureSentence), `${seed}: the famine's power line prints`).toMatch(/^Since the \w+ failed, food is power in /);
+      expect(String(s.pressureSentence), `${seed}: nobody eats well`).not.toMatch(/eats? well/); // anchored: the line above asserts the same sentence prints; red at 8e6fd5e58
+    }), 'a famine with fewer than two powers says no one eats well');
+  });
+});
