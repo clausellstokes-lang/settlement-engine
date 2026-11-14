@@ -4535,6 +4535,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "POSTURE: vulnerable": [
         {
           "angle": "ledger",
+          "marks": [
+            "no crisis: under_siege"
+          ],
           "text": "{settlement} has goods to sell and no dependable way to move them. The exports are real and the road they leave by is not.",
           "slots": [
             "settlement"
@@ -4543,6 +4546,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "no crisis: under_siege"
+          ],
           "text": "What the town makes has to get out over the {access}, and the {access} is not the kind of road a trader counts on.",
           "slots": [
             "access"
@@ -4551,6 +4557,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
+          "marks": [
+            "no crisis: under_siege"
+          ],
           "text": "{settlement} has goods to sell, but the way out is unreliable, and a trader never knows whether a load will get through.",
           "slots": [
             "settlement"

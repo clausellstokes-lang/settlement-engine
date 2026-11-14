@@ -71,6 +71,8 @@ const GUARDS = [
   { seed: 'rww-city-calm-1', pool: 'DS-ECO-6::TIER: minor shadow activity (≥3)', vid: 0, why: 'organised crime: "a nuisance, nothing more" beside a thieves\' guild chapter and an organised syndicate (the increment\'s ww791; round three #1378; v4 v5 are the organised rows)' },
   { seed: 'rww-hamlet-famine-1', pool: 'DS-ECO-6::TIER: minor shadow activity (≥3)', vid: 0, why: 'a famine: "a nuisance, nothing more" beside "Desperate: hunger is eroding order" (the increment\'s ww36)' },
   { seed: 'rww-village-under_siege-1', pool: 'DS-ECO-6::TIER: minor shadow activity (≥3)', vid: 0, why: 'a siege: "a nuisance, nothing more" beside desperation theft and black-market food (the increment\'s ww1245)' },
+  { seed: 'rww-town-under_siege-1', pool: 'DS-ECO-10::POSTURE: vulnerable', vid: 3, why: 'a siege: "a trader never knows whether a load will get through" beside "nothing comes in by road" (the increment\'s ww500; the way out is closed, not unreliable)' },
+  { seed: 'w5-city-under_siege-3', pool: 'DS-ECO-10::POSTURE: vulnerable', vid: 1, why: 'a siege: "no dependable way to move them ... the road they leave by is not" beside "nothing comes in by road" (v3\'s twin, the same mark)' },
 ];
 
 /** @param {string} seed */

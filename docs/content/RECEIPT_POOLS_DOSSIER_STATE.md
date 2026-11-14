@@ -1550,9 +1550,9 @@ note that carries it on the six wired surfaces.
 3. `[visitor]` Ask what this town sells and you get one answer, given without hesitation and without a second item.
 
 **POSTURE: `vulnerable`** *(structural only: the approach is unreliable by its nature)*
-1. `[ledger]` {settlement} has goods to sell and no dependable way to move them. The exports are real and the road they leave by is not.
-2. `[visitor]` What the town makes has to get out over the {access}, and the {access} is not the kind of road a trader counts on.
-3. `[threshold]` {settlement} has goods to sell, but the way out is unreliable, and a trader never knows whether a load will get through.
+1. `[ledger · no crisis: under_siege]` {settlement} has goods to sell and no dependable way to move them. The exports are real and the road they leave by is not.
+2. `[visitor · no crisis: under_siege]` What the town makes has to get out over the {access}, and the {access} is not the kind of road a trader counts on.
+3. `[threshold · no crisis: under_siege]` {settlement} has goods to sell, but the way out is unreliable, and a trader never knows whether a load will get through.
 
 **POSTURE: `entrepot`**
 1. `[ledger · no crisis: under_siege]` {settlement} sells on goods it never made: some of what leaves the town entered it as imports the same season.

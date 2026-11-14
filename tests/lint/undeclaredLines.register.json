@@ -54,7 +54,6 @@
     "DS-SUP-2::COLLAPSING": 3,
     "DS-ECO-10::POSTURE: none": 3,
     "DS-ECO-10::POSTURE: limited": 3,
-    "DS-ECO-10::POSTURE: vulnerable": 3,
     "DS-ECO-10::POSTURE: import_dependent": 3,
     "DS-ECO-10::THE FRESHNESS CAVEAT: for any surface printing a derived tally": 3,
     "DS-ECO-11::TERRAIN: Mountains": 3,

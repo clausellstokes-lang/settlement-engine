@@ -16766,8 +16766,10 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 3,
+      "lineDeclares": {
+        "no crisis: under_siege": 3
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
