@@ -151,7 +151,12 @@ export function institutionDisplayName(instOrName) {
  * household ranges and floors ("(75-650 households)", "(3500+ households)": digit-led) and the
  * display-name table's own ranges ("Houses of worship (10-30)", stripped after the table maps).
  */
-const CATALOGUE_MACHINERY_BRACKET = /\s*\((?:\d[^)]*|high magic|if walled)\)\s*$/i;
+// R2-CODE-B-12, the chair's ruling (m) (NOLANE-HANDBACK's "Fence (word of mouth)", 24 towns on the joined 720): the
+// catalogue's other GRADES, measured by script over every bracketed name the 1,536 births hold: how the house is found
+// ("(word of mouth)"), its scale ("(commercial)"), its strength ("(powerful)") and a spell level ("(divine, 1st
+// level)"). None is the house's own name (no town holds the bare name beside it). The in-world qualifiers stay:
+// (official), (established), (part-time), (resident), (guild), (district), (open cast), (red light district).
+const CATALOGUE_MACHINERY_BRACKET = /\s*\((?:\d[^)]*|high magic|if walled|word of mouth|commercial|powerful|[a-z]+, \d+(?:st|nd|rd|th) level)\)\s*$/i;
 
 /**
  * A COUNT WORD IS A PLURAL, NEVER A PARENTHESIS (ruling (a)): the catalogue's one count word,
