@@ -3059,7 +3059,7 @@ reading rather than a settled one.
 3. `[visitor · crisis: any · no crisis: threat, unrest]` Visitors feel safe at {settlement}, and it is plain that somebody keeps it that way.
 
 **`Moderate`**
-1. `[street · guardPresence]` {settlement} keeps a working balance: the law is present, and nobody has the run of the town.
+1. `[street · guardPresence]` {settlement} keeps a working balance: the law is present, so is crime, and neither has the upper hand.
 2. `[ledger · guardPresence]` The town's record of crimes at {settlement} is neither short nor growing: the law and the criminals are close to even, and the next few seasons will decide which way it goes.
 3. `[visitor · colour]` Visitors to {settlement} are told which few streets to avoid, and the advice turns out to be right.
 4. `[threshold · watch]` Order at {settlement} could tip either way: a few fewer watchmen or one bolder gang would be felt on the streets within the season.

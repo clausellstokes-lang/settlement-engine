@@ -2567,7 +2567,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "guardPresence"
           ],
-          "text": "{settlement} keeps a working balance: the law is present, and nobody has the run of the town.",
+          "text": "{settlement} keeps a working balance: the law is present, so is crime, and neither has the upper hand.",
           "slots": [
             "settlement"
           ],

@@ -43,7 +43,7 @@ seat itself; long runs never cross a turn's end, the suite in six shards; no pul
 | 9 | DS-DEF-8 override: MIGRATION, arrivals | v4 | struck (last row) | a17d14618 (sixth) | v1, v3 print, true |
 | 10 | DS-DEF-2 CHAIN: food trades failing | v3 | reworded (+ the pool and its sibling re-said) | 94c1d5dc5 (sixth) | |
 | 11 | DS-DEF-5 walls PRESENT | v7 | reworded | this seat | v7 itself |
-| 12 | DS-DEF-3 Moderate | v1 | LEFT | | |
+| 12 | DS-DEF-3 Moderate | v1 | reworded | this seat | v1 itself |
 | 13 | DS-DEF-2 CHAIN: defence supplied | v6 | struck (last row) | a17d14618 (sixth) | v5 prints, true |
 | 14 | DS-DEF-3 COMPOUND: insurgency | v5 | struck (last row) | a17d14618 (sixth) | v2, v4 print, true |
 | 15 | DS-DEF-11 WALLED-STRAINED | v3 | declared `no soldiers`, the slot out | this seat | v4 prints where soldiers stand |
@@ -71,9 +71,10 @@ Settled 17 (fifth seat 9, sixth seat 8); LEFT 10, and one style point (#27).
 | B #11 | 07f53f717 | walls PRESENT v7 reworded: "Nothing closes the few ways through {settlement}'s wall, because it has no gate." (was contradicted by the guard line "The walls leave few ways in") | 64 towns rendered, drawn in 27: Tyrvik, Qaryatnagar (the reader's case, beside its guard line), Ulfås (occupied), Taipu (village 332) |
 | B #17 | 217693af2 | NO organized force at all v4, and v5 for the same fault, off a war with no front at the town (the `crisis: wartime` mark dropped; guards at Nishidao) | 53 towns rendered: v4 at Qaryatsaray (village 330), Goraino (siege+famine); v5 at Rundholz (thorp 7), Cnocton (village 185); wartime towns now print v6 (Nishidao, Nishitang, Varatala) |
 | B #23 | 3f5da151e | ARCANE: alchemists v2 reworded (not struck: the pool has two rows), v1 reworded off "Part of the magical help" where alchemy is the only arcane defence (the read's r2r-city-16) | 55 towns rendered: v1 at Saltocolonia (town 505), Prabhavalli (siege), Tikalmul (158,207, famine); v2 at Muultzal (town 615), Capovetum (siege), Markaztappa (occupied) |
+| B #12 | (this commit) | Moderate v1 reworded: "the law is present, so is crime, and neither has the upper hand" (a declaration `no organised crime` was refused by the layer walker: DS-DEF-3 may not read a layer-3 atom; not routed round) | 56 towns rendered, drawn in 7: Aqualitus (the reader's syndicate town), Somakota, Polako, Brahmakund (syndicates), Grudka (semi-organised), Tyrvik (thorp 20), Huashan |
 
 ## What is left (line by line) and how the instruments are re-made
-- B: #12 DS-DEF-3 Moderate v1 (plan: `no organised crime`, guard at a Moderate town with a syndicate); #19 DS-DEF-9 NAMED chain v1 (plan: reworded off "cannot be made without arcane work": the chain's magicNote is a PARTIAL supplement and is divine, druidic or arcane; v2, v3 read with it); #27 DS-DEF-2 neither walls nor force v8, the style point. Then one line to the chair (B pushed).
+- B: #19 DS-DEF-9 NAMED chain v1 (plan: reworded off "cannot be made without arcane work": the chain's magicNote is a PARTIAL supplement and is divine, druidic or arcane; v2, v3 read with it); #27 DS-DEF-2 neither walls nor force v8, the style point. Then one line to the chair (B pushed).
 - C, D, E, F of BRIEF-W2-WRITE-6 (not begun). C's rows in this block: HANDBACK-4 item 4 (#396 DEF-2 no legal v3; #767 DEF-2 Beasts plagued v3; #125 DEF-5 mages' guild v1, v2; #57 DEF-9 false v2), item 5 (#58 DEF-12 enough v2), 30895bb67 (CHAIN defence supplied v1-v3, v5).
 - Instruments: `git archive origin/lane/w2-write-2026-11-13 docs/chair/2026-11-13/probes/W2-WRITE-5 | tar -x -C <dir>` (pins.py: set DATE from the clock); a worktree on a local branch at the lane's tip, `npm ci`, then `git config --local --unset core.hooksPath` in the main clone; the base render `sh render.sh <tree> <out>/own-base seeds-w5a.txt 4` (~25 min); per cure, render only the towns where the pool is eligible at the base. Two small readers of this seat (scratch, not on the lane): one lists the towns where a pool's vid is eligible or drawn with the record's forces, walls, crises and economic gate; one greps a fragment across the dumps.
 
