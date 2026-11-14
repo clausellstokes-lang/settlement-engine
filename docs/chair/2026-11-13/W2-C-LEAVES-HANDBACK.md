@@ -1360,3 +1360,120 @@ reads it as NAMING the siege, so a declaration it accepts (`needs: crisis: under
 hypothetical sense stands in the rule book. Row dbd691c1c6f9171f stays banked (`after-base: leaves-3`), unchanged.
 RECOMMENDATION: at the join, the declaration pass rules the hypothetical (a sense of the rule book, the chair's) on the
 defence lane's text; then the holder's `--check` / `--shrink`.
+
+## Items 2 and 3 (EXECUTED)
+- 2, 7efa2e094: `node scripts/census/page-census.mjs --shrink --workers=4` at 9c0f12347 (the code tip): EXIT 0, nothing
+  rose; P8any 221 → 129, P17 671 → 395 (owed), and P6need 641 → 0, NOT in the eighth seat's two and NOT this seat's
+  cure: importsAsPrinted (arriving, needed) identical by town on the 720 at 3598a6d5f and here; the Economics views of
+  r2r-city-0 and r2r-town-3 byte-identical at both (probes imp9.mjs, views9 DUMP). The fall's cause is NOT PROVED.
+- 3, THE PROOF FAILS: the words of the two NOT PRINTED matchers DO PRINT, from the record's chain outputs, never from the
+  matcher (tradeListDisplay.js :: SERVICE_OUTPUTS, one reader, line 397 `!SERVICE_OUTPUTS.has(good)`, a test). Counted on
+  the 720 (instruments: views9 = the page census's own renderer, every view of every dossier, 16,318 views / 891,202
+  lines; noprint9 = SettlementPDF executed whole, both faith settings, and buildJournalPages whole; 0 errors):
+  | words | Economics tab | PDF | journal |
+  |---|---|---|---|
+  | "international banking services" | 95 towns | 95 | 0 |
+  | "magical item market" | 124 towns | 124 | 56 (its Exports row) |
+  Writer: src/data/supplyChainData.js's chain outputs ("Banking houses » Financial services, International banking
+  services"; "Magical ley line node » Wizard's tower » Magical item market, ..."), also in tradeGoodsData.js and
+  institutionServices.js; the fresh 180: PDF 20 / 28, journal 0 / 12. So the class-5 rule's condition (0 prints) does not
+  hold: the two stay RED AND NAMED, FOR THE DECLARATION PASS, as matchers OF PRINTED WORDS (not "not printed"); the
+  printed occurrences are the data's lines (a service printed as an export or a chain output), for that pass.
+
+# THE LANE'S ONE FINAL STATEMENT (this seat, at the code tip 9c0f12347; documents and registers after it)
+Base 4534ea5e3; the stage a fresh reader has not read begins at d79ea4c70. Births: the 720 (SECOND-WAVE-CENSUS) and the
+fresh 180 (probes/W2-C-LEAVES-4/fresh.txt).
+
+**THE FIELD DIFF (720 births, probes/W2-C-LEAVES-9/fdiff9.mjs).** 4534ea5e3 → tip: 644 of 720 moved (npcs 586,
+relationships 556, simulationTrace 539, generationCoherenceReceipt 514, powerStructure 421, prominentRelationship 319,
+stress / stressors 250, conflicts 233, pressureSentence 155, history 105, economicState 10, coherenceNotes 5). The line's
+tip 976db5b19 → this tip: **0 of 720 moved** (and this seat's own commits 0 of 900). Every moved family is the merged
+line's; THIS LANE DECLARES NO FAMILY: its cures are display leaves.
+
+**CENSUS-2** (2686272b1's census2.sh, 4 workers, --files probes/W2-C-LEAVES-7/c2files.txt; exit 0; counts in
+probes/W2-C-LEAVES-9/census2.tip-9c0f12347.counts.txt). Limits: the dossier's views only (no PDF, no journal); it cannot
+see two lines disagreeing.
+| kind | 4534ea5e3 (PART 7) | tip |
+|---|---|---|
+| a names what the town lacks | 712 / 607 | 712 / 610 |
+| b normal times under a crisis | 70 / 101 | 48 / 59 |
+| c a size word in a small place | 301 / 296 | 301 / 298 |
+| d broken text | 381 / 35 | 382 / 40 |
+| e denies what the town has | 81 / 24 | 32 / 17 |
+| f the house's label | 720 / 304 | 720 / 344 |
+| g machinery on the page | 720 / 14 | 718 / 10 |
+| h (no base row in PART 7's file) | — | 20 / 63 |
+On the lane's files (base → tip): EconomicsTab.jsx g 720/4 → 0, a 498/14 → 496/12, b 29/21 → 3/3, f 309/36 → 309/36;
+defenseDisplay.js a 266/3 → 39/2 (semi-organized "guild" 6 towns, CRIM_STRUCTURE_DATA; "Courts without detention." 33,
+the court rows, LEFT FOR AFTER THE JOIN); computeActiveChains.js b 5/5 → 5/5 (a generator; named); chainNeedShown.js d
+0 → 13 / 13 (the Services tab's "· covers" run-on, exposure, cured at the join by f2c77472c). The whole-tree rises (a, c,
+d, f) are the merged line's writers: none of the lane's files rose.
+
+**THE FIRST CENSUS'S COUNTER** (SECOND-WAVE-CENSUS census.sh, 4 workers; every render.N.log EXIT 0 at both ends;
+compare.mjs exit 0; probes/W2-C-LEAVES-9/counter.*): NO ROW WORSE; better: 6 gap vs imports 285 → 5, 8 no church 221 →
+129, 16a ruling three 330 → 179, 17 non-goods 671 → 395, 4 almost level 106 → 96, 3 191 → 189, 14 168 → 167, 16b 291 →
+281; GLANCE towns 717 → 624; median rows per town 8 → 6.
+
+**THE TESTS (the chair's 07:17 order: no six shards; the suite runs once on the joined tree).** At 5853eaeef:
+tests/lint whole (771 files, 3,189 tests, 13 red in 12 files) and the 268 files that name a file the lane changed
+(git diff 976db5b19..tip -- src: 21 files) plus the 51 registered golden surfaces (1,183 suites, 3,781 tests, 4 red in 2
+files); every red file re-run on a frozen tree of 976db5b19 (and of 3598a6d5f):
+- RED AT THE LINE'S TIP (not the lane's): ledgerCitationIntegrity (load), proseFamilyContract A1-A3 A5 A6,
+  siteCoherenceRatchet C1, newsHeadlineContract and newsVoiceContract (every test skipped: beforeAll), dossierProseManifest
+  (3: the drift corpus, the drift arm 1,050 rows, the mixed-pool arm 178 ≠ 203).
+- NEW ON THE LANE, red already at 3598a6d5f (earlier seats' or the merge's), NAMED, not cured here (count):
+  · presumedThings.walker: the two SERVICE_OUTPUTS literals (by ruling; item 3 above).
+  · sovereigntyLightingContract: the estate's file count 3245 → 3285 (the lane's test files; this seat's +1). DOOR: the
+    LIGHTING_CENSUS_REFREEZE ritual on the joined tree (2m (4): taken from the line's side and re-taken).
+  · tuningRegister.walker: six "dependents moved" rows of src/domain/corruption.js (CAPTURE, CORRUPTION, DEITY_CORRUPTION,
+    DEITY_LAW, GUILD, PATRONAGE _TUNING): the lane's readers of them; DOOR: the TUNING_INVENTORY_REFREEZE ritual at a point
+    the chair names (no value moves).
+  · negativeAssertionAnchor.walker: 4 files, all the lane's tests: economicsClergyProvision, economicsFoodBalanceRowOneHome,
+    economicsFoodSentenceTrue, economicsGoodsPillsBorneOut (.test.jsx): bare not.toContain/not.toMatch to anchor (this
+    seat's own fifth, ringNoteStreetsSmallPlace.test.js:26, CURED cf07a0c1a).
+  · seedLoopTotality.walker: 5 bare seed loops in the lane's tests (economicsClergyProvision :78,
+    economicsFoodBalanceRowOneHome :61, economicsFoodSentenceTrue :52 :86, noOneRingWhereRingsRival :45,
+    charcoalBurnerWorksTheTimber :42).
+  · arcaneClassifierCensus.walker: src/domain/display/tradeListDisplay.js:456, "arcane [wizard] mixed with ambiguous
+    [college, sage]": route it through domain/arcaneIdentity.js.
+  · domainAnyCastBaseline: commercialReasons.js's introducedAt d7ea69a4b resolves to no commit HERE: the clone is shallow
+    (1,200 commits); an environment red, to be read on a full clone (PLAUSIBLE).
+  · tests/domain/display/arcaneNoneLeftOutBesideAMage.test.js (the side seat's): its anchor "the council governs" is false
+    at the tip: rww-town-calm-1 is born differently since the line's merge (powerStructure moved in 421 births). Re-anchor
+    on a town where an Arcane Council governs (named).
+- `node scripts/implementation-packets.mjs validate`: exit 0 (257 packets).
+- THE SHIFT RECORD: docs/chair/2026-11-13/W2-C-LEAVES-SHIFT-RECORD-DRAFT.md (written by this seat; it did not exist).
+
+**THE NEW WORDS OF THE WHOLE LANE** (for the owner's veto, each with its towns where its part gives them): PART 1's
+section "New words for the owner's veto" (the three hunger sentences, b35714f2b; "Needed, and not brought in:", 48bfc15c0);
+PART 3: none standing; PART 4: 1f4b15fb6's message; PART 6: item 6's four forms (fc7cdafe0); PART 8: X-50's "followed by
+the chains it covers" retired (reverted, bb2002626: nothing retired); THIS SEAT: none (1c falls back to the table's own
+note; 1a's text is unchanged).
+
+**FOR THE JOIN, gathered from every part:**
+1. Count the "· covers" run-on on the joined tree: 0 expected (round two B's f2c77472c; this lane's cut reverted).
+2. The phone chrome floor's three rows (620 / 863 / 665 at this lane's merge): re-measured on the joined tree.
+3. The house-label leaf's call sites (kind f, EconomicsTab.jsx 309 towns / 36 lines, r2-code-b's flow card labels).
+4. src/pdf/sections/SupplyChainFlow.jsx :: ChainRow line 73: `getStatus(chain.status)` → `getStatus(chainAsShown(chain,
+   town).status)` (PART 7's FOR THE JOIN, its red test written there).
+5. EconomicsTab.jsx's and EconomicsTrade.jsx's shared lines (PART 7's list): read once on the joined tree.
+6. The arcane defence's two homes (facts/magic.js :: defenceHoldsArcane and recordNamesAMage): one reading at the join.
+7. NEW: defenseDisplay.js :: foodEnduranceLine is lane/coherence-upkeep's (the chair's 11-13 22:42 ruling, 1a7a02927):
+   at the join its text stands; row dbd691c1c6f9171f ("under siege the outlying fields would be lost") stays banked for
+   the declaration pass (a hypothetical the rule book reads as naming the siege).
+8. NEW: the lighting census and the tuning inventory re-taken through their rituals on the joined tree (above).
+
+**FOR THE DECLARATION PASS:** the two SERVICE_OUTPUTS matchers (item 3: their words print from the data); row
+dbd691c1c6f9171f (the hypothetical siege); the eighth seat's eight chainWorking causes are comments (c5dadd358).
+
+**LEFT FOR AFTER THE JOIN** (as PART 8 gives them): the court rows (33 "Court only" / "Courts without detention."
+beside a town hall's drawn arbitration); the four added rows (#1013 the lone gambling house, 12 towns; Arcane "None"
+beside an arcane power or a named mage; the PDF's "Abundant" kicker under a siege, ResourcesProduction.jsx; the charcoal
+burner's four "timber" pills); CENSUS-2's other hits on the lane's writers (the table above, by towns); and from this
+seat: P6need's unexplained fall; the four negative-anchor files, the five seed loops, the arcane classifier at
+tradeListDisplay.js:456, the arcane test's anchor.
+
+**THE EDGE BUNDLES:** `npm run build:edge-shared` last; the result in the commit after this one, or "byte-identical".
+
+## STATUS (this seat, kept current)
+- Items 1 (1a, 1c; 1b named), 2, 3 (the proof fails, counted) and 4 DONE; the statement above. Nothing running.
