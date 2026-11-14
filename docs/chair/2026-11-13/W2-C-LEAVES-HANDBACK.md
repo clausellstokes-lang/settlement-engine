@@ -869,3 +869,78 @@ Scratch worktree /home/user/wt5 (local branch w5-local); before-tree /home/user/
 - Item 4 DONE fb3128664. The early merge DONE 1c36c1717. Item 5 DONE 56f73d7ec. The second merge DONE 6a42e039d (df51100b1;
   three gates green; governing + tests/lint + the Economics tests: 20 red, the same files and counts as after the first merge).
 - Items 6 to 10, then rows (a) to (d): not started (item 6 carries the chair's added row).
+
+# PART 6 — the sixth seat (W2-C-LEAVES-6, 2026-11-14, from beae4ef7e)
+
+**Seat:** a Claude Code session on the new account; the chair is session_01ACmDYZrFEVXyZEUg1NDxxC. Assignment
+(docs/chair/2026-11-14/briefs/BRIEF-W2-C-LEAVES-6.md on the chair's lane): BRIEF-W2-C-LEAVES-5's items 6 to 10 as it
+gives them; the four rows the old chair added (record 422, copied in PART 5: #1013, Arcane "None" beside an arcane power
+of any standing, the PDF's "Abundant" kicker under a siege, the four timber pills); item 3's registers if left; then ONE
+message to the chair and WAIT FOR POINT 49 (lane/integration-2026-11-07, not yet on the line); on the chair's word the
+merge of the line's tip, the two defenseDisplay.js rows banked by hand at point 49 (merge book 2k.5, 3628f37cc,
+`after-base`) cured and shrunk through their door, the instrument's page census read, and THE LANE'S ONE FINAL STATEMENT.
+Origin read back at the start: beae4ef7e (equal to the brief's). Every commit after 303abbf67 read against PART 5: they
+agree; no stop or question to the old chair stands without a ruling copied in (the DOUBTFUL timber pill of
+r2s-under_siege-village-0 is the chair's row (d)), so no first message was sent.
+Scratch worktree /home/user/wt6 (local branch w6-local); before-tree /home/user/wt6b at beae4ef7e. Corpora born at
+beae4ef7e: the 720 (SECOND-WAVE-CENSUS/births.mjs), the fresh 180 and the readers' 50 (probes/W2-C-LEAVES-4/birthsR.mjs).
+EXECUTED = run and read; PLAUSIBLE = read from code.
+
+## Items (this seat)
+| item | commit | on the 720 (before → after) | fresh / readers | read | guard |
+|---|---|---|---|---|---|
+| 6 "Needs X · affects" → one sentence; #1152 | fc7cdafe0 (+ 16cf36a0c, the guard's cure) | chip rows 2,489 in 358 towns → 0; 2,034 sentences in 357; out: another trade's house 67, a need no good brought in 388 (ley line 297, capital + trade access 73, trade access + harbour 16, not imported 2) | fresh 638 → 517; readers 151 → 120 | hamlet, famine, siege port, isolated (stores, magic), the cut's two cities, the #1152 town | economicsNeedSentence.test.jsx (beae4ef7e: 3 of 3 red); economicsImpactOnce re-keyed |
+| 7 the chain card's Outputs pills (#555) | 332061b5d | 24,949 → 23,418 pills; 831 cards in 558 towns; 251 cards lose the box; the trade lists' pills 0 moved | fresh 216 cards in 139 towns; readers 52 in 35 | ten towns by class (commit body) | economicsChainOutputsBorneOut.test.jsx (beae4ef7e: 2 of 2 red) |
+
+## Calls taken without the chair (this seat)
+1. **Item 6, the #1152 reading.** The pills' reading of a chain's houses (a house's name holds the first word of one of
+   the chain's houses) lets the craft guilds do the bowyer's work, because the chain data lists them; so the reader adds
+   ONE closed list, each entry with its cause (tradeListDisplay.js :: houseDoesChainsWork, NO_ONE_CHAINS_TRADE): a craft
+   guild and a market (weekly, a market square) are no one chain's trade; their one need row names the house's own
+   (jewellery; market day trade). Measured: 67 of the 720's cards; nothing else of the 2,489 left by this rule.
+2. **Item 6, the goods are the record's imports.** A part of a need is said to come in only where the record's imports
+   bring it (importsAsPrinted(s).arriving, needMetBy); "fuel" is not on the imports in 289 of 376 parts, "supplies" 84 of
+   93, "gems" 22 of 25: those parts are left out of the sentence. Trade access, capital, a harbour, water power,
+   knowledge and a ley line are no good brought in; a need of nothing else prints nothing (the card's state chip stands).
+3. **Item 6, the consequence is said of the supply,** never of how far the services fall: the record gives every house
+   the same impact ("Operating at minimal capacity or shut down"), which read false of a cathedral's services for want of
+   stone and of a citadel's "last-resort defence" under the siege itself. Under a siege: "… depend on <goods> from outside,
+   which the siege has cut off." (no present "brought in": #169). X-50 kept: the calm and isolated forms' shared clause
+   prints on the first card only (the pin re-keyed by identity).
+4. **Item 6, the services are named, the house is not** (the house labels carry the roster's ranges, "Craft guilds
+   (100-150+)", the house-label leaf is round two B's): "<Services> here depend on …".
+5. **Item 7, a court's work needs a courthouse,** one MADE_GOOD_ROWS entry (the catalogue gives Civil disputes, Criminal
+   trials and Notary services to the Courthouse alone; record 422). "Legal services" stays beside a Town hall.
+6. **Item 7, the card's outputs read the pills' rule without the state and the carriage** (the card's chip says whether
+   it works; an entrepôt card's carried goods leave its Outputs where no house here makes them, as the pills).
+
+## New words for the owner's veto (this seat)
+- Item 6's four forms, each with its town, in fc7cdafe0's message.
+
+## Found, not mine (this seat) — counted, for the seat after the merges or the data lane
+- The generator joins any house's dependency onto every chain that lists the house (computeActiveChains.js): 67 of the
+  720's cards carry another trade's need (craft guilds on the bowyer and the potter; a market on the fishers and the date
+  palms).
+- A need row's second good is mostly not on the record's imports (fuel 289 of 376, supplies 84 of 93, gems 22 of 25).
+- data/economicData.js :: TRADE_DEPENDENCY_NEEDS: a cathedral's row says its religious services, pilgrimage and diocesan
+  administration depend on stone (the data lane).
+- An isolated town's record lists imports beside "No trade access: running on existing stockpiles only" (r2r-town-9).
+- 29 grain cards lose "Agricultural surplus" (item 7): the reader holds no ground for that output (DOUBTFUL; the pills
+  read it the same way).
+- A River Mill Industry card prints "✓ Running" where the only mill is "Access to external mill" (r2r-hamlet-18, -29):
+  the chain-state reader's (item 9's leaf), for item 9's read.
+
+## Registers moved, each through its own door (this seat)
+- docs/content/wiring-census.json: the new leaf chainNeedShown.js (`node scripts/wiring-census.mjs`).
+
+## Red met (classed against beae4ef7e, the lane's tip at the seat's start)
+- tests/lint: 20 red in 19 files at beae4ef7e and at 332061b5d, the same titles. Bodies differ only in the estate file
+  count (a carried red; this lane's new files raise the count it reports) after the item-6 guard's cure 16cf36a0c (it
+  had grown negativeAssertionAnchor's inventory at fc7cdafe0; this seat's first lint read looked at the head of the body
+  diff only: stated).
+- domainAnyCastBaseline: src/domain/display/chainStateShown.js holds one `any` (allowance 0) at beae4ef7e: the lane's own
+  (W2-C-LEAVES-4); item 9 moves the crisis reader into that file and cures it there.
+
+## STATUS (kept current)
+- Item 6 DONE fc7cdafe0 + 16cf36a0c. Item 7 DONE 332061b5d.
+- Items 8 to 10, the added rows (a) to (d), item 3's registers: not started.
