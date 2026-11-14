@@ -1,0 +1,46 @@
+{"id":"11438","town":"r2s-religious_conversion-metropolis-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' printed as a power name; sibling lines call it 'The Guard'","other":"15215"}
+{"id":"17012","town":"r2s-religious_conversion-metropolis-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' printed as a power name; sibling lines call it 'The Guard'","other":"15215"}
+{"id":"17025","town":"r2s-insurgency-metropolis-2","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' printed as a power name in the overview","other":""}
+{"id":"17026","town":"r2s-insurgency-metropolis-2","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' printed as a power name in the quarrel line","other":""}
+{"id":"HEADER","town":"r2s-insurgency-metropolis-3","sev":"MED","kind":"RECORD","why":"DEFENCE says hired: none, yet HOUSES lists Hired blades and PEOPLE has a blade captain of Hired blades","other":""}
+{"id":"08423","town":"r2s-insurgency-metropolis-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence; also 'drawn up names under whether to open...' reads as a slot misfill","other":""}
+{"id":"08445","town":"r2s-insurgency-metropolis-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' printed as a power name in the quarrel line","other":""}
+{"id":"HEADER","town":"r2s-monster_pressure-metropolis-2","sev":"MED","kind":"RECORD","why":"Hills town on trade access road lists Docks/port facilities and Harbour master's office with wharfinger and harbour master; no water access","other":""}
+{"id":"09148","town":"r2s-monster_pressure-metropolis-2","sev":"MED","kind":"LACKS","why":"exports 'Waterborne freight services (cargo, pilotage)'; trade access is road on Hills terrain, no water route","other":""}
+{"id":"27067","town":"r2s-religious_conversion-metropolis-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' printed as a power name in the hook's pair label","other":"15215"}
+{"id":"27466","town":"r2s-religious_conversion-metropolis-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' printed as a power name in the hook's pair label","other":"15215"}
+{"id":"20044","town":"r2s-religious_conversion-metropolis-2","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' printed as a power name in the hook's pair label","other":""}
+{"id":"17031","town":"r2s-religious_conversion-metropolis-2","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' printed as a power name in the quarrel line","other":""}
+{"id":"28086","town":"r2r-metropolis-39","sev":"LOW","kind":"STATE","why":"says mayor and council is 'run by Petros Limniotes'; PEOPLE has him as exchange master of the trade center, nobody at Mayor and council","other":""}
+{"id":"20811","town":"r2s-religious_conversion-metropolis-0","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' printed as a power name in the hook's pair label","other":""}
+{"id":"11439","town":"r2s-religious_conversion-metropolis-0","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' printed as a power name in the quarrel line","other":""}
+{"id":"HEADER","town":"r2s-slave_revolt-metropolis-0","sev":"MED","kind":"RECORD","why":"Plains town on trade access road lists a Harbour master's office with a harbour master; no docks, coast or river","other":""}
+{"id":"27483","town":"r2s-slave_revolt-metropolis-2","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' printed as a power name in the hook's pair label","other":""}
+{"id":"17022","town":"r2s-slave_revolt-metropolis-2","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' printed as a power name in the quarrel line","other":""}
+{"id":"06985","town":"r2r-metropolis-2","sev":"HIGH","kind":"LACKS","why":"names a dragon demanding tribute; HOUSES has no Dragon resident and PEOPLE lists no dragon","other":""}
+{"id":"HEADER","town":"r2r-metropolis-51","sev":"MED","kind":"RECORD","why":"Hills town on trade access road lists Docks/port facilities and Harbour master's office with a wharfinger and harbour master; no water access","other":""}
+{"id":"03629","town":"r2r-metropolis-51","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' printed as a power name in the hook's pair label","other":""}
+{"id":"17010","town":"r2r-metropolis-51","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' printed as a power name in the quarrel line","other":""}
+{"id":"09208","town":"r2r-metropolis-51","sev":"MED","kind":"LACKS","why":"exports 'Waterborne freight services (cargo, pilotage)'; trade access is road on Hills terrain, no water route","other":""}
+{"id":"03241","town":"r2s-succession_void-metropolis-1","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' printed as a power name in the hook's pair label","other":""}
+{"id":"01991","town":"r2s-succession_void-metropolis-1","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' printed as a power name in the quarrel line","other":""}
+{"id":"18741","town":"r2s-wartime-metropolis-3","sev":"LOW","kind":"STATE","why":"'crown requisition order' in a town ruled by a Democratic assembly; GOVERNMENT lists no crown or Royal Authority","other":"26051"}
+{"id":"26051","town":"r2s-wartime-metropolis-3","sev":"LOW","kind":"STATE","why":"The Shield Compact described as 'Crown-appointed'; GOVERNMENT is a Democratic assembly and lists no crown","other":"18741"}
+{"id":"03743","town":"r2s-wartime-metropolis-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in the sentence ('went Military/Guard's way')","other":""}
+{"id":"03400","town":"r2s-wartime-metropolis-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' printed as a power name in the hook's pair label","other":""}
+{"id":"15471","town":"r2s-wartime-metropolis-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' printed as a power name in the hook's pair label","other":""}
+{"id":"17009","town":"r2s-wartime-metropolis-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' printed as a power name in the quarrel line","other":""}
+{"id":"HEADER","town":"r2s-politically_fractured-metropolis-1","sev":"MED","kind":"RECORD","why":"Hills town on trade access road lists Docks/port facilities and Harbour master's office with a wharfinger and harbour master; no water access","other":""}
+{"id":"09296","town":"r2s-politically_fractured-metropolis-1","sev":"MED","kind":"LACKS","why":"exports 'Waterborne freight services (cargo, pilotage)'; trade access is road on Hills terrain, no water route","other":""}
+{"id":"HEADER","town":"r2s-mass_migration-metropolis-3","sev":"MED","kind":"RECORD","why":"Plains town on trade access road lists a Harbour master's office with a harbour master; no docks, coast or river","other":""}
+{"id":"22689","town":"r2s-mass_migration-metropolis-3","sev":"MED","kind":"STATE","why":"says the stone trade is under strain; LAND gives Stone quarry available and Fortifications and Stone & Construction running","other":""}
+{"id":"03924","town":"r2s-mass_migration-metropolis-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' printed as a power name in the hook's pair label","other":""}
+{"id":"11540","town":"r2s-mass_migration-metropolis-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' printed as a power name in the quarrel line","other":""}
+{"id":"03864","town":"r2s-politically_fractured-metropolis-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' printed as a power name in the hook's pair label","other":""}
+{"id":"11477","town":"r2s-politically_fractured-metropolis-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' printed as a power name in the quarrel line","other":""}
+{"id":"HEADER","town":"r2s-succession_void-metropolis-2","sev":"MED","kind":"RECORD","why":"Plains town on crossroads trade access lists Docks/port facilities and Harbour master's office with a wharfinger and harbour master; no water access","other":""}
+{"id":"09508","town":"r2s-succession_void-metropolis-2","sev":"MED","kind":"LACKS","why":"exports 'Waterborne freight services (cargo, pilotage)'; trade access is crossroads on Plains terrain, no water route","other":""}
+{"id":"24378","town":"r2s-succession_void-metropolis-2","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' printed as a power name in the hook's pair label","other":""}
+{"id":"01989","town":"r2s-succession_void-metropolis-2","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' printed as a power name in the quarrel line","other":""}
+{"id":"01995","town":"r2r-metropolis-8","sev":"LOW","kind":"LACKS","why":"quarrel over 'dock taxation authority', stakes 'Port revenue'; HOUSES has no Docks/port facilities, only a harbour master's office and barge company","other":""}
+{"id":"DONE","lines":2295,"blocks":31,"flags":45}
