@@ -225,11 +225,15 @@ const RENDERERS = {
   // needs a market or a merchant house on the live roster (`market`, facts/market.js: a house the catalogue tags 'market',
   // or 'guild' and 'trade'); and an isolated place (`route: isolated`) is not said to do well on army contracts. Refused, the
   // pick resolves as before to the loss text (no line added, the coin's draw unchanged).
+  // R2-CODE-B-6 item 0 (the chair's ruling): "Supply caravans pass through on crown requisition" is false of an isolated
+  // place (`route: isolated`, the record's own trade route): no caravans pass through it. No sentence is true there in
+  // its place, so the loss text leaves the clause out (silence, not a twin). No draw; an unread record keeps it.
   wartime: (name, roll, facts) => {
     const s = name || "the settlement";
-    const [profit, loss] = WARTIME_VARIANTS(s);
+    const isolated = facts ? atomHolds('route: isolated', facts) === true : false;
+    const [profit, loss] = WARTIME_VARIANTS(s, isolated);
     const refused = facts
-      ? atomHolds('prosperity: ≥ moderate', facts) === false || atomHolds('market', facts) === false || atomHolds('route: isolated', facts) === true
+      ? atomHolds('prosperity: ≥ moderate', facts) === false || atomHolds('market', facts) === false || isolated
       : false;
     return roll?.profit && !refused ? profit.text : loss.text;
   },
@@ -258,16 +262,21 @@ const RENDERERS = {
   },
 };
 
+/** wartime (loss)'s caravans sentence: printed only off an isolated route (R2-CODE-B-6 item 0). */
+const WARTIME_CARAVANS = 'Supply caravans pass through on crown requisition. ';
+
 /**
  * wartime's two texts for one place (`s` = the name, or "the settlement"): the profit text, true only
- * where the place is at least of moderate prosperity (checked at the renderer), and the loss text.
+ * where the place is at least of moderate prosperity (checked at the renderer), and the loss text,
+ * whose caravans sentence an isolated place does not carry.
  * @param {string} s
+ * @param {boolean} [isolated] - the record's trade route is `isolated` (read at the renderer)
  * @returns {ReadonlyArray<{ id: string, text: string }>}
  */
-function WARTIME_VARIANTS(s) {
+function WARTIME_VARIANTS(s, isolated = false) {
   return [
     { id: 'profit', text: s + " is in a kingdom at war and doing well out of it: army contracts pay, prices are high, and merchants with the right friends are getting rich. The bill will come later." },
-    { id: 'loss', text: s + " is in a kingdom fighting a war it may not win. Conscription has taken a third of the working-age men. Supply caravans pass through on crown requisition. " + WARTIME_PRICES + " The governing authority is demanding sacrifice while certain families are quietly thriving on contracts." },
+    { id: 'loss', text: s + " is in a kingdom fighting a war it may not win. Conscription has taken a third of the working-age men. " + (isolated ? '' : WARTIME_CARAVANS) + WARTIME_PRICES + " The governing authority is demanding sacrifice while certain families are quietly thriving on contracts." },
   ];
 }
 
