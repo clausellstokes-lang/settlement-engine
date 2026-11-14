@@ -54,7 +54,7 @@ describe('the food card says what trade brings by the food record (item 4(a), th
       expect(town.economicViability.metrics.foodBalance.importCoverage, `anchored: ${seed}'s metric keeps a trickle`).toBeGreaterThan(0);
       const text = foodCard(town);
       expect(text, `anchored: ${seed} prints its food sentence`).toContain(`No food comes into ${town.name} by trade.`);
-      expect([/bring in (?:a little|about half|most|nearly all) of the rest/.test(text), /\+ [\d,]+ imported/.test(text), /Trade covers/.test(text)]).toEqual([false, false, false]);
+      expect([/\b(?:carts|ships|boats|trade) brings? in /.test(text), /\+ [\d,]+ imported/.test(text), /Trade covers/.test(text)]).toEqual([false, false, false]); // re-keyed by identity at W2-C-LEAVES-5: any carrier bringing food in (item 3 re-cut the share words)
     }), 'a besieged town says food comes in by trade');
   }, 120000);
 
@@ -62,6 +62,6 @@ describe('the food card says what trade brings by the food record (item 4(a), th
     const town = birthApp('rw3-city-famine-1');
     expect(Number(town.economicState.foodSecurity.foodRecord.normalImportPct)).toBeGreaterThan(0);
     const text = foodCard(town);
-    expect(/bring in (?:a little|about half|most|nearly all)/.test(text) && /\+ [\d,]+ imported/.test(text)).toBe(true);
+    expect(/\b(?:carts|ships|boats|trade) brings? in /.test(text) && /\+ [\d,]+ imported/.test(text)).toBe(true); // re-keyed by identity at W2-C-LEAVES-5 (item 3 re-cut the share words)
   }, 60000);
 });
