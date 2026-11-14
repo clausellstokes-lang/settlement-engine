@@ -3,6 +3,8 @@
 # every dump (the Tonight sheet, the PDF's text, the Foundry journal: render.census3.jsx), the ninth kind (i: the
 # surfaces disagree) and the chair's laws as kinds L1..L16 (patterns-c3.mjs). CENSUS_RENDER=render.census2.jsx renders
 # the tabs only, exactly as CENSUS-2 did.
+# ONE COMMAND (any tree with node_modules; the probes git-archived out of lane/census-3-2026-11-14; ~22 min at 4 workers):
+#   HOLDERS=<holders.json> sh <probes>/census3.sh <tree> <out> 4  -> <out>/worklist.top.md (first 60), worklist.json, hits.json
 #   sh docs/chair/2026-11-14/probes/CENSUS-3/census3.sh <tree-root> <out-dir> [workers=4] [--files a,b,c] [--seeds <file>] [--reuse] [--count-only]
 # <tree-root>: a checkout with node_modules (npm ci there first). <out-dir>: scratch, outside the repository.
 # Births every seed (default: the census's 720, seeds.txt) in that tree, renders every dossier view through the tree's
@@ -63,5 +65,8 @@ for pair in "COLD_CUT:ROUND-3-CUT.json" "COLD_INC:ROUND-3-CUT-INCREMENT.json"; d
 [ -n "${COLD_CUT:-}" ] || echo "census2: no cold lists (git fetch origin lane/round-3-cut-2026-11-13 in the tree, or set COLD_CUT/COLD_INC): every line is 'unjoined'"
 COLD_CUT=${COLD_CUT:-} COLD_INC=${COLD_INC:-} FILES=$FILES OUT=$OUT node "$P/report2.mjs"; rc=$?
 [ "$rc" -eq 0 ] || { echo "census2: report FAILED (exit $rc)"; exit 1; }
+# CENSUS-3: the worklist (one row a writer, sorted by false towns) from the precision as read, the bar's rows and the join's table
+node "$P/worklist.mjs" "$OUT" "${CENSUS_PRECISION:-$P/precision.json}" "$P/bar0rows.json" "$P/JOIN-ROWS.json" all 60; rc=$?
+[ "$rc" -eq 0 ] || { echo "census3: worklist FAILED (exit $rc)"; exit 1; }
 T2=$(date +%s)
 echo "census2: done; births+render $((T1-T0))s, count+trace $((T2-T1))s"

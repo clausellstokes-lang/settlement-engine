@@ -7,7 +7,7 @@
 // ---------- shared context guards ----------
 // Text before the trigger in the same clause that makes the line NOT assert the house is here.
 const NEG_BEFORE = /\b(no|not|without|nor|never|none|lacks?|lacking|absent|isn't|aren't|wasn't|nobody|nothing|neither|instead of|in place of|short of|want of|missing)\b[^.;:!?]{0,45}$/i;
-const ELSEWHERE = /\b(foreign|nearest|next|neighbou?ring|nearby|another|other|outside|external|elsewhere|beyond|away|abroad|distant|walk to|walks? to|passing through|comes? through|travell?ing|visiting|itinerant|on circuit|travel(?:s|led)? to|ride to|carted to|sent to|go(?:es)? to|from the (?:city|town|village|capital)|in the (?:city|capital)|regional|a day's)\b/i;
+const ELSEWHERE = /\b(foreign|nearest|next|neighbou?ring|nearby|another|other|outside|external|elsewhere|beyond|away|abroad|distant|walk to|walks? to|passing through|comes? through|travell?ing|visiting|itinerant|on circuit|travel(?:s|led)? to|ride to|carted to|sent to|go(?:es)? to|from the (?:city|town|village|capital)|in the (?:city|capital)|regional|a day's|fetched|sent for|is sent|can be brought|brought in time|imported from|from [a-z]+ regions)\b/i;   // CENSUS-3: the last seven, from the ten widest writers' read
 const HYPOTHETICAL_BEFORE = /\b(if|would|could|should|might|may|add|adding|recruit|attract|wants? to|hopes? to|plans? to|dreams? of|needs?|seeks?|seeking|to build|to found|to establish|to open|to raise|once (?:had|was)|used to|former|old|ruined|abandoned)\b[^.;:!?]{0,40}$/i;
 export function guarded(line, idx, len, opts = {}) {   // CENSUS-3: exported for patterns-c3.mjs
   const before = line.slice(Math.max(0, idx - 60), idx); const after = line.slice(idx + len, idx + len + 45);
@@ -48,7 +48,7 @@ export const A_VOCAB = [
   { id: 'healer', t: /\b(?:healers?|physicians?|doctors?|surgeons?|herbalists?|infirmar(?:y|ies)|hospitals?|leeches)\b/i, r: /healer|midwife|apothecar|hospital|physician|herbal|almshouse/i },
   { id: 'apothecary', t: /\bapothecar(?:y|ies)\b/i, r: /apothecar|alchemist/i },
   { id: 'midwife', t: /\bmidwi(?:fe|ves)\b/i, r: /midwife|healer|hospital/i },
-  { id: 'alchemist', t: /\balchemists?\b|\balchemy\b/i, r: /alchem/i, x: /(?:where|unlike|as|than) the alchemist/i },
+  { id: 'alchemist', t: /\balchemists?\b|\balchemy\b/i, r: /alchem/i, x: /(?:where|unlike|as|than) the alchemist|Apothecary & Alchemy/i },   // CENSUS-3: the income stream's name
   { id: 'alchemical', t: /\balchemical\b/i, r: /alchem|apothecar/i },
   { id: 'tannery', t: /\btanner(?:y|ies|s)?\b|\btan-?yards?\b|\btan-?pits?\b/i, r: /tann/i },
   { id: 'smithy', t: /\b(?:smith(?:y|ies)|blacksmiths?|farriers?|smiths)\b|\b(?:the|a|its|their|every|each) forges?\b|\bforges\b/i, r: /smith|forge|metalworker|smelter/i },

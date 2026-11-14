@@ -1,0 +1,1199 @@
+{
+ "res": {
+  "e|MED": {
+   "rows": 4,
+   "printing": 3,
+   "fired": 2
+  },
+  "*|MED": {
+   "rows": 108,
+   "printing": 98,
+   "fired": 10
+  },
+  "c|MED": {
+   "rows": 40,
+   "printing": 36,
+   "fired": 4
+  },
+  "g|MED": {
+   "rows": 37,
+   "printing": 35,
+   "fired": 2
+  },
+  "f|MED": {
+   "rows": 3,
+   "printing": 2,
+   "fired": 0
+  },
+  "c|HIGH": {
+   "rows": 2,
+   "printing": 1,
+   "fired": 0
+  },
+  "*|HIGH": {
+   "rows": 9,
+   "printing": 5,
+   "fired": 2
+  },
+  "h|MED": {
+   "rows": 4,
+   "printing": 4,
+   "fired": 1
+  },
+  "g|HIGH": {
+   "rows": 1,
+   "printing": 0,
+   "fired": 0
+  },
+  "a|MED": {
+   "rows": 17,
+   "printing": 15,
+   "fired": 1
+  },
+  "a|HIGH": {
+   "rows": 4,
+   "printing": 4,
+   "fired": 2
+  },
+  "b|HIGH": {
+   "rows": 1,
+   "printing": 0,
+   "fired": 0
+  },
+  "d|MED": {
+   "rows": 2,
+   "printing": 2,
+   "fired": 0
+  },
+  "b|MED": {
+   "rows": 1,
+   "printing": 1,
+   "fired": 0
+  },
+  "d|HIGH": {
+   "rows": 1,
+   "printing": 0,
+   "fired": 0
+  }
+ },
+ "groups": [
+  {
+   "mechanism": "two homes that disagree",
+   "rows": [
+    12,
+    73,
+    84,
+    113,
+    124,
+    129,
+    132,
+    136,
+    137,
+    138,
+    155,
+    156,
+    157,
+    159,
+    160,
+    168,
+    169,
+    170,
+    181,
+    182,
+    191,
+    213,
+    215,
+    219,
+    220,
+    233,
+    244,
+    257,
+    258,
+    259,
+    275,
+    296,
+    297,
+    299
+   ]
+  },
+  {
+   "mechanism": "presumes normal times under a crisis in force",
+   "rows": [
+    36,
+    39,
+    44,
+    51,
+    54,
+    59,
+    60,
+    67,
+    68,
+    90,
+    93,
+    101,
+    134,
+    200,
+    203,
+    247,
+    248,
+    250
+   ]
+  },
+  {
+   "mechanism": "names a house, a role or a force the town lacks",
+   "rows": [
+    114,
+    115,
+    185,
+    194,
+    195,
+    234,
+    235,
+    256,
+    272,
+    274,
+    278,
+    280,
+    300
+   ]
+  },
+  {
+   "mechanism": "names a resource, a good or a chain state that is not so",
+   "rows": [
+    9,
+    26,
+    38,
+    57,
+    64,
+    77,
+    83,
+    118,
+    162,
+    216,
+    249,
+    276
+   ]
+  },
+  {
+   "mechanism": "a ruler, a power, a threat or a history state that is not so",
+   "rows": [
+    158,
+    198,
+    279,
+    281
+   ]
+  },
+  {
+   "mechanism": "a figure against the record's",
+   "rows": [
+    18,
+    165,
+    210
+   ]
+  },
+  {
+   "mechanism": "a size",
+   "rows": [
+    166,
+    218
+   ]
+  },
+  {
+   "mechanism": "broken text",
+   "rows": [
+    199,
+    293
+   ]
+  },
+  {
+   "mechanism": "a female title on a male npc",
+   "rows": [
+    98
+   ]
+  },
+  {
+   "mechanism": "denies a house, force or crossing the town has",
+   "rows": [
+    206
+   ]
+  },
+  {
+   "mechanism": "a count",
+   "rows": [
+    294
+   ]
+  }
+ ],
+ "rows": [
+  {
+   "n": 2,
+   "town": "bar0-metropolis-calm-rand-1",
+   "severity": "MED",
+   "kind": "e",
+   "printing": false,
+   "fired": []
+  },
+  {
+   "n": 6,
+   "town": "bar0-metropolis-calm-rand-1",
+   "severity": "MED",
+   "kind": "c",
+   "printing": false,
+   "fired": []
+  },
+  {
+   "n": 9,
+   "town": "bar0-metropolis-calm-rand-1",
+   "severity": "MED",
+   "kind": "c",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 10,
+   "town": "bar0-metropolis-calm-rand-1",
+   "severity": "MED",
+   "kind": "c|g",
+   "printing": false,
+   "fired": []
+  },
+  {
+   "n": 12,
+   "town": "bar0-metropolis-calm-rand-1",
+   "severity": "MED",
+   "kind": "g|c",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 15,
+   "town": "bar0-metropolis-calm-rand-1",
+   "severity": "MED",
+   "kind": "g|c",
+   "printing": false,
+   "fired": []
+  },
+  {
+   "n": 17,
+   "town": "bar0-metropolis-calm-rand-1",
+   "severity": "MED",
+   "kind": "g|c",
+   "printing": true,
+   "fired": [
+    "L12"
+   ]
+  },
+  {
+   "n": 18,
+   "town": "bar0-metropolis-calm-rand-1",
+   "severity": "MED",
+   "kind": "f|g",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 26,
+   "town": "bar0-metropolis-calm-rand-1",
+   "severity": "MED",
+   "kind": "c",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 35,
+   "town": "bar0-city-under_siege+famine-rand-1",
+   "severity": "HIGH",
+   "kind": "c|g",
+   "printing": false,
+   "fired": []
+  },
+  {
+   "n": 36,
+   "town": "bar0-city-under_siege+famine-rand-1",
+   "severity": "MED",
+   "kind": "c",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 38,
+   "town": "bar0-city-under_siege+famine-rand-1",
+   "severity": "MED",
+   "kind": "c|h",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 39,
+   "town": "bar0-city-under_siege+famine-rand-1",
+   "severity": "MED",
+   "kind": "c",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 44,
+   "town": "bar0-city-under_siege+famine-rand-1",
+   "severity": "MED",
+   "kind": "c",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 51,
+   "town": "bar0-city-under_siege+famine-rand-1",
+   "severity": "MED",
+   "kind": "c|g",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 54,
+   "town": "bar0-city-under_siege+famine-rand-1",
+   "severity": "MED",
+   "kind": "c|g",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 57,
+   "town": "bar0-city-under_siege+famine-rand-1",
+   "severity": "MED",
+   "kind": "c|g",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 59,
+   "town": "bar0-city-under_siege+famine-rand-1",
+   "severity": "MED",
+   "kind": "c",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 60,
+   "town": "bar0-city-under_siege+famine-rand-1",
+   "severity": "MED",
+   "kind": "c|g",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 62,
+   "town": "bar0-city-under_siege+famine-rand-1",
+   "severity": "MED",
+   "kind": "h",
+   "printing": true,
+   "fired": [
+    "L10"
+   ]
+  },
+  {
+   "n": 64,
+   "town": "bar0-city-under_siege+famine-rand-1",
+   "severity": "MED",
+   "kind": "g",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 67,
+   "town": "bar0-city-under_siege+famine-rand-1",
+   "severity": "MED",
+   "kind": "c",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 68,
+   "town": "bar0-city-under_siege+famine-rand-1",
+   "severity": "MED",
+   "kind": "c",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 71,
+   "town": "bar0-city-under_siege+famine-rand-1",
+   "severity": "MED",
+   "kind": "c|g",
+   "printing": true,
+   "fired": [
+    "b"
+   ]
+  },
+  {
+   "n": 73,
+   "town": "bar0-city-under_siege+famine-rand-1",
+   "severity": "MED",
+   "kind": "g",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 75,
+   "town": "bar0-city-under_siege+famine-rand-1",
+   "severity": "HIGH",
+   "kind": "g|c",
+   "printing": false,
+   "fired": []
+  },
+  {
+   "n": 77,
+   "town": "bar0-city-under_siege+famine-rand-1",
+   "severity": "MED",
+   "kind": "c",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 80,
+   "town": "bar0-city-under_siege+famine-rand-1",
+   "severity": "MED",
+   "kind": "c|g",
+   "printing": false,
+   "fired": []
+  },
+  {
+   "n": 83,
+   "town": "bar0-city-under_siege+famine-rand-1",
+   "severity": "MED",
+   "kind": "c",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 84,
+   "town": "bar0-city-under_siege+famine-rand-1",
+   "severity": "MED",
+   "kind": "g",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 90,
+   "town": "bar0-city-under_siege+famine-rand-1",
+   "severity": "MED",
+   "kind": "c|g",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 93,
+   "town": "bar0-city-under_siege+famine-rand-1",
+   "severity": "MED",
+   "kind": "c|g",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 98,
+   "town": "bar0-city-under_siege+famine-rand-1",
+   "severity": "MED",
+   "kind": "h",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 101,
+   "town": "bar0-city-under_siege+famine-rand-1",
+   "severity": "MED",
+   "kind": "c|g",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 113,
+   "town": "bar0-city-wartime-rand-1",
+   "severity": "MED",
+   "kind": "g|f",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 114,
+   "town": "bar0-city-wartime-rand-1",
+   "severity": "MED",
+   "kind": "a",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 115,
+   "town": "bar0-city-wartime-rand-1",
+   "severity": "HIGH",
+   "kind": "a",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 116,
+   "town": "bar0-city-wartime-rand-1",
+   "severity": "HIGH",
+   "kind": "b|g|h",
+   "printing": false,
+   "fired": []
+  },
+  {
+   "n": 118,
+   "town": "bar0-city-wartime-rand-1",
+   "severity": "MED",
+   "kind": "c|g",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 124,
+   "town": "bar0-city-wartime-rand-1",
+   "severity": "MED",
+   "kind": "a|g",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 129,
+   "town": "bar0-city-wartime-rand-1",
+   "severity": "MED",
+   "kind": "g",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 130,
+   "town": "bar0-city-wartime-rand-1",
+   "severity": "MED",
+   "kind": "e",
+   "printing": true,
+   "fired": [
+    "L8"
+   ]
+  },
+  {
+   "n": 131,
+   "town": "bar0-city-wartime-rand-1",
+   "severity": "MED",
+   "kind": "e",
+   "printing": true,
+   "fired": [
+    "L8"
+   ]
+  },
+  {
+   "n": 132,
+   "town": "bar0-city-wartime-rand-1",
+   "severity": "MED",
+   "kind": "g",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 134,
+   "town": "bar0-city-wartime-rand-1",
+   "severity": "MED",
+   "kind": "c|g",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 136,
+   "town": "bar0-city-wartime-rand-1",
+   "severity": "MED",
+   "kind": "g",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 137,
+   "town": "bar0-city-wartime-rand-1",
+   "severity": "MED",
+   "kind": "g",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 138,
+   "town": "bar0-city-wartime-rand-1",
+   "severity": "MED",
+   "kind": "a|g",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 154,
+   "town": "bar0-thorp-calm-rand-1",
+   "severity": "MED",
+   "kind": "f|g",
+   "printing": false,
+   "fired": []
+  },
+  {
+   "n": 155,
+   "town": "bar0-thorp-calm-rand-1",
+   "severity": "MED",
+   "kind": "c|g",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 156,
+   "town": "bar0-thorp-calm-rand-1",
+   "severity": "MED",
+   "kind": "g",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 157,
+   "town": "bar0-thorp-calm-rand-1",
+   "severity": "MED",
+   "kind": "g|h",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 158,
+   "town": "bar0-thorp-calm-rand-1",
+   "severity": "MED",
+   "kind": "c",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 159,
+   "town": "bar0-thorp-calm-rand-1",
+   "severity": "MED",
+   "kind": "g",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 160,
+   "town": "bar0-thorp-calm-rand-1",
+   "severity": "MED",
+   "kind": "g",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 162,
+   "town": "bar0-thorp-calm-rand-1",
+   "severity": "MED",
+   "kind": "a|c",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 163,
+   "town": "bar0-thorp-calm-rand-1",
+   "severity": "MED",
+   "kind": "a|c",
+   "printing": false,
+   "fired": []
+  },
+  {
+   "n": 165,
+   "town": "bar0-thorp-calm-rand-1",
+   "severity": "MED",
+   "kind": "f|g",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 166,
+   "town": "bar0-thorp-calm-rand-1",
+   "severity": "MED",
+   "kind": "d|g",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 167,
+   "town": "bar0-thorp-calm-rand-1",
+   "severity": "MED",
+   "kind": "c|d|g",
+   "printing": true,
+   "fired": [
+    "L7"
+   ]
+  },
+  {
+   "n": 168,
+   "town": "bar0-thorp-calm-rand-1",
+   "severity": "MED",
+   "kind": "c|d|g",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 169,
+   "town": "bar0-thorp-calm-rand-1",
+   "severity": "MED",
+   "kind": "g",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 170,
+   "town": "bar0-thorp-calm-rand-1",
+   "severity": "MED",
+   "kind": "g",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 179,
+   "town": "bar0-town-occupied-rand-1",
+   "severity": "MED",
+   "kind": "c|g",
+   "printing": true,
+   "fired": [
+    "L16"
+   ]
+  },
+  {
+   "n": 180,
+   "town": "bar0-town-occupied-rand-1",
+   "severity": "MED",
+   "kind": "c|g",
+   "printing": true,
+   "fired": [
+    "L16"
+   ]
+  },
+  {
+   "n": 181,
+   "town": "bar0-town-occupied-rand-1",
+   "severity": "MED",
+   "kind": "g|f",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 182,
+   "town": "bar0-town-occupied-rand-1",
+   "severity": "MED",
+   "kind": "g|f",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 185,
+   "town": "bar0-town-occupied-rand-1",
+   "severity": "MED",
+   "kind": "a",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 191,
+   "town": "bar0-town-occupied-rand-1",
+   "severity": "MED",
+   "kind": "g|c",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 194,
+   "town": "bar0-town-occupied-rand-1",
+   "severity": "MED",
+   "kind": "a",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 195,
+   "town": "bar0-town-occupied-rand-1",
+   "severity": "MED",
+   "kind": "a",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 198,
+   "town": "bar0-town-occupied-rand-1",
+   "severity": "MED",
+   "kind": "c|g",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 199,
+   "town": "bar0-town-occupied-rand-1",
+   "severity": "MED",
+   "kind": "h|e",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 200,
+   "town": "bar0-town-occupied-rand-1",
+   "severity": "MED",
+   "kind": "c|g",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 203,
+   "town": "bar0-town-occupied-rand-1",
+   "severity": "MED",
+   "kind": "g|c",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 205,
+   "town": "bar0-town-occupied-rand-1",
+   "severity": "MED",
+   "kind": "g|c",
+   "printing": true,
+   "fired": [
+    "L9"
+   ]
+  },
+  {
+   "n": 206,
+   "town": "bar0-town-occupied-rand-1",
+   "severity": "MED",
+   "kind": "b|g",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 210,
+   "town": "bar0-town-occupied-rand-1",
+   "severity": "MED",
+   "kind": "g|f",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 213,
+   "town": "bar0-town-occupied-rand-1",
+   "severity": "MED",
+   "kind": "g|f",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 215,
+   "town": "bar0-town-occupied-rand-1",
+   "severity": "MED",
+   "kind": "g|f",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 216,
+   "town": "bar0-hamlet-calm-rand-1",
+   "severity": "HIGH",
+   "kind": "c|f",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 217,
+   "town": "bar0-hamlet-calm-rand-1",
+   "severity": "HIGH",
+   "kind": "d",
+   "printing": false,
+   "fired": []
+  },
+  {
+   "n": 218,
+   "town": "bar0-hamlet-calm-rand-1",
+   "severity": "MED",
+   "kind": "d",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 219,
+   "town": "bar0-hamlet-calm-rand-1",
+   "severity": "MED",
+   "kind": "g|f",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 220,
+   "town": "bar0-hamlet-calm-rand-1",
+   "severity": "MED",
+   "kind": "g|f",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 233,
+   "town": "bar0-town-calm-rand-1",
+   "severity": "MED",
+   "kind": "c|g",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 234,
+   "town": "bar0-town-calm-rand-1",
+   "severity": "MED",
+   "kind": "a|g",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 235,
+   "town": "bar0-town-calm-rand-1",
+   "severity": "MED",
+   "kind": "a|g",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 240,
+   "town": "bar0-town-calm-rand-1",
+   "severity": "MED",
+   "kind": "g",
+   "printing": false,
+   "fired": []
+  },
+  {
+   "n": 244,
+   "town": "bar0-town-calm-rand-1",
+   "severity": "MED",
+   "kind": "g",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 246,
+   "town": "bar0-hamlet-under_siege-rand-1",
+   "severity": "HIGH",
+   "kind": "a|g",
+   "printing": true,
+   "fired": [
+    "a"
+   ]
+  },
+  {
+   "n": 247,
+   "town": "bar0-hamlet-under_siege-rand-1",
+   "severity": "MED",
+   "kind": "c|g",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 248,
+   "town": "bar0-hamlet-under_siege-rand-1",
+   "severity": "MED",
+   "kind": "c|g",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 249,
+   "town": "bar0-hamlet-under_siege-rand-1",
+   "severity": "MED",
+   "kind": "c|g",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 250,
+   "town": "bar0-hamlet-under_siege-rand-1",
+   "severity": "MED",
+   "kind": "c",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 256,
+   "town": "bar0-hamlet-under_siege-rand-1",
+   "severity": "MED",
+   "kind": "a|g",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 257,
+   "town": "bar0-hamlet-under_siege-rand-1",
+   "severity": "MED",
+   "kind": "g|f",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 258,
+   "town": "bar0-hamlet-under_siege-rand-1",
+   "severity": "MED",
+   "kind": "g|f",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 259,
+   "town": "bar0-hamlet-under_siege-rand-1",
+   "severity": "MED",
+   "kind": "g",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 272,
+   "town": "bar0-village-famine-rand-1",
+   "severity": "HIGH",
+   "kind": "a",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 273,
+   "town": "bar0-village-famine-rand-1",
+   "severity": "MED",
+   "kind": "a",
+   "printing": false,
+   "fired": []
+  },
+  {
+   "n": 274,
+   "town": "bar0-village-famine-rand-1",
+   "severity": "MED",
+   "kind": "a",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 275,
+   "town": "bar0-village-famine-rand-1",
+   "severity": "MED",
+   "kind": "g",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 276,
+   "town": "bar0-village-famine-rand-1",
+   "severity": "MED",
+   "kind": "c",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 277,
+   "town": "bar0-village-famine-rand-1",
+   "severity": "MED",
+   "kind": "c,g",
+   "printing": false,
+   "fired": []
+  },
+  {
+   "n": 278,
+   "town": "bar0-village-famine-rand-1",
+   "severity": "MED",
+   "kind": "a,g",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 279,
+   "town": "bar0-village-famine-rand-1",
+   "severity": "MED",
+   "kind": "g",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 280,
+   "town": "bar0-village-famine-rand-1",
+   "severity": "MED",
+   "kind": "a,g",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 281,
+   "town": "bar0-village-famine-rand-1",
+   "severity": "MED",
+   "kind": "c,g",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 291,
+   "town": "bar0-village-calm-rand-1",
+   "severity": "HIGH",
+   "kind": "a,g",
+   "printing": true,
+   "fired": [
+    "a"
+   ]
+  },
+  {
+   "n": 292,
+   "town": "bar0-village-calm-rand-1",
+   "severity": "MED",
+   "kind": "a",
+   "printing": true,
+   "fired": [
+    "a"
+   ]
+  },
+  {
+   "n": 293,
+   "town": "bar0-village-calm-rand-1",
+   "severity": "MED",
+   "kind": "h",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 294,
+   "town": "bar0-village-calm-rand-1",
+   "severity": "MED",
+   "kind": "e",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 296,
+   "town": "bar0-village-calm-rand-1",
+   "severity": "MED",
+   "kind": "g",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 297,
+   "town": "bar0-village-calm-rand-1",
+   "severity": "MED",
+   "kind": "g",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 299,
+   "town": "bar0-village-calm-rand-1",
+   "severity": "MED",
+   "kind": "g",
+   "printing": true,
+   "fired": []
+  },
+  {
+   "n": 300,
+   "town": "bar0-village-calm-rand-1",
+   "severity": "MED",
+   "kind": "a,g",
+   "printing": true,
+   "fired": []
+  }
+ ],
+ "firedBy": {
+  "L12": 1,
+  "L10": 1,
+  "b": 1,
+  "L8": 2,
+  "L7": 1,
+  "L16": 2,
+  "L9": 1,
+  "a": 3
+ }
+}

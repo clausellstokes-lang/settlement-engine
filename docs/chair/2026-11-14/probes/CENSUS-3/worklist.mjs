@@ -21,7 +21,7 @@ function knownBy(file, fn, sents) { const out = new Set();
   return [...out]; }
 const prec = (k) => (P[k]?.p ?? null);
 const W = {};
-for (const h of H) { if (KINDS && !KINDS.has(h.pattern)) continue; const p = prec(h.pattern); if (p == null || p < 0.8) continue;
+for (const h of H) { if (KINDS && !KINDS.has(h.pattern)) continue; if (h.pattern === 'a' && (h.surface === 'pdf' || h.surface === 'journal') && String(h.line).trim().split(/\s+/).length <= 2) continue;   /* a PDF or journal heading ('Church', 'Mining') is a category title, not a claim (read) */ const p = prec(h.pattern); if (p == null || p < 0.8) continue;
   const file = h.writer?.file || '(untraced)'; const fn = h.writer?.fn || ''; const key = file === '(untraced)' ? `(untraced) :: ${fold(h.sentence || h.line).slice(0, 80)}` : `${file} :: ${fn}`;
   const w = (W[key] ||= { writer: key, file, fn, kinds: {}, towns: new Map(), surfaces: new Set(), example: null, holder: h.holder || [], sents: new Set() });
   (w.kinds[h.pattern] ||= new Set()).add(h.seed); w.towns.set(h.seed, Math.max(w.towns.get(h.seed) || 0, p)); w.surfaces.add(h.surface || 'tab'); if (w.sents.size < 40) w.sents.add(h.sentence || h.line);

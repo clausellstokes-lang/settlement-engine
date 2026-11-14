@@ -1,0 +1,3084 @@
+{
+ "res": {
+  "bar|LOW": {
+   "printing": 180,
+   "gone": 8
+  },
+  "bar|MED": {
+   "printing": 98,
+   "gone": 10
+  },
+  "bar|HIGH": {
+   "printing": 5,
+   "gone": 4
+  },
+  "join|HIGH": {
+   "printing": 12,
+   "gone": 9,
+   "unplaceable": 2,
+   "towns": 843
+  },
+  "join|MEDIUM": {
+   "printing": 54,
+   "gone": 47,
+   "unplaceable": 66,
+   "towns": 7559
+  },
+  "join|LOW": {
+   "printing": 1,
+   "gone": 0,
+   "unplaceable": 0,
+   "towns": 14
+  }
+ },
+ "barRows": [
+  {
+   "n": 1,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 2,
+   "severity": "MED",
+   "printing": false
+  },
+  {
+   "n": 3,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 4,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 5,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 6,
+   "severity": "MED",
+   "printing": false
+  },
+  {
+   "n": 7,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 8,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 9,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 10,
+   "severity": "MED",
+   "printing": false
+  },
+  {
+   "n": 11,
+   "severity": "LOW",
+   "printing": false
+  },
+  {
+   "n": 12,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 13,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 14,
+   "severity": "LOW",
+   "printing": false
+  },
+  {
+   "n": 15,
+   "severity": "MED",
+   "printing": false
+  },
+  {
+   "n": 16,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 17,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 18,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 19,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 20,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 21,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 22,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 23,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 24,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 25,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 26,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 27,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 28,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 29,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 30,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 31,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 32,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 33,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 34,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 35,
+   "severity": "HIGH",
+   "printing": false
+  },
+  {
+   "n": 36,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 37,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 38,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 39,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 40,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 41,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 42,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 43,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 44,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 45,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 46,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 47,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 48,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 49,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 50,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 51,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 52,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 53,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 54,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 55,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 56,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 57,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 58,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 59,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 60,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 61,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 62,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 63,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 64,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 65,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 66,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 67,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 68,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 69,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 70,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 71,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 72,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 73,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 74,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 75,
+   "severity": "HIGH",
+   "printing": false
+  },
+  {
+   "n": 76,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 77,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 78,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 79,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 80,
+   "severity": "MED",
+   "printing": false
+  },
+  {
+   "n": 81,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 82,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 83,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 84,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 85,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 86,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 87,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 88,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 89,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 90,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 91,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 92,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 93,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 94,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 95,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 96,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 97,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 98,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 99,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 100,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 101,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 102,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 103,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 104,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 105,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 106,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 107,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 108,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 109,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 110,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 111,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 112,
+   "severity": "LOW",
+   "printing": false
+  },
+  {
+   "n": 113,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 114,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 115,
+   "severity": "HIGH",
+   "printing": true
+  },
+  {
+   "n": 116,
+   "severity": "HIGH",
+   "printing": false
+  },
+  {
+   "n": 117,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 118,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 119,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 120,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 121,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 122,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 123,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 124,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 125,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 126,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 127,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 128,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 129,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 130,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 131,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 132,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 133,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 134,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 135,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 136,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 137,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 138,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 139,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 140,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 141,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 142,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 143,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 144,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 145,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 146,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 147,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 148,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 149,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 150,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 151,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 152,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 153,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 154,
+   "severity": "MED",
+   "printing": false
+  },
+  {
+   "n": 155,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 156,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 157,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 158,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 159,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 160,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 161,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 162,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 163,
+   "severity": "MED",
+   "printing": false
+  },
+  {
+   "n": 164,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 165,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 166,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 167,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 168,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 169,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 170,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 171,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 172,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 173,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 174,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 175,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 176,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 177,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 178,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 179,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 180,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 181,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 182,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 183,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 184,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 185,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 186,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 187,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 188,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 189,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 190,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 191,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 192,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 193,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 194,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 195,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 196,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 197,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 198,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 199,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 200,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 201,
+   "severity": "LOW",
+   "printing": false
+  },
+  {
+   "n": 202,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 203,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 204,
+   "severity": "LOW",
+   "printing": false
+  },
+  {
+   "n": 205,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 206,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 207,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 208,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 209,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 210,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 211,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 212,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 213,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 214,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 215,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 216,
+   "severity": "HIGH",
+   "printing": true
+  },
+  {
+   "n": 217,
+   "severity": "HIGH",
+   "printing": false
+  },
+  {
+   "n": 218,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 219,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 220,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 221,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 222,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 223,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 224,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 225,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 226,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 227,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 228,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 229,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 230,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 231,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 232,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 233,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 234,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 235,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 236,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 237,
+   "severity": "LOW",
+   "printing": false
+  },
+  {
+   "n": 238,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 239,
+   "severity": "LOW",
+   "printing": false
+  },
+  {
+   "n": 240,
+   "severity": "MED",
+   "printing": false
+  },
+  {
+   "n": 241,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 242,
+   "severity": "LOW",
+   "printing": false
+  },
+  {
+   "n": 243,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 244,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 245,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 246,
+   "severity": "HIGH",
+   "printing": true
+  },
+  {
+   "n": 247,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 248,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 249,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 250,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 251,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 252,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 253,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 254,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 255,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 256,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 257,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 258,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 259,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 260,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 261,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 262,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 263,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 264,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 265,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 266,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 267,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 268,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 269,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 270,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 271,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 272,
+   "severity": "HIGH",
+   "printing": true
+  },
+  {
+   "n": 273,
+   "severity": "MED",
+   "printing": false
+  },
+  {
+   "n": 274,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 275,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 276,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 277,
+   "severity": "MED",
+   "printing": false
+  },
+  {
+   "n": 278,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 279,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 280,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 281,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 282,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 283,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 284,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 285,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 286,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 287,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 288,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 289,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 290,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 291,
+   "severity": "HIGH",
+   "printing": true
+  },
+  {
+   "n": 292,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 293,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 294,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 295,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 296,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 297,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 298,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 299,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 300,
+   "severity": "MED",
+   "printing": true
+  },
+  {
+   "n": 301,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 302,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 303,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 304,
+   "severity": "LOW",
+   "printing": true
+  },
+  {
+   "n": 305,
+   "severity": "LOW",
+   "printing": true
+  }
+ ],
+ "joinRows": [
+  {
+   "id": "LV-CHAINSTATE-PDF",
+   "severity": "HIGH",
+   "placeable": false
+  },
+  {
+   "id": "R2B-389",
+   "severity": "HIGH",
+   "placeable": true,
+   "runs": [
+    "A ruling one power refuses to obey"
+   ],
+   "towns": 0
+  },
+  {
+   "id": "R2A-L07L10",
+   "severity": "HIGH",
+   "placeable": true,
+   "runs": [
+    "shops … different quarters",
+    "bodies being carried through {N}'s streets … somewhere in the lower districts"
+   ],
+   "towns": 0
+  },
+  {
+   "id": "R3T-SERVICES",
+   "severity": "HIGH",
+   "placeable": true,
+   "runs": [
+    "chip and the run-together"
+   ],
+   "towns": 0
+  },
+  {
+   "id": "R2A-L05",
+   "severity": "HIGH",
+   "placeable": true,
+   "runs": [
+    "The merchant district of {N} looks prosperous…"
+   ],
+   "towns": 0
+  },
+  {
+   "id": "R2A-L18",
+   "severity": "HIGH",
+   "placeable": true,
+   "runs": [
+    "Their master craftsman is talking to a rival"
+   ],
+   "towns": 135
+  },
+  {
+   "id": "LV-TRADELISTS",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "LV-FOODPDF",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "R2B-LEASTSAY",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "the one with the least say in the house the crisis hits"
+   ],
+   "towns": 22
+  },
+  {
+   "id": "LV-RUNNING-JOURNAL",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "under a siege: the Foundry journal prints it raw ("
+   ],
+   "towns": 0
+  },
+  {
+   "id": "R3T-F5",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "{S} could deal with a brawl or a thief, but the {tier} could not hold off a raid."
+   ],
+   "towns": 0
+  },
+  {
+   "id": "R2B-883",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "about three months at full rations",
+    "a few weeks at full rations",
+    "about three days"
+   ],
+   "towns": 32
+  },
+  {
+   "id": "LV-OTHERNEED",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "BUNDLE-CRP-DE",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "DATA-SMELTER",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "Converts raw ore to refined metal using charcoal-fueled furnaces. The industrial intermediate between mine and smithy."
+   ],
+   "towns": 96
+  },
+  {
+   "id": "LV-CANNOTPRODUCE",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "cannot produce its own"
+   ],
+   "towns": 0
+  },
+  {
+   "id": "PWR-MENTOR",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "UPK-ARCANE52",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "Arcane defense"
+   ],
+   "towns": 203
+  },
+  {
+   "id": "LV-ABUNDANT",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "R3T-F6",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "The trades that feed and equip {S}'s defenders are busy and well stocked, and the defenders know it.",
+    "will not go short / busy and well stocked"
+   ],
+   "towns": 0
+  },
+  {
+   "id": "R3T-PAPER",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "Well-defended",
+    "exists on paper"
+   ],
+   "towns": 107
+  },
+  {
+   "id": "R3C-KEEPORDER",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "Those who keep order in {name} …",
+    "the merchants",
+    "in thorps and hamlets;"
+   ],
+   "towns": 164
+  },
+  {
+   "id": "LV-169",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "LV-MAGICNOTES",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "Druidic forest management…",
+    "Conjured game produces fish",
+    "…depleted farmland",
+    "Arcane quickening of growth"
+   ],
+   "towns": 20
+  },
+  {
+   "id": "LV-NAVAL",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "… has a harbour and nothing to hold it with; any vessel that wants the sea approaches has them"
+   ],
+   "towns": 0
+  },
+  {
+   "id": "DATA-DENSE",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "dense populations",
+    "Intensive plots, terraces, raised fields, and tribute redistribution support dense populations."
+   ],
+   "towns": 27
+  },
+  {
+   "id": "BUNDLE-CRP-ECO",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "CRP-ONESOURCE",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "LV-ARCANENONE",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "beside an arcane power or a named mage; the practitioner census counts neither a governing Arcane Council nor"
+   ],
+   "towns": 0
+  },
+  {
+   "id": "R3T-F4",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "DATA-SAWMILLNAME",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "no sawmill ... finishes it",
+    "Sawmill (commercial)"
+   ],
+   "towns": 221
+  },
+  {
+   "id": "UC-INTSEC",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "Internal Security Strong",
+    "Desperate/Dangerous/Critical"
+   ],
+   "towns": 150
+  },
+  {
+   "id": "R2A-UNDERWORLD",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "On the payroll of the thieves' guild as a silent informant",
+    "Runs a protection scheme targeting the very merchants they're supposed to serve",
+    "the occupying governor",
+    "the revolt's leader"
+   ],
+   "towns": 130
+  },
+  {
+   "id": "R3T-C1",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "Approaching {N}, you see the walls and the soldiers who belong on them, and any attacker would think again about the cost."
+   ],
+   "towns": 0
+  },
+  {
+   "id": "R3T-ORIGIN",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "R2A-REEVE",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "The church wants approval rights over market day activities. The village reeve disagrees."
+   ],
+   "towns": 2
+  },
+  {
+   "id": "BUNDLE-CRP-REST",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "UPK-869",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "PWR-T2",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "Landed families increasingly outpaced by merchant capital …",
+    "Still ahead of merchant interests in real influence, for now."
+   ],
+   "towns": 38
+  },
+  {
+   "id": "CRP-HERESY",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "Questions of what is sanctioned magic and what is heresy remain deliberately unresolved."
+   ],
+   "towns": 86
+  },
+  {
+   "id": "PWR-BLACKMKT",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "answers to Black market through ...",
+    "handled by ... (Multiple criminal factions)"
+   ],
+   "towns": 0
+  },
+  {
+   "id": "R2A-L20",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "The quarantine order they're enforcing…"
+   ],
+   "towns": 0
+  },
+  {
+   "id": "DATA-FAIRS",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "International merchants. Letters of credit accepted."
+   ],
+   "towns": 55
+  },
+  {
+   "id": "LV-GRAPES",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "CRITICAL IMPORT",
+    "Every load of grapes that …'s Vintner uses comes in from elsewhere"
+   ],
+   "towns": 0
+  },
+  {
+   "id": "R2A-CUSTOMS",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "…only one is shown to the customs house",
+    "A customs officer has asked …",
+    "…name {s} before a magistrate"
+   ],
+   "towns": 0
+  },
+  {
+   "id": "R2A-L13",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "The founders built a place to trade",
+    "The founders built for a few families who knew each other"
+   ],
+   "towns": 19
+  },
+  {
+   "id": "UC-THREATEN",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "…would take real effort to threaten"
+   ],
+   "towns": 0
+  },
+  {
+   "id": "CRP-IMPORTREASON",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "Required by <the chain's first processing house> but not available in <terrain>"
+   ],
+   "towns": 0
+  },
+  {
+   "id": "LV-MILLRUN",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "where the only mill is"
+   ],
+   "towns": 0
+  },
+  {
+   "id": "PWR-SYMB",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "R2A-L31",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "The shortfall is met through …",
+    "The gap is closed through …"
+   ],
+   "towns": 0
+  },
+  {
+   "id": "BAR-124",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "BAR-130",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "BAR-131",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "BAR-132",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "BAR-134",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "BAR-169",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "BAR-170",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "BAR-182",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "BAR-194",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "BAR-195",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "BAR-198",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "BAR-210",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "BAR-247",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "BAR-248",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "BAR-249",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "BAR-274",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "BAR-293",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "BAR-294",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "BAR-83",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "CRP-CRIMEGOVT",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "holds the title and little else",
+    "competes with"
+   ],
+   "towns": 1
+  },
+  {
+   "id": "DATA-SVC-SIEGE",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "Livestock auction",
+    "Large-scale trading",
+    "Livestock auctions",
+    "Caravan organization",
+    "Fresh produce",
+    "roasted meats",
+    "Assemble merchants with compatible routes into shared caravans"
+   ],
+   "towns": 317
+  },
+  {
+   "id": "LV-QUARRYINCOME",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "Stone Quarrying"
+   ],
+   "towns": 135
+  },
+  {
+   "id": "PWR-1432",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "Merchant Guilds"
+   ],
+   "towns": 263
+  },
+  {
+   "id": "PWR-PF89",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "no say in the hall",
+    "Contests the seat"
+   ],
+   "towns": 526
+  },
+  {
+   "id": "R2A-L02",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "R2A-L08",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "another [chime] from a different quarter"
+   ],
+   "towns": 0
+  },
+  {
+   "id": "R2A-L24",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "the shipwrights and builders are bidding…"
+   ],
+   "towns": 0
+  },
+  {
+   "id": "UC-FRACT",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "Governance fractured.",
+    "Stability: Stable"
+   ],
+   "towns": 417
+  },
+  {
+   "id": "BUNDLE-LV-CENSUS",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "BUNDLE-R2B-INC",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "No granary; two months in household stores",
+    "The Powers (#)"
+   ],
+   "towns": 720
+  },
+  {
+   "id": "CRP-SLOTLABELS",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "gold/silver ore",
+    "palisade or earthworks",
+    "Military/Guard",
+    "Panteakra bought its capital from outside"
+   ],
+   "towns": 349
+  },
+  {
+   "id": "PWR-MODLEGEND",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "PWR-MODPDF",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "military-dominated"
+   ],
+   "towns": 46
+  },
+  {
+   "id": "UPK-RANGE-CHAIN",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "Merchant guilds (#-#)"
+   ],
+   "towns": 0
+  },
+  {
+   "id": "UPK-STORES",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "a few weeks in the larder"
+   ],
+   "towns": 0
+  },
+  {
+   "id": "LV-PDFNEEDS",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "UPK-W5",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "R3T-WATCHPOOL",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "walls and a watch only",
+    "a watch only"
+   ],
+   "towns": 0
+  },
+  {
+   "id": "R3T-F9",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "LV-DIVINENOTE",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "PWR-HOUSELEAF",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "answers to <house> through ..."
+   ],
+   "towns": 0
+  },
+  {
+   "id": "LV-GAMBLING",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "R2A-LEFT-GAME",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "Has been hunting on land … and selling the game in the market"
+   ],
+   "towns": 0
+  },
+  {
+   "id": "R2A-SHRINE",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "its house of worship survived",
+    "the local clergy"
+   ],
+   "towns": 15
+  },
+  {
+   "id": "R2B-CARAVANS",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "Supply caravans pass through on crown requisition"
+   ],
+   "towns": 25
+  },
+  {
+   "id": "LV-CHARCOAL",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "No one here works the timber"
+   ],
+   "towns": 49
+  },
+  {
+   "id": "LV-PALISADEQUARRY",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "via Palisade"
+   ],
+   "towns": 0
+  },
+  {
+   "id": "UPK-FISHCOMM",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "... are the whole of the economy"
+   ],
+   "towns": 0
+  },
+  {
+   "id": "LV-CAPITAL",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "DATA-PAIRS",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "must brought in",
+    "taverns and ships"
+   ],
+   "towns": 81
+  },
+  {
+   "id": "DATA-PARISH",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "Hundreds of houses of worship across every district ..."
+   ],
+   "towns": 0
+  },
+  {
+   "id": "DATA-ROW6",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "DATA-ROW7",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "LV-CATHEDRAL",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "LV-CHARCOALPILLS",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "LV-MAGICSUPPLY",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "Reliance on magic: … · supplied by …"
+   ],
+   "towns": 0
+  },
+  {
+   "id": "LV-PROCHOUSES",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "LV-UNEXPLOITED",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "PWR-KEEPER",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "PWR-SEATTITLE",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "${who} holds the seat of ..."
+   ],
+   "towns": 0
+  },
+  {
+   "id": "R2A-LEFT-BATCH",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "sold a batch"
+   ],
+   "towns": 161
+  },
+  {
+   "id": "R2A-LEFT-COHESION",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "R2A-LEFT-CRISISSECRET",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "R2A-LEFT-FLAVOR",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "little happened",
+    "no dramatic history"
+   ],
+   "towns": 0
+  },
+  {
+   "id": "R2A-LEFT-FORGES",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "R2A-LEFT-GOVECON",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "R2A-LEFT-LANISTA",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "R2A-LEFT-MILWEAVER",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "R2A-LEFT-PLAGUERIVER",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "the roads and river"
+   ],
+   "towns": 0
+  },
+  {
+   "id": "R2A-LEFT-PLAINS",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "R2A-LEFT-RATION",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "R2A-LEFT-TORN",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "R2B-693",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "Burgomaster, first of Merchant Council · first of Merchant Guilds",
+    "Mill · second of The Highborn Circle"
+   ],
+   "towns": 8
+  },
+  {
+   "id": "R2B-979",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "Disposition established"
+   ],
+   "towns": 271
+  },
+  {
+   "id": "R3C-GEN16",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "Nobody now in {settlement} saw the {calamity}"
+   ],
+   "towns": 0
+  },
+  {
+   "id": "R3C-REVOLTNOTE",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "everyone who keeps order is busy containing the revolt"
+   ],
+   "towns": 24
+  },
+  {
+   "id": "UPK-LADDER",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "R3T-F10",
+   "severity": "LOW",
+   "placeable": true,
+   "runs": [
+    "Import-dependent"
+   ],
+   "towns": 14
+  },
+  {
+   "id": "LV-CHAINNAME",
+   "severity": "HIGH",
+   "placeable": true,
+   "runs": [
+    "- **Chain** *(impaired)*"
+   ],
+   "towns": 0
+  },
+  {
+   "id": "CRP-259",
+   "severity": "HIGH",
+   "placeable": true,
+   "runs": [
+    "nothing it lives by would stop without it",
+    "Nothing structural ... depends on arcane work",
+    "Reliance on magic: None"
+   ],
+   "towns": 418
+  },
+  {
+   "id": "R2B-PALACE",
+   "severity": "HIGH",
+   "placeable": true,
+   "runs": [
+    "built around the Palace/government complex"
+   ],
+   "towns": 13
+  },
+  {
+   "id": "LV-MASTERCRAFT",
+   "severity": "HIGH",
+   "placeable": true,
+   "runs": [
+    "Outputs: Master-crafted weapons"
+   ],
+   "towns": 0
+  },
+  {
+   "id": "R2B-GATES",
+   "severity": "HIGH",
+   "placeable": true,
+   "runs": [
+    "Gates (if walled)",
+    "Major monasteries (#-#). Wounds and fevers…"
+   ],
+   "towns": 11
+  },
+  {
+   "id": "LV-FAMINEEXPORTS",
+   "severity": "HIGH",
+   "placeable": true,
+   "runs": [
+    "Raw wool, Livestock",
+    "The herds failed this year"
+   ],
+   "towns": 87
+  },
+  {
+   "id": "R2A-GREATFIRE",
+   "severity": "HIGH",
+   "placeable": true,
+   "runs": [
+    "lower districts",
+    "merchant stalls",
+    "whole quarters"
+   ],
+   "towns": 74
+  },
+  {
+   "id": "R2A-ARRIVALNB",
+   "severity": "HIGH",
+   "placeable": true,
+   "runs": [
+    "Turf roofs and timber sheds gather behind the working waterfront.",
+    "A patron stands drinks at a wine shop…",
+    "Each lane seems to keep to its own trade…",
+    "Stacks of seasoning planks line the road in…",
+    "Travellers are offered water before anyone asks their business.",
+    "Each lane of stalls has someone who speaks for it…"
+   ],
+   "towns": 17
+  },
+  {
+   "id": "UPK-RANGE-VIAB",
+   "severity": "HIGH",
+   "placeable": true,
+   "runs": [
+    "Taverns (#-#)",
+    "District markets (…)"
+   ],
+   "towns": 1
+  },
+  {
+   "id": "R2A-FOUNDERS",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "Founded by: a dynastic decision that this crossroads would anchor the realm"
+   ],
+   "towns": 28
+  },
+  {
+   "id": "R2B-FOODWORD",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    ") and the Quick Guide's food line against foodBandOf ("
+   ],
+   "towns": 0
+  },
+  {
+   "id": "UPK-234",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "Timber Trade … managed felling keeps production consistent"
+   ],
+   "towns": 0
+  },
+  {
+   "id": "LV-GATECONTROL",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "gate control"
+   ],
+   "towns": 131
+  },
+  {
+   "id": "LV-STRATFRAME",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "…whoever holds the ground holds what the assessment below names",
+    "…could not keep it against anyone who came for it"
+   ],
+   "towns": 0
+  },
+  {
+   "id": "LV-STORED",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "…run on stored {goods}: no trade road reaches {N}.",
+    "…brought in by magic: no trade road reaches {N}."
+   ],
+   "towns": 0
+  },
+  {
+   "id": "R3C-KITCHENS",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "Irrigation, tanks, street kitchens, preservation, and ritual food rules shape supply and consumption."
+   ],
+   "towns": 73
+  },
+  {
+   "id": "DATA-F2",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "passing through the port or the main roads"
+   ],
+   "towns": 18
+  },
+  {
+   "id": "BUNDLE-PWR-P48",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "R2B-GUARDS",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "decide who gets the guards"
+   ],
+   "towns": 17
+  },
+  {
+   "id": "UPK-M5",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "Arcane Support: Present … Detection, wards, counterspell"
+   ],
+   "towns": 0
+  },
+  {
+   "id": "LV-NEEDED",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "Needed, and not brought in"
+   ],
+   "towns": 619
+  },
+  {
+   "id": "R2A-SIEGECARTS",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "A barrel thuds down from a cart…",
+    "Barrels of salt fish stand stacked for the carts …",
+    "Harness jingles … as a cart pulls out.",
+    "Sacks of herbs and spices fill the carts …",
+    "Racks of spearheads and helms … waiting for the carts.",
+    "A broker … goods from routes you have never travelled."
+   ],
+   "towns": 0
+  },
+  {
+   "id": "UPK-P5c",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "The country around {settlement} is thick with creatures and the town has answered it properly: there is a wall to hold and there are people to hold it…"
+   ],
+   "towns": 0
+  },
+  {
+   "id": "R3C-SUCCESSION",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "The ruler of the time was aging or ill, and potential heirs jockeyed for position"
+   ],
+   "towns": 159
+  },
+  {
+   "id": "DATA-180",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "R2B-REQFORCED",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "(faction_boost)",
+    "(coherence_repair)"
+   ],
+   "towns": 166
+  },
+  {
+   "id": "UPK-P5a",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "The adventurers' charter hall coordinates emergency response to threats. Effective for monster incursions and major disturbances…"
+   ],
+   "towns": 0
+  },
+  {
+   "id": "UC-WILD",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "Wild country all round and nobody organised to meet it"
+   ],
+   "towns": 159
+  },
+  {
+   "id": "DATA-QUARRYPLACE",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "A stone quarry with yards for dressing the stone. Much of the region's building stone…"
+   ],
+   "towns": 0
+  },
+  {
+   "id": "DATA-INSTDESC",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "A mine of shafts and adits, with winding gear and ore carts",
+    "Supplies the households.",
+    "Minor but steady revenue"
+   ],
+   "towns": 100
+  },
+  {
+   "id": "UC-BARRACKS",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "no walls; the barracks is all that stands guard",
+    "the town watch is all that stands guard"
+   ],
+   "towns": 44
+  },
+  {
+   "id": "DATA-MINESVC",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "Ore cut underground by the crews and brought out by cart for sorting",
+    "Surface-level ore extraction"
+   ],
+   "towns": 125
+  },
+  {
+   "id": "R3T-C3",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "People at {N} expect to hold against the usual trouble…"
+   ],
+   "towns": 0
+  },
+  {
+   "id": "UPK-P5b",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "…with no garrison to call on it musters the defence…"
+   ],
+   "towns": 0
+  },
+  {
+   "id": "DATA-COMPACT",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "the major farming families (and the guilds negotiated/agreed) a formal compact"
+   ],
+   "towns": 0
+  },
+  {
+   "id": "DATA-FORGE",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "Forge smoke hangs over everything here…",
+    "… lives by its forges: the clang of iron is in every lane",
+    "…most of it is the sound of blades being made",
+    "waiting for the carts"
+   ],
+   "towns": 18
+  },
+  {
+   "id": "UC-MONEY",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "defenders already paid late",
+    "already owed",
+    "short of money for years"
+   ],
+   "towns": 106
+  },
+  {
+   "id": "DATA-C12",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "Causeways and managed water divide the settlement into organized neighborhoods"
+   ],
+   "towns": 1
+  },
+  {
+   "id": "DATA-MEGAIKON",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "runs {N}'s market"
+   ],
+   "towns": 0
+  },
+  {
+   "id": "LV-BUILTON",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "This is the trade the city is actually built on"
+   ],
+   "towns": 0
+  },
+  {
+   "id": "PWR-656",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "Secret: Bought the vineyard by lending its old owner money at a rate that could never be paid back"
+   ],
+   "towns": 58
+  },
+  {
+   "id": "R3T-COURT",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "Legal Infrastructure · Court only"
+   ],
+   "towns": 0
+  },
+  {
+   "id": "UPK-206",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "No deterrence beyond force."
+   ],
+   "towns": 390
+  },
+  {
+   "id": "UPK-273",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "UPK-MAGICDEF",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "no wards or seers",
+    "conventional throughout"
+   ],
+   "towns": 358
+  },
+  {
+   "id": "R2B-ECONLINES",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "ships bring in"
+   ],
+   "towns": 26
+  },
+  {
+   "id": "PWR-312",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "Cut the spending at the stone quarry by a tenth this season, and keep the work going."
+   ],
+   "towns": 3
+  },
+  {
+   "id": "CRP-ECO12",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "DATA-SUCCPOOL",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "A would-be heir approaches outsiders"
+   ],
+   "towns": 180
+  },
+  {
+   "id": "CRP-116",
+   "severity": "HIGH",
+   "placeable": true,
+   "runs": [
+    "leaves its timber unworked",
+    "Needs: Sawmill"
+   ],
+   "towns": 49
+  },
+  {
+   "id": "UPK-H3",
+   "severity": "HIGH",
+   "placeable": true,
+   "runs": [
+    "You can walk into the centre of {settlement} without being stopped, challenged or counted by anybody at all."
+   ],
+   "towns": 0
+  },
+  {
+   "id": "CRP-DEF5OCC",
+   "severity": "HIGH",
+   "placeable": true,
+   "runs": [
+    "Nobody ... is responsible for defending the town"
+   ],
+   "towns": 0
+  },
+  {
+   "id": "UC-H1",
+   "severity": "HIGH",
+   "placeable": true,
+   "runs": [
+    "Undefended: town walls, held by the town watch.",
+    "Undefended: palisade or earthworks, held by the citizen militia."
+   ],
+   "towns": 9
+  },
+  {
+   "id": "UC-H2",
+   "severity": "HIGH",
+   "placeable": true,
+   "runs": [
+    "No perimeter, but the charter hall provides specialist response…"
+   ],
+   "towns": 0
+  },
+  {
+   "id": "CRP-645",
+   "severity": "HIGH",
+   "placeable": true,
+   "runs": [
+    "the rotations run, the gates close on time, and nobody treats any of it as unusual"
+   ],
+   "towns": 9
+  },
+  {
+   "id": "CRP-1206",
+   "severity": "HIGH",
+   "placeable": true,
+   "runs": [
+    "runs on arcane work"
+   ],
+   "towns": 20
+  },
+  {
+   "id": "CRP-DEF11V2",
+   "severity": "HIGH",
+   "placeable": false
+  },
+  {
+   "id": "R3T-P9",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "R3C-BEER",
+   "severity": "MEDIUM",
+   "placeable": false
+  },
+  {
+   "id": "R3C-457",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "leather goods, cheese, preserved meat · Complete production chain in place"
+   ],
+   "towns": 0
+  },
+  {
+   "id": "R3T-C2",
+   "severity": "MEDIUM",
+   "placeable": true,
+   "runs": [
+    "{N}'s garrison roll puts paid soldiers on every stretch of its walls, so raiders stay away…",
+    "People at {N} believe the city could be held…"
+   ],
+   "towns": 0
+  },
+  {
+   "id": "PWR-NEW1",
+   "severity": "MEDIUM",
+   "placeable": false
+  }
+ ]
+}
