@@ -3355,9 +3355,9 @@ may not say the contract is failing unless the economic arm supplies that.
 3. `[street]` {settlement} sends whoever it can against things they are not trained for, and pays for it each time.
 
 **arcane defense PRESENT**
-1. `[ledger · colour]` {settlement} keeps arcane provision in its defenses: detection, wards, and an answer to things that conventional arrangements cannot see coming.
-2. `[visitor · gate]` Something at {settlement}'s gate takes the measure of everyone who enters, and nobody tells them so.
-3. `[street · colour]` There are wards at {settlement} the town does not discuss and would notice immediately if they stopped.
+1. `[ledger · colour]` {settlement}'s defence is not all arms: some of what protects the town is magic.
+2. `[visitor · gate]` Whoever keeps {settlement}'s gate has more than steel to call on.
+3. `[street · colour]` People at {settlement} know the town's defence does not end with its weapons.
 
 **arcane defense ABSENT** {colour}
 1. `[ledger]` {settlement}'s defense is conventional throughout. What arrives unseen here goes undetected and therefore unanswered.

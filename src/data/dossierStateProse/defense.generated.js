@@ -4677,7 +4677,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "{settlement} keeps arcane provision in its defenses: detection, wards, and an answer to things that conventional arrangements cannot see coming.",
+          "text": "{settlement}'s defence is not all arms: some of what protects the town is magic.",
           "slots": [
             "settlement"
           ],
@@ -4688,7 +4688,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "gate"
           ],
-          "text": "Something at {settlement}'s gate takes the measure of everyone who enters, and nobody tells them so.",
+          "text": "Whoever keeps {settlement}'s gate has more than steel to call on.",
           "slots": [
             "settlement"
           ],
@@ -4699,7 +4699,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "There are wards at {settlement} the town does not discuss and would notice immediately if they stopped.",
+          "text": "People at {settlement} know the town's defence does not end with its weapons.",
           "slots": [
             "settlement"
           ],
