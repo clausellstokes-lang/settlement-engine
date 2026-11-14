@@ -695,15 +695,15 @@ the widened and first registers fell by 11 rows, 10 of them arm 1, and rose by 3
 observed shapes, writer-reach door exit 0; page census (720) at or under its register, grid 0 falls; lighting census
 re-taken twice by ritual, green; tuning inventory green.
 
-**The whole suite, six vitest shards at ff824bc36** (refs and local config unchanged across it): 39,271 tests, 41 red,
+**The whole suite, six vitest shards at ff824bc36** (refs and local config unchanged across it): 39,271 tests, 41 failed and 2 files that fail to run,
 145 skipped. Classed (each red file re-run at 976db5b19 and at dbe379c13):
 - 7 the bundles (engineBundleReplay 2, engineServiceCore, engineServiceStoreParity, aiGroundingBundle freshness,
   edgeSharedBundleReproducibility 2): CURED by b87aaa4ea, 59 of 59 bundle tests green at the committed tree.
-- 14 red at the line's own tip too (the line's carried set): dossierProseManifest 3, proseFamilyContract.walker 5,
+- 12 failed tests and the 2 files red at the line's own tip too (the line's carried set): dossierProseManifest 3, proseFamilyContract.walker 5,
   landingFixtureFreshness 2, siteCoherenceRatchet C1, foundingWorldBones, newsHeadlineContract.walker and
   newsVoiceContract.walker (each fails to run).
-- 16 golden pins moved by the lane's declared families (red at dbe379c13 as here, green at the line's tip):
-  generatorGoldenMaster, espionageDormancyFence's driven golden, townCartographyCalibration W2/W8, and twelve
+- 18 golden pins moved by the lane's declared families (red at dbe379c13 as here, green at the line's tip):
+  generatorGoldenMaster, espionageDormancyFence's driven golden, townCartographyCalibration W2/W8, and fourteen
   "the golden corpus is byte-identical" pins (the shift record names them). The golden door is the merge seat's.
 - 4 WALKERS red at dbe379c13 and here, green at the line's tip: THE LANE'S, NOT CURED (below).
 
@@ -731,3 +731,5 @@ the validator's reasons go through a draw door; the three `after-base: r3-code-c
 3. Then the one message to the chair with the statement.
 Instruments, re-made in a minute: probe scripts in this seat's scratchpad are gone with it; the census command is in
 the brief; field diff = births.mjs at two trees + a recursive JSON compare; reds = each shard's `--reporter=json`.
+
+**CORRECTED OUT LOUD** (65086cea2 said 14 and 16): the classes are 7 + 12 (+2 files) + 18 + 4 = 41 failed tests and 2 files.
