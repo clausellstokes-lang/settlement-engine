@@ -143,7 +143,10 @@ describe('R2-CODE-B-11 (b) · the brunt and the stakes read one fact (H2-1, H2-2
       for (const e of entries(s)) expect(bruntOffLoss(s, e), seed).toEqual([]);
       return rows[0].reason;
     });
-    expect(words).toEqual([CAST_REASONS.bruntOnly, CAST_REASONS.bruntLeast, CAST_REASONS.bruntMember]);
+    // R2-CODE-B-13, M4 (RE-KEYED BY IDENTITY): r2r-village-58's brunt was the lever's holder (Sudha Ghosh, "one of the
+    // house" by the cut's #268); the lever's holder no longer bears the brunt, and the next of the house takes it in the
+    // same word with the vocabulary's own next-in-line clause (Anuradha Bhatt).
+    expect(words).toEqual([CAST_REASONS.bruntOnly, CAST_REASONS.bruntLeast, `${CAST_REASONS.bruntMember}; ${CAST_REASONS.nextInLine}`]);
   });
   it('GUARD: where the one power has no stake, the role is ABSENT by its own reason', () => {
     const s = born[BRUNT_TAKEN_OFF];
