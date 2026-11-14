@@ -49,24 +49,9 @@ import { pluralPowerName } from '../display/governanceAccount.js';
  * @typedef {{ text: string, bound: 'cast' | 'lever', link: { kind: 'npc' | 'faction' | 'institution', id: string, label: string } | null }} CrisisHook
  */
 
-/** The noun each kind is spoken of by ("In the siege, …"). PROPOSAL N1 (the lane's report). */
-export const CRISIS_NOUN = Object.freeze(/** @type {Record<string, string>} */ ({
-  under_siege: 'siege',
-  famine: 'famine',
-  occupied: 'occupation',
-  politically_fractured: 'split between the powers',
-  indebted: 'debt crisis',
-  recently_betrayed: 'betrayal',
-  infiltrated: 'infiltration',
-  plague_onset: 'outbreak',
-  succession_void: 'succession crisis',
-  monster_pressure: 'raids',
-  insurgency: 'insurgency',
-  religious_conversion: 'conversion',
-  slave_revolt: 'revolt',
-  wartime: 'war',
-  mass_migration: 'migration',
-}));
+/** The noun each kind is spoken of by: its one home is the leaf `crisisNoun.js` (COHERENCE-UPKEEP-7), re-exported here. */
+export { CRISIS_NOUN } from './crisisNoun.js';
+import { CRISIS_NOUN } from './crisisNoun.js';
 
 /** The noun of last resort: an unknown kind, or a noun the record contradicts. */
 const PLAIN_NOUN = 'crisis';

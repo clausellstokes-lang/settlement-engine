@@ -403,7 +403,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
       <NarrativeNote note={narrativeNote} />
 
       {/* ── PROSPERITY HEADER (the tab's glance surface; the campaign tiles close the page) ── */}
-      <EconomicsGlance eco={eco} prosColor={prosColor} tradeLabel={tradeLabel} ecoScore={ecoScore}
+      <EconomicsGlance eco={eco} settlement={s} prosColor={prosColor} tradeLabel={tradeLabel} ecoScore={ecoScore}
         headerRung={deskProse.prosperityHeader} economyRung={deskProse.prosperityRung} />
 
       {/* ── INCOME SOURCES ──────────────────────────────────────────────── */}

@@ -413,6 +413,18 @@ export const FIRSTPAINT2_LAZY_DOMAIN = [
   // @guarded-by tests/architecture/engineCoreLazyEdge.test.js (the source-graph walker: no engine-core module
   //   statically imports a lazily pinned one — red at ecadf531a, green at point 21) and tests/build/bootSmoke.test.js.
   '/src/domain/display/governanceAccount.js',
+  // COHERENCE-UPKEEP-7 (2026-11-13; the money line's clause, "laid by before the famine"): threatAssessment.js
+  // (pinned here) now reads the two-label sentence's home, so display/prosperityInCrisis.js became generator-reached
+  // (safetyProfile -> defenseDisplay -> threatAssessment -> it) and the derivation put it in EAGER engine-core, where
+  // its static import of facts/crisisKind.js (pinned here) was an engine-core -> coherence-lazy edge
+  // (tests/architecture/engineCoreLazyEdge.test.js). Its other importers (the Overview, Economics glance, Summary,
+  // table view, the PDF view model, the Foundry journal, the realm register) read it as before, and before this
+  // commit it already imported crisisKind.js from their chunks; its one other import, crisis/crisisNoun.js, is a
+  // zero-import leaf, pinned here beside it: crisis/crisisHooks.js (pinned here) re-exports it, so it is generator-reached
+  // and, left unpinned, the derivation put it in EAGER engine-core (+130 B, measured). Pinned here, never left unpinned
+  // (FP-G11).
+  '/src/domain/display/prosperityInCrisis.js',
+  '/src/domain/crisis/crisisNoun.js',
 ];
 for (const frag of ENGINE_SHARED_DOMAIN_EXCISIONS) ENGINE_SHARED_DOMAIN.delete(frag);
 for (const frag of FIRSTPAINT2_LAZY_DOMAIN) ENGINE_SHARED_DOMAIN.delete(frag);

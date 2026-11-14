@@ -1,0 +1,120 @@
+## cold-town-221
+  DEFENSE before: Armed Forces & Fortifications 1 wall 1 force 1 arcane ▲ | Magical Capability Adequate
+  DEFENSE after:  Armed Forces & Fortifications 1 wall 1 force ▲ | Magical Capability Adequate
+    arcane lines after: []
+  MAGIC tab after: Pervasive | Military role: common | Reliance on magic: Present
+    []
+## cold-under_siege-city-16
+  DEFENSE before: Armed Forces & Fortifications 1 wall 2 forces 1 mercenary 1 arcane ▲ | Magical Capability Strong
+  DEFENSE after:  Armed Forces & Fortifications 1 wall 2 forces 1 mercenary ▲ | Magical Capability Strong
+    arcane lines after: ['Magical crime', 'Practitioners misuse alchemical knowledge for profit. Identity alteration, scrying, alchemical fraud, or targeted curses-for-hire.']
+  MAGIC tab after: Broad | Military role: occasional | Reliance on magic: Present
+    ['There is magic at Burjkhel and the city does not rest on it. Losing every practitioner here would be a loss and not a collapse.']
+## cold-under_siege-town-56
+  DEFENSE before: Armed Forces & Fortifications 1 wall 1 force 1 charter 1 arcane ▲ | Magical Capability Adequate
+  DEFENSE after:  Armed Forces & Fortifications 1 wall 1 force 1 charter ▲ | Magical Capability Adequate
+    arcane lines after: ['Arcane black market', 'Alchemists and other magical practitioners who operate outside legal channels supply a sophisticated underground market for forbidden components, illegal rituals, and undetectable forgeries.']
+  MAGIC tab after: Broad | Military role: occasional | Reliance on magic: Present
+    ['Nothing structural at Chernoka depends on arcane work. What the town makes it makes with hands and ground, and would go on making without a practitioner in it.']
+## fresh6-wartime-town-0
+  DEFENSE before: Armed Forces & Fortifications 1 wall 1 force 1 charter 1 arcane ▲ | Magical Capability Strong
+  DEFENSE after:  Armed Forces & Fortifications 1 wall 1 force 1 charter ▲ | Magical Capability Strong
+    arcane lines after: []
+  MAGIC tab after: Pervasive | Military role: common | Reliance on magic: Present
+    ['There is magic at Kulubbalam and the town does not rest on it. Losing every practitioner here would be a loss and not a collapse.']
+## cold-wartime-town-75
+  DEFENSE before: Armed Forces & Fortifications 1 wall 1 force 1 arcane ▲ | Magical Capability Adequate
+  DEFENSE after:  Armed Forces & Fortifications 1 wall 1 force ▲ | Magical Capability Weak
+    arcane lines after: []
+  MAGIC tab after: Common | Military role: common | Reliance on magic: None
+    ['There is magic at Ioannoakra and the town does not rest on it. Losing every practitioner here would be a loss and not a collapse.']
+## cold-famine-town-18
+  DEFENSE before: Armed Forces & Fortifications 1 wall 1 force 1 charter 1 arcane ▲ | Magical Capability Weak
+  DEFENSE after:  Armed Forces & Fortifications 1 wall 1 force 1 charter ▲ | Magical Capability Weak
+    arcane lines after: ['Magical crime', 'Practitioners misuse alchemical knowledge for profit. Identity alteration, scrying, alchemical fraud, or targeted curses-for-hire.']
+  MAGIC tab after: Common | Military role: occasional | Reliance on magic: None
+    []
+## cold-famine-town-40
+  DEFENSE before: Armed Forces & Fortifications 1 wall 1 force 1 arcane ▲ | Magical Capability Weak
+  DEFENSE after:  Armed Forces & Fortifications 1 wall 1 force ▲ | Magical Capability Weak
+    arcane lines after: []
+  MAGIC tab after: Limited | Military role: occasional | Reliance on magic: None
+    []
+## cold-famine-town-9
+  DEFENSE before: Armed Forces & Fortifications 2 walls 2 forces 1 charter 1 arcane ▲ | Magical Capability Critical
+  DEFENSE after:  Armed Forces & Fortifications 2 walls 2 forces 1 charter ▲ | Magical Capability Critical
+    arcane lines after: []
+  MAGIC tab after: Rare | Military role: absent | Reliance on magic: None
+    ['There is magic at Saltoporta and the town does not rest on it. Losing every practitioner here would be a loss and not a collapse.']
+## cold-town-122
+  DEFENSE before: Armed Forces & Fortifications 2 forces 1 arcane ▲ | Magical Capability Weak
+  DEFENSE after:  Armed Forces & Fortifications 2 forces ▲ | Magical Capability Weak
+    arcane lines after: []
+  MAGIC tab after: Limited | Military role: absent | Reliance on magic: None
+    []
+## cold-town-15
+  DEFENSE before: Armed Forces & Fortifications 1 wall 1 force 1 charter 1 arcane ▲ | Magical Capability Adequate
+  DEFENSE after:  Armed Forces & Fortifications 1 wall 1 force 1 charter ▲ | Magical Capability Adequate
+    arcane lines after: []
+  MAGIC tab after: Broad | Military role: occasional | Reliance on magic: None
+    []
+## cold-town-184
+  DEFENSE before: Armed Forces & Fortifications 1 force 1 arcane ▲ | Magical Capability Critical
+  DEFENSE after:  Armed Forces & Fortifications 1 force ▲ | Magical Capability Critical
+    arcane lines after: []
+  MAGIC tab after: Limited | Military role: absent | Reliance on magic: None
+    ['There is magic at Altholz and the town does not rest on it. Losing every practitioner here would be a loss and not a collapse.']
+## cold-town-206
+  DEFENSE before: Armed Forces & Fortifications 1 wall 1 force 1 arcane ▲ | Magical Capability Weak
+  DEFENSE after:  Armed Forces & Fortifications 1 wall 1 force ▲ | Magical Capability Weak
+    arcane lines after: []
+  MAGIC tab after: Limited | Military role: occasional | Reliance on magic: None
+    []
+## cold-town-23
+  DEFENSE before: Armed Forces & Fortifications 1 wall 1 force 1 charter 1 arcane ▲ | Magical Capability Weak
+  DEFENSE after:  Armed Forces & Fortifications 1 wall 1 force 1 charter ▲ | Magical Capability Weak
+    arcane lines after: ['Magical crime', 'Practitioners misuse alchemical knowledge for profit. Identity alteration, scrying, alchemical fraud, or targeted curses-for-hire.']
+  MAGIC tab after: Moderate | Military role: occasional | Reliance on magic: None
+    ['There is magic at Terrafundus and the town does not rest on it. Losing every practitioner here would be a loss and not a collapse.']
+## cold-town-41
+  DEFENSE before: Armed Forces & Fortifications 1 force 1 arcane ▲ | Magical Capability Weak
+  DEFENSE after:  Armed Forces & Fortifications 1 force ▲ | Magical Capability Weak
+    arcane lines after: ['Magical crime', 'Practitioners misuse alchemical knowledge for profit. Identity alteration, scrying, alchemical fraud, or targeted curses-for-hire.']
+  MAGIC tab after: Moderate | Military role: occasional | Reliance on magic: None
+    ['Nothing structural at Purigiri depends on arcane work. What the town makes it makes with hands and ground, and would go on making without a practitioner in it.']
+## cold-town-71
+  DEFENSE before: Armed Forces & Fortifications 1 wall 1 force 1 arcane ▲ | Magical Capability Critical
+  DEFENSE after:  Armed Forces & Fortifications 1 wall 1 force ▲ | Magical Capability Critical
+    arcane lines after: []
+  MAGIC tab after: Limited | Military role: absent | Reliance on magic: Relied upon
+    []
+## cold-under_siege-town-32
+  DEFENSE before: Armed Forces & Fortifications 1 wall 1 force 1 charter 1 arcane ▲ | Magical Capability Critical
+  DEFENSE after:  Armed Forces & Fortifications 1 wall 1 force 1 charter ▲ | Magical Capability Critical
+    arcane lines after: []
+  MAGIC tab after: Rare | Military role: absent | Reliance on magic: Relied upon
+    []
+## cold-city-101
+  DEFENSE before: Armed Forces & Fortifications 2 walls 2 forces 1 mercenary 1 charter 1 arcane ▲ | Magical Capability Weak
+  DEFENSE after:  Armed Forces & Fortifications 2 walls 2 forces 1 mercenary 1 charter ▲ | Magical Capability Weak
+    arcane lines after: []
+  MAGIC tab after: Limited | Military role: absent | Reliance on magic: None
+    ['Nothing structural at Berghavn depends on arcane work. What the city makes it makes with hands and ground, and would go on making without a practitioner in it.']
+## cold-famine-city-32
+  DEFENSE before: Armed Forces & Fortifications 2 walls 2 forces 1 mercenary 1 arcane ▲ | Magical Capability Weak
+  DEFENSE after:  Armed Forces & Fortifications 2 walls 2 forces 1 mercenary ▲ | Magical Capability Weak
+    arcane lines after: ['Magical crime', 'Practitioners misuse alchemical knowledge for profit. Identity alteration, scrying, alchemical fraud, or targeted curses-for-hire.']
+  MAGIC tab after: Limited | Military role: occasional | Reliance on magic: None
+    ['Nothing structural at Rasbazaar depends on arcane work. What the city makes it makes with hands and ground, and would go on making without a practitioner in it.']
+## cold-wartime-city-64
+  DEFENSE before: Armed Forces & Fortifications 2 walls 2 forces 1 mercenary 1 charter 1 arcane ▲ | Magical Capability Weak
+  DEFENSE after:  Armed Forces & Fortifications 2 walls 2 forces 1 mercenary 1 charter ▲ | Magical Capability Weak
+    arcane lines after: []
+  MAGIC tab after: Moderate | Military role: occasional | Reliance on magic: None
+    ['There is magic at Víkey and the city does not rest on it. Losing every practitioner here would be a loss and not a collapse.']
+## fresh6-wartime-city-6
+  DEFENSE before: Armed Forces & Fortifications 1 wall 2 forces 1 mercenary 1 charter 1 arcane ▲ | Magical Capability Adequate
+  DEFENSE after:  Armed Forces & Fortifications 1 wall 2 forces 1 mercenary 1 charter ▲ | Magical Capability Adequate
+    arcane lines after: []
+  MAGIC tab after: Moderate | Military role: occasional | Reliance on magic: Relied upon
+    ['Karakhaven does better than its ground and roads would explain, and the reason is its few practitioners.']

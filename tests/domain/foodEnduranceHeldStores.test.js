@@ -42,12 +42,15 @@ describe('rung-2 window · the Food endurance line reads the held stores', () =>
     expect(FACTS.foodEnduranceOf(placeWith({ storageMonths: 12, storesHeld: true }))?.storesHeld).toBe(true);
   });
 
+  // RE-KEYED BY IDENTITY (UPKEEP-8, the chair's ruling of 2026-11-13 on the Food endurance line): what a siege WOULD do is
+  // said only where none is in force, so the open granary of a place under no siege "would carry" it; under a siege it
+  // "carries" it. The subject is unchanged: an open granary carries the place, with no held-stores words.
   it('an open granary reads as it did: it carries the place', () => {
     const line = foodEnduranceLine(placeWith({ storageMonths: 12 }));
-    // re-keyed (W2-A-LEAVES 2 + 20, 2026-11-12): outside a siege the line is a condition, so the open granary
-    // WOULD carry the town; the held-stores words stay the held granary's alone (the line below)
     expect(line?.sentence).toMatch(/\bthe granary would carry the town\b/);
-    expect(line?.sentence).not.toContain(FACTS.HELD_STORES_WORDS); // anchored: 'the granary carries the town' is matched in this same sentence on the line above
+    expect(line?.sentence).not.toContain(FACTS.HELD_STORES_WORDS); // anchored: 'the granary would carry the town' is matched in this same sentence on the line above
+    const besieged = { ...placeWith({ storageMonths: 12 }) }; besieged.economicState.foodSecurity.hasSiege = true;
+    expect(foodEnduranceLine(besieged)?.sentence).toMatch(/\bthe granary carries the town\b/);
   });
 
   it('a held granary that the harvest alone would cover still says the hall holds it', () => {

@@ -12,12 +12,16 @@
  * criminal supply chain. The debt-evasion line still reads the signal alone (a gambling den is
  * infrastructure, not a network).
  */
+import { hungerIn } from '../../src/generators/safetyLineTruth.js';
 import { beforeAll, describe, expect, it } from 'vitest';
 import { birth, ensureLaws } from '../../scripts/audit/soak-review/corpus.mjs';
 import { settleCrimeLinesToSignal } from '../../src/generators/safetyProfile.js';
 
 const CLAUSE = /No criminal infrastructure/;
 const DESPERATION = 'Hunger-driven theft of food, livestock, and stored goods. Enforcement struggles to distinguish survival crime from organised theft.';
+// UPKEEP-8 (#1173): beside a network the line is "Hunger-driven" only where the record holds hunger; else the same theft, not called hunger.
+const THEFT_NETWORK = 'Theft of food, livestock, and stored goods by people with too little. Enforcement struggles to distinguish survival crime from organised theft.';
+const networkLineOf = (s) => (hungerIn(s.economicState) ? DESPERATION : THEFT_NETWORK);
 const NO_NETWORK = 'Theft driven by economic desperation rather than organization. No criminal infrastructure: just too many people with too little, doing what they must to survive.';
 const DEBT_FULL = 'Residents fleeing creditor obligations, transferring assets fraudulently, or using criminal networks to avoid collection.';
 const DEBT_PLAIN = 'Residents fleeing creditor obligations or transferring assets fraudulently to avoid collection.';
@@ -29,7 +33,8 @@ describe('the survival line reads the block\'s own operations list', () => {
     const { settlement } = birth(6759);
     const profile = settlement.economicState.safetyProfile;
     expect(profile.criminalInstitutions).toContain('Gambling Den');
-    expect(profile.crimeTypes.find((c) => c.type === 'Survival crime')?.desc).toBe(DESPERATION);
+    // RE-KEYED BY IDENTITY (UPKEEP-8, #1173): the network's line, read by the record's hunger.
+    expect(profile.crimeTypes.find((c) => c.type === 'Survival crime')?.desc).toBe(networkLineOf(settlement));
     expect(profile.crimeTypes.map((c) => c.desc).join(' ')).not.toMatch(CLAUSE); // anchored: the survival row's desc is pinned on the line above
   });
 
@@ -47,7 +52,7 @@ describe('the survival line reads the block\'s own operations list', () => {
       safetyProfile: { criminalInstitutions: [], crimeTypes: [{ type: 'Survival crime', desc: NO_NETWORK }] },
     };
     const settled = settleCrimeLinesToSignal(economicState, { seats: [], estate: [] });
-    expect(settled.safetyProfile.crimeTypes[0].desc).toBe(DESPERATION);
+    expect(settled.safetyProfile.crimeTypes[0].desc).toBe(THEFT_NETWORK); // RE-KEYED BY IDENTITY (UPKEEP-8, #1173): no hunger on this record, so not "Hunger-driven"
   });
 
   it('a listed operation alone does not name a network on the debt-evasion line', () => {

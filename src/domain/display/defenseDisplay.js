@@ -586,11 +586,17 @@ export const FOOD_STORES_DOOR = Object.freeze({
 
 const TIER_NOUNS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 
-/** A length of time in plain words, never a decimal. Under seven weeks it is said in weeks.
+/** A length of time in plain words, never a decimal; the words contain the figure they stand for (UPKEEP-8, the chair's
+ * ruling of 2026-11-13 on #34 #43 #75 #86: three days is "a few days", never "a few weeks"). Under seven weeks it is said in
+ * days or weeks.
  * @param {number} months @returns {string} */
 function monthsInWords(months) {
+  const days = Math.round((months * 365) / 12);
   const weeks = Math.round((months * 52) / 12);
-  if (weeks <= 3) return 'a few weeks';
+  if (days <= 2) return 'a day or two';
+  if (days <= 10) return 'a few days';
+  if (days <= 17) return 'a week or two';
+  if (days <= 31) return 'a few weeks';
   if (weeks <= 6) return 'about a month';
   const whole = Math.round(months);
   if (whole < 12) return `about ${numberWord(whole)} months`;
@@ -611,11 +617,11 @@ export function foodEnduranceLine(settlement) {
   if (!end) return null;
   const tier = typeof settlement?.tier === 'string' ? settlement.tier : '';
   const noun = TIER_NOUNS.includes(tier) ? tier : 'place';
-  // 2 + 20 (W2-A-LEAVES, 2026-11-12; the second wave's ruling): THE SIEGE FIGURE IS A CONDITION. Only a besieged
-  // place reads it in the indicative; everywhere else it is what a siege WOULD do to the stores the Economy tab's
-  // row states (the census counted "under siege the outlying fields are lost" outside a siege in 689 of 720).
-  const actual = end.besieged === true;
-  const opening = actual ? 'the siege has taken the outlying fields' : 'under siege the outlying fields would be lost';
+  // UPKEEP-8 (the chair's ruling of 2026-11-13): what a siege WOULD do is said only where none is in force, what it HAS
+  // done only where one is; the months the line states add up from the record's own stored months (full rations the
+  // stores, half rations twice them), and what is still harvested is said to stretch them, never counted into them.
+  const actual = end.besieged === true, would = !actual; // the line's W2-A-LEAVES 2 + 20 name and UPKEEP-8's, one fact
+  const opening = end.besieged ? 'the siege has taken the outlying fields' : 'under siege the outlying fields would be lost';
   const lead = end.hasGranary
     ? `${opening.charAt(0).toUpperCase()}${opening.slice(1)}`
     : `No granary: ${opening}`;
@@ -630,19 +636,21 @@ export function foodEnduranceLine(settlement) {
   // granary simply carries the place.
   const held = end.storesHeld ? `, but ${HELD_STORES_WORDS} it` : '';
   if (end.fullRationMonths === null) {
-    before = `${lead}, but what the ${noun} still grows ${actual ? 'feeds' : 'would feed'} it at full rations; `;
+    before = `${lead}, but what the ${noun} still grows ${would ? 'would feed' : 'feeds'} it at full rations; `;
     door = end.hasGranary ? 'the granary' : 'its household stores';
     const stand = actual ? (end.hasGranary ? 'stands' : 'stand') : 'would stand';
     after = end.hasGranary ? ` ${stand} in reserve${held}.` : ` ${stand} in reserve.`;
   } else {
-    const stretched = end.keptShare > 0 ? 'with what is still harvested, ' : '';
     const half = end.halfRationMonths === null
-      ? '; on half rations the harvest alone is enough'
-      : `, ${monthsInWords(end.halfRationMonths)} on half`;
-    before = `${lead}; ${stretched}`;
+      ? `; on half rations the harvest alone ${would ? 'would be' : 'is'} enough`
+      : `, ${monthsInWords(2 * end.storedMonths)} on half`;
+    const them = end.hasGranary ? 'it' : 'them';
+    const stretched = end.keptShare > 0 && end.halfRationMonths !== null
+      ? `, and what is still harvested ${would ? 'would stretch' : 'stretches'} ${them} further` : '';
+    before = `${lead}; `;
     door = end.hasGranary ? 'the granary' : 'household stores';
-    const carries = end.storesHeld || !actual ? 'would carry' : end.hasGranary ? 'carries' : 'carry';
-    after = ` ${carries} the ${noun} for ${monthsInWords(end.fullRationMonths)} at full rations${half}${held}.`;
+    const carries = end.storesHeld || would ? 'would carry' : end.hasGranary ? 'carries' : 'carry';
+    after = ` ${carries} the ${noun} for ${monthsInWords(end.storedMonths)} at full rations${half}${stretched}${held}.`;
   }
   return { label: FOOD_ENDURANCE_LABEL, before, door, after, sentence: `${before}${door}${after}` };
 }

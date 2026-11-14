@@ -1004,6 +1004,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
         village: { baseChance: 0.2, desc: 'A circle of druids tied to the land. They regulate the seasons, mediate disputes with wild creatures, and know which streams run clean. More common in forested or isolated settlements, but they adapt. Some circles tend city gardens or hidden urban groves.', tags: ['religious'], magicLicense: 'none', priorityCategory: 'magic' },
       },
       ceiling: { tier: 'village', reason: 'In towns and cities the druids speak through the Elder Grove Council.' },
+      successor: 'Elder Grove Council', // UPKEEP-CAPACITY C5 (the chair's G4): one function at two scales
     },
     // Its own text says it is found in cities; it was listed at town only, and on the Magic shelf,
     // until 2026-09-30.

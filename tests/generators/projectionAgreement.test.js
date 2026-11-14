@@ -96,7 +96,9 @@ describe('the projection-agreement arm convicts each disagreement and clears its
     expect(heard.length).toBeGreaterThan(0); // anchored: the grid reaches the crime lines
   });
   test('RED-FIRST: the court-without-prison line names no prison (PRESUME\'s register, banked as this lane\'s: 53 towns)', () => {
-    const profile = generateSafetyProfile({}, 'town', [{ name: 'Town watch', category: 'Defense' }, { name: 'Town hall', category: 'Government' }]);
+    // RE-KEYED BY IDENTITY (UPKEEP-8, the census's court lines): the line names a court only where a courthouse stands (the
+    // defence home's `hasCourthouse`), so the court-without-prison town holds a Courthouse, not a Town hall; same line, same law.
+    const profile = generateSafetyProfile({}, 'town', [{ name: 'Town watch', category: 'Defense' }, { name: 'Courthouse', category: 'Government' }]);
     expect(profile.guardEffectivenessDesc).toMatch(/court/); // anchored: the branch prints its court line
     expect(profile.guardEffectivenessDesc).not.toMatch(/prison/i);
   });
@@ -291,6 +293,11 @@ const REVIEW_SEEDS = [
   { seed: 'agree-thorp-56', tier: 'thorp' }, { seed: 'r2r-hamlet-5', tier: 'hamlet' }, { seed: 'rvw12-village-25', tier: 'village' },
   // F3 (ii): the surplus member's subject ("Surplus from local harvest" printed), live in no birth above
   { seed: 'agree-town-56', tier: 'town' }, { seed: 'r2r-town-2', tier: 'town' },
+  // F3 (iii), RE-KEYED BY IDENTITY (COHERENCE-UPKEEP-7, item 3, the round-three cut's #640): the company member's
+  // subject was "A mercenary company provides enforcement" in G2's three births above, each with a town watch; that
+  // line was false beside the watch and now gives way to the watch's own. With no standing body the hired lines
+  // replace it, so the member's live subject is the merchant guilds' "… maintain their own mercenary companies".
+  { seed: 'agree-city-52', tier: 'city' },
 ];
 describe('the reviewer\'s seeds agree', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });

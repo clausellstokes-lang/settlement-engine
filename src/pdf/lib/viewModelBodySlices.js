@@ -25,6 +25,7 @@ import { stressArray, foodCore, avgScore } from './viewModelPrimitives.js';
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 import { resourceGapLines, exploitationGroupsShown, housesStillNeeded } from '../../domain/display/validationOnPage.js';
 import { crisisSummaryForSurface } from '../../domain/crisis/crisisSummaryVantage.js';
+import { deriveProsperityPosture } from '../../domain/display/dossierViewModel.js';
 
 // Pull the human resource name off an exploitation chain entry (engine stores
 // it as `rawResource`; tolerate a few legacy shapes + bare strings).
@@ -60,6 +61,7 @@ export function economicsSlice(active) {
 
   return {
     prosperity:         ec.prosperity || null,
+    prosperityInCrisis: deriveProsperityPosture(s).inCrisis, // ruling 1(a): the label's ordinary-years sentence, or null
     economicComplexity: ec.economicComplexity || null,
     economyOutput:      ec.compound?.economyOutput ?? null,
     tradeAccess:        ec.tradeAccess || s?.config?.tradeRouteAccess || null,

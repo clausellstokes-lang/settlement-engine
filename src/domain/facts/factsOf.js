@@ -33,6 +33,7 @@ import { canonExports, canonImports } from '../canonicalAccessors.js';
 import { resolveSettlementCulture } from '../resolveCulture.js';
 import { deriveCriminalStructure } from '../display/defenseDisplay.js';
 import { prosperityLabelOf } from '../prosperityRank.js';
+import { keepOf } from './keep.js';
 
 /**
  * The two fields `factsOf` reads itself (every other fact is its home's own reading of the record).
@@ -110,6 +111,8 @@ export function factsOf(record, options = {}) {
     get crime() { return deriveCriminalStructure(record)?.key ?? 'none'; },
     /** the prosperity band (`prosperityRank.js :: prosperityLabelOf`), lower-cased, or undefined */
     get prosperity() { const l = prosperityLabelOf(/** @type {FactsOwnFields} */ (record)?.economicState?.prosperity).toLowerCase(); return l || undefined; },
+    /** what the place can keep up (`keep.js :: keepOf`), read off the prosperity label: `{ bought, funded }` */
+    get keep() { return keepOf(/** @type {FactsOwnFields} */ (record)?.economicState?.prosperity); },
   });
 }
 

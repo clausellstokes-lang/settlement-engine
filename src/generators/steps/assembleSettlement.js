@@ -239,7 +239,7 @@ registerStep('assembleSettlement', {
   // drawn (its relationship branch reads them; it runs on its own named child, so the move shifts
   // no other draw).
   settlement.arrivalScene     = inAssemblySubstream(rng, 'arrival-scene', () => generateArrivalScene(settlement));
-  settlement.defenseProfile   = generateDefenseProfile(settlement);
+  settlement.defenseProfile   = generateDefenseProfile(settlement, keepOfRecord(settlement.economicState)); settlement.economicState = withGuardPaidFromDefence(settlement); // COHERENCE-UPKEEP-5 (R3): pay reads the standing label; COHERENCE-UPKEEP-6 (ruling A): the guard's purse clause from the profile just written
 
   // The final-economy pass already proved that power consumed the final
   // prosperity/safety/food tuple. Assert that proof before applying the one
@@ -483,3 +483,20 @@ registerStep('assembleSettlement', {
   // GENERATION-stamped twins the stressor promotion just minted.
   return { settlement: reapplyEventConditions(promoteStressorsToConditions(normalizeSettlement(settlement))) };
 });
+import { keepOfRecord } from '../../domain/facts/keep.js'; // at the END on purpose: this file's writes are cited by LINE (COHERENCE-UPKEEP)
+import { keptGuardLine, purseWordOfBand } from '../safetyProfile.js'; import { economicSurvivalBandOf } from '../../domain/display/defenseScoreBands.js'; import { standingLabelOf } from '../../domain/facts/keep.js'; // at the END for the same reason (COHERENCE-UPKEEP-6)
+
+/**
+ * THE GUARD ASSESSMENT SAYS WHAT THE TOWN CAN PAY FROM ONE HOME (COHERENCE-UPKEEP-6, the chair's ruling A on the
+ * third read): the Economic Survival band of the defence profile just written (`economicSurvivalBandOf`), so it is
+ * resolved here, after the profile. It reads defence; nothing defence reads is written by it (the power
+ * fingerprint reads the safety label, not this text). At the END of the file so no cited line moves.
+ * @param {any} settlement @returns {any} the economic state, its guard assessment resolved
+ */
+function withGuardPaidFromDefence(settlement) {
+  const es = settlement.economicState;
+  const safety = es?.safetyProfile;
+  if (!safety || typeof safety.guardEffectivenessDesc !== 'string') return es;
+  const pay = purseWordOfBand(economicSurvivalBandOf(settlement), standingLabelOf(es));
+  return { ...es, safetyProfile: { ...safety, guardEffectivenessDesc: keptGuardLine(safety.guardEffectivenessDesc, settlement.institutions || [], pay, { forceScore: settlement.defenseProfile?.scores?.military, tradeDependencies: es.tradeDependencies }) } }; // UPKEEP-8: the guard line's two readings of the record
+}

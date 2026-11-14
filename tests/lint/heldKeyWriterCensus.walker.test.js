@@ -249,6 +249,12 @@ const DISCOVERY_EXEMPT = Object.freeze([
   { symbol: 'standingRosterOf', reason: 'a pure READ: the roster the standing sentences were written on, copied before the resize; it returns a new array and writes nothing.' },
   { symbol: 'standingForceOf', reason: 'a pure READ of the institutions for the standing sentence\'s force word; it returns a new object and writes nothing.' },
   { symbol: 'settleTensionsToRoster', reason: 're-names a tension\'s parties inside `history` for the final roster (copy-on-write, no draw); `history` is not a held key.' },
+  // COHERENCE-UPKEEP (d7d7f7787, the keep home), named at the lane's whole-suite run 2026-11-12.
+  { symbol: 'economicSurvivalBandOf', reason: 'a pure READ of the defence profile just written (defenseProfile.scores.economic, its Economic Survival band), handed to the guard line; it writes nothing (COHERENCE-UPKEEP-6, the chair\'s ruling A: one home for pay).' },
+  { symbol: 'keptGuardLine', reason: 'a pure function from the guard assessment\'s text, the roster and a purse word to the same text with its purse clause; it writes nothing itself (the assembly\'s withGuardPaidFromDefence puts the text back on the economic state; COHERENCE-UPKEEP-6, ruling A).' },
+  { symbol: 'purseWordOfBand', reason: 'a pure map from the Economic Survival band to the purse word the guard lines are declared on; it writes nothing (COHERENCE-UPKEEP-6, ruling A).' },
+  { symbol: 'standingLabelOf', reason: 'a pure READ of the standing prosperity label (else the printed one), the guard line\'s fallback where a record has no band; it writes nothing (COHERENCE-UPKEEP-6).' },
+  { symbol: 'keepOfRecord', reason: 'a pure READ of the standing prosperity label (economicState.prosperityStanding, else the label) into what the place can keep up ({ bought, funded }, domain/facts/keep.js), handed to generateDefenseProfile; it writes nothing at all (COHERENCE-UPKEEP-5, R3).' },
 ]);
 
 /** The held denominator, DERIVED from its producers and never re-typed. */

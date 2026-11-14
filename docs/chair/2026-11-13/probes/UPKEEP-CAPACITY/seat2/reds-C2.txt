@@ -1,0 +1,47 @@
+ FAIL  tests/generators/captureBirthScale.test.js > birth-scale distribution sweep > overwhelming criminal presence reads contested/influenced at birth
+ FAIL  tests/generators/foodModelSingleWriter.test.js > FIX-G1 — the viability summary counts the list the record publishes > over the whole golden corpus, no row states a count its own list does not hold
+ FAIL  tests/generators/generationCertificationCorpus.test.js > seeded generation certification cohort > pins the advisory record_coherence_battery failures BY IDENTITY
+ FAIL  tests/generators/generationForkCensus.test.js > EM-P2 — generation census by execution: the instrument, the classification, both channels > A1 — the instrument reaches the generator graph: mints split 4 direct / 106 via fork, no golden moves, 512 draws unpinned and 0 pinned
+ FAIL  tests/generators/generationForkCensus.test.js > EM-P2 — generation census by execution: the instrument, the classification, both channels > A3e — the classification re-executed: the declared corpus is 63 rows, 12 steps draw, and every stepDraws and keyMoves reproduces
+ FAIL  tests/generators/generationForkCensus.test.js > EM-P2 — generation census by execution: the instrument, the classification, both channels > A4 — both landing triples re-executed: the six varies rows, the sixteen disagreements, and zero differing landing paths
+ FAIL  tests/generators/generationForkCensus.test.js > EM-P2 — generation census by execution: the instrument, the classification, both channels > A5 — the mint channel: four DIRECT mints, every seed root-prefixed, and one seed minted four times with a fork-first via list
+ FAIL  tests/generators/generationForkCensus.test.js > EM-P2 — generation census by execution: the instrument, the classification, both channels > A6 — the hash channel: 69 distinct pickVariant seeds, sixteen external fnv1a32 calls, and two censuses disjoint by construction
+ FAIL  tests/generators/hookThemeDraws.test.js > HK-3 draws — the corpus, through the real pipeline > pin:no-hook-is-lost — the count the DM sees is byte-for-byte what it was
+ FAIL  tests/generators/institutionBudgetPromise.test.js > X-46 car 3 — the promise: the factor at 1.0 is the tip before the budget > every one of sixty seeds is byte-identical with the density factor forced to 1.0
+ FAIL  tests/generators/nameHeldThroughAssembly.test.js > EM-R4 — the settlement name is held through assembly > A1 — EM-R4: inert with no pins: the golden corpus and an empty bag leave every byte where it was
+ FAIL  tests/generators/pipelinePinnedChoosers.test.js > EM-B2a3 — the institution and power choosers consult the pin seam > A1 — the null change: an unpinned run and pins {} leave the golden corpus byte-identical
+ FAIL  tests/generators/pipelinePinnedChoosers.test.js > EM-B2a3 — the institution and power choosers consult the pin seam > A6 — the pin bag is never written through, and the uncloned control keeps that honest
+ FAIL  tests/generators/pipelinePinnedMode.test.js > EM-B2a2 — the pin primitive has ONE exported home: chooseOrPin lives on the runner > A2 — the lift moves nothing: the golden corpus, the draw count and the one-stream shape
+ FAIL  tests/generators/pipelinePinnedMode.test.js > EM-P0 — the pipeline seam: pins are consulted per chooser, on one stream > A1 — the null change: no pins and pins {} leave the golden corpus byte-identical
+ FAIL  tests/generators/pipelinePinnedMode.test.js > EM-R1b — a recordPath-less chooser is not counted against a record-built bag > A5 — EM-R1b: a supplied transient chooser is still handed back, and the unpinned path is inert
+ FAIL  tests/generators/powerEconomyFreshness.test.js > EM-R3 — the power structure is final under a held pin > A4 — the golden is unmoved by construction, and a held bag does move it
+ FAIL  tests/generators/rosterFinalUnderHeldRoster.test.js > EM-R2 — the roster is final inside enrichNpcCoherence under a held roster > A1 — inert with no pins: the golden corpus and the coherence tail are byte-unmoved
+ FAIL  tests/generators/x46NpcBand.test.js > X-46 car 4 (iii) — dark, the world is byte-identical; lit (in this test only), the roster follows the people > sixty seeds (ten a tier) generate byte-identically to the dark digests captured at the window tip (2026-11-04)
+ FAIL  tests/lint/domainAnyCastBaseline.test.js > domain any-cast ratchet — the declared-overrun ledger is honest > ⛔ EVERY DECLARED OVERRUN IS ATTRIBUTED — an unattributed row is a defect laundered into debt
+ FAIL  tests/lint/ledgerCitationIntegrity.test.js [ tests/lint/ledgerCitationIntegrity.test.js ]
+ FAIL  tests/lint/mutationCoverageManifest.test.js > mutation-coverage manifest — the totality contract (E-A) > TOTALITY: every enumerated invariant file has a manifest entry
+ FAIL  tests/lint/negativeAssertionAnchor.walker.test.js > negative-assertion anchor walker (habitat removal) > no NEW un-anchored negative assertion anywhere in the test corpus
+ FAIL  tests/lint/negativeAssertionAnchor.walker.test.js > negative-assertion anchor walker (habitat removal) > the generation-facing quarantine is EXACT (a new, grown or unbanked offender reds)
+ FAIL  tests/lint/newsHeadlineContract.walker.test.js > complete Wizard News address and headline rewrite contract
+ FAIL  tests/lint/newsVoiceContract.walker.test.js > cross-home Wizard News voice contract
+ FAIL  tests/lint/observedShapeReaders.walker.test.js [ tests/lint/observedShapeReaders.walker.test.js ]
+ FAIL  tests/lint/poolDominance.walker.test.js > no drawn pool prints more of one line than its register allows > every drawn pool has a row, and every row is a drawn pool
+ FAIL  tests/lint/poolDominance.walker.test.js > no drawn pool prints more of one line than its register allows > no ceiling sits loose above its measure
+ FAIL  tests/lint/presumedThings.walker.test.js > ARM 1 — the source > ⛔ every source literal that names a thing declares it, or has its row
+ FAIL  tests/lint/proseFamilyContract.walker.test.js > four durable prose-family exact-totality contract
+ FAIL  tests/lint/proseTasteInterested.walker.test.js > the two fixture towns are the ones §R c-22 names, taken as the generator makes them > the captured town carries the birth fact and the clean control does not
+ FAIL  tests/lint/proseTasteInterested.walker.test.js > ⭐⭐ THE STANDING, PRINTED AND ASSERTED ON BOTH TOWNS > prints the per-kind table and holds the four organs against every other kind
+ FAIL  tests/lint/proseTasteInterested.walker.test.js > ⭐⭐ THE STANDING, PRINTED AND ASSERTED ON BOTH TOWNS > the taste's own row is INTERESTED on the captured town and LICENSED on the clean one
+ FAIL  tests/lint/proseWaveGate.walker.test.js > (d) THE FIXTURE SECTION — the interested fact BOTH WAYS (SITTING §T.4, C‴) > composes the captured town and the clean control, and names their standings
+ FAIL  tests/lint/proseWaveGate.walker.test.js > (d) THE FIXTURE SECTION — the interested fact BOTH WAYS (SITTING §T.4, C‴) > ⛔ THE CONTROL HAS NO PEN LINE AT ALL, which is what makes the pair a pair
+ FAIL  tests/lint/proseWiringCensus.walker.test.js > SEAM car 5b — THE HOLDER CENSUS: the source of each construction (SITTING §Q) > ⭐ THE DRY READ: both modes, and the one that writes is not among them
+ FAIL  tests/lint/proseWiringCensus.walker.test.js > SEAM car 5b — THE HOLDER CENSUS: the source of each construction (SITTING §Q) > ⭐⭐ EVERY MAPPING ROW IS CITED TO A PRODUCER THE TREE STILL CARRIES, and a false one reds
+ FAIL  tests/lint/proseWiringCensus.walker.test.js > car 0 — the committed JSON and its interlock > the committed census is byte-identical to a fresh build, and the stamp is live
+ FAIL  tests/lint/recordRegisterTotality.walker.test.js > the record class register — totality over a generated record, in both directions > A4 — KEY_UNPROVEN_AT_LENGTH_ONE is exactly the declared collections the corpus cannot test
+ FAIL  tests/lint/seedLoopTotality.walker.test.js > seed-loop totality walker (habitat removal) > no NEW bare seed loop anywhere in the test corpus
+ FAIL  tests/lint/seedLoopTotality.walker.test.js > seed-loop totality walker (habitat removal) > the generation-facing quarantine is EXACT (a new, grown or unbanked offender reds)
+ FAIL  tests/lint/siteCoherenceRatchet.test.js > site-coherence contradiction ratchet (Wave 0 — inventory freezing, never correctness) > C1 — the live row set equals the frozen baseline in both directions
+ FAIL  tests/lint/sourceCitationIntegrity.walker.test.js > source citation integrity — the live estate > ARM 2 — ONLY-SHRINKS: no NEW past-EOF citation in a live document
+ FAIL  tests/lint/sovereigntyLightingContract.walker.test.js > the sovereignty lighting condition — a marker is EVIDENCE only in a live title > THE CENSUS IS AN ASSERTION, NOT A SENTENCE — every stated figure is executed
+ FAIL  tests/lint/writerReach.walker.test.js [ tests/lint/writerReach.walker.test.js ]
+ FAIL  tests/pdf/goldenViewModel.test.js > pdf.6 — golden snapshot of the SHARED_FIELDS canon values > canon values for the fixed seed are golden (review any change, do not auto-update)

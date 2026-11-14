@@ -38645,7 +38645,8 @@
         },
         {
           "path": "src/generators/defenseGenerator.js",
-          "symbol": "const computeDefenseReadiness = (scores, threat, tier, magicExists = true) =>"
+          "symbol": "const computeDefenseReadiness = (scores, threat, tier, magicExists = true) =>",
+          "retiredBy": "§934.105 (the owner's design of 2026-11-13: defence is the sum of its parts; COHERENCE-UPKEEP-5 V3 at 82c639b44 replaced computeDefenseReadiness by the derived form)"
         },
         {
           "path": "src/generators/foodGenerator.js",

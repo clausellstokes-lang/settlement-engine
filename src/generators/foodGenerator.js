@@ -16,7 +16,8 @@
  *   - Economics tab UI
  */
 
-import { textOf } from '../domain/facts/textOf.js';
+import { filterDeclared, lineText } from '../domain/facts/drawDeclared.js';
+import { factsOf } from '../domain/facts/factsOf.js';
 import { getActiveRng } from '../kernel/rngContext.js';
 import { migrationDirectionOfConfig } from '../domain/migrationDirection.js';
 import { FOOD_IMPORT_RATES, SIEGE_PRODUCTION_KEPT } from '../data/foodImportRates.js';
@@ -82,7 +83,7 @@ export function famineStoresLeft(stored, gapPct, months) {
 // foodGenerator <-> isolationSupport import cycle (46459cb16). Re-exported so every caller keeps its import.
 export { foodLandOf } from './foodLand.js';
 
-export function generateFoodSecurity(tier, institutions, config) {
+export function generateFoodSecurity(tier, institutions, config, storesShare = 1) {
   // Native catalog names remain a compatibility vocabulary for old saves.
   // Current custom names are presentation-only and must not impersonate a
   // granary, mill, market, magical transit node, or religious food anchor.
@@ -146,7 +147,11 @@ export function generateFoodSecurity(tier, institutions, config) {
                     : (['thorp','hamlet','village'].includes(tier) ? 1.5 : 1.0);
   // Mill extends storage — flour lasts longer than grain
   // What the granary holds in a good year; an ACTIVE famine has been drawing on it (below).
-  const storageMonthsFull = Math.round(((hasMill ? baseStorage * 1.25 : baseStorage) + Math.min(3, preservedSources) / 4) * 10) / 10;
+  // COHERENCE-UPKEEP (the chair's ruling 6 of 2026-11-12): what is laid by is bought, so the full
+  // granary keeps `storesShare` of its months — `boughtShare('stores', keepOf(prosperity))`,
+  // handed in by the economy's second call AFTER prosperity (economicState.js); 1 when absent. The
+  // first call (the one prosperity reads) lays by in full, and prosperity reads no months.
+  const storageMonthsFull = Math.round(((hasMill ? baseStorage * 1.25 : baseStorage) + Math.min(3, preservedSources) / 4) * (Number.isFinite(storesShare) ? storesShare : 1) * 10) / 10;
 
   // ── Import dependency ─────────────────────────────────────────────────────
   // How much of caloric needs can the settlement import, and does it need to?
@@ -390,7 +395,7 @@ export function generateFoodSecurity(tier, institutions, config) {
     famineCutPct: stressFamine ? Math.round((1 - famineKeeps) * 100) : 0,
     foodwaysLine: composeFoodwaysLine({
       sources: foodSources,
-      cultureLines: CULTURE_PROFILES[/** @type {keyof typeof CULTURE_PROFILES} */ (config.cultureProfileKey)]?.foodways?.map(textOf) || null, // R-C: a declared row gives back its text (CENSUS-2d)
+      cultureLines: cultureFoodwaysOf(config.cultureProfileKey, { tier, population, institutions, config }), // UPKEEP-9: a declared row is kept only where it holds
       identity: `${tier}|${population}|${terrain}|${route}|${config.cultureProfileKey || ''}`,
       market: hasMarket, // COHERENCE-AGREE-3 (F6): the market home (facts/market.js), read by foodLandOf
     }),
@@ -513,6 +518,22 @@ export function foodProsperityModOf(f) {
     return { type: 'bonus', value: 0.4, reason: 'Agricultural surplus with reserves provides modest prosperity bonus' };
   }
   return null;
+}
+
+/**
+ * THE CULTURE'S FOODWAYS LINES, READ WHERE THE LINE IS CHOSEN (UPKEEP-9, step 2(a)): a declared row (`{ text, needs }`,
+ * cultureProfiles.js) is kept only where the place makes its declaration true (`filterDeclared`, the one reading of a
+ * declaration), then gives back its text; the composer picks among what is left, as it did. It used to hand every row's
+ * bare text on (`textOf`), so "… support dense populations." (`population: ≥ middling`) printed in thorps, hamlets
+ * and villages. Pure: no draw.
+ * @param {unknown} key the culture profile's key @param {object} record the fields the facts read (tier, population,
+ *   roster, config) @returns {string[] | null}
+ */
+function cultureFoodwaysOf(key, record) {
+  const rows = CULTURE_PROFILES[/** @type {keyof typeof CULTURE_PROFILES} */ (key)]?.foodways;
+  if (!rows) return null;
+  return filterDeclared([...rows], { facts: () => factsOf(record), poolId: `cultureProfiles:${String(key)}.foodways`, surface: 'economy', drawKind: 'A' })
+    .map((row) => String(lineText(row)));
 }
 
 /** The middle of the tier's band in the one population table (constants.js :: POPULATION_RANGES). */

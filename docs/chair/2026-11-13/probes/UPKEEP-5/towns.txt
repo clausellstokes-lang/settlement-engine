@@ -1,0 +1,174 @@
+KEY cold-famine-city-75 | city | label Struggling (before any crisis: Poor) | stresses famine | route road | terrain forest | threat frontier | months 2.9 (at the pre-crisis share 3.3, full 4.5)
+RATING base 24 Lightly Defended | today 25 Lightly Defended | V1 36 Lightly Defended (35.53) | V2 36 Lightly Defended (35.53)
+TODAY DIMS {'military': 63, 'monster': 54, 'internal': 0, 'economic': 9, 'magical': 36} BASE DIMS {'military': 45, 'monster': 62, 'internal': 0, 'economic': 10, 'magical': 36}
+  [Built] Walls: full +10 | counts +10
+  [Built] Walls going unmended: full -0.8 | counts -0.8
+  [Stands] Garrison: full +12.6 | paid: kept 79% | famine takes -2 | counts +7.9
+  [Stands] Watch: full +5 | paid: kept 78% | famine takes -1.2 | counts +2.7
+  [Stands] Court: full +4 | paid: kept 79% | famine takes -1.2 | counts +2
+  [Stands] Martial strength (the military dial): full +6.2 | paid: kept 77% | famine takes -1.2 | counts +3.6
+  [Stands] Hired company: full +2.8 | bought: kept 55% | famine takes -0.2 | counts +1.3
+  [Stands] Adventurers' charter: full +10 | bought: kept 55% | famine takes -1 | counts +4.5
+  [Stands] Arcane practitioners: full +6.6 | paid: kept 79% | famine takes -0.8 | counts +4.4
+  [Sustains] Stores (3.3 months): full +5.2 | stores laid by at the place's share | counts +5.2 (laid by at the place's share, at the stores' own writer)
+  [Sustains] Alchemists preserving the grain: full +1.6 | paid: kept 67% | famine takes -1.1 | counts 0
+  [Sustains] Market: full +2 | paid: kept 67% | famine takes -1.3 | counts 0
+  [Sustains] The purse (the economy dial): full +0.2 | famine takes -0.2 | counts 0
+  [Sustains] Garrison unprovisioned: full -1 | counts -1
+  [Sustains] Magic (wards, healing, countermagic): full +12.2 | magic's health 59% | counts +7.2 (the magic's own health reading)
+  [The ground] Folk used to beasts: full +0.8 | counts +0.8
+  [Against] Crime: full -7.6 | counts -7.6
+  [The ground] Terrain (forest): full +2.3 | counts +2.3 (×1.12 on what is built and stands)
+  [The ground] Size: 0 | Threat (frontier): -7
+  CRISES [{'name': 'famine', 'took': {'eco': 13.06, 'mil': 10, 'int': 20, 'mon': 8}}]
+  V2 groups {'BUILT': 9.2, 'STANDS': 26.41, 'SUSTAINS': 11.4, 'GROUND': 3.11, 'AGAINST': -7.6} limited None ['Walls:10']
+
+KEY cold-famine-city-0 | city | label Struggling (before any crisis: Wealthy) | stresses famine | route river | terrain riverside | threat frontier | months 7.1 (at the pre-crisis share 8.7, full 8.7)
+RATING base 77 Fortress | today 54 Defensible | V1 84 Fortress (84.26) | V2 84 Fortress (84.26)
+TODAY DIMS {'military': 71, 'monster': 65, 'internal': 41, 'economic': 40, 'magical': 90} BASE DIMS {'military': 95, 'monster': 92, 'internal': 63, 'economic': 78, 'magical': 90}
+  [Built] Walls: full +10 | counts +10
+  [Stands] Garrison: full +12.6 | paid: kept 100% | famine takes -1.7 | counts +10.9
+  [Stands] Watch: full +5 | paid: kept 100% | famine takes -1 | counts +4
+  [Stands] Court: full +4 | paid: kept 100% | famine takes -0.9 | counts +3.1
+  [Stands] Prison: full +3 | paid: kept 100% | famine takes -0.7 | counts +2.3
+  [Stands] Martial strength (the military dial): full +4.8 | paid: kept 100% | famine takes -0.7 | counts +4
+  [Stands] Adventurers' charter: full +10 | bought: kept 100% | famine takes -1.1 | counts +8.9
+  [Stands] Arcane practitioners: full +13 | paid: kept 100% | famine takes -1.5 | counts +11.5
+  [Sustains] Stores (8.7 months): full +11.2 | stores laid by at the place's share | counts +11.2 (laid by at the place's share, at the stores' own writer)
+  [Sustains] Healing (hospital): full +3 | paid: kept 100% | famine takes -0.8 | counts +2.2
+  [Sustains] Market: full +2 | paid: kept 100% | famine takes -0.8 | counts +1.2
+  [Sustains] The purse (the economy dial): full +2.4 | famine takes -1 | counts +1.4
+  [Sustains] Food processing working: full +1 | famine takes -0.4 | counts +0.6
+  [Sustains] Garrison provisioned: full +1 | counts +1
+  [Sustains] Magic (wards, healing, countermagic): full +18 | magic's health 100% | counts +18 (the magic's own health reading)
+  [The ground] Folk used to beasts: full +0.8 | counts +0.8
+  [Against] Crime: full -1.4 | counts -1.4
+  [The ground] Terrain (riverside): full +1.5 | counts +1.5 (×1.06 on what is built and stands)
+  [The ground] Size: 0 | Threat (frontier): -7
+  CRISES [{'name': 'famine', 'took': {'eco': 15, 'mil': 10, 'int': 20, 'mon': 8}}]
+  V2 groups {'BUILT': 10, 'STANDS': 44.8, 'SUSTAINS': 35.6, 'GROUND': 2.26, 'AGAINST': -1.4} limited None ['Walls:10']
+
+KEY cold-town-139 | town | label Comfortable (before any crisis: Prosperous) | stresses mass_migration | route port | terrain coastal | threat heartland | months 6.3 (at the pre-crisis share 6.5, full 6.5)
+RATING base 38 Defensible | today 40 Defensible | V1 41 Defensible (40.74) | V2 35 Lightly Defended (35.34)
+TODAY DIMS {'military': 30, 'monster': 0, 'internal': 35, 'economic': 74, 'magical': 52} BASE DIMS {'military': 29, 'monster': 0, 'internal': 32, 'economic': 67, 'magical': 52}
+  [Stands] Watch: full +5 | paid: kept 100% | counts +5
+  [Stands] Court: full +4 | paid: kept 100% | counts +4
+  [Stands] Martial strength (the military dial): full +5.2 | paid: kept 100% | counts +5.2
+  [Stands] Hired company: full +2.8 | bought: kept 100% | counts +2.8
+  [Sustains] Stores (6.5 months): full +9.4 | stores laid by at the place's share | counts +9.4 (laid by at the place's share, at the stores' own writer)
+  [Sustains] Market: full +2 | paid: kept 100% | counts +2
+  [Sustains] The purse (the economy dial): full +1.6 | counts +1.6
+  [Sustains] Garrison unprovisioned: full -1 | counts -1
+  [Sustains] Magic (wards, healing, countermagic): full +11.8 | magic's health 88% | counts +10.4 (the magic's own health reading)
+  [The ground] Sea supply: full +2 | counts +2
+  [Against] Crime: full -2.8 | counts -2.8
+  [The ground] Terrain (coastal): full +0.1 | counts +0.1 (×1.02 on what is built and stands)
+  [The ground] Size: +2 | Threat (heartland): 0
+  CRISES []
+  V2 groups {'BUILT': 0, 'STANDS': 17, 'SUSTAINS': 17, 'GROUND': 2.14, 'AGAINST': -2.8} limited {'from': 22.4, 'to': 17} []
+
+KEY cold-thorp-0 | thorp | label Struggling (before any crisis: Struggling) | stresses none | route isolated | terrain hills | threat frontier | months 1.4 (at the pre-crisis share 1.4, full 1.8)
+RATING base 27 Lightly Defended | today 24 Lightly Defended | V1 26 Lightly Defended (25.87) | V2 26 Lightly Defended (25.87)
+TODAY DIMS {'military': 25, 'monster': 22, 'internal': 36, 'economic': 14, 'magical': 0} BASE DIMS {'military': 25, 'monster': 22, 'internal': 36, 'economic': 26, 'magical': 0}
+  [Stands] Martial strength (the military dial): full +0.2 | counts +0.2
+  [Stands] Armed households: full +1.2 | counts +1.2
+  [Stands] Parish as rallying point: full +2.2 | counts +2.2
+  [Stands] Elders and reeve: full +1.8 | counts +1.8
+  [Stands] Close-knit self-policing: full +4.8 | counts +4.8
+  [Stands] Clergy (divine): full +3.6 | counts +3.6
+  [Sustains] Stores (1.4 months): full +2.6 | stores laid by at the place's share | counts +2.6 (laid by at the place's share, at the stores' own writer)
+  [Sustains] The purse (the economy dial): full +2 | counts +2
+  [The ground] Remoteness (alarm and flight): full +1.6 | counts +1.6
+  [The ground] Folk used to beasts: full +0.8 | counts +0.8
+  [Against] Crime: full -0.4 | counts -0.4
+  [The ground] Terrain (hills): full +0.5 | counts +0.5 (×1.18 on what is built and stands)
+  [The ground] Size: +12 | Threat (frontier): -7
+  CRISES []
+  V2 groups {'BUILT': 0, 'STANDS': 13.8, 'SUSTAINS': 4.6, 'GROUND': 2.87, 'AGAINST': -0.4} limited None []
+
+KEY cold-under_siege-town-52 | town | label Struggling (before any crisis: Comfortable) | stresses under_siege | route road | terrain mountain | threat frontier | months 5.1 (at the pre-crisis share 6.1, full 6.3)
+RATING base 34 Lightly Defended | today 28 Lightly Defended | V1 45 Defensible (44.74) | V2 45 Defensible (44.74)
+TODAY DIMS {'military': 67, 'monster': 58, 'internal': 0, 'economic': 14, 'magical': 28} BASE DIMS {'military': 77, 'monster': 61, 'internal': 0, 'economic': 28, 'magical': 28}
+  [Built] Walls: full +10 | counts +10
+  [Stands] Garrison: full +12.6 | paid: kept 100% | under_siege takes -0.7 | counts +11.9
+  [Stands] Watch: full +5 | paid: kept 100% | under_siege takes -0.8 | counts +4.2
+  [Stands] Court: full +4 | paid: kept 100% | under_siege takes -0.9 | counts +3.1
+  [Stands] Martial strength (the military dial): full +5.2 | paid: kept 100% | under_siege takes -0.5 | counts +4.7
+  [Stands] Clergy (divine): full +4 | under_siege takes -0.1 | counts +3.9
+  [Sustains] Stores (6.1 months): full +9 | stores laid by at the place's share | under_siege takes -3.2 | counts +5.8 (laid by at the place's share, at the stores' own writer)
+  [Sustains] Healing (hospital): full +3 | paid: kept 100% | under_siege takes -0.7 | counts +2.3
+  [Sustains] Market: full +2 | paid: kept 100% | under_siege takes -0.7 | counts +1.3
+  [Sustains] The purse (the economy dial): full +1 | under_siege takes -0.4 | counts +0.6
+  [Sustains] Garrison unprovisioned: full -1 | counts -1
+  [Sustains] Magic (wards, healing, countermagic): full +7.2 | magic's health 79% | counts +5.7 (the magic's own health reading)
+  [The ground] Folk used to beasts: full +0.8 | counts +0.8
+  [Against] Crime: full -8 | counts -8
+  [The ground] Terrain (mountain): full +4.5 | counts +4.5 (×1.28 on what is built and stands)
+  [The ground] Size: +2 | Threat (frontier): -7
+  CRISES [{'name': 'under_siege', 'took': {'eco': 25, 'int': 15}}]
+  V2 groups {'BUILT': 10, 'STANDS': 27.8, 'SUSTAINS': 14.66, 'GROUND': 5.28, 'AGAINST': -8} limited None ['Walls:10']
+
+KEY cold-city-16 | city | label Wealthy (before any crisis: Wealthy) | stresses none | route road | terrain hills | threat frontier | months 9 (at the pre-crisis share 9, full 9)
+RATING base 87 Fortress | today 87 Fortress | V1 103 Fortress (103.28) | V2 103 Fortress (103.28)
+TODAY DIMS {'military': 100, 'monster': 100, 'internal': 71, 'economic': 100, 'magical': 97} BASE DIMS {'military': 100, 'monster': 100, 'internal': 71, 'economic': 100, 'magical': 97}
+  [Built] Walls: full +10 | counts +10
+  [Stands] Garrison: full +12.6 | paid: kept 100% | counts +12.6
+  [Stands] Watch: full +5 | paid: kept 100% | counts +5
+  [Stands] Court: full +4 | paid: kept 100% | counts +4
+  [Stands] Martial strength (the military dial): full +8 | paid: kept 100% | counts +8
+  [Stands] Hired company: full +2.8 | bought: kept 100% | counts +2.8
+  [Stands] Adventurers' charter: full +10 | bought: kept 100% | counts +10
+  [Stands] Arcane practitioners: full +11.2 | paid: kept 100% | counts +11.2
+  [Sustains] Stores (9 months): full +11.4 | stores laid by at the place's share | counts +11.4 (laid by at the place's share, at the stores' own writer)
+  [Sustains] Alchemists preserving the grain: full +1.6 | paid: kept 100% | counts +1.6
+  [Sustains] Healing (hospital): full +3 | paid: kept 100% | counts +3
+  [Sustains] Market: full +2 | paid: kept 100% | counts +2
+  [Sustains] The purse (the economy dial): full +4 | counts +4
+  [Sustains] Garrison provisioned: full +1 | counts +1
+  [Sustains] Magic (wards, healing, countermagic): full +19.4 | magic's health 100% | counts +19.4 (the magic's own health reading)
+  [The ground] Folk used to beasts: full +0.8 | counts +0.8
+  [Against] Crime: full -1.6 | counts -1.6
+  [The ground] Terrain (hills): full +5.1 | counts +5.1 (×1.18 on what is built and stands)
+  [The ground] Size: 0 | Threat (frontier): -7
+  CRISES []
+  V2 groups {'BUILT': 10, 'STANDS': 53.6, 'SUSTAINS': 42.4, 'GROUND': 5.88, 'AGAINST': -1.6} limited None ['Walls:10']
+
+KEY cold-hamlet-56 | hamlet | label Comfortable (before any crisis: Comfortable) | stresses none | route crossroads | terrain hills | threat frontier | months 1.5 (at the pre-crisis share 1.5, full 1.5)
+RATING base 25 Lightly Defended | today 25 Lightly Defended | V1 25 Lightly Defended (25.01) | V2 25 Lightly Defended (25.01)
+TODAY DIMS {'military': 33, 'monster': 36, 'internal': 19, 'economic': 31, 'magical': 0} BASE DIMS {'military': 36, 'monster': 38, 'internal': 19, 'economic': 29, 'magical': 0}
+  [Stands] Martial strength (the military dial): full +1.2 | bought: kept 100% | counts +1.2 (rate set by what the place can pay)
+  [Stands] Adventurers' charter: full +10 | bought: kept 90% | counts +9
+  [Stands] Armed households: full +1.6 | counts +1.6
+  [Stands] Parish as rallying point: full +2.2 | counts +2.2
+  [Stands] Elders and reeve: full +1.8 | counts +1.8
+  [Stands] Close-knit self-policing: full +4 | counts +4
+  [Sustains] Stores (1.5 months): full +2.8 | stores laid by at the place's share | counts +2.8 (laid by at the place's share, at the stores' own writer)
+  [Sustains] The purse (the economy dial): full +1.8 | counts +1.8
+  [The ground] Remoteness (alarm and flight): full +0.4 | counts +0.4
+  [The ground] Many roads in: full +1.6 | counts +1.6
+  [The ground] Folk used to beasts: full +0.8 | counts +0.8
+  [Against] Crime: full -4.2 | counts -4.2
+  [The ground] Terrain (hills): full +1 | counts +1 (×1.18 on what is built and stands)
+  [The ground] Size: +8 | Threat (frontier): -7
+  CRISES []
+  V2 groups {'BUILT': 0, 'STANDS': 19.8, 'SUSTAINS': 4.6, 'GROUND': 3.81, 'AGAINST': -4.2} limited None []
+
+KEY cold-hamlet-91 | hamlet | label Poor (before any crisis: Poor) | stresses none | route road | terrain hills | threat frontier | months 1.3 (at the pre-crisis share 1.3, full 1.5)
+RATING base 25 Lightly Defended | today 22 Vulnerable | V1 23 Vulnerable (22.57) | V2 23 Vulnerable (22.57)
+TODAY DIMS {'military': 25, 'monster': 41, 'internal': 26, 'economic': 11, 'magical': 0} BASE DIMS {'military': 30, 'monster': 52, 'internal': 26, 'economic': 14, 'magical': 0}
+  [Stands] Martial strength (the military dial): full +0.4 | bought: kept 100% | counts +0.4 (rate set by what the place can pay)
+  [Stands] Adventurers' charter: full +10 | bought: kept 55% | counts +5.5
+  [Stands] Armed households: full +1.6 | counts +1.6
+  [Stands] Parish as rallying point: full +2.2 | counts +2.2
+  [Stands] Close-knit self-policing: full +4 | counts +4
+  [Stands] Clergy (divine): full +4.4 | counts +4.4
+  [Sustains] Stores (1.3 months): full +2.4 | stores laid by at the place's share | counts +2.4 (laid by at the place's share, at the stores' own writer)
+  [Sustains] The purse (the economy dial): full +1 | counts +1
+  [The ground] Remoteness (alarm and flight): full +0.8 | counts +0.8
+  [The ground] Folk used to beasts: full +0.8 | counts +0.8
+  [Against] Crime: full -2.2 | counts -2.2
+  [The ground] Terrain (hills): full +0.7 | counts +0.7 (×1.18 on what is built and stands)
+  [The ground] Size: +8 | Threat (frontier): -7
+  CRISES []
+  V2 groups {'BUILT': 0, 'STANDS': 18.1, 'SUSTAINS': 3.4, 'GROUND': 2.27, 'AGAINST': -2.2} limited None []
+

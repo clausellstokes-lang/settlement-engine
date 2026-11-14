@@ -81,7 +81,7 @@ const VIABILITY_LABEL = Object.freeze({
 /**
  * Structural view of the economicState fields the display model reads.
  * @typedef {Object} EconStateView
- * @property {unknown} [primaryExports]
+ * @property {unknown} [primaryExports] @property {unknown} [primaryImports]
  * @property {unknown} [exports]
  * @property {unknown} [isEntrepot]
  * @property {unknown} [prosperity]
@@ -238,7 +238,7 @@ export function deriveViability(settlement) {
 
   const food = deriveFoodBalance(settlement);
   const dependencyCount = Array.isArray(v.dependencies) ? v.dependencies.length : 0;
-  const town = name || 'The settlement';
+  const town = name || 'The settlement'; const seen = outlookFactsOf(settlement); // UPKEEP-8 (#228 #253 #326 #379): the Outlook says only what the town's own pages say
 
   if (food.deficit > 0) {
     // "Depends on imports" must match what the import channel actually is:
@@ -267,12 +267,12 @@ export function deriveViability(settlement) {
           `Nothing reliable reaches ${town} from outside, and its own land does not grow enough; the rest comes from its stores${magicFed ? ' and from magic' : ''}.`,
         ]);
     } else if (covered) {
-      line = pick([
+      line = pickTrue(pick, [
         `${town} cannot feed itself: part of its food comes in ${route}.`,
         `${town} grows less than it eats, and the difference arrives ${route}.`,
         `${town} keeps order and pays its way, but it has to buy food to get through the year, and the food comes in ${route}.`,
         `Much of what ${town} eats is brought in ${route}; its own land does not produce enough.`,
-      ]);
+      ], [true, true, seen.keepsOrder && seen.paysItsWay, true], '');
     } else {
       line = pick([
         `${town} grows less than it eats, and its trade brings in little food to make up the difference.`,
@@ -286,12 +286,12 @@ export function deriveViability(settlement) {
     };
   }
   if (dependencyCount > 0) {
-    const goods = dependencyGoods(v.dependencies);
+    const goods = dependencyGoods(v.dependencies, settlement?.economicState?.primaryImports), many = goods !== null && (/ and /.test(goods) || /s$/.test(goods)); // UPKEEP-8 (#253): a good the import list holds, and its number
     return {
       viable: true, verdict: 'dependent', label: VIABILITY_LABEL.dependent,
       summary: `VIABLE WITH CRITICAL DEPENDENCIES: ${pick(goods
         ? [
-          `${town} can stand, but only while ${goods} keep arriving and the routes that bring them stay open.`,
+          `${town} can stand, but only while ${goods} ${many ? 'keep' : 'keeps'} arriving and the routes that bring ${many ? 'them' : 'it'} stay open.`,
           `${town}'s trades run on ${goods} brought in from elsewhere; if that supply stopped, they would stop with it.`,
           `${town} works well enough, as long as nobody cuts it off from the ${goods} it buys in.`,
         ]
@@ -304,11 +304,11 @@ export function deriveViability(settlement) {
   }
   return {
     viable: true, verdict: 'self_sufficient', label: VIABILITY_LABEL.self_sufficient,
-    summary: `VIABLE: ${pick([
+    summary: `VIABLE: ${pickTrue(pick, [
       `${town} feeds itself and pays its own way.`,
       `${town} grows what it eats and makes what it needs, and owes no one for either.`,
       `Nothing ${town} needs to get through the year has to come from outside.`,
-    ])}`,
+    ], [!seen.buysFood && seen.paysItsWay, !seen.buysFood && !seen.needsImports, !seen.buysFood && !seen.needsImports], `${town} gets through the year, buying in what its own land and trades do not provide.`)}`,
     rawSummary,
   };
 }
@@ -337,14 +337,14 @@ function importRoutePhrase(channel) {
 
 /**
  * The goods a dependent town buys in, from its own dependency rows ("Imports grain"), the first
- * two by name; null where no row names a good (the variants then speak of "the goods it buys in").
- * @param {unknown} dependencies @returns {string|null}
+ * two by name; null where no row names a good (the variants then speak of "the goods it buys in"); UPKEEP-8: only a good the list holds.
+ * @param {unknown} dependencies @param {unknown} [imports] the town's printed import list @returns {string|null}
  */
-function dependencyGoods(dependencies) {
-  if (!Array.isArray(dependencies)) return null;
+function dependencyGoods(dependencies, imports = null) {
+  if (!Array.isArray(dependencies)) return null; const listed = Array.isArray(imports) ? imports.map((x) => String(x).toLowerCase()) : null;
   const goods = /** @type {string[]} */ ([...new Set(dependencies
     .map((d) => /^Imports (.+)$/.exec(String(d?.title || ''))?.[1]?.replace(/\s*\(.*\)\s*$/, '').trim().toLowerCase())
-    .filter((g) => g && !/[0-9]/.test(g)))]);
+    .filter((g) => g && !/[0-9]/.test(g) && (!listed || listed.some((x) => x.includes(g)))))]);
   if (goods.length === 0) return null;
   return goods.length === 1 ? goods[0] : `${goods[0]} and ${goods[1]}`;
 }
@@ -596,14 +596,14 @@ export function deriveHeadcounts(settlement) {
 }
 
 /**
- * Prosperity label (§overview/economics) — the prosperity enum BOTH the screen and
- * the PDF render. The COLOR/tone is intentionally per-surface (the web uses an RGB
- * scale, the PDF a print palette), so only the label is a shared scalar.
+ * Prosperity label (§overview/economics) — the prosperity enum BOTH surfaces render; tone is per-surface
+ * (web RGB scale, PDF print palette), so only the label is a shared scalar. `inCrisis`: beside a label a
+ * crisis in force lowered, the one sentence of what the place is in ordinary years (ruling 1(a), REVIEW-UPKEEP-2).
  * @param {any} settlement
- * @returns {{ label: string | null }}
+ * @returns {{ label: string | null, inCrisis: string | null }}
  */
 export function deriveProsperityPosture(settlement) {
-  return { label: settlement?.economicState?.prosperity || null };
+  return { label: settlement?.economicState?.prosperity || null, inCrisis: prosperityInCrisisLine(settlement) };
 }
 
 /**
@@ -791,3 +791,78 @@ import { institutionDisplayName } from './institutionDisplayName.js';
 function proseHouseName(house) {
   return institutionDisplayName(house).replace(/\s*\([^)]*\)/g, '').replace(/\s+/g, ' ').trim();
 }
+
+// The prosperity sentence's one writer (ruling 1(a)); imported here, not at the head, so the line-keyed
+// holder census's citations into this file stay put.
+import { prosperityInCrisisLine } from './prosperityInCrisis.js';
+
+// ── UPKEEP-8 (2026-11-13): the Outlook says only what the town's own pages say ──────────────────────────────
+// The round-three cut's #228 #253 #326 #379 and the increment's #ww-567 #ww-717 #ww-1541 (the chair's ruling: not
+// "keeps order" where law and order reads critical; not "pays its way" where the town is poor and earns less than it
+// spends; not "grows what it eats" or "feeds itself" where it buys its food or lists critical imports).
+
+/**
+ * The seed's variant where it is true; else the next true one in the pool's order; else the twin ('' keeps the pool's
+ * own pick, for a pool whose every variant is true of its branch).
+ * @param {(pool: readonly string[]) => string | undefined} pick @param {readonly string[]} pool @param {readonly boolean[]} ok
+ * @param {string} twin @returns {string}
+ */
+function pickTrue(pick, pool, ok, twin) {
+  const at = Math.max(0, pool.indexOf(String(pick(pool))));
+  for (let k = 0; k < pool.length; k++) { const j = (at + k) % pool.length; if (ok[j]) return pool[j]; }
+  return twin || pool[at];
+}
+
+/**
+ * The fields the Outlook's facts read.
+ * @typedef {{ economicState?: { prosperity?: unknown, primaryImports?: unknown, primaryExports?: unknown, necessityImports?: unknown,
+ *   foodSecurity?: { foodRecord?: { normalImportPct?: unknown } | null } | null } | null,
+ *   resourceAnalysis?: { imports?: { critical?: unknown } | unknown[] } | null }} OutlookSettlement
+ */
+
+/**
+ * What the town's own pages say, for the Outlook: its Law & order band (the Foundations' causal reading), its
+ * printed prosperity rung (the low rungs are the Economics header's "earns less than it spends"), the food it buys
+ * (the food record's import share), and the imports its printed trade list marks as a necessity or as what the terrain
+ * cannot produce (the Economics tab's own list and marks: `EconomicsTab.jsx :: shownImports`).
+ * @param {DossierSettlementView | null | undefined} settlement
+ * @returns {{ keepsOrder: boolean, paysItsWay: boolean, buysFood: boolean, needsImports: boolean }}
+ */
+function outlookFactsOf(settlement) {
+  const town = /** @type {OutlookSettlement | null | undefined} */ (/** @type {unknown} */ (settlement));
+  const eco = town?.economicState || {};
+  const law = bandForVariable(/** @type {Parameters<typeof bandForVariable>[0]} */ (/** @type {unknown} */ (settlement)), 'law_order');
+  const record = eco.foodSecurity?.foodRecord;
+  /** @param {unknown} list @returns {string[]} */
+  const lower = (list) => (Array.isArray(list) ? list : []).map((x) => String(x).toLowerCase());
+  const necessity = lower(eco.necessityImports);
+  const imp = town?.resourceAnalysis?.imports;
+  const terrain = imp && !Array.isArray(imp) ? lower(imp.critical) : [];
+  // the import list AS THE ECONOMICS TAB PRINTS IT: the record's imports and the terrain's criticals, through the list's one filter
+  /** @type {string[]} */
+  const recorded = Array.isArray(eco.primaryImports) ? eco.primaryImports.map(String) : [];
+  const imports = lower(displayTradeList([...recorded, ...terrain.filter((t) => !recorded.some((imp) => imp.toLowerCase().includes(t)))],
+    settlement, { side: 'imports', exports: Array.isArray(eco.primaryExports) ? [...eco.primaryExports] : [] })); // a copy read (tradeListWriters)
+  return {
+    keepsOrder: law !== 'critical' && law !== 'collapsed',
+    paysItsWay: !['Subsistence', ...PROSPERITY_LABELS.slice(0, PROSPERITY_LABELS.indexOf('Poor') + 1)].includes(String(eco.prosperity ?? '')),
+    buysFood: Number(record?.normalImportPct) > 0,
+    needsImports: imports.some((imp) => necessity.some((n) => imp.includes(n)) || terrain.some((t) => imp.includes(t) || t.includes(imp))),
+  };
+}
+
+/**
+ * #608 (UPKEEP-8, the chair's ruling of 2026-11-13): does the Economics glance's Output chip print beside the prosperity
+ * word? The figure (the economy's output, 0-100) and the word (the printed prosperity label) have no common home, so
+ * where they stand two bands apart (the chip red, under 35, beside Prosperous or Wealthy; green, 60 or more, beside
+ * Poor or lower) the word prints alone. Elsewhere the chip prints once, as the T2-1 ruling keeps it.
+ * @param {number} score the chip's figure @param {unknown} label the printed prosperity word @returns {boolean}
+ */
+export function outputChipBesideWord(score, label) {
+  if (!(score > 0)) return false;
+  const rung = ['Subsistence', ...PROSPERITY_LABELS].map(String).indexOf(String(label ?? ''));
+  if (rung < 0) return true;
+  const high = rung >= 1 + PROSPERITY_LABELS.indexOf('Prosperous'), low = rung <= 1 + PROSPERITY_LABELS.indexOf('Poor');
+  return !((score < 35 && high) || (score >= 60 && low));
+}
+import { bandForVariable } from '../causalState.js'; import { PROSPERITY_LABELS } from '../prosperityRank.js'; import { displayTradeList } from './tradeListDisplay.js'; // at the END: no line above moves

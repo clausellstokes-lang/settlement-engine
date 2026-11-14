@@ -82,6 +82,9 @@ const md = (...lines) => lines
   .replace(/\n{3,}/g, '\n\n');
 
 const bullet = (v) => (has(v) ? `- ${esc(v)}` : null);
+/** The Prosperity row's one sentence where a crisis in force lowered the label (the chair's ruling
+ *  1(a), REVIEW-UPKEEP-2): nested beneath that row, so the row and its sentence read together. */
+const inCrisisRow = (v) => (has(v) ? `  - ${esc(v)}` : null);
 
 /** The italic section lede — emitted only when the headline has something to say. */
 const lede = (headline) => (headline ? `*${esc(headline)}*` : null);
@@ -106,6 +109,7 @@ function overviewPage(vm, { historyPrinted = true } = {}) {
     kv('Terrain', id.terrain),
     kv('Government', id.governmentType),
     kv('Prosperity', o.prosperity),
+    inCrisisRow(o.prosperityInCrisis),
     kv('Safety', o.safety),
     kv('Viability', o.viabilityVerdict ? humanize(o.viabilityVerdict) : null),
     o.stress.length ? md('', '## Active crises', o.stress.map(x =>
@@ -317,6 +321,7 @@ function economicsPage(vm) {
     lede(economicsHeadline(e)),
     '',
     kv('Prosperity', e.prosperity),
+    inCrisisRow(e.prosperityInCrisis),
     kv('Complexity', e.economicComplexity),
     // The resource label seam: a trade list may carry a raw RESOURCE_DATA key beside an
     // authored phrase, and the VTT journal printed both exactly as the record spells them.
