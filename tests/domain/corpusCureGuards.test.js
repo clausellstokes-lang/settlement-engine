@@ -76,6 +76,9 @@ const GUARDS = [
   { seed: 'rww-city-under_siege-1', pool: 'DS-POW-6::operation role duty evasion', vid: 1, why: 'a siege: "Goods reach X unrecorded" where nothing comes in by road (W2-WRITE-SIDE-REST-2 D)' },
   { seed: 'rww-metropolis-under_siege-1', pool: 'DS-POW-6::operation role duty evasion', vid: 2, why: 'a siege: "A share of what arrives at X never appears at the gate" where nothing arrives' },
   { seed: 'w5-metropolis-under_siege-1', pool: 'DS-POW-6::operation role duty evasion', vid: 3, why: 'a siege: "the goods that reach X" where none reach it' },
+  { seed: 'w5-city-insurgency-1', pool: 'DS-POW-5::council', vid: 1, why: 'a Royal Authority: "the whole {seat} must agree" of a seat that is one person (the increment\'s ww#796, pf#91)' },
+  { seed: 'w5-city-occupied-4', pool: 'DS-POW-5::council', vid: 2, why: 'a Royal Authority: "the town\'s business goes to the whole {seat}" of one person (the increment\'s ww#42, a Feudal Stewardship)' },
+  { seed: 'w5-metropolis-religious_conversion-1', pool: 'DS-POW-5::council', vid: 4, why: 'a Royal Authority: "its members cannot agree" of a seat that is one person' },
 ];
 
 /** @param {string} seed */

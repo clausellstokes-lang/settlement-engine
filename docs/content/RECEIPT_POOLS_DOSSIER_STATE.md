@@ -2392,10 +2392,10 @@ and never an assertion that the feared thing is happening.
 4. `[visitor]` At {settlement} one audience with the {seat} gets a decision, good or bad, and there is nobody to appeal to afterwards.
 
 **`council`** {colour}
-1. `[ledger]` Decisions at {settlement} are slow because the whole {seat} must agree, and once made they are rarely undone.
-2. `[street]` At {settlement} the town's business goes to the whole {seat}, and everybody has learned how long the answer takes.
+1. `[ledger · no ruler: lord]` Decisions at {settlement} are slow because the whole {seat} must agree, and once made they are rarely undone.
+2. `[street · no ruler: lord]` At {settlement} the town's business goes to the whole {seat}, and everybody has learned how long the answer takes.
 3. `[unfolding]` The {seat} at {settlement} worries less about rivals than about the town turning on it.
-4. `[counterforce]` The {seat} at {settlement} has left obvious decisions untaken because its members cannot agree on them.
+4. `[counterforce · no ruler: lord]` The {seat} at {settlement} has left obvious decisions untaken because its members cannot agree on them.
 
 **`theocracy`** {colour}
 1. `[ledger]` The {seat} at {settlement} rules by its faith: every decision is checked against doctrine first, and only then against what the town needs.

@@ -73,8 +73,8 @@
       "ceilingGzip": 177058
     },
     "src/data/dossierStateProse/power.generated.js": {
-      "raw": 129757,
-      "gzip": 18245,
+      "raw": 129946,
+      "gzip": 18267,
       "ceilingRaw": 357097,
       "ceilingGzip": 79355
     },
@@ -907,6 +907,14 @@
       "toRaw": 129804,
       "gzipAfter": 18271,
       "reason": "+48 B raw over the committed 129756 (gzip level 9: 18272 -> 18271): DS-POW-5 FLAG: merchantArmy v1, v2 declared off an occupation (round three #1075)"
+    },
+    {
+      "car": "W2-WRITE-SIDE-REST-3",
+      "leaf": "src/data/dossierStateProse/power.generated.js",
+      "fromRaw": 129804,
+      "toRaw": 129946,
+      "gzipAfter": 18267,
+      "reason": "+189 B raw over the committed 129757 (gzip level 9: 18245 -> 18267): DS-POW-5 council v1, v2, v4 declared off a seat that is one person (no ruler: lord; the increment's ww#796, pf#91, ww#42)"
     }
   ],
   "ceilingTransfersNewLeaves": [

@@ -34995,7 +34995,9 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
+      "lineDeclares": {
+        "no ruler: lord": 3
+      },
       "undeclared": 0,
       "crisisScoped": false
     },
