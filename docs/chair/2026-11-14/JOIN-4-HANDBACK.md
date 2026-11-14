@@ -36,6 +36,7 @@ THE CHAIR'S RULINGS SENT AFTER THE BRIEF (the chair's messages are not on the br
 | P2 | upkeep-monotone-2026-11-14 (the chair's 13:38 point) | 0ca0bbe94 (14:46; the lane's tip then 2ff1dffe9) | — | 65dc92af9 | 2 registers | `.lighting-census-baseline.json`, `.tuning-inventory.json`; lane-only: `tests/lint/.tuning-register.json`; its goldens `generatorGoldenMaster`, `espionageDormancyFence` (red and named by the lane) and its re-keyed pins: LISTED |
 | P3 | coherence-upkeep-2026-11-12 (the chair's 14:19 point) | 2d8aadb19 (14:56; equal to the lane's tip) | 660cb0893 (merge 9) | b61143029 | none | — |
 | P4 | join-surfaces-2026-11-14 (the chair's 14:19 point) | e6cb445db (15:00; the lane's tip then c66333f0c) | 9e47f912a (merge 11) | c7dc0f526 | none | — |
+| P5 | powers-follow-up-2026-11-13 (the chair's 14:38 point) | d2ffdbb07 (15:09; equal to the lane's tip) | 30b03024f (merge 4) | 474c5f966 | none | — |
 
 Every merge: `verify.sh` no mismatch; lint-staged changed nothing; the hook's gates green at every push (type ratchet 167/167, strict-domain 1113/1113, eslint 0 errors).
 
@@ -54,11 +55,11 @@ No code conflict met so far. Merged clean though both sides moved them (each rea
 
 | file | lanes whose side was not taken (merge #) |
 |---|---|
-| `tests/lint/.lighting-census-baseline.json` | r3-code-c (1), r3-tabs (2), r2-code-a (3), powers (4), w2-fix-data (5) |
+| `tests/lint/.lighting-census-baseline.json` | r3-code-c (1), r3-tabs (2), r2-code-a (3), powers (4), w2-fix-data (5), upkeep-monotone (P2) |
 | `docs/content/wiring-census.json` | r3-tabs (2), w2-write (6) |
 | `scripts/.writer-reach-baseline.json` | r2-code-a (3) (a door: banked once at the close, record 440) |
 | `supabase/functions/_shared/engineBundle.js`, `engineBundle.meta.json` | r2-code-a (3) |
-| `tests/lint/.tuning-inventory.json` | r2-code-a (3) |
+| `tests/lint/.tuning-inventory.json` | r2-code-a (3), upkeep-monotone (P2) |
 | `scripts/census/page-census.register.json` | powers (4) |
 | `scripts/census/pool-dominance.register.json` | w2-fix-data (5) |
 | `tests/lint/presumedThings.register.json` | w2-fix-data (5) (and clean-both at 3, 6) |
@@ -66,7 +67,7 @@ No code conflict met so far. Merged clean though both sides moved them (each rea
 
 Pins (joined side kept inside the hunk): `tests/lint/proseWiringCensus.walker.test.js` `draft.docblockReports.length`: joined 43, r3-tabs 42 (merge 2; the lane's only change in the file).
 
-Merged clean though both sides moved them (for the close to re-derive or measure by its door): `tests/lint/presumedThings.register.json` (3, 6); `tests/lint/presumedThings.widened.register.json` (5, 6); `tests/generators/generationForkCensus.test.js` (4, the mint bound A1); `src/data/dossierStateProse/defense.generated.js` (6, generated); `docs/content/RECEIPT_POOLS_DOSSIER_STATE.md` (6); the pins of merge 6's four tests (§3). `docs/content/prose-shift-register.json` moved by w2-write alone (6): taken from the lane.
+Merged clean though both sides moved them (for the close to re-derive or measure by its door): `tests/lint/presumedThings.register.json` (3, 6); `tests/lint/presumedThings.widened.register.json` (5, 6); `tests/generators/generationForkCensus.test.js` (4, the mint bound A1); `src/data/dossierStateProse/defense.generated.js` (6, generated); `docs/content/RECEIPT_POOLS_DOSSIER_STATE.md` (6); the pins of merge 6's four tests (§3). `docs/content/prose-shift-register.json` moved by w2-write alone (6): taken from the lane. `tests/lint/.tuning-register.json` moved by upkeep-monotone alone (P2): taken from the lane. `src/domain/summary/tonightSheet.js` (P1, clean-both with item 4). The goldens the rebuild's declared moves shift (P2): `tests/property/generatorGoldenMaster.test.js`, `tests/property/espionageDormancyFence.test.js` (red and named by that lane), with its re-keyed pins (its `UPKEEP-MONOTONE-BUILD.md` step 3); the edge bundles are stale against every src change since JOIN-3's rebuild (128ab68c7): rebuilt once at the close.
 
 ## 5. Item 3 at the landed tip 600b9f743 (each run to a file in /home/user/j4out, read by its tail)
 
@@ -107,5 +108,4 @@ A worktree at origin's tip (`git worktree add /home/user/j4wt -b join4 <tip>`, `
 
 ## 9. WHAT IS LEFT (line by line)
 
-1. (Item 5's message sent 14:40; points 1 and 2 made: 9618e0319, 65dc92af9.)
-2. The point left: powers-follow-up at d2ffdbb07 (points 3 and 4 made: b61143029, c7dc0f526). One line back for each; then one closing message with the tip.
+Nothing of the brief or of the chair's points: the eleven (r2-code-b stopped, then landed as point 1), items 3, 4 and 5, and the five points are made. The joined line's code tip 474c5f966. For the close (not this seat's): every row of §4 by its door, once, on the final tree; the edge bundles rebuilt; the lighting census last; the 12 reds named in §5a and `tonightOwnGoal` (red at r2-code-b's own tip a86646b84); `src/pdf/lib/viewModel.js`'s Overview call (FOR THE JOIN, §5a). Item 3's build, grid and count were measured at 600b9f743, before the five points; the points are not counted.
