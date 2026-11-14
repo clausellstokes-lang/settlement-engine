@@ -1,0 +1,13 @@
+1	af8045386	/**
+21	963167f4b	// ROUND THREE, ruling (a): a person's house is printed by its label, the one display leaf.
+22	963167f4b	import { institutionHouseLabel } from '../../../domain/display/institutionDisplayName.js';
+31	af8045386	* R2-CODE-B-5 (the chair's ruling, CENSUS-2 kind d: "Tserenpuntsag Jalayir (the workhouse master), the workhouse master",
+32	af8045386	* r2r-metropolis-7): a row adds a person's title only where the link's own label (the person's name, as the record
+33	af8045386	* holds it) does not already carry it. No word changes. The PDF's twin (pdf/sections/WhoRunsThisTown.jsx) reads the same.
+34	af8045386	* @param {{ name?: string, title?: string } | null | undefined} face
+37	af8045386	const titleAfter = (face) => (face?.title && !carriesTitle(face.name, String(face.title)) ? `, ${face.title}` : '');
+66	af8045386	<strong>{f.place || PLACE[f.rank]}</strong>{' · '}<Face face={f} />{titleAfter(f)}
+78	af8045386	<div style={row}><strong>{g.guild}</strong>{g.boss && <>{' · led by '}<Face face={g.boss} />{titleAfter(g.boss)}</>}</div>
+81	af8045386	<div style={row}>{'handled by '}<Face face={h} />{titleAfter(h)}{h.house ? ` (${institutionHouseLabel(h.house)})` : ''}</div>
+84	af8045386	<Face face={a} />{titleAfter(a)}{a.house ? ` (${institutionHouseLabel(a.house)})` : ''}
+98	963167f4b	<strong>{institutionHouseLabel(f.house)}</strong>{' · '}<Face face={f} />{` · fronts for ${f.guild}`}{f.handler ? ` · handled by ${f.handler}` : ''}

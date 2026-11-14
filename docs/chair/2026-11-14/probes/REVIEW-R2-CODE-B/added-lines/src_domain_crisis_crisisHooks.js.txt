@@ -1,0 +1,36 @@
+1	77ed210af	/**
+39	668fe2baf	import { institutionHouseLabel } from '../display/institutionDisplayName.js';
+85	668fe2baf	// ROUND THREE, ruling (a): the house's label first (the one display leaf: no count range, household
+86	668fe2baf	// range or floor, gate or condition; "(50-100+)" was missed by this function's own pattern), then the
+87	668fe2baf	// district tag a sentence does not speak.
+141	77ed210af	// ROUND THREE item 4 (the chair's ruling): a hook names a house through houseInProse, never raw.
+142	77ed210af	return row.kind === 'institution' ? `the ${houseInProse(row.name)}` : row.name;
+146	77ed210af	* ROUND THREE item 4, ruling (c) (the third seat's named twin: "the houses of worship is stirring it"): every
+147	77ed210af	* LINE_ROLE_CLAUSE verb is singular, so a house whose label is a plural ("Houses of worship", "Inns and taverns") holds
+148	77ed210af	* no clause: the cast hook is not written for it (the lever hook is unchanged). The head is the label before " of ", and a
+149	77ed210af	* pair joined by "and" is plural; the head word's plural is the powers' own reader (`pluralPowerName`). No draw.
+150	77ed210af	* @param {CastRow} row @returns {boolean}
+152	77ed210af	function pluralHouseHolder(row) {
+153	77ed210af	if (row.kind !== 'institution') return false;
+246	9a12e5411	const s = /** @type {HookSettlement} */ (settlement && typeof settlement === 'object' ? settlement : {});
+260	77ed210af	if (holder && clauseOf && str(holder.reason) && !pluralHouseHolder(holder)) {
+288	9a12e5411	* ⛔ A FILL THAT NAMES A ROLE READS THE ROSTER (R2-CODE-B-9; CENSUS-2 at the lane's tip, r2r-town-37:
+289	9a12e5411	* "Maisa ibn Battuta, the healer who identified the outbreak first, has gone quiet." of the dean of
+290	9a12e5411	* the parish churches). `holds` is the holder's OWN roster role the fill's words name: the slot fills
+291	9a12e5411	* only a holder whose card's `role` it matches, and a holder of another role leaves the sentence's own
+292	9a12e5411	* words. Of the five slots only the plague's fill keeps a role word ("the healer"); the others replace
+293	9a12e5411	* their phrase with the name and print no role, so they carry no `holds`.
+294	9a12e5411	* @type {Readonly<Record<string, ReadonlyArray<{ role: CrisisRole, phrase: string, fill: string, kinds: ReadonlyArray<'npc' | 'faction' | 'institution'>, holds?: RegExp }>>>}
+308	9a12e5411	// `holds`: the healers' roles the roster carries (the 720: the apothecary, the midwife, Healer, the hospitaller,
+309	9a12e5411	// the healer) and the physician; an office of a house (the dean, the priest, the hospital's master) is not one.
+317	9a12e5411	* kind, a DM's own text) is returned as it is. A slot that `holds` a role fills only a holder
+318	9a12e5411	* whose own card on `roster` carries it (no card read, no role known: the sentence as written).
+320	9a12e5411	* @param {unknown} [roster] the record's `npcs`, where a slot's holder's own role is read
+323	9a12e5411	export function slotCrisisHook(kind, text, cast, roster = []) {
+328	9a12e5411	const cards = /** @type {Array<{ id?: unknown, name?: unknown, role?: unknown }>} */ (Array.isArray(roster) ? roster : []);
+329	9a12e5411	/** @param {CastRow} row @returns {string} the holder's own roster role, the same card holderWords reads */
+330	9a12e5411	const rosterRoleOf = (row) => str(cards.find((n) => !!n && (str(n.id) || str(n.name)) === row.id)?.role);
+334	9a12e5411	const row = roles.find((r) => r.role === slot.role && slot.kinds.includes(r.kind) && !!str(r.name)
+335	9a12e5411	&& (!slot.holds || slot.holds.test(rosterRoleOf(r))));
+356	9a12e5411	const { cast } = effectiveCastOf(/** @type {never} */ (s), /** @type {never} */ (entry));
+357	9a12e5411	return slotCrisisHook(str(entry.type), entry.crisisHook, cast, s.npcs);

@@ -1,0 +1,8 @@
+108	e878a1367	// ROUND THREE (the chair's ruling; the cut's #163 #427 #497 #891, HIGH): the need and the impact sentence
+109	e878a1367	// after it are TWO things. They were two inline siblings with a margin between them and no character, so
+110	e878a1367	// the page's own text read "Needs TimberSupply route severed." wherever it is copied, exported or read
+111	e878a1367	// aloud. They are two elements now, and the need closes with a full stop and a real space before the
+112	e878a1367	// sentence that follows, so no surface prints them run together. No word changes.
+113	e878a1367	const sentence = r.impact && !impactShown ? truncateAtWord(r.impact, 70) : '';
+118	e878a1367	<span data-testid="service-need">Needs <strong>{resourceDisplayName(r.resource)}</strong>{sentence ? '.' : ''}</span>
+119	e878a1367	{sentence&&<>{' '}<span data-testid="service-need-impact" style={{fontStyle:'italic'}}>{sentence}</span></>}

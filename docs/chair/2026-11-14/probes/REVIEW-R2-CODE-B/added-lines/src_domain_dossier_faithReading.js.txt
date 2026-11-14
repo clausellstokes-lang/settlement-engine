@@ -1,0 +1,57 @@
+1	ffe89ab39	/**
+36	3b7a826e5	import { isMaterializedCustomContent } from '../content/customContentSemanticAuthority.js';
+60	57395ee18	* @property {boolean} [anotherGoverns] another power governs (R2-CODE-B round 3, #ww-536)
+80	8b27458cd	* @property {boolean} roadBarred a siege is in force, so the road to a neighbour's church is barred (R2-CODE-B-SIDE item 7)
+98	8b27458cd	* @property {unknown} [stress] the crisis container (one entry or a list)
+108	ffe89ab39	* "Access to parish church": the place has no church; its people use a neighbour's. R2-CODE-B item 6
+109	ffe89ab39	* (the cold list REVIEW-W2A-3 #180: "its people walk to the next village's parish church" in a thorp
+110	ffe89ab39	* whose only "Access to" row is "Access to external mill"): the access must be to a house of worship,
+111	ffe89ab39	* by its catalogue key or the seam's label, never any "Access to …" row.
+116	8b27458cd	* A siege in force (R2-CODE-B-SIDE item 7): the record's crisis container, `stress` (one entry or a list), as the
+117	8b27458cd	* generator writes it. Read here rather than through canonicalAccessors.js :: canonStressors: importing the accessor
+118	8b27458cd	* moved the observed-shape ratchet's import graph (tests/lint/observedShapeReaders.walker.test.js), and this leaf
+119	8b27458cd	* reads one key.
+120	8b27458cd	* @param {FaithReadingSettlement} s @returns {boolean}
+122	8b27458cd	function besieged(s) {
+123	8b27458cd	const c = s.stress;
+124	8b27458cd	const entries = Array.isArray(c) ? c : (c && typeof c === 'object' ? [c] : []);
+125	8b27458cd	return entries.some((e) => !!e && typeof e === 'object' && /** @type {Record<string, unknown>} */ (e).type === 'under_siege');
+173	3b7a826e5	* A HOUSE BY ITS NATIVE IDENTITY, NEVER BY A NAME A USER CAN TYPE (R2-CODE-B-SIDE item 7b; the chair's ruling of
+174	3b7a826e5	* 2026-11-13 23:15, from the data lane's customContentPresentationClaims finding: a custom house named "... Cathedral
+175	3b7a826e5	* ..." was read as a church). A stamped native house is read by its catalogue id, which a rename does not touch
+176	3b7a826e5	* ('parish_church', 'access_to_parish_church', 'great_cathedral': the catalogue's own words); a custom house (its own
+177	3b7a826e5	* provenance, content/customContentSemanticAuthority.js :: isMaterializedCustomContent, the boundary the roster's
+178	3b7a826e5	* other native readers stop at) is no house of worship by its name, and custom content declares no kind this reading
+179	3b7a826e5	* could take; an unstamped legacy house keeps the name it always had.
+180	3b7a826e5	* @param {unknown} inst @returns {string}
+182	3b7a826e5	function nativeNameOf(inst) {
+183	3b7a826e5	if (!inst || typeof inst !== 'object' || isMaterializedCustomContent(inst)) return '';
+184	e5640b041	/** @type {unknown} */
+185	3b7a826e5	const id = text(r.catalogId);
+186	3b7a826e5	return id ? id.replace(/_/g, ' ') : text(r.name);
+202	3b7a826e5	const name = nativeNameOf(inst);
+263	e5640b041	let bestRow = null;
+271	e5640b041	bestRow = f;
+273	57395ee18	// R2-CODE-B round 3 (the increment's #ww-536, the chair's ruling): where ANOTHER power governs, the religious power is
+274	57395ee18	// a contender, and the line says only what the powers' record holds: never "the real political weight".
+275	57395ee18	if (best && !best.governs) {
+276	57395ee18	const factions = Array.isArray(s.powerStructure?.factions) ? s.powerStructure.factions : [];
+277	e5640b041	best.anotherGoverns = factions.some((f) => f !== bestRow && f?.isGoverning === true);
+311	8b27458cd	// R2-CODE-B-SIDE item 7 (the increment's rww-thorp-under_siege-1): under a siege nothing goes out by road, so no one
+312	8b27458cd	// walks to the next village's church. The crisis container is the canonical accessor's (the one facts/crisisKind.js
+313	8b27458cd	// :: crisisOf reads; not imported here, so this leaf's import graph stays as it was).
+314	8b27458cd	roadBarred: besieged(s),
+377	ffe89ab39	function quietOf(dial, shrine = true) {
+378	ffe89ab39	const line = dial <= 25
+379	ffe89ab39	? 'The people keep their own quiet observances, seldom and lightly. No single creed holds sway, and the shrines answer to no named god.'
+380	ffe89ab39	: dial >= 75
+381	ffe89ab39	? 'The people keep their own quiet observances, and keep them faithfully. No single creed holds sway, and the shrines answer to no named god.'
+382	ffe89ab39	: QUIET_OBSERVANCES_LINE;
+383	ffe89ab39	// R2-CODE-B item 6: "the shrines" presumes a shrine the roster holds (the reading's own `shrine`); where it
+384	ffe89ab39	// holds none, the line keeps its creed and names no shrine.
+385	ffe89ab39	return shrine ? line : line.replace(', and the shrines answer to no named god.', ', and no god is named here.');
+402	57395ee18	if (f.power >= 30 && !f.anotherGoverns) return `Real political weight rests with the ${f.name}.`;
+425	8b27458cd	out.push(reading.roadBarred
+426	8b27458cd	? `${cap(place)} has no church of its own, and the siege keeps its people from the next village’s parish church.`
+427	8b27458cd	: `${cap(place)} has no church of its own; its people walk to the next village’s parish church for the rites.`);
+434	ffe89ab39	return Object.freeze([quietOf(reading.dial, reading.shrine)]);

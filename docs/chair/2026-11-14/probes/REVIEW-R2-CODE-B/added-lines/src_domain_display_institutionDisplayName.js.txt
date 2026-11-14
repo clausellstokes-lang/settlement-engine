@@ -1,0 +1,47 @@
+1	a2088f22c	/**
+83	a2088f22c	* @type {Readonly<Record<string, string>>}
+108	a2088f22c	});
+125	a2088f22c	* @returns {string}
+150	a2088f22c	* ROUND THREE, ruling (a) (the chair, 2026-11-13; ROUND-3-CUT §7 (a)): the same strip covers the
+151	a2088f22c	* household ranges and floors ("(75-650 households)", "(3500+ households)": digit-led) and the
+152	a2088f22c	* display-name table's own ranges ("Houses of worship (10-30)", stripped after the table maps).
+157	a2088f22c	* A COUNT WORD IS A PLURAL, NEVER A PARENTHESIS (ruling (a)): the catalogue's one count word,
+158	a2088f22c	* "Inn (multiple)", reads as the plain plural of its house. Keyed by the catalogue name; read only by
+159	a2088f22c	* the house label below, so `institutionDisplayName` (which generators read into stored sentences)
+160	a2088f22c	* and every record keep their bytes.
+163	a2088f22c	export const HOUSE_LABEL_PLURALS = Object.freeze({
+164	a2088f22c	'Inn (multiple)': 'Inns',
+166	a2088f22c	const PLURAL_BY_LOWER = new Map(
+167	a2088f22c	Object.entries(HOUSE_LABEL_PLURALS).map(([key, label]) => [key.toLowerCase(), label]),
+171	a2088f22c	* THE HOUSE'S LABEL: the one display leaf every surface reads when it prints a house (the roster, the
+172	a2088f22c	* Services, the Power and Crisis tabs, the Outlook, the NPC cards, the chain cards, the PDF and the
+173	a2088f22c	* Foundry journal): the seam's display label, without the catalogue's count range, household range or
+174	a2088f22c	* floor, population gate or gating condition, and with a count word carried by a plural. The in-world
+175	a2088f22c	* qualifiers stay as part of the name ("(part-time)", "(established)", "(open cast)", "(guild)",
+176	a2088f22c	* "(district)", "(resident)"). Display only: the catalogue's names, the record and every key keep the
+177	a2088f22c	* raw spelling (a MATCH reads the raw name, by this module's law). A custom house ('Stormwatch Keep')
+178	a2088f22c	* carries no such bracket and passes through unchanged.
+184	a2088f22c	const plural = PLURAL_BY_LOWER.get(label.toLowerCase());
+185	a2088f22c	if (plural) return plural;
+191	a2088f22c	* A STORED SENTENCE THAT NAMES A HOUSE, read with the house's label (ruling (a); the Outlook's
+192	a2088f22c	* "5 institutions critically impaired by siege: Taverns (5-20), …", written at birth by
+193	a2088f22c	* generators/economy/viability.js and kept in the record). The record keeps its bytes (a saved world
+194	a2088f22c	* reads the same way); at read, every name of a house the settlement holds, in its raw or its
+195	a2088f22c	* display spelling, is replaced by the house's label wherever it stands whole in the sentence.
+196	a2088f22c	* Longest names first, so "Parish churches (2-5)" is read before any shorter name inside it. A name
+197	a2088f22c	* with no machinery in it is not touched. Pure: no draw, no write.
+198	a2088f22c	* @param {unknown} text the stored sentence
+199	a2088f22c	* @param {ReadonlyArray<unknown>} houses the settlement's institutions (objects or raw names)
+202	a2088f22c	export function houseLabelsInText(text, houses) {
+203	a2088f22c	let out = typeof text === 'string' ? text : '';
+204	a2088f22c	if (!out) return out;
+205	a2088f22c	/** @type {Map<string, string>} */
+206	a2088f22c	const swaps = new Map();
+207	a2088f22c	for (const h of Array.isArray(houses) ? houses : []) {
+208	a2088f22c	const raw = typeof h === 'string' ? h : (h && typeof h === 'object' ? /** @type {{ name?: unknown }} */ (h).name : null);
+209	a2088f22c	if (typeof raw !== 'string' || !raw) continue;
+210	a2088f22c	const label = institutionHouseLabel(raw);
+211	a2088f22c	for (const spelled of [raw, institutionDisplayName(raw)]) {
+212	a2088f22c	if (spelled && spelled !== label && !swaps.has(spelled)) swaps.set(spelled, label);
+215	a2088f22c	for (const [spelled, label] of [...swaps].sort((a, b) => b[0].length - a[0].length)) {
+216	a2088f22c	if (out.includes(spelled)) out = out.split(spelled).join(label);

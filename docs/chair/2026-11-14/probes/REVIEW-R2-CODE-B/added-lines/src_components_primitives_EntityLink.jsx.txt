@@ -1,0 +1,8 @@
+4	69b449d97	import { institutionHouseLabel } from '../../domain/display/institutionDisplayName.js';
+51	69b449d97	// ROUND THREE, ruling (a): a door to a HOUSE prints the house's label, the one display leaf (no
+52	69b449d97	// catalogue count range, household range, gate or condition). The index keeps the raw name, which
+53	69b449d97	// the lookups and the mention linker match on; only the printed word is the label.
+54	69b449d97	const house = (entry?.type || type) === 'institution';
+55	69b449d97	const printed = (/** @type {string} */ t) => (house && t ? institutionHouseLabel(t) : t);
+57	69b449d97	const text = printed(fallback || '');
+69	69b449d97	const destination = printed(entry.currentName || fallback || entry.label || '');

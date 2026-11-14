@@ -1,0 +1,142 @@
+{ r2r: 13, r2s: 44, rr3: 84 } { 'Warden/warden': 36, 'Grain Steward/grain': 62, 'Healer/healer': 43 }
+r2r-thorp-5 | thorp | 23 | Deirdre Murphy | Warden | warden | monster_pressure | monster_pressure | celtic | [] | Access to external mill; Wayside shrine; Access to parish church
+r2r-thorp-10 | thorp | 10 | Filomena Novikov | Warden | warden | monster_pressure | monster_pressure | slavic | [] | Access to external mill; Access to parish church
+r2r-thorp-17 | thorp | 11 | Ehecatl Chel | Grain Steward | grain | famine | famine | mesoamerican | [] | Access to external mill; Access to parish church
+r2r-thorp-19 | thorp | 26 | Fionnuala O'Connor | Warden | warden | monster_pressure | monster_pressure | celtic | [] | Access to external mill; Wayside shrine; Access to parish church
+r2r-thorp-38 | thorp | 26 | Gantulga Naiman | Grain Steward | grain | famine | famine | steppe | [] | Access to external mill; Access to parish church
+r2r-thorp-46 | thorp | 26 | Sübetei Kereit | Grain Steward | grain | famine | famine | steppe | [] | Access to external mill; Wayside shrine; Access to parish church
+r2r-thorp-54 | thorp | 17 | Grata Brutus | Grain Steward | grain | famine | famine | latin | [] | Access to external mill; Access to parish church
+r2r-hamlet-9 | hamlet | 33 | Christoph Schneider | Warden | warden | monster_pressure | monster_pressure | germanic | [] | Access to external mill; Access to parish church
+r2r-hamlet-16 | hamlet | 20 | Nicte Cohuoh | Grain Steward | grain | famine | famine | mesoamerican | [] | Access to external mill; Access to parish church; Citizen militia
+r2r-hamlet-24 | hamlet | 100 | Madhuri Ahuja | Grain Steward | grain | famine | famine | south_asian | [] | Access to external mill; Access to parish church
+r2r-hamlet-28 | hamlet | 23 | Mimir Svensson | Grain Steward | grain | famine | famine | norse | [] | Access to external mill; Access to parish church
+r2r-hamlet-36 | hamlet | 74 | Husayn al-Malik | Warden | warden | monster_pressure | monster_pressure | arabic | [] | Access to external mill; Access to parish church
+r2r-village-41 | village | 81 | Masao Ma | Warden | warden | monster_pressure | monster_pressure | east_asian | [] | Mill; Parish church
+r2s-famine-thorp-0 | thorp | 19 | Anastasios Argyros | Grain Steward | grain | famine | famine | greek | [] | Access to external mill; Access to parish church
+r2s-famine-thorp-1 | thorp | 20 | Renuka Bhatt | Grain Steward | grain | famine | famine | south_asian | [] | Access to external mill; Wayside shrine
+r2s-famine-thorp-2 | thorp | 28 | Liber MacCarthy | Grain Steward | grain | famine | famine | celtic | [] | Access to external mill
+r2s-famine-thorp-3 | thorp | 16 | Iulia Varro | Grain Steward | grain | famine | famine | latin | [] | Access to external mill; Access to parish church
+r2s-famine-hamlet-0 | hamlet | 35 | Gallus Cato | Grain Steward | grain | famine | famine | latin | [] | Access to external mill; Wayside shrine; Access to parish church
+r2s-famine-hamlet-1 | hamlet | 41 | Shashi Chaudhary | Grain Steward | grain | famine | famine | south_asian | [] | Access to external mill; Access to parish church
+r2s-famine-hamlet-2 | hamlet | 92 | Klara Pavlov | Grain Steward | grain | famine | famine | slavic | [] | Access to external mill; Wayside shrine; Access to parish church
+r2s-famine-hamlet-3 | hamlet | 22 | Pavel Bykov | Grain Steward | grain | famine | famine | slavic | [] | Access to external mill; Access to parish church
+r2s-occupied-thorp-1 | thorp | 17 | Saraswati Bhat | Grain Steward | grain | famine | occupied+famine | south_asian | [] | Access to external mill; Wayside shrine; Access to parish church
+r2s-occupied-hamlet-0 | hamlet | 20 | Zanabazar Borjigin | Grain Steward | grain | famine | occupied+famine | steppe | [] | Access to external mill; Access to parish church
+r2s-occupied-hamlet-1 | hamlet | 95 | Lasair Quinn | Grain Steward | grain | famine | occupied+famine | celtic | [] | Access to external mill; Wayside shrine; Access to parish church
+r2s-recently_betrayed-hamlet-2 | hamlet | 86 | Anna Choniates | Grain Steward | grain | famine | recently_betrayed+famine | greek | [] | Access to external mill; Access to parish church
+r2s-plague_onset-thorp-0 | thorp | 14 | Jiahao Wu | Healer | healer | plague_onset | plague_onset | east_asian | [] | Access to external mill
+r2s-plague_onset-thorp-1 | thorp | 25 | Raj Banerjee | Healer | healer | plague_onset | plague_onset | south_asian | [] | Access to external mill
+r2s-plague_onset-thorp-2 | thorp | 9 | Kaloyan Petrov | Healer | healer | plague_onset | plague_onset | slavic | [] | Access to external mill; Access to parish church
+r2s-plague_onset-thorp-3 | thorp | 15 | Tribhuvan Bajaj | Healer | healer | plague_onset | plague_onset | south_asian | [] | Access to external mill
+r2s-plague_onset-hamlet-0 | hamlet | 25 | Daria Pavlov | Healer | healer | plague_onset | plague_onset | slavic | [] | Access to external mill; Access to parish church
+r2s-plague_onset-hamlet-1 | hamlet | 35 | Roswitha Müller | Healer | healer | plague_onset | plague_onset | germanic | [] | Access to external mill; Access to parish church; Citizen militia
+r2s-plague_onset-hamlet-2 | hamlet | 24 | Archana Acharya | Healer | healer | plague_onset | plague_onset | south_asian | [] | Access to external mill; Access to parish church
+r2s-succession_void-thorp-0 | thorp | 8 | Shaohua Liu | Grain Steward | grain | famine | succession_void+famine | east_asian | [] | Access to external mill; Access to parish church
+r2s-succession_void-thorp-1 | thorp | 11 | Imma Koch | Grain Steward | grain | famine | succession_void+famine | germanic | [] | Access to external mill; Access to parish church
+r2s-monster_pressure-thorp-0 | thorp | 16 | Omkara Banerjee | Warden | warden | monster_pressure | monster_pressure | south_asian | [] | Access to external mill; Access to parish church
+r2s-monster_pressure-thorp-1 | thorp | 18 | Ronan Murphy | Warden | warden | monster_pressure | monster_pressure | celtic | [] | Access to external mill
+r2s-monster_pressure-thorp-3 | thorp | 10 | Ollin Chuc | Warden | warden | monster_pressure | monster_pressure | mesoamerican | [] | Access to external mill; Access to parish church
+r2s-monster_pressure-hamlet-0 | hamlet | 56 | Birger Svensson | Warden | warden | monster_pressure | monster_pressure | norse | [] | Access to external mill; Access to parish church
+r2s-monster_pressure-hamlet-1 | hamlet | 64 | Panayot Morozov | Warden | warden | monster_pressure | monster_pressure | slavic | [] | Access to external mill; Access to parish church
+r2s-monster_pressure-hamlet-2 | hamlet | 94 | Yesülün Qonggirad | Warden | warden | monster_pressure | monster_pressure | steppe | [] | Access to external mill; Wayside shrine; Access to parish church
+r2s-monster_pressure-hamlet-3 | hamlet | 48 | Elias Chrysoberges | Warden | warden | monster_pressure | monster_pressure | greek | [] | Access to external mill; Access to parish church
+r2s-monster_pressure-village-0 | village | 267 | Nalayani Das | Warden | warden | monster_pressure | monster_pressure | south_asian | [] | Mill; Sawmill; Parish church; Apothecary
+r2s-monster_pressure-village-1 | village | 245 | Güchlüg Ongut | Warden | warden | monster_pressure | monster_pressure | steppe | [] | Mill; Parish church
+r2s-monster_pressure-village-2 | village | 242 | Yashodha Jha | Warden | warden | monster_pressure | monster_pressure | south_asian | [] | Mill; Parish church; Healer (divine, 1st level)
+r2s-monster_pressure-village-3 | village | 207 | Samira al-Masri | Warden | warden | monster_pressure | monster_pressure | arabic | [] | Mill; Parish church
+r2s-insurgency-hamlet-0 | hamlet | 35 | Sophronios Chomatenos | Grain Steward | grain | famine | insurgency+famine | greek | [] | Access to external mill; Access to parish church
+r2s-insurgency-hamlet-2 | hamlet | 72 | Paullus Flavius | Grain Steward | grain | famine | insurgency+famine | latin | [] | Access to external mill; Wayside shrine; Access to parish church
+r2s-wartime-thorp-2 | thorp | 9 | Salim al-Hassan | Grain Steward | grain | famine | wartime+famine | arabic | [] | Access to external mill; Access to parish church
+r2s-wartime-hamlet-3 | hamlet | 84 | Eamon Doherty | Grain Steward | grain | famine | wartime+famine | celtic | [] | Access to external mill; Access to parish church
+r2s-mass_migration-thorp-0 | thorp | 21 | Mongke Jadaran | Healer | healer | mass_migration | mass_migration | steppe | [] | Access to external mill; Access to parish church
+r2s-mass_migration-thorp-1 | thorp | 16 | Wershi Borjigin | Healer | healer | mass_migration | mass_migration | steppe | [] | Access to external mill; Wayside shrine; Access to parish church
+r2s-mass_migration-thorp-2 | thorp | 24 | Koviljka Novikov | Healer | healer | mass_migration | mass_migration | slavic | [] | Access to external mill; Access to parish church
+r2s-mass_migration-thorp-3 | thorp | 7 | Ibrahim al-Malik | Healer | healer | mass_migration | mass_migration | arabic | [] | Access to external mill; Access to parish church
+r2s-mass_migration-hamlet-0 | hamlet | 83 | Varro Bassus | Healer | healer | mass_migration | mass_migration | latin | [] | Access to external mill; Access to parish church
+r2s-mass_migration-hamlet-1 | hamlet | 60 | Ioanna Argyros | Healer | healer | mass_migration | mass_migration | greek | [] | Access to external mill; Access to parish church; Citizen militia
+r2s-mass_migration-hamlet-2 | hamlet | 53 | Domaldr Andersson | Healer | healer | mass_migration | mass_migration | norse | [] | Access to external mill; Access to parish church
+r2s-mass_migration-hamlet-3 | hamlet | 82 | Yaretzi Chi | Healer | healer | mass_migration | mass_migration | mesoamerican | [] | Access to external mill; Access to parish church; Citizen militia
+rr3-thorp-calm-rand-0 | thorp | 9 | Bilgüün Tayichi'ud | Grain Steward | grain | famine | famine | steppe | [] | Access to external mill; Access to parish church
+rr3-thorp-under_siege-rand-3 | thorp | 8 | Nabila al-Malik | Grain Steward | grain | famine | under_siege+famine | arabic | [] | Access to external mill; Wayside shrine; Access to parish church
+rr3-thorp-famine-rand-0 | thorp | 14 | Jade Caan | Grain Steward | grain | famine | famine | mesoamerican | [] | Access to external mill
+rr3-thorp-famine-rand-1 | thorp | 12 | Gavril Ivanov | Grain Steward | grain | famine | famine | slavic | [] | Access to external mill; Access to parish church
+rr3-thorp-famine-rand-2 | thorp | 17 | Vidar Bjornsson | Grain Steward | grain | famine | famine | norse | [] | Access to external mill; Wayside shrine; Access to parish church
+rr3-thorp-famine-rand-3 | thorp | 22 | Otgontuya Taichiud | Grain Steward | grain | famine | famine | steppe | [] | Access to external mill
+rr3-thorp-famine-rand-4 | thorp | 15 | Khalid al-Hassan | Grain Steward | grain | famine | famine | arabic | [] | Access to external mill
+rr3-thorp-famine-rand-5 | thorp | 17 | Mönkhzul Taichiud | Grain Steward | grain | famine | famine | steppe | [] | Access to external mill
+rr3-thorp-famine-port-0 | thorp | 11 | Priya Acharya | Grain Steward | grain | famine | famine | south_asian | [] | Access to external mill; Access to parish church
+rr3-thorp-famine-port-1 | thorp | 9 | Jamila ibn Ahmed | Grain Steward | grain | famine | famine | arabic | [] | Access to external mill; Access to parish church
+rr3-thorp-indebted-rand-0 | thorp | 21 | Lasairfhiona Murphy | Grain Steward | grain | famine | indebted+famine | celtic | [] | Access to external mill; Wayside shrine; Access to parish church
+rr3-thorp-plague_onset-rand-0 | thorp | 8 | Tabassum ibn Ahmed | Healer | healer | plague_onset | plague_onset | arabic | [] | Access to external mill; Access to parish church
+rr3-thorp-plague_onset-rand-1 | thorp | 25 | Magnus Gunnarsson | Healer | healer | plague_onset | plague_onset | norse | [] | Access to external mill
+rr3-thorp-plague_onset-rand-2 | thorp | 24 | Göndul Eriksson | Healer | healer | plague_onset | plague_onset | norse | [] | Access to external mill; Access to parish church
+rr3-thorp-plague_onset-rand-3 | thorp | 16 | Gudrun Haraldsson | Grain Steward | grain | famine | plague_onset+famine | norse | [] | Access to external mill
+rr3-thorp-plague_onset-rand-4 | thorp | 14 | Abaqa Kiyad | Healer | healer | plague_onset | plague_onset | steppe | [] | Access to external mill; Access to parish church
+rr3-thorp-plague_onset-rand-5 | thorp | 6 | Tanya Volkov | Healer | healer | plague_onset | plague_onset | slavic | [] | Access to external mill
+rr3-thorp-plague_onset-port-0 | thorp | 29 | Laskarina Botaneiates | Healer | healer | plague_onset | plague_onset | greek | [] | Access to external mill
+rr3-thorp-plague_onset-port-1 | thorp | 11 | Arghun Naiman | Healer | healer | plague_onset | plague_onset | steppe | [] | Access to external mill
+rr3-thorp-monster_pressure-rand-0 | thorp | 5 | Christophoros Attaleiates | Warden | warden | monster_pressure | monster_pressure | greek | [] | Access to external mill
+rr3-thorp-monster_pressure-rand-1 | thorp | 10 | Jaguar Chan | Warden | warden | monster_pressure | monster_pressure | mesoamerican | [] | Access to external mill
+rr3-thorp-monster_pressure-rand-2 | thorp | 17 | Suvarchala Ahuja | Warden | warden | monster_pressure | monster_pressure | south_asian | [] | Access to external mill; Access to parish church
+rr3-thorp-monster_pressure-rand-3 | thorp | 6 | Pitao Chi | Warden | warden | monster_pressure | monster_pressure | mesoamerican | [] | Access to external mill; Access to parish church
+rr3-thorp-monster_pressure-rand-4 | thorp | 24 | Olof Gunnarsson | Warden | warden | monster_pressure | monster_pressure | norse | [] | Access to external mill; Wayside shrine; Access to parish church
+rr3-thorp-monster_pressure-rand-5 | thorp | 25 | Huda al-Malik | Warden | warden | monster_pressure | monster_pressure | arabic | [] | Access to external mill; Wayside shrine; Access to parish church
+rr3-thorp-monster_pressure-port-1 | thorp | 18 | Yafang Huang | Warden | warden | monster_pressure | monster_pressure | east_asian | [] | Access to external mill
+rr3-thorp-wartime-rand-0 | thorp | 22 | Ogmund Ragnarsson | Grain Steward | grain | famine | wartime+famine | norse | [] | Access to external mill; Wayside shrine; Access to parish church
+rr3-thorp-mass_migration-rand-0 | thorp | 28 | Suvarchala Balan | Healer | healer | mass_migration | mass_migration | south_asian | [] | Access to external mill; Access to parish church
+rr3-thorp-mass_migration-rand-1 | thorp | 9 | Gawain Murphy | Healer | healer | mass_migration | mass_migration | celtic | [] | Access to external mill; Access to parish church
+rr3-thorp-mass_migration-rand-2 | thorp | 12 | Abir al-Rahman | Healer | healer | mass_migration | mass_migration | arabic | [] | Access to external mill; Wayside shrine; Access to parish church
+rr3-thorp-mass_migration-rand-3 | thorp | 15 | Xochicueitl Batab | Healer | healer | mass_migration | mass_migration | mesoamerican | [] | Access to external mill; Access to parish church
+rr3-thorp-mass_migration-rand-4 | thorp | 20 | Zara al-Qadir | Healer | healer | mass_migration | mass_migration | arabic | [] | Access to external mill; Access to parish church
+rr3-thorp-mass_migration-rand-5 | thorp | 17 | Osterhild Wagner | Healer | healer | mass_migration | mass_migration | germanic | [] | Access to external mill
+rr3-thorp-mass_migration-port-0 | thorp | 11 | Freya Ragnarsson | Healer | healer | mass_migration | mass_migration | norse | [] | Access to external mill
+rr3-thorp-mass_migration-port-1 | thorp | 23 | Clodia Severus | Healer | healer | mass_migration | mass_migration | latin | [] | Access to external mill
+rr3-thorp-under_siege+famine-rand-0 | thorp | 22 | Qudama ibn Ahmed | Grain Steward | grain | famine | under_siege+famine | arabic | [] | Access to external mill; Access to parish church
+rr3-thorp-under_siege+famine-rand-1 | thorp | 15 | Yanjmaa Naiman | Grain Steward | grain | famine | under_siege+famine | steppe | [] | Access to external mill; Wayside shrine; Access to parish church
+rr3-thorp-under_siege+famine-rand-2 | thorp | 5 | Dzuna Chel | Grain Steward | grain | famine | under_siege+famine | mesoamerican | [] | Access to external mill
+rr3-thorp-under_siege+famine-rand-3 | thorp | 23 | Rong Yang | Grain Steward | grain | famine | under_siege+famine | east_asian | [] | Access to external mill; Access to parish church
+rr3-thorp-under_siege+famine-rand-4 | thorp | 27 | Theodosia Alexios | Grain Steward | grain | famine | under_siege+famine | greek | [] | Access to external mill; Access to parish church
+rr3-thorp-under_siege+famine-rand-5 | thorp | 30 | Lakshmana Balan | Grain Steward | grain | famine | under_siege+famine | south_asian | [] | Access to external mill
+rr3-thorp-under_siege+famine-port-0 | thorp | 29 | Cveta Novikov | Grain Steward | grain | famine | under_siege+famine | slavic | [] | Access to external mill; Access to parish church
+rr3-thorp-under_siege+famine-port-1 | thorp | 9 | Christofora Bryennios | Grain Steward | grain | famine | under_siege+famine | greek | [] | Access to external mill; Access to parish church
+rr3-hamlet-famine-rand-0 | hamlet | 78 | Theophanes Chortasmenos | Grain Steward | grain | famine | famine | greek | [] | Access to external mill; Wayside shrine; Access to parish church
+rr3-hamlet-famine-rand-1 | hamlet | 99 | Jagannath Ahuja | Grain Steward | grain | famine | famine | south_asian | [] | Access to external mill; Wayside shrine; Access to parish church
+rr3-hamlet-famine-rand-2 | hamlet | 72 | Kilian Fitzgerald | Grain Steward | grain | famine | famine | celtic | [] | Access to external mill; Access to parish church
+rr3-hamlet-famine-rand-3 | hamlet | 72 | Sabah al-Farabi | Grain Steward | grain | famine | famine | arabic | [] | Access to external mill; Access to parish church
+rr3-hamlet-famine-rand-4 | hamlet | 54 | Seianus Aurelius | Grain Steward | grain | famine | famine | latin | [] | Access to external mill; Access to parish church
+rr3-hamlet-famine-rand-5 | hamlet | 42 | Lentulus Corvinus | Grain Steward | grain | famine | famine | latin | [] | Access to external mill; Access to parish church
+rr3-hamlet-famine-port-1 | hamlet | 39 | Ruqayya ibn Khalid | Grain Steward | grain | famine | famine | arabic | [] | Access to external mill; Access to parish church
+rr3-hamlet-infiltrated-rand-5 | hamlet | 98 | Filippos Chortasmenos | Grain Steward | grain | famine | infiltrated+famine | greek | [] | Access to external mill; Wayside shrine; Access to parish church; Citizen militia
+rr3-hamlet-plague_onset-rand-0 | hamlet | 24 | Ixquil Ek | Healer | healer | plague_onset | plague_onset | mesoamerican | [] | Access to external mill; Access to parish church
+rr3-hamlet-plague_onset-rand-1 | hamlet | 39 | Elchidei Merkit | Healer | healer | plague_onset | plague_onset | steppe | [] | Access to external mill; Access to parish church
+rr3-hamlet-plague_onset-rand-2 | hamlet | 79 | Kaspar Müller | Healer | healer | plague_onset | plague_onset | germanic | [] | Access to external mill; Access to parish church
+rr3-hamlet-plague_onset-rand-4 | hamlet | 90 | Alfhild Andersson | Healer | healer | plague_onset | plague_onset | norse | [] | Access to external mill; Access to parish church
+rr3-hamlet-plague_onset-rand-5 | hamlet | 95 | Minucia Varro | Healer | healer | plague_onset | plague_onset | latin | [] | Access to external mill; Access to parish church
+rr3-hamlet-plague_onset-port-0 | hamlet | 74 | Geira Asgersson | Healer | healer | plague_onset | plague_onset | norse | [] | Access to external mill; Access to parish church; Citizen militia
+rr3-hamlet-monster_pressure-rand-0 | hamlet | 52 | Fulvia Varro | Warden | warden | monster_pressure | monster_pressure | latin | [] | Access to external mill; Access to parish church
+rr3-hamlet-monster_pressure-rand-2 | hamlet | 35 | Lyuben Ivanov | Warden | warden | monster_pressure | monster_pressure | slavic | [] | Access to external mill; Access to parish church
+rr3-hamlet-monster_pressure-rand-3 | hamlet | 80 | Járnsaxa Olafsson | Warden | warden | monster_pressure | monster_pressure | norse | [] | Access to external mill; Access to parish church
+rr3-hamlet-monster_pressure-rand-4 | hamlet | 75 | Charis Akropolites | Warden | warden | monster_pressure | monster_pressure | greek | [] | Access to external mill; Wayside shrine; Access to parish church
+rr3-hamlet-monster_pressure-rand-5 | hamlet | 23 | Khatan Kereit | Warden | warden | monster_pressure | monster_pressure | steppe | [] | Access to external mill; Access to parish church
+rr3-hamlet-monster_pressure-port-0 | hamlet | 64 | Sak Cohuoh | Warden | warden | monster_pressure | monster_pressure | mesoamerican | [] | Access to external mill; Access to parish church
+rr3-hamlet-monster_pressure-port-1 | hamlet | 75 | Ogmund Svensson | Warden | warden | monster_pressure | monster_pressure | norse | [] | Access to external mill; Wayside shrine; Access to parish church
+rr3-hamlet-mass_migration-rand-0 | hamlet | 52 | Tribhuvan Desai | Healer | healer | mass_migration | mass_migration | south_asian | [] | Access to external mill; Access to parish church; Citizen militia
+rr3-hamlet-mass_migration-rand-2 | hamlet | 59 | Dorothea Koch | Healer | healer | mass_migration | mass_migration | germanic | [] | Access to external mill; Access to parish church
+rr3-hamlet-mass_migration-rand-3 | hamlet | 80 | Vladimir Ivanov | Healer | healer | mass_migration | mass_migration | slavic | [] | Access to external mill; Access to parish church
+rr3-hamlet-mass_migration-rand-4 | hamlet | 54 | Itzel Batab | Healer | healer | mass_migration | mass_migration | mesoamerican | [] | Access to external mill; Access to parish church
+rr3-hamlet-mass_migration-rand-5 | hamlet | 81 | Barbara Chomatenos | Healer | healer | mass_migration | mass_migration | greek | [] | Access to external mill; Access to parish church
+rr3-hamlet-mass_migration-port-0 | hamlet | 36 | Yoshiko Yang | Healer | healer | mass_migration | mass_migration | east_asian | [] | Access to external mill; Access to parish church
+rr3-hamlet-mass_migration-port-1 | hamlet | 34 | Unurtsetseg Merkit | Healer | healer | mass_migration | mass_migration | steppe | [] | Access to external mill; Access to parish church
+rr3-hamlet-under_siege+famine-rand-0 | hamlet | 49 | Jyoti Basu | Grain Steward | grain | famine | under_siege+famine | south_asian | [] | Access to external mill; Access to parish church
+rr3-hamlet-under_siege+famine-rand-1 | hamlet | 29 | Dragomir Pavlov | Grain Steward | grain | famine | under_siege+famine | slavic | [] | Access to external mill; Access to parish church
+rr3-hamlet-under_siege+famine-rand-2 | hamlet | 85 | Atotoztli Balam | Grain Steward | grain | famine | under_siege+famine | mesoamerican | [] | Access to external mill; Access to parish church
+rr3-hamlet-under_siege+famine-rand-3 | hamlet | 26 | Zorana Lebedev | Grain Steward | grain | famine | under_siege+famine | slavic | [] | Access to external mill; Wayside shrine; Access to parish church; Citizen militia
+rr3-hamlet-under_siege+famine-rand-4 | hamlet | 91 | Emad al-Amin | Grain Steward | grain | famine | under_siege+famine | arabic | [] | Access to external mill; Access to parish church
+rr3-hamlet-under_siege+famine-rand-5 | hamlet | 36 | Rumena Bogdanov | Grain Steward | grain | famine | under_siege+famine | slavic | [] | Access to external mill; Access to parish church
+rr3-hamlet-under_siege+famine-port-0 | hamlet | 69 | Elias Chortasmenos | Grain Steward | grain | famine | under_siege+famine | greek | [] | Access to external mill; Access to parish church
+rr3-hamlet-under_siege+famine-port-1 | hamlet | 93 | Winal Ek | Grain Steward | grain | famine | under_siege+famine | mesoamerican | [] | Access to external mill; Access to parish church; Citizen militia
+rr3-village-monster_pressure-rand-2 | village | 85 | Salome Walter | Warden | warden | monster_pressure | monster_pressure | germanic | [] | Mill; Parish church
+rr3-village-monster_pressure-rand-3 | village | 286 | Murugan Banerjee | Warden | warden | monster_pressure | monster_pressure | south_asian | [] | Mill; Parish church
+rr3-village-monster_pressure-rand-4 | village | 368 | Cato Laenas | Warden | warden | monster_pressure | monster_pressure | latin | [] | Mill; Apothecary; Sawmill; Parish church; Healer (divine, 1st level)
+rr3-village-monster_pressure-rand-5 | village | 383 | Salim al-Kindi | Warden | warden | monster_pressure | monster_pressure | arabic | [] | Mill; Apothecary; Parish church
+rr3-village-monster_pressure-port-0 | village | 160 | Yaretzi Kin | Warden | warden | monster_pressure | monster_pressure | mesoamerican | [] | Mill; Parish church

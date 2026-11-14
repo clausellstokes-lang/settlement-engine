@@ -1,0 +1,12 @@
+27	9b898d5c3	import { institutionHouseLabel } from '../../domain/display/institutionDisplayName.js';
+28	99432257c	import { chainHousesOf, chainSourceOf } from '../../domain/display/chainHouses.js';
+220	e285c603f	// R2-CODE-B round 3, ruling (d) (#804): no ground the record says is absent (chainHouses.js); with the town, a toll
+221	e285c603f	// renamed by its access names that access (COHERENCE-AGREE-6 F1), as the screen's card reads it (R2-CODE-B-7).
+222	e285c603f	chainSourceOf(chain, shown) ? humanize(label(chainSourceOf(chain, shown))) : null,
+225	5ea26f677	// Ruling (e): the roster is read, so a house held only as a road to elsewhere is named as the page names it.
+226	5ea26f677	chainHousesOf(chain.processingInstitutions, instNames).map((h) => humanize(h.name)).join(' + ') || null,
+276	9b898d5c3	// ROUND THREE, ruling (a): through the house's label, the one display leaf (no catalogue count
+277	9b898d5c3	// range, household range, gate or condition).
+278	9b898d5c3	if (typeof svc === 'string') return humanize(institutionHouseLabel(svc));
+279	9b898d5c3	return humanize(institutionHouseLabel(svc)) ||
+280	9b898d5c3	(svc.institution ? humanize(institutionHouseLabel(svc.institution)) : '');

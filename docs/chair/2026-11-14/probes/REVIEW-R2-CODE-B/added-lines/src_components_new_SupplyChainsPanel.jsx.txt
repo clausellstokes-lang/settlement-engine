@@ -1,0 +1,22 @@
+8	99432257c	import { chainHousesOf, chainSourceOf } from '../../domain/display/chainHouses.js';
+126	e285c603f	* @param {{ resource?: unknown } | null} [printed] chainPrintName(chain, town): the source a toll prints under the town's
+127	e285c603f	*   access (chainSourceOf, composed with COHERENCE-AGREE-6 F1)
+130	2ed36a430	*   upstreamNote: null}}
+132	e285c603f	export function chainFlowFacts(chain, instNames = [], printed = null) {
+134	e285c603f	// R2-CODE-B round 3, ruling (d) (#804): no ground the record says is absent (domain/display/chainHouses.js);
+135	e285c603f	// with the town, a toll renamed by its access names that access (R2-CODE-B-7, composed with F1).
+136	e285c603f	resource: chainSourceOf(chain, printed),
+141	a245e05fb	// R2-CODE-B-SIDE item 2 (#366, #799 "Import: Food Processing" beside mills and a brewery; #699 "Precious
+142	a245e05fb	// metal veins · Import: Mining & Coinage"): `upstreamMissing` holds the CHAIN IDS the generator found not
+143	a245e05fb	// running here, and a chain's label is a category of work, not a good. The From line names a good or a
+144	a245e05fb	// ground the record holds, or nothing; the goods the town buys in are the trade list's, which this card
+145	a245e05fb	// is not handed, so it names none. The field stays so every reader of the facts keeps its shape.
+146	a245e05fb	importedUpstream: [],
+147	2ed36a430	// R2-CODE-B-SIDE item 1 (#1375 HIGH, #791, #1256, #448, #630, #793, #800, #1255, #367): the generator's
+148	2ed36a430	// upstream note leaves the card. It is written from the other chains' states and from which chain ids are
+149	2ed36a430	// active (generators/computeActiveChains.js), and this card is handed one chain and the roster's names: no
+150	2ed36a430	// read it holds makes the note true (on the census's 720: 337 of 432 "Needs imported X: no local source"
+151	2ed36a430	// beside the town's own source of X, 149 of 175 "Upstream X chain is impaired" over a chain that is only
+152	2ed36a430	// vulnerable). The card's status says the chain is vulnerable; the upstream chain's own card says why.
+153	2ed36a430	// The record keeps the note (no byte moves). The field stays so every reader of the facts keeps its shape.
+154	2ed36a430	upstreamNote: null,

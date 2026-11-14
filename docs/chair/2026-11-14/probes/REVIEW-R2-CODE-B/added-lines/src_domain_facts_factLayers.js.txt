@@ -1,0 +1,2 @@
+138	f9ee7541d	faith: home('faith', 3, ['institutions', 'config', 'economicState', 'powerStructure', 'npcs', 'stress'], {
+139	f9ee7541d	note: 'its value reads the config, the roster, the income and the factions (layer 3); it touches the cast (layer 3), banked; '

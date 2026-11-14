@@ -1,0 +1,888 @@
+births base 1536 tip 1536 missing 0; leaf diffs 478976; towns moved 1529
+family resourceAnalysis: 1490 towns
+family economicState: 1286 towns
+family simulationTrace: 643 towns
+family economicViability: 532 towns
+family npcs: 444 towns
+family defenseProfile: 423 towns
+family stress: 405 towns
+family stressors: 405 towns
+family generationCoherenceReceipt: 391 towns
+family config: 390 towns
+family culturalIdentity: 282 towns
+family availableServices: 152 towns
+family history: 152 towns
+family relationships: 151 towns
+family powerStructure: 150 towns
+family institutions: 146 towns
+family conflicts: 94 towns
+family prominentRelationship: 91 towns
+family arrivalScene: 67 towns
+family spatialLayout: 48 towns
+family pressureSentence: 45 towns
+family activeConditions: 15 towns
+family coherenceNotes: 14 towns
+family isolationSupport: 1 towns
+  1471	.resourceAnalysis.economicStrengths[]	 e.g. r2r-thorp-0 r2r-thorp-1 r2r-thorp-2
+  643	.simulationTrace[].causes[].reason	 e.g. r2r-thorp-6 r2r-thorp-10 r2r-thorp-13
+  592	.simulationTrace[].causes[].source	 e.g. r2r-thorp-6 r2r-thorp-10 r2r-thorp-13
+  509	.economicState.primaryImports[]	 e.g. r2r-village-4 r2r-village-20 r2r-village-22
+  503	.economicState.foodSecurity.diversityNote	 e.g. r2r-thorp-1 r2r-thorp-2 r2r-thorp-4
+  483	.economicState.incomeSources[].desc	 e.g. r2r-thorp-2 r2r-thorp-4 r2r-thorp-7
+  413	.economicState.primaryExports[]	 e.g. r2r-thorp-6 r2r-thorp-10 r2r-thorp-13
+  402	.resourceAnalysis.strategicValue	 e.g. r2r-thorp-0 r2r-thorp-3 r2r-thorp-5
+  397	.economicState.localProduction[]	 e.g. r2r-thorp-6 r2r-thorp-10 r2r-thorp-13
+  390	.resourceAnalysis.availableResources[]	 e.g. r2r-thorp-6 r2r-thorp-10 r2r-thorp-13
+  390	.resourceAnalysis.resourceConditions[].key	 e.g. r2r-thorp-6 r2r-thorp-10 r2r-thorp-13
+  390	.resourceAnalysis.resourceConditions[].label	 e.g. r2r-thorp-6 r2r-thorp-10 r2r-thorp-13
+  390	.config.nearbyResources[]	 e.g. r2r-thorp-6 r2r-thorp-10 r2r-thorp-13
+  390	.config.nearbyResourcesNative[]	 e.g. r2r-thorp-6 r2r-thorp-10 r2r-thorp-13
+  390	.simulationTrace[].downstreamEffects[].target	 e.g. r2r-thorp-6 r2r-thorp-10 r2r-thorp-13
+  390	.simulationTrace[].targetId	 e.g. r2r-thorp-6 r2r-thorp-10 r2r-thorp-13
+  389	.generationCoherenceReceipt.judgments[].evidence[].evidence	 e.g. r2r-thorp-5 r2r-thorp-10 r2r-thorp-13
+  369	.resourceAnalysis.resourceConditions[].type	 e.g. r2r-thorp-6 r2r-thorp-10 r2r-thorp-13
+  369	.resourceAnalysis.resourceConditions[].randomDepletionEligible	 e.g. r2r-thorp-6 r2r-thorp-10 r2r-thorp-13
+  369	.resourceAnalysis.resourceConditions[].recoveryMode	 e.g. r2r-thorp-6 r2r-thorp-10 r2r-thorp-13
+  351	.economicState.activeChains[].status	 e.g. r2r-thorp-6 r2r-thorp-10 r2r-thorp-13
+  340	.simulationTrace[].causes[].effect	 e.g. r2r-thorp-6 r2r-thorp-10 r2r-thorp-13
+  339	.economicState.activeChains[].activatedByResource	 e.g. r2r-thorp-6 r2r-thorp-10 r2r-thorp-13
+  337	.economicState.situationDesc	 e.g. r2r-thorp-0 r2r-thorp-2 r2r-thorp-13
+  330	.simulationTrace[].causes[]	 e.g. r2r-thorp-6 r2r-thorp-10 r2r-thorp-13
+  318	.economicState.activeChains[].processingInstitutions[]	 e.g. r2r-thorp-6 r2r-thorp-10 r2r-thorp-13
+  316	.economicState.activeChains[].chainId	 e.g. r2r-thorp-6 r2r-thorp-10 r2r-thorp-13
+  316	.economicState.activeChains[].label	 e.g. r2r-thorp-6 r2r-thorp-10 r2r-thorp-13
+  316	.economicState.activeChains[].outputs[]	 e.g. r2r-thorp-6 r2r-thorp-10 r2r-thorp-13
+  314	.economicState.activeChains[].services[]	 e.g. r2r-thorp-6 r2r-thorp-10 r2r-thorp-13
+  311	.economicState.activeChains[].needKey	 e.g. r2r-thorp-6 r2r-thorp-10 r2r-thorp-13
+  311	.economicState.activeChains[].needLabel	 e.g. r2r-thorp-6 r2r-thorp-10 r2r-thorp-13
+  311	.economicState.activeChains[].needColor	 e.g. r2r-thorp-6 r2r-thorp-10 r2r-thorp-13
+  310	.simulationTrace[].result	 e.g. r2r-thorp-10 r2r-thorp-13 r2r-thorp-14
+  303	.simulationTrace[].downstreamEffects[].effect	 e.g. r2r-thorp-10 r2r-thorp-13 r2r-thorp-14
+  301	.economicState.compound.magicInfluence	 e.g. r2r-thorp-6 r2r-thorp-10 r2r-thorp-13
+  301	.economicState.safetyProfile.compound.magicInfluence	 e.g. r2r-thorp-6 r2r-thorp-10 r2r-thorp-13
+  294	.economicState.activeChains[].resourceInputKey	 e.g. r2r-thorp-10 r2r-thorp-13 r2r-thorp-15
+  291	.simulationTrace[].downstreamEffects[]	 e.g. r2r-thorp-10 r2r-thorp-13 r2r-thorp-14
+  282	.economicState.foodSecurity.foodRecord.foodwaysLine	 e.g. r2r-thorp-10 r2r-thorp-32 r2r-thorp-33
+  282	.culturalIdentity.foodways	 e.g. r2r-thorp-10 r2r-thorp-32 r2r-thorp-33
+  276	.economicState.activeChains[].resource	 e.g. r2r-thorp-10 r2r-thorp-13 r2r-thorp-15
+  276	.economicState.activeChains[].resourceKey	 e.g. r2r-thorp-10 r2r-thorp-13 r2r-thorp-15
+  273	.economicState.foodSecurity.foodRecord.foodSources[]	 e.g. r2r-thorp-10 r2r-thorp-32 r2r-thorp-33
+  273	.defenseProfile.scores.disaster	 e.g. r2r-thorp-10 r2r-thorp-32 r2r-thorp-33
+  271	.economicViability.plotHooks[].hook	 e.g. r2r-hamlet-30 r2r-hamlet-35 r2r-village-4
+  270	.economicState.foodSecurity.resilienceScore	 e.g. r2r-thorp-10 r2r-thorp-32 r2r-thorp-33
+  266	.simulationTrace[].targetType	 e.g. r2r-thorp-10 r2r-thorp-13 r2r-thorp-14
+  266	.simulationTrace[].step	 e.g. r2r-thorp-10 r2r-thorp-13 r2r-thorp-14
+  264	.economicState.foodSecurity.activeChains[]	 e.g. r2r-thorp-10 r2r-thorp-32 r2r-thorp-33
+  264	.economicState.foodSecurity.activeChainsCount	 e.g. r2r-thorp-10 r2r-thorp-32 r2r-thorp-33
+  258	.resourceAnalysis.imports.critical[]	 e.g. r2r-thorp-1 r2r-thorp-5 r2r-thorp-7
+  252	.npcs[].goal.short	 e.g. r2r-hamlet-20 r2r-hamlet-48 r2r-village-4
+  250	.simulationTrace[]	 e.g. r2r-thorp-10 r2r-thorp-13 r2r-thorp-14
+  250	.npcs[].goal.long	 e.g. r2r-hamlet-20 r2r-hamlet-48 r2r-village-4
+  236	.defenseProfile.readiness.score	 e.g. r2r-thorp-10 r2r-thorp-37 r2r-thorp-50
+  230	.economicState.activeChains[]	 e.g. r2r-thorp-10 r2r-thorp-13 r2r-thorp-14
+  229	.economicState.activeChains[].upstreamChains[]	 e.g. r2r-hamlet-48 r2r-village-3 r2r-village-4
+  224	.economicState.activeChains[].exportable	 e.g. r2r-hamlet-14 r2r-hamlet-30 r2r-hamlet-48
+  220	.economicState.activeChains[].entrepot (GONE KEY)	 e.g. r2r-hamlet-14 r2r-hamlet-48 r2r-village-3
+  219	.simulationTrace[].causes[].effect (NEW KEY)	 e.g. r2r-thorp-10 r2r-thorp-13 r2r-thorp-14
+  217	.simulationTrace[].causes[].effect (GONE KEY)	 e.g. r2r-thorp-10 r2r-thorp-13 r2r-thorp-14
+  216	.economicState.activeChains[].entrepot (NEW KEY)	 e.g. r2r-hamlet-14 r2r-hamlet-48 r2r-village-3
+  204	.economicState.activeChains[].resourceCondition	 e.g. r2r-thorp-10 r2r-thorp-13 r2r-thorp-15
+  201	.economicState.activeChains[].resourceActive	 e.g. r2r-thorp-10 r2r-thorp-13 r2r-thorp-15
+  201	.economicState.activeChains[].substituteActive	 e.g. r2r-thorp-10 r2r-thorp-13 r2r-thorp-15
+  199	.npcs[]	 e.g. r2r-thorp-17 r2r-thorp-38 r2r-thorp-46
+  198	.npcs[].goal.intent.long.kind	 e.g. r2r-hamlet-20 r2r-hamlet-48 r2r-village-22
+  194	.npcs[].goal.intent.long.key	 e.g. r2r-hamlet-20 r2r-hamlet-48 r2r-village-22
+  192	.npcs[].goal.intent.long.family	 e.g. r2r-hamlet-20 r2r-hamlet-48 r2r-village-22
+  191	.npcs[].goal.intent.short.kind	 e.g. r2r-hamlet-20 r2r-hamlet-48 r2r-village-4
+  190	.npcs[].goal.intent.long.target.id	 e.g. r2r-hamlet-48 r2r-village-22 r2r-town-8
+  189	.npcs[].goal.intent.short.key	 e.g. r2r-hamlet-48 r2r-village-4 r2r-village-22
+  188	.npcs[].goal.intent.short.target.id	 e.g. r2r-hamlet-20 r2r-hamlet-48 r2r-village-22
+  186	.resourceAnalysis.imports.reasons.metals (GONE KEY)	 e.g. r2r-thorp-1 r2r-thorp-5 r2r-thorp-9
+  186	.npcs[].goal.intent.short.family	 e.g. r2r-hamlet-48 r2r-village-4 r2r-village-22
+  182	.economicState.safetyProfile.guardEffectivenessDesc	 e.g. r2r-hamlet-3 r2r-hamlet-6 r2r-hamlet-10
+  181	.stress.cast.roles[].reason	 e.g. r2r-thorp-5 r2r-thorp-10 r2r-thorp-17
+  181	.stressors.cast.roles[].reason	 e.g. r2r-thorp-5 r2r-thorp-10 r2r-thorp-17
+  180	.npcs[].goal.intent.long.target.kind	 e.g. r2r-hamlet-48 r2r-village-22 r2r-town-8
+  177	.npcs[].goal.intent.short.target.kind	 e.g. r2r-hamlet-48 r2r-village-22 r2r-town-10
+  173	.economicState.compound.inst.hasGates	 e.g. r2r-thorp-1 r2r-thorp-2 r2r-thorp-6
+  173	.economicState.safetyProfile.compound.inst.hasGates	 e.g. r2r-thorp-1 r2r-thorp-2 r2r-thorp-6
+  166	.economicViability.plotHooks[]	 e.g. r2r-hamlet-5 r2r-hamlet-38 r2r-village-7
+  166	.economicState.activeChains[].upstreamNote (GONE KEY)	 e.g. r2r-village-3 r2r-village-4 r2r-village-20
+  165	.npcs[].secret.what	 e.g. r2r-hamlet-20 r2r-hamlet-48 r2r-village-22
+  161	.economicViability.dependencies[]	 e.g. r2r-hamlet-5 r2r-hamlet-38 r2r-village-7
+  161	.economicViability.metrics.dependencyCount	 e.g. r2r-hamlet-5 r2r-hamlet-38 r2r-village-7
+  161	.economicState.activeChains[].upstreamNote (NEW KEY)	 e.g. r2r-hamlet-48 r2r-village-3 r2r-village-20
+  159	.economicState.foodSecurity.storageMonths	 e.g. r2r-thorp-10 r2r-thorp-32 r2r-thorp-33
+  159	.economicState.foodSecurity.foodRecord.storageMonths	 e.g. r2r-thorp-10 r2r-thorp-32 r2r-thorp-33
+  159	.npcs[].goal.intent.long.target	 e.g. r2r-hamlet-20 r2r-village-22 r2r-town-10
+  155	.economicState.foodSecurity.chains.Pastoral & livestock	 e.g. r2r-thorp-10 r2r-thorp-32 r2r-thorp-33
+  155	.economicState.tradeDependencies[].institution	 e.g. r2r-town-1 r2r-town-5 r2r-town-10
+  155	.economicState.tradeDependencies[].resource	 e.g. r2r-town-1 r2r-town-5 r2r-town-10
+  155	.economicState.tradeDependencies[].detail	 e.g. r2r-town-1 r2r-town-5 r2r-town-10
+  155	.economicState.tradeDependencies[].affectedServices[]	 e.g. r2r-town-1 r2r-town-5 r2r-town-10
+  152	.economicState.activeChains[].upstreamMissing (GONE KEY)	 e.g. r2r-village-3 r2r-village-4 r2r-village-22
+  152	.economicState.tradeDependencies[].category	 e.g. r2r-town-1 r2r-town-5 r2r-town-10
+  150	.npcs[].personality.speech	 e.g. r2r-hamlet-20 r2r-hamlet-48 r2r-village-22
+  150	.relationships[].to	 e.g. r2r-hamlet-20 r2r-hamlet-48 r2r-village-22
+  150	.relationships[].description	 e.g. r2r-hamlet-20 r2r-hamlet-48 r2r-village-22
+  150	.relationships[].tension	 e.g. r2r-hamlet-20 r2r-hamlet-48 r2r-village-22
+  150	.relationships[].strength	 e.g. r2r-hamlet-20 r2r-hamlet-48 r2r-village-22
+  150	.relationships[].npc2Name	 e.g. r2r-hamlet-20 r2r-hamlet-48 r2r-village-22
+  150	.relationships[].npc2Role	 e.g. r2r-hamlet-20 r2r-hamlet-48 r2r-village-22
+  149	.npcs[].plotHooks[]	 e.g. r2r-hamlet-20 r2r-hamlet-48 r2r-village-22
+  149	.npcs[].id	 e.g. r2r-hamlet-20 r2r-hamlet-48 r2r-village-22
+  149	.npcs[].role	 e.g. r2r-hamlet-20 r2r-hamlet-48 r2r-village-22
+  149	.npcs[].presentation.impression	 e.g. r2r-hamlet-20 r2r-hamlet-48 r2r-village-22
+  149	.npcs[].presentation.behaviour	 e.g. r2r-hamlet-20 r2r-hamlet-48 r2r-village-22
+  149	.relationships[].typeName	 e.g. r2r-hamlet-20 r2r-hamlet-48 r2r-village-22
+  149	.relationships[].archetypeKey	 e.g. r2r-hamlet-20 r2r-hamlet-48 r2r-village-22
+  149	.relationships[].proseVariant	 e.g. r2r-hamlet-20 r2r-hamlet-48 r2r-village-22
+  148	.npcs[].secret.stakes	 e.g. r2r-hamlet-20 r2r-hamlet-48 r2r-village-22
+  148	.npcs[].name	 e.g. r2r-hamlet-20 r2r-hamlet-48 r2r-village-22
+  148	.npcs[].title	 e.g. r2r-hamlet-20 r2r-hamlet-48 r2r-village-22
+  148	.npcs[].personality.flaw	 e.g. r2r-hamlet-20 r2r-hamlet-48 r2r-village-22
+  148	.npcs[].personality.modifier	 e.g. r2r-hamlet-20 r2r-hamlet-48 r2r-village-22
+  148	.npcs[].physical.build	 e.g. r2r-hamlet-20 r2r-hamlet-48 r2r-village-22
+  148	.npcs[].physical.feature	 e.g. r2r-hamlet-20 r2r-hamlet-48 r2r-village-22
+  148	.npcs[].presentation.disposition	 e.g. r2r-hamlet-20 r2r-hamlet-48 r2r-village-22
+  148	.npcs[].institution.key	 e.g. r2r-hamlet-20 r2r-hamlet-48 r2r-village-22
+  148	.npcs[].institution.family	 e.g. r2r-hamlet-20 r2r-hamlet-48 r2r-village-22
+  148	.npcs[].institution.title	 e.g. r2r-hamlet-20 r2r-hamlet-48 r2r-village-22
+  148	.relationships[].type	 e.g. r2r-hamlet-20 r2r-hamlet-48 r2r-village-22
+  147	.npcs[].personality.tell	 e.g. r2r-hamlet-20 r2r-hamlet-48 r2r-village-22
+  147	.npcs[].physical.age	 e.g. r2r-hamlet-20 r2r-hamlet-48 r2r-village-22
+  147	.npcs[].physical.clothes	 e.g. r2r-hamlet-20 r2r-hamlet-48 r2r-village-22
+  147	.relationships[].id	 e.g. r2r-hamlet-20 r2r-hamlet-48 r2r-village-22
+  147	.relationships[].from	 e.g. r2r-hamlet-20 r2r-hamlet-48 r2r-village-22
+  147	.relationships[].npc1Name	 e.g. r2r-hamlet-20 r2r-hamlet-48 r2r-village-22
+  147	.relationships[].npc1Role	 e.g. r2r-hamlet-20 r2r-hamlet-48 r2r-village-22
+  146	.economicState.compound.inst.names[]	 e.g. r2r-thorp-15 r2r-thorp-28 r2r-thorp-46
+  146	.economicState.safetyProfile.compound.inst.names[]	 e.g. r2r-thorp-15 r2r-thorp-28 r2r-thorp-46
+  146	.npcs[].personality.dominant	 e.g. r2r-hamlet-20 r2r-hamlet-48 r2r-village-22
+  145	.institutions[].name	 e.g. r2r-thorp-15 r2r-thorp-28 r2r-thorp-46
+  145	.institutions[].desc	 e.g. r2r-thorp-15 r2r-thorp-28 r2r-thorp-46
+  145	.institutions[].catalogId	 e.g. r2r-thorp-15 r2r-thorp-28 r2r-thorp-46
+  145	.economicState.activeChains[].upstreamMissing (NEW KEY)	 e.g. r2r-village-3 r2r-village-20 r2r-village-22
+  145	.economicState.activeChains[].dependency (GONE KEY)	 e.g. r2r-town-2 r2r-town-10 r2r-town-27
+  144	.economicViability.summary	 e.g. r2r-hamlet-5 r2r-hamlet-38 r2r-village-7
+  144	.npcs[].power	 e.g. r2r-hamlet-48 r2r-village-22 r2r-town-10
+  144	.economicState.tradeDependencies[]	 e.g. r2r-town-1 r2r-town-5 r2r-town-10
+  142	.institutions[].baseChance	 e.g. r2r-thorp-15 r2r-thorp-28 r2r-thorp-46
+  142	.npcs[].gender	 e.g. r2r-hamlet-48 r2r-village-22 r2r-town-10
+  141	.defenseProfile.scores.economic	 e.g. r2r-thorp-10 r2r-thorp-32 r2r-thorp-33
+  140	.institutions[].tags[]	 e.g. r2r-thorp-15 r2r-thorp-28 r2r-thorp-46
+  138	.npcs[].category	 e.g. r2r-hamlet-20 r2r-hamlet-48 r2r-village-22
+  137	.institutions[].priorityCategory	 e.g. r2r-thorp-15 r2r-thorp-28 r2r-thorp-46
+  135	.institutions[].source	 e.g. r2r-thorp-15 r2r-thorp-28 r2r-thorp-46
+  135	.institutions[].category	 e.g. r2r-thorp-15 r2r-thorp-28 r2r-thorp-46
+  135	.npcs[].goal.intent.short.target	 e.g. r2r-village-4 r2r-village-22 r2r-town-10
+  134	.institutions[].exclusiveGroup (GONE KEY)	 e.g. r2r-thorp-15 r2r-thorp-28 r2r-thorp-46
+  134	.economicState.foodSecurity.storageNote	 e.g. r2r-thorp-36 r2r-thorp-44 r2r-thorp-45
+  133	.defenseProfile.scores.magical	 e.g. r2r-village-44 r2r-town-1 r2r-town-2
+  133	.economicViability.warnings[].description	 e.g. r2r-town-1 r2r-town-5 r2r-town-10
+  132	.economicState.foodSecurity.chains.Grain & agriculture	 e.g. r2r-village-4 r2r-town-2 r2r-town-14
+  130	.institutions[].exclusiveGroup (NEW KEY)	 e.g. r2r-thorp-15 r2r-thorp-28 r2r-thorp-46
+  125	.economicState.activeChains[].dependency.institution	 e.g. r2r-city-1 r2r-city-5 r2r-city-15
+  125	.economicState.activeChains[].dependency.resource	 e.g. r2r-city-1 r2r-city-5 r2r-city-15
+  125	.economicState.activeChains[].dependency.affectedServices[]	 e.g. r2r-city-1 r2r-city-5 r2r-city-15
+  125	.economicViability.dependencies[].title	 e.g. r2r-city-4 r2r-city-6 r2r-city-9
+  125	.economicViability.dependencies[].description	 e.g. r2r-city-4 r2r-city-6 r2r-city-9
+  125	.economicViability.dependencies[].suggestedFixes[]	 e.g. r2r-city-4 r2r-city-6 r2r-city-9
+  124	.institutions[].required	 e.g. r2r-thorp-15 r2r-thorp-28 r2r-thorp-46
+  123	.npcs[].memberships[]	 e.g. r2r-village-22 r2r-town-10 r2r-town-41
+  123	.economicViability.dependencies[].impact	 e.g. r2r-city-4 r2r-city-6 r2r-city-9
+  122	.economicViability.dependencies[].category	 e.g. r2r-city-4 r2r-city-6 r2r-city-9
+  119	.institutions[]	 e.g. r2r-thorp-15 r2r-thorp-28 r2r-thorp-46
+  119	.economicState.activeChains[].entrepot	 e.g. r2r-town-1 r2r-town-10 r2r-town-47
+  118	.economicState.compound.inst.hasMercenary	 e.g. r2r-village-8 r2r-village-46 r2r-village-48
+  118	.economicState.safetyProfile.compound.inst.hasMercenary	 e.g. r2r-village-8 r2r-village-46 r2r-village-48
+  117	.npcs[].memberships[].power	 e.g. r2r-village-22 r2r-town-10 r2r-town-41
+  115	.economicViability.suggestions[]	 e.g. r2r-hamlet-22 r2r-village-4 r2r-village-17
+  111	.stress.cast.levers[]	 e.g. r2r-thorp-17 r2r-thorp-38 r2r-thorp-41
+  111	.stressors.cast.levers[]	 e.g. r2r-thorp-17 r2r-thorp-38 r2r-thorp-41
+  107	.npcs[].memberships[].share	 e.g. r2r-town-10 r2r-town-41 r2r-town-42
+  106	.defenseProfile.scores.military	 e.g. r2r-village-48 r2r-town-8 r2r-town-10
+  105	.relationships[]	 e.g. r2r-hamlet-20 r2r-village-22 r2r-town-10
+  105	.availableServices.equipment[].name	 e.g. r2r-village-22 r2r-town-10 r2r-town-16
+  105	.availableServices.equipment[].desc	 e.g. r2r-village-22 r2r-town-10 r2r-town-16
+  105	.availableServices.equipment[].institution	 e.g. r2r-village-22 r2r-town-10 r2r-town-16
+  104	.npcs[].structuralRank	 e.g. r2r-village-22 r2r-town-10 r2r-town-42
+  103	.stress.cast.roles[].id	 e.g. r2r-thorp-17 r2r-thorp-38 r2r-thorp-45
+  103	.stress.cast.roles[].name	 e.g. r2r-thorp-17 r2r-thorp-38 r2r-thorp-45
+  103	.stressors.cast.roles[].id	 e.g. r2r-thorp-17 r2r-thorp-38 r2r-thorp-45
+  103	.stressors.cast.roles[].name	 e.g. r2r-thorp-17 r2r-thorp-38 r2r-thorp-45
+  103	.economicState.safetyProfile.crimeTypes[].desc	 e.g. r2r-town-14 r2r-town-18 r2r-town-24
+  102	.resourceAnalysis.gaps[]	 e.g. r2r-thorp-33 r2r-thorp-42 r2r-hamlet-12
+  99	.economicState.activeChains[].dependency (NEW KEY)	 e.g. r2r-town-2 r2r-town-10 r2r-town-27
+  99	.npcs[].influence	 e.g. r2r-town-10 r2r-town-42 r2r-town-47
+  96	.npcs[].memberships[].rank	 e.g. r2r-village-22 r2r-town-10 r2r-town-41
+  96	.availableServices.legal[].name	 e.g. r2r-town-10 r2r-town-16 r2r-town-41
+  96	.availableServices.legal[].desc	 e.g. r2r-town-10 r2r-town-16 r2r-town-41
+  95	.stress.summary	 e.g. r2r-thorp-11 r2r-thorp-16 r2r-thorp-17
+  95	.stressors.summary	 e.g. r2r-thorp-11 r2r-thorp-16 r2r-thorp-17
+  95	.availableServices.legal[].institution	 e.g. r2r-town-10 r2r-town-16 r2r-town-41
+  94	.availableServices.healing[].name	 e.g. r2r-thorp-15 r2r-thorp-28 r2r-thorp-46
+  94	.availableServices.healing[].desc	 e.g. r2r-thorp-15 r2r-thorp-28 r2r-thorp-46
+  93	.economicState.incomeSources[].percentage	 e.g. r2r-village-22 r2r-village-49 r2r-town-10
+  92	.availableServices.equipment[]	 e.g. r2r-village-22 r2r-town-10 r2r-town-33
+  91	.availableServices.healing[].institution	 e.g. r2r-thorp-15 r2r-thorp-28 r2r-thorp-46
+  91	.prominentRelationship.phrasing	 e.g. r2r-hamlet-20 r2r-village-22 r2r-town-10
+  91	.stress.cast.stakes[].reason	 e.g. r2r-village-9 r2r-village-24 r2r-village-56
+  91	.stressors.cast.stakes[].reason	 e.g. r2r-village-9 r2r-village-24 r2r-village-56
+  91	.economicState.incomeSources[].weight	 e.g. r2r-village-22 r2r-town-10 r2r-town-27
+  89	.powerStructure.factions[].rawPower	 e.g. r2r-thorp-15 r2r-thorp-28 r2r-thorp-46
+  89	.npcs[].importance	 e.g. r2r-village-22 r2r-town-10 r2r-town-41
+  88	.history.currentTensions[].description	 e.g. r2r-thorp-15 r2r-village-24 r2r-village-49
+  88	.availableServices.information[]	 e.g. r2r-hamlet-20 r2r-town-10 r2r-town-16
+  88	.institutions[].cascadeAdded (NEW KEY)	 e.g. r2r-hamlet-48 r2r-town-10 r2r-town-42
+  88	.institutions[].cascadeBoost (NEW KEY)	 e.g. r2r-hamlet-48 r2r-town-10 r2r-town-42
+  88	.prominentRelationship.full	 e.g. r2r-village-22 r2r-town-10 r2r-town-42
+  88	.prominentRelationship.tension	 e.g. r2r-village-22 r2r-town-10 r2r-town-42
+  88	.economicState.incomeSources[].source	 e.g. r2r-town-10 r2r-town-27 r2r-town-36
+  87	.availableServices.information[].name	 e.g. r2r-town-41 r2r-town-42 r2r-town-47
+  87	.availableServices.information[].desc	 e.g. r2r-town-41 r2r-town-42 r2r-town-47
+  86	.availableServices.legal[]	 e.g. r2r-town-10 r2r-town-16 r2r-town-41
+  85	.availableServices.healing[]	 e.g. r2r-thorp-15 r2r-thorp-28 r2r-thorp-46
+  85	.institutions[].tier (NEW KEY)	 e.g. r2r-hamlet-48 r2r-town-10 r2r-town-42
+  85	.powerStructure.factions[].power	 e.g. r2r-village-22 r2r-town-10 r2r-town-41
+  85	.availableServices.information[].institution	 e.g. r2r-town-41 r2r-town-42 r2r-town-47
+  84	.resourceAnalysis.gaps[].impact	 e.g. r2r-hamlet-12 r2r-hamlet-45 r2r-village-3
+  84	.npcs[].institution.veiled	 e.g. r2r-hamlet-20 r2r-town-42 r2r-city-0
+  84	.institutions[].forbiddenTradeRoutes (GONE KEY)	 e.g. r2r-town-10 r2r-town-41 r2r-town-42
+  81	.powerStructure.conflicts[].desc	 e.g. r2r-town-10 r2r-town-41 r2r-town-47
+  81	.conflicts[].desc	 e.g. r2r-town-10 r2r-town-41 r2r-town-47
+  80	.resourceAnalysis.resourceChains[]	 e.g. r2r-thorp-33 r2r-thorp-42 r2r-hamlet-12
+  80	.powerStructure.factions[].desc	 e.g. r2r-village-22 r2r-town-10 r2r-town-41
+  79	.powerStructure.factionRelationships[].ratio	 e.g. r2r-village-22 r2r-town-10 r2r-town-41
+  79	.economicState.incomeSources[]	 e.g. r2r-village-49 r2r-town-10 r2r-town-27
+  79	.economicState.activeChains[].entrepotNote	 e.g. r2r-town-1 r2r-town-10 r2r-town-41
+  79	.institutions[].exclusiveGroup	 e.g. r2r-town-10 r2r-city-17 r2r-city-21
+  78	.institutions[].catalogId (GONE KEY)	 e.g. r2r-hamlet-48 r2r-town-10 r2r-town-42
+  77	.prominentRelationship.npc2	 e.g. r2r-village-22 r2r-town-10 r2r-town-42
+  77	.institutions[].magicLicense (NEW KEY)	 e.g. r2r-town-10 r2r-town-42 r2r-town-57
+  76	.availableServices.food[]	 e.g. r2r-village-22 r2r-town-10 r2r-town-41
+  75	.availableServices.employment[].desc	 e.g. r2r-town-10 r2r-town-16 r2r-town-41
+  75	.availableServices.employment[].institution	 e.g. r2r-town-10 r2r-town-16 r2r-town-41
+  74	.resourceAnalysis.gaps[].chain	 e.g. r2r-hamlet-12 r2r-hamlet-45 r2r-village-3
+  73	.history.historicalEvents[].description	 e.g. r2r-thorp-58 r2r-hamlet-7 r2r-village-4
+  73	.resourceAnalysis.gaps[].severity	 e.g. r2r-hamlet-12 r2r-hamlet-45 r2r-village-3
+  73	.availableServices.employment[].name	 e.g. r2r-town-10 r2r-town-16 r2r-town-41
+  73	.availableServices.employment[]	 e.g. r2r-town-16 r2r-town-42 r2r-town-58
+  72	.stress.cast.roles[].kind	 e.g. r2r-thorp-17 r2r-thorp-38 r2r-thorp-45
+  72	.stressors.cast.roles[].kind	 e.g. r2r-thorp-17 r2r-thorp-38 r2r-thorp-45
+  72	.institutions[].forbiddenTradeRoutes (NEW KEY)	 e.g. r2r-town-10 r2r-town-42 r2r-town-57
+  72	.powerStructure.conflicts[].parties[]	 e.g. r2r-town-10 r2r-town-47 r2r-town-58
+  72	.conflicts[].parties[]	 e.g. r2r-town-10 r2r-town-47 r2r-town-58
+  71	.availableServices.entertainment[].name	 e.g. r2r-town-33 r2r-town-41 r2r-town-42
+  71	.availableServices.entertainment[].desc	 e.g. r2r-town-33 r2r-town-41 r2r-town-42
+  70	.npcs[].allegiance (NEW KEY)	 e.g. r2r-town-42 r2r-town-58 r2r-city-0
+  70	.relationships[].covert (NEW KEY)	 e.g. r2r-town-42 r2r-town-58 r2r-city-0
+  70	.relationships[].handler (NEW KEY)	 e.g. r2r-town-42 r2r-town-58 r2r-city-0
+  69	.availableServices.transport[]	 e.g. r2r-hamlet-20 r2r-hamlet-48 r2r-village-22
+  69	.prominentRelationship.npc1	 e.g. r2r-village-22 r2r-town-10 r2r-town-42
+  69	.institutions[].magicLicense (GONE KEY)	 e.g. r2r-town-10 r2r-town-42 r2r-city-0
+  69	.economicState.activeChains[].upstreamWeak (GONE KEY)	 e.g. r2r-town-42 r2r-town-58 r2r-city-15
+  69	.npcs[].allegiance (GONE KEY)	 e.g. r2r-town-42 r2r-town-58 r2r-city-0
+  69	.relationships[].covert (GONE KEY)	 e.g. r2r-town-42 r2r-town-58 r2r-city-0
+  69	.relationships[].handler (GONE KEY)	 e.g. r2r-town-42 r2r-town-58 r2r-city-0
+  68	.institutions[].cascadeBoost	 e.g. r2r-hamlet-48 r2r-town-42 r2r-town-47
+  68	.economicState.activeChains[].resourceInputCondition	 e.g. r2r-town-1 r2r-town-10 r2r-town-47
+  68	.economicState.activeChains[].resourceInputAvailable	 e.g. r2r-town-1 r2r-town-10 r2r-town-47
+  67	.arrivalScene	 e.g. r2r-thorp-15 r2r-thorp-28 r2r-thorp-46
+  67	.availableServices.entertainment[].institution	 e.g. r2r-town-33 r2r-town-41 r2r-town-42
+  66	.availableServices.entertainment[]	 e.g. r2r-town-33 r2r-town-42 r2r-town-47
+  66	.economicState.activeChains[].upstreamWeak (NEW KEY)	 e.g. r2r-town-42 r2r-town-58 r2r-city-15
+  65	.availableServices.food[].institution	 e.g. r2r-hamlet-48 r2r-town-41 r2r-town-47
+  65	.powerStructure.conflicts[].plotHooks[]	 e.g. r2r-town-10 r2r-town-47 r2r-town-58
+  65	.conflicts[].plotHooks[]	 e.g. r2r-town-10 r2r-town-47 r2r-town-58
+  64	.stress.cast.roles[].temporary	 e.g. r2r-thorp-17 r2r-thorp-38 r2r-thorp-46
+  64	.stressors.cast.roles[].temporary	 e.g. r2r-thorp-17 r2r-thorp-38 r2r-thorp-46
+  64	.npcs[].structuralPosition	 e.g. r2r-hamlet-20 r2r-village-22 r2r-town-10
+  64	.availableServices.food[].name	 e.g. r2r-town-41 r2r-town-47 r2r-city-0
+  64	.availableServices.food[].desc	 e.g. r2r-town-41 r2r-town-47 r2r-city-0
+  63	.history.founding.reason	 e.g. r2r-hamlet-12 r2r-hamlet-30 r2r-hamlet-46
+  63	.availableServices.transport[].name	 e.g. r2r-hamlet-20 r2r-hamlet-48 r2r-village-22
+  63	.availableServices.transport[].desc	 e.g. r2r-hamlet-20 r2r-hamlet-48 r2r-village-22
+  63	.availableServices.transport[].institution	 e.g. r2r-hamlet-20 r2r-hamlet-48 r2r-village-22
+  63	.availableServices.criminal[].name	 e.g. r2r-town-41 r2r-city-15 r2r-city-17
+  63	.availableServices.criminal[].desc	 e.g. r2r-town-41 r2r-city-15 r2r-city-17
+  63	.availableServices.criminal[]	 e.g. r2r-town-41 r2r-town-42 r2r-city-15
+  61	.availableServices.criminal[].institution	 e.g. r2r-town-41 r2r-city-15 r2r-city-17
+  60	.history.currentTensions[].factions[]	 e.g. r2r-village-49 r2r-town-41 r2r-town-42
+  60	.stress[].summary	 e.g. r2s-occupied-thorp-1 r2s-occupied-hamlet-0 r2s-occupied-hamlet-1
+  60	.stressors[].summary	 e.g. r2s-occupied-thorp-1 r2s-occupied-hamlet-0 r2s-occupied-hamlet-1
+  59	.powerStructure.factions[].faction	 e.g. r2r-village-22 r2r-town-10 r2r-town-42
+  58	.powerStructure.factions[].powerLabel	 e.g. r2r-thorp-46 r2r-thorp-55 r2r-hamlet-59
+  57	.institutions[].cascadeAdded (GONE KEY)	 e.g. r2r-town-41 r2r-town-47 r2r-city-0
+  57	.institutions[].cascadeBoost (GONE KEY)	 e.g. r2r-town-41 r2r-town-47 r2r-city-0
+  55	.history.legacyAnnotations[].annotation	 e.g. r2r-thorp-15 r2r-village-4 r2r-village-22
+  54	.powerStructure.factions[].category	 e.g. r2r-village-22 r2r-town-10 r2r-town-42
+  54	.availableServices.magic[]	 e.g. r2r-town-57 r2r-city-29 r2r-city-36
+  53	.history.currentTensions[].plotHooks[]	 e.g. r2r-village-49 r2r-town-41 r2r-town-47
+  53	.institutions[].serviceKeys (GONE KEY)	 e.g. r2r-town-47 r2r-town-58 r2r-city-0
+  52	.npcs[].activeConstraint	 e.g. r2r-hamlet-20 r2r-village-22 r2r-town-10
+  52	.history.currentTensions[].type	 e.g. r2r-village-49 r2r-town-41 r2r-town-47
+  51	.resourceAnalysis.exploitation.unexploited[]	 e.g. r2r-thorp-33 r2r-thorp-42 r2r-hamlet-12
+  50	.history.historicalEvents[].lastingEffects[]	 e.g. r2r-thorp-58 r2r-hamlet-7 r2r-village-4
+  50	.history.historicalEvents[].name	 e.g. r2r-thorp-58 r2r-hamlet-7 r2r-village-4
+  50	.history.eventsTimeline[].name	 e.g. r2r-thorp-58 r2r-hamlet-7 r2r-village-4
+  50	.economicState.compound.inst.hasHospital	 e.g. r2r-city-22 r2r-city-28 r2r-city-33
+  50	.economicState.safetyProfile.compound.inst.hasHospital	 e.g. r2r-city-22 r2r-city-28 r2r-city-33
+  49	.history.historicalEvents[].templateType	 e.g. r2r-thorp-58 r2r-hamlet-7 r2r-village-4
+  49	.resourceAnalysis.gaps[].kind	 e.g. r2r-hamlet-45 r2r-village-50 r2r-city-0
+  48	.history.historicalEvents[].severity	 e.g. r2r-thorp-58 r2r-village-4 r2r-village-58
+  48	.history.historicalEvents[].type	 e.g. r2r-thorp-58 r2r-hamlet-7 r2r-village-4
+  48	.history.eventsTimeline[].type	 e.g. r2r-thorp-58 r2r-hamlet-7 r2r-village-4
+  47	.history.historicalEvents[].plotHooks[]	 e.g. r2r-hamlet-7 r2r-village-4 r2r-village-58
+  47	.resourceAnalysis.exports[]	 e.g. r2r-village-4 r2r-town-1 r2r-town-5
+  47	.stress.cast.stakes[].stake	 e.g. r2r-village-24 r2r-village-58 r2r-metropolis-6
+  47	.stressors.cast.stakes[].stake	 e.g. r2r-village-24 r2r-village-58 r2r-metropolis-6
+  47	.economicState.activeChains[].upstreamNote	 e.g. r2r-village-49 r2r-town-42 r2r-town-57
+  47	.institutions[].tier (GONE KEY)	 e.g. r2r-town-41 r2r-town-47 r2r-city-0
+  46	.npcs[].importance (NEW KEY)	 e.g. r2r-thorp-5 r2r-thorp-10 r2r-thorp-19
+  46	.npcs[].structuralRank (NEW KEY)	 e.g. r2r-thorp-5 r2r-thorp-10 r2r-thorp-19
+  45	.history.eventsTimeline[].anchored	 e.g. r2r-thorp-58 r2r-village-4 r2r-village-58
+  45	.pressureSentence	 e.g. r2r-hamlet-20 r2r-village-22 r2r-town-10
+  45	.history.legacyAnnotations[].eventName	 e.g. r2r-village-4 r2r-village-58 r2r-town-1
+  45	.stress.cast.stakes[].factionId	 e.g. r2r-town-57 r2r-metropolis-2 r2r-metropolis-6
+  45	.stressors.cast.stakes[].factionId	 e.g. r2r-town-57 r2r-metropolis-2 r2r-metropolis-6
+  45	.availableServices.magic[].name	 e.g. r2r-city-36 r2r-city-45 r2r-city-49
+  45	.availableServices.magic[].desc	 e.g. r2r-city-36 r2r-city-45 r2r-city-49
+  45	.stress[].cast.roles[].reason	 e.g. r2r-city-56 r2s-occupied-thorp-1 r2s-occupied-hamlet-0
+  45	.stressors[].cast.roles[].reason	 e.g. r2r-city-56 r2s-occupied-thorp-1 r2s-occupied-hamlet-0
+  44	.history.historicalEvents[].yearsAgo	 e.g. r2r-thorp-58 r2r-village-4 r2r-village-58
+  44	.history.eventsTimeline[].year	 e.g. r2r-thorp-58 r2r-village-4 r2r-village-58
+  44	.history.eventsTimeline[].yearsAgo	 e.g. r2r-thorp-58 r2r-village-4 r2r-village-58
+  44	.resourceAnalysis.gaps[].institution	 e.g. r2r-hamlet-45 r2r-village-47 r2r-village-49
+  44	.powerStructure.conflicts[].issue	 e.g. r2r-town-10 r2r-town-47 r2r-town-58
+  44	.powerStructure.conflicts[].stakes	 e.g. r2r-town-10 r2r-town-47 r2r-town-58
+  44	.conflicts[].issue	 e.g. r2r-town-10 r2r-town-47 r2r-town-58
+  44	.conflicts[].stakes	 e.g. r2r-town-10 r2r-town-47 r2r-town-58
+  44	.prominentRelationship.type	 e.g. r2r-town-10 r2r-town-42 r2r-town-47
+  44	.institutions[].serviceKeys (NEW KEY)	 e.g. r2r-town-58 r2r-city-0 r2r-city-17
+  44	.npcs[].memberships[].veiled	 e.g. r2r-city-5 r2r-city-26 r2r-city-29
+  44	.institutions[].exclusiveGroupCoexists (NEW KEY)	 e.g. r2r-city-17 r2r-city-21 r2r-city-28
+  44	.institutions[].exclusiveGroupCoexists (GONE KEY)	 e.g. r2r-city-17 r2r-city-21 r2r-city-28
+  43	.simulationTrace[].downstreamEffects[].reason (GONE KEY)	 e.g. r2r-hamlet-34 r2r-town-58 r2r-city-0
+  43	.availableServices.lodging[]	 e.g. r2r-village-22 r2r-town-41 r2r-town-47
+  42	.generationCoherenceReceipt.judgments[].evidence[]	 e.g. r2r-village-4 r2r-village-22 r2r-village-58
+  42	.powerStructure.factionRelationships[].narrative	 e.g. r2r-village-22 r2r-town-10 r2r-town-42
+  42	.economicState.activeChains[].resourceDepleted	 e.g. r2r-town-1 r2r-town-47 r2r-city-26
+  42	.defenseProfile.scores.monster	 e.g. r2r-town-10 r2r-town-42 r2r-town-47
+  42	.economicState.safetyProfile.criminalInstitutions[]	 e.g. r2r-town-33 r2r-town-41 r2r-town-47
+  41	.resourceAnalysis.gaps[].institution (GONE KEY)	 e.g. r2r-hamlet-12 r2r-hamlet-45 r2r-village-3
+  41	.resourceAnalysis.gaps[].kind (GONE KEY)	 e.g. r2r-hamlet-12 r2r-hamlet-45 r2r-village-3
+  41	.resourceAnalysis.gaps[].missing (NEW KEY)	 e.g. r2r-hamlet-12 r2r-hamlet-45 r2r-village-3
+  41	.history.legacyAnnotations[].severity	 e.g. r2r-village-4 r2r-village-58 r2r-town-1
+  41	.powerStructure.conflicts[].intensity	 e.g. r2r-town-41 r2r-town-47 r2r-city-49
+  41	.conflicts[].intensity	 e.g. r2r-town-41 r2r-town-47 r2r-city-49
+  39	.simulationTrace[].downstreamEffects[].reason (NEW KEY)	 e.g. r2r-city-5 r2r-city-15 r2r-city-26
+  38	.availableServices.lodging[].institution	 e.g. r2r-hamlet-48 r2r-village-22 r2r-town-41
+  38	.history.legacyAnnotations[].yearsAgo	 e.g. r2r-village-4 r2r-village-58 r2r-town-1
+  38	.availableServices.magic[].institution	 e.g. r2r-city-36 r2r-city-45 r2r-city-50
+  37	.history.historicalEvents[].anchored (NEW KEY)	 e.g. r2r-thorp-58 r2r-town-1 r2r-town-41
+  37	.availableServices.lodging[].name	 e.g. r2r-village-22 r2r-town-41 r2r-town-47
+  37	.availableServices.lodging[].desc	 e.g. r2r-village-22 r2r-town-41 r2r-town-47
+  36	.institutions[].coherenceRepair (NEW KEY)	 e.g. r2r-town-47 r2r-city-26 r2r-city-29
+  35	.history.currentTensions[].severity[]	 e.g. r2r-village-49 r2r-town-47 r2r-city-0
+  35	.spatialLayout.quarters[].landmarks[]	 e.g. r2r-town-10 r2r-town-41 r2r-town-47
+  35	.economicViability.issues[].description	 e.g. r2s-under_siege-town-1 r2s-under_siege-town-3 r2s-under_siege-city-1
+  35	.stress[].cast.roles[].id	 e.g. r2s-occupied-thorp-1 r2s-occupied-hamlet-0 r2s-occupied-hamlet-1
+  35	.stress[].cast.roles[].name	 e.g. r2s-occupied-thorp-1 r2s-occupied-hamlet-0 r2s-occupied-hamlet-1
+  35	.stressors[].cast.roles[].id	 e.g. r2s-occupied-thorp-1 r2s-occupied-hamlet-0 r2s-occupied-hamlet-1
+  35	.stressors[].cast.roles[].name	 e.g. r2s-occupied-thorp-1 r2s-occupied-hamlet-0 r2s-occupied-hamlet-1
+  33	.history.historicalEvents[].anchored (GONE KEY)	 e.g. r2r-thorp-58 r2r-village-58 r2r-town-41
+  33	.institutions[].magicLicense	 e.g. r2r-city-17 r2r-city-21 r2r-city-33
+  32	.powerStructure.publicLegitimacy.score	 e.g. r2r-thorp-50 r2r-hamlet-20 r2r-village-22
+  32	.relationships[].flagDriven	 e.g. r2r-town-47 r2r-town-57 r2r-city-0
+  32	.stress[].cast.roles[].kind	 e.g. r2s-occupied-thorp-1 r2s-occupied-hamlet-0 r2s-occupied-hamlet-1
+  32	.stress[].cast.levers[]	 e.g. r2s-occupied-thorp-1 r2s-occupied-hamlet-0 r2s-occupied-hamlet-1
+  32	.stressors[].cast.roles[].kind	 e.g. r2s-occupied-thorp-1 r2s-occupied-hamlet-0 r2s-occupied-hamlet-1
+  32	.stressors[].cast.levers[]	 e.g. r2s-occupied-thorp-1 r2s-occupied-hamlet-0 r2s-occupied-hamlet-1
+  31	.resourceAnalysis.imports.reasons.Charcoal and fuel (GONE KEY)	 e.g. r2r-thorp-7 r2r-thorp-16 r2r-thorp-28
+  31	.history.historicalCharacter	 e.g. r2r-hamlet-7 r2r-town-1 r2r-town-41
+  31	.economicViability.metrics.foodBalance.importCoverage	 e.g. r2r-town-47 r2r-city-36 r2r-city-56
+  31	.history.currentTensions[].lastingEffects[]	 e.g. r2r-city-0 r2r-city-17 r2r-city-36
+  31	.spatialLayout.quarters[]	 e.g. r2r-city-36 r2r-city-45 r2r-metropolis-2
+  31	.stress[].cast.roles[].temporary	 e.g. r2s-occupied-thorp-1 r2s-occupied-hamlet-0 r2s-occupied-hamlet-1
+  31	.stressors[].cast.roles[].temporary	 e.g. r2s-occupied-thorp-1 r2s-occupied-hamlet-0 r2s-occupied-hamlet-1
+  30	.resourceAnalysis.exploitation.fullyExploited[]	 e.g. r2r-village-4 r2r-town-1 r2r-town-47
+  30	.history.currentTensions[]	 e.g. r2r-village-4 r2r-village-58 r2r-town-41
+  30	.powerStructure.factionRelationships[].pair[]	 e.g. r2r-village-22 r2r-town-10 r2r-town-42
+  30	.economicState.institutionalServices[].institutions[]	 e.g. r2r-city-36 r2r-city-50 r2r-metropolis-2
+  29	.resourceAnalysis.priorityNotes[]	 e.g. r2r-thorp-33 r2r-thorp-42 r2r-hamlet-46
+  29	.economicState.foodSecurity.dailyProduction	 e.g. r2r-village-4 r2r-town-47 r2r-city-36
+  29	.economicViability.metrics.foodBalance.dailyProduction	 e.g. r2r-village-4 r2r-town-47 r2r-city-36
+  29	.economicViability.suggestions[].description	 e.g. r2r-village-54 r2r-town-10 r2r-town-41
+  29	.economicState.activeChains[].magicNote (GONE KEY)	 e.g. r2r-town-1 r2r-metropolis-1 r2r-metropolis-6
+  29	.institutions[].facets (GONE KEY)	 e.g. r2r-town-42 r2r-city-0 r2r-metropolis-1
+  29	.npcs[].allegiance.handler	 e.g. r2r-city-5 r2r-city-26 r2r-city-45
+  28	.history.legacyAnnotations[].eventType	 e.g. r2r-village-4 r2r-town-1 r2r-town-41
+  28	.powerStructure.factionRelationships[].type	 e.g. r2r-town-10 r2r-town-42 r2r-town-47
+  28	.institutions[].facets (NEW KEY)	 e.g. r2r-town-42 r2r-city-0 r2r-metropolis-4
+  28	.defenseProfile.chainModifiers.military	 e.g. r2r-town-57 r2r-city-0 r2r-city-5
+  27	.economicState.institutionalServices[]	 e.g. r2r-town-41 r2r-town-57 r2r-city-26
+  27	.economicState.foodSecurity.rawDeficit	 e.g. r2r-town-47 r2r-city-36 r2r-city-56
+  26	.economicViability.suggestions[].title	 e.g. r2r-village-54 r2r-town-10 r2r-town-41
+  26	.resourceAnalysis.exploitation.partiallyExploited[]	 e.g. r2r-town-5 r2r-town-41 r2r-town-47
+  26	.institutions[].catalogId (NEW KEY)	 e.g. r2r-town-41 r2r-town-47 r2r-city-0
+  26	.npcs[].allegiance.house	 e.g. r2r-city-5 r2r-city-26 r2r-city-45
+  26	.economicState.foodSecurity.deficit	 e.g. r2r-city-36 r2r-metropolis-27 r2r-metropolis-41
+  25	.powerStructure.publicLegitimacy.breakdown.defense	 e.g. r2r-thorp-50 r2r-village-22 r2r-town-42
+  25	.defenseProfile.readiness.label	 e.g. r2r-thorp-50 r2r-village-22 r2r-town-42
+  25	.defenseProfile.readiness.color	 e.g. r2r-thorp-50 r2r-village-22 r2r-town-42
+  25	.defenseProfile.readiness.background	 e.g. r2r-thorp-50 r2r-village-22 r2r-town-42
+  25	.defenseProfile.readiness.border	 e.g. r2r-thorp-50 r2r-village-22 r2r-town-42
+  25	.economicState.foodSecurity.foodRatio	 e.g. r2r-village-4 r2r-city-36 r2r-metropolis-41
+  25	.economicState.foodSecurity.foodRecord.grownPct	 e.g. r2r-village-4 r2r-town-47 r2r-city-36
+  25	.economicState.safetyProfile.plotHooks[]	 e.g. r2r-town-47 r2r-town-57 r2r-city-56
+  25	.economicViability.metrics.foodBalance.rawDeficit	 e.g. r2r-town-47 r2r-city-36 r2r-city-56
+  24	.spatialLayout.quarters[].name	 e.g. r2r-town-41 r2r-city-36 r2r-city-45
+  24	.spatialLayout.quarters[].location	 e.g. r2r-town-41 r2r-city-36 r2r-city-45
+  24	.spatialLayout.quarters[].desc	 e.g. r2r-town-41 r2r-city-36 r2r-city-45
+  24	.economicState.foodSecurity.importCoverage	 e.g. r2r-town-47 r2r-city-36 r2r-city-56
+  23	.economicState.activeChains[].magicRecovery (GONE KEY)	 e.g. r2r-town-1 r2r-metropolis-1 r2r-metropolis-6
+  23	.institutions[].factionSource (NEW KEY)	 e.g. r2r-city-26 r2r-city-29 r2r-city-56
+  23	.economicState.foodSecurity.deficitPct	 e.g. r2r-city-36 r2r-metropolis-41 r2s-under_siege-city-3
+  23	.economicState.foodSecurity.foodRecord.gapPct	 e.g. r2r-city-36 r2r-metropolis-41 r2s-under_siege-city-3
+  23	.economicViability.metrics.foodBalance.deficit	 e.g. r2r-city-36 r2r-metropolis-41 r2s-under_siege-city-3
+  23	.economicViability.metrics.foodBalance.deficitPercent	 e.g. r2r-city-36 r2r-metropolis-41 r2s-under_siege-city-3
+  22	.powerStructure.governingName	 e.g. r2r-town-10 r2r-town-47 r2r-city-26
+  22	.powerStructure.government	 e.g. r2r-town-10 r2r-town-47 r2r-city-26
+  22	.institutions[].coherenceRepair (GONE KEY)	 e.g. r2r-town-47 r2r-city-21 r2r-city-28
+  22	.institutions[].nativeTier (NEW KEY)	 e.g. r2r-city-26 r2r-city-29 r2r-city-36
+  22	.generationCoherenceReceipt.repairs[]	 e.g. r2r-city-26 r2r-city-36 r2r-metropolis-33
+  21	.powerStructure.factionRelationships[]	 e.g. r2r-village-22 r2r-town-57 r2r-city-5
+  21	.history.currentTensions[].lastingEffects (GONE KEY)	 e.g. r2r-town-41 r2r-city-29 r2r-city-36
+  20	.generationCoherenceReceipt.judgments[].evidence[].path	 e.g. r2r-town-41 r2r-metropolis-11 r2r-metropolis-34
+  20	.economicViability.plotHooks[].category	 e.g. r2r-city-32 r2s-under_siege-city-2 r2s-under_siege-metropolis-3
+  20	.economicState.foodSecurity.magicOffset	 e.g. r2r-metropolis-27 r2r-metropolis-41 r2s-under_siege-city-3
+  19	.economicState.activeChains[].externalMillNote	 e.g. r2r-thorp-13 r2r-thorp-57 r2r-hamlet-14
+  19	.history.historicalEvents[]	 e.g. r2r-village-4 r2r-town-1 r2r-town-57
+  19	.history.eventsTimeline[]	 e.g. r2r-village-4 r2r-town-1 r2r-town-57
+  19	.history.legacyAnnotations[]	 e.g. r2r-village-4 r2r-town-47 r2r-city-26
+  19	.powerStructure.conflicts[]	 e.g. r2r-village-22 r2r-town-42 r2r-town-57
+  19	.conflicts[]	 e.g. r2r-village-22 r2r-town-42 r2r-town-57
+  19	.economicState.activeChains[].magicNote (NEW KEY)	 e.g. r2r-metropolis-1 r2r-metropolis-18 r2r-metropolis-33
+  18	.economicState.institutionalServices[].label	 e.g. r2r-city-50 r2r-metropolis-2 r2r-metropolis-33
+  18	.economicState.institutionalServices[].output	 e.g. r2r-city-50 r2r-metropolis-2 r2r-metropolis-33
+  18	.economicState.institutionalServices[].exportLabel	 e.g. r2r-city-50 r2r-metropolis-2 r2r-metropolis-33
+  17	.economicState.activeChains[].magicNote	 e.g. r2r-town-1 r2r-metropolis-18 r2r-metropolis-33
+  17	.economicState.foodSecurity.importPct	 e.g. r2r-town-47 r2r-city-36 r2r-city-56
+  17	.economicState.foodSecurity.importNote	 e.g. r2r-town-47 r2r-city-36 r2r-city-56
+  17	.economicState.foodSecurity.foodRecord.normalImportPct	 e.g. r2r-town-47 r2r-city-36 r2r-city-56
+  17	.history.currentTensions[].lastingEffects (NEW KEY)	 e.g. r2r-town-47 r2r-city-17 r2r-city-47
+  17	.powerStructure.factions[].name	 e.g. r2r-city-5 r2r-city-57 r2r-metropolis-2
+  17	.powerStructure.factions[].contestsNiche	 e.g. r2r-city-5 r2r-city-57 r2r-metropolis-2
+  17	.economicState.institutionalServices[].color	 e.g. r2r-city-50 r2r-metropolis-2 r2r-metropolis-33
+  17	.economicState.safetyProfile.crimeTypes[].type	 e.g. r2r-metropolis-1 r2r-metropolis-25 r2r-metropolis-33
+  16	.economicState.safetyProfile.safetyDesc	 e.g. r2r-hamlet-11 r2r-hamlet-41 r2r-village-6
+  16	.npcs[].allegiance.vector	 e.g. r2r-city-26 r2r-city-50 r2r-metropolis-2
+  16	.economicState.foodSecurity.foodRecord.magicPct	 e.g. r2r-metropolis-41 r2s-under_siege-city-3 r2s-famine-metropolis-0
+  16	.economicState.foodSecurity.foodRecord.failedSource	 e.g. r2s-famine-thorp-1 r2s-famine-town-1 r2s-famine-city-3
+  16	.economicViability.issues[].message	 e.g. r2s-famine-thorp-1 r2s-famine-town-1 r2s-famine-city-3
+  16	.stress.cast.levers[].institution	 e.g. r2s-infiltrated-metropolis-3 r2s-succession_void-town-1 r2s-insurgency-town-1
+  16	.stress.cast.levers[].holderId	 e.g. r2s-infiltrated-metropolis-3 r2s-succession_void-town-1 r2s-insurgency-town-1
+  16	.stress.cast.levers[].holderName	 e.g. r2s-infiltrated-metropolis-3 r2s-succession_void-town-1 r2s-insurgency-town-1
+  16	.stressors.cast.levers[].institution	 e.g. r2s-infiltrated-metropolis-3 r2s-succession_void-town-1 r2s-insurgency-town-1
+  16	.stressors.cast.levers[].holderId	 e.g. r2s-infiltrated-metropolis-3 r2s-succession_void-town-1 r2s-insurgency-town-1
+  16	.stressors.cast.levers[].holderName	 e.g. r2s-infiltrated-metropolis-3 r2s-succession_void-town-1 r2s-insurgency-town-1
+  15	.stress.cast.roles[]	 e.g. r2r-thorp-16 r2r-thorp-45 r2r-town-57
+  15	.stress.cast.absent[]	 e.g. r2r-thorp-16 r2r-thorp-45 r2r-town-57
+  15	.stressors.cast.roles[]	 e.g. r2r-thorp-16 r2r-thorp-45 r2r-town-57
+  15	.stressors.cast.absent[]	 e.g. r2r-thorp-16 r2r-thorp-45 r2r-town-57
+  15	.defenseProfile.scores.internal	 e.g. r2r-town-10 r2r-town-41 r2r-town-42
+  15	.defenseProfile.scores.traditions.hasDruid	 e.g. r2r-town-10 r2r-city-50 r2r-metropolis-27
+  15	.defenseProfile.traditions.hasDruid	 e.g. r2r-town-10 r2r-city-50 r2r-metropolis-27
+  15	.institutions[].forbiddenResources (NEW KEY)	 e.g. r2r-town-42 r2r-city-0 r2r-metropolis-4
+  15	.institutions[].forbiddenResources (GONE KEY)	 e.g. r2r-town-42 r2r-city-0 r2r-metropolis-4
+  15	.economicState.activeChains[].magicRecovery (NEW KEY)	 e.g. r2r-metropolis-1 r2r-metropolis-18 r2r-metropolis-33
+  15	.activeConditions[].severity	 e.g. r2s-succession_void-town-1 r2s-succession_void-town-3 r2s-wartime-village-0
+  14	.npcs[].structuralPosition (GONE KEY)	 e.g. r2r-town-57 r2s-succession_void-town-1 r2s-insurgency-town-1
+  14	.npcs[].settlementCondition (GONE KEY)	 e.g. r2r-town-57 r2s-succession_void-town-1 r2s-insurgency-town-1
+  14	.npcs[].institution.kind	 e.g. r2r-metropolis-6 r2r-metropolis-33 r2s-famine-hamlet-3
+  13	.powerStructure.economyInputFingerprint	 e.g. r2r-hamlet-20 r2r-village-49 r2r-town-41
+  13	.defenseProfile.institutions.magicDef[]	 e.g. r2r-town-57 r2r-city-36 r2r-city-50
+  13	.economicState.compound.inst.hasBlackMarket	 e.g. r2r-city-49 r2r-metropolis-11 r2r-metropolis-18
+  13	.economicState.safetyProfile.compound.inst.hasBlackMarket	 e.g. r2r-city-49 r2r-metropolis-11 r2r-metropolis-18
+  13	.economicViability.metrics.foodBalance.magicFoodOffset	 e.g. r2r-metropolis-27 r2r-metropolis-41 r2s-under_siege-city-3
+  12	.resourceAnalysis.resourceChains[].rawResource	 e.g. r2r-village-4 r2r-town-27 r2r-town-47
+  12	.resourceAnalysis.resourceChains[].processingTags[]	 e.g. r2r-village-4 r2r-town-27 r2r-town-47
+  12	.resourceAnalysis.resourceChains[].processingInstitutions[]	 e.g. r2r-village-4 r2r-town-27 r2r-town-47
+  12	.resourceAnalysis.resourceChains[].intermediateGoods[]	 e.g. r2r-village-4 r2r-town-27 r2r-town-47
+  12	.resourceAnalysis.resourceChains[].finalProducts[]	 e.g. r2r-village-4 r2r-town-27 r2r-town-47
+  12	.resourceAnalysis.resourceChains[].dependsOn[]	 e.g. r2r-village-4 r2r-town-27 r2r-town-47
+  12	.resourceAnalysis.resourceChains[].chainKey	 e.g. r2r-village-4 r2r-town-27 r2r-town-47
+  12	.defenseProfile.chainModifiers.economic	 e.g. r2r-village-4 r2r-town-47 r2r-city-36
+  12	.powerStructure.recentConflict	 e.g. r2r-village-22 r2r-town-10 r2r-town-47
+  11	.powerStructure.factions[]	 e.g. r2r-village-22 r2r-town-57 r2s-under_siege-city-1
+  11	.generationCoherenceReceipt.judgments[].findings[]	 e.g. r2r-village-49 r2r-village-58 r2r-town-57
+  11	.economicState.compound.inst.hasWarehouse	 e.g. r2r-town-10 r2r-town-47 r2r-town-57
+  11	.economicState.safetyProfile.compound.inst.hasWarehouse	 e.g. r2r-town-10 r2r-town-47 r2r-town-57
+  11	.coherenceNotes[]	 e.g. r2r-town-54 r2s-occupied-metropolis-1 r2s-indebted-metropolis-0
+  11	.npcs[].activeConstraint (GONE KEY)	 e.g. r2r-town-57 r2s-succession_void-town-1 r2s-insurgency-town-1
+  11	.defenseProfile.institutions.magicDef[].name	 e.g. r2r-city-50 r2r-metropolis-2 r2r-metropolis-18
+  11	.defenseProfile.institutions.magicDef[].desc	 e.g. r2r-city-50 r2r-metropolis-2 r2r-metropolis-18
+  11	.defenseProfile.institutions.magicDef[].tags[]	 e.g. r2r-city-50 r2r-metropolis-2 r2r-metropolis-18
+  11	.stress[].cast.stakes[].reason	 e.g. r2r-city-56 rr3-town-under_siege+famine-rand-5 rr3-city-under_siege+famine-rand-4
+  11	.stress[].cast.stakes[].stake	 e.g. r2r-city-56 rr3-town-under_siege+famine-rand-5 rr3-city-under_siege+famine-rand-4
+  11	.stressors[].cast.stakes[].reason	 e.g. r2r-city-56 rr3-town-under_siege+famine-rand-5 rr3-city-under_siege+famine-rand-4
+  11	.stressors[].cast.stakes[].stake	 e.g. r2r-city-56 rr3-town-under_siege+famine-rand-5 rr3-city-under_siege+famine-rand-4
+  11	.economicState.compound.inst.hasGangInfra	 e.g. r2r-metropolis-1 r2r-metropolis-33 r2r-metropolis-40
+  11	.economicState.safetyProfile.compound.inst.hasGangInfra	 e.g. r2r-metropolis-1 r2r-metropolis-33 r2r-metropolis-40
+  10	.stress.cast.roles[].role	 e.g. r2r-thorp-45 r2r-town-57 r2s-under_siege-thorp-0
+  10	.stressors.cast.roles[].role	 e.g. r2r-thorp-45 r2r-town-57 r2s-under_siege-thorp-0
+  10	.powerStructure.publicLegitimacy.label	 e.g. r2r-village-22 r2r-town-47 r2r-city-26
+  10	.powerStructure.publicLegitimacy.color	 e.g. r2r-village-22 r2r-town-47 r2r-city-26
+  10	.powerStructure.publicLegitimacy.bg	 e.g. r2r-village-22 r2r-town-47 r2r-city-26
+  10	.powerStructure.publicLegitimacy.govMultiplier	 e.g. r2r-village-22 r2r-town-47 r2r-city-26
+  10	.powerStructure.publicLegitimacy.crimMultiplier	 e.g. r2r-village-22 r2r-town-47 r2r-city-26
+  10	.economicState.safetyProfile.safetyRatio	 e.g. r2r-town-10 r2r-town-41 r2r-town-42
+  10	.economicState.safetyProfile.crimeTypes[]	 e.g. r2r-town-41 r2r-metropolis-25 r2s-under_siege-city-2
+  10	.institutions[].factionSource (GONE KEY)	 e.g. r2r-town-47 r2s-indebted-metropolis-0 r2s-infiltrated-metropolis-3
+  10	.economicState.activeChains[].upstreamMissing[]	 e.g. r2r-town-57 r2r-metropolis-40 r2r-metropolis-41
+  10	.stress.cast.stakes[]	 e.g. r2r-town-57 r2s-under_siege-city-1 r2s-insurgency-hamlet-1
+  10	.stressors.cast.stakes[]	 e.g. r2r-town-57 r2s-under_siege-city-1 r2s-insurgency-hamlet-1
+  10	.defenseProfile.institutions.walls[]	 e.g. r2r-city-29 r2r-city-36 r2r-city-45
+  10	.npcs[].stressNote (NEW KEY)	 e.g. r2r-city-33 r2s-insurgency-metropolis-2 r2s-slave_revolt-metropolis-0
+  10	.economicState.activeChains[].magicRecovery	 e.g. r2r-metropolis-33 r2r-metropolis-41 r2s-famine-metropolis-0
+  9	.economicState.compound.economyOutput	 e.g. r2r-village-22 r2r-town-41 r2r-town-47
+  9	.economicState.safetyProfile.compound.economyOutput	 e.g. r2r-village-22 r2r-town-41 r2r-town-47
+  9	.economicState.compound.inst.hasAlchemist	 e.g. r2r-town-57 r2r-city-50 r2r-metropolis-18
+  9	.economicState.safetyProfile.compound.inst.hasAlchemist	 e.g. r2r-town-57 r2r-city-50 r2r-metropolis-18
+  9	.powerStructure.criminalCaptureState	 e.g. r2r-town-58 r2r-city-26 r2r-metropolis-18
+  9	.economicState.incomeSources[].isCriminal (NEW KEY)	 e.g. r2r-city-29 r2s-mass_migration-city-2 rr3-village-monster_pressure-rand-2
+  9	.economicState.incomeSources[].isCriminal (GONE KEY)	 e.g. r2r-city-29 r2s-mass_migration-city-2 rr3-village-monster_pressure-rand-2
+  9	.npcs[].stressNote (GONE KEY)	 e.g. r2r-city-33 r2s-insurgency-metropolis-2 r2s-slave_revolt-metropolis-0
+  9	.npcs[].allegiance.via	 e.g. r2r-city-45 r2r-metropolis-2 r2r-metropolis-18
+  9	.defenseProfile.institutions.magicDef[].magicLicense	 e.g. r2r-city-50 r2r-metropolis-2 r2r-metropolis-18
+  9	.economicState.compound.inst.hasSmuggling	 e.g. r2r-metropolis-1 r2r-metropolis-33 r2s-under_siege-city-2
+  9	.economicState.safetyProfile.compound.inst.hasSmuggling	 e.g. r2r-metropolis-1 r2r-metropolis-33 r2s-under_siege-city-2
+  9	.history.currentTensions[].specificIssue (GONE KEY)	 e.g. r2s-under_siege-village-0 r2s-under_siege-city-3 rr3-thorp-famine-rand-3
+  9	.powerStructure.factions[].isGoverning (GONE KEY)	 e.g. r2s-under_siege-city-1 r2s-insurgency-town-1 r2s-wartime-village-0
+  8	.resourceAnalysis.exports[].product	 e.g. r2r-village-4 r2r-metropolis-4 r2s-under_siege-city-1
+  8	.history.historicalEvents[].templateType (GONE KEY)	 e.g. r2r-village-4 r2r-city-15 r2r-city-36
+  8	.npcs[].settlementCondition	 e.g. r2r-village-22 r2r-metropolis-18 r2s-succession_void-town-1
+  8	.powerStructure.factions[].modifier	 e.g. r2r-town-47 r2r-city-26 r2s-under_siege-city-3
+  8	.resourceAnalysis.gaps[].missing[]	 e.g. r2r-town-47 r2r-city-50 r2r-metropolis-51
+  8	.powerStructure.factionRelationships[].direction	 e.g. r2r-town-57 r2r-city-27 r2r-metropolis-33
+  8	.economicState.compound.inst.hasMerchantGuild	 e.g. r2r-town-58 r2s-politically_fractured-city-2 r2s-succession_void-town-2
+  8	.economicState.safetyProfile.compound.inst.hasMerchantGuild	 e.g. r2r-town-58 r2s-politically_fractured-city-2 r2s-succession_void-town-2
+  8	.npcs[].allegiance.power	 e.g. r2r-city-5 r2r-city-50 r2r-city-56
+  8	.institutions[].nativeTier (GONE KEY)	 e.g. r2r-city-21 r2r-city-28 r2s-succession_void-town-1
+  8	.defenseProfile.scores.magicDependency	 e.g. r2r-city-36 r2s-politically_fractured-town-2 r2s-succession_void-town-1
+  8	.defenseProfile.magicDependency	 e.g. r2r-city-36 r2s-politically_fractured-town-2 r2s-succession_void-town-1
+  8	.defenseProfile.institutions.magicDef[].category	 e.g. r2r-city-50 r2r-metropolis-18 r2r-metropolis-27
+  8	.defenseProfile.institutions.magicDef[].baseChance	 e.g. r2r-city-50 r2r-metropolis-27 r2s-under_siege-city-3
+  8	.defenseProfile.institutions.charter[].source	 e.g. r2r-metropolis-1 r2r-metropolis-51 r2s-politically_fractured-city-0
+  8	.economicState.institutionalServices[].exportable	 e.g. r2r-metropolis-2 r2r-metropolis-33 r2s-under_siege-city-2
+  8	.history.currentTensions[].specificIssue	 e.g. r2s-famine-thorp-1 r2s-famine-city-3 r2s-famine-metropolis-2
+  7	.economicState.prosperity	 e.g. r2r-hamlet-20 r2r-village-49 r2r-town-41
+  7	.powerStructure.publicLegitimacy.breakdown.prosperity	 e.g. r2r-hamlet-20 r2r-village-49 r2r-town-41
+  7	.resourceAnalysis.exports[].chain	 e.g. r2r-village-4 r2r-metropolis-4 r2s-under_siege-city-3
+  7	.powerStructure.publicLegitimacy.isContested	 e.g. r2r-village-22 r2s-succession_void-town-1 r2s-wartime-village-0
+  7	.defenseProfile.economicGates.monster	 e.g. r2r-village-22 r2r-town-41 r2s-politically_fractured-village-1
+  7	.defenseProfile.economicGates.economic	 e.g. r2r-village-22 r2r-town-41 r2s-politically_fractured-village-1
+  7	.defenseProfile.economicGates.disaster	 e.g. r2r-village-22 r2r-town-41 r2s-politically_fractured-village-1
+  7	.history.siegeNarrative	 e.g. r2r-village-24 r2s-plague_onset-thorp-3 rr3-thorp-under_siege+famine-rand-4
+  7	.economicState.compound.militaryEffective	 e.g. r2r-town-10 r2r-town-42 r2r-town-57
+  7	.economicState.safetyProfile.compound.militaryEffective	 e.g. r2r-town-10 r2r-town-42 r2r-town-57
+  7	.economicState.foodSecurity.magicSupplement	 e.g. r2r-town-10 r2s-succession_void-town-1 r2s-monster_pressure-metropolis-3
+  7	.economicViability.suggestions[].impact (GONE KEY)	 e.g. r2r-town-10 r2r-town-41 r2s-plague_onset-town-3
+  7	.economicViability.suggestions[].suggestedFixes (GONE KEY)	 e.g. r2r-town-10 r2r-town-41 r2s-plague_onset-town-3
+  7	.economicState.compound.inst.hasPrison	 e.g. r2r-town-41 r2r-town-47 r2s-religious_conversion-city-3
+  7	.economicState.safetyProfile.compound.inst.hasPrison	 e.g. r2r-town-41 r2r-town-47 r2s-religious_conversion-city-3
+  7	.powerStructure.factionRelationships[].dmNote (GONE KEY)	 e.g. r2r-town-42 r2r-city-5 r2r-city-45
+  7	.powerStructure.factionRelationships[].dmNote (NEW KEY)	 e.g. r2r-city-5 r2r-metropolis-18 r2r-metropolis-40
+  7	.resourceAnalysis.imports.reasons.grain (GONE KEY)	 e.g. r2r-city-36 r2s-monster_pressure-metropolis-0 rr3-city-religious_conversion-rand-0
+  7	.institutions[].priorityCategory (NEW KEY)	 e.g. r2r-city-49 r2s-indebted-hamlet-0 r2s-insurgency-village-1
+  6	.resourceAnalysis.resourceChains[].exportValue	 e.g. r2r-village-4 r2r-town-27 r2r-town-47
+  6	.history.historicalEvents[].anchored	 e.g. r2r-village-4 r2r-city-15 r2r-city-36
+  6	.economicState.economicComplexity	 e.g. r2r-village-22 r2s-politically_fractured-village-1 r2s-infiltrated-village-2
+  6	.resourceAnalysis.imports.reasons.medicinal herbs (GONE KEY)	 e.g. r2r-village-44 r2r-village-50 r2s-monster_pressure-town-1
+  6	.resourceAnalysis.imports.reasons.clay (NEW KEY)	 e.g. r2r-city-0 r2s-under_siege-city-1 r2s-succession_void-town-1
+  6	.economicViability.suggestions[].suggestedFixes[]	 e.g. r2r-city-26 r2r-metropolis-27 r2s-under_siege-city-2
+  6	.economicState.compound.inst.hasWizardTower	 e.g. r2r-city-36 r2r-metropolis-2 r2r-metropolis-40
+  6	.economicState.safetyProfile.compound.inst.hasWizardTower	 e.g. r2r-city-36 r2r-metropolis-2 r2r-metropolis-40
+  6	.defenseProfile.institutions.magicDef[].catalogId	 e.g. r2r-city-50 r2r-metropolis-2 r2r-metropolis-27
+  6	.resourceAnalysis.exports[].reason	 e.g. r2r-metropolis-4 r2s-under_siege-city-1 r2s-under_siege-city-3
+  6	.defenseProfile.institutions.magicDef[].source	 e.g. r2r-metropolis-18 r2r-metropolis-27 r2r-metropolis-33
+  6	.economicViability.metrics.foodBalance.magicFoodNote	 e.g. r2r-metropolis-27 r2r-metropolis-41 r2s-famine-metropolis-0
+  6	.powerStructure.factions[].isGoverning (NEW KEY)	 e.g. r2s-under_siege-city-1 r2s-insurgency-town-1 r2s-slave_revolt-metropolis-0
+  6	.economicState.foodSecurity.isPressured	 e.g. r2s-famine-metropolis-0 r2s-famine-metropolis-3 r2s-succession_void-town-1
+  6	.institutions[].priorityCategory (GONE KEY)	 e.g. r2s-indebted-hamlet-0 r2s-indebted-hamlet-3 r2s-insurgency-village-1
+  6	.npcs[].structuralPosition (NEW KEY)	 e.g. r2s-religious_conversion-city-3 r2s-slave_revolt-metropolis-0 rr3-village-calm-rand-2
+  6	.npcs[].settlementCondition (NEW KEY)	 e.g. r2s-religious_conversion-city-3 r2s-slave_revolt-metropolis-0 rr3-village-calm-rand-2
+  5	.defenseProfile.economicGates.military (GONE KEY)	 e.g. r2r-village-48 r2s-wartime-village-3 rr3-village-politically_fractured-rand-1
+  5	.history.founding.overcoming	 e.g. r2r-village-49 r2s-succession_void-town-1 r2s-wartime-village-0
+  5	.economicViability.suggestions[].impact (NEW KEY)	 e.g. r2r-village-54 r2r-town-57 r2r-city-45
+  5	.economicViability.suggestions[].suggestedFixes (NEW KEY)	 e.g. r2r-village-54 r2r-town-57 r2r-city-45
+  5	.economicState.compound.inst.hasGarrison	 e.g. r2r-town-10 r2r-town-42 r2r-town-57
+  5	.economicState.safetyProfile.compound.inst.hasGarrison	 e.g. r2r-town-10 r2r-town-42 r2r-town-57
+  5	.defenseProfile.institutions.garrison[]	 e.g. r2r-town-10 r2r-town-42 r2r-town-57
+  5	.economicState.compound.criminalEffective	 e.g. r2r-town-41 r2r-town-47 r2s-mass_migration-city-2
+  5	.economicState.compound.religionInfluence	 e.g. r2r-town-41 r2s-wartime-thorp-0 r2s-mass_migration-city-2
+  5	.economicState.compound.inst.hasCriminalInst	 e.g. r2r-town-41 r2r-town-47 r2s-mass_migration-city-2
+  5	.economicState.safetyProfile.compound.criminalEffective	 e.g. r2r-town-41 r2r-town-47 r2s-mass_migration-city-2
+  5	.economicState.safetyProfile.compound.religionInfluence	 e.g. r2r-town-41 r2s-wartime-thorp-0 r2s-mass_migration-city-2
+  5	.economicState.safetyProfile.compound.inst.hasCriminalInst	 e.g. r2r-town-41 r2r-town-47 r2s-mass_migration-city-2
+  5	.resourceAnalysis.imports.reasons.stone (GONE KEY)	 e.g. r2r-town-41 r2s-succession_void-town-3 r2s-religious_conversion-city-3
+  5	.economicState.safetyProfile.flags.anyActive	 e.g. r2r-town-47 r2r-metropolis-41 r2s-religious_conversion-city-3
+  5	.powerStructure.factions[].captureState (GONE KEY)	 e.g. r2r-town-58 r2r-city-26 r2r-metropolis-18
+  5	.powerStructure.factionRelationships[].ratio (GONE KEY)	 e.g. r2r-city-5 r2r-city-45 r2r-metropolis-18
+  5	.economicState.compound.inst.hasThievesGuild	 e.g. r2r-city-36 r2r-metropolis-18 r2r-metropolis-33
+  5	.economicState.safetyProfile.compound.inst.hasThievesGuild	 e.g. r2r-city-36 r2r-metropolis-18 r2r-metropolis-33
+  5	.defenseProfile.institutions.mercenary[]	 e.g. r2r-city-36 r2s-succession_void-city-2 r2s-religious_conversion-city-3
+  5	.defenseProfile.institutions.magicDef[].priorityCategory	 e.g. r2r-city-50 r2r-metropolis-2 r2r-metropolis-18
+  5	.economicState.safetyProfile.flags.arcaneBlackMarket	 e.g. r2r-metropolis-25 r2r-metropolis-41 r2s-religious_conversion-city-3
+  5	.resourceAnalysis.imports.reasons.mountain_timber (GONE KEY)	 e.g. r2r-metropolis-30 r2r-metropolis-37 rr3-village-infiltrated-rand-1
+  5	.defenseProfile.institutions.charter[].catalogId (GONE KEY)	 e.g. r2r-metropolis-51 r2s-politically_fractured-city-0 r2s-infiltrated-metropolis-3
+  5	.powerStructure.factions[].modifier (GONE KEY)	 e.g. r2s-under_siege-city-1 r2s-insurgency-town-1 r2s-wartime-village-0
+  5	.powerStructure.factions[].modifier (NEW KEY)	 e.g. r2s-under_siege-city-1 r2s-insurgency-town-1 r2s-wartime-village-0
+  5	.resourceAnalysis.exports[].value	 e.g. r2s-under_siege-city-1 r2s-under_siege-city-3 r2s-succession_void-town-1
+  5	.defenseProfile.institutions.charter[]	 e.g. r2s-under_siege-city-2 r2s-succession_void-town-1 r2s-religious_conversion-city-3
+  5	.economicState.foodSecurity.label	 e.g. r2s-under_siege-city-3 r2s-succession_void-town-1 r2s-wartime-village-0
+  5	.economicState.foodSecurity.color	 e.g. r2s-under_siege-city-3 r2s-succession_void-town-1 r2s-wartime-village-0
+  5	.economicState.foodSecurity.bg	 e.g. r2s-under_siege-city-3 r2s-succession_void-town-1 r2s-wartime-village-0
+  5	.economicState.foodSecurity.foodRecord.band	 e.g. r2s-under_siege-city-3 r2s-succession_void-town-1 r2s-wartime-village-0
+  5	.powerStructure.publicLegitimacy.breakdown.food	 e.g. r2s-under_siege-city-3 r2s-succession_void-town-1 r2s-wartime-village-0
+  5	.economicState.foodSecurity.foodRecord.famineCutPct	 e.g. r2s-famine-city-3 r2s-famine-metropolis-3 rr3-thorp-under_siege+famine-rand-4
+  5	.institutions[].tradeRouteRequired (GONE KEY)	 e.g. r2s-famine-metropolis-1 r2s-insurgency-village-1 r2s-mass_migration-town-1
+  5	.institutions[].terrainAccess (GONE KEY)	 e.g. r2s-famine-metropolis-1 r2s-insurgency-village-1 r2s-mass_migration-town-1
+  5	.institutions[].tradeRouteRequired (NEW KEY)	 e.g. r2s-famine-metropolis-1 r2s-insurgency-village-1 r2s-mass_migration-town-1
+  5	.institutions[].terrainAccess (NEW KEY)	 e.g. r2s-famine-metropolis-1 r2s-insurgency-village-1 r2s-mass_migration-town-1
+  5	.powerStructure.publicLegitimacy.isLegitimacyCrisis	 e.g. r2s-succession_void-town-1 r2s-wartime-village-0 rr3-town-insurgency-rand-0
+  5	.powerStructure.publicLegitimacy.governanceFractured	 e.g. r2s-succession_void-town-1 r2s-wartime-village-0 rr3-town-insurgency-rand-0
+  5	.economicViability.metrics.foodBalance.magicFoodOffset (NEW KEY)	 e.g. r2s-succession_void-town-1 r2s-wartime-village-0 rr3-thorp-under_siege-rand-1
+  5	.economicViability.metrics.foodBalance.magicFoodNote (NEW KEY)	 e.g. r2s-succession_void-town-1 r2s-wartime-village-0 rr3-thorp-under_siege-rand-1
+  4	.economicState.compound.inst.hasMarket	 e.g. r2r-village-22 r2s-politically_fractured-village-1 r2s-infiltrated-village-2
+  4	.economicState.safetyProfile.compound.inst.hasMarket	 e.g. r2r-village-22 r2s-politically_fractured-village-1 r2s-infiltrated-village-2
+  4	.economicState.foodSecurity.importDependency	 e.g. r2r-village-22 r2s-politically_fractured-village-1 r2s-infiltrated-village-2
+  4	.history.currentTensions[].specificIssue (NEW KEY)	 e.g. r2r-village-58 r2s-famine-metropolis-1 r2s-mass_migration-metropolis-3
+  4	.resourceAnalysis.imports.reasons.clay (GONE KEY)	 e.g. r2r-town-42 r2r-town-57 rr3-town-under_siege-rand-2
+  4	.economicState.safetyProfile.safetyLabel	 e.g. r2r-town-47 r2r-town-57 r2r-city-26
+  4	.generationCoherenceReceipt.judgments[].status	 e.g. r2r-town-57 rr3-town-monster_pressure-rand-0 rr3-town-monster_pressure-rand-3
+  4	.powerStructure.factionRelationships[].captureState	 e.g. r2r-town-58 r2r-city-26 r2s-mass_migration-town-2
+  4	.powerStructure.factionRelationships[].ratio (NEW KEY)	 e.g. r2r-city-5 r2r-metropolis-53 rr3-village-monster_pressure-rand-2
+  4	.history.historicalEvents[].templateType (NEW KEY)	 e.g. r2r-city-15 r2s-monster_pressure-town-3 rr3-village-infiltrated-rand-1
+  4	.institutions[].required (NEW KEY)	 e.g. r2r-city-49 r2r-metropolis-51 r2s-famine-metropolis-0
+  4	.defenseProfile.institutions.charter[].desc	 e.g. r2r-metropolis-1 r2s-politically_fractured-city-0 r2s-succession_void-city-2
+  4	.defenseProfile.institutions.magicDef[].tier (GONE KEY)	 e.g. r2r-metropolis-27 r2s-famine-metropolis-1 rr3-metropolis-recently_betrayed-rand-5
+  4	.defenseProfile.institutions.magicDef[].cascadeAdded (GONE KEY)	 e.g. r2r-metropolis-27 r2s-famine-metropolis-1 rr3-metropolis-recently_betrayed-rand-5
+  4	.defenseProfile.institutions.magicDef[].cascadeBoost (GONE KEY)	 e.g. r2r-metropolis-27 r2s-famine-metropolis-1 rr3-metropolis-recently_betrayed-rand-5
+  4	.defenseProfile.institutions.magicDef[].catalogId (NEW KEY)	 e.g. r2r-metropolis-27 r2s-famine-metropolis-1 rr3-metropolis-recently_betrayed-rand-5
+  4	.institutions[].required (GONE KEY)	 e.g. r2r-metropolis-41 r2s-occupied-metropolis-0 r2s-slave_revolt-metropolis-0
+  4	.generationCoherenceReceipt.judgments[].findings[].evidence	 e.g. r2s-under_siege-town-1 r2s-under_siege-town-3 r2s-insurgency-town-1
+  4	.powerStructure.factions[].legitimacyCrisis (GONE KEY)	 e.g. r2s-under_siege-city-1 r2s-succession_void-town-1 r2s-wartime-village-0
+  4	.powerStructure.factions[].crisisNote (GONE KEY)	 e.g. r2s-under_siege-city-1 r2s-succession_void-town-1 r2s-wartime-village-0
+  4	.defenseProfile.institutions.charter[].nativeTier (NEW KEY)	 e.g. r2s-politically_fractured-city-0 r2s-infiltrated-metropolis-3 r2s-succession_void-city-2
+  4	.defenseProfile.institutions.charter[].coherenceRepair (NEW KEY)	 e.g. r2s-politically_fractured-city-0 r2s-infiltrated-metropolis-3 r2s-succession_void-city-2
+  4	.economicState.foodSecurity.isSecure	 e.g. r2s-succession_void-town-1 r2s-wartime-village-0 r2s-mass_migration-city-2
+  4	.economicState.foodSecurity.prosperityMod	 e.g. r2s-succession_void-town-1 r2s-wartime-village-0 r2s-mass_migration-city-2
+  4	.institutions[].serviceKeys[]	 e.g. r2s-insurgency-metropolis-2 r2s-wartime-city-0 rr3-metropolis-recently_betrayed-rand-2
+  4	.powerStructure.factions[].name (GONE KEY)	 e.g. r2s-mass_migration-city-2 r2s-mass_migration-metropolis-1 rr3-city-insurgency-rand-5
+  4	.powerStructure.factions[].contestsNiche (GONE KEY)	 e.g. r2s-mass_migration-city-2 r2s-mass_migration-metropolis-1 rr3-city-insurgency-rand-5
+  4	.stress[].cast.roles[]	 e.g. rr3-thorp-under_siege-rand-3 rr3-thorp-plague_onset-rand-3 rr3-thorp-under_siege+famine-port-1
+  4	.stress[].cast.absent[]	 e.g. rr3-thorp-under_siege-rand-3 rr3-thorp-plague_onset-rand-3 rr3-thorp-under_siege+famine-port-1
+  4	.stressors[].cast.roles[]	 e.g. rr3-thorp-under_siege-rand-3 rr3-thorp-plague_onset-rand-3 rr3-thorp-under_siege+famine-port-1
+  4	.stressors[].cast.absent[]	 e.g. rr3-thorp-under_siege-rand-3 rr3-thorp-plague_onset-rand-3 rr3-thorp-under_siege+famine-port-1
+  3	.economicState.foodSecurity.effectiveAgriculture	 e.g. r2r-village-4 r2s-infiltrated-metropolis-3 rr3-village-monster_pressure-rand-2
+  3	.resourceAnalysis.exploitation.fullyExploited[].rawResource	 e.g. r2r-village-4 r2s-succession_void-town-1 rr3-town-under_siege-rand-1
+  3	.resourceAnalysis.exploitation.fullyExploited[].processingTags[]	 e.g. r2r-village-4 r2s-succession_void-town-1 rr3-town-under_siege-rand-1
+  3	.resourceAnalysis.exploitation.fullyExploited[].processingInstitutions[]	 e.g. r2r-village-4 r2s-succession_void-town-1 rr3-town-under_siege-rand-1
+  3	.resourceAnalysis.exploitation.fullyExploited[].intermediateGoods[]	 e.g. r2r-village-4 r2s-succession_void-town-1 rr3-town-under_siege-rand-1
+  3	.resourceAnalysis.exploitation.fullyExploited[].finalProducts[]	 e.g. r2r-village-4 r2s-succession_void-town-1 rr3-town-under_siege-rand-1
+  3	.resourceAnalysis.exploitation.fullyExploited[].dependsOn[]	 e.g. r2r-village-4 r2s-succession_void-town-1 rr3-town-under_siege-rand-1
+  3	.resourceAnalysis.exploitation.fullyExploited[].chainKey	 e.g. r2r-village-4 r2s-succession_void-town-1 rr3-town-under_siege-rand-1
+  3	.economicViability.metrics.foodBalance.agricultureModifier	 e.g. r2r-village-4 r2s-infiltrated-metropolis-3 rr3-village-monster_pressure-rand-2
+  3	.powerStructure.publicLegitimacy.isTolerated	 e.g. r2r-village-22 r2r-city-26 r2s-mass_migration-city-2
+  3	.economicState.safetyProfile.blackMarketCapture	 e.g. r2r-town-41 r2s-mass_migration-city-2 rr3-town-mass_migration-rand-3
+  3	.defenseProfile.economicGates.military	 e.g. r2r-town-41 r2s-mass_migration-city-2 rr3-city-famine-rand-2
+  3	.defenseProfile.economicGates.internal	 e.g. r2r-town-41 r2s-mass_migration-city-2 rr3-city-famine-rand-2
+  3	.powerStructure.publicLegitimacy.breakdown.safety	 e.g. r2r-town-47 r2r-city-26 r2r-metropolis-40
+  3	.powerStructure.factionRelationships[].dmNote	 e.g. r2r-town-57 r2r-town-58 r2r-city-26
+  3	.resourceAnalysis.exploitation.unexploited[].rawResource	 e.g. r2r-town-57 r2r-city-50 r2s-indebted-town-1
+  3	.resourceAnalysis.exploitation.unexploited[].processingTags[]	 e.g. r2r-town-57 r2r-city-50 r2s-indebted-town-1
+  3	.resourceAnalysis.exploitation.unexploited[].processingInstitutions[]	 e.g. r2r-town-57 r2r-city-50 r2s-indebted-town-1
+  3	.resourceAnalysis.exploitation.unexploited[].intermediateGoods[]	 e.g. r2r-town-57 r2r-city-50 r2s-indebted-town-1
+  3	.resourceAnalysis.exploitation.unexploited[].finalProducts[]	 e.g. r2r-town-57 r2r-city-50 r2s-indebted-town-1
+  3	.resourceAnalysis.exploitation.unexploited[].dependsOn[]	 e.g. r2r-town-57 r2r-city-50 r2s-indebted-town-1
+  3	.resourceAnalysis.exploitation.unexploited[].chainKey	 e.g. r2r-town-57 r2r-city-50 r2s-indebted-town-1
+  3	.powerStructure.factionRelationships[].captureState (NEW KEY)	 e.g. r2r-city-5 r2r-metropolis-18 r2s-mass_migration-city-2
+  3	.powerStructure.factionRelationships[].captureState (GONE KEY)	 e.g. r2r-city-5 rr3-village-monster_pressure-rand-2 rr3-town-plague_onset-rand-3
+  3	.resourceAnalysis.imports.reasons.copper ore (NEW KEY)	 e.g. r2r-city-26 r2s-religious_conversion-city-3 rr3-city-under_siege-rand-4
+  3	.resourceAnalysis.imports.reasons.gold/silver ore (NEW KEY)	 e.g. r2r-city-26 r2s-religious_conversion-city-3 rr3-city-religious_conversion-rand-1
+  3	.resourceAnalysis.imports.reasons.gold/silver ore (GONE KEY)	 e.g. r2r-city-45 r2s-monster_pressure-metropolis-2 rr3-metropolis-monster_pressure-rand-0
+  3	.resourceAnalysis.imports.reasons.grapes (GONE KEY)	 e.g. r2r-metropolis-1 r2s-under_siege-city-1 r2s-religious_conversion-city-3
+  3	.defenseProfile.institutions.charter[].nativeTier (GONE KEY)	 e.g. r2r-metropolis-1 r2s-slave_revolt-metropolis-0 rr3-metropolis-recently_betrayed-rand-5
+  3	.defenseProfile.institutions.charter[].coherenceRepair (GONE KEY)	 e.g. r2r-metropolis-1 r2s-slave_revolt-metropolis-0 rr3-metropolis-recently_betrayed-rand-5
+  3	.defenseProfile.institutions.charter[].catalogId (NEW KEY)	 e.g. r2r-metropolis-1 r2s-slave_revolt-metropolis-0 rr3-metropolis-recently_betrayed-rand-5
+  3	.defenseProfile.institutions.magicDef[].forbiddenTradeRoutes (GONE KEY)	 e.g. r2r-metropolis-2 r2r-metropolis-18 r2r-metropolis-33
+  3	.institutions[].facets.clandestine (GONE KEY)	 e.g. r2r-metropolis-18 r2r-metropolis-19 r2s-famine-metropolis-0
+  3	.coherenceNotes[].note	 e.g. r2r-metropolis-40 r2r-metropolis-53 r2s-slave_revolt-metropolis-0
+  3	.stress.cast.absent[].role	 e.g. r2s-under_siege-thorp-1 r2s-under_siege-thorp-2 rr3-thorp-wartime-rand-4
+  3	.stress.cast.absent[].reason	 e.g. r2s-under_siege-thorp-1 r2s-under_siege-thorp-2 rr3-thorp-wartime-rand-4
+  3	.stressors.cast.absent[].role	 e.g. r2s-under_siege-thorp-1 r2s-under_siege-thorp-2 rr3-thorp-wartime-rand-4
+  3	.stressors.cast.absent[].reason	 e.g. r2s-under_siege-thorp-1 r2s-under_siege-thorp-2 rr3-thorp-wartime-rand-4
+  3	.economicState.necessityImports[]	 e.g. r2s-under_siege-city-1 r2s-under_siege-city-3 rr3-city-occupied-rand-2
+  3	.powerStructure.factions[].legitimacyCrisis (NEW KEY)	 e.g. r2s-under_siege-city-1 rr3-town-insurgency-rand-0 rr3-town-mass_migration-rand-3
+  3	.powerStructure.factions[].crisisNote (NEW KEY)	 e.g. r2s-under_siege-city-1 rr3-town-insurgency-rand-0 rr3-town-mass_migration-rand-3
+  3	.economicViability.suggestions[].impact	 e.g. r2s-under_siege-city-2 rr3-city-famine-rand-2 rr3-metropolis-monster_pressure-rand-0
+  3	.economicViability.warnings[]	 e.g. r2s-politically_fractured-city-2 r2s-succession_void-town-3 rr3-city-religious_conversion-rand-0
+  3	.economicViability.metrics.warningCount	 e.g. r2s-politically_fractured-city-2 r2s-succession_void-town-3 rr3-city-religious_conversion-rand-0
+  3	.economicState.compound.inst.hasWalls	 e.g. r2s-succession_void-town-1 r2s-insurgency-town-1 rr3-town-plague_onset-rand-3
+  3	.economicState.safetyProfile.compound.inst.hasWalls	 e.g. r2s-succession_void-town-1 r2s-insurgency-town-1 rr3-town-plague_onset-rand-3
+  3	.spatialLayout.layout	 e.g. r2s-succession_void-town-1 r2s-insurgency-town-1 rr3-town-plague_onset-rand-3
+  3	.activeConditions[].severityBand	 e.g. r2s-succession_void-town-1 rr3-village-slave_revolt-rand-3 rr3-metropolis-slave_revolt-port-1
+  3	.economicViability.metrics.foodBalance.magicFoodOffset (GONE KEY)	 e.g. r2s-monster_pressure-metropolis-2 r2s-religious_conversion-city-3 rr3-city-religious_conversion-rand-0
+  3	.economicViability.metrics.foodBalance.magicFoodNote (GONE KEY)	 e.g. r2s-monster_pressure-metropolis-2 r2s-religious_conversion-city-3 rr3-city-religious_conversion-rand-0
+  3	.npcs[].activeConstraint (NEW KEY)	 e.g. r2s-religious_conversion-city-3 rr3-village-calm-rand-2 rr3-town-mass_migration-rand-3
+  3	.stress[].cast.roles[].role	 e.g. rr3-thorp-under_siege-rand-3 rr3-thorp-under_siege+famine-port-1 rr3-village-under_siege+famine-port-1
+  3	.stressors[].cast.roles[].role	 e.g. rr3-thorp-under_siege-rand-3 rr3-thorp-under_siege+famine-port-1 rr3-village-under_siege+famine-port-1
+  3	.institutions[].terrainRequired (GONE KEY)	 e.g. rr3-village-politically_fractured-rand-1 rr3-town-under_siege-rand-1 rr3-town-under_siege+famine-rand-4
+  3	.institutions[].terrainRequired (NEW KEY)	 e.g. rr3-village-politically_fractured-rand-1 rr3-town-under_siege-rand-1 rr3-town-under_siege+famine-rand-4
+  2	.economicState.foodSecurity.chains.Hunting & foraging	 e.g. r2r-hamlet-36 r2r-hamlet-45
+  2	.economicState.foodSecurity.surplusPct	 e.g. r2r-village-4 rr3-village-monster_pressure-rand-2
+  2	.economicState.foodSecurity.foodRecord.surplusPct	 e.g. r2r-village-4 rr3-village-monster_pressure-rand-2
+  2	.economicViability.metrics.foodBalance.surplus	 e.g. r2r-village-4 rr3-village-monster_pressure-rand-2
+  2	.powerStructure.stability	 e.g. r2r-town-10 r2r-town-47
+  2	.economicState.safetyProfile.economicDragDesc	 e.g. r2r-town-41 rr3-town-mass_migration-rand-3
+  2	.economicState.compound.inst.hasCharterHall	 e.g. r2r-town-47 rr3-town-insurgency-rand-3
+  2	.economicState.safetyProfile.flags.merchantArmy	 e.g. r2r-town-47 rr3-metropolis-under_siege+famine-rand-1
+  2	.economicState.safetyProfile.compound.inst.hasCharterHall	 e.g. r2r-town-47 rr3-town-insurgency-rand-3
+  2	.powerStructure.publicLegitimacy.isEndorsed	 e.g. r2r-town-47 r2r-city-46
+  2	.economicState.compound.inst.hasMagicInst	 e.g. r2r-town-57 rr3-town-under_siege-rand-1
+  2	.economicState.safetyProfile.compound.inst.hasMagicInst	 e.g. r2r-town-57 rr3-town-under_siege-rand-1
+  2	.defenseProfile.scores.traditions.hasAlchemy	 e.g. r2r-town-57 rr3-city-religious_conversion-rand-1
+  2	.defenseProfile.traditions.hasAlchemy	 e.g. r2r-town-57 rr3-city-religious_conversion-rand-1
+  2	.resourceAnalysis.imports.reasons.mountain_timber (NEW KEY)	 e.g. r2r-city-0 r2r-metropolis-33
+  2	.economicState.compound.inst.hasCathedral	 e.g. r2r-city-50 r2s-under_siege-city-2
+  2	.economicState.safetyProfile.compound.inst.hasCathedral	 e.g. r2r-city-50 r2s-under_siege-city-2
+  2	.defenseProfile.institutions.magicDef[].forbiddenTradeRoutes (NEW KEY)	 e.g. r2r-city-50 r2r-metropolis-27
+  2	.generationCoherenceReceipt.repairs[].subject	 e.g. r2r-metropolis-1 r2s-succession_void-town-1
+  2	.generationCoherenceReceipt.repairs[].reason	 e.g. r2r-metropolis-1 r2s-succession_void-town-1
+  2	.defenseProfile.institutions.magicDef[].exclusiveGroup (GONE KEY)	 e.g. r2r-metropolis-2 rr3-metropolis-recently_betrayed-rand-5
+  2	.defenseProfile.institutions.magicDef[].catalogId (GONE KEY)	 e.g. r2r-metropolis-18 r2r-metropolis-33
+  2	.defenseProfile.institutions.magicDef[].tier (NEW KEY)	 e.g. r2r-metropolis-18 r2r-metropolis-33
+  2	.defenseProfile.institutions.magicDef[].cascadeAdded (NEW KEY)	 e.g. r2r-metropolis-18 r2r-metropolis-33
+  2	.defenseProfile.institutions.magicDef[].cascadeBoost (NEW KEY)	 e.g. r2r-metropolis-18 r2r-metropolis-33
+  2	.economicState.compound.inst.hasMonastery	 e.g. r2r-metropolis-41 r2s-insurgency-town-1
+  2	.economicState.safetyProfile.compound.inst.hasMonastery	 e.g. r2r-metropolis-41 r2s-insurgency-town-1
+  2	.institutions[].forbiddenTradeRoutes[]	 e.g. r2s-under_siege-town-1 rr3-town-mass_migration-rand-3
+  2	.powerStructure.factions[].name (NEW KEY)	 e.g. r2s-under_siege-city-1 r2s-slave_revolt-metropolis-0
+  2	.powerStructure.factions[].contestsNiche (NEW KEY)	 e.g. r2s-under_siege-city-1 r2s-slave_revolt-metropolis-0
+  2	.economicViability.plotHooks[].severity	 e.g. r2s-famine-metropolis-3 r2s-wartime-village-0
+  2	.resourceAnalysis.imports.reasons.iron ore (GONE KEY)	 e.g. r2s-occupied-metropolis-0 r2s-slave_revolt-metropolis-0
+  2	.economicViability.warnings[].severity	 e.g. r2s-politically_fractured-city-2 r2s-insurgency-town-1
+  2	.economicViability.warnings[].title	 e.g. r2s-politically_fractured-city-2 r2s-insurgency-town-1
+  2	.economicViability.warnings[].category (NEW KEY)	 e.g. r2s-politically_fractured-city-2 r2s-insurgency-town-1
+  2	.economicViability.warnings[].impact (NEW KEY)	 e.g. r2s-politically_fractured-city-2 r2s-insurgency-town-1
+  2	.economicViability.warnings[].suggestedFixes (NEW KEY)	 e.g. r2s-politically_fractured-city-2 r2s-insurgency-town-1
+  2	.powerStructure.factions[].hidden (NEW KEY)	 e.g. r2s-infiltrated-village-2 r2s-infiltrated-metropolis-3
+  2	.resourceAnalysis.exploitation.fullyExploited[].exportValue	 e.g. r2s-succession_void-town-1 rr3-town-under_siege-rand-1
+  2	.powerStructure.factions[].modifiers (GONE KEY)	 e.g. r2s-insurgency-town-1 rr3-metropolis-religious_conversion-rand-1
+  2	.powerStructure.factions[].modifiers (NEW KEY)	 e.g. r2s-insurgency-town-1 rr3-metropolis-religious_conversion-rand-1
+  2	.generationCoherenceReceipt.judgments[].findings[].detail	 e.g. r2s-insurgency-town-1 rr3-town-under_siege-rand-1
+  2	.defenseProfile.institutions.walls[].desc	 e.g. r2s-religious_conversion-city-3 rr3-city-mass_migration-rand-2
+  2	.defenseProfile.institutions.walls[].source	 e.g. r2s-religious_conversion-city-3 rr3-city-mass_migration-rand-2
+  2	.economicState.compound.inst.hasChurch	 e.g. r2s-wartime-thorp-0 rr3-thorp-under_siege-rand-1
+  2	.economicState.safetyProfile.compound.inst.hasChurch	 e.g. r2s-wartime-thorp-0 rr3-thorp-under_siege-rand-1
+  2	.economicState.foodSecurity.magicNote	 e.g. r2s-wartime-village-0 rr3-town-plague_onset-rand-3
+  2	.powerStructure.factions[].captureState	 e.g. r2s-mass_migration-town-2 rr3-metropolis-insurgency-rand-4
+  2	.economicViability.metrics.foodBalance.rawDeficit (NEW KEY)	 e.g. rr3-thorp-under_siege-rand-1 rr3-city-under_siege+famine-rand-5
+  2	.resourceAnalysis.imports.reasons.timber (GONE KEY)	 e.g. rr3-city-recently_betrayed-rand-4 rr3-metropolis-recently_betrayed-rand-5
+  2	.resourceAnalysis.imports.reasons.Bulk grain and foodstuffs (GONE KEY)	 e.g. rr3-metropolis-calm-rand-0 rr3-metropolis-mass_migration-rand-0
+  1	.resourceAnalysis.imports.reasons.hot_springs_mineral (GONE KEY)	 e.g. r2r-village-47
+  1	.history.legacyAnnotations (NEW KEY)	 e.g. r2r-village-49
+  1	.resourceAnalysis.imports.reasons.glass sand (NEW KEY)	 e.g. r2r-town-41
+  1	.resourceAnalysis.imports.reasons.glass_sand (NEW KEY)	 e.g. r2r-town-41
+  1	.economicState.compound.inst.hasFreeCompany	 e.g. r2r-town-57
+  1	.economicState.safetyProfile.flags.crusaderSynthesis	 e.g. r2r-town-57
+  1	.economicState.safetyProfile.compound.inst.hasFreeCompany	 e.g. r2r-town-57
+  1	.resourceAnalysis.exploitation.unexploited[].exportValue	 e.g. r2r-town-57
+  1	.resourceAnalysis.imports.reasons.hot_springs_mineral (NEW KEY)	 e.g. r2r-town-57
+  1	.powerStructure.publicLegitimacy.isApproved	 e.g. r2r-city-26
+  1	.institutions[].forcedByIsolation (GONE KEY)	 e.g. r2r-city-49
+  1	.institutions[].baseChance (NEW KEY)	 e.g. r2r-city-49
+  1	.stress[].cast.stakes[].factionId	 e.g. r2r-city-56
+  1	.stressors[].cast.stakes[].factionId	 e.g. r2r-city-56
+  1	.resourceAnalysis.imports.reasons.stone (for major construction) (GONE KEY)	 e.g. r2r-metropolis-11
+  1	.defenseProfile.institutions.magicDef[].cascadeBoost	 e.g. r2r-metropolis-18
+  1	.resourceAnalysis.imports.reasons.grapes (NEW KEY)	 e.g. r2r-metropolis-41
+  1	.defenseProfile.institutions.charter[].tier (NEW KEY)	 e.g. r2r-metropolis-51
+  1	.defenseProfile.institutions.charter[].cascadeAdded (NEW KEY)	 e.g. r2r-metropolis-51
+  1	.defenseProfile.institutions.charter[].cascadeBoost (NEW KEY)	 e.g. r2r-metropolis-51
+  1	.economicState.foodSecurity.magicTradeChannel	 e.g. r2s-under_siege-city-3
+  1	.economicState.foodSecurity.prosperityMod.type	 e.g. r2s-under_siege-city-3
+  1	.economicState.foodSecurity.prosperityMod.value	 e.g. r2s-under_siege-city-3
+  1	.economicState.foodSecurity.prosperityMod.reason	 e.g. r2s-under_siege-city-3
+  1	.economicViability.issues[].impact	 e.g. r2s-under_siege-city-3
+  1	.economicViability.issues[].suggestedFixes[]	 e.g. r2s-under_siege-city-3
+  1	.economicViability.issues[]	 e.g. r2s-under_siege-city-3
+  1	.economicViability.metrics.foodBalance.importCoverage (GONE KEY)	 e.g. r2s-under_siege-city-3
+  1	.economicViability.metrics.foodBalance.importChannel (GONE KEY)	 e.g. r2s-under_siege-city-3
+  1	.economicState.activeChains[].upstreamWeak[]	 e.g. r2s-infiltrated-metropolis-0
+  1	.economicState.foodSecurity.chains.Fishing & water	 e.g. r2s-infiltrated-metropolis-3
+  1	.powerStructure.factions[].hidden (GONE KEY)	 e.g. r2s-infiltrated-metropolis-3
+  1	.resourceAnalysis.imports.reasons.grain (NEW KEY)	 e.g. r2s-succession_void-town-1
+  1	.defenseProfile.institutions.garrison[].desc	 e.g. r2s-succession_void-town-1
+  1	.defenseProfile.institutions.garrison[].source	 e.g. r2s-succession_void-town-1
+  1	.defenseProfile.institutions.garrison[].catalogId (GONE KEY)	 e.g. r2s-succession_void-town-1
+  1	.defenseProfile.institutions.garrison[].tier (NEW KEY)	 e.g. r2s-succession_void-town-1
+  1	.defenseProfile.institutions.garrison[].cascadeAdded (NEW KEY)	 e.g. r2s-succession_void-town-1
+  1	.defenseProfile.institutions.garrison[].cascadeBoost (NEW KEY)	 e.g. r2s-succession_void-town-1
+  1	.economicViability.warnings[].priorityNote (NEW KEY)	 e.g. r2s-insurgency-town-1
+  1	.economicState.compound.inst.hasMagesGuild	 e.g. r2s-religious_conversion-city-3
+  1	.economicState.safetyProfile.compound.inst.hasMagesGuild	 e.g. r2s-religious_conversion-city-3
+  1	.resourceAnalysis.imports.reasons.iron ore (NEW KEY)	 e.g. r2s-religious_conversion-city-3
+  1	.defenseProfile.scores.traditions.hasArcaneGuild	 e.g. r2s-religious_conversion-city-3
+  1	.defenseProfile.institutions.walls[].catalogId (GONE KEY)	 e.g. r2s-religious_conversion-city-3
+  1	.defenseProfile.institutions.walls[].tier (NEW KEY)	 e.g. r2s-religious_conversion-city-3
+  1	.defenseProfile.institutions.walls[].cascadeAdded (NEW KEY)	 e.g. r2s-religious_conversion-city-3
+  1	.defenseProfile.institutions.walls[].cascadeBoost (NEW KEY)	 e.g. r2s-religious_conversion-city-3
+  1	.defenseProfile.traditions.hasArcaneGuild	 e.g. r2s-religious_conversion-city-3
+  1	.powerStructure.factions[].captureState (NEW KEY)	 e.g. r2s-mass_migration-village-2
+  1	.economicState.safetyProfile.flags.merchantCriminalBlur	 e.g. r2s-mass_migration-town-2
+  1	.defenseProfile.scores.traditions.hasDivine	 e.g. rr3-thorp-under_siege-rand-1
+  1	.defenseProfile.traditions.hasDivine	 e.g. rr3-thorp-under_siege-rand-1
+  1	.stress[].cast.absent[].role	 e.g. rr3-thorp-under_siege-rand-3
+  1	.stress[].cast.absent[].reason	 e.g. rr3-thorp-under_siege-rand-3
+  1	.stressors[].cast.absent[].role	 e.g. rr3-thorp-under_siege-rand-3
+  1	.stressors[].cast.absent[].reason	 e.g. rr3-thorp-under_siege-rand-3
+  1	.npcs[].temporaryKind	 e.g. rr3-thorp-plague_onset-rand-3
+  1	.npcs[].crisisIds[]	 e.g. rr3-thorp-plague_onset-rand-3
+  1	.isolationSupport.paths[].evidence[]	 e.g. rr3-village-politically_fractured-rand-1
+  1	.config._isolationSupport.paths[].evidence[]	 e.g. rr3-village-politically_fractured-rand-1
+  1	.npcs[].title (GONE KEY)	 e.g. rr3-village-monster_pressure-rand-2
+  1	.npcs[].personality (GONE KEY)	 e.g. rr3-village-monster_pressure-rand-2
+  1	.npcs[].physical (GONE KEY)	 e.g. rr3-village-monster_pressure-rand-2
+  1	.npcs[].goal (GONE KEY)	 e.g. rr3-village-monster_pressure-rand-2
+  1	.npcs[].secret (GONE KEY)	 e.g. rr3-village-monster_pressure-rand-2
+  1	.npcs[].plotHooks (GONE KEY)	 e.g. rr3-village-monster_pressure-rand-2
+  1	.npcs[].presentation (GONE KEY)	 e.g. rr3-village-monster_pressure-rand-2
+  1	.npcs[].institution (GONE KEY)	 e.g. rr3-village-monster_pressure-rand-2
+  1	.npcs[].temporary (NEW KEY)	 e.g. rr3-village-monster_pressure-rand-2
+  1	.npcs[].temporaryKind (NEW KEY)	 e.g. rr3-village-monster_pressure-rand-2
+  1	.npcs[].crisisIds (NEW KEY)	 e.g. rr3-village-monster_pressure-rand-2
+  1	.resourceAnalysis.gaps[].missing (GONE KEY)	 e.g. rr3-town-under_siege-rand-1
+  1	.resourceAnalysis.gaps[].institution (NEW KEY)	 e.g. rr3-town-under_siege-rand-1
+  1	.resourceAnalysis.gaps[].kind (NEW KEY)	 e.g. rr3-town-under_siege-rand-1
+  1	.defenseProfile.scores.traditions.hasArcane	 e.g. rr3-town-under_siege-rand-1
+  1	.defenseProfile.traditions.hasArcane	 e.g. rr3-town-under_siege-rand-1
+  1	.economicState.compound.inst.hasBank	 e.g. rr3-town-indebted-rand-4
+  1	.economicState.safetyProfile.compound.inst.hasBank	 e.g. rr3-town-indebted-rand-4
+  1	.institutions[].coherenceRepair	 e.g. rr3-town-plague_onset-rand-1
+  1	.stress[].cast.levers[].institution	 e.g. rr3-town-under_siege+famine-rand-4
+  1	.stress[].cast.levers[].holderId	 e.g. rr3-town-under_siege+famine-rand-4
+  1	.stress[].cast.levers[].holderName	 e.g. rr3-town-under_siege+famine-rand-4
+  1	.stressors[].cast.levers[].institution	 e.g. rr3-town-under_siege+famine-rand-4
+  1	.stressors[].cast.levers[].holderId	 e.g. rr3-town-under_siege+famine-rand-4
+  1	.stressors[].cast.levers[].holderName	 e.g. rr3-town-under_siege+famine-rand-4
+  1	.resourceAnalysis.imports.reasons.stone (NEW KEY)	 e.g. rr3-city-recently_betrayed-rand-4
+  1	.defenseProfile.institutions.walls[].tier (GONE KEY)	 e.g. rr3-city-mass_migration-rand-2
+  1	.defenseProfile.institutions.walls[].cascadeAdded (GONE KEY)	 e.g. rr3-city-mass_migration-rand-2
+  1	.defenseProfile.institutions.walls[].cascadeBoost (GONE KEY)	 e.g. rr3-city-mass_migration-rand-2
+  1	.defenseProfile.institutions.walls[].catalogId (NEW KEY)	 e.g. rr3-city-mass_migration-rand-2
+  1	.economicState.compound.inst.hasPort	 e.g. rr3-metropolis-under_siege+famine-rand-4
+  1	.economicState.safetyProfile.compound.inst.hasPort	 e.g. rr3-metropolis-under_siege+famine-rand-4
+NEW/GONE KEY rows 8881 [".resourceAnalysis.imports.reasons.metals (GONE KEY)",".npcs[].importance (NEW KEY)",".npcs[].structuralRank (NEW KEY)",".resourceAnalysis.imports.reasons.Charcoal and fuel (GONE KEY)",".simulationTrace[].causes[].effect (NEW KEY)",".simulationTrace[].causes[].effect (GONE KEY)",".institutions[].exclusiveGroup (GONE KEY)",".institutions[].exclusiveGroup (NEW KEY)",".history.historicalEvents[].anchored (NEW KEY)",".history.historicalEvents[].anchored (GONE KEY)",".resourceAnalysis.gaps[].institution (GONE KEY)",".resourceAnalysis.gaps[].kind (GONE KEY)",".resourceAnalysis.gaps[].missing (NEW KEY)",".economicState.activeChains[].entrepot (NEW KEY)",".economicState.activeChains[].entrepot (GONE KEY)",".simulationTrace[].downstreamEffects[].reason (GONE KEY)",".institutions[].catalogId (GONE KEY)",".institutions[].tier (NEW KEY)",".institutions[].cascadeAdded (NEW KEY)",".institutions[].cascadeBoost (NEW KEY)"]

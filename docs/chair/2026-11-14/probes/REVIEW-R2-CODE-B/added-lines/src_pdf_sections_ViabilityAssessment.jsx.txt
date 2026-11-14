@@ -1,0 +1,13 @@
+27	4b11e3910	import { houseLabelsInText, institutionHouseLabel } from '../../domain/display/institutionDisplayName.js';
+38	4b11e3910	// ROUND THREE, ruling (a): a stored sentence that names a house (the siege's "N institutions
+39	4b11e3910	// critically impaired by siege: Taverns (5-20), …", written at birth by viability.js) is read with
+40	4b11e3910	// each held house's label, as the page's Outlook reads it; the record keeps its bytes.
+41	4b11e3910	const houses = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
+42	4b11e3910	const housed = (/** @type {unknown} */ t) => (typeof t === 'string' ? houseLabelsInText(t, houses) : t);
+43	4b11e3910	const issues = (v.issues || []).map((iss) => ({
+44	4b11e3910	...iss,
+45	4b11e3910	description: housed(iss?.description),
+46	4b11e3910	institution: iss?.institution ? institutionHouseLabel(iss.institution) : iss?.institution,
+47	4b11e3910	}));
+198	4b11e3910	itemRender={(w) => housed(noteText(w))}
+233	4b11e3910	itemRender={(c) => housed(label(c) || (typeof c === 'string' ? c : c?.text || ''))}

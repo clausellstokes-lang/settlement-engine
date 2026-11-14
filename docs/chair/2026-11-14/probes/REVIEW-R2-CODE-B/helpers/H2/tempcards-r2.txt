@@ -1,0 +1,362 @@
+## r2r-thorp-5 (thorp, pop 23) Deirdre Murphy [Warden/warden] crises=monster_pressure
+  header: 2 Key Figures?The people worth knowing and what each one holds. / ↺ Reroll / All●●● High●● Moderate● Low / Household Council (1)▲
+  group: In no power (1)▲
+  card: Deirdre Murphy● / Warden
+  mentions:
+    == Summary/Crisis ==: holds the lever: Deirdre Murphy · nobody here could, so this one stepped in for the crisis
+    == World/NPCs ==: Deirdre Murphy●
+## r2r-thorp-10 (thorp, pop 10) Filomena Novikov [Warden/warden] crises=monster_pressure
+  header: 2 Key Figures?The people worth knowing and what each one holds. / ↺ Reroll / All●●● High●● Moderate● Low / Elder Council (1)▲
+  group: In no power (1)▲
+  card: Filomena Novikov● / Warden / Disposition marginal
+  mentions:
+    == Summary/Crisis ==: holds the lever: Filomena Novikov · nobody here could, so this one stepped in for the crisis
+    == World/NPCs ==: Filomena Novikov●
+## r2r-thorp-17 (thorp, pop 11) Ehecatl Chel [Grain Steward/grain] crises=famine
+  header: 3 Key Figures?The people worth knowing and what each one holds. / ↺ Reroll / All●●● High●● Moderate● Low / Household Council (1)▲
+  group: In no power (2)▲
+  card: Ehecatl Chel● / Grain Steward / Disposition marginal
+  mentions:
+    == Summary/Crisis ==: holds the lever: Ehecatl Chel · nobody here could, so this one stepped in for the crisis
+    == Summary/Crisis ==: Ehecatl Chel has food, enough to matter. They will sell it, but their price is not money. The players can intervene in how this plays out.
+    == World/NPCs ==: Ehecatl Chel●
+## r2r-thorp-19 (thorp, pop 26) Fionnuala O'Connor [Warden/warden] crises=monster_pressure
+  header: 2 Key Figures?The people worth knowing and what each one holds. / ↺ Reroll / All●●● High●● Moderate● Low / Elder Council (1)▲
+  group: In no power (1)▲
+  card: Fionnuala O'Connor● / Warden / Disposition marginal
+  mentions:
+    == Summary/Crisis ==: holds the lever: Fionnuala O'Connor · nobody here could, so this one stepped in for the crisis
+    == World/NPCs ==: Fionnuala O'Connor●
+## r2r-thorp-38 (thorp, pop 26) Gantulga Naiman [Grain Steward/grain] crises=famine
+  header: 4 Key Figures?The people worth knowing and what each one holds. / ↺ Reroll / All●●● High●● Moderate● Low / Household Council (1)▲
+  group: In no power (3)▲
+  card: Gantulga Naiman● / Grain Steward / Disposition marginal
+  mentions:
+    == Summary/Crisis ==: holds the lever: Gantulga Naiman · nobody here could, so this one stepped in for the crisis
+    == Summary/Crisis ==: Gantulga Naiman has food, enough to matter. They will sell it, but their price is not money. The players can intervene in how this plays out.
+    == World/NPCs ==: Gantulga Naiman●
+## r2r-thorp-46 (thorp, pop 26) Sübetei Kereit [Grain Steward/grain] crises=famine
+  header: 2 Key Figures?The people worth knowing and what each one holds. / ↺ Reroll / All●●● High●● Moderate● Low / Household Council (1)▲
+  group: In no power (1)▲
+  card: Sübetei Kereit● / Grain Steward / Disposition marginal
+  mentions:
+    == Summary/Crisis ==: holds the lever: Sübetei Kereit · nobody here could, so this one stepped in for the crisis
+    == Summary/Crisis ==: Sübetei Kereit has food, enough to matter. They will sell it, but their price is not money. The players can intervene in how this plays out.
+    == World/NPCs ==: Sübetei Kereit●
+## r2r-thorp-54 (thorp, pop 17) Grata Brutus [Grain Steward/grain] crises=famine
+  header: 2 Key Figures?The people worth knowing and what each one holds. / ↺ Reroll / All●●● High●● Moderate● Low / Elder Council (1)▲
+  group: In no power (1)▲
+  card: Grata Brutus● / Grain Steward / Disposition marginal
+  mentions:
+    == Summary/Crisis ==: holds the lever: Grata Brutus · nobody here could, so this one stepped in for the crisis
+    == Summary/Crisis ==: Grata Brutus has food, enough to matter. They will sell it, but their price is not money. The players can intervene in how this plays out.
+    == World/NPCs ==: Grata Brutus●
+## r2r-hamlet-9 (hamlet, pop 33) Christoph Schneider [Warden/warden] crises=monster_pressure
+  header: 4 Key Figures?The people worth knowing and what each one holds. / ↺ Reroll / All●●● High●● Moderate● Low / Elder Council (2)▲
+  group: In no power (2)▲
+  card: Christoph Schneider● / Warden
+  mentions:
+    == Summary/Crisis ==: holds the lever: Christoph Schneider · nobody here could, so this one stepped in for the crisis
+    == World/NPCs ==: Christoph Schneider●
+## r2r-hamlet-16 (hamlet, pop 20) Nicte Cohuoh [Grain Steward/grain] crises=famine
+  header: 4 Key Figures?The people worth knowing and what each one holds.1 high influence / ↺ Reroll / All●●● High●● Moderate● Low / Elder Council (3)▲
+  group: In no power (1)▲
+  card: Nicte Cohuoh● / Grain Steward
+  mentions:
+    == Summary/Crisis ==: holds the lever: Nicte Cohuoh · nobody here could, so this one stepped in for the crisis
+    == Summary/Crisis ==: Nicte Cohuoh has food, enough to matter. They will sell it, but their price is not money. The players can intervene in how this plays out.
+    == World/NPCs ==: Nicte Cohuoh●
+## r2r-hamlet-24 (hamlet, pop 100) Madhuri Ahuja [Grain Steward/grain] crises=famine
+  header: 2 Key Figures?The people worth knowing and what each one holds. / ↺ Reroll / All●●● High●● Moderate● Low / Headman's Authority (1)▲
+  group: In no power (1)▲
+  card: Madhuri Ahuja● / Grain Steward / Disposition marginal
+  mentions:
+    == Summary/Crisis ==: holds the lever: Madhuri Ahuja · nobody here could, so this one stepped in for the crisis
+    == Summary/Crisis ==: Madhuri Ahuja has food, enough to matter. They will sell it, but their price is not money. The players can intervene in how this plays out.
+    == World/NPCs ==: Madhuri Ahuja●
+## r2r-hamlet-28 (hamlet, pop 23) Mimir Svensson [Grain Steward/grain] crises=famine
+  header: 2 Key Figures?The people worth knowing and what each one holds. / ↺ Reroll / All●●● High●● Moderate● Low / Elder Council (1)▲
+  group: In no power (1)▲
+  card: Mimir Svensson● / Grain Steward / Disposition marginal
+  mentions:
+    == Summary/Crisis ==: holds the lever: Mimir Svensson · nobody here could, so this one stepped in for the crisis
+    == Summary/Crisis ==: Mimir Svensson has food, enough to matter. They will sell it, but their price is not money. The players can intervene in how this plays out.
+    == World/NPCs ==: Mimir Svensson●
+## r2r-hamlet-36 (hamlet, pop 74) Husayn al-Malik [Warden/warden] crises=monster_pressure
+  header: 5 Key Figures?The people worth knowing and what each one holds. / ↺ Reroll / All●●● High●● Moderate● Low / Free Elder Council (2)▲
+  group: In no power (3)▲
+  card: Husayn al-Malik● / Warden
+  mentions:
+    == Summary/Crisis ==: holds the lever: Husayn al-Malik · nobody here could, so this one stepped in for the crisis
+    == World/NPCs ==: Husayn al-Malik●
+## r2r-village-41 (village, pop 81) Masao Ma [Warden/warden] crises=monster_pressure
+  header: 7 Key Figures?The people worth knowing and what each one holds.1 high influence · 1 moderate / ↺ Reroll / All●●● High●● Moderate● Low / Religious Authorities (1)▲
+  group: In no power (2)▲
+  card: Masao Ma● / Warden
+  mentions:
+    == Summary/Crisis ==: holds the lever: Masao Ma · nobody here could, so this one stepped in for the crisis
+    == Summary/Plot Hooks ==: In the raids, Masao Ma holds the key to it: nobody here could, so this one stepped in for the crisis.
+    == World/NPCs ==: Masao Ma●
+## r2s-famine-thorp-0 (thorp, pop 19) Anastasios Argyros [Grain Steward/grain] crises=famine
+  header: 2 Key Figures?The people worth knowing and what each one holds. / ↺ Reroll / All●●● High●● Moderate● Low / Household Council (1)▲
+  group: In no power (1)▲
+  card: Anastasios Argyros● / Grain Steward
+  mentions:
+    == Summary/Crisis ==: holds the lever: Anastasios Argyros · nobody here could, so this one stepped in for the crisis
+    == Summary/Crisis ==: Anastasios Argyros has food, enough to matter. They will sell it, but their price is not money. The players can intervene in how this plays out.
+    == World/NPCs ==: Anastasios Argyros●
+## r2s-famine-thorp-1 (thorp, pop 20) Renuka Bhatt [Grain Steward/grain] crises=famine
+  header: 3 Key Figures?The people worth knowing and what each one holds. / ↺ Reroll / All●●● High●● Moderate● Low / Headman's Authority (1)▲
+  group: In no power (2)▲
+  card: Renuka Bhatt● / Grain Steward / Disposition marginal
+  mentions:
+    == Summary/Crisis ==: holds the lever: Renuka Bhatt · nobody here could, so this one stepped in for the crisis
+    == Summary/Crisis ==: Renuka Bhatt has food, enough to matter. They will sell it, but their price is not money. The players can intervene in how this plays out.
+    == World/NPCs ==: Renuka Bhatt●
+## r2s-famine-thorp-2 (thorp, pop 28) Liber MacCarthy [Grain Steward/grain] crises=famine
+  header: 3 Key Figures?The people worth knowing and what each one holds. / ↺ Reroll / All●●● High●● Moderate● Low / Elder Council (1)▲
+  group: In no power (2)▲
+  card: Liber MacCarthy● / Grain Steward
+  mentions:
+    == Summary/Crisis ==: holds the lever: Liber MacCarthy · nobody here could, so this one stepped in for the crisis
+    == Summary/Crisis ==: Liber MacCarthy has food, enough to matter. They will sell it, but their price is not money. The players can intervene in how this plays out.
+    == World/NPCs ==: Liber MacCarthy●
+## r2s-famine-thorp-3 (thorp, pop 16) Iulia Varro [Grain Steward/grain] crises=famine
+  header: 2 Key Figures?The people worth knowing and what each one holds. / ↺ Reroll / All●●● High●● Moderate● Low / Household Council (1)▲
+  group: In no power (1)▲
+  card: Iulia Varro● / Grain Steward
+  mentions:
+    == Summary/Crisis ==: holds the lever: Iulia Varro · nobody here could, so this one stepped in for the crisis
+    == Summary/Crisis ==: Iulia Varro has food, enough to matter. They will sell it, but their price is not money. The players can intervene in how this plays out.
+    == World/NPCs ==: Iulia Varro●
+## r2s-famine-hamlet-0 (hamlet, pop 35) Gallus Cato [Grain Steward/grain] crises=famine
+  header: 2 Key Figures?The people worth knowing and what each one holds. / ↺ Reroll / All●●● High●● Moderate● Low / Elder Council (1)▲
+  group: In no power (1)▲
+  card: Gallus Cato● / Grain Steward / Disposition marginal
+  mentions:
+    == Summary/Crisis ==: holds the lever: Gallus Cato · nobody here could, so this one stepped in for the crisis
+    == Summary/Crisis ==: Gallus Cato has food, enough to matter. They will sell it, but their price is not money. The players can intervene in how this plays out.
+    == World/NPCs ==: Gallus Cato●
+## r2s-famine-hamlet-1 (hamlet, pop 41) Shashi Chaudhary [Grain Steward/grain] crises=famine
+  header: 2 Key Figures?The people worth knowing and what each one holds. / ↺ Reroll / All●●● High●● Moderate● Low / Free Elder Council (1)▲
+  group: In no power (1)▲
+  card: Shashi Chaudhary● / Grain Steward
+  mentions:
+    == Summary/Crisis ==: holds the lever: Shashi Chaudhary · nobody here could, so this one stepped in for the crisis
+    == Summary/Crisis ==: Shashi Chaudhary has food, enough to matter. They will sell it, but their price is not money. The players can intervene in how this plays out.
+    == World/NPCs ==: Shashi Chaudhary●
+## r2s-famine-hamlet-2 (hamlet, pop 92) Klara Pavlov [Grain Steward/grain] crises=famine
+  header: 5 Key Figures?The people worth knowing and what each one holds. / ↺ Reroll / All●●● High●● Moderate● Low / Feudal Stewardship (3)▲
+  group: In no power (1)▲
+  card: Klara Pavlov● / Grain Steward
+  mentions:
+    == Summary/Crisis ==: holds the lever: Klara Pavlov · nobody here could, so this one stepped in for the crisis
+    == Summary/Crisis ==: Klara Pavlov has food, enough to matter. They will sell it, but their price is not money. The players can intervene in how this plays out.
+    == World/NPCs ==: Klara Pavlov●
+## r2s-famine-hamlet-3 (hamlet, pop 22) Pavel Bykov [Grain Steward/grain] crises=famine
+  header: 2 Key Figures?The people worth knowing and what each one holds. / ↺ Reroll / All●●● High●● Moderate● Low / Household Council (1)▲
+  group: In no power (1)▲
+  card: Pavel Bykov● / Grain Steward
+  mentions:
+    == Summary/Crisis ==: holds the lever: Pavel Bykov · nobody here could, so this one stepped in for the crisis
+    == Summary/Crisis ==: Pavel Bykov has food, enough to matter. They will sell it, but their price is not money. The players can intervene in how this plays out.
+    == World/NPCs ==: Pavel Bykov●
+## r2s-occupied-thorp-1 (thorp, pop 17) Saraswati Bhat [Grain Steward/grain] crises=famine
+  header: 3 Key Figures?The people worth knowing and what each one holds.1 high influence / ↺ Reroll / All●●● High●● Moderate● Low / Occupation Authority (1)▲
+  group: In no power (1)▲
+  card: Saraswati Bhat● / Grain Steward / Disposition marginal
+  mentions:
+    == Summary/Crisis ==: holds the lever: Saraswati Bhat · nobody here could, so this one stepped in for the crisis
+    == Summary/Crisis ==: Saraswati Bhat has food, enough to matter. They will sell it, but their price is not money. The players can intervene in how this plays out.
+    == World/NPCs ==: Saraswati Bhat●
+## r2s-occupied-hamlet-0 (hamlet, pop 20) Zanabazar Borjigin [Grain Steward/grain] crises=famine
+  header: 3 Key Figures?The people worth knowing and what each one holds.1 high influence / ↺ Reroll / All●●● High●● Moderate● Low / Occupation Authority (1)▲
+  group: In no power (1)▲
+  card: Zanabazar Borjigin● / Grain Steward / Disposition marginal
+  mentions:
+    == Summary/Crisis ==: holds the lever: Zanabazar Borjigin · nobody here could, so this one stepped in for the crisis
+    == Summary/Crisis ==: Zanabazar Borjigin has food, enough to matter. They will sell it, but their price is not money. The players can intervene in how this plays out.
+    == World/NPCs ==: Zanabazar Borjigin●
+## r2s-occupied-hamlet-1 (hamlet, pop 95) Lasair Quinn [Grain Steward/grain] crises=famine
+  header: 3 Key Figures?The people worth knowing and what each one holds.1 high influence / ↺ Reroll / All●●● High●● Moderate● Low / Occupation Authority (1)▲
+  group: In no power (1)▲
+  card: Lasair Quinn● / Grain Steward / Disposition marginal
+  mentions:
+    == Summary/Crisis ==: holds the lever: Lasair Quinn · nobody here could, so this one stepped in for the crisis
+    == Summary/Crisis ==: Lasair Quinn has food, enough to matter. They will sell it, but their price is not money. The players can intervene in how this plays out.
+    == World/NPCs ==: Lasair Quinn●
+## r2s-recently_betrayed-hamlet-2 (hamlet, pop 86) Anna Choniates [Grain Steward/grain] crises=famine
+  header: 2 Key Figures?The people worth knowing and what each one holds. / ↺ Reroll / All●●● High●● Moderate● Low / Headman's Authority (1)▲
+  group: In no power (1)▲
+  card: Anna Choniates● / Grain Steward / Disposition marginal
+  mentions:
+    == Summary/Crisis ==: holds the lever: Anna Choniates · nobody here could, so this one stepped in for the crisis
+    == Summary/Crisis ==: Anna Choniates has food, enough to matter. They will sell it, but their price is not money. The players can intervene in how this plays out.
+    == World/NPCs ==: Anna Choniates●
+## r2s-plague_onset-thorp-0 (thorp, pop 14) Jiahao Wu [Healer/healer] crises=plague_onset
+  header: 2 Key Figures?The people worth knowing and what each one holds. / ↺ Reroll / All●●● High●● Moderate● Low / Elder Council (1)▲
+  group: In no power (1)▲
+  card: Jiahao Wu● / Healer
+  mentions:
+    == Summary/Crisis ==: holds the lever: Jiahao Wu · nobody here could, so this one stepped in for the crisis
+    == Summary/Crisis ==: Jiahao Wu, the healer who identified the outbreak first, has gone quiet. Their last message suggested the disease is not natural. Accessing them means navigatin
+    == World/NPCs ==: Jiahao Wu●
+## r2s-plague_onset-thorp-1 (thorp, pop 25) Raj Banerjee [Healer/healer] crises=plague_onset
+  header: 2 Key Figures?The people worth knowing and what each one holds. / ↺ Reroll / All●●● High●● Moderate● Low / Household Council (1)▲
+  group: In no power (1)▲
+  card: Raj Banerjee● / Healer / Disposition marginal
+  mentions:
+    == Summary/Crisis ==: holds the lever: Raj Banerjee · nobody here could, so this one stepped in for the crisis
+    == Summary/Crisis ==: Raj Banerjee, the healer who identified the outbreak first, has gone quiet. Their last message suggested the disease is not natural. Accessing them means naviga
+    == World/NPCs ==: Raj Banerjee●
+## r2s-plague_onset-thorp-2 (thorp, pop 9) Kaloyan Petrov [Healer/healer] crises=plague_onset
+  header: 2 Key Figures?The people worth knowing and what each one holds. / ↺ Reroll / All●●● High●● Moderate● Low / Elder Council (1)▲
+  group: In no power (1)▲
+  card: Kaloyan Petrov● / Healer
+  mentions:
+    == Summary/Crisis ==: holds the lever: Kaloyan Petrov · nobody here could, so this one stepped in for the crisis
+    == Summary/Crisis ==: Kaloyan Petrov, the healer who identified the outbreak first, has gone quiet. Their last message suggested the disease is not natural. Accessing them means navi
+    == World/NPCs ==: Kaloyan Petrov●
+## r2s-plague_onset-thorp-3 (thorp, pop 15) Tribhuvan Bajaj [Healer/healer] crises=plague_onset
+  header: 2 Key Figures?The people worth knowing and what each one holds. / ↺ Reroll / All●●● High●● Moderate● Low / Household Council (1)▲
+  group: In no power (1)▲
+  card: Tribhuvan Bajaj● / Healer
+  mentions:
+    == Summary/Crisis ==: holds the lever: Tribhuvan Bajaj · nobody here could, so this one stepped in for the crisis
+    == Summary/Crisis ==: Tribhuvan Bajaj, the healer who identified the outbreak first, has gone quiet. Their last message suggested the disease is not natural. Accessing them means nav
+    == World/NPCs ==: Tribhuvan Bajaj●
+## r2s-plague_onset-hamlet-0 (hamlet, pop 25) Daria Pavlov [Healer/healer] crises=plague_onset
+  header: 2 Key Figures?The people worth knowing and what each one holds. / ↺ Reroll / All●●● High●● Moderate● Low / Elder Council (1)▲
+  group: In no power (1)▲
+  card: Daria Pavlov● / Healer / Disposition marginal
+  mentions:
+    == Summary/Crisis ==: holds the lever: Daria Pavlov · nobody here could, so this one stepped in for the crisis
+    == Summary/Crisis ==: Daria Pavlov, the healer who identified the outbreak first, has gone quiet. Their last message suggested the disease is not natural. Accessing them means naviga
+    == World/NPCs ==: Daria Pavlov●
+## r2s-plague_onset-hamlet-1 (hamlet, pop 35) Roswitha Müller [Healer/healer] crises=plague_onset
+  header: 3 Key Figures?The people worth knowing and what each one holds.1 high influence / ↺ Reroll / All●●● High●● Moderate● Low / Elder Council (2)▲
+  group: In no power (1)▲
+  card: Roswitha Müller● / Healer / Disposition marginal
+  mentions:
+    == Summary/Crisis ==: holds the lever: Roswitha Müller · nobody here could, so this one stepped in for the crisis
+    == Summary/Crisis ==: Roswitha Müller, the healer who identified the outbreak first, has gone quiet. Their last message suggested the disease is not natural. Accessing them means nav
+    == World/NPCs ==: Roswitha Müller●
+## r2s-plague_onset-hamlet-2 (hamlet, pop 24) Archana Acharya [Healer/healer] crises=plague_onset
+  header: 2 Key Figures?The people worth knowing and what each one holds. / ↺ Reroll / All●●● High●● Moderate● Low / Headman's Authority (1)▲
+  group: In no power (1)▲
+  card: Archana Acharya● / Healer / Disposition marginal
+  mentions:
+    == Summary/Crisis ==: holds the lever: Archana Acharya · nobody here could, so this one stepped in for the crisis
+    == Summary/Crisis ==: Archana Acharya, the healer who identified the outbreak first, has gone quiet. Their last message suggested the disease is not natural. Accessing them means nav
+    == World/NPCs ==: Archana Acharya●
+## r2s-succession_void-thorp-0 (thorp, pop 8) Shaohua Liu [Grain Steward/grain] crises=famine
+  header: 2 Key Figures?The people worth knowing and what each one holds. / ↺ Reroll / All●●● High●● Moderate● Low / Household Council (1)▲
+  group: In no power (1)▲
+  card: Shaohua Liu● / Grain Steward / Disposition marginal
+  mentions:
+    == Summary/Crisis ==: holds the lever: Shaohua Liu · nobody here could, so this one stepped in for the crisis
+    == Summary/Crisis ==: Shaohua Liu has food, enough to matter. They will sell it, but their price is not money. The players can intervene in how this plays out.
+    == World/NPCs ==: Shaohua Liu●
+## r2s-succession_void-thorp-1 (thorp, pop 11) Imma Koch [Grain Steward/grain] crises=famine
+  header: 2 Key Figures?The people worth knowing and what each one holds. / ↺ Reroll / All●●● High●● Moderate● Low / Elder Council (1)▲
+  group: In no power (1)▲
+  card: Imma Koch● / Grain Steward
+  mentions:
+    == Summary/Crisis ==: holds the lever: Imma Koch · nobody here could, so this one stepped in for the crisis
+    == Summary/Crisis ==: Imma Koch has food, enough to matter. They will sell it, but their price is not money. The players can intervene in how this plays out.
+    == World/NPCs ==: Imma Koch●
+## r2s-monster_pressure-thorp-0 (thorp, pop 16) Omkara Banerjee [Warden/warden] crises=monster_pressure
+  header: 2 Key Figures?The people worth knowing and what each one holds. / ↺ Reroll / All●●● High●● Moderate● Low / Household Council (1)▲
+  group: In no power (1)▲
+  card: Omkara Banerjee● / Warden / Disposition marginal
+  mentions:
+    == Summary/Crisis ==: holds the lever: Omkara Banerjee · nobody here could, so this one stepped in for the crisis
+    == World/NPCs ==: Omkara Banerjee●
+## r2s-monster_pressure-thorp-1 (thorp, pop 18) Ronan Murphy [Warden/warden] crises=monster_pressure
+  header: 2 Key Figures?The people worth knowing and what each one holds. / ↺ Reroll / All●●● High●● Moderate● Low / Household Council (1)▲
+  group: In no power (1)▲
+  card: Ronan Murphy● / Warden / Disposition marginal
+  mentions:
+    == Summary/Crisis ==: holds the lever: Ronan Murphy · nobody here could, so this one stepped in for the crisis
+    == World/NPCs ==: Ronan Murphy●
+## r2s-monster_pressure-thorp-3 (thorp, pop 10) Ollin Chuc [Warden/warden] crises=monster_pressure
+  header: 2 Key Figures?The people worth knowing and what each one holds. / ↺ Reroll / All●●● High●● Moderate● Low / Elder Council (1)▲
+  group: In no power (1)▲
+  card: Ollin Chuc● / Warden / Disposition marginal
+  mentions:
+    == Summary/Crisis ==: holds the lever: Ollin Chuc · nobody here could, so this one stepped in for the crisis
+    == World/NPCs ==: Ollin Chuc●
+## r2s-monster_pressure-hamlet-0 (hamlet, pop 56) Birger Svensson [Warden/warden] crises=monster_pressure
+  header: 2 Key Figures?The people worth knowing and what each one holds. / ↺ Reroll / All●●● High●● Moderate● Low / Headman's Authority (1)▲
+  group: In no power (1)▲
+  card: Birger Svensson● / Warden / Disposition marginal
+  mentions:
+    == Summary/Crisis ==: holds the lever: Birger Svensson · nobody here could, so this one stepped in for the crisis
+    == World/NPCs ==: Birger Svensson●
+## r2s-monster_pressure-hamlet-1 (hamlet, pop 64) Panayot Morozov [Warden/warden] crises=monster_pressure
+  header: 5 Key Figures?The people worth knowing and what each one holds. / ↺ Reroll / All●●● High●● Moderate● Low / Free Elder Council (3)▲
+  group: In no power (2)▲
+  card: Panayot Morozov● / Warden
+  mentions:
+    == Summary/Crisis ==: holds the lever: Panayot Morozov · nobody here could, so this one stepped in for the crisis
+    == World/NPCs ==: Panayot Morozov●
+## r2s-monster_pressure-hamlet-2 (hamlet, pop 94) Yesülün Qonggirad [Warden/warden] crises=monster_pressure
+  header: 6 Key Figures?The people worth knowing and what each one holds. / ↺ Reroll / All●●● High●● Moderate● Low / Elder Council (2)▲
+  group: In no power (4)▲
+  card: Yesülün Qonggirad● / Warden
+  mentions:
+    == Summary/Crisis ==: holds the lever: Yesülün Qonggirad · nobody here could, so this one stepped in for the crisis
+    == World/NPCs ==: Yesülün Qonggirad●
+## r2s-monster_pressure-hamlet-3 (hamlet, pop 48) Elias Chrysoberges [Warden/warden] crises=monster_pressure
+  header: 4 Key Figures?The people worth knowing and what each one holds. / ↺ Reroll / All●●● High●● Moderate● Low / Headman's Authority (1)▲
+  group: In no power (3)▲
+  card: Elias Chrysoberges● / Warden / Disposition marginal
+  mentions:
+    == Summary/Crisis ==: holds the lever: Elias Chrysoberges · nobody here could, so this one stepped in for the crisis
+    == World/NPCs ==: Elias Chrysoberges●
+## r2s-monster_pressure-village-0 (village, pop 267) Nalayani Das [Warden/warden] crises=monster_pressure
+  header: 10 Key Figures?The people worth knowing and what each one holds.1 high influence · 1 moderate / ↺ Reroll / All●●● High●● Moderate● Low / Elected Reeve (3)▲
+  group: In no power (4)▲
+  card: Nalayani Das● / Warden
+  mentions:
+    == Summary/Crisis ==: holds the lever: Nalayani Das · nobody here could, so this one stepped in for the crisis
+    == Summary/Plot Hooks ==: In the raids, Nalayani Das holds the key to it: nobody here could, so this one stepped in for the crisis.
+    == World/NPCs ==: Nalayani Das●
+## r2s-monster_pressure-village-1 (village, pop 245) Güchlüg Ongut [Warden/warden] crises=monster_pressure
+  header: 6 Key Figures?The people worth knowing and what each one holds.1 high influence · 1 moderate / ↺ Reroll / All●●● High●● Moderate● Low / Elder Council (1)▲
+  group: In no power (3)▲
+  card: Güchlüg Ongut● / Warden
+  mentions:
+    == Summary/Crisis ==: holds the lever: Güchlüg Ongut · nobody here could, so this one stepped in for the crisis
+    == Summary/Plot Hooks ==: In the raids, Güchlüg Ongut holds the key to it: nobody here could, so this one stepped in for the crisis.
+    == World/NPCs ==: Güchlüg Ongut●
+## r2s-monster_pressure-village-2 (village, pop 242) Yashodha Jha [Warden/warden] crises=monster_pressure
+  header: 11 Key Figures?The people worth knowing and what each one holds.1 high influence · 1 moderate / ↺ Reroll / All●●● High●● Moderate● Low / Merchant Guilds (2)▲
+  group: In no power (4)▲
+  card: Yashodha Jha● / Warden
+  mentions:
+    == Summary/Crisis ==: holds the lever: Yashodha Jha · nobody here could, so this one stepped in for the crisis
+    == World/NPCs ==: Yashodha Jha●
+## r2s-monster_pressure-village-3 (village, pop 207) Samira al-Masri [Warden/warden] crises=monster_pressure
+  header: 6 Key Figures?The people worth knowing and what each one holds.1 high influence / ↺ Reroll / All●●● High●● Moderate● Low / Priestly Guidance (3)▲
+  group: In no power (3)▲
+  card: Samira al-Masri● / Warden
+  mentions:
+    == Summary/Crisis ==: holds the lever: Samira al-Masri · nobody here could, so this one stepped in for the crisis
+    == World/NPCs ==: Samira al-Masri●
+## r2s-insurgency-hamlet-0 (hamlet, pop 35) Sophronios Chomatenos [Grain Steward/grain] crises=famine
+  header: 2 Key Figures?The people worth knowing and what each one holds. / ↺ Reroll / All●●● High●● Moderate● Low / Headman's Authority (1)▲
+  group: In no power (1)▲
+  card: Sophronios Chomatenos● / Grain Steward
+  mentions:
+    == Summary/Crisis ==: holds the lever: Sophronios Chomatenos · nobody here could, so this one stepped in for the crisis
+    == Summary/Crisis ==: Sophronios Chomatenos has food, enough to matter. They will sell it, but their price is not money. The players can intervene in how this plays out.
+    == World/NPCs ==: Sophronios Chomatenos●
+## r2s-insurgency-hamlet-2 (hamlet, pop 72) Paullus Flavius [Grain Steward/grain] crises=famine
+  header: 2 Key Figures?The people worth knowing and what each one holds. / ↺ Reroll / All●●● High●● Moderate● Low / Feudal Stewardship (1)▲
+  group: In no power (1)▲
+  card: Paullus Flavius● / Grain Steward / Disposition marginal
+  mentions:
+    == Summary/Crisis ==: holds the lever: Paullus Flavius · nobody here could, so this one stepped in for the crisis
+    == Summary/Crisis ==: Paullus Flavius has food, enough to matter. They will sell it, but their price is not money. The players can intervene in how this plays out.
+    == World/NPCs ==: Paullus Flavius●

@@ -1,0 +1,8 @@
+42	69b449d97	import { institutionHouseLabel } from '../../domain/display/institutionDisplayName.js';
+70	69b449d97	export function EntityRef({ id, index, type, fallback = '', verbatim = false, style }) {
+72	69b449d97	// ROUND THREE, ruling (a): a reference to a HOUSE prints the house's label, the one display leaf
+73	69b449d97	// the page's EntityLink reads too (no catalogue count range, household range, gate or condition).
+74	69b449d97	const house = (entry?.type || type) === 'institution';
+75	69b449d97	const printed = (/** @type {string} */ t) => (house && t ? institutionHouseLabel(t) : t);
+79	69b449d97	const text = safe(printed(fallback));
+84	69b449d97	const label = safe(verbatim ? fallback : printed(entry.currentName || fallback || entry.label || ''));

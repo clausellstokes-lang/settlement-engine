@@ -1,0 +1,50 @@
+1	111e8b152	/**
+27	111e8b152	import { atomHolds } from '../domain/facts/factVocabulary.js';
+140	111e8b152	// famine: "lost its harvest" presumes the place grows grain (R2-CODE-B item 6; the cold list REVIEW-W2A-3
+141	111e8b152	// #857: a fishing town whose food record holds `foodSources` ["fish"]). A line written in code is a pool of
+142	111e8b152	// two checked at its print site: the vocabulary's `grain` atom (the food record's own source) read by
+143	111e8b152	// `atomHolds`; where the record grows none, the twin says what the famine is. No draw; an unread record
+144	111e8b152	// (no facts, or the atom unanswered) keeps the line as it always read.
+145	111e8b152	famine: (name, _roll, facts) => {
+146	111e8b152	const rest = ' Rationing has begun, the wealthy are hoarding, and the children are visibly hungry.';
+147	e06c1a429	: false;
+148	111e8b152	return noGrain
+149	111e8b152	? `${name} has gone short of food for a second season.${rest}`
+150	111e8b152	: `${name} has lost its harvest for a second season.${rest}`;
+218	111e8b152	// R2-CODE-B item 6 (the cold list REVIEW-W2A-3 #670: "doing well out of it" for a city whose prosperity
+219	111e8b152	// is Poor and whose Economics reads "The place earns less than it spends"): the profit text is true only
+220	111e8b152	// at `prosperity: ≥ moderate` (the vocabulary's band, read by `atomHolds` at this print site); refused,
+221	111e8b152	// the pick resolves to the next row, the loss text (no line added, the coin's draw unchanged). The loss
+222	111e8b152	// text stands as it always did; an unread record keeps the coin's text.
+223	e06c1a429	// R2-CODE-B-5 (the chair's ruling, routed from round three's code lane: "merchants with the right friends are getting rich"
+224	e06c1a429	// in small places with no merchant, and "army contracts pay" in an isolated one): the profit text names merchants, so it
+225	e06c1a429	// needs a market or a merchant house on the live roster (`market`, facts/market.js: a house the catalogue tags 'market',
+226	e06c1a429	// or 'guild' and 'trade'); and an isolated place (`route: isolated`) is not said to do well on army contracts. Refused, the
+227	e06c1a429	// pick resolves as before to the loss text (no line added, the coin's draw unchanged).
+228	b47ba9262	// R2-CODE-B-6 item 0 (the chair's ruling): "Supply caravans pass through on crown requisition" is false of an isolated
+229	b47ba9262	// place (`route: isolated`, the record's own trade route): no caravans pass through it. No sentence is true there in
+230	b47ba9262	// its place, so the loss text leaves the clause out (silence, not a twin). No draw; an unread record keeps it.
+231	ed308fdd8	// The same fault in the price line (the chair's ruling, R2-CODE-B-6): on a fed record (`crisis: hunger` refused)
+232	ed308fdd8	// "Food prices have doubled." resolves to its CENSUS-2d twin "The army has the carts and the road, …", and an
+233	ed308fdd8	// isolated place has no road; the resolver reaches one twin only, so where the place is isolated AND fed the line
+234	ed308fdd8	// is left out here, before the declared resolution. Under hunger the price line prints as before.
+235	111e8b152	wartime: (name, roll, facts) => {
+237	b47ba9262	const isolated = facts ? atomHolds('route: isolated', facts) === true : false;
+238	ed308fdd8	const fedIsolated = isolated && atomHolds('crisis: hunger', facts) === false;
+239	ed308fdd8	const [profit, loss] = WARTIME_VARIANTS(s, isolated, fedIsolated);
+240	e06c1a429	const refused = facts
+241	b47ba9262	? atomHolds('prosperity: ≥ moderate', facts) === false || atomHolds('market', facts) === false || isolated
+243	111e8b152	return roll?.profit && !refused ? profit.text : loss.text;
+270	b47ba9262	/** wartime (loss)'s caravans sentence: printed only off an isolated route (R2-CODE-B-6 item 0). */
+271	b47ba9262	const WARTIME_CARAVANS = 'Supply caravans pass through on crown requisition. ';
+274	111e8b152	* wartime's two texts for one place (`s` = the name, or "the settlement"): the profit text, true only
+275	b47ba9262	* where the place is at least of moderate prosperity (checked at the renderer), and the loss text,
+276	ed308fdd8	* whose caravans sentence an isolated place does not carry, nor its price line where the place is also fed.
+277	111e8b152	* @param {string} s
+278	b47ba9262	* @param {boolean} [isolated] - the record's trade route is `isolated` (read at the renderer)
+279	ed308fdd8	* @param {boolean} [fedIsolated] - isolated, and the record refuses `crisis: hunger` (read at the renderer)
+280	111e8b152	* @returns {ReadonlyArray<{ id: string, text: string }>}
+282	ed308fdd8	function WARTIME_VARIANTS(s, isolated = false, fedIsolated = false) {
+283	111e8b152	return [
+284	111e8b152	{ id: 'profit', text: s + " is in a kingdom at war and doing well out of it: army contracts pay, prices are high, and merchants with the right friends are getting rich. The bill will come later." },
+285	ed308fdd8	{ id: 'loss', text: s + " is in a kingdom fighting a war it may not win. Conscription has taken a third of the working-age men. " + (isolated ? '' : WARTIME_CARAVANS) + (fedIsolated ? '' : WARTIME_PRICES + ' ') + "The governing authority is demanding sacrifice while certain families are quietly thriving on contracts." },

@@ -1,0 +1,12 @@
+52	e28ac16fa	import { institutionHouseLabel } from '../../../domain/display/institutionDisplayName.js';
+77	c40969214	const PROVENANCE_TONE = { you:'#2d7a44', world:'#2a6b6b', auto:'#2a3a7a', none:'#6b5340' };
+93	c40969214	// ROUND THREE, ruling (b) (the chair, 2026-11-13; ROUND-3-CUT §7 (b)): "REQ" was the generator's
+94	c40969214	// provenance (a row the tier's catalogue requires), run onto the house's name: machinery, not a fact
+95	c40969214	// of the place. It leaves the roster; the row is unbadged, like an unstamped generated row.
+96	c40969214	if (created.sourceTag === 'required') return { label:null, color:PROVENANCE_TONE.none, title:undefined };
+159	e28ac16fa	// ROUND THREE, ruling (a) (ROUND-3-CUT §7 (a)): the card names the house by its label, the one
+160	e28ac16fa	// display leaf every surface reads: no catalogue count range, household range, gate or
+161	e28ac16fa	// condition ("Dwellings (1-8)" reads "Dwellings"; "Inn (multiple)" reads "Inns"), the in-world
+162	e28ac16fa	// qualifiers kept. The raw name stays the join key (`key` above) and the React key.
+163	e28ac16fa	label: institutionHouseLabel(inst),
+346	e28ac16fa	<EntityLink id={entityIdFor('service', entity)} type="service" fallback={institutionHouseLabel(svc.name)} style={{ color: swatch.inkMag, fontWeight: 600 }} />

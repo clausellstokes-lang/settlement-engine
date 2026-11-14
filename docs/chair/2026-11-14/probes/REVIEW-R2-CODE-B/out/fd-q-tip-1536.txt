@@ -1,0 +1,76 @@
+births base 1536 tip 1536 missing 0; leaf diffs 2681; towns moved 372
+family stress: 354 towns
+family stressors: 354 towns
+family npcs: 141 towns
+family generationCoherenceReceipt: 141 towns
+  176	.stress.cast.roles[].reason	 e.g. r2r-thorp-5 r2r-thorp-10 r2r-thorp-17
+  176	.stressors.cast.roles[].reason	 e.g. r2r-thorp-5 r2r-thorp-10 r2r-thorp-17
+  141	.generationCoherenceReceipt.judgments[].evidence[].evidence	 e.g. r2r-thorp-5 r2r-thorp-10 r2r-thorp-17
+  95	.stress.summary	 e.g. r2r-thorp-11 r2r-thorp-16 r2r-thorp-17
+  95	.stressors.summary	 e.g. r2r-thorp-11 r2r-thorp-16 r2r-thorp-17
+  94	.npcs[]	 e.g. r2r-thorp-17 r2r-thorp-38 r2r-thorp-46
+  91	.stress.cast.levers[]	 e.g. r2r-thorp-17 r2r-thorp-38 r2r-thorp-41
+  91	.stressors.cast.levers[]	 e.g. r2r-thorp-17 r2r-thorp-38 r2r-thorp-41
+  78	.stress.cast.roles[].id	 e.g. r2r-thorp-17 r2r-thorp-38 r2r-thorp-45
+  78	.stress.cast.roles[].name	 e.g. r2r-thorp-17 r2r-thorp-38 r2r-thorp-45
+  78	.stressors.cast.roles[].id	 e.g. r2r-thorp-17 r2r-thorp-38 r2r-thorp-45
+  78	.stressors.cast.roles[].name	 e.g. r2r-thorp-17 r2r-thorp-38 r2r-thorp-45
+  72	.stress.cast.roles[].kind	 e.g. r2r-thorp-17 r2r-thorp-38 r2r-thorp-45
+  72	.stressors.cast.roles[].kind	 e.g. r2r-thorp-17 r2r-thorp-38 r2r-thorp-45
+  71	.stress.cast.stakes[].reason	 e.g. r2r-village-9 r2r-village-24 r2r-village-56
+  71	.stressors.cast.stakes[].reason	 e.g. r2r-village-9 r2r-village-24 r2r-village-56
+  64	.stress.cast.roles[].temporary	 e.g. r2r-thorp-17 r2r-thorp-38 r2r-thorp-46
+  64	.stressors.cast.roles[].temporary	 e.g. r2r-thorp-17 r2r-thorp-38 r2r-thorp-46
+  60	.stress[].summary	 e.g. r2s-occupied-thorp-1 r2s-occupied-hamlet-0 r2s-occupied-hamlet-1
+  60	.stressors[].summary	 e.g. r2s-occupied-thorp-1 r2s-occupied-hamlet-0 r2s-occupied-hamlet-1
+  47	.npcs[].importance (NEW KEY)	 e.g. r2r-thorp-5 r2r-thorp-10 r2r-thorp-19
+  47	.npcs[].structuralRank (NEW KEY)	 e.g. r2r-thorp-5 r2r-thorp-10 r2r-thorp-19
+  45	.stress[].cast.roles[].reason	 e.g. r2r-city-56 r2s-occupied-thorp-1 r2s-occupied-hamlet-0
+  45	.stressors[].cast.roles[].reason	 e.g. r2r-city-56 r2s-occupied-thorp-1 r2s-occupied-hamlet-0
+  34	.stress[].cast.roles[].id	 e.g. r2s-occupied-thorp-1 r2s-occupied-hamlet-0 r2s-occupied-hamlet-1
+  34	.stress[].cast.roles[].name	 e.g. r2s-occupied-thorp-1 r2s-occupied-hamlet-0 r2s-occupied-hamlet-1
+  34	.stressors[].cast.roles[].id	 e.g. r2s-occupied-thorp-1 r2s-occupied-hamlet-0 r2s-occupied-hamlet-1
+  34	.stressors[].cast.roles[].name	 e.g. r2s-occupied-thorp-1 r2s-occupied-hamlet-0 r2s-occupied-hamlet-1
+  32	.stress[].cast.roles[].kind	 e.g. r2s-occupied-thorp-1 r2s-occupied-hamlet-0 r2s-occupied-hamlet-1
+  32	.stressors[].cast.roles[].kind	 e.g. r2s-occupied-thorp-1 r2s-occupied-hamlet-0 r2s-occupied-hamlet-1
+  31	.stress[].cast.roles[].temporary	 e.g. r2s-occupied-thorp-1 r2s-occupied-hamlet-0 r2s-occupied-hamlet-1
+  31	.stress[].cast.levers[]	 e.g. r2s-occupied-thorp-1 r2s-occupied-hamlet-0 r2s-occupied-hamlet-1
+  31	.stressors[].cast.roles[].temporary	 e.g. r2s-occupied-thorp-1 r2s-occupied-hamlet-0 r2s-occupied-hamlet-1
+  31	.stressors[].cast.levers[]	 e.g. r2s-occupied-thorp-1 r2s-occupied-hamlet-0 r2s-occupied-hamlet-1
+  29	.stress.cast.stakes[].stake	 e.g. r2r-village-24 r2r-village-58 r2s-famine-village-2
+  29	.stressors.cast.stakes[].stake	 e.g. r2r-village-24 r2r-village-58 r2s-famine-village-2
+  13	.stress.cast.roles[]	 e.g. r2r-thorp-16 r2r-thorp-45 r2s-under_siege-thorp-0
+  13	.stress.cast.absent[]	 e.g. r2r-thorp-16 r2r-thorp-45 r2s-under_siege-thorp-0
+  13	.stressors.cast.roles[]	 e.g. r2r-thorp-16 r2r-thorp-45 r2s-under_siege-thorp-0
+  13	.stressors.cast.absent[]	 e.g. r2r-thorp-16 r2r-thorp-45 r2s-under_siege-thorp-0
+  10	.stress[].cast.stakes[].stake	 e.g. rr3-town-under_siege+famine-rand-5 rr3-city-under_siege+famine-rand-4 rr3-city-under_siege+famine-rand-5
+  10	.stress[].cast.stakes[].reason	 e.g. rr3-town-under_siege+famine-rand-5 rr3-city-under_siege+famine-rand-4 rr3-city-under_siege+famine-rand-5
+  10	.stressors[].cast.stakes[].stake	 e.g. rr3-town-under_siege+famine-rand-5 rr3-city-under_siege+famine-rand-4 rr3-city-under_siege+famine-rand-5
+  10	.stressors[].cast.stakes[].reason	 e.g. rr3-town-under_siege+famine-rand-5 rr3-city-under_siege+famine-rand-4 rr3-city-under_siege+famine-rand-5
+  8	.stress.cast.roles[].role	 e.g. r2r-thorp-45 r2s-under_siege-thorp-0 r2s-under_siege-thorp-1
+  8	.stressors.cast.roles[].role	 e.g. r2r-thorp-45 r2s-under_siege-thorp-0 r2s-under_siege-thorp-1
+  4	.stress[].cast.roles[]	 e.g. rr3-thorp-under_siege-rand-3 rr3-thorp-plague_onset-rand-3 rr3-thorp-under_siege+famine-port-1
+  4	.stress[].cast.absent[]	 e.g. rr3-thorp-under_siege-rand-3 rr3-thorp-plague_onset-rand-3 rr3-thorp-under_siege+famine-port-1
+  4	.stressors[].cast.roles[]	 e.g. rr3-thorp-under_siege-rand-3 rr3-thorp-plague_onset-rand-3 rr3-thorp-under_siege+famine-port-1
+  4	.stressors[].cast.absent[]	 e.g. rr3-thorp-under_siege-rand-3 rr3-thorp-plague_onset-rand-3 rr3-thorp-under_siege+famine-port-1
+  3	.stress.cast.absent[].role	 e.g. r2s-under_siege-thorp-1 r2s-under_siege-thorp-2 rr3-thorp-wartime-rand-4
+  3	.stress.cast.absent[].reason	 e.g. r2s-under_siege-thorp-1 r2s-under_siege-thorp-2 rr3-thorp-wartime-rand-4
+  3	.stressors.cast.absent[].role	 e.g. r2s-under_siege-thorp-1 r2s-under_siege-thorp-2 rr3-thorp-wartime-rand-4
+  3	.stressors.cast.absent[].reason	 e.g. r2s-under_siege-thorp-1 r2s-under_siege-thorp-2 rr3-thorp-wartime-rand-4
+  3	.stress[].cast.roles[].role	 e.g. rr3-thorp-under_siege-rand-3 rr3-thorp-under_siege+famine-port-1 rr3-village-under_siege+famine-port-1
+  3	.stressors[].cast.roles[].role	 e.g. rr3-thorp-under_siege-rand-3 rr3-thorp-under_siege+famine-port-1 rr3-village-under_siege+famine-port-1
+  1	.stress[].cast.absent[].role	 e.g. rr3-thorp-under_siege-rand-3
+  1	.stress[].cast.absent[].reason	 e.g. rr3-thorp-under_siege-rand-3
+  1	.stressors[].cast.absent[].role	 e.g. rr3-thorp-under_siege-rand-3
+  1	.stressors[].cast.absent[].reason	 e.g. rr3-thorp-under_siege-rand-3
+  1	.npcs[].id	 e.g. rr3-thorp-plague_onset-rand-3
+  1	.npcs[].role	 e.g. rr3-thorp-plague_onset-rand-3
+  1	.npcs[].temporaryKind	 e.g. rr3-thorp-plague_onset-rand-3
+  1	.npcs[].crisisIds[]	 e.g. rr3-thorp-plague_onset-rand-3
+  1	.stress.cast.levers[].institution	 e.g. rr3-hamlet-mass_migration-rand-1
+  1	.stress.cast.levers[].holderId	 e.g. rr3-hamlet-mass_migration-rand-1
+  1	.stress.cast.levers[].holderName	 e.g. rr3-hamlet-mass_migration-rand-1
+  1	.stressors.cast.levers[].institution	 e.g. rr3-hamlet-mass_migration-rand-1
+  1	.stressors.cast.levers[].holderId	 e.g. rr3-hamlet-mass_migration-rand-1
+  1	.stressors.cast.levers[].holderName	 e.g. rr3-hamlet-mass_migration-rand-1
+NEW/GONE KEY rows 94 [".npcs[].importance (NEW KEY)",".npcs[].structuralRank (NEW KEY)"]

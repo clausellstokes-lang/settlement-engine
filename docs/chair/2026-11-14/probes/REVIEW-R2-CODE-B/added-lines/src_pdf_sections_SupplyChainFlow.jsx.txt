@@ -1,0 +1,14 @@
+24	99432257c	import { chainHousesOf, chainSourceOf } from '../../domain/display/chainHouses.js';
+76	c1efd7f93	// R2-CODE-B item 1b, the chair's ruling R1 (REVIEW-R2-STAGES finding 3): the houses by the seam's house
+77	c1efd7f93	// label, each once (domain/display/chainHouses.js), the screen's chain card's own read — never a rank's
+78	c1efd7f93	// count range the roster does not hold. `present` is the same first-word read this row always made.
+79	c1efd7f93	const insts = chainHousesOf(chain.processingInstitutions, instNames);
+118	e285c603f	{/* R2-CODE-B round 3, ruling (d) (#804): no ground the record says is absent (chainHouses.js); with the town, a
+119	e285c603f	toll renamed by its access names that access (COHERENCE-AGREE-6 F1), as the screen's card reads it (R2-CODE-B-7). */}
+120	e285c603f	{chainSourceOf(chain, shown) ? (
+123	e285c603f	{safe(chainSourceOf(chain, shown))}{chain.resourceDepleted ? ' (depleted)' : ''}
+129	a245e05fb	{/* R2-CODE-B-SIDE item 2: no "Import: <a chain's label>" (a category of work is not a good), as the
+130	a245e05fb	screen's card (SupplyChainsPanel.jsx :: chainFlowFacts.importedUpstream). */}
+170	2ed36a430	{/* R2-CODE-B-SIDE item 1: the generator's upstream note leaves the row, as it leaves the screen's card
+171	2ed36a430	(SupplyChainsPanel.jsx :: chainFlowFacts): no read the row holds makes it true. */}
+189	a245e05fb	<Swatch color={STATUS.vulnerable.bg} border={STATUS.vulnerable.border} label="Vulnerable" />

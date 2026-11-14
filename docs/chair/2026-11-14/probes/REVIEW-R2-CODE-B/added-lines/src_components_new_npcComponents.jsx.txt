@@ -1,0 +1,28 @@
+25	f09e55042	import { keeperFormOf, seatKeeperOf } from '../../domain/people/seatKeeper.js';
+131	f09e55042	// R2-CODE-B round 3 (the increment's #pf-717 #pf-718, the chair's ruling): the keeper of an EMPTY seat is styled as the
+132	f09e55042	// Power tab styles it ("Acting First Magnate"), from the powers lane's one home (people/seatKeeper.js), never by the
+133	f09e55042	// bare title of the office no one holds. The stored role is read unchanged for everyone else.
+134	f09e55042	const keeperSettlement = useStore(s => s.settlement);
+135	f09e55042	const seatKeeper = seatKeeperOf(keeperSettlement);
+136	f09e55042	const seatKeeperForm = seatKeeper ? keeperFormOf(keeperSettlement) : '';
+137	f09e55042	const roleShown = (/** @type {unknown} */ id, /** @type {unknown} */ stored) => (seatKeeper && seatKeeperForm && seatKeeper.id && seatKeeper.id === id ? seatKeeperForm : stored);
+165	f09e55042	<div data-sf-chrome="" style={{flex:1,fontSize:chromeFontSize(FS.xs,mobile),color:MUTED}}>{roleShown(rel.from, rel.npc1Role)} · {rel.strength} · {roleShown(rel.to, rel.npc2Role)}</div>
+191	87c541620	{/* ROUND THREE (the cut's #389 "Moderate tensionMilitary Council vs …"): a space the copied text keeps between the
+192	87c541620	pill and the parties; a whitespace text node between flex items does not move the layout. */}
+193	87c541620	{' '}
+349	87c541620	// ROUND THREE (the cut's #967 #968 #1097: "answers to Whisper market, through Achilles Melissenos", the Black market's
+350	87c541620	// black marketeer): the handler is named only where the record puts the handler in the house or power the person answers
+351	87c541620	// to — the handler's own house (`institution.key`) is it, or the handler holds a standing in it. Otherwise the line says
+352	87c541620	// whom the person answers to and names no go-between the record does not give that house (284 of 923 such lines, 105
+353	87c541620	// of the census's 720 + the readers' 80). The record's `handler` is unchanged.
+354	87c541620	const handlerCard = allegiance?.handler
+355	87c541620	? ((placeSettlement || settlement)?.npcs || []).find((n) => String(n?.id) === allegiance.handler) || null
+357	87c541620	const handlerOfHouse = !!handlerCard && !!allegianceGuild && (String(handlerCard.institution?.key || '') === allegianceGuild
+358	87c541620	|| (Array.isArray(handlerCard.memberships) && handlerCard.memberships.some((m) => m?.power === allegianceGuild)));
+359	87c541620	const allegianceHandler = handlerOfHouse ? handlerCard?.name || null : null;
+441	846f2bcef	{/* R2-CODE-B-5 (the third seat's note: "Flaw: vainTemperament: clever"): two chips are two things; a space the
+442	846f2bcef	copied text keeps between them. A whitespace text node between flex items does not move the layout. */}
+443	846f2bcef	{publicTraits.map((t,i) => <Fragment key={`${t.key}-${i}`}>{i > 0 && ' '}<span title={t.value} style={{fontSize:chromeFontSize(FS.xxs, mobile),color:swatch.inkMag3,background:swatch['#EDE3CC'],padding:'0 5px'}}>{t.label}: {t.value}</span></Fragment>)}
+467	87c541620	{/* ROUND THREE: the badge and the line are two things; a space the copied text keeps ("Hidden allegiance answers
+468	87c541620	to …", never "Hidden allegianceanswers to …"). A whitespace text node between flex items does not move the layout. */}
+469	87c541620	{allegianceGuild && ' '}

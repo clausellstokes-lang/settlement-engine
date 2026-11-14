@@ -1,0 +1,81 @@
+r2r-thorp-11 loss hunger=false mkt=false  :: Wartime. The kingdom's war makes its demands on Muulcoba, in men, carts and supplies, and its leaders must decide how much to give.
+r2r-thorp-16 loss hunger=false mkt=false  :: Wartime. The kingdom's war makes its demands on Beizhou, in men, carts and supplies, and its leaders must decide how much to give.
+r2r-thorp-32 loss hunger=false mkt=false  :: Wartime. In Hochsee the crown's officers come for requisitions, and people watch closely what they take.
+r2r-thorp-55 loss hunger=false mkt=false  :: Wartime. In Yekekum the crown's officers come for requisitions, and people watch closely what they take.
+r2r-thorp-56 loss hunger=false mkt=false  :: Wartime. The kingdom's war makes its demands on Kitaguan, in men, carts and supplies, and its leaders must decide how much to give.
+r2r-hamlet-5 loss hunger=false mkt=false  :: Wartime. The kingdom's war makes its demands on Achilpolis, in men, carts and supplies, and its leaders must decide how much to give.
+r2r-hamlet-53 loss hunger=false mkt=false  :: Wartime. In wartime Markazdeh's trade follows the army: what the war needs sells, and the rest waits.
+r2r-town-27 loss hunger=false mkt=true  :: Wartime. In Markazzamin the crown's officers come for requisitions, and people watch closely what they take. Wajiha al-Qadir leads the defence.
+r2r-metropolis-4 loss hunger=false mkt=true  :: Wartime. A crown officer wants more from Anoousa than it can spare, and someone new might find a way between giving in and refusing. Ioannes Iasites leads the defence.
+r2s-wartime-thorp-0 loss hunger=false mkt=false  :: Wartime. In Amarghat the crown's officers come for requisitions, and people watch closely what they take.
+r2s-wartime-thorp-1 loss mkt=false   :: Wartime. In Breitgate the crown's officers come for requisitions, and people watch closely what they take.
+r2s-wartime-thorp-2 loss pros=false   :: Wartime and Famine. In Hadithaoasis whoever holds grain decides who eats, and they know it. The worst of it falls on Lujain al-Malik.
+r2s-wartime-thorp-3 loss mkt=false   :: Wartime. The kingdom's war makes its demands on Madinatsaray, in men, carts and supplies, and its leaders must decide how much to give.
+r2s-wartime-hamlet-0 loss hunger=false mkt=false  :: Wartime. A crown officer wants more from Nishiyuan than it can spare, and someone new might find a way between giving in and refusing.
+r2s-wartime-hamlet-1 loss hunger=false mkt=false  :: Wartime. In wartime Evangepolis's trade follows the army: what the war needs sells, and the rest waits.
+r2s-wartime-hamlet-2 loss hunger=false mkt=false  :: Wartime. In wartime Kaankin's trade follows the army: what the war needs sells, and the rest waits. Daniyya Caan leads the defence.
+r2s-wartime-hamlet-3 loss pros=false   :: Wartime and Famine. Caercross has lost a second harvest. Its leaders have begun rationing, while the families who can afford it hoard what they have. The worst of it falls on Hugh Doherty.
+r2s-wartime-village-0 profit mkt=true   :: Wartime. A crown officer wants more from Abercross than it can spare, and someone new might find a way between giving in and refusing.
+r2s-wartime-village-1 loss hunger=false mkt=true  :: Wartime. The kingdom's war makes its demands on Puribagh, in men, carts and supplies, and its leaders must decide how much to give. Radha Joshi leads the defence.
+r2s-wartime-village-2 loss hunger=false mkt=false  :: Wartime. In wartime Eleftikon's trade follows the army: what the war needs sells, and the rest waits.
+r2s-wartime-village-3 loss hunger=false mkt=false  :: Wartime. A crown officer wants more from Zelenonick than it can spare, and someone new might find a way between giving in and refusing.
+r2s-wartime-town-0 loss hunger=false mkt=true  :: Wartime. In wartime Skálthorpe's trade follows the army: what the war needs sells, and the rest waits. Sven Olafsson leads the defence.
+r2s-wartime-town-1 loss hunger=false mkt=true  :: Wartime. In wartime Stredpol's trade follows the army: what the war needs sells, and the rest waits. Tatiana Mikhailov leads the defence.
+r2s-wartime-town-2 profit mkt=true   :: Wartime. In Shivapalli the crown's officers come for requisitions, and people watch closely what they take. Ishan Parekh leads the defence.
+r2s-wartime-town-3 loss hunger=false mkt=true  :: Wartime. The kingdom's war makes its demands on Schwarzsteig, in men, carts and supplies, and its leaders must decide how much to give. Ignatz Schröder leads the defence.
+r2s-wartime-city-0 loss hunger=false mkt=true  :: Wartime. In wartime Wadiabad's trade follows the army: what the war needs sells, and the rest waits. Harun al-Najdi leads the defence.
+r2s-wartime-city-1 profit mkt=true   :: Wartime. A crown officer wants more from Jalalserai than it can spare, and someone new might find a way between giving in and refusing. Altan Kiyad leads the defence.
+r2s-wartime-city-2 loss hunger=false mkt=true  :: Wartime. The kingdom's war makes its demands on Langkirche, in men, carts and supplies, and its leaders must decide how much to give. Veronika Schmitt leads the defence.
+r2s-wartime-city-3 loss hunger=false mkt=true  :: Wartime. In wartime Tikalche's trade follows the army: what the war needs sells, and the rest waits. Acamapichtli Koh leads the defence.
+r2s-wartime-metropolis-0 profit mkt=true   :: Wartime. In wartime Qasrchowk's trade follows the army: what the war needs sells, and the rest waits. Salim al-Suri leads the defence.
+r2s-wartime-metropolis-1 loss hunger=false mkt=true  :: Wartime. A crown officer wants more from Vysokoichi than it can spare, and someone new might find a way between giving in and refusing. Todor Nikolayev leads the defence.
+r2s-wartime-metropolis-2 loss hunger=false mkt=true  :: Wartime. In wartime Nanwan's trade follows the army: what the war needs sells, and the rest waits. Zhiwei Im leads the defence.
+r2s-wartime-metropolis-3 loss hunger=false mkt=true  :: Wartime. In wartime Nanwan's trade follows the army: what the war needs sells, and the rest waits. Pengfei Suzuki leads the defence.
+rr3-thorp-wartime-rand-0 loss pros=false   :: Wartime and Famine. In Ingiaker whoever holds grain decides who eats, and they know it. The worst of it falls on Ísgerðr Ragnarsson.
+rr3-thorp-wartime-rand-1 loss hunger=false mkt=false  :: Wartime. A crown officer wants more from Krasnoki than it can spare, and someone new might find a way between giving in and refusing.
+rr3-thorp-wartime-rand-2 loss hunger=false mkt=false  :: Wartime. In wartime Wadipara's trade follows the army: what the war needs sells, and the rest waits.
+rr3-thorp-wartime-rand-3 loss hunger=false mkt=false  :: Wartime. The kingdom's war makes its demands on Meganea, in men, carts and supplies, and its leaders must decide how much to give.
+rr3-thorp-wartime-rand-4 loss hunger=false mkt=false  :: Wartime. In wartime Khirbetsaray's trade follows the army: what the war needs sells, and the rest waits.
+rr3-thorp-wartime-rand-5 loss hunger=false mkt=false  :: Wartime. In wartime Lagourbs's trade follows the army: what the war needs sells, and the rest waits.
+rr3-thorp-wartime-port-0 loss hunger=false mkt=false  :: Wartime. A crown officer wants more from Nishiyuan than it can spare, and someone new might find a way between giving in and refusing.
+rr3-thorp-wartime-port-1 loss hunger=false mkt=false  :: Wartime. In wartime Pantechori's trade follows the army: what the war needs sells, and the rest waits.
+rr3-hamlet-wartime-rand-0 loss hunger=false mkt=false  :: Wartime. In wartime Fonteium's trade follows the army: what the war needs sells, and the rest waits.
+rr3-hamlet-wartime-rand-1 loss hunger=false mkt=false  :: Wartime. In wartime Beicheng's trade follows the army: what the war needs sells, and the rest waits.
+rr3-hamlet-wartime-rand-2 loss hunger=false mkt=false  :: Wartime. The kingdom's war makes its demands on Neadgarth, in men, carts and supplies, and its leaders must decide how much to give.
+rr3-hamlet-wartime-rand-3 loss hunger=false mkt=true  :: Wartime. In Zlatonitsa the crown's officers come for requisitions, and people watch closely what they take.
+rr3-hamlet-wartime-rand-4 loss hunger=false mkt=false  :: Wartime. A crown officer wants more from Breitstift than it can spare, and someone new might find a way between giving in and refusing.
+rr3-hamlet-wartime-rand-5 loss hunger=false mkt=false  :: Wartime. A crown officer wants more from Navaghat than it can spare, and someone new might find a way between giving in and refusing.
+rr3-hamlet-wartime-port-0 loss hunger=false mkt=false  :: Wartime. A crown officer wants more from Darhanbuurt than it can spare, and someone new might find a way between giving in and refusing.
+rr3-hamlet-wartime-port-1 loss hunger=false mkt=false  :: Wartime. A crown officer wants more from Easbeck than it can spare, and someone new might find a way between giving in and refusing.
+rr3-village-wartime-rand-0 loss hunger=false mkt=false  :: Wartime. In Haijin the crown's officers come for requisitions, and people watch closely what they take.
+rr3-village-wartime-rand-1 loss hunger=false mkt=false  :: Wartime. In wartime Steinstadt's trade follows the army: what the war needs sells, and the rest waits.
+rr3-village-wartime-rand-2 loss hunger=false mkt=false  :: Wartime. The kingdom's war makes its demands on Weijiao, in men, carts and supplies, and its leaders must decide how much to give.
+rr3-village-wartime-rand-3 loss hunger=false mkt=false  :: Wartime. In wartime Wadichowk's trade follows the army: what the war needs sells, and the rest waits. Yusra al-Rashidi leads the defence.
+rr3-village-wartime-rand-4 loss hunger=false mkt=false  :: Wartime. In Sanctastagnum the crown's officers come for requisitions, and people watch closely what they take.
+rr3-village-wartime-rand-5 loss hunger=false mkt=false  :: Wartime. In Neaarion the crown's officers come for requisitions, and people watch closely what they take.
+rr3-village-wartime-port-0 loss hunger=false mkt=false  :: Wartime. In Petencoatl the crown's officers come for requisitions, and people watch closely what they take. Ollin Kab leads the defence.
+rr3-village-wartime-port-1 loss hunger=false mkt=false  :: Wartime. A crown officer wants more from Terraminus than it can spare, and someone new might find a way between giving in and refusing. Manlia Gratus leads the defence.
+rr3-town-wartime-rand-0 loss hunger=false mkt=true  :: Wartime. In wartime Pratoorum's trade follows the army: what the war needs sells, and the rest waits. Prima Rufus leads the defence.
+rr3-town-wartime-rand-1 loss hunger=false mkt=true  :: Wartime. The kingdom's war makes its demands on Palenqcoatl, in men, carts and supplies, and its leaders must decide how much to give. Jaguar Kab leads the defence.
+rr3-town-wartime-rand-2 loss hunger=false mkt=true  :: Wartime. A crown officer wants more from Palenqatl than it can spare, and someone new might find a way between giving in and refusing. Nahui Nah leads the defence.
+rr3-town-wartime-rand-3 loss mkt=true   :: Wartime. In wartime Fengan's trade follows the army: what the war needs sells, and the rest waits. Sakura Tanaka leads the defence.
+rr3-town-wartime-rand-4 loss hunger=false mkt=true  :: Wartime. A crown officer wants more from Kripagram than it can spare, and someone new might find a way between giving in and refusing. Hari Choudhry leads the defence.
+rr3-town-wartime-rand-5 loss hunger=false mkt=true  :: Wartime. A crown officer wants more from Panteskala than it can spare, and someone new might find a way between giving in and refusing. Loukas Melissenos leads the defence.
+rr3-town-wartime-port-0 profit mkt=true   :: Wartime. A crown officer wants more from Inverheath than it can spare, and someone new might find a way between giving in and refusing. Saoirse Shaughnessy leads the defence.
+rr3-town-wartime-port-1 loss hunger=false mkt=true  :: Wartime. The kingdom's war makes its demands on Erdenobo, in men, carts and supplies, and its leaders must decide how much to give. Zolzaya Arlat leads the defence.
+rr3-city-wartime-rand-0 loss hunger=false mkt=true  :: Wartime. In wartime Ribatnagar's trade follows the army: what the war needs sells, and the rest waits. Nada al-Kindi leads the defence.
+rr3-city-wartime-rand-1 loss hunger=false mkt=true  :: Wartime. In Ulaanobo the crown's officers come for requisitions, and people watch closely what they take. Otgontuya Besud leads the defence.
+rr3-city-wartime-rand-2 profit mkt=true   :: Wartime. In wartime Cnocgarth's trade follows the army: what the war needs sells, and the rest waits. Vénus MacQuarrie leads the defence.
+rr3-city-wartime-rand-3 profit mkt=true   :: Wartime. In wartime Qaranuur's trade follows the army: what the war needs sells, and the rest waits. Mönkhzul Oirat leads the defence.
+rr3-city-wartime-rand-4 loss hunger=false mkt=true  :: Wartime. A crown officer wants more from Velikomir than it can spare, and someone new might find a way between giving in and refusing. Sofia Marković leads the defence.
+rr3-city-wartime-rand-5 profit mkt=true   :: Wartime. A crown officer wants more from Langenbrücke than it can spare, and someone new might find a way between giving in and refusing. Gertrude Pfeiffer leads the defence.
+rr3-city-wartime-port-0 loss hunger=false mkt=true  :: Wartime. In wartime Uxmalcalco's trade follows the army: what the war needs sells, and the rest waits. Acamapichtli Pech leads the defence.
+rr3-city-wartime-port-1 profit mkt=true   :: Wartime. A crown officer wants more from Megaltion than it can spare, and someone new might find a way between giving in and refusing. Diogenes Makrembolites leads the defence.
+rr3-metropolis-wartime-rand-0 loss hunger=false mkt=true  :: Wartime. In Llanthwaite the crown's officers come for requisitions, and people watch closely what they take. Baothghalach O'Leary leads the defence.
+rr3-metropolis-wartime-rand-1 profit mkt=true   :: Wartime. In wartime Maghhurst's trade follows the army: what the war needs sells, and the rest waits. Ronan Treacy leads the defence.
+rr3-metropolis-wartime-rand-2 profit mkt=true   :: Wartime. A crown officer wants more from Hvaliya than it can spare, and someone new might find a way between giving in and refusing. Dalibor Petrov leads the defence.
+rr3-metropolis-wartime-rand-3 loss hunger=false mkt=true  :: Wartime. A crown officer wants more from Vatantash than it can spare, and someone new might find a way between giving in and refusing. Sübetei Qonggirad leads the defence.
+rr3-metropolis-wartime-rand-4 loss hunger=false mkt=true  :: Wartime. The kingdom's war makes its demands on Altaikum, in men, carts and supplies, and its leaders must decide how much to give. Arslankhan Qonggirad leads the defence.
+rr3-metropolis-wartime-rand-5 loss hunger=false mkt=true  :: Wartime. In wartime Terrapolis's trade follows the army: what the war needs sells, and the rest waits. Plinius Sabinus leads the defence.
+rr3-metropolis-wartime-port-0 loss hunger=false mkt=true  :: Wartime. In wartime Nikephpetra's trade follows the army: what the war needs sells, and the rest waits. Theophano Vryennios leads the defence.
+rr3-metropolis-wartime-port-1 loss hunger=false mkt=true  :: Wartime. In wartime Knockholme's trade follows the army: what the war needs sells, and the rest waits. Ruadh MacIntyre leads the defence.

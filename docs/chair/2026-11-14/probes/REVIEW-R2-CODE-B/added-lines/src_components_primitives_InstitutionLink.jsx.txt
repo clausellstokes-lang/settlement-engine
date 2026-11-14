@@ -1,0 +1,5 @@
+54	d425c31c1	import { institutionHouseLabel } from '../../domain/display/institutionDisplayName.js';
+69	d425c31c1	// ROUND THREE, ruling (a): the trigger names the house by its label, the one display leaf (no
+70	d425c31c1	// catalogue count range, household range, gate or condition; a count word as a plural).
+71	d425c31c1	const label = children ?? (institutionHouseLabel(institution ?? name) || 'Institution');
+100	d425c31c1	title={`View ${institutionHouseLabel(inst) || label} profile`}

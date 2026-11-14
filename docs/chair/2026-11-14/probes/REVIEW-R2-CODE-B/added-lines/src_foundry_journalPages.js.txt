@@ -1,0 +1,13 @@
+38	2af8bdfa9	// ROUND THREE, ruling (a): every house this journal prints is printed by its label, the one display leaf.
+39	d1c8612b1	import { houseLabelsInText, institutionHouseLabel } from '../domain/display/institutionDisplayName.js';
+176	2af8bdfa9	s.cast.length ? s.cast.map(r => `- **${esc(r.roleLabel)}**: ${esc(r.kind === 'institution' ? institutionHouseLabel(r.name) : r.name)} · ${esc(r.reason)}`) : `- ${CRISIS_PAGE_COPY.nobody}`,
+181	2af8bdfa9	s.levers.length ? s.levers.map(l => `- ${esc(institutionHouseLabel(l.institution))}${l.holderName ? `, held by ${esc(l.holderName)}` : ''}`) : `- ${CRISIS_PAGE_COPY.noLevers}`,
+204	2af8bdfa9	kv('House', n.house ? institutionHouseLabel(n.house) : n.house),
+243	e5640b041	function powerPage(vm, houses = []) {
+257	e5640b041	`- **${esc(tn.label ? cap(humanize(tn.label)) : 'Tension')}**${tn.description ? `: ${esc(houseLabelsInText(tn.description, houses))}` : ''}`)) : null,
+306	2af8bdfa9	list.map(i => `- **${esc(institutionHouseLabel(i))}**${i.status && i.status !== 'healthy' ? ` *(${esc(i.status)})*` : ''}${i.description ? `: ${esc(i.description)}` : ''}`),
+364	2af8bdfa9	bullet(typeof f === 'string' ? institutionHouseLabel(f) : `${institutionHouseLabel(f.name || '')}${f.desc ? `: ${f.desc}` : ''}${f.source ? ` (${f.source})` : ''}`)) ) : null,
+391	e5640b041	function viabilityPage(vm, houses = []) {
+400	e5640b041	`- **${esc(i.title || 'Issue')}**${i.severity ? ` (${esc(i.severity)})` : ''}${i.description ? `: ${esc(houseLabelsInText(i.description, houses))}` : ''}`)) : null,
+525	e5640b041	if (inc('powerStructure'))      push('Power', powerPage(vm, settlement?.institutions));
+533	e5640b041	if (inc('viabilityAssessment')) push('Viability Assessment', viabilityPage(vm, settlement?.institutions));

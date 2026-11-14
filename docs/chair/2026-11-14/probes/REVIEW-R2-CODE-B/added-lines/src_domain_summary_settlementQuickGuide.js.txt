@@ -1,0 +1,91 @@
+1	922fe5141	/**
+24	922fe5141	import { populationBandOf } from '../facts/populationBand.js';
+26	fc7514261	import { foodBandOf, voicedLineOf } from './tonightSheet.js';
+109	fc7514261	*   foodSecurity?: { label?: unknown, foodRecord?: Parameters<typeof foodBandOf>[0] },
+183	922fe5141	const phrase = scopeAtSize(seatIntoPhrase(scopePhrase(cultureKey, settlement), settlement), settlement);
+263	922fe5141	* @param {string} phrase @param {SettlementQuickGuideSource} source @returns {string}
+266	922fe5141	if (!phrase) return phrase;
+268	922fe5141	const tier = cleanText(source?.tier).toLowerCase();
+269	922fe5141	const roster = Array.isArray(/** @type {{ institutions?: unknown }} */ (source)?.institutions);
+270	922fe5141	let out = phrase;
+277	66a4f587c	// R2-CODE-B-SIDE item 5: the guild is a HOUSE on the roster, never a power that only contends (rosterHolds below).
+278	66a4f587c	if (roster && out.includes('run by guild and estate') && !rosterHolds(source, GUILD_HOUSE)) {
+285	922fe5141	if (!config || typeof config !== 'object') return scopeAtSize(out, source);
+316	922fe5141	// pasture: a small place's herding ground, only where the record's resources hold grazing land
+317	922fe5141	if (out.includes(', on pasture') && Array.isArray(/** @type {{ nearbyResources?: unknown }} */ (config).nearbyResources)
+318	922fe5141	&& !(/** @type {{ nearbyResources: unknown[] }} */ (config).nearbyResources).includes('grazing_land')) {
+319	922fe5141	out = out.replace(', on pasture and earthwork', '').replace(', on pasture', '');
+324	922fe5141	/** The tiers in which plural streets, an agora, a civic square or masonry building are a size error. */
+325	922fe5141	const TINY_TIERS = new Set(['thorp', 'hamlet']);
+328	922fe5141	* THE SCOPE PHRASE AT THE PLACE'S SIZE (R2-CODE-B item 5; the cold list REVIEW-W2A-3 #323 "built in
+329	922fe5141	* masonry around a civic square" for a hamlet of 41, #365 "built around kin districts" for a hamlet
+330	922fe5141	* of 53, #498 "in quarters by trade and kin" for a village of 105, #816 "built around the agora"
+331	922fe5141	* where no market stands). THE CHAIR'S RULING of 2026-11-13 (the instrument lane's standard,
+332	922fe5141	* registeredWords.js `streets` and `quarters`): plural streets, an agora, a civic or market square,
+333	922fe5141	* building in masonry, neighbourhoods and suburbs are a size error in a thorp or a hamlet (the
+334	922fe5141	* record's `tier`); quarters, districts (and wards, the same thing) are a size error below the
+335	922fe5141	* middling population band (facts/populationBand.js :: populationBandOf). An agora is a market, so
+336	922fe5141	* it also reads the market fact (factsOf(s).market). The clause that is false is struck or said at
+337	922fe5141	* the place's size; nothing is added that the record does not hold. A record with no tier or
+338	922fe5141	* population is legacy and unread. Display-time only.
+341	922fe5141	function scopeAtSize(phrase, source) {
+344	922fe5141	const tiny = TINY_TIERS.has(tier);
+345	66a4f587c	// R2-CODE-B-SIDE item 5: a village is small by its tier as well as by its people (the chair's ruling: "a village of up
+346	66a4f587c	// to about 350 people included"; a village of 372 is a town by its population band and still a village on its page).
+347	66a4f587c	const small = populationBandOf(/** @type {{ population?: unknown, tier?: unknown }} */ (source)) === 'small' || SMALL_TIERS.has(tier);
+349	922fe5141	const noMarket = roster && factsOf(/** @type {Parameters<typeof factsOf>[0]} */ (source)).market === false;
+351	922fe5141	if (tiny) {
+352	922fe5141	out = out.replace('built in masonry around a civic square, and run by', 'run by')
+353	922fe5141	.replace('built around a civic-ritual plaza, on tribute and the ritual calendar', 'built on tribute and the ritual calendar')
+354	922fe5141	.replace('built around a civic-ritual plaza, tribute, and market-and-waterworks', 'built on tribute, market and waterworks');
+356	922fe5141	if (tiny || noMarket) {
+357	922fe5141	out = out.replace('built around the agora and the harbour', 'built around the harbour')
+358	922fe5141	.replace('built around the agora, and run by', 'run by')
+359	922fe5141	.replace('built around the agora, ', 'built ');
+361	922fe5141	if (small) {
+362	66a4f587c	out = out.replace('built around kin districts and an assembly ground', 'built around kin')
+363	922fe5141	.replace(', in quarters by trade and kin', ', kin by kin')
+364	922fe5141	.replace(', in quarters by trade,', ',')
+365	66a4f587c	.replace('built in wards and courtyards', 'built around courtyards')
+366	66a4f587c	// R2-CODE-B-SIDE item 5: a bureau is an office no small place keeps (the increment's hamlet of 31).
+367	66a4f587c	.replace('ordered by bureau and lineage', 'ordered by lineage');
+369	66a4f587c	// R2-CODE-B-SIDE item 5: the houses and the office the phrase names, read against the roster (after the size reads,
+370	66a4f587c	// so a phrase is first said at the place's size). A record with no roster is legacy and unread.
+371	66a4f587c	return roster ? scopeAgainstRoster(out, source) : out;
+374	66a4f587c	/** A house that is waterworks: a conduit, a cistern, a fountain or a bathhouse (a well or a spring is not). */
+376	66a4f587c	/** A house a gift endows: a church, a temple, a religious house, a school, a hospital or an almshouse (a shrine is not). */
+378	66a4f587c	/** A house that keeps an office: a court, a customs or tax house, a chancery (the seat of government is read by its own reader). */
+380	66a4f587c	/** A guild house on the roster (a guild that is only a contending power is not a house: round three's #234). */
+384	66a4f587c	* Does the roster hold a live house of this kind? A road to another place's house ("Access to ...") is not one.
+385	66a4f587c	* @param {SettlementQuickGuideSource} source @param {RegExp} re @returns {boolean}
+387	66a4f587c	function rosterHolds(source, re) {
+388	66a4f587c	return liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (source))
+389	66a4f587c	.map((inst) => cleanText(inst?.name))
+390	66a4f587c	.some((n) => !!n && !/^access to/i.test(n) && re.test(n));
+393	66a4f587c	/** The ruler kinds (facts/rulerKind.js) whose rule is not a civic association. */
+394	66a4f587c	const NOT_CIVIC_RULE = new Set(['lord', 'priest', 'occupier']);
+397	66a4f587c	* THE SCOPE PHRASE'S HOUSES READ AGAINST THE ROSTER (R2-CODE-B-SIDE item 5; round three's #1 "built around courtyards
+398	66a4f587c	* and waterworks, on endowed institutions" in a thorp of 16 with neither, #234 "under temple and guild" with no guild,
+399	66a4f587c	* #513 "run by civic association" under a lord's appointee, the increment's "ordered by bureau and lineage" in a hamlet
+400	66a4f587c	* of 31; CENSUS-2's 57 lines of kind (a)). THE RULING: a frame that names an institution, a quarter or an office reads
+401	66a4f587c	* the roster; a frame that cannot be made true in a small place is not printed there. Each clause is struck where the
+402	66a4f587c	* roster (its live houses, never an "Access to ..." road to another place's) holds no such house (the office is
+403	66a4f587c	* struck in every small place by scopeAtSize itself). Nothing is added the record does not hold. Display-time only.
+406	66a4f587c	function scopeAgainstRoster(phrase, source) {
+407	66a4f587c	const holds = (/** @type {RegExp} */ re) => rosterHolds(source, re);
+408	66a4f587c	const facts = factsOf(/** @type {Parameters<typeof factsOf>[0]} */ (source));
+410	66a4f587c	if (!holds(WATERWORKS_HOUSE)) {
+411	66a4f587c	out = out.replace('built around courtyards and waterworks', 'built around courtyards')
+412	66a4f587c	.replace('tribute, and market-and-waterworks', 'tribute and market')
+413	66a4f587c	.replace('built on tribute, market and waterworks', 'built on tribute and market');
+415	66a4f587c	if (!holds(ENDOWED_HOUSE)) out = out.replace(', on endowed institutions and ', ', on ').replace(', on endowed institutions', '');
+416	66a4f587c	if (!holds(GUILD_HOUSE)) out = out.replace(', under temple and guild', ', under the temple');
+417	66a4f587c	if (!(governmentSeatName(/** @type {Parameters<typeof governmentSeatName>[0]} */ (source)) || holds(OFFICE_HOUSE))) {
+418	66a4f587c	out = out.replace('ordered by bureau and lineage', 'ordered by lineage');
+420	66a4f587c	if (NOT_CIVIC_RULE.has(String(facts.rulerKind))) {
+421	66a4f587c	out = out.replace(', and run by civic association', '').replace(' and civic association', '');
+891	fc7514261	// R2-CODE-B-6 (PART 5's row 1d): the food word from its ONE home, tonightSheet.js :: foodBandOf over the food record,
+892	fc7514261	// so this line agrees with the Tonight sheet and the Daily Life tile (a "Secure" band whose record leaves a share of
+893	fc7514261	// the need unmet reads "Pressured"; an import dependence with no imports reads "Deficit"). A record with no food
+894	fc7514261	// record (a legacy save) keeps its stored label, as it always read.
+895	fc7514261	const food = cleanText(foodBandOf(economy.foodSecurity?.foodRecord)?.label || economy.foodSecurity?.label);

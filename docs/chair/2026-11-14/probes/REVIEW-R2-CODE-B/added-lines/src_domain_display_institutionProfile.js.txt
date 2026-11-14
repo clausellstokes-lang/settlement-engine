@@ -1,0 +1,3 @@
+28	d425c31c1	import { institutionHouseLabel } from './institutionDisplayName.js';
+275	d425c31c1	// ROUND THREE, ruling (a): the profile's heading is the house's label (the one display leaf).
+276	d425c31c1	name: institutionHouseLabel(inst) || name,

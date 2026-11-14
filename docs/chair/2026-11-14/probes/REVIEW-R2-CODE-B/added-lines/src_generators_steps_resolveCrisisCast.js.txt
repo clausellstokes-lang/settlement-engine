@@ -1,0 +1,24 @@
+19	ef0b6208d	* ⛔ A WHOLE PERSON, AND A TRUE RECEIPT (R2-CODE-B-9; the chair's ruling of 2026-11-14 07:32). The
+20	ef0b6208d	* temporary person carries every field the record's contract asks of a born card: `memberships`
+21	ef0b6208d	* and `importance` (the record class register's `card-standing` group), by the roster's own rules
+22	ef0b6208d	* for a face of no power: `importance` 'minor' (people/castPowers.js, "a member ranked nowhere, or
+23	ef0b6208d	* a face of no power, is `minor`") and `structuralRank` from `structuralStandingOf` ('unaffiliated',
+24	ef0b6208d	* the field npcStructure.js writes on every card). The coherence receipt is written by
+25	ef0b6208d	* `assembleSettlement` BEFORE this step appends the person, so where a person is minted the
+26	ef0b6208d	* receipt is written again by its own writer over the final roster: its graph evidence counts the
+27	ef0b6208d	* person it now carries (V-EVIDENCE-ROSTER). No count is edited; a town that mints nobody keeps
+28	ef0b6208d	* the receipt assembleSettlement wrote, byte for byte. Draw-free.
+41	ef0b6208d	import { structuralStandingOf } from '../../domain/people/membership.js';
+42	ef0b6208d	import { buildGenerationCoherenceReceipt } from '../generationCoherence.js';
+65	ef0b6208d	reads: ['generationContext', 'generationRepairs', 'settlement'],
+68	ef0b6208d	// person to its roster (and then re-writes the coherence receipt over that roster)
+84	ef0b6208d	});
+94	ef0b6208d	const memberships = /** @type {never[]} */ ([]);
+97	ef0b6208d	power: 1, influence: 'low', memberships,
+98	ef0b6208d	importance: 'minor', structuralRank: structuralStandingOf({ memberships }).standing,
+139	ef0b6208d	// The receipt counts after the mint (see the header): its own writer, the same context.
+140	ef0b6208d	if (minted.length) {
+141	ef0b6208d	settlement.generationCoherenceReceipt = buildGenerationCoherenceReceipt(settlement, {
+142	ef0b6208d	seed: ctx._seed,
+143	ef0b6208d	generationContext: ctx.generationContext,
+144	ef0b6208d	generationRepairs: ctx.generationRepairs,

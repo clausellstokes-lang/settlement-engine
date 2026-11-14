@@ -1,0 +1,81 @@
+r2r-thorp-11 thorp loss car  army iso=false hunger=false pros=true mkt=false 
+r2r-thorp-16 thorp loss car  army iso=false hunger=false pros=false mkt=false 
+r2r-thorp-32 thorp loss car  army iso=false hunger=false pros=false mkt=false 
+r2r-thorp-55 thorp loss car  army iso=false hunger=false pros=true mkt=false 
+r2r-thorp-56 thorp loss car  army iso=false hunger=false pros=false mkt=false 
+r2r-hamlet-5 hamlet loss car  army iso=false hunger=false pros=false mkt=false 
+r2r-hamlet-53 hamlet loss car  army iso=false hunger=false pros=false mkt=false 
+r2r-town-27 town loss car  army iso=false hunger=false pros=false mkt=true 
+r2r-metropolis-4 metropolis loss car  army iso=false hunger=false pros=true mkt=true 
+r2s-wartime-thorp-0 thorp loss car  army iso=false hunger=false pros=false mkt=false 
+r2s-wartime-thorp-1 thorp loss    iso=true hunger=false pros=false mkt=false 
+r2s-wartime-thorp-2 thorp loss  price  iso=true hunger=true pros=false mkt=false 
+r2s-wartime-thorp-3 thorp loss    iso=true hunger=false pros=false mkt=false 
+r2s-wartime-hamlet-0 hamlet loss car  army iso=false hunger=false pros=true mkt=false 
+r2s-wartime-hamlet-1 hamlet loss car  army iso=false hunger=false pros=false mkt=false 
+r2s-wartime-hamlet-2 hamlet loss car  army iso=false hunger=false pros=false mkt=false 
+r2s-wartime-hamlet-3 hamlet loss  price  iso=true hunger=true pros=false mkt=false 
+r2s-wartime-village-0 village profit    iso=false hunger=false pros=true mkt=true 
+r2s-wartime-village-1 village loss car  army iso=false hunger=false pros=false mkt=true 
+r2s-wartime-village-2 village loss car  army iso=false hunger=false pros=false mkt=false 
+r2s-wartime-village-3 village loss car  army iso=false hunger=false pros=false mkt=false 
+r2s-wartime-town-0 town loss car  army iso=false hunger=false pros=false mkt=true 
+r2s-wartime-town-1 town loss car  army iso=false hunger=false pros=true mkt=true 
+r2s-wartime-town-2 town profit    iso=false hunger=false pros=true mkt=true 
+r2s-wartime-town-3 town loss car  army iso=false hunger=false pros=true mkt=true 
+r2s-wartime-city-0 city loss car  army iso=false hunger=false pros=true mkt=true 
+r2s-wartime-city-1 city profit    iso=false hunger=false pros=true mkt=true 
+r2s-wartime-city-2 city loss car  army iso=false hunger=false pros=false mkt=true 
+r2s-wartime-city-3 city loss car  army iso=false hunger=false pros=true mkt=true 
+r2s-wartime-metropolis-0 metropolis profit    iso=false hunger=false pros=true mkt=true 
+r2s-wartime-metropolis-1 metropolis loss car  army iso=false hunger=false pros=true mkt=true 
+r2s-wartime-metropolis-2 metropolis loss car  army iso=false hunger=false pros=false mkt=true 
+r2s-wartime-metropolis-3 metropolis loss car  army iso=false hunger=false pros=true mkt=true 
+rr3-thorp-wartime-rand-0 thorp loss  price  iso=true hunger=true pros=false mkt=false 
+rr3-thorp-wartime-rand-1 thorp loss car  army iso=false hunger=false pros=false mkt=false 
+rr3-thorp-wartime-rand-2 thorp loss car  army iso=false hunger=false pros=true mkt=false 
+rr3-thorp-wartime-rand-3 thorp loss car  army iso=false hunger=false pros=false mkt=false 
+rr3-thorp-wartime-rand-4 thorp loss car  army iso=false hunger=false pros=false mkt=false 
+rr3-thorp-wartime-rand-5 thorp loss car  army iso=false hunger=false pros=false mkt=false 
+rr3-thorp-wartime-port-0 thorp loss car  army iso=false hunger=false pros=false mkt=false 
+rr3-thorp-wartime-port-1 thorp loss car  army iso=false hunger=false pros=false mkt=false 
+rr3-hamlet-wartime-rand-0 hamlet loss car  army iso=false hunger=false pros=false mkt=false 
+rr3-hamlet-wartime-rand-1 hamlet loss car  army iso=false hunger=false pros=false mkt=false 
+rr3-hamlet-wartime-rand-2 hamlet loss car  army iso=false hunger=false pros=false mkt=false 
+rr3-hamlet-wartime-rand-3 hamlet loss car  army iso=false hunger=false pros=true mkt=true 
+rr3-hamlet-wartime-rand-4 hamlet loss car  army iso=false hunger=false pros=true mkt=false 
+rr3-hamlet-wartime-rand-5 hamlet loss car  army iso=false hunger=false pros=true mkt=false 
+rr3-hamlet-wartime-port-0 hamlet loss car  army iso=false hunger=false pros=true mkt=false 
+rr3-hamlet-wartime-port-1 hamlet loss car  army iso=false hunger=false pros=false mkt=false 
+rr3-village-wartime-rand-0 village loss car  army iso=false hunger=false pros=false mkt=false 
+rr3-village-wartime-rand-1 village loss car  army iso=false hunger=false pros=false mkt=false 
+rr3-village-wartime-rand-2 village loss car  army iso=false hunger=false pros=false mkt=false 
+rr3-village-wartime-rand-3 village loss car  army iso=false hunger=false pros=false mkt=false 
+rr3-village-wartime-rand-4 village loss car  army iso=false hunger=false pros=false mkt=false 
+rr3-village-wartime-rand-5 village loss car  army iso=false hunger=false pros=true mkt=false 
+rr3-village-wartime-port-0 village loss car  army iso=false hunger=false pros=false mkt=false 
+rr3-village-wartime-port-1 village loss car  army iso=false hunger=false pros=false mkt=false 
+rr3-town-wartime-rand-0 town loss car  army iso=false hunger=false pros=false mkt=true 
+rr3-town-wartime-rand-1 town loss car  army iso=false hunger=false pros=false mkt=true 
+rr3-town-wartime-rand-2 town loss car  army iso=false hunger=false pros=false mkt=true 
+rr3-town-wartime-rand-3 town loss    iso=true hunger=false pros=false mkt=true 
+rr3-town-wartime-rand-4 town loss car  army iso=false hunger=false pros=true mkt=true 
+rr3-town-wartime-rand-5 town loss car  army iso=false hunger=false pros=true mkt=true 
+rr3-town-wartime-port-0 town profit    iso=false hunger=false pros=true mkt=true 
+rr3-town-wartime-port-1 town loss car  army iso=false hunger=false pros=true mkt=true 
+rr3-city-wartime-rand-0 city loss car  army iso=false hunger=false pros=true mkt=true 
+rr3-city-wartime-rand-1 city loss car  army iso=false hunger=false pros=true mkt=true 
+rr3-city-wartime-rand-2 city profit    iso=false hunger=false pros=true mkt=true 
+rr3-city-wartime-rand-3 city profit    iso=false hunger=false pros=true mkt=true 
+rr3-city-wartime-rand-4 city loss car  army iso=false hunger=false pros=false mkt=true 
+rr3-city-wartime-rand-5 city profit    iso=false hunger=false pros=true mkt=true 
+rr3-city-wartime-port-0 city loss car  army iso=false hunger=false pros=false mkt=true 
+rr3-city-wartime-port-1 city profit    iso=false hunger=false pros=true mkt=true 
+rr3-metropolis-wartime-rand-0 metropolis loss car  army iso=false hunger=false pros=true mkt=true 
+rr3-metropolis-wartime-rand-1 metropolis profit    iso=false hunger=false pros=true mkt=true 
+rr3-metropolis-wartime-rand-2 metropolis profit    iso=false hunger=false pros=true mkt=true 
+rr3-metropolis-wartime-rand-3 metropolis loss car  army iso=false hunger=false pros=false mkt=true 
+rr3-metropolis-wartime-rand-4 metropolis loss car  army iso=false hunger=false pros=true mkt=true 
+rr3-metropolis-wartime-rand-5 metropolis loss car  army iso=false hunger=false pros=true mkt=true 
+rr3-metropolis-wartime-port-0 metropolis loss car  army iso=false hunger=false pros=true mkt=true 
+rr3-metropolis-wartime-port-1 metropolis loss car  army iso=false hunger=false pros=true mkt=true 

@@ -1,0 +1,5 @@
+12	4b11e3910	import { houseLabelsInText } from '../../../domain/display/institutionDisplayName.js';
+212	4b11e3910	<p style={{fontSize: proseFontSize(FS['12.5'], mobile),color:swatch.inkMag2,lineHeight:1.55,margin:'0 0 6px'}}>{houseLabelsInText(viabilityIssueText(issue, s), s?.institutions)}</p>
+237	4b11e3910	<p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag2,lineHeight:1.5,margin:0}}>{houseLabelsInText(viabilityIssueText(issue, s), s?.institutions)}</p>
+255	4b11e3910	<p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch['#5A3E28'],lineHeight:1.5,margin:0}}>{houseLabelsInText(typeof item.description==='object'?item.description.short||item.description.text||'':item.description||item.message||'', s?.institutions)}</p>
+282	4b11e3910	{wobj.description&&<p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag2,lineHeight:1.5,margin:'0 0 4px'}}>{houseLabelsInText(wobj.description, s?.institutions)}</p>}

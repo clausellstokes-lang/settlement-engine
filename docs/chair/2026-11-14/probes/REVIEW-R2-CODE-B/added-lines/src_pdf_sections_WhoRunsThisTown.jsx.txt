@@ -1,0 +1,13 @@
+1	af8045386	/**
+13	963167f4b	// ROUND THREE, ruling (a): a person's house is printed by its label, the one display leaf the page reads.
+14	963167f4b	import { institutionHouseLabel } from '../../domain/display/institutionDisplayName.js';
+19	af8045386	* R2-CODE-B-5 (the chair's ruling): a row adds a person's title only where the person's name, as the record holds it,
+20	af8045386	* does not already carry it ("Tserenpuntsag Jalayir (the workhouse master), the workhouse master"). The page's twin
+21	af8045386	* (components/new/tabs/WhoRunsThisTownPanel.jsx) reads the same.
+22	af8045386	* @param {{ name?: string, title?: string } | null | undefined} face
+25	af8045386	const titleAfter = (face) => (face?.title && !carriesTitle(face.name, String(face.title)) ? `, ${face.title}` : '');
+41	af8045386	{`${f.place || PLACE[f.rank]} · ${f.name}${titleAfter(f)}`}
+52	af8045386	<Text style={rowStyle}>{`${g.guild}${g.boss ? ` · led by ${g.boss.name}${titleAfter(g.boss)}` : ''}`}</Text>
+55	af8045386	<Text style={rowStyle}>{`handled by ${h.name}${titleAfter(h)}${h.house ? ` (${institutionHouseLabel(h.house)})` : ''}`}</Text>
+58	af8045386	{`${a.name}${titleAfter(a)}${a.house ? ` (${institutionHouseLabel(a.house)})` : ''} · brings ${a.brings}${a.tie ? ` · ${a.tie}` : ''}`}
+68	963167f4b	<Text key={f.id} style={rowStyle}>{`${institutionHouseLabel(f.house)} · ${f.name} · fronts for ${f.guild}${f.handler ? ` · handled by ${f.handler}` : ''}`}</Text>

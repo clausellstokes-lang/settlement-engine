@@ -1,0 +1,3 @@
+27	4909ba684	import { institutionDisplayName, institutionHouseLabel } from '../../../domain/display/institutionDisplayName.js';
+169	e285c603f	const shown = chainPrintName(chain, town), facts = chainFlowFacts(chain, instNames, shown); // COHERENCE-AGREE-6 (F1): what a chain prints reads the town's access (its source through chainSourceOf with it: R2-CODE-B-7); the income keyword above stays on the record's label (logic)
+273	4909ba684	<span style={{color:MUTED,marginRight:4}}>Via:</span>{svc.institutions.map(institutionHouseLabel).join(' · ')}

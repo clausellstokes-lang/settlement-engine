@@ -1,0 +1,8 @@
+47	742ff4e43	// R2-CODE-B item 4 (the cold list REVIEW-W2A-3 #536: "The Market Contest" in a village where "No
+48	742ff4e43	// market or fair stands"): the Market element declares the market it presumes (`market`, the
+49	742ff4e43	// vocabulary's market atom, facts/market.js — the home the Overview's market line reads).
+50	82e0018b3	// R2-CODE-B-SIDE item 6 (the increment's rww-hamlet-calm-1: "The Long Forge Fair" in a hamlet with no smith): the
+51	82e0018b3	// Forge element declares the forge it presumes (`institution: smith`, the vocabulary's own key, read through
+52	82e0018b3	// facts/institutions.js :: hasInstitution: a smithy, a forge or a blacksmith on the roster).
+70	82e0018b3	{ id: 'forge',         glyph: '⚒', noun: 'Forge',      genitive: 'the Forge',           adjective: 'Forge',    season: 'winter', terrains: Object.freeze([]),                          econ: Object.freeze(['road']),                  deityFit: false, foundingFit: false, needs: Object.freeze(['institution: smith']) },
+71	742ff4e43	{ id: 'market',        glyph: '⚖', noun: 'Market',     genitive: 'the Market',          adjective: 'Market',   season: 'summer', terrains: Object.freeze([]),                          econ: Object.freeze(['crossroads', 'port', 'road']), deityFit: false, foundingFit: false, needs: Object.freeze(['market']) },

@@ -1,0 +1,20 @@
+17	48ddf7685	*                          want_not_own:<role>   a cast person whose card carries a goal voiced with
+18	48ddf7685	*                                                another want (ROUND THREE: the card's goal is the one home);
+19	48ddf7685	*                          want_not_role:<role>  a cast person with no goal: the want is not drawn from that
+36	48ddf7685	import { composeTonightSheet, castWantOf, hasOwnGoal, DAYS_PER_MONTH } from '../summary/tonightSheet.js';
+38	48ddf7685	import { isSeatVacant } from '../people/seatKeeper.js';
+40	48ddf7685	/** A want compared in one form: lower-cased, unclosed, spaces folded. @param {unknown} v @returns {string} */
+117	f719dbb38	// ROUND THREE: the half forms the writer says from a month up ("about a month and a half", "about two and a half months").
+121	f719dbb38	const n = (m[1] === 'a' ? 1 : at >= 0 ? at : Number(m[1])) + (m[2] || m[4] ? 1 / 2 : 0);
+122	f719dbb38	return n * UNIT_MONTHS[/** @type {'month'|'week'|'day'} */ (m[3])];
+138	48ddf7685	continue;
+209	48ddf7685	// want_not_own / want_not_role: every cast-voiced person's want. ROUND THREE (the chair's ruling: one home for what
+210	48ddf7685	// a person wants, the card's own goal): a person whose card carries a goal wants that goal, never a role's line
+211	48ddf7685	// (want_not_own); a person with none wants their role's line, re-derived through the writer's own fill (the role,
+212	48ddf7685	// the person, the crisis, the person's house, the seat) and compared by EXACT equality (want_not_role, SW-6 #40).
+213	48ddf7685	// A secret or a temperament (`says`) is not a want and is not read here.
+214	48ddf7685	const seatEmpty = isSeatVacant(settlement);
+216	48ddf7685	if (p.why !== 'cast' || p.sameAs || (p.says && p.says !== 'want') || !str(p.line)) continue;
+219	48ddf7685	if (npc && hasOwnGoal(npc)) {
+221	48ddf7685	if (bareWant(p.line) !== bareWant(goal)) out.push({ surface: 'tonight', quote: `${p.name} (${p.castLabel}): ${p.line}`, detail: `want_not_own:${role}` });
+225	48ddf7685	const want = castWantOf(role, str(p.castId), str(p.castKind), '', house, { seatEmpty });

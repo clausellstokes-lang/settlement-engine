@@ -1,0 +1,72 @@
+1	24ab15c9b	/**
+35	90bafc4d1	import { partitionDefenseInstitutions } from '../institutions/defenseInstitutionBuckets.js';
+37	90bafc4d1	import { TIER_WORDS } from '../facts/factVocabulary.js';
+43	77ed210af	import { isSeatVacant } from '../people/seatKeeper.js'; // ROUND THREE item 4: the empty seat's one home
+165	24ab15c9b	// ROUND THREE, ruling (c) (the chair, 2026-11-13; the cut's #11 #13 #53 #55): "the least say" presumes a house of
+166	24ab15c9b	// several. In a house of ONE the person is named as its only member; a person who also holds the crisis's lever
+167	24ab15c9b	// (the cut's #268) is named as one of the house, never as the one with the least say.
+168	24ab15c9b	bruntOnly: 'the only one in the house the crisis hits',
+169	24ab15c9b	bruntMember: 'one of the house the crisis hits',
+193	90bafc4d1	defenderInstitutionPlace: 'the defence of the place, with no one named to lead it', // R2-CODE-B item 4: below the town tier
+195	90bafc4d1	// R2-CODE-B item 4 (the cold list REVIEW-W2A-3 #855: "Zuma Kanil · a merchant" for the master smith):
+196	90bafc4d1	// "a merchant" is said of the person, so only of one whose own role is trade (TRADE_ROLE); any other
+197	90bafc4d1	// member of the merchant power is named by the power, not by a trade the record does not give them.
+198	90bafc4d1	treaterMerchantMember: "a member of the merchants' power, with the seat itself in dispute",
+496	77ed210af	// ROUND THREE item 4 (the cut's #864 "Grain Holders gains · holds what the crisis makes scarce" where the city granaries'
+497	77ed210af	// face sits in another power): a power HOLDS what the crisis makes scarce only where one of its members faces a house of
+498	77ed210af	// that kind (the record's `institution.key`), never by its name alone. A refused reason falls to the next rule; no draw.
+499	77ed210af	/** @param {string} fname */
+500	77ed210af	const holdsScarce = (fname) => !!scarce && membersOf(s, fname).some((n) => n.institution?.kind === 'house' && scarce.test(str(n.institution?.key)));
+501	77ed210af	// ROUND THREE item 4 (the increment's rows on rpf-town-succession_void-13, rpf-village-succession_void-13): where the
+502	77ed210af	// seat stands empty (people/seatKeeper.js :: isSeatVacant) no one holds it, so the rival is not said to outweigh its
+503	77ed210af	// holder: its stake is the rival claim to govern (`gainsClaim`).
+504	77ed210af	const seatEmpty = isSeatVacant(s);
+512	77ed210af	else if (scarce && scarce.test(name) && holdsScarce(name)) gains = STAKE_REASONS.gainsHolds;
+513	77ed210af	else if ((nature === 'social' || nature === 'engineered') && name === rival) gains = seatEmpty ? STAKE_REASONS.gainsClaim : STAKE_REASONS.gainsRival;
+545	24ab15c9b	* Ruling (c): the brunt's own words for a member of the house hit: "the least say" only in a house of more
+546	24ab15c9b	* than one; its only member is named as such. No draw; the candidates and their order are unchanged.
+547	24ab15c9b	* @param {ReadonlyArray<unknown>} members the house's members, the least powerful first
+548	24ab15c9b	* @returns {string}
+550	24ab15c9b	function leastSayOf(members) {
+551	24ab15c9b	return members.length > 1 ? CAST_REASONS.bruntLeast : CAST_REASONS.bruntOnly;
+573	24ab15c9b	const members = membersOf(s, factionName(f)).reverse();
+574	24ab15c9b	const least = leastSayOf(members);
+576	24ab15c9b	for (const n of touching) out.push(npcRow(n, 'brunt', resolveSibling(CAST_REASONS.bruntBase[sys] || least, BRUNT_SIBLINGS, defence)));
+577	24ab15c9b	for (const n of members) if (!touching.includes(n)) out.push(npcRow(n, 'brunt', least));
+585	24ab15c9b	for (const n of members) out.push(npcRow(n, 'brunt', leastSayOf(members)));
+621	77ed210af	// ROUND THREE item 4 (record 375, the chair's ruling): an "Access to …" row ("Access to parish church", "Access to external
+622	77ed210af	// mill") is the town's road to another place's house, not a house here: it is never a lever.
+679	77ed210af	// ROUND THREE item 4: "already carries more weight than whoever holds the seat" only where someone holds it; under an
+680	77ed210af	// empty seat the rival is named by what it gains (`instigatorGains`), and so ONLY where its stake IS gains (the rival
+681	77ed210af	// claim, deriveStakes): a rival that gains and loses at once ('split') is no instigator by this rule there, and the
+682	77ed210af	// gainers follow in their own order (castDerived's "a power-drawn person holds a membership of that relation"). No draw.
+684	77ed210af	const rivalReason = seatEmpty ? CAST_REASONS.instigatorGains : CAST_REASONS.instigatorRival;
+685	77ed210af	const rivalGains = stakes.some((k) => k.factionId === rival && k.stake === 'gains');
+691	77ed210af	if (r) picks.push({ f: r, reason: rivalReason });
+694	77ed210af	const r = rival && (!seatEmpty || rivalGains) ? factions.find((f) => factionName(f) === rival) : null;
+794	90bafc4d1	/** The tier ladder, low to high (the vocabulary's own `tier` band, facts/factVocabulary.js :: TIER_WORDS). */
+795	90bafc4d1	const TIER_ORDER = TIER_WORDS;
+797	90bafc4d1	/** The defence buckets whose standing members defend the place (`defenseFacts.js :: defenceNames`'s own six). */
+798	90bafc4d1	const DEFENDING_BUCKETS = Object.freeze(['walls', 'garrison', 'watch', 'militia', 'mercenary', 'charter']);
+817	90bafc4d1	// R2-CODE-B item 4 (the cold list REVIEW-W2A-3 #328: "defends: no military, garrison or watch
+818	90bafc4d1	// stands" beside the Tonight sheet's "Defence: Adventurers' charter hall."): the houses that defend
+819	90bafc4d1	// are the defence buckets' standing members (walls, garrison, militia, watch, mercenary, charter;
+820	90bafc4d1	// `partitionDefenseInstitutions`, the one keyword table `defenseFactsOf(s).defenceNames` reads for
+821	90bafc4d1	// that "Defence:" line), never a second regex of this file's own. Roster order kept.
+822	90bafc4d1	const roster = liveInstitutions(s);
+823	90bafc4d1	const buckets = partitionDefenseInstitutions(roster);
+824	90bafc4d1	const defends = new Set(DEFENDING_BUCKETS.flatMap((k) => buckets[k] || []));
+825	90bafc4d1	// "the town's defence" names the place a town: below the town tier the reason names the place
+826	90bafc4d1	// (the chair's size ruling of 2026-11-13; a reason written in code is a pool of two, chosen here).
+827	90bafc4d1	const houseReason = TIER_ORDER.indexOf(str(s.tier)) >= TIER_ORDER.indexOf('town') || !str(s.tier)
+828	90bafc4d1	? CAST_REASONS.defenderInstitution
+829	90bafc4d1	: CAST_REASONS.defenderInstitutionPlace;
+830	90bafc4d1	for (const i of roster.filter((x) => defends.has(x))) {
+831	90bafc4d1	out.push({ role: 'defender', kind: 'institution', id: str(i.name), name: str(i.name), reason: houseReason, temporary: false });
+836	90bafc4d1	/** A person's own role that is trade (the record's `role`), the one case "a merchant" is said of them. */
+849	90bafc4d1	for (const n of membersOf(s, factionName(f))) out.push(npcRow(n, 'treater', TRADE_ROLE.test(str(n.role)) ? CAST_REASONS.treaterMerchant : CAST_REASONS.treaterMerchantMember));
+1050	24ab15c9b	// Ruling (c), the cut's #268: the person who bears the brunt and also holds the lever is not "the one with the
+1051	24ab15c9b	// least say": that clause reads "one of the house the crisis hits" (any next-in-line tail kept). No draw moves.
+1052	24ab15c9b	const bruntAt = roles.findIndex((r) => r.role === 'brunt' && r.kind === 'npc' && r.reason.startsWith(CAST_REASONS.bruntLeast));
+1053	24ab15c9b	if (bruntAt >= 0 && roles.some((r) => r.role === 'lever' && keyOf(r) === keyOf(roles[bruntAt]))) {
+1054	24ab15c9b	roles[bruntAt] = { ...roles[bruntAt], reason: CAST_REASONS.bruntMember + roles[bruntAt].reason.slice(CAST_REASONS.bruntLeast.length) };

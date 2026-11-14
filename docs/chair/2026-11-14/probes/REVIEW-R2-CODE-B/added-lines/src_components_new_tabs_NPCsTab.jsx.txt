@@ -1,0 +1,3 @@
+83	2e905f036	{/* R2-CODE-B-5 (the increment's rpf-hamlet-succession_void-13 "1 high influence ·"): the separator stands
+84	2e905f036	only between two counts, never after the last one. No word changes. */}
+85	2e905f036	{[highCount>0&&`${highCount} high influence`, modCount>0&&`${modCount} moderate`].filter(Boolean).join(' · ')}

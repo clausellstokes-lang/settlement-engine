@@ -1,0 +1,8 @@
+22	9b898d5c3	import { institutionDisplayName, institutionHouseLabel } from '../../domain/display/institutionDisplayName.js';
+195	c40969214	// ROUND THREE, ruling (b): the other sources ("Required", "Generated", "Cascade", "Coherence Repair")
+196	c40969214	// are the generator's provenance, the PDF twin of the roster's "REQ": they leave the card. A house a
+197	c40969214	// power raised says so in words; a custom house keeps its own mark.
+198	c40969214	inst.source === 'faction_boost' ? { label: 'Source', value: 'Raised by a power' } : null,
+221	9b898d5c3	{/* ROUND THREE, ruling (a): the card's title is the house's label, the one display leaf. */}
+222	9b898d5c3	{institutionHouseLabel(inst)}
+277	9b898d5c3	<Text style={{ color: palette.ink }}>{institutionHouseLabel(svc.name)}</Text>

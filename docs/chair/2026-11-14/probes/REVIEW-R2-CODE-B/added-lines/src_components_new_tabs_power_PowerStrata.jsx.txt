@@ -1,0 +1,13 @@
+1	305210087	/**
+132	305210087	<Section title={seatListTitle(powers)} collapsible defaultOpen accent="#8b6a1a">
+421	305210087	// ── The seat's heading ───────────────────────────────────────────────────────
+424	305210087	* A COUNT READS THE LIST IT HEADS (R2-CODE-B-SIDE item 4; round three's #562 #712 #806 and ten more): ThePowers lists
+425	305210087	* the seat and those who contest it, and TheFactions lists every power the record holds, and both were headed
+426	305210087	* "The Powers (N)" with two counts (282 of the census's 720 towns). This list's heading names what it lists; "The
+427	305210087	* Powers (N)" heads the whole roster alone. Declared below its one caller so no line above moves.
+428	305210087	* @param {ReadonlyArray<{ role?: string }>} powers
+429	305210087	* @returns {string}
+431	305210087	function seatListTitle(powers) {
+432	305210087	const held = powers.some((p) => p.role === 'ruler');
+433	305210087	if (!held) return `Contenders for the Seat (${powers.length})`;
+434	305210087	return powers.length > 1 ? `The Seat and Its Contenders (${powers.length})` : 'The Seat';

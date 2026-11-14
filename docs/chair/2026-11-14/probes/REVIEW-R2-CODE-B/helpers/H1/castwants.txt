@@ -1,0 +1,694 @@
+62	share out the food without being crushed between those who want it.
+36	decide who gets the guards, and not be blamed by those who go without.
+23	decide who gets the shelter, and not be blamed by those who go without.
+20	decide who gets the medicine, and not be blamed by those who go without.
+10	be the one others look to when something goes wrong.
+9	get people doing things their way this season without being asked twice.
+8	get the better side of every bargain struck this season.
+8	decide whether to negotiate terms or hold out for relief.
+7	keep unit cohesion as conscription pulls away experienced soldiers and replaces them with frightened substitutes.
+7	identify the person inside the settlement who is communicating with the besiegers.
+6	learn one secret this season that someone would pay to keep.
+6	pay someone back for a wrong done to them.
+5	put away more coin this season than last.
+5	put someone who slighted them back in their place.
+5	collect every coin they are owed, however small.
+5	identify the person inside the walls who is communicating with the besiegers.
+5	get the rights of the fishing community written down and sealed by those who govern, this season.
+5	find one more way to be paid for work already being done.
+5	see someone who wronged them lose face in public this season.
+5	cut the spending at the houses of worship by a tenth this season, and keep the work going.
+5	secure enough food reserves to outlast the blockade.
+4	finish the work they have been given, properly and on time.
+4	learn the secret of someone they envy.
+4	make sure every decision of Merchant Guilds this season goes out under their own name.
+4	take one thing from a person they resent.
+4	tell the right story to the right person, and watch it spread.
+4	solve a problem this season that has beaten everyone else.
+4	be asked for an opinion by those who lead Merchant Guilds, once, this season.
+3	find the apothecary district one more source of money.
+3	stop Craft Guilds from taking anything more from Merchant Guilds this season.
+3	win new business for the customs house beyond the people who already come.
+3	take on the work in Merchant Guilds that no one else wants, and do it without complaint.
+3	do one piece of work so well that no one could find fault with it.
+3	collect what is owed to the house of worship before the season is out.
+3	keep the accounts of the house of worship balanced, and show them to anyone who asks.
+3	make sure every decision of Thieves' Guild this season goes out under their own name.
+3	bring one more person round to what they believe this season.
+3	learn the plans of Elder Council against Religious Authorities before they can act on them.
+3	get someone else to take the blame for a mistake of theirs.
+3	get the houses of worship through the season without borrowing.
+3	stand up for someone who cannot stand up for themselves.
+3	get out of the work they have been given, and let someone else do it.
+3	make sure nothing they did in the past can come back on them this season.
+3	win someone's trust this season, and keep a use for it.
+3	keep the town watch working through the season even if the supply of iron should fail.
+3	find a patron among those who lead Military/Guard, and make themselves useful to them.
+3	tell the truth about something that others keep quiet about.
+3	learn who controls the supply of grain, and get on good terms with them.
+3	win the protection of someone stronger before trouble comes.
+3	stay out of every quarrel they can this season.
+3	keep a bag packed and a way out ready.
+3	manage the influx without the old residents concluding the governing authority has chosen the newcomers over them.
+3	keep the defenders together as the call-up pulls away experienced hands and replaces them with frightened substitutes.
+3	buy grain at the market in bulk this season, while the price is still fair.
+2	collect what is owed to the head-of-household consensus before the season is out.
+2	make sure no new rule from those who govern costs the house of worship anything this season.
+2	find out which members of Religious Authorities are still friendly with Elder Council, and why.
+2	win the house of worship first call on any help those who govern can give this season.
+2	get the rights of the inn written down and sealed by those who govern, this season.
+2	make sure no new rule from those who govern costs the smuggling network anything this season.
+2	keep the dealings between Thieves' Guild and Shadow Senate out of sight for another season.
+2	get the rights of the household written down and sealed by those who govern, this season.
+2	make sure no new rule from those who govern costs the lord's steward's office anything this season.
+2	collect what is owed to the mill before the season is out.
+2	bring Merchant oligarchy a piece of news before anyone else does.
+2	find a patron among those who lead Arcane Council, and make themselves useful to them.
+2	keep the accounts of the fish market balanced, and show them to anyone who asks.
+2	bring Merchant Guilds a piece of news before anyone else does.
+2	cut the spending at the fish market by a tenth this season, and keep the work going.
+2	close one of the routes that money takes into the smuggling network.
+2	help one family through a hard week this season.
+2	make sure every decision of Religious Authorities this season goes out under their own name.
+2	get the rights of the houses of worship written down and sealed by those who govern, this season.
+2	keep the accounts of the woodcutter's camp balanced, and show them to anyone who asks.
+2	be asked for an opinion by those who lead Religious Authorities, once, this season.
+2	try their luck at something new before the season is out.
+2	put something aside against bad times.
+2	find the fishing community one more source of money.
+2	win new business for the wayside inn beyond the people who already come.
+2	close one of the routes that money takes into the front businesses.
+2	make peace between two people who have stopped speaking.
+2	collect what is owed to the smuggling network before the season is out.
+2	keep the accounts of the adventurers' charter hall balanced, and show them to anyone who asks.
+2	find a way to make do with less iron at the town watch.
+2	make sure every decision of Military/Guard this season goes out under their own name.
+2	win one ally of Elder Council over to the side of Religious Authorities.
+2	get the fishing community through the season without borrowing.
+2	secure enough recovered reserves to outlast the blockade.
+2	make sure every decision of Feudal Stewardship this season goes out under their own name.
+2	answer the next move by Elder Council against Religious Authorities, quickly and in public.
+2	get to whatever both Feudal Stewardship and Military/Guard want this season first.
+2	be asked for an opinion by those who lead Headman's Authority, once, this season.
+2	contain the revolt geographically without deploying force that will create martyrs and widen the conflict.
+2	hire someone brave enough to sit up a night with them and see the thing for themselves.
+2	keep the dealings between War Council and Thieves' Guild out of sight for another season.
+2	find out who has been asking about them, and why.
+2	get the fish market through the season without borrowing.
+2	get the houses of worship excused from one tax or levy this season.
+2	win the houses of worship first call on any help those who govern can give this season.
+2	collect what is owed to the houses of worship before the season is out.
+2	cut the spending at the courthouses by a tenth this season, and keep the work going.
+2	find a patron among those who lead Merchant Guilds, and make themselves useful to them.
+2	get the rights of the courthouses written down and sealed by those who govern, this season.
+2	look after someone who has no one else to do it.
+2	win the midwife's house first call on any help those who govern can give this season.
+2	get the rights of the apothecary district written down and sealed by those who govern, this season.
+1	pay every hand at the shepherd collective in full and on time this season.
+1	win the household first call on any help those who govern can give this season.
+1	win the woodcutter's camp first call on any help those who govern can give this season.
+1	stand by Güchlüg Kereit in their next quarrel, whoever it is with.
+1	find the horse yard one more source of money.
+1	speak for Elder Council in one dispute this season where Nakul Chuc would usually speak.
+1	cut the spending at the village headman's office by a tenth this season, and keep the work going.
+1	be seen at the right table with the right people this season.
+1	make sure Grettir Magnusson is not left behind by the changes in the work.
+1	find out what Dragana Lebedev really wants in return.
+1	cut the spending at the house of worship by a tenth this season, and keep the work going.
+1	find a patron among those who lead Household Council, and make themselves useful to them.
+1	do Jun Guo one useful favour this season, unasked.
+1	keep Yuki Guo in second place by giving them enough to want and nothing to take.
+1	cut the spending at the blacksmith's forge by a tenth this season, and keep the work going.
+1	keep Zina Novikov from getting the thing they want most this season.
+1	find out which members of Religious Authorities are still friendly with Headman's Authority, and why.
+1	stop Headman's Authority from taking anything more from Religious Authorities this season.
+1	keep Yoshiko Tang from calling in what is owed this season.
+1	do Muirenn Flaherty a favour big enough to count against what is owed.
+1	speak for Household Council in one dispute this season where Anuradha Bhatt would usually speak.
+1	gain ground for Merchant Guilds at the expense of Merchant Council before the season is out.
+1	keep the quarrel between Religious Authorities and Corrupt Council from turning into open trouble this season.
+1	do Roxane Kurtikios one useful favour this season, unasked.
+1	bring Zosime Kurtikios together with someone who can help them.
+1	make sure no one else learns how much is owed to Enkhtuya Budaad.
+1	make sure no new rule from those who govern costs the inn anything this season.
+1	win the next big piece of work away from the fish market.
+1	pay Suhad al-Basri back one part of what is owed before the season ends.
+1	learn the plans of Guild Council against Religious Authorities before they can act on them.
+1	keep Daniyya Ox from calling in what is owed this season.
+1	find the weak spot in what Nada ibn Zuhr is doing, and press on it.
+1	take on more hands for Herbalism & Remedies at the midwife's house, and keep them busy all season.
+1	be the one Sabbas Kamytzes sends whenever something must be done for Religious Authorities this season.
+1	stop Merchant Guild Council from taking anything more from Religious Authorities this season.
+1	keep the quarrel between Religious Authorities and Royal Authority from turning into open trouble this season.
+1	lay in a season of grain at the inns and taverns while it can still be had.
+1	gather the last three things the being asked for before the moon turns.
+1	take one piece of business from Military/Guard and bring it to Ecclesiastical Council.
+1	find out what it would cost to buy their way free of the black market.
+1	keep Magnhild Torvaldsson busy with real work for Military/Guard, too busy to gather friends of their own.
+1	lure one capable person away from Arcane Council to work for Merchant Guilds.
+1	keep the inns and taverns working through the season even if the supply of grain should fail.
+1	give Despoina Xiphilinos one task this season that will show whether they can be trusted.
+1	learn the plans of Grand Council against Thieves' Guild before they can act on them.
+1	learn who Prakash Wali really meets, and how often.
+1	find a patron among those who lead Religious Authorities, and make themselves useful to them.
+1	pay every hand at the inns and taverns in full and on time this season.
+1	get to whatever both Merchant Guilds and Craft Guilds want this season first.
+1	make sure Petros Limniotes is not left behind by the changes in the work.
+1	get enough on Naji al-Yafi to hold them, and make it stick.
+1	beat Nóinín Menzies at something this season, in front of people who matter.
+1	look for a way to do more for Hunting & Trapping with the same hands.
+1	carry the dragon's message to the person it named, and come back alive.
+1	keep Ulfhéðinn Kolbeinsson from getting the thing they want most this season.
+1	find out what Caihong Huang really wants in return.
+1	learn what Chagatai Arlat has been saying about them, and to whom.
+1	keep the quarrel between Guild Council and War Council from turning into open trouble this season.
+1	bring Pacuvius Dentatus of the rookery in before the season is out.
+1	find whoever can still supply Standing Garrison, and pay them what they ask.
+1	bring Alexandros Hexamilites together with someone who can help them.
+1	get enough on Notger Haas to hold them, and make it stick.
+1	close one of the routes that money takes into the assassins' guild.
+1	find someone who can read the old writing on the list of what is needed.
+1	make sure every decision of War Council this season goes out under their own name.
+1	win new business for the fisher's landing beyond the people who already come.
+1	collect what is owed to the informal elder consensus before the season is out.
+1	win two more people in Elder Council over to their side before Rory MacDonald notices.
+1	get the thatcher's yard through the season without borrowing.
+1	grow the work at the mill by one more pair of hands, then another.
+1	make sure no new rule from those who govern costs the mill anything this season.
+1	do one thing for Guild Council this season that the people who lead it cannot ignore.
+1	learn what Peter Fuchs has been saying about them, and to whom.
+1	answer the next move by Religious Authorities against Merchant oligarchy, quickly and in public.
+1	train an apprentice at the hunter's lodge to take on part of the work.
+1	make sure no new rule from those who govern costs the town granary anything this season.
+1	get their name mentioned whenever something good is done here.
+1	stop Thieves' Guild from taking anything more from Arcane Council this season.
+1	get the courthouses excused from one tax or levy this season.
+1	find out which members of Merchant Guild Council are still friendly with Thieves' Guild, and why.
+1	show the rest of Grain Holders that Illugi Helgason can be wrong, without ever saying so aloud.
+1	do exactly what Börte Bukhara asks this season, and give no cause for complaint.
+1	keep Samarkand Budaad from calling in what is owed this season.
+1	stop Noble Houses from taking anything more from Royal Authority this season.
+1	get the citadel excused from one tax or levy this season.
+1	be asked for an opinion by those who lead City-State Council, once, this season.
+1	show the rest of City-State Council that Ronan MacGregor can be wrong, without ever saying so aloud.
+1	keep the old lessons between them and Anusaya Bhat private.
+1	keep the old lessons between them and Toghan Jadaran private.
+1	find the village headman's office one more source of money.
+1	do Citlali Caan one useful favour this season, unasked.
+1	keep the old lessons between them and Ivan Bogdanov private.
+1	do something no one here expects of them.
+1	ask Prima Nero for a favour that settles a share of the debt.
+1	find out what Yara ibn Ahmed really wants in return.
+1	learn what Masao Zhou has been saying about them, and to whom.
+1	do Hakon Thorsson one useful favour this season, unasked.
+1	do Xristos Kurtikios one useful favour this season, unasked.
+1	speak for Noble Families in one dispute this season where Sheela Kapoor would usually speak.
+1	get the luxury goods quarter to rely on the merchant guilds for something no one else can supply.
+1	get the monasteries excused from one tax or levy this season.
+1	get to whatever both Military/Guard and Grand Guild Consortium want this season first.
+1	learn the plans of Shadow Senate against Religious Authorities before they can act on them.
+1	do one thing for Ducal Governorship this season that the people who lead it cannot ignore.
+1	get the adventurers' charter hall through the season without borrowing.
+1	keep Tullia Corvinus in second place by giving them enough to want and nothing to take.
+1	beat Kseniya Kovalev at something this season, in front of people who matter.
+1	bring Jormundr Gormsson together with someone who can help them.
+1	learn who controls the supply of precious metals, and get on good terms with them.
+1	beat Merchant Guild Council to the next opportunity, and win the credit for Thieves' Guild.
+1	keep Ek Cauac busy with real work for Thieves' Guild, too busy to gather friends of their own.
+1	pay every hand at the fishing community in full and on time this season.
+1	win new business for the hunter's lodge beyond the people who already come.
+1	show the rest of Elder Council that Sabine Neumann can be wrong, without ever saying so aloud.
+1	get the house of worship through the season without borrowing.
+1	ask Capito Maximus for advice on one hard decision this season.
+1	do Étaín Byrne one useful favour this season, unasked.
+1	find the midwife's house one more source of money.
+1	win Tornikes Nestongos one more useful friend this season.
+1	find out which members of Religious Authorities are still friendly with Feudal Appointee, and why.
+1	win two more people in Arcane Council over to their side before Waitling Fitzgerald notices.
+1	show the rest of Religious Authorities that Marek Babić can be wrong, without ever saying so aloud.
+1	find the weak spot in what Slavko Gusev is doing, and press on it.
+1	call in one part of what Helga Jokullsson owes this season.
+1	get the hired blades through the season without borrowing.
+1	make sure no new rule from those who govern costs the apothecary district anything this season.
+1	pay every hand at the apothecary district in full and on time this season.
+1	win over one of Satish Mahajan's friends.
+1	bring Craft Guilds a piece of news before anyone else does.
+1	get the midwife's house through the season without borrowing.
+1	find out which members of The Highborn Circle are still friendly with Free Elder Council, and why.
+1	keep the quarrel between Religious Authorities and Priestly Guidance from turning into open trouble this season.
+1	ask Andronikos I Choniates for advice on one hard decision this season.
+1	spend an evening with Uilleam Larkin this season and talk over the work as they once did.
+1	win two more people in Landed Gentry over to their side before Renuka Ahuja notices.
+1	win the monasteries first call on any help those who govern can give this season.
+1	learn why people favour Merchant Guild Council, and do better for Merchant Guilds.
+1	win new business for the bardic college beyond the people who already come.
+1	get the bardic college excused from one tax or levy this season.
+1	find the gambling district one more source of money.
+1	find the informal elder consensus one more source of money.
+1	get the alehouse through the season without borrowing.
+1	keep the accounts of the carpenter's workshop balanced, and show them to anyone who asks.
+1	lure one capable person away from Household Council to work for Merchant Guilds.
+1	get enough on Unn Leidolfsson to hold them, and make it stick.
+1	make sure Anwar ibn Rushd is not left behind by the changes in the work.
+1	keep the accounts of the free company hall balanced, and show them to anyone who asks.
+1	learn the plans of Town Council against Religious Authorities before they can act on them.
+1	spend an evening with Daud al-Aziz this season and talk over the work as they once did.
+1	find one person willing to speak against Mais al-Karimi, and keep them safe until they do.
+1	spend an evening with Naoki Yamamoto this season and talk over the work as they once did.
+1	keep the quarrel between Military/Guard and Thieves' Guild from turning into open trouble this season.
+1	win over one of Dyrfinna Kolbeinsson's friends.
+1	be the one Oula ibn Rashid sends whenever something must be done for Military/Guard this season.
+1	prove what Oula al-Farabi answers to.
+1	get the professional city watch excused from one tax or levy this season.
+1	warn Mechthild Becker of any trouble before it reaches them.
+1	win a title, a seat or an honour, however small.
+1	find the weak spot in what Xeno Gusev is doing, and press on it.
+1	keep faith with what they hold true, even when it costs them.
+1	do Regina Eisenberg a favour big enough to count against what is owed.
+1	keep Elchidei Yorqin in second place by giving them enough to want and nothing to take.
+1	find a patron they can name in public, and move to their side.
+1	learn the plans of Elder Council against Reform Congregation before they can act on them.
+1	get the merchant guilds excused from one tax or levy this season.
+1	find the weak spot in what Salim al-Malik is doing, and press on it.
+1	answer the next move by City Council against Thieves' Guild, quickly and in public.
+1	learn exactly what Thieves' Guild and Grand Guild Consortium have agreed in private, and who agreed it.
+1	find out what Paullus Lateranus really wants in return.
+1	pay the fair folk what is owed before the next full moon.
+1	get the rights of the citizen militia written down and sealed by those who govern, this season.
+1	settle one quarrel inside Religious Authorities before Rabiria Fronto can settle it and take the credit.
+1	find out which members of Religious Authorities are still friendly with Corrupt Council, and why.
+1	spend an evening with Portia Crispus this season and talk over the work as they once did.
+1	take one piece of business from Church Council and bring it to Thieves' Guild.
+1	bring Liutgar Mayer of the rival gangs in before the season is out.
+1	find the houses of worship one more source of money.
+1	find out whether Oengus O'Leary has been meeting anyone from Religious Authorities in private.
+1	keep Záleif Magnusson from calling in what is owed this season.
+1	get enough on Paul Maier to hold them, and make it stick.
+1	satisfy the crown requisition order without stripping the settlement to the bone.
+1	spend an evening with Quetzalli Batab this season and talk over the work as they once did.
+1	find the waystation one more source of money.
+1	find out which members of Guild Council are still friendly with Thieves' Guild, and why.
+1	get enough on Dalila ibn Battuta to hold them, and make it stick.
+1	bring Enkhjargal Cumans together with someone who can help them.
+1	find one person willing to speak against Usama al-Karimi, and keep them safe until they do.
+1	get enough on Irina Dmitriev to hold them, and make it stick.
+1	find one person willing to speak against Tian Park, and keep them safe until they do.
+1	catch Yang Yoon with something from the front businesses on them, in front of witnesses.
+1	keep the accounts of the lord's reeve's office balanced, and show them to anyone who asks.
+1	warn Kateryna Kozlov of any trouble before it reaches them.
+1	get the stable yard excused from one tax or levy this season.
+1	speak for Feudal Stewardship in one dispute this season where Huana Coh would usually speak.
+1	find out whether Kavya Kapoor has been meeting anyone from Religious Authorities in private.
+1	make sure no one else learns how much is owed to Tamim ibn Khalid.
+1	keep the quarrel between Religious Authorities and Elder Council from turning into open trouble this season.
+1	keep the old lessons between them and Varvara Lebedev private.
+1	find a patron among those who lead Merchant Council, and make themselves useful to them.
+1	win one ally of Craft Guilds over to the side of Merchant Guilds.
+1	keep Pavithra Kaur from spending the money where people will notice.
+1	collect what is owed to the inn before the season is out.
+1	win two more people in Religious Authorities over to their side before Folki Gunnarsson notices.
+1	make sure no new rule from those who govern costs the inns and taverns anything this season.
+1	keep Credhe MacPherson from using the family name for their own ends.
+1	learn whether Cnoc O'Mahony can still pay what is owed.
+1	learn the plans of Craft Guilds against Merchant Guilds before they can act on them.
+1	move what comes from Thieves' Guild through the inns and taverns without the regular hands noticing.
+1	make sure Zenobia Pacuvius is not left behind by the changes in the work.
+1	keep the friendship with Minucia Varro quiet, where it does the most good.
+1	keep the accounts of the elder grove council balanced, and show them to anyone who asks.
+1	speak for The Guild Alliance in one dispute this season where Kilian Ryan would usually speak.
+1	get the informal elder consensus excused from one tax or levy this season.
+1	make sure no new rule from those who govern costs the head-of-household consensus anything this season.
+1	keep the friendship with Marwan al-Malik quiet, where it does the most good.
+1	be asked to speak first at the next gathering that matters.
+1	give away something this season that they would sooner keep.
+1	call in one part of what Elisabeth Richter owes this season.
+1	beat Yahya al-Rahman at something this season, in front of people who matter.
+1	keep the friendship with Urangua Borjigin quiet, where it does the most good.
+1	keep Tochtli Ahau from getting the thing they want most this season.
+1	put their own work in order, down to the last detail.
+1	make sure Kari Haraldsson is not left behind by the changes in the work.
+1	get the woodcutter's camp excused from one tax or levy this season.
+1	pay Govind Banerjee back one part of what is owed before the season ends.
+1	warn Flavia Severus of any trouble before it reaches them.
+1	make sure no new rule from those who govern costs the household anything this season.
+1	collect what is owed to the shepherd collective before the season is out.
+1	get the rights of the head-of-household consensus written down and sealed by those who govern, this season.
+1	win the shepherd collective first call on any help those who govern can give this season.
+1	show the rest of Feudal Stewardship that Yrsa Sigmundsson can be wrong, without ever saying so aloud.
+1	win the fishing community first call on any help those who govern can give this season.
+1	call in one part of what Leela Das owes this season.
+1	ration what is left for River Fishing so the work lasts until new supply arrives.
+1	get the sheepfold through the season without borrowing.
+1	make sure no one else learns how much is owed to Valentinus Maximus.
+1	learn what Barra Kelly has been saying about them, and to whom.
+1	bring Xochitl Hau together with someone who can help them.
+1	beat Jevgeni Volkov at something this season, in front of people who matter.
+1	learn what Zuochen Luo has been saying about them, and to whom.
+1	keep the old lessons between them and Quetzal Cohuoh private.
+1	cut the spending at the citizen militia by a tenth this season, and keep the work going.
+1	find the weak spot in what Torghil Borjigin is doing, and press on it.
+1	find a patron among those who lead Feudal Stewardship, and make themselves useful to them.
+1	beat Simon Klein at something this season, in front of people who matter.
+1	find a second supplier of timber, so one lost cart cannot stop the work at the carpenter's workshop.
+1	keep the citizen militia working through the season even if the supply of iron should fail.
+1	get the rights of the dairy written down and sealed by those who govern, this season.
+1	make sure no new rule from those who govern costs the horse yard anything this season.
+1	warn Freya Eriksson of any trouble before it reaches them.
+1	keep the quarrel between Military/Guard and Feudal Stewardship from turning into open trouble this season.
+1	win the citizen militia first call on any help those who govern can give this season.
+1	help Ariun Taichiud with one thing this season, as family should.
+1	show the rest of Household Council that Huilan Wang can be wrong, without ever saying so aloud.
+1	make sure no new rule from those who govern costs the woodcutter's camp anything this season.
+1	get the horse yard through the season without borrowing.
+1	make sure no new rule from those who govern costs the fisher's landing anything this season.
+1	cut the spending at the hunter's lodge by a tenth this season, and keep the work going.
+1	learn what Olia Sokolov has been saying about them, and to whom.
+1	look for a way to do more for Taverns & Social Life with the same hands.
+1	cut the spending at the fuller's fulling mill by a tenth this season, and keep the work going.
+1	answer the next move by Religious Authorities against Priestly Guidance, quickly and in public.
+1	keep the friendship with Járnsaxa Bjornsson quiet, where it does the most good.
+1	find out what Yash Chaudhary really wants in return.
+1	get the rights of the house of worship written down and sealed by those who govern, this season.
+1	ask Lucius Cordus for advice on one hard decision this season.
+1	keep Incitatus Flavius from getting the thing they want most this season.
+1	get the lord's steward's office excused from one tax or levy this season.
+1	write down every sign they have seen, and show it to someone who understands such things.
+1	bring Elder Council a piece of news before anyone else does.
+1	win two more people in Elder Council over to their side before Dorbei Jadaran notices.
+1	get the rights of the fisher's landing written down and sealed by those who govern, this season.
+1	show the rest of Elected Reeve that Zaachila Dzul can be wrong, without ever saying so aloud.
+1	be in the room the next time Household Council must decide something that matters.
+1	call in one part of what Elchidei Kereit owes this season.
+1	spend an evening with Rutilius Celer this season and talk over the work as they once did.
+1	find the house of worship one more source of money.
+1	make sure Sumitra Dubey is not left behind by the changes in the work.
+1	show the rest of Merchant Guilds that Jagannath Joshi can be wrong, without ever saying so aloud.
+1	remind Nedko Bogdanov, quietly, of what is owed.
+1	stop Elder Council from taking anything more from Religious Authorities this season.
+1	keep Akhtar al-Mawsili from getting the thing they want most this season.
+1	pay Chunhua Wang back one part of what is owed before the season ends.
+1	win one ally of Household Council over to the side of Thieves' Guild.
+1	spend an evening with Bolontiku Nah this season and talk over the work as they once did.
+1	ask Timur Besud for a favour that settles a share of the debt.
+1	win over one of Vasyl Kovalev's friends.
+1	win over one of Sky Woman Batab's friends.
+1	pay every hand at the house of worship in full and on time this season.
+1	get the house of worship excused from one tax or levy this season.
+1	speak for Elder Council in one dispute this season where Mandakini Chatterjee would usually speak.
+1	keep the quarrel between Headman's Authority and Military/Guard from turning into open trouble this season.
+1	win the hunter's lodge first call on any help those who govern can give this season.
+1	do one thing for Merchant Guilds this season that the people who lead it cannot ignore.
+1	win over one of Heracles Kalojan's friends.
+1	pay Cara Silanus back one part of what is owed before the season ends.
+1	make sure Yara al-Rashidi is not left behind by the changes in the work.
+1	do Nabil ibn Ahmed a favour big enough to count against what is owed.
+1	make sure no one else learns how much is owed to Petro Andreyev.
+1	lure one capable person away from Household Council to work for Military Party.
+1	take one piece of business from Military/Guard and bring it to Elder Council.
+1	answer the next move by Headman's Authority against Military Party, quickly and in public.
+1	spend an evening with Waheed al-Isfahani this season and talk over the work as they once did.
+1	make sure Malati Gupta keeps paying, even if late.
+1	pay Gautam Balan back one part of what is owed before the season ends.
+1	keep the accounts of the mill balanced, and show them to anyone who asks.
+1	bring Liesel Huber together with someone who can help them.
+1	be asked for an opinion by those who lead Household Council, once, this season.
+1	make sure no new rule from those who govern costs the waystation anything this season.
+1	be in the room the next time Headman's Authority must decide something that matters.
+1	gain ground for Elected Reeve at the expense of Military/Guard before the season is out.
+1	find one person willing to speak against Sameer al-Tusi, and keep them safe until they do.
+1	ration what is left for Standing Watch so the work lasts until new supply arrives.
+1	get enough on Gleb Popov to hold them, and make it stick.
+1	make do at the town watch with what can be had, and waste none of it.
+1	keep watching Hunab Uc until they make one mistake.
+1	bring Merchant Council a piece of news before anyone else does.
+1	settle one quarrel inside Military/Guard before Sneha Desai can settle it and take the credit.
+1	remind Huitzilxochitl Ku, quietly, of what is owed.
+1	answer the next move by Thieves' Guild against Town Council, quickly and in public.
+1	find the town granary one more source of money.
+1	bring Taha al-Ghazali together with someone who can help them.
+1	win over one of Majid al-Nuri's friends.
+1	find a way to make do with less grain at the town granary.
+1	keep Nikon Drimys from getting the thing they want most this season.
+1	find out what Brynjar Torvaldsson really wants in return.
+1	learn why people favour Merchant Council, and do better for Merchant Guilds.
+1	gain ground for Guild Council at the expense of Military/Guard before the season is out.
+1	take one piece of business from Merchant Council and bring it to Merchant Guilds.
+1	be the one Ilse Koch sends whenever something must be done for Merchant Guilds this season.
+1	make sure Iskra Ilyin is not left behind by the changes in the work.
+1	find the weak spot in what Veerendra Naidu is doing, and press on it.
+1	get the small hospital through the season without borrowing.
+1	train an apprentice at the salt works to take on part of the work.
+1	pay Quetzal Yam back one part of what is owed before the season ends.
+1	answer the next move by Craft Guilds against Merchant Guilds, quickly and in public.
+1	ration what is left for Herbalism & Remedies so the work lasts until new supply arrives.
+1	steer one more piece of business toward Thieves' Guild, for a share of the profit.
+1	cut the spending at the almshouse by a tenth this season, and keep the work going.
+1	find the weak spot in what Antonia Tacitus is doing, and press on it.
+1	win two more people in Religious Authorities over to their side before Dan Hayashi notices.
+1	win two more people in Merchant Guilds over to their side before Shan Sato notices.
+1	bring Nerthus Finsson together with someone who can help them.
+1	grow the work at the apothecary's shop by one more pair of hands, then another.
+1	keep their own affairs private this season, from friend and rival alike.
+1	lay in a season of iron at the town watch while it can still be had.
+1	get the most out of Horse & Animal Trade while it runs well, and put the gains by.
+1	keep Dzuna Uc busy with real work for Religious Authorities, too busy to gather friends of their own.
+1	find the weak spot in what Hildr Flokason is doing, and press on it.
+1	warn Kanleox Nah of any trouble before it reaches them.
+1	answer the next move by Military/Guard against Corrupt Council, quickly and in public.
+1	buy iron at the market in bulk this season, while the price is still fair.
+1	find out where Tümer Tayichi'ud goes when no one is meant to be watching.
+1	bring Anusaya Mukhopadhyay together with someone who can help them.
+1	find one person willing to speak against Rajesh Naidu, and keep them safe until they do.
+1	find out which members of Military/Guard are still friendly with Merchant Council, and why.
+1	close one of the routes that money takes into the smuggling operation.
+1	keep the accounts of the town watch balanced, and show them to anyone who asks.
+1	ask Tepeu Tec for advice on one hard decision this season.
+1	warn Lubna al-Jabbar of any trouble before it reaches them.
+1	learn what Günji Taichiud has been saying about them, and to whom.
+1	bring Petra Alexeyev together with someone who can help them.
+1	find the thing the dragon sent them to find, and tell no one why.
+1	show Sadhbh Walsh how far they have both come since the lessons ended.
+1	pay every hand at the smuggling operation in full and on time this season.
+1	spend an evening with Nadia al-Masri this season and talk over the work as they once did.
+1	bring in from outside what Iron & Metalwork can no longer get close to home.
+1	keep Bera Rognvaldsson from getting the thing they want most this season.
+1	cut the spending at the citadel by a tenth this season, and keep the work going.
+1	find out what Atharva Parekh really wants in return.
+1	find out what the dream that keeps coming back is trying to tell them.
+1	find out whether Sulayman al-Farabi has been meeting anyone from Military/Guard in private.
+1	get enough on Suhad al-Qadir to hold them, and make it stick.
+1	gain ground for Military/Guard at the expense of Military Council before the season is out.
+1	warn Pixan Tec of any trouble before it reaches them.
+1	cut the spending at the town watch by a tenth this season, and keep the work going.
+1	learn the plans of Town Council against Military/Guard before they can act on them.
+1	show the rest of Religious Authorities that Yoko Zheng can be wrong, without ever saying so aloud.
+1	stand by Byung Xiao in their next quarrel, whoever it is with.
+1	beat Ingvar Asgautsson at something this season, in front of people who matter.
+1	warn Kolbeinn Styrkarsson of any trouble before it reaches them.
+1	break off from Rorik Kolbeinsson without letting the street gang see it coming.
+1	get the almshouse excused from one tax or levy this season.
+1	win two more people in Merchant Guilds over to their side before Uto Meyer notices.
+1	cut the spending at the small hospital by a tenth this season, and keep the work going.
+1	keep Bozhena Tarasov from getting the thing they want most this season.
+1	show the rest of Religious Authorities that Eleni Chortasmenos can be wrong, without ever saying so aloud.
+1	win over one of Roxane Chortasmenos's friends.
+1	make sure no new rule from those who govern costs the fighting pits anything this season.
+1	win two more people in Religious Authorities over to their side before Kailash Parekh notices.
+1	do one thing for Merchant Council this season that the people who lead it cannot ignore.
+1	find a second supplier of grain, so one lost cart cannot stop the work at the town granary.
+1	find one person willing to speak against Laxman Pillai, and keep them safe until they do.
+1	beat Aisling Murray at something this season, in front of people who matter.
+1	get the customs house through the season without borrowing.
+1	beat Military/Guard to the next opportunity, and win the credit for Feudal Appointee.
+1	win back the people who stopped relying on the town watch when the work fell short.
+1	find out which members of War Council are still friendly with Guild Council, and why.
+1	beat Vasileios Drimys at something this season, in front of people who matter.
+1	learn what Kolfinna Sigmundsson has been saying about them, and to whom.
+1	bring Minucia Hostus together with someone who can help them.
+1	get the work at the garrison back to full strength this season.
+1	close one of the routes that money takes into the contract killer's people.
+1	keep watching Mandakini Dubey until they make one mistake.
+1	get enough on Manuela Bryennios to hold them, and make it stick.
+1	give Eithne O'Leary one task this season that will show whether they can be trusted.
+1	learn exactly what Corrupt City Council and Thieves' Guild have agreed in private, and who agreed it.
+1	collect what is owed to the fish market before the season is out.
+1	be in the room the next time Merchant Guild Council must decide something that matters.
+1	do Hieronymos Melissenos one useful favour this season, unasked.
+1	grow the work at the customs house by one more pair of hands, then another.
+1	move what comes from The Black Circle through the fish market without the regular hands noticing.
+1	learn what Jatin Sahu has been saying about them, and to whom.
+1	bring Fenghua Hayashi of the front businesses in before the season is out.
+1	keep the accounts of the merchant guilds balanced, and show them to anyone who asks.
+1	get to whatever both Merchant Guilds and Merchant oligarchy want this season first.
+1	answer the next move by Military/Guard against Thieves' Guild, quickly and in public.
+1	get one person close to Christofora Muzalon to talk, quietly.
+1	stand by Achilles Phakrases in their next quarrel, whoever it is with.
+1	keep watch at the houses of worship on the night the omen named.
+1	find the weak spot in what Sharif al-Najdi is doing, and press on it.
+1	give Zümür Kazakh one task this season that will show whether they can be trusted.
+1	get the garrison through the season without borrowing.
+1	settle one quarrel inside Merchant Guilds before Jassim al-Isfahani can settle it and take the credit.
+1	keep Raoul Palaiologos in second place by giving them enough to want and nothing to take.
+1	show Huitzilxochitl Kanil how far they have both come since the lessons ended.
+1	settle one quarrel inside Thieves' Guild before Vikram Panda can settle it and take the credit.
+1	win over one of Mustafa al-Aziz's friends.
+1	keep every meeting with Noriko Yamaguchi secret, even from their closest friends.
+1	learn the plans of Merchant Guild Council against Religious Authorities before they can act on them.
+1	look for a way to do more for Herbalism & Remedies with the same hands.
+1	learn what Evgeny Tretyakov has been saying about them, and to whom.
+1	bring in from outside what Herbalism & Remedies can no longer get close to home.
+1	grow the work at the midwife's house by one more pair of hands, then another.
+1	get the most out of Herbalism & Remedies while it runs well, and put the gains by.
+1	find the weak spot in what Purevdorj Fergana is doing, and press on it.
+1	win over one of Üljeytü Khwarezm's friends.
+1	keep the accounts of the apothecary district balanced, and show them to anyone who asks.
+1	answer the next move by Merchant Guild Council against Religious Authorities, quickly and in public.
+1	beat Adelheid Gruber at something this season, in front of people who matter.
+1	stop Merchant Guild Council from taking anything more from Thieves' Guild this season.
+1	keep the quarrel between The Highborn Circle and City Council from turning into open trouble this season.
+1	keep Kaikeyyi Dubey from getting the thing they want most this season.
+1	find out whether Hema Bajaj has been meeting anyone from Merchant Guilds in private.
+1	find out whether Toquchar Nogai has been meeting anyone from Noble Families in private.
+1	buy iron and fuel at the market in bulk this season, while the price is still fair.
+1	gain ground for Merchant Guilds at the expense of Religious Authorities before the season is out.
+1	answer the next move by Arcane Council against Military/Guard, quickly and in public.
+1	find out where Wenceslas Stepanov goes when no one is meant to be watching.
+1	get the hired blades excused from one tax or levy this season.
+1	learn who controls the supply of iron and fuel, and get on good terms with them.
+1	get the mercenary quarter excused from one tax or levy this season.
+1	do one thing for Merchant City Council this season that the people who lead it cannot ignore.
+1	make sure no new rule from those who govern costs the professional city watch anything this season.
+1	find out what Mustafa al-Farabi really wants in return.
+1	keep every meeting with Ruqayya al-Fasi secret, even from their closest friends.
+1	keep Piso Bassus in second place by giving them enough to want and nothing to take.
+1	pay every hand at the garrison in full and on time this season.
+1	keep Saida ibn Rashid from getting the thing they want most this season.
+1	keep Yelena Cicero in second place by giving them enough to want and nothing to take.
+1	watch who goes in and out of the whisper market, and write it all down.
+1	find out whether Sabinus Crispus has been meeting anyone from Religious Authorities in private.
+1	get enough on Taghrid al-Karimi to hold them, and make it stick.
+1	learn the plans of Thieves' Guild against War Council before they can act on them.
+1	close one of the routes that money takes into the black market.
+1	prove what Franziska Braun answers to.
+1	sit down with Zuma May at the next family gathering and settle one old grievance.
+1	keep the friendship with Thodoros Strategopoulos quiet, where it does the most good.
+1	win over one of Snorri Rognvaldsson's friends.
+1	get the inns and taverns excused from one tax or levy this season.
+1	ask Anna Alexeyev for advice on one hard decision this season.
+1	buy a share in the public bathhouse before the season is out.
+1	win over one of Irmgard Pfeiffer's friends.
+1	grow the work at the inns and taverns by one more pair of hands, then another.
+1	stop Democratic assembly from taking anything more from Religious Authorities this season.
+1	ask Munkhtuya Kipchak for advice on one hard decision this season.
+1	show the rest of Religious Authorities that Chunhua Zhu can be wrong, without ever saying so aloud.
+1	answer the next move by Religious Authorities against Noble Governorship, quickly and in public.
+1	secure enough crafts reserves to outlast the blockade.
+1	stop Military/Guard from taking anything more from Merchant Guild Council this season.
+1	learn the plans of Military/Guard against Merchant Guild Council before they can act on them.
+1	secure enough fish reserves to outlast the blockade.
+1	keep the quarrel between Merchant Guild Council and Religious Authorities from turning into open trouble this season.
+1	keep the accounts of the city granaries balanced, and show them to anyone who asks.
+1	close one of the routes that money takes into the rookery.
+1	be in the room the next time The Merchant Bloc must decide something that matters.
+1	take the last payment from the black market, and find a way to end the arrangement.
+1	buy a rare reagent at the wizard's tower without saying what it is for.
+1	keep Anton Novikov busy with real work for Military/Guard, too busy to gather friends of their own.
+1	secure enough alchemy reserves to outlast the blockade.
+1	keep the quarrel between City-State Council and Religious Authorities from turning into open trouble this season.
+1	get enough on Caoilfhinn MacQuarrie to hold them, and make it stick.
+1	get enough on Anastasios Oinaios to hold them, and make it stick.
+1	close one of the routes that money takes into the thieves' guild.
+1	close one of the routes that money takes into the black market bazaar.
+1	keep watching Ottmar Schulz until they make one mistake.
+1	cut the spending at the professional city watch by a tenth this season, and keep the work going.
+1	get the rights of the court buildings written down and sealed by those who govern, this season.
+1	be the one Domitia Gallus sends whenever something must be done for Religious Authorities this season.
+1	bring Luitgard Vogt together with someone who can help them.
+1	answer the next move by Thieves' Guild against Royal Authority, quickly and in public.
+1	find out what Amina al-Yafi really wants in return.
+1	be in the room the next time Grand Military Council must decide something that matters.
+1	be the one Tukaram Anand sends whenever something must be done for Grain Holders this season.
+1	find a way to make do with less stone at the great cathedral.
+1	get the court buildings through the season without borrowing.
+1	keep the dealings between Democratic assembly and Thieves' Guild out of sight for another season.
+1	stand by Drengr Gislason in their next quarrel, whoever it is with.
+1	bring The Merchant Bloc a piece of news before anyone else does.
+1	bring Folker Steinberg together with someone who can help them.
+1	close one of the routes that money takes into the rival gangs.
+1	keep the accounts of the smuggling network balanced, and show them to anyone who asks.
+1	stand by Scáthach Kennedy in their next quarrel, whoever it is with.
+1	settle one quarrel inside Thieves' Guild before Sky Woman Yax can settle it and take the credit.
+1	pay every hand at the houses of worship in full and on time this season.
+1	do Prithvi Shrivastava a favour big enough to count against what is owed.
+1	be the one Burmaa Kipchak sends whenever something must be done for Merchant Guilds this season.
+1	win over the best hands at the international trade center to work for the merchant guilds.
+1	get to whatever both Merchant Guilds and Religious Authorities want this season first.
+1	beat High Theocratic Council to the next opportunity, and win the credit for Thieves' Guild.
+1	learn the plans of Grand Merchant Oligarchy against Thieves' Guild before they can act on them.
+1	win over one of Vachir Kazakh's friends.
+1	win one ally of Merchant Guilds over to the side of Craft Guilds.
+1	be in the room the next time Craft Guilds must decide something that matters.
+1	be in the room the next time Religious Authorities must decide something that matters.
+1	win new business for the apothecary district beyond the people who already come.
+1	bring Hildr Flokason together with someone who can help them.
+1	win the apothecary district first call on any help those who govern can give this season.
+1	learn the plans of Grand Merchant Oligarchy against Religious Authorities before they can act on them.
+1	do one thing for Craft Guilds this season that the people who lead it cannot ignore.
+1	steer one more piece of business toward the black market bazaar, for a share of the profit.
+1	speak for Merchant Guilds in one dispute this season where Járnsaxa Haraldsson would usually speak.
+1	keep Ermintrude Kaiser in second place by giving them enough to want and nothing to take.
+1	look for a way to do more for Iron & Metalwork with the same hands.
+1	find out which members of Merchant Guilds are still friendly with Craft Guilds, and why.
+1	spend an evening with Zorana Blagojević this season and talk over the work as they once did.
+1	ask Yohualli Yaxche for a favour that settles a share of the debt.
+1	take on the work in Grand Merchant Senate that no one else wants, and do it without complaint.
+1	find one person willing to speak against Tomoko Deng, and keep them safe until they do.
+1	keep the old lessons between them and Zhu Han private.
+1	find out where Predojka Kostić goes when no one is meant to be watching.
+1	learn whether Asdis Haraldsson can still pay what is owed.
+1	win one ally of Thieves' Guild over to the side of Military/Guard.
+1	learn who Altan-Gua Önggirad really meets, and how often.
+1	watch who goes in and out of the underground network, and write it all down.
+1	keep the quarrel between Merchant Guilds and Craft Guilds from turning into open trouble this season.
+1	learn who Thorvald Ormsson really meets, and how often.
+1	bring Zaachila Yaxche of the whisper market in before the season is out.
+1	keep the friendship with Denis Saveliev quiet, where it does the most good.
+1	keep the friendship with Zenobia Quirinus quiet, where it does the most good.
+1	stop Ducal Governorship from taking anything more from Religious Authorities this season.
+1	settle one quarrel inside Thieves' Guild before Coatlicue Balam can settle it and take the credit.
+1	win one ally of Grand Council over to the side of Thieves' Guild.
+1	find out where Bolontiku Xul goes when no one is meant to be watching.
+1	lure one capable person away from Grand Merchant Oligarchy to work for Military/Guard.
+1	show Tümer Ongut how far they have both come since the lessons ended.
+1	catch Soo Yamamoto with something from the black market bazaar on them, in front of witnesses.
+1	find one person willing to speak against Padraig Thornton, and keep them safe until they do.
+1	learn who Nataliya Todorović really meets, and how often.
+1	watch who goes in and out of the front businesses, and write it all down.
+1	catch Toquchar Karachay with something from the smuggling network on them, in front of witnesses.
+1	keep watching Eudoxia Phokas until they make one mistake.
+1	find one person willing to speak against Aifric Hennessy, and keep them safe until they do.
+1	bring Religious Authorities a piece of news before anyone else does.
+1	beat Asgaut Snorrason at something this season, in front of people who matter.
+1	take on the work in Ducal Governorship that no one else wants, and do it without complaint.
+1	be asked for an opinion by those who lead Grand Guild Consortium, once, this season.
+1	take one piece of business from Merchant Guilds and bring it to Religious Authorities.
+1	bring Tariq ibn Arabi together with someone who can help them.
+1	find the weak spot in what Palaiologissa Skleraina is doing, and press on it.
+1	win one ally of Military/Guard over to the side of Ducal Governorship.
+1	keep the friendship with Symeon Kyriadotes quiet, where it does the most good.
+1	bring Prima Zoilus together with someone who can help them.
+1	get enough on Terentia Strabo to hold them, and make it stick.
+1	find the fish market one more source of money.
+1	collect what is owed to the court buildings before the season is out.
+1	find one person willing to speak against Mustafa al-Baghdadi, and keep them safe until they do.
+1	do one thing for Arcane Senate this season that the people who lead it cannot ignore.
+1	find out what Viktor Treue really wants in return.
+1	catch Renate Prinz with something from the whisper market on them, in front of witnesses.
+1	beat Orla Lynch at something this season, in front of people who matter.
+1	do Sorcha Ward one useful favour this season, unasked.
+1	do what Niall Clifford asks this season, and collect the payment from the smuggling network.
+1	find a patron among those who lead Grain Holders, and make themselves useful to them.
+1	find a patron among those who lead Grand Guild Consortium, and make themselves useful to them.
+1	bring Grand Merchant Oligarchy a piece of news before anyone else does.
+1	stop Thieves' Guild from taking anything more from Grand Merchant Oligarchy this season.
+1	secure enough furs reserves to outlast the blockade.

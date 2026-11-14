@@ -1,0 +1,81 @@
+r2r-thorp-11 loss hunger=false mkt=false 
+r2r-thorp-16 loss hunger=false mkt=false 
+r2r-thorp-32 loss hunger=false mkt=false 
+r2r-thorp-55 loss hunger=false mkt=false 
+r2r-thorp-56 loss hunger=false mkt=false 
+r2r-hamlet-5 loss hunger=false mkt=false 
+r2r-hamlet-53 loss hunger=false mkt=false 
+r2r-town-27 loss hunger=false mkt=true 
+r2r-metropolis-4 loss hunger=false mkt=true 
+r2s-wartime-thorp-0 loss hunger=false mkt=false 
+r2s-wartime-thorp-1 loss mkt=false  
+r2s-wartime-thorp-2 loss pros=false  
+r2s-wartime-thorp-3 loss mkt=false  
+r2s-wartime-hamlet-0 loss hunger=false mkt=false 
+r2s-wartime-hamlet-1 loss hunger=false mkt=false 
+r2s-wartime-hamlet-2 loss hunger=false mkt=false 
+r2s-wartime-hamlet-3 loss pros=false  
+r2s-wartime-village-0 profit mkt=true  
+r2s-wartime-village-1 loss hunger=false mkt=true 
+r2s-wartime-village-2 loss hunger=false mkt=false 
+r2s-wartime-village-3 loss hunger=false mkt=false 
+r2s-wartime-town-0 loss hunger=false mkt=true 
+r2s-wartime-town-1 loss hunger=false mkt=true 
+r2s-wartime-town-2 profit mkt=true  
+r2s-wartime-town-3 loss hunger=false mkt=true 
+r2s-wartime-city-0 loss hunger=false mkt=true 
+r2s-wartime-city-1 profit mkt=true  
+r2s-wartime-city-2 loss hunger=false mkt=true 
+r2s-wartime-city-3 loss hunger=false mkt=true 
+r2s-wartime-metropolis-0 profit mkt=true  
+r2s-wartime-metropolis-1 loss hunger=false mkt=true 
+r2s-wartime-metropolis-2 loss hunger=false mkt=true 
+r2s-wartime-metropolis-3 loss hunger=false mkt=true 
+rr3-thorp-wartime-rand-0 loss pros=false  
+rr3-thorp-wartime-rand-1 loss hunger=false mkt=false 
+rr3-thorp-wartime-rand-2 loss hunger=false mkt=false 
+rr3-thorp-wartime-rand-3 loss hunger=false mkt=false 
+rr3-thorp-wartime-rand-4 loss hunger=false mkt=false 
+rr3-thorp-wartime-rand-5 loss hunger=false mkt=false 
+rr3-thorp-wartime-port-0 loss hunger=false mkt=false 
+rr3-thorp-wartime-port-1 loss hunger=false mkt=false 
+rr3-hamlet-wartime-rand-0 loss hunger=false mkt=false 
+rr3-hamlet-wartime-rand-1 loss hunger=false mkt=false 
+rr3-hamlet-wartime-rand-2 loss hunger=false mkt=false 
+rr3-hamlet-wartime-rand-3 loss hunger=false mkt=true 
+rr3-hamlet-wartime-rand-4 loss hunger=false mkt=false 
+rr3-hamlet-wartime-rand-5 loss hunger=false mkt=false 
+rr3-hamlet-wartime-port-0 loss hunger=false mkt=false 
+rr3-hamlet-wartime-port-1 loss hunger=false mkt=false 
+rr3-village-wartime-rand-0 loss hunger=false mkt=false 
+rr3-village-wartime-rand-1 loss hunger=false mkt=false 
+rr3-village-wartime-rand-2 loss hunger=false mkt=false 
+rr3-village-wartime-rand-3 loss hunger=false mkt=false 
+rr3-village-wartime-rand-4 loss hunger=false mkt=false 
+rr3-village-wartime-rand-5 loss hunger=false mkt=false 
+rr3-village-wartime-port-0 loss hunger=false mkt=false 
+rr3-village-wartime-port-1 loss hunger=false mkt=false 
+rr3-town-wartime-rand-0 loss hunger=false mkt=true 
+rr3-town-wartime-rand-1 loss hunger=false mkt=true 
+rr3-town-wartime-rand-2 loss hunger=false mkt=true 
+rr3-town-wartime-rand-3 loss mkt=true  
+rr3-town-wartime-rand-4 loss hunger=false mkt=true 
+rr3-town-wartime-rand-5 loss hunger=false mkt=true 
+rr3-town-wartime-port-0 profit mkt=true  
+rr3-town-wartime-port-1 loss hunger=false mkt=true 
+rr3-city-wartime-rand-0 loss hunger=false mkt=true 
+rr3-city-wartime-rand-1 loss hunger=false mkt=true 
+rr3-city-wartime-rand-2 profit mkt=true  
+rr3-city-wartime-rand-3 profit mkt=true  
+rr3-city-wartime-rand-4 loss hunger=false mkt=true 
+rr3-city-wartime-rand-5 profit mkt=true  
+rr3-city-wartime-port-0 loss hunger=false mkt=true 
+rr3-city-wartime-port-1 profit mkt=true  
+rr3-metropolis-wartime-rand-0 loss hunger=false mkt=true 
+rr3-metropolis-wartime-rand-1 profit mkt=true  
+rr3-metropolis-wartime-rand-2 profit mkt=true  
+rr3-metropolis-wartime-rand-3 loss hunger=false mkt=true 
+rr3-metropolis-wartime-rand-4 loss hunger=false mkt=true 
+rr3-metropolis-wartime-rand-5 loss hunger=false mkt=true 
+rr3-metropolis-wartime-port-0 loss hunger=false mkt=true 
+rr3-metropolis-wartime-port-1 loss hunger=false mkt=true 

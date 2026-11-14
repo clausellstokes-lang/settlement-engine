@@ -1,0 +1,2 @@
+351	ad254be9d	// R2-CODE-B-SIDE item 1 (2ed36a430): the generator's upstream note left the chain card and the PDF's chain flow
+352	ad254be9d	// (no read either holds makes it true there); the record keeps it, carried into the canonical envelope.

@@ -1,0 +1,3 @@
+28	9b898d5c3	import { institutionHouseLabel } from '../../domain/display/institutionDisplayName.js';
+210	9b898d5c3	{/* ROUND THREE, ruling (a): the house by its label, as the page's NPC card door prints it. */}
+211	9b898d5c3	{safe([npc.house ? institutionHouseLabel(npc.house) : '', npc.powerLine].filter(Boolean).join(' · '))}

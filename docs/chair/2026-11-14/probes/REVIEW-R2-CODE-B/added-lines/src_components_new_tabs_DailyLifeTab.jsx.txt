@@ -1,0 +1,7 @@
+17	d94638185	import { foodBandOf } from '../../../domain/summary/tonightSheet.js'; // the food label's one home (ROUND THREE item 2b)
+129	d94638185	// ROUND THREE item 2b (the cut's #843 #1102 #1297: "Strained" under an active famine, "Tightening" beside "Secure"):
+130	d94638185	// the tile prints the food label's ONE home (tonightSheet.js :: foodBandOf), the word the Tonight sheet and the Crisis
+131	d94638185	// page print; its own percent ladder stands only for a record with no band.
+132	d94638185	const foodBand      = foodBandOf(r?.economicState?.foodSecurity?.foodRecord);
+133	d94638185	const foodLabel     = foodBand ? foodBand.label :
+139	d94638185	const foodColor     = foodBand ? foodBand.color :

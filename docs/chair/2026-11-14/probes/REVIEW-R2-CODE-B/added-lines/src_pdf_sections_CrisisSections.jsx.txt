@@ -1,0 +1,4 @@
+14	9b898d5c3	// ROUND THREE, ruling (a): a house in the cast or the levers is printed by its label, as the page prints it.
+15	9b898d5c3	import { institutionHouseLabel } from '../../domain/display/institutionDisplayName.js';
+37	9b898d5c3	{s.cast.length ? s.cast.map((r) => <Line key={`${r.role}-${r.id}`}>{`${r.roleLabel}: ${r.kind === 'institution' ? institutionHouseLabel(r.name) : r.name} · ${r.reason}`}</Line>) : <Line>{CRISIS_PAGE_COPY.nobody}</Line>}
+42	9b898d5c3	{s.levers.length ? s.levers.map((l) => <Line key={l.institution}>{l.holderName ? `${institutionHouseLabel(l.institution)}, held by ${l.holderName}.` : `${institutionHouseLabel(l.institution)}.`}</Line>) : <Line>{CRISIS_PAGE_COPY.noLevers}</Line>}

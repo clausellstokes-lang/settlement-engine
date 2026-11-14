@@ -1,0 +1,7 @@
+29	d1c8612b1	import { houseLabelsInText } from '../../domain/display/institutionDisplayName.js';
+47	d1c8612b1	// ROUND THREE, ruling (a): a tension's stored sentence that names a house (the stockpile line, copied from
+48	d1c8612b1	// the viability record at birth) is read with each held house's label; the record keeps its bytes.
+49	d1c8612b1	const housesHeld = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
+50	d1c8612b1	const tensions = (h.tensions || []).map((t) => (t && typeof t === 'object' && typeof t.description === 'string'
+51	d1c8612b1	? { ...t, description: houseLabelsInText(t.description, housesHeld) }
+52	d1c8612b1	: (typeof t === 'string' ? houseLabelsInText(t, housesHeld) : t)));

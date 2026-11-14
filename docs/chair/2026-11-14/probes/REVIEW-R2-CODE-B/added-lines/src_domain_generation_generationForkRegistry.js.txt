@@ -1,0 +1,7 @@
+104	32438f8d1	// R2-CODE-B-4 (ROUND THREE item 4, 2026-11-14), RE-MEASURED, cells from the arm's printed literal (the literal differs from
+105	32438f8d1	// this one in these two rows only): resolveCrisisCast|crisisCast and |settlement stepDraws 0 -> 2, keyMoves 0 -> 2, class
+106	32438f8d1	// pure -> drawn, on the 63-row corpus. An "Access to ..." row (the road to another place's house; record 375) is no longer a
+107	32438f8d1	// famine's lever, so where it was the only lever house the cast's own rule mints its one temporary person, named on the
+108	32438f8d1	// step's own fork (rng.fork('resolveCrisisCast')); no other step's row moved, so no other stream moved.
+186	32438f8d1	{ step: 'resolveCrisisCast', key: 'crisisCast', via: 'provides', stepDraws: 2, keyMoves: 2, rows: 63, class: 'drawn', onRecord: { absent: 63, same: 0, transformed: 0 }, onRecordClass: 'absent', producedOnRecord: { absent: 63, same: 0, transformed: 0 }, producedOnRecordClass: 'absent', recordPath: null },
+187	32438f8d1	{ step: 'resolveCrisisCast', key: 'settlement', via: 'mutates', stepDraws: 2, keyMoves: 2, rows: 63, class: 'drawn', onRecord: { absent: 0, same: 63, transformed: 0 }, onRecordClass: 'same', producedOnRecord: { absent: 0, same: 63, transformed: 0 }, producedOnRecordClass: 'same', recordPath: 'record' },

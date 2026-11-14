@@ -1,0 +1,4 @@
+33	c1efd7f93	import { chainHousesOf } from '../../domain/display/chainHouses.js'; // R2-CODE-B item 1b (ruling R1): the PROC row's houses
+248	c1efd7f93	c.processingInstitutions?.length ? { label: 'PROC', value: chainHousesOf(c.processingInstitutions, []).map((h) => label(h.name)).filter(Boolean).join(', ') } : null,
+269	c1efd7f93	// R2-CODE-B item 1b (ruling R1): the houses by the seam's house label, each once (chainHouses.js).
+270	c1efd7f93	const flow = [c.resource, ...chainHousesOf(c.processingInstitutions, []).map((h) => h.name), ...(c.outputs || [])]
