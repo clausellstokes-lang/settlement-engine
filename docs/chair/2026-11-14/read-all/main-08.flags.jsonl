@@ -1,0 +1,139 @@
+{"id": "29000", "town": "r2s-mass_migration-town-0", "sev": "HIGH", "kind": "PAIR", "why": "says no formal government, a loose council rules; GOVERNMENT is Church Council (Dominant) and 00999 says it governs", "other": "00999"}
+{"id": "29070", "town": "r2s-mass_migration-town-0", "sev": "MED", "kind": "PAIR", "why": "says hide work stops half-way; HOUSES has Tanners and 03657 says hides become leather here", "other": "03657"}
+{"id": "13554", "town": "r2s-mass_migration-town-0", "sev": "LOW", "kind": "BROKEN", "why": "slash-joined label 'Military/Guard' used as a name in a sentence", "other": ""}
+{"id": "16423", "town": "r2s-mass_migration-town-0", "sev": "MED", "kind": "STATE", "why": "says Religious Authorities could take the hall now; GOVERNMENT has Church Council Dominant, Religious Authorities only Strong", "other": ""}
+{"id": "04893", "town": "r2s-monster_pressure-town-0", "sev": "LOW", "kind": "BROKEN", "why": "slash-joined label 'Military/Guard' used as a name in a sentence", "other": ""}
+{"id": "20796", "town": "r2s-monster_pressure-town-0", "sev": "MED", "kind": "LACKS", "why": "head of the ruling Church Council answers to Street gang; GOVERNMENT lists no gang among its powers", "other": ""}
+{"id": "14373", "town": "r2s-slave_revolt-town-3", "sev": "LOW", "kind": "BROKEN", "why": "doubled item 'fine glass sand, fine glass sand'", "other": ""}
+{"id": "14639", "town": "r2s-slave_revolt-town-3", "sev": "MED", "kind": "PAIR", "why": "says no rival stands to take Church Council's place; Thieves' Guild is an equal Minor power working against it", "other": "22909"}
+{"id": "10827", "town": "r2s-succession_void-town-0", "sev": "MED", "kind": "PAIR", "why": "offers house wine; 14602 says no grapes reach the vintner and TRADE imports none", "other": "14602"}
+{"id": "28851", "town": "r2s-succession_void-town-0", "sev": "MED", "kind": "PAIR", "why": "says vintner imports and blends; 14602 says no grapes reach the vintner, TRADE imports no grapes or must", "other": "14602"}
+{"id": "10146", "town": "r2s-succession_void-town-0", "sev": "LOW", "kind": "STATE", "why": "bare 'Vulnerable' beside a service reads as the defence word; STATE defence is Defensible (likely a supply-risk tag, unexplained)", "other": ""}
+{"id": "13530", "town": "r2s-succession_void-town-0", "sev": "LOW", "kind": "STATE", "why": "bare 'Vulnerable' beside a service reads as the defence word; STATE defence is Defensible (likely a supply-risk tag, unexplained)", "other": ""}
+{"id": "00333", "town": "r2s-succession_void-town-0", "sev": "HIGH", "kind": "STATE", "why": "one person decides quickly; CRISIS is a leadership void, stability Volatile, and 00168 has three claimants", "other": "00168"}
+{"id": "11202", "town": "r2s-succession_void-town-2", "sev": "MED", "kind": "PAIR", "why": "vintner sells wine by cask and bottle; 14362 says grapes are needed and not brought in, TRADE makes no wine", "other": "14362"}
+{"id": "13333", "town": "r2r-town-13", "sev": "LOW", "kind": "BROKEN", "why": "subject and verb disagree: 'Merchant Guilds works'", "other": ""}
+{"id": "13491", "town": "r2r-town-13", "sev": "LOW", "kind": "BROKEN", "why": "subject and verb disagree: 'Religious Authorities tells'", "other": ""}
+{"id": "20172", "town": "r2r-town-13", "sev": "MED", "kind": "STATE", "why": "says a challenger could now take the hall; GOVERNMENT has Military Council Strong, every rival weaker", "other": ""}
+{"id": "09620", "town": "r2r-town-13", "sev": "LOW", "kind": "BROKEN", "why": "two sentences run together ('leverage Still ahead') and contradict each other on merchant standing", "other": ""}
+{"id": "11703", "town": "r2r-town-27", "sev": "LOW", "kind": "BROKEN", "why": "slash-joined label 'Military/Guard' used as a name in a sentence", "other": ""}
+{"id": "02785", "town": "r2r-town-27", "sev": "MED", "kind": "STATE", "why": "says the lord's appointee governs and supersedes custom; GOVERNMENT has Feudal Appointee Suppressed, Military/Guard Strong", "other": "15128"}
+{"id": "07352", "town": "r2r-town-27", "sev": "LOW", "kind": "BROKEN", "why": "slash-joined label 'Military/Guard' used as a name in a sentence", "other": ""}
+{"id": "15128", "town": "r2r-town-27", "sev": "LOW", "kind": "BROKEN", "why": "slash-joined label 'Military/Guard' used as a name in a sentence", "other": ""}
+{"id": "10424", "town": "r2r-town-27", "sev": "MED", "kind": "LACKS", "why": "names 'the council' working alongside landowners; government is Feudal Appointee and HOUSES has no council", "other": ""}
+{"id": "15203", "town": "r2r-town-13", "sev": "LOW", "kind": "BROKEN", "why": "subject and verb disagree: 'the garrison and town watch catches'", "other": ""}
+{"id": "03995", "town": "r2r-town-27", "sev": "LOW", "kind": "BROKEN", "why": "subject and verb disagree: 'the plague years comes up'", "other": ""}
+{"id": "21301", "town": "r2r-town-27", "sev": "LOW", "kind": "BROKEN", "why": "subject and verb disagree: 'The plague years is a generation old'", "other": ""}
+{"id": "13123", "town": "r2s-monster_pressure-town-2", "sev": "LOW", "kind": "STATE", "why": "bare 'Vulnerable' beside a service reads as the defence word; STATE defence is Defensible (likely a supply-risk tag, unexplained)", "other": ""}
+{"id": "20619", "town": "r2r-town-25", "sev": "LOW", "kind": "BROKEN", "why": "subject and verb disagree: 'The garrison and town watch is well paid'", "other": ""}
+{"id": "23465", "town": "r2r-town-25", "sev": "LOW", "kind": "BROKEN", "why": "subject and verb disagree: 'the garrison and town watch sees to that'", "other": ""}
+{"id": "15525", "town": "r2r-town-25", "sev": "MED", "kind": "STATE", "why": "says the town loses something to attackers every season; STATE safety is Very Safe and 23465 says little crime", "other": "23465"}
+{"id": "26467", "town": "r2s-religious_conversion-town-3", "sev": "MED", "kind": "STATE", "why": "presumes people favour Church Council; GOVERNMENT legitimacy is Legitimacy Crisis and Church Council only Minor", "other": ""}
+{"id": "28580", "town": "r2s-politically_fractured-town-0", "sev": "MED", "kind": "STATE", "why": "says merchant families hold exclusive civic power; Merchant oligarchy is only Minor, Thieves' Guild Significant, stability Fractured", "other": "06306"}
+{"id": "07243", "town": "r2s-monster_pressure-town-1", "sev": "LOW", "kind": "STATE", "why": "bare 'Vulnerable' beside a service reads as the defence word; STATE defence is Well-Defended (likely a supply-risk tag, unexplained)", "other": ""}
+{"id": "04316", "town": "r2s-monster_pressure-town-1", "sev": "MED", "kind": "PAIR", "why": "says the town loses guards faster than it replaces them; defence Well-Defended and 20058 says the arrangements are holding", "other": "20058"}
+{"id": "13558", "town": "r2s-recently_betrayed-town-2", "sev": "LOW", "kind": "BROKEN", "why": "slash-joined label 'Military/Guard' used as a name in a sentence", "other": ""}
+{"id": "13316", "town": "r2s-recently_betrayed-town-2", "sev": "LOW", "kind": "BROKEN", "why": "subject and verb disagree: 'Merchant Guilds works'", "other": ""}
+{"id":"15816","town":"r2s-religious_conversion-town-2","sev":"LOW","kind":"STATE","why":"bare 'Vulnerable' beside a service reads as the defence word; STATE defence is Lightly Defended (likely a supply-risk tag, unexplained)","other":""}
+{"id":"11554","town":"r2s-religious_conversion-town-2","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"13615","town":"r2s-religious_conversion-town-2","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"23489","town":"r2s-religious_conversion-town-2","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"14069","town":"r2r-town-57","sev":"MED","kind":"STATE","why":"says much of the region's building stone was cut here; TRADE neither makes nor exports stone","other":""}
+{"id":"13601","town":"r2r-town-57","sev":"MED","kind":"STATE","why":"says Military/Guard is about as strong as Church Council; GOVERNMENT has Military/Guard Minor, Church Council Significant","other":""}
+{"id":"14244","town":"r2r-town-8","sev":"LOW","kind":"BROKEN","why":"doubled item 'fine glass sand, fine glass sand'","other":""}
+{"id":"28979","town":"r2s-infiltrated-town-3","sev":"MED","kind":"PAIR","why":"offers wine wholesale to taverns; 14392 says grapes are needed and not brought in, TRADE makes no wine","other":"14392"}
+{"id":"11176","town":"r2s-infiltrated-town-3","sev":"MED","kind":"PAIR","why":"vintner talks of the year's grapes and sells a cask; 14392 says no grapes are brought in and none grow","other":"14392"}
+{"id":"07638","town":"r2s-insurgency-town-2","sev":"MED","kind":"STATE","why":"says Feudal Appointee's orders go unanswered; GOVERNMENT has it Strong and 13321 says Merchant Guilds works under its rules","other":"13321"}
+{"id":"04579","town":"r2s-insurgency-town-2","sev":"MED","kind":"STATE","why":"says building stone from here has gone to every part of the region; TRADE neither makes nor exports stone","other":""}
+{"id":"05328","town":"r2s-insurgency-town-2","sev":"LOW","kind":"STATE","why":"bare 'Vulnerable' beside a service reads as the defence word; STATE defence is Lightly Defended (likely a supply-risk tag, unexplained)","other":""}
+{"id":"13321","town":"r2s-insurgency-town-2","sev":"LOW","kind":"BROKEN","why":"subject and verb disagree: 'Merchant Guilds works'","other":""}
+{"id":"17394","town":"r2s-insurgency-town-2","sev":"LOW","kind":"BROKEN","why":"sentence ends mid-name 'Owes Lorcan Mac'; the name Mac Cormack is split across sentences 05851 and 05861","other":"05851"}
+{"id":"05851","town":"r2s-insurgency-town-2","sev":"LOW","kind":"BROKEN","why":"opens mid-name 'Cormack a debt' and ends mid-name 'Lorcan Mac': one sentence split at the name","other":"17394"}
+{"id":"22361","town":"r2s-religious_conversion-town-1","sev":"MED","kind":"LACKS","why":"names a private army of the trading houses; DEFENCE has hired: none, only a town watch, in a town of 909","other":""}
+{"id":"20990","town":"r2s-religious_conversion-town-1","sev":"MED","kind":"LACKS","why":"names the merchant guild's private security force; DEFENCE has hired: none","other":""}
+{"id":"20993","town":"r2s-religious_conversion-town-1","sev":"MED","kind":"LACKS","why":"says merchant guilds keep private security beside the watch; DEFENCE has hired: none","other":""}
+{"id":"11522","town":"r2s-wartime-town-1","sev":"MED","kind":"PAIR","why":"says the vintner turns importer and blender; 14347 says grapes are needed and not brought in","other":"14347"}
+{"id":"13247","town":"r2r-town-12","sev":"MED","kind":"STATE","why":"says Merchant Guilds could now take the hall; GOVERNMENT has Merchant Guilds Minor, Corrupt Council Significant (Thieves' Guild is the Strong one)","other":""}
+{"id":"13550","town":"r2s-mass_migration-town-3","sev":"MED","kind":"PAIR","why":"says Military/Guard and Thieves' Guild have a working arrangement; 22929 marks them escalating and 03035 a slow war of arrests","other":"03035"}
+{"id":"10773","town":"r2s-slave_revolt-town-0","sev":"MED","kind":"STATE","why":"busy road and crowded yards of changing teams; CRISIS is an uncontained Slave Revolt, 21735 says the rising still goes on","other":"21735"}
+{"id":"21722","town":"r2s-slave_revolt-town-0","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"13619","town":"r2s-slave_revolt-town-0","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"13585","town":"r2s-slave_revolt-town-0","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence (twice)","other":""}
+{"id":"01134","town":"r2s-slave_revolt-town-0","sev":"MED","kind":"STATE","why":"says the town keeps order; stability is Unstable (revolt not contained) under a Slave Revolt","other":"21735"}
+{"id": "20266", "town": "r2r-town-1", "sev": "MED", "kind": "PAIR", "why": "says the clergy have more say than the arcane orders; 20053 and 03354 say the arcane orders are ahead", "other": "20053"}
+{"id": "14958", "town": "r2r-town-11", "sev": "LOW", "kind": "BROKEN", "why": "skill label 'Deception' capitalised in prose as if a stat key", "other": ""}
+{"id": "13600", "town": "r2r-town-11", "sev": "MED", "kind": "STATE", "why": "says Military/Guard is about as strong as Arcane Council; GOVERNMENT has Military/Guard Minor, Arcane Council Significant", "other": ""}
+{"id": "14152", "town": "r2r-town-11", "sev": "LOW", "kind": "BROKEN", "why": "name fragment 'Namara' left from a name split at 'Mac'", "other": ""}
+{"id": "01392", "town": "r2r-town-11", "sev": "LOW", "kind": "BROKEN", "why": "sentence ends mid-name 'Patrick Mac'; rest continues in 14174", "other": "14174"}
+{"id": "14174", "town": "r2r-town-11", "sev": "LOW", "kind": "BROKEN", "why": "opens mid-name 'Namara on a small matter': one sentence split at the name", "other": "01392"}
+{"id": "20852", "town": "r2s-infiltrated-town-0", "sev": "MED", "kind": "PAIR", "why": "town council run by the Corrupt Council's head, yet Religious Authorities lose most if it gives way", "other": "01888"}
+{"id": "17267", "town": "r2s-infiltrated-town-0", "sev": "LOW", "kind": "BROKEN", "why": "sentence ends mid-name 'Owen Mac'; name split across 06779 and 06739", "other": "06779"}
+{"id": "06779", "town": "r2s-infiltrated-town-0", "sev": "LOW", "kind": "BROKEN", "why": "fragment 'Donald that Owen Mac': one sentence split twice at the name", "other": "17267"}
+{"id": "06739", "town": "r2s-infiltrated-town-0", "sev": "LOW", "kind": "BROKEN", "why": "opens mid-name 'Donald believes': tail of a sentence split at the name", "other": "06779"}
+{"id": "04760", "town": "r2s-infiltrated-town-0", "sev": "LOW", "kind": "BROKEN", "why": "opens mid-name 'Carthy testified': a name split at 'Mac'", "other": ""}
+{"id": "01202", "town": "r2s-infiltrated-town-0", "sev": "LOW", "kind": "BROKEN", "why": "sentence ends mid-name 'Gráinne Mac'; rest in 04758", "other": "04758"}
+{"id": "04758", "town": "r2s-infiltrated-town-0", "sev": "LOW", "kind": "BROKEN", "why": "fragment 'Carthy since.' left from a name split at 'Mac'", "other": "01202"}
+{"id": "20069", "town": "r2s-infiltrated-town-0", "sev": "LOW", "kind": "BROKEN", "why": "sentence ends mid-name 'Owen Mac'; rest in 06736", "other": "06736"}
+{"id": "06736", "town": "r2s-infiltrated-town-0", "sev": "LOW", "kind": "BROKEN", "why": "opens mid-name 'Donald and Cesair': name split at 'Mac'", "other": "20069"}
+{"id": "00801", "town": "r2s-infiltrated-town-0", "sev": "LOW", "kind": "BROKEN", "why": "sentence ends mid-name 'Owen Mac'; rest in 06757", "other": "06757"}
+{"id": "06757", "town": "r2s-infiltrated-town-0", "sev": "LOW", "kind": "BROKEN", "why": "fragment 'Donald has not, yet.' left from a name split at 'Mac'", "other": "00801"}
+{"id": "06783", "town": "r2s-infiltrated-town-0", "sev": "LOW", "kind": "BROKEN", "why": "opens mid-name 'Donald took the post': name split at 'Mac'", "other": ""}
+{"id": "00844", "town": "r2s-infiltrated-town-0", "sev": "LOW", "kind": "BROKEN", "why": "sentence ends mid-name 'Fionnuala Mac'; rest in 06738", "other": "06738"}
+{"id": "06738", "town": "r2s-infiltrated-town-0", "sev": "LOW", "kind": "BROKEN", "why": "fragment 'Donald as an enemy from that day.' left from a name split at 'Mac'", "other": "00844"}
+{"id": "21303", "town": "r2s-infiltrated-town-0", "sev": "LOW", "kind": "BROKEN", "why": "subject and verb disagree: 'The plague years is older'", "other": ""}
+{"id": "HEADER", "town": "r2r-town-3", "sev": "LOW", "kind": "RECORD", "why": "FOUNDING reason is 'None': an unfilled slot in the record", "other": ""}
+{"id": "13160", "town": "r2r-town-3", "sev": "MED", "kind": "PAIR", "why": "says Merchant Council and Thieves' Guild leave each other alone; 13178 marks the pair escalating", "other": "13178"}
+{"id": "14153", "town": "r2r-town-3", "sev": "LOW", "kind": "BROKEN", "why": "opens mid-name 'Namara a debt' and ends mid-name 'Ualgarg Mac': sentence split at the name", "other": "14163"}
+{"id": "14163", "town": "r2r-town-3", "sev": "LOW", "kind": "BROKEN", "why": "fragment 'Namara has never formally called in' left from a name split at 'Mac'", "other": "14153"}
+{"id": "00541", "town": "r2r-town-3", "sev": "LOW", "kind": "BROKEN", "why": "sentence ends mid-name 'Tlachtga Mac'; 02965 spells it MacCarthy", "other": "04785"}
+{"id": "04785", "town": "r2r-town-3", "sev": "LOW", "kind": "BROKEN", "why": "opens mid-name 'Carthy, and what it buys': name split at 'Mac'", "other": "00541"}
+{"id": "04756", "town": "r2r-town-3", "sev": "LOW", "kind": "BROKEN", "why": "opens mid-name 'Carthy pays on the day': name split at 'Mac'", "other": ""}
+{"id": "00685", "town": "r2r-town-3", "sev": "LOW", "kind": "BROKEN", "why": "sentence ends mid-name 'Tlachtga Mac'; rest in 04779", "other": "04779"}
+{"id": "04779", "town": "r2r-town-3", "sev": "LOW", "kind": "BROKEN", "why": "fragment \"Carthy's rivals.\" left from a name split at 'Mac'", "other": "00685"}
+{"id": "04747", "town": "r2r-town-3", "sev": "LOW", "kind": "BROKEN", "why": "opens mid-name 'Carthy heard about it': name split at 'Mac'", "other": ""}
+{"id": "00387", "town": "r2r-town-3", "sev": "LOW", "kind": "BROKEN", "why": "sentence ends mid-name 'Ualgarg Mac'; 20868 spells it MacNamara", "other": "14160"}
+{"id": "14160", "town": "r2r-town-3", "sev": "LOW", "kind": "BROKEN", "why": "opens mid-name 'Namara fought a duel': name split at 'Mac'", "other": "00387"}
+{"id": "04462", "town": "r2r-town-3", "sev": "LOW", "kind": "BROKEN", "why": "sentence ends mid-name 'Ualgarg Mac'; rest in 14185", "other": "14185"}
+{"id": "14185", "town": "r2r-town-3", "sev": "LOW", "kind": "BROKEN", "why": "fragment \"Namara's face.\" left from a name split at 'Mac'", "other": "04462"}
+{"id": "16528", "town": "r2s-indebted-town-0", "sev": "LOW", "kind": "STATE", "why": "bare 'Vulnerable' beside a service reads as the defence word; STATE defence is Defensible (likely a supply-risk tag, unexplained)", "other": ""}
+{"id": "18024", "town": "r2s-indebted-town-0", "sev": "LOW", "kind": "STATE", "why": "bare 'Vulnerable' beside a service reads as the defence word; STATE defence is Defensible (likely a supply-risk tag, unexplained)", "other": ""}
+{"id": "04712", "town": "r2s-indebted-town-0", "sev": "LOW", "kind": "STATE", "why": "bare 'Vulnerable' beside a service reads as the defence word; STATE defence is Defensible (likely a supply-risk tag, unexplained)", "other": ""}
+{"id": "00812", "town": "r2s-indebted-town-0", "sev": "LOW", "kind": "BROKEN", "why": "sentence ends mid-name 'Líadan Mac'; rest in 14179", "other": "14179"}
+{"id": "14179", "town": "r2s-indebted-town-0", "sev": "LOW", "kind": "BROKEN", "why": "fragment 'Namara thinks will fail.' left from a name split at 'Mac'", "other": "00812"}
+{"id": "14168", "town": "r2s-indebted-town-0", "sev": "LOW", "kind": "BROKEN", "why": "opens mid-name 'Namara has said so': name split at 'Mac'", "other": ""}
+{"id": "20875", "town": "r2s-insurgency-town-0", "sev": "LOW", "kind": "BROKEN", "why": "slash-joined label 'Military/Guard' used as a name in a sentence", "other": ""}
+{"id": "13312", "town": "r2s-insurgency-town-0", "sev": "LOW", "kind": "BROKEN", "why": "subject and verb disagree: 'Merchant Guilds works'", "other": ""}
+{"id": "HEADER", "town": "r2s-recently_betrayed-town-0", "sev": "MED", "kind": "RECORD", "why": "TRADE 'made here' lists Coin minting, Precious metals and gems; HOUSES has no Mint, Mine or Smelter", "other": ""}
+{"id": "05224", "town": "r2s-recently_betrayed-town-0", "sev": "MED", "kind": "LACKS", "why": "names coin minting as the town's work; HOUSES has no Mint", "other": ""}
+{"id": "13751", "town": "r2s-recently_betrayed-town-0", "sev": "MED", "kind": "LACKS", "why": "says Mining & Coinage is running; HOUSES has no Mine and no Mint, and TRADE says iron mines and gem deposits exhausted", "other": ""}
+{"id": "16366", "town": "r2s-recently_betrayed-town-0", "sev": "MED", "kind": "LACKS", "why": "names refined ingots as made here; HOUSES has no Smelter or Mint", "other": ""}
+{"id": "04491", "town": "r2s-recently_betrayed-town-0", "sev": "MED", "kind": "LACKS", "why": "names a baker raising bread prices; HOUSES has no bakers", "other": ""}
+{"id": "04020", "town": "r2s-recently_betrayed-town-0", "sev": "MED", "kind": "STATE", "why": "says grain comes in by cart, not from the town; food ledger: grown 3675 of 4248 needed (86% its own)", "other": ""}
+{"id": "04883", "town": "r2s-recently_betrayed-town-0", "sev": "MED", "kind": "STATE", "why": "says spellwork is taught as heresy; TRADE exports spellcasting and identification, DEFENCE has Wizard's tower and Scroll scribe", "other": ""}
+{"id": "20609", "town": "r2s-mass_migration-town-2", "sev": "MED", "kind": "STATE", "why": "says the food gap is closed; STATE food deficit 27% and viable False", "other": "01186"}
+{"id": "01186", "town": "r2s-mass_migration-town-2", "sev": "MED", "kind": "STATE", "why": "says its trade feeds it and names a road in; viable False, deficit 27%, and 13074 says no trade road reaches it", "other": "13074"}
+{"id": "13246", "town": "r2s-mass_migration-town-1", "sev": "LOW", "kind": "BROKEN", "why": "subject and verb disagree: 'Merchant Guilds buys', 'Craft Guilds only makes'", "other": ""}
+{"id": "13571", "town": "r2s-mass_migration-town-1", "sev": "LOW", "kind": "BROKEN", "why": "slash-joined label 'Military/Guard' used as a name in a sentence", "other": ""}
+{"id": "13167", "town": "r2s-mass_migration-town-1", "sev": "LOW", "kind": "BROKEN", "why": "subject and verb disagree: 'Merchant Guilds needs'", "other": ""}
+{"id": "13163", "town": "r2s-mass_migration-town-1", "sev": "LOW", "kind": "BROKEN", "why": "subject and verb disagree: 'Religious Authorities tells'", "other": ""}
+{"id": "13169", "town": "r2s-mass_migration-town-1", "sev": "MED", "kind": "STATE", "why": "says Merchant Council outweighs everyone who wants its place; GOVERNMENT has Merchant Guilds equally Strong", "other": "13161"}
+{"id": "17453", "town": "r2s-mass_migration-town-1", "sev": "MED", "kind": "PAIR", "why": "vintner sells wine from casks; 14238 says grapes are needed and not brought in", "other": "14238"}
+{"id": "00587", "town": "r2s-mass_migration-town-1", "sev": "MED", "kind": "PAIR", "why": "says Theofanis Chrysoberges governs; 02158 says Sisinnios Laskaris holds the Merchant Council seat", "other": "02158"}
+{"id": "22067", "town": "r2s-slave_revolt-town-2", "sev": "MED", "kind": "LACKS", "why": "names a slave market with an auction platform at the town's heart; HOUSES has no slave market", "other": ""}
+{"id": "22314", "town": "r2s-slave_revolt-town-2", "sev": "MED", "kind": "STATE", "why": "defence arrangements 'ordinary rather than anxious'; safety Critical, stability Unstable, 15450 says arms are turned inward", "other": "15450"}
+{"id": "13636", "town": "r2s-wartime-town-0", "sev": "LOW", "kind": "BROKEN", "why": "slash-joined label 'Military/Guard' used as a name in a sentence", "other": ""}
+{"id": "23101", "town": "r2s-wartime-town-0", "sev": "LOW", "kind": "BROKEN", "why": "slash-joined label 'Military/Guard' used as a name in a sentence", "other": ""}
+{"id": "07362", "town": "r2s-wartime-town-0", "sev": "LOW", "kind": "BROKEN", "why": "slash-joined label 'Military/Guard' used as a name in a sentence", "other": ""}
+{"id": "06326", "town": "r2s-wartime-town-0", "sev": "MED", "kind": "PAIR", "why": "says decisions wait on the whole Town Council; 23101 says Military/Guard makes the decisions that matter, Town Council only Minor", "other": "23101"}
+{"id": "09619", "town": "r2s-wartime-town-0", "sev": "MED", "kind": "LACKS", "why": "gentry outpaced by merchant capital; GOVERNMENT lists no merchant power and HOUSES has no merchant guilds", "other": ""}
+{"id": "21302", "town": "r2s-wartime-town-0", "sev": "LOW", "kind": "BROKEN", "why": "subject and verb disagree: 'The plague years is older'", "other": ""}
+{"id": "02876", "town": "r2s-wartime-town-2", "sev": "MED", "kind": "LACKS", "why": "names a wizard's tower and a fence; HOUSES has neither, DEFENCE magic none", "other": ""}
+{"id": "13607", "town": "r2s-wartime-town-2", "sev": "MED", "kind": "STATE", "why": "says Military/Guard is about as strong as Feudal Appointee; GOVERNMENT has Military/Guard Minor, Feudal Appointee Significant", "other": ""}
+{"id": "13595", "town": "r2s-wartime-town-2", "sev": "MED", "kind": "STATE", "why": "says Military/Guard has the strength and the appointee only the office; Feudal Appointee Significant, Military/Guard Minor", "other": ""}
+{"id": "15073", "town": "r2s-wartime-town-2", "sev": "MED", "kind": "STATE", "why": "says nothing protects the Feudal Appointee; it is the strongest power (Significant), every rival Minor", "other": ""}
+{"id": "01042", "town": "r2s-monster_pressure-town-3", "sev": "MED", "kind": "STATE", "why": "says more fortified than its size suggests; STATE defence is Lightly Defended, no garrison", "other": ""}
+{"id": "23103", "town": "r2s-monster_pressure-town-3", "sev": "LOW", "kind": "BROKEN", "why": "subject and verb disagree: 'Merchant Guilds needs'", "other": ""}
+{"id": "15132", "town": "r2s-monster_pressure-town-3", "sev": "LOW", "kind": "BROKEN", "why": "slash-joined label 'Military/Guard' used as a name in a sentence", "other": ""}
+{"id": "09824", "town": "r2s-recently_betrayed-town-1", "sev": "MED", "kind": "STATE", "why": "says grain stores depend on grain brought in; food ledger: grown 4910 of 4718 needed, imports cover None", "other": ""}
+{"id": "13567", "town": "r2s-recently_betrayed-town-1", "sev": "LOW", "kind": "BROKEN", "why": "slash-joined label 'Military/Guard' used as a name in a sentence", "other": ""}
+{"id": "DONE", "lines": 2973, "blocks": 41, "flags": 138}
