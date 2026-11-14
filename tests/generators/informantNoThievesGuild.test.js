@@ -4,8 +4,8 @@
  * printed in towns whose crime is a smuggling network, a street gang or a fence, and no thieves'
  * guild. The sanitiser in `npcGenerator.js :: mergeNPCLists` rewrote the guild only where no crime
  * stood at all (F4: "a powerful outside interest"); where crime stands without a thieves' guild it
- * now names the crime signal's own (`domain/crimeSignal.js`): its named criminal power, else "the
- * local underworld". No draw.
+ * now speaks of "the local underworld" (R2-CODE-A-5: never a criminal power's name, which a user can
+ * hide by hand; record 331). No draw.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
 import { crimeSignalOf } from '../../src/domain/crimeSignal.js';
@@ -25,6 +25,6 @@ describe('the cold list\'s towns with crime and no thieves\' guild, born as the 
     expect(names.some((n) => /thie|criminal guild/i.test(String(n)))).toBe(false);
     const secrets = (s.npcs || []).map((/** @type {any} */ n) => String(n?.secret?.what || ''));
     expect(secrets.filter((t) => /thieves['’]? guild/i.test(t))).toEqual([]);
-    if (informant) expect(secrets.some((t) => /^On the payroll of (?:the local underworld|a powerful outside interest|the [A-Z][\w ]+) as a silent informant$/.test(t))).toBe(true);
+    if (informant) expect(secrets.some((t) => /^On the payroll of (?:the local underworld|a powerful outside interest) as a silent informant$/.test(t))).toBe(true);
   });
 });

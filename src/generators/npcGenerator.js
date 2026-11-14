@@ -719,7 +719,7 @@ export const mergeNPCLists = (npcs, factions, institutions, _tier, _config) => {
   // criminal faction and no criminal house, no NPC is filed under a "criminal network" or a
   // "Thieves' Guild" (471 and 17 NPCs in 1,000 soak places), and a secret or goal naming a
   // thieves' guild takes the pool's own "a powerful outside interest". No draw.
-  const crimeSignal = crimeSignalOf({ seats: factions, estate: institutions }); const noCrime = !crimeFaction && !crimeSignal.present; const noThievesGuild = ![crimeFaction?.faction, ...crimeSignal.factions, ...crimeSignal.houses].some((n) => /thie|criminal guild/i.test(String(n || ''))); const underworld = crimeSignal.factions.find((n) => /^The [A-Z]/.test(n))?.replace(/^The /, 'the ') || 'the local underworld'; // R2-CODE-A item 7: crime with no thieves' guild names the signal's own (its named power, else the local underworld), never a guild it lacks; one line, so no cited line moves
+  const crimeSignal = crimeSignalOf({ seats: factions, estate: institutions }); const noCrime = !crimeFaction && !crimeSignal.present; const noThievesGuild = ![crimeFaction?.faction, ...crimeSignal.factions, ...crimeSignal.houses].some((n) => /thie|criminal guild/i.test(String(n || ''))); const underworld = 'the local underworld'; // R2-CODE-A item 7, R2-CODE-A-5: crime with no thieves' guild speaks of the local underworld, never a guild it lacks and never a power's NAME (a power can be hidden by hand: record 331); the powers lane's crimeSignal.js :: withTownsOwnUnderworld, word for word; one line, so no cited line moves
   const milFaction = factions.find(
     f =>
       f.category === 'military' ||
