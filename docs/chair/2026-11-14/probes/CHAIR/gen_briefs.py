@@ -4572,6 +4572,84 @@ SEATS2['R3-CODE-C-10'] = dict(
 )
 
 
+SEATS2['W2-WRITE-12'] = dict(
+    title="W2-WRITE-12 · the corpus lane goes on curing: the release bar's thirteen medium rows, a ruling each, then the fresh hits",
+    branch='lane/w2-write-2026-11-13', tip='7fad3c04', statement=False,
+    intro=("You are W2-WRITE-12, the twelfth seat on the corpus lane of the settlement-engine integration program (lane/w2-write-2026-11-13). The lane "
+           "holds the dossier's written lines: ONE source document (docs/content/RECEIPT_POOLS_DOSSIER_STATE.md) from which "
+           "src/data/dossierStateProse/*.generated.js are generated; a line is cured by a declaration (the facts it needs, the crises it is "
+           "declared off) or by rewording, never by striking a middle row. The tenth seat cured the release bar's four HIGH rows on these "
+           "pools; the eleventh cured eight more pool families and every row the chair sent it, made the lane's two UI reds green, and handed "
+           "back at its count with the bar's MEDIUM rows unread. Yours: those rows, a ruling each below, then the rest of its list. A reader is "
+           "reading the lane up to the tenth seat's tip NOW: your commits are a later stage. The lane goes on curing and lands later as a "
+           "point of its own on the joined line: NO whole suite, NO new statement."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. On your lane, docs/chair/2026-11-13/W2-WRITE-HANDBACK-11.md WHOLE (76 lines, some very long: by script): the items as made; the "
+          "veto list; WHAT IS LEFT (your list); FOR THE JOIN; the reds; the rulings copied. And of W2-WRITE-HANDBACK-10.md ONLY the section "
+          "\"How the instruments are re-made\" (the owner-page render over 772 towns; the helpers dr.py and adm.mjs; after.sh).\n"
+          "3. THE BAR'S ROWS FOR THIS LANE (`git fetch origin lane/chair-2026-11-08`; `git show "
+          "origin/lane/chair-2026-11-08:docs/chair/2026-11-14/bar-0-rows/BAR-0-ROWS-corpus.json`, with the README.md beside it): each MEDIUM "
+          "row's sentence, town and the fact against it; the towns are in your 772 (the bar0- seeds).\n"
+          "4. The merge book's section 2m on origin/lane/merge-15-point-49-wip-2026-11-14 (the section headed \"## 2m.\"; by script), before the first "
+          "register you touch."),
+    work=("THE LAWS THESE ROWS FALL UNDER (the chair's, each vetoable by the owner): A LINE THAT NAMES A HOUSE, A ROLE OR A FORCE READS THE "
+          "ROSTER; A LINE THAT NAMES WHERE THE FOOD COMES FROM READS THE FOOD RECORD; A LINE THAT PRESUMES NORMAL TIMES IS DECLARED OFF THE "
+          "CRISIS THAT DENIES IT; A POOL LINE CLAIMS NO VERDICT THAT A BAND ON ITS OWN PAGE CAN DENY, unless an atom reads that band; A LINE "
+          "DOES NOT DENY THE TOWN'S OWN HISTORY. Where no atom of the vocabulary reads the fact a line needs, the line is REWORDED to claim "
+          "only what an atom can hold, or it is named with the atom it lacks: the vocabulary is not widened here.\n"
+          "THE CHAIR'S RULINGS ON THE BAR'S THIRTEEN MEDIUM ROWS (the row numbers are the rows file's; EACH ROW IS READ ON ITS PAGE IN ITS "
+          "TOWN FIRST: a row that reads true at your tip is said so, with the town):\n"
+          "#10 \"… feeds itself with a small margin\" where 45 percent of the food is brought in, and #154 \"… is fed, but only just\" where the "
+          "town grows 139 percent of its need: each line prints only where the food record bears it (grown share and surplus): by a "
+          "declaration if an atom reads them; if the POOL'S KEY chose the wrong pool, the key is not yours: name its file and function for "
+          "the join with the count.\n"
+          "#203 \"A visitor … would not guess at the trouble from the streets\" beside checkpoints and a curfew, #200 \"nobody is watching its "
+          "officials\" beside \"local offices work only under their eye\", #205 \"… paying it from money it had put by\" in a Poor town whose "
+          "revenue the occupiers take: each declared off an occupation, and every other variant of its pool read under an occupation in the "
+          "same commit; #205 also off the two lowest prosperity rungs.\n"
+          "#39 \"A merchant … can store a cargo in the city's warehouses and sell it when the price suits\" under a siege: declared off a "
+          "siege, its pool read whole under one.\n"
+          "#38 \"…'s market grew up on the road's trade\" in a river town, printed cut at its first clause: the route's word reads the "
+          "record's trade access (a slot, or a declaration by route); THE CUT (a sentence printed to its first clause) is named with the "
+          "file that cuts, for the chair.\n"
+          "#278 \"… the less its defenders can do …\" where no force stands: the clause prints only where a force stands, else a twin "
+          "without defenders. #168 \"… has money to spend and spends it on its halls and its defences\" in a thorp with no hall and no wall: "
+          "the line names halls and defences only where the roster holds them and the place is a village or larger.\n"
+          "#279 \"Nothing has come for {S} …\" where the town's history holds an occupation: reworded as a claim about NOW (nothing "
+          "threatens it now), which its pool's own conditions already hold.\n"
+          "#12 \"Nobody … bothers with the open grazing land this year … have turned to other work\" where the herds are kept going by magic "
+          "and still worked: the line says the ground is spent and claims no abandonment, unless an atom holds that the chain has stopped.\n"
+          "#275 \"The trade here is in the moving of things. Very little of what leaves began here.\" where every export is made locally: "
+          "only where the record holds a transit trade; if the pool's key is the fault: named, as #10.\n"
+          "#114 \"Members of {S}'s merchant guild do most of the buying and selling …\" where no merchant guild is on the roster (the record's "
+          "flag is true by inference from a merchant government): the line names a guild's members only where the atom reads a guild HOUSE; "
+          "if the atom itself reads the inferred flag, reword to the merchants (no guild named) and name the atom's file for the join.\n"
+          "THEN, in this order:\n"
+          "- The frontier's deterrence lines beside a Weak bar (the eleventh seat's NAMED row: 6 towns): reworded to the facts alone.\n"
+          "- Step 4 (b) of its list: the 16 corpus lines among the 23 fresh presumed-things hits: each READ where it prints and declared or "
+          "cured; the 7 declaration literals stay for the declaration pass, listed.\n"
+          "- THE RELIGIOUS HOUSES' POOL (DS-ECO-12 INCOME WEIGHT), if your count allows: the data lane had written three `no sacredHouse` lines "
+          "into it (on origin/lane/w2-fix-data-2026-11-13, the same pool's rows 3 to 5); the chair ruled this lane's pool stands whole at the "
+          "join: READ those three lines in three towns each: one that is true where this lane's rows 3 and 4 are silent or weaker may be "
+          "added as a LAST row with its conditions (a declared draw move inside those towns), else say why not.\n"
+          "- LAST, if your count allows: the two cases the tabs lane's silences left empty (a watch-only Invasion row; a force-free Beasts "
+          "row): a line for each ONLY if read true in three towns of the case.\n"
+          "THE METHOD OF THIS LANE, as its seats have worked it: one cause a commit, pushed as made; the count before and after on the 772 "
+          "owner-page births (eligible and drawn, by vid); a guard row in tests/domain/corpusCureGuards.test.js for every condition that takes "
+          "a line off a town (a town of the case, named); EVERY NEW OR CHANGED LINE READ WHERE IT PRINTS in three towns of its cells, a siege, "
+          "a famine or an occupation among them, the smallest and the largest size it reaches; after every cure the lane's own after.sh "
+          "(the generator through its door, the wiring census, the byte baseline by measurement, the presumed-things check, the twelve-birth "
+          "grid, the three gates). A middle row of a pool is never struck. ONE MESSAGE TO THE CHAIR after the first six rows (the tip; each "
+          "row's count before and after; the rows named for the join).\n"
+          "THE HAND-BACK, kept current after every item: docs/chair/2026-11-13/W2-WRITE-HANDBACK-12.md in the form of the eleventh's: the "
+          "items; EVERY NEW OR CHANGED LINE with the towns read (the owner's veto list, and the next reader's); what is left, line by line; "
+          "FOR THE JOIN (the eleventh seat's two rows carried forward with yours); the reds at your tip."),
+    merges='',
+    when="for a stop that blocks everything you have left, after the first six rows (the tip; the counts; the rows named for the join), for the file that cuts #38's sentence, and with your hand-back",
+    turns='',
+)
+
+
 def build2(seat):
     s = _r3c6() if seat == 'R3-CODE-C-6' else SEATS2[seat]
     head = (
