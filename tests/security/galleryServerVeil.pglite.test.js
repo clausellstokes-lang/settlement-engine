@@ -26,6 +26,12 @@
  *       equal the listing's page);
  *   (3) THE RED CONTROL: AT210 carries readable strings on the same rows (the measure of the
  *       phase-1 proposal), so (1) is not vacuous.
+ *   (4) NO PAGE CARRIES A ROLE ITS CARD WITHHOLDS: no tie on any page (the 210 page included: the current client
+ *       over the deployed server's response) copies the role of a person whose own card on that page shows none.
+ * (2) RE-KEYED BY IDENTITY, never loosened (the chair's ruling on VEIL-14's item 0, 2026-11-14): no page changes,
+ * for every key EXCEPT a tie's copy of an end's role (relationships[].npc1Role, .npc2Role) of a person whose own
+ * card on the 210 page shows no role: there the page WITHHOLDS. The 210 page is compared with exactly those copies
+ * removed where the page now lacks them, and with nothing else removed (212's N3, 81350423d; its twin, VEIL-14).
  * And the edges: the `$veil` shapes never raise or leak (the VEIL-FIX review's low finding 2);
  * the sanitiser runs once per link read, counted with an IMMUTABLE stand-in (low finding 1);
  * an anonymous legacy event is veiled fail-closed; the helpers' twins agree with the client's
@@ -171,6 +177,35 @@ function carried(resp, page) {
   }
   return { paths, readable };
 }
+/** A tie's copy of an end's role (`npc1Role` for `from`, `npc2Role` for `to`; master's `npc1Id`, `npc2Id`) where that
+ *  person's own card on the same page shows no role: the role the card withholds, told by the tie (law 4). */
+function rolesItsCardWithholds(page) {
+  const out = [];
+  if (!isRec(page) || !Array.isArray(page.relationships)) return out;
+  const cards = new Map((Array.isArray(page.npcs) ? page.npcs : []).filter((c) => isRec(c) && typeof c.id === 'string').map((c) => [c.id, c]));
+  page.relationships.forEach((t, i) => {
+    if (!isRec(t)) return;
+    for (const [key, end] of [['npc1Role', t.from ?? t.npc1Id], ['npc2Role', t.to ?? t.npc2Id]]) {
+      const card = cards.get(String(end));
+      if (typeof t[key] === 'string' && !(isRec(card) && typeof card.role === 'string')) out.push(`relationships[${keyOf(t, i)}].${key} = ${t[key].slice(0, 60)}`);
+    }
+  });
+  return out;
+}
+/** Law (2)'s reference, re-keyed by identity: the 210 page with exactly the copies law (4) names on it removed where
+ *  the page after 211 and 212 lacks them (the page WITHHOLDS there), and nothing else; `n` counts them. */
+function withheldFrom(ref, now) {
+  const page = structuredClone(ref); let n = 0;
+  if (!isRec(page) || !Array.isArray(page.relationships) || !isRec(now) || !Array.isArray(now.relationships)) return { page, n };
+  const told = new Set(rolesItsCardWithholds(ref).map((x) => x.slice(0, x.indexOf(' = '))));
+  const nowTies = new Map(now.relationships.map((t, i) => [keyOf(t, i), t]));
+  page.relationships.forEach((t, i) => {
+    if (!isRec(t)) return;
+    const k = keyOf(t, i); const mine = nowTies.get(k);
+    for (const key of ['npc1Role', 'npc2Role']) if (told.has(`relationships[${k}].${key}`) && isRec(mine) && !(key in mine)) { delete t[key]; n += 1; }
+  });
+  return { page, n };
+}
 const SERVED_KEYS = new Set(['v', 'mode', 'at', 'groupings']);
 /** The overrides a read sends: each member's two booleans and, at most, the served marker. */
 function overridesOffences(ov) {
@@ -191,7 +226,7 @@ function overridesOffences(ov) {
 describe('the server-side share veil (211) — execution against the real SQL and the real client read', () => {
   /** @type {any} */ let LIVE; /** @type {any} */ let AT210;
   /** @type {any} */ let gen; /** @type {any} */ let veil; /** @type {any} */ let gallery; /** @type {any} */ let compose;
-  const control = { readable: 0, rows: 0 };
+  const control = { readable: 0, rows: 0, withheld: 0 };
 
   beforeAll(async () => {
     LIVE = await buildDb();
@@ -282,6 +317,10 @@ describe('the server-side share veil (211) — execution against the real SQL an
         await setRow(ov, dm);
         const now = await readAll(LIVE.db, slug, link);
         const before = await readAll(AT210.db, slug, link);
+        // (4) no page carries a role its card withholds: the pages after 211 and 212, and the 210 pages
+        for (const [where, page] of [['gallery page', now.gPage], ['link page', now.lPage], ['210 gallery page', before.gPage], ['210 link page', before.lPage]]) {
+          fault(`${tag} ${where} carries a role its card withholds`, rolesItsCardWithholds(page));
+        }
         // (1) nothing the page hides is sent
         const g = carried(now.gRow.data, now.gPage);
         fault(`${tag} gallery.data carried`, g.paths); fault(`${tag} gallery.data readable`, g.readable);
@@ -300,9 +339,12 @@ describe('the server-side share veil (211) — execution against the real SQL an
         if (mode === 'live') livePage210.set(key, before);
         const ref = livePage210.get(key);
         if (ref) {
-          if (JSON.stringify(now.gPage) !== JSON.stringify(ref.gPage)) fault(`${tag} gallery page changed`, carried(ref.gPage, now.gPage).paths.concat(carried(now.gPage, ref.gPage).paths.map((p) => `+${p}`)).concat(['(order or value)']));
+          // re-keyed by identity (the header): the page withholds exactly law (4)'s copies, and changes nothing else
+          const g2 = withheldFrom(ref.gPage, now.gPage); const l2 = withheldFrom(ref.lPage, now.lPage);
+          control.withheld += g2.n + l2.n;
+          if (JSON.stringify(now.gPage) !== JSON.stringify(g2.page)) fault(`${tag} gallery page changed`, carried(g2.page, now.gPage).paths.concat(carried(now.gPage, g2.page).paths.map((p) => `+${p}`)).concat(['(order or value)']));
           if (JSON.stringify(now.gGroupings) !== JSON.stringify(ref.gGroupings)) fault(`${tag} gallery groupings`, [`${now.gGroupings} vs ${ref.gGroupings}`]);
-          if (JSON.stringify(now.lPage) !== JSON.stringify(ref.lPage)) fault(`${tag} link page changed`, carried(ref.lPage, now.lPage).paths.concat(carried(now.lPage, ref.lPage).paths.map((p) => `+${p}`)).concat(['(order or value)']));
+          if (JSON.stringify(now.lPage) !== JSON.stringify(l2.page)) fault(`${tag} link page changed`, carried(l2.page, now.lPage).paths.concat(carried(now.lPage, l2.page).paths.map((p) => `+${p}`)).concat(['(order or value)']));
           if (JSON.stringify(now.lGroupings) !== JSON.stringify(ref.lGroupings)) fault(`${tag} link groupings`, [`${now.lGroupings} vs ${ref.lGroupings}`]);
         }
         if (mode !== 'live' && now.gMode !== 'snapshot') fault(`${tag} gallery mode`, [String(now.gMode)]);
@@ -314,6 +356,7 @@ describe('the server-side share veil (211) — execution against the real SQL an
           const iResp = H.last[0].data;
           fault(`${tag} import readable`, carried(iResp, now.gPage).readable);
           fault(`${tag} import page`, carried(imp.settlement, now.gPage).paths);
+          fault(`${tag} import page carries a role its card withholds`, rolesItsCardWithholds(imp.settlement));
           const mapId = `cccccccc-0000-0000-0000-${String(n + 1).padStart(12, '0')}`;
           await LIVE.db.query(`insert into public.saved_maps (id, user_id, name, map_data, is_public, public_slug, share_kind, gallery_share_campaign)
             values ($1, $2, 'map', $3, true, $4, 'map_with_campaign', true) on conflict do nothing`, [mapId, OWNER, JSON.stringify({ campaign: { settlementIds: [id] } }), `map-${n}`]);
@@ -324,6 +367,7 @@ describe('the server-side share veil (211) — execution against the real SQL an
           else {
             fault(`${tag} map member shows what the listing hides`, carried(member, now.gPage).readable);
             fault(`${tag} map member lacks what the listing shows`, carried(now.gPage, member).paths);
+            fault(`${tag} map member carries a role its card withholds`, rolesItsCardWithholds(member));
           }
         }
       }
@@ -335,6 +379,40 @@ describe('the server-side share veil (211) — execution against the real SQL an
   it('THE RED CONTROL: at 210 the same rows carry what their pages hide (the pin is live)', () => {
     expect(control.rows).toBeGreaterThan(0);
     expect(control.readable).toBeGreaterThan(0);
+  });
+
+  it('LAW (4), PLANTED: no page carries a role its card withholds, after 211 and 212 and at 210 (the chair\'s ruling on VEIL-14\'s item 0)', async () => {
+    // THE CLASS OF THE 156: four veiled faces (a house record not stamped public: 206), each holding a role in a form the
+    // earlier markers lacked, each switched off by hand on a Reveal-DM share; each tie copies its end's role.
+    // CONTROLS: p2 is revealed and holds a role; p4 is switched off by hand and its card (an open face) holds one.
+    const MARKS = ['ROLEMARK İß ✦', 'ΡΟΛΟΣ σφραγίδα', 'РОЛЬ печать', '✦✧◆★'];
+    const veiled = MARKS.map((role, i) => ({ id: `v${i}`, name: `Veiled ${i}`, role, institution: { kind: 'house', key: 'rookery' } }));
+    const town = { name: 'Role crossing', tier: 'town',
+      npcs: [...veiled, { id: 'p2', name: 'Other', role: 'the smith' }, { id: 'p4', name: 'Bohdan', role: 'the ferryman' }],
+      relationships: [...veiled.map((v, i) => (i % 2 ? { id: `t${i}`, from: 'p2', to: v.id, npc1Role: 'the smith', npc2Role: v.role }
+        : { id: `t${i}`, from: v.id, to: 'p2', npc1Role: v.role, npc2Role: 'the smith' })),
+      { id: 't9', from: 'p4', to: 'p2', npc1Role: 'the ferryman', npc2Role: 'the smith' }] };
+    const ov = veil.writeShareVeil({}, [...veiled.map((v) => ({ address: `card:npc:${v.id}`, hidden: true })), { address: 'card:npc:p4', hidden: true }],
+      { mode: 'live', at: '2026-11-11T00:00:00.000Z' });
+    expect([ov.v0, ov.v3, ov.p2, ov.p4]).toEqual([{ revealDm: false }, { revealDm: false }, undefined, { revealDm: false }]);
+    for (const { db } of [LIVE, AT210]) {
+      await db.query(`insert into public.settlements (id, user_id, name, tier, data, is_public, public_slug, published_at, unlisted_slug, visibility, gallery_importable, gallery_member_overrides, gallery_share_dm)
+        values ('abababab-0000-0000-0000-000000000001', $1, $2, 'town', $3, true, 'role-p', now(), 'role-l', 'unlisted', true, $4, true)`, [OWNER, town.name, JSON.stringify(town), JSON.stringify(ov)]);
+    }
+    const now = await readAll(LIVE.db, 'role-p', 'role-l');
+    const before = await readAll(AT210.db, 'role-p', 'role-l');
+    const pages = { 'gallery page': now.gPage, 'link page': now.lPage, '210 gallery page': before.gPage, '210 link page': before.lPage };
+    const told = Object.entries(pages).flatMap(([where, page]) => rolesItsCardWithholds(page).map((x) => `${where}: ${x}`));
+    const text = JSON.stringify([pages, now.gRow, now.lResp]);
+    expect({ told, marks: MARKS.filter((m) => text.includes(m)) }).toEqual({ told: [], marks: [] });
+    // anchored: the reads drew the planted town, and the controls arrive on both Reveal-DM pages
+    for (const page of [now.gPage, before.gPage]) {
+      const byId = new Map(page.relationships.map((t) => [t.id, t]));
+      expect([byId.get('t0')?.npc2Role, byId.get('t1')?.npc1Role, byId.get('t9')?.npc1Role, byId.get('t9')?.npc2Role]).toEqual(['the smith', 'the smith', 'the ferryman', 'the smith']);
+    }
+    // THE CHECK IS LIVE: the copy planted back on a page is found
+    const planted = structuredClone(now.gPage); planted.relationships.find((t) => t.id === 't0').npc1Role = MARKS[0];
+    expect(rolesItsCardWithholds(planted)).toEqual([`relationships[id=t0].npc1Role = ${MARKS[0]}`]);
   });
 
   it('a share past the client\'s clamp: the server reads the same last 2,000 well-formed deltas the page reads', async () => {

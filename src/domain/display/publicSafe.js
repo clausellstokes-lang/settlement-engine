@@ -655,7 +655,9 @@ export function toPublicSafe(settlement, { full = false, memberOverrides = null 
         const ov = overrides[key];
         const effReveal = ov && typeof ov.revealDm === 'boolean' ? ov.revealDm : full;
         const out = effReveal ? (fullByKey.get(key) || npc) : publicCard(npc);
-        if (!effReveal && typeof out.id === 'string' && !('role' in out)) roleless.add(out.id);
+        // COHERENCE-VEIL-14: no role is a role with no value, the key absent or holding none. publicNpc writes the key
+        // with no value, and the server judges the SENT card, where such a key is not sent (`n ? 'role'`); null is held.
+        if (!effReveal && typeof out.id === 'string' && out.role === undefined) roleless.add(out.id);
         return out;
       })
       .filter(npc => npc.name || npc.role);

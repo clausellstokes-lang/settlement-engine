@@ -366,10 +366,11 @@ describe('COHERENCE-VEIL-6: a second home of a thing hidden by hand is never sen
             for (const src of openRows) if (!sentRows.has(src) && !names.some((h) => fold(src).includes(h.f))) sent.push(`${label} dm=${dm} ${mode} ${read}: an open income row (${src}) was taken`);
           }
           // COHERENCE-VEIL-8 (N3): a tie's copy of an end's role, where that person's own entry in the same response
-          // carries no role (a person the share does not reveal, sent as a veiled public card: 206)
+          // carries no role (a person the share does not reveal, sent as a veiled public card: 206). COHERENCE-VEIL-14: by
+          // the VALUE, as the server judges the sent card: the twin's card can hold the key with no value, which no JSON sends
           const towns = (v) => (Array.isArray(v) ? v.flatMap(towns) : isRec(v) ? [...(Array.isArray(v.npcs) && Array.isArray(v.relationships) ? [v] : []), ...Object.values(v).flatMap(towns)] : []);
           for (const t of towns(body)) {
-            const roleless = new Set(t.npcs.filter((x) => isRec(x) && typeof x.id === 'string' && !('role' in x)).map((x) => x.id));
+            const roleless = new Set(t.npcs.filter((x) => isRec(x) && typeof x.id === 'string' && x.role === undefined).map((x) => x.id));
             for (const r of t.relationships.filter(isRec)) {
               for (const [end, key] of [[r.from ?? r.npc1Id, 'npc1Role'], [r.to ?? r.npc2Id, 'npc2Role']]) {
                 if (mode !== 'houses' && roleless.has(String(end)) && typeof r[key] === 'string') sent.push(`${label} dm=${dm} ${mode} ${read}: a tie's copy of a role its person's entry withholds, at relationships[].${key}`);
@@ -532,5 +533,65 @@ describe('COHERENCE-VEIL-6: a second home of a thing hidden by hand is never sen
       }
     }
     expect([...new Set(sent)]).toEqual([]);
+  }, TOWN_TIMEOUT_MS);
+
+  it('THE ROLE BY ITS VALUE (COHERENCE-VEIL-14): on a Reveal-DM share, the ties of a person switched off by hand whose card carries no role (the twin\'s card holds the key with no value) send no copy of one, by the server, the client\'s twin or the page; a revealed person, and a person switched off whose card holds a role, keep the tie\'s copy', async () => {
+    // THE HAND TOWN: p1 carries no role and is switched off by hand; each of its ties copies a role in a form the earlier
+    // markers lacked (a dotted capital I and a sharp s, Greek, Cyrillic, symbols only), at either end. THE CONTROLS: p2
+    // (a role) and p3 (none) are revealed (no override); p4 is switched off by hand and its card holds a role
+    const MARKS = ['ROLEMARK İß ✦', 'ΡΟΛΟΣ σφραγίδα', 'РОЛЬ печать', '✦✧◆★'];
+    const town = { name: 'Role crossing', tier: 'town',
+      npcs: [{ id: 'p1', name: 'Nataşa', category: 'x' }, { id: 'p2', name: 'Other', role: 'the smith' },
+        { id: 'p3', name: 'Ilse', category: 'x' }, { id: 'p4', name: 'Bohdan', role: 'the ferryman' }],
+      relationships: [{ id: 't1', from: 'p1', to: 'p2', npc1Role: MARKS[0], npc2Role: 'the smith' },
+        { id: 't2', from: 'p2', to: 'p1', npc1Role: 'the smith', npc2Role: MARKS[1] },
+        { id: 't3', from: 'p1', to: 'p4', npc1Role: MARKS[2], npc2Role: 'the ferryman' },
+        { id: 't4', from: 'p3', to: 'p1', npc1Role: 'the quiet reeve', npc2Role: MARKS[3] }] };
+    const CONTROLS = [['p1>p2', 'npc2Role', 'the smith'], ['p2>p1', 'npc1Role', 'the smith'], ['p1>p4', 'npc2Role', 'the ferryman'], ['p3>p1', 'npc1Role', 'the quiet reeve']];
+    const towns = (v) => (Array.isArray(v) ? v.flatMap(towns) : isRec(v) ? [...(Array.isArray(v.npcs) && Array.isArray(v.relationships) ? [v] : []), ...Object.values(v).flatMap(towns)] : []);
+    const ends = (r) => `${r.from ?? r.npc1Id}>${r.to ?? r.npc2Id}`;
+    const canon = (v) => (Array.isArray(v) ? v.map(canon) : isRec(v) ? Object.fromEntries(Object.keys(v).filter((k) => v[k] !== undefined).sort().map((k) => [k, canon(v[k])])) : v);
+    const tiesOf = (body) => JSON.stringify(canon(towns(body).map((t) => t.relationships)));
+    const db = LIVE.db; H.db = db;
+    const sent = []; const lost = []; const unequal = []; let reads = 0;
+    for (const [shape, record] of Object.entries(shapes(town))) {
+      const pub = veil.galleryPayloadFor(record, { shareDm: true, memberOverrides: {} });
+      for (const mode of ['live', 'snapshot']) {
+        n += 1;
+        const id = `5ec0de60-0000-0000-0000-${String(n).padStart(12, '0')}`;
+        const ov = veil.writeShareVeil({}, [{ address: 'card:npc:p1', hidden: true }, { address: 'card:npc:p4', hidden: true }],
+          mode === 'snapshot' ? { mode, at: '2026-11-01T00:00:00.000Z', snapshot: pub } : { mode: 'live', at: '2026-11-01T00:00:00.000Z' });
+        expect([ov.p1, ov.p2, ov.p3, ov.p4]).toEqual([{ revealDm: false }, undefined, undefined, { revealDm: false }]);
+        await db.query(`insert into public.settlements (id, user_id, name, tier, data, is_public, public_slug, published_at, unlisted_slug, visibility,
+            gallery_member_overrides, gallery_share_dm, gallery_importable)
+          values ($1, $2, $3, $4, $5, true, $6, now(), $7, 'unlisted', $8, true, true)`,
+        [id, OWNER, record.name, record.tier, JSON.stringify(record), `sh${n}`, `shl${n}`, JSON.stringify(ov)]);
+        await db.exec(`set test.uid = '';`);
+        const resp = { gallery: (await db.query('select * from public.get_gallery_dossier($1)', [`sh${n}`])).rows[0] };
+        await db.exec(`set test.uid = '${READER}';`);
+        resp.import = (await db.query('select * from public.import_gallery_dossier($1)', [`sh${n}`])).rows[0];
+        await db.exec(`set test.uid = '';`);
+        // the client's twin as the guard computes it (sharesOf), and the client's read path over the stored row (the page)
+        resp.client = veil.projectShareVeil(veil.galleryPayloadFor(record, { shareDm: true, memberOverrides: ov }), ov);
+        H.uid = '';
+        resp.page = await gallery.fetchPublicDossier(`sh${n}`);
+        const label = `${shape} ${mode}`;
+        for (const [read, body] of Object.entries(resp)) {
+          reads += 1;
+          if (!body) { sent.push(`${label} ${read}: NO ROW`); continue; }
+          const text = JSON.stringify(body);
+          for (const m of MARKS) if (text.includes(m) || text.toLowerCase().includes(m.toLowerCase())) sent.push(`${label} ${read}: the tie's copy "${m}" of a role p1's card does not carry`);
+          const found = towns(body);
+          if (!found.length) lost.push(`${label} ${read}: no town`);
+          for (const t of found) {
+            const byEnds = new Map(t.relationships.filter(isRec).map((r) => [ends(r), r]));
+            for (const [tie, key, want] of CONTROLS) if (byEnds.get(tie)?.[key] !== want) lost.push(`${label} ${read}: the control "${want}" left the tie ${tie}`);
+          }
+        }
+        for (const read of ['gallery', 'import']) if (resp[read] && tiesOf(resp.client) !== tiesOf(resp[read])) unequal.push(`${label}: the twin's ties are not the ${read} read's: ${tiesOf(resp.client)} != ${tiesOf(resp[read])}`);
+      }
+    }
+    expect(reads).toBe(2 * 2 * 4);
+    expect({ sent: [...new Set(sent)], lost, unequal }).toEqual({ sent: [], lost: [], unequal: [] });
   }, TOWN_TIMEOUT_MS);
 });
