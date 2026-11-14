@@ -1,6 +1,6 @@
 # W2-FIX-DATA-11: the data lane goes on curing (kept current after every item)
 
-**State: IN PROGRESS.** Items 1 (the three named reds) and 2 (the draft shift record) DONE; item 3 (the message) next; item 4 (the bar's twenty-one rows) ranked below, cures to follow. Every figure EXECUTED unless marked PLAUSIBLE.
+**State: IN PROGRESS.** Items 1, 2 and 3 DONE; item 4: the rank DONE (section 4), cure 1 (#185) pushed; the next cures follow the rank.
 
 **Seat.** The eleventh seat on `lane/w2-fix-data-2026-11-13`, from `a1481aaf7` (read back from origin first: the brief's tip, no stop). Chair: `session_01ACmDYZrFEVXyZEUg1NDxxC`. Brief: `origin/lane/chair-2026-11-08:docs/chair/2026-11-14/briefs/BRIEF-W2-FIX-DATA-11.md`, self-contained. A reader reads this lane at a1481aaf7: nothing at or below it is rewritten.
 
@@ -29,17 +29,45 @@ Unsigned (owner fields and seat blank); no golden's door run. The 51 registered 
 - UNMOVED: the other 48, green at both ends.
 - The causes: the lane's declared families of HANDBACK-10 section 5, written into the record.
 
-## 3. The message to the chair
-
-(after this file's first push)
+## 3. The message to the chair: SENT 08:42 UTC (the tip 4a3597e39, the three reds, the record's moved surfaces).
 
 ## 4. The bar's twenty-one rows
 
-(ranked below, after the message)
+**THE RANK (EXECUTED, `rank.mjs` over the 730 births at 4a3597e39: the towns whose RECORD prints the row's sentence, and of those the towns where the row's fact holds).** The record field is the one the card, the Services tab, the PDF view model and the Foundry journal print (read verbatim on all four for #185 below).
+
+| row | writer (at the tip) | prints | false | the fact |
+|---|---|---|---|---|
+| #64 / #191 | institutionServices.js (brick service) | 159 | 156 | the brickmaker lacks clay (resourceAnalysis.gaps) |
+| #185 | institutionDescVariants.js (smelter; the rank read one of three texts: 47; all three: 159 of 241) | 68 | 47 | no mine 45, no smith 11 |
+| #9 | institutionServices.js (mine service "Ore cut underground") | 97 | 73 | no mining chain working |
+| #6 | institutionalCatalog.js (the Mine's text; at the tip "A mine of shafts and adits ... Where the deposits ran deep") | 97 | 73 | the same; the tip's text is past-tense, READ: the bar's sentence no longer prints |
+| #158 | generators/historyGenerator.js (the compact's grain clause) | 20 | 17 | no shortage (food secure 17, calm 8) |
+| #233 | arrivalProse.js ("Sacks of herbs and spices") | 12 | 12 | no spices import |
+| #68 | institutionServices.js (livestock auctions) | 151 | 12 | siege 8, famine 5 |
+| #180 | stressTypes.js through crisisCast.js (the collaborator) | 29 occupied | 12 | the collaborator is the occupation's own face |
+| #73 | institutionServices.js (toll) | 159 | 10 | siege |
+| #67 | institutionServices.js (the year's fair) | 179 | 8 | siege |
+| #156 | institutionDescVariants.js (thorp "all of it for the table") | 39 | 7 | grain exported |
+| #36 | arrivalProse.js (salt fish barrels) | 19 | 6 | siege 4, famine 3, fish failed 3 |
+| #51 | institutionDescVariants.js (brewery "for regional sale") | 92 | 6 | siege 3, famine 4 |
+| #71 | institutionServices.js (fresh fish retail) | 144 | 5 | fish failed or absent |
+| #54 | institutionDescVariants.js (coaching inn "Built for the road") | 57 | 4 | siege |
+| #60 | institutionDescVariants.js (ferry "Carts ... wait their turn") | 22 | 3 | siege |
+| #157 | institutionDescVariants.js (reeve "His writ") | 4 | 3 | a woman holds the post |
+| #59 | institutionalCatalog.js (fairs "International merchants") | 57 | 3 | siege |
+| #57 | institutionDescVariants.js (fish market "the morning's catch") | 40 | 1 | fish failed |
+| #2 | institutionVocabulary.js (display: "Hundreds of houses of worship") | (render) | 1 | the count "50-100+" |
+
+**THE CURES (widest cause first).**
+
+1. **#185, the smelter: CURED for its two variants** (`930836ac5`, with the pool rows `c663cfa23` and the lighting census `010a99a78`). The two PAIRS texts declare `needs ["institution: mine", "institution: smith"]`, each with a twin naming neither. Counts on the re-born 730: variants false 102 -> 0 (103 twins; originals kept in 42 towns holding both). NEW LINES (the owner's veto list), each read on the card, the PDF view model and the Foundry journal: "Charcoal furnaces reduce raw ore to refined metal, cast in bars for whoever will buy them." (r2s-under_siege-town-1, town, siege; r2r-town-38; r2r-metropolis-4); "Refines crude ore into workable metal over charcoal fire, and sells it on by the bar." (r2s-famine-town-0, town, famine; r2r-town-1; r2r-metropolis-1). Guard: `tests/data/w2FixData11Rows.test.js` (r2r-town-1, r2r-town-9 no mine; r2r-town-38 no smith; r2r-town-11 keeps it), red first (3 of 3), green after. Doors: presumed-things fresh 49 unchanged, 2 stale `smith` rows out by `--shrink`; grid 0 rises; eslint, domain-strict, type ratchet green. **A CALL FOR THE CHAIR'S VETO:** the declaration makes the three Smelter pools drawn, and the pool guard then reads them unregistered; they took rows by the door's own `--bank-new` (no other row touched, no ceiling raised; the register's pool tally 931 -> 934), as this lane's 4c4a1c269 did. **PARKED with its word `house: mine`:** the catalogue's own text "Converts raw ore ... The industrial intermediate between mine and smithy." (57 towns false): keying its sibling set in this lane's file writes its literal there, a NEW `house: mine` line the walker cannot credit (`house: mine` has no atom; it waits for a factsOf getter), and importing the catalogue into the variants file would move the generation worker's signed bundle.
 
 ## 9. FOR THE JOIN
 
 - Carried from HANDBACK-10 section 9, unchanged.
+- #180 (`src/domain/crisis/crisisCast.js`, changed by lane/r2-code-b-2026-11-13): the occupation's `collaborator` role is filled by the `face` (the occupying governor) in 12 of 29 occupied towns; the one-line change: in the cast's collaborator pick, exclude the face's id (a power that gains, its most ambitious member OTHER than the face, or none).
+- #59 and #6 (`src/data/institutionalCatalog.js`, changed by the upkeep lanes): the fairs' "International merchants. Letters of credit accepted." under a siege (3 towns; a siege twin keyed in institutionDescVariants.js would write the catalogue literal there: the same walker shape as the smelter's); #6 read at the tip as no longer printing the bar's sentence.
+- #2 (`src/domain/display/institutionVocabulary.js`, a display file outside the lane): already named in HANDBACK-10 section 9.
 
 ## 10. The rulings this seat works to
 
