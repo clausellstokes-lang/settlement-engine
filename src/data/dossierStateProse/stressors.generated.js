@@ -2911,7 +2911,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "official",
-          "text": "Each week {settlement} has more hungry mouths and less to give them, and those in charge have no grain left to promise.",
+          "text": "Each week more people in {settlement} go hungry, and those in charge have not stopped it.",
           "slots": [
             "settlement"
           ],

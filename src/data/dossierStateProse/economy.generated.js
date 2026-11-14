@@ -4332,7 +4332,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "Some of {settlement}'s {chain} depends on supplies from elsewhere, and those supplies are failing: what should come down the line arrives short.",
+          "text": "Some of {settlement}'s work draws on its {chain}, which is in trouble itself, so the work that depends on it is at risk too.",
           "slots": [
             "settlement",
             "chain"
@@ -4344,7 +4344,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "Work is slowing at {settlement} for a fault that is not all its own: its {chain} is short of what it needs from upstream.",
+          "text": "Trouble in {settlement}'s {chain} puts what depends on it at risk.",
           "slots": [
             "settlement",
             "chain"

@@ -1605,7 +1605,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "The {seat} at {settlement} holds because {faction} is still the heavier of the two, and the weighing is done again every season.",
+          "text": "The {seat} at {settlement} holds because no rival yet outweighs {faction}, and the weighing is done again every season.",
           "slots": [
             "seat",
             "settlement",
@@ -1617,7 +1617,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
       "riskLabel: Contested": [
         {
           "angle": "ledger",
-          "text": "{counterpart} now has more people behind it than {faction} at {settlement}; {faction} keeps the hall only because the office is still its own.",
+          "text": "{counterpart} could now take the hall from {faction} at {settlement}; {faction} keeps it only because the office is still its own.",
           "slots": [
             "counterpart",
             "faction",
@@ -1636,7 +1636,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "The challenger at {settlement} is now the stronger side, but the {seat} has not changed hands yet. What happens next depends on who moves first.",
+          "text": "The challenger at {settlement} could now take the hall, but the {seat} has not changed hands yet. What happens next depends on who moves first.",
           "slots": [
             "settlement",
             "seat"
@@ -2057,6 +2057,9 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
       "council": [
         {
           "angle": "ledger",
+          "marks": [
+            "no ruler: lord"
+          ],
           "text": "Decisions at {settlement} are slow because the whole {seat} must agree, and once made they are rarely undone.",
           "slots": [
             "settlement",
@@ -2066,6 +2069,9 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "no ruler: lord"
+          ],
           "text": "At {settlement} the town's business goes to the whole {seat}, and everybody has learned how long the answer takes.",
           "slots": [
             "settlement",
@@ -2075,7 +2081,10 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "The {seat} at {settlement} worries less about rivals than about the town turning on it.",
+          "marks": [
+            "no crisis: succession"
+          ],
+          "text": "The {seat} at {settlement} watches the town's temper closely: what it fears is the town turning on it.",
           "slots": [
             "seat",
             "settlement"
@@ -2084,6 +2093,9 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
+          "marks": [
+            "no ruler: lord"
+          ],
           "text": "The {seat} at {settlement} has left obvious decisions untaken because its members cannot agree on them.",
           "slots": [
             "seat",
@@ -2110,7 +2122,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "What threatens the {seat} at {settlement} is heresy more than any rival: a rival creed challenges its right to govern, and everybody involved knows it.",
+          "text": "Heresy is what the {seat} at {settlement} fears: its right to govern rests on the faith, and doubt about the faith is doubt about the {seat}.",
           "slots": [
             "seat",
             "settlement"
@@ -2503,7 +2515,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "marks": [
             "guardPresence"
           ],
-          "text": "{settlement} has people paid to keep order, and they keep the order the gang bosses want; a complaint against the bosses goes nowhere.",
+          "text": "{settlement} has people paid to keep order, but the gang bosses keep their own order alongside them, and charge the town for it.",
           "slots": [
             "settlement"
           ],
@@ -2514,7 +2526,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "colour"
+            "no crisis: occupied"
           ],
           "text": "The trading houses at {settlement} pay for their own armed guards, a private army that keeps order wherever the houses do business. Where the guards and the {seat} disagree, the guards usually win.",
           "slots": [
@@ -2526,7 +2538,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         {
           "angle": "counterforce",
           "marks": [
-            "mercenary"
+            "mercenary",
+            "no crisis: occupied"
           ],
           "text": "Order at {settlement} is kept by a private army of hired swords on the trading houses' pay. They answer to whoever pays them, not to the {seat}.",
           "slots": [
@@ -3052,7 +3065,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
             "tier: ≥ village",
             "crisis: wartime"
           ],
-          "text": "With the war taking everyone's attention, {settlement}'s officials are left to themselves, and an underpaid official left alone is easily bought.",
+          "text": "With the war taking everyone's attention, {settlement}'s officials are left to themselves, and on what they are paid a purse is hard to refuse.",
           "slots": [
             "settlement"
           ],
@@ -3069,7 +3082,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
             "no crisis: insurgency",
             "no crisis: slave_revolt"
           ],
-          "text": "{settlement}'s watch keeps the streets, but nobody keeps an eye on the officials, and they are paid too little to refuse a purse.",
+          "text": "{settlement} has a watch, but nobody keeps an eye on the officials, and they are paid too little to refuse a purse.",
           "slots": [
             "settlement"
           ],
@@ -3282,9 +3295,9 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "colour"
+            "no crisis: under_siege"
           ],
-          "text": "Goods reach {settlement} around the customs rather than through them. The cargo lists are false, the landing places are unofficial, and the duties the town should collect are never paid.",
+          "text": "Goods reach {settlement} unrecorded: the cargo lists are false, and the dues owed on them are never paid.",
           "slots": [
             "settlement"
           ],
@@ -3293,7 +3306,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         {
           "angle": "street",
           "marks": [
-            "gate"
+            "gate",
+            "no crisis: under_siege"
           ],
           "text": "A share of what arrives at {settlement} never appears at the gate, and the share is not small.",
           "slots": [
@@ -3304,9 +3318,9 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         {
           "angle": "counterforce",
           "marks": [
-            "colour"
+            "no crisis: under_siege"
           ],
-          "text": "The customs at {settlement} keep proper books, and a good share of goods goes around them anyway.",
+          "text": "A good share of the goods that reach {settlement} pays none of the dues owed on it.",
           "slots": [
             "settlement"
           ],
@@ -3490,7 +3504,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "angle": "ledger",
           "marks": [
             "dm-only",
-            "colour"
+            "no crisis: occupied"
           ],
           "text": "{faction} answers to the {seat} at {settlement} in name only: whatever the {seat} plans needs its consent, and that consent is bargained for.",
           "slots": [
@@ -3506,10 +3520,10 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
             "dm-only",
             "colour"
           ],
-          "text": "At {settlement} the {seat} gives no order {faction} would refuse, and whoever can turn {faction} turns the place's armed strength with it.",
+          "text": "Nothing the {seat} orders at {settlement} goes ahead if {faction} refuses it, and whoever can win {faction} over can steer the place.",
           "slots": [
-            "settlement",
             "seat",
+            "settlement",
             "faction"
           ],
           "vid": 4
