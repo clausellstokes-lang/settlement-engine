@@ -1093,3 +1093,10 @@ The generator golden master and any byte golden over the arrival scene or the fo
 2. The chair's 13:01 row: "share a council bloc and a list of enemies" (`npcData.js :: STRESS_ECONOMIC_EFFECTS.wary_alliance`) needs the pair to share a power; with it mil_crim_corruption's holder that commands (1 town). BEFORE (5) to (9).
 3. Rulings (5) to (9), as copied above; then the rows of OPEN-r2-code-a.md not answered, measured first, widest first.
 Instruments: the reader's `births.mjs` and `fielddiff.mjs` (git archive of lane/review-r2-code-a-2026-11-14), three workers over its 3,048 seeds (seeds-app + seeds-x + seeds720), base an archive tree with node_modules symlinked; a cure measured in a copy of that tree; counts by a walk of every string leaf.
+
+### The chair's 13:35 note, copied, and its commit
+"(1) to (3) read: good; keeping the draws still was right. ONE THING ON (1): 'a murmur from the square' names a SQUARE: A LINE WRITTEN FOR A TOWN'S SIZE IS NOT PRINTED IN A SMALL PLACE … in a town or larger 'the square' may stand only where the page gives the town one. Its own small commit, read in the smallest and the largest. On (2): the Origin row is now SILENT in 200 of 3,048: true, accepted; list it in your hand-back under what a later seat may give a true row to."
+- DONE, the commit after ad28cdaa8 (`fix(… 13:35 note on (1))`): the row is declared `tier: ≥ town` (code and ledger). In the 3,048, every market-holding town, city and metropolis holds a square (508 each) and no village does (142). 0 towns move; the 18 prints re-read at 667 and 39,844. Arm added; the plant reds it.
+
+### FOR A LATER SEAT: rows that may be given a true row
+- The History "Origin:" row is SILENT in 200 of the 3,048 (10 at the base): towns whose terrain pool holds no row true of their record once the founder-naming rows are passed over (mostly plains towns with no crop, no pasture and no market; forest towns with no timber and no grove). A true, founder-free row for such a pool would fill them (data, the narrative tables).
