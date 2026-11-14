@@ -1,0 +1,2921 @@
+{
+ "families": [
+  {
+   "fam": "Economic Flows: Economic Flows (# active · # impaired)▲?What is made here and what it depends on.",
+   "towns": 200,
+   "readByHand": [
+    "r2s-under_siege-thorp-3",
+    "rr3w-metropolis-famine-rand-1",
+    "r2r-hamlet-0"
+   ],
+   "scripted": true,
+   "trueTowns": 120,
+   "falseTowns": 80,
+   "verdict": "MIXED",
+   "severity": "MED",
+   "kind": "e",
+   "examples": [
+    {
+     "seed": "r2r-metropolis-14",
+     "sentence": "Economic Flows (46 active · 22 impaired)",
+     "fact": "the header counts 22 impaired; the section prints 26 Impaired chips (22 chain cards + 4 service cards, e.g. \"Banking & FinanceServiceExportImpaired\")"
+    },
+    {
+     "seed": "r2s-under_siege-town-2",
+     "sentence": "Economic Flows (10 active · 4 impaired)",
+     "fact": "the header counts 4 impaired; the section prints 5 Impaired chips (4 chain cards + 1 service cards, e.g. \"Banking & FinanceServiceExportImpaired\")"
+    },
+    {
+     "seed": "r2s-under_siege-town-3",
+     "sentence": "Economic Flows (16 active · 9 impaired)",
+     "fact": "the header counts 9 impaired; the section prints 10 Impaired chips (9 chain cards + 1 service cards, e.g. \"Banking & FinanceServiceExportImpaired\")"
+    },
+    {
+     "seed": "r2s-under_siege-city-0",
+     "sentence": "Economic Flows (34 active · 16 impaired)",
+     "fact": "the header counts 16 impaired; the section prints 23 Impaired chips (16 chain cards + 7 service cards, e.g. \"Religious RevenueServiceExportImpaired\")"
+    },
+    {
+     "seed": "r2s-under_siege-city-1",
+     "sentence": "Economic Flows (17 active · 7 impaired)",
+     "fact": "the header counts 7 impaired; the section prints 9 Impaired chips (7 chain cards + 2 service cards, e.g. \"Banking & FinanceServiceExportImpaired\")"
+    }
+   ],
+   "note": "Fault towns by severity/kind: MED e=80"
+  },
+  {
+   "fam": "NEED: {services} here depend on {goods} brought in, which a siege, a closed road or a blockade would cut off.",
+   "towns": 712,
+   "readByHand": [
+    "r2s-politically_fractured-hamlet-1",
+    "r2r-metropolis-8",
+    "r2r-city-44"
+   ],
+   "scripted": true,
+   "trueTowns": 658,
+   "falseTowns": 54,
+   "verdict": "MIXED",
+   "severity": "MED",
+   "kind": "a",
+   "examples": [
+    {
+     "seed": "r2r-town-2",
+     "sentence": "Law enforcement, patrol and gate control here depend on iron brought in, which a siege, a closed road or a blockade would cut off.",
+     "fact": "no walls or gates on the roster (Town watch is the only defence house); the Defense tab says \"Unfortified. No perimeter walls. Defenders cannot control entry points\""
+    },
+    {
+     "seed": "r2r-town-19",
+     "sentence": "Law enforcement, patrol and gate control here depend on iron brought in, which a siege, a closed road or a blockade would cut off.",
+     "fact": "no walls or gates on the roster (Town watch is the only defence house); the Defense tab says \"Unfortified. No perimeter walls. Defenders cannot control entry points\""
+    },
+    {
+     "seed": "r2r-town-24",
+     "sentence": "Law enforcement, patrol and gate control here depend on iron brought in, which a siege, a closed road or a blockade would cut off.",
+     "fact": "no walls or gates on the roster (Town watch is the only defence house); the Defense tab says \"Unfortified. No perimeter walls. Defenders cannot control entry points\""
+    },
+    {
+     "seed": "r2r-town-25",
+     "sentence": "Law enforcement, patrol and gate control here depend on iron brought in, which a siege, a closed road or a blockade would cut off.",
+     "fact": "no walls or gates on the roster (Town watch is the only defence house); the Defense tab says \"Unfortified. No perimeter walls. Defenders cannot control entry points\""
+    },
+    {
+     "seed": "r2r-town-30",
+     "sentence": "Law enforcement, patrol and gate control here depend on iron brought in, which a siege, a closed road or a blockade would cut off.",
+     "fact": "no walls or gates on the roster (Town watch is the only defence house); the Defense tab says \"Unfortified. No perimeter walls. Defenders cannot control entry points\""
+    }
+   ],
+   "note": "Also LOW in 28 towns (wool or flax is also printed under   as well as on the Imports list:  ; medicinal herbs is also printed under   as well as on the Imports list). Fault towns by severity/kind: MED a=54, LOW g=28"
+  },
+  {
+   "fam": "Economic Flows: All (#)Issues (#)Entrepôt (#)Services (#)",
+   "towns": 48,
+   "readByHand": [
+    "rr3w-town-under_siege-river-0",
+    "r2r-metropolis-14"
+   ],
+   "scripted": true,
+   "trueTowns": 1,
+   "falseTowns": 47,
+   "verdict": "MIXED",
+   "severity": "MED",
+   "kind": "e",
+   "examples": [
+    {
+     "seed": "r2r-metropolis-14",
+     "sentence": "All (46)Issues (33)Entrepôt (9)Services (7)",
+     "fact": "Issues (33) but 37 cards print Impaired or Vulnerable: 33 chain cards + 4 service cards printed \"Impaired\" (All counts the service cards)"
+    },
+    {
+     "seed": "r2s-under_siege-metropolis-0",
+     "sentence": "All (31)Issues (18)Entrepôt (1)Services (8)",
+     "fact": "Issues (18) but 23 cards print Impaired or Vulnerable: 18 chain cards + 5 service cards printed \"Impaired\" (All counts the service cards)"
+    },
+    {
+     "seed": "r2s-under_siege-metropolis-1",
+     "sentence": "All (34)Issues (19)Entrepôt (9)Services (8)",
+     "fact": "Issues (19) but 25 cards print Impaired or Vulnerable: 19 chain cards + 6 service cards printed \"Impaired\" (All counts the service cards)"
+    },
+    {
+     "seed": "rr3-town-under_siege-port-0",
+     "sentence": "All (10)Issues (5)Entrepôt (3)Services (2)",
+     "fact": "Issues (5) but 6 cards print Impaired or Vulnerable: 5 chain cards + 1 service cards printed \"Impaired\" (All counts the service cards)"
+    },
+    {
+     "seed": "rr3-town-under_siege+famine-port-0",
+     "sentence": "All (8)Issues (4)Entrepôt (1)Services (2)",
+     "fact": "Issues (4) but 5 cards print Impaired or Vulnerable: 4 chain cards + 1 service cards printed \"Impaired\" (All counts the service cards)"
+    }
+   ],
+   "note": "Fault towns by severity/kind: MED e=47"
+  },
+  {
+   "fam": "NEED: {services} here depend on {goods} brought in by magic: no trade road reaches {N}.",
+   "towns": 30,
+   "readByHand": [
+    "r2r-town-12",
+    "rr3-metropolis-recently_betrayed-rand-4",
+    "rr3-metropolis-famine-rand-3"
+   ],
+   "scripted": true,
+   "trueTowns": 0,
+   "falseTowns": 30,
+   "verdict": "FALSE",
+   "severity": "MED",
+   "kind": "g,a",
+   "examples": [
+    {
+     "seed": "r2r-town-12",
+     "sentence": "Weapon repair, tool sharpening and armour fitting here depend on iron brought in by magic: no trade road reaches Qasrtappa.",
+     "fact": "the same page says \"Qasrtappa is poor, and the road to it is long and hard.\", and its Imports list prints iron arriving"
+    },
+    {
+     "seed": "r2r-town-54",
+     "sentence": "Bread and pastry and rations here depend on grain brought in by magic: no trade road reaches Erdenbuurt.",
+     "fact": "the same page says \"Ore carts and stone carts grind along the road in a line that never seems to end.\", and its Imports list prints grain arriving"
+    },
+    {
+     "seed": "r2r-city-20",
+     "sentence": "Law enforcement, patrol and investigation here depend on iron brought in by magic: no trade road reaches Teotiucan.",
+     "fact": "the same page says \"Whatever reaches Teotiucan by road reaches it at a gate, and the city can close them against it.\", and its Imports list prints iron arriving"
+    },
+    {
+     "seed": "r2r-city-48",
+     "sentence": "Construction, furniture and barrel making here depend on timber brought in by magic: no trade road reaches Vishnumala.",
+     "fact": "the same page says \"Every load of clay that Vishnumala's Potter uses comes in from elsewhere; a closed road would stop its work within the season.\", and its Imports list prints timber arriving"
+    },
+    {
+     "seed": "r2r-city-49",
+     "sentence": "City defence, gate control and customs inspection here depend on stone brought in by magic: no trade road reaches Fontecivitas.",
+     "fact": "the same page says \"Goods wait in Fontecivitas's warehouses between the road and the buyer until the price is right.\", and its Imports list prints stone arriving"
+    }
+   ],
+   "note": "Also LOW in 2 towns (grain is also printed under   as well as on the Imports list:  oversta; fuel is also printed under   as well as on the Imports list:  overstat). Fault towns by severity/kind: MED g=30, LOW g=2, MED a=2"
+  },
+  {
+   "fam": "Economic Flows: Druidic forest management accelerates regrowth and sustainable yield",
+   "towns": 64,
+   "readByHand": [
+    "rr3-town-famine-rand-1",
+    "rr3-metropolis-religious_conversion-rand-3",
+    "r2s-under_siege-city-0"
+   ],
+   "scripted": true,
+   "trueTowns": 35,
+   "falseTowns": 29,
+   "verdict": "MIXED",
+   "severity": "MED",
+   "kind": "h,c",
+   "examples": [
+    {
+     "seed": "r2r-city-5",
+     "sentence": "Druidic forest management accelerates regrowth and sustainable yield",
+     "fact": "on the Reed & Marsh Harvest card: the ground is Marshlands (depleted), no forest"
+    },
+    {
+     "seed": "r2r-metropolis-2",
+     "sentence": "Druidic forest management accelerates regrowth and sustainable yield",
+     "fact": "on the Reed & Marsh Harvest card: the ground is Marshlands (depleted), no forest"
+    },
+    {
+     "seed": "r2s-under_siege-city-0",
+     "sentence": "Druidic forest management accelerates regrowth and sustainable yield",
+     "fact": "under the siege the page says \"Field work and trade have stopped\" and \"The siege has taken the outlying fields\", yet this Shipbuilding and Timber card prints ✦ Magically Sustained with the druids still working its Coastal Timber"
+    },
+    {
+     "seed": "r2s-under_siege-metropolis-1",
+     "sentence": "Druidic forest management accelerates regrowth and sustainable yield",
+     "fact": "under the siege the page says \"Field work and trade have stopped\" and \"The siege has taken the outlying fields\", yet this Shipbuilding and Timber card prints ✦ Magically Sustained with the druids still working its Coastal Timber"
+    },
+    {
+     "seed": "r2s-under_siege-metropolis-2",
+     "sentence": "Druidic forest management accelerates regrowth and sustainable yield",
+     "fact": "under the siege the page says \"Field work and trade have stopped\" and \"The siege has taken the outlying fields\", yet this Bowyer & fletcher card prints ✦ Magically Sustained with the druids still working its Managed woodland"
+    }
+   ],
+   "note": "Fault towns by severity/kind: MED h=23, MED c=6"
+  },
+  {
+   "fam": "Economic Flows: All (#)Issues (#)✓ Productive (#)Entrepôt (#)Services (#)",
+   "towns": 45,
+   "readByHand": [
+    "rr3w-town-under_siege+famine-river-0",
+    "rr3w-metropolis-famine-rand-1",
+    "r2r-city-44"
+   ],
+   "scripted": true,
+   "trueTowns": 19,
+   "falseTowns": 26,
+   "verdict": "MIXED",
+   "severity": "MED",
+   "kind": "e",
+   "examples": [
+    {
+     "seed": "r2s-under_siege-city-0",
+     "sentence": "All (34)Issues (17)✓ Productive (1)Entrepôt (8)Services (9)",
+     "fact": "Issues (17) but 24 cards print Impaired or Vulnerable: 17 chain cards + 7 service cards printed \"Impaired\" (All counts the service cards)"
+    },
+    {
+     "seed": "r2s-under_siege-city-1",
+     "sentence": "All (17)Issues (10)✓ Productive (1)Entrepôt (1)Services (3)",
+     "fact": "Issues (10) but 12 cards print Impaired or Vulnerable: 10 chain cards + 2 service cards printed \"Impaired\" (All counts the service cards)"
+    },
+    {
+     "seed": "r2s-under_siege-metropolis-3",
+     "sentence": "All (46)Issues (23)✓ Productive (1)Entrepôt (11)Services (11)",
+     "fact": "Issues (23) but 27 cards print Impaired or Vulnerable: 23 chain cards + 4 service cards printed \"Impaired\" (All counts the service cards)"
+    },
+    {
+     "seed": "rr3-town-under_siege-rand-4",
+     "sentence": "All (18)Issues (11)✓ Productive (1)Entrepôt (1)Services (2)",
+     "fact": "Issues (11) but 12 cards print Impaired or Vulnerable: 11 chain cards + 1 service cards printed \"Impaired\" (All counts the service cards)"
+    },
+    {
+     "seed": "rr3-town-under_siege-port-1",
+     "sentence": "All (14)Issues (8)✓ Productive (1)Entrepôt (4)Services (1)",
+     "fact": "Issues (8) but 9 cards print Impaired or Vulnerable: 8 chain cards + 1 service cards printed \"Impaired\" (All counts the service cards)"
+    }
+   ],
+   "note": "Fault towns by severity/kind: MED e=26"
+  },
+  {
+   "fam": "Economic Flows: Master-crafted weapons",
+   "towns": 21,
+   "readByHand": [
+    "r2r-hamlet-40",
+    "rr3-town-occupied-rand-1",
+    "r2s-famine-town-0"
+   ],
+   "scripted": true,
+   "trueTowns": 0,
+   "falseTowns": 21,
+   "verdict": "FALSE",
+   "severity": "HIGH",
+   "kind": "a",
+   "examples": [
+    {
+     "seed": "r2r-hamlet-6",
+     "sentence": "Master-crafted weapons",
+     "fact": "hamlet of 57: the card's only houses are Mine (open cast) · Mine; no smith, forge or weaponsmith stands on the roster"
+    },
+    {
+     "seed": "r2r-hamlet-40",
+     "sentence": "Master-crafted weapons",
+     "fact": "hamlet of 27: the card's only houses are Mine (open cast) · Mine; no smith, forge or weaponsmith stands on the roster"
+    },
+    {
+     "seed": "r2r-village-51",
+     "sentence": "Master-crafted weapons",
+     "fact": "village of 359: the card's only houses are Mine; no smith, forge or weaponsmith stands on the roster"
+    },
+    {
+     "seed": "r2r-town-38",
+     "sentence": "Master-crafted weapons",
+     "fact": "town of 1393: the card's only houses are Mine; no smith, forge or weaponsmith stands on the roster"
+    },
+    {
+     "seed": "r2s-famine-town-0",
+     "sentence": "Master-crafted weapons",
+     "fact": "town of 1696: the card's only houses are Mine; no smith, forge or weaponsmith stands on the roster"
+    }
+   ],
+   "note": "Fault towns by severity/kind: HIGH a=21"
+  },
+  {
+   "fam": "NEED: {services} here run on stored {goods}: no trade road reaches {N}.",
+   "towns": 17,
+   "readByHand": [
+    "rr3w-town-occupied-isolated-0",
+    "rr3w-metropolis-famine-isolated-1",
+    "rr3w-town-famine-isolated-1"
+   ],
+   "scripted": true,
+   "trueTowns": 0,
+   "falseTowns": 17,
+   "verdict": "FALSE",
+   "severity": "MED",
+   "kind": "g,a",
+   "examples": [
+    {
+     "seed": "r2r-town-9",
+     "sentence": "Law enforcement, patrol and gate control here run on stored iron: no trade road reaches Ravengarde.",
+     "fact": "the same page says \"Every load of iron ore that Ravengarde's Smelter uses comes in from elsewhere; a closed road would stop its work within the season.\", and its Imports list prints iron arriving"
+    },
+    {
+     "seed": "r2s-mass_migration-town-2",
+     "sentence": "Meals, ale and lodging here run on stored grain: no trade road reaches Shivanand.",
+     "fact": "the same page says \"No great road feeds Shivanand's market.\", and its Imports list prints grain arriving"
+    },
+    {
+     "seed": "rr3-town-infiltrated-rand-2",
+     "sentence": "Law enforcement, patrol and gate control here run on stored iron: no trade road reaches Caerbury.",
+     "fact": "no walls or gates on the roster (Town watch is the only defence house); the Defense tab says \"Unfortified. No perimeter walls. Defenders cannot control entry points\""
+    },
+    {
+     "seed": "rr3w-town-famine-isolated-1",
+     "sentence": "Meals, ale and lodging here run on stored grain: no trade road reaches Ventolitus.",
+     "fact": "the same page says \"No great road feeds Ventolitus's market.\", and its Imports list prints grain arriving"
+    },
+    {
+     "seed": "rr3w-town-occupied-isolated-0",
+     "sentence": "Law enforcement, patrol and gate control here run on stored iron: no trade road reaches Ásberg.",
+     "fact": "the same page says \"Ásberg is too poor to mend its road, and the road brings in too little to make it richer.\", and its Imports list prints iron arriving"
+    }
+   ],
+   "note": "Fault towns by severity/kind: MED g=17, MED a=1"
+  },
+  {
+   "fam": "NEED: {services} here depend on {goods} brought in.",
+   "towns": 677,
+   "readByHand": [
+    "rr3-town-famine-rand-4",
+    "r2r-metropolis-8",
+    "r2r-city-44"
+   ],
+   "scripted": true,
+   "trueTowns": 661,
+   "falseTowns": 16,
+   "verdict": "MIXED",
+   "severity": "MED",
+   "kind": "a,c",
+   "examples": [
+    {
+     "seed": "r2r-town-4",
+     "sentence": "Law enforcement, patrol and gate control here depend on iron brought in.",
+     "fact": "no walls or gates on the roster (Town watch is the only defence house); the Defense tab says \"Unfortified. No perimeter walls. Defenders cannot control entry points\""
+    },
+    {
+     "seed": "r2r-town-29",
+     "sentence": "Law enforcement, patrol and gate control here depend on iron brought in.",
+     "fact": "no walls or gates on the roster (Town watch is the only defence house); the Defense tab says \"Unfortified. No perimeter walls. Defenders cannot control entry points\""
+    },
+    {
+     "seed": "r2r-town-52",
+     "sentence": "Law enforcement, patrol and gate control here depend on iron brought in.",
+     "fact": "no walls or gates on the roster (Town watch is the only defence house); the Defense tab says \"Unfortified. No perimeter walls. Defenders cannot control entry points\""
+    },
+    {
+     "seed": "r2r-town-56",
+     "sentence": "Law enforcement, patrol and gate control here depend on iron brought in.",
+     "fact": "no walls or gates on the roster (Town watch is the only defence house); the Defense tab says \"Unfortified. No perimeter walls. Defenders cannot control entry points\""
+    },
+    {
+     "seed": "r2s-recently_betrayed-town-2",
+     "sentence": "Law enforcement, patrol and gate control here depend on iron brought in.",
+     "fact": "no walls or gates on the roster (Town watch is the only defence house); the Defense tab says \"Unfortified. No perimeter walls. Defenders cannot control entry points\""
+    }
+   ],
+   "note": "Also LOW in 68 towns (grain is also printed under   as well as on the Imports list:  oversta; wool or flax is also printed under   as well as on the Imports list:  ). Fault towns by severity/kind: MED a=14, LOW g=65, LOW c=3, MED c=2"
+  },
+  {
+   "fam": "NEED: {services} here run on stored {goods}.",
+   "towns": 14,
+   "readByHand": [
+    "rr3w-town-occupied-isolated-0",
+    "rr3w-metropolis-famine-isolated-1"
+   ],
+   "scripted": true,
+   "trueTowns": 0,
+   "falseTowns": 14,
+   "verdict": "FALSE",
+   "severity": "MED",
+   "kind": "g",
+   "examples": [
+    {
+     "seed": "r2r-town-9",
+     "sentence": "Meals, ale and lodging here run on stored grain.",
+     "fact": "the same tab's Imports list prints grain arriving (and the page says \"Every load of iron ore that Ravengarde's Smelter uses comes in from elsewhere; a closed road would stop its work within the season.\"): not run on stores"
+    },
+    {
+     "seed": "rr3-town-infiltrated-rand-2",
+     "sentence": "Meals, ale and lodging here run on stored grain.",
+     "fact": "the same tab's Imports list prints grain arriving (and the page says \"Caerbury is too poor to mend its road, and the road brings in too little to make it richer.\"): not run on stores"
+    },
+    {
+     "seed": "rr3w-town-occupied-isolated-0",
+     "sentence": "Meals, ale and lodging here run on stored grain.",
+     "fact": "the same tab's Imports list prints grain arriving (and the page says \"Ásberg is too poor to mend its road, and the road brings in too little to make it richer.\"): not run on stores"
+    },
+    {
+     "seed": "rr3w-town-calm-isolated-0",
+     "sentence": "Law enforcement, patrol and gate control here run on stored iron.",
+     "fact": "the same tab's Imports list prints iron arriving (and the page says \"The exports are real and the road they leave by is not.\"): not run on stores"
+    },
+    {
+     "seed": "rr3w-town-wartime-isolated-0",
+     "sentence": "Mercenary hire, armed escort and siege support here run on stored iron and grain.",
+     "fact": "the same tab's Imports list prints iron and grain arriving (and the page says \"No great road feeds Mikrochori's market.\"): not run on stores"
+    }
+   ],
+   "note": "Fault towns by severity/kind: MED g=14"
+  },
+  {
+   "fam": "Economic Flows: Druidic cultivation supplements depleted farmland",
+   "towns": 84,
+   "readByHand": [
+    "r2r-village-49",
+    "rr3w-metropolis-famine-rand-1",
+    "r2s-famine-city-2"
+   ],
+   "scripted": true,
+   "trueTowns": 71,
+   "falseTowns": 13,
+   "verdict": "MIXED",
+   "severity": "MED",
+   "kind": "h,c",
+   "examples": [
+    {
+     "seed": "r2r-metropolis-42",
+     "sentence": "Druidic cultivation supplements depleted farmland",
+     "fact": "on the Salt & Preservation card: the depleted ground is Salt flats, not farmland"
+    },
+    {
+     "seed": "r2r-metropolis-45",
+     "sentence": "Druidic cultivation supplements depleted farmland",
+     "fact": "on the Salt & Preservation card: the depleted ground is Salt flats, not farmland"
+    },
+    {
+     "seed": "r2r-metropolis-49",
+     "sentence": "Druidic cultivation supplements depleted farmland",
+     "fact": "on the Salt & Preservation card: the depleted ground is Salt flats, not farmland"
+    },
+    {
+     "seed": "r2s-politically_fractured-metropolis-3",
+     "sentence": "Druidic cultivation supplements depleted farmland",
+     "fact": "on the Salt & Preservation card: the depleted ground is Salt flats, not farmland"
+    },
+    {
+     "seed": "r2s-wartime-metropolis-3",
+     "sentence": "Druidic cultivation supplements depleted farmland",
+     "fact": "on the Salt & Preservation card: the depleted ground is Salt flats, not farmland"
+    }
+   ],
+   "note": "Also LOW in 11 towns (on the Foraging card: the depleted ground is Foraging areas , not farm). Fault towns by severity/kind: LOW h=11, MED h=8, MED c=5"
+  },
+  {
+   "fam": "Economic Flows: Conjured game produces fish; minor supplement",
+   "towns": 12,
+   "readByHand": [
+    "r2r-town-6",
+    "rr3-metropolis-politically_fractured-rand-3",
+    "rr3-city-famine-rand-5"
+   ],
+   "scripted": true,
+   "trueTowns": 0,
+   "falseTowns": 12,
+   "verdict": "FALSE",
+   "severity": "MED",
+   "kind": "h",
+   "examples": [
+    {
+     "seed": "r2r-town-6",
+     "sentence": "Conjured game produces fish; minor supplement",
+     "fact": "on the Fishing & Seafood card (Fishing grounds): conjured \"game\" is the wrong kind of word for fish"
+    },
+    {
+     "seed": "r2r-city-35",
+     "sentence": "Conjured game produces fish; minor supplement",
+     "fact": "on the River Fishing card (River fisheries): conjured \"game\" is the wrong kind of word for fish"
+    },
+    {
+     "seed": "r2r-metropolis-21",
+     "sentence": "Conjured game produces fish; minor supplement",
+     "fact": "on the Fishing & Seafood card (Fishing grounds): conjured \"game\" is the wrong kind of word for fish"
+    },
+    {
+     "seed": "r2s-monster_pressure-city-3",
+     "sentence": "Conjured game produces fish; minor supplement",
+     "fact": "on the River Fishing card (River fisheries): conjured \"game\" is the wrong kind of word for fish"
+    },
+    {
+     "seed": "r2s-monster_pressure-metropolis-1",
+     "sentence": "Conjured game produces fish; minor supplement",
+     "fact": "on the Fishing & Seafood card (Fishing grounds): conjured \"game\" is the wrong kind of word for fish"
+    }
+   ],
+   "note": "Also LOW in 2 towns (the famine failed this very source ; the card still claims the magic p; under the siege  the note still claims the River fisheries yields by m). Fault towns by severity/kind: MED h=12, LOW c=2"
+  },
+  {
+   "fam": "NEED: {services} here depend on {goods} from outside, which the siege has cut off.",
+   "towns": 108,
+   "readByHand": [
+    "rr3w-town-under_siege+famine-isolated-0",
+    "r2r-metropolis-14"
+   ],
+   "scripted": true,
+   "trueTowns": 98,
+   "falseTowns": 10,
+   "verdict": "MIXED",
+   "severity": "MED",
+   "kind": "a",
+   "examples": [
+    {
+     "seed": "r2s-under_siege-town-1",
+     "sentence": "Law enforcement, patrol and gate control here depend on iron from outside, which the siege has cut off.",
+     "fact": "no walls or gates on the roster (Town watch is the only defence house); the Defense tab says \"Unfortified. No perimeter walls. Defenders cannot control entry points\""
+    },
+    {
+     "seed": "rr3-town-under_siege-rand-1",
+     "sentence": "Law enforcement, patrol and gate control here depend on iron from outside, which the siege has cut off.",
+     "fact": "no walls or gates on the roster (Town watch is the only defence house); the Defense tab says \"Unfortified. No perimeter walls. Defenders cannot control entry points\""
+    },
+    {
+     "seed": "rr3-town-under_siege-rand-2",
+     "sentence": "Law enforcement, patrol and gate control here depend on iron from outside, which the siege has cut off.",
+     "fact": "no walls or gates on the roster (Town watch is the only defence house); the Defense tab says \"Unfortified. No perimeter walls. Defenders cannot control entry points\""
+    },
+    {
+     "seed": "rr3-town-under_siege-rand-4",
+     "sentence": "Law enforcement, patrol and gate control here depend on iron from outside, which the siege has cut off.",
+     "fact": "no walls or gates on the roster (Town watch is the only defence house); the Defense tab says \"Unfortified. No perimeter walls. Defenders cannot control entry points\""
+    },
+    {
+     "seed": "rr3-town-under_siege-port-1",
+     "sentence": "Law enforcement, patrol and gate control here depend on iron from outside, which the siege has cut off.",
+     "fact": "no walls or gates on the roster (Town watch is the only defence house); the Defense tab says \"Unfortified. No perimeter walls. Defenders cannot control entry points\""
+    }
+   ],
+   "note": "Also LOW in 4 towns (medicinal herbs is also printed under   as well as on the Imports list; timber is also printed under   as well as on the Imports list:  overst). Fault towns by severity/kind: MED a=10, LOW g=4"
+  },
+  {
+   "fam": "Economic Flows: Milled lumber",
+   "towns": 26,
+   "readByHand": [
+    "r2r-village-17",
+    "rr3-city-under_siege+famine-rand-1",
+    "rr3-village-famine-rand-1"
+   ],
+   "scripted": true,
+   "trueTowns": 17,
+   "falseTowns": 9,
+   "verdict": "MIXED",
+   "severity": "MED",
+   "kind": "a",
+   "examples": [
+    {
+     "seed": "r2r-village-2",
+     "sentence": "Milled lumber",
+     "fact": "the card's only house is a Thatcher (\"Lays roofs and mends them.\"); no sawmill on the roster"
+    },
+    {
+     "seed": "r2r-village-46",
+     "sentence": "Milled lumber",
+     "fact": "the card's only house is a Thatcher (\"Lays roofs and mends them.\"); no sawmill on the roster"
+    },
+    {
+     "seed": "r2r-village-50",
+     "sentence": "Milled lumber",
+     "fact": "the card's only house is a Thatcher (\"Lays roofs and mends them.\"); no sawmill on the roster"
+    },
+    {
+     "seed": "r2s-religious_conversion-village-2",
+     "sentence": "Milled lumber",
+     "fact": "the card's only house is a Thatcher (\"Lays roofs and mends them.\"); no sawmill on the roster"
+    },
+    {
+     "seed": "r2s-slave_revolt-village-0",
+     "sentence": "Milled lumber",
+     "fact": "the card's only house is a Thatcher (\"Lays roofs and mends them.\"); no sawmill on the roster"
+    }
+   ],
+   "note": "Fault towns by severity/kind: MED a=9"
+  },
+  {
+   "fam": "Economic Flows: All (#)Issues (#)✓ Productive (#)Services (#)",
+   "towns": 13,
+   "readByHand": [
+    "rr3-town-under_siege+famine-rand-4",
+    "rr3-city-under_siege-rand-0",
+    "r2s-under_siege-town-1"
+   ],
+   "scripted": true,
+   "trueTowns": 8,
+   "falseTowns": 5,
+   "verdict": "MIXED",
+   "severity": "MED",
+   "kind": "e",
+   "examples": [
+    {
+     "seed": "r2s-under_siege-town-3",
+     "sentence": "All (16)Issues (12)✓ Productive (1)Services (1)",
+     "fact": "Issues (12) but 13 cards print Impaired or Vulnerable: 12 chain cards + 1 service cards printed \"Impaired\" (All counts the service cards)"
+    },
+    {
+     "seed": "r2s-under_siege-city-3",
+     "sentence": "All (26)Issues (16)✓ Productive (1)Services (5)",
+     "fact": "Issues (16) but 18 cards print Impaired or Vulnerable: 16 chain cards + 2 service cards printed \"Impaired\" (All counts the service cards)"
+    },
+    {
+     "seed": "rr3-city-under_siege-rand-0",
+     "sentence": "All (29)Issues (12)✓ Productive (1)Services (5)",
+     "fact": "Issues (12) but 13 cards print Impaired or Vulnerable: 12 chain cards + 1 service cards printed \"Impaired\" (All counts the service cards)"
+    },
+    {
+     "seed": "rr3-city-under_siege+famine-rand-4",
+     "sentence": "All (40)Issues (21)✓ Productive (1)Services (7)",
+     "fact": "Issues (21) but 24 cards print Impaired or Vulnerable: 21 chain cards + 3 service cards printed \"Impaired\" (All counts the service cards)"
+    },
+    {
+     "seed": "rr3w-city-under_siege+famine-rand-0",
+     "sentence": "All (29)Issues (16)✓ Productive (1)Services (5)",
+     "fact": "Issues (16) but 19 cards print Impaired or Vulnerable: 16 chain cards + 3 service cards printed \"Impaired\" (All counts the service cards)"
+    }
+   ],
+   "note": "Fault towns by severity/kind: MED e=5"
+  },
+  {
+   "fam": "Economic Flows: Processed textilesDyed clothFine textiles",
+   "towns": 7,
+   "readByHand": [
+    "rr3-village-monster_pressure-rand-2",
+    "rr3-village-famine-rand-0",
+    "r2r-village-55"
+   ],
+   "scripted": true,
+   "trueTowns": 3,
+   "falseTowns": 4,
+   "verdict": "MIXED",
+   "severity": "MED",
+   "kind": "a",
+   "examples": [
+    {
+     "seed": "r2s-insurgency-village-2",
+     "sentence": "Processed textilesDyed clothFine textiles",
+     "fact": "the card's only house is a Fuller (\"Finishes woven cloth by cleaning and thickening it\"); no dyer on the roster"
+    },
+    {
+     "seed": "rr3-village-famine-rand-0",
+     "sentence": "Processed textilesDyed clothFine textiles",
+     "fact": "the card's only house is a Fuller (\"Finishes woven cloth by cleaning and thickening it\"); no dyer on the roster"
+    },
+    {
+     "seed": "rr3-village-monster_pressure-rand-2",
+     "sentence": "Processed textilesDyed clothFine textiles",
+     "fact": "the card's only house is a Fuller (\"Finishes woven cloth by cleaning and thickening it\"); no dyer on the roster"
+    },
+    {
+     "seed": "rr3-village-under_siege+famine-rand-1",
+     "sentence": "Processed textilesDyed clothFine textiles",
+     "fact": "the card's only house is a Fuller (\"Finishes woven cloth by cleaning and thickening it\"); no dyer on the roster"
+    }
+   ],
+   "note": "Fault towns by severity/kind: MED a=4"
+  },
+  {
+   "fam": "Economic Flows: Arcane quickening of growth provides minor food supplement",
+   "towns": 46,
+   "readByHand": [
+    "r2s-politically_fractured-town-1",
+    "rr3-metropolis-politically_fractured-rand-3",
+    "r2s-famine-town-0"
+   ],
+   "scripted": true,
+   "trueTowns": 42,
+   "falseTowns": 4,
+   "verdict": "MIXED",
+   "severity": "MED",
+   "kind": "h",
+   "examples": [
+    {
+     "seed": "r2r-town-51",
+     "sentence": "Arcane quickening of growth provides minor food supplement",
+     "fact": "on the Salt & Preservation card: salt flats grow nothing to quicken"
+    },
+    {
+     "seed": "r2r-city-2",
+     "sentence": "Arcane quickening of growth provides minor food supplement",
+     "fact": "on the Salt & Preservation card: salt flats grow nothing to quicken"
+    },
+    {
+     "seed": "r2s-politically_fractured-town-1",
+     "sentence": "Arcane quickening of growth provides minor food supplement",
+     "fact": "on the Salt & Preservation card: salt flats grow nothing to quicken"
+    },
+    {
+     "seed": "r2s-wartime-city-1",
+     "sentence": "Arcane quickening of growth provides minor food supplement",
+     "fact": "on the Salt & Preservation card: salt flats grow nothing to quicken"
+    }
+   ],
+   "note": "Also LOW in 11 towns (under the siege  the note still claims the Grain fields yields by magi; under the siege  the note still claims the Hunting grounds yields by m). Fault towns by severity/kind: MED h=4, LOW c=11"
+  },
+  {
+   "fam": "Economic Flows: Druidic beast-callers attract game to supplement depleted grounds",
+   "towns": 21,
+   "readByHand": [
+    "rr3-town-recently_betrayed-rand-4",
+    "r2s-indebted-metropolis-1",
+    "rr3-metropolis-under_siege-rand-5"
+   ],
+   "scripted": true,
+   "trueTowns": 19,
+   "falseTowns": 2,
+   "verdict": "MIXED",
+   "severity": "MED",
+   "kind": "c",
+   "examples": [
+    {
+     "seed": "rr3-metropolis-under_siege-rand-5",
+     "sentence": "Druidic beast-callers attract game to supplement depleted grounds",
+     "fact": "under the siege the page says \"Field work and trade have stopped\" and \"The siege has taken the outlying fields\", yet this Hunting & Trapping card prints ✦ Magically Sustained with the druids still working its Hunting grounds"
+    },
+    {
+     "seed": "rr3w-metropolis-under_siege+famine-rand-0",
+     "sentence": "Druidic beast-callers attract game to supplement depleted grounds",
+     "fact": "under the siege the page says \"Field work and trade have stopped\" and \"The siege has taken the outlying fields\", yet this Hunting & Trapping card prints ✦ Magically Sustained with the druids still working its Hunting grounds"
+    }
+   ],
+   "note": "Fault towns by severity/kind: MED c=2"
+  },
+  {
+   "fam": "Economic Flows: Druidic grain-blessing and water purification sustain brewing",
+   "towns": 28,
+   "readByHand": [
+    "rr3-city-infiltrated-rand-3",
+    "rr3w-metropolis-famine-rand-1",
+    "rr3-metropolis-under_siege-rand-3"
+   ],
+   "scripted": true,
+   "trueTowns": 26,
+   "falseTowns": 2,
+   "verdict": "MIXED",
+   "severity": "MED",
+   "kind": "c",
+   "examples": [
+    {
+     "seed": "rr3-metropolis-under_siege-rand-3",
+     "sentence": "Druidic grain-blessing and water purification sustain brewing",
+     "fact": "under the siege the page says \"Field work and trade have stopped\" and \"The siege has taken the outlying fields\", yet this Brewing & Malting card prints ✦ Magically Sustained with the druids still working its Grain fields"
+    },
+    {
+     "seed": "rr3-metropolis-under_siege+famine-rand-2",
+     "sentence": "Druidic grain-blessing and water purification sustain brewing",
+     "fact": "under the siege the page says \"Field work and trade have stopped\" and \"The siege has taken the outlying fields\", yet this Brewing & Malting card prints ✦ Magically Sustained with the druids still working its Grain fields"
+    }
+   ],
+   "note": "Fault towns by severity/kind: MED c=2"
+  },
+  {
+   "fam": "Economic Flows: Military ContractsServiceExportImpaired",
+   "towns": 52,
+   "readByHand": [
+    "r2s-under_siege-city-1",
+    "rr3w-metropolis-famine-isolated-1",
+    "r2r-metropolis-14"
+   ],
+   "scripted": true,
+   "trueTowns": 50,
+   "falseTowns": 2,
+   "verdict": "MIXED",
+   "severity": "MED",
+   "kind": "g",
+   "examples": [
+    {
+     "seed": "rr3w-city-under_siege-port-0",
+     "sentence": "Military ContractsServiceExportImpaired",
+     "fact": "the Institutions tab prints \"Mercenary quarterDefense\" (not impaired), yet the service card runs through it and prints Impaired"
+    },
+    {
+     "seed": "rr3w-city-under_siege-port-1",
+     "sentence": "Military ContractsServiceExportImpaired",
+     "fact": "the Institutions tab prints \"Mercenary quarterDefense\" (not impaired), yet the service card runs through it and prints Impaired"
+    }
+   ],
+   "note": "Fault towns by severity/kind: MED g=2"
+  },
+  {
+   "fam": "NEED: {services} here depend on {goods}, iron and grain brought in by magic: no trade road reaches {N}.",
+   "towns": 2,
+   "readByHand": [
+    "r2r-metropolis-44",
+    "rr3w-metropolis-famine-isolated-0"
+   ],
+   "scripted": true,
+   "trueTowns": 0,
+   "falseTowns": 2,
+   "verdict": "FALSE",
+   "severity": "MED",
+   "kind": "g",
+   "examples": [
+    {
+     "seed": "r2r-metropolis-44",
+     "sentence": "Last-resort defence, command post and long siege endurance here depend on stone, iron and grain brought in by magic: no trade road reaches Tallchowk.",
+     "fact": "the same page says \"Every load of grain that Tallchowk's Mill uses comes in from elsewhere; a closed road would stop its work within the season.\", and its Imports list prints stone, iron and grain arriving"
+    },
+    {
+     "seed": "rr3w-metropolis-famine-isolated-0",
+     "sentence": "Last-resort defence, command post and long siege endurance here depend on stone, iron and grain brought in by magic: no trade road reaches Fjordset.",
+     "fact": "the same page says \"No great road feeds Fjordset's market.\", and its Imports list prints stone, iron and grain arriving"
+    }
+   ],
+   "note": "Fault towns by severity/kind: MED g=2"
+  },
+  {
+   "fam": "Economic Flows: All (#)Issues (#)Services (#)",
+   "towns": 3,
+   "readByHand": [
+    "r2s-under_siege-town-2",
+    "rr3-metropolis-famine-rand-4"
+   ],
+   "scripted": true,
+   "trueTowns": 1,
+   "falseTowns": 2,
+   "verdict": "MIXED",
+   "severity": "MED",
+   "kind": "e",
+   "examples": [
+    {
+     "seed": "r2s-under_siege-town-2",
+     "sentence": "All (10)Issues (6)Services (1)",
+     "fact": "Issues (6) but 7 cards print Impaired or Vulnerable: 6 chain cards + 1 service cards printed \"Impaired\" (All counts the service cards)"
+    },
+    {
+     "seed": "rr3-metropolis-under_siege+famine-rand-3",
+     "sentence": "All (34)Issues (19)Services (9)",
+     "fact": "Issues (19) but 25 cards print Impaired or Vulnerable: 19 chain cards + 6 service cards printed \"Impaired\" (All counts the service cards)"
+    }
+   ],
+   "note": "Fault towns by severity/kind: MED e=2"
+  },
+  {
+   "fam": "NEED: {services} here depend on {goods} brought in by magic.",
+   "towns": 31,
+   "readByHand": [
+    "r2r-town-12",
+    "rr3-metropolis-recently_betrayed-rand-4",
+    "rr3-metropolis-famine-rand-3"
+   ],
+   "scripted": true,
+   "trueTowns": 30,
+   "falseTowns": 1,
+   "verdict": "MIXED",
+   "severity": "MED",
+   "kind": "a",
+   "examples": [
+    {
+     "seed": "r2r-town-54",
+     "sentence": "Law enforcement, patrol and gate control here depend on iron brought in by magic.",
+     "fact": "no walls or gates on the roster (Town watch is the only defence house); the Defense tab says \"Unfortified. No perimeter walls. Defenders cannot control entry points\""
+    }
+   ],
+   "note": "Also LOW in 5 towns (wool or flax is also printed under   as well as on the Imports list:  ; medicinal herbs is also printed under   as well as on the Imports list). Fault towns by severity/kind: LOW g=5, MED a=1, LOW c=1"
+  },
+  {
+   "fam": "NEED: {services} here run on stored {goods}, iron and grain: no trade road reaches {N}.",
+   "towns": 1,
+   "readByHand": [
+    "rr3w-metropolis-occupied-isolated-0"
+   ],
+   "scripted": true,
+   "trueTowns": 0,
+   "falseTowns": 1,
+   "verdict": "FALSE",
+   "severity": "MED",
+   "kind": "g",
+   "examples": [
+    {
+     "seed": "rr3w-metropolis-occupied-isolated-0",
+     "sentence": "Last-resort defence, command post and long siege endurance here run on stored stone, iron and grain: no trade road reaches Hákonset.",
+     "fact": "the same page says \"Bolts of cloth and bales of wool fill the carts waiting on the road out.\", and its Imports list prints stone, iron and grain arriving"
+    }
+   ],
+   "note": "Fault towns by severity/kind: MED g=1"
+  },
+  {
+   "fam": "Economic Flows: Grain surplusBulk food exports",
+   "towns": 52,
+   "readByHand": [
+    "rr3-thorp-monster_pressure-rand-3",
+    "r2r-hamlet-52",
+    "rr3-thorp-occupied-rand-2"
+   ],
+   "scripted": true,
+   "trueTowns": 52,
+   "falseTowns": 0,
+   "verdict": "MIXED",
+   "severity": "LOW",
+   "kind": "d",
+   "examples": [
+    {
+     "seed": "r2r-thorp-12",
+     "sentence": "Grain surplusBulk food exports",
+     "fact": "thorp of 23; \"bulk\" exports from a surplus of 14 lbs/day (Exports prints Grain surplus)"
+    },
+    {
+     "seed": "r2r-thorp-13",
+     "sentence": "Grain surplusBulk food exports",
+     "fact": "thorp of 17; \"bulk\" exports from a surplus of 5 lbs/day (Exports prints Grain surplus)"
+    },
+    {
+     "seed": "r2r-thorp-30",
+     "sentence": "Grain surplusBulk food exports",
+     "fact": "thorp of 15; \"bulk\" exports from a surplus of 11 lbs/day (Exports prints Grain surplus)"
+    },
+    {
+     "seed": "r2r-thorp-39",
+     "sentence": "Grain surplusBulk food exports",
+     "fact": "thorp of 29; \"bulk\" exports from a surplus of 13 lbs/day (Exports prints Grain surplus)"
+    },
+    {
+     "seed": "r2r-thorp-56",
+     "sentence": "Grain surplusBulk food exports",
+     "fact": "thorp of 24; \"bulk\" exports from a surplus of 3 lbs/day (Exports prints Grain surplus)"
+    }
+   ],
+   "note": "Fault towns by severity/kind: LOW d=52"
+  },
+  {
+   "fam": "Economic Flows: Blessed stores; divine provision fills the gap",
+   "towns": 53,
+   "readByHand": [
+    "rr3-village-monster_pressure-rand-0",
+    "r2r-metropolis-8",
+    "r2r-metropolis-14"
+   ],
+   "scripted": true,
+   "trueTowns": 53,
+   "falseTowns": 0,
+   "verdict": "MIXED",
+   "severity": "LOW",
+   "kind": "c",
+   "examples": [
+    {
+     "seed": "r2r-metropolis-14",
+     "sentence": "Blessed stores; divine provision fills the gap",
+     "fact": "under the siege (\"Field work and trade have stopped\") the note still claims the Grazing land yields by magic; card chip vulnerable"
+    },
+    {
+     "seed": "r2s-under_siege-town-0",
+     "sentence": "Blessed stores; divine provision fills the gap",
+     "fact": "under the siege (\"Field work and trade have stopped\") the note still claims the Hunting grounds yields by magic; card chip vulnerable"
+    },
+    {
+     "seed": "rr3w-metropolis-under_siege+famine-isolated-1",
+     "sentence": "Blessed stores; divine provision fills the gap",
+     "fact": "under the siege (\"Field work and trade have stopped\") the note still claims the Wild foraging areas yields by magic; card chip vulnerable"
+    }
+   ],
+   "note": "Fault towns by severity/kind: LOW c=3"
+  },
+  {
+   "fam": "Economic Flows: Flour and mealMilled lumber",
+   "towns": 20,
+   "readByHand": [
+    "r2r-village-39",
+    "rr3-city-plague_onset-rand-0",
+    "r2s-famine-city-0"
+   ],
+   "scripted": true,
+   "trueTowns": 20,
+   "falseTowns": 0,
+   "verdict": "MIXED",
+   "severity": "LOW",
+   "kind": "a",
+   "examples": [
+    {
+     "seed": "r2r-village-37",
+     "sentence": "Flour and mealMilled lumber",
+     "fact": "the only mill is a grain mill (\"Mill\"); no sawmill on the roster"
+    },
+    {
+     "seed": "r2r-village-39",
+     "sentence": "Flour and mealMilled lumber",
+     "fact": "the only mill is a grain mill (\"Mill\"); no sawmill on the roster"
+    },
+    {
+     "seed": "r2s-plague_onset-town-0",
+     "sentence": "Flour and mealMilled lumber",
+     "fact": "the only mill is a grain mill (\"Mills (2-5)\"); no sawmill on the roster"
+    },
+    {
+     "seed": "r2s-slave_revolt-village-3",
+     "sentence": "Flour and mealMilled lumber",
+     "fact": "the only mill is a grain mill (\"Mill\"); no sawmill on the roster"
+    },
+    {
+     "seed": "r2s-slave_revolt-town-1",
+     "sentence": "Flour and mealMilled lumber",
+     "fact": "the only mill is a grain mill (\"Mills (2-5)\"); no sawmill on the roster"
+    }
+   ],
+   "note": "Fault towns by severity/kind: LOW a=9"
+  },
+  {
+   "fam": "Economic Flows: Druidic animal husbandry sustains the herd",
+   "towns": 43,
+   "readByHand": [
+    "r2r-village-49",
+    "r2s-occupied-metropolis-3",
+    "r2s-famine-city-2"
+   ],
+   "scripted": true,
+   "trueTowns": 43,
+   "falseTowns": 0,
+   "verdict": "MIXED",
+   "severity": "LOW",
+   "kind": "c",
+   "examples": [
+    {
+     "seed": "rr3-metropolis-under_siege+famine-rand-2",
+     "sentence": "Druidic animal husbandry sustains the herd",
+     "fact": "under the siege (\"Field work and trade have stopped\") the note still claims the Grazing land yields by magic; card chip vulnerable"
+    },
+    {
+     "seed": "rr3w-metropolis-under_siege-rand-0",
+     "sentence": "Druidic animal husbandry sustains the herd",
+     "fact": "under the siege (\"Field work and trade have stopped\") the note still claims the Grazing land yields by magic; card chip vulnerable"
+    },
+    {
+     "seed": "rr3w-metropolis-under_siege-rand-1",
+     "sentence": "Druidic animal husbandry sustains the herd",
+     "fact": "under the siege (\"Field work and trade have stopped\") the note still claims the Grazing land yields by magic; card chip vulnerable"
+    },
+    {
+     "seed": "rr3w-metropolis-under_siege+famine-rand-0",
+     "sentence": "Druidic animal husbandry sustains the herd",
+     "fact": "under the siege (\"Field work and trade have stopped\") the note still claims the Grazing land yields by magic; card chip vulnerable"
+    }
+   ],
+   "note": "Fault towns by severity/kind: LOW c=4"
+  },
+  {
+   "fam": "Economic Flows: Ship constructionVessel maintenance",
+   "towns": 82,
+   "readByHand": [
+    "rr3-town-wartime-rand-4",
+    "r2r-metropolis-13",
+    "r2s-under_siege-city-0"
+   ],
+   "scripted": true,
+   "trueTowns": 82,
+   "falseTowns": 0,
+   "verdict": "MIXED",
+   "severity": "LOW",
+   "kind": "a",
+   "examples": [
+    {
+     "seed": "r2r-city-19",
+     "sentence": "Ship constructionVessel maintenance",
+     "fact": "no shipyard or shipwright on the roster (Docks/port facilities)"
+    },
+    {
+     "seed": "r2s-succession_void-town-0",
+     "sentence": "Ship constructionVessel maintenance",
+     "fact": "no shipyard or shipwright on the roster (Harbour master's office · Docks/port facilities)"
+    },
+    {
+     "seed": "rr3-town-indebted-rand-0",
+     "sentence": "Ship constructionVessel maintenance",
+     "fact": "no shipyard or shipwright on the roster (Harbour master's office · Docks/port facilities)"
+    },
+    {
+     "seed": "rr3-town-succession_void-rand-3",
+     "sentence": "Ship constructionVessel maintenance",
+     "fact": "no shipyard or shipwright on the roster (Harbour master's office · Docks/port facilities)"
+    }
+   ],
+   "note": "Fault towns by severity/kind: LOW a=4"
+  },
+  {
+   "fam": "Economic Flows: Arcane fabrication provides processed goods from alternative sources",
+   "towns": 56,
+   "readByHand": [
+    "rr3-town-slave_revolt-rand-5",
+    "rr3-metropolis-politically_fractured-rand-3",
+    "r2s-famine-metropolis-2"
+   ],
+   "scripted": true,
+   "trueTowns": 56,
+   "falseTowns": 0,
+   "verdict": "MIXED",
+   "severity": "LOW",
+   "kind": "c",
+   "examples": [
+    {
+     "seed": "rr3-city-under_siege-rand-3",
+     "sentence": "Arcane fabrication provides processed goods from alternative sources",
+     "fact": "under the siege (\"Field work and trade have stopped\") the note still claims the Managed woodland yields by magic; card chip vulnerable"
+    },
+    {
+     "seed": "rr3-city-under_siege+famine-rand-3",
+     "sentence": "Arcane fabrication provides processed goods from alternative sources",
+     "fact": "under the siege (\"Field work and trade have stopped\") the note still claims the Marshlands yields by magic; card chip vulnerable"
+    },
+    {
+     "seed": "rr3-metropolis-under_siege-rand-4",
+     "sentence": "Arcane fabrication provides processed goods from alternative sources",
+     "fact": "under the siege (\"Field work and trade have stopped\") the note still claims the Managed woodland yields by magic; card chip vulnerable"
+    },
+    {
+     "seed": "rr3-metropolis-under_siege+famine-rand-0",
+     "sentence": "Arcane fabrication provides processed goods from alternative sources",
+     "fact": "under the siege (\"Field work and trade have stopped\") the note still claims the Managed woodland yields by magic; card chip vulnerable"
+    },
+    {
+     "seed": "rr3w-city-under_siege-isolated-0",
+     "sentence": "Arcane fabrication provides processed goods from alternative sources",
+     "fact": "under the siege (\"Field work and trade have stopped\") the note still claims the Managed woodland yields by magic; card chip vulnerable"
+    }
+   ],
+   "note": "Fault towns by severity/kind: LOW c=10"
+  },
+  {
+   "fam": "Economic Flows: Arcane fabrication and stone-shaping partially offset depleted extraction",
+   "towns": 76,
+   "readByHand": [
+    "r2r-town-12",
+    "r2s-mass_migration-metropolis-3",
+    "r2s-under_siege-metropolis-3"
+   ],
+   "scripted": true,
+   "trueTowns": 76,
+   "falseTowns": 0,
+   "verdict": "MIXED",
+   "severity": "LOW",
+   "kind": "c",
+   "examples": [
+    {
+     "seed": "r2s-under_siege-metropolis-3",
+     "sentence": "Arcane fabrication and stone-shaping partially offset depleted extraction",
+     "fact": "under the siege (\"Field work and trade have stopped\") the note still claims the Iron ore deposits yields by magic; card chip vulnerable"
+    },
+    {
+     "seed": "rr3-city-under_siege-rand-2",
+     "sentence": "Arcane fabrication and stone-shaping partially offset depleted extraction",
+     "fact": "under the siege (\"Field work and trade have stopped\") the note still claims the Stone quarry yields by magic; card chip vulnerable"
+    },
+    {
+     "seed": "rr3-metropolis-under_siege+famine-rand-2",
+     "sentence": "Arcane fabrication and stone-shaping partially offset depleted extraction",
+     "fact": "under the siege (\"Field work and trade have stopped\") the note still claims the Stone quarry yields by magic; card chip vulnerable"
+    },
+    {
+     "seed": "rr3w-city-under_siege+famine-isolated-1",
+     "sentence": "Arcane fabrication and stone-shaping partially offset depleted extraction",
+     "fact": "under the siege (\"Field work and trade have stopped\") the note still claims the Iron ore deposits yields by magic; card chip vulnerable"
+    },
+    {
+     "seed": "rr3w-city-under_siege+famine-rand-1",
+     "sentence": "Arcane fabrication and stone-shaping partially offset depleted extraction",
+     "fact": "under the siege (\"Field work and trade have stopped\") the note still claims the Stone quarry yields by magic; card chip vulnerable"
+    }
+   ],
+   "note": "Fault towns by severity/kind: LOW c=9"
+  },
+  {
+   "fam": "Economic Flows: Druids call fish and bless the waters",
+   "towns": 23,
+   "readByHand": [
+    "r2r-town-29",
+    "r2r-metropolis-45",
+    "r2s-under_siege-metropolis-1"
+   ],
+   "scripted": true,
+   "trueTowns": 23,
+   "falseTowns": 0,
+   "verdict": "MIXED",
+   "severity": "LOW",
+   "kind": "c",
+   "examples": [
+    {
+     "seed": "rr3w-metropolis-famine-rand-0",
+     "sentence": "Druids call fish and bless the waters",
+     "fact": "the famine failed this very source (fish); the card still claims the magic provision"
+    }
+   ],
+   "note": "Fault towns by severity/kind: LOW c=1"
+  },
+  {
+   "fam": "Economic Flows: GlasswareBooks and manuscripts",
+   "towns": 307,
+   "readByHand": [
+    "r2r-city-51",
+    "r2r-metropolis-8",
+    "r2r-metropolis-14"
+   ],
+   "scripted": true,
+   "trueTowns": 307,
+   "falseTowns": 0,
+   "verdict": "MIXED",
+   "severity": "LOW",
+   "kind": "a",
+   "examples": [
+    {
+     "seed": "r2r-city-51",
+     "sentence": "GlasswareBooks and manuscripts",
+     "fact": "the card's house is Glassmakers; the book-maker credited is only \"Hedge wizard\""
+    },
+    {
+     "seed": "rr3-city-indebted-rand-2",
+     "sentence": "GlasswareBooks and manuscripts",
+     "fact": "the card's house is Glassmakers; the book-maker credited is only \"Bardic college\""
+    },
+    {
+     "seed": "rr3w-city-under_siege+famine-isolated-0",
+     "sentence": "GlasswareBooks and manuscripts",
+     "fact": "the card's house is Glassmakers; the book-maker credited is only \"Hedge wizard\""
+    }
+   ],
+   "note": "Fault towns by severity/kind: LOW a=3"
+  },
+  {
+   "fam": "Economic Flows: Luxury manufactured goodsExtreme luxury goodsMaster-crafted weapons",
+   "towns": 35,
+   "readByHand": [
+    "rr3w-city-under_siege-river-1",
+    "rr3w-metropolis-famine-rand-1",
+    "r2s-under_siege-city-2"
+   ],
+   "scripted": true,
+   "trueTowns": 35,
+   "falseTowns": 0,
+   "verdict": "MIXED",
+   "severity": "LOW",
+   "kind": "a",
+   "examples": [
+    {
+     "seed": "r2r-city-24",
+     "sentence": "Luxury manufactured goodsExtreme luxury goodsMaster-crafted weapons",
+     "fact": "city of 4512: the card's only houses are Luxury goods quarter; no smith, forge or weaponsmith stands on the roster"
+    },
+    {
+     "seed": "r2s-plague_onset-city-2",
+     "sentence": "Luxury manufactured goodsExtreme luxury goodsMaster-crafted weapons",
+     "fact": "city of 11498: the card's only houses are Luxury goods quarter; no smith, forge or weaponsmith stands on the roster"
+    },
+    {
+     "seed": "r2s-religious_conversion-city-1",
+     "sentence": "Luxury manufactured goodsExtreme luxury goodsMaster-crafted weapons",
+     "fact": "city of 4774: the card's only houses are Luxury goods quarter; no smith, forge or weaponsmith stands on the roster"
+    },
+    {
+     "seed": "r2s-slave_revolt-city-3",
+     "sentence": "Luxury manufactured goodsExtreme luxury goodsMaster-crafted weapons",
+     "fact": "city of 4552: the card's only houses are Luxury goods quarter; no smith, forge or weaponsmith stands on the roster"
+    },
+    {
+     "seed": "rr3-city-famine-port-0",
+     "sentence": "Luxury manufactured goodsExtreme luxury goodsMaster-crafted weapons",
+     "fact": "city of 4530: the card's only houses are Luxury goods quarter; no smith, forge or weaponsmith stands on the roster"
+    }
+   ],
+   "note": "Fault towns by severity/kind: LOW a=11"
+  },
+  {
+   "fam": "Economic Flows: Temple fishing rites improve depleted catch",
+   "towns": 14,
+   "readByHand": [
+    "r2s-under_siege-village-1",
+    "rr3-metropolis-succession_void-rand-3"
+   ],
+   "scripted": true,
+   "trueTowns": 14,
+   "falseTowns": 0,
+   "verdict": "MIXED",
+   "severity": "LOW",
+   "kind": "c",
+   "examples": [
+    {
+     "seed": "r2s-under_siege-village-1",
+     "sentence": "Temple fishing rites improve depleted catch",
+     "fact": "under the siege (\"Field work and trade have stopped\") the note still claims the River fisheries yields by magic; card chip vulnerable"
+    },
+    {
+     "seed": "rr3-village-under_siege+famine-rand-3",
+     "sentence": "Temple fishing rites improve depleted catch",
+     "fact": "under the siege (\"Field work and trade have stopped\") the note still claims the River fisheries yields by magic; card chip vulnerable"
+    },
+    {
+     "seed": "rr3w-village-under_siege+famine-rand-0",
+     "sentence": "Temple fishing rites improve depleted catch",
+     "fact": "the famine failed this very source (fish); the card still claims the magic provision"
+    },
+    {
+     "seed": "rr3w-town-under_siege-rand-1",
+     "sentence": "Temple fishing rites improve depleted catch",
+     "fact": "the record's Fishing grounds is absent (a substitute is worked), not depleted"
+    }
+   ],
+   "note": "Fault towns by severity/kind: LOW c=4"
+  },
+  {
+   "fam": "NEED: {services} here depend on {goods}, iron and grain brought in, which a siege, a closed road or a blockade would cut off.",
+   "towns": 33,
+   "readByHand": [
+    "rr3-town-occupied-rand-5",
+    "r2s-occupied-metropolis-3",
+    "r2s-famine-metropolis-0"
+   ],
+   "scripted": true,
+   "trueTowns": 33,
+   "falseTowns": 0,
+   "verdict": "MIXED",
+   "severity": "LOW",
+   "kind": "g",
+   "examples": [
+    {
+     "seed": "r2s-succession_void-metropolis-1",
+     "sentence": "Last-resort defence, command post and long siege endurance here depend on stone, iron and grain brought in, which a siege, a closed road or a blockade would cut off.",
+     "fact": "grain is also printed under \"Produced locally\" (grain) as well as on the Imports list: \"depend on grain brought in\" overstates"
+    }
+   ],
+   "note": "Fault towns by severity/kind: LOW g=1"
+  },
+  {
+   "fam": "Economic Flows: Alchemy & ReagentsArcane & magicalImpaired",
+   "towns": 2,
+   "readByHand": [
+    "rr3-town-under_siege-port-1",
+    "rr3w-city-under_siege-rand-0"
+   ],
+   "scripted": true,
+   "trueTowns": 2,
+   "falseTowns": 0,
+   "verdict": "UNSETTLED",
+   "severity": "LOW",
+   "kind": "c",
+   "examples": [
+    {
+     "seed": "rr3-town-under_siege-port-1",
+     "sentence": "Alchemy & ReagentsArcane & magicalImpaired",
+     "fact": "Impaired under the siege on its Magical ley line node (magical_node): no field work or road trade carries it; the record cannot settle whether a land siege stops it"
+    },
+    {
+     "seed": "rr3w-city-under_siege-rand-0",
+     "sentence": "Alchemy & ReagentsArcane & magicalImpaired",
+     "fact": "Impaired under the siege on its Magical ley line node (magical_node): no field work or road trade carries it; the record cannot settle whether a land siege stops it"
+    }
+   ],
+   "note": "Fault towns by severity/kind: LOW c=2"
+  },
+  {
+   "fam": "Economic Flows: Planar TradeArcane & magicalImpaired",
+   "towns": 1,
+   "readByHand": [
+    "rr3-metropolis-under_siege-port-0"
+   ],
+   "scripted": true,
+   "trueTowns": 1,
+   "falseTowns": 0,
+   "verdict": "UNSETTLED",
+   "severity": "LOW",
+   "kind": "c",
+   "examples": [
+    {
+     "seed": "rr3-metropolis-under_siege-port-0",
+     "sentence": "Planar TradeArcane & magicalImpaired",
+     "fact": "Impaired under the siege on its planar gate (no ground): no field work or road trade carries it; the record cannot settle whether a land siege stops it"
+    }
+   ],
+   "note": "Fault towns by severity/kind: LOW c=1"
+  },
+  {
+   "fam": "NEED: {services} here depend on {goods}, grain and fuel brought in by magic.",
+   "towns": 1,
+   "readByHand": [
+    "rr3-metropolis-recently_betrayed-rand-4"
+   ],
+   "scripted": true,
+   "trueTowns": 1,
+   "falseTowns": 0,
+   "verdict": "MIXED",
+   "severity": "LOW",
+   "kind": "g",
+   "examples": [
+    {
+     "seed": "rr3-metropolis-recently_betrayed-rand-4",
+     "sentence": "City defence, armed response and riot control here depend on iron, grain and fuel brought in by magic.",
+     "fact": "fuel is also printed under \"Produced locally\" (Fuel wood) as well as on the Imports list: \"depend on fuel brought in\" overstates"
+    }
+   ],
+   "note": "Fault towns by severity/kind: LOW g=1"
+  },
+  {
+   "fam": "Economic Flows: Faith & WorshipReligion & civic",
+   "towns": 409,
+   "readByHand": [
+    "r2r-thorp-36",
+    "rr3-hamlet-recently_betrayed-rand-3",
+    "r2r-thorp-1"
+   ],
+   "scripted": true,
+   "trueTowns": 409,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": "No chip in every town: the only house is an \"Access to parish church\" row (no church on the roster); no state is claimed. The card still counts as \"active\" in the section head."
+  },
+  {
+   "fam": "Economic Flows: All (#)✓ Productive (#)",
+   "towns": 31,
+   "readByHand": [
+    "r2s-succession_void-thorp-0",
+    "r2s-wartime-hamlet-3",
+    "r2r-thorp-38"
+   ],
+   "scripted": true,
+   "trueTowns": 31,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: All (#)Issues (#)",
+   "towns": 135,
+   "readByHand": [
+    "r2r-thorp-36",
+    "rr3w-town-under_siege+famine-isolated-1",
+    "r2r-thorp-17"
+   ],
+   "scripted": true,
+   "trueTowns": 135,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: All (#)",
+   "towns": 22,
+   "readByHand": [
+    "rr3-thorp-monster_pressure-rand-3",
+    "r2s-occupied-hamlet-1",
+    "r2s-famine-hamlet-1"
+   ],
+   "scripted": true,
+   "trueTowns": 22,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Grain & BreadFood security",
+   "towns": 67,
+   "readByHand": [
+    "rr3-thorp-monster_pressure-rand-3",
+    "r2r-hamlet-52",
+    "rr3-thorp-occupied-rand-1"
+   ],
+   "scripted": true,
+   "trueTowns": 67,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": "No chip: the only mill is \"Access to external mill\"; the grain fields are the town's own. True."
+  },
+  {
+   "fam": "Economic Flows: All (#)Entrepôt (#)",
+   "towns": 5,
+   "readByHand": [
+    "r2r-thorp-30",
+    "rr3-hamlet-slave_revolt-rand-0"
+   ],
+   "scripted": true,
+   "trueTowns": 5,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Grain surplusAgricultural surplus",
+   "towns": 4,
+   "readByHand": [
+    "r2r-thorp-31",
+    "r2r-hamlet-29"
+   ],
+   "scripted": true,
+   "trueTowns": 4,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Grain & BreadFood securityImpaired",
+   "towns": 35,
+   "readByHand": [
+    "rr3w-thorp-famine-rand-1",
+    "rr3w-metropolis-under_siege-river-1",
+    "r2r-hamlet-0"
+   ],
+   "scripted": true,
+   "trueTowns": 35,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Preserved foods",
+   "towns": 109,
+   "readByHand": [
+    "r2s-occupied-hamlet-0",
+    "r2s-monster_pressure-city-2",
+    "r2r-hamlet-24"
+   ],
+   "scripted": true,
+   "trueTowns": 109,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Aged cheeseLuxury dairy products",
+   "towns": 5,
+   "readByHand": [
+    "r2r-hamlet-42",
+    "rr3-village-famine-rand-1"
+   ],
+   "scripted": true,
+   "trueTowns": 5,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: All (#)Issues (#)✓ Productive (#)",
+   "towns": 86,
+   "readByHand": [
+    "r2s-succession_void-thorp-3",
+    "rr3-town-under_siege-rand-2",
+    "r2r-hamlet-16"
+   ],
+   "scripted": true,
+   "trueTowns": 86,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Palm sugarPreserved fruit",
+   "towns": 27,
+   "readByHand": [
+    "r2r-hamlet-14",
+    "r2r-metropolis-12",
+    "r2s-famine-city-1"
+   ],
+   "scripted": true,
+   "trueTowns": 27,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: River FishingFood securityImpaired",
+   "towns": 13,
+   "readByHand": [
+    "r2r-hamlet-16",
+    "r2s-famine-metropolis-1"
+   ],
+   "scripted": true,
+   "trueTowns": 13,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Normally yields",
+   "towns": 64,
+   "readByHand": [
+    "r2s-under_siege-thorp-3",
+    "r2r-city-44",
+    "r2r-hamlet-16"
+   ],
+   "scripted": true,
+   "trueTowns": 64,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": "Prints only on Impaired cards (siege or famine-failed ground). True."
+  },
+  {
+   "fam": "Economic Flows: All (#)Issues (#)✓ Productive (#)Entrepôt (#)",
+   "towns": 22,
+   "readByHand": [
+    "r2r-hamlet-17",
+    "rr3-town-under_siege+famine-rand-5",
+    "r2s-under_siege-village-3"
+   ],
+   "scripted": true,
+   "trueTowns": 22,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: River Mill IndustryRaw materials & fuel",
+   "towns": 12,
+   "readByHand": [
+    "r2r-hamlet-44",
+    "r2s-succession_void-hamlet-0",
+    "rr3-hamlet-occupied-rand-5"
+   ],
+   "scripted": true,
+   "trueTowns": 12,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": "No chip: the only mill is an access row. True."
+  },
+  {
+   "fam": "Economic Flows: Pilgrimage & Holy SitesReligion & civic",
+   "towns": 33,
+   "readByHand": [
+    "rr3-hamlet-succession_void-rand-5",
+    "r2s-occupied-hamlet-1"
+   ],
+   "scripted": true,
+   "trueTowns": 33,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": "No chip: the only church is an access row. True."
+  },
+  {
+   "fam": "Economic Flows: Furs and pelts",
+   "towns": 56,
+   "readByHand": [
+    "r2s-plague_onset-hamlet-0",
+    "rr3-town-slave_revolt-rand-1",
+    "r2s-under_siege-hamlet-3"
+   ],
+   "scripted": true,
+   "trueTowns": 56,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Fishing & SeafoodFood securityImpaired",
+   "towns": 7,
+   "readByHand": [
+    "r2r-hamlet-28",
+    "rr3-metropolis-under_siege+famine-rand-5"
+   ],
+   "scripted": true,
+   "trueTowns": 7,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Salted fishSmoked seafoodFish oil",
+   "towns": 2,
+   "readByHand": [
+    "r2r-hamlet-28",
+    "r2s-famine-hamlet-0"
+   ],
+   "scripted": true,
+   "trueTowns": 2,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Transit trade profit",
+   "towns": 428,
+   "readByHand": [
+    "r2r-village-35",
+    "r2r-metropolis-8",
+    "r2r-city-44"
+   ],
+   "scripted": true,
+   "trueTowns": 428,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": "Every town is on a river, port or crossroads route with a toll, customs or coaching house; under siege the card is Impaired. True."
+  },
+  {
+   "fam": "Economic Flows: Leather goods",
+   "towns": 6,
+   "readByHand": [
+    "rr3w-village-occupied-river-1",
+    "rr3-village-religious_conversion-rand-0"
+   ],
+   "scripted": true,
+   "trueTowns": 6,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Livestock & DairyFood securityImpaired",
+   "towns": 26,
+   "readByHand": [
+    "r2s-famine-hamlet-3",
+    "rr3w-metropolis-famine-rand-1",
+    "r2r-village-55"
+   ],
+   "scripted": true,
+   "trueTowns": 26,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Textiles & ClothManufacturing & craftsImpaired",
+   "towns": 20,
+   "readByHand": [
+    "r2r-village-55",
+    "rr3w-metropolis-famine-rand-1"
+   ],
+   "scripted": true,
+   "trueTowns": 20,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Cloth Finishing & ClothingManufacturing & craftsImpaired",
+   "towns": 19,
+   "readByHand": [
+    "r2r-village-55",
+    "rr3w-metropolis-famine-rand-1"
+   ],
+   "scripted": true,
+   "trueTowns": 19,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Legal services",
+   "towns": 194,
+   "readByHand": [
+    "rr3-town-famine-rand-4",
+    "rr3-town-occupied-rand-3",
+    "r2s-under_siege-town-0"
+   ],
+   "scripted": true,
+   "trueTowns": 194,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": "Law & Governance card with a Town hall: the court outputs are already dropped; \"Legal services\" from a town hall that arbitrates. True."
+  },
+  {
+   "fam": "Economic Flows: Sacred hive-tending and flower-calling maintains honey production",
+   "towns": 25,
+   "readByHand": [
+    "r2r-town-14",
+    "rr3-metropolis-occupied-rand-3",
+    "rr3-metropolis-famine-rand-1"
+   ],
+   "scripted": true,
+   "trueTowns": 25,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Pottery and ceramics",
+   "towns": 4,
+   "readByHand": [
+    "r2s-slave_revolt-village-3",
+    "rr3-city-politically_fractured-rand-1"
+   ],
+   "scripted": true,
+   "trueTowns": 4,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Strategic controlTrade access fees",
+   "towns": 28,
+   "readByHand": [
+    "rr3-town-politically_fractured-rand-3",
+    "rr3-metropolis-recently_betrayed-rand-4",
+    "r2s-under_siege-town-2"
+   ],
+   "scripted": true,
+   "trueTowns": 28,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Books and manuscriptsPrinting services",
+   "towns": 31,
+   "readByHand": [
+    "r2r-city-31",
+    "r2s-plague_onset-metropolis-2",
+    "r2s-under_siege-city-3"
+   ],
+   "scripted": true,
+   "trueTowns": 31,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Glassware",
+   "towns": 7,
+   "readByHand": [
+    "r2r-city-44",
+    "r2s-religious_conversion-city-0"
+   ],
+   "scripted": true,
+   "trueTowns": 7,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Fine textiles",
+   "towns": 2,
+   "readByHand": [
+    "rr3-city-monster_pressure-rand-1",
+    "r2r-city-31"
+   ],
+   "scripted": true,
+   "trueTowns": 2,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Luxury manufactured goods",
+   "towns": 9,
+   "readByHand": [
+    "rr3-city-recently_betrayed-rand-3",
+    "r2r-city-34",
+    "r2r-city-44"
+   ],
+   "scripted": true,
+   "trueTowns": 9,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "NEED: {services} here depend on {goods}, grain and fuel brought in.",
+   "towns": 2,
+   "readByHand": [
+    "rr3-city-plague_onset-rand-2",
+    "r2r-city-54"
+   ],
+   "scripted": true,
+   "trueTowns": 2,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Temple stores supplement grain shortage",
+   "towns": 12,
+   "readByHand": [
+    "rr3-city-recently_betrayed-rand-5",
+    "r2r-metropolis-8",
+    "rr3-city-occupied-rand-1"
+   ],
+   "scripted": true,
+   "trueTowns": 12,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "NEED: {services} here depend on {goods}, iron and grain from outside, which the siege has cut off.",
+   "towns": 7,
+   "readByHand": [
+    "rr3w-metropolis-under_siege-isolated-1",
+    "r2r-metropolis-14"
+   ],
+   "scripted": true,
+   "trueTowns": 7,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Strategic Crossroads TollTrade & entrepôtImpaired",
+   "towns": 12,
+   "readByHand": [
+    "rr3-town-under_siege+famine-rand-2",
+    "r2r-metropolis-14"
+   ],
+   "scripted": true,
+   "trueTowns": 12,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Wine & SpiritsTrade & entrepôtImpaired",
+   "towns": 45,
+   "readByHand": [
+    "rr3-village-under_siege-rand-4",
+    "r2r-metropolis-14"
+   ],
+   "scripted": true,
+   "trueTowns": 45,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Banking & FinanceServiceExportImpaired",
+   "towns": 47,
+   "readByHand": [
+    "r2s-under_siege-town-3",
+    "r2r-metropolis-14"
+   ],
+   "scripted": true,
+   "trueTowns": 47,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Medical ServicesServiceImpaired",
+   "towns": 27,
+   "readByHand": [
+    "rr3w-town-calm-isolated-0",
+    "r2r-metropolis-14"
+   ],
+   "scripted": true,
+   "trueTowns": 27,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Scholarly RevenueServiceExportImpaired",
+   "towns": 51,
+   "readByHand": [
+    "rr3-city-under_siege-rand-4",
+    "rr3w-metropolis-famine-isolated-1",
+    "r2r-metropolis-14"
+   ],
+   "scripted": true,
+   "trueTowns": 51,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Foraging & SmallholdingFood securityImpaired",
+   "towns": 17,
+   "readByHand": [
+    "r2s-under_siege-thorp-3",
+    "rr3w-metropolis-under_siege-rand-1",
+    "r2s-under_siege-thorp-0"
+   ],
+   "scripted": true,
+   "trueTowns": 17,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Pilgrimage & Holy SitesReligion & civicImpaired",
+   "towns": 33,
+   "readByHand": [
+    "rr3w-hamlet-under_siege+famine-isolated-1",
+    "rr3w-metropolis-under_siege+famine-isolated-1",
+    "r2s-under_siege-hamlet-1"
+   ],
+   "scripted": true,
+   "trueTowns": 33,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": "All under a siege (pilgrims cannot reach the hot springs). In 9 towns the only church is an access row; outside a siege the same card prints no chip. True."
+  },
+  {
+   "fam": "Economic Flows: All (#)Issues (#)Entrepôt (#)",
+   "towns": 21,
+   "readByHand": [
+    "rr3-thorp-wartime-rand-2",
+    "rr3-town-under_siege+famine-rand-0",
+    "r2s-under_siege-hamlet-3"
+   ],
+   "scripted": true,
+   "trueTowns": 21,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Hunting & TrappingFood securityImpaired",
+   "towns": 14,
+   "readByHand": [
+    "r2s-under_siege-hamlet-3",
+    "r2s-under_siege-metropolis-0"
+   ],
+   "scripted": true,
+   "trueTowns": 14,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Iron & MetalworkRaw materials & fuelImpaired",
+   "towns": 28,
+   "readByHand": [
+    "r2s-under_siege-hamlet-3",
+    "rr3w-metropolis-under_siege-rand-0"
+   ],
+   "scripted": true,
+   "trueTowns": 28,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Furs & PeltsTrade & entrepôtImpaired",
+   "towns": 40,
+   "readByHand": [
+    "rr3w-hamlet-under_siege+famine-rand-1",
+    "rr3w-metropolis-under_siege-port-0",
+    "r2s-under_siege-hamlet-3"
+   ],
+   "scripted": true,
+   "trueTowns": 40,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Divine & Magical HealingHealing & medicineImpaired",
+   "towns": 24,
+   "readByHand": [
+    "rr3w-village-under_siege+famine-river-1",
+    "rr3w-metropolis-under_siege+famine-isolated-1",
+    "r2s-under_siege-village-1"
+   ],
+   "scripted": true,
+   "trueTowns": 24,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Beekeeping & WaxManufacturing & craftsImpaired",
+   "towns": 15,
+   "readByHand": [
+    "r2s-under_siege-village-2",
+    "rr3w-metropolis-under_siege-rand-1"
+   ],
+   "scripted": true,
+   "trueTowns": 15,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Salt & PreservationFood securityImpaired",
+   "towns": 37,
+   "readByHand": [
+    "rr3w-village-under_siege-river-1",
+    "r2s-under_siege-metropolis-1",
+    "r2s-under_siege-village-3"
+   ],
+   "scripted": true,
+   "trueTowns": 37,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Spices & DyesTrade & entrepôtImpaired",
+   "towns": 25,
+   "readByHand": [
+    "rr3-town-under_siege+famine-rand-2",
+    "rr3w-metropolis-under_siege-rand-1",
+    "r2s-under_siege-town-0"
+   ],
+   "scripted": true,
+   "trueTowns": 25,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Storage & LogisticsTrade & entrepôtImpaired",
+   "towns": 13,
+   "readByHand": [
+    "rr3-town-under_siege+famine-rand-2",
+    "rr3w-metropolis-under_siege-river-1",
+    "r2s-under_siege-town-0"
+   ],
+   "scripted": true,
+   "trueTowns": 13,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Caravan & Overland TradeTrade & entrepôtImpaired",
+   "towns": 7,
+   "readByHand": [
+    "rr3-town-under_siege+famine-rand-2",
+    "rr3-city-under_siege+famine-rand-0",
+    "r2s-under_siege-town-0"
+   ],
+   "scripted": true,
+   "trueTowns": 7,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Camel Caravan TradeTrade & entrepôtImpaired",
+   "towns": 8,
+   "readByHand": [
+    "rr3-town-under_siege+famine-rand-2",
+    "rr3-city-under_siege+famine-rand-0",
+    "r2s-under_siege-town-0"
+   ],
+   "scripted": true,
+   "trueTowns": 8,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Reed & Marsh HarvestRaw materials & fuelImpaired",
+   "towns": 10,
+   "readByHand": [
+    "rr3-hamlet-under_siege-rand-2",
+    "rr3w-metropolis-under_siege+famine-river-1",
+    "r2s-under_siege-town-1"
+   ],
+   "scripted": true,
+   "trueTowns": 10,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Bowyer & fletcherManufacturing & craftsImpaired",
+   "towns": 13,
+   "readByHand": [
+    "rr3w-village-under_siege-river-0",
+    "rr3w-metropolis-under_siege+famine-isolated-0",
+    "r2s-under_siege-town-2"
+   ],
+   "scripted": true,
+   "trueTowns": 13,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Mountain Pass ControlTrade & entrepôtImpaired",
+   "towns": 1,
+   "readByHand": [
+    "r2s-under_siege-town-2"
+   ],
+   "scripted": true,
+   "trueTowns": 1,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Harbour DuesTrade & entrepôtImpaired",
+   "towns": 23,
+   "readByHand": [
+    "rr3w-town-under_siege-port-1",
+    "rr3w-metropolis-under_siege-port-0",
+    "r2s-under_siege-city-0"
+   ],
+   "scripted": true,
+   "trueTowns": 23,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Religious RevenueServiceExportImpaired",
+   "towns": 9,
+   "readByHand": [
+    "rr3-city-under_siege+famine-port-0",
+    "rr3-metropolis-under_siege+famine-port-0",
+    "r2s-under_siege-city-0"
+   ],
+   "scripted": true,
+   "trueTowns": 9,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Arcane ServicesServiceExportImpaired",
+   "towns": 41,
+   "readByHand": [
+    "rr3-city-under_siege-rand-4",
+    "rr3w-metropolis-famine-isolated-1",
+    "r2s-under_siege-city-0"
+   ],
+   "scripted": true,
+   "trueTowns": 41,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Port RevenueServiceExportImpaired",
+   "towns": 45,
+   "readByHand": [
+    "rr3w-town-under_siege+famine-river-0",
+    "rr3w-metropolis-under_siege-port-0",
+    "r2s-under_siege-city-0"
+   ],
+   "scripted": true,
+   "trueTowns": 45,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Alchemical TradeServiceExportImpaired",
+   "towns": 18,
+   "readByHand": [
+    "rr3-town-under_siege+famine-port-1",
+    "rr3-metropolis-under_siege+famine-rand-1",
+    "r2s-under_siege-city-0"
+   ],
+   "scripted": true,
+   "trueTowns": 18,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Horse & Animal TradeFood securityImpaired",
+   "towns": 16,
+   "readByHand": [
+    "rr3-village-under_siege+famine-rand-3",
+    "rr3w-metropolis-famine-rand-1",
+    "r2s-under_siege-city-1"
+   ],
+   "scripted": true,
+   "trueTowns": 16,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: FortificationsDefense & securityImpaired",
+   "towns": 13,
+   "readByHand": [
+    "rr3w-town-under_siege-river-0",
+    "rr3w-metropolis-under_siege-river-1",
+    "r2s-under_siege-city-2"
+   ],
+   "scripted": true,
+   "trueTowns": 13,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": "All under a siege that has taken the quarry; the chip is the supply chain's, not the walls'. True (a reader may take it for damaged walls)."
+  },
+  {
+   "fam": "Economic Flows: Herbalism & RemediesHealing & medicineImpaired",
+   "towns": 19,
+   "readByHand": [
+    "rr3w-village-under_siege-river-0",
+    "rr3w-metropolis-under_siege-rand-1",
+    "r2s-under_siege-city-2"
+   ],
+   "scripted": true,
+   "trueTowns": 19,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Timber & LumberRaw materials & fuelImpaired",
+   "towns": 13,
+   "readByHand": [
+    "rr3w-village-under_siege-river-0",
+    "rr3w-metropolis-under_siege+famine-isolated-0",
+    "r2s-under_siege-city-2"
+   ],
+   "scripted": true,
+   "trueTowns": 13,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Stone & ConstructionRaw materials & fuelImpaired",
+   "towns": 16,
+   "readByHand": [
+    "rr3w-village-under_siege+famine-river-1",
+    "rr3w-metropolis-under_siege-river-1",
+    "r2s-under_siege-city-2"
+   ],
+   "scripted": true,
+   "trueTowns": 16,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "NEED: {services} here depend on {goods}, grain and fuel from outside, which the siege has cut off.",
+   "towns": 1,
+   "readByHand": [
+    "r2s-under_siege-metropolis-0"
+   ],
+   "scripted": true,
+   "trueTowns": 1,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Mountain TimberRaw materials & fuelImpaired",
+   "towns": 2,
+   "readByHand": [
+    "rr3-city-under_siege-rand-3",
+    "r2s-under_siege-metropolis-0"
+   ],
+   "scripted": true,
+   "trueTowns": 2,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Education & ScholarshipServiceExportImpaired",
+   "towns": 31,
+   "readByHand": [
+    "rr3-metropolis-under_siege-port-0",
+    "rr3w-metropolis-famine-isolated-1",
+    "r2s-under_siege-metropolis-1"
+   ],
+   "scripted": true,
+   "trueTowns": 31,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Boatbuilding & River TransportRaw materials & fuelImpaired",
+   "towns": 4,
+   "readByHand": [
+    "rr3w-village-under_siege-river-0",
+    "r2s-under_siege-metropolis-3"
+   ],
+   "scripted": true,
+   "trueTowns": 4,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: River TollTrade & entrepôtImpaired",
+   "towns": 16,
+   "readByHand": [
+    "rr3w-town-under_siege+famine-river-0",
+    "rr3w-metropolis-under_siege+famine-river-1",
+    "r2s-under_siege-metropolis-3"
+   ],
+   "scripted": true,
+   "trueTowns": 16,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Brewing & MaltingFood securityImpaired",
+   "towns": 22,
+   "readByHand": [
+    "rr3-hamlet-famine-rand-2",
+    "rr3w-metropolis-under_siege-river-1",
+    "r2s-famine-village-2"
+   ],
+   "scripted": true,
+   "trueTowns": 22,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Food ProcessingManufacturing & craftsImpaired",
+   "towns": 6,
+   "readByHand": [
+    "rr3w-city-famine-rand-1",
+    "rr3w-metropolis-under_siege-river-0",
+    "r2s-famine-city-3"
+   ],
+   "scripted": true,
+   "trueTowns": 6,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Leatherworking & CordwainingManufacturing & craftsImpaired",
+   "towns": 12,
+   "readByHand": [
+    "rr3-village-famine-rand-3",
+    "rr3w-metropolis-famine-rand-1",
+    "r2s-famine-metropolis-2"
+   ],
+   "scripted": true,
+   "trueTowns": 12,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: All (#)✓ Productive (#)Entrepôt (#)",
+   "towns": 3,
+   "readByHand": [
+    "r2s-religious_conversion-hamlet-3",
+    "rr3-hamlet-slave_revolt-rand-1"
+   ],
+   "scripted": true,
+   "trueTowns": 3,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Fuel & HeatingRaw materials & fuelImpaired",
+   "towns": 17,
+   "readByHand": [
+    "rr3-hamlet-under_siege-rand-2",
+    "rr3w-metropolis-under_siege+famine-isolated-0",
+    "rr3-hamlet-under_siege-rand-0"
+   ],
+   "scripted": true,
+   "trueTowns": 17,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Meals and drinkPreserved foods",
+   "towns": 1,
+   "readByHand": [
+    "rr3-village-politically_fractured-port-0"
+   ],
+   "scripted": true,
+   "trueTowns": 1,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Alpine Wool and DairyRaw materials & fuelImpaired",
+   "towns": 1,
+   "readByHand": [
+    "rr3-village-under_siege+famine-rand-1"
+   ],
+   "scripted": true,
+   "trueTowns": 1,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Oasis Water and AgricultureRaw materials & fuelImpaired",
+   "towns": 1,
+   "readByHand": [
+    "rr3-town-under_siege-rand-1"
+   ],
+   "scripted": true,
+   "trueTowns": 1,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Magical Items & EnchantingArcane & magicalImpaired",
+   "towns": 9,
+   "readByHand": [
+    "rr3-town-under_siege-port-1",
+    "rr3-metropolis-under_siege+famine-rand-1"
+   ],
+   "scripted": true,
+   "trueTowns": 9,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": "All under a siege; the chain is an entrepôt (trade stopped). True."
+  },
+  {
+   "fam": "Economic Flows: Pottery & BrickmakingManufacturing & craftsImpaired",
+   "towns": 2,
+   "readByHand": [
+    "rr3w-town-under_siege-rand-1",
+    "rr3-city-under_siege-rand-1"
+   ],
+   "scripted": true,
+   "trueTowns": 2,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Clay & CeramicsRaw materials & fuelImpaired",
+   "towns": 2,
+   "readByHand": [
+    "rr3w-town-under_siege-rand-1",
+    "rr3-city-under_siege-rand-1"
+   ],
+   "scripted": true,
+   "trueTowns": 2,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: River Mill IndustryRaw materials & fuelImpaired",
+   "towns": 4,
+   "readByHand": [
+    "rr3w-hamlet-under_siege+famine-rand-1",
+    "rr3-metropolis-under_siege-rand-2",
+    "rr3-city-under_siege-rand-1"
+   ],
+   "scripted": true,
+   "trueTowns": 4,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Silk & Luxury TextilesTrade & entrepôtImpaired",
+   "towns": 8,
+   "readByHand": [
+    "rr3-city-under_siege+famine-rand-1",
+    "rr3w-metropolis-under_siege-rand-1",
+    "rr3-city-under_siege-rand-1"
+   ],
+   "scripted": true,
+   "trueTowns": 8,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Luxury GoodsManufacturing & craftsImpaired",
+   "towns": 8,
+   "readByHand": [
+    "rr3-city-under_siege-rand-4",
+    "rr3w-metropolis-under_siege+famine-isolated-0",
+    "rr3-city-under_siege-rand-2"
+   ],
+   "scripted": true,
+   "trueTowns": 8,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Mining & CoinageRaw materials & fuelImpaired",
+   "towns": 9,
+   "readByHand": [
+    "rr3w-town-under_siege+famine-isolated-1",
+    "rr3w-metropolis-under_siege+famine-isolated-0",
+    "rr3-city-under_siege-rand-2"
+   ],
+   "scripted": true,
+   "trueTowns": 9,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Shipbuilding and TimberRaw materials & fuelImpaired",
+   "towns": 2,
+   "readByHand": [
+    "rr3w-town-under_siege+famine-rand-0",
+    "rr3-city-under_siege+famine-rand-1"
+   ],
+   "scripted": true,
+   "trueTowns": 2,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Floodplain AgricultureRaw materials & fuelImpaired",
+   "towns": 1,
+   "readByHand": [
+    "rr3-metropolis-under_siege-rand-2"
+   ],
+   "scripted": true,
+   "trueTowns": 1,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  },
+  {
+   "fam": "Economic Flows: Leather & HidesManufacturing & craftsImpaired",
+   "towns": 1,
+   "readByHand": [
+    "rr3w-city-under_siege+famine-river-1"
+   ],
+   "scripted": true,
+   "trueTowns": 1,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": null
+  }
+ ],
+ "also": [
+  {
+   "kind": "h",
+   "severity": "LOW",
+   "note": "Not a family line, same section: \"Contributes to <income> - N% of income\" prints on 1701 chain cards in 859 towns, the machinery of a rating (a percentage share)."
+  },
+  {
+   "kind": "e",
+   "severity": "LOW",
+   "note": "\"Economic Flows (N active ...)\" and \"All (N)\" count the access-only cards (Faith & Worship, Grain & Bread, River Mill, Pilgrimage with no chip) that the tab treats as not run here; e.g. r2r-thorp-0 \"Economic Flows (1 active)\" whose one card is Faith & Worship via \"Access to parish church\"."
+  },
+  {
+   "kind": "g",
+   "severity": "LOW",
+   "note": "Siege-form need sentences in ports under siege stand beside the same tab's Exports pills marked \"(naval route only)\", e.g. rr3w-metropolis-under_siege-port-0: the sea route the exports use is not said to be cut."
+  },
+  {
+   "kind": "note",
+   "note": "Checked and true: every Impaired header sits under a siege in force (chain on its own land ground or on trade; a port's sea fishing excepted) or a famine whose failed source is the chain's own ground; every no-chip header is a chain whose only house is an \"Access to ...\" row; every \"brought in by magic\" town has a Teleportation circle or an arcane house; every siege-form sentence is under a siege and no calm form prints under one; every named service is the dependency house's own and the house stands on the roster."
+  }
+ ]
+}

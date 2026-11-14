@@ -1,0 +1,7 @@
+const fs=require("fs");const P=fs.readFileSync("/tmp/claude-0/rw2c/agents/out-surfaces/parsed.jsonl","utf8").split("\n").filter(Boolean).map(JSON.parse);
+const PROC={"timber":/^sawmill|^carpenters' guild|^lumber/i,"mountain_timber":/^sawmill|^carpenters' guild|^lumber|^charcoal burner/i,"animal hides":/^tann|^leather|^furrier/i,"wool":/^weaver|^fuller|^textile|^cloth/i,"medicinal herbs":/^apothecar|^alchemist|^herbalist/i,"glass sand":/^glass/i,"glass_sand":/^glass/i,"desert salt":/^salt works|^saltern/i,"hot_springs_mineral":/^bath|^spa\b|^apothecar|^alchemist/i,"camel_herds":/^caravanserai|^tann/i,"iron ore":/^smelt|^forge|^blacksmith/i,"alpine pasture":/^dairy|^cheese|^weaver|^fuller/i,"alpine_pasture":/^dairy|^cheese|^weaver|^fuller/i};
+const res={};const hits=[];const towns=new Set(),allTowns=new Set();
+for(const x of P){for(const r of (x.L.exploit.partial||[]).filter(r=>r.moved)){allTowns.add(x.seed);const re=PROC[r.r]||PROC[r.r.toLowerCase()];res[r.r]=(res[r.r]||0)+1;if(!re)continue;
+ const have=x.facts.inst.filter(n=>re.test(n));if(have.length){hits.push({seed:x.seed,res:r.r,have,kinds:x.L.kinds.join("+"),tier:x.facts.tier});towns.add(x.seed)}}}
+console.log(res);const c={};for(const h of hits){const k=h.res+"::"+h.have.join("/");c[k]=(c[k]||0)+1}console.log(c);console.log("rows",hits.length,"towns",towns.size,"of",allTowns.size);
+fs.writeFileSync("/tmp/claude-0/rw2c/agents/out-surfaces/dash2-out.json",JSON.stringify(hits,null,1));

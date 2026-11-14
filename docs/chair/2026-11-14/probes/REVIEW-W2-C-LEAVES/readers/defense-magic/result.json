@@ -1,0 +1,953 @@
+{
+ "families": [
+  {
+   "fam": "Supporting Capabilities: Legal InfrastructureNone",
+   "towns": 86,
+   "readByHand": [
+    "rr3-town-famine-rand-4",
+    "r2r-town-20",
+    "rr3w-town-under_siege+famine-isolated-0"
+   ],
+   "scripted": true,
+   "falseTowns": 86,
+   "trueTowns": 0,
+   "verdict": "FALSE",
+   "severity": "MED",
+   "kind": "g",
+   "examples": [
+    {
+     "seed": "r2r-town-4",
+     "sentence": "Legal InfrastructureNone",
+     "fact": "record economicState.compound.inst.hasCourtSystem=true, hasPrison=false; roster law houses: none; the same Defense tab's Guard assessment says: \"Offenders the town watch catches go before the court; there is little room to hold them after.\""
+    },
+    {
+     "seed": "r2r-town-7",
+     "sentence": "Legal InfrastructureNone",
+     "fact": "record economicState.compound.inst.hasCourtSystem=true, hasPrison=false; roster law houses: none; the same Defense tab's Guard assessment says: \"A court exists, though there is nowhere to hold the guilty.\""
+    },
+    {
+     "seed": "r2r-town-8",
+     "sentence": "Legal InfrastructureNone",
+     "fact": "record economicState.compound.inst.hasCourtSystem=true, hasPrison=false; roster law houses: none; the same Defense tab's Guard assessment says: \"Offenders the town watch catches go before the court; there is little room to hold them after.\""
+    },
+    {
+     "seed": "r2r-town-20",
+     "sentence": "Legal InfrastructureNone",
+     "fact": "record economicState.compound.inst.hasCourtSystem=true, hasPrison=false; roster law houses: none; the same Defense tab's Guard assessment says: \"Offenders the town watch catches go before the court; there is little room to hold them after.\""
+    },
+    {
+     "seed": "r2r-town-22",
+     "sentence": "Legal InfrastructureNone",
+     "fact": "record economicState.compound.inst.hasCourtSystem=true, hasPrison=false; roster law houses: none; the same Defense tab's Guard assessment says: \"The court can try a case, but there is little room to hold anyone it convicts.\""
+    }
+   ],
+   "note": "86/86 towns: the row reads the roster (no courthouse/prison house on it; defenseDisplay.js reads `courtOnRoster`, not the flag), but the record's hasCourtSystem=true in every one and the same tab's Guard assessment ('A court exists, though there is nowhere to hold the guilty' / 'Offenders ... go before the court' / 'The court can try a case') and Internal Security ('The town's law can name a wrong and cannot keep the person') say a court sits; 29 also print '<N>'s court passes sentences it cannot enforce'. No town has a court house on the roster, so the row is true to the roster and false to the record flag and to its own page; one of the two must change. All are towns (pop 309-2453); 30+ are under siege/famine/occupation, no difference there."
+  },
+  {
+   "fam": "Supporting Capabilities: No deterrence beyond force.",
+   "towns": 86,
+   "readByHand": [
+    "rr3-town-famine-rand-4",
+    "r2r-town-20",
+    "rr3w-town-under_siege+famine-isolated-0"
+   ],
+   "scripted": true,
+   "falseTowns": 86,
+   "trueTowns": 0,
+   "verdict": "FALSE",
+   "severity": "MED",
+   "kind": "g",
+   "examples": [
+    {
+     "seed": "r2r-town-4",
+     "sentence": "No deterrence beyond force.",
+     "fact": "record economicState.compound.inst.hasCourtSystem=true, hasPrison=false; roster law houses: none; the same Defense tab's Guard assessment says: \"Offenders the town watch catches go before the court; there is little room to hold them after.\""
+    },
+    {
+     "seed": "r2r-town-7",
+     "sentence": "No deterrence beyond force.",
+     "fact": "record economicState.compound.inst.hasCourtSystem=true, hasPrison=false; roster law houses: none; the same Defense tab's Guard assessment says: \"A court exists, though there is nowhere to hold the guilty.\""
+    },
+    {
+     "seed": "r2r-town-8",
+     "sentence": "No deterrence beyond force.",
+     "fact": "record economicState.compound.inst.hasCourtSystem=true, hasPrison=false; roster law houses: none; the same Defense tab's Guard assessment says: \"Offenders the town watch catches go before the court; there is little room to hold them after.\""
+    },
+    {
+     "seed": "r2r-town-20",
+     "sentence": "No deterrence beyond force.",
+     "fact": "record economicState.compound.inst.hasCourtSystem=true, hasPrison=false; roster law houses: none; the same Defense tab's Guard assessment says: \"Offenders the town watch catches go before the court; there is little room to hold them after.\""
+    },
+    {
+     "seed": "r2r-town-22",
+     "sentence": "No deterrence beyond force.",
+     "fact": "record economicState.compound.inst.hasCourtSystem=true, hasPrison=false; roster law houses: none; the same Defense tab's Guard assessment says: \"The court can try a case, but there is little room to hold anyone it convicts.\""
+    }
+   ],
+   "note": "86/86 towns: the row reads the roster (no courthouse/prison house on it; defenseDisplay.js reads `courtOnRoster`, not the flag), but the record's hasCourtSystem=true in every one and the same tab's Guard assessment ('A court exists, though there is nowhere to hold the guilty' / 'Offenders ... go before the court' / 'The court can try a case') and Internal Security ('The town's law can name a wrong and cannot keep the person') say a court sits; 29 also print '<N>'s court passes sentences it cannot enforce'. No town has a court house on the roster, so the row is true to the roster and false to the record flag and to its own page; one of the two must change. All are towns (pop 309-2453); 30+ are under siege/famine/occupation, no difference there."
+  },
+  {
+   "fam": "Supporting Capabilities: Legal InfrastructurePrison only",
+   "towns": 19,
+   "readByHand": [
+    "r2s-insurgency-town-1",
+    "rr3-town-occupied-rand-3",
+    "rr3w-town-famine-river-1"
+   ],
+   "scripted": true,
+   "falseTowns": 19,
+   "trueTowns": 0,
+   "verdict": "FALSE",
+   "severity": "MED",
+   "kind": "g",
+   "examples": [
+    {
+     "seed": "r2r-town-5",
+     "sentence": "Legal InfrastructurePrison only",
+     "fact": "record economicState.compound.inst.hasCourtSystem=true, hasPrison=true; roster law houses: Small prison/stocks; the same Defense tab's Guard assessment says: \"A wrong done here goes before the court, and the guilty can be locked up for it.\""
+    },
+    {
+     "seed": "r2r-town-15",
+     "sentence": "Legal InfrastructurePrison only",
+     "fact": "record economicState.compound.inst.hasCourtSystem=true, hasPrison=true; roster law houses: Small prison/stocks; the same Defense tab's Guard assessment says: \"Offenders the garrison and town watch catches are tried at the court and held in the prison.\""
+    },
+    {
+     "seed": "r2r-town-25",
+     "sentence": "Legal InfrastructurePrison only",
+     "fact": "record economicState.compound.inst.hasCourtSystem=true, hasPrison=true; roster law houses: Small prison/stocks; the same Defense tab's Guard assessment says: \"Thieves here know that the court sits and the cells are real.\""
+    },
+    {
+     "seed": "r2s-under_siege-town-2",
+     "sentence": "Legal InfrastructurePrison only",
+     "fact": "record economicState.compound.inst.hasCourtSystem=true, hasPrison=true; roster law houses: Small prison/stocks; the same Defense tab's Guard assessment says: \"A functioning court and prison mean crimes carry real consequences.\""
+    },
+    {
+     "seed": "r2s-under_siege-town-3",
+     "sentence": "Legal InfrastructurePrison only",
+     "fact": "record economicState.compound.inst.hasCourtSystem=true, hasPrison=true; roster law houses: Small prison/stocks; the same Defense tab's Guard assessment says: \"Thieves here know that the court sits and the cells are real.\""
+    }
+   ],
+   "note": "19/19 towns: roster holds 'Small prison/stocks' and no court house, but hasCourtSystem=true and the same tab's Guard assessment says 'A functioning court and prison mean crimes carry real consequences' / 'Thieves here know that the court sits and the cells are real' / 'Offenders ... are tried at the court and held in the prison'; 'Detention without process. Arbitrary enforcement.' contradicts it outright. Same roster-vs-flag split as the None row."
+  },
+  {
+   "fam": "Supporting Capabilities: Detention without process. Arbitrary enforcement.",
+   "towns": 19,
+   "readByHand": [
+    "r2s-insurgency-town-1",
+    "rr3-town-occupied-rand-3",
+    "rr3w-town-famine-river-1"
+   ],
+   "scripted": true,
+   "falseTowns": 19,
+   "trueTowns": 0,
+   "verdict": "FALSE",
+   "severity": "MED",
+   "kind": "g",
+   "examples": [
+    {
+     "seed": "r2r-town-5",
+     "sentence": "Detention without process. Arbitrary enforcement.",
+     "fact": "record economicState.compound.inst.hasCourtSystem=true, hasPrison=true; roster law houses: Small prison/stocks; the same Defense tab's Guard assessment says: \"A wrong done here goes before the court, and the guilty can be locked up for it.\""
+    },
+    {
+     "seed": "r2r-town-15",
+     "sentence": "Detention without process. Arbitrary enforcement.",
+     "fact": "record economicState.compound.inst.hasCourtSystem=true, hasPrison=true; roster law houses: Small prison/stocks; the same Defense tab's Guard assessment says: \"Offenders the garrison and town watch catches are tried at the court and held in the prison.\""
+    },
+    {
+     "seed": "r2r-town-25",
+     "sentence": "Detention without process. Arbitrary enforcement.",
+     "fact": "record economicState.compound.inst.hasCourtSystem=true, hasPrison=true; roster law houses: Small prison/stocks; the same Defense tab's Guard assessment says: \"Thieves here know that the court sits and the cells are real.\""
+    },
+    {
+     "seed": "r2s-under_siege-town-2",
+     "sentence": "Detention without process. Arbitrary enforcement.",
+     "fact": "record economicState.compound.inst.hasCourtSystem=true, hasPrison=true; roster law houses: Small prison/stocks; the same Defense tab's Guard assessment says: \"A functioning court and prison mean crimes carry real consequences.\""
+    },
+    {
+     "seed": "r2s-under_siege-town-3",
+     "sentence": "Detention without process. Arbitrary enforcement.",
+     "fact": "record economicState.compound.inst.hasCourtSystem=true, hasPrison=true; roster law houses: Small prison/stocks; the same Defense tab's Guard assessment says: \"Thieves here know that the court sits and the cells are real.\""
+    }
+   ],
+   "note": "19/19 towns: roster holds 'Small prison/stocks' and no court house, but hasCourtSystem=true and the same tab's Guard assessment says 'A functioning court and prison mean crimes carry real consequences' / 'Thieves here know that the court sits and the cells are real' / 'Offenders ... are tried at the court and held in the prison'; 'Detention without process. Arbitrary enforcement.' contradicts it outright. Same roster-vs-flag split as the None row."
+  },
+  {
+   "fam": "Criminal Architecture & Public Order: Criminal structure: Semi-organized networks",
+   "towns": 289,
+   "readByHand": [
+    "rr3w-city-under_siege-river-1",
+    "rr3-metropolis-religious_conversion-rand-3",
+    "rr3-city-occupied-rand-2"
+   ],
+   "scripted": true,
+   "trueTowns": 253,
+   "falseTowns": 36,
+   "verdict": "MIXED",
+   "severity": "HIGH",
+   "kind": "c,g",
+   "examples": [
+    {
+     "seed": "r2r-city-50",
+     "sentence": "Criminal structure: Semi-organized networks",
+     "fact": "Power tab: Ruler Corrupt City Council (Criminal, power 39) governs the city; this same Defense section prints 'Underworld: Corrupt City Council · Dominant'; roster and this tab's 'Active criminal operations' hold 'Thieves' guild chapter'"
+    },
+    {
+     "seed": "r2r-metropolis-0",
+     "sentence": "Criminal structure: Semi-organized networks",
+     "fact": "Power tab: Ruler Shadow Senate (Criminal, power 39) governs the metropolis; this same Defense section prints 'Underworld: Shadow Senate · Dominant'"
+    },
+    {
+     "seed": "r2r-metropolis-7",
+     "sentence": "Criminal structure: Semi-organized networks",
+     "fact": "Power tab: Ruler Shadow Senate (Criminal, power 33) governs the metropolis; this same Defense section prints 'Underworld: Thieves' Guild · Dominant'"
+    },
+    {
+     "seed": "r2s-politically_fractured-metropolis-1",
+     "sentence": "Criminal structure: Semi-organized networks",
+     "fact": "Power tab: Ruler Shadow Senate (Criminal, power 14) governs the metropolis; this same Defense section prints 'Underworld: Thieves' Guild · Minor'"
+    },
+    {
+     "seed": "r2s-recently_betrayed-metropolis-3",
+     "sentence": "Criminal structure: Semi-organized networks",
+     "fact": "Power tab: Ruler Shadow Senate (Criminal, power 24) governs the metropolis; this same Defense section prints 'Underworld: Shadow Senate · Significant'"
+    }
+   ],
+   "note": "False where a criminal power holds the seat (18; HIGH) or the roster holds a thieves' guild (18 more; MED: the generator classes 160 of 181 thieves'-guild towns 'organized'). Second sentences (black market, smuggling, gangs, the tier word) are true in every town. The label/note print in a town with a governing criminal power or a thieves' guild in 36 of 289."
+  },
+  {
+   "fam": "Criminal Architecture & Public Order: Criminal activity is coordinated enough to maintain routes and territories but lacks a single controlling authority. Several gangs may be competing. Less predictable than a guild, more structured than street crime.",
+   "towns": 289,
+   "readByHand": [
+    "rr3w-city-under_siege-river-1",
+    "rr3-metropolis-religious_conversion-rand-3",
+    "rr3-city-occupied-rand-2"
+   ],
+   "scripted": true,
+   "trueTowns": 253,
+   "falseTowns": 36,
+   "verdict": "MIXED",
+   "severity": "HIGH",
+   "kind": "c,g",
+   "examples": [
+    {
+     "seed": "r2r-city-50",
+     "sentence": "Criminal activity is coordinated enough to maintain routes and territories but lacks a single controlling authority. Several gangs may be competing. Less predictable than a guild, more structured than street crime.",
+     "fact": "Power tab: Ruler Corrupt City Council (Criminal, power 39) governs the city; this same Defense section prints 'Underworld: Corrupt City Council · Dominant'; roster and this tab's 'Active criminal operations' hold 'Thieves' guild chapter'"
+    },
+    {
+     "seed": "r2r-metropolis-0",
+     "sentence": "Criminal activity is coordinated enough to maintain routes and territories but lacks a single controlling authority. Several gangs may be competing. Less predictable than a guild, more structured than street crime.",
+     "fact": "Power tab: Ruler Shadow Senate (Criminal, power 39) governs the metropolis; this same Defense section prints 'Underworld: Shadow Senate · Dominant'"
+    },
+    {
+     "seed": "r2r-metropolis-7",
+     "sentence": "Criminal activity is coordinated enough to maintain routes and territories but lacks a single controlling authority. Several gangs may be competing. Less predictable than a guild, more structured than street crime.",
+     "fact": "Power tab: Ruler Shadow Senate (Criminal, power 33) governs the metropolis; this same Defense section prints 'Underworld: Thieves' Guild · Dominant'"
+    },
+    {
+     "seed": "r2s-politically_fractured-metropolis-1",
+     "sentence": "Criminal activity is coordinated enough to maintain routes and territories but lacks a single controlling authority. Several gangs may be competing. Less predictable than a guild, more structured than street crime.",
+     "fact": "Power tab: Ruler Shadow Senate (Criminal, power 14) governs the metropolis; this same Defense section prints 'Underworld: Thieves' Guild · Minor'"
+    },
+    {
+     "seed": "r2s-recently_betrayed-metropolis-3",
+     "sentence": "Criminal activity is coordinated enough to maintain routes and territories but lacks a single controlling authority. Several gangs may be competing. Less predictable than a guild, more structured than street crime.",
+     "fact": "Power tab: Ruler Shadow Senate (Criminal, power 24) governs the metropolis; this same Defense section prints 'Underworld: Shadow Senate · Significant'"
+    }
+   ],
+   "note": "False where a criminal power holds the seat (18; HIGH) or the roster holds a thieves' guild (18 more; MED: the generator classes 160 of 181 thieves'-guild towns 'organized'). Second sentences (black market, smuggling, gangs, the tier word) are true in every town. The label/note print in a town with a governing criminal power or a thieves' guild in 36 of 289."
+  },
+  {
+   "fam": "Criminal Architecture & Public Order: Rival crews at {N} are fighting over who runs the streets, and until one wins, people pay both the cut and the brawling. Anyone at {N} who knows whom to ask can buy contraband or stolen goods at the black market.",
+   "towns": 34,
+   "readByHand": [
+    "rr3-city-religious_conversion-rand-1",
+    "r2s-succession_void-metropolis-3",
+    "rr3w-city-famine-rand-1"
+   ],
+   "scripted": true,
+   "trueTowns": 31,
+   "falseTowns": 3,
+   "verdict": "MIXED",
+   "severity": "HIGH",
+   "kind": "c,g",
+   "examples": [
+    {
+     "seed": "r2s-plague_onset-city-3",
+     "sentence": "Rival crews at Xochiucan are fighting over who runs the streets, and until one wins, people pay both the cut and the brawling.",
+     "fact": "Power tab: Ruler Corrupt City Council (Criminal, power 23) governs the city; this same Defense section prints 'Underworld: Corrupt City Council · Significant'"
+    },
+    {
+     "seed": "rr3-city-mass_migration-rand-3",
+     "sentence": "Rival crews at Becantlan are fighting over who runs the streets, and until one wins, people pay both the cut and the brawling.",
+     "fact": "Power tab: Ruler Corrupt City Council (Criminal, power 28) governs the city; this same Defense section prints 'Underworld: Corrupt City Council · Strong'"
+    },
+    {
+     "seed": "rr3-metropolis-slave_revolt-rand-3",
+     "sentence": "Rival crews at Ulantash are fighting over who runs the streets, and until one wins, people pay both the cut and the brawling.",
+     "fact": "Power tab: Ruler Shadow Senate (Criminal, power 14) governs the metropolis; this same Defense section prints 'Underworld: Shadow Senate · Minor'"
+    }
+   ],
+   "note": "False where a criminal power holds the seat (3; HIGH) or the roster holds a thieves' guild (0 more; MED: the generator classes 160 of 181 thieves'-guild towns 'organized'). Second sentences (black market, smuggling, gangs, the tier word) are true in every town."
+  },
+  {
+   "fam": "Criminal Architecture & Public Order: Everyone at {N} knows someone takes a cut, but who it is changes by street and by season. Nothing sold at {N}'s black market reaches the toll book, so the city loses the dues on every load of contraband and stolen goods.",
+   "towns": 17,
+   "readByHand": [
+    "rr3w-city-famine-rand-0",
+    "r2r-city-5",
+    "rr3-city-famine-rand-4"
+   ],
+   "scripted": true,
+   "trueTowns": 12,
+   "falseTowns": 5,
+   "verdict": "MIXED",
+   "severity": "HIGH",
+   "kind": "c,g",
+   "examples": [
+    {
+     "seed": "r2s-religious_conversion-city-3",
+     "sentence": "Everyone at Vatanobo knows someone takes a cut, but who it is changes by street and by season.",
+     "fact": "Power tab: Ruler Corrupt City Council (Criminal, power 36) governs the city; this same Defense section prints 'Underworld: Corrupt City Council · Strong'"
+    },
+    {
+     "seed": "rr3-city-under_siege-port-0",
+     "sentence": "Everyone at Burjserai knows someone takes a cut, but who it is changes by street and by season.",
+     "fact": "Power tab: Ruler Corrupt City Council (Criminal, power 26) governs the city; this same Defense section prints 'Underworld: Corrupt City Council · Strong'"
+    },
+    {
+     "seed": "rr3-city-famine-rand-4",
+     "sentence": "Everyone at Pantenea knows someone takes a cut, but who it is changes by street and by season.",
+     "fact": "Power tab: Ruler Corrupt City Council (Criminal, power 26) governs the city; this same Defense section prints 'Underworld: Thieves' Guild · Significant'"
+    },
+    {
+     "seed": "rr3-city-recently_betrayed-rand-0",
+     "sentence": "Everyone at Hvaliburg knows someone takes a cut, but who it is changes by street and by season.",
+     "fact": "Power tab: Ruler Corrupt City Council (Criminal, power 23) governs the city; this same Defense section prints 'Underworld: Corrupt City Council · Significant'"
+    },
+    {
+     "seed": "rr3-city-occupied-rand-5",
+     "sentence": "Everyone at Divoko knows someone takes a cut, but who it is changes by street and by season.",
+     "fact": "roster and this tab's 'Active criminal operations' hold 'Thieves' guild chapter'"
+    }
+   ],
+   "note": "False where a criminal power holds the seat (4; HIGH) or the roster holds a thieves' guild (1 more; MED: the generator classes 160 of 181 thieves'-guild towns 'organized'). Second sentences (black market, smuggling, gangs, the tier word) are true in every town."
+  },
+  {
+   "fam": "Criminal Architecture & Public Order: Everyone at {N} knows someone takes a cut, but who it is changes by street and by season. Anyone at {N} who knows whom to ask can buy contraband or stolen goods at the black market.",
+   "towns": 37,
+   "readByHand": [
+    "r2r-city-25",
+    "r2r-metropolis-45",
+    "r2s-under_siege-city-3"
+   ],
+   "scripted": true,
+   "trueTowns": 36,
+   "falseTowns": 1,
+   "verdict": "MIXED",
+   "severity": "HIGH",
+   "kind": "c,g",
+   "examples": [
+    {
+     "seed": "r2s-recently_betrayed-metropolis-3",
+     "sentence": "Everyone at Lyssogorod knows someone takes a cut, but who it is changes by street and by season.",
+     "fact": "Power tab: Ruler Shadow Senate (Criminal, power 24) governs the metropolis; this same Defense section prints 'Underworld: Shadow Senate · Significant'"
+    }
+   ],
+   "note": "False where a criminal power holds the seat (1; HIGH) or the roster holds a thieves' guild (0 more; MED: the generator classes 160 of 181 thieves'-guild towns 'organized'). Second sentences (black market, smuggling, gangs, the tier word) are true in every town."
+  },
+  {
+   "fam": "Criminal Architecture & Public Order: Criminal work at {N} is coordinated enough to hold routes and territories and not coordinated enough to have a head; several interests are running, and none of them is the one to talk to. Nothing sold at {N}'s black mark…",
+   "towns": 32,
+   "readByHand": [
+    "r2s-recently_betrayed-city-3",
+    "r2s-politically_fractured-metropolis-2",
+    "r2s-famine-city-1"
+   ],
+   "scripted": true,
+   "trueTowns": 29,
+   "falseTowns": 3,
+   "verdict": "MIXED",
+   "severity": "HIGH",
+   "kind": "c,g",
+   "examples": [
+    {
+     "seed": "r2r-metropolis-7",
+     "sentence": "Criminal work at Ulancaravansarai is coordinated enough to hold routes and territories and not coordinated enough to have a head; several interests are running, and none of them is the one to talk to.",
+     "fact": "Power tab: Ruler Shadow Senate (Criminal, power 33) governs the metropolis; this same Defense section prints 'Underworld: Thieves' Guild · Dominant'"
+    },
+    {
+     "seed": "r2r-city-16",
+     "sentence": "Criminal work at Copantzin is coordinated enough to hold routes and territories and not coordinated enough to have a head; several interests are running, and none of them is the one to talk to.",
+     "fact": "roster and this tab's 'Active criminal operations' hold 'Thieves' guild chapter'"
+    },
+    {
+     "seed": "rr3-city-calm-port-0",
+     "sentence": "Criminal work at Sübeteibulag is coordinated enough to hold routes and territories and not coordinated enough to have a head; several interests are running, and none of them is the one to talk to.",
+     "fact": "roster and this tab's 'Active criminal operations' hold 'Thieves' guild chapter'"
+    }
+   ],
+   "note": "False where a criminal power holds the seat (1; HIGH) or the roster holds a thieves' guild (2 more; MED: the generator classes 160 of 181 thieves'-guild towns 'organized'). Second sentences (black market, smuggling, gangs, the tier word) are true in every town."
+  },
+  {
+   "fam": "Criminal Architecture & Public Order: Criminal work at {N} is coordinated enough to hold routes and territories and not coordinated enough to have a head; several interests are running, and none of them is the one to talk to. Goods moved by smuggling never p…",
+   "towns": 6,
+   "readByHand": [
+    "rr3w-city-wartime-isolated-0",
+    "r2r-metropolis-56",
+    "r2s-famine-metropolis-2"
+   ],
+   "scripted": true,
+   "trueTowns": 6,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": "True in every town: the opener's 'no head / rival crews / who takes the cut changes' stands with Rival Gangs or Multiple criminal factions on the roster (or two contesting criminal powers on the Power tab) and no criminal power in the seat; the second sentence's black market / smuggling / gangs / tier word all match the roster and tier."
+  },
+  {
+   "fam": "Criminal Architecture & Public Order: Criminal work at {N} is coordinated enough to hold routes and territories and not coordinated enough to have a head; several interests are running, and none of them is the one to talk to. Anyone at {N} who knows whom to …",
+   "towns": 38,
+   "readByHand": [
+    "rr3w-city-under_siege-river-1",
+    "rr3-metropolis-religious_conversion-rand-3",
+    "rr3-city-under_siege+famine-rand-1"
+   ],
+   "scripted": true,
+   "trueTowns": 33,
+   "falseTowns": 5,
+   "verdict": "MIXED",
+   "severity": "HIGH",
+   "kind": "c,g",
+   "examples": [
+    {
+     "seed": "r2r-city-50",
+     "sentence": "Criminal work at Capocolonia is coordinated enough to hold routes and territories and not coordinated enough to have a head; several interests are running, and none of them is the one to talk to.",
+     "fact": "Power tab: Ruler Corrupt City Council (Criminal, power 39) governs the city; this same Defense section prints 'Underworld: Corrupt City Council · Dominant'; roster and this tab's 'Active criminal operations' hold 'Thieves' guild chapter'"
+    },
+    {
+     "seed": "r2s-politically_fractured-metropolis-1",
+     "sentence": "Criminal work at Nokhoiobo is coordinated enough to hold routes and territories and not coordinated enough to have a head; several interests are running, and none of them is the one to talk to.",
+     "fact": "Power tab: Ruler Shadow Senate (Criminal, power 14) governs the metropolis; this same Defense section prints 'Underworld: Thieves' Guild · Minor'"
+    },
+    {
+     "seed": "r2s-wartime-city-2",
+     "sentence": "Criminal work at Langkirche is coordinated enough to hold routes and territories and not coordinated enough to have a head; several interests are running, and none of them is the one to talk to.",
+     "fact": "Power tab: Ruler Corrupt City Council (Criminal, power 16) governs the city; this same Defense section prints 'Underworld: Corrupt City Council · Minor'"
+    },
+    {
+     "seed": "r2r-city-56",
+     "sentence": "Criminal work at Spitzgate is coordinated enough to hold routes and territories and not coordinated enough to have a head; several interests are running, and none of them is the one to talk to.",
+     "fact": "roster and this tab's 'Active criminal operations' hold 'Thieves' guild chapter'"
+    },
+    {
+     "seed": "rr3-city-famine-rand-5",
+     "sentence": "Criminal work at Frosthavn is coordinated enough to hold routes and territories and not coordinated enough to have a head; several interests are running, and none of them is the one to talk to.",
+     "fact": "roster and this tab's 'Active criminal operations' hold 'Thieves' guild chapter'"
+    }
+   ],
+   "note": "False where a criminal power holds the seat (3; HIGH) or the roster holds a thieves' guild (2 more; MED: the generator classes 160 of 181 thieves'-guild towns 'organized'). Second sentences (black market, smuggling, gangs, the tier word) are true in every town."
+  },
+  {
+   "fam": "Criminal Architecture & Public Order: Everyone at {N} knows someone takes a cut, but who it is changes by street and by season. Goods moved by smuggling never pass through {N}'s toll book, and every load that slips past is a due the city does not collect.",
+   "towns": 4,
+   "readByHand": [
+    "r2s-insurgency-city-3",
+    "r2s-slave_revolt-city-1",
+    "r2r-city-47"
+   ],
+   "scripted": true,
+   "trueTowns": 4,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": "True in every town: the opener's 'no head / rival crews / who takes the cut changes' stands with Rival Gangs or Multiple criminal factions on the roster (or two contesting criminal powers on the Power tab) and no criminal power in the seat; the second sentence's black market / smuggling / gangs / tier word all match the roster and tier."
+  },
+  {
+   "fam": "Criminal Architecture & Public Order: Everyone at {N} knows someone takes a cut, but who it is changes by street and by season. A smuggling network runs through {N}, and some of what is sold in the city never paid a toll.",
+   "towns": 1,
+   "readByHand": [
+    "r2r-city-54"
+   ],
+   "scripted": true,
+   "trueTowns": 1,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": "True in every town: the opener's 'no head / rival crews / who takes the cut changes' stands with Rival Gangs or Multiple criminal factions on the roster (or two contesting criminal powers on the Power tab) and no criminal power in the seat; the second sentence's black market / smuggling / gangs / tier word all match the roster and tier."
+  },
+  {
+   "fam": "Criminal Architecture & Public Order: Rival crews at {N} are fighting over who runs the streets, and until one wins, people pay both the cut and the brawling. A smuggling network runs through {N}, and some of what is sold in the metropolis never paid a toll.",
+   "towns": 6,
+   "readByHand": [
+    "rr3-metropolis-infiltrated-port-0",
+    "r2r-metropolis-22",
+    "r2r-metropolis-0"
+   ],
+   "scripted": true,
+   "trueTowns": 5,
+   "falseTowns": 1,
+   "verdict": "MIXED",
+   "severity": "HIGH",
+   "kind": "c,g",
+   "examples": [
+    {
+     "seed": "r2r-metropolis-0",
+     "sentence": "Rival crews at Baigang are fighting over who runs the streets, and until one wins, people pay both the cut and the brawling.",
+     "fact": "Power tab: Ruler Shadow Senate (Criminal, power 39) governs the metropolis; this same Defense section prints 'Underworld: Shadow Senate · Dominant'"
+    }
+   ],
+   "note": "False where a criminal power holds the seat (1; HIGH) or the roster holds a thieves' guild (0 more; MED: the generator classes 160 of 181 thieves'-guild towns 'organized'). Second sentences (black market, smuggling, gangs, the tier word) are true in every town."
+  },
+  {
+   "fam": "Criminal Architecture & Public Order: Criminal work at {N} is coordinated enough to hold routes and territories and not coordinated enough to have a head; several interests are running, and none of them is the one to talk to. Few thefts at {N} are ever writt…",
+   "towns": 2,
+   "readByHand": [
+    "r2r-metropolis-5",
+    "r2s-slave_revolt-metropolis-3"
+   ],
+   "scripted": true,
+   "trueTowns": 0,
+   "falseTowns": 2,
+   "verdict": "FALSE",
+   "severity": "HIGH",
+   "kind": "g",
+   "examples": [
+    {
+     "seed": "r2r-metropolis-5",
+     "sentence": "Criminal work at Filopambelos is coordinated enough to hold routes and territories and not coordinated enough to have a head; several interests are running, and none of them is the one to talk to. Few thefts at Filopambelos are ever written into the metropolis's books: a thieves' guild settles them first, and the losses go uncounted.",
+     "fact": "roster and this tab's 'Active criminal operations' hold 'Thieves' guild (powerful)'; the line's own next sentence says 'a thieves' guild settles them first'"
+    },
+    {
+     "seed": "r2s-slave_revolt-metropolis-3",
+     "sentence": "Criminal work at Anoarion is coordinated enough to hold routes and territories and not coordinated enough to have a head; several interests are running, and none of them is the one to talk to. Few thefts at Anoarion are ever written into the metropolis's books: a thieves' guild settles them first, and the losses go uncounted.",
+     "fact": "roster and this tab's 'Active criminal operations' hold 'Thieves' guild (powerful)'; the line's own next sentence says 'a thieves' guild settles them first'"
+    }
+   ],
+   "note": "Self-contradicting line: the opener says the crime has no head / is contested, the second sentence (true: the roster holds a Thieves' guild) says a guild runs it."
+  },
+  {
+   "fam": "Criminal Architecture & Public Order: Rival crews at {N} are fighting over who runs the streets, and until one wins, people pay both the cut and the brawling. Nothing sold at {N}'s black market reaches the toll book, so the metropolis loses the dues on every…",
+   "towns": 19,
+   "readByHand": [
+    "r2r-metropolis-27",
+    "rr3-metropolis-occupied-rand-3",
+    "rr3-metropolis-infiltrated-rand-5"
+   ],
+   "scripted": true,
+   "trueTowns": 18,
+   "falseTowns": 1,
+   "verdict": "MIXED",
+   "severity": "HIGH",
+   "kind": "c,g",
+   "examples": [
+    {
+     "seed": "rr3w-metropolis-calm-river-0",
+     "sentence": "Rival crews at Jincheng are fighting over who runs the streets, and until one wins, people pay both the cut and the brawling.",
+     "fact": "Power tab: Ruler Shadow Senate (Criminal, power 36) governs the metropolis; this same Defense section prints 'Underworld: Shadow Senate · Dominant'"
+    }
+   ],
+   "note": "False where a criminal power holds the seat (1; HIGH) or the roster holds a thieves' guild (0 more; MED: the generator classes 160 of 181 thieves'-guild towns 'organized'). Second sentences (black market, smuggling, gangs, the tier word) are true in every town."
+  },
+  {
+   "fam": "Criminal Architecture & Public Order: Rival crews at {N} are fighting over who runs the streets, and until one wins, people pay both the cut and the brawling. Goods moved by smuggling never pass through {N}'s toll book, and every load that slips past is a du…",
+   "towns": 9,
+   "readByHand": [
+    "rr3-city-mass_migration-port-1",
+    "rr3w-metropolis-famine-isolated-1",
+    "r2s-famine-metropolis-3"
+   ],
+   "scripted": true,
+   "trueTowns": 8,
+   "falseTowns": 1,
+   "verdict": "MIXED",
+   "severity": "HIGH",
+   "kind": "c,g",
+   "examples": [
+    {
+     "seed": "rr3w-metropolis-famine-river-1",
+     "sentence": "Rival crews at Bayanbulag are fighting over who runs the streets, and until one wins, people pay both the cut and the brawling.",
+     "fact": "Power tab: Ruler Shadow Senate (Criminal, power 31) governs the metropolis; this same Defense section prints 'Underworld: Shadow Senate · Strong'"
+    }
+   ],
+   "note": "False where a criminal power holds the seat (1; HIGH) or the roster holds a thieves' guild (0 more; MED: the generator classes 160 of 181 thieves'-guild towns 'organized'). Second sentences (black market, smuggling, gangs, the tier word) are true in every town."
+  },
+  {
+   "fam": "Criminal Architecture & Public Order: Everyone at {N} knows someone takes a cut, but who it is changes by street and by season. Nothing sold at {N}'s black market reaches the toll book, so the metropolis loses the dues on every load of contraband and stolen …",
+   "towns": 14,
+   "readByHand": [
+    "rr3-metropolis-mass_migration-port-1",
+    "r2r-metropolis-14",
+    "rr3-metropolis-under_siege+famine-rand-5"
+   ],
+   "scripted": true,
+   "trueTowns": 14,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": "True in every town: the opener's 'no head / rival crews / who takes the cut changes' stands with Rival Gangs or Multiple criminal factions on the roster (or two contesting criminal powers on the Power tab) and no criminal power in the seat; the second sentence's black market / smuggling / gangs / tier word all match the roster and tier."
+  },
+  {
+   "fam": "Criminal Architecture & Public Order: Criminal work at {N} is coordinated enough to hold routes and territories and not coordinated enough to have a head; several interests are running, and none of them is the one to talk to. The thieves at {N} answer to a g…",
+   "towns": 2,
+   "readByHand": [
+    "r2r-metropolis-21",
+    "rr3-metropolis-indebted-rand-0"
+   ],
+   "scripted": true,
+   "trueTowns": 0,
+   "falseTowns": 2,
+   "verdict": "FALSE",
+   "severity": "HIGH",
+   "kind": "g",
+   "examples": [
+    {
+     "seed": "rr3-metropolis-indebted-rand-0",
+     "sentence": "Criminal work at Tredale is coordinated enough to hold routes and territories and not coordinated enough to have a head; several interests are running, and none of them is the one to talk to. The thieves at Tredale answer to a guild, and the guild decides who works which streets.",
+     "fact": "Power tab: Ruler Shadow Senate (Criminal, power 22) governs the metropolis; this same Defense section prints 'Underworld: Shadow Senate · Significant'; roster and this tab's 'Active criminal operations' hold 'Thieves' guild (powerful)'; the line's own next sentence says 'The thieves ... answer to a guild, and the guild decides who works which streets'"
+    },
+    {
+     "seed": "r2r-metropolis-21",
+     "sentence": "Criminal work at Altmoor is coordinated enough to hold routes and territories and not coordinated enough to have a head; several interests are running, and none of them is the one to talk to. The thieves at Altmoor answer to a guild, and the guild decides who works which streets.",
+     "fact": "roster and this tab's 'Active criminal operations' hold 'Thieves' guild (powerful)'; the line's own next sentence says 'The thieves ... answer to a guild, and the guild decides who works which streets'"
+    }
+   ],
+   "note": "Self-contradicting line: the opener says the crime has no head / is contested, the second sentence (true: the roster holds a Thieves' guild) says a guild runs it. 1 of these towns are also ruled by a criminal power."
+  },
+  {
+   "fam": "Criminal Architecture & Public Order: Rival crews at {N} are fighting over who runs the streets, and until one wins, people pay both the cut and the brawling. The thieves at {N} answer to a guild, and the guild decides who works which streets.",
+   "towns": 6,
+   "readByHand": [
+    "rr3-metropolis-under_siege+famine-rand-2",
+    "rr3-metropolis-slave_revolt-rand-4",
+    "rr3-metropolis-famine-port-0"
+   ],
+   "scripted": true,
+   "trueTowns": 0,
+   "falseTowns": 6,
+   "verdict": "FALSE",
+   "severity": "HIGH",
+   "kind": "g",
+   "examples": [
+    {
+     "seed": "r2r-metropolis-25",
+     "sentence": "Rival crews at Mönkhköl are fighting over who runs the streets, and until one wins, people pay both the cut and the brawling. The thieves at Mönkhköl answer to a guild, and the guild decides who works which streets.",
+     "fact": "roster and this tab's 'Active criminal operations' hold 'Thieves' guild (powerful)'; the line's own next sentence says 'The thieves ... answer to a guild, and the guild decides who works which streets'"
+    },
+    {
+     "seed": "r2s-religious_conversion-metropolis-0",
+     "sentence": "Rival crews at Baizhen are fighting over who runs the streets, and until one wins, people pay both the cut and the brawling. The thieves at Baizhen answer to a guild, and the guild decides who works which streets.",
+     "fact": "roster and this tab's 'Active criminal operations' hold 'Thieves' guild (powerful)'; the line's own next sentence says 'The thieves ... answer to a guild, and the guild decides who works which streets'"
+    },
+    {
+     "seed": "rr3-metropolis-famine-port-0",
+     "sentence": "Rival crews at Longshan are fighting over who runs the streets, and until one wins, people pay both the cut and the brawling. The thieves at Longshan answer to a guild, and the guild decides who works which streets.",
+     "fact": "roster and this tab's 'Active criminal operations' hold 'Thieves' guild (powerful)'; the line's own next sentence says 'The thieves ... answer to a guild, and the guild decides who works which streets'"
+    },
+    {
+     "seed": "rr3-metropolis-succession_void-rand-4",
+     "sentence": "Rival crews at Kleinkirche are fighting over who runs the streets, and until one wins, people pay both the cut and the brawling. The thieves at Kleinkirche answer to a guild, and the guild decides who works which streets.",
+     "fact": "roster and this tab's 'Active criminal operations' hold 'Thieves' guild (powerful)'; the line's own next sentence says 'The thieves ... answer to a guild, and the guild decides who works which streets'"
+    },
+    {
+     "seed": "rr3-metropolis-slave_revolt-rand-4",
+     "sentence": "Rival crews at Castelmagnum are fighting over who runs the streets, and until one wins, people pay both the cut and the brawling. The thieves at Castelmagnum answer to a guild, and the guild decides who works which streets.",
+     "fact": "roster and this tab's 'Active criminal operations' hold 'Thieves' guild (powerful)'; the line's own next sentence says 'The thieves ... answer to a guild, and the guild decides who works which streets'"
+    }
+   ],
+   "note": "Self-contradicting line: the opener says the crime has no head / is contested, the second sentence (true: the roster holds a Thieves' guild) says a guild runs it."
+  },
+  {
+   "fam": "Criminal Architecture & Public Order: Everyone at {N} knows someone takes a cut, but who it is changes by street and by season. Whatever {N}'s gangs take in never appears on the tax lists, and the metropolis is poorer by what they collect.",
+   "towns": 1,
+   "readByHand": [
+    "r2r-metropolis-31"
+   ],
+   "scripted": true,
+   "trueTowns": 1,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": "True in every town: the opener's 'no head / rival crews / who takes the cut changes' stands with Rival Gangs or Multiple criminal factions on the roster (or two contesting criminal powers on the Power tab) and no criminal power in the seat; the second sentence's black market / smuggling / gangs / tier word all match the roster and tier."
+  },
+  {
+   "fam": "Criminal Architecture & Public Order: Rival crews at {N} are fighting over who runs the streets, and until one wins, people pay both the cut and the brawling. Whatever {N}'s gangs take in never appears on the tax lists, and the metropolis is poorer by what t…",
+   "towns": 3,
+   "readByHand": [
+    "r2s-plague_onset-metropolis-2",
+    "rr3w-metropolis-occupied-port-1",
+    "r2r-metropolis-33"
+   ],
+   "scripted": true,
+   "trueTowns": 3,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": "True in every town: the opener's 'no head / rival crews / who takes the cut changes' stands with Rival Gangs or Multiple criminal factions on the roster (or two contesting criminal powers on the Power tab) and no criminal power in the seat; the second sentence's black market / smuggling / gangs / tier word all match the roster and tier."
+  },
+  {
+   "fam": "Criminal Architecture & Public Order: Criminal work at {N} is coordinated enough to hold routes and territories and not coordinated enough to have a head; several interests are running, and none of them is the one to talk to. Whatever {N}'s gangs take in nev…",
+   "towns": 5,
+   "readByHand": [
+    "r2s-politically_fractured-city-3",
+    "rr3w-metropolis-occupied-port-0",
+    "rr3w-city-under_siege-port-1"
+   ],
+   "scripted": true,
+   "trueTowns": 5,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": "True in every town: the opener's 'no head / rival crews / who takes the cut changes' stands with Rival Gangs or Multiple criminal factions on the roster (or two contesting criminal powers on the Power tab) and no criminal power in the seat; the second sentence's black market / smuggling / gangs / tier word all match the roster and tier."
+  },
+  {
+   "fam": "Criminal Architecture & Public Order: Rival crews at {N} are fighting over who runs the streets, and until one wins, people pay both the cut and the brawling. Whatever {N}'s gangs take in never appears on the tax lists, and the city is poorer by what they co…",
+   "towns": 3,
+   "readByHand": [
+    "rr3-city-occupied-rand-2",
+    "rr3-city-succession_void-rand-0",
+    "r2s-indebted-city-0"
+   ],
+   "scripted": true,
+   "trueTowns": 3,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": "True in every town: the opener's 'no head / rival crews / who takes the cut changes' stands with Rival Gangs or Multiple criminal factions on the roster (or two contesting criminal powers on the Power tab) and no criminal power in the seat; the second sentence's black market / smuggling / gangs / tier word all match the roster and tier."
+  },
+  {
+   "fam": "Criminal Architecture & Public Order: Rival crews at {N} are fighting over who runs the streets, and until one wins, people pay both the cut and the brawling. Nothing sold at {N}'s black market reaches the toll book, so the city loses the dues on every load …",
+   "towns": 15,
+   "readByHand": [
+    "rr3-city-famine-port-0",
+    "rr3w-city-wartime-river-0",
+    "rr3-city-famine-rand-0"
+   ],
+   "scripted": true,
+   "trueTowns": 13,
+   "falseTowns": 2,
+   "verdict": "MIXED",
+   "severity": "HIGH",
+   "kind": "c,g",
+   "examples": [
+    {
+     "seed": "rr3-city-famine-rand-0",
+     "sentence": "Rival crews at Portaminus are fighting over who runs the streets, and until one wins, people pay both the cut and the brawling.",
+     "fact": "Power tab: Ruler Corrupt City Council (Criminal, power 23) governs the city; this same Defense section prints 'Underworld: Thieves' Guild · Significant'"
+    },
+    {
+     "seed": "rr3-city-indebted-rand-4",
+     "sentence": "Rival crews at Androntion are fighting over who runs the streets, and until one wins, people pay both the cut and the brawling.",
+     "fact": "roster and this tab's 'Active criminal operations' hold 'Thieves' guild chapter'"
+    }
+   ],
+   "note": "False where a criminal power holds the seat (1; HIGH) or the roster holds a thieves' guild (1 more; MED: the generator classes 160 of 181 thieves'-guild towns 'organized'). Second sentences (black market, smuggling, gangs, the tier word) are true in every town."
+  },
+  {
+   "fam": "Criminal Architecture & Public Order: Everyone at {N} knows someone takes a cut, but who it is changes by street and by season. A smuggling network runs through {N}, and some of what is sold in the metropolis never paid a toll.",
+   "towns": 6,
+   "readByHand": [
+    "rr3w-metropolis-under_siege-isolated-0",
+    "rr3-metropolis-succession_void-rand-3",
+    "rr3-metropolis-under_siege-rand-4"
+   ],
+   "scripted": true,
+   "trueTowns": 6,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": "True in every town: the opener's 'no head / rival crews / who takes the cut changes' stands with Rival Gangs or Multiple criminal factions on the roster (or two contesting criminal powers on the Power tab) and no criminal power in the seat; the second sentence's black market / smuggling / gangs / tier word all match the roster and tier."
+  },
+  {
+   "fam": "Criminal Architecture & Public Order: Criminal work at {N} is coordinated enough to hold routes and territories and not coordinated enough to have a head; several interests are running, and none of them is the one to talk to. A smuggling network runs through…",
+   "towns": 9,
+   "readByHand": [
+    "r2s-succession_void-city-2",
+    "rr3-metropolis-calm-port-0",
+    "rr3-city-under_siege+famine-rand-5"
+   ],
+   "scripted": true,
+   "trueTowns": 9,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": "True in every town: the opener's 'no head / rival crews / who takes the cut changes' stands with Rival Gangs or Multiple criminal factions on the roster (or two contesting criminal powers on the Power tab) and no criminal power in the seat; the second sentence's black market / smuggling / gangs / tier word all match the roster and tier."
+  },
+  {
+   "fam": "Criminal Architecture & Public Order: Rival crews at {N} are fighting over who runs the streets, and until one wins, people pay both the cut and the brawling. A smuggling network runs through {N}, and some of what is sold in the city never paid a toll.",
+   "towns": 2,
+   "readByHand": [
+    "r2s-monster_pressure-city-0",
+    "rr3w-city-calm-river-0"
+   ],
+   "scripted": true,
+   "trueTowns": 2,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": "True in every town: the opener's 'no head / rival crews / who takes the cut changes' stands with Rival Gangs or Multiple criminal factions on the roster (or two contesting criminal powers on the Power tab) and no criminal power in the seat; the second sentence's black market / smuggling / gangs / tier word all match the roster and tier."
+  },
+  {
+   "fam": "Criminal Architecture & Public Order: Everyone at {N} knows someone takes a cut, but who it is changes by street and by season. Goods moved by smuggling never pass through {N}'s toll book, and every load that slips past is a due the metropolis does not colle…",
+   "towns": 2,
+   "readByHand": [
+    "rr3-metropolis-politically_fractured-rand-5",
+    "r2s-slave_revolt-metropolis-1"
+   ],
+   "scripted": true,
+   "trueTowns": 2,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": "True in every town: the opener's 'no head / rival crews / who takes the cut changes' stands with Rival Gangs or Multiple criminal factions on the roster (or two contesting criminal powers on the Power tab) and no criminal power in the seat; the second sentence's black market / smuggling / gangs / tier word all match the roster and tier."
+  },
+  {
+   "fam": "Criminal Architecture & Public Order: Everyone at {N} knows someone takes a cut, but who it is changes by street and by season. Criminal gangs at {N} keep a footing in the city, through the streets they hold or the businesses they front.",
+   "towns": 2,
+   "readByHand": [
+    "rr3-city-politically_fractured-rand-1",
+    "rr3-city-plague_onset-rand-1"
+   ],
+   "scripted": true,
+   "trueTowns": 2,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": "True in every town: the opener's 'no head / rival crews / who takes the cut changes' stands with Rival Gangs or Multiple criminal factions on the roster (or two contesting criminal powers on the Power tab) and no criminal power in the seat; the second sentence's black market / smuggling / gangs / tier word all match the roster and tier."
+  },
+  {
+   "fam": "Criminal Architecture & Public Order: Criminal work at {N} is coordinated enough to hold routes and territories and not coordinated enough to have a head; several interests are running, and none of them is the one to talk to. Criminal gangs at {N} keep a foo…",
+   "towns": 4,
+   "readByHand": [
+    "rr3-city-religious_conversion-rand-4",
+    "rr3w-metropolis-calm-isolated-0",
+    "rr3w-city-under_siege+famine-isolated-0"
+   ],
+   "scripted": true,
+   "trueTowns": 4,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": "True in every town: the opener's 'no head / rival crews / who takes the cut changes' stands with Rival Gangs or Multiple criminal factions on the roster (or two contesting criminal powers on the Power tab) and no criminal power in the seat; the second sentence's black market / smuggling / gangs / tier word all match the roster and tier."
+  },
+  {
+   "fam": "Criminal Architecture & Public Order: Everyone at {N} knows someone takes a cut, but who it is changes by street and by season. The thieves at {N} answer to a guild, and the guild decides who works which streets.",
+   "towns": 3,
+   "readByHand": [
+    "rr3-metropolis-insurgency-port-1",
+    "rr3-metropolis-occupied-rand-4",
+    "rr3w-metropolis-famine-isolated-0"
+   ],
+   "scripted": true,
+   "trueTowns": 0,
+   "falseTowns": 3,
+   "verdict": "FALSE",
+   "severity": "HIGH",
+   "kind": "g",
+   "examples": [
+    {
+     "seed": "rr3-metropolis-occupied-rand-4",
+     "sentence": "Everyone at Inverham knows someone takes a cut, but who it is changes by street and by season. The thieves at Inverham answer to a guild, and the guild decides who works which streets.",
+     "fact": "roster and this tab's 'Active criminal operations' hold 'Thieves' guild (powerful)'; the line's own next sentence says 'The thieves ... answer to a guild, and the guild decides who works which streets'"
+    },
+    {
+     "seed": "rr3-metropolis-insurgency-port-1",
+     "sentence": "Everyone at Staromir knows someone takes a cut, but who it is changes by street and by season. The thieves at Staromir answer to a guild, and the guild decides who works which streets.",
+     "fact": "roster and this tab's 'Active criminal operations' hold 'Thieves' guild (powerful)'; the line's own next sentence says 'The thieves ... answer to a guild, and the guild decides who works which streets'"
+    },
+    {
+     "seed": "rr3w-metropolis-famine-isolated-0",
+     "sentence": "Everyone at Fjordset knows someone takes a cut, but who it is changes by street and by season. The thieves at Fjordset answer to a guild, and the guild decides who works which streets.",
+     "fact": "roster and this tab's 'Active criminal operations' hold 'Thieves' guild (powerful)'; the line's own next sentence says 'The thieves ... answer to a guild, and the guild decides who works which streets'"
+    }
+   ],
+   "note": "Self-contradicting line: the opener says the crime has no head / is contested, the second sentence (true: the roster holds a Thieves' guild) says a guild runs it."
+  },
+  {
+   "fam": "Criminal Architecture & Public Order: Rival crews at {N} are fighting over who runs the streets, and until one wins, people pay both the cut and the brawling. Few thefts at {N} are ever written into the metropolis's books: a thieves' guild settles them first…",
+   "towns": 1,
+   "readByHand": [
+    "rr3-metropolis-recently_betrayed-rand-0"
+   ],
+   "scripted": true,
+   "trueTowns": 0,
+   "falseTowns": 1,
+   "verdict": "FALSE",
+   "severity": "HIGH",
+   "kind": "g",
+   "examples": [
+    {
+     "seed": "rr3-metropolis-recently_betrayed-rand-0",
+     "sentence": "Rival crews at Edznatzin are fighting over who runs the streets, and until one wins, people pay both the cut and the brawling. Few thefts at Edznatzin are ever written into the metropolis's books: a thieves' guild settles them first, and the losses go uncounted.",
+     "fact": "Power tab: Ruler Shadow Senate (Criminal, power 30) governs the metropolis; this same Defense section prints 'Underworld: Shadow Senate · Strong'; roster and this tab's 'Active criminal operations' hold 'Thieves' guild (powerful)'; the line's own next sentence says 'a thieves' guild settles them first'"
+    }
+   ],
+   "note": "Self-contradicting line: the opener says the crime has no head / is contested, the second sentence (true: the roster holds a Thieves' guild) says a guild runs it. 1 of these towns are also ruled by a criminal power."
+  },
+  {
+   "fam": "Criminal Architecture & Public Order: Everyone at {N} knows someone takes a cut, but who it is changes by street and by season. Criminal gangs at {N} keep a footing in the metropolis, through the streets they hold or the businesses they front.",
+   "towns": 2,
+   "readByHand": [
+    "rr3w-metropolis-under_siege-river-0",
+    "rr3-metropolis-succession_void-port-1"
+   ],
+   "scripted": true,
+   "trueTowns": 2,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": "True in every town: the opener's 'no head / rival crews / who takes the cut changes' stands with Rival Gangs or Multiple criminal factions on the roster (or two contesting criminal powers on the Power tab) and no criminal power in the seat; the second sentence's black market / smuggling / gangs / tier word all match the roster and tier."
+  },
+  {
+   "fam": "Criminal Architecture & Public Order: Rival crews at {N} are fighting over who runs the streets, and until one wins, people pay both the cut and the brawling. Criminal gangs at {N} keep a footing in the city, through the streets they hold or the businesses t…",
+   "towns": 1,
+   "readByHand": [
+    "rr3w-city-calm-port-0"
+   ],
+   "scripted": true,
+   "trueTowns": 1,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": "True in every town: the opener's 'no head / rival crews / who takes the cut changes' stands with Rival Gangs or Multiple criminal factions on the roster (or two contesting criminal powers on the Power tab) and no criminal power in the seat; the second sentence's black market / smuggling / gangs / tier word all match the roster and tier."
+  }
+ ],
+ "asides": [
+  "LOW, not counted false: in 66 of the 253 towns where the semi-organized label/opener is counted true, the Power tab's only criminal power is 'Thieves' Guild' and this same Defense section prints 'Underworld: Thieves' Guild · <band>' (desc 'Underworld effectively controls vice, smuggling, and key officials' or 'Organised criminal network controls the black market'), beside 'lacks a single controlling authority ... Less predictable than a guild'. The roster holds Multiple criminal factions / Rival Gangs, which supports the label, so the record does not settle it.",
+  "LOW, rival crews with no Rival Gangs on the roster: 4 towns (r2s-insurgency-city-2, rr3-city-famine-rand-1, rr3-city-famine-port-0, rr3w-city-famine-port-0) print 'Rival crews ... fighting' with no Rival Gangs/Multiple criminal factions; each has a second criminal power contesting the Thieves' Guild's niche on the Power tab, so counted true.",
+  "OUT OF SCOPE (old lines, not new): 'Criminal structure: Semi-organized networks' prints in 26 towns whose record has no criminal institution at all (e.g. rr3w-town-under_siege+famine-rand-0, r2r-hamlet-17, r2r-village-0), where 'coordinated enough to maintain routes and territories' names operations the town lacks (kind a).",
+  "No Arcane Support or Naval Defense row is new in any town in this file; none was read. No broken text, slot, identifier or wrong tier word in any new line (tier word city/metropolis matches the record in 286/286 prose lines; black-market, smuggling and gang second sentences all match the roster)."
+ ]
+}

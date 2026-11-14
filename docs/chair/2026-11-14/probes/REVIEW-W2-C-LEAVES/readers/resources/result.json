@@ -1,0 +1,1265 @@
+{
+ "families": [
+  {
+   "fam": "Gaps & Opportunities: No one here works the stone near {N}.",
+   "towns": 55,
+   "readByHand": [
+    "r2r-town-16",
+    "r2r-hamlet-51",
+    "rr3-metropolis-under_siege-rand-5",
+    "rr3w-hamlet-famine-river-0"
+   ],
+   "scripted": true,
+   "trueTowns": 33,
+   "falseTowns": 22,
+   "verdict": "MIXED",
+   "severity": "MED",
+   "kind": "b",
+   "examples": [
+    {
+     "seed": "r2r-town-16",
+     "sentence": "No one here works the stone near Birkhel.",
+     "fact": "Economics tab, same page: 'Stone & Construction' chain Running (From Stone quarry, Via Brickmaker, Outputs Quarried stone, Building materials, 'Contributes to Stone Quarrying - 5% of income'); record activeChains stone status running."
+    },
+    {
+     "seed": "r2r-town-54",
+     "sentence": "No one here works the stone near Erdenbuurt.",
+     "fact": "Economics tab, same page: 'Stone & Construction' chain Running (From Stone quarry, Via Brickmaker, Outputs Quarried stone, Building materials, 'Contributes to Stone Quarrying - 7% of income'); record activeChains stone status running."
+    },
+    {
+     "seed": "r2r-city-14",
+     "sentence": "No one here works the stone near Serrasinum.",
+     "fact": "Economics tab, same page: 'Stone & Construction' chain Running (From Stone quarry, Via Brickmaker, Outputs Quarried stone, Building materials, 'Contributes to Stone Quarrying - 3% of income'); record activeChains stone status running."
+    },
+    {
+     "seed": "r2r-city-29",
+     "sentence": "No one here works the stone near Kamalapalli.",
+     "fact": "Economics tab, same page: 'Stone & Construction' chain Running (From Stone quarry, Via Brickmaker, Outputs Quarried stone, Building materials, 'Contributes to Stone Quarrying - 4% of income'); record activeChains stone status running."
+    },
+    {
+     "seed": "r2r-city-54",
+     "sentence": "No one here works the stone near Terralitus.",
+     "fact": "Economics tab, same page: 'Stone & Construction' chain Running (From Stone quarry, Via Brickmaker, Outputs Quarried stone, Building materials, 'Contributes to Stone Quarrying - 4% of income'); record activeChains stone status running."
+    }
+   ],
+   "note": "False in the 22 towns whose record runs a 'stone' chain (all via Brickmaker, status running; impaired-shown under siege in 4) - the gap line, and the Unexploited Stone card beside it, deny it. In the other 33 the line is true of the roster (no quarry/mason; only a 'vulnerable' Fortifications chain that 'Needs imported stone'), but 32 of them carry the Economics income line 'Stone Quarrying: Local quarry provides dressed stone to regional builders' - a page disagreement whose false party is the income line (listed under disagreements). All 22 false towns: r2r-town-16, r2r-town-54, r2r-city-14, r2r-city-29, r2r-city-54, r2r-metropolis-11, r2s-plague_onset-city-0, r2s-plague_onset-city-1, r2s-insurgency-city-2, r2s-mass_migration-village-2, r2s-mass_migration-city-0, rr3-village-infiltrated-rand-3, rr3-city-infiltrated-rand-5, rr3-city-succession_void-rand-1, rr3-city-insurgency-rand-4, rr3-city-under_siege+famine-rand-5, rr3-metropolis-under_siege-rand-5, rr3w-village-calm-rand-0, rr3w-town-under_siege-river-0, rr3w-town-occupied-rand-1, rr3w-city-under_siege-rand-0, rr3w-city-wartime-river-1"
+  },
+  {
+   "fam": "Gaps & Opportunities: No one here works the timber near {N}.",
+   "towns": 27,
+   "readByHand": [
+    "r2r-thorp-7",
+    "r2r-town-30",
+    "r2s-famine-thorp-2",
+    "r2r-thorp-22"
+   ],
+   "scripted": true,
+   "trueTowns": 27,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": "No woodcutter/sawmill/carpenter, no timber chain, no timber export in any of the 27 (rr3-village-wartime-rand-3 has a Cooper only). BUT every one prints the Economics income line 'Timber Trade 6-10%', 19 of them as 'Local forest provides sustainable timber revenue; managed felling and sawmilling keep production consistent.' - a page disagreement; the income line (section7) is the false party, not this gap line."
+  },
+  {
+   "fam": "Gaps & Opportunities: No one here works the medicinal herbs near {N}.",
+   "towns": 21,
+   "readByHand": [
+    "rr3-hamlet-succession_void-rand-5",
+    "r2s-mass_migration-town-2",
+    "rr3w-hamlet-under_siege+famine-isolated-1",
+    "rr3w-hamlet-calm-isolated-1"
+   ],
+   "scripted": true,
+   "trueTowns": 21,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": "No apothecary/herbalist/alchemist, no herb export, herbs absent from the page's 'Produced locally'; the two with a forage chain have it impaired on depleted foraging areas."
+  },
+  {
+   "fam": "Gaps & Opportunities: Work on the timber here stops half-way: no sawmill or carpenters' guild finishes it.",
+   "towns": 4,
+   "readByHand": [
+    "r2r-hamlet-12",
+    "r2s-indebted-hamlet-0",
+    "rr3-thorp-politically_fractured-rand-2",
+    "rr3-village-indebted-rand-0"
+   ],
+   "scripted": true,
+   "trueTowns": 4,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": "All four: Woodcutter's camp, no sawmill or carpenter; timber filed partial."
+  },
+  {
+   "fam": "Gaps & Opportunities: Gaps & Opportunities▲",
+   "towns": 49,
+   "readByHand": [
+    "rr3-thorp-mass_migration-rand-1",
+    "r2s-plague_onset-city-1",
+    "rr3w-hamlet-famine-river-0"
+   ],
+   "scripted": true,
+   "trueTowns": 49,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": "Section heading; every one has at least one gap line under it."
+  },
+  {
+   "fam": "Resource Exploitation: PartialMedicinal herbsvery high value (+ the re-filed name line 'Medicinal herbs')",
+   "towns": 72,
+   "readByHand": [
+    "r2r-thorp-9",
+    "r2s-under_siege-thorp-3",
+    "rr3-thorp-under_siege+famine-rand-2",
+    "rr3w-city-under_siege+famine-isolated-1",
+    "r2r-thorp-48"
+   ],
+   "scripted": true,
+   "trueTowns": 60,
+   "falseTowns": 12,
+   "verdict": "MIXED",
+   "severity": "MED",
+   "kind": "g",
+   "examples": [
+    {
+     "seed": "r2r-thorp-48",
+     "sentence": "PartialMedicinal herbsvery high value",
+     "fact": "Economics tab, same page: 'The medicinal herbs around Huawan goes unworked; no house takes it up.'"
+    },
+    {
+     "seed": "r2s-succession_void-thorp-1",
+     "sentence": "PartialMedicinal herbsvery high value",
+     "fact": "Economics tab, same page: 'The medicinal herbs around Schwarzdorf goes unworked; no house takes it up.'"
+    },
+    {
+     "seed": "r2s-insurgency-thorp-2",
+     "sentence": "PartialMedicinal herbsvery high value",
+     "fact": "Economics tab, same page: 'The medicinal herbs around Uaymkin goes unworked; no house takes it up.'"
+    },
+    {
+     "seed": "rr3-hamlet-famine-rand-1",
+     "sentence": "PartialMedicinal herbsvery high value",
+     "fact": "Economics tab, same page: 'The medicinal herbs around Prabhagiri goes unworked; no house takes it up.'"
+    },
+    {
+     "seed": "rr3w-thorp-under_siege-isolated-0",
+     "sentence": "PartialMedicinal herbsvery high value",
+     "fact": "Economics tab, same page: 'The medicinal herbs around Innisford goes unworked; no house takes it up.'"
+    }
+   ],
+   "note": "Every card has evidence of work (a running forage chain; herbs in 'Produced locally'), so the grade itself is defensible against the record; but in 12 towns the Economics tab says the same herbs 'goes unworked; no house takes it up'. All 12: r2r-thorp-48, r2s-succession_void-thorp-1, r2s-insurgency-thorp-2, rr3-hamlet-famine-rand-1, rr3w-thorp-under_siege-isolated-0, rr3w-thorp-under_siege+famine-isolated-0, rr3w-thorp-calm-rand-0, rr3w-thorp-wartime-isolated-0, rr3w-hamlet-under_siege-isolated-1, rr3w-hamlet-famine-isolated-0, rr3w-hamlet-famine-rand-1, rr3w-hamlet-wartime-isolated-0"
+  },
+  {
+   "fam": "Resource Exploitation: PartialTimbermedium value (+ 'Timber')",
+   "towns": 184,
+   "readByHand": [
+    "r2s-plague_onset-hamlet-2",
+    "rr3w-metropolis-famine-rand-1",
+    "rr3w-hamlet-famine-river-0",
+    "r2r-town-1",
+    "r2s-under_siege-town-2",
+    "rr3-village-calm-rand-3"
+   ],
+   "scripted": true,
+   "trueTowns": 98,
+   "falseTowns": 86,
+   "verdict": "MIXED",
+   "severity": "LOW",
+   "kind": "b",
+   "examples": [
+    {
+     "seed": "r2r-town-1",
+     "sentence": "PartialTimbermedium value",
+     "fact": "Roster has Sawmill (commercial) and Carpenters (5-15) - every house the card's chain names; timber chain running (Milled lumber, Barrels); exports Milled timber. 'Partial' understates (record files it Unexploited)."
+    },
+    {
+     "seed": "r2r-city-16",
+     "sentence": "PartialTimbermedium value",
+     "fact": "Sawmill (commercial) + Carpenters (5-15) on the roster; no house still needed."
+    },
+    {
+     "seed": "rr3-village-calm-rand-3",
+     "sentence": "PartialTimbermedium value",
+     "fact": "Economics tab same page: 'The timber around Aberfell goes unworked; no house takes it up.' (g, MED)"
+    }
+   ],
+   "note": "No card is Partial for an unworked resource (every one has a timber chain, woodcutter or timber export). 85 of 184 sit beside every finishing house (Sawmill (commercial) + Carpenters (5-15)) - 'Partial' where the work is finished here (LOW, b; the record's own grade is Unexploited). 1 town (rr3-village-calm-rand-3) disagrees with the Economics 'goes unworked' line (MED, g)."
+  },
+  {
+   "fam": "Resource Exploitation: PartialMountain timbermedium value (+ 'Mountain timber')",
+   "towns": 17,
+   "readByHand": [
+    "rr3-village-mass_migration-rand-0",
+    "r2r-metropolis-38",
+    "r2s-under_siege-town-2",
+    "r2r-village-57",
+    "r2r-city-54"
+   ],
+   "scripted": true,
+   "trueTowns": 14,
+   "falseTowns": 3,
+   "verdict": "MIXED",
+   "severity": "MED",
+   "kind": "g",
+   "examples": [
+    {
+     "seed": "r2r-village-57",
+     "sentence": "PartialMountain timbermedium value",
+     "fact": "Same tab: Nearby Resources lists Mountain Timber under 'Depleted', and the paragraph says 'Nobody at Tlalche bothers with the mountain timber this year: there is nothing left worth taking'; record mountain_timber condition depleted."
+    },
+    {
+     "seed": "r2r-city-54",
+     "sentence": "PartialMountain timbermedium value",
+     "fact": "Same paragraph: 'Nobody at Terralitus bothers with the mountain timber this year'; mountain_timber depleted; mountain_timber_harvest chain impaired."
+    },
+    {
+     "seed": "r2r-town-58",
+     "sentence": "PartialMountain timbermedium value",
+     "fact": "Nearby block on the same tab: Depleted - Alpine Pasture, Mountain Timber; record mountain_timber depleted."
+    }
+   ],
+   "note": "A worked grade on a ground the same tab calls spent (c/g)."
+  },
+  {
+   "fam": "Resource Exploitation: PartialAnimal hideshigh value (+ 'Animal hides')",
+   "towns": 65,
+   "readByHand": [
+    "r2s-famine-hamlet-3",
+    "rr3-metropolis-religious_conversion-rand-3",
+    "rr3-hamlet-under_siege-rand-1",
+    "r2r-city-7"
+   ],
+   "scripted": true,
+   "trueTowns": 45,
+   "falseTowns": 20,
+   "verdict": "MIXED",
+   "severity": "LOW",
+   "kind": "b",
+   "examples": [
+    {
+     "seed": "r2r-city-7",
+     "sentence": "PartialAnimal hideshigh value",
+     "fact": "Tanner (established) + Cobbler's guild + Furrier's district on roster; leather and leather_goods chains running."
+    },
+    {
+     "seed": "r2r-city-11",
+     "sentence": "PartialAnimal hideshigh value",
+     "fact": "Tanner (established) + Cobbler's guild; no house still needed."
+    }
+   ],
+   "note": "Every card is worked or sold (hides/furs exported or a leather chain); in 20 (18 with Tanner + Cobbler's guild, 2 with Tanner alone) every finishing house stands, so 'Partial' understates. LOW."
+  },
+  {
+   "fam": "Resource Exploitation: PartialAlpine pastureshigh value (+ 'Alpine pastures')",
+   "towns": 37,
+   "readByHand": [
+    "rr3-thorp-monster_pressure-rand-3",
+    "rr3-town-indebted-rand-2",
+    "r2s-occupied-hamlet-0",
+    "r2r-thorp-7",
+    "rr3-village-under_siege+famine-rand-2"
+   ],
+   "scripted": true,
+   "trueTowns": 37,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": "Every card's resource is worked or sold here (raw export, a chain on its ground, or listed as produced locally); no finishing house already stands; ground not depleted."
+  },
+  {
+   "fam": "Resource Exploitation: PartialWoolhigh value (+ 'Wool')",
+   "towns": 54,
+   "readByHand": [
+    "rr3-thorp-recently_betrayed-rand-5",
+    "r2s-insurgency-town-2",
+    "r2r-thorp-40",
+    "rr3-hamlet-under_siege-rand-1"
+   ],
+   "scripted": true,
+   "trueTowns": 54,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": "Every card's resource is worked or sold here (raw export, a chain on its ground, or listed as produced locally); no finishing house already stands; ground not depleted."
+  },
+  {
+   "fam": "Resource Exploitation: PartialFine glass sandhigh value (+ 'Fine glass sand')",
+   "towns": 12,
+   "readByHand": [
+    "r2r-thorp-10",
+    "rr3-town-famine-rand-0",
+    "r2s-indebted-thorp-0"
+   ],
+   "scripted": true,
+   "trueTowns": 12,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": "Every card's resource is worked or sold here (raw export, a chain on its ground, or listed as produced locally); no finishing house already stands; ground not depleted. (Cosmetic: the card prints two 'Draws on' lines, from two record cards 'glass sand'/'glass_sand' merged - not a new line.)"
+  },
+  {
+   "fam": "Resource Exploitation: PartialSalt panshigh value (+ 'Salt pans')",
+   "towns": 23,
+   "readByHand": [
+    "rr3-thorp-wartime-rand-1",
+    "r2r-metropolis-19",
+    "r2r-hamlet-14"
+   ],
+   "scripted": true,
+   "trueTowns": 23,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": "Every card's resource is worked or sold here (raw export, a chain on its ground, or listed as produced locally); no finishing house already stands; ground not depleted."
+  },
+  {
+   "fam": "Resource Exploitation: PartialMineral hot springshigh value (+ 'Mineral hot springs')",
+   "towns": 4,
+   "readByHand": [
+    "rr3-hamlet-calm-rand-0",
+    "rr3-village-succession_void-rand-5",
+    "r2r-hamlet-43",
+    "r2r-village-23"
+   ],
+   "scripted": true,
+   "trueTowns": 4,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": "Every card's resource is worked or sold here (raw export, a chain on its ground, or listed as produced locally); no finishing house already stands; ground not depleted."
+  },
+  {
+   "fam": "Resource Exploitation: PartialCamel herdsvery high value (+ 'Camel herds')",
+   "towns": 2,
+   "readByHand": [
+    "r2s-monster_pressure-village-0",
+    "r2s-succession_void-town-2"
+   ],
+   "scripted": true,
+   "trueTowns": 2,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": "Every card's resource is worked or sold here (raw export, a chain on its ground, or listed as produced locally); no finishing house already stands; ground not depleted."
+  },
+  {
+   "fam": "Resource Exploitation: PartialIron orevery high value (+ 'Iron ore')",
+   "towns": 1,
+   "readByHand": [
+    "rr3-town-under_siege+famine-rand-5"
+   ],
+   "scripted": true,
+   "trueTowns": 1,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": "Every card's resource is worked or sold here (raw export, a chain on its ground, or listed as produced locally); no finishing house already stands; ground not depleted."
+  },
+  {
+   "fam": "Resource Exploitation: UnexploitedMedicinal herbsvery high value",
+   "towns": 22,
+   "readByHand": [
+    "r2r-village-8",
+    "rr3-metropolis-wartime-rand-4",
+    "rr3w-town-under_siege-isolated-0",
+    "r2r-town-17",
+    "rr3w-town-famine-isolated-1"
+   ],
+   "scripted": true,
+   "trueTowns": 9,
+   "falseTowns": 13,
+   "verdict": "MIXED",
+   "severity": "LOW",
+   "kind": "g",
+   "examples": [
+    {
+     "seed": "r2r-town-17",
+     "sentence": "UnexploitedMedicinal herbsvery high value",
+     "fact": "Same tab, below: 'Export Potential: healing potions, antidotes / Complete production chain in place'. Record: herbs filed fullyExploited; herbs imported ('Medicinal herbs', 'Ritual wood and herbs (ancient grove damaged)'), herb grounds depleted - so the card agrees with the record and the Export Potential block is the likelier false party."
+    },
+    {
+     "seed": "r2r-metropolis-20",
+     "sentence": "UnexploitedMedicinal herbsvery high value",
+     "fact": "Apothecary district + Alchemist quarter + Herbalism & Remedies chain on the Economics tab; Export Potential 'Complete production chain in place' on the same tab; foraging areas/ancient grove depleted, herbs imported."
+    }
+   ],
+   "note": "No town gathers its own herbs (all herb grounds depleted or herbs brought in), so 'Unexploited' is true of the ground. In the 13 re-filed from Full the same tab's Export Potential block says 'Complete production chain in place' (a disagreement; Export Potential is not a new line)."
+  },
+  {
+   "fam": "Resource Exploitation: UnexploitedFishmedium value (+ 'Fish')",
+   "towns": 1,
+   "readByHand": [
+    "rr3w-town-under_siege+famine-rand-0"
+   ],
+   "scripted": true,
+   "trueTowns": 0,
+   "falseTowns": 1,
+   "verdict": "FALSE",
+   "severity": "MED",
+   "kind": "g",
+   "examples": [
+    {
+     "seed": "rr3w-town-under_siege+famine-rand-0",
+     "sentence": "UnexploitedFishmedium value",
+     "fact": "Fish market and Salt works stand, fishing chain 'Impaired' (not stopped) on the Economics tab, Overview says half the town is 'gutting, salting' fish, food is 'fish from the local waters', and Export Potential on the same tab says 'preserved fish, fish oil / Complete production chain in place'; record files fish fullyExploited."
+    }
+   ],
+   "note": "Re-filed from Full to Unexploited because the chain is impaired under the siege."
+  },
+  {
+   "fam": "Resource Exploitation: Needs: Salters' guild",
+   "towns": 1,
+   "readByHand": [
+    "rr3w-town-under_siege+famine-rand-0"
+   ],
+   "scripted": true,
+   "trueTowns": 1,
+   "falseTowns": 0,
+   "verdict": "UNSETTLED",
+   "severity": "LOW",
+   "kind": "b",
+   "examples": [
+    {
+     "seed": "rr3w-town-under_siege+famine-rand-0",
+     "sentence": "Needs: Salters' guild",
+     "fact": "No Salters' guild on the roster (true), but Salt works stands and the record's fishing chain names Salt works as the house that salts the catch; the record cannot settle whether that is 'of its trade'."
+    }
+   ],
+   "note": ""
+  },
+  {
+   "fam": "Resource Exploitation: Needs: Sawmill, Charcoal burner",
+   "towns": 3,
+   "readByHand": [
+    "r2r-village-0",
+    "r2r-city-46",
+    "rr3-village-wartime-rand-3"
+   ],
+   "scripted": true,
+   "trueTowns": 3,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": "No named house (or one of its trade) on the roster. (r2r-village-8 has a divine Healer, rr3w-town-calm-isolated-0 a Small hospital - neither an apothecary or alchemist.)"
+  },
+  {
+   "fam": "Resource Exploitation: Needs: Sawmill",
+   "towns": 3,
+   "readByHand": [
+    "r2r-village-0",
+    "r2r-city-46",
+    "rr3-village-wartime-rand-3"
+   ],
+   "scripted": true,
+   "trueTowns": 3,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": "No named house (or one of its trade) on the roster. (r2r-village-8 has a divine Healer, rr3w-town-calm-isolated-0 a Small hospital - neither an apothecary or alchemist.)"
+  },
+  {
+   "fam": "Resource Exploitation: Needs: Apothecary, Alchemist shop",
+   "towns": 2,
+   "readByHand": [
+    "r2r-village-8",
+    "rr3w-town-calm-isolated-0"
+   ],
+   "scripted": true,
+   "trueTowns": 2,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": "No named house (or one of its trade) on the roster. (r2r-village-8 has a divine Healer, rr3w-town-calm-isolated-0 a Small hospital - neither an apothecary or alchemist.)"
+  },
+  {
+   "fam": "Prose (strategic framing): \"{N}'s position is worth watching over: whoever holds the ground holds what the assessment below names.\"",
+   "towns": 77,
+   "readByHand": [
+    "rr3-thorp-religious_conversion-rand-0",
+    "r2r-metropolis-10",
+    "rr3w-thorp-under_siege+famine-isolated-1",
+    "r2r-hamlet-14"
+   ],
+   "scripted": true,
+   "trueTowns": 0,
+   "falseTowns": 77,
+   "verdict": "FALSE",
+   "severity": "MED",
+   "kind": "h",
+   "examples": [
+    {
+     "seed": "r2r-metropolis-10",
+     "sentence": "Ulfgarde's position is worth watching over: whoever holds the ground holds what the assessment below names.",
+     "fact": "No assessment prints below (or anywhere on the page): the record's resourceAnalysis.strategicValue (e.g. 'Medium - controls caravan routes, water sources are strategic') is not shown; 0 of 77 pages carry it. The sentence points at the generator's hidden assessment - machinery."
+    },
+    {
+     "seed": "r2r-hamlet-14",
+     "sentence": "Yaxchich's position is worth watching over: whoever holds the ground holds what the assessment below names.",
+     "fact": "No assessment prints below (or anywhere on the page): the record's resourceAnalysis.strategicValue (e.g. 'Medium - controls caravan routes, water sources are strategic') is not shown; 0 of 77 pages carry it. The sentence points at the generator's hidden assessment - machinery."
+    },
+    {
+     "seed": "rr3w-thorp-under_siege+famine-isolated-1",
+     "sentence": "Jayapuram's position is worth watching over: whoever holds the ground holds what the assessment below names.",
+     "fact": "No assessment prints below (or anywhere on the page): the record's resourceAnalysis.strategicValue (e.g. 'Medium - controls caravan routes, water sources are strategic') is not shown; 0 of 77 pages carry it. The sentence points at the generator's hidden assessment - machinery."
+    }
+   ],
+   "note": "Dangling reference to an unprinted internal field."
+  },
+  {
+   "fam": "Prose (strategic framing): \"The people of {N} know what their ground is worth to others, and know they could not keep it against anyone who came for it.\"",
+   "towns": 61,
+   "readByHand": [
+    "r2r-thorp-25",
+    "rr3w-metropolis-famine-rand-1",
+    "r2s-famine-hamlet-3",
+    "r2r-metropolis-20",
+    "r2s-monster_pressure-town-1"
+   ],
+   "scripted": true,
+   "trueTowns": 28,
+   "falseTowns": 33,
+   "verdict": "MIXED",
+   "severity": "MED",
+   "kind": "g",
+   "examples": [
+    {
+     "seed": "r2r-metropolis-20",
+     "sentence": "The people of Anba know what their ground is worth to others, and know they could not keep it against anyone who came for it.",
+     "fact": "Defense tab: posture 'Fortress'; 'its defences would make any attack costly, so raiders and rivals look elsewhere'; Massive walls and fortifications, Multiple garrisons; strategicValue 'difficult to besiege'."
+    },
+    {
+     "seed": "r2s-monster_pressure-town-1",
+     "sentence": "The people of Al-mandi know what their ground is worth to others, and know they could not keep it against anyone who came for it.",
+     "fact": "Defense tab: 'Fortress'; 'the town would take real effort to threaten and knows it'; Town walls, Barracks, Citadel."
+    },
+    {
+     "seed": "r2r-city-7",
+     "sentence": "The people of Faromare know what their ground is worth to others, and know they could not keep it against anyone who came for it.",
+     "fact": "Defense tab posture 'Fortress'."
+    },
+    {
+     "seed": "r2r-city-5",
+     "sentence": "The people of Khānhaven know what their ground is worth to others, and know they could not keep it against anyone who came for it.",
+     "fact": "Defense 'Well-defended'; City walls and gates, Garrison; strategicValue 'defensible terrain'."
+    },
+    {
+     "seed": "r2r-town-53",
+     "sentence": "The people of Khanhan know what their ground is worth to others, and know they could not keep it against anyone who came for it.",
+     "fact": "Defense 'Defensible'."
+    }
+   ],
+   "note": "False where the Defense tab's posture is Well-defended (13), Defensible (12) or Fortress (8); true-ish beside Vulnerable/Undefended/Lightly defended (28). False towns: r2r-town-52, r2r-town-53, r2r-city-5, r2r-city-7, r2r-city-9, r2r-city-34, r2r-city-38, r2r-metropolis-15, r2r-metropolis-20, r2r-metropolis-24, r2s-under_siege-city-3, r2s-occupied-city-1, r2s-recently_betrayed-city-0, r2s-monster_pressure-town-1, r2s-monster_pressure-metropolis-3, r2s-mass_migration-city-3, rr3-town-calm-rand-0, rr3-town-succession_void-rand-1, rr3-town-monster_pressure-rand-5, rr3-city-occupied-rand-0, rr3-city-occupied-rand-4, rr3-city-politically_fractured-rand-4, rr3-city-religious_conversion-rand-3, rr3-city-wartime-rand-2, rr3-metropolis-under_siege-rand-2, rr3-metropolis-politically_fractured-rand-3, rr3-metropolis-indebted-rand-4, rr3-metropolis-insurgency-rand-5, rr3w-town-wartime-isolated-0, rr3w-city-famine-river-0, rr3w-metropolis-under_siege-isolated-1, rr3w-metropolis-famine-rand-1, rr3w-metropolis-occupied-isolated-1"
+  },
+  {
+   "fam": "Prose (strategic framing): \"Others want {N} for what it controls.\"",
+   "towns": 71,
+   "readByHand": [
+    "rr3-thorp-indebted-rand-5",
+    "rr3-metropolis-occupied-rand-3",
+    "r2s-insurgency-hamlet-0"
+   ],
+   "scripted": false,
+   "trueTowns": 71,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": "Every record carries a strategicValue naming what the position controls/offers."
+  },
+  {
+   "fam": "Prose (strategic framing): \"Anyone who looks at {N}'s position can see why someone would want to hold it.\"",
+   "towns": 58,
+   "readByHand": [
+    "rr3w-thorp-under_siege-isolated-1",
+    "r2r-metropolis-19"
+   ],
+   "scripted": false,
+   "trueTowns": 58,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": "Framing of the record's strategicValue."
+  },
+  {
+   "fam": "Prose (strategic framing): \"For as long as others value {N}'s position, the <T> will have to reckon with who wants it...\"",
+   "towns": 57,
+   "readByHand": [
+    "rr3-thorp-plague_onset-rand-2",
+    "rr3-metropolis-religious_conversion-rand-3",
+    "rr3w-hamlet-occupied-rand-0"
+   ],
+   "scripted": false,
+   "trueTowns": 57,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": "Framing of the record's strategicValue."
+  },
+  {
+   "fam": "Prose (strategic framing): \"The people who live there see little of that value.\"",
+   "towns": 71,
+   "readByHand": [
+    "rr3-thorp-indebted-rand-5",
+    "rr3-metropolis-occupied-rand-3",
+    "r2s-insurgency-hamlet-0"
+   ],
+   "scripted": false,
+   "trueTowns": null,
+   "falseTowns": null,
+   "verdict": "UNSETTLED",
+   "severity": "LOW",
+   "kind": "c",
+   "examples": [
+    {
+     "seed": "rr3-metropolis-occupied-rand-3",
+     "sentence": "The people who live there see little of that value.",
+     "fact": "The record holds no field saying how much of the position's worth leaves the town; r2s-insurgency-village-0's own Economics tab says 'There is no trade out. Whatever surplus there is stays'. Unsettleable; LOW."
+    }
+   ],
+   "note": "Claim of extraction the record does not model."
+  },
+  {
+   "fam": "Prose (strategic framing): \"A newcomer to {N} soon hears what its ground is worth to the powers around it, and how little of that worth stays in the <T>.\"",
+   "towns": 76,
+   "readByHand": [
+    "r2s-plague_onset-hamlet-2",
+    "r2r-metropolis-14",
+    "rr3-hamlet-under_siege-rand-1"
+   ],
+   "scripted": false,
+   "trueTowns": null,
+   "falseTowns": null,
+   "verdict": "UNSETTLED",
+   "severity": "LOW",
+   "kind": "c",
+   "examples": [
+    {
+     "seed": "r2s-insurgency-village-0",
+     "sentence": "A newcomer to Kamentsy soon hears what its ground is worth to the powers around it, and how little of that worth stays in the village.",
+     "fact": "The record holds no field saying how much of the position's worth leaves the town; r2s-insurgency-village-0's own Economics tab says 'There is no trade out. Whatever surplus there is stays'. Unsettleable; LOW."
+    }
+   ],
+   "note": "Claim of extraction the record does not model."
+  },
+  {
+   "fam": "Prose (partial): \"The <T> takes the easy half of this trade and sells the rest of it to whoever will do the hard half.\"",
+   "towns": 76,
+   "readByHand": [
+    "r2r-thorp-25",
+    "r2r-metropolis-19",
+    "rr3-hamlet-occupied-rand-3",
+    "r2r-city-20"
+   ],
+   "scripted": true,
+   "trueTowns": 60,
+   "falseTowns": 16,
+   "verdict": "MIXED",
+   "severity": "MED",
+   "kind": "b",
+   "examples": [
+    {
+     "seed": "r2r-city-20",
+     "sentence": "The city takes the easy half of this trade and sells the rest of it to whoever will do the hard half.",
+     "fact": "The town does the hard half itself: alpine_pasture finished by Dyer, Weavers/Textile workers, Tailor's guild and exported as Processed textiles"
+    },
+    {
+     "seed": "r2r-city-34",
+     "sentence": "The city takes the easy half of this trade and sells the rest of it to whoever will do the hard half.",
+     "fact": "The town does the hard half itself: timber finished by Shipyard, Carpenters (5-15), Bowyers & fletchers (guild), Cooper and exported as Barrels and containers"
+    },
+    {
+     "seed": "r2s-famine-city-3",
+     "sentence": "The city takes the easy half of this trade and sells the rest of it to whoever will do the hard half.",
+     "fact": "The town does the hard half itself: wool finished by Dyer, Weavers/Textile workers, Tailor's guild and exported as Processed textiles"
+    },
+    {
+     "seed": "rr3-town-infiltrated-rand-2",
+     "sentence": "The town takes the easy half of this trade and sells the rest of it to whoever will do the hard half.",
+     "fact": "The town does the hard half itself: timber finished by Sawmill (commercial), Bowyers & fletchers (guild) and exported as Bows and crossbows"
+    },
+    {
+     "seed": "rr3-town-mass_migration-rand-5",
+     "sentence": "The town takes the easy half of this trade and sells the rest of it to whoever will do the hard half.",
+     "fact": "The town does the hard half itself: timber finished by Shipyard, Carpenters (5-15), Cooper and exported as Barrels and containers, River craft, Cargo barges, Ship construction"
+    }
+   ],
+   "note": "In every town some raw good of a Partial card is sold and a finishing house is missing, but in 16 the town also finishes that resource with its own houses and exports the finished goods. The sentence never names 'this trade' (no antecedent in the paragraph; LOW h in all 76). False towns: r2r-village-6, r2r-village-50, r2r-town-25, r2r-city-20, r2r-city-34, r2r-city-52, r2s-famine-city-3, r2s-politically_fractured-town-1, rr3-hamlet-famine-rand-4, rr3-town-famine-rand-3, rr3-town-indebted-rand-2, rr3-town-infiltrated-rand-1, rr3-town-infiltrated-rand-2, rr3-town-monster_pressure-rand-2, rr3-town-mass_migration-rand-4, rr3-town-mass_migration-rand-5"
+  },
+  {
+   "fam": "Prose (partial): \"The <T> works part of the line that X could support: the raw material moves, and it moves before it has been made into anything worth more.\"",
+   "towns": 26,
+   "readByHand": [
+    "r2s-indebted-thorp-0",
+    "r2r-city-9",
+    "rr3w-hamlet-occupied-rand-1",
+    "r2s-monster_pressure-town-3"
+   ],
+   "scripted": true,
+   "trueTowns": 14,
+   "falseTowns": 12,
+   "verdict": "MIXED",
+   "severity": "MED",
+   "kind": "b",
+   "examples": [
+    {
+     "seed": "r2r-town-47",
+     "sentence": "The town works part of the line that wool could support: the raw material moves, and it moves before it has been made into anything worth more.",
+     "fact": "Weavers/Textile workers on the roster; exports Processed textiles"
+    },
+    {
+     "seed": "r2r-city-9",
+     "sentence": "The city works part of the line that timber could support: the raw material moves, and it moves before it has been made into anything worth more.",
+     "fact": "Shipyard, Carpenters (5-15), Bowyers & fletchers (guild), Cooper on the roster; exports Barrels and containers, River craft, Cargo barges"
+    },
+    {
+     "seed": "r2r-city-38",
+     "sentence": "The city works part of the line that timber could support: the raw material moves, and it moves before it has been made into anything worth more.",
+     "fact": "Shipyard on the roster; exports River craft, Cargo barges, Ship construction"
+    },
+    {
+     "seed": "r2s-monster_pressure-town-3",
+     "sentence": "The town works part of the line that wool could support: the raw material moves, and it moves before it has been made into anything worth more.",
+     "fact": "Dyer, Weavers/Textile workers, Tailor's guild on the roster; exports Processed textiles, Finished clothing, Dyed cloth"
+    },
+    {
+     "seed": "rr3-town-infiltrated-rand-0",
+     "sentence": "The town works part of the line that wool could support: the raw material moves, and it moves before it has been made into anything worth more.",
+     "fact": "Weavers/Textile workers, Fuller on the roster; exports Processed textiles, Finished clothing, Dyed cloth"
+    }
+   ],
+   "note": "False towns: r2r-hamlet-27, r2r-town-47, r2r-city-9, r2r-city-38, r2s-monster_pressure-town-3, r2s-insurgency-town-3, r2s-wartime-city-1, r2s-mass_migration-hamlet-1, r2s-mass_migration-town-0, rr3-town-indebted-rand-5, rr3-town-infiltrated-rand-0, rr3-city-recently_betrayed-rand-3"
+  },
+  {
+   "fam": "Prose (partial): \"X leaves {N} half-finished, and nobody in the <T> is troubled by it.\"",
+   "towns": 27,
+   "readByHand": [
+    "r2s-famine-hamlet-3",
+    "r2r-metropolis-30",
+    "r2s-succession_void-city-1",
+    "r2r-town-37"
+   ],
+   "scripted": true,
+   "trueTowns": 16,
+   "falseTowns": 11,
+   "verdict": "MIXED",
+   "severity": "MED",
+   "kind": "b",
+   "examples": [
+    {
+     "seed": "r2r-town-37",
+     "sentence": "timber leaves Hadithaserai half-finished, and nobody in the town is troubled by it.",
+     "fact": "Shipyard, Carpenters (5-15), Cooper on the roster; exports Barrels and containers, River craft, Cargo barges, Ship construction"
+    },
+    {
+     "seed": "r2s-politically_fractured-village-1",
+     "sentence": "timber leaves Geraseia half-finished, and nobody in the village is troubled by it.",
+     "fact": "Bowyer & fletcher, Sawmill on the roster; exports Bows and crossbows"
+    },
+    {
+     "seed": "r2s-succession_void-city-1",
+     "sentence": "wool leaves Lipono half-finished, and nobody in the city is troubled by it.",
+     "fact": "Dyer, Weavers/Textile workers, Tailor's guild on the roster; exports Processed textiles, Finished clothing, Dyed cloth"
+    },
+    {
+     "seed": "r2s-mass_migration-town-3",
+     "sentence": "timber leaves Breitenbrunn half-finished, and nobody in the town is troubled by it.",
+     "fact": "Shipyard, Carpenters (5-15), Cooper, Bowyers & fletchers (guild) on the roster; exports Barrels and containers, River craft, Cargo barges, Ship construction"
+    },
+    {
+     "seed": "rr3-town-calm-rand-1",
+     "sentence": "timber leaves Kaltenstift half-finished, and nobody in the town is troubled by it.",
+     "fact": "Carpenters (5-15), Cooper, Bowyers & fletchers (guild), River boatyard on the roster; exports Barrels and containers, River craft, Cargo barges, Ship construction"
+    }
+   ],
+   "note": "Also every one starts the sentence in lower case ('wool leaves…', 'timber leaves…', 'glass sand leaves…'): LOW h, 27/27. False towns: r2r-town-37, r2r-town-52, r2s-politically_fractured-village-1, r2s-succession_void-town-0, r2s-succession_void-city-1, r2s-insurgency-town-2, r2s-mass_migration-town-3, rr3-village-famine-rand-0, rr3-village-monster_pressure-rand-2, rr3-town-calm-rand-1, rr3-town-succession_void-rand-3"
+  },
+  {
+   "fam": "Prose (full): \"This is the trade the <T> is actually built on, and the <T> has taken it as far as it goes.\"",
+   "towns": 52,
+   "readByHand": [
+    "r2r-hamlet-16",
+    "rr3-metropolis-religious_conversion-rand-3",
+    "r2r-town-1",
+    "r2r-city-7",
+    "rr3-hamlet-under_siege-rand-1"
+   ],
+   "scripted": true,
+   "trueTowns": 8,
+   "falseTowns": 44,
+   "verdict": "MIXED",
+   "severity": "MED",
+   "kind": "c",
+   "examples": [
+    {
+     "seed": "rr3-metropolis-religious_conversion-rand-3",
+     "sentence": "This is the trade the metropolis is actually built on, and the metropolis has taken it as far as it goes.",
+     "fact": "'This trade' can only be the Fully exploited card above it (livestock); its income line is 4% of the town's income (top: Market Taxes 21%)."
+    },
+    {
+     "seed": "r2r-town-1",
+     "sentence": "This is the trade the town is actually built on, and the town has taken it as far as it goes.",
+     "fact": "'This trade' can only be the Fully exploited card above it (medicinal herbs); its income line is 6% of the town's income (top: Market Taxes 25%)."
+    },
+    {
+     "seed": "r2s-religious_conversion-metropolis-3",
+     "sentence": "This is the trade the metropolis is actually built on, and the metropolis has taken it as far as it goes.",
+     "fact": "'This trade' can only be the Fully exploited card above it (medicinal herbs); its income line is 2% of the town's income (top: Market Taxes 26%)."
+    },
+    {
+     "seed": "r2r-metropolis-32",
+     "sentence": "This is the trade the metropolis is actually built on, and the metropolis has taken it as far as it goes.",
+     "fact": "'This trade' can only be the Fully exploited card above it (hot_springs_mineral); its income line is 2% of the town's income (top: Market Taxes 26%)."
+    },
+    {
+     "seed": "r2r-city-49",
+     "sentence": "This is the trade the city is actually built on, and the city has taken it as far as it goes.",
+     "fact": "'This trade' can only be the Fully exploited card above it (iron ore); its income line is 6% of the town's income (top: Guild Fees 14%)."
+    }
+   ],
+   "note": "Every town of town size or larger (44) is 'built on' a resource worth 2-8% of its income. True-ish in the 6 fishing hamlets/villages that export their catch; 2 small towns unsettled. 'This trade' has no named antecedent in the paragraph (LOW h, all 52). False towns: r2r-town-1, r2r-town-27, r2r-town-28, r2r-city-5, r2r-city-7, r2r-city-12, r2r-city-49, r2r-metropolis-32, r2r-metropolis-43, r2r-metropolis-52, r2s-under_siege-city-3, r2s-under_siege-metropolis-0, r2s-indebted-city-0, r2s-recently_betrayed-city-0, r2s-infiltrated-town-0, r2s-monster_pressure-metropolis-3, r2s-insurgency-city-1, r2s-religious_conversion-city-2, r2s-religious_conversion-metropolis-3, r2s-wartime-city-0, rr3-town-under_siege-rand-1, rr3-town-plague_onset-rand-1, rr3-town-monster_pressure-rand-0, rr3-city-under_siege-rand-1, rr3-city-under_siege-rand-3, rr3-city-occupied-rand-5, rr3-city-politically_fractured-rand-2, rr3-city-plague_onset-rand-2, rr3-city-monster_pressure-rand-4, rr3-city-slave_revolt-rand-1, rr3-metropolis-under_siege-rand-1, rr3-metropolis-recently_betrayed-rand-4, rr3-metropolis-recently_betrayed-rand-5, rr3-metropolis-plague_onset-rand-2, rr3-metropolis-succession_void-rand-4, rr3-metropolis-insurgency-rand-5, rr3-metropolis-religious_conversion-rand-3, rr3-metropolis-slave_revolt-rand-1, rr3-metropolis-mass_migration-rand-4, rr3w-city-famine-isolated-0, rr3w-city-calm-rand-1, rr3w-metropolis-occupied-isolated-1, rr3w-metropolis-under_siege+famine-isolated-0, rr3w-metropolis-wartime-rand-0"
+  },
+  {
+   "fam": "Prose (full): \"Every stage of the X trade at {N} is done here, from the ground to the gate.\"",
+   "towns": 26,
+   "readByHand": [
+    "rr3-town-famine-rand-2",
+    "rr3-metropolis-occupied-rand-3",
+    "r2r-metropolis-10",
+    "rr3-city-wartime-rand-4"
+   ],
+   "scripted": true,
+   "trueTowns": 12,
+   "falseTowns": 14,
+   "verdict": "MIXED",
+   "severity": "LOW",
+   "kind": "b",
+   "examples": [
+    {
+     "seed": "rr3-city-wartime-rand-4",
+     "sentence": "Every stage of the gold/silver ore trade at Velikomir is done here, from the ground to the gate.",
+     "fact": "No mine and no goldsmith on the roster, no precious-metals chain at all; the record's card still needs a Goldsmiths' guild (MED)."
+    },
+    {
+     "seed": "r2r-city-19",
+     "sentence": "Every stage of the fish trade at Dunbury is done here, from the ground to the gate.",
+     "fact": "No fishing house and no fishmonger/fish market on the roster (only Docks and Salt works); record card needs Fishmonger, Salters' guild."
+    },
+    {
+     "seed": "r2r-city-11",
+     "sentence": "Every stage of the livestock trade at Puripat is done here, from the ground to the gate.",
+     "fact": "No Dairy farmer (one of the three houses the record's livestock chain names); livestock leaves live ('Livestock' exported)."
+    },
+    {
+     "seed": "rr3-town-occupied-rand-3",
+     "sentence": "Every stage of the grain trade at Saraidavan is done here, from the ground to the gate.",
+     "fact": "No bakers; record card still needs Bakers (5-15)."
+    }
+   ],
+   "note": "14 of 26 lack a stage house the record names (10 livestock without Dairy farmer, 2 fish without fishmonger, 1 grain without bakers, 1 gold/silver without mine or goldsmith). In 5 more (under a siege with trade stopped: rr3-city-under_siege-rand-2, rr3w-town-under_siege-rand-1, rr3w-city-under_siege+famine-rand-1, rr3w-metropolis-under_siege-river-1, rr3-city-under_siege+famine-rand-1) 'to the gate' presumes trade that has stopped (LOW c)."
+  },
+  {
+   "fam": "Prose (full): \"The X in {N}'s country is worked all the way through: the ground gives it, H finishes it, and it leaves as G.\"",
+   "towns": 41,
+   "readByHand": [
+    "r2r-village-41",
+    "r2s-politically_fractured-metropolis-2",
+    "r2r-village-55",
+    "r2r-village-5",
+    "rr3-town-calm-rand-0"
+   ],
+   "scripted": true,
+   "trueTowns": 7,
+   "falseTowns": 34,
+   "verdict": "MIXED",
+   "severity": "HIGH",
+   "kind": "a",
+   "examples": [
+    {
+     "seed": "r2r-village-5",
+     "sentence": "The fish in Karakabad's country is worked all the way through: the ground gives it, Fishmonger finishes it, and it leaves as preserved fish.",
+     "fact": "No fisher, no fishmonger, no fish market, no fishing chain and no fish export (exports: Sea salt, River craft, Cargo barges) - the fish is not worked at all (HIGH a)."
+    },
+    {
+     "seed": "r2r-village-41",
+     "sentence": "The fish in Hukou's country is worked all the way through: the ground gives it, Fishmonger finishes it, and it leaves as preserved fish.",
+     "fact": "No Fishmonger or fish market on the roster (Fisher's landing, Salt works); the card still needs Fishmonger (a)."
+    },
+    {
+     "seed": "r2s-politically_fractured-metropolis-2",
+     "sentence": "The livestock in Xinwan's country is worked all the way through: the ground gives it, Butcher finishes it, and it leaves as leather goods.",
+     "fact": "No leather goods among the exports (Livestock and Raw wool leave raw; Leather goods only 'Produced locally'); a butcher does not make leather (c/h)."
+    },
+    {
+     "seed": "rr3-town-calm-rand-0",
+     "sentence": "The grain in Uaymatl's country is worked all the way through: the ground gives it, Mill finishes it, and it leaves as bread.",
+     "fact": "Exports Milled flour, not bread (Baked goods only produced locally)."
+    },
+    {
+     "seed": "r2r-metropolis-38",
+     "sentence": "The gold/silver ore in Ulfstrand's country is worked all the way through: the ground gives it, Smelter finishes it, and it leaves as jewelry.",
+     "fact": "No jewelry exported; record card still needs a Goldsmiths' guild."
+    }
+   ],
+   "note": "34/41 false: fish 8/14 (6 without any fishmonger/fish market, 2 under a siege with trade stopped where nothing 'leaves'), livestock 12/12 ('leaves as leather goods': no town exports leather goods; r2r-village-55 also has no butcher and its trade is stopped), grain 11/12 ('leaves as bread': they export Milled flour), gold/silver 1/1, timber->furniture 1/1 (r2s-succession_void-village-3 exports Milled timber, not furniture), clay->pottery 1/1 (rr3-town-insurgency-rand-0, pottery not exported). Severity HIGH for the house-the-town-lacks cases (7), MED for the not-exported good. In all 41 the house prints as a bare capitalised catalogue name as if a person ('the ground gives it, Fishmonger finishes it'): LOW h. False towns: r2r-village-5, r2r-village-41, r2r-village-55, r2r-town-39, r2r-town-49, r2r-city-26, r2r-metropolis-3, r2r-metropolis-24, r2r-metropolis-38, r2r-metropolis-51, r2s-occupied-city-1, r2s-politically_fractured-metropolis-1, r2s-politically_fractured-metropolis-2, r2s-indebted-metropolis-1, r2s-succession_void-village-1, r2s-succession_void-village-3, r2s-religious_conversion-city-0, rr3-village-plague_onset-rand-3, rr3-village-mass_migration-rand-1, rr3-town-calm-rand-0, rr3-town-insurgency-rand-0, rr3-town-wartime-rand-4, rr3-city-occupied-rand-0, rr3-city-politically_fractured-rand-5, rr3-city-insurgency-rand-2, rr3-city-religious_conversion-rand-5, rr3-metropolis-under_siege-rand-2, rr3-metropolis-politically_fractured-rand-0, rr3w-village-under_siege-rand-0, rr3w-town-wartime-river-0, rr3w-city-famine-rand-1, rr3w-city-under_siege+famine-rand-0, rr3w-metropolis-occupied-rand-1, rr3w-metropolis-wartime-river-0"
+  },
+  {
+   "fam": "Prose (depletion): \"Nothing more can be taken from the R at {N}.\"",
+   "towns": 57,
+   "readByHand": [
+    "r2s-insurgency-hamlet-3",
+    "rr3-metropolis-occupied-rand-3",
+    "r2r-village-55"
+   ],
+   "scripted": true,
+   "trueTowns": 57,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": "Every named ground is 'depleted' in resourceConditions, and the recovery clause matches its type (exhaustible/manual vs renewable/natural). (Exports like Salted fish or Peat fuel beside spent salt flats/coal deposits are explained by sea salt and marshland peat.)"
+  },
+  {
+   "fam": "Prose (depletion): \"The <T> has worked out its R, and it will not come back on its own: someone has to put labour and money into it before it yields again.\"",
+   "towns": 52,
+   "readByHand": [
+    "r2s-infiltrated-village-3",
+    "r2r-metropolis-52",
+    "rr3w-village-under_siege+famine-isolated-0"
+   ],
+   "scripted": true,
+   "trueTowns": 52,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": "Every named ground is 'depleted' in resourceConditions, and the recovery clause matches its type (exhaustible/manual vs renewable/natural)."
+  },
+  {
+   "fam": "Prose (depletion): \"It has worked out its R.\"",
+   "towns": 75,
+   "readByHand": [
+    "r2s-wartime-hamlet-0",
+    "rr3-metropolis-religious_conversion-rand-3",
+    "rr3-hamlet-under_siege-rand-1"
+   ],
+   "scripted": true,
+   "trueTowns": 75,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": "Every named ground is 'depleted' in resourceConditions, and the recovery clause matches its type (exhaustible/manual vs renewable/natural)."
+  },
+  {
+   "fam": "Prose (depletion): \"Nobody at {N} bothers with the R this year: there is nothing left worth taking...\"",
+   "towns": 82,
+   "readByHand": [
+    "r2s-plague_onset-hamlet-2",
+    "rr3w-metropolis-famine-rand-1",
+    "rr3-hamlet-famine-rand-4"
+   ],
+   "scripted": true,
+   "trueTowns": 82,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": "Every named ground is 'depleted' in resourceConditions, and the recovery clause matches its type (exhaustible/manual vs renewable/natural)."
+  },
+  {
+   "fam": "Prose (depletion): \"Left alone, the ground will come back in time; until it does, the <T> buys what it used to take, or goes without.\"",
+   "towns": 75,
+   "readByHand": [
+    "r2s-wartime-hamlet-0",
+    "rr3-metropolis-religious_conversion-rand-3",
+    "rr3-hamlet-under_siege-rand-1"
+   ],
+   "scripted": true,
+   "trueTowns": 75,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": "Every named ground is 'depleted' in resourceConditions, and the recovery clause matches its type (exhaustible/manual vs renewable/natural). Under a siege with trade stopped 'buys what it used to take' is covered by 'or goes without'."
+  },
+  {
+   "fam": "Prose (depletion): \"Until somebody pays to open new workings, the hands that worked there are idle or gone elsewhere.\"",
+   "towns": 57,
+   "readByHand": [
+    "r2s-insurgency-hamlet-3",
+    "rr3-metropolis-occupied-rand-3",
+    "r2r-village-55"
+   ],
+   "scripted": true,
+   "trueTowns": 57,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": "Every named ground is 'depleted' in resourceConditions, and the recovery clause matches its type (exhaustible/manual vs renewable/natural)."
+  },
+  {
+   "fam": "Prose (unexploited): \"There is X out there and nobody has ever thought it worth the trouble, which is the <T>'s considered opinion rather than an oversight.\"",
+   "towns": 4,
+   "readByHand": [
+    "rr3-hamlet-indebted-rand-1",
+    "r2r-city-54",
+    "r2r-town-54",
+    "r2s-infiltrated-hamlet-3"
+   ],
+   "scripted": true,
+   "trueTowns": 2,
+   "falseTowns": 2,
+   "verdict": "MIXED",
+   "severity": "MED",
+   "kind": "b",
+   "examples": [
+    {
+     "seed": "r2r-town-54",
+     "sentence": "There is stone out there and nobody has ever thought it worth the trouble, which is the town's considered opinion rather than an oversight.",
+     "fact": "Economics tab: 'Stone & Construction' chain Running via Brickmaker, outputs Quarried stone, 'Contributes to Stone Quarrying - 7% of income'."
+    },
+    {
+     "seed": "r2r-city-54",
+     "sentence": "There is stone out there and nobody has ever thought it worth the trouble, which is the city's considered opinion rather than an oversight.",
+     "fact": "Same: Stone & Construction Running (Brickmaker), Stone Quarrying 4%."
+    }
+   ],
+   "note": "rr3-hamlet-indebted-rand-1 is true of the roster but sits beside the income line 'Stone Quarrying 8%: Local quarry provides dressed stone' (income line at fault)."
+  },
+  {
+   "fam": "Prose (unexploited): \"X has been there for {N} to take for as long as the <T> has stood, and nobody has found it worth the trouble.\"",
+   "towns": 5,
+   "readByHand": [
+    "rr3-thorp-indebted-rand-5",
+    "r2s-insurgency-village-0",
+    "rr3-hamlet-occupied-rand-4"
+   ],
+   "scripted": true,
+   "trueTowns": 5,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": "LOW",
+   "kind": "h",
+   "examples": [
+    {
+     "seed": "r2s-insurgency-village-0",
+     "sentence": "stone has been there for Kamentsy to take for as long as the village has stood, and nobody has found it worth the trouble.",
+     "fact": "True of the roster; the sentence starts in lower case ('stone has been…')."
+    }
+   ],
+   "note": "No quarry/mason/woodcutter or stone/timber chain in any. 3 stone towns print the Economics income line 'Stone Quarrying 7-8%: Local quarry provides dressed stone…' (income line at fault). Lower-case sentence start in 5/5 (LOW h)."
+  },
+  {
+   "fam": "Prose (unexploited): \"The <T> leaves its X unworked.\"",
+   "towns": 4,
+   "readByHand": [
+    "rr3w-thorp-under_siege-isolated-1",
+    "rr3-hamlet-famine-rand-3",
+    "rr3-thorp-wartime-rand-1"
+   ],
+   "scripted": true,
+   "trueTowns": 4,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": null,
+   "kind": null,
+   "examples": [],
+   "note": "No house or chain works the timber/stone in any."
+  },
+  {
+   "fam": "Prose (unexploited): \"It would fetch barely enough to pay for the digging.\"",
+   "towns": 4,
+   "readByHand": [
+    "rr3w-thorp-under_siege-isolated-1",
+    "rr3-hamlet-famine-rand-3",
+    "rr3-thorp-wartime-rand-1"
+   ],
+   "scripted": true,
+   "trueTowns": 1,
+   "falseTowns": 3,
+   "verdict": "MIXED",
+   "severity": "LOW",
+   "kind": "h",
+   "examples": [
+    {
+     "seed": "rr3-hamlet-famine-rand-3",
+     "sentence": "The hamlet leaves its timber unworked. It would fetch barely enough to pay for the digging.",
+     "fact": "The resource is timber (managed woodland): timber is felled, not dug - wrong-kind word."
+    },
+    {
+     "seed": "rr3w-thorp-under_siege-isolated-1",
+     "sentence": "The thorp leaves its timber unworked. It would fetch barely enough to pay for the digging.",
+     "fact": "The resource is timber (managed woodland): timber is felled, not dug - wrong-kind word."
+    },
+    {
+     "seed": "rr3w-thorp-under_siege+famine-isolated-1",
+     "sentence": "The thorp leaves its timber unworked. It would fetch barely enough to pay for the digging.",
+     "fact": "The resource is timber (managed woodland): timber is felled, not dug - wrong-kind word."
+    }
+   ],
+   "note": "True for the one stone town (rr3-thorp-wartime-rand-1)."
+  },
+  {
+   "fam": "Prose (unexploited): \"The <T> has the gold/silver ore; what it lacks is Smelter to start the work.\"",
+   "towns": 1,
+   "readByHand": [
+    "r2s-wartime-hamlet-1"
+   ],
+   "scripted": true,
+   "trueTowns": 0,
+   "falseTowns": 1,
+   "verdict": "FALSE",
+   "severity": "LOW",
+   "kind": "h",
+   "examples": [
+    {
+     "seed": "r2s-wartime-hamlet-1",
+     "sentence": "The hamlet has the gold/silver ore; what it lacks is Smelter to start the work.",
+     "fact": "True that no smelter stands and precious_metals is available; but the catalogue name prints bare as if a person ('lacks is Smelter'), and 'gold/silver ore' is the record's slash label."
+    }
+   ],
+   "note": ""
+  },
+  {
+   "fam": "Prose (unexploited): \"There is gold/silver ore in {N}'s country worth real money and nothing in the <T> takes it out of the ground.\"",
+   "towns": 2,
+   "readByHand": [
+    "rr3-thorp-politically_fractured-rand-3",
+    "rr3-hamlet-religious_conversion-rand-2"
+   ],
+   "scripted": true,
+   "trueTowns": 2,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": "LOW",
+   "kind": "h",
+   "examples": [],
+   "note": "precious_metals available, no mine/smelter/goldsmith or chain in any. Cosmetic LOW h: the record's slash label 'gold/silver ore' prints as prose."
+  },
+  {
+   "fam": "Prose (unexploited): \"Everybody in this <T> can point at the gold/silver ore, and nobody in this <T> is working it.\"",
+   "towns": 1,
+   "readByHand": [
+    "r2r-village-17"
+   ],
+   "scripted": true,
+   "trueTowns": 1,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": "LOW",
+   "kind": "h",
+   "examples": [],
+   "note": "precious_metals available, no mine/smelter/goldsmith or chain in any. Cosmetic LOW h: the record's slash label 'gold/silver ore' prints as prose."
+  },
+  {
+   "fam": "Prose (unexploited): \"gold/silver ore lies unworked around {N}, and anyone who knows its price elsewhere will want to change that.\"",
+   "towns": 3,
+   "readByHand": [
+    "r2r-hamlet-24",
+    "r2s-insurgency-hamlet-0",
+    "r2s-insurgency-village-3"
+   ],
+   "scripted": true,
+   "trueTowns": 3,
+   "falseTowns": 0,
+   "verdict": "TRUE",
+   "severity": "LOW",
+   "kind": "h",
+   "examples": [],
+   "note": "precious_metals available, no mine/smelter/goldsmith or chain in any. Cosmetic LOW h: the record's slash label 'gold/silver ore' prints as prose, and the sentence starts in lower case."
+  }
+ ],
+ "disagreementsOnPage": [
+  {
+   "what": "Resources gap/prose 'no one works the stone/timber' vs Economics income line 'Stone Quarrying: Local quarry provides dressed stone to regional builders' / 'Timber Trade: Local forest provides sustainable timber revenue; managed felling and sawmilling keep production consistent'",
+   "count": "timber gap 19/27 (27/27 print a Timber Trade income line); stone gap 32 of the 33 otherwise-true towns; 'stone has been there…' 3/5; 'There is stone out there…' 1/4; 'leaves its stone unworked' 1/1",
+   "falseParty": "the income line (no quarry, mason, woodcutter or sawmill on the roster; section7)",
+   "examples": [
+    "r2r-thorp-7",
+    "r2r-hamlet-51",
+    "rr3-thorp-indebted-rand-5"
+   ]
+  },
+  {
+   "what": "Resources 'No one here works the stone' / 'There is stone out there and nobody has ever thought it worth the trouble' vs Economics 'Stone & Construction' chain Running via Brickmaker",
+   "count": "22 + 2 towns",
+   "falseParty": "the Resources lines (record chain runs); see families"
+  },
+  {
+   "what": "PartialMedicinal herbs / PartialTimber card vs Economics 'The X around N goes unworked; no house takes it up.'",
+   "count": "13 towns (12 herbs, 1 timber)",
+   "falseParty": "ambiguous - the Economics tab also lists the herbs under 'Produced locally'"
+  },
+  {
+   "what": "PartialMountain timber card vs 'Depleted: Mountain Timber' in the Nearby block and the paragraph's 'nothing left worth taking'",
+   "count": "3 towns",
+   "falseParty": "the card"
+  },
+  {
+   "what": "'The people of N … could not keep it against anyone who came for it' vs Defense posture Fortress/Defensible/Well-defended",
+   "count": "33/61"
+  },
+  {
+   "what": "Unexploited Medicinal herbs / Unexploited Fish card vs Export Potential 'Complete production chain in place' on the same tab",
+   "count": "13 herbs + 1 fish"
+  }
+ ],
+ "thingsTheTownLacks": [
+  "'… Fishmonger finishes it …' where no fishmonger or fish market stands: r2r-village-5, r2r-village-41, r2s-succession_void-village-1, rr3-village-plague_onset-rand-3, rr3-village-mass_migration-rand-1, rr3-town-wartime-rand-4",
+  "'Butcher finishes it' in r2r-village-55 (no butcher)",
+  "'leaves as leather goods / bread / jewelry / furniture / pottery' - goods the town does not export (26 towns)"
+ ],
+ "wrongKindOrIdentifier": [
+  "bare catalogue names as persons: 'Fishmonger/Butcher/Mill/Sawmill/Smelter/Potter finishes it' (41), 'what it lacks is Smelter' (1)",
+  "'barely enough to pay for the digging' said of timber (3)",
+  "record slash label 'gold/silver ore' in prose (8 sentences)",
+  "sentences starting lower case: 'wool/timber/glass sand leaves N half-finished' (27), 'stone/timber has been there' (5), 'gold/silver ore lies unworked' (3)",
+  "'this trade' with no named antecedent (easy-half 76, built-on 52)"
+ ],
+ "machinery": [
+  "'whoever holds the ground holds what the assessment below names' - points at the generator's unprinted strategicValue assessment (77/77)"
+ ]
+}

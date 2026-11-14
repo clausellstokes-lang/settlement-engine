@@ -1,0 +1,10 @@
+births base 720 tip 720 missing 0; leaf diffs 739; towns moved 266
+family publicProse: 266 towns
+  125	.publicProse.blocks.defense:criminal.ringNote	 e.g. r2r-town-3 r2r-city-3 r2r-city-5
+  117	.publicProse.blocks.defense:criminal.structure.sentence	 e.g. r2r-city-3 r2r-city-5 r2r-city-10
+  105	.publicProse.blocks.economy:economics.exploitation	 e.g. r2r-hamlet-14 r2r-hamlet-15 r2r-hamlet-23
+  105	.publicProse.blocks.economy:services.exploitation	 e.g. r2r-hamlet-14 r2r-hamlet-15 r2r-hamlet-23
+  105	.publicProse.blocks.economy:resources.exploitation	 e.g. r2r-hamlet-14 r2r-hamlet-15 r2r-hamlet-23
+  105	.publicProse.blocks.economy:daily_life.exploitation	 e.g. r2r-hamlet-14 r2r-hamlet-15 r2r-hamlet-23
+  77	.publicProse.blocks.economy:economics.exploitation.sentence	 e.g. r2r-thorp-25 r2r-hamlet-16 r2r-hamlet-22
+NEW/GONE KEY rows 0 []

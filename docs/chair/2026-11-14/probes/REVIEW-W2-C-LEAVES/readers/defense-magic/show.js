@@ -1,0 +1,14 @@
+const fs=require("fs");const B="/tmp/claude-0/rw2c/run/";const s=process.argv[2];
+const page=fs.readFileSync(B+"tip/dumps/"+s+".txt","utf8").split("\n");
+const lv=JSON.parse(fs.readFileSync(B+"leaves-tip.jsonl","utf8").trim().split("\n").find(l=>l.includes('"seed":"'+s+'"')));
+console.log("##",s,lv.tier,lv.pop,lv.crisis,"route",lv.route);
+const a=page.indexOf("== Systems/Power ==");console.log("POWER:",page.slice(a,a+40).filter(l=>/^(Ruler|Contender|The power)/.test(l)).join(" | "));
+const d=page.indexOf("== Systems/Defense ==");const e=page.indexOf("== Systems/Magic ==");const D=page.slice(d,e);
+const g=D.findIndex(l=>l=="Guard assessment");console.log("GUARD:",D[g+1]);
+const i=D.findIndex(l=>l=="Internal Security");console.log("INTSEC:",D[i+1],D[i+2]);
+const c=D.findIndex(l=>/^Criminal Architecture/.test(l));const f=D.findIndex(l=>/^Armed Forces/.test(l));
+const C=D.slice(c+1,f);const ops=C.indexOf("Active criminal operations");
+console.log("CRIME:",C.slice(0,ops<0?6:ops).join(" / "));
+console.log("OPS:",C.filter((l,k)=>k>ops&&ops>=0&&/^[A-Z][^.]{2,35}$/.test(l)).join(", "));
+console.log("PROSE:",C[C.length-1]);
+const sc=D.findIndex(l=>/^Supporting Capabilities/.test(l));console.log("CAPS:",D.slice(sc+1).join(" / "));
