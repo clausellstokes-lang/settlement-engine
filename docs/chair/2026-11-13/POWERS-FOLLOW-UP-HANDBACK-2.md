@@ -1463,3 +1463,16 @@ count: each row is false only where its fact is against it, still to be read per
   <tree>: the modifier keys by family, borne out or not, and the chip's printing; rows13.mjs <census2 out>: the row
   table above; gend.mjs, mintscan.mjs: the two re-keyed guards' exposure scans; holders.sh <file>...: the lanes that hold
   a file by content; scan.mjs <births dir> <predicate>: rows of a births run; push.sh: POWERS-11's, pointed at p13.
+
+## P7.7 First false-count reads of item 5 (record proxies over the 720 at 609ff6472; PLAUSIBLE until each row is read on its page)
+- The census's candidate "... and courts are all ecclesiastical": 33 towns print it; 0 without the record's court
+  (economicState.compound.inst.hasCourtSystem). By that fact the candidate is NOT false at the tip; the census's own
+  pattern reads "court" more widely: read one of its three named towns before closing it.
+- #17 "Well-funded city watch; ...": 100 print it; 0 without a watch (hasWatch). Its fault is the other kind (two
+  homes: the Defense tab's resource-constrained guard; the line printed for a body that is not the watch): to read.
+- #101 "Offers food, a bed and a fresh team; full of news of the road.": 54 print it; 7 under a siege, famine,
+  occupation or plague (r2s-famine-city-1, r2s-famine-metropolis-3, r2s-occupied-city-1, r2s-occupied-metropolis-2, ...).
+  The writer is titleSecretsPresentations.js (this lane's): the widest false count read so far that is plainly the lane's.
+- ww#377 "Undermanned and underfunded; ...": 34 print it; 31 where a garrison AND a watch stand (a weak proxy: the
+  true fact is defenseProfile.readiness, to read).
+- pf#524 "The crown rules here directly.": 21 print it; 1 under occupation or a vacant seat (r2r-metropolis-8).
