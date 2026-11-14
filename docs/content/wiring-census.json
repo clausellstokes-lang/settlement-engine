@@ -23,7 +23,7 @@
   "totals": {
     "pools": 856,
     "blocks": 69,
-    "variants": 2955,
+    "variants": 2954,
     "resolved": 488,
     "unresolved": 368,
     "resolvedWithPredicate": 317,
@@ -30074,7 +30074,7 @@
       ],
       "lineDeclares": {
         "crisis: any": 3,
-        "no crisis: under_siege": 2
+        "no crisis: under_siege": 3
       },
       "undeclared": 0,
       "crisisScoped": true
@@ -30226,7 +30226,8 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 4
+        "colour": 3,
+        "no crisis: under_siege": 1
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -30316,7 +30317,8 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 4
+        "colour": 1,
+        "no crisis: under_siege": 3
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -30401,7 +30403,8 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 4
+        "colour": 3,
+        "no crisis: under_siege": 1
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -30553,7 +30556,8 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 4
+        "colour": 1,
+        "no crisis: under_siege": 3
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -32043,9 +32047,10 @@
       },
       "declares": [],
       "lineDeclares": {
+        "no crisis: occupied": 2,
         "walls": 1
       },
-      "undeclared": 1,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -32550,8 +32555,8 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 10,
-      "grammars": 6,
+      "variants": 9,
+      "grammars": 5,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [
@@ -32610,11 +32615,12 @@
       },
       "declares": [],
       "lineDeclares": {
-        "crisis: under_siege": 3,
+        "crisis: under_siege": 2,
         "guild": 1,
         "market": 2,
         "no crisis: famine": 1,
-        "no crisis: under_siege": 6
+        "no crisis: under_siege": 6,
+        "tier: ≥ village": 1
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -34992,7 +34998,10 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
+      "lineDeclares": {
+        "no crisis: succession": 1,
+        "no ruler: lord": 3
+      },
       "undeclared": 0,
       "crisisScoped": false
     },
@@ -35013,7 +35022,7 @@
       ],
       "hasBag": true,
       "variants": 4,
-      "grammars": 2,
+      "grammars": 3,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -35833,8 +35842,8 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 1,
-        "mercenary": 1
+        "mercenary": 1,
+        "no crisis: occupied": 2
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -36198,7 +36207,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 10,
-      "grammars": 5,
+      "grammars": 4,
       "predicate": [
         {
           "field": "breakdown.safety",
@@ -36393,7 +36402,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 3,
       "predicate": [],
       "branchReads": [
         "power.criminalCaptureState"
@@ -36579,7 +36588,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 3,
+      "grammars": 1,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -36612,8 +36621,8 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 2,
-        "gate": 1
+        "gate": 1,
+        "no crisis: under_siege": 3
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -36946,8 +36955,9 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 3,
-        "commander": 2
+        "colour": 2,
+        "commander": 2,
+        "no crisis: occupied": 1
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -54799,7 +54809,7 @@
         "DS-POW-6 :: capture pressure RECOVERING (strong security, prosperity)"
       ],
       "variants": 14,
-      "grammars": 8,
+      "grammars": 7,
       "blocks": [
         "DS-POW-6"
       ]
@@ -54811,7 +54821,7 @@
         "DS-POW-6 :: capture pressure RECOVERING (strong security, prosperity)"
       ],
       "variants": 14,
-      "grammars": 8,
+      "grammars": 7,
       "blocks": [
         "DS-POW-6"
       ]
@@ -70766,7 +70776,7 @@
       "subject": "BOUGHT-IN",
       "fields": [],
       "readingFunction": "craftReasonPoolKey",
-      "count": "10 variant(s) · 6 grammar(s) · slots {good, institution, settlement}"
+      "count": "9 variant(s) · 5 grammar(s) · slots {good, institution, settlement}"
     },
     {
       "tier": "COVERED",
@@ -71094,7 +71104,7 @@
       "subject": "theocracy",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "4 variant(s) · 2 grammar(s) · slots {institution, seat, settlement}"
+      "count": "4 variant(s) · 3 grammar(s) · slots {institution, seat, settlement}"
     },
     {
       "tier": "COVERED",
@@ -71251,7 +71261,7 @@
         "breakdown.prosperity"
       ],
       "readingFunction": "capturePoolKey",
-      "count": "10 variant(s) · 5 grammar(s) · slots {seat, settlement}"
+      "count": "10 variant(s) · 4 grammar(s) · slots {seat, settlement}"
     },
     {
       "tier": "THIN",
@@ -71270,7 +71280,7 @@
       "subject": "capture reached an AGENT of a faction",
       "fields": [],
       "readingFunction": "capturePoolKey",
-      "count": "3 variant(s) · 2 grammar(s) · slots {faction, settlement}"
+      "count": "3 variant(s) · 3 grammar(s) · slots {faction, settlement}"
     },
     {
       "tier": "COVERED",
@@ -71294,7 +71304,7 @@
       "subject": "operation role duty evasion",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 3 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",

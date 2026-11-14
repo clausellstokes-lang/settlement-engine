@@ -6444,7 +6444,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "marks": [
             "institution: temple"
           ],
-          "text": "The church in {settlement} hunts heresy openly. Anyone suspected of working magic against the faith is denounced from the pulpit and handed to the authorities, so those who have the art keep it hidden.",
+          "text": "The church in {settlement} hunts heresy openly: anyone suspected of working magic against the faith is denounced from the pulpit and handed to the authorities.",
           "slots": [
             "settlement"
           ],
@@ -6466,7 +6466,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "Anyone at {settlement} suspected of working magic is named aloud and shunned, and those who have the art keep it even from their kin.",
+          "text": "Anyone at {settlement} suspected of working magic against the faith is named aloud and shunned.",
           "slots": [
             "settlement"
           ],
@@ -6477,7 +6477,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "A charm worked in the open at {settlement} is reported before nightfall, and the faithful see to it that whoever worked it leaves.",
+          "text": "A charm worked in the open at {settlement} is reported before nightfall, and whoever worked it is shunned by the faithful.",
           "slots": [
             "settlement"
           ],
@@ -6523,7 +6523,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "Most people at {settlement} hold that magic offends the faith, and a neighbour who works it is talked about, though not yet turned in.",
+          "text": "The faithful at {settlement} hold that magic offends their faith, and a neighbour who works it is talked about, though not yet turned in.",
           "slots": [
             "settlement"
           ],
@@ -6545,7 +6545,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "A newcomer at {settlement} soon hears that magic is heresy here, and is watched until the neighbours are sure of them.",
+          "text": "A newcomer at {settlement} soon hears that the faithful count magic a heresy, and is watched until the neighbours are sure of them.",
           "slots": [
             "settlement"
           ],
