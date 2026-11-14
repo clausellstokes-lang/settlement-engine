@@ -262,7 +262,7 @@ function relationalGroundTruth(worldState, nid, tick, resolveNpcName) {
  * @param {boolean} [args.includeGroundTruth]  DM view ⇒ true (covert + relational truth)
  * @param {(nid: string) => (string|null)} [args.resolveNpcName]  ladder nid → a person's NAME, so
  *   the trail never prints an engine key; unresolved ⇒ the sentence names nobody
- * @returns {{ present: boolean, wants: string[], disposition: string[], groundTruth?: Record<string, unknown> } | null}
+ * @returns {{ present: boolean, wants: string[], disposition: string[], standing: string | null, groundTruth?: Record<string, unknown> } | null}
  */
 export function npcInteriority({
   npc, worldState, nid, tick = 0, includeGroundTruth = false, resolveNpcName = () => null,
@@ -278,16 +278,19 @@ export function npcInteriority({
     firstText(p.ideal, p.ideals, n.ideal, n.ideals),
   ]);
 
-  // DISPOSITION (player-safe): the NPC's visible stance — temperament, standing, loyalty, fear.
+  // DISPOSITION (player-safe): the NPC's visible stance — temperament, loyalty, fear.
+  // A WORD IS PRINTED UNDER THE NAME OF WHAT IT MEASURES (2026-11-14, the chair's ruling 1): "established",
+  // "marginal" and "commanding" measure the person's STANDING, not a disposition, so the standing is its own
+  // field and every surface prints it under its own label. Display only: the record does not move.
   const disposition = dedupe([
     firstText(p.dominant, n.temperament),
-    (/** @type {Record<string, string>} */ (INFLUENCE_WORD))[String(n.influence)] || null,
     firstText(n.loyalty, n.loyalties),
     firstText(n.fear, n.fears),
   ]);
+  const standing = (/** @type {Record<string, string>} */ (INFLUENCE_WORD))[String(n.influence)] || null;
 
-  /** @type {{ present: boolean, wants: string[], disposition: string[], groundTruth?: Record<string, unknown> }} */
-  const out = { present: wants.length > 0 || disposition.length > 0, wants, disposition };
+  /** @type {{ present: boolean, wants: string[], disposition: string[], standing: string | null, groundTruth?: Record<string, unknown> }} */
+  const out = { present: wants.length > 0 || disposition.length > 0 || standing !== null, wants, disposition, standing };
 
   if (includeGroundTruth) {
     // COVERT / DM-only marks (never surfaced to a non-DM audience): the compromise stance + the

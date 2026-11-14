@@ -309,6 +309,9 @@ export function NPCInlineCard({
   ));
   const wants = readWants.length > 0 ? readWants : (goalText ? [goalText] : []);
   const disposition = interiority?.disposition || [];
+  // THE STANDING IS PRINTED UNDER ITS OWN LABEL (2026-11-14): "established", "marginal" and "commanding" measure how much the person
+  // counts for in the town, not how they are disposed; the disposition list holds temperament, loyalty and fear.
+  const standingWord = interiority?.standing || '';
   // WIRING W3 C9 (R-W6, FOR THE OWNER'S VETO): how the face deals with strangers, the authored
   // `presentation.behaviour` line drawn at birth. X-48's look-and-voice class (`impression`) stays dark.
   const dealing = typeof npc.presentation?.behaviour === 'string' ? npc.presentation.behaviour.trim() : '';
@@ -510,7 +513,7 @@ export function NPCInlineCard({
               <span style={{fontWeight:700}}>Constraint: </span><MentionText text={npc.activeConstraint} selfId={entityIdFor('npc', npc)}/>
             </p>
           )}
-          {(wants.length > 0 || disposition.length > 0 || dealing) && (
+          {(wants.length > 0 || disposition.length > 0 || standingWord || dealing) && (
             <div style={{margin:'6px 0',display:'flex',flexDirection:'column',gap:2}}>
               {wants.length > 0 && (
                 // Each want goes through ProseParagraph: the first one is the goal the
@@ -523,6 +526,11 @@ export function NPCInlineCard({
                       {i > 0 ? ' · ' : ''}<ProseParagraph text={want} selfId={entityIdFor('npc', npc)} />
                     </Fragment>
                   ))}
+                </div>
+              )}
+              {standingWord && (
+                <div style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag3,lineHeight:1.4}}>
+                  <span style={{fontWeight:700,color:MUTED}}>Standing </span>{standingWord}
                 </div>
               )}
               {disposition.length > 0 && (
