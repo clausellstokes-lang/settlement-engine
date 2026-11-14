@@ -134,6 +134,10 @@ const GUARDS = [
   { seed: 'w5-town-occupied-3', pool: 'DS-POW-6::capture pressure ADVANCING (weak security, poor prosperity)', vid: 5, by: 'record', why: 'an occupation: "nobody is watching its officials" beside "local offices work only under their eye" (BAR-0 #200, Longyuan)' },
   { seed: 'w5-town-occupied-3', pool: 'DS-POW-6::capture pressure ADVANCING (weak security, poor prosperity)', vid: 9, by: 'record', why: 'an occupation: "nobody at X is watching its officials" (v5\'s sibling, the same claim)' },
   { seed: 'w5-city-occupied-1', pool: 'DS-POW-6::capture pressure ADVANCING (weak security, poor prosperity)', vid: 3, by: 'record', why: 'an occupation: "paid little and watched less" of offices the occupiers watch' },
+  { seed: 'w5-metropolis-occupied-2', pool: 'DS-DEF-2::Economic Survival: STRONG', vid: 9, why: 'an occupation: "paying it from money it had put by" where "The occupiers take the revenue" (BAR-0 #205, Longyuan)' },
+  { seed: 'w5-town-occupied-3', pool: 'DS-DEF-2::Economic Survival: STRONG', vid: 3, why: 'an occupation: "its defenders are still paid from it" of a defence the occupiers hold' },
+  { seed: 'w5-city-occupied-101', pool: 'DS-DEF-2::Economic Survival: STRONG', vid: 12, why: 'an occupation: "its defenders are still paid on time" (v3\'s twin)' },
+  { seed: 'w5-city-under_siege-103', pool: 'DS-DEF-2::Economic Survival: STRONG', vid: 9, why: 'a Struggling town: "paying it from money it had put by" off the two lowest prosperity rungs (the chair\'s ruling on BAR-0 #205)' },
 ];
 
 /** @param {string} seed */

@@ -2926,16 +2926,17 @@ supplies the ancestry.
 **`Economic Survival`: `STRONG`**
 1. `[ledger · no crisis: debt · no crisis: famine · prosperity: ≥ moderate]` {settlement}'s accounts have money in hand: the town can keep its defenders paid and buy what a bad season needs without going begging.
 2. `[street · no crisis]` The town could go through a bad season with its arrangements intact, and the people who would have to be paid through one know it.
-3. `[counterforce · crisis · no crisis: debt]` {settlement} had money laid by before this trouble began, and its defenders are still paid from it.
+3. `[counterforce · crisis · no crisis: debt · no crisis: occupied]` {settlement} had money laid by before this trouble began, and its defenders are still paid from it.
 4. `[ledger · crisis: famine]` The famine is costing the town dearly, and the town is paying: its money is going on food, and so far there is money enough.
 5. `[ledger · crisis: debt]` The debt takes much of what {settlement} earns, but what is left still keeps the town's own business running.
 6. `[street · crisis: debt]` People in {settlement} complain of what the creditor takes, but the town still meets its payments.
 7. `[unfolding · crisis: debt]` {settlement} cannot pay off what it owes, but it can carry the debt, and for now it does.
 8. `[street · no crisis]` Nobody in {settlement} lies awake over a lean year: there is enough in hand to see the town through one.
-9. `[ledger · crisis · no crisis: debt · no crisis: famine]` Whatever the present trouble costs {settlement}, the town is paying it from money it had put by.
+9. `[ledger · crisis · no crisis: debt · no crisis: famine · no crisis: occupied · prosperity: ≥ poor]` Whatever the present trouble costs {settlement}, the town is paying it from money it had put by.
 10. `[street · crisis: famine]` Hunger has come to the town, but its money has not run out: what food can be bought, it buys.
 11. `[visitor · crisis: famine]` Food is dear and hard to find here, but whatever food reaches the town is bought: the money is there for it.
-12. `[street · crisis · no crisis: debt · no crisis: famine]` The town went into this trouble with money in hand, and its defenders are still paid on time.
+12. `[street · crisis · no crisis: debt · no crisis: famine · no crisis: occupied]` The town went into this trouble with money in hand, and its defenders are still paid on time.
+13. `[ledger · crisis: occupied]` {settlement} had money laid by when the occupiers came; what the town earns now goes to them.
 
 **`Economic Survival`: `ADEQUATE`** {colour}
 1. `[ledger]` {settlement} can fund a short crisis. A long one begins eating reserves within a few months, and the reserves are not deep enough to hide that from anybody.

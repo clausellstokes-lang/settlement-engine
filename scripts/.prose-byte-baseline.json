@@ -55,8 +55,8 @@
   },
   "leaves": {
     "src/data/dossierStateProse/defense.generated.js": {
-      "raw": 263205,
-      "gzip": 35213,
+      "raw": 263682,
+      "gzip": 35261,
       "ceilingRaw": 488168,
       "ceilingGzip": 108482
     },
@@ -659,6 +659,14 @@
       "toRaw": 130557,
       "gzipAfter": 18338,
       "reason": "+549 B raw over the committed 130008 (gzip level 9: 18272 -> 18338): DS-POW-6 ADVANCING v11, the occupation twin"
+    },
+    {
+      "car": "W2-WRITE-12 #205",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 263205,
+      "toRaw": 263682,
+      "gzipAfter": 35261,
+      "reason": "+477 B raw over the committed 263205 (gzip level 9: 35213 -> 35261): DS-DEF-2 STRONG v13, the occupation twin"
     }
   ],
   "ceilingTransfersNewLeaves": [
