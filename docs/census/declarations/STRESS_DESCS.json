@@ -544,6 +544,7 @@
      "lineId": "STRESS_DESCS.indebted[3]",
      "text": "The merchant district of {name} looks prosperous. The rest of the settlement, visible further in, looks like it has been waiting for the merchant district's prosperity to reach it for some years.",
      "needs": [
+      "market",
       "population: ≥ middling"
      ],
      "excludes": [],
@@ -577,6 +578,21 @@
       "market"
      ],
      "excludes": [],
+     "crisis": [
+      "indebted"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "STRESS_DESCS.indebted[6]",
+     "text": "The best-kept street of {name} looks prosperous. The rest of the settlement, visible further in, looks like it has been waiting for that street's prosperity to reach it for some years.",
+     "needs": [
+      "population: ≥ middling"
+     ],
+     "excludes": [
+      "market"
+     ],
      "crisis": [
       "indebted"
      ],

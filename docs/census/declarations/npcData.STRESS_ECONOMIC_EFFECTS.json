@@ -1904,7 +1904,9 @@
     {
       "id": "wary_alliance.desc#3",
       "text": "{A} and {B} share a council bloc and a list of enemies. They do not share their plans.",
-      "needs": [],
+      "needs": [
+        "shared power"
+      ],
       "excludes": [
         "ruler: lord",
         "ruler: occupier"
