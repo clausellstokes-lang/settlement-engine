@@ -14,6 +14,7 @@
  * no write; the record does not move.
  */
 import { institutionHouseLabel } from './institutionDisplayName.js';
+import { resourceDisplayName } from './resourceDisplayName.js';
 
 /** A regular-expression literal of a plain string. @param {string} s */
 const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -87,11 +88,26 @@ export function chainHousesOf(patterns, instNames) {
  */
 export function chainSourceOf(chain, printed = null) {
   if (!chain || typeof chain !== 'object') return null;
-  const c = /** @type {{ resource?: unknown, resourceCondition?: unknown, resourceInputAvailable?: unknown, resourceDepleted?: unknown }} */ (chain);
+  const c = /** @type {{ resource?: unknown, resourceCondition?: unknown, resourceInputAvailable?: unknown, resourceDepleted?: unknown, substituteActive?: unknown, resourceInputKey?: unknown, resourceInputCondition?: unknown }} */ (chain);
   const resource = typeof c.resource === 'string' && c.resource ? c.resource : null;
   if (!resource) return null;
   if (printed && printed.resource !== resource) return typeof printed.resource === 'string' && printed.resource ? printed.resource : null;
-  if (c.resourceCondition === 'absent') return null;
+  if (c.resourceCondition === 'absent') return substituteOf(c);
   if (c.resourceCondition == null && c.resourceInputAvailable === false && !c.resourceDepleted) return null;
   return resource;
+}
+
+/**
+ * THE SUBSTITUTE A CHAIN RUNS ON (R2-CODE-B-13, the reader's M11; a count falling is not a cure): where the catalogue's
+ * ground is absent, the chain model may run the chain on another input the town HAS (`substituteActive`, with
+ * `resourceInputKey` the input and `resourceInputCondition` 'available': Livestock & Dairy on alpine pastures,
+ * r2r-hamlet-2; fishing on river fisheries, r2r-hamlet-16). That input is the chain's true "From", named in the
+ * Resources tab's words (resourceDisplayName). Anything less than an available substitute names nothing, as before.
+ * @enforced-by tests/domain/chainSourceSubstitute.test.js
+ * @param {{ substituteActive?: unknown, resourceInputKey?: unknown, resourceInputAvailable?: unknown, resourceInputCondition?: unknown }} c
+ * @returns {string | null}
+ */
+function substituteOf(c) {
+  if (c.substituteActive !== true || c.resourceInputAvailable !== true || c.resourceInputCondition !== 'available') return null;
+  return typeof c.resourceInputKey === 'string' && c.resourceInputKey ? (resourceDisplayName(c.resourceInputKey) || null) : null;
 }
