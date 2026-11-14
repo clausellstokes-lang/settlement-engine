@@ -5478,10 +5478,10 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "{resource} lies unworked around {settlement}, and anyone who knows its price elsewhere will want to change that.",
+          "text": "Around {settlement} the {resource} lies unworked, and anyone who knows its price elsewhere will want to change that.",
           "slots": [
-            "resource",
-            "settlement"
+            "settlement",
+            "resource"
           ],
           "vid": 2
         },
@@ -5524,10 +5524,10 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
-          "text": "{resource} has been there for {settlement} to take for as long as the town has stood, and nobody has found it worth the trouble.",
+          "text": "For as long as {settlement} has stood, its {resource} has been there to take, and nobody has found it worth the trouble.",
           "slots": [
-            "resource",
-            "settlement"
+            "settlement",
+            "resource"
           ],
           "vid": 3
         }
@@ -5550,10 +5550,10 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no crisis: under_siege"
           ],
-          "text": "{resource} leaves {settlement} half-finished, and nobody in the town is troubled by it.",
+          "text": "{settlement} sends its {resource} out half-finished, and nobody in the town is troubled by it.",
           "slots": [
-            "resource",
-            "settlement"
+            "settlement",
+            "resource"
           ],
           "vid": 2
         },

@@ -1701,18 +1701,18 @@ A composed page draws one of each grain, never two.
 
 **EXPLOITATION: `unexploited`, `exportValue: high`**
 1. `[ledger]` There is {resource} in {settlement}'s country worth real money and nothing in the town takes it out of the ground.
-2. `[visitor]` {resource} lies unworked around {settlement}, and anyone who knows its price elsewhere will want to change that.
+2. `[visitor]` Around {settlement} the {resource} lies unworked, and anyone who knows its price elsewhere will want to change that.
 3. `[street]` Everybody in this town can point at the {resource}, and nobody in this town is working it.
 4. `[threshold]` {settlement} has the {resource}; what it lacks is {institution} to start the work.
 
 **EXPLOITATION: `unexploited`, `exportValue: medium` or `low`**
 1. `[ledger]` {settlement} leaves its {resource} unworked. It would fetch barely enough to pay for the digging.
 2. `[street]` There is {resource} out there and nobody has ever thought it worth the trouble, which is the town's considered opinion rather than an oversight.
-3. `[counterforce]` {resource} has been there for {settlement} to take for as long as the town has stood, and nobody has found it worth the trouble.
+3. `[counterforce]` For as long as {settlement} has stood, its {resource} has been there to take, and nobody has found it worth the trouble.
 
 **EXPLOITATION: `partiallyExploited`**
 1. `[ledger · no crisis: under_siege]` {settlement} works part of the line that {resource} could support: the raw material moves, and it moves before it has been made into anything worth more.
-2. `[visitor · no crisis: under_siege]` {resource} leaves {settlement} half-finished, and nobody in the town is troubled by it.
+2. `[visitor · no crisis: under_siege]` {settlement} sends its {resource} out half-finished, and nobody in the town is troubled by it.
 3. `[threshold]` The {chain} between {resource} and {good} is begun and not finished here; what stands between the two is one {institution} the town does not have.
 4. `[street · no crisis: under_siege]` The town takes the easy half of this trade and sells the rest of it to whoever will do the hard half.
 5. `[unfolding · crisis: under_siege]` With the roads cut by the siege, {settlement} can no longer send out its {resource}, and what it has stays in the town.
