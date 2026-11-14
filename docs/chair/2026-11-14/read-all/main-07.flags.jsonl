@@ -1,0 +1,120 @@
+{"id":"HEADER","town":"r2s-famine-town-2","sev":"MED","kind":"RECORD","why":"founder is a crown-granted noble, yet the reason says artisans pooled their own resources; both cannot be the founding","other":""}
+{"id":"09398","town":"r2s-famine-town-2","sev":"MED","kind":"PAIR","why":"says founded for its anchorage; FOUNDING reason and 15373 say founded as an artisans' workshop district","other":"15373"}
+{"id":"20334","town":"r2s-famine-town-2","sev":"MED","kind":"STATE","why":"says the country grows no grain; food ledger shows 250 grown and 00614 says it grows about a third","other":"00614"}
+{"id":"12560","town":"r2s-famine-town-2","sev":"MED","kind":"LACKS","why":"names gate control; DEFENCE walls none, no gates on HOUSES","other":""}
+{"id":"19954","town":"r2s-famine-town-2","sev":"MED","kind":"PAIR","why":"says Thieves' Guild is at odds with the Mayor; 23123 and 14920 say they leave each other alone","other":"23123"}
+{"id":"23138","town":"r2s-famine-town-2","sev":"MED","kind":"PAIR","why":"marks Mayor~Thieves' Guild escalating; 23123 and 14920 say neither pushes the other","other":"23123"}
+{"id":"09275","town":"r2s-famine-town-2","sev":"MED","kind":"PAIR","why":"granary would carry the town five months at full rations; town is in famine and 22974 says it has not been enough","other":"22974"}
+{"id":"HEADER","town":"r2s-famine-town-3","sev":"MED","kind":"RECORD","why":"founded by religious authorities wanting a regional centre, yet reason says it began as a toll post; two incompatible origins","other":""}
+{"id":"03522","town":"r2s-famine-town-3","sev":"MED","kind":"PAIR","why":"says council rules in the absence of formal authority; GOVERNMENT and 09742: governed by the Arcane Council","other":"09742"}
+{"id":"03799","town":"r2s-famine-town-3","sev":"MED","kind":"PAIR","why":"marks Arcane Council~Thieves' Guild escalating; 03763 and 14872 say they leave each other alone","other":"03763"}
+{"id":"21205","town":"r2s-famine-town-3","sev":"MED","kind":"STATE","why":"says built defences stand ahead of any present need; STATE defence is Vulnerable","other":""}
+{"id":"13538","town":"r2s-famine-town-3","sev":"MED","kind":"STATE","why":"says magic's military role is common; DEFENCE magic: none","other":""}
+{"id":"HEADER","town":"r2s-famine-town-1","sev":"MED","kind":"RECORD","why":"founded by religious authorities for a regional centre, yet reason is a caravan rest stop; incompatible origins","other":""}
+{"id":"HEADER","town":"r2s-famine-town-1","sev":"MED","kind":"RECORD","why":"HOUSES has a Free company hall of hired soldiers, but DEFENCE hired: none","other":""}
+{"id":"22676","town":"r2s-famine-town-1","sev":"MED","kind":"STATE","why":"presents salaried soldiers in town; DEFENCE hired: none and garrison none","other":""}
+{"id":"01569","town":"r2s-famine-town-1","sev":"MED","kind":"PAIR","why":"says the market sells little and traders are poor; 01566 says the market handles more than the town could use","other":"01566"}
+{"id":"14217","town":"r2s-famine-town-1","sev":"LOW","kind":"BROKEN","why":"doubled item: 'fine glass sand, fine glass sand'","other":""}
+{"id":"05780","town":"r2s-famine-town-1","sev":"MED","kind":"STATE","why":"counts grain sales as income; CRISIS famine, grain imported, granary shut (18670)","other":"18670"}
+{"id":"13120","town":"r2s-famine-town-1","sev":"MED","kind":"STATE","why":"lists Mercenary Forces operational; DEFENCE hired: none","other":""}
+{"id":"02617","town":"r2s-famine-town-1","sev":"MED","kind":"STATE","why":"says a free company hires out swords here; DEFENCE hired: none","other":""}
+{"id":"13395","town":"r2s-famine-town-1","sev":"MED","kind":"PAIR","why":"marks oligarchy~Religious Authorities stable; 15622 and 26193 say the two keep quarrelling","other":"15622"}
+{"id":"13403","town":"r2s-famine-town-1","sev":"MED","kind":"PAIR","why":"marks oligarchy-Merchant Guilds stable; 13377 and 10637 give High tension","other":"13377"}
+{"id":"13358","town":"r2s-famine-town-1","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in prose","other":""}
+{"id":"13354","town":"r2s-famine-town-1","sev":"LOW","kind":"PAIR","why":"counts Merchant oligarchy (2) but 21797 names a ruling three with first, second and third","other":"21797"}
+{"id":"19648","town":"r2s-famine-town-1","sev":"LOW","kind":"BROKEN","why":"doubled word: 'The Long Long Sun Fair'","other":""}
+{"id":"10196","town":"r2s-famine-town-0","sev":"MED","kind":"PAIR","why":"marks Guild Council-Merchant Guilds stable; 10175 gives High tension","other":"10175"}
+{"id":"14370","town":"r2s-famine-town-0","sev":"LOW","kind":"BROKEN","why":"doubled item: 'fine glass sand, fine glass sand'","other":""}
+{"id":"16002","town":"r2s-famine-town-0","sev":"LOW","kind":"STATE","why":"gives 1,444 imported; food ledger says imports cover 1435","other":""}
+{"id":"HEADER","town":"r2s-occupied-town-2","sev":"MED","kind":"RECORD","why":"a town of 310 holds 5-15 craft guilds, 5-20 taverns, multiple inns and 2-5 parish churches","other":""}
+{"id":"HEADER","town":"r2s-occupied-town-2","sev":"LOW","kind":"RECORD","why":"makes iron and metalwork, yet HOUSES has no mine, smelter or smith","other":""}
+{"id":"12014","town":"r2s-occupied-town-2","sev":"MED","kind":"STATE","why":"brewery sends beer across the region; TRADE exports: none and 28748 says no export column","other":"28748"}
+{"id":"10187","town":"r2s-occupied-town-2","sev":"MED","kind":"PAIR","why":"marks Guild Council~Occupation Authority stable; 00381 says the Occupation Authority is at odds with it, 10155 a protest","other":"00381"}
+{"id":"23115","town":"r2s-occupied-town-0","sev":"MED","kind":"PAIR","why":"marks Town Council-Merchant Guilds stable; 23107 and 10687 give High tension","other":"23107"}
+{"id":"03038","town":"r2s-occupied-town-0","sev":"MED","kind":"PAIR","why":"calls Merchant Guilds a few traders who come on market days; HOUSES has resident Merchant guilds (3-8) and 02819 has merchants report to it","other":"02819"}
+{"id":"HEADER","town":"r2s-occupied-town-1","sev":"MED","kind":"RECORD","why":"founded by a merchant consortium owning a waypoint, yet reason is a family granted mill rights; incompatible origins","other":""}
+{"id":"00372","town":"r2s-occupied-town-1","sev":"LOW","kind":"BROKEN","why":"'done by Deception' reads as a game skill name leaked into prose","other":""}
+{"id":"14319","town":"r2s-occupied-town-1","sev":"LOW","kind":"BROKEN","why":"doubled item: 'fine glass sand, fine glass sand'","other":""}
+{"id":"18251","town":"r2s-occupied-town-1","sev":"MED","kind":"PAIR","why":"says food processing is in trouble; 01545 says Sundnes's food trades are working, deficit 1%","other":"01545"}
+{"id":"20622","town":"r2s-occupied-town-1","sev":"LOW","kind":"BROKEN","why":"subject-verb disagreement: 'The garrison and town watch patrols'","other":""}
+{"id":"14236","town":"r2s-occupied-town-3","sev":"LOW","kind":"BROKEN","why":"doubled item: 'fine glass sand, fine glass sand'","other":""}
+{"id":"13341","town":"r2s-occupied-town-3","sev":"MED","kind":"PAIR","why":"marks Merchant Guilds~Craft Guilds stable; 13269 and 10624 give High tension, 16773 a sustained dispute","other":"13269"}
+{"id":"HEADER","town":"r2s-plague_onset-town-3","sev":"MED","kind":"RECORD","why":"founded where the river became navigable for laden vessels, yet trade access is road and HOUSES has no docks or ferry","other":""}
+{"id":"HEADER","town":"r2s-plague_onset-town-3","sev":"LOW","kind":"RECORD","why":"a town of 475 holds 5-15 craft guilds, 3-8 merchant guilds and 5-20 taverns","other":""}
+{"id":"10708","town":"r2s-plague_onset-town-3","sev":"MED","kind":"LACKS","why":"offers hired muscle for coin; HOUSES has no gang or criminal house, DEFENCE hired: none","other":""}
+{"id":"03766","town":"r2s-plague_onset-town-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in prose","other":""}
+{"id":"01519","town":"r2s-plague_onset-town-3","sev":"MED","kind":"STATE","why":"says Ringford's defences are sound; STATE defence Vulnerable","other":""}
+{"id":"11782","town":"r2s-plague_onset-town-3","sev":"LOW","kind":"BROKEN","why":"stored key 'guild_controlled' printed in prose","other":""}
+{"id":"18328","town":"r2s-plague_onset-town-3","sev":"MED","kind":"BROKEN","why":"ends mid-clause: 'learned what favour Nechtan Mac' with no verb","other":""}
+{"id":"05876","town":"r2s-plague_onset-town-3","sev":"LOW","kind":"BROKEN","why":"name cut off: 'a hold on Nechtan Mac'","other":""}
+{"id":"HEADER","town":"r2s-famine-town-2","sev":"LOW","kind":"RECORD","why":"a town of 407 holds 5-15 craft guilds, 5-20 taverns, multiple inns and 2-5 parish churches","other":""}
+{"id":"28852","town":"r2s-plague_onset-town-1","sev":"MED","kind":"PAIR","why":"says notables govern where nothing official exists; GOVERNMENT and 19214: the Corrupt Council governs","other":"19214"}
+{"id":"03160","town":"r2s-plague_onset-town-1","sev":"MED","kind":"STATE","why":"says streets show no trouble; STATE safety Dangerous, Plague Unrest, and 01549 shows a roped-off well","other":"01549"}
+{"id":"09363","town":"r2s-plague_onset-town-1","sev":"LOW","kind":"BROKEN","why":"'told by Deception' reads as a game skill name leaked into prose","other":""}
+{"id":"07646","town":"r2r-town-37","sev":"MED","kind":"PAIR","why":"marks Feudal Appointee~Thieves' Guild escalating; 07626 and 14888 say they leave each other alone","other":"07626"}
+{"id":"16429","town":"r2r-town-37","sev":"MED","kind":"STATE","why":"says Religious Authorities could take the hall; GOVERNMENT has them Minor, the Appointee Significant","other":""}
+{"id":"10759","town":"r2r-town-37","sev":"MED","kind":"PAIR","why":"says Thieves' Guild makes the decisions; 14888 says nobody at the Appointee's head answers to it","other":"14888"}
+{"id":"12494","town":"r2r-town-37","sev":"LOW","kind":"PAIR","why":"counts Landed Gentry (1) yet 30351 names a second of Landed Gentry","other":"30351"}
+{"id":"HEADER","town":"r2s-plague_onset-town-0","sev":"MED","kind":"RECORD","why":"HOUSES has a Free company hall of hired soldiers, but DEFENCE hired: none","other":""}
+{"id":"HEADER","town":"r2s-plague_onset-town-0","sev":"MED","kind":"RECORD","why":"founded by a merchant consortium owning a waypoint, yet reason is a family granted mill rights; incompatible origins","other":""}
+{"id":"21242","town":"r2s-plague_onset-town-0","sev":"LOW","kind":"BROKEN","why":"house label used raw in prose: 'the apothecary (established)'","other":""}
+{"id":"22677","town":"r2s-plague_onset-town-0","sev":"MED","kind":"STATE","why":"presents salaried soldiers in town; DEFENCE hired: none, garrison none","other":""}
+{"id":"20576","town":"r2s-plague_onset-town-0","sev":"MED","kind":"STATE","why":"says a free company keeps its muster roll here; DEFENCE hired: none","other":""}
+{"id":"13412","town":"r2s-plague_onset-town-0","sev":"MED","kind":"STATE","why":"fair draws merchants from across the region; CRISIS plague, safety Quarantined","other":""}
+{"id":"14313","town":"r2s-plague_onset-town-0","sev":"LOW","kind":"BROKEN","why":"doubled item: 'fine glass sand, fine glass sand'","other":""}
+{"id":"13633","town":"r2s-plague_onset-town-0","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in prose","other":""}
+{"id":"13492","town":"r2s-plague_onset-town-0","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in prose","other":""}
+{"id":"23487","town":"r2s-plague_onset-town-0","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in prose","other":""}
+{"id":"13593","town":"r2s-plague_onset-town-0","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in prose","other":""}
+{"id":"04066","town":"r2s-plague_onset-town-0","sev":"MED","kind":"PAIR","why":"says one person answers and there is no one else to ask; 13593 says the Guard outweighs the Council and decides","other":"13593"}
+{"id":"HEADER","town":"r2s-plague_onset-town-2","sev":"MED","kind":"RECORD","why":"HOUSES has a Free company hall of hired soldiers, but DEFENCE hired: none","other":""}
+{"id":"03621","town":"r2s-plague_onset-town-2","sev":"MED","kind":"LACKS","why":"names lumber yards and a sawmill district; HOUSES has no sawmill and timber is imported, woodland cleared","other":""}
+{"id":"HEADER","town":"r2s-recently_betrayed-town-3","sev":"MED","kind":"RECORD","why":"founded by religious authorities for a regional centre, yet reason is farmland granted to a noble; incompatible origins","other":""}
+{"id":"HEADER","town":"r2s-recently_betrayed-town-3","sev":"LOW","kind":"RECORD","why":"a town of 322 holds 5-15 craft guilds, 3-8 merchant guilds and 5-20 taverns","other":""}
+{"id":"01599","town":"r2s-recently_betrayed-town-3","sev":"MED","kind":"PAIR","why":"says its food is herds and little else; 09791 and TRADE speak of its own grain harvest, and it has mills","other":"09791"}
+{"id":"13582","town":"r2s-recently_betrayed-town-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in prose","other":""}
+{"id":"01493","town":"r2s-recently_betrayed-town-3","sev":"LOW","kind":"LACKS","why":"says the books record no guild; HOUSES has craft guilds (5-15) and merchant guilds (3-8)","other":""}
+{"id":"HEADER","town":"r2s-succession_void-town-3","sev":"MED","kind":"RECORD","why":"HOUSES has Hired blades, but DEFENCE hired: none","other":""}
+{"id":"HEADER","town":"r2s-succession_void-town-3","sev":"MED","kind":"RECORD","why":"founded by a crown-granted noble, yet reason is a travelling herbalist who stayed; incompatible origins","other":""}
+{"id":"HEADER","town":"r2s-succession_void-town-3","sev":"LOW","kind":"RECORD","why":"a town of 321 holds 5-15 craft guilds, 5-15 carpenters, 5-15 bakers and 5-20 taverns","other":""}
+{"id":"22166","town":"r2s-succession_void-town-3","sev":"MED","kind":"LACKS","why":"merchants and creditors decide the succession; GOVERNMENT and HOUSES list no merchant power or guild","other":""}
+{"id":"13618","town":"r2s-succession_void-town-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in prose","other":""}
+{"id":"01140","town":"r2s-succession_void-town-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in prose","other":""}
+{"id":"15125","town":"r2s-succession_void-town-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in prose","other":""}
+{"id":"01472","town":"r2s-succession_void-town-3","sev":"MED","kind":"STATE","why":"says the defences are sound; STATE defence Vulnerable","other":""}
+{"id":"HEADER","town":"r2s-indebted-town-1","sev":"MED","kind":"RECORD","why":"founded by religious authorities for a regional centre, yet reason is a disbanded military unit that stayed; incompatible origins","other":""}
+{"id":"HEADER","town":"r2s-indebted-town-1","sev":"LOW","kind":"RECORD","why":"a town of 357 holds 5-15 craft guilds and 5-20 taverns; exports bows and arrows with no bowyer on HOUSES","other":""}
+{"id":"30976","town":"r2s-indebted-town-1","sev":"MED","kind":"LACKS","why":"ticks Mining and Stone quarrying running; HOUSES has no mine or quarry, gem deposits exhausted, 22665 says the stone is untouched","other":"22665"}
+{"id":"19719","town":"r2s-indebted-town-1","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in prose","other":""}
+{"id":"13603","town":"r2s-indebted-town-1","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in prose","other":""}
+{"id":"23482","town":"r2s-indebted-town-1","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in prose","other":""}
+{"id":"23955","town":"r2s-indebted-town-1","sev":"LOW","kind":"BROKEN","why":"buys 'grain and water power at the market'; water power is not a market good","other":""}
+{"id":"24491","town":"r2s-plague_onset-town-2","sev":"LOW","kind":"BROKEN","why":"'a second supplier of grain and water power ... one lost cart'; water power is not carted","other":""}
+{"id":"HEADER","town":"r2s-infiltrated-town-1","sev":"MED","kind":"RECORD","why":"founded by religious authorities for a regional centre, yet reason is a family granted mill rights; incompatible origins","other":""}
+{"id":"HEADER","town":"r2s-infiltrated-town-1","sev":"LOW","kind":"RECORD","why":"a town of 319 holds 5-15 craft guilds, 3-8 merchant guilds and 5-20 taverns","other":""}
+{"id":"28555","town":"r2s-infiltrated-town-1","sev":"LOW","kind":"BROKEN","why":"subject-verb disagreement: 'Weak defences keeps'","other":""}
+{"id":"14875","town":"r2s-infiltrated-town-1","sev":"MED","kind":"STATE","why":"says no criminal power can push the council; CRISIS Infiltrated, regional criminal pressure, decisions shaped from outside","other":""}
+{"id":"21222","town":"r2s-insurgency-town-1","sev":"MED","kind":"PAIR","why":"opposition means to inherit, not take by force; CRISIS Insurgency, Rebellion, and 03911 says armed rebels are active","other":"03911"}
+{"id":"HEADER","town":"r2s-slave_revolt-town-1","sev":"MED","kind":"RECORD","why":"founded by military veterans on land grants, yet reason is a family granted mill rights; incompatible origins","other":""}
+{"id":"HEADER","town":"r2s-slave_revolt-town-1","sev":"LOW","kind":"RECORD","why":"a town of 343 holds 5-15 craft guilds, 5-20 taverns, docks and a courthouse","other":""}
+{"id":"13621","town":"r2s-slave_revolt-town-1","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in prose","other":""}
+{"id":"13586","town":"r2s-slave_revolt-town-1","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in prose","other":""}
+{"id":"HEADER","town":"r2s-religious_conversion-town-0","sev":"MED","kind":"RECORD","why":"founded by military veterans on land grants, yet reason is a fishing village grown into a maritime hub; incompatible origins","other":""}
+{"id":"HEADER","town":"r2s-indebted-town-2","sev":"MED","kind":"RECORD","why":"founded by religious authorities for a regional centre, yet reason is a disbanded military unit that stayed; incompatible origins","other":""}
+{"id":"HEADER","town":"r2r-town-24","sev":"MED","kind":"RECORD","why":"founded by a merchant consortium owning a waypoint, yet reason is veterans granted land after a war; incompatible origins","other":""}
+{"id":"12987","town":"r2r-town-24","sev":"LOW","kind":"LACKS","why":"speaks of imported grain growing charged; TRADE imports list no grain, imports cover only 44","other":""}
+{"id":"HEADER","town":"r2r-town-36","sev":"MED","kind":"RECORD","why":"founded by a merchant consortium owning a waypoint, yet reason is a seasonal herders' gathering made permanent; incompatible origins","other":""}
+{"id":"12852","town":"r2r-town-36","sev":"LOW","kind":"LACKS","why":"signs offer enchanting by the hour; HOUSES has only an alchemist shop, no enchanter or wizard","other":""}
+{"id":"04276","town":"r2r-town-36","sev":"LOW","kind":"LACKS","why":"performers come for the fairs; HOUSES has no annual fair","other":""}
+{"id":"26408","town":"r2r-town-36","sev":"LOW","kind":"BROKEN","why":"'the supply of grain and water power' treats water power as a supplied good","other":""}
+{"id":"HEADER","town":"r2r-town-5","sev":"MED","kind":"RECORD","why":"founded by military veterans on land grants, yet reason is a merchant who found fine local wool; incompatible origins","other":""}
+{"id":"HEADER","town":"r2s-politically_fractured-town-3","sev":"MED","kind":"RECORD","why":"founder is merchants, yet the reason says it was founded by foresters under charter; two different founders","other":""}
+{"id":"04908","town":"r2s-politically_fractured-town-3","sev":"MED","kind":"PAIR","why":"marks Church Council~Religious Authorities stable; 15604 says the two keep quarrelling","other":"15604"}
+{"id":"HEADER","town":"r2s-indebted-town-3","sev":"MED","kind":"RECORD","why":"founded by military veterans on land grants, yet reason is a logging camp that grew; incompatible origins","other":""}
+{"id":"18754","town":"r2s-indebted-town-3","sev":"LOW","kind":"PAIR","why":"brewery supplies regional distribution; trade access isolated and 00723 says no dependable way to move goods","other":"00723"}
+{"id":"12559","town":"r2s-indebted-town-3","sev":"MED","kind":"LACKS","why":"names gate control; DEFENCE walls none, no gates on HOUSES","other":""}
+{"id":"HEADER","town":"r2s-infiltrated-town-2","sev":"LOW","kind":"RECORD","why":"a desert road town has a fish market, with no fishery, fish import or water access","other":""}
+{"id":"17796","town":"r2s-infiltrated-town-2","sev":"LOW","kind":"STATE","why":"offers guard hire; DEFENCE hired: none","other":""}
+{"id":"20621","town":"r2s-infiltrated-town-2","sev":"LOW","kind":"BROKEN","why":"subject-verb disagreement: 'The garrison and town watch maintains'","other":""}
+{"id":"01523","town":"r2s-infiltrated-town-2","sev":"LOW","kind":"STATE","why":"says the trades behind the defenders keep failing; STATE prosperity Moderate, deficit 1%","other":""}
+{"id":"DONE","lines":3147,"blocks":28,"flags":119}
