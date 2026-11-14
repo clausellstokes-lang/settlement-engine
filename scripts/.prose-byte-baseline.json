@@ -55,8 +55,8 @@
   },
   "leaves": {
     "src/data/dossierStateProse/defense.generated.js": {
-      "raw": 262433,
-      "gzip": 35276,
+      "raw": 262444,
+      "gzip": 35290,
       "ceilingRaw": 488168,
       "ceilingGzip": 108482
     },
@@ -587,6 +587,14 @@
       "toRaw": 184022,
       "gzipAfter": 25652,
       "reason": "+23 B raw over the committed 183999 (gzip level 9: 25641 -> 25652): DS-ECO-1 C4 v4 v5 v7 reworded: the siege lines no longer claim the town was poor before the siege"
+    },
+    {
+      "car": "W2-WRITE-10 #217",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 262433,
+      "toRaw": 262444,
+      "gzipAfter": 35290,
+      "reason": "+11 B raw over the committed 262433 (gzip level 9: 35276 -> 35290): DS-DEF-3 Moderate v3: colour -> tier: ≥ village"
     }
   ],
   "ceilingTransfersNewLeaves": [

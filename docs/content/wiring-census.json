@@ -2783,9 +2783,9 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 1,
         "guardPresence": 3,
         "no guardPresence": 2,
+        "tier: ≥ village": 1,
         "watch": 1
       },
       "undeclared": 0,
