@@ -5156,6 +5156,85 @@ SEATS2['INCOME-MEASURE-1'] = dict(
 )
 
 
+SEATS2['R2-CODE-B-12'] = dict(
+    title="R2-CODE-B-12 · round two's second code lane: the minted stand-in's words first, the journal's power slot, then its reader's medium rows in order",
+    branch='lane/r2-code-b-2026-11-13', tip='3357f950', statement=False,
+    intro=("You are R2-CODE-B-12, the twelfth seat on round two's second code lane of the settlement-engine integration program "
+           "(lane/r2-code-b-2026-11-13). The lane holds who is cast in a town's crisis (the face, the lever, the brunt, the collaborator), "
+           "the people minted to stand in where the roster has nobody, the Tonight sheet, and what those rows print on the Crisis tab, the "
+           "hooks, the PDF and the Foundry journal. An independent reader read its stage NOT CLEAR at ac8168c8c: no HIGH of the stage's own, "
+           "fourteen MEDIUM. The eleventh seat cured the collaborator who was the occupier (34 to 0) and the brunt laid on a house that "
+           "loses nothing (66 to 0), held a floor of witnesses by growing its corpus, and handed back at its count with the rest listed in "
+           "order. Yours: that list, IN ITS ORDER. The lane goes on curing and lands later as a point of its own on the joined line: NO "
+           "whole suite, NO new statement: an ADDENDUM at the end."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. On your lane, docs/chair/2026-11-13/R2-CODE-B-HANDBACK.md: ONLY \"# PART 11\" (from that line to the end, by script: about 75 "
+          "lines, some very long): THE CHAIR'S RULINGS (a) to (n), copied whole; the two rows as cured (their form: the cause, the cure, "
+          "the counts on the reader's 1,536 births, the field diff by family, the guard and its plant, the towns read); EVERY NEW OR "
+          "CHANGED LINE; FOR THE JOIN; WHAT IS LEFT (ten items: YOUR LIST, IN ORDER); how the instruments are re-made.\n"
+          "3. THE READER'S VERDICT, for a row you are curing (`git fetch origin lane/review-r2-code-b-2026-11-14`; `git show "
+          "origin/lane/review-r2-code-b-2026-11-14:docs/chair/2026-11-14/REVIEW-R2-CODE-B-2026-11-14.md`: its section 9 (M1 to M14) and "
+          "section 4 (the plants; the two guards that stayed green), by heading; and in REVIEW-R2-CODE-B-LINES-READ.md beside it only the "
+          "entry of the row in hand). Its probes (docs/chair/2026-11-14/probes/REVIEW-R2-CODE-B/: its 1,536 births) by git archive, run "
+          "from outside every repository tree.\n"
+          "4. THE ROWS OTHER SEATS NAMED TO THIS LANE (`git fetch origin lane/chair-2026-11-08`; `git show "
+          "origin/lane/chair-2026-11-08:docs/chair/2026-11-14/join-rows/OPEN-r2-code-b.md`): of its six bullets FOUR are yours as "
+          "CANDIDATES (R2B-LEASTSAY, BAR-130, BAR-131, R2B-CARAVANS); LV-CHAINSTATE-PDF and UPK-STORES are another lane's now.\n"
+          "5. The merge book's section 2m on origin/lane/merge-15-point-49-wip-2026-11-14 (the section headed \"## 2m.\"; by script), before the first "
+          "register you touch."),
+    work=("THE CHAIR'S RULINGS: (a) to (n) AS COPIED IN PART 11 stand, and these since (each vetoable by the owner; copy them into your "
+          "part):\n"
+          "(i, settled) THE TONIGHT FAMINE CALLER IS NOT YOURS: the eleventh seat showed that this lane's half alone reds the strict-domain "
+          "gate; both lines land together on the joined line, by another seat. You do not make it.\n"
+          "(k, widened) THE PDF'S SECTIONS AND THE JOURNAL'S ECONOMICS PAGE ARE ANOTHER LANE'S (a lane cut from the joined branch makes "
+          "every surface read the tab's readers): you change no file under src/pdf/sections/, and in src/foundry/journalPages.js only "
+          "inside this lane's own hunks (`git diff -U0 $(git merge-base origin/lane/integration-2026-11-07 HEAD) HEAD -- "
+          "src/foundry/journalPages.js`), never its economics page. A row that needs more is NAMED under FOR THE JOIN with its measure.\n"
+          "(o) R2B-LEASTSAY (\"the one with the least say in the house the crisis hits\", 69 as the reader narrowed it): re-measure at "
+          "your tip: the eleventh seat's cure of the brunt may have answered it; if it still prints where the person named is the house's "
+          "head or its only member, the reason is said only where the house holds someone with more say.\n"
+          "(p) BAR-130, BAR-131 (\"Institutions behind this power (32)\" beside a list of fewer, one town as named): A COUNT WORD READS THE "
+          "ROSTER: the number is the count of the rows printed under it; measure on the births how often the two differ, and why.\n"
+          "(q) R2B-CARAVANS (\"Supply caravans pass through on crown requisition\" in an isolated wartime town, 4 of 800): the line reads "
+          "the town's routes: no caravan passes through a town the record holds as isolated.\n"
+          "THE WORK, in this order, each cause its own commit, measured first on the reader's 1,536 births (count before and after), red "
+          "first (a collected arm; a keep-guard and a taken-off guard; each arm shown able to red by a plant you do not commit, made in a "
+          "tree no suite or render is running in), pushed as made:\n"
+          "1. PART 11's item 1, (c): THE MINTED STAND-IN'S WORDS, WHOLE, BEFORE ANYTHING ELSE: its role in lay words where the record "
+          "holds no such office; the lever's want names a scarce thing the town HAS. It is A DECLARED MOVE of the minted person: its "
+          "field diff on the census's 720 by family (a leaf outside the minted person, `stress`, `stressors` and what reads them is a "
+          "STOP). THE NEW WORDS ARE READ ON SIX SURFACES (the NPCs tab, the Crisis tab, the hooks, the Tonight sheet, the PDF, the "
+          "journal) in three towns of each kind of stand-in, a siege, a famine and a plague among them, the smallest and the largest "
+          "size; listed for the owner's veto. ONE MESSAGE TO THE CHAIR (the tip; the three counts before and after; the new words), then "
+          "THE COUNT.\n"
+          "2. PART 11's items 2 to 8, in its order: (d), (m), (e), (f), (g), (h) with M14, then (n)'s rows in the chair's order (M10, "
+          "M12, M11, M4, M6's other half, M13, M14) and the two guards made able to red.\n"
+          "3. (o), (p), (q), each measured first.\n"
+          "4. PART 11's item 9, ONCE, AFTER YOUR LAST CAST CURE: the 720 field diff of the whole stage by family; the shift record's "
+          "rows re-measured; the edge bundles rebuilt LAST and committed alone; THE ADDENDUM to the statement (the statement not "
+          "rewritten). If your count's mark comes first: item 9 is NAMED for the next seat, not half-made.\n"
+          "A CURE IN GENERATOR CODE IS A DECLARED MOVE: say which families move, with counts; A PERSON OR A POWER RE-DRAWN OUTSIDE THE "
+          "ROW'S OWN ROLE IS A STOP. EVERY LINE A CURE NOW PRINTS IN A NEW TOWN, OR NEWLY LEAVES SILENT, IS READ WHERE IT PRINTS on "
+          "every surface that prints it before it is pushed: three towns of its cells, a siege, a famine or an occupation among them, "
+          "the smallest and the largest size it reaches; the towns and what printed in the commit body. A WORDING IS BORN WHOLE BEFORE "
+          "ITS PUSH (the eleventh seat's correction: a line's field diff measured on an earlier wording is not that line's measure).\n"
+          "AFTER EVERY CURE: the presumed-things walker (its fresh hits compared with the 18 the lane carries: a rise is a stop); the "
+          "strict-domain gate, the type ratchet and eslint on the touched files; the twelve-birth grid (`node "
+          "scripts/census/page-census.mjs --grid`: a rise is a stop); the test files that name the files you touched; the lighting census "
+          "re-taken by its ritual where a guard file is added; castDerived's floor (a floor of witnesses is held by growing the corpus, "
+          "never lowered).\n"
+          "TO SPEND LESS OF YOUR COUNT: births of the 1,536 take two minutes: count by script; never bring a render's output or a dump "
+          "into your context: a script prints the counts and at most three quoted lines.\n"
+          "THE HAND-BACK, kept current after every item: a new \"# PART 12\" at the end of the lane's hand-back file, in PART 11's form: "
+          "the rulings since copied; each row: its cause, its cure and commit, its counts, its guard and plant, the towns read; EVERY NEW "
+          "OR CHANGED LINE (the owner's veto list, and the next reader's); the declared moves by family; FOR THE JOIN, carried forward; "
+          "what is left, line by line."),
+    merges='',
+    when="for a stop that blocks everything you have left, after (c) (the tip; the counts; the new words), for a leaf moved outside a row's own family, and with your hand-back",
+    turns='',
+)
+
+
 def build2(seat):
     s = _r3c6() if seat == 'R3-CODE-C-6' else SEATS2[seat]
     head = (
