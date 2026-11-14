@@ -5,7 +5,13 @@ tip did not move. The stage: 8ef42a051..9354d792a, the 16 first-parent own commi
 is the tip without the stage: `git diff 6e61d042a 9354d792a` is exactly the stage's 17 files. Probes: `probes/REVIEW-UPKEEP-CAPACITY/` (README).
 Step 1, the cold list: `REVIEW-UPKEEP-CAPACITY-LINES-READ.md` (pushed at d35305020, before any statement was opened).
 
-## VERDICT: __VERDICT__
+## VERDICT: **NOT CLEAR** for lane/upkeep-capacity-2026-11-13 at 9354d792a. Three HIGH findings are the stage's own instances on carried
+writers (H1–H3, 9 towns). Seven MEDIUM findings are the stage's own (M1–M7). The cures themselves mostly hold (step 2), the gates are green, the
+plants red, no kind of census2 rises, and no new key enters the record.
+**The one thing the chair must rule:** the house scale, as built, can LOWER a town for holding the very house the owner named (M4: adding an
+Alchemist shop lowers economic in 125 of 972 births, and a quarter can read below a shop, M6). A house off any ladder counts more than the least rung
+of its part's ladder (a first-level healer above a small hospital). Is anchor B (ruling 3) with off-ladder houses at 1.0, and G5 (ruling 11) under
+limit 1, what the owner asked for?
 
 ## Findings, ranked (EXECUTED unless marked PLAUSIBLE; OWN = the stage's own, CARRIED = false at DEF/base too)
 ### HIGH
@@ -38,7 +44,18 @@ M4 OWN, the stage's law refuted: **"adding a house never lowers a score it feeds
    (divine, 1st level)" (1.00) outweighs a town's "Small hospital" (0.80); a "Fish market" (1.00) outweighs a "Market square" (0.80); a "Hireling
    hall" (1.00) outweighs an "Adventurers' charter hall" (0.80); and a "Monastery or friary" (1.00) outweighs "Parish churches (2-5)" (0.93). The
    carried limit-1 falls (adding a Healer, a Monastery or a Small hospital lowers economic) stand at DEF too: 178, 89 and 53 births.
-__MORE__
+M5 OWN (C6's replacement): "Arcane Support: Present" beside an EMPTY "Arcane defense" list. 23 births at DEF, 33 at the tip, e.g. r2r-city-0,
+   r2r-city-19, r2r-city-41. The statement counts 4, "all Teleportation circles"; ours include a Scroll scribe, an Enchanter's shop and a dragon,
+   and 3 still carry the arcane tradition. Kind g. The chair's ruling 12 sends G5's display line to the display lane; I would not clear the stage
+   with it open (M3 is the same cause).
+M6 OWN, a statement claim not borne out: C1 on the owner's own example. In Ioannoakra the shop and the quarter both read 28 on readiness, and the
+   quarter reads LOWER on Economic (30 against 31). Across 158 alchemist holders, size shows on readiness in 76 and in no rating at all in 82. The
+   eight-towns file explains Ioannoakra's 31 against 30 truly, but the owner's request ("a single alchemist should not have the same influence as
+   an alchemist district") is met in fewer than half of the towns that hold one.
+M7 OWN, undeclared draw moves: the NPCs are re-drawn whole in 8 births, the relationships in 8 and the conflicts in 5, following the power re-draws
+   (ruling 13 declares the politics, not these). The statement also names no surface of tests/fixtures/.golden-freeze-register.json as moved or
+   unmoved ("no golden's door opened").
+
 ### LOW
 L1 OWN: the house scale's behaviour is guarded only by the literal pin of the tuning row (plant P1: least = greatest = 1 reds one test). The
    "1.2 against 0.8" and "1.5 times" guards compute their ratio from the same table.
@@ -53,6 +70,25 @@ L4 CARRIED: Monastery → Multiple monasteries loses the clergy part, because 'm
 - 83 of 87 readiness drops read true (hamlets that walk to another's church, or keep a wayside shrine, lose the clergy points).
 
 ## Steps 3–8 (measured)
+- **2 THE STATEMENT** (read after step 1 was pushed; `probes/.../S.result.md`; 38 of its towns born at base, DEF and tip).
+  - Cures: C0 cured and true (military above its watch counterfactual in 13/25 hired-only births → 0). C2 cured and true (chip 324 → 0; removed
+    lines: chip 0/30 true, "held by the professional city watch" 30/30 true). C3 cured (37/37), but M2 is still false. C4a and C4b cured and true
+    (296 walk/shrine places, clergy 0). C5 cured by silence (no roster moves). C6 cured (alchemist in the list 158 → 0; removed lines 0/30 true),
+    but its replacement is false (M3, M5). C1 is cured in part (M6).
+  - Headline counts as rates on our 720 (base→tip) agree: readiness 78.2% / 77.6%, bands 14.4 / 14.3, power re-drawn 12.8 / 12.2, gain/lose a
+    power 0.19 / 0.14, AI threats 8.2 / 8.9. Three disagree: supply moved 35.7% (ours 26.5%) and supply bands 3.0% (ours 4.7%); arcane closes in
+    quarter cities 25/525 (ours 0/137); and one birth loses "Economic fragility", which the statement does not mention.
+  - EIGHT TOWNS: every before/after figure and every "why" reproduces (0 false). Doubtful (LOW): Hongshan, 13 people, "would see off raiders".
+  - The stage's claims: "higher readiness in 299, never lower" for the alchemist swap is true on readiness, but military is lower in one. "A
+    barracks counts for less than a garrison" holds on the part, but our renames lower a score in 68 (M4). It makes no "adding never lowers"
+    claim; the brief's monotonicity claims are refuted at M4.
+  - Rulings (15, in the statement): I would rule differently on 3 (anchor B: place off-ladder houses by their size, not at 1.0), 11 (G5 under
+    limit 1: a trade's SUSTAINS part should not crowd out economic, M4), 12 (the C6 display lines are false now, M3/M5: land them with the
+    stage) and 13 (declare the NPC, relationship and conflict re-draws, M7). I agree with the other eleven.
+- **6 the reds' classing:** proseWiringCensus.walker (4 red) and negativeAssertionAnchor.walker (2 red) are red at the tip and at DEF with the same
+  titles, and green at the base 8ef42a051: CARRIED from the defence lane, as the statement says. defenceDerived.walker is green at all three.
+- **7 CENSUS-2** (census2.sh, 720 births, --files the stage's 7 src files). Base → tip by towns: a 712→704, b 70→70, c 291→283, d to g unchanged.
+  NO kind rises. The stage's files show the same hits at both (the catalogue's 134/3/1, the defence lane's descriptions).
 - **3 THE LAWS (field diff, fielddiff.mjs).** DEF→tip over 972 births moves: defenseProfile 782, powerStructure 126, simulationTrace 122,
   economicState 42 (compound.inst.hasMilitia 37 = C3; safetyProfile.guardEffectivenessDesc 5), activeConditions[].severity 29, npcs 12 (8 re-drawn
   whole), relationships 8, conflicts 5, stress/stressors cast 6. No roster moves. **No new key** (keysOnlyTip 0). One key gone,
@@ -74,4 +110,16 @@ L4 CARRIED: Monastery → Multiple monasteries loses the clergy part, because 'm
 - **8(b) MONOTONICITY (mono.mjs, 972 births per tree, the record otherwise untouched):** refuted, M4.
 
 ## What I did not measure
-__NOTMEASURED__
+- The whole suite in shards (only the governing files, the named walkers and the plants' 7 files, at tip, DEF and base).
+- Births beyond 972 (the statement's 3,756 checked as rates on our 720).
+- The golden-freeze register's surfaces one by one: the statement names none, and I sampled none (M7).
+- The world-export and grounding JSON surfaces, beyond the field diff (step 3).
+- Contexts the census shapes do not reach: user-added custom houses (the arcane keyword 'mage' matches by substring, so a custom
+  "Pilgrimage …" house would open arcane: PLAUSIBLE, not tested).
+
+**Lines I would strike, for the owner's veto:** the readiness label "Undefended" where the roster holds walls and a force (H1: hold the label at
+Vulnerable while the why-clause names a force); "No perimeter, but the charter hall…" beside walls (H2); "no wards or seers" and "Arcane Support:
+Present" beside the opposite (M3, M5).
+
+**Counts:** HIGH 3 (all the stage's own instances, carried writers); MEDIUM 7 own + 9 carried templates (LINES-READ); LOW 4 own + carried LOWs.
+EXECUTED: all of them except the custom-house note (PLAUSIBLE).

@@ -1,0 +1,8 @@
+tip tests/lint/defenceDerived.walker.test.js EXIT 0  Tests 13 passed (13)
+tip tests/lint/proseWiringCensus.walker.test.js EXIT 1  Tests 4 failed | 75 passed (79)
+tip tests/lint/negativeAssertionAnchor.walker.test.js EXIT 1  Tests 2 failed | 7 passed (9)
+base tests/lint/defenceDerived.walker.test.js EXIT 0  Tests 13 passed (13)
+base tests/lint/proseWiringCensus.walker.test.js EXIT 0  Tests 79 passed (79)
+base tests/lint/negativeAssertionAnchor.walker.test.js EXIT 0  Tests 9 passed (9)
+DONE
+def tests/lint/proseWiringCensus.walker.test.js EXIT 1 (4 failed, same titles as tip); def tests/lint/negativeAssertionAnchor.walker.test.js EXIT 1 (2 failed, same titles)

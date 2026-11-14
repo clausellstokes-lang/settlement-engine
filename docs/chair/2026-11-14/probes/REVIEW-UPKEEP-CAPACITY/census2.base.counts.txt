@@ -1,0 +1,155 @@
+PATTERN a: towns 712 · distinct lines 606 (NEW 326) · writers 101 (NEW 44) · untraced lines 41
+PATTERN b: towns 70 · distinct lines 101 (NEW 59) · writers 39 (NEW 18) · untraced lines 16
+PATTERN c: towns 291 · distinct lines 297 (NEW 173) · writers 43 (NEW 21) · untraced lines 8
+PATTERN d: towns 381 · distinct lines 35 (NEW 15) · writers 9 (NEW 4) · untraced lines 12
+PATTERN e: towns 81 · distinct lines 24 (NEW 14) · writers 6 (NEW 3) · untraced lines 3
+PATTERN f: towns 720 · distinct lines 304 (NEW 165) · writers 10 (NEW 4) · untraced lines 99
+PATTERN g: towns 720 · distinct lines 14 (NEW 0) · writers 3 (NEW 0) · untraced lines 8
+FILE src/data/institutionalCatalog.js [fd]: a 134 towns/11 lines/3 fns · b 3 towns/1 lines/1 fns · c 1 towns/1 lines/1 fns
+  HIT a/alchemist r2r-village-2 Systems/Institutions [INSTITUTION_FAMILIES.village] NEW: Distinct from the alchemist.
+  HIT a/merchants r2r-village-20 Systems/Institutions [INSTITUTION_FAMILIES.village] NEW: Serves merchant caravans and long-distance travellers.
+  HIT a/merchants r2r-village-23 Systems/Institutions [INSTITUTION_FAMILIES.village] NEW: Serves merchant caravans and long-distance travellers.
+  HIT a/fishing r2r-village-27 Systems/Institutions [INSTITUTION_FAMILIES.shared] NEW: Builds and repairs flat-bottomed river craft: barges, punts, ferries, fishing boats.
+  HIT a/inn r2r-village-42 Systems/Institutions [INSTITUTION_FAMILIES.shared] NEW: Small operation supplying local alehouses.
+  HIT a/alchemist r2r-village-50 Systems/Institutions [INSTITUTION_FAMILIES.village] NEW: Distinct from the alchemist.
+  HIT a/alchemist r2r-village-54 Systems/Institutions [INSTITUTION_FAMILIES.village] NEW: Distinct from the alchemist.
+  HIT a/textile r2r-town-1 Systems/Institutions [INSTITUTION_FAMILIES.town] NEW: Multiple mills for grain, fulling cloth.
+  HIT a/fishing r2r-town-4 Systems/Institutions [INSTITUTION_FAMILIES.shared] NEW: Builds and repairs flat-bottomed river craft: barges, punts, ferries, fishing boats.
+  HIT a/textile r2r-town-5 Systems/Institutions [INSTITUTION_FAMILIES.town] NEW: Multiple mills for grain, fulling cloth.
+  HIT a/ships r2r-town-8 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/bakery r2r-town-10 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#672: Kiln crews in the surrounding woodland supply charcoal to the smelters, smiths, and bakers.
+  HIT a/smithy r2r-town-10 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#672: Kiln crews in the surrounding woodland supply charcoal to the smelters, smiths, and bakers.
+  HIT a/textile r2r-town-11 Systems/Institutions [INSTITUTION_FAMILIES.town] NEW: Multiple mills for grain, fulling cloth.
+  HIT a/ships r2r-town-12 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/textile r2r-town-15 Systems/Institutions [INSTITUTION_FAMILIES.town] NEW: Multiple mills for grain, fulling cloth.
+  HIT a/bakery r2r-town-17 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#672: Kiln crews in the surrounding woodland supply charcoal to the smelters, smiths, and bakers.
+  HIT a/textile r2r-town-18 Systems/Institutions [INSTITUTION_FAMILIES.town] NEW: Multiple mills for grain, fulling cloth.
+  HIT a/textile r2r-town-20 Systems/Institutions [INSTITUTION_FAMILIES.town] NEW: Multiple mills for grain, fulling cloth.
+  HIT a/ships r2r-town-20 Systems/Institutions [INSTITUTION_FAMILIES.shared] NEW: Essential for ships, construction, and agriculture.
+  HIT a/textile r2r-town-22 Systems/Institutions [INSTITUTION_FAMILIES.town] NEW: Multiple mills for grain, fulling cloth.
+  HIT a/textile r2r-town-25 Systems/Institutions [INSTITUTION_FAMILIES.town] NEW: Multiple mills for grain, fulling cloth.
+  HIT a/textile r2r-town-27 Systems/Institutions [INSTITUTION_FAMILIES.town] NEW: Multiple mills for grain, fulling cloth.
+  HIT a/garrison r2r-town-30 Systems/Institutions [INSTITUTION_FAMILIES.town] NEW: Offers caravan escort, garrison contracts, and short-term military hire at day-wage rates.
+  HIT a/ships r2r-town-30 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/textile r2r-town-38 Systems/Institutions [INSTITUTION_FAMILIES.town] NEW: Multiple mills for grain, fulling cloth.
+  HIT a/smithy r2r-town-40 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#672: Kiln crews in the surrounding woodland supply charcoal to the smelters, smiths, and bakers.
+  HIT a/bakery r2r-town-42 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#672: Kiln crews in the surrounding woodland supply charcoal to the smelters, smiths, and bakers.
+  HIT a/textile r2r-town-43 Systems/Institutions [INSTITUTION_FAMILIES.town] NEW: Multiple mills for grain, fulling cloth.
+  HIT a/bakery r2r-town-47 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#672: Kiln crews in the surrounding woodland supply charcoal to the smelters, smiths, and bakers.
+  HIT a/garrison r2r-town-50 Systems/Institutions [INSTITUTION_FAMILIES.town] NEW: Offers caravan escort, garrison contracts, and short-term military hire at day-wage rates.
+  HIT a/bakery r2r-town-51 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#672: Kiln crews in the surrounding woodland supply charcoal to the smelters, smiths, and bakers.
+  HIT a/smithy r2r-town-51 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#672: Kiln crews in the surrounding woodland supply charcoal to the smelters, smiths, and bakers.
+  HIT a/smithy r2r-town-54 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#672: Kiln crews in the surrounding woodland supply charcoal to the smelters, smiths, and bakers.
+  HIT a/textile r2r-town-55 Systems/Institutions [INSTITUTION_FAMILIES.town] NEW: Multiple mills for grain, fulling cloth.
+  HIT a/bakery r2r-town-56 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#672: Kiln crews in the surrounding woodland supply charcoal to the smelters, smiths, and bakers.
+  HIT a/textile r2r-town-59 Systems/Institutions [INSTITUTION_FAMILIES.town] NEW: Multiple mills for grain, fulling cloth.
+  HIT a/ships r2r-city-5 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/ships r2r-city-7 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/ships r2r-city-10 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/ships r2r-city-11 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/ships r2r-city-15 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/ships r2r-city-18 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/ships r2r-city-20 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/ships r2r-city-23 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/fishing r2r-city-31 Systems/Institutions [INSTITUTION_FAMILIES.shared] NEW: Builds and repairs flat-bottomed river craft: barges, punts, ferries, fishing boats.
+  HIT a/ships r2r-city-33 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/ships r2r-city-36 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/ships r2r-city-39 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/ships r2r-city-43 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/ships r2r-city-47 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/ships r2r-city-48 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/ships r2r-city-49 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/ships r2r-city-50 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/ships r2r-city-53 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/ships r2r-city-54 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/ships r2r-city-55 Systems/Institutions [INSTITUTION_FAMILIES.shared] NEW: Essential for ships, construction, and agriculture.
+  HIT a/ships r2r-city-55 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/ships r2r-city-57 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/ships r2r-city-59 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/ships r2r-metropolis-1 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/ships r2r-metropolis-3 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/ships r2r-metropolis-4 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/bakery r2r-metropolis-5 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#672: Kiln crews in the surrounding woodland supply charcoal to the smelters, smiths, and bakers.
+  HIT a/ships r2r-metropolis-6 Systems/Institutions [INSTITUTION_FAMILIES.shared] NEW: Essential for ships, construction, and agriculture.
+  HIT a/ships r2r-metropolis-6 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/ships r2r-metropolis-11 Systems/Institutions [INSTITUTION_FAMILIES.shared] NEW: Essential for ships, construction, and agriculture.
+  HIT a/bakery r2r-metropolis-12 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#672: Kiln crews in the surrounding woodland supply charcoal to the smelters, smiths, and bakers.
+  HIT b/siege:road-open r2r-metropolis-14 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#412: Purpose-built for road travellers: stabling for relay horses, scheduled coach departures, meals served at fixed hours, and a passenger waiting room.
+  HIT a/ships r2r-metropolis-19 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/ships r2r-metropolis-24 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/bakery r2r-metropolis-25 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#672: Kiln crews in the surrounding woodland supply charcoal to the smelters, smiths, and bakers.
+  HIT a/ships r2r-metropolis-28 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/ships r2r-metropolis-29 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/ships r2r-metropolis-31 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/ships r2r-metropolis-32 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/ships r2r-metropolis-33 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/bakery r2r-metropolis-36 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#672: Kiln crews in the surrounding woodland supply charcoal to the smelters, smiths, and bakers.
+  HIT a/ships r2r-metropolis-37 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/ships r2r-metropolis-38 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/ships r2r-metropolis-59 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/inn r2s-under_siege-hamlet-1 Systems/Institutions [INSTITUTION_FAMILIES.shared] NEW: Small operation supplying local alehouses.
+  HIT b/siege:road-open r2s-under_siege-town-1 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#412: Purpose-built for road travellers: stabling for relay horses, scheduled coach departures, meals served at fixed hours, and a passenger waiting room.
+  HIT a/textile r2s-under_siege-town-2 Systems/Institutions [INSTITUTION_FAMILIES.town] NEW: Multiple mills for grain, fulling cloth.
+  HIT a/ships r2s-under_siege-city-3 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT b/siege:road-open r2s-under_siege-metropolis-3 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#412: Purpose-built for road travellers: stabling for relay horses, scheduled coach departures, meals served at fixed hours, and a passenger waiting room.
+  HIT a/fishing r2s-famine-town-2 Systems/Institutions [INSTITUTION_FAMILIES.shared] NEW: Builds and repairs flat-bottomed river craft: barges, punts, ferries, fishing boats.
+  HIT a/textile r2s-famine-city-0 Systems/Institutions [INSTITUTION_FAMILIES.shared] NEW: Grain, fulling, and saw mills along every usable watercourse, many under guild or civic licence.
+  HIT a/bakery r2s-famine-city-0 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#672: Kiln crews in the surrounding woodland supply charcoal to the smelters, smiths, and bakers.
+  HIT a/ships r2s-famine-city-2 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/fishing r2s-occupied-town-3 Systems/Institutions [INSTITUTION_FAMILIES.shared] NEW: Builds and repairs flat-bottomed river craft: barges, punts, ferries, fishing boats.
+  HIT a/inn r2s-politically_fractured-village-0 Systems/Institutions [INSTITUTION_FAMILIES.shared] NEW: Small operation supplying local alehouses.
+  HIT a/inn r2s-politically_fractured-village-1 Systems/Institutions [INSTITUTION_FAMILIES.shared] NEW: Small operation supplying local alehouses.
+  HIT a/ships r2s-politically_fractured-city-0 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/ships r2s-politically_fractured-city-3 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/ships r2s-politically_fractured-metropolis-0 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/textile r2s-indebted-town-2 Systems/Institutions [INSTITUTION_FAMILIES.town] NEW: Multiple mills for grain, fulling cloth.
+  HIT a/ships r2s-indebted-city-2 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/alchemist r2s-recently_betrayed-village-0 Systems/Institutions [INSTITUTION_FAMILIES.village] NEW: Distinct from the alchemist.
+  HIT a/textile r2s-recently_betrayed-town-3 Systems/Institutions [INSTITUTION_FAMILIES.town] NEW: Multiple mills for grain, fulling cloth.
+  HIT a/ships r2s-recently_betrayed-city-1 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/ships r2s-recently_betrayed-metropolis-1 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/textile r2s-infiltrated-town-2 Systems/Institutions [INSTITUTION_FAMILIES.town] NEW: Multiple mills for grain, fulling cloth.
+  HIT a/ships r2s-infiltrated-town-3 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/bakery r2s-infiltrated-city-1 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#672: Kiln crews in the surrounding woodland supply charcoal to the smelters, smiths, and bakers.
+  HIT a/ships r2s-infiltrated-city-1 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/ships r2s-infiltrated-metropolis-1 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/garrison r2s-plague_onset-town-0 Systems/Institutions [INSTITUTION_FAMILIES.town] NEW: Offers caravan escort, garrison contracts, and short-term military hire at day-wage rates.
+  HIT a/textile r2s-plague_onset-town-1 Systems/Institutions [INSTITUTION_FAMILIES.town] NEW: Multiple mills for grain, fulling cloth.
+  HIT a/fishing r2s-plague_onset-town-2 Systems/Institutions [INSTITUTION_FAMILIES.shared] NEW: Builds and repairs flat-bottomed river craft: barges, punts, ferries, fishing boats.
+  HIT a/ships r2s-plague_onset-town-3 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/smithy r2s-plague_onset-city-2 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#672: Kiln crews in the surrounding woodland supply charcoal to the smelters, smiths, and bakers.
+  HIT a/alchemist r2s-succession_void-village-3 Systems/Institutions [INSTITUTION_FAMILIES.village] NEW: Distinct from the alchemist.
+  HIT a/textile r2s-succession_void-town-0 Systems/Institutions [INSTITUTION_FAMILIES.town] NEW: Multiple mills for grain, fulling cloth.
+  HIT a/textile r2s-succession_void-town-3 Systems/Institutions [INSTITUTION_FAMILIES.town] NEW: Multiple mills for grain, fulling cloth.
+  HIT a/ships r2s-succession_void-city-2 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/bakery r2s-succession_void-city-3 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#672: Kiln crews in the surrounding woodland supply charcoal to the smelters, smiths, and bakers.
+  HIT a/inn r2s-monster_pressure-hamlet-2 Systems/Institutions [INSTITUTION_FAMILIES.shared] NEW: Small operation supplying local alehouses.
+  HIT a/alchemist r2s-monster_pressure-village-0 Systems/Institutions [INSTITUTION_FAMILIES.village] NEW: Distinct from the alchemist.
+  HIT c/urban r2s-monster_pressure-village-2 Systems/Institutions [INSTITUTION_FAMILIES.village] NEW: Some circles tend city gardens or hidden urban groves.
+  HIT a/bakery r2s-monster_pressure-town-1 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#672: Kiln crews in the surrounding woodland supply charcoal to the smelters, smiths, and bakers.
+  HIT a/textile r2s-monster_pressure-town-2 Systems/Institutions [INSTITUTION_FAMILIES.town] NEW: Multiple mills for grain, fulling cloth.
+  HIT a/garrison r2s-monster_pressure-town-2 Systems/Institutions [INSTITUTION_FAMILIES.town] NEW: Offers caravan escort, garrison contracts, and short-term military hire at day-wage rates.
+  HIT a/smithy r2s-monster_pressure-town-3 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#672: Kiln crews in the surrounding woodland supply charcoal to the smelters, smiths, and bakers.
+  HIT a/ships r2s-monster_pressure-city-2 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/ships r2s-monster_pressure-metropolis-0 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/ships r2s-insurgency-city-1 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/ships r2s-insurgency-city-2 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/bakery r2s-insurgency-city-3 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#672: Kiln crews in the surrounding woodland supply charcoal to the smelters, smiths, and bakers.
+  HIT a/ships r2s-insurgency-metropolis-1 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/fishing r2s-religious_conversion-town-0 Systems/Institutions [INSTITUTION_FAMILIES.shared] NEW: Builds and repairs flat-bottomed river craft: barges, punts, ferries, fishing boats.
+  HIT a/fishing r2s-religious_conversion-town-1 Systems/Institutions [INSTITUTION_FAMILIES.shared] NEW: Builds and repairs flat-bottomed river craft: barges, punts, ferries, fishing boats.
+  HIT a/textile r2s-religious_conversion-town-2 Systems/Institutions [INSTITUTION_FAMILIES.town] NEW: Multiple mills for grain, fulling cloth.
+  HIT a/textile r2s-religious_conversion-town-3 Systems/Institutions [INSTITUTION_FAMILIES.town] NEW: Multiple mills for grain, fulling cloth.
+  HIT a/ships r2s-religious_conversion-city-3 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/ships r2s-religious_conversion-metropolis-0 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/bakery r2s-slave_revolt-town-0 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#672: Kiln crews in the surrounding woodland supply charcoal to the smelters, smiths, and bakers.
+  HIT a/textile r2s-slave_revolt-town-1 Systems/Institutions [INSTITUTION_FAMILIES.town] NEW: Multiple mills for grain, fulling cloth.
+  HIT a/ships r2s-slave_revolt-city-0 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/inn r2s-wartime-village-3 Systems/Institutions [INSTITUTION_FAMILIES.shared] NEW: Small operation supplying local alehouses.
+  HIT a/fishing r2s-wartime-town-3 Systems/Institutions [INSTITUTION_FAMILIES.shared] NEW: Builds and repairs flat-bottomed river craft: barges, punts, ferries, fishing boats.
+  HIT a/ships r2s-wartime-city-0 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/textile r2s-wartime-city-1 Systems/Institutions [INSTITUTION_FAMILIES.shared] NEW: Grain, fulling, and saw mills along every usable watercourse, many under guild or civic licence.
+  HIT a/fishing r2s-wartime-city-2 Systems/Institutions [INSTITUTION_FAMILIES.shared] NEW: Builds and repairs flat-bottomed river craft: barges, punts, ferries, fishing boats.
+  HIT a/ships r2s-wartime-metropolis-0 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/ships r2s-wartime-metropolis-2 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#764: Levies duties on goods entering and leaving via the port or main roads.
+  HIT a/alchemist r2s-mass_migration-village-0 Systems/Institutions [INSTITUTION_FAMILIES.village] NEW: Distinct from the alchemist.
