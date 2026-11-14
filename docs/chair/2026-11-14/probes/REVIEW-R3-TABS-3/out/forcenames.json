@@ -1,0 +1,23 @@
+{
+ "changed": {
+  "Gates (if walled) -> Town gates": [
+   "r2r-town-28 town 2273 ",
+   "r2s-plague_onset-town-0 town 830 plague_onset",
+   "r2s-religious_conversion-town-2 town 1575 religious_conversion",
+   "rr3-town-occupied-rand-4 town 2465 occupied",
+   "rr3-town-slave_revolt-rand-0 town 1448 slave_revolt",
+   "r2r-town-11 town 1790 insurgency",
+   "r2r-town-27 town 1310 wartime",
+   "r2r-town-45 town 2341 ",
+   "r2r-town-49 town 1724 ",
+   "r2r-town-57 town 1144 recently_betrayed",
+   "r2s-famine-town-3 town 737 famine",
+   "r2s-recently_betrayed-town-1 town 2359 recently_betrayed",
+   "r2s-monster_pressure-town-3 town 1890 monster_pressure",
+   "rr3-town-wartime-rand-3 town 1649 wartime"
+  ]
+ },
+ "bracketed": {
+  "Gates (if walled)": 14
+ }
+}

@@ -1,0 +1,99 @@
+GONE	r2r-thorp-1	== Systems/Defense == :: Terrapolis is all but undefended. Nothing in the thorp would stop a serious attack for long.
+GONE	r2r-thorp-1	== Systems/Defense == :: Walls at Terrapolis with townspeople behind them: credible against raiders, and inadequate against anybody who arrives professionally and brought siege gear.
+GONE	r2r-thorp-24	== Systems/Defense == :: Sanctaminus could deal with a brawl or a thief, but the thorp could not hold off a raid.
+GONE	r2r-thorp-27	== Systems/Defense == :: Olympnea is all but undefended. Nothing in the thorp would stop a serious attack for long.
+GONE	r2r-thorp-27	== Systems/Defense == :: Walls at Olympnea with townspeople behind them: credible against raiders, and inadequate against anybody who arrives professionally and brought siege gear.
+GONE	r2r-thorp-40	== Systems/Defense == :: Malotsy could deal with a brawl or a thief, but the thorp could not hold off a raid.
+GONE	r2r-town-11	== Systems/Defense == :: Gates (if walled)
+NEW	r2r-town-11	== Systems/Defense == :: Town gates
+GONE	r2r-town-27	== Systems/Defense == :: Gates (if walled)
+NEW	r2r-town-27	== Systems/Defense == :: Town gates
+GONE	r2r-town-28	== Systems/Defense == :: Gates (if walled)
+NEW	r2r-town-28	== Systems/Defense == :: Town gates
+GONE	r2r-town-45	== Systems/Defense == :: Gates (if walled)
+NEW	r2r-town-45	== Systems/Defense == :: Town gates
+GONE	r2r-town-49	== Systems/Defense == :: Gates (if walled)
+NEW	r2r-town-49	== Systems/Defense == :: Town gates
+GONE	r2r-town-57	== Systems/Defense == :: Gates (if walled)
+NEW	r2r-town-57	== Systems/Defense == :: Town gates
+GONE	r2s-famine-town-3	== Systems/Defense == :: Gates (if walled)
+NEW	r2s-famine-town-3	== Systems/Defense == :: Town gates
+GONE	r2s-monster_pressure-town-3	== Systems/Defense == :: Gates (if walled)
+NEW	r2s-monster_pressure-town-3	== Systems/Defense == :: Town gates
+GONE	r2s-occupied-city-0	== Systems/Defense == :: Breitgrund could deal with a brawl or a thief, but the city could not hold off a raid.
+GONE	r2s-occupied-city-1	== Systems/Defense == :: People at Qaranuur expect to hold against the usual trouble, and they claim no more than that.
+GONE	r2s-occupied-city-3	== Systems/Defense == :: To anyone arriving, Muulchihua looks defended in the ordinary way: enough for the usual trouble, and nothing to spare.
+GONE	r2s-occupied-hamlet-0	== Systems/Defense == :: Qarahiid is all but undefended. Nothing in the hamlet would stop a serious attack for long.
+GONE	r2s-occupied-hamlet-1	== Systems/Defense == :: Llanhurst is all but undefended. Nothing in the hamlet would stop a serious attack for long.
+GONE	r2s-occupied-hamlet-2	== Systems/Defense == :: Dunkelstift could deal with a brawl or a thief, but the hamlet could not hold off a raid.
+GONE	r2s-occupied-hamlet-3	== Systems/Defense == :: Hochgasse could deal with a brawl or a thief, but the hamlet could not hold off a raid.
+GONE	r2s-occupied-metropolis-1	== Systems/Defense == :: Dionpetra could deal with a brawl or a thief, but the metropolis could not hold off a raid.
+GONE	r2s-occupied-metropolis-2	== Systems/Defense == :: Nokhoihan is covered against what it is likely to face, with little left over; two troubles at once would be too many.
+GONE	r2s-occupied-thorp-0	== Systems/Defense == :: Warmstadt is all but undefended. Nothing in the thorp would stop a serious attack for long.
+GONE	r2s-occupied-thorp-0	== Systems/Defense == :: Walls at Warmstadt with townspeople behind them: credible against raiders, and inadequate against anybody who arrives professionally and brought siege gear.
+GONE	r2s-occupied-thorp-1	== Systems/Defense == :: Amarkota could deal with a brawl or a thief, but the thorp could not hold off a raid.
+GONE	r2s-occupied-thorp-2	== Systems/Defense == :: Shanxian could deal with a brawl or a thief, but the thorp could not hold off a raid.
+GONE	r2s-occupied-thorp-3	== Systems/Defense == :: Víkberg could deal with a brawl or a thief, but the thorp could not hold off a raid.
+GONE	r2s-occupied-town-0	== Systems/Defense == :: Cerrocastra could deal with a brawl or a thief, but the town could not hold off a raid.
+GONE	r2s-occupied-town-1	== Systems/Defense == :: People at Sundnes expect to hold against the usual trouble, and they claim no more than that.
+GONE	r2s-occupied-town-2	== Systems/Defense == :: Khutulunbash could deal with a brawl or a thief, but the town could not hold off a raid.
+GONE	r2s-occupied-town-3	== Systems/Defense == :: Lykopetra has enough for the usual trouble and nothing spare, and a second trouble at the same time would find a gap.
+GONE	r2s-occupied-village-0	== Systems/Defense == :: Spitzfeld is all but undefended. Nothing in the village would stop a serious attack for long.
+GONE	r2s-occupied-village-1	== Systems/Defense == :: Celoichi is all but undefended. Nothing in the village would stop a serious attack for long.
+GONE	r2s-occupied-village-2	== Systems/Defense == :: Caerwood could deal with a brawl or a thief, but the village could not hold off a raid.
+GONE	r2s-occupied-village-3	== Systems/Defense == :: Grudka is all but undefended. Nothing in the village would stop a serious attack for long.
+GONE	r2s-plague_onset-town-0	== Systems/Defense == :: Gates (if walled)
+NEW	r2s-plague_onset-town-0	== Systems/Defense == :: Town gates
+GONE	r2s-recently_betrayed-town-1	== Systems/Defense == :: Gates (if walled)
+NEW	r2s-recently_betrayed-town-1	== Systems/Defense == :: Town gates
+GONE	r2s-religious_conversion-town-2	== Systems/Defense == :: Gates (if walled)
+NEW	r2s-religious_conversion-town-2	== Systems/Defense == :: Town gates
+GONE	r2s-succession_void-town-0	== Systems/Defense == :: You see armed fighters at Shivamandal and no wall for them to stand behind, so any fight would happen wherever the attacker chooses. The supply book for Shivamandal's defenders runs short: the trades that should feed and equip them are failing, so the defence is weaker than its numbers suggest.
+GONE	rr3-city-occupied-rand-2	== Systems/Defense == :: Lagoorum is covered against what it is likely to face, with little left over; two troubles at once would be too many.
+GONE	rr3-city-occupied-rand-3	== Systems/Defense == :: Bayanobo is covered against what it is likely to face, with little left over; two troubles at once would be too many.
+GONE	rr3-city-occupied-rand-5	== Systems/Defense == :: Divoko is covered against what it is likely to face, with little left over; two troubles at once would be too many.
+GONE	rr3-hamlet-occupied-port-0	== Systems/Defense == :: Ingidal is all but undefended. Nothing in the hamlet would stop a serious attack for long.
+GONE	rr3-hamlet-occupied-port-1	== Systems/Defense == :: Kaliovo could deal with a brawl or a thief, but the hamlet could not hold off a raid.
+GONE	rr3-hamlet-occupied-rand-0	== Systems/Defense == :: Burjfort is all but undefended. Nothing in the hamlet would stop a serious attack for long.
+GONE	rr3-hamlet-occupied-rand-1	== Systems/Defense == :: Grímli is all but undefended. Nothing in the hamlet would stop a serious attack for long.
+GONE	rr3-hamlet-occupied-rand-2	== Systems/Defense == :: Ormmo is all but undefended. Nothing in the hamlet would stop a serious attack for long.
+GONE	rr3-hamlet-occupied-rand-3	== Systems/Defense == :: Andronarion could deal with a brawl or a thief, but the hamlet could not hold off a raid.
+GONE	rr3-hamlet-occupied-rand-4	== Systems/Defense == :: Ulfhammer is all but undefended. Nothing in the hamlet would stop a serious attack for long.
+GONE	rr3-hamlet-occupied-rand-5	== Systems/Defense == :: Vatankotan is all but undefended. Nothing in the hamlet would stop a serious attack for long.
+GONE	rr3-metropolis-occupied-port-0	== Systems/Defense == :: Campocivitas is covered against what it is likely to face, with little left over; two troubles at once would be too many.
+GONE	rr3-metropolis-occupied-rand-1	== Systems/Defense == :: Vedapat has enough for the usual trouble and nothing spare, and a second trouble at the same time would find a gap.
+GONE	rr3-metropolis-occupied-rand-2	== Systems/Defense == :: People at Ingili expect to hold against the usual trouble, and they claim no more than that.
+GONE	rr3-metropolis-occupied-rand-4	== Systems/Defense == :: Inverham could deal with a brawl or a thief, but the metropolis could not hold off a raid.
+GONE	rr3-thorp-occupied-port-0	== Systems/Defense == :: Bregpol could deal with a brawl or a thief, but the thorp could not hold off a raid.
+GONE	rr3-thorp-occupied-port-1	== Systems/Defense == :: Staroovo could deal with a brawl or a thief, but the thorp could not hold off a raid.
+GONE	rr3-thorp-occupied-rand-0	== Systems/Defense == :: Novosk could deal with a brawl or a thief, but the thorp could not hold off a raid.
+GONE	rr3-thorp-occupied-rand-1	== Systems/Defense == :: Makropyrgos is all but undefended. Nothing in the thorp would stop a serious attack for long.
+GONE	rr3-thorp-occupied-rand-1	== Systems/Defense == :: The walls and townsfolk of Makropyrgos would see off a raid but not a proper army, and nothing now under way will change that.
+GONE	rr3-thorp-occupied-rand-2	== Systems/Defense == :: Chrissoarion could deal with a brawl or a thief, but the thorp could not hold off a raid.
+GONE	rr3-thorp-occupied-rand-3	== Systems/Defense == :: Andao could deal with a brawl or a thief, but the thorp could not hold off a raid.
+GONE	rr3-thorp-occupied-rand-4	== Systems/Defense == :: Fontestagnum could deal with a brawl or a thief, but the thorp could not hold off a raid.
+GONE	rr3-thorp-occupied-rand-5	== Systems/Defense == :: Bhagagiri is all but undefended. Nothing in the thorp would stop a serious attack for long.
+GONE	rr3-thorp-occupied-rand-5	== Systems/Defense == :: Walls at Bhagagiri with townspeople behind them: credible against raiders, and inadequate against anybody who arrives professionally and brought siege gear.
+GONE	rr3-town-occupied-port-0	== Systems/Defense == :: Khutulunkul could deal with a brawl or a thief, but the town could not hold off a raid.
+GONE	rr3-town-occupied-port-1	== Systems/Defense == :: Jalalkhand could deal with a brawl or a thief, but the town could not hold off a raid.
+GONE	rr3-town-occupied-rand-0	== Systems/Defense == :: Rathsike could deal with a brawl or a thief, but the town could not hold off a raid.
+GONE	rr3-town-occupied-rand-1	== Systems/Defense == :: People at Muulcoba expect to hold against the usual trouble, and they claim no more than that.
+GONE	rr3-town-occupied-rand-2	== Systems/Defense == :: Novoki could deal with a brawl or a thief, but the town could not hold off a raid.
+GONE	rr3-town-occupied-rand-3	== Systems/Defense == :: Saraidavan could deal with a brawl or a thief, but the town could not hold off a raid.
+GONE	rr3-town-occupied-rand-4	== Systems/Defense == :: Dar-al-mandi could deal with a brawl or a thief, but the town could not hold off a raid.
+GONE	rr3-town-occupied-rand-4	== Systems/Defense == :: Approaching Dar-al-mandi, you see the walls and the soldiers who belong on them, and any attacker would think again about the cost. Dar-al-mandi's defenders are a little worse off every month the trades behind them keep failing.
+GONE	rr3-town-occupied-rand-4	== Systems/Defense == :: Gates (if walled)
+NEW	rr3-town-occupied-rand-4	== Systems/Defense == :: Town gates
+GONE	rr3-town-occupied-rand-5	== Systems/Defense == :: Prabhaganj could deal with a brawl or a thief, but the town could not hold off a raid.
+GONE	rr3-town-slave_revolt-rand-0	== Systems/Defense == :: Gates (if walled)
+NEW	rr3-town-slave_revolt-rand-0	== Systems/Defense == :: Town gates
+GONE	rr3-town-wartime-rand-3	== Systems/Defense == :: Gates (if walled)
+NEW	rr3-town-wartime-rand-3	== Systems/Defense == :: Town gates
+GONE	rr3-village-occupied-port-0	== Systems/Defense == :: Sübeteikotan could deal with a brawl or a thief, but the village could not hold off a raid.
+GONE	rr3-village-occupied-port-1	== Systems/Defense == :: Nandakot is all but undefended. Nothing in the village would stop a serious attack for long.
+GONE	rr3-village-occupied-rand-0	== Systems/Defense == :: Beiyuan could deal with a brawl or a thief, but the village could not hold off a raid.
+GONE	rr3-village-occupied-rand-1	== Systems/Defense == :: Skálkvam could deal with a brawl or a thief, but the village could not hold off a raid.
+GONE	rr3-village-occupied-rand-2	== Systems/Defense == :: Hákondal is all but undefended. Nothing in the village would stop a serious attack for long.
+GONE	rr3-village-occupied-rand-3	== Systems/Defense == :: Katokastro could deal with a brawl or a thief, but the village could not hold off a raid.
+GONE	rr3-village-occupied-rand-4	== Systems/Defense == :: Innisfell is all but undefended. Nothing in the village would stop a serious attack for long.
+GONE	rr3-village-occupied-rand-5	== Systems/Defense == :: Fortevilla is all but undefended. Nothing in the village would stop a serious attack for long.

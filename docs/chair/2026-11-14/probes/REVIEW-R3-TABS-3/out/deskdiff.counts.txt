@@ -1,0 +1,2 @@
+64	posture.posture GONE
+7	threat.invasion GONE

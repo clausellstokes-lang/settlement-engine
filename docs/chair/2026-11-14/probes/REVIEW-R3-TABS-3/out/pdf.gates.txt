@@ -1,0 +1,14 @@
+r2r-town-28 Gates (if walled) | FORCED | Controlled entry points with gatekeepers. | REQ/FORCED badges: 2
+r2s-plague_onset-town-0 Gates (if walled) | FORCED | Controlled entry points with gatekeepers. | REQ/FORCED badges: 3
+r2s-religious_conversion-town-2 Gates (if walled) | FORCED | Controlled entry points with gatekeepers. | REQ/FORCED badges: 3
+rr3-town-occupied-rand-4 Gates (if walled) | FORCED | Controlled entry points with gatekeepers. | REQ/FORCED badges: 2
+rr3-town-slave_revolt-rand-0 Gates (if walled) | FORCED | Controlled entry points with gatekeepers. | REQ/FORCED badges: 3
+r2r-town-11 Gates (if walled) | Controlled entry points with gatekeepers. | Standing forces | REQ/FORCED badges: 1
+r2r-town-27 Gates (if walled) | FORCED | Controlled entry points with gatekeepers. | REQ/FORCED badges: 3
+r2r-town-45 Gates (if walled) | Guarded ways in and out, each with its keeper. | Citadel | REQ/FORCED badges: 3
+r2r-town-49 Gates (if walled) | Guarded ways in and out, each with its keeper. | Standing forces | REQ/FORCED badges: 1
+r2r-town-57 Gates (if walled) | Controlled entry points with gatekeepers. | Citadel | REQ/FORCED badges: 1
+r2s-famine-town-3 Gates (if walled) | Entry controlled at fixed points, gatekeepers posted. | Standing forces | REQ/FORCED badges: 1
+r2s-recently_betrayed-town-1 Gates (if walled) | Guarded ways in and out, each with its keeper. | Standing forces | REQ/FORCED badges: 1
+r2s-monster_pressure-town-3 Gates (if walled) | FORCED | Controlled entry points with gatekeepers. | REQ/FORCED badges: 3
+rr3-town-wartime-rand-3 Gates (if walled) | FORCED | Controlled entry points with gatekeepers. | REQ/FORCED badges: 4
