@@ -44,9 +44,30 @@
   "DS-GEN-7::power_stress: occupation against stated stability": [
    "declares ruler: occupier (layer 3)"
   ],
+  "DS-GEN-7::power_economic: temple economy under a secular seat": [
+   "names temple (layer 3)"
+  ],
+  "DS-GEN-17::GREAT HOUSE: cathedral": [
+   "names temple (layer 3)"
+  ],
   "DS-POW-5::FLAG: merchantCriminalBlur": [
    "declares guild (layer 3)",
    "names guildhall (layer 3)"
+  ],
+  "DS-FTH-4::FLAG: crusaderSynthesis": [
+   "names temple (layer 3)"
+  ],
+  "DS-FTH-4::FLAG: heresySuppression: hunted": [
+   "names temple (layer 3)"
+  ],
+  "DS-FTH-4::FLAG: heresySuppression: preached": [
+   "names temple (layer 3)"
+  ],
+  "DS-FTH-4::FLAG: religiousFraud": [
+   "names temple (layer 3)"
+  ],
+  "DS-FTH-4::FLAG: mageTheocracy": [
+   "names temple (layer 3)"
   ]
  },
  "readers": {
@@ -1697,10 +1718,6 @@
      "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
     },
     {
-     "line": "const churchControlsEcon = economicState.situationDesc?.toLowerCase().includes('church controls');",
-     "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
-    },
-    {
      "line": "f.faction?.toLowerCase().includes('church') ||",
      "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
     }
@@ -2634,5 +2651,6 @@
     }
    ]
   }
- }
+ },
+ "_notes": "STYLE-2-MERGE point 49 (the chair's ruling on STOP 49d, record 405): seven faith pools RE-BASED BY NAME at the merged measure, by hand (the door has no upward arm), each \"names temple (layer 3)\" — not a violation by the instrument lane: its reviewed cure F4 (3ff343284) moved the home of \"there is a church\" to the faith reading; the pools did not change, the word list did. A pool that names a church reads the faith reading: the corpus lane's to cure."
 }

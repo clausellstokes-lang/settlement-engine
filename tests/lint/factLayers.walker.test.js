@@ -36,6 +36,25 @@ const REGISTER = readJson(REGISTER_REL);
 const POOL_TABLE = readJson(POOL_TABLE_REL).rows;
 /** Each arm's total at the register's first commit (banked at deb1544eb): it never rises. */
 const FIRST = Object.freeze({ leaves: 8, pools: 6, readers: 483 });
+/**
+ * THE POOLS RE-BASED BY NAME AT STYLE-2-MERGE POINT 49 (the chair's ruling on STOP 49d and on its BLOCK, record 405, in the
+ * form of 48b's BLOCK 1, record 383): seven faith pools whose rows the instrument lane's word list raised to the faith
+ * reading's layer. FIRST stays; the first-total arm counts the register LESS this list; the listed rows must equal exactly
+ * their named rows; the list is pinned at SEVEN and SHRINK-ONLY (an eighth name reds). A walker change at a merge point,
+ * authorised by the chair for this one purpose, against the letter of the shrink-only rule (the book, 2k).
+ */
+const CAUSE_49D = 'the instrument lane\'s reviewed cure F4 (3ff343284) moved the home of "there is a church" to the faith reading (layer 3); the pool did not change, the word list did';
+const HOLDER_49D = 'the corpus lane: a pool that names a church reads the faith reading; the row leaves this list when its pool is cured';
+const REBASED_49D = Object.freeze({
+  'DS-GEN-7::power_economic: temple economy under a secular seat': Object.freeze({ rows: Object.freeze(['names temple (layer 3)']), cause: CAUSE_49D, holder: HOLDER_49D }),
+  'DS-GEN-17::GREAT HOUSE: cathedral': Object.freeze({ rows: Object.freeze(['names temple (layer 3)']), cause: CAUSE_49D, holder: HOLDER_49D }),
+  'DS-FTH-4::FLAG: crusaderSynthesis': Object.freeze({ rows: Object.freeze(['names temple (layer 3)']), cause: CAUSE_49D, holder: HOLDER_49D }),
+  'DS-FTH-4::FLAG: heresySuppression: hunted': Object.freeze({ rows: Object.freeze(['names temple (layer 3)']), cause: CAUSE_49D, holder: HOLDER_49D }),
+  'DS-FTH-4::FLAG: heresySuppression: preached': Object.freeze({ rows: Object.freeze(['names temple (layer 3)']), cause: CAUSE_49D, holder: HOLDER_49D }),
+  'DS-FTH-4::FLAG: religiousFraud': Object.freeze({ rows: Object.freeze(['names temple (layer 3)']), cause: CAUSE_49D, holder: HOLDER_49D }),
+  'DS-FTH-4::FLAG: mageTheocracy': Object.freeze({ rows: Object.freeze(['names temple (layer 3)']), cause: CAUSE_49D, holder: HOLDER_49D }),
+});
+const REBASED_49D_CEILING = 7;
 
 /** @type {Awaited<ReturnType<typeof gridBirths>>} */ let births;
 /** @type {Awaited<ReturnType<typeof leafArm>>} */ let leaves;
@@ -156,8 +175,17 @@ describe('nothing reads at or above its own layer (shrink-only)', () => {
   test('no arm\'s total ever rises above its first commit\'s', () => {
     const count = (/** @type {Record<string, string[]>} */ o) => Object.values(o).reduce((s, l) => s + l.length, 0);
     expect(count(REGISTER.leaves)).toBeLessThanOrEqual(FIRST.leaves);
-    expect(count(REGISTER.pools)).toBeLessThanOrEqual(FIRST.pools);
+    const unlisted = Object.fromEntries(Object.entries(REGISTER.pools).filter(([k]) => !Object.hasOwn(REBASED_49D, k)));
+    expect(count(unlisted)).toBeLessThanOrEqual(FIRST.pools);
     const readers = Object.values(REGISTER.readers).reduce((s, f) => s + Object.values(/** @type {Record<string, unknown[]>} */ (f)).reduce((a, b) => a + b.length, 0), 0);
     expect(readers).toBeLessThanOrEqual(FIRST.readers);
+  });
+  test('the pools re-based by name at point 49: each listed pool reads EXACTLY its named rows, and the list never grows past seven', () => {
+    const names = Object.keys(REBASED_49D);
+    expect(names.length).toBeLessThanOrEqual(REBASED_49D_CEILING);
+    for (const [k, v] of Object.entries(REBASED_49D)) {
+      expect(REGISTER.pools[k], k).toEqual([...v.rows]);
+      expect(v.cause.length + v.holder.length, k).toBeGreaterThan(40);
+    }
   });
 });

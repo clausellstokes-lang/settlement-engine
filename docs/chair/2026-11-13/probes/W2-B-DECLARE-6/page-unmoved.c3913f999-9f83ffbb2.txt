@@ -1,0 +1,5 @@
+# fielddiff.mjs (probes/W2-B-DECLARE) <base c3913f999 corpus> <tip 9f83ffbb2 corpus>
+births compared 720 births moved 0
+{}
+# cmp of every rendered dump pair: 720 pairs, 0 differ, the same 720 names
+# counts.txt and counts.perseed.json: byte-identical base and tip; the counter re-run alone at each tree: exit 0, its sorted output equals counts.txt (51 rows)

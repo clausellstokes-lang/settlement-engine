@@ -1,0 +1,44 @@
+shards 8 {"files":12509,"tests":38999,"passed":38695,"failed":52,"pending":252}
+inherited (red at base, same titles)     3 tests/build/engineBundleReplay.test.js 
+inherited (red at base, same titles)     1 tests/lint/institutionTable.walker.test.js 
+inherited (red at base, same titles)     1 tests/lint/siteCoherenceRatchet.test.js 
+inherited (red at base, same titles)     1 tests/domain/townCartographyCalibration.test.js 
+inherited (red at base, same titles)     1 tests/domain/worldFactRederive.test.js 
+inherited (red at base, same titles)     2 tests/build/landingFixtureFreshness.test.js 
+inherited (red at base, same titles)     3 tests/property/editCorpusRatchet.test.js 
+inherited (red at base, same titles)     0 tests/lint/newsHeadlineContract.walker.test.js 
+inherited (red at base, same titles)     0 tests/lint/observedShapeReaders.walker.test.js 
+inherited (red at base, same titles)     3 tests/lint/proseWaveGate.walker.test.js 
+inherited (red at base, same titles)     1 tests/generators/hookThemeDraws.test.js 
+inherited (red at base, same titles)     1 tests/generators/nameHeldThroughAssembly.test.js 
+inherited (red at base, same titles)     1 tests/edgeFunctions/aiGroundingBundle.freshness.test.js 
+inherited (red at base, same titles)     1 tests/generators/institutionBudgetPromise.test.js 
+inherited (red at base, same titles)     1 tests/generators/x46NpcBand.test.js 
+inherited (red at base, same titles)     0 tests/lint/newsVoiceContract.walker.test.js 
+inherited (red at base, same titles)     2 tests/domain/editWorldFactResources.test.js 
+NEW at tip                               1 tests/edgeFunctions/aiOutputSchemaBundle.freshness.test.js 
+   NEW: aiOutputSchema bundle is fresh the current source tree matches the recorded hash (regenerate via npm run build:edge-shared)
+NEW at tip                               4 tests/edgeFunctions/edgeSharedBundleReproducibility.test.js 
+   NEW: edge-shared bundles reproduce AT THE COMMITTED TREE (the dirty-build class) aiCharterBundle.meta.json the recorded sourceHash equals the builder hash over INDEX content
+   NEW: edge-shared bundles reproduce AT THE COMMITTED TREE (the dirty-build class) aiOutputSchemaBundle.meta.json the recorded sourceHash equals the builder hash over INDEX content
+inherited (red at base, same titles)     3 tests/generators/pipelinePinnedMode.test.js 
+inherited (red at base, same titles)     1 tests/generators/rosterFinalUnderHeldRoster.test.js 
+inherited (red at base, same titles)     1 tests/property/espionageDormancyFence.test.js 
+inherited (red at base, same titles)     3 tests/domain/mergeLadderHeldKeys.test.js 
+inherited (red at base, same titles)     1 tests/domain/undercitySewerDerivation.test.js 
+NEW at tip                               1 tests/edgeFunctions/aiCharterBundle.freshness.test.js 
+   NEW: aiCharter bundle is fresh the current source tree matches the recorded hash (regenerate via npm run build:edge-shared)
+inherited (red at base, same titles)     1 tests/generators/generationForkCensus.test.js 
+inherited (red at base, same titles)     1 tests/generators/pipelinePinnedChoosers.test.js 
+inherited (red at base, same titles)     1 tests/generators/powerEconomyFreshness.test.js 
+inherited (red at base, same titles)     1 tests/lint/proseComposed.walker.test.js 
+inherited (red at base, same titles)     3 tests/lint/proseTasteInterested.walker.test.js 
+inherited (red at base, same titles)     1 tests/pdf/goldenViewModel.test.js 
+inherited (red at base, same titles)     1 tests/property/dmLayerGoldenIsolation.test.js 
+inherited (red at base, same titles)     2 tests/property/dossierProseManifest.test.js 
+inherited (red at base, same titles)     0 tests/lint/proseFamilyContract.walker.test.js 
+inherited (red at base, same titles)     0 tests/lint/writerReach.walker.test.js 
+inherited (red at base, same titles)     1 tests/property/generatorGoldenMaster.test.js 
+inherited (red at base, same titles)     1 tests/property/heraldKnowledgeDeskGolden.test.js 
+inherited (red at base, same titles)     1 tests/property/statecraftExposureBand.test.js 
+inherited (red at base, same titles)     1 tests/domain/intentAtlasSoakDistiller.test.js 
