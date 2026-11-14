@@ -11,6 +11,9 @@ Seat JOIN-4 (session `session_01ACmDYZUoeEdTG4RGs1hdRD`), brief `docs/chair/2026
 (e) AFTER EACH MERGE, BEFORE ITS COMMIT: every file the merge changed equals the lane's blob wherever the joined line had not moved it; lint-staged changes nothing. Then the commit; the hook's three gates at the push. A gate RED after a merge: which side's change by `git diff`; a ceiling never raised, no error suppressed; a COMPOSED RED cured only if one line keeps both behaviours (its own commit), else STOP FOR THAT LANE.
 (f) EVERY PUSH PLAIN, explicit refspec, after a fetch and a merge of whatever JOIN-3 pushed (docs); a rejected push fetched, merged and pushed again; never a force.
 
+THE CHAIR'S RULINGS SENT AFTER THE BRIEF (the chair's messages are not on the branch; copied):
+- **13:38 UTC (on the r2-code-b stop):** the stop is right and accepted: DO NOT LAND THAT LANE NOW. RULED: both cures stand, each in its own case (a roster healer: the template; the cast's stand-in where one is minted: the lane's line; the data lane's slot-less twin only where the cast holds nobody): the LANE'S OWN SEAT merges the joined line into its lane, makes it there and re-keys its pins; the chair sends "LAND: lane/r2-code-b-2026-11-13 at <hash>" when it reports. GO ON: coherence-upkeep, the two join lanes, item 3 (build, grid, count), item 5's message. ONE MORE POINT AFTER THE ELEVEN, by the chair's own change of the brief's "not merged" for this one branch: "LAND: lane/upkeep-monotone-2026-11-14 at 0ca0bbe94" (the defence rating's rebuild), by the same laws; its declared moves shift goldens and pins: LISTED, not re-keyed by this seat.
+
 ## 2. The landings
 
 | # | lane | tip merged (read at the merge, UTC) | JOIN-2's tip | merge commit | conflicts | listed for the close |
@@ -24,6 +27,8 @@ Seat JOIN-4 (session `session_01ACmDYZUoeEdTG4RGs1hdRD`), brief `docs/chair/2026
 | 7 | w2-c-leaves-2026-11-13 | 9ac076d5e (13:32) | da7a567f4 | fe6386f83 | none | clean-both: `src/domain/display/defenseDisplay.js` |
 | 8 | r2-code-b-2026-11-13 | b23b48613 (13:36) | 30ed925ee (JOIN-1; JOIN-2 skipped it) | **ABORTED: STOP** (§6) | 9 bundles/metas + lighting (text kept ours, then aborted) | — (nothing landed) |
 | 9 | coherence-upkeep-2026-11-12 | 660cb0893 (13:38) | 26474cda9 | 0537f92f3 | none | clean-both: `src/pdf/lib/viewModelBodySlices.js` |
+| 10 | join-nolane-2026-11-14 | 3ccdc0711 (13:48; the brief's hash, equal to origin's tip) | — | 333f91edc | none | — |
+| 11 | join-surfaces-2026-11-14 | 9e47f912a (13:51) | — | 0a296575c | none | — |
 
 Every merge: `verify.sh` no mismatch; lint-staged changed nothing; the hook's gates green at every push (type ratchet 167/167, strict-domain 1113/1113, eslint 0 errors).
 
@@ -84,4 +89,4 @@ A worktree at origin's tip (`git worktree add /home/user/j4wt -b join4 <tip>`, `
 
 ## 9. WHAT IS LEFT (line by line)
 
-r2-code-b (stopped, §6) waits on the chair; join-nolane at 3ccdc0711; join-surfaces at its tip; the build, the grid, the conflict files' tests and the count at the landed tip; item 4 (the Tonight sheet's famine line) if both halves are in; the remerge patches; the message to the chair.
+r2-code-b (stopped, §6) waits on the chair's LAND; the build, the grid, the conflict files' tests and the count at the landed tip; item 4 (the Tonight sheet's famine line) if both halves are in; the remerge patches; the message to the chair; then the point LAND: lane/upkeep-monotone-2026-11-14 at 0ca0bbe94 (the chair's 13:38 ruling), one line back.
