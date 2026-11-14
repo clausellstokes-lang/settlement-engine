@@ -1,0 +1,7 @@
+[gate-tail] start:  12:02:12 up 46 min,  0 user,  load average: 6.49, 5.95, 4.33 · cores: 4
+page-census: rendering 12 dossiers (4 workers) into /tmp/page-census-TP7JOU
+page-census --grid: 0 fall(s)
+[gate-tail] end:  12:03:11 up 47 min,  0 user,  load average: 9.61, 7.07, 4.83
+[gate-tail] full log: /tmp/gate-tail.20988.log
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)
+EXIT 0

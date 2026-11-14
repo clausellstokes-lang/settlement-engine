@@ -1,0 +1,8 @@
+      Tests  3 failed | 58 passed (61)
+   Start at  11:54:00
+   Duration  78.53s (transform 24.89s, setup 342ms, import 34.25s, tests 88.08s, environment 2.48s)
+
+[gate-tail] end:  11:55:19 up 39 min,  0 user,  load average: 6.51, 3.42, 2.92
+[gate-tail] full log: /tmp/gate-tail.19695.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
+EXIT 1
