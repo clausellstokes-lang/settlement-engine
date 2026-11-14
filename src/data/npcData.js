@@ -1166,7 +1166,7 @@ export const NPC_FACTION_LOYALTY = {
     "A sealed letter arrived for them three weeks ago. They haven't opened it. They won't say why.",
     { text: "They've been quietly buying up property in a district that hasn't been announced as a development site. Yet.", needs: ['population: ≥ middling'] }, // R2-CODE-A-2 (cold #6; the chair's ruling (f)): a district is a size error below the middling band
     { text: "One of their staff has started asking questions about records from seven years ago. They've been reassigned twice already.", needs: ['tier: ≥ village'] }, // R2-CODE-A-2 (cold #6): an office with staff, which no thorp or hamlet keeps
-    'A merchant they spoke against has started praising them in public, and will not say why.',
+    { text: 'A merchant they spoke against has started praising them in public, and will not say why.', needs: ['market'] }, // R2-CODE-A-6 (the chair's row of 2026-11-14 00:20): a merchant only where the roster holds a market
     { text: "Their most trusted advisor hasn't been seen in four days. The official story changes each time it's told.", needs: ['tier: ≥ village'] }, // R2-CODE-A-2 (cold #6): an advisor and an official story, which no thorp or hamlet keeps
     { text: "They know who committed a crime the guard is currently investigating. They're not telling the guard.", needs: ['guardPresence'] }, // CENSUS-3e: the ledger's declaration
     { text: "Someone has been leaving anonymous notes in their office pointing to a colleague's corruption. The notes are accurate.", needs: ['tier: ≥ village'] }, // R2-CODE-A-2 (cold #6): an office with staff, which no thorp or hamlet keeps
@@ -1177,11 +1177,11 @@ export const NPC_FACTION_LOYALTY = {
     { text: "A clerk in their office has been copying letters at night, and the copies have turned up in a rival's hands.", needs: ['tier: ≥ village'] }, // R2-CODE-A-2 (cold #6): an office with staff, which no thorp or hamlet keeps
     'They signed an order last month on bad information, and the family it ruined has learned whose seal is on it.',
     'A petition they set aside has gathered names from half their street, and the people who signed it want an answer this week.',
-    'Someone is collecting fees in their name, and the people paying think the receipts are honest.',
+    { text: 'Someone is collecting fees in their name, and the people paying think the receipts are honest.', needs: ['tier: ≥ village'] }, // R2-CODE-A-6 (the stage read's low 8): a twin carries the condition its office siblings carry
     { text: 'Their deputy has started answering questions meant for them, and people have begun going to the deputy first.', needs: ['tier: ≥ village'] }, // R2-CODE-A-2 (cold #6): an office with staff, which no thorp or hamlet keeps
     "An old ruling of theirs is being used to take a widow's house, and they cannot undo it without admitting the mistake.",
-    'They promised the same post to two people, and both have already told their families.',
-    'A ledger they swore was complete is missing the pages for one season, and an auditor is coming to read it.',
+    { text: 'They promised the same post to two people, and both have already told their families.', needs: ['tier: ≥ village'] }, // R2-CODE-A-6 (the stage read's low 8): a twin carries the condition its office siblings carry
+    { text: 'A ledger they swore was complete is missing the pages for one season, and an auditor is coming to read it.', needs: ['tier: ≥ village'] }, // R2-CODE-A-6 (the stage read's low 8): a twin carries the condition its office siblings carry
     'Their sister has been taking gifts from people who need their signature, and they found out from the person who paid most.',
     'They were seen leaving a house they had no business in, on the night its owner disappeared.',
     'A rule they wrote to stop one abuse has opened the door to another, and the people using it are their friends.',
@@ -1242,7 +1242,7 @@ export const NPC_FACTION_LOYALTY = {
     "A young trader has been undercutting them in ways that shouldn't be possible on their claimed capital.",
     "Someone is buying up their debts. Quietly. They don't know who, or why, or when they plan to call them in.",
     'A valuable cargo was reported lost at sea. The manifest has reappeared in a market two settlements away.',
-    "Their master craftsman is talking to a rival. They haven't confronted them. They're not sure what they'd do.",
+    { text: "Their master craftsman is talking to a rival. They haven't confronted them. They're not sure what they'd do.", needs: ['tier: ≥ village'] }, // R2-CODE-A-6 (the chair's row of 2026-11-14 00:20): no thorp or hamlet keeps a master craftsman (every village and above that printed it holds a house of craft, 145 of 145)
     "A contract they signed in difficult times has a clause they didn't fully read. Someone has read it.",
     "They have been slowly acquiring a controlling interest in a competitor through intermediaries. The competitor hasn't noticed yet.",
     'A supplier is providing goods of uncertain provenance. The price is too good to ask questions. People have started asking questions.',

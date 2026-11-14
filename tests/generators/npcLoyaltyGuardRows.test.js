@@ -25,6 +25,10 @@ const DECLARED = {
   'government#1': ['population: ≥ middling'], 'government#2': ['tier: ≥ village'], 'government#4': ['tier: ≥ village'],
   'government#6': ['tier: ≥ village'], 'government#11': ['tier: ≥ village'], 'government#15': ['tier: ≥ village'],
   'government#22': ['tier: ≥ village'],
+  // R2-CODE-A-6 (re-keyed by identity with its cause): the chair's row of 2026-11-14 00:20 (a merchant only where a market
+  // stands; no master craftsman below a village) and the stage read's low 8 (the three office twins carry their siblings' tier).
+  'government#3': ['market'], 'government#14': ['tier: ≥ village'], 'government#17': ['tier: ≥ village'], 'government#18': ['tier: ≥ village'],
+  'economy#7': ['tier: ≥ village'],
   'government#5': ['guardPresence'],
   'military#0': ['guardPresence'], 'military#1': ['guardPresence'], 'military#3': ['guardPresence'],
   'military#5': ['guardPresence'], 'military#7': ['guardPresence'], 'military#10': ['guardPresence'],
@@ -35,7 +39,7 @@ const DECLARED = {
 };
 
 describe('NPC_FACTION_LOYALTY declarations (CENSUS-3e)', () => {
-  it('declares exactly the ledger\'s fourteen rows and R2-CODE-A-2\'s seven size rows, each by its atom', () => {
+  it('declares exactly the ledger\'s fourteen rows, R2-CODE-A-2\'s seven size rows and R2-CODE-A-6\'s five, each by its atom', () => {
     /** @type {Record<string, string[]>} */ const got = {};
     for (const [cat, rows] of Object.entries(NPC_FACTION_LOYALTY)) {
       rows.forEach((row, i) => { const a = atomsOf(declarationOf(row)); if (a.length) got[`${cat}#${i}`] = a; });

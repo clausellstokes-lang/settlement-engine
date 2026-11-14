@@ -54140,13 +54140,13 @@
         "guardPresence": 9,
         "institution: temple": 1,
         "magic": 3,
-        "market": 1,
+        "market": 2,
         "navigable": 1,
         "no navigable": 1,
         "population: ≥ middling": 1,
-        "tier: ≥ village": 6
+        "tier: ≥ village": 10
       },
-      "undeclared": 152,
+      "undeclared": 147,
       "crisisScoped": false
     },
     {
