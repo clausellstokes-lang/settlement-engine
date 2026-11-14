@@ -9,7 +9,7 @@ The reviewer REVIEW-R2-CODE-B, for the chair (session_01ACmDYZrFEVXyZEUg1NDxxC).
 - **Evidence:** EXECUTED = run and read. PLAUSIBLE = read from code or inferred.
 - **Step 1** (every new or reworded line, read where it prints) is `REVIEW-R2-CODE-B-LINES-READ.md`, pushed at 55cb36653 before any claim was opened.
 
-**VERDICT: (written at the end of the read; see §9)**
+**VERDICT: NOT CLEAR at ac8168c8c: 0 HIGH and 14 MEDIUM findings of the stage's own (§9).**
 
 ## 2. Every row the stage says it cured (EXECUTED; tables per family in `probes/REVIEW-R2-CODE-B/step2/C1..C4/cures.md`)
 
@@ -218,3 +218,96 @@ No cure of the line's was dropped. One LOW, PLAUSIBLE in reach and EXECUTED in c
 - **Outside the eighteen, CARRIED:**
   - "run by its estates" in 49 thorps and hamlets (r2r-thorp-7, 9 people): printed the same at Q.
   - "built around the Palace/government complex" in 27 metropolises (HIGH, `seatIntoPhrase`, the same at Q).
+
+### 6b. The statement's classed reds, each file run at the tip (EXECUTED; `out/cls-*.txt`; 22 files)
+- **Red at the tip, matching the statement's class row for row:**
+  - (a) goldens: generatorGoldenMaster; espionageDormancyFence THE DRIVEN GOLDEN; dmLayerGoldenIsolation A7.
+  - (a) pin seams: nameHeldThroughAssembly A1; rosterFinalUnderHeldRoster A1; pipelinePinnedChoosers A1; pipelinePinnedMode A1, A2, A5; powerEconomyFreshness A4.
+  - (a) pins: hookThemeDraws; rosterDuplicateDraws; x46NpcBand; editCorpusRatchet A7.
+  - (c) edge: aiGroundingBundle.freshness; edgeSharedBundleReproducibility ×2.
+- **Green at the tip:**
+  - Class (b): negativeAssertionAnchor.walker, seedLoopTotality.walker, joins/fieldManifest, mutationCoverageManifest.
+  - The whole STOP 1 group: densityLaw hamlet, recordRegisterTotality A6, recordInvariants EM-R0b A1, recordMerge A1, editCorpusRatchet A1 and A8. This is part 9 item 1's claim "THE SIX REDS GREEN": CONFIRMED.
+- Each class (a) red is a declared move of the four families, waiting on the merge seat's golden door. Each (c) red waits on the edge bundles, which the successor seat is rebuilding.
+- **The same 22 files at the stage's base 80b960171:** 436 passed, 2 red.
+  - edgeSharedBundleReproducibility: 1 of its 2 tip titles is red at the base too (carried).
+  - negativeAssertionAnchor.walker: cured at the tip (class (b)).
+  - Every class (a) golden and pin is GREEN at the base. Those reds are the stage's own moves, declared.
+- **The stage's touched test files at the base** (the 30 that exist there): 0 red but writerReach, which the stage cured.
+
+## 9. FINDINGS, ranked, and THE VERDICT
+
+**VERDICT: NOT CLEAR for `lane/r2-code-b-2026-11-13` at ac8168c8c.** There are 0 HIGH and 14 MEDIUM findings that are the stage's own. Every one is EXECUTED: read in its towns, against the record and against Q.
+
+**The lane moved under src after the tip read.** When this verdict was written, `git diff --stat ac8168c8c..origin/lane/r2-code-b-2026-11-13 -- src/` printed `src/domain/crisis/crisisCast.js | 30 ++++++++++++++++++++----------` (origin at fa85c6592; commits 05cd22366, 5996dd9da, 27c39b750). That is the file of M3 and M4. This review reads ac8168c8c only; those commits are NOT READ.
+
+### HIGH, the stage's own: none.
+
+### MEDIUM, the stage's own
+| # | finding | town · sentence · fact | reach |
+|---|---|---|---|
+| M1 | 2b's one home for the food label is not on every surface (the ruling's words: "every surface … a label of plenty never stands beside a deficit") | r2r-thorp-4: Overview "Food Security Secure", Daily Life and Tonight "Pressured", Economics "Short: 1 lbs/day"; r2s-under_siege-hamlet-2: Overview "Import-dependent" against "Deficit"; r2r-hamlet-1: PDF Identity "Surplus" against the PDF's own Tonight "Secure" | 314 + 16 towns; PDF 830 |
+| M2 | an own goal printed against the cast role (ROUND THREE item 1) | rr3-village-slave_revolt-rand-4: "Arne Mordsson is stirring it" (instigator) beside his want "contain the revolt geographically without deploying force that will create martyrs" | 3 towns |
+| M3 | cast reasons read on a house with no stake, or on the wrong house | r2r-thorp-10: "Marta Popov · the only one in the house the crisis hits" beside "Elder Council no stake yet" (45 towns, 0 at Q); rr3-hamlet-monster_pressure-rand-1: "one of the house the crisis hits" beside "Headman's Authority no stake yet"; rr3-city-mass_migration-port-1: Qian Yoshida "of The Arcane Circle … the one with the least say", whose house has no stake (the house hit is Religious Authorities) | about 50 towns |
+| M4 | brunt and lever on one person | rr2s-village-famine-rand-1: Olivera Novikov "takes the worst of it: one of the house the crisis hits" while she holds the lever, runs the mill and "has food, enough to matter" | 11 rows |
+| M5 | the defence home "with no one named to lead it" where the page names its leader (#328) | rw3-hamlet-under_siege-1: "Adventurers' charter hall · the defence of the place, with no one named to lead it"; the roster names Urbana Calvus, the charter master; r2s-wartime-village-2 (Chartermaster Tornikes Chortasmenos) | 5 towns |
+| M6 | the minted person and the plague slot name a healer the town lacks | r2s-plague_onset-thorp-0: minted "Jiahao Wu, the healer who identified the outbreak first" beside "No healer is kept here; the sick are tended by their own families."; the plague hook's healer in 21 towns with no healer or healing house (r2r-town-37), the stage's where its refill names the healer | 10 + 21 towns |
+| M7 | the minted person's Foundry card disagrees with the NPCs tab | r2r-thorp-10: Foundry "Member of: civic" for a person the NPCs tab files "In no power" | 141 towns |
+| M8 | a twin reworded, its sibling not | r2r-hamlet-16 (fish only): Tonight, PDF and Foundry "Oxteha has lost a second harvest" against the Crisis tab's new "has gone short of food for a second season" | 22 towns |
+| M9 | the siege faith clause contradicts its follower | r2r-thorp-58: "…the siege keeps its people from the next village's parish church. Most folk attend the rites through the year." | 38 of 39 siege towns |
+| M10 | ruling (b): a provenance tag on a line the stage rewrote | r2r-city-0 Foundry "City walls and gates: Masonry ramparts … \(required\)" (`journalPages.js:364`, rewritten by 2af8bdfa9, `(${f.source})` kept) | 1017 towns |
+| M11 | (d) #804 removed true grounds (a count falling is not a cure) | r2r-hamlet-2 "Grazing land" (alpine pasture) and r2r-hamlet-16 "Fishing grounds" (river fish), now no ground at all | 18 of 30 removed read true; 891 of 2064 substitute chains |
+| M12 | 57395ee18 removed a true line and put an understatement in its place | "Real political weight rests with the Religious Authorities." gone from 213 towns, true in 150. r2s-succession_void-village-3 now prints "A voice in the village's affairs belongs to the Religious Authorities." while Power shows them Dominant 58 against the Elder Council's 18 | 150 towns; no guard |
+| M13 | f09e55042 styles a non-office role as the keeper's office | r2s-succession_void-town-1: "Connection: Acting Fixer Tlazolteotl Dzul"; the record's role is "the council's fixer" | 8 ends, 3 towns; no guard |
+| M14 | the harbour frame in a sentence the stage reworded (one of the eighteen) | rr3-thorp-plague_onset-port-0 (thorp of 29): "built around the harbour, on the coast"; no dock, harbour, landing or fishing house. The clause is carried from Q ("the agora and the harbour"); the stage struck the agora and kept the harbour | 5 towns |
+
+### CARRIED (false at Q, the stage's base with the line arrived; whose file writes it)
+- **HIGH:**
+  - Count ranges on the Defense tab and PDF: "Major monasteries (5-10)" in 12 metropolises and "Gates (if walled)" in 14 towns (defenseDisplay.js, DefenseTab.jsx, DefenseSecurity.jsx: the defence lane's).
+  - "Taverns (5-20)" in the Overview and History tensions, r2r-town-9 (OverviewTab.jsx and HistoryTab.jsx).
+  - "built around the Palace/government complex" in 27 Norse metropolises (`settlementQuickGuide.js :: seatIntoPhrase`). This file is the stage's, and the stage worked this phrase.
+  - #389's "A ruling one power refuses to obey" in 49 towns (conflictIssues.js; named in 87c541620, not claimed).
+- **MEDIUM:**
+  - The warden's "decide who gets the guards" beside "No walls and no standing force" (36 towns at Q and the tip; tonightSheet.js CAST_WANTS).
+  - "the one with the least say in the house the crisis hits" beside "no stake yet": narrowed 183 -> 69, still false in 20.
+  - REQ and FORCED on the Defense tab and PDF Defense (768 and 885 towns).
+  - #883: "a few weeks at full rations" beside "about three days" (71 towns, defenseDisplay.js).
+  - The census's kind b/f rises in EconomicsTab.jsx ("a bad season would" under famine; Exports under a siege) and "Inns and taverns (district)", each the same at Q.
+
+### LOW (the stage's own unless marked)
+- "Pressured" at gaps under the ladder's own 5% cut.
+- "Grain Holders no stake yet · it could side with either camp" beside their control of the stores (39 towns).
+- 141 minted lever holders beside "Nobody here controls what this crisis turns on."
+- "the inns … whoever wins it over" (11 towns).
+- "run by patronage and law" beside "no court and no gaol" (33 towns).
+- "the shrines" with one Wayside shrine (3 towns).
+- The dossier search finds the Forge and Market traditions the tab withholds (77 towns, dossierSearch.js, unfiltered).
+- The DM view's "handled by …" twin of the card's withheld handler, page and PDF (r2r-city-0).
+- The step-1 lows H1-14 (Import-Dependent under a cut road, 6 siege towns), H2-7, H2-18 ("(part-time)", "(official)" in a cast slot, 16 towns), H2-25, H3-2, H3-28.
+- The PDF's text-path PROC row silenced by an empty roster (§5).
+- The draft shift record stale against the tip (§3).
+- CARRIED: "run by its estates" in 49 thorps and hamlets; "in a kingdom" (parked).
+
+### TRUE LINES REMOVED (for the owner's veto)
+- (d)'s grounds: 18 of 30 read were true.
+- Faith's "real political weight": 150 of 213 true.
+- Item 1's role wants: 24 of 30 true. The chair's one-goal ruling removed them, and I would not rule differently: the card's own goal is a truer home.
+
+### Where I would rule differently (row by row; the owner may veto any)
+- **2b:** the ruling says every surface. The stage moved Tonight, Daily Life and the quick guide (which prints nowhere) but not the Overview's Systems Health or the PDF's Identity block, which other lanes write. I would rule that a cure of "one home on every surface" is not done until the Overview reads `foodBandOf`. Either that is joined with this lane, or this lane's tile waits for it, or the two disagree in 20% of towns.
+- **Ruling (d):** "never delete a line true somewhere". A substitute chain whose own input is present should name that input, not nothing.
+- **57395ee18:** the line should stay where the contender outweighs the governor; that is the ruling's "a line is in its pool unless the town makes it false".
+- **f09e55042 and 535e654d6:** keep "Acting …" only where the keeper's own title names an office.
+
+### The lines I would strike, for the owner's veto
+- "…, with no one named to lead it" wherever the page names a leader.
+- "the siege keeps its people from the next village's parish church", unless its follower is gated to the siege too.
+- "built around the harbour" in a town without a harbour house.
+
+### What I did not measure
+- The chainCardTruth and stressSummaryDeclared plants.
+- Census-2 at Q: the rises were traced on 4 of 4 rendered towns, not on all.
+- The edge bundles' contents.
+- The whole suite (only the files named and classed).
+- Rows from `rww-`/`rpf-` towns, which births.mjs cannot reproduce; read by class across the 1536 instead.
+- The exports beyond the PDF and Foundry text: JSON export, share view.

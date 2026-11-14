@@ -1,0 +1,20 @@
+## cls-tip.json files 22 passed 421 failed 17
+  RED tests/edgeFunctions/aiGroundingBundle.freshness.test.js 19/20 :: the current source tree matches the recorded hash (regenerate via npm run build:edge-shared)
+  RED tests/edgeFunctions/edgeSharedBundleReproducibility.test.js 27/29 :: the recorded sourceHash equals the builder hash over INDEX content | the recorded sourceHash equals the builder hash over INDEX content
+  RED tests/generators/hookThemeDraws.test.js 12/13 :: pin:no-hook-is-lost — the count the DM sees is byte-for-byte what it was
+  RED tests/generators/nameHeldThroughAssembly.test.js 6/7 :: A1 — EM-R4: inert with no pins: the golden corpus and an empty bag leave every byte where it was
+  RED tests/generators/pipelinePinnedChoosers.test.js 6/7 :: A1 — the null change: an unpinned run and pins {} leave the golden corpus byte-identical
+  RED tests/generators/pipelinePinnedMode.test.js 12/15 :: A1 — the null change: no pins and pins {} leave the golden corpus byte-identical | A2 — the lift moves nothing: the golden corpus, the draw count and the one-stream shape | A5 — EM-R1b: a supplied transient chooser is st
+  RED tests/generators/powerEconomyFreshness.test.js 9/10 :: A4 — the golden is unmoved by construction, and a held bag does move it
+  RED tests/generators/rosterDuplicateDraws.test.js 2/3 :: the corpus is live: the 1,000 births carry rosters of two or more
+  RED tests/generators/rosterFinalUnderHeldRoster.test.js 6/7 :: A1 — inert with no pins: the golden corpus and the coherence tail are byte-unmoved
+  RED tests/generators/x46NpcBand.test.js 23/24 :: sixty seeds (ten a tier) generate byte-identically to the dark digests captured at the window tip (2026-11-04)
+  RED tests/property/dmLayerGoldenIsolation.test.js 14/15 :: A7 — THE ISOLATION PROPERTY: a dormant layer is the committed golden on EVERY corpus row, and a one-root layer moves that root
+  RED tests/property/editCorpusRatchet.test.js 7/8 :: A7 the honesty figures are re-measured and the ride-along has its first population in the chain
+  RED tests/property/espionageDormancyFence.test.js 20/21 :: THE DRIVEN GOLDEN: 360 settlements at this tip hash to the PRE-COUPLING corpus
+  RED tests/property/generatorGoldenMaster.test.js 2/3 :: every config produces byte-identical output to the golden master
+## cls-base.json files 22 passed 436 failed 2
+  RED tests/edgeFunctions/edgeSharedBundleReproducibility.test.js 28/29 :: the recorded sourceHash equals the builder hash over INDEX content
+  RED tests/lint/negativeAssertionAnchor.walker.test.js 8/9 :: no NEW un-anchored negative assertion anywhere in the test corpus
+## gov-base.json files 30 passed 323 failed 0
+  RED tests/lint/writerReach.walker.test.js 0/0 ::  MSG writer-reach dark register row "forcedByToggle on institutions" is UNVERIFIABLE (clause S): the identity is now LIT-NAME
