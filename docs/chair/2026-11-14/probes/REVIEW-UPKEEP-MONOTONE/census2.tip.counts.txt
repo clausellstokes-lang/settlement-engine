@@ -1,0 +1,8 @@
+PATTERN a: towns 703 · distinct lines 558 (NEW 303) · writers 102 (NEW 50) · untraced lines 46
+PATTERN b: towns 70 · distinct lines 98 (NEW 58) · writers 36 (NEW 18) · untraced lines 16
+PATTERN c: towns 296 · distinct lines 275 (NEW 165) · writers 41 (NEW 20) · untraced lines 8
+PATTERN d: towns 398 · distinct lines 40 (NEW 20) · writers 11 (NEW 5) · untraced lines 15
+PATTERN e: towns 60 · distinct lines 20 (NEW 14) · writers 5 (NEW 3) · untraced lines 3
+PATTERN f: towns 720 · distinct lines 344 (NEW 191) · writers 14 (NEW 7) · untraced lines 124
+PATTERN g: towns 720 · distinct lines 13 (NEW 0) · writers 2 (NEW 0) · untraced lines 8
+PATTERN h: towns 20 · distinct lines 63 (NEW 60) · writers 15 (NEW 13) · untraced lines 26
