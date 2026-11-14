@@ -74,7 +74,10 @@ describe('ROUND THREE · the Tonight sheet voices a cast person with the card\'s
       const p = composeTonightSheet(s).people.find((x) => x.why === 'cast' && !hasOwnGoal(npcNamed(s, x.name)));
       expect(p, seed).toBeDefined();
       expect(p.says, seed).toBe('want');
-      expect(p.line, seed).toMatch(/^(decide who gets the|share out the) (medicine|guards)/);
+      // R2-CODE-B-12, ruling (c): the scarce good is one the town has. r2s-monster_pressure-village-1 keeps no walls and
+      // no standing force, so its stand-in wants shelter, never guards (tests/domain/crisisStandInWords.test.js).
+      const scarce = { 'r2s-plague_onset-thorp-0': 'medicine', 'r2s-monster_pressure-village-1': 'shelter' }[seed];
+      expect(p.line, seed).toMatch(new RegExp(`^(decide who gets the|share out the) ${scarce}\\b`));
     }), 'a goal-less cast person voices the role line');
   });
 
