@@ -211,7 +211,10 @@ const RUIN_AGNOSTIC_EXEMPT = Object.freeze({
   // derives reports capacity, never sums it into a provider total.
   'src/domain/worldPulse/institutionStatusLifecycle.js': 'status-grader — grades operational/impaired/shell, so it MUST see the non-live rows liveInstitutions() drops (a shell IS _worldPulseInactive); carries its own isRuinedInstitution guard via institutionStatusModel.js, and credits no provider capacity',
   // ── display: renders the roster (showing a ruin is correct) ──────────────────────
-  'src/domain/display/defenseDisplay.js': 'display — defenseProfile.institutions force buckets, not the roster',
+  // ⭐ defenseDisplay.js's exempt row is DELETED (W2-C-LEAVES-SIDE, 2026-11-13, the chair's #575): its Legal
+  // Infrastructure row now reads the LIVE roster (`liveInstitutions`, a ruined courthouse tries no case), so this
+  // walker reads the file as compliant and asked for the row ("now routes through the ruin filter"). Its other reads
+  // of the defence buckets (`defenseProfile.institutions`) are unchanged and stay a display of what the town built.
   'src/domain/display/institutionProfile.js': 'display — defenseProfile.institutions buckets',
   // ⭐ threatAssessment.js's exempt row is DELETED (lane DEFENSE, 2026-11-03): its rows now ask
   // `domain/defense/defenseFacts.js :: defenseFactsOf`, which reads the LIVE roster through

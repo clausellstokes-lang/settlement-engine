@@ -225,7 +225,7 @@ export function deriveCriminalStructure(settlement) {
   // (The ladder is a reader of the crime fact: tests/lint/factLayers.walker.test.js counts it, family crime.)
   const key = rivalRingsHere(r) ? 'semi-organized' : signal.factions.length ? 'organized'
     : ladder ?? (signal.houses.length || listed ? 'semi-organized' : null);
-  return key ? withRingVantage(CRIM_STRUCTURE_DATA[key], r) : null;
+  return key ? ringNoteUnderStreetFighting(withRingVantage(CRIM_STRUCTURE_DATA[key], r), r) : null;
 }
 
 /** The supply-chain statuses that mean a chain runs (`supplyChainStatus`, less vulnerable/impaired). */
@@ -325,6 +325,7 @@ export function deriveSupportingCapabilities(settlement) {
   // The one set of defence facts (lane DEFENSE): a hospital only where one stands, and a
   // healer named as a healer.
   const facts = defenseFactsOf(r);
+  const court = courtOnRoster(r);
 
   const caps = [
     {
@@ -399,10 +400,11 @@ export function deriveSupportingCapabilities(settlement) {
         : 'No arcane practitioners on the rolls. Wards, detection and counterspell are beyond this settlement.',
     },
     {
+      // W2-C-LEAVES-SIDE (the chair's #575): the court is read off the live roster (`courtOnRoster`, below), not the flag.
       label: 'Legal Infrastructure',
-      status: f.hasCourtSystem && f.hasPrison ? 'Court + Prison' : f.hasCourtSystem ? 'Court only' : f.hasPrison ? 'Prison only' : 'None',
-      color: f.hasCourtSystem && f.hasPrison ? '#1a3a5a' : f.hasCourtSystem ? '#3a5a7a' : f.hasPrison ? '#7a5a3a' : '#9c8068', score: null,
-      note: f.hasCourtSystem && f.hasPrison ? 'Full enforcement chain. Arrest, prosecute, detain.' : f.hasCourtSystem ? 'Courts without detention. Fines and exile only.' : f.hasPrison ? 'Detention without process. Arbitrary enforcement.' : 'No deterrence beyond force.',
+      status: court && f.hasPrison ? 'Court + Prison' : court ? 'Court only' : f.hasPrison ? 'Prison only' : 'None',
+      color: court && f.hasPrison ? '#1a3a5a' : court ? '#3a5a7a' : f.hasPrison ? '#7a5a3a' : '#9c8068', score: null,
+      note: court && f.hasPrison ? 'Full enforcement chain. Arrest, prosecute, detain.' : court ? 'Courts without detention. Fines and exile only.' : f.hasPrison ? 'Detention without process. Arbitrary enforcement.' : 'No deterrence beyond force.',
     },
     {
       label: 'Medical Readiness',
@@ -418,7 +420,7 @@ export function deriveSupportingCapabilities(settlement) {
     // 2026-11-03: "Do add storehouse months the economy tab."). It was the granary read; stored
     // food is printed once, in months, on the Economy tab, and no Defense surface prints it.
   ];
-  if (f.hasNavy || f.hasPort) {
+  if ((f.hasNavy || f.hasPort) && navalRowStandsOn(r)) { // W2-C-LEAVES-SIDE item 2: the sea route (below)
     // experience-product-fit-5: the STANDING naval reality, not just the static
     // institution boolean — when a hostile fleet blockades the port RIGHT NOW,
     // the note reflects it (the live `blockaded` flag is written each pulse and
@@ -444,6 +446,9 @@ export function deriveSupportingCapabilities(settlement) {
   }
   // The Arcane Support row is the list's one magic row.
   if (practitioners.length > 0 && !defenceHoldsArcane(r)) caps.splice(1, 1); // record 369 G5: the list's second row (below)
+  // W2-C-LEAVES-SIDE item 3: "None … No arcane practitioners" is not printed beside a governing arcane power or a named
+  // mage (below): the list's second row, as above (no practitioner, so nothing was taken out before it).
+  if (!arcane && arcaneNamedHere(r)) caps.splice(1, 1);
   return magicWorksAt({ settlement: r }) === false ? caps.filter((c) => c.label !== 'Arcane Support') : caps;
 }
 
@@ -732,3 +737,99 @@ import { rivalRingsOf } from '../corruption.js';
 // literal order: Economic Backing, Arcane Support, …); it is never turned to "None", which would deny the practitioner.
 // Measured on the census's 720 at 5ab1d2c7c: 73 of the 230 Present rows.
 import { defenceHoldsArcane } from '../facts/magic.js';
+
+// ─── W2-C-LEAVES-SIDE: NO ONE-RING NOTE WHERE THE TAB SAYS THE STREETS ARE FOUGHT OVER (at the end of the file) ───
+/**
+ * The crisis lines the Defense tab prints beside the criminal structure (the safety profile's own `safetyDesc` and its
+ * crime patterns, `crimeTypes[].desc`) that say the streets are fought over or the law has gone: a slave revolt's "Rebels
+ * and guards are fighting in the contested districts" and "Active armed conflict … in contested districts", an
+ * insurgency's "Street-level confrontations between insurgent supporters and the watch", "There is no meaningful law
+ * enforcement", "the regular patrols have stopped". Matched by those words, the tab's own.
+ */
+/** The safety label names the crisis in force after a dash (`safetyProfile.js`: "<strain> — <condition>"). */
+const CRISIS_IN_LABEL = /\s—\s\S/;
+const STREETS_FOUGHT_OVER = /fighting in the contested districts|armed conflict between revolt participants|street-level confrontations|no (?:meaningful )?law enforcement|patrols have stopped|abandoned normal patrol/i;
+
+/**
+ * THE ORGANISED-RING NOTE IS NOT PRINTED UNDER A CRISIS WHOSE OWN LINES SAY THE STREETS ARE FOUGHT OVER (W2-C-LEAVES-SIDE,
+ * 2026-11-13; the chair's ruling on the round-three increment's rww-town-slave_revolt-1: "Crime here answers to one ring.
+ * It keeps the streets quiet …" printed under a slave revolt beside "Rebels and guards are fighting in the contested
+ * districts"). Every vantage of the note says the ring puts down violence and keeps order of its own; beside the crisis's
+ * own fighting line that is false. Where a crisis is in force (the tab's safety label names it: "Critical — Slave
+ * Revolt") and one of the tab's lines says so
+ * (`STREETS_FOUGHT_OVER`), the note is left out: the structure's key and label stand, every reader of `key` unmoved.
+ * Measured on the census's 720 at 408c2e30c: 7 of 134 organised rings (3 insurgencies, 4 slave revolts); none without a
+ * crisis in force. The record is read as stored; no fact is added.
+ * @param {{ key: string, label: string, color: string, bg: string, note: string }} row
+ * @param {DefenseDisplaySettlement} settlement
+ * @returns {{ key: string, label: string, color: string, bg: string, note: string }}
+ */
+function ringNoteUnderStreetFighting(row, settlement) {
+  if (row.key !== 'organized') return row;
+  const sp = /** @type {{ safetyLabel?: unknown, safetyDesc?: unknown, crimeTypes?: unknown } | undefined} */ (settlement?.economicState?.safetyProfile);
+  // The crisis in force, as the tab prints it: the safety label's own condition ("Critical — Slave Revolt").
+  if (typeof sp?.safetyLabel !== 'string' || !CRISIS_IN_LABEL.test(sp.safetyLabel)) return row;
+  const lines = [sp?.safetyDesc, ...(Array.isArray(sp?.crimeTypes) ? sp.crimeTypes : []).map((c) => /** @type {{ desc?: unknown } | null} */ (c)?.desc)];
+  return lines.some((l) => typeof l === 'string' && STREETS_FOUGHT_OVER.test(l)) ? Object.freeze({ ...row, note: '' }) : row;
+}
+
+// ─── W2-C-LEAVES-SIDE item 2: THE NAVAL ROW STANDS ON THE SEA (at the end of the file) ───
+import { tradeRouteOf } from '../facts/terrain.js';
+
+/**
+ * WHETHER THE NAVAL DEFENSE ROW HAS A SEA TO SPEAK OF (W2-C-LEAVES-SIDE, 2026-11-13; the cut's #961, "Port facility but no
+ * naval force. Sea approaches are accessible to any vessel." in a river town in a forest). The chair's ruling (record 387,
+ * the port's two homes): the trade route is the home of "this is a port" and of which water it stands on, so the row's
+ * lines (every one of them speaks of the sea approaches) print only where the route is the sea (`tradeRouteOf` 'port').
+ * A river town's docks get no river twin: none was read true (silence, as ruled). A live blockade (the pulse's own
+ * `stockpile.blockaded`, a fleet the record names) keeps the row on any route. Measured on the census's 720 at
+ * 408c2e30c: 121 rows, 48 on the sea route stand; 73 out (river 56, road 11, isolated 4, crossroads 2); none blockaded.
+ * @param {DefenseDisplaySettlement} settlement
+ * @returns {boolean}
+ */
+function navalRowStandsOn(settlement) {
+  return tradeRouteOf(settlement) === 'port' || settlement?.economicState?.foodSecurity?.stockpile?.blockaded === true;
+}
+
+// ─── W2-C-LEAVES-SIDE item 3: NO "NO ARCANE PRACTITIONERS" BESIDE A MAGE THE RECORD NAMES (at the end of the file) ───
+// The chair's ruling on the round-three increment's rww-town-calm-1 ("Arcane Support · None · No arcane practitioners on
+// the rolls" where an Arcane Council governs and the council's archmage is named): the row is left out where the record
+// holds a governing arcane power or a named mage, read in the magic fact's home (`facts/magic.js :: recordNamesAMage`).
+// Record 394 stands for "Present". Measured on the census's 720 at 408c2e30c: 13 rows out.
+import { recordNamesAMage as arcaneNamedHere } from '../facts/magic.js';
+
+// ─── W2-C-LEAVES-SIDE (the chair's #575): THE LEGAL ROW NAMES A COURT ONLY WHERE A HOUSE HOLDS ONE (at the end of the file) ───
+import { liveInstitutions } from '../institutions/institutionRoster.js';
+
+/** A house that is a court by its name: the courthouse, the court buildings. */
+const COURT_HOUSE = /courthouse|court buildings/i;
+/**
+ * The catalogue's court services (`data/institutionServices.js`): a hall, a council or an administration holds a court
+ * only where the town drew one of these for it ("Dispute adjudication: hears civil pleas in the town court", "Dispute
+ * arbitration … before a magistrate", "Appeals court", "Courts and adjudication", the courthouse's own rows).
+ */
+const COURT_SERVICES = new Set(['Civil disputes', 'Criminal trials', 'Civil litigation', 'Criminal proceedings', 'Appeals',
+  'Dispute arbitration', 'Appeals court', 'Dispute adjudication', 'Courts and adjudication', 'Legal appeals', 'Civic law enforcement']);
+
+/**
+ * WHETHER A HOUSE ON THE LIVE ROSTER HOLDS A COURT (W2-C-LEAVES-SIDE, 2026-11-13; the chair's ruling on the cut's #575:
+ * "Legal Infrastructure · Court only" in a town with no courthouse and no prison on its roster). The row read the flag
+ * `compound.inst.hasCourtSystem` (`defenseFacts.js :: hasCourt`, a NAME test that takes every "Town hall" for a court);
+ * the roster governs the page: a courthouse or court buildings stand, or a live house drew a court service
+ * (`availableServices`, the services the Services tab prints for that house). Where the flag and the roster disagree
+ * the record's disagreement is NAMED: on the census's 720 at 408c2e30c, 37 towns (29 "Court only" → "None", 8 "Court +
+ * Prison" → "Prison only"), each a Town hall whose drawn services are permits and taxes; no town the other way.
+ * @param {DefenseDisplaySettlement} settlement
+ * @returns {boolean}
+ */
+function courtOnRoster(settlement) {
+  const live = liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (/** @type {unknown} */ (settlement)))
+    .map((i) => String(/** @type {{ name?: unknown } | null} */ (i)?.name ?? '')).filter(Boolean);
+  if (live.some((n) => COURT_HOUSE.test(n))) return true;
+  const drawn = /** @type {{ availableServices?: unknown }} */ (settlement)?.availableServices;
+  const rows = drawn && typeof drawn === 'object' ? Object.values(drawn).flat() : [];
+  return rows.some((row) => {
+    const sv = /** @type {{ name?: unknown, institution?: unknown } | null} */ (row);
+    return typeof sv?.name === 'string' && COURT_SERVICES.has(sv.name) && live.includes(String(sv?.institution ?? ''));
+  });
+}

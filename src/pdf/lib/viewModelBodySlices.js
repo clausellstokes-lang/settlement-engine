@@ -23,7 +23,7 @@ import { entityIdFor } from '../../domain/dossier/entityLinks.js';
 import { customSupplyChainViewModel } from './customSupplyChains.js';
 import { stressArray, foodCore, avgScore } from './viewModelPrimitives.js';
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
-import { resourceGapLines, exploitationGroupsShown } from '../../domain/display/validationOnPage.js';
+import { resourceGapLines, exploitationGroupsShown, housesStillNeeded } from '../../domain/display/validationOnPage.js';
 import { crisisSummaryForSurface } from '../../domain/crisis/crisisSummaryVantage.js';
 
 // Pull the human resource name off an exploitation chain entry (engine stores
@@ -320,7 +320,11 @@ export function resourcesSlice(active) {
           // the join happens in this line and the renderer can no longer tell one name from
           // the next. Same rule as `servicesSlice` above: a print goes through the seam, and
           // an unmapped name passes through as itself.
-          processing: institutionDisplayName(item?.processing) || institutionDisplayName(item?.institution) ||
+          // W2-C-LEAVES-SIDE (the twin of #452; the processing column only): an Unexploited row names only the houses the
+          // live roster does not hold, by the reader the tab's "Needs:" line reads (validationOnPage.js :: housesStillNeeded).
+          processing: which === 'unexploited'
+            ? housesStillNeeded(s, item?.processingInstitutions).map((n) => institutionDisplayName(n) || n).join(', ') || null
+            : institutionDisplayName(item?.processing) || institutionDisplayName(item?.institution) ||
                       (item?.processingInstitutions || []).map((n) => institutionDisplayName(n) || n).join(', ') || null,
           output: item?.output || item?.product ||
                   (item?.finalProducts || item?.outputs || []).join(', ') || null,
