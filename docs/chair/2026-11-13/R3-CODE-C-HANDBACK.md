@@ -926,3 +926,123 @@ REVIEW-R3-CODE-C/births.mjs` (seeds-all = REVIEW-R3-STAGES seeds720 + seeds-app 
 seeds-extra); probes in /tmp/claude-0/tools: l01.mjs (History-desk sentences with the age named), l05*.mjs (export
 claims by chain, houses, failed source), samerec.mjs (records and families moved), bar0*.mjs (the bar towns). Local
 config and refs compared after every push: unchanged but for the local branch c8 and npm ci's core.hooksPath.
+
+## THE NINTH SEAT (R3-CODE-C-9, 2026-11-14; brief docs/chair/2026-11-14/briefs/BRIEF-R3-CODE-C-9.md on the chair's lane; EXECUTED unless marked)
+
+**The tip.** On origin it read bd21a34c1, as the brief wrote. Scratch worktree /tmp/claude-0/wt9 (local branch c9);
+the lane tip in /tmp/claude-0/wtbase for the red-first runs. Births: the reader's 1,722 (REVIEW-R3-STAGES seeds720 +
+seeds-app + seeds-plagued + REVIEW-R3-CODE-C seeds-extra.txt), and the bar's four towns (bar0-, the rr pattern).
+
+### The chair's rulings this seat worked to (copied from the brief, 2026-11-14; vetoable by the owner)
+1. n80: A LINE THAT NAMES WHERE THE FOOD COMES FROM READS THE FOOD RECORD: a source that failed or is cut off is not
+   named as feeding the town; the line names what still feeds it, or says the source failed in words its siblings
+   already use, or is not written. Count the class on the births.
+2. n240 and n299: the faith's subordinate and "props up" lines (factionDynamics.js) against the town's own conflicts
+   and the faith's civic voice: each line reads the relationship's own standing, the fact the Power tab prints beside
+   it (77f0e6792 is the form): not drawn where the record contradicts it.
+3. THE BEER CLAIM: the same ruling as L05: a good is claimed as made here only where every house its chain needs
+   stands on the roster (the grain chain names no brewer: so the claim reads the roster for a brewer, or the good is
+   not listed). Count before and after; a declared move of the resource analysis's exports.
+4. n15: READ IT on the Power tab in its town (governanceAccount.js composes it at display): false -> cured at display,
+   its own commit; true -> said so with what the record holds.
+5. (The chair's message, 10:58 UTC) H2-22: tonight.official "Famine. {S} has lost a second harvest."
+   (src/domain/crisis/crisisSummaryVantage.js) takes the Crisis tab's twin's condition and words ("{S} has gone short
+   of food for a second season.") where the food record holds no grain; count -> 0; read in three towns, a fishing
+   hamlet among them. NOT DONE (the count; below).
+
+### Rows
+1. **n80, 52d440373.** Cause: the line is composed at generation from every source, the failed one too
+   (foodGenerator.js's call of composeFoodwaysLine), and its one reader handed it on unread. The call's block in
+   foodGenerator.js is held by the unjoined upkeep lanes, so the cure is at the line's ONE READER (domain/foodways.js
+   :: foodwaysLineOf: Economy tab, PDF, Foundry, culturalIdentity.foodways at assembly): the composer's sentence is
+   read back (frame index, slot phrases; no draw), the failed source's phrase taken out (grain and the mill together),
+   the rest kept in the smaller count's frame; the culture's sentence only where it names no failed source; with
+   nothing left, the composer's own no-source answer. Counts: famine towns 99; failed source named 99 -> 0 (88
+   single-source); culturalIdentity.foodways 99 -> 0. Declared move: culturalIdentity.foodways only (1,722: 99; 720:
+   19). Guard: tests/domain/r3c9ReaderLinesTrue.test.js n80 arms, red at bd21a34c1; plants (the grain-mill pairing
+   removed; the reader bypassed) red. "Cut off" read: the food record holds no cut-off source; the depleted fishery
+   still a source by its fishing row (foodLand.js) is named below, not cured.
+2. **n240, f03732b9e.** Cause: World/Faith (faithReading.js :: factionLine) gives the strongest religious power a voice
+   wherever one stands, and its own card's desc gives civic reach in every band, so "have no say in the hall" is
+   contradicted wherever drawn (149 of 149; desc "limited"/"little" in 17). Not drawn (factionDynamics.js). Counts:
+   149 -> 0; dependent 327 unchanged. Declared move: powerStructure.factionRelationships only (1,722: 149; 720: 79).
+   Guard: n240 arms (seven towns), red at bd21a34c1; plant red.
+   **Recommendation for the owner's veto:** the first sentence alone ("{faith} answers to {hall}.") would keep the row
+   in the web; I took the ruling's "not drawn" (no reword ruled).
+3. **n299: FOR THE JOIN** (below). The dependent line prints beside a conflict between the same pair in 63 of 327
+   (Tzulco: "a ruling one power refuses to obey"); the conflicts are drawn after the power step, in held files.
+   "Elder Council keeps order" beside "Nobody here is paid to keep order. A quarrel goes to the heads of the oldest
+   families": read, not false.
+4. **Beer, 9fb62639d.** Cause: evaluateInstitutionDeps listed every final product of a full chain; the grain chain's
+   houses (Mill, Bakers) make no beer. Cure (5): a good none of its chain's houses makes is listed only beside its maker,
+   read by kind (houseHead: Brewery/Brewer; an Alehouse is not), one row: beer -> brewer. Counts: beer rows 73 -> 54;
+   claims 71 -> 52 (the eighth seat's 71 were every beer claim; 19 stood with no brewer); beside no brewer 19 -> 0.
+   Declared move: resourceAnalysis.exports only (1,722: 19; 720: 11). Guard: beer arms (five towns, three kept),
+   red at f03732b9e; plant red.
+5. **n15, 1db43b7eb. READ: FALSE.** Shankou: the Thieves' Guild row is the adversarial capture rung (the hall
+   "hunting ... in earnest", the same tab: "... and Ducal Governorship is winning"), counted by estrangedPowersOf as a
+   power broken with the hall. Cure at display (governanceAccount.js): that row is not estranged. Counts: accounts with
+   the competitive consequence 136 -> 106; whose only competitive tie was that rung 30 -> 0; accounts changed 55.
+   Guard: n15 arm (four towns), red at 9fb62639d; plant red. No record moves.
+
+### EVERY NEW OR CHANGED LINE, with the towns it was read in (the owner's veto list, and the next reader's)
+No new words anywhere. Changed lines (full sentences in each commit's body):
+- **The foodways line** (domain/foodways.js; Economy tab, PDF, Foundry): Agiospolis (city, siege+famine) -> "Meals
+  follow the season and what the household has put by."; rr3p-thorp-famine-rand-0 (thorp of 6, smallest) -> "Herding
+  and mixed farming produce a strongly seasonal food calendar."; rr3-metropolis-famine-port-1 (97,340, largest) ->
+  "Smoking, drying, fermenting, and winter storage are central household technologies."; rr3-village-under_siege+
+  famine-rand-3 -> "The table rests on salted fish. Herding and mixed farming ..."; r2s-famine-metropolis-3 -> "Most
+  meals start from salted fish."; rr3-thorp-under_siege+famine-rand-4 -> "Most meals start from the day's catch."
+- **The faith's subordinate row** (Power tab web): silent in Gortfell (town), r2r-village-12 (village of 80; the web
+  empties, self-gated), rr3-town-under_siege-rand-0 (siege), r2s-occupied-town-1 (occupied), r2r-metropolis-0.
+- **The grain export row** (Resources tab): "bread, beer, animal feed" -> "bread, animal feed" in r2r-town-24 (423),
+  r2s-occupied-town-1 (occupied), rr3-town-wartime-rand-5, rr3p-city-calm-rand-0 (8,231); kept in r2r-metropolis-3.
+- **The governance account** (Power desk, PDF Power Structure): the criminal "no longer takes its orders" and the
+  competitive consequence gone in Shankou, r2s-under_siege-town-0 (siege), r2s-slave_revolt-town-3 (1,271, smallest),
+  rr3-metropolis-recently_betrayed-rand-4 (169,385, largest); newly printed there, the account's own fallback vignette
+  (the record's recentConflict, already on the same town's Summary tab) in 32, e.g. r2r-town-58 "Several merchants have
+  been found murdered this season, and people say the guard is doing nothing about it." (13 towns carry this vignette:
+  the next reader should read it beside the hall's "hunting ... in earnest"), r2r-city-12 "A guild's private soldiers
+  arrested a rival's factor. ..."; a second power's own sentence alone ("The Military/Guard no longer takes its
+  orders.", 5); the next tie's consequence ("Nothing large is settled in the hall without bargaining with them
+  first.", 4).
+
+### Declared moves by family (the 1,722 / the census's 720)
+culturalIdentity.foodways 99 / 19 (52d440373); powerStructure.factionRelationships 149 / 79 (f03732b9e);
+resourceAnalysis.exports 19 / 11 (9fb62639d); 1db43b7eb display only. No draw added or moved.
+
+### FOR THE JOIN (this seat)
+1. n80 at its source: src/generators/foodGenerator.js :: generateFoodSecurity, the composeFoodwaysLine call (held by
+   upkeep-monotone, upkeep-measure-2, coherence-upkeep): `sources: foodSources.filter((src) => !(src === failedSource
+   || (['grain', 'mill'].includes(failedSource) && ['grain', 'mill'].includes(src))))` puts the true line in the raw
+   record (foodRecord.foodwaysLine, read by the JSON export and generationCoherence.js); the reader cure stays harmless.
+2. n299: src/generators/steps/assembleSettlement.js (held by the upkeep lanes and w2-fix-data), after
+   `settlement.powerStructure = { ...settlement.powerStructure, conflicts: settlement.conflicts }`, and the regen in
+   src/generators/generateSettlementPipeline.js after generateConflicts (held by powers-follow-up): drop the
+   governing-religious `dependent` row whose pair is a conflict's parties (63 of 327 on the 1,722).
+3. Goldens, the merge seat's signed regens: powerEconomyFreshness A4 31 (bd21a34c1) -> 35 (f03732b9e; items 1 and 2
+   together, not split); espionageDormancyFence's driven hash, red at bd21a34c1, moved again by 52d440373;
+   generatorGoldenMaster 412, worldFactRederive A7 5, generationForkCensus's control row: red at bd21a34c1, unmoved.
+4. NAMED, not cured: a depleted fishery is still a food source by its fishing row (foodLand.js :: fishRowOnWater), so
+   a foodways line names a catch beside "nothing left worth taking": 104 -> 98 on the 1,722.
+5. NAMED, not cured: "herding" is not in foodways.js :: SOURCE_WORDS.livestock, so a culture sentence claiming herding
+   stands where no herd is a source: 124 lines on the 1,722 (a composer change: foodRecord.foodwaysLine would move).
+6. The lighting census re-take for the guard file tests/domain/r3c9ReaderLinesTrue.test.js (not taken by this seat).
+
+### WHAT IS LEFT, line by line
+1. H2-22 (the chair's 10:58 ruling, above): tonight.official in src/domain/crisis/crisisSummaryVantage.js (this
+   lane's file) takes the Crisis tab twin's condition and words where the food record holds no grain; 22 towns of
+   1,536 on the r2-code-b reader's births; count on the 1,722, red first, read in three towns, a fishing hamlet among
+   them; one line to the chair when pushed.
+2. The eighth seat's other named rows, in its order (its FOR THE JOIN and WHAT IS LEFT), where this lane holds the file.
+3. FOR THE JOIN 1-6 above.
+**What a fresh reader needs:** the range 70d92ed06..<this tip> (the eighth seat's and this seat's); source changed by
+this seat only in domain/foodways.js, generators/factionDynamics.js, generators/resourceGenerator.js,
+domain/display/governanceAccount.js; the first reader's unfinished steps (its "WHAT IS LEFT", 1-6) stand untouched.
+**How the instruments are re-made (all outside the tree, /tmp/claude-0/tools):** births.mjs (REVIEW-R3-CODE-C's, its
+rr pattern widened to bar0-) `TREE=<wt> OUT=<f.gz> SEEDS=seeds-all.txt node births.mjs`; fw.mjs (foodways failed and
+depleted sources named), fwdiff.mjs, rel.mjs (religious-governing lines, desc band, conflicts, faith voice), gov15.mjs
+and gov15sent.mjs (the account's sentences, base against tip), samerec.mjs (records and families moved), holders.sh
+(lanes that changed a file since their merge base with integration; a lane already in lane/join-2026-11-14 counted
+as joined). Local config and refs compared after every push: unchanged but for the local branch c9 and npm ci's
+core.hooksPath.
