@@ -1,0 +1,79 @@
+{"id":"01667","town":"r2r-hamlet-30","sev":"MED","kind":"STATE","why":"calls Sameer ibn Rashid 'the alewife' (female-coded title) but PEOPLE gives him sex m","other":""}
+{"id":"27531","town":"r2r-hamlet-39","sev":"LOW","kind":"BROKEN","why":"subject 'Weak defences' with verb 'keeps' does not agree (sibling sentence 15018 says 'keep')","other":""}
+{"id":"28789","town":"r2r-hamlet-42","sev":"MED","kind":"STATE","why":"names a 'defended pass'; DEFENCE is none throughout (no walls, force or watch); LAND lists only Mountain Pass (available)","other":""}
+{"id":"03005","town":"r2r-hamlet-51","sev":"MED","kind":"TAG","why":"offers market-day selling; tag reaches famine (F) towns and hamlets with no market on HOUSES","other":""}
+{"id":"02757","town":"r2r-hamlet-51","sev":"MED","kind":"STATE","why":"incursion last season destroyed outlying farms; STATE safety is Safe, food surplus 15%, PAST records no monster incursion","other":"00937"}
+{"id":"00937","town":"r2r-hamlet-51","sev":"MED","kind":"PAIR","why":"'a quiet hamlet' contradicts stability 'Tense — regional monster threat' and the incursion sentence","other":"02757"}
+{"id":"00344","town":"r2r-hamlet-51","sev":"LOW","kind":"TAG","why":"claims half the goods are passing through; tag covers famine, occupation and plague towns where road trade is cut or shrunk","other":""}
+{"id":"05277","town":"r2r-hamlet-54","sev":"LOW","kind":"STATE","why":"'Headman' used for Menja Asgersson, PEOPLE sex f, listed only as innkeeper @ Wayside inn; nobody on roster holds headman","other":""}
+{"id":"20860","town":"r2r-hamlet-54","sev":"LOW","kind":"STATE","why":"seat held by 'Headman' Menja Asgersson (f); roster gives her only the innkeeper title, nobody holds headman","other":""}
+{"id":"01948","town":"r2r-hamlet-54","sev":"LOW","kind":"STATE","why":"'Headman' Menja Asgersson is f and roster title is innkeeper; headman office has no roster holder","other":""}
+{"id":"13532","town":"r2r-hamlet-14","sev":"LOW","kind":"BROKEN","why":"doubled item: 'livestock for meat and draft, livestock' repeats livestock","other":""}
+{"id":"11340","town":"r2r-hamlet-25","sev":"LOW","kind":"STATE","why":"says what the hamlet built in answer to the siege 'still stands'; DEFENCE is none (no walls, force or watch)","other":""}
+{"id":"09767","town":"r2r-hamlet-41","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in prose; also 'gives the orders, Guard carries them out' sits against the open quarrel over who commands","other":"04044"}
+{"id":"21373","town":"r2r-hamlet-55","sev":"MED","kind":"TAG","why":"calls the place 'the village'; size word is hamlet (pop 73) and tag reaches hamlets; 'they deserved it' has no antecedent","other":""}
+{"id":"12831","town":"r2r-hamlet-55","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in prose","other":""}
+{"id":"19180","town":"r2r-hamlet-59","sev":"MED","kind":"LACKS","why":"the church as a power wanting approval rights; GOVERNMENT lists no church power and HOUSES has only 'Access to parish church' (none of its own)","other":""}
+{"id":"19721","town":"r2r-hamlet-59","sev":"LOW","kind":"LACKS","why":"'the halls' plural better than a hamlet needs; HOUSES has no hall of any kind, pop 59","other":""}
+{"id":"14848","town":"r2r-hamlet-6","sev":"MED","kind":"STATE","why":"'Pilgrimage Surge' hook; PAST records no pilgrimage (Religious Conflict, Iron Dispute, Siege, Migration only)","other":"14855"}
+{"id":"14855","town":"r2r-hamlet-6","sev":"MED","kind":"STATE","why":"history line 'Pilgrimage surge'; PAST records no pilgrimage event","other":"14848"}
+{"id":"14575","town":"r2r-hamlet-6","sev":"MED","kind":"STATE","why":"'Overwhelmed old residents' of a pilgrim surge; PAST has no pilgrimage and the town is not overwhelmed (safety Safe, food Secure)","other":"14848"}
+{"id":"15917","town":"r2r-hamlet-6","sev":"MED","kind":"STATE","why":"'Sceptics who doubt the miracle'; PAST records no miracle or pilgrimage event","other":"14848"}
+{"id":"00101","town":"r2r-hamlet-8","sev":"MED","kind":"STATE","why":"'Nothing has ever forced this place to change'; PAST records a Purge, a catastrophic Arcane Incident and a Siege 8 years ago","other":"03827"}
+{"id":"11926","town":"r2r-hamlet-8","sev":"MED","kind":"LACKS","why":"a 'legal class profiting from ambiguity'; hamlet of 57 with no court, advocate or legal house on HOUSES","other":""}
+{"id":"02524","town":"r2r-hamlet-8","sev":"MED","kind":"LACKS","why":"forged document introduced 'as evidence' presumes a court; HOUSES has none and QUARRELS/PAST record no land dispute","other":""}
+{"id":"17484","town":"r2r-hamlet-8","sev":"LOW","kind":"STATE","why":"a claim 'suddenly being pressed' on disputed land; QUARRELS none and PAST records no land dispute","other":""}
+{"id":"03827","town":"r2r-hamlet-8","sev":"LOW","kind":"STATE","why":"'present quarrels' of the hamlet; QUARRELS is none and no relations between powers (one power only)","other":""}
+{"id":"11341","town":"r2r-hamlet-8","sev":"LOW","kind":"STATE","why":"says what was built in answer to the siege 'still stands'; DEFENCE is none (no walls, force, watch)","other":""}
+{"id":"27480","town":"r2r-hamlet-8","sev":"LOW","kind":"STATE","why":"watch fires 'laid ready'; DEFENCE watch none, and the Siege was only 8 years ago","other":""}
+{"id":"15248","town":"r2r-hamlet-11","sev":"MED","kind":"LACKS","why":"'public ovens' not on HOUSES (no bakery or oven); tag reaches siege and occupation towns where food distribution is not civic as usual","other":""}
+{"id":"00387","town":"r2r-hamlet-19","sev":"LOW","kind":"PAIR","why":"'closely tied' contradicts the broken-apart history: 'do not forgive', 'neither has forgotten'","other":"21688"}
+{"id":"20922","town":"r2r-hamlet-19","sev":"LOW","kind":"BROKEN","why":"house label 'Fence (word of mouth)' with its parenthetical used as a name in prose; Fence is not a power on GOVERNMENT","other":""}
+{"id":"07178","town":"r2r-hamlet-19","sev":"LOW","kind":"BROKEN","why":"house label 'Fence (word of mouth)' with its parenthetical used as a subject; Fence is not a power on GOVERNMENT","other":""}
+{"id":"02314","town":"r2r-hamlet-2","sev":"MED","kind":"STATE","why":"'a bloodline touched by the surge'; PAST records only a Succession Crisis, no magical surge or wild-magic event","other":""}
+{"id":"24263","town":"r2r-hamlet-18","sev":"MED","kind":"STATE","why":"salt works 'runs well'; LAND gaps say the salt works exists but lacks access to desert_salt","other":""}
+{"id":"19911","town":"r2r-hamlet-47","sev":"LOW","kind":"STATE","why":"states a standing price dispute between farming household and traders; QUARRELS is none and HOUSES lists no large farming household","other":""}
+{"id":"02525","town":"r2r-hamlet-21","sev":"MED","kind":"LACKS","why":"forged document introduced 'as evidence' presumes a court or tribunal; HOUSES has none and PAST/QUARRELS record no land dispute","other":""}
+{"id":"17485","town":"r2r-hamlet-21","sev":"LOW","kind":"STATE","why":"a claim on disputed land 'suddenly being pressed'; QUARRELS none and PAST records no land dispute","other":""}
+{"id":"28006","town":"r2r-hamlet-48","sev":"MED","kind":"LACKS","why":"'Wool→cloth→dyed fabric' presumes cloth and dye work; HOUSES has no weaver or dyer and LAND gap says wool cannot make final goods","other":""}
+{"id":"28222","town":"r2r-hamlet-48","sev":"MED","kind":"LACKS","why":"'cloth, dyed fabric' as output; HOUSES has no weaver or dyer; LAND gap: wool limited to intermediate products","other":""}
+{"id":"24578","town":"r2r-hamlet-26","sev":"LOW","kind":"STATE","why":"wants to grow work at the charcoal kilns; LAND gap says the charcoal burner lacks access to mountain_timber (no input)","other":""}
+{"id":"12836","town":"r2r-hamlet-56","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in prose","other":""}
+{"id":"21461","town":"r2r-village-43","sev":"LOW","kind":"STATE","why":"warm smell of an oven; HOUSES has no bakery or oven, and under siege with food Deficit (gap 71%) it presents baking as ordinary","other":""}
+{"id":"02776","town":"r2r-village-43","sev":"MED","kind":"TAG","why":"a newcomer 'soon hears' of the place; under siege (CRISIS) nothing and nobody arrives by road, trade access isolated","other":""}
+{"id":"16083","town":"r2r-village-43","sev":"MED","kind":"PAIR","why":"potter digging clay from another's land; LAND gap says Potter lacks access to clay and 'No clay reaches the potter'","other":"13747"}
+{"id":"27765","town":"r2r-village-21","sev":"HIGH","kind":"PAIR","why":"'nothing it lives by would stop without' magic; FOOD says 29% of food is made by magic (deficit 43%), and 14209 says the village would go shorter without it","other":"14209"}
+{"id":"20682","town":"r2r-village-21","sev":"LOW","kind":"LACKS","why":"'religious houses' plural as biggest buyers and employers; HOUSES has one Parish church and one priest","other":""}
+{"id":"27972","town":"r2r-village-55","sev":"LOW","kind":"LACKS","why":"'Megaikon's streets' in a village of 102 with no streets or districts on HOUSES (Dwellings, water sources only)","other":""}
+{"id":"27710","town":"r2s-under_siege-village-1","sev":"LOW","kind":"LACKS","why":"'the religious houses' plural as a large part of the village's business; HOUSES has one Parish church and one priest","other":""}
+{"id":"27992","town":"r2s-under_siege-village-2","sev":"LOW","kind":"STATE","why":"'Women brew and sell ale'; PEOPLE gives the Ale house keeper Kallinikos Botaneiates as m","other":""}
+{"id":"22476","town":"r2s-under_siege-village-2","sev":"MED","kind":"TAG","why":"visitors are told to stay polite; under siege (isolated, roads closed, nothing comes in) no visitors arrive","other":"14364"}
+{"id":"11143","town":"r2s-under_siege-village-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in prose","other":""}
+{"id":"27993","town":"r2s-under_siege-village-3","sev":"LOW","kind":"STATE","why":"'Women brew the ale'; PEOPLE gives the Ale house keeper Xipe Ku as m","other":""}
+{"id":"06717","town":"r2s-under_siege-village-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in prose","other":""}
+{"id":"22457","town":"r2s-under_siege-village-3","sev":"MED","kind":"TAG","why":"visitors are told to stay polite; under siege nobody arrives (roads closed); also slash label 'Military/Guard' used as a name","other":"14265"}
+{"id":"27885","town":"r2s-under_siege-village-3","sev":"LOW","kind":"LACKS","why":"'Tenohuacan's streets' in a village of 123 with no streets or quarters on HOUSES","other":""}
+{"id":"01575","town":"r2s-under_siege-village-3","sev":"LOW","kind":"STATE","why":"'every stretch of it is watched'; DEFENCE watch is none (only a palisade and citizen militia)","other":""}
+{"id":"02526","town":"r2s-under_siege-village-3","sev":"MED","kind":"STATE","why":"'the present occupation'; CRISIS is Under Siege and PAST records no occupation here","other":""}
+{"id":"02719","town":"r2s-under_siege-village-0","sev":"MED","kind":"STATE","why":"'draws and sells his work'; PEOPLE gives the cartographer Atotoztli Itza as f","other":""}
+{"id":"11635","town":"r2s-under_siege-village-0","sev":"MED","kind":"STATE","why":"dairy 'keeps cattle or goats' as a working house; LAND gap says Dairy farmer lacks access to livestock","other":""}
+{"id":"16690","town":"r2s-under_siege-village-0","sev":"LOW","kind":"STATE","why":"dairy 'sells the surplus to neighbours'; no livestock access (LAND gap) and under siege nothing goes out","other":""}
+{"id":"21398","town":"r2s-under_siege-village-0","sev":"MED","kind":"STATE","why":"inn for 'traders, pilgrims, and wayfarers who pass'; under siege roads are shut and nobody arrives","other":""}
+{"id":"06594","town":"r2r-village-58","sev":"LOW","kind":"LACKS","why":"'the streets stay badly guarded' in a village of 78 with no streets or districts on HOUSES","other":""}
+{"id":"14260","town":"r2r-village-58","sev":"MED","kind":"STATE","why":"'Nothing has come for Umamala'; PAST records a Purge, a Trade Collapse and an Occupation 56 years ago","other":""}
+{"id":"06590","town":"r2s-famine-village-0","sev":"LOW","kind":"LACKS","why":"'the streets stay badly guarded' in a village of 114 with no streets or districts on HOUSES","other":""}
+{"id":"06593","town":"r2s-famine-village-1","sev":"LOW","kind":"LACKS","why":"'the streets stay badly guarded' in a village of 90 with no streets or districts on HOUSES","other":""}
+{"id":"12898","town":"r2s-famine-village-1","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in prose","other":""}
+{"id":"09775","town":"r2s-famine-village-1","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in prose","other":""}
+{"id":"14303","town":"r2s-famine-village-1","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in prose","other":""}
+{"id":"16226","town":"r2r-village-24","sev":"LOW","kind":"STATE","why":"famine 'caused by export decisions'; TRADE exports are only sacred wood and ritual components, no food export","other":"09741"}
+{"id":"09741","town":"r2r-village-24","sev":"LOW","kind":"STATE","why":"famine 'caused by export decisions'; TRADE exports are only sacred wood and ritual components, no food export","other":"16226"}
+{"id":"02702","town":"r2s-famine-village-3","sev":"MED","kind":"STATE","why":"inn caters to 'whoever the road brings: merchants, pilgrims, travellers'; trade access is isolated and the town is in famine","other":""}
+{"id":"14299","town":"r2s-famine-village-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in prose","other":""}
+{"id":"17386","town":"r2s-occupied-village-0","sev":"LOW","kind":"LACKS","why":"offerings left 'at the shrine'; HOUSES has no shrine, only Parish church and Graveyard","other":""}
+{"id":"01447","town":"r2s-occupied-village-0","sev":"LOW","kind":"STATE","why":"'the arms in the village are theirs'; DEFENCE shows garrison none, hired none, no occupier force listed","other":""}
+{"id":"06941","town":"r2s-occupied-village-3","sev":"MED","kind":"LACKS","why":"'every other doorway seems to sell a remedy'; HOUSES has one Apothecary, and it lacks hot_springs_mineral input","other":""}
+{"id":"06591","town":"r2s-plague_onset-village-2","sev":"LOW","kind":"LACKS","why":"'the streets stay badly guarded' in a village of 141 with no streets or districts on HOUSES","other":""}
+{"id":"21401","town":"r2s-plague_onset-village-2","sev":"LOW","kind":"STATE","why":"'the village's food is a trade item, and the trade is not optional'; TRADE lists no exports or imports and trade access is isolated","other":""}
+{"id":"10797","town":"r2s-plague_onset-village-2","sev":"LOW","kind":"TAG","why":"potter 'lets visitors try'; tag covers plague towns where people do not gather or travel as usual, and this potter lacks clay (LAND gap)","other":""}
+{"id":"DONE","lines":2899,"blocks":54,"flags":78}
