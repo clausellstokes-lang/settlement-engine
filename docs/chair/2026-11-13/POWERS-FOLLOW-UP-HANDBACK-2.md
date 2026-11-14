@@ -1341,3 +1341,70 @@ Pushes by /home/user/runs/push.sh (POWERS-11's, pointed at p13).
     red 7 of 9, naming p8-city-3 and r2r-metropolis-213; restored, 9 of 9 green.
   - Holders by content (probe holders.sh: the 48 lanes with a tip on or after 2026-11-13, a copy differing from the line's AND from
     this lane's): none for either file.
+- **(2) THE PAGE CENSUS'S 720 DOOR at the tip: DONE, d7253090a.** `node scripts/census/page-census.mjs --workers=2` at
+  77d7bcace (3909655c3's code): **EXIT 0**, "the banked corpus reads at or under the register"; no row rose. One fall: P4
+  ("three powers stand almost level" beside a leader far ahead) 96 -> 0, lowered by the door (`--from=<the run> --shrink`,
+  nothing re-born); the grid's one P4 row (r2s-infiltrated-town-0) lowered by `--grid --shrink` in a clean worktree at the
+  same code. The fall's cause: the stage since point 48's re-base (the claim-rung cures b889007c8, a5402c006), PLAUSIBLE
+  by kind, not measured commit by commit. The register is shared by twelve lanes: at the join it is re-taken by its door.
+- **(3a) #272, THE RAW MODIFIER: DONE, 3ed9c47fa.**
+  - Writer: rulingStructure.js (the stored `factions[].modifier`, from the priority sliders). Printer: PowerTab.jsx's
+    power-line chip. Readers of the stored key, measured: only the pages (PowerTab.jsx, pdf/sections/PowerStructure.jsx,
+    SummaryTab.jsx); no kernel, no generator. So the cure is at DISPLAY.
+  - COUNT on the 720 (probes modcount.mjs, chainpower.mjs; the chip's own condition): 395 ruling powers store a key and
+    the chip printed it raw on all 395. After: raw 0; plain words on 206; nothing on 189. By key, stored / not borne out:
+    mage-advised 41/41, merchant-led 43/34, compromised 37/32, defended 34/22, arcane-advised 39/13, corruption-riddled
+    38/12, church-guided 28/11, military-dominated 46/9, theocratic-aligned 56/8, commerce-driven 33/7.
+  - The bar's ten towns, rendered before and after (REVIEW-BAR-0's render.bar0.jsx): raw keys on the Power tab 8 -> 0.
+  - THE SECOND FINDING, NAMED WITH ITS COUNT, NOT CURED: 189 stored keys the record does not bear out (not small; the
+    brief's rule). The stored field is unchanged.
+  - The leaf: src/domain/display/governingModifierWords.js :: governingModifierWordsOf (each family through its fact's
+    one reader: arcane, factsOf magic + magicReliance.js :: practisingInstitutions; force, factsOf.guardPresence; faith,
+    factsOf.sacredHouse and no `subordinate` tie from the seat to a religious power; commerce, factsOf.market or .guild;
+    crime, factsOf.crime). A key of no family prints nothing.
+  - Guard: powerTabSupport.test.jsx STOP-1, re-keyed by identity (its title unchanged). Towns: bar0-village-famine-rand-1
+    (mage-advised stored, nothing prints), twin r2r-town-1 ("mage counsel"). Plants that red it: the leaf printing the
+    words unborne (`return entry.words`); the leaf printing the key (`return key`).
+- **(3b) #291 and its twin #292: DONE, 8dad2e567.** Every line of deriveBaselineConflict that names a market, a court, a
+  guild, a temple or a force was read on the 720 (probe ladder.mjs). False somewhere, now gated on the roster: the levies
+  line (2 towns, no market), "Several merchants have been found murdered ... the guard" (2, no market), the noble-merchant
+  pair (3, no market), "authority over civilian courts" (5, no court). True wherever they print: the tax audit, the new
+  market (0 prints), the commander-prelate, the guild's private soldiers, the hedge wizard, the church court, the guild
+  masters, the crown's levies, the church's veto, the church and market day, the rival guilds, the incursion.
+  - DECLARED MOVE (fdiff.mjs, 720): 12 births, powerStructure.recentConflict 12 and its copy pressureSentence 3; nothing
+    else. No line new or reworded.
+  - Guard: tests/generators/power/conflictLadderReadsRoster.test.js (guard towns bar0-village-calm-rand-1, r2r-village-4,
+    r2r-hamlet-56, r2r-hamlet-14, r2r-village-8; twins r2r-town-4, r2r-town-0, r2r-town-10, r2r-town-16). Plant that reds
+    it: the file's tip form (all five guard towns red).
+  - The lighting census re-taken by its ritual for the new file: d0f0f6027 (files 3273 -> 3274, titles 29478 -> 29480).
+- AFTER BOTH CURES: eslint 0 on the touched files; typecheck:domain:strict 1113/1113; typecheck:ratchet 167/167;
+  presumed-things --check fresh 10 / stale 0 (the tip's own, P6.4); fact-layers door the tip's own 2 named rises;
+  observed-shape readers exact; the twelve-birth grid: no rise. The 20 test files that read the governance labels:
+  468 passed, 1 red, espionageDormancyFence's driven golden, red at the tip too (P6.3's carried list, for the merge
+  seat's re-record).
+
+## P7.2 EVERY NEW OR CHANGED LINE, with the towns it was read in (the owner's veto list)
+- NEW WORDS (the chip, PowerTab.jsx via governingModifierWords.js): "mage counsel", "armed sway", "armed backing",
+  "church sway", "church guidance", "merchant sway", "criminal sway". Read on the page (CENSUS-2's render at 8dad2e567):
+  - armed backing: r2r-thorp-6, r2s-famine-village-1, r2r-village-50 (Headman's Authority);
+  - criminal sway: r2r-thorp-8, r2s-occupied-town-3 (Corrupt Council), r2r-metropolis-5 (Grand Guild Consortium);
+  - church guidance: r2r-thorp-34, r2s-under_siege-thorp-2, r2s-succession_void-town-2 (Church Council);
+  - church sway: r2r-hamlet-2, r2s-under_siege-city-1 (Ecclesiastical Council), r2r-metropolis-3;
+  - merchant sway: r2r-hamlet-11, r2s-famine-metropolis-1 (Ducal Governorship, minor), r2s-occupied-village-2;
+  - armed sway: r2r-hamlet-50, r2s-under_siege-metropolis-2, r2s-occupied-city-1;
+  - mage counsel: r2r-town-1 (Arcane Council), r2s-famine-town-0, r2s-occupied-metropolis-0.
+  - For the veto: a chip can repeat its body's own name ("Corrupt Council ... criminal sway", "Church Council ... church
+    guidance"): true, redundant.
+- RE-ROUTED, NOT REWORDED (#291): the ladder's existing lines now print in 12 towns that printed a false one: r2r-hamlet-14,
+  r2r-village-4, r2r-village-54, r2r-hamlet-23 (grazing rights); r2r-hamlet-18, r2r-village-8, r2r-village-46,
+  r2s-infiltrated-hamlet-0, r2r-hamlet-3 (the strongest armed household); r2r-hamlet-56, r2r-hamlet-17 (the communal
+  stores); r2r-hamlet-50 (the household that sells the most beyond the settlement). Each read on its page. The baseline
+  prints only calm or infiltrated, so no siege, famine or occupation cell carries it.
+
+## P7.3 FOR THE JOIN (this seat's)
+- pdf/sections/PowerStructure.jsx:38 prints the stored modifier key raw (the PDF twin of #272). The one-line change: read
+  `governingModifierWordsOf(settlement)`. Its pin, tests/pdf/restoredSubsections.test.js STOP-1 (expects 'military-dominated'),
+  is in a file lane r2-code-b holds, so the pair is left for the join.
+- SummaryTab.jsx:82 (the faction legend's chips: `f.modifiers` + `f.modifier`, the key uppercased): held by the upkeep
+  lane. The one-line change: the ruling power's chip through `governingModifierWordsOf`.
+- The page-census register and the lighting census are shared files: re-taken by their doors at the join.
