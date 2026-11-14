@@ -3544,6 +3544,56 @@ SEATS2['R2-CODE-A-11'] = dict(
 )
 
 
+SEATS2['R3-CODE-C-9'] = dict(
+    title="R3-CODE-C-9 · round three's code lane: the bar's rows left (a failed fishery's foodways line, two faith lines, the beer claim)",
+    branch='lane/r3-code-c-2026-11-13', tip='bd21a34c', statement=False,
+    intro=("You are R3-CODE-C-9, the ninth seat on round three's code lane of the settlement-engine integration program (lane/r3-code-c-2026-11-13). The "
+           "lane cures false lines in domain, generator and display files. The eighth seat cured the three MEDIUM findings an independent reader "
+           "made on the lane's stage, made a guard red on its fault, read the bar's seven rows in their towns (three were answered by its cures) and "
+           "handed back at its count with what is left written out. Yours is SHORT: the rows left. The lane goes on curing and lands later as a "
+           "point of its own on the joined line: NO whole suite, NO new statement."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. On your lane, docs/chair/2026-11-13/R3-CODE-C-HANDBACK.md: ONLY \"THE EIGHTH SEAT\" (from that heading to the end, about one hundred and "
+          "thirty lines; by script): the rulings it worked to; its cures; the bar's rows as read in their towns; FOR THE JOIN; WHAT IS LEFT, line by "
+          "line: THAT IS YOUR LIST; how the instruments are re-made.\n"
+          "3. THE BAR'S ROWS FOR THIS LANE (`git fetch origin lane/chair-2026-11-08`; `git show "
+          "origin/lane/chair-2026-11-08:docs/chair/2026-11-14/bar-0-rows/BAR-0-ROWS-r3c.json`): the rows n80, n240, n299 and n15, each with its "
+          "town, its sentence and the fact against it; the towns are re-born by the probes on origin/lane/review-bar-0-2026-11-14 "
+          "(docs/chair/2026-11-14/probes/REVIEW-BAR-0/); the lane's reader's probes on origin/lane/review-r3-code-c-2026-11-14 "
+          "(docs/chair/2026-11-14/probes/REVIEW-R3-CODE-C/) give you 1,722 births."),
+    work=("THE WORK, in this order, each cause its own commit, measured first on the reader's births, red first (a collected arm, never a bare seed "
+          "loop; each arm shown able to red by a plant made in a tree no suite is running in), pushed as made:\n"
+          "1. n80: the foodways line that names a food source the record says FAILED (\"fish from the local waters\" under a famine whose fishery "
+          "failed). RULED: A LINE THAT NAMES WHERE THE FOOD COMES FROM READS THE FOOD RECORD: a source that failed or is cut off is not named as "
+          "feeding the town; the line names what still feeds it, or says the source failed in words its siblings already use, or is not written. "
+          "Count the class on the births (every failed or cut-off source named as feeding), not only the one town.\n"
+          "2. n240 and n299: the faith's subordinate and \"props up\" lines (factionDynamics.js) against the town's own conflicts and the faith's "
+          "civic voice: each line reads the relationship's own standing, the fact the Power tab prints beside it (the eighth seat's cure of the "
+          "noble line, 77f0e6792, is the form): not drawn where the record contradicts it.\n"
+          "3. THE BEER CLAIM the eighth seat named and did not cure: \"beer\" kept in 71 towns' grain claims where no brewery stands. THE SAME "
+          "RULING AS ITS L05: a good is claimed as made here only where every house its chain needs stands on the roster (the grain chain names "
+          "no brewer: so the claim reads the roster for a brewer, or the good is not listed). Count before and after; a declared move of the "
+          "resource analysis's exports.\n"
+          "4. n15: READ IT on the Power tab in its town at your tip (governanceAccount.js composes it at display: this lane's file): false -> "
+          "cured at display, its own commit; true -> said so with what the record holds.\n"
+          "5. ONE MESSAGE TO THE CHAIR (the tip; each row's count before and after). Then, if your count allows, the eighth seat's other named "
+          "rows in its order.\n"
+          "EVERY LINE A CURE NOW PRINTS IN A NEW TOWN, OR NEWLY LEAVES SILENT, IS READ WHERE IT PRINTS: three towns of its cells, a famine, a "
+          "siege or an occupation among them, the smallest and the largest size it reaches; the towns and what printed in the commit body. A cure "
+          "in generator code is a DECLARED MOVE: its field diff on the census's 720, confined to the family you name.\n"
+          "AFTER EVERY CURE: the presumed-things walker (it reads every literal under src/); the strict-domain gate, the type ratchet and eslint "
+          "on the touched files; the twelve-birth grid (`node scripts/census/page-census.mjs --grid`: a rise is a stop); the test files that name "
+          "the files you touched.\n"
+          "THE HAND-BACK: a new heading \"THE NINTH SEAT\" at the end of the lane's hand-back file: the rulings above copied; each row: its cause, "
+          "its cure and commit, its counts, its guard and plant, the towns read; EVERY NEW OR CHANGED LINE with the towns it was read in (the "
+          "owner's veto list, and the next reader's); the declared moves by family; FOR THE JOIN; what is left; what a fresh reader needs: the "
+          "range 70d92ed06 to your tip (the eighth seat's and yours) and the first reader's unfinished steps (its file lists them)."),
+    merges='',
+    when="for a stop that blocks everything you have left, at step 5 (the tip; each row's count before and after), and with your hand-back",
+    turns='',
+)
+
+
 def build2(seat):
     s = _r3c6() if seat == 'R3-CODE-C-6' else SEATS2[seat]
     head = (
