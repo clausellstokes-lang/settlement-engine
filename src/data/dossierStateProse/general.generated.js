@@ -11384,7 +11384,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no crisis: under_siege"
           ],
-          "text": "Some of the work at {settlement} depends on goods brought in from outside, because nothing here makes them.",
+          "text": "Some of the work at {settlement} needs goods that nothing here makes.",
           "slots": [
             "settlement"
           ],
@@ -11395,7 +11395,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no crisis: under_siege"
           ],
-          "text": "No trade at {settlement} makes what some of its work needs, so that much is always bought in.",
+          "text": "No trade at {settlement} makes what some of its work needs, so that much must come from elsewhere or be done without.",
           "slots": [
             "settlement"
           ],
@@ -11406,7 +11406,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "crisis: under_siege"
           ],
-          "text": "Some of the work at {settlement} depended on goods brought in from outside, and the siege has stopped them coming.",
+          "text": "Some of the work at {settlement} needs goods that nothing here makes, and since the siege nothing comes in from outside.",
           "slots": [
             "settlement"
           ],

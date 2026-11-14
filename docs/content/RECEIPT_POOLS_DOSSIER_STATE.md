@@ -7301,9 +7301,9 @@ no compass word, no real-world place, no named analogy.*
 
 **`STALLED`** {colour}
 1. `[unfolding]` {institution} at {settlement} has run out of {resource}; it is working through its last stores.
-2. `[ledger · no crisis: under_siege]` Some of the work at {settlement} depends on goods brought in from outside, because nothing here makes them.
-3. `[street · no crisis: under_siege]` No trade at {settlement} makes what some of its work needs, so that much is always bought in.
-4. `[unfolding · crisis: under_siege]` Some of the work at {settlement} depended on goods brought in from outside, and the siege has stopped them coming.
+2. `[ledger · no crisis: under_siege]` Some of the work at {settlement} needs goods that nothing here makes.
+3. `[street · no crisis: under_siege]` No trade at {settlement} makes what some of its work needs, so that much must come from elsewhere or be done without.
+4. `[unfolding · crisis: under_siege]` Some of the work at {settlement} needs goods that nothing here makes, and since the siege nothing comes in from outside.
 
 **`HOME-FED`** {colour}
 1. `[ledger]` {institution} stands in {settlement} because the {resource} is right here.
