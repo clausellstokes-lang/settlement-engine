@@ -1462,8 +1462,8 @@ block reads the canonical status and supplies clauses any surface can attach.
 3. `[street]` People are leaving the {chain}'s trades. That is usually the last thing that happens, not the first.
 
 **UPSTREAM WEAK: a chain the town's work draws on is failing** *(`activeChains[].upstreamWeak`, the upstream chain named; R-W9: authored as a plain line in this block, the cause it names declared, mounted at `economics.upstreamSupply`)*
-1. `[ledger · colour]` Some of {settlement}'s {chain} depends on supplies from elsewhere, and those supplies are failing: what should come down the line arrives short.
-2. `[street · colour]` Work is slowing at {settlement} for a fault that is not all its own: its {chain} is short of what it needs from upstream.
+1. `[ledger · colour]` Some of {settlement}'s work draws on its {chain}, which is in trouble itself, so the work that depends on it is at risk too.
+2. `[street · colour]` Trouble in {settlement}'s {chain} puts what depends on it at risk.
 
 #### The cause-clause library — each clause REQUIRES its field
 
