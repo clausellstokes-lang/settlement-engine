@@ -1720,7 +1720,7 @@ A composed page draws one of each grain, never two.
 **EXPLOITATION: `fullyExploited`**
 1. `[ledger · no crisis: under_siege]` The {resource} in {settlement}'s country is worked all the way to the finished {good}.
 2. `[visitor · gate]` Every stage of the {resource} trade at {settlement} is done here, from the ground to the gate.
-3. `[street · colour]` The town has taken this trade as far as it goes, from the ground to the finished thing.
+3. `[street · no crisis: under_siege]` One of {settlement}'s trades is carried through here from start to finish, from what the country gives to the finished thing.
 4. `[street · colour]` {settlement} takes everything it can from the {resource} its country gives.
 5. `[ledger · crisis: under_siege]` With the siege on, none of {settlement}'s {resource} can go out to buyers; whatever the town works, the town must use.
 

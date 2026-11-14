@@ -5605,10 +5605,12 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         {
           "angle": "street",
           "marks": [
-            "colour"
+            "no crisis: under_siege"
           ],
-          "text": "The town has taken this trade as far as it goes, from the ground to the finished thing.",
-          "slots": [],
+          "text": "One of {settlement}'s trades is carried through here from start to finish, from what the country gives to the finished thing.",
+          "slots": [
+            "settlement"
+          ],
           "vid": 3
         },
         {

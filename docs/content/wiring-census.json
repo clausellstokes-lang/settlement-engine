@@ -18373,10 +18373,10 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 2,
+        "colour": 1,
         "crisis: under_siege": 1,
         "gate": 1,
-        "no crisis: under_siege": 1
+        "no crisis: under_siege": 2
       },
       "undeclared": 0,
       "crisisScoped": false
