@@ -948,7 +948,7 @@ seeds-app + seeds-plagued + REVIEW-R3-CODE-C seeds-extra.txt), and the bar's fou
 5. (The chair's message, 10:58 UTC) H2-22: tonight.official "Famine. {S} has lost a second harvest."
    (src/domain/crisis/crisisSummaryVantage.js) takes the Crisis tab's twin's condition and words ("{S} has gone short
    of food for a second season.") where the food record holds no grain; count -> 0; read in three towns, a fishing
-   hamlet among them. NOT DONE (the count; below).
+   hamlet among them. STOPPED: FOR THE JOIN 7 (the condition cannot be read in this lane's file).
 
 ### Rows
 1. **n80, 52d440373.** Cause: the line is composed at generation from every source, the failed one too
@@ -1028,12 +1028,21 @@ resourceAnalysis.exports 19 / 11 (9fb62639d); 1db43b7eb display only. No draw ad
 5. NAMED, not cured: "herding" is not in foodways.js :: SOURCE_WORDS.livestock, so a culture sentence claiming herding
    stands where no herd is a source: 124 lines on the 1,722 (a composer change: foodRecord.foodwaysLine would move).
 6. The lighting census re-take for the guard file tests/domain/r3c9ReaderLinesTrue.test.js (not taken by this seat).
+7. **H2-22 (the chair's 10:58 ruling), STOPPED.** The Crisis tab's twin is r2-code-b's (src/generators/stressNarrative.js
+   :: RENDERERS.famine, `atomHolds('grain', facts) === false`; on join-2026-11-14, not on this lane).
+   crisisSummaryForSurface(entry, name, surface) (this lane's crisisSummaryVantage.js) is handed only the stress entry
+   and the name, and its one Tonight caller, src/domain/summary/tonightSheet.js:341, is held by r2-code-b and
+   r2-code-b-side (unjoined). So the condition cannot be read in this lane's file alone. Count on the 1,722 at
+   1db43b7eb (h222.mjs): the Tonight "lost a second harvest" line 58, with no grain or mill source 54 (r2r-hamlet-16,
+   a fishing hamlet; r2r-thorp-17, game; r2r-city-44, fish). The two-file change, for r2-code-b or the join: (a)
+   crisisSummaryVantage.js: crisisSummaryForSurface takes an optional `facts` and, for famine's tonight.official,
+   where `atomHolds('grain', facts) === false`, prints "{name} has gone short of food for a second season. Its leaders
+   have begun rationing, while the families who can afford it hoard what they have."; (b) tonightSheet.js:341 passes
+   the record's facts. Named beside it, not ruled: famine's overview.official ("The harvest in {name} has failed, ...")
+   presumes grain the same way.
 
 ### WHAT IS LEFT, line by line
-1. H2-22 (the chair's 10:58 ruling, above): tonight.official in src/domain/crisis/crisisSummaryVantage.js (this
-   lane's file) takes the Crisis tab twin's condition and words where the food record holds no grain; 22 towns of
-   1,536 on the r2-code-b reader's births; count on the 1,722, red first, read in three towns, a fishing hamlet among
-   them; one line to the chair when pushed.
+1. H2-22: FOR THE JOIN 7 (stopped; the chair to place it with r2-code-b or the join seat).
 2. The eighth seat's other named rows, in its order (its FOR THE JOIN and WHAT IS LEFT), where this lane holds the file.
 3. FOR THE JOIN 1-6 above.
 **What a fresh reader needs:** the range 70d92ed06..<this tip> (the eighth seat's and this seat's); source changed by
