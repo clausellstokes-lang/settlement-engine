@@ -582,7 +582,7 @@ from the base to the tip). Helpers and outputs in `probes/R3-TABS/reader/`.
 | the first act (where the second seat stopped; no open question) | DONE | this section |
 | item 0 the naval line written up, its measure, its guard, the governing suites, the births | DONE | 6ed610479 (the lane's mount-walker red cured), e43bacae8 |
 | item 1 the census counter, the births, the reader's classes, the draft shift record | DONE | this commit |
-| item 2 the merge of point 49, the page census, the whole suite in six shards, the lighting census, the edge bundles, THE FINAL STATEMENT | WAITS ON POINT 49 (the chair's word names the tip) | — |
+| item 2 the merge of point 49, the page census, the whole suite in six shards, the lighting census, the edge bundles, THE FINAL STATEMENT | IN HAND (see Step 2 below) | — |
 
 ## How this seat's instruments are re-made (for a successor)
 - Trees: `git archive <sha> | tar -x -C <dir>` outside the repository, `ln -s <a worktree after npm ci>/node_modules <dir>/node_modules`
@@ -594,3 +594,89 @@ from the base to the tip). Helpers and outputs in `probes/R3-TABS/reader/`.
   shards, scan4, classes3; the 1,440 seeds are REVIEW-UPKEEP-2 seeds.all.txt + fresh.seeds + REVIEW-UPKEEP-3 own.seeds); paths inside are
   this container's (/home/user/wt/<tree>, /home/user/inst, /home/user/runs): edit them to yours. `probes/R3-TABS/naval.mjs <pre> <tip> <out> <births.gz>…`;
   `births.mjs` (TREE, OUT, SET, SEEDS). Census ~17 min a tree, render4 ~12 min a tree, on 4 cores.
+
+## The chair's word for step 2, and its hazards (copied: the chair's messages are not on the branch)
+- 03:08 UTC: "POINT 49 IS ON THE LINE: lane/integration-2026-11-07 = 976db5b19 … merge the line's tip as you read it back
+  (a plain merge; say which commit and what conflicted; a register that conflicts is taken from one side and re-derived
+  through its own door)." Then the merge's own registers and the whole suite's six shards; then the page census on the
+  lane's lines by section 2m's doors, the classing, the lane's ONE final statement. "Your draft record's note that the
+  prose manifest MOVED on this lane stands: it is the merge seat's to re-record."
+- 03:18 UTC: section 2m of the merge book is pushed (lane/merge-15-point-49-wip-2026-11-14 d893d9289,
+  docs/INTEGRATION_STYLE_2_2026-11-09.md, "## 2m. FOR EVERY LANE THAT MERGES THE LINE AFTER POINT 49"): run every
+  check it lists right after the merge; a lane NEVER banks a row by hand, raises a row a door refuses, widens an
+  exemption, skips a test, loosens a pin or routes round a door's refusal.
+- HAZARD (03:15 UTC): a shallow clone can give a WRONG merge base, not a missing one. Deepen
+  (`git fetch --depth=2147483647 origin lane/integration-2026-11-07 lane/r3-tabs-2026-11-13`), then
+  `git rev-parse --is-shallow-repository` false and the base of 7239ac754 with the line 9e57f5023.
+- HAZARD (04:37 UTC): a push with NOTHING TO SEND falls into the pre-push hook's whole suite, whose
+  implementationPackets/implementationSession tests run git against the real repository from a linked worktree (the
+  branch moved to a fixture commit, core.bare=true, a fixture user in the shared config). Before every push:
+  `test -n "$(git rev-list origin/<branch>..<local>)"`, else no push; never chain a push after a step that can fail.
+
+## Step 2 — after point 49 (EXECUTED)
+- **The merge:** 841945a26, a plain merge of the line's tip **976db5b19** (read back from origin at 03:08 UTC, 100
+  commits past 9e57f5023) into the lane at 7239ac754. Two conflicts, both registers, NO CODE:
+  `docs/content/wiring-census.json` (one figure) and `tests/lint/.lighting-census-baseline.json` (the tuple), each
+  taken whole from the line's side and re-derived through its door: the wiring census by `node
+  scripts/wiring-census.mjs` (cd63653bf; the composer's stamp and the lane's L1/L2 figures return; `--check` and the
+  prose leaves' `--check` exit 0), the lighting census by LIGHTING_CENSUS_REFREEZE on the clean tip (2903e2143; files
+  3245 -> 3257, the lane's 12 test files). lint-staged on the merge changed nothing (every path that differs from the
+  line is a lane file equal to the lane's tip). Checked after the chair's hazard: the clone deepened to full history
+  (not shallow), the base of 7239ac754 with 976db5b19 is 9e57f5023, and `git merge-tree` with full history names the
+  same two files and nothing else.
+- **Section 2m's checks right after the merge** (each command's own exit): presumed things `--check` exit 0 (fresh 0,
+  stale 0; strips fresh 0, stale 0); fact layers 0 rises, 0 falls; writer reach exit 0; observed shapes exit 1, an
+  execution INPUT changed (the lane's `defense.generated.js`): classed and re-frozen below. The tuning inventory walker
+  is green in the suite (no dependent of a tuning table among the lane's files).
+- **The whole suite ONCE at 2903e2143, in vitest's own six shards** (`--shard=<i>/6 --maxWorkers=3`, each through
+  `scripts/gate-mutex.sh --run`, each to its own file outside the tree; refs and the local config snapshotted before and
+  after: unmoved but for this seat's own fetch): 3,257 files (= the lighting census), 39,110 passed, **15 failed in 10
+  files**, 145 skipped. Every red classed BY EXECUTION at the base aac79b808, at the line 976db5b19 and at the lane's
+  pre-merge tip 7239ac754 (archives, or detached worktrees where the test reads git), failure text compared with paths
+  and timings folded:
+
+| red at 2903e2143 | base aac79b808 | line 976db5b19 | lane 7239ac754 | class | cure |
+|---|---|---|---|---|---|
+| observedShapeReaders.walker (1: the provenance drift classifier) | — | green (check exit 0) | red (check exit 1) | THE LANE'S (eaca79fcd's readsCount lines change an execution input) | b731c85e0: `--write` on the clean tip, provenance only; identities, inventory, totals unchanged |
+| seedLoopTotality.walker (1: a bare seed loop, tensionSeverityOneWord.test.jsx line 93) | — | — | red (the lane's file) | THE LANE'S (b2682f748's test) | 3a497ef5e: the loop collects through `collectSeedFailures`; planted at 66fd07e91 it still reds 10 of 16 with true counts |
+| proseCorpusBytes (1: defense.generated.js 234545 over 234445) | green | green | red | THE LANE'S (eaca79fcd: four `"readsCount": 1,`, 100 B) | f5622ab8f: one declared row by the register's own idiom (fromRaw 234453 → 234545, gzip 31738) |
+| dossierProseManifest (3) | red, same titles | red, same titles | red | MOVED BY THE LANE (the draft shift record) | the merge seat's re-record (the chair's word) |
+| siteCoherenceRatchet (1) | red, detail identical (added forest/plains mountain-flank iron) | red, identical | red, identical | NOT THE LANE'S (one of the first seat's five, classed) | — |
+| landingFixtureFreshness (2) | red, identical | red, identical | red, identical | NOT THE LANE'S (one of the five) | — |
+| foundingWorldBones (1) | red, identical | red, identical | red, identical | NOT THE LANE'S (one of the five) | — |
+| proseFamilyContract.walker (5) | red, identical | red, identical | — | NOT THE LANE'S (red at the base, as the first seat found) | — |
+| newsHeadlineContract.walker (file: "Wizard News introductions drifted: expected 395, got 411") | red, identical | red, identical | red, identical | NOT THE LANE'S | — |
+| newsVoiceContract.walker (file: the same drift) | red, identical | red, identical | red, identical | NOT THE LANE'S | — |
+
+  The first seat's other two unclassed files: `undercitySewerDerivation` red at the base (1: the HONEST FOUNDING arm),
+  green at the line and the tip (the line's cure); `stressSummaryName` green at the base and the tip.
+  After the three cures: the walker, the seed-loop walker, the byte ratchet and every reader of their registers green
+  at b731c85e0 (the observed-shape readers' eight files, the byte register's three; the lighting census and the
+  ranged-tension test 59 of 59).
+- **The page census on this lane's lines, by section 2m's door** (at b731c85e0: `node scripts/census/page-census.mjs
+  --workers=3 --out=<outside the tree>`, the 720 of prefix r2): exit 0, "the banked corpus reads at or under the
+  register", **no row ROSE**; `--grid` exit 0, 0 falls. Two rows FELL and were lowered by `--from=<that run> --shrink`
+  in their own commit (268b26d8c): P9 148 -> 114, P13 172 -> 170. Every row's hits read for the lane's own surfaces
+  (the Defense, History and Substrate tabs, the defence desk); each is CURED or DECLARED:
+  - **P9 "a weak beasts grade over settled-country text", 114 towns: THE LANE'S DESK, DECLARED (a ruling for the
+    chair).** The Beasts & Monsters row prints a DS-DEF-2 line drawn from the `Beasts & Monsters: settled, nothing
+    organized` pool (`defenseStateProse.js :: defenseThreatProse`, the beasts lens) beside a bar of Weak or Critical
+    (r2r-hamlet-1 "Divoino": "Beasts & Monsters: Critical" over "Whoever walks out of Divoino … meets nothing that
+    would justify a watch"). The pool keys on the town's monster threat; the bar prints its READINESS for beasts.
+    Both can be true (no beasts, and nothing kept against them), so the line is a two-homes question, not a false
+    word the record contradicts. The lane lowered the row 148 -> 114 (its posture and threat cures); L2's ruling ("a
+    row's sentence is drawn within the band its bar prints") was applied by the first seat to the Invasion row only
+    (classes A1, F). RECOMMENDATION: the chair rules whether L2 reaches the Beasts row; if it does, the settled pools
+    are struck under a Weak/Critical bar (the row then silent there: the corpus wrote no true pool for that cell),
+    a declared move of about 114 towns' lines on the 720, for a later seat on this desk; not built here (no ruling).
+  - **P10 "hold the gates" with no walls, 17 towns: DECLARED, not this lane's writer.** The Defense tab's force card
+    prints the Town watch's catalogue description ("Part-time guards who walk the night and hold the gates.",
+    `src/data/institutionDescVariants.js`, `src/domain/display/institutionVocabulary.js`) beside the tab's own
+    "Unfortified. No perimeter walls." The description is the data's (held by w2-fix-data, 7 commits off the line,
+    and the defence lane, 1, read at ~01:55 UTC); the card prints it raw (FOR THE JOIN: the house-label leaf).
+  - **P7a and P7b (two founders; "no wharf" beside a port origin), 125 and 27 towns, on the History tab:** the
+    "Origin:" row, passed on by the chair (round two A's pool, #488 #594 #845; the first seat's item 4). DECLARED.
+  - **NEW1 "governance vs Defense", 11 towns:** the readiness badge's label beside the governance line
+    (`computeDefenseReadiness`, the defence lane's). DECLARED.
+  - Every other row's hits are other lanes' surfaces (food, powers, economy, magic, faith, people).
+  Its limits beside the zeros: the dossier's views only; it cannot see two lines disagreeing unless a row names them.
