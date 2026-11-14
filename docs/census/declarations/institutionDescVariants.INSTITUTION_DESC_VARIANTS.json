@@ -2613,7 +2613,7 @@
     },
     {
       "id": "town|Crafts|Mills (2-5)#0",
-      "text": "Several mills, some for grain, some for fulling cloth.",
+      "text": "Several sites grind the town's grain.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2621,7 +2621,7 @@
     },
     {
       "id": "town|Crafts|Mills (2-5)#1",
-      "text": "A handful of mills, grinding grain and fulling cloth.",
+      "text": "The town's grain is ground at a handful of sites.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -4055,7 +4055,7 @@
     },
     {
       "id": "city|Crafts|Mills (2-5)#0",
-      "text": "Mills for grain, fulling, and sawing line every usable stream, many licensed by guild or city.",
+      "text": "Wheels turn on every usable stream, many licensed by guild or city.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -4064,7 +4064,7 @@
     },
     {
       "id": "city|Crafts|Mills (2-5)#1",
-      "text": "Every workable watercourse turns a grain, fulling, or saw mill, most under a guild's or the city's licence.",
+      "text": "Every workable watercourse turns a wheel, most under a guild's or the city's licence.",
       "needs": [],
       "excludes": [],
       "crisis": [],

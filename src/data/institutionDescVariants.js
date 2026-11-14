@@ -627,8 +627,8 @@ const PAIRS = [
     "The modest end of the news trade. A paid register of who came into the city and what they reported, kept openly and taxed like any other counter.",
   ],
   [
-    "Several mills, some for grain, some for fulling cloth.",
-    "A handful of mills, grinding grain and fulling cloth.",
+    "Several sites grind the town's grain.",
+    "The town's grain is ground at a handful of sites.",
   ],
   [
     "Several smiths, each to his specialty.",
@@ -975,8 +975,8 @@ const PAIRS = [
     "A chartered house of correspondents. Reports arrive from several roads and are checked against each other before anything is sold. The written answer carries a standing rate and a grade.",
   ],
   [
-    "Mills for grain, fulling, and sawing line every usable stream, many licensed by guild or city.",
-    "Every workable watercourse turns a grain, fulling, or saw mill, most under a guild's or the city's licence.",
+    "Wheels turn on every usable stream, many licensed by guild or city.",
+    "Every workable watercourse turns a wheel, most under a guild's or the city's licence.",
   ],
   [
     "General forges, farriers, and toolsmiths in each quarter.",
