@@ -1617,7 +1617,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
       "riskLabel: Contested": [
         {
           "angle": "ledger",
-          "text": "{counterpart} now has more people behind it than {faction} at {settlement}; {faction} keeps the hall only because the office is still its own.",
+          "text": "{counterpart} could now take the hall from {faction} at {settlement}; {faction} keeps it only because the office is still its own.",
           "slots": [
             "counterpart",
             "faction",
@@ -1636,7 +1636,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "The challenger at {settlement} is now the stronger side, but the {seat} has not changed hands yet. What happens next depends on who moves first.",
+          "text": "The challenger at {settlement} could now take the hall, but the {seat} has not changed hands yet. What happens next depends on who moves first.",
           "slots": [
             "settlement",
             "seat"

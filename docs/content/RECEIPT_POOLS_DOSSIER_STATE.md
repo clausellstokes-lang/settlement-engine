@@ -2323,9 +2323,9 @@ did not die.
 3. `[unfolding]` The {seat} at {settlement} holds because no rival yet outweighs {faction}, and the weighing is done again every season.
 
 **`riskLabel: Contested`** {colour}
-1. `[ledger]` {counterpart} now has more people behind it than {faction} at {settlement}; {faction} keeps the hall only because the office is still its own.
+1. `[ledger]` {counterpart} could now take the hall from {faction} at {settlement}; {faction} keeps it only because the office is still its own.
 2. `[street]` {settlement} is no longer sure the hall belongs to {faction}, and {faction} governs as though it is not sure either.
-3. `[unfolding]` The challenger at {settlement} is now the stronger side, but the {seat} has not changed hands yet. What happens next depends on who moves first.
+3. `[unfolding]` The challenger at {settlement} could now take the hall, but the {seat} has not changed hands yet. What happens next depends on who moves first.
 4. `[visitor]` Visitors to {settlement} are quietly told to stay polite to {counterpart} as well as to {faction}, and nobody says why.
 
 **`riskLabel: Critical. The seat could fall`** {colour}
