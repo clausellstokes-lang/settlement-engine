@@ -591,7 +591,7 @@ const listOf = (r) => {
   // The score is the figure the page prints: whole points, the exact sum rounded once (COHERENCE-UPKEEP-6, the
   // chair's ruling on the fifth seat's call 1: the band is read from the score as the page shows it). The
   // rounding is its own line, so every part keeps its own measure and the tenths still sum to the score.
-  const score = Math.round(r.total);
+  const score = Math.round(Math.round(r.total * 100) / 100); // UPKEEP-MEASURE-2 X9: read at hundredths first
   if (score !== r.total) rows.push({ exact: score - r.total, line: lineOf('rounding', 'LIMIT') });
   const target = score * 10;
   const shares = apportionTenths(rows.map((x) => x.exact), target);
@@ -635,7 +635,9 @@ export function generateDefenseProfile(settlement, upkeep = keepOf(undefined)) {
   /** @type {any} */
   const scores = {
     // Each score in whole points, the form the page has always shown (the owner, record 328: V3 changes values, not forms).
-    ...Object.fromEntries(SCORE_KEYS.map((d) => [SCORE_NAMES[d], Math.round(r.full[d] ?? 0)])),
+    // UPKEEP-MEASURE-2 X9: read at hundredths before the whole point, so a sum held at the same value (a hold's parts
+    // re-scaled) never prints two figures through the float's last digit.
+    ...Object.fromEntries(SCORE_KEYS.map((d) => [SCORE_NAMES[d], Math.round(Math.round((r.full[d] ?? 0) * 100) / 100)])),
     magicDependency, traditions, ...(disasterScore !== undefined ? { disaster: disasterScore } : {}),
   };
 
