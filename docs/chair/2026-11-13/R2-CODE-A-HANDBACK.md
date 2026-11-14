@@ -1076,3 +1076,20 @@ Brief: `docs/chair/2026-11-14/briefs/BRIEF-R2-CODE-A-12.md` on lane/chair-2026-1
 - Gates: eslint 0, both type ratchets 0, `--grid` 0 (0 falls), the 10 test files reading the founding reason green; presumed-things walker: the base's same 18.
 - Registers made stale (named, never banked): the generator golden master (founding reasons in its births, by its nature); not run by this seat.
 - LEFT, carried, for the veto list: river[1] "grew up beside a strategic bridge crossing" is not walk-landable and has no test (drawn where no bridge stands: base's draws, not measured); "Founded by: a dynastic decision that this crossroads would anchor the realm" in a river metropolis (the reader's carried FOUNDER_ADMITS row).
+
+### Item 3 — ruling (3), "two burial grounds": DONE, ad28cdaa8
+- Cause: `src/data/narrativeData.js :: STRESS_DESCS.religious_conversion` (the plain last row) counts two burial grounds; 77 prints, every one with ONE burial house.
+- Cure: the twin true of one, in its slot: "The dead of {S} are buried in two rows now, the old faith's and the new, and the town's grief is learning to sort itself accordingly. Whoever digs the graves digs both, and is the most carefully neutral soul alive." No burial atom exists (no new word written) and no roster of the 3,048 holds two burial houses, so the row has no "two houses" branch. It uses no STRUCTURE_CLAIMS word, so no draw moves.
+- Counts: "two burial grounds" 77 → 0; field diff `arrivalScene` alone, 77 towns, exact swaps.
+- Guard and plant: `tests/generators/arrivalConversionBurialCount.test.js` (static arm; collected arm of 3). The plant reds both. No line is taken off a town, so no guard is owed. The ledger `docs/census/declarations/STRESS_DESCS.json` moves with the line.
+- **NEW LINE, read where it prints** (no siege, famine or occupation among the 77: the pool prints only when conversion is primary): rr3x-thorp-religious_conversion-port-2 (Kolvik, thorp of 6, one Burial ground), rr3x-metropolis-religious_conversion-isolated-1 (Altaisaray, 29,483, one Cemetery network), r2r-village-5 (Karakabad, one Graveyard). TRUE.
+- Gates: eslint 0, both type ratchets 0, `--grid` 0 (0 falls), the 22 test files naming narrativeData.js green; presumed-things walker: the base's same 18.
+
+### Registers made stale by this seat's cures (named, never banked: the 12:52 ruling)
+The generator golden master and any byte golden over the arrival scene or the founding reason (items 1 to 3 move `arrivalScene` in 95 towns and `history.founding.reason` in 525 of the 3,048); not run by this seat. The six edge bundles: not rebuilt (12:52).
+
+### WHAT IS LEFT, in order (for this seat after its count, or the next)
+1. Ruling (4) ONE FOUNDER ON A PAGE: the pass-over list is now the whole table's 26 rows (item 2); left: a DRAWN founder-naming Origin row stands only where it agrees with the Founded-by row (866 prints of the 3,048 at ad28cdaa8, by the 26-row list), else a row that names none; and the bar's #159 (`settlementOriginProse.js`: the Overview's "Founded at a junction…" reads the record's founding reason; holder check needed: settlementOriginProse.js may be shared).
+2. The chair's 13:01 row: "share a council bloc and a list of enemies" (`npcData.js :: STRESS_ECONOMIC_EFFECTS.wary_alliance`) needs the pair to share a power; with it mil_crim_corruption's holder that commands (1 town). BEFORE (5) to (9).
+3. Rulings (5) to (9), as copied above; then the rows of OPEN-r2-code-a.md not answered, measured first, widest first.
+Instruments: the reader's `births.mjs` and `fielddiff.mjs` (git archive of lane/review-r2-code-a-2026-11-14), three workers over its 3,048 seeds (seeds-app + seeds-x + seeds720), base an archive tree with node_modules symlinked; a cure measured in a copy of that tree; counts by a walk of every string leaf.
