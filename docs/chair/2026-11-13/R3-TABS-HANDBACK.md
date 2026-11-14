@@ -880,6 +880,9 @@ OutputContainer, every tab opened): the whole 1,536 at 301572583, and the towns 
 | (c) | the ADEQUATE fallback and every pool ran before any occupation strike | 1ad5ca6e7: `defenseStateProse.js :: silentUnderAnOccupation`, first in `defensePostureProse` | posture line under an occupation 64 -> 0 of 76 occupied towns (adequate 12, weak 32, critical 20); 64 cells move, all posture, line -> silent | `defensePostureAgainstItsFacts.test.js`, the occupation arm (red first at b5a335a46, 5 of 6); Ingili's ADEQUATE pin re-keyed to silence, its lifted record keeps the reverse guard · the old order restored |
 | (a) sweep | — | the claim of zero's instrument: every rendered page of the 1,536 at 301572583 (`render.sh`), the Defense, History and Foundations sections, for a name ending in a digit-led, "(if walled)" or "(high magic)" bracket | Defense: "Gates (if walled)" 14 (cured above), "Major monasteries (5-10)" 12 (FOR THE JOIN); History: "Taverns (5-20)" 1 ((b)); Foundations: 0. The rest are the page's own tallies ("Vulnerabilities (1)", "Current Tensions (2)") | — |
 | (h) | `defenseStateProse.js :: withinTheBar` read only the Strong band | 60b56d3cb: L2's table reads the Critical band too: walls AND garrison, walls with militia, force with NO walls not drawn there | 542 births read Critical; a hold claim beside Critical 6 -> 0 (5 thorps; all occupied); 7 cells move, all threat.invasion line -> silent: the 6 and Shivamandal (r2s-succession_void-town-0), whose "You see armed fighters … and no wall" was TRUE (the pool-level strike's one true line lost, declared) | `tests/domain/defenseInvasionWithinACriticalBand.test.js`: two real towns and made records set Critical (red first at 268c40013, 5 of 5); defenseWatchIsNotTheLevy's militia keeper (Makropyrgos, now false) re-keyed by identity to rr3-thorp-famine-rand-0 |
+| (e) | the F3 arm's 'no walls' plant could not red (every unwalled strong town taken first by a later strike) | 1fdb32f6b (test only): a MADE record, the walled keeper rr3-town-monster_pressure-rand-4 Devaghat with only its walls off the roster, and a premise title | no line moves | the plant ('no walls' held false, not committed) reds the arm on the made record alone: "Devaghat reads as a defended place from the road in: … the works are kept up" |
+| (d) | the wiring census not re-derived after defenseStateProse.js moved | 63be39d3f: the door (`--dry`: 0 rows, the stamp alone; default write; `--check` exit 0). b55e34c2e: the alias draft's withdrawn-candidate pin re-keyed with its cause 39 -> 42 (the fourth and fifth seats' posture-strike docblocks; still exact; DECLARED for the veto) | proseWiringCensus 79/79; dossierStateProseProjection.contract's two titles (red at 301572583 too, not in the reader's list) green | writer reach's "the surfaceReach grammar round-trips…" (military on chainModifiers, dossier-pdf=N against R) NAMED, NOT WRITTEN: record 440, banked once at the close by the chair |
+| (g) | — | MEASURE ONLY, the joined branch at 7d12b40cb (an archive outside every tree), the two towns born by the bar-0 cfgFor through the real OutputContainer | bar0-town-occupied-rand-1: Foundations "Food · Secure"; Tonight sheet (`composeTonightSheet`) "Food · Pressured. Stores: a granary, about six months of grain." bar0-hamlet-calm-rand-1: "Secure" against "Pressured. No granary; about a month in household stores." The record's band reads secure in both | — |
 | (f) | — | already cured on this lane by f19e75e41 (R3-TABS 1, ruling b1): the reader read a tree without it | "REQ" / "FORCED" as a node on the rendered Defense tab: 0 of 1,536 pages at 301572583 (`render.sh`) | `tests/components/defenseForceCardNoProvenance.test.jsx` (existing) |
 
 ## Every new or changed line, with the towns it was read in
@@ -916,5 +919,22 @@ OutputContainer, every tab opened): the whole 1,536 at 301572583, and the towns 
   S3 74 force-free beasts lines; the Invasion row silent in 220 watch-only towns, the beasts row in 207.
 - **C1, C2:** the deterrence lines under a siege and an occupation are the corpus's pools (declared off both there).
 
-## What is left (kept current)
-(e), (d), (g); the close.
+## THE ADDENDUM to the statement (what the fifth seat changed under src/): `git diff --stat 301572583..HEAD -- src/`
+- `src/components/new/tabs/DefenseTab.jsx`: the force card's name through `institutionDisplayName` ((a), a193ba4fe).
+- `src/domain/display/stateProse/defenseStateProse.js`: `silentUnderAnOccupation`, first in `defensePostureProse` ((c),
+  1ad5ca6e7); L2's `withinTheBar` table reads the Critical band ((h), 60b56d3cb).
+- No generator, data or record file; no draw; no new key or word. Tests: two new files, three re-keyed pins (each
+  with its cause in its commit), the wiring census and the lighting census by their doors.
+
+## The close (what was run, and what was not)
+- At every src commit: eslint on the touched files (0 errors), typecheck:domain:strict 1113 and typecheck:ratchet 167
+  at their ceilings, the presumed-things door (fresh 0, stale 0), page-census --grid (no rise), the governing test
+  files and the two walkers; fact layers, observed shapes and writer reach from (c) on. The lane hook passed on
+  every push.
+- NOT RUN: the page census of the 720; the births' field diff (display-only cures; no generator file touched); the
+  whole suite (as the brief says).
+
+## What is left
+Nothing of this seat's assignment. Banked by the chair at the close: writer reach's surface-reach title. For the
+owner's veto: the true line lost in (h) (Shivamandal); the weak and critical posture lines silenced under an
+occupation in (c) with the adequate ones (52 of the 64); the alias-draft pin's re-key (d).
