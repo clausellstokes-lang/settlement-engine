@@ -6990,7 +6990,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "unfolding",
           "marks": [
-            "colour"
+            "guardPresence"
           ],
           "text": "The longer the hunger lasts at {settlement}, the less its defenders can do, and nothing is filling the stores again yet.",
           "slots": [
