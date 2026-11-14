@@ -20,6 +20,8 @@ import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import { edged } from '../../../design/edgedBox.js';
 import { isVeiled } from '../../../domain/display/galleryVeil.js';
 import { crisisSummaryForSurface } from '../../../domain/crisis/crisisSummaryVantage.js';
+// THE FORCE CARD PRINTS A HOUSE AS THE ROSTER DOES (R3-TABS-5, the chair's ruling (a)): through the label seam.
+import { institutionDisplayName } from '../../../domain/display/institutionDisplayName.js';
 // THE ONE PARAGRAPH RENDERER (owner finding 2026-09-18). Every position on this tab used to
 // map its drawn sentences to one `<p>` EACH, so a five-lens position printed five paragraphs
 // that each opened on the town's name. The DRAW is unchanged: the lines handed over are the
@@ -355,9 +357,12 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
   // ('coherence_repair', 'cascade', 'faction_boost', 'forced'), so a wall the coherence pass raised
   // read as forced by the user. Both are the generator's provenance, which the page never shows; the
   // Institutions tab's badge says who put a house there.
+  // ⛔ NO SURFACE PRINTS A CATALOGUE NAME'S BRACKET (R3-TABS-5, the chair's ruling (a) of 2026-11-14 on H3-T2): the
+  // card printed the catalogue key raw, "Gates (if walled)" (14 of 1,536 births at 301572583, every one walled). The
+  // name now goes through the seam the roster prints a house with; the dedupe below and every match keep the raw key.
   const ForceCard = ({inst:i,accent}) => (
     <div style={{background:swatch['#FAF8F4'],border:'1px solid #e0d0b0',borderLeft:`3px solid ${accent||'#6b5340'}`,padding:'9px 12px',marginBottom:6}}>
-      <div style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag,marginBottom:i.desc?2:0}}>{i.name}</div>
+      <div style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag,marginBottom:i.desc?2:0}}>{institutionDisplayName(i)}</div>
       {i.desc&&<div style={{fontSize: proseFontSize(FS['11.5'], isMobile),color:swatch.inkMag3,lineHeight:1.4}}>{i.desc}</div>}
     </div>
   );
