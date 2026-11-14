@@ -45,6 +45,8 @@ import { readinessBandOf } from '../data/bandLadders.js';
 import { deriveMagicReliance } from '../domain/magicReliance.js';
 import { keepOf, keepOfRecord, fundedGate } from '../domain/facts/keep.js';
 import { DEFENCE_TUNING as W, DEFENCE_WORDS, WATCH_IN_STEAD } from '../data/defenceWeights.js';
+import { houseRungsOf, jobRungAtTier } from '../domain/institutions/houseScale.js';
+import { isFabricInstitution } from '../data/institutionalCatalog.js';
 
 // ─── getDefenseInstitutions ───────────────────────────────────────────────────
 /**
@@ -67,6 +69,35 @@ const TOUCHES = Object.freeze({ sup: 'SUSTAINS', mil: 'STANDS', int: 'STANDS', m
 const ARMED = new Set(['garrison', 'militia', 'watch', 'company', 'charter', 'households', 'wardens']);
 /** The small places (thorp, hamlet, village): the tiers the community's own defence is written for. */
 const SMALL = W.community.arms;
+
+/**
+ * THE PARTS A HOUSE'S SCALE REACHES (UPKEEP-CAPACITY C1, the chair's ruling B), each with the opener it is read by
+ * below, asked of one house alone: its flags and its tradition names. Walls keep their kind, arcane its own tower
+ * and guild rows; the community rows, the crisis reliefs, the stores, the purse, the will and the ground take none.
+ * @type {Readonly<Record<string, (inst: any, names: Readonly<Record<string, boolean>>) => boolean>>}
+ */
+const SCALED_PARTS = Object.freeze({
+  garrison: (i) => i.hasGarrison, militia: (i) => i.hasMilitia, watch: (i) => i.hasWatch, court: (i) => i.hasCourtSystem,
+  prison: (i) => i.hasPrison, wardens: (_, n) => n.wardens, company: (i) => i.hasMercenary, charter: (i) => i.hasCharterHall,
+  clergy: (_, n) => n.divine, druids: (_, n) => n.druid, market: (i) => i.hasMarket, hospital: (i) => i.hasHospital,
+  alchemists: (_, n) => n.alchemy,
+});
+/**
+ * THE HOUSES THAT STAND IN THE PLACE (UPKEEP-CAPACITY C4, the chair's G3): the roster without its fabric rows. A fabric
+ * row is the place, not a house (`institutionalCatalog.js :: isFabricInstitution`): "Access to parish church" is the walk
+ * to another village's church, with no house, no power and no seat, so it opens no clergy part and no rung of the
+ * clergy's ladder. The traditions' names are read over these alone; the small place's parish row (`hasChurch`, the
+ * rallying point) still reads the whole roster.
+ * @param {ReadonlyArray<unknown>} list
+ */
+const housedOf = (list) => list.filter((i) => !isFabricInstitution(/** @type {any} */ (i)));
+/** The scaled parts one house opens, alone (the one `jobsOf` the house-scale reader is handed). @param {unknown} house */
+const scaledPartsOfHouse = (house) => {
+  const one = [house];
+  const { inst } = getInstFlags({}, one);
+  const names = defenseTraditionNamesOf(housedOf(one));
+  return Object.keys(SCALED_PARTS).filter((id) => SCALED_PARTS[id](inst, names));
+};
 
 /** The months laid by → supply points, on diminishing returns (0..max). @param {number} months */
 const storesPointsOf = (months) => {
@@ -208,10 +239,13 @@ const computeDefenseScores = (settlement, keep, instead = null) => {
   const crimeOf = (/** @type {Array<[string, any]>} */ list) => Math.max(2, Math.min(100, list.reduce((a, [, row]) => a * row.crime, flags.criminalPreStress)));
   const crimEff = Math.round(crimeOf(crimeRows));
   const crimBase = Math.round(crimeOf([]));
-  const names = defenseTraditionNamesOf(institutions);
+  const names = defenseTraditionNamesOf(housedOf(institutions));
   const G = W.traditionGates;
   const t = {
-    hasArcane: magicOn && magPri >= G.arcane && (inst.hasMagicInst || names.arcane),
+    // UPKEEP-CAPACITY C6 (the chair's G5): the alchemist's shop and quarter are a trade, not retained casters, so the
+    // arcane opener is the roster's casters alone (the defence home's `arcane` names, which hold every magic house of the
+    // roster flags but the alchemist's); `hasMagicInst` itself is unchanged (other generators read it).
+    hasArcane: magicOn && magPri >= G.arcane && names.arcane,
     hasArcaneGuild: magicOn && magPri >= G.arcaneGuild && names.arcaneGuild,
     hasDivine: magicOn && relPri >= G.divine && (names.divine || (relPri >= G.divineShrine && names.divineShrine)),
     hasDivineStrong: magicOn && relPri >= G.divineStrong && names.divineStrong,
@@ -247,11 +281,29 @@ const computeDefenseScores = (settlement, keep, instead = null) => {
 
   /** @type {any[]} */
   const parts = [];
-  /** @param {Record<string, number>} dims */
-  const clean = (dims) => Object.fromEntries(Object.entries(dims).filter(([, v]) => v));
+  // A HOUSE'S SCALE (UPKEEP-CAPACITY C1, the chair's ruling B): a scaled part's weights × its greatest house's factor,
+  // `least + (greatest - least) × (rung - 1) / (of - 1)` on that house's own ladder (a one-rung ladder 1), read from
+  // the catalogue's ladder by `houseScale.js :: houseRungsOf`. Read once, when a scaled part is first added.
+  /** @type {Record<string, Array<{ rung: number, of: number }>> | null} */
+  let rungs = null;
+  /** @param {string} id @returns {number} */
+  const scaleOf = (id) => {
+    if (!Object.hasOwn(SCALED_PARTS, id)) return 1;
+    rungs = rungs || houseRungsOf(institutions, scaledPartsOfHouse);
+    const S = W.houseScale;
+    // R2's counterfactual watch (a hired-only place with a watch in its stead) is the watch its own tier's ladder
+    // writes: a village's Village watch, a town's Town watch, a city's Professional city watch (the chair's ruling).
+    const on = instead && id === 'watch' ? [jobRungAtTier(id, tier, scaledPartsOfHouse)] : (rungs[id] || []);
+    return on.length ? Math.max(...on.map(({ rung, of }) => (of > 1 ? S.least + (S.greatest - S.least) * (rung - 1) / (of - 1) : 1))) : 1;
+  };
+  /** @param {Record<string, number>} dims @param {string} [id] the part, for its house's scale */
+  const clean = (dims, id) => {
+    const f = id ? scaleOf(id) : 1;
+    return Object.fromEntries(Object.entries(dims).filter(([, v]) => v).map(([d, v]) => [d, v * f]));
+  };
   /** A part kept at a share of its full points. @param {string} group @param {string} id @param {any} dims */
   const add = (group, id, dims, share = 1, extra = {}) => {
-    const raw = clean(dims);
+    const raw = clean(dims, id);
     if (!Object.keys(raw).length) return;
     parts.push({ group, id, raw, dims: Object.fromEntries(Object.entries(raw).map(([d, v]) => [d, v * share])), ...extra });
   };
@@ -259,7 +311,7 @@ const computeDefenseScores = (settlement, keep, instead = null) => {
   const F = (floor) => fundedGate(floor, keep);
   /** A paid part: each score kept at its funded floor. @param {string} group @param {string} id @param {any} dims */
   const paid = (group, id, dims) => {
-    const raw = clean(dims);
+    const raw = clean(dims, id);
     parts.push({ group, id, raw, dims: Object.fromEntries(Object.entries(raw).map(([d, v]) => [d, v * F(W.floors[d])])) });
   };
   const A = W.arcane;
@@ -415,20 +467,33 @@ const computeDefenseScores = (settlement, keep, instead = null) => {
   // R2 (the owner's rule; the lane writer's ruling of 2026-11-13): a hired-only place's military never reads
   // above the same place with a watch in its hired force's stead — that place's REAL military, run through
   // this same code (the pay, the terrain, the crises, R13's hold, limit 1). Where it would, the hired parts'
-  // military is held, together, to the difference. The last rule before fullness, as the cap was today's last
-  // word on the military.
+  // military is held, together, to the difference; and where that is not enough, the martial will's military
+  // as well (UPKEEP-CAPACITY C0, the chair's ruling on the stop at C1): the will is held to the armed bodies'
+  // whole points (R13), so a hired body's beasts and order points carry will a watch's do not, and since the will
+  // on the hired branch went unpaid (befa936dc) that will alone could lift the place above its watch. The last
+  // rule before fullness, as the cap was today's last word on the military.
   if (!instead && hired && !hasStanding) {
     const watchInStead = computeDefenseScores(settlement, keep, { ...inst, ...WATCH_IN_STEAD });
     const hiredParts = parts.filter((q) => q.id === 'company' || q.id === 'charter');
+    const will = parts.find((q) => q.id === 'will');
     const milNow = parts.reduce((a, q) => a + (q.dims.mil || 0), 0);
     const hm = hiredParts.reduce((a, q) => a + Math.max(0, q.dims.mil || 0), 0);
+    const wm = will ? Math.max(0, will.dims.mil || 0) : 0;
     const cf = watchInStead.dims.mil || 0;
-    if (milNow > cf && hm > 0) {
+    if (milNow > cf && hm + wm > 0) {
       const cut = Math.min(hm, milNow - cf);
-      for (const q of hiredParts) {
-        q.dims.mil = (q.dims.mil || 0) * (1 - cut / hm);
-        q.points = sumOf(q.dims) / n;
-        q.listed = q.points;
+      if (cut > 0) {
+        for (const q of hiredParts) {
+          q.dims.mil = (q.dims.mil || 0) * (1 - cut / hm);
+          q.points = sumOf(q.dims) / n;
+          q.listed = q.points;
+        }
+      }
+      const willCut = Math.min(wm, milNow - cf - cut);
+      if (will && willCut > 0) {
+        will.dims.mil -= willCut;
+        will.points = sumOf(will.dims) / n;
+        will.listed = will.points;
       }
     }
   }

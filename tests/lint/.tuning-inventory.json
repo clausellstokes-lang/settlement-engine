@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "d398faebe68eb6a440f939a37108ebf3f5697b43",
-  "measuredBy": "COHERENCE-UPKEEP-6",
+  "measuredAtSha": "94c5d408ffffb9e844a3fe9c5276b09233994c3d",
+  "measuredBy": "UPKEEP-CAPACITY",
   "date": "2026-11-13",
-  "note": "COHERENCE-UPKEEP-6 (d398faebe): threatAssessment.js no longer reads keep.js; no value moved",
+  "note": "UPKEEP-CAPACITY C1 (94c5d408f): DEFENCE_TUNING gains houseScale (least 0.8, greatest 1.2), the chair ruling B; no other value moved",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -131,14 +131,16 @@
     "src/data/defenceWeights.js#DEFENCE_TUNING": {
       "exported": true,
       "idiom": "literal",
-      "keys": 32,
+      "keys": 33,
       "line": 14,
-      "spanDigest": "56252cbd76ea48e2a184a92e438d9c4d8053ece6cb083e22cf4a23c075a793da",
+      "spanDigest": "57869cffa511464733928ec83cbe9de0a1b2afc80cd318d8fdfde5945754a85e",
       "leaves": {
         "walls.mil": 30,
         "walls.mon": 20,
         "wallKind.stone": 1,
         "wallKind.palisade": 0.6,
+        "houseScale.least": 0.8,
+        "houseScale.greatest": 1.2,
         "garrison.mil": 28,
         "garrison.mon": 20,
         "garrison.int": 15,
@@ -9246,7 +9248,7 @@
   "unclosed": [],
   "totals": {
     "tables": 280,
-    "keys": 2291,
+    "keys": 2292,
     "unregisteredNamed": 539,
     "bareDecimals": 6879,
     "zeroDependentTables": 10,

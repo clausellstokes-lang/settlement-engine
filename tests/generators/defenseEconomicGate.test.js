@@ -120,8 +120,12 @@ describe('economic survival respects the actual economy', () => {
   test('a healthy economy with identical buildings scores meaningfully higher', () => {
     /** @param {any} d */
     const supplyBeforeTheLimit = (d) => Math.round(d.filter((x) => x.group === 'SUSTAINS').reduce((a, x) => a + x.points, 0) * 4);
-    const poor = partsOf(town({ priorityEconomy: 15, prosperity: 'Struggling' }));
-    const rich = partsOf(town({ priorityEconomy: 80, prosperity: 'Prosperous' }));
+    // Re-keyed by identity (UPKEEP-CAPACITY C1, a house counts by its rung): the market this test was written for
+    // counts at today's points, so the town keeps a one-rung market house (the catalogue's Fish market) in the
+    // Market Square's stead; a market square is the least rung of its ladder and counts 0.8 of the market's weights.
+    const SAME_BUILDINGS = [{ name: 'Granary' }, { name: 'Grist Mill' }, { name: 'Fish market' }, { name: 'Town Watch' }];
+    const poor = partsOf(town({ priorityEconomy: 15, prosperity: 'Struggling', institutions: SAME_BUILDINGS }));
+    const rich = partsOf(town({ priorityEconomy: 80, prosperity: 'Prosperous', institutions: SAME_BUILDINGS }));
     expect(poor.some((x) => x.id === 'sustainsHeld'), 'anchored: the limit binds this town').toBe(true);
     expect(supplyBeforeTheLimit(rich)).toBeGreaterThan(supplyBeforeTheLimit(poor) + 15);
     expect(supplyBeforeTheLimit(rich)).toBeGreaterThanOrEqual(60);
