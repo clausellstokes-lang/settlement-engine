@@ -1104,7 +1104,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "no watch",
             "no crisis: occupied"
           ],
-          "text": "{settlement} has no line and no force, and the threat now at hand has noticed both.",
+          "text": "{settlement} has no line and no force, and danger is close at hand.",
           "slots": [
             "settlement"
           ],
@@ -1161,7 +1161,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "crisis: any",
             "no crisis: occupied"
           ],
-          "text": "{settlement} has no wall and only its watch, and the threat now at hand has noticed both.",
+          "text": "{settlement} has no wall and only its watch, and danger is close at hand.",
           "slots": [
             "settlement"
           ],

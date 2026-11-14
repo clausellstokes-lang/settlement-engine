@@ -2901,11 +2901,11 @@ supplies the ancestry.
 1. `[ledger · crisis: any · no crisis: threat · no watch]` {settlement} has no line and no force. Organized aggression cannot be resisted here; what preserves the town is distance, diplomacy, or being beneath notice.
 2. `[counterforce · no threat · crisis: any]` Nothing has come for {settlement}, and nothing about the town would stop whatever did. Its safety rests on nobody having wanted it.
 3. `[street · no threat · crisis: any]` The town's plan for an army is to not be interesting to one, and everybody here can state the plan.
-4. `[counterforce · threat · crisis: any · no watch · no crisis: occupied]` {settlement} has no line and no force, and the threat now at hand has noticed both.
+4. `[counterforce · threat · crisis: any · no watch · no crisis: occupied]` {settlement} has no line and no force, and danger is close at hand.
 5. `[street · threat · crisis: any · no watch · no crisis: under_siege · no crisis: occupied]` With trouble at hand, {settlement} has no wall to close and nobody trained to send, and each household is deciding for itself whether to stay.
 6. `[visitor · threat · crisis: any · no watch · no crisis: under_siege · no crisis: occupied]` You find {settlement} with no wall and nobody under arms, and its people keeping close to home until the danger passes.
 7. `[ledger · watch · no threat · crisis: any]` {settlement} has no wall and no soldiers; its watch keeps the peace in the streets and would be no answer to an army.
-8. `[counterforce · watch · threat · crisis: any · no crisis: occupied]` {settlement} has no wall and only its watch, and the threat now at hand has noticed both.
+8. `[counterforce · watch · threat · crisis: any · no crisis: occupied]` {settlement} has no wall and only its watch, and danger is close at hand.
 9. `[street · watch · threat · crisis: any · no crisis: occupied]` With trouble at hand, {settlement}'s watch is all the town has to send, and there is no wall to send it to.
 
 **`Internal Security`: full legal chain (court AND prison)**

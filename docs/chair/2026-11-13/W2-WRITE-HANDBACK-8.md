@@ -10,15 +10,17 @@ brief names it (no difference). Scratch worktree on local branch `w2w8`; pushed 
 ## Items
 | part | row | commit | what | read in |
 |---|---|---|---|---|
-| B | #19 DS-DEF-9 NAMED chain v1 (with v2, v3) | (this commit) | the three lines reworded off "cannot be made without arcane work", "rests on a few practitioners, not on the land", "a workshop that could not run without the arcane": every chain note is a PARTIAL supplement after a shortfall, of four traditions | all 193 towns of the base render that reach the pool |
+| B | #19 DS-DEF-9 NAMED chain v1 (with v2, v3) | b363e8d93 | the three lines reworded off "cannot be made without arcane work", "rests on a few practitioners, not on the land", "a workshop that could not run without the arcane": every chain note is a PARTIAL supplement after a shortfall, of four traditions | all 193 towns of the base render that reach the pool |
+| B | #27 DS-DEF-2 neither walls nor force v8 (with v4, the same phrase) | (this commit) | the style point: "the threat now at hand has noticed both" (a personified abstraction) -> "danger is close at hand" | all 68 towns where v4 or v8 is eligible; drawn in 52 |
 
 ## New or changed lines (for the lane's veto list, with their towns)
 - DS-DEF-9 NAMED chain v1 CHANGED: "At {settlement} the usual work no longer yields enough {good}, and part of the shortfall is made up by means beyond it." (64 towns drawn: Nahrfort hamlet 85, Panteakra city under siege, Ioannodion city, Tikalmul metropolis famine)
 - v2 CHANGED: "If the help beyond ordinary work failed at {settlement}, its {good} would fall further short than it already does." (77: Zhongtian siege+famine, Balwick siege, Buyaniin metropolis)
 - v3 CHANGED: "People at {settlement} know that part of the town's work now holds up only with help beyond ordinary labour." (50: Markaztappa occupied, Varanand village occupied, Kilwell metropolis famine)
+- DS-DEF-2 neither walls nor force v4 CHANGED: "{settlement} has no line and no force, and danger is close at hand." (48: Ribatkala thorp under siege, Goraino hamlet siege+famine, Jómshammer village monsters)
+- v8 CHANGED: "{settlement} has no wall and only its watch, and danger is close at hand." (4: Wadichowk town under siege, Belopol siege+famine, Qingcheng monsters)
 
 ## What is left (line by line)
-- B: #27 DS-DEF-2 neither walls nor force v8, the style point (v4 carries the same phrase). Then one line to the chair.
 - C: HANDBACK-4 item 4 (#396 DEF-2 no legal v3; #767 DEF-2 Beasts plagued v3; #125 DEF-5 mages' guild v1, v2; #57 DEF-9 false v2), item 5 (#58 DEF-12 enough v2), 30895bb67 (CHAIN defence supplied v1-v3, v5).
 - D, E, F, G as the brief gives them.
 
@@ -34,3 +36,17 @@ brief names it (no difference). Scratch worktree on local branch `w2w8`; pushed 
 ## Parked (with the word it needs)
 
 ## Named, not the corpus's (with the file)
+
+## The rulings this seat works to
+BRIEF-W2-WRITE-8 whole. Received from the chair during this seat:
+- 03:15 UTC (the chair to W2-WRITE-8), for step G, nothing changes in B to F: (1) POINT 49 IS ON THE LINE:
+  lane/integration-2026-11-07 = 976db5b19; G still waits for the two side seats' tips and the chair's word. (2) A
+  HAZARD MEASURED BY THE CHAIR: a shallow clone can give a WRONG merge base, not a missing one (at depth 700 one
+  base 96d698de7 and 31 false conflict hunks in registeredWords.js; with full history TWO bases, 96d698de7 and
+  9d5d6e091, and no code file conflicts). BEFORE ANY MERGE AT G: `git fetch --depth=2147483647 origin
+  lane/integration-2026-11-07 lane/w2-write-2026-11-13 lane/w2-write-side-eco-2026-11-13
+  lane/w2-write-side-rest-2026-11-13` (~250 MB); `git rev-parse --is-shallow-repository` prints false. Measured in
+  memory at the chair's tips: the three corpus branches merge with one another with conflicts only in files THE
+  MERGE re-derives (the source document merges clean between them); the line then conflicts in 7 files, no code:
+  the source document (one hunk), defense.generated.js, wiring-census.json, .prose-byte-baseline.json,
+  page-census.register.json and the two presumed-things registers.
