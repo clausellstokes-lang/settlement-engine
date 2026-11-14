@@ -850,7 +850,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no crisis: under_siege"
           ],
-          "text": "{settlement}'s garrison roll puts paid soldiers on every stretch of its walls, so raiders stay away and an army would pay dearly; a long siege would be another matter.",
+          "text": "{settlement} keeps paid soldiers behind its walls, so raiders keep their distance and an army would pay dearly; a long siege would be another matter.",
           "slots": [
             "settlement"
           ],
