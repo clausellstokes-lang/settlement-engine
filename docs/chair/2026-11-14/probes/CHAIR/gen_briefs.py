@@ -1922,7 +1922,7 @@ R3STAGES_TOOLS = (
 # Filled when the lane is final: set 'tip' to the lane's final tip as read from origin, then generate.
 READERS['REVIEW-R3-TABS'] = dict(
     title="REVIEW-R3-TABS · round three's tabs lane read whole, from its base to its final statement",
-    lane='lane/r3-tabs-2026-11-13', own='lane/review-r3-tabs-2026-11-14', base='aac79b80', tip=None,
+    lane='lane/r3-tabs-2026-11-13', own='lane/review-r3-tabs-2026-11-14', base='aac79b80', tip='bb2bf91c',
     what="round three's tabs lane: it cures the false lines and badges the Defense, History and Substrate tabs write themselves, and the defence posture's selector",
     before="the lane's base on the integration line: no reader has read this lane",
     stmt='docs/chair/2026-11-13/R3-TABS-HANDBACK.md', tools=R3STAGES_TOOLS,
