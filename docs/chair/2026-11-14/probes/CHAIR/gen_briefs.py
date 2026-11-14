@@ -1177,6 +1177,98 @@ SEATS2['POWERS-12'] = dict(
 )
 
 
+VEIL_BYTES = (
+    "supabase/migrations/211_server_side_share_veil.sql eface6d093933170b9541fe630068c26e5bd41477e95e913ae7168e373be0b01 and "
+    "supabase/rollback/211_server_side_share_veil.down.sql ce8474ffc251b4c4bd6005d5a409d4a15bd20fef6b507534ef6338d3bd49712f: FROZEN, never changed by "
+    "anyone; 212 (supabase/migrations/212_share_veil_later_cures.sql) 70810c2a1839a3534370ccf091bdb13eb41b0a95f7c096369651b5e40313ef1e, its rollback "
+    "d99237b4b71e2c734f83b8b5cda15f201a85e4902ab05a7e4503d51620458a7b: NOT final"
+)
+
+VEIL_RULED = (
+    "THE CHAIR'S RULINGS ON THE TENTH SEAT'S FIVE PARKED ROWS (2026-11-14, each vetoable by the owner; they go into the owner's pack in plain words): "
+    "(1) A SHOWN POWER WHOSE NAME IS A HIDDEN HOUSE'S NAME WITHOUT ITS QUALIFIER: a string that names a shown power by the power's own name is the "
+    "power's, and STAYS (the owner showed the power; the law does not reach a power that is shown); the house's own full name still goes everywhere. "
+    "(2) THE IMPRESSION: back to THE WORDS, BOTH DIRECTIONS: the composer never builds an impression from the appearance, so no identity ties them; an "
+    "impression is withheld with a hidden appearance only where one's words hold the other's (the reader's hand row); listed for the owner with its "
+    "count. (3) THE PRESSURE SENTENCE: AS BUILT (it goes with the ties' description eye); the generator recording the tie it drew is a new key of the "
+    "record: NAMED for after the release, not built. (4) AS BUILT: a second record that shares the id of a house hidden whole goes with it; the bare "
+    "trace token is taken where its house is hidden whole. (5) WITHIN THE LAW, TO BE CURED: the public sanitiser drops a covert tie from "
+    "`relationships[]` and `prominentRelationship` still tells it (9 of 125 born towns by the twin): a second home of the tie: withheld BY IDENTITY when "
+    "the tie it tells is dropped, in 212 and in the twin, a hand row red first and the born count; and say BY RUN whether the frozen 211 alone and "
+    "today's deployed page tell it too (the owner has been told 211 alone makes nothing worse than today: that must be shown still true, or the chair "
+    "told at once)."
+)
+
+VEIL_LAWS = (
+    "THE LAWS OF THIS LANE (binding): 212 stays ONE transaction, create-or-replace, idempotent, after the frozen 211; 211's two files are never touched: "
+    "prove both checksums at your first commit and at your last; every commit that moves 212 or its rollback carries the new checksum in its message; "
+    "every cure is proved by a planted-marker run, red first, AND by markers the earlier guards lacked (other scripts, symbols only, a dotted capital I, a "
+    "sharp s); a guard or pin is re-keyed by identity, never loosened; the client's twin (src/, the same projection in JavaScript) is changed rule for "
+    "rule with the server and compared with it on every plant. NOTHING IS APPLIED TO ANY HOSTED DATABASE BY ANY SEAT: an in-process pglite or a scratch "
+    "PostgreSQL 16 cluster in your own container (a unix socket, no TCP) only; never `supabase db push`, never `migration repair`, never a production "
+    "credential, never a deploy. The page lanes' laws below bind you too, where they can apply."
+)
+
+SEATS2['VEIL-11'] = dict(
+    title="VEIL-11 · the share veil: the design's rest, the acceptance run green at one checksum, the rehearsal, the owner's pack",
+    branch='lane/coherence-veil-2026-11-11', tip='a12ccfee', statement=False, mark='300,000',
+    intro=("You are VEIL-11, the eleventh seat on the share-veil lane of the settlement-engine integration program (lane/coherence-veil-2026-11-11). THE VEIL: "
+           "when an owner shares a town, whatever the owner hid (a house, a person, an event, a power, a single field) must not reach the reader, in the page "
+           "OR in the data the server sends. The cure lives in two migrations and in the client's twin. MIGRATION 211 IS FROZEN and is the owner's to "
+           "apply. MIGRATION 212 holds every later cure, is NOT final, and is applied by nobody until a fresh security reader has cleared its final bytes. "
+           "The tenth seat built the three largest parts of the ruled design (a house hidden whole removed by its id alone; the name search rebuilt; a "
+           "second home by identity), the last two through builders inside its own session whose SQL it did not read line by line; the security reader's "
+           "acceptance run stands at 35 of 37. Yours: the design's rest, to a green acceptance run at ONE named checksum, the rehearsal and the owner's "
+           "pack. A SECURITY READER READS THE LANE COLD WHILE YOU WORK: a HIGH finding of its comes to you as a ruling."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. On your lane: docs/chair/2026-11-13/COHERENCE-VEIL-HANDBACK-PART11.md WHOLE (313 lines: the bytes; the three cures; THE NAME SEARCH AS BUILT; THE "
+          "SECOND HOMES AS BUILT; the rows left outside the law; what the tenth seat did and did not verify; section 8's counts for the trace; section 10's "
+          "LEFT: THAT IS YOUR LIST) and the two sub-briefs under veil-probe-10/briefs/ (the form a builder's brief takes).\n"
+          "3. YOUR FIRST ACT OF WORK: 212's sections 4b and 4c and the twin's gallerySecondHomes.js READ WHOLE, LINE BY LINE (nobody but their builders has): "
+          "what you find wrong is cured before anything is built on it, red first.\n"
+          "4. THE SECURITY READ YOU ANSWER, on origin/lane/chair-2026-11-08 (`git fetch origin lane/chair-2026-11-08`): "
+          "docs/chair/2026-11-13/REVIEW-VEIL-212-FINAL-2026-11-13.md: the findings V7-5 and V7-8, its section 7 (the owner's step) and section 8 (what the "
+          "next reader will do). ITS PLANT LIBRARY on origin/lane/review-veil-3-2026-11-12 (61a253a79): docs/chair/2026-11-13/probes/REVIEW-VEIL-7/ "
+          "(run-all.sh: one command, about sixty seconds, 37 expected results, the server against the twin, a deep row and a large row timed against 211; "
+          "born/run-born.sh: the born towns in both shapes, about 75 minutes): copy it out with git archive; never commit it to your lane."),
+    first=("FIRST ACT. Read the lane's tip back from origin: it was a12ccfee when this was written; any difference is a stop: tell the chair. Prove the four "
+           "checksums: " + VEIL_BYTES + "."),
+    work=(VEIL_RULED + "\n"
+          "THE WORK, in this order, each its own commit, red first, pushed as made:\n"
+          "A. THE READ of step 3 above, and the two rulings that change bytes: (2) the impression by the words, both directions; (5) the prominent "
+          "relationship by identity.\n"
+          "B. V7-5 WITH THE TRACE BY POSITIVE ACCOUNT (the acceptance run's a07): a trace entry stays only where a house still listed accounts for it: the "
+          "only rule that answers a renamed house, whose record keeps nothing of its birth name. PART 11's section 8 says what it will also drop (entries "
+          "for a house the birth weighed and did not keep): count it on born towns, both counts in the commit.\n"
+          "C. V7-8: EVERY EXISTENCE FLAG, not five, sent as it would read from the houses still listed, by the engine's own getInstFlags (d06). WITH IT THE "
+          "BOOLEANS' DERIVATION AGREED BETWEEN SERVER AND TWIN: a custom house a user names like a criminal house must not raise a flag on the server where "
+          "the twin would not: derive by the house's native identity where the record carries one; if it cannot be done in SQL, say exactly why, show by a "
+          "plant what the difference lets a reader of the page infer (it must be nothing hidden), and STOP for the chair on that row.\n"
+          "D. THE INCOME ROW BY ITS HOUSE: withheld when its house is hidden, whether or not its groupings are shut.\n"
+          "E. THE ACCEPTANCE RUN, RULED: the cures are done when the reader's run-all.sh exits 0 AND born/run-born.sh is green, at ONE named checksum of "
+          "212, WITH THE COST LAW MET: a read with houses hidden costs no more than TWICE the same read on the frozen 211 alone, on the reader's 300 KB row "
+          "and on the largest born town (if it cannot be met: STOP with the numbers). A read never fails where 211 serves.\n"
+          "F. AT THE FINAL BYTES: (a) the red pin tests/security/galleryServerVeil.pglite.test.js (6 of 16) re-keyed BY IDENTITY: the ruled cut (a tie's "
+          "copy of a role the person's card withholds) named as the ONE expected difference, every other path still asserted equal; the one printed path "
+          "that moved in town-2 classed first; never loosened; (b) the planted run on chains built from these bytes, both stored shapes, every read: zero "
+          "but the classed rows; on the frozen 211 alone the exact half still equals its review; (c) the lane's other pins (the helper-count pin; the lint "
+          "registers); (d) THE REHEARSAL on a local chain: 212 applied twice without error or change; its rollback returns the catalogue to the frozen 211's "
+          "exactly (diff the catalogues); then 212 again; THE ROLLBACK ORDER IS 212's FIRST; (e) the whole suite once, in six shards, classed against the "
+          "ten reds PART 8 names.\n"
+          "G. LAST, THE OWNER'S PACK docs/chair/2026-11-13/veil-212/ rebuilt for the FINAL bytes (it describes old bytes and must not be used as it is): the "
+          "security review's section 7 whole (the rollback order; the same-push); the two read-first blocks; the four checksums; and WHAT 212 DOES NOT "
+          "CLOSE, row by row, in plain words (the rows outside the law; the five rulings above). It is handed to NOBODY by you.\n"
+          "WHEN E IS GREEN: ONE message to the chair (the tip, both checksums of 212, what the reader must read) and 212 is not changed again until the "
+          "chair answers; F and G go on.\n"
+          "BUILDERS INSIDE YOUR SESSION (helper agents with a fresh context and a written sub-brief, no push) are allowed for B, C and D: but YOU READ "
+          "THEIR SQL AND THEIR TWIN LINE BY LINE before you push it, and you read your count before you start one and when it returns. YOUR HAND-BACK is a "
+          "new file, docs/chair/2026-11-14/COHERENCE-VEIL-HANDBACK-PART12.md, begun with the rulings above, kept current after every item.\n" + VEIL_LAWS),
+    merges="; a local database cluster in your container",
+    when="for a stop that blocks everything you have left, for the cost law if it cannot be met (the numbers), for ruling (5)'s answer on 211 alone if it is yes, when the acceptance run is green at a named checksum, and for a hand-back",
+    turns='',
+)
+
+
 SEATS2['W2-C-LEAVES-8'] = dict(
     title="W2-C-LEAVES-8 · the third leaves lane's close: its own rising row, the court rows, the added rows, the line's merge, the final statement",
     branch='lane/w2-c-leaves-2026-11-13', tip='4576cfc6', statement=True,
@@ -1291,6 +1383,105 @@ SEATS2['R2-CODE-A-8'] = dict(
     when="for a stop that blocks everything you have left, when the list's time-box closes (one line: the tip; what was cured, what is left), when the line's merge and its registers are pushed, and with your final statement or hand-back",
     turns='',
 )
+
+
+def build_veil_reader():
+    own = 'lane/review-veil-3-2026-11-12'
+    head = (
+        "# BRIEF: REVIEW-VEIL-8 · a fresh security read of migration 212 and the client's twin, for the owner's hand\n\n"
+        "The seat's assignment, written by the chair as a file on 2026-11-14 and named in the seat's first message. The chair is the Claude Code session "
+        "%s. Checked out at `%s` (the earlier security readers' branch), which is also the seat's own branch; a clone of 1200 commits; effort high; the "
+        "model as the chair's records of that day give the mix. A SELF-CONTAINED brief. Rulings sent after it are in the chair's records.\n\n---\n\n" % (CHAIR, own)
+    )
+    body = '\n\n'.join([
+        ("You are REVIEW-VEIL-8, an independent SECURITY reviewer of the settlement-engine integration program. You fix nothing and you change nothing on the "
+         "lane you read. This is defensive review of the project's own code, asked for by its owner's delegate: a privacy control is about to be applied to "
+         "the owner's own database, and you are the last reader before the owner's hand. THE VEIL: when an owner shares a town (a gallery page, a party "
+         "link, a map page, two imports), whatever the owner hid (a house, a person, an event, a power, a single field) must not reach the reader: not on "
+         "the page and not in the data the server sends. The cure lives in two migrations and in the client's twin (src/, the same projection in "
+         "JavaScript, which runs on the reader's side for stored shares). MIGRATION 211 is FROZEN at reviewed bytes and is the owner's to apply. MIGRATION "
+         "212 (supabase/migrations/212_share_veil_later_cures.sql) holds every later cure, is NOT final, and will be applied by nobody until YOU say CLEAR "
+         "on its exact final bytes. YOUR VERDICT: CLEAR or NOT CLEAR for migration 212, its rollback and the client's twin, at a named checksum, for the "
+         "owner's hand. Seven reads before you found 212 not clear; a leak you miss reaches a real owner's readers."),
+        WHY2.replace("This file is your whole assignment and carries the chair's rulings: no adjacent repair, however tempting.",
+                     "This file is your whole assignment."),
+        ("THE LANE YOU READ: lane/coherence-veil-2026-11-11, at a12ccfee when this was written. Its bytes there: " + VEIL_BYTES + ". A BUILDER (VEIL-11) IS "
+         "STILL WORKING ON THE LANE: it adds the trace by positive account, every existence flag, the income row by its house and the booleans' agreement, "
+         "and builds two rulings below that change part of the second homes. START NOW on the bytes as they are; when the chair names the final tip you "
+         "read the difference and give the verdict at the final checksum."),
+        ("READ FIRST, in this order:\n"
+         "1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6) at your checkout.\n"
+         "2. On your own branch (the last security reader's, at 61a253a79): docs/chair/2026-11-13/REVIEW-VEIL-212-FINAL-2026-11-13.md WHOLE (its ten "
+         "findings V7-1 to V7-10, each executed; its section 7, the owner's step; its section 8: what the next reader will do: THAT IS YOU) and "
+         "docs/chair/2026-11-13/probes/REVIEW-VEIL-7/ (its plant library: run-all.sh, 37 expected results, the server against the twin, a deep row and a "
+         "large row timed against 211; born/run-born.sh; its planted-marker instrument: markers of lower-case letters and digits only, so a slug, a fold or "
+         "a join keeps them): REUSE them, do not rewrite them.\n"
+         "3. `git fetch origin lane/coherence-veil-2026-11-11`, then THE TWO MIGRATIONS AND THE CLIENT'S TWIN, COLD (the SQL and the JavaScript, not the "
+         "lane's account of them). Only after your cold pass is committed and pushed: docs/chair/2026-11-13/COHERENCE-VEIL-HANDBACK-PART11.md on the lane "
+         "(what the builder says it built, measured and left) and any PART12 beside it."),
+        ("THE DESIGN THE BUILDER WAS RULED TO BUILD (judge the bytes against it, and judge it: say where you would rule differently): (i) BY WHAT A THING IS "
+         "BUILT FROM, wherever the record says: everything the engine derives from a house, a person, an event or a power is withheld or derived again BY "
+         "IDENTITY when its source is hidden (the two name lists by positive account; every existence flag; an income row by its house; a trace entry by "
+         "its house; the legacy annotation by its event; a tie's copy by its person); a second home follows its source's eye by identity, never by matching "
+         "text. (ii) FREE PROSE ONLY where no identity exists: ONE search per string for all hidden names at once, by whole name on word boundaries IN ANY "
+         "SCRIPT (one fold, the same in both engines; no prefilter that can miss), each house's every name (current, born, and without its bracketed "
+         "qualifier), never a prefix of a longer open name; an open house's own name and a shown power's name are never taken. (iii) A house hidden whole "
+         "is removed whole, by its id alone. (iv) THE COST IS A LAW: a read with houses hidden costs no more than twice the same read on the frozen 211. "
+         "(v) A read never fails where 211 serves: at a bound the reader receives the closed answer, never the unfiltered document. (vi) The client's twin "
+         "the same, rule for rule. THE LAW DOES NOT REACH a separate fact that does not name the hidden thing: a stability label, a quarter's description, "
+         "an export, a tension's type, a power that is shown.\n" + VEIL_RULED),
+        ("THE WORK, in order:\n"
+         "1. COLD: READ 212 AS AN ADVERSARY WOULD READ ITS OUTPUT, and FIRST its sections 4b and 4c (the name search: the helpers `_gallery_veil_name_*` and "
+         "`_gallery_veil_named`; the second homes by identity: `_gallery_veil_card`, `_gallery_veil_sources`, `_gallery_veil_second_homes`, "
+         "`_gallery_veil_embeds`) with the twin's gallerySecondHomes.js: NOBODY BUT THEIR BUILDERS HAS READ THEM LINE BY LINE. For every helper and every "
+         "projection 212 replaces or adds: what does a reader receive, on each read, in both stored shapes, with reveal-to-DM off and on, live and frozen? "
+         "Hunt for: a spelling the fold misses (case, accents, apostrophes, plural or possessive forms, another script, a name that is a prefix or a "
+         "substring of an open house's and the reverse, a name with regex or LIKE metacharacters, a very short name, an empty name); a hidden name inside a "
+         "KEY, an id, a slug, a join, camel case, a number's label; a path the walk does not reach (an array inside an array, a null, a string that is "
+         "itself JSON); the open-name exception hiding a leak; what is REMOVED that should stay (a blanked sentence, a removed row that other rows index "
+         "into: does it break the page?); an error path or a bound that returns the unfiltered document; anything a reader can INFER from what is absent or "
+         "from a count; an identity rule that follows the wrong source or none. And the ordinary dangers of SQL written late: a function without a pinned "
+         "search_path or with the wrong security mode, a dynamic statement, a privilege granted wider than 211 grants, a helper callable by the public "
+         "role, a volatile function marked stable, a loop whose cost grows with the document (the worst case you can construct, timed against 211).\n"
+         "2. YOUR OWN PLANTS, on a local chain 001..212 built from these bytes (the library shows how; local only): the library's run first (its 37 results "
+         "and the born run are the builder's acceptance: say what they miss); then plants of your own invention against the hunt list, at least: a renamed "
+         "hidden house; a hidden house whose name is a substring of an open one and the reverse; a name with an apostrophe, a percent sign, an underscore, "
+         "a dotted capital I, a sharp s, and one in another script; a hidden person who appears in a tie, a goal, a secret, a title and an impression; a "
+         "hidden event referenced by a later event and by a legacy annotation; a covert tie told by the prominent relationship; two records under one id. "
+         "THE CLIENT'S TWIN as a read of its own: the same plants through the JavaScript projection; where the two differ, which is right?\n"
+         "3. THE SPLIT STILL HOLDS: the frozen 211 alone still equals what its review cleared (the two checksums; one planted run on 001..211); 212 runs "
+         "after it as one transaction, create-or-replace, twice without change; its rollback returns the catalogue to the frozen 211's exactly (diff the "
+         "catalogues yourself); the rollback order is 212's first.\n"
+         "4. THEN the lane's claims (PART 11, and PART 12 when it exists): each cure and its proof by your own run; the rows it leaves outside the law, "
+         "each judged; the chair's five rulings above, each judged.\n"
+         "5. FOR THE OWNER: section 7 of your file, in plain words: what 212 changes for a reader; what it does NOT close, row by row; the order to apply "
+         "and to roll back; what to look at before and after; and whether 211 may still be applied before 212 is ready (the last review said 211 alone "
+         "makes nothing worse than today's page: confirm or deny at these bytes, ruling (5) among the things you test)."),
+        ("THE VERDICT: CLEAR or NOT CLEAR at a named checksum of 212 and of its rollback; findings ranked high, medium, low, each with the read, the town and "
+         "the bytes that arrive, EXECUTED told from PLAUSIBLE; what you did not test. Your file: docs/chair/2026-11-14/REVIEW-VEIL-212-8-2026-11-14.md on "
+         "your branch, with your probes under docs/chair/2026-11-14/probes/REVIEW-VEIL-8/. PUSH AFTER EVERY STEP."),
+        ("HOW YOU WORK: scratch worktrees (detached, at the lane's tip: fetch the lane by name), `npm ci` in one; a local PostgreSQL cluster on a unix socket "
+         "(no TCP) or the lane's pglite harness, in your own container; long runs to a file outside every repository tree; gates and runs through `sh "
+         "scripts/gate-tail.sh <command>`, never a pipe; query big files by script, no dumps into your context. HAZARD: `npm ci` writes "
+         "`core.hooksPath=.husky/_` into the shared local config, and tests that run git inside a hook from a linked worktree act on the real repository: "
+         "snapshot refs and local config before and after every suite and every push, and compare. Your clone is shallow (1,200 commits): deepen with `git "
+         "fetch --deepen` if a commit is missing."),
+        COUNT2 % ('300,000', '300,000') + " END YOUR TURN THAT WAY after step 1 and after step 2 in any case.",
+        RUNS,
+        ("WHAT THIS BRIEF AUTHORISES: scratch worktrees and `npm ci`; a local database in your container; commits of your review and probes; plain pushes to "
+         "%s, your only branch (explicit refspec: `git push origin <local>:refs/heads/%s`). NEVER, whoever asks, your own harness's defaults included: a "
+         "commit or a push to the lane you read or to any other branch; `--no-verify`; a force push; a pull request, draft or not; anything on master; a "
+         "deploy; ANY HOSTED DATABASE OR PRODUCTION CREDENTIAL; `supabase db push`; `migration repair`. Nothing you build is run against anything but your "
+         "own local chain. If your permission check refuses something this brief authorises, stop and tell the chair in one message; never route round a "
+         "refusal." % (own, own)),
+        ("MESSAGES. READ YOUR QUEUED NOTIFICATIONS AFTER EVERY PUSH (the ReadNotifications tool): the chair names the lane's new tips there. Write to the "
+         "chair (the send_message tool of the claude-code-remote server, session_id " + CHAIR + "; load it with ToolSearch if it is not listed): AT ONCE "
+         "for any HIGH finding (one message: the read, the town, what arrives, how you reproduced it): the builder cures it while you go on; when your cold "
+         "pass is pushed (one message: the tip, findings by rank); and with your verdict: 150 words at most each: CLEAR or NOT CLEAR, the checksums, your "
+         "branch's tip read back from origin, the one thing the owner must know. Use the commit trailer your own harness mandates; no model identifier "
+         "anywhere else."),
+    ])
+    return head + body + '\n'
 
 
 # ---------------------------------------------------------------------------------------------------------------------
@@ -1604,7 +1795,7 @@ if __name__ == '__main__':
     seats = sys.argv[2:] or list(SEATS)
     os.makedirs(out, exist_ok=True)
     for seat in seats:
-        text = build_bar() if seat == 'REVIEW-BAR-0' else (build_reader(seat) if seat in READERS else (build2(seat) if (seat in SEATS2 or seat == 'R3-CODE-C-6') else build(seat)))
+        text = build_veil_reader() if seat == 'REVIEW-VEIL-8' else build_bar() if seat == 'REVIEW-BAR-0' else (build_reader(seat) if seat in READERS else (build2(seat) if (seat in SEATS2 or seat == 'R3-CODE-C-6') else build(seat)))
         for bad in ('claude-opus', 'claude-fable', 'claude-sonnet', 'claude-haiku', 'Opus', 'Fable', 'Sonnet', 'Haiku'):
             assert bad not in text, (seat, bad)
         text = exact_hashes(text, seat)
