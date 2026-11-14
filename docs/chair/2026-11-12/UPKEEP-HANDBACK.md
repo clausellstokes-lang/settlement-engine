@@ -74,6 +74,7 @@ The order of work (the brief: (j) first, it is HIGH; the chair: the two HIGH add
 
 | Commit | Item | Measure (the 972) | Guard and plant | Moved |
 |---|---|---|---|---|
+| 6ddb94336 | (h) #256 #280: the enforcement sentence reads the roster | **84** births (the census's 84): the stored crime line, the Defense tab and both exports; census 84 / 248 -> **0 / 164** | `tests/generators/safetyEnforcementReadsRoster.test.js`; plant reds it; two pins re-keyed by identity (safetySurvivalLineListed/Signal) | `safetyProfile.js :: settleCrimeLinesToSignal` + `ENFORCEMENT_STRUGGLES` at the file's end |
 | afc90dc96 | the chair's (1) HIGH: the PDF's defence list prints a force under the roster's label | **18** births, the PDF only: "Gates (if walled)" -> "Town gates" (18 lines) | `tests/pdf/defenseForceNamesLabelled.test.jsx` (r2r-town-11, census shape); plant (the file as it was) reds it | `DefenseSecurity.jsx`: `institutionDisplayName(force.name) \|\| force.name` |
 | 364c2313d | (j) HIGH: the Foundry journal names each supply chain by its record | the journal's chain list in **963** births: **12,983** lines "- **Chain** *(…)*" -> the record's label; every other surface and the record byte-identical | `tests/pdf/journalChainNames.test.js` (three born towns; the nameless chain); plant (the file as it was) reds 4 of 4 | `viewModelBodySlices.js :: economicsSlice` reads `chainPrintName(c, s).label`; the chain-print walker reclasses the file EXEMPT -> PRINT_SITES (a narrowing: it must import the leaf) |
 
@@ -84,6 +85,8 @@ The order of work (the brief: (j) first, it is HIGH; the chair: the two HIGH add
 3. The chair's (3): the Overview's Food Security row: ruled to SURFACES-1 (the chair, 11:42).
 
 ## WHAT IS LEFT, line by line
+
+**EVERY NEW OR CHANGED LINE, with the towns it was read in (the owner's veto list):** (j) the journal's "- **<chain label>** *(<status>)*" (r2r-thorp-36, r2r-metropolis-8, rv5-under_siege+famine-hamlet-3, r2s-occupied-town-2); (1) the PDF's "Town gates" (rv5-under_siege-town-5, r2s-famine-town-3, r2s-recently_betrayed-town-1); (h) "Hunger-driven theft of food, livestock, and stored goods." and "Theft of food, livestock, and stored goods by people with too little." (rv5-famine-thorp-0, rv5-under_siege-thorp-2, r2s-occupied-thorp-1, rv5-famine-village-1).
 
 - The chair's rows of 11:43 (the lane's reader REVIEW-UPKEEP-4): a court named in 133 towns with no court house (measure which houses set the court flag first); "Money enough … laid by before the debt crisis" (25 towns); "nobody organised to meet it" (in item 5).
 
