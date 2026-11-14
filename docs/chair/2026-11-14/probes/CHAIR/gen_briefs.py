@@ -1868,8 +1868,9 @@ def build_reader(seat):
     )
     body = '\n\n'.join([
         ("You are %s, an independent reviewer of the settlement-engine integration program. You fix nothing and you change nothing on the lane you read. You "
-         "read ONE STAGE of %s (%s): from %s (%s) to %s, where its last seat made the lane's final statement. You return CLEAR or NOT CLEAR for the lane at "
-         "%s. Read the tip named, not the branch's newest." % (seat, r['lane'], r['what'], r['base'], r['before'], r['tip'], r['tip'])),
+         "read ONE STAGE of %s (%s): from %s (%s) to %s, %s. You return CLEAR or NOT CLEAR for the lane at "
+         "%s. Read the tip named, not the branch's newest." % (seat, r['lane'], r['what'], r['base'], r['before'], r['tip'],
+                                                                 r.get('at', "where its last seat made the lane's final statement"), r['tip'])),
         ("WHY THIS READ MATTERS. The release is held until a fresh round of thirty generated towns reads with no high and no medium false sentence. A read of "
          "another lane found 59 of its 151 new or reworded lines FALSE where they print, because each had been read in one town or none. So the heart of this "
          "read is step 1: every new or reworded line READ WHERE IT PRINTS. A false sentence you miss is the costly error; a true sentence you list wastes a "
@@ -2058,8 +2059,9 @@ READERS['REVIEW-POWERS-4'] = dict(
 )
 
 READERS['REVIEW-UPKEEP-4'] = dict(
+    at="where the lane's twelfth seat handed back; a fourteenth seat goes on curing on top of it, and those later commits are not yours",
     title="REVIEW-UPKEEP-4 · the defence lane's own commits read from its last read to its final statement",
-    lane='lane/coherence-upkeep-2026-11-12', own='lane/review-upkeep-4-2026-11-14', base='0a07f98c', tip=None,
+    lane='lane/coherence-upkeep-2026-11-12', own='lane/review-upkeep-4-2026-11-14', base='0a07f98c', tip='9c32016c',
     what=("the defence lane: the derived defence rating, the money a town can spend on it, and the safety, economy and outlook lines that speak of them"),
     before=("the tip the last reader read: its findings are in its file: check each cured. THIS READ IS OF THE LANE'S OWN COMMITS ONLY: the capacity "
             "branch the lane merged at c448bb3a0 (a house counts by its size) is ANOTHER READER'S stage: leave its commits out of step 1"),
@@ -2072,7 +2074,7 @@ READERS['REVIEW-UPKEEP-4'] = dict(
            "births: only the declared families move, and no rating falls where the stage says it only rises. TWO MEASURED PINS were re-keyed at the "
            "lane's merge of the line (the fork census's outside hash calls: 24; the institution table's service rows: 1,837): measure both yourself. The "
            "statement names literals that stay RED AND NAMED for a declaration pass, measured by the lane on 1,490 births with none false: draw thirty "
-           "of those prints on births of your own and read them."),
+           "of those prints on births of your own and read them. THE CAPACITY BRANCH'S READER (origin/lane/review-upkeep-capacity-2026-11-14, docs/chair/2026-11-14/REVIEW-UPKEEP-CAPACITY-2026-11-14.md: you may open it at once: it is a reader's file) found three HIGH display lines; THE TWELFTH SEAT'S CURES OF THEM ARE INSIDE YOUR STAGE (ffe0750d4: the readiness label reads the roster, a DECLARED MOVE of the label in 26 of 972 births; 7cbcbf5e9; fd1330673; fb7a61558): each by your own count on that reader's 972 births (docs/chair/2026-11-14/probes/REVIEW-UPKEEP-CAPACITY/), and what prints in its place read. NOT YOURS: the rating's arithmetic rebuilt on the side branch lane/upkeep-monotone-2026-11-14 (unmerged; its own reader), and a fourteenth seat curing on top of 9c32016c now (a later stage). ONE NEW STORED KEY to judge under your step 3: `criminalPreStress` on the record's compound."),
 )
 
 READERS['REVIEW-UPKEEP-CAPACITY'] = dict(
@@ -2111,13 +2113,14 @@ READERS['REVIEW-W2-FIX-DATA-3'] = dict(
 )
 
 READERS['REVIEW-W2-WRITE-2'] = dict(
+    at="where the lane's tenth seat handed back; an eleventh seat goes on curing on top of it, and those later commits are not yours",
     title="REVIEW-W2-WRITE-2 · the corpus lane's new and reworded lines read whole, from the last read to its final statement",
-    lane='lane/w2-write-2026-11-13', own='lane/review-w2-write-2-2026-11-14', base='b5206acd', tip=None,
+    lane='lane/w2-write-2026-11-13', own='lane/review-w2-write-2-2026-11-14', base='b5206acd', tip='70e5e746',
     what=("the corpus lane: the dossier's written lines (one source document, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md, from which "
           "src/data/dossierStateProse/*.generated.js are generated), three branches by block merged into one"),
     before=("the tip the last reader read: NOT CLEAR there: 59 of the lane's 151 new or reworded lines were FALSE where they print. Every line the lane "
             "has written or reworded since is yours, and each of the 59 is checked: cured and true, cured by silence, or still false"),
-    stmt='docs/chair/2026-11-13/W2-WRITE-HANDBACK-8.md and the lane\'s statement beside it (its list of new and changed lines with their towns)',
+    stmt='docs/chair/2026-11-13/W2-WRITE-HANDBACK-8.md, W2-WRITE-HANDBACK-9.md and W2-WRITE-HANDBACK-10.md (each seat\'s list of new and changed lines with their towns)',
     tools=("`origin/lane/review-w2-write-2026-11-13` (f07529c3e: `git fetch origin lane/review-w2-write-2026-11-13`): "
            "docs/chair/2026-11-13/REVIEW-W2-WRITE-b5206acd3-2026-11-13.md (the last read: its 59 false lines, each with its towns) and its probes under "
            "docs/chair/2026-11-13/probes/REVIEW-W2-WRITE/ (its renders of the owner's page and its eligibility counts per pool): copy them out with git "
@@ -2127,7 +2130,7 @@ READERS['REVIEW-W2-WRITE-2'] = dict(
            "tests/domain/corpusCureGuards.test.js: plant against a sample of thirty; a line is read ON THE OWNER'S PAGE, where a slot is filled: a slot "
            "that prints a catalogue label or breaks agreement is a finding. THE STAGE IS LARGE: spread step 1 over helper agents of your own, by block "
            "(DS-DEF, DS-ECO, the rest), and check a sample of each. The lane merged three branches: prove each block's lines at the tip equal the branch "
-           "that held the block."),
+           "that held the block. AN ELEVENTH SEAT IS CURING ON TOP of 70e5e746 now: its commits are a later stage, not yours. THE RELEASE BAR'S FOUR HIGH ROWS on this lane's pools were cured inside this stage (the tenth seat's hand-back counts each to 0 on 772 towns): each by your own count, and what prints in its place read."),
 )
 
 
@@ -2168,6 +2171,53 @@ READERS['REVIEW-R3-TABS'] = dict(
            "severities is a finding (ruled: a range is not a rating): count it on every surface."),
 )
 
+
+READERS['REVIEW-POWERS-5'] = dict(
+    at="where the lane's ninth seat handed back; a tenth seat goes on curing on top of it, and those later commits are not yours",
+    title="REVIEW-POWERS-5 · the powers lane read as a diff from 3909655c3 to the ninth seat's tip",
+    lane='lane/powers-follow-up-2026-11-13', own='lane/review-powers-5-2026-11-14', base='3909655c', tip='0ea65f57',
+    what=("the powers lane: who holds power in a town, the powers' standing and claims, titles and honorifics, people's goals, ties and secrets"),
+    before=("the tip the last reader read: no false line of the stage's own there in 1,368 towns; NOT CLEAR on six red test titles only"),
+    stmt='docs/chair/2026-11-13/POWERS-FOLLOW-UP-HANDBACK-2.md (ONLY its PART 7 and PART 8: the two seats inside this stage)',
+    tools=("`origin/lane/review-powers-4-2026-11-14` (`git fetch origin lane/review-powers-4-2026-11-14`): the last read, "
+           "docs/chair/2026-11-14/REVIEW-POWERS-4-2026-11-14.md (its HAND-BACK section says how its instruments are re-made) and "
+           "REVIEW-POWERS-4-LINES-READ.md (the pattern for step 1), with its probes under docs/chair/2026-11-14/probes/REVIEW-POWERS-4/: copy them "
+           "out with git archive and run them from outside every repository tree."),
+    extra=("8. THIS STAGE HOLDS THE CURES OF TWO HIGH ROWS a first measure against the release bar put on this lane (a raw modifier printed on "
+           "the Power tab: the lane counts 395 pages to 0; market, court and merchant lines that did not read the roster: 12 to 0): each by "
+           "your own count on births of your own, and WHAT PRINTS IN THEIR PLACE read. AND ONE GENERATOR MOVE (2768c53c7: the governance text "
+           "now reads the record's readiness label; to reach it, the power replay runs after the defence profile and the reconcile keeps the "
+           "replay's stability): the lane says it moves 11 births, stability only: by your own field diff on the census's 720 and on births of "
+           "your own, say exactly what moves, and whether the changed order can move a power, a legitimacy band or a person anywhere. THE SIX "
+           "RED TITLES of the last read: three are said green at this tip (run the four files); the three toll titles are still red and are "
+           "the NEXT seat's first item by the chair's ruling: name them, do not count them against this stage a second time."),
+)
+
+READERS['REVIEW-W2-FIX-DATA-4'] = dict(
+    at="where the lane's eleventh seat handed back; a twelfth seat goes on curing on top of it, and those later commits are not yours",
+    title="REVIEW-W2-FIX-DATA-4 · the data lane: a first reader's unfinished steps, and the eleventh seat's cures read cold",
+    lane='lane/w2-fix-data-2026-11-13', own='lane/review-w2-fix-data-4-2026-11-14', base='4114cf5a', tip='994733bc',
+    what=("the data lane: false lines written in the data tables (a house's description, a service's text, a history line, an arrival line), with its "
+          "history branch merged in"),
+    before=("the tip the reader before the last read. A FIRST READER OF THIS STAGE read every line of the part up to a1481aaf7 where it prints (126 "
+            "lines; 42 false readings at high or medium; one MEDIUM of the stage's own) and HANDED BACK AT ITS COUNT with steps 2 to 8 undone"),
+    stmt='docs/chair/2026-11-14/W2-FIX-DATA-HANDBACK-10.md (the final statement), W2-FIX-DATA-HANDBACK-9.md and W2-FIX-DATA-HANDBACK-11.md (the eleventh seat, after the statement)',
+    tools=("`origin/lane/review-w2-fix-data-3-2026-11-14` (`git fetch origin lane/review-w2-fix-data-3-2026-11-14`): THE FIRST READER'S FILES: "
+           "docs/chair/2026-11-14/REVIEW-W2-FIX-DATA-3-LINES-READ.md (its step 1, pushed cold: it STANDS for the part up to a1481aaf7: you do not "
+           "read those 126 lines again) and REVIEW-W2-FIX-DATA-3-2026-11-14.md (WHAT IS LEFT, line by line; what it had already measured for step "
+           "3; how its instruments are re-made), with its probes under docs/chair/2026-11-14/probes/REVIEW-W2-FIX-DATA-3/ (births, render, judge, "
+           "surfaces, field diff): copy them out with git archive and run them from outside every repository tree. These two files are a "
+           "READER's, not the lane's: you may open them at once."),
+    extra=("8. YOUR STEP 1 IS ONLY THE LINES NEW OR REWORDED IN a1481aaf7..994733bc (the eleventh seat: the smelter's two variants, three new "
+           "pools' first rows, whatever else its diff holds), read cold where they print. YOUR STEPS 2 TO 8 COVER THE WHOLE STAGE 4114cf5a to "
+           "994733bc, beginning from the first reader's list of what is left (its rulings where it would rule differently are part of your "
+           "step 2: say whether you agree). A DATA ROW PRINTS ON MANY SURFACES (a house's card, the Services tab, the PDF, the journal): for "
+           "each reworded row, every surface. THE POOL GUARD's red titles are carried red and named (two ceilings exceeded): say by your own "
+           "run that no ceiling was raised and no row re-based by hand (three new pools' first rows were banked through the register's own "
+           "form for a new pool: check that form was the register's own). The statement names literals RED AND NAMED for a declaration pass: "
+           "draw thirty of their prints and read them. A TWELFTH SEAT IS CURING ON TOP of 994733bc now: its commits are a later stage, not "
+           "yours."),
+)
 
 SEATS2['R2-CODE-B-7'] = dict(
     title="R2-CODE-B-7 · round two's second code lane: the line's merge and the final statement",
@@ -4276,6 +4326,73 @@ SEATS2['JOIN-ROWS-1'] = dict(
           "its source's path and heading, never from memory. Hashes are read from git, never typed from memory."),
     merges='',
     when="for something that blocks the whole table, and with the table (step 6)",
+    turns='',
+)
+
+
+SEATS2['POWERS-15'] = dict(
+    title="POWERS-15 · the powers lane goes on curing: the toll's three red titles, the title word on a man, then the medium rows by width",
+    branch='lane/powers-follow-up-2026-11-13', tip='0ea65f57', statement=False,
+    intro=("You are POWERS-15, the tenth seat on the powers lane of the settlement-engine integration program (lane/powers-follow-up-2026-11-13). The lane "
+           "holds who rules a town and who contests it: the powers' standing and claims, titles and honorifics, people's goals, ties and secrets. "
+           "An independent reader read the lane's stage with NO false line of the stage's own in 1,368 towns and NOT CLEAR on six red test titles; "
+           "the ninth seat made three of them green, cured three rows (a coaching inn under a crisis; a hall's line beside a syndicate; the "
+           "governance word against the Defense verdict) and handed back at its count. Yours: the three titles still red (the toll), two rows the "
+           "reader named, then the ranked medium rows, WIDEST FIRST. A second reader is reading the stage up to the ninth seat's tip NOW: what you "
+           "change under src/ is a stage after it. The lane goes on curing and lands later as a point of its own on the joined line: NO whole "
+           "suite, NO final statement."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. On your lane, docs/chair/2026-11-13/POWERS-FOLLOW-UP-HANDBACK-2.md, BY LINE RANGE, BY SCRIPT (1,679 lines; open ONLY this): PART 8 WHOLE "
+          "(from the line \"# PART 8\" to the end, about two hundred lines: the rulings in force, the chair's messages copied; the items as made; "
+          "P8.4 THE TABLE; P8.5 WHAT IS LEFT and P8.5a THE SIX RED TITLES: THAT IS YOUR LIST; P8.6 the instruments, under "
+          "docs/chair/2026-11-14/probes/POWERS-14/). Of the older parts only what a row of yours names, by heading.\n"
+          "3. THE READER'S FILE, for its rows only (`git fetch origin lane/review-powers-4-2026-11-14`; `git show "
+          "origin/lane/review-powers-4-2026-11-14:docs/chair/2026-11-14/REVIEW-POWERS-4-2026-11-14.md`): the sections headed \"M1\", \"L3\", "
+          "\"L4\", \"L5\" and \"CARRIED, the ladders' native twins\" (by script).\n"
+          "4. THE BAR'S ROWS FOR THIS LANE, for the rows the table lists from it (`git fetch origin lane/chair-2026-11-08`; `git show "
+          "origin/lane/chair-2026-11-08:docs/chair/2026-11-14/bar-0-rows/BAR-0-ROWS-powers.json`); the towns are re-born by the probes on "
+          "origin/lane/review-bar-0-2026-11-14 (docs/chair/2026-11-14/probes/REVIEW-BAR-0/).\n"
+          "5. The merge book's section 2m on origin/lane/merge-15-point-49-wip-2026-11-14 (the section headed \"## 2m.\"; by script), before the first "
+          "register you touch."),
+    work=("THE CHAIR'S RULINGS OF 2026-11-14 10:57 UTC (record 440; each vetoable by the owner; they are copied in PART 8):\n"
+          "(1) A RED TITLE THE STAGE LEAVES AT ITS TIP BARS CLEAR: tests only, re-keyed BY IDENTITY, never loosened; a floor is not lowered.\n"
+          "(2) THE TOLL: \"NO SLOT PRINTS A CHAIN LABEL\" STANDS. The line's tests/generators/tollNamePrintedEverywhere.test.js (three red titles: r2r-city-8, "
+          "r2r-metropolis-8, r2r-metropolis-49) is re-keyed BY IDENTITY, not loosened: a goal about the toll names the toll's HOUSE as the roster "
+          "prints it; the protective half (no crossroads toll in a river town) is unchanged; a plant reds it. MEASURE FIRST on the 720: every "
+          "goal that names a toll house against the roster: a goal naming \"the toll bridge\" where the roster holds no such house is a false "
+          "line and is cured at its cause before the test is re-keyed.\n"
+          "(3) L3: the title word follows the honorific through the same leaf: a man is not \"the alewife\" under a man's honorific.\n"
+          "(4) T2 (the ladders' native twins in rulingStructure.js): one description that says \"outpaced by merchant capital\" and \"still ahead "
+          "of merchant interests\" together: the two clauses read one comparison of the two powers' standing; T1 and T3 with it where they are "
+          "the same cure (\"present in council discussions\" only where a council governs; \"merchant capital\" only where a merchant power "
+          "stands).\n"
+          "THE WORK, in this order, each cause its own commit, measured first on the 720 and on the lane's births, red first (a collected arm, never a "
+          "bare seed loop; each arm shown able to red by a plant made in a tree NO suite is running in), pushed as made:\n"
+          "1. (2), THE TOLL. Then ONE MESSAGE TO THE CHAIR: the tip; the six titles' state by your own run of the four files.\n"
+          "2. (3), then (4).\n"
+          "3. P8.4's ROWS MARKED LEFT, WIDEST FIRST BY FALSE COUNT, each READ ON ITS PAGE IN ITS TOWN before it is cured (a count by a record "
+          "proxy is a candidate, not a fault): false -> cured at its cause; true -> said so with the towns, and struck from the table. The ninth "
+          "seat's order: ww#850 (\"Holds the title; the decisions that matter are made by …\": does the rival out-rank the holder on the page?), "
+          "ww#440 (\"Merchants with local reach\"), the bar's #17 (\"Well-funded city watch\" beside a resource-constrained guard, and printed "
+          "for a body that is not the watch), pf#520, the bar's #26 (the mine captain's \"Sells ore by the cart\" where every deposit is "
+          "depleted), then the rest. A row whose true writer is another lane's function goes under FOR THE JOIN (file, function, the one-line "
+          "change); a row that needs the owner's words stays PARKED with the words.\n"
+          "4. P8.5's L4 (the guard an earlier reader found missing: the role words styled with no guard; its plant `refresh-role`); the last "
+          "reader's L5 (a cure with no guard) and L4 (a rung that reads the roster at its call, which the merge moves after); the census's "
+          "candidate (\"… courts are all ecclesiastical\"); the two coaching-inn candidates of P8.1.\n"
+          "NAMED, NOT YOURS: the 189 stored modifier keys (a later measure); the writer-reach door (banked once, at the close: you do not "
+          "write it); the declaration pass's rows.\n"
+          "AFTER EVERY CURE: the presumed-things walker; at every commit that touches src/ the strict-domain gate, the type ratchet and eslint "
+          "on the touched files; the twelve-birth grid (`node scripts/census/page-census.mjs --grid`: a rise is a stop); the test files that "
+          "name the files you touched.\n"
+          "EVERY LINE A CURE NOW PRINTS IN A NEW TOWN, OR NEWLY LEAVES SILENT, IS READ WHERE IT PRINTS: three towns of its cells, a siege, a "
+          "famine or an occupation among them, the smallest and the largest size it reaches; the towns and what printed in the commit body. A "
+          "cure in generator code is a DECLARED MOVE: its field diff on the 720, by family, in the hand-back.\n"
+          "THE HAND-BACK, kept current after every item: a new \"# PART 9\" at the end of the lane's hand-back file: the rulings; the six titles; "
+          "the table brought current (each row: read true, cured with its commit and counts, or left); EVERY NEW OR CHANGED LINE with the towns "
+          "it was read in; the declared moves; FOR THE JOIN; what is left, line by line; `git diff --stat 0ea65f574..HEAD -- src/` file by file."),
+    merges='',
+    when="for a stop that blocks everything you have left, after the toll (the tip; the six titles' state), and with your hand-back",
     turns='',
 )
 
