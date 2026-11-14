@@ -853,9 +853,7 @@
    ["market", "other-lane", "Trade is what this settlement lives on. The markets are busy at all hours, and the guilds have a hand in every craft."]
   ],
   "src/generators/economy/viability.js": [
-   ["bank", "other-lane", "Banking institutions exist but the economy priority is very low."],
    ["bank", "other-lane", "Banking Without Economic Focus"],
-   ["bank", "other-lane", "Raise Economy priority or remove Banking institutions"],
    ["garrison", "other-lane", "Add Town Walls or Garrison"],
    ["market", "other-lane", "Add Market Square, Merchants' Quarter, or Trade Guild"],
    ["temple", "other-lane", "Add a house of worship, a temple or a monastery"],
