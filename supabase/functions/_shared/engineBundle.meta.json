@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-11-14T07:12:44.538Z",
+  "generatedAt": "2026-11-14T07:13:22.379Z",
   "entry": "src/engine/serviceEntry.js",
-  "sourceHash": "5b7eb4fe727ccbb0",
-  "engineVersion": "4a3aa5e4990d1ff1",
-  "builtFromCommit": "41f886d0ce5f980d1c7a0aa502c151e8e5db1b9e",
+  "sourceHash": "45f0ae9a029b59dc",
+  "engineVersion": "02736edc20550395",
+  "builtFromCommit": "d11dfde956b125821f5716b6e586c9934b1495b0",
   "inputs": [
-    "../p12/node_modules/seedrandom/seedrandom.js",
+    "node_modules/seedrandom/seedrandom.js",
     "src/data/arrivalProse.js",
     "src/data/bandLadders.js",
     "src/data/chainAccessNames.js",
