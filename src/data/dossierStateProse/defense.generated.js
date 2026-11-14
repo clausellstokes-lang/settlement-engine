@@ -7143,7 +7143,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "colour"
+            "guardPresence"
           ],
           "text": "{settlement} was betrayed recently, and its defence is being rearranged on the assumption that the enemy knows the old arrangements.",
           "slots": [

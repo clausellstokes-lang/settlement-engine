@@ -3697,7 +3697,7 @@ street, the unfolding).
 4. `[street · no guardPresence]` {settlement} keeps no defenders to pay, and the debt is one more reason it never will.
 
 **override: SECURITY COMPROMISED**
-1. `[ledger · colour]` {settlement} was betrayed recently, and its defence is being rearranged on the assumption that the enemy knows the old arrangements.
+1. `[ledger · guardPresence]` {settlement} was betrayed recently, and its defence is being rearranged on the assumption that the enemy knows the old arrangements.
 2. `[street · guardPresence]` The guards at {settlement} have changed their rounds and will not say why, and everyone can guess.
 3. `[unfolding · colour]` Until {settlement} has changed everything the traitor knew, its defence is weaker than it looks.
 4. `[street · no guardPresence]` {settlement} has no defenders to reorganize after the betrayal, only households that now bar their doors and keep their own counsel.
