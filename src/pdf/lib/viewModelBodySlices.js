@@ -281,6 +281,10 @@ export function servicesSlice(active) {
   };
 }
 
+/** EXPORTS-B3: the houses an unexploited chain still needs, under the Resources tab's own word (ResourceChainCard's
+ * "Needs:" line); none, no line. @param {string[]} names */
+const needsLine = (names) => (names.length ? `Needs: ${names.join(', ')}` : null);
+
 export function resourcesSlice(active) {
   const s = active || {};
   const ra = s?.resourceAnalysis || {};
@@ -325,12 +329,18 @@ export function resourcesSlice(active) {
           // an unmapped name passes through as itself.
           // W2-C-LEAVES-SIDE (the twin of #452; the processing column only): an Unexploited row names only the houses the
           // live roster does not hold, by the reader the tab's "Needs:" line reads (validationOnPage.js :: housesStillNeeded).
+          // EXPORTS-B3 (EXPORTS-MEASURE-1 B3, the chair's ruling: candidate A with the tab's word): the row prints what
+          // the tab's card (ResourcesTab.jsx :: ResourceChainCard) prints and no more. A worked chain names no houses and
+          // no goods: the Full card prints neither, the Partial card no house and no finished good (its intermediate goods
+          // are not carried: a surface with no room prints less). An unexploited one names the houses it still needs
+          // under the tab's own word "Needs:" (the PDF and the journal both print this string), and the first two goods
+          // the tab's card shows. Guard: tests/pdf/resourceChainsLikeTheTab.test.jsx.
           processing: which === 'unexploited'
-            ? housesStillNeeded(s, houses).map((n) => institutionDisplayName(n) || n).join(', ') || null
-            : institutionDisplayName(item?.processing) || institutionDisplayName(item?.institution) ||
-                      houses.map((n) => institutionDisplayName(n) || n).join(', ') || null,
-          output: item?.output || item?.product ||
-                  (item?.finalProducts || item?.outputs || []).join(', ') || null,
+            ? (needsLine(housesStillNeeded(s, houses).map((n) => institutionDisplayName(n) || n)))
+            : null,
+          output: which === 'unexploited'
+            ? ((item?.finalProducts || item?.outputs || []).slice(0, 2).join(', ') || null)
+            : null,
           chainStatus: item?.chainStatus || null,
           quality,
           accessibility,
