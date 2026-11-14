@@ -270,3 +270,29 @@ galleryVeilHandRows 9 of 9, gallerySecondHomes 5 of 5, galleryVeilCures 32 of 32
 step; 65 helpers, 65 immutable, none a definer, none callable by a reader role. The lane's pins (`out/pins-V7-2.txt`):
 galleryServerVeil the same six arms red (every one of its 17 printed paths a tie's role copy or its "(order or value)"
 line), not touched; twelve other files green.
+
+## 10. The state after V7-3, V7-1 and V7-2 (the seat, at e9b14472f), and what is parked for the chair
+
+- V7-2 (e9b14472f) was built as V7-1 was: by a builder started inside the seat's session with a fresh context and a
+  written sub-brief; the harness reports 407 thousand tokens in all (94 tool calls, 49 minutes). EXECUTED BY THE SEAT on
+  its bytes (212 `70810c2a…13ef1e`, rollback `d99237b4…458a7b`): the four checksums; `run-all.sh`
+  (`out/run-all-seat-at-e9b14472f.txt`): **37 checks, 35 pass, 2 fail (a07: V7-5; d06: V7-8)**; server against twin
+  equal on 15 of 15; 3,000 deep 42 ms on 211 against 40 ms; 600 x 10,000: 1,141 against 1,280 ms; the hand-row guard
+  9 of 9. NOT READ LINE BY LINE BY THE SEAT, as section 7 says of V7-1.
+- **PARKED, each with the seat's recommendation, for ONE ruling by the chair:**
+  1. A SHOWN POWER WHOSE NAME IS A HIDDEN HOUSE'S NAME WITHOUT ITS QUALIFIER (section 4): as built the power keeps its
+     own name and every other string that names it goes (60 strings on one born metropolis under Reveal DM).
+     Recommended: a string that names a shown power by the power's own name is the power's, and stays.
+  2. THE IMPRESSION BY ITS PERSON (section 9): the composer never builds it from the appearance, so with the appearance
+     eye shut every impression goes (7,010 of 7,010 on 240 born towns; none under the default veil). Recommended: back
+     to the words, both directions (the reader's e06 is a hand row); the identity rule only if the chair wants it.
+  3. THE PRESSURE SENTENCE (section 9): the record ties it to no tie; 5 succession lines go though no tie built them,
+     and the ties' description switch alone takes 23 of 125 phrasings and 9 of 27 sentences built from the open
+     tension. Recommended: the generator records the tie it drew (a field beside the sentence), for the seat after the
+     merges; until then as built.
+  4. V7-3's shared-id row (section 3); the bare trace token `blackMarket` taken where that house is hidden (section 8).
+  5. FOUND, NOT TOUCHED (section 9): the public sanitiser drops a covert tie from `relationships[]` and
+     `prominentRelationship` still tells it (9 of 125 born towns by the twin; the server PLAUSIBLE).
+- **LEFT, in the brief's order:** the design's rest: V7-5 with the trace by positive account (a07) and V7-8, every
+  existence flag (d06); the income row by its house; item 2 of BRIEF-VEIL-9 (the booleans' derivation agreed between
+  server and twin); then the acceptance run to exit 0 and `born/run-born.sh`; BRIEF-VEIL-9's item 3 (a) to (e); the pack.
