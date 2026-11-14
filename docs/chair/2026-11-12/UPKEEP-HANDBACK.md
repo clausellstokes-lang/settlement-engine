@@ -1,3 +1,75 @@
+# COHERENCE-UPKEEP: the hand-back (the fourteenth seat, UPKEEP-14, 2026-11-14) — IN PROGRESS
+
+**The lane:** `lane/coherence-upkeep-2026-11-12`. **Base of this seat:** 9c32016c9 (read back from origin before any work; it matched the brief). **This seat's session:** `session_01ACmDYZGcuZzHGcnNZBoikr`. **The brief:** `origin/lane/chair-2026-11-08:docs/chair/2026-11-14/briefs/BRIEF-UPKEEP-14.md`. **The births:** the capacity reader's 972 (`probes/REVIEW-UPKEEP-CAPACITY/all.seeds`), every surface rendered by its `render5.mjs` at the lane's tip and at each cure. **The instruments** (outside every tree, in the seat's container, `/home/user/ins/`): `rend.sh` (four shards of `render5.mjs`), `census14.mjs` (item 1's one script: every row's printing towns on every surface, and the towns printing it against the record, by the tree's own fact readers `defenceOf` and `scoreBand`), `holders.sh` (holders by content: a lane whose copy differs from integration's, from ours and from every past version of the file in this lane's history, less lanes whose tip is in this line).
+
+## The brief and the rulings this seat works to
+
+THE CHAIR'S RULINGS (2026-11-14; each vetoable by the owner; copy them into the hand-back):
+- (a) THE LAW OF THESE ROWS: A LINE THAT NAMES A HOUSE, A ROLE, A PRACTICE OR A FORCE READS THE ROSTER; A LINE THAT PRESUMES NORMAL TIMES READS THE CRISIS IN FORCE; A LINE WRITTEN FOR A TOWN'S SIZE IS NOT PRINTED IN A THORP; TWO LINES ON ONE PAGE READ ONE FACT. Where the line's file already keeps declared twins (incomeLineSiblings.js does), the true twin is chosen; where no true line exists, one is written and read where it prints, or the line is silent. Silence is true.
+- (b) #234 (incomeLineSiblings.js: "Timber Trade … managed felling keeps production consistent": the twelfth seat measured 111 of the 201 births that print "managed felling" with no woodcutter, lumber house or sawmill): "managed felling" only where a woodcutter, a lumber house, a sawmill or a managed forest stands; otherwise the plain twin.
+- (c) #273 (incomeLineSiblings.js: "Iron & Metalwork: Coal is dug here and sold to the forges of other towns…" in a village with no mine, pit, smithy or forge): "is dug here" only where a house that digs stands. AND MEASURE, do not cure: the births that hold an income ROW (its title and its share) for a trade none of whose houses stand, by title: that is the generator's row and a move of the income shares: the table to the chair.
+- (d) #77 (economicState.js: an income line "Fish & Preserved Produce" where the record calls the fishery depleted, its chain impaired, and salted fish is an import): the line says the truth of it (the river is fished out; what is sold is the last of what was put by) or is silent; if the SHARE itself is the false thing (income from a dead source), measure it and tell the chair with (c)'s table.
+- (e) #90 (safetyProfile.js: "Everyone comes and goes by the gates, so smugglers have to get past the garrison and city watch" under a siege whose own line says the gates are shut and barred): under a siege no line says the gates stand open: a true siege twin (what moves, moves over the wall or by a bribed postern, if the record supports it) or silence.
+- (f) #166 and #218 (safetyProfile.js: "A mix of safer and more exposed areas. Militia volunteers patrol the main paths; … Residents know which corners to avoid." in a thorp of 28 and a hamlet of 87 with no watch): areas, main paths and corners belong to a village or larger; "militia volunteers patrol" only where a militia stands. A thorp or a hamlet gets a small-place line that is true of it, or silence.
+- (g) #244 (safetyProfile.js: "No single dominant organisation: just the steady pressure of too many people with too little…" beside "Criminal structure: Organized syndicate" and a criminal power that governs): the crime summary and the criminal structure row read ONE fact: the line denies a dominant organisation only where the record holds no criminal power that governs or dominates and no thieves' guild. (The structure row is the leaves lane's function; its seat is curing the opposite fault there by the same fact: read the record's criminal power, not the row.)
+- (h) #256 and #280 (safetyProfile.js: "Hunger-driven theft … Enforcement struggles to distinguish survival crime from organised theft." where no watch, court, militia or garrison stands): a line that names enforcement reads the roster: where none stands the sentence stops at the theft.
+- (i) P5, AS THE TWELFTH SEAT WROTE IT OUT (its section "P5", the first bullet): the charter hall's "Effective for monster incursions and major disturbances, less so for routine crime prevention." is dropped where the town's own Beasts & Monsters band reads Critical (11 births): `assembleSettlement.js :: withGuardPaidFromDefence` passes the monster score in `read`, `safetyProfile.js :: keptGuardLine` reads it. assembleSettlement.js is held by this lane AND the data lane BY CONTENT: change ONLY inside `withGuardPaidFromDefence` (this lane's own function); if your change must touch a line outside it: STOP and tell the chair with the lines.
+- (j) HIGH, carried, found by the leaves lane's reader on 1,824 births: THE FOUNDRY JOURNAL NAMES EVERY SUPPLY CHAIN "Chain" ("- **Chain** *(impaired)*": 23,653 lines, every town): `src/pdf/lib/viewModelBodySlices.js :: economicsSlice` reads `c?.name || c?.chainName || 'Chain'` while the record's chains carry `label`. This lane holds that function BY CONTENT (the leaves lane holds `resourcesSlice` in the same file: do not touch it). RULED: the slice reads the name the record holds; a chain with no name is not printed as "Chain". A DECLARED MOVE of the journal's chain lines in every town (and of whatever else reads the slice's `name`: measure which surfaces: if the PDF moves too, say so with counts).
+- (k) ONE STORED KEY (the writer-reach door, measured on the joined tree): this lane newly stores `criminalPreStress` on the record's compound (priorityHelpers.js writes it; defenseGenerator.js reads it at line 239; no customer surface reads it). A NEW KEY IN THE STORED RECORD THAT NO SURFACE READS IS NOT ADDED: the value is handed to the generator without being stored (the pages byte-identical on your births), OR, if it must be stored, it is rowed in the writer-dark register by that register's own form with its evidence (scripts/lib/writer-dark-register.mjs: read its header first). The read at line 239 is in a fenced file: if the cure needs a change there, it is one line and it is NAMED for the builder seat (UPKEEP-13) with the exact change, not made; tell the chair.
+
+## ITEM 1 — THE CENSUS (the 972 at 9c32016c9; `TREE=<tree> node census14.mjs <out> --towns`)
+
+"printing" = the births that print the sentence on any surface (tab, Tonight, PDF, Foundry, AI prompt and grounding, registers, world exports); "false" = those of them whose record makes it false by the row's ruling. The surfaces column counts the false births per surface.
+
+| row | false / printing | surfaces printing it false |
+|---|---|---|
+| HIGH (j) Foundry journal "- **Chain** *(" (every supply chain named "Chain") | **963 / 963** (12983 lines) | foundry 963 |
+| #234 (b) "managed felling" with no woodcutter, lumber house, sawmill or managed forest | **53 / 201** | tab 53, pdf 53, export 106 |
+| #273 (c) "Coal is dug here" with no house that digs | **63 / 68** | tab 63, pdf 63, export 126 |
+| #77 (d) a Fish income row where the fishery is depleted (an exhausted-fishery import, or a fishing chain on a depleted resource) | **43 / 296** | tab 43 |
+| #90 (e) "comes and goes by the gates" / "comes in by the gates" under a siege | **29 / 347** | tab 29, pdf 29, export 58 |
+| (e) the gateless twin "The walls leave few ways in, so smugglers" under a siege | **1 / 27** | tab 1, pdf 1, export 2 |
+| #166 #218 (f) "A mix of safer and more exposed areas" in a thorp or hamlet | **79 / 212** | export 158 |
+| (f) "Militia volunteers patrol" where no militia stands | **0 / 19** |  |
+| #244 (g) "No single dominant organisation" beside a criminal power that governs or dominates, or a thieves' guild | **11 / 50** | tab 11, export 22 |
+| (g, measured wider) the same line beside ANY criminal power on the roster | **10 / 50** | tab 10, export 20 |
+| #256 #280 (h) "Enforcement struggles to distinguish" where no watch, court, militia or garrison stands | **84 / 248** | tab 84, export 168 |
+| P5 (i) "Effective for monster incursions" where the Beasts & Monsters band is Critical | **11 / 20** | tab 11, pdf 11, export 22 |
+| carried: "nobody organised to meet it" beside a charter hall (threatAssessment.js) | **22 / 228** | pdf 22 |
+| carried: "paid late" where prosperity is Prosperous or Wealthy | **5 / 327** | pdf 5 |
+| carried: "already owed" / "short of money for years" where Prosperous or Wealthy (corpus pool) | **5 / 202** | tab 5 |
+| carried: "the barracks is all that stands guard" beside a watch (headlines.js) | **13 / 13** | pdf 13, foundry 13 |
+| carried: "the town watch is all that stands guard" beside a free company hall (headlines.js) | **3 / 44** | pdf 3, foundry 3 |
+| carried (pool): "could not hold off a raid" beside "credible against raiders" | **7 / 119** | tab 7 |
+| carried (pool): "would take real effort to threaten" while occupied or besieged | **21 / 105** | tab 21 |
+| carried (pool): "all but undefended" while besieged with a watch | **8 / 196** | tab 8 |
+| carried (pool): "reads as a defended place from the road in" while besieged | **10 / 105** | tab 10 |
+| carried: "Governance fractured." beside "Stability: Stable" (PowerTab, another lane) | **11 / 438** | tab 11, pdf 11 |
+
+Income ROWS whose trade has no house standing (measure for (c)/(d)): title: no house / rows
+- Iron & Metalwork: 198 / 654
+- Stone Quarrying: 131 / 182
+- Timber Trade: 98 / 220
+- Fish & Preserved Produce: 37 / 151
+- Fish & Maritime Produce: 6 / 145
+- Herbalist & Apothecary: 5 / 101
+- Apothecary & Alchemy: 4 / 290
+- Wool & Textile Trade: 0 / 383
+- Arcane Industry: 0 / 87
+
+The order of work (the brief: (j) first, it is HIGH; then widest first): (j) 963; (h) 84; (f) 79; (c) 63; (b) 53; (d) 43; (e) 29; (g) 11; (i) 11; then (k); then the carried templates of this lane's or no lane's files: "the barracks is all that stands guard" 13, "nobody organised to meet it" 22, "paid late" 5 (threatAssessment.js and headlines.js: holders re-read before the first edit). The pool rows (p1–p4, "already owed") are the corpus's: NAMED, not made.
+
+## What this seat did, in commit order
+
+| Commit | Item | Measure (the 972) | Guard and plant | Moved |
+|---|---|---|---|---|
+
+## FOR THE JOIN (this seat's, gathered)
+
+## WHAT IS LEFT, line by line
+
+---
+
 # COHERENCE-UPKEEP: the hand-back (the twelfth seat, UPKEEP-12, 2026-11-14) — HANDED BACK AT THE COUNT (390,079 at the 10:02 check: under the mark by less than one step-4 item, so handed back rather than crossing it mid-item): H1, H2 and the bar's two HIGH rows (#115, #216) CURED and pushed; H3, M3/M5 and P5 NAMED FOR THE JOIN; M7 declared by field diff with the shift record's 51 surfaces measured; step 4 (the medium rows) NOT STARTED
 
 **The lane:** `lane/coherence-upkeep-2026-11-12`. **Base of this seat:** 26474cda9 (read back from origin before any work; it matched the brief). **This seat's session:** `session_01ACmDYYjzumywJQGkqxyCna`. **The brief:** `origin/lane/chair-2026-11-08:docs/chair/2026-11-14/briefs/BRIEF-UPKEEP-12.md`. **The births:** the capacity reader's 972 (`probes/REVIEW-UPKEEP-CAPACITY/all.seeds`: the census's 720 + 252 of the app's shape), every surface rendered by its `render5.mjs`, born at the lane's tip and at each cure. **The instruments** (outside every tree, in the seat's container): `rend.sh` (four shards of `render5.mjs`), `h1.py` (base -> cure: label, legitimacy, powers, persons, ties, quarrels, and the page-line multiset diff by surface), `lines.py` (the masked lines by surface), `grepw.py` (towns printing a sentence, split by walls), `arc.mjs` (the arcane census against the bucket), `p5.py` (a line by the Beasts band its tab prints), `m7.py` + the reader's `fielddiff.mjs`, `holders2.sh` (holders by content: a lane whose copy differs from the line's, less lanes already in the line and copies that are a past version of the line's file).
