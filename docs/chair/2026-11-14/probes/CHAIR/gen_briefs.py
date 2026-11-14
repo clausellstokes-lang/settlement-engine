@@ -531,7 +531,7 @@ LAWS2 = (
     "A bound is proved on births the builder did not tune on. A rising row is origin (stop) or exposure (declared). A red is classed against the lane's reviewed "
     "base as well as the seat's own. The page shows ratings, never the machinery. A line is in its pool unless the town makes it false. A classifier's refusal "
     "is never routed round. A hand-back carries the rulings its seat worked to: the chair's messages are not on the branch. YOU CHANGE ONLY FILES YOUR "
-    "LANE HOLDS: before the first edit of any file, `git log --oneline origin/lane/integration-2026-11-07..origin/<each other lane> -- <file>`: a fault "
+    "LANE HOLDS: before the first edit of any file, BY CONTENT, `git diff --stat origin/lane/integration-2026-11-07 origin/<each other lane> -- <file>` (a log over merges names false holders): where another lane's copy differs from the line's, that lane holds it too: a fault "
     "whose true writer is a file another lane has changed is NAMED under FOR THE JOIN (file, function, the one-line change) and left: two lanes curing "
     "one fault is a conflict at the join (it happened on 2026-11-14).\n"
     "THE METHOD for every line you write or reword: (1) a line is READ WHERE IT PRINTS before it is pushed: three towns of its own cells, a siege, a famine or an "
@@ -2362,6 +2362,78 @@ SEATS2['R3-CODE-C-7'] = dict(
           "and every test file you touched. Then ONE message to the chair: the tip, the four walkers' outcomes, what is named for the join."),
     merges='',
     when="for a stop that blocks everything you have left, and with your final tip (the four walkers' outcomes; what is named for the join)",
+    turns='',
+)
+
+
+SEATS2['R3-TABS-4'] = dict(
+    title="R3-TABS-4 · round three's tabs lane: the reader's findings cured (one high, three medium, two low)",
+    branch='lane/r3-tabs-2026-11-13', tip='5f860237', statement=False,
+    intro=("You are R3-TABS-4, the fourth seat on round three's tabs lane of the settlement-engine integration program (lane/r3-tabs-2026-11-13). The lane "
+           "cures false lines on the Defense, History, Substrate and Magic tabs at display. It was FINAL at bb2bf91c5 (the line merged, the statement made) "
+           "and A FRESH READER READ IT NOT CLEAR: one HIGH and two MEDIUM false sentences that are this stage's own, executed on the rendered page. Yours: "
+           "those findings cured, each read where it prints, and the lane's statement brought current. NOTHING ELSE: no new row of the old lists."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. THE READER'S FILES (`git fetch origin lane/review-r3-tabs-2026-11-14`; read with `git show origin/lane/review-r3-tabs-2026-11-14:<path>`): "
+          "docs/chair/2026-11-14/REVIEW-R3-TABS-2026-11-14.md WHOLE (54 lines: findings F1 to F10, each with its town, its sentence and the fact against "
+          "it; the instruments) and in docs/chair/2026-11-14/REVIEW-R3-TABS-LINES-READ.md the rows L09, L14, L15, L16 and L19 (by script, by row label). "
+          "Its probes (docs/chair/2026-11-14/probes/REVIEW-R3-TABS/: births.mjs with seeds1536.txt, render.sh, desk.mjs) are yours to copy out with git "
+          "archive and run from outside every repository tree: they are how each finding is reproduced and each cure read.\n"
+          "3. On your lane, docs/chair/2026-11-13/R3-TABS-HANDBACK.md: ONLY its rulings and its final statement (the reader gives the lines: 7 to 22, 58 to "
+          "72, 690 to 723; by script): what L0, L1, L2 and L3 are, in the lane's own words.\n"
+          "4. The merge book's section 2m on origin/lane/merge-15-point-49-wip-2026-11-14 (docs/INTEGRATION_STYLE_2_2026-11-09.md, the section headed "
+          "\"## 2m.\": about forty lines; by script), before the first register you touch."),
+    work=("THE CHAIR'S RULINGS ON THE READER'S FINDINGS (2026-11-14 07:03 UTC; vetoable by the owner; copy them into the hand-back):\n"
+          "(a) F1, HIGH: THE STRONG POSTURE POOL IS STRUCK UNDER AN OCCUPATION, as it is under a siege or a war; AND THE REVERSE GUARD: no strong posture "
+          "line beside a Weak or Critical Invasion & War bar (the line speaks of what the town can field and has built: that bar's own subject). Beside "
+          "such a bar the posture draws no higher than the pool the line's tip 976db5b19 drew for that town, read where it prints.\n"
+          "(b) F3, MEDIUM: a posture variant that names WORKS (\"the works are kept up\") is struck where the record holds no walls; a variant that names a "
+          "watch on the approaches, where it holds neither watch nor garrison. A line that names a thing reads the roster.\n"
+          "(c) F2, MEDIUM, AND F7, LOW: THE CHAIR'S EARLIER NOTE IS WITHDRAWN: A WATCH IS NOT THE TOWNSPEOPLE IN ARMS and not a force that holds a "
+          "perimeter. `militia || watch` leaves the key of the citizen-militia pools (the invasion row) and of the beasts row's held-perimeter lines: a "
+          "pool whose words name a household levy prints only where the record holds a militia or a levy. THE WATCH-ONLY TOWN (a watch and no garrison, "
+          "no contracted force, no militia; walled or not): the row prints NO sentence that says the town has no force (false beside a watch: the lane's "
+          "own earlier cure, kept) and none that names townspeople in arms. If a pool the lane's key can select holds a line TRUE of such a town (the "
+          "watch's own: \"{S} keeps a watch, which is a matter of order rather than of war…\"), it may be the row's line, never the same sentence twice "
+          "on one tab; otherwise THE ROW'S SENTENCE IS SILENT there (the bar and its word still print; read the rendered row: no dangling label). Silence "
+          "is not a false sentence. FOR THE JOIN, named: the corpus owes a pool for \"walls and a watch only\" and \"a watch only\".\n"
+          "(d) F6, MEDIUM, a carried class your L0 moved seven towns into: the supply sentence (\"busy and well stocked\", \"kept supplied\", \"will not go "
+          "short\") under a siege or a famine. First measure what (c) does to it (the seven should leave with the watch). Then, since the key "
+          "(defenceSupplyPoolKey) is in a file only this lane holds: a supply line that says the defenders are well supplied is not drawn under a siege or "
+          "a famine in force (silence, unless its pool holds a line true under the crisis), with a guard town for each. If the measure shows the false "
+          "lines come from the pool's own variants under conditions the key cannot see: FOR THE JOIN, with the count.\n"
+          "(e) F8, LOW: the twin of your History rename: src/domain/dossier/plotHooks.js :: EVENT_LABELS still says \"Exile & Return\" and \"Occupation\" "
+          "(209 and 307 pages). No lane holds that file (checked by content by the chair at 07:03 UTC; check again before you edit): the same two names "
+          "History prints, read where the Plot Hooks tab and the PDF print them (the phrase whole: \"… Event\").\n"
+          "(f) NOT YOURS, named in your hand-back FOR THE JOIN with the reader's counts: F4 (thirteen medium corpus lines newly voiced in the fourteen "
+          "towns whose names open with a non-ASCII capital: your L3 is right, the lines are the corpus's, false in any town); F5 (the posture against "
+          "the invasion row, 82 towns: the one ladder, the defence lane's); F9 (the naval line lost in river towns on coastal terrain: LEFT FOR AFTER THE "
+          "JOIN); F10 (the Substrate food word under a siege: the food generator's label).\n"
+          "THE WORK, in this order, each finding its own commit, measured first on the reader's 1,536 births (its seeds, its render), red first (a "
+          "collected arm over births, never a bare seed loop; each arm shown able to red by a plant you do not commit), pushed as made:\n"
+          "1. F1, both parts. THE GUARD THE READER ASKS FOR: a collected arm that reds on a strong posture line beside a Weak or Critical bar or under an "
+          "occupation, in either direction of L2. Count before and after: strong beside Weak or Critical 2 -> 0; the 34 towns newly drawing the strong "
+          "variant: how many keep it, each TRUE.\n"
+          "2. F3. Count: variants naming works in unwalled towns -> 0; guard town Muulcoba (rr3-town-occupied-rand-1) and a walled town that keeps the line.\n"
+          "3. F2 and F7 together (one cause: the key). Counts on the 1,536: the citizen-militia pool in towns with no militia 139 -> 0; the beasts row's "
+          "held-perimeter lines beside the watch's line 42 -> 0; what each watch-only town's two rows print now, by cell, every distinct text read; the "
+          "militia towns unchanged (byte-identical rows).\n"
+          "4. F6 as ruled in (d). 5. F8 as ruled in (e).\n"
+          "6. READ WHERE IT PRINTS, for every line a cure now prints in a new town or newly leaves silent: three towns of its cells, an occupation, a "
+          "siege and a famine among them, the smallest and the largest size it reaches: the towns and what printed in the commit body. THE READER FOUND "
+          "THESE BECAUSE THE LAST CURE WAS READ IN TOWNS WHERE IT WAS TRUE: read the towns where it could be false.\n"
+          "7. THE CLOSE AGAIN, small: births byte-identical to the line's still (the lane moves no record: prove it by the reader's births.mjs at your "
+          "tip against 976db5b19); section 2m's five doors, each exit (the presumed-things walker at every commit that adds, splits or rewords a "
+          "literal; the page census of the 720: no rise; a fall lowered by the shrink form); the lighting census by its ritual if a test title was "
+          "added; the three fast gates; the governing test files of the files you touched at your tip and at bb2bf91c5 (JSON, to files): no red new on "
+          "your commits; the edge bundles checked last. The whole suite is NOT run again.\n"
+          "8. THE HAND-BACK: a new heading \"THE FOURTH SEAT\" at the end of docs/chair/2026-11-13/R3-TABS-HANDBACK.md: the rulings above copied; each "
+          "finding: its cause (the lane commit), its cure and commit, its counts before and after, its guard and the plant that reds it, the towns read; "
+          "every sentence that now prints in a new town or is newly silent (for the owner's veto); FOR THE JOIN (the rows of (c) and (f)); what a "
+          "fresh reader needs: your range bb2bf91c5..<your tip> and the first reader's steps 3 to 7, which it did not run. Then ONE message to the "
+          "chair: the tip, each finding's count after, what is named for the join."),
+    merges='',
+    when="for a stop that blocks everything you have left, when F1 is pushed (one line: the two counts after), and with your final tip",
     turns='',
 )
 
