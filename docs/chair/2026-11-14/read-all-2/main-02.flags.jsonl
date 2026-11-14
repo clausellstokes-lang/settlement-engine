@@ -1,0 +1,106 @@
+{"id":"20649","town":"r2s-plague_onset-thorp-2","sev":"MED","kind":"LACKS","why":"presumes a reformist leader; GOVERNMENT lists only Elder Council and PEOPLE has two others","other":""}
+{"id":"17445","town":"r2s-plague_onset-thorp-2","sev":"MED","kind":"STATE","why":"'for one side' presumes opposed sides; one power only, QUARRELS none","other":""}
+{"id":"15386","town":"r2s-plague_onset-thorp-2","sev":"MED","kind":"LACKS","why":"names a record-keeping institution; HOUSES lists none","other":""}
+{"id":"11642","town":"r2s-plague_onset-thorp-2","sev":"MED","kind":"LACKS","why":"an office keeping debts and agreements; HOUSES (8) has no such house, thorp of 9","other":""}
+{"id":"21162","town":"r2s-plague_onset-thorp-2","sev":"MED","kind":"STATE","why":"fish from the local waters; LAND gives River Fisheries as depleted","other":""}
+{"id":"14643","town":"r2s-plague_onset-thorp-2","sev":"MED","kind":"LACKS","why":"'parts' of the place and a street in a thorp of 9 people","other":""}
+{"id":"11983","town":"r2s-plague_onset-thorp-2","sev":"LOW","kind":"LACKS","why":"'the defence makes do'; DEFENCE is none in every kind","other":""}
+{"id":"01702","town":"r2s-plague_onset-thorp-1","sev":"MED","kind":"STATE","why":"title Household Elder for Pavithra; roster gives only boat-headman and HOUSES has no Household elder","other":""}
+{"id":"21191","town":"r2s-plague_onset-thorp-1","sev":"MED","kind":"STATE","why":"most raids turn back; defence Vulnerable and PAST records a catastrophic siege 7 years ago","other":"14751"}
+{"id":"14751","town":"r2s-plague_onset-thorp-1","sev":"MED","kind":"STATE","why":"siege weighs on 'the quarrels the thorp is having now'; QUARRELS none","other":""}
+{"id":"02462","town":"r2s-plague_onset-thorp-1","sev":"MED","kind":"LACKS","why":"a 'war party'; only Household Council listed, no quarrels","other":""}
+{"id":"27939","town":"r2r-thorp-41","sev":"MED","kind":"STATE","why":"takes a bad season without going hungry; FOOD Pressured, 7% gap, no fishery on LAND, stores 1.9 months","other":""}
+{"id":"07126","town":"r2r-thorp-41","sev":"MED","kind":"LACKS","why":"a 'war party'; only Elder Council listed, QUARRELS none","other":""}
+{"id":"11090","town":"r2r-thorp-22","sev":"MED","kind":"STATE","why":"puts Akna Balam on the Elder Council; PEOPLE gives her only as boat-headman at the Fishing community","other":""}
+{"id":"01698","town":"r2r-thorp-22","sev":"MED","kind":"STATE","why":"gives Akna Balam the title Elder and the council seat; roster title is boat-headman, no Household elder house here","other":""}
+{"id":"14649","town":"r2r-thorp-22","sev":"MED","kind":"PAIR","why":"'nothing amiss' for a passer-by; CRISIS insurgency, safety Dangerous, armed rebels active, visitors questioned at every turn","other":"03791"}
+{"id":"15437","town":"r2s-infiltrated-thorp-3","sev":"MED","kind":"LACKS","why":"a 'Reformists' camp; GOVERNMENT lists only Elder Council, QUARRELS none, thorp of 6","other":""}
+{"id":"16654","town":"r2s-infiltrated-thorp-3","sev":"MED","kind":"LACKS","why":"a 'Secular camp'; no such power listed, no church house, thorp of 6","other":""}
+{"id":"15536","town":"r2s-infiltrated-thorp-3","sev":"MED","kind":"STATE","why":"religious tension; PAST has no religious event, no religious house, one power, QUARRELS none","other":""}
+{"id":"15562","town":"r2s-infiltrated-thorp-3","sev":"MED","kind":"STATE","why":"religious tension in the history; PAST lists Purge, Debt Crisis, Succession Crisis only","other":""}
+{"id":"02863","town":"r2s-infiltrated-thorp-3","sev":"MED","kind":"STATE","why":"a relic claimed by 'both sides'; one power, QUARRELS none, no religious house","other":""}
+{"id":"02864","town":"r2s-infiltrated-thorp-3","sev":"MED","kind":"STATE","why":"a relic claimed by 'both sides'; one power, QUARRELS none, no religious house","other":""}
+{"id":"02464","town":"r2s-infiltrated-thorp-3","sev":"MED","kind":"STATE","why":"a grazing and water dispute between families 'on each side'; QUARRELS none; thorp of 6, no grazing resource","other":""}
+{"id":"01086","town":"r2s-infiltrated-thorp-3","sev":"LOW","kind":"LACKS","why":"'the law is present'; DEFENCE has no watch, garrison or charter, only a household levy","other":""}
+{"id":"20650","town":"r2s-infiltrated-thorp-3","sev":"MED","kind":"LACKS","why":"presumes a reformist leader; only Elder Council listed, roster is Hademar Meyer the eldest","other":""}
+{"id":"17446","town":"r2s-infiltrated-thorp-3","sev":"MED","kind":"STATE","why":"'for one side' presumes opposed sides; one power only, QUARRELS none","other":""}
+{"id":"22189","town":"r2s-monster_pressure-thorp-1","sev":"LOW","kind":"LACKS","why":"'more is spent on defence'; DEFENCE is none in every kind","other":""}
+{"id":"21598","town":"r2r-thorp-32","sev":"MED","kind":"STATE","why":"'enough food, mostly'; FOOD word Pressured with a 13% gap and stores of 1.5 months","other":"14941"}
+{"id":"29918","town":"r2r-thorp-32","sev":"MED","kind":"STATE","why":"stoneworking shown as worked; LAND gaps say stone and timber are available but not being processed","other":""}
+{"id":"06125","town":"r2r-thorp-32","sev":"LOW","kind":"STATE","why":"a 'Defended' pass; DEFENCE is none in every kind, walls none","other":""}
+{"id":"05589","town":"r2r-thorp-51","sev":"LOW","kind":"LACKS","why":"people watch 'the street'; thorp of 11 with only dwellings","other":""}
+{"id":"15436","town":"r2r-thorp-51","sev":"MED","kind":"LACKS","why":"a 'Reformers' camp; GOVERNMENT lists only Elder Council, QUARRELS none, thorp of 11","other":""}
+{"id":"05104","town":"r2r-thorp-51","sev":"MED","kind":"LACKS","why":"'Complicit beneficiaries' as a group; one power only, QUARRELS none, thorp of 11","other":""}
+{"id":"05718","town":"r2r-thorp-51","sev":"MED","kind":"STATE","why":"a corruption scandal; CRISIS is Recently Betrayed and no scandal or reformers exist in the header","other":""}
+{"id":"19874","town":"r2r-thorp-51","sev":"MED","kind":"LACKS","why":"an investigator who uncovered corruption; PEOPLE roster has only Tomislav Lebedev, and no scandal is recorded","other":""}
+{"id":"02619","town":"r2r-thorp-51","sev":"MED","kind":"LACKS","why":"a key witness to a corruption scandal; no such person on PEOPLE, crisis is a betrayal","other":""}
+{"id":"19302","town":"r2r-thorp-51","sev":"MED","kind":"STATE","why":"'the reformers are being used'; no reformer power exists, QUARRELS none, one power","other":""}
+{"id":"29879","town":"r2r-thorp-51","sev":"MED","kind":"STATE","why":"glass and gems shown as worked; LAND gaps: glass sand and gemstones available but not being processed","other":""}
+{"id":"05720","town":"r2r-thorp-51","sev":"MED","kind":"STATE","why":"a major corruption scandal in the history; PAST lists Migration, Succession Crisis, Debt Crisis only","other":""}
+{"id":"19875","town":"r2r-thorp-51","sev":"MED","kind":"LACKS","why":"an investigator who uncovered corruption; PEOPLE roster has only Tomislav Lebedev, PAST has no scandal","other":""}
+{"id":"02620","town":"r2r-thorp-51","sev":"MED","kind":"LACKS","why":"a key witness to a corruption scandal; no such person on PEOPLE, PAST has no scandal","other":""}
+{"id":"29875","town":"r2r-thorp-52","sev":"MED","kind":"STATE","why":"wool and textiles shown as worked; LAND gaps: wool and animal hides available but not being processed","other":""}
+{"id":"20744","town":"r2s-indebted-thorp-0","sev":"MED","kind":"STATE","why":"a route that is closed; LAND has Strategic Crossroads available and TRADE exports transit trade and tolls","other":""}
+{"id":"01539","town":"r2s-indebted-thorp-0","sev":"LOW","kind":"STATE","why":"food 'from hunting and little else'; HOUSES has Subsistence farming and TRADE makes dates","other":""}
+{"id":"11060","town":"r2s-indebted-thorp-1","sev":"MED","kind":"STATE","why":"Eir Ragnarsson 'of Household Council' holds the seat; PEOPLE gives her as head shepherd of the Shepherd collective only","other":""}
+{"id":"06960","town":"r2s-indebted-thorp-1","sev":"LOW","kind":"LACKS","why":"money 'reaches its defence'; DEFENCE is none in every kind","other":""}
+{"id":"01911","town":"r2s-infiltrated-thorp-0","sev":"MED","kind":"STATE","why":"gives Messalina Severus the title Elder; roster gives head shepherd only, and the Household elder house has nobody","other":""}
+{"id":"27529","town":"r2s-infiltrated-thorp-0","sev":"LOW","kind":"BROKEN","why":"subject and verb disagree: 'Weak defences keeps Pratolitus'","other":""}
+{"id":"21024","town":"r2s-infiltrated-thorp-0","sev":"MED","kind":"STATE","why":"says the town was built after the siege; it is 233 years old and the siege was 133 years ago","other":""}
+{"id":"20852","town":"r2s-mass_migration-thorp-3","sev":"MED","kind":"STATE","why":"gives Fuad ibn Ahmed the title Headman; PEOPLE roster gives only head shepherd at the Shepherd collective","other":""}
+{"id":"11563","town":"r2s-mass_migration-thorp-3","sev":"MED","kind":"STATE","why":"gives Fuad ibn Ahmed the title Headman; PEOPLE roster gives only head shepherd at the Shepherd collective","other":""}
+{"id":"13350","town":"r2s-politically_fractured-thorp-1","sev":"MED","kind":"STATE","why":"'multiple weak claimants'; GOVERNMENT has two powers, The Independent Bloc Dominant and Household Council Strong","other":""}
+{"id":"11564","town":"r2s-politically_fractured-thorp-1","sev":"MED","kind":"STATE","why":"gives Citlali Caan the title Household Elder; roster gives head shepherd only and HOUSES has no Household elder","other":""}
+{"id":"29904","town":"r2s-religious_conversion-thorp-2","sev":"MED","kind":"STATE","why":"gemcutting shown as worked; LAND gaps: gemstones available but not being processed","other":""}
+{"id":"15100","town":"r2s-religious_conversion-thorp-2","sev":"LOW","kind":"LACKS","why":"priests in the town taking payment; HOUSES has only Access to parish church, so no priest of its own","other":""}
+{"id":"11034","town":"r2s-religious_conversion-thorp-3","sev":"MED","kind":"STATE","why":"puts Calvus Corvinus on the Household Council as its seat-holder; PEOPLE gives him only as camp foreman at the Woodcutter's camp","other":""}
+{"id":"05290","town":"r2s-religious_conversion-thorp-3","sev":"MED","kind":"STATE","why":"title Household Elder for the camp foreman; HOUSES has no Household elder and roster gives camp foreman only","other":""}
+{"id":"20819","town":"r2s-religious_conversion-thorp-3","sev":"MED","kind":"STATE","why":"title Household Elder for the camp foreman; HOUSES has no Household elder and roster gives camp foreman only","other":""}
+{"id":"01720","town":"r2s-religious_conversion-thorp-3","sev":"MED","kind":"STATE","why":"title Household Elder for the camp foreman; HOUSES has no Household elder and roster gives camp foreman only","other":""}
+{"id":"11133","town":"r2s-slave_revolt-thorp-2","sev":"MED","kind":"STATE","why":"puts Tianmei Wu on the Elder Council as seat-holder; PEOPLE gives her only as boat-headman at the Fishing community","other":""}
+{"id":"11535","town":"r2s-slave_revolt-thorp-2","sev":"MED","kind":"STATE","why":"title Elder for Tianmei Wu; roster gives boat-headman only and HOUSES has no elder house","other":""}
+{"id":"14706","town":"r2s-slave_revolt-thorp-2","sev":"LOW","kind":"LACKS","why":"'the streets where the revolt is fought' in a thorp of 21 with only dwellings","other":""}
+{"id":"27952","town":"r2s-slave_revolt-thorp-2","sev":"MED","kind":"STATE","why":"nobody brings in the harvest and fields idle; FOOD word Secure, 86% grown, stores 1.7 months","other":""}
+{"id":"13714","town":"r2s-succession_void-thorp-2","sev":"MED","kind":"PAIR","why":"'no one has stepped forward'; PEOPLE lists the household elder in office and another sentence names her Acting Elder","other":"05125"}
+{"id":"19627","town":"r2s-wartime-thorp-3","sev":"LOW","kind":"BROKEN","why":"subject and verb disagree: 'The gemstones ... goes unworked'","other":""}
+{"id":"21054","town":"r2r-thorp-19","sev":"LOW","kind":"LACKS","why":"incense drifts into 'the press of the lane'; a lane crowd in a thorp of 26, under a beast threat","other":""}
+{"id":"27667","town":"r2r-thorp-19","sev":"MED","kind":"STATE","why":"'for one side' presumes opposed sides; one power only, QUARRELS none","other":""}
+{"id":"03874","town":"r2r-thorp-19","sev":"MED","kind":"STATE","why":"'the thorp's present quarrels'; QUARRELS none, one power only","other":""}
+{"id":"29104","town":"r2s-indebted-thorp-2","sev":"LOW","kind":"STATE","why":"a 'defended pass'; DEFENCE has no garrison, militia or watch, only a palisade","other":""}
+{"id":"07356","town":"r2s-infiltrated-thorp-1","sev":"MED","kind":"STATE","why":"fish catch landed and sold; TRADE exports only sea salt, LAND has no fishing resource, and 03898 says it sells one item","other":"03898"}
+{"id":"21358","town":"r2s-infiltrated-thorp-2","sev":"MED","kind":"LACKS","why":"vigilantes as an armed group; DEFENCE is none in every kind, one power only, thorp of 25","other":""}
+{"id":"01914","town":"r2s-insurgency-thorp-1","sev":"MED","kind":"STATE","why":"title Household Elder for Asgaut Olafsson; roster gives head shepherd only and HOUSES has no Household elder","other":""}
+{"id":"01715","town":"r2s-insurgency-thorp-2","sev":"MED","kind":"STATE","why":"title Elder for Yohualli Balam; roster gives camp foreman only, and the Household elder house has nobody in it","other":""}
+{"id":"16460","town":"r2s-insurgency-thorp-2","sev":"LOW","kind":"LACKS","why":"a foreman's own store with prices; HOUSES lists no store or market","other":""}
+{"id":"19798","town":"r2s-insurgency-thorp-3","sev":"LOW","kind":"BROKEN","why":"subject and verb disagree: 'The herds feeds Hochkirche'","other":""}
+{"id":"21342","town":"r2s-insurgency-thorp-3","sev":"MED","kind":"PAIR","why":"trouble 'not in the streets'; safety Dangerous - Insurgency, households openly defy the government, and a thorp of 16 has no streets","other":"13229"}
+{"id":"14866","town":"r2s-mass_migration-thorp-0","sev":"MED","kind":"STATE","why":"the reeve is 'he'; PEOPLE gives the reeve Lkhagvajav Taichiud as (f)","other":""}
+{"id":"20237","town":"r2s-mass_migration-thorp-0","sev":"MED","kind":"STATE","why":"'the paperwork backs him' for the reeve; PEOPLE gives the reeve Lkhagvajav Taichiud as (f)","other":"14866"}
+{"id":"20734","town":"r2s-mass_migration-thorp-1","sev":"LOW","kind":"LACKS","why":"'both roads are watched'; DEFENCE watch, garrison, militia and hired are all none","other":""}
+{"id":"21979","town":"r2s-monster_pressure-thorp-0","sev":"LOW","kind":"LACKS","why":"those answering for its safety spend more on it; DEFENCE is none in every kind","other":""}
+{"id":"03437","town":"r2s-monster_pressure-thorp-3","sev":"MED","kind":"LACKS","why":"a 'war party'; only Elder Council listed, QUARRELS none, thorp of 10","other":""}
+{"id":"03438","town":"r2s-monster_pressure-thorp-3","sev":"MED","kind":"LACKS","why":"a 'war party'; only Elder Council listed, QUARRELS none, thorp of 10","other":""}
+{"id":"19921","town":"r2s-politically_fractured-thorp-0","sev":"LOW","kind":"LACKS","why":"'the streets' in a thorp of 9 with only dwellings","other":""}
+{"id":"05896","town":"r2s-politically_fractured-thorp-0","sev":"LOW","kind":"LACKS","why":"'Cross a street' in a thorp of 9; HOUSES has only dwellings (1-8)","other":""}
+{"id":"11014","town":"r2s-recently_betrayed-thorp-2","sev":"MED","kind":"STATE","why":"puts Atotoztli Caan on the Household Council as seat-holder; PEOPLE gives her only as boat-headman at the Fishing community","other":""}
+{"id":"11541","town":"r2s-recently_betrayed-thorp-3","sev":"MED","kind":"STATE","why":"title Household Elder for the camp foreman; HOUSES has no Household elder and roster gives camp foreman only","other":""}
+{"id":"26610","town":"r2s-slave_revolt-thorp-0","sev":"MED","kind":"LACKS","why":"'two more people in Feudal Stewardship' to win over; the roster has one person of it, the reeve, and one power only","other":""}
+{"id":"11136","town":"r2s-slave_revolt-thorp-3","sev":"MED","kind":"STATE","why":"puts Badr ibn Rashid on the Household Council as seat-holder; PEOPLE gives him only as head shepherd of the Shepherd collective","other":""}
+{"id":"03478","town":"r2s-slave_revolt-thorp-3","sev":"MED","kind":"LACKS","why":"presumes a reformist leader; only Household Council listed, roster is one head shepherd","other":""}
+{"id":"03479","town":"r2s-slave_revolt-thorp-3","sev":"MED","kind":"LACKS","why":"presumes a reformist leader; only Household Council listed, roster is one head shepherd","other":""}
+{"id":"11562","town":"r2r-thorp-25","sev":"MED","kind":"STATE","why":"title Elder for Xoc Caan; roster gives head shepherd only and HOUSES has no Household elder","other":""}
+{"id":"29843","town":"r2r-thorp-25","sev":"LOW","kind":"LACKS","why":"'the commons speak for it in the street'; thorp of 21 with only dwellings, no street","other":""}
+{"id":"29869","town":"r2r-thorp-56","sev":"MED","kind":"LACKS","why":"brewing shown as worked; HOUSES has no brewery and TRADE makes no drink","other":""}
+{"id":"19088","town":"r2s-recently_betrayed-thorp-0","sev":"MED","kind":"STATE","why":"title Household Elder for Theophano Akropolites; roster gives boat-headman only and HOUSES has no Household elder","other":""}
+{"id":"19310","town":"r2s-religious_conversion-thorp-1","sev":"MED","kind":"STATE","why":"country 'holds very little in the way of creatures'; TOWN monsters are heartland","other":""}
+{"id":"20641","town":"r2r-thorp-11","sev":"MED","kind":"LACKS","why":"presumes a reformist leader; only Household Council listed, roster is one head shepherd","other":""}
+{"id":"20642","town":"r2r-thorp-11","sev":"MED","kind":"LACKS","why":"presumes a reformist leader; only Household Council listed, roster is one head shepherd","other":""}
+{"id":"22143","town":"r2r-thorp-26","sev":"MED","kind":"STATE","why":"a trade collapse hook; PAST records Succession Crisis, Siege and Shortage only, and CRISIS is Infiltrated","other":""}
+{"id":"22149","town":"r2r-thorp-26","sev":"MED","kind":"STATE","why":"history lists a major trade collapse; PAST records Succession Crisis, Siege and Shortage only","other":""}
+{"id":"06236","town":"r2r-thorp-26","sev":"MED","kind":"STATE","why":"'displaced traders' of a diverted trade; no trade collapse in PAST, exports are transit trade and tolls","other":"22149"}
+{"id":"28028","town":"r2r-thorp-26","sev":"MED","kind":"STATE","why":"workers left without wages from a trade loss; no trade collapse in PAST, Strategic Crossroads available","other":"22149"}
+{"id":"15678","town":"r2r-thorp-26","sev":"MED","kind":"STATE","why":"rivals who 'profited from the diversion'; no trade diversion or collapse recorded in PAST","other":"22149"}
+{"id":"20745","town":"r2r-thorp-26","sev":"MED","kind":"STATE","why":"a route that is closed; LAND has Strategic Crossroads available and TRADE exports transit trade and tolls","other":""}
+{"id":"02351","town":"r2r-thorp-26","sev":"MED","kind":"STATE","why":"'the collapse was arranged'; PAST has no trade collapse","other":"22149"}
+{"id":"01913","town":"r2r-thorp-26","sev":"MED","kind":"STATE","why":"title Headman for Daria Lebedev; roster gives head shepherd only, and the Household elder house has nobody","other":""}
+{"id":"DONE","lines":2809,"blocks":55,"flags":105}
