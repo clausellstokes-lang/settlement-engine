@@ -2718,6 +2718,140 @@ SEATS2['VEIL-13'] = dict(
 )
 
 
+SEATS2['JOIN-2'] = dict(
+    title="JOIN-2 · the true join's first refreeze: every register through its door once on the joined tree, the whole check, every red classed",
+    branch='lane/join-2026-11-14', tip='__JOIN_TIP__', statement=False,
+    intro=("You are JOIN-2, the second merge seat of THE TRUE JOIN of the settlement-engine integration program. Nine builder lanes cure false lines on the "
+           "generated town pages; JOIN-1 merged all nine onto lane/join-2026-11-14 (started at the integration line's tip 976db5b19), resolved the code "
+           "by hand, took every conflicted register from one side and LISTED it, and re-derived nothing. YOU ARE NOW THE ONLY WRITER OF THAT BRANCH. "
+           "Yours: (0) each lane merged once more at its tip as it stands when you begin; (1) THE FIRST REFREEZE: every register, baseline, generated "
+           "file, bundle and measured pin of the joined tree through its own door, ONCE, in the merge book's order; (2) the whole check, every red "
+           "CLASSED; (3) the count; (4) the hand-back. From then on the branch is THE JOINED LINE: lanes land on it as points, on the chair's word. "
+           "YOU CURE NO PAGE LINE AND YOU SIGN NOTHING."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6) and CONTRIBUTING.md at your checkout.\n"
+          "2. JOIN-1's HAND-BACK on your branch, WHOLE: docs/chair/2026-11-14/JOIN-HANDBACK.md (the order and tips merged; every code resolution; THE "
+          "REFREEZE'S WORKLIST: every file taken from one side with the lane not taken, every pin listed with its figures; stops; hazards).\n"
+          "3. THE MERGE BOOK at your checkout, docs/INTEGRATION_STYLE_2_2026-11-09.md, by script, by heading: SECTION 2n WHOLE (\"## 2n.\": the join's "
+          "refreeze: each file's door, its checking and writing commands, the clean-tree rule and THE ORDER) and SECTION 2m WHOLE (\"## 2m.\": the "
+          "instrument's doors by command; what a lane does to land). Section 5 ONLY for a command you cannot find elsewhere: ITS STEP 4 (\"Sign\") IS "
+          "NOT RUN and its step 6's `--no-verify` IS NOT USED (an older rule): every push here is plain.\n"
+          "4. THE REHEARSAL'S HAND-BACK (`git fetch origin lane/join-rehearsal-2026-11-14`; `git show "
+          "origin/lane/join-rehearsal-2026-11-14:docs/chair/2026-11-14/JOIN-REHEARSAL-HANDBACK.md`): SECTION 3 (the doors the book does not give, "
+          "found; the order that really ran; the pins it measured) and section 7 (hazards)."),
+    first=("FIRST ACT. FULL HISTORY (`git fetch --depth=2147483647 origin lane/join-2026-11-14 lane/integration-2026-11-07` and the nine lanes; `git "
+           "rev-parse --is-shallow-repository` prints false). Read your branch's tip back from origin: it was __JOIN_TIP__ when this was written; a later "
+           "tip by JOIN-1 is not a stop: say so and start from it."),
+    work=("THE WORK, in this order, pushed as made, every door through `sh scripts/gate-tail.sh`, never a pipe, its output to a file under "
+          "docs/chair/2026-11-14/probes/JOIN/ (short ones) or outside the tree (long ones):\n"
+          "0. EACH LANE ONCE MORE, at its tip on origin NOW (read each back; the hash in the commit subject), in JOIN-1's order and by JOIN-1's rules "
+          "(code by hand at the cause, both lanes' cures standing; a pinned test hunk by hunk; a register whole from the side already on the branch, "
+          "listed; rows appended by both sides both stand). A lane that has not moved since JOIN-1 merged it is skipped, said so. NOT the veil lane.\n"
+          "1. THE REFREEZE, in section 2n's ORDER, WITH THE REHEARSAL'S CORRECTION (the state-prose generator REFUSES while the wiring census is "
+          "stale: `node scripts/wiring-census.mjs`, then `node scripts/generate-dossier-state-prose.mjs`, then the wiring census again, then both "
+          "checks). Row by row of 2n's table and of JOIN-1's worklist: the door's CHECK first (its exit and what it names, to a file), then its "
+          "writing form where 2n gives it to the seat, each register ITS OWN COMMIT with the door's output in the body, on a clean committed tree "
+          "where 2n says so. THE LAWS OF THE REFREEZE:\n"
+          "   (a) EVERY REGISTER IS SHRINK-ONLY. A RISE at the joined tree (a page-census row, a pool-dominance ceiling, a count no lane's cause "
+          "explains) is a STOP FOR THAT ROW: one message to the chair with the row and its figure at the joined tree, at the line's tip and at the tip "
+          "of each lane that touches it; nothing banked, nothing raised; GO ON with the next row.\n"
+          "   (b) REDS THAT ARE EXPECTED AND ARE NOT STOPS, because the lanes named them for ONE DECLARATION PASS that follows you: the "
+          "presumed-things door's FRESH hits (lines gated in code, not declared through a draw door) and the fact-layers door's reader rises; the "
+          "writer-reach door's new dark identities from the powers lane's re-deal (its growth form `--rebank` is NOT run: the close's, signed by the "
+          "chair); the observed-shape reads the defence lane named. For each door: its whole output at the joined tree SAVED, the stale rows shrunk "
+          "by the door's shrink form, and the fresh list COMPARED BY SCRIPT with what each lane's hand-back names under \"FOR THE DECLARATION PASS\" "
+          "(the hand-backs are in your tree under docs/chair/): a hit NO lane named is NEW AT THE JOIN: say which two lanes' changes meet in it.\n"
+          "   (c) THE MEASURED PINS (2n's step 7; JOIN-1's list): each figure is MEASURED at the joined tree by the pin's own instrument and "
+          "re-keyed BY IDENTITY, every lane's cause kept in its note and the join named; never a sum, never one side's figure taken on trust. A "
+          "figure the named causes together do not explain is a stop for that pin.\n"
+          "   (d) NOTHING IS SIGNED. No golden's door in its writing mode. The golden surfaces the lanes' declared moves shift stay RED AND NAMED "
+          "until the close's one signing.\n"
+          "   (e) THE EDGE BUNDLES in a checkout with ITS OWN node_modules (a symlinked one leaks paths into them), after every src change is in; "
+          "THE LIGHTING CENSUS LAST.\n"
+          "   ONE MESSAGE TO THE CHAIR when the refreeze is pushed: the tip; each door's exit; the stops.\n"
+          "2. THE WHOLE CHECK ON THE JOINED TREE: `npm run typecheck:ratchet`, `npm run typecheck:domain:strict`, `npm run lint`; `node "
+          "scripts/implementation-packets.mjs validate`; then THE WHOLE SUITE ONCE, IN SIX SHARDS (`npx vitest run --exclude='tests/build/**' "
+          "--shard=<i>/6 --reporter=json`, each to its own file outside the tree; the ledger ref fetched first: `git fetch origin "
+          "review-fixes-2026-07-08:review-fixes-2026-07-08`; refs and local config snapshotted before and after). EVERY RED CLASSED, the table in "
+          "the hand-back, by re-running the red FILES on frozen trees (`git worktree add --detach`): (A) THE LINE'S OWN, red at 976db5b19 too; (B) A "
+          "REGISTERED GOLDEN SURFACE OR PIN that the lanes' declared moves shift (tests/fixtures/.golden-freeze-register.json; name the lanes whose "
+          "draft shift records declare it moved: each lane's hand-back or its *shift-record.DRAFT.json): a registered surface red that NO lane "
+          "declares moved is a stop; (C) the doors' named reds of law (b); (D) A LANE'S OWN, red at that lane's tip too (name the lane); (E) "
+          "COMPOSED AT THE JOIN: red here and green at every lane's tip: each READ: one your own resolution made is cured, its own commit; any "
+          "other is named with the lanes that meet in it and the failing assertion. A red you cannot class is a stop.\n"
+          "3. THE COUNT: the measuring seat's command once on the joined tree (`git fetch origin lane/census-2-2026-11-13`; `mkdir -p <scratch>/c2 "
+          "&& git archive origin/lane/census-2-2026-11-13 docs/chair/2026-11-13/probes/CENSUS-2 | tar -x -C <scratch>/c2`; `sh "
+          "<scratch>/c2/docs/chair/2026-11-13/probes/CENSUS-2/census2.sh <tree root> <an out-dir outside the repository> 4`): its eight kinds beside "
+          "the line's and the rehearsal's (the rehearsal's hand-back, section 6, and the chair's records).\n"
+          "4. THE HAND-BACK: docs/chair/2026-11-14/JOIN-HANDBACK.md, a PART 2: the refreeze row by row (the door, its exit, the commit); every stop "
+          "and the chair's ruling on it; the fresh hits no lane named; the pins measured, each with its causes; the suite's five classes with "
+          "counts and files; the census's table; WHAT A LANE DOES TO LAND ON THE JOINED LINE AS A POINT, by command (it merges the joined line, "
+          "takes the line's registers and re-derives its own rows through the doors as section 2m gives them, pushes, and the merge seat merges "
+          "it); hazards. ONE message to the chair.\n"
+          "5. THEN, WHILE YOUR COUNT ALLOWS, POINTS, ON THE CHAIR'S MESSAGES ONLY: \"LAND: <lane> at <hash>\": that commit merged (the lane holds "
+          "the joined line and has re-derived its registers, so the merge is clean: if it is not, STOP), the hook's gates, the push, one line."),
+    merges="; the merges into YOUR branch of the nine lanes at their tips (step 0) and, later, of the commits the chair names (step 5)",
+    when="for each stop (one message a stop; go on meanwhile), when the refreeze is pushed (the tip; each door's exit; the stops), with the suite's classes, and with your hand-back",
+    turns='',
+)
+
+
+SEATS2['R2-CODE-B-9'] = dict(
+    title="R2-CODE-B-9 · round two's second code lane: the person minted whole, the plague slot, the re-measures, the final statement",
+    branch='lane/r2-code-b-2026-11-13', tip='30ed925e', statement=True,
+    intro=("You are R2-CODE-B-9, the ninth seat on round two's second code lane of the settlement-engine integration program (lane/r2-code-b-2026-11-13). "
+           "The lane cures false lines on the Tonight sheet, the cast cards, the crisis cast and hooks, the NPCs, Relationships, Services and Daily Life "
+           "tabs, the chain card's facts, the quick guide, the traditions, the faith reading and the stress summaries. ITS LIST IS DONE, THE LINE IS "
+           "MERGED, THE SUITE IS CLASSED, THE CENSUS AND THE FIELD DIFF ARE TAKEN (the eighth seat, which handed back by judgement with its list "
+           "written out). TWO CURES ARE LEFT, both exact, and then the lane's ONE final statement. A SEAT ON THIS LANE SPENDS ITS COUNT ON READING: "
+           "read only what this brief names."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. On your lane, docs/chair/2026-11-13/R2-CODE-B-HANDBACK.md, BY LINE RANGE, BY SCRIPT (the file is 799 lines; open ONLY these): from the "
+          "line \"# PART 8\" down to the heading \"## Step 5: GATHERED BY SCRIPT\" (about fifty long lines: the rulings; the items; THE TWENTY-SEVEN "
+          "classed; STOP 1 with its cause; the census at the tip and its one fresh false line; the field diff; the draft shift record), and from "
+          "\"## HAND BACK (2026-11-14 ~07:50 UTC\" to the end (WHAT IS LEFT, in order, with files and lines: THAT IS YOUR LIST; the instruments and "
+          "how they are re-made). Step 5's gathering (the two hundred lines between) is opened ONLY when you write the statement, by script.\n"
+          "3. The merge book's section 2m on origin/lane/merge-15-point-49-wip-2026-11-14 (docs/INTEGRATION_STYLE_2_2026-11-09.md, the section headed "
+          "\"## 2m.\": about forty lines; by script), before the first register you touch."),
+    work=("THE WORK, in the eighth seat's order (its HAND BACK, items 1 to 6), pushed as made:\n"
+          "1. THE PERSON MINTED WHOLE (the chair's ruling of 07:32 UTC, copied in PART 8; vetoable): src/generators/steps/resolveCrisisCast.js :: "
+          "mintTemporary. A person in the record is a WHOLE person: the temporary person carries every field the record's contract asks of a born "
+          "person (`importance` by the roster's own rule, and whatever else recordInvariants and the record class register name), and is minted "
+          "where the receipt and every count read it: the receipt stays TRUE by its own writing (mint before it counts, or count after), never a "
+          "count edited to fit. A DECLARED MOVE of the npcs family, its own commit, RED FIRST on the six reds the hand-back lists (they are its "
+          "guard). MEASURE on the census's 720: the towns that mint (37 before); the field diff, the line 976db5b19 against your tip, confined to "
+          "`npcs` and the receipt, with counts; the minted person READ WHERE IT PRINTS in three towns, a crisis among them (the cast card, the NPCs "
+          "tab, the Tonight sheet: wherever a person's importance or standing prints, it prints true of a stranger passing through). A density cap "
+          "exceeded BY DESIGN is a STOP with both sides. No other lane holds that file (check by content before you edit).\n"
+          "2. THE PLAGUE SLOT (a false line in a lane file: cured now): src/domain/crisis/crisisHooks.js :: CRISIS_HOOK_SLOTS.plague_onset: \"…, the "
+          "healer who identified the outbreak first, …\" names its holder a healer without reading the holder's role (r2r-town-37: the dean of the "
+          "parish churches). A LINE THAT NAMES A ROLE READS THE ROSTER: the slot fills only a holder whose own role is a healer's; else the sentence "
+          "keeps its own words. EVERY slot of that table that names a role (a captain, a priest, a physician, a reeve) is read the same way, not only "
+          "the one the census met: list them, count on the 720 how many towns each prints of a holder with another role, cure each, one commit, red "
+          "first on r2r-town-37, a guard town whose lever IS a healer, three towns read.\n"
+          "3. AFTER 1 AND 2: CENSUS-2 at the new tip (the command in the statement's form below) and the 720 field diff again; the draft shift "
+          "record's rows re-measured (the goldens and pins of class (a) move again with the mint); the test files that name the files you touched, "
+          "at your tip and at 30ed925ee (JSON, to files): no red new on your commits. THE WHOLE SUITE IS NOT RUN (the joined tree's).\n"
+          "4. THE STATEMENT'S ROWS FOR THE DECLARATION PASS, worded as the chair re-ruled at 06:40 UTC (the hand-back's item 4 gives it whole): for "
+          "each of the fifteen quick-guide hits: a replace()'s first argument or its second; a SHAPE ROW where the frame's member already declares "
+          "the atom; else the code condition and the atom. The fact-layers reader's row: both contents.\n"
+          "5. THE EDGE BUNDLES LAST (`npm run build:edge-shared` in a checkout with ITS OWN node_modules: a symlinked one leaks paths into them), "
+          "committed alone if they differ; the three edge titles re-run.\n"
+          "6. `node scripts/implementation-packets.mjs validate`, its exit; THE LANE'S ONE FINAL STATEMENT in the form below (the base is e969a75b7; "
+          "the stage a reader has not read begins at 80b960171), built from PARTS 6 to 8 and step 5's gathering; ONE message to the chair: the tip, "
+          "the reds by class, where the statement is. A fresh reader then reads the lane from 80b960171: leave it what it needs.\n"
+          "7. ONLY IF YOUR COUNT IS THEN UNDER 250,000: THE LANE GOES ON CURING (the chair's order of 07:11 UTC: the joined line moves by points and no "
+          "lane waits): the bar's rows for this lane (`git fetch origin lane/chair-2026-11-08`; `git show "
+          "origin/lane/chair-2026-11-08:docs/chair/2026-11-14/bar-0-rows/BAR-0-ROWS-r2b.json`, with the README.md beside it: five MEDIUM rows of a "
+          "first measure against the release bar, each a sentence, its town and the fact against it; the towns are re-born by the probes on "
+          "origin/lane/review-bar-0-2026-11-14, docs/chair/2026-11-14/probes/REVIEW-BAR-0/): each read in its town at your tip, counted on your "
+          "births, cured widest first, one cause a commit, each line read where it prints; listed in the hand-back under a heading of its own (a "
+          "stage after the statement)."),
+    merges='',
+    when="for a stop that blocks everything you have left, when step 1 is pushed (one line: the towns that mint; the six reds' state; the field diff's families), and with your final statement or hand-back",
+    turns='',
+)
+
+
 def build2(seat):
     s = _r3c6() if seat == 'R3-CODE-C-6' else SEATS2[seat]
     head = (
