@@ -4851,7 +4851,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "{settlement}'s magical defence sits in the mages' own books, not the town's: the mages can withdraw it, and the town cannot hold it.",
+          "text": "{settlement}'s wards are the mages' work, and they hold only as long as the mages keep them up.",
           "slots": [
             "settlement"
           ],
