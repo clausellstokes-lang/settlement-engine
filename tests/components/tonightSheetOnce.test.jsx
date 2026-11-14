@@ -68,6 +68,37 @@ const castLinesOf = (s, npc) => {
   });
 };
 
+/** Lower-led, unclosed: the form every arm of the oracle compares in. */
+const bare = (x) => String(x || '').replace(/[.!?]$/, '').toLowerCase();
+
+/**
+ * The oracle for one voiced person: null where the line is on the record, else the miss. The arms are R11's ruled
+ * order (tonightSheet.js :: voicedLineOf): the cast role's want, the person's own want, their secret, and (d) their
+ * temperament. Arm (d), the chair's ruling of 2026-11-12 on the fourth seat's parked item 2: the composer is as ruled
+ * and the oracle lagged it (x51-tonight-51: the seat-holder is the insurgency's target and keeps its own secret, so
+ * RUNG2-F13 withholds it and step (d) voices the temperament). The oracle accepts the temperament ONLY where the sheet
+ * says 'temperament' AND the line is the record's own `personality.dominant`: a re-key to the ruled design by identity.
+ */
+const personMissOf = (seed, settlement, p) => {
+  const npc = (settlement.npcs || []).find((n) => n.name === p.name);
+  if (!npc) return `${seed}: ${p.name} is not on the roster`;
+  const goal = bare(String(npc.goal?.short || npc.goal?.long || '').replace(/^to\s+/i, ''));
+  const secret = bare(npc.secret?.what);
+  const line = bare(p.line);
+  // A person voiced FROM THE CRISIS CAST wants what the ROLE wants: their line is the castWantOf line for their
+  // own role, crisis and id (the role's CAST_WANTS pool; their own goal where the role has none). Added at
+  // 1e28faf1f (lane RUNG2-F13 unit 3, CRISIS-CAST-SENSE, the chair's ruling rung 2 §3c), which composes that
+  // line at render; measured: this arm green at 1e28faf1f^ (f7127dd20), red at 1e28faf1f (12 cast lines at the
+  // tip, every one a CAST_WANTS line). Every other person still prints their own want or secret.
+  const castLine = p.why === 'cast' ? castLinesOf(settlement, npc).map(bare) : [];
+  const dominant = typeof npc.personality === 'object' && npc.personality ? npc.personality.dominant : undefined;
+  const temperament = p.says === 'temperament' && typeof dominant === 'string' && dominant !== '' ? bare(dominant) : null;
+  if (p.line && line !== goal && line !== secret && !castLine.includes(line) && line !== temperament) {
+    return `${seed}: ${p.name}'s line is neither their want nor their secret${p.says === 'temperament' ? ' nor their temperament' : ''}: ${p.line}`;
+  }
+  return null;
+};
+
 const crisisLabels = (s) => (Array.isArray(s.stress) ? s.stress : s.stress ? [s.stress] : [])
   .filter(Boolean).map((x) => x.label).filter(Boolean);
 
@@ -136,23 +167,10 @@ describe('X-51: one Tonight sheet', () => {
     const offenders = [];
     let people = 0;
     for (const { seed, settlement, sheet, surfaces } of ROWS) {
-      const byName = new Map((settlement.npcs || []).map((n) => [n.name, n]));
       for (const p of sheet.people) {
         people += 1;
-        const npc = byName.get(p.name);
-        if (!npc) { offenders.push(`${seed}: ${p.name} is not on the roster`); continue; }
-        const goal = String(npc.goal?.short || npc.goal?.long || '').replace(/^to\s+/i, '').toLowerCase();
-        const secret = String(npc.secret?.what || '').toLowerCase();
-        const line = p.line.replace(/[.!?]$/, '').toLowerCase();
-        // A person voiced FROM THE CRISIS CAST wants what the ROLE wants: their line is the castWantOf line for their
-        // own role, crisis and id (the role's CAST_WANTS pool; their own goal where the role has none). Added at
-        // 1e28faf1f (lane RUNG2-F13 unit 3, CRISIS-CAST-SENSE, the chair's ruling rung 2 §3c), which composes that
-        // line at render; measured: this arm green at 1e28faf1f^ (f7127dd20), red at 1e28faf1f (12 cast lines at the
-        // tip, every one a CAST_WANTS line). Every other person still prints their own want or secret.
-        const castLine = p.why === 'cast' ? castLinesOf(settlement, npc).map((l) => l.replace(/[.!?]$/, '').toLowerCase()) : [];
-        if (p.line && line !== goal.replace(/[.!?]$/, '') && line !== secret.replace(/[.!?]$/, '') && !castLine.includes(line)) {
-          offenders.push(`${seed}: ${p.name}'s line is neither their want nor their secret: ${p.line}`);
-        }
+        const miss = personMissOf(seed, settlement, p);
+        if (miss) offenders.push(miss);
       }
       const hookTexts = collectPlotHooks(settlement).map((h) => String(h.text).replace(/[.!?]$/, '').toLowerCase());
       for (const h of sheet.hooks) {
@@ -168,5 +186,19 @@ describe('X-51: one Tonight sheet', () => {
     }
     expect(people, 'the sheet voiced almost no one').toBeGreaterThan(90);
     expect(offenders, offenders.slice(0, 20).join('\n')).toEqual([]);
+  });
+
+  // The arm (d) is not a loosening: planted, a temperament that is not the record's own, or the record's own temperament
+  // printed as a want, is red; the true one is green (x51-tonight-51, the seat-holder the chair's ruling names).
+  test('arm (d) holds by identity: a wrong temperament, or the temperament said as a want, is red', () => {
+    const row = ROWS.find((r) => r.seed === 'x51-tonight-51');
+    const voiced = row.sheet.people.find((p) => p.says === 'temperament');
+    expect(voiced, 'x51-tonight-51 voices no one by temperament').toBeTruthy();
+    const npc = row.settlement.npcs.find((n) => n.name === voiced.name);
+    expect(bare(voiced.line)).toBe(bare(npc.personality.dominant));
+    expect(personMissOf(row.seed, row.settlement, voiced)).toBe(null);
+    const wrong = npc.personality.dominant === 'Cold and calculating' ? 'Warm-hearted.' : 'Cold and calculating.';
+    expect(personMissOf(row.seed, row.settlement, { ...voiced, line: wrong })).toMatch(/nor their temperament/);
+    expect(personMissOf(row.seed, row.settlement, { ...voiced, says: 'want' })).toMatch(/neither their want nor their secret/);
   });
 });

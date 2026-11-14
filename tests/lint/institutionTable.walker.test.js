@@ -226,12 +226,18 @@ describe('the column census, measured across the estate', () => {
     // census-1f unit 1c: -5) from the shared 1,925; the merged tip reads 1,849 = 1,925 - 72 - 5 + 1, the two causes
     // composed and one row of INTERACTION (the census's declared service roll over the review-intake's regenerated
     // service keys; PLAUSIBLE as attributed, not bisected per settlement). The liveness anchor is unchanged in kind.
+    // ⭐ RE-MEASURED 2026-11-13 (STYLE-2-MERGE point 47 (2026-11-13, the COHERENCE-AGREE merge 22cc9ef7d; a figure its drafted record names for the merge seat)): 1,849 -> 1,843, the draft's own
+    // figure exactly (the lane's tip reads 1843 from the same 1849); the liveness anchor is unchanged in kind.
     // ⭐ RE-MEASURED 2026-11-12 (COHERENCE-UPKEEP, the chair's ruling (A) on the services STOP): 1,849 → 1,834, ONE
     // cause, c19e96e23 — services are kept as far as the place can pay, by a draw-free roll after the seeded one, so the
     // rule only takes rows away (0 added on the lane's 360). The liveness anchor is unchanged in kind.
     // ⭐ RE-MEASURED 2026-11-13 (COHERENCE-UPKEEP-5, the review's F2): 1,834 → 1,837, ONE cause — a house's own
     // service (its catalogue's guaranteed rows and every rite) is never held back by the upkeep roll, so 3 rows the
     // roll had taken from standing houses here come back (0 removed). The liveness anchor is unchanged in kind.
+    // ⭐ RE-MEASURED 2026-11-14 (UPKEEP-10, THE MERGE of lane/integration-2026-11-07 at 976db5b19 into the defence
+    // lane): 1,837, MEASURED by this arm at the merged tree. The two sides: the line's 1,843 is the figure its base
+    // 69b53decd already measured (red there against 1,849): no cause of the line's since the base; the lane's tip
+    // f943c9772 measures 1,837 (its two causes above). The merge equals the lane's figure: no third cause.
     expect(serviceRows, 'the header claims 1,837 instantiated service rows over these thirty')
       .toBe(1837);
     expect(

@@ -301,6 +301,13 @@ export const FACT_DIMENSIONS = Object.freeze({
     if (cleric === true || house === true) return true;
     return cleric === false && house === false ? false : undefined;
   } }),
+  // W2-B-DECLARE item 4 (the class table §5.1, "an access-only church", home `faithReading.js`): the faith
+  // reading's own two answers, read through the `faith` getter it already has. `church` = a house of worship
+  // that is a church stands here (`hasChurch`: a wayside shrine is not one); `church access` = no church
+  // here, and the people go to a neighbour's (`accessOnly`). Pattern 8's access wording declares the second,
+  // so a line that speaks of the walk to another parish is refused where a church stands.
+  church: dim({ shape: 'presence', home: 'faith', reader: (f) => (f.faith && typeof f.faith === 'object' ? bool(f.faith.hasChurch) : undefined) }),
+  'church access': dim({ shape: 'presence', home: 'faith', reader: (f) => (f.faith && typeof f.faith === 'object' ? bool(f.faith.accessOnly) : undefined) }),
   // CENSUS-3b unit 1 (ruling R-E): the delegated getters. Organised crime = a structure at
   // `semi-organized` or above (routes and territory, or a hierarchy); a diffuse presence is not one.
   'organised crime': dim({ shape: 'presence', home: 'crime',

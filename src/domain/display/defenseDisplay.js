@@ -167,7 +167,7 @@ export function criminalOpNote(name) {
 const CRIM_STRUCTURE_DATA = Object.freeze({
   organized: {
     key: 'organized', label: 'Organized Syndicate', color: '#8b1a1a', bg: '#fdf4f4',
-    note: 'One criminal ring decides what crime is allowed here. Its rules are predictable and it can be bargained with; it puts down random violence because that brings the law, and it lives on protection money and bought officials.',
+    note: 'One criminal ring decides what crime is allowed here. Its rules are predictable and it can be bargained with; it puts down random violence because that brings the law, and it lives on protection money and on any official it can buy.',
   },
   'semi-organized': {
     key: 'semi-organized', label: 'Semi-Organized Networks', color: '#8a3010', bg: '#fdf0e8',
@@ -218,10 +218,13 @@ export function deriveCriminalStructure(settlement) {
   // Either makes the null answer SEMI-ORGANIZED, the same reading a criminal house gets above.
   const listed = (r.economicState?.safetyProfile?.criminalInstitutions || []).length > 0
     || runningCriminalChains(r).length > 0;
-  const key = ladder
-    ?? (signal.factions.length ? 'organized'
-      : signal.houses.length || listed ? 'semi-organized'
-        : null);
+  // ⛔ A GANG IS A GANG (W2-A-LEAVES 5b, 2026-11-12; the second wave's ruling): the crime signal's FACTIONS outrank
+  // the name ladder. The ladder read a fence's house as "diffuse" and never asked the roster, so the Defense tab
+  // printed "Diffuse, no gang" beside a criminal power on the Power tab (2 of the census's 720). A criminal power
+  // is a hierarchy, the pool's own reading of one; the ladder answers only where no criminal power stands.
+  // (The ladder is a reader of the crime fact: tests/lint/factLayers.walker.test.js counts it, family crime.)
+  const key = signal.factions.length ? 'organized'
+    : ladder ?? (signal.houses.length || listed ? 'semi-organized' : null);
   return key ? withRingVantage(CRIM_STRUCTURE_DATA[key], r) : null;
 }
 
@@ -608,6 +611,9 @@ export function foodEnduranceLine(settlement) {
   if (!end) return null;
   const tier = typeof settlement?.tier === 'string' ? settlement.tier : '';
   const noun = TIER_NOUNS.includes(tier) ? tier : 'place';
+  // 2 + 20 (W2-A-LEAVES, 2026-11-12; the second wave's ruling): THE SIEGE FIGURE IS A CONDITION. Only a besieged
+  // place reads it in the indicative; everywhere else it is what a siege WOULD do to the stores the Economy tab's
+  // row states (the census counted "under siege the outlying fields are lost" outside a siege in 689 of 720).
   // UPKEEP-8 (the chair's ruling of 2026-11-13): what a siege WOULD do is said only where none is in force, what it HAS
   // done only where one is; the months the line states add up from the record's own stored months (full rations the
   // stores, half rations twice them), and what is still harvested is said to stretch them, never counted into them.
@@ -629,7 +635,8 @@ export function foodEnduranceLine(settlement) {
   if (end.fullRationMonths === null) {
     before = `${lead}, but what the ${noun} still grows ${would ? 'would feed' : 'feeds'} it at full rations; `;
     door = end.hasGranary ? 'the granary' : 'its household stores';
-    after = end.hasGranary ? ` stands in reserve${held}.` : ' stand in reserve.';
+    const stand = would ? 'would stand' : end.hasGranary ? 'stands' : 'stand'; // the line's verb (W2-A-LEAVES), read by this lane's `would`
+    after = end.hasGranary ? ` ${stand} in reserve${held}.` : ` ${stand} in reserve.`;
   } else {
     const half = end.halfRationMonths === null
       ? `; on half rations the harvest alone ${would ? 'would be' : 'is'} enough`
@@ -663,12 +670,20 @@ import { hashKey } from './stateProse/stateProseKernel.js';
  */
 const ORGANIZED_RING_NOTES = Object.freeze([
   CRIM_STRUCTURE_DATA.organized.note,
-  'Crime here answers to one ring. It keeps the streets quiet because trouble brings the law, lives on protection money and the officials it pays, and anyone who needs something from it can bargain.',
-  'Shopkeepers here pay one ring for protection, and the ring pays officials in turn. It stamps out random violence, which would bring the law, and its terms are known and can be negotiated.',
-  'Ask who runs crime here and the answer is one ring. It sets the rules and keeps to them, it can be bargained with, and it puts down any violence that would bring the law; it lives on protection money and bribed officials.',
+  'Crime here answers to one ring. It keeps the streets quiet because trouble brings the law, lives on protection money and on whatever official it can pay, and anyone who needs something from it can bargain.',
+  'Shopkeepers here pay one ring for protection, and the ring pays any official who will take its money. It stamps out random violence, which would bring the law, and its terms are known and can be negotiated.',
+  'Ask who runs crime here and the answer is one ring. It sets the rules and keeps to them, it can be bargained with, and it puts down any violence that would bring the law; it lives on protection money and on any official it can bribe.',
 ]);
 
 /**
+ * W2-A-LEAVES-2 (2026-11-13; REVIEW-W2A F3, F3c). Each vantage said the ring "lives on protection money and bought
+ * officials" (the officials it pays, pays officials in turn, bribed officials): FALSE in 87 of the census's 720
+ * organised rings, where no official answers to a criminal house and the hall is not the criminals'. Whether one
+ * does is VEILED (the cast's allegiances and the hall's rung are stripped from the public record), and this note is
+ * one value printed on the DM's Defense tab and the public page alike, so it may not read it. The four vantages now
+ * say what is true in every town and read nothing hidden: the ring lives on "any official it can buy" (pays "any
+ * official who will take its money"), which presumes no buyer; the DM's "Who answers to whom" names those it has.
+ * The pick is the settlement's seed, as before (SW-B5); for the owner's veto, as new words.
  * @param {{ key: string, label: string, color: string, bg: string, note: string }} row
  * @param {{ _seed?: unknown }} settlement
  * @returns {{ key: string, label: string, color: string, bg: string, note: string }}

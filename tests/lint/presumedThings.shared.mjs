@@ -7,11 +7,12 @@
  * beside the vocabulary atoms that answer for it (`src/domain/facts/factVocabulary.js ::
  * FACT_DIMENSIONS`), the way `src/domain/foodways.js :: SOURCE_WORDS` gives the food sources theirs.
  *
- *   ARM 1 (source)  every string literal of three words or more under ARM1_ROOTS that uses a thing's
- *                   words either DECLARES the thing (an atom of `atoms`, on its needs or its excludes,
- *                   in the declaration around it: `needs`, `excludes`, `tags`, `marks`, `cast`,
- *                   `poolDeclares`, or an array handed to the same call) or stands in the register
- *                   under a named reason.
+ *   ARM 1 (source)  every string literal of three words or more under ARM1_ROOTS that uses a REGISTERED
+ *                   WORD's words (a thing, and since W2-B-DECLARE item 3 a state, a size or a count:
+ *                   `registeredWords.js :: REGISTERED_WORDS`) either DECLARES it (an atom of `atoms`, on its needs or its excludes,
+ *                   in a declaration around it that a draw door enforces — `needs`, `excludes`,
+ *                   `poolDeclares`, a state variant's `marks`, a tagged table's `tags`; `DECL_PROPS` —
+ *                   or an array handed to the same call) or stands in a register under a named reason.
  *   ARM 2 (printed) every sentence of a generated record that uses a thing's words, printed in a town
  *                   where the vocabulary's own readers (`factsOf`) say the thing is ABSENT, is listed;
  *                   a listed line stands in the register under a named reason, or the walker reds.
@@ -28,186 +29,327 @@
  *
  * Pure apart from the file reads of arm 1; arm 2 reads the records it is handed.
  */
+import { createHash } from 'node:crypto';
 import { readFileSync, readdirSync, statSync } from 'node:fs';
-import { join } from 'node:path';
+import { join, posix } from 'node:path';
 import { createRequire } from 'node:module';
 
 import { timeBandOf } from '../../src/domain/display/heraldCausalGrammar.js';
-import { INSTITUTION_SERVICES } from '../../src/data/institutionServices.js';
-
-/**
- * THE HOUSES THAT TRY DISPUTES (the chair's correction of 2026-11-12, measured by COHERENCE-AGREE-2):
- * a court is a house whose OWN catalogued service tries disputes under the public law, read from its
- * service rows, never from its name alone — the Town hall's "Dispute arbitration: Bring commercial and
- * civil disputes before a magistrate", the City hall's "Appeals court", the Town council's "Dispute
- * adjudication", the City administration's "Courts and adjudication", a Courthouse's "Civil disputes" and
- * "Criminal trials", the court buildings' "Appeals", Mayor and council's "Legal appeals", a city-state's
- * "Civic law enforcement". A headman's, elder's or reeve's mediation, a guild's arbitration and a church's
- * court are not the town's court.
- */
-const COURT_SERVICE = /^(?:civil disputes|criminal trials|dispute arbitration|dispute adjudication|courts and adjudication|appeals(?: court)?|legal appeals|civic law enforcement)$/i;
-export const COURT_HOUSES = Object.freeze(new Set(Object.entries(INSTITUTION_SERVICES)
-  .filter(([, rows]) => Object.keys(rows || {}).some((service) => COURT_SERVICE.test(service)))
-  .map(([name]) => name.toLowerCase())));
+import {
+  THINGS, declarationImplies, newWordsDeniedIn, newWordsNamedIn, sentencesOf, thingsNamedIn, thingsDeniedIn, presentForDenial,
+} from '../../src/domain/facts/registeredWords.js';
+import { CRISIS_KIND_ALIASES, declarationOfMarks, declarationOfTags } from '../../src/domain/facts/factVocabulary.js';
 
 const require = createRequire(import.meta.url);
 const ts = require('typescript');
 
 export const REGISTER_REL = 'tests/lint/presumedThings.register.json';
 
-/** The trees arm 1 reads: the pool data and the writers that hold prose. */
-export const ARM1_ROOTS = Object.freeze(['src/data', 'src/generators']);
+/**
+ * THE WIDENED REGISTER (W2-B-DECLARE, 2026-11-12): the habitat a widening of this walker newly sees — a
+ * carrier no door enforces (item 1), a new root or a new word (item 3) — banked shrink-only beside the first
+ * register, through its door `scripts/presumed-things-door.mjs` (`--shrink`; `--bank <reason> --base <rev>`
+ * banks only a literal that already stood at the widening's base, so no new line is ever banked).
+ */
+export const WIDENED_REGISTER_REL = 'tests/lint/presumedThings.widened.register.json';
+
+/** A strip site's key in the widened register: file and receiver. @param {string} file @param {string} receiver */
+export const stripKey = (file, receiver) => `${file} :: ${receiver}`;
 
 /**
- * THE THINGS. `words`: the words that name it (a building's own walls are not the perimeter, ruling
- * 3; a moneylender is a person, not a house). `atoms`: the vocabulary atoms whose declaration answers
- * for it (a line declaring any of them, on either side, declares the thing). `absent(facts, names)`:
- * true when the record lacks it — the vocabulary's own readers where an atom exists; the live roster's
- * names (`liveInstitutionNames`) where the vocabulary has no atom yet.
- * @type {Readonly<Record<string, { words: RegExp, atoms: ReadonlyArray<string>, absent: (f: any, names: string[]) => boolean }>>}
+ * A literal's identity: the sha-256 of its WHOLE text, 16 hex characters (F4 of REVIEW-W2B's second read: a key of the
+ * first 120 characters let a false sentence appended to a banked line pass). Any edit to a banked line is a fresh hit.
+ * @param {string} text
  */
-export const THINGS = Object.freeze({
-  walls: {
-    words: /\b(?:town|city) walls\b|\bthe walls\b|\bwalls and gates\b|\bramparts?\b|\bbattlements\b/i,
-    atoms: ['walls', 'palisade', 'gate'],
-    absent: (f) => !f.defence.walls && !f.defence.palisade,
-  },
-  garrison: {
-    words: /\bgarrison(?:s|ed)?\b|\bbarracks\b/i,
-    atoms: ['garrison', 'soldiers', 'commander'],
-    absent: (f) => !f.defence.garrison,
-  },
-  militia: { words: /\bmilitias?\b/i, atoms: ['militia'], absent: (f) => !f.defence.militia },
-  watch: {
-    words: /\b(?:town|city|night|village) watch\b|\bwatchm[ae]n\b|\bthe watch\b|\bwatch captain\b|\bwatch rota\b/i,
-    atoms: ['watch'],
-    absent: (f) => !f.defence.watch,
-  },
-  mercenary: {
-    words: /\bmercenar(?:y|ies)\b|\bsellswords?\b|\bfree compan(?:y|ies)\b/i,
-    atoms: ['mercenary', 'soldiers'],
-    absent: (f) => !f.defence.mercenary,
-  },
-  docks: {
-    words: /\bdocks?\b|\bharbou?rs?\b|\bquays?\b|\bwharf\b|\bwharves\b|\bdockside\b|\bdockworkers?\b|\bdockhands?\b/i,
-    atoms: ['docks', 'navigable', 'coast', 'river', 'port', 'institution: docks', 'route: port', 'route: river'],
-    absent: (f) => !f.water.navigable && !f.hasInstitution('docks'),
-    presentForDenial: (f) => f.hasInstitution('docks'),
-  },
-  granary: { words: /\bgranar(?:y|ies)\b/i, atoms: ['institution: granary'], absent: (f) => !f.hasInstitution('granary') },
-  mill: { words: /\bmill(?:s|er|ers)?\b/i, atoms: ['institution: mill'], absent: (f) => !f.hasInstitution('mill') },
-  market: {
-    words: /(?<!\bblack |\bwhisper )\bmarket(?:place|s| square| day| days| cross)?\b/i,
-    atoms: ['market'],
-    absent: (f) => !f.market,
-  },
-  temple: {
-    words: /\btemples?\b|\bchurch(?:es)?\b|\bchapels?\b|\bshrines?\b|\bcathedrals?\b|\babbey\b/i,
-    atoms: ['temple', 'sacredHouse', 'clergy', 'priest', 'institution: temple', 'institution: monastery'],
-    absent: (f) => !f.sacredHouse,
-  },
-  prison: {
-    words: /\bprisons?\b|\bgaols?\b|\bjails?\b/i,
-    atoms: [],
-    absent: (_f, names) => !names.some((n) => /prison|gaol|jail|stocks/i.test(n)),
-  },
-  court: {
-    words: /\bcourthouses?\b|\bcourts? of law\b|\blaw ?courts?\b/i,
-    atoms: [],
-    absent: (_f, names) => !names.some((n) => /court/i.test(n) || COURT_HOUSES.has(n.toLowerCase())),
-  },
-  bank: {
-    words: /\bbankers?\b|\bbanking\b|\bmoney.?changers?\b|\bcounting.?houses?\b/i,
-    atoms: ['institution: bank'],
-    absent: (f) => !f.hasInstitution('bank'),
-  },
-  guildhall: { words: /\bguild ?halls?\b/i, atoms: ['guild'], absent: (f) => !f.guild },
-  war: {
-    words: /\bthe war\b|\bwartime\b|\bat war\b|\bthe armies\b/i,
-    atoms: ['war: front', 'war: aggressor', 'war: at war', 'war: peace', 'crisis: wartime', 'crisis: under_siege', 'crisis: occupied'],
-    absent: (f) => f.warState === 'peace' && !f.crisis?.has?.('wartime') && !f.crisis?.has?.('under_siege') && !f.crisis?.has?.('occupied'),
-  },
-  // THE LAW (the chair's ruling A of 2026-11-11, "denials"): read on the DENIAL side only
-  // (`denialOnly`), because every town has some law and naming it presumes nothing; denying it
-  // ("No law, bring coin", "There is no official recourse here") presumes there is none. The town
-  // has law where a peace-keeping house stands (the vocabulary's watch or garrison) or a house
-  // that judges (a court, a council, a hall, a headman, a magistrate). "No law permits" is the
-  // law of anywhere, not of this town.
-  law: {
-    words: /\blaw enforcement\b|\bofficial recourse\b|\blaw\b(?! permits)/i,
-    atoms: ['watch', 'garrison', 'guardPresence'],
-    absent: (f, names) => !f.defence.watch && !f.defence.garrison
-      && !names.some((n) => /court|council|\bhall\b|headman|magistrat|reeve|justiciar|sheriff/i.test(n)),
-    denialOnly: true,
-  },
-});
+export const literalHash = (text) => createHash('sha256').update(String(text)).digest('hex').slice(0, 16);
 
-export const THING_IDS = Object.freeze(Object.keys(THINGS));
+/** An arm-1 hit's key in either register: file, thing, the hash of the whole literal. */
+export const hitKey = (file, thing, text) => `${file}\t${thing}\t${literalHash(text)}`;
 
 /**
- * A NEGATION the sentence itself states ("no militia could handle", "without courts or prison"):
- * the line names the thing to say it is not there. Read the same way by both arms.
- * @param {string} sentence @param {RegExp} words
+ * A banked row is `[thing, reason, the literal's first 120 characters (a label, read by no key), hash]`. The hash is one
+ * string, or a list for a row banked before F4 over several literals that share their first 120 characters (5 such
+ * rows at the re-key: the row still covers exactly the literals it covered, no more). A row with no hash covers nothing.
+ * @param {string} file @param {Array<any>} row @returns {string[]}
  */
-export function negates(sentence, words) {
-  const m = new RegExp(words.source, 'ig');
-  for (const hit of sentence.matchAll(m)) {
-    const before = sentence.slice(Math.max(0, hit.index - 48), hit.index);
-    const after = sentence.slice(hit.index + hit[0].length, hit.index + hit[0].length + 24);
-    const denied = /\b(?:no|not|without|nor|lacks?|lacking|beyond any|than any)\s+(?:[\w'-]+,?\s+(?:or\s+|and\s+)?){0,3}$/i.test(before)
-      || /^\s+(?:cannot|could not|can't|couldn't)\b/i.test(after);
-    if (!denied) return false;
-  }
-  return true;
-}
+export const rowKeys = (file, row) => (Array.isArray(row[3]) ? row[3] : row[3] ? [row[3]] : []).map((h) => `${file}\t${row[0]}\t${h}`);
 
-/** The sentences of a printed text (a semicolon closes one, as the scan of the critique read them). */
-export const sentencesOf = (text) => String(text).split(/(?<=[.!?;])\s+/).map((s) => s.trim()).filter(Boolean);
+/** The arm-1 keys a register banks. @param {{ arm1: Record<string, Array<Array<any>>> }} register */
+export const bankedKeys = (register) => new Set(Object.entries(register.arm1).flatMap(([f, rows]) => rows.flatMap((r) => rowKeys(f, r))));
 
-/** The things a sentence names and does not negate. @param {string} sentence */
-export function thingsNamedIn(sentence) {
-  return THING_IDS.filter((id) => !THINGS[id].denialOnly && THINGS[id].words.test(sentence) && !negates(sentence, THINGS[id].words));
-}
+/** The row the door banks for a hit. @param {{ thing: string, text: string }} hit @param {string} reason */
+export const bankRow = (hit, reason) => [hit.thing, reason, String(hit.text).slice(0, 120), literalHash(hit.text)];
 
 /**
- * A DENIAL OF EXISTENCE: some use of the thing's words is "no X", "without (a, any) X", "lacks
- * (a) X", with at most one plain qualifier between ("no public law", "no official recourse").
- * Narrower than `negates` on purpose: "not a prison" denies an identity, "no single barracks"
- * a size, "the watch cannot" an ability, "would not call the law" a choice, and "no market dues"
- * a market's toll; none says the thing is not there. @param {string} sentence @param {RegExp} words
+ * The trees arm 1 reads. W2-B-DECLARE item 3 (record 288, ruling 1, B (i)): the display and the components joined
+ * the pool data and the generators, so a line written in code is read where it is written; their habitat at the
+ * widening is banked in the widened register under `root`, shrink-only.
  */
-export function deniesExistence(sentence, words) {
-  const m = new RegExp(words.source, 'ig');
-  for (const hit of sentence.matchAll(m)) {
-    const before = sentence.slice(Math.max(0, hit.index - 32), hit.index);
-    const after = sentence.slice(hit.index + hit[0].length, hit.index + hit[0].length + 16);
-    if (/^\s+(?:dues|tolls?|fees?|rights?|prices?|value|permits)\b/i.test(after)) continue;
-    if (/\b(?:no|without(?:\s+(?:an?|any))?|lacks?(?:\s+(?:an?|any))?|lacking(?:\s+(?:an?|any))?)\s+(?:(?:public|official|lawful|legal|real|proper|working|standing|organised|organized)\s+)?$/i.test(before)) return true;
-  }
-  return false;
-}
+export const ARM1_ROOTS = Object.freeze(['src/data', 'src/generators', 'src/domain', 'src/components']);
 
 /**
- * The things a sentence DENIES: such a line presumes the thing's ABSENCE (the chair's ruling A of
- * 2026-11-11). @param {string} sentence
+ * THE THINGS AND THEIR MATCHER live in ONE home, `src/domain/facts/registeredWords.js` (W2-B-DECLARE,
+ * 2026-11-12), moved there verbatim so the page arm (`coherence/vocabularyPageFindings.js`) reads the same
+ * matcher as both arms here. Re-exported, so every reader of this rule book reads them as before.
  */
-export function thingsDeniedIn(sentence) {
-  return THING_IDS.filter((id) => THINGS[id].words.test(sentence) && deniesExistence(sentence, THINGS[id].words));
-}
-
-/**
- * Does the town HAVE the thing, for a denial? The thing's own reader, except where the denial names
- * a narrower thing than the presumption does: "no wharf of its own" denies the dock HOUSE, which a
- * navigable town may lack. @param {string} thing @param {any} facts @param {string[]} names
- */
-export function presentForDenial(thing, facts, names) {
-  const t = THINGS[thing];
-  return t.presentForDenial ? !!t.presentForDenial(facts, names) : !t.absent(facts, names);
-}
+export {
+  COURT_HOUSES, THINGS, THING_IDS, negates, sentencesOf, thingsNamedIn, deniesExistence, thingsDeniedIn, presentForDenial,
+} from '../../src/domain/facts/registeredWords.js';
 
 // ── ARM 1: the source ─────────────────────────────────────────────────────────────────────────
 
-const DECL_PROPS = new Set(['needs', 'excludes', 'tags', 'marks', 'cast', 'poolDeclares', 'requires']);
+/**
+ * THE CARRIERS ARM 1 CREDITS ARE THE CARRIERS A DOOR ENFORCES, ON AN OBJECT A DOOR DRAWS (W2-B-DECLARE item 1; the
+ * chair's record 294, ruling 5; the second seat, F3: "credit a carrier only on an object a door draws — an element of a
+ * pool handed to the declared draw, or a kernel pool"). A literal counts as declared only where the declaration around
+ * it is one a draw door READS, on an object a door is HANDED:
+ *   `needs`, `excludes`, `crisis`  the generator door (`factVocabulary.js :: declarationOf`);
+ *   `poolDeclares`       the door's pool-level atoms;
+ *   `marks`              the corpus door, on a state variant (an object with a numeric `vid`) in a kernel pool file;
+ *   `tags`               ONLY in a file whose table a door draws `{ tagged: true }` (`TAGGED_TABLE_FILES`);
+ *   a BUILDER's array    a call to a function of the file whose returned rows put that argument on `needs` or
+ *                        `excludes` (a sibling set's `declaredSet(text, needs, twin)`), inside a drawn table.
+ * WHAT A DOOR DRAWS (`drawnRanges`): the pool and sibling arguments of every door call in the walker's roots, followed
+ * back through local variables, a function's parameters to its callers, a function's returns and imports, to the
+ * top-level tables they read; and every state variant of a kernel pool file. An object outside them declares nothing,
+ * whatever it carries: `{ needs: ['militia'], blurb }` printed by `X.blurb` is undeclared.
+ */
+const DECL_PROPS = new Set(['needs', 'excludes', 'poolDeclares', 'crisis']);
+
+/** THE DOORS and the argument positions that hand them lines (`drawDeclared.js`). */
+export const DOOR_ARGS = Object.freeze({
+  drawDeclared: [0], filterDeclared: [0], resolveDeclared: [0], resolveSibling: [1], resolveSiblingSentences: [1], noteDeclared: [1],
+});
+
+/** The kernel's pool files: their state variants are drawn by `stateProseKernel.js :: eligibleVariants`. */
+export const KERNEL_POOL_FILE = /^src\/data\/dossierStateProse\/[^/]+\.generated\.js$/;
+
+/**
+ * The files whose tables a door draws `{ tagged: true }`, each with its site: `tags` declares there and
+ * nowhere else. The walker's pin holds this list equal to the `tagged: true` sites in `src`.
+ */
+export const TAGGED_TABLE_FILES = Object.freeze({
+  'src/generators/npcStructure.js': 'NPC_STRUCTURE (`T`), resolved by `resolveDeclared(T[looked], { tagged: true, … })`',
+});
+
+/** Does this object literal carry a numeric `vid` (a state-prose variant: the kernel reads its marks)? @param {any} obj */
+function isStateVariant(obj) {
+  return obj.properties.some((p) => ts.isPropertyAssignment(p) && p.name
+    && (ts.isIdentifier(p.name) || ts.isStringLiteral(p.name)) && p.name.text === 'vid' && ts.isNumericLiteral(p.initializer));
+}
+
+/** @param {any} p a property's name node @returns {string|null} */
+const propName = (p) => (p && (ts.isIdentifier(p) || ts.isStringLiteral(p)) ? p.text : null);
+
+/** @param {string} from the importing file @param {string} spec @param {Set<string>} known @returns {string|null} */
+function resolveSpec(from, spec, known) {
+  if (!spec.startsWith('.')) return null;
+  const base = posix.normalize(posix.join(posix.dirname(from), spec));
+  for (const c of [base, `${base}.js`, `${base}/index.js`, `${base}.jsx`]) if (known.has(c)) return c;
+  return null;
+}
+
+/**
+ * THE DRAWN RANGES: per file, the source ranges a door is handed (see the header above). Static and conservative:
+ * a whole top-level table is drawn when any of it is handed to a door.
+ * @param {ReadonlyArray<[string, string]>} files [rel, source] of every file the walker reads
+ * @returns {Map<string, Array<[number, number]>>}
+ */
+export function drawnRanges(files) {
+  const known = new Set(files.map(([rel]) => rel));
+  /** @type {Map<string, any>} */ const mods = new Map();
+  for (const [rel, src] of files) {
+    const sf = ts.createSourceFile(rel, src, ts.ScriptTarget.Latest, true, ts.ScriptKind.JSX);
+    const top = new Map(); const imports = new Map(); const exports = new Map(); const calls = [];
+    for (const st of sf.statements) {
+      if (ts.isVariableStatement(st)) for (const d of st.declarationList.declarations) { if (ts.isIdentifier(d.name)) top.set(d.name.text, d); }
+      else if (ts.isFunctionDeclaration(st) && st.name) top.set(st.name.text, st);
+      if ((ts.isVariableStatement(st) || ts.isFunctionDeclaration(st)) && st.modifiers?.some((m) => m.kind === ts.SyntaxKind.ExportKeyword)) {
+        if (ts.isVariableStatement(st)) for (const d of st.declarationList.declarations) { if (ts.isIdentifier(d.name)) exports.set(d.name.text, { rel, name: d.name.text }); }
+        else if (st.name) exports.set(st.name.text, { rel, name: st.name.text });
+      }
+      if (ts.isImportDeclaration(st) && ts.isStringLiteral(st.moduleSpecifier)) {
+        const from = resolveSpec(rel, st.moduleSpecifier.text, known);
+        const cl = st.importClause;
+        if (from && cl?.namedBindings && ts.isNamedImports(cl.namedBindings)) for (const e of cl.namedBindings.elements) imports.set(e.name.text, { rel: from, name: (e.propertyName || e.name).text });
+        if (from && cl?.namedBindings && ts.isNamespaceImport(cl.namedBindings)) imports.set(cl.namedBindings.name.text, { rel: from, name: '*' });
+      }
+      if (ts.isExportDeclaration(st) && st.exportClause && ts.isNamedExports(st.exportClause)) {
+        const from = st.moduleSpecifier && ts.isStringLiteral(st.moduleSpecifier) ? resolveSpec(rel, st.moduleSpecifier.text, known) : rel;
+        for (const e of st.exportClause.elements) if (from) exports.set(e.name.text, { rel: from, name: (e.propertyName || e.name).text, via: from !== rel });
+      }
+    }
+    const visit = (n) => { if (ts.isCallExpression(n)) calls.push(n); ts.forEachChild(n, visit); };
+    visit(sf);
+    mods.set(rel, { sf, top, imports, exports, calls });
+  }
+  /** @type {Map<string, Array<[number, number]>>} */ const ranges = new Map();
+  const mark = (rel, node) => { (ranges.get(rel) || ranges.set(rel, []).get(rel)).push([node.pos, node.end]); };
+  const seen = new Set();
+  /** the exported name's own file and top-level name, through re-exports */
+  const exported = (rel, name, hops = 0) => {
+    const m = mods.get(rel); const e = m?.exports.get(name);
+    if (!e) return m?.top.has(name) ? { rel, name } : null;
+    return e.via && hops < 4 ? exported(e.rel, e.name, hops + 1) : { rel: e.rel, name: e.name };
+  };
+  const callsTo = (rel, name) => {
+    /** @type {Array<[string, any]>} */ const out = [];
+    for (const [r, m] of mods) for (const c of m.calls) {
+      if (!ts.isIdentifier(c.expression)) continue;
+      const callee = c.expression.text;
+      if (r === rel && callee === name && m.top.has(name)) out.push([r, c]);
+      const imp = m.imports.get(callee);
+      if (imp) { const t = exported(imp.rel, imp.name); if (t && t.rel === rel && t.name === name) out.push([r, c]); }
+    }
+    return out;
+  };
+  const markTop = (rel, name, depth) => {
+    const k = `${rel}::${name}`; if (seen.has(k)) return; seen.add(k);
+    const d = mods.get(rel)?.top.get(name); if (!d) return;
+    mark(rel, d);
+    if (ts.isVariableDeclaration(d) && d.initializer) trace(rel, d.initializer, depth + 1, false);
+    else if (ts.isFunctionDeclaration(d)) traceReturns(rel, d, depth + 1);
+  };
+  const traceReturns = (rel, fn, depth) => {
+    if (fn.body && !ts.isBlock(fn.body)) { trace(rel, fn.body, depth, true); return; }
+    const visit = (n) => { if (ts.isReturnStatement(n) && n.expression) trace(rel, n.expression, depth, true); if (!ts.isFunctionLike(n)) ts.forEachChild(n, visit); };
+    if (fn.body) ts.forEachChild(fn.body, visit);
+  };
+  /** the declaration of an identifier in scope at `at`: a top-level name, a local variable, a parameter, an import */
+  const declOf = (rel, at, name) => {
+    for (let cur = at.parent; cur; cur = cur.parent) {
+      if (ts.isFunctionLike(cur)) {
+        const i = (cur.parameters || []).findIndex((p) => ts.isIdentifier(p.name) && p.name.text === name);
+        if (i >= 0) return { kind: 'param', fn: cur, index: i };
+      }
+      if ((ts.isForOfStatement(cur) || ts.isForInStatement(cur)) && ts.isVariableDeclarationList(cur.initializer)
+        && cur.initializer.declarations.some((d) => ts.isIdentifier(d.name) && d.name.text === name)) return { kind: 'local', init: cur.expression };
+      const stmts = ts.isSourceFile(cur) || ts.isBlock(cur) || ts.isModuleBlock(cur) || ts.isCaseClause(cur) ? cur.statements : null;
+      if (!stmts) continue;
+      for (const st of stmts) {
+        if (ts.isVariableStatement(st)) for (const d of st.declarationList.declarations) {
+          const binds = ts.isIdentifier(d.name) ? [d.name.text] : [];
+          if (!ts.isIdentifier(d.name)) { const v = (b) => { if (ts.isIdentifier(b)) binds.push(b.text); else ts.forEachChild(b, v); }; ts.forEachChild(d.name, v); }
+          if (binds.includes(name)) return ts.isSourceFile(cur) ? { kind: 'top' } : { kind: 'local', init: d.initializer };
+        }
+        if (ts.isFunctionDeclaration(st) && st.name?.text === name) return ts.isSourceFile(cur) ? { kind: 'top' } : { kind: 'localFn', fn: st };
+      }
+    }
+    return mods.get(rel)?.imports.has(name) ? { kind: 'import' } : null;
+  };
+  const fnName = (fn) => {
+    if (ts.isFunctionDeclaration(fn) && fn.name) return fn.name.text;
+    if (fn.parent && ts.isVariableDeclaration(fn.parent) && ts.isIdentifier(fn.parent.name)) return fn.parent.name.text;
+    return null;
+  };
+  /** follow every name an expression reads to the tables behind it */
+  function trace(rel, expr, depth, owned) {
+    if (!expr || depth > 8) return;
+    if (owned) mark(rel, expr);
+    const m = mods.get(rel);
+    const visit = (n) => {
+      if (ts.isIdentifier(n)) {
+        const p = n.parent;
+        if (p && ts.isPropertyAccessExpression(p) && p.name === n) return;
+        if (p && (ts.isPropertyAssignment(p) || ts.isMethodDeclaration(p)) && p.name === n) return;
+        const d = declOf(rel, n, n.text);
+        if (!d) return;
+        if (d.kind === 'top') markTop(rel, n.text, depth);
+        else if (d.kind === 'local') trace(rel, d.init, depth + 1, true);
+        else if (d.kind === 'localFn') traceReturns(rel, d.fn, depth + 1);
+        else if (d.kind === 'import') {
+          const imp = m.imports.get(n.text);
+          if (imp.name === '*') { if (p && ts.isPropertyAccessExpression(p) && p.expression === n) { const t = exported(imp.rel, p.name.text); if (t) markTop(t.rel, t.name, depth); } }
+          else { const t = exported(imp.rel, imp.name); if (t) markTop(t.rel, t.name, depth); }
+        } else if (d.kind === 'param') {
+          const name = fnName(d.fn);
+          const k = `${rel}::param::${d.fn.pos}::${d.index}`;
+          if (!name || seen.has(k)) return; seen.add(k);
+          const owner = mods.get(rel).top.has(name) ? [rel, name] : null;
+          for (const [r, c] of owner ? callsTo(owner[0], owner[1]) : mods.get(rel).calls.filter((c) => ts.isIdentifier(c.expression) && c.expression.text === name).map((c) => [rel, c])) {
+            if (c.arguments[d.index]) trace(r, c.arguments[d.index], depth + 1, true);
+          }
+        }
+        return;
+      }
+      ts.forEachChild(n, visit);
+    };
+    visit(expr);
+  }
+  for (const [rel, m] of mods) {
+    for (const c of m.calls) {
+      const callee = ts.isIdentifier(c.expression) ? c.expression.text : ts.isPropertyAccessExpression(c.expression) ? c.expression.name.text : null;
+      for (const i of (callee && Object.hasOwn(DOOR_ARGS, callee) ? DOOR_ARGS[callee] : [])) if (c.arguments[i]) trace(rel, c.arguments[i], 0, true);
+    }
+    if (KERNEL_POOL_FILE.test(rel)) mark(rel, m.sf);
+  }
+  return ranges;
+}
+
+/** Is this node inside a range a door draws? @param {Map<string, Array<[number, number]>>} drawn @param {string} rel @param {any} node */
+const isDrawn = (drawn, rel, node) => (drawn.get(rel) || []).some(([a, b]) => node.pos >= a && node.end <= b);
+
+/**
+ * THE BUILDERS of one file: a top-level function whose returned rows put a parameter on `text`, `needs` or `excludes`
+ * (a sibling set's `declaredSet(text, needs, twin)`). name → the rows, each `{ text, needs, excludes }` as parameter
+ * positions. @param {any} sf @returns {Map<string, Array<{ text: number, needs: number, excludes: number }>>}
+ */
+function buildersOf(sf) {
+  /** @type {Map<string, Array<{ text: number, needs: number, excludes: number }>>} */ const out = new Map();
+  for (const st of sf.statements) {
+    const decls = ts.isVariableStatement(st) ? st.declarationList.declarations.map((d) => [d.name, d.initializer]) : ts.isFunctionDeclaration(st) ? [[st.name, st]] : [];
+    for (const [name, fn] of decls) {
+      if (!name || !ts.isIdentifier(name) || !fn || !ts.isFunctionLike(fn)) continue;
+      const params = fn.parameters.map((p) => (ts.isIdentifier(p.name) ? p.name.text : null));
+      const rows = [];
+      const visit = (n) => {
+        if (ts.isObjectLiteralExpression(n)) {
+          const at = (prop) => {
+            const p = n.properties.find((x) => propName(x.name) === prop);
+            const v = p && (ts.isShorthandPropertyAssignment(p) ? p.name : ts.isPropertyAssignment(p) && ts.isIdentifier(p.initializer) ? p.initializer : null);
+            return v ? params.indexOf(v.text) : -1;
+          };
+          const row = { text: at('text'), needs: at('needs'), excludes: at('excludes') };
+          if (row.text >= 0 && (row.needs >= 0 || row.excludes >= 0)) rows.push(row);
+        }
+        ts.forEachChild(n, visit);
+      };
+      visit(fn);
+      if (rows.length) out.set(name.text, rows);
+    }
+  }
+  return out;
+}
+
+/** @returns {{ needs: string[], excludes: string[], crisis: string[] }} */
+const emptyDecl = () => ({ needs: [], excludes: [], crisis: [] });
+/** @param {{ needs: string[], excludes: string[], crisis: string[] }} into @param {{ needs: ReadonlyArray<string>, excludes: ReadonlyArray<string>, crisis: ReadonlyArray<string> }} d */
+const addDecl = (into, d) => { into.needs.push(...d.needs); into.excludes.push(...d.excludes); into.crisis.push(...d.crisis); };
+
+/**
+ * The declaration properties of one DRAWN object literal that a door enforces, folded into `out` in the door's own
+ * reading (`needs` / `excludes` as written; `crisis` values; `poolDeclares` and a tagged table's `tags` as the tag slot
+ * reads them; a state variant's `marks` as the kernel reads them).
+ * @param {any} obj @param {string} rel @param {{ needs: string[], excludes: string[], crisis: string[] }} out
+ */
+function collectCredited(obj, rel, out) {
+  for (const p of obj.properties) {
+    const name = propName(p.name);
+    if (!name || !ts.isPropertyAssignment(p)) continue;
+    /** @type {string[]} */ const words = [];
+    if (DECL_PROPS.has(name) || name === 'marks' || name === 'tags') collectStrings(p.initializer, words);
+    if (name === 'needs') out.needs.push(...words);
+    else if (name === 'excludes') out.excludes.push(...words);
+    else if (name === 'crisis') for (const w of words) out.crisis.push(...w.replace(/^crisis:\s*/i, '').split(',').map((v) => v.trim()).filter(Boolean).map((v) => CRISIS_KIND_ALIASES[v] || v));
+    else if (name === 'poolDeclares') addDecl(out, declarationOfTags(words));
+    else if (name === 'marks' && isStateVariant(obj) && KERNEL_POOL_FILE.test(rel)) {
+      // as the kernel reads them (`stateProseKernel.js :: variantFactDeclaration` reads the atom marks as the tag slot
+      // does; its law 5 reads the family marks through `declarationOfMarks`)
+      addDecl(out, declarationOfTags(words)); addDecl(out, declarationOfMarks(words));
+    }
+    else if (name === 'tags' && Object.prototype.hasOwnProperty.call(TAGGED_TABLE_FILES, rel)) addDecl(out, declarationOfTags(words));
+  }
+}
 
 /**
  * THE SOURCE SITES ARM 1 DOES NOT READ, each with its reason (the header's "WHAT ARM 1 DOES NOT READ"). A literal
@@ -221,6 +363,30 @@ export const ARM1_NOT_PRINTED = Object.freeze([
   }),
 ]);
 
+/**
+ * THE RULE BOOK'S OWN DATA (W2-B-DECLARE second seat, F10): the files whose literals are the vocabulary itself — a
+ * word's pattern, its atoms, the leaf it reads — never a line about a town. Read by no printing file: the pin "the rule
+ * book is read only by its checks" holds the files that import it. Exempt by its SITE, so no row of the register ever
+ * banks a string of the rule book.
+ */
+export const ARM1_RULE_BOOK = Object.freeze({
+  'src/domain/facts/registeredWords.js': 'the registered words, their atoms and their leaves: the walker\'s and the page check\'s rule book, imported by no printing file',
+});
+
+/**
+ * THE LINE'S OWN INSTRUMENTS, ADMITTED BY NAME (STYLE-2-MERGE-13, point 49: the chair's ruling on STOP 49a (i), record
+ * 405; the form of the rule book's above and of chainPrintSites' EXEMPT at point 48). Two files of other lanes that print
+ * nothing — the rendered-dossier census's rows (their labels, its counter's own words) and the layer table's doc strings —
+ * whose literals this walker's widened roots read as lines once both lanes stood on the line. Each is admitted with its
+ * EXACT count of arm-1 hits and of strip sites: the walker asserts each file reads exactly its named counts, so a new line
+ * in either file, or one gone, reds ("each admitted instrument reads exactly its named counts"). Not a directory rule: a
+ * file in src/domain/coherence/ has printed a line before.
+ */
+export const ARM1_INSTRUMENTS = Object.freeze({
+  'src/domain/coherence/pageCensusFindings.js': Object.freeze({ hits: 11, strips: 2, reason: 'the rendered-dossier census (W2-A-LEAVES): its rows\' labels and the words its counter looks for, read by no printing file' }),
+  'src/domain/facts/factLayers.js': Object.freeze({ hits: 3, strips: 0, reason: 'the layer table (W2-A-LEAVES): its leaves\' doc strings, read by its walker and no printing file' }),
+});
+
 /** Is this literal one of ARM1_NOT_PRINTED's sites? @param {string} rel @param {any} node */
 function isNotPrintedSite(rel, node) {
   const call = node.parent;
@@ -229,31 +395,27 @@ function isNotPrintedSite(rel, node) {
     && call.arguments[site.argument] === node);
 }
 
-/** The atom a declaration word answers (`no X` → X), lower-cased. @param {string} w */
-const atomWord = (w) => w.trim().replace(/^no\s+/i, '').toLowerCase();
-
 /**
- * Every string a declaration around `node` carries: the declaration properties of each object
- * literal on the way up (four levels), and the array arguments of each call on the way up (a
- * `declaredSet(text, ['watch'])`).
- * @param {any} node
+ * The declaration around a literal: each DRAWN object literal on the way up (five levels), and, where the literal is
+ * an argument of a BUILDER call inside a drawn table, the arrays the builder puts on its row's `needs` / `excludes`.
+ * @param {any} node @param {string} rel @param {Map<string, Array<[number, number]>>} drawn @param {Map<string, any>} builders
  */
-function declarationWordsAround(node) {
-  /** @type {string[]} */ const out = [];
-  const strings = (n) => collectStrings(n, out);
-  let cur = node.parent;
-  for (let depth = 0; cur && depth < 5; depth++, cur = cur.parent) {
-    if (ts.isObjectLiteralExpression(cur)) {
-      for (const p of cur.properties) {
-        const name = p.name && (ts.isIdentifier(p.name) || ts.isStringLiteral(p.name)) ? p.name.text : null;
-        if (name && DECL_PROPS.has(name) && ts.isPropertyAssignment(p)) strings(p.initializer);
+function declarationAround(node, rel, drawn, builders) {
+  const out = emptyDecl();
+  let cur = node.parent; let child = node;
+  for (let depth = 0; cur && depth < 5; depth++, child = cur, cur = cur.parent) {
+    if (ts.isObjectLiteralExpression(cur) && (isDrawn(drawn, rel, cur) || (isStateVariant(cur) && KERNEL_POOL_FILE.test(rel)))) collectCredited(cur, rel, out);
+    else if (ts.isCallExpression(cur) && ts.isIdentifier(cur.expression) && builders.has(cur.expression.text) && isDrawn(drawn, rel, cur)) {
+      const at = cur.arguments.indexOf(child);
+      for (const row of builders.get(cur.expression.text)) {
+        if (row.text !== at) continue;
+        if (row.needs >= 0 && cur.arguments[row.needs]) collectStrings(cur.arguments[row.needs], out.needs);
+        if (row.excludes >= 0 && cur.arguments[row.excludes]) collectStrings(cur.arguments[row.excludes], out.excludes);
       }
-    } else if (ts.isCallExpression(cur)) {
-      for (const a of cur.arguments) if (ts.isArrayLiteralExpression(a)) strings(a);
     }
     if (ts.isVariableStatement(cur) || ts.isFunctionDeclaration(cur) || ts.isSourceFile(cur)) break;
   }
-  return out.map(atomWord);
+  return out;
 }
 
 /** Is this literal a property NAME (a sibling table's key: its line is declared beside it), or a `twinOf`? */
@@ -265,31 +427,40 @@ function isKeyOrTwinOf(node) {
 }
 
 /**
- * The TEXT-KEYED declarations of one source text: a table whose key is a line's own text and whose
- * value declares it (`DESC_VARIANT_DECLARATIONS`, a sibling set `'<text>': declaredSet(…)`). Text →
- * the declaration words. Read over the whole tree first, because a line and its declaration may
- * live in two files (`rulingStructure.js` prints what `powerSiblings.js` declares).
- * @param {string} rel @param {string} src
- * @returns {Map<string, string[]>}
+ * The TEXT-KEYED declarations of one source text: a DRAWN table whose key is a line's own text and whose value
+ * declares it (a sibling set `'<text>': declaredSet(…)` handed to `resolveSibling`). Text → the declaration. Read over
+ * the whole tree first, because a line and its declaration may live in two files (`rulingStructure.js` prints what
+ * `powerSiblings.js` declares).
+ * @param {string} rel @param {string} src @param {Map<string, Array<[number, number]>>} [drawn]
+ * @returns {Map<string, { needs: string[], excludes: string[], crisis: string[] }>}
  */
-export function keyedDeclarations(rel, src) {
+export function keyedDeclarations(rel, src, drawn = drawnRanges([[rel, src]])) {
   const sf = ts.createSourceFile(rel, src, ts.ScriptTarget.Latest, true, ts.ScriptKind.JSX);
-  /** @type {Map<string, string[]>} */ const out = new Map();
+  const builders = buildersOf(sf);
+  /** @type {Map<string, { needs: string[], excludes: string[], crisis: string[] }>} */ const out = new Map();
   const visit = (n) => {
-    if (ts.isPropertyAssignment(n) && (ts.isStringLiteral(n.name) || ts.isNoSubstitutionTemplateLiteral(n.name))) {
-      const words = [];
+    if (ts.isPropertyAssignment(n) && (ts.isStringLiteral(n.name) || ts.isNoSubstitutionTemplateLiteral(n.name)) && isDrawn(drawn, rel, n)) {
+      const d = emptyDecl();
       const read = (m) => {
         if (ts.isObjectLiteralExpression(m)) {
-          for (const p of m.properties) {
-            const name = p.name && (ts.isIdentifier(p.name) || ts.isStringLiteral(p.name)) ? p.name.text : null;
-            if (name && DECL_PROPS.has(name) && ts.isPropertyAssignment(p)) collectStrings(p.initializer, words);
+          // the row that prints the key's own text (an original), not its twin
+          const text = m.properties.find((x) => propName(x.name) === 'text');
+          if (!text || (ts.isPropertyAssignment(text) && (ts.isStringLiteral(text.initializer) || ts.isNoSubstitutionTemplateLiteral(text.initializer)) && text.initializer.text === n.name.text)) collectCredited(m, rel, d);
+        }
+        if (ts.isCallExpression(m) && ts.isIdentifier(m.expression) && builders.has(m.expression.text)) {
+          for (const row of builders.get(m.expression.text)) {
+            const t = m.arguments[row.text];
+            if (!t || !(ts.isStringLiteral(t) || ts.isNoSubstitutionTemplateLiteral(t)) || t.text !== n.name.text) continue;
+            if (row.needs >= 0 && m.arguments[row.needs]) collectStrings(m.arguments[row.needs], d.needs);
+            if (row.excludes >= 0 && m.arguments[row.excludes]) collectStrings(m.arguments[row.excludes], d.excludes);
           }
         }
-        if (ts.isCallExpression(m)) for (const a of m.arguments) if (ts.isArrayLiteralExpression(a)) collectStrings(a, words);
         ts.forEachChild(m, read);
       };
       read(n.initializer);
-      if (words.length) out.set(n.name.text, [...(out.get(n.name.text) || []), ...words.map(atomWord)]);
+      if (d.needs.length || d.excludes.length || d.crisis.length) {
+        const prev = out.get(n.name.text) || emptyDecl(); addDecl(prev, d); out.set(n.name.text, prev);
+      }
     }
     ts.forEachChild(n, visit);
   };
@@ -307,22 +478,31 @@ function collectStrings(n, out) {
  * Arm 1 over one source text: one hit per (literal, thing) that is NOT declared.
  * @param {string} rel the file's path from the repository root
  * @param {string} src
- * @param {Map<string, string[]>} [keyed] the tree's text-keyed declarations (`keyedDeclarations`)
+ * @param {Map<string, { needs: string[], excludes: string[], crisis: string[] }>} [keyed] the tree's text-keyed declarations (`keyedDeclarations`)
+ * @param {Map<string, Array<[number, number]>>} [drawn] the ranges a door draws (`drawnRanges`)
  * @returns {Array<{ file: string, thing: string, text: string }>}
  */
-export function scanSource(rel, src, keyed = keyedDeclarations(rel, src)) {
+export function scanSource(rel, src, keyed, drawn = drawnRanges([[rel, src]])) {
+  if (Object.hasOwn(ARM1_RULE_BOOK, rel)) return [];
+  keyed ??= keyedDeclarations(rel, src, drawn);
   const sf = ts.createSourceFile(rel, src, ts.ScriptTarget.Latest, true, ts.ScriptKind.JSX);
+  const builders = buildersOf(sf);
   /** @type {Array<{ file: string, thing: string, text: string }>} */ const hits = [];
   const visit = (n) => {
-    const isText = ts.isStringLiteral(n) || ts.isNoSubstitutionTemplateLiteral(n) || ts.isTemplateHead(n) || ts.isTemplateMiddle(n) || ts.isTemplateTail(n);
-    if (isText && n.text.trim().split(/\s+/).length >= 3 && !isKeyOrTwinOf(n) && !isNotPrintedSite(rel, n)) {
-      let declared = null;
-      for (const sentence of sentencesOf(n.text)) {
-        for (const thing of thingsNamedIn(sentence)) {
-          declared ??= [...declarationWordsAround(n), ...(keyed.get(n.text) || [])];
-          const atoms = THINGS[thing].atoms.map((a) => a.toLowerCase());
-          if (declared.some((w) => atoms.includes(w))) continue;
-          if (!hits.some((h) => h.thing === thing && h.text === n.text)) hits.push({ file: rel, thing, text: n.text });
+    // a JSX text node is a line written in a component (W2-B-DECLARE item 3: the components are a root); its
+    // white space is folded as a browser folds it
+    const jsx = ts.isJsxText(n) ? n.text.replace(/\s+/g, ' ').trim() : null;
+    const isText = jsx !== null || ts.isStringLiteral(n) || ts.isNoSubstitutionTemplateLiteral(n) || ts.isTemplateHead(n) || ts.isTemplateMiddle(n) || ts.isTemplateTail(n);
+    const text = jsx ?? n.text;
+    if (isText && text.trim().split(/\s+/).length >= 3 && !isKeyOrTwinOf(n) && !isNotPrintedSite(rel, n)) {
+      /** @type {{ needs: string[], excludes: string[], crisis: string[] } | null} */ let declared = null;
+      for (const sentence of sentencesOf(text)) {
+        const named = [...thingsNamedIn(sentence), ...newWordsNamedIn(sentence)].map((id) => [id, 'names']);
+        const denied = [...thingsDeniedIn(sentence), ...newWordsDeniedIn(sentence)].map((id) => [id, 'denies']);
+        for (const [thing, side] of [...named, ...denied]) {
+          if (!declared) { declared = declarationAround(n, rel, drawn, builders); const k = keyed.get(text); if (k) addDecl(declared, k); }
+          if (declarationImplies(thing, declared, side)) continue;
+          if (!hits.some((h) => h.thing === thing && h.text === text)) hits.push({ file: rel, thing, text });
         }
       }
     }
@@ -347,11 +527,243 @@ export function listFiles(root) {
 }
 
 /** @param {string} root @returns {Array<{ file: string, thing: string, text: string }>} */
-export function scanTree(root) {
-  const files = listFiles(root).map((rel) => [rel, readFileSync(join(root, rel), 'utf8')]);
-  /** @type {Map<string, string[]>} */ const keyed = new Map();
-  for (const [rel, src] of files) for (const [k, v] of keyedDeclarations(rel, src)) keyed.set(k, [...(keyed.get(k) || []), ...v]);
-  return files.flatMap(([rel, src]) => scanSource(rel, src, keyed));
+/** @param {string} root @param {{ keepAdmitted?: boolean }} [opts] keepAdmitted: also the ARM1_INSTRUMENTS files' hits (their count arm) */
+export function scanTree(root, { keepAdmitted = false } = {}) {
+  const files = /** @type {Array<[string, string]>} */ (listFiles(root).map((rel) => [rel, readFileSync(join(root, rel), 'utf8')]));
+  const drawn = drawnRanges(files);
+  /** @type {Map<string, { needs: string[], excludes: string[], crisis: string[] }>} */ const keyed = new Map();
+  for (const [rel, src] of files) for (const [k, v] of keyedDeclarations(rel, src, drawn)) { const prev = keyed.get(k) || emptyDecl(); addDecl(prev, v); keyed.set(k, prev); }
+  const hits = files.flatMap(([rel, src]) => scanSource(rel, src, keyed, drawn));
+  return keepAdmitted ? hits : hits.filter((h) => !Object.hasOwn(ARM1_INSTRUMENTS, h.file));
+}
+
+// ── ARM 3: the strip ban (W2-B-DECLARE item 3) ────────────────────────────────────────────────────
+
+/**
+ * THE STRIP BAN (the chair's record 288, ruling 1, B (iii); the procedure §5.3: "no stripping a declaration
+ * before a draw"). A pool whose lines carry declarations is selected only through a door (`drawDeclared`,
+ * `filterDeclared`); unwrapping its lines to their text first (`.map(textOf)`, `.map(lineText)`,
+ * `.map((l) => l.text)`) throws the declarations away, and the bare pick after it is refused nowhere.
+ * Every strip-shaped call in `src` is listed by its identity — file and receiver text — and stands in the
+ * widened register's `strips` under a named reason (`strip-before-draw`, to cure; `not-a-draw`, a dedupe, a
+ * join, a check or a list printed whole), or the walker reds. Written only through the register's door. A new strip IN A
+ * SHAPE THE BAN NAMES is red in the lane that writes it. THE BAN CATCHES THE SHAPES IT NAMES AND NO OTHERS (REVIEW-W2B's
+ * third read, finding 2: 3 of the reader's 15 new shapes caught); the twelve it misses are KNOWN GAPS, each named in
+ * `tests/lint/presumedThings.stripShapes.json` and pinned by the walker, so a seat that widens the ban moves a named row.
+ */
+export const STRIP_ROOTS = Object.freeze(['src']);
+
+/** The doors: a `.text` taken off their draw is the door's own, never a strip. */
+const STRIP_DOORS = new Set(['drawDeclared', 'filterDeclared', 'resolveDeclared']);
+const UNWRAP_FNS = new Set(['textOf', 'lineText']);
+
+/** @param {any} e @returns {any} the expression under parentheses, `as`/satisfies, non-null and `String(…)` */
+function bare(e) {
+  for (;;) {
+    if (ts.isParenthesizedExpression(e) || ts.isAsExpression(e) || ts.isNonNullExpression(e) || (ts.isSatisfiesExpression && ts.isSatisfiesExpression(e))) e = e.expression;
+    else if (ts.isCallExpression(e) && ts.isIdentifier(e.expression) && e.expression.text === 'String' && e.arguments.length === 1) e = e.arguments[0];
+    else return e;
+  }
+}
+
+/**
+ * How a callback's parameter binds the line: `l` (its name) or `{ text }` / `{ text: t }` (the names the text is bound
+ * to). @param {any} name @returns {{ p: string | null, aliases: Set<string> } | null}
+ */
+function lineBinding(name) {
+  if (!name) return null;
+  if (ts.isIdentifier(name)) return { p: name.text, aliases: new Set() };
+  if (ts.isObjectBindingPattern(name)) {
+    const aliases = new Set(name.elements.filter((el) => (el.propertyName || el.name).getText() === 'text' && ts.isIdentifier(el.name)).map((el) => el.name.text));
+    return aliases.size ? { p: null, aliases } : null;
+  }
+  return null;
+}
+
+/**
+ * Does `e` take the text of the line bound by `b` anywhere in that one expression, wrapped or not (F3 of REVIEW-W2B's second read: a
+ * template, `.trim()`, `l && l.text`, a conditional, `[...acc, l.text]`, `String(…)`)? Read: `p.text`, `p?.text`,
+ * `p['text']`, a name the text is bound to, `textOf(p)` / `lineText(p)` / a local helper of the same shape. Not read: a
+ * nested function, and an object that carries the line whole (`{ ...l, text: … }` keeps its declarations). Nor any other
+ * path to the text (`Reflect.get`, a destructure in a block body, …): the KNOWN GAPS (`presumedThings.stripShapes.json`).
+ * @param {any} e @param {{ p: string | null, aliases: Set<string> }} b @param {Set<string>} helpers
+ */
+function takesText(e, b, helpers) {
+  let found = false;
+  const isP = (/** @type {any} */ x) => !!b.p && ts.isIdentifier(bare(x)) && bare(x).text === b.p;
+  const visit = (/** @type {any} */ n) => {
+    if (found || ts.isFunctionLike(n)) return;
+    if (ts.isObjectLiteralExpression(n) && n.properties.some((pr) => ts.isSpreadAssignment(pr) && isP(pr.expression))) return;
+    if (ts.isIdentifier(n) && b.aliases.has(n.text)) {
+      const par = n.parent;
+      const isName = par && ((ts.isPropertyAccessExpression(par) && par.name === n) || (ts.isPropertyAssignment(par) && par.name === n));
+      if (!isName) { found = true; return; }
+    }
+    if ((ts.isPropertyAccessExpression(n) && n.name.text === 'text' && isP(n.expression))
+      || (ts.isElementAccessExpression(n) && ts.isStringLiteralLike(n.argumentExpression) && n.argumentExpression.text === 'text' && isP(n.expression))
+      || (ts.isCallExpression(n) && ts.isIdentifier(n.expression) && (UNWRAP_FNS.has(n.expression.text) || helpers.has(n.expression.text))
+        && n.arguments.length >= 1 && isP(n.arguments[0]))) { found = true; return; }
+    ts.forEachChild(n, visit);
+  };
+  visit(e);
+  return found;
+}
+
+/**
+ * The expressions a body hands on, outside nested functions: `return`s (`mode` 'return'), or what it pushes, adds or
+ * yields (`mode` 'push', a loop's or a `forEach`'s). @param {any} body @param {'return' | 'push'} mode @returns {any[]}
+ */
+function sinksOf(body, mode) {
+  /** @type {any[]} */ const out = [];
+  const visit = (/** @type {any} */ n) => {
+    if (ts.isFunctionLike(n)) return;
+    if (mode === 'return' && ts.isReturnStatement(n) && n.expression) out.push(n.expression);
+    if (mode === 'push' && ts.isCallExpression(n) && ts.isPropertyAccessExpression(n.expression) && ['push', 'unshift', 'add'].includes(n.expression.name.text)) out.push(...n.arguments);
+    if (mode === 'push' && ts.isYieldExpression(n) && n.expression) out.push(n.expression);
+    ts.forEachChild(n, visit);
+  };
+  visit(body);
+  return out;
+}
+
+/**
+ * The names a block binds to the line's text (`const said = l.text;`), added to the binding, so `return said` reads.
+ * @param {any} body @param {{ p: string | null, aliases: Set<string> }} b @param {Set<string>} helpers
+ */
+function withLocalAliases(body, b, helpers) {
+  const out = { p: b.p, aliases: new Set(b.aliases) };
+  for (let pass = 0; pass < 2; pass += 1) {
+    const visit = (/** @type {any} */ n) => {
+      if (ts.isFunctionLike(n)) return;
+      if (ts.isVariableDeclaration(n) && ts.isIdentifier(n.name) && n.initializer && takesText(n.initializer, out, helpers)) out.aliases.add(n.name.text);
+      ts.forEachChild(n, visit);
+    };
+    visit(body);
+  }
+  return out;
+}
+
+/**
+ * Does a callback (an arrow or a function expression) take the text of its `idx`-th parameter into what it hands on?
+ * @param {any} fn @param {number} idx @param {Set<string>} helpers @param {'return' | 'push'} mode
+ */
+function callbackTakes(fn, idx, helpers, mode) {
+  if (!fn || !(ts.isArrowFunction(fn) || ts.isFunctionExpression(fn) || ts.isFunctionDeclaration(fn)) || fn.parameters.length <= idx || !fn.body) return false;
+  const b = lineBinding(fn.parameters[idx].name);
+  if (!b) return false;
+  if (!ts.isBlock(fn.body)) return mode === 'return' ? takesText(fn.body, b, helpers) : sinksOf(fn.body, mode).some((x) => takesText(x, b, helpers));
+  const bb = withLocalAliases(fn.body, b, helpers);
+  return sinksOf(fn.body, mode).some((x) => takesText(x, bb, helpers));
+}
+
+/**
+ * Is this `.map` / `.flatMap` / `Array.from` argument an unwrap to text (a callback whose returned expression takes its
+ * line's text, `textOf` / `lineText`, or a local helper that does)? @param {any} arg @param {Set<string>} helpers
+ */
+function isUnwrap(arg, helpers) {
+  if (ts.isIdentifier(arg)) return UNWRAP_FNS.has(arg.text) || helpers.has(arg.text);
+  return callbackTakes(arg, 0, helpers, 'return');
+}
+
+/** The local helpers of a file that unwrap a line (`const getText = (l) => l.text;`, `function getText(l) {…}`). @param {any} sf */
+function unwrapHelpers(sf) {
+  /** @type {Set<string>} */ const helpers = new Set();
+  for (let pass = 0; pass < 2; pass += 1) {
+    const visit = (/** @type {any} */ n) => {
+      if (ts.isFunctionDeclaration(n) && n.name && callbackTakes(n, 0, helpers, 'return')) helpers.add(n.name.text);
+      if (ts.isVariableDeclaration(n) && ts.isIdentifier(n.name) && n.initializer && (ts.isArrowFunction(n.initializer) || ts.isFunctionExpression(n.initializer))
+        && callbackTakes(n.initializer, 0, helpers, 'return')) helpers.add(n.name.text);
+      ts.forEachChild(n, visit);
+    };
+    visit(sf);
+  }
+  return helpers;
+}
+
+/**
+ * The strip-shaped calls of one source text: `{ file, receiver }`, the receiver's source text (whitespace
+ * folded, its first 100 characters) being the site's identity. The shapes (F5; F3 of the second read): `R.map(unwrap)` /
+ * `R.flatMap(unwrap)` with any extra argument (`map(textOf, ctx)`); `Array.from(R, unwrap)`; `R.reduce(fn)` whose
+ * returned expression takes its line's text; `R.forEach(fn)` and `for (const l of R)` that push, add or yield it;
+ * `for (let i …) … push(R[i].text)`; and `pick(R).text`, a `.text` taken off any call but a door's, whose first argument
+ * is the receiver. An unwrap is a member access `text` of the line in the handed-on expression, wrapped or not. These are
+ * the shapes the ban names, and it catches no others: the twelve KNOWN GAPS of the third read are pinned by shape in
+ * `tests/lint/presumedThings.stripShapes.json`.
+ * @param {string} rel @param {string} src @returns {Array<{ file: string, receiver: string }>}
+ */
+export function stripSites(rel, src) {
+  const sf = ts.createSourceFile(rel, src, ts.ScriptTarget.Latest, true, ts.ScriptKind.JSX);
+  const helpers = unwrapHelpers(sf);
+  /** @type {Array<{ file: string, receiver: string }>} */ const out = [];
+  const text = (/** @type {any} */ n) => n.getText(sf).replace(/\s+/g, ' ').slice(0, 100);
+  const method = (/** @type {any} */ n) => (ts.isCallExpression(n) && ts.isPropertyAccessExpression(n.expression) ? n.expression.name.text : '');
+  const visit = (/** @type {any} */ n) => {
+    const m = method(n);
+    if (['map', 'flatMap'].includes(m) && n.arguments.length >= 1 && isUnwrap(n.arguments[0], helpers)) {
+      out.push({ file: rel, receiver: text(n.expression.expression) });
+    } else if (m === 'from' && ts.isIdentifier(n.expression.expression) && n.expression.expression.text === 'Array' && n.arguments.length >= 2 && isUnwrap(n.arguments[1], helpers)) {
+      out.push({ file: rel, receiver: text(n.arguments[0]) });
+    } else if (['reduce', 'reduceRight'].includes(m) && n.arguments.length >= 1 && callbackTakes(n.arguments[0], 1, helpers, 'return')) {
+      out.push({ file: rel, receiver: text(n.expression.expression) });
+    } else if (m === 'forEach' && n.arguments.length >= 1 && callbackTakes(n.arguments[0], 0, helpers, 'push')) {
+      out.push({ file: rel, receiver: text(n.expression.expression) });
+    } else if (ts.isForOfStatement(n) && ts.isVariableDeclarationList(n.initializer) && n.initializer.declarations.length === 1) {
+      const b = lineBinding(n.initializer.declarations[0].name);
+      if (b) {
+        const bb = withLocalAliases(n.statement, b, helpers);
+        if (sinksOf(n.statement, 'push').some((x) => takesText(x, bb, helpers))) out.push({ file: rel, receiver: text(n.expression) });
+      }
+    } else if (ts.isForStatement(n) && n.initializer && ts.isVariableDeclarationList(n.initializer) && n.initializer.declarations.length === 1
+      && ts.isIdentifier(n.initializer.declarations[0].name)) {
+      const i = n.initializer.declarations[0].name.text;
+      /** @type {any} */ let recv = null;
+      const inner = (/** @type {any} */ x) => {
+        if (recv || ts.isFunctionLike(x)) return;
+        if (ts.isPropertyAccessExpression(x) && x.name.text === 'text' && ts.isElementAccessExpression(bare(x.expression))
+          && ts.isIdentifier(bare(x.expression).argumentExpression) && bare(x.expression).argumentExpression.text === i) { recv = bare(x.expression).expression; return; }
+        ts.forEachChild(x, inner);
+      };
+      for (const sink of sinksOf(n.statement, 'push')) inner(sink);
+      if (recv) out.push({ file: rel, receiver: text(recv) });
+    } else if (ts.isPropertyAccessExpression(n) && n.name.text === 'text' && ts.isCallExpression(bare(n.expression))) {
+      const call = bare(n.expression);
+      const callee = ts.isIdentifier(call.expression) ? call.expression.text : ts.isPropertyAccessExpression(call.expression) ? call.expression.name.text : '';
+      if (call.arguments.length >= 1 && callee && !STRIP_DOORS.has(callee) && !UNWRAP_FNS.has(callee)
+        && (ts.isIdentifier(call.arguments[0]) || ts.isArrayLiteralExpression(call.arguments[0]) || ts.isPropertyAccessExpression(call.arguments[0]))) {
+        out.push({ file: rel, receiver: text(call.arguments[0]) });
+      }
+    }
+    ts.forEachChild(n, visit);
+  };
+  visit(sf);
+  return out;
+}
+
+/**
+ * F5 (the third seat; REVIEW-W2B: "its key lets a new strip on an already-banked receiver pass"): a file's sites COUNT
+ * PER RECEIVER — the first site of a receiver keeps its receiver, the n-th is `receiver #n` — so a second strip of a
+ * banked receiver is a fresh key and reds. @param {Array<{ file: string, receiver: string }>} sites
+ * @returns {Array<{ file: string, receiver: string }>}
+ */
+export function withOrdinals(sites) {
+  /** @type {Map<string, number>} */ const seen = new Map();
+  return sites.map((x) => { const k = stripKey(x.file, x.receiver); const n = (seen.get(k) || 0) + 1; seen.set(k, n); return n === 1 ? x : { ...x, receiver: `${x.receiver} #${n}` }; });
+}
+
+/** @param {string} root @returns {Array<{ file: string, receiver: string }>} every strip-shaped call under STRIP_ROOTS, counted per receiver */
+/** @param {string} root @param {{ keepAdmitted?: boolean }} [opts] keepAdmitted: also the ARM1_INSTRUMENTS files' strip sites */
+export function stripTree(root, { keepAdmitted = false } = {}) {
+  /** @type {string[]} */ const files = [];
+  const walk = (rel) => {
+    for (const e of readdirSync(join(root, rel)).sort()) {
+      const p = `${rel}/${e}`;
+      if (statSync(join(root, p)).isDirectory()) walk(p);
+      else if (/\.(?:js|jsx|mjs)$/.test(e)) files.push(p);
+    }
+  };
+  for (const r of STRIP_ROOTS) walk(r);
+  const sites = withOrdinals(files.flatMap((rel) => stripSites(rel, readFileSync(join(root, rel), 'utf8'))));
+  return keepAdmitted ? sites : sites.filter((x) => !Object.hasOwn(ARM1_INSTRUMENTS, x.file));
 }
 
 // ── ARM 2: the printed record ─────────────────────────────────────────────────────────────────

@@ -193,7 +193,11 @@ const GOLDEN_CONTROL_KEY = 'town|germanic|plains|road|civilized|golden-master-v3
 // taken in the same act as the golden re-record).
 // -> 4c561fca STYLE-2-MERGE record 43, the COHERENCE-PRESUME merge (the culture lines and the re-titled watch role re-deal the
 // control row's text; taken in the same act as the golden re-record).
-const GOLDEN_CONTROL_HASH = '4c561fca47d4958e791283078316da01353ff1db6be653e82ef3d1275849655c';
+// -> de99d519 STYLE-2-MERGE record 46, the COHERENCE-POWERS merge (the dual hat re-deals the control row's cast, ranks and ties;
+// taken in the same act as the golden re-record).
+// -> f4fc47a0 STYLE-2-MERGE record 47, the COHERENCE-AGREE merge (one fact, one answer: the control row's resource roll, economy and
+// defence read off its own record; taken in the same act as the golden re-record).
+const GOLDEN_CONTROL_HASH = 'f4fc47a0ffe9036b899c2ce86a4fbb071857e321eb222599108adc3f6ccea662';
 /** EM-P0's own pinned-mode row and its chooser keys, re-measured here under the mocks. */
 const PIN_ROW = {
   settType: 'town', culture: 'germanic', terrainOverride: 'riverside',
@@ -219,7 +223,12 @@ const CHOOSER_KEYS = ['npcs', 'relationships'];
 // RE-KEYED at MERGE-TRAIN record 9 (2026-11-09, the ALLEGIANCE-CAR4 merge, 824a8ce2f): 547 -> 512, measured by this arm at the
 // merged tree (547 at the point-8 tip 8b75f466a): car 4's A9 (03ff59084) retires the population step's goal draw — the goals are
 // dealt at the seam by people/goals.js :: dealGoals — so 35 fewer unpinned draws reach the population stream on this row.
-const POPULATION_UNPINNED_DRAWS = 512;
+// RE-KEYED at STYLE-2-MERGE point 46 (2026-11-13, the COHERENCE-POWERS merge 6aeaa4154; a figure its drafted record names for
+// the merge seat, 'generationForkCensus A1'): 512 -> 493, measured by this arm at the merged tree. The pin row's cast loses ONE
+// card, CONFIRMED by generating the row at 358e072ab and at the merge (28 -> 27 cards; the only one gone is npc_town_council,
+// 'the first councillor', the seat's own office face: the dual hat seats the leader from a house, so the office face is not
+// minted). That the 19 draws are all that card's own is PLAUSIBLE (the step is not instrumented per card).
+const POPULATION_UNPINNED_DRAWS = 493;
 /** The row both side channels are censused on (the pre-proof's probe row). */
 const CENSUS_ROW = {
   settType: 'town', culture: 'germanic', terrainOverride: 'riverside',
@@ -295,7 +304,22 @@ const PICK_VARIANT_CALLS = 31;
 // (services/serviceRollMaterialization.js :: upkeepRoll). The probe row is Comfortable, so every bought row rolls:
 // 24 calls, counted on the probe row by a counter in a scratch tree (lodging 3, food 4, equipment 9, healing 3,
 // transport 3, commercial legal 2; every row kept). The register's fnv1a32External moves with it.
-const FNV_EXTERNAL_CALLS = 42;
+// RE-KEYED 2026-11-13 (STYLE-2-MERGE point 46, the COHERENCE-POWERS merge, the chair's ruling on STOP 46b): 17 -> 16,
+// MEASURED by A6 and CONFIRMED caller by caller (a probe recording each external fnv1a32 caller's first src frame on
+// this probe row, at 3575cf061 against the merge): buildConflictPlotHooks 2 = 2, composeFoodwaysLine 1 = 1,
+// fingerprintPowerEconomyInput 6 = 6, the tie prose's per-archetype offset (power/relationshipArchetypes.js) 7 = 7 (the
+// pairs re-dealt: 5 of its 7 strings and one quarrel's parties differ), and resolveTieKey (domain/roles/roleClass.js)
+// 1 -> 0: the base's 'mutual_leverage::npc_town_watch>npc_town_hall' tie key is no longer resolved, the dual hat having
+// re-dealt the probe row's cast and ties. No call site left the code (no changed line under src names fnv1a32); the
+// figure is the probe row's runtime count. The register's fnv1a32External moves with it.
+// RE-KEYED 2026-11-14 (UPKEEP-10, THE MERGE of lane/integration-2026-11-07 at 976db5b19 into the defence lane): 24,
+// MEASURED by A6 at the merged tree and attributed caller by caller (a scratch dump of the hashed strings): foodways 3,
+// fingerprintPowerEconomyInput 6, upkeep rolls 6, the tie prose 7, the faction conflicts 2. THE TWO SIDES' CAUSES: the
+// line's 17 -> 16 above (resolveTieKey 1 -> 0); the lane's own 42 was never re-keyed after it moved, and measures 25 at
+// the lane's tip f943c9772, bisected on its first parent: 42 -> 24 at 44cddb372 (UPKEEP-5 F2: a house's own service is
+// never scaled, so 18 bought rows no longer roll: upkeep 24 -> 6), 24 -> 25 at 0c950f06c (UPKEEP-5 R3: one more
+// composeFoodwaysLine, foodways 2 -> 3). The merge: 25 - 1 = 24, no third cause. The register moves with it.
+const FNV_EXTERNAL_CALLS = 24;
 /** The fork law A1 pins: the mint wrapper's equivalence rests on this line and nothing else. */
 const FORK_LAW = 'fork: (label) => createPRNG(`${seed}::${label}`),';
 /** §6.4's off-corpus block: a wizard-reachable switch, the keys it moves, and 24 seeds. */
@@ -385,7 +409,7 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     ).toEqual([]);
   };
 
-  it('A1 — the instrument reaches the generator graph: mints split 4 direct / 106 via fork, no golden moves, 512 draws unpinned and 0 pinned', () => {
+  it('A1 — the instrument reaches the generator graph: mints split 4 direct / 106 via fork, no golden moves, 493 draws unpinned and 0 pinned', () => {
     // ── C0 — the mocks lose no export. A replacement that dropped a name would break
     // importers silently, and every figure below would be measured on a crippled module.
     expect(mintCensus.actualKeys.length, 'the prng mock factory never ran').toBeGreaterThan(0);
@@ -426,6 +450,9 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     // 'people-faces' and one keyed fork per card (28 on this row); PEOPLE-3 HOOKS (0f930ce95) forks each card's key again
     // for its one hook and adds ['people-hooks']: 58 labels, 30 distinct, unmoved to the tip. Measured at
     // every stage with its own produced manifest; pinned EXACTLY, in order (a new, lost or re-ordered fork reds).
+    // STYLE-2-MERGE point 46 (2026-11-13, the COHERENCE-POWERS merge): 28 -> 27 cards, 58 -> 56 labels, 30 -> 29 distinct; the one
+    // card gone, in both passes, is npc_town_council (the seat's office face, not minted under the dual hat; CONFIRMED with
+    // POPULATION_UNPINNED_DRAWS above).
     expect(unpinnedPopulation.forkLabels, 'the step mints exactly the cast\'s declared streams').toEqual([
       'people-faces',
       'npc_charcoal_burner',
@@ -445,7 +472,6 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
       'npc_bakers_5_15',
       'npc_craft_guilds_5_15',
       'npc_parish_churches_2_5',
-      'npc_town_council',
       'npc_courthouse',
       'npc_small_prison_stocks',
       'npc_town_watch',
@@ -474,7 +500,6 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
       'npc_bakers_5_15',
       'npc_craft_guilds_5_15',
       'npc_parish_churches_2_5',
-      'npc_town_council',
       'npc_courthouse',
       'npc_small_prison_stocks',
       'npc_town_watch',

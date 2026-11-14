@@ -223,6 +223,7 @@ Match the change to the proof. A PR is not ready until the relevant rows are gre
 | store/state (`src/store/**`) | store/integration tests; cross-slice writes go through one persist path |
 | backend (`supabase/migrations/**`, `functions/**`) | an **executed** test (pglite for SQL/RLS/ledger; a signed-event test for the webhook) — not a source-text regex |
 | dossier data (a field shown to the user) | a **screen ↔ PDF parity** assertion (the field is derived once and both surfaces read it) |
+| a line a reader can see (a pool line, a sentence written in code) | the procedure [`docs/content/SOP_POOLS_AND_CONDITIONS.md`](docs/content/SOP_POOLS_AND_CONDITIONS.md): a registered word declares its disqualifier, the draw goes through a door, the case table is covered, the page measure by vocabulary shows no finding |
 | publishable data (gallery) | a **public/privacy** test proving private fields never project |
 | a user journey | a Playwright spec under `e2e/` |
 | a new dependency | a bundle-impact note + `npm audit --audit-level=high --omit=dev` clean |

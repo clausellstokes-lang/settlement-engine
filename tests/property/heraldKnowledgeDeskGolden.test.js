@@ -126,6 +126,12 @@ describe('the knowledge desk — the non-omniscient Herald golden (captured firs
     // 442 → 446 at STYLE-2-MERGE RECORD 38, THE HERALD GOLDEN OF POINT 36 SIGNED AT THE RESIDUE MERGE (ODQ §934.105, the chair's ruling
     // of 2026-11-10; record docs/shift-records/2026-11-11-style-2-merge-38-residue-herald.json): the pulse reads a person's powers by
     // membership (GREEN-TIP ae6693ccb, PULSE-SITES 0db374102); four more items on rr-fresh-full|1 (440 → 444).
+    // 446 → 440 at STYLE-2-MERGE RECORD 46, THE COHERENCE-POWERS MERGE (ODQ §934.105; record
+    // docs/shift-records/2026-11-13-style-2-merge-46-coherence-powers.json): the dual hat re-deals the fresh campaign's cast, so
+    // its simulated year's news is re-dealt — on rr-fresh-full|1 99 section rows leave and 93 arrive (itemCount moves with them).
+    // 440 → 446 at STYLE-2-MERGE RECORD 47, THE COHERENCE-AGREE MERGE (ODQ §934.105; record
+    // docs/shift-records/2026-11-13-style-2-merge-47-coherence-agree.json): the fresh campaign's simulated year reads the moved
+    // defence, power and food figures, so its news is re-dealt — on rr-fresh-full|1 29 section rows leave and 35 arrive (itemCount 438 → 444).
     expect(Object.keys(manifest)).toHaveLength(446);
   });
 
@@ -187,10 +193,12 @@ describe('the knowledge desk — the non-omniscient Herald golden (captured firs
       // the hidden allegiance and J-19's lit pulse re-deal the year at the stage of e5f88930b; the year's misjudgment beats are now 2 (15, 4), all on knowledge.
       // Re-dealt at MERGE-TRAIN RECORD 3, THE ALLEGIANCE-CAR3 MERGE (ODQ §934.105, THE TRAIN, 2026-11-09; record docs/shift-records/2026-11-09-merge-train-3-car3.json):
       // organizedCrime 0.05 and the round-robin deal re-deal the year at the stage of c6ded8e3a; the year's misjudgment beats are now 3 (15, 19, 4), all on knowledge.
+      // Re-dealt at STYLE-2-MERGE RECORD 47, THE COHERENCE-AGREE MERGE (ODQ §934.105, THE STYLE WAVE'S MERGE, 2026-11-13; record docs/shift-records/2026-11-13-style-2-merge-47-coherence-agree.json):
+      // the year reads the moved defence, power and food figures at the stage of 9e2ae9035; the year's misjudgment beats are now 3 (15, 4, 45), all on knowledge.
       expect(misjudged).toEqual([
         'wizard_news.15.belief_misjudgment.soak-a.soak-c',
-        'wizard_news.19.belief_misjudgment.soak-a.soak-c',
         'wizard_news.4.belief_misjudgment.soak-a.soak-c',
+        'wizard_news.45.belief_misjudgment.soak-b.soak-d',
       ]);
       for (const id of misjudged) {
         expect(live.sections[id]).toBe('knowledge');

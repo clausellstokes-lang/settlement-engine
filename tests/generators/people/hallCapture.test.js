@@ -150,6 +150,20 @@ describe('the derivation (§3.4) on fixtures', () => {
     expect(at([clean('a', 1), clean('b', 2), clean('c', 3), { ...agent('d', null) }]).state).toBe('none');
   });
 
+  it('capture needs a criminal power standing: an agent lord and second with none in the town is at most corrupted', async () => {
+    // COHERENCE-POWERS (the chair's ruling of 2026-11-12, cure (a)): the design's capture is "the lord is an agent and
+    // agentScore >= captureScore", ALLOWED WHERE A CRIMINAL POWER STANDS (captureBirthScale.test.js's own sentence). It
+    // held before only because the office face was never dealt an allegiance; the dual-hat leader is a house face and is.
+    // A lord who is bought, with no organisation to hold the hall, reads corrupted. Found at cap-ord-town-19: a Town
+    // Mayor's warehouse factor, an agent of a hidden smuggling house, in a town with no criminal power.
+    const { hallCaptureOf } = await import('../../../src/domain/people/hallCapture.js');
+    const alone = { factionRelationships: [], factions: [{ faction: 'Elder Council', category: 'government', power: 40, isGoverning: true }] };
+    const hall = hallCaptureOf({ npcs: [agent('a', 1), agent('b', 2), clean('c', 3)], powerStructure: alone }, { climate: 'none' });
+    expect([hall.agentRung, hall.state, hall.underworld]).toEqual(['corrupted', 'corrupted', null]);
+    // the same hall with the guild standing is captured (the control: the condition, not the agents, decides)
+    expect(hallCaptureOf({ npcs: [agent('a', 1), agent('b', 2), clean('c', 3)], powerStructure: powers() }, { climate: 'none' }).state).toBe('capture');
+  });
+
   it('the climate rung is capped at equilibrium: strengths alone never reach corrupted or capture', async () => {
     const { hallCaptureOf } = await import('../../../src/domain/people/hallCapture.js');
     const at = (climate) => hallCaptureOf({ npcs: [clean('a', 1)], powerStructure: powers() }, { climate });
