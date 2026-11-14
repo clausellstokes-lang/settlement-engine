@@ -31,9 +31,10 @@ export function serviceImpactReason(svc, { impaired, degraded, depReasons }) {
 }
 
 // X-50 (BOILERPLATE ONCE): `impactShown` — an earlier row already printed this row's impact
-// sentence, so the row keeps its own need and prints no impact; `impactCovers` — the row that
-// prints the impact names the chains it covers after it. Both default to the old row.
-export function ServiceItem({ svc, accent='#6b5340', isCriminal=false, _tradeDeps, impaired, degraded, vulnerable, depReasons, chainDepth=null, settlement=null, impactShown=false, impactCovers=null }) {
+// sentence, so the row keeps its own need and prints no impact. Defaults to the old row.
+// W2-C-LEAVES-8 item 1 (the chair, 2026-11-14): nothing is run on to the impact (the "· covers"
+// list of the rows' need labels was machinery on the page).
+export function ServiceItem({ svc, accent='#6b5340', isCriminal=false, _tradeDeps, impaired, degraded, vulnerable, depReasons, chainDepth=null, settlement=null, impactShown=false }) {
   // THE PHONE PROSE FLOOR — the description sentence and the impairment reason.
   // The service name, the ✦ custom mark, the status pill, the chain-depth chip
   // and the institution attribution keep their own steps: they are the row's
@@ -106,7 +107,6 @@ export function ServiceItem({ svc, accent='#6b5340', isCriminal=false, _tradeDep
                 name above and stays that way — only the printed word goes through the seam. */}
              Needs <strong>{resourceDisplayName(r.resource)}</strong>
             {r.impact&&!impactShown&&<span style={{fontStyle:'italic',marginLeft:4}}>{truncateAtWord(r.impact, 70)}</span>}
-            {r.impact&&!impactShown&&impactCovers?.length>0&&<span style={{marginLeft:4}}>· covers {impactCovers.join(', ')}</span>}
           </p>;
         })()}
       </div>

@@ -12,7 +12,6 @@ import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import {computeChainSets, computeChainDepthMap} from '../tabHelpers';
 import EconomyFreshnessNote from '../EconomyFreshnessNote.jsx';
 import {ServiceItem, serviceImpactReason} from '../serviceComponents';
-import { resourceDisplayName } from '../../../domain/display/resourceDisplayName.js';
 import {NarrativeNote} from '../NarrativeNote';
 import { economyDeskRead } from '../economyDeskRead.js';
 import { DeskLines } from './EconomicsGlance.jsx'; // the shared position renderer (see its docblock)
@@ -205,8 +204,9 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
   // impaired row printed it — "No trade access: running on existing stockpiles only." once per
   // severed chain. TRIM-2's Economics pattern: each distinct impact prints on the FIRST row that
   // carries it, in this tab's own render order (catOrder over the open categories, then
-  // `serviceOrder`), followed by the chains it covers; every row keeps its own "Needs {resource}".
-  // An impact only one row carries is printed as before.
+  // `serviceOrder`); every row keeps its own "Needs {resource}". An impact only one row carries is
+  // printed as before. W2-C-LEAVES-8 item 1 (the chair, 2026-11-14: the page shows no chip row of
+  // machinery): nothing is run on to the impact; the "· covers" list of the rows' need labels is cut.
   const impactPlan = (() => {
     const groups = new Map(); // impact -> rows that carry it, in render order
     const cmp = serviceOrder(impaired, degraded);
@@ -219,11 +219,10 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
         groups.get(reason.impact).push({ svc, reason });
       }
     }
-    const plan = new Map(); // svc -> { impactShown, impactCovers }
+    const plan = new Map(); // svc -> { impactShown }
     for (const rows of groups.values()) {
       if (rows.length < 2) continue;
-      const covers = [...new Set(rows.map(({ reason }) => resourceDisplayName(reason.resource)).filter(Boolean))];
-      rows.forEach(({ svc }, i) => plan.set(svc, i === 0 ? { impactShown: false, impactCovers: covers } : { impactShown: true, impactCovers: null }));
+      rows.forEach(({ svc }, i) => plan.set(svc, { impactShown: i > 0 }));
     }
     return plan;
   })();
@@ -355,7 +354,7 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
                       <React.Fragment key={i}>
                         <ServiceItem svc={svc} accent={meta.accent} isCriminal={isCriminal}
                           tradeDeps={tradeDeps} impaired={impaired} degraded={degraded} vulnerable={vulnerable} depReasons={depReasons} settlement={settlement} chainDepth={serviceChainDepth.get((typeof svc==='string'?svc:svc?.institution||'').toLowerCase())}
-                          impactShown={impactPlan.get(svc)?.impactShown || false} impactCovers={impactPlan.get(svc)?.impactCovers || null}/>
+                          impactShown={impactPlan.get(svc)?.impactShown || false}/>
                         {/* ── DS-SUP-3's SECOND LENS, UNDER THE ROW IT NAMES ──────────────
                             The Defense idiom exactly (DefenseTab's `threatSentenceFor`): the
                             sentence sits in the list, under the row, OUTSIDE any control — the

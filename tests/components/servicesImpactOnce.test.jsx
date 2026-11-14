@@ -6,8 +6,14 @@
  * Services: every impaired row printed its dependency's impact sentence, and generation gives
  * every dependency of a settlement one impact (economicState.js :: generateEconomicState), so
  * "No trade access: running on existing stockpiles only." printed once per severed chain. Each
- * distinct impact now prints once, on the first row that carries it, followed by the chains it
- * covers; every row keeps its own "Needs {resource}" (TRIM-2's Economics pattern).
+ * distinct impact now prints once, on the first row that carries it; every row keeps its own
+ * "Needs {resource}" (TRIM-2's Economics pattern).
+ *
+ * W2-C-LEAVES-8 item 1 (the chair's ruling, 2026-11-14: the page shows no chip row of machinery; where the need box
+ * prints the record's impact sentence, nothing is run on to it): the impact was followed by "· covers" and the need
+ * labels of every row under it ("Operating at minimal capacity or shut down.· covers Grain, Livestock / game, Grain +
+ * water power", 15 of the census's 720, every one a siege or a road-less town). The list is gone: each of those rows
+ * prints its own need. The pin that the line named every chain after it is re-keyed to the ruling: nothing follows it.
  */
 import { afterEach, beforeAll, describe, expect, test } from 'vitest';
 import { cleanup, render } from '@testing-library/react';
@@ -50,8 +56,8 @@ beforeAll(() => {
 }, 600000);
 afterEach(cleanup);
 
-describe('X-50: the Services impact line prints once, followed by the chains it covers', () => {
-  test('a Services tab with two or more severed chains prints each impact once, with every chain named after it', () => {
+describe('X-50: the Services impact line prints once, and nothing is run on to it', () => {
+  test('a Services tab with two or more severed chains prints each impact once, and no list of chains after it', () => {
     const offenders = [];
     let multi = 0;
     for (const { seed, text, impacts, needLines } of SERVICES) {
@@ -61,12 +67,10 @@ describe('X-50: the Services impact line prints once, followed by the chains it 
         multi += 1;
         const n = countOf(text, impact);
         if (n !== 1) { offenders.push(`${seed}: printed ${n}x: ${impact}`); continue; }
-        // every severed chain the line covers is named after it, on the one row that prints it
-        const chains = [...new Set(carriers.map((l) => l.slice('Needs '.length).split(impact)[0].trim()))];
+        // W2-C-LEAVES-8 item 1: nothing is run on to the impact on the one row that prints it (no "· covers" list)
         const head = needLines.find((l) => l.includes(impact)) || '';
-        const after = head.slice(head.indexOf(impact) + impact.length);
-        const missing = chains.filter((c) => !after.includes(c));
-        if (missing.length) offenders.push(`${seed}: the line names no ${missing.join(', ')} after it: ${head}`);
+        const after = head.slice(head.indexOf(impact) + impact.length).trim();
+        if (after) offenders.push(`${seed}: run on to the impact: ${after}`);
       }
     }
     expect(multi, 'no rendered Services tab had two rows under one impact').toBeGreaterThan(5);
