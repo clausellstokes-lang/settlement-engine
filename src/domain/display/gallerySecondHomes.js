@@ -503,15 +503,32 @@ function sweepHiddenNames(s, search) {
 }
 
 /**
+ * ONE FOLD FOR THE WORDS, BOTH ENGINES, EVERY SCRIPT (COHERENCE-VEIL-11, the seat's read of 212 section 4b): THE NAME
+ * SEARCH's own preparation (namePrep: NFKD, the marks U+0300 to U+036F gone), A-Z lowered by an explicit map, each
+ * letter outside A-Z written as the first of its case class (NAME_CASE, the one table), the sharp s as 'ss'. Never an
+ * engine's own case map: toLowerCase() and PostgreSQL's lower() disagree outside ASCII (a word-final capital sigma, U+0130).
+ * SQL twin: _gallery_veil_case_fold (the same string for every input: the guard asks every code point of the basic plane).
+ * @param {string} t @returns {string}
+ */
+export const caseFold = (t) => (NON_ASCII.test(t) ? Array.from(asciiLower(namePrep(t))).map(ch => CASE_FIRST.get(ch) ?? ch).join('') : asciiLower(t)).replace(/\u00df/g, 'ss');
+
+/**
  * THE WORDS, IN BOTH DIRECTIONS, in any case (COHERENCE-VEIL-8: a composer that lower-cases the first letter of what
  * it embeds, legacyGenerator.js :: annotationBody, still embeds it). The text holds one of the pieces (a piece of the
  * source inside the copy), or (COHERENCE-VEIL-10, V7-2) one of the text's own pieces stands inside one of them (a piece
  * of the copy inside the source: a source amended by appending or by a prefix still holds its born wording). The
- * fallback where the record gives a copy no identity; never the first rule. SQL twin: _gallery_veil_embeds.
+ * fallback where the record gives a copy no identity; never the first rule. Compared by caseFold (COHERENCE-VEIL-11); a
+ * piece whose fold is empty is no piece. SQL twin: _gallery_veil_embeds.
  * @param {unknown} text @param {string[]} pieces @returns {boolean}
  */
-const embedsAny = (text, pieces) => typeof text === 'string' && (pieces.some(p => text.toLowerCase().includes(p.toLowerCase()))
-  || secondHomePieces(text).some(c => pieces.some(p => p.toLowerCase().includes(c.toLowerCase()))));
+const embedsAny = (text, pieces) => {
+  if (typeof text !== 'string' || !pieces.length) return false;
+  const t = caseFold(text);
+  const fp = pieces.map(caseFold).filter(f => f !== '');
+  if (fp.some(f => t.includes(f))) return true;
+  const fc = secondHomePieces(text).map(caseFold).filter(f => f !== '');
+  return fc.some(c => fp.some(f => f.includes(c)));
+};
 
 /**
  * THE IMPRESSION GOES BY ITS PERSON (COHERENCE-VEIL-10, V7-2; the chair's record 418): the impression on a person's

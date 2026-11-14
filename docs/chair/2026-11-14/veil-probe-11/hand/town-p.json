@@ -1,0 +1,13 @@
+{"name": "Coldharbour", "tier": "town",
+ "institutions": [{"name": "Rope walk", "category": "Economy", "desc": "Rope."}],
+ "npcs": [{"id": "npc.ivo", "name": "Ivo Marchetti", "role": "Harbourmaster"}, {"id": "npc.tamsin", "name": "Tamsin Vey", "role": "Chandler"},
+          {"id": "npc.olek", "name": "Olek Brandt", "role": "Cooper"}, {"id": "npc.ruth", "name": "Ruth Calloway", "role": "Netmaker"}],
+ "relationships": [
+   {"id": "tie.ivo-tamsin", "from": "npc.ivo", "to": "npc.tamsin", "npc1Name": "Ivo Marchetti", "npc2Name": "Tamsin Vey", "type": "secret_patron", "typeName": "Silent Partnership",
+    "covert": true, "description": "COVERTMARK the harbourmaster quietly owns half of the chandlery", "tension": "COVERTMARK the customs ledger would show it if anyone looked"},
+   {"id": "tie.olek-ruth", "from": "npc.olek", "to": "npc.ruth", "npc1Name": "Olek Brandt", "npc2Name": "Ruth Calloway", "type": "rival", "typeName": "Professional Rivalry",
+    "description": "They bid against each other for every barrel contract", "tension": "Ruth undercut the last contract by a single copper"}],
+ "prominentRelationship": {"npc1": "Ivo Marchetti", "npc2": "Tamsin Vey", "type": "Silent Partnership",
+   "full": "COVERTMARK the harbourmaster quietly owns half of the chandlery", "tension": "COVERTMARK the customs ledger would show it if anyone looked",
+   "phrasing": "Ivo Marchetti and Tamsin Vey share a silent partnership. COVERTMARK the customs ledger would show it if anyone looked."},
+ "pressureSentence": "The harbour is busy this season."}

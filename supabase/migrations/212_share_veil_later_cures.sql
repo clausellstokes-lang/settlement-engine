@@ -78,6 +78,12 @@
 --       accounts for it), a person's impression by its person. Where only the words tie a copy to its source they are
 --       matched in both directions, on the current and the stored wording (section 4b states each rule; no helper is
 --       added, removed or re-signed: _gallery_veil_card, _embeds, _sources and _second_homes are restated).
+--   (21) THE WORDS IN ONE FOLD (COHERENCE-VEIL-11; the seat's read of section 4b): where the words tie a copy to its
+--       source, "in any case" was each engine's own case map, and PostgreSQL's lower() and JavaScript's toLowerCase()
+--       disagree outside ASCII (a word-final capital sigma; U+0130), so a shut sentence in Greek capitals was sent here
+--       and withheld by the twin; neither found a sharp s as 'ss', the dotless i as 'i' or an accented copy. Both now
+--       compare by one fold (_gallery_veil_case_fold, gallerySecondHomes.js :: caseFold): the name search's
+--       preparation, A-Z lowered, each other letter the first of its case class from the one table.
 --   (10) A PERSON HIDDEN BY THE PER-PERSON SWITCH IS NOT SENT IN A ROSTER COPY EITHER (COHERENCE-VEIL-6; the fifth
 --       review's V5-4, ruled by the chair): _gallery_apply_member_overrides now reduces each roster copy
 --       (factions[].members[], powerStructure.factions[].members[]) of a person the share does not reveal to the
@@ -89,14 +95,14 @@
 --       Reveal-DM projection of the gallery read and the import, beside 211's decrees and dmLayer; before, every
 --       reader and every importer of such a share received both.
 --
--- NEW: twenty-five helpers (_gallery_veil_pieces, _embeds, _fold, _hidden_name, _sources, _tie_pieces, _second_homes,
--- _member_revealed, _roster_members, _tie_roles, _roster_splice; and the name search's fourteen: _name_sep, _name_case,
+-- NEW: twenty-six helpers (_gallery_veil_pieces, _embeds, _case_fold, _fold, _hidden_name, _sources, _tie_pieces,
+-- _second_homes, _member_revealed, _roster_members, _tie_roles, _roster_splice; and the name search's fourteen: _name_sep, _name_case,
 -- _name_prep, _name_fold, _name_needle, _name_search, _name_ready, _name_hits, _name_hit, _named, _name_near,
 -- _name_floor, _name_taken, _name_sweep). RESTATED, each as 211's statement plus the cure:
 -- _gallery_veil_card, _gallery_veil_apply, _gallery_apply_member_overrides, get_gallery_dossier and
 -- import_gallery_dossier (their grants restated as 211 states them). No helper of 211 changes its
 -- signature, so nothing 211 created is left behind. 211's section 7 is restated last: no _gallery_veil*
--- helper is callable by public, anon or authenticated (65 in all). NOT CHANGED: get_unlisted_dossier,
+-- helper is callable by public, anon or authenticated (66 in all). NOT CHANGED: get_unlisted_dossier,
 -- get_gallery_map and every other function. No table, column, constraint, policy or row.
 --
 -- COUPLED CLIENT TWIN: src/domain/display/gallerySecondHomes.js (the second homes, (9); the name search, (19)), called
@@ -201,12 +207,41 @@ $$;
 -- (a piece of the source inside the copy), or (COHERENCE-VEIL-10, V7-2) one of the text's own pieces stands inside one
 -- of them (a piece of the copy inside the source: a source amended by appending or by a prefix still holds its born
 -- wording). The fallback where the record gives a copy no identity; never the first rule.
+-- Compared by ONE FOLD, BOTH ENGINES, EVERY SCRIPT (COHERENCE-VEIL-11: _gallery_veil_case_fold, below); a piece whose
+-- fold is empty is no piece.
 create or replace function public._gallery_veil_embeds(txt jsonb, pieces text[])
-returns boolean language sql immutable as $$
-  select jsonb_typeof(txt) = 'string' and (
-    exists (select 1 from unnest(pieces) p where position(lower(p) in lower(txt #>> '{}')) > 0)
-    or exists (select 1 from unnest(public._gallery_veil_pieces(txt)) c, unnest(pieces) p where position(lower(c) in lower(p)) > 0))
-$$;
+returns boolean language plpgsql immutable as $$
+declare
+  t text;
+  fp text[];
+begin
+  if jsonb_typeof(txt) is distinct from 'string' or coalesce(cardinality(pieces), 0) = 0 then return false; end if;
+  t := public._gallery_veil_case_fold(txt #>> '{}');
+  fp := array(select f from unnest(pieces) p, lateral (select public._gallery_veil_case_fold(p) as f) q where f <> '');
+  return exists (select 1 from unnest(fp) f where position(f in t) > 0)
+      or exists (select 1 from unnest(public._gallery_veil_pieces(txt)) c, lateral (select public._gallery_veil_case_fold(c) as fc) q, unnest(fp) f
+                  where fc <> '' and position(fc in f) > 0);
+end $$;
+
+-- [212: NEW] public._gallery_veil_case_fold
+-- ONE FOLD FOR THE WORDS, BOTH ENGINES, EVERY SCRIPT (COHERENCE-VEIL-11, the seat's read of this section). "In any
+-- case" was each engine's own case map (lower(), toLowerCase()), and the two disagree outside ASCII: a word-final
+-- capital sigma is a medial sigma here and a final one in JavaScript; U+0130 is 'i' here and 'i' with a combining dot
+-- there; and neither makes the sharp s 'ss', the dotless i 'i' or an accent nothing. The fold: ASCII, A-Z lowered by an
+-- explicit map; any other text, THE NAME SEARCH's own preparation (_gallery_veil_name_prep: NFKD, the marks U+0300 to
+-- U+036F gone), A-Z lowered, each letter outside A-Z written as the first of its case class (the one table,
+-- _gallery_veil_name_case, read only here), the sharp s as 'ss'. The same string as gallerySecondHomes.js :: caseFold.
+create or replace function public._gallery_veil_case_fold(t text)
+returns text language plpgsql immutable as $$
+declare
+  cv text;   -- every member of a case class but its first
+  cc text;   -- and, place for place, that class's first
+begin
+  if t is null or t !~ '[^\x01-\x7f]' then return translate(t, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'); end if;
+  select string_agg(substr(g, 2), '' order by o), string_agg(repeat(left(g, 1), char_length(g) - 1), '' order by o)
+    into cv, cc from string_to_table(public._gallery_veil_name_case(), ' ') with ordinality x(g, o);
+  return replace(translate(translate(public._gallery_veil_name_prep(t), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), cv, cc), chr(223), 'ss');
+end $$;
 
 -- [212: NEW] public._gallery_veil_fold
 -- THE CATALOGUE IDENTITY'S FOLD (COHERENCE-VEIL-8, -9): lower case, every run of characters that are not an ASCII

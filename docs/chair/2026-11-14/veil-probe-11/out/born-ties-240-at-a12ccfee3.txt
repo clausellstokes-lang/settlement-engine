@@ -1,0 +1,4 @@
+{"towns":240,"withPr":114,"prCovert":2,"prCovertSentPublic":2,"prCovertSentDm":2,"psNamesCovert":0,"psNamesCovertSentPublic":0,"psIsCovertPhrasing":0,"npcs":6770,"impr":6769,"imprWords":1,"imprWordsLower":1}
+covert types: [["Held Over Them",1],["Silent Partnership",1]]
+city/calm/14: {"npc1":"Zayn al-Basri","npc2":"Duha ibn Rashid","type":"Held Over Them"}
+metropolis/infiltrated/3: {"npc1":"Leupold Reich","npc2":"Aleidis Köhler","type":"Silent Partnership"}

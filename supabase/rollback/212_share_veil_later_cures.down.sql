@@ -349,8 +349,9 @@ $$;
 revoke execute on function public.import_gallery_dossier(text) from public;
 grant execute on function public.import_gallery_dossier(text) to authenticated;
 
--- ── 2. the helpers 212 created, by signature (twenty-five: COHERENCE-VEIL-10 replaced the eighth seat's sweep, _folded_name, _names and _sweep, by the name search's fourteen, _name_* and _named) ──
+-- ── 2. the helpers 212 created, by signature (twenty-six: COHERENCE-VEIL-10 replaced the eighth seat's sweep, _folded_name, _names and _sweep, by the name search's fourteen, _name_* and _named; COHERENCE-VEIL-11 added _case_fold) ──
 drop function if exists public._gallery_veil_embeds(jsonb, text[]);
+drop function if exists public._gallery_veil_case_fold(text);
 drop function if exists public._gallery_veil_fold(text);
 drop function if exists public._gallery_veil_hidden_name(jsonb, jsonb, text[], jsonb);
 drop function if exists public._gallery_veil_member_revealed(jsonb, jsonb, boolean, boolean, boolean);

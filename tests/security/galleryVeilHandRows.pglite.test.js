@@ -738,4 +738,64 @@ describe('COHERENCE-VEIL-10: the veil\'s design on rows written by hand (REVIEW-
     expect(bad).toEqual([]);
     expect(differs).toEqual([]);
   }, ARM_TIMEOUT_MS);
+
+  // ── COHERENCE-VEIL-11: THE WORDS IN EVERY SCRIPT (the seat's read of 212 section 4b) ──────────────────────────────
+  // Where only the words tie a copy to its source (a pressureSentence in a town under a stress that names no tie's two
+  // ends), the source is matched in any case. The two engines' own case maps disagree outside ASCII (PostgreSQL's
+  // lower() writes a word-final capital sigma as a medial sigma where JavaScript writes the final one; JavaScript
+  // writes U+0130 as i and a combining dot), and neither makes the sharp s 'ss', the dotless i 'i' or an accent
+  // nothing. Each plant: the shut tie's description in one case, the sentence holding it in the other.
+  it('VEIL-11 THE WORDS IN EVERY SCRIPT: a shut source is found in a words-only home whatever the case, the script, the accents, a sharp s or a dotted capital I, by the same fold in both engines; the same sentence arrives where its source is open', async () => {
+    const bad = []; const differs = []; let reads = 0;
+    const PLANTS = [
+      ['Greek, a word-final sigma', 'ΟΙ ΔΥΟ ΟΙΚΟΓΕΝΕΙΕΣ ΜΟΙΡΑΖΟΝΤΑΙ ΕΝΑ ΠΑΛΙΟ ΧΡΕΟΣ', 'Στο λιμάνι λένε πως οι δυο οικογενειες μοιραζονται ενα παλιο χρεος.'],
+      ['Greek, accented in the copy', 'ΟΙ ΔΥΟ ΟΙΚΟΓΕΝΕΙΕΣ ΜΟΙΡΑΖΟΝΤΑΙ ΕΝΑ ΠΑΛΙΟ ΧΡΕΟΣ', 'Στο λιμάνι λένε πως οι δύο οικογένειες μοιράζονται ένα παλιό χρέος.'],
+      ['Turkish, a dotted capital I and the dotless i', 'İSKELE KAPISI GECE AÇIK KALDI', 'Rıhtımda herkes biliyor: iskele kapısı gece açık kaldı.'],
+      ['German, a sharp s', 'DIE GROSSE STRASSE WURDE GESPERRT', 'Am Kai heißt es nur: die große straße wurde gesperrt.'],
+      ['German, a capital sharp s', 'DIE GROẞE STRAẞE WURDE GESPERRT', 'Am Kai heißt es nur: die grosse strasse wurde gesperrt.'],
+      ['Cyrillic', 'СТАРЫЙ ДОЛГ ЗА ПЕРЕПРАВУ ТАК И НЕ ВЕРНУЛИ', 'На пристани говорят: старый долг за переправу так и не вернули.'],
+      ['Armenian', 'ՀԻՆ ՊԱՐՏՔԸ ԴԵՌ ՉԻ ՎԵՐԱԴԱՐՁՎԵԼ', 'Նավամատույցում ասում են՝ հին պարտքը դեռ չի վերադարձվել։'],
+    ];
+    for (const [how, source, sentence] of PLANTS) {
+      for (const open of [false, true]) {
+        const t = saltmere((k) => (k === 'favour' ? source : AMENDED['as born'](k)), { shut: open ? [] : ['tieA'], stress: { type: 'famine' }, pressure: sentence });
+        const r = await sharesOf(t.town, t.deltas);
+        differs.push(...twinDiffers(r).map(d => `${how}${open ? ' (open)' : ''}: ${d}`));
+        for (const { tag, doc } of each(r)) {
+          reads += 1;
+          const sent = doc?.pressureSentence;
+          if (!open && sent !== undefined) bad.push(`${how}, ${tag}: the sentence holding the shut source is sent: ${JSON.stringify(sent).slice(0, 90)}`);
+          if (open && sent !== sentence) bad.push(`${how} (open), ${tag}: the sentence is ${JSON.stringify(sent).slice(0, 90)}`);
+        }
+      }
+    }
+    expect(reads).toBe(PLANTS.length * 2 * 8);
+    expect(bad).toEqual([]);
+    expect(differs).toEqual([]);
+  }, ARM_TIMEOUT_MS);
+
+  it('VEIL-11 THE WORDS\' FOLD IS ONE: _gallery_veil_case_fold and the twin\'s caseFold give the same string for every code point of the basic plane and every letter of the case table, alone and inside a word', async () => {
+    const sh = await import('../../src/domain/display/gallerySecondHomes.js');
+    const points = [];
+    for (let c = 1; c <= 0xffff; c += 1) if (c < 0xd800 || c > 0xdfff) points.push(String.fromCodePoint(c));
+    for (const ch of new Set(Array.from(sh.NAME_CASE.replace(/ /g, '')))) if (ch.codePointAt(0) > 0xffff) points.push(ch);
+    const bad = []; let asked = 0;
+    for (let i = 0; i < points.length; i += 2048) {
+      const part = points.slice(i, i + 2048);
+      for (const text of [part.join(' '), part.map(ch => `x${ch}y`).join(' ')]) {
+        asked += 1;
+        const server = (await db.query('select public._gallery_veil_case_fold($1) as f', [text])).rows[0].f;
+        if (server !== sh.caseFold(text)) {
+          const a = Array.from(server); const b = Array.from(sh.caseFold(text)); let k = 0; while (k < a.length && a[k] === b[k]) k += 1;
+          bad.push(`from U+${part[0].codePointAt(0).toString(16)}: first difference at ${k}: server ${JSON.stringify(a.slice(k, k + 4).join(''))}, twin ${JSON.stringify(b.slice(k, k + 4).join(''))}`);
+        }
+      }
+    }
+    expect(asked).toBeGreaterThan(60);
+    expect(bad).toEqual([]);
+    // the fold is the words' only case map: a sigma, a dotted capital I, a sharp s
+    expect(sh.caseFold('ΧΡΕΟΣ')).toBe(sh.caseFold('χρεος'));
+    expect(sh.caseFold('İSKELE KAPISI')).toBe(sh.caseFold('iskele kapısı'));
+    expect(sh.caseFold('STRAẞE')).toBe(sh.caseFold('strasse'));
+  }, ARM_TIMEOUT_MS);
 });
