@@ -55,38 +55,38 @@
   },
   "leaves": {
     "src/data/dossierStateProse/defense.generated.js": {
-      "raw": 234545,
-      "gzip": 31738,
+      "raw": 262544,
+      "gzip": 35291,
       "ceilingRaw": 488168,
       "ceilingGzip": 108482
     },
     "src/data/dossierStateProse/economy.generated.js": {
-      "raw": 170255,
-      "gzip": 23958,
+      "raw": 184022,
+      "gzip": 25652,
       "ceilingRaw": 393810,
       "ceilingGzip": 87513
     },
     "src/data/dossierStateProse/general.generated.js": {
-      "raw": 279568,
-      "gzip": 35664,
+      "raw": 297282,
+      "gzip": 37947,
       "ceilingRaw": 796761,
       "ceilingGzip": 177058
     },
     "src/data/dossierStateProse/power.generated.js": {
-      "raw": 124251,
-      "gzip": 17495,
+      "raw": 130008,
+      "gzip": 18272,
       "ceilingRaw": 357097,
       "ceilingGzip": 79355
     },
     "src/data/dossierStateProse/stressors.generated.js": {
-      "raw": 147483,
-      "gzip": 20773,
+      "raw": 147666,
+      "gzip": 20815,
       "ceilingRaw": 258858,
       "ceilingGzip": 57524
     },
     "src/data/dossierStateProse/warFaith.generated.js": {
-      "raw": 178226,
-      "gzip": 24601,
+      "raw": 180300,
+      "gzip": 25094,
       "ceilingRaw": 505306,
       "ceilingGzip": 112290
     },
@@ -109,8 +109,8 @@
       "ceilingGzip": 6751
     },
     "src/data/dossierRelations.generated.js": {
-      "raw": 28249,
-      "gzip": 2664,
+      "raw": 28926,
+      "gzip": 2673,
       "ceilingRaw": 43888,
       "ceilingGzip": 9753
     }
@@ -547,6 +547,54 @@
       "toRaw": 234545,
       "gzipAfter": 31738,
       "reason": "+92 B over the chain (+100 over the committed 234445; the leaf had shrunk 8 B undeclared since its last row) (gzip level 9: 31731 -> 31738): eaca79fcd re-took the wiring census over the moved defence composer (L1: POSTURE_POOL_OF_BADGE resolves four DS-DEF-1 posture pools) and projected the leaves through node scripts/generate-dossier-state-prose.mjs, which writes `\"readsCount\": 1,` (25 B) into the poolMeta of those four pools; nothing else in the leaf moves (no pool, variant or word). The lane left the row undeclared; declared by its third seat at the lane tip after the merge of point 49 (--check exit 0)."
+    },
+    {
+      "car": "JOIN-2 (the true join's first refreeze, 2026-11-14; the chair's ruling of 09:09 UTC)",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 234545,
+      "toRaw": 262544,
+      "gzipAfter": 35291,
+      "reason": "+27999 B raw over the committed 234545 (gzip level 9: 31738 -> 35291): measured at the joined tree after the state-prose generator ran through its door (a80825e8c), never summed. The six state desk leaves: the declared growth of the corpus lane (W2-WRITE, fdae163f3) and the data lane (W2-FIX-DATA, 8d2aa98b1), each already keyed on its own lane through this instrument, composed by the join. dossierRelations.generated.js (28,249 -> 28,926): the defence lane's (coherence-upkeep 26474cda9) fundedGate and upkeep relations on the economicGates rows in src/generators/defenseGenerator.js, re-projected by the generator here; that lane's undeclared growth (it never regenerated the leaf). No ceiling moved; every leaf under its ceiling."
+    },
+    {
+      "car": "JOIN-2 (the true join's first refreeze, 2026-11-14; the chair's ruling of 09:09 UTC)",
+      "leaf": "src/data/dossierStateProse/economy.generated.js",
+      "fromRaw": 170551,
+      "toRaw": 184022,
+      "gzipAfter": 25652,
+      "reason": "+13767 B raw over the committed 170255 (gzip level 9: 23958 -> 25652): measured at the joined tree after the state-prose generator ran through its door (a80825e8c), never summed. The six state desk leaves: the declared growth of the corpus lane (W2-WRITE, fdae163f3) and the data lane (W2-FIX-DATA, 8d2aa98b1), each already keyed on its own lane through this instrument, composed by the join. dossierRelations.generated.js (28,249 -> 28,926): the defence lane's (coherence-upkeep 26474cda9) fundedGate and upkeep relations on the economicGates rows in src/generators/defenseGenerator.js, re-projected by the generator here; that lane's undeclared growth (it never regenerated the leaf). No ceiling moved; every leaf under its ceiling."
+    },
+    {
+      "car": "JOIN-2 (the true join's first refreeze, 2026-11-14; the chair's ruling of 09:09 UTC)",
+      "leaf": "src/data/dossierStateProse/general.generated.js",
+      "fromRaw": 287856,
+      "toRaw": 297282,
+      "gzipAfter": 37947,
+      "reason": "+17714 B raw over the committed 279568 (gzip level 9: 35664 -> 37947): measured at the joined tree after the state-prose generator ran through its door (a80825e8c), never summed. The six state desk leaves: the declared growth of the corpus lane (W2-WRITE, fdae163f3) and the data lane (W2-FIX-DATA, 8d2aa98b1), each already keyed on its own lane through this instrument, composed by the join. dossierRelations.generated.js (28,249 -> 28,926): the defence lane's (coherence-upkeep 26474cda9) fundedGate and upkeep relations on the economicGates rows in src/generators/defenseGenerator.js, re-projected by the generator here; that lane's undeclared growth (it never regenerated the leaf). No ceiling moved; every leaf under its ceiling."
+    },
+    {
+      "car": "JOIN-2 (the true join's first refreeze, 2026-11-14; the chair's ruling of 09:09 UTC)",
+      "leaf": "src/data/dossierStateProse/power.generated.js",
+      "fromRaw": 125681,
+      "toRaw": 130008,
+      "gzipAfter": 18272,
+      "reason": "+5757 B raw over the committed 124251 (gzip level 9: 17495 -> 18272): measured at the joined tree after the state-prose generator ran through its door (a80825e8c), never summed. The six state desk leaves: the declared growth of the corpus lane (W2-WRITE, fdae163f3) and the data lane (W2-FIX-DATA, 8d2aa98b1), each already keyed on its own lane through this instrument, composed by the join. dossierRelations.generated.js (28,249 -> 28,926): the defence lane's (coherence-upkeep 26474cda9) fundedGate and upkeep relations on the economicGates rows in src/generators/defenseGenerator.js, re-projected by the generator here; that lane's undeclared growth (it never regenerated the leaf). No ceiling moved; every leaf under its ceiling."
+    },
+    {
+      "car": "JOIN-2 (the true join's first refreeze, 2026-11-14; the chair's ruling of 09:09 UTC)",
+      "leaf": "src/data/dossierStateProse/stressors.generated.js",
+      "fromRaw": 147483,
+      "toRaw": 147666,
+      "gzipAfter": 20815,
+      "reason": "+183 B raw over the committed 147483 (gzip level 9: 20773 -> 20815): measured at the joined tree after the state-prose generator ran through its door (a80825e8c), never summed. The six state desk leaves: the declared growth of the corpus lane (W2-WRITE, fdae163f3) and the data lane (W2-FIX-DATA, 8d2aa98b1), each already keyed on its own lane through this instrument, composed by the join. dossierRelations.generated.js (28,249 -> 28,926): the defence lane's (coherence-upkeep 26474cda9) fundedGate and upkeep relations on the economicGates rows in src/generators/defenseGenerator.js, re-projected by the generator here; that lane's undeclared growth (it never regenerated the leaf). No ceiling moved; every leaf under its ceiling."
+    },
+    {
+      "car": "JOIN-2 (the true join's first refreeze, 2026-11-14; the chair's ruling of 09:09 UTC)",
+      "leaf": "src/data/dossierRelations.generated.js",
+      "fromRaw": 28249,
+      "toRaw": 28926,
+      "gzipAfter": 2673,
+      "reason": "+677 B raw over the committed 28249 (gzip level 9: 2664 -> 2673): measured at the joined tree after the state-prose generator ran through its door (a80825e8c), never summed. The six state desk leaves: the declared growth of the corpus lane (W2-WRITE, fdae163f3) and the data lane (W2-FIX-DATA, 8d2aa98b1), each already keyed on its own lane through this instrument, composed by the join. dossierRelations.generated.js (28,249 -> 28,926): the defence lane's (coherence-upkeep 26474cda9) fundedGate and upkeep relations on the economicGates rows in src/generators/defenseGenerator.js, re-projected by the generator here; that lane's undeclared growth (it never regenerated the leaf). No ceiling moved; every leaf under its ceiling."
     }
   ],
   "ceilingTransfersNewLeaves": [
