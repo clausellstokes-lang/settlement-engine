@@ -41,7 +41,7 @@ export const buildWartimeNarrative = (institutionFlags, governingFactionName, in
 
   if (isWellSupplied) {
     return (
-      (sovereign ? 'The garrison has doubled and the city treasury pays its bills, so contracts for grain, leather and ironwork go to anyone who can fill them. ' : 'The garrison has doubled and the crown pays its bills, so contracts for grain, leather and ironwork go to anyone who can fill them. ') +
+      (sovereign ? 'Those under arms have doubled, and the city treasury pays their keep, so contracts for grain, leather and ironwork go to anyone who can fill them. ' : 'The garrison has doubled and the crown pays its bills, so contracts for grain, leather and ironwork go to anyone who can fill them. ') +
       'The men who left to fight have not come back. ' +
       `${governingFactionName} must decide how much more the settlement can give to the war.`
     );
