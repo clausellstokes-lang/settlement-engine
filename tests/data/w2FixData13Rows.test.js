@@ -6,6 +6,7 @@
  * in loses it.
  */
 import { beforeAll, describe, expect, test } from 'vitest';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
@@ -31,8 +32,7 @@ describe('W2-FIX-DATA-13: the measured rows in the data lane\'s files', () => {
   // DATA-SMELTER (the chair's 11:31 ruling): the catalogue's own Smelter text named "mine and smithy" in 57 of the 96
   // towns it printed in where the roster lacks one (r2r-town-26 neither; r2r-town-34; r2s-under_siege-city-2 no mine).
   test('DATA-SMELTER: no Smelter description names a mine or a smithy the roster lacks', () => {
-    const bad = [];
-    for (const seed of ['r2r-town-26', 'r2r-town-34', 'r2s-under_siege-city-2']) {
+    expectNoSeedFailures(collectSeedFailures(['r2r-town-26', 'r2r-town-34', 'r2s-under_siege-city-2'], (seed) => {
       const town = bornCensus(seed);
       const names = roster(town);
       const hasMine = names.some((n) => /\bmines?\b|mining/i.test(n));
@@ -40,8 +40,9 @@ describe('W2-FIX-DATA-13: the measured rows in the data lane\'s files', () => {
       const smelter = (town.institutions || []).find((/** @type {any} */ i) => i.name === 'Smelter');
       expect(smelter, seed).toBeTruthy();
       const desc = String(smelter.desc || '');
-      if ((!hasMine && /\bmine\b/i.test(desc)) || (!hasSmith && /smith/i.test(desc))) bad.push(`${seed}: ${desc}`);
-    }
-    expect(bad).toEqual([]);
+      if (!hasMine) expect(desc, seed).not.toMatch(/\bmine\b/i);
+      if (!hasSmith) expect(desc, seed).not.toMatch(/smith/i);
+    }), 'no Smelter description names a mine or a smithy the roster lacks');
   }, 120_000);
+
 });
