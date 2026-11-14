@@ -131,7 +131,8 @@ export const LEAVES = Object.freeze({
   // ── layer 3: over the powers ──
   rulerKind: home('rulerKind', 3, ['powerStructure']),
   guild: home('guild', 3, ['powerStructure', 'institutions']),
-  crime: home('crime', 3, ['_seed', 'economicState', 'economicState.safetyProfile', 'institutions', 'powerStructure'], {
+  // W2-C-LEAVES-9: the ring note's vantage reads `_seed`, and the tier for its second vantage's declaration (tier: ≥ village).
+  crime: home('crime', 3, ['_seed', 'economicState', 'economicState.safetyProfile', 'institutions', 'powerStructure', 'tier'], {
     note: '`deriveCriminalStructure` reads the safety profile\'s crime lines, which assembly settles to the crime signal (a back-write at layer 3): it reads its own layer',
   }),
   crimeSignal: leaf({ layer: 3, module: 'domain/crimeSignal.js', exported: 'crimeSignalOf', call: 'crimeLists', reads: ['powerStructure', 'institutions'] }),

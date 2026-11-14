@@ -661,11 +661,14 @@ import { hashKey } from './stateProse/stateProseKernel.js';
  * from another vantage. No new fact is read. The settlement's own seed chooses (`_seed`, the
  * birth's identity) through the kernel's avalanched `hashKey`, with no draw; a record with no seed prints the original. Only the note
  * varies: `key`, `label` and the colours are the table's, so every reader of `key` is unmoved.
- * @type {ReadonlyArray<string>}
+ * W2-C-LEAVES-9 (the chair's ruling of 2026-11-14 05:28 (1)): the second vantage says "the streets", a size word a thorp or
+ * a hamlet makes false (`registeredWords.js :: streets`), so it DECLARES the tier where it is true; `withRingVantage`
+ * hands the drawn vantage to the list door and, where it is refused, prints the table's own note.
+ * @type {ReadonlyArray<string | { text: string, needs: string[] }>}
  */
 const ORGANIZED_RING_NOTES = Object.freeze([
   CRIM_STRUCTURE_DATA.organized.note,
-  'Crime here answers to one ring. It keeps the streets quiet because trouble brings the law, lives on protection money and on whatever official it can pay, and anyone who needs something from it can bargain.',
+  { text: 'Crime here answers to one ring. It keeps the streets quiet because trouble brings the law, lives on protection money and on whatever official it can pay, and anyone who needs something from it can bargain.', needs: ['tier: ≥ village'] },
   'Shopkeepers here pay one ring for protection, and the ring pays any official who will take its money. It stamps out random violence, which would bring the law, and its terms are known and can be negotiated.',
   'Ask who runs crime here and the answer is one ring. It sets the rules and keeps to them, it can be bargained with, and it puts down any violence that would bring the law; it lives on protection money and on any official it can bribe.',
 ]);
@@ -678,7 +681,8 @@ const ORGANIZED_RING_NOTES = Object.freeze([
  * one value printed on the DM's Defense tab and the public page alike, so it may not read it. The four vantages now
  * say what is true in every town and read nothing hidden: the ring lives on "any official it can buy" (pays "any
  * official who will take its money"), which presumes no buyer; the DM's "Who answers to whom" names those it has.
- * The pick is the settlement's seed, as before (SW-B5); for the owner's veto, as new words.
+ * The pick is the settlement's seed, as before (SW-B5); for the owner's veto, as new words. The drawn vantage passes the
+ * list door (`filterDeclared`, W2-C-LEAVES-9): one refused in a small place leaves the table's own note; no roll moves.
  * @param {{ key: string, label: string, color: string, bg: string, note: string }} row
  * @param {{ _seed?: unknown }} settlement
  * @returns {{ key: string, label: string, color: string, bg: string, note: string }}
@@ -686,7 +690,10 @@ const ORGANIZED_RING_NOTES = Object.freeze([
 function withRingVantage(row, settlement) {
   const seed = settlement?._seed;
   if (row.key !== 'organized' || typeof seed !== 'string' || !seed) return row;
-  const note = ORGANIZED_RING_NOTES[hashKey(`${seed}::defenseDisplay:organizedRing`) % ORGANIZED_RING_NOTES.length];
+  const drawn = ORGANIZED_RING_NOTES[hashKey(`${seed}::defenseDisplay:organizedRing`) % ORGANIZED_RING_NOTES.length];
+  const [kept] = filterDeclared([drawn], { facts: () => factsOf(/** @type {Parameters<typeof factsOf>[0]} */ (/** @type {unknown} */ (settlement))),
+    poolId: 'defenseDisplay:ORGANIZED_RING_NOTES', surface: 'defense', drawKind: 'H' });
+  const note = kept === undefined ? row.note : lineText(kept);
   return note === row.note ? row : Object.freeze({ ...row, note });
 }
 
@@ -833,3 +840,7 @@ function courtOnRoster(settlement) {
     return typeof sv?.name === 'string' && COURT_SERVICES.has(sv.name) && live.includes(String(sv?.institution ?? ''));
   });
 }
+
+// ─── W2-C-LEAVES-9: THE RING'S VANTAGES PASS THE LIST DOOR (at the end of the file, so no line above moves) ───
+import { filterDeclared, lineText } from '../facts/drawDeclared.js';
+import { factsOf } from '../facts/factsOf.js';
