@@ -123,12 +123,38 @@ describe('economic survival respects the actual economy', () => {
     // Re-keyed by identity (UPKEEP-CAPACITY C1, a house counts by its rung): the market this test was written for
     // counts at today's points, so the town keeps a one-rung market house (the catalogue's Fish market) in the
     // Market Square's stead; a market square is the least rung of its ladder and counts 0.8 of the market's weights.
-    const SAME_BUILDINGS = [{ name: 'Granary' }, { name: 'Grist Mill' }, { name: 'Fish market' }, { name: 'Town Watch' }];
+    // ⭐ RE-KEYED BY IDENTITY (UPKEEP-15, the chair's ruling (b) of 2026-11-14): the fixture's identity is "a market
+    // house that counts at today's points". The cause: the off-ladder rule (UPKEEP-13's P3, bb0aaa3fe: a house on no
+    // ladder of a laddered job counts at the least rung the catalogue offers at its size) places the Fish market at the
+    // market's least rung (factor 0.8), so it no longer counts at today's points. The catalogue reads "Merchant guilds
+    // (15-40)" at factor 1 (rung 2 of 3); it stands on the city's shelf, and no market house of the town's shelf reads
+    // at factor 1 (each reads 0.8 or 0.93), so it is taken: of the scaled parts it opens the market alone. The
+    // threshold is unchanged. The Fish market's own case is stated by the arm below.
+    const SAME_BUILDINGS = [{ name: 'Granary' }, { name: 'Grist Mill' }, { name: 'Merchant guilds (15-40)' }, { name: 'Town Watch' }];
     const poor = partsOf(town({ priorityEconomy: 15, prosperity: 'Struggling', institutions: SAME_BUILDINGS }));
     const rich = partsOf(town({ priorityEconomy: 80, prosperity: 'Prosperous', institutions: SAME_BUILDINGS }));
     expect(poor.some((x) => x.id === 'sustainsHeld'), 'anchored: the limit binds this town').toBe(true);
+    expect(rich.find((x) => x.id === 'market')?.full, 'anchored: the market house counts at today\'s points').toBe(2.5);
     expect(supplyBeforeTheLimit(rich)).toBeGreaterThan(supplyBeforeTheLimit(poor) + 15);
     expect(supplyBeforeTheLimit(rich)).toBeGreaterThanOrEqual(60);
+  });
+
+  test('the Fish market, placed at the least rung, still lets the healthy economy score higher, by the measured margin (UPKEEP-15)', () => {
+    // The case that moved, not hidden (the chair's ruling (b)): the off-ladder rule places the Fish market at the
+    // market's least rung (factor 0.8: 2 points full, against the market's 2.5 at today's points), and the healthy
+    // economy still scores higher than the poor one, by the margin measured at UPKEEP-15: 74 against 59, the
+    // market's points 2 and 1.2.
+    /** @param {any} d */
+    const supplyBeforeTheLimit = (d) => Math.round(d.filter((x) => x.group === 'SUSTAINS').reduce((a, x) => a + x.points, 0) * 4);
+    const FISH = [{ name: 'Granary' }, { name: 'Grist Mill' }, { name: 'Fish market' }, { name: 'Town Watch' }];
+    const poor = partsOf(town({ priorityEconomy: 15, prosperity: 'Struggling', institutions: FISH }));
+    const rich = partsOf(town({ priorityEconomy: 80, prosperity: 'Prosperous', institutions: FISH }));
+    expect(rich.find((x) => x.id === 'market')?.full).toBe(2);
+    expect(rich.find((x) => x.id === 'market')?.points).toBe(2);
+    expect(poor.find((x) => x.id === 'market')?.points).toBe(1.2);
+    expect(supplyBeforeTheLimit(rich)).toBe(74);
+    expect(supplyBeforeTheLimit(poor)).toBe(59);
+    expect(supplyBeforeTheLimit(rich)).toBeGreaterThan(supplyBeforeTheLimit(poor));
   });
 
   test('the gate scales monotonically with economy priority', () => {
