@@ -281,3 +281,24 @@ The stage re-deals **no tie** (lane-only, the relationships and conflicts are eq
 - The 33 other UNMOVED surfaces: not run.
 - The armed rows removed (67 + 111): counted, not read one by one.
 - A content profile admitting one of slavery and trafficking but not the other: not born; planted (`persons-some` reds its guard).
+
+## HAND-BACK (the count read 466,924 by get_session at 10:18 UTC, past 400,000)
+
+**Done, all pushed:**
+- Steps 1–8: the list at 9d903b877, the review at e3c773be6.
+- The verdict went to the chair.
+
+**What is left, line by line.** None of it changes the verdict.
+- The 4,305 corpus: not born.
+- The 33 UNMOVED surfaces not sampled.
+- The whole suite in six shards: the chair ruled it is run once on the joined tree.
+- The 178 removed armed rows: counted, not read.
+- The PDF rendered as pages.
+- A content profile that admits one of the two governed topics.
+
+**The instruments, re-made.**
+1. `git archive` this branch's `probes/REVIEW-POWERS-4` and CENSUS-2's directory (`lane/census-2-2026-11-13`), each into a scratch directory outside every repository tree.
+2. Replace CENSUS-2's `seedcfg.mjs` with this one.
+3. Make detached worktrees at 96a6ced46, a5402c006, 3909655c3 and 976db5b19. Run `npm ci --ignore-scripts` in one and link `node_modules` into the others; the lockfile is equal at all four.
+4. Run `census2.sh <tree> <out> 4 --files <the 11 stage src files> [--seeds seeds.x.txt]`, or `births.mjs` alone for records.
+5. Run the probes against the corpora as the README says.
