@@ -38,5 +38,24 @@ None found in the first seat's commits: its one ruling (00:23 UTC) is copied int
 - DS-ECO-11: the generator calls a chain fully exploited at two roster houses carrying its processing tag (`src/generators/resourceGenerator.js :: evaluateInstitutions`): a thorp with only a Fishing community is "Fully exploited" in fish, "Complete production chain in place", with no fishmonger or salter (67 of 160 full-leading towns have none of the row's named houses). The lines agree with the tab; the tab's premise is the generator's.
 - DS-ECO-11 partiallyExploited v3 is never eligible: the exploitation lens's slot bag fills `{resource}`, `{good}`, `{institution}` but not `{chain}` (`economyStateProse.js`, `exploitSlots`). A dead line, not false; left.
 
+## C: the fourth seat's rewordings in DS-ECO (W2-WRITE-HANDBACK-4 item 5, 0c2438025; its item 4 and 30895bb67 are DS-DEF only)
+| row | line | state | commit |
+|---|---|---|---|
+| C1 | DS-ECO-10 POSTURE established v5 | FALSE beside the one-trade income line (49 of 103 draws) and under a siege: reworded with v1 v3 (D #309 #245, E ww902 ww1497 ww1527), v5 `no crisis: under_siege` (guard rww-city-under_siege-1) | 5132da377 |
+| C2 | DS-ECO-9 HOW THE NEED IS MET much of it brought in v3 | open (D #1369, E ww1180 name its earlier wording) | |
+| C3 | DS-ECO-9 HOW THE NEED IS MET part of it by magic v2, v3 | open: the key reads foodRecord.magicPct, which includes "divine provision"; v3 "it is there by magic" beside "Reliance on magic: None" (E ww503, ww843, ww972, ww1466; D #174) | |
+| C4 | DS-ECO-1 C3 the middle rungs v2 | open (D #686 names its earlier wording) | |
+| C5 | DS-ECO-6 TIER a large share off the books v2 (dm-only) | open (D #804 names its earlier wording) | |
+
+## What is left, line by line (for a successor)
+- C2 to C5 above, each read on the base render (`$OUT/r-base`, 762 towns at 632dd1259) and re-rendered at the tip.
+- D (round three's cut, rows whose writer is economy.generated.js: 43, 4 HIGH): HIGH #167 #433 (C4 v1 under a siege: already declared, read at tip), #212 (C4 v2 under a plague's quarantine: v2, v3, v6 still print under plague_onset beside "Nobody comes into X and nobody leaves": declare `no crisis: plague_onset`, guard w5-city-plague_onset-3), #1378 (DS-ECO-6 minor shadow v0 beside a thieves' guild); then the MED rows by pool, widest first: DS-ECO-9 SECURE v1 v3; DS-ECO-6 minor shadow v0; DS-ECO-11 STRATEGIC v3; DS-ECO-11 unexploited medium v1-v3; DS-ECO-12 INCOME WEIGHT religious v1 (the house case); DS-ECO-10 entrepot v2; DS-ECO-12 house needs v2 (reworded at 3f46ef5bb: re-read); DS-ECO-1 C5 v2 under a famine; DS-ECO-8 WEALTHY v1, STRUGGLING v3, MODERATE v4; DS-ECO-9 ACTIVE FAMINE v1 v3. Query: `node -e` over ROUND-3-CUT.json `lines` where `writer.file` includes economy.generated.
+- E (the increment, NEW rows: 25, HIGH ww500 POSTURE vulnerable v3 under a siege, ww1298 unexploited medium v2 beside a running timber chain); the measuring seat's candidates DS-ECO-10 established v6 and none v2 ("merchant" with none on the roster), DS-ECO-12 INCOME WEIGHT religious v2, DS-ECO-11 fullyExploited v1.
+- The three notes: (i) fullyExploited v2 v4 under a siege (v1 v3 now declared); "what it lacks is {institution}", "takes the easy half" (partially v4: "this trade" has no referent, the same fault as v6); (ii) the can-pay row (UPKEEP-HANDBACK W5 on lane/coherence-upkeep-2026-11-12); (iii) the house-needs premise.
+- The census command at dcd4759b0 and at the tip (twelve minutes each).
+
+## How the instruments are re-made
+`git worktree add -b <local> <dir> origin/lane/w2-write-side-eco-2026-11-13`; `npm ci` there, then `git config --local --unset core.hooksPath` in the main clone (npm ci writes it); `git archive <tip> docs/chair/2026-11-13/probes/W2-WRITE-5 | tar -x -C <H>`; `OUT` outside the repo. The base render: `sh $H/render.sh <tree> $OUT/r-base $H/seeds-w5a.txt 3` (about 45 minutes); a read: the same with a short seeds file. Every commit: edit the source, `sh $H/doors.sh`, a guard row red first where a mark is added, `sh $H/iterate.sh "<cause>"` twice around `node $H/bytes.mjs`, the proseMoveGrammar shares by hand only if CONTROL 4 stays red (restore the file if the integers end where they began), `gates.sh`, `npm run lint`, fetch, `push.sh`.
+
 ## The state
-B: DONE, 15 of 15 (11 by the first seat, 4 by the second), and D #1200 (the one-source pool's v1 v2) taken with item 9 because B's strike left v2 alone under a famine. Next: C.
+B: DONE, 15 of 15 (11 by the first seat, 4 by the second), and D #1200 taken with item 9. C: 1 of 5 rows (C1). Tip 5132da377 before this file's commit.
