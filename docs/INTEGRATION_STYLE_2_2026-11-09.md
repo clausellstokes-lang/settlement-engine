@@ -882,6 +882,47 @@ Point 49 (the instrument lane, W2-B-DECLARE) put guards on the line that READ YO
 - **An instrument that throws at your lane's tip** (observed shapes and writer reach threw at the instrument lane's own tip: "osr-tier-14 minted no tier candidate") hides your own new reads until the merge: merge the line first, then run every check above.
 - **Build after the tests:** a `dist/` in the tree reds chainPrintSites F1; and with no `dist/`, the `tests/build` dist arms skip (2k.7 item 4).
 
+## 2n. THE JOIN'S REFREEZE (STYLE-2-MERGE-15, at the chair's request, 2026-11-14; the forty non-code files of the chair's join map `docs/chair/2026-11-14/probes/CHAIR/joinmap-0318.json` on the chair's lane)
+The nine CODE files of the map are composed by the join's seat under its chair and are not here. Each row: what re-derives the file, its checking and writing commands, whether it needs a CLEAN COMMITTED tree (`git status --porcelain` empty, the composes committed), and its place in THE ORDER. Run every command from the joined tree's root, each through `sh scripts/gate-tail.sh`, never a pipe. **NOT FOUND** = the book gives no door for that file: it is composed by hand and checked by the test named, and the join's seat asks its chair before any writing. A row's "form" is the book's (sections cited).
+
+**THE ORDER at one joined tree (no step invalidates an earlier one):** 1 compose (no door) → 2 the state-prose generator → 3 the byte baseline → 4 the wiring census → COMMIT → 5 the measuring doors (presumed things, pool guard, page census, fact layers) → 6 writer reach and observed shapes (writing forms) → 7 the pinned tests re-keyed by measurement → 8 the tuning ritual → COMMIT → 9 the edge bundles → COMMIT → 10 the lighting census, LAST → COMMIT → the whole check.
+
+| step | file | re-derived by: check · write | clean committed? | form and cautions |
+|---|---|---|---|---|
+| 1 | `docs/content/RECEIPT_POOLS_DOSSIER_STATE.md` | NOT FOUND (an authored corpus, the state prose's source) | no | content compose by hand, a block a side; a choice between two texts is a stop. Feeds step 2 |
+| 1 | `docs/content/prose-shift-register.json` | NOT FOUND; checked by `tests/data/dossierStateProseProjection.contract.test.js` (it recomputes every pin) | no | row-level union; re-check after step 2 |
+| 1 | `scripts/mutation-coverage-manifest.json` | no door; checked by `tests/lint/mutationCoverageManifest.test.js` (TOTALITY) | no | a line-level compose: one side's whole manifest plus each lane's NEW entries, key by key against the base; no entry changed on both sides (2k.1). A new invariant file with no entry: break, see red, restore, `cmp`, a `kind: 'rationale'` entry (the book's form) |
+| 2 | `src/data/dossierStateProse/defense.generated.js` | `node scripts/generate-dossier-state-prose.mjs --check` · `node scripts/generate-dossier-state-prose.mjs` (`npm run gen:dossier-prose`) | no | GENERATED: never hand-merged; take either side, then regenerate from step 1's corpus |
+| 3 | `scripts/.prose-byte-baseline.json` | NOT FOUND (no ritual); read by `tests/lint/proseCorpusBytes.test.js` | after 2 | its own `_doc`: a leaf's `raw` EQUALS the bytes on disk; re-key only by measurement after step 2, a fall lowered, a rise to the chair |
+| 4 | `docs/content/wiring-census.json` | `node scripts/wiring-census.mjs --check` · `node scripts/wiring-census.mjs` | after 2 | one side, then re-derived (2j.1, 2k.1: producerIndexFiles re-stamped). `proseWiringCensus` reads it (step 7) |
+| 5 | `tests/lint/presumedThings.register.json` | `node scripts/presumed-things-door.mjs --check` · `--shrink` (stale rows only) | yes | a ROW-LEVEL compose, keys unchanged (2k.1: 826); `--bank --base` refuses a NEW line; a fresh hit of another lane is a STOP, banked by hand only by the chair's ruling (49a, 2m) |
+| 5 | `tests/lint/presumedThings.widened.register.json` | as above | yes | as above; the seven `after-base: <holder>` rows (2m item 3) leave only by their holders' cures and `--shrink` |
+| 5 | `scripts/census/pool-dominance.register.json` | `node scripts/census/pool-dominance.mjs` ("0 over, 0 unregistered, 0 stale, 0 loose") · `--tighten` ONLY on the chair's ruling | yes | since point 45 no seat raises a ceiling; a row red on both corpora goes to the chair (docs/DESIGN_POOL_CENSUS.md §6.7) |
+| 5 | `scripts/census/page-census.register.json` | `node scripts/census/page-census.mjs --workers=2` (720 births, ~15–20 min) and `--grid` · `--shrink`, `--grid --shrink` (falls only) | yes | NO UPWARD ARM: a rise is a STOP, measured at three trees; a re-base by hand only by ruling (48c's form, 2j.5) |
+| 6 | `scripts/.writer-reach-baseline.json` | `node scripts/check-writer-reach.mjs` · `node scripts/check-writer-reach.mjs --write` | yes | one side ("ours"), then `--write` (the book: "registers: ours, then the doors"). A dark row whose consumer left: re-point BY IDENTITY first (49c), or the walker fails AT LOAD |
+| 7 | `tests/generators/generationForkCensus.test.js` | the fork census control, re-keyed in the stage | after 5 | 2h.7 (c): a FALL with its caller named is the seat's to key (both constants, one commit, BEFORE step 9); a RISE goes back to the lane (Appendix B `stagepins.py --control`) |
+| 7 | `tests/generators/institutionBudgetPromise.test.js` | re-key BY IDENTITY from a probe run (Appendix G `rekey.py`) | after 5 | 2f's standing law 5 (a golden-corpus null-change pin); each seed moved by a declared cause only (7e0776804) |
+| 7 | `tests/components/phoneChromeFloor.census.test.js` | re-measure by the census, re-key by cause | after 5 | the book's form, quoted: "re-measure by the census, re-key by cause" |
+| 7 | `tests/components/dossierPhoneFloorAllViews.test.jsx` | a LINE-LEVEL compose by cause | after 5 | each view's count from the lane whose declared cause moved it (2j.1) |
+| 7 | `tests/lint/proseComposed.walker.test.js` | re-key BY IDENTITY, a dated note | after 5 | the book's form (proseComposed A13) |
+| 7 | `tests/lint/proseMoveGrammar.walker.test.js` | re-key by measurement | after 5 | the book's form, quoted: "re-key by measurement"; "compose them; never loosen" |
+| 7 | `tests/lint/proseWiringCensus.walker.test.js` | re-key by measurement | after 4 | reads the wiring census: never before step 4 |
+| 7 | `tests/lint/heldKeyWriterCensus.walker.test.js` | a walker: its own inventory, never the test ratchet's census | after 5 | an exemption only for a PURE READ, with its reason (e780dd11b); anything else is a stop |
+| 7 | `tests/lint/.prose-numerics-baseline.json` | NOT FOUND (a register keyed BY LINE); read by `tests/lint/proseNumerics.test.js` | after 2 | "by line" (the book): re-key each moved line by its text, never a count |
+| 7 | `tests/lint/proseNumerics.test.js` | NOT FOUND | after 2 | compose as code; its baseline is the row above |
+| 7 | `tests/domain/composeStateProse.test.js` | NOT FOUND | after 2 | compose as code; its pins re-key only by measurement after step 2 |
+| 7 | `tests/domain/foodEnduranceHeldStores.test.js` | NOT FOUND | — | compose as code |
+| 7 | `tests/domain/corpusCureGuards.test.js` | NOT FOUND | after 2 | compose as code |
+| 7 | `tests/lint/institutionTable.walker.test.js` | NOT FOUND | — | a walker: compose as code; never bank its row in the test ratchet |
+| 7 | `tests/lint/proseEntryContradiction.walker.test.js` | NOT FOUND | after 2 | a walker: as above |
+| 7 | `tests/domain/facts/textOf.test.js` | NOT FOUND | — | compose as code |
+| 7 | `tests/lint/rawColorLiteral.test.js` | NOT FOUND | — | compose as code |
+| 8 | `tests/lint/.tuning-inventory.json` | the ritual inside `tests/lint/tuningRegister.walker.test.js`: `TUNING_INVENTORY_REFREEZE='<seat>' TUNING_INVENTORY_NOTE='<why>' npx vitest run tests/lint/tuningRegister.walker.test.js` (exits non-zero BY DESIGN), then the plain run green | YES | one side, then the ritual (d02c3a058); `scripts/count-tuning-inventory.mjs` only reports. No value moves; a value change is the owner's signing |
+| 9 | `supabase/functions/_shared/aiCharterBundle.js`, `aiCharterBundle.meta.json`, `aiGroundingBundle.js`, `aiGroundingBundle.meta.json`, `aiOutputSchemaBundle.js`, `aiOutputSchemaBundle.meta.json`, `analyticsEventsBundle.meta.json`, `engineBundle.js`, `engineBundle.meta.json`, `intentAtlasBundle.meta.json` (ten files) | `npm run build:edge-shared` (all metas from ONE run); checked by the edge suites' freshness and reproducibility rows | after every src change | GENERATED: take either side, then rebuild once AFTER steps 1–8 (src final); keep only the bundles whose sourceHash moved (section 5) |
+| 10 | `tests/lint/.lighting-census-baseline.json` | `LIGHTING_CENSUS_REFREEZE='<seat>' LIGHTING_CENSUS_NOTE='<why>' npx vitest run tests/lint/sovereigntyLightingContract.walker.test.js`, then plain until green (34/34) | YES | the line's side, then the ritual, LAST: it counts every test file and title, so any later test change re-reds it |
+
+**Cautions.** A `dist/` in the tree reds chainPrintSites F1: build only after the tests. `npm ci` writes `core.hookspath=.husky/_`; snapshot refs and config (Appendix I `snap.sh`) around every suite and push. Every register is shrink-only: a rise at the join is a stop with the measure, never banked by a seat.
+
 ## 3. The running tables
 
 **STOP rulings, as applied:**
