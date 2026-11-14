@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-11-13T20:57:46.572Z",
+  "generatedAt": "2026-11-14T05:19:41.418Z",
   "entry": "src/domain/aiOutputSchema.js",
-  "sourceHash": "961f85094a0dbb67",
+  "sourceHash": "fa6ff84355cf63cf",
   "inputs": [
-    "node_modules/immer/dist/immer.mjs",
-    "node_modules/seedrandom/seedrandom.js",
+    "../p12/node_modules/immer/dist/immer.mjs",
+    "../p12/node_modules/seedrandom/seedrandom.js",
     "src/data/chainAccessNames.js",
     "src/data/constants.js",
     "src/data/entityTags.js",
