@@ -511,6 +511,90 @@ SEATS['R3-TABS-3'] = dict(
 )
 
 
+# ---------------------------------------------------------------------------------------------------------------------
+# THE SECOND GENERATION (2026-11-14, after the first hand-back by THE COUNT): a brief that is SELF-CONTAINED. A seat's
+# onboarding reading (the brief chain, the handoffs, the hand-backs whole) was about a third of its mark. A second-generation
+# brief carries the laws, the way of working and the statement's form in itself, and names only the sections a seat must open.
+# ---------------------------------------------------------------------------------------------------------------------
+
+WHY2 = (
+    "WHO IS ASKING. The chair is the Claude Code session %s (your parent). The program moved to this account on 2026-11-14; no earlier session "
+    "can be reached, and whatever a seat did not push is lost. In the chair's chat on 2026-11-14 the owner wrote: \"Continue with the pending work! ... I defer "
+    "all decisions to you and give you all permissions you may require.\" This file is your whole assignment and carries the chair's rulings: no adjacent "
+    "repair, however tempting. Merging the pull request and the deploy stay the owner's." % CHAIR
+)
+
+LAWS2 = (
+    "THE LAWS FOR EVERY BRIEF (the program's, binding): Measure first. Never read a gate through a pipe. One cause per commit, red first. Registers only "
+    "through their doors; pins re-keyed by identity, never loosened; never bank a baseline row or skip a test. A seat works in a scratch worktree of its lane and "
+    "pushes plainly. Query big files by script. A count falling is not a cure. A claim of zero names the instrument that looked everywhere the words can print. "
+    "A bound is proved on births the builder did not tune on. A rising row is origin (stop) or exposure (declared). A red is classed against the lane's reviewed "
+    "base as well as the seat's own. The page shows ratings, never the machinery. A line is in its pool unless the town makes it false. A classifier's refusal "
+    "is never routed round. A hand-back carries the rulings its seat worked to: the chair's messages are not on the branch.\n"
+    "THE METHOD for every line you write or reword: (1) a line is READ WHERE IT PRINTS before it is pushed: three towns of its own cells, a siege, a famine or an "
+    "occupation among them wherever it can print under one, the smallest and the largest size it reaches, the towns and what printed in the commit body; (2) a "
+    "twin carries every condition its siblings carry; (3) a line that names a house, a role, a force or a good reads the roster; (4) a line that cannot be made "
+    "true by its conditions is not written: silence is not a false sentence; (5) every cure that takes a line off some towns has its guard town; (6) a seat that "
+    "rewords a sentence owns the whole sentence as it prints. No new key in the settlement record; no new word in the vocabulary file (a row that needs one is "
+    "PARKED with its word); a name a user can hide by hand is never written into a stored, composed sentence; a claim of zero is counted on every surface (the "
+    "tabs, the Tonight sheet, the PDF's text, the Foundry journal, the exports). A cure in generator or data code is a DECLARED MOVE: its field diff confined to "
+    "the family you name, with counts; no draw added or moved unless declared."
+)
+
+def how2(branch):
+    return (
+        "HOW YOU WORK: a scratch worktree on a local branch at the lane's tip, `npm ci` there; plain pushes with the explicit refspec `git push origin "
+        "<local>:refs/heads/%s` (the lane hook runs three fast gates), `git fetch` and merge BEFORE every push (a push git rejects falls into the whole check); "
+        "PUSH AFTER EVERY ITEM AND BEFORE ANY LONG RUN. At every commit that touches src/: the strict-domain gate, the type ratchet and eslint on the touched "
+        "files, each through `sh scripts/gate-tail.sh <command>`, never a pipe. A register moves only through its own door, in its own commit; where the door is "
+        "the merge seat's, name the row and go on. Long runs to a file outside every repository tree; no dumps into your context. HAZARD: `npm ci` writes "
+        "`core.hooksPath=.husky/_` into the shared local config, and tests that run git inside a hook from a linked worktree act on the real repository: snapshot "
+        "refs and local config before and after every suite and every push, and compare. The ledger ref for the suite: `git fetch origin "
+        "review-fixes-2026-07-08:review-fixes-2026-07-08`. Your clone is shallow (1,200 commits): deepen with `git fetch --deepen` if a merge base is missing." % branch
+    )
+
+STATEMENT2 = (
+    "THE FINAL STATEMENT'S FORM (the program's, as the lanes' first briefs give it), once, at the final tip, in the lane's hand-back file: each count before and "
+    "after on the census's 720 and on fresh seeds; the measuring seat's command (CENSUS-2: `git fetch origin lane/census-2-2026-11-13`; `mkdir -p <scratch>/c2 && "
+    "git archive origin/lane/census-2-2026-11-13 docs/chair/2026-11-13/probes/CENSUS-2 | tar -x -C <scratch>/c2`; `sh "
+    "<scratch>/c2/docs/chair/2026-11-13/probes/CENSUS-2/census2.sh <tree root> <an out-dir outside the repository> 4 --files <the lane's files, comma-separated>`, "
+    "to a file) at the lane's base and at the tip, the count per kind, every hit in the lane's files read against its town (a hit is a candidate), its limits said "
+    "beside any zero (the dossier's views only; it cannot see two lines disagreeing); the 720-birth field diff by family, each family one the lane declares; ONE "
+    "draft shift record named for the lane, declaring moved or unmoved BY MEASURE the six golden surfaces AND every other registered surface that the whole "
+    "suite's red titles pin (the register is tests/fixtures/.golden-freeze-register.json); the whole suite once, IN SIX SHARDS, every red classed against the "
+    "line's own failing set at the lane's base (a red new on the lane is the lane's to cure through its door, or is named with its owner); the new words with "
+    "their towns, for the owner's veto; FOR THE JOIN, whatever the lane names for the seat that joins the lanes; the edge bundles checked last and committed "
+    "alone if they differ. Signing is the merge seat's: you run no golden's door in its writing mode."
+)
+
+SEATS2 = {}
+
+def build2(seat):
+    s = SEATS2[seat]
+    head = (
+        "# BRIEF: %s\n\n"
+        "The seat's assignment, written by the chair as a file on 2026-11-14 and named in the seat's first message. The chair is the Claude Code session "
+        "%s. Checked out at `%s`, which is also the seat's own branch; a clone of 1200 commits; effort high; the model as the chair's records of that day give "
+        "the mix. A SELF-CONTAINED brief of the second generation: it carries the laws and the forms itself. Rulings sent after it are in the chair's records.\n\n---\n\n"
+        % (s['title'], CHAIR, s['branch'])
+    )
+    body = '\n\n'.join([
+        s['intro'],
+        WHY2 + ' Never rewrite a commit at or below %s.' % s['tip'],
+        "READ, AND NO MORE THAN THIS (the laws and forms the older briefs carried are written out below: do not open the brief chain or the chair's handoffs):\n" + s['read'],
+        "FIRST ACT. Read the lane's tip back from origin: it was %s when this was written; any difference is a stop: tell the chair." % s['tip'],
+        s['work'],
+        LAWS2,
+        how2(s['branch']),
+    ] + ([STATEMENT2] if s.get('statement') else []) + [
+        COUNT + ' ' + s['turns'],
+        RUNS,
+        never(s['branch'], s['merges']),
+        messages(s['when']),
+    ])
+    return head + body + '\n'
+
+
 QUOTED_FROM_OLD_DOCS = {'4534ea5e3', 'a59796dda'}  # hashes quoted from the old chair's documents, deeper than this clone
 
 def exact_hashes(text, seat):
@@ -558,7 +642,7 @@ if __name__ == '__main__':
     seats = sys.argv[2:] or list(SEATS)
     os.makedirs(out, exist_ok=True)
     for seat in seats:
-        text = build(seat)
+        text = build2(seat) if seat in SEATS2 else build(seat)
         for bad in ('claude-opus', 'claude-fable', 'claude-sonnet', 'claude-haiku', 'Opus', 'Fable', 'Sonnet', 'Haiku'):
             assert bad not in text, (seat, bad)
         text = exact_hashes(text, seat)
