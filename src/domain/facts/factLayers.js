@@ -151,6 +151,8 @@ export const LEAVES = Object.freeze({
   // about bought officials are struck by it (`display/stateProse/crimeLineDisqualifiers.js`)
   officialsInPay: leaf({ layer: 4, module: 'domain/facts/officialsInPay.js', exported: 'officialsInCriminalPayOf', call: 'record', reads: ['npcs', 'powerStructure'] }),
   hasOtherNpc: home('hasOtherNpc', 4, ['npcs'], { call: 'factsCall' }),
+  // R2-CODE-A-14 (the chair's ruling (s1)): a PAIR's fact — the two cards' memberships (the cast, layer 3)
+  sharesPower: home('sharesPower', 4, ['npcs'], { call: 'factsCall' }),
   magicPractitioners: leaf({ layer: 4, module: 'domain/magicReliance.js', exported: 'magicPractitioners', call: 'record', reads: ['institutions', 'npcs'] }),
   magicReliance: leaf({ layer: 4, module: 'domain/magicReliance.js', exported: 'deriveMagicReliance', call: 'record', reads: ['config', 'economicState', 'institutions', 'npcs'] }),
   magicSource: leaf({ layer: 4, module: 'domain/facts/magicSource.js', exported: 'magicSourceOf', call: 'record', reads: ['config', 'economicState', 'institutions', 'npcs'],
