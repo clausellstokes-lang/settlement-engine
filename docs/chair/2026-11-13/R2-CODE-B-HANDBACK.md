@@ -1353,10 +1353,15 @@ Brief: origin/lane/chair-2026-11-08:docs/chair/2026-11-14/briefs/BRIEF-R2-CODE-B
 - tests/generators/pipelinePinnedChoosers.test.js A1 (the golden corpus, three golden-master-v3 rows): red identically at 3357f950c (the lane's known golden move, PART 10's S4 (a)).
 - The presumed-things walker ARM 1: fresh 18, the lane's 18.
 
+## (d) H2-15 — STOPPED, NAMED FOR THE JOIN (nothing committed)
+- The journal's two "Member of" lines (src/foundry/journalPages.js:193 npcQuickRefPage, :203 notableNpcPage) are NOT inside this lane's hunks (its only hunk there is :204, the House line), and their value's writer is src/pdf/lib/viewModel.js (the npc row, `const factionRefName = labelOfFactionRef(firstPower || n?.faction || n?.category);`), a file this lane never changed and the r3-tabs and upkeep lanes hold BY CONTENT. Ruling (d): STOP with the line.
+- MEASURED (1,536 births at 3a6de5c7b, buildViewModel): a card with no membership and no faction prints its CATEGORY as its power: 4,395 cards. "other" 2,105 cards / 752 towns, "criminal" 947 / 402, "religious" 425 / 339, "economy" 407 / 229, "magic" 357 / 202, "civic" 141 / 141 (every minted stand-in), "military" 13 / 11. The NPCs tab files these cards "In no power".
+
 ## FOR THE JOIN (carried)
 - (i) the Tonight famine line: both halves in one change at the join (PART 11).
+- (d) THE POWER SLOT: viewModel.js's npc row drops the category fallback, `labelOfFactionRef(firstPower || n?.faction)`, and the journal's two "Member of" lines print "In no power" (the NPCs tab's own words) where `factionLabel` is empty; the PDF readers of `factionLabel` / `factionAffiliation` read the same way. 4,395 cards on the 1,536 (above). Whose: the lane that holds viewModel.js at the join (r3-tabs / upkeep), with journalPages.js's two lines.
 
 ## WHAT IS LEFT, line by line
-1. (d) H2-15: the journal's power slot ("Member of: civic"), only inside this lane's hunks.
+1. (d) STOPPED, named for the join (above).
 2. (m) with (s): the catalogue brackets through the house-label leaf; "Gates (if walled)" on the journal and the Levers list.
 3. (e) H4-7; 4. (f) H1-1; 5. (g) H2-4; 6. (h) with M14; 7. (n): M10, M12, M11, M4, M6's other half, M13, M14, the two guards made able to red; 8. (o), (p), (q); 9. item 9 (the 720 field diff of the stage by family, the shift record's rows, the ADDENDUM; registers re-derived once at the close by ruling (r)).
