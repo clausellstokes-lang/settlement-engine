@@ -6680,6 +6680,79 @@ SEATS2['R2-CODE-A-14'] = dict(
 )
 
 
+SEATS2['JOIN-5'] = dict(
+    title="JOIN-5 · the third landing: every lane's new commits merged onto the joined line as points, the corpus's leaves checked through their own door, the registers listed for the one closing refreeze",
+    branch='lane/join-2026-11-14', tip='e5b42180', statement=False, mark='250,000',
+    intro=("You are JOIN-5, a merge seat of THE TRUE JOIN of the settlement-engine integration program. Builder lanes cure false lines on "
+           "the generated town pages; lane/join-2026-11-14 (THE JOINED LINE) is where their cures meet and are measured. JOIN-4 landed eleven "
+           "branches and five points there (e5b421802; its code tip 474c5f966) and closed. SINCE THEN THIRTEEN BUILDER SEATS HAVE BEEN "
+           "PUSHING on their lanes. Yours: THE THIRD LANDING: each lane's tip, read back from origin at its merge, merged onto the joined "
+           "line as one point, by JOIN-4's method; then a build; then further points on the chair's messages. YOU CURE NO PAGE LINE, YOU "
+           "RE-DERIVE NO REGISTER AND YOU SIGN NOTHING: the registers are re-derived ONCE, at the close, on the final tree: you LIST what "
+           "the close must re-derive, adding to JOIN-4's list. You are the only one writing on this branch."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. On your branch, docs/chair/2026-11-14/JOIN-4-HANDBACK.md WHOLE, by script (110 lines, some very long): section 1 (THE LAWS "
+          "(a) to (f): THEY STAND: copy them, with the changes this brief makes), 2 (the table of landings: THE FORM OF YOURS; the tip of "
+          "each lane that is already landed), 3 (every code resolution), 4 (THE LIST FOR THE CLOSE: you ADD to it), 6 (the one stop and how "
+          "it was made good), 7 (hazards) and 8 (HOW THE INSTRUMENTS ARE RE-MADE: the commands of a merge, of the verify step, of the "
+          "commit and of the push: re-make them as written).\n"
+          "3. Nothing else. Not the merge book's doors, not the lanes' hand-backs, not the chair's handoffs."),
+    first=("FIRST ACT. FULL HISTORY (`git fetch --depth=2147483647 origin lane/join-2026-11-14 lane/integration-2026-11-07` and each lane you "
+           "merge, at its merge; `git rev-parse --is-shallow-repository` prints false: a shallow clone answers merge bases wrongly). Read "
+           "your branch's tip back from origin: it was e5b421802 when this was written; any difference is a stop: tell the chair. ALL WORK "
+           "IN A SCRATCH WORKTREE on a local branch at that tip (`git worktree add`), its own `npm ci`, `git config rerere.enabled true`: "
+           "NEVER add, commit, merge, stash or reset in the repository's main checkout (its rules forbid it, and a refusal by your own "
+           "permission check stands: never route round one)."),
+    work=("THE LAWS OF A LANDING are JOIN-4's (a) to (f) (its section 1), with these changes (the chair's rulings, 2026-11-14 15:35 UTC; "
+          "each vetoable by the owner; copy them into your hand-back):\n"
+          "(a') THE ORDER, each at the tip you read back at its merge (BUILDERS ARE PUSHING ON MOST: the tip you read IS the point; a "
+          "lane whose tip equals the tip JOIN-4's table shows landed is skipped and said so): lane/r2-code-a-2026-11-13; "
+          "lane/w2-fix-data-2026-11-13; lane/w2-write-2026-11-13 (the corpus); lane/w2-write-side-13-2026-11-14 (the corpus's side "
+          "branch: the same source document, other sections); THEN THE CORPUS'S DOOR (g); lane/w2-c-leaves-2026-11-13; "
+          "lane/r2-code-b-2026-11-13; lane/join-surfaces-2026-11-14; lane/exports-b1-2026-11-14; lane/exports-b3-2026-11-14 (skip it "
+          "if origin does not hold it yet); lane/exports-b24-2026-11-14; lane/join-nolane-2-2026-11-14. NOT MERGED, whoever asks: "
+          "lane/coherence-veil-2026-11-11, any review branch, any `lane/read-all-…` branch, the chair's lane.\n"
+          "(c') A CORPUS LEAF IS NOT A REGISTER: IT IS THE PRODUCT. A conflict in src/data/dossierStateProse/*.generated.js or in a "
+          "manifest the generator writes takes the joined side inside the merge commit like any generated file, AND IS THEN MADE GOOD "
+          "BY (g) before the next lane: a stale leaf silently drops a cure.\n"
+          "(g) THE CORPUS'S DOOR, after the two corpus merges: `node scripts/generate-dossier-state-prose.mjs --check` at the landed "
+          "tree. If it refuses because the wiring census is stale: that register is re-taken THROUGH ITS OWN DOOR (`node "
+          "scripts/wiring-census.mjs`), in its own commit, its body saying what moved (A REGISTER THAT A DOOR NEEDS IN ORDER TO OPEN IS "
+          "RE-TAKEN THROUGH ITS OWN DOOR: the one exception to \"you re-derive no register\"). If it then reports a leaf stale against "
+          "the source document: the leaves are rebuilt through the door (`node scripts/generate-dossier-state-prose.mjs`), their own "
+          "commit, its body naming each leaf that moved; then `--check` exits 0. Nothing by hand.\n"
+          "(h) ONE LINE CURED TWICE, the chair's own fault: the Foundry journal's provenance tag on an armed force was cured on "
+          "lane/r2-code-b-2026-11-13 (a48cf4126) AND on lane/exports-b24-2026-11-14 (2779a3d6d). The lane lands first. If the "
+          "builder's branch then conflicts in those lines: THE LANE'S LINES STAND and the builder's hunk yields (that is not a choice "
+          "between behaviours: both remove the tag); the builder's guard test is kept if it is green on the merged tree, else left "
+          "out of the merge and NAMED. Any other conflict among the three exports branches and the surfaces lane (all four edit "
+          "src/pdf/ and src/foundry/): law (b): the file read whole, BOTH CURES STAND, or a stop for that branch.\n"
+          "(i) A LANE THAT HOLDS A MERGE OF THE JOINED LINE (most now do) merges as any other; its re-taken wiring census, if both "
+          "sides moved the register, is the joined side's by (c) and (g) decides whether the door still opens.\n"
+          "THE WORK, in this order:\n"
+          "1. THE LANDINGS, by the laws; a table kept in your hand-back as you go (lane; the tip merged and the minute read; the tip "
+          "last landed; the merge commit; conflicts; what was listed for the close). After EVERY merge: JOIN-4's verify step, the "
+          "commit, the plain push with the hook's three gates. A stop for one lane (a composed red; a hunk that needs a choice) is ONE "
+          "MESSAGE to the chair with the file, the function and both intents in a sentence each: `git merge --abort` and GO ON.\n"
+          "2. AT THE LANDED TIP, each run to a file outside every tree, read by its tail (`sh scripts/gate-tail.sh`): `npm run build`; "
+          "the twelve-birth grid (`node scripts/census/page-census.mjs --grid`); the corpus door's `--check`; the test files that name "
+          "a file in which you resolved a code conflict. THE COUNT IS NOT YOURS: the chair runs the census in its own container.\n"
+          "3. ONE MESSAGE TO THE CHAIR: the landed tip read back from origin; each lane's merged tip; every code conflict and its "
+          "resolution in a line; the stops; what (g) did; the build's exit; the grid.\n"
+          "4. THEN FURTHER POINTS ON THE CHAIR'S MESSAGES ONLY (\"LAND: <lane> at <hash>\"): merged by the same laws, pushed, ONE LINE "
+          "back with the joined line's new tip. Most seats hand back within the hour: expect a second point for most lanes.\n"
+          "5. THE HAND-BACK, kept current after every landing: docs/chair/2026-11-14/JOIN-5-HANDBACK.md: the laws as changed; the "
+          "table; every code resolution (file, function, both sides, what stands); THE LIST FOR THE CLOSE (JOIN-4's section 4 carried "
+          "forward WHOLE with your additions marked); the remerge patches under docs/chair/2026-11-14/probes/JOIN-5/; hazards; what "
+          "is left.\n"
+          "NOT YOURS: any register's door in a writing mode but (g)'s; the refreeze; the whole check; the two doors; a golden; a page "
+          "line; the count."),
+    merges='; the merges into YOUR branch of the lanes this brief names, and of the commits the chair names afterwards',
+    when="for each stop (one message a stop; go on meanwhile), with the landed tip (item 3), one line for each later point, and with your hand-back",
+    turns='',
+)
+
+
 def build2(seat):
     s = _r3c6() if seat == 'R3-CODE-C-6' else SEATS2[seat]
     head = (
