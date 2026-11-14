@@ -34,6 +34,8 @@ THE CHAIR'S RULINGS SENT AFTER THE BRIEF (the chair's messages are not on the br
 | 11 | join-surfaces-2026-11-14 | 9e47f912a (13:51) | — | 0a296575c | none | — |
 | P1 | r2-code-b-2026-11-13 (the chair's 14:20 point) | a86646b84 (14:42; the lane's tip then 08e43c072) | 30ed925ee | 9618e0319 | none | clean-both: `src/domain/summary/tonightSheet.js` (item 4 and the lane's `castWantFactsOf`/`scarceOf`, both stand); the three files of the stop 39/39; `tonightOwnGoal` 6/7, red at the lane's tip too |
 | P2 | upkeep-monotone-2026-11-14 (the chair's 13:38 point) | 0ca0bbe94 (14:46; the lane's tip then 2ff1dffe9) | — | 65dc92af9 | 2 registers | `.lighting-census-baseline.json`, `.tuning-inventory.json`; lane-only: `tests/lint/.tuning-register.json`; its goldens `generatorGoldenMaster`, `espionageDormancyFence` (red and named by the lane) and its re-keyed pins: LISTED |
+| P3 | coherence-upkeep-2026-11-12 (the chair's 14:19 point) | 2d8aadb19 (14:56; equal to the lane's tip) | 660cb0893 (merge 9) | b61143029 | none | — |
+| P4 | join-surfaces-2026-11-14 (the chair's 14:19 point) | e6cb445db (15:00; the lane's tip then c66333f0c) | 9e47f912a (merge 11) | c7dc0f526 | none | — |
 
 Every merge: `verify.sh` no mismatch; lint-staged changed nothing; the hook's gates green at every push (type ratchet 167/167, strict-domain 1113/1113, eslint 0 errors).
 
@@ -106,4 +108,4 @@ A worktree at origin's tip (`git worktree add /home/user/j4wt -b join4 <tip>`, `
 ## 9. WHAT IS LEFT (line by line)
 
 1. (Item 5's message sent 14:40; points 1 and 2 made: 9618e0319, 65dc92af9.)
-2. The points left, in the chair's order: coherence-upkeep at 2d8aadb19; join-surfaces at e6cb445db; powers-follow-up at d2ffdbb07. One line back for each; then one closing message with the tip.
+2. The point left: powers-follow-up at d2ffdbb07 (points 3 and 4 made: b61143029, c7dc0f526). One line back for each; then one closing message with the tip.
