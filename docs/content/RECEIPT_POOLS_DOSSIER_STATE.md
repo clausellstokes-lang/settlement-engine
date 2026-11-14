@@ -2547,9 +2547,9 @@ own entailment and licenses nothing about who runs it.
 3. `[visitor · colour]` Things said to be unobtainable at {settlement} can be had, for a price, in a back room nobody points you to.
 
 **operation role `duty evasion`**
-1. `[ledger · colour]` Goods reach {settlement} around the customs rather than through them. The cargo lists are false, the landing places are unofficial, and the duties the town should collect are never paid.
+1. `[ledger · colour]` Goods reach {settlement} unrecorded: the cargo lists are false, and the dues owed on them are never paid.
 2. `[street · gate]` A share of what arrives at {settlement} never appears at the gate, and the share is not small.
-3. `[counterforce · colour]` The customs at {settlement} keep proper books, and a good share of goods goes around them anyway.
+3. `[counterforce · colour]` A good share of the goods that reach {settlement} pays none of the dues owed on it.
 
 **operation role `unlicensed revenue`** {colour}
 1. `[ledger]` There is gambling at {settlement} that nobody licenses, and it funds a good deal more than itself.

@@ -3285,7 +3285,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "Goods reach {settlement} around the customs rather than through them. The cargo lists are false, the landing places are unofficial, and the duties the town should collect are never paid.",
+          "text": "Goods reach {settlement} unrecorded: the cargo lists are false, and the dues owed on them are never paid.",
           "slots": [
             "settlement"
           ],
@@ -3307,7 +3307,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "The customs at {settlement} keep proper books, and a good share of goods goes around them anyway.",
+          "text": "A good share of the goods that reach {settlement} pays none of the dues owed on it.",
           "slots": [
             "settlement"
           ],
