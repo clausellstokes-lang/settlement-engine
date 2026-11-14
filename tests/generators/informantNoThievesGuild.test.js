@@ -67,6 +67,11 @@ describe('a secret names merchants only where the roster holds a market (R2-CODE
     const s = born(seed);
     expect((s.npcs || []).map((/** @type {any} */ n) => `${n?.secret?.what || ''} | ${n?.secret?.stakes || ''}`).filter((t) => /merchant/i.test(t))).toEqual([]);
   });
+  it('the plague quarantine secret\'s merchant (`market`, R2-CODE-A-7 item 5): guard town r2s-plague_onset-village-0 (no market); r2s-plague_onset-town-0 keeps it', () => {
+    /** @param {string} seed */ const quarantine = (seed) => (born(seed).npcs || []).some((/** @type {any} */ n) => /shipments from a specific merchant/.test(n?.secret?.what || ''));
+    expect(quarantine('r2s-plague_onset-village-0')).toBe(false);
+    expect(quarantine('r2s-plague_onset-town-0')).toBe(true);
+  });
   it('r2s-under_siege-village-0 (a market) keeps the protection scheme on its merchants', () => {
     expect((born('r2s-under_siege-village-0').npcs || []).some((/** @type {any} */ n) => /targeting the very merchants/.test(n?.secret?.what || ''))).toBe(true);
   });

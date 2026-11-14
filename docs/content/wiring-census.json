@@ -54279,7 +54279,7 @@
       "lineDeclares": {
         "gate": 2,
         "institution: temple": 1,
-        "market": 1,
+        "market": 2,
         "migration: exodus": 2,
         "migration: influx": 5,
         "no ruler: lord": 6,
@@ -54289,7 +54289,7 @@
         "starving": 1,
         "tier: ≥ town": 1
       },
-      "undeclared": 62,
+      "undeclared": 61,
       "crisisScoped": false
     },
     {

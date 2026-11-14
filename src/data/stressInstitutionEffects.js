@@ -294,6 +294,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
       secret:
         "The quarantine order they're enforcing doesn't apply to shipments from a specific merchant they have a financial relationship with",
       stakes: "That merchant's last shipment arrived four days ago",
+      needs: ["market"], // R2-CODE-A-7 (step 1 item 4b): a merchant's shipments only where the roster holds a market
     },
     {
       secret:
