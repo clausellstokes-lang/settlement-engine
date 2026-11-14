@@ -27,6 +27,10 @@
  * person it now carries (V-EVIDENCE-ROSTER). No count is edited; a town that mints nobody keeps
  * the receipt assembleSettlement wrote, byte for byte. Draw-free.
  *
+ * ⛔ ITS ROLE CLAIMS NO OFFICE (R2-CODE-B-12, the chair's ruling (c)): the person stands in where the record holds no
+ * house and no office-holder for the lever, so its `role` is what it DOES in the crisis it was minted for, in lay words
+ * (`STAND_IN_ROLE`, domain/crisis/crisisCast.js: "Tends the sick", never "Healer" beside "No healer is kept here").
+ *
  * `crisisResolve` (src/domain/crisisLifecycle.js) removes a resolved crisis's temporary person.
  *
  * THE CRISIS HOOKS ARE NOT WRITTEN HERE (the HOOKS-UNDER-STRESS lane; the chair's ruling 4): the
@@ -37,16 +41,9 @@
 import { chooseOrPin, registerStep } from '../pipeline.js';
 import { STRESS_SEVERITY_WEIGHT } from '../stressGenerator.js';
 import { pickFirst } from '../npcGenerator.js';
-import { deriveCrisisCast, castHash } from '../../domain/crisis/crisisCast.js';
+import { deriveCrisisCast, castHash, STAND_IN_ROLE, STAND_IN_ROLE_FALLBACK } from '../../domain/crisis/crisisCast.js';
 import { structuralStandingOf } from '../../domain/people/membership.js';
 import { buildGenerationCoherenceReceipt } from '../generationCoherence.js';
-
-/** The role a temporary person carries on the roster, by the kind of lever it holds. */
-const TEMPORARY_ROLE = Object.freeze(/** @type {Record<string, string>} */ ({
-  healer: 'Healer',
-  grain: 'Grain Steward',
-  warden: 'Warden',
-}));
 
 const UNPINNED = Symbol('unpinned');
 
@@ -93,7 +90,7 @@ registerStep('resolveCrisisCast', {
       const id = `npc_temp_${kind}`;
       const memberships = /** @type {never[]} */ ([]);
       minted.push({
-        id, name, gender, role: TEMPORARY_ROLE[kind] || 'Steward', category: 'civic',
+        id, name, gender, role: STAND_IN_ROLE[crisisId] || STAND_IN_ROLE_FALLBACK, category: 'civic',
         power: 1, influence: 'low', memberships,
         importance: 'minor', structuralRank: structuralStandingOf({ memberships }).standing,
         temporary: true, temporaryKind: kind, crisisIds: [crisisId],

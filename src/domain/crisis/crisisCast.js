@@ -269,6 +269,23 @@ export const CRISIS_LEVERS = Object.freeze(/** @type {Record<string, { house: Re
   infiltrated: { house: /watch|guard|court|council|customs/i, temporary: null },
 }));
 
+/**
+ * THE STAND-IN'S ROLE, IN LAY WORDS (R2-CODE-B-12, the chair's ruling (c) on H2-14, H2-16 and M6: "Healer" beside "No
+ * healer is kept here", "Grain Steward" beside "No granary", "Warden" where no force stands). A temporary person is
+ * minted only where the crisis's lever has neither a house nor an office-holder, so the record holds no such office:
+ * the role names what the person DOES in the crisis they were minted for, never an office, a house or a force. Keyed by
+ * the crisis kind; `STAND_IN_ROLE_FALLBACK` for a kind with none. Read by the pipeline's mint
+ * (generators/steps/resolveCrisisCast.js) and by the plague hook's slot (crisisHooks.js), which names a stand-in
+ * without calling them a healer.
+ */
+export const STAND_IN_ROLE = Object.freeze(/** @type {Record<string, string>} */ ({
+  famine: 'Rations the food',
+  plague_onset: 'Tends the sick',
+  mass_migration: 'Takes charge of the migration',
+  monster_pressure: 'Rallies the neighbours',
+}));
+export const STAND_IN_ROLE_FALLBACK = 'Stepped in for the crisis';
+
 // ── The base each affected system hits (rule 1) ───────────────────────────────────────────
 
 const A = FACTION_ARCHETYPES;

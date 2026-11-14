@@ -32,7 +32,7 @@
  */
 
 import { hookTruthViolations, settlementHookFacts, speakHookTruthfully } from '../coherence/hookTruth.js';
-import { CAST_REASONS, effectiveCastOf, requiredRolesOf } from './crisisCast.js';
+import { CAST_REASONS, STAND_IN_ROLE, STAND_IN_ROLE_FALLBACK, effectiveCastOf, requiredRolesOf } from './crisisCast.js';
 import { resolveDeclared, lineText } from '../facts/drawDeclared.js';
 import { factsOf } from '../facts/factsOf.js';
 import { firstRankMembershipOf, powerOrderOf } from '../people/membership.js';
@@ -274,6 +274,9 @@ export function crisisHooksOf(settlement, entry, facts = settlementHookFacts(set
 
 // ── The crisis hook's name slot (CRISIS-2's open note; docs/DESIGN_CRISIS_TAB.md) ──────────
 
+/** The roles of a person minted to stand in (`STAND_IN_ROLE`), exactly: the plague slot's second fill reads them. */
+const STAND_IN_ROLE_RE = new RegExp(`^(?:${[...Object.values(STAND_IN_ROLE), STAND_IN_ROLE_FALLBACK].join('|')})$`);
+
 /**
  * The `{holder}` slot of each catalog `crisisHook` that NAMES a role the cast holds. `phrase` is
  * the sentence's own words for the role, which the slot replaces; `fill` says how the name
@@ -308,6 +311,10 @@ export const CRISIS_HOOK_SLOTS = Object.freeze({
     // `holds`: the healers' roles the roster carries (the 720: the apothecary, the midwife, Healer, the hospitaller,
     // the healer) and the physician; an office of a house (the dean, the priest, the hospital's master) is not one.
     Object.freeze({ role: /** @type {CrisisRole} */ ('lever'), phrase: 'The healer who identified the outbreak first', fill: '{holder}, the healer who identified the outbreak first,', kinds: Object.freeze(/** @type {const} */ (['npc'])), holds: /\b(?:healers?|apothecar(?:y|ies)|midwi(?:fe|ves)|hospitallers?|physicians?)\b/i }),
+    // R2-CODE-B-12, the chair's ruling (c) (M6's minted half, r2s-plague_onset-thorp-0: "Jiahao Wu, the healer who
+    // identified the outbreak first" beside "No healer is kept here"): the person minted to stand in, whose role is
+    // what they do in lay words (`STAND_IN_ROLE`), is named without the word "healer"; the town keeps none.
+    Object.freeze({ role: /** @type {CrisisRole} */ ('lever'), phrase: 'The healer who identified the outbreak first', fill: '{holder}, who identified the outbreak first,', kinds: Object.freeze(/** @type {const} */ (['npc'])), holds: STAND_IN_ROLE_RE }),
   ]),
 });
 

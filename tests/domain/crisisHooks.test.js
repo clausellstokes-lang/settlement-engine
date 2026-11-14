@@ -266,7 +266,9 @@ describe('the plague slot on born towns: the dean is not named the healer, the h
   });
 
   it('r2s-plague_onset-thorp-0 and r2r-city-19: a lever who is a healer is still named', () => {
-    expect(plagueHookOf(born('r2s-plague_onset-thorp-0'))).toMatch(/^Jiahao Wu, the healer who identified the outbreak first, has gone quiet\./);
+    // R2-CODE-B-12, ruling (c): thorp-0's lever is the minted stand-in ("Tends the sick"; no healer is kept there), named
+    // without the word (tests/domain/crisisStandInWords.test.js); the apothecary is a healer and keeps it.
+    expect(plagueHookOf(born('r2s-plague_onset-thorp-0'))).toMatch(/^Jiahao Wu, who identified the outbreak first, has gone quiet\./);
     expect(plagueHookOf(born('r2r-city-19'))).toMatch(/^Una Murray, the healer who identified the outbreak first, has gone quiet\./);
   });
 });
