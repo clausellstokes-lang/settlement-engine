@@ -1375,8 +1375,8 @@ sentence in two voices. **No named deaths.**
 3. `[visitor · colour]` A visitor may not see it, but some of the food on {settlement}'s tables was never grown or bought: it is there by magic.
 
 **FOOD SOURCES: one source**
-1. `[ledger · no crisis: famine]` {settlement} lives off its {good} and little else. One bad year for the {good} would be a hungry year for the whole town.
-2. `[street · colour]` Nearly every meal at {settlement} goes back to the {good}, and after a poor season for the {good}, everyone eats less.
+1. `[ledger · no crisis: famine]` {settlement}'s own food comes from its {good} and little else, so one bad year for the {good} would cost the whole town dear.
+2. `[street · colour]` The food {settlement} raises for itself all goes back to the {good}, and after a poor season for the {good} there is less to go round.
 3. `[unfolding · no crisis: famine]` {settlement} has little food of its own but its {good}, so a bad season for the {good} is felt at every table.
 
 **FOOD SOURCES: several, the largest named**

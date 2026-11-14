@@ -37,8 +37,8 @@
     "syntheticTableFields": 174,
     "tiers": {
       "MISSING": 33,
-      "THIN": 612,
-      "COVERED": 244,
+      "THIN": 611,
+      "COVERED": 245,
       "MISSING-AT-TIER": 45
     },
     "tierSilences": 352,
@@ -15905,7 +15905,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 1,
+      "grammars": 2,
       "predicate": [
         {
           "field": "eco.foodSecurity.foodRecord.foodSources.length",
@@ -54957,7 +54957,7 @@
         "DS-ECO-9 :: FOOD SOURCES: one source"
       ],
       "variants": 3,
-      "grammars": 1,
+      "grammars": 2,
       "blocks": [
         "DS-ECO-9"
       ]
@@ -68468,14 +68468,14 @@
       "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
-      "tier": "THIN",
+      "tier": "COVERED",
       "block": "DS-ECO-9",
       "subject": "FOOD SOURCES: one source",
       "fields": [
         "eco.foodSecurity.foodRecord.foodSources.length"
       ],
       "readingFunction": "foodSourcesPoolKey",
-      "count": "3 variant(s) · 1 grammar(s) · slots {good, settlement}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {good, settlement}"
     },
     {
       "tier": "COVERED",
