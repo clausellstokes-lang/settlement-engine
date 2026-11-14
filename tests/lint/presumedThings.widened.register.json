@@ -2054,30 +2054,6 @@
     "498cfc75c90d5834"
    ],
    [
-    "quarters",
-    "word",
-    "Patrols at {settlement} have changed their routes, and some districts are closed to anyone without business there.",
-    "5c20597434a2b64a"
-   ],
-   [
-    "quarters",
-    "word",
-    "Some districts of {settlement} are closed off now, and whatever happens there goes unrecorded and unpunished.",
-    "5f8d6934d29fb438"
-   ],
-   [
-    "quarters",
-    "word",
-    "Which power holds a district of {settlement} decides which rules apply there.",
-    "2fe7494f83abfe50"
-   ],
-   [
-    "quarters",
-    "word",
-    "Each power at {settlement} keeps its own list of offences, so a wrong punished in one district goes unpunished in the ne",
-    "cb2c18ff89ae6733"
-   ],
-   [
     "plague",
     "word",
     "{settlement} has no dedicated healers. Wounds take what they take, and a plague here runs until it has finished.",
@@ -2130,24 +2106,6 @@
     "word",
     "{settlement} leans on its practitioners; a hard season for them (a feud, a sickness, a falling-out with the hall) is a h",
     "43ee1250202c3af8"
-   ],
-   [
-    "practitioner",
-    "word",
-    "{settlement} does better than its ground and roads would explain, and the reason is its few practitioners.",
-    "7c8a20d3e3d5469c"
-   ],
-   [
-    "practitioner",
-    "word",
-    "{settlement}'s trade in {good} rests on a few practitioners, not on the land.",
-    "9a61f72877533def"
-   ],
-   [
-    "practitioner",
-    "word",
-    "There is magic at {settlement} and the town does not rest on it. Losing every practitioner here would be a loss and not ",
-    "2082a51afbef8994"
    ],
    [
     "practitioner",
@@ -2218,12 +2176,6 @@
    [
     "armedForce",
     "family",
-    "{settlement}'s garrison roll puts paid soldiers on every stretch of its walls, so raiders stay away and an army would pa",
-    "a0136f7c15a9f92d"
-   ],
-   [
-    "armedForce",
-    "family",
     "Approaching {settlement}, you see the walls and the soldiers who belong on them, and any attacker would think again abou",
     "4981288dbf0ebe5c"
    ],
@@ -2238,24 +2190,6 @@
     "family",
     "{settlement}'s accounts have money in hand: the town can keep its defenders paid and buy what a bad season needs without",
     "f5ff1370e1e6dfb1"
-   ],
-   [
-    "armedForce",
-    "family",
-    "{settlement}'s pay book is always behind: its defenders are paid late or not at all, and people owed wages are slow to t",
-    "bfdeca17a4563143"
-   ],
-   [
-    "armedForce",
-    "family",
-    "The supply book for {settlement}'s defenders balances: the town's own trades feed and equip them, so a call to arms does",
-    "bc87122ce3dac14b"
-   ],
-   [
-    "armedForce",
-    "family",
-    "The trades that feed and equip {settlement}'s defenders are busy and well stocked, and the defenders know it.",
-    "d6f8fca2c085060a"
    ],
    [
     "armedForce",
@@ -2438,12 +2372,6 @@
     "2fe8b75f4c2640c5"
    ],
    [
-    "openTrade",
-    "family",
-    "Traffic in and out of {settlement} goes through its gates, and that is where anyone arriving is first seen.",
-    "b7f57bb7bc66d87b"
-   ],
-   [
     "house: wizard's tower",
     "family",
     "The wizard's tower at {settlement} is where the town turns when a threat is beyond its ordinary defences.",
@@ -2454,36 +2382,6 @@
     "family",
     "The town's defence against magic rests on the wizard's tower at {settlement}, and no muster roll lists it: if the wizard",
     "a7bbaa4c685e7078"
-   ],
-   [
-    "house: mages' guild",
-    "family",
-    "The mages' guild at {settlement} keeps the town's wards and answers hostile spells.",
-    "523da53a968dc8dd"
-   ],
-   [
-    "house: mages' guild",
-    "family",
-    "{settlement}'s magical defence sits in the mages' guild's books, not the town's: the guild can withdraw it, and the town",
-    "23ff5c2c388f5f47"
-   ],
-   [
-    "house: alchemist",
-    "family",
-    "The magical help at {settlement} comes from its alchemists, who brew for the defenders.",
-    "1366532ce65b83b7"
-   ],
-   [
-    "armedForce",
-    "family",
-    "The magical help at {settlement} comes from its alchemists, who brew for the defenders.",
-    "1366532ce65b83b7"
-   ],
-   [
-    "house: alchemist",
-    "family",
-    "{settlement} buys its magical support from its alchemists by the batch, and the town's accounts carry it as a purchase, ",
-    "3f3c713516f9fa62"
    ],
    [
     "clergy",
@@ -2722,18 +2620,6 @@
     "06577da4a386b68b"
    ],
    [
-    "smallMargin",
-    "word",
-    "{settlement} feeds itself with a small margin. The counts come out ahead by a little, every season, without much drama.",
-    "5565ec2b8e02ad20"
-   ],
-   [
-    "onlyJust",
-    "word",
-    "{settlement} is fed, but only just. A poor harvest is felt at every table; a good one means a little put by.",
-    "4328e4b3cddcd11b"
-   ],
-   [
     "religiousHouses",
     "word",
     "Faith carries real weight in {settlement}'s money. What the religious houses take in and spend is a large part of the to",
@@ -2774,24 +2660,6 @@
     "family",
     "{settlement} lives on a {complexity} and ends each year with money to spare, and the traffic on its {access} keeps it th",
     "3440f868ce21318d"
-   ],
-   [
-    "openTrade",
-    "family",
-    "Traffic moves along {settlement}'s {access} every day, and little of its money stays. The place earns less than it spend",
-    "472826d2eb1651fb"
-   ],
-   [
-    "openTrade",
-    "family",
-    "Plenty passes through {settlement}, and little of it stops. The town is poor, and its people say so to anyone who asks.",
-    "d2c3ac745df1f735"
-   ],
-   [
-    "openTrade",
-    "family",
-    "{settlement}'s market sells little, though the {access} is busy; most of the traffic does not stop, and the traders here",
-    "454b6651da5aacfc"
    ],
    [
     "openTrade",
@@ -2932,12 +2800,6 @@
     "41758bfab11ee934"
    ],
    [
-    "openTrade",
-    "family",
-    "The carts feed this town as much as the fields do. Everybody knows what day they come and what it means if they do not.",
-    "e9ed40da1f16a117"
-   ],
-   [
     "famine",
     "family",
     "A substantial part of what {settlement} eats is bought, and under the hunger the bought part comes short. The stores cov",
@@ -2956,12 +2818,6 @@
     "76b4b52212951b49"
    ],
    [
-    "openTrade",
-    "family",
-    "Bread at {settlement} is as likely to come from somebody else's fields as from the town's own, and everyone knows which ",
-    "241e1ace193d6b21"
-   ],
-   [
     "house: library",
     "family",
     "DS-SUP-2: LADDER › canonical supply-chain status + the break-cause clause library · `deriveSupplyChainState(chain, settl",
@@ -2972,12 +2828,6 @@
     "family",
     "The export list at {settlement} is longer than the town's own trades would explain, and the difference is what passes th",
     "46613010b6caad7a"
-   ],
-   [
-    "famineToCome",
-    "family",
-    "{settlement} lives off its {good} and little else. One bad year for the {good} would be a hungry year for the whole town",
-    "c116c26e7a8afe1f"
    ]
   ],
   "src/data/dossierStateProse/general.generated.js": [
@@ -3010,12 +2860,6 @@
     "word",
     "{settlement} is quiet under occupation: no unrest, and nobody doing anything they were not told to.",
     "f7aba2e3cae3483a"
-   ],
-   [
-    "occupation",
-    "word",
-    "{settlement} was occupied and gave nothing up that mattered; what the occupier took, the town had already moved.",
-    "28a6234a83faf399"
    ],
    [
     "powersCount",
@@ -3266,12 +3110,6 @@
    [
     "openTrade",
     "family",
-    "{settlement}'s market lives off through-traffic; the town sells to the road as much as to itself.",
-    "9e822479d614eae4"
-   ],
-   [
-    "openTrade",
-    "family",
     "{settlement}'s market serves the town itself; little passes through that was not always coming here.",
     "45116905c9070836"
    ],
@@ -3346,12 +3184,6 @@
     "family",
     "{institution} at {settlement} eats what the carts bring; the town's crafts begin at the weighbeam, not the field.",
     "6e3572f2fdd3cf3b"
-   ],
-   [
-    "openTrade",
-    "family",
-    "Carts bring {settlement} what its workshops need, and carry the worked {good} away again.",
-    "0db406b36bc96e2b"
    ],
    [
     "temple",
@@ -3450,18 +3282,6 @@
     "family",
     "The trading houses at {settlement} pay for their own armed guards, a private army that keeps order wherever the houses d",
     "1170b553e4467d98"
-   ],
-   [
-    "streets",
-    "family",
-    "Criminal money is reaching the officials of {settlement} one at a time, because the town is poor and its streets are bad",
-    "f56ad1489f992762"
-   ],
-   [
-    "streets",
-    "family",
-    "Each season it gets easier to buy an official at {settlement}: the town stays poor, the streets stay badly guarded, and ",
-    "17c032777b79aa94"
    ],
    [
     "streets",
@@ -4207,12 +4027,6 @@
     "implied",
     "The church and the garrison in {settlement} act as one: soldiers keep the feast days, priests stand at the musters, and ",
     "e7183e8bb32fab56"
-   ],
-   [
-    "temple",
-    "implied",
-    "The church in {settlement} hunts heresy openly. Anyone suspected of working magic against the faith is denounced from th",
-    "08e811a8581b6109"
    ],
    [
     "temple",
