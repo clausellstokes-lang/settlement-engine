@@ -788,10 +788,8 @@ lighting census by its ritual, in its own commit (5efbfde7e, 853188dcf, fe7eaaf0
   against an Invasion row that sees raiders off, 82 towns (80 at the line): the one ladder, the defence lane's.
   **F9:** the naval line lost in 115 river towns, 22 on coastal terrain: after the join. **F10:** the Substrate food
   word "Import-dependent" under a siege, 18 towns: the food generator's label.
-- **Found by this seat, not ruled:** a strong posture beside the supply clause "defenders go short / make do /
-  worse off" (CHAIN: defence short): 168 towns at the line, 240 at bb2bf91c5 (L1), 232 after F3, the class
-  unmeasured after the guard-on-paper cure; the cure would be a disqualifier in postureLineDisqualifiers.js (this
-  lane's file) reading `chainModifiers.military < 0`: for the chair.
+- ~~Found by this seat, not ruled~~ RULED AND CURED below (the short supply). The counts first written here (168 /
+  240 / 232) were WRONG: the matcher took "will not go short", a line of the SUPPLIED pool.
 - The readiness badge "Well-defended" still stands over "exists on paper" in the 31 guard-on-paper towns:
   `defenseGenerator.js :: computeDefenseReadiness`, the defence lane's.
 - plotHooks.js's other copy: lane/rung2-shadow-2026-11-07 changed the file after its merge base (a rung-1 merge
@@ -825,3 +823,19 @@ Tip <read back in the message to the chair>. Every finding the chair ruled is cu
 F1 2 -> 0 and 14 -> 0; the guard on paper 31 -> 0; F3 -> 0; F2 139 -> 0; F7 38 (reader 42) -> 0; F6 27 -> 0;
 F8 209/307 -> 0. Left: nothing of this seat's assignment. For the chair: the strong posture beside a short
 defence supply (FOR THE JOIN above). The PR's merge, the deploy and the manifest's re-record are not this lane's.
+
+## The chair's ruling of 08:53 UTC and its cure (after the close)
+- **The ruling (copied; vetoable):** a strong posture line beside the same tab's supply sentence saying the
+  defenders go short is two places on one page that disagree, and the rise was this lane's own move: the strong pool
+  is NOT DRAWN where the supply key reads short, by the same fact (never its sentence), in postureLineDisqualifiers.js.
+- **CORRECTION:** this seat's earlier counts of the class (168 / 240 / 232: the F3 commit, this file, two messages
+  to the chair) matched "will not go short", a SUPPLIED line. By the short pool's own lines: **141** at the line's tip,
+  **203** at bb2bf91c5, 198 after F3, **173** at 08acc23d4 -> **0** at 5d0a2d5fd. 173 cells move, all posture, strong ->
+  silent. Guard: the fourth arm of `tests/domain/defensePostureAgainstItsFacts.test.js` (red first at 08acc23d4) ·
+  `supplyShort` off. Read: Frosthavn (famine), Ulaanobo (wartime), r2r-metropolis-13 (the largest): the badge and
+  the assessment print, no posture line, no dangling label. F3's walled keeper moved to
+  rr3-town-monster_pressure-rand-4 (Al-kot's supply is short: its strong line now struck, truly).
+- **Close for this commit:** births untouched (display only; the same function, no generator file); eslint, both type
+  ratchets, the presumed-things door, observed shapes, fact layers, writer reach exit 0; governing files 599/0; the
+  lighting census re-taken (246a22eb7). The page census of the 720 was NOT re-run after this commit (it ran at
+  6b74eb2aa: exit 0, no rise): a fresh reader's step.
