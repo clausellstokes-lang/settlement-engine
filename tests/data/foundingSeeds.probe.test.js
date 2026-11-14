@@ -85,7 +85,15 @@ describe('claims-parity — each synopsis is proven by the forged world', () => 
     expect(eventsOf(t).filter((e) => e.severity === 'major').length).toBeGreaterThanOrEqual(5);
     // Receipt 2: a major siege in its history.
     expect(eventsOf(t).some((e) => /siege/i.test(e.name) && e.severity === 'major')).toBe(true);
-    // Receipt 3: grew from a single logging operation whose owner refused to leave.
+    // Receipt 3: it developed around an important river ford.
+    //
+    // RE-VERIFIED 2026-11-14 (R2-CODE-A-5, the chair's ruling on the History tab's Origin row: the draw reads
+    // the record). The old receipt's row, "grew from a single logging operation whose owner refused to leave when
+    // the contract ended", was a commodity hook dealt because the lead export "Sacred wood" scans as timber; this
+    // town has no timber near (river fish, river clay, an ancient grove, a stone quarry, foraging), so the row is
+    // refused and resolves draw-free to the next admitted one, "developed around an important river ford": true of
+    // a riverside town on a river route. The synopsis and the receipt are re-verified to the forged world; every
+    // other receipt is unchanged. (The notes below are the earlier re-verifications, for the record.)
     //
     // RE-VERIFIED 2026-09-30 (the urban band, ODQ §934.86). Same mechanism as the note below:
     // the founding reason is one draw from a pool the settlement's exports widen, and the
@@ -112,7 +120,7 @@ describe('claims-parity — each synopsis is proven by the forged world', () => 
     // foundedBy, initialChallenge, overcoming, legitimacy) is byte-identical to the
     // committed base, which is why only this one assertion moved. The new reason is
     // the truer one: the old roster's lead export came from an exhausted seam.
-    expect(/single logging operation whose owner refused to leave/i.test(t.history?.founding?.reason || '')).toBe(true);
+    expect(/developed around an important river ford/i.test(t.history?.founding?.reason || '')).toBe(true);
     // Receipt 4: the mills the title names are still standing. Added with the
     // re-verification above so the seed's title and synopsis keep a proven anchor
     // once the founding clause stopped carrying one (the claims-parity law).
@@ -184,7 +192,7 @@ const LINK_FIELDS = {
   // foodBalance's plague branch cuts local production (×0.75) and writes the stress's consequence for food.
   'economicViability.issues[stress_consequence]': { cause: 'plague', effect: 'poor harvests',
     holds: (t) => (t.economicViability?.issues || []).some((i) => i?.type === 'stress_consequence'
-      && i?.category === 'Food Supply' && /^The plague has killed or sickened many who work the fields\./.test(i?.message || '')) }, // re-keyed with the note's rewrite (W1 ECO second seat, 2026-11-07)
+      && i?.category === 'Food Supply' && /^The sickness is spreading among those who work the fields,/.test(i?.message || '')) }, // re-keyed with the note's rewrite (W1 ECO second seat, 2026-11-07); re-keyed again (R2-CODE-A-3, round three #1312): the onset's note reads the record's food source, and this world's is its fields
   // computePublicLegitimacy's safety term reads the safety label, whose strain is the plague's own.
   'powerStructure.publicLegitimacy.breakdown.safety': { cause: 'plague', effect: 'title unhonoured',
     holds: (t) => (legitOf(t).breakdown?.safety ?? 0) < 0

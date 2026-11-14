@@ -131,19 +131,21 @@ export const LEAVES = Object.freeze({
   // ── layer 3: over the powers ──
   rulerKind: home('rulerKind', 3, ['powerStructure']),
   guild: home('guild', 3, ['powerStructure', 'institutions']),
-  crime: home('crime', 3, ['_seed', 'economicState', 'economicState.safetyProfile', 'institutions', 'powerStructure'], {
+  // W2-C-LEAVES-9: the ring note's vantage reads `_seed`, and the tier for its second vantage's declaration (tier: ≥ village).
+  crime: home('crime', 3, ['_seed', 'economicState', 'economicState.safetyProfile', 'institutions', 'powerStructure', 'tier'], {
     note: '`deriveCriminalStructure` reads the safety profile\'s crime lines, which assembly settles to the crime signal (a back-write at layer 3): it reads its own layer',
   }),
   crimeSignal: leaf({ layer: 3, module: 'domain/crimeSignal.js', exported: 'crimeSignalOf', call: 'crimeLists', reads: ['powerStructure', 'institutions'] }),
-  faith: home('faith', 3, ['institutions', 'config', 'economicState', 'powerStructure', 'npcs'], {
-    note: 'its value reads the config, the roster, the income and the factions (layer 3); it touches the cast (layer 3), banked',
+  faith: home('faith', 3, ['institutions', 'config', 'economicState', 'powerStructure', 'npcs', 'stress'], {
+    note: 'its value reads the config, the roster, the income and the factions (layer 3); it touches the cast (layer 3), banked; '
+      + 'it reads the crisis container (stress, layer 0) for a siege that bars the road to the next village\'s church (R2-CODE-B-SIDE item 7, 8b27458cd; declared at the line\'s merge, R2-CODE-B-7)',
   }),
   beastsReadiness: leaf({ layer: 3, module: 'domain/facts/beastsReadiness.js', exported: 'beastsReadinessOf', call: 'record', reads: ['config', 'defenseProfile'] }),
   leaderLead: leaf({ layer: 3, module: 'domain/facts/leaderLead.js', exported: 'leaderLeadOfRecord', call: 'record', reads: ['powerStructure'] }),
   powersList: leaf({ layer: 3, module: 'domain/dossier/powerStrata.js', exported: 'derivePowerStrata', call: 'record', reads: ['powerStructure'],
     note: 'the one derivation of both lists the Power tab prints (the contenders and the roster); the fault of 16b is that both are titled alike, not a second derivation' }),
   // ── layer 4: over the cast ──
-  importsAsPrinted: leaf({ layer: 4, module: 'domain/display/tradeListDisplay.js', exported: 'importsAsPrinted', call: 'record', reads: ['economicState', 'resourceAnalysis', 'tier'] }),
+  importsAsPrinted: leaf({ layer: 4, module: 'domain/display/tradeListDisplay.js', exported: 'importsAsPrinted', call: 'record', reads: ['activeConditions', 'config', 'economicState', 'institutions', 'resourceAnalysis', 'stress', 'stressors', 'tier'] }), // W2-C-LEAVES-4 item 2: the pills read the chain cards' crisis state (chainStateShown.js :: crisisOf); W2-C-LEAVES R2: a need the town makes (its live roster, through localProductionAsPrinted); W2-C-LEAVES-3 P1-a: the chain leaf's WORKED_BY_HOUSE reads the town's own live resources (config)
   founder: leaf({ layer: 4, module: 'domain/facts/founder.js', exported: 'founderOf', call: 'record', reads: ['history'] }),
   // W2-A-LEAVES-2 (REVIEW-W2A F3): an official in a criminal's pay, the cast's own fact; the crime desk's lines
   // about bought officials are struck by it (`display/stateProse/crimeLineDisqualifiers.js`)

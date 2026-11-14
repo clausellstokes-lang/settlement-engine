@@ -16,6 +16,7 @@ import useIsMobile from '../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 import { edged } from '../../design/edgedBox.js';
+import { governingModifierWordsOf } from '../../domain/display/governingModifierWords.js';
 
 // Tier 7.19 — `second` was the per-file body-copy alias for '#6b5340'.
 // Routing it through `BODY` from tabConstants centralises future contrast
@@ -45,7 +46,7 @@ function characterSentence(r) {
 }
 
 // ── Stacked faction power bar ─────────────────────────────────────────────────
-function FactionBar({ factions }) {
+function FactionBar({ factions, governingWords = '' }) {
   // THE PHONE CHROME FLOOR — the modifier chips and the share figure, above the
   // empty-roster early return so the hook order is stable.
   const mobile = useIsMobile();
@@ -79,7 +80,9 @@ function FactionBar({ factions }) {
       <div style={{display:'flex',flexDirection:'column',gap:5}}>
         {factions.map((f,i)=>{
           const c=FACTION_COLORS[i%FACTION_COLORS.length];
-          const mods=(f.modifiers||[]).concat(f.modifier?[f.modifier]:[]);
+          // POWERS-15 (REVIEW-POWERS-5 A7; one reader for one fact on every surface): the ruling power's stored modifier
+          // key is never printed; its chip is the Power tab's own words (display/governingModifierWords.js), or none
+          const mods=(f.modifiers||[]).concat(f.modifier&&f.isGoverning&&governingWords?[governingWords]:[]);
           return <div id={entityAnchor('faction', { id:f.id || f.faction, name:f.faction })} key={i} style={{display:'flex',alignItems:'center',gap:7,scrollMarginTop:ANCHOR_OFFSET}}>
             <div style={{width:10,height:10,background:c,flexShrink:0}}/>
             {/* ODQ §934.23 — no clamp on dossier text: a faction name is generated and has no provable width, so the legend row wraps it rather than truncating the body it names. */}
@@ -128,6 +131,7 @@ function SummaryTab({ settlement:r }) {
   // Deficit % from the canonical display model (residual ÷ daily need), matching
   // the PDF — not the engine's gross deficitPercent. (A+ pdf.3.)
   const foodCanon=deriveFoodBalance(r);
+  const prosperityInCrisis=prosperityInCrisisLine(r); // ruling 1(a): the crisis-lowered label's ordinary-years sentence, or null
   const _topIssue=via?.issues?.[0];
   const topNPCs=[...(w||[])].sort((a,b)=>(b.power||0)-(a.power||0)).slice(0,6);
   const dp=r.defenseProfile||{};
@@ -150,7 +154,7 @@ function SummaryTab({ settlement:r }) {
       r.arrivalScene?`\n> ${r.arrivalScene}`:'',
       `\n**${characterSentence(r)}**`,
       `\n**Power:** ${allFactions.slice(0,3).map(f=>`${f.faction} (${f.power}%)`).join(', ')}. ${ps?.stability||''}`,
-      `**Economy:** ${eco.prosperity||'?'} - ${eco.economicComplexity||''}. Exports: ${eco.primaryExports?.join(', ')||'none'}.${foodCanon.deficit>0?` Food deficit ${foodCanon.deficitPct}%.`:''}`,
+      `**Economy:** ${eco.prosperity||'?'} - ${eco.economicComplexity||''}.${prosperityInCrisis?` ${prosperityInCrisis}`:''} Exports: ${eco.primaryExports?.join(', ')||'none'}.${foodCanon.deficit>0?` Food deficit ${foodCanon.deficitPct}%.`:''}`,
       `**Defense:** ${dp.readiness?.label||'Unknown'}`,
       `\n**Key NPCs:**`,...topNPCs.map(v=>{
         const traits=normalizeNpcTraits(v).filter(t=>t.visibility!=='gm').slice(0,4).map(t=>`${t.label}: ${t.value}`).join('; ');
@@ -240,12 +244,15 @@ function SummaryTab({ settlement:r }) {
           stale tile instead of reading as an ambient caveat over the whole
           dossier; the tighter margin pulls it under the tile row. Conditional on
           the reconciliationLog detector; absent trail ⇒ byte-identical tab. */}
+      {/* The Economy tile's label, where a crisis in force lowered it, says what the place is in
+          ordinary years (the chair's ruling 1(a), REVIEW-UPKEEP-2): the one sentence, under the row. */}
+      {prosperityInCrisis&&<p data-testid="summary-prosperity-in-crisis" style={{fontSize:proseFontSize(FS.xs, isMobile),color:muted,fontStyle:'italic',lineHeight:1.4,margin:'-6px 0 12px'}}>{prosperityInCrisis}</p>}
       <EconomyFreshnessNote settlement={r} variant="tallies" margin="-6px 0 12px" />
 
       {/* ── POWER + CONFLICTS ────────────────────────────────────────────── */}
       <div style={{background:swatch['#F4F6FD'],border:'1px solid #b8c8e8',borderLeft:'3px solid #2a3a7a',padding:'12px 14px',marginBottom:12}}>
         <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:800,color:swatch.info,textTransform:'uppercase',letterSpacing:'0.07em',marginBottom:10}}>Power & Conflict</div>
-        <FactionBar factions={allFactions.slice(0,5)}/>
+        <FactionBar factions={allFactions.slice(0,5)} governingWords={governingModifierWordsOf(r)}/>
         {ps?.recentConflict&&<p style={{fontSize:proseFontSize(FS.xs, isMobile),color:swatch.danger,marginTop:8,lineHeight:1.4}}>{ps.recentConflict}</p>}
         {allConflicts.length>0&&<>
           <div style={{height:1,background:swatch['#C0CCE8'],margin:'10px 0'}}/>
@@ -411,3 +418,4 @@ export default React.memo(SummaryTab);
 // The crisis hook's {holder} is filled where it is read (the chair's ruling 4, HOOKS-UNDER-STRESS); the
 // import sits here, not at the head, so the line-keyed prose-numerics register's rows above stay put.
 import { crisisHookFor } from '../../domain/crisis/crisisHooks.js';
+import { prosperityInCrisisLine } from '../../domain/display/prosperityInCrisis.js';

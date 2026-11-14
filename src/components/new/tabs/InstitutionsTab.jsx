@@ -49,7 +49,7 @@ import { computeChainSets } from '../tabHelpers';
 // The rows can shift with an economy event exactly as the Services tab's do, so the page carries
 // the same freshness note (economyReadModelCoverage: COVERED; chair ruling 5, 2026-10-30).
 import EconomyFreshnessNote from '../EconomyFreshnessNote.jsx';
-import { institutionDisplayName } from '../../../domain/display/institutionDisplayName.js';
+import { institutionHouseLabel } from '../../../domain/display/institutionDisplayName.js';
 import { identityForInstitution } from '../../../domain/display/institutionVocabulary.js';
 import { institutionProvenanceOf } from '../../../domain/provenance/rosterProvenance.js';
 import { isFabricInstitution } from '../../../data/institutionalCatalog.js';
@@ -74,7 +74,7 @@ import { FLUSH, FLUSH_PAGE, FLUSH_STACK } from '../../../design/flush.js';
 // *ByWorldPulseOutcomeId stamps into a single answer to "who put this here". Nothing is
 // persisted: the record is derived per render. 'forced' (the player force-added it at
 // generation) wears the same YOU mark as a DM event, and the legend says so once.
-const PROVENANCE_TONE = { you:'#2d7a44', world:'#2a6b6b', required:'#a0762a', auto:'#2a3a7a', none:'#6b5340' };
+const PROVENANCE_TONE = { you:'#2d7a44', world:'#2a6b6b', auto:'#2a3a7a', none:'#6b5340' };
 
 /** @param {object} inst */
 export function institutionBadge(inst) {
@@ -90,8 +90,20 @@ export function institutionBadge(inst) {
       title: created.reason ? `Grown by the living world. ${created.reason}` : 'Grown by the living world',
     };
   }
-  if (created.sourceTag === 'required') return { label:'REQ', color:PROVENANCE_TONE.required, title:'Historically required' };
-  if (created.sourceTag === 'forced') return { label:'YOU', color:PROVENANCE_TONE.you, title:'Added by you' };
+  // ROUND THREE, ruling (b) (the chair, 2026-11-13; ROUND-3-CUT §7 (b)): "REQ" was the generator's
+  // provenance (a row the tier's catalogue requires), run onto the house's name: machinery, not a fact
+  // of the place. It leaves the roster; the row is unbadged, like an unstamped generated row.
+  if (created.sourceTag === 'required') return { label:null, color:PROVENANCE_TONE.none, title:undefined };
+  // R2-CODE-B item 2 (the cold list REVIEW-W2A-3 #893 #894: "Hedge wizard YOU" with no house added by
+  // the user): `source: 'forced'` is written by every generator that forces a row — the user's toggle
+  // AND the isolation pass (isolationGenerator.js, `forcedByIsolation`). The record's own word for the
+  // user's hand is `forcedByToggle` (assembleInstitutions.js, every toggle path); only that wears YOU.
+  // A row the generator forced makes no claim of who added it, like an unstamped generated row.
+  if (created.sourceTag === 'forced') {
+    return inst?.forcedByToggle === true
+      ? { label:'YOU', color:PROVENANCE_TONE.you, title:'Added by you' }
+      : { label:null, color:PROVENANCE_TONE.none, title:undefined };
+  }
   if (created.sourceTag === 'auto-resolved') return { label:'→', color:PROVENANCE_TONE.auto, title:'Auto-resolved dependency' };
   // Unstamped legacy rows stay unbadged rather than being guessed at. Custom rows are
   // skinned gold by the caller's own ✦ branch.
@@ -144,7 +156,11 @@ export function institutionsWithServices(settlement) {
       return {
         inst,
         category: String(inst.category || ''),
-        label: institutionDisplayName(inst),
+        // ROUND THREE, ruling (a) (ROUND-3-CUT §7 (a)): the card names the house by its label, the one
+        // display leaf every surface reads: no catalogue count range, household range, gate or
+        // condition ("Dwellings (1-8)" reads "Dwellings"; "Inn (multiple)" reads "Inns"), the in-world
+        // qualifiers kept. The raw name stays the join key (`key` above) and the React key.
+        label: institutionHouseLabel(inst),
         services: byInstitution.get(key) || [],
         backs: backers.get(key) || [],
         // PEOPLE-6 LINKS: the house's representative (null for a house with no face)
@@ -327,7 +343,7 @@ export function InstitutionCard({ inst, category, label, services, sets, backs =
             const entity = serviceEntityOf(svc);
             return (
               <span key={`${entity.id}-${j}`} data-testid="institution-service" style={{ fontSize: FS['12.5'] }}>
-                <EntityLink id={entityIdFor('service', entity)} type="service" fallback={institutionDisplayName(svc.name)} style={{ color: swatch.inkMag, fontWeight: 600 }} />
+                <EntityLink id={entityIdFor('service', entity)} type="service" fallback={institutionHouseLabel(svc.name)} style={{ color: swatch.inkMag, fontWeight: 600 }} />
               </span>
             );
           })}

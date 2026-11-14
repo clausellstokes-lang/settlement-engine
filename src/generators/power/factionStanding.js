@@ -64,8 +64,9 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }) 
                     : 'The order is settled for now; they are busy holding on to second place and make no move on first.')),
           rank === 2 &&
             (gapAbove <= 5 && gapBelow <= 5
-              ? (standing =
-                  'Three powers stand almost level here, and no one leads; every council vote has to be bargained for.')
+              ? (standing = topTwoGap <= 5
+                  ? 'Three powers stand almost level here, and no one leads; every council vote has to be bargained for.'
+                  : 'They are always at the table, but cannot set their own terms.')
               : gapAbove <= 10
                 ? (standing =
                     'Close enough to the two above that their support is worth buying; they play ' +
@@ -197,7 +198,7 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }) 
                       ? 'They and the steward both claim the same authority, so petitioners go to whichever is likelier to say yes.'
                       : stewardVariant === 1
                         ? 'The steward and the household have worked out who does what, but they bargain it again whenever something important is at stake.'
-                        : 'Which one actually governs depends on the day and the question; both would say themselves.';
+                        : 'Which one actually governs depends on the day and the question; each would say it does.'; // COHERENCE-POWERS-8 (round three #565): the clause read whole
             standing = standing ? standing + ' ' + stewardNote : stewardNote;
           }
         }

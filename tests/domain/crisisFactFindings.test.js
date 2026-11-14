@@ -75,8 +75,10 @@ describe('the famine month-burn', () => {
     expect(famineStoresLeft(15.3, 4, 12)).toBe(15.3);
   });
   it('a held famine granary says so in the one stores writer; a famine of few months prints what is in hand', () => {
-    expect(foodStoresWords({ storageMonths: 12.1, hasGranary: true, storesHeld: true })).toBe('Stores: a granary of twelve months that the hall will not open.');
-    expect(foodStoresWords({ storageMonths: 2.4, hasGranary: true, storesHeld: false })).toBe('Stores: a granary, two months of grain.');
+  // RE-KEYED BY IDENTITY (R2-CODE-B-3 item 2a, the chair's ruling: the words contain the figure, "about" from a month up):
+  // the same records, the same held/open reading and the same rounding; the span now says "about".
+    expect(foodStoresWords({ storageMonths: 12.1, hasGranary: true, storesHeld: true })).toBe('Stores: a granary of about twelve months that the hall will not open.');
+    expect(foodStoresWords({ storageMonths: 2.4, hasGranary: true, storesHeld: false })).toBe('Stores: a granary, about two and a half months of grain.'); // 2.4: "two months" was not its figure
   });
 });
 

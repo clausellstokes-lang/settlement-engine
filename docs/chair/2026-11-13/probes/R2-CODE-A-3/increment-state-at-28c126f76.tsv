@@ -1,0 +1,38 @@
+ww-3	MED	exact	rww-thorp-calm-1	narrativeGenerator.js::generateSettlementReason	.settlementReason[]	Survival here rests on carriage by magic, the caravans that still come, the roads in a goo
+ww-23	MED	exact	rww-thorp-calm-1	stressInstitutionEffects.js::STRESS_INSTITUTION_EFFECTS.needs	.npcs[].secret.what	Has documentation proving the famine was caused by export decisions made by Elder Council,
+ww-28	HIGH	gone	rww-hamlet-famine-1	narrativeText.js::PRESSURE_SENTENCES		The bakers of Ulfset have started cutting the bread with things that are not flour; everyo
+ww-29	MED	exact	rww-hamlet-famine-1	settlementOriginProse.js::ORIGIN_POOLS	.settlementReason[]	The shortfall is met through carriage by magic, the caravans that still come, the roads in
+ww-53	HIGH	gone	rww-hamlet-famine-1	narrativeGenerator.js::genArrivalDetail		a miller who built a mill and found customers before they found customers
+ww-58	HIGH	gone	rww-village-religious_conversion-1	narrativeData.js::STRESS_DESCS.religious_conversion		The mason's yard in Hochplatz is its busiest enterprise: one set of holy symbols coming do
+ww-59	MED	exact	rww-village-religious_conversion-1	narrativeText.js::PRESSURE_SENTENCES	.pressureSentence	Every legal document that required religious sanction is now in a grey zone that the court
+ww-285	MED	exact	rww-town-famine-1	narrativeText.js::POLITICAL_FLAVOR	.history.historicalCharacter	Everything before the Siege is referred to as 'the old settlement'. What exists now was bu
+ww-286	MED	head	rww-town-famine-1	narrativeText.js::PRESSURE_SENTENCES	.pressureSentence	Kitaxian is two bad weeks from genuine starvation; Religious Authorities controls the rema
+ww-288	MED	gone	rww-town-famine-1	foodBalance.js::deriveFoodBalanceAnalysis		A poor harvest somewhere else has spiked the price of grain. The settlement must decide wh
+ww-472	MED	head	rww-town-under_siege-1	narrativeText.js::POLITICAL_FLAVOR	.history.historicalCharacter	Economically dynamic in ways that occasionally tip into instability: the Trade Collapse is
+ww-477	MED	gone	rww-town-under_siege-1	npcData.js::NPC_FACTION_LOYALTY.military		Tracks they were told to ignore lead from the edge of the fields to a camp nobody has repo
+ww-540	HIGH	gone	rww-hamlet-succession_void-1	narrativeData.js::STRESS_DESCS.succession_void		The masons of Xitang have stopped mid-job on the great house; scaffolding stands empty on 
+ww-719	MED	exact	rww-thorp-monster_pressure-1	stressInstitutionEffects.js::STRESS_INSTITUTION_EFFECTS.needs	.npcs[].secret.what	Has been selling information about patrol schedules to an outside party who claims to be a
+ww-890	MED	exact	rww-thorp-plague_onset-1	narrativeData.js::TERRAIN_NARRATIVE_HOOKS.river	.history.founding.reason	was established by a family granted mill rights by a distant lord who never visited
+ww-892	MED	head	rww-hamlet-mass_migration-1	narrativeText.js::PRESSURE_SENTENCES	.stress.summary	Vikborg is taking in more people than it can feed.
+ww-915	MED	exact	rww-hamlet-mass_migration-1	narrativeData.js::TERRAIN_NARRATIVE_HOOKS.river	.history.founding.reason	began as a riverside mill settlement
+ww-920	HIGH	gone	rww-village-indebted-1	narrativeData.js::STRESS_DESCS.indebted		The merchant district of Quirigek looks prosperous. The rest of the settlement, visible fu
+ww-996	MED	exact	rww-city-insurgency-1	narrativeData.js::STRESS_DESCS.insurgency	.arrivalScene	Eisenberg's gate stands open and unmanned.
+ww-1064	MED	exact	rww-city-insurgency-1	stressInstitutionEffects.js::STRESS_INSTITUTION_EFFECTS.needs	.npcs[].secret.what	Ordered a crackdown that killed people who had nothing to do with the insurgency, then fal
+ww-1070	HIGH	head	rww-metropolis-under_siege-1	narrativeText.js::PRESSURE_SENTENCES	.pressureSentence	Naranjotepec is surrounded. Supply lines are cut, morale is fracturing, and Yellow Corn Co
+ww-1158	MED	head	rww-city-famine-1	narrativeText.js::speakTierLines	.pressureSentence	Chrysoberge Comnenus, the senior craft-guild master, knows where the hoarded coal can be f
+ww-1219	HIGH	gone	rww-city-famine-1	stressInstitutionEffects.js::STRESS_INSTITUTION_EFFECTS.famine		Controls a hidden cache of coal reserves that could feed the settlement for two more weeks
+ww-1225	HIGH	head	rww-village-under_siege-1	narrativeText.js::PRESSURE_SENTENCES	.pressureSentence	Qaryatsaray is surrounded. Supply lines are cut, morale is fracturing, and Khadija al-Aziz
+ww-1407	MED	exact	rww-city-recently_betrayed-1	narrativeData.js::STRESS_NOTES.recently_betrayed	.history.founding.stressNote	The settlement was founded by a few families who trusted each other. One of their own has 
+ww-1444	MED	exact	rww-village-calm-1	npcData.js::STRESS_ECONOMIC_EFFECTS.family_complication	.relationships[].description	Fiachra Murray and Saoirse Sullivan are cousins on opposite sides of the settlement's poli
+ww-1481	MED	exact	rww-village-famine-1	stressInstitutionEffects.js::STRESS_INSTITUTION_EFFECTS.needs	.npcs[].secret.what	Has documentation proving the famine was caused by export decisions made by Religious Auth
+pf-55	MED	exact	rpf-city-calm-13	npcData.js::STRESS_ECONOMIC_EFFECTS.family_complication	.relationships[].description	Jibril al-Rahman and Ola al-Jabiri are cousins on opposite sides of the settlement's polit
+pf-207	MED	exact	rpf-city-politically_fractured-13	npcData.js::STRESS_ECONOMIC_EFFECTS.mentor_legacy	.relationships[].description	Xipe Acalan named Rain Bacab as successor in front of witnesses. The formal handover has n
+pf-394	HIGH	gone	rpf-town-under_siege+famine-13	stressInstitutionEffects.js::STRESS_INSTITUTION_EFFECTS.needs		Is receiving legal shipments through a covert route and selling them at triple the officia
+pf-400	MED	exact	rpf-town-under_siege+famine-13	npcData.js::STRESS_ECONOMIC_EFFECTS.family_complication	.relationships[].description	Chac Itza and Ome Ucan are cousins on opposite sides of the settlement's politics. Their g
+pf-602	MED	exact	rpf-town-politically_fractured-13	npcData.js::STRESS_ECONOMIC_EFFECTS.old_debt	.relationships[].tension	Órlaith Ryan has fallen on hard times, and the debt Tadhg Tobin owes is now the only asset
+pf-628	MED	exact	rpf-metropolis-politically_fractured-13	powerSiblings.js::FACTION_DESC_SIBLINGS	.powerStructure.factions[].desc	Well-funded city watch; it keeps order reliably and is growing more sure of its own author
+pf-649	MED	exact	rpf-metropolis-politically_fractured-13	npcData.js::STRESS_ECONOMIC_EFFECTS.old_debt	.relationships[].tension	Kalliope Mosele has fallen on hard times, and the debt Emmanuel Palaiolagos owes is now th
+pf-707	MED	exact	rpf-town-occupied-13	npcData.js::STRESS_ECONOMIC_EFFECTS.gov_econ_dependence	.relationships[].description	Thorstein Haraldsson's treasury borrowed from Jarl Dagsson to cover a bad harvest and has 
+pf-708	MED	exact	rpf-town-occupied-13	npcData.js::STRESS_ECONOMIC_EFFECTS.gov_econ_dependence	.relationships[].description	Every civic project Ogmund Sigvaldsson announces has first been costed, quietly, in Jokull
+pf-709	MED	exact	rpf-town-occupied-13	npcData.js::STRESS_ECONOMIC_EFFECTS.gov_econ_dependence	.relationships[].description	Bard Ljotsson holds the settlement's tax rolls as security for its loans. Víðr Magnusson c
+pf-726	MED	exact	rpf-metropolis-succession_void-13	npcData.js::STRESS_ECONOMIC_EFFECTS.gov_econ_dependence	.relationships[].description	Emiko Ma holds the settlement's tax rolls as security for its loans. Ruixiang An cannot ra

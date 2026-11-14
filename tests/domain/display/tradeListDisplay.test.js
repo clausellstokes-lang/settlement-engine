@@ -66,3 +66,28 @@ describe('the camel chain declares the desert (the lane ruling 2)', () => {
     expect(allowing).toEqual(['desert']);
   });
 });
+
+describe('"Capital" is not a good shipped (NOLANE-1, LV-CAPITAL; the leaves lane\'s r2s-famine-city-0)', () => {
+  // A collected arm over census births (SECOND-WAVE-CENSUS dials) whose record carries "Capital" among its imports: the
+  // caravan masters' "Capital + trade access" need, cut to its first part. Money is not a good brought in, so it leaves
+  // the list as the other category errors do; every real import beside it still prints.
+  it('no birth prints "Capital" as an import; the goods beside it stay', async () => {
+    const { generateSettlementPipeline } = await import('../../../src/generators/generateSettlementPipeline.js');
+    const { birthConfig, loadGenerationLawPayloads } = await import('../../../src/domain/density/densityCreateBoundary.js');
+    const { DEFAULT_CONFIG } = await import('../../../src/store/configSlice.js');
+    await loadGenerationLawPayloads();
+    const dials = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true,
+      selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
+    let carrying = 0;
+    for (const [seed, settType] of [['r2r-city-0', 'city'], ['r2r-city-1', 'city'], ['r2r-city-3', 'city']]) {
+      const town = generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...dials, settType }), null, { seed, customContent: {} });
+      const imports = town.economicState.primaryImports;
+      if (!imports.includes('Capital')) continue;
+      carrying++;
+      const shown = displayTradeList(imports, town, { side: 'imports', exports: town.economicState.primaryExports });
+      expect(shown, `${seed}: no "Capital" import`).not.toContain('Capital');
+      expect(shown.length, `${seed}: the guard — the real imports still print`).toBeGreaterThan(0);
+    }
+    expect(carrying, 'anchored: the births carry the record\'s "Capital"').toBeGreaterThan(0);
+  }, 120000);
+});

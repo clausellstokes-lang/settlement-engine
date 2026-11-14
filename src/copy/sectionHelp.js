@@ -27,7 +27,7 @@ export const SECTION_HELP = Object.freeze({
   systemsHealth: `Safety, viability and defense, read side by side. ${SYSTEMS_HEALTH_VINTAGE}`,
   tensions: 'Who is at odds with whom, and how badly.',
   foundations: 'What is holding up and what is under strain.',
-  institutions: 'Each house: what it is, who it backs, what it offers. The badge says who put it here: history, you, the living world, or a dependency.',
+  institutions: 'Each house: what it is, who it backs, what it offers. The badge says who put it here: you, the living world, or a dependency.',
   services: 'What can be bought or hired here, and what is short.',
   supplyChains: 'What is made here and what it depends on.',
   rulers: 'Who holds power and how firmly.', // not `power`: the prose-numerics scanner reads a `.power` member as a figure

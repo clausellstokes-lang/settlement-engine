@@ -23,8 +23,8 @@ import { resolveSibling } from '../../domain/facts/drawDeclared.js';
 import {
   hasTradeRouteConnection,
   isTradeRouteDisconnected,
-  SEASONAL_ROUTE_FOOD_IMPORT_RATE,
-} from '../../domain/tradeRouteSemantics.js';
+  SEASONAL_ROUTE_FOOD_IMPORT_RATE, waterAccessKind, // R2-CODE-A-4 (A15): the water home's rule
+} from '../../domain/tradeRouteSemantics.js'; import { hasMarketInstitution } from '../../domain/facts/market.js'; // R2-CODE-A-4 (A26): the market home
 // Shared phrases hoisted once (train EM-T16's worker buy-back, judgment 214c): each is spelled here and referenced below; every emitted value is byte-identical.
 const ESTABLISH_SEASONAL_ACCESS_PATRONAGE_OR_A_DEPENDABLE_TRADE_ROUTE = 'Establish seasonal access, patronage, or a dependable trade route';
 const FERTILE_FLOODPLAIN = 'fertile_floodplain';
@@ -60,7 +60,7 @@ export function grownShareOf(effectiveAgri) {
 }
 
 /** The words a famine note uses for the source it failed (FOOD-3). */
-const FAILED_SOURCE_WORDS = Object.freeze({ grain: 'grain harvest', livestock: 'herds', fish: 'fishing', mill: 'mill', game: 'hunt' });
+/** R2-CODE-A item 6: the shortage hook where no food comes in by trade: the siege this file reads (`config.stressTypes`, the one that sets the route to isolated below) has cut every road, and the balance names no channel (`importChannel`: a route's, or a magic channel's past the siege) carrying food in. @param {any} config @param {any} foodBalance @returns {boolean} */ const siegeCutsImports = (config, foodBalance) => (config?.stressTypes || []).includes('under_siege') && !foodBalance?.importChannel; const NO_FOOD_BY_TRADE_HOOK = 'No food comes in by trade now, and what is left here is in a few hands; those who hold it have quadrupled the price, and the locals are arguing over whether to pay, wait it out, or take it.'; export const FAILED_SOURCE_WORDS = Object.freeze({ grain: 'grain harvest', livestock: 'herds', fish: 'fishing', mill: 'mill', game: 'hunt' }); /** R2-CODE-A item 1: WHAT A PLACE EATS AND STORES, in one plain word, from its one food record (below): "grain" where the record keeps grain (a granary, whose stores line reads "months of grain", or a grain or mill source), else "food"; no record reads "food". Every crisis line that means the town's food reads this, never the export slot (`tradeCommodity.js`). Draw-free; one line, so no cited line moves. @param {{ hasGranary?: unknown, foodSources?: unknown } | null | undefined} foodRecord @returns {'grain' | 'food'} */ export const foodStoreWord = (foodRecord) => (foodRecord && (foodRecord.hasGranary === true || (Array.isArray(foodRecord.foodSources) && foodRecord.foodSources.some((s) => s === 'grain' || s === 'mill'))) ? 'grain' : 'food'); /** R2-CODE-A-2 (cold #1068): the two crisis notes that add MOUTHS rather than take from the fields, so their heading never says the harvest thinned. */ const OCCUPIERS_EAT_NOTE = 'The occupiers are fed from local stores, so the food has to stretch about a fifth further than before.'; const NEWCOMERS_EAT_NOTE = 'Newcomers keep arriving, and every one of them has to be fed from the same fields and stores.'; const MOUTH_NOTES = new Set([OCCUPIERS_EAT_NOTE, NEWCOMERS_EAT_NOTE]); /** R2-CODE-A-3 (round three HIGH #1312, MED #203): "The plague has killed or sickened many who work the fields" printed under an outbreak the crisis card calls not yet a plague, in towns that live on fish and grow no field crop. The onset's food note says the sickness is spreading among those who bring in the food the record says this place lives on (its largest source, FOOD-3), and what that costs them; a record naming no source keeps the fields. R2-CODE-A-4 (the independent reader's A15, the chair's ruling): a line of the sea is said only of a place the record puts on it (the water home's maritime kind); a fishing town on a river or a lake has its own twin. @param {unknown} sources @param {boolean} [onSea] @returns {string} */ const plagueFoodNote = (sources, onSea = false) => { const first = Array.isArray(sources) ? sources[0] : null; return first === 'fish' ? (onSea ? 'The sickness is spreading among those who crew the boats, and the ones still at sea face a thin catch and a hard winter.' : 'The sickness is spreading among those who fish, and the ones still working face a thin catch and a hard winter.') : first === 'livestock' ? 'The sickness is spreading among those who tend the herds, and the ones still at work face a lean year and a hard winter.' : first === 'game' ? 'The sickness is spreading among those who hunt, and the ones still out face a lean season and a hard winter.' : 'The sickness is spreading among those who work the fields, and the ones still at work face a short harvest and a hard winter.'; };
 
 // ── THE FOOD RECORD (FOOD-1, chair ruling 1, 2026-11-03) ─────────────────────────────
 /**
@@ -228,11 +228,11 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
   }
   if (stresses.includes('plague_onset')) {
     productionMult *= 0.75;
-    stressNotes.push('The plague has killed or sickened many who work the fields. Those still standing face a short harvest and a hard winter.');
+    stressNotes.push(plagueFoodNote(foodSecurity?.foodRecord?.foodSources, waterAccessKind(config?.terrainType, config?.tradeRouteAccess) === 'maritime')); // R2-CODE-A-3 (round three HIGH #1312, MED #203): the onset's note reads the food record's largest source; R2-CODE-A-4 (A15): the sea only where the water home says maritime; one line, so no cited line moves
   }
   if (stresses.includes('occupied')) {
     consumptionMult *= 1.2;
-    stressNotes.push('The occupiers are fed from local stores, so the food has to stretch about a fifth further than before.');
+    stressNotes.push(OCCUPIERS_EAT_NOTE);
   }
   // [generators-domain-1] second-wave stress types with a food-relevant viabilityNote.
   // (Defense stays coupled via the priorityHelpers effective-score multipliers — no inline
@@ -251,7 +251,7 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
     consumptionMult *= 1.15;
     // The ARRIVALS set. A departures record adds no mouths here (the writer's multiplier above), so
     // its set is silent: a note would state a food effect the record does not hold (the census law).
-    stressNotes.push('Newcomers keep arriving, and every one of them has to be fed from the same fields and stores.');
+    stressNotes.push(NEWCOMERS_EAT_NOTE);
   }
 
   // The legacy view (no canonical record) grows by the same base numbers as the writer
@@ -546,8 +546,8 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
         });
       }
       plotHooks.push({
-        category: 'Trade Politics',
-        hook: 'A poor harvest somewhere else has spiked the price of grain. The settlement must decide what it can still afford to import, and the merchants are watching it decide.',
+        category: !(importCoverageFinal > 0 && importChannelLabel) ? 'Scarce Food' : 'Trade Politics', // R2-CODE-A-2 (cold #152): the line reads the famine and the channel this balance reads; nothing coming in, no trade to speak of
+        hook: !(importCoverageFinal > 0 && importChannelLabel) ? `No food can be bought in from outside now, so the ${foodStoreWord(foodSecurity?.foodRecord)} already here is all there is, and its price climbs every week. The settlement must decide how to share it, and those who hold it are watching it decide.` : stresses.includes('famine') ? `The ${FAILED_SOURCE_WORDS[/** @type {keyof typeof FAILED_SOURCE_WORDS} */ (foodSecurity?.foodRecord?.failedSource)] || 'crops'} failed here this year, and what food can still be bought from outside costs more every week. The settlement must decide what it can still afford to import, and ${hasMarketInstitution(institutions) ? 'the merchants are' : 'whoever brings the food in is'} watching it decide.` : `A poor harvest somewhere else has spiked the price of grain. The settlement must decide what it can still afford to import, and ${hasMarketInstitution(institutions) ? 'the merchants are' : 'whoever brings the food in is'} watching it decide.`, // R2-CODE-A-4 (the reader's A26, the chair's ruling): merchants only where the roster holds a market (the market home)
         severity: 'medium',
       });
     }
@@ -606,12 +606,12 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
         // SW-B1 (STYLE-RULINGS-2 B1(b), the SURFACES audit's P73): the label read no surplus, so a town that
         // still grows more than it eats (Lundey, soak1k-1, +17) printed "Cutting the Food Supply" beside
         // "it feeds itself". The label and its note now read the surplus beside the cut.
-        title: surplus >= 0 ? 'Crisis Thinning the Harvest' : 'Crisis Cutting the Food Supply',
+        title: Math.round(deficit) > 0 ? 'Crisis Cutting the Food Supply' : MOUTH_NOTES.has(note) ? 'Crisis Adding Mouths to Feed' : 'Crisis Thinning the Harvest', // R2-CODE-A-2 (cold #1068): the heading reads the gap this balance publishes (it read the local surplus, a second home), and a crisis that adds mouths thins no harvest
         message: note,
         description: note,
-        priorityNote: surplus >= 0
-          ? 'The crisis has cut the harvest, but what is grown still covers what is eaten.'
-          : 'The crisis is cutting into the food supply now.',
+        priorityNote: Math.round(deficit) > 0
+          ? 'The crisis is cutting into the food supply now.'
+          : `${MOUTH_NOTES.has(note) ? 'There are more mouths to feed' : 'The crisis has cut the harvest'}, but ${Math.round(dailyProductionFinal) >= Math.round(dailyNeedFinal) ? 'what is grown still covers what is eaten' : 'the shortfall is still made up'}.`,
       });
     });
   }
@@ -789,11 +789,11 @@ export const deriveSupplyRiskAnalysis = (population, terrain, institutions, conf
         severity: 'critical',
       });
     } else if (route !== 'isolated') {
-      hooks.push({
-        category: 'Trade Monopoly',
+      if (siegeCutsImports(config, foodBalance) || importHeld(facts, GRAIN_IMPORT)) hooks.push({ // R2-CODE-A-8 item 7 (ROUND-3-CUT #208): the importer names grain only where the record imports it
+        category: siegeCutsImports(config, foodBalance) ? 'Hoarded Food' : 'Trade Monopoly',
         // CENSUS-3e (answer 2, R-V measured): `guild` at this step differs from the final record on
         // 25 of 1,000 births, so the hook presumes only the imports its branch guarantees.
-        hook: 'One importer now brings in all the grain and has quadrupled the price; the locals are arguing over whether to pay, find another supplier, or take the grain.',
+        hook: siegeCutsImports(config, foodBalance) ? NO_FOOD_BY_TRADE_HOOK : 'One importer now brings in all the grain and has quadrupled the price; the locals are arguing over whether to pay, find another supplier, or take the grain.', // R2-CODE-A item 6: the importer presumes food comes in by trade; where the siege has cut every road in and no channel carries food past it, the hoard inside
         severity: 'high',
       });
       if (route === 'river')
@@ -843,7 +843,7 @@ export const deriveSupplyRiskAnalysis = (population, terrain, institutions, conf
           impact: 'Creates trade dependency and vulnerability.',
           suggestedFixes: [`Establish stable trade relationship with ${resource} supplier`],
         });
-        if (resource.toLowerCase().includes('timber'))
+        if (resource.toLowerCase().includes('timber') && (pick % 2 !== 0 || (timberStandHeld(config) && !siegeCutsImports(config, foodBalance)))) // R2-CODE-A-8 item 7b (ROUND-3-CUT #1004, #1336), composed at the merge of the line: the FOREST sentence only where the roster's resources hold a stand still standing, and not under a siege that cuts every road; the line's rafts sentence and its draw (`pick`, no roll) unchanged
           hooks.push({ category: 'Resource Conflict', severity: 'medium',
             hook: ["Something is killing the forest the timber comes from, and the settlement's building and shipbuilding trades stall without it. Find another supplier, or find out what is in those woods?",
               'The timber rafts stopped coming a month ago, and the shipwrights and builders are bidding against each other for what is left in the yards.'][pick % 2],
@@ -895,4 +895,4 @@ function moderateGapGrade(facts) {
   if (severity === undefined) return {};
   return { category: FOOD_SECURITY_BANDS[/** @type {keyof typeof FOOD_SECURITY_BANDS} */ (band)].label, severity };
 }
-import { MODERATE_GAP_TWIN, OUTLOOK_HOOK_SIBLINGS } from './outlookHookSiblings.js'; import { liveMaterialFor } from './localMaterials.js'; export { OUTLOOK_HOOK_SIBLINGS }; // LANDING-R2 (ODQ §934.105): the outlook hooks' declared siblings moved verbatim to economy/outlookHookSiblings.js, re-exported; below every cited line, so none moves
+/** R2-CODE-A-8 item 7 (the chair's ruling: a line names an import or a source only where the record holds it): does the record's import list (`factsOf(…).imports`, the economic state's `primaryImports`) hold a good this pattern names? No facts (a direct caller): held, as resolveSibling keeps a line it cannot read. @param {object | (() => object) | null} facts @param {RegExp} pattern @returns {boolean} */ function importHeld(facts, pattern) { const f = /** @type {any} */ (typeof facts === 'function' ? facts() : facts); if (!f) return true; const list = Array.isArray(f.imports) ? f.imports : []; return list.some((/** @type {unknown} */ x) => typeof x === 'string' && pattern.test(x)); } const GRAIN_IMPORT = /grain/i; /** R2-CODE-A-8 item 7b: does the roster's resource list (`availableNativeResourceKeys`: present and not depleted) hold a stand of timber, the forest the timber line names? A config with no resource list (a direct caller): held. @param {any} config @returns {boolean} */ function timberStandHeld(config) { return !Array.isArray(config?.nearbyResources) || availableNativeResourceKeys(config).some((k) => TIMBER_STAND.test(k)); } const TIMBER_STAND = /^(managed_forest|shipbuilding_timber|mountain_timber)$/; import { MODERATE_GAP_TWIN, OUTLOOK_HOOK_SIBLINGS } from './outlookHookSiblings.js'; import { liveMaterialFor } from './localMaterials.js'; export { OUTLOOK_HOOK_SIBLINGS }; // LANDING-R2 (ODQ §934.105): the outlook hooks' declared siblings moved verbatim to economy/outlookHookSiblings.js, re-exported; below every cited line, so none moves

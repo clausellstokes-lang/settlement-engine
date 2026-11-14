@@ -1,0 +1,27 @@
+commit e20a60e0d36b1163ee6b606e827831656201962e
+subject join(JOIN-1 · 3): merge lane/r2-code-a-2026-11-13 at c77bd5d57
+parents 64fe60ead14221f1f6b665fe9d2ee7be05527f11 c77bd5d57692b30ac6325b823a1e3cb4091ca912
+
+diff --git a/tests/lint/proseWiringCensus.walker.test.js b/tests/lint/proseWiringCensus.walker.test.js
+remerge CONFLICT (content): Merge conflict in tests/lint/proseWiringCensus.walker.test.js
+index 3ab067535..807afc880 100644
+--- a/tests/lint/proseWiringCensus.walker.test.js
++++ b/tests/lint/proseWiringCensus.walker.test.js
+@@ -1785,17 +1785,10 @@ describe('car 0f — the ALIAS DRAFT: measured, nothing ratified, no leaf writte
+     // beside a `stress` write gain a generator-write row (historyEventStrands.js:42, npcGenerator.js:176, :791). ⚠ FINDINGS,
+     // NOT JOINS, like the two rows above; the identifier (ratified) rows are unchanged at three.
+     // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6 (+8 pools, +19 variants): 9 -> 10.
+-<<<<<<< 64fe60ead (join(JOIN-1 · 2): merge lane/r3-tabs-2026-11-13 at 5efbfde7e)
+     expect(draft.rows.length, 'candidate rows at this tip, docblock withdrawn').toBe(14); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted). // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (9 -> 14) // MERGE-WAVE at the W3 POW merge: both lanes' deltas composed (9 -> 15) // MERGE-WAVE at the W3 POW merge (2026-11-08): measured at the merged tip — 14: W3 POW's new candidate is one the W1/W2 side already proposes, so it counts once (additive would be 15)
+     expect(draft.endpointsWithCandidate, 'endpoints with at least one candidate').toBe(4);
+     expect(draft.noCandidate.length, 'and the wiring debt the SEAM and WAVE trains inherit').toBe(85);
+     expect(draft.docblockReports.length, 'the withdrawn candidates, reported and never proposed').toBe(39); // COHERENCE-AGREE (2026-11-11): 36 -> 37, one docblock of the lane's that names an endpoint token, re-measured at its tip; reported, never proposed // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted). // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 28 -> 29 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 29 -> 34 // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (28 -> 35) // W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants) // MERGE-WAVE at the W4 PEOPLE merge: both lanes' deltas composed (28 -> 36) // R3-TABS L2 (f0adcd83a, re-keyed by R3-TABS-2): the within-the-bar disqualifiers' docblocks name two endpoint tokens; reported, never proposed: 37 -> 39.
+-=======
+-    expect(draft.rows.length, 'candidate rows at this tip, docblock withdrawn').toBe(19); // R2-CODE-A-8 (2026-11-14), RE-KEYED BY IDENTITY with its cause, 14 -> 19 (measured: the draft's rows at e969a75b7 and at this lane's tip): R2-CODE-A-4's caad6db0e (round two #215, ww-475) passes `siege:`, `tier`, `hasFoodImport` (foodBalance) and `isolationSupport` (_config) on ONE line, src/generators/narrativeGenerator.js:804, so `condition:siege` gains five generator-write rows there, read roots foodBalance, readings.tier, settlement.config, settlement.isolationSupport, settlement.tier; nothing else entered or left. ⚠ FINDINGS, NOT JOINS, like the rows below: the keys build a pool's admission context, not a write of world state; the identifier (ratified) rows are unchanged at three. // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted). // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (9 -> 14) // MERGE-WAVE at the W3 POW merge: both lanes' deltas composed (9 -> 15) // MERGE-WAVE at the W3 POW merge (2026-11-08): measured at the merged tip — 14: W3 POW's new candidate is one the W1/W2 side already proposes, so it counts once (additive would be 15)
+-    expect(draft.endpointsWithCandidate, 'endpoints with at least one candidate').toBe(5); // R2-CODE-A-8: 4 -> 5, `condition:siege` (the five rows of caad6db0e above)
+-    expect(draft.noCandidate.length, 'and the wiring debt the SEAM and WAVE trains inherit').toBe(84); // R2-CODE-A-8: 85 -> 84, the same endpoint answered (89 in all, unchanged)
+-    expect(draft.docblockReports.length, 'the withdrawn candidates, reported and never proposed').toBe(37); // COHERENCE-AGREE (2026-11-11): 36 -> 37, one docblock of the lane's that names an endpoint token, re-measured at its tip; reported, never proposed // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted). // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 28 -> 29 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 29 -> 34 // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (28 -> 35) // W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants) // MERGE-WAVE at the W4 PEOPLE merge: both lanes' deltas composed (28 -> 36)
+->>>>>>> c77bd5d57 (test(R2-CODE-A-9, the close's lighting census): the census re-taken by its ritual on the clean committed tree at 1b43907d1)
+     expect(draft.rows.every((r) => r.evidence !== 'docblock'), 'no row rests on a comment').toBe(true);
+     // ⭐ `generator-write` IS AN AST READING NOW (SITTING §P.2-27, cure: the fold's R6). Five of
+     // the nine citations the first cut carried were not writes of world state at all — a

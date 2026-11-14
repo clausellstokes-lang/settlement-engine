@@ -27,9 +27,9 @@
   {"thing": "docks", "path": ".economicState.tradeDependencies[].detail", "text": "harbour", "reason": "hedge", "note": "\"crossroads or harbour\", \"Trade access + harbour\": the alternative stated", "towns": 6},
   {"thing": "docks", "path": ".economicState.tradeDependencies[].resource", "text": "harbour", "reason": "hedge", "note": "\"crossroads or harbour\", \"Trade access + harbour\": the alternative stated", "towns": 6},
   {"thing": "docks", "path": ".economicViability.warnings[].description", "text": "Trade access + harbour", "reason": "hedge", "note": "the builder's dependency label: an alternative stated", "towns": 6},
+  {"thing": "docks", "path": ".institutions[].desc", "text": "by road or harbour", "reason": "hedge", "note": "\"by road or harbour\": the sentence states the alternative", "towns": 22},
   {"thing": "garrison", "path": ".institutions[].desc", "text": "garrison contracts", "reason": "figure", "note": "the hire company's trade, wherever it is hired", "towns": 5},
   {"thing": "garrison", "path": ".institutions[].desc", "text": "garrison work", "reason": "figure", "note": "the hire company's trade, wherever it is hired", "towns": 5},
-  {"thing": "market", "path": ".history.founding.reason", "text": "grew as an agricultural market center", "reason": "past", "note": "the founding: a past event", "towns": 1},
   {"thing": "market", "path": ".history.founding.reason", "text": "on the open market", "reason": "figure", "note": "\"the open market\": trade at large", "towns": 1},
   {"thing": "market", "path": ".institutions[].desc", "text": "game at market", "reason": "figure", "note": "\"at market\": to sell, wherever the selling is", "towns": 1},
   {"thing": "market", "path": ".institutions[].desc", "text": "game to market", "reason": "figure", "note": "\"to market\": to sell, wherever the selling is", "towns": 1},
@@ -42,7 +42,7 @@
   {"thing": "mercenary", "path": ".institutions[].desc", "text": "retired soldiers and sellswords", "reason": "past", "note": "retired: their service is past", "towns": 12},
   {"thing": "mercenary", "path": ".powerStructure.recentConflict", "text": "whether to raise a levy or hire mercenaries", "reason": "hedge", "note": "\"whether to … hire\": not yet hired", "towns": 5},
   {"thing": "mercenary", "path": ".pressureSentence", "text": "whether to raise a levy or hire mercenaries", "reason": "hedge", "note": "\"whether to … hire\": not yet hired", "towns": 2},
-  {"thing": "walls", "path": ".history.historicalEvents[].plotHooks[]", "text": "sealed inside the walls during construction", "reason": "past", "note": "a past event", "towns": 5},
+  {"thing": "walls", "path": ".institutions[].desc", "text": "walls and churches of half the region", "reason": "hedge", "note": "the region's walls, not this town's", "towns": 7},
   {"thing": "walls", "path": ".npcs[].presentation.impression", "text": "The walls are covered with charts", "reason": "ruling-3", "note": "a room's walls, not the perimeter", "towns": 8},
   {"thing": "walls", "path": ".npcs[].secret.what", "text": "the walls built with them crumble", "reason": "ruling-3", "note": "the walls of any building, not the perimeter", "towns": 6},
   {"thing": "war", "path": ".history.currentTensions[].lastingEffects[]", "text": "Wartime property seizures remain legally unresolved", "reason": "past", "note": "the seizures were made in a past war", "towns": 11},
@@ -184,8 +184,6 @@
   "src/data/dossierStateProse/defense.generated.js": [
    ["court", "after-release", "You can see the courthouse and the gaol at {settlement} from the street, and the town means you to.", "f8aa86f5bf0ee11e"],
    ["docks", "after-release", "{settlement} has a harbour and nothing to hold it with; any vessel that wants the sea approaches has them.", "eb0eee027c212b6b"],
-   ["docks", "after-release", "You can sail into {settlement} unchallenged; nobody watches the harbour mouth.", "2d673ab17c0d8143"],
-   ["garrison", "after-release", "{settlement}'s garrison roll puts paid soldiers on every stretch of its walls, so raiders stay away and an army would pa", "a0136f7c15a9f92d"],
    ["garrison", "after-release", "DS-DEF-2: `Defense › Threat assessment (the five readiness rows)` · `defenseProfile.scores{monster,military,internal,eco", "8d9663583bb57c49"],
    ["garrison", "after-release", "DS-DEF-5: `Defense › Armed forces & fortifications` · `defenseProfile.institutions{walls,garrison,militia,watch,mercenar", "7f7529058e384742"],
    ["granary", "after-release", "Ask for the granary or the sick-house at {settlement} and you are pointed to neither, because there is neither.", "ac07b87933b446f4"],
@@ -200,7 +198,6 @@
    ["walls", "after-release", "Every household at {settlement} would send someone to the walls, and everyone knows that townsfolk with spears are no tr", "6af29cfae6de5a07"],
    ["walls", "after-release", "People at {settlement} believe the town could be held, and the soldiers on the walls give them good reason to.", "864d9e085885d1df"],
    ["walls", "after-release", "The walls and townsfolk of {settlement} would see off a raid but not a proper army, and nothing now under way will chang", "e64ad924e931e344"],
-   ["walls", "after-release", "There is very little in the country around {settlement} and there are substantial works facing it; whatever the walls he", "a12468ac1fa571ee"],
    ["war", "after-release", "{settlement} has given up several ordinary things for the war, and nobody mentions them any more.", "cbde99872c85fe3c"],
    ["war", "after-release", "{settlement} has given up several ordinary things for the war, and people have stopped remarking on it.", "62baacc6d771d489"],
    ["war", "after-release", "{settlement} is on a war footing: what it makes, what it stores and who is free to work are all decided by the war.", "29372bb93f5927af"],
@@ -211,7 +208,6 @@
    ["watch", "after-release", "There is very little street violence at {settlement}, and the watch is not the reason: the people who run the town's cri", "2d56d73ea40967d1"]
   ],
   "src/data/dossierStateProse/economy.generated.js": [
-   ["market", "after-release", "{settlement} sends several different goods out to market; if one trade fails, the others still go.", "7838162a4de02e4f"],
    ["market", "after-release", "DS-ECO-10: LADDER › export posture, market scarcity, and the freshness caveat · `deriveExportPosture(settlement){status,", "1aa74650a4595043"],
    ["market", "after-release", "DS-ECO-4: Economics › Market Prices · `deriveMarketPrices(...)` → `{exports[], imports[], highlight{label,tag,crierLine}", "992ac6f7fe67a7e0"],
    ["market", "after-release", "Loaded carts leave {settlement} for other markets. The town grows more food than it can eat.", "403415e3b52b4019"],
@@ -234,7 +230,6 @@
    ["market", "after-release", "No guild runs {settlement}'s market: the town's only hold on trade is the stall fee.", "6182a6c3b726a265"],
    ["market", "after-release", "Prices in {settlement} hold steady from one market to the next; the town is not living hand to mouth.", "6e4b0029752e1429"],
    ["market", "after-release", "The market stands where carts always stopped; stalls followed the carts, and {settlement} grew around them.", "c608d0c0609dcc27"],
-   ["market", "after-release", "Visitors find {settlement}'s market without asking; the busiest street through town leads straight to it.", "59c799aae108b099"],
    ["prison", "after-release", "{settlement} is visibly governed: a hall of justice, a gaol, and officers to staff them.", "0efcb879d014c5c9"],
    ["prison", "after-release", "{settlement} keeps its own court and its own gaol, and settles its own quarrels.", "ff40ea8e081673d3"],
    ["temple", "after-release", "{settlement} has an official ruler and a real one: the temple, whose say counts most in the market.", "aba70c0900e464db"]
@@ -319,7 +314,6 @@
    ["watch", "after-release", "Sergeant of the Watch", "0af34cfec1116693"]
   ],
   "src/data/foundingSeeds.js": [
-   ["mill", "after-release", "Grown from a single logging operation whose owner refused to leave when the contract ended, this river town has turned i", "c9742f9f314f8669"],
    ["mill", "after-release", "Its mills still stand among its institutions.", "0eb14d7ce1da4368"],
    ["mill", "after-release", "The Mill That Outlived Its Wars", "ad5e7e637bfe41ef"]
   ],
@@ -536,14 +530,10 @@
   ],
   "src/data/narrativeData.js": [
    ["bank", "after-release", "was founded when a powerful merchant family built a counting house at the junction", "0d200b8e0cbd9952"],
-   ["docks", "after-release", " announces itself beyond the last rise: masts above the roofs, gulls wheeling over the quays, and salt bright in the air", "d8038670e7e5820e"],
-   ["docks", "after-release", "'s harbour before you see it: rigging knocking against masts, dock crews calling cargo tallies, and surf working against", "4cc4370b42f2514d"],
-   ["docks", "after-release", "The harbour at ", "01f9ab971382c90a"],
    ["docks", "after-release", "was established to exploit the natural harbour", "89ef9cf90e50859c"],
    ["market", "after-release", " against a tide of people leaving it. The market has ended for the day, and the settlement is exhaling its visitors back", "ecde53e76c116b24"],
    ["market", "after-release", "'s market day has the comfortable chaos of something that has been happening in the same place for a long time and has w", "ed5262a969858209"],
    ["market", "after-release", "grew as an agricultural market center", "2270c7558c955a85"],
-   ["market", "after-release", "The founders built a place to trade. Now the army takes what the market used to sell.", "ed1de8047c7fcbf9"],
    ["market", "after-release", "The market at ", "09a0d77ee957a22f"],
    ["market", "after-release", "was established as a market town where merchants could meet", "d1a44dd8a765360e"],
    ["mill", "after-release", "began as a riverside mill settlement", "a70845241c46c424"],
@@ -623,8 +613,7 @@
    ["market", "after-release", "The Market Guild", "e896137f7db911ab"]
   ],
   "src/data/powerSiblings.js": [
-   ["temple", "after-release", "The church wants approval rights over market day activities. The village reeve disagrees.", "e836596fd75d7b87"],
-   ["temple", "after-release", "The church wants approval rights over who may trade and when. The village reeve disagrees.", "34d22323ae3f4ba7"]
+   ["temple", "after-release", "The church wants approval rights over market day activities. The village reeve disagrees.", "e836596fd75d7b87"]
   ],
   "src/data/resourceData.js": [
    ["bank", "after-release", "Silver, gold, or copper deposits; attracts merchants and banking infrastructure", "09d73cd2d1fd589c"],
@@ -784,9 +773,7 @@
    ["market", "after-release", "Trade is what this settlement lives on. The markets are busy at all hours, and the guilds have a hand in every craft.", "a217ca67520254b0"]
   ],
   "src/generators/economy/viability.js": [
-   ["bank", "after-release", "Banking institutions exist but the economy priority is very low.", "794bb23543dd590c"],
    ["bank", "after-release", "Banking Without Economic Focus", "c0a7c888f796e84d"],
-   ["bank", "after-release", "Raise Economy priority or remove Banking institutions", "507ed54bca42e42b"],
    ["temple", "after-release", "Add a house of worship, a temple or a monastery", "12760e6b967021f0"],
    ["watch", "after-release", "Add Thieves' Guild, Black Market, or City Watch", "653197f17b02acd7"]
   ],
@@ -822,9 +809,6 @@
    ["watch", "after-release", "professional city watch", "4fcdf8d8e07451d2"]
   ],
   "src/generators/narrative/settlementOriginProse.js": [
-   ["docks", "after-release", " and has never had a wharf.", "dbac32fac1dc1414"],
-   ["docks", "after-release", ", and no one has ever built a wharf here.", "eb134e780d04aa97"],
-   ["docks", "after-release", "; ask for the docks and you are told there are none.", "94c6cf9b173a6542"],
    ["docks", "after-release", "A port settlement whose wharves and navigable water define its trade.", "be7dd9778ae8e3d8"],
    ["docks", "after-release", "A port: the wharves are why the place exists, and everything else grew up behind them.", "1e8ca35c59011c1f"],
    ["docks", "after-release", "A river port built around navigable inland water; barges, wharves, and seasonal river traffic shape its economy.", "c654f46293b19687"],
@@ -840,7 +824,6 @@
    ["market", "after-release", "grew around a sheep run whose owner had the rare good sense to also build a mill and a market", "5ce058a24e9fc77b"],
    ["market", "after-release", "The market stalls near the gate are attended by people who seem more interested in watching the street than selling.", "ee5896f82bbd47f2"],
    ["mercenary", "after-release", "the mercenary company", "8a88361744c9d8e8"],
-   ["mill", "after-release", "a miller who built a mill and found customers before they found customers", "dd41b715e7948d26"],
    ["mill", "after-release", "grew around a sheep run whose owner had the rare good sense to also build a mill and a market", "5ce058a24e9fc77b"],
    ["temple", "after-release", "began when quarry workers sent to extract stone for a distant cathedral decided the site was worth keeping for themselve", "865f6b58bf2e29b9"]
   ],
@@ -848,7 +831,6 @@
    ["granary", "after-release", "The settlement keeps more in reserve than its size explains: granaries a little too large, stores a little too deep.", "18800481eb742132"],
    ["granary", "after-release", "The settlement keeps more in reserve than its size explains: granaries a little too large, walls a little too strong.", "b443347f937904fb"],
    ["militia", "after-release", " is why this settlement has walls where others do not, why the militia drills when other villages have forgotten how, an", "60cc62a9c7e7172c"],
-   ["war", "after-release", " could spare, and several it could not, has gone to the war; what remains is losing people and resources by attrition (a", "b141cb1fd92f9a6f"],
    ["war", "after-release", " is at war and, for now, on the right side of it: contracts are flowing, the garrison is reinforced, and the crown is pa", "477f2721e5d2d6ad"],
    ["war", "after-release", " is prospering on the right side of it: full warehouses, a reinforced garrison, coin moving fast, and all of it lost if ", "65cf322223134a9b"],
    ["war", "after-release", " trade has never paid better, and the place now needs the war to go on to pay for what the war has already cost it.", "43b91f14a98deff6"],
@@ -980,7 +962,6 @@
   ],
   "src/generators/structuralValidator.js": [
    ["docks", "after-release", "A river settlement should exploit its water access: mills, docks, or fishmongers.", "42b0b9c83c65fd57"],
-   ["garrison", "after-release", "/100. Infrastructure exists on paper but this level of underfunding means the defences are barely maintained and the gar", "56b5ca09a750dc85"],
    ["garrison", "after-release", "A garrison without walls is untenable in an embattled region. Defenders have nowhere to make a stand.", "41ae8eb216e3d279"],
    ["garrison", "after-release", "A metropolis requires multiple garrisons or a professional guard force of hundreds. A single garrison cannot secure a ci", "f2c6f010c53fdd20"],
    ["garrison", "after-release", "Embattled region with no military force. Walls without defenders are a convenient funnel. A garrison, militia, or mercen", "3f2a2ef94ca3d2f0"],

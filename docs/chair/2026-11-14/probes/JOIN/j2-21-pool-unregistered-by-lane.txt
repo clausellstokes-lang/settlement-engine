@@ -1,0 +1,44 @@
+unregistered before the tighten (43), and the lane tips whose register carries each:
+powers-follow-up	ledger:NPC_STRUCTURE.criminal__stable__dominant
+powers-follow-up	ledger:NPC_STRUCTURE.magic__corruption__dominant
+powers-follow-up	ledger:NPC_STRUCTURE.magic__economic_stress__dominant
+powers-follow-up	ledger:NPC_STRUCTURE.magic__governance_fractured__dominant
+powers-follow-up	ledger:NPC_STRUCTURE.magic__stable__dominant
+powers-follow-up	ledger:NPC_STRUCTURE.other__corruption__dominant
+NO-LANE-TIP	ledger:cultureProfiles:arabic.foodways
+NO-LANE-TIP	ledger:cultureProfiles:celtic.foodways
+NO-LANE-TIP	ledger:cultureProfiles:east_asian.foodways
+NO-LANE-TIP	ledger:cultureProfiles:germanic.foodways
+NO-LANE-TIP	ledger:cultureProfiles:greek.foodways
+NO-LANE-TIP	ledger:cultureProfiles:latin.foodways
+NO-LANE-TIP	ledger:cultureProfiles:mesoamerican.foodways
+NO-LANE-TIP	ledger:cultureProfiles:norse.foodways
+NO-LANE-TIP	ledger:cultureProfiles:slavic.foodways
+NO-LANE-TIP	ledger:cultureProfiles:south_asian.foodways
+NO-LANE-TIP	ledger:cultureProfiles:steppe.foodways
+w2-fix-data	ledger:historyData:HISTORY_DESC_SIBLINGS
+w2-fix-data	ledger:historyData:HISTORY_QUARTER_WORDS
+w2-fix-data	ledger:historyData:HISTORY_SMALL_PLACE_WORDS
+w2-fix-data	ledger:institutionDescVariants:city|Defense|Mercenary quarter
+w2-fix-data	ledger:institutionDescVariants:city|Economy|Customs house
+w2-fix-data	ledger:institutionDescVariants:city|Economy|Fish market
+w2-fix-data	ledger:institutionDescVariants:city|Economy|Pawnbroker
+w2-fix-data	ledger:institutionDescVariants:city|Economy|Toll bridge
+w2-fix-data	ledger:institutionDescVariants:hamlet|Crafts|Maltster
+w2-fix-data	ledger:institutionDescVariants:metropolis|Defense|Mercenary quarter
+w2-fix-data	ledger:institutionDescVariants:metropolis|Economy|Customs house
+w2-fix-data	ledger:institutionDescVariants:metropolis|Economy|Fish market
+w2-fix-data	ledger:institutionDescVariants:metropolis|Economy|Pawnbroker
+w2-fix-data	ledger:institutionDescVariants:metropolis|Economy|Toll bridge
+w2-fix-data	ledger:institutionDescVariants:thorp|Religious|Burial ground
+w2-fix-data	ledger:institutionDescVariants:town|Defense|Town watch
+w2-fix-data	ledger:institutionDescVariants:town|Economy|Annual fair
+w2-fix-data	ledger:institutionDescVariants:town|Economy|Customs house
+w2-fix-data	ledger:institutionDescVariants:town|Economy|Fish market
+w2-fix-data	ledger:institutionDescVariants:town|Economy|Pawnbroker
+w2-fix-data	ledger:institutionDescVariants:town|Economy|Toll bridge
+w2-fix-data	ledger:institutionDescVariants:town|Economy|Town granary
+w2-fix-data	ledger:institutionDescVariants:village|Crafts|Brewer
+w2-fix-data	ledger:institutionDescVariants:village|Crafts|Maltster
+w2-fix-data	ledger:institutionDescVariants:village|Economy|Toll bridge
+w2-fix-data	ledger:stressTypes:STRESS_TYPE_SIBLINGS

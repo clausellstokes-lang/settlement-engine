@@ -103,6 +103,7 @@ export const DECLARATION_CHANNELS = Object.freeze([
   { module: 'src/domain/threatProfile.js', name: 'THREAT_TEXT_SIBLINGS', kind: 'siblings' },
   { module: 'src/generators/economy/foodBalance.js', name: 'OUTLOOK_HOOK_SIBLINGS', kind: 'siblings' },
   { module: 'src/generators/economy/incomeLineSiblings.js', name: 'INCOME_LINE_SIBLINGS', kind: 'siblings' }, // COHERENCE-AGREE-3: the income lines on the town's own land
+  { module: 'src/generators/economy/incomeLineSiblings.js', name: 'INCOME_STATE_SIBLINGS', kind: 'siblings' }, // UPKEEP-8: the income lines the finished record makes true (the round-three cut)
   { module: 'src/generators/economy/prosperity.js', name: 'PROSPERITY_LINE_SIBLINGS', kind: 'siblings' }, // COHERENCE-AGREE: the market lines' twins
   { module: 'src/generators/foodLand.js', name: 'FOOD_RECORD_LINE_SIBLINGS', kind: 'siblings' }, // COHERENCE-AGREE-3: the diversity line's own-plots twin
   { module: 'src/generators/narrativeText.js', name: 'POLITICAL_FLAVOR_SIBLINGS', kind: 'siblings' },
@@ -116,6 +117,7 @@ export const NOT_TABLE_CHANNELS = Object.freeze({
   DOSSIER_CONNECTIVE_DECLARATIONS: 'a list PARALLEL to each connective list, read by position (CENSUS-1h unit 7); the connectives are state-corpus joints, not an enrolled table',
   FIELD_DECLARATIONS: 'the edit cards\' field declarations (domain/edit), not prose',
   TENSION_TEMPLATE_DECLARATIONS: 'keyed by the tension template\'s TYPE beside the selection (CENSUS-1g unit 4); the history templates are not an enrolled table',
+  TITLE_LINE_DECLARATIONS: 'the card titles\' secret and presentation lines, keyed by SURFACE then text (COHERENCE-POWERS-7 D, POWERS-9: water needs and the governed content topics), read by people/poolMap.js :: settleTitleLines; the title tables (TITLE_SECRETS, TITLE_PRESENTATIONS) are not an enrolled table',
   // W2-FIX-DATA-6, by the same ruling's test: no row of it prints (a template's needs / excludes / timeline flag, no text);
   // keyed by TYPE like TENSION_TEMPLATE_DECLARATIONS, and the templates' printed text is not an enrolled table.
   HISTORY_TEMPLATE_RECORD_DECLARATIONS: 'keyed by the history template\'s TYPE beside the selection (W2-FIX-DATA-2 dde3b1277, W2-FIX-DATA-5 dabdb6061): declarations only, no row of it prints; the history templates are not an enrolled table',

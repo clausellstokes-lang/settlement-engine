@@ -27,7 +27,8 @@
  *                            mills", "the smuggling network"); never possessive, never the subject
  *                            of a verb that must agree in number ("the mills" / "the brewery").
  *   {guild}                  `allegiance.power` as printed, else `allegiance.house` as a house.
- *   {chain}                  the chain's label as printed ("Grain & Bread", "Faith & Worship").
+ *   ({chain} is STRUCK, POWERS-9: a chain's label is a catalogue name, "Grain & Bread", "Food Processing"; the
+ *   SUPPLY lines name the work through {house}, "the work at {house}", the house's own display noun.)
  *   {resource}               the house's trade dependency, as goods with NO article (a mass noun:
  *                            "grain", "iron and fuel"), lower-cased, "+" read as "and"; a
  *                            dependency on trade access alone fills nothing, and its lines are
@@ -48,7 +49,10 @@
  * ── `needs` (CENSUS-4c R-C) ──
  * A line that presumes a town fact its family's support gate does not guarantee declares it in
  * place, in the fact vocabulary's atoms (`src/domain/facts/factVocabulary.js`):
- * `{ line: '…', needs: ['market'] }`. A bare string declares nothing.
+ * `{ line: '…', needs: ['market'] }`. A bare string declares nothing. A line whose words fail under a crisis in force
+ * declares it on its `excludes` side (POWERS-9, the chair's ruling: a goal that presumes buying, hiring, laying in stores
+ * or trade by road is not dealt under a siege, nor under a famine where its own words fail):
+ * `{ line: '…', excludes: ['crisis: siege'] }`.
  *
  * Pure data: no closures, no imports, no randomness.
  *
@@ -63,7 +67,7 @@ export const GOAL_SLOTS = Object.freeze({
   RANK: Object.freeze(['power', 'above', 'below']),
   POWER: Object.freeze(['power', 'rival', 'issue']),
   INSTITUTION: Object.freeze(['house', 'otherHouse']),
-  SUPPLY: Object.freeze(['chain', 'resource', 'import', 'house']),
+  SUPPLY: Object.freeze(['resource', 'import', 'house']),
   TIES: Object.freeze(['other']),
   PERSONALITY: Object.freeze(['flaw', 'dominant', 'modifier']),
   ALLEGIANCE: Object.freeze(['guild', 'handler', 'front', 'agent', 'target', 'targetHouse']),
@@ -79,6 +83,7 @@ export const GOAL_SLOTS_STRUCK = Object.freeze({
   SUPPLY: Object.freeze({
     status: 'machinery words (vulnerable, impaired, entrepot, magically_sustained); the sub-kind says which',
     route: 'the isolation receipt holds path keys (local_foodshed, seasonal_access, reserves, patronage), not a route a player names',
+    chain: 'a chain\'s label is a catalogue name ("Grain & Bread", "Food Processing", "Iron & Metalwork"), never a slot\'s words (POWERS-9, the chair\'s ruling: no slot prints a catalogue or a chain label); the lines name the work through {house}',
   }),
   TIES: Object.freeze({ kind: 'the tie type is the sub-kind; its label ("Mutual Leverage", "Outstanding Debt") is a card label, not a goal word' }),
   ALLEGIANCE: Object.freeze({ season: 'no season field at birth (the fact vocabulary has no season atom, ruling 8); the WARRANT lines are written without it' }),
@@ -89,7 +94,7 @@ export const GOAL_SUBKIND_SLOTS = Object.freeze({
   RANK: Object.freeze({ climb: ['power', 'above'], defend: ['power', 'below'], enter: ['power'] }),
   POWER: Object.freeze({ tense: ['power', 'rival'], competitive: ['power', 'rival'], corrupted: ['power', 'rival'], conflict: ['power', 'rival', 'issue'] }),
   INSTITUTION: Object.freeze({ solvency: ['house'], rebuilding: ['house'], charter: ['house'], takeover: ['house', 'otherHouse'] }),
-  SUPPLY: Object.freeze({ impaired: ['chain', 'house'], dependency: ['resource', 'house'], isolation: ['import'], expansion: ['chain', 'house'] }),
+  SUPPLY: Object.freeze({ impaired: ['house'], dependency: ['resource', 'house'], isolation: ['import'], expansion: ['house'] }),
   TIES: Object.freeze({ rival_enemy: ['other'], debtor: ['other'], creditor: ['other'], ally: ['other'], family: ['other'], mentor_student: ['other'] }),
   PERSONALITY: Object.freeze(Object.fromEntries(['greed', 'hunger_for_status', 'fear', 'forbidden_patron', 'duty', 'kindness', 'mastery', 'caution', 'conviction', 'sway', 'grudge', 'impulse']
     .map((k) => [k, Object.freeze(['flaw', 'dominant', 'modifier'])]))),
@@ -176,7 +181,7 @@ export const TIE_TYPE_TO_GOAL_SUBKIND = Object.freeze({
   mentor_student: Object.freeze({ from: 'mentor_student', to: 'mentor_student' }),
 });
 
-const cell = (lines) => Object.freeze(lines.map((l) => (typeof l === 'string' ? l : Object.freeze({ line: l.line, needs: Object.freeze([...l.needs]) }))));
+const cell = (lines) => Object.freeze(lines.map((l) => (typeof l === 'string' ? l : Object.freeze({ line: l.line, needs: Object.freeze([...(l.needs || [])]), ...(l.excludes ? { excludes: Object.freeze([...l.excludes]) } : {}) }))));
 
 /**
  * THE LINES. `GOAL_FAMILY_LINES[family][subKind][vantage]` → the variants (a string, or
@@ -406,28 +411,28 @@ export const GOAL_FAMILY_LINES = Object.freeze({
     // the card's house processes a chain whose status is impaired
     impaired: Object.freeze({
       short: cell([
-        'Find a new source of supply for {chain} before the stores run out.',
-        'Keep {chain} going at {house} through the season, whatever it takes.',
-        'Bring in from outside what {chain} can no longer get close to home.',
-        'Ration what is left for {chain} so the work lasts until new supply arrives.',
-        'Find whoever can still supply {chain}, and pay them what they ask.',
-        'Waste nothing in {chain} while the supply is short.',
+        { line: 'Find a new source of supply for the work at {house} before what is left runs out.', excludes: ['crisis: siege'] },
+        'Keep the work going at {house} through the season, whatever it takes.',
+        { line: 'Bring in from outside what the work at {house} can no longer get close to home.', excludes: ['crisis: siege'] },
+        'Ration what is left at {house} so the work lasts until new supply arrives.',
+        { line: 'Find whoever can still supply {house}, and pay them what they ask.', excludes: ['crisis: siege'] },
+        'Waste nothing at {house} while the supply is short.',
       ]),
       long: cell([
-        'Make {chain} safe from the next shortage, with more than one source for every need.',
-        'Find a lasting replacement for what {chain} lost in the shortage.',
-        'Build up stores large enough that {chain} never stops for lack of supply again.',
-        'Restore {chain} to full work, and keep it there.',
-        'Be the one who kept {chain} alive through the shortage.',
-        'Change how {chain} works so it needs less of what keeps running short.',
+        'Make the work at {house} safe from the next shortage, with more than one source for every need.',
+        'Find a lasting replacement for what the work at {house} lost in the shortage.',
+        'Build up stores large enough that the work at {house} never stops for lack of supply again.',
+        'Bring the work at {house} back to its full strength, and keep it there.',
+        'Be the one who kept the work at {house} alive through the shortage.',
+        'Change the way the work is done at {house}, so it needs less of what keeps running short.',
       ]),
     }),
     // the card's house has a trade dependency on {resource}
     dependency: Object.freeze({
       short: cell([
-        'Find a second supplier of {resource}, so one lost cart cannot stop the work at {house}.',
-        'Lay in a season of {resource} at {house} while it can still be had.',
-        { line: 'Buy {resource} at the market in bulk this season, while the price is still fair.', needs: ['market'] },
+        { line: 'Find a second supplier of {resource}, so one lost cart cannot stop the work at {house}.', excludes: ['crisis: siege'] },
+        { line: 'Lay in a season of {resource} at {house} while it can still be had.', excludes: ['crisis: siege'] },
+        { line: 'Buy {resource} at the market in bulk this season, while the price is still fair.', needs: ['market'], excludes: ['crisis: siege'] },
         'Learn who controls the supply of {resource}, and get on good terms with them.',
         'Keep {house} working through the season even if the supply of {resource} should fail.',
         'Find a way to make do with less {resource} at {house}.',
@@ -463,19 +468,19 @@ export const GOAL_FAMILY_LINES = Object.freeze({
     // the card's house processes a running or operational chain
     expansion: Object.freeze({
       short: cell([
-        'Take on more hands for {chain} at {house}, and keep them busy all season.',
-        'Win new business for {house} beyond the people who already come.',
-        'Get the most out of {chain} while it runs well, and put the gains by.',
-        'Grow the work at {house} by one more pair of hands, then another.',
+        { line: 'Take on more hands at {house}, and keep them busy all season.', excludes: ['crisis: siege', 'crisis: famine'] },
+        { line: 'Win new business for {house} beyond the people who already come.', excludes: ['crisis: siege'] },
+        { line: 'Get the most out of the work at {house} while it runs well, and put the gains by.', excludes: ['crisis: siege', 'crisis: famine'] },
+        { line: 'Grow the work at {house} by one more pair of hands, then another.', excludes: ['crisis: siege', 'crisis: famine'] },
         'Train an apprentice at {house} to take on part of the work.',
-        'Look for a way to do more for {chain} with the same hands.',
+        'Look for a way to do more at {house} with the same hands.',
       ]),
       long: cell([
-        'Make {chain} the thing this place is known for.',
+        'Make the work at {house} the thing this place is known for.',
         'Grow the work at {house} until no one nearby can match it.',
         'Carry the name of {house} beyond this place, so people come from far off for the work done there.',
-        'Build {chain} into a trade that will feed the next generation here.',
-        'Bring every step of {chain} under the roof of {house}.',
+        'Build the work at {house} into a trade that will feed the next generation here.',
+        'Bring every step of the trade, from the first goods to the last, under the roof of {house}.',
         'Double the work at {house}, and find the hands to do it.',
       ]),
     }),

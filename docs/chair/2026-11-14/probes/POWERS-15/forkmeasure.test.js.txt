@@ -1,0 +1,854 @@
+/**
+ * generationForkCensus.test.js — EM-P2's CENSUS BY EXECUTION.
+ *
+ * The register at src/domain/generation/generationForkRegistry.js declares what generation's
+ * 72 `(step, key)` pairs DO (75 until GS-2 retired three, 2026-10-31). This file measures the same things by RUNNING the pipeline and
+ * holds the declaration equal to the measurement. On any difference the arm builds the fresh
+ * literal as the exact source text of the declaration, PRINTS it, and FAILS — it writes no
+ * file and takes no update flag (§6.7, STOP-10). A census that rewrites its own baseline
+ * proves nothing.
+ *
+ * ⛔ THE FIRST ARM IS THE INSTRUMENT'S OWN CONTROL, AND IT IS A STOP — NOT A HOPE. Two module
+ * mocks live here. If they do not reach the generator graph the census cannot lie loudly, it
+ * lies QUIETLY: `total mints` reads 4 instead of 35 while every other control stays green,
+ * which is exactly what the pre-proof's negative control produced. A1 therefore runs before a
+ * line of literal is read, and if it reds the lane writes the STOP with the numbers it saw. It
+ * does NOT touch vite.config.js, a setupFiles entry or any shared vitest configuration: the
+ * shared-config fallback is a chair act, never a packet step (chair ruling, 2026-09-19).
+ *
+ * ⛔ THE FORK RE-IMPLEMENTATION IS THE LOAD-BEARING PART OF THE MINT MOCK, and the estate has
+ * the lesson written down already at tests/property/advanceEpochDormancyFence.test.js:77-82:
+ * "wrapping a function in its OWN module's namespace counts ZERO when the caller invokes it
+ * intra-module, because the internal binding stays the original." `src/kernel/prng.js :: fork` IS
+ * such a caller, so a naive wrapper is blind to 31 of 35 mints. The cure is exact rather than
+ * approximate: `fork(label)` is DEFINED as `createPRNG` over a derived seed, so routing it
+ * through the wrapper yields the same seed string and therefore the same stream, byte for
+ * byte, and counts it. The equivalence is PINNED by A1's source assertion on prng.js :: fork — the
+ * same pin pipelinePinnedMode.test.js A7 already carries — so if that line ever changes, A1
+ * reds before the census can lie.
+ *
+ * ⭐ THE HASH MOCK NEEDS NO RE-IMPLEMENTATION, and the intra-module rule is why: `pickVariant`
+ * has no intra-module caller, so its wrapper is total over its callers; `pickVariant` calls
+ * `fnv1a32` intra-module (proseHash.js:52), so the `fnv1a32` wrapper counts only the module's
+ * EXTERNAL callers. The two censuses are disjoint BY CONSTRUCTION, and nothing is double
+ * counted. That is a property, not a convenience, and A6 asserts it.
+ */
+import { createHash } from 'node:crypto';
+import { readFileSync, writeFileSync } from 'node:fs';
+import { resolve } from 'node:path';
+
+import { describe, expect, it, vi } from 'vitest';
+
+/**
+ * THE RECORDERS. Module-scope consts declared ABOVE the `vi.mock` calls, because a factory
+ * hoists above the imports but RUNS lazily; the modules under test are therefore reached by
+ * `await import(...)` below, which is the shape every precedent in this tree uses.
+ *
+ * Each carries an `on` flag and both are OFF for the classification: 63 rows x 23 runs x ~31
+ * mints is forty-five thousand records the classification does not read.
+ */
+const mintCensus = { rows: [], on: false, actualKeys: [] };
+const hashCensus = { picks: [], hashes: [], on: false, actualKeys: [] };
+
+vi.mock('../../src/kernel/prng.js', async (importOriginal) => {
+  const actual = await importOriginal();
+  mintCensus.actualKeys = Object.keys(actual).sort();
+  const mint = (seed, via) => {
+    const inner = actual.createPRNG(seed);
+    const record = { seed: String(seed), via, calls: 0, forkLabels: [] };
+    if (mintCensus.on) mintCensus.rows.push(record);
+    const out = {};
+    for (const key of Object.keys(inner)) {
+      const value = inner[key];
+      if (typeof value !== 'function') { out[key] = value; continue; }
+      if (key === 'fork') {
+        // NOT `inner.fork(label)`. See THE FORK RE-IMPLEMENTATION in this file's header.
+        out[key] = (label) => {
+          record.forkLabels.push(String(label));
+          return mint(`${seed}::${label}`, 'fork');
+        };
+        continue;
+      }
+      out[key] = (...args) => { record.calls += 1; return value(...args); };
+    }
+    return out;
+  };
+  return { ...actual, createPRNG: (seed) => mint(seed, 'direct') };
+});
+
+vi.mock('../../src/kernel/proseHash.js', async (importOriginal) => {
+  const actual = await importOriginal();
+  hashCensus.actualKeys = Object.keys(actual).sort();
+  return {
+    ...actual,
+    pickVariant: (pool, seed) => {
+      if (hashCensus.on) {
+        hashCensus.picks.push({
+          seed: seed === undefined ? ' undefined' : String(seed),
+          poolLen: Array.isArray(pool) ? pool.length : -1,
+        });
+      }
+      return actual.pickVariant(pool, seed);
+    },
+    fnv1a32: (str) => {
+      if (hashCensus.on) hashCensus.hashes.push(String(str));
+      return actual.fnv1a32(str);
+    },
+  };
+});
+
+const {
+  censusCorpus, classify, emitTier1Literal, instrumentedRoot, runHeadless,
+} = await import('../helpers/generationForkCensus.js');
+const { goldenCorpus, keyOf } = await import('../helpers/goldenMasterCorpus.js');
+const { expectAbsentWithAnchor } = await import('../helpers/anchoredNegatives.js');
+const { generateSettlementPipeline } = await import('../../src/generators/generateSettlementPipeline.js');
+const { getStepMeta, getStepOrder } = await import('../../src/generators/pipeline.js');
+const { pinsFrom, rederive } = await import('../../src/domain/edit/dmLayer.js');
+const { declarationsFor, isEditableCard } = await import('../../src/domain/edit/fieldDeclarations.js');
+const {
+  GENERATION_CENSUS_ROWS, GENERATION_CHANNELS, GENERATION_TIER1, GENERATION_TIER2,
+} = await import('../../src/domain/generation/generationForkRegistry.js');
+const prngModule = await import('../../src/kernel/prng.js');
+const proseHashModule = await import('../../src/kernel/proseHash.js');
+
+const GOLDEN_MANIFEST_PATH = resolve(process.cwd(), 'tests', 'fixtures', 'generator-golden-master.json');
+const PRNG_SOURCE_PATH = resolve(process.cwd(), 'src', 'kernel', 'prng.js');
+/** The manifest row A1 pins, and the hash it carries — both asserted, so neither drifts alone. */
+const GOLDEN_CONTROL_KEY = 'town|germanic|plains|road|civilized|golden-master-v3';
+// 2026-10-01, the urban band (ODQ §934.86): this row's hash moved with the golden master's re-record through the
+// signed door (917834e22); b77b5909... -> 95a3de2d..., read from the committed manifest and re-derived under both mocks.
+// 2026-10-02, the Voice Program wave 2 (ODQ §934.88): the row moved again with the re-record through the signed door
+// (a7202d720); 95a3de2d... -> 8f5da975..., its arrival scene and pressure sentence now drawn from their own streams.
+// Then the Voice Program wave 3 (ODQ §934.88), through the signed door (dc8a022e1): 8f5da975... -> f5f19fea..., the arrival scene
+// composed as a place.
+// Then wave 4 block 1 (6990709a0): f5f19fea... -> 2a837ce5..., the arrival hook naming only what the settlement holds.
+// 2026-10-30, service category fidelity (RS-1..RS-13, ODQ §934.101), through the signed door
+// (docs/shift-records/2026-10-30-service-category-fidelity.json): 2a837ce5... -> e49d32f7..., this town's services
+// filed by the registered categories.
+// 2026-10-31, one faction set (GS-2, ODQ §934.101), through the signed door
+// (docs/shift-records/2026-10-31-one-faction-set.json): e49d32f7... -> 9f94ab28..., this town's factions the power
+// factions and its conflicts the crossing rivalries.
+// 2026-10-31, tension variety (GS-1, ODQ §934.101), through the signed door
+// (docs/shift-records/2026-10-31-tension-variety.json): 9f94ab28... -> 67a3cc18..., this town's tie prose drawn
+// without replacement from eight-variant pools.
+// 2026-11-03, FOOD-1 (ODQ §934.104), through the signed door (docs/shift-records/2026-11-03-food-1-one-food-record.json):
+// 67a3cc18... -> 48f22f18..., this town's food record stored and its prosperity read from it.
+// 2026-11-03, FOOD-2 (ODQ §934.104), through the signed door (docs/shift-records/2026-11-03-food-2-food-base-numbers.json):
+// 48f22f18... -> f0ec823b..., this town's food base read from the one terrain table and its hinterland drawn as supply.
+// 2026-11-03, FOOD-3 (ODQ §934.104), through the signed door (docs/shift-records/2026-11-03-food-3-food-diversity.json):
+// f0ec823b... -> 908c8abd..., this town's food sources, failed source and foodways line stored on its food record.
+// 2026-11-03, DEFENSE-2 roster lines (ODQ §934.104), through the signed door
+// (docs/shift-records/2026-11-03-defense-roster-lines.json): 908c8abd... -> c957dd78..., this town's germanic
+// defence pattern reworded to hold on every roster.
+// 2026-11-03, DEFENSE-2 magic dependency (ODQ §934.104), through the signed door
+// (docs/shift-records/2026-11-03-defense-magic-dependency.json): c957dd78... -> b1b9502a..., this town's defence
+// record storing the one magic reliance reading.
+// 2026-11-04/05, the rung-1 landing (ODQ §934.105), the row moved with fourteen signed records, traced by reading the
+// committed manifest at each record commit (LANDING-6): b1b9502a... -> 2c1412ef X-46 car 1 (960e145e6) -> ea0f0c91 car 2
+// (0710eba4f) -> a0273c9a CRISIS (3d846d379) -> a569067a TERRAIN-POOLS (cd6df0c1e) -> a6dffdf7 SELF-VOUCH (0a5e5494f) ->
+// dc73b260 car 3 (70fac9ff0) -> ddde4e81 SELF-VOUCH I5 (70e58b6df) -> 498c9bda PLACE-NOT-TIER (dd65cb629) -> 40f855d3
+// TRUTH unit D (dfe79d34e) -> eab06b85 car 3 I7 (c099f0a4d) -> 84f03e52 F5 (efae972d4) -> c8942082 F6 (90218b271) ->
+// 57b4e0e1 F1 (81f690f78) -> 0dfd25bc F10 (fb06483e0); record 28 (the V-SUMMARY-HOOKS cure) does not move it.
+// 2026-11-07, the wiring wave's writer lane W0 (ODQ §934.105, R-W7), traced the same way at each record commit: 0dfd25bc
+// held by record 01 (0d440e3a3) -> 02966f46 ONE IMPORT SHARE (098019be7) -> 5598ccec ONE FOOD-SOURCE COUNT (d6d4c49cf) ->
+// 95d0f88a LEGACY ANNOTATIONS DATED (ffacca9e4) -> 27d34617 THE DATE IN ONE HOME (bd55f335e).
+// 2026-11-07, the pool census composed (ODQ §934.105, LANDING-R2), through the signed door: 0dfd25bc... -> b933a9c0... at
+// c488022cf (record docs/shift-records/2026-11-06-rung2-01-census-composed-generator-master.json, 525 of 525 rows, the
+// 33 census causes inside it; the chair's ruled exception). Measured: the committed manifest reads 0dfd25bc at
+// c488022cf^ and b933a9c0 at c488022cf; this row's own lineage mover, 73fa1a1e7 (reader-tonight-wants R11 unit 3), moves
+// it alone (0dfd25bc at its parent 7f0632463, da214b26 at 73fa1a1e7, by editWorldFactResources' row-21 probe).
+// 2026-11-07, the people car's landing (ODQ §934.105, PEOPLE-LAND second seat), traced the same way at each record's
+// golden-master commit: 27d34617 -> 7c4966f8 record 0a, the review-intake lane (2781cc742) -> 5ce7a31b 0b, the W0 merge's
+// composition (5c9a2a171; the base 262e8b255's own produced row) -> 2dc1916f PEOPLE-1 CAST (bea23878e) -> df1f6ff3 PEOPLE-2
+// (053b85375) -> b5f89e1d PEOPLE-3 HOOKS (3d52c0932) -> 4957a2b9 PEOPLE-4 TIES (9cd1f1f1c), held by 5A (61136ab39) ->
+// b58f9562 PEOPLE-5B EDIT (32b625930), held by the shim out (d16a14aaf).
+// 2026-11-08, the integration landing (MERGE-CAR, ODQ §934.105), traced the same way at each record's golden-master
+// commit: b58f9562 (the car's, carried) -> 2432ade0 record A, the rung-2 landing's merge (4e22bb6ad) -> 882e592f record B,
+// the people car's merge (6196cdec8).
+// 2026-11-08, the wave (MERGE-WAVE, ODQ §934.105), traced the same way at each record's golden-master commit: 882e592f
+// holds through record 1 (W1, 9288badee) and record 2 (W2, 35f9a29c6) -> 0bbb38b0 record 3, W3 (9cf847535) -> 7d900165 record 4,
+// W4 (b2ca867ac) -> 38c21132 record 5, W5 (c895df2dc) -> f776c5dd record 6, W7 (7f374ca60), holding through record 7, FOOD
+// (90950a7d8) -> d88f930b record 8, FIX-PUBLIC-VEIL (d8007f696).
+// 2026-11-09, the train (MERGE-TRAIN, ODQ §934.105), traced the same way: d88f930b holds through the wave's record 10
+// (7a33ae253) -> 772bcdc9 record 1, the ALLEGIANCE-CAR1 merge (c88cc75dd; the v3 save migration's schemaVersion 3 and the
+// hidden allegiance re-shape the control row).
+// -> 6f0047b6 record 9, the ALLEGIANCE-CAR4 merge (the goals A9 and item 15's title-secret draw re-deal the control row; taken
+// in record 9's golden-master act, the chair's note (3) of 09:2x).
+// -> f3e83c3c STYLE-2-MERGE record 3, the SW-2 INSTITUTIONS merge (the catalogue law's 80 identity-text swaps reach the control row's
+// institutions; taken in the same act as the golden re-record, the train's note-3 idiom).
+// -> 3818ab12 STYLE-2-MERGE record 9, the SW-B5 FRAMES merge (the safetyProfile frames re-deal the control row's guard and
+// criminal-structure lines; taken in the same act as the golden re-record).
+// -> 3e522ac1 STYLE-2-MERGE record 16, the SW-7 POWER-SIDE merge (the people's dealing lines, secrets and the power cards'
+// sentences re-deal the control row; taken in the same act as the golden re-record).
+// -> 003d51a5 STYLE-2-MERGE record 17, the SW-B1 CONTRADICTIONS merge (the power cards' standing sentences read the power
+// order, P51/P50, and re-deal the control row's faction descriptions; taken in the same act as the golden re-record).
+// -> 5b81ba52 STYLE-2-MERGE record 19, the SW-10 HOOKS merge (the grown person-hook pools re-deal the control row's plot hooks;
+// taken in the same act as the golden re-record).
+// -> b480bb65 STYLE-2-MERGE record 22, the SW-6 CRISIS-SURFACES merge (the crisis cast's reasons and npcStructure's pools re-deal
+// the control row; taken in the same act as the golden re-record).
+// -> 2cbe4731 STYLE-2-MERGE record 24, the SW-8 RENAME-POWERS merge (the retired word leaves the power generators' and cast pools,
+// re-dealing the control row's text; taken in the same act as the golden re-record).
+// -> c876f033 STYLE-2-MERGE record 25, the URBAN-FIX merge (the one foodways line and the receipt re-deal the control row's text;
+// taken in the same act as the golden re-record).
+// -> 4c561fca STYLE-2-MERGE record 43, the COHERENCE-PRESUME merge (the culture lines and the re-titled watch role re-deal the
+// control row's text; taken in the same act as the golden re-record).
+// -> de99d519 STYLE-2-MERGE record 46, the COHERENCE-POWERS merge (the dual hat re-deals the control row's cast, ranks and ties;
+// taken in the same act as the golden re-record).
+// -> f4fc47a0 STYLE-2-MERGE record 47, the COHERENCE-AGREE merge (one fact, one answer: the control row's resource roll, economy and
+// defence read off its own record; taken in the same act as the golden re-record).
+const GOLDEN_CONTROL_HASH = 'f4fc47a0ffe9036b899c2ce86a4fbb071857e321eb222599108adc3f6ccea662';
+/** EM-P0's own pinned-mode row and its chooser keys, re-measured here under the mocks. */
+const PIN_ROW = {
+  settType: 'town', culture: 'germanic', terrainOverride: 'riverside',
+  tradeRouteAccess: 'river', monsterThreat: 'civilized', _seed: 'em-p0-pinned-mode',
+};
+const POPULATION_STEP = 'generatePopulation';
+// GS-2 one faction set (2026-10-31, ODQ §934.101): four -> two; the groups and the conflicts are derived at assembly.
+const CHOOSER_KEYS = ['npcs', 'relationships'];
+// 2026-10-01, the urban band (ODQ §934.86): 315 -> 307 draws on the pin row's unpinned population step (measured; the same
+// figure pipelinePinnedMode's A2 reads as the unpinned total on this row).
+// Then the druid rulings (2026-10-01, ODQ §934.86 addendum 2, J30–J33): 307 -> 310 (measured; pipelinePinnedMode's A2 reads the same 310).
+// Then GS-2 one faction set (2026-10-31, ODQ §934.101): 310 -> 306 (measured; the name picks and the conflict draws left the step).
+// 2026-11-05 (LANDING-6, bisected by first-parent stage): 306 -> 303 X-46 car 3 (90dc22f18), unmoved to the tip (the
+// same figure pipelinePinnedMode's UNPINNED_STEP_DRAWS reads, re-keyed there by LANDING-5).
+// 2026-11-07, the people car's landing (PEOPLE-LAND second seat, bisected by first-parent stage, each stage's own
+// produced manifest in place): 303 -> 885 PEOPLE-1 CAST (dc655f712: one face per face-bearing house, the cast drawn on the
+// step) -> 840 PEOPLE-3 HOOKS (0f930ce95: one hook per card) -> 560 PEOPLE-4 TIES (c7d552370: the pair writer's draws
+// leave the step), unmoved to the tip.
+// RE-KEYED at MERGE-CAR (2026-11-08; the integration side held the base's 303): 560 -> 547, measured by this arm at the
+// merged tree. The car's person-hook draws now run through the rung-2 landing's declared draw (drawDeclared over the
+// census's facts, the held set refusing inside it — MERGE-R2's ruling 2: nothing left, no roll), the composition of
+// silent breaks 1 and 2. PLAUSIBLE, not bisected.
+// RE-KEYED at MERGE-TRAIN record 9 (2026-11-09, the ALLEGIANCE-CAR4 merge, 824a8ce2f): 547 -> 512, measured by this arm at the
+// merged tree (547 at the point-8 tip 8b75f466a): car 4's A9 (03ff59084) retires the population step's goal draw — the goals are
+// dealt at the seam by people/goals.js :: dealGoals — so 35 fewer unpinned draws reach the population stream on this row.
+// RE-KEYED at STYLE-2-MERGE point 46 (2026-11-13, the COHERENCE-POWERS merge 6aeaa4154; a figure its drafted record names for
+// the merge seat, 'generationForkCensus A1'): 512 -> 493, measured by this arm at the merged tree. The pin row's cast loses ONE
+// card, CONFIRMED by generating the row at 358e072ab and at the merge (28 -> 27 cards; the only one gone is npc_town_council,
+// 'the first councillor', the seat's own office face: the dual hat seats the leader from a house, so the office face is not
+// minted). That the 19 draws are all that card's own is PLAUSIBLE (the step is not instrumented per card).
+const POPULATION_UNPINNED_DRAWS = 493;
+/** The row both side channels are censused on (the pre-proof's probe row). */
+const CENSUS_ROW = {
+  settType: 'town', culture: 'germanic', terrainOverride: 'riverside',
+  tradeRouteAccess: 'river', monsterThreat: 'civilized', _seed: 'golden-master-v3',
+};
+/** The seed the mint census sees minted FOUR times, and the vias that convict a blind wrapper. */
+const REPEATED_SEED = `${CENSUS_ROW._seed}::generatePower::power-structure`;
+const REPEATED_VIAS = ['fork', 'direct', 'direct', 'direct'];
+// 2026-10-01, the urban band (ODQ §934.86): 96 -> 107 pickVariant calls on the probe row (+11, measured; the institution
+// registry rebuild changed what the same seed assembles); every call is still a real choice with its own seed.
+// 2026-10-31, tension variety (GS-1, ODQ §934.101): 107 -> 69 pickVariant calls and 6 -> 15 external fnv1a32 calls
+// on the probe row (measured). The tie prose left the pair-hash door: its 19 ties' 38 desc/tension picks now render
+// at a drawn index, and the draw opens one fnv offset per archetype present (9 here) through the external channel.
+// 2026-11-05 (LANDING-6, bisected by first-parent stage with this arm alone): 69 -> 31 X-46 car 3 (90dc22f18, the
+// institution budget: houses only, so the probe town's institution-description picks go 59 -> 21) -> 32 PINS (37b1e746d)
+// -> 31 car 3 I7 (6ca454d2b). NO VARIANT FAMILY IS LOST: the probe row's seeds, read at 79c442330 and at the tip, carry
+// the same five families (institution description, settlement origin, stress note, five history events, three history
+// anchors); only the institution family's population moved.
+const PICK_VARIANT_CALLS = 31;
+// 2026-11-04, window-end pin re-key (REGISTERS seat): 15 -> 16 external fnv1a32 calls on the probe row (measured;
+// FOOD-3, food diversity, traced at stage T3 in DOORS-4).
+// 2026-11-05 (LANDING-6, bisected by first-parent stage): 16 -> 17 X-46 car 1 (1264a8152) -> 15 X-46 car 3 (90dc22f18),
+// unmoved to the tip; the register's fnv1a32External moves with it (generationForkRegistry.js).
+// 2026-11-07 (LANDING-R2, the pool census composed; bisected with this arm alone over the census lineage from the merge
+// base bf263a78d, 15): 15 -> 24 census-4 R3 (596cb8b1b, the tie rule: one role-class rule for the tie step and the
+// instrument) -> 32 census-4 R12 (acd70a977, faction-role-fit), both reaching census-1b through the merge 950b75014,
+// unmoved to the tip (pickVariant 31, every one a real choice, unmoved). The register's fnv1a32External moves with it.
+// RE-KEYED 2026-11-07 (the people car, PEOPLE-1 CAST): 15 -> 17. The external fnv1a32 callers on the probe row are
+// the tie prose (power/relationshipArchetypes.js) and the conflict lines (dossier/hookLines.js), one hash per tie
+// or conflict drawn; the cast is the roster's faces now (the probe town carries more cards than its named roster
+// did), so two more ties hash their prose. The cast's size is the named cause.
+// RE-KEYED 2026-11-07 (the people car, PEOPLE-4 TIES, R-P7): 17 -> 16, measured. One tie per card replaces the
+// pair saturation, so the probe row's tie prose hashes once per card's own tie; the register's fnv1a32External
+// (15 at this lane's base, never re-keyed by PEOPLE-1) moves to the same measured figure.
+// RE-KEYED by MERGE-234 (one tie writer, the chair's ruling): 16 -> 15, measured by A6 at the 1+2+3+4 tip — the
+// seam mint's tie no longer hashes its prose through the retired pair generator; drawTies writes it.
+// RE-KEYED at MERGE-CAR (2026-11-07; the people car merged into the integration branch over the rung-2 landing's 32
+// above): 15 -> 16, MEASURED by this arm at the merged tree. R12's fitter (acd70a977) is retired with its hashes (the
+// chair's SC-1 ruling); R3's tie rule (596cb8b1b, resolveTieKey) is ported into the one tie writer (people/ties.js ::
+// drawTies), one tie per card. PLAUSIBLE attribution, not bisected. The register's fnv1a32External moves with it.
+// RE-KEYED 2026-11-08 (FIX-PUBLIC-VEIL, the second seat): 15 -> 13, measured by A6. A veiled face is born with an
+// opaque id, and its keyed forks (`people-faces::`, `people-ties::`, `people-hooks::<card id>`) re-deal, so two of
+// the probe row's ties draw archetypes whose prose takes no external fnv1a32 hash. The cause is the lane's one
+// UNSIGNED generator move.
+// COMPOSED 2026-11-08 (ALLEGIANCE-CAR1, the veil merged over MERGE-CAR, 744c22d74): 16 -> 14, MEASURED by this arm at
+// the merged tree — the integration side's 16 with the veil's re-deal of the probe row's veiled faces composed in (the
+// veil measured -2 at its lane, 15 -> 13; the same -2 here). The register's fnv1a32External moves with it.
+// RE-KEYED 2026-11-09 (ALLEGIANCE-CAR4): 14 -> 15, MEASURED by A6 at the car's tip and traced call by call against the base
+// f6209c0c5 (a probe recording each external fnv1a32 caller's stack on this probe row): the fourteen base callers are
+// all still there (1 foodways, 6 economy fingerprints, 1 resolveTieKey, 6 tie-prose offsets), and the one new caller is
+// the tie prose's per-archetype offset (power/relationshipArchetypes.js, via people/ties.js :: drawTies) for
+// "Felix Brauer>Kunhild Meyer::family_complication" — a tie that was `old_debt` (an archetype already hashed) at the
+// base. The cause is the BIRTH stream, not goals.js's import graph (A9 runs after drawTies and makes no fnv1a32 call
+// here): the retired goal draw (03ff59084) and item 15's title-secret draw (eabc93dfe) leave a face's fork before its
+// power roll, so the rookery boss's `power` 1 -> 2, the pair's power gap 4 -> 3, and computeRelTension draws another
+// kind. The register's fnv1a32External moves with it.
+// RE-KEYED 2026-11-11 (COHERENCE-QUARREL cure 2): 15 -> 17, MEASURED. The probe row's two quarrels each
+// take one fnv1a32 for their plot hook (power/conflicts.js :: buildConflictPlotHooks: one hash of the seed, the
+// parties and the issue picks the hook and the offer's wording, draw-free). The register's fnv1a32External moves with it.
+// RE-KEYED 2026-11-13 (STYLE-2-MERGE point 46, the COHERENCE-POWERS merge, the chair's ruling on STOP 46b): 17 -> 16,
+// MEASURED by A6 and CONFIRMED caller by caller (a probe recording each external fnv1a32 caller's first src frame on
+// this probe row, at 3575cf061 against the merge): buildConflictPlotHooks 2 = 2, composeFoodwaysLine 1 = 1,
+// fingerprintPowerEconomyInput 6 = 6, the tie prose's per-archetype offset (power/relationshipArchetypes.js) 7 = 7 (the
+// pairs re-dealt: 5 of its 7 strings and one quarrel's parties differ), and resolveTieKey (domain/roles/roleClass.js)
+// 1 -> 0: the base's 'mutual_leverage::npc_town_watch>npc_town_hall' tie key is no longer resolved, the dual hat having
+// re-dealt the probe row's cast and ties. No call site left the code (no changed line under src names fnv1a32); the
+// figure is the probe row's runtime count. The register's fnv1a32External moves with it.
+const FNV_EXTERNAL_CALLS = 16;
+/** The fork law A1 pins: the mint wrapper's equivalence rests on this line and nothing else. */
+const FORK_LAW = 'fork: (label) => createPRNG(`${seed}::${label}`),';
+/** §6.4's off-corpus block: a wizard-reachable switch, the keys it moves, and 24 seeds. */
+const OFF_CORPUS_BASE = {
+  settType: 'town', culture: 'germanic', terrainOverride: 'plains',
+  tradeRouteAccess: 'road', monsterThreat: 'civilized',
+};
+const OFF_CORPUS_PROBES = [
+  { label: "settType:'random'", patch: { settType: 'random' }, keys: ['tier', 'townPlus'] },
+  { label: "culture:'random_culture'", patch: { culture: 'random_culture' }, keys: ['culture'] },
+  { label: '_randomizePriorities:true', patch: { _randomizePriorities: true }, keys: ['magicLevel', 'priorityMagicEffective'] },
+];
+const OFF_CORPUS_SEEDS = Array.from({ length: 24 }, (_, index) => `offcorpus-${index}`);
+const OFF_CORPUS_STEP = 'resolveConfig';
+/**
+ * ⛔ THE THREE DISPLAY-NAME-KEYED CHOICE SITES, NAMED HERE RATHER THAN IN THE REGISTER, and the
+ * placement is a MEASUREMENT rather than a preference (lane EM-P2, 2026-09-20). Spelling these
+ * three module paths under `src/` convicts the register under two standing estate walkers at
+ * once: tests/lint/entropyRootCensus.walker.test.js counts a quoted stream-mint call as a site
+ * even inside a string literal (35 -> 36 in src/domain), and
+ * tests/lint/settlementMapSurfaceAllowlist.walker.test.js refuses settlement-map vocabulary
+ * anywhere under `src/` (ODQ §725). Neither walker scans `tests/`, and these sites are OBSERVED
+ * DATA either way, so they live beside the arm that observes them. They are EM-P1b's class and
+ * this packet asserts nothing about their cure.
+ */
+const DISPLAY_NAME_KEYED_SITES = [
+  { site: 'src/generators/steps/assembleInstitutions.js:1004', channel: 'hash', marker: 'inst.name' }, // 2026-10-01, the urban band (ODQ §934.86): a pure line move, 774 -> 863; 2026-11-05 (LANDING-6, read per first-parent step): the same pickVariant line, 863 -> 888 terrain-pools (ac09ea83b) -> 891 its re-merge (fb5edb7f5) -> 910 car 3 (90dc22f18) -> 911 PINS (37b1e746d) -> 1004 F6 (6d84aa834)
+  { site: 'src/data/npcData.js:1635', channel: 'hash', marker: '?.name' }, // 2026-11-09 (STYLE-2-MERGE point 19, SW-10 HOOKS composed over SW-7): 1537 -> 1635, a pure line move (SW-10's NPC_FACTION_LOYALTY growth of 98 lines, 4ba2a241d..fbbe4a992, above SW-7's 1537), measured at the merged tree; 2026-11-09 (STYLE-2 SW-7, B10(b) the dealing pool): 1436 -> 1537, a pure line move (DEALING_TRAIT_FAMILY, NPC_DEALING_BY_TRAIT and dealingLineFor above it); 2026-11-08 (ALLEGIANCE-CAR1): 1435 -> 1436, a pure line move (the HANDLER_TIE_LINES import above it); 2026-11-07 (LANDING-R2, the pool census composed): a pure line move, 1334 -> 1342 census-4c unit 4 (99fbe262f) -> 1400 census-4g unit 2 (6e9cbc676) -> 1435 census-4h unit 4 (ea6b9e1eb), traced through every census commit touching the file; the pickVariant call and its marker unchanged (99fbe262f adds a `lines` field to the wrapper's trailer only)
+  { site: 'src/domain/townMap/glyphAssign.js:125', channel: 'mint', marker: 'createPRNG(`glyph:${seedId}`)' },
+];
+
+/** The golden master's own hash, spelled exactly as generatorGoldenMaster.test.js spells it. */
+function hashFor(row) {
+  const { _seed: seed, ...cfg } = row;
+  const settlement = generateSettlementPipeline(cfg, null, { seed, customContent: {} });
+  return createHash('sha256').update(JSON.stringify(settlement)).digest('hex');
+}
+
+/** Run one row with both recorders ON, and hand back what they saw. */
+function censusRun(row) {
+  mintCensus.rows = []; mintCensus.on = true;
+  hashCensus.picks = []; hashCensus.hashes = []; hashCensus.on = true;
+  const instrumented = instrumentedRoot(row._seed);
+  const context = runHeadless(row, instrumented.root);
+  mintCensus.on = false; hashCensus.on = false;
+  return {
+    context, instrumented, mints: mintCensus.rows, picks: hashCensus.picks, hashes: hashCensus.hashes,
+  };
+}
+
+/** Resolve a Tier-2 `a.b[].c` path against a record; [] means the path does not exist there. */
+function resolveOutputKey(root, path) {
+  let nodes = [root];
+  for (const segment of path.split('.')) {
+    const isArray = segment.endsWith('[]');
+    const key = isArray ? segment.slice(0, -2) : segment;
+    const next = [];
+    for (const node of nodes) {
+      if (node === null || node === undefined || typeof node !== 'object') continue;
+      const value = node[key];
+      if (value === undefined) continue;
+      if (isArray) { if (Array.isArray(value)) next.push(...value); } else next.push(value);
+    }
+    nodes = next;
+  }
+  return nodes.filter((value) => value !== undefined);
+}
+
+describe('EM-P2 — generation census by execution: the instrument, the classification, both channels', () => {
+  /** One classification serves A3e and A4; it is the expensive measurement in this file. */
+  let measured = null;
+  const measure = () => {
+    if (measured === null) measured = classify();
+    return measured;
+  };
+  /** The declared rows, keyed, so a comparison names the row rather than an index. */
+  const declaredBy = new Map(GENERATION_TIER1.map((row) => [`${row.step}|${row.key}`, row]));
+  /** THE MISMATCH ARM: it PRINTS the fresh literal and FAILS. It never writes (STOP-10). */
+  const failOnDifference = (differences, fresh) => {
+    expect(
+      differences,
+      `\nTHE REGISTER DISAGREES WITH A FRESH EXECUTION on ${differences.length} row(s):\n`
+      + `${differences.join('\n')}\n\n`
+      + 'PASTE THIS FRESH LITERAL into src/domain/generation/generationForkRegistry.js and\n'
+      + 're-run. That green is the proof; this arm writes no file and takes no update flag.\n\n'
+      + `${fresh}\n`,
+    ).toEqual([]);
+  };
+
+  it('A1 — the instrument reaches the generator graph: mints split 4 direct / 106 via fork, no golden moves, 493 draws unpinned and 0 pinned', () => {
+    // ── C0 — the mocks lose no export. A replacement that dropped a name would break
+    // importers silently, and every figure below would be measured on a crippled module.
+    expect(mintCensus.actualKeys.length, 'the prng mock factory never ran').toBeGreaterThan(0);
+    expect(hashCensus.actualKeys.length, 'the proseHash mock factory never ran').toBeGreaterThan(0);
+    expect(Object.keys(prngModule).sort(), 'prng.js export parity').toEqual(mintCensus.actualKeys);
+    expect(Object.keys(proseHashModule).sort(), 'proseHash.js export parity').toEqual(hashCensus.actualKeys);
+
+    // ── THE FORK LAW. The mint wrapper re-implements `fork` as the SAME derivation, so it
+    // yields the same stream byte for byte. If this line changes the equivalence is gone.
+    expect(readFileSync(PRNG_SOURCE_PATH, 'utf8'), 'STOP-4: prng.js :: fork is the fork law').toContain(FORK_LAW);
+
+    // ── C1 — the golden control: the instrument changes no generated byte.
+    const manifest = JSON.parse(readFileSync(GOLDEN_MANIFEST_PATH, 'utf-8'));
+    const rows = goldenCorpus();
+    const control = rows.find((row) => keyOf(row) === GOLDEN_CONTROL_KEY);
+    expect(control, `the golden control row ${GOLDEN_CONTROL_KEY} left the corpus`).toBeDefined();
+    
+    
+    const moved = [];
+    let checked = 0;
+    for (let index = 0; index < rows.length; index += 21) {
+      checked += 1;
+      if (manifest[keyOf(rows[index])] !== hashFor(rows[index])) moved.push(keyOf(rows[index]));
+    }
+    expect(checked, 'the stride sweep is not vacuous').toBeGreaterThanOrEqual(25);
+    
+
+    // ── C2 — the pin control (EM-P0 A3, re-measured under the instrument).
+    const unpinned = instrumentedRoot(PIN_ROW._seed);
+    const unpinnedContext = runHeadless(PIN_ROW, unpinned.root);
+    const unpinnedPopulation = unpinned.perStep.get(POPULATION_STEP);
+    expect(unpinnedPopulation, 'the runner never forked the population step').toBeDefined();
+    expect(unpinnedPopulation.draws, 'unpinned population draws').toBe(POPULATION_UNPINNED_DRAWS);
+    expect(unpinnedPopulation.random, 'every unpinned draw is a random() call').toBe(POPULATION_UNPINNED_DRAWS);
+    expect(unpinnedPopulation.other, 'no non-random method on the population stream').toBe(0);
+    // 2026-11-07, the people car's landing (PEOPLE-LAND second seat; the fork census's law: a keyed fork is DECLARED, never
+    // silent): the step was fork-free through 262e8b255. PEOPLE-1 CAST (dc655f712) mints the cast's inner stream
+    // 'people-faces' and one keyed fork per card (28 on this row); PEOPLE-3 HOOKS (0f930ce95) forks each card's key again
+    // for its one hook and adds ['people-hooks']: 58 labels, 30 distinct, unmoved to the tip. Measured at
+    // every stage with its own produced manifest; pinned EXACTLY, in order (a new, lost or re-ordered fork reds).
+    // STYLE-2-MERGE point 46 (2026-11-13, the COHERENCE-POWERS merge): 28 -> 27 cards, 58 -> 56 labels, 30 -> 29 distinct; the one
+    // card gone, in both passes, is npc_town_council (the seat's office face, not minted under the dual hat; CONFIRMED with
+    // POPULATION_UNPINNED_DRAWS above).
+    expect(unpinnedPopulation.forkLabels, 'the step mints exactly the cast\'s declared streams').toEqual([
+      'people-faces',
+      'npc_charcoal_burner',
+      'npc_inn_multiple',
+      'npc_taverns_5_20',
+      'npc_river_ferry',
+      'npc_river_boatyard',
+      'npc_barge_and_river_transport_company',
+      'npc_docks_port_facilities',
+      'npc_town_granary',
+      'npc_mills_2_5',
+      'npc_apothecary_established',
+      'npc_bowyers_fletchers_guild',
+      'npc_tanner_established',
+      'npc_cobbler_s_guild',
+      'npc_butchers_3_8',
+      'npc_bakers_5_15',
+      'npc_craft_guilds_5_15',
+      'npc_parish_churches_2_5',
+      'npc_courthouse',
+      'npc_small_prison_stocks',
+      'npc_town_watch',
+      'npc_barracks',
+      'npc_traveling_performers',
+      'npc_gladiatorial_school',
+      'npc_fish_market',
+      'npc_merchant_guilds_3_8',
+      'npc_potter',
+      'npc_brickmaker',
+      'people-hooks',
+      'npc_charcoal_burner',
+      'npc_inn_multiple',
+      'npc_taverns_5_20',
+      'npc_river_ferry',
+      'npc_river_boatyard',
+      'npc_barge_and_river_transport_company',
+      'npc_docks_port_facilities',
+      'npc_town_granary',
+      'npc_mills_2_5',
+      'npc_apothecary_established',
+      'npc_bowyers_fletchers_guild',
+      'npc_tanner_established',
+      'npc_cobbler_s_guild',
+      'npc_butchers_3_8',
+      'npc_bakers_5_15',
+      'npc_craft_guilds_5_15',
+      'npc_parish_churches_2_5',
+      'npc_courthouse',
+      'npc_small_prison_stocks',
+      'npc_town_watch',
+      'npc_barracks',
+      'npc_traveling_performers',
+      'npc_gladiatorial_school',
+      'npc_fish_market',
+      'npc_merchant_guilds_3_8',
+      'npc_potter',
+      'npc_brickmaker',
+    ]);
+
+    const pins = Object.fromEntries(CHOOSER_KEYS.map((key) => [key, unpinnedContext[key]]));
+    for (const key of CHOOSER_KEYS) expect(pins[key], `pin ${key}`).toBeDefined();
+    const pinned = instrumentedRoot(PIN_ROW._seed);
+    const pinnedContext = runHeadless(PIN_ROW, pinned.root, { pins });
+    expect(pinned.perStep.get(POPULATION_STEP).draws, 'a fully pinned step draws nothing').toBe(0);
+    // ⭐ THE REPRODUCTION CLAIM IS THE RECORD'S (EM-R2 §0.S, judgment 204b). The draw controls
+    // above keep their ctx-built bag: `a fully pinned step draws nothing` is true of ANY full
+    // bag and is not this member's claim. But the key `npcs` names TWO facts — ctx's
+    // PRE-enrichment roster and the RECORD's post-coherence roster — and the product's own
+    // channel is the record's: `dmLayer :: pinsFrom` structuredClones `source[key]` out of the
+    // record, and `rederive` is the only caller a DM edit reaches. So the reproduction is
+    // asserted on a RECORD-built bag, through `rederive`, with a no-op root override.
+    const record = unpinnedContext.settlement;
+    const engine = { run: generateSettlementPipeline, getStepMeta };
+    const declarations = { declarationsFor, isEditableCard };
+    const npc0 = (record.npcs || [])[0] || {};
+    const layer = {
+      roots: { [`npc:${npc0.id}:status`]: npc0.status }, worldFacts: {}, minted: {}, phantoms: {},
+    };
+    const { pins: recordPins } = pinsFrom(record, layer, declarations, engine);
+    for (const key of CHOOSER_KEYS) expect(recordPins[key], `record pin ${key}`).toBeDefined();
+    const pinRowConfig = Object.fromEntries(Object.entries(PIN_ROW).filter(([key]) => key !== '_seed'));
+    const rederived = rederive(record, pinRowConfig, layer, engine, declarations);
+    expect(JSON.stringify(rederived.record), 'the record-built bag reproduces the record through rederive')
+      .toBe(JSON.stringify(record));
+    // The ctx-pinned run above is kept as the DRAW control and stays byte-identical; this is its
+    // liveness anchor, so the binding the replaced claim used is still read and asserts nothing
+    // about reproduction.
+    expect(pinnedContext.settlement, 'the ctx-pinned draw control still produced a settlement').toBeDefined();
+
+    // ── C3 — THE MINT CENSUS. A total of 4 is the signature of a mock that never reached the
+    // generator graph: it is exactly what the pre-proof's negative control produced while every
+    // control above stayed green. That is the whole reason this arm exists.
+    const seen = censusRun(CENSUS_ROW);
+    const direct = seen.mints.filter((record) => record.via === 'direct');
+    const viaFork = seen.mints.filter((record) => record.via === 'fork');
+    const foreign = seen.mints.filter((record) => !record.seed.startsWith(CENSUS_ROW._seed));
+    process.stdout.write(`\n[A1] mints total=${seen.mints.length} direct=${direct.length}`
+      + ` viaFork=${viaFork.length} foreign=${foreign.length}`
+      + ` pickVariant=${seen.picks.length} fnv1a32External=${seen.hashes.length}\n`
+      + `[A1] direct seeds = ${direct.map((record) => record.seed).join(' | ')}\n`);
+    writeFileSync(process.env.MINTDUMP, JSON.stringify(seen.mints.map((r) => [r.seed, r.via])));
+    expect(seen.context.settlement, 'the census run produced no settlement').toBeDefined();
+    expect(direct.length, 'STOP-6: DIRECT mints — a 4 here with a total of 4 is the blind wrapper').toBe(4);
+    expect(seen.mints.length, 'STOP-5: total mints below 35 means the mock never reached the graph')
+      .toBeGreaterThanOrEqual(35);
+    // 2026-10-02, the Voice Program wave 2 (ODQ §934.88): 36 -> 38, the measured 35 plus the assembly step's two new
+    // named child streams ('pressure-sentence', 'arrival-scene'; ed3768dc1), with the same one mint of slack. Measured
+    // on this row: total 37, direct 4, via fork 33, foreign 0.
+    // GS-2 one faction set (2026-10-31, ODQ §934.101): the assembly step's 'faction-conflicts' child stream is one more
+    // mint. Measured on this row: total 38, direct 4, via fork 34, foreign 0; the one mint of slack is spent, not widened.
+    // 2026-11-05 (LANDING-6, measured with this arm's census at the window's moving stages): 38 at 1264a8152^ -> 39 X-46 car 1
+    // (1264a8152) -> 40 CRISIS (d3e072368; still 40 at ac09ea83b) -> 39 X-46 car 3 (90dc22f18), 39 at PINS, I7, F6, F10 and the
+    // tip. The bound is re-keyed to the tip's figure, never above it.
+    // 2026-11-07, the people car's landing (PEOPLE-LAND second seat, this arm's census at every stage of the stack, each
+    // with its own produced manifest): 39 at 262e8b255 -> 70 PEOPLE-1 CAST (dc655f712: 'people-faces' and the per-card
+    // keyed forks; fnv1a32External 15 -> 18) -> 91 PEOPLE-3 HOOKS (0f930ce95: 'people-hooks' and each card's hook fork) ->
+    // 110 PEOPLE-4 TIES (c7d552370: each card's tie on its own keyed fork, R-P7; fnv1a32External 18 -> 15), unmoved to the
+    // tip; direct 4, foreign 0 throughout. The bound is re-keyed to the tip's figure, never above it.
+    // 2026-11-09, the train (MERGE-TRAIN at the ALLEGIANCE-CAR1 merge, this arm's census at the merged tree): 110 -> 118, car 1's
+    // hidden allegiance (5902f1a4a, domain/people/allegiance.js :: dealAllegiances): one `allegiance` family fork and one keyed
+    // fork per eligible card on this row (+8); direct 4, foreign 0. Re-keyed to the measured figure, never above it.
+    // 2026-11-09, MERGE-TRAIN record 9 (the ALLEGIANCE-CAR4 merge, this arm's census at the merged tree): 118 -> 138, car 4's A9
+    // (03ff59084, people/goals.js :: dealGoals): one `people-goals` family fork and one keyed fork per card on this row (+20);
+    // direct 4, foreign 0. Re-keyed to the measured figure, never above it.
+    expect(seen.mints.length, 'total mints is row-dependent but bounded').toBeLessThanOrEqual(138);
+    expect(viaFork.length, 'STOP-6: mints via the re-implemented fork').toBeGreaterThanOrEqual(31);
+    expect(foreign.map((record) => record.seed), 'every minted seed is root-prefixed').toEqual([]);
+  }, 120_000);
+
+  it('A3e — the classification re-executed: the declared corpus is 63 rows, 12 steps draw, and every stepDraws and keyMoves reproduces', () => {
+    const corpus = censusCorpus();
+    const grid = [];
+    const pairsSeen = new Set();
+    for (const row of corpus) {
+      const key = `${row.settType}|${row.terrainOverride}`;
+      if (pairsSeen.has(key)) break;
+      pairsSeen.add(key);
+      grid.push(row);
+    }
+    expect(corpus.length, 'the declared census corpus size').toBe(GENERATION_CENSUS_ROWS);
+    expect(corpus.length, 'the corpus is 42 grid rows plus the 21-row tail').toBe(63);
+    expect(grid.length, 'the grid half is every (settType, terrain) pair once').toBe(42);
+    expect(corpus.length - grid.length, 'the tail is not optional (the rare drawn rows live there)').toBe(21);
+    expect(new Set(corpus.map(keyOf)).size, 'the corpus holds no duplicate row').toBe(corpus.length);
+
+    const fresh = measure();
+    expect(fresh.corpusRows, 'the classifier measured the declared corpus').toBe(GENERATION_CENSUS_ROWS);
+    expect(fresh.rows.length, 'the measured pair set is the registry"s, not a literal').toBe(GENERATION_TIER1.length);
+    expect(fresh.rows.length, 'anti-vacuity: the pair set is real before any equality is claimed').toBeGreaterThan(70);
+    expect(fresh.steps.length, 'every registered step was perturbed').toBe(getStepOrder().length);
+    // ALLEGIANCE-CAR1 (2026-11-08, J-2): 13 -> 12, MEASURED — corruptionPass, a drawing step, retired (its roll is the seam's)
+    expect(fresh.drawingSteps.length, 'steps that draw at all').toBe(12);
+    process.stdout.write(`\n[A3e] corpus=${fresh.corpusRows} pairs=${fresh.rows.length}`
+      + ` wall=${fresh.wallMs}ms drawingSteps=${fresh.drawingSteps.length}\n`);
+
+    const differences = [];
+    for (const row of fresh.rows) {
+      const id = `${row.step}|${row.key}`;
+      const declared = declaredBy.get(id);
+      if (!declared) { differences.push(`${id}: measured but not declared`); continue; }
+      for (const field of ['via', 'stepDraws', 'keyMoves', 'rows', 'class']) {
+        if (declared[field] !== row[field]) {
+          differences.push(`${id}.${field}: declared ${JSON.stringify(declared[field])} measured ${JSON.stringify(row[field])}`);
+        }
+      }
+    }
+    for (const declared of GENERATION_TIER1) {
+      const id = `${declared.step}|${declared.key}`;
+      if (!fresh.rows.some((row) => `${row.step}|${row.key}` === id)) differences.push(`${id}: declared but not measured`);
+    }
+    failOnDifference(differences, emitTier1Literal(fresh.rows));
+  }, 180_000);
+
+  it('A4 — both landing triples re-executed: the six varies rows, the sixteen disagreements, and zero differing landing paths', () => {
+    const fresh = measure();
+    const differences = [];
+    for (const row of fresh.rows) {
+      const id = `${row.step}|${row.key}`;
+      const declared = declaredBy.get(id);
+      if (!declared) { differences.push(`${id}: measured but not declared`); continue; }
+      for (const triple of ['onRecord', 'producedOnRecord']) {
+        for (const bucket of ['absent', 'same', 'transformed']) {
+          if (declared[triple][bucket] !== row[triple][bucket]) {
+            differences.push(`${id}.${triple}.${bucket}: declared ${declared[triple][bucket]} measured ${row[triple][bucket]}`);
+          }
+        }
+      }
+      for (const field of ['onRecordClass', 'producedOnRecordClass', 'recordPath']) {
+        if (declared[field] !== row[field]) {
+          differences.push(`${id}.${field}: declared ${JSON.stringify(declared[field])} measured ${JSON.stringify(row[field])}`);
+        }
+      }
+      // §6.2's TRIPWIRE: a row that lands in two different places while reading unanimously
+      // would be a register telling a caller a single truth it does not have.
+      if (!row.recordPathUnanimous && row.onRecordClass !== 'varies') {
+        differences.push(`${id}: non-unanimous recordPath ${JSON.stringify(row.recordPathCounts)} on a '${row.onRecordClass}' row (STOP-11)`);
+      }
+    }
+    const variesRows = fresh.rows.filter((row) => row.onRecordClass === 'varies').map((row) => `${row.step}|${row.key}`);
+    const disagreeing = fresh.rows.filter((row) => row.onRecordClass !== row.producedOnRecordClass)
+      .map((row) => `${row.step}|${row.key}`);
+    const nonUnanimous = fresh.rows.filter((row) => !row.recordPathUnanimous).map((row) => `${row.step}|${row.key}`);
+    process.stdout.write(`\n[A4] varies=${variesRows.length} disagreeing=${disagreeing.length}`
+      + ` nonUnanimousPaths=${nonUnanimous.length} differingLandingPaths=${fresh.pathDiffRows.length}\n`
+      + `[A4] varies rows: ${variesRows.join(', ')}\n`);
+
+    failOnDifference(differences, emitTier1Literal(fresh.rows));
+    // LANDING-8 (2026-11-06, ODQ §934.105): 7 -> 11. The crisis cast writes copy-on-write (lane D, 8befe5a0d), so the four
+    // `stress` rows' FINAL comparand reads 'varies' (same 9 / transformed 54), measured by this arm's fresh execution.
+    expect(variesRows.length, 'the varies rows of the FINAL comparand').toBe(11);
+    // 2026-10-01, the urban band (ODQ §934.86): 18 -> 16 (measured). The institution rebuild moved the producedOnRecord
+    // classes of isolationSupport (varies -> same) and generationRepairs (absent -> varies); the six varies rows stay six.
+    // LANDING-8 (2026-11-06, ODQ §934.105): 17 -> 13, the same cause (8befe5a0d): the four `stress` rows' two comparands
+    // now agree ('varies' both), because the record holds a copy of exactly what the stress steps produced.
+    expect(disagreeing.length, 'the rows where the two comparands disagree').toBe(13); // MERGE-234 (one tie writer): 14 -> 13, measured by this arm at the 1+2+3+4 tip — the seam's `::tie` fork is retired, so `relationships` is transformed on both comparands // 2026-11-07 PEOPLE-1 CAST: 13 -> 14, the seam's tie moves `relationships` on a crisis-cast row (A4's own reading) // lane CRISIS (2026-11-03): resolveCrisisCast joins: assembleSettlement|stress's produced value differs from the record where a crisis is cast (16 -> 17)
+    expect(nonUnanimous.length, 'exactly one row lands in two places, and it is already varies').toBe(1);
+    // ⛔ THERE IS NO producedPath, AND THAT IS A MEASUREMENT. If this ever becomes non-zero a
+    // second path field is owed and the register is telling half a truth about WHERE.
+    expect(
+      fresh.pathDiffRows.map((entry) => `${entry.id} ${entry.count}/${fresh.corpusRows} ${entry.example}`),
+      'a post-step value landed at a different path than the final one: a producedPath is owed',
+    ).toEqual([]);
+    // The derived labels really are derived: each triple sums to the denominator on every row.
+    for (const row of fresh.rows) {
+      const id = `${row.step}|${row.key}`;
+      expect(row.onRecord.absent + row.onRecord.same + row.onRecord.transformed, `${id} onRecord sums to rows`).toBe(row.rows);
+      expect(row.producedOnRecord.absent + row.producedOnRecord.same + row.producedOnRecord.transformed, `${id} producedOnRecord sums to rows`).toBe(row.rows);
+    }
+  }, 120_000);
+
+  it('A5 — the mint channel: four DIRECT mints, every seed root-prefixed, and one seed minted four times with a fork-first via list', () => {
+    const seen = censusRun(CENSUS_ROW);
+    const direct = seen.mints.filter((record) => record.via === 'direct');
+    const viaFork = seen.mints.filter((record) => record.via === 'fork');
+    const bySeed = new Map();
+    for (const record of seen.mints) bySeed.set(record.seed, [...(bySeed.get(record.seed) || []), record.via]);
+    const repeated = [...bySeed.entries()].filter(([, vias]) => vias.length > 1);
+    let subForks = 0;
+    for (const step of getStepOrder()) subForks += (seen.instrumented.perStep.get(step)?.forkLabels.length || 0);
+    process.stdout.write(`\n[A5] total=${seen.mints.length} direct=${direct.length} viaFork=${viaFork.length}`
+      + ` stepForks=${getStepOrder().length} subForks=${subForks}`
+      + ` repeatedSeeds=${repeated.map(([seed, vias]) => `${seed} x${vias.length} [${vias.join('|')}]`).join(' ; ')}\n`);
+
+    expect(direct.length, 'STOP-6: the DIRECT count is the assertion').toBe(GENERATION_CHANNELS.mints.direct);
+    expect(GENERATION_CHANNELS.mints.instrument, 'the register names the mint door').toBe('src/kernel/prng.js#createPRNG');
+    expect(GENERATION_CHANNELS.mints.rootSeedPrefixed, 'the register claims root-prefixed seeds').toBe(true);
+    expect(seen.mints.filter((record) => !record.seed.startsWith(CENSUS_ROW._seed)).map((record) => record.seed),
+      'a foreign-prefix seed would be a stream this census cannot attribute').toEqual([]);
+    expect(viaFork.length, 'every fork the proxy saw is a mint the census saw')
+      .toBe(getStepOrder().length + subForks);
+    expect(seen.mints.length, 'total mints is row-dependent and is recorded, not pinned').toBeGreaterThanOrEqual(35);
+    // ⭐ THE SHARPEST DISCRIMINATOR. Under a naive wrapper this seed is minted x3 with vias
+    // [direct|direct|direct]; the fork-minted member of the quartet is exactly what the
+    // re-implementation buys, so the via list alone convicts a mock that did not take.
+    expect(bySeed.get(REPEATED_SEED), `${REPEATED_SEED} vias`).toEqual(REPEATED_VIAS);
+    expect(repeated.map(([seed]) => seed), 'exactly one seed is minted more than once').toEqual([REPEATED_SEED]);
+  }, 120_000);
+
+  it('A6 — the hash channel: 69 distinct pickVariant seeds, sixteen external fnv1a32 calls, and two censuses disjoint by construction', () => {
+    const seen = censusRun(CENSUS_ROW);
+    const realChoices = seen.picks.filter((pick) => pick.poolLen > 1 && pick.seed && pick.seed !== ' undefined');
+    const pickSeeds = new Set(seen.picks.map((pick) => pick.seed));
+    process.stdout.write(`\n[A6] pickVariant=${seen.picks.length} realChoices=${realChoices.length}`
+      + ` distinctSeeds=${pickSeeds.size} fnv1a32External=${seen.hashes.length}\n`);
+
+    expect(seen.picks.length, 'pickVariant calls on the probe row').toBe(PICK_VARIANT_CALLS);
+    expect(realChoices.length, 'every call is a real choice: pool > 1 and a non-falsy seed').toBe(PICK_VARIANT_CALLS);
+    expect(pickSeeds.size, 'every choice carries its own seed string').toBe(PICK_VARIANT_CALLS);
+    expect(seen.picks.filter((pick) => pick.poolLen <= 1), 'a pool of one is not a choice').toEqual([]);
+    expect(seen.hashes.length, 'fnv1a32 EXTERNAL callers').toBe(FNV_EXTERNAL_CALLS);
+    expect(GENERATION_CHANNELS.hash.fnv1a32External, 'the register declares the external count').toBe(FNV_EXTERNAL_CALLS);
+    expect(GENERATION_CHANNELS.hash.instrument, 'the register names the hash door').toBe('src/kernel/proseHash.js#pickVariant');
+    // DISJOINT BY CONSTRUCTION: pickVariant calls fnv1a32 intra-module, so the fnv1a32 wrapper
+    // counts only EXTERNAL callers and no choice is ever double-counted as a raw hash site.
+    const hashStrings = new Set(seen.hashes);
+    expect([...pickSeeds].filter((seed) => hashStrings.has(seed)),
+      'a pickVariant seed reached the fnv1a32 wrapper: the two censuses overlap').toEqual([]);
+
+    // The three DISPLAY-NAME-KEYED sites, named as observed data. EM-P1b owns their cure; this
+    // packet asserts nothing about it, only that the register still names where they are.
+    expect(DISPLAY_NAME_KEYED_SITES.length, 'the observed name-keyed sites').toBe(3);
+    for (const site of DISPLAY_NAME_KEYED_SITES) {
+      const [rel, lineNumber] = site.site.split(':');
+      const line = readFileSync(resolve(process.cwd(), rel), 'utf8').split('\n')[Number(lineNumber) - 1];
+      expect(line, `${site.site} is past the end of its file: re-measure the observed site`).toBeDefined();
+      expect(line, `${site.site} no longer carries ${site.marker}: re-measure the observed site`).toContain(site.marker);
+      expect(['hash', 'mint'], `${site.site} channel`).toContain(site.channel);
+    }
+  }, 120_000);
+
+  it('A7 — the corpus ceiling: each key the register calls pure moves under at least one wizard-reachable config', () => {
+    const meta = new Map(getStepMeta().map((entry) => [entry.name, entry]));
+    const configKeys = new Set([...meta.get(OFF_CORPUS_STEP).provides, ...meta.get(OFF_CORPUS_STEP).mutates]);
+    const digest = (value) => createHash('sha1').update(JSON.stringify(value) ?? ' undefined').digest('hex').slice(0, 16);
+    const snapshot = (row, perturbStep) => {
+      let bag = null;
+      runHeadless(row, instrumentedRoot(row._seed, { perturbStep }).root, {
+        onStep: (step, ctx) => {
+          if (step !== OFF_CORPUS_STEP) return;
+          bag = {};
+          for (const key of configKeys) bag[key] = key in ctx ? digest(ctx[key]) : ' ABSENT';
+        },
+      });
+      return bag;
+    };
+
+    const tooWeak = [];
+    const neverRan = [];
+    for (const probe of OFF_CORPUS_PROBES) {
+      const tally = new Map();
+      // ⛔ NO ASSERTION INSIDE THE SEED LOOP. A seed loop that asserts inline stops at the FIRST
+      // failing seed, so its failure count is a lower bound and every later seed goes unrun
+      // (tests/lint/seedLoopTotality.walker.test.js). Every seed runs here; the collections are
+      // judged once, below, so the failure message carries the true count rather than a floor.
+      for (const seed of OFF_CORPUS_SEEDS) {
+        const row = { ...OFF_CORPUS_BASE, ...probe.patch, _seed: seed };
+        const base = snapshot(row, null);
+        const perturbed = snapshot(row, OFF_CORPUS_STEP);
+        if (base === null || perturbed === null) { neverRan.push(`${probe.label}/${seed}`); continue; }
+        for (const key of Object.keys(base)) if (base[key] !== perturbed[key]) tally.set(key, (tally.get(key) || 0) + 1);
+      }
+      process.stdout.write(`\n[A7] ${probe.label} moved = `
+        + `${[...tally.entries()].sort((a, b) => b[1] - a[1]).map(([key, n]) => `${key}:${n}/${OFF_CORPUS_SEEDS.length}`).join(' , ')}\n`);
+      for (const key of probe.keys) {
+        // ⛔ `> 0`, NEVER A RATIO. The ratios are a property of the seed SET, not of the tree:
+        // the compile lane's seeds moved townPlus 13/24 where the recon's moved it 11/24. A
+        // ratio assertion would be a flake with a number on it.
+        const seen = tally.get(key) || 0;
+        const declared = GENERATION_TIER1.find((r) => r.step === OFF_CORPUS_STEP && r.key === key);
+        expect(declared, `${key} is not a declared resolveConfig row`).toBeDefined();
+        expect(declared.class, `${key} is classed by the register over the corpus`).toBe('pure');
+        if (seen === 0) tooWeak.push(`${probe.label}: ${key} moved in 0 of ${OFF_CORPUS_SEEDS.length} seeds`);
+      }
+    }
+    expect(
+      neverRan,
+      'resolveConfig never ran for these probe seeds, so their tallies measured nothing',
+    ).toEqual([]);
+    expect(
+      tooWeak,
+      'a key the register calls pure did not move under ANY of its 24 off-corpus seeds, so the'
+      + ' corpus-ceiling blind half no longer describes the tree',
+    ).toEqual([]);
+  }, 120_000);
+
+  it('A8e — Tier 2 executed: every outputKey resolves on a generated record and every origin equals its holding-step perturbation', () => {
+    const corpus = censusCorpus();
+    const grid = [];
+    const pairsSeen = new Set();
+    for (const row of corpus) {
+      const key = `${row.settType}|${row.terrainOverride}`;
+      if (pairsSeen.has(key)) break;
+      pairsSeen.add(key);
+      grid.push(row);
+    }
+    expect(grid.length, 'the Tier-2 corpus is every tier x terrain once').toBe(42);
+    expect(GENERATION_TIER2.length, 'the declared Tier-2 rows').toBe(10);
+
+    const holders = [...new Set(GENERATION_TIER2.map((row) => row.step))];
+    const occupancy = new Map(GENERATION_TIER2.map((row) => [row.outputKey, 0]));
+    const movedUnderHolder = new Map(GENERATION_TIER2.map((row) => [row.outputKey, 0]));
+    /** The two paths EM-A1 asked about that get NO row, measured rather than asserted away. */
+    const ABSENT_PROBES = ['institutions[].state', 'powerStructure.seats[].holder'];
+    const absentOccupancy = new Map(ABSENT_PROBES.map((path) => [path, 0]));
+    let resolvingPaths = null;
+
+    for (const row of grid) {
+      const base = runHeadless(row, instrumentedRoot(row._seed).root).settlement;
+      for (const declared of GENERATION_TIER2) {
+        if (resolveOutputKey(base, declared.outputKey).length) {
+          occupancy.set(declared.outputKey, occupancy.get(declared.outputKey) + 1);
+        }
+      }
+      for (const path of ABSENT_PROBES) {
+        if (resolveOutputKey(base, path).length) absentOccupancy.set(path, absentOccupancy.get(path) + 1);
+      }
+      if (resolvingPaths === null) {
+        resolvingPaths = [...GENERATION_TIER2.map((declared) => declared.outputKey), ...ABSENT_PROBES]
+          .filter((path) => resolveOutputKey(base, path).length > 0);
+      }
+      for (const holder of holders) {
+        const perturbed = runHeadless(row, instrumentedRoot(row._seed, { perturbStep: holder }).root).settlement;
+        for (const declared of GENERATION_TIER2) {
+          if (declared.step !== holder) continue;
+          const before = JSON.stringify(resolveOutputKey(base, declared.outputKey));
+          const after = JSON.stringify(resolveOutputKey(perturbed, declared.outputKey));
+          if (before !== after) movedUnderHolder.set(declared.outputKey, movedUnderHolder.get(declared.outputKey) + 1);
+        }
+      }
+    }
+    process.stdout.write(`\n[A8e] occupancy = ${GENERATION_TIER2.map((row) => `${row.outputKey}:${occupancy.get(row.outputKey)}/${grid.length}`).join(' , ')}\n`
+      + `[A8e] movedUnderHolder = ${GENERATION_TIER2.map((row) => `${row.outputKey}:${movedUnderHolder.get(row.outputKey)}/${grid.length}`).join(' , ')}\n`
+      + `[A8e] absent probes = ${ABSENT_PROBES.map((path) => `${path}:${absentOccupancy.get(path)}/${grid.length}`).join(' , ')}\n`);
+
+    // ── ARM A: occupancy > 0. Row 5 (npcs[].status) sits at 18/42 — the structural-seat family
+    // EM-A1 §1c.2 names — so the floor is `> 0`, not `=== 42`.
+    const empty = GENERATION_TIER2.filter((row) => occupancy.get(row.outputKey) === 0).map((row) => row.outputKey);
+    expect(empty, 'STOP-8: a Tier-2 outputKey does not resolve on a generated record').toEqual([]);
+    // ── ARM C: origin EQUALS the measurement, in both directions.
+    const wrongOrigin = GENERATION_TIER2
+      .filter((row) => row.origin !== (movedUnderHolder.get(row.outputKey) > 0 ? 'drawn' : 'computed'))
+      .map((row) => `${row.outputKey}: declared ${row.origin}, moved ${movedUnderHolder.get(row.outputKey)}/${grid.length}`);
+    expect(wrongOrigin, 'a declared origin disagrees with its holding-step perturbation').toEqual([]);
+    // RE-KEYED 2026-11-07 (the people car): 5 -> 7. The NPC's role and the placeholder's status no longer move
+    // under the population step's perturbed stream (a card's role is its house's), so they are `computed` too.
+    // RE-KEYED 2026-11-08 (ALLEGIANCE-CAR2, the guild's push): 7 -> 6. The role list moves under the population step's
+    // perturbed stream again (7/42, measured by ARM C above): the flaws drawn there decide the hidden agents, whom the push
+    // now weights in the rank deal (src/domain/generation/generationForkRegistry.js names the chain), so it is `drawn`.
+    expect(GENERATION_TIER2.filter((row) => row.origin === 'computed').length,
+      'the power structure consumes zero draws, the placeholder\'s status is the appender\'s, and all ten rows stay editable anyway').toBe(6);
+
+    // ── THE ANCHORED NEGATIVE. `powerStructure.seats[].holder` is the path the version-2 design
+    // joined on and it exists NOWHERE; `powerStructure.governingName` is the real seat and
+    // travels the same generatePower code path, so the exclusion cannot go vacuous.
+    expect(absentOccupancy.get('powerStructure.seats[].holder'), 'the version-2 seat path resolves nowhere').toBe(0);
+    expect(absentOccupancy.get('institutions[].state'), 'institutions[].state does not exist at generation').toBe(0);
+    expectAbsentWithAnchor(
+      resolvingPaths, 'powerStructure.seats[].holder', 'powerStructure.governingName',
+      'A8e: the real seat is governingName, not seats[].holder',
+    );
+  }, 120_000);
+});

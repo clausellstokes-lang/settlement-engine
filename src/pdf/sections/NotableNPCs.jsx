@@ -25,6 +25,7 @@ import { label, humanize, safe } from '../lib/format.js';
 import { EntityRef, anchorTarget } from '../primitives/EntityRef.jsx';
 import { ProseText } from '../primitives/ProseText.jsx';
 import { tokenCase } from '../../domain/display/labelCase.js';
+import { institutionHouseLabel } from '../../domain/display/institutionDisplayName.js';
 
 /**
  * TextRow — Label · prose value pair, but the value is rendered as plain
@@ -206,7 +207,8 @@ function FullCard({ npc, index }) {
       {/* PEOPLE-5A (M-1b): the card's house and its standing in each power by rank. */}
       {(npc.house || npc.powerLine) && (
         <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'], marginTop: 2 }}>
-          {safe([npc.house, npc.powerLine].filter(Boolean).join(' · '))}
+          {/* ROUND THREE, ruling (a): the house by its label, as the page's NPC card door prints it. */}
+          {safe([npc.house ? institutionHouseLabel(npc.house) : '', npc.powerLine].filter(Boolean).join(' · '))}
         </Text>
       )}
 

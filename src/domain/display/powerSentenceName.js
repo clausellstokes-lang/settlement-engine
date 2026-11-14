@@ -12,9 +12,18 @@
  *
  * The name: the first of a slashed pair, as an institution's noun is (institutionSentenceNoun):
  * "Military/Guard" → "Military", "Monster Hunters / Adventurers" → "Monster Hunters". The record's
- * label is untouched; this is the sentence's spelling only. The possessive: a power's name is a
- * bloc, so a name whose last word is a plural (ending in -ies, or in -s after a consonant) takes a
- * bare apostrophe ("Religious Authorities'", "Merchant Guilds'"); every other name takes "'s".
+ * label is untouched; this is the sentence's spelling only. The possessive: a power's name (and a
+ * suppressed institution's noun, which the pulse's suppression line reads through this same leaf —
+ * COHERENCE-POWERS-6 item 8, the "craft guilds's" witness bug) is usually a plural bloc, so a name
+ * whose last word is a plural takes a bare apostrophe ("Religious Authorities'", "Merchant Guilds'",
+ * "Noble Houses'", "market squares'"); a singular, and the Latin/sibilant singular endings -us, -ss
+ * and -is ("consensus's", "duchess's", "crisis's"), take "'s".
+ *
+ * ⛔ THE OLD RULE (-ies or -s after a consonant) MISSED a plural ending in a VOWEL + s — "Noble
+ * Houses" read "Noble Houses's", "market squares" read "market squares's" — and WRONGLY bared a
+ * singular -ss ("duchess'"). The widened rule bares every -s plural except the three singular
+ * endings, which no roster power name carries (measured 2026-11-13 over the faction and institution
+ * catalogues: the only vowel+s singular is "…consensus", correctly kept with "'s").
  * @enforced-by tests/domain/powerSentenceName.test.js
  */
 
@@ -29,5 +38,7 @@ export function powerSentenceName(name) {
 export function powerPossessive(name) {
   const said = powerSentenceName(name);
   const last = said.split(' ').at(-1) || '';
-  return /(?:ies|[bcdfghjklmnpqrtvwxyz]s)$/i.test(last) ? `${said}'` : `${said}'s`;
+  // a plural takes a bare apostrophe: -ies, or any -s that is not a singular -us / -ss / -is
+  const plural = /ies$/i.test(last) || (/s$/i.test(last) && !/(?:us|ss|is)$/i.test(last));
+  return plural ? `${said}'` : `${said}'s`;
 }

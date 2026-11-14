@@ -1,0 +1,15 @@
+h-c72917251 hired-only 36 military above 0 readiness above 14 both 0
+   mil above: []
+   readiness above: [('cold-hamlet-239', 27, 25), ('cold-village-65', 14, 11), ('agree-village-43', 33, 32), ('cold-hamlet-56', 25, 23), ('cold-hamlet-120', 44, 41), ('cold-hamlet-132', 20, 17), ('cold-hamlet-238', 12, 11), ('cold-village-98', 39, 35), ('cold-village-168', 30, 29), ('cold-village-220', 24, 21), ('fresh6-hamlet-22', 24, 23), ('fresh6-hamlet-38', 33, 32)]
+h-0a07f98c7 hired-only 36 military above 0 readiness above 14 both 0
+   mil above: []
+   readiness above: [('cold-hamlet-239', 27, 25), ('cold-village-65', 14, 11), ('agree-village-43', 33, 32), ('cold-hamlet-56', 25, 23), ('cold-hamlet-120', 43, 40), ('cold-hamlet-132', 20, 17), ('cold-hamlet-238', 12, 11), ('cold-village-98', 39, 35), ('cold-village-168', 30, 29), ('cold-village-220', 24, 21), ('fresh6-hamlet-22', 24, 23), ('fresh6-hamlet-38', 33, 32)]
+h-2133873fe hired-only 36 military above 0 readiness above 14 both 0
+   mil above: []
+   readiness above: [('cold-hamlet-239', 27, 25), ('cold-village-65', 14, 11), ('agree-village-43', 33, 32), ('cold-hamlet-56', 25, 23), ('cold-hamlet-120', 44, 41), ('cold-hamlet-132', 20, 17), ('cold-hamlet-238', 12, 11), ('cold-village-98', 39, 35), ('cold-village-168', 30, 29), ('cold-village-220', 24, 21), ('fresh6-hamlet-22', 24, 23), ('fresh6-hamlet-38', 33, 32)]
+h-8ef42a051 hired-only 36 military above 8 readiness above 21 both 5
+   mil above: [('cold-hamlet-162', 49, 42), ('cold-village-130', 43, 38), ('fresh6-hamlet-8', 44, 37), ('cold-hamlet-113', 51, 44), ('cold-hamlet-181', 46, 38), ('cold-village-73', 44, 43), ('cold-village-203', 67, 60), ('fresh6-hamlet-41', 51, 39)]
+   readiness above: [('cold-hamlet-56', 25, 23), ('cold-hamlet-120', 44, 41), ('cold-hamlet-132', 20, 17), ('cold-hamlet-162', 29, 28), ('cold-hamlet-206', 25, 24), ('cold-hamlet-238', 12, 11), ('cold-village-98', 39, 35), ('cold-village-168', 30, 29), ('cold-village-220', 24, 21), ('fresh6-hamlet-8', 31, 30), ('fresh6-hamlet-22', 24, 23), ('fresh6-hamlet-38', 33, 32)]
+h-C0 hired-only 36 military above 0 readiness above 16 both 0
+   mil above: []
+   readiness above: [('cold-hamlet-56', 25, 23), ('cold-hamlet-91', 24, 23), ('cold-hamlet-120', 44, 41), ('cold-hamlet-132', 20, 17), ('cold-hamlet-206', 25, 24), ('cold-hamlet-238', 12, 11), ('cold-hamlet-239', 27, 25), ('cold-village-65', 14, 11), ('cold-village-98', 39, 35), ('cold-village-168', 30, 29), ('cold-village-220', 24, 21), ('fresh6-hamlet-22', 24, 23)]

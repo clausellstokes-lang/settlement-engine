@@ -15,7 +15,7 @@
  *   applyLegitimacyMultipliers → mutates faction array in place
  */
 
-import { LEGITIMACY_CUTS, legitimacyBandOf } from '../data/bandLadders.js';
+import { LEGITIMACY_CUTS, legitimacyBandOf } from '../data/bandLadders.js'; import { STRESS_POWER_FACES } from '../data/stressPowerFaces.js'; // one line: the holder census keys this file by line
 // ── Public legitimacy contributions ──────────────────────────────────────────
 // Prosperity → ±20
 const PROSPERITY_CONTRIB = {
@@ -387,6 +387,14 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
     const ratio = mil.power / Math.max(1, gov.power);
     let type, direction, narrative;
 
+    // R3-CODE-C (ROUND-3-CUT #1074, HIGH: "Merchant Guild Council gives the orders and Occupation Authority carries
+    // them out" beside the crisis's "its own officials take their orders"): a power an occupation sends in (the
+    // table's appointed row, data/stressPowerFaces.js) is filed under the military category, so `mil` can be the
+    // occupier. Its row says what the crisis is at every band: the hall carries out what the occupier decides (the
+    // subordinate frame, its parties the other way round). Its kind never says the hall commands (subordinate) or
+    // that each needs the other (symbiotic); the bands above those (tense, competitive) stand.
+    const occupier = STRESS_POWER_FACES.some((row) => row.appointed && row.power === mil.faction && stressed(row.stress));
+
     if (ratio <= 0.5) {
       type = 'subordinate';
       // R6 (soak 1000 rung 1, kind 4): the soldiers sentence needs soldiers on the record, a
@@ -401,7 +409,15 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
       narrative = `${mil.faction} is now about as strong as ${gov.faction}. The hall asks for the commander's agreement instead of giving orders, and less and less is decided without it.`;
     } else {
       type = 'competitive';
-      narrative = `${mil.faction} no longer takes orders from ${gov.faction}. ${gov.faction} keeps the title; ${mil.faction} makes the decisions that matter.`;
+      // R3-CODE-C-2 (ROUND-3-CUT-INCREMENT #pf-591): "makes the decisions that matter" only where the force is the
+      // strongest power; beside a stronger one (Religious Authorities 47 to the Guard's 19) the first sentence stands alone.
+      const strongest = factions.every((f) => f === mil || (f.power || 0) <= (mil.power || 0));
+      narrative = `${mil.faction} no longer takes orders from ${gov.faction}.${strongest ? ` ${gov.faction} keeps the title; ${mil.faction} makes the decisions that matter.` : ''}`;
+    }
+    // The occupier's row (#1074): its kind from the same bands, never subordinate or symbiotic; its words the crisis's.
+    if (occupier) {
+      type = type === 'competitive' ? 'competitive' : 'tense';
+      narrative = `${gov.faction} carries out what ${mil.faction} decides.`;
     }
 
     direction = stressed('under_siege') ? 'escalating'  // military power rising in crisis
@@ -446,7 +462,9 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
                             (gov.faction || '').toLowerCase().includes('theocrat') ||
                             (gov.faction || '').toLowerCase().includes('ecclesiast');
 
-    if (govIsTheocratic) {
+    // R3-CODE-C-2 (#pf-590): a religious power that is not the governing one is another body; "the same people in
+    // practice" is said of none (their members are not shared), so a church government reads the same bands.
+    if (govIsTheocratic && rel === gov) {
       type = 'symbiotic';
       narrative = `${rel.faction} and ${gov.faction} are the same people in practice; the hall rules because the faith says it may.`;
     } else if (ratio >= 1.1) {
@@ -464,7 +482,15 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
               : stressed('plague_onset')         ? 'escalating'  // church gains legitimacy in crisis
               : 'stable';
 
-    addRel({ pair: [gov.faction, rel.faction], type, direction, ratio: Math.round(ratio*100)/100, narrative });
+    // R3-CODE-C-9 (the bar's n240; the chair's ruling of 2026-11-14, vetoable by the owner: the line reads the
+    // relationship's own standing, the fact the record prints beside it, and is not drawn where the record contradicts
+    // it; 77f0e6792's form). The subordinate line says the faith has "no say in the hall"; World/Faith gives the
+    // strongest religious power a voice in the town's affairs wherever one stands (dossier/faithReading.js ::
+    // factionLine: a small voice below 15, a voice, real weight from 30), and its own card on the Power tab gives it
+    // civic reach in every band (rulingStructure.js's religious desc: "limited" at the least). So it is not drawn.
+    // Gortfell (bar0-town-calm-rand-1): beside "A voice in the town's affairs belongs to the Religious Authorities."
+    // 149 of the reader's 1,722 births.
+    if (type !== 'subordinate') addRel({ pair: [gov.faction, rel.faction], type, direction, ratio: Math.round(ratio*100)/100, narrative });
   }
 
   // ── Governing ↔ Criminal ────────────────────────────────────────────────────
@@ -519,6 +545,12 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
   }
 
   // ── Noble ↔ Governing (feudal dynamics) ────────────────────────────────────
+  // R3-CODE-C-8 (the reader's L14; the chair's ruling (c) of 2026-11-14, vetoable by the owner): the subordinate line
+  // ("still have their titles, but ... have taken most of their power") is not drawn of the indebted crisis's own
+  // creditor power (data/stressPowerFaces.js, the indebted row): beside it the Power tab prints "Strained — the creditors
+  // have a say in every decision" (governanceNarrative.js). r2r-metropolis-33, 1 of 128 subordinate lines.
+  const nobleIsCreditor = !!noble && stressed('indebted')
+    && STRESS_POWER_FACES.some((row) => row.stress === 'indebted' && row.power === noble.faction);
   if (noble && gov && !gov.faction?.toLowerCase().includes('feudal')) {
     const ratio = noble.power / Math.max(1, gov.power);
     let type, narrative;
@@ -531,9 +563,9 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
       ? `${noble.faction} hold old rights ${gov.faction} cannot take away; nothing about land, inheritance or levies gets done without their agreement.`
       : ratio >= 0.5
       ? `${noble.faction} live under the rule of ${gov.faction} but keep enough rights of their own (land, courts, levies) to bargain, not simply obey.`
-      : `${noble.faction} still have their titles, but merchant money and the hall's offices have taken most of their power.`;
+      : `${noble.faction} still have their titles, but ${merc && (merc.power || 0) > (noble.power || 0) ? 'merchant money and ' : ''}the hall's offices have taken most of their power.`; // R3-CODE-C-2 (#pf-90): merchant money only where a merchant power outranks them
 
-    addRel({ pair: [noble.faction, gov.faction], type, direction: 'declining', ratio: Math.round(ratio*100)/100, narrative });
+    if (!(type === 'subordinate' && nobleIsCreditor)) addRel({ pair: [noble.faction, gov.faction], type, direction: 'declining', ratio: Math.round(ratio*100)/100, narrative });
   }
 
   // Deduplicate by pair (sorted key) — prevents double-relationships
