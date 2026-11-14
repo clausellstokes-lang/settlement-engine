@@ -1,0 +1,56 @@
+PATTERN a: towns 711 · distinct lines 536 (NEW 284) · writers 93 (NEW 43) · untraced lines 45
+PATTERN b: towns 70 · distinct lines 94 (NEW 55) · writers 38 (NEW 18) · untraced lines 16
+PATTERN c: towns 293 · distinct lines 264 (NEW 156) · writers 38 (NEW 18) · untraced lines 8
+PATTERN d: towns 382 · distinct lines 36 (NEW 19) · writers 8 (NEW 5) · untraced lines 14
+PATTERN e: towns 57 · distinct lines 19 (NEW 13) · writers 4 (NEW 3) · untraced lines 3
+PATTERN f: towns 720 · distinct lines 344 (NEW 191) · writers 14 (NEW 7) · untraced lines 124
+PATTERN g: towns 720 · distinct lines 14 (NEW 0) · writers 3 (NEW 0) · untraced lines 8
+PATTERN h: towns 20 · distinct lines 63 (NEW 60) · writers 15 (NEW 13) · untraced lines 26
+FILE src/generators/narrativeText.js [ra]: a 12 towns/6 lines/1 fns
+FILE src/data/narrativeData.js [ra]: a 2 towns/2 lines/2 fns · c 4 towns/3 lines/3 fns
+FILE src/data/npcData.js [ra]: a 6 towns/5 lines/3 fns
+FILE src/generators/narrative/settlementOriginProse.js [none]: b 2 towns/2 lines/1 fns
+FILE src/generators/economy/foodBalance.js [ra]: b 2 towns/1 lines/1 fns
+  HIT a/clergy r2r-thorp-0 Summary/Overview [POLITICAL_FLAVOR] NEW: "Visitors sometimes ask why the people here seem so personally invested in theological questions that most settlements leave to the priests.
+  HIT a/clergy r2r-thorp-0 World/History [POLITICAL_FLAVOR] NEW: "Visitors sometimes ask why the people here seem so personally invested in theological questions that most settlements leave to the priests.
+  HIT a/clergy r2r-thorp-2 Summary/Overview [POLITICAL_FLAVOR] NEW: "Visitors sometimes ask why the people here seem so personally invested in theological questions that most settlements leave to the priests.
+  HIT a/clergy r2r-thorp-2 World/History [POLITICAL_FLAVOR] NEW: "Visitors sometimes ask why the people here seem so personally invested in theological questions that most settlements leave to the priests.
+  HIT a/clergy r2r-thorp-11 Summary/Overview [POLITICAL_FLAVOR] NEW: "The Religious Conflict is why the local clergy and the civic authority maintain a relationship of careful, documented mutual respect rather than the easy cooperation you find elsewhere"
+  HIT a/clergy r2r-thorp-11 World/History [POLITICAL_FLAVOR] NEW: "The Religious Conflict is why the local clergy and the civic authority maintain a relationship of careful, documented mutual respect rather than the easy cooperation you find elsewhere"
+  HIT a/clergy r2r-thorp-12 Summary/Overview [POLITICAL_FLAVOR] NEW: "Visitors sometimes ask why the people here seem so personally invested in theological questions that most settlements leave to the priests.
+  HIT a/clergy r2r-thorp-12 World/History [POLITICAL_FLAVOR] NEW: "Visitors sometimes ask why the people here seem so personally invested in theological questions that most settlements leave to the priests.
+  HIT a/church r2r-thorp-29 Summary/Overview [POLITICAL_FLAVOR] NEW: "The Religious Conflict split the faith here; its house of worship survived, but the congregation never came back together"
+  HIT a/church r2r-thorp-29 World/History [POLITICAL_FLAVOR] NEW: "The Religious Conflict split the faith here; its house of worship survived, but the congregation never came back together"
+  HIT a/merchants r2r-thorp-39 World/History [STRESS_DESCS.slave_revolt] NEW: Beginning in the lower districts, the blaze took wooden buildings and merchant stalls street by street until whole quarters were gone
+  HIT c/quarters r2r-thorp-39 World/History [STRESS_DESCS.slave_revolt] NEW: Beginning in the lower districts, the blaze took wooden buildings and merchant stalls street by street until whole quarters were gone
+  HIT c/districts r2r-thorp-39 World/History [STRESS_DESCS.slave_revolt] NEW: Beginning in the lower districts, the blaze took wooden buildings and merchant stalls street by street until whole quarters were gone
+  HIT a/clergy r2r-hamlet-4 Summary/Overview [POLITICAL_FLAVOR] NEW: "The Religious Conflict is why the local clergy and the civic authority maintain a relationship of careful, documented mutual respect rather than the easy cooperation you find elsewhere"
+  HIT a/clergy r2r-hamlet-4 World/History [POLITICAL_FLAVOR] NEW: "The Religious Conflict is why the local clergy and the civic authority maintain a relationship of careful, documented mutual respect rather than the easy cooperation you find elsewhere"
+  HIT a/church r2r-hamlet-39 Summary/Overview [POLITICAL_FLAVOR] NEW: "The Heresy Trials split the faith here; its house of worship survived, but the congregation never came back together"
+  HIT a/church r2r-hamlet-39 World/History [POLITICAL_FLAVOR] NEW: "The Heresy Trials split the faith here; its house of worship survived, but the congregation never came back together"
+  HIT a/church r2r-hamlet-45 Summary/Overview [POLITICAL_FLAVOR] NEW: "The Pilgrimage split the faith here; its house of worship survived, but the congregation never came back together"
+  HIT a/church r2r-hamlet-45 World/History [POLITICAL_FLAVOR] NEW: "The Pilgrimage split the faith here; its house of worship survived, but the congregation never came back together"
+  HIT a/church r2r-hamlet-50 Summary/Overview [POLITICAL_FLAVOR] NEW: "The Religious Conflict split the faith here; its house of worship survived, but the congregation never came back together"
+  HIT a/church r2r-hamlet-50 World/History [POLITICAL_FLAVOR] NEW: "The Religious Conflict split the faith here; its house of worship survived, but the congregation never came back together"
+  HIT a/clergy r2r-hamlet-55 Summary/Overview [POLITICAL_FLAVOR] NEW: "Visitors sometimes ask why the people here seem so personally invested in theological questions that most settlements leave to the priests.
+  HIT a/clergy r2r-hamlet-55 World/History [POLITICAL_FLAVOR] NEW: "Visitors sometimes ask why the people here seem so personally invested in theological questions that most settlements leave to the priests.
+  HIT c/districts r2r-village-47 Summary/Overview [STRESS_DESCS.indebted] ww#920~: The merchant district of Mahapat looks prosperous.
+  HIT c/quarters r2r-village-57 World/History [STRESS_DESCS.slave_revolt] NEW: Beginning in the lower districts, the blaze took wooden buildings and merchant stalls street by street until whole quarters were gone
+  HIT c/districts r2r-village-57 World/History [STRESS_DESCS.slave_revolt] NEW: Beginning in the lower districts, the blaze took wooden buildings and merchant stalls street by street until whole quarters were gone
+  HIT a/customs r2r-city-3 World/Relationships [STRESS_ECONOMIC_EFFECTS.econ_crim_blur] NEW: The warehouse keeps two inventories, and only one is shown to the customs house.
+  HIT a/customs r2r-city-3 World/Relationships [STRESS_ECONOMIC_EFFECTS.econ_crim_blur] NEW: A customs officer has asked Photios Glabas for the names of every supplier.
+  HIT b/siege:arrivals r2r-metropolis-14 Summary/Overview [ORIGIN_POOLS] NEW: It exists because travellers had to stop somewhere, and the roads decided that somewhere was here.
+  HIT a/guild:thieves r2r-metropolis-50 World/NPCs [NPC_CRIMINAL_SECRETS_BY_HOLDER.criminal] cut#596: Secret: On the payroll of the thieves' guild as a silent informant
+  HIT b/siege:brought-in r2s-under_siege-city-0 Summary/Plot Hooks [deriveSupplyRiskAnalysis] cut#208: One importer now brings in all the grain and has quadrupled the price; the locals are arguing over whether to pay, find another supplier, or take the grain.
+  HIT b/siege:brought-in r2s-under_siege-metropolis-3 Summary/Plot Hooks [deriveSupplyRiskAnalysis] cut#208: One importer now brings in all the grain and has quadrupled the price; the locals are arguing over whether to pay, find another supplier, or take the grain.
+  HIT b/famine:plenty r2s-famine-village-1 Summary/Overview [ORIGIN_POOLS] ww#1159: Established along the river for drinking, for milling, and for moving what the fields produce. All three still hold.
+  HIT a/guild r2s-occupied-thorp-0 Summary/Overview [POLITICAL_FLAVOR] cut#2~: "The Guild War aside, the history here is long and steady, and travellers remember the place kindly"
+  HIT a/guild r2s-occupied-thorp-0 World/History [POLITICAL_FLAVOR] cut#2~: "The Guild War aside, the history here is long and steady, and travellers remember the place kindly"
+  HIT a/merchants r2s-occupied-hamlet-3 World/NPCs [NPC_CRIMINAL_SECRETS_BY_HOLDER.criminal] NEW: Secret: Runs a protection scheme targeting the very merchants they're supposed to serve
+  HIT a/clergy r2s-politically_fractured-hamlet-0 Summary/Overview [POLITICAL_FLAVOR] NEW: "Visitors sometimes ask why the people here seem so personally invested in theological questions that most settlements leave to the priests.
+  HIT a/clergy r2s-politically_fractured-hamlet-0 World/History [POLITICAL_FLAVOR] NEW: "Visitors sometimes ask why the people here seem so personally invested in theological questions that most settlements leave to the priests.
+  HIT a/guild:thieves r2s-politically_fractured-city-1 World/NPCs [NPC_CRIMINAL_SECRETS_BY_HOLDER.criminal] cut#596: Secret: On the payroll of the thieves' guild as a silent informant
+  HIT a/court r2s-plague_onset-town-0 World/Relationships [STRESS_ECONOMIC_EFFECTS.mil_crim_suppression] NEW: Salim al-Baghdadi has a witness willing to name Nasr ibn Zuhr before a magistrate.
+  HIT a/quarry r2s-succession_void-town-0 Summary/Overview [STRESS_DESCS.succession_void] ww#540~: Building has stopped mid-job across Shivamandal; scaffolding stands empty on dressed stone.
+  HIT c/quarters r2s-religious_conversion-village-3 Summary/Overview [STRESS_DESCS.religious_conversion] NEW: Two processions are forming in different quarters, and the people watching each are counting who watches the other.
+  HIT a/merchants r2s-slave_revolt-hamlet-2 World/NPCs [NPC_CRIMINAL_SECRETS_BY_HOLDER.criminal] NEW: Secret: Runs a protection scheme targeting the very merchants they're supposed to serve

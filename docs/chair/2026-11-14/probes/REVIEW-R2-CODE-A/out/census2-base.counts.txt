@@ -1,0 +1,197 @@
+PATTERN a: towns 716 · distinct lines 593 (NEW 306) · writers 103 (NEW 45) · untraced lines 46
+PATTERN b: towns 70 · distinct lines 101 (NEW 60) · writers 38 (NEW 19) · untraced lines 12
+PATTERN c: towns 291 · distinct lines 293 (NEW 172) · writers 41 (NEW 20) · untraced lines 8
+PATTERN d: towns 381 · distinct lines 36 (NEW 19) · writers 7 (NEW 4) · untraced lines 14
+PATTERN e: towns 60 · distinct lines 20 (NEW 14) · writers 5 (NEW 3) · untraced lines 3
+PATTERN f: towns 720 · distinct lines 345 (NEW 191) · writers 13 (NEW 6) · untraced lines 122
+PATTERN g: towns 720 · distinct lines 14 (NEW 0) · writers 3 (NEW 0) · untraced lines 8
+PATTERN h: towns 21 · distinct lines 68 (NEW 65) · writers 16 (NEW 14) · untraced lines 29
+FILE src/data/narrativeData.js [ra]: a 40 towns/36 lines/7 fns · c 36 towns/30 lines/5 fns
+FILE src/generators/narrativeText.js [ra]: a 27 towns/13 lines/2 fns · b 5 towns/2 lines/1 fns · c 6 towns/2 lines/1 fns
+FILE src/generators/economy/foodBalance.js [ra]: a 14 towns/5 lines/1 fns · b 2 towns/1 lines/1 fns
+FILE src/generators/narrative/settlementOriginProse.js [none]: e 4 towns/1 lines/1 fns · b 8 towns/5 lines/1 fns
+FILE src/data/npcData.js [ra]: a 8 towns/5 lines/3 fns
+FILE src/generators/narrativeGenerator.js [ra]: b 3 towns/3 lines/1 fns
+FILE src/data/stressInstitutionEffects.js [ra]: a 3 towns/1 lines/1 fns
+  HIT a/clergy r2r-thorp-0 Summary/Overview [POLITICAL_FLAVOR] NEW: "Visitors sometimes ask why the people here seem so personally invested in theological questions that most settlements leave to the priests.
+  HIT a/clergy r2r-thorp-0 World/History [POLITICAL_FLAVOR] NEW: "Visitors sometimes ask why the people here seem so personally invested in theological questions that most settlements leave to the priests.
+  HIT a/clergy r2r-thorp-2 Summary/Overview [POLITICAL_FLAVOR] NEW: "Visitors sometimes ask why the people here seem so personally invested in theological questions that most settlements leave to the priests.
+  HIT a/clergy r2r-thorp-2 World/History [POLITICAL_FLAVOR] NEW: "Visitors sometimes ask why the people here seem so personally invested in theological questions that most settlements leave to the priests.
+  HIT a/clergy r2r-thorp-11 Summary/Overview [POLITICAL_FLAVOR] NEW: "The Religious Conflict is why the local clergy and the civic authority maintain a relationship of careful, documented mutual respect rather than the easy cooperation you find elsewhere"
+  HIT a/workshops r2r-thorp-11 Summary/Overview [PRESSURE_SENTENCES] NEW: Every capable pair of hands Muulcoba could spare, and several it could not, has gone to the war; what remains is losing people and resources by attrition (a workshop closed for want of a master, a fie
+  HIT a/clergy r2r-thorp-11 World/History [POLITICAL_FLAVOR] NEW: "The Religious Conflict is why the local clergy and the civic authority maintain a relationship of careful, documented mutual respect rather than the easy cooperation you find elsewhere"
+  HIT a/clergy r2r-thorp-12 Summary/Overview [POLITICAL_FLAVOR] NEW: "Visitors sometimes ask why the people here seem so personally invested in theological questions that most settlements leave to the priests.
+  HIT a/clergy r2r-thorp-12 World/History [POLITICAL_FLAVOR] NEW: "Visitors sometimes ask why the people here seem so personally invested in theological questions that most settlements leave to the priests.
+  HIT a/merchants r2r-thorp-14 Summary/Overview [ARRIVAL_SCENES.ordinary] NEW: A merchant argues with a carter on the road into Eisenburg about the size of a load.
+  HIT a/workshops r2r-thorp-16 Summary/Overview [PRESSURE_SENTENCES] NEW: Every capable pair of hands Beizhou could spare, and several it could not, has gone to the war; what remains is losing people and resources by attrition (a workshop closed for want of a master, a fiel
+  HIT a/market r2r-thorp-16 World/History [STRESS_NOTES.wartime] NEW: Now the army takes what the market used to sell.
+  HIT b/famine:plenty r2r-thorp-17 Summary/Overview [famineFoodIsPower] NEW: Since the hunt failed, food is power in Chichich, and everyone is watching who eats well.
+  HIT a/church r2r-thorp-29 Summary/Overview [POLITICAL_FLAVOR] NEW: "The Religious Conflict split the faith here; its house of worship survived, but the congregation never came back together"
+  HIT c/streets r2r-thorp-29 Summary/Overview [PRESSURE_SENTENCES] NEW: The streets of Yurtbulag have gone quiet, and everyone is waiting for something to break.
+  HIT a/church r2r-thorp-29 World/History [POLITICAL_FLAVOR] NEW: "The Religious Conflict split the faith here; its house of worship survived, but the congregation never came back together"
+  HIT a/market r2r-thorp-32 World/History [STRESS_NOTES.wartime] NEW: Now the army takes what the market used to sell.
+  HIT a/merchants r2r-thorp-39 World/History [STRESS_DESCS.slave_revolt] NEW: Beginning in the lower districts, the blaze took wooden buildings and merchant stalls street by street until whole quarters were gone
+  HIT c/quarters r2r-thorp-39 World/History [STRESS_DESCS.slave_revolt] NEW: Beginning in the lower districts, the blaze took wooden buildings and merchant stalls street by street until whole quarters were gone
+  HIT c/districts r2r-thorp-39 World/History [STRESS_DESCS.slave_revolt] NEW: Beginning in the lower districts, the blaze took wooden buildings and merchant stalls street by street until whole quarters were gone
+  HIT a/bakery r2r-thorp-54 Summary/Overview [PRESSURE_SENTENCES] ww#28: The bakers of Forteripa have started cutting the bread with things that are not flour; everyone can taste it, and the fact that nobody complains is the most alarming part.
+  HIT a/clergy r2r-hamlet-4 Summary/Overview [POLITICAL_FLAVOR] NEW: "The Religious Conflict is why the local clergy and the civic authority maintain a relationship of careful, documented mutual respect rather than the easy cooperation you find elsewhere"
+  HIT a/clergy r2r-hamlet-4 World/History [POLITICAL_FLAVOR] NEW: "The Religious Conflict is why the local clergy and the civic authority maintain a relationship of careful, documented mutual respect rather than the easy cooperation you find elsewhere"
+  HIT e/docks r2r-hamlet-13 Summary/Overview [ORIGIN_POOLS] NEW: Founded on the shore; the place has no wharf.
+  HIT b/famine:plenty r2r-hamlet-16 Summary/Overview [famineFoodIsPower] NEW: Since the fishing failed, food is power in Oxteha, and everyone is watching who eats well.
+  HIT a/merchants r2r-hamlet-16 Summary/Plot Hooks [deriveFoodBalanceAnalysis] cut#14~: The settlement must decide what it can still afford to import, and the merchants are watching it decide.
+  HIT a/merchants r2r-hamlet-17 Summary/Overview [ARRIVAL_SCENES.ordinary] NEW: A merchant argues with a carter on the road into Faroaltum about the size of a load.
+  HIT a/merchants r2r-hamlet-22 Summary/Overview [ARRIVAL_SCENES.ordinary] NEW: A merchant argues with a carter on the road into Yugou about the size of a load.
+  HIT a/bakery r2r-hamlet-24 Summary/Overview [PRESSURE_SENTENCES] ww#28: The bakers of Jayakota have started cutting the bread with things that are not flour; everyone can taste it, and the fact that nobody complains is the most alarming part.
+  HIT b/famine:plenty r2r-hamlet-28 Summary/Overview [famineFoodIsPower] NEW: Since the fishing failed, food is power in Ravenoy, and everyone is watching who eats well.
+  HIT a/merchants r2r-hamlet-30 Summary/Overview [ARRIVAL_SCENES.ordinary] NEW: A merchant argues with a carter on the road into Karakkala about the size of a load.
+  HIT a/merchants r2r-hamlet-32 Summary/Overview [STRESS_DESCS.indebted] ww#920~: The merchant district of Terrasinum looks prosperous.
+  HIT c/districts r2r-hamlet-32 Summary/Overview [STRESS_DESCS.indebted] ww#920~: The merchant district of Terrasinum looks prosperous.
+  HIT a/merchants r2r-hamlet-33 Summary/Overview [STRESS_DESCS.indebted] ww#920~: The merchant district of Puripuram looks prosperous.
+  HIT c/districts r2r-hamlet-33 Summary/Overview [STRESS_DESCS.indebted] ww#920~: The merchant district of Puripuram looks prosperous.
+  HIT a/merchants r2r-hamlet-38 Summary/Overview [STRESS_DESCS.indebted] ww#920~: The merchant district of Prabhakota looks prosperous.
+  HIT c/districts r2r-hamlet-38 Summary/Overview [STRESS_DESCS.indebted] ww#920~: The merchant district of Prabhakota looks prosperous.
+  HIT a/church r2r-hamlet-39 Summary/Overview [POLITICAL_FLAVOR] NEW: "The Heresy Trials split the faith here; its house of worship survived, but the congregation never came back together"
+  HIT a/church r2r-hamlet-39 World/History [POLITICAL_FLAVOR] NEW: "The Heresy Trials split the faith here; its house of worship survived, but the congregation never came back together"
+  HIT a/church r2r-hamlet-45 Summary/Overview [POLITICAL_FLAVOR] NEW: "The Pilgrimage split the faith here; its house of worship survived, but the congregation never came back together"
+  HIT a/church r2r-hamlet-45 World/History [POLITICAL_FLAVOR] NEW: "The Pilgrimage split the faith here; its house of worship survived, but the congregation never came back together"
+  HIT a/merchants r2r-hamlet-48 Summary/Overview [ARRIVAL_SCENES.ordinary] NEW: A merchant argues with a carter on the road into Markazmela about the size of a load.
+  HIT a/church r2r-hamlet-50 Summary/Overview [POLITICAL_FLAVOR] NEW: "The Religious Conflict split the faith here; its house of worship survived, but the congregation never came back together"
+  HIT a/church r2r-hamlet-50 World/History [POLITICAL_FLAVOR] NEW: "The Religious Conflict split the faith here; its house of worship survived, but the congregation never came back together"
+  HIT a/clergy r2r-hamlet-55 Summary/Overview [POLITICAL_FLAVOR] NEW: "Visitors sometimes ask why the people here seem so personally invested in theological questions that most settlements leave to the priests.
+  HIT a/clergy r2r-hamlet-55 World/History [POLITICAL_FLAVOR] NEW: "Visitors sometimes ask why the people here seem so personally invested in theological questions that most settlements leave to the priests.
+  HIT e/docks r2r-village-11 Summary/Overview [ORIGIN_POOLS] NEW: Founded on the shore; the place has no wharf.
+  HIT a/docks r2r-village-12 Summary/Overview [ARRIVAL_SCENES.river] NEW: The river carries the sounds of Fortecolonia to you around the bend before the buildings appear: a mill wheel, the knock of boats against a jetty, someone calling a tally across the water.
+  HIT a/merchants r2r-village-12 World/NPCs [NPC_CRIMINAL_SECRETS_BY_HOLDER.criminal] NEW: Secret: Runs a protection scheme targeting the very merchants they're supposed to serve
+  HIT a/merchants r2r-village-19 Summary/Overview [ARRIVAL_SCENES.ordinary] NEW: A merchant argues with a carter on the road into Chinggistash about the size of a load.
+  HIT a/merchants r2r-village-38 Summary/Overview [STRESS_DESCS.indebted] ww#920~: The merchant district of Drumdale looks prosperous.
+  HIT c/districts r2r-village-38 Summary/Overview [STRESS_DESCS.indebted] ww#920~: The merchant district of Drumdale looks prosperous.
+  HIT a/mason r2r-village-39 Summary/Overview [STRESS_DESCS.religious_conversion] ww#58: The mason's yard in Beikou is its busiest enterprise: one set of holy symbols coming down, another going up, and the same three workmen paid for both.
+  HIT b/siege:arrivals r2r-village-43 Summary/Overview [generateSettlementReason] ww#3: Survival here rests on carriage by magic, the caravans that still come, the roads in a good season, or the favour of a patron — every one of them fragile.
+  HIT c/districts r2r-village-47 Summary/Overview [STRESS_DESCS.indebted] ww#920~: The merchant district of Mahapat looks prosperous.
+  HIT a/merchants r2r-village-50 Summary/Plot Hooks [deriveFoodBalanceAnalysis] cut#14~: The settlement must decide what it can still afford to import, and the merchants are watching it decide.
+  HIT a/merchants r2r-village-50 World/NPCs [STRESS_INSTITUTION_EFFECTS.needs] NEW: Secret: The quarantine order they're enforcing doesn't apply to shipments from a specific merchant they have a financial relationship with
+  HIT a/merchants r2r-village-52 Summary/Overview [STRESS_DESCS.indebted] ww#920~: The merchant district of Niederbrücke looks prosperous.
+  HIT c/districts r2r-village-52 Summary/Overview [STRESS_DESCS.indebted] ww#920~: The merchant district of Niederbrücke looks prosperous.
+  HIT b/siege:road-open r2r-village-55 Summary/Overview [ORIGIN_POOLS] NEW: A crossroads settlement: every road brings it trade, and any of them can bring it trouble.
+  HIT a/mason r2r-village-56 Summary/Overview [STRESS_DESCS.succession_void] ww#540: The masons of Treford have stopped mid-job on the great house; scaffolding stands empty on dressed stone.
+  HIT a/quarry r2r-village-56 Summary/Overview [STRESS_DESCS.succession_void] ww#540: The masons of Treford have stopped mid-job on the great house; scaffolding stands empty on dressed stone.
+  HIT c/quarters r2r-village-57 World/History [STRESS_DESCS.slave_revolt] NEW: Beginning in the lower districts, the blaze took wooden buildings and merchant stalls street by street until whole quarters were gone
+  HIT c/districts r2r-village-57 World/History [STRESS_DESCS.slave_revolt] NEW: Beginning in the lower districts, the blaze took wooden buildings and merchant stalls street by street until whole quarters were gone
+  HIT a/docks r2r-town-19 Summary/Overview [ARRIVAL_SCENES.river] NEW: The river carries the sounds of Altaikum to you around the bend before the buildings appear: a mill wheel, the knock of boats against a jetty, someone calling a tally across the water.
+  HIT a/docks r2r-town-20 Summary/Overview [ARRIVAL_SCENES.river] NEW: The river carries the sounds of Sübeteikhurel to you around the bend before the buildings appear: a mill wheel, the knock of boats against a jetty, someone calling a tally across the water.
+  HIT a/customs r2r-city-3 World/Relationships [STRESS_ECONOMIC_EFFECTS.econ_crim_blur] NEW: The warehouse keeps two inventories, and only one is shown to the customs house.
+  HIT a/customs r2r-city-3 World/Relationships [STRESS_ECONOMIC_EFFECTS.econ_crim_blur] NEW: A customs officer has asked Photios Glabas for the names of every supplier.
+  HIT b/siege:arrivals r2r-metropolis-14 Summary/Overview [ORIGIN_POOLS] NEW: It exists because travellers had to stop somewhere, and the roads decided that somewhere was here.
+  HIT a/guild:thieves r2r-metropolis-50 World/NPCs [NPC_CRIMINAL_SECRETS_BY_HOLDER.criminal] cut#596: Secret: On the payroll of the thieves' guild as a silent informant
+  HIT b/siege:trade-flows r2s-under_siege-thorp-0 Summary/Overview [ORIGIN_POOLS] NEW: Built at a major crossroads, and trade comes in on every road.
+  HIT b/siege:road-open r2s-under_siege-village-2 Summary/Overview [generateSettlementReason] ww#3~: What is missing comes in through carriage by magic, the caravans that still come, the roads in a good season, or the favour of a patron — when it comes at all.
+  HIT b/siege:trade-flows r2s-under_siege-town-1 Summary/Overview [ORIGIN_POOLS] NEW: Trade flows in, goods flow out, people pass through.
+  HIT b/siege:arrivals r2s-under_siege-town-2 Summary/Overview [generateSettlementReason] ww#3~: The settlement cannot fully feed itself; what the land does not give arrives expensively — through carriage by magic, the caravans that still come, the roads in a good season, or the favour of a patro
+  HIT b/siege:trade-flows r2s-under_siege-town-3 Summary/Overview [ORIGIN_POOLS] NEW: Trade flows in, goods flow out, people pass through.
+  HIT b/siege:brought-in r2s-under_siege-city-0 Summary/Plot Hooks [deriveSupplyRiskAnalysis] cut#208: One importer now brings in all the grain and has quadrupled the price; the locals are arguing over whether to pay, find another supplier, or take the grain.
+  HIT b/siege:trade-flows r2s-under_siege-city-1 Summary/Overview [ORIGIN_POOLS] NEW: Trade flows in, goods flow out, people pass through.
+  HIT b/siege:trade-flows r2s-under_siege-metropolis-2 Summary/Overview [ORIGIN_POOLS] NEW: Trade flows in, goods flow out, people pass through.
+  HIT b/siege:brought-in r2s-under_siege-metropolis-3 Summary/Plot Hooks [deriveSupplyRiskAnalysis] cut#208: One importer now brings in all the grain and has quadrupled the price; the locals are arguing over whether to pay, find another supplier, or take the grain.
+  HIT b/famine:plenty r2s-famine-thorp-0 Summary/Overview [famineFoodIsPower] NEW: Since the fishing failed, food is power in Makronea, and everyone is watching who eats well.
+  HIT a/merchants r2s-famine-thorp-0 Summary/Plot Hooks [deriveFoodBalanceAnalysis] cut#14~: The settlement must decide what it can still afford to import, and the merchants are watching it decide.
+  HIT a/merchants r2s-famine-thorp-1 Summary/Plot Hooks [deriveFoodBalanceAnalysis] cut#14~: The settlement must decide what it can still afford to import, and the merchants are watching it decide.
+  HIT a/merchants r2s-famine-thorp-2 Summary/Plot Hooks [deriveFoodBalanceAnalysis] cut#14~: The settlement must decide what it can still afford to import, and the merchants are watching it decide.
+  HIT a/merchants r2s-famine-thorp-3 Summary/Plot Hooks [deriveFoodBalanceAnalysis] cut#14~: The settlement must decide what it can still afford to import, and the merchants are watching it decide.
+  HIT b/famine:plenty r2s-famine-hamlet-0 Summary/Overview [famineFoodIsPower] NEW: Since the fishing failed, food is power in Montemare, and everyone is watching who eats well.
+  HIT e/docks r2s-famine-hamlet-0 Summary/Overview [ORIGIN_POOLS] NEW: Founded on the shore; the place has no wharf.
+  HIT a/merchants r2s-famine-hamlet-0 Summary/Plot Hooks [deriveFoodBalanceAnalysis] cut#14~: The settlement must decide what it can still afford to import, and the merchants are watching it decide.
+  HIT a/merchants r2s-famine-hamlet-3 Summary/Plot Hooks [deriveFoodBalanceAnalysis] cut#14~: The settlement must decide what it can still afford to import, and the merchants are watching it decide.
+  HIT a/merchants r2s-famine-village-0 Summary/Plot Hooks [deriveFoodBalanceAnalysis] cut#14~: The settlement must decide what it can still afford to import, and the merchants are watching it decide.
+  HIT b/famine:plenty r2s-famine-village-1 Summary/Overview [ORIGIN_POOLS] ww#1159: Established along the river for drinking, for milling, and for moving what the fields produce. All three still hold.
+  HIT a/merchants r2s-famine-village-1 Summary/Plot Hooks [deriveFoodBalanceAnalysis] cut#14~: The settlement must decide what it can still afford to import, and the merchants are watching it decide.
+  HIT c/quarters r2s-famine-village-2 Summary/Overview [STRESS_DESCS.famine] NEW: Spitzhafen looks prosperous in the merchant quarter: new paint, loaded carts, a market stall with produce.
+  HIT a/bakery r2s-famine-village-2 Summary/Overview [PRESSURE_SENTENCES] ww#28: The bakers of Spitzhafen have started cutting the bread with things that are not flour; everyone can taste it, and the fact that nobody complains is the most alarming part.
+  HIT a/guild r2s-occupied-thorp-0 Summary/Overview [POLITICAL_FLAVOR] cut#2~: "The Guild War aside, the history here is long and steady, and travellers remember the place kindly"
+  HIT a/guild r2s-occupied-thorp-0 World/History [POLITICAL_FLAVOR] cut#2~: "The Guild War aside, the history here is long and steady, and travellers remember the place kindly"
+  HIT a/merchants r2s-occupied-hamlet-3 World/NPCs [NPC_CRIMINAL_SECRETS_BY_HOLDER.criminal] NEW: Secret: Runs a protection scheme targeting the very merchants they're supposed to serve
+  HIT a/merchants r2s-occupied-village-0 Summary/Overview [POLITICAL_FLAVOR] NEW: The Economic Divide didn't create the merchant class here, but it defined what the merchant class could become"
+  HIT a/merchants r2s-occupied-village-0 World/History [POLITICAL_FLAVOR] NEW: The Economic Divide didn't create the merchant class here, but it defined what the merchant class could become"
+  HIT a/clergy r2s-politically_fractured-hamlet-0 Summary/Overview [POLITICAL_FLAVOR] NEW: "Visitors sometimes ask why the people here seem so personally invested in theological questions that most settlements leave to the priests.
+  HIT a/clergy r2s-politically_fractured-hamlet-0 World/History [POLITICAL_FLAVOR] NEW: "Visitors sometimes ask why the people here seem so personally invested in theological questions that most settlements leave to the priests.
+  HIT a/guild:thieves r2s-politically_fractured-city-1 World/NPCs [NPC_CRIMINAL_SECRETS_BY_HOLDER.criminal] cut#596: Secret: On the payroll of the thieves' guild as a silent informant
+  HIT a/merchants r2s-indebted-thorp-0 Summary/Overview [STRESS_DESCS.indebted] ww#920~: The merchant district of Makrokastro looks prosperous.
+  HIT c/districts r2s-indebted-thorp-0 Summary/Overview [STRESS_DESCS.indebted] ww#920~: The merchant district of Makrokastro looks prosperous.
+  HIT a/merchants r2s-indebted-thorp-1 Summary/Overview [STRESS_DESCS.indebted] ww#920~: The merchant district of Ravenås looks prosperous.
+  HIT c/districts r2s-indebted-thorp-1 Summary/Overview [STRESS_DESCS.indebted] ww#920~: The merchant district of Ravenås looks prosperous.
+  HIT a/merchants r2s-indebted-thorp-2 Summary/Overview [STRESS_DESCS.indebted] ww#920~: The merchant district of Kamalaganj looks prosperous.
+  HIT c/districts r2s-indebted-thorp-2 Summary/Overview [STRESS_DESCS.indebted] ww#920~: The merchant district of Kamalaganj looks prosperous.
+  HIT a/merchants r2s-indebted-thorp-3 Summary/Overview [STRESS_DESCS.indebted] ww#920~: The merchant district of Villaoppidum looks prosperous.
+  HIT c/districts r2s-indebted-thorp-3 Summary/Overview [STRESS_DESCS.indebted] ww#920~: The merchant district of Villaoppidum looks prosperous.
+  HIT a/merchants r2s-indebted-hamlet-0 Summary/Overview [STRESS_DESCS.indebted] ww#920~: The merchant district of Gantulgabulag looks prosperous.
+  HIT c/districts r2s-indebted-hamlet-0 Summary/Overview [STRESS_DESCS.indebted] ww#920~: The merchant district of Gantulgabulag looks prosperous.
+  HIT c/districts r2s-indebted-hamlet-1 Summary/Overview [STRESS_DESCS.indebted] ww#920~: The merchant district of Hadithaqila looks prosperous.
+  HIT a/merchants r2s-indebted-hamlet-2 Summary/Overview [STRESS_DESCS.indebted] ww#920~: The merchant district of Goldhausen looks prosperous.
+  HIT c/districts r2s-indebted-hamlet-2 Summary/Overview [STRESS_DESCS.indebted] ww#920~: The merchant district of Goldhausen looks prosperous.
+  HIT a/merchants r2s-indebted-hamlet-3 Summary/Overview [STRESS_DESCS.indebted] ww#920~: The merchant district of Morkstrand looks prosperous.
+  HIT c/districts r2s-indebted-hamlet-3 Summary/Overview [STRESS_DESCS.indebted] ww#920~: The merchant district of Morkstrand looks prosperous.
+  HIT a/merchants r2s-indebted-village-0 Summary/Overview [STRESS_DESCS.indebted] ww#920~: The merchant district of Uxmalahau looks prosperous.
+  HIT c/districts r2s-indebted-village-0 Summary/Overview [STRESS_DESCS.indebted] ww#920~: The merchant district of Uxmalahau looks prosperous.
+  HIT a/merchants r2s-indebted-village-1 Summary/Overview [STRESS_DESCS.indebted] ww#920~: The merchant district of Olympnea looks prosperous.
+  HIT c/districts r2s-indebted-village-1 Summary/Overview [STRESS_DESCS.indebted] ww#920~: The merchant district of Olympnea looks prosperous.
+  HIT a/merchants r2s-indebted-village-3 Summary/Overview [STRESS_DESCS.indebted] ww#920~: The merchant district of Chrissonea looks prosperous.
+  HIT c/districts r2s-indebted-village-3 Summary/Overview [STRESS_DESCS.indebted] ww#920~: The merchant district of Chrissonea looks prosperous.
+  HIT a/bakery r2s-recently_betrayed-hamlet-2 Summary/Overview [PRESSURE_SENTENCES] ww#28: The bakers of Nikephrion have started cutting the bread with things that are not flour; everyone can taste it, and the fact that nobody complains is the most alarming part.
+  HIT a/merchants r2s-plague_onset-thorp-0 Summary/Plot Hooks [deriveFoodBalanceAnalysis] cut#14~: The settlement must decide what it can still afford to import, and the merchants are watching it decide.
+  HIT a/merchants r2s-plague_onset-village-0 World/NPCs [STRESS_INSTITUTION_EFFECTS.needs] NEW: Secret: The quarantine order they're enforcing doesn't apply to shipments from a specific merchant they have a financial relationship with
+  HIT a/merchants r2s-plague_onset-village-2 Summary/Plot Hooks [deriveFoodBalanceAnalysis] cut#14~: The settlement must decide what it can still afford to import, and the merchants are watching it decide.
+  HIT a/merchants r2s-plague_onset-village-2 World/NPCs [STRESS_INSTITUTION_EFFECTS.needs] NEW: Secret: The quarantine order they're enforcing doesn't apply to shipments from a specific merchant they have a financial relationship with
+  HIT a/court r2s-plague_onset-town-0 World/Relationships [STRESS_ECONOMIC_EFFECTS.mil_crim_suppression] NEW: Salim al-Baghdadi has a witness willing to name Nasr ibn Zuhr before a magistrate.
+  HIT a/mason r2s-succession_void-thorp-2 Summary/Overview [STRESS_DESCS.succession_void] ww#540: The masons of Tulummal have stopped mid-job on the great house; scaffolding stands empty on dressed stone.
+  HIT a/quarry r2s-succession_void-thorp-2 Summary/Overview [STRESS_DESCS.succession_void] ww#540: The masons of Tulummal have stopped mid-job on the great house; scaffolding stands empty on dressed stone.
+  HIT a/merchants r2s-succession_void-thorp-2 Summary/Overview [PRESSURE_SENTENCES] NEW: The succession in Tulummal will be settled by the trade more than by any claim of blood or law: whoever the merchants and the creditors decide to deal with becomes, retroactively, the legitimate succe
+  HIT a/merchants r2s-succession_void-thorp-3 Summary/Overview [PRESSURE_SENTENCES] NEW: The succession in Markazmahal will be settled by the timber more than by any claim of blood or law: whoever the merchants and the creditors decide to deal with becomes, retroactively, the legitimate s
+  HIT a/merchants r2s-succession_void-hamlet-1 Summary/Overview [PRESSURE_SENTENCES] NEW: The succession in Skalddal will be settled by the medicinal herbs more than by any claim of blood or law: whoever the merchants and the creditors decide to deal with becomes, retroactively, the legiti
+  HIT a/mason r2s-succession_void-hamlet-2 Summary/Overview [STRESS_DESCS.succession_void] ww#540: The masons of Weichturm have stopped mid-job on the great house; scaffolding stands empty on dressed stone.
+  HIT a/quarry r2s-succession_void-hamlet-2 Summary/Overview [STRESS_DESCS.succession_void] ww#540: The masons of Weichturm have stopped mid-job on the great house; scaffolding stands empty on dressed stone.
+  HIT a/mason r2s-succession_void-village-2 Summary/Overview [STRESS_DESCS.succession_void] ww#540: The masons of Caerworth have stopped mid-job on the great house; scaffolding stands empty on dressed stone.
+  HIT a/quarry r2s-succession_void-village-2 Summary/Overview [STRESS_DESCS.succession_void] ww#540: The masons of Caerworth have stopped mid-job on the great house; scaffolding stands empty on dressed stone.
+  HIT a/merchants r2s-succession_void-village-2 Summary/Overview [PRESSURE_SENTENCES] NEW: The succession in Caerworth will be settled by the trade more than by any claim of blood or law: whoever the merchants and the creditors decide to deal with becomes, retroactively, the legitimate succ
+  HIT a/mason r2s-succession_void-village-3 Summary/Overview [STRESS_DESCS.succession_void] ww#540: The masons of Easford have stopped mid-job on the great house; scaffolding stands empty on dressed stone.
+  HIT a/quarry r2s-succession_void-village-3 Summary/Overview [STRESS_DESCS.succession_void] ww#540: The masons of Easford have stopped mid-job on the great house; scaffolding stands empty on dressed stone.
+  HIT a/mason r2s-succession_void-town-0 Summary/Overview [STRESS_DESCS.succession_void] ww#540: The masons of Shivamandal have stopped mid-job on the great house; scaffolding stands empty on dressed stone.
+  HIT a/quarry r2s-succession_void-town-0 Summary/Overview [STRESS_DESCS.succession_void] ww#540: The masons of Shivamandal have stopped mid-job on the great house; scaffolding stands empty on dressed stone.
+  HIT a/guild:thieves r2s-succession_void-city-2 World/NPCs [NPC_CRIMINAL_SECRETS_BY_HOLDER.criminal] cut#596: Secret: On the payroll of the thieves' guild as a silent informant
+  HIT c/streets r2s-insurgency-thorp-0 Summary/Overview [PRESSURE_SENTENCES] NEW: The streets of Llanheath have gone quiet, and everyone is waiting for something to break.
+  HIT c/streets r2s-insurgency-hamlet-1 Summary/Overview [PRESSURE_SENTENCES] NEW: The streets of Neuhof have gone quiet, and everyone is waiting for something to break.
+  HIT a/mason r2s-religious_conversion-thorp-0 Summary/Overview [STRESS_DESCS.religious_conversion] ww#58: The mason's yard in Palenqcalco is its busiest enterprise: one set of holy symbols coming down, another going up, and the same three workmen paid for both.
+  HIT c/quarters r2s-religious_conversion-thorp-1 Summary/Overview [STRESS_DESCS.religious_conversion] NEW: Two processions are forming in different quarters, and the people watching each are counting who watches the other.
+  HIT c/quarters r2s-religious_conversion-thorp-3 Summary/Overview [STRESS_DESCS.religious_conversion] NEW: Two processions are forming in different quarters, and the people watching each are counting who watches the other.
+  HIT c/quarters r2s-religious_conversion-hamlet-0 Summary/Overview [STRESS_DESCS.religious_conversion] NEW: Two processions are forming in different quarters, and the people watching each are counting who watches the other.
+  HIT a/church r2s-religious_conversion-hamlet-1 Summary/Overview [STRESS_DESCS.religious_conversion] NEW: The bells of Hagiolathra ring twice for every hour: one set of chimes, then another from a different quarter, a beat later and out of tune.
+  HIT a/mason r2s-religious_conversion-hamlet-2 Summary/Overview [STRESS_DESCS.religious_conversion] ww#58: The mason's yard in Raasziyarat is its busiest enterprise: one set of holy symbols coming down, another going up, and the same three workmen paid for both.
+  HIT c/quarters r2s-religious_conversion-hamlet-3 Summary/Overview [STRESS_DESCS.religious_conversion] NEW: Two processions are forming in different quarters, and the people watching each are counting who watches the other.
+  HIT c/quarters r2s-religious_conversion-village-0 Summary/Overview [STRESS_DESCS.religious_conversion] NEW: Two processions are forming in different quarters, and the people watching each are counting who watches the other.
+  HIT e/docks r2s-religious_conversion-village-1 Summary/Overview [ORIGIN_POOLS] NEW: Founded on the shore; the place has no wharf.
+  HIT c/quarters r2s-religious_conversion-village-3 Summary/Overview [STRESS_DESCS.religious_conversion] NEW: Two processions are forming in different quarters, and the people watching each are counting who watches the other.
+  HIT a/court-generic r2s-religious_conversion-town-2 Summary/Overview [PRESSURE_SENTENCES] ww#59: Every legal document that required religious sanction is now in a grey zone that the courts are not equipped to resolve quickly.
+  HIT c/streets r2s-slave_revolt-hamlet-0 Summary/Overview [STRESS_DESCS.slave_revolt] NEW: There are bodies being carried through Velikoichi's streets under cloth, and the people carrying them are not mourners but labourers doing grim, fast work.
+  HIT c/districts r2s-slave_revolt-hamlet-0 Summary/Overview [STRESS_DESCS.slave_revolt] NEW: The rising that did this is not finished; you can hear it, somewhere in the lower districts, still going on.
+  HIT c/districts r2s-slave_revolt-hamlet-0 Summary/Overview [PRESSURE_SENTENCES] NEW: The revolt in Velikoichi is too big to put down by force alone: the enslaved hold whole districts and are organised, and the governing power has not committed what crushing them would take.
+  HIT c/streets r2s-slave_revolt-hamlet-2 Summary/Overview [STRESS_DESCS.slave_revolt] NEW: There are bodies being carried through Cnocthwaite's streets under cloth, and the people carrying them are not mourners but labourers doing grim, fast work.
+  HIT c/districts r2s-slave_revolt-hamlet-2 Summary/Overview [STRESS_DESCS.slave_revolt] NEW: The rising that did this is not finished; you can hear it, somewhere in the lower districts, still going on.
+  HIT a/merchants r2s-slave_revolt-hamlet-2 World/NPCs [NPC_CRIMINAL_SECRETS_BY_HOLDER.criminal] NEW: Secret: Runs a protection scheme targeting the very merchants they're supposed to serve
+  HIT c/streets r2s-slave_revolt-hamlet-3 Summary/Overview [STRESS_DESCS.slave_revolt] NEW: There are bodies being carried through Breitenwiese's streets under cloth, and the people carrying them are not mourners but labourers doing grim, fast work.
+  HIT c/districts r2s-slave_revolt-hamlet-3 Summary/Overview [STRESS_DESCS.slave_revolt] NEW: The rising that did this is not finished; you can hear it, somewhere in the lower districts, still going on.
+  HIT c/districts r2s-slave_revolt-hamlet-3 Summary/Overview [PRESSURE_SENTENCES] NEW: The revolt in Breitenwiese is too big to put down by force alone: the enslaved hold whole districts and are organised, and the governing power has not committed what crushing them would take.
+  HIT a/merchants r2s-slave_revolt-hamlet-3 Summary/Plot Hooks [deriveFoodBalanceAnalysis] cut#14~: The settlement must decide what it can still afford to import, and the merchants are watching it decide.
+  HIT a/merchants r2s-slave_revolt-village-1 Summary/Plot Hooks [deriveFoodBalanceAnalysis] cut#14~: The settlement must decide what it can still afford to import, and the merchants are watching it decide.
+  HIT c/districts r2s-slave_revolt-village-2 Summary/Overview [PRESSURE_SENTENCES] NEW: The revolt in Mönkhkotan is too big to put down by force alone: the enslaved hold whole districts and are organised, and the governing power has not committed what crushing them would take.
+  HIT a/workshops r2s-wartime-thorp-3 Summary/Overview [PRESSURE_SENTENCES] NEW: Every capable pair of hands Madinatsaray could spare, and several it could not, has gone to the war; what remains is losing people and resources by attrition (a workshop closed for want of a master, a
+  HIT a/market r2s-wartime-thorp-3 World/History [STRESS_NOTES.wartime] NEW: Now the army takes what the market used to sell.
+  HIT a/workshops r2s-wartime-hamlet-0 Summary/Overview [PRESSURE_SENTENCES] NEW: Every capable pair of hands Nishiyuan could spare, and several it could not, has gone to the war; what remains is losing people and resources by attrition (a workshop closed for want of a master, a fi
+  HIT a/market r2s-wartime-hamlet-1 World/History [STRESS_NOTES.wartime] NEW: Now the army takes what the market used to sell.
+  HIT a/workshops r2s-wartime-hamlet-2 Summary/Overview [PRESSURE_SENTENCES] NEW: Every capable pair of hands Kaankin could spare, and several it could not, has gone to the war; what remains is losing people and resources by attrition (a workshop closed for want of a master, a fiel
+  HIT a/bakery r2s-wartime-hamlet-3 Summary/Overview [PRESSURE_SENTENCES] ww#28: The bakers of Caercross have started cutting the bread with things that are not flour; everyone can taste it, and the fact that nobody complains is the most alarming part.
+  HIT a/market r2s-wartime-village-3 World/History [STRESS_NOTES.wartime] NEW: Now the army takes what the market used to sell.
+  HIT c/streets r2s-mass_migration-thorp-0 World/History [STRESS_NOTES.mass_migration] NEW: Now newcomers crowd the streets, and half the faces are strangers.
+  HIT c/streets r2s-mass_migration-thorp-1 World/History [STRESS_NOTES.mass_migration] NEW: Its streets and wells were never meant for this many people.
+  HIT c/streets r2s-mass_migration-thorp-2 World/History [STRESS_NOTES.mass_migration] NEW: Now newcomers crowd the streets, and half the faces are strangers.
+  HIT c/streets r2s-mass_migration-thorp-3 World/History [STRESS_NOTES.mass_migration] NEW: Its streets and wells were never meant for this many people.
+  HIT c/streets r2s-mass_migration-hamlet-0 World/History [STRESS_NOTES.mass_migration] NEW: Now newcomers crowd the streets, and half the faces are strangers.
+  HIT c/streets r2s-mass_migration-hamlet-2 World/History [STRESS_NOTES.mass_migration] NEW: Now newcomers crowd the streets, and half the faces are strangers.
+  HIT c/streets r2s-mass_migration-hamlet-3 World/History [STRESS_NOTES.mass_migration] NEW: Its streets and wells were never meant for this many people.
