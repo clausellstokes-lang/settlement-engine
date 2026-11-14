@@ -22,10 +22,10 @@ flags = []; status = {}
 for p in packets:
     # crisis-07's file is on the crisis-06 branch; SUFFIX=-s reads the next model down's calibration branches; FLAGS_DIR reads local files
     # READ=2 reads the second read's branches and files (its short last packets are on the branch of the packet before)
-    READ2 = os.environ.get('READ') == '2'
-    ALIAS = {'main-18': 'main-17', 'crisis-08': 'crisis-07', 'cal-05': 'cal-04'} if READ2 else {'crisis-07': 'crisis-06'}
-    PREFIX = 'origin/lane/read-all-2-2026-11-14-' if READ2 else 'origin/lane/read-all-2026-11-14-'
-    FDIR = 'read-all-2' if READ2 else 'read-all'
+    RD = os.environ.get('READ', '1')   # READ=2 the second read; READ=3 the exports' read (ALIAS='{"main-20":"main-19"}' for packets that ride with another)
+    ALIAS = json.loads(os.environ['ALIAS']) if os.environ.get('ALIAS') else ({'main-18': 'main-17', 'crisis-08': 'crisis-07', 'cal-05': 'cal-04'} if RD == '2' else {'crisis-07': 'crisis-06'} if RD == '1' else {})
+    PREFIX = 'origin/lane/read-all-2026-11-14-' if RD == '1' else 'origin/lane/read-all-%s-2026-11-14-' % RD
+    FDIR = 'read-all' if RD == '1' else 'read-all-' + RD
     br = PREFIX + ALIAS.get(p, p) + (os.environ.get('SUFFIX', '') if p.startswith('cal') else '')
     try:
         if os.environ.get('FLAGS_DIR'): txt = io.open('%s/%s.flags.jsonl' % (os.environ['FLAGS_DIR'], p), encoding='utf-8').read()
