@@ -1,0 +1,84 @@
+/**
+ * tests/generators/timberHookForestHeld.test.js — R2-CODE-A-8, item 7 (ROUND-3-CUT #1004, #1336): the
+ * outlook hook "Something is killing the forest the timber comes from … find out what is in those
+ * woods?" printed in towns whose record holds no forest at all (rr2s-metropolis-plague_onset-port-1:
+ * a coastal metropolis whose only resource is a magical node) or whose forest is worked out
+ * (rr2s-city-occupied-rand-1: "It has worked out its managed woodland"). The hook fires on the
+ * terrain's must-import list, which says nothing of a forest. THE CHAIR'S RULING: a line names an
+ * import or a source only where the record holds it; under a siege nothing is brought in by road.
+ * The line (and its navigable twin) is written only where the roster's resources hold a timber
+ * stand still standing (`availableNativeResourceKeys`: managed_forest, shipbuilding_timber,
+ * mountain_timber, not depleted), and not under a siege that cuts every road with no channel past it
+ * (`siegeCutsImports`, the importer's rule). Elsewhere it is not written (no twin: a twin naming the
+ * import would be new words, left to the owner). No draw: a T branch.
+ * RE-KEYED BY IDENTITY (R2-CODE-A-10), its cause the line's own: the merge of the line (16e5184bf) brought
+ * COHERENCE-AGREE's 2a59c4c2e, `foodBalance.js :: deriveSupplyRiskAnalysis` "a live material is no import and no
+ * hook" (`localMaterials.js :: liveMaterialFor`: managed_forest, mountain_timber, shipbuilding_timber are timber).
+ * A stand still standing is therefore no import at all, and no timber line is written beside it, under a siege or
+ * not: the three "keeps it" expectations are re-keyed to that rule, the same configs and the same guard towns.
+ * Nothing printed is false: the forest sentence is written nowhere now (no stand → this cure; a stand → the line's).
+ */
+import { beforeAll, describe, expect, it } from 'vitest';
+import { deriveSupplyRiskAnalysis } from '../../src/generators/economy/foodBalance.js';
+import { availableNativeResourceKeys } from '../../src/domain/resourceSemantics.js';
+import { liveMaterialFor } from '../../src/generators/economy/localMaterials.js';
+import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
+import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+
+const TIMBER = /the forest the timber comes from/;
+/** Composed at the merge of the line (976db5b19): the timber branch draws the forest sentence or the line's rafts sentence by `pick` (population + institutions, no roll); a population of 801 beside one sawmill draws the forest one. */
+const TIMBER_HOOK = /the forest the timber comes from|The timber rafts stopped coming/;
+const SAWMILL = [{ name: 'Sawmill', category: 'Crafts' }];
+const BALANCE = { deficit: 0, dailyProduction: 10, dailyNeed: 10 };
+const timberFor = (/** @type {any} */ config, balance = BALANCE) => deriveSupplyRiskAnalysis(801, { mustImport: ['timber'] }, SAWMILL, { tradeRouteAccess: 'road', terrainType: 'plains', tier: 'town', ...config }, balance)
+  .plotHooks.some((h) => TIMBER.test(h.hook));
+
+describe('the timber line names a forest only where the record holds one', () => {
+  it('no stand of timber, or a stand worked out, writes no line; a standing forest is no import (the line\'s rule), so no line either', () => {
+    expect(timberFor({ nearbyResources: ['magical_node'] })).toBe(false);
+    expect(timberFor({ nearbyResources: ['managed_forest'], nearbyResourcesDepleted: ['managed_forest'] })).toBe(false);
+    expect(liveMaterialFor('timber', ['managed_forest'])).toBe('managed_forest');
+    expect(liveMaterialFor('timber', ['mountain_timber', 'iron_deposits'])).toBe('mountain_timber');
+    expect(timberFor({ nearbyResources: ['managed_forest'] })).toBe(false);
+    expect(timberFor({ nearbyResources: ['mountain_timber', 'iron_deposits'] })).toBe(false);
+  });
+  it('a siege with no channel past it writes no line; under a siege a channel still feeds, the standing forest is still no import', () => {
+    expect(timberFor({ nearbyResources: ['managed_forest'], stressTypes: ['under_siege'] })).toBe(false);
+    expect(liveMaterialFor('timber', ['managed_forest'])).toBe('managed_forest');
+    expect(timberFor({ nearbyResources: ['managed_forest'], stressTypes: ['under_siege'] }, { ...BALANCE, importChannel: 'teleportation circle' })).toBe(false);
+  });
+});
+
+const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
+/** The lane's births in the app's shape (probes/R2-CODE-A-3/b740.mjs :: cfgFor). @param {string} seed */
+function born(seed) {
+  let m = seed.match(/^r2r-(\w+)-(\d+)$/);
+  let cfg;
+  if (m) cfg = { ...DEFAULT_CONFIG, ...DIALS, settType: m[1] };
+  else if ((m = seed.match(/^r2s-(\w+)-(thorp|hamlet|village|town|city|metropolis)-(\d+)$/))) cfg = { ...DEFAULT_CONFIG, ...DIALS, selectedStresses: [m[1]], selectedStressesRandom: false, settType: m[2] };
+  else {
+    m = /** @type {RegExpMatchArray} */ (seed.match(/^rr2s-(\w+)-([a-z_+]+)-([a-z_]+)-(\d+)$/));
+    cfg = { ...DEFAULT_CONFIG, ...(m[3] === 'rand' ? {} : { tradeRouteAccess: m[3] }), settType: m[1], selectedStressesRandom: false, selectedStresses: m[2] === 'calm' ? [] : m[2].split('+'), _randomizePriorities: true };
+  }
+  return /** @type {any} */ (generateSettlementPipeline(birthConfig(cfg), null, { seed, customContent: {} }));
+}
+/** @param {any} s */
+const printsTimberHook = (s) => (s.economicViability?.plotHooks || []).some((/** @type {any} */ h) => TIMBER_HOOK.test(h.hook));
+/** @param {any} s */
+const printsTimber = (s) => (s.economicViability?.plotHooks || []).some((/** @type {any} */ h) => TIMBER.test(h.hook));
+/** @param {any} s */
+const forestHeld = (s) => availableNativeResourceKeys(s.config).some((k) => /^(managed_forest|shipbuilding_timber|mountain_timber)$/.test(k));
+
+describe('the cut\'s towns and their guard, born as the app births them', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  it('no town whose record holds no standing timber is told the forest its timber comes from is dying', () => {
+    const towns = ['rr2s-metropolis-plague_onset-port-1', 'rr2s-city-occupied-rand-1', 'r2r-city-4', 'r2r-village-4'].map((seed) => ({ seed, s: born(seed) }));
+    const falseForest = towns.filter(({ s }) => !forestHeld(s) && printsTimber(s)).map(({ seed }) => seed);
+    expect(falseForest).toEqual([]);
+  });
+  it('the guard towns, with a forest standing, import no timber and so print no timber hook, by the line\'s rule (a calm city with a managed forest; a village by shipbuilding timber)', () => {
+    const towns = ['r2r-city-26', 'r2r-village-11'].map((seed) => ({ seed, s: born(seed) }));
+    expect(towns.map(({ seed, s }) => [seed, forestHeld(s), printsTimberHook(s)])).toEqual(towns.map(({ seed }) => [seed, true, false]));
+  });
+});

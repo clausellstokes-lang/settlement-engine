@@ -9,7 +9,7 @@
 //      EVENT_TYPE_NAMES) consumed by historyGenerator.js.
 
 import { HISTORY_DESC_VARIANTS } from './historyDescVariants.js';
-import { pickVariant } from '../kernel/proseHash.js'; import { migrationDirectionOfConfig } from '../domain/migrationDirection.js';
+import { pickVariant } from '../kernel/proseHash.js'; import { migrationDirectionOfConfig } from '../domain/migrationDirection.js'; import { resolveSibling } from '../domain/facts/drawDeclared.js';
 
 // Notable power-holder roles by domain (government, religious, crafts,
 // military, economy, criminal, magic, other). Each entry describes a role that
@@ -1137,8 +1137,8 @@ export const HISTORICAL_EVENTS_DATA = [
     ],
     plotHooks: [
       "A would-be heir approaches outsiders to investigate a rival's past",
-      { text: 'The ailing ruler wants a final errand completed before naming a successor', excludes: ['ruler: council'] }, // CENSUS-3d unit 6
-      { text: 'Someone is poisoning the ruler slowly, and the physician knows', excludes: ['ruler: council'] }, // CENSUS-3d unit 6
+      { text: 'The ailing ruler wants a final errand completed before naming a successor', excludes: ['ruler: council', 'ruler: elder', 'crisis: succession_void'] }, // CENSUS-3d unit 6; W2-FIX-DATA-5 (ww-544): no living ruler while the seat stands empty; W2-FIX-DATA-HISTORY item G (pf-160): an elders' council has no one ruler to name a successor
+      { text: 'Someone is poisoning the ruler slowly, and someone in the household knows', excludes: ['ruler: council', 'ruler: elder', 'crisis: succession_void'] }, // CENSUS-3d unit 6; W2-FIX-DATA-5 (ww-545's sibling): the same; W2-FIX-DATA-HISTORY item G: the twin carries its sibling's conditions
     ],
     severity: ['minor', 'major'],
   },
@@ -1181,8 +1181,8 @@ export const HISTORICAL_EVENTS_DATA = [
       "One guild's charter was revoked and never fully restored",
     ],
     plotHooks: [
-      "A guild master's records have gone missing ahead of an audit",
-      'A journeyman denied mastership has proof the exam was rigged',
+      { text: "A guild master's records have gone missing ahead of an audit", needs: ['guild'] }, // W2-FIX-DATA: the guild homed (facts/guild.js)
+      { text: 'A journeyman denied mastership has proof the exam was rigged', needs: ['guild'] }, // W2-FIX-DATA: no mastership without a guild (c10)
       { text: 'Someone is sabotaging both guilds to destabilize the market for a third party', needs: ['market'] }, // CENSUS-3d unit 6
     ],
     severity: ['minor', 'major'],
@@ -1211,7 +1211,7 @@ export const HISTORICAL_EVENTS_DATA = [
       'Price ceilings on the affected goods still enforced in lean seasons',
     ],
     plotHooks: [
-      { text: 'A warehouse full of the scarce goods is being kept off the market on purpose', needs: ['market'] }, // CENSUS-3d unit 6
+      { text: 'A store of the scarce goods is being kept off the market on purpose', needs: ['market'] }, // CENSUS-3d unit 6; W2-FIX-DATA-HISTORY item G (ww-1230): the goods, not a warehouse the roster may lack (was "A warehouse full of ...")
       'The scarcity was engineered. Someone destroyed the competing supply route',
       'An alternative source exists but the information is being suppressed',
     ],
@@ -1227,7 +1227,7 @@ export const HISTORICAL_EVENTS_DATA = [
     ],
     plotHooks: [
       'The crime wave is coordinated. Someone is directing it to create a pretext',
-      { text: 'A guard captain is on the payroll of the criminal network', needs: ['guardPresence'] }, // CENSUS-3d unit 6
+      { text: 'A guard captain is on the payroll of the criminal network', needs: ['watch'] }, // CENSUS-3d unit 6; W2-FIX-DATA: a captain of the guard needs a watch, not a household levy (c04)
       'The vigilantes have begun targeting innocents based on bad information',
     ],
     severity: ['minor', 'major'],
@@ -1308,15 +1308,15 @@ export const HISTORICAL_EVENTS_DATA = [
     // URBAN-FIX D-1: the tension's words when its own event sits on the timeline older than 80 years (historyGenerator.js :: tensionByMemory)
     byMemory: { dated: { description: 'The occupation ended long ago, but the families who collaborated and the families who resisted still keep apart', factions: ['Collaborator families', 'Resistance families', 'Those who want it forgotten'] },
       // URBAN-FIX D-1b: the words when the timeline holds no occupation at all: the template's own lasting effects, naming no past event
-      unanchored: { description: 'Collaborator and resistance families still keep to separate quarters, and old property seizures remain legally unresolved', factions: ['Collaborator families', 'Resistance families', 'Those who want it forgotten'] } },
+      unanchored: { description: 'Collaborator and resistance families still keep apart, and old property seizures remain legally unresolved', factions: ['Collaborator families', 'Resistance families', 'Those who want it forgotten'] } },
     lastingEffects: [
-      'Collaborator and resistance families still keep to separate quarters',
+      'Collaborator and resistance families still keep apart',
       'Wartime property seizures remain legally unresolved',
     ],
     plotHooks: [
       "A collaborator family's wartime fortune was built on betrayals that are finally surfacing",
       'Resistance fighters kept records that would expose people still in power',
-      'A former occupier officer has returned under a false identity',
+      { text: 'A former occupier officer has returned under a false identity', excludes: ['crisis: occupied'] }, // W2-FIX-DATA-HISTORY item C: "former" says the occupation is over; not under one in force
     ],
     severity: ['major', 'catastrophic'],
   },
@@ -1445,7 +1445,7 @@ export const HISTORICAL_EVENTS_DATA = [
     description: 'A sickness moved through the settlement for {duration} seasons, thinning families and testing every institution to its limit',
     factions: ['Quarantine hardliners', 'The bereaved and the blamed', 'Healers and charlatans alike'],
     plotHooks: [
-      'A healer who profited enormously during the plague is being asked how they stayed untouched',
+      { text: 'A healer who profited enormously during the plague is being asked how they stayed untouched', needs: ['healer'] }, // W2-FIX-DATA-HISTORY item E (CENSUS-2 kind a): the healer is asked now, so one practises here
       'The plague pit holds a body that matches no one on the list of the dead',
       'The quarantine was used to settle old scores, and the survivors remember exactly who',
     ],
@@ -1469,7 +1469,7 @@ export const HISTORICAL_EVENTS_DATA = [
     plotHooks: [
       'The evidence that convicted the heretic was fabricated, and a witness is finally willing to say so',
       "The condemned doctrine is quietly practised still, by more of the town's leaders than would admit it",
-      { text: 'A relic seized during the trial never reached the temple vault it was bound for', needs: ['institution: temple'] }, // CENSUS-3d unit 6
+      { text: 'A relic seized during the trial never reached the vault it was bound for', needs: ['institution: temple'] }, // CENSUS-3d unit 6
     ],
     severity: ['minor', 'major'],
   },
@@ -1514,7 +1514,7 @@ export const HISTORICAL_EVENTS_DATA = [
     plotHooks: [
       'The surge was no accident. An experiment went wrong, and the notes were hidden, not destroyed',
       'A bloodline touched by the surge is now manifesting something the family cannot conceal',
-      'The affected district is slowly spreading its strangeness, and the authorities are pretending otherwise',
+      { text: 'The affected district is slowly spreading its strangeness, and the authorities are pretending otherwise', needs: ['tier: ≥ town'] }, // W2-FIX-DATA-HISTORY item E (CENSUS-2 kind c): a district is a town's
     ],
     severity: ['minor', 'major'],
   },
@@ -1644,3 +1644,185 @@ export const historyDescription = (eventTemplate, seed) => {
     ? pickVariant([eventTemplate.description, ...variants], seed)
     : eventTemplate.description;
 };
+
+// ─── W2-FIX-DATA-2 item 1 (2026-11-13; the REVIEW-W2B cold list, rows 3, 7, 29, 204, 282): THE HISTORY'S PLACE WORDS ───
+// The place a flood, a fire or a surge of magic touched was named by districts and quarters in a thorp of six, and by a
+// waterfront in a town with no water. Each word now declares what makes it false; a place of village size or smaller
+// takes a small-place word in its stead. No roll is added: the timeline's one pick of `{quarter}` is kept, and a
+// refused word resolves through the declared door (its twin, else the hash argmax over the admitted words).
+
+/**
+ * THE TIMELINE'S `{quarter}` (generateEventNarrative's default, printed by wild_magic): the four words in their
+ * drawn order, each declaring the size and the house it presumes; each twin, reached only by resolution, is a
+ * small-place word (VETOABLE wording, the owner's).
+ */
+export const HISTORY_QUARTER_WORDS = Object.freeze([
+  Object.freeze({ text: "the merchants' quarter", needs: Object.freeze(['market', 'tier: ≥ town']) }),
+  Object.freeze({ text: 'the residential district', needs: Object.freeze(['tier: ≥ town']) }),
+  Object.freeze({ text: 'the waterfront', needs: Object.freeze(['navigable', 'tier: ≥ village']) }),
+  Object.freeze({ text: 'the temple district', needs: Object.freeze(['institution: temple', 'tier: ≥ town']) }),
+  Object.freeze({ text: 'the low ground', twinOf: "the merchants' quarter", needs: Object.freeze(['tier: ≤ village']) }),
+  Object.freeze({ text: 'the houses', twinOf: 'the residential district', needs: Object.freeze(['tier: ≤ village']) }),
+  Object.freeze({ text: 'the edge of the fields', twinOf: 'the waterfront', needs: Object.freeze(['tier: ≤ village']) }),
+  Object.freeze({ text: 'the yards behind the houses', twinOf: 'the temple district', needs: Object.freeze(['tier: ≤ village']) }),
+]);
+
+/**
+ * THE ROUTE'S PLACE WORD AT VILLAGE SIZE AND BELOW (`historyRouteContext.js :: smallPlaceWordsOf`): the route
+ * context names the harbour districts, the riverside quarter, the mill and lumber district or the lower districts;
+ * a place of village size or smaller takes the word of its water in their stead (`{location}` and `{quarter}`).
+ * Keyed by the route context's `disasterProfile`; every other profile reads `inland`. VETOABLE wording.
+ */
+export const HISTORY_SMALL_PLACE_WORDS = Object.freeze({
+  coastal: Object.freeze({ text: 'the houses nearest the shore', needs: Object.freeze(['coast', 'tier: ≤ village']) }),
+  river: Object.freeze({ text: 'the houses nearest the river', needs: Object.freeze(['river', 'tier: ≤ village']) }),
+  inland: Object.freeze({ text: 'the low ground', needs: Object.freeze(['tier: ≤ village']) }),
+});
+
+/**
+ * W2-FIX-DATA-5 (2026-11-13; ROUND-3-CUT #331): THE HISTORY TEXTS THAT PRESUME A PLACE'S SIZE, AND THEIR SMALL-PLACE TWINS
+ * (`historyGenerator.js :: sizedHistoryText`, at the timeline's description and the tension's). The great fire burns
+ * "across whole districts", "across entire districts", "street by street until whole quarters were gone", through
+ * warehouses and wharves: districts, quarters and streets are a size error in a place of village size or smaller (the
+ * chair's ruling of 2026-11-13). Keyed by the raw template text; each twin names no district, street or building type.
+ * VETOABLE wording (the owner's).
+ */
+export const HISTORY_DESC_SIBLINGS = Object.freeze({
+  "A fire that began in {location} consumed {building_type} across whole districts before it could be checked": Object.freeze([
+    Object.freeze({ text: "A fire that began in {location} consumed {building_type} across whole districts before it could be checked", needs: Object.freeze(['tier: ≥ town']) }),
+    Object.freeze({ text: "A fire that began in {location} burned through the houses and their outbuildings before it could be checked", twinOf: "A fire that began in {location} consumed {building_type} across whole districts before it could be checked", needs: Object.freeze(['tier: ≤ village']) }),
+  ]),
+  "A fire out of {location} spread through {building_type} across entire districts before anyone could bring it under control": Object.freeze([
+    Object.freeze({ text: "A fire out of {location} spread through {building_type} across entire districts before anyone could bring it under control", needs: Object.freeze(['tier: ≥ town']) }),
+    Object.freeze({ text: "A fire out of {location} spread from roof to roof before anyone could bring it under control", twinOf: "A fire out of {location} spread through {building_type} across entire districts before anyone could bring it under control", needs: Object.freeze(['tier: ≤ village']) }),
+  ]),
+  "Beginning in {location}, the blaze took {building_type} street by street until whole quarters were gone": Object.freeze([
+    Object.freeze({ text: "Beginning in {location}, the blaze took {building_type} street by street until whole quarters were gone", needs: Object.freeze(['tier: ≥ town']) }),
+    Object.freeze({ text: "Beginning in {location}, the blaze took house after house before it was put out", twinOf: "Beginning in {location}, the blaze took {building_type} street by street until whole quarters were gone", needs: Object.freeze(['tier: ≤ village']) }),
+  ]),  // W2-FIX-DATA-HISTORY item E (2026-11-13; CENSUS-2's historyGenerator.js :: generateRelationshipEvent writer; ROUND-3-CUT-INCREMENT
+  // ww-26, ww-90): THE RESOURCE EVENTS' TEXTS, resolved where the event is written (`sizedResourceEvent`, below): the Great
+  // Construction's civic buildings or cathedral, and its quarrymen's guild with civic influence now; the Harvest Compact's
+  // merchant guilds; the Arcane Incident's district and its regulatory body; the Iron Dispute's extraction to this day and its
+  // mining contract. A text with no twin is dropped where it is refused (a lasting effect, a hook). The Great Construction
+  // holds a third member, no twin: a town with no house of worship takes it by the door's argmax (its civic buildings, no
+  // cathedral). VETOABLE wording.
+  "A period of ambitious stone construction transformed the settlement's character. Walls, civic buildings, or a cathedral raised from local quarry stone. The quarry workers became a political force.": Object.freeze([
+    Object.freeze({ text: "A period of ambitious stone construction transformed the settlement's character. Walls, civic buildings, or a cathedral raised from local quarry stone. The quarry workers became a political force.", needs: Object.freeze(['tier: ≥ town', 'institution: temple']) }),
+    Object.freeze({ text: "A period of ambitious stone construction transformed the settlement's character. Its walls and civic buildings were raised from local quarry stone. The quarry workers became a political force.", needs: Object.freeze(['tier: ≥ town']), excludes: Object.freeze(['institution: temple']) }),
+    Object.freeze({ text: "A period of ambitious stone building transformed the settlement's character, its walls and its larger houses raised from local quarry stone. The quarry workers became a political force.", twinOf: "A period of ambitious stone construction transformed the settlement's character. Walls, civic buildings, or a cathedral raised from local quarry stone. The quarry workers became a political force.", needs: Object.freeze(['tier: ≤ village']) }),
+  ]),
+  "A period of ambitious stone construction transformed the settlement's character. Civic buildings or a cathedral raised from local quarry stone. The quarry workers became a political force.": Object.freeze([
+    Object.freeze({ text: "A period of ambitious stone construction transformed the settlement's character. Civic buildings or a cathedral raised from local quarry stone. The quarry workers became a political force.", needs: Object.freeze(['tier: ≥ town', 'institution: temple']) }),
+    Object.freeze({ text: "A period of ambitious stone construction transformed the settlement's character. Its civic buildings were raised from local quarry stone. The quarry workers became a political force.", needs: Object.freeze(['tier: ≥ town']), excludes: Object.freeze(['institution: temple']) }),
+    Object.freeze({ text: "A period of ambitious stone building transformed the settlement's character, its larger houses raised from local quarry stone. The quarry workers became a political force.", twinOf: "A period of ambitious stone construction transformed the settlement's character. Civic buildings or a cathedral raised from local quarry stone. The quarry workers became a political force.", needs: Object.freeze(['tier: ≤ village']) }),
+  ]),
+  "Quarrymen's guild retains unusual civic influence": Object.freeze([
+    Object.freeze({ text: "Quarrymen's guild retains unusual civic influence", needs: Object.freeze(['guild']) }),
+    Object.freeze({ text: "The quarrymen's families retain unusual civic influence", twinOf: "Quarrymen's guild retains unusual civic influence", excludes: Object.freeze(['guild']) }),
+  ]),
+  "After years of disputed grain prices, the major farming families and the guilds negotiated a formal compact regulating grain sale and storage. It held for a generation.": Object.freeze([
+    Object.freeze({ text: "After years of disputed grain prices, the major farming families and the guilds negotiated a formal compact regulating grain sale and storage. It held for a generation.", needs: Object.freeze(['guild']) }),
+    Object.freeze({ text: "After years of disputed grain prices, the major farming families agreed a formal compact regulating grain sale and storage. It held for a generation.", twinOf: "After years of disputed grain prices, the major farming families and the guilds negotiated a formal compact regulating grain sale and storage. It held for a generation.", excludes: Object.freeze(['guild']) }),
+  ]),
+  "A catastrophic or transformative event tied to the local ley line concentration occurred, permanently altering a district of the settlement and the lives of its inhabitants.": Object.freeze([
+    Object.freeze({ text: "A catastrophic or transformative event tied to the local ley line concentration occurred, permanently altering a district of the settlement and the lives of its inhabitants.", needs: Object.freeze(['tier: ≥ town']) }),
+    Object.freeze({ text: "A catastrophic or transformative event tied to the local ley line concentration occurred, permanently altering part of the settlement and the lives of its inhabitants.", twinOf: "A catastrophic or transformative event tied to the local ley line concentration occurred, permanently altering a district of the settlement and the lives of its inhabitants.", needs: Object.freeze(['tier: ≤ village']) }),
+  ]),
+  "Affected district retains residual magical effects": Object.freeze([
+    Object.freeze({ text: "Affected district retains residual magical effects", needs: Object.freeze(['tier: ≥ town']) }),
+    Object.freeze({ text: "The affected ground retains residual magical effects", twinOf: "Affected district retains residual magical effects", needs: Object.freeze(['tier: ≤ village']) }),
+  ]),
+  "Arcane regulatory body established with unusual local authority": Object.freeze([
+    Object.freeze({ text: "Arcane regulatory body established with unusual local authority", needs: Object.freeze(['tier: ≥ town']) }),
+  ]),
+  "Rights to the local iron deposits became the subject of a prolonged dispute between the settlement and a rival lord. The outcome shaped who controls extraction to this day.": Object.freeze([
+    Object.freeze({ text: "Rights to the local iron deposits became the subject of a prolonged dispute between the settlement and a rival lord. The outcome shaped who controls extraction to this day.", needs: Object.freeze(['institution: mine']) }),
+    Object.freeze({ text: "Rights to the local iron deposits became the subject of a prolonged dispute between the settlement and a rival lord. The outcome shaped who holds those rights to this day.", twinOf: "Rights to the local iron deposits became the subject of a prolonged dispute between the settlement and a rival lord. The outcome shaped who controls extraction to this day.", excludes: Object.freeze(['institution: mine']) }),
+  ]),
+  "A rival family claims their ancestor was cheated out of the original mining contract": Object.freeze([
+    Object.freeze({ text: "A rival family claims their ancestor was cheated out of the original mining contract", needs: Object.freeze(['institution: mine']) }),
+    Object.freeze({ text: "A rival family claims their ancestor was cheated out of the original rights to the deposits", twinOf: "A rival family claims their ancestor was cheated out of the original mining contract", excludes: Object.freeze(['institution: mine']) }),
+  ]),
+  "Fortified extraction sites established during the dispute": Object.freeze([
+    Object.freeze({ text: "Fortified extraction sites established during the dispute", needs: Object.freeze(['institution: mine']) }),
+  ]),
+  // W2-FIX-DATA-13 (2026-11-14; the chair's 12:11 ruling on REVIEW-W2-FIX-DATA-4's HIGH, r2r-thorp-58 and r2s-indebted-thorp-0):
+  // QUARTERS AND DISTRICTS BELONG TO A TOWN OR LARGER, whatever the head count. The two lasting effects of the event
+  // tables that name them (the migration's districts, the economic divide's quarters) take the size; no twin is written.
+  // A refused effect resolves draw-free (`historyGenerator.js :: sizedLastingEffects`) to the template's next effect
+  // whose own test holds, else silence; a tension, which prints its template's whole list, leaves it out.
+  "Newcomer and old-family districts remain socially distinct": Object.freeze([
+    Object.freeze({ text: "Newcomer and old-family districts remain socially distinct", needs: Object.freeze(['tier: ≥ town']) }),
+  ]),
+  "The merchant quarter and the labourers' quarter remain walled apart": Object.freeze([
+    Object.freeze({ text: "The merchant quarter and the labourers' quarter remain walled apart", needs: Object.freeze(['tier: ≥ town']) }),
+  ]),
+});
+
+/**
+ * W2-FIX-DATA-HISTORY item C (2026-11-13; the review of the data lane, L4; ROUND-3-CUT-INCREMENT ww-254, ww-724, ww-752,
+ * ww-754, ww-755, ww-756): A TENSION THAT IS ITS OWN PAST'S LEGACY NEEDS THAT PAST ON THE TIMELINE. The occupation's
+ * legacy speaks of collaborators and resisters, of wartime fortunes and records kept by resistance fighters, and of a
+ * former occupier officer: every one of its words presumes an occupation the town lived through. Where the town's own
+ * timeline holds no occupation it printed all the same (a thorp of five under a siege; a city whose past is a religious
+ * conflict, an economic divide and a great fire). The chair's ruling: a history line speaks of an event only where the
+ * town's own timeline holds it. Such a tension is set aside at the selection exactly as a refused template is (the
+ * selection's own loop, R-Q), read by the event's identity on the timeline (`templateType`, as
+ * `historyGenerator.js :: tensionByMemory` reads it). Its memory words for an absent event (`byMemory.unanchored`) are
+ * kept in the table and reached by no town.
+ */
+export const TENSIONS_THAT_NEED_THEIR_OWN_EVENT = Object.freeze(['occupation_legacy']);
+
+/**
+ * May this tension stand beside this timeline? @param {{ type?: string }} tmpl @param {ReadonlyArray<any>} timeline
+ * @returns {boolean}
+ */
+export const tensionHeldByTimeline = (tmpl, timeline) => !TENSIONS_THAT_NEED_THEIR_OWN_EVENT.includes(String(tmpl?.type))
+  || (Array.isArray(timeline) ? timeline : []).some((e) => e?.templateType === tmpl.type);
+
+/**
+ * W2-FIX-DATA-HISTORY item L (2026-11-13; the first cut's #267, round two's #368; ROUND-3-CUT-INCREMENT ww-1489): THE
+ * SHORTAGE'S LEAD READS THE INCOME SHARES. "Life here runs mostly on the timber trade" printed where timber was 8 per cent
+ * of the town's income, and "mostly on the wool trade" in a thorp that earns nothing from wool: the commodity is the first
+ * export's (`tradeCommodity.js :: deriveTradeCommodity`), and the lead never read what the town lives on. The chair's
+ * ruling: a lead that says what a town lives on reads the record's own income shares (`economicState.incomeSources`,
+ * each a source and its percentage); "mostly" only where that source is the largest and more than half; the largest
+ * named as the largest where it is half or less; "among the trades" where it is a lesser one; where no income source is
+ * the commodity's trade, no lead (the issue that follows stands alone). Draw-free. VETOABLE wording (the owner's).
+ * Each commodity's own income source, by the economy's labels (`economy/economicState.js`).
+ */
+export const LIVELIHOOD_INCOME_SOURCE = Object.freeze({
+  timber: /^Timber Trade$/, grain: /^Grain Sales$/, fish: /^Fish & /, wool: /^Wool & Textile Trade$/, iron: /^Iron & Metalwork$/,
+  stone: /^Stone Quarrying$/, alchemy: /^Apothecary & Alchemy$/, 'medicinal herbs': /^Herbalist & Apothecary$/,
+});
+
+/**
+ * @param {string | null | undefined} commodity the first export's commodity
+ * @param {ReadonlyArray<{ source?: unknown, percentage?: unknown }> | null | undefined} incomeSources
+ * @returns {string} the lead, or '' where the town's income holds no source of that trade
+ */
+export const livelihoodLead = (commodity, incomeSources) => {
+  const own = commodity ? LIVELIHOOD_INCOME_SOURCE[/** @type {keyof typeof LIVELIHOOD_INCOME_SOURCE} */ (commodity)] : null;
+  const rows = (Array.isArray(incomeSources) ? incomeSources : []).filter((r) => typeof r?.source === 'string' && Number.isFinite(Number(r?.percentage)));
+  const mine = own ? rows.filter((r) => own.test(String(r.source))) : [];
+  if (!mine.length) return '';
+  const share = Math.max(...mine.map((r) => Number(r.percentage)));
+  const largest = Math.max(...rows.map((r) => Number(r.percentage)));
+  if (share < largest) return `Among the trades the place lives by, the ${commodity} trade is under strain.`;
+  return share > 50 ? `Life here runs mostly on the ${commodity} trade, and that trade is under strain.` : `The ${commodity} trade is the largest the place lives by, and it is under strain.`;
+};
+
+/**
+ * W2-FIX-DATA-HISTORY item E: a resource event's texts, each resolved through the declared door over
+ * `HISTORY_DESC_SIBLINGS` against the history's facts: the description takes its twin where refused; a lasting effect or a
+ * hook takes its twin, else is dropped. Draw-free (the event was drawn already). Called where the event is written
+ * (`historyGenerator.js :: generateRelationshipEvent`).
+ * @template {{ description?: string, lastingEffects?: string[], plotHooks?: string[] }} E
+ * @param {E} event @param {object | (() => object) | null} facts @returns {E}
+ */
+export const sizedResourceEvent = (event, facts) => {
+  const opts = { facts, poolId: 'historyData:HISTORY_DESC_SIBLINGS', surface: 'history', drawKind: /** @type {const} */ ('T') };
+  const list = (/** @type {unknown} */ xs) => (Array.isArray(xs) ? xs.map((x) => resolveSibling(x, HISTORY_DESC_SIBLINGS, { ...opts, dropRefused: true })).filter((x) => x != null) : xs);
+  return { ...event, description: resolveSibling(event.description, HISTORY_DESC_SIBLINGS, opts), lastingEffects: list(event.lastingEffects), plotHooks: list(event.plotHooks) };
+};
+

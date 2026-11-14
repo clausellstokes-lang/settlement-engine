@@ -1,0 +1,16 @@
+# COHERENCE-UPKEEP-6, ruling 6 MEASURED, NOT BUILT: the posture line (defenseStateProse.js :: posturePoolKey, a file the first leaves lane holds) bands readiness.score on the aspects ladder (scoreBand 65/40/20); ruled: Fortress and Well-Defended -> strong, Defensible and Lightly Defended -> adequate, below -> weak.
+# births6.mjs at 008fc3328, 3,036 + 720 fresh6. Cells: (badge band, pool today, pool ruled): births
+#   ('Vulnerable', 'CRITICAL', 'WEAK') 703 CHANGES
+#   ('Fortress', 'STRONG', 'STRONG') 661 
+#   ('Lightly Defended', 'WEAK', 'ADEQUATE') 558 CHANGES
+#   ('Well-Defended', 'STRONG', 'STRONG') 433 
+#   ('Undefended', 'CRITICAL', 'WEAK') 423 CHANGES
+#   ('Vulnerable', 'WEAK', 'WEAK') 352 
+#   ('Defensible', 'ADEQUATE', 'ADEQUATE') 317 
+#   ('Well-Defended', 'ADEQUATE', 'STRONG') 274 CHANGES
+#   ('Defensible', 'WEAK', 'ADEQUATE') 35 CHANGES
+# ten of ('Lightly Defended', 'WEAK', 'ADEQUATE') : cold-thorp-0(25) cold-thorp-2(24) cold-thorp-22(29) cold-thorp-24(25) cold-thorp-28(29) cold-thorp-30(33) cold-thorp-36(25) cold-thorp-40(31) cold-thorp-46(29) cold-thorp-48(28)
+# ten of ('Vulnerable', 'CRITICAL', 'WEAK') : cold-thorp-4(15) cold-thorp-6(18) cold-thorp-12(14) cold-thorp-14(14) cold-thorp-18(18) cold-thorp-20(12) cold-thorp-26(18) cold-thorp-32(12) cold-thorp-38(14) cold-thorp-44(17)
+# ten of ('Undefended', 'CRITICAL', 'WEAK') : cold-thorp-8(7) cold-thorp-70(10) cold-thorp-78(8) cold-thorp-130(10) cold-thorp-164(7) cold-thorp-206(5) cold-thorp-222(10) cold-thorp-226(10) cold-hamlet-4(4) cold-hamlet-18(4)
+# ten of ('Defensible', 'WEAK', 'ADEQUATE') : cold-hamlet-186(38) cold-town-24(39) cold-town-74(38) cold-town-88(39) cold-town-122(38) cold-town-130(39) cold-town-154(38) cold-town-172(39) cold-town-212(39) cold-town-236(39)
+# ten of ('Well-Defended', 'ADEQUATE', 'STRONG') : cold-town-10(59) cold-town-16(60) cold-town-20(59) cold-town-36(60) cold-town-42(58) cold-town-66(59) cold-town-68(56) cold-town-78(62) cold-town-96(64) cold-town-98(59)

@@ -1,0 +1,9 @@
+births 0; fresh6 0
+houses by rung and tier (scaled parts):
+
+======== A against base (each seed born three times, the factor through the whole pipeline) ========
+Traceback (most recent call last):
+  File "/home/user/settlement-engine/docs/chair/2026-11-13/probes/UPKEEP-CAPACITY/an2.py", line 20, in <module>
+    print(f'READINESS: moved {len(mv)} (up {sum(x>0 for x in dl)}, down {sum(x<0 for x in dl)}); mean all {sum(dl)/len(dl):+.2f}, movers {sum(mv)/max(1,len(mv)):+.2f}; min {min(dl)} max {max(dl)}; bands {sum(bc.values())} {dict(bc)}')
+                                                                                                           ~~~~~~~^~~~~~~~
+ZeroDivisionError: division by zero

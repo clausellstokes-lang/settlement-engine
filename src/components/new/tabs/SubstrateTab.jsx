@@ -17,7 +17,7 @@
 
 import InfoPill from '../../primitives/InfoPill.jsx';
 import { SECTION_HELP } from '../../../copy/sectionHelp.js';
-import { tokenCase } from '../labelLadder.js';
+import { statusCase, tokenCase } from '../labelLadder.js';
 import { useMemo } from 'react';
 import { causalBandWord, deriveCausalState, variablePolarity } from '../../../domain/causalState.js';
 import { activeConditionWords, conditionsSentence } from '../../../domain/display/conditionWords.js';
@@ -78,17 +78,51 @@ function healthOrientedScore(row) {
  * print "COLLAPSED" beside it, which reads as "the crime is gone". causalBandWord
  * is the function that already existed to fix precisely this, and had no caller.
  */
-function BandPill({ variable, band }) {
+function BandPill({ variable, band, word: recordWord = null, tone: recordTone = null }) {
   const mobile = useIsMobile();
-  const tone = BAND_TONE[band] || MUTED;
-  const word = causalBandWord(variable, band);
+  const tone = recordTone || BAND_TONE[band] || MUTED;
+  const word = recordWord || tokenCase(causalBandWord(variable, band));
   return (
     <span data-band={band} style={{
       display: 'inline-block', minWidth: 66, textAlign: 'center', padding: '1px 7px',
       fontSize: chromeFontSize(FS.pico, mobile), fontWeight: 800,
       color: swatch.white, background: tone,
-    }}>{tokenCase(word)}</span>
+    }}>{word}</span>
   );
+}
+
+/**
+ * ⭐ THE FOOD ROW READS THE FOOD RECORD'S OWN WORD (R3-TABS, round three's cut #494 and #1317; the
+ * chair's ruling (c): a line that disagrees with another home on the same page reads the home the record
+ * bears out). The Food row banded the causal score on the causal ladder and printed "Strained" beside the
+ * Overview's "Food Security · Deficit" (a siege, a 68% deficit) and "Adequate" beside "Pressured". The
+ * food record's band is the page's one food reading (the Overview, the Crisis tab and this row now print
+ * the same word, `economicState.foodSecurity.label`, cased as the Overview cases it, in its colour). The
+ * causal band stays on `data-band` and orders the rows; a record without a label keeps the band word.
+ * @param {any} settlement
+ * @returns {{ word: string, tone: string | null } | null}
+ */
+function foodRecordWord(settlement) {
+  const fs = settlement?.economicState?.foodSecurity;
+  const label = typeof fs?.label === 'string' ? fs.label.trim() : '';
+  if (!label) return null;
+  return { word: statusCase(label), tone: typeof fs.color === 'string' && fs.color ? fs.color : null };
+}
+
+/**
+ * ⭐ UNDER A SIEGE THE TRADE ROW SAYS SO (R3-TABS, round two's #329 and #858; the chair's ruling of
+ * 2026-11-13: the tab does not print a connectivity word the town's own crisis contradicts). The reading
+ * (`causalState.js :: deriveTradeConnectivity`) folds a siege in as wartime pressure, so the row read
+ * "Adequate" in 29 of 82 siege births at aac79b808 (Surplus in 1) while every one of those crises' own
+ * summary says nothing comes in by road. Under a siege in force the row prints the crisis's own label.
+ * @param {any} settlement
+ * @returns {{ word: string, tone: string } | null}
+ */
+function siegeCrisisWord(settlement) {
+  const stresses = Array.isArray(settlement?.stress) ? settlement.stress : settlement?.stress ? [settlement.stress] : [];
+  const siege = stresses.find((x) => x?.type === 'under_siege');
+  const label = typeof siege?.label === 'string' ? siege.label.trim() : '';
+  return label ? { word: statusCase(label), tone: RED } : null;
 }
 
 /**
@@ -172,15 +206,19 @@ export default function SubstrateTab({ settlement }) {
             Each row keeps its flex box, so the band word still sits at the right edge
             of its column exactly as it sat at the right edge of the page. */}
         <NameColumns count={rows.length} style={{ padding: `0 ${SP.md}px` }}>
-          {rows.map(row => (
+          {rows.map(row => {
+            const recordRead = row.key === 'food_security' ? foodRecordWord(settlement)
+              : row.key === 'trade_connectivity' ? siegeCrisisWord(settlement) : null;
+            return (
             <div key={row.key} data-substrate-row style={{
               display: 'flex', alignItems: 'center', gap: SP.sm,
               padding: `${SP.sm}px 0`, borderBottom: `1px solid ${BORDER}`,
             }}>
               <span style={{ flex: 1, fontSize: FS.sm, fontWeight: 600, color: INK }}>{row.label}</span>
-              <BandPill variable={row.key} band={row.band} />
+              <BandPill variable={row.key} band={row.band} word={recordRead?.word} tone={recordRead?.tone} />
             </div>
-          ))}
+            );
+          })}
         </NameColumns>
       </div>
       {magicReliance.shown && (

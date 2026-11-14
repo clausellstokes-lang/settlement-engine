@@ -42,7 +42,6 @@
  */
 
 import { deriveAllActiveConditions } from './activeConditions.js';
-import { magicLedger } from './magicLedger.js';
 import { canonStressors } from './canonicalAccessors.js';
 import { resolveSibling, resolveDeclared } from './facts/drawDeclared.js';
 import { factsOf } from './facts/factsOf.js';
@@ -400,19 +399,12 @@ export function collectThreatSources(settlement) {
         originSurface: 'defenseProfile',
       });
     }
-    // Low magical DEFENSE only reads as wild-magic instability where magic is a
-    // real force: in a dead-magic world or a mundane low-magic village, scores.magical
-    // is legitimately ~0 and there is nothing arcane to destabilise. Without this gate
-    // every no-magic campaign and most small towns reported a CRITICAL wild-magic threat.
-    const magic = magicLedger(settlement);
-    const magicIsLive = magic.magicExists && (magic.magicLevel === 'medium' || magic.magicLevel === 'high');
-    if (magicIsLive && typeof scores.magical === 'number' && scores.magical > 0 && scores.magical < 40) {
-      out.push({
-        raw: { name: 'Magical instability', severity: clampInv(scores.magical) },
-        inferredType: 'arcane_instability',
-        originSurface: 'defenseProfile',
-      });
-    }
+    // R3-CODE-C (the chair's ruling of 2026-11-13, the defence lane's C-H1): a low MAGICAL DEFENCE score is a rating
+    // of the town's defence, not a fact about the world's magic, and is never read as "Magical instability" (it was:
+    // wherever magic ran medium or high and the score lay under 40). Unstable magic is a fact only where the record
+    // holds it: a magical crisis among the stressors (magical_instability, a dead zone, wild magic), which step 5
+    // below surfaces as an arcane_instability threat by its own name. The two siblings above stand: a low rating of
+    // order or supply IS that risk.
   }
 
   // 3. Explicit defenseProfile.threats[] (if the generator ever populates it)

@@ -579,6 +579,10 @@ const STRESSOR_EDITS_FILES = Object.freeze([
   'generators/generationReceiptJudgments.js', // authored-intent certification (consumer)
   'generators/steps/resolveStress.js',     // the regeneration overlay (consumer)
   'generators/steps/stressConfirmPass.js', // forced-set guard (consumer)
+  // W2-FIX-DATA-3 (146ad0eab, REVIEW-W2-FIX-DATA F1): `settledStressTypes` reads `stressorEdits.added`
+  // to know the forced crises a description drawn before the confirm pass may read — the same forced
+  // set stressConfirmPass keeps; it writes nothing (its one mention is a read). Joined by W2-FIX-DATA-6.
+  'generators/steps/assembleInstitutions.js', // the description draw's settled crises (consumer)
 ]);
 
 // (c) The roaming-twin store actions:

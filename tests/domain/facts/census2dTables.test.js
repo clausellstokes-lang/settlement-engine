@@ -224,7 +224,9 @@ describe('PRESSURE_SENTENCES (narrativeText.js, R: the rows inside each stressor
     }
     expect(wrong).toEqual([]);
     // 17 -> 16 (COHERENCE-PRESUME): the mass-migration line no longer names a market, so it declares nothing
-    expect(declaring).toBe(16);
+    // 16 -> 18 (R2-CODE-A-3, round three #40 / #4): famine[0] and famine[4] presume a common store and need a granary
+    // 18 -> 21 (R2-CODE-A-6, CENSUS-2's writers): succession_void[5] needs a market, insurgency(street)[1] and slave_revolt[0] the middling band
+    expect(declaring).toBe(21);
   });
 });
 
@@ -263,7 +265,7 @@ function siblingArm(name, siblings, root) {
 describe('the declared sibling sets stand beside their tables', () => {
   it('every declaring ledger line has its set, exactly; nothing else is declared', () => {
     for (const [name, siblings, root, n] of [
-      ['STRESS_TYPE_MAP', STRESS_TYPE_SIBLINGS, STRESS_TYPE_MAP, 4],
+      ['STRESS_TYPE_MAP', STRESS_TYPE_SIBLINGS, STRESS_TYPE_MAP, 5], // W2-FIX-DATA-7: the famine's hook declares `institution: mill` (its slot has a holder only where a mill stands), 4 → 5
       ['STRESSOR_SPINE_PHRASES', STRESSOR_SPINE_SIBLINGS, STRESSOR_SPINE_PHRASES, 2],
       ['CONDITION_ARCHETYPE_TEMPLATES', CONDITION_ARCHETYPE_SIBLINGS, CONDITION_ARCHETYPE_TEMPLATES, 6],
       ['QUICK_GUIDE_CLAUSES', QUICK_GUIDE_SIBLINGS, null, 9], // CENSUS-2g unit 7 (R-AY): the Slavic scope's `river` dropped, 7 → 6; RUNG-2 LANDING phase B: the inland Norse and Slavic forms declare `excludes: navigable`, 6 → 8; phase C unit 4: the Greek inland form aligned, 8 → 9

@@ -27,6 +27,8 @@
 import { describe, expect, test } from 'vitest';
 
 import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
+import { poolMemberTexts } from '../helpers/drawnProse.js';
+import { yearBand } from '../../src/domain/display/stateProse/generalStateProse.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { buildCauseWalk } from '../../src/domain/display/causeWalk.js';
 import {
@@ -43,6 +45,7 @@ import {
   POOL_PARENT,
   TERMINALS,
   TIME_BANDS,
+  LIVING_FLOOR,
   avalanche32,
   connectiveFor,
   fnv1a32,
@@ -330,7 +333,29 @@ describe('THE TIME BANDS — no digits, and the predicate-only sixth', () => {
     expect(timeBandWord(oldest, 'attributive')).toBeNull();
     expect(timeBandWord(oldest, 'span')).toBeNull();
     expect(timeBandWord(oldest, 'since')).toBeNull();
-    expect(timeBandWord(oldest, 'predicate')).toBe('older than its bearers');
+    // R3-CODE-C-2 #ww-470: re-keyed by identity (the sixth band's predicate) to the word that names no bearer.
+    expect(timeBandWord(oldest, 'predicate')).toBe('older than anyone living');
+  });
+
+  // R3-CODE-C-2, ROUND-3-CUT-INCREMENT #ww-470 (HIGH, rww-metropolis-wartime-1, World/History): "Jalaliin
+  // came through the siege, older than its bearers; …". The predicate column fills `{timeband_age}`
+  // after any subject and in the legacy molds' apposition (generalStateProse.js :: timebandAgeFill),
+  // so a band word that leans on a pronoun (a grudge's "its bearers") misreads after a siege, a ruin
+  // or the town itself. Every predicate is said of no one in particular.
+  test('no band\'s predicate leans on a pronoun, so the oldest reads after a siege in every legacy mold', () => {
+    const leaning = [...TIME_BANDS.map((band) => timeBandWord(band, 'predicate')), LIVING_FLOOR.predicate]
+      .filter((word) => typeof word === 'string' && /\b(?:its|their|his|her)\b/i.test(word));
+    expect(leaning).toEqual([]);
+    // R3-CODE-C-8 (the reader's L01, the chair's ruling (a)): re-keyed by identity. A siege 77 years gone is
+    // within the life of the record's oldest (the elder ages reach "seventies"): the band says what only
+    // they remember; "older than anyone living" is said at ninety and over.
+    const age = yearBand(77).predicate;
+    expect(age).toBe('older than all but the oldest alive');
+    const slots = { settlement: 'Jalaliin', calamity: 'siege', timeband_age: age };
+    const lines = ['LEGACY-RECOVERED', 'LEGACY-UNRESOLVED', 'LEGACY-SHIFTED']
+      .flatMap((poolKey) => poolMemberTexts({ leaf: 'general', blockId: 'DS-GEN-16', poolKey, slots }));
+    expect(lines.length).toBeGreaterThan(0);
+    expect(lines.filter((line) => !line.toLowerCase().includes(`the siege, ${age}`))).toEqual([]);
   });
 
   test('no band word carries a numeral of any kind', () => {

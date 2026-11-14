@@ -25,7 +25,7 @@ import { flag } from '../../lib/flags.js';
 import { plotHookText } from '../../lib/proseSeams.js';
 import { collectPlotHooks } from '../../domain/dossier/plotHooks.js';
 import { crisisNoteFor } from '../../domain/dossier/powerStrata.js';
-import { deriveFoodBalance, deriveViability } from '../../domain/display/dossierViewModel.js';
+import { deriveFoodBalance, deriveProsperityPosture, deriveViability } from '../../domain/display/dossierViewModel.js';
 import { isViabilityItem } from '../../domain/display/viabilityFilter.js';
 import { criticalIssuesOf, stressEffectsOf, viabilityIssueText } from '../../domain/display/validationOnPage.js';
 import { summarizeMagic, deriveMagicProfile } from '../../domain/magicProfile.js';
@@ -383,7 +383,7 @@ function overviewSlice(active, ai, useAi) {
     arrivalScene:       useAi ? (ai?.arrivalScene || ai?.aiNarrative?.arrivalScene || null) : null,
     pressureSentence:   useAi ? (ai?.pressureSentence || ai?.aiNarrative?.pressureSentence || null) : null,
     character:          s?.history?.historicalCharacter || null,
-    prosperity,
+    prosperity,         prosperityInCrisis: deriveProsperityPosture(s).inCrisis, // ruling 1(a): the label's ordinary-years sentence, or null (one line: the line-keyed FPZ rows below stay put)
     prosperityTone:     PROSPERITY_TONE[(prosperity || '').toLowerCase()] || 'muted',
     safety,
     safetyTone:         SAFETY_TONE[(safety || '').toLowerCase()] || 'muted',
@@ -751,7 +751,9 @@ function npcsSlice(active) {
     // to, so the affiliation chip can link to that faction with no name match.
     // PEOPLE-5A (M-1b): the affiliation is the card's FIRST-RANK power, read from its memberships.
     const firstPower = firstPowerOf(n, powerOrder);
-    const factionRefName = labelOfFactionRef(firstPower || n?.faction || n?.category);
+    // NEVER A CATEGORY KEY (COHERENCE-UPKEEP-7, the chair's ruling F2; the fourth read's C-L3): a person in no power
+    // has no label here, so the journal prints no "Member of" row and an empty table cell, never "magic" or "other".
+    const factionRefName = labelOfFactionRef(firstPower || n?.faction);
     return {
       id: n?.id || entityIdFor('npc', n),
       factionLink: factionRefName ? factionIdFromName(factionRefName) : null,
@@ -934,7 +936,11 @@ function labelOfHook(h) {
  * The engine sometimes emits severity as an array (`['minor', 'major']`),
  * a min/max object (`{ min: 'minor', max: 'major' }`), or just a string.
  * Without normalization, an array renders as "minormajor" because react-pdf
- * joins array children with no separator. Pick the strongest readable form.
+ * joins array children with no separator.
+ * ⛔ A RANGE IS NOT A RATING (the chair's ruling, R3-TABS second seat): a tension's
+ * record holds the template's list of severities, unresolved, so more than one
+ * severity is a range and NO word is returned (it was joined "minor / major");
+ * nothing is chosen for the reader. One severity returns that word.
  */
 function normSeverity(s) {
   if (s == null) return null;
@@ -942,14 +948,12 @@ function normSeverity(s) {
   if (Array.isArray(s)) {
     const parts = s.map(x => (typeof x === 'string' ? x : (x?.label || x?.value || ''))).filter(Boolean);
     if (parts.length === 0) return null;
-    if (parts.length === 1) return parts[0];
-    // "minor / major" reads correctly; the worst element is usually last
-    return parts.join(' / ');
+    return new Set(parts).size === 1 ? parts[0] : null;
   }
   if (typeof s === 'object') {
     if (s.label) return s.label;
     if (s.value) return String(s.value);
-    if (s.max && s.min && s.max !== s.min) return `${s.min} / ${s.max}`;
+    if (s.max && s.min && s.max !== s.min) return null;
     if (s.max) return s.max;
     if (s.min) return s.min;
     if (s.level) return s.level;

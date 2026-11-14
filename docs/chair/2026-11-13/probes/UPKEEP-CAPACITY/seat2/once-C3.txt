@@ -1,0 +1,10 @@
+births 3756
+== stat: births with any 724
+    387 Access to parish church | internal:clergy+parish | {'thorp': 179, 'hamlet': 208} e.g. cold-thorp-16
+    227 Parish church | internal:clergy+parish | {'village': 227} e.g. cold-village-10
+    143 Wayside shrine | internal:clergy+parish | {'thorp': 60, 'hamlet': 57, 'village': 26} e.g. cold-thorp-20
+    110 Monastery or friary | monster:clergy+hospital | {'town': 110} e.g. cold-town-12
+== drop: births with any 318
+    262 Access to parish church | internal:clergy+parish | {'thorp': 117, 'hamlet': 145} e.g. cold-thorp-16
+     56 Monastery or friary | monster:clergy+hospital | {'town': 56} e.g. cold-town-12
+== cap side effects (classed apart): 409 {'Elder Grove Council': 261, 'Parish churches (10-30)': 141, 'Parish churches (2-5)': 38, 'Hedge wizard': 31, 'Alchemist shop': 27, "Wizard's tower": 13, "Mages' guild": 12, 'Alchemist quarter': 9}

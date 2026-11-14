@@ -25,6 +25,7 @@
  * owner's to veto (docs/chair/2026-11-09/OWNER-WORDS-DOSSIER-2026-11-09.md).
  */
 import { rulingChainOf } from '../dossier/powerStrata.js';
+import { seatKeeperOf } from '../people/seatKeeper.js';
 
 /** @param {unknown} v @returns {string} */
 const text = (v) => (typeof v === 'string' ? v.trim() : '');
@@ -172,6 +173,12 @@ export function estrangedPowersOf(settlement, governing) {
     if (!governing || !pair.includes(governing)) continue;
     const other = pair.find((/** @type {string} */ n) => n && n !== governing);
     if (!other) continue;
+    // R3-CODE-C-9 (the bar's n15, bar0-metropolis-calm-rand-1, Shankou): the criminal row at the adversarial capture
+    // rung (factionDynamics.js :: govCriminalRelation, "... is hunting {criminals} in earnest") is the hall pursuing a
+    // rival it is beating (the same tab: "{criminals} works against {ruler}, and {ruler} is winning",
+    // dmPowerLines.js); it has not broken with the hall, so the account names it neither as refusing the hall's orders
+    // nor as a cost to them ("It can no longer make its orders hold alone"). 30 of the reader's 1,722 accounts.
+    if (rel.type === 'competitive' && rel.captureState === 'adversarial') continue;
     const tie = rel.type === 'corrupted' ? (rel.captureState === 'capture' ? 'capture' : 'corrupted')
       : rel.type === 'competitive' ? 'competitive'
         : rel.type === 'tense' ? 'tense' : null;
@@ -285,9 +292,12 @@ export function governanceAccountOf(settlement, opts = {}) {
     // fills the gap, from the record: the claimants it names, else the power governing without a head.
     sentences.push(`No one holds the seat at ${place}.`);
     const claimants = Array.isArray(chain.absence.claimants) ? chain.absence.claimants.map(text).filter(Boolean) : [];
-    sentences.push(claimants.length
-      ? `${listOf(claimants)} ${claimants.length === 1 ? 'contends' : 'contend'} for it.`
-      : `${capFirst(ruler)} governs without a head.`);
+    // R3-CODE-C-3 (ROUND-3-CUT-INCREMENT #pf-260, rpf-city-succession_void+politically_fractured-13): "governs without
+    // a head" beside the same tab's "Acting Governor Iulia Laenas keeps the seat meanwhile". The keeper has one home
+    // (people/seatKeeper.js :: seatKeeperOf); where one keeps the seat the power is not headless, and the tab's seat row
+    // already names the keeper, so the sentence is left out rather than said twice.
+    if (claimants.length) sentences.push(`${listOf(claimants)} ${claimants.length === 1 ? 'contends' : 'contend'} for it.`);
+    else if (!seatKeeperOf(s)) sentences.push(`${capFirst(ruler)} governs without a head.`);
   } else {
     sentences.push(`${place} is governed by ${ruler}. No one is named to its seat.`);
   }

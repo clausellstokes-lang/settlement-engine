@@ -1,0 +1,107 @@
+diff --git a/src/domain/institutions/defenseInstitutionBuckets.js b/src/domain/institutions/defenseInstitutionBuckets.js
+index 46bb8fcc3..3f106d48b 100644
+--- a/src/domain/institutions/defenseInstitutionBuckets.js
++++ b/src/domain/institutions/defenseInstitutionBuckets.js
+@@ -263,6 +263,32 @@ export function magicPresenceRosterOf(institutions) {
+   });
+ }
+ 
++/**
++ * COUNT ONCE, THE SECOND HALF (COHERENCE-UPKEEP-7, the chair's ruling, a declared move): a house that stands under
++ * two named parts keeps the part of its own kind. The alchemist shop and the alchemist quarter are ALCHEMISTS (the
++ * alchemy tradition above names them) and leave ARCANE, whose gate reads the magic-house flag over the roster
++ * without them (`arcaneRosterOf`). Measured first: docs/chair/2026-11-13/probes/UPKEEP-7/. No weight changed.
++ * @type {ReadonlyArray<string>}
++ */
++export const DEFENSE_ALCHEMIST_HOUSES = Object.freeze(['alchemist shop', 'alchemist quarter']);
++
++/**
++ * The roster the arcane gate reads: the roster without the alchemist houses (count once). RUIN-BLIND, as the
++ * partition. One name reading per institution. Returns the SAME array where no alchemist house stands, so a caller
++ * can tell by identity that nothing was left out.
++ * @param {unknown} institutions
++ * @returns {unknown[]}
++ */
++export function arcaneRosterOf(institutions) {
++  /** @type {unknown[]} */
++  const list = Array.isArray(institutions) ? institutions : [];
++  const kept = list.filter((inst) => {
++    const name = nativeSemanticName(inst).toLowerCase();
++    return !DEFENSE_ALCHEMIST_HOUSES.some((kw) => name.includes(kw));
++  });
++  return kept.length === list.length ? list : kept;
++}
++
+ /**
+  * THE WALL'S KIND (the chair's R17, optional): read from the walls row's name by the same keyword
+  * discipline, stone by default. NO term of the defence profile reads it, and no record stores it;
+diff --git a/src/generators/defenseGenerator.js b/src/generators/defenseGenerator.js
+index f94ed25f0..fe6a6d1b2 100644
+--- a/src/generators/defenseGenerator.js
++++ b/src/generators/defenseGenerator.js
+@@ -39,7 +39,7 @@
+ import { getInstFlags, getPriorities } from './helpers.js';
+ import { computeEffectiveMagicPresence, neighbourMilitaryFactorOf } from './priorityHelpers.js';
+ import { hasTradeRouteConnection } from '../domain/tradeRouteSemantics.js';
+-import { partitionDefenseInstitutions, defenseTraditionNamesOf, defenseWallOf, magicPresenceRosterOf } from '../domain/institutions/defenseInstitutionBuckets.js';
++import { partitionDefenseInstitutions, defenseTraditionNamesOf, defenseWallOf, magicPresenceRosterOf, arcaneRosterOf } from '../domain/institutions/defenseInstitutionBuckets.js';
+ import { resolveGenerationWorldLaw } from './generationContext.js';
+ import { readinessBandOf } from '../data/bandLadders.js';
+ import { deriveMagicReliance } from '../domain/magicReliance.js';
+@@ -210,8 +210,12 @@ const computeDefenseScores = (settlement, keep, instead = null) => {
+   const crimBase = Math.round(crimeOf([]));
+   const names = defenseTraditionNamesOf(institutions);
+   const G = W.traditionGates;
++  // Count once (COHERENCE-UPKEEP-7): the alchemist houses are alchemists, so the arcane gate reads the magic-house
++  // flag over the roster without them; the same flag, read again only where an alchemist house was left out.
++  const arcaneRoster = arcaneRosterOf(institutions);
++  const arcaneHouse = arcaneRoster === institutions ? inst.hasMagicInst : getInstFlags(config, arcaneRoster).inst.hasMagicInst;
+   const t = {
+-    hasArcane: magicOn && magPri >= G.arcane && (inst.hasMagicInst || names.arcane),
++    hasArcane: magicOn && magPri >= G.arcane && (arcaneHouse || names.arcane),
+     hasArcaneGuild: magicOn && magPri >= G.arcaneGuild && names.arcaneGuild,
+     hasDivine: magicOn && relPri >= G.divine && (names.divine || (relPri >= G.divineShrine && names.divineShrine)),
+     hasDivineStrong: magicOn && relPri >= G.divineStrong && names.divineStrong,
+diff --git a/tests/generators/magicCountOnce.test.js b/tests/generators/magicCountOnce.test.js
+index 6332ae77a..62d3f2cb8 100644
+--- a/tests/generators/magicCountOnce.test.js
++++ b/tests/generators/magicCountOnce.test.js
+@@ -54,3 +54,38 @@ describe('count once: a named house leaves the magic presence (ruling 4, reading
+     expect(bad).toEqual([]);
+   });
+ });
++
++// COHERENCE-UPKEEP-7, the chair's ruling (count once, the second half): a house that stands under two named parts
++// keeps the part of its own kind. The alchemist shop and the alchemist quarter are ALCHEMISTS and leave ARCANE: the
++// arcane gate reads the magic-house flag over the roster without them (`defenseInstitutionBuckets.js ::
++// arcaneRosterOf`). A declared move of the rating; no weight changed. The review's count-once test (REVIEW-UPKEEP-2
++// claims.mjs (c)): drop each house alone, recompute the parts (never stored), and the non-rule parts whose full value
++// moves are the parts that house feeds.
++const ALCHEMIST_HOUSES = ['alchemist shop', 'alchemist quarter'];
++const RULE_PARTS = new Set(['terrain', 'size', 'danger', 'wallsUnmanned', 'sustainsHeld', 'scaleTop', 'scaleBottom', 'will', 'rounding']);
++const isRulePart = (/** @type {string} */ id) => RULE_PARTS.has(id) || id.startsWith('full:') || id.startsWith('floor:');
++/** @param {any} s @returns {Record<string, number>} */
++const fullOf = (s) => Object.fromEntries(defencePartsOf(s).filter((p) => !isRulePart(p.id)).map((p) => [p.id, p.full]));
++
++describe('count once, the second half: the alchemist houses are alchemists and leave arcane', () => {
++  test('the defence home names the two alchemist houses', () => {
++    expect([...(home.DEFENSE_ALCHEMIST_HOUSES || [])].sort()).toEqual([...ALCHEMIST_HOUSES].sort());
++  });
++
++  test('RED-FIRST: dropped alone, an alchemist house moves one part only (alchemists), never arcane beside it', () => {
++    let held = 0;
++    const bad = [];
++    for (const { seed, s } of births) {
++      const base = fullOf(s);
++      s.institutions.forEach((inst, i) => {
++        if (!ALCHEMIST_HOUSES.some((h) => lc(inst).includes(h))) return;
++        held += 1;
++        const now = fullOf({ ...s, institutions: s.institutions.filter((_, j) => j !== i) });
++        const moved = [...new Set([...Object.keys(base), ...Object.keys(now)])].filter((k) => Math.abs((base[k] ?? 0) - (now[k] ?? 0)) > 1e-9);
++        if (moved.length > 1 || moved.includes('arcane')) bad.push([seed, inst.name, moved.join('+')]);
++      });
++    }
++    expect(held, 'anchored: the corpus holds alchemist houses').toBeGreaterThan(5);
++    expect(bad).toEqual([]);
++  });
++});

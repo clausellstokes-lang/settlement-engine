@@ -1,0 +1,84 @@
+{
+ "n": 1490,
+ "C": {
+  "608.apart:0": 1043,
+  "608.apart:1": 445,
+  "bar.military.disagree:amber-beside-WEAK": 41,
+  "bar.military.disagree:green-beside-ADEQUATE": 53,
+  "inc.alchemyLabel": 554,
+  "inc.alchemyLabel.noAlchemist:Apothecary & Alchemy": 351,
+  "bar.internal.disagree:amber-beside-WEAK": 41,
+  "bar.internal.disagree:green-beside-ADEQUATE": 121,
+  "608.apart:2": 2
+ },
+ "ex": {
+  "608.apart:0": [
+   "rv2-calm-thorp-0",
+   "rv2-calm-thorp-1",
+   "rv2-calm-thorp-3",
+   "rv2-calm-thorp-4",
+   "rv2-calm-thorp-6",
+   "rv2-calm-thorp-9"
+  ],
+  "608.apart:1": [
+   "rv2-calm-thorp-2",
+   "rv2-calm-thorp-5",
+   "rv2-calm-thorp-7",
+   "rv2-calm-thorp-8",
+   "rv2-calm-thorp-13",
+   "rv2-calm-thorp-17"
+  ],
+  "bar.military.disagree:amber-beside-WEAK": [
+   "rv2-calm-thorp-10",
+   "rv2-calm-thorp-14",
+   "rv2-calm-thorp-20",
+   "rv2-calm-thorp-36",
+   "rv2-calm-thorp-39",
+   "rv2-calm-hamlet-14"
+  ],
+  "bar.military.disagree:green-beside-ADEQUATE": [
+   "rv2-calm-hamlet-30",
+   "rv2-calm-village-10",
+   "rv2-calm-village-11",
+   "rv2-calm-village-28",
+   "rv2-calm-town-6",
+   "rv2-calm-town-15"
+  ],
+  "inc.alchemyLabel": [
+   "rv2-calm-village-4",
+   "rv2-calm-village-12",
+   "rv2-calm-town-2",
+   "rv2-calm-town-3",
+   "rv2-calm-town-7",
+   "rv2-calm-town-9"
+  ],
+  "inc.alchemyLabel.noAlchemist:Apothecary & Alchemy": [
+   "rv2-calm-village-4",
+   "rv2-calm-village-12",
+   "rv2-calm-town-17",
+   "rv2-calm-town-30",
+   "rv2-calm-town-32",
+   "rv2-calm-city-8"
+  ],
+  "bar.internal.disagree:amber-beside-WEAK": [
+   "rv2-calm-village-35",
+   "rv2-calm-town-0",
+   "rv2-calm-town-14",
+   "rv2-calm-town-15",
+   "rv2-calm-town-16",
+   "rv2-calm-town-17"
+  ],
+  "bar.internal.disagree:green-beside-ADEQUATE": [
+   "rv2-calm-city-0",
+   "rv2-calm-city-1",
+   "rv2-calm-city-2",
+   "rv2-calm-city-3",
+   "rv2-calm-city-8",
+   "rv2-calm-city-14"
+  ],
+  "608.apart:2": [
+   "rr2s-village-monster_pressure-rand-1",
+   "rww-metropolis-infiltrated-1"
+  ]
+ }
+}

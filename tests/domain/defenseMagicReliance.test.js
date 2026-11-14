@@ -47,7 +47,12 @@ describe('the Arcane Support row reads the practitioner census', () => {
     const s = born('village', 'd2-magic-village-66-10', { magicExists: true, priorityMagic: 66 });
     const practitioners = magicPractitioners(s);
     expect(practitioners.length, 'the census finds a practitioner here').toBeGreaterThan(0);
-    const row = arcaneRow(s);
+    // RE-KEYED BY IDENTITY (W2-C-LEAVES-3, the chair's ruling record 369 G5): the row is a claim about the DEFENCE and
+    // prints only where the defence profile's own arcane tradition holds too. This village's does not, so no row; with
+    // the tradition held, the census's practitioner is Present and named, as before.
+    expect(s.defenseProfile.traditions.hasArcane, 'anchored: the defence holds no arcane tradition here').toBe(false);
+    expect(arcaneRow(s), 'no row: the defence\'s own tradition does not hold').toBeUndefined();
+    const row = arcaneRow({ ...s, defenseProfile: { ...s.defenseProfile, traditions: { ...s.defenseProfile.traditions, hasArcane: true } } });
     expect(row?.status, 'Arcane Support status').toBe('Present');
     expect(row?.note, 'the note names the first practitioner').toContain(practitioners[0]);
   });
@@ -57,7 +62,8 @@ describe('the Arcane Support row reads the practitioner census', () => {
     expect(magicPractitioners(s), 'no practitioner before the witch is added').toEqual([]);
     expect(arcaneRow(s)?.note, 'the no-practitioner note before').toMatch(/^No arcane practitioners on the rolls/);
     const npcs = [...(s.npcs || []), { name: 'Wenna Holt', role: 'Hedge Witch', status: 'active' }];
-    const row = arcaneRow({ ...s, npcs });
+    // RE-KEYED BY IDENTITY (record 369 G5): the defence's own arcane tradition is held here too, so the census decides.
+    const row = arcaneRow({ ...s, npcs, defenseProfile: { ...s.defenseProfile, traditions: { ...s.defenseProfile.traditions, hasArcane: true } } });
     expect(row?.status, 'status with the witch on the rolls').toBe('Present');
     expect(row?.note, 'the note names her').toContain('Wenna Holt');
   });

@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "27c39b75066fadf08b1f2bad5900d0d325db72be",
-  "measuredBy": "R2-CODE-B-11",
+  "measuredAtSha": "128ab68c7de6badd4509ad1e8528f8077602ffc5",
+  "measuredBy": "JOIN-3",
   "date": "2026-11-14",
-  "note": "H2-1/2/3: three (b) titles in tests/domain/crisisCastReaderRows.test.js",
-  "files": 3272,
-  "parked": 403,
-  "credited": 2869,
-  "titles": 29543,
-  "suiteTitles": 8018
+  "note": "THE TRUE JOIN (lane/join-2026-11-14): nine lanes composed over the line 976db5b19; re-taken LAST on the clean committed joined tree after step 7 (pins), 8 (tuning) and 9 (edge bundles), by the book 2n step 10.",
+  "files": 3448,
+  "parked": 416,
+  "credited": 3032,
+  "titles": 30107,
+  "suiteTitles": 8255
 }

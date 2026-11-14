@@ -1,0 +1,80 @@
+## cold-thorp-0
+  tab before: Critical ▼ | Invasion & War
+  tab after:  Critical ▼ | Invasion & War
+  pdf after:  Beasts & Monsters | Critical | Wild country all round and nobody organised to meet it; any creature of real size would get in.
+## cold-hamlet-123
+  tab before: Critical ▼ | Whoever walks out of Chalmal, in any direction and at any hour, meets nothing that would justify a watch.
+  tab after:  Critical ▼ | Whoever walks out of Chalmal, in any direction and at any hour, meets nothing that would justify a watch.
+  pdf after:  Beasts & Monsters | Critical | Quiet country and no organised defence, which is all the country asks.
+## cold-famine-hamlet-1
+  tab before: Weak ▼ | Invasion & War
+  tab after:  Critical ▼ | Invasion & War
+  pdf after:  Beasts & Monsters | Critical | Wild country all round and nobody organised to meet it; any creature of real size would get in.
+## cold-famine-thorp-22
+  tab before: Critical ▼ | Invasion & War
+  tab after:  Critical ▼ | Invasion & War
+  pdf after:  Beasts & Monsters | Critical | Wild country all round and nobody organised to meet it; any creature of real size would get in.
+## cold-hamlet-110
+  tab before: Weak ▼ | Jabalpur's walls and fighters are holding against the creatures, but each season wears them down, and the hamlet is barely keeping up.
+  tab after:  Critical ▼ | Jabalpur's walls and fighters are holding against the creatures, but each season wears them down, and the hamlet is barely keeping up.
+  pdf after:  Beasts & Monsters | Critical | Palisade and citizen militia provide a viable but demanding posture in an embattled region. Watch rotations are thin. Simultaneous incursions will break coverage. No specialist monster hunters.
+## cold-hamlet-14
+  tab before: Critical ▼ | Invasion & War
+  tab after:  Critical ▼ | Invasion & War
+  pdf after:  Beasts & Monsters | Critical | Wild country all round and nobody organised to meet it; any creature of real size would get in.
+## cold-hamlet-179
+  tab before: Critical ▼ | Invasion & War
+  tab after:  Critical ▼ | Invasion & War
+  pdf after:  Beasts & Monsters | Critical | Wild country all round and nobody organised to meet it; any creature of real size would get in.
+## cold-hamlet-217
+  tab before: Weak ▼ | The country around Fortenovum is thick with creatures and the hamlet has answered it properly: there is a wall to hold and there are people to hold it, and both are in use constantly.
+  tab after:  Critical ▼ | The country around Fortenovum is thick with creatures and the hamlet has answered it properly: there is a wall to hold and there are people to hold it, and both are in use constantly.
+  pdf after:  Beasts & Monsters | Critical | Palisade and citizen militia provide a viable but demanding posture in an embattled region. Watch rotations are thin. Simultaneous incursions will break coverage. No specialist monster hunters.
+## cold-hamlet-35
+  tab before: Critical ▼ | The hamlet has never needed to think about what is outside it, and does not.
+  tab after:  Critical ▼ | The hamlet has never needed to think about what is outside it, and does not.
+  pdf after:  Beasts & Monsters | Critical | Quiet country and no organised defence, which is all the country asks.
+## cold-hamlet-57
+  tab before: Critical ▼ | Invasion & War
+  tab after:  Critical ▼ | Invasion & War
+  pdf after:  Beasts & Monsters | Critical | Wild country all round and nobody organised to meet it; any creature of real size would get in.
+## cold-hamlet-86
+  tab before: Critical ▼ | Neuhain keeps no organized defense against the country, and in a heartland this quiet the arrangement is a reasonable one rather than a gap.
+  tab after:  Critical ▼ | Neuhain keeps no organized defense against the country, and in a heartland this quiet the arrangement is a reasonable one rather than a gap.
+  pdf after:  Beasts & Monsters | Critical | Quiet country and no organised defence, which is all the country asks.
+## cold-thorp-140
+  tab before: Critical ▼ | The thorp has never needed to think about what is outside it, and does not.
+  tab after:  Critical ▼ | The thorp has never needed to think about what is outside it, and does not.
+  pdf after:  Beasts & Monsters | Critical | Quiet country and no organised defence, which is all the country asks.
+## cold-thorp-166
+  tab before: Weak ▼ | Invasion & War
+  tab after:  Critical ▼ | Invasion & War
+  pdf after:  Beasts & Monsters | Critical | Wild country all round and nobody organised to meet it; any creature of real size would get in.
+## cold-thorp-195
+  tab before: Weak ▼ | You see spears at Achilambelos and no wall for them to stand on, so anything that came at the thorp from two sides at once would get in.
+  tab after:  Critical ▼ | You see spears at Achilambelos and no wall for them to stand on, so anything that came at the thorp from two sides at once would get in.
+  pdf after:  Beasts & Monsters | Critical | Active frontier with a militia but no perimeter. Defense is reactive. Attackers choose the point of engagement. Adequate for routine threats; exposed to anything coordinated.
+## cold-thorp-234
+  tab before: Weak ▼ | Ioannoeia's walls and fighters are holding against the creatures, but each season wears them down, and the thorp is barely keeping up.
+  tab after:  Critical ▼ | Ioannoeia's walls and fighters are holding against the creatures, but each season wears them down, and the thorp is barely keeping up.
+  pdf after:  Beasts & Monsters | Critical | Palisade and citizen militia provide a viable but demanding posture in an embattled region. Watch rotations are thin. Simultaneous incursions will break coverage. No specialist monster hunters.
+## cold-thorp-57
+  tab before: Weak ▼ | Lundhavn's walls and fighters are holding against the creatures, but each season wears them down, and the thorp is barely keeping up.
+  tab after:  Critical ▼ | Lundhavn's walls and fighters are holding against the creatures, but each season wears them down, and the thorp is barely keeping up.
+  pdf after:  Beasts & Monsters | Critical | Palisade and citizen militia provide a viable but demanding posture in an embattled region. Watch rotations are thin. Simultaneous incursions will break coverage. No specialist monster hunters.
+## cold-famine-hamlet-0
+  tab before: Critical ▼ | The country around Ainsaray is thick with creatures and the hamlet has answered it properly: there is a wall to hold and there are people to hold it, and both are in use constantly.
+  tab after:  Critical ▼ | The country around Ainsaray is thick with creatures and the hamlet has answered it properly: there is a wall to hold and there are people to hold it, and both are in use constantly.
+  pdf after:  Beasts & Monsters | Critical | Palisade and citizen militia provide a viable but demanding posture in an embattled region. Watch rotations are thin. Simultaneous incursions will break coverage. No specialist monster hunters.
+## cold-hamlet-147
+  tab before: Critical ▼ | You see spears at Copantlan and no wall for them to stand on, so anything that came at the hamlet from two sides at once would get in.
+  tab after:  Critical ▼ | You see spears at Copantlan and no wall for them to stand on, so anything that came at the hamlet from two sides at once would get in.
+  pdf after:  Beasts & Monsters | Critical | Active frontier with a militia but no perimeter. Defense is reactive. Attackers choose the point of engagement. Adequate for routine threats; exposed to anything coordinated.
+## cold-hamlet-91
+  tab before: Weak ▼ | Invasion & War
+  tab after:  Weak ▼ | Invasion & War
+  pdf after:  Beasts & Monsters | Weak | Wild country all round and nobody organised to meet it; any creature of real size would get in.
+## cold-thorp-223
+  tab before: Critical ▼ | Invasion & War
+  tab after:  Critical ▼ | Invasion & War
+  pdf after:  Beasts & Monsters | Critical | Wild country all round and nobody organised to meet it; any creature of real size would get in.

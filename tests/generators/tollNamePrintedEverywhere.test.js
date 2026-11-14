@@ -35,16 +35,39 @@ beforeAll(async () => {
   }
 }, 180000);
 
-describe('FINDING 1: an NPC\'s goal names the toll by the town\'s access', () => {
+describe('FINDING 1: an NPC\'s goal about the toll names the toll\'s house, and no goal names a crossroads or a chain label', () => {
+  // RE-KEYED BY IDENTITY (POWERS-15, the chair's ruling of 2026-11-14 10:57 UTC, record 440: "no slot prints a chain
+  // label" STANDS). POWERS-9 (8ae50a069) struck the goals' {chain} slot: a SUPPLY goal names the work through its own
+  // house ("the work at {house}", `houseFill`, the house's display noun). The goal that named the catalogue's toll at
+  // faa20bc6c is the goal whose intent targets the toll's chain; it now names its speaker's house AS THE ROSTER PRINTS
+  // IT, a house of the toll's chain the roster holds. Measured first on the census's 720 (POWERS-15 probes toll.mjs):
+  // every goal naming a toll house (toll bridge, caravaneer's post, coaching inn, customs house) names a house the
+  // roster holds: none false. The protective half is unchanged: no goal names a crossroads.
+  /** @type {Record<string, number>} the toll goals per seed at 0ea65f574 (r2r-metropolis-49: the toll-keeper and the customs collector) */
+  const TOLL_GOALS = { 'r2r-city-8': 1, 'r2r-metropolis-8': 1, 'r2r-metropolis-49': 2 };
   for (const [seed, [access, printed]] of Object.entries(SEEDS)) {
-    test(`${seed} (${access}): no goal names a crossroads, and a goal names "${printed}"`, () => {
+    test(`${seed} (${access}): no goal names a crossroads or the toll's label "${printed}", and the toll's goal names its house as the roster prints it`, async () => {
+      const { houseFill } = await import('../../src/generators/people/goals.js');
       const s = births[seed];
       expect(s.config.tradeRouteAccess).toBe(access);
-      expect(s.economicState.activeChains.some((c) => c.chainId === 'crossroads_trade'), 'anchored: the toll runs here').toBe(true);
+      const toll = s.economicState.activeChains.find((c) => c.chainId === 'crossroads_trade');
+      expect(toll, 'anchored: the toll runs here').toBeTruthy();
       const goals = s.npcs.flatMap((n) => [n.goal?.short, n.goal?.long]).filter(Boolean);
       expect(goals.filter((g) => CATALOGUE.test(g))).toEqual([]);
-      // anchored: the goal that named the catalogue's toll at faa20bc6c names the access's toll now
-      expect(goals.some((g) => g.includes(printed)), 'a goal names the toll by its printed name').toBe(true);
+      // no slot prints a chain label: neither the catalogue's nor the access's
+      expect(goals.filter((g) => g.includes(printed) || g.includes(String(toll.label)))).toEqual([]);
+      // the goal that names the toll's work, by its intent's target (the identity), names the speaker's house
+      const rosterNames = new Set((s.institutions || []).map((/** @type {any} */ i) => String(i.name)));
+      const tollHouses = new Set(toll.processingInstitutions.map(String));
+      const tollGoals = s.npcs.flatMap((/** @type {any} */ n) => ['short', 'long']
+        .filter((w) => n.goal?.intent?.[w]?.target?.kind === 'chain' && n.goal.intent[w].target.id === 'crossroads_trade')
+        .map((w) => ({ text: String(n.goal[w]), house: String(n.institution?.key ?? '') })));
+      expect(tollGoals.length, 'anchored: the toll\'s goals of this town').toBe(TOLL_GOALS[seed]);
+      for (const g of tollGoals) {
+        expect(rosterNames.has(g.house), `${g.house}: the roster holds the speaker's house`).toBe(true);
+        expect(tollHouses.has(g.house), `${g.house}: a house of the toll's chain`).toBe(true);
+        expect(g.text, 'the goal names the house as the roster prints it').toContain(houseFill(g.house));
+      }
     });
   }
 });

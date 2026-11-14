@@ -280,12 +280,12 @@ describe('THE PUBLIC GATE — the economy desk stays silent on a public dossier'
     const text = container.textContent;
     // re-keyed by identity at SW-B6 (2026-11-09, STYLE-RULINGS-2 B6): the sentence says it in WORDS (60% grown,
     // half the gap by trade, 12% short), and every FIGURE sits in the stat line, the label row above it.
-    expect(text).toContain('Forge Town grows about two parts in three of what it eats, and carts bring in about half the rest.');
+    expect(text).toContain('Forge Town grows about three parts in five of what it eats, and carts bring in about half the rest.'); // re-keyed by identity at W2-C-LEAVES-5 (item 3's bands: 600 of 1,000 is about three parts in five, not two in three)
     expect(text).toContain('Some households still go short, and a bad season would leave more of them hungry.');
     // ODQ §934.20 — the magic clause still speaks; its figure is the stat line's, beside the residual, so a
     // reader adds production, imports, provision and the shortfall in one row and lands on the need. The
     // fixture names no channel, so the neutral word stands rather than a guessed adjective.
-    expect(text).toContain('Magical provision makes up a little more.');
+    expect(text).toContain('Magical provision makes up less than a fifth of what it eats.'); // re-keyed by identity at W2-C-LEAVES-5 (item 3: the provision states its own share, 80 of 1,000)
     expect(text).toContain(`+ ${fb.magicFoodOffset} by magical provision`);
     expect(text).toContain(`Short: ${fb.deficit} lbs/day`);
     expect(text).not.toContain('of the food people need'); // anchored: the words sentence is pinned PRESENT above
@@ -312,7 +312,7 @@ describe('THE PUBLIC GATE — the economy desk stays silent on a public dossier'
       settlement: withFood({ dailyProduction: 600, dailyNeed: 1000, deficit: 200, deficitPercent: 20, surplus: 0, rawDeficit: 400, magicFoodOffset: 200, agricultureModifier: 1 }),
       saveId: null, publicDossier: true,
     })).container.textContent;
-    expect(severed).toContain('No food comes into Forge Town by trade. Magical provision makes up a little more. Many households go short'); // re-keyed by identity at SW-B6 (2026-11-09): words in the sentence, figures in the stat line
+    expect(severed).toContain('No food comes into Forge Town by trade. Magical provision makes up about a fifth of what it eats. Many households go short'); // re-keyed by identity at SW-B6 (2026-11-09): words in the sentence, figures in the stat line; again at W2-C-LEAVES-5 (item 3: the provision states its own share, 200 of 1,000)
     expect(severed).toContain('+ 200 by magical provision');
     expect(severed).toContain('Short: 200 lbs/day');
   });
@@ -393,8 +393,8 @@ describe('THE PUBLIC GATE — the economy desk stays silent on a public dossier'
     // 773 grown, + 169 imported, + 31 by provision, need 1,014, short 41 — 241 − 169 − 31 = 41.
     // re-keyed by identity at SW-B6 (2026-11-09, STYLE-RULINGS-2 B6): the sentence says the same in words.
     expect(text).toContain(`Short: ${fb.deficit} lbs/day`);
-    expect(text).toContain('Forge Town grows about three parts in four of what it eats, and carts bring in most of the rest.');
-    expect(text).toContain('Divine provision makes up a little more. A few households still go short');
+    expect(text).toContain('Forge Town grows about three parts in four of what it eats, and carts bring in about three parts in four of the rest.'); // re-keyed by identity at W2-C-LEAVES-5 (item 3's bands: 169 of the 241 gap is not "most")
+    expect(text).toContain('Divine provision makes up less than a fifth of what it eats. A few households still go short'); // re-keyed by identity at W2-C-LEAVES-5 (item 3: 31 of 1,014)
     expect(fb.rawDeficit - fb.importCoverage - fb.magicFoodOffset).toBe(fb.deficit);
   });
 
@@ -548,12 +548,16 @@ const GROUND = {
     strategicValue: 'Medium - agricultural heartland, but exposed to raids',
     economicStrengths: ['Grain production', 'Livestock'],
     exploitation: {
+      // RE-KEYED BY IDENTITY (W2-C-LEAVES-3, P1-b and P1-c): the unexploited card was the timber, beside an export of
+      // 'Timber': a resource whose own raw good the town sells is worked (P1-b), so the cards print it Partial and the
+      // desk's "nothing in the town takes it out of the ground" no longer speaks of it. The lens's case is a resource the
+      // town does not sell: the iron ore, which no house here smelts.
       unexploited: [{
-        rawResource: 'timber',
+        rawResource: 'iron ore',
         exportValue: 'very high',
-        processingInstitutions: ['Sawmill'],
-        intermediateGoods: ['sawn planks'],
-        finalProducts: ['furniture'],
+        processingInstitutions: ['Smelter'],
+        intermediateGoods: ['pig iron'],
+        finalProducts: ['tools'],
       }],
       partiallyExploited: [],
       fullyExploited: [],
@@ -586,7 +590,7 @@ const GROUND_LINES = Object.freeze(drawnMembers({
   workings: {
     blockId: 'DS-ECO-11',
     poolKey: 'EXPLOITATION: unexploited, exportValue: high',
-    slots: { ...GROUND_SLOTS, resource: 'timber', institution: 'Sawmill' },
+    slots: { ...GROUND_SLOTS, resource: 'iron ore', institution: 'Smelter' },
   },
   catalog: { blockId: 'DS-SUP-3', poolKey: 'THE HEALING GAP' },
   posture: { blockId: 'DS-ECO-10', poolKey: 'POSTURE: established' },
@@ -711,7 +715,10 @@ describe('DESK-ECON2 — the mounted positions are DRAWS, not citations', () => 
     cleanup();
     const pub = render(e(EconomicsTab, { settlement: GROUND, saveId: null, publicDossier: true }));
     const pubText = pub.container.textContent;
-    expectPresentThenAbsent(privText, pubText, GROUND_LINES.posture, 'economics.exportPosture');
+    // RE-KEYED BY IDENTITY (W2-WRITE-11, the lane's red of HANDBACK-9): the corpus writes "the town" of any size and the
+    // desk speaks it in the record's own noun; GROUND is a village, so the page prints "beyond the village" (right for the
+    // size). The anchor is spoken in the record's noun as onPage() speaks every other anchor here; the line is unchanged.
+    expectPresentThenAbsent(privText, pubText, speakTierNoun(GROUND_LINES.posture, tierNounFor(GROUND.tier)), 'economics.exportPosture');
     // The Trade Profile section itself is the surface and survives the gate.
     expect(pubText).toContain('Timber');
     expect(pubText).toContain('Exports');
@@ -1074,7 +1081,7 @@ describe('UX consolidation — the Economics page says each fact once', () => {
     const text = render(e(EconomicsTab, { settlement: fed, saveId: 'forge_town', publicDossier: false })).container.textContent;
     expect(text, 'the income-mix lens still draws').toContain('The tolls carry the town.');
     expect(text, 'the trade-profile lens is not drawn').not.toContain('The same carts go out and come back.'); // anchored: toContain income-mix on this render
-    expect(text).toContain('Forge Town grows about two parts in three of what it eats, and carts bring in most of the rest.'); // re-keyed by identity at SW-B6 (2026-11-09): the food narrative in words (700 of 1,000 grown; 200 of the 300 gap by trade)
+    expect(text).toContain('Forge Town grows about three parts in four of what it eats, and carts bring in about two parts in three of the rest.'); // re-keyed by identity at SW-B6 (2026-11-09): the food narrative in words (700 of 1,000 grown; 200 of the 300 gap by trade); again at W2-C-LEAVES-5 (item 3's bands)
     expect(text).not.toContain('trade-dependent for food security'); // anchored: the words sentence is pinned PRESENT on this render
   });
 

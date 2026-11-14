@@ -685,3 +685,19 @@ export function securityImpairmentsOf(settlement) {
 export function isOustedNpc(npc) {
   return !!npc?.ousted;
 }
+
+/**
+ * WHETHER CRIMINAL RINGS RIVAL HERE (W2-C-LEAVES-3, round three; the cold list REVIEW-R2-STAGES #1172, #1202, #716,
+ * #750, #813), read in the crime fact's home beside its detector. A criminal seat of the power roster that GOVERNS
+ * (`isGoverning`: a council bought outright) is the captured hall, not a rival ring; two or more criminal seats that do
+ * not govern, or the estate's own "Multiple criminal factions" (the Institutions tab's rival gangs disputing their
+ * turf), is no single controlling authority. Pure, draw-free and total.
+ * @param {ReadonlyArray<{ category?: unknown, isGoverning?: unknown } | null | undefined> | null | undefined} seats the power roster's seats
+ * @param {ReadonlyArray<{ name?: unknown } | null | undefined> | null | undefined} estate the institutions
+ * @returns {boolean}
+ */
+export function rivalRingsOf(seats, estate) {
+  const rings = (Array.isArray(seats) ? seats : []).filter((f) => f?.category === 'criminal' && f?.isGoverning !== true);
+  return rings.length >= 2 || (Array.isArray(estate) ? estate : []).some((i) => /multiple criminal factions/i.test(String(i?.name ?? '')));
+}
+

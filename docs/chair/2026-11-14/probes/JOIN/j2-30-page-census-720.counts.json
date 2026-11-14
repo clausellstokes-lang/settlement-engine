@@ -1,0 +1,69 @@
+{
+ "prefix": "r2",
+ "scale": 1,
+ "births": 720,
+ "counts": {
+  "P17": 395,
+  "P7a": 116,
+  "P18": 341,
+  "P16three": 179,
+  "NEW1": 12,
+  "P8any": 123,
+  "P9": 103,
+  "P19": 7,
+  "P14": 23,
+  "NEW2": 6
+ },
+ "examples": {
+  "P17": [
+   "r2r-city-0",
+   "r2r-city-1",
+   "r2r-city-10"
+  ],
+  "P7a": [
+   "r2r-city-0",
+   "r2r-city-16",
+   "r2r-city-17"
+  ],
+  "P18": [
+   "r2r-city-1",
+   "r2r-city-10",
+   "r2r-city-11"
+  ],
+  "P16three": [
+   "r2r-city-10",
+   "r2r-city-14",
+   "r2r-city-16"
+  ],
+  "NEW1": [
+   "r2r-city-32",
+   "r2r-city-41",
+   "r2r-city-9"
+  ],
+  "P8any": [
+   "r2r-hamlet-1",
+   "r2r-hamlet-11",
+   "r2r-hamlet-13"
+  ],
+  "P9": [
+   "r2r-hamlet-1",
+   "r2r-hamlet-12",
+   "r2r-hamlet-14"
+  ],
+  "P19": [
+   "r2r-hamlet-34",
+   "r2r-town-9",
+   "r2r-village-23"
+  ],
+  "P14": [
+   "r2r-hamlet-35",
+   "r2r-hamlet-4",
+   "r2r-hamlet-45"
+  ],
+  "NEW2": [
+   "r2r-town-29",
+   "r2r-village-2",
+   "r2s-indebted-hamlet-0"
+  ]
+ }
+}

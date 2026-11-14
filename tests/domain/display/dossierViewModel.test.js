@@ -203,11 +203,15 @@ describe('deriveViability — isolated import-channel wording matrix', () => {
   // per case. 'magical provision' must be gated on magicFoodOffset > 0 — an
   // isolated village in a magicExists:false world covered by minor caravan
   // routes must NOT be described as magically fed.
-  const isolated = (fb) => ({
+  // UPKEEP-12 (#216): magic is credited only where the RECORD's food home holds a magic supply as well (the food
+  // generator's `magicOffset`, the producer's own field); a viability offset alone (a divine provision the food record
+  // never counted) names no magic. The magic-fed cases carry the record's supply, as a born magic-fed town does.
+  const isolated = (fb, supply = (fb.magicFoodOffset || 0) > 0 ? fb.magicFoodOffset : 0) => ({
     economicViability: {
       viable: true,
       metrics: { foodBalance: { deficit: 500, dailyProduction: 1000, dailyNeed: 1500, ...fb } },
     },
+    economicState: { foodSecurity: { magicOffset: supply } },
     config: { tradeRouteAccess: 'isolated' },
   });
 
@@ -252,6 +256,11 @@ describe('deriveViability — isolated import-channel wording matrix', () => {
     const r = deriveViability(isolated({ magicFoodOffset: 200 }));
     expect(r.summary).toMatch(/nothing from outside makes up the difference|Nothing reliable reaches/);
     expect(r.summary).toMatch(/magic/);
+    // the bar's #216 (bar0-hamlet-calm-rand-1): a viability offset the food record does not hold ("Reliance on magic:
+    // None") names no magic
+    const unheld = deriveViability(isolated({ magicFoodOffset: 1 }, 0));
+    expect(unheld.summary).toMatch(/nothing from outside makes up the difference|Nothing reliable reaches/);
+    expect(unheld.summary).not.toMatch(/magic/); // anchored: the denial is named on the line above
   });
 });
 

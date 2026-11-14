@@ -19,6 +19,24 @@ import NameColumns from '../../primitives/NameColumns.jsx';
 import { magicDeskRead } from '../magicDeskRead.js';
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
 import { FLUSH } from '../../../design/flush.js';
+import { defenceHoldsArcane, economyShowsMagic } from '../../../domain/facts/magic.js';
+
+/**
+ * WHETHER A ROLE ROW CAN PRINT (W2-C-LEAVES-SIDE item 7, 2026-11-13; the cut's #1086 "Economic role: absent" beside an
+ * alchemical export, #1394 "Military role: absent"). The chair's ruling: a role row reads the home that speaks of that
+ * role: the economy's exports and income for the economic role (`facts/magic.js :: economyShowsMagic`), the defence's
+ * own tradition for the military role (`defenceHoldsArcane`); "absent" is never printed where that home shows the role,
+ * and a row that cannot be made true there is left out (no other band is invented). Measured on the census's 720 at
+ * 408c2e30c: 32 "Economic role: absent" rows out; military 0 (no "absent" beside the defence's tradition).
+ * @param {unknown} settlement @param {string} role @param {unknown} band
+ * @returns {boolean}
+ */
+function roleRowShown(settlement, role, band) {
+  if (band !== 'absent') return true;
+  if (role === 'economic') return !economyShowsMagic(settlement);
+  if (role === 'military') return !defenceHoldsArcane(settlement);
+  return true;
+}
 
 /**
  * DS-DEF-9's position — the registry's first CROSS-TAB row, now drawn HERE (UX consolidation
@@ -145,7 +163,7 @@ export default function MagicTab({ settlement, publicDossier = false, playerView
                   {supply.supply && <span data-testid="magic-reliance-source" style={{ fontWeight: 400 }}> · supplied by {supply.supply}</span>}
                 </div>
               )}
-              {posture.roleLines.map((line, i) => (
+              {posture.roleLines.map((line, i) => [line, Object.keys(posture.roles || {})[i]]).filter(([, role]) => roleRowShown(settlement, role, posture.roles?.[role])).map(([line], i) => (
                 <div key={i} data-role-line style={{ fontSize: proseFontSize(FS.sm, mobile), color: BODY, padding: `${SP.xs}px 0` }}>{line}</div>
               ))}
             </div>

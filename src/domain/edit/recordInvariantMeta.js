@@ -65,7 +65,7 @@ export const CHECK_META = Object.freeze({
   'V-BAND-FOODSEC': { kind: 'band', paths: [`${FOOD_SECURITY}.label`, `${FOOD_SECURITY}.deficitPct`, `${FOOD_SECURITY}.surplusPct`, `${FOOD_SECURITY}.hasFamine`], keys: ['economicState'] },
   'V-ISOLATION': { kind: 'arithmetic', paths: ['isolationSupport.deficit', 'isolationSupport.requiredCapacity', 'isolationSupport.capacity'], keys: ['isolationSupport'] },
   'V-COND-BAND': { kind: 'band', paths: ['activeConditions[].severityBand', 'activeConditions[].severity'], keys: ['activeConditions'] },
-  'V-BAND-READINESS': { kind: 'band', paths: ['defenseProfile.readiness.label', 'defenseProfile.readiness.score'], keys: ['defenseProfile'] },
+  'V-BAND-READINESS': { kind: 'band', paths: ['defenseProfile.readiness.label', 'defenseProfile.readiness.score', 'defenseProfile.institutions'], keys: ['defenseProfile'] },
   'V-INCOME-100': { kind: 'arithmetic', paths: ['economicState.incomeSources[].percentage'], keys: ['economicState'] },
   'V-POWER-100': { kind: 'arithmetic', paths: ['powerStructure.factions[].power'], keys: ['powerStructure'] },
   'V-LEGIT-SUM': { kind: 'arithmetic', paths: [`${LEGITIMACY}.score`, `${LEGITIMACY}.breakdown`], keys: ['powerStructure'] },

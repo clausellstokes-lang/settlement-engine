@@ -68,6 +68,8 @@ const PRINT_SITES = Object.freeze({
   'src/generators/steps/generateEconomy.js': 'the chain receipts of `simulationTrace` ("Because of Resource: <source>"), printed by the pipeline rail',
   'src/domain/supplyChainState.js': 'the projection\'s `name` and `dependencies`, which the explanation rail and the causal readers print',
   'src/domain/worldPulse/institutionLifecycle.js': 'the growth gap "<chain> currently imports …"',
+  // UPKEEP-14 (j): moved here from EXEMPT, where it was classed as printing "Chain" for every chain: it now names them.
+  'src/pdf/lib/viewModelBodySlices.js': 'the PDF view model\'s chain `name` (the flag-off chain cards and the Foundry journal\'s Supply chains list)',
 });
 
 /** Files that print the projection's `name` / `dependencies` (named through the leaf by `deriveSupplyChainState`). */
@@ -90,8 +92,7 @@ const EXEMPT = Object.freeze({
   'src/components/map/ChainEdges.jsx': [1, 'regional supply paths between settlements (`chain.path`), not a town\'s chain record'],
   'src/pdf/sections/EconomicsTrade.jsx': [3, 'its own chain reads are the custom chains\' (user-confirmed, §14); the active chains print through SupplyChainFlow, which it hands the town'],
   'src/pdf/sections/ResourcesProduction.jsx': [1, 'resource-exploitation rows (`resourceAnalysis.exploitation`), not active chains'],
-  'src/pdf/lib/viewModelBodySlices.js': [2, 'the exploitation rows\' resource names; the chains\' `name` reads `c.name || c.chainName`, which the record never carries, so the flag-off path prints "Chain" (PART FIVE, found, not the lane\'s), never the record\'s label'],
-  'src/foundry/journalPages.js': [3, 'the Foundry journal prints the PDF view model\'s chain `name` (viewModelBodySlices: "Chain", above) and the exploitation rows\' resources'],
+  'src/foundry/journalPages.js': [3, 'the Foundry journal prints the PDF view model\'s chain `name` (viewModelBodySlices, a print site: the leaf\'s label) and the exploitation rows\' resources'],
   'src/pdf/lib/customSupplyChains.js': [2, 'the confirmed custom chains (§14), the user\'s own words'],
   'src/pdf/lib/viewModel.js': [1, 'a logic read (`isArcaneChain`: the label\'s magic words), which stays on the record by the chair\'s ruling'],
   'src/domain/display/stateProse/generalStateProse.js': [1, 'a logic read (`homeFedChain`: the resource against the worked land), which stays on the record'],

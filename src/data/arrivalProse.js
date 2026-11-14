@@ -61,11 +61,11 @@ export const ARRIVAL_SENSES = Object.freeze([
       () => 'A drift of forge smoke hangs over the roofs, and somewhere under it a hammer keeps time.',
       () => 'A smith quenches a blade in a hiss of steam, and the sound follows you down the lane.',
     ],
-    dominant: [
-      (n) => `The hammering echoes through all of ${n}, and the place plainly lives by its forges.`,
-      () => 'Forge smoke hangs over everything here, and the ring of the anvils never quite stops.',
-      () => 'Racks of new ironwork stand outside the workshops, waiting for the carts.',
-      (n) => `${n} lives by its forges: the clang of iron is in every lane.`,
+    dominant: [ // W2-FIX-DATA-3 (REVIEW-W2A-3 #366): these four lines speak of many forges; a village or smaller has one (a hamlet's part-time smith, a village's blacksmith), so they declare tier: ≥ town. A one-forge place then draws none and its sense beat is left out (the redraw finds no clean line and draws nothing more); a line of its own would lengthen the pool and re-deal the arrival in every town that draws it (measured: 44 of 720)
+      { text: (n) => `The hammering of the forges echoes through all of ${n}.`, needs: ['institution: smith', 'tier: ≥ town'] }, // W2-FIX-DATA-12 item 3: no claim the place lives by them (false in 16 of 16: metalwork 3 to 12% of the income, never first)
+      { text: () => 'Forge smoke hangs over everything here, and the ring of the anvils never quite stops.', needs: ['institution: smith', 'tier: ≥ town'] }, // W2-FIX-DATA-12 item 3: the anvils stand on the roster (a town with only a Smelter printed it)
+      { text: () => 'Racks of new ironwork stand outside the workshops, waiting for the carts.', needs: ['institution: smith', 'tier: ≥ town'], excludes: ['crisis: under_siege'] }, // W2-FIX-DATA: the carts a siege stops (c22)
+      { text: (n) => `The clang of iron from the smithies carries down the lanes of ${n}.`, needs: ['institution: smith', 'tier: ≥ town'] }, // W2-FIX-DATA-12 item 3 (the reader's A04): no claim the place lives by them, and a smith stands
     ] },
   // ARMS speaks only where the settlement EXPORTS weapons or armour (no `lines`, so it is never a candidate on a
   // smithy alone): the owner's own example, "if a big part of their output is in making military weapons".
@@ -74,10 +74,12 @@ export const ARRIVAL_SENSES = Object.freeze([
     trade: ['weapon', 'armour', 'armor'],
     lines: [],
     dominant: [
-      { text: (n) => `The hammering echoes throughout ${n}, and most of it is the sound of blades being made.`, crisis: ['any'] },
-      { text: () => 'Racks of spearheads and helms stand outside the workshops, waiting for the carts.', crisis: ['any'] },
-      { text: () => 'Every forge you pass is making something meant for a war, and the carts on the road out are full of it.', excludes: ['crisis: under_siege'], crisis: ['any'] },
-      { text: () => 'A smith tests a new blade against a post, frowns, and sends it back to the fire.', crisis: ['any'] },
+      // W2-FIX-DATA-4 (REVIEW-W2A-3 #184; ROUND-3 #600): the arms key is reached by a bowyer or a trade word with no smith on the roster, and
+      // three of its lines speak of many forges and workshops: each needs a smith, and the three a town (a hamlet has one part-time smith)
+      { text: (n) => `The hammering echoes throughout ${n}, and most of it is the sound of blades being made.`, needs: ['institution: smith', 'tier: ≥ town'], crisis: ['any'] },
+      { text: () => 'Racks of spearheads and helms stand outside the workshops, waiting for the carts.', needs: ['institution: smith', 'tier: ≥ town'], excludes: ['crisis: under_siege'], crisis: ['any'] }, // W2-FIX-DATA-12 item 5 (the reader's A06): the twin carries its siblings' siege exclusion: no cart reaches a besieged town
+      { text: () => 'Every forge you pass is making something meant for a war, and the carts on the road out are full of it.', needs: ['institution: smith', 'tier: ≥ town'], excludes: ['crisis: under_siege'], crisis: ['wartime', 'insurgency'] }, // W2-FIX-DATA-5 (ww-1157): a war the record holds
+      { text: () => 'A smith tests a new blade against a post, frowns, and sends it back to the fire.', needs: ['institution: smith'], crisis: ['any'] },
     ] },
   { key: 'bread',
     institutions: ['bakery', 'baker', 'bakehouse', 'mill', 'mills'],
@@ -129,7 +131,7 @@ export const ARRIVAL_SENSES = Object.freeze([
       // CENSUS-2f, R-AP: the picker reaches `fish` by a fish market's or a fishmonger's NAME, which guarantees no
       // catch (soak1k-152), so every line here declares `fish` (the food record's source) and a refused beat redraws.
       { text: () => "Gulls quarrel over the fish stalls, and the air smells of the morning's catch.", needs: ['market', 'navigable', 'fish'] },
-      { text: () => 'A fishmonger shouts a price over the slap of wet baskets.', needs: ['fish'] },
+      { text: () => 'A fishmonger shouts a price over the slap of wet baskets.', needs: ['fish', 'market'] }, // W2-FIX-DATA: a price is shouted at a market (c05)
       { text: () => 'Nets hang drying on poles, and the smell of the catch follows you.', needs: ['fish'] },
       { text: () => 'A basket of fish, still flapping, is carried past at a run.', needs: ['fish'] },
     ],
@@ -181,8 +183,8 @@ export const ARRIVAL_SENSES = Object.freeze([
     ],
     dominant: [
       { text: () => "Pilgrims crowd the road in, and every second stall sells candles, tokens or someone's blessing.", needs: ['market'], excludes: ['crisis: threat'], crisis: ['any'] },
-      { text: (n) => `The bells of ${n} answer one another across the roofs, and the streets slow for them.`, crisis: ['any'] },
-      { text: () => 'Pilgrims in travel-stained cloaks queue patiently for their turn at the holy places.', excludes: ['crisis: threat', 'crisis: unrest'], crisis: ['any'] },
+      { text: (n) => `The bells of ${n} answer one another across the roofs, and the streets slow for them.`, needs: ['church', 'tier: ≥ town'], crisis: ['any'] }, // W2-FIX-DATA-4 (ROUND-3 #46): bells answering one another and streets want a house of worship (a shrine is not one) and a town (rr2s-thorp-famine-rand-1: a wayside shrine, 12 people)
+      { text: () => 'Pilgrims in travel-stained cloaks queue patiently for their turn at the holy places.', needs: ['church'], excludes: ['crisis: threat', 'crisis: unrest'], crisis: ['any'] }, // W2-FIX-DATA-4 (ROUND-3 #46): the holy places want a house of worship (a wayside shrine is not one) (the line a refused bell line redraws onto)
     ] },
   { key: 'stone',
     institutions: ['quarry', 'stone quarry', 'mason', 'mine', 'mines', 'stonecutter'],
@@ -209,7 +211,7 @@ export const ARRIVAL_SENSES = Object.freeze([
     ],
     dominant: [
       (n) => `The smell of sawn timber is everywhere in ${n}, and so is the sawdust.`,
-      () => 'Stacks of seasoning planks line the road in, taller than the carts that wait for them.',
+      { text: () => 'Stacks of seasoning planks line the road in, taller than the carts that wait for them.', excludes: ['crisis: under_siege'], crisis: ['any'] }, // W2-FIX-DATA-HISTORY item F (CENSUS-2 kind b): no cart waits on a road the siege has cut
       () => 'The rasp of the saws carries from yard to yard all through the day.',
     ] },
   { key: 'kilns',
@@ -296,9 +298,9 @@ export const ARRIVAL_PEOPLE = Object.freeze({
     { text: () => 'A notice of the next fair is nailed up beside a doorway, and someone is reading it aloud for the others.', needs: ['market'] },
   ],
   latin: [
-    { text: () => 'A patron moves through the crowd with clients at their heels, greeting people by name.', crisis: ['any'] },
-    { text: () => "A notary's clerk hurries past with a satchel of contracts.", crisis: ['any'] },
-    { text: () => 'People argue politics in the open, loudly, and seem to enjoy it.', excludes: ['crisis: occupied'], crisis: ['any'] },
+    { text: () => 'A patron moves through the crowd with clients at their heels, greeting people by name.', needs: ['tier: ≥ town'], crisis: ['any'] }, // W2-FIX-DATA: a crowd and a patron's clients (c09 at 33)
+    { text: () => "A notary's clerk hurries past with a satchel of contracts.", needs: ['tier: ≥ town'], crisis: ['any'] }, // W2-FIX-DATA: a notary's trade (c03 at 9)
+    { text: () => 'People argue politics in the open, loudly, and seem to enjoy it.', excludes: ['crisis: occupied', 'crisis: under_siege'], crisis: ['any'] }, // W2-FIX-DATA-5 (ww-473): not with the enemy at the walls
     { text: () => 'A benefactor\'s name is carved fresh above a mended well, and people make sure you notice it.', crisis: ['any'] },
   ],
   celtic: [
@@ -309,12 +311,12 @@ export const ARRIVAL_PEOPLE = Object.freeze({
   ],
   arabic: [
     () => 'A broker sits in the shade, matching buyers to goods from routes you have never travelled.',
-    () => 'Travellers are offered water before anyone asks their business.',
+    { text: () => 'Travellers are offered water before anyone asks their business.', excludes: ['crisis: under_siege'] }, // W2-FIX-DATA: no traveller reaches a besieged gate (c12)
     () => 'Two partners go over their accounts in a courtyard with a mediator sitting between them.',
-    () => 'A merchant swears an oath on his scales, and the buyer watches the scales anyway.',
+    { text: () => 'A merchant swears an oath on his scales, and the buyer watches the scales anyway.', needs: ['market'] }, // W2-FIX-DATA-HISTORY item F (CENSUS-2 kind a): the same
   ],
   norse: [
-    { text: () => 'People argue law in the open as freely as they trade.', excludes: ['crisis: occupied'], crisis: ['any'] },
+    { text: () => 'People argue law in the open as freely as they trade.', excludes: ['crisis: occupied', 'crisis: under_siege'], crisis: ['any'] }, // W2-FIX-DATA-5 (ww-473's sibling): no trade moves under a siege
     { text: () => 'Racks of drying fish and smoked meat stand beside the houses, laid in against the winter.', needs: ['navigable'], excludes: ['crisis: hunger'], crisis: ['any'] },
     { text: () => 'A household leader hands out gifts in the open, and everyone watching keeps count.', crisis: ['any'] },
     { text: () => 'Neighbours work together to mend a roof, and nobody seems to be in charge of it.', crisis: ['any'] },
@@ -328,14 +330,14 @@ export const ARRIVAL_PEOPLE = Object.freeze({
   east_asian: [
     () => 'A clerk records every cartload that passes in a careful ledger.',
     () => 'An elder settles a quarrel in a quiet voice before it can grow loud enough to need anyone else.',
-    () => 'Tea is poured for a merchant before the bargaining begins, and the bargaining waits for it.',
-    () => 'Each lane seems to keep to its own trade, and each trade to its own lane.',
+    { text: () => 'Tea is poured for a merchant before the bargaining begins, and the bargaining waits for it.', needs: ['market'] }, // W2-FIX-DATA-HISTORY item F (CENSUS-2 kind a): a merchant bargains where a market stands
+    { text: () => 'Each lane seems to keep to its own trade, and each trade to its own lane.', needs: ['tier: ≥ town'] }, // W2-FIX-DATA-HISTORY item F (ww-541): lanes of trades are a town's (a hamlet of 31 has a handful of houses)
   ],
   mesoamerican: [
     () => 'Porters bent under loaded frames file past, and someone counts them in.',
     () => 'The neighbours turn out together to sweep and mend their own street.',
     () => 'Festival banners hang above the doors, faded from one year and waiting for the next.',
-    () => 'Craftspeople sit in rows, each row a different trade, each worker deep in their own work.',
+    { text: () => 'Craftspeople sit in rows, each row a different trade, each worker deep in their own work.', needs: ['market'] }, // W2-FIX-DATA-3 (REVIEW-W2A-3 #2): rows to each trade are a market's (a thorp of twelve printed it)
   ],
   south_asian: [
     () => 'A moneylender sits at a low table with a queue of familiar faces waiting.',
@@ -345,7 +347,7 @@ export const ARRIVAL_PEOPLE = Object.freeze({
   ],
   steppe: [
     { text: () => 'Horse traders show their animals at the edge of the settlement, where herders and townsfolk meet.', excludes: ['crisis: under_siege'], crisis: ['any'] },
-    { text: () => 'Felt tents stand beside the timber houses, and their owners seem at home in either.', crisis: ['any'] },
+    { text: () => 'Felt tents stand beside the houses, and their owners seem at home in either.', crisis: ['any'] },
     { text: () => 'A caravan broker shouts terms to a line of laden animals and the people leading them.', crisis: ['any'] },
     { text: () => 'Guests are greeted with a cup before a word of business is spoken.', crisis: ['any'] },
   ],
@@ -353,7 +355,7 @@ export const ARRIVAL_PEOPLE = Object.freeze({
     { text: () => 'Two citizens argue a point of law loudly enough for a crowd to gather.', excludes: ['crisis: occupied'], crisis: ['any'] },
     { text: () => 'A notice of the next assembly is chalked on a wall, and someone has corrected the spelling.', excludes: ['crisis: occupied'], crisis: ['any'] },
     { text: () => 'A money changer sits at his table with coins from many mints.', needs: ['institution: bank'], crisis: ['any'] }, // COHERENCE-PRESUME: it printed in towns with no money changer
-    { text: () => 'A patron stands drinks at a wine shop, and makes sure everyone knows who is paying.', crisis: ['any'] },
+    { text: () => 'A patron stands drinks at a wine shop, and makes sure everyone knows who is paying.', needs: ['institution: tavern', 'tier: ≥ village'], crisis: ['any'] }, // W2-FIX-DATA-12 (REVIEW-R2-CODE-A, the chair's 10:57): a wine shop stands on the roster, and a thorp or hamlet has none to stand drinks in
   ],
   mixed: [
     { text: () => 'You hear three languages in as many steps, and nobody seems to find it strange.', crisis: ['any'] },
