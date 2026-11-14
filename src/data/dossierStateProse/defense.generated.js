@@ -774,7 +774,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "no threat",
             "crisis: any"
           ],
-          "text": "{settlement} keeps no organized defense against the country, and in a heartland this quiet the arrangement is a reasonable one rather than a gap.",
+          "text": "{settlement} has no wall against the country, and the settled heartland around it sends little that would call for one.",
           "slots": [
             "settlement"
           ],
@@ -786,8 +786,10 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "no threat",
             "crisis: any"
           ],
-          "text": "The town has never needed to think about what is outside it, and does not.",
-          "slots": [],
+          "text": "People at {settlement} seldom see a beast: the settled country around the town holds few of them.",
+          "slots": [
+            "settlement"
+          ],
           "vid": 2
         },
         {
@@ -796,7 +798,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "no threat",
             "crisis: any"
           ],
-          "text": "Whoever walks out of {settlement}, in any direction and at any hour, meets nothing that would justify a watch.",
+          "text": "Whoever walks out of {settlement}, in any direction and at any hour, is unlikely to meet a beast.",
           "slots": [
             "settlement"
           ],
