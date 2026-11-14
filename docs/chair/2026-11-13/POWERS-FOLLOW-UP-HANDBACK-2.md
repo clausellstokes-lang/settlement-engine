@@ -943,3 +943,36 @@ executed). Scratch worktree `/home/user/wt/p11` on a local branch `p11` at the l
 ## P5.2 Item by item
 - M4 negativeAssertionAnchor (2 titles): DONE, 0a9133bcf. Thirteen sites in eight files (the reader saw six at
   96a6ced46; the fourth seat's tests added the rest), each anchored where it stands; no ceiling moved.
+- M4 presumedThings ARM 1 (2 literals, the crown cure's twins): DONE, aaab72958 (stressFactions.js: the wartime twin
+  DECLARES `crisis: wartime`, true by its branch; output byte-identical) and 70b3d4677 (governingStressVignettes.js:
+  CURED, "Those under arms have doubled, and the city treasury pays their keep, ..." read in p11-sov-city-38,
+  p11-sov-city-285, p11-sov-metropolis-35; NEW WORDS for the owner's veto). No row added.
+- M4 the each-family park debt (119 against 108 at ec72918d4): DONE, e4939ca71. Exactly eleven files, all the lane's own
+  new tests, parked solely on `it.each` (the walker's classifier dumped at both trees); each call became one plain test
+  running every row through collectSeedFailures / expectNoSeedFailures; the ceiling not raised (108).
+- M4 wiringCensusDeclared (25 held against 26 found): DONE, d942ff36b. TITLE_LINE_DECLARATIONS (43b32e775) is no
+  channel of an enrolled table: ruled out by name in table-pools.mjs :: NOT_TABLE_CHANNELS with its reason; the census
+  unmoved.
+- M4 observedShapeReaders (A1/A7 and SHRINK-ONLY: `contestsNiche on factions`, 2 reads, rosterText.js): DONE,
+  392d47021. The rival's host is found by the old standing sentence its own `desc` ends in (the longest match), a key
+  the record writes; byte-identical on 400 births with 223 rivals; the checker exit 0 at 2186 findings.
+- M4 poolDominance (7 drawn pools with no row): DONE, 11457f38f, through `--tighten` (the register's one door for a new
+  pool; no re-base): seven one-line NPC_STRUCTURE `dominant` rows banked (each reading in the commit body), twelve
+  `subordinate` rows no longer drawn dropped, thirteen ceilings tightened by the door (listed in the body).
+- M4 tuningRegister's six rows: NAMED FOR THE MERGE SEAT'S RITUAL, not refrozen here. The six:
+  src/domain/corruption.js#CAPTURE_TUNING, #CORRUPTION_TUNING, #DEITY_CORRUPTION_TUNING, #DEITY_LAW_TUNING,
+  #GUILD_TUNING, #PATRONAGE_TUNING, each "dependents moved" and nothing else (no value, digest, key or leaf). Cause:
+  59f877e58 (COHERENCE-POWERS-7 E) made src/domain/dossier/powerSupport.js import corruption.js :: isCriminalInstitution,
+  so each table gains one dependent. Why the merge seat's: every refreeze in the inventory's history is the
+  TUNING_INVENTORY_REFREEZE ritual at a merged tip (562582982, 7bf909070, a21b5091a, ff97f0333, c4600338d; 5af109812
+  at a green tip), and the line's inventory differs from this lane's, so a lane refreeze is redone at the merge.
+  RECOMMENDATION: the merge seat's ritual at the merge of this lane, its note naming 59f877e58.
+
+## P5.3 M4 at 11457f38f, the nine files re-run (executed)
+- 217 passed, 3 red: observedShapeReaders "the producers ran and the corpus is not empty" and sovereigntyLightingContract
+  "THE CENSUS IS AN ASSERTION" (red at 714381934 too: CARRIED; the second's figure is the estate's test-file count, 3227
+  at 714381934 and 3250 here against 3224, the lane's new test files among the rise), and tuningRegister (NAMED above).
+- Of the reader's eleven: nine GREEN (phoneChromeFloor, noLegacyFactionReaders by the fifth seat; seven by this seat),
+  the two observedShapeReaders titles GREEN, tuningRegister NAMED for the merge seat.
+- Every governing run of the commits above: no red that is not red at 714381934 but pipelinePinnedChoosers A1 (red at
+  714381934 and the tip alike: the golden corpus).
