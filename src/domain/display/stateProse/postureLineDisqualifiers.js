@@ -22,6 +22,18 @@
  *     Under a siege every strong line is struck and the posture says nothing; the banner names the siege.
  *   - A FORCE STANDS: any standing garrison, militia, watch or contracted company (`standingDefenseForces`,
  *     L0's reading).
+ *   - NO WALLS / NO WATCH OR GARRISON (R3-TABS-4; the chair's ruling (b) of 2026-11-14 on the fresh reader's F3):
+ *     a line that names a thing reads the roster. The strong pool's first line names WORKS ("the works are kept
+ *     up") and a watch on the approaches ("the approaches are watched"): it is struck where the roster holds no
+ *     walls, and where it holds neither a watch nor a garrison (3 unwalled towns of the reader's 1,536 at
+ *     bb2bf91c5, 2 at the line's tip 976db5b19: Muulcoba "the works are kept up" beside "The town's defense is
+ *     people rather than works").
+ *   - THE GUARD ON PAPER (R3-TABS-4; the chair's ruling of 2026-11-14 07:32 UTC on this seat's measure): the
+ *     strong pool is struck WHOLE where the Guard assessment beside it stands at its lowest tier ("The … exists on
+ *     paper. Chronically underpaid and poorly equipped"): two places on one page that disagree (9 towns of the
+ *     reader's 1,536 at the line's tip 976db5b19, 32 at bb2bf91c5 by L1). Read from THE SAME FACT the assessment
+ *     reads (`safetyProfile.js`, its tier, never its sentence): a military institution, no state crime, effective
+ *     military under 30 and the economy priority under 35 (agreeing with the sentence in 1,536 of 1,536).
  *   - UNDER AN OCCUPATION: `stress[].type` `occupied` (R3-TABS-4; the chair's ruling (a) of 2026-11-14 on the
  *     fresh reader's F1): the strong pool is struck WHOLE, as under a siege. Every one of its lines says the
  *     town's own defences are in good order, beside the banner "The occupiers' troops at … protect it from
@@ -31,7 +43,8 @@
  */
 import { standingDefenseForces } from '../../institutions/defenseInstitutionBuckets.js';
 
-/** @typedef {{ opens: string, falseWhere: 'at war' | 'under siege' | 'a force stands' }} PostureLineDeclaration */
+/** @typedef {'at war' | 'under siege' | 'a force stands' | 'no walls' | 'no watch or garrison'} PostureLineFact */
+/** @typedef {{ opens: string, falseWhere: PostureLineFact | ReadonlyArray<PostureLineFact> }} PostureLineDeclaration */
 
 /**
  * `<pool>` → `vid` → what the line opens with and the fact that makes it false.
@@ -39,7 +52,7 @@ import { standingDefenseForces } from '../../institutions/defenseInstitutionBuck
  */
 export const POSTURE_LINE_DISQUALIFIERS = Object.freeze({
   'readiness STRONG': Object.freeze({
-    1: Object.freeze({ opens: '{settlement} reads as a defended place from the road in', falseWhere: 'under siege' }),
+    1: Object.freeze({ opens: '{settlement} reads as a defended place from the road in', falseWhere: /** @type {ReadonlyArray<PostureLineFact>} */ (Object.freeze(['under siege', 'no walls', 'no watch or garrison'])) }),
     2: Object.freeze({ opens: 'What {settlement} can field and what {settlement} has built', falseWhere: 'at war' }),
     3: Object.freeze({ opens: 'The town does not spend much time thinking about being attacked', falseWhere: 'at war' }),
     4: Object.freeze({ opens: 'Nothing presses {settlement} at present', falseWhere: 'at war' }),
@@ -49,8 +62,24 @@ export const POSTURE_LINE_DISQUALIFIERS = Object.freeze({
   }),
 });
 
-/** The pools struck whole under an occupation. @type {ReadonlySet<string>} */
+/** The pools struck whole under an occupation, or beside the guard on paper. @type {ReadonlySet<string>} */
 const STRUCK_UNDER_AN_OCCUPATION = new Set(['readiness STRONG']);
+
+/**
+ * The Guard assessment's lowest tier, by the fact `safetyProfile.js` chooses it on (the branch that writes "exists on
+ * paper"): the town keeps a military institution, its guard does not work for state crime, its effective military
+ * is under 30 and its economy priority under 35. The compound is the safety profile's own (`economicState.compound`,
+ * the same object the assessment was written from).
+ * @param {unknown} settlement @returns {boolean}
+ */
+function guardOnPaper(settlement) {
+  const es = /** @type {{ compound?: { inst?: { hasMilitaryInst?: unknown }, militaryEffective?: unknown, raw?: { economy?: unknown } }, safetyProfile?: { flags?: { stateCrime?: unknown } } } | null | undefined} */ (
+    /** @type {{ economicState?: unknown } | null | undefined} */ (settlement)?.economicState);
+  const c = es?.compound;
+  const military = c?.militaryEffective; const economy = c?.raw?.economy;
+  return Boolean(c?.inst?.hasMilitaryInst) && !es?.safetyProfile?.flags?.stateCrime
+    && typeof military === 'number' && military < 30 && typeof economy === 'number' && economy < 35;
+}
 
 /** @type {Map<unknown, Map<string, unknown>>} */
 const VIEWS = new Map();
@@ -74,19 +103,24 @@ export function corpusAdmittingPostureLines(corpus, settlement) {
   const underSiege = types.includes('under_siege');
   const atWar = underSiege || types.includes('wartime');
   const occupied = types.includes('occupied');
+  const strikeWhole = occupied || guardOnPaper(settlement);
   const forces = standingDefenseForces(settlement);
   const force = forces.garrison.present || forces.militia.present || forces.watch.present || forces.mercenary.present;
-  /** @type {Record<PostureLineDeclaration['falseWhere'], boolean>} */
-  const holds = { 'at war': atWar, 'under siege': underSiege, 'a force stands': force };
+  /** @type {Record<PostureLineFact, boolean>} */
+  const holds = {
+    'at war': atWar, 'under siege': underSiege, 'a force stands': force,
+    'no walls': !forces.walls.present, 'no watch or garrison': !forces.watch.present && !forces.garrison.present,
+  };
   /** @type {Record<string, ReadonlyArray<{ vid?: unknown }>>} */ const pools = {};
   /** @type {string[]} */ const struck = [];
   for (const [pool, declared] of Object.entries(POSTURE_LINE_DISQUALIFIERS)) {
     const variants = block.pools[pool];
     if (!Array.isArray(variants)) continue;
-    const wholePool = occupied && STRUCK_UNDER_AN_OCCUPATION.has(pool);
+    const wholePool = strikeWhole && STRUCK_UNDER_AN_OCCUPATION.has(pool);
     const kept = variants.filter((v) => {
       const d = typeof v?.vid === 'number' ? declared[v.vid] : undefined;
-      const out = wholePool || Boolean(d && holds[d.falseWhere]);
+      const facts = d ? (typeof d.falseWhere === 'string' ? [d.falseWhere] : d.falseWhere) : [];
+      const out = wholePool || facts.some((fact) => holds[fact]);
       if (out) struck.push(`${pool}#${v.vid}`);
       return !out;
     });

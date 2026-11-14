@@ -482,6 +482,16 @@ export function beastsRowPoolKey(monsterThreat, perimeter, force) {
 }
 
 /**
+ * The beasts row's two pools whose lines say the perimeter is HELD by people on it ("there is a wall to hold and
+ * there are people to hold it", "with a wall and armed people behind it"): a watch alone does not hold a
+ * perimeter (R3-TABS-4, the chair's ruling (c) on F7), so a watch-only town draws neither, and says nothing.
+ * @type {ReadonlySet<string>}
+ */
+const HELD_PERIMETER_POOLS = new Set(['Beasts & Monsters: plagued, perimeter AND organized force', 'Beasts & Monsters: frontier, credible deterrence']);
+/** @param {string|null} poolKey @param {boolean} watchOnly @returns {string|null} */
+const noHeldPerimeterByAWatch = (poolKey, watchOnly) => (poolKey && watchOnly && HELD_PERIMETER_POOLS.has(poolKey) ? null : poolKey);
+
+/**
  * DS-DEF-2 row 2 — INVASION & WAR: walls against a professional garrison or a militia.
  * TOTAL over the six situations the eight boolean combinations collapse into.
  * @type {Readonly<Record<string, string>>}
@@ -644,6 +654,16 @@ export function defenceSupplyPoolKey(chainModifiers, force) {
   return null;
 }
 
+/**
+ * ⛔ R3-TABS-4 (the chair's ruling (d) of 2026-11-14 on the fresh reader's F6, a carried class): the supply line
+ * that says the defenders are well supplied ("busy and well stocked", "kept supplied", "will not go short", "the
+ * supply book … balances") is NOT DRAWN under a siege or a famine in force: every line of its pool is false there
+ * (27 towns of the reader's 1,536 at the line's tip 976db5b19) and none is true, so the clause is silent.
+ * @param {string|null} poolKey @param {unknown} stress @returns {string|null}
+ */
+const noSupplyUnderACrisis = (poolKey, stress) => (poolKey === 'CHAIN: defence supplied'
+  && stressList(stress).some((entry) => entry?.type === 'under_siege' || entry?.type === 'famine') ? null : poolKey);
+
 /** @param {{economic?: unknown}|null|undefined} chainModifiers @returns {string|null} */
 export function foodTradesPoolKey(chainModifiers) {
   if (!chainModifiers || typeof chainModifiers !== 'object') return null;
@@ -683,7 +703,7 @@ function chainArm(chainModifiers, arm) {
  * re-derives from `settlement.institutions` through the canonical live filter, which is
  * why a ruined citadel does not read here as standing walls.
  *
- * @param {{name?: string, config?: {monsterThreat?: unknown}|null, institutions?: unknown,
+ * @param {{name?: string, config?: {monsterThreat?: unknown}|null, institutions?: unknown, stress?: unknown,
  *   defenseProfile?: {scores?: {economic?: unknown, military?: unknown}|null, chainModifiers?: {military?: unknown, economic?: unknown}|null}|null,
  *   economicState?: {compound?: {inst?: Record<string, unknown>}|null}|null}|null|undefined} settlement
  * @param {{seed?: string, audience?: string, tierNoun?: string|null}} [options]
@@ -705,16 +725,22 @@ export function defenseThreatProse(settlement, options = {}) {
   // no force only when it holds no garrison, no militia (the household levy is one), no watch and no
   // contracted company; the projection already carries all four. Read from three of them, a town whose
   // force was its watch was "walls and nobody to put on them" while its force cards printed the watch
-  // (79 walled and 41 unwalled watch-only births of 884 at 9e57f5023). For the invasion row a watch
-  // stands with the townspeople's pools and a contracted company with the paid professionals' pools.
-  // ⚠ ONE CELL THE CORPUS DID NOT WRITE, AND IT IS SILENT: an UNWALLED town whose only force is its watch.
-  // `militia only` names a militia ("The militia at … know every path"), which such a town lacks, and no
-  // other pool is true of it; the row says nothing there rather than round it into a neighbour (this
-  // desk's idiom, `beastsRowSituation`). The cell is the corpus lane's to write.
+  // (79 walled and 41 unwalled watch-only births of 884 at 9e57f5023). For the invasion row a contracted
+  // company stands with the paid professionals' pools; a watch, below, with none.
+  // ⛔ R3-TABS-4 (the chair's ruling (c) of 2026-11-14 on the fresh reader's F2 and F7; L0's note on the watch
+  // WITHDRAWN): A WATCH IS NOT THE TOWNSPEOPLE IN ARMS and not a force that holds a perimeter. The citizen-militia
+  // pools name a household levy ("Every household at … would send someone to the walls") and print only where the
+  // roster holds a militia or a levy (139 walled watch-only towns of the reader's 1,536 drew them at bb2bf91c5);
+  // the beasts row's held-perimeter lines ("a wall to hold and … people to hold it") print only beside a garrison,
+  // a militia or a contracted company (42 beside the watch's own line). THE WATCH-ONLY TOWN, walled or not, hears
+  // no sentence that says it has no force (L0's cure, kept) and none that names townspeople in arms: no pool this
+  // row's key can select holds a line true of it (the watch's own line is the force desk's, already on the tab),
+  // so the Invasion row's sentence, and the supply clause beside it, are SILENT there; the bar prints. FOR THE
+  // JOIN: the corpus owes a pool for "walls and a watch only" and for "a watch only".
   const watch = forces.watch.present;
   const contracted = forces.mercenary.present;
   const force = garrison || militia || watch || contracted;
-  const watchAloneUnwalled = !walls && watch && !garrison && !militia && !contracted;
+  const watchOnly = watch && !garrison && !militia && !contracted;
 
   // ⭐ ROUTED THROUGH THE COMPOSER (SEAM car 3f), as is every entry point on this leaf. The
   // spine key is this desk's own key function and every bag is unchanged; the candidates
@@ -754,10 +780,10 @@ export function defenseThreatProse(settlement, options = {}) {
   };
 
   return Object.freeze({
-    beasts: rung(beastsRowPoolKey(settlement?.config?.monsterThreat, walls, force)),
+    beasts: rung(noHeldPerimeterByAWatch(beastsRowPoolKey(settlement?.config?.monsterThreat, walls, force), watchOnly)),
     invasion: rungWith(
-      withinTheBar(watchAloneUnwalled ? null : invasionRowPoolKey(walls, garrison || contracted, militia || watch), dp.scores?.military),
-      defenceSupplyPoolKey(settlement?.defenseProfile?.chainModifiers, force),
+      withinTheBar(watchOnly ? null : invasionRowPoolKey(walls, garrison || contracted, militia), dp.scores?.military),
+      noSupplyUnderACrisis(defenceSupplyPoolKey(settlement?.defenseProfile?.chainModifiers, force), settlement?.stress),
     ),
     internal: rung(internalRowPoolKey(
       civicFlag(compound.hasCourtSystem), civicFlag(compound.hasPrison),
@@ -984,11 +1010,8 @@ export function defensePostureProse(settlement, options = {}) {
   };
 
   return Object.freeze({
-    posture: projected(withinTheBar(
-      noStrongBesideAWeakBar(
-        posturePoolKey(settlement?.defenseProfile?.readiness?.score),
-        settlement?.defenseProfile?.readiness?.score, settlement?.defenseProfile?.scores?.military,
-      ), settlement?.defenseProfile?.scores?.military,
+    posture: projected(withinTheBar(noStrongBesideAWeakBar(posturePoolKey(settlement?.defenseProfile?.readiness?.score),
+      settlement?.defenseProfile?.readiness?.score, settlement?.defenseProfile?.scores?.military), settlement?.defenseProfile?.scores?.military,
     ), corpusAdmittingPostureLines(CORPUS, settlement)),
     terrain: projected(terrainDefencePoolKey(terrain)),
     prize: projected(strategicPrizePoolKey(terrain)),
