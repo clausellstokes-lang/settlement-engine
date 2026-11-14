@@ -61,8 +61,8 @@
       "ceilingGzip": 108482
     },
     "src/data/dossierStateProse/economy.generated.js": {
-      "raw": 183999,
-      "gzip": 25641,
+      "raw": 184022,
+      "gzip": 25652,
       "ceilingRaw": 393810,
       "ceilingGzip": 87513
     },
@@ -579,6 +579,14 @@
       "toRaw": 147666,
       "gzipAfter": 20815,
       "reason": "+183 B raw over the committed 147483 (gzip level 9: 20773 -> 20815): the corpus lane's cures and its two side branches composed (the per-cure rows stand in the lane's history at cfa9c17dd)"
+    },
+    {
+      "car": "W2-WRITE-10 #75",
+      "leaf": "src/data/dossierStateProse/economy.generated.js",
+      "fromRaw": 183999,
+      "toRaw": 184022,
+      "gzipAfter": 25652,
+      "reason": "+23 B raw over the committed 183999 (gzip level 9: 25641 -> 25652): DS-ECO-1 C4 v4 v5 v7 reworded: the siege lines no longer claim the town was poor before the siege"
     }
   ],
   "ceilingTransfersNewLeaves": [

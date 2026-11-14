@@ -11932,7 +11932,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 7,
-      "grammars": 2,
+      "grammars": 3,
       "predicate": [],
       "branchReads": [
         "rank"
@@ -67960,7 +67960,7 @@
       "subject": "COMBINATION C4: a low rung on a working approach",
       "fields": [],
       "readingFunction": "prosperityHeaderPoolKey",
-      "count": "7 variant(s) · 2 grammar(s) · slots {access, settlement}"
+      "count": "7 variant(s) · 3 grammar(s) · slots {access, settlement}"
     },
     {
       "tier": "COVERED",
