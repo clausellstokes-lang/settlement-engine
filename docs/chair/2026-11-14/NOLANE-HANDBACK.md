@@ -165,3 +165,53 @@ None: LV-CAPITAL is display only.
 - `census.sh <tree> <out>` from the SECOND-WAVE-CENSUS probe (git archive of origin/lane/second-wave-census-2026-11-12).
 - The BAR-0 probe's `render2.sh` for its four seed files.
 - Then `node docs/chair/2026-11-14/probes/NOLANE-1/table.mjs <tree> <census-out> <r90-dir> <out.json>`.
+
+# NOLANE-2
+
+Seat NOLANE-2B (brief `docs/chair/2026-11-14/briefs/BRIEF-NOLANE-2.md` on the chair's lane, with the chair's three corrections). Branch `lane/join-nolane-2-2026-11-14`, cut from the joined line at **9618e0319**. The joined line has since moved (474c5f966 when I last read it); I did not merge it (correction 1). **HANDED BACK AT THE COUNT** (259,316 used at the waking after item 1; the mark was 250,000).
+
+## Rulings worked to
+
+The brief's r1–r5, the chair's corrections, and the chair's rulings in session: (a) THE REFUSAL STANDS: no add, commit, stash, checkout or reset in `/home/user/settlement-engine` (that checkout is not a working tree; my uncommitted edits there are saved as patches and it is left as it is); (b) all work in a scratch worktree (`git worktree add -b nolane2b <scratch>/own origin/lane/join-2026-11-14`), pushed `nolane2b:refs/heads/lane/join-nolane-2-2026-11-14`; (c) ONE ITEM AT A TIME: the count before by the table script, the guard first and red, the patch, green, the count after, the field diff, three towns read on every surface, its own commit, push; one message to the chair after item 1 before item 2.
+
+## The table re-made at 9618e0319 (720 births; the 90 named towns NOT re-rendered)
+
+`probes/NOLANE-2/table-at-9618e0319.txt`. Moves against the first seat's table: LV-CAPITAL 0 (cured); the palisade's "palisade or earthworks" 6 of 720 (was 25); gold/silver ore 92; "Military/Guard" in prose 200 (the joined line's 582b8acad cures it since: not re-counted). Unchanged: R2B-979 461, BAR-169/170 65 of 278, BAR-182 48 of 112, LV-CANNOTPRODUCE 33, BAR-293 28, BAR-274 19, LV-CATHEDRAL 100, LV-MAGICNOTES forest-on-reed 9 / conjured-fish 6 / farmland-on-salt 5 / quickening-on-salt 4 / druidic-under-siege 4, LV-PROCHOUSES 5, LV-OTHERNEED 5.
+
+## Done
+
+**1. R2B-979, the standing word: commit 9cdf93089, pushed.** `npcInteriority` returns `standing` as its own field; the disposition list holds temperament, loyalty and fear; the NPC card prints a "Standing" row under Wants, above Disposition. Display only. Before: 461 / 720 (every one of the 720 dossiers printed a standing word under "Disposition"). After (180 printing towns rendered at the tree): 0 of 180 print one there, 180 of 180 print "Standing <word>" with the same word set; by the record 0 of 21013 people. Red first 4 of 4 (`tests/components/npcCardStanding.test.jsx`, the re-keyed `tests/domain/npcInteriorityRead.test.js`). Read: r2r-thorp-0, r2r-hamlet-5, r2s-under_siege-city-0, r2s-famine-metropolis-3, r2s-occupied-village-1. Gates: strict 1113 (ceiling 1113), ratchet 167, eslint clean, presumed-things door 153 (= base), grid 0 falls. **NEW LABEL: "Standing"** (veto list).
+
+## Built and measured, NOT yet committed (patches in `probes/NOLANE-2/`, each applies to 9618e0319; each needs its own red-first, after-count and three-town reading before its commit)
+
+2. **BAR-169/170, the fair** (`item-fair.patch`): `TraditionsTab.jsx` gains `ACT_NEEDS = {fair: ['market']}` merged with the element's needs (`motifNeeds`); test `tests/components/traditionsTabFairAct.test.jsx` (fixture pair with the guard town, and a collected arm over births). Red first shown on the old tab: 2 of 3 arms (the births arm named r2r-thorp-1, "The Fair of the First Landing", no market). Green after; the six traditionsTab tests green. Not yet done: the 720 count after, the three-town reading, gates. The PDF's Traditions chapter prints the lit mirror only (no filter at all, element needs included): NAMED, not touched.
+3. **BAR-182, one home for the public's legitimacy** (`item-legit.patch`): `SubstrateTab.jsx :: legitimacyRecordWord` (the record's `powerStructure.publicLegitimacy.label`, as the Food row reads the food record). Test `tests/components/substrateLegitimacyOneHome.test.jsx` red on the old tab (48 of 48 sampled births differ), green after. **`SubstrateTab.jsx` changed on the joined line after 9618e0319 (the food word, 14 lines): the patch may need a hand merge; re-apply at the new tip.**
+
+## Measured, and a STOP-with-table (no patch kept)
+
+4. **LV-CANNOTPRODUCE (33)**: the writer is NOT `deriveNecessityImports` (that one already reads localProduction). It is `src/generators/economy/primaryTradeLists.js :: buildPrimaryTradeLists`: the siege/famine Grain and Salt, the siege "Iron (weapons)" and the plague "Medicinal herbs" it adds without asking localProduction (44 records: Medicinal herbs 20, Salt 16, Grain 8). I tried the one-line generator cure (skip a crisis necessity the town already produces). FIELD DIFF ON THE 720 (`probes/NOLANE-2/diffcorp.mjs`): 52 towns differ: `economicState.necessityImports` 52, `primaryImports` 39, **and also** `primaryExports` 4, `economicViability.plotHooks` 4, `history.founding` 3 (a founding re-drawn: r2s-under_siege-metropolis-1), `resourceAnalysis.gaps` 2. More than the import list moves: **a STOP, by the brief**. The cure was reverted. **The display cure, which moves nothing:** `EconomicsTab.jsx` marks an import red as a necessity and prints the "Settlement necessity" legend from `eco.necessityImports`; compute the necessity list from the entries not in the printed "Produced locally" list (`tradeListsAsPrinted(settlement).local`), and read the same list at the PDF (`src/pdf/sections/EconomicsTrade.jsx:174` prints "NECESSITY IMPORTS" for any truthy value, an empty array included: a false tag in its own right, not measured) and at `dossierViewModel.js :: outlookFactsOf` (`needsImports`). Recommended; not built.
+
+## Left, widest first (none begun beyond the above)
+
+- The public's legitimacy (3), the fair (2): commit them as above.
+- The necessity import (4): the display cure above.
+- r5 `defworkFill` "palisade or earthworks" (now 6 of 720): `defenseStateProse.js :: defworkFill` returns the plain word "palisade" for the catalogue house "Palisade or earthworks". Not begun.
+- The magic notes (about 28), the Entrepôt line's warehouse fees with no warehouse (19, `tradeGoods.js :: generateTradeIncomeStreams`, a declared move), LV-PROCHOUSES (5), LV-OTHERNEED (5): not begun.
+- NOT MINE, named with counts at 9618e0319: LV-CATHEDRAL 100 (data lane), BAR-293 28 (surfaces lane: SURFACES-2 measured "no empty tag"; see its hand-back), R3C-REVOLTNOTE 11, R2A-LEFT-GAME 4, R2A-LEFT-GOVECON (15 of 30 read false, `npcData.js :: wary_alliance`), the palisade/quarry rows (parked, the owner's), the arcane census (fenced).
+- The 90 named towns were not re-rendered for the table.
+
+## Every new or changed line, with the towns it was read in (the veto list)
+
+"Standing <word>" (NPC card): the five towns above. Nothing else is pushed.
+
+## Declared moves by family
+
+None pushed (item 1 is display only). The tried and reverted necessity cure's diff is item 4.
+
+## Registers named stale
+
+None made stale by item 1. Base reds, the same at 9618e0319: `tests/lint/negativeAssertionAnchor.walker.test.js` (2: the population 19 vs 3), `tests/lint/rawColorLiteral.test.js` (1209 vs 1206), `tests/lint/proseNumerics.test.js` (line identity). The items built but not committed would add test files to the lighting census's file count (3448 vs 3251 already red) and negative-assertion counts: check at the close.
+
+## How my instruments are re-made
+
+`probes/NOLANE-2/`: `read.sh <tree> <out> <seedsfile>` renders listed census seeds through the tree's own dossier (the SECOND-WAVE-CENSUS `render.census.jsx`); `diffcorp.mjs <outA> <outB> [depth]` is the field diff by family of two births corpora (born by the census's `births.mjs`); `q1.mjs` finds necessity imports also produced; `q3.mjs` compares the standing words before and after. The table: `node docs/chair/2026-11-14/probes/NOLANE-1/table.mjs <tree> <census-out> <r90-dir> <out.json>` (an empty r90 dir is allowed). The base census took ~35 minutes on 4 cores with other work running (~12 alone). Hazard met: the dumps drop a repeated line within a tab, so line counts are not card counts: compare sets of words.
