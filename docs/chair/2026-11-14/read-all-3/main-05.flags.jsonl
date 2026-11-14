@@ -1,0 +1,94 @@
+{"id":"21589","town":"r2r-hamlet-6","sev":"MED","kind":"STATE","why":"Pilgrimage Surge flood of coin and strangers changed town for good; PAST records no pilgrimage or miracle, CRISIS none","other":""}
+{"id":"25433","town":"r2r-hamlet-6","sev":"MED","kind":"LACKS","why":"names 'Temple beneficiaries'; HOUSES has only a wayside shrine and access to a parish church, no temple","other":""}
+{"id":"21328","town":"r2r-hamlet-6","sev":"MED","kind":"LACKS","why":"'Temple beneficiaries' party; HOUSES has no temple, only a wayside shrine; the miracle/pilgrim dispute is in neither PAST nor QUARRELS","other":""}
+{"id":"27557","town":"r2r-hamlet-6","sev":"LOW","kind":"LACKS","why":"pilgrim trade and 'the office that authenticates relics'; TRADE shows no pilgrim trade, HOUSES/GOVERNMENT list no such office","other":""}
+{"id":"HEADER","town":"r2r-hamlet-6","sev":"LOW","kind":"RECORD","why":"hamlet of 57 with only a mine captain and militia exports advanced weapons and armor; no smith or forge in HOUSES","other":""}
+{"id":"20759","town":"r2r-hamlet-8","sev":"HIGH","kind":"STATE","why":"'Nothing has ever forced this place to change much'; PAST records a Purge, a catastrophic Arcane Incident and a Siege 8 years ago","other":""}
+{"id":"21077","town":"r2r-hamlet-8","sev":"MED","kind":"LACKS","why":"'Legal class profiting from ambiguity' in a hamlet of 57; HOUSES has no court, legal or guild house; QUARRELS none","other":""}
+{"id":"21316","town":"r2r-hamlet-8","sev":"MED","kind":"LACKS","why":"party 'Legal class profiting from ambiguity'; no legal house or office in HOUSES/GOVERNMENT; a land dispute is in neither PAST nor QUARRELS","other":""}
+{"id":"08243","town":"r2r-hamlet-8","sev":"MED","kind":"STATE","why":"presents a live Disputed Land claim between two sides; QUARRELS none and PAST records no land dispute","other":""}
+{"id":"HEADER","town":"r2r-hamlet-8","sev":"LOW","kind":"RECORD","why":"founder 'three or four families wintering together' cannot sit with reason 'began as a naval base protecting the coast'; no force at all in DEFENCE","other":""}
+{"id":"31853","town":"r2r-hamlet-8","sev":"LOW","kind":"RECORD","why":"'began as a naval base' for a hamlet of 57 founded by families wintering together; DEFENCE has no garrison, militia or watch","other":""}
+{"id":"HEADER","town":"r2r-hamlet-15","sev":"LOW","kind":"RECORD","why":"hamlet of 42 with Merchant Guilds as a Dominant power; HOUSES has no guild or warehouse, only a periodic market","other":""}
+{"id":"16694","town":"r2r-hamlet-15","sev":"LOW","kind":"LACKS","why":"guilds 'control warehousing'; HOUSES has no warehouse or granary, and the town has 42 people","other":""}
+{"id":"15836","town":"r2r-hamlet-2","sev":"LOW","kind":"STATE","why":"'Luxury dairy products' neither exported nor made here in TRADE (only Aged cheese, Preserved foods)","other":""}
+{"id":"04387","town":"r2r-hamlet-2","sev":"LOW","kind":"STATE","why":"names Luxury dairy products as output; TRADE exports and made-here list none","other":""}
+{"id":"31195","town":"r2r-hamlet-2","sev":"MED","kind":"STATE","why":"describes a past wild-magic surge whose effects never faded; PAST records only the Succession Crisis 9 years ago","other":""}
+{"id":"HEADER","town":"r2r-hamlet-2","sev":"MED","kind":"RECORD","why":"hamlet of 76 with a part-time smith and no school exports advanced weapons and armor and makes Education (basic)","other":""}
+{"id":"15256","town":"r2r-hamlet-23","sev":"LOW","kind":"LACKS","why":"'keeps you at the gate'; DEFENCE walls none, so no gate","other":""}
+{"id":"HEADER","town":"r2r-hamlet-18","sev":"LOW","kind":"RECORD","why":"exports Pilgrim hospitality and bottled healing waters, but HOUSES has no inn, hostel, spa or shrine; also exports flour with no mill of its own","other":""}
+{"id":"11074","town":"r2r-hamlet-18","sev":"MED","kind":"STATE","why":"'salt works ... runs well'; LAND gaps say the salt works exists but lacks access to its salt input","other":""}
+{"id":"21444","town":"r2r-hamlet-18","sev":"MED","kind":"STATE","why":"sacks of salt leaving the works are counted; LAND gaps say the salt works lacks its salt input (salt flats absent)","other":""}
+{"id":"05243","town":"r2r-hamlet-47","sev":"MED","kind":"STATE","why":"calls Severus Aquila 'Headman'; PEOPLE gives only boat-headman, and the Village headman house has nobody in it; title doubled 'boat-headman, Headman'","other":""}
+{"id":"31876","town":"r2r-hamlet-47","sev":"MED","kind":"PAIR","why":"town overcame its crisis by securing an exclusive charter; the market is said to run without any charter and no charter appears in DEFENCE/HOUSES","other":"21556"}
+{"id":"13045","town":"r2r-hamlet-47","sev":"MED","kind":"PAIR","why":"'overcome by securing an exclusive charter'; the periodic market gathers without any charter, no charter held in HOUSES","other":"21556"}
+{"id":"16697","town":"r2r-hamlet-47","sev":"LOW","kind":"LACKS","why":"'International merchant houses controlling port licences' in a hamlet of 90; HOUSES has no port office, guildhall or harbour house","other":""}
+{"id":"14617","town":"r2r-hamlet-48","sev":"MED","kind":"STATE","why":"'sends out cloth and dyed fabric'; TRADE exports no cloth and LAND gaps say wool cannot produce final goods, only intermediates","other":""}
+{"id":"16174","town":"r2r-hamlet-56","sev":"LOW","kind":"LACKS","why":"maltster supplies 'the alehouses nearby'; HOUSES has one alehouse, and TRADE shows no export or neighbour trade in malt","other":""}
+{"id":"11324","town":"r2r-village-43","sev":"MED","kind":"STATE","why":"offers grain sold by the sack at harvest; town is under siege, grown 29% of need, 71% deficit, nothing comes in","other":""}
+{"id":"10203","town":"r2r-village-43","sev":"MED","kind":"STATE","why":"fired brick offered; no brickmaker in HOUSES and LAND gaps say the potter lacks access to clay","other":""}
+{"id":"21735","town":"r2r-village-43","sev":"MED","kind":"STATE","why":"pottery and ceramics offered as made; LAND gaps say the potter exists but lacks access to clay","other":""}
+{"id":"21725","town":"r2r-village-43","sev":"MED","kind":"STATE","why":"potter's ware 'all fired in a modest kiln' presented as working; LAND gaps say the potter lacks access to clay","other":""}
+{"id":"31884","town":"r2r-village-43","sev":"MED","kind":"STATE","why":"causeways and managed water dividing the settlement into organized neighborhoods; terrain is Hills, marshland depleted, village of 149 with nine houses","other":""}
+{"id":"29296","town":"r2r-village-21","sev":"MED","kind":"STATE","why":"names a top export by sea; CRISIS Under Siege, so nothing goes out by road, gate or water","other":""}
+{"id":"14754","town":"r2r-village-21","sev":"MED","kind":"STATE","why":"'income rests on salted fish'; under siege nothing is exported by water, and the same line says nothing comes in","other":""}
+{"id":"03877","town":"r2r-village-55","sev":"MED","kind":"LACKS","why":"standing levy roster in 'the village archive'; HOUSES has no archive or record house, and DEFENCE has no militia, garrison or levy","other":""}
+{"id":"08783","town":"r2r-village-55","sev":"MED","kind":"STATE","why":"gives Entrepôt Trade a 13% share; CRISIS Under Siege, TRADE exports none, nothing comes in or goes out","other":""}
+{"id":"25494","town":"r2r-village-55","sev":"MED","kind":"STATE","why":"says Textiles & Cloth is impaired; LAND gives that chain as running, its grazing land available","other":""}
+{"id":"06896","town":"r2r-village-55","sev":"MED","kind":"STATE","why":"says Cloth Finishing & Clothing is impaired; LAND gives that chain as running","other":""}
+{"id":"12782","town":"r2r-village-55","sev":"LOW","kind":"LACKS","why":"horseshoeing 'essential for cavalry'; DEFENCE has no cavalry, garrison or militia","other":""}
+{"id":"HEADER","town":"r2r-village-55","sev":"LOW","kind":"RECORD","why":"a Fish market and smoked-fish output in a Hills village; LAND lists no fishing grounds or water resource","other":""}
+{"id":"27668","town":"r2s-under_siege-village-1","sev":"MED","kind":"LACKS","why":"'the quarrymen's families' hold civic influence; HOUSES has no quarry and LAND says the stone is a resource nobody works","other":""}
+{"id":"12107","town":"r2r-hamlet-18","sev":"LOW","kind":"BROKEN","why":"prints the slash-joined label 'Military/Guard' as a name in prose","other":""}
+{"id":"27478","town":"r2r-hamlet-18","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"12128","town":"r2r-hamlet-18","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in prose","other":""}
+{"id":"08266","town":"r2s-under_siege-village-1","sev":"MED","kind":"STATE","why":"says Divine & Magical Healing is impaired; LAND gives that chain as running, its hot springs available","other":""}
+{"id":"06892","town":"r2s-under_siege-village-2","sev":"HIGH","kind":"LACKS","why":"'a single defended gate'; DEFENCE has walls none, garrison none, militia none, watch none","other":""}
+{"id":"15413","town":"r2s-under_siege-village-2","sev":"HIGH","kind":"LACKS","why":"layout names 'a single defended gate'; DEFENCE walls none and no force of any kind","other":""}
+{"id":"05776","town":"r2s-under_siege-village-2","sev":"MED","kind":"STATE","why":"says Beekeeping & Wax is impaired; LAND gives that chain as running, wild foraging available","other":""}
+{"id":"HEADER","town":"r2s-under_siege-village-2","sev":"MED","kind":"RECORD","why":"founders are refugees who found the place defensible, but the reason is two rival mining operations sharing infrastructure; no mine in HOUSES","other":""}
+{"id":"05663","town":"r2s-under_siege-village-3","sev":"MED","kind":"TAG","why":"offers pottage and bread as basic food; under siege, grown 38% of need, 62% deficit; tag has F and S towns","other":""}
+{"id":"14079","town":"r2s-under_siege-village-3","sev":"LOW","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as a name in a sentence","other":""}
+{"id":"23236","town":"r2s-under_siege-village-3","sev":"MED","kind":"STATE","why":"says Salt & Preservation is impaired; LAND gives that chain as entrepot, salt works run on imported salt","other":""}
+{"id":"20913","town":"r2s-under_siege-village-0","sev":"MED","kind":"STATE","why":"income from visiting pilgrims; CRISIS Under Siege so nobody arrives, and TRADE exports none, no pilgrim trade listed","other":""}
+{"id":"21580","town":"r2s-under_siege-village-0","sev":"MED","kind":"STATE","why":"gives Pilgrim Trade an 8% share; CRISIS Under Siege, exports none, nothing comes in by road","other":""}
+{"id":"29535","town":"r2s-under_siege-village-0","sev":"MED","kind":"STATE","why":"inn serves 'traders, pilgrims, and wayfarers who pass'; CRISIS Under Siege, nothing comes in or goes out by road","other":""}
+{"id":"06381","town":"r2s-under_siege-village-0","sev":"LOW","kind":"STATE","why":"cartographer 'draws and sells his work'; PEOPLE gives the cartographer, Atotoztli Itza, as f","other":""}
+{"id":"07712","town":"r2s-under_siege-village-0","sev":"MED","kind":"STATE","why":"dairy farmer 'keeps cattle or goats'; LAND gaps say the dairy farmer exists but lacks access to livestock","other":""}
+{"id":"06310","town":"r2r-village-58","sev":"MED","kind":"STATE","why":"caravanserai offers cargo transport, escorted caravans, pack animal hire; LAND gaps: it lacks camel herds (depleted); caravan trade vulnerable","other":""}
+{"id":"23822","town":"r2r-village-58","sev":"MED","kind":"STATE","why":"'none of them decisive'; PAST holds major events: Purge, Trade Collapse, Occupation, Migration","other":""}
+{"id":"14686","town":"r2r-village-58","sev":"MED","kind":"STATE","why":"'built up slowly, with no single break'; PAST records major Trade Collapse, Occupation 56 years ago and Migration","other":""}
+{"id":"13939","town":"r2r-village-58","sev":"MED","kind":"BROKEN","why":"garbled: 'one of the house the crisis hits; next in line, the first choice already holding a role that contradicts this one'","other":""}
+{"id":"11316","town":"r2r-village-58","sev":"LOW","kind":"BROKEN","why":"'Grain Holders no stake yet' has no verb; reads as an unfilled slot","other":""}
+{"id":"06312","town":"r2r-village-58","sev":"LOW","kind":"LACKS","why":"'stout walled enclosure ... sleeping room for fifty' with stabling for camels; DEFENCE walls none, village of 78, camel herds depleted","other":""}
+{"id":"14727","town":"r2s-famine-village-0","sev":"MED","kind":"STATE","why":"'income rests on milled flour'; FOOD failed source is grain, famine cut 65%, stores 0.1 months; no line should offer the food that failed","other":""}
+{"id":"13943","town":"r2s-famine-village-1","sev":"MED","kind":"BROKEN","why":"garbled 'one of the house the crisis hits; next in line, the first choice already holding a role that contradicts this one'; also prints 'Military/Guard'","other":""}
+{"id":"09012","town":"r2s-famine-village-1","sev":"MED","kind":"STATE","why":"exports freshwater catch, salted and smoked fish; FOOD failed source is fish, famine, stores 0.1 months","other":""}
+{"id":"21093","town":"r2s-famine-village-2","sev":"MED","kind":"STATE","why":"'Outsiders see a busy market'; CRISIS Famine, people queue for food, stores 0.1 months, safety Unsafe","other":""}
+{"id":"26135","town":"r2s-famine-village-2","sev":"MED","kind":"STATE","why":"infiltration story of an agents' handler; PAST records only an Economic Divide, no purge or infiltration","other":""}
+{"id":"05991","town":"r2s-famine-village-2","sev":"MED","kind":"STATE","why":"says Brewing & Malting is impaired; LAND gives that chain as running, grain fields available","other":""}
+{"id":"12002","town":"r2r-village-24","sev":"MED","kind":"STATE","why":"famine 'caused by export decisions'; TRADE exports only sacred wood and ritual components, no food leaves; failed source None","other":""}
+{"id":"31242","town":"r2r-village-24","sev":"MED","kind":"STATE","why":"offers waterfowl game as caught in season; LAND gives Marshlands as depleted, the wildfowler's resource","other":""}
+{"id":"23808","town":"r2r-village-24","sev":"MED","kind":"STATE","why":"says road trade supplies 42% of needs; FOOD: brought in 24%, the 42% is the gap","other":""}
+{"id":"02945","town":"r2r-village-24","sev":"LOW","kind":"STATE","why":"settlement 'ringed by managed woodland'; LAND lists no managed woodland, only depleted marshland, grove and iron","other":""}
+{"id":"23385","town":"r2r-village-24","sev":"MED","kind":"STATE","why":"famine 'caused by export decisions'; TRADE exports only sacred wood and ritual components, no food leaves; failed source None","other":""}
+{"id":"15406","town":"r2r-village-24","sev":"LOW","kind":"STATE","why":"settlement 'ringed by managed woodland'; LAND lists no managed woodland resource","other":""}
+{"id":"12004","town":"r2s-famine-village-3","sev":"MED","kind":"STATE","why":"famine 'caused by export decisions made by Military/Guard'; TRADE exports none, failed source None; slash-joined power label in prose","other":""}
+{"id":"25017","town":"r2s-famine-village-3","sev":"MED","kind":"STATE","why":"'Stone-walled village'; DEFENCE walls are a palisade or earthworks, not stone","other":""}
+{"id":"15445","town":"r2s-famine-village-3","sev":"MED","kind":"STATE","why":"layout 'Stone-walled village'; DEFENCE walls are a palisade or earthworks, not stone","other":""}
+{"id":"29533","town":"r2s-famine-village-3","sev":"MED","kind":"STATE","why":"inn caters to merchants and pilgrims 'the road brings'; trade access isolated, famine, TRADE exports none","other":""}
+{"id":"29770","town":"r2s-occupied-village-0","sev":"LOW","kind":"STATE","why":"food lacking comes in by 'minor routes and sanctioned caravans'; trade access isolated, imports only incense","other":""}
+{"id":"29522","town":"r2s-occupied-village-2","sev":"LOW","kind":"LACKS","why":"'warehouse fees' from goods passing through; HOUSES has no warehouse or storehouse","other":""}
+{"id":"16606","town":"r2s-occupied-village-2","sev":"LOW","kind":"BROKEN","why":"'Merchant Guilds no stake yet' has no verb; reads as an unfilled slot","other":""}
+{"id":"HEADER","town":"r2s-plague_onset-village-1","sev":"LOW","kind":"RECORD","why":"TRADE both exports and imports Medicinal herbs, and lists them as made here","other":""}
+{"id":"23580","town":"r2s-plague_onset-village-2","sev":"MED","kind":"STATE","why":"tanner 'sells leather'; LAND gaps say the tannery lacks access to livestock and to animal hides","other":""}
+{"id":"23594","town":"r2s-plague_onset-village-2","sev":"MED","kind":"STATE","why":"tanner sells thin leather by the hide; LAND gaps say the tannery lacks livestock and animal hides, so it has no leather to sell","other":""}
+{"id":"21726","town":"r2s-plague_onset-village-2","sev":"MED","kind":"STATE","why":"potter throws and fires pottery as ordinary work; LAND gaps say the potter exists but lacks access to clay","other":""}
+{"id":"08715","town":"r2s-plague_onset-village-2","sev":"LOW","kind":"BROKEN","why":"'Elected Reeve no stake yet' has no verb; reads as an unfilled slot","other":""}
+{"id":"08704","town":"r2s-plague_onset-village-2","sev":"LOW","kind":"STATE","why":"reeve works 'under noble oversight'; GOVERNMENT lists only Religious Authorities and Elected Reeve, no noble power","other":""}
+{"id":"06946","town":"r2r-village-5","sev":"MED","kind":"STATE","why":"coastal timber turned into ferries by the river ferry; LAND gaps say the timber is raw but not being processed, boatbuilding chain vulnerable","other":""}
+{"id":"HEADER","town":"r2r-village-5","sev":"LOW","kind":"RECORD","why":"exports River craft and Cargo barges and makes them, but HOUSES has no boatyard or shipwright, only a ferry","other":""}
+{"id":"16334","town":"r2s-infiltrated-village-1","sev":"MED","kind":"STATE","why":"'Master-crafted weapons EXPORT'; TRADE exports list weapons and armour, quality tools and advanced weapons, none master-crafted","other":""}
+{"id":"HEADER","town":"r2s-infiltrated-village-1","sev":"LOW","kind":"RECORD","why":"exports iron ore and advanced weapons, yet HOUSES has no mine, only one blacksmith, and 117 people","other":""}
+{"id":"14639","town":"r2s-slave_revolt-village-1","sev":"MED","kind":"STATE","why":"'sends out potions and tinctures'; TRADE exports none, trade access isolated, LAND gaps say herbs cannot make final goods","other":""}
+{"id":"DONE","lines":2400,"blocks":47,"flags":93}
