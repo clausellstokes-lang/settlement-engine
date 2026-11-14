@@ -131,6 +131,9 @@ const GUARDS = [
   { seed: 'w5-city-occupied-2', pool: 'DS-DEF-1::readiness ADEQUATE', vid: 4, why: 'an occupation: "has enough for the usual trouble and nothing spare" of an occupied city (v3\'s sibling) (W2-WRITE-11)' },
   { seed: 'w5-city-occupied-1', pool: 'DS-DEF-8::override active, viability intact', vid: 3, why: 'an occupation: "A visitor ... would not guess at the trouble from the streets" beside the occupiers\' checkpoints and curfew (BAR-0 #203, Longyuan)' },
   { seed: 'rww-town-occupied-1', pool: 'DS-DEF-8::override active, viability intact', vid: 2, why: 'an occupation: "the defence makes do with what is left over" of a defence the occupiers hold ("the arms in the town are theirs")' },
+  { seed: 'w5-town-occupied-3', pool: 'DS-POW-6::capture pressure ADVANCING (weak security, poor prosperity)', vid: 5, by: 'record', why: 'an occupation: "nobody is watching its officials" beside "local offices work only under their eye" (BAR-0 #200, Longyuan)' },
+  { seed: 'w5-town-occupied-3', pool: 'DS-POW-6::capture pressure ADVANCING (weak security, poor prosperity)', vid: 9, by: 'record', why: 'an occupation: "nobody at X is watching its officials" (v5\'s sibling, the same claim)' },
+  { seed: 'w5-city-occupied-1', pool: 'DS-POW-6::capture pressure ADVANCING (weak security, poor prosperity)', vid: 3, by: 'record', why: 'an occupation: "paid little and watched less" of offices the occupiers watch' },
 ];
 
 /** @param {string} seed */

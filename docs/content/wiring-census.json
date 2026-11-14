@@ -23,7 +23,7 @@
   "totals": {
     "pools": 856,
     "blocks": 69,
-    "variants": 2948,
+    "variants": 2949,
     "resolved": 488,
     "unresolved": 368,
     "resolvedWithPredicate": 317,
@@ -36220,7 +36220,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 10,
+      "variants": 11,
       "grammars": 4,
       "predicate": [
         {
@@ -36294,15 +36294,17 @@
       },
       "declares": [],
       "lineDeclares": {
+        "crisis: occupied": 1,
         "crisis: threat": 2,
         "crisis: wartime": 2,
         "no crisis: insurgency": 2,
+        "no crisis: occupied": 3,
         "no crisis: slave_revolt": 2,
         "no crisis: threat": 4,
         "no crisis: wartime": 4,
         "no watch": 2,
         "tier: ≤ hamlet": 1,
-        "tier: ≥ village": 8,
+        "tier: ≥ village": 9,
         "watch": 2
       },
       "undeclared": 0,
@@ -54822,7 +54824,7 @@
         "DS-POW-6 :: capture pressure ADVANCING (weak security, poor prosperity)",
         "DS-POW-6 :: capture pressure RECOVERING (strong security, prosperity)"
       ],
-      "variants": 14,
+      "variants": 15,
       "grammars": 7,
       "blocks": [
         "DS-POW-6"
@@ -54834,7 +54836,7 @@
         "DS-POW-6 :: capture pressure ADVANCING (weak security, poor prosperity)",
         "DS-POW-6 :: capture pressure RECOVERING (strong security, prosperity)"
       ],
-      "variants": 14,
+      "variants": 15,
       "grammars": 7,
       "blocks": [
         "DS-POW-6"
@@ -71275,7 +71277,7 @@
         "breakdown.prosperity"
       ],
       "readingFunction": "capturePoolKey",
-      "count": "10 variant(s) · 4 grammar(s) · slots {seat, settlement}"
+      "count": "11 variant(s) · 4 grammar(s) · slots {seat, settlement}"
     },
     {
       "tier": "THIN",

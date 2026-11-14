@@ -73,8 +73,8 @@
       "ceilingGzip": 177058
     },
     "src/data/dossierStateProse/power.generated.js": {
-      "raw": 130008,
-      "gzip": 18272,
+      "raw": 130557,
+      "gzip": 18338,
       "ceilingRaw": 357097,
       "ceilingGzip": 79355
     },
@@ -651,6 +651,14 @@
       "toRaw": 263205,
       "gzipAfter": 35213,
       "reason": "+136 B raw over the committed 263069 (gzip level 9: 35199 -> 35213): DS-DEF-8 v2 v3 gain no crisis: occupied"
+    },
+    {
+      "car": "W2-WRITE-12 #200",
+      "leaf": "src/data/dossierStateProse/power.generated.js",
+      "fromRaw": 130008,
+      "toRaw": 130557,
+      "gzipAfter": 18338,
+      "reason": "+549 B raw over the committed 130008 (gzip level 9: 18272 -> 18338): DS-POW-6 ADVANCING v11, the occupation twin"
     }
   ],
   "ceilingTransfersNewLeaves": [
