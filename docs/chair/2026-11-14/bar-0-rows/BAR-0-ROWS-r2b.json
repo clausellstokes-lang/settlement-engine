@@ -1,0 +1,57 @@
+[
+ {
+  "n": 199,
+  "severity": "MED",
+  "town": "bar0-town-occupied-rand-1",
+  "tab": "Systems/Power",
+  "kind": "h|e",
+  "sentence": "Institutions behind this power (4)",
+  "fact": "Under Contender Occupation Authority the heading \"Institutions behind this power (4)\" and \"In the service of this command\" print with no institution listed beneath them (every other power lists its houses).",
+  "source": "src/components/new/tabs/power/PowerStrata.jsx:198",
+  "mechanism": "broken text"
+ },
+ {
+  "n": 179,
+  "severity": "MED",
+  "town": "bar0-town-occupied-rand-1",
+  "tab": "Summary/Crisis",
+  "kind": "c|g",
+  "sentence": "collaborates: Ruixiang He · the most ambitious of a power that gains",
+  "fact": "stress.cast.roles: face and collaborator are the same id npc_power_occupation_authority; npcs[Ruixiang He].title \"the occupying governor\"; the same tab names him \"the occupier's local face: Ruixiang He · leads the occupying power\". The occupier's own governor is not a local collaborator.",
+  "source": "src/domain/crisis/crisisCast.js:201",
+  "mechanism": "a ruler, a power, a threat or a history state that is not so"
+ },
+ {
+  "n": 181,
+  "severity": "MED",
+  "town": "bar0-town-occupied-rand-1",
+  "tab": "Summary/Crisis",
+  "kind": "g|f",
+  "sentence": "Food: Pressured.",
+  "fact": "economicState.foodSecurity.label \"Secure\", foodRecord.band \"secure\", isPressured false; Overview \"Food SecuritySecure\", Foundations \"FoodSecure\".",
+  "source": "src/domain/summary/settlementQuickGuide.js:893",
+  "mechanism": "two homes that disagree"
+ },
+ {
+  "n": 215,
+  "severity": "MED",
+  "town": "bar0-town-occupied-rand-1",
+  "tab": "Table/Tonight sheet",
+  "kind": "g|f",
+  "sentence": "Food Pressured.",
+  "fact": "economicState.foodSecurity.label \"Secure\", isPressured false; Overview \"Food SecuritySecure\".",
+  "source": "src/domain/summary/tonightSheet.js:693",
+  "mechanism": "two homes that disagree"
+ },
+ {
+  "n": 220,
+  "severity": "MED",
+  "town": "bar0-hamlet-calm-rand-1",
+  "tab": "Table/Tonight sheet",
+  "kind": "g|f",
+  "sentence": "Food Pressured.",
+  "fact": "economicState.foodSecurity.label \"Secure\", isPressured false; Overview \"Food SecuritySecure\".",
+  "source": "src/domain/summary/tonightSheet.js:693",
+  "mechanism": "two homes that disagree"
+ }
+]

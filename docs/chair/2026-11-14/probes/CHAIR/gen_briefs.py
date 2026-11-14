@@ -2513,6 +2513,71 @@ SEATS2['JOIN-1'] = dict(
 )
 
 
+SEATS2['W2-WRITE-10'] = dict(
+    title="W2-WRITE-10 · the corpus lane: the HIGH rows of the first measure against the bar, the HIGH rows already designed, the lane's own reds",
+    branch='lane/w2-write-2026-11-13', tip='6fdff4ab', statement=False,
+    intro=("You are W2-WRITE-10, the tenth seat on the corpus lane of the settlement-engine integration program (lane/w2-write-2026-11-13). The corpus is "
+           "the dossier's written lines; its three branches are ONE again and the lane holds the integration line (the ninth seat: the merge of the "
+           "three, the line's merge, the registers through their doors; handed back at its context mark). A first measure against the release bar (ten "
+           "fresh towns read cold on a rehearsal of the join) found the corpus's pools to be THE LARGEST WRITER OF WHAT IS STILL FALSE: 4 of its 9 high "
+           "and 15 of its medium rows. THE ORDER HAS CHANGED (the chair, 2026-11-14 07:11 UTC): the true join has begun on lane/join-2026-11-14 and this "
+           "lane is merged there as it stood; THE LANE DOES NOT CLOSE NOW: IT CURES, and lands again later as a point of its own. Yours: the HIGH rows, "
+           "then the lane's own reds, then the widest medium rows. NO whole suite, NO final statement: they belong to the seat that makes that landing."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. On your lane, docs/chair/2026-11-13/W2-WRITE-HANDBACK-9.md WHOLE (78 lines, long ones: by script): the ninth seat's items; the merge of the "
+          "line and each register's door; THE 24 FRESH PRESUMED-THINGS HITS, classed; the two UI reds as measured; WHAT IS LEFT; LEFT FOR AFTER THE JOIN "
+          "(the HIGH rows already designed, each with its cure: THEY ARE YOURS NOW); the chair's notes copied; the rulings. And "
+          "docs/chair/2026-11-13/probes/W2-WRITE-5/README.md (the lane's instruments: iterate.sh, doors.sh, bytes.mjs, pins.py, push.sh).\n"
+          "3. THE BAR'S ROWS FOR THIS LANE (`git fetch origin lane/chair-2026-11-08`; `git show "
+          "origin/lane/chair-2026-11-08:docs/chair/2026-11-14/bar-0-rows/BAR-0-ROWS-corpus.json`, with the README.md beside it): 19 rows, 4 HIGH: each a "
+          "sentence, its town, the fact against it and the generated file and line that wrote it ON THE REHEARSAL'S TREE (find the pool and the variant "
+          "at your tip by the sentence's fixed words, never by the line number). The towns are re-born by the measure's own probes (`git fetch origin "
+          "lane/review-bar-0-2026-11-14`: docs/chair/2026-11-14/probes/REVIEW-BAR-0/: copy them out with git archive; run them from outside every "
+          "repository tree).\n"
+          "4. The merge book's section 2m on origin/lane/merge-15-point-49-wip-2026-11-14 (docs/INTEGRATION_STYLE_2_2026-11-09.md, the section headed "
+          "\"## 2m.\": about forty lines; by script): the presumed-things door and the page census, before the first register you touch."),
+    work=("THE LIST, in this order, each cause its own commit, measured first on births in the app's own shape (the lane's seeds and the measure's ten "
+          "towns), red first (a guard row appended red BEFORE the cure, in the same commit), every firing variant of a pool you touch READ, pushed as made:\n"
+          "1. THE FOUR HIGH ROWS OF THE BAR'S MEASURE (the rows file, severity HIGH): #75 (DS-ECO-1, the siege combination: \"{S} was poor even while its "
+          "trade moved freely, and the siege has stopped it moving at all\" in a town whose standing reads Prosperous, two lines under \"Prosperous "
+          "before the siege\"); #116 (\"timber leaves {S} half-finished, and nobody in the city is troubled by it\" beside a commercial sawmill, a sawyer "
+          "and a milled-lumber export); #217 (\"Visitors to {S} are told which few streets to avoid\" in a hamlet of 87: the size ruling); #246 "
+          "(\"Faith carries real weight in {S}'s money. What the religious houses take in and spend is a large part of the hamlet's business\" where the "
+          "roster holds a wayside shrine, a road to another place's parish church and a burial ground, and the income is all rents). FOR EACH: the "
+          "pool and variant; IN HOW MANY TOWNS of your births it prints against its record (the count, by script, before and after); the cure by a "
+          "registered condition that makes it true wherever it prints, or a rewording, or silence where no true line can be made; the guard row.\n"
+          "2. THE HIGH ROWS ALREADY DESIGNED (HANDBACK-9, \"LEFT FOR AFTER THE JOIN\", each as written there with its cure and its guard towns): DS-DEF-2 "
+          "walls AND professional garrison v1 to v3 under an occupation; #645 (the week's routine under a siege or an occupation); #1509 (\"comfortably "
+          "over-provided against beasts\" beside a Weak or Critical bar: no atom reads the monster score, so the three variants are reworded to be true "
+          "beside any bar: the pool's KEY is another lane's file and is not yours); #1206 (\"runs on arcane work\" where every magic role reads absent, "
+          "with v2 to v4); the two the seventh seat found (DS-DEF-5 no organized force v1 to v3 under an occupation; DS-DEF-11 WALLED-STRAINED v2 under "
+          "an occupation, its slot printing a catalogue label).\n"
+          "3. ONE MESSAGE TO THE CHAIR (the tip; each HIGH row's count before and after), then THE COUNT.\n"
+          "4. THE LANE'S OWN REDS: (a) the two UI test files, as HANDBACK-9 measured them, by the chair's ruling copied there (find the commit that "
+          "emptied DS-GEN-18's STALLED case for seed forge_town: the cure is a line true in that case, read in three towns, or the seed re-keyed by "
+          "identity to a town the pool still serves, with its cause; the export-posture anchor: re-keyed by identity with its cause, or cured if "
+          "\"village\" is the wrong word for the size); (b) THE 24 FRESH PRESUMED-THINGS HITS: the seven tag literals stay RED AND NAMED (a declaration's "
+          "own tag read as a source literal: FOR THE DECLARATION PASS, NOT PRINTED, with the proof that no page prints the tag); the seventeen corpus "
+          "lines each READ IN ITS TOWNS, then DECLARED through a registered condition where the condition holds in every town the pool reaches AND the "
+          "draws do not move (prove both by script), or CURED where it is false somewhere; a declaration that would need a word the vocabulary does not "
+          "hold is PARKED with its word.\n"
+          "5. THE MEDIUM ROWS of the rows file, WIDEST FIRST: one script over your births that counts the towns printing each row's sentence at your "
+          "tip; cure the widest causes, one cause a commit, until your count's mark. The table of counts goes in the hand-back.\n"
+          "AFTER EVERY CURE: the corpus's own doors as the lane's instruments run them; the presumed-things walker (it reads every literal); the page "
+          "census's twelve-birth grid (`node scripts/census/page-census.mjs --grid`: a rise is a stop); at every push the three fast gates by the hook.\n"
+          "NOT YOURS: the seven faith pools of the ninth seat's step 7 (the faith reading is another lane's file: AFTER THE JOIN, measured on the joined "
+          "tree); the whole suite; the lane's final statement; any file outside the corpus's own (the source document, its generated twins, its pins, "
+          "its guards).\n"
+          "THE HAND-BACK, kept current after every item: docs/chair/2026-11-13/W2-WRITE-HANDBACK-10.md: the rulings you worked to (this brief's, and the "
+          "chair's messages copied); every row: its pool and variant, its counts, its cure and commit, its guard, the towns read; EVERY NEW OR CHANGED "
+          "LINE with the towns it was read in (the owner's veto list, and the next reader's); what is left, line by line; how the instruments are "
+          "re-made.\n" + CORPUS2),
+    merges='',
+    when="for a stop that blocks everything you have left, at step 3 (the tip; each HIGH row's count before and after), and with your hand-back",
+    turns='',
+)
+
+
 def build2(seat):
     s = _r3c6() if seat == 'R3-CODE-C-6' else SEATS2[seat]
     head = (

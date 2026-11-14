@@ -1,0 +1,13 @@
+[
+ {
+  "n": 84,
+  "severity": "MED",
+  "town": "bar0-city-under_siege+famine-rand-1",
+  "tab": "Systems/Economics",
+  "kind": "g",
+  "sentence": "Healing, surgical care and long-term recovery here depend on medicinal herbs from outside, which the siege has cut off.",
+  "fact": "resourceAnalysis.availableResources includes \"medicinal_herbs\"; Resources tab \"Commodities available: hot springs medicinal herbs\"",
+  "source": "src/domain/display/chainNeedShown.js:75",
+  "mechanism": "two homes that disagree"
+ }
+]

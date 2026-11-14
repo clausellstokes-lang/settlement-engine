@@ -1,0 +1,134 @@
+[
+ {
+  "n": 216,
+  "severity": "HIGH",
+  "town": "bar0-hamlet-calm-rand-1",
+  "tab": "Systems/Outlook",
+  "kind": "c|f",
+  "sentence": "Nothing reliable reaches Saltosinum from outside, and its own land does not grow enough; the rest comes from its stores and from magic.",
+  "fact": "economicState.foodSecurity.magicSupplement 0, magicOffset 0, foodRecord.magicPct 0; isolationSupport.magicDependent false, paths local_foodshed + seasonal_access; page \"Reliance on magic: None\", Magic tab \"Medical role: absent ... Infrastructure role: absent\".",
+  "source": "src/domain/display/dossierViewModel.js:267",
+  "mechanism": "names a resource, a good or a chain state that is not so"
+ },
+ {
+  "n": 115,
+  "severity": "HIGH",
+  "town": "bar0-city-wartime-rand-1",
+  "tab": "Systems/Economics",
+  "kind": "a",
+  "sentence": "Arcane Industry Enchanting contracts, magical research commissions, and the licensing of spellcasting practitioners. The mages' guild contributes meaningfully to civic revenue.",
+  "fact": "compound.inst.hasMagesGuild false; institutions[] Magic = Wizard's tower, Scroll scribe, Teleportation circle (no mages' guild or academy)",
+  "source": "src/generators/economy/economicState.js:311",
+  "mechanism": "names a house, a role or a force the town lacks"
+ },
+ {
+  "n": 206,
+  "severity": "MED",
+  "town": "bar0-town-occupied-rand-1",
+  "tab": "Systems/Defense",
+  "kind": "b|g",
+  "sentence": "No deterrence beyond force.",
+  "fact": "compound.inst.hasCourtSystem true; Law & Governance chain (Town hall) outputs \"Legal services\"; same tab \"the penalties its hearings can hand down are money and exile\". Printed beside \"Legal InfrastructureNone\".",
+  "source": "src/domain/display/defenseDisplay.js:407",
+  "mechanism": "denies a house, force or crossing the town has"
+ },
+ {
+  "n": 77,
+  "severity": "MED",
+  "town": "bar0-city-under_siege+famine-rand-1",
+  "tab": "Systems/Economics",
+  "kind": "c",
+  "sentence": "Fish & Preserved Produce",
+  "fact": "income line 3%; river_fish depleted; River Fishing chain \"impaired\"; \"Salted fish (local river fishery exhausted)\" is an import",
+  "source": "src/generators/economy/economicState.js:497",
+  "mechanism": "names a resource, a good or a chain state that is not so"
+ },
+ {
+  "n": 273,
+  "severity": "MED",
+  "town": "bar0-village-famine-rand-1",
+  "tab": "Systems/Economics",
+  "kind": "a",
+  "sentence": "Iron & Metalwork Coal is dug here and sold to the forges of other towns; no forge here burns it, so this income stream leans on the trade route.",
+  "fact": "income line titled 'Iron & Metalwork' while the roster has no smithy, forge or mine (institutions: Farmland, Common grazing land, Fish market, Mill, Carpenter, Parish church, Graveyard, Priest, Dwellings, Water sources); the sentence itself says no forge here",
+  "source": "src/generators/economy/incomeLineSiblings.js:19",
+  "mechanism": "names a house, a role or a force the town lacks"
+ },
+ {
+  "n": 234,
+  "severity": "MED",
+  "town": "bar0-town-calm-rand-1",
+  "tab": "Systems/Economics",
+  "kind": "a|g",
+  "sentence": "Timber Trade Local forest provides sustainable timber revenue; managed felling keeps production consistent.",
+  "fact": "institutions[] has no sawmill, woodcutters or carpenters; resourceAnalysis.gaps: {chain:'timber', missing:['Sawmill','Carpenters\\' guild'], impact:'Raw resource available but not being processed'}; Systems/Resources shows Timber 'Partial'; no timber chain in economicState.activeChains",
+  "source": "src/generators/economy/incomeLineSiblings.js:75",
+  "mechanism": "names a house, a role or a force the town lacks"
+ },
+ {
+  "n": 256,
+  "severity": "MED",
+  "town": "bar0-hamlet-under_siege-rand-1",
+  "tab": "Systems/Defense",
+  "kind": "a|g",
+  "sentence": "Hunger-driven theft of food, livestock, and stored goods. Enforcement struggles to distinguish survival crime from organised theft.",
+  "fact": "no watch/court/militia in institutions[]; same tab: 'There is no watch.', 'Legal InfrastructureNone', 'No organized force'",
+  "source": "src/generators/safetyProfile.js:26",
+  "mechanism": "names a house, a role or a force the town lacks"
+ },
+ {
+  "n": 280,
+  "severity": "MED",
+  "town": "bar0-village-famine-rand-1",
+  "tab": "Systems/Defense",
+  "kind": "a,g",
+  "sentence": "Hunger-driven theft of food, livestock, and stored goods. Enforcement struggles to distinguish survival crime from organised theft.",
+  "fact": "no watch, court or enforcer (compound.inst.hasWatch:false, hasCourtSystem:false); same tab 'Nobody here is paid to keep order.'; 'Legal InfrastructureNone'",
+  "source": "src/generators/safetyProfile.js:26",
+  "mechanism": "names a house, a role or a force the town lacks"
+ },
+ {
+  "n": 166,
+  "severity": "MED",
+  "town": "bar0-thorp-calm-rand-1",
+  "tab": "Systems/Defense",
+  "kind": "d|g",
+  "sentence": "A mix of safer and more exposed areas. Militia volunteers patrol the main paths; quieter spots after dark carry genuine risk. Residents know which corners to avoid.",
+  "fact": "population 28, Dwellings (1-8); same tab: \"There is no watch. The old families keep the peace\"",
+  "source": "src/generators/safetyProfile.js:329",
+  "mechanism": "a size"
+ },
+ {
+  "n": 218,
+  "severity": "MED",
+  "town": "bar0-hamlet-calm-rand-1",
+  "tab": "Systems/Defense",
+  "kind": "d",
+  "sentence": "A mix of safer and more exposed areas. Locals watch over the main paths; quieter spots after dark carry genuine risk. Residents know which corners to avoid.",
+  "fact": "population 87, \"Dwellings (5-25)\"; compound.inst.hasCriminalInst false, safetyProfile.crimeTypes []; same tab \"what wrongdoing the hamlet has, people do on their own account\". Areas, main paths and corners belong to a larger place.",
+  "source": "src/generators/safetyProfile.js:329",
+  "mechanism": "a size"
+ },
+ {
+  "n": 90,
+  "severity": "MED",
+  "town": "bar0-city-under_siege+famine-rand-1",
+  "tab": "Systems/Defense",
+  "kind": "c|g",
+  "sentence": "Everyone comes and goes by the gates, so smugglers have to get past the garrison and city watch.",
+  "fact": "same tab: \"Agiospolis's gates are shut and barred, and nothing has come through them since the siege began.\"",
+  "source": "src/generators/safetyProfile.js:375",
+  "mechanism": "presumes normal times under a crisis in force"
+ },
+ {
+  "n": 244,
+  "severity": "MED",
+  "town": "bar0-town-calm-rand-1",
+  "tab": "Systems/Defense",
+  "kind": "g",
+  "sentence": "Petty theft, minor fraud, and opportunistic violence are persistent. No single dominant organisation: just the steady pressure of too many people with too little, and too few consequences for taking.",
+  "fact": "same tab, lines above: 'Criminal structure: Organized syndicate', 'Shopkeepers here pay one ring for protection...', 'Underworld: Corrupt Council', and below 'the people who run the town's crime put down anything that would bring the law on them'",
+  "source": "src/generators/safetyProfile.js:567",
+  "mechanism": "two homes that disagree"
+ }
+]

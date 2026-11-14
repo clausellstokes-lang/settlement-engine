@@ -1,0 +1,233 @@
+[
+ {
+  "n": 36,
+  "severity": "MED",
+  "town": "bar0-city-under_siege+famine-rand-1",
+  "tab": "Summary/Overview",
+  "kind": "c",
+  "sentence": "Barrels of salt fish stand stacked for the carts, and the gulls have opinions about every one.",
+  "fact": "famine + siege in force; foodRecord.failedSource \"fish\"; config.nearbyResourcesDepleted includes \"river_fish\"; \"Salted fish (local river fishery exhausted)\" is an import and foodSecurity.importCoverage 0; Resources tab: \"there is nothing left worth taking\"",
+  "source": "src/data/arrivalProse.js:143",
+  "mechanism": "presumes normal times under a crisis in force"
+ },
+ {
+  "n": 233,
+  "severity": "MED",
+  "town": "bar0-town-calm-rand-1",
+  "tab": "Summary/Overview",
+  "kind": "c|g",
+  "sentence": "Sacks of herbs and spices fill the carts, and the smell of them clings to your clothes.",
+  "fact": "economicState.primaryImports has no spices (herbs only as 'Ritual wood and herbs (ancient grove damaged)'); Systems/Economics prints 'Needed, and not brought in: luxury goods, spices, gold/silver ore.'",
+  "source": "src/data/arrivalProse.js:267",
+  "mechanism": "two homes that disagree"
+ },
+ {
+  "n": 51,
+  "severity": "MED",
+  "town": "bar0-city-under_siege+famine-rand-1",
+  "tab": "Systems/Institutions",
+  "kind": "c|g",
+  "sentence": "Brews ale and beer at commercial scale for the taverns and for regional sale. A major employer and a heavy buyer of grain.",
+  "fact": "famine + siege; Grain is an import and importCoverage 0; Economics: \"Meals, ale and lodging here depend on grain from outside, which the siege has cut off.\"; Mills impaired for want of grain; Brewery card has no Impaired badge",
+  "source": "src/data/institutionDescVariants.js:1010",
+  "mechanism": "presumes normal times under a crisis in force"
+ },
+ {
+  "n": 57,
+  "severity": "MED",
+  "town": "bar0-city-under_siege+famine-rand-1",
+  "tab": "Systems/Institutions",
+  "kind": "c|g",
+  "sentence": "A covered fish market under the market wardens. The morning's catch or the week's salted barrels, sold by weight and inspected for rot.",
+  "fact": "river_fish depleted; River Fishing chain \"impaired\"; foodRecord.failedSource \"fish\"; Resources tab: \"there is nothing left worth taking\"; Fish market card carries no Impaired badge",
+  "source": "src/data/institutionDescVariants.js:2031",
+  "mechanism": "names a resource, a good or a chain state that is not so"
+ },
+ {
+  "n": 156,
+  "severity": "MED",
+  "town": "bar0-thorp-calm-rand-1",
+  "tab": "Systems/Institutions",
+  "kind": "g",
+  "sentence": "Each family tills a small holding, all of it for the table.",
+  "fact": "primaryExports \"Grain surplus\"; foodRecord.surplusPct 38; income 76% \"Agricultural Rents ... from tenant farmers\"; Economics \"Tyrby lives on a farm surplus\"",
+  "source": "src/data/institutionDescVariants.js:31",
+  "mechanism": "two homes that disagree"
+ },
+ {
+  "n": 60,
+  "severity": "MED",
+  "town": "bar0-city-under_siege+famine-rand-1",
+  "tab": "Systems/Institutions",
+  "kind": "c|g",
+  "sentence": "A flat-bottomed ferry over the river, the crossing rights held in one family for generations. Carts, beasts and walkers wait their turn on the bank.",
+  "fact": "Toll bridge card on the same tab: \"Since the siege closed the roads, there are none to gather.\"; enemies camped around the town",
+  "source": "src/data/institutionDescVariants.js:334",
+  "mechanism": "presumes normal times under a crisis in force"
+ },
+ {
+  "n": 54,
+  "severity": "MED",
+  "town": "bar0-city-under_siege+famine-rand-1",
+  "tab": "Systems/Institutions",
+  "kind": "c|g",
+  "sentence": "Built for the road: relay stabling, coaches on a schedule, meals at set hours, and a room for waiting passengers. Horses are changed here, not merely rested.",
+  "fact": "Services tab: \"with the roads held the rooms stand mostly empty\" and \"while the siege holds the roads, none go out\"; famine in force (meals)",
+  "source": "src/data/institutionDescVariants.js:554",
+  "mechanism": "presumes normal times under a crisis in force"
+ },
+ {
+  "n": 185,
+  "severity": "MED",
+  "town": "bar0-town-occupied-rand-1",
+  "tab": "Systems/Institutions",
+  "kind": "a",
+  "sentence": "The industrial step from what the mine yields to what the smith uses.",
+  "fact": "config.nearbyResources [\"deep_harbour\",\"shipbuilding_timber\",\"ancient_ruins\",\"salt_flats\"]: no mine; institutions[] has no smith/blacksmith; resourceAnalysis.gaps \"Smelter runs on imported iron ore\", imports.critical \"iron ore: Required by Smelter but not available in Coastal terrain\".",
+  "source": "src/data/institutionDescVariants.js:695",
+  "mechanism": "names a house, a role or a force the town lacks"
+ },
+ {
+  "n": 157,
+  "severity": "MED",
+  "town": "bar0-thorp-calm-rand-1",
+  "tab": "Systems/Institutions",
+  "kind": "g|h",
+  "sentence": "A distant lord's man, set here to watch the settlement and remit what it owes. His writ is legitimate; his welcome is not.",
+  "fact": "the reeve is Járnsaxa Ragnarsson, npcs[0].gender \"female\" (Connection: Reeve Járnsaxa Ragnarsson printed directly below)",
+  "source": "src/data/institutionDescVariants.js:74",
+  "mechanism": "two homes that disagree"
+ },
+ {
+  "n": 191,
+  "severity": "MED",
+  "town": "bar0-town-occupied-rand-1",
+  "tab": "Systems/Services",
+  "kind": "g|c",
+  "sentence": "Standard-size fired clay bricks by the cartload.",
+  "fact": "resourceAnalysis.gaps \"Brickmaker exists but lacks access to clay\"; Resources tab \"No clay reaches the brickmaker.\"; Economics \"Needed, and not brought in: ... clay.\"",
+  "source": "src/data/institutionServices.js (Fired brick)",
+  "mechanism": "two homes that disagree"
+ },
+ {
+  "n": 67,
+  "severity": "MED",
+  "town": "bar0-city-under_siege+famine-rand-1",
+  "tab": "Systems/Services",
+  "kind": "c",
+  "sentence": "The largest trading event of the year. Merchants from distant regions.",
+  "fact": "Large-scale trading (Major annual fairs) shown unimpaired; stress under_siege \"nothing comes in by road\"; situationDesc \"The market is shut\"",
+  "source": "src/data/institutionServices.js:1084",
+  "mechanism": "presumes normal times under a crisis in force"
+ },
+ {
+  "n": 68,
+  "severity": "MED",
+  "town": "bar0-city-under_siege+famine-rand-1",
+  "tab": "Systems/Services",
+  "kind": "c",
+  "sentence": "Major livestock sales across all species and quality grades.",
+  "fact": "Livestock auctions shown unimpaired under siege + famine; Pastoral & livestock food chain false in foodSecurity.chains",
+  "source": "src/data/institutionServices.js:1085",
+  "mechanism": "presumes normal times under a crisis in force"
+ },
+ {
+  "n": 73,
+  "severity": "MED",
+  "town": "bar0-city-under_siege+famine-rand-1",
+  "tab": "Systems/Services",
+  "kind": "g",
+  "sentence": "Collect toll from all who cross. Rate varies by load and cargo.",
+  "fact": "Crossing fee shown unimpaired; Institutions tab Toll bridge: \"Since the siege closed the roads, there are none to gather.\"",
+  "source": "src/data/institutionServices.js:1346",
+  "mechanism": "two homes that disagree"
+ },
+ {
+  "n": 9,
+  "severity": "MED",
+  "town": "bar0-metropolis-calm-rand-1",
+  "tab": "Systems/Services",
+  "kind": "c",
+  "sentence": "Ore cut underground by the crews and brought out by cart for sorting.",
+  "fact": "config.nearbyResourcesDepleted includes coal_deposits, precious_metals, gemstone_deposits (all the town's minable deposits); activeChains precious_metals_mining \"impaired\"; Resources prints these as Depleted",
+  "source": "src/data/institutionServices.js:1817",
+  "mechanism": "names a resource, a good or a chain state that is not so"
+ },
+ {
+  "n": 64,
+  "severity": "MED",
+  "town": "bar0-city-under_siege+famine-rand-1",
+  "tab": "Systems/Services",
+  "kind": "g",
+  "sentence": "Standard-size fired clay bricks by the cartload.",
+  "fact": "resourceAnalysis.gaps Brickmaker \"lacks access to clay\"; Resources tab \"No clay reaches the brickmaker.\"",
+  "source": "src/data/institutionServices.js:395",
+  "mechanism": "names a resource, a good or a chain state that is not so"
+ },
+ {
+  "n": 71,
+  "severity": "MED",
+  "town": "bar0-city-under_siege+famine-rand-1",
+  "tab": "Systems/Services",
+  "kind": "c|g",
+  "sentence": "Fish sold daily from the morning catch. Selection varies by season.",
+  "fact": "Fresh fish retail shown unimpaired; river_fish depleted; River Fishing chain \"impaired\"; foodRecord.failedSource \"fish\"; Resources tab: \"there is nothing left worth taking\"",
+  "source": "src/data/institutionServices.js:952",
+  "mechanism": "names a resource, a good or a chain state that is not so"
+ },
+ {
+  "n": 6,
+  "severity": "MED",
+  "town": "bar0-metropolis-calm-rand-1",
+  "tab": "Systems/Institutions",
+  "kind": "c",
+  "sentence": "A worked shaft or adit with hired crews, winding gear, and ore carts.",
+  "fact": "config.nearbyResourcesDepleted [\"grazing_land\",\"coal_deposits\",\"precious_metals\",\"gemstone_deposits\"]: every minable deposit is depleted; activeChains precious_metals_mining status \"impaired\"; Resources prints \"Depleted Coal Deposits Gemstone Deposits Grazing Land Precious Metals\"",
+  "source": "src/data/institutionalCatalog.js:243",
+  "mechanism": "names a resource, a good or a chain state that is not so"
+ },
+ {
+  "n": 59,
+  "severity": "MED",
+  "town": "bar0-city-under_siege+famine-rand-1",
+  "tab": "Systems/Institutions",
+  "kind": "c",
+  "sentence": "International merchants. Letters of credit accepted.",
+  "fact": "Major annual fairs card has no Impaired badge; under siege nothing comes in by road; transit_finance chain \"impaired\"",
+  "source": "src/data/institutionalCatalog.js:308",
+  "mechanism": "presumes normal times under a crisis in force"
+ },
+ {
+  "n": 2,
+  "severity": "MED",
+  "town": "bar0-metropolis-calm-rand-1",
+  "tab": "Systems/Institutions",
+  "kind": "e",
+  "sentence": "Hundreds of houses of worship across all districts.",
+  "fact": "institutions[] name \"Parish churches (50-100+)\": fifty to a hundred-odd, not hundreds",
+  "source": "src/data/institutionalCatalog.js:939",
+  "mechanism": "a count"
+ },
+ {
+  "n": 180,
+  "severity": "MED",
+  "town": "bar0-town-occupied-rand-1",
+  "tab": "Summary/Crisis",
+  "kind": "c|g",
+  "sentence": "The occupation's local collaborators include Ruixiang He, someone the players will recognise.",
+  "fact": "Ruixiang He is \"the occupying governor\" (npcs[].title), first of Occupation Authority, not a local who collaborates; locals who do collaborate exist (Ren Liu secret \"feeding information to the occupation authority\", Naoki Kimura \"helped legitimise the takeover\").",
+  "source": "src/data/stressTypes.js:51 + src/domain/crisis/crisisCast.js",
+  "mechanism": "a ruler, a power, a threat or a history state that is not so"
+ },
+ {
+  "n": 158,
+  "severity": "MED",
+  "town": "bar0-thorp-calm-rand-1",
+  "tab": "Summary/Plot Hooks",
+  "kind": "c",
+  "sentence": "A clause in the compact entitles certain families to first refusal on grain sales, and the current shortage makes that clause valuable",
+  "fact": "stress null (calm); foodSecurity.label \"Secure\", surplusPct 38, no shortage",
+  "source": "src/generators/historyGenerator.js:794",
+  "mechanism": "a ruler, a power, a threat or a history state that is not so"
+ }
+]

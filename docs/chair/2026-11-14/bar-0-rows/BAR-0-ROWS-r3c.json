@@ -1,0 +1,79 @@
+[
+ {
+  "n": 15,
+  "severity": "MED",
+  "town": "bar0-metropolis-calm-rand-1",
+  "tab": "Systems/Power",
+  "kind": "g|c",
+  "sentence": "It can no longer make its orders hold alone, though the hall still gives them.",
+  "fact": "factions Ducal Governorship power 30 powerLabel \"Strong\" vs Thieves' Guild 8 \"Suppressed\"; publicLegitimacy.governanceFractured false; same tab: \"Ducal Governorship (strong)\" and \"Thieves' Guild works against Ducal Governorship, and Ducal Governorship is winning.\"",
+  "source": "src/domain/display/governanceAccount.js:348",
+  "mechanism": "a ruler, a power, a threat or a history state that is not so"
+ },
+ {
+  "n": 80,
+  "severity": "MED",
+  "town": "bar0-city-under_siege+famine-rand-1",
+  "tab": "Systems/Economics",
+  "kind": "c|g",
+  "sentence": "The table rests on fish from the local waters.",
+  "fact": "river_fish depleted (config.nearbyResourcesDepleted); foodRecord.failedSource \"fish\"; Resources tab: \"Nobody at Agiospolis bothers with the river fisheries this year: there is nothing left worth taking\"",
+  "source": "src/domain/foodways.js:33",
+  "mechanism": "names a resource, a good or a chain state that is not so"
+ },
+ {
+  "n": 299,
+  "severity": "MED",
+  "town": "bar0-village-calm-rand-1",
+  "tab": "Systems/Power",
+  "kind": "g",
+  "sentence": "Elder Council keeps order and collects the taxes; Religious Authorities tells people that both are right and ordained. Each props up the other.",
+  "fact": "record conflicts[0]: Elder Council vs Religious Authorities, 'moderate' conflict over 'A ruling that one power refuses to obey' (Overview Tensions and Relationships 'Active Conflicts (1)'); also nobody keeps order: Defense 'Nobody at Tzulco is paid to keep order', Foundations 'Law & orderCritical'",
+  "source": "src/generators/factionDynamics.js:475",
+  "mechanism": "two homes that disagree"
+ },
+ {
+  "n": 240,
+  "severity": "MED",
+  "town": "bar0-town-calm-rand-1",
+  "tab": "Systems/Power",
+  "kind": "g",
+  "sentence": "Religious Authorities answers to Corrupt Council. Its priests look after their flocks and have no say in the hall.",
+  "fact": "same tab: 'Clergy and church institutions exercise meaningful civic influence through moral authority, land ownership, and popular trust... their support is worth buying'; World/Faith: 'A voice in the town’s affairs belongs to the Religious Authorities.'",
+  "source": "src/generators/factionDynamics.js:478",
+  "mechanism": "two homes that disagree"
+ },
+ {
+  "n": 162,
+  "severity": "MED",
+  "town": "bar0-thorp-calm-rand-1",
+  "tab": "Systems/Resources",
+  "kind": "a|c",
+  "sentence": "bread, beer, animal feed",
+  "fact": "printed with \"Complete production chain in place\"; institutions[] has no bakers, brewer or mill (only Access to external mill); resourceAnalysis.exploitation lists processingInstitutions \"Mill\",\"Bakers (5-15)\" the thorp lacks",
+  "source": "src/generators/resourceGenerator.js:423",
+  "mechanism": "names a resource, a good or a chain state that is not so"
+ },
+ {
+  "n": 163,
+  "severity": "MED",
+  "town": "bar0-thorp-calm-rand-1",
+  "tab": "Systems/Resources",
+  "kind": "a|c",
+  "sentence": "Complete production chain in place",
+  "fact": "grain is milled a day away (Access to external mill); no bakers or brewer in institutions[]",
+  "source": "src/generators/resourceGenerator.js:423",
+  "mechanism": "names a resource, a good or a chain state that is not so"
+ },
+ {
+  "n": 277,
+  "severity": "MED",
+  "town": "bar0-village-famine-rand-1",
+  "tab": "Systems/Resources",
+  "kind": "c,g",
+  "sentence": "Complete production chain in place",
+  "fact": "Export Potential 'bread, beer, animal feed' marked complete while Economics shows 'Grain & Bread ... Impaired' (famine, foodRecord.failedSource:'grain'); grain chain lists 'Bakers (5-15)' as processor and the town has only a Mill, no bakers, no brewer",
+  "source": "src/generators/resourceGenerator.js:423",
+  "mechanism": "names a resource, a good or a chain state that is not so"
+ }
+]

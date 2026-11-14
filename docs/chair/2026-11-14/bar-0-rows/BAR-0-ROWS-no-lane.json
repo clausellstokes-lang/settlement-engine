@@ -1,0 +1,35 @@
+[
+ {
+  "n": 83,
+  "severity": "MED",
+  "town": "bar0-city-under_siege+famine-rand-1",
+  "tab": "Systems/Economics",
+  "kind": "c",
+  "sentence": "Grain exportAgricultural produceSurplus food",
+  "fact": "Floodplain Agriculture chain \"impaired\", fertile_floodplain depleted; foodRecord.band \"famine\", surplusPct 0; printed as the card's yield without the \"Normally yields\" label",
+  "source": "src/data/supplyChainData.js:461",
+  "mechanism": "names a resource, a good or a chain state that is not so"
+ },
+ {
+  "n": 194,
+  "severity": "MED",
+  "town": "bar0-town-occupied-rand-1",
+  "tab": "Systems/Economics",
+  "kind": "a",
+  "sentence": "Smuggling Network Revenue Smuggling, contraband and protection rackets bring money in here, but it goes to the criminals who run them and the treasury sees none of it.",
+  "fact": "economicState.compound.inst.hasSmuggling false, hasBlackMarket false; criminal roster is Front businesses + Street gang only.",
+  "source": "src/domain/worldPulse/treasury.js:400 (label)",
+  "mechanism": "names a house, a role or a force the town lacks"
+ },
+ {
+  "n": 274,
+  "severity": "MED",
+  "town": "bar0-village-famine-rand-1",
+  "tab": "Systems/Economics",
+  "kind": "a",
+  "sentence": "Entrepôt Trade Transit duties, warehouse fees, and re-export premiums from goods passing through the crossroads.",
+  "fact": "economicState.compound.inst.hasWarehouse:false; no warehouse in institutions[]",
+  "source": "src/generators/economy/tradeGoods.js:143",
+  "mechanism": "names a house, a role or a force the town lacks"
+ }
+]
