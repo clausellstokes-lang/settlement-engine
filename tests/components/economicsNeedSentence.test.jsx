@@ -8,7 +8,7 @@
  */
 import React from 'react';
 import { afterEach, beforeAll, describe, expect, test, vi } from 'vitest';
-import { cleanup, render } from '@testing-library/react';
+import { cleanup, fireEvent, render } from '@testing-library/react';
 
 vi.mock('../../src/store/index.js', () => {
   const data = { campaigns: [] };
@@ -24,6 +24,7 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { liveInstitutionNames } from '../../src/domain/facts/institutions.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 /** The app's own shape (the readers' cfgFor). @param {string} seed */
 const birthApp = (seed) => {
@@ -33,9 +34,10 @@ const birthApp = (seed) => {
   return generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...route, settType: m[1], selectedStressesRandom: false, selectedStresses: stresses,
     _randomizePriorities: true }), null, { seed, customContent: {} });
 };
-/** @param {any} town @returns {string} the tab's text with every flow card shown */
+/** @param {any} town @returns {string} the tab's text, the Economic Flows section opened */
 const tabText = (town) => {
   const { container, unmount } = render(<EconomicsTab settlement={town} narrativeNote={null} />);
+  for (const e of [...container.querySelectorAll('[aria-expanded="false"]')]) if (/Economic Flows/.test(e.textContent || '')) fireEvent.click(e);
   const t = container.textContent || '';
   unmount();
   return t;
@@ -54,9 +56,7 @@ describe('a chain card states its need in one sentence (item 6)', () => {
     expect(garrison?.dependency?.resource, 'anchored: the record\'s need').toBe('Iron + fuel');
     expect(liveInstitutionNames(town), 'anchored: the watch stands').toContain(garrison.dependency.institution);
     const t = tabText(town);
-    expect(t).not.toContain('· affects:');
-    expect(t).not.toContain('Needs Iron + fuel');
-    expect(t).not.toContain('Needs Timber');
+    for (const gone of ['· affects:', 'Needs Iron + fuel', 'Needs Timber']) expectAbsentWithAnchor(t, gone, ' here depend on ', 'the need box prints its sentence');
     expect(t).toContain('Law enforcement, patrol and investigation here depend on iron brought in');
     expect(t).toContain('Construction, furniture and barrel making here depend on timber brought in');
     expect(t.split(', which a siege, a closed road or a blockade would cut off').length - 1, 'the shared clause once (X-50)').toBe(1);
@@ -66,9 +66,9 @@ describe('a chain card states its need in one sentence (item 6)', () => {
     const town = birthApp('rr2s-city-under_siege+famine-rand-1');
     expect(chainOf(town, 'garrison')?.dependency?.resource, 'anchored').toBe('Iron + fuel');
     const t = tabText(town);
-    expect(t).not.toContain('· affects:');
+    expectAbsentWithAnchor(t, '· affects:', 'which the siege has cut off', 'the need box under a siege');
     expect(t).toContain('Law enforcement, patrol and investigation here depend on iron and fuel from outside, which the siege has cut off.');
-    expect(t).not.toContain('brought in, which a siege');
+    expectAbsentWithAnchor(t, 'brought in, which a siege', 'which the siege has cut off', 'no present "brought in" under a siege');
   }, 60000);
 
   test('another trade\'s house\'s need is not printed on the card (#1152, rr2s-metropolis-calm-rand-1), and a need that is no good brought in prints nothing (the guard: a mages\' ley line)', () => {
@@ -76,11 +76,10 @@ describe('a chain card states its need in one sentence (item 6)', () => {
     const bow = chainOf(town, 'bowyer_fletcher');
     expect(bow?.dependency?.institution, 'anchored: the generator joined the craft guilds\' need onto the bowyer').toBe('Craft guilds (100-150+)');
     const t = tabText(town);
-    expect(t).not.toMatch(/luxury goods, specialist commission and fine jewellery/i);
-    expect(t).not.toContain('Metal ore + gems');
+    for (const gone of ['Luxury goods, specialist commission and fine jewellery', 'Metal ore + gems']) expectAbsentWithAnchor(t, gone, ' here depend on ', 'another trade\'s need');
     expect(t, 'the guard: a need of the card\'s own house still prints').toContain('Meals, ale and lodging here depend on grain brought in');
     const siege = birthApp('rr2s-city-under_siege+famine-rand-1');
     expect(chainOf(siege, 'spellcasting')?.dependency?.resource, 'anchored').toBe('Magical ley lines');
-    expect(tabText(siege)).not.toMatch(/spellcasting, arcane training and magical licensing/i);
+    expectAbsentWithAnchor(tabText(siege), 'Spellcasting, arcane training and magical licensing', 'which the siege has cut off', 'a need no good brought in');
   }, 90000);
 });
