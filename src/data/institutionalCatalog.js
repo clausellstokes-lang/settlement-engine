@@ -157,7 +157,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
     {
       shared: { name: "Fisher's landing", face: 'the boat-headman', tradeRouteRequired: ['port', 'river'], terrainAccess: ['coastal', 'riverside'], desc: 'A rough landing with racks for drying and salting fish. Primary protein source near water.', tags: ['trade'], priorityCategory: 'economy' },
       at: {
-        thorp: { name: 'Fishing community', baseChance: 0.72, desc: "Nets, traps, and drying racks. The settlement's economy is inseparable from the water.", tags: ['food', 'water', 'economy'] },
+        thorp: { name: 'Fishing community', baseChance: 0.72, desc: "Nets, traps, and drying racks, kept by the households that fish the water.", tags: ['food', 'water', 'economy'] },
         hamlet: { baseChance: 0.55 },
         village: { baseChance: 0.55 },
       },
@@ -213,7 +213,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       ceiling: { tier: 'village', reason: 'Fowling is a marsh and field trade; towns buy the birds at market.' },
     },
     {
-      shared: { name: "Woodcutter's camp", face: 'the camp foreman', terrainRequired: ['forest'], desc: 'Felling crews and a stacking yard at the forest edge. The settlement lives on timber, charcoal wood, and the carting of both.', tags: ['economy', 'timber'], priorityCategory: 'economy' },
+      shared: { name: "Woodcutter's camp", face: 'the camp foreman', terrainRequired: ['forest'], desc: 'Felling crews and a stacking yard at the forest edge, cutting timber and charcoal wood and carting both.', tags: ['economy', 'timber'], priorityCategory: 'economy' },
       at: {
         thorp: { baseChance: 0.55, desc: 'Seasonal felling and timber stacking. The whole settlement smells of fresh sawdust and pine resin.' },
         hamlet: { baseChance: 0.45 },

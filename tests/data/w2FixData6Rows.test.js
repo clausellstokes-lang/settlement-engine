@@ -115,4 +115,14 @@ describe('W2-FIX-DATA-8: the census writers in the data lane\'s files (the eight
       expect(desc, seed).toMatch(/fever/);
     }), 'no alchemist: none is named');
   }, 240_000);
+
+  test('the chair\'s added row for row 4 (23:48; ww-924): a house of work says its trade is the whole of the living only where nothing else is; in r2r-thorp-0, r2r-thorp-30, r2r-thorp-50, r2r-hamlet-4 and r2r-village-8 the rents carry most of the income, and no description says otherwise', () => {
+    expectNoSeedFailures(collectSeedFailures(['r2r-thorp-0', 'r2r-thorp-30', 'r2r-thorp-50', 'r2r-hamlet-4', 'r2r-village-8'], (seed) => {
+      const town = bornCensus(seed);
+      const top = [...(town.economicState.incomeSources || [])].sort((/** @type {any} */ a, /** @type {any} */ b) => b.percentage - a.percentage)[0];
+      expect(top.source, seed).toBe('Agricultural Rents');
+      const said = (town.institutions || []).map((/** @type {any} */ i) => String(i.desc)).filter((/** @type {string} */ d) => /inseparable from the water|lives by the water|whole of the economy|lives on timber|what the hamlet lives on/.test(d));
+      expect(said, seed).toEqual([]);
+    }), 'another line carries the income: no trade is the whole of it');
+  }, 240_000);
 });

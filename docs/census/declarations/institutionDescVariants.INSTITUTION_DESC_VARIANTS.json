@@ -115,7 +115,7 @@
     },
     {
       "id": "thorp|Economy|Fishing community#0",
-      "text": "Nets, traps, and racks for drying. The thorp lives by the water and cannot be parted from it.",
+      "text": "Nets, traps, and racks for drying. Whoever fishes the water here keeps them.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -123,7 +123,7 @@
     },
     {
       "id": "thorp|Economy|Fishing community#1",
-      "text": "Its livelihood is the water itself. The nets, the traps, the drying racks are the whole of the economy.",
+      "text": "The nets, the traps, the drying racks: what the water gives, the fishing households take.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -431,7 +431,7 @@
     },
     {
       "id": "hamlet|Economy|Fisher's landing#1",
-      "text": "A rough jetty and its salting-and-drying racks. Where there is water, the fish are what the hamlet lives on.",
+      "text": "A rough jetty and its salting-and-drying racks, where the hamlet's catch is landed and cured.",
       "needs": [
         "tier: ≤ hamlet"
       ],

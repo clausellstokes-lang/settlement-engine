@@ -35,8 +35,8 @@ const PAIRS = [
     "Grain, roots, and preserves kept in a common underground store. The settlement's guard against a bad year.",
   ],
   [
-    "Nets, traps, and racks for drying. The thorp lives by the water and cannot be parted from it.",
-    "Its livelihood is the water itself. The nets, the traps, the drying racks are the whole of the economy.",
+    "Nets, traps, and racks for drying. Whoever fishes the water here keeps them.",
+    "The nets, the traps, the drying racks: what the water gives, the fishing households take.",
   ],
   [
     "The flock is held and worked in common, and the thorp keeps time by the grazing calendar.",
@@ -112,7 +112,7 @@ const PAIRS = [
   ],
   [
     "A crude landing hung with racks for drying and salting the catch. Near water, it is the chief source of protein.",
-    "A rough jetty and its salting-and-drying racks. Where there is water, the fish are what the hamlet lives on.",
+    "A rough jetty and its salting-and-drying racks, where the hamlet's catch is landed and cured.",
   ],
   [
     "Keeps flocks of sheep for wool and mutton, driving them by season between the low winter pastures and the high summer grazing. He is a mainstay of the cloth trade.",
@@ -2126,7 +2126,7 @@ export const DESC_VARIANT_SIBLINGS = Object.freeze({
  * GATE, which the cascade can add after the description draw (4 of 1,525 measured births).
  */
 export const DESC_VARIANT_DECLARATIONS = Object.freeze({
-  "A rough jetty and its salting-and-drying racks. Where there is water, the fish are what the hamlet lives on.": Object.freeze({ needs: Object.freeze(["tier: ≤ hamlet"]) }), // hamlet|Economy|Fisher's landing#1
+  "A rough jetty and its salting-and-drying racks, where the hamlet's catch is landed and cured.": Object.freeze({ needs: Object.freeze(["tier: ≤ hamlet"]) }), // hamlet|Economy|Fisher's landing#1
   "Tends kilns out in the nearby woods, supplying the fuel that smiths and bakers burn. The necessary link between forest and forge.": Object.freeze({ needs: Object.freeze(["terrain: forest"]) }), // W2-FIX-DATA (REVIEW-W2B cold list)
   "Works his kilns in the woodland close by, turning timber into the fuel for forge and oven. Without him nothing gets from the trees to the fire.": Object.freeze({ needs: Object.freeze(["terrain: forest"]) }), // W2-FIX-DATA (REVIEW-W2B cold list)
   "A plain hall held under a regional adventurers' charter. It posts bounties, houses monster hunters, and takes up the local defence no garrison is here to keep. You find them along dangerous frontiers.": Object.freeze({ excludes: Object.freeze(["garrison"]) }), // hamlet|Adventuring|Adventurers' charter hall#0
