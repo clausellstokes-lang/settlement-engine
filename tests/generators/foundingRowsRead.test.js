@@ -51,32 +51,38 @@ describe('the founding rows read the record', () => {
     for (const row of Object.keys(FOUNDER_ADMITS)) expect(src.includes(`'${row}'`), row).toBe(true);
   });
 
-  it.each([
-    ['rr2s-town-under_siege-rand-1', /the local soil produces something/], // #488: no crop of its own
-    ['rr2s-town-plague_onset-rand-1', /salt deposit/], // #594: no salt near
-    ['rr2s-village-famine-rand-29', /sacred grove/], // #845: no grove near (re-keyed by identity, R2-CODE-A-9: after the line's merge rr2s-city-famine-rand-1 holds an ancient grove, so the row is true there; this famine birth draws the row with none near)
-    ['rww-thorp-plague_onset-1', /mill rights/], // ww-890: no mill of its own
-    ['rww-hamlet-mass_migration-1', /riverside mill settlement/], // ww-915: no mill of its own
-  ])('A2: %s — the false Origin row is gone and the row in its place is admitted', (seed, gone) => {
-    const s = born(seed);
-    expect(s.history.founding.reason).not.toMatch(gone);
-    const test = FOUNDING_REASON_ADMITS[s.history.founding.reason];
-    expect(!test || test(stateOf(s))).toBe(true);
+  it('A2: the false Origin row is gone and the row in its place is admitted (every row)', () => {
+    for (const [seed, gone] of [
+      ['rr2s-town-under_siege-rand-1', /the local soil produces something/], // #488: no crop of its own
+      ['rr2s-town-plague_onset-rand-1', /salt deposit/], // #594: no salt near
+      ['rr2s-village-famine-rand-29', /sacred grove/], // #845: no grove near (re-keyed by identity, R2-CODE-A-9: after the line's merge rr2s-city-famine-rand-1 holds an ancient grove, so the row is true there; this famine birth draws the row with none near)
+      ['rww-thorp-plague_onset-1', /mill rights/], // ww-890: no mill of its own
+      ['rww-hamlet-mass_migration-1', /riverside mill settlement/], // ww-915: no mill of its own
+    ]) {
+      const s = born(seed);
+      expect(s.history.founding.reason, `${seed}: the false Origin row is gone`).not.toMatch(gone);
+      const test = FOUNDING_REASON_ADMITS[s.history.founding.reason];
+      expect(!test || test(stateOf(s)), `${seed}: the row in its place is admitted`).toBe(true);
+    }
   });
 
-  it.each(['rww-hamlet-famine-1', 'rww-hamlet-succession_void-1', 'rww-hamlet-mass_migration-1'])('A2: %s — the founder is no miller who found customers', (seed) => {
-    expect(born(seed).history.founding.foundedBy).toBe('a household that settled first and found others following it in');
+  it('A2: the founder is no miller who found customers (every row)', () => {
+    for (const seed of ['rww-hamlet-famine-1', 'rww-hamlet-succession_void-1', 'rww-hamlet-mass_migration-1']) {
+      expect(born(seed).history.founding.foundedBy, `${seed}: the founder is no miller who found customers`).toBe('a household that settled first and found others following it in');
+    }
   });
 
-  it.each([
-    // guard towns: the record makes the row false, so it does not print
-    ['r2r-thorp-59', /coastal trading port/], // a river route on the coast: not a port by its route
-    ['r2r-hamlet-4', /maritime hub/], // a port hamlet: no hub
-    ['r2r-thorp-8', /agricultural market center/], // a thorp with no market
-    ['r2r-thorp-29', /logging operation/], // sacred wood sold, no timber near
-    ['r2r-hamlet-6', /riverside mill settlement/], // no mill of its own
-  ])('A3: guard town %s — the row does not print', (seed, gone) => {
-    expect(born(seed).history.founding.reason).not.toMatch(gone);
+  it('A3: guard town — the row does not print (every row)', () => {
+    for (const [seed, gone] of [
+      // guard towns: the record makes the row false, so it does not print
+      ['r2r-thorp-59', /coastal trading port/], // a river route on the coast: not a port by its route
+      ['r2r-hamlet-4', /maritime hub/], // a port hamlet: no hub
+      ['r2r-thorp-8', /agricultural market center/], // a thorp with no market
+      ['r2r-thorp-29', /logging operation/], // sacred wood sold, no timber near
+      ['r2r-hamlet-6', /riverside mill settlement/], // no mill of its own
+    ]) {
+      expect(born(seed).history.founding.reason, `${seed}: the row does not print`).not.toMatch(gone);
+    }
   });
 
   it('A3: the refused rows still print where the record makes them true (a port city: the trading port row is admitted)', () => {
@@ -106,15 +112,17 @@ describe('the founding rows read the record', () => {
     expect(new Set(rows.filter((r) => SHAPE.test(r)))).toEqual(new Set(NAMES_A_FOUNDER));
   });
 
-  it.each([
-    'r2r-thorp-22', 'r2r-thorp-59', 'r2r-hamlet-53', 'r2r-village-21', 'r2r-village-51', 'r2r-town-3',
-    'r2s-insurgency-city-0', 'r2s-religious_conversion-village-2',
-  ])('A5: %s — a refused coastal row resolves onto no second founder', (seed) => {
-    const plan = /^r2s-(\w+)-(\w+)-\d+$/.exec(seed);
-    const s = plan
-      ? /** @type {any} */ (generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...CENSUS_DIALS, settType: plan[2], selectedStresses: [plan[1]], selectedStressesRandom: false }), null, { seed, customContent: {} }))
-      : born(seed);
-    expect(NAMES_A_FOUNDER.has(String(s.history.founding.reason))).toBe(false);
+  it('A5: a refused coastal row resolves onto no second founder (every row)', () => {
+    for (const seed of [
+      'r2r-thorp-22', 'r2r-thorp-59', 'r2r-hamlet-53', 'r2r-village-21', 'r2r-village-51', 'r2r-town-3',
+      'r2s-insurgency-city-0', 'r2s-religious_conversion-village-2',
+    ]) {
+      const plan = /^r2s-(\w+)-(\w+)-\d+$/.exec(seed);
+      const s = plan
+        ? /** @type {any} */ (generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...CENSUS_DIALS, settType: plan[2], selectedStresses: [plan[1]], selectedStressesRandom: false }), null, { seed, customContent: {} }))
+        : born(seed);
+      expect(NAMES_A_FOUNDER.has(String(s.history.founding.reason)), `${seed}: a refused coastal row resolves onto no second founder`).toBe(false);
+    }
   });
 
   it('A5: the resolution passes over a founder row, keeps one drawn, and falls silent where only such rows are admitted', () => {

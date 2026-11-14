@@ -26,9 +26,11 @@ describe('the crisis vignettes carry their size', () => {
     expect(STRESS_DESCS.slave_revolt.filter((r) => /manacle/.test(String(typeof r === 'function' ? r('X') : r.text('X'))))).toEqual([]);
   });
   beforeAll(async () => { await loadGenerationLawPayloads(); });
-  it.each([['r2s-religious_conversion-thorp-1', 'religious_conversion', 'thorp'], ['r2s-slave_revolt-hamlet-3', 'slave_revolt', 'hamlet']])('%s: no quarters, streets or districts in a small place', (seed, crisis, settType) => {
-    const s = /** @type {any} */ (generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...DIALS, selectedStresses: [crisis], settType }), null, { seed, customContent: {} }));
-    expect(typeof s.arrivalScene).toBe('string');
-    expect(/\bquarters?\b|\bdistricts?\b|\bstreets\b/.test(s.arrivalScene), s.arrivalScene).toBe(false);
+  it('no quarters, streets or districts in a small place (every row)', () => {
+    for (const [seed, crisis, settType] of [['r2s-religious_conversion-thorp-1', 'religious_conversion', 'thorp'], ['r2s-slave_revolt-hamlet-3', 'slave_revolt', 'hamlet']]) {
+      const s = /** @type {any} */ (generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...DIALS, selectedStresses: [crisis], settType }), null, { seed, customContent: {} }));
+      expect(typeof s.arrivalScene, `${seed}: an arrival scene`).toBe('string');
+      expect(/\bquarters?\b|\bdistricts?\b|\bstreets\b/.test(s.arrivalScene), `${seed}: ${s.arrivalScene}`).toBe(false);
+    }
   });
 });

@@ -34,8 +34,10 @@ describe("the reader's towns, born as the app births them", () => {
     expect((s.institutions || []).some((/** @type {any} */ i) => /baker/i.test(i.name))).toBe(false);
     expect(s.pressureSentence).not.toMatch(/bakers/);
   });
-  it.each([['rww-metropolis-under_siege-1', 'Yellow Corn Coh'], ['rww-village-under_siege-1', 'Khadija al-Aziz']])('%s: the siege line names no card', (seed, name) => {
-    const s = born(seed);
-    expect(s.pressureSentence).not.toContain(name);
+  it('the siege line names no card (every row)', () => {
+    for (const [seed, name] of [['rww-metropolis-under_siege-1', 'Yellow Corn Coh'], ['rww-village-under_siege-1', 'Khadija al-Aziz']]) {
+      const s = born(seed);
+      expect(s.pressureSentence, `${seed}: the siege line names no card`).not.toContain(name);
+    }
   });
 });

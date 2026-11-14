@@ -72,16 +72,18 @@ describe('the cold list\'s towns, born as the app births them', () => {
     String(s.pressureSentence || ''),
     ...(s.npcs || []).flatMap((/** @type {any} */ n) => [n?.goal?.short, n?.goal?.text, n?.secret?.what].map((t) => String(t || ''))),
   ];
-  it.each([
-    ['rw3-metropolis-under_siege-1'], // "its days of legal", "Secure enough legal reserves", "skimming from the legal reserves"
-    ['rw3-city-famine-1'], // "the remaining reeds reserves", "a hidden cache of reeds reserves", "receiving reeds shipments"
-    ['rw3-town-under_siege-1'], // "its days of crafts", "crafts reserves"
-    ['rw3-town-under_siege+famine-1'], // "meals reserves", "meals shipments"
-  ])('%s: every food slot says what the town eats and stores', (seed) => {
-    const s = /** @type {any} */ (born(seed));
-    const own = foodStoreWord(s.economicState?.foodSecurity?.foodRecord);
-    const words = printed(s).flatMap(foodWordsIn);
-    expect(words.length).toBeGreaterThan(0);
-    for (const w of words) expect([own, 'food']).toContain(w);
+  it('every food slot says what the town eats and stores (every row)', () => {
+    for (const [seed] of [
+      ['rw3-metropolis-under_siege-1'], // "its days of legal", "Secure enough legal reserves", "skimming from the legal reserves"
+      ['rw3-city-famine-1'], // "the remaining reeds reserves", "a hidden cache of reeds reserves", "receiving reeds shipments"
+      ['rw3-town-under_siege-1'], // "its days of crafts", "crafts reserves"
+      ['rw3-town-under_siege+famine-1'], // "meals reserves", "meals shipments"
+    ]) {
+      const s = /** @type {any} */ (born(seed));
+      const own = foodStoreWord(s.economicState?.foodSecurity?.foodRecord);
+      const words = printed(s).flatMap(foodWordsIn);
+      expect(words.length, `${seed}: a food slot prints`).toBeGreaterThan(0);
+      for (const w of words) expect([own, 'food'], `${seed}: ${w}`).toContain(w);
+    }
   });
 });

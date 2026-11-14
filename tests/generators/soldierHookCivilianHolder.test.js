@@ -38,12 +38,14 @@ describe('the military lines that are true of any holder', () => {
 
 describe('the cold list\'s crisis towns, born as the app births them', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
-  it.each([['rw3-city-wartime-1'], ['rw3-town-under_siege-1']])('%s: no holder outside the military carries a soldier\'s hook', (seed) => {
-    const s = born(seed);
-    const civil = (s.npcs || []).filter((/** @type {any} */ n) => n.category !== 'military');
-    const false_ = civil.flatMap((/** @type {any} */ n) => (n.plotHooks || []).filter((/** @type {string} */ h) => COMMAND.has(h)).map((/** @type {string} */ h) => `${n.role}: ${h}`));
-    expect(false_).toEqual([]);
-    for (const n of civil) expect((n.plotHooks || []).length, `${n.role} keeps its one hook`).toBe(1);
+  it('no holder outside the military carries a soldier\'s hook (every row)', () => {
+    for (const [seed] of [['rw3-city-wartime-1'], ['rw3-town-under_siege-1']]) {
+      const s = born(seed);
+      const civil = (s.npcs || []).filter((/** @type {any} */ n) => n.category !== 'military');
+      const false_ = civil.flatMap((/** @type {any} */ n) => (n.plotHooks || []).filter((/** @type {string} */ h) => COMMAND.has(h)).map((/** @type {string} */ h) => `${n.role}: ${h}`));
+      expect(false_, `${seed}: no holder outside the military carries a soldier's hook`).toEqual([]);
+      for (const n of civil) expect((n.plotHooks || []).length, `${seed}: ${n.role} keeps its one hook`).toBe(1);
+    }
   });
   it('rw3-city-wartime-1: the military holders keep their soldier\'s hooks', () => {
     const s = born('rw3-city-wartime-1');

@@ -26,12 +26,14 @@ describe('the stable lines that name a major event read how many there are', () 
     expect(LINES[1](ONE)).toBe('The Crash aside, the history here is long and steady, and travellers remember the place kindly');
     expect(LINES[2](ONE)).toBe('The Crash is the one event people here still date things by; the rest of its history is quieter');
   });
-  it.each([['two', TWO], ['three', THREE]])('%s major events: no line names one and denies the rest; each names the first two', (_n, events) => {
-    for (const line of LINES.slice(0, 2)) {
-      const t = line(events);
-      expect(t).not.toMatch(DENIES);
-      expect(t).toMatch(/Crash/);
-      expect(t).toMatch(/Siege/);
+  it('major events: no line names one and denies the rest; each names the first two (every row)', () => {
+    for (const [_n, events] of [['two', TWO], ['three', THREE]]) {
+      for (const line of LINES.slice(0, 2)) {
+        const t = line(events);
+        expect(t, `${_n} major events: no line names one and denies the rest`).not.toMatch(DENIES);
+        expect(t, `${_n} major events: names the Crash`).toMatch(/Crash/);
+        expect(t, `${_n} major events: names the Siege`).toMatch(/Siege/);
+      }
     }
   });
   it('two major events and nothing else: the dating line names both and claims no quieter rest', () => {

@@ -40,17 +40,21 @@ describe('the clerk line needs a place large enough to keep an office', () => {
     expect(gov.find((l) => DISTRICT.test(l?.text ?? l))?.needs).toContain('population: ≥ middling');
   });
   beforeAll(async () => { await loadGenerationLawPayloads(); });
-  it.each([['rw3-thorp-calm-1'], ['r2r-hamlet-34'], ['r2s-recently_betrayed-hamlet-2'], ['r2s-slave_revolt-thorp-0'], ['r2r-hamlet-45'], ['r2r-thorp-17'], ['r2s-insurgency-thorp-3']])('%s: no one in a thorp or a hamlet has an office with staff, and each keeps one hook', (seed) => {
-    const s = born(seed);
-    expect(['thorp', 'hamlet']).toContain(s.tier);
-    for (const n of s.npcs) {
-      expect((n.plotHooks || []).some((/** @type {string} */ h) => CLERK.test(h) || ADVISOR.test(h) || DISTRICT.test(h)), `${n.role}`).toBe(false);
-      expect((n.plotHooks || []).length).toBe(1);
+  it('no one in a thorp or a hamlet has an office with staff, and each keeps one hook (every row)', () => {
+    for (const [seed] of [['rw3-thorp-calm-1'], ['r2r-hamlet-34'], ['r2s-recently_betrayed-hamlet-2'], ['r2s-slave_revolt-thorp-0'], ['r2r-hamlet-45'], ['r2r-thorp-17'], ['r2s-insurgency-thorp-3']]) {
+      const s = born(seed);
+      expect(['thorp', 'hamlet'], `${seed}: a thorp or a hamlet`).toContain(s.tier);
+      for (const n of s.npcs) {
+        expect((n.plotHooks || []).some((/** @type {string} */ h) => CLERK.test(h) || ADVISOR.test(h) || DISTRICT.test(h)), `${seed}: ${n.role}`).toBe(false);
+        expect((n.plotHooks || []).length, `${seed}: ${n.role} keeps one hook`).toBe(1);
+      }
     }
   });
-  it.each([['r2r-village-53'], ['r2r-village-59']])('%s: a village below the middling band buys up no property in a district', (seed) => {
-    const s = born(seed);
-    expect(s.tier).toBe('village');
-    for (const n of s.npcs) expect((n.plotHooks || []).some((/** @type {string} */ h) => DISTRICT.test(h)), `${n.role}`).toBe(false);
+  it('a village below the middling band buys up no property in a district (every row)', () => {
+    for (const [seed] of [['r2r-village-53'], ['r2r-village-59']]) {
+      const s = born(seed);
+      expect(s.tier, `${seed}: a village`).toBe('village');
+      for (const n of s.npcs) expect((n.plotHooks || []).some((/** @type {string} */ h) => DISTRICT.test(h)), `${seed}: ${n.role}`).toBe(false);
+    }
   });
 });

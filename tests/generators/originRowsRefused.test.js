@@ -48,14 +48,16 @@ describe("the readers' towns, born as the app births them", () => {
     const m = /** @type {RegExpMatchArray} */ (seed.match(/^(?:rww|rr2s)-(\w+)-([a-z_+]+)-(?:rand-)?\d+$/));
     return /** @type {any} */ (generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: m[1], selectedStressesRandom: false, selectedStresses: m[2] === 'calm' ? [] : m[2].split('+'), _randomizePriorities: true }), null, { seed, customContent: {} }));
   };
-  it.each([
-    ['rww-village-under_siege-1', ORIGIN_POOLS.road[0]],
-    ['rr2s-hamlet-under_siege-rand-1', ORIGIN_POOLS.road[3]],
-  ])('%s: the refused row does not print', (seed, refused) => {
-    const s = born(seed);
-    expect(s.config.stressTypes).toContain('under_siege');
-    expect(ORIGIN_POOLS.road).toContain(s.settlementReason[0]);
-    // anchored: the line above proves the founding line is a live row of the same road pool
-    expect(s.settlementReason).not.toContain(refused);
+  it('the refused row does not print (every row)', () => {
+    for (const [seed, refused] of [
+      ['rww-village-under_siege-1', ORIGIN_POOLS.road[0]],
+      ['rr2s-hamlet-under_siege-rand-1', ORIGIN_POOLS.road[3]],
+    ]) {
+      const s = born(seed);
+      expect(s.config.stressTypes, `${seed}: under siege`).toContain('under_siege');
+      expect(ORIGIN_POOLS.road, `${seed}: the founding line is a road row`).toContain(s.settlementReason[0]);
+      // anchored: the line above proves the founding line is a live row of the same road pool
+      expect(s.settlementReason, `${seed}: the refused row does not print`).not.toContain(refused);
+    }
   });
 });

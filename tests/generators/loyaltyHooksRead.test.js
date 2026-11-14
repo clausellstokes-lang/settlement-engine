@@ -19,8 +19,10 @@ const rowOf = (pool, text) => /** @type {any[]} */ (/** @type {any} */ (NPC_FACT
 const MERCHANT = /^A merchant they spoke against /, CRAFTSMAN = /^Their master craftsman is talking/, FEES = /^Someone is collecting fees in their name/, POST = /^They promised the same post to two people/, AUDITOR = /an auditor is coming to read it\.$/;
 
 describe('A1 the rows declare what they name', () => {
-  it.each([['government', MERCHANT, ['market']], ['economy', CRAFTSMAN, ['tier: ≥ village']], ['government', FEES, ['tier: ≥ village']], ['government', POST, ['tier: ≥ village']], ['government', AUDITOR, ['tier: ≥ village']]])('%s %s needs %j', (pool, text, needs) => {
-    expect(rowOf(pool, text)?.needs).toEqual(needs);
+  it('each row needs what it names (every row)', () => {
+    for (const [pool, text, needs] of [['government', MERCHANT, ['market']], ['economy', CRAFTSMAN, ['tier: ≥ village']], ['government', FEES, ['tier: ≥ village']], ['government', POST, ['tier: ≥ village']], ['government', AUDITOR, ['tier: ≥ village']]]) {
+      expect(rowOf(pool, text)?.needs, `${pool} ${text} needs ${JSON.stringify(needs)}`).toEqual(needs);
+    }
   });
 });
 
@@ -35,12 +37,14 @@ describe('A2 the towns, born in the census shape', () => {
   };
   /** @param {any} s */
   const hooks = (s) => (s.npcs || []).flatMap((/** @type {any} */ n) => n.plotHooks || []).map((/** @type {any} */ h) => (typeof h === 'string' ? h : h.text));
-  it.each([
-    ['r2r-thorp-17', MERCHANT], ['r2r-thorp-1', MERCHANT],
-    ['r2s-succession_void-thorp-1', CRAFTSMAN],
-    ['r2r-thorp-20', FEES], ['r2s-infiltrated-thorp-3', POST], ['r2r-thorp-28', AUDITOR],
-  ])('guard town %s: the hook does not print', (seed, text) => {
-    expect(hooks(born(seed)).some((h) => text.test(h))).toBe(false);
+  it('guard town: the hook does not print (every row)', () => {
+    for (const [seed, text] of [
+      ['r2r-thorp-17', MERCHANT], ['r2r-thorp-1', MERCHANT],
+      ['r2s-succession_void-thorp-1', CRAFTSMAN],
+      ['r2r-thorp-20', FEES], ['r2s-infiltrated-thorp-3', POST], ['r2r-thorp-28', AUDITOR],
+    ]) {
+      expect(hooks(born(seed)).some((h) => text.test(h)), `${seed}: the hook does not print`).toBe(false);
+    }
   });
   it('a town with a market keeps the merchant hook (r2r-town-1)', () => {
     expect(hooks(born('r2r-town-1')).some((h) => MERCHANT.test(h))).toBe(true);

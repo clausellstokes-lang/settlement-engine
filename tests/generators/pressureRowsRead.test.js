@@ -59,23 +59,27 @@ describe('A2 the census towns, born in the census shape', () => {
   const dials = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
   /** @param {string} seed */
   const born = (seed) => { const m = /** @type {RegExpMatchArray} */ (seed.match(/^r2s-(\w+)-(thorp|hamlet|village|town|city|metropolis)-\d+$/)); return /** @type {any} */ (generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...dials, selectedStresses: [m[1]], selectedStressesRandom: false, settType: m[2] }), null, { seed, customContent: {} })); };
-  it.each([
-    ['r2s-wartime-thorp-3', /a workshop/],
-    ['r2s-succession_void-thorp-2', /merchants/],
-    ['r2s-insurgency-thorp-0', /streets/],
-    ['r2s-slave_revolt-hamlet-3', /districts/],
-    ['r2s-religious_conversion-town-2', /courts/],
-  ])('guard town %s: the line does not say what the town lacks', (seed, words) => {
-    expect(born(seed).pressureSentence).not.toMatch(words);
+  it('guard town: the line does not say what the town lacks (every row)', () => {
+    for (const [seed, words] of [
+      ['r2s-wartime-thorp-3', /a workshop/],
+      ['r2s-succession_void-thorp-2', /merchants/],
+      ['r2s-insurgency-thorp-0', /streets/],
+      ['r2s-slave_revolt-hamlet-3', /districts/],
+      ['r2s-religious_conversion-town-2', /courts/],
+    ]) {
+      expect(born(seed).pressureSentence, `${seed}: the line does not say what the town lacks`).not.toMatch(words);
+    }
   });
-  it.each([
-    ['r2s-wartime-city-3', /a workshop closed/],
-    ['r2s-succession_void-metropolis-3', /the merchants and the creditors/],
-    ['r2s-insurgency-city-3', /^The streets of/],
-    ['r2s-slave_revolt-metropolis-0', /whole districts/],
-    ['r2s-religious_conversion-city-0', /the courts are not equipped/],
-  ])('%s keeps its row where the record bears it out', (seed, words) => {
-    expect(born(seed).pressureSentence).toMatch(words);
+  it('keeps its row where the record bears it out (every row)', () => {
+    for (const [seed, words] of [
+      ['r2s-wartime-city-3', /a workshop closed/],
+      ['r2s-succession_void-metropolis-3', /the merchants and the creditors/],
+      ['r2s-insurgency-city-3', /^The streets of/],
+      ['r2s-slave_revolt-metropolis-0', /whole districts/],
+      ['r2s-religious_conversion-city-0', /the courts are not equipped/],
+    ]) {
+      expect(born(seed).pressureSentence, `${seed} keeps its row where the record bears it out`).toMatch(words);
+    }
   });
 });
 

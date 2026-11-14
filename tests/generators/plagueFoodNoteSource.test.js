@@ -17,13 +17,15 @@ describe("the reader's two fishing towns under an outbreak, born as the app birt
   const born = (seed, settType, route = {}) => /** @type {any} */ (generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...route, settType, selectedStressesRandom: false, selectedStresses: ['plague_onset'], _randomizePriorities: true }), null, { seed, customContent: {} }));
   /** @param {any} s */
   const notes = (s) => (s.economicViability?.issues || []).filter((i) => i?.type === 'stress_consequence').map((i) => i.message);
-  it.each([
-    ['rr2s-metropolis-plague_onset-port-1', 'metropolis', { tradeRouteAccess: 'port' }],
-    ['rr2s-hamlet-plague_onset-rand-1', 'hamlet', {}],
-  ])('%s: the note names the boats, not the fields, and calls no onset a plague', (seed, settType, route) => {
-    const s = born(seed, settType, route);
-    expect(s.economicState.foodSecurity.foodRecord.foodSources[0]).toBe('fish');
-    expect(notes(s).filter((m) => /work the fields|The plague has/.test(m))).toEqual([]);
-    expect(notes(s)).toContain('The sickness is spreading among those who crew the boats, and the ones still at sea face a thin catch and a hard winter.');
+  it('the note names the boats, not the fields, and calls no onset a plague (every row)', () => {
+    for (const [seed, settType, route] of [
+      ['rr2s-metropolis-plague_onset-port-1', 'metropolis', { tradeRouteAccess: 'port' }],
+      ['rr2s-hamlet-plague_onset-rand-1', 'hamlet', {}],
+    ]) {
+      const s = born(seed, settType, route);
+      expect(s.economicState.foodSecurity.foodRecord.foodSources[0], `${seed}: fish first`).toBe('fish');
+      expect(notes(s).filter((m) => /work the fields|The plague has/.test(m)), `${seed}: not the fields, and no onset called a plague`).toEqual([]);
+      expect(notes(s), `${seed}: the note names the boats`).toContain('The sickness is spreading among those who crew the boats, and the ones still at sea face a thin catch and a hard winter.');
+    }
   });
 });

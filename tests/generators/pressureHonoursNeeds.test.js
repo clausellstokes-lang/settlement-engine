@@ -21,11 +21,13 @@ const born = (seed) => {
 
 describe('the pressure sentence honours its rows\' declarations', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
-  it.each([['rw3-hamlet-under_siege-1'], ['rw3-town-under_siege+famine-1']])('%s: no gate, so no "rationing and the gates"; the next siege row in its place', (seed) => {
-    const s = born(seed);
-    expect(factsOf(s).defence?.gate).toBe(false);
-    expect(s.pressureSentence).not.toMatch(/the rationing and the gates/);
-    expect(s.pressureSentence).toMatch(/cache in .* has been inventoried and argued over/);
+  it('no gate, so no "rationing and the gates"; the next siege row in its place (every row)', () => {
+    for (const [seed] of [['rw3-hamlet-under_siege-1'], ['rw3-town-under_siege+famine-1']]) {
+      const s = born(seed);
+      expect(factsOf(s).defence?.gate, `${seed}: no gate`).toBe(false);
+      expect(s.pressureSentence, `${seed}: no "rationing and the gates"`).not.toMatch(/the rationing and the gates/);
+      expect(s.pressureSentence, `${seed}: the next siege row in its place`).toMatch(/cache in .* has been inventoried and argued over/);
+    }
   });
   it('rw3-metropolis-under_siege-1: an admitted pick prints exactly the row it drew (its walls stand)', () => {
     const s = born('rw3-metropolis-under_siege-1');

@@ -22,14 +22,18 @@ describe('the import hook reads the roster for its merchants, born as the app bi
   };
   /** @param {any} s */
   const hook = (s) => (s.economicViability?.plotHooks || []).map((/** @type {any} */ h) => h?.hook).find((/** @type {string} */ h) => /watching it decide\.$/.test(h || ''));
-  it.each(['rr2s-thorp-famine-rand-1', 'rww-village-famine-1'])('%s: no market, so no merchants', (seed) => {
-    const s = born(seed);
-    expect(hasMarketInstitution(s.institutions)).toBe(false);
-    expect(hook(s)).toMatch(/and whoever brings the food in is watching it decide\.$/);
+  it('no market, so no merchants (every row)', () => {
+    for (const seed of ['rr2s-thorp-famine-rand-1', 'rww-village-famine-1']) {
+      const s = born(seed);
+      expect(hasMarketInstitution(s.institutions), `${seed}: no market`).toBe(false);
+      expect(hook(s), `${seed}: no merchants`).toMatch(/and whoever brings the food in is watching it decide\.$/);
+    }
   });
-  it.each(['rww-town-famine-1', 'rww-city-famine-1'])('%s: a market stands, and the merchants watch', (seed) => {
-    const s = born(seed);
-    expect(hasMarketInstitution(s.institutions)).toBe(true);
-    expect(hook(s)).toMatch(/and the merchants are watching it decide\.$/);
+  it('a market stands, and the merchants watch (every row)', () => {
+    for (const seed of ['rww-town-famine-1', 'rww-city-famine-1']) {
+      const s = born(seed);
+      expect(hasMarketInstitution(s.institutions), `${seed}: a market stands`).toBe(true);
+      expect(hook(s), `${seed}: the merchants watch`).toMatch(/and the merchants are watching it decide\.$/);
+    }
   });
 });

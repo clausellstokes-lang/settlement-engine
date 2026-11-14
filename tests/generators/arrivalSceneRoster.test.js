@@ -19,9 +19,11 @@ describe('the arrival scenes read the roster', () => {
     expect(/** @type {any} */ (ARRIVAL_SCENES.river[2]).needs).toEqual(['institution: mill', 'institution: docks']);
   });
   beforeAll(async () => { await loadGenerationLawPayloads(); });
-  it.each([['r2r-hamlet-22', 'hamlet', /A merchant argues with a carter/], ['r2r-town-20', 'town', /against a jetty/]])('%s: the line the roster refuses does not print', (seed, settType, refused) => {
-    const s = /** @type {any} */ (generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...DIALS, settType }), null, { seed, customContent: {} }));
-    expect(typeof s.arrivalScene).toBe('string');
-    expect(refused.test(s.arrivalScene), s.arrivalScene).toBe(false);
+  it('the line the roster refuses does not print (every row)', () => {
+    for (const [seed, settType, refused] of [['r2r-hamlet-22', 'hamlet', /A merchant argues with a carter/], ['r2r-town-20', 'town', /against a jetty/]]) {
+      const s = /** @type {any} */ (generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...DIALS, settType }), null, { seed, customContent: {} }));
+      expect(typeof s.arrivalScene, `${seed}: an arrival scene`).toBe('string');
+      expect(refused.test(s.arrivalScene), `${seed}: ${s.arrivalScene}`).toBe(false);
+    }
   });
 });

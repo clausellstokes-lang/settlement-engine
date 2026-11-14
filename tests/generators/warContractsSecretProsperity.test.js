@@ -33,10 +33,12 @@ describe('the war-contracts secret needs a town the war made rich', () => {
     expect(row?.needs).toContain('prosperity: ≥ comfortable');
   });
   beforeAll(async () => { await loadGenerationLawPayloads(); });
-  it.each([['rw3-city-wartime-1'], ['r2s-wartime-town-0'], ['r2s-wartime-village-1'], ['r2s-wartime-city-1']])('%s: a town below comfortable carries no such secret', (seed) => {
-    const s = born(seed);
-    expect(['Comfortable', 'Prosperous', 'Wealthy']).not.toContain(s.economicState.prosperity);
-    expect(holders(s)).toEqual([]);
+  it('a town below comfortable carries no such secret (every row)', () => {
+    for (const [seed] of [['rw3-city-wartime-1'], ['r2s-wartime-town-0'], ['r2s-wartime-village-1'], ['r2s-wartime-city-1']]) {
+      const s = born(seed);
+      expect(['Comfortable', 'Prosperous', 'Wealthy'], `${seed}: below comfortable`).not.toContain(s.economicState.prosperity);
+      expect(holders(s), `${seed}: carries no such secret`).toEqual([]);
+    }
   });
   it('r2s-wartime-city-0: a comfortable town keeps it', () => {
     const s = born('r2s-wartime-city-0');

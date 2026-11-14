@@ -40,12 +40,14 @@ describe("the readers' towns, born as the app births them", () => {
     const m = /** @type {RegExpMatchArray} */ (seed.match(/^(?:rww|rr2s)-(\w+)-([a-z_+]+)-(?:rand-)?\d+$/));
     return /** @type {any} */ (generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: m[1], selectedStressesRandom: false, selectedStresses: m[2] === 'calm' ? [] : m[2].split('+'), _randomizePriorities: true }), null, { seed, customContent: {} }));
   };
-  it.each(['rr2s-thorp-calm-rand-1', 'rww-thorp-calm-1', 'rww-hamlet-famine-1'])('%s: nothing comes in, and no channel is named', (seed) => {
-    const s = born(seed);
-    expect(s.config.tradeRouteAccess).toBe('isolated');
-    expect(s.economicState.foodSecurity.importCoverage).toBe(0);
-    expect(s.settlementReason[0]).toMatch(/gets by on what/);
-    expect(CHANNEL_WORDS.test(s.settlementReason[0]), s.settlementReason[0]).toBe(false);
+  it('nothing comes in, and no channel is named (every row)', () => {
+    for (const seed of ['rr2s-thorp-calm-rand-1', 'rww-thorp-calm-1', 'rww-hamlet-famine-1']) {
+      const s = born(seed);
+      expect(s.config.tradeRouteAccess, `${seed}: isolated`).toBe('isolated');
+      expect(s.economicState.foodSecurity.importCoverage, `${seed}: nothing comes in`).toBe(0);
+      expect(s.settlementReason[0], `${seed}: gets by on what it has`).toMatch(/gets by on what/);
+      expect(CHANNEL_WORDS.test(s.settlementReason[0]), `${seed}: ${s.settlementReason[0]}`).toBe(false);
+    }
   });
   it('rww-village-famine-1: food comes in, and the receipt\'s own channels are named', () => {
     const s = born('rww-village-famine-1');
