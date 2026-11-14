@@ -2466,8 +2466,8 @@ and never an assertion that the feared thing is happening.
 4. `[watch · guardPresence]` {settlement} has people paid to keep order, but the gang bosses keep their own order alongside them, and charge the town for it.
 
 **FLAG: merchantArmy** *(WIRING W3 C4: `safetyProfile.flags.merchantArmy`)*
-1. `[ledger · colour]` The trading houses at {settlement} pay for their own armed guards, a private army that keeps order wherever the houses do business. Where the guards and the {seat} disagree, the guards usually win.
-2. `[counterforce · mercenary]` Order at {settlement} is kept by a private army of hired swords on the trading houses' pay. They answer to whoever pays them, not to the {seat}.
+1. `[ledger · no crisis: occupied]` The trading houses at {settlement} pay for their own armed guards, a private army that keeps order wherever the houses do business. Where the guards and the {seat} disagree, the guards usually win.
+2. `[counterforce · mercenary · no crisis: occupied]` Order at {settlement} is kept by a private army of hired swords on the trading houses' pay. They answer to whoever pays them, not to the {seat}.
 
 **FLAG: merchantCriminalBlur** *(WIRING W3 C5: `safetyProfile.flags.merchantCriminalBlur`)*
 1. `[ledger · guild]` At {settlement} the richest merchants and the criminal bosses are often the same people; a deal struck in the guild hall and a deal struck in a back room look much alike.

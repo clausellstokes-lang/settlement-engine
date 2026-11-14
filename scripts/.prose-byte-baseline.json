@@ -73,8 +73,8 @@
       "ceilingGzip": 177058
     },
     "src/data/dossierStateProse/power.generated.js": {
-      "raw": 129756,
-      "gzip": 18272,
+      "raw": 129804,
+      "gzip": 18271,
       "ceilingRaw": 357097,
       "ceilingGzip": 79355
     },
@@ -899,6 +899,14 @@
       "toRaw": 297347,
       "gzipAfter": 37953,
       "reason": "+720 B raw over the committed 296627 (gzip level 9: 37897 -> 37953): STALLED v2 reworded, v3 v4 new"
+    },
+    {
+      "car": "W2-WRITE-SIDE-REST-2",
+      "leaf": "src/data/dossierStateProse/power.generated.js",
+      "fromRaw": 129770,
+      "toRaw": 129804,
+      "gzipAfter": 18271,
+      "reason": "+48 B raw over the committed 129756 (gzip level 9: 18272 -> 18271): DS-POW-5 FLAG: merchantArmy v1, v2 declared off an occupation (round three #1075)"
     }
   ],
   "ceilingTransfersNewLeaves": [

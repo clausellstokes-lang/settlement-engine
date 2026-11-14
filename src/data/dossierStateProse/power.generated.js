@@ -2514,7 +2514,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "colour"
+            "no crisis: occupied"
           ],
           "text": "The trading houses at {settlement} pay for their own armed guards, a private army that keeps order wherever the houses do business. Where the guards and the {seat} disagree, the guards usually win.",
           "slots": [
@@ -2526,7 +2526,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         {
           "angle": "counterforce",
           "marks": [
-            "mercenary"
+            "mercenary",
+            "no crisis: occupied"
           ],
           "text": "Order at {settlement} is kept by a private army of hired swords on the trading houses' pay. They answer to whoever pays them, not to the {seat}.",
           "slots": [

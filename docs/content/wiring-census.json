@@ -35831,8 +35831,8 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 1,
-        "mercenary": 1
+        "mercenary": 1,
+        "no crisis: occupied": 2
       },
       "undeclared": 0,
       "crisisScoped": false
