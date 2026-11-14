@@ -27,7 +27,7 @@
  * kind's own catalogue text (`data/stressTypes.js`) presume. No line names a garrison, soldiers,
  * walls or a hospital (those are facts of their own), no figure, no tier noun, and a war line holds
  * for a town that profits from the war and one that pays for it (the summary's roll is not kept).
- * Nor a body that keeps order (only an occupation's occupiers are the kind's own force), a merchant
+ * Nor a body that keeps order or keeps the place safe (only an occupation's occupiers are the kind's own force), a merchant
  * (the market's fact) or a street (a thorp has none): the call sites pass the entry and the name
  * and no roster, so a line says "those who answer for", "those who sell", "out of doors" (R3-CODE-C-5).
  *
@@ -211,7 +211,7 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
     },
     defence: {
       watch: '{name} is still looking for whoever betrayed it, and every unexplained absence draws a hard look.',
-      official: 'Those who keep {name} safe are questioning everyone who could have reached what was sold, and nobody is above suspicion.',
+      official: 'Those who answer for {name} are questioning everyone who could have reached what was sold, and nobody is above suspicion.', // R3-CODE-C-5 (the chair, 02:06Z): no keepers of its safety the kind does not promise
       local: 'In {name} neighbours watch one another now, and an old friend\'s late visit draws questions.',
       traveller: 'At {name}, travellers are asked their business twice, and their answers are remembered.',
     },
@@ -315,7 +315,7 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
     },
     defence: {
       watch: 'Whatever is attacking around {name}, wolves, raiders or worse, is getting bolder, and the lookouts count the days between attacks.',
-      official: 'Those who keep {name} safe cannot cover every road and every field, and the attackers seem to know it.',
+      official: 'Nobody in {name} can watch every road and every field at once, and the attackers seem to know it.', // R3-CODE-C-5: no keepers of its safety
       local: 'Families in {name} bring their animals in at dusk and bar their doors, and nobody works the far fields alone.',
       traveller: 'The roads to {name} are dangerous: travellers move in groups and by daylight, and some never arrive.',
     },
@@ -419,7 +419,7 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
     },
     defence: {
       watch: 'In wartime {name} watches its roads for deserters, spies and the army\'s own requisition officers alike.',
-      official: 'Those who keep {name} safe have fewer hands than before, with men called away to the war.',
+      official: 'With men called away to the war, {name} has fewer hands than before to see to its own safety.', // R3-CODE-C-5: no keepers of its safety
       local: 'In {name} the families whose men were called up wait for news, and the rest keep an eye on the road.',
       traveller: 'On the roads near {name} you meet army carts and the crown\'s officers, and give way to both.',
     },
@@ -472,7 +472,7 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
       },
       defence: {
         watch: 'With so many gone, {name}\'s empty houses draw thieves and squatters, and fewer people are left to keep them out.',
-        official: 'Those who keep {name} safe have fewer to call on each season, and more empty houses to watch.',
+        official: 'Each season {name} has fewer people to call on for its safety, and more empty houses to watch.', // R3-CODE-C-5: no keepers of its safety
         local: 'In {name} those who stay keep an eye on their neighbours\' empty houses, and lock their own.',
         traveller: 'Walking through {name}, you pass house after empty house, and few people about to see who goes in.',
       },

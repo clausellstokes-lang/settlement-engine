@@ -200,4 +200,14 @@ describe('R3-CODE-C-5: no line of the table promises a force, a merchant or a st
     expect(s.tier).toBe('thorp');
     expect(printed(s).filter((l) => /\bstreets?\b/i.test(l))).toEqual([]);
   });
+  // The chair's ruling of 02:06Z: "Those who keep {name} safe" is the same presumption where no force stands.
+  it('no line names people who keep the place safe', () => {
+    expect(lines(SETS).filter(([, l]) => /\bkeeps? \S+ safe\b/i.test(l)).map(([k]) => k)).toEqual([]);
+  });
+  it('r2s-wartime-thorp-70 (a thorp of 29, no force): no line names its keepers', () => {
+    const s = born('r2s-wartime-thorp-70');
+    const af = deriveArmedForces(s);
+    expect([s.tier, af.standing.length + af.contracted.length]).toEqual(['thorp', 0]);
+    expect(printed(s).filter((l) => /\bkeeps? \S+ safe\b/i.test(l))).toEqual([]);
+  });
 });
