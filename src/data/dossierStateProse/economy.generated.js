@@ -3673,7 +3673,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "Not all of {settlement}'s food is grown or bought: some of what the town eats is made or kept by magic, and the town would go shorter without it.",
+          "text": "Not all of {settlement}'s food is grown or bought: some of what the town eats is provided by spell or by prayer, and the town would go shorter without it.",
           "slots": [
             "settlement"
           ],
@@ -3695,7 +3695,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "A visitor may not see it, but some of the food on {settlement}'s tables was never grown or bought: it is there by magic.",
+          "text": "A visitor may not see it, but some of the food on {settlement}'s tables was never grown or bought: it came by spell or by prayer.",
           "slots": [
             "settlement"
           ],

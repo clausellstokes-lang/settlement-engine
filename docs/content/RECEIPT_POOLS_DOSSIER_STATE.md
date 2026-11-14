@@ -1370,9 +1370,9 @@ sentence in two voices. **No named deaths.**
 3. `[street · no crisis: plague_onset]` A good part of what {settlement} eats is brought in, and everyone knows when the next load is due.
 
 **HOW THE NEED IS MET: part of it by magic**
-1. `[ledger · colour]` Not all of {settlement}'s food is grown or bought: some of what the town eats is made or kept by magic, and the town would go shorter without it.
+1. `[ledger · colour]` Not all of {settlement}'s food is grown or bought: some of what the town eats is provided by spell or by prayer, and the town would go shorter without it.
 2. `[street · colour]` Part of {settlement}'s food is neither grown nor bought, and the table would be thinner without it.
-3. `[visitor · colour]` A visitor may not see it, but some of the food on {settlement}'s tables was never grown or bought: it is there by magic.
+3. `[visitor · colour]` A visitor may not see it, but some of the food on {settlement}'s tables was never grown or bought: it came by spell or by prayer.
 
 **FOOD SOURCES: one source**
 1. `[ledger · no crisis: famine]` {settlement}'s own food comes from its {good} and little else, so one bad year for the {good} would cost the whole town dear.
