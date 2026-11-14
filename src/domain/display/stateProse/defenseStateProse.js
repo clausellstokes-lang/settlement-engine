@@ -893,14 +893,25 @@ const POSTURE_POOL_OF_BADGE = Object.freeze({
  * undefended") are silent there. The bar and the badge stay; nothing is said against them.
  * @type {ReadonlySet<string>}
  */
-const AGAINST_A_STRONG_BAR = new Set([
-  'Invasion & War: walls with NO force', 'Invasion & War: neither walls nor force',
-  'readiness WEAK', 'readiness CRITICAL',
-]);
+/**
+ * ⛔ AND A LINE CLAIMS NO VERDICT THAT A BAND ON ITS OWN PAGE CAN DENY (R3-TABS-5; the chair's ruling (h) of 2026-11-14,
+ * found by the reader of the defence rating's rebuild: there a thorp's "Invasion & War" chip reads Critical over
+ * "credible against raiders" or "would see off a raid", 12 of its 972 births). Where the bar reads Critical, no pool is
+ * drawn that holds a line saying the place holds, deters or sees off a raid: walls with a garrison ("raiders stay away",
+ * "any attacker would think again", "the town could be held"), walls with townspeople ("credible against raiders",
+ * "would see off a raid") and a force with no walls ("It answers raiders well"); the row is silent there. The pools
+ * every line of which is true beside Critical (walls and nobody on them, no line and no force, armed citizens on their
+ * own ground) are drawn as before. 6 towns of the second reader's 1,536 at 268c40013 printed such a claim.
+ * @type {Readonly<Record<string, ReadonlySet<string>>>}
+ */
+const AGAINST_THE_BAR = Object.freeze({
+  STRONG: new Set(['Invasion & War: walls with NO force', 'Invasion & War: neither walls nor force', 'readiness WEAK', 'readiness CRITICAL']),
+  CRITICAL: new Set(['Invasion & War: walls AND professional garrison', 'Invasion & War: walls with citizen militia', 'Invasion & War: force with NO walls']),
+});
 /** @param {string|null} poolKey @param {unknown} militaryScore @returns {string|null} */
 function withinTheBar(poolKey, militaryScore) {
-  const strong = typeof militaryScore === 'number' && Number.isFinite(militaryScore) && scoreBand(militaryScore) === 'STRONG';
-  return poolKey && strong && AGAINST_A_STRONG_BAR.has(poolKey) ? null : poolKey;
+  const band = typeof militaryScore === 'number' && Number.isFinite(militaryScore) ? scoreBand(militaryScore) : null;
+  return poolKey && band && AGAINST_THE_BAR[band]?.has(poolKey) ? null : poolKey;
 }
 
 /**

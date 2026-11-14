@@ -27,7 +27,10 @@ const cfgFor = (seed) => {
   return birthConfig({ ...DEFAULT_CONFIG, settType: m[1], selectedStressesRandom: false, selectedStresses: m[2] === 'calm' ? [] : m[2].split('+'), _randomizePriorities: true });
 };
 const WATCH_ONLY = ['r2s-occupied-town-0', 'rr3-town-famine-rand-1', 'r2r-town-11', 'rr3-town-under_siege-rand-3'];
-const MILITIA = 'rr3-thorp-occupied-rand-1';
+// R3-TABS-5, the chair's ruling (h): RE-KEYED BY IDENTITY. Makropyrgos (rr3-thorp-occupied-rand-1) reads Critical on its
+// Invasion & War bar, where the citizen-militia pool's "would see off a raid" is now not drawn; the keeper is a walled
+// militia thorp whose bar does not read Critical (Weak), so the arm still asserts a real militia keeps its pool.
+const MILITIA = 'rr3-thorp-famine-rand-0';
 const TOWNS = {};
 beforeAll(async () => {
   await loadGenerationLawPayloads();
