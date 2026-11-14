@@ -1,0 +1,3387 @@
+{
+ "seat": "CENSUS-3",
+ "items": {
+  "1": {
+   "tree": "lane/join-2026-11-14 at c2c12792e (read back from origin 2026-11-14 ~13:00 UTC)",
+   "instrument": "CENSUS-2 census2.sh as it stands (lane/census-2-2026-11-13), the 720 seeds",
+   "fall": {
+    "towns": 720,
+    "kinds": {
+     "a": {
+      "then": 712,
+      "now": 516,
+      "tab": 516,
+      "tonight": 0,
+      "pdf": 0,
+      "journal": 0,
+      "lines": 211
+     },
+     "b": {
+      "then": 70,
+      "now": 46,
+      "tab": 46,
+      "tonight": 0,
+      "pdf": 0,
+      "journal": 0,
+      "lines": 42
+     },
+     "c": {
+      "then": 301,
+      "now": 43,
+      "tab": 43,
+      "tonight": 0,
+      "pdf": 0,
+      "journal": 0,
+      "lines": 21
+     },
+     "d": {
+      "then": 382,
+      "now": 22,
+      "tab": 22,
+      "tonight": 0,
+      "pdf": 0,
+      "journal": 0,
+      "lines": 8
+     },
+     "e": {
+      "then": 60,
+      "now": 15,
+      "tab": 15,
+      "tonight": 0,
+      "pdf": 0,
+      "journal": 0,
+      "lines": 14
+     },
+     "f": {
+      "then": 720,
+      "now": 309,
+      "tab": 309,
+      "tonight": 0,
+      "pdf": 0,
+      "journal": 0,
+      "lines": 53
+     },
+     "g": {
+      "then": 720,
+      "now": 0,
+      "tab": 0,
+      "tonight": 0,
+      "pdf": 0,
+      "journal": 0,
+      "lines": 0
+     },
+     "h": {
+      "then": 20,
+      "now": 2,
+      "tab": 2,
+      "tonight": 0,
+      "pdf": 0,
+      "journal": 0,
+      "lines": 2
+     }
+    }
+   },
+   "precision": {
+    "a": {
+     "p": 0.93,
+     "read": "CENSUS-2: 28 of 30 on its third read (2026-11-13)"
+    },
+    "b": {
+     "p": 0.93,
+     "read": "CENSUS-2: 28 of 30 on its second read"
+    },
+    "c": {
+     "p": 1,
+     "read": "CENSUS-2: 30 of 30"
+    },
+    "d": {
+     "p": 1,
+     "read": "CENSUS-2: 30 of 30 on its second read"
+    },
+    "e": {
+     "p": 0.95,
+     "read": "CENSUS-2: 21 of 22 distinct lines"
+    },
+    "f": {
+     "p": 1,
+     "read": "CENSUS-2: 30 of 30"
+    },
+    "g": {
+     "p": 1,
+     "read": "CENSUS-2: 11 of 11"
+    },
+    "h": {
+     "p": 0.96,
+     "read": "CENSUS-2: 23 of 24"
+    }
+   },
+   "worklist": [
+    {
+     "writer": "src/components/new/tabs/ServicesTab.jsx :: ServicesTab",
+     "file": "src/components/new/tabs/ServicesTab.jsx",
+     "fn": "ServicesTab",
+     "towns": 305,
+     "falseTowns": 305,
+     "kinds": {
+      "f": 305
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "none"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-village-53",
+      "view": "Systems/Services",
+      "surface": "tab",
+      "kind": "f/tag",
+      "sentence": "Dispute resolution (guild)"
+     }
+    },
+    {
+     "writer": "src/components/new/tabs/InstitutionsTab.jsx :: InstitutionCard",
+     "file": "src/components/new/tabs/InstitutionsTab.jsx",
+     "fn": "InstitutionCard",
+     "towns": 303,
+     "falseTowns": 303,
+     "kinds": {
+      "f": 303
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "rb(shared commits only)",
+      "rbs(shared commits only)"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-town-6",
+      "view": "Systems/Institutions",
+      "surface": "tab",
+      "kind": "f/tag",
+      "sentence": "Bowyers & fletchers (guild)Crafts"
+     }
+    },
+    {
+     "writer": "src/components/new/npcComponents.jsx :: NPCInlineCard",
+     "file": "src/components/new/npcComponents.jsx",
+     "fn": "NPCInlineCard",
+     "towns": 302,
+     "falseTowns": 302,
+     "kinds": {
+      "f": 302
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "rb"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-town-6",
+      "view": "World/NPCs",
+      "surface": "tab",
+      "kind": "f/tag",
+      "sentence": "Bowyers & fletchers (guild) · second of Military/Guard · member of Craft Guilds"
+     }
+    },
+    {
+     "writer": "src/components/new/tabs/power/PowerStrata.jsx :: ThePowers",
+     "file": "src/components/new/tabs/power/PowerStrata.jsx",
+     "fn": "ThePowers",
+     "towns": 298,
+     "falseTowns": 298,
+     "kinds": {
+      "f": 298
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "rb(shared commits only)",
+      "rbs(shared commits only)"
+     ],
+     "known": [
+      "join:BAR-130",
+      "join:BAR-131"
+     ],
+     "example": {
+      "seed": "r2r-town-6",
+      "view": "Systems/Power",
+      "surface": "tab",
+      "kind": "f/tag",
+      "sentence": "Bowyers & fletchers (guild)"
+     }
+    },
+    {
+     "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+     "file": "src/components/new/tabs/EconomicsTab.jsx",
+     "fn": "EconomicFlowsSection",
+     "towns": 219,
+     "falseTowns": 218.6,
+     "kinds": {
+      "a": 8,
+      "f": 213
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "rb",
+      "wc"
+     ],
+     "known": [
+      "bar#235"
+     ],
+     "example": {
+      "seed": "r2r-hamlet-18",
+      "view": "Systems/Economics",
+      "surface": "tab",
+      "kind": "a/quarry",
+      "sentence": "Stone Quarrying"
+     }
+    },
+    {
+     "writer": "src/generators/economy/incomeLineSiblings.js :: REMEDIES_LINE",
+     "file": "src/generators/economy/incomeLineSiblings.js",
+     "fn": "REMEDIES_LINE",
+     "towns": 138,
+     "falseTowns": 128.3,
+     "kinds": {
+      "a": 138
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "wcs"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-village-0",
+      "view": "Systems/Economics",
+      "surface": "tab",
+      "kind": "a/alchemist",
+      "sentence": "Apothecary & Alchemy Remedies and simple preparations, made and sold here: a modest trade."
+     }
+    },
+    {
+     "writer": "src/data/institutionDescVariants.js :: DESC_VARIANT_SIBLINGS",
+     "file": "src/data/institutionDescVariants.js",
+     "fn": "DESC_VARIANT_SIBLINGS",
+     "towns": 107,
+     "falseTowns": 99.5,
+     "kinds": {
+      "a": 106,
+      "b": 3
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "fd"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-thorp-0",
+      "view": "Systems/Institutions",
+      "surface": "tab",
+      "kind": "a/clergy",
+      "sentence": "A priest says the words when one can be brought in time; when one cannot, whoever knew the dead best says them."
+     }
+    },
+    {
+     "writer": "(untraced) :: Inns and taverns (district)",
+     "file": "(untraced)",
+     "fn": "",
+     "towns": 50,
+     "falseTowns": 50,
+     "kinds": {
+      "f": 50
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "?"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-city-4",
+      "view": "Systems/Economics",
+      "surface": "tab",
+      "kind": "f/tag",
+      "sentence": "Inns and taverns (district)"
+     }
+    },
+    {
+     "writer": "src/data/institutionDescColour.js :: DESC_VARIANT_COLOUR_DECLARATIONS",
+     "file": "src/data/institutionDescColour.js",
+     "fn": "DESC_VARIANT_COLOUR_DECLARATIONS",
+     "towns": 51,
+     "falseTowns": 47.6,
+     "kinds": {
+      "a": 41,
+      "c": 2,
+      "b": 9
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "fd"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-village-23",
+      "view": "Systems/Institutions",
+      "surface": "tab",
+      "kind": "a/merchants",
+      "sentence": "A lone inn catering to whoever the road brings: merchants, pilgrims, travellers."
+     }
+    },
+    {
+     "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Last rites",
+     "file": "src/data/institutionServices.js",
+     "fn": "INSTITUTION_SERVICES.Last rites",
+     "towns": 47,
+     "falseTowns": 43.7,
+     "kinds": {
+      "a": 47
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "fd"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-thorp-2",
+      "view": "Systems/Services",
+      "surface": "tab",
+      "kind": "a/church",
+      "sentence": "Funeral rites, said by the parish priest, who comes or is sent for."
+     }
+    },
+    {
+     "writer": "src/data/dossierStateProse/economy.generated.js :: DS-ECO-10 › POSTURE: established · v6",
+     "file": "src/data/dossierStateProse/economy.generated.js",
+     "fn": "DS-ECO-10 › POSTURE: established · v6",
+     "towns": 39,
+     "falseTowns": 36.3,
+     "kinds": {
+      "a": 39
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "wr"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-thorp-1",
+      "view": "Systems/Economics",
+      "surface": "tab",
+      "kind": "a/merchants",
+      "sentence": "A merchant who comes to Terrapolis for one thing usually leaves with two or three."
+     }
+    },
+    {
+     "writer": "src/generators/economy/incomeLineSiblings.js :: IRON_IMPORTED_LINE",
+     "file": "src/generators/economy/incomeLineSiblings.js",
+     "fn": "IRON_IMPORTED_LINE",
+     "towns": 38,
+     "falseTowns": 35.3,
+     "kinds": {
+      "a": 38
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "wcs"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-town-4",
+      "view": "Systems/Economics",
+      "surface": "tab",
+      "kind": "a/mine",
+      "sentence": "Iron & Metalwork Iron imported from mining regions and worked locally; this income stream is vulnerable to supply disruption."
+     }
+    },
+    {
+     "writer": "src/domain/people/allegiance.js :: leaveAllegianceReceipts",
+     "file": "src/domain/people/allegiance.js",
+     "fn": "leaveAllegianceReceipts",
+     "towns": 31,
+     "falseTowns": 31,
+     "kinds": {
+      "f": 31
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "none"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-town-58",
+      "view": "Systems/Power",
+      "surface": "tab",
+      "kind": "f/tag",
+      "sentence": "Huda ibn Sina, the bowyer (Bowyers & fletchers (guild)) · brings information and small favours · a patron no one names"
+     }
+    },
+    {
+     "writer": "src/domain/display/defenseDisplay.js :: deriveSupportingCapabilities",
+     "file": "src/domain/display/defenseDisplay.js",
+     "fn": "deriveSupportingCapabilities",
+     "towns": 32,
+     "falseTowns": 29.8,
+     "kinds": {
+      "a": 32
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "wc"
+     ],
+     "known": [
+      "join:UPK-M5"
+     ],
+     "example": {
+      "seed": "r2r-town-6",
+      "view": "Systems/Defense",
+      "surface": "tab",
+      "kind": "a/court-generic",
+      "sentence": "Courts without detention."
+     }
+    },
+    {
+     "writer": "src/data/institutionDescVariants.js :: PAIRS",
+     "file": "src/data/institutionDescVariants.js",
+     "fn": "PAIRS",
+     "towns": 30,
+     "falseTowns": 27.9,
+     "kinds": {
+      "a": 25,
+      "b": 5
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "fd"
+     ],
+     "known": [
+      "join:BAR-247",
+      "join:DATA-PAIRS",
+      "join:DATA-F2",
+      "join:UPK-P5b"
+     ],
+     "example": {
+      "seed": "r2r-village-6",
+      "view": "Systems/Institutions",
+      "surface": "tab",
+      "kind": "a/reeve",
+      "sentence": "Less official than a reeve, more stable than nothing."
+     }
+    },
+    {
+     "writer": "src/data/institutionalCatalog.js :: INSTITUTION_FAMILIES.town",
+     "file": "src/data/institutionalCatalog.js",
+     "fn": "INSTITUTION_FAMILIES.town",
+     "towns": 27,
+     "falseTowns": 25.1,
+     "kinds": {
+      "a": 27
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "fd"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-town-1",
+      "view": "Systems/Institutions",
+      "surface": "tab",
+      "kind": "a/textile",
+      "sentence": "Multiple mills for grain, fulling cloth."
+     }
+    },
+    {
+     "writer": "src/data/dossierStateProse/economy.generated.js :: DS-ECO-12 › INCOME WEIGHT: the religious houses · v1",
+     "file": "src/data/dossierStateProse/economy.generated.js",
+     "fn": "DS-ECO-12 › INCOME WEIGHT: the religious houses · v1",
+     "towns": 25,
+     "falseTowns": 23.2,
+     "kinds": {
+      "a": 25
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "wr"
+     ],
+     "known": [
+      "bar#246",
+      "join:LV-GRAPES",
+      "join:CRP-ECO12"
+     ],
+     "example": {
+      "seed": "r2r-thorp-11",
+      "view": "Systems/Economics",
+      "surface": "tab",
+      "kind": "a/church",
+      "sentence": "What the religious houses take in and spend is a large part of the thorp's business."
+     }
+    },
+    {
+     "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Dispute arbitration",
+     "file": "src/data/institutionServices.js",
+     "fn": "INSTITUTION_SERVICES.Dispute arbitration",
+     "towns": 25,
+     "falseTowns": 23.2,
+     "kinds": {
+      "a": 25
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "fd"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-town-6",
+      "view": "Systems/Services",
+      "surface": "tab",
+      "kind": "a/court",
+      "sentence": "Bring commercial and civil disputes before a magistrate."
+     }
+    },
+    {
+     "writer": "src/data/dossierStateProse/economy.generated.js :: DS-ECO-10 › POSTURE: none · v2",
+     "file": "src/data/dossierStateProse/economy.generated.js",
+     "fn": "DS-ECO-10 › POSTURE: none · v2",
+     "towns": 23,
+     "falseTowns": 21.4,
+     "kinds": {
+      "a": 23
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "wr"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-thorp-17",
+      "view": "Systems/Economics",
+      "surface": "tab",
+      "kind": "a/merchants",
+      "sentence": "A merchant who came to buy in quantity has come to the wrong place."
+     }
+    },
+    {
+     "writer": "(untraced) :: Mining & {N} materials & fuelVulnerable",
+     "file": "(untraced)",
+     "fn": "",
+     "towns": 23,
+     "falseTowns": 21.4,
+     "kinds": {
+      "a": 23
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "?"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-hamlet-15",
+      "view": "Systems/Economics",
+      "surface": "tab",
+      "kind": "a/mine",
+      "sentence": "Mining & QuarryingRaw materials & fuelVulnerable"
+     }
+    },
+    {
+     "writer": "src/generators/power/stressFactions.js :: applyStressEventFactions",
+     "file": "src/generators/power/stressFactions.js",
+     "fn": "applyStressEventFactions",
+     "towns": 21,
+     "falseTowns": 20.9,
+     "kinds": {
+      "c": 20,
+      "a": 1
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "pw"
+     ],
+     "known": [
+      "join:BAR-132",
+      "join:BUNDLE-PWR-P48"
+     ],
+     "example": {
+      "seed": "r2r-hamlet-4",
+      "view": "Systems/Power",
+      "surface": "tab",
+      "kind": "c/districts",
+      "sentence": "Claims legitimate authority through different means; controls a distinct district or institution."
+     }
+    },
+    {
+     "writer": "src/data/institutionServiceKeys.generated.js :: INSTITUTION_SERVICE_KEYS",
+     "file": "src/data/institutionServiceKeys.generated.js",
+     "fn": "INSTITUTION_SERVICE_KEYS",
+     "towns": 22,
+     "falseTowns": 20.5,
+     "kinds": {
+      "a": 22
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "none"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-metropolis-0",
+      "view": "Systems/Services",
+      "surface": "tab",
+      "kind": "a/house",
+      "sentence": "Black market bazaar"
+     }
+    },
+    {
+     "writer": "(untraced) :: The powerHousehold {N} (dominant)merchant-led",
+     "file": "(untraced)",
+     "fn": "",
+     "towns": 20,
+     "falseTowns": 18.6,
+     "kinds": {
+      "a": 20
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "?"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-thorp-5",
+      "view": "Systems/Power",
+      "surface": "tab",
+      "kind": "a/merchants",
+      "sentence": "The powerHousehold Council (dominant)merchant-led"
+     }
+    },
+    {
+     "writer": "src/data/people/titleSecretsPresentations.js :: ROWS",
+     "file": "src/data/people/titleSecretsPresentations.js",
+     "fn": "ROWS",
+     "towns": 19,
+     "falseTowns": 17.7,
+     "kinds": {
+      "a": 17,
+      "b": 2
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "pw"
+     ],
+     "known": [
+      "join:R2A-LEFT-GAME",
+      "join:PWR-656"
+     ],
+     "example": {
+      "seed": "r2r-village-16",
+      "view": "World/NPCs",
+      "surface": "tab",
+      "kind": "a/inn",
+      "sentence": "How they deal Generous with a cup and with talk; hears everything the taverns say."
+     }
+    },
+    {
+     "writer": "src/data/historyData.js :: HISTORY_DESC_SIBLINGS",
+     "file": "src/data/historyData.js",
+     "fn": "HISTORY_DESC_SIBLINGS",
+     "towns": 19,
+     "falseTowns": 17.7,
+     "kinds": {
+      "a": 19
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "fd"
+     ],
+     "known": [
+      "join:DATA-COMPACT"
+     ],
+     "example": {
+      "seed": "r2r-village-26",
+      "view": "World/History",
+      "surface": "tab",
+      "kind": "a/quarry",
+      "sentence": "A period of ambitious stone building transformed the settlement's character, its larger houses raised from local quarry stone."
+     }
+    },
+    {
+     "writer": "(untraced) :: The {N} of the {N}",
+     "file": "(untraced)",
+     "fn": "",
+     "towns": 16,
+     "falseTowns": 14.9,
+     "kinds": {
+      "a": 16
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "?"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-thorp-5",
+      "view": "World/Traditions",
+      "surface": "tab",
+      "kind": "a/fair",
+      "sentence": "The Fair of the Dead"
+     }
+    },
+    {
+     "writer": "src/generators/power/governanceNarrative.js :: deriveBaselineConflict",
+     "file": "src/generators/power/governanceNarrative.js",
+     "fn": "deriveBaselineConflict",
+     "towns": 16,
+     "falseTowns": 14.9,
+     "kinds": {
+      "a": 16
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "pw"
+     ],
+     "known": [
+      "bar#291",
+      "bar#292"
+     ],
+     "example": {
+      "seed": "r2r-hamlet-3",
+      "view": "Systems/Power",
+      "surface": "tab",
+      "kind": "a/court-generic",
+      "sentence": "The military commanders are pushing for expanded authority over civilian courts, and Headman's Authority is losing ground."
+     }
+    },
+    {
+     "writer": "src/data/dossierStateProse/defense.generated.js :: DS-DEF-5 › ARCANE: alchemists · v1",
+     "file": "src/data/dossierStateProse/defense.generated.js",
+     "fn": "DS-DEF-5 › ARCANE: alchemists · v1",
+     "towns": 16,
+     "falseTowns": 14.9,
+     "kinds": {
+      "a": 16
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "rt",
+      "wr",
+      "wcs"
+     ],
+     "known": [
+      "join:CRP-DEF5OCC"
+     ],
+     "example": {
+      "seed": "r2r-city-48",
+      "view": "Systems/Defense",
+      "surface": "tab",
+      "kind": "a/alchemist",
+      "sentence": "Alchemy is practised at Vishnumala, and some of what it makes goes to the city's defenders."
+     }
+    },
+    {
+     "writer": "(untraced) :: Institutional controlguild_controlled",
+     "file": "(untraced)",
+     "fn": "",
+     "towns": 14,
+     "falseTowns": 14,
+     "kinds": {
+      "d": 14
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "?"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-town-1",
+      "view": "Systems/Magic",
+      "surface": "tab",
+      "kind": "d/raw-key",
+      "sentence": "Institutional controlguild_controlled"
+     }
+    },
+    {
+     "writer": "src/components/new/tabs/WhoRunsThisTownPanel.jsx :: WhoRunsThisTownPanel",
+     "file": "src/components/new/tabs/WhoRunsThisTownPanel.jsx",
+     "fn": "WhoRunsThisTownPanel",
+     "towns": 13,
+     "falseTowns": 13,
+     "kinds": {
+      "f": 13
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "rb"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-city-3",
+      "view": "Systems/Power",
+      "surface": "tab",
+      "kind": "f/tag",
+      "sentence": "Inns and taverns (district) · Maroula Bryennios · fronts for Whisper market · handled by Nikomedissa Akropolites"
+     }
+    },
+    {
+     "writer": "(untraced) :: Inns and taverns (district) · held by {N} {N}",
+     "file": "(untraced)",
+     "fn": "",
+     "towns": 12,
+     "falseTowns": 12,
+     "kinds": {
+      "f": 12
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "?"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-city-3",
+      "view": "Summary/Crisis",
+      "surface": "tab",
+      "kind": "f/tag",
+      "sentence": "Inns and taverns (district) · held by Maroula Bryennios"
+     }
+    },
+    {
+     "writer": "src/generators/narrativeText.js :: POLITICAL_FLAVOR",
+     "file": "src/generators/narrativeText.js",
+     "fn": "POLITICAL_FLAVOR",
+     "towns": 12,
+     "falseTowns": 11.2,
+     "kinds": {
+      "a": 12
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "ra"
+     ],
+     "known": [
+      "join:R2A-SHRINE"
+     ],
+     "example": {
+      "seed": "r2r-thorp-0",
+      "view": "Summary/Overview",
+      "surface": "tab",
+      "kind": "a/clergy",
+      "sentence": "\"Visitors sometimes ask why the people here seem so personally invested in theological questions that most settlements leave to the priests."
+     }
+    },
+    {
+     "writer": "(untraced) :: Gates (if walled)",
+     "file": "(untraced)",
+     "fn": "",
+     "towns": 11,
+     "falseTowns": 11,
+     "kinds": {
+      "f": 11
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "?"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-town-11",
+      "view": "Systems/Defense",
+      "surface": "tab",
+      "kind": "f/condition",
+      "sentence": "Gates (if walled)"
+     }
+    },
+    {
+     "writer": "src/generators/economy/outlookHookSiblings.js :: MODERATE_GAP_TWIN",
+     "file": "src/generators/economy/outlookHookSiblings.js",
+     "fn": "MODERATE_GAP_TWIN",
+     "towns": 11,
+     "falseTowns": 10.2,
+     "kinds": {
+      "a": 11
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "rc"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-thorp-7",
+      "view": "Summary/Plot Hooks",
+      "surface": "tab",
+      "kind": "a/merchants",
+      "sentence": "The settlement grows less food than it eats, and a merchant has offered to make up the difference at a price the settlement cannot pay in coin."
+     }
+    },
+    {
+     "writer": "src/generators/power/governingStressVignettes.js :: buildWartimeNarrative",
+     "file": "src/generators/power/governingStressVignettes.js",
+     "fn": "buildWartimeNarrative",
+     "towns": 11,
+     "falseTowns": 10.2,
+     "kinds": {
+      "a": 11
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "pw"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-thorp-11",
+      "view": "Systems/Power",
+      "surface": "tab",
+      "kind": "a/workshops",
+      "sentence": "Conscription has taken the workers, and the farms and workshops are short-handed."
+     }
+    },
+    {
+     "writer": "src/domain/facts/magicSource.js :: MAGIC_NOTE_TRADITION",
+     "file": "src/domain/facts/magicSource.js",
+     "fn": "MAGIC_NOTE_TRADITION",
+     "towns": 11,
+     "falseTowns": 10.2,
+     "kinds": {
+      "a": 11
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "none"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-city-39",
+      "view": "Systems/Magic",
+      "surface": "tab",
+      "kind": "a/house",
+      "sentence": "Bowyer & fletcher: Arcane fabrication provides processed goods from alternative sources"
+     }
+    },
+    {
+     "writer": "src/data/finishedGoodsCategory.js :: INSTITUTION_FINISHED_GOODS_DEMAND.importLabels",
+     "file": "src/data/finishedGoodsCategory.js",
+     "fn": "INSTITUTION_FINISHED_GOODS_DEMAND.importLabels",
+     "towns": 10,
+     "falseTowns": 9.4,
+     "kinds": {
+      "a": 9,
+      "d": 1
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "none"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-town-5",
+      "view": "Systems/Economics",
+      "surface": "tab",
+      "kind": "a/alchemical",
+      "sentence": "Alchemical reagents and scribal suppliesFine porcelain and lacquerwareGemstones (local gem deposits exhausted)GrainIncense, ritual oil, and vestment materialsPreserved provisionsQuality paper and inkRaw hides and animal "
+     }
+    },
+    {
+     "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Offal and by-products",
+     "file": "src/data/institutionServices.js",
+     "fn": "INSTITUTION_SERVICES.Offal and by-products",
+     "towns": 10,
+     "falseTowns": 9.3,
+     "kinds": {
+      "a": 10
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "fd"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-town-4",
+      "view": "Systems/Services",
+      "surface": "tab",
+      "kind": "a/tannery",
+      "sentence": "By-products sold to chandlers and tanners."
+     }
+    },
+    {
+     "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Mercenary hire",
+     "file": "src/data/institutionServices.js",
+     "fn": "INSTITUTION_SERVICES.Mercenary hire",
+     "towns": 10,
+     "falseTowns": 9.3,
+     "kinds": {
+      "a": 10
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "fd"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-town-30",
+      "view": "Systems/Services",
+      "surface": "tab",
+      "kind": "a/garrison",
+      "sentence": "Hire trained soldiers for military campaigns, garrison duty, and escorts."
+     }
+    },
+    {
+     "writer": "src/data/dossierStateProse/economy.generated.js :: DS-ECO-12 › INCOME WEIGHT: the religious houses · v2",
+     "file": "src/data/dossierStateProse/economy.generated.js",
+     "fn": "DS-ECO-12 › INCOME WEIGHT: the religious houses · v2",
+     "towns": 9,
+     "falseTowns": 8.4,
+     "kinds": {
+      "a": 9
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "wr"
+     ],
+     "known": [
+      "join:LV-GRAPES",
+      "join:CRP-ECO12"
+     ],
+     "example": {
+      "seed": "r2r-thorp-5",
+      "view": "Systems/Economics",
+      "surface": "tab",
+      "kind": "a/church",
+      "sentence": "The religious houses at Glenburn are among its biggest buyers and employers, and a bad year for them is a bad year for the thorp."
+     }
+    },
+    {
+     "writer": "src/data/institutionalCatalog.js :: INSTITUTION_FAMILIES.shared",
+     "file": "src/data/institutionalCatalog.js",
+     "fn": "INSTITUTION_FAMILIES.shared",
+     "towns": 9,
+     "falseTowns": 8.4,
+     "kinds": {
+      "a": 6,
+      "b": 3
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "fd"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-town-20",
+      "view": "Systems/Institutions",
+      "surface": "tab",
+      "kind": "a/ships",
+      "sentence": "Essential for ships, construction, and agriculture."
+     }
+    },
+    {
+     "writer": "src/generators/power/governanceNarrative.js :: buildSlaveRevoltNarrative",
+     "file": "src/generators/power/governanceNarrative.js",
+     "fn": "buildSlaveRevoltNarrative",
+     "towns": 8,
+     "falseTowns": 8,
+     "kinds": {
+      "c": 8
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "pw"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2s-slave_revolt-thorp-0",
+      "view": "Systems/Power",
+      "surface": "tab",
+      "kind": "c/streets",
+      "sentence": "The rebels' buildings are marked, and some streets are contested."
+     }
+    },
+    {
+     "writer": "src/data/dossierStateProse/general.generated.js :: DS-GEN-13 › COMMERCE: a market, no guild · v2",
+     "file": "src/data/dossierStateProse/general.generated.js",
+     "fn": "DS-GEN-13 › COMMERCE: a market, no guild · v2",
+     "towns": 8,
+     "falseTowns": 7.6,
+     "kinds": {
+      "e": 8
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "fd(shared commits only)",
+      "wr(shared commits only)",
+      "fh(shared commits only)",
+      "wse(shared commits only)",
+      "wsr(shared commits only)"
+     ],
+     "known": [
+      "join:BUNDLE-CRP-REST"
+     ],
+     "example": {
+      "seed": "r2r-village-11",
+      "view": "Summary/Overview",
+      "surface": "tab",
+      "kind": "e/guild",
+      "sentence": "No guild runs Milonick's market: the village's only hold on trade is the stall fee."
+     }
+    },
+    {
+     "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Fresh fish retail",
+     "file": "src/data/institutionServices.js",
+     "fn": "INSTITUTION_SERVICES.Fresh fish retail",
+     "towns": 8,
+     "falseTowns": 7.4,
+     "kinds": {
+      "b": 8
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "fd"
+     ],
+     "known": [
+      "bar#71"
+     ],
+     "example": {
+      "seed": "r2r-thorp-45",
+      "view": "Systems/Services",
+      "surface": "tab",
+      "kind": "b/siege:market-day",
+      "sentence": "Fish sold daily from the morning catch."
+     }
+    },
+    {
+     "writer": "src/data/supplyChainData.js :: SUPPLY_CHAIN_NEEDS.raw_extraction",
+     "file": "src/data/supplyChainData.js",
+     "fn": "SUPPLY_CHAIN_NEEDS.raw_extraction",
+     "towns": 8,
+     "falseTowns": 7.4,
+     "kinds": {
+      "a": 8
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "none"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-hamlet-18",
+      "view": "Systems/Economics",
+      "surface": "tab",
+      "kind": "a/mill",
+      "sentence": "River Mill IndustryRaw materials & fuel"
+     }
+    },
+    {
+     "writer": "src/generators/safetyProfile.js :: generateSafetyProfile",
+     "file": "src/generators/safetyProfile.js",
+     "fn": "generateSafetyProfile",
+     "towns": 8,
+     "falseTowns": 7.4,
+     "kinds": {
+      "a": 8
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "up"
+     ],
+     "known": [
+      "join:UPK-P5a"
+     ],
+     "example": {
+      "seed": "r2s-infiltrated-city-1",
+      "view": "Systems/Defense",
+      "surface": "tab",
+      "kind": "a/guild:adventurers",
+      "sentence": "The adventurers' charter hall handles threats the watch cannot."
+     }
+    },
+    {
+     "writer": "src/domain/display/institutionDisplayName.js :: institutionHouseLabel",
+     "file": "src/domain/display/institutionDisplayName.js",
+     "fn": "institutionHouseLabel",
+     "towns": 7,
+     "falseTowns": 7,
+     "kinds": {
+      "f": 7
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "rb(shared commits only)",
+      "rbs(shared commits only)"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-metropolis-14",
+      "view": "Systems/Outlook",
+      "surface": "tab",
+      "kind": "f/tag",
+      "sentence": "21 institutions critically impaired by siege: Banking district, Inns and taverns (district), State granary complex, Mills, Blacksmiths, Specialized metalworkers, Luxury goods quarter, Carpenters, Weavers/Textile workers,"
+     }
+    },
+    {
+     "writer": "src/data/dossierStateProse/economy.generated.js :: DS-ECO-1 › COMBINATION C5: a low rung on a narrow approach · v2",
+     "file": "src/data/dossierStateProse/economy.generated.js",
+     "fn": "DS-ECO-1 › COMBINATION C5: a low rung on a narrow approach · v2",
+     "towns": 7,
+     "falseTowns": 6.5,
+     "kinds": {
+      "b": 7
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "wr"
+     ],
+     "known": [
+      "join:BUNDLE-CRP-ECO",
+      "join:LV-GRAPES",
+      "join:LV-STRATFRAME",
+      "join:CRP-ECO12"
+     ],
+     "example": {
+      "seed": "r2r-thorp-17",
+      "view": "Systems/Economics",
+      "surface": "tab",
+      "kind": "b/famine:plenty",
+      "sentence": "Chichich lives on a subsistence living that feeds it and no more, and the road in is too poor to bring anything extra."
+     }
+    },
+    {
+     "writer": "(untraced) :: The powerElder {N} (dominant)church-guided",
+     "file": "(untraced)",
+     "fn": "",
+     "towns": 6,
+     "falseTowns": 5.6,
+     "kinds": {
+      "a": 6
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "?"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-thorp-2",
+      "view": "Systems/Power",
+      "surface": "tab",
+      "kind": "a/church",
+      "sentence": "The powerElder Council (dominant)church-guided"
+     }
+    },
+    {
+     "writer": "src/generators/narrativeText.js :: famineFoodIsPower",
+     "file": "src/generators/narrativeText.js",
+     "fn": "famineFoodIsPower",
+     "towns": 6,
+     "falseTowns": 5.6,
+     "kinds": {
+      "b": 6
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "ra"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-thorp-17",
+      "view": "Summary/Overview",
+      "surface": "tab",
+      "kind": "b/famine:plenty",
+      "sentence": "Since the hunt failed, food is power in Chichich, and everyone is watching who eats well."
+     }
+    },
+    {
+     "writer": "(untraced) :: Timber→lumber→planks→furniture→ships",
+     "file": "(untraced)",
+     "fn": "",
+     "towns": 6,
+     "falseTowns": 5.6,
+     "kinds": {
+      "a": 6
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "?"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-thorp-22",
+      "view": "Systems/Resources",
+      "surface": "tab",
+      "kind": "a/ships",
+      "sentence": "Timber→lumber→planks→furniture→ships"
+     }
+    },
+    {
+     "writer": "src/data/dossierStateProse/stressors.generated.js :: DS-CND-1 › DIRECTION: stable · CRISIS: occupied · v4",
+     "file": "src/data/dossierStateProse/stressors.generated.js",
+     "fn": "DS-CND-1 › DIRECTION: stable · CRISIS: occupied · v4",
+     "towns": 6,
+     "falseTowns": 5.6,
+     "kinds": {
+      "a": 6
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "fd(shared commits only)",
+      "wr(shared commits only)",
+      "fh(shared commits only)",
+      "wse(shared commits only)",
+      "wsr(shared commits only)"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-thorp-24",
+      "view": "Summary/Overview",
+      "surface": "tab",
+      "kind": "a/merchants",
+      "sentence": "Merchants in Sanctaminus pay the occupiers the same share of every sale, season after season, and have learned to price it in."
+     }
+    },
+    {
+     "writer": "src/data/dossierStateProse/economy.generated.js :: DS-ECO-12 › CRITICAL IMPORT: the land cannot give it · v2",
+     "file": "src/data/dossierStateProse/economy.generated.js",
+     "fn": "DS-ECO-12 › CRITICAL IMPORT: the land cannot give it · v2",
+     "towns": 6,
+     "falseTowns": 5.6,
+     "kinds": {
+      "b": 6
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "wr"
+     ],
+     "known": [
+      "join:LV-GRAPES",
+      "join:CRP-ECO12"
+     ],
+     "example": {
+      "seed": "r2r-hamlet-0",
+      "view": "Systems/Economics",
+      "surface": "tab",
+      "kind": "b/siege:brought-in",
+      "sentence": "None of the timber used at Spitzsteig comes from the country here; the hamlet brings in what it uses, or goes without."
+     }
+    },
+    {
+     "writer": "src/domain/display/defenseDisplay.js :: CRIM_STRUCTURE_DATA",
+     "file": "src/domain/display/defenseDisplay.js",
+     "fn": "CRIM_STRUCTURE_DATA",
+     "towns": 6,
+     "falseTowns": 5.6,
+     "kinds": {
+      "a": 6
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "wc"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-hamlet-17",
+      "view": "Systems/Defense",
+      "surface": "tab",
+      "kind": "a/guild",
+      "sentence": "Less predictable than a guild, more structured than street crime."
+     }
+    },
+    {
+     "writer": "src/generators/economy/outlookHookSiblings.js :: STARVING_HOOK",
+     "file": "src/generators/economy/outlookHookSiblings.js",
+     "fn": "STARVING_HOOK",
+     "towns": 6,
+     "falseTowns": 5.6,
+     "kinds": {
+      "a": 6
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "rc"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-village-24",
+      "view": "Summary/Plot Hooks",
+      "surface": "tab",
+      "kind": "a/merchants",
+      "sentence": "Its hungriest are turning to banditry, and a merchant has offered to supply food at a price the settlement cannot pay in coin."
+     }
+    },
+    {
+     "writer": "src/data/dossierStateProse/general.generated.js :: DS-GEN-13 › COMMERCE: craft guilds, no merchant guild · v1",
+     "file": "src/data/dossierStateProse/general.generated.js",
+     "fn": "DS-GEN-13 › COMMERCE: craft guilds, no merchant guild · v1",
+     "towns": 5,
+     "falseTowns": 4.8,
+     "kinds": {
+      "e": 5
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "fd(shared commits only)",
+      "wr(shared commits only)",
+      "fh(shared commits only)",
+      "wse(shared commits only)",
+      "wsr(shared commits only)"
+     ],
+     "known": [
+      "join:BUNDLE-CRP-REST"
+     ],
+     "example": {
+      "seed": "r2r-town-12",
+      "view": "Summary/Overview",
+      "surface": "tab",
+      "kind": "e/guild:merchant",
+      "sentence": "A buyer at Qasrtappa deals with each craft guild on its own, with no merchant guild above them."
+     }
+    },
+    {
+     "writer": "src/data/dossierStateProse/defense.generated.js :: DS-DEF-2 › Internal Security: no legal infrastructure · v1",
+     "file": "src/data/dossierStateProse/defense.generated.js",
+     "fn": "DS-DEF-2 › Internal Security: no legal infrastructure · v1",
+     "towns": 5,
+     "falseTowns": 4.7,
+     "kinds": {
+      "b": 5
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "rt",
+      "wr",
+      "wcs"
+     ],
+     "known": [
+      "join:R3T-F6",
+      "join:R3T-C1",
+      "join:BAR-134",
+      "join:R3T-WATCHPOOL",
+      "join:UPK-P5c",
+      "join:CRP-645",
+      "join:R3T-P9",
+      "join:R3T-C2"
+     ],
+     "example": {
+      "seed": "r2r-thorp-1",
+      "view": "Systems/Defense",
+      "surface": "tab",
+      "kind": "b/occupied:order-own",
+      "sentence": "Terrapolis keeps no court and no gaol, and no wrong done there is written down; order is kept by whoever is armed and standing there, and when they leave, nothing keeps it."
+     }
+    },
+    {
+     "writer": "src/data/dossierStateProse/economy.generated.js :: DS-ECO-6 › TIER: minor shadow activity (≥3) · v1",
+     "file": "src/data/dossierStateProse/economy.generated.js",
+     "fn": "DS-ECO-6 › TIER: minor shadow activity (≥3) · v1",
+     "towns": 5,
+     "falseTowns": 4.7,
+     "kinds": {
+      "b": 5
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "wr"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-hamlet-0",
+      "view": "Systems/Economics",
+      "surface": "tab",
+      "kind": "b/siege:trade-flows",
+      "sentence": "A little of Spitzsteig's trade goes unrecorded, small enough to annoy the clerks and too small to change what the hamlet is."
+     }
+    },
+    {
+     "writer": "src/generators/historyGenerator.js :: generateRelationshipEvent",
+     "file": "src/generators/historyGenerator.js",
+     "fn": "generateRelationshipEvent",
+     "towns": 5,
+     "falseTowns": 4.7,
+     "kinds": {
+      "a": 5
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "fd"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-village-26",
+      "view": "Summary/Plot Hooks",
+      "surface": "tab",
+      "kind": "a/quarry",
+      "sentence": "The quarry foreman's descendants claim unpaid wages from the original commission"
+     }
+    },
+    {
+     "writer": "src/generators/history/historyRouteContext.js :: deriveHistoryRouteContext",
+     "file": "src/generators/history/historyRouteContext.js",
+     "fn": "deriveHistoryRouteContext",
+     "towns": 5,
+     "falseTowns": 4.7,
+     "kinds": {
+      "a": 5
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "fd(shared commits only)",
+      "fh(shared commits only)"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-town-15",
+      "view": "World/History",
+      "surface": "tab",
+      "kind": "a/docks",
+      "sentence": "Beginning in the riverside quarter, the blaze took barges, warehouses, and wharf infrastructure street by street until whole quarters were gone"
+     }
+    },
+    {
+     "writer": "src/generators/computeActiveChains.js :: INSTITUTIONAL_SERVICE_MAP",
+     "file": "src/generators/computeActiveChains.js",
+     "fn": "INSTITUTIONAL_SERVICE_MAP",
+     "towns": 5,
+     "falseTowns": 4.7,
+     "kinds": {
+      "b": 5
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "wcs"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2s-under_siege-town-2",
+      "view": "Systems/Economics",
+      "surface": "tab",
+      "kind": "b/siege:trade-list",
+      "sentence": "Financial services (letters of credit)"
+     }
+    },
+    {
+     "writer": "(untraced) :: ServicesGem purchaseJewellery purchaseJewellery appraisal",
+     "file": "(untraced)",
+     "fn": "",
+     "towns": 4,
+     "falseTowns": 4,
+     "kinds": {
+      "d": 4
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "?"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-town-3",
+      "view": "Systems/Institutions",
+      "surface": "tab",
+      "kind": "d/doubled-word",
+      "sentence": "ServicesGem purchaseJewellery purchaseJewellery appraisal"
+     }
+    },
+    {
+     "writer": "(untraced) :: Major monasteries (#-#).",
+     "file": "(untraced)",
+     "fn": "",
+     "towns": 4,
+     "falseTowns": 4,
+     "kinds": {
+      "f": 4
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "?"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-metropolis-32",
+      "view": "Systems/Defense",
+      "surface": "tab",
+      "kind": "f/count-range",
+      "sentence": "Major monasteries (5-10)."
+     }
+    },
+    {
+     "writer": "src/data/arrivalProse.js :: ARRIVAL_PEOPLE.germanic",
+     "file": "src/data/arrivalProse.js",
+     "fn": "ARRIVAL_PEOPLE.germanic",
+     "towns": 4,
+     "falseTowns": 3.7,
+     "kinds": {
+      "a": 4
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "fd"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-thorp-18",
+      "view": "Summary/Overview",
+      "surface": "tab",
+      "kind": "a/workshops",
+      "sentence": "A craftsman shows off a finished piece in his doorway, and passers-by judge it out loud."
+     }
+    },
+    {
+     "writer": "src/data/dossierStateProse/stressors.generated.js :: DS-CND-1 › DIRECTION: stable · CRISIS: succession_void · v3",
+     "file": "src/data/dossierStateProse/stressors.generated.js",
+     "fn": "DS-CND-1 › DIRECTION: stable · CRISIS: succession_void · v3",
+     "towns": 4,
+     "falseTowns": 3.7,
+     "kinds": {
+      "a": 4
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "fd(shared commits only)",
+      "wr(shared commits only)",
+      "fh(shared commits only)",
+      "wse(shared commits only)",
+      "wsr(shared commits only)"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-village-9",
+      "view": "Summary/Overview",
+      "surface": "tab",
+      "kind": "a/merchants",
+      "sentence": "Nothing large is agreed in Megalburg until someone is in charge, so merchants deal season to season and promise nothing longer."
+     }
+    },
+    {
+     "writer": "(untraced) :: The powerHousehold {N} (significant)merchant-led",
+     "file": "(untraced)",
+     "fn": "",
+     "towns": 4,
+     "falseTowns": 3.7,
+     "kinds": {
+      "a": 4
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "?"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-village-18",
+      "view": "Systems/Power",
+      "surface": "tab",
+      "kind": "a/merchants",
+      "sentence": "The powerHousehold Council (significant)merchant-led"
+     }
+    },
+    {
+     "writer": "src/data/historyData.js :: HISTORICAL_EVENTS_DATA.severity",
+     "file": "src/data/historyData.js",
+     "fn": "HISTORICAL_EVENTS_DATA.severity",
+     "towns": 4,
+     "falseTowns": 3.7,
+     "kinds": {
+      "a": 4
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "fd"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-village-55",
+      "view": "World/History",
+      "surface": "tab",
+      "kind": "a/guild",
+      "sentence": "Rival guilds fought over who may sell what, and over a say in how the place is run"
+     }
+    },
+    {
+     "writer": "src/generators/power/claimStanding.js :: CLAIM_RUNGS",
+     "file": "src/generators/power/claimStanding.js",
+     "fn": "CLAIM_RUNGS",
+     "towns": 4,
+     "falseTowns": 3.7,
+     "kinds": {
+      "a": 4
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "pw"
+     ],
+     "known": [
+      "join:PWR-PF89"
+     ],
+     "example": {
+      "seed": "r2r-town-8",
+      "view": "Systems/Power",
+      "surface": "tab",
+      "kind": "a/court-generic",
+      "sentence": "Church institutions hold direct temporal power; tithes, land, and courts are all ecclesiastical."
+     }
+    },
+    {
+     "writer": "(untraced) :: The powerElder {N} (strong)church-guided",
+     "file": "(untraced)",
+     "fn": "",
+     "towns": 4,
+     "falseTowns": 3.7,
+     "kinds": {
+      "a": 4
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "?"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2s-under_siege-thorp-2",
+      "view": "Systems/Power",
+      "surface": "tab",
+      "kind": "a/church",
+      "sentence": "The powerElder Council (strong)church-guided"
+     }
+    },
+    {
+     "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Weekly market",
+     "file": "src/data/institutionServices.js",
+     "fn": "INSTITUTION_SERVICES.Weekly market",
+     "towns": 4,
+     "falseTowns": 3.7,
+     "kinds": {
+      "b": 4
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "fd"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2s-under_siege-town-0",
+      "view": "Systems/Services",
+      "surface": "tab",
+      "kind": "b/siege:market-day",
+      "sentence": "Regular market days with produce, goods, and livestock."
+     }
+    },
+    {
+     "writer": "src/data/dossierStateProse/economy.generated.js :: DS-ECO-10 › POSTURE: none · v3",
+     "file": "src/data/dossierStateProse/economy.generated.js",
+     "fn": "DS-ECO-10 › POSTURE: none · v3",
+     "towns": 4,
+     "falseTowns": 3.7,
+     "kinds": {
+      "b": 4
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "wr"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2s-occupied-thorp-1",
+      "view": "Systems/Economics",
+      "surface": "tab",
+      "kind": "b/famine:plenty",
+      "sentence": "Whatever surplus there is stays, and is eaten or worn here."
+     }
+    },
+    {
+     "writer": "src/generators/power/governingStressVignettes.js :: buildReligiousConversionNarrative",
+     "file": "src/generators/power/governingStressVignettes.js",
+     "fn": "buildReligiousConversionNarrative",
+     "towns": 4,
+     "falseTowns": 3.7,
+     "kinds": {
+      "a": 4
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "pw"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2s-religious_conversion-thorp-1",
+      "view": "Systems/Power",
+      "surface": "tab",
+      "kind": "a/clergy",
+      "sentence": "The split is now open: two priests, two congregations, two registers of births, deaths and marriages."
+     }
+    },
+    {
+     "writer": "src/data/dossierStateProse/stressors.generated.js :: DS-CND-1 › DIRECTION: stable · CRISIS: occupied · v2",
+     "file": "src/data/dossierStateProse/stressors.generated.js",
+     "fn": "DS-CND-1 › DIRECTION: stable · CRISIS: occupied · v2",
+     "towns": 3,
+     "falseTowns": 3,
+     "kinds": {
+      "c": 3
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "fd(shared commits only)",
+      "wr(shared commits only)",
+      "fh(shared commits only)",
+      "wse(shared commits only)",
+      "wsr(shared commits only)"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-thorp-1",
+      "view": "Summary/Overview",
+      "surface": "tab",
+      "kind": "c/streets",
+      "sentence": "The occupiers in Terrapolis's streets are the same faces as last season, and they no longer bother to look about them."
+     }
+    },
+    {
+     "writer": "src/data/dossierStateProse/defense.generated.js :: DS-DEF-3 › COMPOUND: active siege · v1",
+     "file": "src/data/dossierStateProse/defense.generated.js",
+     "fn": "DS-DEF-3 › COMPOUND: active siege · v1",
+     "towns": 3,
+     "falseTowns": 3,
+     "kinds": {
+      "c": 3
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "rt",
+      "wr",
+      "wcs"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2s-under_siege-thorp-2",
+      "view": "Systems/Defense",
+      "surface": "tab",
+      "kind": "c/streets",
+      "sentence": "With the thorp under siege, quarrels over rations and theft of food are the trouble on Agioslimani's streets now."
+     }
+    },
+    {
+     "writer": "src/data/institutionalCatalog.js :: INSTITUTION_FAMILIES.village",
+     "file": "src/data/institutionalCatalog.js",
+     "fn": "INSTITUTION_FAMILIES.village",
+     "towns": 3,
+     "falseTowns": 2.9,
+     "kinds": {
+      "a": 2,
+      "c": 1
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "fd"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-village-20",
+      "view": "Systems/Institutions",
+      "surface": "tab",
+      "kind": "a/merchants",
+      "sentence": "Serves merchant caravans and long-distance travellers."
+     }
+    },
+    {
+     "writer": "src/data/traditionCorpus.js :: TRADITION_ELEMENTS",
+     "file": "src/data/traditionCorpus.js",
+     "fn": "TRADITION_ELEMENTS",
+     "towns": 3,
+     "falseTowns": 2.8,
+     "kinds": {
+      "a": 3
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "rb(shared commits only)",
+      "rbs(shared commits only)"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-thorp-1",
+      "view": "World/Traditions",
+      "surface": "tab",
+      "kind": "a/fair",
+      "sentence": "The Fair of the First Landing"
+     }
+    },
+    {
+     "writer": "(untraced) :: The powerHousehold {N} (strong)merchant-led",
+     "file": "(untraced)",
+     "fn": "",
+     "towns": 3,
+     "falseTowns": 2.8,
+     "kinds": {
+      "a": 3
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "?"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-thorp-46",
+      "view": "Systems/Power",
+      "surface": "tab",
+      "kind": "a/merchants",
+      "sentence": "The powerHousehold Council (strong)merchant-led"
+     }
+    },
+    {
+     "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicsTab",
+     "file": "src/components/new/tabs/EconomicsTab.jsx",
+     "fn": "EconomicsTab",
+     "towns": 3,
+     "falseTowns": 2.8,
+     "kinds": {
+      "b": 3
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "rb",
+      "wc"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-metropolis-14",
+      "view": "Systems/Economics",
+      "surface": "tab",
+      "kind": "b/siege:trade-list",
+      "sentence": "Legal services (contracts, notarial)Military contract servicesScholarly services (research access, rare texts)"
+     }
+    },
+    {
+     "writer": "src/data/dossierStateProse/power.generated.js :: DS-POW-4 › riskLabel: Contested · v4",
+     "file": "src/data/dossierStateProse/power.generated.js",
+     "fn": "DS-POW-4 › riskLabel: Contested · v4",
+     "towns": 3,
+     "falseTowns": 2.8,
+     "kinds": {
+      "b": 3
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "wr"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2s-under_siege-village-2",
+      "view": "Systems/Power",
+      "surface": "tab",
+      "kind": "b/siege:arrivals",
+      "sentence": "Visitors to Dionpyrgos are quietly told to stay polite to Religious Authorities as well as to Headman's Authority, and nobody says why."
+     }
+    },
+    {
+     "writer": "src/data/dossierStateProse/defense.generated.js :: DS-DEF-4 › structure semi-organized · v3",
+     "file": "src/data/dossierStateProse/defense.generated.js",
+     "fn": "DS-DEF-4 › structure semi-organized · v3",
+     "towns": 2,
+     "falseTowns": 2,
+     "kinds": {
+      "c": 2
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "rt",
+      "wr",
+      "wcs"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-hamlet-20",
+      "view": "Systems/Defense",
+      "surface": "tab",
+      "kind": "c/streets",
+      "sentence": "Rival crews at Jómsmark are fighting over who runs the streets, and until one wins, people pay both the cut and the brawling."
+     }
+    },
+    {
+     "writer": "src/data/officeTitles.js :: OFFICE_TITLES",
+     "file": "src/data/officeTitles.js",
+     "fn": "OFFICE_TITLES",
+     "towns": 2,
+     "falseTowns": 2,
+     "kinds": {
+      "f": 1,
+      "d": 1
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "none"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-city-49",
+      "view": "World/NPCs",
+      "surface": "tab",
+      "kind": "f/tag",
+      "sentence": "Inns and taverns (district) · Master of the Guilds, first of Merchant Guild Council"
+     }
+    },
+    {
+     "writer": "src/data/dossierStateProse/defense.generated.js :: DS-DEF-3 › COMPOUND: slave revolt · v2",
+     "file": "src/data/dossierStateProse/defense.generated.js",
+     "fn": "DS-DEF-3 › COMPOUND: slave revolt · v2",
+     "towns": 2,
+     "falseTowns": 2,
+     "kinds": {
+      "c": 2
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "rt",
+      "wr",
+      "wcs"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2s-slave_revolt-thorp-2",
+      "view": "Systems/Defense",
+      "surface": "tab",
+      "kind": "c/streets",
+      "sentence": "People at Fenggang keep away from the streets where the revolt is being fought, and nobody walks them after dark."
+     }
+    },
+    {
+     "writer": "(untraced) :: The powerHeadman's {N} (dominant)church-guided",
+     "file": "(untraced)",
+     "fn": "",
+     "towns": 2,
+     "falseTowns": 1.9,
+     "kinds": {
+      "a": 2
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "?"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-thorp-12",
+      "view": "Systems/Power",
+      "surface": "tab",
+      "kind": "a/church",
+      "sentence": "The powerHeadman's Authority (dominant)church-guided"
+     }
+    },
+    {
+     "writer": "(untraced) :: The powerElder {N} (significant)church-guided",
+     "file": "(untraced)",
+     "fn": "",
+     "towns": 2,
+     "falseTowns": 1.9,
+     "kinds": {
+      "a": 2
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "?"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-thorp-41",
+      "view": "Systems/Power",
+      "surface": "tab",
+      "kind": "a/church",
+      "sentence": "The powerElder Council (significant)church-guided"
+     }
+    },
+    {
+     "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Tithe and dues",
+     "file": "src/data/institutionServices.js",
+     "fn": "INSTITUTION_SERVICES.Tithe and dues",
+     "towns": 2,
+     "falseTowns": 1.9,
+     "kinds": {
+      "a": 2
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "fd"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-hamlet-29",
+      "view": "Systems/Services",
+      "surface": "tab",
+      "kind": "a/church",
+      "sentence": "Collects the lord's dues and the temple tithe"
+     }
+    },
+    {
+     "writer": "src/generators/economy/outlookHookSiblings.js :: PEACE_IRON_HOOKS",
+     "file": "src/generators/economy/outlookHookSiblings.js",
+     "fn": "PEACE_IRON_HOOKS",
+     "towns": 2,
+     "falseTowns": 1.9,
+     "kinds": {
+      "a": 2
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "rc"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-hamlet-35",
+      "view": "Summary/Plot Hooks",
+      "surface": "tab",
+      "kind": "a/merchants",
+      "sentence": "The iron merchants have doubled their price this season, and the smiths are mending tools with scrap."
+     }
+    },
+    {
+     "writer": "src/data/dossierStateProse/general.generated.js :: DS-GEN-13 › COMMERCE: a market, no guild · v3",
+     "file": "src/data/dossierStateProse/general.generated.js",
+     "fn": "DS-GEN-13 › COMMERCE: a market, no guild · v3",
+     "towns": 2,
+     "falseTowns": 1.9,
+     "kinds": {
+      "e": 2
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "fd(shared commits only)",
+      "wr(shared commits only)",
+      "fh(shared commits only)",
+      "wse(shared commits only)",
+      "wsr(shared commits only)"
+     ],
+     "known": [
+      "join:BUNDLE-CRP-REST"
+     ],
+     "example": {
+      "seed": "r2r-hamlet-47",
+      "view": "Summary/Overview",
+      "surface": "tab",
+      "kind": "e/guild",
+      "sentence": "Buying and selling at Lidocastra is done face to face at the market with no guild between seller and buyer."
+     }
+    },
+    {
+     "writer": "(untraced) :: The powerHousehold {N} (significant)church-guided",
+     "file": "(untraced)",
+     "fn": "",
+     "towns": 2,
+     "falseTowns": 1.9,
+     "kinds": {
+      "a": 2
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "?"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-hamlet-53",
+      "view": "Systems/Power",
+      "surface": "tab",
+      "kind": "a/church",
+      "sentence": "The powerHousehold Council (significant)church-guided"
+     }
+    },
+    {
+     "writer": "src/data/powerSiblings.js :: BASELINE_CONFLICT_SIBLINGS",
+     "file": "src/data/powerSiblings.js",
+     "fn": "BASELINE_CONFLICT_SIBLINGS",
+     "towns": 2,
+     "falseTowns": 1.9,
+     "kinds": {
+      "a": 2
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "ra"
+     ],
+     "known": [
+      "join:R2A-REEVE"
+     ],
+     "example": {
+      "seed": "r2r-hamlet-59",
+      "view": "Systems/Power",
+      "surface": "tab",
+      "kind": "a/church",
+      "sentence": "The church wants approval rights over market day activities."
+     }
+    },
+    {
+     "writer": "src/data/people/goalFamilies.js :: GOAL_FAMILY_LINES",
+     "file": "src/data/people/goalFamilies.js",
+     "fn": "GOAL_FAMILY_LINES",
+     "towns": 2,
+     "falseTowns": 1.9,
+     "kinds": {
+      "h": 2
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "pw"
+     ],
+     "known": [
+      "join:PWR-312"
+     ],
+     "example": {
+      "seed": "r2r-village-57",
+      "view": "World/NPCs",
+      "surface": "tab",
+      "kind": "h/bare-title",
+      "sentence": "Wants Show the rest of Elected Reeve that Xipe Chel can be wrong, without ever saying so aloud."
+     }
+    },
+    {
+     "writer": "src/generators/power/conflictIssues.js :: BASE_ISSUES",
+     "file": "src/generators/power/conflictIssues.js",
+     "fn": "BASE_ISSUES",
+     "towns": 2,
+     "falseTowns": 1.9,
+     "kinds": {
+      "a": 2
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "pw"
+     ],
+     "known": [
+      "join:R2B-389"
+     ],
+     "example": {
+      "seed": "r2r-town-10",
+      "view": "Summary/Plot Hooks",
+      "surface": "tab",
+      "kind": "a/bakery",
+      "sentence": "Bread went up twice this month, and a baker says he was told to raise it."
+     }
+    },
+    {
+     "writer": "src/generators/economy/incomeLineSiblings.js :: REMEDIES_SHORT_LINE",
+     "file": "src/generators/economy/incomeLineSiblings.js",
+     "fn": "REMEDIES_SHORT_LINE",
+     "towns": 2,
+     "falseTowns": 1.9,
+     "kinds": {
+      "a": 2
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "wcs"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-town-34",
+      "view": "Systems/Economics",
+      "surface": "tab",
+      "kind": "a/alchemist",
+      "sentence": "Apothecary & Alchemy Remedies and preparations are made here, but few, while the herbs and reagents they need run short."
+     }
+    },
+    {
+     "writer": "(untraced) :: Mining & {N} materials & fuelImpaired",
+     "file": "(untraced)",
+     "fn": "",
+     "towns": 2,
+     "falseTowns": 1.9,
+     "kinds": {
+      "a": 2
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "?"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-city-32",
+      "view": "Systems/Economics",
+      "surface": "tab",
+      "kind": "a/mine",
+      "sentence": "Mining & CoinageRaw materials & fuelImpaired"
+     }
+    },
+    {
+     "writer": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS",
+     "file": "src/generators/narrative/settlementOriginProse.js",
+     "fn": "ORIGIN_POOLS",
+     "towns": 2,
+     "falseTowns": 1.9,
+     "kinds": {
+      "b": 2
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "ra"
+     ],
+     "known": [
+      "join:R2A-L31"
+     ],
+     "example": {
+      "seed": "r2r-metropolis-14",
+      "view": "Summary/Overview",
+      "surface": "tab",
+      "kind": "b/siege:arrivals",
+      "sentence": "It exists because travellers had to stop somewhere, and the roads decided that somewhere was here."
+     }
+    },
+    {
+     "writer": "src/generators/economy/foodBalance.js :: deriveSupplyRiskAnalysis",
+     "file": "src/generators/economy/foodBalance.js",
+     "fn": "deriveSupplyRiskAnalysis",
+     "towns": 2,
+     "falseTowns": 1.9,
+     "kinds": {
+      "b": 2
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "ra"
+     ],
+     "known": [
+      "join:R2A-L24"
+     ],
+     "example": {
+      "seed": "r2s-under_siege-city-0",
+      "view": "Summary/Plot Hooks",
+      "surface": "tab",
+      "kind": "b/siege:brought-in",
+      "sentence": "One importer now brings in all the grain and has quadrupled the price; the locals are arguing over whether to pay, find another supplier, or take the grain."
+     }
+    },
+    {
+     "writer": "src/data/npcData.js :: NPC_CRIMINAL_SECRETS_BY_HOLDER.criminal",
+     "file": "src/data/npcData.js",
+     "fn": "NPC_CRIMINAL_SECRETS_BY_HOLDER.criminal",
+     "towns": 2,
+     "falseTowns": 1.9,
+     "kinds": {
+      "a": 2
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "ra"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2s-occupied-hamlet-3",
+      "view": "World/NPCs",
+      "surface": "tab",
+      "kind": "a/merchants",
+      "sentence": "Secret: Runs a protection scheme targeting the very merchants they're supposed to serve"
+     }
+    },
+    {
+     "writer": "src/data/dossierStateProse/stressors.generated.js :: DS-CND-1 › DIRECTION: worsening · CRISIS: insurgency · v3",
+     "file": "src/data/dossierStateProse/stressors.generated.js",
+     "fn": "DS-CND-1 › DIRECTION: worsening · CRISIS: insurgency · v3",
+     "towns": 2,
+     "falseTowns": 1.9,
+     "kinds": {
+      "a": 2
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "fd(shared commits only)",
+      "wr(shared commits only)",
+      "fh(shared commits only)",
+      "wse(shared commits only)",
+      "wsr(shared commits only)"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2s-insurgency-thorp-1",
+      "view": "Summary/Overview",
+      "surface": "tab",
+      "kind": "a/merchants",
+      "sentence": "Fewer merchants in Ulfset pay what the government asks, and more pay its rivals instead."
+     }
+    },
+    {
+     "writer": "src/domain/summary/settlementQuickGuide.js :: scopeAtSize",
+     "file": "src/domain/summary/settlementQuickGuide.js",
+     "fn": "scopeAtSize",
+     "towns": 2,
+     "falseTowns": 1.9,
+     "kinds": {
+      "a": 2
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "rb"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2s-insurgency-town-1",
+      "view": "Summary/Overview",
+      "surface": "tab",
+      "kind": "a/waterworks",
+      "sentence": "Mesoamerican-inspired: built around a civic-ritual plaza, tribute, and market-and-waterworks."
+     }
+    },
+    {
+     "writer": "(untraced) :: Bohdan {N} is paid first, every quarter.",
+     "file": "(untraced)",
+     "fn": "",
+     "towns": 1,
+     "falseTowns": 1,
+     "kinds": {
+      "c": 1
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "?"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-village-2",
+      "view": "World/Relationships",
+      "surface": "tab",
+      "kind": "c/quarters",
+      "sentence": "Bohdan Golubev is paid first, every quarter."
+     }
+    },
+    {
+     "writer": "src/data/dossierStateProse/defense.generated.js :: DS-DEF-3 › COMPOUND: insurgency · v3",
+     "file": "src/data/dossierStateProse/defense.generated.js",
+     "fn": "DS-DEF-3 › COMPOUND: insurgency · v3",
+     "towns": 1,
+     "falseTowns": 1,
+     "kinds": {
+      "c": 1
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "rt",
+      "wr",
+      "wcs"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-village-34",
+      "view": "Systems/Defense",
+      "surface": "tab",
+      "kind": "c/districts",
+      "sentence": "Some districts of Lagoorum are closed off now, and whatever happens there goes unrecorded and unpunished."
+     }
+    },
+    {
+     "writer": "src/data/narrativeData.js :: STRESS_DESCS.indebted",
+     "file": "src/data/narrativeData.js",
+     "fn": "STRESS_DESCS.indebted",
+     "towns": 1,
+     "falseTowns": 1,
+     "kinds": {
+      "c": 1
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "ra"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-village-47",
+      "view": "Summary/Overview",
+      "surface": "tab",
+      "kind": "c/districts",
+      "sentence": "The merchant district of Mahapat looks prosperous."
+     }
+    },
+    {
+     "writer": "src/generators/economy/viability.js :: generateEconomicViability",
+     "file": "src/generators/economy/viability.js",
+     "fn": "generateEconomicViability",
+     "towns": 1,
+     "falseTowns": 1,
+     "kinds": {
+      "f": 1
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "up(shared commits only)",
+      "um(shared commits only)"
+     ],
+     "known": [
+      "join:UPK-RANGE-VIAB"
+     ],
+     "example": {
+      "seed": "r2r-town-9",
+      "view": "Summary/Overview",
+      "surface": "tab",
+      "kind": "f/count-range",
+      "sentence": "11 institutions operating on stockpiles only (isolated trade): Weekly market, Market square, Taverns (5-20), Town granary, Mills, Carpenters, Town watch, Citadel, Weavers/Textile workers, Barracks, Town walls."
+     }
+    },
+    {
+     "writer": "(untraced) :: The seatVachir {N} (the senior guild master), the senior guild master and {N}",
+     "file": "(untraced)",
+     "fn": "",
+     "towns": 1,
+     "falseTowns": 1,
+     "kinds": {
+      "d": 1
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "?"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-town-50",
+      "view": "Systems/Power",
+      "surface": "tab",
+      "kind": "d/doubled-label",
+      "sentence": "The seatVachir Merv (the senior guild master), the senior guild master and Alderman"
+     }
+    },
+    {
+     "writer": "(untraced) :: Vachir {N} (the senior guild master), the senior guild master and {N}, holds the",
+     "file": "(untraced)",
+     "fn": "",
+     "towns": 1,
+     "falseTowns": 1,
+     "kinds": {
+      "d": 1
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "?"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-town-50",
+      "view": "Systems/Power",
+      "surface": "tab",
+      "kind": "d/doubled-label",
+      "sentence": "Vachir Merv (the senior guild master), the senior guild master and Alderman, holds the seat of the Guild Council."
+     }
+    },
+    {
+     "writer": "(untraced) :: ServicesCustom commissionGem purchaseJewellery purchaseJewellery appraisal",
+     "file": "(untraced)",
+     "fn": "",
+     "towns": 1,
+     "falseTowns": 1,
+     "kinds": {
+      "d": 1
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "?"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2s-recently_betrayed-town-2",
+      "view": "Systems/Institutions",
+      "surface": "tab",
+      "kind": "d/doubled-word",
+      "sentence": "ServicesCustom commissionGem purchaseJewellery purchaseJewellery appraisal"
+     }
+    },
+    {
+     "writer": "src/data/narrativeData.js :: STRESS_DESCS.religious_conversion",
+     "file": "src/data/narrativeData.js",
+     "fn": "STRESS_DESCS.religious_conversion",
+     "towns": 1,
+     "falseTowns": 1,
+     "kinds": {
+      "c": 1
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "ra"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2s-religious_conversion-village-3",
+      "view": "Summary/Overview",
+      "surface": "tab",
+      "kind": "c/quarters",
+      "sentence": "Two processions are forming in different quarters, and the people watching each are counting who watches the other."
+     }
+    },
+    {
+     "writer": "src/data/dossierStateProse/defense.generated.js :: DS-DEF-8 › override: MIGRATION, arrivals · v1",
+     "file": "src/data/dossierStateProse/defense.generated.js",
+     "fn": "DS-DEF-8 › override: MIGRATION, arrivals · v1",
+     "towns": 1,
+     "falseTowns": 1,
+     "kinds": {
+      "c": 1
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "rt",
+      "wr",
+      "wcs"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2s-mass_migration-hamlet-1",
+      "view": "Systems/Defense",
+      "surface": "tab",
+      "kind": "c/crowds",
+      "sentence": "More people are arriving at Eleftakra than its guards can keep in order, so they spend their days on the crowds, not on the roads."
+     }
+    },
+    {
+     "writer": "src/data/arrivalProse.js :: ARRIVAL_SENSES.lines",
+     "file": "src/data/arrivalProse.js",
+     "fn": "ARRIVAL_SENSES.lines",
+     "towns": 1,
+     "falseTowns": 0.9,
+     "kinds": {
+      "a": 1
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "fd"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-thorp-42",
+      "view": "Summary/Overview",
+      "surface": "tab",
+      "kind": "a/workshops",
+      "sentence": "The rasp of a saw and the smell of fresh-cut wood come from a workshop yard."
+     }
+    },
+    {
+     "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Wholesale trade",
+     "file": "src/data/institutionServices.js",
+     "fn": "INSTITUTION_SERVICES.Wholesale trade",
+     "towns": 1,
+     "falseTowns": 0.9,
+     "kinds": {
+      "a": 1
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "fd"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-thorp-50",
+      "view": "Systems/Services",
+      "surface": "tab",
+      "kind": "a/inn",
+      "sentence": "Bulk purchase by taverns, institutions, and inland traders."
+     }
+    },
+    {
+     "writer": "src/data/historyData.js :: HISTORICAL_EVENTS_DATA.factions",
+     "file": "src/data/historyData.js",
+     "fn": "HISTORICAL_EVENTS_DATA.factions",
+     "towns": 1,
+     "falseTowns": 0.9,
+     "kinds": {
+      "a": 1
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "fd"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-hamlet-6",
+      "view": "Summary/Overview",
+      "surface": "tab",
+      "kind": "a/church",
+      "sentence": "Temple beneficiariesOverwhelmed old residentsSceptics who doubt the miracle"
+     }
+    },
+    {
+     "writer": "(untraced) :: Headman's {N} candidatethe merchant class",
+     "file": "(untraced)",
+     "fn": "",
+     "towns": 1,
+     "falseTowns": 0.9,
+     "kinds": {
+      "a": 1
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "?"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-hamlet-22",
+      "view": "Summary/Overview",
+      "surface": "tab",
+      "kind": "a/merchants",
+      "sentence": "Headman's AuthorityPopular candidatethe merchant class"
+     }
+    },
+    {
+     "writer": "(untraced) :: Elder {N} candidatethe merchant class",
+     "file": "(untraced)",
+     "fn": "",
+     "towns": 1,
+     "falseTowns": 0.9,
+     "kinds": {
+      "a": 1
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "?"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-hamlet-31",
+      "view": "Summary/Overview",
+      "surface": "tab",
+      "kind": "a/merchants",
+      "sentence": "Elder CouncilPopular candidatethe merchant class"
+     }
+    },
+    {
+     "writer": "(untraced) :: The powerHeadman's {N} (suppressed)church-guided",
+     "file": "(untraced)",
+     "fn": "",
+     "towns": 1,
+     "falseTowns": 0.9,
+     "kinds": {
+      "a": 1
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "?"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-hamlet-45",
+      "view": "Systems/Power",
+      "surface": "tab",
+      "kind": "a/church",
+      "sentence": "The powerHeadman's Authority (suppressed)church-guided"
+     }
+    },
+    {
+     "writer": "(untraced) :: The powerHousehold {N} (dominant)church-guided",
+     "file": "(untraced)",
+     "fn": "",
+     "towns": 1,
+     "falseTowns": 0.9,
+     "kinds": {
+      "a": 1
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "?"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-hamlet-59",
+      "view": "Systems/Power",
+      "surface": "tab",
+      "kind": "a/church",
+      "sentence": "The powerHousehold Council (dominant)church-guided"
+     }
+    },
+    {
+     "writer": "(untraced) :: The {N} {N}",
+     "file": "(untraced)",
+     "fn": "",
+     "towns": 1,
+     "falseTowns": 0.9,
+     "kinds": {
+      "a": 1
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "?"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-village-55",
+      "view": "World/History",
+      "surface": "tab",
+      "kind": "a/guild",
+      "sentence": "The Guild WarEconomicminor"
+     }
+    },
+    {
+     "writer": "(untraced) :: Alchemy & {N} & magicalImpaired",
+     "file": "(untraced)",
+     "fn": "",
+     "towns": 1,
+     "falseTowns": 0.9,
+     "kinds": {
+      "a": 1
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "?"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-town-6",
+      "view": "Systems/Economics",
+      "surface": "tab",
+      "kind": "a/alchemist",
+      "sentence": "Alchemy & ReagentsArcane & magicalImpaired"
+     }
+    },
+    {
+     "writer": "(untraced) :: Gem {N} & {N} materials & fuelVulnerable",
+     "file": "(untraced)",
+     "fn": "",
+     "towns": 1,
+     "falseTowns": 0.9,
+     "kinds": {
+      "a": 1
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "?"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-town-14",
+      "view": "Systems/Economics",
+      "surface": "tab",
+      "kind": "a/mine",
+      "sentence": "Gem Mining & LapidaryRaw materials & fuelVulnerable"
+     }
+    },
+    {
+     "writer": "src/generators/historyGenerator.js :: noteByTemplateRow",
+     "file": "src/generators/historyGenerator.js",
+     "fn": "noteByTemplateRow",
+     "towns": 1,
+     "falseTowns": 0.9,
+     "kinds": {
+      "a": 1
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "fd"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-town-19",
+      "view": "World/History",
+      "surface": "tab",
+      "kind": "a/docks",
+      "sentence": "A fire out of the riverside quarter spread through barges, warehouses, and wharf infrastructure across entire districts before anyone could bring it under control"
+     }
+    },
+    {
+     "writer": "src/data/npcData.js :: STRESS_ECONOMIC_EFFECTS.econ_crim_blur",
+     "file": "src/data/npcData.js",
+     "fn": "STRESS_ECONOMIC_EFFECTS.econ_crim_blur",
+     "towns": 1,
+     "falseTowns": 0.9,
+     "kinds": {
+      "a": 1
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "ra"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2r-city-3",
+      "view": "World/Relationships",
+      "surface": "tab",
+      "kind": "a/customs",
+      "sentence": "The warehouse keeps two inventories, and only one is shown to the customs house."
+     }
+    },
+    {
+     "writer": "src/data/dossierStateProse/economy.generated.js :: DS-ECO-1 › COMBINATION C5: a low rung on a narrow approach · v3",
+     "file": "src/data/dossierStateProse/economy.generated.js",
+     "fn": "DS-ECO-1 › COMBINATION C5: a low rung on a narrow approach · v3",
+     "towns": 1,
+     "falseTowns": 0.9,
+     "kinds": {
+      "b": 1
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "wr"
+     ],
+     "known": [
+      "join:BUNDLE-CRP-ECO",
+      "join:LV-GRAPES",
+      "join:LV-STRATFRAME",
+      "join:CRP-ECO12"
+     ],
+     "example": {
+      "seed": "r2s-under_siege-thorp-2",
+      "view": "Systems/Economics",
+      "surface": "tab",
+      "kind": "b/siege:brought-in",
+      "sentence": "Agioslimani is too poor to mend its road, and the road brings in too little to make it richer."
+     }
+    },
+    {
+     "writer": "src/data/supplyChainData.js :: QUALITY_TOOLS_AND_WEAPONS",
+     "file": "src/data/supplyChainData.js",
+     "fn": "QUALITY_TOOLS_AND_WEAPONS",
+     "towns": 1,
+     "falseTowns": 0.9,
+     "kinds": {
+      "b": 1
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "none"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2s-under_siege-town-0",
+      "view": "Systems/Economics",
+      "surface": "tab",
+      "kind": "b/siege:trade-list",
+      "sentence": "Quality tools and weaponsPilgrimage & religious tourism"
+     }
+    },
+    {
+     "writer": "(untraced) :: The powerHousehold {N} (minor)church-guided",
+     "file": "(untraced)",
+     "fn": "",
+     "towns": 1,
+     "falseTowns": 0.9,
+     "kinds": {
+      "a": 1
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "?"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2s-politically_fractured-hamlet-1",
+      "view": "Systems/Power",
+      "surface": "tab",
+      "kind": "a/church",
+      "sentence": "The powerHousehold Council (minor)church-guided"
+     }
+    },
+    {
+     "writer": "src/domain/summary/settlementQuickGuide.js :: scopeAgainstRecord",
+     "file": "src/domain/summary/settlementQuickGuide.js",
+     "fn": "scopeAgainstRecord",
+     "towns": 1,
+     "falseTowns": 0.9,
+     "kinds": {
+      "a": 1
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "rb"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2s-indebted-village-3",
+      "view": "Summary/Overview",
+      "surface": "tab",
+      "kind": "a/docks",
+      "sentence": "Greek-inspired; people here live in a place built around the harbour, on the coast, and run by civic association."
+     }
+    },
+    {
+     "writer": "src/data/dossierStateProse/defense.generated.js :: DS-DEF-3 › Safe · v2",
+     "file": "src/data/dossierStateProse/defense.generated.js",
+     "fn": "DS-DEF-3 › Safe · v2",
+     "towns": 1,
+     "falseTowns": 0.9,
+     "kinds": {
+      "a": 1
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "rt",
+      "wr",
+      "wcs"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2s-infiltrated-village-2",
+      "view": "Systems/Defense",
+      "surface": "tab",
+      "kind": "a/force",
+      "sentence": "The village's record of crimes at Bayarserai stays short: there is crime, but enforcement keeps it down and keeps it from growing."
+     }
+    },
+    {
+     "writer": "src/generators/economy/incomeLineSiblings.js :: ALCHEMIST_SUPPLEMENTS_LINE",
+     "file": "src/generators/economy/incomeLineSiblings.js",
+     "fn": "ALCHEMIST_SUPPLEMENTS_LINE",
+     "towns": 1,
+     "falseTowns": 0.9,
+     "kinds": {
+      "a": 1
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "wcs"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2s-infiltrated-city-1",
+      "view": "Systems/Economics",
+      "surface": "tab",
+      "kind": "a/healer",
+      "sentence": "Herbalist & Apothecary Herbal remedies, minor alchemical preparations, and potion sales."
+     }
+    },
+    {
+     "writer": "src/generators/factionDynamics.js :: computeFactionRelationships",
+     "file": "src/generators/factionDynamics.js",
+     "fn": "computeFactionRelationships",
+     "towns": 1,
+     "falseTowns": 0.9,
+     "kinds": {
+      "a": 1
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "rc"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2s-plague_onset-town-0",
+      "view": "Systems/Power",
+      "surface": "tab",
+      "kind": "a/court-generic",
+      "sentence": "Landed Gentry live under the rule of Military Council but keep enough rights of their own (land, courts, levies) to bargain, not simply obey."
+     }
+    },
+    {
+     "writer": "src/data/npcData.js :: STRESS_ECONOMIC_EFFECTS.mil_crim_suppression",
+     "file": "src/data/npcData.js",
+     "fn": "STRESS_ECONOMIC_EFFECTS.mil_crim_suppression",
+     "towns": 1,
+     "falseTowns": 0.9,
+     "kinds": {
+      "a": 1
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "ra"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2s-plague_onset-town-0",
+      "view": "World/Relationships",
+      "surface": "tab",
+      "kind": "a/court",
+      "sentence": "Salim al-Baghdadi has a witness willing to name Nasr ibn Zuhr before a magistrate."
+     }
+    },
+    {
+     "writer": "src/data/narrativeData.js :: STRESS_DESCS.succession_void",
+     "file": "src/data/narrativeData.js",
+     "fn": "STRESS_DESCS.succession_void",
+     "towns": 1,
+     "falseTowns": 0.9,
+     "kinds": {
+      "a": 1
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "ra"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2s-succession_void-town-0",
+      "view": "Summary/Overview",
+      "surface": "tab",
+      "kind": "a/quarry",
+      "sentence": "Building has stopped mid-job across Shivamandal; scaffolding stands empty on dressed stone."
+     }
+    },
+    {
+     "writer": "src/generators/power/factionStanding.js :: annotateFactionStanding",
+     "file": "src/generators/power/factionStanding.js",
+     "fn": "annotateFactionStanding",
+     "towns": 1,
+     "falseTowns": 0.9,
+     "kinds": {
+      "a": 1
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "pw"
+     ],
+     "known": [
+      "join:CRP-HERESY"
+     ],
+     "example": {
+      "seed": "r2s-slave_revolt-village-0",
+      "view": "Systems/Power",
+      "surface": "tab",
+      "kind": "a/guild",
+      "sentence": "They denounce the guild from the pulpit; the guild funds two charitable institutions and makes the denunciations look selective."
+     }
+    },
+    {
+     "writer": "(untraced) :: The powerHeadman's {N} (strong)church-guided",
+     "file": "(untraced)",
+     "fn": "",
+     "towns": 1,
+     "falseTowns": 0.9,
+     "kinds": {
+      "a": 1
+     },
+     "surfaces": [
+      "tab"
+     ],
+     "holder": [
+      "?"
+     ],
+     "known": [],
+     "example": {
+      "seed": "r2s-wartime-thorp-3",
+      "view": "Systems/Power",
+      "surface": "tab",
+      "kind": "a/church",
+      "sentence": "The powerHeadman's Authority (strong)church-guided"
+     }
+    }
+   ]
+  }
+ }
+}
