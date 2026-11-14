@@ -6023,6 +6023,90 @@ SEATS2['EXPORTS-MEASURE-1'] = dict(
 )
 
 
+SEATS2['W2-FIX-DATA-14'] = dict(
+    title="W2-FIX-DATA-14 · the data lane: its own worklist taken by the census's command, the cathedral's need row, its reader's medium lines, then by width",
+    branch='lane/w2-fix-data-2026-11-13', tip='6f70f3d0', statement=False,
+    intro=("You are W2-FIX-DATA-14, the fourteenth seat on the data lane of the settlement-engine integration program "
+           "(lane/w2-fix-data-2026-11-13). The lane cures false lines written in the data tables: a house's description, a service's text, a "
+           "history line, an arrival line. An independent reader read it NOT CLEAR at 994733bcd; the thirteenth seat cured the reader's HIGH "
+           "row (district and quarter lines in small places, 60 to 0), the smelter's text (57 to 0) and the slave revolt's note (11 to 0), "
+           "and handed back at its count with its list in order. SINCE THEN A SCRIPT CENSUS OF 720 TOWNS HAS RANKED EVERY WRITER BY FALSE "
+           "TOWNS, AND THIS LANE'S FILES STAND HIGH IN IT (a table of description declarations: 206 towns; the catalogue's descriptions by "
+           "tier: 40 to 55 each; a history table: 60). Yours: YOUR OWN WORKLIST, TAKEN AT YOUR OWN TIP BY THE CENSUS'S ONE COMMAND, then "
+           "the cures BY WIDTH. The lane lands as points on the joined line: NO whole suite, NO new statement."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. On your lane, docs/chair/2026-11-14/W2-FIX-DATA-HANDBACK-13.md WHOLE (by script): the rulings copied (THEY STAND); the three "
+          "cures as made (THE FORM OF A CURE IN THESE TABLES: a crisis twin, a tier twin, a declaration; red first; a guard); EVERY NEW OR "
+          "CHANGED LINE; FOR THE JOIN; section 5 WHAT IS LEFT (YOUR LIST, beside the census's rows); section 6 the instruments.\n"
+          "3. THE CENSUS (`git fetch origin lane/census-3-2026-11-14`; `git show "
+          "origin/lane/census-3-2026-11-14:docs/chair/2026-11-14/CENSUS-3-2026-11-14.md`, by script): ONLY \"THE ONE COMMAND\" (how it is "
+          "run on any tree with `--files`), \"PRECISION, AS READ\" and, in \"Item 6\", the rows whose holder reads `fd` (this lane): each "
+          "with an example town and line. Its probes by git archive, run from outside every repository tree.\n"
+          "4. THE READER'S VERDICT, for a row you are curing (`git fetch origin lane/review-w2-fix-data-4-2026-11-14`: "
+          "docs/chair/2026-11-14/, its verdict file: the findings table by script); and the no-lane seat's row for the cathedral "
+          "(`git fetch origin lane/join-nolane-2026-11-14`; `git show "
+          "origin/lane/join-nolane-2026-11-14:docs/chair/2026-11-14/NOLANE-HANDBACK.md`, ONLY the table \"FOR THE JOIN\")."),
+    first=("FIRST ACT. FULL HISTORY (`git fetch --depth=2147483647 origin lane/w2-fix-data-2026-11-13 lane/join-2026-11-14 "
+           "lane/integration-2026-11-07`; `git rev-parse --is-shallow-repository` prints false). Read your lane's tip back from origin: it "
+           "was 6f70f3d04 when this was written; any difference is a stop: tell the chair. (1) MERGE THE JOINED LINE'S TIP INTO YOUR LANE "
+           "(`git merge --no-ff origin/lane/join-2026-11-14`, the tip as you read it: say which): every lane's cures are landed there; "
+           "from this merge on your lane holds them. A code conflict in a file of yours keeps BOTH sides' cures (read the file whole); a "
+           "register, a baseline, a generated file or a bundle that conflicts takes THE JOINED LINE'S side. After it: the three fast "
+           "gates and the test files that name this lane's files: a test red after the merge and green on both sides before it is A "
+           "COMPOSED RED: one message to the chair with the two intents in a sentence each; go on meanwhile. (2) YOUR WORKLIST: the "
+           "census's one command at your merged tip (about 22 minutes, to a directory outside every tree), then its table for YOUR "
+           "files (`--files`: every file under src/data/ that your lane has changed since its merge base with "
+           "origin/lane/integration-2026-11-07, and every file the census's Item 6 gives the holder `fd`). EXCEPT "
+           "src/data/cultureProfiles.js: its lines print in the PDF only, and a measuring seat is sizing that chapter's cure now: NOT "
+           "YOURS until the chair says."),
+    work=("THE CHAIR'S RULINGS SINCE THE THIRTEENTH SEAT'S COPY (2026-11-14; each vetoable by the owner; copy them into your hand-back):\n"
+          "(r1) REGISTERS ARE RE-DERIVED ONCE, AT THE CLOSE, ON THE FINAL TREE: you re-take no census and no baseline after a cure and "
+          "rebuild no bundle: a register your cure or your merge leaves stale is NAMED in your hand-back; nothing is banked, raised or "
+          "hand-edited; the pool guard still runs where a pool is touched; a pin your cure moves is re-keyed BY IDENTITY in the same "
+          "commit.\n"
+          "(r2) A HIT OF THE CENSUS IS A CANDIDATE, NOT A FAULT: before a writer of its table is cured, TEN of its hit lines are read "
+          "where they print (the town's roster, its tier, its crisis): the false ones are counted and the row takes its place in your "
+          "table by FALSE towns; a writer whose hits read true is STRUCK with one line saying why.\n"
+          "(r3) THE CATHEDRAL'S NEED ROW (100 of 720 towns, all false: \"Religious services, pilgrimage … here depend on stone brought "
+          "in\"): src/data/economicData.js, the two cathedral rows of TRADE_DEPENDENCY_NEEDS: the rows' services name what the stone "
+          "keeps up (building repairs), not worship, pilgrimage and teaching: A DECLARED MOVE of dependency.affectedServices and the "
+          "Services tab's at-risk marks: its field diff by family; more than that moving is a stop.\n"
+          "(r4) A SURFACE PRINTS A HOUSE'S DESCRIPTION THROUGH ONE READER: where the census shows a description false on the PDF or the "
+          "journal and true or absent on the tab, the fault is the export's (it prints the catalogue raw): NAME the row for the "
+          "surfaces lane with its count; do not cure it in the data.\n"
+          "THE WORK, in this order, each cause its own commit, measured first on your births and on the census's 720 (count before and "
+          "after), red first (a collected arm; a guard town for every line a condition takes off a town; each arm shown able to red by "
+          "a plant you do not commit, made in a tree no suite or render is running in), pushed as made:\n"
+          "1. ONE TABLE FIRST, in your hand-back: the census's rows for your files as read under (r2), beside section 5's rows "
+          "re-measured at your merged tip (false / printing): SORTED BY FALSE TOWNS. ONE MESSAGE TO THE CHAIR with its first ten rows.\n"
+          "2. THE CURES IN THE TABLE'S ORDER. As the counts stood when this was written the order would be: the description "
+          "declarations (the census's 206 towns: read first), (r3) the cathedral 100, the catalogue's descriptions by tier where the "
+          "TAB prints them false, the history table's lasting effects left after the thirteenth seat's cure, the street kitchens 30, "
+          "the reader's three MEDIUM (the forge arrival still printing; a wharf with no docks, a sawmill district with no sawmill, "
+          "\"chandlers and tanners\" with neither), the grain clause 18, the siege cells and the famine cells of the services and "
+          "descriptions, the rest of section 5.\n"
+          "3. THE POOL GUARD'S TWO ROWS OVER THEIR CEILINGS (plotHooks:succession_crisis, plotHooks:resource_scarcity), as section 5 "
+          "has them: widen the pool with lines READ TRUE in three towns of the case, or narrow the cure's condition; NEVER raise a "
+          "ceiling.\n"
+          "A CURE IN A DATA TABLE THAT A GENERATOR READS IS A DECLARED MOVE: say which families move, with counts; more than the row's "
+          "own lines moving is a STOP with the table. EVERY LINE YOU WRITE OR REWORD IS READ WHERE IT PRINTS before it is pushed, ON "
+          "EVERY SURFACE THAT PRINTS THE ROW (a house's card, the Services tab, the PDF, the journal): three towns of its cells, a "
+          "siege, a famine or an occupation among them, the smallest and the largest size it reaches. A TWIN TAKES ITS SIBLINGS' "
+          "CONDITION; A RE-GATE READS THE LINE THAT INHERITS ITS TOWNS.\n"
+          "AFTER EVERY CURE: the presumed-things walker (a rise over your merged base is a stop); the three fast gates on the touched "
+          "files; the twelve-birth grid (`node scripts/census/page-census.mjs --grid`: a rise is a stop; a fall is NAMED); the test "
+          "files that name the files you touched. AT THE END, ONCE: the census's command again with `--files`: your table's rows "
+          "before and after, in the hand-back.\n"
+          "THE HAND-BACK, kept current after every item: docs/chair/2026-11-14/W2-FIX-DATA-HANDBACK-14.md in the form of the "
+          "thirteenth's: the rulings copied; the merge (the tip merged; conflicts; composed reds); the table; the rows as cured; EVERY "
+          "NEW OR CHANGED LINE with the towns it was read in; the rows NAMED for the surfaces lane; THE REGISTERS NAMED STALE; FOR THE "
+          "JOIN; what is left, line by line."),
+    merges='; the merge of the joined line into YOUR lane that the first act names',
+    when="for a stop that blocks everything you have left, for a composed red after the merge, with step 1's table (its first ten rows), and with your hand-back",
+    turns='',
+)
+
+
 def build2(seat):
     s = _r3c6() if seat == 'R3-CODE-C-6' else SEATS2[seat]
     head = (
