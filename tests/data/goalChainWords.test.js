@@ -9,6 +9,7 @@
  * whose words fail under a siege or a famine declare it on their `excludes` side.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
@@ -40,15 +41,17 @@ describe('POWERS-9 · the goal lines name no chain', () => {
 
 describe('POWERS-9 · the readers\' towns', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
-  it.each(['rww-city-under_siege-1', 'rww-village-under_siege-1', 'rpf-village-succession_void+famine-13', 'rpf-city-politically_fractured-13',
-    'rpf-town-succession_void-13', 'rpf-metropolis-occupied-13', 'rpf-metropolis-politically_fractured-13'])('%s: no goal prints a chain label; none presumes trade under a siege', (seed) => {
+  it('every reader\'s town: no goal prints a chain label; none presumes trade under a siege', () => {
+    expectNoSeedFailures(collectSeedFailures(['rww-city-under_siege-1', 'rww-village-under_siege-1', 'rpf-village-succession_void+famine-13', 'rpf-city-politically_fractured-13',
+    'rpf-town-succession_void-13', 'rpf-metropolis-occupied-13', 'rpf-metropolis-politically_fractured-13'], (seed) => {
     const s = born(seed);
     const goals = s.npcs.flatMap((c) => [c.goal?.short, c.goal?.long].filter(Boolean).map((g) => ({ g, short: g === c.goal?.short })));
     expect(goals.filter(({ g }) => LABELS.some((x) => g.includes(x))).map(({ g }) => g)).toEqual([]);
     const types = (Array.isArray(s.stress) ? s.stress : [s.stress]).filter(Boolean).map((x) => x.type);
     if (types.includes('under_siege')) expect(goals.filter(({ g, short }) => short && SIEGE_WORDS.test(g)).map(({ g }) => g)).toEqual([]);
     if (types.includes('famine')) expect(goals.filter(({ g, short }) => short && FAMINE_WORDS.test(g)).map(({ g }) => g)).toEqual([]);
-  }, 60_000);
+  }), 'every reader\'s town: no goal prints a chain label; none presumes trade under a siege');
+  }, 420_000);
   it('THE GUARD: the reworded lines still print where true (rpf-metropolis-politically_fractured-13 keeps a SUPPLY line through its house)', () => {
     const s = born('rpf-metropolis-politically_fractured-13');
     expect(s.npcs.some((c) => /the work at the |^Waste nothing at |^Ration what is left at |^Find whoever can still supply /.test(c.goal?.short || ''))).toBe(true);

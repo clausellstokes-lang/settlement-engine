@@ -7,6 +7,7 @@
  * next admitted candidate, draw-free (generators/people/goals.js :: familyCandidates, drawVantage, admittedAfter).
  */
 import { beforeAll, describe, expect, it } from 'vitest';
+import { collectSeedFailures, expectNoSeedFailures } from '../../helpers/seedFailures.js';
 import { generateSettlementPipeline } from '../../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../../src/store/configSlice.js';
@@ -26,14 +27,16 @@ const isCharter = (/** @type {string} */ g) => CHARTER.some((re) => re.test(g));
 
 describe('POWERS-9 · the charter goals', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
-  it.each(['rpf-city-calm-13', 'rpf-metropolis-calm-13', 'rpf-town-calm-13', 'rpf-hamlet-calm-13'])('%s: no criminal house and no head of the governing power holds one', (seed) => {
+  it('every seed: no criminal house and no head of the governing power holds one', () => {
+    expectNoSeedFailures(collectSeedFailures(['rpf-city-calm-13', 'rpf-metropolis-calm-13', 'rpf-town-calm-13', 'rpf-hamlet-calm-13'], (seed) => {
     const s = born(seed);
     const crim = new Set(criminalHousesOf(s).map((h) => h.name));
     const gov = (s.powerStructure?.factions || []).find((f) => f.isGoverning)?.faction;
     const bad = s.npcs.filter((c) => [c.goal?.short, c.goal?.long].some((g) => g && isCharter(g))
       && (crim.has(c.institution?.key) || (c.memberships || []).some((m) => m.power === gov && m.rank === 1)));
     expect(bad.map((c) => `${c.name}, ${c.title}: ${c.goal?.short} / ${c.goal?.long}`)).toEqual([]);
-  }, 60_000);
+  }), 'every seed: no criminal house and no head of the governing power holds one');
+  }, 240_000);
   it('THE GUARD: a lawful house\'s card keeps its charter goal (rpf-city-calm-13, the tailor\'s guild)', () => {
     const s = born('rpf-city-calm-13');
     expect(s.npcs.some((c) => c.goal?.short === "Have those who govern confirm, in writing, who may give orders at the tailor's guild.")).toBe(true);

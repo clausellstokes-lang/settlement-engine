@@ -12,6 +12,7 @@
  * 718 towns. Births through the reviewer's own app shape; every expected word a literal.
  */
 import { afterEach, beforeAll, describe, expect, it } from 'vitest';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { cleanup, render } from '@testing-library/react';
 import PowerTab from '../../src/components/new/tabs/PowerTab.jsx';
 import { PowerStructure } from '../../src/pdf/sections/PowerStructure.jsx';
@@ -45,8 +46,9 @@ function collectText(node, out = []) {
 
 describe('COHERENCE-POWERS-7 · public legitimacy: the rating, never its points', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
-  it.each(['rw3-thorp-calm-1', 'rw3-thorp-famine-1', 'rw3-hamlet-calm-1', 'rw3-metropolis-under_siege-1',
-    'rw3-metropolis-politically_fractured-1'])('%s: the Power tab shows the score and its band, no "Breakdown" and no points', (seed) => {
+  it('every seed: the Power tab shows the score and its band, no "Breakdown" and no points', () => {
+    expectNoSeedFailures(collectSeedFailures(['rw3-thorp-calm-1', 'rw3-thorp-famine-1', 'rw3-hamlet-calm-1', 'rw3-metropolis-under_siege-1',
+    'rw3-metropolis-politically_fractured-1'], (seed) => {
     const s = born(seed);
     const leg = s.powerStructure.publicLegitimacy;
     expect(Object.values(leg.breakdown).some((v) => Number(v) !== 0), 'premise: the score was moved by its causes').toBe(true);
@@ -56,12 +58,15 @@ describe('COHERENCE-POWERS-7 · public legitimacy: the rating, never its points'
     expect(page.textContent).toContain(leg.label);
     expect(blocks.filter((t) => t === 'Breakdown')).toEqual([]);
     expect(blocks.filter((t) => POINTS.test(` ${t} `) && t.length < 24)).toEqual([]);
-  }, 60_000);
-  it.each(['rw3-thorp-famine-1', 'rw3-metropolis-under_siege-1'])('%s: the PDF\'s Power chapter prints the score, no points', (seed) => {
+  }), 'every seed: the Power tab shows the score and its band, no "Breakdown" and no points');
+  }, 300_000);
+  it('every seed: the PDF\'s Power chapter prints the score, no points', () => {
+    expectNoSeedFailures(collectSeedFailures(['rw3-thorp-famine-1', 'rw3-metropolis-under_siege-1'], (seed) => {
     const s = born(seed);
     const leaves = collectText(PowerStructure({ settlement: s, vm: buildViewModel({ settlement: s }) }));
     expect(leaves.join(' ')).toContain('PUBLIC LEGITIMACY');
     // a chip is one Text whose two leaves are the signed figure and the label ("-10 " + "Prosperity")
     expect(leaves.join('')).not.toMatch(/(?:[+-]\d+|\b0) (?:Prosperity|Safety|Defense|Food security)\b/); // anchored: these same leaves are asserted to hold PUBLIC LEGITIMACY just above
-  }, 60_000);
+  }), 'every seed: the PDF\'s Power chapter prints the score, no points');
+  }, 120_000);
 });

@@ -10,6 +10,7 @@
  * lines; 11 "Financial Dependence" rows with a lord on the governing side.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
+import { collectSeedFailures, expectNoSeedFailures } from '../../helpers/seedFailures.js';
 import { generateSettlementPipeline } from '../../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../../src/store/configSlice.js';
@@ -32,12 +33,14 @@ describe('COHERENCE-POWERS-7 (R1) · a minted lord holds no office and owes no g
     expect(CLAIMANT_FACE.category).toBe('other');
   });
   beforeAll(async () => { await loadGenerationLawPayloads(); });
-  it.each(['r2r-city-1', 'r2r-town-9', 'r2r-village-27', 'r2s-recently_betrayed-city-2', 'r2s-succession_void-metropolis-3'])('%s', (seed) => {
+  it('every seed: a minted lord holds no office and owes no governor\'s debts', () => {
+    expectNoSeedFailures(collectSeedFailures(['r2r-city-1', 'r2r-town-9', 'r2r-village-27', 'r2s-recently_betrayed-city-2', 'r2s-succession_void-metropolis-3'], (seed) => {
     const s = born(seed);
     const lords = minted(s);
     expect(lords.length, 'premise: a lord is minted here').toBeGreaterThan(0);
     const ids = new Set(lords.map((c) => c.id));
     expect(lords.filter((c) => /\boffice\b/i.test(String(c.structuralPosition || ''))).map((c) => `${c.name}: ${c.structuralPosition}`)).toEqual([]);
     expect(s.relationships.filter((r) => r.typeName === 'Financial Dependence' && ids.has(r.from)).map((r) => r.description)).toEqual([]);
-  }, 60_000);
+  }), 'every seed: a minted lord holds no office and owes no governor\'s debts');
+  }, 300_000);
 });

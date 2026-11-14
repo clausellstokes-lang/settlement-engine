@@ -13,6 +13,7 @@
  * r2s-indebted-city-0 and r2s-succession_void-city-2 (the lord of The Peerage). Every expected word is a literal.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
+import { collectSeedFailures, expectNoSeedFailures } from '../../helpers/seedFailures.js';
 import { generateSettlementPipeline } from '../../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../../src/store/configSlice.js';
@@ -59,17 +60,19 @@ describe('COHERENCE-POWERS-7 leftover 1 · the rule, in its home', () => {
 
 describe('COHERENCE-POWERS-7 leftover 1 · the four minted faces of the census\'s 720', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
-  it.each([
+  it('every minted face of the four towns reads "the local underworld", and no minted face names a guild the town lacks', () => {
+    expectNoSeedFailures(collectSeedFailures([
     ['r2r-metropolis-39', 'the lord'],
     ['r2s-politically_fractured-city-1', "the bloc's speaker"],
     ['r2s-indebted-city-0', 'the lord'],
     ['r2s-succession_void-city-2', 'the lord'],
-  ])('%s: %s reads "the local underworld", and no minted face names a guild the town lacks', (seed, title) => {
+  ], ([seed, title]) => {
     const s = born(seed);
     expect(hasGuild(s)).toBe(false);
     const faces = minted(s);
     expect(faces.filter((c) => GUILD.test(String(c.secret?.what || ''))).map((c) => `${c.title}: ${c.secret.what}`)).toEqual([]);
     expect(faces.filter((c) => c.title === title).map((c) => c.secret?.what))
       .toContain('On the payroll of the local underworld as a silent informant');
-  }, 60_000);
+  }), 'every minted face of the four towns reads "the local underworld", and no minted face names a guild the town lacks');
+  }, 240_000);
 });

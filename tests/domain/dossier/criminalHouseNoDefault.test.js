@@ -11,6 +11,7 @@
  * houses under the ruler by default. The default's share is 0, so no person's membership reads it: no record byte moves.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
+import { collectSeedFailures, expectNoSeedFailures } from '../../helpers/seedFailures.js';
 import { generateSettlementPipeline } from '../../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../../src/store/configSlice.js';
@@ -44,11 +45,12 @@ describe('COHERENCE-POWERS-7 · a criminal house is never under the ruling power
     }
     expect(under.some((e) => e.why === DEFAULT_WORDS), 'a house of no power\'s kind still answers to the seat').toBe(true);
   }, 60_000);
-  it.each(['rw3-city-calm-1', 'rw3-city-wartime-1', 'rw3-metropolis-calm-1', 'rw3-metropolis-politically_fractured-1'])(
-    '%s: every criminal house lands on a criminal power or on no one, never the seat by default', (seed) => {
+  it('every seed: every criminal house lands on a criminal power or on no one, never the seat by default', () => {
+    expectNoSeedFailures(collectSeedFailures(['rw3-city-calm-1', 'rw3-city-wartime-1', 'rw3-metropolis-calm-1', 'rw3-metropolis-politically_fractured-1'], (seed) => {
       const s = born(seed);
       for (const inst of s.institutions.filter((i) => isCriminalInstitution(i))) {
         expect((houseBacksOf(s).get(inst.name) || []).filter((b) => b.basis === 'default').map((b) => b.faction), inst.name).toEqual([]);
       }
-    }, 60_000);
+    }), 'every seed: every criminal house lands on a criminal power or on no one, never the seat by default');
+  }, 240_000);
 });

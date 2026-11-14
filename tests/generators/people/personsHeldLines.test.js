@@ -10,6 +10,7 @@
  * line (a twin true of the town), draw-free (people/poolMap.js :: settleTitleLines).
  */
 import { beforeAll, describe, expect, it } from 'vitest';
+import { collectSeedFailures, expectNoSeedFailures } from '../../helpers/seedFailures.js';
 import { generateSettlementPipeline } from '../../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../../src/store/configSlice.js';
@@ -65,11 +66,13 @@ describe('POWERS-9 · persons bought, sold or held: the declarations', () => {
 
 describe('POWERS-9 · the readers\' towns print no line of persons held under the grounded settings', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
-  it.each(['rww-metropolis-wartime-1', 'rww-metropolis-calm-1', 'rww-metropolis-under_siege-1'])('%s', (seed) => {
+  it('every reader\'s town prints no line of persons held under the grounded settings', () => {
+    expectNoSeedFailures(collectSeedFailures(['rww-metropolis-wartime-1', 'rww-metropolis-calm-1', 'rww-metropolis-under_siege-1'], (seed) => {
     const s = born(seed);
     expect(resolveGenerationContentProfile(s.config).boundaries.slavery).toBe(false);
     const held = s.npcs.filter((c) => HELD.test(c.secret?.what || '') || HELD.test(c.presentation?.impression || ''))
       .map((c) => `${c.title}: ${c.secret?.what} / ${c.presentation?.impression}`);
     expect(held).toEqual([]);
-  }, 60_000);
+  }), 'every reader\'s town prints no line of persons held under the grounded settings');
+  }, 180_000);
 });

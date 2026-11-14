@@ -9,6 +9,7 @@
  * family …"); every other card keeps getRank. Draw-free (a T lookup).
  */
 import { beforeAll, describe, expect, it } from 'vitest';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
@@ -33,7 +34,9 @@ function headsBehind(s) {
 
 describe('COHERENCE-POWERS-7 · the head of its kind\'s strongest power reads its kind\'s head row', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
-  it.each([['hamlet', 'r2r-hamlet-20'], ['town', 'r2r-town-3'], ['city', 'r2r-city-5'], ['village', 'r2r-village-8']])('%s %s', (t, seed) => {
+  it('every tier\'s town: no head of its kind\'s strongest power reads a row behind its leaders', () => {
+    expectNoSeedFailures(collectSeedFailures([['hamlet', 'r2r-hamlet-20'], ['town', 'r2r-town-3'], ['city', 'r2r-city-5'], ['village', 'r2r-village-8']], ([t, seed]) => {
     expect(headsBehind(born(t, seed))).toEqual([]);
-  }, 60_000);
+  }), 'every tier\'s town: no head of its kind\'s strongest power reads a row behind its leaders');
+  }, 240_000);
 });

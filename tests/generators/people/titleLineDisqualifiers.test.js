@@ -13,6 +13,7 @@
  * Before the cure, at the lane's base 714381934: 223 such lines in 165 towns of the census's 720 and the reviewer's 20.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
+import { collectSeedFailures, expectNoSeedFailures } from '../../helpers/seedFailures.js';
 import { generateSettlementPipeline } from '../../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../../src/store/configSlice.js';
@@ -43,7 +44,8 @@ describe('COHERENCE-POWERS-7 · the title table\'s declarations', () => {
 
 describe('COHERENCE-POWERS-7 · the reviewer\'s towns read no title line their record refuses', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
-  it.each(['rw3-metropolis-calm-1', 'rw3-village-famine-1', 'rw3-city-wartime-1', 'rw3-town-under_siege-1', 'rw3-town-occupied-1'])('%s', (seed) => {
+  it('every reviewer\'s town reads no title line its record refuses', () => {
+    expectNoSeedFailures(collectSeedFailures(['rw3-metropolis-calm-1', 'rw3-village-famine-1', 'rw3-city-wartime-1', 'rw3-town-under_siege-1', 'rw3-town-occupied-1'], (seed) => {
     const s = born(seed);
     const water = waterOf(s);
     const refused = [];
@@ -55,5 +57,6 @@ describe('COHERENCE-POWERS-7 · the reviewer\'s towns read no title line their r
       }
     }
     expect(refused).toEqual([]);
-  }, 60_000);
+  }), 'every reviewer\'s town reads no title line its record refuses');
+  }, 300_000);
 });

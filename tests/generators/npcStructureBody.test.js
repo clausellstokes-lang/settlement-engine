@@ -11,6 +11,7 @@
  * "Commands those under arms ...", the head of a lesser one no row).
  */
 import { beforeAll, describe, expect, it } from 'vitest';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
@@ -34,7 +35,8 @@ function firstPower(card, s) {
 
 describe('POWERS-9 · a structural row of the card\'s own body', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
-  it.each([
+  it('every reader\'s town prints none of its cured rows', () => {
+    expectNoSeedFailures(collectSeedFailures([
     ['rpf-hamlet-famine-13', 'Heads an old family while the seat fails'],
     ['rpf-village-succession_void+famine-13', 'Heads an old family while the seat fails'],
     ['rpf-city-occupied-13', "Holds an office whose purse shrinks with everyone else's."],
@@ -47,7 +49,7 @@ describe('POWERS-9 · a structural row of the card\'s own body', () => {
     ['rpf-town-calm-13', 'Leads a squad in quiet times, where the work is routine and the risks are low.'],
     ['rpf-town-calm-13', 'Belongs to a lesser old family, behind the leading one.'],
     ['rpf-metropolis-wartime-13', 'Leads a squad whose members are being pulled toward one side'],
-  ])('%s prints no "%s"', (seed, line) => {
+  ], ([seed, line]) => {
     const s = born(seed);
     expect(s.npcs.filter((c) => String(c.structuralPosition || '').startsWith(line)).map((c) => `${c.name}, ${c.title}`)).toEqual([]);
     expect(s.npcs.length, 'premise: the roster is live').toBeGreaterThan(0);
@@ -59,7 +61,8 @@ describe('POWERS-9 · a structural row of the card\'s own body', () => {
       }
       if (c.category === 'military' && c.structuralRank === 'head') expect(String(c.structuralPosition || '')).not.toMatch(/^Leads a squad/); // anchored: a sweep of the head's own row; the roster is asserted live above
     }
-  }, 60_000);
+  }), 'every reader\'s town prints none of its cured rows');
+  }, 720_000);
 
   it('THE GUARD: the true rows still print (the head of the town\'s one armed power; a noble body\'s lesser member)', () => {
     const calm = born('rpf-town-calm-13');
