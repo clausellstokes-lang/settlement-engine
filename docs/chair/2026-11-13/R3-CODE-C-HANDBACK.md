@@ -530,3 +530,39 @@ refs and local config compared before and after every push since, only this seat
   "Those who answer for {name}'s safety" (the siege's own wording), if the chair rules it a force.
 - **slave_revolt's catalogue text** (src/data/stressTypes.js, the data lane's): its viabilityNote says "everyone who keeps
   order is busy containing the revolt", the presumption this pass took out of the table.
+
+### The chair's message to this seat (copied: the messages are not on the branch)
+
+- 02:06Z: the close accepted as pushed (8039f8f41). ONE RULING (vetoable by the owner): "Those who keep {name} safe"
+  IS THE SAME PRESUMPTION where the town holds no force (no garrison, no militia or household levy, no watch, no
+  contracted company): 19 of its 35 prints on the 960. ONE MORE PASS of the same table, the same form as bbeb95b73:
+  where no force stands the line does not name people who keep the place safe; "Those who answer for {name}'s safety"
+  where that is true of the town (its seat answers); each reworded line READ WHERE IT PRINTS in three towns, red first,
+  a guard town, display only, its own commit; then CENSUS-2 at the new tip for the statement. ROUTED BY THE CHAIR, not
+  this lane's: stressNarrative.js's wartime line (round two B), the slave revolt's viabilityNote in stressTypes.js (the
+  data lane), crisisHooks.js's "inn (multiple)" (FOR THE JOIN, on the chair's list). Then wait for point 49.
+
+### HAND BACK AT THE COUNT (02:0x UTC; used_tokens 370,537, read by get_session) — what the successor takes
+
+The tip is this file's commit; the code tip bbeb95b73. NOT STARTED, nothing changed for them:
+1. **The "keep {name} safe" pass**, as ruled above. The lines (kind.surface.vantage, prints / no-force prints on the
+   960): recently_betrayed.defence.official 16 / 6 ("Those who keep {name} safe are questioning everyone…"),
+   monster_pressure.defence.official 8 / 6 ("Those who keep {name} safe cannot cover every road…"),
+   wartime.defence.official 11 / 7 ("Those who keep {name} safe have fewer hands than before…"), and
+   mass_migration departures defence.official (0 born: no birth writes departures). The tools, all in this seat's
+   scratchpad and rebuilt in a minute: probe/vantage-count.mjs (TREE=<tree> OUT=<json> node vantage-count.mjs
+   <corpus.ndjson.gz>...: the call sites' own picks; family `safe`, `safe_noforce`), probe/where-prints.mjs with
+   probe/changed-keys.txt (three towns per line, records written out), REVIEW-R2-STAGES surfaces.sh, probe/read-lines.mjs
+   (each sentence where it printed, with the town's force, market and size); the 720 corpus is CENSUS-2's
+   corpus.ndjson.gz of any tree (its births.mjs), the 240 the lane's fresh births (REVIEW-R2-STAGES births.mjs, seeds
+   r2r-<size>-fresh3c-0..9, r2s-<crisis>-<size>-70..71). The red-first test extends the R3-CODE-C-5 describe of
+   tests/domain/crisis/crisisSummaryVantage.test.js (its `born` helper takes r2s- seeds with the census's dials). Note:
+   "Those who answer for {name}'s safety" is under_siege.defence.official's and infiltrated.defence.official's own
+   words already: the test "no line is used twice" needs each new line distinct.
+2. **CENSUS-2 at the new tip**, `--files` the 29 lane files (this seat's files.csv: the list in the third seat's
+   successor list, each a path), for the statement's base -> tip per kind (base aac79b808 above).
+3. **Wait for point 49**; on the chair's word: the merge of the line's named tip (a plain merge commit; the eight edge
+   bundles resolved by `npm run build:edge-shared`), the instrument's findings on this lane's lines cured or declared,
+   and THE LANE'S ONE FINAL STATEMENT (the whole suite once in six vitest shards, each to its own file outside the tree;
+   everything BRIEF-R3-CODE-C-4 item 5 lists). Changed bundled sources since the third seat: crisisSummaryVantage.js
+   (bbeb95b73) is in the edge bundles' sources (the third seat named it there): re-emit last and alone.
