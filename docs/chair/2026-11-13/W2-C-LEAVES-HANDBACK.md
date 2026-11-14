@@ -1002,11 +1002,23 @@ fresh 180 and the readers' 50 (probes/W2-C-LEAVES-4/birthsR.mjs). EXECUTED = run
   writing command, how a banked row is cured and shrunk), on its save branch lane/merge-15-point-49-wip-2026-11-14
   (docs/INTEGRATION_STYLE_2_2026-11-09.md; find the section by script): read it before touching a register after the
   merge.
+- 03:15 UTC, A HAZARD FOR THE MERGE OF THE LINE: a shallow clone can give a WRONG merge base, not a missing one (the
+  chair's shallow clone showed 31 false conflict hunks for another lane; with full history none). BEFORE THE MERGE:
+  `git fetch --depth=2147483647 origin lane/integration-2026-11-07 lane/w2-c-leaves-2026-11-13` (about 250 MB); then
+  `git rev-parse --is-shallow-repository` prints false and `git merge-base --all origin/lane/integration-2026-11-07 HEAD`
+  prints TWO bases, 817980b33 and 69b53decd. The chair's in-memory merge of 3bbcacae8 with 976db5b19: 11 conflicted
+  files. CODE, resolved by hand at the cause: src/domain/goods.schema.js only. THE REST: wiring-census.json, the phone
+  chrome floor's census test, and the edge bundles with their meta files: each taken from ONE side and re-derived
+  through its own door or script (`npm run build:edge-shared` for the bundles, alone, last), never merged by hand. A
+  conflict outside this list means the base is wrong or the lane moved: look before resolving. FOR THE JOIN, measured:
+  this lane and round two B both change EconomicsTab.jsx and src/pdf/sections/EconomicsTrade.jsx: keep item 8's change
+  there to ONE call site and name the lines (done: 3bbcacae8's message names them).
 
 ## Items (this seat)
 | item | commits | measured (before c22530310 → after) | guard |
 |---|---|---|---|
-| 8 the PDF's and the journal's trade lists read the tab's one reader | f8ae10519 (the goods-list licence reads the page's trade marks), 3bbcacae8 | the 720: PDF exports / imports / local 6,680 / 4,082 / 8,928 → 6,033 / 3,801 / 6,531 = the tab's (unchanged) = the journal's; towns disagreeing 363 / 115 / 640 → 0; fresh 180 88 / 84 / 165 → 0; readers' 50 21 / 13 / 44 → 0 | tradeListsThreeSurfaces.test.jsx (5 of 6 red at c22530310; guard r2r-city-0); foodWordsGoodsListMarks.test.js (2 of 4 red) |
+| 8 the PDF's and the journal's trade lists read the tab's one reader | f8ae10519 (the goods-list licence reads the page's trade marks), 3bbcacae8 | the 720: PDF exports / imports / local 6,680 / 4,082 / 8,928 → 6,033 / 3,801 / 6,531 = the tab's (unchanged) = the journal's; towns disagreeing 363 / 115 / 640 → 0; fresh 180 88 / 84 / 165 → 0; readers' 50 21 / 13 / 44 → 0 | tradeListsThreeSurfaces.test.jsx (5 of 6 red at c22530310; guard r2r-city-0; add4184ea: one plain test, no new each); foodWordsGoodsListMarks.test.js (2 of 4 red) |
+| 9 the card's chain-state reader into chainStateShown.js (chainAsShown); the journal's chain line reads it; record 375; the file's `any` cured | f5f372aec | the 720: cards printing a working state through an access row only 209 → 0; journal chain lines with another state than the card 104 → 0; fresh+readers 43 → 0; pills byte-identical; records byte-identical | journalChainStateIsTheCards.test.js (2 of 3 red at c22530310; guard r2r-village-27) |
 
 Item 8's changed lines in the shared files (every one, in 3bbcacae8's message): src/pdf/sections/EconomicsTrade.jsx 35,
 124, 134, 143, 145, 147, 156, 165 (none added or removed); src/foundry/journalPages.js 40, 313, 322, 323;
@@ -1023,7 +1035,23 @@ src/domain/coherence/foodWordsFindings.js 82 and a constant after the function (
    (foundryExportsFishTrade, red with item 8 alone). The licence strips the three marks the lists print; any other
    bracket is still read. Its own commit, first.
 
+3. **Item 9, the pills keep the crisis state.** Record 375's rule is the card's (chainStateShown); the goods pills read
+   chainCrisisStateShown (the old body, renamed): with the rule in the pills, "grain" and "Grain surplus" left 28 / 27
+   thorps whose fields are worked and whose mill is a neighbour's (false).
+
+## FOR THE JOIN (the seat that joins the lanes)
+- src/pdf/sections/SupplyChainFlow.jsx (another lane's file; not touched): function ChainRow, line 73,
+  `const st = getStatus(chain.status);` → `const st = getStatus(chainAsShown(chain, town).status);` with
+  `import { chainAsShown } from '../../domain/display/chainStateShown.js';` at the file's end. getStatus must print no
+  chip for '' (NO_STATE_SHOWN). The test that reds until it is made: execute ChainRow({ chain, instNames, primaryExports,
+  town }) for r2r-hamlet-18's river_milling chain (born by birth720 as in tests/foundry/journalChainStateIsTheCards.test.js)
+  and walk it to its text leaves (the tests/pdf idiom): no "Running" leaf; and for r2r-hamlet-0's grain chain the
+  status label is the card's impaired word. Red at f5f372aec (the flow reads chain.status).
+
 ## Found, not mine (this seat)
+- The journal's "Supply chains" lines print every chain as "**Chain**": the view model's chain name
+  (viewModelBodySlices.js: c.name || c.chainName || 'Chain') holds neither key on the 720's chains; the PDF's flow reads
+  chainPrintName. For the seat after the merges (one expression: the journal's line reading chainPrintName).
 - The words of an export pill differ by surface: the tab prints the record's spelling, the PDF and the journal
   resourceDisplayName's (82 export pills on the 720, 13 fresh, 5 readers': "River fish" beside "River fisheries"). The
   label seam's (§934.22 item 2), not item 8's.
@@ -1037,9 +1065,40 @@ src/domain/coherence/foodWordsFindings.js 82 and a constant after the function (
   phoneChromeFloor.census 1, chainPrintSites.walker 1, observedShapeReaders.walker (suite), dossierProseManifest 3: red
   with the same titles at c22530310.
 
+## Red met (this seat, continued)
+- Item 9's governing files (97): the item-8 list's reds with their titles; domainAnyCastBaseline 5 red at c22530310 → 1
+  at f5f372aec (the unattributed-overrun row: commercialReasons.js's introducedAt sha absent from this shallow clone;
+  red at the base); sovereigntyLightingContract's EACH-FAMILY red was this lane's (3bbcacae8's test.each), cured add4184ea.
+
 ## STATUS (kept current)
-- Item 8 DONE, pushed 3bbcacae8. Next: item 9 (the chain-state reader into chainStateShown.js), then 10, the four added
-  rows, row 5, then on the chair's word already given: the merge of 976db5b19 (read back again then) and the statement.
+- Item 8 DONE 3bbcacae8 (+ f8ae10519, add4184ea). Item 9 DONE f5f372aec. Pushed; nothing running.
+- WHAT IS LEFT, line by line (the brief's order; each measured first on the 720 and the fresh 180, red first, pushed):
+  1. ITEM 10: CENSUS-2 at the tip and at 4534ea5e3 (`git fetch origin lane/census-2-2026-11-13`; archive its
+     docs/chair/2026-11-13/probes/CENSUS-2 to a scratch dir; `sh census2.sh <tree> <out outside the repo> 4 --files
+     <probes/W2-C-LEAVES-3/c2files.txt joined by commas, + src/domain/display/chainNeedShown.js>` to a file, ~12 min
+     each); every hit on the lane's writers read against its town, cured or named. WITH IT the court rows (record 422):
+     the 33 "Legal Infrastructure · Court only" rows beside a Town hall with a drawn "Dispute arbitration"
+     (defenseDisplay.js :: courtOnRoster counts a drawn court service): where no courthouse stands the row does not say
+     "Court"; it speaks of the town hall's (or the council's) hearings, read where it prints in three towns, or it is not
+     written; display only; red first; a guard town; the new words listed for the owner's veto.
+  2. THE FOUR ADDED ROWS (PART 5's wording): (a) #1013, the lone gambling house (12 towns): no structure note, no
+     structure label; (b) Arcane "None" beside an arcane power of any standing or a named mage (9 more); (c) the PDF's
+     "Abundant" kicker (src/pdf/sections/ResourcesProduction.jsx, shared, one line, named) not under a siege (31 towns;
+     tradeStoppedHere is the siege's home); (d) the charcoal burner's four "timber" pills read (r2s-under_siege-village-0,
+     r2s-indebted-hamlet-0, r2s-plague_onset-hamlet-2, r2s-wartime-hamlet-0), cured or named.
+  3. PART 6's row 5: the second merge's registers verified by their doors.
+  4. The chair's word for point 49 is GIVEN (03:08 UTC): no message, no wait. Read lane/integration-2026-11-07 back
+     (976db5b19 at 03:08), the full-history fetch above, the merge (plain; say the commit and what conflicted, against
+     the chair's list of 11), the merge book's section 2m on lane/merge-15-point-49-wip-2026-11-14 read first, the two
+     defenseDisplay.js rows (2k.5, 3628f37cc, `after-base`) cured and shrunk through their door, the instrument's page
+     census read on this lane's lines, then THE ONE FINAL STATEMENT (PART 4 item 10's additions: the first census's
+     counter at 4534ea5e3 and the tip, its own rows checked; the whole suite in six shards at both; the field diff;
+     CENSUS-2 per kind; docs/chair/2026-11-13/W2-C-LEAVES-SHIFT-RECORD-DRAFT.md; the edge bundles last, alone).
+- Instruments, re-made: corpora `TREE=<tree> OUT=<dir> node SECOND-WAVE-CENSUS/births.mjs` (the 720;
+  lane/second-wave-census-2026-11-12) and `TREE=<tree> SEEDS=probes/W2-C-LEAVES-4/{fresh,readers}.txt OUT=<f.ndjson.gz>
+  node probes/W2-C-LEAVES-4/birthsR.mjs`; the probes in docs/chair/2026-11-14/probes/W2-C-LEAVES-7/: tri8.sh +
+  tri8.census.jsx + agree8.mjs (item 8's three surfaces), state9.mjs (`TREE=<tree> node state9.mjs <corpus...>`: card
+  vs journal state, access-only working chains), pick9.mjs. Each takes trees by path and writes nothing in a tree.
 - Probes: /home/user/c7/probe/tri8.census.jsx + tri8.sh (`sh tri8.sh <tree> <corpus.ndjson.gz> <out.ndjson>`: the
   three surfaces' pills per town) and agree8.mjs (`TREE=<tree> node agree8.mjs <out.ndjson>`); copied to
   docs/chair/2026-11-14/probes/W2-C-LEAVES-7/ at the hand-back.
