@@ -907,3 +907,39 @@ docs/chair/2026-11-13/probes/POWERS-9/ (copied from this seat's scratch; each ru
   origin/lane/round-3-cut-2026-11-13:docs/chair/2026-11-13/ROUND-3-CUT-INCREMENT.json and filter class NEW, at.line set,
   writer.file in the lane's files, as mine78.json); whereprints.mjs (small / large / crisis reads); one.mjs, readcards.mjs.
 - The census: `sh <c2>/census2.sh <tree> <out> 4 --files <the lane's 29 files>`; check its EXIT line and counts.txt.
+
+# PART 5 — POWERS-11, the lane's sixth seat (kept current after every item)
+
+Lane read back from origin at **ec72918d4** before the first act (equal to the brief's). Builder: POWERS-11, on the
+account the program moved to on 2026-11-14; the chair is session_01ACmDYZrFEVXyZEUg1NDxxC. The fifth seat (POWERS-10)
+pushed two commits after 2f016b7b4 and wrote no part of its own: 1bf74bd1a (phoneChromeFloor's three dossier rows
+re-recorded: GREEN at ec72918d4, executed) and ec72918d4 (noLegacyFactionReaders' two sites named: GREEN at ec72918d4,
+executed). Scratch worktree `/home/user/wt/p11` on a local branch `p11` at the lane's tip, `npm ci` there (it wrote
+`core.hookspath=.husky/_` into the shared local config, as for every seat before; kept); a detached base worktree at
+714381934 with `node_modules` linked; long runs to `/home/user/runs/`, outside every tree; plain pushes
+`git push origin p11:refs/heads/lane/powers-follow-up-2026-11-13`.
+
+## P5.0 The rulings, copied in
+- THE BRIEF (docs/chair/2026-11-14/briefs/BRIEF-POWERS-11.md on the chair's lane): BRIEF-POWERS-10 binds as written, its
+  work in its order (M4; M1 and the lows L4, L5, L7; the rows other lanes named; the 44 of the 78; the census at base and
+  tip; then wait for point 49: the line's merge, #312, the three banked rows, the statement). A red is classed against
+  the lane's REVIEWED BASE 714381934. Never rewrite a commit at or below ec72918d4. The whole suite in six vitest shards,
+  each to its own file outside the tree. A seat reads its own count (send_later, then get_session) at each turn's end.
+- THE CHAIR, 2026-11-14 01:36 UTC, the two open stops of PART 4: (1) ww#656 (the vineyard's grapes) needs the chain
+  leaf: it travels with #312 after point 49, in the same step, its own commit. (2) A card's TITLE on a man ("the
+  alewife", "the midwife", "the madam"): propose the men's words, each a plain word of the period that names the trade
+  and not the sex where one exists, read where it prints in three towns (the smallest and the largest size it reaches),
+  red first, one commit, every new word listed with its towns for the owner's veto; no new word in the vocabulary file
+  (a title that can only be made there is PARKED with its word); a title the card shares with a styled-title leaf goes
+  through that leaf, never beside it.
+
+## P5.1 M4 at ec72918d4, the nine files run at both trees (executed, `--maxWorkers=3`, through the mutex)
+- At 714381934: 2 red titles (observedShapeReaders "the producers ran and the corpus is not empty";
+  sovereigntyLightingContract "THE CENSUS IS AN ASSERTION, NOT A SENTENCE"): red at both trees, CARRIED.
+- At ec72918d4: 11 red: those 2 and NINE of the reader's eleven (phoneChromeFloor and noLegacyFactionReaders green):
+  negativeAssertionAnchor x2, observedShapeReaders x2 (A1/A7; SHRINK-ONLY), poolDominance, presumedThings ARM 1,
+  sovereigntyLightingContract's each-family park debt, tuningRegister, wiringCensusDeclared.
+
+## P5.2 Item by item
+- M4 negativeAssertionAnchor (2 titles): DONE, 0a9133bcf. Thirteen sites in eight files (the reader saw six at
+  96a6ced46; the fourth seat's tests added the rest), each anchored where it stands; no ceiling moved.
