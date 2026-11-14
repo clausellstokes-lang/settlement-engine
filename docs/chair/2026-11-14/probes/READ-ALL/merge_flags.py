@@ -20,10 +20,12 @@ for p in packets:
         if m: shown[(p, m.group(1))] = (town, m.group(2))
 flags = []; status = {}
 for p in packets:
-    br = 'origin/lane/read-all-2026-11-14-' + p
+    # crisis-07's file is on the crisis-06 branch; SUFFIX=-s reads the next model down's calibration branches; FLAGS_DIR reads local files
+    br = 'origin/lane/read-all-2026-11-14-' + ('crisis-06' if p == 'crisis-07' else p) + (os.environ.get('SUFFIX', '') if p.startswith('cal') else '')
     try:
-        txt = subprocess.check_output(['git', '-C', REPO, 'show', '%s:docs/chair/2026-11-14/read-all/%s.flags.jsonl' % (br, p)], stderr=subprocess.DEVNULL).decode('utf-8')
-    except subprocess.CalledProcessError:
+        if os.environ.get('FLAGS_DIR'): txt = io.open('%s/%s.flags.jsonl' % (os.environ['FLAGS_DIR'], p), encoding='utf-8').read()
+        else: txt = subprocess.check_output(['git', '-C', REPO, 'show', '%s:docs/chair/2026-11-14/read-all/%s.flags.jsonl' % (br, p)], stderr=subprocess.DEVNULL).decode('utf-8')
+    except (subprocess.CalledProcessError, OSError):
         status[p] = 'NO FILE'; continue
     n = 0; bad = 0; done = ''
     for line in txt.split('\n'):

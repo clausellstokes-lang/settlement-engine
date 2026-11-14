@@ -6753,6 +6753,78 @@ SEATS2['JOIN-5'] = dict(
 )
 
 
+VEIL_BYTES_15 = (
+    "supabase/migrations/211_server_side_share_veil.sql eface6d093933170b9541fe630068c26e5bd41477e95e913ae7168e373be0b01 and "
+    "supabase/rollback/211_server_side_share_veil.down.sql ce8474ffc251b4c4bd6005d5a409d4a15bd20fef6b507534ef6338d3bd49712f: FROZEN, never changed by "
+    "anyone; 212 (supabase/migrations/212_share_veil_later_cures.sql) 1caa9691a3cb891140fe0dc0ef59fa0b1954602ac370adf00b302b65ce666747, its rollback "
+    "(supabase/rollback/212_share_veil_later_cures.down.sql) ebf68fe8594c98c0cef31d986bbb3d5d2ea0ff6da98aa6c2b9dcd7a71483a781: NOT final (computed by the "
+    "chair from origin at 625e2a8ef, 15:51 UTC on 2026-11-14)"
+)
+
+SEATS2['VEIL-15'] = dict(
+    title="VEIL-15 · the share veil: the impression by a shared run of twelve, then the list in order, toward a green acceptance run at one checksum",
+    branch='lane/coherence-veil-2026-11-11', tip='625e2a8e', statement=False, mark='300,000',
+    intro=("You are VEIL-15, the fifteenth seat on the share-veil lane of the settlement-engine integration program (lane/coherence-veil-2026-11-11). THE "
+           "VEIL: when an owner shares a town, whatever the owner hid (a house, a person, an event, a power, a single field) must not reach the reader, in "
+           "the page OR in the data the server sends. The cure lives in two migrations and in the client's twin. MIGRATION 211 IS FROZEN and is the "
+           "owner's to apply. MIGRATION 212 holds every later cure, is NOT final, and is applied by nobody until a fresh security reader has cleared its "
+           "final bytes. The fourteenth seat classed and cured the red security test (NOT A LEAK: a role the page should withhold was kept by the "
+           "client's twin; the pin re-keyed by identity with a planted arm; 212's bytes unmoved) and handed back at its count after that one item. "
+           "Yours: THE ITEMS OF ITS LIST, IN ORDER, ONE AT A TIME, toward a green acceptance run at ONE checksum. Items 1 and 2 have written sub-briefs."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. On your lane: docs/chair/2026-11-14/COHERENCE-VEIL-HANDBACK-PART15.md WHOLE (188 lines: the rulings in force, section 0; the bytes, "
+          "section 1; item 0 as classed and cured, sections 2 to 4: THE FORM OF A CURE AND OF ITS PROOF ON THIS LANE; WHAT IS LEFT, in order, "
+          "section 5; how the instruments are re-made, section 6; the base's verdicts, section 7). NOTHING of the older parts except a section a "
+          "sub-brief or PART 15 sends you to, by line range, by script.\n"
+          "3. For the item in hand ONLY: its written sub-brief (docs/chair/2026-11-14/veil-probe-13/briefs/SUB-BRIEF-IMPRESSION-RUN.md; "
+          "SUB-BRIEF-R2.md), and the helpers of 212 and the functions of the twin that the item touches, whole, before they are changed.\n"
+          "4. THE SECURITY READER'S FILE, for the findings you answer: on origin/lane/review-veil-3-2026-11-12 (72a3bb24f): "
+          "docs/chair/2026-11-14/REVIEW-VEIL-212-8-2026-11-14.md, the section of the finding in hand only, and its plants beside it; the library "
+          "docs/chair/2026-11-13/probes/REVIEW-VEIL-7/ on the same branch (run-all.sh; born/run-born.sh): copy them out with git archive; never "
+          "commit them to your lane."),
+    first=("FIRST ACT. Read the lane's tip back from origin: it was 625e2a8ef when this was written; any difference is a stop: tell the chair. Prove the four "
+           "checksums: " + VEIL_BYTES_15 + ". ALL WORK IN A SCRATCH WORKTREE (never the repository's main checkout: its rules forbid staging or "
+           "committing there, and a refusal by your own permission check stands: never route round one). Re-make the instruments as PART 15's "
+           "section 6 says (the cluster, the reader's library by git archive, the acceptance run). DO NOT re-run the acceptance run at the base: "
+           "PART 15's section 7 gives it (exit 1; 35 of 37; a07 and d06 the only FAIL rows; the twin 15 of 15): you run it after your own first "
+           "change. YOU DO NOT MERGE THE JOINED LINE: this lane lands at its own close, after its security reader."),
+    work=("THE RULINGS IN FORCE are PART 15's section 0, whole (the chair's re-ruling of 07:42 UTC on the impression: A FLOOR FIELD, by a shared run of "
+          "twelve; the ruling on CALL V13-1 with THE CONDITION THE FRESH SECURITY READER WILL BE GIVEN; the ruling on item 0: the test's law "
+          "re-keyed by identity, not loosened): copy them whole into your part. THE COST LAW: no more than TWICE the frozen 211 on the reader's "
+          "300 KB row, on its V8-3 row and on the largest born town; a read never fails where 211 serves.\n"
+          "THE WORK, ONE ITEM AT A TIME, each its own commit, red first, pushed, with the new checksums of 212 and its rollback in the commit message:\n"
+          "1. THE IMPRESSION BY A SHARED RUN OF TWELVE (the sub-brief is written; its base f2bffdbf0: read what the lane changed since in the "
+          "files it names before you build): replacing the clause cut in 212's impression arm and in the twin's withholdImpression; the "
+          "helpers nothing else reads leave, the rollback's drops following. COUNTED ON BORN TOWNS as the ruling says: over 23 chance runs is a "
+          "STOP: tell the chair before you push. Every change to the apply re-runs the V13-1 plant on the link.\n"
+          "2. R2 (its sub-brief: first the premise proved over every plane).\n"
+          "3. V8-3 (one pass; the cost law: the largest born town's link is 2.10 times the frozen 211 ALREADY AT THE BASE: this item owns it); "
+          "V8-9 (no unbounded pattern; the closed answer at any bound, never an error); then V8-2, V8-4, V8-5 (each one commit by identity, "
+          "else written in the pack under WHAT 212 DOES NOT CLOSE with its reason).\n"
+          "4. B (V7-5: the trace by positive account, the acceptance run's a07; count what it also drops), C (V7-8: every existence flag by the "
+          "engine's own getInstFlags, d06; the booleans agreed between server and twin; R3 goes with it; if it cannot be done in SQL, say exactly "
+          "why, show by a plant what the difference lets a reader infer, and STOP for the chair on that row), D (the income row by its house).\n"
+          "5. E: THE ACCEPTANCE RUN: run-all.sh exits 0 AND born/run-born.sh green at ONE named checksum of 212, the cost law met. WHEN E IS GREEN: "
+          "ONE message to the chair (the tip, both checksums, what the reader must read) and 212 is not changed again until the chair answers: a "
+          "fresh security reader then reads the final bytes.\n"
+          "6. F AND G, ONLY AFTER THE CHAIR ANSWERS E, as PART 12's section 8 gives them; F's named row as PART 14's section 4 has it.\n"
+          "THE LIGHTING CENSUS on this lane was re-taken through its door by the fourteenth seat (97d6c3f13): a test file you add moves it "
+          "again: re-take it through its door in its own commit ONLY if its walker reds for your own files; else NAME it.\n"
+          "HOW TO KEEP YOUR COUNT (the thirteenth and the fourteenth seat each spent a whole count on ONE item): YOUR CONTEXT HOLDS THE LIST, "
+          "THE RULINGS AND THE DIFFS, NOT THE FILES. Comparisons are SCRIPTS whose output goes to files: you read the summary lines. Give each "
+          "building item to A BUILDER INSIDE YOUR SESSION (a helper agent with a fresh context and the WRITTEN sub-brief: the item, its ruling "
+          "whole, the helpers it touches, the laws of the lane, red first, no push); then YOU READ ITS DIFF LINE BY LINE (the SQL and the twin: "
+          "the thirteenth seat's own reading found a leak its builder's cure had left: this reading is the lane's guard and is never skipped), "
+          "run the guards and run-all.sh yourself, and push. Read your count BEFORE you start a builder and WHEN IT RETURNS (end your turn THE "
+          "COUNT's way after every pushed item). THE MARK IS A MARK, NOT A WALL: at 300,000, or sooner if the next item cannot be built AND "
+          "read inside it: a new file docs/chair/2026-11-14/COHERENCE-VEIL-HANDBACK-PART16.md, begun with the rulings in force copied whole, "
+          "kept current after every item, and hand back. An item half built is not pushed: its builder's work is described in PART 16 and left.\n" + VEIL_LAWS),
+    merges="; a local database cluster in your container",
+    when="AT ONCE for a leak (a public read that tells or carries what is hidden); for a stop that blocks everything you have left; for the cost law if it cannot be met (the numbers); for the born count of item 1 if it is over 23; after each pushed item (one line: the tip, both checksums); when the acceptance run is green at a named checksum; and for a hand-back",
+    turns='',
+)
+
+
 def build2(seat):
     s = _r3c6() if seat == 'R3-CODE-C-6' else SEATS2[seat]
     head = (
