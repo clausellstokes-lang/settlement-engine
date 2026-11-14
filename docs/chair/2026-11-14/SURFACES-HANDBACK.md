@@ -327,6 +327,19 @@ food count re-taken on records born at it: every cell of item 1 still 0), 65dc92
   tab call the pill's leaf; the leaf joins THREADED; the lane-25 split pins its two re-keyed lines).
 - GATES: as item 1; the named tests: the base's 17 reds title for title.
 
+## Item 2 (r4): "ABUNDANT" UNDER A SIEGE — DONE, e99bf024d
+
+- CAUSE: the tab, under a siege in force (`chainStateShown.js :: tradeStoppedHere`), prints the grounds first and
+  unlabelled; the PDF's NEARBY RESOURCES printed them under "Abundant".
+- CURE ((r7) smallest hunk): `ResourcesProduction.jsx` calls the tab's reader: under a siege the grounds print first
+  with no kicker, before Depleted; "Abundant" only where no siege holds. The journal prints no such word ("Nearby
+  resources").
+- COUNTS (`probes/SURFACES-3/abundant.census.jsx`, records at 474c5f966): "Abundant" under a siege 56 of 56 -> 0; with no
+  siege 714 -> 714.
+- GUARD: `tests/pdf/abundantUnderSiegeEverySurface.test.jsx` (the tab rendered and the PDF; the guard: a calm thorp keeps
+  "Abundant"). Red first 3 of 3; the guard reds alone under a plant.
+- GATES: as item 1; the 5 test files naming the file: 0 reds, as the base.
+
 ## Every new or changed word on a surface (the owner's veto list)
 
 | surface | before | after | towns read |
@@ -334,11 +347,13 @@ food count re-taken on records born at it: every cell of item 1 still 0), 65dc92
 | PDF Economics, FOOD SECURITY block | the view's DEFICIT, share, cover, provision | the tab's row: DEFICIT = the tab's Short; its share; cover only where the row imports; the provision the row credits | r2s-famine-thorp-0 (10 -> 11), r2s-under_siege-metropolis-0 (80026 -> 80237, provision line gone), r2s-under_siege-city-2 ("imports cover 1%" gone), r2s-occupied-town-0 (228 -> 245), r2r-thorp-32 (2 -> 1) |
 | journal Economics "Food" | "Deficit −10 (26% of need)", "Surplus +1", "Balanced" | the food word: "Deficit — Active Famine", "Deficit", "Pressured", "Secure" | r2s-famine-thorp-0, r2s-under_siege-metropolis-0, r2s-occupied-town-0, r2r-thorp-32 |
 | PDF EXPORTS, journal Exports | "River fisheries", "Precious metal veins", "Coastal timber" | the tab's "River fish", "Precious metals", "Shipbuilding timber" | r2r-thorp-44, r2s-famine-city-2, r2s-wartime-metropolis-1, r2r-town-52 |
+| PDF NEARBY RESOURCES under a siege | "Abundant" before the grounds | the grounds first, unlabelled ("Depleted" kept) | r2s-under_siege-thorp-0, rr3-hamlet-under_siege+famine-rand-4, r2s-under_siege-metropolis-0, r2r-hamlet-0 |
 
 ## Registers named stale (r1)
 
 - `tests/lint/sovereigntyLightingContract.walker.test.js` "THE CENSUS IS AN ASSERTION": red before me; my new test files
-  `tests/pdf/foodFiguresEverySurface.test.jsx` and `tests/pdf/tradePillWordEverySurface.test.jsx` add to what a re-take counts. Not re-taken.
+  `tests/pdf/foodFiguresEverySurface.test.jsx`, `tests/pdf/tradePillWordEverySurface.test.jsx` and
+  `tests/pdf/abundantUnderSiegeEverySurface.test.jsx` add to what a re-take counts. Not re-taken.
 
 ## Found, not cured
 
@@ -346,16 +361,15 @@ food count re-taken on records born at it: every cell of item 1 still 0), 65dc92
 
 ## What is left, line by line
 
-1. (r4) "Abundant" under a siege (56 of 56): `ResourcesProduction.jsx` ~167 `r.nearbyAbundant`; the PDF prints the
-   groups the tab prints, through the tab's reader ((r7): only that group's hunk in that file).
-2. (r5) the Defence chapter's force name and provenance chip: MEASURE FIRST (UPKEEP-14's
+1. (r5) the Defence chapter's force name and provenance chip: MEASURE FIRST (UPKEEP-14's
    `tests/pdf/defenseForceNamesLabelled.test.jsx` is on the line).
-3. (r6) the tension rows' bracket ("Taverns (5-20)", History and Overview, through `houseLabelsInText`); the PDF's
+2. (r6) the tension rows' bracket ("Taverns (5-20)", History and Overview, through `houseLabelsInText`); the PDF's
    medical line; the stores' unit (6 towns); the trade connectivity row (with a system state).
-4. THE SWEEP, once, at the end.
+3. THE SWEEP, once, at the end.
 
 HOW THE INSTRUMENTS ARE RE-MADE: `probes/SURFACES-3/run.sh <tree> <x.census.jsx> <out> <seeds> <workers> [VAR=val]`
 runs a census under vitest in shards. Records: `run.sh <tree> births.census.jsx <out> probes/SURFACES-2/seeds772.txt 4
 RECORD_OUT=<records>` (39 s for the 772: births only, no render). The food figures: `run.sh <tree>
 foodblock.census.jsx <out> <seeds> 4 RECORDS=<records>` (45 s), then `node foodblockagg.mjs <out>`. The trade pills: `run.sh <tree> trade.census.jsx <out> <seeds> 4
-RECORDS=<records>`, then `node tradeagg.mjs <out>`.
+RECORDS=<records>`, then `node tradeagg.mjs <out>`. The siege groups:
+`run.sh <tree> abundant.census.jsx <out> <seeds> 4 RECORDS=<records>` (each line: siege, "Abundant" printed, the block).
