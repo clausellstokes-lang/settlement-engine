@@ -1497,6 +1497,16 @@ Pushes by docs/chair/2026-11-14/probes/POWERS-14/push.sh (POWERS-11's, pointed a
 - THE CHAIR, 2026-11-14 09:49 UTC: one row added at the top of the list after the row in hand, the page census's NEW1 (copied
   whole under its item in P8.1): ONE LADDER FOR ONE WORD; count it by the census's door before and after; a declared move in
   those towns only; red first, three towns read; STOP if the record's label is not in reach.
+- THE CHAIR, 2026-11-14 10:57 UTC (record 440; vetoable by the owner), on REVIEW-POWERS-4's M1 (six titles red at 3909655c3):
+  (1) a red title the stage leaves at its tip bars CLEAR: tests only, before the lane lands: mintedFaceUnderworld re-keyed BY
+  IDENTITY to a town that still holds its case, its arm shown able to red by a plant; styledTitleOnRows' floor NOT lowered (the
+  corpus gains towns of the case); the grid's stale row out by the door's shrink form. (2) THE TOLL: "no slot prints a chain
+  label" stands; tollNamePrintedEverywhere re-keyed BY IDENTITY, not loosened: a goal about the toll names the toll's HOUSE as
+  the roster prints it; the protective half (no crossroads toll in a river town) unchanged; a plant reds it; MEASURE FIRST on
+  the 720: a goal naming "the toll bridge" where the roster holds no such house is a false line and is cured. (3) L3 accepted:
+  the title word follows the honorific through the same leaf (a man is not "the alewife"). (4) T2 (rulingStructure.js:
+  "outpaced by merchant capital" beside "still ahead of merchant interests" in one description) joins the list after the rows
+  held.
 
 ## P8.1 Item by item
 - **#101 THE COACHING INN UNDER A CRISIS: CURED, de125480f** (the lighting census re-taken by its ritual, 67169e8b4: files 3274 ->
@@ -1638,6 +1648,23 @@ Pushes by docs/chair/2026-11-14/probes/POWERS-14/push.sh (POWERS-11's, pointed a
 - L4 (refreshRelationshipProjections styles the role words with no guard; its plant `refresh-role`); the census candidate
   (courts: P7.7 found 0 by the record's court fact; read one of its three named towns); P4.8's other lines; P4.7's and P5.10's.
 - The two #101 candidates of P8.1 (the keeper's present-tense travel secret under a siege; the innkeeper's road gossip).
+
+## P8.5a THE READER'S SIX RED TITLES, their state at 8a19c8999 (executed: vitest over the four files, 32 passed, 3 red)
+- mintedFaceUnderworld (r2s-succession_void-city-2's witness gone): GREEN. Re-keyed by POWERS-13 at 6dada2454 (after the
+  reader's 3909655c3) BY IDENTITY to r2r-metropolis-213, with plants that red it (P7.1 item 1). Meets ruling (1).
+- styledTitleOnRows ("expected 9 to be >= 10"): GREEN. POWERS-13 at 1d5bbf43f kept the floor at 10 and added p8-city-3 to the
+  corpus (it reads 12). Meets ruling (1): the floor not lowered.
+- pageCensus.walker's grid row r2s-infiltrated-town-0 (stale P4): GREEN. Lowered by `--grid --shrink` at d7253090a (P7.1 item 2).
+- tollNamePrintedEverywhere x3 (r2r-city-8, r2r-metropolis-8, r2r-metropolis-49, "no goal names a crossroads ... "): RED,
+  NOT STARTED. Ruling (2) is the next seat's first item: measure first on the 720 (goals naming "the toll bridge" against the
+  roster's houses), cure the false ones, re-key the three by identity (the goal names the toll's house as the roster prints
+  it), the protective half unchanged, a plant.
+- Then L3 (the title word through the honorific's leaf: faceHonorifics.js :: styledTitleOf), then T2 (rulingStructure.js), then
+  P8.5's rows by width.
+
+## P8.7 HAND BACK (at the count's mark)
+- Tip 8a19c8999 plus this file's commit. Cured: #101 (de125480f), ww#375 (d9bb4085d), NEW1 (2768c53c7); each red first,
+  plant-proven, read on its page, its move measured on the 720. Left: P8.5a, then P8.5, in that order.
 
 ## P8.6 THIS SEAT'S INSTRUMENTS (docs/chair/2026-11-14/probes/POWERS-14/)
 - b14.sh <tree> <out> [seeds] [n]: the 720 (or a list) born in the census shape, the whole record per birth (about 30 s at n=4);
