@@ -545,6 +545,10 @@ def how2(branch):
     return (
         "HOW YOU WORK: a scratch worktree on a local branch at the lane's tip, `npm ci` there; plain pushes with the explicit refspec `git push origin "
         "<local>:refs/heads/%s` (the lane hook runs three fast gates), `git fetch` and merge BEFORE every push (a push git rejects falls into the whole check); "
+        "BEFORE EVERY PUSH `test -n \"$(git rev-list origin/<lane>..<local>)\"`, else do not push, and never chain a push after a step that can fail: A PUSH "
+        "WITH NOTHING TO SEND FALLS INTO THE HOOK'S WHOLE SUITE, and two tests in it (tests/scripts/implementationPackets.test.js, "
+        "implementationSession.test.js) then run git against your REAL repository from the linked worktree (bitten twice on 2026-11-14: the local "
+        "branch moved to a fixture commit; core.bare=true and a fixture user written into the shared config); "
         "PUSH AFTER EVERY ITEM AND BEFORE ANY LONG RUN. At every commit that touches src/: the strict-domain gate, the type ratchet and eslint on the touched "
         "files, each through `sh scripts/gate-tail.sh <command>`, never a pipe. A register moves only through its own door, in its own commit; where the door is "
         "the merge seat's, name the row and go on. Long runs to a file outside every repository tree; no dumps into your context. HAZARD: `npm ci` writes "
