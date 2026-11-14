@@ -1,0 +1,149 @@
+58575662c6f25034ac6c787f9efd7ae4690e0d69 merge(JOIN-REHEARSAL): lane/w2-fix-data-history-2026-11-13 at 864948c8b into the rehearsal's save branch
+
+diff --git a/tests/domain/facts/textOf.test.js b/tests/domain/facts/textOf.test.js
+remerge CONFLICT (content): Merge conflict in tests/domain/facts/textOf.test.js
+index cf8919440..b5ad8b90d 100644
+--- a/tests/domain/facts/textOf.test.js
++++ b/tests/domain/facts/textOf.test.js
+@@ -28,18 +28,7 @@ describe('textOf', () => {
+     expect(rows.every((r) => typeof textOf(r) === 'function' || typeof textOf(r) === 'string')).toBe(true);
+     // 86 → 92 by cause: CENSUS-2f unit 2 (R-AP) declared the fish key's three bare lines and the faith key's bell, incense and hymn;
+     // 92 → 99: CENSUS-2f unit 7 — fish.dominant[1] declares `fish` (R-AP amended) and six read bare lines are marked colour (R-AO)
+-<<<<<<< 2845c5fc5 (merge(JOIN-REHEARSAL): lane/w2-fix-data-2026-11-13 at fb00318d9 into the rehearsal's save branch)
+     // 99 → 105: R2-CODE-A item 4 — the port scene's four harbour rows declare `docks` and two shore rows (`coast`) join them
+     expect(rows.filter((r) => typeof r === 'object').length).toBe(105);
+-=======
+-    // 99 → 101: W2-FIX-DATA (the REVIEW-W2B cold list) — the smiths' ironwork carts (siege) and the arabic water for travellers (siege) declare
+-    // 101 → 105: W2-FIX-DATA-3 (REVIEW-W2A-3 #366, #2) — the smiths' three bare dominant lines ("Forge smoke hangs …",
+-    // "The hammering echoes through all of …", "… lives by its forges …") declare `tier: ≥ town` (fb48fb8bc), and the
+-    // mesoamerican craftspeople row ("Craftspeople sit in rows …") declares `market` (c0f8dd279); re-keyed by W2-FIX-DATA-6
+-    // 105 → 109: W2-FIX-DATA-HISTORY item F (9d952d02b; ROUND-3-CUT-INCREMENT ww-541, CENSUS-2) — the east-asian lanes of trades
+-    // (tier: ≥ town), the tea for a merchant and the oath on the scales (market), and the timber planks waiting for carts
+-    // (no crisis: under_siege) were bare; each declares now (re-keyed by identity with its cause).
+-    expect(rows.filter((r) => typeof r === 'object').length).toBe(109);
+->>>>>>> 864948c8b (docs(W2-FIX-DATA-HISTORY): handed back by file: the chair's succession ruling (ruled, not built), the other lane's rows each marked, the red guards with their doors, the instruments committed, the new merge owed)
+   });
+ });
+diff --git a/tests/lint/presumedThings.register.json b/tests/lint/presumedThings.register.json
+remerge CONFLICT (content): Merge conflict in tests/lint/presumedThings.register.json
+index 1c6a12fd9..9e498276c 100644
+--- a/tests/lint/presumedThings.register.json
++++ b/tests/lint/presumedThings.register.json
+@@ -355,12 +355,9 @@
+    ["market", "after-release", "Competing guilds struggled for control of the market and a voice in local politics", "55d9052326c870a7"],
+    ["market", "after-release", "What began as a disagreement over trade with a partner town spread until no merchant or buyer in the market was untouche", "80f6efebadf208c0"]
+   ],
+-<<<<<<< 2845c5fc5 (merge(JOIN-REHEARSAL): lane/w2-fix-data-2026-11-13 at fb00318d9 into the rehearsal's save branch)
+   "src/data/inlandDescriptions.js": [
+    ["market", "after-release", "An open stall or small roofed market selling salted and smoked fish brought in by cart. The barrels keep, so the price h", "735e41052db815c1"]
+   ],
+-=======
+->>>>>>> 864948c8b (docs(W2-FIX-DATA-HISTORY): handed back by file: the chair's succession ruling (ruled, not built), the other lane's rows each marked, the red guards with their doors, the instruments committed, the new merge owed)
+   "src/data/institutionDescVariants.js": [
+    ["bank", "after-release", "A whole quarter given to money: banking across borders, credit by letter, and speculation in coin at scale.", "8f2eb4e1f4055ffa"],
+    ["bank", "after-release", "Foreign coin exchanged. The first stirrings of banking.", "1fae8ad9d9472126"],
+@@ -840,14 +837,10 @@
+    ["mill", "after-release", "the mill and lumber district", "56fb56b50084c436"]
+   ],
+   "src/generators/historyGenerator.js": [
+-<<<<<<< 2845c5fc5 (merge(JOIN-REHEARSAL): lane/w2-fix-data-2026-11-13 at fb00318d9 into the rehearsal's save branch)
+    ["temple", "after-release", "A period of ambitious stone construction transformed the settlement's character. Civic buildings or a cathedral raised f", "dc29bf0a6a243a34"],
+    ["temple", "after-release", "A period of ambitious stone construction transformed the settlement's character. Walls, civic buildings, or a cathedral ", "cc27d2b3e3fca458"],
+    ["temple", "after-release", "the temple district", "3a3da5b46e268323"],
+    ["walls", "after-release", "Something was sealed inside the walls during construction, deliberately", "ae2c2b6e31da2c3d"]
+-=======
+-   ["walls", "after-release", "Something was sealed inside the walls during construction, deliberately"]
+->>>>>>> 864948c8b (docs(W2-FIX-DATA-HISTORY): handed back by file: the chair's succession ruling (ruled, not built), the other lane's rows each marked, the red guards with their doors, the instruments committed, the new merge owed)
+   ],
+   "src/generators/historyTemplate.js": [
+    ["docks", "after-release", "ships, warehouses, and dock buildings", "1a8b9b93a15ffbf3"],
+diff --git a/tests/lint/presumedThings.widened.register.json b/tests/lint/presumedThings.widened.register.json
+remerge CONFLICT (content): Merge conflict in tests/lint/presumedThings.widened.register.json
+index 1f8672f71..03a2fcfd0 100644
+--- a/tests/lint/presumedThings.widened.register.json
++++ b/tests/lint/presumedThings.widened.register.json
+@@ -1548,7 +1548,6 @@
+    [
+     "quarters",
+     "word",
+-<<<<<<< 2845c5fc5 (merge(JOIN-REHEARSAL): lane/w2-fix-data-2026-11-13 at fb00318d9 into the rehearsal's save branch)
+     "caravan courts and covered lanes make movement through the merchant quarter deliberate",
+     "81db5d998f5eca41"
+    ],
+@@ -1563,9 +1562,6 @@
+     "word",
+     "Any armed service, levied or paid, is organized through districts and administrative chains.",
+     "138f5f20b739abb6"
+-=======
+-    "Any armed service, levied or paid, is organized through districts and administrative chains."
+->>>>>>> 864948c8b (docs(W2-FIX-DATA-HISTORY): handed back by file: the chair's succession ruling (ruled, not built), the other lane's rows each marked, the red guards with their doors, the instruments committed, the new merge owed)
+    ],
+    [
+     "quarters",
+@@ -1576,7 +1572,6 @@
+    [
+     "quarters",
+     "word",
+-<<<<<<< 2845c5fc5 (merge(JOIN-REHEARSAL): lane/w2-fix-data-2026-11-13 at fb00318d9 into the rehearsal's save branch)
+     "Citizen or district levies provide defense; stone enclosures, towers, fortified heights, and naval assets where relevant",
+     "32c2539a37354045"
+    ],
+@@ -1585,9 +1580,6 @@
+     "family",
+     "A lordly court shares practical administration with guild officers and sworn neighborhood representatives.",
+     "d6ecb307ee51f62c"
+-=======
+-    "A large central compound anchors neighborhoods organized around wells and workshops."
+->>>>>>> 864948c8b (docs(W2-FIX-DATA-HISTORY): handed back by file: the chair's succession ruling (ruled, not built), the other lane's rows each marked, the red guards with their doors, the instruments committed, the new merge owed)
+    ],
+    [
+     "notary",
+@@ -4467,15 +4459,12 @@
+     "9468ebd163240990"
+    ],
+    [
+-<<<<<<< 2845c5fc5 (merge(JOIN-REHEARSAL): lane/w2-fix-data-2026-11-13 at fb00318d9 into the rehearsal's save branch)
+     "occupation",
+     "word",
+     "A former occupier officer has returned under a false identity",
+     "a99fe08c977c506c"
+    ],
+    [
+-=======
+->>>>>>> 864948c8b (docs(W2-FIX-DATA-HISTORY): handed back by file: the chair's succession ruling (ruled, not built), the other lane's rows each marked, the red guards with their doors, the instruments committed, the new merge owed)
+     "quarters",
+     "word",
+     "Newcomer and old-family districts remain socially distinct",
+@@ -4506,15 +4495,12 @@
+     "aeb5b0382f767be9"
+    ],
+    [
+-<<<<<<< 2845c5fc5 (merge(JOIN-REHEARSAL): lane/w2-fix-data-2026-11-13 at fb00318d9 into the rehearsal's save branch)
+     "quarters",
+     "word",
+     "The affected district is slowly spreading its strangeness, and the authorities are pretending otherwise",
+     "99991bda60e08c67"
+    ],
+    [
+-=======
+->>>>>>> 864948c8b (docs(W2-FIX-DATA-HISTORY): handed back by file: the chair's succession ruling (ruled, not built), the other lane's rows each marked, the red guards with their doors, the instruments committed, the new merge owed)
+     "succession",
+     "word",
+     "The Succession Crisis",
+@@ -27135,7 +27121,6 @@
+     "97191f116025a6ce"
+    ]
+   ],
+-<<<<<<< 2845c5fc5 (merge(JOIN-REHEARSAL): lane/w2-fix-data-2026-11-13 at fb00318d9 into the rehearsal's save branch)
+   "src/generators/historyGenerator.js": [
+    [
+     "quarters",
+@@ -27186,8 +27171,6 @@
+     "4db6189132ac7faf"
+    ]
+   ],
+-=======
+->>>>>>> 864948c8b (docs(W2-FIX-DATA-HISTORY): handed back by file: the chair's succession ruling (ruled, not built), the other lane's rows each marked, the red guards with their doors, the instruments committed, the new merge owed)
+   "src/generators/historyTemplate.js": [
+    [
+     "quarters",

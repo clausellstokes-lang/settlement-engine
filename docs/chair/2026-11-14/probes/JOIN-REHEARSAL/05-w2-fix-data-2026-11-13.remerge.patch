@@ -1,0 +1,908 @@
+2845c5fc519b8b15493708c3ca73dc7c98a4e183 merge(JOIN-REHEARSAL): lane/w2-fix-data-2026-11-13 at fb00318d9 into the rehearsal's save branch
+
+diff --git a/scripts/census/pool-dominance.register.json b/scripts/census/pool-dominance.register.json
+remerge CONFLICT (content): Merge conflict in scripts/census/pool-dominance.register.json
+index 57b6533b0..ca772da6b 100644
+--- a/scripts/census/pool-dominance.register.json
++++ b/scripts/census/pool-dominance.register.json
+@@ -3,7 +3,6 @@
+   "corpus": "[{\"tier\":\"thorp\",\"n\":150},{\"tier\":\"hamlet\",\"n\":200},{\"tier\":\"village\",\"n\":350},{\"tier\":\"town\",\"n\":550},{\"tier\":\"city\",\"n\":350},{\"tier\":\"metropolis\",\"n\":150},{\"tier\":\"village\",\"n\":50,\"stress\":\"famine\"},{\"tier\":\"town\",\"n\":50,\"stress\":\"famine\"},{\"tier\":\"town\",\"n\":50,\"stress\":\"wartime\"},{\"tier\":\"city\",\"n\":50,\"stress\":\"wartime\"},{\"tier\":\"town\",\"n\":50,\"stress\":\"under_siege\"},{\"tier\":\"city\",\"n\":50,\"stress\":\"under_siege\"}]",
+   "census": {
+     "_note": "Figures for the second wave, never a red: re-written by every door.",
+-<<<<<<< ca6485128 (merge(JOIN-REHEARSAL): lane/powers-follow-up-2026-11-13 at 18d249003 into the rehearsal's save branch)
+     "pools": 909,
+     "printOneLine": 679,
+     "measuredUnder30Draws": 146,
+@@ -11,46 +10,9 @@
+       {
+         "pool": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:population_friction",
+         "top1": 0.8928,
+-=======
+-    "pools": 931,
+-    "printOneLine": 670,
+-    "measuredUnder30Draws": 144,
+-    "highestSharesOver150Draws": [
+-      {
+-        "pool": "ledger:institutionServices:Access to external mill.Grain milling (a day away)",
+-        "top1": 0.98,
+->>>>>>> fb00318d9 (docs(W2-FIX-DATA-8): handed back by file near the mark; what is left is section 2, line by line)
+-        "top5": 1,
+-        "draws": 350,
+-        "lines": 2
+-      },
+-      {
+-        "pool": "ledger:institutionServices:Annual fair.Seasonal trading",
+-        "top1": 0.9496,
+-        "top5": 1,
+-        "draws": 238,
+-        "lines": 2
+-      },
+-      {
+-        "pool": "ledger:institutionServices:Carriers' guild.Freight haulage",
+-        "top1": 0.9464,
+-        "top5": 1,
+-        "draws": 205,
+-        "lines": 2
+-      },
+-      {
+-        "pool": "ledger:institutionServices:Coaching inn.Lodging",
+-        "top1": 0.9101,
+         "top5": 1,
+-        "draws": 545,
+-        "lines": 2
+-      },
+-      {
+-        "pool": "ledger:institutionServices:Coaching inn.Horse change",
+-        "top1": 0.9042,
+-        "top5": 1,
+-        "draws": 386,
+-        "lines": 2
++        "draws": 1082,
++        "lines": 3
+       },
+       {
+         "pool": "ledger:safetyProfile:SAFETY_LINE_SIBLINGS",
+@@ -60,7 +22,6 @@
+         "lines": 2
+       },
+       {
+-<<<<<<< ca6485128 (merge(JOIN-REHEARSAL): lane/powers-follow-up-2026-11-13 at 18d249003 into the rehearsal's save branch)
+         "pool": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:infiltration_fear",
+         "top1": 0.8692,
+         "top5": 1,
+@@ -73,20 +34,6 @@
+         "top5": 1,
+         "draws": 845,
+         "lines": 3
+-=======
+-        "pool": "ledger:institutionServices:Daily markets.Fresh produce",
+-        "top1": 0.8734,
+-        "top5": 1,
+-        "draws": 450,
+-        "lines": 2
+-      },
+-      {
+-        "pool": "ledger:institutionServices:River boatyard.Boat repair",
+-        "top1": 0.8155,
+-        "top5": 1,
+-        "draws": 168,
+-        "lines": 2
+->>>>>>> fb00318d9 (docs(W2-FIX-DATA-8): handed back by file near the mark; what is left is section 2, line by line)
+       },
+       {
+         "pool": "ledger:factionLabelSiblings:FACTION_LABEL_SIBLINGS",
+@@ -96,26 +43,11 @@
+         "lines": 2
+       },
+       {
+-<<<<<<< ca6485128 (merge(JOIN-REHEARSAL): lane/powers-follow-up-2026-11-13 at 18d249003 into the rehearsal's save branch)
+         "pool": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:magical_controversy",
+         "top1": 0.8006,
+         "top5": 1,
+         "draws": 682,
+         "lines": 3
+-=======
+-        "pool": "ledger:institutionServices:Mine (open cast).Raw extraction",
+-        "top1": 0.8057,
+-        "top5": 1,
+-        "draws": 283,
+-        "lines": 2
+-      },
+-      {
+-        "pool": "ledger:historyData:HISTORY_DESC_SIBLINGS",
+-        "top1": 0.7926,
+-        "top5": 1,
+-        "draws": 458,
+-        "lines": 2
+->>>>>>> fb00318d9 (docs(W2-FIX-DATA-8): handed back by file near the mark; what is left is section 2, line by line)
+       },
+       {
+         "pool": "ledger:npcGenerator:NPC_GOAL_SIBLINGS",
+@@ -123,7 +55,6 @@
+         "top5": 1,
+         "draws": 230,
+         "lines": 2
+-<<<<<<< ca6485128 (merge(JOIN-REHEARSAL): lane/powers-follow-up-2026-11-13 at 18d249003 into the rehearsal's save branch)
+       },
+       {
+         "pool": "ledger:crisisCast:CAST_REASON_SIBLINGS",
+@@ -159,8 +90,6 @@
+         "top5": 1,
+         "draws": 453,
+         "lines": 3
+-=======
+->>>>>>> fb00318d9 (docs(W2-FIX-DATA-8): handed back by file near the mark; what is left is section 2, line by line)
+       }
+     ],
+     "secondWave": [
+@@ -5671,168 +5600,11 @@
+       "lines": 2,
+       "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+     },
+-<<<<<<< ca6485128 (merge(JOIN-REHEARSAL): lane/powers-follow-up-2026-11-13 at 18d249003 into the rehearsal's save branch)
+     "ledger:NPC_STRUCTURE.magic__contested__dominant": {
+-=======
+-    "ledger:institutionDescVariants:city|Defense|Mercenary quarter": {
+->>>>>>> fb00318d9 (docs(W2-FIX-DATA-8): handed back by file near the mark; what is left is section 2, line by line)
+-      "top1": 1,
+-      "top5": 1,
+-      "lines": 1,
+-      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+-<<<<<<< ca6485128 (merge(JOIN-REHEARSAL): lane/powers-follow-up-2026-11-13 at 18d249003 into the rehearsal's save branch)
+-=======
+-    },
+-    "ledger:institutionDescVariants:city|Economy|Customs house": {
+-      "top1": 0.6992,
+-      "top5": 1,
+-      "lines": 4,
+-      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+-    },
+-    "ledger:institutionDescVariants:city|Economy|Fish market": {
+-      "top1": 0.5455,
+-      "top5": 1,
+-      "lines": 4,
+-      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+-    },
+-    "ledger:institutionDescVariants:city|Economy|Pawnbroker": {
+-      "top1": 0.3289,
+-      "top5": 1,
+-      "lines": 4,
+-      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+-    },
+-    "ledger:institutionDescVariants:hamlet|Crafts|Maltster": {
+-      "top1": 0.7143,
+-      "top5": 1,
+-      "lines": 3,
+-      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+-    },
+-    "ledger:institutionDescVariants:metropolis|Defense|Mercenary quarter": {
+-      "top1": 0.384,
+-      "top5": 1,
+-      "lines": 3,
+-      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+-    },
+-    "ledger:institutionDescVariants:metropolis|Economy|Customs house": {
+-      "top1": 0.7265,
+-      "top5": 1,
+-      "lines": 4,
+-      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+-    },
+-    "ledger:institutionDescVariants:metropolis|Economy|Fish market": {
+-      "top1": 0.5778,
+-      "top5": 1,
+-      "lines": 4,
+-      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+-    },
+-    "ledger:institutionDescVariants:metropolis|Economy|Pawnbroker": {
+-      "top1": 0.3674,
+-      "top5": 1,
+-      "lines": 4,
+-      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+-    },
+-    "ledger:institutionDescVariants:town|Defense|Town watch": {
+-      "top1": 0.3672,
+-      "top5": 1,
+-      "lines": 4,
+-      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+-    },
+-    "ledger:institutionDescVariants:town|Economy|Customs house": {
+-      "top1": 0.8077,
+-      "top5": 1,
+-      "lines": 4,
+-      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+-    },
+-    "ledger:institutionDescVariants:town|Economy|Fish market": {
+-      "top1": 0.5847,
+-      "top5": 1,
+-      "lines": 4,
+-      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+-    },
+-    "ledger:institutionDescVariants:town|Economy|Pawnbroker": {
+-      "top1": 0.9028,
+-      "top5": 1,
+-      "lines": 3,
+-      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+-    },
+-    "ledger:institutionDescVariants:town|Economy|Town granary": {
+-      "top1": 0.3586,
+-      "top5": 1,
+-      "lines": 3,
+-      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+-    },
+-    "ledger:institutionDescVariants:village|Crafts|Maltster": {
+-      "top1": 0.8,
+-      "top5": 1,
+-      "lines": 4,
+-      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+-    },
+-    "ledger:historyData:HISTORY_QUARTER_WORDS": {
+-      "top1": 0.242,
+-      "top5": 0.8554,
+-      "lines": 8,
+-      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+-    },
+-    "ledger:historyData:HISTORY_SMALL_PLACE_WORDS": {
+       "top1": 1,
+       "top5": 1,
+       "lines": 1,
+       "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+-    },
+-    "ledger:historyData:HISTORY_DESC_SIBLINGS": {
+-      "top1": 0.7926,
+-      "top5": 1,
+-      "lines": 2,
+-      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+-    },
+-    "ledger:institutionDescVariants:city|Economy|Toll bridge": {
+-      "top1": 0.5426,
+-      "top5": 1,
+-      "lines": 4,
+-      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+-    },
+-    "ledger:institutionDescVariants:metropolis|Economy|Toll bridge": {
+-      "top1": 0.4477,
+-      "top5": 1,
+-      "lines": 3,
+-      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+-    },
+-    "ledger:institutionDescVariants:thorp|Religious|Burial ground": {
+-      "top1": 1,
+-      "top5": 1,
+-      "lines": 1,
+-      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+-    },
+-    "ledger:institutionDescVariants:town|Economy|Annual fair": {
+-      "top1": 0.4525,
+-      "top5": 1,
+-      "lines": 4,
+-      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+-    },
+-    "ledger:institutionDescVariants:town|Economy|Toll bridge": {
+-      "top1": 0.4957,
+-      "top5": 1,
+-      "lines": 4,
+-      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+-    },
+-    "ledger:institutionDescVariants:village|Economy|Toll bridge": {
+-      "top1": 0.5,
+-      "top5": 1,
+-      "lines": 3,
+-      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+-    },
+-    "ledger:stressTypes:STRESS_TYPE_SIBLINGS": {
+-      "top1": 0.7524,
+-      "top5": 1,
+-      "lines": 2,
+-      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+-    },
+-    "ledger:institutionDescVariants:village|Crafts|Brewer": {
+-      "top1": 0.5122,
+-      "top5": 1,
+-      "lines": 4,
+-      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+->>>>>>> fb00318d9 (docs(W2-FIX-DATA-8): handed back by file near the mark; what is left is section 2, line by line)
+     }
+   }
+ }
+diff --git a/scripts/lib/table-pools.mjs b/scripts/lib/table-pools.mjs
+remerge CONFLICT (content): Merge conflict in scripts/lib/table-pools.mjs
+index 496148c71..4173e5f2d 100644
+--- a/scripts/lib/table-pools.mjs
++++ b/scripts/lib/table-pools.mjs
+@@ -116,12 +116,9 @@ export const NOT_TABLE_CHANNELS = Object.freeze({
+   DOSSIER_CONNECTIVE_DECLARATIONS: 'a list PARALLEL to each connective list, read by position (CENSUS-1h unit 7); the connectives are state-corpus joints, not an enrolled table',
+   FIELD_DECLARATIONS: 'the edit cards\' field declarations (domain/edit), not prose',
+   TENSION_TEMPLATE_DECLARATIONS: 'keyed by the tension template\'s TYPE beside the selection (CENSUS-1g unit 4); the history templates are not an enrolled table',
+-<<<<<<< ca6485128 (merge(JOIN-REHEARSAL): lane/powers-follow-up-2026-11-13 at 18d249003 into the rehearsal's save branch)
+   TITLE_LINE_DECLARATIONS: 'the card titles\' secret and presentation lines, keyed by SURFACE then text (COHERENCE-POWERS-7 D, POWERS-9: water needs and the governed content topics), read by people/poolMap.js :: settleTitleLines; the title tables (TITLE_SECRETS, TITLE_PRESENTATIONS) are not an enrolled table',
+-=======
+   // W2-FIX-DATA-6, by the same ruling's test: no row of it prints (a template's needs / excludes / timeline flag, no text);
+   // keyed by TYPE like TENSION_TEMPLATE_DECLARATIONS, and the templates' printed text is not an enrolled table.
+   HISTORY_TEMPLATE_RECORD_DECLARATIONS: 'keyed by the history template\'s TYPE beside the selection (W2-FIX-DATA-2 dde3b1277, W2-FIX-DATA-5 dabdb6061): declarations only, no row of it prints; the history templates are not an enrolled table',
+   HISTORY_DESC_SIBLINGS: 'keyed by a history template\'s raw description text, resolved at the timeline\'s and the tension\'s print (W2-FIX-DATA-5, ROUND-3-CUT #331); the history templates are not an enrolled table',
+->>>>>>> fb00318d9 (docs(W2-FIX-DATA-8): handed back by file near the mark; what is left is section 2, line by line)
+ });
+diff --git a/tests/domain/facts/textOf.test.js b/tests/domain/facts/textOf.test.js
+remerge CONFLICT (content): Merge conflict in tests/domain/facts/textOf.test.js
+index 358cf9fa7..b5ad8b90d 100644
+--- a/tests/domain/facts/textOf.test.js
++++ b/tests/domain/facts/textOf.test.js
+@@ -28,14 +28,7 @@ describe('textOf', () => {
+     expect(rows.every((r) => typeof textOf(r) === 'function' || typeof textOf(r) === 'string')).toBe(true);
+     // 86 → 92 by cause: CENSUS-2f unit 2 (R-AP) declared the fish key's three bare lines and the faith key's bell, incense and hymn;
+     // 92 → 99: CENSUS-2f unit 7 — fish.dominant[1] declares `fish` (R-AP amended) and six read bare lines are marked colour (R-AO)
+-<<<<<<< ca6485128 (merge(JOIN-REHEARSAL): lane/powers-follow-up-2026-11-13 at 18d249003 into the rehearsal's save branch)
+     // 99 → 105: R2-CODE-A item 4 — the port scene's four harbour rows declare `docks` and two shore rows (`coast`) join them
+-=======
+-    // 99 → 101: W2-FIX-DATA (the REVIEW-W2B cold list) — the smiths' ironwork carts (siege) and the arabic water for travellers (siege) declare
+-    // 101 → 105: W2-FIX-DATA-3 (REVIEW-W2A-3 #366, #2) — the smiths' three bare dominant lines ("Forge smoke hangs …",
+-    // "The hammering echoes through all of …", "… lives by its forges …") declare `tier: ≥ town` (fb48fb8bc), and the
+-    // mesoamerican craftspeople row ("Craftspeople sit in rows …") declares `market` (c0f8dd279); re-keyed by W2-FIX-DATA-6
+->>>>>>> fb00318d9 (docs(W2-FIX-DATA-8): handed back by file near the mark; what is left is section 2, line by line)
+     expect(rows.filter((r) => typeof r === 'object').length).toBe(105);
+   });
+ });
+diff --git a/tests/lint/presumedThings.register.json b/tests/lint/presumedThings.register.json
+remerge CONFLICT (content): Merge conflict in tests/lint/presumedThings.register.json
+index 85bd74464..9e498276c 100644
+--- a/tests/lint/presumedThings.register.json
++++ b/tests/lint/presumedThings.register.json
+@@ -27,11 +27,7 @@
+   {"thing": "docks", "path": ".economicState.tradeDependencies[].detail", "text": "harbour", "reason": "hedge", "note": "\"crossroads or harbour\", \"Trade access + harbour\": the alternative stated", "towns": 6},
+   {"thing": "docks", "path": ".economicState.tradeDependencies[].resource", "text": "harbour", "reason": "hedge", "note": "\"crossroads or harbour\", \"Trade access + harbour\": the alternative stated", "towns": 6},
+   {"thing": "docks", "path": ".economicViability.warnings[].description", "text": "Trade access + harbour", "reason": "hedge", "note": "the builder's dependency label: an alternative stated", "towns": 6},
+-<<<<<<< ca6485128 (merge(JOIN-REHEARSAL): lane/powers-follow-up-2026-11-13 at 18d249003 into the rehearsal's save branch)
+   {"thing": "docks", "path": ".institutions[].desc", "text": "by road or harbour", "reason": "hedge", "note": "\"by road or harbour\": the sentence states the alternative", "towns": 22},
+-=======
+-  {"thing": "garrison", "path": ".economicViability.warnings[].suggestedFixes[]", "text": "Add Town Walls or Garrison", "reason": "hedge", "note": "advice to the builder: what to add", "towns": 4},
+->>>>>>> fb00318d9 (docs(W2-FIX-DATA-8): handed back by file near the mark; what is left is section 2, line by line)
+   {"thing": "garrison", "path": ".institutions[].desc", "text": "garrison contracts", "reason": "figure", "note": "the hire company's trade, wherever it is hired", "towns": 5},
+   {"thing": "garrison", "path": ".institutions[].desc", "text": "garrison work", "reason": "figure", "note": "the hire company's trade, wherever it is hired", "towns": 5},
+   {"thing": "market", "path": ".history.founding.reason", "text": "grew as an agricultural market center", "reason": "past", "note": "the founding: a past event", "towns": 1},
+@@ -48,6 +44,7 @@
+   {"thing": "mercenary", "path": ".powerStructure.recentConflict", "text": "whether to raise a levy or hire mercenaries", "reason": "hedge", "note": "\"whether to … hire\": not yet hired", "towns": 5},
+   {"thing": "mercenary", "path": ".pressureSentence", "text": "whether to raise a levy or hire mercenaries", "reason": "hedge", "note": "\"whether to … hire\": not yet hired", "towns": 2},
+   {"thing": "walls", "path": ".history.historicalEvents[].plotHooks[]", "text": "sealed inside the walls during construction", "reason": "past", "note": "a past event", "towns": 5},
++  {"thing": "walls", "path": ".institutions[].desc", "text": "walls and churches of half the region", "reason": "hedge", "note": "the region's walls, not this town's", "towns": 7},
+   {"thing": "walls", "path": ".npcs[].presentation.impression", "text": "The walls are covered with charts", "reason": "ruling-3", "note": "a room's walls, not the perimeter", "towns": 8},
+   {"thing": "walls", "path": ".npcs[].secret.what", "text": "the walls built with them crumble", "reason": "ruling-3", "note": "the walls of any building, not the perimeter", "towns": 6},
+   {"thing": "war", "path": ".history.currentTensions[].lastingEffects[]", "text": "Wartime property seizures remain legally unresolved", "reason": "past", "note": "the seizures were made in a past war", "towns": 11},
+@@ -187,7 +184,6 @@
+    ["watch", "after-release", "The watch {settlement}'s seat raised against foreigners is now its most reliable instrument, and the hall is discovering", "007b3771cade631f"]
+   ],
+   "src/data/dossierStateProse/defense.generated.js": [
+-<<<<<<< ca6485128 (merge(JOIN-REHEARSAL): lane/powers-follow-up-2026-11-13 at 18d249003 into the rehearsal's save branch)
+    ["court", "after-release", "You can see the courthouse and the gaol at {settlement} from the street, and the town means you to.", "f8aa86f5bf0ee11e"],
+    ["docks", "after-release", "{settlement} has a harbour and nothing to hold it with; any vessel that wants the sea approaches has them.", "eb0eee027c212b6b"],
+    ["docks", "after-release", "{settlement}'s granary tally and its open harbour make it the hardest kind of place to starve out: a siege would need a ", "7d2d55a1e7be7e6d"],
+@@ -235,41 +231,6 @@
+    ["market", "after-release", "DS-ECO-4: Economics › Market Prices · `deriveMarketPrices(...)` → `{exports[], imports[], highlight{label,tag,crierLine}", "992ac6f7fe67a7e0"],
+    ["market", "after-release", "Loaded carts leave {settlement} for other markets. The town grows more food than it can eat.", "403415e3b52b4019"],
+    ["market", "after-release", "The clergy have more say over {settlement}'s market than its traders do; anyone who wants to do business here goes to th", "ddbf6c9f71a595a8"]
+-=======
+-   ["court", "after-release", "You can see the courthouse and the gaol at {settlement} from the street, and the town means you to."],
+-   ["docks", "after-release", "{settlement} has a harbour and nothing to hold it with; any vessel that wants the sea approaches has them."],
+-   ["docks", "after-release", "You can sail into {settlement} unchallenged; nobody watches the harbour mouth."],
+-   ["garrison", "after-release", "{settlement}'s garrison roll puts paid soldiers on every stretch of its walls, so raiders stay away and an army would pa"],
+-   ["garrison", "after-release", "DS-DEF-2: `Defense › Threat assessment (the five readiness rows)` · `defenseProfile.scores{monster,military,internal,eco"],
+-   ["garrison", "after-release", "DS-DEF-5: `Defense › Armed forces & fortifications` · `defenseProfile.institutions{walls,garrison,militia,watch,mercenar"],
+-   ["mercenary", "after-release", "A free company keeps a hall at {settlement} and hires out its swords to whoever pays."],
+-   ["mercenary", "after-release", "DS-DEF-5: `Defense › Armed forces & fortifications` · `defenseProfile.institutions{walls,garrison,militia,watch,mercenar"],
+-   ["mercenary", "after-release", "The free company at {settlement} keeps its own muster roll, not the town's: its fighters answer to their captain and the"],
+-   ["militia", "after-release", "DS-DEF-2: `Defense › Threat assessment (the five readiness rows)` · `defenseProfile.scores{monster,military,internal,eco"],
+-   ["militia", "after-release", "DS-DEF-5: `Defense › Armed forces & fortifications` · `defenseProfile.institutions{walls,garrison,militia,watch,mercenar"],
+-   ["militia", "after-release", "The militia at {settlement} know every path around the town, and they know that will not stop a professional army."],
+-   ["prison", "after-release", "You can see the courthouse and the gaol at {settlement} from the street, and the town means you to."],
+-   ["walls", "after-release", "Approaching {settlement}, you see the walls and the soldiers who belong on them, and any attacker would think again abou"],
+-   ["walls", "after-release", "Every household at {settlement} would send someone to the walls, and everyone knows that townsfolk with spears are no tr"],
+-   ["walls", "after-release", "People at {settlement} believe the town could be held, and the soldiers on the walls give them good reason to."],
+-   ["walls", "after-release", "The walls and townsfolk of {settlement} would see off a raid but not a proper army, and nothing now under way will chang"],
+-   ["walls", "after-release", "There is very little in the country around {settlement} and there are substantial works facing it; whatever the walls he"],
+-   ["war", "after-release", "{settlement} has given up several ordinary things for the war, and nobody mentions them any more."],
+-   ["war", "after-release", "{settlement} has given up several ordinary things for the war, and people have stopped remarking on it."],
+-   ["war", "after-release", "{settlement} is on a war footing: what it makes, what it stores and who is free to work are all decided by the war."],
+-   ["war", "after-release", "Strangers at {settlement} are watched and questioned; the war has made everyone careful."],
+-   ["war", "after-release", "The war has made people at {settlement} wary of anyone they do not know, and prices and curfews are set by order."],
+-   ["war", "after-release", "The war's demands at {settlement} keep reaching further, into trades and households that thought themselves untouched."],
+-   ["war", "after-release", "What {settlement} produces, stores and spares is all being decided against the war, and the deciding has reached things "],
+-   ["watch", "after-release", "There is very little street violence at {settlement}, and the watch is not the reason: the people who run the town's cri"]
+-  ],
+-  "src/data/dossierStateProse/economy.generated.js": [
+-   ["market", "after-release", "{settlement} sends several different goods out to market; if one trade fails, the others still go."],
+-   ["market", "after-release", "DS-ECO-10: LADDER › export posture, market scarcity, and the freshness caveat · `deriveExportPosture(settlement){status,"],
+-   ["market", "after-release", "DS-ECO-4: Economics › Market Prices · `deriveMarketPrices(...)` → `{exports[], imports[], highlight{label,tag,crierLine}"],
+-   ["market", "after-release", "Loaded carts leave {settlement} for other markets. The town grows more food than it can eat."],
+-   ["market", "after-release", "The clergy have more say over {settlement}'s market than its traders do; anyone who wants to do business here goes to th"]
+->>>>>>> fb00318d9 (docs(W2-FIX-DATA-8): handed back by file near the mark; what is left is section 2, line by line)
+   ],
+   "src/data/dossierStateProse/general.generated.js": [
+    ["docks", "after-release", "{settlement} has a harbour and hardly uses it: empty moorings, few dock hands, and a strange sail draws a crowd to stare", "7c8c2bd09a4761ae"],
+@@ -297,7 +258,6 @@
+    ["watch", "after-release", "The {seat} at {settlement} governs a besieged town, which means it governs rationing, the gates and the watch rota, and ", "1961be948387c885"]
+   ],
+   "src/data/dossierStateProse/stressors.generated.js": [
+-<<<<<<< ca6485128 (merge(JOIN-REHEARSAL): lane/powers-follow-up-2026-11-13 at 18d249003 into the rehearsal's save branch)
+    ["court", "after-release", "A list of grievances was nailed to the courthouse door and nobody has dared take it down. The rising is genuinely popula", "22592d50246e5ce9"],
+    ["garrison", "after-release", "Holding this place costs more than it returns. Garrisons, administrators and suppression tie down strength that was mean", "d1dcf904d853d6e3"],
+    ["garrison", "after-release", "The armed movement here answers a foreign garrison. Collaborators and patriots eat at the same tables, and everyone know", "7764776686a48531"],
+@@ -312,20 +272,6 @@
+    ["war", "after-release", "The war asks more of {settlement} each season: more men, more carts, more of the harvest.", "764c3365eaef36cf"],
+    ["war", "after-release", "The war goes on far from {settlement}, neither nearer nor further, and the town has grown used to its demands.", "ed75bf012a087a11"],
+    ["war", "after-release", "The war's demands on {settlement} have settled: the army takes its share, and trade goes on around it.", "1f69aa85add817fa"]
+-=======
+-   ["court", "after-release", "A list of grievances was nailed to the courthouse door and nobody has dared take it down. The rising is genuinely popula"],
+-   ["garrison", "after-release", "Holding this place costs more than it returns. Garrisons, administrators and suppression tie down strength that was mean"],
+-   ["garrison", "after-release", "The armed movement here answers a foreign garrison. Collaborators and patriots eat at the same tables, and everyone know"],
+-   ["garrison", "after-release", "The resistance is bleeding the garrison. Occupation and revolt feed each other here, and the arrangement costs the occup"],
+-   ["market", "after-release", "{settlement} owes coin it could have paid before the market turned; each week the obligation grows against the means."],
+-   ["war", "after-release", "As the war winds down, more of {settlement}'s goods are going to ordinary buyers again."],
+-   ["war", "after-release", "Each season the war brings new demands to {settlement}, and those in charge are running out of ways to meet them."],
+-   ["war", "after-release", "More army carts pass through {settlement} every time you come, and the talk at every door is of the war."],
+-   ["war", "after-release", "The war asks less of {settlement} now, and fewer of its carts and men go to the army."],
+-   ["war", "after-release", "The war asks more of {settlement} each season: more men, more carts, more of the harvest."],
+-   ["war", "after-release", "The war goes on far from {settlement}, neither nearer nor further, and the town has grown used to its demands."],
+-   ["war", "after-release", "The war's demands on {settlement} have settled: the army takes its share, and trade goes on around it."]
+->>>>>>> fb00318d9 (docs(W2-FIX-DATA-8): handed back by file near the mark; what is left is section 2, line by line)
+   ],
+   "src/data/dossierStateProse/warFaith.generated.js": [
+    ["garrison", "after-release", "{counterpart} holds more than it can garrison properly, and {settlement} is one of the places where the thinness shows.", "57de0ba7fbc5265e"],
+@@ -413,7 +359,6 @@
+    ["market", "after-release", "An open stall or small roofed market selling salted and smoked fish brought in by cart. The barrels keep, so the price h", "735e41052db815c1"]
+   ],
+   "src/data/institutionDescVariants.js": [
+-<<<<<<< ca6485128 (merge(JOIN-REHEARSAL): lane/powers-follow-up-2026-11-13 at 18d249003 into the rehearsal's save branch)
+    ["bank", "after-release", "A whole quarter given to money: banking across borders, credit by letter, and speculation in coin at scale.", "8f2eb4e1f4055ffa"],
+    ["bank", "after-release", "Foreign coin exchanged. The first stirrings of banking.", "1fae8ad9d9472126"],
+    ["bank", "after-release", "Lending, currency exchange, and credit by letter. Rudimentary banking.", "012f7570b2bf0cb3"],
+@@ -481,72 +426,6 @@
+    ["temple", "after-release", "Works wood into the useful and the ornamental alike (tool handles, holy figures, inlay for furniture) and makes the sacr", "9df57ae2017a78f5"],
+    ["walls", "after-release", "Masonry ramparts studded with towers and pierced by many gates.", "98bc7f5fa53e0f17"],
+    ["watch", "after-release", "Watchmen serving part-time. Night patrols and gate duty.", "837006bf0b956def"]
+-=======
+-   ["bank", "after-release", "A whole quarter given to money: banking across borders, credit by letter, and speculation in coin at scale."],
+-   ["bank", "after-release", "Foreign coin exchanged. The first stirrings of banking."],
+-   ["bank", "after-release", "Lending, currency exchange, and credit by letter. Rudimentary banking."],
+-   ["bank", "after-release", "Loans, coin exchange, and letters of credit. The beginnings of banking."],
+-   ["bank", "after-release", "Tests precious metal brought to market for purity, charging by the assay. Banking and minting depend on it."],
+-   ["bank", "after-release", "They change coin from abroad. Banking in its infancy."],
+-   ["docks", "after-release", "A city-scale yard building large merchant ships and warships alike. It holds several dry docks, a ropewalk, a sail loft,"],
+-   ["docks", "after-release", "A dock on river or coast. Bulk trade and river carriage depend on it."],
+-   ["docks", "after-release", "Here large merchant and war vessels are built at city scale, across multiple dry docks, with ropewalk, sail loft, and de"],
+-   ["garrison", "after-release", "A billet and hiring office for professional soldiers idle between campaigns. Caravan escort, garrison work, and short-te"],
+-   ["garrison", "after-release", "Garrisons spread through the quarters; no single barracks could secure a city this size."],
+-   ["garrison", "after-release", "Lodging for guardsmen, or a modest garrison."],
+-   ["garrison", "after-release", "Quarters for the guard or a small garrison."],
+-   ["garrison", "after-release", "Troops quartered in several places at once, a metropolis being far too large for one garrison."],
+-   ["garrison", "after-release", "Where a band of soldiers lodges and takes contracts between wars. They hire out by the day for escort, garrison duty, an"],
+-   ["granary", "after-release", "A network of granaries run by the state, holding reserves against emergency."],
+-   ["market", "after-release", "A broad open square given over to market days and fairs."],
+-   ["market", "after-release", "A permanent district, licensed for commerce in persons, with auction halls, holding compounds, broker offices, and the a"],
+-   ["market", "after-release", "A standing underground market dealing contraband, forged papers, and services no law permits."],
+-   ["market", "after-release", "An office that assays the purity of gold and silver brought to market, for a fee each time. Minting and banking cannot w"],
+-   ["market", "after-release", "An open stall or small roofed market for selling the day's catch. The price falls quickly, for fish keeps no better than"],
+-   ["market", "after-release", "Between five and ten standing market districts, each to its own trade: grain, livestock, cloth, metals, exotica."],
+-   ["market", "after-release", "Five to ten permanent quarters given over to markets, sorted by ware: grain, livestock, cloth, metals, and the exotic."],
+-   ["market", "after-release", "Meat markets and shambles kept under strict civic rules."],
+-   ["market", "after-release", "Monthly or seasonal, the market gathers without any charter to sanction it. Sustained by custom, by convenience, and by "],
+-   ["market", "after-release", "Musters hunting parties across the lands about the settlement, selling venison, pelts, and game at market. It is also wh"],
+-   ["market", "after-release", "Permanent markets in more than one square, each serving its own quarter."],
+-   ["market", "after-release", "Several standing market squares, one to a district."],
+-   ["market", "after-release", "Standing markets in more than one quarter, open every day."],
+-   ["market", "after-release", "Takes waterfowl and game birds with nets, traps, and trained hunting birds, bringing ducks, geese, and pigeons to market"],
+-   ["market", "after-release", "Tests precious metal brought to market for purity, charging by the assay. Banking and minting depend on it."],
+-   ["market", "after-release", "The central plaza where the weekly market and the fairs are held."],
+-   ["market", "after-release", "The shambles and meat markets, closely regulated by the city."],
+-   ["market", "after-release", "Where the day's catch is sold, from an open stall or a small covered market. Prices sink fast. Fish will not wait."],
+-   ["mercenary", "after-release", "A drinking hall for old soldiers and mercenaries put out to pasture. It offers rough security, the odd brawl, and now an"],
+-   ["mercenary", "after-release", "Where retired soldiers and sellswords do their drinking. Security of a sort, the occasional brawl, and, from time to tim"],
+-   ["mill", "after-release", "A handful of mills, grinding grain and fulling cloth."],
+-   ["mill", "after-release", "A manor mill holding the sole right to grind (the banalité)."],
+-   ["mill", "after-release", "A mill driven by water or ox, cutting planks and beams for builders. Sited near timber, it can meet a whole region's bui"],
+-   ["mill", "after-release", "A mill turned by water or oxen that saws planks and beams for construction and keeps a standing crew."],
+-   ["mill", "after-release", "A water- or wind-driven mill holding the sole right to grind. The miller tends to be the richest man in the village, and"],
+-   ["mill", "after-release", "Every workable watercourse turns a grain, fulling, or saw mill, most under a guild's or the city's licence."],
+-   ["mill", "after-release", "Grain goes to the manor or village mill; grinding it at home is commonly against the law."],
+-   ["mill", "after-release", "Mills for grain, fulling, and sawing line every usable stream, many licensed by guild or city."],
+-   ["mill", "after-release", "Planks and beams for the building trade, sawn by water or ox power at a mill with a permanent crew."],
+-   ["mill", "after-release", "Several mills, some for grain, some for fulling cloth."],
+-   ["mill", "after-release", "The lord's mill, and by banalité the only one grain may lawfully be ground at."],
+-   ["prison", "after-release", "A state prison of some size, keeping its political prisoners, debtors, and convicts apart from one another."],
+-   ["prison", "after-release", "A vast state gaol where the political, the indebted, and the convicted are each held separately."],
+-   ["temple", "after-release", "A charity house sheltering the destitute poor, the aged, and the disabled who cannot work. Church endowment and wealthy "],
+-   ["temple", "after-release", "A small shrine by the road at the edge of the parish. No priest keeps it."],
+-   ["temple", "after-release", "Abandoned babies and young children are received here and given plain care until apprenticeship, a family placement, or "],
+-   ["temple", "after-release", "Carves both plain and decorative pieces from wood: handles for tools, religious figures, furniture inlay. For the church"],
+-   ["temple", "after-release", "Consecrated earth ringing the church."],
+-   ["temple", "after-release", "Hallowed ground about the church."],
+-   ["temple", "after-release", "Kept for the poor, the old, and the crippled who have no work in them, funded by church endowment and rich patrons. It f"],
+-   ["temple", "after-release", "Plain wayside shrine for prayer. Unstaffed."],
+-   ["temple", "after-release", "Separate courts for trade, for crime, and for the church."],
+-   ["temple", "after-release", "Takes in abandoned infants and small children and keeps them in basic care until they are apprenticed, placed with famil"],
+-   ["temple", "after-release", "The great church of the metropolis. The region's chief religious authority sits here, and the faithful travel to it."],
+-   ["temple", "after-release", "The metropolitan cathedral, seat of the region's highest prelate and a draw for pilgrims."],
+-   ["temple", "after-release", "Works wood into the useful and the ornamental alike (tool handles, holy figures, inlay for furniture) and makes the sacr"],
+-   ["walls", "after-release", "Masonry ramparts studded with towers and pierced by many gates."],
+-   ["watch", "after-release", "Watchmen serving part-time. Night patrols and gate duty."]
+->>>>>>> fb00318d9 (docs(W2-FIX-DATA-8): handed back by file near the mark; what is left is section 2, line by line)
+   ],
+   "src/data/institutionLadders.js": [
+    ["market", "after-release", "Slave market district", "74a38cc7536fc631"],
+@@ -606,7 +485,6 @@
+    ["watch", "after-release", "Walls, wells, roads, and the watch", "4d8ac9d3cd2c4a57"]
+   ],
+   "src/data/institutionalCatalog.js": [
+-<<<<<<< ca6485128 (merge(JOIN-REHEARSAL): lane/powers-follow-up-2026-11-13 at 18d249003 into the rehearsal's save branch)
+    ["bank", "after-release", "Basic banking (5,000+).", "0194f871380f72bf"],
+    ["bank", "after-release", "Consolidated financial quarter: international banking, letters of credit, currency speculation at scale.", "82b9cec5b7f97add"],
+    ["bank", "after-release", "Early banking (2,000+ population).", "9145c7bbbd3d95e7"],
+@@ -684,84 +562,6 @@
+    ["watch", "after-release", "the watch captain", "7c4fd90270cb9b1f"],
+    ["watch", "after-release", "the watch commander", "5803337e88093f1c"],
+    ["watch", "after-release", "the watch sergeant", "8fe3ad78cf455b6c"]
+-=======
+-   ["bank", "after-release", "Basic banking (5,000+)."],
+-   ["bank", "after-release", "Consolidated financial quarter: international banking, letters of credit, currency speculation at scale."],
+-   ["bank", "after-release", "Early banking (2,000+ population)."],
+-   ["bank", "after-release", "Exchange foreign currency. Early banking."],
+-   ["bank", "after-release", "Loans, currency exchange, letters of credit. Basic banking."],
+-   ["bank", "after-release", "Tests the purity of precious metals brought to market. Essential infrastructure for banking and minting. Charges fees pe"],
+-   ["bank", "after-release", "Tests the purity of precious metals brought to the town. Essential infrastructure for banking and minting. Charges fees "],
+-   ["docks", "after-release", "At town scale the catch lands at the docks and is sold through the fish market."],
+-   ["docks", "after-release", "River or coastal dock. Essential for bulk water trade and river transport."],
+-   ["garrison", "after-release", "A billet and contracting office for a band of professional soldiers available between campaigns. Offers caravan escort, "],
+-   ["garrison", "after-release", "Garrison forces distributed across quarters. No single barracks can secure a metropolis."],
+-   ["garrison", "after-release", "Guild bowyers and fletchers: standard arrows by the sheaf, specialty broadheads, composite bows to commission. Supplies "],
+-   ["garrison", "after-release", "Housing for guards or small garrison."],
+-   ["garrison", "after-release", "Layered wall systems: outer wall, inner wall, citadel ring. Multiple garrison zones and gatehouses."],
+-   ["garrison", "after-release", "the garrison commander"],
+-   ["granary", "after-release", "A hamlet stores household by household; the granary is the town rung."],
+-   ["granary", "after-release", "A town is fed by its hinterland: the granary and the market carry farming in the town roster."],
+-   ["granary", "after-release", "State granary complex"],
+-   ["granary", "after-release", "State-administered granary network holding strategic reserves."],
+-   ["granary", "after-release", "the granary reeve"],
+-   ["granary", "after-release", "the master of granaries"],
+-   ["market", "after-release", "A permanent, licensed district for commerce in persons: auction halls, holding compounds, broker offices, and associated"],
+-   ["market", "after-release", "A town is fed by its hinterland: the granary and the market carry farming in the town roster."],
+-   ["market", "after-release", "Absorbed by the fish market at town scale."],
+-   ["market", "after-release", "An open-air stall or small covered market where the day's catch is sold. Prices drop fast. Fish doesn't wait."],
+-   ["market", "after-release", "At town scale the catch lands at the docks and is sold through the fish market."],
+-   ["market", "after-release", "Central plaza for weekly markets and fairs."],
+-   ["market", "after-release", "Dairying is rural; towns buy milk, butter, and cheese at market."],
+-   ["market", "after-release", "District markets (5-10)"],
+-   ["market", "after-release", "Five to ten permanent specialized market districts: grain, livestock, cloth, metals, exotica."],
+-   ["market", "after-release", "Flocks graze the countryside; towns buy wool through the weavers and the market."],
+-   ["market", "after-release", "Fowling is a marsh and field trade; towns buy the birds at market."],
+-   ["market", "after-release", "Official announcer who reads proclamations, market prices, and news at fixed times in the market square. Employed by the"],
+-   ["market", "after-release", "Official announcer who reads proclamations, market prices, and news at fixed times in the market squares. Employed by th"],
+-   ["market", "after-release", "Organises hunting parties across the surrounding territory. Sells venison, pelts, and game to market. Doubles as a sourc"],
+-   ["market", "after-release", "Permanent market activity in multiple locations."],
+-   ["market", "after-release", "Permanent underground market: contraband, forged documents, illegal services."],
+-   ["market", "after-release", "Shambles and meat markets under strict civic regulation."],
+-   ["market", "after-release", "Slave market district"],
+-   ["market", "after-release", "Tests the purity of precious metals brought to market. Essential infrastructure for banking and minting. Charges fees pe"],
+-   ["market", "after-release", "the slave-market master"],
+-   ["mercenary", "after-release", "A drinking hall where retired soldiers and mercenaries gather. Informal security, bar brawls, and the occasional job off"],
+-   ["mercenary", "after-release", "Free company hall"],
+-   ["militia", "after-release", "the militia captain"],
+-   ["mill", "after-release", "A water- or ox-powered mill producing planks and beams for the construction trade. A town near timber can supply an enti"],
+-   ["mill", "after-release", "A water- or ox-powered mill producing planks and beams for the construction trade. Employs a permanent crew."],
+-   ["mill", "after-release", "Access to external mill"],
+-   ["mill", "after-release", "Grain, fulling, and saw mills along every usable watercourse, many under guild or civic licence."],
+-   ["mill", "after-release", "Manor mill with milling monopoly (banalité)."],
+-   ["mill", "after-release", "Multiple mills for grain, fulling cloth."],
+-   ["mill", "after-release", "Must travel to manor/village mill. Home grinding often illegal."],
+-   ["mill", "after-release", "Water or windmill with monopoly milling rights. The miller is often the wealthiest and most resented figure in the villa"],
+-   ["prison", "after-release", "State prison complex: political prisoners, debtors, convicted criminals held separately."],
+-   ["prison", "after-release", "the prison warden"],
+-   ["temple", "after-release", "Access to parish church"],
+-   ["temple", "after-release", "At town scale the clergy are held inside the parish churches' row."],
+-   ["temple", "after-release", "Carves functional and decorative items from wood: tool handles, religious figures, furniture inlays. Produces sacred ima"],
+-   ["temple", "after-release", "Cathedral (10,000+ only)"],
+-   ["temple", "after-release", "Charitable house for the destitute poor, aged, and disabled who cannot work. Funded by church endowment and wealthy dono"],
+-   ["temple", "after-release", "Inside a town every street is in reach of a parish church."],
+-   ["temple", "after-release", "Metropolitan cathedral. Seat of the highest regional religious authority. Pilgrimage destination."],
+-   ["temple", "after-release", "Parish churches (10-30)"],
+-   ["temple", "after-release", "Parish churches (2-5)"],
+-   ["temple", "after-release", "Parish churches (50-100+)"],
+-   ["temple", "after-release", "Receives abandoned infants and young children, providing basic care until they can be apprenticed, placed with families,"],
+-   ["walls", "after-release", "Burial has left the walls entirely: grounds beyond every gate, each with its own road, its own gatekeepers, and a trade "],
+-   ["walls", "after-release", "City walls and gates"],
+-   ["walls", "after-release", "City walls carry their gates in their own row."],
+-   ["walls", "after-release", "Commons are a rural institution; towns graze on leased or enclosed land outside the walls."],
+-   ["walls", "after-release", "Dense multi-story blocks, tenement courts, and suburbs spilling past the walls."],
+-   ["watch", "after-release", "A loft of message birds kept by people who file no returns. Word arrives unsigned and ahead of the watch. Only a standin"],
+-   ["watch", "after-release", "Guild bowyers and fletchers: standard arrows by the sheaf, specialty broadheads, composite bows to commission. Supplies "],
+-   ["watch", "after-release", "Professional city watch"],
+-   ["watch", "after-release", "the watch captain"],
+-   ["watch", "after-release", "the watch commander"],
+-   ["watch", "after-release", "the watch sergeant"]
+->>>>>>> fb00318d9 (docs(W2-FIX-DATA-8): handed back by file near the mark; what is left is section 2, line by line)
+   ],
+   "src/data/narrativeData.js": [
+    ["bank", "after-release", "was founded when a powerful merchant family built a counting house at the junction", "0d200b8e0cbd9952"],
+@@ -1037,16 +837,10 @@
+    ["mill", "after-release", "the mill and lumber district", "56fb56b50084c436"]
+   ],
+   "src/generators/historyGenerator.js": [
+-<<<<<<< ca6485128 (merge(JOIN-REHEARSAL): lane/powers-follow-up-2026-11-13 at 18d249003 into the rehearsal's save branch)
+    ["temple", "after-release", "A period of ambitious stone construction transformed the settlement's character. Civic buildings or a cathedral raised f", "dc29bf0a6a243a34"],
+    ["temple", "after-release", "A period of ambitious stone construction transformed the settlement's character. Walls, civic buildings, or a cathedral ", "cc27d2b3e3fca458"],
+    ["temple", "after-release", "the temple district", "3a3da5b46e268323"],
+    ["walls", "after-release", "Something was sealed inside the walls during construction, deliberately", "ae2c2b6e31da2c3d"]
+-=======
+-   ["temple", "after-release", "A period of ambitious stone construction transformed the settlement's character. Civic buildings or a cathedral raised f"],
+-   ["temple", "after-release", "A period of ambitious stone construction transformed the settlement's character. Walls, civic buildings, or a cathedral "],
+-   ["walls", "after-release", "Something was sealed inside the walls during construction, deliberately"]
+->>>>>>> fb00318d9 (docs(W2-FIX-DATA-8): handed back by file near the mark; what is left is section 2, line by line)
+   ],
+   "src/generators/historyTemplate.js": [
+    ["docks", "after-release", "ships, warehouses, and dock buildings", "1a8b9b93a15ffbf3"],
+diff --git a/tests/lint/presumedThings.widened.register.json b/tests/lint/presumedThings.widened.register.json
+remerge CONFLICT (content): Merge conflict in tests/lint/presumedThings.widened.register.json
+index 64a1ad793..03a2fcfd0 100644
+--- a/tests/lint/presumedThings.widened.register.json
++++ b/tests/lint/presumedThings.widened.register.json
+@@ -2054,7 +2054,6 @@
+     "498cfc75c90d5834"
+    ],
+    [
+-<<<<<<< ca6485128 (merge(JOIN-REHEARSAL): lane/powers-follow-up-2026-11-13 at 18d249003 into the rehearsal's save branch)
+     "quarters",
+     "word",
+     "Patrols at {settlement} have changed their routes, and some districts are closed to anyone without business there.",
+@@ -2079,8 +2078,6 @@
+     "cb2c18ff89ae6733"
+    ],
+    [
+-=======
+->>>>>>> fb00318d9 (docs(W2-FIX-DATA-8): handed back by file near the mark; what is left is section 2, line by line)
+     "plague",
+     "word",
+     "{settlement} has no dedicated healers. Wounds take what they take, and a plague here runs until it has finished.",
+@@ -2737,7 +2734,6 @@
+     "4328e4b3cddcd11b"
+    ],
+    [
+-<<<<<<< ca6485128 (merge(JOIN-REHEARSAL): lane/powers-follow-up-2026-11-13 at 18d249003 into the rehearsal's save branch)
+     "religiousHouses",
+     "word",
+     "Faith carries real weight in {settlement}'s money. What the religious houses take in and spend is a large part of the to",
+@@ -2750,8 +2746,6 @@
+     "d66f2b242f0fa38c"
+    ],
+    [
+-=======
+->>>>>>> fb00318d9 (docs(W2-FIX-DATA-8): handed back by file near the mark; what is left is section 2, line by line)
+     "practitioner",
+     "word",
+     "Magic carries real weight in {settlement}'s money. What the town's practitioners charge for, and what they buy, is a lar",
+@@ -3008,7 +3002,6 @@
+    [
+     "occupation",
+     "word",
+-<<<<<<< ca6485128 (merge(JOIN-REHEARSAL): lane/powers-follow-up-2026-11-13 at 18d249003 into the rehearsal's save branch)
+     "{settlement} is under occupation; the streets are quiet because soldiers hold them, not because the town is at peace.",
+     "c6c53056134c456b"
+    ],
+@@ -3023,9 +3016,6 @@
+     "word",
+     "{settlement} was occupied and gave nothing up that mattered; what the occupier took, the town had already moved.",
+     "28a6234a83faf399"
+-=======
+-    "{settlement} was occupied and gave nothing up that mattered; what the occupier took, the town had already moved."
+->>>>>>> fb00318d9 (docs(W2-FIX-DATA-8): handed back by file near the mark; what is left is section 2, line by line)
+    ],
+    [
+     "powersCount",
+@@ -3500,7 +3490,6 @@
+   ],
+   "src/data/dossierStateProse/stressors.generated.js": [
+    [
+-<<<<<<< ca6485128 (merge(JOIN-REHEARSAL): lane/powers-follow-up-2026-11-13 at 18d249003 into the rehearsal's save branch)
+     "occupation",
+     "word",
+     "{settlement}'s taxes go to the occupier before the town sees them, and its officials take their orders from outside.",
+@@ -3519,8 +3508,6 @@
+     "71cfd98ad4c329cd"
+    ],
+    [
+-=======
+->>>>>>> fb00318d9 (docs(W2-FIX-DATA-8): handed back by file near the mark; what is left is section 2, line by line)
+     "famine",
+     "word",
+     "This famine is not a failure of harvest. It is a blockade, and it keeps exactly as long as the blockade keeps.",
+@@ -4484,15 +4471,12 @@
+     "014fb4c5ca0e70a8"
+    ],
+    [
+-<<<<<<< ca6485128 (merge(JOIN-REHEARSAL): lane/powers-follow-up-2026-11-13 at 18d249003 into the rehearsal's save branch)
+     "quarters",
+     "word",
+     "A fire that began in {location} consumed {building_type} across whole districts before it could be checked",
+     "f5b3bd95a42e8aee"
+    ],
+    [
+-=======
+->>>>>>> fb00318d9 (docs(W2-FIX-DATA-8): handed back by file near the mark; what is left is section 2, line by line)
+     "plague",
+     "word",
+     "A healer who profited enormously during the plague is being asked how they stayed untouched",
+@@ -4579,15 +4563,12 @@
+     "2cd838df6f39a521"
+    ],
+    [
+-<<<<<<< ca6485128 (merge(JOIN-REHEARSAL): lane/powers-follow-up-2026-11-13 at 18d249003 into the rehearsal's save branch)
+     "quarters",
+     "word",
+     "A fire out of {location} spread through {building_type} across entire districts before anyone could bring it under contr",
+     "7130762978fa8f82"
+    ],
+    [
+-=======
+->>>>>>> fb00318d9 (docs(W2-FIX-DATA-8): handed back by file near the mark; what is left is section 2, line by line)
+     "plague",
+     "word",
+     "The pestilence lingered {duration} seasons, thinning the families it reached and pushing every institution to the edge o",
+@@ -4622,15 +4603,12 @@
+     "0f6c7ac3988bcbea"
+    ],
+    [
+-<<<<<<< ca6485128 (merge(JOIN-REHEARSAL): lane/powers-follow-up-2026-11-13 at 18d249003 into the rehearsal's save branch)
+     "famine",
+     "word",
+     "Shared grain stores that even out the harvests and hold off famine.",
+     "02c8405e5684c952"
+    ],
+    [
+-=======
+->>>>>>> fb00318d9 (docs(W2-FIX-DATA-8): handed back by file near the mark; what is left is section 2, line by line)
+     "siege",
+     "word",
+     "An innermost stronghold, the city's final hold under siege.",
+@@ -4783,22 +4761,8 @@
+    [
+     "religiousHouses",
+     "word",
+-<<<<<<< ca6485128 (merge(JOIN-REHEARSAL): lane/powers-follow-up-2026-11-13 at 18d249003 into the rehearsal's save branch)
+     "Hundreds of quarters, one house of worship to each, so that faith runs through every part of the city.",
+     "0905ec72abb6e586"
+-=======
+-    "Ground beside each house of worship, with burial beyond the gate where a ground has filled its own. The sexton's registe"
+-   ],
+-   [
+-    "religiousHouses",
+-    "word",
+-    "A house of worship to every quarter."
+-   ],
+-   [
+-    "religiousHouses",
+-    "word",
+-    "Houses of worship in the hundreds, across every district. No neighbourhood is without the faith."
+->>>>>>> fb00318d9 (docs(W2-FIX-DATA-8): handed back by file near the mark; what is left is section 2, line by line)
+    ],
+    [
+     "practitioner",
+@@ -6689,7 +6653,6 @@
+    [
+     "market",
+     "carrier",
+-<<<<<<< ca6485128 (merge(JOIN-REHEARSAL): lane/powers-follow-up-2026-11-13 at 18d249003 into the rehearsal's save branch)
+     "A covered fish market under the market wardens. The morning's catch or the week's salted barrels, sold by weight and ins",
+     "1629a5565489f3d5"
+    ],
+@@ -6698,9 +6661,6 @@
+     "carrier",
+     "Multiple market squares",
+     "e38e0958dc38849c"
+-=======
+-    "Multiple market squares"
+->>>>>>> fb00318d9 (docs(W2-FIX-DATA-8): handed back by file near the mark; what is left is section 2, line by line)
+    ],
+    [
+     "market",
+@@ -6769,15 +6729,12 @@
+     "53588a3f7cb08b28"
+    ],
+    [
+-<<<<<<< ca6485128 (merge(JOIN-REHEARSAL): lane/powers-follow-up-2026-11-13 at 18d249003 into the rehearsal's save branch)
+     "famine",
+     "word",
+     "Communal grain storage. Buffers harvests, prevents famine.",
+     "b77abf521091f2db"
+    ],
+    [
+-=======
+->>>>>>> fb00318d9 (docs(W2-FIX-DATA-8): handed back by file near the mark; what is left is section 2, line by line)
+     "quarters",
+     "word",
+     "Communal bathing facility with heated water. In some cultures a social hub; in others suspect as a venue for vice. Eithe",
+@@ -6828,7 +6785,6 @@
+    [
+     "quarters",
+     "word",
+-<<<<<<< ca6485128 (merge(JOIN-REHEARSAL): lane/powers-follow-up-2026-11-13 at 18d249003 into the rehearsal's save branch)
+     "A council of senior druids who govern their circle's relationship with the city. They may maintain a hidden grove beneat",
+     "6d43c6c588682f72"
+    ],
+@@ -6837,9 +6793,6 @@
+     "word",
+     "Multi-story buildings. Tenements for poor.",
+     "35e45129b7d6d4a6"
+-=======
+-    "Multi-story buildings. Tenements for poor."
+->>>>>>> fb00318d9 (docs(W2-FIX-DATA-8): handed back by file near the mark; what is left is section 2, line by line)
+    ],
+    [
+     "quarters",
+@@ -17434,7 +17387,6 @@
+    [
+     "prison",
+     "root",
+-<<<<<<< ca6485128 (merge(JOIN-REHEARSAL): lane/powers-follow-up-2026-11-13 at 18d249003 into the rehearsal's save branch)
+     "Court + Prison",
+     "2e5bbcad8d5be670"
+    ],
+@@ -17467,9 +17419,6 @@
+     "after-base: leaves-3",
+     "Crime here answers to one ring. It keeps the streets quiet because trouble brings the law, lives on protection money and",
+     "2ad05ec341eede64"
+-=======
+-    "Court + Prison"
+->>>>>>> fb00318d9 (docs(W2-FIX-DATA-8): handed back by file near the mark; what is left is section 2, line by line)
+    ]
+   ],
+   "src/domain/display/demographicReading.js": [
+@@ -20082,7 +20031,6 @@
+    [
+     "granary",
+     "root",
+-<<<<<<< ca6485128 (merge(JOIN-REHEARSAL): lane/powers-follow-up-2026-11-13 at 18d249003 into the rehearsal's save branch)
+     "Disasters & Famine: granary AND hospital",
+     "c83ed29ae1dd13ca"
+    ],
+@@ -20091,9 +20039,6 @@
+     "root",
+     "Disasters & Famine: granary AND parish care only",
+     "79f060f43ccbf529"
+-=======
+-    "Disasters & Famine: granary AND parish care only"
+->>>>>>> fb00318d9 (docs(W2-FIX-DATA-8): handed back by file near the mark; what is left is section 2, line by line)
+    ],
+    [
+     "granary",
+@@ -20298,7 +20243,6 @@
+    [
+     "famine",
+     "word",
+-<<<<<<< ca6485128 (merge(JOIN-REHEARSAL): lane/powers-follow-up-2026-11-13 at 18d249003 into the rehearsal's save branch)
+     "ACTIVE FAMINE: the failed source, part of the harvest",
+     "247b793142c98eb3"
+    ],
+@@ -20307,9 +20251,6 @@
+     "word",
+     "INCOME WEIGHT: the religious houses",
+     "4ce8bc58cfde26fb"
+-=======
+-    "ACTIVE FAMINE: the failed source, part of the harvest"
+->>>>>>> fb00318d9 (docs(W2-FIX-DATA-8): handed back by file near the mark; what is left is section 2, line by line)
+    ]
+   ],
+   "src/domain/display/stateProse/generalStateProse.js": [
+@@ -27184,7 +27125,6 @@
+    [
+     "quarters",
+     "word",
+-<<<<<<< ca6485128 (merge(JOIN-REHEARSAL): lane/powers-follow-up-2026-11-13 at 18d249003 into the rehearsal's save branch)
+     "the merchants' quarter",
+     "0b20b35cf5d9f7e9"
+    ],
+@@ -27205,9 +27145,6 @@
+     "word",
+     "A catastrophic or transformative event tied to the local ley line concentration occurred, permanently altering a distric",
+     "4f6fa1145b7e6e27"
+-=======
+-    "A catastrophic or transformative event tied to the local ley line concentration occurred, permanently altering a distric"
+->>>>>>> fb00318d9 (docs(W2-FIX-DATA-8): handed back by file near the mark; what is left is section 2, line by line)
+    ],
+    [
+     "quarters",

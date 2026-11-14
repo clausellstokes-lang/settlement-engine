@@ -1,0 +1,877 @@
+b9e0bf005a6141350053853ac6b4b5f28e2de5e5 merge(JOIN-REHEARSAL): lane/coherence-upkeep-2026-11-12 at f943c9772 into the rehearsal's save branch
+
+diff --git a/docs/implementation/PACKET_MANIFEST.json b/docs/implementation/PACKET_MANIFEST.json
+index 6b56b51d5..64b99eb77 100644
+--- a/docs/implementation/PACKET_MANIFEST.json
++++ b/docs/implementation/PACKET_MANIFEST.json
+@@ -38645,7 +38645,8 @@
+         },
+         {
+           "path": "src/generators/defenseGenerator.js",
+-          "symbol": "const computeDefenseReadiness = (scores, threat, tier, magicExists = true) =>"
++          "symbol": "const computeDefenseReadiness = (scores, threat, tier, magicExists = true) =>",
++          "retiredBy": "§934.105 (the owner's design of 2026-11-13: defence is the sum of its parts; COHERENCE-UPKEEP-5 V3 at 82c639b44 replaced computeDefenseReadiness by the derived form)"
+         },
+         {
+           "path": "src/generators/foodGenerator.js",
+diff --git a/scripts/mutation-coverage-manifest.json b/scripts/mutation-coverage-manifest.json
+remerge CONFLICT (content): Merge conflict in scripts/mutation-coverage-manifest.json
+index 2387f0d27..678890b5d 100644
+--- a/scripts/mutation-coverage-manifest.json
++++ b/scripts/mutation-coverage-manifest.json
+@@ -3827,7 +3827,6 @@
+       "kind": "rationale",
+       "rationale": "COHERENCE-AGREE's shrink-only count of the defence facts' private readers (2026-11-11; the second member, COHERENCE-AGREE-3, 2026-11-12). Its guard-the-guard tests plant a private reader of each shape (a name test, a pattern test, a flag from a name list) and controls (a read of the home, a scope test on a variable named wall), and hold the patterns to them. WHAT IT CATCHES: a line that sets a private walls/garrison/militia/watch/mercenary, gate, court or free-company flag from anything but the home, or that calls a name test with a string or pattern literal holding one of the words written in tests/lint/defenceFactReaders.shared.mjs (walls, garrison, barracks, militia, watch, mercenar*; court, courthouse, town hall, city hall, gate(s), gatehouse, hireling hall, free company, hired muscle, veteran's lodge, sellsword); the exact-equality arms red on such a line in a file whose banked count it exceeds, or in a file outside the registers. A word held in a name-like constant in the same file (`const W = 'courthouse'; n.includes(W)`) is read as the word (COHERENCE-AGREE-6, REVIEW-AGREE-2 F8 (i)). The third member (COHERENCE-AGREE-7, F8 (ii)) counts the palisade, the prison, the hospital and the healer (palisade(s), earthwork(s), prison(s), gaol(s), jail(s), hospital(s), infirmar*, healer(s)) against its own shrink-only register; every word lives in ONE table keyed to the home's atoms (ATOM_WORDS), the atom test reds on a defence-homed atom of FACT_DIMENSIONS with no word there and on a word its own member does not count, and the review's nine plants are each held counted. A name list tested against a role archetype and an agreement check that reads the home on the same line are ruled out by rule. WHAT IT DOES NOT CATCH: a word held in a constant of another file or in a prose constant (a comma, or more than 40 characters), a word the lists do not hold, and a reader that asks the question without a name test."
+     },
+-<<<<<<< 5a7b5d2d8 (merge(JOIN-REHEARSAL): lane/r2-code-b-2026-11-13 at e285c603f into the rehearsal's save branch)
+     "tests/generators/churchNoteReadsFlag.test.js": {
+       "kind": "rationale",
+       "rationale": "W2-B-DECLARE item 5's cure pin (lane/w2-b-declare-2026-11-12, commit 1ae138b47): narrativeGenerator.js :: genCoherence sets churchControlsEcon from the generator's own flag (economicState.safetyProfile.flags.theocraticEconomy), never from the situation sentence, which an isolated place never prints. The test births r2r-town-54 (flag true, sentence silent on the church) and holds the note 'flows through religious institutions'. EXECUTED AT BUILD TIME, 2026-11-12: the inverse edit (churchControlsEcon = !!economicState.situationDesc?.toLowerCase().includes('church controls')) was planted from a cp backup, the test run, and the file restored by cp, verified byte-identical by cmp and sha256: RESULT 1 of 1 arm red, by title ('a theocratic economy whose situation sentence is suppressed still carries its note': expected false to be true). Not in scripts/mutation-sweep.sh because the plant is a one-line revert of the cure itself, which the commit's own red-first run already demonstrates; promote to a sweep plant when the sweep next touches narrativeGenerator.js."
+@@ -3835,15 +3834,6 @@
+     "tests/generators/w2FixDataHistoryItems.test.js": {
+       "kind": "rationale",
+       "rationale": "THE HISTORY, CULTURE AND ARRIVAL SEAT OF THE DATA LANE (W2-FIX-DATA-HISTORY, 2026-11-13; ROUND-3-CUT-INCREMENT, the review of the data lane L4, CENSUS-2). Its catching power is EXECUTED in the test body, one describe an item: each pins the declaration or the reader it cures through the real door (historyGenerator.js :: trueToRecordAt, historyData.js :: tensionHeldByTimeline and livelihoodLead, cultureProfiles.js :: CULTURE_LINE_SIBLINGS) and reds when a declaration is dropped or turned, and each GUARD re-births a reader's own town in the app's shape and reds when the cured sentence prints again anywhere in its record (the history, the materialized culture detail, the arrival) or when the town loses what it must keep (a tension, a detail). Each member was RED at its item's parent commit and green at the cure (the commit bodies name the counts)."
+-=======
+-    "tests/generators/upkeepHired.test.js": {
+-      "kind": "rationale",
+-      "rationale": "THE HIRED-FORCE COUNTERFACTUAL (COHERENCE-UPKEEP, the chair's ruling 2 of 2026-11-12). Its catching power is EXECUTED, not claimed: it was written red-first and run at the lane's base 65ce74ce6, where all five hired-only corpus villages failed it (agree-village-45 military 97 with a charter hall against 93 with a watch in its stead; agree-village-43 65 against 61). The cure that turns it green is the hired rule in src/generators/defenseGenerator.js; reverting that rule reds it again. Its anchor arm proves the counterfactual is a watch and no hired force, so the comparison cannot pass vacuously."
+-    },
+-    "tests/lint/upkeepReaders.walker.test.js": {
+-      "kind": "rationale",
+-      "rationale": "THE UPKEEP-READER WALKER (COHERENCE-UPKEEP, the chair's ruling 1 of 2026-11-12). Its catching power is carried in-file: the plant arm convicts a planted output-over-50 upkeep gate and clears a non-gate read of the same output through the walker's own statement-window rule; the register arms are two-way (every live read is a row, every row is a live read), so a new reader reds by name and a retired read cannot leave a stale row; the anchored count proves the walk reads the defence gates."
+->>>>>>> f943c9772 (docs(UPKEEP-10): the hand-back part: #869 measured (FOR THE JOIN: the PDF's Foundations grid), the grain line cured, the coal lines at zero; the probes)
+     }
+   },
+   "meta": {
+diff --git a/src/domain/display/defenseDisplay.js b/src/domain/display/defenseDisplay.js
+remerge CONFLICT (content): Merge conflict in src/domain/display/defenseDisplay.js
+index f32dc6bfd..360f0e59f 100644
+--- a/src/domain/display/defenseDisplay.js
++++ b/src/domain/display/defenseDisplay.js
+@@ -617,19 +617,11 @@ export function foodEnduranceLine(settlement) {
+   if (!end) return null;
+   const tier = typeof settlement?.tier === 'string' ? settlement.tier : '';
+   const noun = TIER_NOUNS.includes(tier) ? tier : 'place';
+-<<<<<<< 5a7b5d2d8 (merge(JOIN-REHEARSAL): lane/r2-code-b-2026-11-13 at e285c603f into the rehearsal's save branch)
+-  // 2 + 20 (W2-A-LEAVES, 2026-11-12; the second wave's ruling): THE SIEGE FIGURE IS A CONDITION. Only a besieged
+-  // place reads it in the indicative; everywhere else it is what a siege WOULD do to the stores the Economy tab's
+-  // row states (the census counted "under siege the outlying fields are lost" outside a siege in 689 of 720).
+-  const actual = end.besieged === true;
+-  const opening = actual ? 'the siege has taken the outlying fields' : 'under siege the outlying fields would be lost';
+-=======
+   // UPKEEP-8 (the chair's ruling of 2026-11-13): what a siege WOULD do is said only where none is in force, what it HAS
+   // done only where one is; the months the line states add up from the record's own stored months (full rations the
+   // stores, half rations twice them), and what is still harvested is said to stretch them, never counted into them.
+-  const would = !end.besieged;
++  const actual = end.besieged === true, would = !actual; // the line's W2-A-LEAVES 2 + 20 name and UPKEEP-8's, one fact
+   const opening = end.besieged ? 'the siege has taken the outlying fields' : 'under siege the outlying fields would be lost';
+->>>>>>> f943c9772 (docs(UPKEEP-10): the hand-back part: #869 measured (FOR THE JOIN: the PDF's Foundations grid), the grain line cured, the coal lines at zero; the probes)
+   const lead = end.hasGranary
+     ? `${opening.charAt(0).toUpperCase()}${opening.slice(1)}`
+     : `No granary: ${opening}`;
+@@ -644,11 +636,7 @@ export function foodEnduranceLine(settlement) {
+   // granary simply carries the place.
+   const held = end.storesHeld ? `, but ${HELD_STORES_WORDS} it` : '';
+   if (end.fullRationMonths === null) {
+-<<<<<<< 5a7b5d2d8 (merge(JOIN-REHEARSAL): lane/r2-code-b-2026-11-13 at e285c603f into the rehearsal's save branch)
+-    before = `${lead}, but what the ${noun} still grows ${actual ? 'feeds' : 'would feed'} it at full rations; `;
+-=======
+     before = `${lead}, but what the ${noun} still grows ${would ? 'would feed' : 'feeds'} it at full rations; `;
+->>>>>>> f943c9772 (docs(UPKEEP-10): the hand-back part: #869 measured (FOR THE JOIN: the PDF's Foundations grid), the grain line cured, the coal lines at zero; the probes)
+     door = end.hasGranary ? 'the granary' : 'its household stores';
+     const stand = actual ? (end.hasGranary ? 'stands' : 'stand') : 'would stand';
+     after = end.hasGranary ? ` ${stand} in reserve${held}.` : ` ${stand} in reserve.`;
+@@ -661,13 +649,8 @@ export function foodEnduranceLine(settlement) {
+       ? `, and what is still harvested ${would ? 'would stretch' : 'stretches'} ${them} further` : '';
+     before = `${lead}; `;
+     door = end.hasGranary ? 'the granary' : 'household stores';
+-<<<<<<< 5a7b5d2d8 (merge(JOIN-REHEARSAL): lane/r2-code-b-2026-11-13 at e285c603f into the rehearsal's save branch)
+-    const carries = end.storesHeld || !actual ? 'would carry' : end.hasGranary ? 'carries' : 'carry';
+-    after = ` ${carries} the ${noun} for ${monthsInWords(end.fullRationMonths)} at full rations${half}${held}.`;
+-=======
+     const carries = end.storesHeld || would ? 'would carry' : end.hasGranary ? 'carries' : 'carry';
+     after = ` ${carries} the ${noun} for ${monthsInWords(end.storedMonths)} at full rations${half}${stretched}${held}.`;
+->>>>>>> f943c9772 (docs(UPKEEP-10): the hand-back part: #869 measured (FOR THE JOIN: the PDF's Foundations grid), the grain line cured, the coal lines at zero; the probes)
+   }
+   return { label: FOOD_ENDURANCE_LABEL, before, door, after, sentence: `${before}${door}${after}` };
+ }
+diff --git a/src/domain/display/dossierViewModel.js b/src/domain/display/dossierViewModel.js
+remerge CONFLICT (content): Merge conflict in src/domain/display/dossierViewModel.js
+index 16264ed35..252a9cfa3 100644
+--- a/src/domain/display/dossierViewModel.js
++++ b/src/domain/display/dossierViewModel.js
+@@ -775,7 +775,6 @@ export function magicRelianceDeskSettlement(settlement) {
+     defenseProfile: { ...defenseProfile, magicDependency: reliance.reliesOnMagic },
+   }));
+ }
+-<<<<<<< 5a7b5d2d8 (merge(JOIN-REHEARSAL): lane/r2-code-b-2026-11-13 at e285c603f into the rehearsal's save branch)
+ // W2-A-LEAVES (row 3): the leaf the Magic tab's reliance line names its source from (an import at the foot, so the
+ // lines the prose wiring census cites above keep their numbers).
+ import { magicSourceOf } from '../facts/magicSource.js';
+@@ -792,7 +791,7 @@ import { institutionDisplayName } from './institutionDisplayName.js';
+ function proseHouseName(house) {
+   return institutionDisplayName(house).replace(/\s*\([^)]*\)/g, '').replace(/\s+/g, ' ').trim();
+ }
+-=======
++
+ // The prosperity sentence's one writer (ruling 1(a)); imported here, not at the head, so the line-keyed
+ // holder census's citations into this file stay put.
+ import { prosperityInCrisisLine } from './prosperityInCrisis.js';
+@@ -867,4 +866,3 @@ export function outputChipBesideWord(score, label) {
+   return !((score < 35 && high) || (score >= 60 && low));
+ }
+ import { bandForVariable } from '../causalState.js'; import { PROSPERITY_LABELS } from '../prosperityRank.js'; import { displayTradeList } from './tradeListDisplay.js'; // at the END: no line above moves
+->>>>>>> f943c9772 (docs(UPKEEP-10): the hand-back part: #869 measured (FOR THE JOIN: the PDF's Foundations grid), the grain line cured, the coal lines at zero; the probes)
+diff --git a/src/domain/generation/generationForkRegistry.js b/src/domain/generation/generationForkRegistry.js
+remerge CONFLICT (content): Merge conflict in src/domain/generation/generationForkRegistry.js
+index c05e07fa6..5ce1d9340 100644
+--- a/src/domain/generation/generationForkRegistry.js
++++ b/src/domain/generation/generationForkRegistry.js
+@@ -256,12 +256,7 @@ export const GENERATION_CHANNELS = Object.freeze({
+   mints: Object.freeze({ instrument: 'src/kernel/prng.js#createPRNG', direct: 4, rootSeedPrefixed: true }),
+   // 2026-10-31, tension variety (GS-1, ODQ §934.101): 6 -> 15, the tie-prose draw's per-archetype offsets (measured).
+   // 2026-11-04, window-end pin re-key (REGISTERS seat): 15 -> 16, FOOD-3 (food diversity) opens one more offset (measured).
+-<<<<<<< 5a7b5d2d8 (merge(JOIN-REHEARSAL): lane/r2-code-b-2026-11-13 at e285c603f into the rehearsal's save branch)
+-  hash: Object.freeze({ instrument: 'src/kernel/proseHash.js#pickVariant', fnv1a32External: 16 /* STYLE-2-MERGE point 46 (2026-11-13, the COHERENCE-POWERS merge, the chair's ruling on STOP 46b): 17 -> 16, MEASURED by A6 and CONFIRMED caller by caller (tests/generators/generationForkCensus.test.js, the RE-KEYED note of 2026-11-13). */ /* COHERENCE-QUARREL (2026-11-11): 15 -> 17, MEASURED by A6: the probe row's two quarrels each take one hash for their plot hook (power/conflicts.js :: buildConflictPlotHooks, the hook and the offer's wording from one fnv1a32 of the seed, the parties and the issue; no roll). ALLEGIANCE-CAR4: 14 -> 15, MEASURED by A6 and traced against the base f6209c0c5: the birth stream moved (the retired goal draw, 03ff59084, and item 15's title secrets, eabc93dfe, leave a face's fork before its power roll), so one probe-row tie draws a new archetype whose prose takes one more per-archetype offset; no caller in goals.js's graph. ALLEGIANCE-CAR1 (the veil merged over MERGE-CAR, 744c22d74): 16 -> 14, MEASURED by A6 at the merged tree, FIX-PUBLIC-VEIL's -2 (a veiled face's opaque id re-deals its keyed forks, so two of the probe row's ties take prose with no external hash) composed over MERGE-CAR's 16. MERGE-234: 18 (lane 1) / 16 (lane 4) -> 15, MEASURED by A6 at the 1+2+3+4 tip: the seam mint's `::tie` draw (the retired pair generator's tie prose) is retired, one tie writer. The rung-2 side's 15 -> 32 (census-4 R3 596cb8b1b +9, R12 acd70a977 +8) composed at MERGE-CAR: 15 -> 16, MEASURED by A6 at the merged tree — R12's fitter retired with its hashes (SC-1), R3's tie rule (resolveTieKey) now hashing at the one tie writer, people/ties.js; PLAUSIBLE, not bisected */ }),
+-=======
+-  hash: Object.freeze({ instrument: 'src/kernel/proseHash.js#pickVariant', fnv1a32External: 42 /* COHERENCE-UPKEEP (2026-11-12, ruling 4 under (A), c19e96e23): 18 -> 42, MEASURED by A6 and traced: one fnv1a32 per bought service row the keep roll evaluates (services/serviceRollMaterialization.js :: upkeepRoll, `<seed>|upkeep|<institution>|<service>`), 24 on the Comfortable probe row. COHERENCE-UPKEEP (2026-11-12, ruling 6, 05ec9b601): 17 -> 18, MEASURED by A6 and traced: the stores' second call composes the foodways line again (domain/foodways.js :: composeFoodwaysLine, one fnv1a32 of `foodways|<identity>`). COHERENCE-QUARREL (2026-11-11): 15 -> 17, MEASURED by A6: the probe row's two quarrels each take one hash for their plot hook (power/conflicts.js :: buildConflictPlotHooks, the hook and the offer's wording from one fnv1a32 of the seed, the parties and the issue; no roll). ALLEGIANCE-CAR4: 14 -> 15, MEASURED by A6 and traced against the base f6209c0c5: the birth stream moved (the retired goal draw, 03ff59084, and item 15's title secrets, eabc93dfe, leave a face's fork before its power roll), so one probe-row tie draws a new archetype whose prose takes one more per-archetype offset; no caller in goals.js's graph. ALLEGIANCE-CAR1 (the veil merged over MERGE-CAR, 744c22d74): 16 -> 14, MEASURED by A6 at the merged tree, FIX-PUBLIC-VEIL's -2 (a veiled face's opaque id re-deals its keyed forks, so two of the probe row's ties take prose with no external hash) composed over MERGE-CAR's 16. MERGE-234: 18 (lane 1) / 16 (lane 4) -> 15, MEASURED by A6 at the 1+2+3+4 tip: the seam mint's `::tie` draw (the retired pair generator's tie prose) is retired, one tie writer. The rung-2 side's 15 -> 32 (census-4 R3 596cb8b1b +9, R12 acd70a977 +8) composed at MERGE-CAR: 15 -> 16, MEASURED by A6 at the merged tree — R12's fitter retired with its hashes (SC-1), R3's tie rule (resolveTieKey) now hashing at the one tie writer, people/ties.js; PLAUSIBLE, not bisected */ }),
+->>>>>>> f943c9772 (docs(UPKEEP-10): the hand-back part: #869 measured (FOR THE JOIN: the PDF's Foundations grid), the grain line cured, the coal lines at zero; the probes)
+-});
++  hash: Object.freeze({ instrument: 'src/kernel/proseHash.js#pickVariant', fnv1a32External: 23 /* JOIN-REHEARSAL (2026-11-14, a rehearsal of the join): the line's 17 -> 16 (point 46, below) and COHERENCE-UPKEEP's 17 -> 18 -> 42 (below) composed on the joined tree: MEASURED by A6 there, 23 (tests/generators/generationForkCensus.test.js A6, 'expected 23'; not the sum 41: the upkeep roll's 24 were counted on the lane's own Comfortable probe row, which the joined tree re-deals). The census test's own pins are the line's, re-keyed at the true join. */ /* STYLE-2-MERGE point 46 (2026-11-13, the COHERENCE-POWERS merge, the chair's ruling on STOP 46b): 17 -> 16, MEASURED by A6 and CONFIRMED caller by caller (tests/generators/generationForkCensus.test.js, the RE-KEYED note of 2026-11-13). */ /* COHERENCE-UPKEEP (2026-11-12, ruling 4 under (A), c19e96e23): 18 -> 42, MEASURED by A6 and traced: one fnv1a32 per bought service row the keep roll evaluates (services/serviceRollMaterialization.js :: upkeepRoll, `<seed>|upkeep|<institution>|<service>`), 24 on the Comfortable probe row. COHERENCE-UPKEEP (2026-11-12, ruling 6, 05ec9b601): 17 -> 18, MEASURED by A6 and traced: the stores' second call composes the foodways line again (domain/foodways.js :: composeFoodwaysLine, one fnv1a32 of `foodways|<identity>`). COHERENCE-QUARREL (2026-11-11): 15 -> 17, MEASURED by A6: the probe row's two quarrels each take one hash for their plot hook (power/conflicts.js :: buildConflictPlotHooks, the hook and the offer's wording from one fnv1a32 of the seed, the parties and the issue; no roll). ALLEGIANCE-CAR4: 14 -> 15, MEASURED by A6 and traced against the base f6209c0c5: the birth stream moved (the retired goal draw, 03ff59084, and item 15's title secrets, eabc93dfe, leave a face's fork before its power roll), so one probe-row tie draws a new archetype whose prose takes one more per-archetype offset; no caller in goals.js's graph. ALLEGIANCE-CAR1 (the veil merged over MERGE-CAR, 744c22d74): 16 -> 14, MEASURED by A6 at the merged tree, FIX-PUBLIC-VEIL's -2 (a veiled face's opaque id re-deals its keyed forks, so two of the probe row's ties take prose with no external hash) composed over MERGE-CAR's 16. MERGE-234: 18 (lane 1) / 16 (lane 4) -> 15, MEASURED by A6 at the 1+2+3+4 tip: the seam mint's `::tie` draw (the retired pair generator's tie prose) is retired, one tie writer. The rung-2 side's 15 -> 32 (census-4 R3 596cb8b1b +9, R12 acd70a977 +8) composed at MERGE-CAR: 15 -> 16, MEASURED by A6 at the merged tree — R12's fitter retired with its hashes (SC-1), R3's tie rule (resolveTieKey) now hashing at the one tie writer, people/ties.js; PLAUSIBLE, not bisected */ }),});
+ 
+ /**
+  * @param {string} step @param {string} key
+diff --git a/tests/domain/foodEnduranceHeldStores.test.js b/tests/domain/foodEnduranceHeldStores.test.js
+remerge CONFLICT (content): Merge conflict in tests/domain/foodEnduranceHeldStores.test.js
+index 06fc78925..e014ff1b5 100644
+--- a/tests/domain/foodEnduranceHeldStores.test.js
++++ b/tests/domain/foodEnduranceHeldStores.test.js
+@@ -47,17 +47,10 @@ describe('rung-2 window · the Food endurance line reads the held stores', () =>
+   // "carries" it. The subject is unchanged: an open granary carries the place, with no held-stores words.
+   it('an open granary reads as it did: it carries the place', () => {
+     const line = foodEnduranceLine(placeWith({ storageMonths: 12 }));
+-<<<<<<< 5a7b5d2d8 (merge(JOIN-REHEARSAL): lane/r2-code-b-2026-11-13 at e285c603f into the rehearsal's save branch)
+-    // re-keyed (W2-A-LEAVES 2 + 20, 2026-11-12): outside a siege the line is a condition, so the open granary
+-    // WOULD carry the town; the held-stores words stay the held granary's alone (the line below)
+-    expect(line?.sentence).toMatch(/\bthe granary would carry the town\b/);
+-    expect(line?.sentence).not.toContain(FACTS.HELD_STORES_WORDS); // anchored: 'the granary carries the town' is matched in this same sentence on the line above
+-=======
+     expect(line?.sentence).toMatch(/\bthe granary would carry the town\b/);
+     expect(line?.sentence).not.toContain(FACTS.HELD_STORES_WORDS); // anchored: 'the granary would carry the town' is matched in this same sentence on the line above
+     const besieged = { ...placeWith({ storageMonths: 12 }) }; besieged.economicState.foodSecurity.hasSiege = true;
+     expect(foodEnduranceLine(besieged)?.sentence).toMatch(/\bthe granary carries the town\b/);
+->>>>>>> f943c9772 (docs(UPKEEP-10): the hand-back part: #869 measured (FOR THE JOIN: the PDF's Foundations grid), the grain line cured, the coal lines at zero; the probes)
+   });
+ 
+   it('a held granary that the harvest alone would cover still says the hall holds it', () => {
+diff --git a/tests/generators/generationForkCensus.test.js b/tests/generators/generationForkCensus.test.js
+remerge CONFLICT (content): Merge conflict in tests/generators/generationForkCensus.test.js
+index a5bc88ec7..3e26130f2 100644
+--- a/tests/generators/generationForkCensus.test.js
++++ b/tests/generators/generationForkCensus.test.js
+@@ -237,13 +237,6 @@ const CENSUS_ROW = {
+ /** The seed the mint census sees minted FOUR times, and the vias that convict a blind wrapper. */
+ const REPEATED_SEED = `${CENSUS_ROW._seed}::generatePower::power-structure`;
+ const REPEATED_VIAS = ['fork', 'direct', 'direct', 'direct'];
+-// RE-KEYED 2026-11-12 (COHERENCE-UPKEEP, ruling 6, 05ec9b601): the stores are laid by at the label's share on a
+-// SECOND call of the stores' writer after prosperity (economicState.js :: generateEconomicState), and that writer's one
+-// draw is the label-keyed fork `food.cropFortune`, so the probe row mints it twice, both by fork: the second call draws
+-// the same crop fortune BY DESIGN (no stream moves). Measured by A5: repeatedSeeds = cropFortune x2 [fork|fork] ;
+-// power-structure x4. The power-structure quartet is unmoved.
+-const STORES_SEED = `${CENSUS_ROW._seed}::generateEconomy::food.cropFortune`;
+-const STORES_VIAS = ['fork', 'fork'];
+ // 2026-10-01, the urban band (ODQ §934.86): 96 -> 107 pickVariant calls on the probe row (+11, measured; the institution
+ // registry rebuild changed what the same seed assembles); every call is still a real choice with its own seed.
+ // 2026-10-31, tension variety (GS-1, ODQ §934.101): 107 -> 69 pickVariant calls and 6 -> 15 external fnv1a32 calls
+@@ -295,7 +288,6 @@ const PICK_VARIANT_CALLS = 31;
+ // RE-KEYED 2026-11-11 (COHERENCE-QUARREL cure 2): 15 -> 17, MEASURED. The probe row's two quarrels each
+ // take one fnv1a32 for their plot hook (power/conflicts.js :: buildConflictPlotHooks: one hash of the seed, the
+ // parties and the issue picks the hook and the offer's wording, draw-free). The register's fnv1a32External moves with it.
+-<<<<<<< 5a7b5d2d8 (merge(JOIN-REHEARSAL): lane/r2-code-b-2026-11-13 at e285c603f into the rehearsal's save branch)
+ // RE-KEYED 2026-11-13 (STYLE-2-MERGE point 46, the COHERENCE-POWERS merge, the chair's ruling on STOP 46b): 17 -> 16,
+ // MEASURED by A6 and CONFIRMED caller by caller (a probe recording each external fnv1a32 caller's first src frame on
+ // this probe row, at 3575cf061 against the merge): buildConflictPlotHooks 2 = 2, composeFoodwaysLine 1 = 1,
+@@ -305,18 +297,6 @@ const PICK_VARIANT_CALLS = 31;
+ // re-dealt the probe row's cast and ties. No call site left the code (no changed line under src names fnv1a32); the
+ // figure is the probe row's runtime count. The register's fnv1a32External moves with it.
+ const FNV_EXTERNAL_CALLS = 16;
+-=======
+-// RE-KEYED 2026-11-12 (COHERENCE-UPKEEP, ruling 6, 05ec9b601): 17 -> 18, MEASURED by A6 and traced: the stores' second
+-// call (above, STORES_SEED) composes the foodways line again, one more fnv1a32 (domain/foodways.js ::
+-// composeFoodwaysLine, `foodways|<identity>`). The register's fnv1a32External moves with it.
+-// RE-KEYED 2026-11-12 (COHERENCE-UPKEEP, ruling 4 under (A), c19e96e23): 18 -> 42, MEASURED by A6 and traced: the
+-// services keep each bought row by a draw-free roll after the seeded ones, one fnv1a32 of
+-// `<seed>|upkeep|<institution>|<service>` per bought row evaluated while the place's share is below 1
+-// (services/serviceRollMaterialization.js :: upkeepRoll). The probe row is Comfortable, so every bought row rolls:
+-// 24 calls, counted on the probe row by a counter in a scratch tree (lodging 3, food 4, equipment 9, healing 3,
+-// transport 3, commercial legal 2; every row kept). The register's fnv1a32External moves with it.
+-const FNV_EXTERNAL_CALLS = 42;
+->>>>>>> f943c9772 (docs(UPKEEP-10): the hand-back part: #869 measured (FOR THE JOIN: the PDF's Foundations grid), the grain line cured, the coal lines at zero; the probes)
+ /** The fork law A1 pins: the mint wrapper's equivalence rests on this line and nothing else. */
+ const FORK_LAW = 'fork: (label) => createPRNG(`${seed}::${label}`),';
+ /** §6.4's off-corpus block: a wizard-reachable switch, the keys it moves, and 24 seeds. */
+@@ -707,8 +687,7 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
+     // [direct|direct|direct]; the fork-minted member of the quartet is exactly what the
+     // re-implementation buys, so the via list alone convicts a mock that did not take.
+     expect(bySeed.get(REPEATED_SEED), `${REPEATED_SEED} vias`).toEqual(REPEATED_VIAS);
+-    expect(bySeed.get(STORES_SEED), `${STORES_SEED} vias`).toEqual(STORES_VIAS);
+-    expect(repeated.map(([seed]) => seed), 'exactly these two seeds are minted more than once').toEqual([STORES_SEED, REPEATED_SEED]);
++    expect(repeated.map(([seed]) => seed), 'exactly one seed is minted more than once').toEqual([REPEATED_SEED]);
+   }, 120_000);
+ 
+   it('A6 — the hash channel: 69 distinct pickVariant seeds, sixteen external fnv1a32 calls, and two censuses disjoint by construction', () => {
+diff --git a/tests/lint/.lighting-census-baseline.json b/tests/lint/.lighting-census-baseline.json
+remerge CONFLICT (content): Merge conflict in tests/lint/.lighting-census-baseline.json
+index d240985e6..d6fb66070 100644
+--- a/tests/lint/.lighting-census-baseline.json
++++ b/tests/lint/.lighting-census-baseline.json
+@@ -24,7 +24,6 @@
+     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
+     "beside the assertions, deliberately. Only the live tuple moved."
+   ],
+-<<<<<<< 5a7b5d2d8 (merge(JOIN-REHEARSAL): lane/r2-code-b-2026-11-13 at e285c603f into the rehearsal's save branch)
+   "measuredAtSha": "cd63653bf18781f31c22bcc852b22dc9171eaac7",
+   "measuredBy": "R3-TABS-3",
+   "date": "2026-11-14",
+@@ -34,15 +33,4 @@
+   "credited": 2853,
+   "titles": 29433,
+   "suiteTitles": 7984
+-=======
+-  "measuredAtSha": "3bd14d0b5b0d2375832b1f8d3ce676edbac432e6",
+-  "measuredBy": "UPKEEP-10",
+-  "date": "2026-11-14",
+-  "note": "UPKEEP-10: the grain line's three tests (3bd14d0b5)",
+-  "files": 3250,
+-  "parked": 403,
+-  "credited": 2847,
+-  "titles": 29367,
+-  "suiteTitles": 7978
+->>>>>>> f943c9772 (docs(UPKEEP-10): the hand-back part: #869 measured (FOR THE JOIN: the PDF's Foundations grid), the grain line cured, the coal lines at zero; the probes)
+ }
+diff --git a/tests/lint/.prose-numerics-baseline.json b/tests/lint/.prose-numerics-baseline.json
+remerge CONFLICT (content): Merge conflict in tests/lint/.prose-numerics-baseline.json
+index f2f5d6ddc..3b4ea9d3d 100644
+--- a/tests/lint/.prose-numerics-baseline.json
++++ b/tests/lint/.prose-numerics-baseline.json
+@@ -337,7 +337,7 @@
+   },
+   {
+     "path": "src/components/new/tabs/EconomicsGlance.jsx",
+-    "line": 134,
++    "line": 128,
+     "category": "floatInterpolation",
+     "snippet": "{ecoScore}"
+   },
+@@ -721,13 +721,13 @@
+   },
+   {
+     "path": "src/domain/magicProfile.js",
+-    "line": 172,
++    "line": 156,
+     "category": "floatInterpolation",
+     "snippet": "`${religious.name} (power ${religious.power}) restricts arcane practice.`"
+   },
+   {
+     "path": "src/domain/magicProfile.js",
+-    "line": 180,
++    "line": 164,
+     "category": "floatInterpolation",
+     "snippet": "`${arcane.name} (power ${arcane.power}) normalizes arcane practice.`"
+   },
+@@ -979,61 +979,37 @@
+   },
+   {
+     "path": "src/pdf/sections/EconomicsTrade.jsx",
+-<<<<<<< 5a7b5d2d8 (merge(JOIN-REHEARSAL): lane/r2-code-b-2026-11-13 at e285c603f into the rehearsal's save branch)
+     "line": 312,
+-=======
+-    "line": 315,
+->>>>>>> f943c9772 (docs(UPKEEP-10): the hand-back part: #869 measured (FOR THE JOIN: the PDF's Foundations grid), the grain line cured, the coal lines at zero; the probes)
+     "category": "floatInterpolation",
+     "snippet": "{flow}"
+   },
+   {
+     "path": "src/pdf/sections/EconomicsTrade.jsx",
+-<<<<<<< 5a7b5d2d8 (merge(JOIN-REHEARSAL): lane/r2-code-b-2026-11-13 at e285c603f into the rehearsal's save branch)
+     "line": 381,
+-=======
+-    "line": 384,
+->>>>>>> f943c9772 (docs(UPKEEP-10): the hand-back part: #869 measured (FOR THE JOIN: the PDF's Foundations grid), the grain line cured, the coal lines at zero; the probes)
+     "category": "floatInterpolation",
+     "snippet": "{iss.severity}"
+   },
+   {
+     "path": "src/pdf/sections/EconomicsTrade.jsx",
+-<<<<<<< 5a7b5d2d8 (merge(JOIN-REHEARSAL): lane/r2-code-b-2026-11-13 at e285c603f into the rehearsal's save branch)
+     "line": 480,
+-=======
+-    "line": 483,
+->>>>>>> f943c9772 (docs(UPKEEP-10): the hand-back part: #869 measured (FOR THE JOIN: the PDF's Foundations grid), the grain line cured, the coal lines at zero; the probes)
+     "category": "floatInterpolation",
+     "snippet": "{fb.deficitPct}"
+   },
+   {
+     "path": "src/pdf/sections/EconomicsTrade.jsx",
+-<<<<<<< 5a7b5d2d8 (merge(JOIN-REHEARSAL): lane/r2-code-b-2026-11-13 at e285c603f into the rehearsal's save branch)
+     "line": 480,
+-=======
+-    "line": 483,
+->>>>>>> f943c9772 (docs(UPKEEP-10): the hand-back part: #869 measured (FOR THE JOIN: the PDF's Foundations grid), the grain line cured, the coal lines at zero; the probes)
+     "category": "percentToken",
+     "snippet": "{fb.deficitPct}"
+   },
+   {
+     "path": "src/pdf/sections/EconomicsTrade.jsx",
+-<<<<<<< 5a7b5d2d8 (merge(JOIN-REHEARSAL): lane/r2-code-b-2026-11-13 at e285c603f into the rehearsal's save branch)
+     "line": 485,
+-=======
+-    "line": 488,
+->>>>>>> f943c9772 (docs(UPKEEP-10): the hand-back part: #869 measured (FOR THE JOIN: the PDF's Foundations grid), the grain line cured, the coal lines at zero; the probes)
+     "category": "floatInterpolation",
+     "snippet": "{fb.coveragePct}"
+   },
+   {
+     "path": "src/pdf/sections/EconomicsTrade.jsx",
+-<<<<<<< 5a7b5d2d8 (merge(JOIN-REHEARSAL): lane/r2-code-b-2026-11-13 at e285c603f into the rehearsal's save branch)
+     "line": 485,
+-=======
+-    "line": 488,
+->>>>>>> f943c9772 (docs(UPKEEP-10): the hand-back part: #869 measured (FOR THE JOIN: the PDF's Foundations grid), the grain line cured, the coal lines at zero; the probes)
+     "category": "percentToken",
+     "snippet": "{fb.coveragePct}"
+   },
+@@ -1099,19 +1075,19 @@
+   },
+   {
+     "path": "src/pdf/sections/Overview.jsx",
+-    "line": 548,
++    "line": 542,
+     "category": "floatInterpolation",
+     "snippet": "` · imports cover ${fb.coveragePct}% of gap`"
+   },
+   {
+     "path": "src/pdf/sections/Overview.jsx",
+-    "line": 548,
++    "line": 542,
+     "category": "floatInterpolation",
+     "snippet": "{fb.coveragePct != null ? ` · imports cover ${fb.coveragePct}% of gap` : ''}"
+   },
+   {
+     "path": "src/pdf/sections/Overview.jsx",
+-    "line": 548,
++    "line": 542,
+     "category": "percentToken",
+     "snippet": "` · imports cover ${fb.coveragePct}% of gap`"
+   },
+diff --git a/tests/lint/.tuning-inventory.json b/tests/lint/.tuning-inventory.json
+remerge CONFLICT (content): Merge conflict in tests/lint/.tuning-inventory.json
+index 38fdc59ce..791d9f18a 100644
+--- a/tests/lint/.tuning-inventory.json
++++ b/tests/lint/.tuning-inventory.json
+@@ -7,17 +7,10 @@
+     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
+     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
+   ],
+-<<<<<<< 5a7b5d2d8 (merge(JOIN-REHEARSAL): lane/r2-code-b-2026-11-13 at e285c603f into the rehearsal's save branch)
+   "measuredAtSha": "19dd60303f9a1fb2d1cf6966f3ddff8dda638fb7",
+   "measuredBy": "STYLE-2-MERGE-13",
+   "date": "2026-11-13",
+   "note": "point 49: W2-B-DECLARE (5657a229c) merged — RULING_PATRONAGE_TUNING gains the dependent src/domain/facts/registeredWords.js (F2 third seat: the ruling faces read dmPowerViewOf); no value moved",
+-=======
+-  "measuredAtSha": "94c5d408ffffb9e844a3fe9c5276b09233994c3d",
+-  "measuredBy": "UPKEEP-CAPACITY",
+-  "date": "2026-11-13",
+-  "note": "UPKEEP-CAPACITY C1 (94c5d408f): DEFENCE_TUNING gains houseScale (least 0.8, greatest 1.2), the chair ruling B; no other value moved",
+->>>>>>> f943c9772 (docs(UPKEEP-10): the hand-back part: #869 measured (FOR THE JOIN: the PDF's Foundations grid), the grain line cured, the coal lines at zero; the probes)
+   "schemaVersion": 1,
+   "trees": {
+     "p1": [
+@@ -135,194 +128,6 @@
+       ],
+       "namedDependents": []
+     },
+-    "src/data/defenceWeights.js#DEFENCE_TUNING": {
+-      "exported": true,
+-      "idiom": "literal",
+-      "keys": 33,
+-      "line": 14,
+-      "spanDigest": "57869cffa511464733928ec83cbe9de0a1b2afc80cd318d8fdfde5945754a85e",
+-      "leaves": {
+-        "walls.mil": 30,
+-        "walls.mon": 20,
+-        "wallKind.stone": 1,
+-        "wallKind.palisade": 0.6,
+-        "houseScale.least": 0.8,
+-        "houseScale.greatest": 1.2,
+-        "garrison.mil": 28,
+-        "garrison.mon": 20,
+-        "garrison.int": 15,
+-        "militia.mil": 10,
+-        "militia.mon": 12,
+-        "militia.int": 8,
+-        "watch.mil": 7,
+-        "watch.int": 18,
+-        "court.int": 20,
+-        "prison.int": 15,
+-        "wardens.mon": 12,
+-        "company.mil": 14,
+-        "company.contract": 4,
+-        "charter.mil": 10,
+-        "charter.mon": 35,
+-        "charter.int": 5,
+-        "dial.mil": 0.35,
+-        "dial.int": 0.25,
+-        "dial.intNoLaw": 0.04,
+-        "dial.none": 0.06,
+-        "dial.hiredExtra": 0.29,
+-        "neighbour.hostile": 1.2,
+-        "neighbour.rival": 1.2,
+-        "neighbour.cold_war": 1.18,
+-        "neighbour.tense": 1.1,
+-        "neighbour.allied": 0.92,
+-        "neighbour.trade_partner": 0.96,
+-        "community.remoteness.isolated": 8,
+-        "community.remoteness.road": 4,
+-        "community.remoteness.other": 2,
+-        "community.arms.thorp": 6,
+-        "community.arms.hamlet": 8,
+-        "community.arms.village": 10,
+-        "community.close.thorp": 18,
+-        "community.close.hamlet": 14,
+-        "community.close.village": 10,
+-        "community.parishMil": 3,
+-        "community.parishInt": 8,
+-        "community.eldersMil": 3,
+-        "community.eldersInt": 6,
+-        "arcane.mil": 10,
+-        "arcane.milPerDial": 0.25,
+-        "arcane.milMax": 15,
+-        "arcane.tower": 5,
+-        "arcane.guild": 8,
+-        "arcane.mon": 15,
+-        "arcane.monPerDial": 0.2,
+-        "arcane.monMax": 10,
+-        "arcane.intFrom": 50,
+-        "arcane.intPerDial": 0.16,
+-        "arcane.intMax": 8,
+-        "clergy.mon": 18,
+-        "clergy.intFrom": 60,
+-        "clergy.intPerDial": 0.25,
+-        "clergy.intMax": 10,
+-        "clergy.blessing": 6,
+-        "clergy.blessingFrom": 70,
+-        "druids.mon": 12,
+-        "traditionsMonsterMax": 35,
+-        "traditionGates.arcane": 35,
+-        "traditionGates.arcaneGuild": 55,
+-        "traditionGates.divine": 55,
+-        "traditionGates.divineShrine": 65,
+-        "traditionGates.divineStrong": 65,
+-        "traditionGates.druid": 30,
+-        "traditionGates.alchemy": 15,
+-        "stores.firstMonth": 10,
+-        "stores.toSixMonths": 7,
+-        "stores.sixMonths": 6,
+-        "stores.afterSix": 4,
+-        "stores.max": 70,
+-        "stores.granaryMonths": 4,
+-        "stores.noGranaryMonths": 1,
+-        "market.sup": 10,
+-        "hospital.sup": 10,
+-        "hospital.mon": 5,
+-        "alchemists.sup": 8,
+-        "purse.sup": 20,
+-        "sea.sup": 10,
+-        "crossroads.sup": 8,
+-        "threat.folk.plagued": 8,
+-        "threat.folk.frontier": 4,
+-        "threat.plaguedCountry": -15,
+-        "threat.penalty.plagued": 15,
+-        "threat.penalty.frontier": 7,
+-        "terrain.mountain": 1.28,
+-        "terrain.hills": 1.18,
+-        "terrain.forest": 1.12,
+-        "terrain.riverside": 1.06,
+-        "terrain.coastal": 1.02,
+-        "crime.int": 0.4,
+-        "size.thorp": 12,
+-        "size.hamlet": 8,
+-        "size.village": 4,
+-        "size.town": 2,
+-        "floors.mil": 0.6,
+-        "floors.mon": 0.7,
+-        "floors.int": 0.65,
+-        "floors.sup": 0.45,
+-        "floors.mag": 0.45,
+-        "floors.disaster": 0.55,
+-        "chains.provisioned": 5,
+-        "chains.unprovisioned": -5,
+-        "chains.masons": 6,
+-        "chains.unmended": -4,
+-        "chains.foodWorking": 5,
+-        "chains.foodBroken": -8,
+-        "crises.under_siege.crime": 1.25,
+-        "crises.under_siege.sup": 25,
+-        "crises.under_siege.int": 15,
+-        "crises.under_siege.teleportFrom": 65,
+-        "crises.under_siege.teleportEco": 0.4,
+-        "crises.under_siege.guildFrom": 50,
+-        "crises.under_siege.guildInt": 0.53,
+-        "crises.under_siege.strongInt": 0.53,
+-        "crises.under_siege.druidFrom": 40,
+-        "crises.under_siege.druidEco": 0.72,
+-        "crises.famine.crime": 1.35,
+-        "crises.famine.sup": 20,
+-        "crises.famine.mil": 10,
+-        "crises.famine.int": 20,
+-        "crises.famine.mon": 8,
+-        "crises.famine.druidFrom": 30,
+-        "crises.famine.druidEco": 0.4,
+-        "crises.famine.druidMil": 0.5,
+-        "crises.famine.druidMon": 0.5,
+-        "crises.famine.divineEco": 12,
+-        "crises.famine.divineMil": 6,
+-        "crises.famine.arcaneFrom": 50,
+-        "crises.famine.arcaneEco": 15,
+-        "crises.famine.alchemyEco": 3,
+-        "crises.occupied.crime": 0.6,
+-        "crises.occupied.mil": 35,
+-        "crises.occupied.int": 20,
+-        "crises.plague_onset.crime": 1.2,
+-        "crises.plague_onset.mil": 15,
+-        "crises.plague_onset.sup": 15,
+-        "crises.plague_onset.divineMil": 0.33,
+-        "crises.plague_onset.divineEco": 0.53,
+-        "crises.plague_onset.alchemyMil": 8,
+-        "crises.plague_onset.alchemyEco": 10,
+-        "crises.plague_onset.arcaneFrom": 50,
+-        "crises.plague_onset.arcaneMil": 10,
+-        "crises.succession_void.mil": 15,
+-        "crises.succession_void.int": 20,
+-        "crises.politically_fractured.int": 20,
+-        "crises.recently_betrayed.crime": 1.15,
+-        "crises.recently_betrayed.int": 10,
+-        "crises.recently_betrayed.mil": 10,
+-        "crises.indebted.crime": 1.2,
+-        "crises.indebted.sup": 15,
+-        "crises.indebted.mil": 10,
+-        "crises.infiltrated.int": 15,
+-        "crises.infiltrated.mil": 8,
+-        "crises.monster_pressure.mon": 20,
+-        "crises.monster_pressure.mil": 5,
+-        "crises.monster_pressure.arcaneFrom": 40,
+-        "crises.monster_pressure.arcaneMon": 0.25,
+-        "crises.monster_pressure.divineMon": 0.4,
+-        "crises.monster_pressure.druidMon": 0.5,
+-        "crises.wartime.sup": 15,
+-        "crises.insurgency.crime": 1.25,
+-        "crises.mass_migration.crime": 1.18,
+-        "crises.religious_conversion.crime": 1.22,
+-        "crises.slave_revolt.crime": 1.3
+-      },
+-      "dependents": [
+-        "src/generators/defenseGenerator.js",
+-        "src/generators/priorityHelpers.js"
+-      ],
+-      "namedDependents": [
+-        "src/generators/defenseGenerator.js",
+-        "src/generators/priorityHelpers.js"
+-      ]
+-    },
+     "src/data/foodImportRates.js#SIEGE_PRODUCTION_KEPT": {
+       "exported": true,
+       "idiom": "literal",
+@@ -1257,11 +1062,7 @@
+       "exported": false,
+       "idiom": "literal",
+       "keys": 1,
+-<<<<<<< 5a7b5d2d8 (merge(JOIN-REHEARSAL): lane/r2-code-b-2026-11-13 at e285c603f into the rehearsal's save branch)
+       "line": 990,
+-=======
+-      "line": 987,
+->>>>>>> f943c9772 (docs(UPKEEP-10): the hand-back part: #869 measured (FOR THE JOIN: the PDF's Foundations grid), the grain line cured, the coal lines at zero; the probes)
+       "spanDigest": "d8ad20f683ec92a4a0b123ebd6748169b8712e96577f567cd56d3cdd08f76113",
+       "leaves": {
+         "value": 0.05
+@@ -1390,61 +1191,6 @@
+       ],
+       "namedDependents": []
+     },
+-    "src/domain/facts/keep.js#KEEP_TUNING": {
+-      "exported": true,
+-      "idiom": "literal",
+-      "keys": 7,
+-      "line": 39,
+-      "spanDigest": "0a94ddb381c843a2d64c57af568d1c6f8c86923f669d733faade8424277eb613",
+-      "leaves": {
+-        "Struggling.bought": 0.4,
+-        "Struggling.funded": 0.3,
+-        "Subsistence.bought": 0.55,
+-        "Subsistence.funded": 0.3,
+-        "Poor.bought": 0.55,
+-        "Poor.funded": 0.4,
+-        "Moderate.bought": 0.75,
+-        "Moderate.funded": 0.7,
+-        "Comfortable.bought": 0.9,
+-        "Comfortable.funded": 1,
+-        "Prosperous.bought": 1,
+-        "Prosperous.funded": 1,
+-        "Wealthy.bought": 1,
+-        "Wealthy.funded": 1
+-      },
+-      "dependents": [
+-        "src/domain/display/prosperityInCrisis.js",
+-        "src/domain/facts/factsOf.js",
+-        "src/domain/magicProfile.js",
+-        "src/generators/defenseGenerator.js",
+-        "src/generators/economy/economicState.js",
+-        "src/generators/services/serviceRollMaterialization.js",
+-        "src/generators/steps/assembleSettlement.js"
+-      ],
+-      "namedDependents": []
+-    },
+-    "src/domain/facts/keep.js#KEEP_SCALE_TUNING": {
+-      "exported": true,
+-      "idiom": "literal",
+-      "keys": 3,
+-      "line": 97,
+-      "spanDigest": "b6308e4c49142fb193f25d310792d9a854b2a1712461b4252a148209ac0df8a6",
+-      "leaves": {
+-        "services": 0.7,
+-        "stores": 0.7,
+-        "magicBelow": 0.6
+-      },
+-      "dependents": [
+-        "src/domain/display/prosperityInCrisis.js",
+-        "src/domain/facts/factsOf.js",
+-        "src/domain/magicProfile.js",
+-        "src/generators/defenseGenerator.js",
+-        "src/generators/economy/economicState.js",
+-        "src/generators/services/serviceRollMaterialization.js",
+-        "src/generators/steps/assembleSettlement.js"
+-      ],
+-      "namedDependents": []
+-    },
+     "src/domain/npc/livedExperienceFunnel.js#FUNNEL_TUNING": {
+       "exported": true,
+       "idiom": "mixed",
+@@ -9215,6 +8961,7 @@
+     "src/domain/worldPulse/worldPulseFeedCuration.js": 2,
+     "src/generators/cascadeGenerator.js": 8,
+     "src/generators/chainMagicSubstitution.js": 16,
++    "src/generators/defenseGenerator.js": 46,
+     "src/generators/density/applyDensityLaw.js": 10,
+     "src/generators/density/densityRoll.js": 7,
+     "src/generators/density/successionGrammar.js": 3,
+@@ -9243,7 +8990,7 @@
+     "src/generators/power/rulingStructure.js": 13,
+     "src/generators/power/settlementNarrative.js": 3,
+     "src/generators/power/stressFactions.js": 34,
+-    "src/generators/priorityHelpers.js": 74,
++    "src/generators/priorityHelpers.js": 80,
+     "src/generators/safetyProfile.js": 18,
+     "src/generators/services/institutionServices.js": 10,
+     "src/generators/services/serviceRollMaterialization.js": 1,
+@@ -9260,11 +9007,11 @@
+   },
+   "unclosed": [],
+   "totals": {
+-    "tables": 280,
+-    "keys": 2292,
++    "tables": 277,
++    "keys": 2249,
+     "unregisteredNamed": 539,
+-    "bareDecimals": 6879,
++    "bareDecimals": 6931,
+     "zeroDependentTables": 10,
+-    "zeroNamedDependentTables": 187
++    "zeroNamedDependentTables": 185
+   }
+ }
+diff --git a/tests/lint/heldKeyWriterCensus.walker.test.js b/tests/lint/heldKeyWriterCensus.walker.test.js
+remerge CONFLICT (content): Merge conflict in tests/lint/heldKeyWriterCensus.walker.test.js
+index 20ccef4be..8174331b2 100644
+--- a/tests/lint/heldKeyWriterCensus.walker.test.js
++++ b/tests/lint/heldKeyWriterCensus.walker.test.js
+@@ -244,20 +244,17 @@ const DISCOVERY_EXEMPT = Object.freeze([
+   { symbol: 'resolveSibling', reason: 'W2-FIX-DATA-7: resolves a stress entry\'s stored catalogue hook and note through their declared sets (stressTypes.js :: STRESS_TYPE_SIBLINGS), draw-free; touches `stress`, a READING, never a held key.' },
+   // URBAN-FIX C-1 (935c961fd), composed at STYLE-2-MERGE point 25: the food record's composed line, read for the stored foodways.
+   { symbol: 'foodwaysLineOf', reason: 'a pure READ of economicState.foodSecurity.foodRecord.foodwaysLine (trimmed, or null); it writes nothing at all.' },
+-<<<<<<< 5a7b5d2d8 (merge(JOIN-REHEARSAL): lane/r2-code-b-2026-11-13 at e285c603f into the rehearsal's save branch)
+   // COHERENCE-POWERS-3 (F1, F2), classed by COHERENCE-POWERS-4 (2026-11-12), each read from its own body.
+   { symbol: 'seatFacesFoldedByDualHat', reason: 'a pure READ over the record (0 or 1: the seat\'s face the dual hat folded), handed to the density law as part of the mass; it writes nothing at all.' },
+   { symbol: 'standingRosterOf', reason: 'a pure READ: the roster the standing sentences were written on, copied before the resize; it returns a new array and writes nothing.' },
+   { symbol: 'standingForceOf', reason: 'a pure READ of the institutions for the standing sentence\'s force word; it returns a new object and writes nothing.' },
+   { symbol: 'settleTensionsToRoster', reason: 're-names a tension\'s parties inside `history` for the final roster (copy-on-write, no draw); `history` is not a held key.' },
+-=======
+   // COHERENCE-UPKEEP (d7d7f7787, the keep home), named at the lane's whole-suite run 2026-11-12.
+   { symbol: 'economicSurvivalBandOf', reason: 'a pure READ of the defence profile just written (defenseProfile.scores.economic, its Economic Survival band), handed to the guard line; it writes nothing (COHERENCE-UPKEEP-6, the chair\'s ruling A: one home for pay).' },
+   { symbol: 'keptGuardLine', reason: 'a pure function from the guard assessment\'s text, the roster and a purse word to the same text with its purse clause; it writes nothing itself (the assembly\'s withGuardPaidFromDefence puts the text back on the economic state; COHERENCE-UPKEEP-6, ruling A).' },
+   { symbol: 'purseWordOfBand', reason: 'a pure map from the Economic Survival band to the purse word the guard lines are declared on; it writes nothing (COHERENCE-UPKEEP-6, ruling A).' },
+   { symbol: 'standingLabelOf', reason: 'a pure READ of the standing prosperity label (else the printed one), the guard line\'s fallback where a record has no band; it writes nothing (COHERENCE-UPKEEP-6).' },
+   { symbol: 'keepOfRecord', reason: 'a pure READ of the standing prosperity label (economicState.prosperityStanding, else the label) into what the place can keep up ({ bought, funded }, domain/facts/keep.js), handed to generateDefenseProfile; it writes nothing at all (COHERENCE-UPKEEP-5, R3).' },
+->>>>>>> f943c9772 (docs(UPKEEP-10): the hand-back part: #869 measured (FOR THE JOIN: the PDF's Foundations grid), the grain line cured, the coal lines at zero; the probes)
+ ]);
+ 
+ /** The held denominator, DERIVED from its producers and never re-typed. */
+diff --git a/tests/lint/institutionTable.walker.test.js b/tests/lint/institutionTable.walker.test.js
+remerge CONFLICT (content): Merge conflict in tests/lint/institutionTable.walker.test.js
+index e95c01061..63e2be30a 100644
+--- a/tests/lint/institutionTable.walker.test.js
++++ b/tests/lint/institutionTable.walker.test.js
+@@ -226,21 +226,10 @@ describe('the column census, measured across the estate', () => {
+     // census-1f unit 1c: -5) from the shared 1,925; the merged tip reads 1,849 = 1,925 - 72 - 5 + 1, the two causes
+     // composed and one row of INTERACTION (the census's declared service roll over the review-intake's regenerated
+     // service keys; PLAUSIBLE as attributed, not bisected per settlement). The liveness anchor is unchanged in kind.
+-<<<<<<< 5a7b5d2d8 (merge(JOIN-REHEARSAL): lane/r2-code-b-2026-11-13 at e285c603f into the rehearsal's save branch)
+     // ⭐ RE-MEASURED 2026-11-13 (STYLE-2-MERGE point 47 (2026-11-13, the COHERENCE-AGREE merge 22cc9ef7d; a figure its drafted record names for the merge seat)): 1,849 -> 1,843, the draft's own
+     // figure exactly (the lane's tip reads 1843 from the same 1849); the liveness anchor is unchanged in kind.
+     expect(serviceRows, 'the header claims 1,843 instantiated service rows over these thirty')
+       .toBe(1843);
+-=======
+-    // ⭐ RE-MEASURED 2026-11-12 (COHERENCE-UPKEEP, the chair's ruling (A) on the services STOP): 1,849 → 1,834, ONE
+-    // cause, c19e96e23 — services are kept as far as the place can pay, by a draw-free roll after the seeded one, so the
+-    // rule only takes rows away (0 added on the lane's 360). The liveness anchor is unchanged in kind.
+-    // ⭐ RE-MEASURED 2026-11-13 (COHERENCE-UPKEEP-5, the review's F2): 1,834 → 1,837, ONE cause — a house's own
+-    // service (its catalogue's guaranteed rows and every rite) is never held back by the upkeep roll, so 3 rows the
+-    // roll had taken from standing houses here come back (0 removed). The liveness anchor is unchanged in kind.
+-    expect(serviceRows, 'the header claims 1,837 instantiated service rows over these thirty')
+-      .toBe(1837);
+->>>>>>> f943c9772 (docs(UPKEEP-10): the hand-back part: #869 measured (FOR THE JOIN: the PDF's Foundations grid), the grain line cured, the coal lines at zero; the probes)
+     expect(
+       carriers,
+       'a generation step began writing `settlement.services`. The schema declares the field and'
+diff --git a/tests/lint/presumedThings.register.json b/tests/lint/presumedThings.register.json
+remerge CONFLICT (content): Merge conflict in tests/lint/presumedThings.register.json
+index 789d4d9dc..9e498276c 100644
+--- a/tests/lint/presumedThings.register.json
++++ b/tests/lint/presumedThings.register.json
+@@ -813,20 +813,11 @@
+    ["market", "after-release", "Trade is what this settlement lives on. The markets are busy at all hours, and the guilds have a hand in every craft.", "a217ca67520254b0"]
+   ],
+   "src/generators/economy/viability.js": [
+-<<<<<<< 5a7b5d2d8 (merge(JOIN-REHEARSAL): lane/r2-code-b-2026-11-13 at e285c603f into the rehearsal's save branch)
+    ["bank", "after-release", "Banking institutions exist but the economy priority is very low.", "794bb23543dd590c"],
+    ["bank", "after-release", "Banking Without Economic Focus", "c0a7c888f796e84d"],
+    ["bank", "after-release", "Raise Economy priority or remove Banking institutions", "507ed54bca42e42b"],
+    ["temple", "after-release", "Add a house of worship, a temple or a monastery", "12760e6b967021f0"],
+    ["watch", "after-release", "Add Thieves' Guild, Black Market, or City Watch", "653197f17b02acd7"]
+-=======
+-   ["bank", "other-lane", "Banking Without Economic Focus"],
+-   ["garrison", "other-lane", "Add Town Walls or Garrison"],
+-   ["market", "other-lane", "Add Market Square, Merchants' Quarter, or Trade Guild"],
+-   ["temple", "other-lane", "Add a house of worship, a temple or a monastery"],
+-   ["walls", "other-lane", "Add Town Walls or Garrison"],
+-   ["watch", "other-lane", "Add Thieves' Guild, Black Market, or City Watch"]
+->>>>>>> f943c9772 (docs(UPKEEP-10): the hand-back part: #869 measured (FOR THE JOIN: the PDF's Foundations grid), the grain line cured, the coal lines at zero; the probes)
+   ],
+   "src/generators/factionDynamics.js": [
+    ["temple", "after-release", " has sway. Merchants pay for churches, ", "d1a258fb4e72890c"],
+diff --git a/tests/lint/proseNumerics.test.js b/tests/lint/proseNumerics.test.js
+remerge CONFLICT (content): Merge conflict in tests/lint/proseNumerics.test.js
+index ad67e1607..52b52d169 100644
+--- a/tests/lint/proseNumerics.test.js
++++ b/tests/lint/proseNumerics.test.js
+@@ -598,24 +598,11 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
+ // STYLE-2-MERGE-2 at the SW-12 PULSE-LINES merge point (2026-11-09) — THE TWO CURES COMPOSE: 204 -> 193, the union
+ // of SW-B6's seven rows and SW-12's four (no row in both, none added), floatInterpolation 137 -> 130, percentToken
+ // 50 -> 46; the baseline regenerated by this file's own scanner at the merged tree, every live row present on both sides.
+-<<<<<<< 5a7b5d2d8 (merge(JOIN-REHEARSAL): lane/r2-code-b-2026-11-13 at e285c603f into the rehearsal's save branch)
+ // W2-C-LEAVES item 4(c) (2026-11-13): the Economics tab's machinery row left (EconomicsTab.jsx 572-574, five rows): 193 -> 188.
+ // W2-C-LEAVES-5 item 5 (2026-11-14, #1153): the chain card's "N% recovery" chip left everywhere (EconomicsTab.jsx 238,
+ // two rows: floatInterpolation 128 -> 127, percentToken 44 -> 43): 188 -> 186; the baseline regenerated by this file's
+ // own scanner, every other row byte-identical.
+ const REVIEWED_TOTAL_CEILING = 186;
+-=======
+-// COHERENCE-UPKEEP-6 ruling D(iii) (2026-11-13, the sentence led by its word on the PDF) — THREE PURE LINE MOVES, NO
+-// DEBT MOTION: Overview.jsx gains one import line (prosperityInCrisisLed) above its three rows, 547 -> 548 (x3);
+-// path, category and snippet byte-identical, checked row by row. Cover.jsx and EconomicsTrade.jsx own no row below theirs.
+-// COHERENCE-UPKEEP-6 ruling 1(a) (2026-11-13, the prosperity label's ordinary-years sentence) — TEN PURE LINE MOVES,
+-// NO DEBT MOTION. The one sentence (`domain/display/prosperityInCrisis.js`) is printed under the Prosperity word, which
+-// adds lines ABOVE the rows three files own: EconomicsGlance.jsx (its import, a prop's doc line, the read, the
+-// conditional line) 128 -> 134; the print chapters' conditional <Text> under the stat strip, EconomicsTrade.jsx
+-// 310 -> 315, 379 -> 384, 478 -> 483 (x2), 483 -> 488 (x2), and Overview.jsx 542 -> 547 (x3). Re-addressed by
+-// identity (path, category and snippet byte-identical, checked row by row); 193 / 130 / 46 unmoved.
+-const REVIEWED_TOTAL_CEILING = 193;
+->>>>>>> f943c9772 (docs(UPKEEP-10): the hand-back part: #869 measured (FOR THE JOIN: the PDF's Foundations grid), the grain line cured, the coal lines at zero; the probes)
+ const REVIEWED_CATEGORY_CEILINGS = Object.freeze({
+   floatInterpolation: 127,
+   percentToken: 43,
+diff --git a/tests/lint/proseWiringCensus.walker.test.js b/tests/lint/proseWiringCensus.walker.test.js
+remerge CONFLICT (content): Merge conflict in tests/lint/proseWiringCensus.walker.test.js
+index 3a2b39d3a..08ae8ac0e 100644
+--- a/tests/lint/proseWiringCensus.walker.test.js
++++ b/tests/lint/proseWiringCensus.walker.test.js
+@@ -1630,21 +1630,19 @@ describe('car 0 — mounts per fact, custom reachability, and the relation table
+ 
+   test('the relation table has its row count by source and by direction, and source (d) is EMPTY', () => {
+     const relations = committed.relations;
+-    expect(relations.rows.length, 'rows the four sources yield at this tip').toBe(169); // COHERENCE-UPKEEP (2026-11-12, 07ebe8bdc and the parameter move): the five gates hang on the keep home — source (c)'s economicGates rows read keep/fundedGate, not econOutput/instFlags/economyOutput: 165 -> 169
+-    expect(Object.fromEntries(relations.bySource), 'by source').toEqual({ a: 131, b: 28, c: 10 }); // COHERENCE-UPKEEP: source (c) 6 -> 10 (the gates on keep/fundedGate)
+-    expect(Object.fromEntries(relations.byDirection), 'and every row carries its direction').toEqual({ 'a->b': 169 }); // COHERENCE-UPKEEP: 165 -> 169, as above
++    expect(relations.rows.length, 'rows the four sources yield at this tip').toBe(165);
++    expect(Object.fromEntries(relations.bySource), 'by source').toEqual({ a: 131, b: 28, c: 6 });
++    expect(Object.fromEntries(relations.byDirection), 'and every row carries its direction').toEqual({ 'a->b': 165 });
+     // ⭐ SOURCE (d) IS THE SITTING'S AND IS EMPTY, ASSERTED (ARCH §5.2, E-F14b). A missing key
+     // would leave a reader to infer the emptiness; an assertion makes the standing
+     // ratification door's first row visible the moment it lands.
+     expect(relationsFromSitting(), 'no sitting has ratified an axis pair').toEqual([]);
+     expect(relations.rows.filter((r) => r.source === 'd'), 'so the table carries none').toEqual([]);
+-    // THE EDGE ARCH §5.2 NAMES, recovered rather than transcribed: the generator's military upkeep
+-    // gate degrading the military score. COHERENCE-UPKEEP (2026-11-12, 07ebe8bdc, the chair's ruling 3,
+-    // alternative B) MOVED ITS SOURCE: `milUpkeepMult = fundedGate(0.6, keep)` reads the keep home (the
+-    // prosperity label), where it read `min(1, 0.6 + econOutput/50 * 0.4)`. The edge is the same edge.
++    // THE EDGE ARCH §5.2 NAMES, recovered rather than transcribed: the generator's
++    // `milUpkeepMult = min(1, 0.6 + econOutput/50 * 0.4)` degrading the military score.
+     const gate = relations.rows.filter((r) => r.b === 'economicGates.military');
+-    expect(gate.map((r) => r.a), 'the keep home is the gate\'s source')
+-      .toEqual(['src/generators/defenseGenerator.js::fundedGate', 'src/generators/defenseGenerator.js::upkeep']);
++    expect(gate.map((r) => r.a), 'econOutput is the gate\'s source')
++      .toEqual(['src/generators/defenseGenerator.js::econOutput']);
+     expect(gate[0].relation).toBe('consequence');
+     expect(gate[0].direction).toBe('a->b');
+   });
+@@ -1683,7 +1681,7 @@ describe('car 0 — mounts per fact, custom reachability, and the relation table
+     // ⭐ TWO ROWS JOIN ON ONE ENDPOINT AT THE LEAF, and one of them is the ARCH document's
+     // own worked edge — `econOutput` degrading `economicGates.military`. Even that edge is
+     // half-joined, because the desks read the gate as an unrooted parameter.
+-    expect(join.leafEither, 'three rows touch a desk read at the leaf').toBe(3); // COHERENCE-UPKEEP (2026-11-12): the gates' keep rows add one leaf touch: 2 -> 3
++    expect(join.leafEither, 'two rows touch a desk read at the leaf').toBe(2);
+     expect(join.leafRows, 'and none of them on BOTH endpoints').toEqual([]);
+     // THE CONSEQUENCE, stated as an executable fact rather than a caution: until a
+     // normalisation lands, the clause seat has no licensed row and every modifier at this
+@@ -1744,8 +1742,8 @@ describe('car 0f — the ALIAS DRAFT: measured, nothing ratified, no leaf writte
+       endpoints, roots: [...roots], paths: [...paths].sort(), ...draftSources(),
+     });
+     // THE STRUCTURAL HALF, which no unrelated car can move.
+-    expect(endpoints.length, 'the relation table\'s endpoints').toBe(88); // COHERENCE-UPKEEP (2026-11-12): the gates' sources econOutput, instFlags and economyOutput become fundedGate and upkeep: 89 -> 88
+-    expect(draft.endpointsWithCandidate + draft.noCandidate.length, 'every endpoint is answered once').toBe(88); // COHERENCE-UPKEEP: 89 -> 88, as above
++    expect(endpoints.length, 'the relation table\'s endpoints').toBe(89);
++    expect(draft.endpointsWithCandidate + draft.noCandidate.length, 'every endpoint is answered once').toBe(89);
+     expect(new Set(draft.rows.map((r) => `${r.endpoint}|${r.readRoot}`)).size,
+       'one row per pair, never one per citation').toBe(draft.rows.length);
+     for (const row of draft.rows) {
+@@ -1789,13 +1787,8 @@ describe('car 0f — the ALIAS DRAFT: measured, nothing ratified, no leaf writte
+     // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6 (+8 pools, +19 variants): 9 -> 10.
+     expect(draft.rows.length, 'candidate rows at this tip, docblock withdrawn').toBe(14); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted). // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (9 -> 14) // MERGE-WAVE at the W3 POW merge: both lanes' deltas composed (9 -> 15) // MERGE-WAVE at the W3 POW merge (2026-11-08): measured at the merged tip — 14: W3 POW's new candidate is one the W1/W2 side already proposes, so it counts once (additive would be 15)
+     expect(draft.endpointsWithCandidate, 'endpoints with at least one candidate').toBe(4);
+-<<<<<<< 5a7b5d2d8 (merge(JOIN-REHEARSAL): lane/r2-code-b-2026-11-13 at e285c603f into the rehearsal's save branch)
+     expect(draft.noCandidate.length, 'and the wiring debt the SEAM and WAVE trains inherit').toBe(85);
+     expect(draft.docblockReports.length, 'the withdrawn candidates, reported and never proposed').toBe(39); // COHERENCE-AGREE (2026-11-11): 36 -> 37, one docblock of the lane's that names an endpoint token, re-measured at its tip; reported, never proposed // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted). // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 28 -> 29 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 29 -> 34 // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (28 -> 35) // W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants) // MERGE-WAVE at the W4 PEOPLE merge: both lanes' deltas composed (28 -> 36) // R3-TABS L2 (f0adcd83a, re-keyed by R3-TABS-2): the within-the-bar disqualifiers' docblocks name two endpoint tokens; reported, never proposed: 37 -> 39.
+-=======
+-    expect(draft.noCandidate.length, 'and the wiring debt the SEAM and WAVE trains inherit').toBe(84); // COHERENCE-UPKEEP (2026-11-12): the gates' three output endpoints become two keep endpoints with no candidate: 85 -> 84
+-    expect(draft.docblockReports.length, 'the withdrawn candidates, reported and never proposed').toBe(39); // COHERENCE-UPKEEP (2026-11-12): 37 -> 39, the lane's docblocks that name the gates' new endpoints (fundedGate, upkeep), re-measured at its tip; reported, never proposed // COHERENCE-AGREE (2026-11-11): 36 -> 37, one docblock of the lane's that names an endpoint token, re-measured at its tip; reported, never proposed // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted). // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 28 -> 29 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 29 -> 34 // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (28 -> 35) // W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants) // MERGE-WAVE at the W4 PEOPLE merge: both lanes' deltas composed (28 -> 36)
+->>>>>>> f943c9772 (docs(UPKEEP-10): the hand-back part: #869 measured (FOR THE JOIN: the PDF's Foundations grid), the grain line cured, the coal lines at zero; the probes)
+     expect(draft.rows.every((r) => r.evidence !== 'docblock'), 'no row rests on a comment').toBe(true);
+     // ⭐ `generator-write` IS AN AST READING NOW (SITTING §P.2-27, cure: the fold's R6). Five of
+     // the nine citations the first cut carried were not writes of world state at all — a
+@@ -1824,7 +1817,7 @@ describe('car 0f — the ALIAS DRAFT: measured, nothing ratified, no leaf writte
+       'src/generators/npcGenerator.js', // W1 ECO construction (2026-11-07): one more Property key; composed at the W2 DEF merge (MERGE-WAVE)
+     ]);
+     for (const withdrawn of ['src/generators/structuralValidator.js:588', 'src/generators/stressNarrative.js:80',
+-      'src/generators/defenseGenerator.js:484', 'src/generators/narrativeText.js:53', // :484 re-derived (COHERENCE-UPKEEP-5, V3 rewrote the file): generateDefenseProfile's `Disasters & Famine` comment, which EM-R0d had at :603 (shifted -5 from :608)
++      'src/generators/defenseGenerator.js:603', 'src/generators/narrativeText.js:53', // :603 re-derived: generateDefenseProfile's `Disasters & Famine` comment, which EM-R0d shifted -5 from :608
+       'src/generators/stressNarrative.js:83']) {
+       expect(draft.rows.map((r) => r.at), `${withdrawn} was a comment, a string or an arrow parameter`)
+         .not.toContain(withdrawn); // anchored: the four sound citations are asserted above

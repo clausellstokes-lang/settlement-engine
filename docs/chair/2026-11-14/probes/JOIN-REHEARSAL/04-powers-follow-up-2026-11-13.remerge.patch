@@ -1,0 +1,374 @@
+ca648512850653b27c013f9887ebef2567f28196 merge(JOIN-REHEARSAL): lane/powers-follow-up-2026-11-13 at 18d249003 into the rehearsal's save branch
+
+diff --git a/scripts/census/pool-dominance.register.json b/scripts/census/pool-dominance.register.json
+remerge CONFLICT (content): Merge conflict in scripts/census/pool-dominance.register.json
+index 2d50f7fc4..ca772da6b 100644
+--- a/scripts/census/pool-dominance.register.json
++++ b/scripts/census/pool-dominance.register.json
+@@ -3,15 +3,9 @@
+   "corpus": "[{\"tier\":\"thorp\",\"n\":150},{\"tier\":\"hamlet\",\"n\":200},{\"tier\":\"village\",\"n\":350},{\"tier\":\"town\",\"n\":550},{\"tier\":\"city\",\"n\":350},{\"tier\":\"metropolis\",\"n\":150},{\"tier\":\"village\",\"n\":50,\"stress\":\"famine\"},{\"tier\":\"town\",\"n\":50,\"stress\":\"famine\"},{\"tier\":\"town\",\"n\":50,\"stress\":\"wartime\"},{\"tier\":\"city\",\"n\":50,\"stress\":\"wartime\"},{\"tier\":\"town\",\"n\":50,\"stress\":\"under_siege\"},{\"tier\":\"city\",\"n\":50,\"stress\":\"under_siege\"}]",
+   "census": {
+     "_note": "Figures for the second wave, never a red: re-written by every door.",
+-<<<<<<< 44d32838b (merge(JOIN-REHEARSAL): lane/r2-code-a-2026-11-13 at e93a3e570 into the rehearsal's save branch)
+     "pools": 909,
+     "printOneLine": 679,
+     "measuredUnder30Draws": 146,
+-=======
+-    "pools": 902,
+-    "printOneLine": 672,
+-    "measuredUnder30Draws": 142,
+->>>>>>> ec6d70a0e (docs(POWERS-11): the chair's word of 03:08 UTC copied in; the linked-worktree hazard bitten and undone, logged)
+     "highestSharesOver150Draws": [
+       {
+         "pool": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:population_friction",
+@@ -48,13 +42,6 @@
+         "draws": 1593,
+         "lines": 2
+       },
+-      {
+-        "pool": "ledger:npcGenerator:NPC_GOAL_SIBLINGS",
+-        "top1": 0.8009,
+-        "top5": 1,
+-        "draws": 231,
+-        "lines": 2
+-      },
+       {
+         "pool": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:magical_controversy",
+         "top1": 0.8006,
+@@ -63,7 +50,6 @@
+         "lines": 3
+       },
+       {
+-<<<<<<< 44d32838b (merge(JOIN-REHEARSAL): lane/r2-code-a-2026-11-13 at e93a3e570 into the rehearsal's save branch)
+         "pool": "ledger:npcGenerator:NPC_GOAL_SIBLINGS",
+         "top1": 0.787,
+         "top5": 1,
+@@ -75,12 +61,6 @@
+         "top1": 0.7793,
+         "top5": 1,
+         "draws": 743,
+-=======
+-        "pool": "ledger:crisisCast:CAST_REASON_SIBLINGS",
+-        "top1": 0.7908,
+-        "top5": 1,
+-        "draws": 760,
+->>>>>>> ec6d70a0e (docs(POWERS-11): the chair's word of 03:08 UTC copied in; the linked-worktree hazard bitten and undone, logged)
+         "lines": 2
+       },
+       {
+@@ -405,7 +385,7 @@
+       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
+     },
+     "ledger:ARRIVAL_SENSES.herbs.dominant": {
+-      "top1": 0.3732,
++      "top1": 0.375,
+       "top5": 1,
+       "reason": "held at or below its original ceiling 0.375 (point 43 re-banked it upward within two draws; restored by POOL-GUARD where the rule holds it): banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
+       "lines": 3
+@@ -614,35 +594,47 @@
+       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
+       "lines": 1
+     },
++    "ledger:NPC_STRUCTURE.criminal__contested__subordinate": {
++      "top1": 1,
++      "top5": 1,
++      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
++      "lines": 1
++    },
+     "ledger:NPC_STRUCTURE.criminal__corruption__dominant": {
+       "top1": 1,
+       "top5": 1,
+       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
+       "lines": 1
+     },
++    "ledger:NPC_STRUCTURE.criminal__corruption__subordinate": {
++      "top1": 1,
++      "top5": 1,
++      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
++      "lines": 1
++    },
+     "ledger:NPC_STRUCTURE.criminal__economic_stress__dominant": {
+       "top1": 1,
+       "top5": 1,
+       "lines": 1,
+       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
+     },
+-    "ledger:NPC_STRUCTURE.criminal__governance_fractured__dominant": {
++    "ledger:NPC_STRUCTURE.criminal__economic_stress__subordinate": {
+       "top1": 1,
+       "top5": 1,
+       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
+       "lines": 1
+     },
+-    "ledger:NPC_STRUCTURE.criminal__governance_fractured__subordinate": {
++    "ledger:NPC_STRUCTURE.criminal__governance_fractured__dominant": {
+       "top1": 1,
+       "top5": 1,
+       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
+       "lines": 1
+     },
+-    "ledger:NPC_STRUCTURE.criminal__stable__dominant": {
++    "ledger:NPC_STRUCTURE.criminal__governance_fractured__subordinate": {
+       "top1": 1,
+       "top5": 1,
+-      "lines": 1,
+-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
++      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
++      "lines": 1
+     },
+     "ledger:NPC_STRUCTURE.criminal__stable__subordinate": {
+       "top1": 1,
+@@ -770,35 +762,35 @@
+       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
+       "lines": 1
+     },
+-    "ledger:NPC_STRUCTURE.magic__contested__dominant": {
++    "ledger:NPC_STRUCTURE.magic__contested__subordinate": {
+       "top1": 1,
+       "top5": 1,
+-      "lines": 1,
+-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
++      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
++      "lines": 1
+     },
+-    "ledger:NPC_STRUCTURE.magic__corruption__dominant": {
++    "ledger:NPC_STRUCTURE.magic__corruption__subordinate": {
+       "top1": 1,
+       "top5": 1,
+-      "lines": 1,
+-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
++      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
++      "lines": 1
+     },
+-    "ledger:NPC_STRUCTURE.magic__economic_stress__dominant": {
++    "ledger:NPC_STRUCTURE.magic__economic_stress__subordinate": {
+       "top1": 1,
+       "top5": 1,
+-      "lines": 1,
+-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
++      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
++      "lines": 1
+     },
+-    "ledger:NPC_STRUCTURE.magic__governance_fractured__dominant": {
++    "ledger:NPC_STRUCTURE.magic__governance_fractured__subordinate": {
+       "top1": 1,
+       "top5": 1,
+-      "lines": 1,
+-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
++      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
++      "lines": 1
+     },
+-    "ledger:NPC_STRUCTURE.magic__stable__dominant": {
++    "ledger:NPC_STRUCTURE.magic__stable__subordinate": {
+       "top1": 1,
+       "top5": 1,
+-      "lines": 1,
+-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
++      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
++      "lines": 1
+     },
+     "ledger:NPC_STRUCTURE.military__contested__dominant": {
+       "top1": 1,
+@@ -866,11 +858,17 @@
+       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
+       "lines": 1
+     },
+-    "ledger:NPC_STRUCTURE.other__corruption__dominant": {
++    "ledger:NPC_STRUCTURE.other__contested__subordinate": {
+       "top1": 1,
+       "top5": 1,
+-      "lines": 1,
+-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
++      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
++      "lines": 1
++    },
++    "ledger:NPC_STRUCTURE.other__corruption__subordinate": {
++      "top1": 1,
++      "top5": 1,
++      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
++      "lines": 1
+     },
+     "ledger:NPC_STRUCTURE.other__economic_stress__dominant": {
+       "top1": 1,
+@@ -914,12 +912,24 @@
+       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
+       "lines": 1
+     },
++    "ledger:NPC_STRUCTURE.religious__contested__subordinate": {
++      "top1": 1,
++      "top5": 1,
++      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
++      "lines": 1
++    },
+     "ledger:NPC_STRUCTURE.religious__corruption__dominant": {
+       "top1": 1,
+       "top5": 1,
+       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
+       "lines": 1
+     },
++    "ledger:NPC_STRUCTURE.religious__corruption__subordinate": {
++      "top1": 1,
++      "top5": 1,
++      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
++      "lines": 1
++    },
+     "ledger:NPC_STRUCTURE.religious__economic_stress__dominant": {
+       "top1": 1,
+       "top5": 1,
+@@ -5335,7 +5345,7 @@
+       "lines": 4
+     },
+     "ledger:npcData:HANDLER_TIE_ARCHETYPES.handler_leverage_secret": {
+-      "top1": 0.3107,
++      "top1": 0.3112,
+       "top5": 1,
+       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
+       "lines": 4
+@@ -5347,8 +5357,8 @@
+       "lines": 6
+     },
+     "ledger:npcData:HANDLER_TIE_ARCHETYPES.handler_patron": {
+-      "top1": 0.1788,
+-      "top5": 0.8575,
++      "top1": 0.1833,
++      "top5": 0.8586,
+       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
+       "lines": 6
+     },
+@@ -5359,13 +5369,13 @@
+       "lines": 40
+     },
+     "ledger:npcData:NPC_HOOK_SIBLINGS": {
+-      "top1": 0.618,
++      "top1": 0.6209,
+       "top5": 1,
+       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
+       "lines": 2
+     },
+     "ledger:npcData:NPC_PLOT_HOOKS": {
+-      "top1": 0.2575,
++      "top1": 0.2578,
+       "top5": 1,
+       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
+       "lines": 4
+@@ -5383,7 +5393,7 @@
+       "lines": 8
+     },
+     "ledger:npcData:STRESS_ECONOMIC_EFFECTS.econ_crim_blur": {
+-      "top1": 0.1616,
++      "top1": 0.1652,
+       "top5": 0.6698,
+       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
+       "lines": 8
+@@ -5396,7 +5406,7 @@
+     },
+     "ledger:npcData:STRESS_ECONOMIC_EFFECTS.econ_mil_contract": {
+       "top1": 0.2078,
+-      "top5": 0.7342,
++      "top5": 0.8052,
+       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
+       "lines": 8
+     },
+@@ -5408,7 +5418,7 @@
+     },
+     "ledger:npcData:STRESS_ECONOMIC_EFFECTS.genuine_respect": {
+       "top1": 0.1353,
+-      "top5": 0.664,
++      "top5": 0.6656,
+       "reason": "held at or below its original ceiling 0.6778 (point 43 re-banked it upward within two draws; restored by POOL-GUARD where the rule holds it): banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
+       "lines": 8
+     },
+@@ -5419,14 +5429,14 @@
+       "lines": 8
+     },
+     "ledger:npcData:STRESS_ECONOMIC_EFFECTS.mag_crim_market": {
+-      "top1": 0.1765,
+-      "top5": 0.7255,
++      "top1": 0.1837,
++      "top5": 0.7347,
+       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
+       "lines": 8
+     },
+     "ledger:npcData:STRESS_ECONOMIC_EFFECTS.mentor_legacy": {
+-      "top1": 0.1279,
+-      "top5": 0.6308,
++      "top1": 0.128,
++      "top5": 0.6319,
+       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
+       "lines": 8
+     },
+@@ -5444,7 +5454,7 @@
+     },
+     "ledger:npcData:STRESS_ECONOMIC_EFFECTS.mutual_leverage": {
+       "top1": 0.129,
+-      "top5": 0.6313,
++      "top5": 0.6338,
+       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
+       "lines": 8
+     },
+@@ -5474,12 +5484,12 @@
+     },
+     "ledger:npcData:STRESS_ECONOMIC_EFFECTS.wary_alliance": {
+       "top1": 0.1327,
+-      "top5": 0.6456,
++      "top5": 0.6475,
+       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
+       "lines": 8
+     },
+     "ledger:npcGenerator:CRIME_KNOWLEDGE": {
+-      "top1": 0.2542,
++      "top1": 0.2553,
+       "top5": 1,
+       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
+       "lines": 4
+diff --git a/tests/components/phoneChromeFloor.census.test.js b/tests/components/phoneChromeFloor.census.test.js
+remerge CONFLICT (content): Merge conflict in tests/components/phoneChromeFloor.census.test.js
+index 1918e13d5..ff51839c7 100644
+--- a/tests/components/phoneChromeFloor.census.test.js
++++ b/tests/components/phoneChromeFloor.census.test.js
+@@ -343,17 +343,9 @@ const ROUTE_BASELINE = Object.freeze({
+   // 2026-11-12, COHERENCE-POWERS-2 item 3: PowerStrata.jsx's FactionRow gains the leaderless line of a power a stress brings
+   // (one `chromeFontSize` and one `proseFontSize` row, both floored) — `floored` +2 on /create, /settlements, /gallery,
+   // 621 -> 623, 864 -> 866, 666 -> 668; `bare` unmoved; re-measured by this census.
+-<<<<<<< 44d32838b (merge(JOIN-REHEARSAL): lane/r2-code-a-2026-11-13 at e93a3e570 into the rehearsal's save branch)
+   // 2026-11-13, R3-TABS (ruling b1): DefenseTab.jsx's ForceCard loses its provenance badge (one `chromeFontSize` row) —
+   // `floored` -1 on /create, /settlements, /gallery, 623 -> 622, 866 -> 865, 668 -> 667; `bare` unmoved; re-measured by this census.
+   '/create':                { roots: 1, files: 162, floored: 622, ruled: 5, bare: 97, owner: 'lane 28 — the create page + the tier picker' },
+-=======
+-  // 2026-11-14, POWERS-10 (the reader's M4 at 96a6ced46, REVIEW-POWERS-3): a59796dda (COHERENCE-POWERS-7 A, the owner's
+-  // ratings-not-machinery) cut public legitimacy's "Breakdown" heading and its chip row from PowerTab.jsx, two `chromeFontSize`
+-  // sites with their block: `floored` -2 on /create, /settlements, /gallery, 623 -> 621, 866 -> 864, 668 -> 666; `bare` unmoved;
+-  // a surface only shrank; measured out of this census's own red run at 2f016b7b4 and the diff of a59796dda (its two sites).
+-  '/create':                { roots: 1, files: 162, floored: 621, ruled: 5, bare: 97, owner: 'lane 28 — the create page + the tier picker' },
+->>>>>>> ec6d70a0e (docs(POWERS-11): the chair's word of 03:08 UTC copied in; the linked-worktree hazard bitten and undone, logged)
+   '/home':                  { roots: 1, files: 19, floored: 8, ruled: 4, bare: 19, owner: 'lane 28 — the landing' },
+   // The Realm lazily mounts the create flow's ClerkNote for its one advisory
+   // line, so lane 28's file lands on a route it does not own. One site.
+@@ -404,13 +396,9 @@ const ROUTE_BASELINE = Object.freeze({
+   // 2026-11-10, LIBRARY-SIMPLE (owner: "No longer does it advance time."): floored 867 -> 864, the
+   // campaign folder's three advance sites left with their controls — the "Advance by" micro-label,
+   // the auto-resolve switch's label and the interval select, one `chromeFontSize` each; 0 bare.
+-<<<<<<< 44d32838b (merge(JOIN-REHEARSAL): lane/r2-code-a-2026-11-13 at e93a3e570 into the rehearsal's save branch)
+   // 2026-11-13, R3-TABS (ruling b1): DefenseTab.jsx's ForceCard loses its provenance badge (one `chromeFontSize` row) —
+   // `floored` -1 on /create, /settlements, /gallery, 623 -> 622, 866 -> 865, 668 -> 667; `bare` unmoved; re-measured by this census.
+   '/settlements':           { roots: 1, files: 206, floored: 865, ruled: 4, bare: 0 },
+-=======
+-  '/settlements':           { roots: 1, files: 206, floored: 864, ruled: 4, bare: 0 },
+->>>>>>> ec6d70a0e (docs(POWERS-11): the chair's word of 03:08 UTC copied in; the linked-worktree hazard bitten and undone, logged)
+   // /compendium files 51 -> 50 with the same T6 cut: the size grid's one helper module left the
+   // compendium's import closure when ConfigurationPanel stopped importing it; floored 211 -> 206.
+   // floored 208 -> 206 (2026-11-10, COMPENDIUM-HUB H1, the owner's word "Rather than a horizontal
+@@ -439,13 +427,9 @@ const ROUTE_BASELINE = Object.freeze({
+   // 2026-11-07, PEOPLE-6 LINKS: the Institutions card's face row (one `proseFontSize` site, 0 bare) — +1; the
+   // other +1 is red at the base bc4b6423 (the people car's lanes; /admin and /world's +1 there are left red, the base's).
+   // PEOPLE-6 LINKS step 2: +1, the NPC card's role row (one `chromeFontSize` site, 0 bare).
+-<<<<<<< 44d32838b (merge(JOIN-REHEARSAL): lane/r2-code-a-2026-11-13 at e93a3e570 into the rehearsal's save branch)
+   // 2026-11-13, R3-TABS (ruling b1): DefenseTab.jsx's ForceCard loses its provenance badge (one `chromeFontSize` row) —
+   // `floored` -1 on /create, /settlements, /gallery, 623 -> 622, 866 -> 865, 668 -> 667; `bare` unmoved; re-measured by this census.
+   '/gallery':               { roots: 1, files: 151, floored: 667, ruled: 4, bare: 0 },
+-=======
+-  '/gallery':               { roots: 1, files: 151, floored: 666, ruled: 4, bare: 0 },
+->>>>>>> ec6d70a0e (docs(POWERS-11): the chair's word of 03:08 UTC copied in; the linked-worktree hazard bitten and undone, logged)
+   '/founders':              { roots: 1, files: 13, floored: 8, ruled: 1, bare: 0 },
+   '/first-hundred':         { roots: 1, files: 6, floored: 4, ruled: 1, bare: 0 },
+   '/roadmap':               { roots: 1, files: 6, floored: 3, ruled: 1, bare: 0 },

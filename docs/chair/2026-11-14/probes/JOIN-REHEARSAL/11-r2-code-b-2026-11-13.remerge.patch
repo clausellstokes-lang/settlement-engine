@@ -1,0 +1,114 @@
+5a7b5d2d82f67c5853ee6bcf2e230bdf9401fd15 merge(JOIN-REHEARSAL): lane/r2-code-b-2026-11-13 at e285c603f into the rehearsal's save branch
+
+diff --git a/src/components/new/tabs/EconomicsTab.jsx b/src/components/new/tabs/EconomicsTab.jsx
+remerge CONFLICT (content): Merge conflict in src/components/new/tabs/EconomicsTab.jsx
+index 6af2595e6..da241474d 100644
+--- a/src/components/new/tabs/EconomicsTab.jsx
++++ b/src/components/new/tabs/EconomicsTab.jsx
+@@ -24,13 +24,8 @@ import { economyDeskRead } from '../economyDeskRead.js'; // the desk's ONE calle
+ import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
+ import { generalDeskLines } from '../generalDeskRead.js'; // DS-GEN-18 · the general desk's ONE caller
+ import Button from '../../primitives/Button.jsx';
+-<<<<<<< efcac854f (merge(JOIN-REHEARSAL): lane/w2-c-leaves-2026-11-13 at 71624aad0 into the rehearsal's save branch)
+-import { institutionDisplayName } from '../../../domain/display/institutionDisplayName.js';
+-import { tradeListsAsPrinted, tradeMarksOnPage, revenuesOffTheLists, chainOutputsShown } from '../../../domain/display/tradeListDisplay.js'; // CENSUS-3b unit 3 — the trade lists' one display reader (kind A, filterDeclared)
+-=======
+ import { institutionDisplayName, institutionHouseLabel } from '../../../domain/display/institutionDisplayName.js';
+-import { displayTradeList, tradeMarksOnPage, revenuesOffTheLists } from '../../../domain/display/tradeListDisplay.js'; // CENSUS-3b unit 3 — the trade lists' one display reader (kind A, filterDeclared)
+->>>>>>> e285c603f (fix(R2-CODE-B-7, at the merge): a toll renamed by the town's access names that access as its source (ruling (d) composed with F1))
++import { tradeListsAsPrinted, tradeMarksOnPage, revenuesOffTheLists, chainOutputsShown } from '../../../domain/display/tradeListDisplay.js'; // CENSUS-3b unit 3 — the trade lists' one display reader (kind A, filterDeclared)
+ import { resourceDisplayName } from '../../../domain/display/resourceDisplayName.js'; // §934.22 item 2 — the native-resource label seam (the Imports pills)
+ import { edged } from '../../../design/edgedBox.js';
+ import { foodStoresWords } from '../../../domain/summary/tonightSheet.js'; // the stores sentence's ONE writer (TRIM-2 request 3)
+@@ -171,11 +166,7 @@ function EconomicFlowsSection({ chains: chainsAsRead, institutionalServices = []
+           // T2-6: the facts the retired Supply Chains diagram alone carried (resource node,
+           // missing houses, upstream imports, the upstream note) — one derivation, shared
+           // with the Compendium's ChainRow.
+-<<<<<<< efcac854f (merge(JOIN-REHEARSAL): lane/w2-c-leaves-2026-11-13 at 71624aad0 into the rehearsal's save branch)
+-          const shown = chainPrintName(chain, town), facts = chainFlowFacts({ ...chain, ...shown }, instNames), outs = chainOutputsShown(chain, town); // COHERENCE-AGREE-6 (F1): what a chain prints reads the town's access; the income keyword above stays on the record's label (logic)
+-=======
+-          const shown = chainPrintName(chain, town), facts = chainFlowFacts(chain, instNames, shown); // COHERENCE-AGREE-6 (F1): what a chain prints reads the town's access (its source through chainSourceOf with it: R2-CODE-B-7); the income keyword above stays on the record's label (logic)
+->>>>>>> e285c603f (fix(R2-CODE-B-7, at the merge): a toll renamed by the town's access names that access as its source (ruling (d) composed with F1))
++          const shown = chainPrintName(chain, town), facts = chainFlowFacts(chain, instNames, shown), outs = chainOutputsShown(chain, town); // COHERENCE-AGREE-6 (F1): what a chain prints reads the town's access (its source through chainSourceOf with it: R2-CODE-B-7); the income keyword above stays on the record's label (logic)
+           // X-50 (BOILERPLATE ONCE): generation gives every chain of a settlement the same impact
+           // sentence, so it prints on the first card that carries it; each card keeps its need.
+           const needFirst = !filtered.slice(0, i).some(prev => chainNeedLine(prev, town)); // the shared clause on the first card only
+diff --git a/tests/components/phoneChromeFloor.census.test.js b/tests/components/phoneChromeFloor.census.test.js
+remerge CONFLICT (content): Merge conflict in tests/components/phoneChromeFloor.census.test.js
+index a3ee16371..ff51839c7 100644
+--- a/tests/components/phoneChromeFloor.census.test.js
++++ b/tests/components/phoneChromeFloor.census.test.js
+@@ -343,19 +343,9 @@ const ROUTE_BASELINE = Object.freeze({
+   // 2026-11-12, COHERENCE-POWERS-2 item 3: PowerStrata.jsx's FactionRow gains the leaderless line of a power a stress brings
+   // (one `chromeFontSize` and one `proseFontSize` row, both floored) — `floored` +2 on /create, /settlements, /gallery,
+   // 621 -> 623, 864 -> 866, 666 -> 668; `bare` unmoved; re-measured by this census.
+-<<<<<<< efcac854f (merge(JOIN-REHEARSAL): lane/w2-c-leaves-2026-11-13 at 71624aad0 into the rehearsal's save branch)
+   // 2026-11-13, R3-TABS (ruling b1): DefenseTab.jsx's ForceCard loses its provenance badge (one `chromeFontSize` row) —
+   // `floored` -1 on /create, /settlements, /gallery, 623 -> 622, 866 -> 865, 668 -> 667; `bare` unmoved; re-measured by this census.
+   '/create':                { roots: 1, files: 162, floored: 622, ruled: 5, bare: 97, owner: 'lane 28 — the create page + the tier picker' },
+-=======
+-  // 2026-11-13, R2-CODE-B item 1 (the page states facts and never the machinery): serviceComponents.jsx's chain-depth chip
+-  // ("2-order chain", one `chromeFontSize` site) leaves the service row — `floored` -1 on /create, /settlements, /gallery,
+-  // 623 -> 622, 866 -> 865, 668 -> 667; `bare` unmoved; re-measured by this census.
+-  // 2026-11-13, R2-CODE-B-SIDE items 1 and 2 (2ed36a430, a245e05fb): SupplyChainsPanel.jsx's ChainRow loses the generator's
+-  // upstream note (one `chromeFontSize` site) and the phone row's "imported" pill (one `chromeFontSize` site) — `floored` -2 on
+-  // /create, /settlements, /compendium, /gallery, 622 -> 620, 865 -> 863, 205 -> 203, 667 -> 665; `bare` unmoved; re-measured by this census.
+-  '/create':                { roots: 1, files: 162, floored: 620, ruled: 5, bare: 97, owner: 'lane 28 — the create page + the tier picker' },
+->>>>>>> e285c603f (fix(R2-CODE-B-7, at the merge): a toll renamed by the town's access names that access as its source (ruling (d) composed with F1))
+   '/home':                  { roots: 1, files: 19, floored: 8, ruled: 4, bare: 19, owner: 'lane 28 — the landing' },
+   // The Realm lazily mounts the create flow's ClerkNote for its one advisory
+   // line, so lane 28's file lands on a route it does not own. One site.
+@@ -406,13 +396,9 @@ const ROUTE_BASELINE = Object.freeze({
+   // 2026-11-10, LIBRARY-SIMPLE (owner: "No longer does it advance time."): floored 867 -> 864, the
+   // campaign folder's three advance sites left with their controls — the "Advance by" micro-label,
+   // the auto-resolve switch's label and the interval select, one `chromeFontSize` each; 0 bare.
+-<<<<<<< efcac854f (merge(JOIN-REHEARSAL): lane/w2-c-leaves-2026-11-13 at 71624aad0 into the rehearsal's save branch)
+   // 2026-11-13, R3-TABS (ruling b1): DefenseTab.jsx's ForceCard loses its provenance badge (one `chromeFontSize` row) —
+   // `floored` -1 on /create, /settlements, /gallery, 623 -> 622, 866 -> 865, 668 -> 667; `bare` unmoved; re-measured by this census.
+   '/settlements':           { roots: 1, files: 206, floored: 865, ruled: 4, bare: 0 },
+-=======
+-  '/settlements':           { roots: 1, files: 206, floored: 863, ruled: 4, bare: 0 },
+->>>>>>> e285c603f (fix(R2-CODE-B-7, at the merge): a toll renamed by the town's access names that access as its source (ruling (d) composed with F1))
+   // /compendium files 51 -> 50 with the same T6 cut: the size grid's one helper module left the
+   // compendium's import closure when ConfigurationPanel stopped importing it; floored 211 -> 206.
+   // floored 208 -> 206 (2026-11-10, COMPENDIUM-HUB H1, the owner's word "Rather than a horizontal
+@@ -429,7 +415,7 @@ const ROUTE_BASELINE = Object.freeze({
+   // smaller than its fact lines"): the institution card's description now asks proseFontSize for FS.sm
+   // (12 px, not below the chrome floor, so the census no longer counts it as floored); it still renders 14 px
+   // on a phone and 12 px on desktop, never smaller than the 12 px fact lines. A fall, said here.
+-  '/compendium':            { roots: 1, files: 50, floored: 203, ruled: 3, bare: 0 },
++  '/compendium':            { roots: 1, files: 50, floored: 205, ruled: 3, bare: 0 },
+   '/about/what-this-is':    { roots: 1, files: 16, floored: 7, ruled: 1, bare: 0 },
+   '/about/guide':           { roots: 1, files: 12, floored: 13, ruled: 3, bare: 0 },
+   '/account':               { roots: 1, files: 46, floored: 107, ruled: 5, bare: 0 },
+@@ -441,13 +427,9 @@ const ROUTE_BASELINE = Object.freeze({
+   // 2026-11-07, PEOPLE-6 LINKS: the Institutions card's face row (one `proseFontSize` site, 0 bare) — +1; the
+   // other +1 is red at the base bc4b6423 (the people car's lanes; /admin and /world's +1 there are left red, the base's).
+   // PEOPLE-6 LINKS step 2: +1, the NPC card's role row (one `chromeFontSize` site, 0 bare).
+-<<<<<<< efcac854f (merge(JOIN-REHEARSAL): lane/w2-c-leaves-2026-11-13 at 71624aad0 into the rehearsal's save branch)
+   // 2026-11-13, R3-TABS (ruling b1): DefenseTab.jsx's ForceCard loses its provenance badge (one `chromeFontSize` row) —
+   // `floored` -1 on /create, /settlements, /gallery, 623 -> 622, 866 -> 865, 668 -> 667; `bare` unmoved; re-measured by this census.
+   '/gallery':               { roots: 1, files: 151, floored: 667, ruled: 4, bare: 0 },
+-=======
+-  '/gallery':               { roots: 1, files: 151, floored: 665, ruled: 4, bare: 0 },
+->>>>>>> e285c603f (fix(R2-CODE-B-7, at the merge): a toll renamed by the town's access names that access as its source (ruling (d) composed with F1))
+   '/founders':              { roots: 1, files: 13, floored: 8, ruled: 1, bare: 0 },
+   '/first-hundred':         { roots: 1, files: 6, floored: 4, ruled: 1, bare: 0 },
+   '/roadmap':               { roots: 1, files: 6, floored: 3, ruled: 1, bare: 0 },
+diff --git a/tests/lint/rawColorLiteral.test.js b/tests/lint/rawColorLiteral.test.js
+remerge CONFLICT (content): Merge conflict in tests/lint/rawColorLiteral.test.js
+index 8a823dd30..a47251578 100644
+--- a/tests/lint/rawColorLiteral.test.js
++++ b/tests/lint/rawColorLiteral.test.js
+@@ -124,11 +124,7 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
+ // 1229 + 1229 -> 1228 (2026-11-08, MERGE-CAR): both sides' shrinks of the same base 1230 composed — the rung-2 landing's
+ // (ViabilityTab's accent, d3b9280f6) and the people car's (PEOPLE-3 HOOKS: the `relationship` hook category's colour);
+ // measured by this file's counter at the merged tip. A shrink, banked.
+-<<<<<<< efcac854f (merge(JOIN-REHEARSAL): lane/w2-c-leaves-2026-11-13 at 71624aad0 into the rehearsal's save branch)
+ const BUDGET = 1216; // committed raw-color-literal occurrences. EXACT. Lower on a shrink; never raise. 1225 -> 1216 on 2026-11-13, COHERENCE-POWERS-7 (measured by this walk): the Power tab's legitimacy breakdown chips (three tones of background, ink and border, nine literals) left with the points they printed (the owner: ratings, never the machinery). 1228 -> 1225 on 2026-11-09, OWNER-WORDS-DOSSIER item 3 (measured by this walk): the Power tab's standalone vignette paragraph and its border ternary left with the three governance pieces; the one paragraph that replaces them adds a single bordered block. 1230 -> 1229 on 2026-11-07, PEOPLE-3 HOOKS: the `relationship` hook category (unemitted since X-2) left the PLOT_HOOK_CATEGORIES registry with its colour '#5a3a1a'. 1313 -> 1303 on 2026-09-19: the fixes consist's label ladder and the band-primitive deletion removed ten raw literals.
+-=======
+-const BUDGET = 1221; // committed raw-color-literal occurrences. EXACT. Lower on a shrink; never raise. 1224 -> 1221 on 2026-11-13, R2-CODE-B-SIDE item 2 (a245e05fb; measured by this walk): the PDF chain row's import node left with its tone IMPORT ('#2a5a8a', '#eef2fb', '#a0b0d8') in SupplyChainFlow.jsx. 1225 -> 1224 on 2026-11-13, R2-CODE-B round 3 ruling (b) (measured by this walk): the roster's "REQ" badge left, and with it its tone '#a0762a' in InstitutionsTab.jsx's PROVENANCE_TONE. 1228 -> 1225 on 2026-11-09, OWNER-WORDS-DOSSIER item 3 (measured by this walk): the Power tab's standalone vignette paragraph and its border ternary left with the three governance pieces; the one paragraph that replaces them adds a single bordered block. 1230 -> 1229 on 2026-11-07, PEOPLE-3 HOOKS: the `relationship` hook category (unemitted since X-2) left the PLOT_HOOK_CATEGORIES registry with its colour '#5a3a1a'. 1313 -> 1303 on 2026-09-19: the fixes consist's label ladder and the band-primitive deletion removed ten raw literals.
+->>>>>>> e285c603f (fix(R2-CODE-B-7, at the merge): a toll renamed by the town's access names that access as its source (ruling (d) composed with F1))
+ // Pure-hex TEMPLATE elements are their OWN population with their OWN number. They are NOT
+ // folded into BUDGET: one number per population, so a future movement stays attributable to
+ // the population that moved. Today's single occurrence is real debt, not a placeholder —
