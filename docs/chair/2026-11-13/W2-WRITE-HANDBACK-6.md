@@ -1,0 +1,80 @@
+# W2-WRITE — the hand-back of the main seat after the split (the sixth and seventh seats)
+
+**Lane:** `lane/w2-write-2026-11-13`, the main seat of the split (the DS-DEF block). The sixth seat
+(W2-WRITE-6) pushed four commits after the split base `dcd4759b0` and its session ended with the account on
+2026-11-14; it wrote no hand-back file, so its commit bodies are its record. The seventh seat (W2-WRITE-7,
+brief `docs/chair/2026-11-14/briefs/BRIEF-W2-WRITE-7.md` on the chair's lane) read the lane's tip back from
+origin at the start: `2f1ff0e78`, as the brief names it (no difference). Scratch worktree on local branch
+`w2w7`; pushed by `git push origin w2w7:refs/heads/lane/w2-write-2026-11-13`. No commit at or below
+`2f1ff0e78` rewritten.
+
+**Status:** item 0 (this file) begun. B in progress.
+
+**The chair:** session_01ACmDYZrFEVXyZEUg1NDxxC (from 2026-11-14). The brief binds this seat to
+BRIEF-W2-WRITE-6 as written (its reading, its work in order, its METHOD, its RULED list, its HOW YOU WORK, its
+hazards, what it authorises and forbids), with the changes BRIEF-W2-WRITE-7 states (THE COUNT read by the
+seat itself; long runs never cross a turn's end, the suite in six shards; no pull request).
+
+## Where the sixth seat stopped (read from its four commit bodies against HANDBACK-5's table "DS-DEF (27)")
+- `a17d14618` B: five LAST rows struck (MIGRATION arrivals v4, CHAIN defence supplied v6, insurgency v5,
+  ACTIVE SIEGE v4, UNWALLED-LARGE v3), each with what prints after, read on the owner's page.
+- `47f8bdd8e` B: readiness STRONG v5 and v6 reworded (middle rows).
+- `94c1d5dc5` B: CHAIN food trades failing v3 reworded, with every line of both CHAIN food-trades pools
+  re-said as the record's chain (method 7); working v1 declared `no crisis: famine` with its guard row.
+- `2f1ff0e78` the old chair's court ruling of 00:23 UTC (record 422), copied into the commit body: the four
+  printing Internal Security lines name a hearing, not a court. Not one of the 27.
+- No stop and no question put to the old chair is named in any of the four bodies without its ruling copied
+  in. So no first message to the chair was sent (the brief: only if there are open stops).
+- One gap read against the ruling as the old chair's record 422 gives it ("every DS-DEF line of court,
+  MAGISTRATE, JUDGE, trial or sentence measured against the roster's courthouse"): `2f1ff0e78` measured
+  court, trial, tried, sentence and verdict; magistrate and judge are measured by this seat (below).
+
+## B: the 27 of DS-DEF, against what is done
+| # | pool | variant | settled | by | what prints after / state |
+|---|---|---|---|---|---|
+| 1 | DS-DEF-2 Invasion & War: neither walls nor force | v6 | reworded | 2d1832b7b (fifth) | |
+| 2 | DS-DEF-2 Beasts & Monsters: settled, nothing organized | v6 | declared | 35acb7794 (fifth) | |
+| 3 | DS-DEF-2 Invasion & War: neither walls nor force | v10 | struck | 2d1832b7b (fifth) | |
+| 4 | DS-DEF-5 garrison PRESENT | v4 | struck | 255009302 (fifth) | |
+| 5 | DS-DEF-2 Invasion & War: neither walls nor force | v2 | reworded | 57997cb3d (fifth) | |
+| 6 | DS-DEF-2 Invasion & War: walls with NO force | v6 | declared `no watch` | 18bd2465e (fifth) | |
+| 7 | DS-DEF-2 Invasion & War: walls with NO force | v4 | declared off occupation | ad5a8c846 (fifth) | |
+| 8 | DS-DEF-1 readiness STRONG | v5 | reworded | 47f8bdd8e (sixth) | read at Aryapura, Brahmabagh, a siege metropolis |
+| 9 | DS-DEF-8 override: MIGRATION, arrivals | v4 | struck (last row) | a17d14618 (sixth) | v1, v3 print, true |
+| 10 | DS-DEF-2 CHAIN: food trades failing | v3 | reworded (+ the pool and its sibling re-said) | 94c1d5dc5 (sixth) | |
+| 11 | DS-DEF-5 walls PRESENT | v7 | LEFT | | |
+| 12 | DS-DEF-3 Moderate | v1 | LEFT | | |
+| 13 | DS-DEF-2 CHAIN: defence supplied | v6 | struck (last row) | a17d14618 (sixth) | v5 prints, true |
+| 14 | DS-DEF-3 COMPOUND: insurgency | v5 | struck (last row) | a17d14618 (sixth) | v2, v4 print, true |
+| 15 | DS-DEF-11 WALLED-STRAINED | v3 | agreement only (d56c896f8, fifth); "too few hands" beside a garrison LEFT | | |
+| 16 | DS-DEF-11 WALLED-STRAINED | v7 | LEFT | | |
+| 17 | DS-DEF-5 NO organized force at all | v4 | LEFT | | |
+| 18 | DS-DEF-8 override: ACTIVE SIEGE | v4 | struck (last row) | a17d14618 (sixth) | v1-v3 print, true |
+| 19 | DS-DEF-9 magicDependency true, with a NAMED dependent chain | v1 | LEFT | | |
+| 20 | DS-DEF-2 Invasion & War: neither walls nor force | v5 | declared off siege, occupation | 2d1832b7b (fifth) | |
+| 21 | DS-DEF-11 WALLED-STRAINED | v8 | LEFT (last row) | | |
+| 22 | DS-DEF-11 WALLED-STRAINED | v6 | LEFT | | |
+| 23 | DS-DEF-5 ARCANE: alchemists | v2 | LEFT (last row) | | |
+| 24 | DS-DEF-11 UNWALLED-LARGE | v3 | struck (last row) | a17d14618 (sixth) | v1, v2 print, true |
+| 25 | DS-DEF-1 readiness STRONG | v6 | reworded | 47f8bdd8e (sixth) | read at Al-mandi, a siege city, a 574-person town |
+| 26 | DS-DEF-11 WALLED-STRAINED | v4 | LEFT | | |
+| 27 | DS-DEF-2 Invasion & War: neither walls nor force | v8 | declared off occupation (2d1832b7b, fifth); the style point LEFT | | |
+
+Settled 17 (fifth seat 9, sixth seat 8); LEFT 10, and one style point (#27).
+
+## Items of this seat
+| item | commit | what | read in |
+|---|---|---|---|
+| 0 | (this file) | the table above | |
+
+## Named, not the corpus's (with the file)
+
+## Parked (with the word it needs)
+
+## Found while reading, for later steps
+
+## The rulings this seat works to
+BRIEF-W2-WRITE-7 (the chair session_01ACmDYZrFEVXyZEUg1NDxxC, 2026-11-14) and, through it, BRIEF-W2-WRITE-6
+whole, with BRIEF-W2-WRITE-5's RULED list, HOW YOU WORK and NEVER; record 422 (a court only where a
+courthouse stands on the roster; a line speaks of the town hall or the council hearing disputes, or is not
+written). Rulings received from the chair during this seat: none yet.
