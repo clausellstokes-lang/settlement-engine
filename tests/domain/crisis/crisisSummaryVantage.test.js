@@ -18,6 +18,8 @@ import { composeCrisisPage } from '../../../src/domain/crisis/crisisPage.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../../helpers/seedFailures.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../../src/store/configSlice.js';
+import { deriveArmedForces } from '../../../src/domain/display/defenseDisplay.js';
+import { hasMarketInstitution } from '../../../src/domain/facts/market.js';
 
 const KINDS = Object.keys(STRESS_TYPE_MAP);
 const SURFACES = /** @type {const} */ (['cover', 'overview', 'defence', 'tonight']);
@@ -152,5 +154,50 @@ describe('R3-CODE-C-3: a vantage promises no force, no merchant and no streets i
   it('rpf-thorp-succession_void-13 (no market, no merchant): no line speaks of its merchants', () => {
     const s = appShape('rpf-thorp-succession_void-13');
     expect(linesOf(s).filter((l) => /merchant/i.test(l))).toEqual([]);
+  });
+});
+
+// R3-CODE-C-5 (the third seat's "Found on the way", ruled by the chair as one rewording pass of the table): the same
+// presumption in the table's other lines. "Those who keep order" and "everyone set to keep order" (a force), "the
+// merchants" (a market's people) and "streets" (a size) are facts no crisis kind guarantees, and the call sites pass
+// no roster, so every line is worded to what holds in a thorp with no force and no market and in a metropolis alike.
+// The one line that keeps "keeping order" is the occupation's: its occupiers are the kind's own force. THE GUARD
+// TOWNS are births the rewording was not tuned on (the lane's fresh seeds, the census's dials), each printing its
+// family's false line at e2aa8e278.
+describe('R3-CODE-C-5: no line of the table promises a force, a merchant or a street', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  /** @param {[string, object][]} sets @returns {[string, string][]} */
+  const lines = (sets) => sets.flatMap(([kind, set]) => SURFACES.flatMap((sf) => Object.entries(set[sf]).map(([v, l]) => [`${kind}.${sf}.${v}`, l])));
+  const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
+  const born = (seed) => {
+    const m = seed.match(/^r2s-(\w+)-(thorp|hamlet|village|town|city|metropolis)-(\d+)$/);
+    return generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...DIALS, selectedStresses: [m[1]], selectedStressesRandom: false, settType: m[2] }), null, { seed, customContent: {} });
+  };
+  const printed = (s) => (Array.isArray(s.stress) ? s.stress : s.stress ? [s.stress] : [])
+    .flatMap((e) => SURFACES.map((sf) => crisisSummaryForSurface(e, s.name, sf) || ''));
+  it('no line names a body that keeps order, but the occupation\'s own', () => {
+    expect(lines(SETS).filter(([, l]) => /\bkeep(?:s|ing)? order\b/i.test(l)).map(([k]) => k)).toEqual(['occupied.defence.official']);
+  });
+  it('no line names a merchant', () => {
+    expect(lines(SETS).filter(([, l]) => /\bmerchants?\b/i.test(l)).map(([k]) => k)).toEqual([]);
+  });
+  it('no line names a street', () => {
+    expect(lines(SETS).filter(([, l]) => /\bstreets?\b/i.test(l)).map(([k]) => k)).toEqual([]);
+  });
+  it('r2s-slave_revolt-thorp-70 (a thorp of 12, no force): no line sets anyone to keep order', () => {
+    const s = born('r2s-slave_revolt-thorp-70');
+    const af = deriveArmedForces(s);
+    expect([s.tier, af.standing.length + af.contracted.length]).toEqual(['thorp', 0]);
+    expect(printed(s).filter((l) => /keep(?:s|ing)? order/i.test(l))).toEqual([]);
+  });
+  it('r2s-occupied-hamlet-70 (a hamlet of 47, no market): no line speaks of its merchants', () => {
+    const s = born('r2s-occupied-hamlet-70');
+    expect([s.tier, hasMarketInstitution(s.institutions)]).toEqual(['hamlet', false]);
+    expect(printed(s).filter((l) => /merchant/i.test(l))).toEqual([]);
+  });
+  it('r2s-plague_onset-thorp-70 (a thorp of 26): no line speaks of its streets', () => {
+    const s = born('r2s-plague_onset-thorp-70');
+    expect(s.tier).toBe('thorp');
+    expect(printed(s).filter((l) => /\bstreets?\b/i.test(l))).toEqual([]);
   });
 });

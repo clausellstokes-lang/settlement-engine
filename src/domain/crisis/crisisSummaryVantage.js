@@ -27,6 +27,9 @@
  * kind's own catalogue text (`data/stressTypes.js`) presume. No line names a garrison, soldiers,
  * walls or a hospital (those are facts of their own), no figure, no tier noun, and a war line holds
  * for a town that profits from the war and one that pays for it (the summary's roll is not kept).
+ * Nor a body that keeps order (only an occupation's occupiers are the kind's own force), a merchant
+ * (the market's fact) or a street (a thorp has none): the call sites pass the entry and the name
+ * and no roster, so a line says "those who answer for", "those who sell", "out of doors" (R3-CODE-C-5).
  *
  * A kind this table does not know (an authored custom crisis) keeps its stored summary on every
  * surface: a line written for another crisis is worse than a repeat.
@@ -119,11 +122,11 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
     cover: {
       traveller: 'Foreign officials run {name} now; the locals answer their questions politely and say as little as they can.',
       newcomer: 'Newcomers to {name} are questioned by the occupiers\' officials before any local will say a word to them.',
-      trade: 'Everything sold in {name} pays the occupiers their due first, and the merchants keep their prices and their opinions to themselves.',
+      trade: 'Everything sold in {name} pays the occupiers their due first, and those who sell keep their prices and their opinions to themselves.', // R3-CODE-C-5: no merchant
       watch: 'At every road into {name}, the occupiers\' officials note who comes and goes.',
     },
     overview: {
-      local: 'In {name} people answer to foreign officials now, and mind what they say in the street.',
+      local: 'In {name} people answer to foreign officials now, and mind what they say out of doors.', // R3-CODE-C-5: no street
       trade: 'The occupiers take {name}\'s revenue, and the local offices work only under their eye.',
       official: '{name}\'s own leaders keep their titles, but every decision they make goes to the occupiers for approval.',
       newcomer: 'A newcomer in {name} is taken for the occupiers\' informer until they prove otherwise.',
@@ -169,7 +172,7 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
   }),
   indebted: pools({
     cover: {
-      traveller: 'The creditor\'s agents walk {name}\'s streets as if they owned them, and in a way they do: the place owes more than it can ever pay.',
+      traveller: 'The creditor\'s agents walk about {name} as if they owned it, and in a way they do: the place owes more than it can ever pay.', // R3-CODE-C-5: no streets
       newcomer: 'In {name}, a newcomer is asked straight away whether they come from the creditor.',
       trade: 'Much of what {name} earns goes straight to its creditor, and nothing is left over to build with.',
       watch: 'The creditor\'s agents in {name} keep a close eye on every cart that leaves and every coin that changes hands.',
@@ -182,7 +185,7 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
     },
     defence: {
       watch: 'The creditor keeps its own people in {name}, watching where every coin goes.',
-      official: 'Those who keep order in {name} must keep it for the creditor too, and the people know it.',
+      official: 'Those who answer for {name} must answer to the creditor too, and the people know it.', // R3-CODE-C-5: no force is the kind's to promise
       local: 'People in {name} hide what little they have saved, in case the creditor\'s agents come asking.',
       traveller: 'Passing through {name}, you meet the creditor\'s agents before you meet its own officials.',
     },
@@ -247,7 +250,7 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
   }),
   plague_onset: pools({
     cover: {
-      traveller: 'A sickness is spreading in {name}: doors are shut, and people keep their distance in the street.',
+      traveller: 'A sickness is spreading in {name}: doors are shut, and people keep their distance from one another.', // R3-CODE-C-5: no street
       newcomer: 'Anyone arriving in {name} is asked where they came from and whether they are well before anyone will take their hand.',
       trade: 'Fewer people come to market in {name} since the sickness began, and some goods have stopped arriving altogether.',
       watch: 'In {name} some houses are marked and watched and others are not, and nobody seems to agree on the rules.',
@@ -266,7 +269,7 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
     },
     tonight: {
       official: 'A sickness is spreading in {name}, and its leaders can neither agree where it came from nor get people to accept a quarantine.',
-      watch: 'The quarantine in {name} is kept in some streets and ignored in others, and the sickness goes where it likes.',
+      watch: 'The quarantine in {name} is kept in some houses and ignored in others, and the sickness goes where it likes.', // R3-CODE-C-5: no streets
       newcomer: 'Anyone new to {name} will be asked whether they carry the sickness, and few will believe the answer.',
       trade: 'With fewer buyers and fewer carts, {name}\'s trade shrinks for as long as the sickness lasts.',
     },
@@ -275,8 +278,8 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
     cover: {
       traveller: 'Everyone you meet in {name} has a view on who should take the dead leader\'s seat, and nobody has taken it yet.',
       newcomer: 'Newcomers to {name} are courted by every claimant to the empty seat, each hoping to count one more friend.',
-      trade: 'Big business waits in {name} until a new leader is chosen, and the merchants hold back their coin.',
-      watch: 'In {name} the followers of rival claimants eye each other across the street, waiting for the first push.',
+      trade: 'Every large bargain in {name} waits until a new leader is chosen, and those with coin hold it back.', // R3-CODE-C-5: no merchant, no big business
+      watch: 'In {name} the followers of rival claimants eye each other warily, waiting for the first push.', // R3-CODE-C-5: no street
     },
     overview: {
       local: 'With the old leader dead and no one in their place, people in {name} wait to see who comes out on top.',
@@ -327,7 +330,7 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
     cover: {
       traveller: '{name} looks calm, but its offices are half empty and orders go unanswered; one of its strongest powers has turned against those in charge.',
       newcomer: 'Newcomers to {name} are asked, quietly, whether they come on the government\'s business.',
-      trade: 'In {name} taxes are disputed and some offices no longer send their revenue on, and merchants are unsure whom they owe.',
+      trade: 'In {name} taxes are disputed and some offices no longer send their revenue on, and those who trade are unsure whom they owe.', // R3-CODE-C-5: no merchant
       watch: 'Nobody in {name} fights in the open; those watching are counting who still obeys the government and who has stopped.',
     },
     overview: {
@@ -337,8 +340,8 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
       newcomer: 'A newcomer in {name} soon learns that the government\'s word counts for less than it seems.',
     },
     defence: {
-      watch: 'There is no fighting in {name}\'s streets; the danger is quieter, officials who will not act and orders that go nowhere.',
-      official: 'Those who keep order in {name} cannot be sure whose side their own people are on.',
+      watch: 'There is no fighting in {name}; the danger is quieter, officials who will not act and orders that go nowhere.', // R3-CODE-C-5: no streets
+      official: 'Those who answer for {name} cannot be sure whose side their own people are on.', // R3-CODE-C-5: no force
       local: 'In {name} people keep out of the quarrel between the government and the power that defies it, and away from anyone asking questions.',
       traveller: 'Passing through {name}, you would see nothing amiss unless you asked who is really in charge.',
     },
@@ -351,7 +354,7 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
   }),
   religious_conversion: pools({
     cover: {
-      traveller: '{name}\'s faith is in dispute: you hear two kinds of prayer in its streets, and people are careful which one they join.',
+      traveller: '{name}\'s faith is in dispute: you hear two kinds of prayer there, and people are careful which one they join.', // R3-CODE-C-5: no streets
       newcomer: 'Newcomers to {name} are asked, sooner or later, which faith they keep, and the answer decides who will deal with them.',
       trade: 'In {name} feast days and fairs are held twice over, once for each faith, and trade between the two grows harder.',
       watch: 'In {name} each faith watches the other\'s gatherings closely, and a loud sermon draws a crowd from both.',
@@ -364,8 +367,8 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
     },
     defence: {
       watch: 'Arguments over faith in {name} run hot, and a feast day can end in a fight.',
-      official: 'Those who keep order in {name} are kept busy by quarrels between the faiths, and are trusted by neither.',
-      local: 'In {name} families keep away from the other faith\'s feasts, and words in the street can turn to blows.',
+      official: 'Those who answer for {name} are kept busy by quarrels between the faiths, and are trusted by neither.', // R3-CODE-C-5: no force
+      local: 'In {name} families keep away from the other faith\'s feasts, and words between neighbours can turn to blows.', // R3-CODE-C-5: no street
       traveller: 'Travellers in {name} do well to keep their prayers to themselves; both faiths are quick to take offence.',
     },
     tonight: {
@@ -380,7 +383,7 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
       traveller: 'Work has stopped across {name}: the enslaved have downed their tools, and their owners stand by not knowing what to do.',
       newcomer: 'Newcomers to {name} are watched by owners and rebels alike, each wondering which side they will take.',
       trade: 'Less is made in {name} since the revolt began; the owners keep their gangs only on work they can watch.',
-      watch: 'Everyone in {name} set to keep order is busy with the revolt, and every other duty waits.',
+      watch: 'In {name} every watchful eye is on the revolt, and every other duty waits.', // R3-CODE-C-5: no force
     },
     overview: {
       local: 'Whole work gangs in {name} have downed their tools, and the owners argue over whether to bargain or to crack down.',
@@ -389,14 +392,14 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
       newcomer: 'A newcomer in {name} is asked whether they keep slaves, and the answer marks them to both sides.',
     },
     defence: {
-      watch: '{name}\'s enslaved are in open defiance, and everyone set to keep order is busy containing them.',
-      official: 'Those who keep order in {name} are stretched thin containing the revolt, and have nothing left for anything else.',
+      watch: '{name}\'s enslaved are in open defiance, and their owners watch them day and night.', // R3-CODE-C-5: no force
+      official: 'Those who answer for {name} have their hands full with the revolt, and nothing left for anything else.', // R3-CODE-C-5: no force
       local: 'Owners in {name} lock their doors at night, and the enslaved who still work do so under watch.',
       traveller: 'Travellers through {name} find work stopped and owners on edge, and are asked whether they bring help.',
     },
     tonight: {
       official: 'Those in charge of {name} must choose between bargaining with the rebels and crushing them, and the owners press for the second.',
-      watch: 'The rebels in {name} have demands, and those keeping order wait to see whether anyone will listen.',
+      watch: 'The rebels in {name} have demands, and everyone waits to see whether anyone will listen.', // R3-CODE-C-5: no force
       newcomer: 'The rebels in {name} have demands and no one to carry them; an outsider could be that person.',
       trade: 'Every day the revolt in {name} lasts, less is made and the owners lose more, and their patience is running out.',
     },
@@ -443,7 +446,7 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
       },
       defence: {
         watch: 'Newcomers keep arriving in {name}, and with them come quarrels over space and work that the old families expect someone to settle.',
-        official: 'Those who keep order in {name} are stretched by the newcomers, and some of the hungriest take what they cannot earn.',
+        official: 'Those who answer for {name} are stretched by the newcomers, and some of the hungriest take what they cannot earn.', // R3-CODE-C-5: no force
         local: 'Old families in {name} lock up what they once left out, and blame the newcomers for every theft.',
         traveller: 'On the road into {name}, you pass families camped wherever there is room, watching every cart that goes by.',
       },
@@ -456,10 +459,10 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
     }),
     departures: pools({
       cover: {
-        traveller: 'Every street in {name} has houses standing empty, their owners gone for good.',
+        traveller: 'Houses in {name} stand empty, their owners gone for good.', // R3-CODE-C-5: no streets, no count
         newcomer: 'A newcomer to {name} is welcomed eagerly: there are empty houses to fill and work nobody is left to do.',
         trade: 'Fewer buyers and fewer hands: {name}\'s fields go short of workers and its trade short of customers.',
-        watch: 'With so many gone from {name}, whole streets are dark at night and nobody watches them.',
+        watch: 'With so many gone from {name}, empty houses stand dark at night and nobody watches them.', // R3-CODE-C-5: no streets
       },
       overview: {
         local: 'Families keep leaving {name}, the ones who could afford to first, and those who stay do the work of the ones who went.',
