@@ -23,7 +23,7 @@
   "totals": {
     "pools": 856,
     "blocks": 69,
-    "variants": 2960,
+    "variants": 2959,
     "resolved": 488,
     "unresolved": 368,
     "resolvedWithPredicate": 317,
@@ -19396,7 +19396,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 4,
+      "variants": 3,
       "grammars": 2,
       "predicate": [
         {
@@ -19454,8 +19454,9 @@
       },
       "declares": [],
       "lineDeclares": {
-        "crisis: under_siege": 2,
-        "no crisis: under_siege": 2
+        "crisis: under_siege": 1,
+        "no crisis: under_siege": 2,
+        "stores: < 6": 1
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -54918,7 +54919,7 @@
       "pools": [
         "DS-ECO-12 :: CRITICAL IMPORT: a house needs what the land lacks"
       ],
-      "variants": 4,
+      "variants": 3,
       "grammars": 2,
       "blocks": [
         "DS-ECO-12"
@@ -68914,7 +68915,7 @@
         "criticalRow.institution"
       ],
       "readingFunction": "criticalImportPoolKey",
-      "count": "4 variant(s) · 2 grammar(s) · slots {good, settlement}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {good, settlement}"
     },
     {
       "tier": "THIN",
