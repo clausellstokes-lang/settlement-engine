@@ -1605,7 +1605,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "The {seat} at {settlement} holds because {faction} is still the heavier of the two, and the weighing is done again every season.",
+          "text": "The {seat} at {settlement} holds because no rival yet outweighs {faction}, and the weighing is done again every season.",
           "slots": [
             "seat",
             "settlement",

@@ -2320,7 +2320,7 @@ did not die.
 **`riskLabel: Holding`** {colour}
 1. `[ledger]` {faction} outweighs everyone at {settlement} who wants its place, and the whole town knows who they are. {faction} holds on, but has to watch them.
 2. `[street]` {settlement} has people who would take the hall if they could. They cannot, and everyone involved knows it.
-3. `[unfolding]` The {seat} at {settlement} holds because {faction} is still the heavier of the two, and the weighing is done again every season.
+3. `[unfolding]` The {seat} at {settlement} holds because no rival yet outweighs {faction}, and the weighing is done again every season.
 
 **`riskLabel: Contested`** {colour}
 1. `[ledger]` {counterpart} now has more people behind it than {faction} at {settlement}; {faction} keeps the hall only because the office is still its own.
