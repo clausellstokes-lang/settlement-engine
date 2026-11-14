@@ -1,0 +1,14 @@
+ FAIL  tests/lint/factLayers.walker.test.js > nothing reads at or above its own layer (shrink-only) > READERS: every file reads exactly its banked count, and no file reads outside the register
+ FAIL  tests/lint/presumedThings.walker.test.js > ARM 1 — the source > ⛔ every source literal that names a thing declares it, or has its row
+ FAIL  tests/lint/presumedThings.walker.test.js > ARM 1 — the source > ⛔ no stale row: a cured line leaves the register in its own commit
+ FAIL  tests/lint/proseComposed.walker.test.js > A13 — the PROVENANCE move, EXECUTABLE since the holder census landed (SEAM car 5b) > ⭐⭐ THE FAIL LIMB IS REACHABLE ON REAL INPUT: a citing variant whose holder this town has captured
+ FAIL  tests/lint/proseTasteInterested.walker.test.js > the two fixture towns are the ones §R c-22 names, taken as the generator makes them > the captured town carries the birth fact and the clean control does not
+ FAIL  tests/lint/proseTasteInterested.walker.test.js > ⭐⭐ THE STANDING, PRINTED AND ASSERTED ON BOTH TOWNS > prints the per-kind table and holds the four organs against every other kind
+ FAIL  tests/lint/proseTasteInterested.walker.test.js > ⭐⭐ THE STANDING, PRINTED AND ASSERTED ON BOTH TOWNS > the taste's own row is INTERESTED on the captured town and LICENSED on the clean one
+ FAIL  tests/lint/proseWaveGate.walker.test.js > (d) THE FIXTURE SECTION — the interested fact BOTH WAYS (SITTING §T.4, C‴) > composes the captured town and the clean control, and names their standings
+ FAIL  tests/lint/proseWaveGate.walker.test.js > (d) THE FIXTURE SECTION — the interested fact BOTH WAYS (SITTING §T.4, C‴) > ⛔ THE CONTROL HAS NO PEN LINE AT ALL, which is what makes the pair a pair
+ FAIL  tests/lint/proseWaveGate.walker.test.js > (d) THE FIXTURE SECTION — the interested fact BOTH WAYS (SITTING §T.4, C‴) > ⭐ THE TWO RENDERINGS DIFFER IN EXACTLY ONE WAY, which is what the sitting is being shown
+ FAIL  tests/lint/sovereigntyLightingContract.walker.test.js > the sovereignty lighting condition — a marker is EVIDENCE only in a live title > THE CENSUS IS AN ASSERTION, NOT A SENTENCE — every stated figure is executed
+ FAIL  tests/property/dossierProseManifest.test.js > the composed-prose manifest — the DRIFT corpus, both audiences > ⭐ THE DRIFT ARM: no row added, no row removed, no row moved
+ FAIL  tests/property/dossierProseManifest.test.js > the composed-prose manifest — the DRIFT corpus, both audiences > ⭐⭐ THE DRIFT CORPUS CARRIES FOUR SEEDS, and the tally is derived rather than described
+ FAIL  tests/property/dossierProseManifest.test.js > the two controls no one-audience manifest can see > ⭐ THE MIXED-POOL AUDIENCE ARM: the two faces differ only where a pool is mixed

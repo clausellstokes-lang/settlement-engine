@@ -165,7 +165,7 @@ describe('the warFaith corpus join is populated, or every claim below is free', 
     // 430 -> 433 at census-5b unit 3 (c00b30eb6, R-L): DS-WAR-1 warExhaustion rested and DS-FTH-3's
     // two uncontested/secure pools each gain one crisis-safe twin (measured 430 at its parent).
     // 433 -> 443 at W4 PEOPLE (2026-11-07): DS-FTH-4's five FLAG pools, two variants each.
-    expect(pools.reduce((n, pool) => n + pool.length, 0)).toBe(443);
+    expect(pools.reduce((n, pool) => n + pool.length, 0)).toBe(449); // W2-WRITE FTH-4 heresy without a church (2026-11-13): 443 -> 449
   });
 
   test('the producer-minted fixtures really carry the producer shapes', () => {

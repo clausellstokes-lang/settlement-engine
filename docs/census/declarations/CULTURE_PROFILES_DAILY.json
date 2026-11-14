@@ -424,8 +424,10 @@
     },
     {
      "lineId": "CULTURE_PROFILES.latin.foodways[1]",
-     "text": "Public ovens, neighborhood vendors, and shared dining customs make food distribution visibly civic.",
-     "needs": [],
+     "text": "Public ovens, market vendors, and shared dining customs make food distribution visibly civic.",
+     "needs": [
+      "market"
+     ],
      "excludes": [],
      "colour": false,
      "stop": [
@@ -675,7 +677,7 @@
     },
     {
      "lineId": "CULTURE_PROFILES.celtic.foodways[1]",
-     "text": "Herding and mixed farming produce a strongly seasonal food calendar.",
+     "text": "Herds and field grain set a strongly seasonal food calendar.",
      "needs": [],
      "excludes": [],
      "colour": false,
@@ -1748,13 +1750,11 @@
     },
     {
      "lineId": "CULTURE_PROFILES.east_asian.foodways[1]",
-     "text": "Shared waterworks, fermentation, and intensive garden production structure urban food supply.",
+     "text": "Fermentation, careful use of water, and intensive garden plots shape the food supply.",
      "needs": [],
      "excludes": [],
      "colour": false,
-     "stop": [
-      "tier (urban food supply)"
-     ]
+     "stop": []
     }
    ],
    "rendered": false
@@ -2689,7 +2689,8 @@
      "lineId": "CULTURE_PROFILES.greek.builtForm[0]",
      "text": "Stone and plaster courtyard houses rise around an agora, stoas, shrines, and steep connecting lanes.",
      "needs": [
-      "market"
+      "market",
+      "tier: ≥ town"
      ],
      "excludes": [],
      "colour": false,
@@ -2700,7 +2701,8 @@
      "lineId": "CULTURE_PROFILES.greek.builtForm[1]",
      "text": "A fortified high precinct overlooks the market, theater, and workshops; where geography permits, it also overlooks a working harbor.",
      "needs": [
-      "market"
+      "market",
+      "tier: ≥ town"
      ],
      "excludes": [],
      "colour": false,

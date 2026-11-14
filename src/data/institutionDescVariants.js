@@ -35,8 +35,8 @@ const PAIRS = [
     "Grain, roots, and preserves kept in a common underground store. The settlement's guard against a bad year.",
   ],
   [
-    "Nets, traps, and racks for drying. The thorp lives by the water and cannot be parted from it.",
-    "Its livelihood is the water itself. The nets, the traps, the drying racks are the whole of the economy.",
+    "Nets, traps, and racks for drying. Whoever fishes the water here keeps them.",
+    "The nets, the traps, the drying racks: what the water gives, the fishing households take.",
   ],
   [
     "The flock is held and worked in common, and the thorp keeps time by the grazing calendar.",
@@ -107,12 +107,12 @@ const PAIRS = [
     "Open-field farming, parcelled into strips.",
   ],
   [
-    "Open pasture the village grazes in common.",
+    "Open pasture the hamlet grazes in common.",
     "Common ground where the settlement's beasts are pastured together.",
   ],
   [
     "A crude landing hung with racks for drying and salting the catch. Near water, it is the chief source of protein.",
-    "A rough jetty and its salting-and-drying racks. Where there is water, the fish are what the hamlet lives on.",
+    "A rough jetty and its salting-and-drying racks, where the hamlet's catch is landed and cured.",
   ],
   [
     "Keeps flocks of sheep for wool and mutton, driving them by season between the low winter pastures and the high summer grazing. He is a mainstay of the cloth trade.",
@@ -139,8 +139,8 @@ const PAIRS = [
     "Iron ore, coal, or stone dug from a shallow pit or shaft. The labour falls to the poorest, and it is perilous, grimy, and needed all the same.",
   ],
   [
-    "Cuts and dresses building stone into blocks. A gang of quarrymen work it with picks and wedges. Slow going, but the only source of proper building material there is.",
-    "Quarrymen with picks and wedges cut and dress the stone for building. It is slow, and it is the sole way to come by real building material.",
+    "A stone quarry, its blocks cut and dressed by a gang of quarrymen with picks and wedges. Slow going, and the only proper building material the place has had.",
+    "A quarry opened with picks and wedges, its stone cut and dressed for building by hand. Slow work, and the only real building stone the place has known.",
   ],
   [
     "Boils or dries naturally saline brine, yielding the raw salt that preserves food. It works only where salt flats, springs, or other workable deposits provide a local supply.",
@@ -291,12 +291,12 @@ const PAIRS = [
     "Ore, coal, or stone is won from a shaft or open cut here. The capital and organisation are more than a thorp could carry, but a village near the seams manages it, working its poorest hands.",
   ],
   [
-    "Building stone cut in an ordered working. A village sitting on good quarry ground can furnish half a region's building, and the quarry master is well aware of the fact.",
-    "The methodical winning of building stone. Set on the right ground, a village can meet half a region's need for it. Something the quarry master never forgets.",
+    "A building-stone quarry laid out in an ordered working. A village sitting on good quarry ground can furnish half a region's building, and the quarry master is well aware of the fact.",
+    "A quarry for building stone, opened with method. Set on the right ground, a village can meet half a region's need for it. Something the quarry master never forgets.",
   ],
   [
-    "Evaporation pans and brine-works turn the local saline source into salt. By weight, it is the settlement's most traded product, and no household does without it.",
-    "Salt is won from local brine in broad evaporation pans. It is the settlement's most-traded good by weight and a necessity in every home.",
+    "Evaporation pans and brine-works turn the local saline source into salt, and no household does without it.",
+    "Salt is won from local brine in broad evaporation pans. It is a necessity in every home.",
   ],
   [
     "Musters hunting parties across the lands about the settlement, selling venison, pelts, and game at market. It is also where the wilderness is known best: which trails are safe and which are not.",
@@ -331,8 +331,8 @@ const PAIRS = [
     "Maintains stabling and trains horses for the saddle and the traces. Indispensable wherever a road runs through.",
   ],
   [
-    "A flat-bottomed ferry over the river, the crossing rights held in one family for generations. Anyone unwilling to walk the distance to the nearest bridge depends on it.",
-    "The river is crossed by a flat-bottomed ferry, worked by a family that has held the right to it for generations. Without it, the nearest bridge is a long walk off.",
+    "A flat-bottomed ferry over the river, the crossing rights held in one family for generations. Carts, beasts and walkers wait their turn on the bank.",
+    "The river is crossed here by a flat-bottomed ferry, worked by a family that has held the right to it for generations.",
   ],
   [
     "Builds and mends flat-bottomed river craft: barges, punts, ferries, fishing boats. The work turns on river-boat knowledge: shallow draft, a hull that flexes, parts made to be replaced.",
@@ -363,8 +363,8 @@ const PAIRS = [
     "Casks for storage and carriage, all his making.",
   ],
   [
-    "Herbal medicines, poultices, and everyday remedies for sale. Not to be confused with the alchemist. Nothing magical here, no acid flasks. The proprietor knows the roots that break a fever and the mushrooms that end a life. Herbalism supplies on hand.",
-    "Sells poultices, common cures, and medicines drawn from herbs. Where the alchemist deals in magical compounds and acid, this trade does not. Its keeper can name which root treats fever and which mushroom kills, and keeps herbalism supplies in stock.",
+    "Herbal medicines, poultices, and everyday remedies for sale. Nothing magical here, no acid flasks. The proprietor knows the roots that break a fever and the mushrooms that end a life. Herbalism supplies on hand.",
+    "Sells poultices, common cures, and medicines drawn from herbs. Magical compounds and acid are no part of this trade. Its keeper can name which root treats fever and which mushroom kills, and keeps herbalism supplies in stock.",
   ],
   [
     "Bows, crossbows, and arrows all made here. Finished ammunition sells off the shelf, and custom bows are made to order. Any adventurer with an empty quiver comes here first.",
@@ -375,7 +375,7 @@ const PAIRS = [
     "Powered by water or ox, the saw reduces logs to planks and beams, widening the settlement's output of building timber and furniture.",
   ],
   [
-    "Turns malted grain into ale by the barrel. After the bakers, no trade eats more grain. It supplies both alehouses and homes.",
+    "Turns malted grain into ale by the barrel. Only bread takes more of the grain. It supplies both alehouses and homes.",
     "Makes ale in bulk from malted grain. The second-greatest draw on the grain supply after bread. Alehouses and households alike are stocked from here.",
   ],
   [
@@ -511,12 +511,12 @@ const PAIRS = [
     "Charcoal from woodland kilns feeds the smelters, the smithies, and the bake ovens. At this pace of metalwork, a forest lasts a generation.",
   ],
   [
-    "A shaft or adit worked by hired crews with winding gear and ore carts. Where the deposits go deep, the mine is why the place grew at all.",
-    "Hired crews, winding gear, and ore carts work a shaft into the deposits. Where they run deep, the settlement grew around the mine.",
+    "A mine of shafts and adits, with winding gear and ore carts at the head. Where the deposits ran deep, the mine is why the place grew at all.",
+    "A shaft driven into the deposits, with winding gear and ore carts at the pithead. Where they ran deep, the settlement grew around the mine.",
   ],
   [
-    "A quarry with yards of dressed stone and its own masons. Half the region's walls and churches were cut here.",
-    "Masons dress the stone in yards beside the working face. The quarry supplies walls and churches across half the region.",
+    "A stone quarry, with yards beside it for dressing the stone. Half the region's building stone was cut here.",
+    "Yards for dressing stone stand beside the quarry face. Building stone from here has gone to every part of the region.",
   ],
   [
     "Held by royal charter. The heart of the town's trade.",
@@ -567,8 +567,8 @@ const PAIRS = [
     "A district given to stables, horse-trade, and the farrier's craft, for any merchant, soldier, or traveller needing a new mount.",
   ],
   [
-    "Ordinary beasts only: horses, dogs, falcons.",
-    "Horses, dogs, and falcons. Nothing more exotic.",
+    "Horses, dogs and falcons, broken and trained to order.",
+    "Horses, dogs, and falcons, each trained for its work.",
   ],
   [
     "Keeps relay horses at the coaching inn for fast message riders. Letters and small parcels move far faster than anyone on foot.",
@@ -611,8 +611,8 @@ const PAIRS = [
     "A public sale of the enslaved: war captives, debtors, convicts, and the trafficked. In places where slavery is lawful, it stands as ordinary commercial infrastructure.",
   ],
   [
-    "A formal house for the sale of costly goods: estates, ships, livestock, art, and now and then persons. It takes a premium from buyer and seller both.",
-    "The recognised venue for high-value lots, be they estates, ships, livestock, art, or on occasion persons. Both buyer and seller pay its premium.",
+    "A formal house for the sale of costly goods: estates, ships, livestock, art, and now and then a whole household's goods. It takes a premium from buyer and seller both.",
+    "The recognised venue for high-value lots, be they estates, ships, livestock, art, or on occasion a debtor's whole house. Both buyer and seller pay its premium.",
   ],
   [
     "Tests the purity of precious metals brought in. Infrastructure without which banking and minting cannot work. It charges by the assay.",
@@ -747,8 +747,8 @@ const PAIRS = [
     "Abandoned babies and young children are received here and given plain care until apprenticeship, a family placement, or a childhood spent in the house itself. Generally a church foundation. The wheel in the wall admits a child by night, no name asked.",
   ],
   [
-    "Senior druids who govern how their circle deals with the city. They may keep a grove hidden beneath the streets, hold the line between the city's spread and the wild, or advise its rulers on the land. Found where a city has come to terms with the wild.",
-    "A council of elder druids charged with their circle's standing in the city: sometimes tending a concealed grove below the streets, sometimes mediating between expansion and wild ground, sometimes counselling those in power on ecological matters. It arises only in cities at peace with the wild.",
+    "Senior druids who govern how their circle deals with the town. They may keep a grove hidden beneath the streets, hold the line between the town's spread and the wild, or advise its rulers on the land.",
+    "A council of elder druids charged with their circle's standing in the town: sometimes tending a concealed grove below the streets, sometimes mediating between expansion and wild ground, sometimes counselling those in power on ecological matters.",
   ],
   [
     "A man of the lord's choosing governs, and noble authority overrides whatever the town was accustomed to.",
@@ -1079,8 +1079,8 @@ const PAIRS = [
     "A citizens' assembly wields the formal authority, its eligible voters debating and settling the larger ordinances and the appointments to office.",
   ],
   [
-    "A royal governor or viceroy administers the city directly for the crown. The standing is high, and so is the scrutiny.",
-    "The crown governs here at first hand, through a royal governor or viceroy. Great prestige, and no less watchfulness.",
+    "The crown governs the city from here, in person or through a royal governor. The standing is high, and so is the scrutiny.",
+    "The crown governs here at first hand, whether the monarch sits in it or a viceroy does. Great prestige, and no less watchfulness.",
   ],
   [
     "The official announcer, reading proclamations, market prices, and news in the market squares at set hours, paid by the city or a guild.",
@@ -1179,8 +1179,8 @@ const PAIRS = [
     "Illicit wares, bought and sold in hidden places.",
   ],
   [
-    "A lone hand or small cell, in a place too small to keep an assassins guild. Work comes through criminal go-betweens: less dependable, but deniable.",
-    "One killer, or a handful, in a place too small to keep an assassins guild. Contracts arrive by way of criminal intermediaries, less reliable and for that reason harder to trace back.",
+    "A lone hand or small cell with no assassins guild behind it. Work comes through criminal go-betweens: less dependable, but deniable.",
+    "One killer, or a handful, answering to no assassins guild. Contracts arrive by way of criminal intermediaries, less reliable and for that reason harder to trace back.",
   ],
   [
     "It seizes free persons and slips them into slavery on forged provenance papers. No lawful market stands here to absorb them, so it keeps its own holding and its own routes.",
@@ -1239,8 +1239,8 @@ const PAIRS = [
     "A guild for every trade imaginable, well past a hundred distinct crafts in all.",
   ],
   [
-    "Houses of worship in the hundreds, across every district. No neighbourhood is without the faith.",
-    "Hundreds of quarters, one house of worship to each, so that faith runs through every part of the city.",
+    "Parishes by the score, anywhere from fifty to past a hundred. No street of the city is far from the faith.",
+    "Every quarter keeps its own parish, so that faith runs through every part of the city.",
   ],
   [
     "Burial has left the walls: grounds beyond every gate, each with its road and its gatekeepers, and a trade in plots the revenue office keeps an eye on.",
@@ -1896,6 +1896,219 @@ export const DESC_VARIANT_SIBLINGS = Object.freeze({
     Object.freeze({ text: 'An overnight stop behind walls, offering stabling, a well, and basic supplies to caravans and long-haul travellers. Where the inn sees to comfort, this sees to the animals and the laden wagons.', needs: Object.freeze(['walls']) }),
     Object.freeze({ text: 'An overnight stop inside a fenced yard, offering stabling, a well, and basic supplies to caravans and long-haul travellers. Where the inn sees to comfort, this sees to the animals and the laden wagons.', twinOf: 'An overnight stop behind walls, offering stabling, a well, and basic supplies to caravans and long-haul travellers. Where the inn sees to comfort, this sees to the animals and the laden wagons.', excludes: Object.freeze(['walls']) }),
   ]),
+  // W2-FIX-DATA (2026-11-13; the REVIEW-W2B cold list): each line the cold read found false declares what makes it
+  // false, and its twin, in the same voice, says what is true in that case (VETOABLE wording, the owner's).
+  "Converts barley into malt for brewing. Small operation supplying local alehouses. Requires grain surplus.": Object.freeze([
+    Object.freeze({ text: "Converts barley into malt for brewing. Small operation supplying local alehouses. Requires grain surplus.", needs: Object.freeze(["institution: tavern"]) }),
+    Object.freeze({ text: "Converts barley into malt for brewing. A small operation; the households brew their own ale from it. Requires grain surplus.", twinOf: "Converts barley into malt for brewing. Small operation supplying local alehouses. Requires grain surplus.", excludes: Object.freeze(["institution: tavern"]) }),
+  ]),
+  "Turns barley into malt for the brewers. A small concern feeding the local alehouses, and one that only runs when grain is in surplus.": Object.freeze([
+    Object.freeze({ text: "Turns barley into malt for the brewers. A small concern feeding the local alehouses, and one that only runs when grain is in surplus.", needs: Object.freeze(["institution: tavern"]) }),
+    Object.freeze({ text: "Turns barley into malt for the households that brew at home. A small concern, and one that only runs when grain is in surplus.", twinOf: "Turns barley into malt for the brewers. A small concern feeding the local alehouses, and one that only runs when grain is in surplus.", excludes: Object.freeze(["institution: tavern"]) }),
+  ]),
+  "Malts barley for brewing on a modest scale, supplying the alehouses nearby. It needs grain to spare before it can work at all.": Object.freeze([
+    Object.freeze({ text: "Malts barley for brewing on a modest scale, supplying the alehouses nearby. It needs grain to spare before it can work at all.", needs: Object.freeze(["institution: tavern"]) }),
+    Object.freeze({ text: "Malts barley on a modest scale for brewing at home. It needs grain to spare before it can work at all.", twinOf: "Malts barley for brewing on a modest scale, supplying the alehouses nearby. It needs grain to spare before it can work at all.", excludes: Object.freeze(["institution: tavern"]) }),
+  ]),
+  // W2-FIX-DATA-8 (2026-11-14; HANDBACK-6 section 8 row 3, ROUND-3-CUT-INCREMENT ww-1415): the village brewer's three lines
+  // name the alehouses it supplies; each needs one on the roster, and its twin, in the same voice, supplies the households
+  // (VETOABLE wording, the owner's). The twins presume no alehouse either way (the Town watch's shape): the cascade adds
+  // an Ale house AFTER the description draw (r2r-village-24, -54: 2 of the census's 6 brewer villages with one), so a twin
+  // that excluded it would be false there by the final record.
+  "Converts malted grain to ale in quantity. The largest consumer of grain after bread. Supplies alehouses and households.": Object.freeze([
+    Object.freeze({ text: "Converts malted grain to ale in quantity. The largest consumer of grain after bread. Supplies alehouses and households.", needs: Object.freeze(["institution: tavern"]) }),
+    Object.freeze({ text: "Converts malted grain to ale in quantity. The largest consumer of grain after bread. Supplies the households.", twinOf: "Converts malted grain to ale in quantity. The largest consumer of grain after bread. Supplies alehouses and households." }),
+  ]),
+  "Turns malted grain into ale by the barrel. Only bread takes more of the grain. It supplies both alehouses and homes.": Object.freeze([
+    Object.freeze({ text: "Turns malted grain into ale by the barrel. Only bread takes more of the grain. It supplies both alehouses and homes.", needs: Object.freeze(["institution: tavern"]) }),
+    Object.freeze({ text: "Turns malted grain into ale by the barrel. Only bread takes more of the grain. It supplies the homes hereabouts.", twinOf: "Turns malted grain into ale by the barrel. Only bread takes more of the grain. It supplies both alehouses and homes." }),
+  ]),
+  "Makes ale in bulk from malted grain. The second-greatest draw on the grain supply after bread. Alehouses and households alike are stocked from here.": Object.freeze([
+    Object.freeze({ text: "Makes ale in bulk from malted grain. The second-greatest draw on the grain supply after bread. Alehouses and households alike are stocked from here.", needs: Object.freeze(["institution: tavern"]) }),
+    Object.freeze({ text: "Makes ale in bulk from malted grain. The second-greatest draw on the grain supply after bread. The households are stocked from here.", twinOf: "Makes ale in bulk from malted grain. The second-greatest draw on the grain supply after bread. Alehouses and households alike are stocked from here." }),
+  ]),
+  "Part-time guards. Night patrol and gate duty.": Object.freeze([
+    Object.freeze({ text: "Part-time guards. Night patrol and gate duty.", needs: Object.freeze(["gate"]) }),
+    Object.freeze({ text: "Part-time guards. Night patrols through the lanes.", twinOf: "Part-time guards. Night patrol and gate duty." }),
+  ]),
+  "Part-time guards who walk the night and hold the gates.": Object.freeze([
+    Object.freeze({ text: "Part-time guards who walk the night and hold the gates.", needs: Object.freeze(["gate"]) }),
+    Object.freeze({ text: "Part-time guards who walk the night and keep the peace.", twinOf: "Part-time guards who walk the night and hold the gates." }),
+  ]),
+  "Watchmen serving part-time. Night patrols and gate duty.": Object.freeze([
+    Object.freeze({ text: "Watchmen serving part-time. Night patrols and gate duty.", needs: Object.freeze(["gate"]) }),
+    Object.freeze({ text: "Men and women serving part-time, walking the night rounds.", twinOf: "Watchmen serving part-time. Night patrols and gate duty." }),
+  ]),
+  "Kiln crews in the surrounding woodland supply charcoal to the smelters, smiths, and bakers. Metalworking here burns through a forest a generation.": Object.freeze([
+    Object.freeze({ text: "Kiln crews in the surrounding woodland supply charcoal to the smelters, smiths, and bakers. Metalworking here burns through a forest a generation.", needs: Object.freeze(["terrain: forest"]) }),
+    Object.freeze({ text: "Turf-covered kilns burn wood slowly down to charcoal, the fuel that forge and oven need to run hot.", twinOf: "Kiln crews in the surrounding woodland supply charcoal to the smelters, smiths, and bakers. Metalworking here burns through a forest a generation.", excludes: Object.freeze(["terrain: forest"]) }),
+  ]),
+  "Crews tend kilns out in the woods and sell charcoal to smelters, smiths, and bakers. The metal trades here use up a forest a generation.": Object.freeze([
+    Object.freeze({ text: "Crews tend kilns out in the woods and sell charcoal to smelters, smiths, and bakers. The metal trades here use up a forest a generation.", needs: Object.freeze(["terrain: forest"]) }),
+    Object.freeze({ text: "Charcoal kilns, tended day and night while a burn lasts. What they make feeds the hottest fires in the settlement.", twinOf: "Crews tend kilns out in the woods and sell charcoal to smelters, smiths, and bakers. The metal trades here use up a forest a generation.", excludes: Object.freeze(["terrain: forest"]) }),
+  ]),
+  "Charcoal from woodland kilns feeds the smelters, the smithies, and the bake ovens. At this pace of metalwork, a forest lasts a generation.": Object.freeze([
+    Object.freeze({ text: "Charcoal from woodland kilns feeds the smelters, the smithies, and the bake ovens. At this pace of metalwork, a forest lasts a generation.", needs: Object.freeze(["terrain: forest"]) }),
+    Object.freeze({ text: "A collier's kilns, smoking under their turf, turning whatever wood can be had into charcoal for forge and oven.", twinOf: "Charcoal from woodland kilns feeds the smelters, the smithies, and the bake ovens. At this pace of metalwork, a forest lasts a generation.", excludes: Object.freeze(["terrain: forest"]) }),
+  ]),
+  "Operates kilns in the surrounding woodland, supplying fuel for smithing, baking, and heating. The settlement's most reliable fuel source when timber is abundant.": Object.freeze([
+    Object.freeze({ text: "Operates kilns in the surrounding woodland, supplying fuel for smithing, baking, and heating. The settlement's most reliable fuel source when timber is abundant.", needs: Object.freeze(["terrain: forest"]) }),
+    Object.freeze({ text: "Turf-covered kilns burn wood slowly down to charcoal, the fuel that forge and oven need to run hot.", twinOf: "Operates kilns in the surrounding woodland, supplying fuel for smithing, baking, and heating. The settlement's most reliable fuel source when timber is abundant.", excludes: Object.freeze(["terrain: forest"]) }),
+  ]),
+  "Works kilns out in the surrounding woods, producing the fuel for smiths, bakers, and hearths. Where timber runs plentiful, no fuel source is steadier.": Object.freeze([
+    Object.freeze({ text: "Works kilns out in the surrounding woods, producing the fuel for smiths, bakers, and hearths. Where timber runs plentiful, no fuel source is steadier.", needs: Object.freeze(["terrain: forest"]) }),
+    Object.freeze({ text: "Charcoal kilns, tended day and night while a burn lasts. What they make feeds the hottest fires in the settlement.", twinOf: "Works kilns out in the surrounding woods, producing the fuel for smiths, bakers, and hearths. Where timber runs plentiful, no fuel source is steadier.", excludes: Object.freeze(["terrain: forest"]) }),
+  ]),
+  "Tends charcoal kilns in the nearby woodland to feed the forge, the oven, and the fire. When timber is abundant, it is the settlement's surest supply of fuel.": Object.freeze([
+    Object.freeze({ text: "Tends charcoal kilns in the nearby woodland to feed the forge, the oven, and the fire. When timber is abundant, it is the settlement's surest supply of fuel.", needs: Object.freeze(["terrain: forest"]) }),
+    Object.freeze({ text: "A collier's kilns, smoking under their turf, turning whatever wood can be had into charcoal for forge and oven.", twinOf: "Tends charcoal kilns in the nearby woodland to feed the forge, the oven, and the fire. When timber is abundant, it is the settlement's surest supply of fuel.", excludes: Object.freeze(["terrain: forest"]) }),
+  ]),
+  "Operates kilns in nearby woodland. Supplies fuel for smithing and baking. Essential intermediate step between forest and forge.": Object.freeze([
+    Object.freeze({ text: "Operates kilns in nearby woodland. Supplies fuel for smithing and baking. Essential intermediate step between forest and forge.", needs: Object.freeze(["terrain: forest"]) }),
+    Object.freeze({ text: "Turf-covered kilns burn wood slowly down to charcoal, the fuel that forge and oven need to run hot.", twinOf: "Operates kilns in nearby woodland. Supplies fuel for smithing and baking. Essential intermediate step between forest and forge.", excludes: Object.freeze(["terrain: forest"]) }),
+  ]),
+  "Tends kilns out in the nearby woods, supplying the fuel that smiths and bakers burn. The necessary link between forest and forge.": Object.freeze([
+    Object.freeze({ text: "Tends kilns out in the nearby woods, supplying the fuel that smiths and bakers burn. The necessary link between forest and forge.", needs: Object.freeze(["terrain: forest"]) }),
+    Object.freeze({ text: "Charcoal kilns, tended day and night while a burn lasts. What they make feeds the hottest fires in the settlement.", twinOf: "Tends kilns out in the nearby woods, supplying the fuel that smiths and bakers burn. The necessary link between forest and forge.", excludes: Object.freeze(["terrain: forest"]) }),
+  ]),
+  "Works his kilns in the woodland close by, turning timber into the fuel for forge and oven. Without him nothing gets from the trees to the fire.": Object.freeze([
+    Object.freeze({ text: "Works his kilns in the woodland close by, turning timber into the fuel for forge and oven. Without him nothing gets from the trees to the fire.", needs: Object.freeze(["terrain: forest"]) }),
+    Object.freeze({ text: "A collier's kilns, smoking under their turf, turning whatever wood can be had into charcoal for forge and oven.", twinOf: "Works his kilns in the woodland close by, turning timber into the fuel for forge and oven. Without him nothing gets from the trees to the fire.", excludes: Object.freeze(["terrain: forest"]) }),
+  ]),
+  "Levies duties on goods entering and leaving via the port or main roads. Run by royal or municipal officials.": Object.freeze([
+    Object.freeze({ text: "Levies duties on goods entering and leaving via the port or main roads. Run by royal or municipal officials.", needs: Object.freeze(["institution: docks"]) }),
+    Object.freeze({ text: "Levies duties on goods entering and leaving by the main roads. Run by royal or municipal officials.", twinOf: "Levies duties on goods entering and leaving via the port or main roads. Run by royal or municipal officials.", excludes: Object.freeze(["institution: docks"]) }),
+  ]),
+  "Duties are taken here on goods passing through the port or the main roads. Royal or municipal officers run it.": Object.freeze([
+    Object.freeze({ text: "Duties are taken here on goods passing through the port or the main roads. Royal or municipal officers run it.", needs: Object.freeze(["institution: docks"]) }),
+    Object.freeze({ text: "Duties are taken here on goods passing along the main roads. Royal or municipal officers run it.", twinOf: "Duties are taken here on goods passing through the port or the main roads. Royal or municipal officers run it.", excludes: Object.freeze(["institution: docks"]) }),
+  ]),
+  "Levies charged on all trade in and out by road or harbour, collected by officials of crown or town.": Object.freeze([
+    Object.freeze({ text: "Levies charged on all trade in and out by road or harbour, collected by officials of crown or town.", needs: Object.freeze(["institution: docks"]) }),
+    Object.freeze({ text: "Levies charged on all trade in and out by road, collected by officials of crown or town.", twinOf: "Levies charged on all trade in and out by road or harbour, collected by officials of crown or town.", excludes: Object.freeze(["institution: docks"]) }),
+  ]),
+  "Lends against pledged goods at high interest and asks no questions. The only credit open to labourers, journeymen, and anyone the banks turn away.": Object.freeze([
+    Object.freeze({ text: "Lends against pledged goods at high interest and asks no questions. The only credit open to labourers, journeymen, and anyone the banks turn away.", needs: Object.freeze(["institution: bank"]) }),
+    Object.freeze({ text: "Lends against pledged goods at high interest and asks no questions. For labourers and journeymen it is the only credit there is.", twinOf: "Lends against pledged goods at high interest and asks no questions. The only credit open to labourers, journeymen, and anyone the banks turn away.", excludes: Object.freeze(["institution: bank"]) }),
+  ]),
+  "Takes pledges and lends at steep interest, no questions asked. It is the only credit for labourers, journeymen, and whoever the banks refuse.": Object.freeze([
+    Object.freeze({ text: "Takes pledges and lends at steep interest, no questions asked. It is the only credit for labourers, journeymen, and whoever the banks refuse.", needs: Object.freeze(["institution: bank"]) }),
+    Object.freeze({ text: "Takes pledges and lends at steep interest, no questions asked. Labourers and journeymen have nowhere else to borrow.", twinOf: "Takes pledges and lends at steep interest, no questions asked. It is the only credit for labourers, journeymen, and whoever the banks refuse.", excludes: Object.freeze(["institution: bank"]) }),
+  ]),
+  "High-interest loans against pledged goods, with no questions. For labourers, journeymen, and anyone the banks will not serve, it is the only lender.": Object.freeze([
+    Object.freeze({ text: "High-interest loans against pledged goods, with no questions. For labourers, journeymen, and anyone the banks will not serve, it is the only lender.", needs: Object.freeze(["institution: bank"]) }),
+    Object.freeze({ text: "High-interest loans against pledged goods, with no questions. For labourers and journeymen it is the only lender going.", twinOf: "High-interest loans against pledged goods, with no questions. For labourers, journeymen, and anyone the banks will not serve, it is the only lender.", excludes: Object.freeze(["institution: bank"]) }),
+  ]),
+  "Communal grain storage. Buffers harvests, prevents famine.": Object.freeze([
+    Object.freeze({ text: "Communal grain storage. Buffers harvests, prevents famine.", excludes: Object.freeze(["crisis: famine"]) }),
+    Object.freeze({ text: "Communal grain storage, meant to carry the town through bad harvests. This year it has not been enough.", twinOf: "Communal grain storage. Buffers harvests, prevents famine.", crisis: Object.freeze(["famine"]) }),
+  ]),
+  "Shared grain stores that even out the harvests and hold off famine.": Object.freeze([
+    Object.freeze({ text: "Shared grain stores that even out the harvests and hold off famine.", excludes: Object.freeze(["crisis: famine"]) }),
+    Object.freeze({ text: "Shared grain stores, built to even out the harvests. The famine is drawing them down faster than any harvest could refill them.", twinOf: "Shared grain stores that even out the harvests and hold off famine.", crisis: Object.freeze(["famine"]) }),
+  ]),
+  "The old grounds inside the walls filled generations ago, so the dead are lifted once their term is up and their bones stacked in the charnel house to make room for the next. New ground has been bought outside the gates, and the carts that go out at dusk are a fixed part of the city's evening. Who is lifted and who is left where they lie is settled by what a family endowed.": Object.freeze([
+    Object.freeze({ text: "The old grounds inside the walls filled generations ago, so the dead are lifted once their term is up and their bones stacked in the charnel house to make room for the next. New ground has been bought outside the gates, and the carts that go out at dusk are a fixed part of the city's evening. Who is lifted and who is left where they lie is settled by what a family endowed.", needs: Object.freeze(["walls","gate"]), excludes: Object.freeze(["crisis: under_siege"]) }),
+    Object.freeze({ text: "The old grounds filled generations ago, so the dead are lifted once their term is up and their bones stacked in the charnel house to make room for the next. Since the siege closed the roads, no cart goes out to the new ground, and the newly dead wait in the charnel house. Who is lifted and who is left where they lie is settled by what a family endowed.", twinOf: "The old grounds inside the walls filled generations ago, so the dead are lifted once their term is up and their bones stacked in the charnel house to make room for the next. New ground has been bought outside the gates, and the carts that go out at dusk are a fixed part of the city's evening. Who is lifted and who is left where they lie is settled by what a family endowed.", crisis: Object.freeze(["under_siege"]) }),
+  ]),
+  "Carts go out at dusk to ground bought beyond the walls, and the charnel house holds what the old plots gave up. What a family endowed decides who is lifted and who is left.": Object.freeze([
+    Object.freeze({ text: "Carts go out at dusk to ground bought beyond the walls, and the charnel house holds what the old plots gave up. What a family endowed decides who is lifted and who is left.", needs: Object.freeze(["walls"]), excludes: Object.freeze(["crisis: under_siege"]) }),
+    Object.freeze({ text: "The charnel house holds what the old plots gave up, and with the roads cut it now holds the newly dead as well. What a family endowed decides who is lifted and who is left.", twinOf: "Carts go out at dusk to ground bought beyond the walls, and the charnel house holds what the old plots gave up. What a family endowed decides who is lifted and who is left.", crisis: Object.freeze(["under_siege"]) }),
+  ]),
+  "Organized sellsword companies. Major forces (hundreds to thousands).": Object.freeze([
+    Object.freeze({ text: "Organized sellsword companies. Major forces (hundreds to thousands).", needs: Object.freeze(["tier: = metropolis","mercenary"]) }),
+    Object.freeze({ text: "Organized sellsword companies. Real forces, a few score to a few hundred blades apiece.", twinOf: "Organized sellsword companies. Major forces (hundreds to thousands).", needs: Object.freeze(["mercenary"]) }),
+  ]),
+  "Sellsword companies under proper organisation, mustering hundreds to thousands.": Object.freeze([
+    Object.freeze({ text: "Sellsword companies under proper organisation, mustering hundreds to thousands.", needs: Object.freeze(["tier: = metropolis","mercenary"]) }),
+    Object.freeze({ text: "Sellsword companies under proper organisation, each mustering a few score blades, the largest some hundreds.", twinOf: "Sellsword companies under proper organisation, mustering hundreds to thousands.", needs: Object.freeze(["mercenary"]) }),
+  ]),
+  "Organised bands of hired blades. Major forces, hundreds to thousands strong.": Object.freeze([
+    Object.freeze({ text: "Organised bands of hired blades. Major forces, hundreds to thousands strong.", needs: Object.freeze(["tier: = metropolis","mercenary"]) }),
+    Object.freeze({ text: "Organised bands of hired blades, a few score to a few hundred strong.", twinOf: "Organised bands of hired blades. Major forces, hundreds to thousands strong.", needs: Object.freeze(["mercenary"]) }),
+  ]),
+  "A covered fish market under the market wardens. The morning's catch or the week's salted barrels, sold by weight and inspected for rot.": Object.freeze([
+    Object.freeze({ text: "A covered fish market under the market wardens. The morning's catch or the week's salted barrels, sold by weight and inspected for rot.", needs: Object.freeze(["navigable","market"]) }),
+    Object.freeze({ text: "A covered fish market under the market wardens. Salted, smoked and dried fish come in by cart, sold by weight and inspected for rot.", twinOf: "A covered fish market under the market wardens. The morning's catch or the week's salted barrels, sold by weight and inspected for rot.", needs: Object.freeze(["market"]), excludes: Object.freeze(["navigable"]) }),
+  ]),
+  "Covered stalls under the wardens' eye, selling the morning's catch or the week's salted barrels by weight, each checked for rot.": Object.freeze([
+    Object.freeze({ text: "Covered stalls under the wardens' eye, selling the morning's catch or the week's salted barrels by weight, each checked for rot.", needs: Object.freeze(["navigable","market"]) }),
+    Object.freeze({ text: "Covered stalls under the wardens' eye, selling salt fish and dried fish carted in by the barrel, each checked for rot.", twinOf: "Covered stalls under the wardens' eye, selling the morning's catch or the week's salted barrels by weight, each checked for rot.", needs: Object.freeze(["market"]), excludes: Object.freeze(["navigable"]) }),
+  ]),
+  "The market wardens keep a roofed fish market where fresh catch and salted barrels are weighed out and inspected before sale.": Object.freeze([
+    Object.freeze({ text: "The market wardens keep a roofed fish market where fresh catch and salted barrels are weighed out and inspected before sale.", needs: Object.freeze(["navigable","market"]) }),
+    Object.freeze({ text: "The market wardens keep a roofed fish market where carted barrels of salt fish are weighed out and inspected before sale.", twinOf: "The market wardens keep a roofed fish market where fresh catch and salted barrels are weighed out and inspected before sale.", needs: Object.freeze(["market"]), excludes: Object.freeze(["navigable"]) }),
+  ]),
+  // W2-FIX-DATA-4 (2026-11-13; REVIEW-W2A-3 #502, #508): the river's boatyard and ferry stand in coastal ports with no river (the catalogue admits them by a port route); each text that names the river declares it, and its twin speaks of the water. VETOABLE wording (the owner's).
+  "Builds and repairs flat-bottomed river craft: barges, punts, ferries, fishing boats. Specialist knowledge of river construction: shallow draft, flexible hull, replaceable parts.": Object.freeze([
+    Object.freeze({ text: "Builds and repairs flat-bottomed river craft: barges, punts, ferries, fishing boats. Specialist knowledge of river construction: shallow draft, flexible hull, replaceable parts.", needs: Object.freeze(["river"]) }),
+    Object.freeze({ text: "Builds and repairs flat-bottomed craft for shallow water: punts, ferries, fishing boats. Specialist knowledge: shallow draft, flexible hull, replaceable parts.", twinOf: "Builds and repairs flat-bottomed river craft: barges, punts, ferries, fishing boats. Specialist knowledge of river construction: shallow draft, flexible hull, replaceable parts.", excludes: Object.freeze(["river"]) }),
+  ]),
+  "Builds and mends flat-bottomed river craft: barges, punts, ferries, fishing boats. The work turns on river-boat knowledge: shallow draft, a hull that flexes, parts made to be replaced.": Object.freeze([
+    Object.freeze({ text: "Builds and mends flat-bottomed river craft: barges, punts, ferries, fishing boats. The work turns on river-boat knowledge: shallow draft, a hull that flexes, parts made to be replaced.", needs: Object.freeze(["river"]) }),
+    Object.freeze({ text: "Builds and mends flat-bottomed boats for shallow water: punts, ferries, fishing craft. The work turns on a shallow draft, a hull that flexes, and parts made to be replaced.", twinOf: "Builds and mends flat-bottomed river craft: barges, punts, ferries, fishing boats. The work turns on river-boat knowledge: shallow draft, a hull that flexes, parts made to be replaced.", excludes: Object.freeze(["river"]) }),
+  ]),
+  "River boats, all flat-bottomed, made and repaired here: barges, punts, ferries, and fishing craft. It takes a specialist's hand. Shallow in the draft, supple in the hull, and built so parts can be swapped out.": Object.freeze([
+    Object.freeze({ text: "River boats, all flat-bottomed, made and repaired here: barges, punts, ferries, and fishing craft. It takes a specialist's hand. Shallow in the draft, supple in the hull, and built so parts can be swapped out.", needs: Object.freeze(["river"]) }),
+    Object.freeze({ text: "Shallow-water boats, all flat-bottomed, made and repaired here: punts, ferries, and fishing craft. It takes a specialist's hand. Shallow in the draft, supple in the hull, and built so parts can be swapped out.", twinOf: "River boats, all flat-bottomed, made and repaired here: barges, punts, ferries, and fishing craft. It takes a specialist's hand. Shallow in the draft, supple in the hull, and built so parts can be swapped out.", excludes: Object.freeze(["river"]) }),
+  ]),
+  "A flat-bottomed ferry crossing the river. The ferryman's family has held the crossing rights for generations, and every crossing pays the family its fare.": Object.freeze([
+    Object.freeze({ text: "A flat-bottomed ferry crossing the river. The ferryman's family has held the crossing rights for generations, and every crossing pays the family its fare.", needs: Object.freeze(["river"]) }),
+    Object.freeze({ text: "A flat-bottomed ferry across the water. The ferryman's family has held the crossing rights for generations, and every crossing pays the family its fare.", twinOf: "A flat-bottomed ferry crossing the river. The ferryman's family has held the crossing rights for generations, and every crossing pays the family its fare.", excludes: Object.freeze(["river"]) }),
+  ]),
+  "A flat-bottomed ferry over the river, the crossing rights held in one family for generations. Carts, beasts and walkers wait their turn on the bank.": Object.freeze([
+    Object.freeze({ text: "A flat-bottomed ferry over the river, the crossing rights held in one family for generations. Carts, beasts and walkers wait their turn on the bank.", needs: Object.freeze(["river"]) }),
+    Object.freeze({ text: "A flat-bottomed ferry over the water, the crossing rights held in one family for generations. Carts, beasts and walkers wait their turn at the landing.", twinOf: "A flat-bottomed ferry over the river, the crossing rights held in one family for generations. Carts, beasts and walkers wait their turn on the bank.", excludes: Object.freeze(["river"]) }),
+  ]),
+  "The river is crossed here by a flat-bottomed ferry, worked by a family that has held the right to it for generations.": Object.freeze([
+    Object.freeze({ text: "The river is crossed here by a flat-bottomed ferry, worked by a family that has held the right to it for generations.", needs: Object.freeze(["river"]) }),
+    Object.freeze({ text: "The water is crossed here by a flat-bottomed ferry, worked by a family that has held the right to it for generations.", twinOf: "The river is crossed here by a flat-bottomed ferry, worked by a family that has held the right to it for generations.", excludes: Object.freeze(["river"]) }),
+  ]),
+  // W2-FIX-DATA-5 (2026-11-13; REVIEW-W2A-3 #973, #238; the cell of ROUND-3-CUT-INCREMENT ww-494): the Annual fair's merchants
+  // and the toll bridge's steady fees under a siege that cuts every road. Each text declares the siege off; its twin says
+  // the roads are held. VETOABLE wording (the owner's).
+  "Regional merchants. Luxury goods available.": Object.freeze([
+    Object.freeze({ text: "Regional merchants. Luxury goods available.", excludes: Object.freeze(["crisis: under_siege"]) }),
+    Object.freeze({ text: "A yearly fair for regional merchants. None can reach it while the roads are held.", twinOf: "Regional merchants. Luxury goods available.", crisis: Object.freeze(["under_siege"]) }),
+  ]),
+  "Merchants from across the region, and luxuries to be had.": Object.freeze([
+    Object.freeze({ text: "Merchants from across the region, and luxuries to be had.", excludes: Object.freeze(["crisis: under_siege"]) }),
+    Object.freeze({ text: "A yearly gathering of the region's merchants, cut off while the siege holds the roads.", twinOf: "Merchants from across the region, and luxuries to be had.", crisis: Object.freeze(["under_siege"]) }),
+  ]),
+  "A yearly draw for regional traders, with fine goods on offer.": Object.freeze([
+    Object.freeze({ text: "A yearly draw for regional traders, with fine goods on offer.", excludes: Object.freeze(["crisis: under_siege"]) }),
+    Object.freeze({ text: "A yearly draw for regional traders, though none can come while the roads are held.", twinOf: "A yearly draw for regional traders, with fine goods on offer.", crisis: Object.freeze(["under_siege"]) }),
+  ]),
+  "A bridge with a toll house. The keeper collects passage fees and performs basic maintenance. Minor but steady revenue.": Object.freeze([
+    Object.freeze({ text: "A bridge with a toll house. The keeper collects passage fees and performs basic maintenance. Minor but steady revenue.", excludes: Object.freeze(["crisis: under_siege"]) }),
+    Object.freeze({ text: "A bridge with a toll house. The keeper collects passage fees and performs basic maintenance. With the roads held, no one crosses and nothing is taken.", twinOf: "A bridge with a toll house. The keeper collects passage fees and performs basic maintenance. Minor but steady revenue.", crisis: Object.freeze(["under_siege"]) }),
+  ]),
+  "A bridge with a toll house upon it. The keeper takes the passage fees and sees to simple upkeep. The income is small but never fails.": Object.freeze([
+    Object.freeze({ text: "A bridge with a toll house upon it. The keeper takes the passage fees and sees to simple upkeep. The income is small but never fails.", excludes: Object.freeze(["crisis: under_siege"]) }),
+    Object.freeze({ text: "A bridge with a toll house upon it. The keeper takes the passage fees and sees to simple upkeep, though no one has crossed since the roads were cut.", twinOf: "A bridge with a toll house upon it. The keeper takes the passage fees and sees to simple upkeep. The income is small but never fails.", crisis: Object.freeze(["under_siege"]) }),
+  ]),
+  "A toll house guards this bridge; its keeper gathers the crossing fees and handles the basic repairs. Modest revenue, but steady.": Object.freeze([
+    Object.freeze({ text: "A toll house guards this bridge; its keeper gathers the crossing fees and handles the basic repairs. Modest revenue, but steady.", excludes: Object.freeze(["crisis: under_siege"]) }),
+    Object.freeze({ text: "A toll house guards this bridge; its keeper gathers the crossing fees and handles the basic repairs. Since the siege closed the roads, there are none to gather.", twinOf: "A toll house guards this bridge; its keeper gathers the crossing fees and handles the basic repairs. Modest revenue, but steady.", crisis: Object.freeze(["under_siege"]) }),
+  ]),
+  // W2-FIX-DATA-5 (2026-11-13; ROUND-3-CUT #17): the thorp's burial ground says no clergy is near enough to speak, in a thorp
+  // whose people go to a neighbour's parish church ("Access to parish church", whose Last rites the parish priest comes to say).
+  // Each such text declares the faith reading's access answer (`church access`, faithReading.js :: accessOnly) on its excludes
+  // side, and its twin says the words wait for a priest when one can be fetched in time. The twin is true whether or not
+  // the access survives the roster's later trim (it does not in about a quarter of these thorps): it claims no priest
+  // near, and no want of one. VETOABLE wording (the owner's).
+  "A corner of the holding left out of the plough, banked with turf and marked with fieldstones. No clergy lives near enough to speak over anyone, so the words are said by whoever knew the dead best. The oldest markers have lost their names to the weather and are kept clear anyway.": Object.freeze([
+    Object.freeze({ text: "A corner of the holding left out of the plough, banked with turf and marked with fieldstones. No clergy lives near enough to speak over anyone, so the words are said by whoever knew the dead best. The oldest markers have lost their names to the weather and are kept clear anyway.", excludes: Object.freeze(["church access"]) }),
+    Object.freeze({ text: "A corner of the holding left out of the plough, banked with turf and marked with fieldstones. A priest says the words when one can be brought in time; when one cannot, whoever knew the dead best says them. The oldest markers have lost their names to the weather and are kept clear anyway.", twinOf: "A corner of the holding left out of the plough, banked with turf and marked with fieldstones. No clergy lives near enough to speak over anyone, so the words are said by whoever knew the dead best. The oldest markers have lost their names to the weather and are kept clear anyway.", needs: Object.freeze(["church access"]) }),
+  ]),
+  "A turf-banked corner of the holding, kept out of the plough and marked with fieldstones. No clergy is near enough to speak, so the words fall to whoever knew the dead best.": Object.freeze([
+    Object.freeze({ text: "A turf-banked corner of the holding, kept out of the plough and marked with fieldstones. No clergy is near enough to speak, so the words fall to whoever knew the dead best.", excludes: Object.freeze(["church access"]) }),
+    Object.freeze({ text: "A turf-banked corner of the holding, kept out of the plough and marked with fieldstones. A priest speaks when one can be fetched in time; otherwise the words fall to whoever knew the dead best.", twinOf: "A turf-banked corner of the holding, kept out of the plough and marked with fieldstones. No clergy is near enough to speak, so the words fall to whoever knew the dead best.", needs: Object.freeze(["church access"]) }),
+  ]),
+  "Fieldstones on a low bank at the edge of the ploughland. The rites are said by neighbours because there is nobody else to say them, and the weathered markers are kept clear regardless.": Object.freeze([
+    Object.freeze({ text: "Fieldstones on a low bank at the edge of the ploughland. The rites are said by neighbours because there is nobody else to say them, and the weathered markers are kept clear regardless.", excludes: Object.freeze(["church access"]) }),
+    Object.freeze({ text: "Fieldstones on a low bank at the edge of the ploughland. The rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless.", twinOf: "Fieldstones on a low bank at the edge of the ploughland. The rites are said by neighbours because there is nobody else to say them, and the weathered markers are kept clear regardless.", needs: Object.freeze(["church access"]) }),
+  ]),
 });
 
 /**
@@ -1913,9 +2126,9 @@ export const DESC_VARIANT_SIBLINGS = Object.freeze({
  * GATE, which the cascade can add after the description draw (4 of 1,525 measured births).
  */
 export const DESC_VARIANT_DECLARATIONS = Object.freeze({
-  "A rough jetty and its salting-and-drying racks. Where there is water, the fish are what the hamlet lives on.": Object.freeze({ needs: Object.freeze(["tier: ≤ hamlet"]) }), // hamlet|Economy|Fisher's landing#1
-  "Tends kilns out in the nearby woods, supplying the fuel that smiths and bakers burn. The necessary link between forest and forge.": Object.freeze({ needs: Object.freeze(["terrain: forest"]) }), // hamlet|Economy|Charcoal burner#0
-  "Works his kilns in the woodland close by, turning timber into the fuel for forge and oven. Without him nothing gets from the trees to the fire.": Object.freeze({ needs: Object.freeze(["terrain: forest"]) }), // hamlet|Economy|Charcoal burner#1
+  "A rough jetty and its salting-and-drying racks, where the hamlet's catch is landed and cured.": Object.freeze({ needs: Object.freeze(["tier: ≤ hamlet"]) }), // hamlet|Economy|Fisher's landing#1
+  "Tends kilns out in the nearby woods, supplying the fuel that smiths and bakers burn. The necessary link between forest and forge.": Object.freeze({ needs: Object.freeze(["terrain: forest"]) }), // W2-FIX-DATA (REVIEW-W2B cold list)
+  "Works his kilns in the woodland close by, turning timber into the fuel for forge and oven. Without him nothing gets from the trees to the fire.": Object.freeze({ needs: Object.freeze(["terrain: forest"]) }), // W2-FIX-DATA (REVIEW-W2B cold list)
   "A plain hall held under a regional adventurers' charter. It posts bounties, houses monster hunters, and takes up the local defence no garrison is here to keep. You find them along dangerous frontiers.": Object.freeze({ excludes: Object.freeze(["garrison"]) }), // hamlet|Adventuring|Adventurers' charter hall#0
   "Chartered by the region's adventuring order and little more than a rough hall for it. Bounties go up on its board, monster hunters bed down inside, and with no garrison to call on it musters the defence. A frontier fixture where the country is dangerous.": Object.freeze({ excludes: Object.freeze(["garrison"]) }), // hamlet|Adventuring|Adventurers' charter hall#1
   "Goods route through the hamlet to slip past the toll roads and customs posts. It is paid for the service in kind, and glad of it.": Object.freeze({ needs: Object.freeze(["tier: ≤ hamlet"]) }), // hamlet|Criminal|Smuggling waypoint#0
@@ -1925,16 +2138,16 @@ export const DESC_VARIANT_DECLARATIONS = Object.freeze({
   "Runs cattle or goats for their milk, butter, and soft cheese. Vital protein and fat when the grain runs thin. What isn't used goes to the weekly market.": Object.freeze({ needs: Object.freeze(["market"]) }), // village|Economy|Dairy farmer#0
   "Keeps a herd of cattle or goats, yielding milk, butter, and soft cheese; in the lean grain months these are the settlement's protein and fat. The surplus is sold at the weekly market.": Object.freeze({ needs: Object.freeze(["market"]) }), // village|Economy|Dairy farmer#1
   "Catches wildfowl (using snares, nets, and trained birds) to stock the market with duck, goose, and pigeon.": Object.freeze({ needs: Object.freeze(["market"]) }), // village|Economy|Wildfowler#1
-  "Works kilns out in the surrounding woods, producing the fuel for smiths, bakers, and hearths. Where timber runs plentiful, no fuel source is steadier.": Object.freeze({ needs: Object.freeze(["terrain: forest"]) }), // village|Economy|Charcoal burner#0
-  "Tends charcoal kilns in the nearby woodland to feed the forge, the oven, and the fire. When timber is abundant, it is the settlement's surest supply of fuel.": Object.freeze({ needs: Object.freeze(["terrain: forest"]) }), // village|Economy|Charcoal burner#1
-  "A flat-bottomed ferry over the river, the crossing rights held in one family for generations. Anyone unwilling to walk the distance to the nearest bridge depends on it.": Object.freeze({ needs: Object.freeze(["river"]) }), // village|Economy|River ferry#0
-  "The river is crossed by a flat-bottomed ferry, worked by a family that has held the right to it for generations. Without it, the nearest bridge is a long walk off.": Object.freeze({ needs: Object.freeze(["river"]) }), // village|Economy|River ferry#1
+  "Works kilns out in the surrounding woods, producing the fuel for smiths, bakers, and hearths. Where timber runs plentiful, no fuel source is steadier.": Object.freeze({ needs: Object.freeze(["terrain: forest"]) }), // W2-FIX-DATA (REVIEW-W2B cold list)
+  "Tends charcoal kilns in the nearby woodland to feed the forge, the oven, and the fire. When timber is abundant, it is the settlement's surest supply of fuel.": Object.freeze({ needs: Object.freeze(["terrain: forest"]) }), // W2-FIX-DATA (REVIEW-W2B cold list)
+  "A flat-bottomed ferry over the river, the crossing rights held in one family for generations. Carts, beasts and walkers wait their turn on the bank.": Object.freeze({ needs: Object.freeze(["river"]) }), // village|Economy|River ferry#0
+  "The river is crossed here by a flat-bottomed ferry, worked by a family that has held the right to it for generations.": Object.freeze({ needs: Object.freeze(["river"]) }), // village|Economy|River ferry#1
   "Builds and mends flat-bottomed river craft: barges, punts, ferries, fishing boats. The work turns on river-boat knowledge: shallow draft, a hull that flexes, parts made to be replaced.": Object.freeze({ needs: Object.freeze(["river"]) }), // village|Economy|River boatyard#0
   "River boats, all flat-bottomed, made and repaired here: barges, punts, ferries, and fishing craft. It takes a specialist's hand. Shallow in the draft, supple in the hull, and built so parts can be swapped out.": Object.freeze({ needs: Object.freeze(["river"]) }), // village|Economy|River boatyard#1
   "Turns hides to leather with oak bark. The stink of it keeps it downstream. Without it there are no shoes, no harness, no straps.": Object.freeze({ needs: Object.freeze(["river"]) }), // village|Crafts|Tannery#0
   "Hides become leather here, cured with oak bark. It reeks, and so it sits downstream, but shoes, harness, and straps all depend on it.": Object.freeze({ needs: Object.freeze(["river"]) }), // village|Crafts|Tannery#1
-  "Crews tend kilns out in the woods and sell charcoal to smelters, smiths, and bakers. The metal trades here use up a forest a generation.": Object.freeze({ needs: Object.freeze(["terrain: forest"]) }), // town|Economy|Charcoal burner#0
-  "Charcoal from woodland kilns feeds the smelters, the smithies, and the bake ovens. At this pace of metalwork, a forest lasts a generation.": Object.freeze({ needs: Object.freeze(["terrain: forest"]) }), // town|Economy|Charcoal burner#1
+  "Crews tend kilns out in the woods and sell charcoal to smelters, smiths, and bakers. The metal trades here use up a forest a generation.": Object.freeze({ needs: Object.freeze(["terrain: forest"]) }), // W2-FIX-DATA (REVIEW-W2B cold list)
+  "Charcoal from woodland kilns feeds the smelters, the smithies, and the bake ovens. At this pace of metalwork, a forest lasts a generation.": Object.freeze({ needs: Object.freeze(["terrain: forest"]) }), // W2-FIX-DATA (REVIEW-W2B cold list)
   "Builds and mends ocean-going merchantmen. It wants a steady supply of timber, iron fittings, and skilled shipwrights. A great employer, and a heavy investment of capital.": Object.freeze({ needs: Object.freeze(["coast"]) }), // town|Economy|Shipyard#0
   "Sea-going trade vessels are built and repaired here, on a footing of constant timber, iron fittings, and specialist labour. It employs many and ties up much capital.": Object.freeze({ needs: Object.freeze(["coast"]) }), // town|Economy|Shipyard#1
   "A fleet of river barges working scheduled and commissioned runs. It carries bulk cargo, passengers, and military supply along the river network.": Object.freeze({ needs: Object.freeze(["river"]) }), // town|Economy|Barge and river transport company#0
@@ -1946,8 +2159,6 @@ export const DESC_VARIANT_DECLARATIONS = Object.freeze({
   "The town's bread. Prices fixed by the guild.": Object.freeze({ needs: Object.freeze(["guild"]) }), // town|Crafts|Bakers (5-15)#0
   "Bread baked for sale, with the guild setting the price.": Object.freeze({ needs: Object.freeze(["guild"]) }), // town|Crafts|Bakers (5-15)#1
   "Each congregation buries its own, and the sexton keeps the roll that inheritance disputes are settled from. Guilds buy plots together so their members lie among their trade.": Object.freeze({ needs: Object.freeze(["guild"]) }), // town|Religious|Parish burial grounds#1
-  "Senior druids who govern how their circle deals with the city. They may keep a grove hidden beneath the streets, hold the line between the city's spread and the wild, or advise its rulers on the land. Found where a city has come to terms with the wild.": Object.freeze({ needs: Object.freeze(["tier: ≥ city"]) }), // town|Religious|Elder Grove Council#0
-  "A council of elder druids charged with their circle's standing in the city: sometimes tending a concealed grove below the streets, sometimes mediating between expansion and wild ground, sometimes counselling those in power on ecological matters. It arises only in cities at peace with the wild.": Object.freeze({ needs: Object.freeze(["tier: ≥ city"]) }), // town|Religious|Elder Grove Council#1
   "The official voice, reading proclamations, market prices, and news at set hours in the market square. Town or guild pays his wage.": Object.freeze({ needs: Object.freeze(["market"]) }), // town|Government|Town crier#0
   "At fixed times he stands in the market square and calls out the proclamations, the prices, and the news. His employer is the town, or else a guild.": Object.freeze({ needs: Object.freeze(["market"]) }), // town|Government|Town crier#1
   "An innermost stronghold, the city's final hold under siege.": Object.freeze({ needs: Object.freeze(["tier: ≥ city"]) }), // town|Defense|Citadel#1
@@ -1965,7 +2176,7 @@ export const DESC_VARIANT_DECLARATIONS = Object.freeze({
   "Several alchemical workshops, run under a guild.": Object.freeze({ needs: Object.freeze(["guild"]) }), // city|Crafts|Alchemist quarter#0
   "A cluster of alchemists' workshops, organised into a guild.": Object.freeze({ needs: Object.freeze(["guild"]) }), // city|Crafts|Alchemist quarter#1
   "The grounds inside the walls filled generations back, so the dead are lifted when their term is up and their bones stacked to make room. New ground lies outside the gates.": Object.freeze({ needs: Object.freeze(["walls","gate"]) }), // city|Religious|Burial grounds and charnel house#0
-  "Carts go out at dusk to ground bought beyond the walls, and the charnel house holds what the old plots gave up. What a family endowed decides who is lifted and who is left.": Object.freeze({ needs: Object.freeze(["walls"]) }), // city|Religious|Burial grounds and charnel house#1
+  "Carts go out at dusk to ground bought beyond the walls, and the charnel house holds what the old plots gave up. What a family endowed decides who is lifted and who is left.": Object.freeze({ needs: Object.freeze(["walls"]), excludes: Object.freeze(["crisis: under_siege"]) }), // W2-FIX-DATA (REVIEW-W2B cold list)
   "The official announcer, reading proclamations, market prices, and news in the market squares at set hours, paid by the city or a guild.": Object.freeze({ needs: Object.freeze(["market"]) }), // city|Government|Town crier#0
   "Employed by the city or a guild to call proclamations, prices, and news in the market squares at fixed times.": Object.freeze({ needs: Object.freeze(["market"]) }), // city|Government|Town crier#1
   "Excavated ways running under walls and wards alike; whole shipments pass below the city without touching a street.": Object.freeze({ needs: Object.freeze(["walls"]) }), // city|Criminal|Underground network#1
@@ -1974,4 +2185,17 @@ export const DESC_VARIANT_DECLARATIONS = Object.freeze({
   "Multi-story blocks packed around tenement courts, and suburbs that have outgrown the walls.": Object.freeze({ needs: Object.freeze(["walls"]) }), // metropolis|Infrastructure|Housing (3500+ households)#1
   "Walls within walls: an outer line, an inner line, and the citadel ring. Garrison districts and gatehouses at every stage.": Object.freeze({ needs: Object.freeze(["garrison"]) }), // metropolis|Defense|Massive walls and fortifications#0
   "A defence built in layers: outer wall, inner wall, and the ring about the citadel, with garrisons and gatehouses throughout.": Object.freeze({ needs: Object.freeze(["garrison"]) }), // metropolis|Defense|Massive walls and fortifications#1
+  "Turns barley into malt for the brewers. A small concern feeding the local alehouses, and one that only runs when grain is in surplus.": Object.freeze({ needs: Object.freeze(["institution: tavern"]) }), // W2-FIX-DATA (REVIEW-W2B cold list)
+  "Turns malted grain into ale by the barrel. Only bread takes more of the grain. It supplies both alehouses and homes.": Object.freeze({ needs: Object.freeze(["institution: tavern"]) }), // W2-FIX-DATA-8 row 3 (ww-1415)
+  "Makes ale in bulk from malted grain. The second-greatest draw on the grain supply after bread. Alehouses and households alike are stocked from here.": Object.freeze({ needs: Object.freeze(["institution: tavern"]) }), // W2-FIX-DATA-8 row 3 (ww-1415)
+  "Malts barley for brewing on a modest scale, supplying the alehouses nearby. It needs grain to spare before it can work at all.": Object.freeze({ needs: Object.freeze(["institution: tavern"]) }), // W2-FIX-DATA (REVIEW-W2B cold list)
+  "Duties are taken here on goods passing through the port or the main roads. Royal or municipal officers run it.": Object.freeze({ needs: Object.freeze(["institution: docks"]) }), // W2-FIX-DATA (REVIEW-W2B cold list)
+  "Levies charged on all trade in and out by road or harbour, collected by officials of crown or town.": Object.freeze({ needs: Object.freeze(["institution: docks"]) }), // W2-FIX-DATA (REVIEW-W2B cold list)
+  "Takes pledges and lends at steep interest, no questions asked. It is the only credit for labourers, journeymen, and whoever the banks refuse.": Object.freeze({ needs: Object.freeze(["institution: bank"]) }), // W2-FIX-DATA (REVIEW-W2B cold list)
+  "High-interest loans against pledged goods, with no questions. For labourers, journeymen, and anyone the banks will not serve, it is the only lender.": Object.freeze({ needs: Object.freeze(["institution: bank"]) }), // W2-FIX-DATA (REVIEW-W2B cold list)
+  "Shared grain stores that even out the harvests and hold off famine.": Object.freeze({ excludes: Object.freeze(["crisis: famine"]) }), // W2-FIX-DATA (REVIEW-W2B cold list)
+  "Sellsword companies under proper organisation, mustering hundreds to thousands.": Object.freeze({ needs: Object.freeze(["tier: = metropolis","mercenary"]) }), // W2-FIX-DATA (REVIEW-W2B cold list)
+  "Organised bands of hired blades. Major forces, hundreds to thousands strong.": Object.freeze({ needs: Object.freeze(["tier: = metropolis","mercenary"]) }), // W2-FIX-DATA (REVIEW-W2B cold list)
+  "Covered stalls under the wardens' eye, selling the morning's catch or the week's salted barrels by weight, each checked for rot.": Object.freeze({ needs: Object.freeze(["navigable","market"]) }), // W2-FIX-DATA (REVIEW-W2B cold list)
+  "The market wardens keep a roofed fish market where fresh catch and salted barrels are weighed out and inspected before sale.": Object.freeze({ needs: Object.freeze(["navigable","market"]) }), // W2-FIX-DATA (REVIEW-W2B cold list)
 });

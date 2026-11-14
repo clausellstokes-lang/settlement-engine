@@ -241,6 +241,7 @@ const DISCOVERY_EXEMPT = Object.freeze([
   { symbol: 'recordTrace', reason: 'appends a receipt to `simulationTrace` through the run\'s deterministic clock, the sanctioned cross-cutting ledger, never a held key.' },
   { symbol: 'takeAllegianceReceipts', reason: 'takes (and forgets) the receipts the seam left in a module WeakMap keyed by the settlement; it writes no key on the record.' },
   { symbol: 'factsOf', reason: 'a pure READ of the record\'s declared facts, handed to renderStressSummary as its facts bag; it returns a new object and writes nothing at all.' },
+  { symbol: 'resolveSibling', reason: 'W2-FIX-DATA-7: resolves a stress entry\'s stored catalogue hook and note through their declared sets (stressTypes.js :: STRESS_TYPE_SIBLINGS), draw-free; touches `stress`, a READING, never a held key.' },
   // URBAN-FIX C-1 (935c961fd), composed at STYLE-2-MERGE point 25: the food record's composed line, read for the stored foodways.
   { symbol: 'foodwaysLineOf', reason: 'a pure READ of economicState.foodSecurity.foodRecord.foodwaysLine (trimmed, or null); it writes nothing at all.' },
   // COHERENCE-POWERS-3 (F1, F2), classed by COHERENCE-POWERS-4 (2026-11-12), each read from its own body.

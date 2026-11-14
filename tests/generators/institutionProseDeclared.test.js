@@ -30,10 +30,13 @@ describe('the institution descriptions declare by text (CENSUS-4c unit 5)', () =
   const rows = ledger('institutionDescVariants.INSTITUTION_DESC_VARIANTS').rows.filter(declares);
   it('the column is the ledger\'s declaring rows less the three waiting on order', () => {
     // COHERENCE-PRESUME (2026-11-11): the town bowyers' line #0 reworded to presume no militia, so it declares nothing (65 → 64, 62 → 61)
-    expect(rows).toHaveLength(64);
+    // W2-FIX-DATA (2026-11-13, the REVIEW-W2B cold list): eleven variant texts read false now declare what makes them false (alehouse, port, bank, famine, metropolis, navigable water) and carry a twin in DESC_VARIANT_SIBLINGS (64 → 75, 61 → 72)
+    // W2-FIX-DATA-3 (2026-11-13, REVIEW-W2-FIX-DATA F4): the Elder Grove Council's two variants no longer say "the city"; they speak the corpus's "town", which the draw speaks in the place's own noun, so their `tier: ≥ city` declaration went with the word (75 → 73, 72 → 70)
+    // W2-FIX-DATA-8 (2026-11-14, HANDBACK-6 section 8 row 3, ww-1415): the village brewer's two variants name the alehouses it supplies and need one on the roster, each with its twin in DESC_VARIANT_SIBLINGS (73 → 75, 70 → 72)
+    expect(rows).toHaveLength(75);
     const cols = /** @type {Record<string, any>} */ (D.DESC_VARIANT_DECLARATIONS);
     const want = rows.filter((/** @type {any} */ r) => !WAITING_ON_ORDER.includes(r.id));
-    expect(Object.keys(cols)).toHaveLength(61);
+    expect(Object.keys(cols)).toHaveLength(72);
     for (const r of want) {
       expect({ id: r.id, ...shape(V.declarationOf(cols[r.text])) }).toEqual({ id: r.id, needs: r.needs, excludes: r.excludes, crisis: r.crisis });
     }
@@ -49,7 +52,13 @@ describe('the institution descriptions declare by text (CENSUS-4c unit 5)', () =
 describe('the services declare in place (CENSUS-4c unit 5)', () => {
   const rows = ledger('institutionServices.INSTITUTION_SERVICES').rows;
   it('each definition carries exactly the ledger\'s declaration (4b\'s two Mill rows included)', () => {
-    expect(rows.filter(declares)).toHaveLength(49);
+    // W2-FIX-DATA (2026-11-13, the REVIEW-W2B cold list): the mill run, the morning produce and the carriers' haulage exclude a siege, each with its twin; the mill run has no ledger row (49 → 51)
+    // W2-FIX-DATA-3 (2026-11-13, REVIEW-W2-FIX-DATA F3): the open-cast menu's raw extraction excludes town size and above, where every Mine works a shaft, with its twin (51 → 52)
+    // W2-FIX-DATA-4 (2026-11-13, REVIEW-W2A-3 #507 #508): the river boatyard's and the river ferry's four services that name the river need it, each with its twin, where a coastal port with no river holds the houses (52 → 56)
+    // W2-FIX-DATA-5 (2026-11-13, ROUND-3-CUT-INCREMENT ww-494): the Annual fair's seasonal trading excludes a siege that cuts every road, with its twin (56 → 57)
+    // W2-FIX-DATA-6 (2026-11-13, CENSUS-2 kind b): the coaching inn's lodging and horse change exclude a siege that holds the roads, each with its twin (57 → 59)
+    // W2-FIX-DATA-8 (2026-11-14, ROUND-3-CUT-INCREMENT ww-1416): the brewer's barrel trade needs an alehouse on the roster, with its twin (59 → 60)
+    expect(rows.filter(declares)).toHaveLength(60);
     for (const r of rows) {
       const [inst, svc] = r.id.split('|');
       const def = /** @type {any} */ (INSTITUTION_SERVICES)[inst][svc];
