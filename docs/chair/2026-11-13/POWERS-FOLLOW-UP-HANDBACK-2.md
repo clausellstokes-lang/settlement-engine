@@ -1832,10 +1832,10 @@ Pushes by probes/POWERS-15/push.sh (POWERS-14's, pointed at p15: fetch, fast-for
   holders.sh (fetch +refs/heads/lane/*:refs/remotes/origin/lane/* first); POWERS-14's gates.sh.
 
 ## P9.6 `git diff --stat 0ea65f574..HEAD -- src/`
-- src/components/new/SummaryTab.jsx (A7) | 5 ++++-
+- src/components/new/SummaryTab.jsx (A7) | 9 ++++++---
 - src/data/people/dmPowerLines.js (D1) | 7 +++++--
 - src/domain/display/governingModifierWords.js (A5) | 13 +++++++++++--
-- src/pdf/sections/PowerStructure.jsx (A7) | 6 ++++--
+- src/pdf/sections/PowerStructure.jsx (A7) | 8 +++++---  (4 files, 27 insertions, 10 deletions)
 
 ## P9.7 HAND BACK (the count past 300,000 at 12:05, the chair's mark 380,000)
 - Tip: this file's commit on 301108e7f. Done: the toll re-keyed (0eb30242f), the six titles green, the fork pin re-keyed
