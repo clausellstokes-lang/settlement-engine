@@ -1725,6 +1725,17 @@ Pushes by probes/POWERS-15/push.sh (POWERS-14's, pointed at p15: fetch, fast-for
   DONE BY `stagepins.py --control`: that instrument writes the control hash (C1) with the golden's header and A7 pin, the signed
   door's act; this lane runs no golden door and the manifest row is the line's, so A1 stays red at C1 here until the golden's
   re-record at the join (as fce41f2b7). The file at 60b89e5ce: 5 passed, A1 (C1) and A6 (15 vs 16) red, both red at 0eb30242f.
+- **THE CONFLICT ISSUE (the chair's 11:38 row, BASE_ISSUES "A ruling one power refuses to obey"): ALREADY CURED ON THIS LANE,
+  527198c17** (COHERENCE-POWERS-8 round three #337: `issue: 'A ruling that one power refuses to obey'`, its `id` kept on the old
+  text so the draw's ledger and the quarrel's hook hash keep their key). The 720 born at 0ea65f574: the broken text 0 towns, the
+  whole phrase 20 towns. The cure is in origin/lane/join-2026-11-14 (ancestor check) and absent from the line (976db5b19) and from
+  r2-code-b (its reader's 49 towns were born on a tree without it). READ ON THE PAGE (census2 render at f1fac0972, the Relationships
+  tab's conflict card "<tension> | <party> vs <party> · <issue>"): r2s-under_siege-metropolis-0 (a siege, a metropolis, the largest)
+  "High tension · High Theocratic Council vs Craft Guilds · A ruling that one power refuses to obey"; r2s-famine-town-1 (a famine)
+  "· Merchant oligarchy vs Merchant Guilds · A ruling ..."; r2s-politically_fractured-hamlet-3 (a hamlet, the smallest) "· The
+  Independent Bloc vs Headman's Authority · A ruling ...". THE REST OF THE TABLE, each read beside the pill: the other 43
+  BASE_ISSUES and the 15 STRESS_ISSUES are whole noun phrases or "who/whether" clauses; none drops a relative word or reads broken
+  after "·": none reworded. No commit under src/, no move.
 
 ## P9.2 EVERY NEW OR CHANGED LINE, with the towns it was read in
 - None yet: the two items are tests only.
