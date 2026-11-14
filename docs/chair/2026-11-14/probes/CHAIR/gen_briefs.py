@@ -5669,6 +5669,84 @@ SEATS2['SURFACES-2'] = dict(
 )
 
 
+SEATS2['NOLANE-2'] = dict(
+    title="NOLANE-2 · the false lines no lane holds, on the landed tree: the standing word under its own label first (two towns in three), then the measured rows by width",
+    branch='lane/join-nolane-2026-11-14', tip='3ccdc071', statement=False,
+    intro=("You are NOLANE-2, the second seat of the no-lane lane of the settlement-engine integration program "
+           "(lane/join-nolane-2026-11-14, cut from the joined line). The first seat measured fifty-four rows that no builder lane holds on "
+           "the joined tree's 720 births and the bar's 90 named towns, cured one, and handed back at its count with every row left written "
+           "out: its writer, its count, and for most its ONE-LINE CHANGE. Seven of its own rows it could not cure, because another lane "
+           "had since changed the file. THAT HAS CHANGED: a merge seat has now landed every lane's new commits on the joined line, so your "
+           "lane, once it merges the joined line, HOLDS EVERY LANE'S CURES, and a row in such a file is yours to cure where no seat is "
+           "working on that function now. Yours: the rows, WIDEST FIRST. The lane lands as points on the joined line: NO whole suite."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. On your lane, docs/chair/2026-11-14/NOLANE-HANDBACK.md WHOLE (167 lines, some long: by script): the laws worked to and the "
+          "chair's four rulings; item 0's tables (\"Still false, no lane's: MINE\": every row with its count and its writer; \"Printing, and "
+          "a ruling rather than a cure\"; the rows that are a lane's: NOT YOURS); the one cure as made (THE FORM OF A CURE HERE); FOR THE "
+          "JOIN (seven rows with their one-line changes); WHAT IS LEFT (eight items, two of them scoped in detail); how the instruments "
+          "are re-made (docs/chair/2026-11-14/probes/NOLANE-1/).\n"
+          "3. Nothing else: not the older briefs, not the chair's handoffs, not another lane's hand-back."),
+    first=("FIRST ACT. FULL HISTORY (`git fetch --depth=2147483647 origin lane/join-nolane-2026-11-14 lane/join-2026-11-14 "
+           "lane/integration-2026-11-07`; `git rev-parse --is-shallow-repository` prints false). Read your lane's tip back from origin: it "
+           "was 3ccdc0711 when this was written; any difference is a stop: tell the chair. THEN MERGE THE JOINED LINE'S TIP INTO YOUR LANE "
+           "(`git merge --no-ff origin/lane/join-2026-11-14`, the tip as you read it: say which; merge it AGAIN before your hand-back): a "
+           "code conflict keeps BOTH sides' cures (read the file whole); a register, a baseline, a generated file or a bundle that "
+           "conflicts takes THE JOINED LINE'S side. THEN RE-MAKE THE FIRST SEAT'S TABLE AT YOUR MERGED TIP (its one script; births of the "
+           "720: about ten minutes): the lanes' landed cures have moved the pages since it measured: a row now at 0 is STRUCK, with its "
+           "count; a row is cured only on its count at YOUR tip."),
+    work=("THE CHAIR'S RULINGS SINCE THE FIRST SEAT'S COPY (2026-11-14; each vetoable by the owner; copy them into the hand-back), beside "
+          "its four, which stand:\n"
+          "(r1) REGISTERS ARE RE-DERIVED ONCE, AT THE CLOSE, ON THE FINAL TREE: you re-take no census and no baseline after a cure and "
+          "rebuild no bundle; a register your cure makes stale is NAMED in the hand-back (file; the title that reds; your commit); never "
+          "banked, never raised, never hand-edited. A PIN your cure moves is re-keyed BY IDENTITY in the same commit.\n"
+          "(r2) THE FILE RULE, AS IT NOW STANDS: after your merge you may change ANY file, EXCEPT inside a function or data entry that a "
+          "seat is working on now. THOSE ARE: in src/data/npcData.js the tie lines (round two's first code lane's seat has the bloc line "
+          "and the corruption row: NOT YOURS); in src/data/economicData.js the cathedral rows and in src/data/stressTypes.js the slave "
+          "revolt's note (the data lane's seat: NOT YOURS); in src/data/people/titleSecretsPresentations.js every row (the powers "
+          "lane's seat: NOT YOURS); in src/components/new/tabs/OverviewTab.jsx the Systems-health block (the surfaces lane's seat has its "
+          "food row: the Safety tag with no value in 28 thorps is sent to that seat: NOT YOURS); src/domain/magicReliance.js (FENCED: it "
+          "feeds the defence rating); src/domain/crisis/ and src/domain/summary/tonightSheet.js (round two's second code lane's seat). A "
+          "row that needs one of these is NAMED with its count, not cured.\n"
+          "(r3) THE STANDING WORD, by the first seat's ruling 1, IS YOURS NOW AND FIRST: it prints under \"Disposition\" in 461 of the "
+          "720 (\"established\", \"marginal\", \"commanding\"). A WORD IS PRINTED UNDER THE NAME OF WHAT IT MEASURES: the disposition "
+          "list holds temperament, loyalty and fear; the standing prints as the person's STANDING under its own label on every surface "
+          "that prints the disposition (the NPCs tab's card, the PDF's, the journal's: find each by the reader's callers). Display only: "
+          "the record does not move. The pinned test (tests/domain/npcInteriorityRead.test.js) is re-keyed BY IDENTITY: the list without "
+          "the standing word, and the standing asserted under its label. src/components/new/npc/ files were changed by round two's "
+          "second code lane: your merge holds its changes: keep them whole. THE NEW LABEL IS READ ON EVERY SURFACE in three towns and "
+          "goes on the veto list.\n"
+          "(r4) THE PUBLIC'S LEGITIMACY HAS ONE HOME (48 of 112: the Foundations tab says \"Critical\" where the Power tab says "
+          "\"Contested\"): by ruling 4 the Foundations row prints the record's stored label (src/components/new/tabs/SubstrateTab.jsx: "
+          "the tabs lane has no seat now: yours). (r5) \"man the palisade or earthworks\" (25): the fill returns the plain word for the "
+          "house that stands (src/domain/display/stateProse/defenseStateProse.js :: defworkFill: yours now).\n"
+          "THE WORK, in this order, each cause its own commit, measured first at your merged tip on the 720 and the 90 named towns "
+          "(count before and after), red first (a collected arm over births; a keep-guard; each arm shown able to red by a plant you do "
+          "not commit, made in a tree no suite or render is running in), pushed as made:\n"
+          "1. (r3) the standing word. ONE MESSAGE TO THE CHAIR when it is pushed (the tip; the count before and after on each surface; "
+          "the new label), then THE COUNT.\n"
+          "2. BY WIDTH, each as the hand-back writes its change: the fair tradition's `market` need (65: scoped in detail: finish it, on "
+          "every surface that prints the traditions); (r4) 48; a necessity import the town also produces (33: a generator move: its "
+          "field diff by family; more than the import list moving is a STOP); (r5) 25; the magic notes (about 28: a declared move of the "
+          "note only); the Entrepot line's warehouse fees with no warehouse (19: a declared move); the processing houses and the other "
+          "need (5 and 5).\n"
+          "3. PARKED AND FENCED ROWS STAY SO (the palisade's quarry rows: the owner's; the arcane census: fenced), listed with their "
+          "counts at your tip.\n"
+          "A CURE IN GENERATOR OR DATA CODE IS A DECLARED MOVE: its field diff on the 720 by family; a power, a person or a tie re-drawn "
+          "is a STOP with the table. EVERY LINE A CURE NOW PRINTS IN A NEW TOWN, OR NEWLY LEAVES SILENT, IS READ WHERE IT PRINTS on every "
+          "surface that prints it before it is pushed: three towns of its cells, a siege, a famine or an occupation among them, the "
+          "smallest and the largest size it reaches; the towns and what printed in the commit body.\n"
+          "AFTER EVERY CURE: the strict-domain gate, the type ratchet and eslint on the touched files; the presumed-things door's fresh "
+          "count against your merged base's (a rise is a stop); the twelve-birth grid (`node scripts/census/page-census.mjs --grid`: a "
+          "rise is a stop; a fall is NAMED); the test files that name the files you touched.\n"
+          "THE HAND-BACK, kept current after every item: a part \"# NOLANE-2\" at the end of the lane's hand-back file, in the first "
+          "seat's form: the rulings copied; the table re-made; each row as cured; EVERY NEW OR CHANGED LINE with the towns it was read "
+          "in (the owner's veto list, and the next reader's); the declared moves by family; THE REGISTERS NAMED STALE; what is left."),
+    merges='; the merges of the joined line into YOUR lane that the first act names',
+    when="for a stop that blocks everything you have left, when the standing word is pushed (the tip; the counts; the label), for a generator move that re-draws more than its row, and with your hand-back",
+    turns='',
+)
+
+
 def build2(seat):
     s = _r3c6() if seat == 'R3-CODE-C-6' else SEATS2[seat]
     head = (
