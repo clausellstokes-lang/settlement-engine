@@ -1019,6 +1019,12 @@ fresh 180 and the readers' 50 (probes/W2-C-LEAVES-4/birthsR.mjs). EXECUTED = run
   (src/domain/display/defenseDisplay.js: the siege line "under siege the outlying fields would be lost" and the crime
   desk's ring line with "streets", reason `after-base: leaves-3`) and exactly how a holder cures one and shrinks it out.
   Read it before the first register touched after the merge of the line. (NOT read by this seat.)
+- 04:15 UTC, A CHANGE OF ORDER FOR EVERY LANE (vetoable by the owner): THE CLOSE COMES FIRST. Every lane is to be final
+  for the join in the seat it has now; rows not reached are cured AFTER the join, on the joined line, in the order a
+  fresh measure of the joined tree gives. For this lane: if rows are still open when the count passes 180,000, finish the
+  item in hand, write the rest under LEFT FOR AFTER THE JOIN (row, writer, what you know) and go STRAIGHT to the line's
+  merge (full history first), section 2m's checks, the two banked rows and the final statement. (Received after this
+  seat's hand-back message; this seat's count was over 180,000 at item 9's end. Applied in STATUS below.)
 
 ## Items (this seat)
 | item | commits | measured (before c22530310 → after) | guard |
@@ -1101,6 +1107,16 @@ Out dirs (container-local, lost on restart): /home/user/c7/c2tip, /home/user/c7/
 ## STATUS (kept current)
 - Item 8 DONE 3bbcacae8 (+ f8ae10519, add4184ea). Item 9 DONE f5f372aec. CENSUS-2 RUN at both ends (above). HANDED BACK
   at the count (351,022 after item 9: the census's reading and the court rows do not fit under 400,000). Nothing running.
+- NEXT, BY THE CHAIR'S 04:15 ORDER: the line's merge, section 2m's checks, the two banked rows and the final statement
+  (row 4 below). Rows 1 to 3 below are LEFT FOR AFTER THE JOIN (each row's writer and what is known are in it).
+- A HAZARD MET (EXECUTED, 04:18-04:25 UTC): a push from /home/user/wt7 with NO new commit (this seat's slip: a failed edit
+  left nothing to commit, and the push ran anyway, against the brief's "no push with nothing to send") fell into the
+  pre-push hook's whole check (test:ratchet, the full suite); a suite test acting on git from the linked worktree moved
+  the local branch w7-local to a fixture commit (106c00699 "packet authority") and wrote core.bare=true, user.name /
+  user.email "Fixture" and commit.gpgsign=false into the shared local config. Found by the refs/config snapshot; the hook
+  was stopped; NOTHING reached origin (ls-remote: 4576cfc6a). Restored: the config to its post-npm-ci state (three keys
+  unset, core.bare=false), w7-local to 4576cfc6a by a mixed reset (the files were untouched; status clean after). The
+  main checkout unchanged (beae4ef7e, clean). For every seat: never push without a new commit; snapshot and compare.
 - WHAT IS LEFT, line by line (the brief's order; each measured first on the 720 and the fresh 180, red first, pushed):
   1. ITEM 10 (the census is RUN, above: re-run only at a new tip): CENSUS-2 at the tip and at 4534ea5e3 (`git fetch origin lane/census-2-2026-11-13`; archive its
      docs/chair/2026-11-13/probes/CENSUS-2 to a scratch dir; `sh census2.sh <tree> <out outside the repo> 4 --files
