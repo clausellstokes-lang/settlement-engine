@@ -117,3 +117,25 @@ describe('a posture line that names works or a watch reads the roster (F3)', () 
     expect(postureOf(WALLED_KEEPS)?.beside).toMatch(NAMES_WORKS);
   });
 });
+
+/**
+ * The chair's ruling of 2026-11-14 07:32 UTC (on this seat's own measure): NO STRONG POSTURE BESIDE THE GUARD ON
+ * PAPER. "What … can field … are both in good order" stood beside the Guard assessment "The … exists on paper.
+ * Chronically underpaid and poorly equipped" in 31 of the reader's 1,536 at 853188dcf (9 at the line's tip
+ * 976db5b19, 32 at bb2bf91c5 by L1). The strong pool is not drawn at that tier, read from the fact the assessment
+ * is written from. RED-FIRST at 853188dcf: the three towns below.
+ */
+const ON_PAPER = ['rr3-town-insurgency-rand-2', 'rr3-city-plague_onset-rand-5', 'rr3-metropolis-calm-rand-2'];
+describe('no strong posture beside a guard that exists on paper', () => {
+  beforeAll(() => { for (const seed of ON_PAPER) TOWNS[seed] = TOWNS[seed] || birth(seed); }, 300000);
+  test('the strong pool is not drawn where the Guard assessment stands at its lowest tier', () => {
+    const failures = collectSeedFailures(ON_PAPER, (seed) => {
+      const s = TOWNS[seed];
+      if (!/exists on paper/.test(s.economicState.safetyProfile.guardEffectivenessDesc)) throw new Error('premise: the guard is not on paper');
+      if (!['Fortress', 'Well-Defended'].includes(s.defenseProfile.readiness.label)) throw new Error(`premise: ${s.defenseProfile.readiness.label}`);
+      const posture = postureOf(seed);
+      if (posture?.rung?.provenance?.poolKey === 'readiness STRONG') throw new Error(`strong beside the guard on paper: ${posture.beside}`);
+    });
+    expectNoSeedFailures(failures, 'the posture beside its guard');
+  });
+});
