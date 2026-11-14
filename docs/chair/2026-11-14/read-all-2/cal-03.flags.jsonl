@@ -1,0 +1,77 @@
+{"id":"HEADER","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"RECORD","why":"PEOPLE gives Takeshi Li (m) the title 'district madam'; a feminine title on a man","other":""}
+{"id":"HEADER","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"RECORD","why":"powers list Thieves' Guild (Suppressed) while HOUSES lists 'Thieves' guild (powerful)'","other":""}
+{"id":"HEADER","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"RECORD","why":"FOUNDING: a dynastic decision about 'this crossroads' (access is road only) yet the reason is it 'grew as an agricultural market center'","other":""}
+{"id":"HEADER","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"RECORD","why":"a Mine with a mine captain stands while LAND has every mineral resource depleted (precious metals, gems, coal)","other":""}
+{"id":"HEADER","town":"bar0-metropolis-calm-rand-1","sev":"LOW","kind":"RECORD","why":"Livestock & Dairy chain magically_sustained while FOOD gives by magic 0% and livestock is imported","other":""}
+{"id":"HEADER","town":"bar0-metropolis-calm-rand-1","sev":"LOW","kind":"RECORD","why":"Fish market in a plains town with road access only; no river or coast in the record","other":""}
+{"id":"C4858","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"STATE","why":"a miracle that drew pilgrims is told as history; PAST records no such event","other":""}
+{"id":"C4862","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"STATE","why":"rival guilds fought, told as history; PAST records no such event","other":""}
+{"id":"C4866","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"STATE","why":"a popular rising over guild recognition told as history; PAST records no rebellion","other":""}
+{"id":"C4897","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"STATE","why":"Law & order 'Adequate' while stability is Unstable (pervasive organized crime) and C4887 gives criminal opportunity Elevated","other":"C4887"}
+{"id":"C5024","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"STATE","why":"History lists a 'Pilgrimage Surge'; PAST records no such event","other":"C4858"}
+{"id":"C5028","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"STATE","why":"History lists a 'Guild Conflict'; PAST records no such event","other":"C4862"}
+{"id":"C5032","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"STATE","why":"History lists a 'Popular Uprising'; PAST records no rising","other":"C4866"}
+{"id":"C5119","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"LACKS","why":"turns out sea charts; a plains town with road access only, no coast","other":""}
+{"id":"C5167","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"STATE","why":"'Merchant Prince' for Chiyo Jang, whom PEOPLE gives as female","other":""}
+{"id":"C5220","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"STATE","why":"'He sells by the barrel' of the vintner; PEOPLE gives vintner Seoyeon Gao as female","other":""}
+{"id":"C5221","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"STATE","why":"'he imports and blends' of the vintner; PEOPLE gives Seoyeon Gao as female","other":""}
+{"id":"C5253","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"STATE","why":"calls the thieves' guild 'the ruling criminal syndicate'; GOVERNMENT gives Thieves' Guild as Suppressed","other":""}
+{"id":"C5365","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"STATE","why":"a working mine with ore carts offering raw extraction; LAND gives precious metals, gems and coal all depleted","other":""}
+{"id":"C5416","town":"bar0-metropolis-calm-rand-1","sev":"LOW","kind":"BROKEN","why":"'told by Deception': a capitalised game-skill label set into the prose as a word","other":""}
+{"id":"C5500","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"STATE","why":"'Lord Chancellor' for Hua Yamamoto, whom PEOPLE gives as female","other":""}
+{"id":"C5753","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"STATE","why":"ore cut underground by crews, offered as a service; LAND gives every ore and gem deposit depleted","other":"C5365"}
+{"id":"C6074","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"STATE","why":"'Foraged goods' produced locally; LAND gives foraging areas absent and the foraging chain vulnerable","other":""}
+{"id":"C6339","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"BROKEN","why":"'The Powers (8)' lists seven (Government, Noble, Military, Thieves', Merchant, Arcane, Religious); The Martial Alliance is not among them","other":""}
+{"id":"C6367","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"PAIR","why":"Military/Guard 'carries out what Ducal Governorship decides' while the page has it contesting the seat and QUARRELS gives Ducal vs Military high","other":"C6347"}
+{"id":"C6370","town":"bar0-metropolis-calm-rand-1","sev":"LOW","kind":"BROKEN","why":"'Merchant Guilds works': plural subject with singular verb","other":""}
+{"id":"C6391","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"STATE","why":"Noble Houses' wishes 'go straight to the top' through a shared head; QUARRELS gives Ducal Governorship vs Noble Houses high","other":""}
+{"id":"C6496","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"PAIR","why":"garrison and watch 'resource-constrained... inadequate equipment and irregular pay' against the military power's 'Well-funded city watch'","other":"C6480"}
+{"id":"C6487","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"STATE","why":"criminals 'roughly even with the military'; the page scores them 8 against 15 and GOVERNMENT gives Thieves' Guild Suppressed","other":"C6347"}
+{"id":"C6491","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"STATE","why":"mages 'hold real influence through monopoly'; GOVERNMENT gives Arcane Orders as Suppressed","other":""}
+{"id":"C6521","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"PAIR","why":"'neither has the upper hand' between law and crime, against 'Ducal Governorship is winning' over the Thieves' Guild","other":"C6425"}
+{"id":"C6528","town":"bar0-metropolis-calm-rand-1","sev":"LOW","kind":"LACKS","why":"smugglers use 'unofficial landing points'; a plains town with road access only, no water route","other":""}
+{"id":"C6645","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"STATE","why":"'With nothing pressing'; stability is Unstable (pervasive organized crime, monsters on the roads) with three high quarrels","other":""}
+{"id":"C6714","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"STATE","why":"the watch commander serves 'in quiet times'; stability is Unstable with pervasive organized crime and monsters on the roads","other":""}
+{"id":"C6715","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"STATE","why":"'With nothing threatening'; monsters plagued and on the roads, stability Unstable","other":""}
+{"id":"C6773","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"STATE","why":"merchant house's 'hold is secure and its say is real' in 'quiet times'; GOVERNMENT gives Merchant Guilds Suppressed, stability Unstable","other":""}
+{"id":"C6784","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"STATE","why":"casters' 'place is secure' in 'quiet times'; GOVERNMENT gives Arcane Orders Suppressed, stability Unstable","other":""}
+{"id":"C6732","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"STATE","why":"smuggling head Jun Song ranked 'first of Thieves' Guild'; PEOPLE has Qinglong Moon as guildmaster of thieves, absent from the power","other":""}
+{"id":"C6770","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"STATE","why":"exchange master ranked 'first of Merchant Guilds'; PEOPLE has Haruka Tang as senior guild master of the merchant guilds, absent from the power","other":""}
+{"id":"C6793","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"STATE","why":"'Lord Chancellor' for Hua Yamamoto, whom PEOPLE gives as female","other":"C5500"}
+{"id":"C6868","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"STATE","why":"mine captain 'Sells ore by the cart'; LAND gives every ore, metal and gem deposit depleted","other":"C5365"}
+{"id":"C6878","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"STATE","why":"'Merchant Prince' for Chiyo Jang, whom PEOPLE gives as female","other":"C5167"}
+{"id":"C7300","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"STATE","why":"chief magistrate Xin Cao 'taught the trade' to master smith Enlai Ren as apprentice; PEOPLE: a judge and a smith, not one trade","other":""}
+{"id":"C7318","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"STATE","why":"academy chancellor Hua Yamamoto 'learned the work' at arena master Liang Qian's side; PEOPLE gives them unrelated trades","other":""}
+{"id":"C7414","town":"bar0-metropolis-calm-rand-1","sev":"LOW","kind":"PAIR","why":"'has started repaying the debt in coin' though the line before says it has been repaid in small amounts ever since","other":"C7413"}
+{"id":"C7494","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"STATE","why":"mercenary captain Huilan Ma is the theatre manager's student, using his methods and ledger; PEOPLE gives them unrelated trades","other":""}
+{"id":"C7551","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"STATE","why":"Myung An warns of raids and makes arrests, with 'watch reports' following; PEOPLE gives Myung An as castellan of the Citadel, Narae Ma heads the watch","other":"C7552"}
+{"id":"C7554","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"STATE","why":"'the district madam' is Takeshi Li, whom PEOPLE gives as male","other":""}
+{"id":"C7610","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"STATE","why":"a 'current tension' from a pilgrim miracle; neither PAST nor QUARRELS records it","other":"C4858"}
+{"id":"C7615","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"STATE","why":"a 'current tension' from a guild war; neither PAST nor QUARRELS records it","other":"C4862"}
+{"id":"C7620","town":"bar0-metropolis-calm-rand-1","sev":"MED","kind":"STATE","why":"a 'current tension' from a popular rising; neither PAST nor QUARRELS records one","other":"C4866"}
+{"id":"HEADER","town":"bar0-thorp-calm-rand-1","sev":"MED","kind":"RECORD","why":"FOUNDING: founded by a healer who stopped for a traveller, yet the reason is farmland granted to a favoured noble","other":""}
+{"id":"HEADER","town":"bar0-thorp-calm-rand-1","sev":"MED","kind":"RECORD","why":"TRADE: a thorp of 28 makes 'flour' with only access to an external mill, makes 'luxury', and exports toll revenue with no toll house","other":""}
+{"id":"HEADER","town":"bar0-thorp-calm-rand-1","sev":"LOW","kind":"RECORD","why":"'trade access' listed as a good made here","other":""}
+{"id":"HEADER","town":"bar0-thorp-calm-rand-1","sev":"LOW","kind":"RECORD","why":"Shepherd collective with no grazing land among resources; gemstone deposits available yet unworked while gaps say none","other":""}
+{"id":"HEADER","town":"bar0-thorp-calm-rand-1","sev":"LOW","kind":"RECORD","why":"PEOPLE gives Járnsaxa Ragnarsson as female with a '-son' patronymic in a Norse-inspired culture","other":""}
+{"id":"C7697","town":"bar0-thorp-calm-rand-1","sev":"MED","kind":"LACKS","why":"built 'around the hall' and 'the assembly'; HOUSES has no hall and GOVERNMENT is a Feudal Stewardship under a reeve","other":""}
+{"id":"C7709","town":"bar0-thorp-calm-rand-1","sev":"LOW","kind":"LACKS","why":"a merchant among the neighbours; a thorp of 28 with no market, roster of two (reeve, shepherd)","other":"C7727"}
+{"id":"C7731","town":"bar0-thorp-calm-rand-1","sev":"MED","kind":"STATE","why":"a popular rising against the ruling powers told as history; PAST records no uprising","other":""}
+{"id":"C7737","town":"bar0-thorp-calm-rand-1","sev":"MED","kind":"PAIR","why":"'not much left to sell'; FOOD gives 38% surplus, grain exported, and the page says it ends each year with money to spare","other":"C7857"}
+{"id":"C7769","town":"bar0-thorp-calm-rand-1","sev":"MED","kind":"STATE","why":"History lists a 'Popular Uprising'; PAST records none","other":"C7731"}
+{"id":"C7777","town":"bar0-thorp-calm-rand-1","sev":"MED","kind":"STATE","why":"'the current shortage' of grain; FOOD is Secure with 38% surplus","other":""}
+{"id":"C7796","town":"bar0-thorp-calm-rand-1","sev":"MED","kind":"PAIR","why":"each holding tilled 'all of it for the table'; FOOD gives 38% surplus and grain surplus is exported","other":"C7867"}
+{"id":"C7799","town":"bar0-thorp-calm-rand-1","sev":"MED","kind":"STATE","why":"'His writ' of the reeve, Járnsaxa Ragnarsson, female in PEOPLE; 'his welcome is not' against legitimacy Approved","other":""}
+{"id":"C7798","town":"bar0-thorp-calm-rand-1","sev":"LOW","kind":"STATE","why":"'a distant lord's man' for the reeve, whom PEOPLE gives as female","other":""}
+{"id":"C7808","town":"bar0-thorp-calm-rand-1","sev":"LOW","kind":"BROKEN","why":"slash-joined 'manor/village mill' set in a sentence","other":""}
+{"id":"C7861","town":"bar0-thorp-calm-rand-1","sev":"MED","kind":"LACKS","why":"tolls taken on the roads; HOUSES has no toll house or toll-keeper, roster has only reeve and shepherd","other":""}
+{"id":"C7864","town":"bar0-thorp-calm-rand-1","sev":"MED","kind":"PAIR","why":"timber is had only 'by what it buys'; TRADE imports only salt and the page says timber is needed and not brought in","other":"C7871"}
+{"id":"C7898","town":"bar0-thorp-calm-rand-1","sev":"LOW","kind":"PAIR","why":"'Central trade hub' for a thorp of 28 the page says has no market or fair","other":"C7727"}
+{"id":"C7987","town":"bar0-thorp-calm-rand-1","sev":"MED","kind":"PAIR","why":"household stores 'about two months at full rations'; FOOD gives 1.5 months and the page says about a month and a half","other":"C7878"}
+{"id":"C8060","town":"bar0-thorp-calm-rand-1","sev":"LOW","kind":"STATE","why":"the head shepherd talks of 'the hills'; terrain is Plains","other":""}
+{"id":"C8078","town":"bar0-thorp-calm-rand-1","sev":"MED","kind":"LACKS","why":"backing a candidate 'would cost the alliance its majority'; a thorp of 28, one power, two people, no council or vote","other":"C8077"}
+{"id":"C8085","town":"bar0-thorp-calm-rand-1","sev":"MED","kind":"LACKS","why":"spends on 'its halls and its defences'; HOUSES has no hall, DEFENCE has no walls and only a household levy","other":"C7993"}
+{"id":"C8089","town":"bar0-thorp-calm-rand-1","sev":"MED","kind":"PAIR","why":"keeps a 'Charter Fair' (and a Greening Fair); the page says no market or fair stands in Tyrby","other":"C7727"}
+{"id":"C8101","town":"bar0-thorp-calm-rand-1","sev":"MED","kind":"STATE","why":"a 'current tension' from a popular rising; PAST records none and QUARRELS is none","other":"C7731"}
+{"id":"C8156","town":"bar0-thorp-calm-rand-1","sev":"MED","kind":"STATE","why":"Tonight hook 'Popular Uprising'; PAST records no uprising","other":"C7769"}
+{"id":"DONE","lines":3404,"blocks":2,"flags":76}
