@@ -817,8 +817,51 @@ SEATS2['W2-WRITE-SIDE-REST-3'] = dict(
 )
 
 
+# R3-CODE-C-6 is seated only when point 49 is on the line: LINE49 is then set to the line's tip (read from origin) and the brief generated.
+LINE49 = '976db5b1'  # the line's tip with point 49, read from origin by the chair at 03:08 UTC on 2026-11-14
+
+def _r3c6():
+    assert LINE49, 'set LINE49 to the line tip that holds point 49 before generating this brief'
+    return dict(
+    title="R3-CODE-C-6 · round three's code lane: point 49's merge and the final statement",
+    branch='lane/r3-code-c-2026-11-13', tip='dbe379c1', statement=True,
+    intro=("You are R3-CODE-C-6, the sixth seat on round three's code lane of the settlement-engine integration program (lane/r3-code-c-2026-11-13). The lane "
+           "cures false lines in domain, generator and display files no other lane held (the crisis vantage table, the outlook hooks, the foodways, the "
+           "services' fallbacks). Its list is DONE: the fifth seat closed it and ended. What is left is the lane's landing work, and it is yours whole: the "
+           "merge of the integration line, which now holds point 49 (the instrument lane), the instrument's findings on this lane's lines, and the lane's ONE "
+           "final statement."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. On your lane, docs/chair/2026-11-13/R3-CODE-C-HANDBACK.md: the section \"THE FIFTH SEAT\" WHOLE (its items with their measures; the 108 census hits "
+          "read; found on the way; what the fresh seat takes; the census's counts at base and tip, which serve your statement unless the merge changes what the "
+          "lane's files print) and the third seat's \"FOR THE JOIN\". The file is long: read those sections by line range, by script.\n"
+          "3. On origin/lane/merge-15-point-49-wip-2026-11-14 (the merge seat's save branch: `git fetch origin lane/merge-15-point-49-wip-2026-11-14`), the merge "
+          "book docs/INTEGRATION_STYLE_2_2026-11-09.md: SECTION 2m ONLY, \"FOR EVERY LANE THAT MERGES THE LINE AFTER POINT 49\" (the instrument's walkers "
+          "and registers, each door's checking and writing command, what a lane may never do). The merge seat was still writing it when this brief was "
+          "written: THE CHAIR TELLS YOU WHEN IT IS PUSHED; if it is not there when you reach step 2, do step 1 and start the suite's shards meanwhile. The "
+          "file has very long lines: find the section by script and read it by range."),
+    work=("THE WORK, in this order, pushed as made:\n"
+          "1. THE MERGE: `git fetch origin lane/integration-2026-11-07`; the line's tip was " + LINE49 + " when this was written (point 49 landed): merge the "
+          "tip you read back (a plain merge commit; never a rebase; say which commit and what conflicted; a register or a bundle that conflicts is taken from "
+          "one side and re-derived through its own script or door, never merged by hand; a conflict in src/ is listed with its resolution; one that needs a "
+          "choice between two behaviours is a STOP). The edge bundles by `npm run build:edge-shared`, in their own commit.\n"
+          "2. THE INSTRUMENT'S FINDINGS ON THIS LANE'S LINES, as the book's 2m gives the doors: each of the instrument's walkers run at your merged tip; every "
+          "red that names a line, a literal, a pool row or a page line of THIS lane's files is cured (the line made true or declared through a registered "
+          "condition) or leaves by the door's own shrink; a red on another lane's or the line's own carried set is NAMED with its owner and left; nothing is "
+          "banked by hand.\n"
+          "3. The measuring seat's command again ONLY IF the merge changed what the lane's files print (say how you know); otherwise the fifth seat's counts "
+          "stand in the statement.\n"
+          "4. THE LANE'S ONE FINAL STATEMENT in the form below (the whole suite once, in six shards, every red classed against the line's carried set and "
+          "against the lane's base; the draft shift record; the new words of the whole lane gathered from the hand-back's sections; FOR THE JOIN; the edge "
+          "bundles last and alone). Then ONE message to the chair: the tip, the suite's reds by class, the statement's place. A fresh reader then reads the "
+          "lane: leave it what it needs."),
+    merges="; the merge of the integration line's tip named in step 1",
+    when="for a stop that blocks everything you have left, and with your final statement or hand-back",
+    turns='',
+    )
+
+
 def build2(seat):
-    s = SEATS2[seat]
+    s = _r3c6() if seat == 'R3-CODE-C-6' else SEATS2[seat]
     head = (
         "# BRIEF: %s\n\n"
         "The seat's assignment, written by the chair as a file on 2026-11-14 and named in the seat's first message. The chair is the Claude Code session "
@@ -890,7 +933,7 @@ if __name__ == '__main__':
     seats = sys.argv[2:] or list(SEATS)
     os.makedirs(out, exist_ok=True)
     for seat in seats:
-        text = build2(seat) if seat in SEATS2 else build(seat)
+        text = build2(seat) if (seat in SEATS2 or seat == 'R3-CODE-C-6') else build(seat)
         for bad in ('claude-opus', 'claude-fable', 'claude-sonnet', 'claude-haiku', 'Opus', 'Fable', 'Sonnet', 'Haiku'):
             assert bad not in text, (seat, bad)
         text = exact_hashes(text, seat)
