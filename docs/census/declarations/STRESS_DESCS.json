@@ -1622,7 +1622,7 @@
     },
     {
      "lineId": "STRESS_DESCS.religious_conversion[5]",
-     "text": "{name} has two burial grounds now, one old and one new, and the town's grief is learning to sort itself accordingly. The gravedigger serves both and is the most carefully neutral man alive.",
+     "text": "The dead of {name} are buried in two rows now, the old faith's and the new, and the town's grief is learning to sort itself accordingly. Whoever digs the graves digs both, and is the most carefully neutral soul alive.",
      "needs": [],
      "excludes": [],
      "crisis": [

@@ -383,8 +383,8 @@ export const STRESS_DESCS = {
       `The bells of ${r} ring twice for every hour: one set of chimes, then another from a different quarter, a beat later and out of tune. Nobody in the street looks up.`, needs: ['institution: temple', 'population: ≥ middling'] }, // R2-CODE-A-4 (CENSUS-2 c/quarters): a different quarter, at the middling band
     { text: r =>
       `The busiest work in ${r} is on its holy symbols: one set coming down, another going up, and the same three workmen paid for both. They no longer joke about it.`, needs: ['sacredHouse'] }, // R2-CODE-A-3 (the increment's ww-58): no mason's yard the roster cannot name (record 386 (3)); the symbols are a sacred house's
-    r =>
-      `${r} has two burial grounds now, one old and one new, and the town's grief is learning to sort itself accordingly. The gravedigger serves both and is the most carefully neutral man alive.`,
+    r => // R2-CODE-A-12 (ruling (3)): a count word reads the roster; no roster holds two burial houses here, so the rows are the graves'
+      `The dead of ${r} are buried in two rows now, the old faith's and the new, and the town's grief is learning to sort itself accordingly. Whoever digs the graves digs both, and is the most carefully neutral soul alive.`,
   ],
   slave_revolt: [
     { text: r =>
