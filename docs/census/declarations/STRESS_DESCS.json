@@ -164,7 +164,8 @@
      "lineId": "STRESS_DESCS.famine[0]",
      "text": "{name} looks prosperous in the merchant quarter: new paint, loaded carts, a market stall with produce. It is only when you walk further in that the other version of the settlement appears: shuttered houses, people sitting on doorsteps with no particular purpose.",
      "needs": [
-      "market"
+      "market",
+      "population: ≥ middling"
      ],
      "excludes": [],
      "crisis": [
@@ -541,7 +542,9 @@
     {
      "lineId": "STRESS_DESCS.indebted[3]",
      "text": "The merchant district of {name} looks prosperous. The rest of the settlement, visible further in, looks like it has been waiting for the merchant district's prosperity to reach it for some years.",
-     "needs": [],
+     "needs": [
+      "population: ≥ middling"
+     ],
      "excludes": [],
      "crisis": [
       "indebted"
@@ -1029,8 +1032,10 @@
     },
     {
      "lineId": "STRESS_DESCS.succession_void[4]",
-     "text": "The masons of {name} have stopped mid-job on the great house; scaffolding stands empty on dressed stone. Work that fine waits on a patron, and the town is not currently sure who that is.",
-     "needs": [],
+     "text": "Building has stopped mid-job across {name}; scaffolding stands empty on dressed stone. Work that fine waits on a patron, and the town is not currently sure who that is.",
+     "needs": [
+      "tier: ≥ town"
+     ],
      "excludes": [],
      "crisis": [
       "succession_void"
@@ -1572,7 +1577,9 @@
     {
      "lineId": "STRESS_DESCS.religious_conversion[2]",
      "text": "{name} is observing a holy day, and you cannot tell which one. Some shops are shut and draped; others are pointedly open. Two processions are forming in different quarters, and the people watching each are counting who watches the other.",
-     "needs": [],
+     "needs": [
+      "population: ≥ middling"
+     ],
      "excludes": [],
      "crisis": [
       "religious_conversion"
@@ -1586,7 +1593,8 @@
      "lineId": "STRESS_DESCS.religious_conversion[3]",
      "text": "The bells of {name} ring twice for every hour: one set of chimes, then another from a different quarter, a beat later and out of tune. Nobody in the street looks up.",
      "needs": [
-      "institution: temple"
+      "institution: temple",
+      "population: ≥ middling"
      ],
      "excludes": [],
      "crisis": [
@@ -1599,8 +1607,10 @@
     },
     {
      "lineId": "STRESS_DESCS.religious_conversion[4]",
-     "text": "The mason's yard in {name} is its busiest enterprise: one set of holy symbols coming down, another going up, and the same three workmen paid for both. They no longer joke about it.",
-     "needs": [],
+     "text": "The busiest work in {name} is on its holy symbols: one set coming down, another going up, and the same three workmen paid for both. They no longer joke about it.",
+     "needs": [
+      "sacredHouse"
+     ],
      "excludes": [],
      "crisis": [
       "religious_conversion"
@@ -1690,7 +1700,9 @@
     {
      "lineId": "STRESS_DESCS.slave_revolt[3]",
      "text": "There are bodies being carried through {name}'s streets under cloth, and the people carrying them are not mourners but labourers doing grim, fast work. The rising that did this is not finished; you can hear it, somewhere in the lower districts, still going on.",
-     "needs": [],
+     "needs": [
+      "population: ≥ middling"
+     ],
      "excludes": [],
      "crisis": [
       "slave_revolt"
@@ -1702,16 +1714,14 @@
     },
     {
      "lineId": "STRESS_DESCS.slave_revolt[4]",
-     "text": "The manacle-maker's shop in {name} is shuttered and scorched: the only burned building on the street, which tells you the fire was a statement, not an accident.",
+     "text": "One building in {name} is shuttered and scorched, the only burned one in sight, which tells you the fire was a statement, not an accident.",
      "needs": [],
      "excludes": [],
      "crisis": [
       "slave_revolt"
      ],
      "colour": false,
-     "stop": [
-      "manacle-maker"
-     ]
+     "stop": []
     },
     {
      "lineId": "STRESS_DESCS.slave_revolt[5]",

@@ -1801,12 +1801,17 @@ describe('car 0f — the ALIAS DRAFT: measured, nothing ratified, no leaf writte
     // 6 -> 7 at W2 DEF C1/C2 (2026-11-07): DS-DEF-9's FLAG pools read `safetyProfile.flags`, a new shipped read path, and
     // the AST cut finds one more npcGenerator.js Property key writing toward it. ⚠ A FINDING, NOT A JOIN, like the rows above.
     // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6 (+8 pools, +19 variants): 6 -> 7.
-    expect(byEvidence.get('generator-write'), 'the four sound citations survive the AST cut').toBe(11); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted). // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 7 -> 10, the three `settlement.stress` findings above // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (6 -> 11) // MERGE-WAVE at the W3 POW merge: both lanes' deltas composed (6 -> 12) // MERGE-WAVE at the W3 POW merge (2026-11-08): 11 measured, one under the additive 12: W3 POW's flag-read row lands on an npcGenerator.js write the W1/W2 side already counts, so it counts once
+    expect(byEvidence.get('generator-write'), 'the four sound citations survive the AST cut').toBe(16); // R2-CODE-A-8: 11 -> 16, the five Property keys of caad6db0e at narrativeGenerator.js:804 (above); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted). // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 7 -> 10, the three `settlement.stress` findings above // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (6 -> 11) // MERGE-WAVE at the W3 POW merge: both lanes' deltas composed (6 -> 12) // MERGE-WAVE at the W3 POW merge (2026-11-08): 11 measured, one under the additive 12: W3 POW's flag-read row lands on an npcGenerator.js write the W1/W2 side already counts, so it counts once
     expect(draft.rows.filter((r) => r.evidence === 'generator-write').map((r) => r.at.replace(/:\d+$/, '')).sort(),
       'and each is a real write in a generator').toEqual([
       'src/generators/defenseGenerator.js',
       'src/generators/history/historyEventStrands.js',
       'src/generators/history/historyEventStrands.js', // W2 DEF stress-type keys: a `stress` write toward the new settlement.stress root
+      'src/generators/narrativeGenerator.js', // R2-CODE-A-8: caad6db0e's admission context at :804 (foodBalance)
+      'src/generators/narrativeGenerator.js', // R2-CODE-A-8: caad6db0e's admission context at :804 (readings.tier)
+      'src/generators/narrativeGenerator.js', // R2-CODE-A-8: caad6db0e's admission context at :804 (settlement.config)
+      'src/generators/narrativeGenerator.js', // R2-CODE-A-8: caad6db0e's admission context at :804 (settlement.isolationSupport)
+      'src/generators/narrativeGenerator.js', // R2-CODE-A-8: caad6db0e's admission context at :804 (settlement.tier)
       'src/generators/npc/factionLeaderSecret.js',
       'src/generators/npcGenerator.js',
       'src/generators/npcGenerator.js',

@@ -53768,16 +53768,20 @@
       "name": "ARRIVAL_SCENES",
       "drawKind": "R",
       "drawSite": "src/generators/narrative/arrivalScene.js:216-228 (sceneKey from route/terrain/market fragments, then one pickRandom on t",
-      "lines": 26,
+      "lines": 28,
       "declares": [],
       "lineDeclares": {
+        "coast": 2,
         "crisis: any": 7,
+        "docks": 4,
+        "institution: docks": 1,
         "institution: mill": 1,
         "institution: smith": 1,
+        "market": 1,
         "population: ≥ middling": 1,
         "walls": 1
       },
-      "undeclared": 15,
+      "undeclared": 11,
       "crisisScoped": false
     },
     {
@@ -53865,10 +53869,10 @@
         "crisis: any": 5,
         "institution: granary": 1,
         "magic": 4,
-        "market": 1,
+        "market": 2,
         "sacredHouse": 2
       },
-      "undeclared": 31,
+      "undeclared": 30,
       "crisisScoped": false
     },
     {
@@ -53927,11 +53931,14 @@
         "no crisis: under_siege": 1,
         "no crisis: unrest": 5,
         "no war: front": 1,
+        "population: ≥ middling": 5,
+        "sacredHouse": 1,
         "soldiers": 2,
+        "tier: ≥ town": 1,
         "walls": 12,
         "watch": 4
       },
-      "undeclared": 30,
+      "undeclared": 25,
       "crisisScoped": false
     },
     {
@@ -54192,11 +54199,13 @@
         "guardPresence": 9,
         "institution: temple": 1,
         "magic": 3,
-        "market": 1,
+        "market": 2,
         "navigable": 1,
-        "no navigable": 1
+        "no navigable": 1,
+        "population: ≥ middling": 1,
+        "tier: ≥ village": 10
       },
-      "undeclared": 159,
+      "undeclared": 147,
       "crisisScoped": false
     },
     {
@@ -54329,16 +54338,17 @@
       "lineDeclares": {
         "gate": 2,
         "institution: temple": 1,
-        "market": 1,
+        "market": 2,
         "migration: exodus": 2,
         "migration: influx": 5,
         "no ruler: lord": 6,
         "no ruler: occupier": 6,
         "other npc": 20,
+        "prosperity: ≥ comfortable": 1,
         "starving": 1,
         "tier: ≥ town": 1
       },
-      "undeclared": 63,
+      "undeclared": 61,
       "crisisScoped": false
     },
     {

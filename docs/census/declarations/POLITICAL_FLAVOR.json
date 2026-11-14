@@ -183,10 +183,12 @@
         {
           "lineId": "POLITICAL_FLAVOR.economic_heavy[0]",
           "text": "A settlement whose identity was built on commerce. The ${event} didn't create the merchant class here, but it defined what the merchant class could become",
-          "needs": [],
+          "needs": [
+            "market"
+          ],
           "excludes": [],
           "crisis": null,
-          "colour": true,
+          "colour": false,
           "stop": []
         },
         {

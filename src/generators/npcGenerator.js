@@ -15,7 +15,7 @@ import { nativeSemanticName } from '../domain/content/customContentSemanticAutho
 import { getUpgradeOpportunities, mandatedRoleCandidate } from './economicGenerator.js';
 import { random as _rng, pick as ctxPick, getActiveRng } from '../kernel/rngContext.js';
 import { drawUnique } from './hookVariety.js';
-import { themeOfText } from '../domain/hookThemes.js';
+import { themeOfText, UNTYPED } from '../domain/hookThemes.js';
 import { disambiguateNPCDisplayNames } from './npcDisplayNames.js';
 import { resolveGenerationWorldLaw } from './generationContext.js';
 import { legacyMassRange } from '../domain/density/densityLaw.js'; import { defenceRoleGate } from '../domain/defense/defenseFacts.js'; import { crimeSignalOf, withoutCriminalGuild } from '../domain/crimeSignal.js'; // R6 (and F4 unit 3): one line, so no cited line moves
@@ -29,7 +29,7 @@ import { TRAIT_PRESENCE_DISTRIBUTION } from '../data/npcData.js';
 
 import { pickRandom2 } from './helpers.js';
 import { STRESS_INSTITUTION_EFFECTS } from '../data/stressInstitutionEffects.js';
-import { secretsHeldByFoodRecord } from '../domain/foodSurplus.js'; import { fillSentenceSlots } from './narrativeProse.js'; import { waterAccessKind } from '../domain/tradeRouteSemantics.js'; import { otherNpcOf } from '../domain/facts/otherNpc.js'; import { rosterFramer } from './npc/rosterFrame.js'; // F11 / CENSUS-1 / CENSUS-4b / GEN-SPEED cure 2: one line, so no cited line moves
+import { secretsHeldByFoodRecord } from '../domain/foodSurplus.js'; import { hasMarketInstitution } from '../domain/facts/market.js'; import { fillSentenceSlots } from './narrativeProse.js'; import { waterAccessKind } from '../domain/tradeRouteSemantics.js'; import { otherNpcOf } from '../domain/facts/otherNpc.js'; import { rosterFramer } from './npc/rosterFrame.js'; import { foodStoreWord } from './economy/foodBalance.js'; // F11 / CENSUS-1 / CENSUS-4b / GEN-SPEED cure 2 / R2-CODE-A item 1: one line, so no cited line moves
 import {
   MANNERISMS,
   SPEECH_PATTERNS,
@@ -41,7 +41,7 @@ import {
   NPC_WANTS,
   NPC_FACTION_LOYALTY,
   dealingLineFor,
-  NPC_PRESENTATION_MODES, NPC_HOOK_SIBLINGS,
+  NPC_PRESENTATION_MODES, NPC_HOOK_SIBLINGS, MILITARY_HOOKS_TRUE_OF_ANY_HOLDER, RELIGIOUS_HOOKS_TRUE_OF_ANY_HOLDER, // R2-CODE-A-2, R2-CODE-A-3: one line, so no cited line moves
 } from '../data/npcData.js';
 
 // pickFromArray — uses seeded PRNG when available
@@ -356,12 +356,12 @@ const generateNPCAppearance = (r = 'other', facts = null) => ({
 // verbatim; people/goals.js :: dealGoals draws them at the seam's end, A9, through resolveDeclared). Moved here, unchanged,
 // from the retired role-goal draw (`generateNPCGoal`) and `mergeNPCLists`'s stress block.
 
-/** The siege goal's three rows (`STRESS_GOALS.under_siege`), the trade commodity filled. @param {string | null} commodity */
-export const SIEGE_GOALS = (commodity) => {
+/** The siege goal's three rows (`STRESS_GOALS.under_siege`); R2-CODE-A item 1: the reserves are the town's food, read from its food record (`foodBalance.js :: foodStoreWord`), never the export ("Secure enough legal reserves"). The caller hands the trade commodity, unread, and no record yet (`people/goals.js`, parked): the row reads "food". @param {string | null} _commodity @param {Parameters<typeof foodStoreWord>[0]} [foodRecord] */
+export const SIEGE_GOALS = (_commodity, foodRecord = null) => {
   const STRESS_GOALS = {
     under_siege: [
       {
-        short: `Secure enough ${commodity || 'food'} reserves to outlast the blockade`,
+        short: `Secure enough ${foodStoreWord(foodRecord)} reserves to outlast the blockade`,
         long: 'Survive this: everything else can wait',
         driven_by: 'protection',
       },
@@ -523,12 +523,12 @@ const generatePlotHook = (category = 'other', config = {}, hookRegistry, facts =
     const biasedCategories = [...new Set(stresses.map(s => STRESS_TO_CATEGORY[s]).filter(Boolean))];
     if (biasedCategories.length > 0) {
       const biasedCat = pickFromArray(biasedCategories);
-      if (NPC_FACTION_LOYALTY[biasedCat]) return drawLoyalty(NPC_FACTION_LOYALTY[biasedCat], hookRegistry, facts);
+      if (NPC_FACTION_LOYALTY[biasedCat]) { const drawn = drawLoyalty(NPC_FACTION_LOYALTY[biasedCat], hookRegistry, facts), trueOfAny = biasedCat === 'military' ? MILITARY_HOOKS_TRUE_OF_ANY_HOLDER : biasedCat === 'religious' ? RELIGIOUS_HOOKS_TRUE_OF_ANY_HOLDER : null; return trueOfAny && category !== biasedCat && !trueOfAny.has(drawn) ? ownPoolHook(drawn, category, hookRegistry, facts, biasedCat) : drawn; } // R2-CODE-A-2: a soldier's line is the military's own; R2-CODE-A-3 (round three #518–#524, #1322–#1334): and a priest's the religious pool's; one line, so no cited line moves
     }
   }
 
   return drawLoyalty(NPC_FACTION_LOYALTY[category] || NPC_FACTION_LOYALTY.other, hookRegistry, facts);
-};
+}; /** R2-CODE-A-2 (the cold list REVIEW-W2A-3, MEDIUM #676 #678 #968 #969): A SOLDIER'S LINE ON A HOLDER WHO COMMANDS NO FORCE. The crisis bias above pulls a holder outside the military pool into it, and the drawn line presumes their soldiers, their armoury, their patrol route. It is refused for that holder (`npcData.js :: MILITARY_HOOKS_TRUE_OF_ANY_HOLDER` names the two lines that are true of anyone) and resolves DRAW-FREE into the holder's own pool: the row at the drawn row's place, else the declared draw's own resolution, refusing every text the roster holds; then the generic pool; else the drawn line stands. The roll and the drawn text in the registry are unchanged, so no town without the false line moves; the line kept is registered. @param {string} drawn @param {string} category @param {any} reg @param {any} facts @param {'military'|'religious'} [from] the biased pool the line was drawn from (R2-CODE-A-3) @returns {string} */ const ownPoolHook = (drawn, category, reg, facts, from = 'military') => { const at = Math.max(0, NPC_FACTION_LOYALTY[from].findIndex((l) => lineText(l) === drawn)); for (const pool of [NPC_FACTION_LOYALTY[category] || NPC_FACTION_LOYALTY.other, NPC_FACTION_LOYALTY.other]) { const text = drawDeclared(pool, { draw: (p) => p[at % p.length], facts, held: reg?.titles, key: `${getActiveRng()?.seed ?? ''}::npcData:NPC_FACTION_LOYALTY`, poolId: 'npcData:NPC_FACTION_LOYALTY', surface: 'npcs', drawKind: 'T' }).text; if (typeof text === 'string') { reg?.titles?.add(text); const theme = themeOfText(text); if (theme && theme !== UNTYPED && reg?.themes instanceof Set) reg.themes.add(theme); return text; } } return drawn; };
 
 /** THE PERSON HOOK — one line of the NPC hook pool under `hookPool` (people/poolMap.js :: hookPoolFor),
  * refusing a held text, the wet line resolved through its declared sibling set (CENSUS-1c: the F5 inland
@@ -617,10 +617,10 @@ export const generateCrimeLevel = (npc, npcIndex, summary, allNpcs, held = null)
   const stressEffects = secretsHeldByFoodRecord((summary.stressTypes || (stressType ? [stressType] : [])).flatMap(s => STRESS_INSTITUTION_EFFECTS[s] || []).filter(e => !e.direction || e.direction === (summary.migrationDirection || 'arrivals')), summary.foodRecord);
   if (stressEffects.length > 0 && random01(0.45)) {
     const otherNpc = otherNpcOf({ npcs: allNpcs }, npcIndex); // CENSUS-1 fact 14: the other-NPC home's selection — MERGE-R2: read before the draw, so the held key reads the text the figure would carry
-    const effect = drawDeclared(stressEffects, { draw: pickRandom2, facts: summary.facts ?? (() => factsOf({ npcs: allNpcs, stress: (summary.stressTypes || (stressType ? [stressType] : [])).map((type) => ({ type, ...(type === 'mass_migration' && summary.migrationDirection ? { direction: summary.migrationDirection } : {}) })), economicState: { foodSecurity: { foodRecord: summary.foodRecord } } })), ctx: { npc: npcIndex }, key: `${getActiveRng()?.seed ?? ''}::stressInstitutionEffects:STRESS_INSTITUTION_EFFECTS`, poolId: 'stressInstitutionEffects:STRESS_INSTITUTION_EFFECTS', surface: 'npcs', drawKind: 'R', held, heldKey: (e) => fillSentenceSlots(e.secret, { faction: topFaction, commodity, npc: otherNpc?.name }, { npc: 'someone' }) }).line; // CENSUS-1c + CENSUS-4: ⚠ the 0.45 roll stays on the food-filtered pool's emptiness (§2.2); the whole record's facts when the summary carries them (narrativeGenerator :: enrichNpcCoherence), else the partial record // MERGE-R2: REVIEW-INTAKE-4's held refusal; W0's direction on the partial record's migration entry
+    const effect = drawDeclared(stressEffects, { draw: pickRandom2, facts: summary.facts ?? (() => factsOf({ npcs: allNpcs, stress: (summary.stressTypes || (stressType ? [stressType] : [])).map((type) => ({ type, ...(type === 'mass_migration' && summary.migrationDirection ? { direction: summary.migrationDirection } : {}) })), economicState: { foodSecurity: { foodRecord: summary.foodRecord } } })), ctx: { npc: npcIndex }, key: `${getActiveRng()?.seed ?? ''}::stressInstitutionEffects:STRESS_INSTITUTION_EFFECTS`, poolId: 'stressInstitutionEffects:STRESS_INSTITUTION_EFFECTS', surface: 'npcs', drawKind: 'R', held, heldKey: (e) => fillSentenceSlots(e.secret, { faction: topFaction, commodity, food: foodStoreWord(summary.foodRecord), npc: otherNpc?.name }, { npc: 'someone' }) }).line; // CENSUS-1c + CENSUS-4: ⚠ the 0.45 roll stays on the food-filtered pool's emptiness (§2.2); the whole record's facts when the summary carries them (narrativeGenerator :: enrichNpcCoherence), else the partial record // MERGE-R2: REVIEW-INTAKE-4's held refusal; W0's direction on the partial record's migration entry
     if (effect) return {
-      what: fillSentenceSlots(effect.secret, { faction: topFaction, commodity, npc: otherNpc?.name }, { npc: 'someone' }), // F11: a fallback that opens a sentence is sentence-cased
-      stakes: fillSentenceSlots(effect.stakes, { faction: govFaction, commodity, npc: otherNpc?.name }, { npc: 'someone' }),
+      what: fillSentenceSlots(effect.secret, { faction: topFaction, commodity, food: foodStoreWord(summary.foodRecord), npc: otherNpc?.name }, { npc: 'someone' }), // F11: a fallback that opens a sentence is sentence-cased; R2-CODE-A item 1: {food} is the town's own (foodBalance.js :: foodStoreWord)
+      stakes: fillSentenceSlots(effect.stakes, { faction: govFaction, commodity, food: foodStoreWord(summary.foodRecord), npc: otherNpc?.name }, { npc: 'someone' }),
     };
   }
 
@@ -719,7 +719,7 @@ export const mergeNPCLists = (npcs, factions, institutions, _tier, _config) => {
   // criminal faction and no criminal house, no NPC is filed under a "criminal network" or a
   // "Thieves' Guild" (471 and 17 NPCs in 1,000 soak places), and a secret or goal naming a
   // thieves' guild takes the pool's own "a powerful outside interest". No draw.
-  const noCrime = !crimeFaction && !crimeSignalOf({ seats: factions, estate: institutions }).present;
+  const crimeSignal = crimeSignalOf({ seats: factions, estate: institutions }); const noCrime = !crimeFaction && !crimeSignal.present; const noThievesGuild = ![crimeFaction?.faction, ...crimeSignal.factions, ...crimeSignal.houses].some((n) => /thie|criminal guild/i.test(String(n || ''))); const underworld = 'the local underworld'; const noMarket = !hasMarketInstitution(institutions); /** @param {unknown} text @returns {unknown} */ const withoutMarketWords = (text) => (typeof text !== 'string' ? text : text.replace("the very merchants they're supposed to serve", "the very households they're supposed to serve").replace('the merchants have been keeping records', 'the households have been keeping records')); // R2-CODE-A-7 (step 1 item 4; the chair's ruling: a secret names merchants, a market or a guild only where the roster holds them): a town with no market hears the protection scheme of its households, each rewrite the whole phrase as the pool spells it; draw-free; one line, as the ceiling requires. "goes to market" is the register's ruled figure (presumedThings row: to sale), not rewritten // R2-CODE-A item 7, R2-CODE-A-5: crime with no thieves' guild speaks of the local underworld, never a guild it lacks and never a power's NAME (a power can be hidden by hand: record 331); the powers lane's crimeSignal.js :: withTownsOwnUnderworld, word for word; one line, so no cited line moves
   const milFaction = factions.find(
     f =>
       f.category === 'military' ||
@@ -1018,12 +1018,12 @@ export const mergeNPCLists = (npcs, factions, institutions, _tier, _config) => {
       // F4 unit 3: the guard reads the crime signal (it implies the old institution-name test), and
       // the pattern reads "the thieves' guild" too: the pool spells it with the apostrophe, which
       // `/thieves guild/` never matched, so the secret printed unsanitised in 17 soak places.
-      if (mentionsCriminalGuild && noCrime) {
+      if (mentionsCriminalGuild && (noCrime || noThievesGuild)) { // R2-CODE-A item 7: also where crime stands but no thieves' guild does
         enriched.secret = {
-          what: withoutCriminalGuild(npc.secret.what || ''),
+          what: noCrime ? withoutCriminalGuild(npc.secret.what || '') : String(npc.secret.what || '').replace(/on (?:the )?thieves['’]? guild payroll/gi, `on the payroll of ${underworld}`).replace(/(?:the )?(?:thieves['’]?|criminal) guild/gi, underworld),
           stakes: npc.secret.stakes,
         };
-      }
+      } if (noMarket && enriched.secret && /merchant/i.test(`${enriched.secret.what || ''} ${enriched.secret.stakes || ''}`)) enriched.secret = { ...enriched.secret, what: withoutMarketWords(enriched.secret.what), stakes: withoutMarketWords(enriched.secret.stakes) }; // R2-CODE-A-7: a town with no market (no draw)
     }
 
     return enriched;
