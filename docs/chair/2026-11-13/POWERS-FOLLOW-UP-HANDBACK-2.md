@@ -1952,3 +1952,39 @@ Births by POWERS-15's b15.sh (the 720; the reader's 996 by REVIEW-POWERS-5's see
   committed golden fixture ..." 210, and the espionage fence's corpus 13 -> 184 of 360 (green / green / 13 at 30b03024f).
 - (r2) The generator golden master and the dormant-layer isolation read 513 rows red at both trees (already stale at the lane's
   base; the cure's text rows join the re-record at the join).
+
+## P10.5 THE TABLE (measured at 30b03024f / 582b8acad on the census's 720; rows not re-measured are P8.4's figures, marked)
+| towns | row | state |
+|---|---|---|
+| 237 -> 226 | (r2) a slashed or bracketed power inside a sentence (pname.mjs) | CURED in this lane's writers, 582b8acad; 226 left, all in writers another lane holds (P10.3) |
+| 163 hold, 49 print | (r3) L3 the title word on a man: 31 male alewives, 52 male madams, 80 male district madams (records); 49 towns print the word beside such a man on the tabs (sexw.mjs over the render at 582b8acad: "handled by <M>, the district madam (Red light ...)" 14, "Second · <M>, the alewife" 7, "handled by <M>, the madam (Brothel ...)" 7, the Power strata rows, "Connection: Elder <M>, the alewife" 3) | left (measured; the cure designed below) |
+| 120 (P8.4) | ww#850 "Holds the title; the decisions that matter are made by ..." | left; its rival now prints in the prose form (r2) |
+| 104 (P8.4) | ww#440 "Merchants with local reach" | left |
+| 100 (P8.4) | bar #17 "Well-funded city watch" | left |
+| 66 (the chair's) | (4) "(Smuggling network)" bracket in a sentence; note the district madam's line above carries the same house-label bracket ("(Red light ...)", "(Brothel ...)") | left |
+| 52 (P8.4) | pf#520 "holds a third share in" | the power now in the prose form (r2, dmPowerLines.js); the row's own claim left unread |
+| 49 (P8.4) | bar #26 "Sells ore by the cart" (all deposits depleted) | left: the vocabulary has no depletion atom (factVocabulary.js read): PARKED with its word ("a working deposit") unless a twin |
+| 28 / 24 / 16 | (2) the chain block run together (the census text still reads "The powerCity-State Council (dominant)armed sway": re-measure on the page); (3) "Merchant Guilds" with no guild; E3 the coach secrets under a siege | left |
+| 9 printing, 4 false (the chair's 13:01) | R2A-LEFT-GAME "selling the game in the market" with no market | left: `needs: ['market']` in TITLE_LINE_DECLARATIONS.secret (the `market` atom exists); one commit with E3 (`excludes: ['crisis: under_siege']` on the keeper's two coach secrets) |
+
+## P10.6 WHAT IS LEFT, line by line (HAND BACK at the count's mark: 350,453 at the first count check, the next cure would cross 400,000)
+- L3 (next): data/faceHonorifics.js :: styledTitleOf takes the man's word too: a title whose last word is a gendered pool's
+  FEMALE last word takes the MALE form's for a man ("the alewife" -> "the brewster", "the madam" -> "the master", "the district
+  madam" -> "the district master"); EXCLUDE "the midwife" (the word names the work, not the worker; the honorific already gives
+  a man "Goodman"). Its readers: patronage.js (the Power strata rows), ties.js and the pipeline's npc1Role/npc2Role (stored:
+  a declared move of relationships[].npc*Role in the 163 towns). The house-label line "handled by <M>, the district madam (Red
+  light ...)" and "Connection: Elder <M>, the alewife" are other writers: trace each (census2 writers2) before the cure; the
+  bracket there is the chair's (4) too. Guard: the 49 towns' men by count, a woman madam kept.
+- Then the table's order (P10.5): ww#850, ww#440, bar #17, (4), pf#520, bar #26 (PARKED), (2), (3) (a generator move: STOP with
+  the table if a power is re-drawn beyond its towns), E3 + R2A-LEFT-GAME in one commit (each its own arm), T2/T1/T3, then the
+  narrower rows; P9.5's last lines (L4, L5, the courts candidate, the two coaching-inn candidates).
+- (r2) FOR THE JOIN (P10.3) stands; the corpus lane prints the same prose words.
+
+## P10.7 HOW THE INSTRUMENTS ARE RE-MADE (docs/chair/2026-11-14/probes/POWERS-16/)
+- Births: POWERS-15's b15.sh (copied to /home/user/probes with b15.mjs; CENSUS-2 archived from origin/lane/census-2-2026-11-13 to
+  /home/user/probes/census-2-2026-11-13; REVIEW-POWERS-5's probes to /home/user/probes/rp5). Renders: CENSUS-2's census2.sh
+  <tree> <out> <w> [--seeds f] [--count-only], dumps in <out>/dumps. pname.mjs <corpus> <dumps> (a power label in a sentence,
+  by template); sexw.mjs <corpus> <dumps> (a female title word beside a man); fd.mjs (BASE= TIP= OUT=, two births dirs) and
+  fdcheck.mjs <base> <tip> (every change is label -> prose form); v/sumpdf.test.jsx and v/surf.test.jsx (TREE= CORPUS= SEEDS=
+  OUTF= [PAT=], run with v/vitest.config.mjs: the PDF's GOVERNING box and the Summary legend; every surface's sentences);
+  push.sh and holders.sh pointed at /home/user/p16.
