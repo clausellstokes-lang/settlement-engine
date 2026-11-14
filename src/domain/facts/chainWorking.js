@@ -32,34 +32,34 @@ export const WORKING_CHAIN_STATUSES = Object.freeze(['running', 'operational', '
  * A CHAIN WORKS A RESOURCE ONLY THROUGH A HOUSE WHOSE TRADE IS TO EXTRACT OR PROCESS IT (W2-C-LEAVES R3, the chair's
  * ruling on REVIEW-R2-STAGES finding 4, 2026-11-13). The chain data names an input for chains whose houses only USE
  * it, so the leaf read them as working it and true "No one here works the …" lines were lost. ONE closed list, each
- * entry with its cause; a chain is left out for an entry's resource (or good) when its id is the entry's, or when
+ * entry with its cause (a comment above it: no page prints it, W2-C-LEAVES-8); a chain is left out for an entry's resource (or good) when its id is the entry's, or when
  * EVERY house it runs through is of the entry's houses. Households that forage DO work what they gather: no entry.
  * The deeper home is the chain data's own rows (`data/supplyChainData.js`: `fortification` and the clergy chains
  * name an input they do not work), named in the lane's hand-back; this list is the leaf's reading of them.
- * @type {ReadonlyArray<Readonly<{ chains?: ReadonlyArray<string>, houses?: ReadonlyArray<string>, resources?: ReadonlyArray<string>, goods?: ReadonlyArray<string>, cause: string }>>}
+ * @type {ReadonlyArray<Readonly<{ chains?: ReadonlyArray<string>, houses?: ReadonlyArray<string>, resources?: ReadonlyArray<string>, goods?: ReadonlyArray<string> }>>}
  */
 export const NOT_WORKED_THROUGH = Object.freeze([
-  Object.freeze({ chains: ['fortification'], resources: ['stone_quarry'],
-    cause: 'a palisade, walls, gates or a citadel use dressed stone; they do not quarry or dress it (r2r-village-56, r2s-succession_void-hamlet-1)' }),
-  Object.freeze({ houses: ['brickmaker'], resources: ['stone_quarry'],
-    cause: 'a brickmaker fires clay; it does not quarry stone (the Stone & Construction chain held by a Brickmaker alone)' }),
-  Object.freeze({ chains: ['divine_healing', 'pilgrimage'], goods: ['medicinal herbs'],
-    cause: 'clergy at the hot springs heal and receive pilgrims; they do not gather the herbs (r2r-village-38, r2r-town-43)' }),
+  // a palisade, walls, gates or a citadel use dressed stone; they do not quarry or dress it (r2r-village-56, r2s-succession_void-hamlet-1)
+  Object.freeze({ chains: ['fortification'], resources: ['stone_quarry'] }),
+  // a brickmaker fires clay; it does not quarry stone (the Stone & Construction chain held by a Brickmaker alone)
+  Object.freeze({ houses: ['brickmaker'], resources: ['stone_quarry'] }),
+  // clergy at the hot springs heal and receive pilgrims; they do not gather the herbs (r2r-village-38, r2r-town-43)
+  Object.freeze({ chains: ['divine_healing', 'pilgrimage'], goods: ['medicinal herbs'] }),
 ]);
 
 /**
  * A HOUSE WHOSE TRADE WORKS A GOOD THAT NO CHAIN OF THE MODEL TAKES THROUGH IT (W2-C-LEAVES-3, the chair's ruling P1-a,
- * 2026-11-13): the counterpart of `NOT_WORKED_THROUGH`. ONE closed list, each entry with its cause: where the asked good
+ * 2026-11-13): the counterpart of `NOT_WORKED_THROUGH`. ONE closed list, each entry with its cause (a comment above it): where the asked good
  * is an entry's, a resource of the town's own (live) yields it, a house of the entry's trade stands on the live roster
  * (not a road to elsewhere), and no import of the record brings the good in (`brought`: then the house works what is
  * bought, and the town's own source is not what reaches it), the good is worked here.
- * @type {ReadonlyArray<Readonly<{ houses: ReadonlyArray<string>, goods: ReadonlyArray<string>, brought: RegExp, cause: string }>>}
+ * @type {ReadonlyArray<Readonly<{ houses: ReadonlyArray<string>, goods: ReadonlyArray<string>, brought: RegExp }>>}
  */
 export const WORKED_BY_HOUSE = Object.freeze([
-  Object.freeze({ houses: ['apothecar'], goods: ['medicinal herbs'], brought: /\bherbs?\b/i,
-    cause: "an apothecary's house works the medicinal herbs of the town's own ground into its remedies; the chain model takes the herbs only from foraging areas (P1-a: r2r-village-47, r2r-metropolis-31, r2r-metropolis-54). Where the record imports herbs (\"Medicinal herbs\", \"Herbs and forage (local gathering areas exhausted)\": r2r-town-17, r2r-city-41, the cold list's #1146) the apothecary's herbs are bought" }),
-  Object.freeze({ houses: ['charcoal burner'], goods: ['timber'], brought: /\b(?:timber|wood|lumber)\b/i,
-    cause: "a charcoal burner cuts and burns the wood of the town's own forest in its kilns (the catalogue: \"Operates kilns in nearby woodland\"); the chain model takes the timber only through a sawmill or carpenters (the chair's ruling on P1-b's doubtful lines: r2s-plague_onset-hamlet-2, r2s-wartime-hamlet-0, r2s-under_siege-village-0). Where the record imports timber or wood the burner's wood is bought" }),
+  // an apothecary's house works the medicinal herbs of the town's own ground into its remedies; the chain model takes the herbs only from foraging areas (P1-a: r2r-village-47, r2r-metropolis-31, r2r-metropolis-54). Where the record imports herbs ("Medicinal herbs", "Herbs and forage (local gathering areas exhausted)": r2r-town-17, r2r-city-41, the cold list's #1146) the apothecary's herbs are bought
+  Object.freeze({ houses: ['apothecar'], goods: ['medicinal herbs'], brought: /\bherbs?\b/i }),
+  // a charcoal burner cuts and burns the wood of the town's own forest in its kilns (the catalogue: "Operates kilns in nearby woodland"); the chain model takes the timber only through a sawmill or carpenters (the chair's ruling on P1-b's doubtful lines: r2s-plague_onset-hamlet-2, r2s-wartime-hamlet-0, r2s-under_siege-village-0). Where the record imports timber or wood the burner's wood is bought
+  Object.freeze({ houses: ['charcoal burner'], goods: ['timber'], brought: /\b(?:timber|wood|lumber)\b/i }),
 ]);
 
 /**
