@@ -125,6 +125,10 @@ const GUARDS = [
   { seed: 'w5-city-occupied-1', pool: 'DS-DEF-11::WALLED-STRAINED', vid: 2, why: 'an occupation: "fewer people turn out each season to man the city walls and gates, and the city is slow to notice" of walls the occupiers hold (HANDBACK-6, W2-WRITE-11, Markaztappa)' },
   { seed: 'w5-city-occupied-1', pool: 'DS-DEF-11::WALLED-STRAINED', vid: 1, why: 'an occupation: "accounts keep its walls in repair but fall short on the watch\'s wages" of a town whose revenue the occupiers take (v2\'s sibling, W2-WRITE-11)' },
   { seed: 'w5-hamlet-occupied-104', pool: 'DS-DEF-11::WALLED-STRAINED', vid: 5, why: 'an occupation: "keeps its works in repair and pays nobody to stand guard there" beside the occupiers\' troops (v2\'s sibling, W2-WRITE-11)' },
+  { seed: 'w5-metropolis-occupied-1', pool: 'DS-DEF-1::readiness ADEQUATE', vid: 3, why: 'an occupation: "People expect to hold against the usual trouble" of a town an army already holds (the chair\'s row of 11:01, REVIEW-R3-TABS-2 R1/C3) (W2-WRITE-11)' },
+  { seed: 'w5-town-occupied-3', pool: 'DS-DEF-1::readiness ADEQUATE', vid: 1, why: 'an occupation: "covered against what it is likely to face" of a town already taken (v3\'s sibling) (W2-WRITE-11)' },
+  { seed: 'w5-city-occupied-104', pool: 'DS-DEF-1::readiness ADEQUATE', vid: 2, why: 'an occupation: "looks defended in the ordinary way: enough for the usual trouble" of an occupied city (v3\'s sibling) (W2-WRITE-11)' },
+  { seed: 'w5-city-occupied-2', pool: 'DS-DEF-1::readiness ADEQUATE', vid: 4, why: 'an occupation: "has enough for the usual trouble and nothing spare" of an occupied city (v3\'s sibling) (W2-WRITE-11)' },
 ];
 
 /** @param {string} seed */

@@ -2753,10 +2753,10 @@ margin *arm*. They are different fields on different rows and both are kept;
 8. `[ledger · crisis: wartime · guardPresence]` With the war on, {settlement}'s people under arms and its works are both in good order, and the town means to keep them so.
 
 **readiness `ADEQUATE`** {colour}
-1. `[ledger]` {settlement} is covered against what it is likely to face, with little left over; two troubles at once would be too many.
-2. `[visitor]` To anyone arriving, {settlement} looks defended in the ordinary way: enough for the usual trouble, and nothing to spare.
-3. `[street]` People at {settlement} expect to hold against the usual trouble, and they claim no more than that.
-4. `[threshold]` {settlement} has enough for the usual trouble and nothing spare, and a second trouble at the same time would find a gap.
+1. `[ledger · no crisis: occupied]` {settlement} is covered against what it is likely to face, with little left over; two troubles at once would be too many.
+2. `[visitor · no crisis: occupied]` To anyone arriving, {settlement} looks defended in the ordinary way: enough for the usual trouble, and nothing to spare.
+3. `[street · no crisis: occupied]` People at {settlement} expect to hold against the usual trouble, and they claim no more than that.
+4. `[threshold · no crisis: occupied]` {settlement} has enough for the usual trouble and nothing spare, and a second trouble at the same time would find a gap.
 
 **readiness `WEAK`** {crisis-scoped}
 1. `[ledger · crisis: any]` {settlement} could deal with a brawl or a thief, but the town could not hold off a raid.

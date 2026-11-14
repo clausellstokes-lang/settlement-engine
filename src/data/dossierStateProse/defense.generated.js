@@ -118,6 +118,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "readiness ADEQUATE": [
         {
           "angle": "ledger",
+          "marks": [
+            "no crisis: occupied"
+          ],
           "text": "{settlement} is covered against what it is likely to face, with little left over; two troubles at once would be too many.",
           "slots": [
             "settlement"
@@ -126,6 +129,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "no crisis: occupied"
+          ],
           "text": "To anyone arriving, {settlement} looks defended in the ordinary way: enough for the usual trouble, and nothing to spare.",
           "slots": [
             "settlement"
@@ -134,6 +140,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "no crisis: occupied"
+          ],
           "text": "People at {settlement} expect to hold against the usual trouble, and they claim no more than that.",
           "slots": [
             "settlement"
@@ -142,6 +151,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
+          "marks": [
+            "no crisis: occupied"
+          ],
           "text": "{settlement} has enough for the usual trouble and nothing spare, and a second trouble at the same time would find a gap.",
           "slots": [
             "settlement"

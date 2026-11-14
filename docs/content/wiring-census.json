@@ -228,7 +228,9 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
+      "lineDeclares": {
+        "no crisis: occupied": 4
+      },
       "undeclared": 0,
       "crisisScoped": false
     },

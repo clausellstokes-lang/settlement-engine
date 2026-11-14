@@ -55,8 +55,8 @@
   },
   "leaves": {
     "src/data/dossierStateProse/defense.generated.js": {
-      "raw": 262797,
-      "gzip": 35196,
+      "raw": 263069,
+      "gzip": 35199,
       "ceilingRaw": 488168,
       "ceilingGzip": 108482
     },
@@ -635,6 +635,14 @@
       "toRaw": 262797,
       "gzipAfter": 35196,
       "reason": "+73 B raw over the committed 262724 (gzip level 9: 35201 -> 35196): DS-DEF-11 WALLED-STRAINED v1 v2 v5 + no crisis: occupied, v2 slot out"
+    },
+    {
+      "car": "W2-WRITE-11 ADEQ",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 262797,
+      "toRaw": 263069,
+      "gzipAfter": 35199,
+      "reason": "+272 B raw over the committed 262797 (gzip level 9: 35196 -> 35199): DS-DEF-1 readiness ADEQUATE v1-v4 + no crisis: occupied"
     }
   ],
   "ceilingTransfersNewLeaves": [
