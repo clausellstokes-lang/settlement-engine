@@ -466,15 +466,15 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
             {shownExports.length>0
               ?<div style={{display:'flex',flexWrap:'wrap',gap:4}}>
                 {shownExports.map((e,i)=>{
-                  const transit=e.includes('(transit)');
+                  const transit=e.includes('(transit)'); const word=tradePillWord(e,'exports'); // SURFACES-3 item 2 (r3): the pill's one word
                   const ownership=tradeLabelOwnership(eco,'exports',e);
                   const title=ownership.members.length
                     ? `incl. ${ownership.members.join(', ')}`
                     : ownership.mixed
                       ? 'Also an exact custom endpoint'
                       : undefined;
-                  if(ownership.customOnly) return <span key={i} title={title} style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:GOLD_DEEP,...GOLD_TINT,borderWidth:1,borderStyle:'solid',padding:'3px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{e}{ownership.members.length?<span style={{fontWeight:600,opacity:0.8}}> · incl. {ownership.members.length}</span>:null}<span style={{fontWeight:800}}>✦</span></span>;
-                  return <span key={i} title={title} style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:600,color:transit?'#2a3a7a':'#1a5a28',background:transit?'#eaecf8':'#e8f5ec',border:`1px solid ${transit?'#a8b8e8':'#a8d8b0'}`,padding:'3px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{e}{ownership.mixed?<span style={{fontWeight:700,color:GOLD_DEEP}}>{ownership.members.length?` · incl. ${ownership.members.length} ✦`:' · also custom ✦'}</span>:null}</span>;
+                  if(ownership.customOnly) return <span key={i} title={title} style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:GOLD_DEEP,...GOLD_TINT,borderWidth:1,borderStyle:'solid',padding:'3px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{word}{ownership.members.length?<span style={{fontWeight:600,opacity:0.8}}> · incl. {ownership.members.length}</span>:null}<span style={{fontWeight:800}}>✦</span></span>;
+                  return <span key={i} title={title} style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:600,color:transit?'#2a3a7a':'#1a5a28',background:transit?'#eaecf8':'#e8f5ec',border:`1px solid ${transit?'#a8b8e8':'#a8d8b0'}`,padding:'3px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{word}{ownership.mixed?<span style={{fontWeight:700,color:GOLD_DEEP}}>{ownership.members.length?` · incl. ${ownership.members.length} ✦`:' · also custom ✦'}</span>:null}</span>;
                 })}
                 {exportMarks.has('transit')&&<div style={{width:'100%',fontSize:chromeFontSize(FS.xxs, mobile),color:swatch.info,fontStyle:'italic',marginTop:4}}>Blue = re-exported transit goods</div>}
               </div>
@@ -498,7 +498,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
                     // the RAW value (`resourceAnalysis.imports.critical` carries catalogue KEYS —
                     // camel_herds, hot_springs_mineral — and availableResourceSatisfies matches
                     // against those very strings); only the label a reader sees is resolved.
-                    const impLabel=resourceDisplayName(imp);
+                    const impLabel=tradePillWord(imp,'imports');
                     const title=ownership.members.length
                       ? `incl. ${ownership.members.join(', ')}`
                       : ownership.mixed
@@ -791,6 +791,7 @@ function foodSentence(s, eco, fb, fbal, foodBar, foodDeficit, foodSurplus) {
   return `${name} grows ${grown} of what it eats, and ${carriers} in ${brought}.${magic} ${short}`;
 }
 
+import { tradePillWord } from '../../../domain/display/tradePillWord.js'; // SURFACES-3 item 2 (r3): the trade pill's word, the PDF's and the journal's too
 import { carriersOf } from '../../../domain/display/foodCarrier.js'; // SURFACES-3 item 1: who brings the food in, moved whole to the leaf the PDF reads too
 
 export default React.memo(EconomicsTab);

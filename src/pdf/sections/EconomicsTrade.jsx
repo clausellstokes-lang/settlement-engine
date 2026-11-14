@@ -28,11 +28,11 @@ import {
   tradeLabelOwnership,
 } from '../../domain/content/customTradeLabelOwnership.js';
 import { statusCase } from '../../domain/display/labelCase.js';
-import { resourceDisplayName } from '../../domain/display/resourceDisplayName.js'; // §934.22 item 2 — the EXPORTS/IMPORTS lists
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js'; // §934.22 item 1(b) — the PROC row
 import { chainHousesOf } from '../../domain/display/chainHouses.js'; // R2-CODE-B item 1b (ruling R1): the PROC row's houses
 import { SupplyChainFlow } from './SupplyChainFlow.jsx';
 import { StateProse } from '../primitives/StateProse.jsx';
+import { tradePillWord } from '../../domain/display/tradePillWord.js';
 import { foodBlockShown } from '../../domain/display/foodCarrier.js'; // SURFACES-3 item 1: the tab's food row
 import { revenuesOffTheLists, tradeListsAsPrinted } from '../../domain/display/tradeListDisplay.js'; // CENSUS-3c R-P 2 — the revenues that left the trade lists; W2-C-LEAVES-7 item 8 — the tab's trade lists
 
@@ -43,7 +43,7 @@ function renderedTradeLabel(economy, direction, item) {
   // rather than at each `itemRender` call site is what keeps that split in ONE place, and it
   // is the shape tests/lint/resourceLabelSeam.census.test.js's owed row named.
   const ownership = tradeLabelOwnership(economy, direction, item);
-  const shown = label(resourceDisplayName(item));
+  const shown = label(tradePillWord(item, direction)); // SURFACES-3 item 2 (r3): the tab's word (an export as the list spells it)
   if (ownership.customOnly) {
     const members = ownership.members.length
       ? ` (incl. ${ownership.members.join(', ')})`

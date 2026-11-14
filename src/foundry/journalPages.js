@@ -37,9 +37,9 @@ import { composeCrisisPage, CRISIS_PAGE_COPY } from '../domain/crisis/crisisPage
 import { stakeLines, unprintedFacts } from '../pdf/lib/crisisPrint.js';
 // ROUND THREE, ruling (a): every house this journal prints is printed by its label, the one display leaf.
 import { houseLabelsInText, institutionHouseLabel } from '../domain/display/institutionDisplayName.js';
-import { resourceDisplayName } from '../domain/display/resourceDisplayName.js';
 import { tradeListsAsPrinted, revenuesOffTheLists } from '../domain/display/tradeListDisplay.js';
 import { foodwaysLineOf } from '../domain/foodways.js';
+import { tradePillWord } from '../domain/display/tradePillWord.js'; // SURFACES-3 item 2 (r3): the tab's pill word
 import { foodWordShown } from '../domain/display/foodWordShown.js';
 import { chainStateOnPage } from '../pdf/lib/chainStateOnPage.js'; // SURFACES-1 item 1: the tab's state in the tab's words
 import {
@@ -327,8 +327,8 @@ function economicsPage(vm, settlement = vm.raw) { // W2-C-LEAVES-8: the settleme
     // The resource label seam: a trade list may carry a raw RESOURCE_DATA key beside an
     // authored phrase, and the VTT journal printed both exactly as the record spells them.
     // F11 / CENSUS-3b unit 3: the journal reads the SCREEN's lists (one display reader).
-    kv('Exports', trade.exports.map(x => resourceDisplayName(x)).filter(Boolean).join(', ')),
-    kv('Imports', trade.imports.map(x => resourceDisplayName(x)).filter(Boolean).join(', ')),
+    kv('Exports', trade.exports.map(x => tradePillWord(x, 'exports')).filter(Boolean).join(', ')),
+    kv('Imports', trade.imports.map(x => tradePillWord(x, 'imports')).filter(Boolean).join(', ')),
     kv('Food', foodWordShown(settlement)?.label), // SURFACES-3 item 1: the food word's one home, or no row (its own Surplus/Balanced/Deficit went)
     (e.incomeSources || []).length ? md('', '## Income', e.incomeSources.map(s =>
       `- ${esc(label(s.source) || s.source)}: ${esc(Math.round(s.percentage))}%`)) : null,
