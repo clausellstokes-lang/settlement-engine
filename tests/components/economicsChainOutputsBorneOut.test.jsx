@@ -25,6 +25,8 @@ import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { liveInstitutionNames } from '../../src/domain/facts/institutions.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { chainOutputsShown } from '../../src/domain/display/tradeListDisplay.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 /** The app's own shape (the readers' cfgFor). @param {string} seed */
 const birthApp = (seed) => {
@@ -45,6 +47,27 @@ const tabText = (town) => {
 /** @param {any} town @param {string} chainId */
 const chainOf = (town, chainId) => (town.economicState.activeChains || []).find((/** @type {any} */ c) => c.chainId === chainId);
 const COURT_OUTPUTS = ['Civil disputes', 'Criminal trials', 'Notary services'];
+/** The census's and the reader's shapes (REVIEW-W2-C-LEAVES render.rr3s.jsx :: cfgFor: r2r, r2s, rr3). @param {string} seed */
+const birthAny = (seed) => {
+  if (seed.startsWith('rr3-')) {
+    const m = /** @type {RegExpMatchArray} */ (seed.match(/^rr3-(\w+)-([a-z_+]+)-([a-z_]+)-\d+$/));
+    return generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...(m[3] === 'rand' ? {} : { tradeRouteAccess: m[3] }), settType: m[1],
+      selectedStressesRandom: false, selectedStresses: m[2] === 'calm' ? [] : m[2].split('+'), _randomizePriorities: true }), null, { seed, customContent: {} });
+  }
+  const dials = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true,
+    selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
+  const m = /** @type {RegExpMatchArray} */ (seed.match(/^r2r-(\w+)-\d+$/) || seed.match(/^r2s-(\w+)-(\w+)-\d+$/));
+  const cfg = seed.startsWith('r2r-') ? { ...DEFAULT_CONFIG, ...dials, settType: m[1] }
+    : { ...DEFAULT_CONFIG, ...dials, selectedStresses: [m[1]], selectedStressesRandom: false, settType: m[2] };
+  return generateSettlementPipeline(birthConfig(cfg), null, { seed, customContent: {} });
+};
+/** W2-C-LEAVES-12 ruling (3), at f9db28270: a card's output no house of its row stands for (a Mine and master-crafted weapons;
+ * a Thatcher and milled lumber; Docks and ship construction with no shipyard), the reader's [11] and its MEDIUM pills. */
+const OUTPUT_SILENT = [['r2r-hamlet-6', 'iron', 'Master-crafted weapons'], ['r2r-hamlet-40', 'iron', 'Master-crafted weapons'],
+  ['r2s-famine-town-0', 'iron', 'Master-crafted weapons'], ['r2s-slave_revolt-village-0', 'timber', 'Milled lumber'],
+  ['r2r-town-4', 'harbour_trade', 'Ship construction']];
+/** …and guards, where a house of the good's row stands: the output keeps printing. */
+const OUTPUT_KEPT = [['r2r-village-28', 'iron', 'Master-crafted weapons'], ['r2r-town-8', 'iron', 'Master-crafted weapons']];
 
 afterEach(cleanup);
 
@@ -61,7 +84,27 @@ describe('a chain card prints only the outputs its houses bear out (item 7)', ()
     expect(liveInstitutionNames(guard), 'anchored').toContain('Courthouse');
     const g = tabText(guard);
     for (const o of COURT_OUTPUTS) expect(g, o).toContain(o);
-  }, 60000);
+
+    // W2-C-LEAVES-12, the chair's ruling (3) (REVIEW-W2-C-LEAVES [11], HIGH): A GOOD WITH NO MAKER ROW IS NOT PRINTED BY
+    // DEFAULT. The card's default read any house of the chain by its name's first word: "Outputs: Master-crafted weapons"
+    // on an Iron & Metalwork card whose only house is a Mine (21 of 21). The unit:
+    const iron = { chainId: 'iron', processingInstitutions: ['Mine (open cast)', 'Mine', 'Blacksmith'], resourceInputKey: 'iron_deposits',
+      outputs: ['Quality tools and weapons', 'Master-crafted weapons', 'Widgets of no row'] };
+    /** @param {string[]} houses */
+    const held = (houses) => ({ name: 'Testford', institutions: houses.map((name) => ({ name })), economicState: { activeChains: [iron] } });
+    expect(chainOutputsShown(iron, held(['Mine (open cast)'])), 'a mine forges no blade').toEqual([]);
+    expect(chainOutputsShown(iron, held(['Blacksmith'])), 'a smith does; a good of no row is made by no house')
+      .toEqual(['Quality tools and weapons', 'Master-crafted weapons']);
+    // …and on the births: the card's outputs, a house of each good's own row standing (a famine town among them)
+    expectNoSeedFailures(collectSeedFailures([...OUTPUT_SILENT, ...OUTPUT_KEPT], (row) => {
+      const [seed, chainId, good] = row;
+      const town = /** @type {any} */ (birthAny(seed));
+      expect(chainOf(town, chainId)?.outputs, `${seed}: anchored, the record's ${chainId} outputs`).toContain(good);
+      const shown = chainOutputsShown(chainOf(town, chainId), town);
+      if (OUTPUT_SILENT.includes(row)) expect(shown, `${seed}: ${good} with no house that makes it`).not.toContain(good);
+      else expect(shown, `${seed}: ${good} beside the house that makes it`).toContain(good);
+    }), 'a card names a good no house of the town makes');
+  }, 120000);
 
   test('a house of worship reached only by an "Access to" row offers nothing here (rww-hamlet-calm-1); a church that stands keeps its outputs (rww-metropolis-calm-1)', () => {
     const hamlet = birthApp('rww-hamlet-calm-1');

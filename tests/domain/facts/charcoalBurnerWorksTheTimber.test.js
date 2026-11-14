@@ -7,6 +7,7 @@
  * reads Partial; four towns gain "timber" as produced locally; no half-way line moves.
  */
 import { beforeAll, describe, expect, test } from 'vitest';
+import { collectSeedFailures, expectNoSeedFailures } from '../../helpers/seedFailures.js';
 import { generateSettlementPipeline } from '../../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../../src/store/configSlice.js';
@@ -39,10 +40,10 @@ describe('a charcoal burner works the timber of the town\'s own forest', () => {
   });
 
   test('the census: the three doubtful lines are gone where a charcoal burner stands on the town\'s own forest', () => {
-    for (const seed of ['r2s-plague_onset-hamlet-2', 'r2s-wartime-hamlet-0', 'r2s-under_siege-village-0']) {
+    expectNoSeedFailures(collectSeedFailures(['r2s-plague_onset-hamlet-2', 'r2s-wartime-hamlet-0', 'r2s-under_siege-village-0'], (seed) => {
       const s = birthCensus(seed);
       expect(s.institutions.some((/** @type {any} */ i) => i.name === 'Charcoal burner'), `${seed}: anchored, the burner`).toBe(true);
       expect(resourceGapLines(s).map((g) => g.impact).filter((l) => /works the timber/.test(l)), seed).toEqual([]);
-    }
+    }), 'a census town still says no one works the timber');
   }, 60000);
 });

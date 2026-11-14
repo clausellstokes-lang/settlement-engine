@@ -36,7 +36,7 @@ import { institutionHasAnyTag } from '../../lib/entities.js';
 import { institutionDisplayName } from './institutionDisplayName.js';
 import { resourceDisplayName } from './resourceDisplayName.js';
 import { compareCodepoint } from '../deterministicSort.js';
-import { importsAsPrinted } from './tradeListDisplay.js';
+import { exportsAsPrinted, houseMakesGoodNamed, importsAsPrinted, tradeMarkOf } from './tradeListDisplay.js';
 import { chainModelsResource, chainWorksResource } from '../facts/chainWorking.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { familyOfInstitution, institutionalCatalog } from '../../data/institutionalCatalog.js';
@@ -202,9 +202,14 @@ function gapResourceKeys(s, chainKey) {
  * @param {PageRecord} s @param {string} name a house the chain's list names
  */
 function houseOfKindHere(s, name) {
+  return houseOfKindOn(s, name) !== undefined;
+}
+
+/** The live house of the named house's kind (`houseOfKindHere`'s reading), or undefined. @param {PageRecord} s @param {string} name */
+function houseOfKindOn(s, name) {
   const want = familyOfInstitution({ name });
   const wantScales = scaleGroupsOf(name, want?.key);
-  return liveInstitutions(s).some((inst) => {
+  return liveInstitutions(s).find((inst) => {
     const have = str(inst?.name);
     if (!have) return false;
     if (have.toLowerCase() === name.toLowerCase()) return true;
@@ -277,9 +282,14 @@ const FINISHING_TRADES = Object.freeze({
  * @param {PageRecord} s @param {string} name a house the chain's list names, missing by kind
  */
 function tradeFinisherHere(s, name) {
+  return tradeFinisherOn(s, name) !== undefined;
+}
+
+/** The live house of the named house's finishing trade (`tradeFinisherHere`'s reading), or undefined. @param {PageRecord} s @param {string} name */
+function tradeFinisherOn(s, name) {
   const trades = FINISHING_TRADES[name.toLowerCase()];
-  if (!trades) return false;
-  return liveInstitutions(s).some((inst) => {
+  if (!trades) return undefined;
+  return liveInstitutions(s).find((inst) => {
     const have = str(inst?.name).toLowerCase();
     return !!have && !have.startsWith('access to') && trades.some((w) => have.includes(w));
   });
@@ -404,8 +414,47 @@ export function exploitationForDesk(s) {
   return { exploitation: {
     unexploited: g.unexploited.filter((x) => !x.moved).map((x) => asRead(x.card)),
     partiallyExploited: partial.map((x) => asRead(x.card)),
-    fullyExploited: g.full.map((x) => x.card),
+    fullyExploited: g.full.map((x) => fullRowAsHeld(s, x.card)).filter((x) => x !== null),
   } };
+}
+
+/**
+ * A FULL ROW SPEAKS ONLY OF A HOUSE THAT STANDS AND A GOOD THAT LEAVES (W2-C-LEAVES-11, the chair's ruling (2) of 2026-11-14
+ * on REVIEW-W2-C-LEAVES's HIGH [2]: "The {resource} in {N}'s country is worked all the way through: the ground gives it,
+ * {House} finishes it, and it leaves as {good}." was false in 34 of the 41 towns where the stage's re-filing newly printed
+ * it, "Fishmonger finishes it, and it leaves as preserved fish" with no fishmonger and no fish export; and in the towns
+ * where it printed before). The row's slots were the chain table's defaults (`processingInstitutions[0]`,
+ * `finalProducts[0]`), never the record. Here they are the record's: the first of the chain's houses the live roster holds
+ * by kind or by trade (`houseOfKindOn`, `tradeFinisherOn`; never an access row or a count band), named
+ * by its display label with any count struck (`proseHouseName`), and the first of the chain's goods an export the page
+ * prints holds (`exportsAsPrinted`), named as that export prints. Where either is missing the row is not offered and
+ * the sentence is not written.
+ * @param {PageRecord} s @param {ExploitationCard} card
+ * @returns {ExploitationCard | null}
+ */
+function fullRowAsHeld(s, card) {
+  const houses = arr(card.processingInstitutions).map(str).filter(Boolean)
+    .map((n) => houseOfKindOn(s, n) ?? tradeFinisherOn(s, n))
+    // a road to a neighbour's house finishes nothing here; a catalogue count band ("Blacksmiths (3-10)") is many houses,
+    // and the sentence's slot names one
+    .filter((inst) => inst !== undefined && !/^access to/i.test(str(inst?.name)) && !/\(\d/.test(str(inst?.name)));
+  if (!houses.length) return null;
+  const exported = exportsAsPrinted(/** @type {Parameters<typeof exportsAsPrinted>[0]} */ (s)).map((x) => tradeMarkOf(x).label);
+  // W2-C-LEAVES-12, the chair's ruling (2b): THE HOUSE THAT FINISHES A GOOD MAKES THAT GOOD. The house and the good are
+  // named together only where the good's own maker row holds that house (`houseMakesGoodNamed`): a mill makes flour, not
+  // beer; a fish market sells fish, it renders no oil. The first such pair in the chain's order, else no row.
+  for (const product of arr(card.finalProducts).map(str).filter(Boolean)) {
+    const good = exported.find((x) => norm(x).includes(norm(product)));
+    const house = good && houses.find((inst) => houseMakesGoodNamed(good, str(inst?.name), /** @type {Parameters<typeof houseMakesGoodNamed>[2]} */ (s)));
+    // the export as the page names it, in running prose: its bracketed note struck, a common noun ("Beer (barrel)" -> "beer")
+    if (good && house) return { ...card, processingInstitutions: [proseHouseName(house)], finalProducts: [good.replace(/\s*\([^)]*\)/g, '').trim().toLowerCase()] };
+  }
+  return null;
+}
+
+/** A house as running prose names it: its display label, any bracketed count or note struck ("Bakers (5-15)" -> "Bakers"). @param {{ name?: unknown } | null | undefined} inst */
+function proseHouseName(inst) {
+  return str(institutionDisplayName(inst) || inst?.name).replace(/\s*\([^)]*\)/g, '').replace(/\s+/g, ' ').trim();
 }
 
 /**

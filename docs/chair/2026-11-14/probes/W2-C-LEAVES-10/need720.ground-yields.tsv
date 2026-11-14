@@ -1,0 +1,80 @@
+r2r-town-12	wool	isolated	worked	alpine_pasture	Cloth purchase, garment tailoring and textile dyeing here depend on wool or flax brought in by magic.
+r2r-town-12	wool	isolated	worked	alpine_pasture	Cloth purchase, garment tailoring and textile dyeing here depend on wool or flax brought in by magic.
+r2r-town-12	medicinal_herbs	isolated	worked	marshlands/hot_springs	Healing, surgical care and long-term recovery here depend on medicinal herbs brought in by magic.
+r2r-town-42	wool	brought	worked	alpine_pasture	Cloth purchase, garment tailoring and textile dyeing here depend on wool or flax brought in, which a siege, a closed road or a blockade would cut off.
+r2r-town-42	wool	brought	worked	alpine_pasture	Cloth purchase, garment tailoring and textile dyeing here depend on wool or flax brought in.
+r2r-town-52	medicinal_herbs	brought	worked	magical_node	Potions, alchemical components and reagents here depend on medicinal herbs brought in, which a siege, a closed road or a blockade would cut off.
+r2r-town-52	medicinal_herbs	brought	worked	magical_node	Healing, surgical care and long-term recovery here depend on medicinal herbs brought in.
+r2r-town-54	grain	isolated	worked	date_palms	Bread and pastry and rations here depend on grain brought in by magic: no trade road reaches Erdenbuurt.
+r2r-town-54	grain	isolated	worked	date_palms	Meals, ale and lodging here depend on grain brought in by magic.
+r2r-town-56	timber	brought	worked	mountain_timber	Construction, furniture and barrel making here depend on timber brought in, which a siege, a closed road or a blockade would cut off.
+r2r-city-12	timber	brought	worked	shipbuilding_timber	Printed documents, books and pamphlets here depend on timber or rags for paper brought in.
+r2r-city-16	timber	brought	worked	shipbuilding_timber	Printed documents, books and pamphlets here depend on timber or rags for paper brought in.
+r2r-city-20	wool	isolated	worked	alpine_pasture	Cloth purchase, garment tailoring and textile dyeing here depend on wool or flax brought in by magic.
+r2r-city-20	timber	isolated	worked	mountain_timber/managed_forest	Construction, furniture and barrel making here depend on timber brought in by magic.
+r2r-city-20	wool	isolated	worked	alpine_pasture	Cloth purchase, garment tailoring and textile dyeing here depend on wool or flax brought in by magic.
+r2r-city-20	timber	isolated	worked	mountain_timber/managed_forest	Printed documents, books and pamphlets here depend on timber or rags for paper brought in by magic.
+r2r-city-38	medicinal_herbs	brought	not worked	magical_node	Healing, surgical care and long-term recovery here depend on medicinal herbs and supplies brought in.
+r2r-city-48	medicinal_herbs	isolated	not worked	hot_springs	Healing, surgical care and long-term recovery here depend on medicinal herbs brought in by magic.
+r2r-city-52	medicinal_herbs	brought	worked	magical_node	Healing, surgical care and long-term recovery here depend on medicinal herbs brought in.
+r2r-metropolis-8	medicinal_herbs	brought	not worked	hot_springs/marshlands	Healing, surgical care and quarantine here depend on medicinal herbs brought in.
+r2r-metropolis-18	medicinal_herbs	brought	worked	foraging_areas/marshlands/ancient_grove	Healing, surgical care and quarantine here depend on medicinal herbs brought in.
+r2r-metropolis-20	medicinal_herbs	brought	not worked	ancient_grove/foraging_areas/hot_springs/marshlands	Healing, surgical care and quarantine here depend on medicinal herbs brought in.
+r2r-metropolis-32	wool	brought	worked	alpine_pasture	Cloth purchase, garment tailoring and textile dyeing here depend on wool or flax brought in.
+r2r-metropolis-32	wool	brought	worked	alpine_pasture	Cloth purchase, garment tailoring and textile dyeing here depend on wool or flax brought in.
+r2r-metropolis-38	timber	brought	worked	mountain_timber	Construction, furniture and barrel making here depend on timber brought in.
+r2r-metropolis-50	medicinal_herbs	brought	not worked	hot_springs/ancient_grove	Healing, surgical care and quarantine here depend on medicinal herbs brought in.
+r2r-metropolis-56	medicinal_herbs	isolated	not worked	hot_springs_mineral/marshlands/hot_springs	Healing, surgical care and quarantine here depend on medicinal herbs brought in by magic.
+r2s-under_siege-metropolis-0	medicinal_herbs	siege	worked	hot_springs_mineral/marshlands	Healing, surgical care and quarantine here depend on medicinal herbs from outside, which the siege has cut off.
+r2s-under_siege-metropolis-0	timber	siege	worked	mountain_timber	Construction, furniture and barrel making here depend on timber from outside, which the siege has cut off.
+r2s-indebted-metropolis-0	grain	brought	worked	date_palms	Meals, ale and lodging here depend on grain brought in.
+r2s-plague_onset-metropolis-2	medicinal_herbs	brought	not worked	hot_springs_mineral/ancient_grove/marshlands	Healing, surgical care and quarantine here depend on medicinal herbs brought in.
+r2s-succession_void-town-2	grain	brought	worked	date_palms	Meals, ale and lodging here depend on grain brought in, which a siege, a closed road or a blockade would cut off.
+r2s-succession_void-metropolis-0	medicinal_herbs	brought	not worked	hot_springs/foraging_areas	Healing, surgical care and quarantine here depend on medicinal herbs brought in.
+r2s-monster_pressure-city-2	livestock	brought	worked	alpine_pasture	Fresh meat and rendered fat here depend on livestock or game brought in, which a siege, a closed road or a blockade would cut off.
+r2s-monster_pressure-city-2	medicinal_herbs	brought	worked	marshlands/ancient_grove	Healing, surgical care and long-term recovery here depend on medicinal herbs brought in.
+r2s-religious_conversion-city-2	timber	brought	worked	shipbuilding_timber	Printed documents, books and pamphlets here depend on timber or rags for paper brought in.
+r2s-slave_revolt-town-0	medicinal_herbs	brought	not worked	hot_springs	Healing, surgical care and long-term recovery here depend on medicinal herbs brought in.
+r2r-town-7	grain	brought	worked	date_palms	Meals, ale and lodging here depend on grain brought in.
+r2r-town-17	medicinal_herbs	brought	not worked	hot_springs/ancient_grove	Healing, surgical care and long-term recovery here depend on medicinal herbs brought in.
+r2r-city-19	timber	brought	worked	shipbuilding_timber	Printed documents, books and pamphlets here depend on timber or rags for paper brought in.
+r2r-city-21	medicinal_herbs	brought	worked	marshlands/ancient_grove/foraging_areas	Healing, surgical care and long-term recovery here depend on medicinal herbs brought in.
+r2r-city-35	medicinal_herbs	brought	not worked	hot_springs/foraging_areas	Healing, surgical care and long-term recovery here depend on medicinal herbs brought in.
+r2r-city-41	medicinal_herbs	brought	not worked	hot_springs	Healing, surgical care and long-term recovery here depend on medicinal herbs and supplies brought in.
+r2r-city-43	grain	brought	worked	date_palms	Bread and pastry and rations here depend on grain brought in.
+r2r-city-43	grain	brought	worked	date_palms	Mercenary hire, armed escort and contract soldiers here depend on iron and grain brought in.
+r2r-city-43	grain	brought	worked	date_palms	Meals, ale and lodging here depend on grain brought in.
+r2r-city-43	medicinal_herbs	brought	worked	marshlands/ancient_grove	Healing, surgical care and long-term recovery here depend on medicinal herbs brought in.
+r2r-city-55	medicinal_herbs	brought	not worked	foraging_areas/ancient_grove/hot_springs	Healing, surgical care and long-term recovery here depend on medicinal herbs brought in.
+r2r-metropolis-5	wool	brought	worked	alpine_pasture	Cloth purchase, garment tailoring and textile dyeing here depend on wool or flax brought in, which a siege, a closed road or a blockade would cut off.
+r2r-metropolis-5	timber	brought	worked	mountain_timber	Construction, furniture and barrel making here depend on timber brought in.
+r2r-metropolis-5	wool	brought	worked	alpine_pasture	Cloth purchase, garment tailoring and textile dyeing here depend on wool or flax brought in.
+r2r-metropolis-5	timber	brought	worked	mountain_timber	Printed documents, books and pamphlets here depend on timber or rags for paper brought in.
+r2r-metropolis-9	medicinal_herbs	isolated	not worked	foraging_areas/ancient_grove/hot_springs	Healing, surgical care and quarantine here depend on medicinal herbs brought in by magic.
+r2r-metropolis-13	medicinal_herbs	brought	worked	magical_node	Healing, surgical care and quarantine here depend on medicinal herbs brought in.
+r2r-metropolis-25	grain	brought	worked	date_palms	Mercenary hire, armed escort and contract soldiers here depend on iron and grain brought in.
+r2r-metropolis-25	grain	brought	worked	date_palms	Meals, ale and lodging here depend on grain brought in.
+r2r-metropolis-27	medicinal_herbs	brought	worked	marshlands/foraging_areas/ancient_grove	Healing, surgical care and quarantine here depend on medicinal herbs brought in.
+r2r-metropolis-33	medicinal_herbs	brought	worked	foraging_areas/marshlands/ancient_grove	Healing, surgical care and quarantine here depend on medicinal herbs brought in.
+r2r-metropolis-55	medicinal_herbs	brought	worked	magical_node	Healing, surgical care and quarantine here depend on medicinal herbs brought in.
+r2s-occupied-town-3	medicinal_herbs	brought	not worked	ancient_grove/hot_springs	Healing, surgical care and long-term recovery here depend on medicinal herbs brought in.
+r2s-occupied-city-3	wool	brought	worked	alpine_pasture	Cloth purchase, garment tailoring and textile dyeing here depend on wool or flax brought in.
+r2s-occupied-city-3	wool	brought	worked	alpine_pasture	Cloth purchase, garment tailoring and textile dyeing here depend on wool or flax brought in.
+r2s-indebted-metropolis-1	medicinal_herbs	brought	not worked	foraging_areas/hot_springs	Healing, surgical care and quarantine here depend on medicinal herbs brought in.
+r2s-indebted-metropolis-3	medicinal_herbs	brought	not worked	hot_springs_mineral/foraging_areas/ancient_grove/magical_node	Healing, surgical care and quarantine here depend on medicinal herbs brought in.
+r2s-recently_betrayed-town-1	medicinal_herbs	brought	not worked	hot_springs	Healing, surgical care and long-term recovery here depend on medicinal herbs brought in.
+r2s-plague_onset-town-1	medicinal_herbs	brought	not worked	hot_springs	Healing, surgical care and long-term recovery here depend on medicinal herbs brought in.
+r2s-plague_onset-metropolis-3	medicinal_herbs	brought	not worked	ancient_grove/hot_springs	Healing, surgical care and quarantine here depend on medicinal herbs brought in.
+r2s-succession_void-city-3	wool	brought	worked	camel_herds/grazing_land	Cloth purchase, garment tailoring and textile dyeing here depend on wool or flax brought in, which a siege, a closed road or a blockade would cut off.
+r2s-succession_void-metropolis-1	grain	brought	worked	date_palms	Last-resort defence, command post and long siege endurance here depend on stone, iron and grain brought in, which a siege, a closed road or a blockade would cut
+r2s-succession_void-metropolis-1	grain	brought	worked	date_palms	Mercenary hire, armed escort and contract soldiers here depend on iron and grain brought in.
+r2s-succession_void-metropolis-1	grain	brought	worked	date_palms	Meals, ale and lodging here depend on grain brought in.
+r2s-succession_void-metropolis-3	medicinal_herbs	brought	worked	ancient_grove/marshlands/foraging_areas	Healing, surgical care and quarantine here depend on medicinal herbs brought in.
+r2s-monster_pressure-city-3	medicinal_herbs	brought	not worked	foraging_areas/hot_springs	Healing, surgical care and long-term recovery here depend on medicinal herbs brought in.
+r2s-monster_pressure-metropolis-3	timber	brought	worked	mountain_timber	Construction, furniture and barrel making here depend on timber brought in.
+r2s-insurgency-metropolis-1	medicinal_herbs	brought	not worked	hot_springs_mineral/foraging_areas/marshlands	Healing, surgical care and quarantine here depend on medicinal herbs brought in, which a siege, a closed road or a blockade would cut off.
+r2s-insurgency-metropolis-1	wool	brought	worked	alpine_pasture	Cloth purchase, garment tailoring and textile dyeing here depend on wool or flax brought in.
+r2s-insurgency-metropolis-1	wool	brought	worked	alpine_pasture	Cloth purchase, garment tailoring and textile dyeing here depend on wool or flax brought in.
+r2s-mass_migration-city-3	medicinal_herbs	brought	worked	magical_node	Healing, surgical care and long-term recovery here depend on medicinal herbs and supplies brought in.
+r2s-mass_migration-city-3	timber	brought	worked	shipbuilding_timber	Printed documents, books and pamphlets here depend on timber or rags for paper brought in.
+r2s-mass_migration-metropolis-3	medicinal_herbs	brought	worked	marshlands/ancient_grove	Healing, surgical care and quarantine here depend on medicinal herbs brought in.
