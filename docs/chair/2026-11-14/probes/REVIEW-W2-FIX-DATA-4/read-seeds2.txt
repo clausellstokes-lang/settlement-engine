@@ -1,0 +1,7 @@
+rv4-any-city-under_siege-4
+rv4-any-metropolis-occupied-2
+rv4-any-town-wartime-4
+rv4-any-city-under_siege+famine-6
+rv4-any-town-under_siege-6
+rv4-any-town-under_siege-11
+rv4-any-town-occupied-1
