@@ -832,6 +832,20 @@ town in that column so that the war line planted in the famine pool REDS; prove 
    words 288 (all 60-89). Guard: tests/domain/r3c8ReaderLinesTrue.test.js (L01 arms), red at 70d92ed06 3/3, plant
    floorWeeks 52*60 red 3/3. Re-keyed by identity: heraldCausalVoice.test.js's own R3-CODE-C-2 pin of the false words at
    77 years.
+2. **L05 (and the carried #457 class), 1b3e0fdfd.** Cause: a chain counted "fully exploited" at two houses of ANY of its
+   tags (Subsistence farming and an external mill carry "food"), so the claim stood with none of the chain's houses and
+   beside a famine that failed its source. Cure (resourceGenerator.js :: evaluateInstitutionDeps): the row is written
+   only where every house in `processingInstitutions` (not an "Access to ..." road) stands by name or by kind (a house
+   that processes the chain, same head word), and the food record's `failedSource` is not the chain's; else NOT LISTED
+   (the ruling's arm). A chain naming no house (oasis dates) gives its goods without the claim. DECLARED MOVE:
+   resourceAnalysis.exports only (720: 291 towns; 1,722: 627, all in resourceAnalysis). Counts: "cheese, preserved meat"
+   claims 82 -> 0 (famine 8 -> 0; no butcher/dairy/herd 21 -> 0); leather with no tanner 50 -> 0 (reader 51); every
+   claim 795 -> 121; export rows 1,137 -> 457; towns with an export row 827 -> 365. Guard: the L05 arms (ten towns, three
+   named guard towns); red at 70d92ed06; plants (3), (4) and the no-house arm each red. Re-keyed by identity:
+   resourceAnalysisCoupling.test.js's R3-CODE-C-2 #457 pin. **Recommendation for the chair:** the ruling's other arm (the
+   row says what is missing in the partial sibling's words) would keep more rows; I took "not listed" because no product
+   to house map may be built (the 2026-11-13 ruling) and a partial row's intermediates ("meat, hides, dairy") would newly
+   print where their houses do not stand.
 
 ### EVERY NEW OR CHANGED LINE, with the towns it was read in (the owner's veto list, and the next reader's)
 - **"older than all but the oldest alive"** (NEW WORDS; heraldCausalGrammar.js :: LIVING_FLOOR, the History tab's
@@ -839,8 +853,16 @@ town in that column so that the war line planted in the famine pool REDS; prove 
   74y), rr3-thorp-under_siege+famine-rand-3 (siege and famine; 79y), r2s-wartime-thorp-2 (war and famine; 67y),
   r2r-thorp-0 (73y), r2s-mass_migration-metropolis-3 (metropolis of 248,369, largest; 78y). The sentences are in be7f5a208's body.
 
+- **The export row** (resourceGenerator.js): no new words. Kept with the claim: rr3-metropolis-occupied-rand-3 (301,467,
+  occupied, largest), rr3-town-under_siege+famine-rand-0, rr3-city-plague_onset-rand-2; given without the claim:
+  r2s-infiltrated-thorp-3 (thorp of 6); now silent: r2r-thorp-36 (thorp of 5), r2s-famine-thorp-1, r2s-famine-city-3,
+  rr3p-thorp-under_siege-rand-2, rr3-metropolis-religious_conversion-rand-3. The rows are in 1b3e0fdfd's body.
+
 ### FOR THE JOIN (this seat)
 1. The lighting census re-take for the new test file (this seat's own commit, at the end of its items).
 2. The dossier prose manifest's re-record (red at the lane tip already; seventh seat's item 4) now carries the L01 words.
 3. NAMED, the corpus lane's file: DS-GEN-16 ANCHORED-OLD "Nobody now in {settlement} saw the {calamity}" is keyed on the
    sixth band's id and prints from sixty years (src/data/dossierStateProse/general.generated.js).
+4. The golden re-derive manifest (tests/domain/worldFactRederive.test.js A7): red at the lane tip (3 misses); L05's
+   declared move makes it 4: the signed regen, the merge seat's act.
+5. NOT CURED, named: "beer" in the kept grain claims (71) where no brewery stands; the grain chain names no brewer.
