@@ -1,0 +1,10 @@
+# surfcmp.mjs: each golden surface's suite, base c3913f999 (run alone) vs tip 9f83ffbb2 (the whole suite): passed/failed/skipped/pending and a hash of the failure messages (paths and timings stripped)
+generator-golden-master        base 2/1/0/0 6da1ed8c45 | tip 2/1/0/0 6da1ed8c45 IDENTICAL
+espionage-dormancy-fence       base 20/1/0/0 d4f5169f49 | tip 20/1/0/0 d4f5169f49 IDENTICAL
+dossier-prose-manifest         base 15/2/0/0 acd6adaddf | tip 15/2/0/0 acd6adaddf IDENTICAL
+pdf-golden                     base 3/1/0/0 523cd22844 | tip 3/1/0/0 523cd22844 IDENTICAL
+herald-knowledge-desk-golden   base 2/1/0/0 52933f4b49 | tip 2/1/0/0 52933f4b49 IDENTICAL
+preset-lighting-witness        base 7/0/0/0 green | tip 7/0/0/0 green IDENTICAL
+cartography-calibration        base 31/1/0/0 979b28354e | tip 31/1/0/0 979b28354e IDENTICAL
+# goldenhash.mjs (probes/W2-B-DECLARE): the generator golden master's 525 configurations hashed as its test hashes them: base c3913f999 vs tip b861d1b22: 525 / 525, 0 differ
+# manifestmoved.mjs (REVIEW-W2B-3): 956 rows off the fixture at c3913f999 and at b861d1b22; 0 rows changed between

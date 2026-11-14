@@ -1,0 +1,41 @@
+word quarters: 305 findings, 292 distinct (town, sentence), 175 towns; salt "w2b5-f2-quarters-2026-11-13"
+
+1. r2s-insurgency-village-2 · Systems/Defense · names
+   "Some districts of Xiji are closed off now, and whatever happens there goes unrecorded and unpunished."
+   {"tier":"village","pop":293,"crisis":"insurgency","market":false,"roster":"","rosterSize":18,"magic":true}
+
+2. r2r-hamlet-35 · Systems/Defense · names
+   "Which power holds a district of Sundoy decides which rules apply there."
+   {"tier":"hamlet","pop":36,"crisis":"politically_fractured","market":false,"roster":"","rosterSize":9,"magic":true}
+
+3. r2r-thorp-19 · Summary/Overview · names
+   "people here live in a place built around kin districts and an assembly ground, on pasture."
+   {"tier":"thorp","pop":26,"crisis":"monster_pressure","market":false,"roster":"","rosterSize":8,"magic":true}
+
+4. r2r-hamlet-29 · Summary/Overview · names
+   "people here live in a place built around kin districts and an assembly ground, on pasture."
+   {"tier":"hamlet","pop":83,"crisis":"calm","market":false,"roster":"","rosterSize":10,"magic":true}
+
+5. r2r-village-49 · Summary/Overview · names
+   "An uncontrolled surge of magic left its mark on the lumber yards and sawmill district and on the people who were there, and the effects have never fully faded"
+   {"tier":"village","pop":168,"crisis":"calm","market":true,"roster":"Weekly market","rosterSize":19,"magic":true}
+
+6. r2s-politically_fractured-village-1 · Systems/Power · names
+   "controls a distinct district or institution."
+   {"tier":"village","pop":324,"crisis":"politically_fractured","market":false,"roster":"","rosterSize":13,"magic":true}
+
+7. r2s-slave_revolt-hamlet-0 · Summary/Overview · names
+   "The revolt in Velikoichi is too big to put down by force alone: the enslaved hold whole districts and are organised, and the governing power has not committed what crushing them would take."
+   {"tier":"hamlet","pop":89,"crisis":"slave_revolt","market":false,"roster":"","rosterSize":11,"magic":true}
+
+8. r2s-occupied-hamlet-1 · Summary/Overview · names
+   "Celtic-inspired, and it shows: built around kin districts and an assembly ground, on pasture."
+   {"tier":"hamlet","pop":95,"crisis":"occupied,famine","market":false,"roster":"","rosterSize":9,"magic":true}
+
+9. r2s-recently_betrayed-hamlet-1 · Summary/Plot Hooks · names
+   "Families who lived through it tell it this way: the affected district is slowly spreading its strangeness, and the authorities are pretending otherwise"
+   {"tier":"hamlet","pop":44,"crisis":"recently_betrayed","market":false,"roster":"","rosterSize":10,"magic":true}
+
+10. r2s-indebted-thorp-2 · Summary/Overview · names
+   "The rest of the settlement, visible further in, looks like it has been waiting for the merchant district's prosperity to reach it for some years."
+   {"tier":"thorp","pop":8,"crisis":"indebted","market":false,"roster":"","rosterSize":8,"magic":true}

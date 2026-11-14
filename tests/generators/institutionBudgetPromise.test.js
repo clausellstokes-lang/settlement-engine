@@ -118,6 +118,12 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 // RE-KEYED BY IDENTITY 2026-11-13 (STYLE-2-MERGE-11, point 47): 60 of 60 moved, none by the budget (densityFactor still
 // forced to 1), by the COHERENCE-AGREE merge 22cc9ef7d (docs/shift-records/2026-11-13-style-2-merge-47-coherence-agree.json: one fact, one answer: the resource roll's refused members refilled, the economy and defence read off the town's own record); the line before the merge reads all sixty green.
 // Re-captured at the merge with the factor forced to 1.0, this file's own loop (an untracked probe), twice and equal.
+// RE-KEYED BY IDENTITY 2026-11-13 (STYLE-2-MERGE-13, point 49): 1 of 60 moved, none by the budget (densityFactor still
+// forced to 1), by the W2-B-DECLARE merge (lane/w2-b-declare-2026-11-12 at 5657a229c; its draft record's ONE generated
+// cause, item 5, 1ae138b47: the church note reads the stored flag safetyProfile.flags.theocraticEconomy): seed 41
+// (6fce6e3d180fc1be -> 0b896078cabcb3c9) gains one `power_economic` coherence note, its only moved leaves
+// (.coherenceNotes.0: type, severity, tab, note); the line's tip 9e57f5023 reproduces the old hash. Red at the lane's own
+// tip and base for the agreement lane's cause, so the lane could not see it. Re-captured at the merge, the probe and this loop.
 const BEFORE = Object.freeze([
   '5846eb303e8ba516', // 0
   '4995df767a612f94', // 1
@@ -160,7 +166,7 @@ const BEFORE = Object.freeze([
   'f1ef4fc4047259fc', // 38
   '07015de5e6b7cffe', // 39
   'caad5676d4326a51', // 40
-  '6fce6e3d180fc1be', // 41
+  '0b896078cabcb3c9', // 41
   '7aeabecf762d9569', // 42
   '7e44d8330739caeb', // 43
   '00bac639c8e3061f', // 44
