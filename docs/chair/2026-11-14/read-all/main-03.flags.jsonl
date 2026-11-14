@@ -1,0 +1,160 @@
+{"id": "HEADER", "town": "r2r-thorp-15", "sev": "MED", "kind": "RECORD", "why": "thorp of 23 makes gems and Education (basic); HOUSES has no mine, quarry or school", "other": ""}
+{"id": "20909", "town": "r2r-thorp-21", "sev": "MED", "kind": "STATE", "why": "says iron ore goes unworked; TRADE lists iron and metalwork made here", "other": ""}
+{"id": "03918", "town": "r2r-thorp-21", "sev": "MED", "kind": "STATE", "why": "says iron ore lies unworked; TRADE lists iron and metalwork made here", "other": ""}
+{"id": "HEADER", "town": "r2r-thorp-21", "sev": "MED", "kind": "RECORD", "why": "founded by a healer, yet reason says founded by religious hermits; also makes iron, metalwork with no smithy or mine", "other": ""}
+{"id": "22257", "town": "r2r-thorp-30", "sev": "LOW", "kind": "LACKS", "why": "speaks of a record of arrests; DEFENCE has no watch, guard or any force to arrest", "other": ""}
+{"id": "HEADER", "town": "r2r-thorp-30", "sev": "LOW", "kind": "RECORD", "why": "thorp of 15 exports Pilgrim hospitality with no inn or shrine of its own, and coal with no mine", "other": ""}
+{"id": "00755", "town": "r2r-thorp-33", "sev": "HIGH", "kind": "LACKS", "why": "says money is spent on its halls and defences; DEFENCE is none throughout and HOUSES has no hall", "other": ""}
+{"id": "HEADER", "town": "r2r-thorp-33", "sev": "MED", "kind": "RECORD", "why": "makes Religious services and Education (basic) though it only has access to a parish church and no school", "other": ""}
+{"id": "07344", "town": "r2r-thorp-4", "sev": "LOW", "kind": "BROKEN", "why": "slash-joined label 'gold/silver ore' used as a name in a sentence", "other": ""}
+{"id": "HEADER", "town": "r2r-thorp-4", "sev": "MED", "kind": "RECORD", "why": "founded by an extended family, yet reason says founded by a disbanded military unit; desert thorp in food deficit exports grain, gems, schooling", "other": ""}
+{"id": "28615", "town": "r2r-thorp-49", "sev": "MED", "kind": "LACKS", "why": "a busy street in a thorp of 15 with 1-8 dwellings; tag reaches every thorp", "other": ""}
+{"id": "00141", "town": "r2r-thorp-49", "sev": "LOW", "kind": "PAIR", "why": "says no great disruption in its history; 21281 says the pilgrimage left a legacy of trouble never put right", "other": "21281"}
+{"id": "28960", "town": "r2r-thorp-50", "sev": "HIGH", "kind": "LACKS", "why": "lists Wholesale trade as an institution; HOUSES has no wholesale trade or market", "other": ""}
+{"id": "04603", "town": "r2r-thorp-50", "sev": "MED", "kind": "LACKS", "why": "bulk purchase by taverns and institutions; thorp of 28 has no tavern or market on HOUSES", "other": ""}
+{"id": "HEADER", "town": "r2r-thorp-50", "sev": "LOW", "kind": "RECORD", "why": "thorp of 28 makes iron and metalwork with no smithy or mine on HOUSES", "other": ""}
+{"id": "22442", "town": "r2r-thorp-12", "sev": "LOW", "kind": "STATE", "why": "says walls keep most trouble outside; STATE defence is Vulnerable", "other": ""}
+{"id": "HEADER", "town": "r2r-thorp-12", "sev": "LOW", "kind": "RECORD", "why": "founded by a discharged soldier, yet reason says one family's farmland that others settled around", "other": ""}
+{"id": "21394", "town": "r2r-thorp-34", "sev": "MED", "kind": "LACKS", "why": "names church guidance as a power; GOVERNMENT lists only the Elder Council, and the thorp has only access to a parish church", "other": ""}
+{"id": "HEADER", "town": "r2r-thorp-34", "sev": "LOW", "kind": "RECORD", "why": "thorp of 18 in food deficit exports livestock and wool with no herding house, and makes Education (basic) with no school", "other": ""}
+{"id": "HEADER", "town": "r2r-thorp-8", "sev": "LOW", "kind": "RECORD", "why": "reason says farmland granted to a favoured noble, but no lord governs (Elder Council) and founders were siblings; Education (basic) with no school", "other": ""}
+{"id": "28557", "town": "r2r-thorp-13", "sev": "LOW", "kind": "BROKEN", "why": "subject and verb disagree: 'Weak defences keeps'", "other": ""}
+{"id": "HEADER", "town": "r2r-thorp-6", "sev": "LOW", "kind": "RECORD", "why": "thorp of 19 makes Religious services and Education (basic) with only access to a parish church and no school", "other": ""}
+{"id": "11674", "town": "r2r-hamlet-0", "sev": "LOW", "kind": "BROKEN", "why": "'of Feudal Stewardship is the one who would come to terms: holds the seat' — missing article and a dangling fragment", "other": ""}
+{"id": "10025", "town": "r2r-hamlet-0", "sev": "MED", "kind": "STATE", "why": "offers grazing for a traveller's beasts; under siege the besiegers let nobody through (23071)", "other": "23071"}
+{"id": "02770", "town": "r2r-hamlet-0", "sev": "MED", "kind": "STATE", "why": "speaks of ongoing trade and clerks; under siege nothing comes in (15089), exports none, hamlet of 22 has no clerks", "other": "15089"}
+{"id": "14854", "town": "r2r-hamlet-0", "sev": "MED", "kind": "PAIR", "why": "says nobody asks who comes next; legitimacy is Legitimacy Crisis and 19310 says the steward fears the hamlet turning on it", "other": "19310"}
+{"id": "11676", "town": "r2s-under_siege-hamlet-0", "sev": "LOW", "kind": "BROKEN", "why": "'of Headman's Authority is the one who would come to terms: holds the seat' — dangling fragment", "other": ""}
+{"id": "12766", "town": "r2s-under_siege-hamlet-0", "sev": "MED", "kind": "STATE", "why": "a common table for passing travellers; under siege nobody passes by road", "other": ""}
+{"id": "12958", "town": "r2s-under_siege-hamlet-0", "sev": "LOW", "kind": "LACKS", "why": "manor mill with banalité; no lord in GOVERNMENT (Headman's Authority) and the mill is external", "other": ""}
+{"id": "09254", "town": "r2s-under_siege-hamlet-0", "sev": "LOW", "kind": "BROKEN", "why": "two months at full rations should be about four on half, not three; the figures do not agree", "other": ""}
+{"id": "HEADER", "town": "r2s-under_siege-hamlet-0", "sev": "LOW", "kind": "RECORD", "why": "hamlet of 48 makes luxury, Leather goods and Education (basic) with no tanner or school on HOUSES", "other": ""}
+{"id": "14612", "town": "r2s-under_siege-hamlet-1", "sev": "MED", "kind": "PAIR", "why": "says no livestock reaches the dairy farmer; 16779 says the dairy farmer runs cattle or goats, and there is common grazing", "other": "16779"}
+{"id": "15710", "town": "r2s-under_siege-hamlet-1", "sev": "LOW", "kind": "LACKS", "why": "lists Pilgrimage & Holy Sites as an economy; hamlet has no shrine, only access to a parish church", "other": ""}
+{"id": "20758", "town": "r2s-under_siege-hamlet-1", "sev": "MED", "kind": "LACKS", "why": "names the hamlet's stone quarry; HOUSES has no quarry and resources (29582) list no stone", "other": "29582"}
+{"id": "29011", "town": "r2s-under_siege-hamlet-1", "sev": "LOW", "kind": "LACKS", "why": "'Zlatoko's streets' in a hamlet of 57 with 5-25 dwellings", "other": ""}
+{"id": "20784", "town": "r2s-under_siege-hamlet-1", "sev": "HIGH", "kind": "LACKS", "why": "says its defence is conventional throughout; DEFENCE is none in every column", "other": ""}
+{"id": "HEADER", "town": "r2s-under_siege-hamlet-1", "sev": "LOW", "kind": "RECORD", "why": "makes Hospitality for travellers with no inn; founded on land granted to a noble yet no lord governs", "other": ""}
+{"id": "HEADER", "town": "r2s-under_siege-hamlet-2", "sev": "LOW", "kind": "RECORD", "why": "makes iron and metalwork with no smith, Hospitality for travellers with no inn", "other": ""}
+{"id": "02866", "town": "r2s-under_siege-hamlet-3", "sev": "HIGH", "kind": "STATE", "why": "a notice of the next fair; under siege nothing comes in by road and the market cannot draw a fair", "other": ""}
+{"id": "00986", "town": "r2s-under_siege-hamlet-3", "sev": "LOW", "kind": "LACKS", "why": "a sortie presumes a force; DEFENCE has no garrison, militia, watch or hired troops", "other": ""}
+{"id": "03036", "town": "r2s-under_siege-hamlet-3", "sev": "LOW", "kind": "LACKS", "why": "'the local alehouses' plural; HOUSES has one Alehouse, and grain is in 61% deficit, not surplus", "other": ""}
+{"id": "02485", "town": "r2s-under_siege-hamlet-3", "sev": "MED", "kind": "STATE", "why": "a stable for travellers to lodge their mounts; under siege no traveller comes by road", "other": ""}
+{"id": "02796", "town": "r2s-under_siege-hamlet-3", "sev": "LOW", "kind": "LACKS", "why": "a manor mill with banalité; no lord in GOVERNMENT and the mill is external", "other": ""}
+{"id": "HEADER", "town": "r2s-under_siege-hamlet-3", "sev": "MED", "kind": "RECORD", "why": "hamlet of 80 makes Advanced weapons and armor from a part-time smith; Education (basic) with no school", "other": ""}
+{"id": "09558", "town": "r2s-under_siege-hamlet-3", "sev": "LOW", "kind": "BROKEN", "why": "slash-joined label 'frontier/northern settlements' used in a sentence", "other": ""}
+{"id": "14837", "town": "r2s-under_siege-hamlet-3", "sev": "MED", "kind": "LACKS", "why": "names the ancient grove; resources (29900) list hunting grounds and iron deposits, no grove", "other": "29900"}
+{"id": "01224", "town": "r2s-under_siege-hamlet-3", "sev": "LOW", "kind": "BROKEN", "why": "repeats the speaker's own name where a pronoun belongs: 'Brunhild Weber was right... Brunhild Weber was wrong'", "other": ""}
+{"id": "HEADER", "town": "r2s-famine-hamlet-3", "sev": "LOW", "kind": "RECORD", "why": "famine hamlet of 22 exports livestock and makes gems and Education (basic) with no mine or school", "other": ""}
+{"id": "14846", "town": "r2s-occupied-hamlet-0", "sev": "MED", "kind": "LACKS", "why": "names the marshlands; resources (29167) list alpine pasture, timber, pass, quarry, no marsh", "other": "29167"}
+{"id": "20770", "town": "r2s-occupied-hamlet-0", "sev": "LOW", "kind": "LACKS", "why": "speaks of what it spends on defence; DEFENCE is none throughout and the arms are the occupiers'", "other": "01507"}
+{"id": "07396", "town": "r2s-occupied-hamlet-0", "sev": "MED", "kind": "STATE", "why": "says it still does the job it began with; it began as a defensive stronghold and is now Undefended and occupied", "other": ""}
+{"id": "HEADER", "town": "r2s-occupied-hamlet-0", "sev": "LOW", "kind": "RECORD", "why": "founded as a defensive stronghold yet DEFENCE is none; isolated access yet makes 'trade access'", "other": ""}
+{"id": "HEADER", "town": "r2r-hamlet-24", "sev": "LOW", "kind": "RECORD", "why": "isolated access yet grew on pass traffic; makes gems and Education (basic) with no mine or school", "other": ""}
+{"id": "15015", "town": "r2r-hamlet-28", "sev": "MED", "kind": "LACKS", "why": "'built around the hall'; HOUSES has no hall", "other": ""}
+{"id": "29009", "town": "r2r-hamlet-28", "sev": "MED", "kind": "STATE", "why": "says the fishing is gone; TRADE exports Salted fish, Smoked seafood and Fish oil and makes fish", "other": ""}
+{"id": "30946", "town": "r2r-hamlet-28", "sev": "MED", "kind": "LACKS", "why": "claims Shipbuilding; HOUSES has only a Fisher's landing, no shipyard; tag reaches every hamlet", "other": ""}
+{"id": "14852", "town": "r2r-hamlet-28", "sev": "MED", "kind": "STATE", "why": "says nobody asks who comes next; legitimacy is Legitimacy Crisis and stability Desperate", "other": ""}
+{"id": "09250", "town": "r2s-famine-hamlet-1", "sev": "LOW", "kind": "STATE", "why": "says some food comes in; trade access isolated and imports cover None", "other": ""}
+{"id": "11608", "town": "r2s-famine-hamlet-1", "sev": "LOW", "kind": "STATE", "why": "says the famine hits only one in the house; the famine is a 66% deficit hitting the whole hamlet", "other": ""}
+{"id": "22667", "town": "r2s-famine-hamlet-1", "sev": "MED", "kind": "PAIR", "why": "says nobody works the timber; TRADE makes timber and 30983 claims a timber trade", "other": "30983"}
+{"id": "14856", "town": "r2s-famine-hamlet-1", "sev": "MED", "kind": "PAIR", "why": "says nobody asks who comes next; 15845 says the council has lost its standing, legitimacy Legitimacy Crisis", "other": "15845"}
+{"id": "HEADER", "town": "r2s-famine-hamlet-1", "sev": "LOW", "kind": "RECORD", "why": "isolated hamlet of 41 makes iron and metalwork with no smith, Education (basic) with no school", "other": ""}
+{"id": "10057", "town": "r2s-insurgency-hamlet-0", "sev": "LOW", "kind": "STATE", "why": "says run by civic association; GOVERNMENT is a Headman's Authority", "other": ""}
+{"id": "20456", "town": "r2s-insurgency-hamlet-0", "sev": "MED", "kind": "STATE", "why": "duties fall short of trade actually done; isolated, exports none, imports none", "other": ""}
+{"id": "HEADER", "town": "r2s-insurgency-hamlet-0", "sev": "LOW", "kind": "RECORD", "why": "isolated access yet grew at a strategic pass and makes 'trade access'; makes gems with no mine", "other": ""}
+{"id": "03985", "town": "r2s-recently_betrayed-hamlet-2", "sev": "LOW", "kind": "STATE", "why": "says run by civic association; GOVERNMENT is a Headman's Authority", "other": ""}
+{"id": "14953", "town": "r2s-recently_betrayed-hamlet-2", "sev": "MED", "kind": "STATE", "why": "'everybody accepts it'; stability Shaken — nobody trusts those in charge, legitimacy Legitimacy Crisis", "other": ""}
+{"id": "20645", "town": "r2s-recently_betrayed-hamlet-2", "sev": "LOW", "kind": "BROKEN", "why": "slash-joined label 'gold/silver ore' used as a name in a sentence", "other": ""}
+{"id": "07343", "town": "r2s-recently_betrayed-hamlet-2", "sev": "LOW", "kind": "BROKEN", "why": "slash-joined label 'gold/silver ore' used as a name in a sentence", "other": ""}
+{"id": "04080", "town": "r2s-recently_betrayed-hamlet-2", "sev": "LOW", "kind": "BROKEN", "why": "'the whole Headman's Authority' — a headman is one person, not a body", "other": ""}
+{"id": "HEADER", "town": "r2s-recently_betrayed-hamlet-2", "sev": "LOW", "kind": "RECORD", "why": "founded as a defensive stronghold yet Undefended; makes gems and Education (basic) with no mine or school", "other": ""}
+{"id": "17543", "town": "r2s-wartime-hamlet-3", "sev": "LOW", "kind": "STATE", "why": "rich travellers choosing between roads; trade access is isolated", "other": ""}
+{"id": "28726", "town": "r2s-wartime-hamlet-3", "sev": "LOW", "kind": "LACKS", "why": "practitioners' charges are a large part of its business; HOUSES has no practitioner and DEFENCE magic none", "other": ""}
+{"id": "20768", "town": "r2s-wartime-hamlet-3", "sev": "MED", "kind": "STATE", "why": "says it leaves its stone unworked; TRADE lists stone made here", "other": ""}
+{"id": "20769", "town": "r2s-famine-hamlet-0", "sev": "MED", "kind": "STATE", "why": "says it leaves its timber unworked; TRADE lists timber made here", "other": ""}
+{"id": "05233", "town": "r2s-occupied-hamlet-1", "sev": "MED", "kind": "LACKS", "why": "collects the lord's dues and the temple tithe; no lord in GOVERNMENT and no temple on HOUSES", "other": ""}
+{"id": "HEADER", "town": "r2s-occupied-hamlet-1", "sev": "LOW", "kind": "RECORD", "why": "isolated hamlet makes glass, gems and Hospitality for travellers with no glassworks, mine or inn", "other": ""}
+{"id": "18655", "town": "r2r-hamlet-16", "sev": "MED", "kind": "PAIR", "why": "quarry supplies dressed stone to regional builders; TRADE exports no stone, imports cut stone, and 29076 says the work stops half-way", "other": "29076"}
+{"id": "01516", "town": "r2r-hamlet-16", "sev": "MED", "kind": "STATE", "why": "says Oxteha's defences are sound; STATE defence is Vulnerable", "other": ""}
+{"id": "28786", "town": "r2s-famine-hamlet-2", "sev": "MED", "kind": "LACKS", "why": "says all livestock must come from elsewhere; HOUSES has a Dairy farmer and common grazing land", "other": "14235"}
+{"id": "30972", "town": "r2s-famine-hamlet-2", "sev": "MED", "kind": "LACKS", "why": "claims Shipbuilding; HOUSES has only a Fisher's landing, no shipyard", "other": ""}
+{"id": "21587", "town": "r2s-famine-hamlet-2", "sev": "MED", "kind": "STATE", "why": "says the question of replacing the rulers does not come up; legitimacy is Legitimacy Crisis, stability Desperate", "other": ""}
+{"id": "HEADER", "town": "r2s-occupied-hamlet-2", "sev": "LOW", "kind": "RECORD", "why": "founded by a religious community, yet reason says a logging owner who refused to leave; gems and Education with no mine or school", "other": ""}
+{"id": "09261", "town": "r2s-occupied-hamlet-3", "sev": "LOW", "kind": "BROKEN", "why": "two months at full rations should be about four on half, not three; the figures do not agree", "other": ""}
+{"id": "09716", "town": "r2s-plague_onset-hamlet-0", "sev": "MED", "kind": "PAIR", "why": "'goods come, goods go' as usual; under plague 07340 says quarantine costs the hamlet its trade", "other": "07340"}
+{"id": "03157", "town": "r2s-plague_onset-hamlet-0", "sev": "MED", "kind": "STATE", "why": "a visitor would not guess the trouble; safety is Dangerous — Plague Unrest, and a hamlet of 25 has no streets", "other": ""}
+{"id": "17060", "town": "r2s-plague_onset-hamlet-0", "sev": "MED", "kind": "LACKS", "why": "sells the game in the market; HOUSES has no market", "other": ""}
+{"id": "12415", "town": "r2s-plague_onset-hamlet-2", "sev": "MED", "kind": "LACKS", "why": "dust of fired clay on everything; HOUSES has a charcoal burner but no potter or kiln for clay", "other": ""}
+{"id": "14857", "town": "r2s-plague_onset-hamlet-2", "sev": "MED", "kind": "STATE", "why": "nobody asks who comes next; legitimacy Legitimacy Crisis, and 10305 says the headman is lying about the outbreak", "other": "10305"}
+{"id": "23470", "town": "r2s-plague_onset-hamlet-1", "sev": "HIGH", "kind": "STATE", "why": "visitors find the market; safety is Quarantined and 07716 says travel is discouraged", "other": "07716"}
+{"id": "03680", "town": "r2s-plague_onset-hamlet-1", "sev": "LOW", "kind": "STATE", "why": "work in carrying, weighing and selling as often as making; a quarantined hamlet of 35 with only a periodic market", "other": ""}
+{"id": "21584", "town": "r2s-plague_onset-hamlet-1", "sev": "MED", "kind": "STATE", "why": "says replacing the council does not come up; legitimacy is Legitimacy Crisis", "other": ""}
+{"id": "15016", "town": "r2s-infiltrated-hamlet-2", "sev": "MED", "kind": "LACKS", "why": "'built around the hall'; HOUSES has no hall", "other": ""}
+{"id": "15568", "town": "r2s-infiltrated-hamlet-2", "sev": "MED", "kind": "PAIR", "why": "says people feel safe with nothing to tell them otherwise; 18429 says people watch each other and something has changed", "other": "18429"}
+{"id": "21101", "town": "r2s-infiltrated-hamlet-3", "sev": "MED", "kind": "RECORD", "why": "says built upon mountain trade; terrain is Forest, access isolated, founded as a noble's hunting lodge", "other": ""}
+{"id": "02975", "town": "r2s-monster_pressure-hamlet-0", "sev": "MED", "kind": "LACKS", "why": "lives by stabling, meals and repairs; HOUSES has an alehouse only, no stable, inn or smith", "other": ""}
+{"id": "21590", "town": "r2s-monster_pressure-hamlet-0", "sev": "MED", "kind": "STATE", "why": "says replacing the headman does not come up; legitimacy is Legitimacy Crisis", "other": ""}
+{"id": "03944", "town": "r2s-monster_pressure-hamlet-0", "sev": "LOW", "kind": "BROKEN", "why": "subject and verb disagree: 'the plague years comes up'", "other": ""}
+{"id": "21298", "town": "r2s-monster_pressure-hamlet-0", "sev": "LOW", "kind": "BROKEN", "why": "subject and verb disagree: 'The plague years is a decade old'", "other": ""}
+{"id": "22767", "town": "r2r-hamlet-34", "sev": "HIGH", "kind": "LACKS", "why": "a crime the guard is investigating; DEFENCE has no garrison or watch, only a citizen militia", "other": ""}
+{"id": "20690", "town": "r2r-hamlet-34", "sev": "HIGH", "kind": "LACKS", "why": "the guards have changed their rounds; DEFENCE has no watch or garrison, only a citizen militia", "other": ""}
+{"id": "15062", "town": "r2r-hamlet-34", "sev": "MED", "kind": "PAIR", "why": "says nothing needed comes from outside; 14420 says the militia needs iron and 14660 says it runs on stockpiles", "other": "14420"}
+{"id": "01760", "town": "r2r-hamlet-35", "sev": "MED", "kind": "PAIR", "why": "'all three powers'; GOVERNMENT lists two powers, the Independent Bloc and Headman's Authority", "other": ""}
+{"id": "20908", "town": "r2r-hamlet-35", "sev": "MED", "kind": "LACKS", "why": "iron merchants and 'the smiths'; hamlet of 36 has one part-time smith and no merchants on HOUSES", "other": ""}
+{"id": "17137", "town": "r2r-hamlet-35", "sev": "LOW", "kind": "PAIR", "why": "miners sent into an unsafe gallery; the mine is open cast, surface-level extraction (18772)", "other": "18772"}
+{"id": "10046", "town": "r2s-politically_fractured-hamlet-3", "sev": "LOW", "kind": "STATE", "why": "says run by civic association; GOVERNMENT is a Headman's Authority against an Independent Bloc", "other": ""}
+{"id": "HEADER", "town": "r2s-politically_fractured-hamlet-3", "sev": "LOW", "kind": "RECORD", "why": "exports Pilgrim hospitality and makes Hospitality, iron and metalwork with no inn, shrine or smith", "other": ""}
+{"id": "16639", "town": "r2s-succession_void-hamlet-3", "sev": "LOW", "kind": "LACKS", "why": "a River Mill Industry; HOUSES has only access to an external mill", "other": ""}
+{"id": "20059", "town": "r2s-succession_void-hamlet-3", "sev": "MED", "kind": "LACKS", "why": "an arrest book filling with names; hamlet of 28 has no watch, guard or court", "other": ""}
+{"id": "17102", "town": "r2s-succession_void-hamlet-3", "sev": "LOW", "kind": "LACKS", "why": "removing records from the archive; hamlet of 28 has no archive on HOUSES", "other": ""}
+{"id": "HEADER", "town": "r2s-succession_void-hamlet-3", "sev": "MED", "kind": "RECORD", "why": "makes and exports flour, milled lumber and processed textiles with only access to an external mill", "other": ""}
+{"id": "10055", "town": "r2s-wartime-hamlet-1", "sev": "LOW", "kind": "STATE", "why": "says run by civic association; GOVERNMENT is a Household Council", "other": ""}
+{"id": "20754", "town": "r2s-wartime-hamlet-1", "sev": "LOW", "kind": "BROKEN", "why": "slash label 'gold/silver ore' and a bare capitalised key 'lacks is Smelter'", "other": ""}
+{"id": "HEADER", "town": "r2s-wartime-hamlet-1", "sev": "LOW", "kind": "RECORD", "why": "founded by wintering families, yet reason says a disbanded military unit; makes gems and Education with no mine or school", "other": ""}
+{"id": "01333", "town": "r2r-hamlet-33", "sev": "MED", "kind": "LACKS", "why": "paints its civic buildings; hamlet of 32 has no civic building on HOUSES", "other": ""}
+{"id": "11594", "town": "r2r-hamlet-33", "sev": "LOW", "kind": "BROKEN", "why": "'of Headman's Authority is the one who would come to terms: holds the seat' — dangling fragment", "other": ""}
+{"id": "01512", "town": "r2s-indebted-hamlet-3", "sev": "MED", "kind": "STATE", "why": "says Morkstrand's defences are sound; STATE defence is Vulnerable", "other": ""}
+{"id": "10714", "town": "r2s-mass_migration-hamlet-0", "sev": "HIGH", "kind": "LACKS", "why": "lists a Hiring hall finding workers and mercenaries; HOUSES has no hiring hall", "other": "07735"}
+{"id": "HEADER", "town": "r2s-mass_migration-hamlet-0", "sev": "LOW", "kind": "RECORD", "why": "founded by a religious community, yet reason says farmland granted to a noble, and no lord governs (Free Elder Council)", "other": ""}
+{"id": "15026", "town": "r2s-mass_migration-hamlet-2", "sev": "MED", "kind": "LACKS", "why": "'built around the hall'; HOUSES has no hall", "other": ""}
+{"id": "13589", "town": "r2s-mass_migration-hamlet-3", "sev": "LOW", "kind": "BROKEN", "why": "slash-joined label 'Military/Guard' used as a name in a sentence", "other": ""}
+{"id": "13626", "town": "r2s-mass_migration-hamlet-3", "sev": "LOW", "kind": "BROKEN", "why": "slash-joined label 'Military/Guard' used as a name in a sentence", "other": ""}
+{"id": "07662", "town": "r2s-mass_migration-hamlet-3", "sev": "LOW", "kind": "BROKEN", "why": "slash-joined label 'Military/Guard' used as a name in a sentence", "other": ""}
+{"id": "19721", "town": "r2s-mass_migration-hamlet-3", "sev": "LOW", "kind": "BROKEN", "why": "slash-joined label 'The Military/Guard' used as a name in a sentence", "other": ""}
+{"id": "17296", "town": "r2s-mass_migration-hamlet-3", "sev": "LOW", "kind": "BROKEN", "why": "slash-joined label 'Military/Guard' used as a name in a sentence", "other": ""}
+{"id": "10756", "town": "r2s-mass_migration-hamlet-3", "sev": "LOW", "kind": "BROKEN", "why": "'made by The Guard' — the power is named Military/Guard; a capitalised stray label", "other": ""}
+{"id": "20439", "town": "r2s-monster_pressure-hamlet-3", "sev": "HIGH", "kind": "PAIR", "why": "speaks of its defences and a muster; DEFENCE is none and 01146 says it kept no defence and never built one", "other": "01146"}
+{"id": "10041", "town": "r2s-recently_betrayed-hamlet-1", "sev": "LOW", "kind": "STATE", "why": "says run by civic association; GOVERNMENT is an Elder Council", "other": ""}
+{"id": "HEADER", "town": "r2s-recently_betrayed-hamlet-1", "sev": "MED", "kind": "RECORD", "why": "part-time smith in a hamlet of 44 exports Advanced weapons and armor; forest hamlet exports reeds, peat, waterfowl; charcoal-burner origin with no charcoal burner", "other": ""}
+{"id": "21986", "town": "r2s-recently_betrayed-hamlet-1", "sev": "LOW", "kind": "LACKS", "why": "wood for the charcoal kilns; HOUSES has no charcoal burner", "other": ""}
+{"id": "10043", "town": "r2s-religious_conversion-hamlet-1", "sev": "LOW", "kind": "STATE", "why": "says run by civic association; GOVERNMENT is a Free Elder Council", "other": ""}
+{"id": "20755", "town": "r2s-religious_conversion-hamlet-1", "sev": "LOW", "kind": "BROKEN", "why": "bare capitalised key with no article: 'what it lacks is Smelter'", "other": ""}
+{"id": "00648", "town": "r2s-religious_conversion-hamlet-3", "sev": "MED", "kind": "LACKS", "why": "says two burial grounds, old and new; HOUSES lists one Burial ground", "other": ""}
+{"id": "HEADER", "town": "r2s-religious_conversion-hamlet-3", "sev": "MED", "kind": "RECORD", "why": "hamlet of 41 with no smith makes and exports Quality tools and weapons and Advanced weapons and armor", "other": ""}
+{"id": "11702", "town": "r2s-wartime-hamlet-2", "sev": "LOW", "kind": "LACKS", "why": "'holds the office of the guard'; DEFENCE has no guard or watch, only a citizen militia", "other": ""}
+{"id": "15281", "town": "r2r-hamlet-32", "sev": "MED", "kind": "LACKS", "why": "endless line of ore and stone carts; hamlet of 63 has one open-cast mine and no quarry", "other": ""}
+{"id": "01601", "town": "r2r-hamlet-32", "sev": "MED", "kind": "LACKS", "why": "food from hunting and little else; HOUSES has farming and a shepherd but no hunter's lodge", "other": ""}
+{"id": "16777", "town": "r2r-hamlet-32", "sev": "LOW", "kind": "STATE", "why": "sells to both sides in the fight for the seat; the crisis is debt, the council holds its seat (19512)", "other": "19512"}
+{"id": "03986", "town": "r2r-hamlet-5", "sev": "LOW", "kind": "STATE", "why": "says run by civic association; GOVERNMENT is an Elder Council with a War Council", "other": ""}
+{"id": "22476", "town": "r2r-hamlet-5", "sev": "LOW", "kind": "BROKEN", "why": "house label with its parenthesis used in prose: 'the resident smith (part-time), run by'", "other": ""}
+{"id": "19996", "town": "r2r-hamlet-5", "sev": "LOW", "kind": "PAIR", "why": "says the War Council is at odds with the Elder Council; 07133 marks their relation stable", "other": "07133"}
+{"id": "HEADER", "town": "r2r-hamlet-5", "sev": "MED", "kind": "RECORD", "why": "part-time smith in a hamlet exports Advanced weapons and armor; a Dominant War Council with DEFENCE none", "other": ""}
+{"id": "03975", "town": "r2s-insurgency-hamlet-3", "sev": "LOW", "kind": "STATE", "why": "says run by civic association; GOVERNMENT is an Elder Council", "other": ""}
+{"id": "20767", "town": "r2s-religious_conversion-hamlet-2", "sev": "MED", "kind": "STATE", "why": "says it leaves its clay unworked; TRADE makes clay and pottery", "other": ""}
+{"id": "HEADER", "town": "r2s-religious_conversion-hamlet-2", "sev": "MED", "kind": "RECORD", "why": "makes pottery, processed textiles, flour and milled lumber with no potter, weaver or mill of its own", "other": ""}
+{"id": "21466", "town": "r2s-slave_revolt-hamlet-0", "sev": "MED", "kind": "LACKS", "why": "names church sway as a power; GOVERNMENT lists only the Headman's Authority and the hamlet has only a wayside shrine", "other": ""}
+{"id": "21713", "town": "r2s-slave_revolt-hamlet-1", "sev": "LOW", "kind": "BROKEN", "why": "house label with its parenthesis used in prose: 'the mine (open cast), run by'", "other": ""}
+{"id": "21485", "town": "r2s-slave_revolt-hamlet-1", "sev": "LOW", "kind": "LACKS", "why": "names merchant sway as a power; GOVERNMENT lists only the Household Council", "other": ""}
+{"id": "03341", "town": "r2s-slave_revolt-hamlet-1", "sev": "MED", "kind": "LACKS", "why": "farming families and the guilds negotiated a compact; hamlet of 36 has no guild on HOUSES", "other": ""}
+{"id": "16620", "town": "r2s-slave_revolt-hamlet-2", "sev": "MED", "kind": "LACKS", "why": "rival crews fight over who runs the streets; HOUSES has one criminal house, a smuggling waypoint, in a hamlet", "other": ""}
+{"id": "06764", "town": "r2s-slave_revolt-hamlet-2", "sev": "LOW", "kind": "BROKEN", "why": "a name is cut across two sentences: 'Eileen Mac' / 'Donald, so the two of them' (06801)", "other": "06801"}
+{"id": "03969", "town": "r2s-succession_void-hamlet-1", "sev": "MED", "kind": "LACKS", "why": "'built around the hall'; HOUSES has no hall", "other": ""}
+{"id": "22077", "town": "r2s-succession_void-hamlet-1", "sev": "MED", "kind": "LACKS", "why": "a mash tun and a brewhouse door; HOUSES has a maltster but no brewhouse or alehouse", "other": ""}
+{"id": "HEADER", "town": "r2s-succession_void-hamlet-1", "sev": "LOW", "kind": "RECORD", "why": "makes fish with no fisher's landing; exports Pilgrim hospitality and makes Hospitality with no inn", "other": ""}
+{"id": "20438", "town": "r2r-hamlet-36", "sev": "HIGH", "kind": "LACKS", "why": "speaks of Nahrmandi's defences and a muster; DEFENCE has no wall and no force", "other": ""}
+{"id": "HEADER", "town": "r2r-hamlet-36", "sev": "MED", "kind": "RECORD", "why": "part-time smith exports Advanced weapons and armor; founded by wintering families yet reason says a disbanded military unit", "other": ""}
+{"id": "16961", "town": "r2r-hamlet-38", "sev": "LOW", "kind": "LACKS", "why": "a cave-in sealed in a gallery; the hamlet's mine is open cast, with no galleries", "other": ""}
+{"id": "HEADER", "town": "r2r-hamlet-38", "sev": "MED", "kind": "RECORD", "why": "part-time smith exports Advanced weapons and armor; founded on a noble's land grant yet a headman governs", "other": ""}
+{"id": "01570", "town": "r2r-hamlet-4", "sev": "LOW", "kind": "PAIR", "why": "says the market sells little and traffic does not stop; 12980 says market day fills the hamlet with buyers", "other": "12980"}
+{"id": "DONE", "lines": 3265, "blocks": 70, "flags": 159}
