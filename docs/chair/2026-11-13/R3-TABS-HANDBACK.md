@@ -680,3 +680,41 @@ from the base to the tip). Helpers and outputs in `probes/R3-TABS/reader/`.
     (`computeDefenseReadiness`, the defence lane's). DECLARED.
   - Every other row's hits are other lanes' surfaces (food, powers, economy, magic, faith, people).
   Its limits beside the zeros: the dossier's views only; it cannot see two lines disagreeing unless a row names them.
+- **The edge bundles, checked last:** `npm run build:edge-shared` at 5df403a1c, exit 0: every bundle's bytes and hash
+  unchanged; only the six `*.meta.json` stamps (`generatedAt`, `builtFromCommit`) moved, so the bundles do NOT differ
+  and nothing was committed (the rebuild's stamps restored). No `dist/` in the tree.
+
+# THE LANE'S ONE FINAL STATEMENT (R3-TABS-3, 2026-11-14; the final tip 4b5539e75 + this commit; code at 268b26d8c)
+EXECUTED unless marked. Every tree a committed sha (an integrity-counted archive, or a detached worktree where a test
+or door reads git). The lane's base aac79b808; the line merged in at 976db5b19 (point 49).
+
+| measure | base aac79b808 | the line 976db5b19 | the final tip 5df403a1c |
+|---|---|---|---|
+| births (census 720, reader 20, fresh 144; sha256 of the decoded ndjson) | a65d30b2… / 2997a853… / 666d7793… | 71d1f68d… / 2997a853… / 0a7713fa… | **equal to the line** (the lane moves no record; the line's points 48 and 49 move the base's) |
+| the first census's counter (census.sh, then count.mjs outside its pipe, its own exit) | exit 0, 50 rows | exit 0, 47 rows | exit 0, 47 rows; stderr empty at all three |
+| compare.mjs against the final tip | 26 rows: no WORSE, no NEW; BETTER 9 (148 → 114, the lane's) and 20 (689 → 0, the line's) | no WORSE, no NEW; BETTER 9 only (148 → 114) | — |
+| the reader's classes (render4 + scan4 + classes3, the 1,440) A / A1 / B / D / E / F / K | — | 151 / 45 / 36 / 35 / 56 / 50 / 10 | **0 / 0 / 0 / 0 / 22 / 0 / 0** |
+| the page census (section 2m's door, the 720) | — | banked by the line | at or under every row; no RISE; P9 and P13 FELL and are lowered (268b26d8c); the grid 0 falls |
+| section 2m's other doors | — | — | presumed things fresh 0 stale 0; fact layers 0 rises; writer reach exit 0; observed shapes re-frozen (b731c85e0), then exit 0 |
+| the whole suite, six vitest shards at 2903e2143 | — | — | 3,257 files, 39,110 passed, 15 failed in 10 files, 145 skipped; the lane's own three reds CURED (3a497ef5e, f5622ab8f, b731c85e0); the manifest MOVED (the shift record); the other six files red at the base with identical text |
+| the six golden surfaces | — | — | five UNMOVED (green); the dossier prose manifest MOVED by L0, L2 and the naval cure (−250 cells on golden-master-v3; the seeds −8/−6/−6): the merge seat's re-record (`R3-TABS-SHIFT-RECORD-DRAFT.md`) |
+| the lighting census | — | 3245 files | re-frozen 3257 (2903e2143); no test file added after it but the ranged-tension test's rewrite (no new file, no new title) |
+| the edge bundles | — | — | unchanged (stamps only; not committed) |
+
+- **The 22 left in class E** (the same 22 towns before and after the merge): the readiness badge itself reads
+  "Undefended" beside walls and a force; the posture line agrees with the badge (L1). The badge is
+  `defenseGenerator.js :: computeDefenseReadiness`, held by **lane/coherence-upkeep-2026-11-12** (the defence lane).
+- **What this lane cured, every row** (the first seat's STATUS table and the second seat's items stand): REQ/FORCED
+  (360/246 → 0 on the 720), the Underworld band (118 → 0), "Exile & Return" (622 → 0), the Foundations Food word (720
+  → 0), the trade row under a siege (24 → 0), L0–L3 and the siege posture (the reader's classes above), the crime rows
+  cut mid-sentence (339 → 0), the severity range (History tab 1,089 → 0; the PDF 2,190 → 0 per variant), the naval
+  line off the sea (57 → 0 on the 720, 6 → 0 on the fresh 144); and the lane's own register reds after the merge.
+- **FOR THE JOIN / for the chair, added by this seat:** P9 (the Beasts row's settled lines beside a Weak/Critical bar,
+  114 towns: does L2 reach the Beasts row? a ruling); P10 (the Town watch's catalogue description "hold the gates" in
+  17 unwalled towns: w2-fix-data's data, printed raw by the force card); the cure's docblock in
+  `defenseStateProse.js` says 61 river towns where the measure is 57 + 6 (a comment, for the corpus lane's next pass
+  over the file); the mount walker's scan reading a quote inside a regex literal as a string (tests/lint).
+- **CONFIRMED vs PLAUSIBLE:** every count, exit, hash and classing above was run and read. PLAUSIBLE only: which
+  lines make the manifest's −250 cells (attributed by commit, not read cell by cell).
+- **Left:** nothing of this lane's assignment. The PR's merge, the deploy and the manifest's re-record are not this
+  lane's.
