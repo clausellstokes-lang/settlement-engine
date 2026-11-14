@@ -72,6 +72,7 @@ const GUARDS = [
   { seed: 'w5-city-under_siege-1', pool: 'DS-GEN-13::WAREHOUSES', vid: 1, why: 'a siege: "Goods wait in X\'s warehouses between the road and the buyer" of a road the siege has closed' },
   { seed: 'w5-city-under_siege+famine-102', pool: 'DS-GEN-13::WAREHOUSES', vid: 3, why: 'a siege: "fill after the harvest and empty ... as the town trades out of them" (the increment\'s ww#1071, HIGH)' },
   { seed: 'rww-city-under_siege-1', pool: 'DS-GEN-13::WAREHOUSES', vid: 4, why: 'a siege: "leave goods there between journeys" where nobody journeys (the fifth seat\'s found line)' },
+  { seed: 'w5-hamlet-politically_fractured-2', pool: 'DS-GEN-18::BOUGHT-IN', vid: 5, why: 'a hamlet: "Much of the work in X\'s workshops begins with unloading a cart" where a part-time smith is the only craft (round three #134, #220)' },
 ];
 
 /** @param {string} seed */

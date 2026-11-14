@@ -32616,7 +32616,8 @@
         "guild": 1,
         "market": 2,
         "no crisis: famine": 1,
-        "no crisis: under_siege": 6
+        "no crisis: under_siege": 6,
+        "tier: ≥ village": 1
       },
       "undeclared": 0,
       "crisisScoped": false

@@ -7325,7 +7325,7 @@ no compass word, no real-world place, no named analogy.*
 2. `[visitor · market · no crisis: under_siege]` {settlement} buys in what it cannot make, and the trading keeps as many people busy as the making would.
 3. `[street]` {institution} at {settlement} eats what the carts bring; the town's crafts begin at the weighbeam, not the field.
 4. `[trade · no crisis: under_siege]` Ask where {settlement} gets its {good} and you are pointed at the carts, not at anyone in the town.
-5. `[local · guild · no crisis: under_siege]` Much of the work in {settlement}'s workshops begins with unloading a cart.
+5. `[local · guild · tier: ≥ village · no crisis: under_siege]` Much of the work in {settlement}'s workshops begins with unloading a cart.
 6. `[newcomer · market · no crisis: under_siege · no crisis: famine]` Anyone looking for work at {settlement} finds it in carrying, weighing and selling as often as in making.
 7. `[ledger · crisis: under_siege]` {settlement} bought its {good} from outside, and since the siege nothing has come in; what is left is being made to last.
 8. `[street · crisis: under_siege]` The carts that kept {settlement}'s trades supplied have not come since the siege began.

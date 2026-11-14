@@ -11486,6 +11486,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "angle": "local",
           "marks": [
             "guild",
+            "tier: ≥ village",
             "no crisis: under_siege"
           ],
           "text": "Much of the work in {settlement}'s workshops begins with unloading a cart.",
