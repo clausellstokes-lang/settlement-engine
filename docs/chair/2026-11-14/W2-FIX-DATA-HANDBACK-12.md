@@ -1,6 +1,6 @@
 # W2-FIX-DATA-12: the data lane goes on curing (kept current after every item)
 
-**State: WORKING.** Item 1 DONE (pushed). Every figure EXECUTED unless marked PLAUSIBLE.
+**State: WORKING.** Items 1 and 2 DONE (pushed). Every figure EXECUTED unless marked PLAUSIBLE.
 
 **Seat.** The twelfth seat on `lane/w2-fix-data-2026-11-13`, from `994733bcd` (read back from origin first: the brief's tip, no stop). Chair: `session_01ACmDYZrFEVXyZEUg1NDxxC`. Brief: `origin/lane/chair-2026-11-08:docs/chair/2026-11-14/briefs/BRIEF-W2-FIX-DATA-12.md`. Nothing at or below 994733bcd is rewritten.
 
@@ -27,6 +27,16 @@ The brief (BRIEF-W2-FIX-DATA-12); the chair's 10:40 message: ONE ROW MORE for th
 - Guard: `tests/data/w2FixData12Rows.test.js` #116 (the three; r2r-town-12, no timber house, keeps timber unexploited): red 3 of 3 with the tag planted out, green after.
 - Doors: presumed-things `--check` fresh 49 stale 0 (carried); walker 42 passed / 1 failed (ARM 1, the carried 49); grid 0 rises; domain-strict, type ratchet, eslint: exit 0.
 
+### Item 2 · the PDF's Architecture line (HIGH, carried; the reader's C02 C05 C08 C15): CURED, `184c68ba0` (lighting census `c530590f2`)
+
+- Writer: `src/pdf/sections/IdentityDailyLife.jsx` printed `culturalIdentity.architecturalDetail` raw (chosen at resolveConfig, where only the tier is known). The web's one leaf is the arrival's sight beat (`arrivalScene.js`, W2-FIX-DATA-4 item 4): the detail's row held to its own declaration against the whole record, refused -> left out. ONE HOME: that reading moved unchanged to `src/data/cultureProfiles.js :: architecturalDetailRefused(detail, profileKey, facts)`; the arrival and the PDF both call it. Holders: IdentityDailyLife.jsx none; arrivalScene.js and cultureProfiles.js: every differing copy equals this lane's.
+- Counts on the 730, the PDF's text (function components called) against the record: Architecture rows false 75 -> 0 (thorp 9, hamlet 15, village 26, town 7, city 9, metropolis 9); printed 730 -> 655, the 75 silenced exactly the 75 refused. The reader's towns r2r-village-12, r2r-city-0, r2r-city-26, r2r-metropolis-41: no row. The tabs print the detail only in the arrival (byte-identical: births 0 moved); the Foundry journal has no Architecture row. Not counted: the reader's `rv3-` towns (no configuration for them in CENSUS-2's seedcfg).
+- No line written; no draw moved; no record key.
+- Read (PDF chapter): r2r-village-12 (village, no market), r2r-city-0 (city) and r2r-metropolis-41 (metropolis, no palisade, no river), r2s-occupied-thorp-3 (thorp, occupation, not navigable): no row; r2r-village-25 (a market): "arcaded market fronts define the principal square".
+- Guard: the second test of `tests/data/w2FixData12Rows.test.js`, red 3 of 3 with the raw print planted back, green after.
+- Suites: the 66 files naming cultureProfiles, IdentityDailyLife or arrivalScene + the presumed-things walker: 11 failures, the same 11 at b7eaa6af1. Doors: presumed-things fresh 49 / stale 0; fact layers 0 rises; observed shapes red at the base too (six generated inputs: the merge seat's refreeze); grid 0; domain-strict, type ratchet, eslint 0.
+- The reader's A04 (a forge line beside an idle smelter) is the forge pool's line 4: cured with item 3.
+
 ## 3. FOR THE JOIN
 
 - `src/generators/resourceGenerator.js :: evaluateInstitutionChain` (held by many lanes): a partial chain's `missing` list is by exact name, so 'Sawmill' reads missing beside 'Sawmill (commercial)' (12 towns print "no sawmill ... finishes it"). The one-line change: `!institutions.some(i => i.name === name || String(i.name).startsWith(name + ' ('))`.
@@ -34,8 +44,7 @@ The brief (BRIEF-W2-FIX-DATA-12); the chair's 10:40 message: ONE ROW MORE for th
 
 ## 4. WHAT IS LEFT, line by line
 
-1. Item 2: the PDF's Architecture line (`src/pdf/sections/IdentityDailyLife.jsx:303`) through the web's reader; the reader's A04.
-2. Item 3: the arrival's forge line (`src/data/arrivalProse.js:65`), the cure of HANDBACK-11 section 5 item 1.
-3. Item 4: the message to the chair, then the count.
-4. Item 5: A06; the two guild lines.
-5. Item 6: the ranked table (HANDBACK-11 section 4), widest first, with the chair's 10:40 row (the charter hall) and the rows other lanes named (street kitchens; the arrival's carts under a siege; the great fire in a thorp; the pool guard's two rows).
+1. Item 3: the arrival's forge line (`src/data/arrivalProse.js:65`) and A04 (line 4 of the same pool), the cure of HANDBACK-11 section 5 item 1.
+2. Item 4: the message to the chair, then the count.
+3. Item 5: A06; the two guild lines.
+4. Item 6: the ranked table (HANDBACK-11 section 4), widest first, with the chair's 10:40 row (the charter hall) and the rows other lanes named (street kitchens; the arrival's carts under a siege; the great fire in a thorp; the pool guard's two rows).
