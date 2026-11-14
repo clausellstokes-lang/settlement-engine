@@ -4650,6 +4650,159 @@ SEATS2['W2-WRITE-12'] = dict(
 )
 
 
+JOIN_LANE_FIRST = (
+    "FIRST ACT. FULL HISTORY (`git fetch --depth=2147483647 origin lane/join-2026-11-14 lane/integration-2026-11-07` and the nine lanes; `git "
+    "rev-parse --is-shallow-repository` prints false). CUT YOUR OWN BRANCH from the joined branch's tip as it stands on origin when you begin "
+    "(it was 85e10f1e when this was written; the merge seat is still committing registers and tests on it: a later tip is not a stop: say which "
+    "you took): `git worktree add -b %s <scratch>/own origin/lane/join-2026-11-14`. You never commit on, or push to, the joined branch."
+)
+
+SEATS2['SURFACES-1'] = dict(
+    title="SURFACES-1 · one reader for one fact on every surface: the PDF and the Foundry journal print through the tab's own readers",
+    branch='lane/join-surfaces-2026-11-14', checkout='lane/join-2026-11-14', tip='85e10f1e', statement=False,
+    intro=("You are SURFACES-1, the first seat of a NEW LANE of the settlement-engine integration program, cut from the JOINED branch "
+           "(lane/join-2026-11-14: nine builder lanes merged). The lanes cured false lines on the app's tabs by putting READERS between the "
+           "stored record and the page: a chain's state as shown under a siege or a famine, the goods a trade list may name, the food "
+           "figures, the imports a besieged town may list. THE PDF AND THE FOUNDRY JOURNAL STILL PRINT THE RECORD RAW in several places, so "
+           "one town's PDF contradicts its own tab. A reader measured it on 1,824 towns and every lane named its part \"for the join\". No "
+           "lane could cure it alone: the readers are one lane's, the PDF's chain row another's. On the joined tree both stand. Yours: THE "
+           "ONE LAW, surface by surface, MEASURED FIRST. Your lane lands later as a point of its own on the joined line, on the chair's "
+           "word: NO whole suite."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. YOUR ROWS (`git fetch origin lane/chair-2026-11-08`; `git show "
+          "origin/lane/chair-2026-11-08:docs/chair/2026-11-14/join-rows/<file>`, by script, by row id): in OPEN-no-lane-s.md the rows "
+          "LV-TRADELISTS, LV-FOODPDF, LV-ABUNDANT, LV-169, UPK-869, PWR-MODPDF, PWR-MODLEGEND; in OPEN-r2-code-b.md the row "
+          "LV-CHAINSTATE-PDF; in OPEN-shared.md the row LV-RUNNING-JOURNAL. Each is a CANDIDATE as its namer counted it: you measure it.\n"
+          "3. THE READER'S MEASURE of the three surfaces (`git fetch origin lane/review-w2-c-leaves-2026-11-14`; `git show "
+          "origin/lane/review-w2-c-leaves-2026-11-14:docs/chair/2026-11-14/REVIEW-W2-C-LEAVES-LINES-READ.md`: ONLY the section \"The lane's "
+          "three-surface claim\" and the ranked list's rows 10 to 13, by script); its probes "
+          "(docs/chair/2026-11-14/probes/REVIEW-W2-C-LEAVES/: `seeds-all.txt`, `render.sh`, `surfaces.sh`, `jrlines.mjs`: the tab dumps, the "
+          "PDF's text and the journal for a town) are yours to copy out with git archive and run from outside every repository tree.\n"
+          "4. THE READERS THEMSELVES, whole, before you call one from a new place: src/domain/display/chainStateShown.js, "
+          "src/domain/display/tradeListDisplay.js, src/domain/display/validationOnPage.js; and tests/pdf/tradeListsThreeSurfaces.test.jsx "
+          "(the guard you extend).\n"
+          "5. The merge book's section 2m at your checkout (docs/INTEGRATION_STYLE_2_2026-11-09.md, the section headed \"## 2m.\"; by "
+          "script), before the first register you touch."),
+    first=JOIN_LANE_FIRST % 'lane/join-surfaces-2026-11-14',
+    work=("THE LAW (the chair, 2026-11-14; vetoable by the owner): ONE READER FOR ONE FACT ON EVERY SURFACE. What the Economics, Resources, "
+          "Defense, Power and Overview tabs say of a chain's state, a chain's outputs, a trade list, the food figures, the imports under a "
+          "siege, a resource's standing, the trade connectivity and a power's modifier, the PDF and the Foundry journal say THROUGH THE SAME "
+          "FUNCTION THE TAB CALLS. No surface re-derives a fact from the raw record; no surface prints a stored key or a generator's state "
+          "word raw. A surface that has no room for the reader's whole answer prints less of it, never something else.\n"
+          "THE WORK, in this order, each fact its own commit, pushed as made:\n"
+          "0. MEASURE FIRST, ONE SCRIPT: on the census's 720 born at your tip (and the reader's siege, famine and occupation towns), for "
+          "each fact: the towns where the PDF's text or the journal says something the tab does not (by fact, by surface, with three towns "
+          "named). The table goes at the top of your hand-back and ONE MESSAGE to the chair gives its figures. A row that measures 0 is "
+          "struck with its count.\n"
+          "1. HIGH: THE CHAIN'S STATE (the PDF's chain cards and flow print \"Active\", \"Entrepôt\" or \"Running\" under a siege or a famine "
+          "where the tab and the journal print Impaired: 200 towns as named; the journal's \"(running)\" printed raw in besieged towns): "
+          "src/pdf/sections/SupplyChainFlow.jsx and src/pdf/sections/Services.jsx read the tab's shown state; the flow's colour follows "
+          "it.\n"
+          "2. THE CHAIN'S OUTPUTS AND THE TRADE LISTS (pills the tab does not print: 593 as named): the PDF's Economics chapter and the "
+          "journal's economics page print the lists the tab's reader gives; the imports under a siege with them (29 towns as named).\n"
+          "3. THE FOOD BLOCK (the PDF prints the view's figures, not the tab's: its deficit differs from the tab's Short: 223 as named), AND "
+          "ONE HOME FOR THE FOOD WORD: the Overview's Food Security row (src/components/new/tabs/OverviewTab.jsx, the Systems-health block) "
+          "prints the stored label (\"Secure\") beside \"Pressured\" on the Tonight sheet and Daily Life in 330 towns of 1,536: it reads "
+          "`foodBandOf(eco.foodSecurity?.foodRecord)` (src/domain/summary/tonightSheet.js) for label and colour, falling back to the stored "
+          "label where the record has no band. OverviewTab.jsx is ALSO being changed by the defence lane's seat (its tensions lines): you "
+          "change ONLY the Food Security row's lines.\n"
+          "4. THE REST: the PDF's \"Abundant\" kicker under a siege; the Campaign State's trade connectivity \"Adequate\" under a siege; the "
+          "PDF's Power Structure and the Summary legend printing a power's stored modifier key (the powers lane cured the Power tab through "
+          "a reader: call it).\n"
+          "5. THE GUARD, grown with every fact: tests/pdf/tradeListsThreeSurfaces.test.jsx (or a sibling beside it) asserts, over born towns "
+          "that include a siege, a famine and an occupation, that the three surfaces agree on each fact you cured; each arm shown able to "
+          "red by a plant you do not commit, made in a tree no suite is running in. A fact you cure with no arm is not cured.\n"
+          "HOLDING, BY FUNCTION: the files of your rows are no lane's, or another lane's function that lane is no longer changing (the "
+          "chair has told the r2-code-b lane's seat that the PDF's chain row is yours from now). Before the first edit of any file, check "
+          "BY CONTENT which lanes changed it since their merge base (`git diff -U0 $(git merge-base origin/lane/integration-2026-11-07 "
+          "origin/<lane>) origin/<lane> -- <file>` at each lane's tip on origin NOW): where your change would fall inside a hunk a lane is "
+          "still changing (src/foundry/journalPages.js and src/pdf/lib/viewModelBodySlices.js are such files), put the logic in a small "
+          "module of your own and make the surface's change ONE call line.\n"
+          "YOU MOVE NO RECORD: the generator, its stored lists and its stored words are not yours; a cure of yours that moves a record leaf "
+          "is a STOP. Display and the PDF's and journal's text only.\n"
+          "EVERY LINE A CURE NOW PRINTS, OR NEWLY LEAVES OUT, IS READ WHERE IT PRINTS on the surface you changed AND beside the tab: three "
+          "towns, a siege, a famine or an occupation among them, the smallest and the largest size it reaches; the towns and what printed "
+          "in the commit body.\n"
+          "AFTER EVERY CURE: the presumed-things walker; the strict-domain gate, the type ratchet and eslint on the touched files; the "
+          "twelve-birth grid (`node scripts/census/page-census.mjs --grid`: a rise is a stop); the test files that name the files you "
+          "touched.\n"
+          "THE HAND-BACK, kept current after every item: docs/chair/2026-11-14/SURFACES-HANDBACK.md on your branch: the law; item 0's "
+          "table, before and after; each fact: its cause, its cure and commit, its counts, its guard and plant, the towns read; every "
+          "place a surface now prints less than the tab (said, with the reason); what you found and did not cure, by file and holder; "
+          "what is left."),
+    merges='',
+    when="with item 0's table (one message), for a stop that blocks everything you have left, after item 1 (the tip; the count before and after), and with your hand-back",
+    turns='',
+)
+
+
+SEATS2['NOLANE-1'] = dict(
+    title="NOLANE-1 · the false lines no lane holds: each measured on the joined tree, traced to its writer, cured where no lane is working",
+    branch='lane/join-nolane-2026-11-14', checkout='lane/join-2026-11-14', tip='85e10f1e', statement=False,
+    intro=("You are NOLANE-1, the first seat of a NEW LANE of the settlement-engine integration program, cut from the JOINED branch "
+           "(lane/join-2026-11-14: nine builder lanes merged). Each lane cures false sentences in the files it holds; a gathering seat has "
+           "put every row the lanes and their readers NAMED and could not cure into one table. About seventy of its OPEN rows sit in files "
+           "NO LANE HAS CHANGED, or have no writer traced at all: people's ties and secrets, magic notes on a chain, a chain card's needs, "
+           "run-together chips, rows of the supply-chain tables. Nobody is working on them. Yours: those rows, WIDEST FIRST, each MEASURED "
+           "on the joined tree before anything is changed (a row is a CANDIDATE as its namer counted it; some are already cured). Your lane "
+           "lands later as a point of its own on the joined line, on the chair's word: NO whole suite."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. YOUR ROWS (`git fetch origin lane/chair-2026-11-08`; `git show "
+          "origin/lane/chair-2026-11-08:docs/chair/2026-11-14/join-rows/OPEN-no-lane-s.md` and `…/OPEN-no-writer-traced.md`: both WHOLE, by "
+          "script: about seventy bullets, each with its sentence, its writer where traced, its count as named and its sources). NOT YOURS "
+          "among them, already placed by the chair: LV-TRADELISTS, LV-FOODPDF, LV-ABUNDANT, LV-169, UPK-869, PWR-MODPDF, PWR-MODLEGEND "
+          "(another new lane holds the PDF and the journal); DATA-SMELTER and DATA-FAIRS (the data lane's seat); UPK-ARCANE52 and UC-INTSEC "
+          "(the leaves lane's seat holds defenseDisplay.js); R3T-SERVICES (the r2-code-b lane's seat); PWR-T2 (the powers lane's seat); "
+          "R3T-ORIGIN (the r2-code-a lane's seat); every row whose writer is a corpus pool (src/data/dossierStateProse/*.generated.js: the "
+          "corpus lane's).\n"
+          "3. For a row you take: its SOURCE, by the path and heading the row gives (a lane's hand-back or a reader's file on that lane's "
+          "branch: `git show origin/<branch>:<path>`, the named section only), for the towns and the fact.\n"
+          "4. The census's births and renders: `git fetch origin lane/second-wave-census-2026-11-12` "
+          "(docs/chair/2026-11-12/probes/SECOND-WAVE-CENSUS/: the 720, their render) and, for the release bar's rows (ids BAR-…), the "
+          "probes on origin/lane/review-bar-0-2026-11-14 (docs/chair/2026-11-14/probes/REVIEW-BAR-0/): copied out with git archive, run "
+          "from outside every repository tree.\n"
+          "5. The merge book's section 2m at your checkout (docs/INTEGRATION_STYLE_2_2026-11-09.md, the section headed \"## 2m.\"; by "
+          "script), before the first register you touch."),
+    first=JOIN_LANE_FIRST % 'lane/join-nolane-2026-11-14',
+    work=("THE LAWS THESE ROWS FALL UNDER (the chair's, each vetoable by the owner): A LINE THAT NAMES A HOUSE, A ROLE, A PRACTICE OR A FORCE "
+          "READS THE ROSTER; A LINE THAT PRESUMES NORMAL TIMES READS THE CRISIS IN FORCE; A LINE WRITTEN FOR A TOWN'S SIZE IS NOT PRINTED "
+          "IN A THORP; TWO LINES ON ONE PAGE READ ONE FACT; TWO THINGS A PAGE SAYS ARE SET APART (no two labels run together); NO SURFACE "
+          "PRINTS A CATALOGUE NAME'S BRACKET, A STORED KEY OR THE MACHINERY; A TIE HAS ONE DIRECTION (a mentor is not his pupil's pupil; a "
+          "person has one master in a craft; a mentor and a pupil share a trade); A NOTE ON A CHAIN NAMES THE GROUND THE CHAIN WORKS (forest "
+          "magic on a forest, never on reed, marsh or salt) AND A TRADITION THE TOWN HOLDS. Where no true line exists, one is written and "
+          "read where it prints, or the line is silent. Silence is true.\n"
+          "THE WORK:\n"
+          "0. THE TABLE FIRST, ONE SCRIPT: every row of yours, on the census's 720 born at your tip (and the row's own town): STILL FALSE "
+          "(false / printing), ALREADY TRUE (struck, with its count), or NOT FOUND (the sentence prints nowhere: say how you looked). For "
+          "every row with no writer traced: the writer, by the sentence's fixed words (`git grep`), then the function that chooses or "
+          "gates it. WHO HOLDS THE WRITER NOW, BY CONTENT, at each lane's tip on origin NOW (`git diff -U0 $(git merge-base "
+          "origin/lane/integration-2026-11-07 origin/<lane>) origin/<lane> -- <file>`: the hunks' functions): a row whose function a lane "
+          "has changed is THAT LANE'S: named in your table with the lane, never cured here. The table goes at the top of your hand-back; "
+          "ONE MESSAGE to the chair gives its figures and the rows that turned out to be a lane's.\n"
+          "1. THEN THE ROWS THAT ARE STILL FALSE AND NO LANE'S, WIDEST FIRST, each cause its own commit, red first (a collected arm over "
+          "births; a guard town for every line a condition takes off a town; each arm shown able to red by a plant you do not commit, made "
+          "in a tree no suite is running in), pushed as made. EVERY LINE A CURE NOW PRINTS IN A NEW TOWN, OR NEWLY LEAVES SILENT, IS READ "
+          "WHERE IT PRINTS on every surface that prints it: three towns of its cells, a siege, a famine or an occupation among them, the "
+          "smallest and the largest size it reaches; the towns and what printed in the commit body.\n"
+          "2. A CURE IN GENERATOR OR DATA CODE IS A DECLARED MOVE: its field diff on the 720 by family (your tip against the commit "
+          "before); if more moves than the row's own lines, or a power, a person or a tie is RE-DRAWN beyond the row's own (the mentor "
+          "rows re-draw ties by their nature: say how many, and that nothing else moves): STOP with the table. THE DEFENCE RATING IS "
+          "FENCED: src/domain/magicReliance.js feeds it: a row whose cure lies there (LV-ARCANENONE) is MEASURED AND NAMED, with whether a "
+          "score would move, never changed here.\n"
+          "AFTER EVERY CURE: the presumed-things walker; the strict-domain gate, the type ratchet and eslint on the touched files; the "
+          "twelve-birth grid (`node scripts/census/page-census.mjs --grid`: a rise is a stop); the test files that name the files you "
+          "touched. Nothing is banked by hand; no golden's door in its writing mode (a golden your declared move shifts stays red and "
+          "named); the writer-reach door is not written (the chair banks it once, at the close).\n"
+          "THE HAND-BACK, kept current after every item: docs/chair/2026-11-14/NOLANE-HANDBACK.md on your branch: the laws; item 0's "
+          "table, kept current (each row: still false with its count, struck, a lane's, cured with its commit and counts, or left); EVERY "
+          "NEW OR CHANGED LINE with the towns it was read in (the owner's veto list, and a reader's); the declared moves by family; what "
+          "is left, line by line."),
+    merges='',
+    when="with item 0's table (one message: its figures; the rows that are a lane's), for a stop that blocks everything you have left, for a re-draw beyond a row's own, and with your hand-back",
+    turns='',
+)
+
+
 def build2(seat):
     s = _r3c6() if seat == 'R3-CODE-C-6' else SEATS2[seat]
     head = (
