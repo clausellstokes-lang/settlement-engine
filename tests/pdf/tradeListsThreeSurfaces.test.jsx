@@ -117,15 +117,18 @@ afterEach(cleanup);
 describe('the trade lists print the same pills on the tab, the PDF and the journal (W2-C-LEAVES-7 item 8)', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
 
-  test.each([
-    ['r2r-thorp-2', 'a toll and a road are not goods'],
-    ['r2r-thorp-10', 'a good no house here makes is not exported'],
-  ])('the exports (%s): %s', (seed) => {
-    const { tab, pdf, jr } = threeSurfaces(seed);
-    expect(tab.exports?.length, `${seed}: anchored, the tab prints exports`).toBeGreaterThan(0);
-    const want = sorted((tab.exports || []).map((x) => resourceDisplayName(x)));
-    expect(sorted(pdf.exports.items), `${seed}: the PDF's EXPORTS`).toEqual(want);
-    expect(fold(jr.exports), `${seed}: the journal's Exports`).toBe(asJournalRow(tab.exports || [], jr.exports));
+  test('the exports: a toll and a road are not goods (r2r-thorp-2); a good no house here makes is not exported (r2r-thorp-10)', () => {
+    // every seed is read before one assertion (a loop that asserts inline stops at its first failing seed)
+    const rows = ['r2r-thorp-2', 'r2r-thorp-10'].map((seed) => {
+      const { tab, pdf, jr } = threeSurfaces(seed);
+      const want = sorted((tab.exports || []).map((x) => resourceDisplayName(x)));
+      return { seed, printed: (tab.exports?.length || 0) > 0, pdf: sorted(pdf.exports.items).join(' | ') === want.join(' | '),
+        journal: fold(jr.exports) === asJournalRow(tab.exports || [], jr.exports) };
+    });
+    expect(rows).toEqual([
+      { seed: 'r2r-thorp-2', printed: true, pdf: true, journal: true },
+      { seed: 'r2r-thorp-10', printed: true, pdf: true, journal: true },
+    ]);
   }, 120000);
 
   test('the imports: under a siege that stops trade nothing is listed as brought in, on any surface (r2r-metropolis-14)', () => {
