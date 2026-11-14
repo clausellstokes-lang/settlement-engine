@@ -1,0 +1,64 @@
+{"id":"C2455","town":"bar0-city-wartime-rand-1","sev":"HIGH","kind":"STATE","why":"tile prints Food Security Pressured; FOOD word is Secure (stores 9 months, granary, gap 3%)","other":""}
+{"id":"C2504","town":"bar0-city-wartime-rand-1","sev":"HIGH","kind":"STATE","why":"'Food: Pressured.' but FOOD word is Secure","other":"C2455"}
+{"id":"C2530","town":"bar0-city-wartime-rand-1","sev":"MED","kind":"STATE","why":"Foundations prints Food Pressured; FOOD word is Secure","other":""}
+{"id":"C2457","town":"bar0-city-wartime-rand-1","sev":"MED","kind":"LACKS","why":"names 'merchant guild'; HOUSES has no merchant guild (only Tailor's guild, Craft guilds)","other":""}
+{"id":"C2489","town":"bar0-city-wartime-rand-1","sev":"LOW","kind":"STATE","why":"Zuhuy Tun is the watch commander; 'leads the military' is the Garrison commander Malinalxochitl Kab (PEOPLE)","other":""}
+{"id":"C2502","town":"bar0-city-wartime-rand-1","sev":"LOW","kind":"BROKEN","why":"lever 'Garrison' printed with no 'held by' holder, though Malinalxochitl Kab is garrison commander","other":"C2501"}
+{"id":"C2611","town":"bar0-city-wartime-rand-1","sev":"MED","kind":"LACKS","why":"'throughout the wards': population 3000 holds no wards; HOUSES lists none","other":""}
+{"id":"C2593","town":"bar0-city-wartime-rand-1","sev":"LOW","kind":"LACKS","why":"'workers' quarter': no such quarter in HOUSES; population 3000","other":""}
+{"id":"C2604","town":"bar0-city-wartime-rand-1","sev":"LOW","kind":"STATE","why":"'one importer brings in all the grain' but FOOD: 55% grown here, 41% brought in, granary holds 9 months","other":""}
+{"id":"C2702","town":"bar0-city-wartime-rand-1","sev":"LOW","kind":"BROKEN","why":"'More than one quarter of inns' is not a complete claim; reads as cut-off phrase","other":""}
+{"id":"C2963","town":"bar0-city-wartime-rand-1","sev":"MED","kind":"STATE","why":"'managed felling... sustainable'; LAND: Managed woodland absent, Timber & Lumber chain vulnerable, 'cannot produce final goods'","other":""}
+{"id":"C2992","town":"bar0-city-wartime-rand-1","sev":"MED","kind":"STATE","why":"'Very little of what leaves began here'; TRADE exports salted fish, fish oil, sea salt, potions, milled lumber all made here","other":""}
+{"id":"C2964","town":"bar0-city-wartime-rand-1","sev":"MED","kind":"PAIR","why":"'two or three trades' contradicts 'Highly diversified — multiple major revenue streams'","other":"C2945"}
+{"id":"C3001","town":"bar0-city-wartime-rand-1","sev":"LOW","kind":"STATE","why":"imports printed 2,469 lbs/day; FOOD header gives imports cover 2466","other":""}
+{"id":"C3014","town":"bar0-city-wartime-rand-1","sev":"LOW","kind":"BROKEN","why":"'16 active' and All (16) but filters Issues 3 + Productive 6 + Entrepôt 2 + Services 3 make 14","other":"C3015"}
+{"id":"C3176","town":"bar0-city-wartime-rand-1","sev":"HIGH","kind":"STATE","why":"written as partners (gives orders / carries them out); QUARRELS has Merchant oligarchy vs War Council in high conflict: a ruling it refuses to obey","other":"C2471"}
+{"id":"C3175","town":"bar0-city-wartime-rand-1","sev":"MED","kind":"STATE","why":"Web shows Merchant oligarchy ⇌ War Council symbiotic/stable; QUARRELS lists them in high conflict (C2470)","other":"C2470"}
+{"id":"C3272","town":"bar0-city-wartime-rand-1","sev":"MED","kind":"PAIR","why":"'accounts have money in hand, defenders paid'; page says war takes most of the money and the oligarchy cannot afford the requisition","other":"C3257"}
+{"id":"C3159","town":"bar0-city-wartime-rand-1","sev":"LOW","kind":"BROKEN","why":"'The Powers (5)' lists four rows (Merchant, War Council, Arcane Orders, Mages' Compact); The Shield Compact has no row","other":""}
+{"id":"C3137","town":"bar0-city-wartime-rand-1","sev":"LOW","kind":"PAIR","why":"crown officer 'came last week and left'; hook says a crown officer 'has arrived' with orders","other":"C2510"}
+{"id":"C3366","town":"bar0-city-wartime-rand-1","sev":"MED","kind":"STATE","why":"claims levy is cutting the food supply, 'less harvested'; FOOD: famine cut 0%, failed source None, word Secure","other":""}
+{"id":"C3365","town":"bar0-city-wartime-rand-1","sev":"MED","kind":"STATE","why":"'Crisis Cutting the Food Supply' stress effect; FOOD shows famine cut 0% and no failed source","other":"C3366"}
+{"id":"C3416","town":"bar0-city-wartime-rand-1","sev":"MED","kind":"PAIR","why":"prisoner 'died in the cells'; page says courts without detention, nowhere to hold the guilty, fines and exile only","other":"C3253"}
+{"id":"C3584","town":"bar0-city-wartime-rand-1","sev":"MED","kind":"STATE","why":"'the decisive victory everyone celebrates'; CRISIS is an ongoing war the town may not win, and PAST records no victory","other":"C2483"}
+{"id":"C3745","town":"bar0-city-wartime-rand-1","sev":"HIGH","kind":"STATE","why":"Daily Life prints Food Pressured; FOOD word is Secure","other":"C2455"}
+{"id":"C3861","town":"bar0-city-wartime-rand-1","sev":"HIGH","kind":"STATE","why":"Tonight sheet prints 'Food Pressured'; FOOD word is Secure","other":"C2455"}
+{"id":"C3792","town":"bar0-city-wartime-rand-1","sev":"MED","kind":"STATE","why":"'founded for trade and quiet growth'; FOUNDING: a military command that built fortifications founded it","other":"C3789"}
+{"id":"C3830","town":"bar0-city-wartime-rand-1","sev":"LOW","kind":"BROKEN","why":"historical event description printed with no event title (The Scandal, 194 years ago, missing from the list)","other":""}
+{"id":"C3831","town":"bar0-city-wartime-rand-1","sev":"LOW","kind":"BROKEN","why":"historical event description printed with no event title (The Flood, 225 years ago, missing from the list)","other":""}
+{"id":"HEADER","town":"bar0-hamlet-calm-rand-1","sev":"MED","kind":"RECORD","why":"hamlet of 87, isolated, no exports, makes gems and coal with no mining house; herbs 'made' though LAND gap says not processed","other":""}
+{"id":"C3898","town":"bar0-hamlet-calm-rand-1","sev":"HIGH","kind":"STATE","why":"tile prints Food Security Pressured; FOOD word is Secure (grown 97%, gap 3%)","other":""}
+{"id":"C3929","town":"bar0-hamlet-calm-rand-1","sev":"MED","kind":"STATE","why":"Foundations prints Food Pressured; FOOD word is Secure","other":"C3898"}
+{"id":"C3884","town":"bar0-hamlet-calm-rand-1","sev":"MED","kind":"STATE","why":"'re-judged as the campaign advances': CRISIS none, no campaign in this calm hamlet","other":""}
+{"id":"C3939","town":"bar0-hamlet-calm-rand-1","sev":"MED","kind":"STATE","why":"History lists a Corruption Scandal; PAST records only The Purge (19 years ago)","other":""}
+{"id":"C3903","town":"bar0-hamlet-calm-rand-1","sev":"LOW","kind":"STATE","why":"official corruption surfaced and resisted; PAST records only The Purge, and QUARRELS none; page also says history long and steady","other":"C3873"}
+{"id":"C3907","town":"bar0-hamlet-calm-rand-1","sev":"MED","kind":"STATE","why":"names a two-season dispute over grazing and water dividing families; QUARRELS is none","other":""}
+{"id":"C4077","town":"bar0-hamlet-calm-rand-1","sev":"MED","kind":"STATE","why":"names a two-season grazing/water dispute; QUARRELS is none and the only power is the Elder Council","other":"C3907"}
+{"id":"C4122","town":"bar0-hamlet-calm-rand-1","sev":"MED","kind":"STATE","why":"'re-judged as the campaign advances': CRISIS none, no campaign in this calm hamlet","other":"C3884"}
+{"id":"C4128","town":"bar0-hamlet-calm-rand-1","sev":"MED","kind":"STATE","why":"'Nothing has come for Saltosinum'; PAST records The Purge (occupation_infiltration, 19 years ago, major)","other":""}
+{"id":"C4139","town":"bar0-hamlet-calm-rand-1","sev":"MED","kind":"PAIR","why":"'keeps order well enough by itself'; Law & order is Critical and C4131 says nothing keeps order once armed people leave","other":"C3916"}
+{"id":"C4101","town":"bar0-hamlet-calm-rand-1","sev":"LOW","kind":"PAIR","why":"'oldest heads decide things together' but the Elder Council has 1 member and PEOPLE roster is one person","other":"C4099"}
+{"id":"C4203","town":"bar0-hamlet-calm-rand-1","sev":"HIGH","kind":"STATE","why":"Daily Life prints Food Pressured; FOOD word is Secure","other":"C3898"}
+{"id":"C4260","town":"bar0-hamlet-calm-rand-1","sev":"HIGH","kind":"STATE","why":"Tonight sheet prints 'Food Pressured'; FOOD word is Secure","other":"C3898"}
+{"id":"C4253","town":"bar0-hamlet-calm-rand-1","sev":"MED","kind":"STATE","why":"urgent grazing/water dispute between families; QUARRELS is none","other":"C3907"}
+{"id":"C4222","town":"bar0-hamlet-calm-rand-1","sev":"LOW","kind":"STATE","why":"current tension 'Corruption scandal, major'; PAST records only The Purge and QUARRELS none","other":"C3939"}
+{"id":"C4300","town":"bar0-hamlet-under_siege-rand-1","sev":"MED","kind":"STATE","why":"'Reliance on magic: None'; FOOD shows 29% of food made by magic (by magic 29%), magic medium","other":""}
+{"id":"C4360","town":"bar0-hamlet-under_siege-rand-1","sev":"MED","kind":"STATE","why":"'Reliance on magic: None'; FOOD shows 29% of food made by magic","other":"C4300"}
+{"id":"C4309","town":"bar0-hamlet-under_siege-rand-1","sev":"MED","kind":"STATE","why":"a sickness for three seasons; PAST records only a Succession Crisis and the Siege, and CRISIS is a siege not a plague","other":""}
+{"id":"C4375","town":"bar0-hamlet-under_siege-rand-1","sev":"MED","kind":"STATE","why":"'Plague Years' event with plague pit and quarantine; PAST records no plague","other":"C4309"}
+{"id":"C4385","town":"bar0-hamlet-under_siege-rand-1","sev":"MED","kind":"STATE","why":"caravanserai as hinge of desert trade where caravans cross; siege stops all roads, and LAND says it lacks access to camel herds","other":""}
+{"id":"C4388","town":"bar0-hamlet-under_siege-rand-1","sev":"MED","kind":"STATE","why":"offers Caravan organization under siege (nothing comes in); LAND gap: Caravanserai lacks access to camel herds","other":""}
+{"id":"C4393","town":"bar0-hamlet-under_siege-rand-1","sev":"LOW","kind":"STATE","why":"stable where travellers leave horses; under siege nothing comes in or out by road","other":"C4317"}
+{"id":"C4331","town":"bar0-hamlet-under_siege-rand-1","sev":"LOW","kind":"STATE","why":"'a month and a half in household stores'; FOOD gives stores 1.3 months","other":""}
+{"id":"C4446","town":"bar0-hamlet-under_siege-rand-1","sev":"MED","kind":"STATE","why":"offers assembling merchants into caravans; under siege no one comes or goes by road, and LAND says Caravanserai lacks camel herds","other":"C4317"}
+{"id":"C4480","town":"bar0-hamlet-under_siege-rand-1","sev":"LOW","kind":"STATE","why":"'a month and a half in household stores'; FOOD gives stores 1.3 months","other":"C4331"}
+{"id":"C4496","town":"bar0-hamlet-under_siege-rand-1","sev":"MED","kind":"STATE","why":"Date Palms and Orchards chain shown Impaired and fed 'From Caravanserai'; LAND gives it running with its resource available","other":""}
+{"id":"C4664","town":"bar0-hamlet-under_siege-rand-1","sev":"MED","kind":"STATE","why":"'Reliance on magic: None'; FOOD shows 29% of food made by magic","other":"C4300"}
+{"id":"C4670","town":"bar0-hamlet-under_siege-rand-1","sev":"MED","kind":"PAIR","why":"'nothing it lives by would stop without it'; FOOD has 29% made by magic and C4483 says the hamlet would go shorter without it","other":"C4483"}
+{"id":"C4667","town":"bar0-hamlet-under_siege-rand-1","sev":"MED","kind":"PAIR","why":"'Medical role: common' for magic; page says no arcane practitioners on the rolls and no healer kept here","other":"C4648"}
+{"id":"C4765","town":"bar0-hamlet-under_siege-rand-1","sev":"MED","kind":"STATE","why":"'Plague years' tension, a sickness for three seasons; PAST records no plague (only Succession Crisis and Siege)","other":"C4309"}
+{"id":"C4813","town":"bar0-hamlet-under_siege-rand-1","sev":"LOW","kind":"STATE","why":"'a month and a half in household stores'; FOOD gives stores 1.3 months","other":"C4331"}
+{"id":"C4774","town":"bar0-hamlet-under_siege-rand-1","sev":"LOW","kind":"STATE","why":"'founders chose this place for trade, water and good ground' (plural); FOUNDING: one retired tradesperson, at a defensible position on the road; desert terrain","other":"C4770"}
+{"id":"C4791","town":"bar0-hamlet-under_siege-rand-1","sev":"LOW","kind":"STATE","why":"'quarrels the hamlet is having now'; QUARRELS is none","other":""}
+{"id":"DONE","lines":2508,"blocks":3,"flags":63}
