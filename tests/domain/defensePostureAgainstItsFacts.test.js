@@ -16,12 +16,19 @@ import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { scoreBand } from '../../src/domain/display/defenseScoreBands.js';
 import { defensePostureProse } from '../../src/domain/display/stateProse/defenseStateProse.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { standingDefenseForces } from '../../src/domain/institutions/defenseInstitutionBuckets.js';
 
 /** The reader's app shape (rr3-<size>-<calm|s1+s2>-rand-<i>) and L2's own (rv2-<calm|s>-<size>-<i>). */
 const birth = (seed) => {
   let m = seed.match(/^rr3-(thorp|hamlet|village|town|city|metropolis)-([a-z_+]+)-rand-(\d+)$/);
   if (m) {
     return generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: m[1], selectedStressesRandom: false, selectedStresses: m[2] === 'calm' ? [] : m[2].split('+'), _randomizePriorities: true }), null, { seed, customContent: {} });
+  }
+  m = seed.match(/^r2r-(thorp|hamlet|village|town|city|metropolis)-(\d+)$/);
+  if (m) {
+    // The census's own cfgFor (the reader's births.mjs), verbatim.
+    const dials = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
+    return generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...dials, settType: m[1] }), null, { seed, customContent: {} });
   }
   m = seed.match(/^rv2-([a-z_+]+)-(thorp|hamlet|village|town|city|metropolis)-(\d+)$/);
   return generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: m[2], selectedStresses: m[1] === 'calm' ? [] : m[1].split('+'), selectedStressesRandom: false }), null, { seed, customContent: {} });
@@ -72,5 +79,41 @@ describe('the posture line against the facts beside it (F1, both directions of L
     expect(postureOf('rr3-metropolis-occupied-rand-2')?.rung?.provenance?.poolKey).toBe('readiness ADEQUATE');
     expect(postureOf(LIFTED)?.rung?.provenance?.poolKey).toBe('readiness ADEQUATE');
     expect(postureOf(KEEPS)?.rung?.provenance?.poolKey).toBe('readiness STRONG');
+  });
+});
+
+/**
+ * The chair's ruling (b) of 2026-11-14 on the reader's F3: A LINE THAT NAMES A THING READS THE ROSTER. The strong
+ * pool's first line names works ("the works are kept up") and a watch on the approaches: it is not drawn where
+ * the roster holds no walls, or neither a watch nor a garrison. RED-FIRST at 44dc0d5f9: Yunxian and the
+ * religious-conversion town below printed it unwalled. Muulcoba (the reader's town, unwalled, occupied) is held
+ * too; a walled town keeps the line.
+ */
+const UNWALLED = ['r2r-town-52', 'rr3-town-religious_conversion-rand-1', 'rr3-town-occupied-rand-1'];
+const WALLED_KEEPS = 'rr3-town-slave_revolt-rand-5';
+const NAMES_WORKS = /the works are kept up|the approaches are watched/;
+/** The watch half alone: the walled town's own record with its watch and garrison taken off the roster. */
+const UNWATCHED = 'rr3-town-slave_revolt-rand-5 with no watch or garrison';
+const offTheRoster = (s) => ({ ...s, institutions: (s.institutions || []).filter((inst) => {
+  const f = standingDefenseForces({ ...s, institutions: [inst] }); return !f.watch.present && !f.garrison.present;
+}) });
+describe('a posture line that names works or a watch reads the roster (F3)', () => {
+  beforeAll(() => {
+    for (const seed of [...UNWALLED, WALLED_KEEPS]) TOWNS[seed] = TOWNS[seed] || birth(seed);
+    TOWNS[UNWATCHED] = offTheRoster(TOWNS[WALLED_KEEPS]);
+  }, 300000);
+  test('no unwalled town, and none without a watch or a garrison, is told its works are kept up', () => {
+    const failures = collectSeedFailures([...UNWALLED, UNWATCHED], (seed) => {
+      const s = TOWNS[seed]; const f = standingDefenseForces(s);
+      if (seed === UNWATCHED ? (!f.walls.present || f.watch.present || f.garrison.present) : f.walls.present) throw new Error('premise');
+      const line = defensePostureProse(s, { seed: seed === UNWATCHED ? WALLED_KEEPS : seed }).posture?.beside || '';
+      if (NAMES_WORKS.test(line)) throw new Error(`${seed === UNWATCHED ? 'no watch or garrison' : 'no walls'}: ${line}`);
+    });
+    expectNoSeedFailures(failures, 'the works read from the roster');
+  });
+  test('a walled town with its watch keeps the line', () => {
+    const f = standingDefenseForces(TOWNS[WALLED_KEEPS]);
+    expect(f.walls.present && (f.watch.present || f.garrison.present)).toBe(true);
+    expect(postureOf(WALLED_KEEPS)?.beside).toMatch(NAMES_WORKS);
   });
 });
