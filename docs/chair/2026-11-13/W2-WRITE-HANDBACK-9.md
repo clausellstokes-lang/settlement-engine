@@ -13,16 +13,31 @@ The session's context field reads 0: this seat's count is its own estimate (abou
 ## Items
 | part | row | commit | what | read in |
 |---|---|---|---|---|
-| 1 | HIGH #1170 DS-DEF-2 walls AND professional garrison v1 | (this commit) | "garrison roll puts paid soldiers on every stretch of its walls" beside DS-DEF-11 WALLED-STRAINED's "too few people man them" (23 of 74 towns drawn; Ringfield, Cobachihua, Kaltenplatz, Miloburg, Lundstrand). No registered condition reads the upkeep gate (`economicGates.military`): reworded, vid and declaration kept | all 232 eligible towns, 74 drawn |
+| 1 | HIGH #1170 DS-DEF-2 walls AND professional garrison v1 | 7832ef469 | "garrison roll puts paid soldiers on every stretch of its walls" beside DS-DEF-11 WALLED-STRAINED's "too few people man them" (23 of 74 towns drawn; Ringfield, Cobachihua, Kaltenplatz, Miloburg, Lundstrand). No registered condition reads the upkeep gate (`economicGates.military`): reworded, vid and declaration kept | all 232 eligible towns, 74 drawn |
 | 1 | HIGH #642 DS-DEF-2 walls with NO force v2 | read, kept | at the tip v2 carries `no watch · no mercenary`; drawn in 6 towns (Kolbø, Nordey, Ioannolimani, Evangeanthi, Kamenin, Nishidao), every one's Armed Forces row "1 wall" and no force: true. The row's own town is a `-port-` birth this render does not reproduce | 12 eligible |
 
 ## New or changed lines (for the lane's veto list, with their towns)
 - DS-DEF-2 Invasion & War: walls AND professional garrison v1 CHANGED: "{settlement} keeps paid soldiers behind its walls, so raiders keep their distance and an army would pay dearly; a long siege would be another matter." (74 drawn: Ringfield metropolis, Lundstrand metropolis famine, Cobachihua city famine, Kaltenplatz town famine, Miloburg town wartime)
 
+**THE TIME-BOX:** the count read 189,040 at 04:58 UTC (get_session, after the first item), past the brief's 120,000:
+the item in hand (#1170) finished and pushed; every row below not reached goes AFTER THE JOIN; the seat goes to THE CLOSE.
+
 ## What is left (line by line)
-- (kept current after every item)
+- THE CLOSE: step 4's message sent (04:59 UTC); steps 5 to 8 wait on the chair's naming of the two side tips.
 
 ## LEFT FOR AFTER THE JOIN
+Rows of this seat's list not reached at the time-box (the row, its writer, what is known):
+- NEW, found by this seat at f737c96e7 (HIGH by its kind): DS-DEF-2 Invasion & War: walls AND professional garrison v1 to v3 UNDER AN OCCUPATION. v1 "... so raiders keep their distance and an army would pay dearly", v2 "any attacker would think again about the cost", v3 "People ... believe the town could be held" of a town an army already holds: 19 occupied towns eligible; v1 drawn in 3 (Markaztappa w5-city-occupied-1, w5-metropolis-occupied-101, w5-metropolis-occupied-3), v2 in 8, v3 in 8. The cure: `no crisis: occupied` on v1-v3 (the pool is `{colour}`), guard rows at w5-city-occupied-1; the pool then prints silence under an occupation (v4 is siege-only).
+- HIGH inc #645 DS-DEF-2 Beasts & Monsters: plagued, perimeter AND organized force v2 (the round's writer; rww-city-under_siege-1, Panteakra): "the rotations run, the gates close on time, and nobody treats any of it as unusual" under a siege. At the tip v2 (`[street · gate]`) is eligible in 3 of 39 towns reaching the pool (a siege with famine among them) and drawn in 2 of the read (Faromare calm; Gankhuuiin w5-city-occupied-3, under an occupation: false there too). The cure: `no crisis: under_siege · no crisis: occupied`, guards at rww-city-under_siege-1 and w5-city-occupied-3.
+- HIGH inc #1509 DS-DEF-2 Beasts & Monsters: settled, defenses beyond the need v2 (rww-thorp-famine-1, Kolbø): "comfortably over-provided against beasts" beside the bar "Beasts & Monsters Critical". The key is `settled country, perimeter` and reads no force (defenseStateProse.js `beastsRowSituation`); at the tip v2 is drawn beside Monster Defense Weak at Evangeanthi (w5-thorp-calm-3) as well. v1 "substantial works facing it" and v3 "how relaxed the people on it are" (presumes people on the perimeter where no force stands) want the same reading. No atom reads the monster score: a rewording.
+- HIGH inc #1206 DS-DEF-9 `magicDependency` true v1 (rww-city-famine-1, Megaousa): "runs on arcane work" where every magic role reads absent and the reliance reads supplement. Not reached; v2-v4 ("the town's whole arrangement rests on them", "does better than its ground and roads would explain") to be read with it.
+- The two the seventh seat found (HANDBACK-6): DS-DEF-5 NO organized force at all v1-v3 under an occupation (Ulfås, w5-hamlet-occupied-104: "Nobody ... is responsible for defending the town" where the occupiers' troops stand); DS-DEF-11 WALLED-STRAINED v2 under an occupation, its `{defwork}` slot printing the catalogue label. Not reached.
+- Step 2, not reached: the re-read at the tip of the five HIGH rows earlier seats cured (#812 #953 #1305 #954 #1392). From the hand-back of the eighth seat: #812 re-read in its part C and kept.
+- Step 3, not reached: CENSUS-2 over defense.generated.js at dcd4759b0 and at the tip.
+
+## Hazards (the chair's, copied)
+- 04:37 UTC: a push with NOTHING TO SEND falls into the pre-push hook's whole suite, whose implementationPackets / implementationSession tests run git against the real repository from a linked worktree (branch moved, `core.bare=true`, a fixture user). Before every push: `test -n "$(git rev-list origin/<branch>..<local>)"`; never chain a push after a step that can fail.
 
 ## The rulings this seat works to
-BRIEF-W2-WRITE-9 whole.
+BRIEF-W2-WRITE-9 whole. Received from the chair during this seat:
+- 04:58 UTC, to every closing lane, ruled once for all (vetoable by the owner), FOR STEP 6, the instrument's fresh hits after the merge of the line: a corpus line is declared in the source document through a registered condition (that is the door) or cured. For a hit that is not a corpus line: (1) a stale row leaves by the door's shrink form; (2) where a set or table ALREADY declares the atom and the text only stands apart from it: the SHAPE CURE, byte-identical; (3) a line GATED IN CODE (true wherever it prints) but not declared through a draw door: not banked, not keyed by hand, not reworded to slip the matcher: it stays RED AND NAMED under FOR THE DECLARATION PASS in the statement (file, text, code condition, atom, any new word), for one declaration pass after the join; (4) a line FALSE somewhere is a cure, now. The statement gives each walker's exit and says these reds are the lane's, named. No stop to the chair for classes 1 to 3.
