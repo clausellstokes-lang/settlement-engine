@@ -592,14 +592,14 @@ export const checkStructuralValidity = (institutions, config = {}) => {
         violations.push({
           type:        'survival_crisis',
           institution: 'Regional Threat',
-          reason:      `Embattled region: Military priority is ${resolvedMilPriority}/100. Infrastructure exists on paper but this level of underfunding means the defences are barely maintained and the garrison is skeletal. This settlement will fall.`,
+          reason:      'Embattled region. Infrastructure exists on paper, but the defences are so underfunded that they are barely maintained and the defenders are few. This settlement will fall.', // R3-CODE-C #325/#468: no slider figure on the page
           severity:    'error',
         });
       } else if (resolvedMilPriority < 40) {
         violations.push({
           type:        'survival_crisis',
           institution: 'Regional Threat',
-          reason:      `Embattled region: Military priority is ${resolvedMilPriority}/100. Fortification and forces are present but chronically underfunded: poor equipment, low morale, and thin reinforcement. A beleaguered outpost surviving on the edge.`,
+          reason:      `Embattled region. Fortification and forces are present but chronically underfunded: poor equipment, low morale, and thin reinforcement.${tierAtLeast(tier, 'city') ? '' : ' A beleaguered outpost surviving on the edge.'}`, // R3-CODE-C-2 (REVIEW-R3-STAGES C11): "outpost" is a size word, said only of a place small enough to be one
           severity:    'warning',
         });
       }

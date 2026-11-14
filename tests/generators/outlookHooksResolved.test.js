@@ -65,7 +65,11 @@ describe('the starving outlook set (CENSUS-3g unit 5)', () => {
   });
 
   it('the twin answers the moderate gap only', () => {
-    expect(SET[1]).toMatchObject({ twinOf: STARVING, excludes: ['food: ≤ deficit'], needs: ['food: ≤ pressured'] });
+    // R3-CODE-C-2 (CENSUS-2 kind a): re-keyed by identity (the moderate twin's declaration) with its cause: a
+    // merchant who offers food must be able to come, so the twin, like its original, refuses an isolated route
+    // and a siege; the famine there reads the set's third member, which names no merchant.
+    expect(SET[1]).toMatchObject({ twinOf: STARVING, excludes: ['food: ≤ deficit', 'route: isolated', 'crisis: under_siege'], needs: ['food: ≤ pressured'] });
+    expect(SET[2]).toEqual({ text: 'The settlement is starving, and its hungriest are turning to banditry.', needs: ['food: ≤ deficit'] });
   });
 });
 

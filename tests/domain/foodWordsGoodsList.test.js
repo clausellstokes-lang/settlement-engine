@@ -5,9 +5,12 @@
  * soak1k-20 (a secure village that hunts) printed "… Game meat … Preserved foods Meals and drink"
  * and the check read it as a livestock claim. Hand-built records only.
  */
-import { describe, expect, it } from 'vitest';
+import { beforeAll, describe, expect, it } from 'vitest';
 import { foodWordsFindings } from '../../src/domain/coherence/foodWordsFindings.js';
-import { sourcesNamedIn } from '../../src/domain/foodways.js';
+import { composeFoodwaysLine, sourcesNamedIn } from '../../src/domain/foodways.js';
+import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
+import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 
 const EXPORTS = ['Furs and pelts', 'Game meat', 'Hunting trophies', 'Leather goods', 'Preserved foods', 'Meals and drink'];
 /** @param {object} foodRecord @param {string[]} [primaryExports] */
@@ -39,5 +42,25 @@ describe('"Game meat" is game', () => {
   });
   it('a sentence about game meat on the table does not flag a hunting place', () => {
     expect(foodWordsFindings(place(SECURE_HUNTERS), 'Game meat is the mainstay of the table.')).toEqual([]);
+  });
+});
+
+// R3-CODE-C-3 (ROUND-3-CUT-INCREMENT #ww-707, rww-thorp-monster_pressure-1, Systems/Economics): the culture's flavour
+// "Public ovens, neighborhood vendors, and shared dining customs make food distribution visibly civic." printed in a
+// thorp of 28 whose Overview says "No market or fair stands". Its sellers are a market's people: the line stands only
+// where the market home says a market does.
+describe('a culture line naming sellers stands only where a market does', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  const OVENS = 'Public ovens, neighborhood vendors, and shared dining customs make food distribution visibly civic.';
+  it('no market: the sellers line is refused, a line naming no source or seller is kept', () => {
+    const line = composeFoodwaysLine({ sources: ['livestock'], cultureLines: [OVENS], identity: 'thorp|28', market: false });
+    expect(line).not.toContain('vendors');
+    expect(composeFoodwaysLine({ sources: ['livestock'], cultureLines: [OVENS], identity: 'thorp|28', market: true })).toContain('vendors');
+    expect(composeFoodwaysLine({ sources: [], cultureLines: [OVENS], identity: 'thorp|28', market: false })).toBe('Meals follow the season and what the household has put by.');
+  });
+  it('THE GUARD TOWN rww-thorp-monster_pressure-1 (no market): its foodways line names no vendor', () => {
+    const seed = 'rww-thorp-monster_pressure-1';
+    const s = generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: 'thorp', selectedStressesRandom: false, selectedStresses: ['monster_pressure'], _randomizePriorities: true }), null, { seed, customContent: {} });
+    expect(String(s.economicState?.foodSecurity?.foodRecord?.foodwaysLine)).not.toMatch(/vendors|Public ovens/);
   });
 });
