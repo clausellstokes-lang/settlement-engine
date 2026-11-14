@@ -120,3 +120,36 @@ five scores' bands: 889 of the 3,756's score readings, 166 on the 720. Powers re
 ## Stops
 None. The count field (get_session's context_usage.used_tokens) read 264,797 at both checks (09:46, 10:31): it
 looks stale; the seat works on, and says so.
+
+## UPKEEP-15 (the second seat; brief docs/chair/2026-11-14/briefs/BRIEF-UPKEEP-15.md on lane/chair-2026-11-08), kept current
+Worked in a scratch worktree on the local branch `u15-own`, pushed by explicit refspec. The tip read back at the start: 8bd8e3078.
+
+### The rulings worked to (the chair's, 2026-11-14, each vetoable by the owner)
+- (a) as briefed: the famine fall traced and cured at its cause, never by loosening; the guard widened to made records.
+  **11:23 UTC, on my trace:** ACCEPTED AS MEASURED: no score falls; the exact toll is equal in both fixtures; the red is
+  the whole-point rounding of two differences after the hundredths change. The equality arm re-keyed BY IDENTITY to the
+  famine's own toll on the parts, EXACTLY equal; the "at most" arms kept; a plant reds it (not committed); ONE ARM ADDED:
+  every PRINTED score with the divine added is at least the printed score without it; the made records assert the law on
+  printed scores as well as exact ones.
+- (b) "a healthy economy ... meaningfully higher": trace first; if the people's bound, re-key by identity to a place it
+  does not bind and add an arm stating the bound's own case; else a finding.
+- (c) magicCountOnce: a larger rung of a named two-job house is the same house (re-key by identity) if the single
+  "Monastery or friary" is already named; else STOP with the table.
+- (d) the two base goldens stay RED AND NAMED; no golden's door in its writing mode.
+
+### Item (a): done
+| commit | cause | births moved |
+|---|---|---|
+| c1f436213 | the guard widened: `tests/generators/defenceMonotoneMade.test.js`, made records (6 tiers at their people; no crisis or each of the crisis table's 15; three rosters; 8 dial pairs; with and without stores; each of 8 reliefs added to a place holding none, one, two, all but one): 1,105,920 changes | none (test only) |
+| 5605b1047 | defenseEconomicGate's famine arm re-keyed to the famine's toll on the parts (-78 and -78); the printed-scores arm added; the plant (divine supply cap 12 -> 4) reds it ("-70 to be -78") | none (test only) |
+| 51c4c5033 | `defenceExactOf` (a reader, no figure moves); the made records assert the exact scores at hundredths as well as the printed | none |
+- THE TRACE (EXECUTED): adding the divine lowers no score (economic fed 59.6 -> 76.4, starving 32.27 -> 49.07). The famine's
+  crisis points are identical (sup 8, mil 5, int 20, mon 4, all taken); its exact economic toll is 27.33 in both (limit 1
+  holds the stores to the force, and the famine takes the same 27.33 from the force). 60 - 32 = 28 against 76 - 49 = 27 is
+  rounding. NO ARITHMETIC CHANGE: the births it moves: none (the file of seeds is empty, so none is written).
+- THE WIDENED GUARD (EXECUTED): at b42be5de9, 279,136 printed score-falls (teleport circle and alchemists on the economic
+  score, the granary on the magical, under every crisis); at the build's tip 0 printed, 0 exact at hundredths (raw floats:
+  7,707 differences, each at most 1.4e-14). It runs about 5 minutes on one worker.
+- NOTED: `tests/lint/sovereigntyLightingContract.walker.test.js` was already red at 8bd8e3078 (the estate's file count
+  3,275 against 3,274: UPKEEP-13's guard file); my new file moves it again. Re-taken once through its ritual at the
+  declaration, on the clean committed tree.
