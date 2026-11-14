@@ -18,6 +18,16 @@ They show two classes the first list did not: an office with nobody in it (j) an
 (a counting-house merchant family, a shipwright family, foresters, a favoured noble's farmland). That confirms the
 same tip: those pairs do not occur at the base.
 
+**THE CHAIR'S RULINGS (23:17 UTC, each vetoable by the owner), copied as given.** C1-A GRANTED: the made list asks the
+export's own gates, and a chain needs a house of THIS town, by `institutionalCatalog.js :: isFabricInstitution`. C2-A
+GRANTED: the seven category keys leave the made list. FA GRANTED: the 48 silent Origin rows are the rule's own answer.
+DA GRANTED AS A DECLARED MOVE (38 towns). The hired-house member (70) is DESIGNED and struck. h is DESIGNED for an inland
+fish market, and the strict 37 are this seat's to measure next. Builders: TAIL-DEFECON (c1a, c2a), TAIL-NARRATIVE (fa),
+TAIL-POWERS (da). **SAID BACK TO THE CHAIR:** the costs section below was pushed after the ruling. DA contradicts
+the pin `powerCardOrderReads.test.js` SW-B1 · P50 (a thorp seated by priority reads "Headman's Authority"), so building
+DA re-decides that pin, and TAIL-POWERS should hold it to the chair before building. C1-A reds two anchors of
+`economicsProducedLocally.test.jsx`, one of them the smith's iron, which C1-A's gate should admit: TAIL-DEFECON reads it first.
+
 ## THE TABLE
 
 "Printed": towns of the class whose dump holds the class's witness (the good, the house, the power, both founding
