@@ -167,7 +167,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "crisis: under_siege"
           ],
-          "text": "With the siege closing every way in, {settlement} has lost even the little that passing trade used to leave behind.",
+          "text": "With the siege closing every way in, {settlement} has lost what passing trade used to leave behind, and the town feels the loss.",
           "slots": [
             "settlement"
           ],
@@ -178,7 +178,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "crisis: under_siege"
           ],
-          "text": "{settlement} was poor even while its trade moved freely, and the siege has stopped it moving at all.",
+          "text": "The siege has stopped {settlement}'s trade moving at all, and the money that trade brought in has stopped with it.",
           "slots": [
             "settlement"
           ],
@@ -202,7 +202,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "crisis: under_siege"
           ],
-          "text": "{settlement} had little to begin with, and the siege has stopped the passing traffic that brought in the rest.",
+          "text": "Since the siege began, no passing traffic brings money into {settlement}, and nothing has taken its place.",
           "slots": [
             "settlement"
           ],

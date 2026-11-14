@@ -828,10 +828,10 @@ the access.
 1. `[ledger · no crisis: under_siege · no crisis: plague_onset]` Trade comes and goes by {settlement}'s {access}, and the town stays poor all the same.
 2. `[street · no crisis: under_siege · no crisis: plague_onset]` Some trade comes past {settlement}, and little of it stops. The town is poor, and its people say so to anyone who asks.
 3. `[visitor · market · no crisis: under_siege · no crisis: plague_onset]` {settlement}'s market sells little, though the {access} is busy; most of the traffic does not stop, and the traders here are poor.
-4. `[ledger · crisis: under_siege]` With the siege closing every way in, {settlement} has lost even the little that passing trade used to leave behind.
-5. `[street · crisis: under_siege]` {settlement} was poor even while its trade moved freely, and the siege has stopped it moving at all.
+4. `[ledger · crisis: under_siege]` With the siege closing every way in, {settlement} has lost what passing trade used to leave behind, and the town feels the loss.
+5. `[street · crisis: under_siege]` The siege has stopped {settlement}'s trade moving at all, and the money that trade brought in has stopped with it.
 6. `[visitor · no market · no crisis: under_siege · no crisis: plague_onset]` There is no market at {settlement} to hold the trade that passes by, and the town stays poor while the trade goes on its way.
-7. `[ledger · crisis: under_siege]` {settlement} had little to begin with, and the siege has stopped the passing traffic that brought in the rest.
+7. `[ledger · crisis: under_siege]` Since the siege began, no passing traffic brings money into {settlement}, and nothing has taken its place.
 
 **COMBINATION C5: a low rung on a narrow approach**
 1. `[visitor]` {settlement} is poor, and the road to it is long and hard. What the road does not bring in, the people here go without.
@@ -3055,7 +3055,7 @@ reading rather than a settled one.
 **`Moderate`**
 1. `[street · guardPresence]` {settlement} keeps a working balance: the law is present, so is crime, and neither has the upper hand.
 2. `[ledger · guardPresence]` The town's record of crimes at {settlement} is neither short nor growing: the law and the criminals are close to even, and the next few seasons will decide which way it goes.
-3. `[visitor · colour]` Visitors to {settlement} are told which few streets to avoid, and the advice turns out to be right.
+3. `[visitor · tier: ≥ village]` Visitors to {settlement} are told which few streets to avoid, and the advice turns out to be right.
 4. `[threshold · watch]` Order at {settlement} could tip either way: a few fewer watchmen or one bolder gang would be felt on the streets within the season.
 5. `[street · no guardPresence]` Nobody at {settlement} is paid to keep order, and for now the place keeps order well enough by itself.
 6. `[ledger · no guardPresence]` {settlement} has nobody to keep the peace and no great need of anyone yet; trouble here is settled between neighbours.

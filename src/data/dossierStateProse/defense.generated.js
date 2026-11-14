@@ -2591,7 +2591,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "visitor",
           "marks": [
-            "colour"
+            "tier: ≥ village"
           ],
           "text": "Visitors to {settlement} are told which few streets to avoid, and the advice turns out to be right.",
           "slots": [
