@@ -27,6 +27,10 @@ import { render, screen, fireEvent, cleanup, within } from '@testing-library/rea
 import PowerTab from '../../src/components/new/tabs/PowerTab.jsx';
 import { SUPPORT_BASIS } from '../../src/domain/dossier/powerSupport.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
+import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { governingModifierWordsOf } from '../../src/domain/display/governingModifierWords.js';
+import { governingFactionOf } from '../../src/domain/rulingPower.js';
 import { rulingChainOf } from '../../src/domain/dossier/powerStrata.js';
 import { coupContenders, coupRiskLabel } from '../../src/domain/rulingPowerCoup.js';
 import { structuralLensOf } from '../../src/domain/spatial/cohesionWeave.js';
@@ -274,18 +278,40 @@ describe('PowerTab — the §815 ruling chain ("Who runs this place?")', () => {
     expect(screen.getByTestId('ruling-chain-npc').textContent).toBe('Serena Copperlane');
   });
 
-  it('STOP-1 (R7): the governing faction modifier rides the power line, its one home since T2-17 cut the Governing authority box', () => {
+  // RE-KEYED BY IDENTITY (POWERS-13, the bar's HIGH row #272; P4.8 ww#639 ww#980 pf#1 pf#23): the chip prints the
+  // modifier's PLAIN WORDS, and only where the town's record bears it out (display/governingModifierWords.js); the
+  // stored key ('corruption-riddled', 'mage-advised') is never printed. The guard town is the row's own,
+  // bar0-village-famine-rand-1 (the bar's probes' app shape): "Elder Council (significant) mage-advised" with no
+  // mage and no magic house; r2r-town-1 is its twin, an arcane house standing.
+  it('STOP-1 (R7): the governing faction modifier rides the power line, its one home since T2-17 cut the Governing authority box', async () => {
     const s = base();
     s.powerStructure.factions[0].modifier = 'corruption-riddled';
+    s.institutions = [{ name: "Thieves' guild chapter" }];
     render(<PowerTab powerStructure={s.powerStructure} settlement={s} narrativeNote={null} />);
     const chip = screen.getByTestId('ruling-chain-modifier');
-    expect(chip.textContent).toBe('corruption-riddled');
-    expect(screen.getByTestId('ruling-chain').textContent.split('corruption-riddled').length - 1, 'said once on the page').toBe(1);
+    expect(chip.textContent).toBe('criminal sway');
+    expect(screen.getByTestId('ruling-chain').textContent.split('criminal sway').length - 1, 'said once on the page').toBe(1);
+    expectAbsentWithAnchor(screen.getByTestId('ruling-chain').textContent, 'corruption-riddled', 'Merchant Guild', 'the stored key is never printed');
+    cleanup();
+    const bare = base();
+    bare.powerStructure.factions[0].modifier = 'corruption-riddled'; // no criminal house, no criminal power: not borne out
+    render(<PowerTab powerStructure={bare.powerStructure} settlement={bare} narrativeNote={null} />);
+    expectAbsentWithAnchor(screen.getByTestId('ruling-chain').textContent, 'corruption-riddled', 'Merchant Guild', 'an unborne modifier prints nothing');
+    expect(screen.queryByTestId('ruling-chain-modifier'), 'not borne out, no chip').toBeNull(); // anchored: the chain block renders (above)
     cleanup();
     render(<PowerTab powerStructure={base().powerStructure} settlement={base()} narrativeNote={null} />);
     expect(screen.getByTestId('ruling-chain').textContent).toContain('Merchant Guild');
     expect(screen.queryByTestId('ruling-chain-modifier'), 'no modifier, no chip').toBeNull(); // anchored: the chain block renders on this render
-  });
+    cleanup();
+    await loadGenerationLawPayloads();
+    const row = generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: 'village', selectedStressesRandom: false, selectedStresses: ['famine'], _randomizePriorities: true }), null, { seed: 'bar0-village-famine-rand-1', customContent: {} });
+    expect(governingFactionOf(row)?.modifier, 'the guard town stores the key').toBe('mage-advised');
+    expect(governingModifierWordsOf(row), 'no mage, no magic house: nothing prints').toBe('');
+    const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
+    const twin = generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...DIALS, settType: 'town' }), null, { seed: 'r2r-town-1', customContent: {} });
+    expect(governingFactionOf(twin)?.modifier, 'the twin stores the key').toBe('arcane-advised');
+    expect(governingModifierWordsOf(twin), 'an arcane house stands: its plain words').toBe('mage counsel');
+  }, 60000);
 
   it('a pre-density settlement with no NPCs renders the chain as far as the data goes', () => {
     const s = base();
