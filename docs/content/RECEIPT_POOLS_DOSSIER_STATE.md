@@ -3307,7 +3307,7 @@ may not say the contract is failing unless the economic arm supplies that.
 4. `[visitor · no gate · no crisis: under_siege]` {settlement} has a wall but no proper gate in it: people come and go by gaps everyone knows, and the wall slows trouble more than it stops it.
 5. `[street · no gate · no crisis: under_siege]` The wall around {settlement} turns back a wandering beast and slows a raid; nobody counts who comes in, because there is no gate to count them at.
 6. `[ledger · crisis: under_siege]` {settlement}'s wall is all that stands between the town and the siege, and every stretch of it is watched now.
-7. `[ledger · no gate · no crisis: under_siege]` {settlement} put its labour into a wall and none into a gate; the wall marks the edge of the town more than it closes it.
+7. `[ledger · no gate · no crisis: under_siege]` Nothing closes the few ways through {settlement}'s wall, because it has no gate.
 8. `[ledger · no gate · crisis: under_siege]` With no gate in its wall, {settlement} has no proper way to shut itself in against the siege.
 9. `[street · no gate · guardPresence · crisis: under_siege]` The people who keep order in {settlement} are spread along a wall with no gate in it, and the siege can try it anywhere.
 

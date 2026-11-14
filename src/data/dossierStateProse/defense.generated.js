@@ -4368,7 +4368,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "no gate",
             "no crisis: under_siege"
           ],
-          "text": "{settlement} put its labour into a wall and none into a gate; the wall marks the edge of the town more than it closes it.",
+          "text": "Nothing closes the few ways through {settlement}'s wall, because it has no gate.",
           "slots": [
             "settlement"
           ],

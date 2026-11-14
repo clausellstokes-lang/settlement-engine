@@ -42,7 +42,7 @@ seat itself; long runs never cross a turn's end, the suite in six shards; no pul
 | 8 | DS-DEF-1 readiness STRONG | v5 | reworded | 47f8bdd8e (sixth) | read at Aryapura, Brahmabagh, a siege metropolis |
 | 9 | DS-DEF-8 override: MIGRATION, arrivals | v4 | struck (last row) | a17d14618 (sixth) | v1, v3 print, true |
 | 10 | DS-DEF-2 CHAIN: food trades failing | v3 | reworded (+ the pool and its sibling re-said) | 94c1d5dc5 (sixth) | |
-| 11 | DS-DEF-5 walls PRESENT | v7 | LEFT | | |
+| 11 | DS-DEF-5 walls PRESENT | v7 | reworded | this seat | v7 itself |
 | 12 | DS-DEF-3 Moderate | v1 | LEFT | | |
 | 13 | DS-DEF-2 CHAIN: defence supplied | v6 | struck (last row) | a17d14618 (sixth) | v5 prints, true |
 | 14 | DS-DEF-3 COMPOUND: insurgency | v5 | struck (last row) | a17d14618 (sixth) | v2, v4 print, true |
@@ -67,13 +67,16 @@ Settled 17 (fifth seat 9, sixth seat 8); LEFT 10, and one style point (#27).
 |---|---|---|---|
 | 0 | 7f4f3d339 | the table above | |
 | B #15, #26 | fe171885e | WALLED-STRAINED siege rows: v3 `no soldiers` (guard Tihono), v3 and v4 without `{defwork}` (the slot printed "palisade or earthworks" and broke agreement) | 62 STRAINED siege towns rendered: v3 at Prabhanagar (thorp 12), Hongguan, Zuuköl (siege+famine); v4 at Tihono, Hákonås (222,797), Belovich (thorp 5), Spitzplatz |
-| B #16, #21, #22 | (this commit) | WALLED-STRAINED v8 struck (last row); v6, v7 reworded without `{defwork}` (v6 printed it twice; v7 "pays anyone" and "stretched thin" beside volunteer militias), both `no crisis: occupied` (guards Ulfås, Shangou) | 50 STRAINED calm towns rendered: v7 at Tyrvik (thorp), Muulek (wartime), Loughbury (village 386, famine), 22 in all; v6 at Altgasse (plague), Beiguan (wartime), true in all 11 eligible |
+| B #16, #21, #22 | 8c63fd2ed | WALLED-STRAINED v8 struck (last row); v6, v7 reworded without `{defwork}` (v6 printed it twice; v7 "pays anyone" and "stretched thin" beside volunteer militias), both `no crisis: occupied` (guards Ulfås, Shangou) | 50 STRAINED calm towns rendered: v7 at Tyrvik (thorp), Muulek (wartime), Loughbury (village 386, famine), 22 in all; v6 at Altgasse (plague), Beiguan (wartime), true in all 11 eligible |
+| B #11 | (this commit) | walls PRESENT v7 reworded: "Nothing closes the few ways through {settlement}'s wall, because it has no gate." (was contradicted by the guard line "The walls leave few ways in") | 64 towns rendered, drawn in 27: Tyrvik, Qaryatnagar (the reader's case, beside its guard line), Ulfås (occupied), Taipu (village 332) |
 
 ## Named, not the corpus's (with the file)
 
 ## Parked (with the word it needs)
 
 ## Found while reading, for later steps
+- DS-DEF-5 NO organized force at all v1-v3 print under an occupation (Ulfås, w5-hamlet-occupied-104: "Nobody at Ulfås is responsible for defending the hamlet" while the occupier holds it): step D/E/F, in this block.
+- DS-DEF-11 WALLED-STRAINED v2 prints under an occupation ("fewer people turn out each season to man the {defwork}"; and its {defwork} prints the catalogue label): step D/E.
 
 ## The rulings this seat works to
 BRIEF-W2-WRITE-7 (the chair session_01ACmDYZrFEVXyZEUg1NDxxC, 2026-11-14) and, through it, BRIEF-W2-WRITE-6
