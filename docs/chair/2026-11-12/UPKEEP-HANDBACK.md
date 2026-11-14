@@ -1,3 +1,76 @@
+# COHERENCE-UPKEEP: the hand-back (the sixteenth seat, UPKEEP-16, 2026-11-14) — IN PROGRESS
+
+**The lane:** `lane/coherence-upkeep-2026-11-12`. **Base of this seat:** f4e9cd37b (read back from origin before any work; it matched the brief). **This seat's session:** `session_01ACmDYa4WRpjjbAEP3yWi9k` (the chair's: `session_01ACmDYZrFEVXyZEUg1NDxxC`). **The brief:** `origin/lane/chair-2026-11-08:docs/chair/2026-11-14/briefs/BRIEF-UPKEEP-16.md`. **The births:** the capacity reader's 972 (`probes/REVIEW-UPKEEP-CAPACITY/all.seeds`), every surface rendered by its `render5.mjs` at the lane's tip and at each cure. **The instruments** (outside every tree, `/home/user/ins/`), re-made from the fourteenth seat's description: `rend.sh` (four shards of `render5.mjs`, about 5 minutes), `census16.mjs` (the fourteenth seat's rows re-made, plus the rows of this seat's items; it imports the tree's `defenceOf` and `sourcesNamedIn`), `pdiff.py` (births changed by surface, the line multisets gone and come, `--records` the record's field paths changed), `holders.sh` (holders by content, as the fourteenth seat's), `gates.sh` (the brief's after-every-cure gates), `where.mjs` (every section and line a literal prints in, for reading a line where it prints).
+
+## The rulings this seat works to
+
+THE CHAIR'S RULINGS (a) to (k): as copied in the fourteenth seat's part below (unchanged). And these since (2026-11-14, each vetoable by the owner):
+- (l) THE COURT (the lane's reader: a court named in 133 towns with no court house): ONE FACT FOR THE COURT: a line that sends an offender before a court, or names its hearings, prints only where a house that hears cases stands on the roster (a court, a town hall that holds hearings, a magistrate, a manor's court). MEASURE FIRST which houses set the record's court flag in those towns: where the flag is set with no such house, the flag's writer is the false side: say which file writes it, and STOP for that part with the table.
+- (m) "Money enough … laid by before the debt crisis" (25 towns) and its like from the rebuild's reader (money "enough for a long crisis" in Poor or Struggling towns; "paid late" where the defence is fully funded): A LINE ABOUT MONEY LAID BY OR OWED READS THE RECORD'S PROSPERITY, ITS FUNDING AND THE CRISIS IN FORCE.
+- (n) THE STORED FOODWAYS LINE under a famine (66 births hand the composer the source that failed): the call in foodGenerator.js :: generateFoodSecurity hands the sources less the failed one (grain and mill failing together): a DECLARED MOVE of that stored line only. With it, in the same file, the Foundations tab's food word "Import-dependent" under a siege (6 towns as named: the stored word reads the siege): measure it; if it moves more than the word, STOP with the table.
+- (o) THE INCOME ROWS WITH NO HOUSE (the fourteenth seat's table under (c): an income row for Iron & Metalwork in 198 towns, Stone Quarrying 131, Timber 98, Fish 43, where no house of that trade stands): NOT YOURS: a measuring seat shows the chair the cures first. You cure the LINES ((b), (c)'s "is dug here", (d)) and leave the rows and their shares as they are.
+
+## ITEM 1 — THE TABLE RE-TAKEN (the 972 at f4e9cd37b; `TREE=<tree> node census16.mjs <out> --towns`)
+
+Every row the fourteenth seat counted that this seat's items touch, re-taken once, at the start: each matches the fourteenth seat's figure exactly. "printing" = the births that print the sentence on any surface; "false" = those whose record makes it false by the row's ruling.
+
+| row | false / printing at f4e9cd37b | surfaces printing it false |
+|---|---|---|
+| (n) the stored foodways line names the source the famine failed | **66 / 121** | tab 66, pdf 66, foundry 49, export 132 |
+| (c) "Coal is dug here" with no house that digs (a mine or a quarry) | **63 / 68** | tab 63, pdf 63, export 126 |
+| (b) "managed felling" with no woodcutter, lumber house, sawmill or managed forest | **53 / 201** | tab 53, pdf 53, export 106 |
+| (d) a Fish income ROW where the fishery is depleted (ruling (o): the row is not this seat's) | **43 / 296** | tab 43, pdf 43, export 86 |
+| (d) the fish income LINE ("Fish is sold here…", "Catch landed…") where the fishery is depleted | **33 / 213** | tab 33, pdf 33, export 66 |
+| (e) "comes and goes by the gates" / "comes in by the gates" under a siege | **29 / 347** | tab 29, pdf 29, export 58 |
+| (e) the gateless twin "The walls leave few ways in, so smugglers" under a siege | **1 / 27** | tab 1, pdf 1, export 2 |
+| (g) "No single dominant organisation" beside a criminal power that governs or dominates, or a thieves' guild | **11 / 50** | tab 11, export 22 |
+| (g, wider) the same line beside ANY criminal power | **10 / 50** | tab 10, export 20 |
+| (i) "Effective for monster incursions" where the Beasts & Monsters band is Critical | **11 / 20** | tab 11, pdf 11, export 22 |
+| item 5: "the barracks is all that stands guard" beside a watch | **13 / 13** | pdf 13, foundry 13 |
+| item 5: "the town watch is all that stands guard" beside a free company hall | **3 / 44** | pdf 3, foundry 3 |
+| item 5: "nobody organised to meet it" beside a charter hall | **22 / 228** | pdf 22 |
+| item 5: "paid late" where prosperity is Prosperous or Wealthy | **5 / 327** | pdf 5 |
+| (n), its second part: the stored food word "Import-Dependent" under a siege | **9 / 15** (the 6 with a teleport channel do import) | tab (Overview) 15, Tonight 15, pdf 15, foundry 15, exports 30 |
+
+## What this seat did, in commit order
+
+| Commit | Item | Measure (the 972) | Guard and plant | Moved |
+|---|---|---|---|---|
+| dc896075a | (n) the famine's foodways line is not composed from the source the famine failed | **66** births (the census's 66, set compared): census 66 / 121 -> **0 / 121** | `tests/generators/foodwaysFamineFailedSource.test.js`; plant (the call as it was) reds 5 of 6 | `foodGenerator.js`: the `composeFoodwaysLine` call hands `sourcesAFamineLeaves(foodSources, failedSource)` (at the file's end); DECLARED MOVE: `foodRecord.foodwaysLine` and its copy `culturalIdentity.foodways`, those 66 births only |
+
+## THE DECLARED MOVES
+
+- (n) dc896075a: the stored foodways line, two record leaves (`economicState.foodSecurity.foodRecord.foodwaysLine`, `culturalIdentity.foodways`), 66 births; no other leaf; no draw (the composer is draw-free).
+
+## STOPPED, with the table
+
+- **(n), its second part: the stored food word "Import-Dependent" under a siege.** 15 births of the 972 (as named: 6): r2s-under_siege-city-0, -metropolis-1, -metropolis-2, -metropolis-3, -village-1; rv5-under_siege-city-0, -city-2, -city-5, -hamlet-4, -metropolis-3, -metropolis-4, -metropolis-5, -thorp-0, -village-3. In 6 of them (the cities and two metropolises, importing 23 to 25%) a teleportation circle carries food through the siege (`magicTradeChannel: 'teleport'`) and the word is TRUE; in the other **9** nothing is imported (`importPct` 0) and the word is false. It prints on the Overview, the Tonight sheet ("Food Import-Dependent."), the PDF's Food line, the Foundry journal and both exports. THE WORD IS NOT FOODGENERATOR'S ALONE: the label is `bandLadders.js :: foodSecurityBandOf` (fenced: the rating's rebuild) and the record carries the same band as a KEY (`foodBalance.js :: deriveFoodRecord`, `band: foodSecurityBandKeyOf(...)`), which other sentences read (`economyStateProse.js`'s `securityKey`). Changing the word in `foodGenerator.js` alone leaves the record's band saying importDependent beside a label that says otherwise (two homes for one fact); changing both moves the band key every band reader reads: more than the word. STOPPED as ruled. RECOMMENDATION: the true writer is `bandLadders.js :: foodSecurityBandKeyOf`: a siege with no import (`importPct` 0) reads `deficit` (the word "Deficit"), one line in the fenced file, for the builder of the rebuild, with the 9 births above as its measure.
+
+## FOR THE JOIN (this seat's, gathered)
+
+1. (n), found while reading: `src/domain/foodways.js :: SOURCE_WORDS.livestock` does not read "Herding" (`\bherds?\b`), so the culture line "Herding and mixed farming produce a strongly seasonal food calendar." is kept as flavour in places with no herds (a game-only thorp, a grain-only village) and where a famine failed the herds; it printed in those towns before this seat's cure too (the cure leaves it standing alone in 6). Not measured further; the one-word change (`herd(?:s|ing)?`) is a move of every culture line that names herding: for the seat that holds `foodways.js`.
+
+## THE REDS CLASSED (each red at the lane's base f4e9cd37b as well, not this seat's)
+
+- `tests/lint/presumedThings.walker.test.js`: 2 tests, 29 rows, identical at the base and at each cure (the row lists compared).
+- `tests/domain/worldFactRederive.test.js` A7 ("THE GOLDENS CANNOT SEE ANY OF IT"): red at the base too.
+
+## REGISTERS MADE STALE (the chair's ruling of 12:52: named, never re-taken)
+
+- The lighting census (`tests/lint/.lighting-census-baseline.json`): this seat's new test files (the list grows with each cure): `tests/generators/foodwaysFamineFailedSource.test.js` (dc896075a). The title that reds: `tests/lint/sovereigntyLightingContract.walker.test.js`'s census arm.
+
+## WHAT IS LEFT, line by line
+
+1. (c) #273 "Coal is dug here" 63 / 68; (b) #234 "managed felling" 53 / 201; (d) #77 the fish line 33 (row 43, the row (o)'s); (e) #90 the gates under a siege 29 + 1; then (l) the court, (m) the money lines, item 5's rows, (g) 11, (i) 11.
+2. (k) `criminalPreStress`.
+3. OPEN-coherence-upkeep.md's rows not answered above.
+
+**How the instruments are re-made:** a scratch worktree on a local branch at the lane's tip (`git worktree add -b u16 /home/user/wt origin/lane/coherence-upkeep-2026-11-12`), `npm ci`, then `git config --local --unset core.hookspath` in the shared config; a detached worktree at the base (`/home/user/base`) with `node_modules` symlinked. The reader's probes by `git archive origin/lane/review-upkeep-capacity-2026-11-14 docs/chair/2026-11-14/probes/REVIEW-UPKEEP-CAPACITY | tar -x` outside every tree. `rend.sh <tree> <out>`: the seeds split in four (`split -n l/4`), four `TREE=<tree> node render5.mjs <shard> <out>` at once (five minutes). `census16.mjs`: the rows above (the fourteenth seat's definitions; the court-house reader is the tree's `defenseFactsOf`). `pdiff.py <outA> <outB> --records`. `gates.sh <tag> <files>`: the strict-domain gate, the type ratchet, eslint on the files, the grid, the presumed-things walker, the derived-rating walker, each through `gate-tail.sh`. Commits with `git -c core.hooksPath=.husky/_ commit` (the lint-staged hook), pushes `git -c core.hooksPath=.husky/_ push origin u16:refs/heads/lane/coherence-upkeep-2026-11-12` after the rev-list test; refs and the shared config compared before and after each push: unchanged but the remote ref.
+
+**An honest note on dc896075a:** it was committed with the hooks path unset (the shared config's `core.hooksPath` removed after `npm ci`, as the fourteenth seat did), so the lint-staged pre-commit hook did not run on it; eslint on its two files had exited 0 just before. From the next commit on, this seat commits with `git -c core.hooksPath=.husky/_ commit`.
+
+---
+
 # COHERENCE-UPKEEP: the hand-back (the fourteenth seat, UPKEEP-14, 2026-11-14) — HANDED BACK AT THE COUNT (341,531 at the 12:13 check; one more cure does not fit under 400,000): (j), the chair's (1), (h), (f) CURED and pushed; the chair's (2), (3) and (1)'s tab twin NAMED; the rest of step 3, (k) and item 5 NOT STARTED
 
 **The lane:** `lane/coherence-upkeep-2026-11-12`. **Base of this seat:** 9c32016c9 (read back from origin before any work; it matched the brief). **This seat's session:** `session_01ACmDYZGcuZzHGcnNZBoikr`. **The brief:** `origin/lane/chair-2026-11-08:docs/chair/2026-11-14/briefs/BRIEF-UPKEEP-14.md`. **The births:** the capacity reader's 972 (`probes/REVIEW-UPKEEP-CAPACITY/all.seeds`), every surface rendered by its `render5.mjs` at the lane's tip and at each cure. **The instruments** (outside every tree, in the seat's container, `/home/user/ins/`): `rend.sh` (four shards of `render5.mjs`), `census14.mjs` (item 1's one script: every row's printing towns on every surface, and the towns printing it against the record, by the tree's own fact readers `defenceOf` and `scoreBand`), `holders.sh` (holders by content: a lane whose copy differs from integration's, from ours and from every past version of the file in this lane's history, less lanes whose tip is in this line).
