@@ -740,3 +740,59 @@ implementationSession.test.js run git against the REAL repository from the linke
 a fixture commit, core.bare=true, a fixture user in the shared config). Before every push: `test -n "$(git rev-list
 origin/<branch>..<local>)"`, else do not push; never chain a push after a step that can fail. This seat: every push
 carried commits; local config and local branch refs compared to the snapshots after the last push: unchanged.
+
+### THE SEVENTH SEAT (R3-CODE-C-7, 2026-11-14; brief docs/chair/2026-11-14/briefs/BRIEF-R3-CODE-C-7.md on the chair's lane; EXECUTED unless marked)
+
+**The tip.** On origin it read 0ccf3ff24, not b6bd3a3c1. The one commit between them is the sixth seat's, documents only.
+The chair ruled at 06:53Z: start from 0ccf3ff24 (not a stop). Each walker was first run, JSON, at the tip, at the line's
+tip 976db5b19 and at the lane's pre-merge tip dbe379c13 (frozen worktrees). All four were red at both lane trees and green at the line's.
+
+**The four walkers.**
+1. **negativeAssertionAnchor**: CURED, 5eba19f9b. Cause: four lane test files held 9 bare negatives, and none has a row at
+   the line: crisisSummaryVantage 4 (b6208d93a), crisisPage 1 (2ce44a973), foodWordsGoodsList 2 (c61b61434),
+   governanceAccount 2 (4ba5449e6). No other lane's own commit touches these files. The cure is in the four test files:
+   each negative is anchored to its subject, either asserted a non-empty string of its pool or of the guard town
+   (with a one-line `// anchored:` marker), or through `expectPresentThenAbsent` / `expectAbsentWithAnchor`. The guard
+   town rww-thorp-monster_pressure-1's `String(undefined)` used to pass vacuously. Six plants, not committed, each red
+   at its anchor. No baseline row.
+2. **poolDominance** ("no ceiling sits loose above its measure"): NOT CURED, PARKED for the chair. The one loose row is
+   `ledger:foodBalance:OUTLOOK_HOOK_SIBLINGS`: top1 ceiling 0.649, measure 0.5449, lines 2 -> 3. Cause: 0b3ce25a3
+   (R3-CODE-C-2, the merchant-free outlook line). The door `node scripts/census/pool-dominance.mjs --tighten`, run to
+   measure in the scratch tree with the register restored after and never committed, would move **57 rows of 909**
+   (the loose row and 56 others lowered within noise) and re-take the register's `census` header. Its own header calls
+   it "THE CHAIR'S DOOR ... a lane's tree is a re-dealt sample, so run lane by lane it walks every ceiling down the
+   noise; used only on a ruling". The brief foresaw one ceiling lowered. A hand edit of the one row is barred
+   (registers only through their doors). RECOMMENDATION: the chair rules whether `--tighten` runs on this lane (all 57
+   rows, its own commit, the output in the body) or at the merge seat on the composed line; I would hold it for the
+   merge seat, which tightens once on the composed tree. No ceiling would rise.
+3. **writerReach**, two titles (the frozen shapesDigest; the lit arm): CURED, f242b80be. Cause, bisected on the corpus
+   digest over the lane's 43 first-parent commits: 0b3ce25a3, the only digest move. `check-writer-reach.mjs`: exit 0,
+   names nothing. Forecast before writing (the door's own run() with the writer captured in memory): cohort
+   1378 -> 1378, 0 stale, 0 struck, 0 violations; population, corpusMeta, registerDigest, verdictDigest and
+   detectorDigest unchanged; moving only frozenAtSha, shapesDigest and the scan's own counters. `--write` on the
+   clean committed tree: exit 0, byte-equal to the forecast. Walker 52/52.
+4. **The dossier prose manifest**: MEASURED, b934abc46 (draft shift record: `re-record`). Red at both trees, on the same
+   three titles. At both trees the same 1038 of 1050 rows differ from the fixture, which is byte-identical at both
+   (the line's set). The lane moves 752 of those 1038 further (764 cells: history.legacy|history.record 752,
+   history.identity 12; none added or removed), all by ONE display-only family: a322b602f (#ww-470, TIME_BANDS "older
+   than anyone living"). Bisected by the run's own cells, and its text equals the tip's on all 764 cells.
+
+**Item 5.** No test title added or renamed (the diff 0ccf3ff24..HEAD under tests/ holds no it/test/describe line), so the
+lighting census was not re-taken. sovereigntyLightingContract.walker and mutationCoverageManifest: 44/44 green.
+
+**At the final code tip b934abc46** (this commit adds only this section):
+- The three fast gates, each through `sh scripts/gate-tail.sh`: typecheck:domain:strict exit 0 (1113, ceiling 1113);
+  typecheck:ratchet exit 0 (167, ceiling 167); eslint on the four touched test files exit 0.
+- `node scripts/implementation-packets.mjs validate`: exit 0 (257 packets, 0 READY).
+- The five instrument doors of section 2m: presumed things `--check` exit 0 (fresh 0, stale 0); fact layers exit 0
+  (0 rises, 0 falls); observed shapes exit 0; writer reach exit 0 (pending-surface debt none); page census (720,
+  `--workers=2`) exit 0 ("the banked corpus reads at or under the register"). All were clean at the sixth seat's tip, and are clean by this seat's own run.
+- Re-run (the whole suite NOT re-run): the three walker files and the four touched test files, 128 of 129. The one red
+  is poolDominance's loose ceiling, parked above.
+- **no file under src/ changed after b6bd3a3c1** (`git diff --stat b6bd3a3c1..HEAD -- src/` prints nothing).
+- Local git config and branch refs compared against snapshots after every push: unchanged but for this seat's own
+  local branch, and `core.hooksPath` written once by `npm ci`.
+
+**FOR THE JOIN (added by this seat):** (4) the poolDominance `--tighten`, above, at the chair's ruling; (5) the dossier
+prose manifest's fixture re-record (the line's 1038 rows with the lane's 752 among them) and the golden pins of the
+sixth seat's class of 18: the merge seat's signed acts.
