@@ -1188,7 +1188,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "Offenders at {settlement} are arrested, tried and held, and each case is written into the court's lists, so people expect a hearing, not a beating.",
+          "text": "Offenders at {settlement} are arrested, heard and held, and each case is written down, so people expect a hearing, not a beating.",
           "slots": [
             "settlement"
           ],
@@ -1210,7 +1210,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "Bring a complaint at {settlement} and it goes to a court and gets a hearing, not a favour.",
+          "text": "Bring a complaint at {settlement} and it gets a hearing, not a favour.",
           "slots": [
             "settlement"
           ],
@@ -1220,7 +1220,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "Internal Security: court without detention": [
         {
           "angle": "ledger",
-          "text": "{settlement} tries offences it cannot hold anyone for; the sentences available here are money and exile, and both of them fall unevenly.",
+          "text": "{settlement} has nowhere to hold an offender, so the penalties its hearings can hand down are money and exile, and both of them fall unevenly.",
           "slots": [
             "settlement"
           ],
@@ -1234,7 +1234,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "{settlement}'s court passes sentences it cannot enforce, so each unpaid fine makes the next one easier to ignore.",
+          "text": "The fines {settlement} hands down cannot be enforced, so each unpaid fine makes the next one easier to ignore.",
           "slots": [
             "settlement"
           ],

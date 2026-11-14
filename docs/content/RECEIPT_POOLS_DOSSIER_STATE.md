@@ -2909,14 +2909,14 @@ supplies the ancestry.
 9. `[street · watch · threat · crisis: any · no crisis: occupied]` With trouble at hand, {settlement}'s watch is all the town has to send, and there is no wall to send it to.
 
 **`Internal Security`: full legal chain (court AND prison)**
-1. `[ledger · colour]` Offenders at {settlement} are arrested, tried and held, and each case is written into the court's lists, so people expect a hearing, not a beating.
+1. `[ledger · colour]` Offenders at {settlement} are arrested, heard and held, and each case is written down, so people expect a hearing, not a beating.
 2. `[street · watch]` A thing done wrong at {settlement} goes somewhere and takes time, and the town has come to rely on that rather than on the watch's temper.
-3. `[visitor · colour]` Bring a complaint at {settlement} and it goes to a court and gets a hearing, not a favour.
+3. `[visitor · colour]` Bring a complaint at {settlement} and it gets a hearing, not a favour.
 
 **`Internal Security`: court without detention** {colour}
-1. `[ledger]` {settlement} tries offences it cannot hold anyone for; the sentences available here are money and exile, and both of them fall unevenly.
+1. `[ledger]` {settlement} has nowhere to hold an offender, so the penalties its hearings can hand down are money and exile, and both of them fall unevenly.
 2. `[street]` The town's law can name a wrong and cannot keep the person who did it, so it reaches for the purse or the road.
-3. `[unfolding]` {settlement}'s court passes sentences it cannot enforce, so each unpaid fine makes the next one easier to ignore.
+3. `[unfolding]` The fines {settlement} hands down cannot be enforced, so each unpaid fine makes the next one easier to ignore.
 
 **`Internal Security`: detention without process** {colour}
 1. `[ledger]` {settlement} can hold people and has no settled way of deciding whether it should, which makes enforcement here a matter of who is doing it.
