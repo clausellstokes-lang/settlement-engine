@@ -1,0 +1,7 @@
+NOTICE:  database "ct212_0_ns" does not exist, skipping
+NOTICE:  database "ct212_1_ns" does not exist, skipping
+NOTICE:  database "ct212_2_ns" does not exist, skipping
+NOTICE:  database "ct212_3_ns" does not exist, skipping
+sweep census over ct212_0,ct212_1,ct212_2,ct212_3: 24 towns, 384 reads compared, 15 reads from which the sweep took a string
+$.economicState.situationDesc | towns 1 | strings 15
+      e.g. Vatannuur: Honest trade gets by, but a busy black market undercuts it.

@@ -1,0 +1,590 @@
+{"towns":24,"planted":15422,"propagated":8821,"shares":192,"reads":1536,"handHides":49561,"clamped":0,"housesHiddenWhole":36,"frozenSkips":1182}
+births that threw: 0 []
+raised: 0 []
+reads:
+   ct212 card row 192
+   ct212 gallery row 192
+   ct212 import row 192
+   ct212 importMap row 192
+   ct212 link row 192
+   ct212 map row 192
+   ct212 mapLink row 192
+   ct212 moreByCreator row 192
+lists:
+   ct212 _gallery_public_tile_rows {"rows":204,"markers":0}
+   ct212 list_curated_dossiers {"rows":0,"markers":0}
+   ct212 list_featured_dossiers {"rows":0,"markers":0}
+   ct212 list_featured_maps {"rows":0,"markers":0}
+   ct212 list_gallery_dossiers(all) {"rows":204,"markers":0}
+   ct212 list_gallery_maps {"rows":192,"markers":0}
+planted by origin: {"institution.desc":852,"faction.desc":320,"npc.personality":629,"npc.physical":629,"npc.secret":739,"npc.plotHooks":1253,"event.description":116,"event.lastingEffects":92,"event.plotHooks":47,"tension.description":42,"tension.lastingEffects":35,"tension.plotHooks":42,"npc.goal":629,"conflict.stakes":21,"conflict.desc":21,"conflict.plotHooks":21,"relationship.tension":627,"relationship.description":627,"grouping.criminalCaptureState":24,"npc.personality(inner)":1258,"npc.physical(inner)":1675,"npc.goal(inner)":1258,"npc.secret(inner)":1258,"npc.plotHooks(inner)":629,"event.lastingEffects(inner)":99,"event.plotHooks(inner)":68,"tension.lastingEffects(inner)":70,"tension.plotHooks(inner)":123,"conflict.plotHooks(inner)":21,"grouping.generationCoherenceReceipt(inner)":1181,"note.dossierNotes":24,"note.dmNotes":24,"note.notes":24,"note.narrativeNotes":24,"note.tabNotes":48,"note.npc.notes":66,"note.npc.dmNotes":66,"note.institution.notes":72,"note.institution.dmNotes":72,"note.faction.notes":55,"note.faction.dmNotes":55,"grouping.decrees":24,"grouping.dmLayer":24,"custom.customContentRoster.id":24,"custom.customContentRoster.name":24,"custom.customContentRoster.description":24,"custom.customContentProvenance.id":24,"custom.customContentProvenance.ownerKey":24,"custom.customContentProvenance.name":24,"ai.ai_data.narrative":24,"ai.ai_data.summary":24,"ai.ai_data.grounding":24,"grouping.desc":79,"grouping.availableServices.criminal(inner)":15,"npc.allegiance":26,"grouping.reason":12,"grouping.economicState.safetyProfile.crimeTypes(inner)":2,"grouping.structuralSuggestions(inner)":8,"npc.activeConstraint":51,"faction.captureState":3,"grouping.economicState.safetyProfile.criminalInstitutions(inner)":6,"faction.crisisNote":17,"grouping.structuralViolations(inner)":3}
+propagated to:
+   event.lastingEffects(inner)  =>  generationCoherenceReceipt.judgments[].findings[].evidence 2
+   event.lastingEffects(inner)  =>  history.currentTensions[].lastingEffects[] 7
+   event.plotHooks(inner)  =>  history.currentTensions[].plotHooks[] 1
+   faction.crisisNote  =>  powerStructure.factions[].crisisNote 10
+   faction.desc  =>  powerStructure.factions[].desc 194
+   grouping.desc  =>  economicState.safetyProfile.crimeTypes[].desc 3
+   grouping.generationCoherenceReceipt(inner)  =>  activeConditions[].causes[].detail 1
+   grouping.generationCoherenceReceipt(inner)  =>  availableServices.equipment[].desc 1
+   grouping.generationCoherenceReceipt(inner)  =>  culturalIdentity.defensePattern 1
+   grouping.generationCoherenceReceipt(inner)  =>  generationCoherenceReceipt.checks[].label 408
+   grouping.generationCoherenceReceipt(inner)  =>  generationCoherenceReceipt.judgments[].evidence[].detail 531
+   grouping.generationCoherenceReceipt(inner)  =>  generationCoherenceReceipt.judgments[].evidence[].evidence 73
+   grouping.generationCoherenceReceipt(inner)  =>  generationCoherenceReceipt.judgments[].findings[].detail 24
+   grouping.generationCoherenceReceipt(inner)  =>  generationCoherenceReceipt.judgments[].findings[].evidence 12
+   grouping.generationCoherenceReceipt(inner)  =>  generationCoherenceReceipt.judgments[].label 168
+   grouping.generationCoherenceReceipt(inner)  =>  generationCoherenceReceipt.judgments[].summary 192
+   grouping.generationCoherenceReceipt(inner)  =>  generationCoherenceReceipt.repairs[].reason 9
+   grouping.generationCoherenceReceipt(inner)  =>  history.founding.foundedBy 1
+   grouping.generationCoherenceReceipt(inner)  =>  history.historicalEvents[].lastingEffects[] 2
+   grouping.generationCoherenceReceipt(inner)  =>  history.legacyAnnotations[].annotation 2
+   grouping.generationCoherenceReceipt(inner)  =>  institutions[].desc 4
+   grouping.generationCoherenceReceipt(inner)  =>  simulationTrace[].causes[].reason 9
+   grouping.generationCoherenceReceipt(inner)  =>  spatialLayout.layout 1
+   grouping.generationCoherenceReceipt(inner)  =>  stress.label 1
+   grouping.reason  =>  economicViability.dependencies[].description 1
+   institution.desc  =>  generationCoherenceReceipt.judgments[].findings[].evidence 4
+   npc.activeConstraint  =>  npcs[].activeConstraint 12
+   npc.goal(inner)  =>  npcs[].goal.long 2
+   npc.personality(inner)  =>  npcs[].personality.speech 916
+   npc.personality(inner)  =>  npcs[].personality.tell 902
+   npc.physical(inner)  =>  npcs[].physical.build 2626
+   npc.physical(inner)  =>  npcs[].physical.clothes 1178
+   npc.physical(inner)  =>  npcs[].physical.feature 1274
+   npc.physical(inner)  =>  npcs[].presentation.impression 2
+   relationship.description  =>  prominentRelationship.full 16
+   relationship.description  =>  relationships[].description 154
+   relationship.tension  =>  pressureSentence 5
+   relationship.tension  =>  prominentRelationship.phrasing 16
+   relationship.tension  =>  prominentRelationship.tension 16
+   relationship.tension  =>  relationships[].tension 32
+   tension.lastingEffects(inner)  =>  history.historicalEvents[].lastingEffects[] 7
+   tension.plotHooks(inner)  =>  history.historicalEvents[].plotHooks[] 1
+ARRIVED: 263 rows
+ct212 | marker | conflict.desc  ->  conflicts[].desc | towns<=5/shard | shares: 2 | gallery:42 import:42
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | conflict.desc  ->  dossier.conflicts[].desc | towns<=5/shard | shares: 2 | link:42
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | conflict.desc  ->  dossier.powerStructure.conflicts[].desc | towns<=5/shard | shares: 2 | link:42
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | conflict.desc  ->  import_gallery_map.members[].settlement.conflicts[].desc | towns<=5/shard | shares: 2 | importMap:42
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | conflict.desc  ->  import_gallery_map.members[].settlement.powerStructure.conflicts[].desc | towns<=5/shard | shares: 2 | importMap:42
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | conflict.desc  ->  members[].settlement.conflicts[].desc | towns<=5/shard | shares: 2 | map:42
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | conflict.desc  ->  members[].settlement.powerStructure.conflicts[].desc | towns<=5/shard | shares: 2 | map:42
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | conflict.desc  ->  powerStructure.conflicts[].desc | towns<=5/shard | shares: 2 | gallery:42 import:42
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | conflict.plotHooks  ->  conflicts[].plotHooks[] | towns<=5/shard | shares: 1 | gallery:21 import:21
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | conflict.plotHooks  ->  powerStructure.conflicts[].plotHooks[] | towns<=5/shard | shares: 1 | gallery:21 import:21
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | conflict.plotHooks(inner)  ->  conflicts[].plotHooks[] | towns<=5/shard | shares: 1 | gallery:21 import:21
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | conflict.plotHooks(inner)  ->  powerStructure.conflicts[].plotHooks[] | towns<=5/shard | shares: 1 | gallery:21 import:21
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | conflict.stakes  ->  conflicts[].stakes | towns<=5/shard | shares: 2 | gallery:42 import:42
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | conflict.stakes  ->  dossier.conflicts[].stakes | towns<=5/shard | shares: 2 | link:42
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | conflict.stakes  ->  dossier.powerStructure.conflicts[].stakes | towns<=5/shard | shares: 2 | link:42
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | conflict.stakes  ->  import_gallery_map.members[].settlement.conflicts[].stakes | towns<=5/shard | shares: 2 | importMap:42
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | conflict.stakes  ->  import_gallery_map.members[].settlement.powerStructure.conflicts[].stakes | towns<=5/shard | shares: 2 | importMap:42
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | conflict.stakes  ->  members[].settlement.conflicts[].stakes | towns<=5/shard | shares: 2 | map:42
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | conflict.stakes  ->  members[].settlement.powerStructure.conflicts[].stakes | towns<=5/shard | shares: 2 | map:42
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | conflict.stakes  ->  powerStructure.conflicts[].stakes | towns<=5/shard | shares: 2 | gallery:42 import:42
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | event.description  ->  dossier.history.historicalEvents[].description | towns<=6/shard | shares: 2 | link:232
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | event.description  ->  history.historicalEvents[].description | towns<=6/shard | shares: 2 | gallery:232 import:232
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | event.description  ->  import_gallery_map.members[].settlement.history.historicalEvents[].description | towns<=6/shard | shares: 2 | importMap:232
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | event.description  ->  members[].settlement.history.historicalEvents[].description | towns<=6/shard | shares: 2 | map:232
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | event.lastingEffects  ->  dossier.history.historicalEvents[].lastingEffects[] | towns<=6/shard | shares: 2 | link:184
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | event.lastingEffects  ->  history.historicalEvents[].lastingEffects[] | towns<=6/shard | shares: 2 | gallery:184 import:184
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | event.lastingEffects  ->  import_gallery_map.members[].settlement.history.historicalEvents[].lastingEffects[] | towns<=6/shard | shares: 2 | importMap:184
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | event.lastingEffects  ->  members[].settlement.history.historicalEvents[].lastingEffects[] | towns<=6/shard | shares: 2 | map:184
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | event.lastingEffects(inner)  ->  dossier.history.currentTensions[].lastingEffects[] | towns<=4/shard | shares: 2 | link:14
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | event.lastingEffects(inner)  ->  dossier.history.historicalEvents[].lastingEffects[] | towns<=6/shard | shares: 2 | link:198
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | event.lastingEffects(inner)  ->  history.currentTensions[].lastingEffects[] | towns<=4/shard | shares: 2 | gallery:14 import:14
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | event.lastingEffects(inner)  ->  history.historicalEvents[].lastingEffects[] | towns<=6/shard | shares: 2 | gallery:198 import:198
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | event.lastingEffects(inner)  ->  import_gallery_map.members[].settlement.history.currentTensions[].lastingEffects[] | towns<=4/shard | shares: 2 | importMap:14
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | event.lastingEffects(inner)  ->  import_gallery_map.members[].settlement.history.historicalEvents[].lastingEffects[] | towns<=6/shard | shares: 2 | importMap:198
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | event.lastingEffects(inner)  ->  members[].settlement.history.currentTensions[].lastingEffects[] | towns<=4/shard | shares: 2 | map:14
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | event.lastingEffects(inner)  ->  members[].settlement.history.historicalEvents[].lastingEffects[] | towns<=6/shard | shares: 2 | map:198
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | event.plotHooks  ->  history.historicalEvents[].plotHooks[] | towns<=6/shard | shares: 1 | gallery:47 import:47
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | event.plotHooks(inner)  ->  history.currentTensions[].plotHooks[] | towns<=1/shard | shares: 1 | gallery:1 import:1
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | event.plotHooks(inner)  ->  history.historicalEvents[].plotHooks[] | towns<=6/shard | shares: 1 | gallery:68 import:68
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | faction.captureState  ->  powerStructure.factions[].captureState | towns<=1/shard | shares: 1 | gallery:3 import:3
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | faction.crisisNote  ->  dossier.powerStructure.factions[].crisisNote | towns<=3/shard | shares: 2 | link:32
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | faction.crisisNote  ->  import_gallery_map.members[].settlement.powerStructure.factions[].crisisNote | towns<=3/shard | shares: 2 | importMap:33
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | faction.crisisNote  ->  members[].settlement.powerStructure.factions[].crisisNote | towns<=3/shard | shares: 2 | map:33
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | faction.crisisNote  ->  powerStructure.factions[].crisisNote | towns<=3/shard | shares: 2 | gallery:33 import:33
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | faction.desc  ->  dossier.powerStructure.factions[].desc | towns<=6/shard | shares: 2 | link:484
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | faction.desc  ->  import_gallery_map.members[].settlement.powerStructure.factions[].desc | towns<=6/shard | shares: 2 | importMap:504
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | faction.desc  ->  members[].settlement.powerStructure.factions[].desc | towns<=6/shard | shares: 2 | map:504
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | faction.desc  ->  powerStructure.factions[].desc | towns<=6/shard | shares: 2 | gallery:532 import:532
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | grouping.availableServices.criminal(inner)  ->  availableServices.criminal[].name | towns<=3/shard | shares: 1 | gallery:15 import:15
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | grouping.availableServices.criminal(inner)  ->  import_gallery_map.members[].settlement.availableServices.criminal[].name | towns<=3/shard | shares: 1 | importMap:15
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | grouping.availableServices.criminal(inner)  ->  members[].settlement.availableServices.criminal[].name | towns<=3/shard | shares: 1 | map:15
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | grouping.criminalCaptureState  ->  powerStructure.criminalCaptureState | towns<=6/shard | shares: 1 | gallery:24 import:24
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | grouping.desc  ->  availableServices.criminal[].desc | towns<=4/shard | shares: 1 | gallery:50 import:50
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | grouping.desc  ->  economicState.safetyProfile.crimeTypes[].desc | towns<=4/shard | shares: 1 | gallery:29 import:29
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | grouping.desc  ->  import_gallery_map.members[].settlement.availableServices.criminal[].desc | towns<=4/shard | shares: 1 | importMap:50
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | grouping.desc  ->  import_gallery_map.members[].settlement.economicState.safetyProfile.crimeTypes[].desc | towns<=4/shard | shares: 1 | importMap:29
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | grouping.desc  ->  members[].settlement.availableServices.criminal[].desc | towns<=4/shard | shares: 1 | map:50
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | grouping.desc  ->  members[].settlement.economicState.safetyProfile.crimeTypes[].desc | towns<=4/shard | shares: 1 | map:29
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | grouping.economicState.safetyProfile.crimeTypes(inner)  ->  economicState.safetyProfile.crimeTypes[].type | towns<=1/shard | shares: 1 | gallery:2 import:2
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | grouping.economicState.safetyProfile.crimeTypes(inner)  ->  import_gallery_map.members[].settlement.economicState.safetyProfile.crimeTypes[].type | towns<=1/shard | shares: 1 | importMap:2
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | grouping.economicState.safetyProfile.crimeTypes(inner)  ->  members[].settlement.economicState.safetyProfile.crimeTypes[].type | towns<=1/shard | shares: 1 | map:2
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | grouping.economicState.safetyProfile.criminalInstitutions(inner)  ->  economicState.safetyProfile.criminalInstitutions[] | towns<=2/shard | shares: 1 | gallery:6 import:6
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | grouping.economicState.safetyProfile.criminalInstitutions(inner)  ->  import_gallery_map.members[].settlement.economicState.safetyProfile.criminalInstitutions[] | towns<=2/shard | shares: 1 | importMap:6
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | grouping.economicState.safetyProfile.criminalInstitutions(inner)  ->  members[].settlement.economicState.safetyProfile.criminalInstitutions[] | towns<=2/shard | shares: 1 | map:6
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | grouping.generationCoherenceReceipt(inner)  ->  activeConditions[].causes[].detail | towns<=1/shard | shares: 8 | gallery:8 import:8
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | marker | grouping.generationCoherenceReceipt(inner)  ->  availableServices.equipment[].desc | towns<=1/shard | shares: 2 | gallery:2 import:2
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | grouping.generationCoherenceReceipt(inner)  ->  dossier.activeConditions[].causes[].detail | towns<=1/shard | shares: 8 | link:8
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | marker | grouping.generationCoherenceReceipt(inner)  ->  dossier.availableServices.equipment[].desc | towns<=1/shard | shares: 2 | link:2
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | grouping.generationCoherenceReceipt(inner)  ->  dossier.history.founding.foundedBy | towns<=1/shard | shares: 8 | link:8
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | marker | grouping.generationCoherenceReceipt(inner)  ->  dossier.history.historicalEvents[].lastingEffects[] | towns<=1/shard | shares: 2 | link:4
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | grouping.generationCoherenceReceipt(inner)  ->  dossier.history.legacyAnnotations[].annotation | towns<=1/shard | shares: 8 | link:16
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | marker | grouping.generationCoherenceReceipt(inner)  ->  dossier.institutions[].desc | towns<=3/shard | shares: 2 | link:8
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | grouping.generationCoherenceReceipt(inner)  ->  dossier.spatialLayout.layout | towns<=1/shard | shares: 8 | link:8
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | marker | grouping.generationCoherenceReceipt(inner)  ->  dossier.stress.label | towns<=1/shard | shares: 8 | link:8
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | marker | grouping.generationCoherenceReceipt(inner)  ->  dossier.stressors.label | towns<=1/shard | shares: 8 | link:8
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | marker | grouping.generationCoherenceReceipt(inner)  ->  history.founding.foundedBy | towns<=1/shard | shares: 8 | gallery:8 import:8
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | marker | grouping.generationCoherenceReceipt(inner)  ->  history.historicalEvents[].lastingEffects[] | towns<=1/shard | shares: 2 | gallery:4 import:4
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | grouping.generationCoherenceReceipt(inner)  ->  history.legacyAnnotations[].annotation | towns<=1/shard | shares: 8 | gallery:16 import:16
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | marker | grouping.generationCoherenceReceipt(inner)  ->  import_gallery_map.members[].settlement.activeConditions[].causes[].detail | towns<=1/shard | shares: 8 | importMap:8
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | marker | grouping.generationCoherenceReceipt(inner)  ->  import_gallery_map.members[].settlement.availableServices.equipment[].desc | towns<=1/shard | shares: 2 | importMap:2
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | grouping.generationCoherenceReceipt(inner)  ->  import_gallery_map.members[].settlement.history.founding.foundedBy | towns<=1/shard | shares: 8 | importMap:8
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | marker | grouping.generationCoherenceReceipt(inner)  ->  import_gallery_map.members[].settlement.history.historicalEvents[].lastingEffects[] | towns<=1/shard | shares: 2 | importMap:4
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | grouping.generationCoherenceReceipt(inner)  ->  import_gallery_map.members[].settlement.history.legacyAnnotations[].annotation | towns<=1/shard | shares: 8 | importMap:16
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | marker | grouping.generationCoherenceReceipt(inner)  ->  import_gallery_map.members[].settlement.institutions[].desc | towns<=3/shard | shares: 2 | importMap:8
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | grouping.generationCoherenceReceipt(inner)  ->  import_gallery_map.members[].settlement.spatialLayout.layout | towns<=1/shard | shares: 8 | importMap:8
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | marker | grouping.generationCoherenceReceipt(inner)  ->  import_gallery_map.members[].settlement.stress.label | towns<=1/shard | shares: 8 | importMap:8
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | marker | grouping.generationCoherenceReceipt(inner)  ->  import_gallery_map.members[].settlement.stressors.label | towns<=1/shard | shares: 8 | importMap:8
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | marker | grouping.generationCoherenceReceipt(inner)  ->  institutions[].desc | towns<=3/shard | shares: 2 | gallery:8 import:8
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | grouping.generationCoherenceReceipt(inner)  ->  members[].settlement.activeConditions[].causes[].detail | towns<=1/shard | shares: 8 | map:8
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | marker | grouping.generationCoherenceReceipt(inner)  ->  members[].settlement.availableServices.equipment[].desc | towns<=1/shard | shares: 2 | map:2
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | grouping.generationCoherenceReceipt(inner)  ->  members[].settlement.history.founding.foundedBy | towns<=1/shard | shares: 8 | map:8
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | marker | grouping.generationCoherenceReceipt(inner)  ->  members[].settlement.history.historicalEvents[].lastingEffects[] | towns<=1/shard | shares: 2 | map:4
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | grouping.generationCoherenceReceipt(inner)  ->  members[].settlement.history.legacyAnnotations[].annotation | towns<=1/shard | shares: 8 | map:16
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | marker | grouping.generationCoherenceReceipt(inner)  ->  members[].settlement.institutions[].desc | towns<=3/shard | shares: 2 | map:8
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | grouping.generationCoherenceReceipt(inner)  ->  members[].settlement.spatialLayout.layout | towns<=1/shard | shares: 8 | map:8
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | marker | grouping.generationCoherenceReceipt(inner)  ->  members[].settlement.stress.label | towns<=1/shard | shares: 8 | map:8
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | marker | grouping.generationCoherenceReceipt(inner)  ->  members[].settlement.stressors.label | towns<=1/shard | shares: 8 | map:8
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | marker | grouping.generationCoherenceReceipt(inner)  ->  simulationTrace[].causes[].reason | towns<=3/shard | shares: 5 | gallery:45 import:45
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | grouping.generationCoherenceReceipt(inner)  ->  spatialLayout.layout | towns<=1/shard | shares: 8 | gallery:8 import:8
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | marker | grouping.generationCoherenceReceipt(inner)  ->  stress.label | towns<=1/shard | shares: 8 | gallery:8 import:8
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | marker | grouping.generationCoherenceReceipt(inner)  ->  stressors.label | towns<=1/shard | shares: 8 | gallery:8 import:8
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | marker | grouping.reason  ->  dossier.economicViability.dependencies[].description | towns<=1/shard | shares: 8 | link:8
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | marker | grouping.reason  ->  economicViability.dependencies[].description | towns<=1/shard | shares: 8 | gallery:8 import:8
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | marker | grouping.reason  ->  import_gallery_map.members[].settlement.economicViability.dependencies[].description | towns<=1/shard | shares: 8 | importMap:8
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | marker | grouping.reason  ->  import_gallery_map.members[].settlement.structuralSuggestions[].reason | towns<=2/shard | shares: 1 | importMap:9
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | grouping.reason  ->  import_gallery_map.members[].settlement.structuralViolations[].reason | towns<=1/shard | shares: 1 | importMap:3
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | grouping.reason  ->  members[].settlement.economicViability.dependencies[].description | towns<=1/shard | shares: 8 | map:8
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | marker | grouping.reason  ->  members[].settlement.structuralSuggestions[].reason | towns<=2/shard | shares: 1 | map:9
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | grouping.reason  ->  members[].settlement.structuralViolations[].reason | towns<=1/shard | shares: 1 | map:3
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | grouping.reason  ->  structuralSuggestions[].reason | towns<=2/shard | shares: 1 | gallery:9 import:9
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | grouping.reason  ->  structuralViolations[].reason | towns<=1/shard | shares: 1 | gallery:3 import:3
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | grouping.structuralSuggestions(inner)  ->  import_gallery_map.members[].settlement.structuralSuggestions[].institution | towns<=1/shard | shares: 1 | importMap:1
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | grouping.structuralSuggestions(inner)  ->  import_gallery_map.members[].settlement.structuralSuggestions[].suggested[] | towns<=2/shard | shares: 1 | importMap:7
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | grouping.structuralSuggestions(inner)  ->  members[].settlement.structuralSuggestions[].institution | towns<=1/shard | shares: 1 | map:1
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | grouping.structuralSuggestions(inner)  ->  members[].settlement.structuralSuggestions[].suggested[] | towns<=2/shard | shares: 1 | map:7
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | grouping.structuralSuggestions(inner)  ->  structuralSuggestions[].institution | towns<=1/shard | shares: 1 | gallery:1 import:1
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | grouping.structuralSuggestions(inner)  ->  structuralSuggestions[].suggested[] | towns<=2/shard | shares: 1 | gallery:7 import:7
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | grouping.structuralViolations(inner)  ->  import_gallery_map.members[].settlement.structuralViolations[].suggestedFixes[] | towns<=1/shard | shares: 1 | importMap:3
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | grouping.structuralViolations(inner)  ->  members[].settlement.structuralViolations[].suggestedFixes[] | towns<=1/shard | shares: 1 | map:3
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | grouping.structuralViolations(inner)  ->  structuralViolations[].suggestedFixes[] | towns<=1/shard | shares: 1 | gallery:3 import:3
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | institution.desc  ->  defenseProfile.institutions.charter[].desc | towns<=3/shard | shares: 2 | gallery:10 import:10
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | institution.desc  ->  defenseProfile.institutions.garrison[].desc | towns<=2/shard | shares: 2 | gallery:32 import:32
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | institution.desc  ->  defenseProfile.institutions.magicDef[].desc | towns<=2/shard | shares: 2 | gallery:32 import:32
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | institution.desc  ->  defenseProfile.institutions.mercenary[].desc | towns<=2/shard | shares: 2 | gallery:8 import:8
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | institution.desc  ->  defenseProfile.institutions.militia[].desc | towns<=1/shard | shares: 2 | gallery:6 import:6
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | institution.desc  ->  defenseProfile.institutions.walls[].desc | towns<=5/shard | shares: 2 | gallery:36 import:36
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | institution.desc  ->  defenseProfile.institutions.watch[].desc | towns<=4/shard | shares: 2 | gallery:24 import:24
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | institution.desc  ->  dossier.defenseProfile.institutions.charter[].desc | towns<=3/shard | shares: 2 | link:10
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | institution.desc  ->  dossier.defenseProfile.institutions.garrison[].desc | towns<=2/shard | shares: 2 | link:32
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | institution.desc  ->  dossier.defenseProfile.institutions.magicDef[].desc | towns<=2/shard | shares: 2 | link:32
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | institution.desc  ->  dossier.defenseProfile.institutions.mercenary[].desc | towns<=2/shard | shares: 2 | link:8
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | institution.desc  ->  dossier.defenseProfile.institutions.militia[].desc | towns<=1/shard | shares: 2 | link:6
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | institution.desc  ->  dossier.defenseProfile.institutions.walls[].desc | towns<=5/shard | shares: 2 | link:36
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | institution.desc  ->  dossier.defenseProfile.institutions.watch[].desc | towns<=4/shard | shares: 2 | link:24
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | institution.desc  ->  dossier.institutions[].desc | towns<=6/shard | shares: 2 | link:1558
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | institution.desc  ->  import_gallery_map.members[].settlement.defenseProfile.institutions.charter[].desc | towns<=3/shard | shares: 2 | importMap:10
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | institution.desc  ->  import_gallery_map.members[].settlement.defenseProfile.institutions.garrison[].desc | towns<=2/shard | shares: 2 | importMap:32
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | institution.desc  ->  import_gallery_map.members[].settlement.defenseProfile.institutions.magicDef[].desc | towns<=2/shard | shares: 2 | importMap:32
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | institution.desc  ->  import_gallery_map.members[].settlement.defenseProfile.institutions.mercenary[].desc | towns<=2/shard | shares: 2 | importMap:8
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | institution.desc  ->  import_gallery_map.members[].settlement.defenseProfile.institutions.militia[].desc | towns<=1/shard | shares: 2 | importMap:6
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | institution.desc  ->  import_gallery_map.members[].settlement.defenseProfile.institutions.walls[].desc | towns<=5/shard | shares: 2 | importMap:36
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | institution.desc  ->  import_gallery_map.members[].settlement.defenseProfile.institutions.watch[].desc | towns<=4/shard | shares: 2 | importMap:24
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | institution.desc  ->  import_gallery_map.members[].settlement.institutions[].desc | towns<=6/shard | shares: 2 | importMap:1594
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | institution.desc  ->  institutions[].desc | towns<=6/shard | shares: 2 | gallery:1594 import:1594
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | institution.desc  ->  members[].settlement.defenseProfile.institutions.charter[].desc | towns<=3/shard | shares: 2 | map:10
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | institution.desc  ->  members[].settlement.defenseProfile.institutions.garrison[].desc | towns<=2/shard | shares: 2 | map:32
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | institution.desc  ->  members[].settlement.defenseProfile.institutions.magicDef[].desc | towns<=2/shard | shares: 2 | map:32
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | institution.desc  ->  members[].settlement.defenseProfile.institutions.mercenary[].desc | towns<=2/shard | shares: 2 | map:8
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | institution.desc  ->  members[].settlement.defenseProfile.institutions.militia[].desc | towns<=1/shard | shares: 2 | map:6
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | institution.desc  ->  members[].settlement.defenseProfile.institutions.walls[].desc | towns<=5/shard | shares: 2 | map:36
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | institution.desc  ->  members[].settlement.defenseProfile.institutions.watch[].desc | towns<=4/shard | shares: 2 | map:24
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | institution.desc  ->  members[].settlement.institutions[].desc | towns<=6/shard | shares: 2 | map:1594
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | note.faction.dmNotes  ->  powerStructure.factions[].dmNotes | towns<=6/shard | shares: 5 | gallery:275 import:275
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | note.faction.notes  ->  powerStructure.factions[].notes | towns<=6/shard | shares: 5 | gallery:275 import:275
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | note.institution.dmNotes  ->  institutions[].dmNotes | towns<=6/shard | shares: 5 | gallery:360 import:360
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | note.institution.notes  ->  institutions[].notes | towns<=6/shard | shares: 5 | gallery:360 import:360
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | note.tabNotes  ->  tabNotes.overview | towns<=6/shard | shares: 5 | gallery:120 import:120
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | note.tabNotes  ->  tabNotes.power | towns<=6/shard | shares: 5 | gallery:120 import:120
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | npc.personality  ->  import_gallery_map.members[].settlement.npcs[].personality.vq6 | towns<=6/shard | shares: 1 | importMap:629
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | npc.personality  ->  members[].settlement.npcs[].personality.vq6 | towns<=6/shard | shares: 1 | map:629
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | npc.personality  ->  npcs[].personality.vq6 | towns<=6/shard | shares: 1 | gallery:629 import:629
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | npc.personality(inner)  ->  import_gallery_map.members[].settlement.npcs[].personality.speech | towns<=6/shard | shares: 1 | importMap:1545
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | npc.personality(inner)  ->  import_gallery_map.members[].settlement.npcs[].personality.tell | towns<=6/shard | shares: 1 | importMap:1531
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | npc.personality(inner)  ->  members[].settlement.npcs[].personality.speech | towns<=6/shard | shares: 1 | map:1545
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | npc.personality(inner)  ->  members[].settlement.npcs[].personality.tell | towns<=6/shard | shares: 1 | map:1531
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | npc.personality(inner)  ->  npcs[].personality.speech | towns<=6/shard | shares: 1 | gallery:1545 import:1545
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | npc.personality(inner)  ->  npcs[].personality.tell | towns<=6/shard | shares: 1 | gallery:1531 import:1531
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | npc.physical  ->  import_gallery_map.members[].settlement.npcs[].physical.vq6 | towns<=6/shard | shares: 1 | importMap:629
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | npc.physical  ->  members[].settlement.npcs[].physical.vq6 | towns<=6/shard | shares: 1 | map:629
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | npc.physical  ->  npcs[].physical.vq6 | towns<=6/shard | shares: 1 | gallery:629 import:629
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | npc.physical(inner)  ->  dossier.npcs[].presentation.impression | towns<=1/shard | shares: 8 | link:16
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | marker | npc.physical(inner)  ->  import_gallery_map.members[].settlement.npcs[].physical.build | towns<=6/shard | shares: 1 | importMap:3079
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | npc.physical(inner)  ->  import_gallery_map.members[].settlement.npcs[].physical.clothes | towns<=6/shard | shares: 1 | importMap:1807
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | npc.physical(inner)  ->  import_gallery_map.members[].settlement.npcs[].physical.feature | towns<=6/shard | shares: 1 | importMap:1867
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | npc.physical(inner)  ->  import_gallery_map.members[].settlement.npcs[].presentation.impression | towns<=1/shard | shares: 8 | importMap:16
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | marker | npc.physical(inner)  ->  members[].settlement.npcs[].physical.build | towns<=6/shard | shares: 1 | map:3079
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | npc.physical(inner)  ->  members[].settlement.npcs[].physical.clothes | towns<=6/shard | shares: 1 | map:1807
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | npc.physical(inner)  ->  members[].settlement.npcs[].physical.feature | towns<=6/shard | shares: 1 | map:1867
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | npc.physical(inner)  ->  members[].settlement.npcs[].presentation.impression | towns<=1/shard | shares: 8 | map:16
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | marker | npc.physical(inner)  ->  npcs[].physical.build | towns<=6/shard | shares: 1 | gallery:3079 import:3079
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | npc.physical(inner)  ->  npcs[].physical.clothes | towns<=6/shard | shares: 1 | gallery:1807 import:1807
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | npc.physical(inner)  ->  npcs[].physical.feature | towns<=6/shard | shares: 1 | gallery:1867 import:1867
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | npc.physical(inner)  ->  npcs[].presentation.impression | towns<=1/shard | shares: 8 | gallery:16 import:16
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | marker | relationship.description  ->  dossier.prominentRelationship.full | towns<=5/shard | shares: 2 | link:32
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | relationship.description  ->  dossier.relationships[].description | towns<=6/shard | shares: 2 | link:1510
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | relationship.description  ->  import_gallery_map.members[].settlement.prominentRelationship.full | towns<=5/shard | shares: 2 | importMap:32
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | relationship.description  ->  import_gallery_map.members[].settlement.relationships[].description | towns<=6/shard | shares: 2 | importMap:1510
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | relationship.description  ->  members[].settlement.prominentRelationship.full | towns<=5/shard | shares: 2 | map:32
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | relationship.description  ->  members[].settlement.relationships[].description | towns<=6/shard | shares: 2 | map:1510
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | relationship.description  ->  prominentRelationship.full | towns<=5/shard | shares: 2 | gallery:32 import:32
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | relationship.description  ->  relationships[].description | towns<=6/shard | shares: 2 | gallery:1562 import:1562
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | relationship.tension  ->  dossier.pressureSentence | towns<=3/shard | shares: 2 | link:10
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | relationship.tension  ->  dossier.prominentRelationship.phrasing | towns<=5/shard | shares: 2 | link:32
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | relationship.tension  ->  dossier.prominentRelationship.tension | towns<=5/shard | shares: 2 | link:32
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | relationship.tension  ->  dossier.relationships[].tension | towns<=6/shard | shares: 2 | link:1266
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | relationship.tension  ->  import_gallery_map.members[].settlement.pressureSentence | towns<=3/shard | shares: 2 | importMap:10
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | relationship.tension  ->  import_gallery_map.members[].settlement.prominentRelationship.phrasing | towns<=5/shard | shares: 2 | importMap:32
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | relationship.tension  ->  import_gallery_map.members[].settlement.prominentRelationship.tension | towns<=5/shard | shares: 2 | importMap:32
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | relationship.tension  ->  import_gallery_map.members[].settlement.relationships[].tension | towns<=6/shard | shares: 2 | importMap:1266
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | relationship.tension  ->  members[].settlement.pressureSentence | towns<=3/shard | shares: 2 | map:10
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | relationship.tension  ->  members[].settlement.prominentRelationship.phrasing | towns<=5/shard | shares: 2 | map:32
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | relationship.tension  ->  members[].settlement.prominentRelationship.tension | towns<=5/shard | shares: 2 | map:32
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | relationship.tension  ->  members[].settlement.relationships[].tension | towns<=6/shard | shares: 2 | map:1266
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | relationship.tension  ->  pressureSentence | towns<=3/shard | shares: 2 | gallery:10 import:10
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | relationship.tension  ->  prominentRelationship.phrasing | towns<=5/shard | shares: 2 | gallery:32 import:32
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | relationship.tension  ->  prominentRelationship.tension | towns<=5/shard | shares: 2 | gallery:32 import:32
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | relationship.tension  ->  relationships[].tension | towns<=6/shard | shares: 2 | gallery:1318 import:1318
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | tension.description  ->  dossier.history.currentTensions[].description | towns<=6/shard | shares: 2 | link:84
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | tension.description  ->  dossier.history.siegeNarrative | towns<=4/shard | shares: 2 | link:10
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | tension.description  ->  history.currentTensions[].description | towns<=6/shard | shares: 2 | gallery:84 import:84
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | tension.description  ->  history.siegeNarrative | towns<=4/shard | shares: 2 | gallery:10 import:10
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | tension.description  ->  import_gallery_map.members[].settlement.history.currentTensions[].description | towns<=6/shard | shares: 2 | importMap:84
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | tension.description  ->  import_gallery_map.members[].settlement.history.siegeNarrative | towns<=4/shard | shares: 2 | importMap:10
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | tension.description  ->  members[].settlement.history.currentTensions[].description | towns<=6/shard | shares: 2 | map:84
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | tension.description  ->  members[].settlement.history.siegeNarrative | towns<=4/shard | shares: 2 | map:10
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | tension.lastingEffects  ->  dossier.history.currentTensions[].lastingEffects[] | towns<=6/shard | shares: 2 | link:70
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | tension.lastingEffects  ->  history.currentTensions[].lastingEffects[] | towns<=6/shard | shares: 2 | gallery:70 import:70
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | tension.lastingEffects  ->  import_gallery_map.members[].settlement.history.currentTensions[].lastingEffects[] | towns<=6/shard | shares: 2 | importMap:70
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | tension.lastingEffects  ->  members[].settlement.history.currentTensions[].lastingEffects[] | towns<=6/shard | shares: 2 | map:70
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | tension.lastingEffects(inner)  ->  dossier.history.currentTensions[].lastingEffects[] | towns<=6/shard | shares: 2 | link:140
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | tension.lastingEffects(inner)  ->  dossier.history.historicalEvents[].lastingEffects[] | towns<=4/shard | shares: 2 | link:14
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | tension.lastingEffects(inner)  ->  history.currentTensions[].lastingEffects[] | towns<=6/shard | shares: 2 | gallery:140 import:140
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | tension.lastingEffects(inner)  ->  history.historicalEvents[].lastingEffects[] | towns<=4/shard | shares: 2 | gallery:14 import:14
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | tension.lastingEffects(inner)  ->  import_gallery_map.members[].settlement.history.currentTensions[].lastingEffects[] | towns<=6/shard | shares: 2 | importMap:140
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | tension.lastingEffects(inner)  ->  import_gallery_map.members[].settlement.history.historicalEvents[].lastingEffects[] | towns<=4/shard | shares: 2 | importMap:14
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | tension.lastingEffects(inner)  ->  members[].settlement.history.currentTensions[].lastingEffects[] | towns<=6/shard | shares: 2 | map:140
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | tension.lastingEffects(inner)  ->  members[].settlement.history.historicalEvents[].lastingEffects[] | towns<=4/shard | shares: 2 | map:14
+      on: DM reveal on | marked, every person switched off, no other eye ; DM reveal on | unmarked, every person switched off
+ct212 | marker | tension.plotHooks  ->  history.currentTensions[].plotHooks[] | towns<=6/shard | shares: 1 | gallery:42 import:42
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | tension.plotHooks(inner)  ->  history.currentTensions[].plotHooks[] | towns<=6/shard | shares: 1 | gallery:123 import:123
+      on: DM reveal on | unmarked, every person switched off
+ct212 | marker | tension.plotHooks(inner)  ->  history.historicalEvents[].plotHooks[] | towns<=1/shard | shares: 1 | gallery:1 import:1
+      on: DM reveal on | unmarked, every person switched off
+ct212 | text | text of grouping.generationCoherenceReceipt(inner)  ->  activeConditions[].causes[].detail | towns<=1/shard | shares: 6 | gallery:6 import:6
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | text | text of grouping.generationCoherenceReceipt(inner)  ->  dossier.activeConditions[].causes[].detail | towns<=1/shard | shares: 6 | link:6
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | text | text of grouping.generationCoherenceReceipt(inner)  ->  dossier.history.founding.foundedBy | towns<=1/shard | shares: 6 | link:6
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | text | text of grouping.generationCoherenceReceipt(inner)  ->  dossier.history.legacyAnnotations[].annotation | towns<=1/shard | shares: 6 | link:12
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | text | text of grouping.generationCoherenceReceipt(inner)  ->  dossier.spatialLayout.layout | towns<=1/shard | shares: 6 | link:6
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | text | text of grouping.generationCoherenceReceipt(inner)  ->  dossier.stress.label | towns<=1/shard | shares: 6 | link:6
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | text | text of grouping.generationCoherenceReceipt(inner)  ->  dossier.stressors.label | towns<=1/shard | shares: 6 | link:6
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | text | text of grouping.generationCoherenceReceipt(inner)  ->  history.founding.foundedBy | towns<=1/shard | shares: 6 | gallery:6 import:6
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | text | text of grouping.generationCoherenceReceipt(inner)  ->  history.legacyAnnotations[].annotation | towns<=1/shard | shares: 6 | gallery:12 import:12
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | text | text of grouping.generationCoherenceReceipt(inner)  ->  import_gallery_map.members[].settlement.activeConditions[].causes[].detail | towns<=1/shard | shares: 6 | importMap:6
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | text | text of grouping.generationCoherenceReceipt(inner)  ->  import_gallery_map.members[].settlement.history.founding.foundedBy | towns<=1/shard | shares: 6 | importMap:6
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | text | text of grouping.generationCoherenceReceipt(inner)  ->  import_gallery_map.members[].settlement.history.legacyAnnotations[].annotation | towns<=1/shard | shares: 6 | importMap:12
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | text | text of grouping.generationCoherenceReceipt(inner)  ->  import_gallery_map.members[].settlement.spatialLayout.layout | towns<=1/shard | shares: 6 | importMap:6
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | text | text of grouping.generationCoherenceReceipt(inner)  ->  import_gallery_map.members[].settlement.stress.label | towns<=1/shard | shares: 6 | importMap:6
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | text | text of grouping.generationCoherenceReceipt(inner)  ->  import_gallery_map.members[].settlement.stressors.label | towns<=1/shard | shares: 6 | importMap:6
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | text | text of grouping.generationCoherenceReceipt(inner)  ->  members[].settlement.activeConditions[].causes[].detail | towns<=1/shard | shares: 6 | map:6
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | text | text of grouping.generationCoherenceReceipt(inner)  ->  members[].settlement.history.founding.foundedBy | towns<=1/shard | shares: 6 | map:6
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | text | text of grouping.generationCoherenceReceipt(inner)  ->  members[].settlement.history.legacyAnnotations[].annotation | towns<=1/shard | shares: 6 | map:12
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | text | text of grouping.generationCoherenceReceipt(inner)  ->  members[].settlement.spatialLayout.layout | towns<=1/shard | shares: 6 | map:6
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | text | text of grouping.generationCoherenceReceipt(inner)  ->  members[].settlement.stress.label | towns<=1/shard | shares: 6 | map:6
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | text | text of grouping.generationCoherenceReceipt(inner)  ->  members[].settlement.stressors.label | towns<=1/shard | shares: 6 | map:6
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | text | text of grouping.generationCoherenceReceipt(inner)  ->  simulationTrace[].causes[].reason | towns<=3/shard | shares: 3 | gallery:27 import:27
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated
+ct212 | text | text of grouping.generationCoherenceReceipt(inner)  ->  spatialLayout.layout | towns<=1/shard | shares: 6 | gallery:6 import:6
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | text | text of grouping.generationCoherenceReceipt(inner)  ->  stress.label | towns<=1/shard | shares: 6 | gallery:6 import:6
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | text | text of grouping.generationCoherenceReceipt(inner)  ->  stressors.label | towns<=1/shard | shares: 6 | gallery:6 import:6
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | text | text of grouping.reason  ->  dossier.economicViability.dependencies[].description | towns<=1/shard | shares: 6 | link:6
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | text | text of grouping.reason  ->  economicViability.dependencies[].description | towns<=1/shard | shares: 6 | gallery:6 import:6
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | text | text of grouping.reason  ->  import_gallery_map.members[].settlement.economicViability.dependencies[].description | towns<=1/shard | shares: 6 | importMap:6
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | text | text of grouping.reason  ->  members[].settlement.economicViability.dependencies[].description | towns<=1/shard | shares: 6 | map:6
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | text | text of npc.physical(inner)  ->  dossier.npcs[].presentation.impression | towns<=1/shard | shares: 6 | link:12
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | text | text of npc.physical(inner)  ->  import_gallery_map.members[].settlement.npcs[].presentation.impression | towns<=1/shard | shares: 6 | importMap:12
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | text | text of npc.physical(inner)  ->  members[].settlement.npcs[].presentation.impression | towns<=1/shard | shares: 6 | map:12
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+ct212 | text | text of npc.physical(inner)  ->  npcs[].presentation.impression | towns<=1/shard | shares: 6 | gallery:12 import:12
+      on: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated

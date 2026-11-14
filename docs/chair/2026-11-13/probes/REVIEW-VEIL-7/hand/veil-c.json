@@ -1,0 +1,4 @@
+{"$veil":{"v":1,"mode":"live","deltas":[
+ {"address":"card:institution:raken-den","hidden":true},{"address":"card:institution:kraken-den","hidden":true},
+ {"address":"card:institution:stanbul-den","hidden":true},{"address":"card:institution:istanbul-den","hidden":true},{"address":"card:institution:i-stanbul-den","hidden":true},
+ {"address":"card:institution:institution","hidden":true},{"address":"card:institution:label-only-lodge","hidden":true}]}}

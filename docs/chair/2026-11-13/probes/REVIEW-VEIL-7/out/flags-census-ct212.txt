@@ -1,0 +1,4 @@
+flags census over ct212_0,ct212_1,ct212_2,ct212_3: 25 towns, 204 link reads, 108 with a stored house the response does not list
+compound.hasBlackMarket | towns 1 | reads 8 | no hidden raiser found 0 | by: Black market ; Black market bazaar
+compound.hasCriminalInst | towns 1 | reads 8 | no hidden raiser found 0 | by: Black market ; Black market bazaar ; Thieves' guild (powerful) ; Assassins' guild
+compound.names[] entries no listed house accounts for | towns 1 | reads 12 | no hidden raiser found 0 | by: smuggling network ; black market bazaar

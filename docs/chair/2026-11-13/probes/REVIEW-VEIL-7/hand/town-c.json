@@ -1,0 +1,12 @@
+{"name":"Kelvinport","tier":"town",
+ "institutions":[
+  {"name":"Kraken Den","category":"Criminal","desc":"A den (the K is U+212A, the Kelvin sign)."},
+  {"name":"İstanbul Den","category":"Criminal","desc":"A den (the I is U+0130)."},
+  {"name":"","category":"Criminal","desc":"A house with an empty name."},
+  {"label":"Label Only Lodge","category":"Criminal","desc":"A house with a label and no name."},
+  {"name":"Fish market","category":"Economy","desc":"Fish."}],
+ "npcs":[{"id":"npc.mira","name":"Mira Vane","role":"Fence of the Label Only Lodge","title":"Kraken den regular"}],
+ "economicState":{
+   "compound":{"inst":{"names":["kraken den","i̇stanbul den","label only lodge","fish market"],"hasCriminalInst":false,"hasMarket":true}},
+   "situationDesc":"Honest trade gets by.",
+   "primaryExports":["Salt fish","kraken den ink","i̇stanbul den silk","Label Only Lodge dice"]}}

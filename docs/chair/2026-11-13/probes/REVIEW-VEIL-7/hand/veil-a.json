@@ -1,0 +1,8 @@
+{"$veil":{"v":1,"mode":"live","deltas":[
+ {"address":"card:institution:black-market","hidden":true},
+ {"address":"card:institution:black-market-bazaar","hidden":false},
+ {"address":"card:institution:thieves-guild-powerful","hidden":true},
+ {"address":"card:institution:unknown","hidden":true},
+ {"address":"card:institution:assassins-guild","hidden":true},
+ {"address":"card:institution:inst-777","hidden":true},
+ {"address":"card:institution:100-pure-gold-o-malley-s","hidden":true}]}}

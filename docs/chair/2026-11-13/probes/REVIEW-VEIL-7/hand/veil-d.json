@@ -1,0 +1,5 @@
+{"$veil":{"v":1,"mode":"live","deltas":[
+ {"address":"card:institution:thieves-guild-powerful","hidden":true},
+ {"address":"card:institution:hidden-shrine-of-the-drowned","hidden":true},
+ {"address":"block:defense.criminalStructure","hidden":false},
+ {"address":"block:power.criminalUnderside","hidden":false}]}}

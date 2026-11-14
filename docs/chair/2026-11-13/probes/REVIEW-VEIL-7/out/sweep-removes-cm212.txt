@@ -1,0 +1,5 @@
+NOTICE:  database "cm212_0_ns" does not exist, skipping
+NOTICE:  database "cm212_1_ns" does not exist, skipping
+NOTICE:  database "cm212_2_ns" does not exist, skipping
+NOTICE:  database "cm212_3_ns" does not exist, skipping
+sweep census over cm212_0,cm212_1,cm212_2,cm212_3: 24 towns, 384 reads compared, 0 reads from which the sweep took a string

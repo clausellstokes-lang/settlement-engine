@@ -1,0 +1,28 @@
+{"name":"Coldharbor","tier":"town",
+ "institutions":[
+  {"name":"Black market","category":"Criminal","desc":"Contraband under the quay."},
+  {"name":"Black market bazaar","category":"Criminal","desc":"A tolerated night market."},
+  {"name":"Thieves' guild (powerful)","category":"Criminal","desc":"The guild."},
+  {"name":"Гильдия теней","category":"Criminal","desc":"Shadows."},
+  {"name":"Assassins' guild","category":"Criminal","desc":"Knives."},
+  {"id":"inst-777","name":"The Velvet Hand","category":"Criminal","desc":"Born as the smuggling network, renamed by the owner."},
+  {"name":"100% Pure_Gold (O'Malley's) [.*]","category":"Criminal","desc":"A front."},
+  {"name":"Fish market","category":"Economy","desc":"Fish."}],
+ "npcs":[
+  {"id":"npc.mira","name":"Mira Vane","role":"Fence","title":"Voice of the ThievesGuildPowerful","goal":{"short":"Take over the Гильдия теней by spring"},"secret":"Pays the thieves' guilds of two towns"},
+  {"id":"npc.oro","name":"Oro Pell","role":"Clerk of the 100% pure_gold (o'malley's) [.*]","goal":{"short":"Audit the fish market"}},
+  {"id":"npc.black_market_broker","name":"Black market broker","role":"Broker"}],
+ "powerStructure":{"factions":[{"faction":"Assassins' Guild","power":10,"desc":"A power that is shown."}]},
+ "economicState":{
+   "compound":{"inst":{"names":["black market","black market bazaar","thieves' guild (powerful)","гильдия теней","assassins' guild","smuggling network","100% pure_gold (o'malley's) [.*]","fish market"],
+                       "hasCriminalInst":true,"hasThievesGuild":true,"hasBlackMarket":true,"hasSmuggling":true,"hasGangInfra":false,"hasMarket":true}},
+   "incomeSources":[{"source":"Thieves' Guild Revenue","isCriminal":true,"desc":"An estimated 19% flows through fencing."},{"source":"Market Taxes","percentage":30}],
+   "situationDesc":"Honest trade gets by; the thieves' guilds of the coast take their tithe.",
+   "primaryExports":["Salt fish","thievesguildpowerful ledgers","{\"guild\":\"Thieves' guild (powerful)\"}"],
+   "activeChains":[{"chainId":"fishing","label":"Fishing","processingInstitutions":["Fish market"],
+                    "institutionLoad":{"Thieves' guild (powerful)":3,"Fish market":1},
+                    "links":[{"from":"institution.thieves_guild_powerful","to":"npc.mira","kind":"employs"}],
+                    "offers":[{"id":"thieves_guild_powerful.fence","name":"Fencing at the Thieves' guild (powerful)"},{"id":"thieves_guild_powerful.safehouse","name":"Safehouse"}],
+                    "nested":[["Thieves' guild (powerful)","Fish market"],[["thieves' guild (powerful)"]]]}]},
+ "simulationTrace":[{"targetId":"institution.smuggling_network","causes":[{"reason":"smuggling network absorbed rivals"}]},
+                    {"targetId":"institution.fish_market","causes":[{"reason":"fish market grew"}]}]}

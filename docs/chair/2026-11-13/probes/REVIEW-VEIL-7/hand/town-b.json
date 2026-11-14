@@ -1,0 +1,10 @@
+{"name":"Nordhafen","tier":"town",
+ "institutions":[
+  {"name":"Гильдия теней","category":"Criminal","desc":"Shadows."},
+  {"name":"Fish market","category":"Economy","desc":"Fish."}],
+ "npcs":[
+  {"id":"npc.mira","name":"Mira Vane","role":"Fence","secret":"Sworn to the Гильдия теней since childhood","goal":{"short":"Rule the гильдия теней"}}],
+ "economicState":{
+   "compound":{"inst":{"names":["гильдия теней","fish market"],"hasCriminalInst":false,"hasMarket":true}},
+   "situationDesc":"The Гильдия теней taxes every stall on the quay.",
+   "primaryExports":["Salt fish","Гильдия теней contraband"]}}

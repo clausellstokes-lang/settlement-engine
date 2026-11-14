@@ -1,0 +1,23 @@
+chain ct212: 25 towns, 204 shares, 1392 reads, 300 houses hidden whole (summed over shares)
+ct212 | economicState.activeChains[].institutionLoad.<key> | towns: no reveal 1, DM 1 | spelled as the card 24, another form 0 | reads: gallery import link | shares: DM reveal on | every eye shut ; no reveal | every eye shut
+      e.g. Coldharbor gallery: "Thieves' guild (powerful)" in "Thieves' guild (powerful)"
+ct212 | economicState.activeChains[].links[].from | towns: no reveal 1, DM 1 | spelled as the card 0, another form 24 | reads: gallery import link | shares: DM reveal on | every eye shut ; no reveal | every eye shut
+      e.g. Coldharbor gallery: "Thieves' guild (powerful)" in "institution.thieves_guild_powerful"
+ct212 | economicState.activeChains[].offers[].id | towns: no reveal 1, DM 1 | spelled as the card 0, another form 24 | reads: gallery import link | shares: DM reveal on | every eye shut ; no reveal | every eye shut
+      e.g. Coldharbor gallery: "Thieves' guild (powerful)" in "thieves_guild_powerful.fence"
+ct212 | economicState.compound.inst.<key> | towns: no reveal 4, DM 4 | spelled as the card 0, another form 129 | reads: gallery import importMap link map | shares: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; DM reveal on | marked, persons only ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+      e.g. Coldharbor gallery: "Black market" in "hasBlackMarket"
+ct212 | economicState.compound.inst.names[] | towns: no reveal 1, DM 1 | spelled as the card 0, another form 48 | reads: gallery import link | shares: DM reveal on | every eye shut ; no reveal | every eye shut
+      e.g. Coldharbor gallery: "Black market" in "black market bazaar"
+ct212 | economicState.primaryExports[] | towns: no reveal 1, DM 1 | spelled as the card 0, another form 24 | reads: gallery import link | shares: DM reveal on | every eye shut ; no reveal | every eye shut
+      e.g. Coldharbor gallery: "Thieves' guild (powerful)" in "thievesguildpowerful ledgers"
+ct212 | economicState.safetyProfile.compound.inst.<key> | towns: no reveal 3, DM 3 | spelled as the card 0, another form 105 | reads: gallery import importMap link map | shares: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; DM reveal on | marked, persons only ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+      e.g. Vatannuur gallery: "Black market" in "hasBlackMarket"
+ct212 | economicState.safetyProfile.flags.<key> | towns: no reveal 3, DM 3 | spelled as the card 0, another form 105 | reads: gallery import importMap link map | shares: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; DM reveal on | marked, persons only ; no reveal | every eye shut ; no reveal | every eye shut | frozen ; no reveal | every eye shut, narrated
+      e.g. Vatannuur gallery: "Black market" in "arcaneBlackMarket"
+ct212 | npcs[].id | towns: no reveal 1, DM 1 | spelled as the card 0, another form 24 | reads: gallery import link | shares: DM reveal on | every eye shut ; no reveal | every eye shut
+      e.g. Coldharbor gallery: "Black market" in "npc.black_market_broker"
+ct212 | npcs[].title | towns: no reveal 1, DM 1 | spelled as the card 0, another form 24 | reads: gallery import link | shares: DM reveal on | every eye shut ; no reveal | every eye shut
+      e.g. Coldharbor gallery: "Thieves' guild (powerful)" in "Voice of the ThievesGuildPowerful"
+ct212 | simulationTrace[].downstreamEffects[].target | towns: no reveal 0, DM 2 | spelled as the card 0, another form 16 | reads: gallery import | shares: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; DM reveal on | every eye shut, narrated ; DM reveal on | marked, persons only
+      e.g. Vatannuur gallery: "Black market" in "blackMarket"

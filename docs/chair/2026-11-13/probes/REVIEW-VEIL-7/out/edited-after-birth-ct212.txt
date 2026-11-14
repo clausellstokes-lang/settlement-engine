@@ -1,0 +1,8 @@
+ct212_0 | as stored | shares 6 | prominentRelationship.full 0 | .tension 0 | .phrasing 0 | pressureSentence 6 | siegeNarrative 5 | shares with a legacy annotation sent 6 | annotations sent 11
+ct212_0 | sources edited after the birth | shares 6 | prominentRelationship.full 0 | .tension 0 | .phrasing 0 | pressureSentence 6 | siegeNarrative 6 | shares with a legacy annotation sent 6 | annotations sent 11
+ct212_1 | as stored | shares 6 | prominentRelationship.full 0 | .tension 0 | .phrasing 0 | pressureSentence 4 | siegeNarrative 2 | shares with a legacy annotation sent 6 | annotations sent 13
+ct212_1 | sources edited after the birth | shares 6 | prominentRelationship.full 0 | .tension 0 | .phrasing 0 | pressureSentence 4 | siegeNarrative 6 | shares with a legacy annotation sent 6 | annotations sent 13
+ct212_2 | as stored | shares 6 | prominentRelationship.full 0 | .tension 0 | .phrasing 0 | pressureSentence 6 | siegeNarrative 6 | shares with a legacy annotation sent 6 | annotations sent 11
+ct212_2 | sources edited after the birth | shares 6 | prominentRelationship.full 0 | .tension 0 | .phrasing 0 | pressureSentence 6 | siegeNarrative 6 | shares with a legacy annotation sent 6 | annotations sent 11
+ct212_3 | as stored | shares 6 | prominentRelationship.full 0 | .tension 0 | .phrasing 0 | pressureSentence 3 | siegeNarrative 6 | shares with a legacy annotation sent 6 | annotations sent 13
+ct212_3 | sources edited after the birth | shares 6 | prominentRelationship.full 0 | .tension 0 | .phrasing 0 | pressureSentence 3 | siegeNarrative 6 | shares with a legacy annotation sent 6 | annotations sent 13

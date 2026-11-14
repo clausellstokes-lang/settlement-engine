@@ -1,0 +1,12 @@
+{"name":"Guildless","tier":"town",
+ "institutions":[
+  {"name":"Thieves' guild (powerful)","category":"Criminal","desc":"The only guild in town."},
+  {"name":"Hidden shrine of the Drowned","category":"Religious","tags":["facet:clandestine:clandestine"],"desc":"The only shrine in town."},
+  {"name":"Fish market","category":"Economy","desc":"Fish."}],
+ "npcs":[{"id":"npc.mira","name":"Mira Vane","role":"Fence","secret":"Answers to the Thieves' Guild alone"}],
+ "economicState":{
+   "compound":{"inst":{"names":["thieves' guild (powerful)","hidden shrine of the drowned","fish market"],
+       "hasCriminalInst":true,"hasThievesGuild":true,"hasGuild":true,"hasChurch":true,"hasMarket":true,"hasBlackMarket":false}},
+   "safetyProfile":{"criminalInstitutions":["Thieves' guild (powerful)"],"blackMarketCapture":19,"safetyDesc":"Watch your purse."},
+   "incomeSources":[{"source":"Thieves' Guild Revenue","isCriminal":true,"percentage":19,"desc":"An estimated 19% of economic activity flows through unofficial channels: guild-organised fencing."},{"source":"Market Taxes","percentage":30}],
+   "situationDesc":"The Thieves' Guild sets the price of everything."}}

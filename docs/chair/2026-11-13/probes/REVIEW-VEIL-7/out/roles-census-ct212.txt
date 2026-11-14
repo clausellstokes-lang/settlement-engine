@@ -1,0 +1,1 @@
+roles census over ct212_0,ct212_1,ct212_2,ct212_3: 25 towns, 408 reads, 1300 (person, read) pairs whose own card withholds a stored role or title

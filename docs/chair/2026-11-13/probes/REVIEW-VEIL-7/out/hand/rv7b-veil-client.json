@@ -1,0 +1,1 @@
+{"economicState":{"compound":{"inst":{"names":["fish market"],"hasMarket":true,"hasCriminalInst":false}},"primaryExports":["Salt fish"]},"institutions":[{"desc":"Fish.","name":"Fish market","category":"Economy"}],"name":"Nordhafen","npcs":[{"id":"npc.mira","name":"Mira Vane","role":"Fence"}],"tier":"town"}
