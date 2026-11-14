@@ -1,0 +1,307 @@
+{
+ "chip armed backing": {
+  "prints": 22,
+  "sizes": {
+   "thorp": 5,
+   "hamlet": 4,
+   "village": 12,
+   "town": 1
+  },
+  "crises": {
+   "calm": 4,
+   "infiltrated": 2,
+   "plague_onset": 1,
+   "famine": 4,
+   "indebted": 1,
+   "insurgency": 2,
+   "religious_conversion": 1,
+   "slave_revolt": 1,
+   "wartime": 3,
+   "succession_void": 4
+  }
+ },
+ "chip criminal sway": {
+  "prints": 95,
+  "sizes": {
+   "thorp": 5,
+   "hamlet": 2,
+   "village": 5,
+   "town": 26,
+   "city": 27,
+   "metropolis": 30
+  },
+  "crises": {
+   "calm": 27,
+   "recently_betrayed": 1,
+   "mass_migration": 3,
+   "occupied": 11,
+   "infiltrated": 12,
+   "plague_onset": 2,
+   "succession_void": 4,
+   "insurgency": 1,
+   "religious_conversion": 2,
+   "slave_revolt": 2,
+   "wartime": 10,
+   "politically_fractured": 3,
+   "under_siege": 7,
+   "famine": 8,
+   "indebted": 3
+  }
+ },
+ "chip church guidance": {
+  "prints": 40,
+  "sizes": {
+   "thorp": 10,
+   "hamlet": 8,
+   "village": 20,
+   "town": 2
+  },
+  "crises": {
+   "calm": 10,
+   "plague_onset": 1,
+   "politically_fractured": 3,
+   "wartime": 6,
+   "religious_conversion": 1,
+   "under_siege": 5,
+   "occupied": 3,
+   "infiltrated": 2,
+   "succession_void": 6,
+   "monster_pressure": 1,
+   "famine": 3
+  }
+ },
+ "chip church sway": {
+  "prints": 102,
+  "sizes": {
+   "hamlet": 10,
+   "village": 6,
+   "town": 30,
+   "city": 20,
+   "metropolis": 36
+  },
+  "crises": {
+   "calm": 27,
+   "insurgency": 5,
+   "recently_betrayed": 5,
+   "mass_migration": 2,
+   "succession_void": 6,
+   "indebted": 3,
+   "wartime": 15,
+   "under_siege": 6,
+   "occupied": 12,
+   "politically_fractured": 4,
+   "infiltrated": 7,
+   "plague_onset": 1,
+   "monster_pressure": 1,
+   "slave_revolt": 5,
+   "famine": 6
+  }
+ },
+ "chip merchant sway": {
+  "prints": 97,
+  "sizes": {
+   "hamlet": 5,
+   "village": 18,
+   "town": 17,
+   "city": 14,
+   "metropolis": 43
+  },
+  "crises": {
+   "calm": 23,
+   "politically_fractured": 2,
+   "under_siege": 11,
+   "insurgency": 4,
+   "famine": 8,
+   "occupied": 8,
+   "indebted": 5,
+   "recently_betrayed": 1,
+   "succession_void": 3,
+   "monster_pressure": 2,
+   "slave_revolt": 1,
+   "wartime": 25,
+   "mass_migration": 1,
+   "infiltrated": 3
+  }
+ },
+ "chip armed sway": {
+  "prints": 101,
+  "sizes": {
+   "hamlet": 4,
+   "town": 17,
+   "city": 27,
+   "metropolis": 52,
+   "village": 1
+  },
+  "crises": {
+   "calm": 20,
+   "mass_migration": 2,
+   "infiltrated": 10,
+   "under_siege": 6,
+   "occupied": 5,
+   "politically_fractured": 4,
+   "indebted": 3,
+   "recently_betrayed": 2,
+   "succession_void": 12,
+   "monster_pressure": 2,
+   "insurgency": 5,
+   "religious_conversion": 3,
+   "slave_revolt": 1,
+   "wartime": 19,
+   "famine": 8
+  }
+ },
+ "chip mage counsel": {
+  "prints": 73,
+  "sizes": {
+   "town": 11,
+   "city": 32,
+   "metropolis": 25,
+   "village": 4,
+   "hamlet": 1
+  },
+  "crises": {
+   "indebted": 5,
+   "calm": 14,
+   "insurgency": 4,
+   "politically_fractured": 7,
+   "monster_pressure": 1,
+   "famine": 4,
+   "occupied": 7,
+   "infiltrated": 4,
+   "plague_onset": 2,
+   "religious_conversion": 1,
+   "wartime": 10,
+   "mass_migration": 1,
+   "succession_void": 4,
+   "under_siege": 11
+  }
+ },
+ "criminal sway contradicted": {
+  "n": 48,
+  "of": 95,
+  "sizes": {
+   "thorp": 5,
+   "hamlet": 2,
+   "town": 7,
+   "city": 14,
+   "metropolis": 17,
+   "village": 3
+  }
+ },
+ "church chip, no religious power on the roster": {
+  "n": 29,
+  "of": 142,
+  "sizes": {
+   "thorp": 10,
+   "hamlet": 18,
+   "city": 1
+  }
+ },
+ "hall": {
+  "prints": 307,
+  "sizes": {
+   "town": 17,
+   "city": 128,
+   "metropolis": 162
+  },
+  "crises": {
+   "insurgency": 10,
+   "calm": 74,
+   "mass_migration": 6,
+   "politically_fractured": 19,
+   "succession_void": 31,
+   "infiltrated": 19,
+   "monster_pressure": 8,
+   "under_siege": 25,
+   "indebted": 9,
+   "famine": 11,
+   "occupied": 28,
+   "recently_betrayed": 5,
+   "plague_onset": 4,
+   "religious_conversion": 2,
+   "slave_revolt": 4,
+   "wartime": 54
+  },
+  "lines": [
+   "The head, the second and the third of X make their own decisions; none of them takes orders from the criminals."
+  ]
+ },
+ "hall under occupation": 28,
+ "hall under infiltration": 19,
+ "stability": [
+  "r2r-hamlet-3: Ordered (strong military presence); monsters on the roads -> Tense — regional monster threat (Lightly Defended)",
+  "r2r-hamlet-11: Ordered (strong military presence); monsters on the roads -> Tense — regional monster threat (Lightly Defended)",
+  "r2r-hamlet-18: Ordered (strong military presence); monsters on the roads -> Tense — regional monster threat (Lightly Defended)",
+  "r2r-village-6: Ordered (strong military presence); monsters on the roads -> Tense — regional monster threat (Lightly Defended)",
+  "r2r-town-29: Vulnerable (prosperous but underdefended) -> Stable (Defensible)",
+  "r2r-town-30: Vulnerable (prosperous but underdefended) -> Stable (Defensible)",
+  "r2r-town-46: Vulnerable (prosperous but underdefended) -> Stable (Defensible)",
+  "r2r-town-47: Vulnerable (prosperous but underdefended) -> Stable (Defensible)",
+  "r2r-city-32: Vulnerable (prosperous but underdefended) -> Stable (Fortress)",
+  "r2r-city-41: Vulnerable (prosperous but underdefended) -> Stable (Fortress)",
+  "r2s-infiltrated-hamlet-0: Ordered (strong military presence); monsters on the roads -> Vulnerable (decisions shaped from outside); monsters on the roads (Vulnerable)",
+  "rww-town-calm-303: Vulnerable (prosperous but underdefended) -> Stable (Defensible)",
+  "r4-town-calm-501: Vulnerable (prosperous but underdefended) -> Stable (Defensible)",
+  "r5-hamlet-infiltrated-703: Ordered (strong military presence); monsters on the roads -> Vulnerable (decisions shaped from outside); monsters on the roads (Vulnerable)",
+  "r5-town-calm-702: Vulnerable (prosperous but underdefended) -> Stable (Well-Defended)"
+ ],
+ "conflict": [
+  "r2r-hamlet-3: The military commanders are pushing for expanded a... -> The strongest armed household has started making decisions on everyone's behalf without asking.",
+  "r2r-hamlet-14: The merchant class is outbuying noble landholdings... -> A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.",
+  "r2r-hamlet-17: Several merchants have been found murdered this se... -> Someone has been stealing from the communal stores. Everyone suspects someone. No one is saying anything.",
+  "r2r-hamlet-18: The military commanders are pushing for expanded a... -> The strongest armed household has started making decisions on everyone's behalf without asking.",
+  "r2r-hamlet-23: Free Elder Council has been debating market levies... -> A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.",
+  "r2r-hamlet-50: The merchant class is outbuying noble landholdings... -> The household that sells the most beyond the settlement has been throwing its weight around in community decisions.",
+  "r2r-hamlet-56: Several merchants have been found murdered this se... -> Someone has been stealing from the communal stores. Everyone suspects someone. No one is saying anything.",
+  "r2r-village-4: Elder Council has been debating market levies for ... -> A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.",
+  "r2r-village-8: The military commanders are pushing for expanded a... -> The strongest armed household has started making decisions on everyone's behalf without asking.",
+  "r2r-village-46: The military commanders are pushing for expanded a... -> The strongest armed household has started making decisions on everyone's behalf without asking.",
+  "r2r-village-54: The merchant class is outbuying noble landholdings... -> A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.",
+  "r2s-infiltrated-hamlet-0: The military commanders are pushing for expanded a... -> The strongest armed household has started making decisions on everyone's behalf without asking.",
+  "rww-hamlet-calm-302: The military commanders are pushing for expanded a... -> The strongest armed household has started making decisions on everyone's behalf without asking.",
+  "rww-hamlet-calm-306: The merchant class is outbuying noble landholdings... -> The household that sells the most beyond the settlement has been throwing its weight around in community decisions.",
+  "rww-hamlet-infiltrated-306: Elder Council has been debating market levies for ... -> A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.",
+  "rww-village-calm-301: Elder Council has been debating market levies for ... -> A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.",
+  "rww-village-calm-306: The military commanders are pushing for expanded a... -> The strongest armed household has started making decisions on everyone's behalf without asking.",
+  "r4-hamlet-calm-501: The merchant class is outbuying noble landholdings... -> A monster incursion last season destroyed outlying farms. The militia is stretched thin and Elder Council cannot agree on whether to raise a levy or hire mercenaries.",
+  "r4-hamlet-infiltrated-500: The merchant class is outbuying noble landholdings... -> A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.",
+  "r4g-hamlet-calm-500: Free Elder Council has been debating market levies... -> A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.",
+  "r5-hamlet-calm-704: The merchant class is outbuying noble landholdings... -> A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.",
+  "r5-hamlet-infiltrated-703: The merchant class is outbuying noble landholdings... -> The strongest armed household has started making decisions on everyone's behalf without asking."
+ ],
+ "inn": {
+  "keepers": 436,
+  "moved": 38,
+  "sizes": {
+   "metropolis": 21,
+   "town": 4,
+   "city": 13
+  },
+  "crises": {
+   "under_siege": 24,
+   "famine": 14
+  },
+  "behaviours": {
+   "Pleasant, but asks where you are going and when, and writes it down.": 24,
+   "Sells places on the coach and beds by the night; asks for payment first.": 14
+  },
+  "siegeSecrets": [
+   "r2r-metropolis-14: Changes tired horses for fresh ones and sells the good ones on, giving travellers the worst of the stable",
+   "r2s-under_siege-town-1: Changes tired horses for fresh ones and sells the good ones on, giving travellers the worst of the stable",
+   "r2s-under_siege-metropolis-0: Changes tired horses for fresh ones and sells the good ones on, giving travellers the worst of the stable",
+   "r2s-under_siege-metropolis-2: Tells a band on the road which coaches carry money and when they leave",
+   "rww-town-under_siege-302: Changes tired horses for fresh ones and sells the good ones on, giving travellers the worst of the stable",
+   "rww-city-under_siege-301: Changes tired horses for fresh ones and sells the good ones on, giving travellers the worst of the stable",
+   "rww-city-under_siege-302: Changes tired horses for fresh ones and sells the good ones on, giving travellers the worst of the stable",
+   "rww-metropolis-under_siege-303: Tells a band on the road which coaches carry money and when they leave",
+   "r4g-town-under_siege-500: Changes tired horses for fresh ones and sells the good ones on, giving travellers the worst of the stable",
+   "r4-metropolis-under_siege-502: Tells a band on the road which coaches carry money and when they leave",
+   "r4g-metropolis-under_siege-501: Tells a band on the road which coaches carry money and when they leave",
+   "r5-city-under_siege-707: Changes tired horses for fresh ones and sells the good ones on, giving travellers the worst of the stable",
+   "r5-city-under_siege-708: Tells a band on the road which coaches carry money and when they leave",
+   "r5-city-under_siege-709: Changes tired horses for fresh ones and sells the good ones on, giving travellers the worst of the stable",
+   "r5-metropolis-under_siege-703: Changes tired horses for fresh ones and sells the good ones on, giving travellers the worst of the stable",
+   "r5-metropolis-under_siege-708: Tells a band on the road which coaches carry money and when they leave"
+  ]
+ }
+}

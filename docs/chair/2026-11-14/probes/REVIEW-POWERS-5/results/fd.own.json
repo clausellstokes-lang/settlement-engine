@@ -1,0 +1,134 @@
+{
+ "seeds": 996,
+ "townsMoved": [
+  "rww-hamlet-calm-302",
+  "rww-hamlet-calm-306",
+  "rww-hamlet-infiltrated-306",
+  "rww-village-calm-301",
+  "rww-village-calm-306",
+  "rww-town-calm-303",
+  "rww-town-famine-303",
+  "rww-city-under_siege-302",
+  "rww-city-famine-303",
+  "rww-metropolis-under_siege-301",
+  "rww-metropolis-under_siege-302",
+  "r4-hamlet-calm-501",
+  "r4-hamlet-infiltrated-500",
+  "r4g-hamlet-calm-500",
+  "r4-town-calm-501",
+  "r4-town-famine-502",
+  "r4g-town-under_siege-500",
+  "r4-city-under_siege-501",
+  "r4-city-famine-500",
+  "r4-city-famine-501",
+  "r4g-city-under_siege-500",
+  "r4g-city-famine-502",
+  "r4-metropolis-under_siege-500",
+  "r4-metropolis-under_siege-501",
+  "r4-metropolis-under_siege-502",
+  "r4g-metropolis-under_siege-500",
+  "r4g-metropolis-under_siege-501",
+  "r4g-metropolis-under_siege-502",
+  "r4g-metropolis-famine-501",
+  "r4g-metropolis-famine-502",
+  "r5-hamlet-calm-704",
+  "r5-hamlet-infiltrated-703",
+  "r5-town-calm-702",
+  "r5-city-famine-702",
+  "r5-city-under_siege-707",
+  "r5-city-under_siege-708",
+  "r5-city-under_siege-709",
+  "r5-city-famine-708",
+  "r5-metropolis-under_siege-701",
+  "r5-metropolis-under_siege-702",
+  "r5-metropolis-under_siege-703",
+  "r5-metropolis-famine-701",
+  "r5-metropolis-under_siege-708",
+  "r5-metropolis-under_siege-709",
+  "r5-metropolis-famine-707"
+ ],
+ "rows": [
+  {
+   "path": ".npcs[].presentation.impression",
+   "towns": 32,
+   "n": 32,
+   "ex": [
+    "rww-town-famine-303: \"Brisk and cheerful, always half on the way to the yard, where coaches rattle in and out.\" -> \"Efficient and loud. Calls out departures and prices in the same breath.\"",
+    "rww-city-under_siege-302: \"Efficient and loud. Calls out departures and prices in the same breath.\" -> \"Notes every traveller's name, face and baggage, and remembers all three.\"",
+    "rww-city-famine-303: \"Brisk and cheerful, always half on the way to the yard, where coaches rattle in and out.\" -> \"Efficient and loud. Calls out departures and prices in the same breath.\"",
+    "rww-metropolis-under_siege-301: \"Brisk and cheerful, always half on the way to the yard, where coaches rattle in and out.\" -> \"Notes every traveller's name, face and baggage, and remembers all three.\"",
+    "rww-metropolis-under_siege-302: \"Brisk and cheerful, always half on the way to the yard, where coaches rattle in and out.\" -> \"Notes every traveller's name, face and baggage, and remembers all three.\"",
+    "r4-town-famine-502: \"Brisk and cheerful, always half on the way to the yard, where coaches rattle in and out.\" -> \"Efficient and loud. Calls out departures and prices in the same breath.\"",
+    "r4g-town-under_siege-500: \"Brisk and cheerful, always half on the way to the yard, where coaches rattle in and out.\" -> \"Notes every traveller's name, face and baggage, and remembers all three.\"",
+    "r4-city-under_siege-501: \"Brisk and cheerful, always half on the way to the yard, where coaches rattle in and out.\" -> \"Notes every traveller's name, face and baggage, and remembers all three.\""
+   ]
+  },
+  {
+   "path": ".npcs[].presentation.disposition",
+   "towns": 32,
+   "n": 32,
+   "ex": [
+    "rww-town-famine-303: \"welcoming\" -> \"transactional\"",
+    "rww-city-under_siege-302: \"transactional\" -> \"cautious\"",
+    "rww-city-famine-303: \"welcoming\" -> \"transactional\"",
+    "rww-metropolis-under_siege-301: \"welcoming\" -> \"cautious\"",
+    "rww-metropolis-under_siege-302: \"welcoming\" -> \"cautious\"",
+    "r4-town-famine-502: \"welcoming\" -> \"transactional\"",
+    "r4g-town-under_siege-500: \"welcoming\" -> \"cautious\"",
+    "r4-city-under_siege-501: \"welcoming\" -> \"cautious\""
+   ]
+  },
+  {
+   "path": ".npcs[].presentation.behaviour",
+   "towns": 32,
+   "n": 32,
+   "ex": [
+    "rww-town-famine-303: \"Offers food, a bed and a fresh team; full of news of the road.\" -> \"Sells places on the coach and beds by the night; asks for payment first.\"",
+    "rww-city-under_siege-302: \"Sells places on the coach and beds by the night; asks for payment first.\" -> \"Pleasant, but asks where you are going and when, and writes it down.\"",
+    "rww-city-famine-303: \"Offers food, a bed and a fresh team; full of news of the road.\" -> \"Sells places on the coach and beds by the night; asks for payment first.\"",
+    "rww-metropolis-under_siege-301: \"Offers food, a bed and a fresh team; full of news of the road.\" -> \"Pleasant, but asks where you are going and when, and writes it down.\"",
+    "rww-metropolis-under_siege-302: \"Offers food, a bed and a fresh team; full of news of the road.\" -> \"Pleasant, but asks where you are going and when, and writes it down.\"",
+    "r4-town-famine-502: \"Offers food, a bed and a fresh team; full of news of the road.\" -> \"Sells places on the coach and beds by the night; asks for payment first.\"",
+    "r4g-town-under_siege-500: \"Offers food, a bed and a fresh team; full of news of the road.\" -> \"Pleasant, but asks where you are going and when, and writes it down.\"",
+    "r4-city-under_siege-501: \"Offers food, a bed and a fresh team; full of news of the road.\" -> \"Pleasant, but asks where you are going and when, and writes it down.\""
+   ]
+  },
+  {
+   "path": ".powerStructure.recentConflict",
+   "towns": 10,
+   "n": 10,
+   "ex": [
+    "rww-hamlet-calm-302: \"The military commanders are pushing for expanded authority over civilian courts, and Free Elder Council is losing ground.\" -> \"The strongest armed household has started making decisions on everyone's behalf without asking.\"",
+    "rww-hamlet-calm-306: \"The merchant class is outbuying noble landholdings. Three estates have changed hands in the last decade. The families that lost them have not forgotten.\" -> \"The household that sells the most beyond the settlement has been throwing its weight around in community decisions.\"",
+    "rww-hamlet-infiltrated-306: \"Elder Council has been debating market levies for three months. The merchants have stopped attending the sessions. Both sides are now acting as if the other ha -> \"A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.\"",
+    "rww-village-calm-301: \"Elder Council has been debating market levies for three months. The merchants have stopped attending the sessions. Both sides are now acting as if the other ha -> \"A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.\"",
+    "rww-village-calm-306: \"The military commanders are pushing for expanded authority over civilian courts, and Headman's Authority is losing ground.\" -> \"The strongest armed household has started making decisions on everyone's behalf without asking.\"",
+    "r4-hamlet-calm-501: \"The merchant class is outbuying noble landholdings. Three estates have changed hands in the last decade. The families that lost them have not forgotten.\" -> \"A monster incursion last season destroyed outlying farms. The militia is stretched thin and Elder Council cannot agree on whether to raise a levy or hire merce",
+    "r4-hamlet-infiltrated-500: \"The merchant class is outbuying noble landholdings. Three estates have changed hands in the last decade. The families that lost them have not forgotten.\" -> \"A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.\"",
+    "r4g-hamlet-calm-500: \"Free Elder Council has been debating market levies for three months. The merchants have stopped attending the sessions. Both sides are now acting as if the oth -> \"A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.\""
+   ]
+  },
+  {
+   "path": ".pressureSentence",
+   "towns": 4,
+   "n": 4,
+   "ex": [
+    "rww-hamlet-calm-306: \"The merchant class is outbuying noble landholdings. Three estates have changed hands in the last decade. The families that lost them have not forgotten.\" -> \"The household that sells the most beyond the settlement has been throwing its weight around in community decisions.\"",
+    "rww-village-calm-306: \"The military commanders are pushing for expanded authority over civilian courts, and Headman's Authority is losing ground.\" -> \"The strongest armed household has started making decisions on everyone's behalf without asking.\"",
+    "r4g-hamlet-calm-500: \"Free Elder Council has been debating market levies for three months. The merchants have stopped attending the sessions. Both sides are now acting as if the oth -> \"A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.\"",
+    "r5-hamlet-calm-704: \"The merchant class is outbuying noble landholdings. Three estates have changed hands in the last decade. The families that lost them have not forgotten.\" -> \"A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.\""
+   ]
+  },
+  {
+   "path": ".powerStructure.stability",
+   "towns": 4,
+   "n": 4,
+   "ex": [
+    "rww-town-calm-303: \"Vulnerable (prosperous but underdefended)\" -> \"Stable\"",
+    "r4-town-calm-501: \"Vulnerable (prosperous but underdefended)\" -> \"Stable\"",
+    "r5-hamlet-infiltrated-703: \"Ordered (strong military presence); monsters on the roads\" -> \"Vulnerable (decisions shaped from outside); monsters on the roads\"",
+    "r5-town-calm-702: \"Vulnerable (prosperous but underdefended)\" -> \"Stable\""
+   ]
+  }
+ ]
+}

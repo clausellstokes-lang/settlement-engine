@@ -1,0 +1,112 @@
+{
+ "seeds": 720,
+ "townsMoved": [
+  "r2r-hamlet-3",
+  "r2r-hamlet-11",
+  "r2r-hamlet-14",
+  "r2r-hamlet-17",
+  "r2r-hamlet-18",
+  "r2r-hamlet-23",
+  "r2r-hamlet-50",
+  "r2r-hamlet-56",
+  "r2r-village-4",
+  "r2r-village-6",
+  "r2r-village-8",
+  "r2r-village-46",
+  "r2r-village-54",
+  "r2r-town-29",
+  "r2r-town-30",
+  "r2r-town-46",
+  "r2r-town-47",
+  "r2r-city-32",
+  "r2r-city-41",
+  "r2r-metropolis-14",
+  "r2s-under_siege-town-1",
+  "r2s-under_siege-metropolis-0",
+  "r2s-under_siege-metropolis-3",
+  "r2s-famine-city-1",
+  "r2s-famine-metropolis-3",
+  "r2s-infiltrated-hamlet-0"
+ ],
+ "rows": [
+  {
+   "path": ".powerStructure.recentConflict",
+   "towns": 12,
+   "n": 12,
+   "ex": [
+    "r2r-hamlet-3: \"The military commanders are pushing for expanded authority over civilian courts, and Headman's Authority is losing ground.\" -> \"The strongest armed household has started making decisions on everyone's behalf without asking.\"",
+    "r2r-hamlet-14: \"The merchant class is outbuying noble landholdings. Three estates have changed hands in the last decade. The families that lost them have not forgotten.\" -> \"A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.\"",
+    "r2r-hamlet-17: \"Several merchants have been found murdered this season, and people say the guard is doing nothing about it.\" -> \"Someone has been stealing from the communal stores. Everyone suspects someone. No one is saying anything.\"",
+    "r2r-hamlet-18: \"The military commanders are pushing for expanded authority over civilian courts, and Headman's Authority is losing ground.\" -> \"The strongest armed household has started making decisions on everyone's behalf without asking.\"",
+    "r2r-hamlet-23: \"Free Elder Council has been debating market levies for three months. The merchants have stopped attending the sessions. Both sides are now acting as if the oth -> \"A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.\"",
+    "r2r-hamlet-50: \"The merchant class is outbuying noble landholdings. Three estates have changed hands in the last decade. The families that lost them have not forgotten.\" -> \"The household that sells the most beyond the settlement has been throwing its weight around in community decisions.\"",
+    "r2r-hamlet-56: \"Several merchants have been found murdered this season, and people say the guard is doing nothing about it.\" -> \"Someone has been stealing from the communal stores. Everyone suspects someone. No one is saying anything.\"",
+    "r2r-village-4: \"Elder Council has been debating market levies for three months. The merchants have stopped attending the sessions. Both sides are now acting as if the other ha -> \"A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.\""
+   ]
+  },
+  {
+   "path": ".powerStructure.stability",
+   "towns": 11,
+   "n": 11,
+   "ex": [
+    "r2r-hamlet-3: \"Ordered (strong military presence); monsters on the roads\" -> \"Tense — regional monster threat\"",
+    "r2r-hamlet-11: \"Ordered (strong military presence); monsters on the roads\" -> \"Tense — regional monster threat\"",
+    "r2r-hamlet-18: \"Ordered (strong military presence); monsters on the roads\" -> \"Tense — regional monster threat\"",
+    "r2r-village-6: \"Ordered (strong military presence); monsters on the roads\" -> \"Tense — regional monster threat\"",
+    "r2r-town-29: \"Vulnerable (prosperous but underdefended)\" -> \"Stable\"",
+    "r2r-town-30: \"Vulnerable (prosperous but underdefended)\" -> \"Stable\"",
+    "r2r-town-46: \"Vulnerable (prosperous but underdefended)\" -> \"Stable\"",
+    "r2r-town-47: \"Vulnerable (prosperous but underdefended)\" -> \"Stable\""
+   ]
+  },
+  {
+   "path": ".npcs[].presentation.impression",
+   "towns": 6,
+   "n": 6,
+   "ex": [
+    "r2r-metropolis-14: \"Efficient and loud. Calls out departures and prices in the same breath.\" -> \"Notes every traveller's name, face and baggage, and remembers all three.\"",
+    "r2s-under_siege-town-1: \"Brisk and cheerful, always half on the way to the yard, where coaches rattle in and out.\" -> \"Notes every traveller's name, face and baggage, and remembers all three.\"",
+    "r2s-under_siege-metropolis-0: \"Efficient and loud. Calls out departures and prices in the same breath.\" -> \"Notes every traveller's name, face and baggage, and remembers all three.\"",
+    "r2s-under_siege-metropolis-3: \"Efficient and loud. Calls out departures and prices in the same breath.\" -> \"Notes every traveller's name, face and baggage, and remembers all three.\"",
+    "r2s-famine-city-1: \"Brisk and cheerful, always half on the way to the yard, where coaches rattle in and out.\" -> \"Efficient and loud. Calls out departures and prices in the same breath.\"",
+    "r2s-famine-metropolis-3: \"Brisk and cheerful, always half on the way to the yard, where coaches rattle in and out.\" -> \"Efficient and loud. Calls out departures and prices in the same breath.\""
+   ]
+  },
+  {
+   "path": ".npcs[].presentation.disposition",
+   "towns": 6,
+   "n": 6,
+   "ex": [
+    "r2r-metropolis-14: \"transactional\" -> \"cautious\"",
+    "r2s-under_siege-town-1: \"welcoming\" -> \"cautious\"",
+    "r2s-under_siege-metropolis-0: \"transactional\" -> \"cautious\"",
+    "r2s-under_siege-metropolis-3: \"transactional\" -> \"cautious\"",
+    "r2s-famine-city-1: \"welcoming\" -> \"transactional\"",
+    "r2s-famine-metropolis-3: \"welcoming\" -> \"transactional\""
+   ]
+  },
+  {
+   "path": ".npcs[].presentation.behaviour",
+   "towns": 6,
+   "n": 6,
+   "ex": [
+    "r2r-metropolis-14: \"Sells places on the coach and beds by the night; asks for payment first.\" -> \"Pleasant, but asks where you are going and when, and writes it down.\"",
+    "r2s-under_siege-town-1: \"Offers food, a bed and a fresh team; full of news of the road.\" -> \"Pleasant, but asks where you are going and when, and writes it down.\"",
+    "r2s-under_siege-metropolis-0: \"Sells places on the coach and beds by the night; asks for payment first.\" -> \"Pleasant, but asks where you are going and when, and writes it down.\"",
+    "r2s-under_siege-metropolis-3: \"Sells places on the coach and beds by the night; asks for payment first.\" -> \"Pleasant, but asks where you are going and when, and writes it down.\"",
+    "r2s-famine-city-1: \"Offers food, a bed and a fresh team; full of news of the road.\" -> \"Sells places on the coach and beds by the night; asks for payment first.\"",
+    "r2s-famine-metropolis-3: \"Offers food, a bed and a fresh team; full of news of the road.\" -> \"Sells places on the coach and beds by the night; asks for payment first.\""
+   ]
+  },
+  {
+   "path": ".pressureSentence",
+   "towns": 3,
+   "n": 3,
+   "ex": [
+    "r2r-hamlet-14: \"The merchant class is outbuying noble landholdings. Three estates have changed hands in the last decade. The families that lost them have not forgotten.\" -> \"A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.\"",
+    "r2r-hamlet-50: \"The merchant class is outbuying noble landholdings. Three estates have changed hands in the last decade. The families that lost them have not forgotten.\" -> \"The household that sells the most beyond the settlement has been throwing its weight around in community decisions.\"",
+    "r2r-hamlet-56: \"Several merchants have been found murdered this season, and people say the guard is doing nothing about it.\" -> \"Someone has been stealing from the communal stores. Everyone suspects someone. No one is saying anything.\""
+   ]
+  }
+ ]
+}

@@ -1,0 +1,76 @@
+PATTERN a: towns 712 · distinct lines 593 (NEW 322) · writers 103 (NEW 48) · untraced lines 44
+PATTERN b: towns 70 · distinct lines 101 (NEW 59) · writers 39 (NEW 18) · untraced lines 16
+PATTERN c: towns 301 · distinct lines 298 (NEW 173) · writers 43 (NEW 21) · untraced lines 8
+PATTERN d: towns 382 · distinct lines 40 (NEW 20) · writers 11 (NEW 5) · untraced lines 15
+PATTERN e: towns 60 · distinct lines 20 (NEW 14) · writers 5 (NEW 3) · untraced lines 3
+PATTERN f: towns 720 · distinct lines 343 (NEW 190) · writers 14 (NEW 7) · untraced lines 123
+PATTERN g: towns 720 · distinct lines 6 (NEW 0) · writers 3 (NEW 0) · untraced lines 0
+PATTERN h: towns 20 · distinct lines 73 (NEW 67) · writers 15 (NEW 13) · untraced lines 34
+FILE src/generators/power/governanceNarrative.js [pw]: a 24 towns/8 lines/1 fns · c 8 towns/8 lines/1 fns
+FILE src/data/people/titleSecretsPresentations.js [pw]: a 17 towns/6 lines/1 fns · b 2 towns/2 lines/1 fns
+FILE src/generators/people/poolMap.js [pw] NEW-FILE: f 6 towns/2 lines/1 fns
+FILE src/domain/people/patronage.js [none] NEW-FILE: f 2 towns/3 lines/1 fns
+  HIT a/reeve r2r-thorp-0 Summary/Overview [deriveBaselineConflict] NEW: The village reeve disagrees.
+  HIT a/reeve r2r-thorp-2 Summary/Overview [deriveBaselineConflict] NEW: The village reeve disagrees.
+  HIT a/reeve r2r-thorp-6 Summary/Overview [deriveBaselineConflict] NEW: The village reeve disagrees.
+  HIT a/reeve r2r-thorp-12 Summary/Overview [deriveBaselineConflict] NEW: The village reeve disagrees.
+  HIT a/reeve r2r-thorp-15 Summary/Overview [deriveBaselineConflict] NEW: The village reeve disagrees.
+  HIT a/reeve r2r-thorp-23 Summary/Overview [deriveBaselineConflict] NEW: The village reeve disagrees.
+  HIT a/reeve r2r-thorp-28 Summary/Overview [deriveBaselineConflict] NEW: The village reeve disagrees.
+  HIT a/reeve r2r-thorp-34 Summary/Overview [deriveBaselineConflict] NEW: The village reeve disagrees.
+  HIT a/reeve r2r-thorp-36 Summary/Overview [deriveBaselineConflict] NEW: The village reeve disagrees.
+  HIT a/reeve r2r-thorp-47 Summary/Overview [deriveBaselineConflict] NEW: The village reeve disagrees.
+  HIT a/reeve r2r-thorp-48 Summary/Overview [deriveBaselineConflict] NEW: The village reeve disagrees.
+  HIT a/reeve r2r-thorp-50 Summary/Overview [deriveBaselineConflict] NEW: The village reeve disagrees.
+  HIT a/reeve r2r-hamlet-2 Summary/Overview [deriveBaselineConflict] NEW: The village reeve disagrees.
+  HIT a/reeve r2r-hamlet-7 Summary/Overview [deriveBaselineConflict] NEW: The village reeve disagrees.
+  HIT a/church r2r-hamlet-21 Systems/Power [deriveBaselineConflict] NEW: The church is demanding veto power over council appointments.
+  HIT a/reeve r2r-hamlet-29 Summary/Overview [deriveBaselineConflict] NEW: The village reeve disagrees.
+  HIT a/reeve r2r-hamlet-30 Summary/Overview [deriveBaselineConflict] NEW: The village reeve disagrees.
+  HIT a/reeve r2r-hamlet-37 Summary/Overview [deriveBaselineConflict] NEW: The village reeve disagrees.
+  HIT a/church r2r-hamlet-41 Summary/Overview [deriveBaselineConflict] NEW: The church is demanding veto power over council appointments.
+  HIT a/church r2r-hamlet-41 Systems/Power [deriveBaselineConflict] NEW: The church is demanding veto power over council appointments.
+  HIT a/church r2r-hamlet-55 Systems/Power [deriveBaselineConflict] NEW: The priest has summoned someone before the church court.
+  HIT a/clergy r2r-hamlet-55 Systems/Power [deriveBaselineConflict] NEW: The priest has summoned someone before the church court.
+  HIT a/reeve r2r-hamlet-57 Summary/Overview [deriveBaselineConflict] NEW: The village reeve disagrees.
+  HIT a/inn r2r-village-16 World/NPCs [ROWS] cut#254~: How they deal Generous with a cup and with talk; hears everything the taverns say.
+  HIT a/inn r2r-village-16 World/NPCs [ROWS] NEW: Secret: Thins the ale with water after it is sold by the barrel and charges the taverns for full strength
+  HIT a/bakery r2r-village-40 World/NPCs [ROWS] NEW: Secret: Buys grain that was meant for bread in the lean months, at a price the bakers cannot match
+  HIT a/bakery r2r-village-57 World/NPCs [ROWS] NEW: Secret: Buys grain that was meant for bread in the lean months, at a price the bakers cannot match
+  HIT a/court-generic r2r-town-15 Systems/Power [deriveBaselineConflict] NEW: The military commanders are pushing for expanded authority over civilian courts, and Guild Council is losing ground.
+  HIT a/court-generic r2r-town-16 Systems/Power [deriveBaselineConflict] NEW: The military commanders are pushing for expanded authority over civilian courts, and Church Council is losing ground.
+  HIT a/court-generic r2r-town-28 Systems/Power [deriveBaselineConflict] NEW: The military commanders are pushing for expanded authority over civilian courts, and Military Council is losing ground.
+  HIT a/bakery r2r-town-29 World/NPCs [ROWS] NEW: Secret: Buys grain that was meant for bread in the lean months, at a price the bakers cannot match
+  HIT f/tag r2r-city-17 World/NPCs [POOL_BY_TITLE] NEW: Merchant guilds (15-40) · Speaker of the Assembly, first of Democratic assembly · first of Merchant Guilds
+  HIT a/apothecary r2r-city-20 World/NPCs [ROWS] NEW: Secret: Has been selling the hospital's medicines to an apothecary and treating the poor with cheaper ones
+  HIT f/tag r2r-city-28 World/NPCs [POOL_BY_TITLE] NEW: Merchant guilds (15-40) · Speaker of the Assembly, first of Democratic assembly · first of Merchant Guilds
+  HIT f/count-range r2r-city-56 Systems/Power [HANDLER_TIE_WORDS] NEW: Waltraud Pfaff, the dean (Parish churches (10-30)) · brings protection and decisions · held over them: someone they love
+  HIT f/tag r2r-city-57 World/NPCs [POOL_BY_TITLE] NEW: Craft guilds (30-80) · Speaker of the Assembly, first of Democratic assembly · first of Craft Guilds
+  HIT f/tag r2r-metropolis-7 Systems/Power [HANDLER_TIE_WORDS] NEW: Samarkand Jirgin, the senior guild master (Merchant guilds (50-100+)) · brings a place for the money and the goods · a patron no one names
+  HIT f/count-range r2r-metropolis-7 Systems/Power [HANDLER_TIE_WORDS] NEW: Munkhtuya Khwarezm, the master baker (Bakers (5-15)) · brings a place for the money and the goods · a patron no one names
+  HIT a/bakery r2r-metropolis-12 World/NPCs [ROWS] NEW: Secret: Buys grain that was meant for bread in the lean months, at a price the bakers cannot match
+  HIT a/bakery r2r-metropolis-25 World/NPCs [ROWS] NEW: Secret: Buys grain that was meant for bread in the lean months, at a price the bakers cannot match
+  HIT a/bakery r2r-metropolis-36 World/NPCs [ROWS] NEW: Secret: Buys grain that was meant for bread in the lean months, at a price the bakers cannot match
+  HIT b/siege:brought-in r2s-under_siege-city-3 World/NPCs [ROWS] NEW: Secret: Melts down items brought in for repair and returns them in cheaper metal
+  HIT b/siege:arrivals r2s-under_siege-metropolis-2 World/NPCs [ROWS] NEW: Secret: Tells a band on the road which coaches carry money and when they leave
+  HIT a/market r2s-politically_fractured-hamlet-0 World/NPCs [ROWS] ww#1543: Secret: Has been hunting on land that belongs to someone else and selling the game in the market
+  HIT f/tag r2s-indebted-city-1 World/NPCs [POOL_BY_TITLE] NEW: Craft guilds (30-80) · Speaker of the Assembly, first of Democratic assembly · first of Craft Guilds
+  HIT f/tag r2s-recently_betrayed-city-2 World/NPCs [POOL_BY_TITLE] NEW: Merchant guilds (15-40) · Speaker of the Assembly, first of Democratic assembly · first of Merchant Guilds
+  HIT a/bakery r2s-infiltrated-city-1 World/NPCs [ROWS] NEW: Secret: Buys grain that was meant for bread in the lean months, at a price the bakers cannot match
+  HIT a/market r2s-plague_onset-hamlet-0 World/NPCs [ROWS] ww#1543: Secret: Has been hunting on land that belongs to someone else and selling the game in the market
+  HIT a/apothecary r2s-plague_onset-city-3 World/NPCs [ROWS] NEW: Secret: Has been selling the hospital's medicines to an apothecary and treating the poor with cheaper ones
+  HIT a/market r2s-succession_void-hamlet-0 World/NPCs [ROWS] ww#1543: Secret: Has been hunting on land that belongs to someone else and selling the game in the market
+  HIT a/inn r2s-monster_pressure-village-1 World/NPCs [ROWS] cut#254~: How they deal Generous with a cup and with talk; hears everything the taverns say.
+  HIT a/inn r2s-insurgency-village-0 World/NPCs [ROWS] ww#1441: How they deal Sells by the barrel to taverns and by the jug to anyone; talks prices plainly.
+  HIT a/inn r2s-insurgency-village-0 World/NPCs [ROWS] NEW: Secret: Thins the ale with water after it is sold by the barrel and charges the taverns for full strength
+  HIT c/streets r2s-slave_revolt-thorp-0 Systems/Power [buildSlaveRevoltNarrative] NEW: The rebels' buildings are marked, and some streets are contested.
+  HIT c/streets r2s-slave_revolt-thorp-1 Systems/Power [buildSlaveRevoltNarrative] NEW: The rebels' buildings are marked, and some streets are contested.
+  HIT c/streets r2s-slave_revolt-thorp-2 Systems/Power [buildSlaveRevoltNarrative] NEW: The rebels' buildings are marked, and some streets are contested.
+  HIT c/streets r2s-slave_revolt-thorp-3 Systems/Power [buildSlaveRevoltNarrative] NEW: The rebels' buildings are marked, and some streets are contested.
+  HIT c/streets r2s-slave_revolt-hamlet-0 Systems/Power [buildSlaveRevoltNarrative] NEW: The rebels' buildings are marked, and some streets are contested.
+  HIT c/streets r2s-slave_revolt-hamlet-1 Systems/Power [buildSlaveRevoltNarrative] NEW: The rebels' buildings are marked, and some streets are contested.
+  HIT c/streets r2s-slave_revolt-hamlet-2 Systems/Power [buildSlaveRevoltNarrative] NEW: The rebels' buildings are marked, and some streets are contested.
+  HIT c/streets r2s-slave_revolt-hamlet-3 Systems/Power [buildSlaveRevoltNarrative] NEW: The rebels' buildings are marked, and some streets are contested.
+  HIT a/bakery r2s-slave_revolt-town-2 World/NPCs [ROWS] NEW: Secret: Buys grain that was meant for bread in the lean months, at a price the bakers cannot match
+  HIT a/market r2s-wartime-hamlet-1 World/NPCs [ROWS] ww#1543: Secret: Has been hunting on land that belongs to someone else and selling the game in the market
+  HIT f/tag r2s-mass_migration-city-3 World/NPCs [POOL_BY_TITLE] NEW: Merchant guilds (15-40) · Speaker of the Assembly, first of Democratic assembly · first of Merchant Guilds
