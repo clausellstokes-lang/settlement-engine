@@ -941,6 +941,12 @@ EXECUTED = run and read; PLAUSIBLE = read from code.
 - domainAnyCastBaseline: src/domain/display/chainStateShown.js holds one `any` (allowance 0) at beae4ef7e: the lane's own
   (W2-C-LEAVES-4); item 9 moves the crisis reader into that file and cures it there.
 
+## The chair's ruling to this seat by message (copied in; 2026-11-14, received 02:21 UTC, after the hand-back message)
+- THE COUNT, changed: the mark is 400,000 tokens (not 350,000), and the check is AFTER EVERY ITEM (every pushed cure),
+  never more than forty-five minutes apart; at a hand-back the file says what is left line by line and how the
+  instruments are re-made, so a successor opens only its part. This seat's count, 427,106, is over the new mark too:
+  the hand-back stands.
+
 ## STATUS AT THE HAND-BACK (this seat read its own count after items 6 and 7: 427,106 tokens, over the brief's 350,000)
 - Item 6 DONE fc7cdafe0 + 16cf36a0c. Item 7 DONE 332061b5d. Pushed; nothing running.
 - NOT STARTED, for the successor, in the brief's order (BRIEF-W2-C-LEAVES-6 THE WORK):
