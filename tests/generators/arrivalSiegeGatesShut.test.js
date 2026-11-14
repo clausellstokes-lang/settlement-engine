@@ -53,7 +53,7 @@ describe('under a siege in force the arrival keeps the gates shut', () => {
       expect(types, `${seed}: a siege in force`).toContain('under_siege');
       expect(String(s.arrivalScene), `${seed}: the arrival opens on the town`).toContain(s.name);
       expect(String(s.arrivalScene), `${seed}: the gate is shut`).toMatch(/\bgates? (?:are )?shut\b|\bshut fast\b/i);
-      expect(String(s.arrivalScene), `${seed}: no open gate, no traffic by road`).not.toMatch(OPEN_UNDER_SIEGE);
+      expect(String(s.arrivalScene), `${seed}: no open gate, no traffic by road`).not.toMatch(OPEN_UNDER_SIEGE); // anchored: the two lines above assert this arrival names the town and its shut gate; red at 1869ac9b2 (9 of 9)
     }), 'under a siege in force the arrival keeps the gates shut');
   });
 
