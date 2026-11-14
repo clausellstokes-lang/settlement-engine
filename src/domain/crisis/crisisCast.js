@@ -30,13 +30,14 @@ import { GEN_TO_PULSE_TYPE } from '../stressorPicker.js';
 import { factionArchetype, FACTION_ARCHETYPES } from '../factionArchetypes.js';
 import { governingFactionOf } from '../rulingPower.js';
 import { outrankingRivalOf, rulingChainOf } from '../dossier/powerStrata.js';
-import { isOfficeStandIn } from '../dossier/seatHolder.js';
+import { isOfficeStandIn, seatHouseFaceOf } from '../dossier/seatHolder.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { factsOf } from '../facts/factsOf.js';
 import { resolveSibling } from '../facts/drawDeclared.js';
 import { CAST_EDIT_PATH, CAST_EDIT_SEPARATOR } from '../userEditLines.js';
 import { nativeSemanticName } from '../content/customContentSemanticAuthority.js';
 import { firstRankMembershipOf, membersByRank, membershipsOf, powerOrderOf } from '../people/membership.js';
+import { allegianceOf } from '../people/allegiance.js'; // ALLEGIANCE-CAR1: the hidden allegiance's one reader (J-1)
 
 // ── The tuning (the owner's dials; docs/DESIGN_CRISIS_TAB.md "Open for the owner's veto") ──
 
@@ -144,44 +145,49 @@ const OCCASIONAL_BY_NATURE = Object.freeze(/** @type {Record<CrisisNature, Array
 export const CAST_REASONS = Object.freeze({
   bruntBase: Object.freeze(/** @type {Record<string, string>} */ ({
     food_security: 'the hunger falls first on its people',
-    labor_capacity: 'its hands do the work the crisis takes',
+    labor_capacity: 'its people do the work the crisis needs most',
     trade_connectivity: 'its trade is cut',
     defense_readiness: 'its people stand on the walls',
-    public_legitimacy: 'its standing is what the crisis spends',
+    public_legitimacy: 'the blame falls on the house, and its good name pays for the crisis', // SW-6 (B3): never "it" for a person
     healing_capacity: 'its people tend the sick',
-    tax_revenue: 'its revenue is what the crisis drains',
+    tax_revenue: 'its income dries up first',
     housing_pressure: 'its people take in the newcomers',
     social_trust: 'its people stop trusting their neighbours',
     faction_stability: 'its own ranks begin to split',
     law_order: 'its people keep an order that is failing',
     criminal_opportunity: 'its streets are where the crime lands',
   })),
-  bruntLeast: 'the least powerful of the house the crisis hits',
-  leverRuns: 'holds the office the crisis turns on',
-  leverInstitution: 'the crisis turns on this house, and no one on the roster runs it',
-  leverTemporary: 'no one on the roster could; here for this crisis',
-  instigatorRival: 'outranks the seat while it weakens',
-  instigatorGains: 'its faction gains from the crisis',
+  // SW-6 CRISIS-SURFACES (STYLE-RULINGS-2 A1, R1–R3): the fragments in the cast's own voice, no gender, no unread noun.
+  bruntLeast: 'the one with the least say in the house the crisis hits',
+  leverRuns: 'runs the office that decides how the crisis goes',
+  leverInstitution: 'whoever runs it decides how the crisis goes, and nobody named here runs it',
+  leverTemporary: 'nobody here could, so this one stepped in for the crisis',
+  instigatorRival: 'already carries more weight than whoever holds the seat, and gains as the seat weakens',
+  // SW-9b-B (E-3, URBAN-AUDIT §5; the chair's words, 02:2x, option C): a small name whose house the gaining power ranks by
+  // its backing. A FIXED sentence: it names nobody (factionRename.js's law for this vocabulary), so no rename and no veil
+  // reaches it. No draw.
+  instigatorBacked: 'speaks for the power that gains from the crisis, from a house that power backs',
+  instigatorGains: 'its power gains from the crisis',
   instigatorLinked: 'drawn from the house that bore the famine',
   targetSeat: 'holds the seat',
-  targetSeatContested: 'holds the seat, with legitimacy already contested',
+  targetSeatContested: 'holds the seat, and the right to it is already in dispute', // SW-6 second seat (B3): the rule's word "legitimacy" out
   targetGoverning: 'the governing house',
   targetLinked: "the occupation's resistance turns on its local face",
   exploiterCorrupt: 'corrupt, with ties to the underworld',
-  exploiterTrait: 'grasping by nature, in a faction that gains',
-  exploiterPower: 'the most powerful of a faction that gains',
+  exploiterTrait: 'grasping by nature, in a power that gains',
+  exploiterPower: 'the strongest figure in a power that gains',
   exploiterLinked: "the siege's profiteer, still selling what the siege cut off",
-  scapegoatSeat: 'holds the seat, blamed while legitimacy is contested',
-  scapegoatLever: 'holds the lever, blamed while legitimacy is contested',
+  scapegoatSeat: 'holds the seat, and takes the blame while the right to it is in dispute', // SW-6 second seat (B3)
+  scapegoatLever: 'runs the office the crisis turns on, and takes the blame while the seat is in dispute', // SW-6 second seat (B3): "the lever" is the engine's word
   defenderMilitary: 'leads the military',
   defenderOffice: "holds the garrison's office",
   defenderInstitution: "the town's defence, with no one on the roster leading it",
-  treaterMerchant: 'leads the merchants, the seat being contested',
+  treaterMerchant: 'a merchant, with the seat itself in dispute', // SW-6 second seat (B3): any member of a merchant house, so no "leads"
   treaterSeat: 'holds the seat',
   collaboratorCorrupt: 'corrupt, with ties to the underworld',
-  collaboratorAmbition: 'the most ambitious of a faction that gains',
+  collaboratorAmbition: 'the most ambitious of a power that gains',
   collaboratorLinked: "the famine's exploiter, first to deal with the occupier",
-  waverer: 'its faction could go either way',
+  waverer: 'its power could go either way',
   face: 'leads the occupying power',
   nextInLine: 'next in line, the first choice already holding a role that contradicts this one',
   dm: "the DM's word",
@@ -191,13 +197,13 @@ export const CAST_REASONS = Object.freeze({
 export const CAST_ABSENCES = Object.freeze({
   noBase: "no house's base is hit",
   noLever: 'no house the crisis turns on stands here',
-  noGains: 'no faction gains',
+  noGains: 'no power gains',
   outsideHand: 'an outside hand, unnamed',
   noSeat: 'no seat or governing house stands',
   noMilitary: 'no military, garrison or watch stands',
   noMerchantOrSeat: 'no merchant house and no seat stands',
   noOccupier: 'no occupying power on the roster',
-  noSplit: 'no faction could go either way',
+  noSplit: 'no power could go either way',
   notContested: 'legitimacy is not contested',
   noLoser: "neither the seat's house nor the lever's loses by it",
   townCap: 'the town already has one',
@@ -210,14 +216,14 @@ export const STAKE_REASONS = Object.freeze({
   gainsChurch: 'the church gains while the seat struggles',
   gainsMerchants: 'the merchants gain while the seat is endorsed',
   gainsCrime: 'crime gains from the disorder',
-  gainsRival: 'outranks the seat while it weakens',
+  gainsRival: 'already carries more weight than whoever holds the seat', // SW-6 (B3 C4): R3's fact, without the echo of "gains"
   gainsClaim: 'a rival claim to govern gains by it',
   gainsHolds: 'holds what the crisis makes scarce',
   gainsOccupier: 'the occupier gains by it',
-  loses: 'the crisis hits its base',
+  loses: 'its own people feel the crisis first', // SW-6 (B3 C4): "its base" was the rule's word
   losesSeat: 'the seat bears the blame',
   split: 'gains and loses by it at once',
-  untouched: 'no direct stake; it could go either way',
+  untouched: 'it could side with either camp', // SW-6 (B3 A·C4): the page's label says "no stake yet"
 });
 
 // ── The levers: the houses each kind turns on, and the faces that run them ─────────────────
@@ -321,8 +327,7 @@ export const CRISIS_LINKS = Object.freeze([
  * @property {unknown=} power
  * @property {Array<{ power: string, rank: 1 | 2 | 3 | null, share?: number }>=} memberships
  * @property {{ kind?: string, key?: string, title?: string } | null=} institution
- * @property {boolean=} corrupt
- * @property {{ criminalInstitution?: string, thievesGuild?: string } | null=} corruptTies
+ * @property {Record<string, unknown> | null=} allegiance the hidden allegiance (ALLEGIANCE-CAR1), read through allegianceOf
  * @property {{ dominant?: string | null, flaw?: string | null, modifier?: string | null } | null=} personality
  * @property {boolean=} temporary
  * @property {string=} temporaryKind
@@ -557,7 +562,9 @@ export function bruntCandidates(s, kind, stakes) {
  */
 function faceOfHouse(s, house) {
   if (!house) return null;
-  return rosterOf(s).find((n) => n.institution?.kind === 'house' && str(n.institution?.key) === house) || null;
+  // COHERENCE-POWERS (cure (i)): the seat's house where a house leads is faced by the leader (seatHolder.js)
+  return rosterOf(s).find((n) => n.institution?.kind === 'house' && str(n.institution?.key) === house)
+    || /** @type {CastNpc | null} */ (seatHouseFaceOf(/** @type {never} */ (s), house));
 }
 
 /**
@@ -655,10 +662,23 @@ export function instigatorCandidates(s, kind, stakes) {
   const seatHouses = new Set(factionsOf(s).filter((f) => holdsTheSeat(s, f)).map(factionName));
   const actsForTheSeat = (/** @type {CastNpc} */ n) => seatHouses.has(str(firstRankMembershipOf(n, order)?.power));
   for (const { f, reason } of picks) {
-    for (const n of membersOf(s, factionName(f))) if (!actsForTheSeat(n)) out.push(npcRow(n, 'instigator', reason));
+    for (const n of membersOf(s, factionName(f))) if (!actsForTheSeat(n)) out.push(npcRow(n, 'instigator', smallNameBacked(n, f, gainers.includes(f)) ? CAST_REASONS.instigatorBacked : reason));
     out.push(factionRow(f, 'instigator', reason));
   }
   return { candidates: out, absent: nature === 'engineered' ? CAST_ABSENCES.outsideHand : CAST_ABSENCES.noGains };
+}
+
+/**
+ * E-3 (URBAN-AUDIT §5, the chair's ruling; SW-9b-B): true for an instigator who is a SMALL NAME (card power 1-3), the
+ * face of a house that holds a RANKED membership in the instigating power (the backing the people car wrote: the mill,
+ * the opera house, the vintner at city scale), where that power gains from the crisis. Reads only; no draw.
+ * @param {CastNpc} n @param {CastFaction} f @param {boolean} gains @returns {boolean}
+ */
+function smallNameBacked(n, f, gains) {
+  const card = numOf(/** @type {{ power?: unknown }} */ (n).power);
+  if (!gains || n.institution?.kind !== 'house' || !str(n.institution?.key)) return false;
+  if (!(card > 0 && card <= 3)) return false; // a small name: card power 1-3 is "low" (URBAN-AUDIT §5's band)
+  return membershipsOf(n).some((m) => m.power === factionName(f) && m.rank != null);
 }
 
 /**
@@ -699,7 +719,7 @@ export function exploiterCandidates(s, stakes, role) {
   const gainers = new Set(stakes.filter((k) => k.stake === 'gains').map((k) => k.factionId));
   const pool = rosterOf(s).map((n, at) => ({ n, at })).filter(({ n }) => memberOfAny(n, gainers));
   /** @param {CastNpc} n */
-  const grade = (n) => (n.corrupt ? 0 : traitsOf(n).some((t) => GRASPING_TRAITS.includes(t)) ? 1 : 2);
+  const grade = (n) => (allegianceOf(n) ? 0 : traitsOf(n).some((t) => GRASPING_TRAITS.includes(t)) ? 1 : 2);
   pool.sort((a, b) => (grade(a.n) - grade(b.n)) || (numOf(b.n.power) - numOf(a.n.power)) || (a.at - b.at));
   const reasons = [CAST_REASONS.exploiterCorrupt, CAST_REASONS.exploiterTrait, CAST_REASONS.exploiterPower];
   return { candidates: pool.map(({ n }) => npcRow(n, role, reasons[grade(n)])), absent: CAST_ABSENCES.noGains };
@@ -777,10 +797,10 @@ export function treaterCandidates(s) {
 export function collaboratorCandidates(s, stakes) {
   const roster = rosterOf(s);
   /** @type {CastRow[]} */
-  const out = roster.filter((n) => n.corrupt && !!n.corruptTies).map((n) => npcRow(n, 'collaborator', CAST_REASONS.collaboratorCorrupt));
+  const out = roster.filter((n) => !!allegianceOf(n)).map((n) => npcRow(n, 'collaborator', CAST_REASONS.collaboratorCorrupt));
   const gainers = new Set(stakes.filter((k) => k.stake === 'gains').map((k) => k.factionId));
   const ambitious = roster.map((n, at) => ({ n, at }))
-    .filter(({ n }) => memberOfAny(n, gainers) && !n.corrupt)
+    .filter(({ n }) => memberOfAny(n, gainers) && !allegianceOf(n))
     .sort((a, b) => {
       const am = (/** @type {CastNpc} */ n) => (traitsOf(n).some((t) => AMBITION_TRAITS.includes(t)) ? 0 : 1);
       return (am(a.n) - am(b.n)) || (numOf(b.n.power) - numOf(a.n.power)) || (a.at - b.at);

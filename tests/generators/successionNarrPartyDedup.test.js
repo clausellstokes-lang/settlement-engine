@@ -9,6 +9,9 @@
  * the cost." Fix: resolvePartyPair dedupes by resolved display name
  * (case-insensitive, fallbacks included) and the four gov/top pair templates
  * switch to a single-party phrasing when only one distinct party exists.
+ *
+ * W3 POW (2026-11-08): the four templates re-worded under the owner's style law of 2026-11-07;
+ * every anchor below re-keyed to the new words (the dedup assertions themselves unchanged).
  */
 import { describe, expect, test } from 'vitest';
 
@@ -35,7 +38,7 @@ describe('genSuccessionNarr party-pair dedup', () => {
       govFaction: 'Corrupt Council',
       topFaction: 'Corrupt Council',
     });
-    const line = findLine(narratives, 'every resource decision is a political one');
+    const line = findLine(narratives, 'who goes without');
     expect(line).toBeTruthy();
     // The single-party phrasing is what the dedup produces INSTEAD of the doubled name,
     // so it is the anchor: a template that stopped rendering this sentence reds here
@@ -43,10 +46,10 @@ describe('genSuccessionNarr party-pair dedup', () => {
     expectAbsentWithAnchor(
       line,
       'Corrupt Council and Corrupt Council',
-      'Corrupt Council decides who bears the cost',
+      'Corrupt Council decides who goes without',
       'poor-settlement sentence collapses to one party',
     );
-    expect(line).toContain('Corrupt Council decides who bears the cost');
+    expect(line).toContain('Corrupt Council decides who goes without');
   });
 
   test('poor-settlement sentence keeps the two-party phrasing when parties differ', () => {
@@ -56,8 +59,8 @@ describe('genSuccessionNarr party-pair dedup', () => {
       govFaction: 'Corrupt Council',
       topFaction: 'Merchant Houses',
     });
-    const line = findLine(narratives, 'every resource decision is a political one');
-    expect(line).toContain('Corrupt Council and Merchant Houses disagree about who bears the cost');
+    const line = findLine(narratives, 'who goes without');
+    expect(line).toContain('Corrupt Council and Merchant Houses quarrel over who goes without');
   });
 
   test('dedup compares resolved names case-insensitively', () => {
@@ -67,10 +70,10 @@ describe('genSuccessionNarr party-pair dedup', () => {
       govFaction: 'Corrupt Council',
       topFaction: 'corrupt council',
     });
-    const line = findLine(narratives, 'every resource decision is a political one');
+    const line = findLine(narratives, 'who goes without');
     // The case-insensitive dedup keeps the govFaction spelling and collapses to the
     // single-party phrasing; asserting that first proves the sentence rendered at all.
-    expect(line).toContain('Corrupt Council decides who bears the cost');
+    expect(line).toContain('Corrupt Council decides who goes without');
     // anchored: the single-party phrasing assertion above proves `line` is live prose
     expect(line).not.toMatch(/corrupt council and corrupt council/i);
   });
@@ -82,14 +85,14 @@ describe('genSuccessionNarr party-pair dedup', () => {
       govFaction: null,
       topFaction: 'the council',
     });
-    const line = findLine(narratives, 'every resource decision is a political one');
+    const line = findLine(narratives, 'who goes without');
     expectAbsentWithAnchor(
       line,
       'the council and the council',
-      'the council decides who bears the cost',
+      'the council decides who goes without',
       'dedup after fallback resolution collapses to one party',
     );
-    expect(line).toContain('the council decides who bears the cost');
+    expect(line).toContain('the council decides who goes without');
   });
 
   test('contested-stability sentence collapses to a single party on collision', () => {
@@ -99,15 +102,15 @@ describe('genSuccessionNarr party-pair dedup', () => {
       govFaction: 'Corrupt Council',
       topFaction: 'Corrupt Council',
     });
-    const line = findLine(narratives, 'looks stable from the outside');
+    const line = findLine(narratives, 'than it looks from outside');
     expect(line).toBeTruthy();
     expectAbsentWithAnchor(
       line,
       'Corrupt Council and Corrupt Council',
-      "Corrupt Council's hold on that stability",
+      "Corrupt Council's hold on",
       'contested-stability sentence collapses to one party',
     );
-    expect(line).toContain("Corrupt Council's hold on that stability");
+    expect(line).toContain("Corrupt Council's hold on");
   });
 
   test('economic-disparity sentence collapses to a single party on collision', () => {
@@ -117,15 +120,15 @@ describe('genSuccessionNarr party-pair dedup', () => {
       govFaction: 'Merchant Houses',
       topFaction: 'Merchant Houses',
     });
-    const line = findLine(narratives, 'wealth gap');
+    const line = findLine(narratives, 'live different lives now');
     expect(line).toBeTruthy();
     expectAbsentWithAnchor(
       line,
-      'Merchant Houses controls the surplus and Merchant Houses',
-      'controls the surplus and will not redistribute it',
+      'Merchant Houses holds the surplus, and Merchant Houses',
+      'holds the surplus and will not share it',
       'economic-disparity sentence collapses to one party',
     );
-    expect(line).toContain('controls the surplus and will not redistribute it');
+    expect(line).toContain('holds the surplus and will not share it');
   });
 
   test('resource-scarcity sentence collapses to a single party on collision', () => {

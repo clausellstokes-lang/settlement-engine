@@ -285,7 +285,7 @@ export function houseBacksOf(settlement) {
  * @param {SupportInstitution[]} institutions
  * @returns {string | null}
  */
-function seatHouseName(institutions) {
+export function seatHouseName(institutions) {
   let government = null;
   let hall = null;
   for (const inst of institutions) {
@@ -299,6 +299,15 @@ function seatHouseName(institutions) {
   }
   return government ? government.name : hall;
 }
+
+/**
+ * THE KINDS A RULER CLAIMS (COHERENCE-POWERS, rule A; the chair's ruling of 2026-11-11 on the owner's
+ * word "they come from an institution, and are elevated yet still tied to an institution"): a ruler
+ * of one of these kinds is that kind's first claimant in the deal below, beside any power of its kind.
+ * A criminal ruler is not (the veil: its houses are hidden). The raw landing (`houseBacksOf`) is
+ * unchanged: a ruler still takes its own kind's share whole only where no other power of it is seated.
+ */
+export const RULER_KINDS = /** @type {readonly string[]} */ (Object.freeze([A.RELIGIOUS, A.MILITARY, A.MERCHANT, A.ARCANE, A.NOBLE, A.CRAFT]));
 
 /**
  * THE SNAKE DEAL FOR A DOUBLED NICHE (the people car, PEOPLE-1 CAST, 2026-11-07; the chair's
@@ -330,6 +339,7 @@ function seatHouseName(institutions) {
  * @param {Map<string, HouseBack[]>} byHouse the map `houseBacksOf` built for this settlement
  * @returns {Map<string, HouseBack[]>}
  */
+
 export function dealDoubledNiches(settlement, byHouse) {
   const factions = Array.isArray(settlement?.powerStructure?.factions) ? settlement.powerStructure.factions : [];
   const institutions = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
@@ -340,11 +350,15 @@ export function dealDoubledNiches(settlement, byHouse) {
   factions.forEach((f, at) => {
     const name = nameOf(f);
     if (!name) return;
-    // the ruler claims the government archetype (its share lands on the seat by rule), nothing else
-    const arch = name === ruler ? A.GOVERNMENT : backingArchetypeOf(f);
-    const list = claimantsByArch.get(arch) || [];
-    if (!list.some((c) => c.name === name)) list.push({ name, power: name === ruler ? Infinity : (Number(f.power) || 0), at });
-    claimantsByArch.set(arch, list);
+    // the ruler claims the government archetype (its share lands on the seat by rule) and its OWN KIND
+    // (COHERENCE-POWERS, rule A), first in both; a criminal ruler claims no kind (the veil)
+    const own = backingArchetypeOf(f);
+    const archs = name === ruler ? [A.GOVERNMENT, ...(RULER_KINDS.includes(own) ? [own] : [])] : [own];
+    for (const arch of archs) {
+      const list = claimantsByArch.get(arch) || [];
+      if (!list.some((c) => c.name === name)) list.push({ name, power: name === ruler ? Infinity : (Number(f.power) || 0), at });
+      claimantsByArch.set(arch, list);
+    }
   });
   const seatHouse = seatHouseName(institutions);
   /** @type {Map<string, HouseBack[]>} */
@@ -352,8 +366,11 @@ export function dealDoubledNiches(settlement, byHouse) {
   for (const [arch, claimants] of claimantsByArch) {
     if (claimants.length < 2) continue;
     claimants.sort((x, y) => (y.power - x.power) || (x.at - y.at));
-    const leader = claimants[0].name;
+    // the claimant the arithmetic above landed the archetype on: the ruler for the government; for
+    // any other archetype its strongest non-ruling power (powerIndex), even where the ruler deals first
+    const leader = arch === A.GOVERNMENT ? claimants[0].name : (claimants.find((c) => c.name !== ruler) || claimants[0]).name;
     // the houses whose largest share is this archetype and whose landing sits on the leader
+    /** @type {Array<{ key: string, weight: number, at: number, list: HouseBack[], landing: HouseBack }>} */
     const dealt = [];
     institutions.forEach((inst, at) => {
       const key = String(inst?.name || '');
@@ -364,13 +381,20 @@ export function dealDoubledNiches(settlement, byHouse) {
       const list = out.get(key);
       const landing = list?.find((b) => b.faction === leader && b.basis === 'aligned');
       if (!landing) return;
-      dealt.push({ key, weight: row.weight, at, list, landing });
+      // `landing` was found IN `list`, so `list` is present here (the guard above).
+      dealt.push({ key, weight: row.weight, at, list: /** @type {HouseBack[]} */ (list), landing });
     });
     dealt.sort((x, y) => (y.weight - x.weight) || (x.at - y.at));
     dealt.forEach((house, i) => {
       const to = claimants[i % claimants.length].name;
       if (to === leader) return;
-      out.set(house.key, house.list.map((b) => (b === house.landing ? { ...b, faction: to } : b)));
+      // a house the ruler already holds a share of (the seat's government share beside the kind's) merges
+      // the dealt share into that one landing, the larger keeping its phrase, as `houseBacksOf` merges
+      const held = house.list.find((b) => b !== house.landing && b.faction === to);
+      out.set(house.key, held
+        ? house.list.filter((b) => b !== house.landing).map((b) => (b === held ? { ...(held.share >= house.landing.share ? b : { ...house.landing, faction: to }), share: b.share + house.landing.share } : b))
+          .sort((x, y) => y.share - x.share)
+        : house.list.map((b) => (b === house.landing ? { ...b, faction: to } : b)));
     });
   }
   return out;

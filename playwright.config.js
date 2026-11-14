@@ -10,7 +10,8 @@
  *   - flow-f-single-dossier.spec.js        (single-dossier recovery, CONFIGURED mode)
  *   - regional-causality.spec.js           (campaign UI, LOCAL mode)
  *
- * TWO dev servers boot for the suite:
+ * THREE dev servers boot for the suite (the third, :5175, is the FLAGGED client —
+ * VITE_ENGINE_REMOTE=true — for e2e/engine-remote-flagged.spec.js; see FLAGGED_URL below):
  *   - :5173 — the default LOCAL-data server (VITE_E2E_LOCAL_DATA=true from
  *     .env.e2e). Here `isConfigured` is false, so auth uses the
  *     `settlement_mock_auth` localStorage seam and saves round-trip through
@@ -39,6 +40,15 @@ const BASE_URL = process.env.E2E_BASE_URL || `http://localhost:${PORT}`;
 // Second server for the payment flows — Supabase-configured, fully route-stubbed.
 const CONFIGURED_PORT = 5174;
 export const CONFIGURED_URL = `http://localhost:${CONFIGURED_PORT}`;
+
+// Third server: THE FLAGGED CLIENT (remote-path R5). VITE_ENGINE_REMOTE=true, so the
+// vite.config.js plugin `engineAbsentWhenRemote` resolves the three local engine modules to
+// `localEngine.absent.js` and every generation goes to the engine service, at a SAME-ORIGIN URL
+// (no CORS) that e2e/engine-remote-flagged.spec.js answers with the REAL engine-generate
+// handler (e2e/support/engineFunction.js). Local data and mock auth as on :5173.
+const FLAGGED_PORT = 5175;
+export const FLAGGED_URL = `http://localhost:${FLAGGED_PORT}`;
+export const FLAGGED_ENGINE_URL = `${FLAGGED_URL}/functions/v1/engine-generate`;
 
 export default defineConfig({
   testDir: './e2e',
@@ -134,6 +144,19 @@ export default defineConfig({
         VITE_SUPABASE_URL: 'https://mock.supabase.co',
         VITE_SUPABASE_ANON_KEY: 'mock-anon-key-for-e2e',
         VITE_E2E_LOCAL_DATA: 'false',
+      },
+    },
+    {
+      // The FLAGGED client (VITE_ENGINE_REMOTE=true) for e2e/engine-remote-flagged.spec.js.
+      command: `npm run dev -- --mode e2e --port ${FLAGGED_PORT} --strictPort`,
+      url: FLAGGED_URL,
+      timeout: 60_000,
+      reuseExistingServer: !process.env.CI,
+      stdout: 'ignore',
+      stderr: 'pipe',
+      env: {
+        VITE_ENGINE_REMOTE: 'true',
+        VITE_ENGINE_GENERATE_URL: FLAGGED_ENGINE_URL,
       },
     },
   ],

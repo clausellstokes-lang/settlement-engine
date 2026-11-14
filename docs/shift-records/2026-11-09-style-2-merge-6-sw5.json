@@ -1,0 +1,22 @@
+{
+  "_doc": "RECORD 6 OF THE STYLE WAVE'S MERGE (STYLE-2-MERGE), ODQ §934.105 (the cloud chair signs by the owner's delegation of 2026-11-06, vetoable; a successor chair does not inherit this signature). THE LAW OF THE CHAIN (BRIEF-MERGE-CAR §0; BRIEF-STYLE-2-WAVE §3): the integration branch's first-parent line is the golden chain; a lane's unsigned cause commits are components signed at its merge point. THE CAUSE, ONE: THE SW-5 CRISIS-VANTAGES MERGE OVER THE INTEGRATION BRANCH — lane/style-2-crisis-vantages-2026-11-09 at 794846ba5 merged at a7770ecfe (STYLE-2-MERGE point 6), npcGenerator.js composed against car 4's A9 (its two stress-goal 'rather than' lines land on the pool A9 retired; its wartime notes carried onto STRESS_GOAL_OVERRIDES), the dated roster composed; its lane signed nothing, its two generator causes are the components signed here with the lane's own figures (docs/chair/2026-11-09/STYLE-2-CRISIS-VANTAGES-2026-11-09.md §2): d76dd0608, the stress-institution effects' 8 lines, fence 35; e249e565f, npcGenerator's wartime notes and three 'rather than', gm 194, fence 220; every other commit of the lane 0 on all six surfaces. On the line the chain reads gm 192 (the two retired goal lines no longer reachable) and fence 228 (the two causes' rows overlapping). THE MOVE, MEASURED before the write by scripts/audit/landing-stage.sh measure, stage to stage against the post-state of record 4 and the zero-move point 5 after it (the stage of f6147ff4b, SW-4): the generator golden master 192 of 525 rows (town 24, city 84, metropolis 84) 3bb1c433.. -> b9a9e693..; the espionage fence's driven corpus 228 of 360 rows (thorp 15, hamlet 7, village 38, town 50, city 59, metropolis 59) 70b1e6db.. -> e4fd16d3..; 360/360 distinct; herald 0, witness 0, PDF 0; the prose manifest's movement at this point (0 of 1,050 rows) is signed ONCE at the final tip. Built through the guard with no STOP.",
+  "ownerWords": "I also now give all permissions required now and in the future. I also defer all judgement to you. · I leave all judgement now and in the future to you.",
+  "ownerDate": "2026-11-06",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation of 2026-11-06 to the cloud chair; the style wave's merge STYLE-2-MERGE, 2026-11-09)",
+  "cause": "THE SW-5 CRISIS-VANTAGES MERGE OVER THE INTEGRATION BRANCH — lane/style-2-crisis-vantages-2026-11-09 at 794846ba5 merged at a7770ecfe (STYLE-2-MERGE point 6), npcGenerator.js composed against car 4's A9 (its two stress-goal 'rather than' lines land on the pool A9 retired; its wartime notes carried onto STRESS_GOAL_OVERRIDES), the dated roster composed; its lane signed nothing, its two generator causes are the components signed here with the lane's own figures (docs/chair/2026-11-09/STYLE-2-CRISIS-VANTAGES-2026-11-09.md §2): d76dd0608, the stress-institution effects' 8 lines, fence 35; e249e565f, npcGenerator's wartime notes and three 'rather than', gm 194, fence 220; every other commit of the lane 0 on all six surfaces. On the line the chain reads gm 192 (the two retired goal lines no longer reachable) and fence 228 (the two causes' rows overlapping)",
+  "seat": "STYLE-2-MERGE (Opus 5.5) under the cloud chair, session session_01FbPLbejcfwX5nii12VM673, from the stage at a7770ecfe",
+  "surfaces": [
+    {
+      "surface": "generator-golden-master",
+      "action": "re-record",
+      "predictedRows": 525,
+      "proofForm": "settlement-hash"
+    },
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant"
+    }
+  ]
+}

@@ -29,6 +29,7 @@
 import { clamp01 } from '../region/contestMath.js';
 import { stablePart } from './worldState.js';
 import { formatCount } from '../formatNumber.js';
+import { numberWord } from '../display/numberWords.js';
 import {
   getRelationshipSettlements,
   relationshipKeyFromEdge,
@@ -488,9 +489,12 @@ export function applyHomeWarCosts({
       archetype: 'war_drain',
       targetSaveId: fromId,
       severity: drainSeverity,
-      headline: `${name}'s war chest bleeds`,
-      summary: `Sustaining the campaign against ${targetName} drains the home economy.`,
-      reasons: [`${frontCount} active war front${frontCount === 1 ? '' : 's'} from ${name}${ageDrain > 0 ? `, ${deploymentAge} ticks deployed` : ''}.`],
+      headline: `${name}'s war is emptying its treasury`,
+      summary: `${name} is paying for its campaign against ${targetName}, and the bill falls on the people at home.`,
+      // A1·84 / D·1 (SW-11): the fronts and the weeks in words; a tick is the realm's week.
+      reasons: [ageDrain > 0
+        ? `${name} has had its army in the field for ${numberWord(deploymentAge)} week${deploymentAge === 1 ? '' : 's'}, on ${numberWord(frontCount)} front${frontCount === 1 ? '' : 's'}.`
+        : `${name} has its army in the field on ${numberWord(frontCount)} front${frontCount === 1 ? '' : 's'}.`],
       tick,
       sourceEventTargetId: rec.targetId,
       causes: [{ source: fromId, effect: 'war_drain', reason: `${name} is besieging ${targetName}.` }],
@@ -521,12 +525,12 @@ export function applyHomeWarCosts({
         archetype: 'reinforcement_cost',
         targetSaveId: fromId,
         severity: flow.drainSeverity,
-        headline: `${name} bleeds to keep its army fed`,
+        headline: `${name} keeps feeding its army at the front`,
         summary: `${name} keeps sending men, coin, and grain to the front against ${targetName}, and the home pays for every levy.`,
         reasons: flow.reasons,
         tick,
         sourceEventTargetId: rec.targetId,
-        causes: [{ source: fromId, effect: 'reinforcement_cost', reason: `${name} is reinforcing its army besieging ${targetName} (${deploymentAge} ticks deployed).` }],
+        causes: [{ source: fromId, effect: 'reinforcement_cost', reason: `${name} is sending fresh men to its army outside ${targetName}.` }],
         recordMode: recurringWarConditionRecordMode({ snapshot, archetype: 'reinforcement_cost', targetSaveId: fromId, severity: flow.drainSeverity, sourceEventTargetId: rec.targetId }),
       }));
     }
@@ -544,7 +548,7 @@ export function applyHomeWarCosts({
         severity: nextScar,
         headline: `${name} grows war-weary`,
         summary: `The long campaign against ${targetName} has left ${name} a lasting wound. The treasury thins and the public tires of war.`,
-        reasons: ['The weariness of this war has set into the place and will not simply lift; it is a wound now, not a mood.'],
+        reasons: [`The war against ${targetName} has gone on so long that ${name} will feel it long after the peace.`],
         tick,
         // Keyed by the HOME (like the decay path below), NOT the war target:
         // deriveActiveCondition hashes the condition id from sourceEventTargetId, so a

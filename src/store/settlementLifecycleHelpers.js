@@ -186,23 +186,22 @@ export function rippleEventThroughWorld({ afterState, campaign, event, beforeEnv
  * the DM's to add, and generation builds churches, not a pantheon. Only saves
  * written before that batch still carry a latent pantheon (config.latentPantheon);
  * tier never touches generation. This is where the key turns for those saves:
- * a PREMIUM (or elevated) account activates on generation-complete / save-open,
- * copying the latent patron + cults into the LIVE embeds via the pure, rng-free,
- * idempotent activateLatentPantheon (a no-op when no latent record exists). FREE / ANON never activate — the latent
- * record stays private (stripped from every public projection, publicSafe.js /
- * migration 128) and the engine stays the certified inert ground state (the
- * neutrality theorem). Defensive: any auth-read failure ⇒ no activation.
+ * EVERY owner's save activates on generation-complete / save-open (the owner's tier
+ * law, 2026-11-09; the chair's ruling V5: premade gods are engine content, not custom
+ * content, law (3)), copying the latent patron + cults into the LIVE embeds via the
+ * pure, rng-free, idempotent activateLatentPantheon (a no-op when no latent record
+ * exists — every save written since T4). The latent record stays stripped from every
+ * public projection (publicSafe.js / migration 128). Defensive: any failure ⇒ the
+ * settlement unchanged. The name and the `get` parameter are kept so the callers
+ * stay byte-identical; nothing is read from the store.
  * @template T
  * @param {T} settlement
- * @param {() => any} get  the store getter (auth tier + role live here)
+ * @param {() => any} [_get]  the store getter, unread since V5 (kept for the callers)
  * @returns {T}
  */
-export function activateFaithIfEntitled(settlement, get) {
+export function activateFaithIfEntitled(settlement, _get) {
   try {
-    const s = typeof get === 'function' ? get() : null;
-    const entitled = s?.auth?.tier === 'premium'
-      || (typeof s?.isElevated === 'function' && s.isElevated());
-    return entitled ? activateLatentPantheon(settlement) : settlement;
+    return activateLatentPantheon(settlement);
   } catch {
     return settlement;
   }

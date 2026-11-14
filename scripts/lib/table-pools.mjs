@@ -39,6 +39,7 @@ export const TABLE_POOLS = Object.freeze([
   { id: 'npcData.MANNERISMS', module: 'src/data/npcData.js', name: 'MANNERISMS', drawKind: 'R', rulings: ['colour'], drawSite: 'npcGenerator.js:323 → hookVariety.js:93 drawUnique' },
   { id: 'npcData.NPC_AGE_DATA', module: 'src/data/npcData.js', name: 'NPC_AGE_DATA', drawKind: 'R', rulings: ['colour'], drawSite: 'npcGenerator.js:353 pickFromArray ×2' },
   { id: 'npcData.NPC_BUILDS', module: 'src/data/npcData.js', name: 'NPC_BUILDS', drawKind: 'R', rulings: ['colour'], drawSite: 'npcGenerator.js:354 pickFromArray' },
+  { id: 'npcData.NPC_DEALING_BY_TRAIT', module: 'src/data/npcData.js', name: 'NPC_DEALING_BY_TRAIT', drawKind: 'T', drawSite: 'npcGenerator.js:552 dealingLineFor(disposition, personality) → NPC_DEALING_BY_TRAIT[disposition][DEALING_TRAIT_FAMILY[trait]] (draw-free; SW-7 B10(b), POWER-SIDE §7)' },
   { id: 'npcData.NPC_CRIMINAL_SECRETS', module: 'src/data/npcData.js', name: 'NPC_CRIMINAL_SECRETS', drawKind: 'R', drawSite: 'factionLeaderSecret.js:89 weighted type roll + :110 pickFromArray(eligiblePool)' },
   { id: 'npcData.NPC_FACTION_GOALS', module: 'src/data/npcData.js', name: 'NPC_FACTION_GOALS', drawKind: 'R', drawSite: 'npcGenerator.js:613 pickFromArray (keyed by role; reached only if the stress-goal roll at :608 fails)' },
   { id: 'npcData.NPC_FACTION_LOYALTY', module: 'src/data/npcData.js', name: 'NPC_FACTION_LOYALTY', drawKind: 'R', drawSite: 'npcGenerator.js:659/683/687 drawLoyalty → drawUnique (NPC plot-hook titles, keyed by category)' },
@@ -97,6 +98,9 @@ export const DECLARATION_CHANNELS = Object.freeze([
   { module: 'src/domain/summary/settlementQuickGuide.js', name: 'QUICK_GUIDE_SIBLINGS', kind: 'siblings' },
   { module: 'src/domain/threatProfile.js', name: 'THREAT_TEXT_SIBLINGS', kind: 'siblings' },
   { module: 'src/generators/economy/foodBalance.js', name: 'OUTLOOK_HOOK_SIBLINGS', kind: 'siblings' },
+  { module: 'src/generators/economy/incomeLineSiblings.js', name: 'INCOME_LINE_SIBLINGS', kind: 'siblings' }, // COHERENCE-AGREE-3: the income lines on the town's own land
+  { module: 'src/generators/economy/prosperity.js', name: 'PROSPERITY_LINE_SIBLINGS', kind: 'siblings' }, // COHERENCE-AGREE: the market lines' twins
+  { module: 'src/generators/foodLand.js', name: 'FOOD_RECORD_LINE_SIBLINGS', kind: 'siblings' }, // COHERENCE-AGREE-3: the diversity line's own-plots twin
   { module: 'src/generators/narrativeText.js', name: 'POLITICAL_FLAVOR_SIBLINGS', kind: 'siblings' },
   { module: 'src/generators/npcGenerator.js', name: 'NPC_GOAL_SIBLINGS', kind: 'siblings' },
   { module: 'src/generators/safetyProfile.js', name: 'SAFETY_LINE_SIBLINGS', kind: 'siblings' },

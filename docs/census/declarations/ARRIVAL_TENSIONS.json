@@ -132,7 +132,7 @@
         },
         {
           "lineId": "ARRIVAL_TENSIONS.unsafe[1]",
-          "text": "People keep their purses close and their eyes on strangers.",
+          "text": "People keep their purses close and watch anyone they do not know.",
           "needs": [],
           "excludes": [],
           "crisis": null,
@@ -150,7 +150,7 @@
         },
         {
           "lineId": "ARRIVAL_TENSIONS.unsafe[3]",
-          "text": "People walk quickly and do not stop to talk to strangers.",
+          "text": "People walk quickly and do not stop to talk to anyone they do not know.",
           "needs": [],
           "excludes": [],
           "crisis": null,
@@ -183,7 +183,7 @@
         },
         {
           "lineId": "ARRIVAL_TENSIONS.poor[1]",
-          "text": "People mend what they have rather than buy anything new.",
+          "text": "People mend what they have, and nobody seems to buy anything new.",
           "needs": [],
           "excludes": [],
           "crisis": null,

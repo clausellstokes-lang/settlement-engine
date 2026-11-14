@@ -5,6 +5,7 @@ import { cellFor, birth, ensureLaws, sha } from './soak-review/corpus.mjs';
 await ensureLaws();
 const { generateSettlementPipeline } = await import('../../src/generators/generateSettlementPipeline.js');
 const { isCriminalInstitution } = await import('../../src/domain/corruption.js');
+const { powersByRankOf } = await import('../../src/domain/people/membership.js');
 const [from, to, outPath] = [Number(process.argv[2]), Number(process.argv[3]), process.argv[4]];
 const fs = await import('node:fs');
 const ORG = /criminal network|thieves['’] guild|crime boss|kingpin/i;
@@ -25,10 +26,13 @@ for (let i = from; i < to; i++) {
   const relOff = rels.filter(r => (r.pair || []).some(p => !finNames.has(p)));
   const relOffCrim = relOff.filter(r => (r.pair || []).some(p => trimmed.find(t => t.n === p && t.c === 'criminal')));
   const npcs = s.npcs || [];
-  const affOff = npcs.filter(n => n.factionAffiliation && trimmed.some(t => t.n === n.factionAffiliation)).length;
-  const secAffTrim = npcs.filter(n => n.secondaryAffiliation && trimmed.some(t => t.n === n.secondaryAffiliation)).length;
-  const secAffCrimNoSignal = signal ? 0 : npcs.filter(n => ORG.test(String(n.secondaryAffiliation || ''))).length;
-  const goalNoSignal = signal ? 0 : npcs.filter(n => ORG.test(JSON.stringify([n.goal, n.goals, n.factionGoal]))).length;
+  // FIX-PUBLIC-VEIL step 3 (2026-11-07): the people car retired `factionAffiliation`, `secondaryAffiliation` and
+  // `factionGoal` (M-2); a card's first and second powers are its best-ranked memberships (powersByRankOf), and
+  // the goal list keeps the card's own goals. The figures read the same facts the retired fields carried.
+  const affOff = npcs.filter(n => { const p = powersByRankOf(n)[0]?.power; return p && trimmed.some(t => t.n === p); }).length;
+  const secAffTrim = npcs.filter(n => { const p = powersByRankOf(n)[1]?.power; return p && trimmed.some(t => t.n === p); }).length;
+  const secAffCrimNoSignal = signal ? 0 : npcs.filter(n => ORG.test(String(powersByRankOf(n)[1]?.power || ''))).length;
+  const goalNoSignal = signal ? 0 : npcs.filter(n => ORG.test(JSON.stringify([n.goal, n.goals]))).length;
   const secretNoSignal = signal ? 0 : npcs.filter(n => ORG.test(JSON.stringify(n.secret ?? ''))).length;
   const histNoSignal = signal ? 0 : (s.history?.currentTensions || []).filter(t => ORG.test(JSON.stringify(t))).length;
   const crimes = s.economicState?.safetyProfile?.crimeTypes || [];

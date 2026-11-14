@@ -58,8 +58,8 @@ describe('2. coup verdict headline', () => {
 
 describe('3. politicsRead projectBloc presence', () => {
   const ws = (/** @type {string[]} */ members) => ({ politicsLedgers: { s1: { blocs: [{ id: 'b1', members, end: 'seats', strain: 0, sinceTick: 0 }] } } });
-  it('a memberless open bloc opens on "A faction"; a held member is unchanged', () => {
-    expect(settlementBlocs({ worldState: ws([]), settlementId: 's1' })?.blocs[0].presence).toBe('A faction stand together as a bloc, for a share of the seats.');
+  it('a memberless open bloc opens on "A power" (SW-5: the retired word, STYLE-RULINGS-2 A8); a held member is unchanged', () => {
+    expect(settlementBlocs({ worldState: ws([]), settlementId: 's1' })?.blocs[0].presence).toBe('A power stand together as a bloc, for a share of the seats.');
     expect(settlementBlocs({ worldState: ws(['the Guild']), settlementId: 's1' })?.blocs[0].presence).toBe('the Guild stand together as a bloc, for a share of the seats.');
   });
 });
@@ -102,7 +102,9 @@ describe('6. moralInstitutionPressure openers', () => {
   it('a nameless prescriber leads the abolition as "A reaching faith"', () => {
     const fired = drive(evaluateMoralInstitutionPressure, settlement({ alignmentAxis: 'good', lawAxis: 'lawful' }, [{ name: 'Slave market', status: 'active' }]), 40);
     expect(fired?.reasons[0]).toMatch(/^A reaching faith leads the abolition: /);
-    expect(fired?.summary).toMatch(/^Under a reaching faith, /);
+    // Re-keyed by identity (STYLE-2 C2, SW-12 third seat, A2·179): the summary is a four-vantage
+    // pool now; the nameless prescriber's seeded line opens on the sentence-cased fallback.
+    expect(fired?.summary).toBe('The faithful want the Slave market in s1 closed: it is thought too cruel.');
   });
   it('a nameless patron raises the founding as "The patron"', () => {
     const fired = drive(evaluateMoralInstitutionFounding, settlement({ alignmentAxis: 'good', lawAxis: 'lawful' }, []), 400);
@@ -192,10 +194,10 @@ describe('14. warRemembrance territory and cost lines', () => {
     } } },
     nameFor,
   })[0];
-  it('a nameless occupier or place opens on "A court the record no longer names"', () => {
+  it('a nameless occupier or place opens on "A court whose name has been lost"', () => {
     const row = rows(() => '');
-    expect(row.territory[0]).toBe('A court the record no longer names burned a court the record no longer names.');
-    expect(row.territory[1]).toBe('A court the record no longer names was held.');
+    expect(row.territory[0]).toBe('A court whose name has been lost burned a court whose name has been lost.');
+    expect(row.territory[1]).toBe('A court whose name has been lost was held.');
   });
   it('a held name is unchanged', () => {
     const row = rows((id) => ({ o: 'Marchmont', p: 'Thornwall', q: 'Fenby' }[id] || id));

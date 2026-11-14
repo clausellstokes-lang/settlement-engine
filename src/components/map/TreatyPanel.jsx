@@ -15,7 +15,6 @@
 import { useMemo } from 'react';
 import { ScrollText, HeartHandshake, AlertTriangle } from 'lucide-react';
 
-import { useStore } from '../../store/index.js';
 import { renderAllTreaties, treatyTrueStateChip } from '../../domain/display/treatyDocument.js';
 import { Section } from './WorldPulsePrimitives.jsx';
 import WarCausalBrief from './WarCausalBrief.jsx';
@@ -168,12 +167,10 @@ function TreatyCard({ doc, nameById, worldState, includeGroundTruth }) {
 export default function TreatyPanel({ campaign, nameById }) {
   const worldState = campaign?.worldState || null;
   const treaties = useMemo(() => renderAllTreaties(worldState), [worldState]);
-  const tier = useStore(s => s.auth?.tier);
-  const elevated = useStore(s => (typeof s.isElevated === 'function' ? s.isElevated() : false));
-  // The includeGroundTruth convention (BeliefDivergenceBand's, verbatim): a quiet default
-  // is DM knowledge. Premium / elevated only; every other viewer gets the honest public
-  // reading of the same treaty, which is that the term is kept. Fail-closed.
-  const includeGroundTruth = tier === 'premium' || elevated;
+  // V1-map (the owner's tier law, 2026-11-09): the panel mounts only inside the world map's
+  // campaign Herald, whose outer gate carries law (6); the inner tier term mirrored it and is
+  // deleted. The data gate is the read's own (beliefs, ledgers) — no behaviour change.
+  const includeGroundTruth = true;
 
   if (treaties.length === 0) {
     return (

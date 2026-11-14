@@ -61,6 +61,25 @@ function expectLockedWithPill(button) {
   expect(button.querySelector('[data-launch-pill]')?.textContent).toBe(PILL);
 }
 
+/**
+ * THE OWNER (2026-11-09): "Oh in the button buy this dossier, remove the for 2.99 and available
+ * at launch. The available at launch is in the pill for the button." The buy button's own words
+ * are the bare label: no price and no "Available at launch" outside the pill. The pill is in the
+ * button exactly once. The price stays in the unlock dialog title and on the ladder's one-time
+ * rung, where a buyer sees it before paying.
+ */
+function expectLabelOnlyThenPill(button, label) {
+  const pills = button.querySelectorAll('[data-launch-pill]');
+  expect(pills.length).toBe(1);
+  const clone = button.cloneNode(true);
+  clone.querySelectorAll('[data-launch-pill]').forEach((n) => n.remove());
+  const own = clone.textContent.trim();
+  // The button's own words are EXACTLY the label: no "$", no "Available at launch" outside the pill.
+  expect(own).toBe(label);
+  // The accessible name says the reason once: the label, then the pill's words.
+  expect(button.textContent.match(/Available at launch/g)).toHaveLength(1);
+}
+
 /** A non-purchase control stays live and wears no pill. */
 function expectLiveWithoutPill(button) {
   expect(button.tagName).toBe('BUTTON');
@@ -94,10 +113,11 @@ describe('launch lock (dossier): BuyThisDossier', () => {
   it('the anonymous "Buy this dossier" button is disabled, wears the pill, and a click opens no ladder', () => {
     storeRef.current = freeOwnerStore({ auth: { tier: 'anon' }, canSave: () => false });
     render(<BuyThisDossier settlement={{ name: 'Testburg', tier: 'anon' }} saveId={null} />);
-    const buy = screen.getByRole('button', { name: /buy this dossier for \$2\.99/i });
+    const buy = screen.getByRole('button', { name: /^buy this dossier/i });
     expectLockedWithPill(buy);
     // The label text comes first, so the button still reads as the buy action.
-    expect(buy.textContent.startsWith('Buy this dossier for $2.99')).toBe(true);
+    expect(buy.textContent.startsWith('Buy this dossier')).toBe(true);
+    expectLabelOnlyThenPill(buy, 'Buy this dossier');
     fireEvent.click(buy);
     expect(screen.queryByRole('dialog')).toBeNull();
   });
@@ -105,8 +125,11 @@ describe('launch lock (dossier): BuyThisDossier', () => {
   it('the signed-in "Unlock all exports" button is disabled, wears the pill, and a click opens no popup', () => {
     storeRef.current = freeOwnerStore();
     render(<BuyThisDossier settlement={{ name: 'Testburg', tier: 'wanderer' }} saveId="save-1" />);
-    const unlock = screen.getByRole('button', { name: /unlock all exports for this settlement · \$2\.99/i });
+    const unlock = screen.getByRole('button', { name: /^unlock all exports for this settlement/i });
     expectLockedWithPill(unlock);
+    expectLabelOnlyThenPill(unlock, 'Unlock all exports for this settlement');
+    // The hover title is the label too: no price, no second "Available at launch".
+    expect(unlock.getAttribute('title')).toBe('Unlock all exports for this settlement');
     fireEvent.click(unlock);
     expect(screen.queryByText(/A one-time purchase unlocks every export/i)).toBeNull();
     expect(screen.queryByRole('dialog')).toBeNull();
@@ -167,6 +190,11 @@ describe('launch lock (dossier): ExportUnlockDialog', () => {
     fireEvent.click(notNow);
     expect(onClose).toHaveBeenCalledTimes(1);
   });
+
+  it('the dialog title keeps the price: the buyer sees it before paying (the button no longer does)', () => {
+    render(<ExportUnlockDialog open saveId="save-1" onClose={vi.fn()} />);
+    expect(screen.getByText('Unlock all exports for this settlement · $2.99')).toBeTruthy();
+  });
 });
 
 describe('launch lock (dossier): DossierSessionNotices', () => {
@@ -203,7 +231,15 @@ describe('launch lock (dossier): NextActionRail', () => {
     expect(document.getElementById(exportRung.getAttribute('aria-describedby')).textContent).toBe(PILL);
     expect(document.getElementById(edit.getAttribute('aria-describedby')).textContent)
       .toBe(`Manual editing is a Cartographer feature. Click to upgrade.${PILL}`);
-    expect(exportRung.getAttribute('title')).toBe(PILL);
+    // THE OWNER (2026-11-09): the pill alone says "Available at launch". The row's tooltip is its
+    // label, not the words a second time, so the reason is said once (name + title + description).
+    for (const [rung, label] of [[edit, 'Edit (Cartographer)'], [exportRung, 'Export Dossier']]) {
+      expect(rung.getAttribute('title')).toBe(label);
+      const said = [rung.getAttribute('aria-label'), rung.getAttribute('title'),
+        document.getElementById(rung.getAttribute('aria-describedby')).textContent].join(' | ');
+      expect(said.match(/Available at launch/g)).toHaveLength(1);
+      expect(rung.querySelectorAll('[data-launch-pill]')).toHaveLength(1);
+    }
     fireEvent.click(edit);
     fireEvent.click(exportRung);
     expect(handlers.onEdit).toHaveBeenCalledTimes(0);

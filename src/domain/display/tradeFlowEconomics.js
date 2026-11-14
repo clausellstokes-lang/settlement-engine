@@ -28,6 +28,8 @@
 
 import { getSpatialLedger } from '../spatial/distanceRead.js';
 import { throughputBand, flowMagnitudeBand, FLOW_BANDS, TRADE_FLOW_TUNING } from '../spatial/tradeFlow.js';
+import { speakTierNoun } from './stateProse/stateProseKernel.js';
+import { tierNounFor } from './stateProse/weaveBlock.js';
 
 /** @param {unknown} v @param {number} fallback @returns {number} */
 function finiteNumber(v, fallback) {
@@ -90,12 +92,13 @@ const BAND_COPY = Object.freeze({
  * @param {EconomicBaseline | null | undefined} args.economicState  the GENERATION
  *   baseline — read only, NEVER mutated.
  * @param {unknown} args.settlementId
+ * @param {unknown} [args.tier] the settlement's tier; the headline speaks its noun (a thorp is no town)
  * @returns {{ band: 'shortage'|'adequate'|'surplus', label: string,
  *   dependency: 'strained'|'met'|'abundant', inbound: 'quiet'|'trickle'|'steady'|'busy',
  *   outbound: 'quiet'|'trickle'|'steady'|'busy', headline: string,
  *   tradeDependent: boolean } | null}
  */
-export function flowDerivedDependency({ worldState, economicState, settlementId } = /** @type {never} */ ({})) {
+export function flowDerivedDependency({ worldState, economicState, settlementId, tier } = /** @type {never} */ ({})) {
   if (settlementId == null) return null;
   const ledger = /** @type {Record<string, { in?: unknown, out?: unknown }> | undefined} */ (
     getSpatialLedger(worldState, 'tradeFlow'));
@@ -118,7 +121,8 @@ export function flowDerivedDependency({ worldState, economicState, settlementId 
     dependency: /** @type {'strained'|'met'|'abundant'} */ (copy.dependency),
     inbound: flowMagnitudeBand(inflow),
     outbound: flowMagnitudeBand(outflow),
-    headline: copy.headline,
+    // THE TIER NOUN (SW-9, the audit's A11 row): the shortage line said "the town" in a thorp.
+    headline: speakTierNoun(copy.headline, tierNounFor(tier)),
     tradeDependent,
   };
 }

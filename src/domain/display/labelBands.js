@@ -77,7 +77,7 @@ export const SAFETY_BANDS = Object.freeze([
 /**
  * STABILITY — every label `governanceNarrative.js` can return, by its band word.
  * `deriveBaselineStability` supplies the first eight; `applyStressStability`
- * supplies the rest and may append `'; monster threat active'`
+ * supplies the rest and may append `'; monsters on the roads'`
  * (`annotateMonsterThreat`). Three separator conventions, one vocabulary.
  * @type {ReadonlyArray<string>}
  */

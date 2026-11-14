@@ -31,7 +31,7 @@ import {
 import { useStore } from '../../store/index.js';
 import { getAiCost, getTierDisplayName } from '../../config/pricing.js';
 import ActionRail from '../primitives/ActionRail.jsx';
-import AvailableAtLaunchPill, { AVAILABLE_AT_LAUNCH } from '../primitives/AvailableAtLaunchPill.jsx';
+import AvailableAtLaunchPill from '../primitives/AvailableAtLaunchPill.jsx';
 import { ConfirmDialog } from '../primitives/Dialog.jsx';
 import { resolveExportAccess } from '../BuyThisDossier.jsx';
 import { t } from '../../copy/index.js';
@@ -115,8 +115,10 @@ export default function NextActionRail({ settlement, save, handlers, simulated =
 }
 
 /**
- * A locked purchase rung: disabled, titled "Available at launch", and wearing the
- * pill on its hint line. The hint line (not the tag slot) carries the pill because
+ * A locked purchase rung: disabled and wearing the pill on its hint line. The pill is
+ * the ONE place the words "Available at launch" appear (the owner, 2026-11-09: "The
+ * available at launch is in the pill for the button"), so the row carries no
+ * `disabledReason` and its tooltip stays its label. The hint line (not the tag slot) carries the pill because
  * it sits inside the row under the label and is announced through the row's
  * aria-describedby; the tag slot would frame the pill in a second parchment chip.
  */
@@ -124,7 +126,6 @@ function lockForLaunch(item) {
   return {
     ...item,
     disabled: true,
-    disabledReason: AVAILABLE_AT_LAUNCH,
     hint: (
       <>
         {item.hint}

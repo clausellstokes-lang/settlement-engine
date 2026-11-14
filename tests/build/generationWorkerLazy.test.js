@@ -410,7 +410,44 @@ const SENTINEL = 'settlementforge:generation:worker-v1';
 //   car's hook and tie writers, the ported R3 rule, the reader's membership port) · 4c39885fc 0 · the composition cure
 //   b19740ab3 + the display fix 9fd906c23 +212. The sum closes exactly: 1,579,660 + 115,909 + 23,904 + 16,196 + 212 =
 //   1,735,881, the tip's worker bundle. Recorded AT the measured figure; MONOTONE-DOWN from here.
-export const WORKER_BUNDLE_CEILING_BYTES = 1735881;
+// 1,735,881 -> 1,746,551 (2026-11-09, MERGE-WAVE step 4, the ten lanes merged; the chair's standing ruling "trim where no
+// output byte moves, then re-record at the measured figure", under the owner's delegation of 2026-11-06; VETOABLE BY THE
+// OWNER): A RISE OF 10,670 B. No trim that moves no output byte was attempted in this seat. MEASURED by a fresh
+// `npm run build` of a git archive of every first-parent point that touches a build input, read by this file's own arm;
+// the checkout at the final tip reads the same 1,746,551:
+//   the wave's base 7b86cd07a 1,735,881 (equal to the ceiling) · W1 ECO ea0e269a9 +50 · W2 DEF 82a4e2856 -1,495 ·
+//   W3 POW 1a160d599 -2,376 · W4 PEOPLE 66c23bfea -3,500 · W5 HIS e510409b1 -860 · W1-A0b 9c2724ecb 0 ·
+//   W7 HOOKS 501c97412 +13,069 (the hook pools, the receipt, npcData and the title pools) · FIX-FOOD-ISOLATION c6e8a4ad6
+//   +1,151 · EXPORT-KEYS c6c733d23 0 · FIX-PUBLIC-VEIL 7e65c7bec +4,626 (the veil bit stamped at birth, the veiled re-deal)
+//   · 140b8f333, GREEN-BASE ee663bd9f, 59d723a37, FIX-ARROW-SECTIONS 2c76c6177, 5c14aac4a, 642f1796c 0 each ·
+//   the docks read bcf3e7f8a +5. The sum closes exactly: 1,735,881 + 50 - 1,495 - 2,376 - 3,500 - 860 + 13,069 + 1,151
+//   + 4,626 + 5 = 1,746,551, the tip's worker bundle. Recorded AT the measured figure; MONOTONE-DOWN from here.
+// 1,746,551 -> 1,976,655 (2026-11-09, MERGE-TRAIN, the allegiance train's nine merge points; the W0-CLOSE idiom, the chair's
+// ruling of 2026-11-08 20:4x and of 2026-11-09 09:2x — the ceiling re-recorded ONCE at the final tip at the measured figure,
+// every byte attributed by car, NO buy-back and NO lazy seam (car 4 measured its two tables as synchronous reads); VETOABLE BY
+// THE OWNER): A RISE OF 230,104 B. MEASURED by a fresh `npm run build` of a git archive of every merge point's tip, read by
+// this file's own arm; the train's base 2053a809c reads 1,746,551 (the ceiling, exactly):
+//   ALLEGIANCE-CAR1 e5f88930b +21,787 (the tie lines +12,830, allegiance.js +6,390, the v3 migration +1,939, the catalog +903,
+//   the renames +490, archetypes +338, corruptionPass retired -1,835 — car 1's record §8) · CAR2 f51058995 +7,124 (hallCapture.js,
+//   the guild's push, the capture rows) · CAR3 c6ded8e3a +74 · WRITE-TITLES-14 0 · OWNER-WORDS-DOSSIER -4 · FIX-HOOK-OBJECT +40 ·
+//   FIX-BUY-BUTTON 0 · FIX-ARROW-PLAQUE 0 · CAR4 824a8ce2f +201,083 — THE OWNER'S CONTENT: the two writers' tables
+//   (src/data/people/goalFamilies.js, WRITE-GOALS 82796628e, and src/data/people/titleSecretsPresentations.js, WRITE-PEOPLE-3
+//   5ee39a56c; ~60 KB of the car's gzip rise) and people/goals.js's dealer · the boundary cure, the landing fixture, the floor
+//   and type fixes 0. The sum closes exactly: 1,746,551 + 21,787 + 7,124 + 74 - 4 + 40 + 201,083 = 1,976,655, the final tip's
+//   worker bundle. Recorded AT the measured figure; MONOTONE-DOWN from here.
+// 1,976,655 -> 2,008,268 (2026-11-11, STYLE-2-MERGE-7, THE STYLE WAVE'S CLOSING ACT 7; the W0-CLOSE idiom, the chair's ruling (B3) —
+// the ceiling re-recorded ONCE at the final tip at the measured figure, every byte attributed by merge point, NO buy-back;
+// VETOABLE BY THE OWNER): A RISE OF 31,613 B. MEASURED by a fresh production build of every first-parent merge point's tree; the
+// base bd07005b9 reads 1,976,655 (the ceiling, exactly). By point (every point not named: 0):
+//   SW-1 CAUSE-CONJUNCTION (2) -1 · SW-2 INSTITUTIONS (3) -321 · SW-3 REALM-PROSE (4) +12 · SW-4 HOOKS-CONNECTIVE (5)
+//            +11 · SW-5 CRISIS-VANTAGES (6) +36 · SW-B2 FIRST-IMPRESSIONS (7) +557 · SW-B5 FRAMES (9) +2,298 · SW-B6
+//            ECO-DEF-BLOCKS (10) +760 · SW-9 ODD-ROWS (15) +23 · SW-7 POWER-SIDE (16) +4,823 · SW-B1 CONTRADICTIONS
+//            (17) +826 · SW-10 HOOKS (19) +25,794 · FIX-SECTION-REGEN (21) +127 · SW-6 CRISIS-SURFACES (22) -5,697 ·
+//            SW-8 RENAME-POWERS (24) +32 · URBAN-FIX (25) +1,440 · SW-9b-B (27) +306 · GREEN-TIP (36) +69 · GEN-SPEED
+//            (39) +518
+//   The sum closes exactly at the final tip's worker bundle. The largest: SW-10 HOOKS +25,794 (the hook pools), SW-7 POWER-SIDE
+//   +4,823, SW-B5 FRAMES +2,298, URBAN-FIX +1,440; SW-6 CRISIS-SURFACES -5,697. Recorded AT the measured figure; MONOTONE-DOWN from here.
+export const WORKER_BUNDLE_CEILING_BYTES = 2008268;
 
 const source = (path) => readFileSync(join(ROOT, path), 'utf8');
 

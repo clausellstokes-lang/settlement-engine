@@ -164,7 +164,11 @@ describe('the CARTESIAN unit set is the attach set times the spines times the fa
     // 388 -> 397, measured with the gate's own roster and builder on each commit's tree (127 pools
     // throughout): F12 unit 2 (e19e3e4cf, the DS-DEF crisis twins) +8; census-5b unit 3
     // (c00b30eb6, DS-DEF-1 strategic value LOW v4) +1.
-    expect(total, 'the units actually compared').toBe(397);
+    // 397 -> 444 over the W2 DEF lane (2026-11-07), each new line one unit of the defense section: DS-DEF-9 FLAG pools +4
+    // (c66099791), DS-DEF-4 FIXTURE pools +8 (ec73f09f3), DS-DEF-5 FIXTURE pools +6 (e4cbe50db) and gates v3-v4 +2
+    // (4aaa0f230), DS-DEF-5 ARCANE pools +12 (15e146c53), DS-DEF-12 +15 (the third seat). This pin was not re-keyed by
+    // the lane's first two seats; the sum is measured, not inferred.
+    expect(total, 'the units actually compared').toBe(558); // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 444 -> 458 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 458 -> 557 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 557 -> 558
     // AND THE FLAG IS A FLAG: without `bareSpine` the lib answers the SHAPE REPORT's question
     // (the units a corpus LICENSES), which on a spine pool is none. The two populations are
     // different on purpose, and this is the line that says so.
@@ -489,6 +493,8 @@ describe('⭐⭐ AN UNWRITTEN SET MUST NOT READ AS A CLEAN ONE, and the rule sta
  * arranges it (`spine + ' ' + modifier`, verbatim). A fixture whose shape drifted from the
  * shipped one would exercise nothing, which is the way an arm goes blind while reading green.
  */
+// The clause is the RETIRED wording of DS-DEF-11 WALLED-STRAINED v1 (rewritten at W2 DEF fourth seat, 2026-11-07,
+// under the owner's style law); kept here as synthetic fixture text, since the arms read its SHAPE, not the corpus.
 const SPINE_TEXT = 'The wall is kept up out of the town\'s own purse; stone keeps itself, and wages do not.';
 const FACE_TEXT = 'The watch is bought where the muster fell short.';
 const fixtureUnit = () => ({
@@ -904,7 +910,8 @@ describe('(d) THE FIXTURE SECTION — the interested fact BOTH WAYS (SITTING §T
     // Re-keyed by identity 2026-11-07 (REVIEW-INTAKE-LAND): the captured town is rate-69-0 and the
     // control rate-9-2 at the merged tip of the review-intake lane and rung 1, the two 2026-11-06
     // causes composed (tests/fixtures/tasteTowns.js names the scan).
-    expect(captured.standing, 'rate-69-0 is the captured town').toBe('INTERESTED');
+    // rate-69-0 -> rate-105-2 on 2026-11-08 (ALLEGIANCE-CAR2, the derived capture state; tests/fixtures/tasteTowns.js).
+    expect(captured.standing, 'rate-105-2 is the captured town').toBe('INTERESTED');
     expect(clean.standing, 'rate-9-2 is the control and it is NOT interested').toBe('LICENSED');
     expect(captured.holder, 'and the holder is the census\'s own answer').toBeTruthy();
   });
@@ -955,7 +962,9 @@ describe('THE ROSTER — a desk section is a LEAF, and the partition is asserted
     // partition makes "impossible" a measurement.
     const cover = sectionsCoverEveryPool();
     expect(cover.sections).toBe(6);
-    expect(cover.pools, 'every shipped pool').toBe(709);
+    // 709 -> 729 over the W2 DEF lane (2026-11-07): +2 FLAG, +4 DS-DEF-4 FIXTURE, +3 DS-DEF-5 FIXTURE, +6 ARCANE, +5 DS-DEF-12.
+    // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6 (+8 pools, +19 variants): 709 -> 717.
+    expect(cover.pools, 'every shipped pool').toBe(856); // STYLE-2-MERGE at the SW-B2 merge (2026-11-09): 857 -> 856, DS-GEN-11's zero pool leaves (3e9de356e) // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 729 -> 733 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 733 -> 766 // MERGE-WAVE at the W2 DEF merge (2026-11-08): W1 ECO's +77 variants / +26 pools composed with W2 DEF's (measured at the merged tip) // MERGE-WAVE at the W3 POW merge: both lanes' deltas composed (709 -> 800) // W4 PEOPLE 2026-11-07: +7 pools/+18 variants, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants) // MERGE-WAVE at the W4 PEOPLE merge: both lanes' deltas composed (709 -> 852) // MERGE-WAVE at the W5 HIS merge: both lanes' deltas composed (709 -> 857)
     expect(cover.unreached, 'a pool no section reaches').toEqual([]);
     expect(cover.twice, 'a pool two sections claim').toEqual([]);
   });
@@ -971,7 +980,8 @@ describe('THE ROSTER — a desk section is a LEAF, and the partition is asserted
           .toMatch(/^[a-z0-9-]+$/);
       }
     }
-    expect(total, 'and the six sum to the corpus').toBe(709);
+    // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6 (+8 pools, +19 variants): 709 -> 717.
+    expect(total, 'and the six sum to the corpus').toBe(856); // STYLE-2-MERGE at the SW-B2 merge (2026-11-09): 857 -> 856, DS-GEN-11's zero pool leaves (3e9de356e) // 709 -> 729 over the W2 DEF lane (see the partition arm) // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 729 -> 733 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 733 -> 766 // MERGE-WAVE at the W2 DEF merge (2026-11-08): W1 ECO's +77 variants / +26 pools composed with W2 DEF's (measured at the merged tip) // MERGE-WAVE at the W3 POW merge: both lanes' deltas composed (709 -> 800) // W4 PEOPLE 2026-11-07: +7 pools/+18 variants, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants) // MERGE-WAVE at the W4 PEOPLE merge: both lanes' deltas composed (709 -> 852) // MERGE-WAVE at the W5 HIS merge: both lanes' deltas composed (709 -> 857)
     expect(poolRosterOf({ section: 'no-such-desk' }).rows).toEqual([]);
     expect(poolRosterOf({ section: 'no-such-desk' }).why).toContain('NOT-EXECUTABLE');
     expect(poolRosterOf({}).rows.length, 'and no flag at all is the taste\'s seven').toBe(7);

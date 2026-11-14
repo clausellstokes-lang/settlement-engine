@@ -73,6 +73,27 @@ export const REFUSAL_REASONS = Object.freeze({
    */
   ENGINE_VERSION_RETIRED: 'engineVersionRetired',
   /**
+   * The engine service's rate guard refused (HTTP 429, the remote transport's typed
+   * `engine_rate_limited`). A limit, not a failure: "try once more" is false advice, waiting
+   * cures it. The sentence promises no clock time, because the client cannot tell the
+   * minute's window from the day's (remote-path R3, 2026-11-10).
+   */
+  ENGINE_RATE_LIMITED: 'engineRateLimited',
+  /**
+   * The engine service could not be reached (the remote transport's typed
+   * `engine_unavailable`: a network failure, a 5xx, or a build with no service configured).
+   * Nothing the reader made was lost, and the connection is the first thing to check
+   * (remote-path R3, 2026-11-10).
+   */
+  ENGINE_UNAVAILABLE: 'engineUnavailable',
+  /**
+   * The request carries what the engine service cannot make yet (the remote transport's typed
+   * `engine_remote_unsupported`: an imported neighbour, the account's own content, a settlement
+   * inside a campaign), refused before any request. Not a failure and not cured by trying again;
+   * its `{what}` names what was asked for (lib/engineRefusal.js; remote-path FU-3, 2026-11-10).
+   */
+  ENGINE_UNSUPPORTED: 'engineUnsupported',
+  /**
    * A STAFF-ONLY destination reached by an account that is not staff (ODQ
    * §934.28). Not a paid gate and not an upgrade path — no tier buys it, so its
    * sentence offers no door; it simply says the page is not this account's.
@@ -227,10 +248,14 @@ export function isRefusalReason(id) {
  * optional, because an unkeyed record must go on behaving exactly as records did
  * before the field existed (see REFUSAL_SURFACES).
  *
+ * A var may also be a LIST OF COPY KEYS (remote-path FU-3): RefusalNotice resolves each key and
+ * joins them with the reason's own `join`, so a raiser picks WHICH phrases apply while the words
+ * stay in the copy dictionary.
+ *
  * @param {string} reason one of REFUSAL_REASONS
- * @param {Record<string, string|number>|null} [vars]
+ * @param {Record<string, string|number|string[]>|null} [vars]
  * @param {string|null} [at] one of REFUSAL_SURFACES — the surface that asked
- * @returns {{ reason: string, vars: Record<string, string|number>|null, at: string|null }}
+ * @returns {{ reason: string, vars: Record<string, string|number|string[]>|null, at: string|null }}
  */
 export function refusalOf(reason, vars = null, at = null) {
   return { reason, vars: vars && Object.keys(vars).length ? vars : null, at: at || null };

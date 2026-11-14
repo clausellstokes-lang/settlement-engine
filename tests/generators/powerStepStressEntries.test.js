@@ -22,13 +22,18 @@ const ke = (t) => t === 'mass_migration';
 
 describe('unit B: the power step reads the migration direction from the stress entry', () => {
   it('RED-FIRST: an exodus entry mints the departure committee; an influx entry does not', () => {
-    const factions = (entries) => {
+    // GREEN-BASE (2026-11-08): since MERGE-R2's ruling 1 (R-W7 e) the faction reader holds W0's one
+    // declared fact through the config's projection (`stressConfirmPass.js` stamps
+    // `config.migrationDirection` from the confirmed entries beside `config.stressTypes`), so the
+    // arm hands the step what the pipeline hands it: the entry in W0's words AND its projection.
+    const factions = (direction) => {
       const list = [{ faction: 'Town Council', power: 30, isGoverning: true }];
-      applyStressEventFactions(list, ke, 'Town Council', false, { priorityEconomy: 5 }, [], entries);
+      const config = { priorityEconomy: 5, stressTypes: ['mass_migration'], migrationDirection: direction };
+      applyStressEventFactions(list, ke, 'Town Council', false, config, [], MIGRATION(direction));
       return list.map((f) => f.faction);
     };
-    expect(factions(MIGRATION('exodus'))).toContain('Departure Committee');
-    expect(factions(MIGRATION('influx'))).not.toContain('Departure Committee'); // anchored: the same reader mints the committee under exodus on the line above
+    expect(factions('departures')).toContain('Departure Committee');
+    expect(factions('arrivals')).not.toContain('Departure Committee'); // anchored: the same reader mints the committee under departures on the line above
   });
 
   it('RED-FIRST: the governance narrative tells the departure under an exodus entry', () => {

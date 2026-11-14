@@ -1,0 +1,22 @@
+{
+  "_doc": "RECORD 19 OF THE STYLE WAVE'S MERGE (STYLE-2-MERGE, carried by its third seat STYLE-2-MERGE-3), ODQ §934.105 (the cloud chair signs by the owner's delegation of 2026-11-06, vetoable; a successor chair does not inherit this signature). THE LAW OF THE CHAIN (BRIEF-MERGE-CAR §0; BRIEF-STYLE-2-WAVE §3): the integration branch's first-parent line is the golden chain; a lane's unsigned cause commits are components signed at its merge point. THE CAUSE, ONE: THE SW-10 HOOKS MERGE OVER THE INTEGRATION BRANCH — lane/style-2-hooks-2026-11-09 at f50b7b047 merged at 856de8427 (STYLE-2-MERGE point 19), npcData.js composed (SW-10's person-hook pool growth beside SW-7's B10(b) lines, non-overlapping), the fork census's npcData site re-keyed by measurement (1537 -> 1635), the wiring census and writer reach re-taken through their doors and the dated roster composed; its lane signed nothing, its causes are the components signed here with the lane's own figures (docs/chair/2026-11-09/STYLE-2-HOOKS-2026-11-09.md §4): the person-hook pools grown to the four-vantage floor (4ba2a241d other, fff55a455 government, db0e0b0f2 economy, d782e1891 military, 169941774 religious, abee0dbf9 criminal, fbbe4a992 small_settlement, 2a1051b81 titles) gm 525 cumulative, the fence moved by every pool cause; ce61aa3f5 (the plural grammar) 0. Composed on the line, FIELD-DIFFED stage to stage: gm 525 of 525 in one string field only — npcs[].plotHooks[] (no non-string leaf moved) — fence 360 of 360. THE MOVE, MEASURED before the write by scripts/audit/landing-stage.sh measure, stage to stage against the stage of 9ae41c2fa (record 18's post-state with its docs-only hand-back commits after it, measured 0 on all six against the committed fixtures): the generator golden master 525 of 525 rows (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84 — the keyed rows per tier as the stage tool counts them) 21b50e30.. -> 16c01856..; the espionage fence's driven corpus 360 of 360 rows (60 per tier) 03fc50e3.. -> 3f8371fd..; 360/360 distinct; herald 0, witness 0, prose 0, PDF 0. Built through the guard with no STOP.",
+  "ownerWords": "I also now give all permissions required now and in the future. I also defer all judgement to you. · I leave all judgement now and in the future to you.",
+  "ownerDate": "2026-11-06",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation of 2026-11-06 to the cloud chair; the style wave's merge STYLE-2-MERGE, 2026-11-09)",
+  "cause": "THE SW-10 HOOKS MERGE OVER THE INTEGRATION BRANCH — lane/style-2-hooks-2026-11-09 at f50b7b047 merged at 856de8427 (STYLE-2-MERGE point 19), npcData.js composed (SW-10's person-hook pool growth beside SW-7's B10(b) lines, non-overlapping), the fork census's npcData site re-keyed by measurement (1537 -> 1635), the wiring census and writer reach re-taken through their doors and the dated roster composed; its lane signed nothing, its causes are the components signed here with the lane's own figures (docs/chair/2026-11-09/STYLE-2-HOOKS-2026-11-09.md §4): the person-hook pools grown to the four-vantage floor (4ba2a241d other, fff55a455 government, db0e0b0f2 economy, d782e1891 military, 169941774 religious, abee0dbf9 criminal, fbbe4a992 small_settlement, 2a1051b81 titles) gm 525 cumulative, the fence moved by every pool cause; ce61aa3f5 (the plural grammar) 0. Composed on the line, FIELD-DIFFED stage to stage: gm 525 of 525 in one string field only — npcs[].plotHooks[] (no non-string leaf moved) — fence 360 of 360",
+  "seat": "STYLE-2-MERGE-3 under the cloud chair, session session_01FbPLbejcfwX5nii12VM673, from the stage at 856de8427",
+  "surfaces": [
+    {
+      "surface": "generator-golden-master",
+      "action": "re-record",
+      "predictedRows": 525,
+      "proofForm": "settlement-hash"
+    },
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant"
+    }
+  ]
+}

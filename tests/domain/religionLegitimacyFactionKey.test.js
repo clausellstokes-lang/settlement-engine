@@ -35,6 +35,7 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { governingFactionOf, nameOf, transferRulingPower } from '../../src/domain/rulingPower.js';
 import { factionArchetype } from '../../src/domain/factionArchetypes.js';
 import { rulerLens, orgPower } from '../../src/domain/worldPulse/religionLegitimacy.js';
+import { holdsMembership } from '../../src/domain/people/membership.js';
 
 /** A real generated power structure. @param {string} tier @param {string} prosperity */
 const realPs = (tier, prosperity) => generatePowerStructure(tier, { prosperity }, null, {}, []);
@@ -187,7 +188,11 @@ describe('rulerLens reads the canonical governing seat', () => {
     // 2026-11-07 PEOPLE-1 CAST: the lens floors the seat's power with its own people's (`leadPow`, the governing
     // faction's highest card power); the cast's seat card carries a higher `power` than the rung roster's, so the
     // bound is the formula on the seat's OWN people, read off the record — never the temple's 57.
-    const seatPeople = (s.npcs || []).filter((n) => n.factionAffiliation === nameOf(seat)).map((n) => orgPower(n));
+    // GREEN-TIP (2026-11-10, re-keyed by cause 15207301f, people-5b step 3 — the v2 record): the seat's people are the
+    // cards holding a MEMBERSHIP in it (people/membership.js :: holdsMembership, the read rulerLens makes through
+    // npcInFaction); the retired `factionAffiliation` is on no current card, so the old filter read an empty seat.
+    const seatPeople = (s.npcs || []).filter((n) => holdsMembership(n, nameOf(seat))).map((n) => orgPower(n));
+    expect(seatPeople.length, 'the seat is faced (R-P2): the bound below is read off real people').toBeGreaterThan(0);
     const leadPow = Math.max(0, ...seatPeople);
     expect(lens.power).toBeCloseTo(Math.min(1, 0.45 + 0.55 * Math.max(0.17, leadPow)), 10);
     expect(lens.power).not.toBeCloseTo(0.45 + 0.55 * 0.57, 10); // anchored: the equality above pins the seat's own reading

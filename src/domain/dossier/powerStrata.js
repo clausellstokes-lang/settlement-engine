@@ -259,6 +259,9 @@ export function groupRelationships(relationships) {
  * stand-ins, and the settlement-wide fallback is gone.
  */
 import { seatCandidatesOf, isOfficeStandIn } from './seatHolder.js';
+import { cardHatsOf } from '../people/cardPowers.js';
+import { seatKeeperLineOf } from '../people/seatKeeper.js';
+import { membersByRank } from '../people/membership.js';
 import { hasLadder, ladderRungsOf, ladderFactionKeyOf } from '../townMap/ladderRead.js';
 
 /**
@@ -350,7 +353,8 @@ export function rulingChainOf(settlement) {
   if (!npc && governing && !vacant) {
     const chosen = liveSeatCandidatesOf(settlement)[0] || null;
     if (chosen) {
-      npc = { name: String(chosen.name || ''), role: String(chosen.role || ''), via: /** @type {'roster'} */ ('roster') };
+      // COHERENCE-POWERS: the dual-hat leader is named by both hats ("the miller and Mayor"); any other holder by its role
+      npc = { name: String(chosen.name || ''), role: cardHatsOf(chosen), via: /** @type {'roster'} */ ('roster') };
     }
   }
 
@@ -360,15 +364,27 @@ export function rulingChainOf(settlement) {
     if (vacant) {
       // The row's own label is "The seat", so the line opens on the verb: the row
       // read "The seat The seat stands empty" while it opened on the noun.
-      const line = claimants.length === 0
+      // COHERENCE-POWERS-4 (F3): a claimant is a person (castPowers.js mints the claimant who faces the power), so the row
+      // names the person with the line it presses: "Theodelinde Roth for Noble Claimant (Senior Line)"
+      const roster = Array.isArray(settlement?.npcs) ? settlement.npcs : [];
+      const claimantWords = claimants.map((power) => {
+        const first = /** @type {{ name?: unknown, memberships?: unknown } | undefined} */ (membersByRank(roster, power)[0]);
+        const leads = !!first && Array.isArray(first.memberships)
+          && first.memberships.some((m) => !!m && typeof m === 'object' && m.power === power && m.rank === 1);
+        return leads && first?.name ? `${String(first.name)} for ${power}` : power;
+      });
+      const empty = claimants.length === 0
         ? 'Stands empty; the succession is unsettled.'
-        : `Stands empty; ${claimants.length === 1 ? 'a claimant circles' : `${claimants.length} claimants circle`}: ${claimants.join(', ')}.`;
+        : `Stands empty; ${claimants.length === 1 ? 'a claimant circles' : `${claimants.length} claimants circle`}: ${claimantWords.join(', ')}.`;
+      // COHERENCE-POWERS-3 (F7): who keeps the seat while it stands empty, in the caretaker's form the card prints
+      const keeper = seatKeeperLineOf(settlement);
+      const line = keeper ? `${empty} ${keeper}` : empty;
       absence = { kind: /** @type {'missing_seat'} */ ('missing_seat'), claimants, line };
     } else if (governing) {
       absence = {
         kind: /** @type {'unrecorded'} */ ('unrecorded'),
         claimants: [],
-        line: 'No named seat-holder stands in the record. The chain ends, honestly, at the faction.',
+        line: 'No named seat-holder stands in the record. The chain ends, honestly, at the power.',
       };
     }
   }
@@ -384,7 +400,7 @@ export function rulingChainOf(settlement) {
  * whenever public legitimacy falls below the contested cut. It names nobody, and
  * on the audit's 389 no stronger rival existed in 18 of 110 cases.
  */
-export const APPEARS_TO_GOVERN = 'The faction that appears to govern is not the faction that governs.';
+export const APPEARS_TO_GOVERN = 'Holds the title, but the decisions that matter are made elsewhere.';
 
 /**
  * The faction that outranks the governing faction on the power figures: the
@@ -407,13 +423,6 @@ export function outrankingRivalOf(settlement) {
   }
   return best ? nameOf(best) || null : null;
 }
-
-/**
- * The sentence the Power tab's legitimacy panel prints after "Governance fractured." when
- * governance is fractured (PowerTab.jsx). The generator's crisis note on the governing
- * faction carries the same words (factionDynamics.js :: applyLegitimacyMultipliers).
- */
-export const FRACTURE_PANEL_LINE = 'Real decisions are being made informally.';
 
 /**
  * X-50 (BOILERPLATE ONCE): a note with every sentence the tab already prints elsewhere
@@ -443,6 +452,6 @@ export function crisisNoteFor(settlement, faction) {
   if (!note.includes(APPEARS_TO_GOVERN)) return note;
   const governing = governingFactionOf(settlement);
   const rival = governing && faction === governing ? outrankingRivalOf(settlement) : null;
-  const said = rival ? `${APPEARS_TO_GOVERN.slice(0, -1)}; the real decisions rest with ${rival}.` : '';
+  const said = rival ? `Holds the title; the decisions that matter are made by ${rival}.` : '';
   return note.replace(APPEARS_TO_GOVERN, said).replace(/\s{2,}/g, ' ').trim();
 }

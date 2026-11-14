@@ -95,7 +95,9 @@ describe('THE GATE\'S PARTY ARM (a party is a fact)', () => {
     const real = collectPlotHooks(base({ stress: stress('Merchant Guilds') })).filter((h) => h.crisis);
     const planted = collectPlotHooks(base({ stress: stress('The Old Grouping') })).filter((h) => h.crisis);
     // liveness: the real lever hook is there, between its holder and the power that loses
-    const lever = real.find((h) => h.parties.some((p) => p.kind === 'power' && p.name === 'Merchant Guilds' && h.text.includes('loses')));
+    // re-keyed by identity (STYLE-2-MERGE-3 at SW-6's point; the cause SW-6's 27c9aed19, a plural losing power agrees in the
+    // lever hook): "Merchant Guilds" is plural, so its stake verb is "lose most", not "loses most".
+    const lever = real.find((h) => h.parties.some((p) => p.kind === 'power' && p.name === 'Merchant Guilds' && /\bMerchant Guilds lose most\b/.test(h.text)));
     expect(lever).toBeTruthy();
     expect(planted.some((h) => h.text.includes('The Old Grouping'))).toBe(false);
   });

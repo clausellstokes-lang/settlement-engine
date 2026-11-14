@@ -291,7 +291,8 @@ describe('PowerTab — the §815 ruling chain ("Who runs this place?")', () => {
     render(<PowerTab powerStructure={s.powerStructure} settlement={s} narrativeNote={null} />);
     const chain = screen.getByTestId('ruling-chain');
     expect(chain.textContent).toContain('Merchant Guild');
-    expect(screen.getByTestId('ruling-chain-absence').textContent).toMatch(/ends, honestly, at the faction/);
+    // Re-keyed by identity 2026-11-09 (SW-8 RENAME-POWERS C9-4, the owner's map): the same absence line, "at the power".
+    expect(screen.getByTestId('ruling-chain-absence').textContent).toMatch(/ends, honestly, at the power/);
   });
 });
 
@@ -350,14 +351,17 @@ describe('UX consolidation — Power (T2-17..T2-19)', () => {
     cleanup();
     const f = render(<PowerTab powerStructure={fractured.powerStructure} settlement={fractured} narrativeNote={null} publicDossier />).container.textContent;
     expect(f).toContain('Governance fractured.');
-    expect(f).not.toContain('appears to govern is not the faction that governs'); // anchored: toContain('Governance fractured.') on this render
+    // re-keyed by identity at W3 POW #189 (2026-11-08, the owner's style law: the crisis note says the one thing the banner does not): the unnamed claim's new words.
+    expect(f).not.toContain('decisions that matter are made elsewhere'); // anchored: toContain('Governance fractured.') on this render
   });
 
   it('T2-18: the cut lenses do not draw (DS-POW-2 lens, legitimacy hold, governing title, dormant blocs) and the kept ones do', () => {
     const d = desk(false);
     const text = view({ publicDossier: false });
     expect(d.stabilityHeader?.sentence, 'fixture premise: the stability ladder line draws').toBeTruthy();
-    expect(text).toContain(d.stabilityHeader.sentence.slice(-40));
+    // Re-keyed OWNER-WORDS-DOSSIER item 3 (2026-11-09): the hall line's row glances; the governance block is
+    // one paragraph, so the ladder line no longer prints and the succession line below is the kept anchor.
+    expect(text, 'the DS-POW-2 hall line still prints').not.toContain(d.stabilityHeader.sentence.slice(-40)); // anchored: the succession line on this render, next
     expect(text).toContain(d.successionRisk.sentence.slice(-40));
     for (const [lens, rung] of [['stabilityLens', d.stabilityLens], ['successionHold', d.successionHold], ['governingTitle', d.governingTitle], ['blocPresence (dormant)', d.blocPresence]]) {
       if (!rung?.sentence) continue;
@@ -384,8 +388,8 @@ describe('UX consolidation — Power (T2-17..T2-19)', () => {
     expect(town.conflicts.length, 'fixture premise: the town has a conflict').toBeGreaterThan(0);
     expect(town.history.currentTensions.length, 'fixture premise: the town has tensions').toBeGreaterThan(0);
     const text = view({ publicDossier: true });
-    expect(text).toContain('The Factions');
-    expect(text).not.toMatch(/Current Tensions \(|Active Conflicts \(/); // anchored: toContain('The Factions') on this render
+    expect(text).toContain('The Powers');
+    expect(text).not.toMatch(/Current Tensions \(|Active Conflicts \(/); // anchored: toContain('The Powers') on this render
     expect(text).not.toContain(town.conflicts[0].issue); // anchored: same render
   });
 });

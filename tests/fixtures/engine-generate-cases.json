@@ -7,5 +7,23 @@
     "tradeRouteAccess": "river",
     "monsterThreat": "frontier"
   },
-  "seeds": ["engine-contract-alpha", "engine-contract-beta", "engine-contract-gamma"]
+  "seeds": ["engine-contract-alpha", "engine-contract-beta", "engine-contract-gamma"],
+  "_storeContentProvenanceDoc": "The content provenance the STORE hands its own standalone generation in its default state (src/store/settlementContentRuntime.js :: settlementContentRuntimeOptions over customContentSlice.js :: getActiveCustomContentRuntime): the vanilla environment, no binding hash. The function stamps its birth with the same (remote-path R2, 2026-11-10), so the Deno replay's expected side is the local birth under THIS, and tests/build/engineBundleReplay.test.js pins it to the real store's own value.",
+  "storeContentProvenance": {
+    "scope": "standalone",
+    "environment": {
+      "schemaVersion": 1,
+      "environmentId": "system:vanilla",
+      "environmentRevisionId": "system:vanilla:v1",
+      "revisionNumber": 1,
+      "source": "vanilla",
+      "packVersions": [],
+      "directDefinitions": [],
+      "tunables": {},
+      "visualSelection": {},
+      "environmentHash": "aeb02a6f73cd182b45498535f24b7d7cc509799add744ce436d87a65f6c73bb3",
+      "createdAt": null
+    },
+    "bindingHash": null
+  }
 }

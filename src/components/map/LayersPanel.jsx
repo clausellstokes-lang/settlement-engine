@@ -278,8 +278,8 @@ export default function LayersPanel({ onClose }) {
         {layers.territory && (
           <div style={{ marginLeft: SP.md, marginBottom: SP.sm }}>
             <span style={{ fontFamily: sans, fontSize: proseFontSize(FS.micro, mobile), color: MUTED, lineHeight: 1.4 }}>
-              Impressionistic: sampled dots suggest each settlement's reach by road
-              (the canonized partition), not exact borders. Larger places read stronger.
+              A rough picture: dots show how far each settlement reaches by road,
+              not exact borders. Larger places show stronger.
             </span>
           </div>
         )}

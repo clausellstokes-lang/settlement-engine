@@ -46,6 +46,23 @@ export const EMPTY_GALLERY_FILTERS = Object.freeze({
 
 const PAGE_SIZE = 24;
 
+// THE OWNER'S REDIRECT (the owner's word, 2026-11-09, SW-B7 row (f)): "If the DM is
+// logged in that owns the settlement they simply go the the normal library view of
+// it." A party link the signed-in viewer owns never renders the players' page.
+// Ownership is the server's word first (get_unlisted_dossier's is_owner, migration
+// 208), the viewer's saves matched by id as the fallback — never by slug (a party
+// link carries the unlisted slug, which no save's public_slug ever matches). The
+// public listing page is not redirected: it carries the owner's listing editor.
+function ownsPartyLink(dossier, userId, saves) {
+  if (!userId || !dossier?.unlisted) return false;
+  if (dossier.isOwner === true) return true;
+  return dossier.id != null && (saves || []).some(sv => sv?.id != null && String(sv.id) === String(dossier.id));
+}
+
+function routeOwnerToLibrary(dossier) {
+  navigate('settlements', { params: { id: String(dossier.id) }, replace: true });
+}
+
 export function useGalleryPageState(routeSlug = null) {
   const auth = useStore(s => s.auth);
   useEnsureSavedSettlementsLoaded(auth?.user?.id);
@@ -203,6 +220,9 @@ export function useGalleryPageState(routeSlug = null) {
         if (dossierRequestGenRef.current !== requestGen) return;
         if (campaign) { setUnlistedCampaign(campaign); setDossier(null); }
         else { setDossier(null); setDossierError('This settlement is not available.'); }
+      } else if (ownsPartyLink(next, useStore.getState().auth?.user?.id, useStore.getState().savedSettlements)) {
+        setDossier(null);
+        routeOwnerToLibrary(next);
       } else {
         setDossier(next);
       }
@@ -252,6 +272,22 @@ export function useGalleryPageState(routeSlug = null) {
     setDossierError(null);
     setUnlistedCampaign(null);
   }, [routeSlug, openDossier]);
+
+  // Row (f), signed out → signed in on the players' page: re-resolve the slug, so the
+  // server's is_owner answers for the new viewer and the owner is routed home.
+  const viewerId = auth?.user?.id || null;
+  const lastViewerRef = useRef(viewerId);
+  useEffect(() => {
+    if (lastViewerRef.current === viewerId) return;
+    lastViewerRef.current = viewerId;
+    if (viewerId && dossier?.unlisted && activeSlug) void Promise.resolve().then(() => openDossier(activeSlug, { replace: true }));
+  }, [viewerId, dossier, activeSlug, openDossier]);
+  // Row (f), the fallback: the viewer's saves arrive after the dossier; a save whose
+  // id is the dossier's routes the owner home all the same.
+  const savedSettlements = useStore(s => s.savedSettlements);
+  useEffect(() => {
+    if (ownsPartyLink(dossier, viewerId, savedSettlements)) routeOwnerToLibrary(dossier);
+  }, [dossier, viewerId, savedSettlements]);
 
   const loadMore = useCallback(async () => {
     if (galleryQuery.filters?.mine || galleryQuery.filters?.unlistedMine || galleryQuery.filters?.featuredOnly) return; // owner/featured lists return all at once

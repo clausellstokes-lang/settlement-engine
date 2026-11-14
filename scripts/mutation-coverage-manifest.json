@@ -73,6 +73,10 @@
       "kind": "mutation",
       "label": "dossier-mounts/a corpus block leaves the dark list with no mount"
     },
+    "tests/lint/poolDominance.walker.test.js": {
+      "kind": "rationale",
+      "rationale": "THE DOMINANCE ARM'S DOOR (COHERENCE-QUARREL, 2026-11-11; its noise rule and six-tier corpus POOL-GUARD, 2026-11-12, docs/DESIGN_POOL_CENSUS.md section 6). It executes the generator over a 2,050-settlement corpus (six tiers, three forced stresses; about 137 seconds alone) and judges every drawn pool against its register, so it is coupled to its subject by construction. WHAT IT CATCHES: a rise beyond three standard errors of a share at the ceiling (the error over towns, never below the binomial); a crossing of 0.75 on a pool of 30 draws or more; a collapse to one line where chance (top1^towns) is under 1/1000; any rise on a cured target; a missing or stale row; a loose ceiling beyond slack and noise; a register banked on another corpus. WHAT IT DOES NOT: a rise inside a pool's own noise; a pool the corpus never draws; variety lost among lines the pool's line id merges. Its catching power was EXECUTED 2026-11-12 on scratch copies of src (never the shared worktree), the final script and register copied in: (1) ARRIVAL_PEOPLE.greek cut from 4 lines to 2 reddened 'no pool rises above its ceiling beyond its own noise' (top1 0.5625 > 0.3449, 5.6 SE); (2) POLITICAL_FLAVOR.stable 9 lines to 5 reddened it (top1 5.7 SE, top5 16.7 SE); (3) npcData:NPC_FACTION_LOYALTY, every category halved, reddened it (top1 17.0 SE, top5 18.2 SE); (4) ARRIVAL_MEMORIES.heresy_trial cut to one line reddened it by the collapse arm alone (10 towns, chance 1.0e-4); (5) the village Dairy farmer variants emptied reddened the row check (no longer drawn). Its false-alarm rate on four re-seeds by --seed-prefix: 1 / 1 / 1 / 0 rows (the exact rule it replaced: 146 / 135 / 144 / 138). The COHERENCE-QUARREL plants (the pre-cure conflicts.js and safetyProfile.js) were NOT re-executed under the new rule; their rises sat against targets, which it judges exactly. A standing sweep plant is not offered: the sweep reverts with a checkout against a shared worktree, the reason recorded at customContentCharsetWiring."
+    },
     "tests/lint/statusUnionTotality.walker.test.js": {
       "kind": "rationale",
       "rationale": "THE STATUS-UNION TOTALITY WALKER (EM-B1d version 5). Its catching power is EXECUTED: SIX mutants planted 2026-09-19, each proved to have moved the file's bytes before the run, each run under the gate mutex, each restored by cp from a backup taken BEFORE the plant and verified byte-identical by cmp and sha256 in the same shell (never the checkout family). Every one reddened its NAMED title. (1) M1' THE RULING MADE MACHINERY -- ROSTER_ABSENT_STATUSES GAINS 'jailed' in src/domain/density/factionLifecycle.js: TRUE_EXIT 1, 2 failed / 149 passed in tests/generators/densityLaw.test.js, reddening BOTH the exact-equality pin (expected ['dead','exiled','jailed','removed'] to equal ['dead','exiled','removed']) and this packet's new arm (a jailed figure must keep their place in the house: expected false to be true). That is the version-5 ruling enforced: availability is not house membership, and a reversible verdict may never dissolve a house. (2) M2' NPC_UNAVAILABLE_STATUSES loses 'jailed' in src/domain/entities/npcs.js: TRUE_EXIT 1, 3 failed / 1 passed, T1 convicting by name (enumerates the union without jailed) plus the availability arm that calls inferSuccessors and rosterPersonAvailable for real. (3) M3 envoyCasting.js regains the foreign spelling 'imprisoned' beside its union read: TRUE_EXIT 1, 2 failed / 2 passed, reported with its file:line (declared a union READ but spells imprisoned at 111:imprisoned) -- the ODQ 934.47 addendum 5 arm. (4) M4 A FIFTH ENUMERATOR PLANTED as a new src/domain/entities file listing 'dead' and 'exiled': TRUE_EXIT 1, 2 failed / 2 passed -- the discovery arm and the flagged-set equality both convict a consumer nobody declared, which makes this a guard against the NEXT consumer rather than a snapshot of this one. (5) M5 THE TYPEDEF GAINS A MEMBER ('banished'): TRUE_EXIT 1, 2 failed / 2 passed -- the union is read LIVE, so a new member reds the exact-list pin AND every roster row that does not list it. (6) M6 LOST_NPC_STATUS loses 'jailed': TRUE_EXIT 1, 1 failed / 3 passed, T1 by name. Focused green restored afterwards: 4 passed / 4, TRUE_EXIT 0. A standing sweep plant is not offered because five of the six targets are SHARED modules a concurrent lane may hold uncommitted work in, and scripts/mutation-sweep.sh reverts with git checkout -- <file> against the live worktree, which this program's shared-tree protocol forbids outright -- the same reason recorded at customContentCharsetWiring. Promote to kind:mutation when the sweep gains a target outside those shared files."
@@ -380,6 +384,10 @@
       "label": "prose/spine frame word doubled into the body",
       "what": "Standing plant restores the frame word INSIDE deriveStrainedBy, which is the exact shape that shipped \"It is currently strained by / Strained by under Siege, infiltrated.\" to every first-run user. The frame belongs to SPINE_RUNGS and to nothing else; a deriver that authors one too makes the rail print it twice. Only a RENDER assertion can see the doubling, because it lives in the juncture between the component's <dt> and the deriver's <dd> and each half is well-formed alone. Mutation target src/domain/simulationSpine.js is tracked and clean as of lane PS's commit."
     },
+    "tests/components/powerGovernanceAccount.test.jsx": {
+      "kind": "rationale",
+      "rationale": "THE GOVERNANCE PARAGRAPH ON THE POWER TAB (OWNER-WORDS-DOSSIER item 3a; owed at MERGE-TRAIN, 2026-11-09, where the integration side's enumeration rule reaches it). Its catching power is EXECUTED in the test body: the tab is rendered over a planted record and asserted to carry the paragraph and to print none of the retired DS-POW-1/2 sentences, with a non-vacuity arm proving the desk still draws them, so a mount that prints both or neither reds."
+    },
     "tests/components/privacyPolicyParity.test.js": {
       "kind": "uncovered"
     },
@@ -437,6 +445,14 @@
     "tests/data/catalogTagGovernance.test.js": {
       "kind": "uncovered"
     },
+    "tests/data/goalFamilies.test.js": {
+      "kind": "rationale",
+      "rationale": "THE GOAL FAMILIES' LINES (WRITE-GOALS 82796628e, merged by ALLEGIANCE-CAR4; owed at MERGE-TRAIN, 2026-11-09, where the integration side's enumeration rule reaches it). Its catching power is EXECUTED in the test body: six CONTROL arms plant a bad slot, a tic, a duplicate / article / possessive / agreement fault, an unknown tie type, a dropped type and a bad target, and an ungated line, and assert each check reds, so a disarmed check fails this file."
+    },
+    "tests/data/handlerTieLines.test.js": {
+      "kind": "rationale",
+      "rationale": "THE HANDLER TIE LINES (WRITE-PEOPLE's data, ALLEGIANCE-CAR1's tier-neutral rewording 61d065e9e; owed at MERGE-TRAIN, 2026-11-09, where the integration side's enumeration rule reaches it). Its catching power is EXECUTED in the test body: the arm 'a planted control reds the checks (one fault of each kind)' plants one fault per check (an unfilled slot, a struck tic, a repeat, a tier noun) and asserts each check reds, so a disarmed check fails this file."
+    },
     "tests/data/categoryGovernance.test.js": {
       "kind": "mutation",
       "label": "data-schema.4/dead priorityCategory"
@@ -456,6 +472,11 @@
     },
     "tests/data/foundingSeeds.test.js": {
       "kind": "uncovered"
+    },
+    "tests/data/foundingWorldBones.test.js": {
+      "kind": "rationale",
+      "rationale": "EVERY PROMISE ON A FOUNDING WORLD'S CARD IS CARRIED BY ITS CANONICAL SEED AND BY 19 OF 20 FORKS (FOUNDING-WORLDS, 2026-11-10, the chair's rulings F2 and N8). Its catching power was EXECUTED red-first twice: at blackcrag-016 the canonical arm reported 'is ruled by its guild-masters (tags: Guild power)' red, 1 failed / 10 passed (governingName 'Noble Governorship'; commit be56efb67); and run with the three cards' OLD clauses the fork arm reported 'Black Crag: ruled by its guild-masters — 1/20', 'Cnocby: … whose cousin to ask … — 1/20', 'Cnocby: the carters who still stop … — 8/20', 'Mossgate: … Contested council — 14/20' and two more (commits 08c36904f, 1320a8540, 1c22f4227). The table quotes each teaser and tag verbatim, so a re-worded card also reds until re-measured. WHY A RATIONALE RATHER THAN A STANDING SWEEP PLANT: the subject is the whole generation pipeline under three fixed configs; any engine change that moves a card's facts is the plant, and a hand-planted regression in src/generators would move every golden with it.",
+      "kindNote": "rationale rather than a standing sweep plant: the engine itself is the subject; the red-firsts are recorded in the commits."
     },
     "tests/data/galleryReactionVocab.test.js": {
       "kind": "uncovered"
@@ -699,6 +720,10 @@
       "kind": "mutation",
       "label": "domain.5/undo inverse round-trip"
     },
+    "tests/domain/governanceAccount.test.js": {
+      "kind": "rationale",
+      "rationale": "THE GOVERNANCE PARAGRAPH (OWNER-WORDS-DOSSIER items 3a-3f; owed at MERGE-TRAIN, 2026-11-09, where the integration side's enumeration rule reaches it). Its catching power is EXECUTED in the test body: every arm composes the paragraph from a PLANTED record (two estranged powers, a vacant seat, a fractured town, the royal pair) and pins the exact names, their order and the retired word's absence, each negative anchored by a positive on the same text; the generator arm walks every vignette buildGovernanceLabels can write, so a composer or vignette regression changes an asserted string."
+    },
     "tests/domain/governanceLedger.test.js": {
       "kind": "uncovered"
     },
@@ -769,6 +794,10 @@
     "tests/edgeFunctions/operatorMessagesNoTelemetry.test.js": {
       "kind": "rationale",
       "rationale": "Self-proving Operator Messages boundary census: seven exact production surfaces each carry a file-specific live-export anchor, while an embedded two-arm planted fixture proves that both the analytics-emission detector and the Herald/Wizard News register detector fire on every ordinary run. A standing mutation would only replay that synthetic proof while editing multiple production Operator Messages surfaces during a broad sweep."
+    },
+    "tests/edgeFunctions/promptsNpcFaction.test.js": {
+      "kind": "rationale",
+      "rationale": "THE EDGE NPC EXTRACTS READ MEMBERSHIPS (FIX-PUBLIC-VEIL step 3; owed at MERGE-WAVE, 2026-11-09, where the integration side's enumeration rule reaches it). Its catching power is EXECUTED in the test body: npcFactionOf and the three REFINEMENT_PASSES extracts run on a record whose second card carries ONLY the retired factionAffiliation (planted, must read undefined), and the source scan's absence is anchored (expectAbsentWithAnchor) on the live prompts.ts. A planted regression would re-implement the retired read the planted card already exercises."
     },
     "tests/edgeFunctions/paymentRefundDurableWorker.test.js": {
       "kind": "rationale",
@@ -877,6 +906,14 @@
     "tests/generators/pipelineContract.test.js": {
       "kind": "rationale",
       "rationale": "REBUILT AND SELF-PROVING (ODQ 764.2, lane T9): was kind:'uncovered'. THE DEFECT THIS ROW REPLACES, stated exactly: every assertion in that suite was `.not.toThrow()` -- a shape that passes when the guard is REMOVED. Strict mode quietly disarmed would have left all eighteen greens (twelve configs, six relationship families) standing over an instrument that checked nothing. Neither house idiom reached it: its subject is executed pipeline behaviour, not source text, so the in-memory string-doctoring plant does not apply, and the sweep's disk-mutate path is closed to build lanes because its revert is the `git checkout --` family this program's shared-tree protocol forbids outright. THE CURE IS A STANDING CONTROL THAT RUNS ON EVERY ORDINARY INVOCATION rather than weekly: an ISOLATED module graph (vi.resetModules() + dynamic import, so the process-wide _steps singleton every sibling suite shares is never touched) into which synthetic steps are registered, driving THE SAME runPipeline strict path. It proves all four things a plant would: an undeclared in-place write throws BY NAME (`step \"writesUndeclared\" wrote undeclared ctx key(s) [betaWrittenInPlace]`), a declared write does not, the OTHER half of strict (a declared read with no earlier producer) throws with its own message, and the same undeclared write is SILENT with strict:false -- so the convictions are strict mode's doing and not an unrelated failure. A purity arm asserts the live registry still holds resolveConfig and none of the three synthetic steps. MEASURED at the rebuild: 22 tests, all green, exit 0. THE PURITY ARM CONVICTED ITS OWN FIRST DRAFT, which read the live registry through a dynamic `await import(...)` and therefore got back the LAST graph resetModules had minted -- a synthetic one -- and reported it as poisoned; the live registry is the one bound by the file's STATIC import, and only that one. Enumerated under the tests/generators enforcer-dir arm and under the NAME_PATTERN basename arm on `contract`."
+    },
+    "tests/generators/conflictCast.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/conflictTouched.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
     },
     "tests/generators/pipelinePinnedChoosers.test.js": {
       "kind": "rationale",
@@ -1453,6 +1490,10 @@
       "kind": "mutation",
       "label": "commands/journal conflict contract drift"
     },
+    "tests/security/canonCommandStampedRow.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
     "tests/security/createRouteCommand.pglite.test.js": {
       "kind": "rationale",
       "ref": "pglite-executed"
@@ -1494,6 +1535,10 @@
       "ref": "pglite-executed"
     },
     "tests/security/aiSpendSafety.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/allegianceVeil.pglite.test.js": {
       "kind": "rationale",
       "ref": "pglite-executed"
     },
@@ -2033,6 +2078,10 @@
       "kind": "rationale",
       "ref": "self-proving-meta"
     },
+    "tests/lint/libraryAdvancesNothing.walker.test.js": {
+      "kind": "mutation",
+      "label": "library-simple/the Library reads no campaign advance"
+    },
     "tests/store/commitPendingEditsTotality.walker.test.js": {
       "kind": "rationale",
       "ref": "self-proving-meta"
@@ -2278,6 +2327,10 @@
     "tests/lint/namedPersonTransitTotality.walker.test.js": {
       "kind": "rationale",
       "ref": "src-scan-totality-inline-controls-2026-08-03"
+    },
+    "tests/data/dmPowerLines.test.js": {
+      "kind": "rationale",
+      "rationale": "THE DM VIEW'S CAPTURE AND PATRONAGE LINES (WRITE-PEOPLE's data, 1f60470eb, merged by ALLEGIANCE-CAR2; owed at MERGE-TRAIN, 2026-11-09, where the integration side's enumeration rule reaches it). Its catching power is EXECUTED in the test body: the arm 'a planted control reds the checks' plants a fault of each kind and asserts every check reds, so a disarmed check fails this file."
     },
     "tests/data/dossierStateProseProjection.contract.test.js": {
       "kind": "rationale",
@@ -2757,6 +2810,10 @@
       "kind": "rationale",
       "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
     },
+    "tests/generators/stressNoteDirection.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
     "tests/generators/stressPriority.test.js": {
       "kind": "rationale",
       "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
@@ -2956,6 +3013,11 @@
       "rationale": "THE LANDING PROSE IS GROUNDED IN THE FIXTURE (ODQ 934.30 car 8). Its catching power is EXECUTED IN THE TEST BODY: every quoted fact in src/copy/landing.js is bound to the field of the regenerated fixture it came from — the population as digits and as words, the week count, the six advance events by week number and headline noun as PAIRS (the engine writes 'criminal' where the prose says 'crime', so each pair binds both sides and neither passes alone), the receipts, the neighbour names, the retired keys — so a regeneration that moves a field reds the sentence that went stale, and a rewrite that drops a fact reds against the field. WHY A RATIONALE RATHER THAN A STANDING SWEEP PLANT: the two sides of every binding are a generated file and the copy dictionary, both surfaces a concurrent lane holds, and the sweep's revert is a checkout. Recorded 2026-09-19 by the chair.",
       "kindNote": "rationale rather than a standing sweep plant: both sides of the binding are shared surfaces; the in-body pair bindings are the substitute."
     },
+    "tests/copy/landingNarrationGrounding.test.js": {
+      "kind": "rationale",
+      "rationale": "THE LANDING NARRATION SAYS ONLY WHAT ITS RECEIPTS HOLD (FOUNDING-WORLDS, 2026-11-10, the chair's rulings N1 and N3). Its catching power was EXECUTED red-first: on the narration the fixture carried at f0f98d883 the names arm reported [\"Elder Council\", \"Odhrán MacCarthy\", \"Gallagher\", \"Inghean MacCarthy\"] (no derived field holds them) and the figures arm reported the claim table's phrase absent, 2 failed / 2 passed; green on the re-grounded narration (commit 45a5e622c). Every figure is bound to a receipt field by a claim table (the route pool's three and two, the institution's 4% and x2.50), and every capitalised name to another fixture field. WHY A RATIONALE RATHER THAN A STANDING SWEEP PLANT: both sides are a generated module (src/components/home/landingFixture.js) and authored copy in the emitter (STOCK_NARRATION), and a plant in either is undone by the re-emit the arm exists to demand; the sweep's revert is a checkout over a file a concurrent lane may regenerate.",
+      "kindNote": "rationale rather than a standing sweep plant: the target is generated and the copy is a shared surface; the red-first is recorded in the commit."
+    },
     "tests/lint/worldPulseFateTotality.walker.test.js": {
       "kind": "rationale",
       "rationale": "THE PULSE'S FATE VOCABULARY IS CLOSED, KINDED AND TOTAL (EM-B1h). Its catching power was EXECUTED as SIX planted mutants, each convicted by a NAMED arm and each restored SHA-256 exact: M1 the kind map loses 'disbanded' -> T2's patch.fate PRODUCER arm names moralInstitutionPressure.js and the word (the arm that matters, because no write site and no walked deriver spells 'disbanded' -- its only producer is that file's ternary, reaching worldPulseFate through institutionLifecycle's patch.fate), with T1's length and T3's homonym set reddening beside it; M2 closureFateForInstitution gains a fourth return 'liquidated' -> T2's derived-row arm names the deriver and the word; M3 the assertWorldPulseFate call is deleted from ruinInstitution -> T2's guarded-writer arm and T4's refusal arm; M4 a seventh writer planted as a new src/ file spelling a trigger token -> T3's FLAGGED set-equality and T2's writer-set equality; M5 demoted_by_disaster's kind flipped standing -> closure -> T1's population arm, 15/1/2 measured as 16/0/2; M6 a planted import of WORLD_PULSE_FATE_KIND -> T4's no-reader arm, the machinery that keeps this packet a freeze rather than a cure. Both matcher controls are in the file: it fires on a planted literal, ignores a commented one, and the shared codeOnly helper is shown to return zero.",
@@ -2982,6 +3044,10 @@
     "tests/lint/opGuardCoverage.walker.test.js": {
       "kind": "rationale",
       "rationale": "THE OP GUARD-COVERAGE WALKER (EM-B1b, cases C5 to C8; design SP6 instrument 3 and SP12.8, ARCH SP5 and SP8.3). IT IS A RATIONALE BECAUSE ITS REMOVER-PROOF IS CARRIED IN THE FILE AND RE-RUN ON EVERY GATE RUN RATHER THAN ONCE IN A SWEEP. Five of the walker's own assertions are planted mutants that drive the LIVE predicates (coverageProblems and declaredKeys), each a SPREAD COPY of the real composed catalogue with exactly one row bent and every other row untouched, so no file on disk is mutated and no checkout is needed: (1) declare-war's guards replaced by a string, convicted as 'guards is not an array'; (2) make-peace's guards holding one non-function entry, convicted as '1 declared guard cannot fire', which is SP12.8's own refusal; (3) open-trade's guardsStated emptied, convicted as an omission rather than a default; (4) send-force's guards populated while its sentence still claims none is wired, convicted as the contradiction arm; (5) C6's two directions, an authored row that stops declaring (undeclared by name) and a declaration no catalogue module authors (stale by name). C7 also proves the emptiness matcher REFUSES a sentence that claims coverage, so the sweep behind the contradiction arm is never a claim about nothing. The file's OWN removal is proved by EM-B1b's build red-first, which installs the pre-change operations.js over the spliced one and the un-widened tests/domain/editOperations.test.js over the widened one, quotes the named reds with their counts, and restores both byte-identically by sha256 before the green. A standing sweep plant would only re-prove in a shell what these controls prove inside the file, and it would have to mutate a catalogue leaf that a concurrent lane may hold uncommitted work in, which the sweep reverts with a checkout."
+    },
+    "tests/lint/declaredLineShape.test.js": {
+      "kind": "rationale",
+      "rationale": "THE DECLARED-LINE SHAPE WALKER (FIX-HOOK-OBJECT, the '[object Object]' hook line; owed at MERGE-TRAIN, 2026-11-09, where the integration side's enumeration rule reaches it). Its catching power is EXECUTED in the test body: the arm 'the walker flags a planted bad shape and passes the two lawful ones (red-first, anti-vacuity)' plants an object-text line and asserts the walker flags it, so a disarmed walker fails this file."
     },
     "tests/lint/decreeCause.walker.test.js": {
       "kind": "rationale",
@@ -3036,6 +3102,10 @@
       "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
     },
     "tests/generators/foodwaysOneLine.test.jsx": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/historicalCharacterMajorEvents.test.js": {
       "kind": "rationale",
       "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
     },
@@ -3201,9 +3271,49 @@
       "kind": "rationale",
       "rationale": "PEOPLE-1 CAST (2026-11-07, the people car's lane 1). Its catching power is EXECUTED on every ordinary run, not claimed: the walker executes the revised face census against the live registry (every family's face declared and of the three forms; the NONE list exact, with a stray-null arm that reds on any other faceless non-fabric row; the seat word on exactly the two government buildings; the three noPower persons at weight 0 in the backing catalogue; the family, row, override and distinct-title figures pinned at what was measured, 165/2/13 and 463/4/52). A planted mark (a fourth face form, a null on a FACE family, a seat word on a third building) reds the named arm by construction of the exact-equality pins. A standing sweep plant is not offered because the one target, src/data/institutionalCatalog.js, is the shared catalogue every concurrent lane edits, and scripts/mutation-sweep.sh reverts with git checkout -- <file> against the live worktree, which this program's shared-tree protocol forbids (the standing reason recorded at customContentCharsetWiring). Promote to kind:mutation when the sweep gains a target outside the shared catalogue."
     },
+    "tests/lint/styleLaw.walker.test.js": {
+      "kind": "rationale",
+      "rationale": "THE STYLE WALKER (STYLE-2-WAVE lane SW-0, the chair's ruling A10, 2026-11-09). Its catching power is EXECUTED IN THE TEST BODY on every run, in memory, mutating nothing on disk: a planted literal carrying a struck tic in a file the baseline does not name is a RISE 0 -> 1; a planted tic whose baseline total is 0 ('nothing has broken yet') is REFUSED even in a file the baseline names; a fall is green; and the unit rules (comments blanked, template and brace slots read as slots, JSX text runs with an element boundary, case-insensitive word bounds, the en.js allow-list) each convict their planted source. The in-place negative control was executed at the lane's tip: a 'rather than' literal appended to src/domain/summary/tonightSheet.js (baseline 1 -> 2) and a 'nothing has broken yet' literal appended to src/domain/display/newsBody.js redded exactly the two ratchet arms (2 failed / 20); both files restored byte-exact from a cp backup (git diff clean) and the file green again (20/20). A standing sweep plant would re-run that same check while mutating a live product file in the shared worktree; the in-body controls make it redundant."
+    },
+    "tests/lint/presumedThings.walker.test.js": {
+      "kind": "rationale",
+      "rationale": "THE WORD-TO-THING WALKER (COHERENCE-PRESUME, the chair's charter of 2026-11-11 §1). Its catching power is EXECUTED IN THE TEST BODY on every run, in memory, mutating nothing on disk: a planted undeclared literal naming the militia is a hit, while the same line declared on its needs, on its excludes, as a sibling table's key, and a negated line are not; the negation reader convicts its four planted sentences; a planted record that prints 'Town watch and militia' where the militia is absent is listed and the same record with the militia is not. Both arms also red on a STALE register row, so a cure that keeps its row, or a row removed without its cure, convicts the commit. ARM 1 puts ONE site out of reach (ARM1_NOT_PRINTED, COHERENCE-AGREE-4, 2026-11-12): the detail argument of generationCoherence.js :: finding, the receipt's diagnostic; a planted literal of the same words in another argument, another callee or another file is still a hit, and the pin 'no reader prints a finding's words' reds when a printing file reads a receipt finding's detail (executed: a planted read in VersionsTab.jsx redded it, restored byte-exact)."
+    },
     "tests/generators/people/representatives.test.js": {
       "kind": "rationale",
       "rationale": "PEOPLE-1 CAST (2026-11-07, the people car's lane 1). Its catching power is EXECUTED on every ordinary run, not claimed: the suite drives the real pipeline over the golden 525 and the soak 1,000's first 200 and asserts one card per face-bearing house and zero duplicates against the registry's own face column (an independent oracle, tests/lint/faceRegistry), the seat always faced (house, hall or mint, by id), ids stable across two births, the same seed giving an identical cast, and the per-tier envelope at the measured figures. A generator that dropped a house, faced one twice, minted beside a seat house or drew on the step's stream reds the named arm. A standing sweep plant is not offered because the targets (people/representatives.js, steps/generatePopulation.js, npcGenerator.js) are the people car's live seam that the middle lanes PEOPLE-2..4 build on concurrently, and the sweep's revert is a checkout of the live worktree. Promote to kind:mutation once the car has landed."
+    },
+    "tests/generators/people/powersDualHat.test.js": {
+      "kind": "rationale",
+      "rationale": "COHERENCE-POWERS guard (2026-11-11, the owner's dual-hat law). Its catching power was EXECUTED, not claimed, by running it red first: at decc7bf15, before the rule, all three of its checks were red, naming 17 seed misses over its thirteen seeds (10 where the leader was the office, 6 where a ruler of a kind had none of its kind in its first three, 1 Arcane Council with no arcane house), and on the scratch rule A two checks were red on one seed (docs/chair/2026-11-11/COHERENCE-POWERS-PHASE1-ADDENDUM.md, item 6). It drives the real pipeline on thirteen corpus seeds and reads every card against the backing catalogue's own shares (an independent oracle). A generator that seats the office over a house, or drops the ruler's kind from its first three, reds the named seed. A standing sweep plant is not offered for the reason recorded at tests/generators/people/representatives.test.js: the targets (castPowers.js, representatives.js, powerSupport.js) are the people seam other lanes edit concurrently, and the sweep's revert is a checkout of the live worktree. Promote to kind:mutation once the lane has landed."
+    },
+    "tests/generators/people/stressPowersFaced.test.js": {
+      "kind": "rationale",
+      "rationale": "COHERENCE-POWERS item 3 guard (2026-11-12; the chair's ruling on the second seat's item 0 STOP: every power on the page has a person, or its declared leaderless line). Its catching power was EXECUTED, not claimed, by running it red first: at fbbaa82e6 with the table and its reader present and the casting unbuilt, two of its four checks were red over its 22 seeds (eighteen powers with no member and no line: War Council 4, Occupation Authority 2, Quarantine Council 2, Reform Congregation 2, New Faith Community, Conversion Enforcement Office, The Highborn Circle, The Peerage 2, Monster Hunters, the houseless Thieves' Guild 2; and four occupation authorities not faced by a person sent in). Green after the casting (castPowers.js :: seatStressPowers and the two mints). The corpus arm over 2,460 births is the second seat's probe (docs/chair/2026-11-11/probes/COHERENCE-POWERS-2/item3.mjs): 0 blank."
+    },
+    "tests/generators/people/dualHatPoliticalMass.test.js": {
+      "kind": "rationale",
+      "rationale": "COHERENCE-POWERS-3 F1 guard (2026-11-12; REVIEW-POWERS F1: the dual hat does not shrink a place's political mass). Its catching power was EXECUTED, not claimed, by running it red first: with the merged start's steps/assembleSettlement.js (massOverride the bare card count) its first check was red on all eight of the reviewer's crisis and small-place seeds, each naming the power not on the page (Occupation Authority twice, Revolt Leadership, War Council, Grain Holders, The Highborn Circle, Monster Hunters / Adventurers, The Independent Bloc); green with the cure. It drives the real pipeline through birthConfig and checks literal power names (an independent oracle), and pins representatives.js :: seatFacesFoldedByDualHat on literal fixtures. A standing sweep plant is not offered for the reason recorded at tests/generators/people/representatives.test.js: the targets sit on the people seam other lanes edit concurrently, and the sweep's revert is a checkout of the live worktree. Promote to kind:mutation once the lane has landed."
+    },
+    "tests/generators/people/powerTextFinalRoster.test.js": {
+      "kind": "rationale",
+      "rationale": "COHERENCE-POWERS-3 F2 guard (2026-11-12; REVIEW-POWERS F2: every text that names a power reads the final roster). Its catching power was EXECUTED, not claimed, by running it red first: with the merged start's steps/assembleSettlement.js (no settling pass) both checks were red on its 120 births (every crisis forced at every size, and six sizes on random dials): History-tab tension parties and standing sentences naming a power the density law had trimmed, and standing sentences counting three powers beside one or two. Green with the cure (power/rosterText.js). Its oracle is independent: each seed is born a second time without the density law, so the names that can leave are the generator's own, not a list the code under test computes. A standing sweep plant is not offered for the reason recorded at tests/generators/people/representatives.test.js: the targets sit on seams other lanes edit concurrently, and the sweep's revert is a checkout of the live worktree. Promote to kind:mutation once the lane has landed."
+    },
+    "tests/generators/people/crisisSeat.test.js": {
+      "kind": "rationale",
+      "rationale": "COHERENCE-POWERS-3 guard (2026-11-12; the chair's rulings (1) and (2) on F1's measure: an occupation seats its occupier at every size, a fractured realm shows at least two powers). Its catching power was EXECUTED, not claimed, by running it red first: with the previous density/densityRoll.js, density/applyDensityLaw.js and data/stressPowerFaces.js both checks were red over its sixty births (15 misses: occupations with no Occupation Authority on the page, fractured realms with one power alone); green with the cure. It drives the real pipeline through birthConfig at every size and checks literal power names and the minted face (an independent oracle). A standing sweep plant is not offered for the reason recorded at tests/generators/people/representatives.test.js. Promote to kind:mutation once the lane has landed."
+    },
+    "tests/generators/people/seatHolderCard.test.js": {
+      "kind": "rationale",
+      "rationale": "COHERENCE-POWERS-5 guard (2026-11-13; REVIEW-POWERS-2 at e86d069be, N1-N3, the chair's ruling to the fifth seat: the person the seat's own home names reads the seat's row, office first and house second, never a subordinate's; each later finding's arm joins it with its own cure). Its catching power was EXECUTED, not claimed, by running each arm red first against the tree before its cure (N1: both arms red, the review's four towns and 106 misses over 138 births at every size and crisis). It drives the real pipeline through birthConfig with the census's dials and reads the holder from the Power tab's own seat home (powerStrata.js :: rulingChainOf) against literal row openings (an independent oracle). A standing sweep plant is not offered for the reason recorded at tests/generators/people/representatives.test.js. Promote to kind:mutation once the lane has landed."
+    },
+    "tests/generators/people/successionClaimants.test.js": {
+      "kind": "rationale",
+      "rationale": "COHERENCE-POWERS-4 guard (2026-11-12; REVIEW-POWERS F3, the chair's brief to the fourth seat: a claimant power is faced by its claimant in person, minted as the occupier's governor is, and named on the seat row; the old families' body takes the next free rung of the landed powers, else keeps its line). Its catching power was EXECUTED, not claimed, by running it red first: with the previous data/stressPowerFaces.js, people/castPowers.js and dossier/powerStrata.js all four checks were red (the review's two towns with no claimant on the page, the metropolises faced by a mine captain and a college master, the bodies printing their line beside a free landed rung); green with the cure. It drives the real pipeline through birthConfig at every size and checks literal power names, the minted title and the printed seat row (an independent oracle). A standing sweep plant is not offered for the reason recorded at tests/generators/people/representatives.test.js. Promote to kind:mutation once the lane has landed."
+    },
+    "tests/generators/people/powersOnThePage.test.js": {
+      "kind": "rationale",
+      "rationale": "COHERENCE-POWERS 2B guard (2026-11-12; the chair's charter items 1-3: the fold, the council of a kind, the powers with no one on the page). Its catching power was EXECUTED, not claimed, by running it red first: at 6f1bf56f7 four of its six checks were red over its fourteen seeds (a power of the roster's own or a density rival with no member card on nine seeds, the ruler's own kind beside it with no house on three, and an Arcane Council with no arcane house on five, read two ways); the other two are invariants the cure must keep (the roster conserved at 100, no relationship naming a power the roster lacks) and were green before and after. It drives the real pipeline through birthConfig and reads every power against the cast's own memberships and the backing catalogue's shares, with its own list of the roster's own powers (an independent oracle). A standing sweep plant is not offered for the reason recorded at tests/generators/people/representatives.test.js: the targets (rulerKin.js, applyDensityLaw.js, representatives.js) sit on seams other lanes edit concurrently, and the sweep's revert is a checkout of the live worktree. Promote to kind:mutation once the lane has landed."
     },
     "tests/generators/people/castPowers.test.js": {
       "kind": "rationale",
@@ -3429,6 +3539,10 @@
       "kind": "rationale",
       "rationale": "CENSUS-4f unit 2 (3cb986142): the Military/Guard label declares guardPresence and its one twin excludes it (src/data/factionLabelSiblings.js). IT IS A RATIONALE BECAUSE ITS CATCHING POWER WAS PROVEN BY AN EXECUTED IN-PLACE NEGATIVE CONTROL (LANDING-R2 seat E, 2026-11-07, at 104654b43): the twin's text 'Military Party' -> 'Military Guard Party' -> 3 failed / 4 (a, b, c). File restored byte-exact from a cp backup (cmp equal; git diff clean) and the file green again. A standing sweep plant would re-run that identical check while mutating a module the generation suites share."
     },
+    "tests/data/titleSecretsPresentations.test.js": {
+      "kind": "rationale",
+      "rationale": "THE TITLE SECRETS AND PRESENTATIONS (WRITE-PEOPLE's data, merged by ALLEGIANCE-CAR3 with ac6c44316; owed at MERGE-TRAIN, 2026-11-09, where the integration side's enumeration rule reaches it). Its catching power is EXECUTED in the test body: the arm 'a planted control reds the checks' plants a fault of each kind and asserts every check reds, so a disarmed check fails this file."
+    },
     "tests/data/tradeGoodsAuthorNotes.test.js": {
       "kind": "rationale",
       "rationale": "CENSUS-3b R-A (416bafa6b): no tradeGoodsData text prints an author condition '(if ...)' / '(where ...)' / '(only ...)' (src/data/tradeGoodsData.js, every exported string walked). IT IS A RATIONALE BECAUSE ITS CATCHING POWER WAS PROVEN BY AN EXECUTED IN-PLACE NEGATIVE CONTROL (LANDING-R2 seat E, 2026-11-07, at 104654b43): CRAFT_GUILDS_5_15 'Craft guilds (5-15)' -> 'Craft guilds (if 5-15)' -> 1 failed / 1. File restored byte-exact from a cp backup (cmp equal; git diff clean) and the file green again. A standing sweep plant would re-run that identical check while mutating a module the generation suites share."
@@ -3509,13 +3623,37 @@
       "kind": "rationale",
       "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
     },
+    "tests/generators/people/goals.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/people/hallCapture.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/regenDerivedState.test.js": {
+      "kind": "rationale",
+      "rationale": "FIX-SECTION-REGEN (2026-11-09; docs/chair/2026-11-09/FIX-SECTION-REGEN-2026-11-09.md). Its catching power is EXECUTED, not claimed: written red-first, it ran against the uncured tree twice — at bd07005b9 (the regen derived the hall on a private view and returned no powerStructure) the hall arms failed (2 failed | 1 passed), and at 8047c02cd (the conflicts written at the root only) the dual-address arm failed (1 failed | 3 passed); both are the planted regressions, reverting either cure re-creates them. A standing sweep plant is not offered: the subject is the composed generation pipeline (generateSettlementPipeline.js, narrativeGenerator.js), shared modules a concurrent lane may hold uncommitted work in, which check_caught's `git checkout --` revert would discard — the reason the generators tree's other subject-coupled files carry rationales."
+    },
     "tests/generators/people/personHooks.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/people/personHookSpread.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/people/allegiance.test.js": {
       "kind": "rationale",
       "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
     },
     "tests/generators/people/ties.test.js": {
       "kind": "rationale",
       "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/lint/noLegacyCorruptReaders.walker.test.js": {
+      "kind": "rationale",
+      "rationale": "I-15, THE RETIRED CORRUPT MARK'S READERS (ALLEGIANCE-CAR1 41a39975a, red-first at 5902f1a4a with 25 sites in 11 files; owed at MERGE-TRAIN, 2026-11-09, where the integration side's enumeration rule reaches it). Its catching power is EXECUTED in the test body: the arm 'POSITIVE CONTROL: a planted read of every refused shape is caught; the other meanings are not' plants each refused read and asserts the scan reds on it, so a disarmed scan fails this file."
     },
     "tests/lint/noLegacyFactionReaders.walker.test.js": {
       "kind": "rationale",
@@ -3524,6 +3662,86 @@
     "tests/data/faceHonorifics.test.js": {
       "kind": "rationale",
       "rationale": "THE HONORIFIC REGISTRY (PEOPLE-6 LINKS step 2; the A-11 harbour guard at MERGE-CAR). Owed at MERGE-CAR (2026-11-08): the people car's links lane added it where the integration side's enumeration rule now reaches it. The subject is authored DATA (src/data/faceHonorifics.js) plus one pure resolver, and the suite's catching power is in its own arms: totality both ways against the LIVE census (every title a face can be born with — the catalogue's faceRows and the two mint tables — and no other), the canonical form pinned per named title, the deterministic pick reaching every form, the gendered forms by card gender, and the coast guard's two arms, each with an anchored negative (expectAbsentWithAnchor) so a vacuous pool cannot pass. A sweep plant would mutate src/data/institutionalCatalog.js or the registry, files nearly every generation suite imports and a concurrent lane may hold; the sweep's revert is a `git checkout --`."
+    },
+    "tests/domain/newsCardFace.pin.test.js": {
+      "kind": "rationale",
+      "rationale": "THE NEWS CARD'S FACE STATES AN EVENT AND NAMES ITS PEOPLE (SW-11 PULSE-CARD, STYLE-RULINGS-2 C1; enrolled by STYLE-2-MERGE at the SW-11 merge point, 2026-11-09, where the integration side's enumeration rule reaches it). Its catching power is EXECUTED red-first on the lane: at the base the face printed the lifecycle-only line and the pipeline's state word, and the pin's three arms red on those assertions, not on an import (the file's own fallback face is the base face)."
+    },
+    "tests/domain/successionQuestionPrint.pin.test.js": {
+      "kind": "rationale",
+      "rationale": "THE SUCCESSION QUESTION PRINTS NAMES, NEVER IDS (SW-11 PULSE-CARD, the audit's C2·26; enrolled by STYLE-2-MERGE at the SW-11 merge point, 2026-11-09). Its catching power is EXECUTED red-first on the lane: a planted succession outcome printed the question's ids at both print sites before the cure."
+    },
+    "tests/security/surveyorPremiumOnly.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/generators/npcStructureSeatPlain.test.js": {
+      "kind": "rationale",
+      "rationale": "THE SEAT-HOLDERS' POSITION AND CONSTRAINT PRINT IN PLAIN WORDS (SW-6 CRISIS-SURFACES, STYLE-RULINGS-2 B10(b); enrolled by STYLE-2-MERGE-3 at the SW-6 merge point, 2026-11-09, where the integration side's enumeration rule reaches it). Its catching power is EXECUTED red-first on the lane (docs/chair/2026-11-09/STYLE-2-CRISIS-SURFACES-2026-11-09.md §1 and §6.1): new at cause 11 (165049330), widened red-first per category (cause 18 MILITARY, 30a35a390: 6 red at the parent) and held to the record battery's defence words (cause 29, bb81f76db: 4 red at the parent)."
+    },
+    "tests/generators/foodCutLabelReadsSurplus.test.js": {
+      "kind": "rationale",
+      "rationale": "THE CRISIS LABEL READS THE FOOD SURPLUS (SW-B1 CONTRADICTIONS, STYLE-RULINGS-2 B1; enrolled by STYLE-2-MERGE-2 at the SW-B1 merge point, 2026-11-09, where the integration side's enumeration rule reaches it). Its catching power is EXECUTED red-first on the lane (docs/chair/2026-11-09/STYLE-2-CONTRADICTIONS-2026-11-09.md: every cause cured red-first at bd07005b9): 1 red at the base (\"Crisis Cutting the Food Supply\" beside a surplus, P73), green at the cure ef7286a7a."
+    },
+    "tests/generators/importChannelReadsDocks.test.js": {
+      "kind": "rationale",
+      "rationale": "THE FOOD IMPORT CHANNEL SAYS 'BY SEA' ONLY OVER DOCKS (SW-B1 CONTRADICTIONS, STYLE-RULINGS-2 B1; enrolled by STYLE-2-MERGE-2 at the SW-B1 merge point, 2026-11-09, where the integration side's enumeration rule reaches it). Its catching power is EXECUTED red-first on the lane (docs/chair/2026-11-09/STYLE-2-CONTRADICTIONS-2026-11-09.md: every cause cured red-first at bd07005b9): 1 red at the base (\"expected 'port trade' not to be 'port trade'\": a port route with no docks, P71), green at the cure."
+    },
+    "tests/generators/powerCardOrderReads.test.js": {
+      "kind": "rationale",
+      "rationale": "THE POWER CARDS READ THE POWERS THEY SPEAK OF (SW-B1 CONTRADICTIONS, STYLE-RULINGS-2 B1; enrolled by STYLE-2-MERGE-2 at the SW-B1 merge point, 2026-11-09, where the integration side's enumeration rule reaches it). Its catching power is EXECUTED red-first on the lane (docs/chair/2026-11-09/STYLE-2-CONTRADICTIONS-2026-11-09.md: every cause cured red-first at bd07005b9): 14 red at the base (P51 ×4 seeds and P50 ×6: \"Thieves' Guild (39) … above Guild Council (37)\", \"Power is distributed …\"; §2·D #7 ×2), green at the cures."
+    },
+    "tests/build/engineServiceStoreParity.test.js": {
+      "kind": "rationale",
+      "rationale": "THE ENGINE SERVICE ANSWERS THE STORE'S OWN REQUESTS WITH THE STORE'S OWN RECORDS (remote-path R2, lane/remote-path-2026-11-10, 2026-11-10). Its catching power is EXECUTED: TWO mutants planted 2026-11-10, each proved to have moved the file's bytes (cmp) before the run, each restored by cp from a backup taken BEFORE the plant and verified byte-identical by cmp. (1) The store stops stamping: src/store/settlementContentRuntime.js `environment: runtime.environment || null` -> `environment: null` reddened 'generate: the bundle's birth for the wire body equals the local core on the store's request, stamp included' (TRUE_EXIT 1, 1 failed / 3 passed). (2) The service stamps a different environment: the vanilla environmentHash in supabase/functions/_shared/engineBundle.js replaced by 64 zeros reddened the same title (TRUE_EXIT 1, 1 failed / 3 passed). A standing sweep plant is not offered because both targets are shared: the store module is read by every generation lane, and the bundle is GENERATED (the merge seat re-emits it), so check_caught's `git checkout --` revert would race a concurrent re-emit -- the reason recorded at customContentCharsetWiring. Promote to kind:mutation when the sweep gains a target outside those files."
+    },
+    "tests/generators/crimeLevelFrameWork.test.js": {
+      "kind": "rationale",
+      "rationale": "GEN-SPEED cure 2's work-count pin (lane/gen-speed-2026-11-10, merged at STYLE-2-MERGE point 39; its record docs/chair/2026-11-10/GEN-SPEED-2026-11-10.md). Its catching power was EXECUTED at the merge, not claimed (STYLE-2-MERGE-7, 2026-11-11): src/generators/npc/rosterFrame.js's roster-keyed memory planted away (`if (slot.key !== key) slot = …` made unconditional, so every person re-frames the whole held set, the pre-cure cubic work) reddened exactly 'masking steps are bounded by (M + 4P) · N, not P · (M + 4) · N' (1 failed | 1 passed); the file was restored from a copy taken before the plant and cmp-verified byte-identical, `grep -c PLANT` 0, the pin 2/2 green after. A rationale rather than a standing sweep plant: scripts/mutation-sweep.sh reverts by git checkout against a shared worktree, and the merge seat adds no sweep row."
+    },
+    "tests/generators/spareHookLineFactsWork.test.js": {
+      "kind": "rationale",
+      "rationale": "GEN-SPEED cure 3's work-count pin (lane/gen-speed-2026-11-10, merged at STYLE-2-MERGE point 39; its record docs/chair/2026-11-10/GEN-SPEED-2026-11-10.md). Its catching power was EXECUTED, not claimed: (1) at the merge (STYLE-2-MERGE-7, 2026-11-11) src/generators/people/representatives.js's `const facts = () => once;` planted back to the pre-cure per-call `factsOf(…)` reddened exactly 'reads the roster a bounded number of times over a whole walk, not once per row' (expected 24 to be less than or equal to 8; 1 failed | 1 passed); the file was restored from a copy taken before the plant and cmp-verified byte-identical, `grep -c PLANT` 0, the pin 2/2 green after. (2) The lane's own plant for the second arm, recorded in its record: a write of a roster row's `name` inside the loop turned 'a deep-frozen record and place give the same lines…' red (TypeError: Cannot assign to read only property 'name'), removed after. A rationale rather than a standing sweep plant, as above."
+    },
+    "tests/build/buildHeapPinned.test.js": {
+      "kind": "rationale",
+      "rationale": "CI-FIT's build-heap pin (lane/ci-fit-2026-11-10, merged at STYLE-2-MERGE point 40; proven in real CI by the chair, run 42808855501). Its catching power was EXECUTED at the merge, not claimed (STYLE-2-MERGE-7, 2026-11-11): package.json's `build` planted back to a bare `vite build` (the default heap, the exit-134 state the pin guards) reddened exactly '`npm run build` runs Vite through node with --max-old-space-size of at least 4096' (1 failed | 1 passed); package.json restored from a copy taken before the plant and cmp-verified byte-identical, the pin 2/2 green after. A rationale rather than a standing sweep plant: scripts/mutation-sweep.sh reverts by git checkout against a shared worktree, and the merge seat adds no sweep row."
+    },
+    "tests/generators/projectionAgreement.test.js": {
+      "kind": "rationale",
+      "rationale": "COHERENCE-AGREE's projection-agreement guard (2026-11-11). Its catching power is proven by its own construction: arm 1 plants one record per finding (a must-import beside live iron, an unsupported strength, a strategic yield clause, a war hook in peace, a scarcity beside a live material, a mercenary sentence with no company, an income line naming a resource the town lacks, a must-import note beside a live material, an unqualified grain import at 90% grown, a shortage import beside its resource, worked land missing from the sources) and holds each convicted with its twin cleared; arm 2 births the corpus seeds that disagreed at the base and was executed RED at 99bcc6944 (and at each guard extension: f88d87af2, db9dcb7a4) before every cure turned it green. A sweep plant would duplicate arm 1."
+    },
+    "tests/generators/coherenceAgreeCures.test.js": {
+      "kind": "rationale",
+      "rationale": "COHERENCE-AGREE's cure pins (2026-11-11), one describe block per cure. Every block was executed RED against the lane's base tree (99bcc6944, a scratch copy of it) and GREEN at its cure's commit before the commit was made; that red-then-green execution is the mutation proof for each, recorded in the cure's commit message. A sweep plant would re-run the base."
+    },
+    "tests/generators/tollNamePrintedEverywhere.test.js": {
+      "kind": "rationale",
+      "rationale": "COHERENCE-AGREE-8's pins for the toll's name off a crossroads (REVIEW-AGREE-3 FINDING 1), one describe block per writer cured (the NPC goals, the chain receipts, the read-time projections) and THE SWEEP (every stored string of the birth but the two carriers the chair's ruling keeps, and every export the town drives without a browser). Every block was executed RED at its cure's parent (a scratch worktree of the lane at that commit) and GREEN at the cure's commit before the commit was made; that red-then-green execution is the mutation proof, recorded in each commit message. A sweep plant would re-run the parent."
+    },
+    "tests/lint/tradeListWriters.walker.test.js": {
+      "kind": "rationale",
+      "rationale": "COHERENCE-AGREE-8's census of every writer of a town's trade lists (REVIEW-AGREE-3 FINDING 2: a fifth writer stood unseen). Its guard-the-guard test holds the writer pattern to five planted writes and three reads. Executed plants, each RED alone and reverted (recorded in its commit): the fifth writer's refusal parameter changed; a sixth writer file in src/generators/economy pushing a good; a new write in a COPIES file (the PDF view model); and the receipt member's old three-suffix match (projectionAgreement's fifth-writer arm)."
+    },
+    "tests/lint/chainPrintSites.walker.test.js": {
+      "kind": "rationale",
+      "rationale": "COHERENCE-AGREE-6's walker for an active chain's name and source (REVIEW-AGREE-2 F1, the chair's ruling of 2026-11-12: the rename at print time), WIDENED by COHERENCE-AGREE-8 (REVIEW-AGREE-3 FINDING 1: it walked the print surfaces only, and a goal writer in src/generators/people stayed unseen). Its roots are every top-level directory of product code, and an unclassed new directory reds it; it sees a chain held as chain/ch (anywhere), as c (in a file touching chains) or under any name taken from a chain list (for-of, an array method's parameter, a find, one step through a local array). Its guard-the-guard test holds the patterns to seven planted shapes. Executed plants, each RED alone and reverted (recorded in the widening's commit): a goal writer in src/generators/people reading ch.label; a domain file printing row.label from activeChains; an edge function reading k.resource; a new top-level code directory; an exempt file's new read (the count arm); a print site dropping the leaf's import. At the parent the widened walker reds on the four new print sites."
+    },
+    "tests/components/pageCensus.walker.test.jsx": {
+      "kind": "rationale",
+      "rationale": "W2-A-LEAVES's rendered-dossier arm in the suite (2026-11-12): twelve births of the second wave's census corpus (six sizes, calm and in crisis) rendered through the real OutputContainer as the owner sees it, walked, and read by the page battery's page-census check; each seed's rows must equal scripts/census/page-census.register.json's grid row exactly. EXECUTED on 2026-11-12: removing 'P13' from the banked grid row of r2r-thorp-0 (a dossier now printing a row the register does not hold) reddened the test 'r2r-thorp-0'; restored from a backup taken before the plant. The reader itself is proven row by row by tests/domain/coherence/pageCensusFindings.test.js. WHAT IT DOES NOT CATCH: a contradiction on a birth outside the grid (the 720 and the fresh corpora are scripts/census/page-census.mjs's) and a contradiction no census pattern describes."
+    },
+    "tests/domain/coherence/pageCensusFindings.test.js": {
+      "kind": "rationale",
+      "rationale": "W2-A-LEAVES's plants for the rendered-dossier arm (2026-11-12): every row of src/domain/coherence/pageCensusFindings.js :: PAGE_CENSUS_ROWS has a planted dossier (the census's own two-line shapes) that reds its own row and no other, the totality of plants against rows is asserted, controls with the contradicting half removed read nothing, and the page battery's page-census check is held to a planted view. WHAT IT CATCHES: a row whose test stops matching its pattern, a row that reds another's plant, a row added with no plant. WHAT IT DOES NOT CATCH: the pattern worded another way on the page (the census's words are the test's)."
+    },
+    "tests/lint/factLayers.walker.test.js": {
+      "kind": "rationale",
+      "rationale": "W2-A-LEAVES's layer walker (2026-11-12): the layer table (src/domain/facts/factLayers.js, tests/lint/factLayers.poolTable.json) held to the source, and three shrink-only arms against tests/lint/factLayers.register.json. Its guard-the-guard tests plant each fault in memory and hold the verdicts to it: a layer-1 leaf that reads the cast (a violation and an undeclared read), a stored field no stratum places, a stored leaf reading above its stratum, a base-reading pool line naming the garrison in a pool below it and a pool declaring a cast atom in a pool below it (and the same lines green one layer up), an unplaced pool, and private name tests of six fact families (with controls: a read of the home, a thieves' guild under the guild family, a word through a constant). EXECUTED AGAINST THE TREE on 2026-11-12 before the first commit: a name test of 'market' appended to src/domain/magicReliance.js reddened 'READERS: every file reads exactly its banked count' (a 100th file), and a cast read declared on the magic leaf reddened 'every leaf declares exactly the strata it touches'; both restored by copy from a backup taken before the plant, porcelain back to the lane's own files. WHAT IT DOES NOT CATCH: a leaf branch the sixteen-birth grid never takes; a pool line's claim in words no vocabulary registers yet (a practitioner, a capture, a margin); a name test spelled through a helper of another file."
+    },
+    "tests/lint/defenceFactReaders.walker.test.js": {
+      "kind": "rationale",
+      "rationale": "COHERENCE-AGREE's shrink-only count of the defence facts' private readers (2026-11-11; the second member, COHERENCE-AGREE-3, 2026-11-12). Its guard-the-guard tests plant a private reader of each shape (a name test, a pattern test, a flag from a name list) and controls (a read of the home, a scope test on a variable named wall), and hold the patterns to them. WHAT IT CATCHES: a line that sets a private walls/garrison/militia/watch/mercenary, gate, court or free-company flag from anything but the home, or that calls a name test with a string or pattern literal holding one of the words written in tests/lint/defenceFactReaders.shared.mjs (walls, garrison, barracks, militia, watch, mercenar*; court, courthouse, town hall, city hall, gate(s), gatehouse, hireling hall, free company, hired muscle, veteran's lodge, sellsword); the exact-equality arms red on such a line in a file whose banked count it exceeds, or in a file outside the registers. A word held in a name-like constant in the same file (`const W = 'courthouse'; n.includes(W)`) is read as the word (COHERENCE-AGREE-6, REVIEW-AGREE-2 F8 (i)). The third member (COHERENCE-AGREE-7, F8 (ii)) counts the palisade, the prison, the hospital and the healer (palisade(s), earthwork(s), prison(s), gaol(s), jail(s), hospital(s), infirmar*, healer(s)) against its own shrink-only register; every word lives in ONE table keyed to the home's atoms (ATOM_WORDS), the atom test reds on a defence-homed atom of FACT_DIMENSIONS with no word there and on a word its own member does not count, and the review's nine plants are each held counted. A name list tested against a role archetype and an agreement check that reads the home on the same line are ruled out by rule. WHAT IT DOES NOT CATCH: a word held in a constant of another file or in a prose constant (a comma, or more than 40 characters), a word the lists do not hold, and a reader that asks the question without a name test."
     }
   },
   "meta": {

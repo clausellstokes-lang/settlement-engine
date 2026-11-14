@@ -88,7 +88,7 @@ export const GATE_FEATURES = {
   "Multiple garrisons": {
     minTier: "city",
     requires: ["Garrison", "Barracks", PROFESSIONAL_CITY_WATCH],
-    reason: "Multiple garrison facilities require city-scale population and military investment."
+    reason: "Multiple garrison facilities require a city's population and military investment."
   },
   [PROFESSIONAL_CITY_WATCH]: {
     minTier: "city",
@@ -106,7 +106,7 @@ export const GATE_FEATURES = {
   },
   [ADVANCED_WATER_INFRASTRUCTURE]: {
     minTier: "metropolis",
-    reason: "Complex multi-district water distribution requires metropolis-scale population and resources."
+    reason: "Complex multi-district water distribution requires the population and resources of a metropolis."
   },
   "Sewage system": {
     minTier: "city",
@@ -119,7 +119,7 @@ export const GATE_FEATURES = {
   },
   "Market square": {
     minTier: "village",
-    reason: "A market square at village scale is the weekly market clearing. Town-scale gets a formal paved square with a royal charter."
+    reason: "In a village the market square is the cleared ground where the weekly market meets. A town gets a formal paved square with a royal charter."
   },
   "Weekly market": {
     minTier: "village",
@@ -129,7 +129,7 @@ export const GATE_FEATURES = {
   [MULTIPLE_MARKET_SQUARES]: {
     minTier: "city",
     requires: ["Market square", "Daily markets"],
-    reason: "Multiple permanent market squares require city-scale trade volume."
+    reason: "Multiple permanent market squares require the trade of a city."
   },
   "Daily markets": {
     minTier: "city",
@@ -154,7 +154,7 @@ export const GATE_FEATURES = {
   "Merchant guilds (50-100+)": {
     minTier: "metropolis",
     requires: [MERCHANT_GUILDS_15_40, DISTRICT_MARKETS_5_10],
-    reason: "Extreme specialization requires metropolis-scale trade volume."
+    reason: "Extreme specialization requires the trade of a metropolis."
   },
   [WAREHOUSE_DISTRICT]: {
     minTier: "city",
@@ -164,7 +164,7 @@ export const GATE_FEATURES = {
   "International trade center": {
     minTier: "metropolis",
     requires: [WAREHOUSE_DISTRICT, "Banking houses"],
-    reason: "Global trade requires major trade infrastructure: port access or substantial overland networksstructure with banking."
+    reason: "Global trade requires major trade infrastructure: port access or substantial overland networks, with banking."
   },
   [DOCKS_PORT_FACILITIES]: {
     requiresAccess: ["port", "river"],
@@ -208,7 +208,7 @@ export const GATE_FEATURES = {
   [PARISH_CHURCHES_10_30]: {
     minTier: "city",
     requires: [PARISH_CHURCHES_2_5],
-    reason: "An extensive network of them requires city-scale population."
+    reason: "An extensive network of them requires a city's population."
   },
   [PARISH_CHURCHES_50_100]: {
     minTier: "metropolis",
@@ -222,7 +222,7 @@ export const GATE_FEATURES = {
   [MULTIPLE_MONASTERIES]: {
     minTier: "city",
     requires: [MONASTERY_OR_FRIARY],
-    reason: "Multiple religious houses require city-scale wealth and population."
+    reason: "Multiple religious houses require a city's wealth and population."
   },
   "Major monasteries (5-10)": {
     minTier: "metropolis",
@@ -270,7 +270,7 @@ export const GATE_FEATURES = {
   },
   "Town hall": {
     minTier: "town",
-    reason: "Formal civic administration requires town-scale governance."
+    reason: "Formal civic administration begins at the size of a town."
   },
   "City hall": {
     minTier: "city",
@@ -293,7 +293,7 @@ export const GATE_FEATURES = {
   "Massive prison": {
     minTier: "metropolis",
     requires: ["Large prison", MULTIPLE_COURT_BUILDINGS],
-    reason: "Vast prisons require metropolitan-scale criminal justice system."
+    reason: "Vast prisons require the courts and justice system of a metropolis."
   },
   "Palace/government complex": {
     minTier: "metropolis",
@@ -312,7 +312,7 @@ export const GATE_FEATURES = {
   "Craft guilds (100-150+)": {
     minTier: "metropolis",
     requires: [CRAFT_GUILDS_30_80],
-    reason: "Every conceivable trade requires metropolis-scale population."
+    reason: "Every conceivable trade requires the population of a metropolis."
   },
   "Specialized metalworkers": {
     requires: ["Blacksmiths (3-10)", CRAFT_GUILDS_30_80, CRAFT_GUILDS_5_15],
@@ -405,7 +405,7 @@ export const GATE_FEATURES = {
   [MULTIPLE_CRIMINAL_FACTIONS]: {
     minTier: "city",
     requires: ["Street gang", THIEVES_GUILD_CHAPTER, SMUGGLING_OPERATION],
-    reason: "Multiple competing criminal organizations require city-scale population."
+    reason: "Multiple competing criminal organizations require a city's population."
   },
   "Black market bazaar": {
     minTier: "city",
@@ -428,7 +428,7 @@ export const GATE_FEATURES = {
   "Smuggling network": {
     minTier: "city",
     requires: [SMUGGLING_OPERATION, WAREHOUSE_DISTRICT],
-    reason: "Network-scale smuggling requires an established operation and storage infrastructure. Port access is a bonus but not required for overland networks."
+    reason: "A smuggling network grows from an established operation with places to store its goods. A port helps, but overland networks do without one."
   },
   "Front businesses": {
     minTier: "town",
@@ -442,7 +442,7 @@ export const GATE_FEATURES = {
   [MULTIPLE_ADVENTURERS_GUILDS]: {
     minTier: "city",
     requires: [ADVENTURERS_CHARTER_HALL],
-    reason: "Competing guilds require metropolis-scale adventuring demand."
+    reason: "Competing guilds need the adventuring trade of a metropolis."
   },
   "Dungeon delving supply district": {
     minTier: "city",
@@ -459,7 +459,7 @@ export const GATE_FEATURES = {
   },
   "Wizard's tower": {
     minTier: "town",
-    reason: "A tower-dwelling wizard establishes their own supply chain at this scale."
+    reason: "A wizard who keeps a tower arranges their own supplies."
   },
   "Alchemist shop": {
     minTier: "town",

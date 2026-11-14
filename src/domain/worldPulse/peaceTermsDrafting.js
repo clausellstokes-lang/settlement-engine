@@ -260,7 +260,7 @@ export function draftReceipt(type, asset, years, magnitude) {
     case 'restitution': return `Restitution for a debt long unpaid: ${shareWord} for ${years} year${years === 1 ? '' : 's'}; the old grain-years, called in at last.`;
     case 'compelled_alliance': return `Forced allyship for ${years} year${years === 1 ? '' : 's'}. A banner compelled, and compelled loyalty rots.`;
     case 'demilitarization': return `A mobilization cap for ${years} year${years === 1 ? '' : 's'}: the beaten foe may not rearm.`;
-    case 'non_aggression': return `A non-aggression pact ${years} year${years === 1 ? '' : 's'}: no war between these courts while it stands.`;
+    case 'non_aggression': return `A non-aggression pact for ${years} year${years === 1 ? '' : 's'}: no war between these courts while it stands.`;
     case 'occupation_continuation': return `The occupation continues ${years} year${years === 1 ? '' : 's'}. The garrison stays at the walls.`;
     case 'puppet_seat': return `A victor-aligned seat installed (registration seam): cheap control, brittle control.`;
     case 'disclosure': return `Observer/disclosure clause (registration seam): the loser's court opened to the victor's eyes.`;

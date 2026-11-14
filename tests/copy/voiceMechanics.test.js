@@ -309,14 +309,13 @@ function walkJs(dir, out = []) {
 const AUTHORED_VOCABULARY_ALLOWLIST = Object.freeze({
   'src/generators/power/governanceNarrative.js': Object.freeze({
     'Unstable — criminal governance': { count: 1, why: 'public-order band, deriveBaselineStability :250 — sibling values in the same return set spell the gloss with parentheses ("Enforced Order (authoritarian)", "Tense (external threat)").' },
-    'Critical (active siege — survival priority)': { count: 1, why: 'public-order band, applyStressStability :289 — the dash is INSIDE the parenthetical gloss.' },
     'Fractured — no stable governing authority': { count: 1, why: 'public-order band, applyStressStability :295 — the `politically_fractured` stressor override.' },
-    'Shaken — institutional trust collapsed': { count: 1, why: 'public-order band, applyStressStability :298 — the `recently_betrayed` stressor override.' },
+    'Shaken — nobody trusts those in charge': { count: 1, why: 'public-order band, applyStressStability :298 — the `recently_betrayed` stressor override.' },
     'Desperate — hunger is eroding order': { count: 1, why: 'public-order band, applyStressStability :301 — the `famine` stressor override.' },
-    'Anxious — disease is overriding normal authority': { count: 1, why: 'public-order band, applyStressStability :304 — the `plague_onset` stressor override.' },
+    'Anxious — people fear the sickness more than they heed orders': { count: 1, why: 'public-order band, applyStressStability :304 — the `plague_onset` stressor override.' },
     'Volatile — power is available to whoever moves first': { count: 1, why: 'public-order band, applyStressStability :307 — the `succession_void` stressor override.' },
-    'Strained — debt obligations constrain every decision': { count: 1, why: 'public-order band, applyStressStability :313 — the `indebted` stressor override, which yields to an Unstable baseline.' },
-    'Tense — regional monster threat': { count: 1, why: 'public-order band, annotateMonsterThreat :337 — the standalone form of the "; monster threat active" annotation.' },
+    'Strained — the creditors have a say in every decision': { count: 1, why: 'public-order band, applyStressStability :313 — the `indebted` stressor override, which yields to an Unstable baseline.' },
+    'Tense — regional monster threat': { count: 1, why: 'public-order band, annotateMonsterThreat :337 — the standalone form of the "; monsters on the roads" annotation.' },
   }),
   'src/generators/economy/prosperity.js': Object.freeze({
     'Highly diversified — multiple major revenue streams': { count: 1, why: 'economic-complexity band, deriveEconomicComplexity :296 — byte-identical to src/domain/display/labelBands.js COMPLEXITY_LABEL.HIGHLY_DIVERSIFIED, which transcribes this producer.' },

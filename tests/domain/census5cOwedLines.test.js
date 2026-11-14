@@ -4,7 +4,7 @@
  * Owed since CENSUS-5 (the lane record's "waiting / owed" table), now that their getters exist:
  *   DS-DEF-6 Economic Backing: Well-funded v2  "The soldiers at {settlement} are paid"      `soldiers` (1c)
  *   DS-DEF-4 capture none v2                   "There is a criminal interest … with the means"  `organised crime` (3b)
- *   DS-DEF-4 structure null v1                 "No criminal infrastructure has been identified" `no organised crime` (3b)
+ *   DS-DEF-4 structure null v1                 "books record no gang, guild or racket" `no organised crime` (3b; W2 DEF fourth seat re-keyed it from "No criminal infrastructure has been identified", 2026-11-07)
  *
  * Found by unit 2's reading (the {colour} pass), each a claim the record can contradict:
  *   DS-FTH-3 LEGITIMACY: established v1  "Nobody disputes it"                 `no crisis: religious_conversion`
@@ -51,7 +51,7 @@ const under = (type) => withFacts({ crisis: factsOf({ stress: [{ type }] }).cris
 const OWED = Object.freeze([
   ['DS-DEF-6', 'Economic Backing: Well-funded', /The soldiers at \{settlement\} are paid/, 'soldiers', withFacts({ soldiers: false }), CALM_FACTS_ADMIT_ALL],
   ['DS-DEF-4', 'capture none', /There is a criminal interest at/, 'organised crime', withFacts({ crime: 'none' }), withFacts({ crime: 'organized' })],
-  ['DS-DEF-4', 'structure null (nothing organized recognized)', /No criminal infrastructure has been identified/, 'no organised crime', withFacts({ crime: 'organized' }), withFacts({ crime: 'diffuse' })],
+  ['DS-DEF-4', 'structure null (nothing organized recognized)', /books record no gang, guild or racket/, 'no organised crime', withFacts({ crime: 'organized' }), withFacts({ crime: 'diffuse' })],
   ['DS-FTH-3', 'LEGITIMACY: established', /Nobody disputes it/, 'no crisis: religious_conversion', under('religious_conversion'), CALM_FACTS_ADMIT_ALL],
   ['DS-WAR-5', 'posture peace', /no soldiers to speak of/, 'no soldiers', CALM_FACTS_ADMIT_ALL, withFacts({ soldiers: false })],
   ['DS-WAR-5', 'settlementWarStatus null (peace, not missing data)', /quarrels are the ordinary kind/, 'no crisis: unrest', under('insurgency'), CALM_FACTS_ADMIT_ALL],

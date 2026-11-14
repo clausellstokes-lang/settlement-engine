@@ -259,17 +259,33 @@ describe('institution rename: the declared cascade over real pipeline saves', ()
     // 2026-11-07 PEOPLE-5B (M-7): 44 -> 40 — the grouping's member copy left the record, so the four NPC handle rows
     // at the second home (`factions[].members[].{institution.key, corruptTies.thievesGuild, corruptTies.criminalInstitution,
     // linkedInstitutionIds[]}`) left with it (factionRename.js :: NPC_HOMES is ['npcs[]']).
-    expect(exactRows.length, 'the exact rows are the 40 the packet, RUNG1B-F7 and PEOPLE-5B declare').toBe(40);
+    // 2026-11-08 ALLEGIANCE-CAR1: 40 -> 39 — the two `corruptTies.{thievesGuild, criminalInstitution}` rows left with the
+    // retired mark; ONE `allegiance.house` row (the hidden allegiance's criminal house) took their place.
+    // 2026-11-09 ALLEGIANCE-CAR4: 39 -> 41 — the keyed goal's two house targets (`goal.intent.{short,long}.target.id`
+    // where `kind === 'house'`, generators/people/goals.js), a house's roster name as the simulation's join.
+    expect(exactRows.length, 'the exact rows are the 41 the packet, RUNG1B-F7, PEOPLE-5B, ALLEGIANCE-CAR1 and ALLEGIANCE-CAR4 declare').toBe(41);
+    expect(exactRows.map((row) => row.path), 'the keyed goal\'s house targets are declared').toEqual(expect.arrayContaining(['npcs[].goal.intent.short.target.id', 'npcs[].goal.intent.long.target.id']));
+    expect(exactRows.map((row) => row.path), 'the allegiance\'s house is declared, the retired ties are not').toEqual(expect.arrayContaining(['npcs[].allegiance.house']));
+    expect(exactRows.filter((row) => row.path.includes('corruptTies')).map((row) => row.path)).toEqual([]);
 
     // (vi)(d) BOTH MEMBERS OBSERVED FIRING through the cascade, never asserted from the declaration.
     const fired = new Set();
+    // ALLEGIANCE-CAR1 (2026-11-08): the retired mark wrote a criminal house TWICE per corrupt card (`corruptTies.thievesGuild`
+    // and `.criminalInstitution`) and its allegiance once, so the worst-case house no longer lands on a criminal house in the
+    // sample and the `verbatim` row (`safetyProfile.criminalInstitutions[]`) is reached by none. Each world therefore also
+    // renames its worst-case CRIMINAL house where it holds one, so both forms are still OBSERVED firing.
     for (const world of worlds) {
-      const save = reloaded(world.save);
-      const before = new Map(labelRows.map((row) => [row.path, valuesAt(save, row.path).length]));
-      applyInstitutionRenameToSettlement(save, world.worst.name, NEW_NAME);
-      for (const row of labelRows) {
-        if (!before.get(row.path)) continue;
-        if (valuesAt(save, row.path).includes(LABEL_REWRITE[row.rewrite](NEW_NAME))) fired.add(row.rewrite);
+      const listed = new Set(valuesAt(world.save, 'economicState.safetyProfile.criminalInstitutions[]').map(normalise));
+      const criminal = rosterOf(world.save).filter((name) => listed.has(normalise(name)))
+        .sort((a, b) => handleCount(world.save, b) - handleCount(world.save, a))[0];
+      for (const target of [world.worst.name, criminal].filter(Boolean)) {
+        const save = reloaded(world.save);
+        const before = new Map(labelRows.map((row) => [row.path, valuesAt(save, row.path).length]));
+        applyInstitutionRenameToSettlement(save, target, NEW_NAME);
+        for (const row of labelRows) {
+          if (!before.get(row.path)) continue;
+          if (valuesAt(save, row.path).includes(LABEL_REWRITE[row.rewrite](NEW_NAME))) fired.add(row.rewrite);
+        }
       }
     }
     expect([...fired].sort(), 'a rewrite form never fired over the whole sample, so the vocabulary has a dead member').toEqual(['lower', 'verbatim']);

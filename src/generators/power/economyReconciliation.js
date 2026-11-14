@@ -45,10 +45,11 @@ const NEIGHBOUR_SOURCES = new Set([
   'neighbour_mirror',
   'neighbour_opposition',
 ]);
+// ALLEGIANCE-CAR2 (J-13): `captureState` left this list — the governing row's birth seed is written once, at the coherence
+// seam (domain/people/hallCapture.js :: writeHallCapture), after this re-projection; no projection carries it now.
 const TRANSIENT_PROJECTION_FIELDS = [
   'legitimacyCrisis',
   'crisisNote',
-  'captureState',
 ];
 
 // THE UNPINNED SENTINEL. `chooseOrPin` returns the thunk's value only when the key is ABSENT
@@ -329,7 +330,6 @@ export function reconcilePowerStructure(
   powerStructure.government = projected.government;
   powerStructure.publicLegitimacy = projected.publicLegitimacy;
   powerStructure.factionRelationships = projected.factionRelationships;
-  powerStructure.criminalCaptureState = projected.criminalCaptureState;
   powerStructure.powerProjectionVersion = projected.powerProjectionVersion;
   powerStructure.economyInputFingerprint =
     projected.economyInputFingerprint;
@@ -390,7 +390,7 @@ export function refreshPowerGenerationTraces(
       );
       if (legitimacyCause) {
         legitimacyCause.reason =
-          `As the governing faction, ${profile.name} inherits the settlement's `
+          `As the governing power, ${profile.name} inherits the settlement's `
           + `public-legitimacy score (${profile.legitimacy}).`;
       }
     }

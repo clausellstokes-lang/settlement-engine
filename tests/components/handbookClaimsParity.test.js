@@ -72,7 +72,7 @@ describe('Keeper’s Handbook ↔ engine claims parity', () => {
 
   it('Cold War: clandestine intelligence FACTIONS — never "intelligence NPCs" (finding 9)', () => {
     expect(handbook).not.toMatch(/intelligence NPCs/);
-    expect(handbook).toMatch(/Cold War seeds clandestine intelligence factions/);
+    expect(handbook).toMatch(/Cold War seeds clandestine intelligence powers/);
     expect(getMirrorFactionLabel('military', 'cold_war', 'X')).toMatch(/Deep Cover Operatives/);
     expect(getMirrorFactionLabel('criminal', 'cold_war', 'X')).toMatch(/Clandestine Network/);
   });

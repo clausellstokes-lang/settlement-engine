@@ -35,6 +35,9 @@
  * annotation. `covert` is always true (the covert-naming law, §6). Pure.
  */
 
+import { allegianceOf } from './people/allegiance.js'; // ALLEGIANCE-CAR1: the hidden allegiance's one reader (J-1)
+import { PATRONAGE_TUNING, isOustedNpc, securityImpairmentsOf } from './corruption.js';
+
 /** The set of leash kinds whose beneficiary sits in ANOTHER settlement/court —
  *  the ones whose exposure must NEVER impair a local organization. */
 const FOREIGN_LEASH_KINDS = Object.freeze(new Set(['foreign_settlement', 'foreign_faction', 'foreign_org']));
@@ -68,6 +71,24 @@ const FOREIGN_LEASH_KINDS = Object.freeze(new Set(['foreign_settlement', 'foreig
  * removes the FATE, not the consequence.
  */
 export const WILLED_MEETING_CONSPIRACY = 'chance_meeting';
+
+/**
+ * THE CARD'S CORRUPTION MARK AS THE SIMULATION READS IT (J-19, AMENDED BY CAUSE: the chair's ruling, ALLEGIANCE-CAR1;
+ * its reader is worldPulse/npcAgency.js :: ensureNpcStates). A v3 card is born with no `corrupt` boolean: its hidden
+ * allegiance is the mark, read through `allegianceOf`: an allegiance is corrupt; a v3 card with none is CLEAN
+ * (generation decided; never a re-roll). The retired boolean is read only where present, which at v3 means the
+ * simulation's OWN write-back (npcAgency.js :: mirrorCorruptionOntoSettlement: an exposure writes `corrupt: false` onto a card
+ * that keeps its allegiance, and must stick) or a pre-v3 save. Undefined only for a pre-v3 save with no boolean: the
+ * legacy re-roll, keyed by the SAVE'S VERSION, not by the field's absence.
+ * @param {{ corrupt?: unknown } | null | undefined} npc @param {{ schemaVersion?: unknown } | null | undefined} settlement
+ * @returns {boolean | undefined}
+ */
+export function corruptMarkOf(npc, settlement) {
+  if (typeof npc?.corrupt === 'boolean') return npc.corrupt;
+  if (allegianceOf(npc)) return true;
+  if ((Number(settlement?.schemaVersion) || 0) >= 3) return false;
+  return undefined;
+}
 
 /**
  * True iff a leash was WILLED by a chance meeting. TOTAL: garbage, null, a leashless
@@ -118,7 +139,14 @@ export function isForeignLeashKind(kind) {
  * @returns {ResolvedLeash}
  */
 export function resolveLeash(npc, settlement, worldState) {
-  const ties = npc && typeof npc.corruptTies === 'object' ? npc.corruptTies : null;
+  // ALLEGIANCE-CAR1 (2026-11-08): the leash rides on the card's hidden allegiance (its one reader, allegianceOf); the
+  // retired `corruptTies.criminalInstitution` is the allegiance's `house`, and its simulation sub-fields (`leash`,
+  // `foreignPatron`, `conspiracy`) are carried on the allegiance by the v2 -> v3 migration. THE LEGACY ARM: the frozen
+  // simulation (M-6) still writes `corruptTies` on the cards it turns, so a card with no allegiance reads its
+  // `corruptTies` as before (this file is on the dormant list for that arm; it leaves when FPZ rebuilds the loop).
+  const allegiance = allegianceOf(npc);
+  const ties = allegiance ? { ...allegiance, criminalInstitution: allegiance.house || null }
+    : (npc && typeof npc.corruptTies === 'object' ? npc.corruptTies : null);
 
   // 1. Explicit normalized leash (foreign lanes / composer).
   const explicit = ties && typeof ties.leash === 'object' && ties.leash ? ties.leash : null;
@@ -167,5 +195,84 @@ export function resolveLeash(npc, settlement, worldState) {
     conspiracy: null,
     foreign: false,
     covert: true,
+  };
+}
+
+// ── THE BOUGHT WATCH, ON THE LOCAL AXIS (ALLEGIANCE-CAR3, 2026-11-08) ───────────────────────────────
+// The chair's late row 1 and the ES design's §3.3 bracket (lane/fp-rebase-2026-11-08, DESIGN_FP_ARCH_ES.md):
+// a bought watch is a LOCAL allegiance of the watch's FACE to the briber's criminal house, read through
+// allegianceOf and the card's own `institution.key` (its allegiance's `via` is 'office' there by the
+// design's §1.4) — NEVER the foreign leash (`allegiance.leash`, the web's sidecar: the FOREIGN axis, read
+// by resolveLeash). The person arm read `npc.corrupt === true` homed by `npcHomeInstitution` (the
+// retired `factionAffiliation` family), which no card has carried since the people car: MEASURED dead
+// at the base 4297838f3 and at car 1's tip alike (a lit fp-read-2 run, twenty years: covert 0,
+// revealed 0, drag 0 every year at both). The institution arm (a 'corruption' impairment) is unchanged.
+// Moved here from corruption.js (the eager first-paint module may not import the allegiance reader);
+// both names keep (landed tokens). Pure.
+
+/** @param {unknown} a @param {unknown} b */
+function nameMatches(a, b) {
+  const x = String(a || '').trim().toLowerCase();
+  const y = String(b || '').trim().toLowerCase();
+  if (!x || !y) return false;
+  return x === y || x.includes(y) || y.includes(x);
+}
+
+/**
+ * True when the card is a LOCAL agent still in place: it holds a hidden allegiance to a local criminal
+ * house (a foreign leash with no house is the other axis), it is not ousted, and the simulation has not
+ * exposed it (its own write-back `corrupt: false` sticks, corruptMarkOf's rule).
+ * @param {import('./settlement.schema.js').SimNpc} npc @param {{ schemaVersion?: unknown } | null | undefined} settlement
+ * @returns {boolean}
+ */
+function isLocalAgentInPlace(npc, settlement) {
+  const a = allegianceOf(npc);
+  if (!a || !a.house || isOustedNpc(npc)) return false;
+  return corruptMarkOf(npc, settlement) === true;
+}
+
+/**
+ * Which of the settlement's security institutions are compromised, and how.
+ *   covert   — the FACE of a security house holds a local hidden allegiance, unexposed (the hidden
+ *              stooge), or the house carries only covert 'corruption' impairments; drags onset
+ *              security, invisible to the public.
+ *   revealed — the institution carries a public 'corruption' impairment (a scandal made it public);
+ *              drags onset security AND raises the exposure visibility of anyone still corrupt inside it.
+ *
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
+ * @returns {{covert: string[], revealed: string[]}}
+ */
+export function compromisedSecurityInstitutions(settlement) {
+  // the institution arm: corruption.js :: securityImpairmentsOf (a covert impairment hidden, a public one revealed)
+  const { securityInstitutions, covert, revealed } = securityImpairmentsOf(settlement);
+  if (!securityInstitutions.length) return { covert: [], revealed: [] };
+
+  // THE PERSON ARM, LOCAL AXIS: the face of a security house that answers, unexposed, to a local house.
+  for (const npc of settlement?.npcs || []) {
+    const inst = npc?.institution;
+    if (!inst || inst.kind !== 'house' || !isLocalAgentInPlace(npc, settlement)) continue;
+    const match = securityInstitutions.find((s) => nameMatches(s.name, inst.key));
+    if (match && !revealed.has(/** @type {string} */ (match.name))) covert.add(/** @type {string} */ (match.name));
+  }
+
+  return { covert: [...covert], revealed: [...revealed] };
+}
+
+/**
+ * The patronage drag corrupted security institutions exert on ONSET-side
+ * effective security (covert + revealed both count: a bought watch shields
+ * recruits whether or not the town knows it's bought). The dials are
+ * corruption.js :: PATRONAGE_TUNING (the bought watch's name, J-12).
+ *
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
+ * @returns {{drag: number, covert: string[], revealed: string[]}}
+ */
+export function patronageSecurityDrag(settlement) {
+  const { covert, revealed } = compromisedSecurityInstitutions(settlement);
+  const count = covert.length + revealed.length;
+  return {
+    drag: Math.min(PATRONAGE_TUNING.maxDrag, count * PATRONAGE_TUNING.dragPerInstitution),
+    covert,
+    revealed,
   };
 }

@@ -65,7 +65,7 @@ export function magicAbsentProseFindings(surfaces) {
 }
 
 /** DS-DEF-4's `structure null` variants and the tab's static no-organised-crime line. */
-const CRIME_DENIAL = /No criminal infrastructure has been identified[^.]*\.|goes wrong one thing at a time and belongs to whoever did it|met with genuine incomprehension|No organized criminal infrastructure detected\./;
+const CRIME_DENIAL = /books record no gang, guild or racket[^.]*\.|goes wrong one thing at a time and belongs to whoever did it|who runs things on the quiet and you get blank looks|No organized criminal infrastructure detected\./;
 const OPERATIONS_LIST = /Active criminal operations\s*\n\s*\S/;
 /** A criminal supply chain chip whose status runs (`supplyChainStatus`: Operational, Running, Transhipment hub). */
 const RUNNING_CRIMINAL_CHAIN = /Criminal supply chains\s*\n[^\n]*·\s*(?:Operational|Running|Transhipment hub)\b/;

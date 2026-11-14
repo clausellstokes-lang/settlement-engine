@@ -28,6 +28,7 @@ describe('inland texts on their seeds', () => {
 describe('the Greek line inland', () => {
   it('keeps the agora and drops the harbour', () => {
     const line = cultureScopeLine({ culturalIdentity: { key: 'greek', label: 'Greek-inspired' }, config: { terrainType: 'plains', tradeRouteAccess: 'road' } });
-    expect(line).toBe('Greek-inspired, built around the agora, on hillside ground and civic association.');
+    // STYLE-2 A·O2: the ground is the record's terrain, never a fixed "hillside"
+    expect(line).toBe('Greek-inspired, built around the agora, on the open plain, and run by civic association.');
   });
 });

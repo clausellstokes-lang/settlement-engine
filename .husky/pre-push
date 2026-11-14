@@ -5,6 +5,29 @@
 #
 # To skip in an emergency: git push --no-verify
 # (but only when you've already run `npm run check` locally and it passed).
+#
+# LANE BRANCHES (the owner's word, 2026-11-12). A push whose every ref is a lane
+# branch (refs/heads/lane/*) runs the three fast gates instead of the whole check:
+# the type ratchet, the strict-domain gate and the linter (about four minutes).
+# Lane branches are the working branches of the integration program. They carry
+# goldens that are signed at the merge point, so the whole check cannot pass on
+# them; it runs on what they are merged into, here and in CI.
+# EVERY OTHER PUSH (master, the CI branch, a tag, any other ref, a mixed push, a
+# push with no ref at all) runs the whole check below, exactly as before.
+lane_only=1
+saw_ref=0
+while read -r local_ref local_sha remote_ref remote_sha; do
+  saw_ref=1
+  case "$remote_ref" in
+    refs/heads/lane/*) ;;
+    *) lane_only=0 ;;
+  esac
+done
+if [ "$saw_ref" = 1 ] && [ "$lane_only" = 1 ]; then
+  npm run typecheck:ratchet && npm run typecheck:domain:strict && npm run lint
+  exit $?
+fi
+
 npm run check
 
 # CI also runs two jobs that `npm run check` does NOT:

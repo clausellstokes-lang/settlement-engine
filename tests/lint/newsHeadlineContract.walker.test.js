@@ -152,7 +152,15 @@ describe('complete Wizard News address and headline rewrite contract', () => {
     // 2026-11-08 (MERGE-CAR, the people car merged into the integration branch, 8dff691f3; re-keyed by identity with its cause, measured at
     // the working tree, byte-equal to the merge): 40/2/80/0/80/596/800 → 40/2/80/0/80/588/792; no home in or out; applied|tradition 22/22 →
     // 18/18 (both fields, the integration parent's own count), at news-headline-contract.mjs's ADDRESS_TOTALS. PLAUSIBLE, not bisected. Every row stays indicative.
-    expect(baseline.addressTotality.totals).toEqual({ homes: 40, fields: 2, identities: 80, prospectiveIdentities: 0, indicativeIdentities: 80, distinctValues: 588, occurrences: 792 });
+    // 2026-11-08 (MERGE-WAVE at the FIX-PUBLIC-VEIL merge, the veiled re-deal's year, at news-headline-contract.mjs's ADDRESS_TOTALS): one home arrives.
+    // 2026-11-09 (MERGE-TRAIN at the ALLEGIANCE-CAR1 merge, e5f88930b; car 1's re-dealt year — the hidden allegiance 5902f1a4a, then J-19 d131ab158 —
+    // at news-headline-contract.mjs's ADDRESS_TOTALS): 41/2/82/0/82/596/782 → 43/2/86/0/86/606/792; four homes in and two out. Every row stays indicative.
+    // 2026-11-09 (MERGE-TRAIN at the ALLEGIANCE-CAR2 merge, f51058995; the guild's push bbb1a4abc re-dealing the year, at news-headline-contract.mjs's
+    // ADDRESS_TOTALS): 43/2/86/0/86/606/792 → 44/2/88/0/88/606/792; applied|resource_depletion returns, none leaves. Every row stays indicative.
+    // 2026-11-09 (MERGE-TRAIN at the ALLEGIANCE-CAR3 merge, c6ded8e3a; e9070d614's organized-crime rate 0.10 → 0.05 re-dealing the year, at
+    // news-headline-contract.mjs's ADDRESS_TOTALS): 44/2/88/0/88/606/792 → 43/2/86/0/86/602/790; one home in, two out. Every row stays indicative.
+    // 43/86/602/790 → 44/88/623/790 at the style wave's final tip (STYLE-2-MERGE-7, closing act 4; the causes at news-headline-contract.mjs).
+    expect(baseline.addressTotality.totals).toEqual({ homes: 44, fields: 2, identities: 88, prospectiveIdentities: 0, indicativeIdentities: 88, distinctValues: 623, occurrences: 790 });
   });
 
   it('A3 freezes both raw lanes and all 26 exact rewrite counts', () => {

@@ -286,9 +286,21 @@ describe('MG-4.1 — the mundane realm, measured across every member', () => {
  * MEASURED (seed 'mg4-acceptance-1', small/realistic_regional/highIsland). ALL FIVE AXES the
  * envelope compares, mundane vs magical, machine-checked by the last pin in MG-4.2 against
  * this very line — see THE RECORD IS CHECKED below:
- *   RECORDED-CENSUS: members 5 vs 5 · institutions 99 vs 102 · factions 12 vs 12 · services 126 vs 130 · historyEvents 18 vs 18
- * Ratios: members 1.000 · institutions 0.971 · factions 1.000 · services 0.969 ·
- * historyEvents 1.000 — the mundane realm is at parity on three of five axes.
+ *   RECORDED-CENSUS: members 5 vs 5 · institutions 99 vs 102 · factions 12 vs 11 · services 121 vs 124 · historyEvents 17 vs 17
+ * Ratios: members 1.000 · institutions 0.971 · factions 1.091 · services 0.976 ·
+ * historyEvents 1.000 — the mundane realm is at or above parity on three of five axes.
+ * ⚠️ RE-RECORDED 2026-11-12 (COHERENCE-POWERS 2B, lane/coherence-powers-2026-11-11), ONE SAME-SEED SHIFT, THE MAGICAL TWIN
+ * MOVES: factions 12 vs 12 → 12 vs 11 (1.000 → 1.091). At the density resize, a power of the ruler's own kind that no house
+ * stands behind is folded into the ruler (power/rulerKin.js :: settleHouselessPowers); one of the magical twin's twelve is
+ * such a power (measured at the fold's own commit; the later not-built rule moves no axis here). Every other axis holds; the ratio stays inside PENDING_BANDS. Copied from this
+ * pin's own measured line; this line and the design doc's MG-4 block moved in ONE act.
+ * ⚠️ RE-RECORDED 2026-11-08 (MERGE-WAVE, GREEN-BASE §4.6; meant for the W7 HOOKS merge point, applied at the GREEN-BASE point),
+ * TWO SAME-SEED SHIFTS, BOTH TWINS MOVE: services 126 vs 130 → 121 vs 124 (0.969 → 0.976) and historyEvents 18 vs 18 → 17 vs 17.
+ * The services shift is born at MERGE-R2's 10b8f09b4: REVIEW-INTAKE unit 2's proxy menus (69960e5d9, 122 vs 125 on the
+ * integration side) composed with census-1f's −1/−2 (9eee701c0). The history shift is W7 HOOKS's 4a3d37b86 (the history plot
+ * hooks in the plain register; bisected on W7's first parent by GREEN-BASE: 5c9218f62 reads 18, 4a3d37b86 reads 17). The
+ * arcane census over the mundane realm is still EMPTY; every ratio stays inside PENDING_BANDS. Copied from this pin's own
+ * measured line; this line and the design doc's MG-4 block moved in ONE act.
  * ⚠️ RE-RECORDED 2026-11-07 (LANDING-R2 seat C2, the pool census composed; ODQ §934.105), ONE SAME-SEED SHIFT, BOTH
  * TWINS MOVE: services 127 vs 132 → 126 vs 130 (ratio 0.962 → 0.969); every other axis holds. The cause is census-1f
  * unit 1c (9eee701c0): a rolled service whose definition's declaration the birth's facts refuse is not materialized.

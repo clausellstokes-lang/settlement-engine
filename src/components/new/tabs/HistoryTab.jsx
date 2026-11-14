@@ -160,14 +160,14 @@ export function HistoryTab({settlement:r, narrativeNote, onReroll, publicDossier
   // `composeStateProse` rather than through a single kernel read, and the browser-side cost
   // is unmeasured. The result is a pure function of the settlement and the two view flags.
   const historyDesk = useMemo(
-    () => generalDeskLines(r, {publicDossier, playerView, tier: r?.tier}).history,
+    () => generalDeskLines(r, {publicDossier, playerView, publicSite: 'general:history', tier: r?.tier}).history,
     [r, publicDossier, playerView],
   );
   if (!r?.history) return <Empty message="No historical data available."/>;
   const h = r.history;
   // DS-GEN-9 (history.identity) and DS-GEN-16 (history.record) are GLANCE rows by chair
   // ruling (H3, H4): the founding line is the history desk's one sentence on this page.
-  const {foundedLine} = historyDesk;
+  const {foundedLine, legacyLines} = historyDesk;
   const {founding, historicalEvents=[], currentTensions=[], historicalCharacter, age, eventsTimeline=[]} = h;
 
   // Sort events most recent first
@@ -308,6 +308,10 @@ export function HistoryTab({settlement:r, narrativeNote, onReroll, publicDossier
         <div style={{display:'flex',flexDirection:'column',gap:10}}>
           {sortedEvents.map((evt,i)=><HistoryEventCard key={i} evt={evt} h={h} isExp={expandedEvent===i} onToggle={()=>setExpandedEvent(expandedEvent===i?null:i)}/>)}
         </div>
+        {/* ── DS-GEN-16 (history.legacy) — the recent blow in living memory and the record's
+            past-to-present link, UNDER the events they name (X-16). W5 construction 2026-11-07. */}
+        {legacyLines.length>0&&<ProseBlock lines={legacyLines} settlementName={r.name} tier={r.tier}
+          style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.6,margin:'10px 0 0',fontStyle:'italic'}}/>}
       </Collapsible>}
 
     </div>

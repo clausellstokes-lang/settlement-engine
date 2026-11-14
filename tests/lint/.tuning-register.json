@@ -2505,6 +2505,30 @@
       "band": null,
       "note": ""
     },
+    "src/domain/people/allegiance.js#ALLEGIANCE_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": "ALLEGIANCE-CAR1 (2026-11-08, the allegiance design §3.1, J-5, J-8): the hidden allegiance's dials — organizedCrime (probability, 0.05 — 0.10 at birth, tuned by ALLEGIANCE-CAR3 on the soak 1,000's no-criminal-power band: organized crime's weight on the birth chance, inside the spawn clamp), organizedFull (points, 8: the summed criminal-house backing weight at which organized crime reads 1), powerBonus (fraction01, 0.25: the step for an independent criminal power), share (share, 0.15: the allegiance's weight for patronage and the push, outside the open shares' sum), frontWeight (multiplier, 1: a PRIME front's roll weight, RESERVED, J-8), weightZeroHouse (multiplier, 0.5: a weight-0 criminal house's backing weight in the organized-crime sum, the design's '0 -> 0.5'), bossJoinsAbove (count, 4: the boss joins the handlers' round only when every other handler would otherwise carry more than this many agents — J-10's boss-last in its fallback sense, the chair's ruling of 2026-11-08, ALLEGIANCE-CAR3); registered as a draft the day the dial was born, not signed."
+    },
+    "src/domain/people/patronage.js#RULING_PATRONAGE_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": "ALLEGIANCE-CAR3 (2026-11-08, the allegiance design §3.3, J-9, J-12): ruling patronage's dials — byRank.1 / .2 / .3 (fraction01, 0.15 / 0.10 / 0.05: a ranked face's weight, by its rank in the ruling power, of the other power's own strength), steward (fraction01, 0.10: a steward in a vacant seat at rank 2's weight), cap (fraction01, 0.25: never more than a quarter of the power's own strength), ceilingGap (points, 1: a boosted power stops one point under the ruler); derived, never stored (J-9); registered as a draft the day the dial was born, not signed."
+    },
+    "src/domain/people/hallCapture.js#HALL_CAPTURE_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": "ALLEGIANCE-CAR2 (2026-11-08, the allegiance design §3.4, J-13): the derived hall-capture state's dials — weight.1 / .2 / .3 (points, 3 / 2 / 1: an agent's weight by its rank in the ruling three), captureScore (points, 5: the lord and the second), corruptedScore (points, 3: the second and the third, or the lord alone), climateCap (rank, 2: the highest rung of CAPTURE_LADDER the strengths-only climate can reach, 'equilibrium'); registered as a draft the day the dial was born, not signed."
+    },
     "src/generators/people/castPowers.js#CAST_POWERS_TUNING": {
       "role": null,
       "status": "draft",
@@ -2512,6 +2536,51 @@
       "unit": null,
       "band": null,
       "note": "PEOPLE-1 CAST (2026-11-07, R-P5): the ranks a power seats (3) and the roll weight of a weight-0 house (0.5); registered as a draft the day the dial was born, not signed."
+    },
+    "src/generators/people/castPowers.js#GUILD_PUSH_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": "ALLEGIANCE-CAR2 (2026-11-08, the allegiance design §3.2, J-11): the guild's push on a hidden agent's roll weight in its legitimate powers' rank deal — strength (multiplier, 0.6: the criminal power's pull at full strength), strengthFull (points, 30: the criminal power's strength at which the pull is full), organized (multiplier, 0.4: organized crime's pull), max (multiplier, 2.0: the cap); the floors never read it; registered as a draft the day the dial was born, not signed."
+    },
+    "src/generators/people/goals.js#GOAL_FAMILY_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": "ALLEGIANCE-CAR4 (2026-11-09, the allegiance design §3.6 and §6.2, J-15): the goal families' weights — base.<family> (multiplier, 1 each: RANK, POWER, INSTITUTION, SUPPLY, TIES, PERSONALITY, ALLEGIANCE, CRISIS); fit.rankClimb 1.5 (a card ranked 2 or 3), fit.powerFirst 1.3 (a rank-1 face), fit.supplyTrade 1.5 (the Crafts and Economy shelves), fit.institutionImpaired 1.3 (the house processes an impaired chain), fit.allegianceAgentShort 3 (an agent's short goal), fit.allegianceHandler 2 (a handler), fit.crisisStress 2 (under its stress), fit.personality 0.6 (the floor); uncanny.perCard.<tier> (probability, thorp 0.003 · hamlet 0.004 · village 0.006 · town 0.008 · city 0.011 · metropolis 0.013: the owner's rare fantasy goals, magic on as the gate, WRITE-GOALS §8's drafts), uncanny.capPerSettlement (count, 2), uncanny.vantage ('short'); registered as a draft the day the dial was born, not signed."
+    },
+    "src/generators/people/goals.js#LAW_PURSUIT_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "strengthFull": "points",
+        "warrant.base": "probability",
+        "warrant.enforcer": "probability",
+        "warrant.guild": "probability",
+        "warrant.min": "probability",
+        "warrant.max": "probability",
+        "suspicion.base": "probability",
+        "suspicion.enforcer": "probability",
+        "suspicion.guild": "probability",
+        "suspicion.organized": "probability",
+        "suspicion.min": "probability",
+        "suspicion.max": "probability",
+        "exposure.open": "multiplier",
+        "exposure.front": "multiplier",
+        "exposure.office": "multiplier",
+        "exposure.retainer": "multiplier",
+        "importance.pillar": "multiplier",
+        "importance.key": "multiplier",
+        "importance.notable": "multiplier",
+        "importance.minor": "multiplier"
+      },
+      "band": null,
+      "note": "ALLEGIANCE-CAR4 (2026-11-09, the allegiance design §3.5, J-14): the law's pursuit — strengthFull (points, 30: a power's strength at which the pull is full); warrant.base / .enforcer / .guild / .min / .max (probability, 0.20 / 0.40 / 0.25 / 0.05 / 0.60: an open criminal face's warrant, up with the enforcer's power, down with the guild's); suspicion.base / .enforcer / .guild / .organized / .min / .max (probability, 0.10 / 0.30 / 0.20 / 0.10 / 0.02 / 0.40: a hidden allegiance's suspicion, up with both strengths and organized crime); exposure.open / .front / .office / .retainer (multiplier, 1.0 / 0.5 / 0.75 / 0.4: a target's weight by its link); importance.pillar / .key / .notable / .minor (multiplier, 4 / 3 / 2 / 1); registered as a draft the day the dial was born, not signed."
     },
     "src/lib/townScene/adaptiveQuality.js#GOVERNOR_TUNING": {
       "role": null,
@@ -2995,9 +3064,19 @@
         "sites": 3,
         "introducedAt": "725b62eb50599f0a1f1d4bda8328a20130e02296",
         "cause": "W1 ECO construction (725b62eb5, WIRING-RULINGS R-W1, the fourteen generation facts said in the economy section): the three share thresholds at which a desk key is spoken, FAMINE_MOST_FROM = 50, BROUGHT_IN_FROM = 20 and INFLUENCE_WEIGHS_FROM = 60, named where they are read. Display-side pool-key gates, no generated byte. Attributed by MERGE-WAVE (2026-11-08) at the W1 ECO merge point, the lane having banked none; the names earn their register row when the owner signs the estate"
+      },
+      "src/generators/foodLand.js": {
+        "sites": 4,
+        "introducedAt": "b46048140467b9a597b66259d93cfb54507524d0",
+        "cause": "GREEN-TIP (2026-11-10, b46048140, the foodGenerator <-> isolationSupport import-cycle cure; the chair's STOP-2 ruling, ODQ \u00a7934.105): RELOCATION, NET ZERO. The four custom-content food constants CUSTOM_PRODUCER_CAPACITY_PER_ITEM 0.15, CUSTOM_PRODUCER_CAPACITY_CAP 0.6, CUSTOM_CONSUMER_NEED_PER_ITEM 0.1 and CUSTOM_CONSUMER_NEED_CAP 0.5 moved byte-for-byte with foodLandOf from src/generators/foodGenerator.js into the new leaf (the moved 168-line block is cmp-identical to the lines removed); foodGenerator loses exactly these four. No tuning figure enters the product."
       }
     },
     "bareDecimals": {
+      "src/generators/foodLand.js": {
+        "sites": 7,
+        "introducedAt": "b46048140467b9a597b66259d93cfb54507524d0",
+        "cause": "GREEN-TIP (2026-11-10, b46048140, the foodGenerator <-> isolationSupport import-cycle cure; the chair's STOP-2 ruling, ODQ \u00a7934.105): RELOCATION, NET ZERO. foodLandOf's seven bare decimals 0.25, 0.10, 0.10, 0.09, 0.08, 0.5 and 2.0 moved byte-for-byte with the function from src/generators/foodGenerator.js (48 -> 41, the same seven) into the new leaf (the moved 168-line block is cmp-identical to the lines removed). No tuning figure enters the product."
+      },
       "src/domain/worldPulse/thievesGuild.js": {
         "sites": 2,
         "introducedAt": "754856b125828dc555359d6df0e0632be9636a09",
@@ -3017,6 +3096,11 @@
         "sites": 1,
         "introducedAt": "141383cd47d2ef8e32be24a01dbd1ad400943e00",
         "cause": "PEOPLE-4 TIES (R-P7, the chair's one-tie target rule, PEOPLE-RULINGS §1): the target weight is the house's X-45 weight, 0.5 for a weight-0 house, x SHARED_POWER_FACTOR = 3 when the two share a power; the ruled values written where they are read. Attributed by PEOPLE-LAND (2026-11-07) at the landing, the lane having banked neither; the names earn their register row when the owner signs the estate (the bare 0.5)"
+      },
+      "src/domain/display/stateProse/warFaithStateProse.js": {
+        "sites": 1,
+        "introducedAt": "86a30fdf270fffa1f1bfe2542c45a48bfcf531d0",
+        "cause": "W4 PEOPLE construction (86a30fdf2, WIRING-RULINGS R-W1, the faith and great-house construction C1-C5): the heresy pool's band, `heresyIntensity >= 0.5` (at or above one half the church hunts, below it preaches), written where it is read; a display-side pool-key gate, no generated byte. Attributed by MERGE-WAVE (2026-11-08) at the W4 PEOPLE merge point, the lane having banked none; the value earns its register row when the owner signs the estate"
       }
     }
   },

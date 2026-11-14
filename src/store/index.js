@@ -43,6 +43,7 @@ import { createToggleSlice }     from './toggleSlice.js';
 // line) so the operationRegistry census walker — which derives the composed-slice
 // file list from the `import { createXSlice }` lines — still recognises this slice.
 import { normalizeServicesToggles } from './toggleSlice.js';
+import { adoptPublicProseAck } from './settlementSlice.js';
 import { createSettlementSlice } from './settlementSlice.js';
 import { createAiSlice }         from './aiSlice.js';
 import { createNeighbourSlice }  from './neighbourSlice.js';
@@ -266,6 +267,10 @@ export function registerAuthIntentHandlers({ registerHandler, INTENTS }) {
     }
   });
 }
+
+// SW-B7b: the store holds what the save path stamped, so a canon command after a save
+// compares equal (settlementSlice.js :: adoptPublicProseAck).
+savesService.onPublicProseAck?.((ack) => adoptPublicProseAck(useStore.setState, useStore.getState, ack));
 
 import('../lib/authIntents.js')
   .then(registerAuthIntentHandlers)

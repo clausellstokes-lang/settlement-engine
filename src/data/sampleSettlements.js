@@ -25,6 +25,15 @@
  * seeds are quoted forever; changing a config or seed re-derives a different
  * settlement and the teaser must be re-matched.
  *
+ * ⛔ AND THE PROMISE IS TO THE VISITOR'S TOWN, NOT ONLY THE CANONICAL ONE (the chair's
+ * ruling N8, 2026-11-10, on the owner's word of that day: "regeenrate mossgate, cnocby,
+ * and black crag vwith the updated system"). "Visit" forks with a seed suffixed by who
+ * is forking, so a clause the canonical seed carries and the forks do not is broken for
+ * nearly every visitor. Every clause of a teaser and every tag holds in at least 19 of
+ * 20 forks at the card's own dials, or is pinned by a real wizard dial, or leaves the
+ * card. tests/data/foundingWorldBones.test.js generates the canonical seed and twenty
+ * forks of each card and holds every promise to that line.
+ *
  * Each sample carries:
  *   - id        — stable identifier (used by the fork action)
  *   - name      — display name shown on the card
@@ -57,8 +66,8 @@ export const SAMPLE_SETTLEMENTS = Object.freeze([
     name:    'Cnocby',
     tier:    'village',
     terrain: 'mountain',
-    teaser:  'A mountain village on a through road, where the good timber was cut out a generation ago and the carters who still stop know exactly whose cousin to ask about the rest.',
-    tags:    ['Mountain road', 'Exhausted timber', 'Quiet criminal pressure'],
+    teaser:  'A mountain village on a through road, where the good timber has been cut faster than it can grow back, and the farms, the common grazing and the mill keep the place.',
+    tags:    ['Mountain road', 'Exhausted timber', 'Farms and grazing'],
     config: {
       settType:         'village',
       tradeRouteAccess: 'road',
@@ -84,8 +93,14 @@ export const SAMPLE_SETTLEMENTS = Object.freeze([
     name:    'Mossgate',
     tier:    'town',
     terrain: 'coastal',
-    teaser:  'A rain-grey harbour town where the council and the temple have stopped speaking, and the merchant guilds quietly profit from the silence.',
-    tags:    ['Coastal trade', 'Contested council', 'Religious tension'],
+    // RE-MATCHED 2026-11-10 (N8; the old teaser, verbatim, is kept in
+    // docs/chair/2026-11-10/FOUNDING-WORLDS-2026-11-10.md): the council-temple quarrel
+    // held in 16 of 20 forks, the contested council in 14 and the guilds' quiet profit
+    // in 15, and no dial pins a faction or a conflict; "rain-grey" was colour no field
+    // holds. What every fork carries: the docks and the harbour master (20/20), and the
+    // Merchant Guilds and the Religious Authorities both as powers (19/20, 97/100).
+    teaser:  'A harbour town with docks and a harbour master, where the merchant guilds and the religious authorities both hold power.',
+    tags:    ['Coastal trade', 'Merchant guilds', 'Religious authority'],
     config: {
       settType:         'town',
       tradeRouteAccess: 'port',
@@ -106,7 +121,7 @@ export const SAMPLE_SETTLEMENTS = Object.freeze([
     name:    'Black Crag',
     tier:    'city',
     terrain: 'mountain',
-    teaser:  'A mountain city built on iron, ruled by its guild-masters, whose mines now give up too little ore.',
+    teaser:  'A mountain city built on iron, where the merchant guilds hold power and the mines now give up too little ore.',
     tags:    ['Industrial', 'Guild power', 'Dwindling resource'],
     config: {
       settType:         'city',
@@ -130,7 +145,22 @@ export const SAMPLE_SETTLEMENTS = Object.freeze([
       nearbyResourcesRandom: false,
       nearbyResources:       ['iron_deposits', 'coal_deposits', 'stone_quarry', 'mountain_timber', 'alpine_pasture', 'crossroads_position'],
       nearbyResourcesState:  { iron_deposits: 'depleted' },
-      seed:                  'blackcrag-016',
+      // RE-HUNTED 2026-11-10 (the owner: "regeenrate mossgate, cnocby, and black
+      // crag vwith the updated system"): at the engine of that day `blackcrag-016`
+      // generated a city ruled by a "Noble Governorship", so "ruled by its
+      // guild-masters" was no longer true of it. The hunt ran under this SAME
+      // config, blackcrag-017 upward, and blackcrag-045 (the 29th tried) is the
+      // first to carry every bone: a "Merchant Guild Council" governs, iron
+      // depleted, a Mine and a Smelter, "Iron ore (local mines exhausted)". THEN THE
+      // TEASER WAS RE-MATCHED (N8, the same day): the guild government held in 1 of
+      // 20 FORKS at this config, and no dial pins a governing power, so "ruled by its
+      // guild-masters" left the card for what the forks carry: the Merchant Guilds as
+      // a power (20/20) and "Iron ore (local mines exhausted)" (20/20). The old
+      // sentence, verbatim, is kept in docs/chair/2026-11-10/FOUNDING-WORLDS-2026-11-10.md.
+      // A fork saved from the old seed keeps its own `_seed`
+      // and its `_forkedFromSample: 'sample-blackcrag'`; nothing reads this seed
+      // after the fork. tests/data/foundingWorldBones.test.js holds every card's bones.
+      seed:                  'blackcrag-045',
     },
   },
   // ⛔ CNOCBY REPLACED THORNWELL HERE (owner order ODQ §934.30, 2026-09-19: "Have
@@ -156,6 +186,15 @@ export const SAMPLE_SETTLEMENTS = Object.freeze([
   // holds 12/12 across suffixed forks (measured 2026-09-19). The inn, the market
   // and the faction conflict are NOT pinned and NOT promised: they held 6/12,
   // 8/12 and 8/12, so the teaser says nothing about them.
+  //
+  // ⚠ RE-MATCHED 2026-11-10 (N8; the old teaser, verbatim, is kept in
+  // docs/chair/2026-11-10/FOUNDING-WORLDS-2026-11-10.md). The carters held in 8 of 20
+  // forks and "whose cousin to ask" (any criminal institution or faction) in 1 of 20,
+  // although the criminal dial is the highest of the five at 64: at village size the
+  // dial does not deliver what its name says. "A generation ago" was a date no field
+  // holds. What every fork carries: the road, the cut-out timber (in the dossier's
+  // words, "cleared faster than they can regrow"), and Farmland, Common grazing land
+  // and a Mill (20/20, 100/100).
 ]);
 
 /**

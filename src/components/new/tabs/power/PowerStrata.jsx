@@ -35,6 +35,7 @@ import { deriveFactionSupport } from '../../../../domain/dossier/powerSupport.js
 import { derivePowerStrata, groupRelationships, crisisNoteFor, withoutShownSentences } from '../../../../domain/dossier/powerStrata.js';
 import useIsMobile from '../../../../hooks/useIsMobile.js';
 import { membersByRank, rankIn } from '../../../../domain/people/membership.js';
+import { leaderlessLineOf } from '../../../../domain/people/stressPowerFaces.js';
 import { RANK_WORD } from '../../../../domain/people/cardPowers.js';
 import { entityIdFor } from '../../../../domain/dossier/entityLinks.js';
 import { chromeFontSize, proseFontSize } from '../../../../design/proseScale.js';
@@ -65,7 +66,7 @@ const metaFor = (kind) => RELATIONSHIP_META[kind] || { label: kind || 'Other', c
 const ARCHETYPE_LABEL = {
   government: 'Government', noble: 'Noble', military: 'Military', merchant: 'Merchant',
   religious: 'Religious', criminal: 'Criminal', arcane: 'Arcane', craft: 'Craft',
-  labor: 'Labour', outsider: 'Outsider', occupation: 'Occupation', civic: 'Civic', other: 'Faction',
+  labor: 'Labour', outsider: 'Outsider', occupation: 'Occupation', civic: 'Civic', other: 'Other',
 };
 
 const powerLabelColor = (lbl) =>
@@ -160,7 +161,7 @@ export function ThePowers({ settlement, powers, factionSupport, showCoupChip = t
                 <span style={{ fontSize: FS.md, fontWeight: 700, color: swatch.inkMag, flex: 1, minWidth: 0, lineHeight: 1.2 }}>
                   <EntityLink id={factionIdFromName(p.name)} type="faction" fallback={p.name} style={{ color: swatch.inkMag }} />
                 </span>
-                <span style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 600, color: MUTED, flexShrink: 0 }}>{ARCHETYPE_LABEL[p.archetype] || 'Faction'}</span>
+                <span style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 600, color: MUTED, flexShrink: 0 }}>{ARCHETYPE_LABEL[p.archetype] || 'Other'}</span>
                 {p.powerLabel && (
                   <span style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 700, color: powerLabelColor(p.powerLabel), background: `${powerLabelColor(p.powerLabel)}12`, border: `1px solid ${powerLabelColor(p.powerLabel)}30`, padding: '1px 5px', flexShrink: 0 }}>
                     {p.powerLabel}
@@ -261,7 +262,7 @@ export function TheFactions({ settlement, roster, expandedFaction, setExpandedFa
   };
 
   return (
-    <Section title={`The Factions (${roster.length})`} collapsible defaultOpen>
+    <Section title={`The Powers (${roster.length})`} collapsible defaultOpen>
       {/* Distribution bar — the whole roster by power share (the flat view, demoted to an overview). */}
       <div style={{ display: 'flex', height: 18, overflow: 'hidden', marginBottom: 10, gap: 1 }}>
         {roster.map((r, i) => {
@@ -301,6 +302,8 @@ export function FactionRow({ settlement, r, i, last = false, isExp, onToggle, ro
   const members = membersByRank(settlement?.npcs || [], r.name);
   const memberCount = members.length;
   const ranked = members.map((npc) => ({ npc, rank: rankIn(npc, r.name) })).filter((x) => x.rank).slice(0, 3);
+  // COHERENCE-POWERS item 3: a power a stress brings that by its nature has no single voice says so in its one declared line
+  const leaderless = memberCount === 0 ? leaderlessLineOf(settlement, r.name) : '';
   // The crisis note as the dossier prints it (powerStrata.js :: crisisNoteFor), less any sentence the tab prints in another
   // block (X-50, BOILERPLATE ONCE: the legitimacy panel's fracture line has one home; the search mount passes none).
   const crisisNote = withoutShownSentences(crisisNoteFor(settlement, f), shownOnTab);
@@ -311,7 +314,7 @@ export function FactionRow({ settlement, r, i, last = false, isExp, onToggle, ro
       style={{ borderBottom: last ? 'none' : `1px solid ${SEAM}`, background: isExp ? '#f5f0e8' : f.legitimacyCrisis ? '#fdf4f4' : swatch.white }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '5px 9px', cursor: expandable ? 'pointer' : 'default' }}
         {...(expandable ? {
-          role: 'button', tabIndex: 0, 'aria-label': `${r.name} faction details`, 'aria-expanded': isExp, 'aria-controls': `roster-faction-${i}-detail`,
+          role: 'button', tabIndex: 0, 'aria-label': `${r.name} details`, 'aria-expanded': isExp, 'aria-controls': `roster-faction-${i}-detail`,
           onClick: onToggle, onKeyDown: (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onToggle(); } } } : {})}>
         <span style={{ width: 10, height: 10, background: c, flexShrink: 0 }} />
         {f.legitimacyCrisis && <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: swatch.danger, flexShrink: 0 }}>{'⚠'}</span>}
@@ -324,7 +327,7 @@ export function FactionRow({ settlement, r, i, last = false, isExp, onToggle, ro
             {holds ? '↑ Holds power' : 'Contests the seat'}
           </Button>
         )}
-        <span style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 600, color: MUTED, flexShrink: 0 }}>{ARCHETYPE_LABEL[r.archetype] || 'Faction'}</span>
+        <span style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 600, color: MUTED, flexShrink: 0 }}>{ARCHETYPE_LABEL[r.archetype] || 'Other'}</span>
         <span style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, color: c, flexShrink: 0, minWidth: 24, textAlign: 'right' }}>{r.power}</span>
         {expandable && <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, flexShrink: 0 }}>{isExp ? '▲' : '▼'}</span>}
       </div>
@@ -332,11 +335,18 @@ export function FactionRow({ settlement, r, i, last = false, isExp, onToggle, ro
       {memberCount > 0 && (
         <div style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '3px 9px 3px 24px', background: `${c}08`, borderLeft: `2px solid ${c}30` }}>
           <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: c }}>{'↳'}</span>
-          <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: swatch.inkMag3 }}>{memberCount} member{memberCount !== 1 ? 's' : ''}
+          <span style={{ fontSize: proseFontSize(FS.xxs, mobile), color: swatch.inkMag3 }}>{memberCount} member{memberCount !== 1 ? 's' : ''}
             {ranked.map(({ npc, rank }) => (
               <span key={npc.id || npc.name}>{` · ${RANK_WORD[rank]} `}<EntityLink id={entityIdFor('npc', npc, npc.name)} type="npc" fallback={npc.name} style={{ color: swatch.inkMag }} /></span>
             ))}
           </span>
+        </div>
+      )}
+
+      {memberCount === 0 && leaderless && (
+        <div style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '3px 9px 3px 24px', background: `${c}08`, borderLeft: `2px solid ${c}30` }}>
+          <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: c }}>{'↳'}</span>
+          <span style={{ fontSize: proseFontSize(FS.xxs, mobile), color: swatch.inkMag3 }}>{leaderless}</span>
         </div>
       )}
 
@@ -366,7 +376,7 @@ export function TheWeb({ groups }) {
   return (
     <Section title={`The Web (${edgeCount})`} collapsible defaultOpen accent="#4a6a1a">
       <div style={{ fontSize: proseFontSize(FS.xxs, mobile), color: MUTED, marginBottom: 8, lineHeight: 1.4 }}>
-        How the powers and factions stand to one another, grouped by the kind of tie.
+        How the powers stand to one another, grouped by the kind of tie.
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
         {groups.map((g) => {

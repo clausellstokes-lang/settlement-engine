@@ -91,3 +91,21 @@ describe('buildHeraldFeed — the wizard-news source (the late-lane doors)', () 
     expect(bySection.war.length).toBe(0);
   });
 });
+
+describe('STYLE-2 SW-12 (ledger D·12–13): the two unlabelled fallbacks in plain words', () => {
+  test('an unlabelled lifted trouble and an unlabelled echo name no "recorded pressure"', () => {
+    const campaign = {
+      worldState: {
+        pulseHistory: [{ tick: 7, selectedOutcomes: [], impactDigest: [], resolvedStressors: [{ id: 's-lifted', type: 'famine', severity: 0.5, affectedSettlementIds: ['a'] }] }],
+        stressors: [{ id: 's-echo', type: 'famine', status: 'residual', lifecycleStage: 'residual', memoryStrength: 0.4, severity: 0.3, affectedSettlementIds: ['a'] }],
+      },
+      wizardNews: { entries: [] },
+    };
+    const { bySection } = buildHeraldFeed(campaign, { lens: 'campaign' });
+    const headlines = Object.values(bySection).flat().map((item) => item.headline);
+    expect(headlines).toContain('A trouble in the realm has passed');
+    expect(headlines).toContain('An old trouble is still talked of');
+    // anchored: the same headline list holds the two new lines asserted above
+    expect(headlines.join(' | ')).not.toMatch(/recorded pressure|past pressure/);
+  });
+});

@@ -289,7 +289,7 @@ function totalityRule(ctx) {
     { faction: who, power: Number(bagOf(seat).power) || 0 });
   return {
     kind: GUARD_KINDS[4], facet: 'share', offers: [GUARD_OFFERS[0], GUARD_OFFERS[6]],
-    message: `The factions hold ${sum} points of power between them, not ${target}. Rebalanced they would read: ${shares}.`,
+    message: `The powers' shares add up to ${sum}, not ${target}. Rebalanced they would read: ${shares}.`,
     ...(rebalanced ? { fulfil: rebalanced } : {}),
   };
 }

@@ -23,6 +23,109 @@
  */
 import { stablePart } from './stablePart.js';
 import { clamp01, effectiveStressorSeverity } from './stressorSeverity.js';
+// STYLE-2 C2 (SW-12): the zero-import selection kernel (no rng; keyed on the outcome id).
+import { pickLine } from './proseSelection.js';
+
+// STYLE-2 C2 (SW-12) — the aftermath of a resolved crisis, said as what it left behind.
+// The slots are the writer's own: the crisis label and its residual effects (catalog
+// tokens, humanised). No settlement name is held here (only the target id), so no line
+// names the place; no watch or office is claimed. Four vantages per intro pool.
+/** @typedef {{ label: string, effect1: string, effects: string }} ResidualSlots */
+const RESIDUAL_HEADLINE = Object.freeze([
+  (/** @type {ResidualSlots} */ x) => `${x.label} is over, but not forgotten`,
+  (/** @type {ResidualSlots} */ x) => `${x.label} has passed; ${x.effect1} remains`,
+  (/** @type {ResidualSlots} */ x) => `${x.label} has ended, leaving ${x.effect1}`,
+  (/** @type {ResidualSlots} */ x) => `${x.label} is done, and ${x.effect1} is what it left`,
+]);
+const RESIDUAL_SUMMARY = Object.freeze([
+  (/** @type {ResidualSlots} */ x) => `${x.label} is over, but people still live with ${x.effects}.`,
+  (/** @type {ResidualSlots} */ x) => `${x.label} has ended; the rulers are left with ${x.effects} to mend.`,
+  (/** @type {ResidualSlots} */ x) => `A visitor can still see what ${x.label.toLowerCase()} left behind: ${x.effects}.`,
+  (/** @type {ResidualSlots} */ x) => `${x.label} has run its course; what remains is ${x.effects}.`,
+]);
+// STYLE-2 C2 (SW-12 third seat, A1·105, ·109, ·49) — THE STRESSOR READER VOCABULARY. The
+// catalog labels are engine names ("Religious conversion fracture", "Rebellion pressure"); a
+// reader is told the crisis as a plain noun, keyed by the stressor's TYPE (the one fact every
+// record carries). A type outside the map prints its own label. No town is named: these
+// writers hold only ids.
+/** @type {Readonly<Record<string, string>>} */
+const STRESSOR_READER_NOUN = Object.freeze({
+  siege: 'the siege',
+  famine: 'the famine',
+  occupation: 'the occupation',
+  political_fracture: 'the political split',
+  indebtedness: 'the debt crisis',
+  betrayal: 'the betrayal',
+  infiltration: 'the spy ring',
+  disease_outbreak: 'the sickness',
+  succession_void: 'the fight over the empty seat',
+  monster_raider_pressure: 'the raids',
+  insurgency: 'the insurgency',
+  religious_conversion_fracture: 'the split between the faiths',
+  slave_revolt: 'the slave revolt',
+  rebellion: 'the rebellion',
+  wartime: 'the war footing',
+  mass_migration: 'the flood of newcomers',
+  market_shock: 'the market crash',
+  criminal_corridor: "the smugglers' road",
+  magical_instability: 'the wild magic',
+  coup_detat: 'the coup',
+  magic_deadzone: 'the failing of magic',
+});
+
+/**
+ * The crisis as a reader says it ("the split between the faiths"), sentence-cased on request.
+ * @param {{ type?: unknown, label?: unknown }} stressor @param {{ capital?: boolean }} [opts]
+ */
+export function stressorReaderNoun(stressor, { capital = false } = {}) {
+  const noun = STRESSOR_READER_NOUN[String(stressor?.type || '')] || String(stressor?.label || 'the crisis');
+  return capital ? `${noun.charAt(0).toUpperCase()}${noun.slice(1)}` : noun;
+}
+
+/** Residual-effect tokens given reader words (A1·49, the rebellion's three); others humanised. */
+/** @type {Readonly<Record<string, string>>} */
+const RESIDUAL_EFFECT_WORDS = Object.freeze({
+  reprisal_memory: 'old reprisals remembered',
+  autonomy_cells: 'rebel cells still meeting',
+  broken_tax_obligations: 'taxes no one pays',
+});
+
+/** @param {unknown} token */
+export function residualEffectWords(token) {
+  return RESIDUAL_EFFECT_WORDS[String(token)] || String(token).replace(/_/g, ' ');
+}
+
+/** @typedef {{ noun: string, Noun: string }} AftermathSlots */
+/** A1·105 — the crisis has ended; four orders, seeded by the stressor's id. */
+const AFTERMATH_HEADLINE = Object.freeze([
+  (/** @type {AftermathSlots} */ x) => `${x.Noun} is over`,
+  (/** @type {AftermathSlots} */ x) => `${x.Noun} has ended`,
+  (/** @type {AftermathSlots} */ x) => `${x.Noun} has run its course`,
+  (/** @type {AftermathSlots} */ x) => `The worst of ${x.noun} is past`,
+]);
+/** A1·109 — its echo has faded from living memory; four orders. */
+const HISTORY_HEADLINE = Object.freeze([
+  (/** @type {AftermathSlots} */ x) => `${x.Noun} passes into history`,
+  (/** @type {AftermathSlots} */ x) => `${x.Noun} is only a memory now`,
+  (/** @type {AftermathSlots} */ x) => `${x.Noun} belongs to the past now`,
+  (/** @type {AftermathSlots} */ x) => `Few still speak of ${x.noun}`,
+]);
+
+/** @param {{ id?: unknown, type?: unknown, label?: unknown }} stressor */
+export function stressorAftermathHeadline(stressor) {
+  return pickLine(AFTERMATH_HEADLINE, `aftermath:${String(stressor?.id || '')}`, { noun: stressorReaderNoun(stressor), Noun: stressorReaderNoun(stressor, { capital: true }) });
+}
+
+/** @param {{ id?: unknown, type?: unknown, label?: unknown }} stressor */
+export function stressorHistoryHeadline(stressor) {
+  return pickLine(HISTORY_HEADLINE, `history:${String(stressor?.id || '')}`, { noun: stressorReaderNoun(stressor), Noun: stressorReaderNoun(stressor, { capital: true }) });
+}
+
+/** "a, b and c" from residual-effect tokens. @param {string[]} tokens */
+function effectsPhrase(tokens) {
+  const words = tokens.map(residualEffectWords);
+  return words.length > 1 ? `${words.slice(0, -1).join(', ')} and ${words[words.length - 1]}` : (words[0] || 'its scars');
+}
 
 export const STRESSOR_POLICIES = Object.freeze({
   transient: { baseResolutionChance: 0.46, decay: 0.18, maxAge: 2 },
@@ -424,13 +527,21 @@ export function residualOutcome(stressor, tick) {
     // severityBySettlement stamp), not the record's origin severity.
     const experienced = effectiveStressorSeverity(stressor, targetSaveId);
     const residualSeverity = Math.max(0.15, experienced * 0.45);
+    const id = `world_outcome.residual.${tick}.${stablePart(stressor.id)}.${stablePart(targetSaveId)}`;
+    const effectTokens = (stressor.residualEffects || []).slice(0, 3);
+    /** @type {ResidualSlots} */
+    const slots = {
+      label: String(stressor.label),
+      effect1: effectTokens.length ? residualEffectWords(effectTokens[0]) : 'its scars',
+      effects: effectsPhrase(effectTokens),
+    };
     return {
       // The id carries the resolution's tick, as every minted world outcome's does: a stressor id
       // that resolves twice at one settlement (the same pressure rising again) would otherwise mint
       // one id twice, and the regional event log would carry a duplicate record id. The tick sits
       // FIRST, not last: the regional event id is cut to 80 characters (propagation.js :: idPart),
       // and a trailing tick behind a long stressor id would be cut away with the tail.
-      id: `world_outcome.residual.${tick}.${stablePart(stressor.id)}.${stablePart(targetSaveId)}`,
+      id,
       type: 'condition',
       candidateType: 'stressor_residual',
       ruleId: `stressor_${stressor.type}_residual`,
@@ -440,11 +551,10 @@ export function residualOutcome(stressor, tick) {
       targetSaveId,
       severity: residualSeverity,
       score: Math.round(experienced * 45),
-      headline: `${stressor.label} leaves aftereffects`,
-      summary: `${stressor.label} is no longer the active crisis, but its consequences remain visible.`,
+      headline: pickLine(RESIDUAL_HEADLINE, `${id}:headline`, slots),
+      summary: pickLine(RESIDUAL_SUMMARY, `${id}:summary`, slots),
+      // STYLE-2 C2 (SW-12): the residual effects are named in the summary, so no pill restates them.
       reasons: [
-        'A time-bounded stressor resolved.',
-        `Residual effects remain: ${stressor.residualEffects.slice(0, 3).join(', ').replace(/_/g, ' ')}.`,
         // The resolution receipt: why the crisis ended (counterforce-led
         // recovery, what it outlasted) — same explainability bar as births.
         ...(stressor.resolutionContext?.narrative ? [stressor.resolutionContext.narrative] : []),

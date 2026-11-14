@@ -16,7 +16,7 @@ import { resourceDisplayName } from '../../../domain/display/resourceDisplayName
 import {NarrativeNote} from '../NarrativeNote';
 import { economyDeskRead } from '../economyDeskRead.js';
 import { DeskLines } from './EconomicsGlance.jsx'; // the shared position renderer (see its docblock)
-import { compareCodepoint } from '../../../domain/deterministicSort.js';
+import { impairedInstitutionOf } from '../deskHostArgs.js';
 import { edged } from '../../../design/edgedBox.js';
 import InfoPill from '../../primitives/InfoPill.jsx';
 import { SECTION_HELP } from '../../../copy/sectionHelp.js';
@@ -170,12 +170,9 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
   // PRESENT is the pool's own condition, so the search runs over the rendered categories;
   // the order is by CODEPOINT (never localeCompare — THE PROMISE is cross-device stability)
   // so the same settlement names the same house on every machine.
-  const impairedInstitution = catOrder
-    .filter(cat => (catStats[cat]?.imp || 0) > 0)
-    .flatMap(cat => (services[cat] || []).map(svc => (typeof svc === 'object' ? svc.institution || '' : '')))
-    .filter(inst => inst && impaired.has(inst))
-    .sort(compareCodepoint)[0] || null;
-  const deskProse = economyDeskRead(settlement, { publicDossier, playerView, tier: settlement?.tier, impairedInstitution });
+  // The search is deskHostArgs.js's, shared with the public prose composer (SW-B7b).
+  const impairedInstitution = impairedInstitutionOf(services, impaired);
+  const deskProse = economyDeskRead(settlement, { publicDossier, playerView, publicSite: 'economy:services', tier: settlement?.tier, impairedInstitution });
   // ⭐ THE ROW DS-SUP-3'S SECOND LENS IS ABOUT (owner order 2026-09-19, the Defense idiom
   // applied here). That lens names `{institution}` — ONE house, by name — and it printed in
   // the catalog paragraph at the top of the tab, a screen and a half above the row that

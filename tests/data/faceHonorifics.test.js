@@ -6,7 +6,8 @@
  * registry names no title that no face can carry. The owner's and the chair's named forms are pinned.
  */
 import { describe, it, expect } from 'vitest';
-import { FACE_HONORIFICS, FACE_HONORIFICS_INLAND, honorificOfTitle } from '../../src/data/faceHonorifics.js';
+import { FACE_HONORIFICS, FACE_HONORIFICS_BY_CULTURE, FACE_HONORIFICS_INLAND, honorificOfTitle } from '../../src/data/faceHonorifics.js';
+import { CULTURES } from '../../src/data/worldFactOptions.js';
 import { cardHonorificOf } from '../../src/domain/people/cardDoor.js';
 import { faceRows } from '../../src/data/institutionalCatalog.js';
 import { SEAT_MINT_TITLES, OTHER_MINT_ROWS, headOf } from '../../src/generators/people/mintTitles.js';
@@ -106,5 +107,125 @@ describe("the harbour master's pool is the one its coast admits (A-11)", () => {
     expect(['Harbourmaster', 'Master of the Harbour']).toContain(cardHonorificOf(harbourCard));
     // the guard is the harbour's alone: an inland place leaves every other title's pool as the registry holds it
     expect(Object.keys(FACE_HONORIFICS_INLAND)).toEqual(['the harbour master']);
+  });
+});
+
+// WRITE-TITLES-14 (WAVE-RULINGS item 14): the settlement's culture picks the culture's own pool for an office it names;
+// any other culture, title or place reads the registry's pool — the fallback, display-only.
+describe("the settlement's culture picks its own word for the office (item 14)", () => {
+  const seeds = Array.from({ length: 40 }, (_, i) => `seed-${i}`);
+  const formsOf = (title, gender, place) => [...new Set(seeds.map((seed) => honorificOfTitle(title, gender, seed, place)))].sort();
+  it("the owner's two: a Norse place's lord and headman read Jarl, a Celtic place's priest reads Druid", () => {
+    expect(formsOf('the lord', 'male', { culture: 'norse' })).toEqual(['Jarl']);
+    expect(formsOf('the headman', 'female', { culture: 'norse' })).toEqual(['Jarl']);
+    expect(formsOf('the priest', 'female', { culture: 'celtic' })).toEqual(['Druid']);
+    expect(honorificOfTitle('the priest', 'female', 'seed-1', { culture: 'norse' })).toBe('Gydja');
+    expect(honorificOfTitle('the priest', 'male', 'seed-1', { culture: 'norse' })).toBe('Godi');
+  });
+  it("a title the culture names no form for reads the registry's pool", () => {
+    expect(formsOf('the mayor', 'male', { culture: 'celtic' })).toEqual(formsOf('the mayor', 'male'));
+    expect(formsOf('the priest', 'male', { culture: 'germanic' })).toEqual(['Father', 'Pastor', 'Reverend', 'Vicar']);
+  });
+  it("a culture with no pool, 'mixed', an unknown key and no culture all read the registry's pool", () => {
+    for (const culture of ['mixed', 'random_culture', 'atlantean', null, undefined]) {
+      expect(formsOf('the lord', 'female', { culture }), String(culture)).toEqual(['Lady']);
+      expect(formsOf('the priest', 'male', { culture }), String(culture)).toEqual(['Father', 'Pastor', 'Reverend', 'Vicar']);
+    }
+    expect(formsOf('the lord', 'female')).toEqual(['Lady']);
+    // east_asian names the lord alone: its priest reads the registry
+    expect(formsOf('the priest', 'male', { culture: 'east_asian' })).toEqual(['Father', 'Pastor', 'Reverend', 'Vicar']);
+  });
+  it('the coast guard and the culture read compose: an inland Norse harbour master is still a Dockmaster or Wharfinger', () => {
+    expect(formsOf('the harbour master', null, { coastal: false, culture: 'norse' })).toEqual(['Dockmaster', 'Wharfinger']);
+  });
+  it("the card door reads the settlement's culture through the one culture read, and falls back without one", () => {
+    const lordCard = { id: 'npc_l', name: 'Sigrid Ulfsdottir', gender: 'female', institution: { kind: 'power', key: 'Noble Houses', name: 'Noble Houses', title: 'the lord' } };
+    const priestCard = { id: 'npc_p', name: 'Bran Mac Lir', gender: 'male', institution: { kind: 'house', key: 'Parish church', name: 'Parish church', title: 'the priest' } };
+    expect(cardHonorificOf({ ...lordCard, gender: 'male' }, { config: { culture: 'norse' }, institutions: [] })).toBe('Jarl');
+    expect(cardHonorificOf(lordCard, { config: { culture: 'steppe' }, institutions: [] })).toBe('Khatun');
+    // the materialized identity is the second leg, for a config-stripped save
+    expect(cardHonorificOf(priestCard, { culturalIdentity: { key: 'celtic' }, institutions: [] })).toBe('Druid');
+    // no settlement culture, no settlement, and a 'mixed' place: the registry
+    expect(cardHonorificOf(lordCard, { config: {}, institutions: [] })).toBe('Lady');
+    expect(cardHonorificOf(lordCard)).toBe('Lady');
+    expect(cardHonorificOf(lordCard, { config: { culture: 'mixed' }, culturalIdentity: { key: 'mixed' }, institutions: [] })).toBe('Lady');
+  });
+});
+
+// WRITE-TITLES-14: THE CULTURE TABLE IS PINNED WHOLE — every (culture, title) variant, read through the resolver and the card door
+// by both genders; a culture or title added, dropped or re-worded reds here and names itself.
+describe('every culture-keyed honorific is pinned (item 14)', () => {
+  // the LEADERSHIP, FAITH and WARDEN titles the item admits; a culture pool on any other title reds
+  const SCOPE = new Set([
+    'the eldest', 'the village elder', 'the headman', 'the lord', 'the mayor', 'the monarch', 'the governor', 'the royal governor',
+    'the occupying governor', 'the war-leader', 'the priest', 'the elder priest', 'the high priest',
+    'the commander', 'the garrison commander', 'the watch captain', 'the watch commander',
+  ]);
+  /** culture → title → [masculine form, feminine form] */
+  const PINS = {
+    germanic: { 'the mayor': ['Burgomaster', 'Burgomaster'] },
+    latin: {
+      'the lord': ['Dominus', 'Domina'], 'the high priest': ['Pontifex', 'Pontifex'], 'the watch captain': ['Tribune', 'Tribune'],
+      'the watch commander': ['Prefect', 'Prefect'], 'the garrison commander': ['Prefect', 'Prefect'],
+    },
+    celtic: {
+      'the headman': ['Chieftain', 'Chieftain'], 'the priest': ['Druid', 'Druid'], 'the elder priest': ['Druid', 'Druid'],
+      'the high priest': ['Druid', 'Druid'],
+    },
+    arabic: {
+      'the eldest': ['Sheikh', 'Sheikh'], 'the village elder': ['Sheikh', 'Sheikh'], 'the headman': ['Sheikh', 'Sheikh'],
+      'the lord': ['Emir', 'Emir'], 'the governor': ['Wali', 'Wali'], 'the royal governor': ['Wali', 'Wali'],
+      'the priest': ['Imam', 'Imam'], 'the elder priest': ['Imam', 'Imam'], 'the garrison commander': ['Qaid', 'Qaid'],
+    },
+    norse: {
+      'the lord': ['Jarl', 'Jarl'], 'the headman': ['Jarl', 'Jarl'], 'the priest': ['Godi', 'Gydja'],
+      'the elder priest': ['Godi', 'Gydja'], 'the high priest': ['Godi', 'Gydja'],
+    },
+    slavic: {
+      'the eldest': ['Starosta', 'Starosta'], 'the village elder': ['Starosta', 'Starosta'], 'the headman': ['Starosta', 'Starosta'],
+      'the lord': ['Boyar', 'Boyarina'], 'the war-leader': ['Voivode', 'Voivode'], 'the commander': ['Voivode', 'Voivode'],
+      'the garrison commander': ['Voivode', 'Voivode'], 'the governor': ['Voivode', 'Voivode'],
+    },
+    mesoamerican: { 'the lord': ['Tlatoani', 'Tlatoani'], 'the monarch': ['Huey Tlatoani', 'Huey Tlatoani'], 'the priest': ['Tlamacazqui', 'Tlamacazqui'] },
+    south_asian: {
+      'the headman': ['Mukhiya', 'Mukhiya'], 'the lord': ['Raja', 'Rani'], 'the monarch': ['Maharaja', 'Maharani'], 'the priest': ['Purohit', 'Purohit'],
+    },
+    steppe: {
+      'the lord': ['Khan', 'Khatun'], 'the war-leader': ['Noyan', 'Noyan'], 'the occupying governor': ['Darughachi', 'Darughachi'],
+      'the priest': ['Shaman', 'Shaman'],
+    },
+    east_asian: { 'the lord': ['Daimyo', 'Daimyo'] },
+    greek: { 'the mayor': ['Archon', 'Archon'], 'the commander': ['Strategos', 'Strategos'], 'the high priest': ['Hierophant', 'Hierophant'] },
+  };
+  const seeds = Array.from({ length: 24 }, (_, i) => `seed-${i}`);
+
+  it('names only canonical cultures and only registered titles in scope; every canonical culture names one', () => {
+    expect(Object.keys(FACE_HONORIFICS_BY_CULTURE).sort()).toEqual(Object.keys(PINS).sort());
+    for (const culture of Object.keys(FACE_HONORIFICS_BY_CULTURE)) {
+      expect(CULTURES, culture).toContain(culture);
+      for (const title of Object.keys(FACE_HONORIFICS_BY_CULTURE[culture])) {
+        expect(Object.keys(FACE_HONORIFICS), `${culture} ${title}`).toContain(title);
+        expect(SCOPE.has(title), `${culture} ${title}`).toBe(true);
+      }
+    }
+    expect(Object.keys(FACE_HONORIFICS_BY_CULTURE).sort()).toEqual([...CULTURES].sort());
+    expect(Object.values(PINS).reduce((n, t) => n + Object.keys(t).length, 0)).toBe(47);
+  });
+
+  it('every (culture, title) reads exactly its pinned forms by gender, through the resolver and the card door', () => {
+    for (const [culture, titles] of Object.entries(PINS)) {
+      expect(Object.keys(FACE_HONORIFICS_BY_CULTURE[culture]).sort(), culture).toEqual(Object.keys(titles).sort());
+      for (const [title, [male, female]] of Object.entries(titles)) {
+        const at = `${culture} ${title}`;
+        expect([...new Set(seeds.map((seed) => honorificOfTitle(title, 'male', seed, { culture })))], at).toEqual([male]);
+        expect([...new Set(seeds.map((seed) => honorificOfTitle(title, 'female', seed, { culture })))], at).toEqual([female]);
+        expect(honorificOfTitle(title, undefined, undefined, { culture }), at).toBe(male);
+        const card = { id: 'npc_x', name: 'A B', gender: 'female', institution: { kind: 'house', key: 'K', name: 'K', title } };
+        expect(cardHonorificOf(card, { config: { culture }, institutions: [] }), at).toBe(female);
+        // the same card on a settlement with no culture reads the registry's pool, never the culture's form
+        const fallback = cardHonorificOf(card, { config: {}, institutions: [] });
+        expect(fallback, at).toBe(honorificOfTitle(title, 'female', 'npc_x::K'));
+      }
+    }
   });
 });

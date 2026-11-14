@@ -124,7 +124,7 @@ export default function RoadScenePanel({ campaign }) {
     <div style={{ display: 'grid', gap: SP.sm }} data-testid="road-scene-panel">
       <div style={{ fontSize: proseFontSize(FS.micro, mobile), color: MUTED, lineHeight: 1.4 }}>
         Pick an origin and destination (or click a settlement on the map for the origin). The road
-        is read from truth. Staging it writes nothing.
+        shows the world as it really is, and staging it changes nothing.
       </div>
       <div style={{ display: 'flex', gap: SP.sm, flexWrap: 'wrap' }}>
         {pickerRow('road-scene-from', 'From', origin, setOrigin, dest)}

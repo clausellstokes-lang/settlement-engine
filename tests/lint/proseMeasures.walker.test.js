@@ -174,12 +174,15 @@ describe('CAR 5(c) — the licensed level-1 members per block, on the COMPOSED f
       + '    V3 / V8 (no typed none-exists or not-held field), V6 (no typed unresolved /\n'
       + '    contested / pending STATE field — SITTING A12)\n'
       + `  settlement-only blocks: ${settlementOnly.map((r) => r.block).join(', ')}\n`);
-    expect(blocks).toHaveLength(68);
+    expect(blocks).toHaveLength(69); // MERGE-WAVE at the W4 PEOPLE merge point (2026-11-08): 69, W2 DEF's DS-DEF-12 block (C3-C5); W2's lane never re-keyed this pin
     // ⚠ THE SITTING'S A12 SAYS "20 of 68 settlement-only". This lane measures TWENTY-TWO by a
     // different method (resolving every composer bag from source). The list is printed above
     // so the chair can diff it rather than take either number on trust.
-    expect(settlementOnly.length).toBe(22);
-    expect(oneMember.length).toBe(33);
+    expect(settlementOnly.length).toBe(23); // MERGE-WAVE (2026-11-08): 23 since the W2 DEF merge point (red there, measured at 2d9f47504): DS-DEF-12 is settlement-only
+    // W4 PEOPLE (2026-11-07; re-measured at the people car's merge, 2026-11-08): 33 -> 34. DS-FTH-4 is MOUNTED at
+    // faith.templeGround, so it gains a composed fill (it had no bag); its slots (cleric, counterpart, creed, faction,
+    // houses, observance, rival_creed, settlement, term) license only the bare PRESENT.
+    expect(oneMember.length).toBe(35); // MERGE-WAVE at the W4 PEOPLE merge point (2026-11-08): 33 + W2 DEF's DS-DEF-12 (34 measured at the W3 point 95f31f192) + W4's DS-FTH-4 = 35, additive
   });
 });
 

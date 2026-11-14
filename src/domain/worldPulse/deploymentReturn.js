@@ -465,7 +465,7 @@ export function deploymentReturnOutcomes({ resolvedDeployments = [], snapshot, g
           severity: 0.3,
           headline: `${homeName} throws off its occupiers`,
           summary: `${homeName}'s army returned to a captured home and broke the occupation; the settlement begins restoring its own authority.`,
-          reasons: [`A host come home ${returnMusterWordFor(ratio)} threw off the occupiers: ${returnOddsWordFor(pSuccess)}, and it came off.`],
+          reasons: [pickLine(RETURN_WON_REASON, `world_outcome.occupation_lifted.${stablePart(homeId)}.${tick}`, { home: homeName, muster: returnMusterWordFor(ratio), odds: returnOddsWordFor(pSuccess), deed: 'drove out the occupiers' })],
           ...(liftTransfer ? { powerTransfer: liftTransfer } : {}),
           condition: {
             archetype: 'occupation_lifted',
@@ -501,8 +501,8 @@ export function deploymentReturnOutcomes({ resolvedDeployments = [], snapshot, g
           targetSaveId: homeId,
           severity: 0.3,
           headline: `${homeName} lifts the siege at its gates`,
-          summary: `${homeName}'s army returned to a besieged home and relieved it; the settlement begins to recover.`,
-          reasons: [`A host come home ${returnMusterWordFor(ratio)} relieved the siege: ${returnOddsWordFor(pSuccess)}, and it came off.`],
+          summary: pickLine(SIEGE_LIFTED_SUMMARY, `world_outcome.siege_lifted.${stablePart(homeId)}.${tick}`, { home: homeName }),
+          reasons: [pickLine(RETURN_WON_REASON, `world_outcome.siege_lifted.${stablePart(homeId)}.${tick}`, { home: homeName, muster: returnMusterWordFor(ratio), odds: returnOddsWordFor(pSuccess), deed: 'broke the siege' })],
           condition: {
             archetype: 'siege_lifted',
             severity: 0.3,
@@ -627,3 +627,31 @@ export function deploymentReturnOutcomes({ resolvedDeployments = [], snapshot, g
 
   return outcomes;
 }
+
+// Kept at the foot of the file so the line-bound authoring ledger
+// (tests/lint/wizardNewsAuthoring.walker.test.js) sees no row move.
+import { pickLine } from './proseSelection.js';
+
+/** The slots a prose line fills (STYLE-2 SW-12). @typedef {Record<string, string>} ReturnLineSlots */
+
+/**
+ * The relieved siege, four vantages of one fact (STYLE-2 C2, SW-12 third seat, A2·139): the
+ * town's own army came home and the besiegers are gone from its walls. The besieger is not
+ * named — this branch reads only `isBesieged`, never who the besieger is.
+ */
+const SIEGE_LIFTED_SUMMARY = Object.freeze([
+  (/** @type {ReturnLineSlots} */ x) => `${x.home}'s army came home and drove the besiegers from its walls.`,
+  (/** @type {ReturnLineSlots} */ x) => `The siege of ${x.home} is over: its own army came home and broke it.`,
+  (/** @type {ReturnLineSlots} */ x) => `${x.home}'s gates are open again; its army came back and sent the besiegers off.`,
+  (/** @type {ReturnLineSlots} */ x) => `The besiegers have gone from ${x.home}'s walls, driven off by its returning army.`,
+]);
+
+/**
+ * The won return's receipt (A2·140): the host's muster and the attempt's odds, both from the
+ * TE-HERALD-1 ladders above, in three orders of one fact; `deed` is the branch's own act.
+ */
+const RETURN_WON_REASON = Object.freeze([
+  (/** @type {ReturnLineSlots} */ x) => `${x.home}'s army came home ${x.muster} and ${x.deed}. It was ${x.odds}, and the day went its way.`,
+  (/** @type {ReturnLineSlots} */ x) => `${x.home}'s army ${x.deed} on its return, ${x.muster}. It was ${x.odds}.`,
+  (/** @type {ReturnLineSlots} */ x) => `It was ${x.odds}: ${x.home}'s army came home ${x.muster}, and ${x.deed}.`,
+]);

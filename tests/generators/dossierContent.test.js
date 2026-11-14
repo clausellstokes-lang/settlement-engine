@@ -202,7 +202,7 @@ describe('AMENDMENT B — sentence-start faction interpolations are capitalised 
     const r = { name: 'Ashholt', govFaction: 'the town council', topFaction: 'the merchant guild', commodity: 'grain', compound: { criminalEffective: 70, militaryEffective: 20, economyOutput: 40 } };
     // famine[4] and the insurgency compound[0] both OPEN a sentence on govFaction.
     expect(PRESSURE_SENTENCES.famine(r)[4]).toMatch(/^The town council of Ashholt/);
-    expect(PRESSURE_SENTENCES.insurgency(r)[0]).toMatch(/current arrangement\. The town council still holds/);
+    expect(PRESSURE_SENTENCES.insurgency(r)[0]).toMatch(/have stopped obeying\. The town council still holds/); // W4 second seat: re-keyed to the re-worded line (row 217)
     // indebted[1] OPENS on topFaction.
     expect(PRESSURE_SENTENCES.indebted(r)[1]).toMatch(/^The merchant guild took the loans/);
   });

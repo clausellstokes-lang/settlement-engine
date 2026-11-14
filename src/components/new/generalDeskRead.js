@@ -38,6 +38,8 @@ import { generalStateProse, GENERAL_STATE_PROSE_SILENT } from '../../domain/disp
 import { drawnAtMount } from '../../domain/display/stateProse/dossierMounts.js';
 import { resolvePrimaryStress } from '../../generators/stressPriority.js';
 import { tierNounFor } from '../../domain/display/stateProse/weaveBlock.js';
+import { byDesignItemsOf } from '../../domain/display/validationOnPage.js'; // SW-B1 (B1(c)): the one reader of the by-design rows
+import { publicProseOf } from '../../domain/display/publicProse.js';
 
 /**
  * The general desk's OVERVIEW positions. Bound once each: the registry's reachability arm
@@ -59,6 +61,7 @@ const POPULATION_MOUNT = 'overview.populationDirection';
 const IDENTITY_MOUNT = 'history.identity';
 const FOUNDED_MOUNT = 'history.founded';
 const RECORD_MOUNT = 'history.record';
+const LEGACY_MOUNT = 'history.legacy';
 
 /** The VIABILITY and PLOT-HOOKS positions. */
 const VERDICT_MOUNT = 'viability.verdict';
@@ -95,6 +98,7 @@ const SILENT_HISTORY = Object.freeze({
   identityLines: Object.freeze([]),
   foundedLine: null,
   recordLine: null,
+  legacyLines: Object.freeze([]),
 });
 
 /** The same, for the viability verdict and the plot-hook framing. */
@@ -131,6 +135,34 @@ export const GENERAL_DESK_SILENT = Object.freeze({
 });
 
 /**
+ * THE PUBLIC SITES (STYLE-RULINGS-2 B10(a), SW-B7b): each host's call site and the one group of
+ * lines it renders. The shared page prints that group as the owner's player view drew it at
+ * the owner's save (`publicProse.js`); every other group, and an unshipped site, is SILENT.
+ */
+const PUBLIC_SITE_GROUP = Object.freeze({
+  'general:overview': 'overview',
+  'general:history': 'history',
+  'general:viability': 'viability',
+  'general:economics': 'economics',
+});
+
+/**
+ * The shared page's lines for one call site: the shipped group, keyed to its SILENT shape.
+ * @param {any} settlement @param {unknown} site @returns {typeof GENERAL_DESK_SILENT}
+ */
+function publicGeneralLines(settlement, site) {
+  const group = typeof site === 'string' ? PUBLIC_SITE_GROUP[/** @type {keyof typeof PUBLIC_SITE_GROUP} */ (site)] : undefined;
+  const shipped = group ? publicProseOf(settlement, /** @type {string} */ (site)) : null;
+  if (!group || !shipped || typeof shipped !== 'object') return GENERAL_DESK_SILENT;
+  const silent = /** @type {Record<string, unknown>} */ (GENERAL_DESK_SILENT[group]);
+  const lines = /** @type {Record<string, unknown>} */ (shipped);
+  return /** @type {typeof GENERAL_DESK_SILENT} */ (Object.freeze({
+    ...GENERAL_DESK_SILENT,
+    [group]: Object.freeze(Object.fromEntries(Object.keys(silent).map((key) => [key, lines[key] ?? silent[key]]))),
+  }));
+}
+
+/**
  * The sentence one rung draws at one position, or null. The registry's own depth ruling is
  * applied here and nowhere else: flip a row from `sentence` to `glance` in
  * `dossierMounts.js` and the position falls silent with no edit at any call site.
@@ -165,6 +197,12 @@ function recordCleanOf(r) {
   const verdict = Array.isArray(judgments)
     ? judgments.find((j) => j?.id === 'record_coherence_battery')?.status
     : undefined;
+  // SW-B1 (STYLE-RULINGS-2 B1(c), DS-GEN-11's by-design read arm): by-design contradictions are not
+  // battery findings, so a passing battery vouched "nothing about it fails to add up" above the tab's
+  // own "By-Design Contradictions (n)" (Shangjin, soak1k-9). A record with any by-design row — read
+  // from the tab's one reader, `byDesignItemsOf` — is not one the zero pool may vouch for: it reads
+  // as unasked (`undefined`), and DS-GEN-11's count line renders nothing.
+  if (verdict === 'pass' && byDesignItemsOf(r?.economicViability, r).length > 0) return undefined;
   return verdict === 'pass' ? true : verdict === 'needs_review' ? false : undefined;
 }
 
@@ -173,7 +211,7 @@ function recordCleanOf(r) {
  *
  * @param {object|null|undefined} settlement the record the tab already holds
  * @param {{tierNoun?: string|null, tier?: unknown, publicDossier?: boolean, playerView?: boolean,
- *   stresses?: ReadonlyArray<{type?: unknown}|null>,
+ *   publicSite?: string, stresses?: ReadonlyArray<{type?: unknown}|null>,
  *   hookCategories?: ReadonlyArray<unknown>|null,
  *   clockIds?: ReadonlyArray<unknown>|null,
  *   steadings?: ReadonlyArray<unknown>|null,
@@ -304,8 +342,10 @@ export function generalDeskLines(settlement, options = {}) {
   // defect that scan already documents for `window.history.replaceState`, with `prose` in
   // the receiver slot; the exclusion there is a host-global list this name cannot join, and
   // the baseline refuses to absorb a NEW identity, so the cure is at the read.
-  const { identity, founded, record } = prose.history;
-  return Object.freeze({
+  const { identity, founded, record, legacy } = prose.history;
+  // ⭐ THE SHARED PAGE (SW-B7b): the owner's player-view lines for this call site, shipped at the
+  // save; the desk above was not drawn (its own statement's gate), and nothing re-draws here.
+  return publicDossier ? publicGeneralLines(r, options.publicSite) : Object.freeze({
     overview: Object.freeze({
       // ⛔ ALWAYS EMPTY SINCE OWNER ORDER 2026-09-17: `overview.systemsHealth` is a GLANCE row,
       // so `line()` draws no sentence here and no tab renders this field. It stays routed
@@ -327,6 +367,8 @@ export function generalDeskLines(settlement, options = {}) {
         line(MARKET_MOUNT, prose.overview.commerce),
         line(MARKET_MOUNT, prose.overview.warehouses),
         line(INSTITUTIONS_MOUNT, prose.overview.institutions),
+        line(INSTITUTIONS_MOUNT, prose.overview.cathedral),
+        line(INSTITUTIONS_MOUNT, prose.overview.monastery),
       ].filter(Boolean).map(siteClause)),
       situationLine: line(SITUATION_MOUNT, prose.overview.situation),
       connectionLines: Object.freeze(prose.overview.notableConnection
@@ -338,6 +380,7 @@ export function generalDeskLines(settlement, options = {}) {
         .map((rung) => line(IDENTITY_MOUNT, rung)).filter(Boolean)),
       foundedLine: line(FOUNDED_MOUNT, founded),
       recordLine: line(RECORD_MOUNT, record),
+      legacyLines: Object.freeze(legacy.map((rung) => line(LEGACY_MOUNT, rung)).filter(Boolean)),
     }),
     viability: Object.freeze({
       // ONE LENS OF THREE (UX consolidation 2026-10-30, RULINGS-T2 T2-13; RUBRIC R2): the

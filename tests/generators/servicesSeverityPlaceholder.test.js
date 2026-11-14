@@ -1,7 +1,7 @@
 /**
  * tests/generators/servicesSeverityPlaceholder.test.js
  *
- * The lawless "No law, bring coin" service shipped an un-interpolated template
+ * The lawless "No law, bring coin" service (since COHERENCE-PRESUME "Weak law, bring coin") shipped an un-interpolated template
  * placeholder in user-visible prose: "...whoever can apply more violence or pay
  * more for SEVERITY." The token 'SEVERITY' was a bare literal from the very first
  * commit (never a `${...}` interpolation), so its original intent is unrecoverable
@@ -55,7 +55,7 @@ describe('services — SEVERITY placeholder is retired', () => {
     let fired = 0;
     const failures = collectSeedFailures(SWEEP, ({ _seed, ...cfg }) => {
       const s = generateSettlementPipeline(cfg, null, { seed: _seed, customContent: {} });
-      const law = serviceDescs(s).find((d) => /no official recourse/i.test(d));
+      const law = serviceDescs(s).find((d) => /slow and easily outbid/i.test(d));
       if (!law) return;
       fired++;
       // The anchor IS the corrected prose: a description that no longer says

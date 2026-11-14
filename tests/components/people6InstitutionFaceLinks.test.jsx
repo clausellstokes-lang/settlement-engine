@@ -13,7 +13,11 @@
  *   3. the NPC card's institution line is a door to its house's card; a minted face (kind
  *      'power') leads to its power's card; a DM's person (`institution: null`) has no door;
  *   4. the gallery veil and the public-safe projection hide the join as they hide the NPC card's
- *      house: with the card's `institution` gone, no row and no door.
+ *      house: with the card's `institution` gone, no row and no door. FIX-PUBLIC-VEIL (the chair's
+ *      ruling of 2026-11-07, shape (a); re-keyed with that cause): the public projection READS the
+ *      card's veil bit — an open house's face (`institution.veiled: false`) keeps its row, its door
+ *      and its honorific on the public card (§6's PLAUSIBLE resolved); a veiled or unstamped face
+ *      is bare.
  */
 import React from 'react';
 import { describe, it, expect, afterEach, beforeAll, beforeEach, vi } from 'vitest';
@@ -36,11 +40,11 @@ import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const MILLER = {
   id: 'npc_mill', name: 'Edda Marl', role: 'the miller', title: 'the miller', category: 'craft',
-  institution: { kind: 'house', key: 'Mill', family: 'mills', title: 'the miller' }, memberships: [],
+  institution: { kind: 'house', key: 'Mill', family: 'mills', title: 'the miller', veiled: false }, memberships: [],
 };
 const REEVE = {
   id: 'npc_seat', name: 'Osric Vane', role: 'the reeve', title: 'the reeve', category: 'government',
-  institution: { kind: 'power', key: 'Village Moot', family: null, title: 'the reeve' }, memberships: [{ power: 'Village Moot', rank: 1 }],
+  institution: { kind: 'power', key: 'Village Moot', family: null, title: 'the reeve', veiled: false }, memberships: [{ power: 'Village Moot', rank: 1 }],
 };
 const STRANGER = { id: 'npc_dm', name: 'Wynn Tallow', role: 'traveller', category: 'other', institution: null };
 const SETTLEMENT = {
@@ -89,10 +93,24 @@ describe('2. the Institutions card: the face row is a door to the NPC card', () 
     const setActiveTab = vi.fn();
     const { container } = render(<Dossier settlement={SETTLEMENT} setActiveTab={setActiveTab}><InstitutionsTab settlement={SETTLEMENT} /></Dossier>);
     const row = within(cardOf(container, 'Mill')).getByTestId('institution-face');
-    expect(row.textContent).toBe('Master Miller Edda Marl'); // the pool's pick for npc_mill::Mill
+    expect(row.textContent).toBe('Connection: Master Miller Edda Marl'); // the pool's pick for npc_mill::Mill; re-keyed OWNER-WORDS-DOSSIER item 1 (the row opens on "Connection:")
     fireEvent.click(within(row).getByRole('button', { name: 'Go to Edda Marl' }));
     expect(setActiveTab).toHaveBeenCalledWith('npcs', 'entity_link');
     expect(useStore.getState().focusedEntity?.id).toBe(entityIdFor('npc', MILLER));
+  });
+
+  // OWNER-WORDS-DOSSIER item 1 (the owner, 2026-11-09: "In the institution card, before each NPC, say
+  // 'Contact:'", amended minutes later: "Actually rather than contact, I would say 'Connection:'"): the
+  // face row opens on the word, and the word is not part of the door (the link's name is the face's alone).
+  it('the face row opens on "Connection:" before the face, outside the door', () => {
+    const { container } = render(<Dossier settlement={SETTLEMENT} setActiveTab={vi.fn()}><InstitutionsTab settlement={SETTLEMENT} /></Dossier>);
+    const row = within(cardOf(container, 'Mill')).getByTestId('institution-face');
+    const label = within(row).getByTestId('institution-face-label');
+    expect(label.textContent).toBe('Connection:');
+    expect(row.textContent.startsWith('Connection: ')).toBe(true);
+    const door = within(row).getByRole('button', { name: 'Go to Edda Marl' });
+    expect(door.textContent).toBe('Master Miller Edda Marl');
+    expect(door.contains(label)).toBe(false);
   });
 
   it('a house with no face shows no row', () => {
@@ -148,21 +166,36 @@ describe('4. the veil and the public projection hide the join as they hide the c
     expect(facesByHouse(SETTLEMENT.npcs).has('Mill')).toBe(true);
   });
 
-  it('the public-safe projection strips the card\'s institution, so no row and no door', () => {
+  it('the public-safe projection reads the veil bit: an open house\'s face keeps its row and its door', () => {
     const pub = toPublicSafe(SETTLEMENT);
     const miller = pub.npcs.find((n) => n.name === 'Edda Marl');
-    expect(miller.name).toBe('Edda Marl');
-    expect(cardInstitutionDoorOf(miller, pub)).toBeNull();
+    expect(miller.institution).toEqual(MILLER.institution);
+    expect(cardInstitutionDoorOf(miller, pub)).toEqual({ type: 'institution', id: entityIdFor('institution', SETTLEMENT.institutions[0]), name: 'Mill' });
     const rows = institutionsWithServices(pub);
-    expect(rows.find((r) => r.inst.name === 'Mill')?.inst.name).toBe('Mill');
-    expect(rows.find((r) => r.inst.name === 'Mill')?.face).toBeNull();
+    expect(rows.find((r) => r.inst.name === 'Mill')?.face?.name).toBe('Edda Marl');
+    // the minted seat of an open power keeps its door to the power's card
+    expect(cardInstitutionDoorOf(pub.npcs.find((n) => n.name === 'Osric Vane'), pub)?.type).toBe('faction');
+  });
+
+  it('the public-safe projection strips a veiled face — and a face born before the bit — so no row and no door', () => {
+    for (const institution of [{ ...MILLER.institution, veiled: true }, { kind: 'house', key: 'Mill', family: 'mills', title: 'the miller' }]) {
+      const pub = toPublicSafe({ ...SETTLEMENT, npcs: [{ ...MILLER, institution }, REEVE, STRANGER] });
+      const miller = pub.npcs.find((n) => n.name === 'Edda Marl');
+      expect(miller.name).toBe('Edda Marl');
+      expect(cardInstitutionDoorOf(miller, pub)).toBeNull();
+      // the wire form (publicNpc's literal carries undefined-valued keys, which JSON drops)
+      expectAbsentWithAnchor(Object.keys(JSON.parse(JSON.stringify(miller))), 'title', 'name', 'a veiled face prints no title');
+      const rows = institutionsWithServices(pub);
+      expect(rows.find((r) => r.inst.name === 'Mill')?.inst.name).toBe('Mill');
+      expect(rows.find((r) => r.inst.name === 'Mill')?.face).toBeNull();
+    }
   });
 });
 
 describe('5. step 2: the honorific (the owner: "Pastor Robert Thomas" on the institution card; the name alone on the NPC card, the role on its own row)', () => {
   const PASTOR = {
     id: 'npc_parish-church', name: 'Robert Thomas', role: 'the priest', title: 'the priest', category: 'religious', gender: 'male',
-    institution: { kind: 'house', key: 'Parish church', family: 'parish', title: 'the priest' }, memberships: [],
+    institution: { kind: 'house', key: 'Parish church', family: 'parish', title: 'the priest', veiled: false }, memberships: [],
   };
   const ABBESS = { ...PASTOR, id: 'npc_abbey', name: 'Hild Wren', gender: 'female', institution: { kind: 'house', key: 'Abbey', family: 'monastery', title: 'the abbot' } };
   const CHURCHED = { ...SETTLEMENT, institutions: [...SETTLEMENT.institutions, { name: 'Parish church', category: 'Religious', desc: 'Stone and a bell.' }], npcs: [...SETTLEMENT.npcs, PASTOR] };
@@ -184,7 +217,7 @@ describe('5. step 2: the honorific (the owner: "Pastor Robert Thomas" on the ins
     const setActiveTab = vi.fn();
     const { container } = render(<Dossier settlement={CHURCHED} setActiveTab={setActiveTab}><InstitutionsTab settlement={CHURCHED} /></Dossier>);
     const row = within(cardOf(container, 'Stone and a bell.')).getByTestId('institution-face');
-    expect(row.textContent).toBe('Pastor Robert Thomas');
+    expect(row.textContent).toBe('Connection: Pastor Robert Thomas'); // re-keyed OWNER-WORDS-DOSSIER item 1 (the row opens on "Connection:")
     fireEvent.click(within(row).getByRole('button', { name: 'Go to Robert Thomas' }));
     expect(useStore.getState().focusedEntity?.id).toBe(entityIdFor('npc', PASTOR));
   });
@@ -219,9 +252,14 @@ describe('5. step 2: the honorific (the owner: "Pastor Robert Thomas" on the ins
     const v = veiled.npcs.find((n) => n.id === 'npc_parish-church');
     expect(faceNameOf(v)).toBe('Robert Thomas');
     expect(cardHonorificOf(v)).toBe('');
+    // FIX-PUBLIC-VEIL: an open house's honorific prints on the public card as on the DM's
     const pub = toPublicSafe(CHURCHED).npcs.find((n) => n.name === 'Robert Thomas');
-    expect(faceNameOf(pub)).toBe('Robert Thomas');
-    expect(cardHonorificOf(pub)).toBe('');
+    expect(faceNameOf(pub)).toBe('Pastor Robert Thomas');
+    // a veiled house's face is bare on the public card
+    const hidden = { ...CHURCHED, npcs: CHURCHED.npcs.map((n) => (n.id === 'npc_parish-church' ? { ...n, institution: { ...n.institution, veiled: true } } : n)) };
+    const pubHidden = toPublicSafe(hidden).npcs.find((n) => n.name === 'Robert Thomas');
+    expect(faceNameOf(pubHidden)).toBe('Robert Thomas');
+    expect(cardHonorificOf(pubHidden)).toBe('');
     // the unveiled control
     expect(faceNameOf(CHURCHED.npcs.find((n) => n.id === 'npc_parish-church'))).toBe('Pastor Robert Thomas');
   });

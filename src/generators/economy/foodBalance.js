@@ -7,6 +7,7 @@ import { migrationDirectionOfConfig } from '../../domain/migrationDirection.js';
 import { FOOD_SECURITY_BANDS, FOOD_SECURITY_CUTS, foodSecurityBandKeyOf } from '../../data/bandLadders.js';
 import { FOOD_IMPORT_RATES, SIEGE_PRODUCTION_KEPT } from '../../data/foodImportRates.js';
 import {
+  getInstFlags,
   getTradeRouteFeatures,
   hasTeleportationInfra,
 } from '../helpers.js';
@@ -322,10 +323,15 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
   // The label is read by a player (dossierViewModel prints it verbatim), so the
   // config token is de-slugged: 'mountain_pass' must arrive as "mountain pass
   // trade". Byte-identical for every single-word route.
+  // SW-B1 CONTRADICTIONS (STYLE-RULINGS-2 B1(b), the SURFACES audit's P71/#2): "port trade" — printed
+  // "brought in by sea" and "comes in by port trade" — is said only over docks. A port route with no
+  // docks (Albamunicipium, soak1k-0, a mountain thorp) names the channel plainly as "trade"; the rate is
+  // the route's, unchanged. The docks are the institution flag the #10 gate reads (`getInstFlags.inst`).
+  const portWithoutDocks = effectiveRoute === 'port' && !getInstFlags(config || {}, institutions || []).inst?.hasPort;
   const importChannelLabel = importCoverageRate <= 0
     ? null
     : !disconnectedRoute
-      ? `${String(effectiveRoute).replace(/_/g, ' ')} trade`
+      ? (portWithoutDocks ? 'trade' : `${String(effectiveRoute).replace(/_/g, ' ')} trade`)
       : _magicTradeRate * _maintainerMult >= _minorRouteRate
         ? (_hasTeleportCircle ? 'teleportation circle' : _siegeIsolation ? 'airship runs (impaired by siege)' : 'airship traffic')
         : 'minor routes and sanctioned caravans';
@@ -512,7 +518,7 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
         });
         plotHooks.push({
           category: 'Trade Disruption',
-          hook: `The ${effectiveRoute} trade route is cut off by bandits, war, or weather. The settlement has ${Math.round((dailyProductionFinal / dailyNeedFinal) * 30)} days of food left. Famine follows within weeks.`,
+          hook: `The ${effectiveRoute} trade route is cut, and nothing has come along it in days. The town has ${Math.round((dailyProductionFinal / dailyNeedFinal) * 30)} days of food left, and no one knows when the next load will come.`,
           severity: 'high',
         });
       }
@@ -597,10 +603,15 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
         type: 'stress_consequence',
         category: 'Food Supply',
         severity: isCritical ? 'critical' : 'implausible',
-        title: 'Crisis Cutting the Food Supply',
+        // SW-B1 (STYLE-RULINGS-2 B1(b), the SURFACES audit's P73): the label read no surplus, so a town that
+        // still grows more than it eats (Lundey, soak1k-1, +17) printed "Cutting the Food Supply" beside
+        // "it feeds itself". The label and its note now read the surplus beside the cut.
+        title: surplus >= 0 ? 'Crisis Thinning the Harvest' : 'Crisis Cutting the Food Supply',
         message: note,
         description: note,
-        priorityNote: 'The crisis is cutting into the food supply now.',
+        priorityNote: surplus >= 0
+          ? 'The crisis has cut the harvest, but what is grown still covers what is eaten.'
+          : 'The crisis is cutting into the food supply now.',
       });
     });
   }
@@ -782,25 +793,25 @@ export const deriveSupplyRiskAnalysis = (population, terrain, institutions, conf
         category: 'Trade Monopoly',
         // CENSUS-3e (answer 2, R-V measured): `guild` at this step differs from the final record on
         // 25 of 1,000 births, so the hook presumes only the imports its branch guarantees.
-        hook: 'A single importer controls the grain coming in and has raised prices 300%. The locals are weighing whether to pay it, find another supplier, or take the grain.',
+        hook: 'One importer now brings in all the grain and has quadrupled the price; the locals are arguing over whether to pay, find another supplier, or take the grain.',
         severity: 'high',
       });
       if (route === 'river')
         hooks.push({
           category: 'River Control',
-          hook: 'Upstream settlement builds dam or diverts river. Threatens water access AND grain shipments. Diplomacy or war?',
+          hook: 'A town upstream has dammed the river or turned it: the water is low here, the grain shipments are stuck, and the town must choose between talking and fighting.',
           severity: 'high',
         });
       if (route === 'port' && resolveTerrain(config) === 'coastal')
         hooks.push({
           category: 'Naval Blockade',
-          hook: `An enemy fleet or a pirate squadron blockades the port. The settlement has ${Math.round((foodBalance.dailyProduction / foodBalance.dailyNeed) * 30)} days of reserves, and nothing enters or leaves until that changes.`,
+          hook: `Ships sit across the harbour mouth, an enemy's or pirates', and nothing enters or leaves. The town has ${Math.round((foodBalance.dailyProduction / foodBalance.dailyNeed) * 30)} days of reserves.`,
           severity: 'high',
         });
       if (route === 'road' && hasDeficit)
         hooks.push({
           category: 'Bandit Raids',
-          hook: 'Bandits are taking the food caravans, and the settlement has posted a bounty for clearing the trade road. But are the "bandits" refugees driven here from somewhere worse?',
+          hook: 'Bandits are taking the food caravans, and the town has posted a bounty for clearing the trade road; the carters who got away say the "bandits" looked like families who had fled somewhere worse.',
           severity: 'medium',
         });
     }
@@ -819,7 +830,9 @@ export const deriveSupplyRiskAnalysis = (population, terrain, institutions, conf
     )
     || hasTeleportationInfra(institutions, config);
   if (mustImport) {
+    const pick = Math.round(Number(population) || 0) + (institutions?.length || 0); // COHERENCE-AGREE: the event a place draws, by its size, no roll
     mustImport.forEach((resource) => {
+      if (liveMaterialFor(resource, availableNativeResourceKeys(config || {}))) return; // COHERENCE-AGREE: a live material is no import and no hook
       if (hasImportProcessor(institutions, resource, config)) {
         if (!hasExternalSupply) return;
         warnings.push({
@@ -831,17 +844,16 @@ export const deriveSupplyRiskAnalysis = (population, terrain, institutions, conf
           suggestedFixes: [`Establish stable trade relationship with ${resource} supplier`],
         });
         if (resource.toLowerCase().includes('timber'))
-          hooks.push({
-            category: 'Resource Conflict',
-            hook: "Something is killing the forest the timber comes from, and the settlement's building and shipbuilding trades stall without it. Find another supplier, or find out what is in those woods?",
-            severity: 'medium',
+          hooks.push({ category: 'Resource Conflict', severity: 'medium',
+            hook: ["Something is killing the forest the timber comes from, and the settlement's building and shipbuilding trades stall without it. Find another supplier, or find out what is in those woods?",
+              'The timber rafts stopped coming a month ago, and the shipwrights and builders are bidding against each other for what is left in the yards.'][pick % 2],
           });
         if (resource.toLowerCase().includes('metal') || resource.toLowerCase().includes('iron'))
-          hooks.push({
-            category: 'Strategic Resource',
-            hook: 'War breaks out. Metal suppliers prioritize military contracts. Blacksmiths cannot get iron for tools/repairs. Economy suffers, population discontent grows.',
-            severity: 'medium',
-          });
+          hooks.push({ category: 'Strategic Resource', severity: 'medium', hook: (typeof facts === 'function' ? facts() : facts)?.warState !== 'peace' // the war line only where the record holds a war
+            ? 'War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with. Work slows, and people are starting to complain.'
+            : ['The iron merchants have doubled their price this season, and the smiths are mending tools with scrap. Work slows, and people are starting to complain.',
+              'The iron carts are three weeks late and the carters will not say why. The smiths are rationing what they have, and work waits on mended tools.',
+              'A new toll on the iron road has made metal dear. The smiths blame whoever set it, and the tools still need mending.'][pick % 3] });
       }
     });
   }
@@ -883,4 +895,4 @@ function moderateGapGrade(facts) {
   if (severity === undefined) return {};
   return { category: FOOD_SECURITY_BANDS[/** @type {keyof typeof FOOD_SECURITY_BANDS} */ (band)].label, severity };
 }
-import { MODERATE_GAP_TWIN, OUTLOOK_HOOK_SIBLINGS } from './outlookHookSiblings.js'; export { OUTLOOK_HOOK_SIBLINGS }; // LANDING-R2 (ODQ §934.105): the outlook hooks' declared siblings moved verbatim to economy/outlookHookSiblings.js, re-exported; below every cited line, so none moves
+import { MODERATE_GAP_TWIN, OUTLOOK_HOOK_SIBLINGS } from './outlookHookSiblings.js'; import { liveMaterialFor } from './localMaterials.js'; export { OUTLOOK_HOOK_SIBLINGS }; // LANDING-R2 (ODQ §934.105): the outlook hooks' declared siblings moved verbatim to economy/outlookHookSiblings.js, re-exported; below every cited line, so none moves

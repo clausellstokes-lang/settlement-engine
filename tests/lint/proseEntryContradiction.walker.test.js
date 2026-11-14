@@ -315,9 +315,13 @@ describe('the corpus loaders — fail-closed, and counted against the probe', ()
     // c00b30eb6 +4); the causal leaf and the 787 pools unchanged. 2810 -> 2811 at
     // LANDING-R2 helper G (the chair's §934.105 ruling (1): DS-GEN-17 PROVISIONED v3, the hospital-only line) +1.
     // 2811 -> 2812 at LANDING-R2 helper G2 (the chair's 06:5x DS-CND-1 boom line (ODQ §934.105, ruling (2)): ARCHETYPE: boom v4 `[street · crisis: any]`) +1.
-    expect(leaves.length + causal.length).toBe(2889); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
-    expect(new Set([...leaves, ...causal].map((e) => e.poolId)).size).toBe(813); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
-    expect(new Set(leaves.map((e) => e.block)).size).toBe(68);
+    // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6 (+8 pools, +19 variants): 2812 -> 2831.
+    // WIRING W3 second seat (2026-11-07), the owner's style law over DS-POW-1 (the #23 tier twins, Endorsed v5 and Legitimacy Crisis v5, +2 variants): 2831 -> 2833.
+    // W3 POW fourth seat (2026-11-08): DS-POW-1 governanceFractured `[newcomer]` v5 (STYLE-AUDIT §2a #24), +1: 2833 -> 2834.
+    // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6 (+8 pools, +19 variants): 787 -> 795.
+    expect(leaves.length + causal.length).toBe(3247); // STYLE-2-MERGE at the SW-B2 merge (2026-11-09): DS-GEN-11's vouching zero pool leaves (3e9de356e, B·#28): 3232 -> 3229 // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted). // 2812 -> 2859 over the W2 DEF lane (2026-11-07): the 47 lines it added (FLAG 4, DS-DEF-4 FIXTURE 8, DS-DEF-5 FIXTURE 8, ARCANE 12, DS-DEF-12 15) // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 2859 -> 2873 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 2873 -> 2973 // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (2812 -> 3050) // MERGE-WAVE at the W3 POW merge: both lanes' deltas composed (2812 -> 3072) // W4 PEOPLE 2026-11-07: +7 pools/+18 variants, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants); W4 PEOPLE second seat 2026-11-07: re-measured, DS-STR-1 the style law (+4 departures lines) // MERGE-WAVE at the W4 PEOPLE merge: both lanes' deltas composed (2812 -> 3222) // MERGE-WAVE at the W5 HIS merge: both lanes' deltas composed (2812 -> 3232) // STYLE-2-MERGE at the SW-B5 merge (2026-11-09): SW-B5 FRAMES' vantage variants composed over SW-B2's zero-pool exit (the lane re-keyed this pin from its own base): 3229 -> 3247
+    expect(new Set([...leaves, ...causal].map((e) => e.poolId)).size).toBe(934); // STYLE-2-MERGE at the SW-B2 merge (2026-11-09): 935 -> 934, DS-GEN-11's zero pool leaves (3e9de356e) // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted). // 787 -> 807 over the W2 DEF lane (2026-11-07): the twenty pools it added (FLAG 2, DS-DEF-4 FIXTURE 4, DS-DEF-5 FIXTURE 3, ARCANE 6, DS-DEF-12 5) // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 807 -> 811 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 811 -> 844 // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (787 -> 870) // MERGE-WAVE at the W3 POW merge: both lanes' deltas composed (787 -> 878) // W4 PEOPLE 2026-11-07: re-measured, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants) // MERGE-WAVE at the W4 PEOPLE merge: both lanes' deltas composed (787 -> 930) // MERGE-WAVE at the W5 HIS merge: both lanes' deltas composed (787 -> 935)
+    expect(new Set(leaves.map((e) => e.block)).size).toBe(69); // W2 DEF C3–C5 (DS-DEF-12, 2026-11-07): 68 -> 69 // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (68 -> 69) // MERGE-WAVE at the W3 POW merge: both lanes' deltas composed (68 -> 69) // MERGE-WAVE at the W4 PEOPLE merge: both lanes' deltas composed (68 -> 69) // MERGE-WAVE at the W5 HIS merge: both lanes' deltas composed (68 -> 69)
     expect(crier.length).toBeGreaterThan(300);
     expect(generator.length).toBeGreaterThan(0);
   });
@@ -331,13 +335,21 @@ describe('the corpus loaders — fail-closed, and counted against the probe', ()
     // (6dd3f9766, the {colour} rulings) +21 rows whose text now joins its twin. 0 unjoined.
     // 2121 -> 2122 at LANDING-R2 helper G (the chair's §934.105 ruling (1): DS-GEN-17 PROVISIONED v3, the hospital-only line) +1.
     // 2122 -> 2123 at LANDING-R2 helper G2 (the chair's 06:5x DS-CND-1 boom line (ODQ §934.105, ruling (2)): ARCHETYPE: boom v4 `[street · crisis: any]`) +1.
-    expect(joined.length).toBe(2200); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
+    // 2123 -> 2170 over the W2 DEF lane (2026-11-07): every line the lane added joins its twin — DS-DEF-9 FLAG 4, DS-DEF-4
+    // FIXTURE 8, DS-DEF-5 FIXTURE 8, ARCANE 12, DS-DEF-12 15 = 47. (The lane's first two seats did not re-key this pin.)
+    // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6 (+8 pools, +19 variants): 2123 -> 2142.
+    // WIRING W3 second seat (2026-11-07), the owner's style law over DS-POW-1 (the #23 tier twins, Endorsed v5 and Legitimacy Crisis v5, +2 variants): 2142 -> 2144.
+    // W3 POW fourth seat (2026-11-08): DS-POW-1 governanceFractured `[newcomer]` v5, +1 joined row: 2144 -> 2145.
+    expect(joined.length).toBe(2558); // STYLE-2-MERGE at the SW-B2 merge (2026-11-09): DS-GEN-11's vouching zero pool leaves (3e9de356e, B·#28): 2543 -> 2540 // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted). // 2184 -> 2284 (W2 DEF stress-type keys, 2026-11-07): the hundred new lines // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 2170 -> 2184 (the fourteen CHAIN lines) // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (2123 -> 2361) // MERGE-WAVE at the W3 POW merge: both lanes' deltas composed (2123 -> 2383) // W4 PEOPLE 2026-11-07: +7 pools/+18 variants, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants); W4 PEOPLE second seat 2026-11-07: re-measured, DS-STR-1 the style law (+4 departures lines) // MERGE-WAVE at the W4 PEOPLE merge: both lanes' deltas composed (2123 -> 2533) // MERGE-WAVE at the W5 HIS merge: both lanes' deltas composed (2123 -> 2543) // STYLE-2-MERGE at the SW-B5 merge (2026-11-09): SW-B5 FRAMES' vantage variants composed over SW-B2's zero-pool exit (the lane re-keyed this pin from its own base): 2540 -> 2558
     expect(unjoined).toEqual([]);
     // The compact-row grammar (a whole pool on one bullet line, 225 variants) carries no
     // per-row address, so not every leaf variant has an annex line. That gap is the ADDRESS
     // reader's, is declared, and is why the pool grammar stays with the projection.
     expect(leafLines.size).toBeLessThan(leaves.length);
-    expect(leafLines.size).toBe(2200); // 2121 -> 2122 at the same cause: the new line is addressed; 2122 -> 2123 at G2's boom v4, likewise // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
+    // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6 (+8 pools, +19 variants): 2123 -> 2142.
+    // 2142 -> 2144 at WIRING W3's second seat (2026-11-07): the #23 tier twins are addressed lines.
+    // 2144 -> 2145 at W3 POW's fourth seat (2026-11-08): DS-POW-1 governanceFractured `[newcomer]` v5 is an addressed line.
+    expect(leafLines.size).toBe(2558); // STYLE-2-MERGE at the SW-B2 merge (2026-11-09): DS-GEN-11's vouching zero pool leaves (3e9de356e, B·#28): 2543 -> 2540 // 2121 -> 2122 at the same cause: the new line is addressed; 2122 -> 2123 at G2's boom v4, likewise // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted). // 2123 -> 2170 over the W2 DEF lane, the same 47 lines addressed // 2121 -> 2122 at the same cause: the new line is addressed; 2122 -> 2123 at G2's boom v4, likewise // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 2170 -> 2184 (the fourteen CHAIN lines) // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (2123 -> 2361) // 2121 -> 2122 at the same cause: the new line is addressed; 2122 -> 2123 at G2's boom v4, likewise // MERGE-WAVE at the W3 POW merge: both lanes' deltas composed (2123 -> 2383) // 2121 -> 2122 at the same cause: the new line is addressed; 2122 -> 2123 at G2's boom v4, likewise; 2123 -> 2141 at W4 PEOPLE 2026-11-07 (the faith and great-house construction, 18 new lines, each addressed); W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants); W4 PEOPLE second seat 2026-11-07: re-measured, DS-STR-1 the style law (+4 departures lines) // MERGE-WAVE at the W4 PEOPLE merge: both lanes' deltas composed (2123 -> 2533) // 2121 -> 2122 at the same cause: the new line is addressed; 2122 -> 2123 at G2's boom v4, likewise // MERGE-WAVE at the W5 HIS merge: both lanes' deltas composed (2123 -> 2543) // STYLE-2-MERGE at the SW-B5 merge (2026-11-09): SW-B5 FRAMES' vantage variants composed over SW-B2's zero-pool exit (the lane re-keyed this pin from its own base): 2540 -> 2558
   });
 });
 
@@ -359,7 +371,7 @@ describe('the composed-fill resolver — measured against an orthogonal witness'
     // composer's slot bag from source and asking which blocks no bag serves. They agree
     // exactly. If the resolver ever goes dark it will disagree, loudly.
     expect(noBag.slice().sort()).toEqual([...UNMOUNTED_BLOCKS].sort());
-    expect(noBag.length).toBe(14); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
+    expect(noBag.length).toBe(13); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted). // W4 PEOPLE 2026-11-07: +7 pools/+18 variants, the faith and great-house construction // MERGE-WAVE at the W4 PEOPLE merge: both lanes' deltas composed (15 -> 13)
   });
 
   it('reads the three bags the reconciliation measured by hand', () => {
@@ -425,8 +437,21 @@ describe('THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships
       // at LANDING-R2 helper G2 (the chair's 06:5x DS-CND-1 boom line (ODQ §934.105, ruling (2)): ARCHETYPE: boom v4 `[street · crisis: any]`): the boom line sits above it.
       // 5326 -> 5422 at W1 ECO construction (2026-11-07): 96 annex lines of new economy pools sit above it.
       // 5422 -> 5425: three DS-ECO-11 strategic-value vantages added above it (W1 ECO, 2026-11-07).
-      .find((row) => row.line === 5425);
-    expect(annexRow, 'RECEIPT_POOLS_DOSSIER_STATE.md:5425 did not load').toBeTruthy();
+      // 5326 -> 5458 over the W2 DEF lane (2026-11-07): the lane's new pools and their notes sit above it (DS-DEF-4, -5, -9
+      // and the new DS-DEF-12 block); re-addressed by the same text.
+      // 5458 -> 5489 at W2 DEF C6 (2026-11-07): DS-DEF-2's four CHAIN pools and their note sit above it.
+      // 5489 -> 5674 (W2 DEF stress-type keys, 2026-11-07): DS-DEF-3's and DS-DEF-8's thirty-three new pools sit above it.
+      // 5326 -> 5361 at WIRING W3 (2026-11-07): the C1-C6 pools in DS-POW-5/-6 sit above it.
+      // 5361 -> 5363, re-addressed by its text ("the same trades exempt"): the second seat of WIRING W3 (2026-11-07),
+      // the #23 tier twins (DS-POW-1 Endorsed v5, Legitimacy Crisis v5) sit above it.
+      // 5363 -> 5364, re-addressed by its text ("the same trades exempt"): W3 POW's fourth seat (2026-11-08),
+      // DS-POW-1 governanceFractured `[newcomer]` v5 sits above it.
+      // 5326 -> 5546, re-addressed by its text ("the same trades exempt") at W4 PEOPLE second seat 2026-11-07: DS-CND-1's
+      // forty-five crisis-keyed direction pools (STYLE-RULINGS §1a) and their note sit above it, 220 lines.
+      // 5546 -> 5550 at the same seat's DS-STR-1 pass: the migration pool's four departures lines sit above it.
+      // 5326 -> 5332 at W5 HIS (2026-11-07): DS-POP-1's re-citation paragraph sits above it.
+      .find((row) => row.line === 6052); // STYLE-2-MERGE at the SW-B5 merge (2026-11-09): SW-B5 FRAMES' eighteen vantage lines on five frame pools, composed over SW-B2's zero-pool exit, re-addressed by its text: 6041 -> 6052 // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (5326 -> 5773) // MERGE-WAVE at the W3 POW merge: both lanes' deltas composed (5326 -> 5811) // MERGE-WAVE at the W4 PEOPLE merge: both lanes' deltas composed (5326 -> 6035) // MERGE-WAVE at the W5 HIS merge: both lanes' deltas composed (5326 -> 6041)
+    expect(annexRow, 'RECEIPT_POOLS_DOSSIER_STATE.md:6052 did not load').toBeTruthy(); // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (5326 -> 5773) // MERGE-WAVE at the W3 POW merge: both lanes' deltas composed (5326 -> 5811) // MERGE-WAVE at the W4 PEOPLE merge: both lanes' deltas composed (5326 -> 6035) // MERGE-WAVE at the W5 HIS merge: both lanes' deltas composed (5326 -> 6041)
     expect(walkEntry(annexRow, withEntryContext(base, {})).fails.map((f) => f.arm))
       .toContain('exemption on a null column');
   });
@@ -452,9 +477,15 @@ describe('THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships
     const base = estateGround({ officeRoster: deriveOfficeRoster() });
     const ladder = await loadNpcLadder();
     const male = ladder.filter((row) => /\bhis\b/i.test(row.text) && !/\bher\b/i.test(row.text));
-    // The anchor is SHIPPED material, and there is a lot of it: 121 male-pronoun rows of
-    // 1,662. A single hand-picked line would be a fixture wearing a corpus's coat.
-    expect(male.length).toBeGreaterThan(50);
+    // The anchor is SHIPPED material. A single hand-picked line would be a fixture
+    // wearing a corpus's coat.
+    // RE-KEYED by STYLE-2 SW-1 (ruling A5, 2026-11-09): the cure struck he/his from every
+    // R6 line that PRINTS (121 -> 29 rows of 1,662). The 29 that remain are all the
+    // `reformed` stage, which the lane left byte-identical because a reformed bearer's
+    // card never prints the line (reform clears `npc.corrupt`). So the anchor is now
+    // keyed to that identity, and pinned EXACTLY: a further strike re-keys it by its cause.
+    expect(male.length).toBe(29);
+    expect(male.every((row) => /\.reformed$/.test(String(row.pool)))).toBe(true);
     const anchor = male[0];
     // PRESENT-THEN-ABSENT: the bearer's typed gender contradicts the pronoun and the arm
     // fails; the matching gender and the same shipped line falls silent.
@@ -476,15 +507,17 @@ describe('THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships
     const { joined } = joinAnnexToLeaves(loadStateAnnex(), leaves);
 
     // ⛔ THE ANCHOR §2.4.1 NAMES DOES NOT FIRE, AND THAT IS REPORTED RATHER THAN PATCHED.
-    // `RECEIPT_POOLS_DOSSIER_STATE.md:2256` is the `[counterforce]` turtling row under an
+    // `RECEIPT_POOLS_DOSSIER_STATE.md:2257` is the `[counterforce]` turtling row under an
     // `economicBase: extraction` header (SITTING A5). Measured at this tip, against every
     // value of the provenance flag, it fires NO arm of this walker: its defect is a pool-key
     // SCOPE fault (a military-doctrine sentence under an economic-base key — R-DA-19), and
     // this walker carries no scope arm. So it cannot serve as a C3-lexical anchor, and the
     // roster's fifth entry is NOT-EXECUTABLE with its reason rather than silently absent.
     // W1 ECO (2026-11-07): re-addressed to the turtling row itself (2371); the stale 2256 had drifted onto another row.
-    const row = joined.find((r) => r.line === 2371);
-    expect(row, 'RECEIPT_POOLS_DOSSIER_STATE.md:2371 did not load').toBeTruthy();
+    // 2256 -> 2257, re-addressed by its text (the turtling row): W3 POW's fourth seat (2026-11-08), DS-POW-1
+    // governanceFractured `[newcomer]` v5 sits above it.
+    const row = joined.find((r) => r.line === 2383); // STYLE-2-MERGE at the SW-B5 merge (2026-11-09): SW-B5 FRAMES' eighteen vantage lines on five frame pools, composed over SW-B2's zero-pool exit, re-addressed by its text: 2372 -> 2383 // MERGE-WAVE at the W3 POW merge: both lanes' deltas composed (2256 -> 2372)
+    expect(row, 'RECEIPT_POOLS_DOSSIER_STATE.md:2383 did not load').toBeTruthy(); // MERGE-WAVE at the W3 POW merge: both lanes' deltas composed (2256 -> 2372)
     for (const eventProvenance of [true, false]) {
       expect(walkEntry(row, withEntryContext(base, { eventProvenance })).fails).toEqual([]);
     }
@@ -516,8 +549,20 @@ describe('THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships
     // `eventProvenance: false`; NOT-EXECUTABLE without the flag) — measured on that one entry.
     // 47 -> 46 (both) at the chair's 07:1x ruling: the boom line's undated clause ("coin moves
     // freely and work is easy to find") makes no dated claim, so the entry leaves the class.
-    expect(notExecutable).toBe(48); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
-    expect(fails).toBe(48); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
+    // 46 -> 45 (W2 DEF, 2026-11-07): DS-DEF-8's generic framing v1 rewritten off its actor claim ("What {settlement}'s defenses
+    // are ordinarily worth ... the arrangements have been rebuilt"), measured on that one entry.
+    // 45 -> 44 (W2 DEF fourth seat, 2026-11-07, the DS-DEF-1 style rows): readiness ADEQUATE v3's old wording ("The town
+    // believes it could hold ...") carried the class; its rewrite does not, measured on that one entry.
+    // 44 -> 43 (W2 DEF fourth seat (DS-DEF-2 style rows, 2026-11-07)), measured on the entries that left the class.
+    // 43 -> 42 (W2 DEF fourth seat (DS-DEF-10 style rows, 2026-11-07)), measured on the entries that left the class.
+    // 42 -> 41 (W2 DEF fourth seat (DS-WAR-1 style rows, 2026-11-07)), measured on the entries that left the class.
+    // 46 -> 41 (both) at W5 HIS's style pass (2026-11-07, ODQ §934.105, the owner's style law): the rewritten
+    // history/overview lines drop five provenance-class phrasings (measured over the leaves, parent -> commit).
+    // 46 -> 45 (both) at W7 HOOKS (2026-11-07, the owner's style law): JF-CPL-18b / v04's rewrite ("…what the hall
+    // wanted to build sits unbuilt") drops the old line's actor verb "founded", so the entry leaves the class; W7's two
+    // other new lexicon hits ("ordered", "years ago") were re-worded before landing. Measured on the causal leaf.
+    expect(notExecutable).toBe(36); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted). // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (46 -> 43) // W4 PEOPLE 2026-11-07: re-measured, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured, DS-STR-1 the style law (two provenance-class lines re-worded out of the class) // MERGE-WAVE at the W4 PEOPLE merge: both lanes' deltas composed (46 -> 42) // MERGE-WAVE at the W5 HIS merge: both lanes' deltas composed (46 -> 37) // MERGE-WAVE at the W7 HOOKS merge: both lanes' deltas composed (46 -> 36)
+    expect(fails).toBe(36); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted). // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (46 -> 43) // W4 PEOPLE 2026-11-07: re-measured, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured, DS-STR-1 the style law (two provenance-class lines re-worded out of the class) // MERGE-WAVE at the W4 PEOPLE merge: both lanes' deltas composed (46 -> 42) // MERGE-WAVE at the W5 HIS merge: both lanes' deltas composed (46 -> 37) // MERGE-WAVE at the W7 HOOKS merge: both lanes' deltas composed (46 -> 36)
     // PRESENT-THEN-ABSENT on one of them, so the arm is proved rather than counted.
     const anchor = corpus.find((entry) => walkEntry(entry, withEntryContext(base, { eventProvenance: false }))
       .fails.some((f) => f.klass === 'C3'));
@@ -651,7 +696,7 @@ describe('THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships
     );
   });
 
-  it('THE QUALIFY ARM on the shipped `DS-POW-5::autocrat` variant — a trailing coordinate', async () => {
+  it('THE QUALIFY ARM on the shipped `DS-POW-5::theocracy` variant — a trailing coordinate', async () => {
     // ⛔ THE SECOND ARM CAR 9 OWED (INSTR-912 car 10, cure 13; FOLD-2 P12). Cure 15's code —
     // `armQualify` reading a trailing coordinate inside ONE sentence, where it used to return
     // early on `sentences.length < 2` — shipped with no assertion naming it, so stubbing the
@@ -659,7 +704,11 @@ describe('THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships
     // control, read from the SHIPPED corpus rather than transcribed.
     const ground = estateGround({ officeRoster: deriveOfficeRoster() });
     const leaves = await loadStateLeaves();
-    const target = leaves.find((e) => /DS-POW-5/.test(e.id) && /autocrat#2$/.test(e.id));
+    // RE-KEYED BY IDENTITY at WIRING W3's second seat (2026-11-07): the owner's style law rewrote `autocrat` v3
+    // ("What the {seat} fears is not the city but the …; …") into two plain sentences, so it no longer carries the
+    // trailing coordinate. `theocracy` v4 ("At {settlement} the hall and the {institution} are run by the same people;
+    // only the hours differ.") is the block's shipped variant that does, measured at the tip.
+    const target = leaves.find((e) => /DS-POW-5/.test(e.id) && /theocracy#3$/.test(e.id));
     expect(target, 'the named variant is still in the corpus').toBeTruthy();
     const walk = walkEntry(target, ground);
     expect(verdictOf(walk), 'a claim the ground cannot settle is WITHHELD, never a pass').toBe('WITHHELD');
@@ -676,7 +725,18 @@ describe('THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships
     // chair's ruling of 2026-11-04; the owner's veto point). Report-only, still a minority.
     // 336 -> 341, measured per commit on the leaves: F12 unit 2 (e19e3e4cf) +3, census-5b unit 3
     // (c00b30eb6, R-L twins) +2. Report-only, still a minority.
-    expect(carrying.length, 'entries carrying the trailing-coordinate class, at this tip').toBe(352); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted).
+    // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6 (+8 pools, +19 variants): 341 -> 345.
+    // 345 -> 341 at WIRING W3's second seat (2026-11-07), the owner's style law over DS-POW-1/-2/-5/-6/-7: the plain
+    // rewrites drop the "; …" afterthought from four power variants (measured on the leaves). Report-only, still a minority.
+    // 341 -> 340 at the owner's reading of 2026-11-07 (WAVE-RULINGS item 16, the ledger vantage names the record and its
+    // cost): DS-POW-6 duty evasion v1 is two sentences now, not a "; …" list.
+    // 340 -> 335 at the car rows of WIRING W3 (2026-11-08, the owner's style law over DS-POW-3 and DS-POW-4, after the people car): five ladder and succession lines lose their "; …" afterthought.
+    // 341 -> 343 at W5 HIS construction (2026-11-07, ODQ §934.105): two of DS-GEN-16's new legacy lines carry the class. Report-only, still a minority.
+    // 343 -> 371 at W5 HIS's style pass (2026-11-07, the owner's style law): plain "X, and Y" statements replace the
+    // aphorisms and balances. Report-only, still a minority.
+    // 371 -> 372 at W5 HIS second seat, DS-REL-2 (2026-11-08, the owner's style law): one of the block's plain
+    // rewrites ends on its consequence clause. Report-only, still a minority.
+    expect(carrying.length, 'entries carrying the trailing-coordinate class, at this tip').toBe(372); // STYLE-2-MERGE at the SW-B2 merge (2026-11-09): DS-GEN-11's vouching zero pool leaves (3e9de356e, B·#28): 374 -> 373 // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted). // 341 -> 346 over the W2 DEF lane (2026-11-07), measured on the leaves: +3 at the second seat's tip (the DS-DEF-4/5 rewrites and FIXTURE: gates v2), +2 at DS-DEF-12 (CAPACITY: enough v3, MAGIC-DEPENDENT v1). Report-only, still a minority. // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 346 -> 347 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 347 -> 346 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 346 -> 347 // W2 DEF fourth seat (DS-DEF-2 style rows, 2026-11-07): 347 -> 345 (report-only) // W2 DEF fourth seat (DS-DEF-6 style rows, 2026-11-07): 345 -> 342 (report-only) // W2 DEF fourth seat (DS-DEF-7 style rows, 2026-11-07): 342 -> 341 (report-only) // W2 DEF fourth seat (DS-DEF-10 style rows, 2026-11-07): 341 -> 336 (report-only) // W2 DEF fourth seat (DS-DEF-11 style rows, 2026-11-07): 336 -> 334 (report-only) // W2 DEF fourth seat (DS-WAR-1 style rows, 2026-11-07): 334 -> 333 (report-only) // W2 DEF fourth seat (DS-WAR-3 style rows, 2026-11-07): 333 -> 332 (report-only) // W2 DEF fourth seat (DS-WAR-5 style rows, 2026-11-07): 332 -> 331 (report-only) // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (341 -> 342) // MERGE-WAVE at the W3 POW merge: both lanes' deltas composed (341 -> 336) // W4 PEOPLE 2026-11-07: re-measured, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants; report-only, still a minority); W4 PEOPLE second seat 2026-11-07: re-measured, DS-STR-1 the style law (+4 departures lines) // MERGE-WAVE at the W4 PEOPLE merge: both lanes' deltas composed (341 -> 343) // MERGE-WAVE at the W5 HIS merge: both lanes' deltas composed (341 -> 374) // STYLE-2-MERGE at the SW-B6 merge (2026-11-09): SW-B6 ECO-DEF-BLOCKS' rewrites (DS-ECO-1/-12, DS-DEF-1/-8), composed over SW-B2's and SW-B5's (the lane re-keyed this pin from its own base): 373 -> 372
     expect(carrying.length, 'and it is a minority of the 2,266 R1 variants').toBeLessThan(leaves.length / 2);
     console.log(`  Q · trailing coordinate: ${carrying.length} of ${leaves.length} R1 entries carry the class`);
   });

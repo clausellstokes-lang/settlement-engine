@@ -181,8 +181,46 @@ const TOTAL_KEYS = Object.freeze(['identities', 'distinctValues', 'occurrences']
 // LINES: the car's re-dealt cast × the rung-2 landing's pool census (its tradition home at the integration side's count),
 // attributed by equality with each parent's measured row, PLAUSIBLE, not bisected. Conservation closes: 396 − 1 = 395. No row
 // flips its voice class (every owned home reads indicative); the voice debt stays EMPTY.
+// ── RE-RECORDED 2026-11-08 AT MERGE-WAVE's FIX-PUBLIC-VEIL MERGE POINT (7e65c7bec; the brief §0.6: the news family re-recorded in
+// ONE act, PEOPLE-1's precedent), the cause the veil lane's own: a veiled face's opaque id re-deals its keyed forks, which moves
+// the corpus's AO-0 year (the lane left these walkers red for this act). ONE corpus build at the merged tip, each library's own
+// functions (the voice throw disabled in an untracked scratch copy only). 396/1/395/40 → 391/1/390/41, the same act as the headline and
+// prose-family contracts: one home arrives (applied|resource_depletion), indicative; the voice debt stays EMPTY.
+// ── RE-RECORDED 2026-11-09 AT MERGE-TRAIN's ALLEGIANCE-CAR1 MERGE POINT (e5f88930b, car 1 = lane/allegiance-car1-2026-11-08 at
+// 7395b5dab; the news family re-recorded in ONE act, MERGE-WAVE's 460b1b0d9 form), the cause car 1's own generator moves re-dealing
+// the corpus's AO-0 year: the hidden allegiance (5902f1a4a, dealt at the seam on its own keyed forks) and chiefly J-19 (d131ab158:
+// ensureNpcStates reads the hidden allegiance, so the lit pulse's knowledge desk changes; herald 443 → 450 on its lane). ONE corpus
+// build at the merged tip, each library's own functions (the voice throw disabled in an untracked scratch copy only).
+// 391/1/390/41 → 396/0/396/43 (equal to the observed-shape walker's rung-36 pin), the same act as the headline and prose-family
+// contracts: four homes arrive (applied|commons_gathering, applied|npc_verdict, queued|npc_sabotage, queued|trade_pressure) and two
+// leave (applied|resource_depletion, queued|npc_reform); the one retirement is gone (396 − 0 = 396). Every owned home reads
+// indicative (applied|npc_protect 17 → 18, applied|npc_reform 23 → 25); the voice debt stays EMPTY.
+// ── RE-RECORDED 2026-11-09 AT MERGE-TRAIN's ALLEGIANCE-CAR2 MERGE POINT (f51058995, car 2 = lane/allegiance-car2-2026-11-08 at
+// 46715e751; record 2, rung 37; the news family re-recorded in ONE act, 460b1b0d9's form), the cause car 2's own: the guild's push
+// (bbb1a4abc, GUILD_PUSH_TUNING / guildPushOf, the one draw line in rankPowers) re-deals the corpus's AO-0 year, with A6 the hall
+// (ce90cf16e) and the capture rows read from the one state (aca93cbc5) beside it (docs/allegiance/ALLEGIANCE_CAR2_2026-11-08.md §4).
+// ONE corpus build at the merged tip (562582982), each library's own functions (the voice throw disabled in an untracked scratch copy only).
+// 396/0/396/43 → 396/0/396/44, the same act as the headline and prose-family contracts: applied|resource_depletion returns and
+// no home leaves; every owned home reads indicative (applied|npc_reform 25 → 24); the voice debt stays EMPTY.
+// ── RE-RECORDED 2026-11-09 AT MERGE-TRAIN's ALLEGIANCE-CAR3 MERGE POINT (c6ded8e3a, car 3 = lane/allegiance-car3-2026-11-08 at
+// 6ea8fb318; record 3, rung 38; the news family re-recorded in ONE act, 460b1b0d9's form), the cause car 3's own: e9070d614
+// ALLEGIANCE_TUNING.organizedCrime 0.10 → 0.05 re-deals the corpus's AO-0 year (bisected by the OSR seat as the one generator cause;
+// 8567f490d and 2f89aaeef are fence-only; docs/allegiance/ALLEGIANCE_CAR3_2026-11-08.md §8). ONE corpus build at the merged tip
+// (5f8f76238), each library's own functions (the voice throw disabled in an untracked scratch copy only).
+// 396/0/396/44 → 395/1/394/43, the same act as the headline and prose-family contracts: queued|npc_reform arrives, applied|
+// resource_depletion and queued|trade_pressure leave; every owned home reads indicative; the voice debt stays EMPTY.
+// ── RE-DECLARED 2026-11-10 BY THE RESIDUE SEAT (under the cloud chair, ODQ §934.105) AT THE SIMULATION BATCH (STYLE-2-MERGE
+// point 36: GREEN-TIP and PULSE-SITES), the cause GREEN-TIP's own and ONE commit, BISECTED: ae6693ccb (GREEN-TIP P2, the pulse
+// seats an NPC by its first-rank membership — a pure re-point of the retired read). One corpus build per tree, each library's own
+// functions (the voice throw disabled in an untracked scratch copy only): the line 90774f2fa 395/1/394/43; the line + GREEN-TIP to
+// 44b37a520 395/1/394/43; to ae6693ccb 395/1/394/44; every later prefix of either lane 395/1/394/44. 395/1/394/43 → 395/1/394/44:
+// ONE HOME ARRIVES, applied|npc_expose (root 5, "Vilbirg Weber exposes Stefan Friedmann"), an EXISTING home reached from a newly
+// seated actor — its headline is heraldDeeds.js's `expose.done` and its summary the agent's goal line, both on the line before the
+// batch, and the home already sits in NEWS_VOICE_RETRO_ROWS; NO NEW PROSE. The same seating re-deals three neighbours: applied|
+// npc_exploit 2 → 1, applied|npc_reform 24 → 25, applied|npc_suppress 6 → 5; introductions, retirements and conservation hold
+// (395 − 1 = 394); the voice debt stays EMPTY at the line and at the merged tip.
 const CORPUS = Object.freeze({
-  pulseRoots: 12, introductions: 396, retirements: 1, finalEntries: 395, homes: 40,
+  pulseRoots: 12, introductions: 395, retirements: 1, finalEntries: 394, homes: 44,
 });
 
 export const NEWS_VOICE_PROTECTED_SUBSTRATE = Object.freeze([

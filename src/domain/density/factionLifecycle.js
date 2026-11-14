@@ -45,6 +45,7 @@
 
 import { rollsRegisterVii } from './densityLaw.js';
 import { seatKey } from './seatKey.js';
+import { holdsMembership } from '../people/membership.js';
 
 /** The three legal states of a faction under §810.4. There is no fourth. */
 export const FACTION_LIFECYCLE_STATES = Object.freeze([
@@ -101,10 +102,18 @@ export function isOnRoster(npc) {
 /**
  * The named figures currently crewing one faction.
  *
- * Joins on `factionAffiliation` by the seat's DISPLAY NAME — the same key
- * `seatKey`, `ladderFactionKey` and `npcInFaction` all use. Read the name
- * through `seatKey`, never by hand: `.faction` wins over `.name`, and that
- * precedence is a house law several modules depend on.
+ * Joins on the card's MEMBERSHIP in the seat's DISPLAY NAME (people/membership.js ::
+ * holdsMembership) — the power a membership names is the same key `seatKey`,
+ * `ladderFactionKey` and `npcInFaction` all use. Read the name through `seatKey`,
+ * never by hand: `.faction` wins over `.name`, and that precedence is a house law
+ * several modules depend on.
+ *
+ * ⛔ RE-POINTED (GREEN-TIP, 2026-11-10): this join read `factionAffiliation`, which the
+ * people car retired from every card (15207301f, the v2 record), so on a CURRENT
+ * record every house read EMPTY — 0 of 216 born powers crewed over 60 soak births —
+ * and the pulse's R18 reaction (factionDensityKernel.js) dissolved every non-ruling
+ * power on the first tick (156 of 216 gone after one tick). Same join, the current
+ * reader; no new behaviour.
  *
  * @param {{npcs?: Array<Record<string, unknown>>}|null|undefined} settlement
  * @param {Record<string, unknown>} faction
@@ -114,7 +123,7 @@ export function factionRosterOf(settlement, faction) {
   const key = seatKey(faction);
   if (!key) return [];
   const npcs = Array.isArray(settlement?.npcs) ? settlement.npcs : [];
-  return npcs.filter(n => String(n?.factionAffiliation || '') === key && isOnRoster(n));
+  return npcs.filter(n => holdsMembership(n, key) && isOnRoster(n));
 }
 
 /**

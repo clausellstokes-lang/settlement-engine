@@ -26,18 +26,20 @@ import {
   SLOT_FILL_SHAPES,
   SLOT_FILL_TABLES,
   governingSharePoolKey,
+  gmAdvisoryPoolKey,
   legitimacyBandPoolKey,
   legitimacyLensPoolKey,
   powerStateProse,
   stabilityLensPoolKey,
   stabilityPoolKey,
+  structureFlagPoolKey,
 } from '../../src/domain/display/stateProse/powerStateProse.js';
 import { likelyFutureFacts } from '../../src/domain/simulationSpine.js';
 import { CRIMINAL_OP_ROLES, criminalOpEcon } from '../../src/domain/criminalOpRole.js';
 import { COUP_RISK_LABELS, coupRiskLabel } from '../../src/domain/rulingPowerCoup.js';
 import { mirrorOf } from '../../src/domain/worldPulse/npcLadderState.js';
 import {
-  ECONOMIC_BASES, RULING_POWERS, structuralLens, structuralLensOf,
+  ECONOMIC_BASES, RULING_POWERS, structuralLens, structuralLensOf, seatLensOf,
 } from '../../src/domain/spatial/cohesionWeave.js';
 import { hasLadder, ladderInstabilityOf, ladderRungsOf } from '../../src/domain/townMap/ladderRead.js';
 import { hasPolitics, settlementBlocs as politicsBlocsOf } from '../../src/domain/display/politicsRead.js';
@@ -355,13 +357,16 @@ describe('the power desk — THE PROMISE and the mount wiring', () => {
     expect(crisis.legitimacyLens.sentence).toBeTruthy();
   });
 
-  it('the registry mounts DS-POW-1 once, as a sentence, on the power tab', () => {
+  // Re-keyed OWNER-WORDS-DOSSIER item 3 (the owner, 2026-11-09: "The governance description itself seemed
+  // disconnected"): DS-POW-1 stays MOUNTED once on the power tab, at a GLANCE row; the governance block is
+  // one paragraph read off the record (domain/display/governanceAccount.js).
+  it('the registry mounts DS-POW-1 once, at a glance, on the power tab', () => {
     const rows = DOSSIER_MOUNTS.filter((row) => row.blockId === BLOCK);
     expect(rows).toHaveLength(1);
     expect(rows[0]).toMatchObject({
-      mount: 'power.legitimacyBanner', tab: 'power', desk: 'power', rung: 'sentence',
+      mount: 'power.legitimacyBanner', tab: 'power', desk: 'power', rung: 'glance',
     });
-    expect(sentenceMountForBlock(BLOCK)?.mount).toBe('power.legitimacyBanner');
+    expect(sentenceMountForBlock(BLOCK), 'DS-POW-1 speaks again beside the governance paragraph').toBeNull();
     expectAbsentWithAnchor(
       UNMOUNTED_BLOCKS, BLOCK, A_DARK_SIBLING, 'DS-POW-1 is mounted, so the dark half must not name it',
     );
@@ -369,9 +374,13 @@ describe('the power desk — THE PROMISE and the mount wiring', () => {
 
   it('the mount ROUTES: flipping the row to glance would silence both readings together', () => {
     const drawn = powerStateProse(town(legit('Contested', { safety: -20 })), { seed: 's' });
-    // As mounted (sentence), both readings reach the page.
-    expect(drawnAtMount('power.legitimacyBanner', drawn.legitimacyBanner).sentence).toBeTruthy();
-    expect(drawnAtMount('power.legitimacyBanner', drawn.legitimacyLens).sentence).toBeTruthy();
+    // The desk draws both readings; as mounted (a glance since OWNER-WORDS-DOSSIER item 3), the row silences
+    // them TOGETHER, and the glance keeps the band word.
+    expect(drawn.legitimacyBanner.sentence, 'the desk draws the ladder line').toBeTruthy();
+    expect(drawn.legitimacyLens.sentence, 'and the lens line').toBeTruthy();
+    expect(drawnAtMount('power.legitimacyBanner', drawn.legitimacyBanner).sentence).toBeNull();
+    expect(drawnAtMount('power.legitimacyBanner', drawn.legitimacyLens).sentence).toBeNull();
+    expect(drawnAtMount('power.legitimacyBanner', drawn.legitimacyBanner).glance).toBe('Contested');
     // A glance row strips the sentence AND its provenance from whatever it is handed —
     // the control proving the component is routed rather than merely naming a string.
     const asGlance = drawnAtMount('economics.economyTile', drawn.legitimacyBanner);
@@ -396,14 +405,14 @@ const REAL_STABILITY = Object.freeze([
   ['Unstable (pervasive organized crime)', 'unstable matched'],
   ['Unstable — criminal governance', 'unstable matched'],
   ['Volatile — power is available to whoever moves first', 'unstable matched'],
-  ['Critical (active siege — survival priority)', 'siege matched'],
+  ['Critical (under siege)', 'siege matched'], // W3 POW: the producer's words of 2026-11-07
   ['Desperate — hunger is eroding order', 'Desperate matched'],
   // ⛔ THE REGRESSION PIN. A substring test for `stable` MATCHES "no stable governing
   // authority" and would print "The hall is settled" about a settlement that has none.
   ['Fractured — no stable governing authority', 'no token matched: unclassified (the plain-description floor)'],
-  ['Shaken — institutional trust collapsed', 'no token matched: unclassified (the plain-description floor)'],
+  ['Shaken — nobody trusts those in charge', 'no token matched: unclassified (the plain-description floor)'],
   ['Tense (external threat)', 'no token matched: unclassified (the plain-description floor)'],
-  ['Anxious — disease is overriding normal authority', 'no token matched: unclassified (the plain-description floor)'],
+  ['Anxious — people fear the sickness more than they heed orders', 'no token matched: unclassified (the plain-description floor)'],
   ['Suppressed (under occupation — resistance simmers)', 'no token matched: unclassified (the plain-description floor)'],
   ['Ordered (strong military presence)', 'no token matched: unclassified (the plain-description floor)'],
   ['Vulnerable (prosperous but underdefended)', 'no token matched: unclassified (the plain-description floor)'],
@@ -470,10 +479,10 @@ describe('DS-POW-2 — the ladder is the producer\'s, and the substring bug stay
     expect(arcOf('Stable')).toBe('continuity');
     expect(arcOf('Unstable (pervasive organized crime)')).toBe('test');
     expect(arcOf('Volatile — power is available to whoever moves first')).toBe('test');
-    expect(arcOf('Critical (active siege — survival priority)')).toBe('crisis');
+    expect(arcOf('Critical (under siege)')).toBe('crisis');
     expect(arcOf('Desperate — hunger is eroding order')).toBe('crisis');
     // A monster-threat annotation appends a suffix and must not move the classification.
-    expect(arcOf('Unstable — criminal governance; monster threat active')).toBe('test');
+    expect(arcOf('Unstable — criminal governance; monsters on the roads')).toBe('test');
   });
 
   it('the desk REFINES the canonical arc rather than forking it', () => {
@@ -498,7 +507,7 @@ describe('DS-POW-2 — the ladder is the producer\'s, and the substring bug stay
   });
 
   it('⚠ `critical matched` has NO producer today — declared, and pinned so it cannot hide', () => {
-    // The only label carrying either token is `Critical (active siege — survival priority)`,
+    // The only label carrying either token is `Critical (under siege)`,
     // and most-specific-wins routes it to `siege matched`. So this pool is mounted and
     // unreachable. If a producer ever emits a critical stability WITHOUT a siege, this arm
     // reds and someone lights the pool instead of it staying quietly dead.
@@ -554,7 +563,7 @@ describe('DS-POW-2 — ALIVENESS: all nine pools fire, and {seat} stays delibera
     const CASES = [
       ['stable matched', ruled('Stable', { factions: DOMINANT_FACTIONS })],
       ['unstable matched', ruled('Unstable — criminal governance', { factions: DOMINANT_FACTIONS })],
-      ['siege matched', ruled('Critical (active siege — survival priority)', { factions: DOMINANT_FACTIONS })],
+      ['siege matched', ruled('Critical (under siege)', { factions: DOMINANT_FACTIONS })],
       ['Desperate matched', ruled('Desperate — hunger is eroding order', { factions: DOMINANT_FACTIONS })],
       ['no token matched: unclassified (the plain-description floor)', ruled('Tense (external threat)', { factions: DOMINANT_FACTIONS })],
       ['critical matched', ruled('Critical — the seat is failing', { factions: DOMINANT_FACTIONS })],
@@ -615,11 +624,12 @@ describe('DS-POW-2 — ALIVENESS: all nine pools fire, and {seat} stays delibera
     expect(drawn.stabilityHeader.sentence).toBeTruthy();
   });
 
-  it('the registry mounts DS-POW-2 once, as a sentence, on the power tab', () => {
+  // Re-keyed OWNER-WORDS-DOSSIER item 3 (2026-11-09): DS-POW-2 stays MOUNTED once, at a GLANCE row.
+  it('the registry mounts DS-POW-2 once, at a glance, on the power tab', () => {
     const rows = DOSSIER_MOUNTS.filter((row) => row.blockId === POW2);
     expect(rows).toHaveLength(1);
-    expect(rows[0]).toMatchObject({ mount: 'power.stabilityHeader', tab: 'power', desk: 'power', rung: 'sentence' });
-    expect(sentenceMountForBlock(POW2)?.mount).toBe('power.stabilityHeader');
+    expect(rows[0]).toMatchObject({ mount: 'power.stabilityHeader', tab: 'power', desk: 'power', rung: 'glance' });
+    expect(sentenceMountForBlock(POW2), 'DS-POW-2 speaks again beside the governance paragraph').toBeNull();
     expectAbsentWithAnchor(
       UNMOUNTED_BLOCKS, POW2, A_DARK_SIBLING, 'DS-POW-2 is mounted, so the dark half must not name it',
     );
@@ -711,12 +721,28 @@ describe('DS-POW-6 — the capture pools are COVERT, and that is the kernel work
   it('pressure direction reads the CANONICAL contributions, and a mixed pair is silence', () => {
     expect(capturePoolKey('equilibrium', { safety: -12, prosperity: -10 }))
       .toBe('capture pressure ADVANCING (weak security, poor prosperity)');
-    expect(capturePoolKey('none', { safety: 8, prosperity: 15 }))
+    // re-keyed (W2-A-LEAVES 5a, 2026-11-12): the RECOVERING pool's state is one that has met the criminals
+    // ('adversarial': "Fighting the criminals"), never 'none', where the hall reads "Free of the criminals"
+    expect(capturePoolKey('adversarial', { safety: 8, prosperity: 15 }))
       .toBe('capture pressure RECOVERING (strong security, prosperity)');
     // Mixed and flat are neither direction — the corpus wrote no sentence for them.
-    expect(capturePoolKey('none', { safety: -12, prosperity: 15 })).toBeNull();
-    expect(capturePoolKey('none', { safety: 0, prosperity: 0 })).toBeNull();
+    expect(capturePoolKey('adversarial', { safety: -12, prosperity: 15 })).toBeNull();
+    expect(capturePoolKey('adversarial', { safety: 0, prosperity: 0 })).toBeNull();
     expect(capturePoolKey('none', null)).toBeNull();
+  });
+
+  it('5a RE-RULED (W2-A-LEAVES-2, REVIEW-W2A F3): the blanket silence at none is withdrawn — the pressure pools draw again', () => {
+    // The first seat returned null at 'none' and 288 lines left the page, most of them true. Each line is now struck
+    // only where the town makes it false (crimeLineDisqualifiers.js); the key keeps its direction at every rung
+    // below `corrupted`.
+    expect(capturePoolKey('none', { safety: -12, prosperity: -10 })).toBe('capture pressure ADVANCING (weak security, poor prosperity)');
+    expect(capturePoolKey('none', { safety: 8, prosperity: 15 })).toBe('capture pressure RECOVERING (strong security, prosperity)');
+    expect(capturePoolKey('equilibrium', { safety: -12, prosperity: -10 })).toBe('capture pressure ADVANCING (weak security, poor prosperity)');
+    expect(capturePoolKey('adversarial', { safety: -12, prosperity: -10 })).toBe('capture pressure ADVANCING (weak security, poor prosperity)');
+    expect(capturePoolKey(undefined, { safety: -12, prosperity: -10 })).toBe('capture pressure ADVANCING (weak security, poor prosperity)');
+    // the DM's desk at none, with no official in a criminal's pay, prints the one ADVANCING line that presumes none
+    const drawn = powerStateProse(underside(BREAK({ prosperity: -10, safety: -12 }), 'none'), {}, { seed: 'a', audience: 'dm' });
+    expect(drawn.captureReading?.sentence).toMatch(/^Each season it gets easier to buy an official/);
   });
 });
 
@@ -761,7 +787,10 @@ describe('DS-POW-6 — the reading lens TILES with DS-POW-1 rather than overlapp
       underside(null, 'none'),
       underside(BREAK({}), 'none'),
       underside(BREAK({ prosperity: -10, safety: -12 }), 'equilibrium'),
-      underside(BREAK({ prosperity: 15, safety: 8 }), 'none'),
+      // re-keyed from 'none' (W2-A-LEAVES 5a), then from 'adversarial' (W2-A-LEAVES-2, F3): with no cast and no watch
+      // fact, RECOVERING's one line true at adversarial ("the approach … did not take") declares a watch; at
+      // equilibrium its "losing their grip on the hall" is true
+      underside(BREAK({ prosperity: 15, safety: 8 }), 'equilibrium'),
       underside(BREAK({ prosperity: -10, safety: -12 }), 'corrupted'),
       underside(BREAK({ prosperity: -10, safety: -12 }), 'capture'),
       ...['Black Market Ring', 'Smuggling Operation', 'Gambling Den', 'Front Business',
@@ -777,9 +806,13 @@ describe('DS-POW-6 — the reading lens TILES with DS-POW-1 rather than overlapp
         }
       }
     }
-    expect(reached.size, `unreached: ${Object.keys(POW6_POOLS).filter((k) => !reached.has(k))}`)
-      .toBe(Object.keys(POW6_POOLS).length);
-    expect(Object.keys(POW6_POOLS)).toHaveLength(13);
+    // WIRING W3 (2026-11-07): the two GM-advisory pools read the relationships, not this lens;
+    // they are driven by their own arm at the end of this file.
+    const lensPools = Object.keys(POW6_POOLS).filter((k) => !k.startsWith('GM ADVISORY'));
+    expect(reached.size, `unreached: ${lensPools.filter((k) => !reached.has(k))}`)
+      .toBe(lensPools.length);
+    expect(lensPools).toHaveLength(13);
+    expect(Object.keys(POW6_POOLS)).toHaveLength(15);
   });
 });
 
@@ -1166,7 +1199,9 @@ describe('DS-POW-5 — the lens vocabularies ARE the pool keys, both directions'
       expect(rulingPowerPoolKey({ rulingPower: word })).toBe(word);
     }
     const poolWords = Object.keys(POW5_POOLS)
-      .filter((k) => !k.startsWith('economicBase: ') && !k.startsWith('governing body name'));
+      .filter((k) => !k.startsWith('economicBase: ') && !k.startsWith('governing body name')
+        // WIRING W3 (2026-11-07): the six structure-flag pools are a lens of their own, driven below.
+        && !k.startsWith('FLAG: '));
     expect([...poolWords].sort()).toEqual([...RULING_POWERS].sort());
   });
 
@@ -1254,6 +1289,58 @@ describe('DS-POW-5 — structuralLensOf is the ONE derivation, and it matches it
   });
 });
 
+describe('DS-POW-5 — the seat\'s lens (SW-7 POWER-SIDE, STYLE-2 B7): the ruling pools speak of the body that HOLDS the seat', () => {
+  // soak1k-10 (Olympambelos) at 0f2e6c097: "The Noble Governorship at Olympambelos rules by its faith" — the strongest
+  // power was the clergy, the seat a noble governor's. The pools are sentences about the {seat}.
+  const nobleSeatClergyStrong = { name: 'Tarvel', powerStructure: { governingName: 'Noble Governorship', factions: [
+    { faction: 'Noble Governorship', category: 'noble', power: 30, isGoverning: true },
+    { faction: 'Religious Authorities', category: 'religious', power: 45 },
+  ] } };
+  it('reads the governing row, not the strongest; structuralLensOf keeps its own answer', () => {
+    expect(seatLensOf(nobleSeatClergyStrong).rulingPower).toBe('autocrat');
+    expect(structuralLensOf(nobleSeatClergyStrong).rulingPower).toBe('theocracy');
+  });
+  it('the desk on the seat\'s lens draws the autocrat pool, never the theocracy pool', () => {
+    expect(rulingPowerPoolKey(seatLensOf(nobleSeatClergyStrong))).toBe('autocrat');
+    const out = powerStateProse(nobleSeatClergyStrong, { structuralLens: seatLensOf(nobleSeatClergyStrong) },
+      { seed: 'seat-lens', audience: 'dm' });
+    expect(String(out.rulingStructure?.sentence ?? '').length).toBeGreaterThan(0);
+    // anchored: the sentence is asserted non-empty on the line above and the pool key is pinned 'autocrat'
+    expect(String(out.rulingStructure?.sentence ?? '')).not.toMatch(/faith|doctrine|heresy/i);
+  });
+  it('rule and succession is silent on an empty seat, which the ruling chain names first (soak1k-8, Achileia: "Stands empty")', () => {
+    const vacantSeat = { name: 'Tarvel', powerStructure: { governingName: "Headman's Authority", factions: [
+      { faction: "Headman's Authority", category: 'government', power: 30, isGoverning: true, modifiers: ['vacant'] },
+      { faction: 'Religious Authorities', category: 'religious', power: 45 },
+    ] } };
+    const contenders = { incumbent: { name: "Headman's Authority", gated: true }, challengers: [{ name: 'Religious Authorities', weight: 45 }] };
+    const out = powerStateProse(vacantSeat, { contenders, riskLabel: 'Contested', structuralLens: seatLensOf(vacantSeat) },
+      { seed: 'seat-vacant', audience: 'dm' });
+    // The ruling chain says "Stands empty" first; the contest pools speak of a holder, so the block is silent.
+    expect(out.successionRisk).toBeNull();
+    // Non-vacuity: the same town with its seat held draws the Contested line.
+    const held = { ...vacantSeat, powerStructure: { ...vacantSeat.powerStructure,
+      factions: vacantSeat.powerStructure.factions.map((f) => ({ ...f, modifiers: [] })) } };
+    const heldOut = powerStateProse(held, { contenders, riskLabel: 'Contested', structuralLens: seatLensOf(held) },
+      { seed: 'seat-vacant', audience: 'dm' });
+    expect(String(heldOut.successionRisk?.sentence ?? '')).not.toBe('');
+  });
+  it('the birth roster\'s coarse seat categories: economy is the merchant seat; a category the table cannot place says nothing', () => {
+    // soak1k-3 Guild Council [economy], soak1k-2 Elected Reeve [other] (measured on the twelve at 0f2e6c097).
+    const seated = (category) => ({ name: 'T', powerStructure: { governingName: 'Seat', factions: [
+      { faction: 'Seat', category, power: 30, isGoverning: true }, { faction: 'Occupation Authority', category: 'military', power: 37 },
+    ] } });
+    expect(seatLensOf(seated('economy'))?.rulingPower).toBe('merchant_league');
+    expect(seatLensOf(seated('other'))).toBeUndefined();
+    expect(powerStateProse(seated('other'), { structuralLens: seatLensOf(seated('other')) }, { seed: 'reeve', audience: 'dm' })
+      .rulingStructure).toBeNull();
+  });
+  it('with no governing row it answers the strongest faction\'s lens, as before', () => {
+    const s = { name: 'T', powerStructure: { factions: [{ category: 'merchant', power: 60 }, { category: 'noble', power: 40 }] } };
+    expect(seatLensOf(s).rulingPower).toBe(structuralLensOf(s).rulingPower);
+  });
+});
+
 describe('DS-POW-5 — ALIVENESS, the covert pool, and the three rare slots', () => {
   it('all twelve pools fire across the two audiences', () => {
     const reached = new Set();
@@ -1284,7 +1371,8 @@ describe('DS-POW-5 — ALIVENESS, the covert pool, and the three rare slots', ()
     // economicBase pools are dark by declaration (see the arm above), and stating the
     // number here is what stops a later reader assuming all twelve were wired.
     expect(reached.size, `unreached: ${Object.keys(POW5_POOLS).filter((k) => !reached.has(k))}`).toBe(7);
-    expect(Object.keys(POW5_POOLS)).toHaveLength(12);
+    // WIRING W3 (2026-11-07): + the six structure-flag pools, driven by their own arm below.
+    expect(Object.keys(POW5_POOLS)).toHaveLength(18);
   });
 
   it('`criminal` is WHOLLY covert, so the player sees silence and the DM sees the line', () => {
@@ -1512,5 +1600,82 @@ describe('DS-POW-7 — ALIVENESS over a PLAYED world, read through the shipped r
     // THE MILESTONE, asserted rather than claimed: no DS-POW- block remains dark.
     expect(UNMOUNTED_BLOCKS.filter((b) => b.startsWith('DS-POW-'))).toEqual([]);
     expect(DOSSIER_MOUNTS.filter((row) => row.desk === 'power')).toHaveLength(7);
+  });
+});
+
+/**
+ * WIRING W3 (2026-11-07) — THE FIVE STRUCTURE FLAGS (DS-POW-5) AND THE GM ADVISORY (DS-POW-6).
+ * Switch each fact on and a sentence comes out; switch it off and the rung is null. The
+ * advisory is DM-private: a player page draws the key and then silence.
+ */
+describe('WIRING W3 — the structure flags and the GM advisory speak', () => {
+  const W3_FLAG_POOLS = Object.keys(POW5_POOLS).filter((k) => k.startsWith('FLAG: '));
+  const W3_ADVISORY_POOLS = Object.keys(POW6_POOLS).filter((k) => k.startsWith('GM ADVISORY'));
+  /** @param {object} flags @param {object} [defence] */
+  const flagged = (flags, relationships = []) => ({
+    name: 'Thornwall',
+    _seed: 'seed-w3',
+    tier: 'town',
+    institutions: [{ name: 'Garrison', category: 'Defense' }],
+    powerStructure: {
+      governingName: 'Merchant Council',
+      factionRelationships: relationships,
+    },
+    economicState: { safetyProfile: { criminalInstitutions: [], flags } },
+  });
+
+  it('the key function reads each flag, the gravest first, and the intensity bands stateCrime', () => {
+    expect(structureFlagPoolKey(null)).toBeNull();
+    expect(structureFlagPoolKey({})).toBeNull();
+    expect(structureFlagPoolKey({ stateCrime: true, stateCrimeIntensity: 0.05 })).toBe('FLAG: stateCrime');
+    expect(structureFlagPoolKey({ stateCrime: true, stateCrimeIntensity: 0.3 })).toBe('FLAG: stateCrime, heavy');
+    expect(structureFlagPoolKey({ crimeIsGovt: true, stateCrime: true })).toBe('FLAG: crimeIsGovt');
+    expect(structureFlagPoolKey({ merchantArmy: true, merchantCriminalBlur: true })).toBe('FLAG: merchantArmy');
+    expect(structureFlagPoolKey({ merchantCriminalBlur: true })).toBe('FLAG: merchantCriminalBlur');
+    expect(structureFlagPoolKey({ secularBrutalism: true })).toBe('FLAG: secularBrutalism');
+    for (const key of W3_FLAG_POOLS) expect(POW5_POOLS[key]).toBeTruthy();
+    expect(W3_FLAG_POOLS).toHaveLength(6);
+  });
+
+  it('ALIVENESS: every flag pool prints a sentence on a state that holds it', () => {
+    const reached = new Set();
+    const states = [
+      { stateCrime: true, stateCrimeIntensity: 0.05 }, { stateCrime: true, stateCrimeIntensity: 0.3 },
+      { crimeIsGovt: true }, { merchantArmy: true }, { merchantCriminalBlur: true }, { secularBrutalism: true },
+    ];
+    for (const flags of states) {
+      for (let i = 0; i < 6; i += 1) {
+        const line = powerStateProse(flagged(flags), {}, { seed: `w3-${i}`, audience: 'dm' }).structureFlag;
+        if (line?.sentence) {
+          reached.add(line.provenance.poolKey);
+          // anchored: `reached` is pinned at all six pools below
+          expect(line.sentence).not.toMatch(/[{}0-9]/);
+        }
+      }
+    }
+    expect([...reached].sort()).toEqual([...W3_FLAG_POOLS].sort());
+    expect(powerStateProse(flagged({}), {}, { seed: 'w3', audience: 'dm' }).structureFlag).toBeNull();
+  });
+
+  it('the GM advisory reads the dmNote, speaks to the DM, and is silent to a player', () => {
+    const military = { pair: ['Merchant Council', 'Town Guard'], type: 'competitive', dmNote: 'note' };
+    const criminal = { pair: ['Merchant Council', 'Thieves Guild'], type: 'corrupted', captureState: 'corrupted', dmNote: 'note' };
+    const quiet = { pair: ['Merchant Council', 'Thieves Guild'], type: 'competitive', captureState: 'adversarial', dmNote: null };
+    expect(gmAdvisoryPoolKey([quiet])).toBeNull();
+    expect(gmAdvisoryPoolKey([military])).toBe('GM ADVISORY: the commander is a political actor');
+    expect(gmAdvisoryPoolKey([quiet, criminal])).toBe('GM ADVISORY: officials with criminal arrangements');
+    const reached = new Set();
+    for (const rel of [military, criminal]) {
+      for (let i = 0; i < 6; i += 1) {
+        const dm = powerStateProse(flagged({}, [rel]), {}, { seed: `w3a-${i}`, audience: 'dm' }).gmAdvisory;
+        if (dm?.sentence) reached.add(dm.provenance.poolKey);
+        expect(powerStateProse(flagged({}, [rel]), {}, { seed: `w3a-${i}`, audience: 'player' }).gmAdvisory?.sentence ?? null)
+          .toBeNull();
+      }
+    }
+    const crimLine = powerStateProse(flagged({}, [criminal]), {}, { seed: 'w3a-0', audience: 'dm' }).gmAdvisory.sentence;
+    expect(crimLine).toContain('Thieves Guild');
+    expect([...reached].sort()).toEqual([...W3_ADVISORY_POOLS].sort());
+    expect(W3_ADVISORY_POOLS).toHaveLength(2);
   });
 });

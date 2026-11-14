@@ -1,6 +1,6 @@
 /**
  * aiChronicleAppend.js — the store-facing facade for appending one entry to a
- * save's chronicle, with tier-based rotation.
+ * save's chronicle, under the one chronicle limit (no tier read).
  *
  * Moved out of aiSlice.js verbatim by THE DECOMPOSITION WAVE (lane D). The slice
  * keeps the `_appendChronicleEntry` key (three call sites go through
@@ -14,7 +14,7 @@
  */
 
 import { persistSaveUpdate } from './campaignSliceShared.js';
-import { CHRONICLE_LIMITS, createChronicleEntry, appendChronicleEntry } from '../lib/chronicle.js';
+import { CHRONICLE_LIMIT, createChronicleEntry, appendChronicleEntry } from '../lib/chronicle.js';
 import { isCanonSave } from '../domain/campaign/canon.js';
 
 /** @typedef {() => any} StoreGet */
@@ -39,9 +39,7 @@ export async function appendChronicleEntryAction(
   // (persistActiveSaveLifecycle), so the entry read above is never stale.
   if (reason === 'regenerate' && !isCanonSave(entry)) return;
 
-  const limit = state.isElevated?.() ? CHRONICLE_LIMITS.elevated
-              : state.isPremium?.()  ? CHRONICLE_LIMITS.premium
-              : CHRONICLE_LIMITS.free;
+  const limit = CHRONICLE_LIMIT;
 
   // Prefer the run's OWN prose (threaded by the caller). Only fall back to the
   // live store view when this save is the one on screen — otherwise a

@@ -100,6 +100,7 @@ const RUIN_AGNOSTIC_EXEMPT = Object.freeze({
   'src/domain/edit/pools.js': 'name-lookup/affordance — the `npc.role` pool offers a DM the roles the record\'s OWN institutions roster already carries, as a SELECTION LIST ("what may a human name for this field"), never a live-provider aggregation: it sums nothing and credits no institution with capacity. RULED EXEMPT BY THE CHAIR (judgment 138, EM-A2b version 7) on the same reason src/domain/events/targetRosters.js and src/domain/tableLedger.js already hold. Routing it through liveInstitutions() would DROP a ruined institution from a picker where it is a legitimate answer — the former warden of a burned keep is a role a DM may still name — and would add a THIRTEENTH import to a leaf whose own header forbids one.',
   'src/domain/mapProfile.js': 'existence-gate (deferred) — .some() walls → hasWalls; a ruined citadel still reads walled (owner glance)',
   'src/domain/contradictions.js': 'existence-gate — narrative QA detectors (.some presence)',
+  'src/domain/people/cardVeil.js': 'name-lookup — FIX-PUBLIC-VEIL (2026-11-07): veiledOfInstitution finds a face\'s house row BY NAME only to apply the veil predicate (criminal, clandestine, an illegal brokerage) and stamp the card\'s bit. It credits no capacity and sums nothing; a ruined house is still the same class of house, so its face stays veiled or open with it.',
   'src/domain/people/cardDoor.js': 'name-lookup/display — PEOPLE-6 LINKS (2026-11-07): the NPC card\'s door back finds its house\'s roster row BY NAME only to compute the id the Institutions card focuses on. It credits no capacity and sums nothing; a ruined house still has its card and its face, so the link stands.',
   'src/domain/coherence/readerBattery.js': 'existence-gate/name-lookup — THE READER BATTERY (lane READER-INSTRUMENTS, 2026-11-04) is an INSTRUMENT, not a provider aggregation: the soak runs it over BIRTH records to ask whether rendered prose names a house the roster lacks — `houseNames` maps the roster to catalogue names for the [~strength-no-house] column and the [no-watch] sub-case, and `hasMarketInstitution(s?.institutions)` is the [no-market] existence gate. It credits no institution with capacity and sums nothing; its own header says it cures nothing. The same standing as contradictions.js above (narrative QA detectors). A ruin on a pulsed save would read present here, which is a false negative in an instrument, never an over-credit in the product.',
   // LANDING-R2 seat E (2026-11-07): the two raw readers the pool census merged in, each classified
@@ -164,6 +165,8 @@ const RUIN_AGNOSTIC_EXEMPT = Object.freeze({
   'src/domain/worldPulse/magicBufferModel.js': 'loss-count scalar — `loss.institutions` is the StrikeLoss COUNT of buildings one calamity would fell (an integer supplied by the calamity producer via magicBufferApply), never a settlement roster; the leaf is pure arithmetic that sees no settlement, roster, world or name, so there is no row to ruin-filter and no provider capacity is credited',
   // ── penalty-side: counts impaired/criminal for a PENALTY, not live crediting ─────
   'src/domain/corruption.js': 'penalty-side — criminal/corruption-impairment classifier (drag, not credit)',
+  // ALLEGIANCE-CAR1 (2026-11-08): the retired corruptionPass's roster read moved here with the deal (J-2), measured.
+  'src/domain/people/allegiance.js': 'penalty-side — the allegiance deal reads the roster\'s CRIMINAL houses (isCriminalInstitution) for the corruption climate and organized-crime pressure (drag, not credit), as the retired corruptionPass did through corruption.js, and looks a card\'s house up by name (the handler pool, the `via` mark); it credits no provider capacity',
   'src/domain/state/deriveSystemState.js': 'penalty-side — countByStatus impaired/critical risk penalty (status-aware)',
   // ── mutation / write / undo: rewrites the roster ─────────────────────────────────
   'src/domain/factionRename.js': 'mutation — a faction rename rewrites `institutions[].factionSource`, the exact-name marker recording WHICH faction raised an institution. A ruined institution keeps that provenance, so filtering the roster here would strand the ruin under the old faction name and split the join the rename exists to hold together. Credits nothing.',
@@ -226,6 +229,7 @@ const RUIN_AGNOSTIC_EXEMPT = Object.freeze({
   // this row's deletion rather than its rewording.
   // ⚠ Do NOT re-add it: an exempt entry for a non-reader is the stale state that arm forbids.
   'src/domain/display/dossierViewModel.js': 'display — roster count for the dossier overview',
+  'src/domain/dossier/seatHolder.js': 'name-lookup — seatHouseFaceOf (COHERENCE-POWERS cure (i)) names the seat\'s house on the roster (powerSupport.js :: seatHouseName) to find its face; it credits no house with function, and a ruined hall is faced as the card itself already stands',
   'src/domain/dossier/powerSupport.js': 'display/list — lists institutions aligned to each power for the Power-tab support web (a relationship/alignment display keyed on category + factionSource, NOT a live-provider capacity aggregate); each row is an InstitutionLink that surfaces the institution\'s actual state, so a ruin is shown, never credited with function',
   // ── canon-path string literal: RETIRED 2026-08-14, THE READ WAS NEVER A READ ────
   // parityContract.js was exempted for `'headcounts.institutions'` at :75 — a
@@ -500,9 +504,23 @@ describe('ruin-filter roster ratchet (structural-prevention Pattern 2)', () => {
     // EXEMPT above with their reasons. The arm's own failure message: "expected 103 to be 99".
     // PEOPLE-5B (2026-11-07, M-7): 99 -> 100, settlementMigrations.js :: migrateV1toV2's roster-name read (EXEMPT above).
     // PEOPLE-6 LINKS (2026-11-07): 100 -> 101, src/domain/people/cardDoor.js :: cardInstitutionDoorOf's roster-name read (EXEMPT above).
+    // FIX-PUBLIC-VEIL (2026-11-07): 101 -> 102, src/domain/people/cardVeil.js :: veiledOfInstitution's roster-name read (EXEMPT above).
     // MERGE-CAR (2026-11-08): 99 + 4 (the pool census's readers, LANDING-R2 above) + 2 (PEOPLE-5B, PEOPLE-6 LINKS) = 105, measured
     // by this file's own scan at the merged tip; both sides' readers composed, no new one.
-    expect(readers.length).toBe(105);
+    // MERGE-WAVE at the FIX-PUBLIC-VEIL merge (2026-11-08): 105 + 1 (cardVeil.js :: veiledOfInstitution, above) + 1 (W1 ECO's
+    // economyStateProse.js :: hiddenHouseRow, 725b62eb5, made compliant in the cause commit after this merge) = 107, measured.
+    // MERGE-CAR (2026-11-08): 99 + 4 (the pool census's readers, LANDING-R2 above) + 2 (PEOPLE-5B, PEOPLE-6 LINKS) = 105, measured
+    // by this file's own scan at the merged tip; both sides' readers composed, no new one.
+    // FIX-PUBLIC-VEIL (2026-11-07): 101 -> 102, src/domain/people/cardVeil.js :: veiledOfInstitution's roster-name read (EXEMPT above).
+    // ALLEGIANCE-CAR1 (2026-11-08, the veil merged over MERGE-CAR): 105 + 1 (cardVeil.js, EXEMPT) = 106, measured by this file's own scan.
+    // ALLEGIANCE-CAR1 (2026-11-08): 106 -> 107, src/domain/people/allegiance.js (the deal's criminal-house read, EXEMPT above), measured by this file's own scan.
+    // MERGE-TRAIN at the ALLEGIANCE-CAR1 merge (2026-11-09): the integration side's 107 (cardVeil.js + hiddenHouseRow) + car 1's
+    // allegiance.js (EXEMPT; the lane's 107 counted cardVeil.js once with it) = 108, measured by this file's own scan at the merged tip.
+    // STYLE-2-MERGE at the SW-B2 merge (2026-11-09): 108 -> 109, src/domain/summary/settlementQuickGuide.js :: scopeAgainstRecord's
+    // roster read (SW-B2's 966709f9c, A·O2: the identity line reads the institutions), COMPLIANT (liveInstitutions), measured by this file's own scan.
+    // COHERENCE-POWERS (2026-11-12): 109 -> 110, src/domain/dossier/seatHolder.js :: seatHouseFaceOf's roster-name read (EXEMPT above:
+    // the seat's house where a house leads is faced by the dual-hat leader), measured by this file's own scan.
+    expect(readers.length).toBe(110);
   });
 
   test('exempt honesty: every exempt entry still reads .institutions and is not already compliant', () => {

@@ -185,7 +185,7 @@ export const EVENTS_FALLBACK_POOLS = Object.freeze({
     'an office whose decisions now have an owner',
     'a public thing quietly become a private one',
     'business that goes one way whoever brings it',
-    'travellers told which faction to approach about the hall',
+    'travellers told which power to approach about the hall',
     'a takeover conducted entirely in appointments',
   ]),
 
@@ -193,12 +193,12 @@ export const EVENTS_FALLBACK_POOLS = Object.freeze({
   // AUTHORED canonical in FALLBACK_CANONICALS and is NOT stored here. CADENCE chronic → floor 8 · live 1 · +7. ✅ §894 de-slugged (was 'institution suppression').
   faction_institution_suppression: Object.freeze([
     'an interest closing a hall it could not hold',
-    "a suppression entered against the hall under a faction's name",
+    "a suppression entered against the hall under a power's name",
     'an office prevented from doing its work',
     "a rival's foothold taken away rather than taken over",
     'doors shut by people who do not own them',
     'travellers sent away from a hall that is open in name',
-    "a dismantling done in a faction's name and entered in no minute book",
+    "a dismantling done in a power's name and entered in no minute book",
   ]),
 
   // faction_law_preference_push — doc variants 2..8; variant 1 ('a faction's push for the law it wants') is the
@@ -210,14 +210,14 @@ export const EVENTS_FALLBACK_POOLS = Object.freeze({
     'a statute with a beneficiary on its face',
     'a council asked, again, to see it one way',
     'travellers finding the same argument in every tavern',
-    "a season of one faction's drafting",
+    "a season of one power's drafting",
   ]),
 
   // faction_power_shift — doc variants 2..8; variant 1 ('a shift of power between factions') is the
   // AUTHORED canonical in FALLBACK_CANONICALS and is NOT stored here. CADENCE chronic → floor 8 · live 1 · +7. ✅ §894 de-slugged (was 'power shift').
   faction_power_shift: Object.freeze([
     'weight moving from one interest to another',
-    'a shift entered on the faction rolls',
+    'a shift entered on the rolls of the powers',
     'rooms that used to be full emptying into other rooms',
     'the list of people worth persuading, rewritten',
     'an old balance that no longer holds',

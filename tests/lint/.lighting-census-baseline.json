@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "18a3daf5b3807d5b0af3cfaa30b1cbf91233f416",
-  "measuredBy": "MERGE-WAVE (W1 ECO merge point)",
-  "date": "2026-11-08",
-  "note": "the W1 ECO merge at ea0e269a9: the lane brings its new suites (the construction and style arms of W1 ECO) into the integration branch; refrozen at the merged tip",
-  "files": 3118,
-  "parked": 384,
-  "credited": 2734,
-  "titles": 28617,
-  "suiteTitles": 7699
+  "measuredAtSha": "194c20e51ffa60f1b391e5020773683aa714d1db",
+  "measuredBy": "STYLE-2-MERGE-12",
+  "date": "2026-11-13",
+  "note": "point 48: W2-A-LEAVES (817980b33) merged onto the line at aac79b808; its new test files and titles",
+  "files": 3242,
+  "parked": 402,
+  "credited": 2840,
+  "titles": 29345,
+  "suiteTitles": 7960
 }

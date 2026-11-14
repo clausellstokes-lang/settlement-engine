@@ -19,13 +19,14 @@
 
 import { crisisHookFor } from './crisisHooks.js';
 import { crisisContainer } from '../facts/crisisKind.js';
-import { CRISIS_ROLE_LABEL, effectiveCastOf } from './crisisCast.js';
+import { CRISIS_ROLE_LABEL, STAKE_REASONS, effectiveCastOf } from './crisisCast.js';
 import { composeTonightSheet } from '../summary/tonightSheet.js';
 import { entityIdFor } from '../dossier/entityLinks.js';
 import { factionIdFromName } from '../../lib/entities.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { speakTierNoun } from '../display/stateProse/tierVoice.js';
 import { tierNounFor } from '../display/stateProse/weaveBlock.js';
+import { migrationDirectionOf } from './migrationDirection.js';
 
 /** The page's one copy constant, on every surface that prints it. */
 export const CRISIS_PAGE_COPY = Object.freeze({
@@ -37,7 +38,7 @@ export const CRISIS_PAGE_COPY = Object.freeze({
   ifNothing: 'If nothing is done',
   hook: 'Hook',
   nobody: 'nobody',
-  noLevers: 'No house it turns on stands here.',
+  noLevers: 'Nobody here controls what this crisis turns on.',
   edited: '✎ YOU',
   editedTitle: 'Named by you',
   edit: '✎ Edit',
@@ -48,13 +49,13 @@ export const CRISIS_PAGE_COPY = Object.freeze({
   add: 'Add',
   pointer: 'Open the Crisis tab',
   begunByYou: 'begun by your event',
-  stake: Object.freeze({ gains: 'gains', loses: 'loses', split: 'split' }),
-  nature: Object.freeze({
-    natural: 'a natural crisis',
-    social: 'a crisis of the town itself',
-    engineered: 'an engineered crisis',
-    external: 'a crisis from outside',
-  }),
+  // SW-6 CRISIS-SURFACES (B3, A·C4: "split. not touched yet" contradicted itself on every untouched row): a power
+  // the crisis has not touched prints as having no stake yet, never as split.
+  stake: Object.freeze({ gains: 'gains', loses: 'loses', split: 'split', untouched: 'no stake yet' }),
+  // STYLE-AUDIT row 21 (W4 PEOPLE, second seat, 2026-11-07): the event line prints the kind as its
+  // heading; the cast's classification (natural, social, engineered, external) is machinery and is
+  // no longer printed. A migration says which way it runs (WAVE-RULINGS item 8: both sets).
+  direction: Object.freeze({ influx: 'people arriving', exodus: 'people leaving' }),
 });
 
 /**
@@ -75,7 +76,7 @@ export const CRISIS_PAGE_COPY = Object.freeze({
  * @typedef {Object} CrisisPageStake
  * @property {string} factionId
  * @property {string} doorId
- * @property {'gains' | 'loses' | 'split'} stake
+ * @property {'gains' | 'loses' | 'split' | 'untouched'} stake  'untouched': the record's split stake with the untouched reason
  * @property {string} reason
  *
  * @typedef {Object} CrisisPageLever
@@ -103,7 +104,7 @@ export const CRISIS_PAGE_COPY = Object.freeze({
  *
  * @typedef {{ name?: unknown, id?: unknown }} PageNpc
  * @typedef {{ name?: unknown, id?: unknown }} PageInstitution
- * @typedef {{ type?: unknown, label?: unknown, summary?: unknown, crisisHook?: unknown, viabilityNote?: unknown, addedByEventId?: unknown, cast?: CrisisCast, _userEdits?: Record<string, { value?: unknown }> }} PageEntry
+ * @typedef {{ type?: unknown, label?: unknown, summary?: unknown, crisisHook?: unknown, viabilityNote?: unknown, addedByEventId?: unknown, direction?: unknown, cast?: CrisisCast, _userEdits?: Record<string, { value?: unknown }> }} PageEntry
  * @typedef {{ name?: unknown, tier?: unknown, stress?: PageEntry | PageEntry[] | null, npcs?: PageNpc[], institutions?: PageInstitution[] }} PageSettlement
  */
 
@@ -151,17 +152,27 @@ export function castDoorId(settlement, kind, id) {
 }
 
 /**
- * The event in one line: the crisis, its nature, and its onset where a record holds one.
- * The nature's copy says "the town"; it is spoken with the place's own noun (`noun`).
- * @param {string} label @param {CrisisNature | null} nature @param {PageEntry} entry
+ * The event in one line: the crisis, a migration's direction, and whether the DM's event began it.
+ * Spoken with the place's own noun (`noun`), as every fixed line on this page is.
+ * @param {string} label @param {PageEntry} entry
  * @param {string | null} noun the place's tier noun, or null when the record has no tier
  * @returns {string}
  */
-function eventLine(label, nature, entry, noun) {
+function eventLine(label, entry, noun) {
   const parts = [label];
-  if (nature) parts.push(CRISIS_PAGE_COPY.nature[nature]);
+  if (str(entry.type) === 'mass_migration') parts.push(CRISIS_PAGE_COPY.direction[migrationDirectionOf(entry)]);
   if (str(entry.addedByEventId)) parts.push(CRISIS_PAGE_COPY.begunByYou);
   return speakTierNoun(`${parts.join(', ')}.`, noun);
+}
+
+/**
+ * The stake the page prints: the record's own, except a split that is the untouched power's (the record keeps
+ * `split` for the waverer's rule; the reader is told the power has no stake yet).
+ * @param {{ stake: 'gains' | 'loses' | 'split', reason: string }} k
+ * @returns {'gains' | 'loses' | 'split' | 'untouched'}
+ */
+function stakeShown(k) {
+  return k.stake === 'split' && k.reason === STAKE_REASONS.untouched ? 'untouched' : k.stake;
 }
 
 /**
@@ -196,7 +207,7 @@ export function composeCrisisPage(settlement) {
       type,
       label,
       nature,
-      line: eventLine(label, nature, entry, noun),
+      line: eventLine(label, entry, noun),
       summary: str(entry.summary),
       hook: crisisHookFor(s, entry),
       cast: (cast?.roles || []).map((r) => ({
@@ -211,7 +222,7 @@ export function composeCrisisPage(settlement) {
       })),
       absent: (cast?.absent || []).map((a) => ({ role: a.role, roleLabel: CRISIS_ROLE_LABEL[a.role] || a.role, reason: speak(a.reason) })),
       edited,
-      stakes: (entry.cast?.stakes || []).map((k) => ({ factionId: k.factionId, doorId: castDoorId(s, 'faction', k.factionId), stake: k.stake, reason: speak(k.reason) })),
+      stakes: (entry.cast?.stakes || []).map((k) => ({ factionId: k.factionId, doorId: castDoorId(s, 'faction', k.factionId), stake: stakeShown(k), reason: speak(k.reason) })),
       levers: (entry.cast?.levers || []).map((l) => ({
         institution: l.institution,
         doorId: castDoorId(s, 'institution', l.institution),

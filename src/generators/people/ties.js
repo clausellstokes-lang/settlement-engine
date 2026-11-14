@@ -30,13 +30,13 @@
  */
 
 import { getInstFlags, getStressFlags } from '../helpers.js';
-import { computeRelTension, createTieProseDraw } from '../power/relationshipArchetypes.js';
+import { computeRelTension, createTieProseDraw, handlerArchetypeFor, HANDLER_LEVERAGE_KINDS } from '../power/relationshipArchetypes.js';
+import { allegianceOf } from '../../domain/people/allegiance.js';
 import { STRESS_ECONOMIC_EFFECTS } from '../../data/npcData.js';
 import { backingRowFor } from '../../data/institutionBacking.js';
 import { defenseFactsOf, forceWordsOf } from '../../domain/defense/defenseFacts.js';
 import { random as _rng } from '../../kernel/rngContext.js';
 import { onStream, seatHouseOf, SEAT_CARD_ID } from './representatives.js';
-import { OTHER_CARD_PREFIX } from './mintTitles.js';
 import { birthFactsOf } from '../../domain/facts/factsOf.js';
 import { tieArchetype } from '../npc/tieKind.js';
 
@@ -128,18 +128,43 @@ export function drawTies(cards, place, rng, only = {}) {
   // the seat house's face, else the minted seat, else the first card — and draws only its KIND here.
   const seat = seatHouseOf(/** @type {any} */ (institutions));
   const seatKey = seat ? String(seat.house.name || '') : null;
-  const seatCard = cast.find((c) => (seatKey ? c?.institution?.kind === 'house' && c?.institution?.key === seatKey : c?.id === SEAT_CARD_ID)) || cast[0];
-  const isOtherMint = (/** @type {Record<string, any>} */ c) => c?.institution?.kind === 'power' && String(c.id).startsWith(OTHER_CARD_PREFIX);
+  // COHERENCE-POWERS: the seat is the governing power's FIRST (the dual-hat leader, a house's face, where a house
+  // leads); a cast with no ranks (a pre-car save) reads the seat house's face, else the minted seat, as before
+  const governingName = typeof government === 'string' ? government : null;
+  const ledBy = governingName
+    ? cast.find((c) => Array.isArray(c?.memberships) && c.memberships.some((m) => m?.power === governingName && m?.rank === 1))
+    : null;
+  const seatCard = ledBy || cast.find((c) => (seatKey ? c?.institution?.kind === 'house' && c?.institution?.key === seatKey : c?.id === SEAT_CARD_ID)) || cast[0];
+  // a minted face that is not the seat (FIX-PUBLIC-VEIL: a veiled mint's id is opaque, so it is told by
+  // its kind, not by the `npc_power_` prefix)
+  const isOtherMint = (/** @type {Record<string, any>} */ c) => c?.institution?.kind === 'power' && c?.id !== SEAT_CARD_ID;
+
+  // THE HANDLER TIE (ALLEGIANCE-CAR1, 2026-11-08; the allegiance design §1.5): a card with a hidden allegiance
+  // (domain/people/allegiance.js) spends its ONE outgoing tie on its handler — the forced target, as the seat is
+  // an `other` mint's — and the KIND follows the vector on the card, never rolled (fear's leverage sub-kind is
+  // drawn on the card's own tie fork). The tie is `covert: true, handler: true`: the value-level covert drop
+  // removes it from every public projection (publicSafe.js; SQL 142/206).
+  const byId = new Map(cast.map((c) => [String(c.id), c]));
+  /** @param {Record<string, any>} c @returns {Record<string, any> | null} */
+  const handlerOf = (c) => {
+    const h = allegianceOf(c)?.handler;
+    const card = h ? byId.get(h) : null;
+    return card && card !== c && card.id !== c.id ? card : null;
+  };
 
   const sources = only?.sources ? cast.filter((c) => only.sources.has(c.id)) : cast;
   return sources.map((from) => {
     const others = cast.filter((c) => c !== from && c.id !== from.id);
     const weights = others.map((c) => weightOf.get(c) * (sharesPower(from, c) ? SHARED_POWER_FACTOR : 1));
     const fork = family.fork(String(from.id));
-    const forced = isOtherMint(from) && seatCard && seatCard !== from && seatCard.id !== from.id ? seatCard : null;
+    const handler = handlerOf(from);
+    const forced = handler || (isOtherMint(from) && seatCard && seatCard !== from && seatCard.id !== from.id ? seatCard : null);
     return onStream(fork, () => {
       const to = forced || fork.weightedPick(others, weights);
-      const archetype = tieArchetype(computeRelTension(from, to, stressFlags, instFlags), from, to); // CENSUS-4 R3: the tie rule, resolved after the roll (MERGE-CAR)
+      const vector = handler ? allegianceOf(from)?.vector : null;
+      const archetype = handler
+        ? handlerArchetypeFor(String(vector), vector === 'fear' ? fork.pick(HANDLER_LEVERAGE_KINDS) : undefined)
+        : tieArchetype(computeRelTension(from, to, stressFlags, instFlags), from, to); // CENSUS-4 R3: the tie rule, resolved after the roll (MERGE-CAR)
       const pool = RELATIONSHIP_STRENGTHS[archetype.type] || RELATIONSHIP_STRENGTHS.respect;
       const strength = pool[Math.floor(_rng() * pool.length)];
       const { archetypeKey, proseVariant, description, tension } = drawTieProse(archetype, from, to);
@@ -159,6 +184,7 @@ export function drawTies(cards, place, rng, only = {}) {
         archetypeKey,
         proseVariant,
         flagDriven: stressFlags.anyActive && FLAG_DRIVEN.has(archetype),
+        ...(handler ? { covert: true, handler: true } : {}),
       };
     });
   });

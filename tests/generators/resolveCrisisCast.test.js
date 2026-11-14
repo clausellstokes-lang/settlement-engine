@@ -8,10 +8,11 @@ import { describe, it, expect } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { crisisResolve } from '../../src/domain/crisisLifecycle.js';
 import { STRESS_TYPE_MAP } from '../../src/data/stressTypes.js';
+import { MIGRATION_HOOK_BY_DIRECTION } from '../../src/generators/stressNarrative.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { collectPlotHooks } from '../../src/domain/dossier/plotHooks.js';
 import { hookTruthViolations, settlementHookFacts } from '../../src/domain/coherence/hookTruth.js';
-import { crisisHookFor, crisisHooksOf } from '../../src/domain/crisis/crisisHooks.js';
+import { crisisHookFor, crisisHooksOf, houseInProse } from '../../src/domain/crisis/crisisHooks.js';
 import { applyUserEdit } from '../../src/domain/userEdits.js';
 import { CAST_EDIT_PATH, formatCastRoles } from '../../src/domain/crisis/crisisCast.js';
 import { composeCrisisPage } from '../../src/domain/crisis/crisisPage.js';
@@ -78,7 +79,7 @@ describe('a generated crisis adds the hooks its cast derives', () => {
     expect(hooks[0].text).toContain(holder.name);
     expect(hooks[0].text).toContain(holder.reason);
     expect(hooks[1].crisis).toBe('famine');
-    expect(hooks[1].text).toContain(entry.cast.levers[0].institution);
+    expect(hooks[1].text).toContain(houseInProse(entry.cast.levers[0].institution)); // SW-6 (4b1827494): re-keyed by identity — the house prints as prose
     expect('plotHooks' in entry).toBe(false); // read off the cast, never stored
   });
 
@@ -124,7 +125,11 @@ describe('a generated crisis adds the hooks its cast derives', () => {
     expect(crisisHookFor(s, plague)).toBe(STRESS_TYPE_MAP.plague_onset.crisisHook
       .replace('The healer who identified the outbreak first', `${lever.name}, the healer who identified the outbreak first,`));
     const m = gen('slot-migration-0', 'town', ['mass_migration']);
-    expect(crisisHookFor(m, entriesOf(m)[0])).toBe(STRESS_TYPE_MAP.mass_migration.crisisHook);
+    // W4 PEOPLE second seat 2026-11-07 (#8, WAVE-RULINGS item 8): a migration entry stores the hook its
+    // own direction names (stressNarrative.js :: MIGRATION_HOOK_BY_DIRECTION, arrivals at birth), not the
+    // catalogue's type-level sentence; the pin re-keys to that template, and it carries no holder slot.
+    expect(crisisHookFor(m, entriesOf(m)[0])).toBe(MIGRATION_HOOK_BY_DIRECTION.arrivals);
+    expect(entriesOf(m)[0].crisisHook).not.toBe(STRESS_TYPE_MAP.mass_migration.crisisHook);
   });
 
   it('a DM\'s cast edit renames the holder in the printed crisis hook: the Crisis page (tab, print chapter, journal) and the print view model', () => {

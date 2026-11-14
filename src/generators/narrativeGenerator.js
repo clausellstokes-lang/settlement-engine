@@ -31,12 +31,18 @@ import {
   random as _rng,
   setActiveRng,
 } from '../kernel/rngContext.js';
-import { assignCastPowers } from './people/castPowers.js';
+import { landMemberships, rankPowers } from './people/castPowers.js';
+import { assignHandlers, dealAllegiances, leaveAllegianceReceipts } from '../domain/people/allegiance.js';
+import { hallCaptureOf, writeHallCapture } from '../domain/people/hallCapture.js';
+import { captureClimateOf } from './power/rulingStructure.js';
+import { withCaptureRelations } from './factionDynamics.js';
+import { cardInstitutionVeilOf } from '../domain/people/cardPowers.js';
 import { drawTies } from './people/ties.js';
+import { dealGoals } from './people/goals.js';
 import { pickVariant } from '../kernel/proseHash.js';
 import { selectOriginBody } from './narrative/settlementOriginProse.js';
 import { resolvePrimaryStress } from './stressPriority.js';
-import { migrationDirectionOfStress } from '../domain/migrationDirection.js';
+import { migrationDirectionOfStress, migrationDirectionOfConfig } from '../domain/migrationDirection.js';
 import { pick, pickRandom, pickRandom2, random01 } from './helpers.js';
 import { resolveTerrain } from '../domain/resolveTerrain.js';
 import { deriveTradeCommodity } from './tradeCommodity.js';
@@ -45,6 +51,7 @@ import {
   TERRAIN_NARRATIVE_HOOKS,
   STRESS_DESCS,
   STRESS_NOTES,
+  MASS_MIGRATION_DEPARTURE_NOTES,
 } from '../data/narrativeData.js';
 // The runner's ONE pin primitive (EM-B2a2's landed export). This module consults a pin
 // through it and nowhere else: no local clone (EM-R1 clones the bag on entry at the runner)
@@ -136,7 +143,7 @@ const genSettSummary = settlement => {
             : tier === 'metropolis'
               ? 'the grand council'
               : 'the council');
-  const topFaction = factions[0]?.faction || 'the dominant faction';
+  const topFaction = factions[0]?.faction || 'the dominant power';
 
   const crimFaction =
     factions.find(
@@ -420,7 +427,14 @@ export const genArrivalDetail = (
     overcoming: pick(OVERCOMING_BY_PROSPERITY[prosperity] || OVERCOMING_BY_PROSPERITY.Moderate),
     stressNote: primaryStress
       ? pickVariant(
-        licensedNotes(STRESS_NOTES[primaryStress], economicContext?._institutions), // F1: walls only where they stand
+        licensedNotes(
+          // R-W7 (e), W5 HIS 2026-11-07: the migration note reads the declared direction; a
+          // departures town draws the departures set, never the arrivals one.
+          primaryStress === 'mass_migration' && migrationDirectionOfConfig(config) === 'departures'
+            ? MASS_MIGRATION_DEPARTURE_NOTES
+            : STRESS_NOTES[primaryStress],
+          economicContext?._institutions,
+        ), // F1: walls only where they stand
         config?._seed ? `${config._seed}::stressNote::${primaryStress}` : null,
       ) ?? null
       : null,
@@ -500,6 +514,8 @@ const genPressureDetail = settlement => {
             ? 'the local herbalist'
             : 'the healers';
 
+  // FIX-PUBLIC-VEIL (the second seat): is the top card a veiled face (its house record veiled)?
+  const topCardVeiled = cardInstitutionVeilOf(npcs?.[0]) === 'veiled';
   return {
     name,
     tier,
@@ -524,8 +540,11 @@ const genPressureDetail = settlement => {
     topNPC: npcs?.[0] || null,
     // M-1b (PEOPLE-1 CAST): a card's role is its TITLE and carries its article ('the master fishmonger'); the pressure
     // lines prefix ", the " themselves, so the noun is handed over without it (never "the the").
-    topNPCRole: String(npcs?.[0]?.role || '').replace(/^the\s+/i, '') || null,
-    topNPCName: npcs?.[0]?.name || null,
+    // FIX-PUBLIC-VEIL (the second seat): a VEILED top card's title would name its hidden house in the public
+    // pressure sentence ("Qian Deng, the smuggler, knows more…"), so neither is handed over and each template
+    // takes its own anonymous fallback ("the most senior official"); an open card's lines are unchanged.
+    topNPCRole: topCardVeiled ? null : (String(npcs?.[0]?.role || '').replace(/^the\s+/i, '') || null),
+    topNPCName: topCardVeiled ? null : (npcs?.[0]?.name || null),
     viabilityIssues: economicViability?.issues || [],
     isViable: economicViability?.viable !== false,
     topTension: (history?.currentTensions || [])[0]?.type || null,
@@ -718,6 +737,19 @@ const buildPoliticalNarrative = (npc, index, summary, allNpcs, held = null) => {
   return enriched;
 };
 
+/**
+ * The small-place tier line, five vantages (local, traveller, official, trade, newcomer). Five, not
+ * four: a power-of-two pool aliases under the FNV pick (the origin pools' own pin). Index 0 is the
+ * seedless line.
+ */
+export const SMALL_PLACE_TIER_LINES = Object.freeze([
+  'Every household here has its work, and there is little to spare.',
+  'A handful of houses; you could greet everyone in it before noon.',
+  'Everyone here knows every household by name, and none has much put by.',
+  'What little the place grows or makes is mostly used at home; there is not much left to sell.',
+  'A newcomer is noticed by the second day here, and asked what work they mean to do.',
+]);
+
 // ─── generateSettlementReason ─────────────────────────────────────────────────
 /**
  * Generate the founding reason description for the settlement header.
@@ -732,9 +764,11 @@ const buildPoliticalNarrative = (npc, index, summary, allNpcs, held = null) => {
  *                                 When it records a meaningful deficit, the isolated
  *                                 wording acknowledges the gap instead of seeding the
  *                                 AI pass with a self-sufficiency claim.
+ * @param {{ hasDocks?: boolean }} [roster] - #10: the roster's docks/wharf flag; an explicit false
+ *                                 takes the terrain's arm, absent keeps the port arm.
  * @returns {string[]} Array of reason strings (shown as bullet list)
  */
-export const generateSettlementReason = (tier, route, neighbor, _config = {}, foodBalance = null) => {
+export const generateSettlementReason = (tier, route, neighbor, _config = {}, foodBalance = null, roster = {}) => {
   const lines = [];
 
   // Meaningful food deficit? rawDeficit is the pre-import gap (need − production);
@@ -755,30 +789,36 @@ export const generateSettlementReason = (tier, route, neighbor, _config = {}, fo
     _config.magicExists !== false
     && Number(_config.priorityMagic ?? 50) > 0
   )
-    ? 'magical transport, sanctioned caravans, seasonal access, or patronage'
-    : 'sanctioned caravans, seasonal access, patronage, or emergency rationing';
+    // STYLE-2 FIRST-IMPRESSIONS (A·O16): the support list in plain words, not the channel names.
+    ? 'carriage by magic, the caravans that still come, the roads in a good season, or the favour of a patron'
+    : 'the caravans that still come, the roads in a good season, or the favour of a patron';
   lines.push(selectOriginBody({
     route,
     terrainType: _config.terrainType ?? null,
     hasFoodDeficit,
+    // #10: the port reason reads the roster's docks/wharf flag (undefined from a caller that does not say).
+    // A parameter of its own, never a config key: the config is the DM's saved input, the roster is not.
+    hasDocks: roster?.hasDocks,
     supportChannels,
     specialResources: _config.specialResources ?? null,
     seed: _config._seed ?? null,
   }));
 
-  // Tier-specific context
+  // Tier-specific context. THE OWNER'S STYLE LAW (W5 HIS 2026-11-07, STYLE-AUDIT §2a #11 and §2b-5):
+  // plain statement, no mechanism. The small-place line was the second most-repeated frame on the
+  // 1,000 (334 towns), so it is a pool of five vantages chosen DRAW-FREE by the settlement's seed
+  // (the same town keeps its line; a sibling prints another); a seedless caller gets index 0.
   if (tier === 'metropolis') {
-    lines.push(
-      'At this scale, the settlement no longer serves a single economic function. It IS the economic function for its region.',
-    );
+    lines.push('Everything in the region is bought, sold or decided here.');
   } else if (tier === 'city') {
     lines.push(
       hasFoodDeficit
         ? 'Large enough that its appetites outrun its fields. What the city consumes, it cannot fully produce.'
-        : 'Large enough to produce what it consumes and consume what it produces. External trade amplifies rather than sustains.',
+        : 'Large enough to feed itself; its trade brings extras, not the essentials.',
     );
   } else if (['thorp', 'hamlet'].includes(tier)) {
-    lines.push('Small enough that every household knows its purpose. Surplus, if any, is modest.');
+    const seed = typeof _config._seed === 'string' ? _config._seed.trim() : '';
+    lines.push(pickVariant(SMALL_PLACE_TIER_LINES, seed ? `${seed}::settlement-tier-line::${tier}` : null));
   }
 
   return lines;
@@ -866,6 +906,21 @@ export const generateArrivalScene = settlement => composeArrivalScene(settlement
  *  - Current tensions string
  */
 /**
+ * A6 (ALLEGIANCE-CAR2, the design §3.4, J-13): the settlement's power structure with the hall-capture state derived
+ * from `npcs` (their ranks and hidden allegiances) and the classifier's climate rung over the current roster — written
+ * by its ONE writer, domain/people/hallCapture.js :: writeHallCapture. Draw-free. EXPORTED for the NPC section
+ * regeneration (FIX-SECTION-REGEN, 2026-11-09): generators/generateSettlementPipeline.js :: regenNPCsPipeline
+ * re-derives the BORN record's hall over its final cast through this same seam (`opts.rederive`), never a private copy.
+ * @param {*} settlement @param {Array<Record<string, any>>} npcs @param {{ rederive?: boolean }} [opts]
+ * @returns {*} the new power structure
+ */
+export const withHallCapture = (settlement, npcs, opts = {}) => {
+  const hall = hallCaptureOf(settlement, { npcs, climate: captureClimateOf(settlement) });
+  // the capture rows of the relation matrix READ the one state (the chair's ruling on car 2's STOP 3)
+  return withCaptureRelations(writeHallCapture(settlement.powerStructure, hall, opts), hall.state);
+};
+
+/**
  * The NPC coherence-enrichment sub-pass: faction/secret overlays
  * (buildPoliticalNarrative) → faction-structure merge (mergeNPCLists) →
  * structural positions/goals/constraints (enrichNPCsWithStructure). Extracted so
@@ -898,7 +953,21 @@ export const enrichNpcCoherence = (settlement) => {
   // pass reads the memberships (npcStructure.js) and no card carries the old fields. This tail is still
   // the one BOTH full assembly and NPC section-regen run, so a regenerated cast carries the
   // same powers as a born one.
-  const withPowers = assignCastPowers(settlement, rawMergedNpcs, getActiveRng());
+  // ── THE ALLEGIANCE TRAIN, car 1 (ALLEGIANCE-CAR1, 2026-11-08; the design §2): one forward pass,
+  // A1 the memberships landed (rank null) → A2 the hidden allegiances dealt, each card on its own keyed
+  // fork `people-allegiance::<card id>` of this seam's stream (domain/people/allegiance.js; the retired
+  // corruptionPass step's roll, moved here so a regenerated cast deals its allegiances too) → A3 the
+  // rank deal → A4 the handlers, draw-free, after the ranks they read. The receipts are left for the
+  // assembly step's trace (steps/assembleSettlement.js); a regeneration's are dropped, as before.
+  const rng = getActiveRng();
+  const landed = landMemberships(settlement, rawMergedNpcs, rng, settlement?._seed ?? null);
+  const dealt = dealAllegiances(settlement, landed.all, rng);
+  // (ALLEGIANCE-CAR4: the retired pass's compromised short goal is gone — the agent's goal is the ALLEGIANCE
+  // family's, dealt at A9 with every other card's, people/goals.js :: dealGoals.)
+  const withPowers = rankPowers(settlement, landed);
+  assignHandlers(withPowers, settlement);
+  leaveAllegianceReceipts(settlement, dealt);
+  settlement.powerStructure = withHallCapture(settlement, withPowers); // A6 (car 2, J-13): the hall-capture state DERIVED, its ONE writer — after the ranks and handlers it reads, before the structural pass that reads it
   return enrichNPCsWithStructure(withPowers, settlement);
 };
 
@@ -923,7 +992,7 @@ function inCoherenceSubstream(rng, label, operation) {
   }
 }
 
-export const generateCoherence = (settlement, coherenceRng = null, pins = null) => {
+export const generateCoherence = (settlement, coherenceRng = null, pins = null, seed = null) => {
   if (!settlement) return settlement;
 
   // Each output owns a stable draw budget. Conditional work in NPC enrichment
@@ -947,8 +1016,22 @@ export const generateCoherence = (settlement, coherenceRng = null, pins = null) 
   const mergedNpcs = chooseOrPin(pins, 'npcs', () => inCoherenceSubstream(
     coherenceRng,
     'npc-enrichment',
-    () => enrichNpcCoherence(settlement),
+    // FIX-PUBLIC-VEIL (the second seat): the record's seed salts a veiled mint's opaque id at the cast seam. It is
+    // LENT to the settlement for this call only (assembly attaches `_seed` after the seam; nothing on this path
+    // read it before), so the enrichment's signature, pinned by packet EM-R2, is unchanged.
+    () => {
+      const lend = seed != null && settlement._seed == null;
+      if (lend) settlement._seed = seed;
+      try {
+        return enrichNpcCoherence(settlement);
+      } finally {
+        if (lend) delete settlement._seed;
+      }
+    },
   ));
+
+  // A6 on a HELD roster (car 2): the enrichment above did not run, so the state is derived from the held cast here
+  if (pins && Object.prototype.hasOwnProperty.call(pins, 'npcs')) settlement.powerStructure = withHallCapture(settlement, mergedNpcs);
 
   // ── THE PEOPLE CAR (PEOPLE-4 TIES, 2026-11-07; R-P7): ONE OUTGOING TIE PER CARD, drawn HERE over
   // the final cast — after the memberships the target rule reads ("× 3 when the two share a
@@ -960,7 +1043,13 @@ export const generateCoherence = (settlement, coherenceRng = null, pins = null) 
     { config: settlement.config || {}, institutions: settlement.institutions || [], tier: settlement.tier, government: settlement.powerStructure?.government ?? null },
     coherenceRng?.fork ? coherenceRng : getActiveRng(),
   ));
-  const withTies = { ...settlement, npcs: mergedNpcs, relationships };
+  // ── A9, THE GOALS (the allegiance train, car 4; the design §2 and §6): every card's SHORT and LONG goal, drawn at the
+  // END of the seam — after the ranks, the agents, the handlers and the ties the families bind — on the seam's own keyed
+  // family (`people-goals::<card id>`, people/goals.js), from the families each card's record supports. A held `npcs`
+  // key is the DM's cast: its goals are not redrawn.
+  const npcsHeld = !!pins && Object.prototype.hasOwnProperty.call(pins, 'npcs');
+  const goaledNpcs = npcsHeld ? mergedNpcs : dealGoals(settlement, mergedNpcs, relationships, coherenceRng?.fork ? coherenceRng : getActiveRng());
+  const withTies = { ...settlement, npcs: goaledNpcs, relationships };
 
   const history = settlement.history || {};
 
@@ -1001,7 +1090,7 @@ export const generateCoherence = (settlement, coherenceRng = null, pins = null) 
 
   return {
     ...settlement,
-    npcs: mergedNpcs,
+    npcs: goaledNpcs,
     relationships,
     prominentRelationship,
     coherenceNotes,

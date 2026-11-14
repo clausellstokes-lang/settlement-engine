@@ -21,7 +21,13 @@
  */
 
 import { describe, test, expect, afterEach, vi } from 'vitest';
-import { render, screen, cleanup } from '@testing-library/react';
+import { render, screen, cleanup, fireEvent } from '@testing-library/react';
+import { existsSync } from 'node:fs';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { join, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 
 afterEach(cleanup);
 
@@ -61,6 +67,14 @@ vi.mock('../../src/store/index.js', () => {
   return { useStore };
 });
 
+function assertLandingTrimmed(container) {
+  const text = container.textContent;
+  expect(container.querySelector('[data-compendium-grid]')).not.toBeNull();
+  expectAbsentWithAnchor(text, 'rendered by the deterministic engine', 'Tiers & Routes', 'the landing text');
+  expectAbsentWithAnchor(text, 'It cannot drift from what the simulator actually does', 'Tiers & Routes', 'the landing text');
+  expectAbsentWithAnchor(text, 'The sample world is', 'Tiers & Routes', 'the landing text');
+}
+
 describe('CompendiumPanel — decomposition smoke', () => {
   test('mounts without throwing and renders the built-in catalog', async () => {
     const CompendiumPanel = (await import('../../src/components/CompendiumPanel.jsx')).default;
@@ -70,12 +84,11 @@ describe('CompendiumPanel — decomposition smoke', () => {
     expect(document.body).toBeTruthy();
     expect(container.firstChild).not.toBeNull();
 
-    // Default mode is the built-in catalog on the Overview dashboard (DOC WAVE 2/2).
-    // Pinning its stable, artifact-rendered copy means a broken extraction (e.g.
-    // CompendiumDashboard/CatalogHubs → primitives/artifact import) surfaces here.
-    expect(
-      screen.getByText(/rendered by the deterministic engine from its own registries/),
-    ).toBeTruthy();
+    // The landing renders its grid (a broken extraction of CompendiumDashboard would fail
+    // here). RE-KEYED BY IDENTITY (the owner, 2026-11-10, verbatim: "remove the everything
+    // here is rednedered by the deteremistic.... all the way to the sample world cnocby..."):
+    // the intro sentence and the sample-world line are gone; a tile name is the anchor.
+    assertLandingTrimmed(container);
   });
 
   test('mounts in standalone mode without throwing', async () => {
@@ -83,32 +96,149 @@ describe('CompendiumPanel — decomposition smoke', () => {
     const { container } = render(<CompendiumPanel standalone />);
 
     expect(container.firstChild).not.toBeNull();
-    expect(
-      screen.getByText(/rendered by the deterministic engine from its own registries/),
-    ).toBeTruthy();
+    assertLandingTrimmed(container);
   });
 
-  // RESTORATION #9 — the standalone-page identity (Page frame + PageHeader) and
-  // the WAI-ARIA tab wiring (role=tablist/tab/tabpanel with matching id linkage)
-  // were dropped at the composite; this pins that they are wired back.
-  test('standalone carries the PageHeader identity and ARIA tab wiring', async () => {
+  // RESTORATION #9 pinned the standalone-page identity (Page frame + PageHeader) and
+  // the WAI-ARIA tab wiring. The owner's word of 2026-11-10 ("Rather than a horizontal
+  // scroll, I would like that the first page of compendium lists in boxes that are
+  // flush to each other … when one clicks on it they are taken to a different page")
+  // retired the tab row: the landing is now a nav landmark of twelve links, one per
+  // section page, and no tablist is left. The PageHeader identity pin stands.
+  test('standalone carries the PageHeader identity and the landing grid of section links', async () => {
     const CompendiumPanel = (await import('../../src/components/CompendiumPanel.jsx')).default;
     render(<CompendiumPanel standalone />);
 
-    // PageHeader identity: the serif page title, not just a document.title swap.
     expect(screen.getByRole('heading', { level: 1, name: 'Compendium' })).toBeTruthy();
 
-    // The tab strip is a labelled tablist; every tab declares role=tab; the
-    // content region is a tabpanel whose id matches the selected tab's
-    // aria-controls (the linkage AT relies on).
-    const tablist = screen.getByRole('tablist', { name: 'Compendium sections' });
-    expect(tablist).toBeTruthy();
-    const tabs = screen.getAllByRole('tab');
-    expect(tabs.length).toBeGreaterThan(0);
-    const panel = screen.getByRole('tabpanel');
-    const selected = tabs.find((t) => t.getAttribute('aria-selected') === 'true');
-    expect(selected).toBeTruthy();
-    expect(selected.getAttribute('aria-controls')).toBe(panel.getAttribute('id'));
-    expect(panel.getAttribute('aria-labelledby')).toBe(selected.getAttribute('id'));
+    const nav = screen.getByRole('navigation', { name: 'Compendium sections' });
+    const links = [...nav.querySelectorAll('li > a')];
+    expect(links).toHaveLength(12);
+    // The chair's H1+ order (the owner: "three columns not three rows"), reading across.
+    expect(links.map((a) => a.getAttribute('href'))).toEqual([
+      '/compendium/tiers', '/compendium/economy', '/compendium/powers',
+      '/compendium/institutions', '/compendium/magic-and-religion', '/compendium/stress',
+      '/compendium/calamity', '/compendium/neighbours', '/compendium/operations',
+      '/compendium/living-world', '/compendium/a-z', '/compendium/custom',
+    ]);
+    expect(nav.querySelector('ul').style.gridTemplateColumns).toBe('repeat(3, minmax(0, 1fr))');
+    // The kickers: the owner's two approved words, eight then two then none.
+    const kickers = links.map((a) => a.querySelector('[data-tile-kicker]')?.textContent ?? null);
+    expect(kickers).toEqual([...Array(8).fill('The world'), 'How it works', 'How it works', null, null]);
+    // H13: every tile is lettered over a painting of our stock — lazy, sized, decorative.
+    for (const a of links) {
+      const slug = a.getAttribute('href').split('/').pop();
+      const img = a.querySelector('img');
+      expect(img.getAttribute('src'), slug).toBe(`/backgrounds/compendium/${slug}.webp`);
+      expect(img.getAttribute('loading')).toBe('lazy');
+      expect(img.getAttribute('width')).toBe('800');
+      expect(img.getAttribute('height')).toBe('320');
+      expect(img.getAttribute('alt')).toBe('');
+      expect(existsSync(join(ROOT, 'public', 'backgrounds', 'compendium', `${slug}.webp`)), slug).toBe(true);
+    }
+    // No tile carries a description line any more (H13): the name and the count only.
+    expect(links[0].textContent).toBe('The worldTiers & Routes6');
+    // H14: with purchases closed (this test build), My Custom Content wears the launch skin
+    // and the existing "Available at launch" pill; no other tile does.
+    expect(links[11].getAttribute('data-skin')).toBe('launch');
+    expect(links[11].querySelector('[data-launch-pill]')).not.toBeNull();
+    expect(links.slice(0, 11).filter((a) => a.querySelector('[data-launch-pill]'))).toEqual([]);
+    // The twelfth box is My Custom Content (ruling H4); the mode toggle is gone.
+    expect(links[11].textContent).toContain('My Custom Content');
+    expect(screen.queryByRole('tablist')).toBeNull();
+    expect(screen.queryAllByRole('tab')).toHaveLength(0);
+    expect(screen.queryByRole('button', { name: /Built-in Catalog/ })).toBeNull();
+    // No Back on the landing.
+    expect(screen.queryByRole('button', { name: 'Back' })).toBeNull();
+  });
+
+  test('a section page leads with Back, its title and its own search', async () => {
+    const CompendiumPanel = (await import('../../src/components/CompendiumPanel.jsx')).default;
+    const { container } = render(<CompendiumPanel standalone routeSection="institutions" />);
+    const back = screen.getByRole('button', { name: 'Back' });
+    expect(screen.getByRole('heading', { level: 1, name: 'Institutions' })).toBeTruthy();
+    expect(screen.getByLabelText('Search catalog')).toBeTruthy();
+    // Back comes first: before the heading in document order.
+    const h1 = screen.getByRole('heading', { level: 1 });
+    expect(back.compareDocumentPosition(h1) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    // The landing's grid is not on a section page.
+    expect(container.querySelector('nav[aria-label="Compendium sections"]')).toBeNull();
+    // Back returns to the landing (pushed).
+    window.history.replaceState(null, '', '/compendium/institutions');
+    const before = window.history.length;
+    back.click();
+    expect(window.location.pathname).toBe('/compendium');
+    expect(window.history.length).toBe(before + 1);
+    window.history.replaceState(null, '', '/');
+  });
+
+  test('an entry page also leads with Back', async () => {
+    const CompendiumPanel = (await import('../../src/components/CompendiumPanel.jsx')).default;
+    render(<CompendiumPanel standalone routeEntry="tier-thorp" />);
+    expect(screen.getByRole('button', { name: 'Back' })).toBeTruthy();
+    expect(screen.getByRole('heading', { level: 1, name: 'Tiers & Routes' })).toBeTruthy();
+  });
+
+  // H8 (the owner: "The search bar acts as a search bar that filters based on string
+  // matching"): on a section page the one box narrows the page IN PLACE, by substring.
+  test('a section page’s one search box filters the page by string matching, in place', async () => {
+    const CompendiumPanel = (await import('../../src/components/CompendiumPanel.jsx')).default;
+    const { container } = render(<CompendiumPanel standalone routeSection="calamity" />);
+    expect(container.querySelectorAll('input')).toHaveLength(1); // one box, no second search
+    const root = container.querySelector('[data-compendium-filter-root]');
+    const visible = () => [...root.querySelectorAll('*')].filter((el) => !el.closest('[data-filter-hidden]')).map((el) => el.textContent).join(' ');
+    expect(visible()).toContain('Flavours');
+    fireEvent.change(screen.getByLabelText('Search catalog'), { target: { value: 'FLOOD' } });
+    expect(visible().toLowerCase()).toContain('flood');
+    expect(root.querySelectorAll('[data-filter-hidden]').length).toBeGreaterThan(0);
+    // Every hidden entry is one that does not contain the string.
+    expect([...root.querySelectorAll('[data-filter-hidden]')].filter((el) => el.textContent.toLowerCase().includes('flood'))).toEqual([]);
+    fireEvent.change(screen.getByLabelText('Search catalog'), { target: { value: '' } });
+    expect(root.querySelectorAll('[data-filter-hidden]').length).toBe(0);
+  });
+
+  // COMPENDIUM-INSTITUTIONS-2 (the chair's catch at the look-first, 2026-11-10): the in-place
+  // filter narrows inside any element of five or more children, and H7's fact lines put every
+  // institution card past five, so "inn" split cards apart (titles without lines, lines without
+  // titles). The owner's rule stands: "The search bar acts as a search bar that filters based
+  // on string matching". An ENTRY is shown whole or hidden whole; the string is matched against
+  // the entry's whole text, as before.
+  const isHidden = (el) => !!el.closest('[data-filter-hidden]');
+  test('the Institutions filter shows each card WHOLE or hides it WHOLE ("inn"), and clearing restores all 282', async () => {
+    const CompendiumPanel = (await import('../../src/components/CompendiumPanel.jsx')).default;
+    const { container } = render(<CompendiumPanel standalone routeSection="institutions" />);
+    const cards = () => [...container.querySelectorAll('[data-compendium-filter-root] [id^="inst-"]')];
+    expect(cards()).toHaveLength(282);
+    fireEvent.change(screen.getByLabelText('Search catalog'), { target: { value: 'inn' } });
+    const all = cards();
+    const shown = all.filter((c) => !isHidden(c));
+    expect(shown.length).toBeGreaterThan(0);
+    for (const c of shown) {
+      expect(c.textContent.toLowerCase(), c.id).toContain('inn');
+      // whole: no part of a shown card is hidden — its title, description and every fact line
+      expect(c.querySelectorAll('[data-filter-hidden]').length, c.id).toBe(0);
+    }
+    for (const c of all.filter(isHidden)) expect(c.textContent.toLowerCase().includes('inn'), c.id).toBe(false);
+    fireEvent.change(screen.getByLabelText('Search catalog'), { target: { value: '' } });
+    expect(cards().filter(isHidden)).toHaveLength(0);
+    expect(cards()).toHaveLength(282);
+  });
+
+  // The same rule on a second page measured past five children before the fix: Economy's band
+  // ladders (title, blurb, seven bands). "poor" names a band of Prosperity; the ladder shows whole.
+  test('the Economy filter shows a band ladder WHOLE ("poor" keeps the Prosperity ladder with its title)', async () => {
+    const CompendiumPanel = (await import('../../src/components/CompendiumPanel.jsx')).default;
+    const { container } = render(<CompendiumPanel standalone routeSection="economy" />);
+    const root = container.querySelector('[data-compendium-filter-root]');
+    const title = [...root.querySelectorAll('div')].find((d) => d.textContent === 'Prosperity');
+    expect(title).toBeTruthy();
+    const ladder = title.parentElement;
+    expect(ladder.children.length).toBeGreaterThanOrEqual(5);
+    fireEvent.change(screen.getByLabelText('Search catalog'), { target: { value: 'poor' } });
+    expect(isHidden(ladder)).toBe(false);
+    expect(isHidden(title)).toBe(false);
+    expect(ladder.querySelectorAll('[data-filter-hidden]').length).toBe(0);
+    fireEvent.change(screen.getByLabelText('Search catalog'), { target: { value: '' } });
+    expect(root.querySelectorAll('[data-filter-hidden]').length).toBe(0);
   });
 });

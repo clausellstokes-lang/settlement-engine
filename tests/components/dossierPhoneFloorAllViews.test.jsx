@@ -88,6 +88,8 @@ vi.mock('../../src/lib/analytics.js', () => ({
 
 import OutputContainer from '../../src/components/OutputContainer.jsx';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { withPublicProse } from '../../src/domain/display/publicProse.js';
+import { composePublicProse } from '../../src/components/new/publicProseCompose.js';
 
 /** A line long enough to be READ rather than glanced at — `chromeFontSize`'s own bound. */
 const MIN_CHARS = 45;
@@ -106,10 +108,10 @@ const SHORT_PANELS = Object.freeze({
   // Chair ruling 2026-10-30 (BUILD-T3 U4, Chronicle): the empty state is the one fact, the
   // pitch cut. This fixture is a fresh generated city with no save and no campaign events.
   chronicle: { text: 'No chronicle yet.' },
-  // FOOD-2 (the food base numbers, 2026-11-03): the fixture city is fed by its hinterland, so it
-  // carries no food warning and its viability reading is the verdict alone. The short form is
-  // the fact about this fixture, not an empty tab.
-  viability: { text: '✓ Viablethe settlement can function.Judged at the first survey; not re-run since.' },
+  // FOOD-2's viability row (2026-11-03, 'the verdict alone') RETIRED at MERGE-WAVE's GREEN-BASE point (2026-11-08): from the
+  // W2 DEF merge point the fixture city's viability tab prints its verdict sentence ("Varaghat can stand, but only …", W2 DEF's
+  // viability lines), so it is no longer a short form and takes the 100-character floor like every other tab (measured in
+  // clean worktrees: the old text at ff2096d2b, the new at 2d9f47504 and every later point).
 });
 
 /**
@@ -128,6 +130,10 @@ const EMPTY_VIEWS = Object.freeze({
   // The fixture has no save and no campaign, so it has no chronicle; the empty state is the
   // ruled 17-character sentence (SHORT_PANELS above), below the 45-character measuring bound.
   'Notes/Chronicle': 'no events: a fresh unsaved city, empty state ruled to one fact (BUILD-T3 U4)',
+  // MERGE-WAVE at the GREEN-BASE point (2026-11-08), born at the W4 PEOPLE merge point (measured in clean worktrees: present at
+  // 95f31f192, empty from 0b967e6b3): WAVE-RULINGS #37 (W4's 86a30fdf2) made the daily-life offer the button's CAPTION, not a
+  // body paragraph, and this fixture city has no generated daily life, so the view's one body line left with the ruling.
+  'World/Daily Life': 'no daily life generated: a fresh city whose only line, the offer, is the button caption since WAVE-RULINGS #37 (W4 86a30fdf2)',
   // 'Systems/Magic' LEFT this list (lane MAGIC, 2026-11-03): the dependence block now draws on the
   // one reliance reading, which this fixture city reads as relied upon, so its stamped title and its
   // static explanation render on the public walk (the DS-DEF-9 corpus line stays gated, §885.3).
@@ -162,6 +168,11 @@ beforeAll(() => {
       },
     },
   };
+  // ⭐ STAMPED AS A SAVE STAMPS IT (SW-B7b, STYLE-RULINGS-2 B10(a)). `readOnly` with no saveId is
+  // the SHARED page, which prints the owner's player-view draws shipped at the save
+  // (`data.publicProse`); an unstamped town there is silent where a desk speaks. So the walk
+  // measures the shared page a viewer actually meets: the town as its save path writes it.
+  town = withPublicProse(town, composePublicProse(town));
 }, 120_000);
 
 /**
@@ -576,54 +587,107 @@ const desktopShape = (perView) => Object.fromEntries(
 // field; reached census-1b by the merge 950b75014) Institutions 65 -> 62 · b8fdcd3d5 (census-1e unit 1, the registry goal
 // lookup resolves through the one rule: a stable entry under an active crisis is refused and the NPC keeps its role
 // goal) NPCs 31 -> 23. sub14 follows measured.
+// ── RE-MEASURED 2026-11-09 (SW-B7b, the economy desk's public branch lit; the walk is the SHARED page, `readOnly` with no
+// saveId, so the fixture is stamped as its save stamps it): Economics 42 -> 46, Daily Life 0 -> 1; Resources holds (the
+// rated `strategicValue` line left, DS-ECO-11's draw stands in its place). No token moved.
+// ── RE-MEASURED 2026-11-09 (SW-B7b, the general desk's public branch lit, the same stamped walk): Overview 11/10 -> 12/11,
+// Economics 46 -> 47, Outlook 2 -> 3, History 13 -> 15. No token moved.
+// ── RE-MEASURED 2026-11-09 (SW-B7b fourth seat, the stressors desk's public branch lit, `stressors:overview`): Overview
+// 12/11 -> 13/12 (the crisis card's condition line). No token moved.
+// ── RE-MEASURED 2026-11-09 (SW-B7b fourth seat, the defense desk's public branch lit, `defense:*`): Defense 25/25 ->
+// 35/35 (the eight lenses' shipped lines; T2-20's static line left). No token moved.
+// ── RE-MEASURED 2026-11-09 (SW-B7b fourth seat, the power desk's public branch lit, `power:desk` / `power:governance`):
+// Power 29/28 -> 33/32. No token moved.
+// ── RE-MEASURED 2026-11-09 (SW-B7b fourth seat, the faith desk's public branch lit, `warFaith:faith`): Faith 1/1 ->
+// 2/2. No token moved.
+// ── RE-MEASURED 2026-11-10 (STYLE-2-MERGE point 25, URBAN-FIX B-P1 1b3436acd composed with SW-B7b's lit general desk): the
+// licence row passes the fixture town's receipt, so DS-GEN-11's contradiction line leaves the Outlook: Outlook 3/3 -> 2/2.
+// Green on the lane alone (its base predates the lit desk); confirmed by removing the row in the stage. No token moved.
+// ── RE-MEASURED 2026-11-12 (STYLE-2-MERGE-8): no token moved; the COHERENCE-QUARREL merge d4723749a (STYLE-2-MERGE point 42; lane/coherence-quarrel-2026-11-11 at 1c7b5786c, record
+// docs/shift-records/2026-11-12-style-2-merge-42-coherence-quarrel.json) draws ONE hook per quarrel from the issue's own hooks, so
+// the fixture town's quarrel hooks print two fewer lines: Summary/Plot Hooks 89 -> 87; every other view holds. Re-keyed BY IDENTITY
+// at the merge by the chair's ruling on STOP 42 (2026-11-12), measured by this file's own walk.
+// ── RE-MEASURED 2026-11-12 (COHERENCE-POWERS-4, the lane's whole suite; bisected per view by this file's own walk at every
+// first-parent commit of lane/coherence-powers-2026-11-11 that touches src): no token moved; every line uses proseFontSize or
+// chromeFontSize and the floors arm reads zero violations. The dual-hat law's cast moves the fixture city's lines:
+// rule A, 23a2015d4 (World/NPCs +3, World/Relationships +1 prose +1 chrome); the dual hat, e0c8bb357 (NPCs +1, Relationships
+// +1 chrome); cure (i), 04334d6ef, the office face no longer minted beside the leading house (NPCs -7, Relationships -2 prose
+// -5 chrome, Summary/Overview +1 chrome line, one Plot Hooks prose line now judged chrome, Systems/Institutions +1 prose); the
+// two hats on the seat row, 4509d4add (Systems/Power +1 prose). F3 (c67c8319e) and every other lane commit move nothing.
+// Desktop: Overview 13 -> 14, Institutions 71 -> 72, Power 33 -> 34, NPCs 284 -> 281, Relationships 178 -> 174.
+// ── RE-MEASURED 2026-11-13 (COHERENCE-POWERS-5, bisected by this file's own walk at each of the fifth seat's commits that
+// touch src, 463eb0b04 green): the N1 commit, c0b46646e, alone moves a count — the fixture city's seat-holder now always
+// carries its seat line on the card (World/NPCs +1 prose); no later commit moves a count; no token moved; the floors arm
+// reads zero violations.
+// Desktop: NPCs 281 -> 282.
+// ── RE-MEASURED 2026-11-13 (STYLE-2-MERGE point 47, the COHERENCE-AGREE merge 22cc9ef7d; §2f's NAMED CLASS 1, its three checks):
+// no token moved; the floors arm reads zero violations and every sub-12 count reads 0, mobile and desktop. Only views that print
+// a leaf the lane declares move, each in the declared direction and by EXACTLY the lane's own movement at its tip 69b53decd
+// (measured there against its base): Summary/Overview +1 prose, Summary/Plot Hooks +2 prose, Systems/Economics -1 chrome,
+// World/History +1 prose — views that print families the draft declares (the summary's economy and situation, the plot hooks,
+// the trade cards, the history); the single lines themselves are not traced here.
+// Desktop: Overview 14 -> 15, Plot Hooks 87 -> 89, Economics 47 -> 46, History 15 -> 16.
 const DESKTOP_BASELINE = Object.freeze({
-  "Summary/Overview":    { measured: 11, sub14: 10 },
+  // RE-MEASURED ONCE at MERGE-TRAIN's final tip (2026-11-09, the allegiance train; BRIEF-MERGE-TRAIN §0.3, GREEN-BASE §4.4's form),
+  // the same walk: World/NPCs 220 -> 284, bisected on the desktop walk at the merge points' stages — 220 at the base, CAR1 +3
+  // (the hidden-allegiance badge rows, 4e55421ea), CAR2/CAR3 -1, CAR4 +62 (every card's short and long goal, A9 03ff59084); every other
+  // view and point 0. The floors arm read one violation first (car 1's badge line at 12px prose), cured before this pin moved.
+  // RE-MEASURED ONCE at MERGE-WAVE's GREEN-BASE point (2026-11-08, GREEN-BASE §4.4), the final merged tree: the people car's rows
+  // (8dff691f3: World/NPCs 23 -> 220, World/Relationships 61 -> 178, Summary/Plot Hooks 37 -> 88 with the car's one hook per face)
+  // and the wave's lines (Systems/Power 22 -> 30, Services 109 -> 104, Resources 2 -> 1, Outlook 1 -> 2; World/Daily Life 1 -> 0,
+  // WAVE-RULINGS #37). Per-view attribution to single lanes is PLAUSIBLE (not bisected per view). No desktop FS token moved.
+  "Summary/Overview":    { measured: 15, sub14: 14 },
   // T2-25 measured it at 1 under Systems/Causes; X-12 moves it here (BUILD-T1), same count.
-  "Summary/Foundations": { measured:  1, sub14:  1 },
+  "Summary/Foundations": { measured: 1, sub14: 1 },
   // 37 -> 38 (2026-10-31, the G2 + W2-LINKS composition at the integration merge): one conflict line more in
   // the fixture now that conflict parties are power factions (X-26a); no token moved. Relationships likewise 59 -> 60.
-  "Summary/Plot Hooks":  { measured: 37, sub14: 37 },
-  "Systems/Services":    { measured: 109, sub14: 109 },
-  "Systems/Institutions": { measured: 62, sub14: 62 }, // T1-14, measured 2026-10-30 by this walk
+// ── RE-MEASURED 2026-11-10 (STYLE-2-MERGE-4, point 24; SW-8 RENAME-POWERS C9-6 d12e20112, the power generators):
+// Plot Hooks 88 -> 89 on both arms. Red on SW-8's own tip b951ce7da and unkeyed there; bisected over the lane: green at
+// c85fd3f85, red at d12e20112 (the conflict hooks reworded). No token moved; sub12 0.
+  "Summary/Plot Hooks":  { measured: 89, sub14: 89 },
+  "Systems/Services":    { measured: 104, sub14: 104 },
+  "Systems/Institutions": { measured: 72, sub14: 72 }, // T1-14, measured 2026-10-30 by this walk; 62 → 71 OWNER-WORDS-DOSSIER item 1 (2026-11-09): the nine face rows each gain the "Connection:" label, a line of its own
   // 47 -> 40 (2026-10-30, UX consolidation U1, RULINGS-T2 T2-1..T2-8): no desktop token moved; the page lost
   // its duplicates (Economy/Food tiles, the Supply Chains rows, the Resource Exploitation chips, the plot hooks).
-  "Systems/Economics":   { measured: 42, sub14: 42 },
+  "Systems/Economics":   { measured: 46, sub14: 46 },
   // 28 -> 22 (2026-10-30, UX consolidation U5, T2-17..T2-19): Current Tensions, Active Conflicts and the
   // duplicate governing rows left the page; no token moved.
-  "Systems/Power":       { measured: 22, sub14: 21 },
+  "Systems/Power":       { measured: 34, sub14: 33 }, // 30 -> 29 OWNER-WORDS-DOSSIER item 3 (2026-11-09): the vignette line and the DS-POW-1/2 readings became one paragraph
   // 28 -> 27 (2026-10-30, UX consolidation U6, T2-20..T2-23): the duplicate order headline, the first-survey
   // beside line, the Economic Backing row and the empty-state line left the page; no token moved.
   // 27 -> 26 (2026-10-30, cure lane T11 U3, VERIFIER F11 / X-2): the fixture town's one order & crime plot
   // hook left the Defense page for the Plot Hooks tab; no token moved (bisected: 317307cc green, 987602c0 moves it).
   // 25 -> 26 (2026-11-04, REGISTERS-4 door 7, measured at the composed tip): DEFENSE-3's X-52 food endurance line
   // (8e9de64b9, the siege reading of the stores) adds one prose line on WIRING-2's re-measure; no token moved.
-  "Systems/Defense":     { measured: 25, sub14: 25 },
+  "Systems/Defense":     { measured: 35, sub14: 35 },
   // 5 -> 4 (2026-10-30, UX consolidation U2, T2-10): the "Depleted. Consumed locally, export potential
   // reduced" label shortened to "Depleted" and fell under the walk's measuring length; no token moved.
-  "Systems/Resources":   { measured:  2, sub14:  2 },
+  "Systems/Resources":   { measured: 1, sub14: 1 },
   // 4 -> 5 (2026-09-19, browser pass 3 car 4): the receipt strip's culture line now reads the
   // identity's LABEL ("South-Asian-inspired") instead of a key, so it crosses the walk's
   // forty-five characters and is measured — and it is prose, so it takes the prose floor.
   // 5 -> 2 (2026-10-30, UX consolidation U3, T2-11..T2-14): the coaching caption and the generation receipt
   // (moved to Versions) left the page; no token moved.
-  "Systems/Outlook":     { measured:  1, sub14:  1 },
+  "Systems/Outlook":     { measured: 2, sub14: 2 },
   // 1 -> 2 (2026-10-30, UX consolidation): the posture sentence became a word (T2-26) and the dependence
   // block arrived from Outlook (T2-15): its DS-DEF-9 line (prose) and its stamped title (chrome).
   // 0 -> 4 (2026-11-03, lane MAGIC, chair ruling 2): the dependence block reads the one reliance reading
   // instead of the siege/famine/plague flag, so the fixture's block renders on the public walk: its title
   // (chrome), its static explanation and its chain notes (prose). No token moved.
-  "Systems/Magic":       { measured:  4, sub14:  4 },
-  "World/NPCs":          { measured: 23, sub14: 23 },
+  // 4 -> 5 (2026-11-12, W2-A-LEAVES, census row 3): the reliance line names its source (" · supplied by …"), so it
+  // crosses the walk's forty-five characters and is measured; its 700 weight judges it chrome. No token moved.
+  "Systems/Magic":       { measured: 5, sub14: 5 },
+  "World/NPCs":          { measured: 282, sub14: 282 },
   // 60 -> 61 / 58 -> 59 and mobile 58 -> 59 (2026-10-31, G3 at the merge, GS-1): the eight-variant tie lines wrap one
   // line longer in the fixture; no token moved.
-  "World/Relationships": { measured: 61, sub14: 59 },
-  "World/Faith":         { measured:  1, sub14:  1 },
-  "World/Daily Life":    { measured:  1, sub14:  1 },
-  "World/Rumors & News": { measured:  1, sub14:  1 }, // X-7a launch teaser (BUILD-T1 registers it always)
-  "World/War":           { measured:  1, sub14:  1 }, // X-7a launch teaser, same
-  "World/Traditions":    { measured:  1, sub14:  1 },
-  "World/History":       { measured: 13, sub14: 13 },
-  "Notes/Chronicle":     { measured:  0, sub14:  0 }, // 1 -> 0: the empty-state pitch cut (BUILD-T3 U4)
+  "World/Relationships": { measured: 174, sub14: 172 },
+  "World/Faith":         { measured: 2, sub14: 2 },
+  "World/Daily Life":    { measured: 1, sub14: 1 },
+  "World/Rumors & News": { measured: 1, sub14: 1 }, // X-7a launch teaser (BUILD-T1 registers it always)
+  "World/War":           { measured: 1, sub14: 1 }, // X-7a launch teaser, same
+  "World/Traditions":    { measured: 1, sub14: 1 },
+  "World/History":       { measured: 16, sub14: 16 },
+  "Notes/Chronicle":     { measured: 0, sub14: 0 }, // 1 -> 0: the empty-state pitch cut (BUILD-T3 U4)
 });
 
 /**
@@ -685,41 +749,95 @@ const DESKTOP_BASELINE = Object.freeze({
 // ── RE-MEASURED 2026-11-07 (LANDING-R2, the pool census composed): content moved, no token did; sub12 stays zero and the
 // floors arm is green. The same two steps as the desktop note: e152ee220 census-4 R8 (Institutions prose 64 -> 61) and
 // b8fdcd3d5 census-1e unit 1 (NPCs prose 30 -> 22); chrome and both sub-floor counts hold.
+// ── RE-MEASURED 2026-11-09 (SW-B7b, the economy desk's public branch lit; the fixture now STAMPED as its save stamps it):
+// Economics prose 34 -> 38 (the desk's shipped lines; the legacy situationDesc lead left), Daily Life 0 -> 1 (DS-ECO-8);
+// the food-security line took the tab's prose floor (proseFontSize), so sub12 stays zero and the floors arm is green.
+// ── RE-MEASURED 2026-11-09 (SW-B7b, the general desk's public branch lit): Overview prose 10 -> 11, Economics 38 -> 39
+// (DS-GEN-18's craft line), Outlook 2 -> 3, History 13 -> 15; chrome and both sub-floor counts hold.
+// ── RE-MEASURED 2026-11-09 (SW-B7b fourth seat, the stressors desk's public branch lit): Overview prose 11 -> 12 (the
+// crisis card's condition line); chrome and both sub-floor counts hold.
+// ── RE-MEASURED 2026-11-09 (SW-B7b fourth seat, the defense desk's public branch lit): Defense prose 23 -> 33; chrome
+// and both sub-floor counts hold.
+// ── RE-MEASURED 2026-11-09 (SW-B7b fourth seat, the power desk's public branch lit): Power prose 28 -> 32; chrome and
+// both sub-floor counts hold.
+// ── RE-MEASURED 2026-11-09 (SW-B7b fourth seat, the faith desk's public branch lit): Faith prose 1 -> 2; chrome and
+// both sub-floor counts hold.
+// ── RE-MEASURED 2026-11-10 (STYLE-2-MERGE point 25, URBAN-FIX B-P1 1b3436acd composed with SW-B7b's lit general desk): DS-GEN-11's
+// contradiction line leaves the fixture town's Outlook: prose 3 -> 2; chrome and both sub-floor counts hold.
+// ── RE-MEASURED 2026-11-12 (STYLE-2-MERGE-8): chrome and both sub-floor counts hold (0 in every view); the COHERENCE-QUARREL merge d4723749a (STYLE-2-MERGE point 42; lane/coherence-quarrel-2026-11-11 at 1c7b5786c, record
+// docs/shift-records/2026-11-12-style-2-merge-42-coherence-quarrel.json) draws ONE hook per quarrel from the issue's own hooks, so
+// the fixture town's quarrel hooks print two fewer lines: Summary/Plot Hooks 89 -> 87; every other view holds. Re-keyed BY IDENTITY
+// at the merge by the chair's ruling on STOP 42 (2026-11-12), measured by this file's own walk.
+// ── RE-MEASURED 2026-11-12 (COHERENCE-POWERS-4, the lane's whole suite; bisected per view by this file's own walk at every
+// first-parent commit of lane/coherence-powers-2026-11-11 that touches src): no token moved; every line uses proseFontSize or
+// chromeFontSize and the floors arm reads zero violations. The dual-hat law's cast moves the fixture city's lines:
+// rule A, 23a2015d4 (World/NPCs +3, World/Relationships +1 prose +1 chrome); the dual hat, e0c8bb357 (NPCs +1, Relationships
+// +1 chrome); cure (i), 04334d6ef, the office face no longer minted beside the leading house (NPCs -7, Relationships -2 prose
+// -5 chrome, Summary/Overview +1 chrome line, one Plot Hooks prose line now judged chrome, Systems/Institutions +1 prose); the
+// two hats on the seat row, 4509d4add (Systems/Power +1 prose). F3 (c67c8319e) and every other lane commit move nothing.
+// Mobile: sub12 0 in every view; sub14 moves only with chrome (Overview 0 -> 1, Plot Hooks 0 -> 1, Relationships 39 -> 36).
+// ── RE-MEASURED 2026-11-13 (COHERENCE-POWERS-5, bisected by this file's own walk at each of the fifth seat's commits that
+// touch src, 463eb0b04 green): the N1 commit, c0b46646e, alone moves a count — the fixture city's seat-holder now always
+// carries its seat line on the card (World/NPCs +1 prose); no later commit moves a count; no token moved; the floors arm
+// reads zero violations.
+// Mobile: World/NPCs prose 280 -> 281.
+// ── RE-MEASURED 2026-11-13 (STYLE-2-MERGE point 47, the COHERENCE-AGREE merge 22cc9ef7d; §2f's NAMED CLASS 1, its three checks):
+// no token moved; the floors arm reads zero violations and every sub-12 count reads 0, mobile and desktop. Only views that print
+// a leaf the lane declares move, each in the declared direction and by EXACTLY the lane's own movement at its tip 69b53decd
+// (measured there against its base): Summary/Overview +1 prose, Summary/Plot Hooks +2 prose, Systems/Economics -1 chrome,
+// World/History +1 prose — views that print families the draft declares (the summary's economy and situation, the plot hooks,
+// the trade cards, the history); the single lines themselves are not traced here.
+// Mobile: Overview prose 12 -> 13, Plot Hooks prose 86 -> 88, Economics chrome 8 -> 7 (sub14 8 -> 7), History prose 15 -> 16.
 const MOBILE_BASELINE = Object.freeze({
-  "Summary/Overview":    { prose: 10, chrome: 1, sub14: 0, sub12: 0 },
-  "Summary/Foundations": { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
+  // RE-MEASURED ONCE at MERGE-TRAIN's final tip (2026-11-09, the allegiance train; BRIEF-MERGE-TRAIN §0.3, GREEN-BASE §4.4's form),
+  // the same walk: World/NPCs 219 -> 283, bisected on the desktop walk at the merge points' stages — 220 at the base, CAR1 +3
+  // (the hidden-allegiance badge rows, 4e55421ea), CAR2/CAR3 -1, CAR4 +62 (every card's short and long goal, A9 03ff59084); every other
+  // view and point 0. The floors arm read one violation first (car 1's badge line at 12px prose), cured before this pin moved.
+  // RE-MEASURED ONCE at MERGE-WAVE's GREEN-BASE point (2026-11-08, GREEN-BASE §4.4), the same walk at 375px: the people car's
+  // rows (8dff691f3) and GREEN-BASE's 27b858fd9 (the car's rows on the PROSE floor) with the wave's lines; World/Relationships
+  // chrome 3 -> 39 (the car's tie cards' chrome rows, all >= 12px). sub12 stays 0 in every view; the floors arm reads 0 violations.
+  "Summary/Overview":    { prose: 13, chrome: 2, sub14: 1, sub12: 0 },
+  "Summary/Foundations": { prose: 1, chrome: 0, sub14: 0, sub12: 0 },
   // 37 -> 38 and Relationships 57 -> 58 (2026-10-31, the G2 + W2-LINKS composition at the merge): one conflict
   // line more (X-26a); both sub-floor counts stay where they were.
-  "Summary/Plot Hooks":  { prose: 37, chrome: 0, sub14: 0, sub12: 0 },
-  "Systems/Services":    { prose: 108, chrome: 1, sub14: 0, sub12: 0 },
-  "Systems/Institutions": { prose: 61, chrome: 1, sub14: 0, sub12: 0 },
+  "Summary/Plot Hooks":  { prose: 88, chrome: 1, sub14: 1, sub12: 0 },
+  "Systems/Services":    { prose: 103, chrome: 1, sub14: 0, sub12: 0 },
+  "Systems/Institutions": { prose: 71, chrome: 1, sub14: 0, sub12: 0 }, // 61 → 70 OWNER-WORDS-DOSSIER item 1 (2026-11-09): the nine "Connection:" labels, each at the prose floor
   // prose 39 -> 33 (2026-10-30, UX consolidation U1): the duplicate blocks left the page; no floor moved.
-  "Systems/Economics":   { prose: 34, chrome: 8, sub14: 8, sub12: 0 },
+  "Systems/Economics":   { prose: 39, chrome: 7, sub14: 7, sub12: 0 },
   // prose 27 -> 21 (2026-10-30, UX consolidation U5): tensions, conflicts and the duplicate rows left.
-  "Systems/Power":       { prose: 21, chrome: 1, sub14: 0, sub12: 0 },
+  "Systems/Power":       { prose: 33, chrome: 1, sub14: 0, sub12: 0 }, // 29 -> 28 OWNER-WORDS-DOSSIER item 3 (2026-11-09): the governance block is one paragraph
   // prose 27 -> 25, chrome 1 -> 2 (2026-10-30, UX consolidation U6): the criminal faction is now one
   // name-and-band chrome line (12px floor, lawful) instead of a description paragraph.
   // prose 25 -> 24 (2026-10-30, cure lane T11 U3, VERIFIER F11 / X-2): the inline order & crime hook is cut.
   // prose 23 -> 24 (2026-11-04, REGISTERS-4 door 7, measured at the composed tip): DEFENSE-3's X-52 food endurance
   // line (8e9de64b9) adds one prose line on WIRING-2's re-measure; the sub-floor counts hold.
-  "Systems/Defense":     { prose: 23, chrome: 2, sub14: 2, sub12: 0 },
+  // prose 23 -> 24, chrome 2 -> 1, sub14 2 -> 1 (2026-11-09, SW-8 RENAME-POWERS C1+C2, re-measured at the lane's
+  // C2 tip): the criminal line's label "Criminal faction:" became "Underworld:" (C2), one chrome row fewer at
+  // 375px (the shorter line falls under MIN_CHARS), and one prose line more, PLAUSIBLY the renamed "Rival
+  // Gangs" operation taking its own gang note (C1) where it shared the catch-all (not bisected);
+  // sub12 stays 0 and the floors arm reads 0 violations.
+  // STYLE-2-MERGE point 24: composed with SW-B7b's Defense +10 (33 at point 23): prose 33 -> 34, chrome 1, sub14 1.
+  "Systems/Defense":     { prose: 34, chrome: 1, sub14: 1, sub12: 0 },
   // chrome 1 -> 0 (2026-10-30, UX consolidation U2): the long Depleted label is now one word.
-  "Systems/Resources":   { prose:  2, chrome: 0, sub14: 0, sub12: 0 },
+  "Systems/Resources":   { prose: 1, chrome: 0, sub14: 0, sub12: 0 },
   // prose 5 -> 2 (2026-10-30, UX consolidation U3): the caption and the receipt left the page.
-  "Systems/Outlook":     { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
+  "Systems/Outlook":     { prose: 2, chrome: 0, sub14: 0, sub12: 0 },
   // prose 1, chrome 0 -> 1 (2026-10-30, UX consolidation): the dependence block's line and its title.
   // prose 0 -> 3, chrome 0 -> 1 (2026-11-03, lane MAGIC, chair ruling 2): the dependence block reads the one
   // reliance reading; its title is the 12px chrome line, its explanation and chain notes take the prose floor.
-  "Systems/Magic":       { prose:  3, chrome: 1, sub14: 1, sub12: 0 },
-  "World/NPCs":          { prose: 22, chrome: 1, sub14: 0, sub12: 0 },
-  "World/Relationships": { prose: 58, chrome: 3, sub14: 3, sub12: 0 },
-  "World/Faith":         { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
-  "World/Daily Life":    { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
-  "World/Rumors & News": { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
-  "World/War":           { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
-  "World/Traditions":    { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
-  "World/History":       { prose: 13, chrome: 0, sub14: 0, sub12: 0 },
-  "Notes/Chronicle":     { prose:  0, chrome: 0, sub14: 0, sub12: 0 }, // 1 -> 0: the pitch cut (BUILD-T3 U4)
+  // chrome 1 -> 2 (2026-11-12, W2-A-LEAVES, census row 3): the reliance line names its source, crosses the walk's
+  // forty-five characters and is measured, chrome by its 700 weight at the prose size (sub14 and sub12 hold).
+  "Systems/Magic":       { prose: 3, chrome: 2, sub14: 1, sub12: 0 },
+  "World/NPCs":          { prose: 281, chrome: 1, sub14: 0, sub12: 0 },
+  "World/Relationships": { prose: 138, chrome: 36, sub14: 36, sub12: 0 },
+  "World/Faith":         { prose: 2, chrome: 0, sub14: 0, sub12: 0 },
+  "World/Daily Life":    { prose: 1, chrome: 0, sub14: 0, sub12: 0 },
+  "World/Rumors & News": { prose: 1, chrome: 0, sub14: 0, sub12: 0 },
+  "World/War":           { prose: 1, chrome: 0, sub14: 0, sub12: 0 },
+  "World/Traditions":    { prose: 1, chrome: 0, sub14: 0, sub12: 0 },
+  "World/History":       { prose: 16, chrome: 0, sub14: 0, sub12: 0 },
+  "Notes/Chronicle":     { prose: 0, chrome: 0, sub14: 0, sub12: 0 }, // 1 -> 0: the pitch cut (BUILD-T3 U4)
 });
 
 describe('THE PHONE FLOORS — every dossier view', () => {

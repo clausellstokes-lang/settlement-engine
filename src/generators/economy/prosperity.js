@@ -16,6 +16,9 @@ import {
   isTradeRouteDisconnected,
 } from '../../domain/tradeRouteSemantics.js';
 import { resolveGenerationWorldLaw } from '../generationContext.js';
+import { resolveSibling } from '../../domain/facts/drawDeclared.js';
+import { factsOf } from '../../domain/facts/factsOf.js';
+import { PROSPERITY_RANK } from '../../domain/prosperityRank.js';
 
 
 // Public compatibility name retained for every generator caller. The vocabulary
@@ -24,16 +27,65 @@ import { resolveGenerationWorldLaw } from '../generationContext.js';
 export const priorityToCategory = priorityBand;
 
 
-// deriveEconomicSituationDesc
+// deriveEconomicSituationDesc — `prosperityLabel` (COHERENCE-AGREE-3, F11) is the computed label the
+// record prints beside the line; where the economy slider's trade line contradicts it, the label wins.
 export const deriveEconomicSituationDesc = (
   config = {},
   _tier = 'town',
   institutions = [],
   foodSecurity = null,
-) => {
+  prosperityLabel = null,
+) => resolveSibling(situationDescOf(config, _tier, institutions, foodSecurity, prosperityLabel), PROSPERITY_LINE_SIBLINGS, {
+  facts: () => factsOf({ institutions }), poolId: 'prosperity:PROSPERITY_LINE_SIBLINGS', surface: 'economics', drawKind: 'T',
+});
+
+/**
+ * THE TRADE LINE AND THE PROSPERITY LABEL, ONE ANSWER (COHERENCE-AGREE-3, REVIEW-AGREE F11). The trade
+ * lines below are chosen by a band of the economy slider; the label beside them is computed. Where the
+ * slider's line says the opposite of the label ("Commerce is sluggish" beside "Prosperous"), the line is
+ * re-keyed to the label's own band: a label of Comfortable or better takes no slow-trade line, a label of
+ * Poor or worse no busy-trade line. The label's meaning is the ladder's (domain/prosperityRank.js ::
+ * PROSPERITY_RANK); this reads its rank and adds no meaning of its own.
+ */
+const SLOW_TRADE = Object.freeze(['low', 'very_low']);
+const BUSY_TRADE = Object.freeze(['high', 'very_high']);
+/** The band of the trade line a label's rank speaks for. @param {number} rank */
+const tradeBandOfRank = (rank) => (rank >= PROSPERITY_RANK.Wealthy ? 'very_high' : rank >= PROSPERITY_RANK.Prosperous ? 'high' : rank >= PROSPERITY_RANK.Moderate ? 'medium' : rank >= PROSPERITY_RANK.Poor ? 'low' : 'very_low');
+/**
+ * Does a trade line's band contradict the prosperity label? @param {string} band @param {unknown} label
+ * @returns {boolean}
+ */
+export const tradeBandContradictsLabel = (band, label) => {
+  const rank = PROSPERITY_RANK[/** @type {keyof typeof PROSPERITY_RANK} */ (String(label || ''))];
+  if (typeof rank !== 'number') return false;
+  return (SLOW_TRADE.includes(band) && rank >= PROSPERITY_RANK.Comfortable) || (BUSY_TRADE.includes(band) && rank <= PROSPERITY_RANK.Poor);
+};
+/**
+ * The trade lines by the band each is chosen for, read by the coherence receipt's agreement arm
+ * (generationCoherence.js) with `tradeBandContradictsLabel`, so the arm and this writer give one answer.
+ * Matched by opening words, so a market line's declared twin is read as its original.
+ * @type {ReadonlyArray<readonly [RegExp, string]>}
+ */
+export const TRADE_LINE_BANDS = Object.freeze([
+  [/^Trade is what this settlement lives on\./, 'very_high'],
+  [/^Trade is brisk, the guilds are well run/, 'high'],
+  [/^Commerce is sluggish;/, 'low'],
+  [/^Little coin changes hands here/, 'very_low'],
+  [/^Cut off as it is, the settlement runs itself well/, 'high'],
+  [/^With no outside trade, the settlement struggles/, 'low'],
+]);
+
+/** @param {string} econCat @param {unknown} label @returns {string} the band the trade line is chosen by */
+const tradeBandFor = (econCat, label) => (tradeBandContradictsLabel(econCat, label)
+  ? tradeBandOfRank(Number(PROSPERITY_RANK[/** @type {keyof typeof PROSPERITY_RANK} */ (String(label))]))
+  : econCat);
+
+/** @param {any} config @param {string} _tier @param {any[]} institutions @param {any} foodSecurity @param {unknown} [prosperityLabel] @returns {string} */
+const situationDescOf = (config, _tier, institutions, foodSecurity, prosperityLabel = null) => {
   const flags = getInstFlags(config, institutions);
   const stress = getStressFlags(config, institutions);
   const econCat = priorityToCategory(flags.economyOutput);
+  const tradeCat = tradeBandFor(econCat, prosperityLabel);
   const crimeCat = priorityToCategory(flags.criminalEffective);
   const route = config?.tradeRouteAccess || 'road';
   const worldLaw = resolveGenerationWorldLaw(null, config);
@@ -60,62 +112,62 @@ export const deriveEconomicSituationDesc = (
     : null;
 
   if (primaryStress === 'under_siege')
-    return 'All normal economic activity is suspended. Markets are closed, merchant caravans have stopped arriving, and whatever currency existed is being redirected toward survival. The only economic question is the arithmetic of remaining supplies.';
+    return 'The market is shut and the caravans have stopped coming. What coin there is goes on staying alive, and the only question anyone asks is how long the stores will last.';
   if (primaryStress === 'famine')
-    return 'The economy is structured around food scarcity. Those with grain have power. Those without are making increasingly desperate decisions. Normal market activity continues in a technical sense. Prices are simply at levels that exclude most of the population.';
+    return 'Food is short, and those with grain hold the power. The market still opens, but most people cannot afford what is on the stalls, and those without grain are growing desperate.';
   if (primaryStress === 'occupied') {
     const extractionChannel = worldLaw.supportsMaritime()
       ? 'maritime levies'
       : worldLaw.supportsRiverTrade()
         ? 'river tolls and cargo seizures'
         : 'road tolls and seizure powers';
-    return `Revenue flows outward to the occupying authority via ${extractionChannel} and compulsory assessment. Local commerce continues under supervision. The officially stated economic situation differs from the experienced one.`;
+    return `The occupiers take their share through ${extractionChannel}, with forced assessments on top. Local trade goes on under their eye, and things are worse than the official word admits.`;
   }
   if (primaryStress === 'indebted')
-    return "Debt service obligations consume a meaningful share of revenue before any local investment is possible. The creditor's representative has effective veto power over fiscal decisions. Economic activity continues but its fruits are partly spoken for before they are earned.";
+    return "Much of what the settlement takes in goes on its debts before anything can be spent at home, and the creditor's agent can block any spending. People still work and trade, but part of what they earn is owed before they earn it.";
   if (primaryStress === 'plague_onset')
-    return "Market activity is reduced by fear and quarantine measures. Supply chains for common goods are disrupted. The economic situation would be manageable if it weren't compounded by the medical crisis. As it is, each problem is making the other worse.";
+    return "Fear of the sickness and the quarantine have emptied the market, and everyday goods are hard to come by. Either trouble alone could be borne; together each makes the other worse.";
   if (primaryStress === 'politically_fractured')
-    return 'Economic activity requires navigating factional lines that did not exist a year ago. Some merchants have aligned with specific factions. Cross-faction trade continues but it is slower and more expensive than it should be.';
+    return 'Trading now means picking a way between rival powers that did not exist a year ago. Some merchants have taken sides. Trade between the sides goes on, but it is slower and dearer than it should be.';
 
   // The gap is the food record's (FOOD-1): what remains AFTER imports and magic, cut where
   // the band cuts it (a private 25 before), and said as what it is.
   const foodGapPct = Number(foodSecurity?.foodRecord?.gapPct ?? foodSecurity?.deficitPct) || 0;
   if (foodGapPct > FOOD_SECURITY_CUTS.importDependent) {
-    return `After imports, ${Math.round(foodGapPct)}% of daily need goes uncovered. Rationing and outside supply are economic necessities; commercial strength in other sectors cannot cover that gap.`;
+    return `Even with what is brought in, people here go short of ${foodGapPct > FOOD_SECURITY_CUTS.deficit ? 'much of' : 'part of'} the food they need each day. The settlement has to ration and buy from outside, and no other trade it has can make that up.`;
   }
 
   if (isolated) {
     const isTownPlus = getTradeRouteFeatures(config?.tier || config?.settType || 'village');
     const hasMagicTrade = hasTeleportationInfra(institutions, config);
     if (isTownPlus && !hasMagicTrade)
-      return 'This settlement is too large to survive in true isolation. Without trade routes, specialist goods cannot be sourced, surpluses cannot be sold, and population density cannot be sustained. The economy is structurally broken.';
+      return 'The settlement is too big to live cut off. With no trade routes it cannot buy what it does not make or sell what it has spare, and it cannot keep this many people fed.';
     if (isTownPlus && hasMagicTrade)
-      return 'Trade flows through magical channels. Teleportation circles and planar contacts replace roads. The economy functions but depends entirely on maintaining that arcane infrastructure.';
+      return 'Goods come and go by magic: teleportation circles and planar contacts do the work of roads. Trade works, but only as long as the circles do.';
     if (stress.stateCrime)
-      return 'Internal production is suppressed by institutional extraction. What little surplus exists flows upward rather than into communal welfare.';
-    if (econCat === 'very_high' || econCat === 'high')
-      return 'Despite isolation, internal production is well-organised. Skilled crafts, efficient agriculture, and communal resource management keep the settlement self-sufficient.';
-    if (econCat === 'low' || econCat === 'very_low')
-      return 'The settlement struggles to sustain itself without outside trade. Resources are tightly rationed and growth is impossible.';
-    return 'The settlement meets its own needs without external trade, though surpluses are modest and specialist goods are unavailable.';
+      return 'Those in power take so much that little gets made, and what little is left over goes to them.';
+    if (tradeCat === 'very_high' || tradeCat === 'high')
+      return 'Cut off as it is, the settlement runs itself well: skilled crafts, well-worked fields and shared stores keep it fed and supplied.';
+    if (tradeCat === 'low' || tradeCat === 'very_low')
+      return 'With no outside trade, the settlement struggles to feed and supply itself. Everything is rationed, and there is nothing to spare for growing.';
+    return 'The settlement feeds and supplies itself without outside trade, but it has little to spare and cannot get what it does not make.';
   }
 
   if (stress.theocraticEconomy)
     return 'The church controls most economic activity. Land, markets, and trade flow through religious institutions. Commerce is present but the church sets the terms.';
   if (stress.merchantCriminalBlur)
-    return 'Commerce is vigorous and the distinction between legitimate trade and criminal enterprise is largely academic. The wealthiest operators play both sides.';
+    return 'Trade is brisk, and it is hard to say where honest business ends and crime begins. The richest traders work both sides.';
   if (stress.stateCrime)
-    return 'The official economy appears functional. The reality is that institutional extraction (confiscations, forced sales, and selective taxation) suppresses productive activity.';
-  if (econCat === 'very_high')
-    return 'Commerce is the lifeblood of this settlement. Markets are active at all hours and guild influence reaches every trade.';
-  if (econCat === 'high')
-    return 'Trade is vigorous and the guilds are well-organized, generating steady civic revenue.';
-  if (econCat === 'low') return 'Commerce is sluggish; markets meet infrequently and many crafts are in decline.';
-  if (econCat === 'very_low')
-    return 'The economy is barely functional. Barter replaces coin and few outsiders bother to trade here.';
+    return "On paper the settlement's trade looks healthy. In fact, seizures, forced sales and unfair taxes keep people from making or selling much.";
+  if (tradeCat === 'very_high')
+    return 'Trade is what this settlement lives on. The markets are busy at all hours, and the guilds have a hand in every craft.';
+  if (tradeCat === 'high')
+    return "Trade is brisk, the guilds are well run, and the settlement's coffers fill steadily.";
+  if (tradeCat === 'low') return 'Commerce is sluggish; markets meet infrequently and many crafts are in decline.';
+  if (tradeCat === 'very_low')
+    return 'Little coin changes hands here; people barter, and few outsiders bother to come and trade.';
   if (crimeCat === 'high' || crimeCat === 'very_high')
-    return 'Official commerce is moderate but a thriving shadow economy undercuts legitimate trade.';
+    return 'Honest trade gets by, but a busy black market undercuts it.';
   return 'Trade proceeds at an ordinary pace for a settlement of this size.';
 };
 
@@ -332,3 +384,42 @@ const complexityByExports = (tier, incomeSourceCount, exportCount, hasMarketInst
               : exportCount >= 3
                 ? 'Subsistence with surplus'
                 : 'Subsistence — survival economy';
+
+/**
+ * DECLARED SIBLINGS (COHERENCE-AGREE, 2026-11-12). The economic situation's lines that name the
+ * town's market need the market home's atom (`domain/facts/market.js`); each twin says the same
+ * thing for a town with no market. Measured on 360 births (seeds agree-<tier>-<i>) before the
+ * change: "markets meet infrequently" printed in 7 towns with no market, "The market still opens"
+ * in 2, the rest in none. Keyed by the printed text; resolved through `resolveSibling` above.
+ * `alsoNeeds` declares what BOTH the line and its twin name besides the market (COHERENCE-AGREE-4): the
+ * theocratic pair names the church, so each needs the sacred house — true wherever it prints, since its
+ * branch (`priorityHelpers.js :: theocraticEconomy`) fires only beside a cathedral or a monastery.
+ * @param {string} text @param {string} twin @param {ReadonlyArray<string>} [alsoNeeds]
+ */
+const marketSet = (text, twin, alsoNeeds = []) => Object.freeze([
+  Object.freeze({ text, needs: Object.freeze(['market', ...alsoNeeds]) }),
+  Object.freeze(alsoNeeds.length
+    ? { text: twin, twinOf: text, needs: Object.freeze([...alsoNeeds]), excludes: Object.freeze(['market']) }
+    : { text: twin, twinOf: text, excludes: Object.freeze(['market']) }),
+]);
+export const PROSPERITY_LINE_SIBLINGS = Object.freeze({
+  'The market is shut and the caravans have stopped coming. What coin there is goes on staying alive, and the only question anyone asks is how long the stores will last.': marketSet(
+    'The market is shut and the caravans have stopped coming. What coin there is goes on staying alive, and the only question anyone asks is how long the stores will last.',
+    'The caravans have stopped coming and nothing is bought or sold. What coin there is goes on staying alive, and the only question anyone asks is how long the stores will last.'),
+  'Food is short, and those with grain hold the power. The market still opens, but most people cannot afford what is on the stalls, and those without grain are growing desperate.': marketSet(
+    'Food is short, and those with grain hold the power. The market still opens, but most people cannot afford what is on the stalls, and those without grain are growing desperate.',
+    'Food is short, and those with grain hold the power. What food is sold costs more than most people can pay, and those without grain are growing desperate.'),
+  'Fear of the sickness and the quarantine have emptied the market, and everyday goods are hard to come by. Either trouble alone could be borne; together each makes the other worse.': marketSet(
+    'Fear of the sickness and the quarantine have emptied the market, and everyday goods are hard to come by. Either trouble alone could be borne; together each makes the other worse.',
+    'Fear of the sickness and the quarantine keep people from trading, and everyday goods are hard to come by. Either trouble alone could be borne; together each makes the other worse.'),
+  'The church controls most economic activity. Land, markets, and trade flow through religious institutions. Commerce is present but the church sets the terms.': marketSet(
+    'The church controls most economic activity. Land, markets, and trade flow through religious institutions. Commerce is present but the church sets the terms.',
+    'The church controls most economic activity. Land and trade flow through religious institutions. Commerce is present but the church sets the terms.',
+    ['sacredHouse']),
+  'Trade is what this settlement lives on. The markets are busy at all hours, and the guilds have a hand in every craft.': marketSet(
+    'Trade is what this settlement lives on. The markets are busy at all hours, and the guilds have a hand in every craft.',
+    'Trade is what this settlement lives on. Goods change hands at all hours, and the guilds have a hand in every craft.'),
+  'Commerce is sluggish; markets meet infrequently and many crafts are in decline.': marketSet(
+    'Commerce is sluggish; markets meet infrequently and many crafts are in decline.',
+    'Commerce is sluggish; little is bought or sold and many crafts are in decline.'),
+});

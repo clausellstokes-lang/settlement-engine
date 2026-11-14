@@ -73,7 +73,7 @@ const LEDGER_PROPS = {
   onView: () => {}, deleteId: null, setDeleteId: () => {}, deleteConfirmed: () => {},
   campaigns: [], addToCampaign: () => {}, removeFromCampaign: () => {},
   onReactivate: () => {}, canReactivate: false, reactivatingId: null,
-  onCanonize: () => {}, onAdvanceTime: () => {}, onCreateCampaign: () => {}, onNavigate: () => {},
+  onCanonize: () => {}, onCreateCampaign: () => {}, onNavigate: () => {},
   canManageCampaigns: false, selectMode: false, selectedIds: new Set(), onToggleSelect: () => {},
 };
 

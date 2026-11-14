@@ -189,7 +189,17 @@ describe('composeSettlementQuickGuide', () => {
     // ⚠ RE-RECORDING IS A CONTENT DECISION, NEVER A FORMALITY: read the changed scope
     // against its phrase in SCOPE_PHRASE, move the phrase if the terms moved, and only
     // then re-record, with the reason written down.
-    const SCOPE_TEXT_DIGEST = '912bcf91c35b';
+    // 912bcf91c35b -> 0268f53d29cd at W5 HIS's style pass (2026-11-07, the owner's style law, STYLE-AUDIT §2b-5
+    // row 30): every scope lost its "design grammar" filing word and reads as a plain sentence; each keeps its
+    // terms, so every SCOPE_PHRASE paraphrase was re-read and still holds (none moved).
+    // 0268f53d29cd -> 48db1bc0fdfc, same pass: the east-asian scope drops "Walled" (the soak's coh:defense-words read it
+    // on 35 wall-less towns); its paraphrase never named walls and still holds.
+    // 48db1bc0fdfc -> 05b9e6d78861 at COHERENCE-PRESUME (2026-11-12): the Greek scope's agora stands "at the
+    // centre", not "by the harbor" (it printed in 14 corpus towns with no water), and the Mesoamerican scope has
+    // "waterworks and gardens" round its plaza, not "markets" (2 marketless towns). Both paraphrases were re-read:
+    // each is declared on its own (the Greek harbour needs navigable, with its inland twin; the Mesoamerican
+    // market-and-waterworks needs market, with its twin), so neither presumes and neither moved.
+    const SCOPE_TEXT_DIGEST = '05b9e6d78861';
     const scopesInKeyOrder = Object.values(CULTURE_PROFILES).map((profile) => profile.scope);
     const digest = (parts) => createHash('sha256').update(parts.join('\n')).digest('hex').slice(0, 12);
 
@@ -433,9 +443,31 @@ describe('composeSettlementQuickGuide', () => {
     }).identitySentence).toBe(
       'Testholm is a Norse-inspired town of 1,200 people, built around the Town hall and the water, on assembly and what the season allows.',
     );
-    // a culture whose phrase never says "the hall" is untouched by a seat
+    // a culture whose phrase never says "the hall" is untouched by a seat; STYLE-2 A·O2: a roster
+    // with no guild prints no guild (the record is read before the line speaks)
     expect(cultureScopeLine({ culturalIdentity: { key: 'germanic', label: 'Germanic-inspired' }, institutions: [{ name: 'Town hall' }] }))
-      .toBe('Germanic-inspired, built in timber and stone, and run by guild and estate.');
+      .toBe('Germanic-inspired, built in timber and stone, and run by its estates.');
+  });
+
+  it('STYLE-2 A·O2: the culture scope line reads tier, terrain and route before it speaks, and the seed picks its frame', () => {
+    // soak1k-11, Gankhuushari: a steppe metropolis of 93,360 printed "a pastoral life half-settled and half-moving"
+    const metropolis = cultureScopeLine({ tier: 'metropolis', culturalIdentity: { key: 'steppe', label: 'Steppe-inspired' }, config: { terrainType: 'mountain', tradeRouteAccess: 'mountain_pass' } });
+    expect(metropolis).toBe('Steppe-inspired, built on clan lines, held by clan and caravan.');
+    expect(cultureScopeLine({ tier: 'hamlet', culturalIdentity: { key: 'steppe', label: 'Steppe-inspired' } })).toMatch(/pastoral life/);
+    // soak1k-3, Al-karez: an Arabic river port read "the caravan road"
+    expect(cultureScopeLine({ tier: 'town', culturalIdentity: { key: 'arabic', label: 'Arabic-inspired' }, config: { terrainType: 'riverside', tradeRouteAccess: 'port' } }))
+      .toMatch(/on endowed institutions and the river trade\.$/);
+    // the seed chooses: frame 0 without one; the same seed the same frame forever; the facts never move
+    const greek = { culturalIdentity: { key: 'greek', label: 'Greek-inspired' }, config: { terrainType: 'riverside', tradeRouteAccess: 'road' } };
+    const lines = new Set();
+    for (let i = 0; i < 40; i++) {
+      const line = cultureScopeLine({ ...greek, _seed: `soak1k-${i}` });
+      expect(line).toBe(cultureScopeLine({ ...greek, _seed: `soak1k-${i}` }));
+      expect(line).toMatch(/^Greek-inspired\b.*agora, on riverside ground, and run by civic association\.$/i);
+      expect(line).not.toMatch(/harbou?r|hillside/); // anchored: the toMatch above proves `line` is the live scope sentence
+      lines.add(line);
+    }
+    expect(lines.size).toBe(5);
   });
 
   it('states how a settlement lives as a sentence, over every food-security label', () => {

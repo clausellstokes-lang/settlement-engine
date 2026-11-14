@@ -35,7 +35,16 @@ describe('the service runs the same core as the worker', () => {
       const serviceRequest = (birth) => ({
         op: 'settlement',
         requestId: null,
-        payload: { fullConfig: birth(config), neighbour: null, seed, contentRuntime: { customContent: {} } },
+        payload: {
+          fullConfig: birth(config),
+          neighbour: null,
+          seed,
+          // engine-generate's birth: the store's standalone vanilla stamp (remote-path R2).
+          contentRuntime: {
+            customContent: {},
+            contentProvenance: { scope: 'standalone', environment: bundle.VANILLA_CONTENT_ENVIRONMENT, bindingHash: null },
+          },
+        },
       });
       const served = bundle.runGenerationRequest(serviceRequest(bundle.birthConfig));
       const local = runGenerationRequest(serviceRequest(birthConfig));

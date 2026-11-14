@@ -16,7 +16,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { basename, join } from 'node:path';
 
 export const MIGRATION_TRAIN_BASE_HEAD = 121;
-export const MIGRATION_TRAIN_REPO_HEAD = 204;
+export const MIGRATION_TRAIN_REPO_HEAD = 210;
 
 const FORWARD_ONLY_REASON = [
   'No automatic schema rollback is admitted for this wave.',
@@ -641,6 +641,204 @@ export const MIGRATION_WAVES = Object.freeze([
     }),
     expectedObjects: Object.freeze([
       Object.freeze({ kind: 'function', name: 'report_engine_generations' }),
+    ]),
+  }),
+  Object.freeze({
+    id: 'retired-faction-public-keys',
+    from: 205,
+    to: 205,
+    purpose: 'The people car (ODQ §934.105, PEOPLE-RULINGS M-1b / M-2) retired the NPC grouping '
+      + '`settlement.factions` and the per-NPC faction fields; the owner\'s word of 2026-11-07: '
+      + 'the export allowlist\'s dead keys go before the deploy. ONE re-stated function: '
+      + 'public._gallery_sanitize_public_json is 189\'s body VERBATIM outside its two allowlist '
+      + 'literals and their comments — public_toplevel loses \'factions\' and npc_allowed loses '
+      + '\'factionAffiliation\' and \'secondaryAffiliation\'. Every change only HIDES; no public '
+      + 'field is added. It creates no table, no column, no policy and no row, and re-points '
+      + 'get_gallery_dossier, get_unlisted_dossier, import_gallery_dossier and '
+      + '_gallery_apply_member_overrides (093) by name with no signature change and no re-grant. '
+      + 'DEPLOYMENT remains the owner\'s manual act (`supabase db push` plus the applied-head '
+      + 'bump in that same act).',
+    rollback: Object.freeze({
+      mode: 'forward-only',
+      reason: [
+        FORWARD_ONLY_REASON,
+        'Like 202 and 203, this wave is one re-stated function and its own @rollback annotation '
+        + 'spells the whole reversal out: recreate 189\'s body verbatim, i.e. the same function '
+        + 'with the three keys restored to its two allowlists — which is why 205 classifies as '
+        + 'documented-manual-reversal rather than taking the wave policy. Nothing is destroyed '
+        + 'on reversal: the function holds no state and no row was minted; the only consequence '
+        + 'is that the three retired keys project publicly again, exactly as today.',
+      ].join(' '),
+    }),
+    expectedObjects: Object.freeze([
+      Object.freeze({ kind: 'function', name: '_gallery_sanitize_public_json' }),
+    ]),
+  }),
+  Object.freeze({
+    id: 'public-card-veil-bit',
+    from: 206,
+    to: 206,
+    purpose: 'FIX-PUBLIC-VEIL (the chair\'s ruling of 2026-11-07, shape (a)): every writer of a card\'s '
+      + '`institution` stamps `institution.veiled` at birth from one predicate (src/domain/people/cardVeil.js), '
+      + 'and the public dossier sanitizer reads the bit. ONE re-stated function: '
+      + 'public._gallery_sanitize_public_json is 205\'s body VERBATIM outside two new constants '
+      + '(npc_house_keys, npc_house_named), two locals and the per-row house rule — an NPC object\'s '
+      + '`institution` and `memberships` are public only where `institution.veiled` is false, and a face '
+      + 'whose `institution` is an object with the bit true or absent loses `title` and `role` '
+      + '(fail-closed). A card with no institution record projects exactly as at 205. THE SECOND SEAT (the '
+      + 'chair\'s ruling of 2026-11-08) adds one ROOT pass inside the same function: a hidden power\'s own row, the '
+      + 'conflicts and crisis stakes naming it, and its name in any other public string VALUE (masked by walking '
+      + 'the document — never a key, never the settlement\'s own name; amended before first apply by the pre-deploy '
+      + 'review of 2026-11-10, as in 207 and 210) leave the public JSON, every row stamped hidden leaves, and a '
+      + 'veiled face\'s ties lose its title (npc1Role / npc2Role). It creates no '
+      + 'table, no column, no policy and no row, and re-points get_gallery_dossier, get_unlisted_dossier, '
+      + 'import_gallery_dossier and _gallery_apply_member_overrides (093) by name with no signature '
+      + 'change and no re-grant. DEPLOYMENT remains the owner\'s manual act after 205 (`supabase db '
+      + 'push` plus the applied-head bump in that same act).',
+    rollback: Object.freeze({
+      mode: 'forward-only',
+      reason: [
+        FORWARD_ONLY_REASON,
+        'Like 202, 203 and 205, this wave is one re-stated function and its own @rollback annotation '
+        + 'spells the whole reversal out: recreate 205\'s body verbatim, i.e. the same function without '
+        + 'the two house constants and the per-row rule — which is why 206 classifies as '
+        + 'documented-manual-reversal rather than taking the wave policy. Nothing is destroyed on '
+        + 'reversal: the function holds no state and no row was minted; the only consequence is that '
+        + 'every face\'s title and role project publicly again and no face\'s institution or memberships do.',
+      ].join(' '),
+    }),
+    expectedObjects: Object.freeze([
+      Object.freeze({ kind: 'function', name: '_gallery_sanitize_public_json' }),
+    ]),
+  }),
+  Object.freeze({
+    id: 'public-hall-capture-veil',
+    from: 207,
+    to: 207,
+    purpose: 'ALLEGIANCE-CAR2, J-20 (the chair\'s ruling of 2026-11-08): the hall-capture state is derived from the '
+      + 'ruling three\'s HIDDEN allegiances (src/domain/people/hallCapture.js), so the public dossier carries none of '
+      + 'it. ONE re-stated function: public._gallery_sanitize_public_json is 206\'s body VERBATIM plus one root-pass '
+      + 'block — powerStructure.criminalCaptureState and every factions[].captureState are stripped, and every '
+      + 'factionRelationships[] row carrying a captureState or typed corrupted is dropped whole. It creates no '
+      + 'table, no column, no policy and no row; _gallery_world_snapshot_is_safe is untouched. DEPLOYMENT remains '
+      + 'the owner\'s manual act after 206 (`supabase db push` plus the applied-head bump in that same act).',
+    rollback: Object.freeze({
+      mode: 'forward-only',
+      reason: [
+        FORWARD_ONLY_REASON,
+        'Like 202, 203, 205 and 206, this wave is one re-stated function and its own @rollback annotation '
+        + 'spells the whole reversal out: recreate 206\'s body verbatim, i.e. the same function without the '
+        + 'hall-capture block — which is why 207 classifies as documented-manual-reversal rather than taking the '
+        + 'wave policy. Nothing is destroyed on reversal: the function holds no state and no row was minted; the '
+        + 'only consequence is that the capture state and the capture relation rows project publicly again.',
+      ].join(' '),
+    }),
+    expectedObjects: Object.freeze([
+      Object.freeze({ kind: 'function', name: '_gallery_sanitize_public_json' }),
+    ]),
+  }),
+  Object.freeze({
+    id: 'party-link-independent-idempotent-veiled',
+    from: 208,
+    to: 208,
+    // THE ENTRY THE LANE OMITTED (SW-B7a PARTY-LINK; written by STYLE-2-MERGE at its merge point on the chair's ruling of
+    // 17:2x): the purpose QUOTES the migration's own header, trimmed by elision only.
+    purpose: 'SW-B7a PARTY-LINK, from the migration\'s own header: "208 — the party link: idempotent, veiled, owner-aware, '
+      + 'independent of the listing … Recreates the five settlement party-link RPCs of migration 168 and derives 168\'s '
+      + '`visibility` column from the slug. The map RPCs … are untouched." (c) "an existing slug is returned unchanged with '
+      + 'no write at all; only rotate_settlement_unlisted_slug mints anew, only revoke_settlement_unlisted ends it." (d) '
+      + '"THE LINK HONOURS THE VEIL AND NEVER WIDENS. … Now the read keeps 168\'s sanitized base, runs '
+      + '_gallery_apply_member_overrides over it with the sanitized JSON as its only source (so it can hide, never '
+      + 'reveal), and returns gallery_member_overrides (and gallery_share_dm = false)" — the overrides less the '
+      + 'export\'s frozen snapshot (amended before first apply by the pre-deploy review of 2026-11-10). '
+      + '(f) "get_unlisted_dossier returns is_owner = (s.user_id = '
+      + 'auth.uid()), false for anon" (g) "share no longer touches is_public, is_featured or visibility-as-listing … The '
+      + 'column `visibility` is DERIVED: \'unlisted\' exactly when unlisted_slug is not null, held by a check constraint '
+      + 'after a backfill". The backfill UPDATE and the check constraint settlements_visibility_derived have no kind of '
+      + 'their own in this manifest; the constraint is carried on its table. DEPLOYMENT remains the owner\'s manual act '
+      + '(`supabase db push` plus the applied-head bump in that same act), after 207.',
+    rollback: Object.freeze({
+      mode: 'forward-only',
+      reason: [
+        FORWARD_ONLY_REASON,
+        'Like 202–207, this wave\'s own @rollback annotation spells the whole reversal out, quoted: "re-create '
+        + 'share_settlement_unlisted, rotate_settlement_unlisted_slug, revoke_settlement_unlisted, get_unlisted_dossier '
+        + 'and list_my_unlisted_dossiers at their migration-168 bodies, and `alter table public.settlements drop '
+        + 'constraint if exists settlements_visibility_derived`. No data is lost either way: the backfill only re-states '
+        + 'visibility from unlisted_slug, and no slug is minted, moved or dropped by this migration." — which is why 208 '
+        + 'classifies as documented-manual-reversal rather than taking the wave policy.',
+      ].join(' '),
+    }),
+    expectedObjects: Object.freeze([
+      Object.freeze({ kind: 'function', name: 'share_settlement_unlisted' }),
+      Object.freeze({ kind: 'function', name: 'rotate_settlement_unlisted_slug' }),
+      Object.freeze({ kind: 'function', name: 'revoke_settlement_unlisted' }),
+      Object.freeze({ kind: 'function', name: 'get_unlisted_dossier' }),
+      Object.freeze({ kind: 'function', name: 'list_my_unlisted_dossiers' }),
+      Object.freeze({ kind: 'table', name: 'settlements' }),
+    ]),
+  }),
+  Object.freeze({
+    id: 'surveyor-premium-only',
+    from: 209,
+    to: 209,
+    purpose: 'TIER-PARITY-FIX (the owner, 2026-11-09: the Surveyor is "Premium only"; law (7) of the '
+      + 'owner\'s tier law): ONE re-stated SECURITY DEFINER function. public.has_surveyor_entitlement() '
+      + 'is 201\'s body with the row test narrowed and one disjunct added: staff first (201, unchanged), '
+      + 'then an active premium tier through 024\'s current_user_has_premium_access() (tier premium or '
+      + 'is_founder — Founders as lifetime premium), then an active surveyor_entitlements row whose '
+      + 'source is \'grant\' (the admin concierge path) — a purchased \'subscription\' row no longer '
+      + 'admits by itself. It is the gate the nine AI-control edge functions and the BYOK RPCs (159, '
+      + '191) route through, so the client\'s isSurveyorTier and the server agree by construction. It '
+      + 'creates no table, no column, no policy and no row, mints and deletes no entitlement, and '
+      + 'leaves the surveyor_stage_enabled() kill switch, the per-task metering and the dark '
+      + 'SURVEYOR_PLAN untouched. DEPLOYMENT remains the owner\'s manual act (`supabase db push` plus '
+      + 'the applied-head bump in that same act), after 207 and 208.',
+    rollback: Object.freeze({
+      mode: 'forward-only',
+      reason: [
+        FORWARD_ONLY_REASON,
+        'Like 201, this wave is one re-stated function and its own @rollback annotation spells the '
+        + 'whole reversal out: re-run 201\'s body verbatim (staff OR any active row) — which is why 209 '
+        + 'classifies as documented-manual-reversal rather than taking the wave policy. Nothing is '
+        + 'destroyed on reversal: the function holds no state and no row was minted or deleted; the '
+        + 'only consequence is that a bare Cartographer and a Founder are refused on the AI layer again '
+        + 'and a purchased row admits again.',
+      ].join(' '),
+    }),
+    expectedObjects: Object.freeze([
+      Object.freeze({ kind: 'function', name: 'has_surveyor_entitlement' }),
+    ]),
+  }),
+  // 208 and 209 land with their own lanes' entries (SW-B7a, TIER-PARITY-FIX); this lane writes 210's alone.
+  Object.freeze({
+    id: 'public-prose-text-projection',
+    from: 210,
+    to: 210,
+    purpose: '210 — the public dossier carries the owner\'s composed blocks as text (publicProse). '
+      + 'STYLE-RULINGS-2 B10(a), lane SW-B7b PROJECTION; the chair\'s ruling of 2026-11-09 12:5x: the paid-surface '
+      + 'gate (§885.3, publicDossier ⇒ no state prose) is LIFTED for the gallery page and the players\' link, as a '
+      + 'TEXT PROJECTION. The composed blocks are drawn owner-side (the player audience, the record\'s own seed) at '
+      + 'every save and carried as strings in `settlements.data.publicProse` … The seed posture (099/121) stands: '
+      + 'the seed never travels; only the drawn sentences do. A mechanical re-statement of 207\'s '
+      + '`_gallery_sanitize_public_json` body (latest wins) with ONE token added to the top-level allowlist: '
+      + '\'publicProse\'. Deeper levels keep the recursive denylist, so a key under publicProse that matches a '
+      + 'private token is stripped, fail-closed. … `_gallery_apply_member_overrides` (093, 208\'s twin) calls this '
+      + 'function by name and is unchanged. DEPLOYMENT remains the owner\'s manual act after 207, 208 and 209 '
+      + '(`supabase db push` plus the applied-head bump in that same act).',
+    rollback: Object.freeze({
+      mode: 'forward-only',
+      reason: [
+        FORWARD_ONLY_REASON,
+        'Like 202, 203, 205, 206 and 207, this wave is one re-stated function and its own @rollback annotation '
+        + 'spells the whole reversal out: re-apply 207\'s body verbatim, i.e. the same function without '
+        + '\'publicProse\' in public_toplevel — which is why 210 classifies as documented-manual-reversal rather '
+        + 'than taking the wave policy. Nothing is destroyed on reversal: the function holds no state; the public '
+        + 'page then falls silent where the composed blocks stood, as at 207.',
+      ].join(' '),
+    }),
+    expectedObjects: Object.freeze([
+      Object.freeze({ kind: 'function', name: '_gallery_sanitize_public_json' }),
     ]),
   }),
 ]);

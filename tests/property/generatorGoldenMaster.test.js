@@ -18,6 +18,182 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-13 — STYLE-2-MERGE RECORD 47, THE COHERENCE-AGREE MERGE OVER THE INTEGRATION BRANCH, THROUGH THE SIGNED DOOR (ODQ §934.105, THE STYLE WAVE'S MERGE, STYLE-2-MERGE;
+ *   record docs/shift-records/2026-11-13-style-2-merge-47-coherence-agree.json; the chair signs under the owner's delegation, vetoable).
+ *   525 of 525 rows (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84) against record 46's post-state. THE CAUSE, ONE (first-parent step 22cc9ef7d): the COHERENCE-AGREE merge (lane/coherence-agree-2026-11-11 at 69b53decd; one fact, one answer: the town's own drawn record overrides a terrain or institution table, and a fact has one reader). LAW 2's SECOND CASE (the lane cut from 3575cf061): measured at the merge, the draft's '525 of 525' exactly. FIELD-DIFFED: resourceAnalysis and config's rolled resources, simulationTrace, economicState, economicViability, defenseProfile, culturalIdentity, the re-dealt holders' institutions, npcs, relationships, services, quarters, powers, conflicts, stress casts, history and arrival scene, activeConditions, the pressure line, and the derived coherence receipt, isolation support and structural violations; every family the draft declares.
+ *   Written from the staged tree S47 (the tree of 9e2ae9035 with the door paths carried from the branch). 5ef18089.. -> 7b7089fd..
+ *
+ * 2026-11-13 — STYLE-2-MERGE RECORD 46, THE COHERENCE-POWERS MERGE OVER THE INTEGRATION BRANCH, THROUGH THE SIGNED DOOR (ODQ §934.105, THE STYLE WAVE'S MERGE, STYLE-2-MERGE;
+ *   record docs/shift-records/2026-11-13-style-2-merge-46-coherence-powers.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   393 of 525 rows (thorp 24, hamlet 12, village 84, town 105, city 84, metropolis 84) against record 43's post-state. THE CAUSE, ONE (first-parent step 6aeaa4154): the COHERENCE-POWERS merge (lane/coherence-powers-2026-11-11 at 313c67e2b; the owner's dual-hat law: the leader comes from a house of the town and keeps its hat, the powers stand on the houses). FIELD-DIFFED: npcs, relationships, conflicts, capture states, the stress casts, the coherence receipt, the trace, the prominent relationship and the pressure line, the families the draft declares.
+ *   Written from the staged tree S46 (the tree of 6aeaa4154 with the door paths carried from the branch). 083542bb.. -> 5ef18089..
+ *
+ * 2026-11-12 — STYLE-2-MERGE RECORD 43, THE COHERENCE-PRESUME MERGE OVER THE INTEGRATION BRANCH, THROUGH THE SIGNED DOOR (ODQ §934.105, THE STYLE WAVE'S MERGE, STYLE-2-MERGE;
+ *   record docs/shift-records/2026-11-12-style-2-merge-43-coherence-presume.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   505 of 525 rows (thorp 78, hamlet 84, village 84, town 105, city 76, metropolis 78) against record 42's post-state. THE CAUSE, ONE (first-parent step f922124d0): the COHERENCE-PRESUME merge (lane/coherence-presume-2026-11-11 at 02c5f8fbd; a line names a thing the town does not have, its components named in the record). FIELD-DIFFED: text leaves only (culture, NPC names and roles and the ties that read them, quarters, history, institution texts, arrival, pressure, criminal services); no band, label or score.
+ *   Written from the staged tree S43 (the tree of f922124d0 with the door paths carried from the branch). 6f8317a8.. -> 083542bb..
+ *
+ * 2026-11-12 — STYLE-2-MERGE RECORD 42, THE COHERENCE-QUARREL MERGE OVER THE INTEGRATION BRANCH, THROUGH THE SIGNED DOOR (ODQ §934.105, THE STYLE WAVE'S MERGE, STYLE-2-MERGE;
+ *   record docs/shift-records/2026-11-12-style-2-merge-42-coherence-quarrel.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   476 of 525 rows (thorp 72, hamlet 84, village 84, town 68, city 84, metropolis 84) against record 27's post-state. THE CAUSE, ONE (first-parent step d4723749a): the COHERENCE-QUARREL merge (lane/coherence-quarrel-2026-11-11 at 1c7b5786c; cures 1-4: the quarrels' cast-declared issues with hooks of their own, the touched power's clause, the smuggling hook's tellings). FIELD-DIFFED: conflicts[] and powerStructure.conflicts[] issue/stakes/desc/plotHooks, economicState.safetyProfile.plotHooks[]; no other leaf.
+ *   Written from the staged tree S42 (the tree of d4723749a with the door paths carried from the branch). 97936ac1.. -> 6f8317a8..
+ *
+ * 2026-11-09 — STYLE-2-MERGE RECORD 27, THE SW-9b-B MERGE OVER THE INTEGRATION BRANCH, THROUGH THE SIGNED DOOR (ODQ §934.105, THE STYLE WAVE'S MERGE, STYLE-2-MERGE;
+ *   record docs/shift-records/2026-11-10-style-2-merge-27-sw9b-b.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   167 of 525 rows (village 12, city 84, metropolis 71) against record 25's post-state. THE CAUSE, ONE (first-parent step ee364b3ef): the SW-9b-B merge (lane/style-2-sw9b-b-2026-11-09 at df52ccd34; b23e4e91b, the cast's fixed reason instigatorBacked). FIELD-DIFFED: stress/stressors cast.roles[].reason, 0 non-string leaves.
+ *   Written from the staged tree S27 (the tree of ee364b3ef with the door paths carried from the branch). a1374044.. -> 97936ac1..
+ *
+ * 2026-11-09 — STYLE-2-MERGE RECORD 25, THE URBAN-FIX MERGE OVER THE INTEGRATION BRANCH, THROUGH THE SIGNED DOOR (ODQ §934.105, THE STYLE WAVE'S MERGE, STYLE-2-MERGE;
+ *   record docs/shift-records/2026-11-10-style-2-merge-25-urban-fix.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   387 of 525 rows (thorp 45, hamlet 57, village 57, town 60, city 84, metropolis 84) against record 24's post-state. THE CAUSE, ONE (first-parent step fe81a843e): the URBAN-FIX merge (lane/urban-fix-2026-11-09 at 9ee7df1ba; B-P1, C-1, D-1, D-1b). FIELD-DIFFED: culturalIdentity.foodways 297, generationCoherenceReceipt 217 (findings removed only, 231; needs_review -> pass 167), history.currentTensions 1; every other leaf a string.
+ *   Written from the staged tree S25 (the tree of fe81a843e with the door paths carried from the branch). 5020a5aa.. -> a1374044..
+ *
+ * 2026-11-09 — STYLE-2-MERGE RECORD 24, THE SW-8 RENAME-POWERS MERGE OVER THE INTEGRATION BRANCH, THROUGH THE SIGNED DOOR (ODQ §934.105, THE STYLE WAVE'S MERGE, STYLE-2-MERGE;
+ *   record docs/shift-records/2026-11-10-style-2-merge-24-sw8.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   525 of 525 rows (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84) against record 22's post-state. THE CAUSE, ONE (first-parent step c0433a1c7): the SW-8 RENAME-POWERS merge (lane/style-2-rename-powers-2026-11-09 at b951ce7da; the owner's map C1-C10, C10b). FIELD-DIFFED: eleven string paths, 0 non-string leaves.
+ *   Written from the staged tree S24 (the tree of c0433a1c7 with the door paths carried from the branch). 2908b7a3.. -> 5020a5aa..
+ *
+ * 2026-11-09 — STYLE-2-MERGE RECORD 22, THE SW-6 CRISIS-SURFACES MERGE OVER THE INTEGRATION BRANCH, THROUGH THE SIGNED DOOR (ODQ §934.105, THE STYLE WAVE'S MERGE, STYLE-2-MERGE;
+ *   record docs/shift-records/2026-11-09-style-2-merge-22-sw6.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   525 of 525 rows (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84) against record 19's post-state. THE CAUSE, ONE (first-parent step ac1442a3d): the SW-6 CRISIS-SURFACES merge (lane/style-2-crisis-surfaces-2026-11-09 at 828ade53f; its generator causes the components: the crisis cast's reasons and npcStructure's position and constraint pools). FIELD-DIFFED: stress/stressors cast.roles[].reason and cast.stakes[].reason 516 rows, npcs[].structuralPosition and npcs[].activeConstraint 255 rows, string leaves only.
+ *   Written from the staged tree S22 (the tree of ac1442a3d with the door paths carried from the branch). 16c01856.. -> 2908b7a3..
+ *
+ * 2026-11-09 — STYLE-2-MERGE RECORD 19, THE SW-10 HOOKS MERGE OVER THE INTEGRATION BRANCH, THROUGH THE SIGNED DOOR (ODQ §934.105, THE STYLE WAVE'S MERGE, STYLE-2-MERGE;
+ *   record docs/shift-records/2026-11-09-style-2-merge-19-sw10.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   525 of 525 rows (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84) against record 18's post-state. THE CAUSE, ONE (first-parent step 856de8427): the SW-10 HOOKS merge (lane/style-2-hooks-2026-11-09 at f50b7b047; its generator causes the components: the eight person-hook pool causes 4ba2a241d..2a1051b81). FIELD-DIFFED: npcs[].plotHooks[] 525 rows, string leaves only.
+ *   Written from the staged tree S19 (the tree of 856de8427 with the door paths carried from the branch). 21b50e30.. -> 16c01856..
+ *
+ * 2026-11-09 — STYLE-2-MERGE RECORD 17, THE SW-B1 CONTRADICTIONS MERGE OVER THE INTEGRATION BRANCH, THROUGH THE SIGNED DOOR (ODQ §934.105, THE STYLE WAVE'S MERGE, STYLE-2-MERGE;
+ *   record docs/shift-records/2026-11-09-style-2-merge-17-swb1.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   464 of 525 rows (thorp 65, hamlet 84, village 84, town 63, city 84, metropolis 84) against record 16's post-state. THE CAUSE, ONE (first-parent step 0f2cb865c): the SW-B1 CONTRADICTIONS merge (lane/style-2-contradictions-2026-11-09 at 8c650338d; its generator causes the components: P50/P51/powerSiblings 447, P71 29). FIELD-DIFFED: powerStructure.factions[].desc 447 rows and economicViability.metrics.foodBalance.importChannel 29 rows, string leaves only.
+ *   Written from the staged tree S17 (the tree of 0f2cb865c with the door paths carried from the branch). 25824515.. -> 21b50e30..
+ *
+ * 2026-11-09 — STYLE-2-MERGE RECORD 16, THE SW-7 POWER-SIDE MERGE OVER THE INTEGRATION BRANCH, THROUGH THE SIGNED DOOR (ODQ §934.105, THE STYLE WAVE'S MERGE, STYLE-2-MERGE;
+ *   record docs/shift-records/2026-11-09-style-2-merge-16-sw7.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   525 of 525 rows (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84) against point 15's post-state. THE CAUSE, ONE (first-parent step a3062d919): the SW-7 POWER-SIDE merge (lane/style-2-power-side-2026-11-09 at be1f2d6b3; its generator causes the components: the power cards' standing sentences and the Web's narratives, the people's dealing lines, secrets and tie tensions, the catalogue swaps, the economic line and the legacy annotations — the lane's own, 525 composed).
+ *   Written from the staged tree S16 (the tree of a3062d919 with the door paths carried from the branch). 3f587a09.. -> 25824515..
+ *
+ * 2026-11-09 — STYLE-2-MERGE RECORD 9, THE SW-B5 FRAMES MERGE OVER THE INTEGRATION BRANCH, THROUGH THE SIGNED DOOR (ODQ §934.105, THE STYLE WAVE'S MERGE, STYLE-2-MERGE;
+ *   record docs/shift-records/2026-11-09-style-2-merge-9-swb5.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   524 of 525 rows (thorp 84, hamlet 84, village 84, town 104, city 84, metropolis 84) against point 8's post-state. THE CAUSE, ONE (first-parent step 46e0121c2): the SW-B5 FRAMES merge (lane/style-2-frames-2026-11-09 at 09d2fd01d; its generator causes the components: 6a9cf348a the safetyProfile frames 524, d49a59f2c the key-goods leak 36 — the lane's own, 524 composed).
+ *   Written from the staged tree S9 (the tree of 46e0121c2 with the door paths carried from the branch). ab57c9db.. -> 3f587a09..
+ *
+ * 2026-11-09 — STYLE-2-MERGE RECORD 7, THE SW-B2 FIRST-IMPRESSIONS MERGE OVER THE INTEGRATION BRANCH, THROUGH THE SIGNED DOOR (ODQ §934.105, THE STYLE WAVE'S MERGE, STYLE-2-MERGE;
+ *   record docs/shift-records/2026-11-09-style-2-merge-7-swb2.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   110 of 525 rows (thorp 24, hamlet 24, village 24, town 14, city 12, metropolis 12) against point 6's post-state. THE CAUSE, ONE (first-parent step 52da4542c): the SW-B2 FIRST-IMPRESSIONS merge (lane/style-2-first-impressions-2026-11-09 at 249773c5d; its A·O16 causes the components: 443cf4051, b6d48ec0e — the lane's own 147 over its base, 110 on the line; settlementReason alone, field-diffed).
+ *   Written from the staged tree S7 (the tree of 52da4542c with the door paths carried from the branch). b9a9e693.. -> ab57c9db..
+ *
+ * 2026-11-09 — STYLE-2-MERGE RECORD 6, THE SW-5 CRISIS-VANTAGES MERGE OVER THE INTEGRATION BRANCH, THROUGH THE SIGNED DOOR (ODQ §934.105, THE STYLE WAVE'S MERGE, STYLE-2-MERGE;
+ *   record docs/shift-records/2026-11-09-style-2-merge-6-sw5.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   192 of 525 rows (town 24, city 84, metropolis 84) against point 5's post-state. THE CAUSE, ONE (first-parent step a7770ecfe): the SW-5 CRISIS-VANTAGES merge (lane/style-2-crisis-vantages-2026-11-09 at 794846ba5; its unsigned cause the component: e249e565f, npcGenerator's wartime notes and three 'rather than' — the lane's own 194, 192 on the line after car 4's A9 retired two goal lines).
+ *   Written from the staged tree S6 (the tree of a7770ecfe with the door paths carried from the branch). 3bb1c433.. -> b9a9e693..
+ *
+ * 2026-11-09 — STYLE-2-MERGE RECORD 4, THE SW-3 REALM-PROSE MERGE OVER THE INTEGRATION BRANCH, THROUGH THE SIGNED DOOR (ODQ §934.105, THE STYLE WAVE'S MERGE, STYLE-2-MERGE;
+ *   record docs/shift-records/2026-11-09-style-2-merge-4-sw3.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   34 of 525 rows (thorp 1, hamlet 6, village 6, town 7, city 7, metropolis 7; the celtic culture, the arrival line) against point 3's post-state. THE CAUSE, ONE (first-parent step 1ef46ca30): the SW-3 REALM-PROSE merge (lane/style-2-realm-prose-2026-11-09 at d96ae7a41; its unsigned cause the component: 0991cc9e5, ruling A6, the realm prose — the lane's own 34).
+ *   Written from the staged tree S4 (the tree of 1ef46ca30 with the door paths carried from the branch). 13d47ef6.. -> 3bb1c433..
+ *
+ * 2026-11-09 — STYLE-2-MERGE RECORD 3, THE SW-2 INSTITUTIONS MERGE OVER THE INTEGRATION BRANCH, THROUGH THE SIGNED DOOR (ODQ §934.105, THE STYLE WAVE'S MERGE, STYLE-2-MERGE;
+ *   record docs/shift-records/2026-11-09-style-2-merge-3-sw2.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   369 of 525 rows (thorp 12, hamlet 84, town 105, city 84, metropolis 84) against point 2's post-state. THE CAUSE, ONE (first-parent step ef4645832): the SW-2 INSTITUTIONS merge (lane/style-2-institutions-2026-11-09 at 1614661ad; its one unsigned cause the component: 8b38ac2f3, the catalogue law A3, 80 minimal swaps in the institution identity text — the lane's own 369).
+ *   Written from the staged tree S3 (the tree of ef4645832 with the door paths carried from the branch). c46e7d69.. -> 13d47ef6..
+ *
+ * 2026-11-09 — STYLE-2-MERGE RECORD 1, THE CHAIR'S WORDS AT SW-0's POINT, THROUGH THE SIGNED DOOR (ODQ §934.105, THE STYLE WAVE'S MERGE, STYLE-2-MERGE;
+ *   record docs/shift-records/2026-11-09-style-2-merge-1-sw0.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   1 of 525 rows (town 1: town|germanic|plains|crossroads) against the train's final tip's post-state. THE CAUSE, ONE (first-parent step ca15421ff):
+ *   the chair's words at SW-0's point (STOP 1) — the warehouse factor's secret 'never sign the ledger' -> 'never sign the books' (titleSecretsPresentations.js).
+ *   Written from the staged tree S1 (the tree of ca15421ff with the door paths carried from the branch). e8901fee.. -> c46e7d69..
+ *
+ * 2026-11-09 — MERGE-TRAIN RECORD 9, THE ALLEGIANCE-CAR4 MERGE OVER THE INTEGRATION BRANCH, THROUGH THE SIGNED DOOR (ODQ §934.105, THE TRAIN, MERGE-TRAIN;
+ *   record docs/shift-records/2026-11-09-merge-train-9-car4.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   525 of 525 rows (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84) against point 8's post-state. THE CAUSE, ONE (first-parent
+ *   step 824a8ce2f): the ALLEGIANCE-CAR4 merge over the integration branch (lane/allegiance-car4-2026-11-08 at ea012f42d; its two unsigned causes the components: 03ff59084 A9 the goals 525, eabc93dfe item 15 the fallback title's secret 525 — the lane's own figures; write-goals 82796628e and write-people-3 5ee39a56c its components). ATTRIBUTION, ZERO RESIDUE BY CONSTRUCTION: written from the
+ *   staged tree ST9 (the tree of 824a8ce2f with the door paths carried from the branch). daedf3c6.. -> e8901fee..
+ *
+ * 2026-11-09 — MERGE-TRAIN RECORD 3, THE ALLEGIANCE-CAR3 MERGE OVER THE INTEGRATION BRANCH, THROUGH THE SIGNED DOOR (ODQ §934.105, THE TRAIN, MERGE-TRAIN;
+ *   record docs/shift-records/2026-11-09-merge-train-3-car3.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   170 of 525 rows (town 2, city 84, metropolis 84) against record 2's post-state. THE CAUSE, ONE (first-parent
+ *   step c6ded8e3a): the ALLEGIANCE-CAR3 merge over the integration branch (lane/allegiance-car3-2026-11-08 at 6ea8fb318; its unsigned causes the components: e9070d614 organizedCrime 0.10 -> 0.05 170 (fence 128), 8567f490d the round-robin deal (fence 11), 2f89aaeef the boss joins above 4 (fence 1) — the lane's own stage-to-stage figures). ATTRIBUTION, ZERO RESIDUE BY CONSTRUCTION: written from the
+ *   staged tree ST3 (the tree of c6ded8e3a with the door paths carried from the branch). 38229dd6.. -> daedf3c6..
+ *
+ * 2026-11-09 — MERGE-TRAIN RECORD 2, THE ALLEGIANCE-CAR2 MERGE OVER THE INTEGRATION BRANCH, THROUGH THE SIGNED DOOR (ODQ §934.105, THE TRAIN, MERGE-TRAIN;
+ *   record docs/shift-records/2026-11-09-merge-train-2-car2.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   101 of 525 rows (city 32, metropolis 69) against record 1's post-state. THE CAUSE, ONE (first-parent
+ *   step f51058995): the ALLEGIANCE-CAR2 merge over the integration branch (lane/allegiance-car2-2026-11-08 at 46715e751; its three unsigned causes the components: bbb1a4abc A3 the guild's push 105, ce90cf16e A6 the hall-capture state 15, aca93cbc5 the capture rows 15 — the lane's own stage-to-stage figures). ATTRIBUTION, ZERO RESIDUE BY CONSTRUCTION: written from the
+ *   staged tree ST2 (the tree of f51058995 with the door paths carried from the branch). eb2db45f.. -> 38229dd6..
+ *
+ * 2026-11-09 — MERGE-TRAIN RECORD 1, THE ALLEGIANCE-CAR1 MERGE, THROUGH THE SIGNED DOOR (ODQ §934.105, THE TRAIN, MERGE-TRAIN;
+ *   record docs/shift-records/2026-11-09-merge-train-1-car1.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   525 of 525 rows (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84) against the wave's final post-state. THE CAUSE, ONE (first-parent
+ *   step e5f88930b): the ALLEGIANCE-CAR1 merge over the integration branch (lane/allegiance-car1-2026-11-08 at 7395b5dab; its six unsigned
+ *   causes the components: 5902f1a4a the hidden allegiance 258, 5e4f43bb7 the v3 save migration 525 (schemaVersion 3 on every record),
+ *   ec9698796 the receipt's gate 170, 61d065e9e the tie lines' tier words 80, 1515f0b19 the receipt's reason 170 — the lane's own
+ *   stage-to-stage figures). ATTRIBUTION, ZERO RESIDUE BY CONSTRUCTION: written from the staged tree ST1 (the tree of e5f88930b with the
+ *   door paths carried from the branch). 5f77f02f.. -> eb2db45f..
+ *
+ * 2026-11-08 — MERGE-WAVE RECORD 10, THE DOCKS READ (W5 HIS #10's GATE), THROUGH THE SIGNED DOOR (ODQ §934.105, THE WAVE, MERGE-WAVE;
+ *   record docs/shift-records/2026-11-08-merge-wave-10-docks-read.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   37 of 525 rows (town 13, city 12, metropolis 12) against the final tip's (records 8 and 9's post-state). THE CAUSE, ONE (first-parent
+ *   step bcf3e7f8a): the docks were never read: W5 HIS's #10 gate afc024f67 read the flag at the wrong depth, `hasDocks` false on every birth (bcf3e7f8a, generateNarratives.js `.inst.hasPort`). ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree SW10 (the tree of bcf3e7f8a with the door paths carried from
+ *   the branch, the previous record's writes committed). b35d56c0.. -> 5f77f02f..
+ *
+ * 2026-11-08 — MERGE-WAVE RECORD 8, THE FIX-PUBLIC-VEIL MERGE, THROUGH THE SIGNED DOOR (ODQ §934.105, THE WAVE, MERGE-WAVE;
+ *   record docs/shift-records/2026-11-08-merge-wave-8-public-veil.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   525 of 525 rows (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84) against record 7's post-state. THE CAUSE, ONE (first-parent
+ *   step 7e65c7bec): the FIX-PUBLIC-VEIL merge over the integration branch (lane/fix-public-veil-2026-11-07 at eb18cb458; its lane records the components). ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree SW8 (the tree of 7e65c7bec with the door paths carried from
+ *   the branch, the previous record's writes committed). 3c3ba783.. -> b35d56c0..
+ *
+ * 2026-11-08 — MERGE-WAVE RECORD 7, THE FIX-FOOD-ISOLATION MERGE, THROUGH THE SIGNED DOOR (ODQ §934.105, THE WAVE, MERGE-WAVE;
+ *   record docs/shift-records/2026-11-08-merge-wave-7-food-isolation.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   73 of 525 rows (thorp 12, hamlet 12, village 12, town 13, city 12, metropolis 12) against record 6's post-state. THE CAUSE, ONE (first-parent
+ *   step c6e8a4ad6): the FIX-FOOD-ISOLATION merge over the integration branch (lane/fix-food-isolation-2026-11-07 at 7b489f21e; its lane records the components). ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree SW7 (the tree of c6e8a4ad6 with the door paths carried from
+ *   the branch, the previous record's writes committed). ac300c3b.. -> 3c3ba783..
+ *
+ * 2026-11-08 — MERGE-WAVE RECORD 6, THE W7 HOOKS MERGE, THROUGH THE SIGNED DOOR (ODQ §934.105, THE WAVE, MERGE-WAVE;
+ *   record docs/shift-records/2026-11-08-merge-wave-6-w7-hooks.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   525 of 525 rows (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84) against record 5's post-state. THE CAUSE, ONE (first-parent
+ *   step 501c97412): the W7 HOOKS merge over the integration branch (lane/w7-hooks-2026-11-07 at 0313644b3; its lane records the components). ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree SW6 (the tree of 501c97412 with the door paths carried from
+ *   the branch, the previous record's writes committed). 0fa3e014.. -> ac300c3b..
+ *
+ * 2026-11-08 — MERGE-WAVE RECORD 5, THE W5 HIS MERGE, THROUGH THE SIGNED DOOR (ODQ §934.105, THE WAVE, MERGE-WAVE;
+ *   record docs/shift-records/2026-11-08-merge-wave-5-w5-his.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   525 of 525 rows (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84) against record 4's post-state. THE CAUSE, ONE (first-parent
+ *   step e510409b1): the W5 HIS merge over the integration branch (lane/w5-his-2026-11-07 at 46741f9cd; its lane records the components). ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree SW5 (the tree of e510409b1 with the door paths carried from
+ *   the branch, the previous record's writes committed). 3873f90e.. -> 0fa3e014..
+ *
+ * 2026-11-08 — MERGE-WAVE RECORD 4, THE W4 PEOPLE MERGE, THROUGH THE SIGNED DOOR (ODQ §934.105, THE WAVE, MERGE-WAVE;
+ *   record docs/shift-records/2026-11-08-merge-wave-4-w4-people.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   523 of 525 rows (thorp 84, hamlet 84, village 84, town 103, city 84, metropolis 84) against record 3's post-state. THE CAUSE, ONE (first-parent
+ *   step 66c23bfea): the W4 PEOPLE merge over the integration branch (lane/w4-people-2026-11-07 at 665817eae; its lane records the components). ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree SW4 (the tree of 66c23bfea with the door paths carried from
+ *   the branch, the previous record's writes committed). 20eca11e.. -> 3873f90e..
+ *
+ * 2026-11-08 — MERGE-WAVE RECORD 3, THE W3 POW MERGE, THROUGH THE SIGNED DOOR (ODQ §934.105, THE WAVE, MERGE-WAVE;
+ *   record docs/shift-records/2026-11-08-merge-wave-3-w3-pow.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   525 of 525 rows (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84) against record 2's post-state. THE CAUSE, ONE (first-parent
+ *   step 1a160d599): the W3 POW merge over the integration branch (lane/w3-pow-2026-11-07 at 1d8db6ddd; its lane records the components). ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree SW3 (the tree of 1a160d599 with the door paths carried from
+ *   the branch, the previous record's writes committed). 8e80cd6a.. -> 20eca11e..
+ *
+ * 2026-11-08 — MERGE-WAVE RECORD 2, THE W2 DEF MERGE, THROUGH THE SIGNED DOOR (ODQ §934.105, THE WAVE, MERGE-WAVE;
+ *   record docs/shift-records/2026-11-08-merge-wave-2-w2-def.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   422 of 525 rows (thorp 84, hamlet 84, village 84, town 2, city 84, metropolis 84) against record 1's post-state. THE CAUSE, ONE (first-parent
+ *   step 82a4e2856): the W2 DEF merge over the integration branch (lane/w2-def-2026-11-07 at 091b23bb3; its lane records the components). ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree SW2 (the tree of 82a4e2856 with the door paths carried from
+ *   the branch, the previous record's writes committed). 0580a38d.. -> 8e80cd6a..
+ *
+ * 2026-11-08 — MERGE-WAVE RECORD 1, THE W1 ECO MERGE, THROUGH THE SIGNED DOOR (ODQ §934.105, THE WAVE, MERGE-WAVE;
+ *   record docs/shift-records/2026-11-08-merge-wave-1-w1-eco.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   210 of 525 rows (thorp 12, hamlet 12, village 12, town 6, city 84, metropolis 84) against MERGE-CAR record C's post-state. THE CAUSE, ONE (first-parent
+ *   step ea0e269a9): the W1 ECO merge over the integration branch (lane/w1-eco-2026-11-07 at b7e54f1b4; its lane records the components). ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree SW1 (the tree of ea0e269a9 with the door paths carried from
+ *   the branch, the previous record's writes committed). 9be37cae.. -> 0580a38d..
+ *
  * 2026-11-08 — MERGE-CAR RECORD B, THE PEOPLE CAR'S MERGE, THROUGH THE SIGNED DOOR (ODQ §934.105, THE INTEGRATION LANDING, MERGE-CAR;
  *   record docs/shift-records/2026-11-08-merge-car-b-people-car-composition.json; the cloud chair signs under the owner's delegation, vetoable).
  *   525 of 525 rows (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84) against record A's post-state. THE CAUSE, ONE (first-parent

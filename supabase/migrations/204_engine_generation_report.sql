@@ -1,4 +1,9 @@
 -- ────────────────────────────────────────────────────────────────────────────
+-- AMENDED BEFORE FIRST APPLY by the pre-deploy review of 2026-11-10 (finding 8):
+--   `revoke … from public` alone leaves a hosted project's default EXECUTE grants
+--   to anon and authenticated standing; the two roles are now revoked by name
+--   (migration 113's idiom). Pinned: tests/security/engineGenerationReport.pglite.test.js.
+-- ────────────────────────────────────────────────────────────────────────────
 -- 204_engine_generation_report.sql — the READ half of the engine service's cost
 -- log (ENGINE-5 unit 4; docs/DESIGN_ENGINE_SERVICE.md "Every call logged with its
 -- cost; a daily total on the admin analytics panel").
@@ -59,4 +64,5 @@ comment on function public.report_engine_generations() is
   'ENGINE-5 read-only engine service cost line: engine_generate rows today and this month, by op and outcome, from public.analytics_events. Returns no identity. service_role only.';
 
 revoke all on function public.report_engine_generations() from public;
+revoke all on function public.report_engine_generations() from anon, authenticated;
 grant execute on function public.report_engine_generations() to service_role;

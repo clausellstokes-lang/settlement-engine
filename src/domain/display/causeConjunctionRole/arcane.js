@@ -14,324 +14,338 @@
 export const ARCANE_ROLE_CONTENT = {
   underfunded: {
     attributed: [
-      'The patronage dried up, and the adept\'s scruples dried with it; commissions are taken now that were once refused at any price, and the clients come after dark.',
-      'An unfunded tower is an available one: the adept works for whoever pays, and the work has drifted from what the town would recognize as lawful.',
+      'The patrons stopped paying, and the adept stopped turning work away. Commissions once refused at any price are taken now, and the clients come after dark.',
+      'With no patron paying for the tower, the adept works for whoever pays, and the work has drifted past what the town would call lawful.',
     ],
     're-caused': [
-      'What first bent the adept has passed; the dry patronage bends the work now, and the after-dark commissions pay what daylight will not.',
+      'The adept\'s first reason is gone, but now no patron pays, and the after-dark commissions pay what daylight work will not.',
     ],
     reformed: [
       'The patronage returned and the adept refused the dark commissions; the waiting clients were named to the council, deposits returned.',
       'With the tower funded again, the adept came clean; the work done in the dry season was cataloged and, where it could be, undone.',
     ],
     historicized: [
-      'The patronage recovered, but the after-dark clients still knock; the poverty that first opened the door is a memory.',
+      'The patrons pay again, but the after-dark clients still knock, and the adept still takes their work.',
     ],
     'exposed-public': [
       'It is public what the adept sold when the patronage failed, and the commissions are being read out with their buyers attached.',
-      "The dark work is out: the adept's dry-season catalog is in the council's hands, and the town is learning what its coin refused to fund.",
+      "The dark work is out: the adept kept a list of every job taken after dark while no patron paid, and the town is reading it.",
+      "The people who bought the adept's after-dark work are hearing their own names read out in the street, next to what they paid for.",
     ],
     're-adjudicated': [
-      'The syndicate holding the adept is destroyed, but the patronage is still dry, and the dark commissions now settle to a new account.',
+      'Whoever paid the adept before is gone, but now no patron pays for the tower, and the after-dark clients keep the adept in work.',
     ],
   },
   'chain-starved': {
     attributed: [
-      'The reagent trade died with the roads, so the adept buys from resurrection men and worse; the work continues, and the shelves hold things with histories.',
-      'What the craft needs no longer arrives by caravan, and the adept has stopped asking where it arrives from; the suppliers ask no questions either, which is the price of theirs.',
+      'The trade in reagents died with the roads, so the adept buys from grave-robbers and worse. The work goes on, and some things on the shelves were taken from the dead.',
+      'What the craft needs no longer comes by caravan, and the adept has stopped asking where it comes from. The suppliers ask no questions in return.',
     ],
     're-caused': [
-      "The adept's first reason is gone; the dead reagent trade reasons for him now, and the grave-goods suppliers keep the work alive.",
+      "The adept's first reason is gone, but now the roads are closed to the reagent trade, and the grave-robbers keep the work supplied.",
     ],
     reformed: [
       'The reagent trade revived and the adept purged the shelves; what had histories was buried back where it came from, witnessed.',
       'With the caravans running, the adept came clean; the resurrection men lost their best customer and the council gained a list.',
     ],
     historicized: [
-      'The caravans returned, but the adept still buys from the quiet men; the shortage that introduced them is long supplied.',
+      'The caravans are back, but the adept still buys from the grave-robbers.',
     ],
     'exposed-public': [
       'It is public that the adept\'s shelves were stocked by grave-robbers, and the families of the robbed are reading the inventory.',
-      "The supply chain is out: the adept's work ran on plundered graves while the roads were dead, and the town wants its dead accounted.",
+      "It is out that the adept's work ran on goods from robbed graves while the roads were closed, and the town wants to know whose dead they were.",
+      'Families with graves outside the town are asking the adept to their face which of the goods on those shelves came from their own dead.',
     ],
     're-adjudicated': [
-      'The old suppliers are destroyed, but the reagent trade is still dead, and whoever robs graves now inherited the adept\'s custom.',
+      "Whoever supplied the adept before is gone, but the roads are closed now, and whoever robs graves fills the adept's shelves.",
     ],
   },
   depleted: {
     attributed: [
-      'The components ran out, so the adept has been mining the town\'s own wards for parts; the protections still hum, but thinner, and only he knows where the gaps are.',
-      'Every working needs materials, and the materials are gone; the adept strips older enchantments to feed newer ones, and bills the town for wards it no longer fully has.',
+      'The materials ran out, so the adept has been taking parts from the town\'s own wards. The protections still hold, but thinner, and only the adept knows where the gaps are.',
+      'The materials are gone, so the adept strips old enchantments to feed new ones, and still bills the town for wards it no longer fully has.',
     ],
     're-caused': [
-      "The adept's first cause has passed; the empty component stores reason for him now, and the town's wards keep paying the difference.",
+      "The adept's first reason is gone, but now the stores are empty, and the adept keeps stripping the town's wards for parts.",
     ],
     reformed: [
       'The stores were replenished and the adept restored every stripped ward at his own cost, gap by gap, before confessing the map of them.',
       'With components flowing again, the adept came clean; the thinned protections were rebuilt first and explained after.',
     ],
     historicized: [
-      'The stores recovered, but the stripped wards were never made whole; the shortage that excused the mining has passed.',
+      'The stores are full again, but the adept never made the stripped wards whole, and still bills for their upkeep.',
     ],
     'exposed-public': [
       'It is public that the adept cannibalized the town\'s wards and billed for their upkeep, and every household is asking what still protects it.',
-      "The gap map is out: the adept knew exactly where the town stood naked, because he had undressed it, and charged for the clothing.",
+      "It is out that the adept knew exactly where the town's wards had gaps, because the adept made them, and charged for the wards all the same.",
+      'Households that paid for ward upkeep are walking the lines themselves now, looking for the gaps the adept made.',
     ],
     're-adjudicated': [
-      'The syndicate is gone, but the components are still exhausted, and the ward-stripping trade has new beneficiaries.',
+      'Whoever paid the adept before is gone, but now the stores are empty, and the adept goes on stripping the wards for parts.',
     ],
   },
   'trade-strangled': {
     attributed: [
-      'The embargo cannot search what it cannot open, and the adept\'s warded crates open for no customs man; the smugglers pay him per seal, and business is brisk.',
-      'Trade is strangled except where the adept seals it shut; his wards make cargo invisible to inspection, and the runners bid for his calendar.',
+      'The embargo\'s inspectors cannot open what the adept has warded, and the smugglers pay the adept by the seal. Business is brisk.',
+      'The embargo holds everywhere except where the adept\'s wards hide the cargo. The runners compete to book the adept.',
     ],
     're-caused': [
-      'What first held the adept has passed; the embargo holds him now, and every warded crate renews the retainer.',
+      'The adept\'s first reason is gone, but now the embargo chokes the trade, and every warded crate brings another payment.',
     ],
     reformed: [
       'The embargo lifted and the adept broke his own seals for the customs house, then published the warding pattern so it could never serve again.',
       'When trade reopened, the adept came clean; the sealed-crate clients were named, and the craft went back to honest locks.',
     ],
     historicized: [
-      'The embargo is lifted, but the warded crates still move; the strangled trade that commissioned them is done.',
+      'The embargo is over, but the adept still seals crates for the smugglers.',
     ],
     'exposed-public': [
-      'It is public that the adept\'s wards blinded the customs house, and every unopenable crate of the period is being traced to his seal.',
-      "The seals are out: the adept sold invisibility to the contraband trade, and the law is learning how much it never saw.",
+      'It is public that the adept\'s wards blinded the customs inspectors, and every crate no one could open is being traced to the adept\'s seal.',
+      "It is out that the adept hid smuggled cargo from the law, and the law is learning how much it missed.",
+      "The customs inspectors are opening every crate that went through under the adept's seal, and finding what they were kept from seeing.",
     ],
     're-adjudicated': [
-      'The old clients are destroyed, but the trade is still strangled, and the warded-crate business has been re-commissioned by their successors.',
+      "Whoever paid the adept before is gone, but now an embargo chokes the trade, and whoever smuggles pays for the adept's seals.",
     ],
   },
   'levied-away': {
     attributed: [
-      'With the soldiers levied away, the town\'s safety hangs on the adept\'s wards, and the adept has priced accordingly; protection continues for those who pay, and thins for those who cannot.',
-      'The war took the swords and left the spells, and the adept has been renting the difference; the wards play favorites now, street by street.',
+      'With the soldiers away at war, the town\'s safety rests on the adept\'s wards, and the adept charges for them: streets that pay stay protected, and streets that cannot are left thin.',
+      'The war took the soldiers and left the wards, and the adept sells the protection street by street.',
     ],
     're-caused': [
-      "The adept's first cause resolved, but the levy left the town leaning on his wards, and the leaning is now the arrangement's whole weight.",
+      "The adept's first reason is gone, but now the soldiers are away at war, and the town depends on wards the adept sells street by street.",
     ],
     reformed: [
       'The companies returned and the adept evened the wards; every street protected alike, and the favor-payments returned to their payers.',
       'When the strength came home, the adept came clean; the tiered protection was confessed to the council and flattened that week.',
     ],
     historicized: [
-      'The soldiers are back, but the wards still play favorites; the absence that taught them is over.',
+      'The soldiers are back, but the adept still guards only the streets that pay.',
     ],
     'exposed-public': [
-      'It is public that the adept tiered the town\'s protection while its soldiers were at war, and the unpaid streets are counting what they suffered.',
-      "The favor map is out: the wards guarded purses, not people, and the adept drew the boundaries himself.",
+      'It is public that the adept sold the town\'s protection street by street while its soldiers were at war, and the unpaid streets are counting what they suffered.',
+      "It is out that the wards guarded purses, not people, and the adept drew the lines between them.",
+      'The streets left unguarded while the soldiers were away want to know why the next street was protected and theirs was not.',
     ],
     're-adjudicated': [
-      'The syndicate fell, but the strength is still levied away, and the ward-rents now collect to the arrangement\'s new holders.',
+      'Whoever paid the adept before is gone, but now the soldiers are away at war, and the adept goes on selling the wards street by street.',
     ],
   },
   'garrison-drained': {
     attributed: [
-      'The garrison is hollow, and everyone knows the wards are the town\'s real wall; what no one knows is that the adept has sold the survey of their weak seams, twice.',
-      'With the garrison drained, the adept\'s wards matter more than the gates, and their flaws are worth more than their strength; he retails both, to different customers.',
+      'The garrison is hollow, and everyone knows the wards are the town\'s real wall. No one knows the adept has sold the plan of their weak points, twice.',
+      'With the garrison emptied, the wards matter more than the gates, and their weak points are worth more than their strength. The adept sells both, to different buyers.',
     ],
     're-caused': [
-      "The adept's first reason passed, but the garrison hollowed after, and the market for the wards' weak seams now sustains the arrangement.",
+      "The adept's first reason is gone, but now the garrison is thin, and the adept keeps selling word of where the wards are weak.",
     ],
     reformed: [
       'The garrison was refilled and the adept re-cut every seam he had sold, making the surveys worthless; then he confessed the selling.',
       'With the ranks restored, the adept came clean; the sold surveys were bought back or voided, and the wards made honest.',
     ],
     historicized: [
-      'The garrison stands full again, but the sold surveys still circulate; the drain that priced them has ended.',
+      'The garrison is back to strength, but the adept still sells the plans of the wards\' weak points.',
     ],
     'exposed-public': [
       'It is public that the adept sold the map of the wards\' weaknesses while the garrison stood empty, and the town knows its wall had a merchant.',
-      "The surveys are out, with the adept's seal on them: every weak seam in the town's protection, priced and sold to strangers.",
+      "The plans are out, with the adept's seal on them: every weak point in the town's wards, priced and sold to outsiders.",
+      "Every family by the wall knows now that its weak points were sold to outsiders, and that the seller was the town's own adept.",
     ],
     're-adjudicated': [
-      'The old buyers are destroyed, but the garrison is still drained, and the weak-seam trade has found the adept new customers.',
+      "Whoever paid the adept before is gone, but now the garrison is thin, and the adept sells the plans of the wards' weak points to whoever asks.",
     ],
   },
   'siege-scarred': {
     attributed: [
-      'The war buys workings faster than the adept can cast them, and he sells to both camps; the wards he raises for one side are the ones he knows how to breach for the other.',
-      'Under the war\'s pressure the adept\'s craft went to market: fire for one army, shields for the other, and the invoices in different inks.',
+      'The war buys spells faster than the adept can cast them, and the adept sells to both camps. The wards raised for one side are the ones the adept knows how to break for the other.',
+      'With the war pressing, the adept sold to both armies: fire for one, shields for the other.',
     ],
     're-caused': [
-      "The adept's old cause cleared, but the war pressed in, and the two-camp commissions now finance the arrangement.",
+      "The adept's first reason is gone, but now the war presses in, and both camps buy from the adept.",
     ],
     reformed: [
       'The war receded and the adept closed both accounts; the workings sold to each side were disclosed to the town that sat between them.',
       'With the pressure lifted, the adept came clean about the double commissions, and spent the proceeds unbreaching what he had breached.',
     ],
     historicized: [
-      'The war moved on, but both camps still hold the adept\'s workings; he serviced the arsenals of a fight that has ended.',
+      'The war has moved on, but both camps still hold the adept\'s spells, and the adept still keeps them working.',
     ],
     'exposed-public': [
       'It is public that the adept armed both camps, and each army has learned its shields and its enemy\'s fire share an author.',
-      "The double invoices are out: the adept sold the war to itself, and the town caught between the camps has read the totals.",
+      "It is out that the adept sold to both sides of the war, and the town caught between them knows what each side paid.",
+      'Both armies now know the same adept made their shields and the fire thrown at them, and neither trusts anything the adept sold.',
     ],
     're-adjudicated': [
-      'The syndicate is broken, but the war still presses, and the two-camp trade has been assumed by parties who knew the invoices first.',
+      'Whoever paid the adept before is gone, but now the war presses in, and the adept goes on selling to both camps.',
     ],
   },
   occupation: {
     attributed: [
-      'The occupier needs eyes, and the adept\'s scrying is the best in town; he watches his neighbors for them, and the watching is paid in license to practice.',
-      'The occupation registers the talented, and the adept keeps the register; who can do what, and where they sleep, delivered monthly in exchange for his own name\'s omission.',
+      'The occupier needs eyes, and the adept is the best scryer in town. The adept watches the neighbors for the occupier and is allowed to keep practicing in return.',
+      'The occupation keeps a list of the gifted, and the adept writes it: who can do what, and where they sleep, sent each month in return for leaving the adept\'s own name off.',
     ],
     're-caused': [
-      "What first compromised the adept is gone; the occupier's license sustains the practice now, and the scrying pays the license.",
+      "The adept's first reason is gone, but now the occupier's leave is what lets the adept practice, and the scrying pays for it.",
     ],
     reformed: [
       'The occupier withdrew and the adept burned the register, then stood before those it had named and read his own entry first.',
       'With the occupation ended, the adept came clean; the scrying was confessed to the watched, house by house.',
     ],
     historicized: [
-      'The occupier is gone, but the adept still keeps the register current; the master who required it has marched away.',
+      'The occupier is gone, but the adept still keeps the list of the gifted up to date.',
     ],
     'exposed-public': [
-      'It is public that the adept scried on the town for the occupier, and every family is recalculating what the occupation somehow knew.',
-      "The register is out, in the adept's hand: the town's talented, cataloged for the occupier, with his own name absent.",
+      'It is public that the adept scried on the town for the occupier, and every family is working out how the occupation knew what it knew.',
+      "The list is out, in the adept's hand: the town's gifted, listed for the occupier, and the adept's own name left off.",
+      "The gifted families on the adept's list are asking why the occupier came to their doors first, and the answer is in the adept's hand.",
     ],
     're-adjudicated': [
-      "The adept's old paymaster is destroyed, but the occupier remains, and the scrying contract has been renewed on their letterhead.",
+      "Whoever paid the adept before is gone, but now the occupier is in control, and the adept scries for it.",
     ],
   },
   'conduct-drift': {
     attributed: [
-      'A dark patron funds the adept\'s research, and the research has bent toward the patron\'s appetites; what the craft forbids, the funding rewards, and the adept has stopped distinguishing.',
-      'The forbidden shelf in the adept\'s library grows, and every volume was paid for; a patron that prizes transgression sponsors the collection, and collects in kind.',
+      'A dark patron funds the adept\'s research, and the research has turned toward what the patron craves. What the craft forbids, the patron pays for, and the adept no longer tells the two apart.',
+      'The forbidden shelf in the adept\'s library keeps growing, and a patron that rewards forbidden work paid for every book on it.',
     ],
     're-caused': [
-      "The adept's first cause resolved, but a patron that rewards the deed took up the funding, and the research follows the reward.",
+      "The adept's first reason is gone, but now a dark patron pays for the forbidden work, and the adept researches what the patron pays for.",
     ],
     reformed: [
       "The patron's shadow lifted and the adept sealed the forbidden shelf; the sponsored research was ended and its notes given to the circle to bury.",
       'With the rewarding patron gone, the adept came clean; the transgressions lost their funding, and he found he had only ever wanted the funding.',
     ],
     historicized: [
-      'The patron is gone, but the forbidden shelf still grows; the sponsorship ended and the appetite it trained did not.',
+      'The patron is gone, but the adept still adds to the forbidden shelf.',
     ],
     'exposed-public': [
-      'It is public that the adept\'s research served a dark patron\'s appetites, and the circle is auditing everything he ever published.',
+      'It is public that the adept\'s research served a dark patron, and everything the adept ever wrote is being read again.',
       "The sponsorship is out: the forbidden work was commissioned, and the town has seen the patron's terms in the adept's own files.",
+      'Anyone who ever paid the adept for a working is asking now whether a dark patron had a hand in that too.',
     ],
     're-adjudicated': [
-      "The syndicate fell, but the patron that rewards the deed still stands, and the adept's research grants were simply re-signed.",
+      "Whoever paid the adept before is gone, but now a dark patron rewards the forbidden work, and the adept's research answers to it.",
     ],
   },
   'conversion-pressure': {
     attributed: [
-      'The rival faith pays for omens, and the adept\'s auguries have learned which answers sell; the stars say what the mission needs them to, at standard rates.',
-      'Conversion goes easier with signs and wonders, so the mission buys them wholesale; the adept supplies the wonders and invoices as consulting.',
+      'The rival faith pays for omens, and the adept\'s readings have learned which answers sell. The stars say what the mission needs.',
+      'Conversion goes easier with wonders, so the mission buys them in bulk from the adept and is billed for advice.',
     ],
     're-caused': [
-      "The adept's first reason passed; the rival faith's omen budget replaced it, and the auguries keep earning it.",
+      "The adept's first reason is gone, but now a rival faith pays for omens, and the adept supplies them.",
     ],
     reformed: [
       'The rival faith withdrew and the adept published the true readings beside the sold ones, so the town could see the difference.',
       'When the conversion pressure broke, the adept came clean; the bought omens were recanted, each one, by name.',
     ],
     historicized: [
-      'The rival faith gave up the town, but the adept\'s auguries still lean; the omen budget closed and the habit of leaning did not.',
+      'The rival faith has given up on the town, but the adept\'s readings still lean its way.',
     ],
     'exposed-public': [
-      'It is public that the mission bought its miracles from the adept, and every sign that moved a convert is being re-read as an invoice.',
-      "The omen trade is out: the adept sold the sky's opinions to the rival faith, and both congregations want the real readings.",
+      'It is public that the mission bought its miracles from the adept, and every sign that won a convert is being looked at again.',
+      "It is out that the adept sold false omens to the rival faith, and both congregations want the true readings.",
+      'Converts who changed faith over a sign are learning that the sign was bought from the adept.',
     ],
     're-adjudicated': [
-      'The old patron is gone, but the rival faith still presses, and the omen budget has been reassigned to the adept\'s new principals.',
+      'Whoever paid the adept before is gone, but now a rival faith presses in, and it pays the adept for omens.',
     ],
   },
   secularization: {
     attributed: [
-      'The old covenant between the craft and the temple limited what an adept may do, and the temple that enforced it stands empty; the adept has been practicing past the line, because no one holds the line.',
-      'With the faith gone cold, the proscriptions on the craft went with it; the adept works freely in territory that was fenced for good reasons, and charges frontier prices.',
+      'The old pact between the craft and the temple limited what an adept may do, and the temple that kept it stands empty. The adept has been working past that limit, because no one enforces it.',
+      'With the faith gone cold, the old bans on the craft went with it. The adept now does work that was forbidden for good reason, and charges well for it.',
     ],
     're-caused': [
-      "The adept's first cause resolved, but the faith went cold behind it, and with the covenant unenforced, the work simply continued past the line.",
+      "The adept's first reason is gone, but now the faith has gone cold, and with no one enforcing the pact, the forbidden work goes on.",
     ],
     reformed: [
       'The faith revived and the covenant with it; the adept stepped back inside the line unforced, and surrendered the work done beyond it.',
       'When belief returned, the adept came clean; the frontier practice was confessed to the restored temple and set down.',
     ],
     historicized: [
-      'The faith warmed again, but the adept never came back inside the line; the cold season that opened the frontier has closed behind him.',
+      'The faith has warmed again, but the adept still does the work the pact forbade, and still sells it.',
     ],
     'exposed-public': [
-      'It is public what the adept practiced while the covenant slept, and the reviving temple has made the craft its first inquiry.',
-      "The frontier work is out: what the old line forbade, the adept did and sold, and the town is learning why the line was drawn.",
+      'It is public what the adept did while no one enforced the pact, and the returning temple has made the craft its first question.',
+      "It is out that the adept did and sold what the old pact forbade, and the town is learning why it was forbidden.",
+      'The returning priests have made one question their first: what the adept did while the pact went unenforced.',
     ],
     're-adjudicated': [
-      "The adept's paymaster fell, but the faith is still cold, and no covenant has revived that might fence the work again.",
+      "Whoever paid the adept before is gone, but now the faith has gone cold, and nothing limits the adept's work.",
     ],
   },
   'clergy-scandal': {
     attributed: [
-      'The temple\'s disgrace left the town hungry for the miraculous, and the adept caters; manufactured wonders fill the gap the priests vacated, and the offerings redirect to his door.',
-      'With the clergy tainted, no one trusts the altar\'s wonders, so they buy the adept\'s; his miracles are competitively priced and technically real, which the sermons never mention.',
+      'The temple\'s disgrace left the town hungry for miracles, and the adept sells them. The wonders are made to order, and the offerings now go to the adept\'s door.',
+      'With the clergy disgraced, no one trusts the altar\'s wonders, so people buy the adept\'s. They are cheap and real enough, and the sermons never mention them.',
     ],
     're-caused': [
-      "The adept's first reason resolved, but the tainted priesthood left a market gap, and filling it with paid wonders now sustains the arrangement.",
+      "The adept's first reason is gone, but now the priesthood is disgraced, and the adept sells wonders in its place.",
     ],
     reformed: [
       'The priesthood was cleansed and the adept closed the miracle stall; the redirected offerings were sent to the altar they had abandoned.',
       "With the clergy's scandal resolved, the adept came clean; the manufactured wonders were disclosed as workings, priced and ordinary.",
     ],
     historicized: [
-      'The temple was set in order, but the miracle stall never closed; the disgrace that opened the market is mended.',
+      'The temple has been set in order, but the adept still sells wonders to the faithful.',
     ],
     'exposed-public': [
       'It is public that the adept sold workings as wonders while the temple was disgraced, and the faithful are asking what they actually knelt to.',
-      "The stall's books are out: the adept billed the town's hunger for the holy, and the hunger was real even if the wonders were retail.",
+      'It is out that the adept sold made-to-order wonders to a town hungry for the holy, and the faithful want their offerings back.',
+      'People who gave offerings for a wonder have learned the adept made it to order, and they want the offerings back.',
     ],
     're-adjudicated': [
-      "The syndicate is gone, but the priesthood's taint remains, and the wonder trade has been re-capitalized by new backers.",
+      'Whoever paid the adept before is gone, but now the priesthood is disgraced, and the adept sells wonders to whoever wants them.',
     ],
   },
   captured: {
     attributed: [
-      'The syndicate holds the adept\'s debts, and his craft services theirs; locks open oddly around their crews, and the watch\'s trackers follow trails that end at walls.',
-      'The underworld collects the adept\'s notes quarterly: what was warded, what was scried, and workings to order; the debt never shrinks, which is the design.',
+      'The underworld holds the adept\'s debts, and the adept\'s craft serves it. Locks open oddly around its crews, and trackers follow trails that end at walls.',
+      'The underworld collects the adept\'s notes each quarter: what was warded, what was scried, and spells cast to order. The debt never gets smaller, and it is meant not to.',
     ],
     're-caused': [
-      "The adept's old cause resolved, but the underworld holds the town's offices now, and a craft it holds is a tool, not a tenant.",
+      "The adept's first reason is gone, but now the underworld holds the town's offices, and it uses the adept's craft.",
     ],
     reformed: [
       'The capture was broken and the adept called in his own debt: every working done for the syndicate was named, and its counterspell filed with the watch.',
       "With the syndicate's grip broken, the adept came clean; the serviced crimes were confessed, and the craft turned to undoing them.",
     ],
     historicized: [
-      'The capture was broken, but the adept still works to the syndicate\'s old patterns; the debt is void and the habits are not.',
+      'The underworld\'s hold is broken and the debt is void, but the adept still opens locks for its crews.',
     ],
     'exposed-public': [
-      'It is public that the adept\'s craft served the underworld, and every oddly opened lock in memory has found its locksmith.',
-      "The debt ledger is out: the syndicate held the adept by his notes, and the town has learned what the interest was paid in.",
+      'It is public that the adept\'s craft served the underworld, and everyone whose lock opened oddly now knows why.',
+      "It is out that the underworld held the adept by debt, and the town has learned how the debt was paid.",
+      'Households whose locks opened on their own know now that the adept worked for the underworld, paying off a debt.',
     ],
     're-adjudicated': [
-      'The syndicate holding the debt is destroyed, but the offices are still captured, and the notes were found, bought, and re-presented.',
+      'Whoever held the adept\'s debt before is gone, but the underworld holds the offices now, and whoever runs them found and bought the debt.',
     ],
   },
   scandal: {
     attributed: [
-      'The scandal made memory dangerous, and the adept trades in it; recollections blur for the implicated at premium rates, and sharpen for their accusers at higher ones.',
-      'Since the scandal broke, the adept\'s truth-work has been for hire to whoever fears it most; the same craft that could settle the matter is paid to unsettle it.',
+      'The scandal made memory dangerous, and the adept sells it: memories blur for the accused for a high price, and sharpen for their accusers for a higher one.',
+      'Since the scandal broke, the adept\'s truth-work goes to whoever fears it most. The craft that could settle the matter is paid to muddy it.',
     ],
     're-caused': [
-      "The adept's first cause cleared, but the scandal broke behind it, and the memory trade now finances the arrangement.",
+      "The adept's first reason is gone, but now a scandal has broken, and the adept sells memory-work.",
     ],
     reformed: [
       'The scandal burned out and the adept restored what he had blurred, freely, and filed the true recollections with the court.',
       'When the scandal settled, the adept came clean; the memory work was confessed and undone where undoing was still possible.',
     ],
     historicized: [
-      'The scandal is old news, but the memory trade continues; the panic that priced recollection has faded.',
+      'The scandal is old news, but the adept still blurs memories for those who pay.',
     ],
     'exposed-public': [
       'It is public that the adept blurred memories through the scandal, and no testimony from those months is trusted, including the innocent kind.',
-      "The memory invoices are out: who paid to forget, who paid to be believed, and the adept's rates for each.",
+      "It is out who paid the adept to forget, who paid to be believed, and what the adept charged each.",
+      "Nobody's word from the scandal months is taken now, because the adept was paid to blur what people remember.",
     ],
     're-adjudicated': [
-      "The syndicate is broken, but the scandal's economy survives, and the memory trade has re-contracted with the adept retained.",
+      'Whoever paid the adept before is gone, but now a scandal has broken, and whoever fears it pays the adept for memory-work.',
     ],
   },
 };

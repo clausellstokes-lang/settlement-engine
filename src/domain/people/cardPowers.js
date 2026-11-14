@@ -36,6 +36,16 @@ export function powerNameOf(power) {
   return String(p.faction || p.name || '');
 }
 
+/**
+ * The governing power's name (the row marked `isGoverning`, else the record's `governingName`), or null.
+ * @param {unknown} settlement @returns {string | null}
+ */
+export function governingNameOf(settlement) {
+  const row = powersOf(settlement).find((f) => f.isGoverning === true);
+  const name = row ? powerNameOf(row) : String(recordOf(recordOf(settlement).powerStructure).governingName || '');
+  return name || null;
+}
+
 /** @param {unknown} settlement @returns {string[]} the powers' names, roster order */
 export function powerNamesOf(settlement) {
   return powersOf(settlement).map(powerNameOf).filter(Boolean);
@@ -56,12 +66,80 @@ export function cardPowerParts(card, powerOrder = []) {
 }
 
 /**
- * THE CARD'S POWER LINE: "first of X · second of Y" ('' for a card in no power).
- * @param {unknown} card @param {string[]} [powerOrder] @returns {string}
+ * THE CARD'S POWER LINE: "first of X · second of Y" ('' for a card in no power). The dual-hat leader's
+ * first rank in the governing power prints its office (COHERENCE-POWERS): "Reeve, first of Elected Reeve"; the
+ * keeper of an empty seat its caretaker's form (COHERENCE-POWERS-3, F7: "Acting Reeve, first of Elected Reeve").
+ * @param {unknown} card @param {string[]} [powerOrder] @param {string | null} [governing] the governing power's name
+ * @param {boolean} [keeper] the card keeps the governing power's seat while it stands empty (seatKeeper.js :: seatKeeperOf)
+ * @returns {string}
  */
-export function cardPowerLine(card, powerOrder = []) {
-  return cardPowerParts(card, powerOrder).map((p) => p.label).join(' · ');
+export function cardPowerLine(card, powerOrder = [], governing = null, keeper = false) {
+  const held = cardOfficeOf(card);
+  // COHERENCE-POWERS-3 (F7): the keeper of an empty seat holds its office in the caretaker's form
+  const office = held && keeper ? caretakerFormOf(held, governing) : held;
+  const parts = cardPowerParts(card, powerOrder);
+  const seat = office && governing ? parts.find((p) => p.power === governing && p.rank === 1) : null;
+  // the office leads the line: the seat, then the card's other standings in their order
+  return (seat ? [`${office}, ${seat.label}`, ...parts.filter((p) => p !== seat).map((p) => p.label)] : parts.map((p) => p.label))
+    .join(' · ');
 }
+
+/** The crown's offices: an empty crown is kept by a regent (COHERENCE-POWERS-3, F7; the chair's ruling of 2026-11-12). */
+const CROWN_OFFICES = Object.freeze(['King', 'Queen', 'Monarch']);
+/** Titles that describe the person, not an office (the exempt small place's eldest): the acting form takes the
+ *  government's own office word (the chair's refinement of 2026-11-12), never "Acting Eldest". */
+const DESCRIPTIVE_TITLES = Object.freeze({
+  Eldest: (/** @type {string | null} */ government) => (government === 'Household Council' ? 'Household Elder' : 'Elder'),
+});
+
+/**
+ * THE CARETAKER'S FORM OF AN OFFICE (COHERENCE-POWERS-3, F7; the chair's ruling of 2026-11-12, the owner's to veto):
+ * where the seat stands empty its keeper holds "Acting <the office>"; a crown's, "Regent"; a regent already keeps its
+ * words. '' for no office.
+ * @param {string | null | undefined} office the office or honorific as printed @param {string | null} [government]
+ * @returns {string}
+ */
+export function caretakerFormOf(office, government = null) {
+  const word = String(office || '').trim();
+  if (!word) return '';
+  if (CROWN_OFFICES.includes(word)) return 'Regent';
+  if (/^Regent\b|^Acting\b/.test(word)) return word;
+  const described = /** @type {Record<string, (g: string | null) => string>} */ (DESCRIPTIVE_TITLES)[word];
+  return `Acting ${described ? described(government) : word}`;
+}
+
+/**
+ * THE LEADER'S OFFICE (COHERENCE-POWERS, the dual hat): a house's face that leads the town carries the
+ * office's title in its `role` beside its house's `title` (people/castPowers.js FLOOR 1); null for every
+ * other card (M-1b: a face's role is its title; a minted face's and a DM's person's role is its own).
+ * @param {unknown} card @returns {string | null}
+ */
+export function cardOfficeOf(card) {
+  const c = recordOf(card);
+  const inst = cardInstitutionOf(card);
+  const role = String(c.role || '').trim();
+  if (!inst || inst.kind !== 'house' || !role) return null;
+  return role !== String(c.title || '').trim() && role !== inst.title ? role : null;
+}
+
+/**
+ * THE TWO HATS, as one phrase: "the miller and Reeve" for the dual-hat leader, else the card's role
+ * (the office's own face, a minted seat, a DM's person). The seat's lines read it (the Power tab's seat
+ * row, the governance account).
+ * @param {unknown} card @returns {string}
+ */
+export function cardHatsOf(card) {
+  const c = recordOf(card);
+  const office = cardOfficeOf(card);
+  const title = String(c.title || '').trim();
+  // COHERENCE-POWERS-5 (N7; REVIEW-POWERS-2 at e86d069be): where the house title already carries the office's word ("the
+  // boat-headman" beside Headman, "the priest" beside Elder Priest), the office is dropped from the phrase, never doubled
+  if (office && lastWordOf(title) === lastWordOf(office)) return title;
+  return office ? `${title} and ${office}` : String(c.role || '').trim();
+}
+
+/** A title's last word, lower case, a hyphened word's last part ("the boat-headman" → "headman"). @param {string} words */
+const lastWordOf = (words) => String(words).toLowerCase().split(/[\s-]+/).filter(Boolean).pop() || '';
 
 /**
  * The card's FIRST-RANK power's name (its best standing), or null for a card in no power.
@@ -84,15 +162,46 @@ export const cardInPower = holdsMembership;
 
 /**
  * THE CARD'S INSTITUTION: its house's name (kind 'house'), or the power it was minted from
- * (kind 'power'), or null (a DM's person, a pre-car card).
- * @param {unknown} card @returns {{ kind: 'house' | 'power', name: string, title: string } | null}
+ * (kind 'power'), or null (a DM's person, a pre-car card). `veiled` is the card's veil bit as
+ * stamped at birth (FIX-PUBLIC-VEIL; true, false, or undefined on a card born before the bit).
+ * @param {unknown} card @returns {{ kind: 'house' | 'power', name: string, title: string, veiled: unknown } | null}
  */
 export function cardInstitutionOf(card) {
   const inst = recordOf(recordOf(card).institution);
   const kind = inst.kind === 'house' || inst.kind === 'power' ? inst.kind : null;
   const name = String(inst.key || inst.name || '');
   if (!kind || !name) return null;
-  return { kind, name, title: String(inst.title || '') };
+  return { kind, name, title: String(inst.title || ''), veiled: inst.veiled };
+}
+
+/**
+ * THE READER (the public projection's one question, FIX-PUBLIC-VEIL): a card's house as the public
+ * projection reads it — 'public' (an `institution` record stamped `veiled: false`), 'veiled' (stamped
+ * true, or not stamped: fail-closed), or 'none' (no record: a pre-car card, a DM's person).
+ * @param {unknown} card @returns {'public' | 'veiled' | 'none'}
+ */
+export function cardInstitutionVeilOf(card) {
+  // the card's house record as cardInstitutionOf reads it: a record of kind 'house' | 'power' with a key;
+  // anything else (absent, null, a legacy string, a malformed object) is none
+  const inst = cardInstitutionOf(card);
+  if (!inst) return 'none';
+  return inst.veiled === false ? 'public' : 'veiled';
+}
+
+/** May this card's house be named publicly? @param {unknown} card @returns {boolean} */
+export function isHousePublic(card) {
+  return cardInstitutionVeilOf(card) === 'public';
+}
+
+/**
+ * The memberships a public house's face publishes: the entries stamped `veiled: false` (the same law
+ * per entry); a hidden or criminal power's membership, or an unstamped one, is dropped; a non-array is
+ * no list (undefined). Order kept.
+ * @param {unknown} memberships @returns {unknown[] | undefined}
+ */
+export function publicMembershipsOf(memberships) {
+  if (!Array.isArray(memberships)) return undefined;
+  return memberships.filter((m) => !!m && typeof m === 'object' && !Array.isArray(m) && /** @type {Record<string, unknown>} */ (m).veiled === false);
 }
 
 /** @param {unknown} card @returns {string | null} the card's house (kind 'house' only) */

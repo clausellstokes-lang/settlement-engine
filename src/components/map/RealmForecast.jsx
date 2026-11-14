@@ -207,10 +207,10 @@ export default function RealmForecast({ campaign }) {
             </div>
           )}
           <p style={{ fontSize: proseFontSize(FS.xxs, mobile), color: MUTED, margin: '8px 0 0', fontStyle: 'italic', lineHeight: 1.5 }}>
-            This is a deterministic, bounded projection from the recorded snapshot through the selected interval.
-            It includes the current docket and organic realm changes, assumes no later edits or party actions, and
-            uses defaults where the world would await your word. A queued party action&apos;s wider realm ripple is
-            not included, so this is guidance rather than a guaranteed outcome.
+            This forecast runs the realm forward from where it stands now, over the interval you chose. It counts
+            the orders on the docket and the realm&apos;s own changes, assumes you make no further edits and the party
+            does nothing, and takes the default wherever the world would wait for your word. It leaves out the wider
+            ripples of a queued party action, so treat it as guidance, not a promise.
           </p>
         </div>
       )}

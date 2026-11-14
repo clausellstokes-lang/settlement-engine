@@ -22,7 +22,7 @@
     },
     {
       "id": "instigator#1",
-      "text": "turn this crisis into the settlement's next arrangement, with themselves at the head of it.",
+      "text": "use this crisis to take the seat for themselves.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -30,7 +30,7 @@
     },
     {
       "id": "instigator#2",
-      "text": "be the one still standing when the present order runs out of answers.",
+      "text": "be the one people turn to when the seat fails.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -38,7 +38,7 @@
     },
     {
       "id": "brunt#0",
-      "text": "get their own people through this with what little they have left.",
+      "text": "get {people} a fair share of {scarce} before it runs out.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -46,7 +46,7 @@
     },
     {
       "id": "brunt#1",
-      "text": "be heard by someone with power before the crisis takes the rest.",
+      "text": "be heard by the seat before the {noun} takes what {people} have left.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -54,7 +54,7 @@
     },
     {
       "id": "brunt#2",
-      "text": "hold on until the worst has passed, and remember who helped.",
+      "text": "hold {people} together through the {noun}, and remember who helped.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -62,7 +62,7 @@
     },
     {
       "id": "lever#0",
-      "text": "decide who gets what the crisis has made scarce, and be thanked rather than blamed for it.",
+      "text": "decide who gets the {scarce}, and not be blamed by those who go without.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -70,7 +70,7 @@
     },
     {
       "id": "lever#1",
-      "text": "keep the office the crisis turns on working, whatever it costs them.",
+      "text": "keep {house} working through the {noun}, whatever it costs them.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -78,7 +78,7 @@
     },
     {
       "id": "lever#2",
-      "text": "hold the one thing everyone now needs without being crushed between those who want it.",
+      "text": "share out the {scarce} without being crushed between those who want it.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -86,7 +86,7 @@
     },
     {
       "id": "exploiter#0",
-      "text": "sell what the crisis has made scarce for as long as the crisis lasts.",
+      "text": "sell {scarce} dear while others go without.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -94,7 +94,7 @@
     },
     {
       "id": "exploiter#1",
-      "text": "come out of this richer than they went in, without anyone tracing how.",
+      "text": "come out of the {noun} richer than they went in, without anyone tracing how.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -102,7 +102,7 @@
     },
     {
       "id": "defender#0",
-      "text": "hold the line until the crisis breaks, with fewer hands than the line needs.",
+      "text": "hold the line through the {noun} with fewer hands than the line needs.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -110,7 +110,7 @@
     },
     {
       "id": "defender#1",
-      "text": "keep the defence standing long enough for someone else to end this.",
+      "text": "keep {house} standing long enough for someone else to end the {noun}.",
       "needs": [],
       "excludes": [],
       "crisis": [],

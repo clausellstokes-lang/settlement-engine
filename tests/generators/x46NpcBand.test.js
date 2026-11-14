@@ -187,6 +187,32 @@ describe('X-46 car 4 (iii) — dark, the world is byte-identical; lit (in this t
   // people car's merge 8dff691f3 moves 60 against either side, and nothing after it moves any: 2c7437030, 4c39885fc and,
   // through the car's seam cure b19740ab3 (moves none of the sixty) and record C, the tip 3f95e3484 all read the merge's
   // sixty. Re-captured at 3f95e3484, twice and equal (fixture tests/fixtures/x46-npc-band-dark-digests.json).
+  // RE-KEYED BY IDENTITY 2026-11-10 (GREEN-TIP, the chair's ruling on the census's group (6)): 60 of 60 moved. MEASURED by
+  // this file's recipe (an untracked probe) at 8308f13f8 (the MERGE-CAR re-key, 0 moved) and every first-parent stage of
+  // 8308f13f8..bf14617ca touching src/, the helpers or scripts (73 stages, git-archive trees); the stages that moved a
+  // digest, with how many of the sixty each moved:
+  // W1 ECO ea0e269a9 (29), W2 DEF 82a4e2856 (55), W3 POW 1a160d599 (60), W4 PEOPLE 66c23bfea (42),
+  // W5 HIS e510409b1 (60), W7 HOOKS 501c97412 (60), FIX-PUBLIC-VEIL 7e65c7bec (60), ALLEGIANCE-CAR1 e5f88930b (60),
+  // ALLEGIANCE-CAR2 f51058995 (14), ALLEGIANCE-CAR3 c6ded8e3a (23), ALLEGIANCE-CAR4 824a8ce2f (60),
+  // SW-0 point fix ca15421ff (6), SW-2 INSTITUTIONS ef4645832 (50), SW-3 REALM-PROSE 1ef46ca30 (5),
+  // SW-5 CRISIS-VANTAGES a7770ecfe (34), SW-B5 FRAMES 46e0121c2 (42), SW-B6 ECO-DEF-BLOCKS 8de6c4a1a (2),
+  // SW-7 POWER-SIDE a3062d919 (60), SW-B1 CONTRADICTIONS 0f2cb865c (43), SW-10 HOOKS 856de8427 (60),
+  // SW-6 CRISIS-SURFACES ac1442a3d (60), SW-8 RENAME-POWERS 56f3b2df7 (60), URBAN-FIX 17b814803 (51).
+  // Every stage is a lane merge with its own signed shift record (the movers inside each merge are not isolated:
+  // PLAUSIBLE per commit, CONFIRMED per stage). Re-captured at the green-tip lane over bf14617ca (whose generation is
+  // bf14617ca's byte for byte), twice and equal (fixture tests/fixtures/x46-npc-band-dark-digests.json).
+  // RE-KEYED BY IDENTITY 2026-11-12 (STYLE-2-MERGE-8): 38 of 60 moved by the COHERENCE-QUARREL merge d4723749a (STYLE-2-MERGE point 42; lane/coherence-quarrel-2026-11-11 at 1c7b5786c, record docs/shift-records/2026-11-12-style-2-merge-42-coherence-quarrel.json: the quarrels' issues, stakes, descriptions and hooks, and the safety record's plot hooks); the line's tip
+  // decc7bf15 reads every digest green, the merge reads these 38 red (the lane's own predicted 38). Re-captured at the merge
+  // by this file's own loop (an untracked probe), twice and equal.
+  // RE-KEYED BY IDENTITY 2026-11-12 (STYLE-2-MERGE-8, point 43): 56 of 60 moved by the COHERENCE-PRESUME merge f922124d0 (docs/shift-records/2026-11-12-style-2-merge-43-coherence-presume.json:
+  // a line names a thing the town does not have: the culture lines, the re-titled watch role and the ties it re-deals, the history and institution texts); the line before the merge reads every digest green. Re-captured at the merge by this file's own loop (an
+  // untracked probe), twice and equal.
+  // RE-KEYED BY IDENTITY 2026-11-12 (STYLE-2-MERGE-9, point 46): 51 of 60 moved by the COHERENCE-POWERS merge 6aeaa4154 (docs/shift-records/2026-11-13-style-2-merge-46-coherence-powers.json:
+  // the dual hat re-deals the cast); the line before the merge reads every digest green. Re-captured at the merge by this file's own loop (an
+  // untracked probe), twice and equal.
+  // RE-KEYED BY IDENTITY 2026-11-13 (STYLE-2-MERGE-11, point 47): 60 of 60 moved by the COHERENCE-AGREE merge 22cc9ef7d (docs/shift-records/2026-11-13-style-2-merge-47-coherence-agree.json:
+  // one fact, one answer: the resource roll's refused members refilled, the economy and defence read off the town's own record); the line before the merge reads every digest green. Re-captured at the merge by this file's own loop (an
+  // untracked probe), twice and equal.
   const DARK =/** @type {Record<string, string>} */ (JSON.parse(readFileSync(
     fileURLToPath(new URL('../fixtures/x46-npc-band-dark-digests.json', import.meta.url)), 'utf8',
   )));

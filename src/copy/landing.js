@@ -60,7 +60,7 @@ export const landing = {
     // 2026-10-31 derives a quarrel again, voice.receipts.conflict, which §02 names.
     // Re-grounded 2026-11-04 at the rung-1 landing: the travellers' inn gave way to a blacksmith
     // lifted by the nearby resources and terrain. An OWNER VETO POINT.)
-    body:  'Pick a size and forge. Everything after that is derived, not drawn from a table: where the road goes, which smith the hills make worth seating, which faction is owed a favour, what was cut down a generation ago and never grew back. Open the Advanced panel and set terrain, age, wealth and trouble yourself.',
+    body:  'Pick a size and forge. Everything after that is derived, not drawn from a table: where the road goes, which smith the hills make worth seating, which power is owed a favour, what was cut down a generation ago and never grew back. Open the Advanced panel and set terrain, age, wealth and trouble yourself.',
     axiom: 'Every dossier answers the same question: given these constraints, what must this place be?',
     // ⛔ THE SECTION-LEVEL ASK IS GONE (owner, 2026-09-19, taking the draft's
     // recommendation): ONE ask at the top and ONE at the end. `cta` ("Forge a
@@ -71,7 +71,7 @@ export const landing = {
     // hand-off to the next stop, in the estate's caps-link idiom.
     readOn: 'Read on: the voice',
     micro: 'No account needed',
-    ceiling: 'Without an account, forge up to a Town. Sign in free for every size, saving, and full Basic / Advanced control.',
+    ceiling: 'Without an account, forge a Town. Sign in free for every size, saving, and full Basic / Advanced control.',
     draftTitle: 'Instant draft',
     draftHint:  'pick a size and go',
     // Population bands mirror the engine canon (src/data/constants.js
@@ -101,13 +101,14 @@ export const landing = {
     // STRIP-1: `waypoint` ('02 · The visual') is REMOVED — it pilled the settlement-map
     // section, which is gone. The rest of this block feeds §01's MiniDossierCard.
     h2:      'Read the Summary tab. That’s your session prep.',
-    // ⚑ FIXTURE-GROUNDED: the population (town.population 412) and the bakehouse
-    // (town.prose) are quoted from the frozen fixture, and the eyebrow's two
-    // dials (town.eyebrow "road village · mountain") are what "a mountain
-    // village the road reaches" says. tests/copy/landingProseGrounding.test.js
-    // reds when a regenerated fixture leaves this sentence behind.
-    body:    'This is Cnocby: eighty-two people, a mountain village the road reaches, and a bakehouse already on its second bake when you arrive. The Summary tab is your session prep. Systems, factions and history sit one tab deeper, for when the party starts digging.',
-    library: 'Sign in free to keep every town in your Library, organized by campaign.',
+    // ⚑ FIXTURE-GROUNDED: the population (town.population 82) is quoted from the
+    // frozen fixture, and the eyebrow's two dials (town.eyebrow "road village ·
+    // mountain") are what "a mountain village the road reaches" says.
+    // tests/copy/landingProseGrounding.test.js reds when a regenerated fixture
+    // leaves this sentence behind. (The bakehouse clause was CUT on 2026-11-10,
+    // FOUNDING-WORLDS / the chair's ruling N2: town.prose no longer carries one.)
+    body:    'This is Cnocby: eighty-two people, a mountain village the road reaches. The Summary tab is your session prep. Systems, powers and history sit one tab deeper, for when the party starts digging.',
+    library: 'Sign in free to keep your towns in your Library.',
     // ⛔ `cta` ('Forge a settlement') and `link` ('Read on: the voice') ARE
     // DELETED. Neither was rendered anywhere — the brief block feeds §01's
     // MiniDossierCard, which has never had a section ask — and the read-on line
@@ -117,7 +118,7 @@ export const landing = {
     population: 'Population {n}',
     more:    '+{n} more in the dossier',
     save:     'Save to Library',
-    saveNote: 'free account · keeps every draft',
+    saveNote: 'free account · saves to your Library',
     // The one interactive artifact control (owner addition W-L2/5): replays the
     // fixture's exact seed + config through the SAME forge action as every
     // other generation — same anon cap, no special path. Determinism, quietly.
@@ -176,8 +177,8 @@ export const landing = {
     body1: 'Canonize the draft and Cnocby becomes part of your campaign: it takes events, keeps a chronicle, remembers. Put it on the world map in the Realm with the towns around it, tie them together by trade and grudge, and add your own gods, guilds and goods in the Compendium.',
     // ⚑ FIXTURE-GROUNDED, EVENT BY EVENT. Every beat in this sentence is one row
     // of realm.advance — the same six records the card beside it renders, in the
-    // same order, at the same weeks (2 order · 3 rally · 4 fracture passed · 5 war footing
-    // · 9 capture · 12 trade). It is the most fragile prose on the page and the grounding
+    // same order, at the same weeks (2 order · 2 war footing · 4 the faiths' split over
+    // · 9 capture · 12 reforms · 12 crime). It is the most fragile prose on the page and the grounding
     // suite walks it word against field.
     // 2026-10-02, the Voice Program (ODQ §934.88): re-grounded on the regenerated timeline, which now speaks in deeds
     // ("Cnocby goes onto a war footing", "Crime takes hold of Cnocby", "Cnocby's trade routes break down").
@@ -186,7 +187,10 @@ export const landing = {
     // 2026-11-07 (the people car's landing, PEOPLE-LAND second seat; an OWNER VETO POINT): re-grounded on the
     // timeline the cast derives (the priest's order, a rally for an institution, the fracture passed, the war
     // footing, the capture, the broken routes).
-    body2: 'Then advance time. In Cnocby’s first twelve weeks Étaín Sullivan set out to restore order and Fearghus O’Brien rallied supporters to take control of an institution; the religious conversion fracture passed, leaving its sectarian memory behind; by week five the village was on a war footing, by week nine the Elder Council had captured an institution, and by week twelve its trade routes had broken down. Every one of those is a record the engine wrote, and every one carries its cause.',
+    // 2026-11-11 (FOUNDING-WORLDS at the final tip 7ab12183f; an OWNER VETO POINT): re-grounded on the timeline the
+    // simulation cure derives (the priest's order, the war footing, the faiths' split over, the Elder Council's
+    // capture of the water, the reforms, the crime); the conversion to Vael and the broken routes left the run.
+    body2: 'Then advance time. In Cnocby’s first twelve weeks Étaín Sullivan set out to restore order and the village went onto a war footing; the split between the faiths ended, leaving its sectarian memory behind; by week nine control of the village’s water was passing to the Elder Council; and by week twelve Caoilfhinn Gallagher was pushing through reforms as crime took hold of its streets. Every one of those is a record the engine wrote, and every one carries its cause.',
     // The chronicle beside the realm map is the REGION's band, not the town's —
     // two cards that now say different things, and a reader needs to be told why.
     regionLine: 'Beside it, the region: what the neighbours did while Cnocby was busy.',
@@ -276,7 +280,7 @@ export const landing = {
     tiers: [
       { name: 'Wanderer',     badge: 'Free · account',    body: 'A free account unlocks every size with full settlement customization, a Library with up to {freeSaves} saves, and sharing to the Gallery.' },
       { name: 'Cartographer', badge: 'Premium',           body: 'The living simulation: the Realm, wars that end themselves, custom content, and gallery import. Unlimited saves and unlimited exports.', accent: true },
-      { name: 'Surveyor',     badge: 'AI · early access', body: 'The optional AI workshop: an analyst for your world, prose briefs, and session interpretation that proposes edits for you to approve. It never writes canon. Bring your own key.', aiWall: true },
+      { name: 'Surveyor',     badge: 'AI · early access', body: 'The AI workshop, with Cartographer: an analyst for your world, prose briefs, and session interpretation that proposes edits for you to approve. It never writes canon. Bring your own key.', aiWall: true },
       // ⛔ AN INVITATION-ONLY TIER LEAVES THE PUBLIC PATH (owner, ODQ §934.24
       // addendum). The Founders' Hall is given and never sold, so advertising it
       // to a logged-out visitor on the page whose job is to get them forging is

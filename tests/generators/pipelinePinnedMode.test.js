@@ -517,7 +517,7 @@ describe('EM-B2a2 — the pin primitive has ONE exported home: chooseOrPin lives
 /** The census corpus's own row count (EM-P2's declared 63). The floor every A7 figure rests on. */
 const CENSUS_ROWS = 63;
 /** The rows §0.1 measured the leak in, and the two keys it moved. RE-MEASURED by A7, never trusted. */
-const LEAKED_ROWS = 38; // 2026-10-01, the urban band (ODQ §934.86): 42 -> 44 (corruptionPass mutates npcs and factions on two more rows); 2026-11-05, records 12–26 (the rung-1 landing's signed shifts, ODQ §934.105; re-keyed at the landed tip by LANDING-5 under the chair's ruling 4): 44 -> 38
+const LEAKED_ROWS = 63; // 2026-11-08, ALLEGIANCE-CAR1: 38 -> 63, the control now PLANTS its downstream mutator (the live one, corruptionPass, is retired, J-2; with no writer the control read 0), one write per row on every row; history: 2026-10-01, the urban band (ODQ §934.86): 42 -> 44 (corruptionPass mutates npcs and factions on two more rows); 2026-11-05, records 12–26 (the rung-1 landing's signed shifts, ODQ §934.105; re-keyed at the landed tip by LANDING-5 under the chair's ruling 4): 44 -> 38
 /** The three pin channels A8 walks: every registered step that provides a held record key. */
 const PIN_CHANNELS = ['generatePopulation', 'assembleInstitutions', 'generatePower'];
 
@@ -551,7 +551,7 @@ function bypassEveryRunnerClone(bag, keys) {
 }
 
 describe('EM-R1 — the pin bag is cloned on entry, at the runner', () => {
-  it('A7 — the leak and the cure: a record-built bag moves 0 of 63, where the uncloned control moves 44', () => {
+  it('A7 — the leak and the cure: a record-built bag moves 0 of 63, where the uncloned control (a planted downstream write) moves 63', () => {
     const rows = censusCorpus();
     const keys = getStepMeta().find((meta) => meta.name === POPULATION_STEP).provides;
     expect(rows, 'the census corpus is the floor every figure here rests on').toHaveLength(CENSUS_ROWS);
@@ -567,15 +567,28 @@ describe('EM-R1 — the pin bag is cloned on entry, at the runner', () => {
         const before = JSON.stringify(caller);
         // ANTI-VACUITY, MEASURED AT THE PRODUCER'S OWN BOUNDARY: the pin was TAKEN on this row,
         // which is what tells a cured runner apart from a member that dropped the pin entirely.
-        // It is read from the PATCH, never from the finished context: `corruptionPass` mutates
+        // It is read from the PATCH, never from the finished context: the planted write below (once `corruptionPass`) mutates
         // `npcs` AFTER the pin lands (GS-2: `factions` is no longer in the context to mutate), so the final context differs on 44 rows by
         // design and a check placed there would report a false 19 of 63 (the 2026-10-01 re-measure; was 42 and 21).
         const bypass = mode === 'bypassed' ? bypassEveryRunnerClone(caller, keys) : null;
+        let planted = false;
+        let produced = false;
         const options = {
           pins: caller,
           onStrictViolation: () => {},
           onStep: (name, ctx, patch) => {
             if (bypass) bypass(name, ctx);
+            // THE PLANTED DOWNSTREAM MUTATOR (ALLEGIANCE-CAR1): the live one this control stood on was
+            // `corruptionPass`, which wrote `npcs` IN PLACE after the pin landed; the allegiance car retired
+            // it (J-2: the seam's dealer copies), so with no writer the control read 0 and the zero above went
+            // vacuous. Planted at the first boundary after the producer, one in-place write per run, the shape
+            // the retired pass had: through the runner's clones it lands on the runner's copy, defeated it
+            // lands on the caller's record.
+            if (name === POPULATION_STEP) produced = true;
+            else if (!planted && produced && Array.isArray(ctx.npcs) && ctx.npcs[0]) {
+              planted = true;
+              ctx.npcs[0].plantedDownstreamWrite = true;
+            }
             if (name !== POPULATION_STEP || !patch) return;
             if (keys.every((key) => JSON.stringify(patch[key]) === JSON.stringify(bag[key]))) {
               tally.took += 1;
@@ -603,8 +616,8 @@ describe('EM-R1 — the pin bag is cloned on entry, at the runner', () => {
     expect(through.took, 'the pins were dropped, so the zero above proves nothing').toBe(CENSUS_ROWS);
     expect(through.perKey).toEqual({});
 
-    // THE NEGATIVE CONTROL: the same bag with every runner clone defeated is written through on
-    // 38 rows (44 before records 12–26), by npcs alone (GS-2: factions left the bag), so the zero above can never go silently vacuous.
+    // THE NEGATIVE CONTROL: the same bag with every runner clone defeated is written through by the
+    // planted downstream write on all 63 rows (38 by corruptionPass before its retirement, 44 before records 12–26), by npcs alone (GS-2: factions left the bag), so the zero above can never go silently vacuous.
     expect(bypassed.moved, 'the control came back clean: the bypass no longer defeats the clones')
       .toBe(LEAKED_ROWS);
     expect(bypassed.perKey).toEqual({ npcs: LEAKED_ROWS });

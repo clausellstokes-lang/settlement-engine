@@ -31,7 +31,6 @@ const NEITHER = withFacts({ sacredHouse: false, faith: { seniorCleric: null } })
 
 const CLAIMS = Object.freeze([
   ['DS-FTH-1', 'PATRON: rankAxis: major', /Its clergy speak with the confidence/],
-  ['DS-FTH-1', 'PATRON: rankAxis: minor', /the clergy find easier to forgive/],
   ['DS-FTH-1', 'STANDINGS: a plural field, no majority', /the clergy of each describe/],
   ['DS-FTH-1', 'MANDATE: contested, or patron security below the floor', /more than the clergy do/],
   ['DS-FTH-1', 'MANDATE: a dominant church', /the patron's clergy have already asked/],
@@ -40,7 +39,10 @@ const CLAIMS = Object.freeze([
 const COLOUR = Object.freeze([
   ['DS-FTH-3', 'PANTHEON RANK: Cult', /Its clergy travel little/],
   ['DS-FTH-3', 'PANTHEON RANK: Major', /its clergy speak to rulers/],
-  ['DS-FTH-3', 'PANTHEON RANK: Major', /gives its clergy their standing/],
+  // W4 PEOPLE second seat 2026-11-07: re-keyed to the line's text after the first seat's faith style pass (05da0e050, the owner's style law): the line no longer names the clergy, so it is colour (the PATRON minor row moved here from
+  // CLAIMS for the same reason; its `clergy` mark became `colour` in the annex, since the line now claims no clergy).
+  ['DS-FTH-3', 'PANTHEON RANK: Major', /in great houses and small/],
+  ['DS-FTH-1', 'PATRON: rankAxis: minor', /travellers from far off will not have heard of/],
 ]);
 
 describe('the compose · "the clergy" re-read by R-AD', () => {

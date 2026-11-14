@@ -180,11 +180,11 @@ export function tonightAtTheTable(settlement) {
   if (disrupted.length > 0) {
     const f = disrupted[0];
     const good = f.needLabel || f.name || 'the supply';
-    const reason = f.failureConsequences || 'broken supply chain.';
+    const reason = typeof f.failureConsequences === 'string' ? f.failureConsequences.trim() : '';
     out.push({
       kind: 'RED',
       title: `Don't mention ${good}`,
-      body:  `NPCs go cold mid-sentence. Reason: ${reason}`,
+      body:  reason ? `People go quiet mid-sentence when it comes up. ${reason}` : 'People go quiet mid-sentence when it comes up.',
     });
   }
 

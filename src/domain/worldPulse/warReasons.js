@@ -1040,11 +1040,13 @@ export const CASUS_VETO_PROSE = Object.freeze({
  * never re-births). Pure: same input ⇒ same output (preview ≡ apply).
  * @param {Record<string, unknown>} worldState
  * @param {{ fromId: unknown, toId: unknown, type: string, severity01?: number,
- *           receipt?: string, tick?: number }} args
+ *           receipt?: string, tick?: number, toName?: unknown }} args  `toName` is the target's
+ *   PRINTED name for the default receipt (the caller's read); the id and the snake_case type
+ *   token never print — the type reads as words, an unnamed target as "its rival".
  * @returns {{ ok: true, worldState: Record<string, unknown> }
  *         | { ok: false, code: keyof typeof CASUS_VETO_PROSE, detail: string }}
  */
-export function declareCasus(worldState, { fromId, toId, type, severity01 = 0.6, receipt = '', tick = 0 }) {
+export function declareCasus(worldState, { fromId, toId, type, severity01 = 0.6, receipt = '', tick = 0, toName = '' }) {
   if (!peaceCausalActive(/** @type {{ simulationRules?: Record<string, unknown> }} */(worldState))) {
     return { ok: false, code: 'casus_gate_dark', detail: 'peace-engine gate absent' };
   }
@@ -1069,7 +1071,7 @@ export function declareCasus(worldState, { fromId, toId, type, severity01 = 0.6,
     score,
     tick: Number.isFinite(tick) ? Number(tick) : 0,
     sinceTick: prevEntry?.reasons?.[reasonType]?.sinceTick,
-    receipt: String(receipt || '').trim() || pickLine(DECREE_DEFAULT_RECEIPTS, `${key}#decree`, { type: reasonType, to }),
+    receipt: String(receipt || '').trim() || pickLine(DECREE_DEFAULT_RECEIPTS, `${key}#decree`, { type: reasonType.replace(/_/g, ' '), to: String(toName || '').trim() || 'its rival' }),
   });
   // r2 worldpulse-war-military-5: write the decree into a DECREED sub-ledger so the next tick's
   // state-derived fold carries it (max-merged, ramping down) instead of dropping it — `force ≡

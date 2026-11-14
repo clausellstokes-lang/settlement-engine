@@ -5,7 +5,6 @@ import { sans, Section, Empty } from '../Primitives';
 import {NarrativeNote} from '../NarrativeNote';
 import { economyDeskRead } from '../economyDeskRead.js';
 import { DeskLines } from './EconomicsGlance.jsx'; // the shared position renderer (see its docblock)
-import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 // THE TWO LABEL SEAMS (§934.13 / §934.22). `rawResource` is a catalogue key on a desert
@@ -117,13 +116,10 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
   if (!res) return <Empty message="No resource data available."/>;
   const _config = r?.config || {};
   // THE ECONOMY DESK, through its one caller. DS-ECO-11 renders here and nowhere else.
-  const deskProse = economyDeskRead(r, { publicDossier, playerView, tier: r?.tier });
-  // ⭐ ONE STRATEGIC-VALUE SENTENCE (UX consolidation 2026-10-30, RULINGS-T2 T2-9; RUBRIC R2).
-  // DS-ECO-11's strategic-value lens REPLACES the generator's line where the desk speaks (DM
-  // and player views); the generator's line stands where it does not (the public dossier, or
-  // a silent corpus). Never both: the header used to print the line and the desk paragraph
-  // below restated it in voice on 856 of 856 towns with a terrain.
-  const deskWorth = drawnAtMount(GROUND_MOUNT, deskProse.strategicValue)?.sentence || null;
+  const deskProse = economyDeskRead(r, { publicDossier, playerView, publicSite: 'economy:resources', tier: r?.tier });
+  // ⭐ ONE STRATEGIC-VALUE SENTENCE (RULINGS-T2 T2-9): DS-ECO-11's lens, on every view (the shared
+  // page prints the owner's player-view draw: SW-B7b). The generator's rated line (`strategicValue`)
+  // LEFT with that cause: no owner view reached it (0 of 300 towns), and a page with no draw is silent.
   // ⭐ THE GAPS READ THE RECORD (READER-R1, the chair's ruling 3). The generator's gap rows
   // ("Mill exists but lacks access to grain") ask the catalogue, not the place; a gap prints
   // here only when the record holds none of the house's inputs, as a fact about the place.
@@ -155,7 +151,6 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
           <div style={{flex:1,minWidth:160}}>
             <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:terrainColor,marginBottom:4}}>Terrain</div>
             <div style={{fontSize: FS['22'],fontWeight:700,color:swatch.inkMag,lineHeight:1.1,marginBottom:6}}>{res.terrain||'Unknown'}</div>
-            {!deskWorth&&res.strategicValue&&<div style={{fontSize: proseFontSize(FS['12.5'], mobile),color:swatch.inkMag2,lineHeight:1.5}}>{res.strategicValue}</div>}
           </div>
           {res.economicStrengths?.length>0&&<div style={{flex:'2 1 200px'}}>
             <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.inkMag3,marginBottom:6}}>What the land offers</div>

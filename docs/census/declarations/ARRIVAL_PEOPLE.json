@@ -137,7 +137,7 @@
         },
         {
           "lineId": "ARRIVAL_PEOPLE.celtic[1]",
-          "text": "A household feeds strangers at its door, and makes sure everyone sees it doing so.",
+          "text": "A household feeds passing travellers at its door, and makes sure everyone sees it doing so.",
           "needs": [],
           "excludes": [
             "crisis: hunger"
@@ -636,7 +636,7 @@
         },
         {
           "lineId": "ARRIVAL_PEOPLE.mixed[1]",
-          "text": "People here greet strangers with open curiosity, and ask where you have come from before your name.",
+          "text": "People here greet newcomers with open curiosity, and ask where you have come from before your name.",
           "needs": [],
           "excludes": [
             "crisis: threat",

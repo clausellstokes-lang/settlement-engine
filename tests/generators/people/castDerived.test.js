@@ -17,7 +17,7 @@ import { goldenCorpus, keyOf } from '../../helpers/goldenMasterCorpus.js';
 import { birth, ensureLaws } from '../../../scripts/audit/soak-review/corpus.mjs';
 import { CAST_REASONS } from '../../../src/domain/crisis/crisisCast.js';
 import { crisisCastFindings } from '../../../src/domain/coherence/crisisCastFindings.js';
-import { seatCandidatesOf } from '../../../src/domain/dossier/seatHolder.js';
+import { seatCandidatesOf, seatHouseFaceOf } from '../../../src/domain/dossier/seatHolder.js';
 import { rulingChainOf } from '../../../src/domain/dossier/powerStrata.js';
 import { factionArchetype, FACTION_ARCHETYPES as A } from '../../../src/domain/factionArchetypes.js';
 import { governingFactionOf, nameOf } from '../../../src/domain/rulingPower.js';
@@ -47,7 +47,8 @@ function relationFor(row) {
   const r = row.reason;
   const stake = (want) => (p, f, k) => want.includes(k);
   if (startsWithAny(r, [CAST_REASONS.bruntLeast, ...Object.values(CAST_REASONS.bruntBase)])) return stake(['loses', 'split', undefined]);
-  if (startsWithAny(r, [CAST_REASONS.instigatorGains, CAST_REASONS.exploiterTrait, CAST_REASONS.exploiterPower, CAST_REASONS.collaboratorAmbition])) return stake(['gains']);
+  // re-keyed by identity (SW-9b-B E-3, the chair's ruling 02:2x): the backed instigator is drawn from a power that gains.
+  if (startsWithAny(r, [CAST_REASONS.instigatorGains, CAST_REASONS.instigatorBacked, CAST_REASONS.exploiterTrait, CAST_REASONS.exploiterPower, CAST_REASONS.collaboratorAmbition])) return stake(['gains']);
   if (startsWithAny(r, [CAST_REASONS.waverer])) return stake(['split']);
   if (startsWithAny(r, [CAST_REASONS.defenderMilitary])) return (p, f) => factionArchetype(f) === A.MILITARY;
   if (startsWithAny(r, [CAST_REASONS.treaterMerchant])) return (p, f) => factionArchetype(f) === A.MERCHANT;
@@ -89,7 +90,9 @@ describe('step 1 — the crisis cast reads memberships (825 born settlements)', 
     let faced = 0;
     let bare = 0;
     for (const { label, s } of corpus) {
-      const faceOf = (house) => (s.npcs || []).find((n) => n?.institution?.kind === 'house' && n.institution.key === house && !n.temporary && !n.ousted) || null;
+      // COHERENCE-POWERS re-key (cure (i), one person, one face): the seat's house where a house leads is faced by the leader
+      const faceOf = (house) => (s.npcs || []).find((n) => n?.institution?.kind === 'house' && n.institution.key === house && !n.temporary && !n.ousted)
+        || seatHouseFaceOf(s, house);
       for (const e of stressesOf(s)) {
         for (const l of e.cast.levers) {
           const face = faceOf(l.institution);
@@ -162,8 +165,8 @@ describe('step 3 — the structural standing is the first-rank power\'s (825 bor
     expect(by.mayor.structuralRank).toBe('head');
     expect(by.reeve.structuralRank).toBe('inner_circle');
     expect(by.drifter.structuralRank).toBe('unaffiliated');
-    expect(by.mayor.structuralPosition).toMatch(/^Holds governing authority/);
-    expect(by.reeve.structuralPosition).toMatch(/^Occupies a civic position|^Holds a civic position/);
+    expect(by.mayor.structuralPosition).toMatch(/^Holds the seat\b/); // re-keyed by identity (SW-6 cause 11, 165049330): the government seat's dominant row in plain words
+    expect(by.reeve.structuralPosition).toMatch(/^Holds an office\b/); // re-keyed by identity (SW-6 cause 11): the subordinate row
     expect(by.reeve.structuralPosition).not.toBe(by.mayor.structuralPosition); // anchored: both carry a position (the two lines above)
   });
 });

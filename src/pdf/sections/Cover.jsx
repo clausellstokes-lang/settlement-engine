@@ -152,7 +152,8 @@ export function Cover({ settlement, narrativeMode = false, vm, isFounder = false
   // §69.4: `num()` returns an UNGROUPED String(Math.round(n)), so the cover read
   // `8000` while Overview.jsx:39 in the SAME DOCUMENT read `8,000` via formatCount.
   const popValue = formatCount(ident.population);
-  const popSub = ident.tier ? `${ident.tier}-tier` : null;
+  // The tier word alone ("Thorpe"), one spelling everywhere (ODQ §934.63 F14); "-tier" was machinery.
+  const popSub = ident.tier || null;
 
   const prosperity = overview.prosperity || null;
   const prosperityTone = overview.prosperityTone || 'muted';
@@ -185,8 +186,12 @@ export function Cover({ settlement, narrativeMode = false, vm, isFounder = false
           <View style={{ flexDirection: 'row', gap: 6 }}>
             {/* Founder Edition mark — small parchment-gold pill, sits
                 to the left of the AI badge when both are present so
-                "Founder + AI" reads naturally rather than stacking. */}
-            {isFounder && (
+                "Founder + AI" reads naturally rather than stacking.
+                ⛔ ONE TIER WORD PER COVER (STYLE-RULINGS-2 B1(d), 2026-11-09): an anonymous export
+                is the free preview, and a founder is a signed-in account, so the two never name
+                one export; where a caller passes both, the cover prints the preview's word and
+                not this pill. tests/pdf/restoredSubsections.test.js (B4) */}
+            {isFounder && !isAnonymous && (
               <View
                 style={{
                   paddingHorizontal: 10, paddingVertical: 4,

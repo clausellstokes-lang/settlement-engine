@@ -852,7 +852,7 @@ describe('law_order — the B5 lawful/chaotic deity coupling', () => {
     const tag = lawfulVar.contributors.find(c => c.effect === 'lawful_patron');
     expect(tag).toBeTruthy();
     expect(tag.delta).toBeGreaterThan(0);
-    expect(tag.reason).toMatch(/strengthens law & order/);
+    expect(tag.reason).toMatch(/stands behind the law/);
 
     const chaoticVar = deriveSystemVariable('law_order', withDeity('chaotic'));
     const ctag = chaoticVar.contributors.find(c => c.effect === 'chaotic_patron');

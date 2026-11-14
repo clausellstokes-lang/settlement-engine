@@ -92,6 +92,64 @@ describe('the people car — one outgoing tie per card (R-P7)', () => {
   }, 120_000);
 });
 
+/**
+ * I-12's added arm (ALLEGIANCE-CAR1, 2026-11-08; the allegiance design §1.5, §4): an agent's ONE
+ * outgoing tie is its handler tie — `to` its handler, `covert: true, handler: true` — so the handler tie
+ * REPLACES the drawn tie and one-out still holds; no other tie is a handler tie. Red-first at the split's
+ * tip (no allegiance dealt there): the anti-vacuity count.
+ * @param {any} s @returns {{ findings: string[], handlerTies: number }}
+ */
+function handlerTieFindings(s) {
+  const findings = [];
+  const byFrom = new Map((s.relationships || []).map((t) => [t.from, t]));
+  const ids = new Set((s.npcs || []).map((n) => n?.id));
+  let handlerTies = 0;
+  for (const n of s.npcs || []) {
+    const h = n?.allegiance?.handler;
+    if (!h || !ids.has(h)) continue;
+    const t = byFrom.get(n.id);
+    if (!t) { findings.push(`${n.id}: an agent with no outgoing tie`); continue; }
+    if (t.to !== h) findings.push(`${n.id}: its tie names ${t.to}, not its handler ${h}`);
+    if (t.covert !== true || t.handler !== true) findings.push(`${n.id}: its handler tie is not covert + handler`);
+    handlerTies += 1;
+  }
+  for (const t of s.relationships || []) {
+    const agent = (s.npcs || []).find((n) => n?.id === t.from);
+    if (t.handler === true && !agent?.allegiance) findings.push(`${t.from}: a handler tie from a card with no allegiance`);
+  }
+  return { findings, handlerTies };
+}
+
+describe('I-12 — the handler tie is the agent\'s one outgoing tie (ALLEGIANCE-CAR1)', () => {
+  it('over the soak 1,000\'s first 240 cities and metropolises: every agent ties to its handler, covert', async () => {
+    await ensureLaws();
+    const findings = []; let handlerTies = 0;
+    for (let i = 0; i < 240; i += 1) {
+      if (i % 6 !== 4 && i % 6 !== 5) continue;
+      const s = birth(i).settlement;
+      assertTies(s, `soak1k-${i}`);
+      const r = handlerTieFindings(s);
+      findings.push(...r.findings.map((f) => `soak1k-${i} ${f}`));
+      handlerTies += r.handlerTies;
+    }
+    expect(findings).toEqual([]);
+    expect(handlerTies, 'the slice draws handler ties').toBeGreaterThanOrEqual(40);
+  }, 300_000);
+
+  it('the check is live: a planted drawn tie on an agent, and a planted handler tie on a clean card, red', () => {
+    const s = {
+      npcs: [{ id: 'a', allegiance: { handler: 'h' } }, { id: 'h' }, { id: 'c' }],
+      relationships: [{ id: 'tie_a', from: 'a', to: 'c' }, { id: 'tie_h', from: 'h', to: 'a' }, { id: 'tie_c', from: 'c', to: 'h', handler: true, covert: true }],
+    };
+    const { findings } = handlerTieFindings(s);
+    expect(findings).toEqual([
+      'a: its tie names c, not its handler h',
+      'a: its handler tie is not covert + handler',
+      'c: a handler tie from a card with no allegiance',
+    ]);
+  });
+});
+
 describe('drawTies — the target rule', () => {
   const card = (id, extra = {}) => ({ id, name: `N ${id}`, role: 'the x', category: 'other', power: 3, memberships: [], ...extra });
 
@@ -99,6 +157,20 @@ describe('drawTies — the target rule', () => {
     expect(drawTies([card('a')], {}, createPRNG('t'))).toEqual([]);
     const two = drawTies([card('a'), card('b')], {}, createPRNG('t'));
     expect(two.map((t) => `${t.from}>${t.to}`)).toEqual(['a>b', 'b>a']);
+  });
+
+  it('an `other` mint ties to the governing power\'s first — the dual-hat leader where a house leads, not the office (COHERENCE-POWERS)', () => {
+    const cast = [
+      card('npc_mayor_and_council', { institution: { kind: 'house', key: 'Mayor and council', title: 'the mayor' }, memberships: [{ power: 'Town Council', rank: 2, share: 1 }] }),
+      card('npc_mills', { institution: { kind: 'house', key: 'Mills (2-5)', title: 'the miller' }, memberships: [{ power: 'Town Council', rank: 1, share: 0 }] }),
+      card('npc_power_revolt_leadership', { institution: { kind: 'power', key: 'Revolt Leadership' }, memberships: [{ power: 'Revolt Leadership', rank: 1, share: 1 }] }),
+    ];
+    const place = { institutions: [{ name: 'Mayor and council' }, { name: 'Mills (2-5)' }], tier: 'town', government: 'Town Council' };
+    const mintTie = drawTies(cast, place, createPRNG('t')).find((t) => t.from === 'npc_power_revolt_leadership');
+    expect(mintTie?.to).toBe('npc_mills');
+    // a cast with no ranks (a save from before the car) still ties the mint to the seat house's face
+    const old = cast.map((c) => ({ ...c, memberships: [] }));
+    expect(drawTies(old, place, createPRNG('t')).find((t) => t.from === 'npc_power_revolt_leadership')?.to).toBe('npc_mayor_and_council');
   });
 
   it('the weights: a minted face or no house is 1; a shared power multiplies by 3', () => {

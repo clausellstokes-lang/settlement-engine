@@ -136,6 +136,10 @@ describe('birth-scale distribution sweep', () => {
     // of 10 sat only 0.34 sigma above that base and could not distinguish tuning
     // drift from ordinary corpus variation. The owner delegated the decision on
     // 2026-07-28, so the alpha-1e-3 derived ceiling of 20 replaces it.
+    // RE-RATIFIED BY THE OWNER 2026-11-09 (~03:5x UTC, "Yes", relayed by the chair), re-keyed by identity with its cause
+    // (ALLEGIANCE-CAR2, A6): the state is DERIVED from the hall's hidden agents (domain/people/hallCapture.js), so a hall
+    // whose lord is an agent reads corrupted; measured 12/400 towns and 19/400 cities, every one with an agent in the
+    // ruling three. The manifest holds the re-derived ceilings (25, 34) with the owner's word.
     const townCorrupted = envelope('capture.ordinaryTown.corrupted');
     expect(
       countAtLeast(ordinaryTowns, 'corrupted'),
@@ -152,17 +156,32 @@ describe('birth-scale distribution sweep', () => {
       + `(${cityCorrupted.margin} sigma). A red means the city rate moved.`,
     ).toBeLessThanOrEqual(cityCorrupted.bound);
     // ── VILLAGES: degenerate, not derivable ───────────────────────────────────
-    // 0/400 villages read corrupted. A binomial envelope at baseRate 0 derives a bound
+    // 0/400 villages read corrupted (4/400 under the derived hall since 2026-11-09, ALLEGIANCE-CAR2; inside the
+    // authored ceiling, which the owner's re-ratification leaves as it stands). A binomial envelope at baseRate 0 derives a bound
     // of 1, which would assert far more certainty than 400 samples can buy: with zero
     // observed events the rule of three puts the plausible ceiling at 3 per 400. The
     // authored 2.5% ceiling stays, un-derived and labelled.
     expect(countAtLeast(ordinaryVillages, 'corrupted')).toBeLessThanOrEqual(Math.round(N * 0.025));
   });
 
-  it('ordinary settlements never read full capture at birth', () => {
+  it('ordinary settlements read full capture at birth only as an agent lord\'s hall where a criminal power stands', () => {
+    // RE-KEYED BY IDENTITY 2026-11-09 under the owner's ratification (~03:5x UTC, "Yes", relayed by the chair; ALLEGIANCE-CAR2,
+    // A6): "never" was the strengths-only classifier's; under the derived hall a capture is the design §3.4's "the lord is
+    // an agent and agentScore >= captureScore", allowed where a criminal power stands (measured 1/400 cities,
+    // cap-ord-city-235). Towns and villages stay at 0 (measured); cities read the derived envelope, and EVERY capture
+    // anywhere must be an agent lord's hall with a criminal power standing.
     expect(countAtLeast(ordinaryTowns, 'capture')).toBe(0);
-    expect(countAtLeast(ordinaryCities, 'capture')).toBe(0);
     expect(countAtLeast(ordinaryVillages, 'capture')).toBe(0);
+    const cityCapture = envelope('capture.ordinaryCity.capture');
+    expect(countAtLeast(ordinaryCities, 'capture'),
+      `ordinary cities captured: bound ${cityCapture.bound} derived from a measured ${cityCapture.baseRate} at N=${cityCapture.baseMeasurementN}`)
+      .toBeLessThanOrEqual(cityCapture.bound);
+    for (const s of [...ordinaryTowns, ...ordinaryCities, ...ordinaryVillages].filter((x) => capOf(x) === 'capture')) {
+      const gov = (s.powerStructure?.factions || []).find((f) => f.isGoverning);
+      const lordAgent = (s.npcs || []).some((n) => n?.allegiance && (n.memberships || []).some((m) => m.power === gov?.faction && m.rank === 1));
+      const crimPower = (s.powerStructure?.factions || []).some((f) => !f.isGoverning && (f.category === 'criminal' || /thie/i.test(String(f.faction))));
+      expect([lordAgent, crimPower], `${s.name}: a capture is an agent lord's hall with a criminal power standing`).toEqual([true, true]);
+    }
   });
 
   it('ordinary villages are overwhelmingly clean', () => {

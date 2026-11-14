@@ -243,11 +243,8 @@ const defaultTrue = new Set(flags.filter((f) => /** @type {Record<string, unknow
 // Flag lit credit (c): explicit registry, validated like LIT_COVERED_BY.
 /** @type {Record<string, { file: string, evidence: string, note: string }>} */
 const FLAG_LIT_COVERED_BY = {
-  allyDefenseEnabled: {
-    file: 'tests/domain/allyDefense.p3.test.js',
-    evidence: 'computeAllyRelief',
-    note: 'drives the gated mechanism’s functions directly below the gate and asserts relief lowers the fall probability',
-  },
+  // allyDefenseEnabled STRUCK (STYLE-2-MERGE at the FIX-PULSE-DEFECTS point, 2026-11-09): SW-11's
+  // tests/domain/newsCardFace.pin.test.js drives the flag lit literally, so the registry entry is no longer the evidence.
   defenderAttritionEnabled: {
     file: 'tests/domain/defenderAttrition.spike.test.js',
     evidence: 'defenderAttritionEnabled: defenderAttrition',
@@ -258,11 +255,8 @@ const FLAG_LIT_COVERED_BY = {
     evidence: 'economicCoupReadEnabled',
     note: 'drives economicAdj through resolveCoupVerdict (the flag’s mechanism) and asserts the hold-chance shifts',
   },
-  warForageEnabled: {
-    file: 'tests/domain/warForage.p3.test.js',
-    evidence: 'warForageEnabled: warForage',
-    note: 'feeds the flag through a variable set true at call sites; asserts forage effects on conquest',
-  },
+  // warForageEnabled STRUCK (STYLE-2-MERGE at the FIX-PULSE-DEFECTS point, 2026-11-09): SW-11's
+  // tests/domain/newsCardFace.pin.test.js drives the flag lit literally, so the registry entry is no longer the evidence.
 };
 
 // ── The gaps, computed live ──────────────────────────────────────────────────

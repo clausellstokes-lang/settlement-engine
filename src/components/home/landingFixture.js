@@ -77,24 +77,24 @@ export const fixture = {
     "tier": "village",
     "eyebrow": "road village · mountain",
     "prose": "The first person you meet on the road into Cnocby wants to know your business, and the second already knows it. Earth-banked enclosures and older rounded foundations remain visible between newer halls.",
-    "pressure": "Étaín Sullivan and Lasair Hayes are connected by something neither discusses openly: Étaín Sullivan and Lasair Hayes will both present proposals at the next council session. Only one will be accepted.",
+    "pressure": "Étaín Sullivan and Lasair Hayes will both present proposals at the next council session. Only one will be accepted.",
     "hooks": [
       {
         "kind": "NPC",
         "tone": "success",
         "tag": "derived · npcs",
         "lead": "Waitling Hayes, the eldest",
-        "rest": " · goal: win the people back with things that cost nothing: fair hearings and quick answers."
+        "rest": " · goal: settle one quarrel inside elder council before fearghus o'brien can settle it and take the credit."
       },
       {
         "kind": "NPC",
         "tone": "success",
         "tag": "derived · npcs",
         "lead": "Étaín Sullivan, the priest",
-        "rest": " · goal: keep their small charge going on half the alms and none of the help."
+        "rest": " · goal: have the old rights of the house of worship read out and recognised before anyone challenges them."
       }
     ],
-    "hooksMore": 2
+    "hooksMore": 4
   },
   "voice": {
     "receipts": [
@@ -111,30 +111,30 @@ export const fixture = {
         "text": "blacksmith · selected (Base chance 4% lifted by ×2.50 from nearby resources + terrain.)"
       }
     ],
-    "narrated": "The road made Cnocby by a coin’s width, three chances of it against two of nothing, and the mountain stands are being cleared faster than they grow back. The Elder Council and the Religious Authorities are at odds over conscripting the guilds’ apprentices, and a neutral name is being pressed to choose a side before the council next sits. The mayor, Odhrán MacCarthy, means to win the people back with what costs nothing: fair hearings and quick answers. Hector Gallagher and Inghean MacCarthy are bound by something neither speaks of, and they are about to stand on opposite sides of a decision that matters."
+    "narrated": "The road made Cnocby by a coin’s width, three chances of it against two of nothing, and the mountain stands are being cleared faster than they grow back. The village keeps a smith on four chances in a hundred, more than doubled by the mountain and by what lies near it."
   },
   "realm": {
     "whyTrace": [
       {
         "axis": "Trade connectivity",
         "from": "adequate",
-        "to": "critical",
-        "tone": "danger",
-        "reason": "Wartime pressure disrupts trade flows. Trade route strain disrupts trade flows."
+        "to": "strained",
+        "tone": "warning",
+        "reason": "Wartime pressure disrupts trade flows. Criminal pressure disrupts trade flows."
       },
       {
         "axis": "Religious authority",
         "from": "adequate",
         "to": "surplus",
         "tone": "success",
-        "reason": "Vael (major) anchors religious authority (piety ×1.40). Religious Authorities carries power 30."
+        "reason": "Vael (major) gives the priesthood its standing. Religious Authorities carries power 30."
       },
       {
         "axis": "Social trust",
         "from": "strained",
         "to": "critical",
         "tone": "danger",
-        "reason": "Public legitimacy 14 colors trust. Criminal pressure erodes communal trust."
+        "reason": "Public legitimacy 13 colors trust. Criminal pressure erodes communal trust."
       }
     ],
     "advance": [
@@ -145,34 +145,34 @@ export const fixture = {
         "text": "Étaín Sullivan is out to restore order."
       },
       {
-        "week": "Week 3",
-        "season": "the spring of year 1",
-        "headline": "Fearghus O'Brien rallies supporters",
-        "text": "Fearghus O'Brien is out to take control of an institution."
-      },
-      {
-        "week": "Week 4",
-        "season": "the spring of year 1",
-        "headline": "Religious conversion fracture has passed",
-        "text": "Religious conversion fracture is over, but it leaves sectarian memory, temple debt, ritual disputes. It will be remembered for a while yet."
-      },
-      {
-        "week": "Week 5",
+        "week": "Week 2",
         "season": "the spring of year 1",
         "headline": "Cnocby goes onto a war footing",
         "text": "Cnocby is mustering its levies and doubling its watch."
       },
       {
+        "week": "Week 4",
+        "season": "the spring of year 1",
+        "headline": "The split between the faiths is over",
+        "text": "Religious conversion fracture is over, but it leaves sectarian memory, temple debt, ritual disputes behind."
+      },
+      {
         "week": "Week 9",
         "season": "the spring of year 1",
         "headline": "Elder Council captures an institution",
-        "text": "Elder Council sees an opening to press council rule interests."
+        "text": "Control of Cnocby's multiple water sources is passing to Elder Council."
       },
       {
         "week": "Week 12",
         "season": "the spring of year 1",
-        "headline": "Cnocby's trade routes break down",
-        "text": "Caravans are passing Cnocby by, and its market stalls stand half empty."
+        "headline": "Caoilfhinn Gallagher pushes through reforms",
+        "text": "Caoilfhinn Gallagher is out to come through the crisis."
+      },
+      {
+        "week": "Week 12",
+        "season": "the spring of year 1",
+        "headline": "Crime takes hold of Cnocby",
+        "text": "Thieves and racketeers are working Cnocby's streets in the open."
       }
     ],
     "chronicle": [
@@ -185,13 +185,13 @@ export const fixture = {
       {
         "kind": "stressor",
         "tone": "war",
-        "week": "Week 4",
-        "text": "The faith of Korl broke its pact with Keshigordu, a betrayal its patron's nature made only a matter of time."
+        "week": "Week 2",
+        "text": "Cnocby is mustering its levies and doubling its watch."
       },
       {
         "kind": "trade",
         "tone": "economic",
-        "week": "Week 10",
+        "week": "Week 12",
         "text": "Thieves and racketeers are working Cnocby's streets in the open."
       }
     ],

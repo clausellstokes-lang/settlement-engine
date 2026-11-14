@@ -107,6 +107,12 @@ export const SAVED_KEY_WRITERS = Object.freeze([
     key: 'migrationReports', file: 'src/domain/settlementMigrations.js', symbol: 'migrateV1toV2',
     sites: 1, spelling: 'assign', reachedFromSrc: true,
   }),
+  // ALLEGIANCE-CAR1 (2026-11-08): the v2 -> v3 migration (the allegiance's) reports what it could not move — its one
+  // `migrationReports` write (settlementMigrations.js :: migrateV2toV3), reached through the chain's v2 -> v3 step.
+  Object.freeze({
+    key: 'migrationReports', file: 'src/domain/settlementMigrations.js', symbol: 'migrateV2toV3',
+    sites: 1, spelling: 'assign', reachedFromSrc: true,
+  }),
   Object.freeze({
     key: 'dmLayer', file: 'src/store/editSlice.js', symbol: 'applyCascadeEdit',
     sites: 1, spelling: 'assign', reachedFromSrc: true,
@@ -232,6 +238,8 @@ export const KEYED_COLLECTIONS = Object.freeze({
   'history.legacyAnnotations': Object.freeze(['eventName', 'yearsAgo']),
   institutions: 'name',
   // the card is keyed by its id; its `institution` and its ranked `memberships` merge INSIDE the HELD card.
+  // ALLEGIANCE-CAR1 (2026-11-08): so does its `allegiance` (the hidden allegiance, domain/people/allegiance.js) — ONE
+  // record per card, a HELD card field the DM edits whole (the Impose / Expose events, the Power tab), never keyed.
   npcs: 'id',
   // 2026-11-07 PEOPLE-1 CAST (R-P3/R-P5): a card's powers, one entry per power its house backs, keyed by the power's name.
   'npcs[].memberships': 'power',

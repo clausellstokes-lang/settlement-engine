@@ -37,7 +37,7 @@
     },
     {
      "lineId": "CRISIS_CAST_REASONS.CAST_REASONS.bruntBase.labor_capacity",
-     "text": "its hands do the work the crisis takes",
+     "text": "its people do the work the crisis needs most",
      "needs": [],
      "excludes": [],
      "crisis": "any",
@@ -94,7 +94,7 @@
     },
     {
      "lineId": "CRISIS_CAST_REASONS.CAST_REASONS.bruntBase.public_legitimacy",
-     "text": "its standing is what the crisis spends",
+     "text": "it takes the blame, and its good name pays for the crisis",
      "needs": [],
      "excludes": [],
      "crisis": "any",
@@ -117,7 +117,7 @@
     },
     {
      "lineId": "CRISIS_CAST_REASONS.CAST_REASONS.bruntBase.tax_revenue",
-     "text": "its revenue is what the crisis drains",
+     "text": "its income dries up first",
      "needs": [],
      "excludes": [],
      "crisis": "any",
@@ -257,7 +257,7 @@
     },
     {
      "lineId": "CRISIS_CAST_REASONS.CAST_REASONS.leverInstitution",
-     "text": "the crisis turns on this house, and no one on the roster runs it",
+     "text": "whoever runs it decides how the crisis goes, and nobody named here runs it",
      "needs": [],
      "excludes": [],
      "crisis": "any",
@@ -266,7 +266,7 @@
     },
     {
      "lineId": "CRISIS_CAST_REASONS.CAST_REASONS.leverTemporary",
-     "text": "no one on the roster could; here for this crisis",
+     "text": "nobody here could, so this one stepped in for the crisis",
      "needs": [],
      "excludes": [],
      "crisis": "any",
@@ -284,7 +284,7 @@
     },
     {
      "lineId": "CRISIS_CAST_REASONS.CAST_REASONS.instigatorGains",
-     "text": "its faction gains from the crisis",
+     "text": "its power gains from the crisis",
      "needs": [],
      "excludes": [],
      "crisis": "any",
@@ -360,7 +360,7 @@
     },
     {
      "lineId": "CRISIS_CAST_REASONS.CAST_REASONS.exploiterTrait",
-     "text": "grasping by nature, in a faction that gains",
+     "text": "grasping by nature, in a power that gains",
      "needs": [],
      "excludes": [],
      "crisis": "any",
@@ -369,7 +369,7 @@
     },
     {
      "lineId": "CRISIS_CAST_REASONS.CAST_REASONS.exploiterPower",
-     "text": "the most powerful of a faction that gains",
+     "text": "the strongest figure in a power that gains",
      "needs": [],
      "excludes": [],
      "crisis": "any",
@@ -478,7 +478,7 @@
     },
     {
      "lineId": "CRISIS_CAST_REASONS.CAST_REASONS.collaboratorAmbition",
-     "text": "the most ambitious of a faction that gains",
+     "text": "the most ambitious of a power that gains",
      "needs": [],
      "excludes": [],
      "crisis": "any",
@@ -500,7 +500,7 @@
     },
     {
      "lineId": "CRISIS_CAST_REASONS.CAST_REASONS.waverer",
-     "text": "its faction could go either way",
+     "text": "its power could go either way",
      "needs": [],
      "excludes": [],
      "crisis": "any",
@@ -583,7 +583,7 @@
     },
     {
      "lineId": "CRISIS_CAST_REASONS.CAST_ABSENCES.noGains",
-     "text": "no faction gains",
+     "text": "no power gains",
      "needs": [],
      "excludes": [],
      "crisis": "any",
@@ -645,7 +645,7 @@
     },
     {
      "lineId": "CRISIS_CAST_REASONS.CAST_ABSENCES.noSplit",
-     "text": "no faction could go either way",
+     "text": "no power could go either way",
      "needs": [],
      "excludes": [],
      "crisis": "any",
@@ -829,7 +829,7 @@
     },
     {
      "lineId": "CRISIS_CAST_REASONS.STAKE_REASONS.untouched",
-     "text": "no direct stake; it could go either way",
+     "text": "not touched yet; it could side with either camp",
      "needs": [],
      "excludes": [],
      "crisis": "any",

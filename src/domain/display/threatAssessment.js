@@ -152,25 +152,24 @@ export function buildThreatAssessment(r) {
           : '')
         + 'Adequate for the threat level.';
     } else if (hasWalls && hasMilitia) {
-      mon = (palisade ? 'Palisade' : 'Walls') + ' and militia are standard frontier resilience. Effective against most creature threats, strained by simultaneous incursions. '
+      mon = (palisade ? 'A palisade' : 'Walls') + ' and a militia, as most frontier places have: enough for most creatures, not for several attacks at once.'
         + (hasCharter
-          ? 'Charter hall provides specialist backup. '
-          : '')
-        + 'Honest posture for a frontier settlement.';
+          ? ' The charter hall sends specialists when the militia is not enough.'
+          : '');
     } else if (hasGarrison || hasMilitia) {
       mon = 'Active frontier with '
         + (hasGarrison ? 'a garrison' : 'a militia')
         + ' but no perimeter. Defense is reactive. Attackers choose the point of engagement. Adequate for routine threats; exposed to anything coordinated.';
     } else {
-      mon = 'Active frontier with no organized defense. Vulnerable to any monster of moderate capability.';
+      mon = 'Wild country all round and nobody organised to meet it; any creature of real size would get in.';
     }
   } else {
     if (hasWalls && hasGarrison) {
-      mon = 'Safe heartland: the existing defenses are substantially more than the threat level requires.';
+      mon = 'Quiet country, and far more defences than it calls for.';
     } else if (hasWalls || hasGarrison || hasMilitia || hasCharter) {
       mon = 'Safe heartland with minimal creature activity. Existing defenses are appropriate. The primary threats here are internal.';
     } else {
-      mon = 'Safe heartland with no organized defense. Acceptable given the threat environment.';
+      mon = 'Quiet country and no organised defence, which is all the country asks.';
     }
   }
   result.push({
@@ -190,7 +189,7 @@ export function buildThreatAssessment(r) {
     mil = (palisade ? 'A palisade and a professional garrison provide' : 'Walls and professional garrison provide')
       + ' meaningful deterrence against raiding and conventional assault. Not rated for sustained siege without significant supply stockpiles.';
   } else if (hasWalls && hasMilitia) {
-    mil = (palisade ? 'A palisade with citizen militia' : 'Walls with citizen militia') + ': credible deterrence against raiders, inadequate against any professional force with siege capability.';
+    mil = (palisade ? 'A palisade' : 'Walls') + ' and armed townsfolk: enough to turn raiders away, not enough against an army that brings siege gear.';
   } else if (hasWalls) {
     mil = palisade
       ? 'A palisade but no organized military force to man it. A determined attacker is over it with ladders and time.'
@@ -217,16 +216,16 @@ export function buildThreatAssessment(r) {
   const sl = sp.safetyLabel || 'Moderate';
   let intA = 'Internal security: ' + sl + '. ';
   if (sl.includes('Dangerous')) {
-    intA += 'Active violence and organized crime make internal order the primary threat. ';
+    intA += 'Violence and organised crime are the main danger here. ';
   }
   if (f.hasCourtSystem && f.hasPrison) {
-    intA += 'Full legal infrastructure provides enforcement capacity.';
+    intA += 'Arrest, trial and gaol all work here.';
   } else if (f.hasCourtSystem) {
-    intA += 'Courts prosecute but limited detention.';
+    intA += 'There is a court but almost nowhere to hold anyone.';
   } else if (f.hasPrison) {
-    intA += 'Detention without systematic prosecution.';
+    intA += 'People are locked up without trial.';
   } else {
-    intA += 'No legal infrastructure: order relies on force alone.';
+    intA += 'No court and no gaol; order rests on whoever is armed.';
   }
   result.push({
     label: 'Internal Security',
@@ -242,16 +241,16 @@ export function buildThreatAssessment(r) {
       : '#8b1a1a';
   let econA;
   if (econScore >= 65) {
-    econA = 'Strong economic base can absorb a sustained crisis. Tax revenue funds emergency measures and '
-      + (hasGarrison ? 'sustains garrison pay' : 'keeps the defence paid')
-      + ' during prolonged engagement.';
+    econA = 'Money enough to ride out a long crisis: emergency measures can be paid for, and '
+      + (hasGarrison ? 'the garrison kept paid' : 'the defenders kept paid')
+      + ' while it lasts.';
   } else if (econScore >= 40) {
-    econA = 'Adequate economic resilience for a short-term crisis. A prolonged siege will begin straining reserves within months.';
+    econA = 'Money enough for a short crisis; a long siege would start eating the reserves within months.';
   } else if (econScore >= 25) {
-    econA = 'Chronic underfunding limits emergency response. A sustained crisis will exhaust reserves and '
-      + (hasGarrison ? 'undermine garrison morale.' : 'wear down the people who defend the place.');
+    econA = 'The defenders are already paid late; a long crisis would empty the reserves and '
+      + (hasGarrison ? 'wear out the garrison\'s patience.' : 'wear down the people who defend the place.');
   } else {
-    econA = 'Economic base cannot support crisis response. Any sustained threat quickly overwhelms the capacity to respond.';
+    econA = 'There is no money to meet a crisis; any lasting trouble would find nothing to spend.';
   }
   result.push({
     label: 'Economic Survival',
@@ -264,12 +263,12 @@ export function buildThreatAssessment(r) {
   // in months; this row speaks of who tends the sick, and of a famine by name (F9 unit 1).
   // Under an active famine the row's sentence names it first (F9 unit 1).
   const care = facts.hasHospital
-    ? 'Hospital infrastructure enables disease containment and systematic quarantine.'
+    ? 'The hospital can isolate the sick and keep an outbreak from spreading.'
     : facts.hasHealer
       ? healerSubject(facts.healerName) + ' treats the sick one at a time; an outbreak would outrun it.'
       : f.hasChurch
         ? 'Clergy provide basic wound care: better than nothing, worse than a hospital.'
-        : 'No medical infrastructure. Plague spreads until it burns out.';
+        : 'Nobody here treats the sick, and a plague would run until it burned out.';
   const disA = inActiveFamine(r) ? `${FAMINE_SENTENCE} ${care}` : care;
   result.push({
     label: 'Disasters & Famine',

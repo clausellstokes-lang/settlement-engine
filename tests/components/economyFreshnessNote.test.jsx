@@ -60,7 +60,7 @@ import { ServicesTab } from '../../src/components/new/tabs/ServicesTab.jsx';
 import SummaryTab from '../../src/components/new/SummaryTab.jsx';
 import TableView from '../../src/components/TableView.jsx';
 import SessionMode from '../../src/components/session/SessionMode.jsx';
-import { ECONOMY_FRESHNESS_SENTENCES } from '../../src/domain/display/economyFreshness.js';
+import { ECONOMY_FRESHNESS_SENTENCES, economyFreshnessNote } from '../../src/domain/display/economyFreshness.js';
 
 // W1 ECO second seat (2026-11-07): re-keyed, not loosened, with the sentence's rewrite under the owner's style law.
 const ECON_NOTE = /^Something has changed in this town since these tallies were taken, and it may not show in them yet\.$/;
@@ -272,3 +272,14 @@ describe('the sentence is ONE vetoable copy unit across every covered surface', 
     expect(screen.getByText(SVC_NOTE).textContent).toBe(ECONOMY_FRESHNESS_SENTENCES.catalog);
   });
 });
+
+describe('the freshness note speaks the settlement\'s own tier noun (SW-9, the audit\'s A11 tier-noun row)', () => {
+  it('a thorp reads "this thorp", a town keeps the constant byte-for-byte', () => {
+    const thorp = { ...makeSettlement(STALE_TRAIL), tier: 'thorp' };
+    expect(economyFreshnessNote(thorp, 'tallies'))
+      .toBe('Something has changed in this thorp since these tallies were taken, and it may not show in them yet.');
+    expect(economyFreshnessNote(thorp, 'catalog')).toContain('in this thorp since');
+    expect(economyFreshnessNote(makeSettlement(STALE_TRAIL), 'tallies')).toBe(ECONOMY_FRESHNESS_SENTENCES.tallies);
+  });
+});
+

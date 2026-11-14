@@ -1,0 +1,44 @@
+// The untracked leaf of PARKED-f4.patch (git diff omits new files). As built and measured: src/generators/economy/chainIncome.js
+/**
+ * economy/chainIncome.js — AN INCOME LINE THAT NAMES A WORKING STANDS WHERE ITS CHAIN RUNS (COHERENCE-AGREE-6, F4).
+ * The chain model is the one reader: a source is offered only where a chain of its family runs; its line is read from
+ * that chain's own state. (The chair re-ruled F4 on 2026-11-12: build ONLY the leaf "a chain works this resource here";
+ * the income source stays; the generator gate below is NOT to be applied.)
+ */
+import { LOCAL_COAL_LINE } from './incomeLineSiblings.js';
+
+export const INCOME_CHAIN_FAMILIES = Object.freeze({
+  'Iron & Metalwork': Object.freeze(['iron_deposits', 'coal_deposits', 'precious_metals']),
+  'Timber Trade': Object.freeze(['managed_forest', 'timber', 'mountain_timber', 'shipbuilding_timber']),
+  'Stone Quarrying': Object.freeze(['stone_quarry']),
+});
+export const RUNNING_CHAIN_STATUSES = Object.freeze(['running', 'operational', 'entrepot', 'vulnerable', 'magically_sustained']);
+const LINES = Object.freeze({
+  'Iron & Metalwork': Object.freeze({
+    ore: 'Local ore feeds the smithy directly. Metalwork income is not trade-route dependent.',
+    coal: LOCAL_COAL_LINE,
+    bought: 'Iron imported from mining regions and worked locally; this income stream is vulnerable to supply disruption.',
+  }),
+  'Timber Trade': Object.freeze({
+    own: 'Local forest provides sustainable timber revenue; managed felling and sawmilling keep production consistent.',
+    bought: 'Timber sourced from more distant forests and resold or processed locally: trade route dependent.',
+  }),
+  'Stone Quarrying': Object.freeze({
+    own: 'Local quarry provides dressed stone to regional builders: reliable income with low transport overhead.',
+    bought: 'Stone masons work imported material; the quarrying income notation reflects processing margin only.',
+  }),
+});
+/** The line a source prints, read from its family's running chains; null where none runs. */
+export function chainIncomeLine(source, chains, liveResources) {
+  const family = INCOME_CHAIN_FAMILIES[source];
+  const lines = LINES[source];
+  if (!family || !lines) return null;
+  const live = new Set(liveResources || []);
+  const running = (Array.isArray(chains) ? chains : []).filter((c) => RUNNING_CHAIN_STATUSES.includes(String(c?.status))
+    && (family.includes(String(c?.resourceInputKey)) || family.includes(String(c?.resourceKey))));
+  if (!running.length) return null;
+  const own = new Set(running.filter((c) => c.resourceInputAvailable === true).map((c) => String(c.resourceInputKey))
+    .filter((key) => family.includes(key) && live.has(key)));
+  if (source === 'Iron & Metalwork') return own.has('iron_deposits') ? lines.ore : own.has('coal_deposits') ? lines.coal : lines.bought;
+  return own.size ? lines.own : lines.bought;
+}

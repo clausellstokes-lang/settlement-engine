@@ -225,13 +225,18 @@ describe('SurveyorDoor — entitlement (the marker law)', () => {
     expect(tab.querySelector('[aria-hidden="true"]')?.textContent).toBe('Ask the Surveyor');
   });
 
-  it('isSurveyorTier chokepoint: entitlement OR founder OR elevated role; Cartographer premium excluded', () => {
-    expect(isSurveyorTier({ hasSurveyorEntitlement: true })).toBe(true);
+  // RE-KEYED BY CAUSE (lane TIER-PARITY-FIX, 2026-11-09; the owner: the Surveyor is
+  // "Premium only"): the Cartographer premium is now the Surveyor's holder and the free
+  // account is refused; Founders (lifetime premium) and staff are admitted; the server's own
+  // answer (209: premium ∨ staff ∨ a staff grant) is honoured so client and server agree.
+  it('isSurveyorTier chokepoint: premium (Founders folded in) OR staff OR the server\'s answer; free refused', () => {
+    expect(isSurveyorTier({ tier: 'premium' })).toBe(true); // Cartographer — the door
     expect(isSurveyorTier({ isFounder: true })).toBe(true);
     expect(isSurveyorTier({ role: 'admin' })).toBe(true);
     expect(isSurveyorTier({ role: 'developer' })).toBe(true);
-    expect(isSurveyorTier({ tier: 'premium' })).toBe(false); // Cartographer — no door
+    expect(isSurveyorTier({ tier: 'free', hasSurveyorEntitlement: true })).toBe(true); // a staff grant, per the server
     expect(isSurveyorTier({ tier: 'free' })).toBe(false);
+    expect(isSurveyorTier({ tier: 'anon' })).toBe(false);
     expect(isSurveyorTier(null)).toBe(false);
   });
 

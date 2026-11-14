@@ -35,6 +35,16 @@ import {
   RETIRED_MIGRATION_DIRECTION_BASELINE_SCHEMA,
   RETIRED_PEOPLE_CAST_BASELINE_SCHEMA,
   RETIRED_PEOPLE_LANDING_BASELINE_SCHEMA,
+  RETIRED_CAR_MERGE_BASELINE_SCHEMA,
+  RETIRED_WAVE_W2_BASELINE_SCHEMA,
+  RETIRED_WAVE_FOOD_BASELINE_SCHEMA,
+  RETIRED_WAVE_VEIL_BASELINE_SCHEMA,
+  RETIRED_TRAIN_CAR1_BASELINE_SCHEMA,
+  RETIRED_TRAIN_CAR2_BASELINE_SCHEMA,
+  RETIRED_TRAIN_CAR3_BASELINE_SCHEMA,
+  RETIRED_TRAIN_CAR4_BASELINE_SCHEMA,
+  RETIRED_PUBLIC_PROSE_BASELINE_SCHEMA,
+  RETIRED_PLAYED_WORLDS_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA,
   validateSchema3Baseline,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
@@ -69,6 +79,16 @@ import {
   validateSchema30Baseline,
   validateSchema31Baseline,
   validateSchema32Baseline,
+  validateSchema33Baseline,
+  validateSchema34Baseline,
+  validateSchema35Baseline,
+  validateSchema36Baseline,
+  validateSchema37Baseline,
+  validateSchema38Baseline,
+  validateSchema39Baseline,
+  validateSchema40Baseline,
+  validateSchema41Baseline,
+  validateSchema42Baseline,
 } from '../../scripts/lib/observed-shape-baseline.mjs';
 import {
   digestOf,
@@ -372,8 +392,28 @@ describe('observed-shape schema-3 baseline envelope', () => {
     // ⭐ SCHEMA 30: THE PEOPLE CAR'S CAST (the owner's charter, ODQ §934.105; lane PEOPLE-1 CAST, 2026-11-07): schema 29's envelope, tag law, roster and corpus definition UNCHANGED, re-governed to a register that admits 19 ordinary rows the cast's year exposes and lets 0 go; nothing is declared and the bank holds at 77/51.
     // ⭐ SCHEMA 31: THE PEOPLE CAR'S LANDING (ODQ §934.105; the landing seat PEOPLE-LAND, 2026-11-07): schema 30's envelope, tag law, roster and corpus definition UNCHANGED, re-governed to a NEW GENESIS from a restored consistent schema-30 predecessor; the grouping and the per-NPC faction fields leave the record (M-2, M-7), 90 rows admitted with attribution by lane cause, 9 go, 2 decrease; nothing is declared and the bank holds at 77/51.
     // ⭐ SCHEMA 32: MERGE-CAR (the people car merged into the integration branch over the rung-2 landing; the chair's brief, 2026-11-08): schema 31's envelope, tag law, roster and corpus definition UNCHANGED; the car's genesis at 31 STANDS and the integration side's schema-30 reads (R2's census readers) are admitted by cause, 15 rows admitted, 12 go; nothing is declared and the bank is 76/50.
-    expect(BASELINE_SCHEMA).toBe(32);
+    // ⭐ SCHEMA 33: MERGE-WAVE at the W2 DEF merge (one rung per cause, the chair's ruling of 2026-11-08): schema 32's envelope, tag law, roster and corpus definition UNCHANGED; one grounded read admitted by cause.
+    // ⭐ SCHEMA 34: MERGE-WAVE at the FIX-FOOD-ISOLATION merge (one rung per cause): one row admitted by cause.
+    // ⭐ SCHEMA 35: MERGE-WAVE at the FIX-PUBLIC-VEIL merge (one rung, two causes, the chair's option B).
+    // ⭐ SCHEMA 36: MERGE-TRAIN at the ALLEGIANCE-CAR1 merge (one rung, two causes: the hidden allegiance and the J-19 re-deal; the car's own 33, the veil merge, is not re-minted).
+    // ⭐ SCHEMA 37: MERGE-TRAIN at the ALLEGIANCE-CAR2 merge (one rung, one cause: the guild's push re-deals the year, 13 rows retired).
+    // ⭐ SCHEMA 38: MERGE-TRAIN at the ALLEGIANCE-CAR3 merge (one rung, two causes: car 3's dial re-deals the year, 13 admitted and 5 retired; the bought watch retires 1).
+    // ⭐ SCHEMA 39: MERGE-TRAIN at the ALLEGIANCE-CAR4 merge (one rung, two causes: the goals rebuilt — 7 admitted, 4 repaired, 16 uncured instrument erosion — and the fingerprint re-based, 1 admitted).
+    // ⭐ SCHEMA 40: THE PUBLIC PROSE WRITER'S ADMISSION (lane SW-B7b PROJECTION, the chair's grant of 2026-11-09 13:5x): ONE save-time-writer declaration, `publicProse on settlement` (the roster 14 -> 15, the bank 77/51); its one new row is admitted tagged and nothing else moves.
+    // ⭐ SCHEMA 41: THE PLAYED-WORLDS WRITER'S ADMISSION (STYLE-2-MERGE closing act 5, the chair's FINAL RULING of 2026-11-09 21:2x): a NEW writer class, played-worlds-writer, and its first declaration, `outcome on outcome` (the roster 15 -> 16, the bank 78/52); its one row, admitted ordinary at 40, is tagged and nothing else moves.
+    // ⭐ SCHEMA 42: the agreement lane's tier seed (STYLE-2-MERGE point 47, STOP 47a) — producer 2b's seed re-searched (osr-tier-14 -> osr-tier-19); topology, tag law, roster and bank unchanged.
+    expect(BASELINE_SCHEMA).toBe(42);
+    expect(RETIRED_PLAYED_WORLDS_BASELINE_SCHEMA).toBe(41);
+    expect(RETIRED_PUBLIC_PROSE_BASELINE_SCHEMA).toBe(40);
+    expect(RETIRED_TRAIN_CAR4_BASELINE_SCHEMA).toBe(39);
+    expect(RETIRED_TRAIN_CAR3_BASELINE_SCHEMA).toBe(38);
+    expect(RETIRED_TRAIN_CAR2_BASELINE_SCHEMA).toBe(37);
+    expect(RETIRED_TRAIN_CAR1_BASELINE_SCHEMA).toBe(36);
+    expect(RETIRED_WAVE_VEIL_BASELINE_SCHEMA).toBe(35);
+    expect(RETIRED_WAVE_FOOD_BASELINE_SCHEMA).toBe(34);
+    expect(RETIRED_WAVE_W2_BASELINE_SCHEMA).toBe(33);
     expect(RETIRED_PEOPLE_LANDING_BASELINE_SCHEMA).toBe(31);
+    expect(RETIRED_CAR_MERGE_BASELINE_SCHEMA).toBe(32);
     expect(RETIRED_PEOPLE_CAST_BASELINE_SCHEMA).toBe(30);
     expect(RETIRED_MIGRATION_DIRECTION_BASELINE_SCHEMA).toBe(29);
     expect(RETIRED_TIER_COVERAGE_BASELINE_SCHEMA).toBe(28);
@@ -706,6 +746,76 @@ function validSchema31Baseline_fixture() {
   return baseline;
 }
 
+/** The RETIRED schema-32 envelope, pinned to its own LITERAL number (the W2-merge rung). */
+function validSchema32Baseline_fixture() {
+  const baseline = validSchema7Baseline();
+  baseline.schema = RETIRED_CAR_MERGE_BASELINE_SCHEMA;
+  return baseline;
+}
+
+/** The RETIRED schema-33 envelope, pinned to its own LITERAL number (the food-isolation rung). */
+function validSchema33Baseline_fixture() {
+  const baseline = validSchema7Baseline();
+  baseline.schema = RETIRED_WAVE_W2_BASELINE_SCHEMA;
+  return baseline;
+}
+
+/** The RETIRED schema-34 envelope, pinned to its own LITERAL number (the public-veil rung). */
+function validSchema34Baseline_fixture() {
+  const baseline = validSchema7Baseline();
+  baseline.schema = RETIRED_WAVE_FOOD_BASELINE_SCHEMA;
+  return baseline;
+}
+
+/** The RETIRED schema-35 envelope, pinned to its own LITERAL number (the allegiance-car1 rung). */
+function validSchema35Baseline_fixture() {
+  const baseline = validSchema7Baseline();
+  baseline.schema = RETIRED_WAVE_VEIL_BASELINE_SCHEMA;
+  return baseline;
+}
+
+/** The RETIRED schema-36 envelope, pinned to its own LITERAL number (the allegiance-car2 rung). */
+function validSchema36Baseline_fixture() {
+  const baseline = validSchema7Baseline();
+  baseline.schema = RETIRED_TRAIN_CAR1_BASELINE_SCHEMA;
+  return baseline;
+}
+
+/** The RETIRED schema-37 envelope, pinned to its own LITERAL number (the allegiance-car3 rung). */
+function validSchema37Baseline_fixture() {
+  const baseline = validSchema7Baseline();
+  baseline.schema = RETIRED_TRAIN_CAR2_BASELINE_SCHEMA;
+  return baseline;
+}
+
+/** The RETIRED schema-38 envelope, pinned to its own LITERAL number (the allegiance-car4 rung). */
+function validSchema38Baseline_fixture() {
+  const baseline = validSchema7Baseline();
+  baseline.schema = RETIRED_TRAIN_CAR3_BASELINE_SCHEMA;
+  return baseline;
+}
+
+/** The RETIRED schema-39 envelope, pinned to its own LITERAL number (the public-prose rung). */
+function validSchema39Baseline_fixture() {
+  const baseline = validSchema7Baseline();
+  baseline.schema = RETIRED_TRAIN_CAR4_BASELINE_SCHEMA;
+  return baseline;
+}
+
+/** The RETIRED schema-40 envelope, pinned to its own LITERAL number (the played-worlds rung). */
+function validSchema40Baseline_fixture() {
+  const baseline = validSchema7Baseline();
+  baseline.schema = RETIRED_PUBLIC_PROSE_BASELINE_SCHEMA;
+  return baseline;
+}
+
+/** The RETIRED schema-41 envelope, pinned to its own LITERAL number (the tier-seed rung). */
+function validSchema41Baseline_fixture() {
+  const baseline = validSchema7Baseline();
+  baseline.schema = RETIRED_PLAYED_WORLDS_BASELINE_SCHEMA;
+  return baseline;
+}
+
 /** The LIVE envelope, whatever number is in force. */
 function validLiveBaseline() {
   const baseline = validSchema7Baseline();
@@ -1010,9 +1120,60 @@ describe('observed-shape schema-7 bank-by-rule envelope', () => {
     // with a fixture; `live` belongs to 32 now.
     const peopleLanding = validSchema31Baseline_fixture();
     expect(validateSchema31Baseline(peopleLanding)).toBe(peopleLanding);
-    expect(validateSchema32Baseline(live)).toBe(live);
     expect(() => validateSchema31Baseline(live)).toThrow(/is not schema 31/);
     expect(() => validateSchema32Baseline(peopleLanding)).toThrow(/is not schema 32/);
+    // ⭐ 32 IS RETIRED at the schema-33 rung (MERGE-WAVE, W2 DEF) and validates its OWN literal, paired
+    // with a fixture; `live` belongs to 33 now.
+    const carMerge = validSchema32Baseline_fixture();
+    expect(validateSchema32Baseline(carMerge)).toBe(carMerge);
+    expect(() => validateSchema32Baseline(live)).toThrow(/is not schema 32/);
+    expect(() => validateSchema33Baseline(carMerge)).toThrow(/is not schema 33/);
+    // ⭐ 33 IS RETIRED at the schema-34 rung (MERGE-WAVE, FIX-FOOD-ISOLATION) and validates its OWN literal.
+    const waveW2 = validSchema33Baseline_fixture();
+    expect(validateSchema33Baseline(waveW2)).toBe(waveW2);
+    expect(() => validateSchema33Baseline(live)).toThrow(/is not schema 33/);
+    expect(() => validateSchema34Baseline(waveW2)).toThrow(/is not schema 34/);
+    // ⭐ 34 IS RETIRED at the schema-35 rung (MERGE-WAVE, FIX-PUBLIC-VEIL) and validates its OWN literal.
+    const waveFood = validSchema34Baseline_fixture();
+    expect(validateSchema34Baseline(waveFood)).toBe(waveFood);
+    expect(() => validateSchema34Baseline(live)).toThrow(/is not schema 34/);
+    expect(() => validateSchema35Baseline(waveFood)).toThrow(/is not schema 35/);
+    // ⭐ 35 IS RETIRED at the schema-36 rung (MERGE-TRAIN, ALLEGIANCE-CAR1) and validates its OWN literal.
+    const waveVeil = validSchema35Baseline_fixture();
+    expect(validateSchema35Baseline(waveVeil)).toBe(waveVeil);
+    expect(() => validateSchema35Baseline(live)).toThrow(/is not schema 35/);
+    expect(() => validateSchema36Baseline(waveVeil)).toThrow(/is not schema 36/);
+    // ⭐ 36 IS RETIRED at the schema-37 rung (MERGE-TRAIN, ALLEGIANCE-CAR2) and validates its OWN literal.
+    const trainCar1 = validSchema36Baseline_fixture();
+    expect(validateSchema36Baseline(trainCar1)).toBe(trainCar1);
+    expect(() => validateSchema36Baseline(live)).toThrow(/is not schema 36/);
+    expect(() => validateSchema37Baseline(trainCar1)).toThrow(/is not schema 37/);
+    // ⭐ 37 IS RETIRED at the schema-38 rung (MERGE-TRAIN, ALLEGIANCE-CAR3) and validates its OWN literal.
+    const trainCar2 = validSchema37Baseline_fixture();
+    expect(validateSchema37Baseline(trainCar2)).toBe(trainCar2);
+    expect(() => validateSchema37Baseline(live)).toThrow(/is not schema 37/);
+    expect(() => validateSchema38Baseline(trainCar2)).toThrow(/is not schema 38/);
+    // ⭐ 38 IS RETIRED at the schema-39 rung (MERGE-TRAIN, ALLEGIANCE-CAR4) and validates its OWN literal.
+    const trainCar3 = validSchema38Baseline_fixture();
+    expect(validateSchema38Baseline(trainCar3)).toBe(trainCar3);
+    expect(() => validateSchema38Baseline(live)).toThrow(/is not schema 38/);
+    expect(() => validateSchema39Baseline(trainCar3)).toThrow(/is not schema 39/);
+    // ⭐ 39 IS RETIRED at the schema-40 rung (SW-B7b, the public prose writer) and validates its OWN literal.
+    const trainCar4 = validSchema39Baseline_fixture();
+    expect(validateSchema39Baseline(trainCar4)).toBe(trainCar4);
+    expect(() => validateSchema39Baseline(live)).toThrow(/is not schema 39/);
+    expect(() => validateSchema40Baseline(trainCar4)).toThrow(/is not schema 40/);
+    // ⭐ 40 IS RETIRED at the schema-41 rung (STYLE-2-MERGE closing act 5, the played-worlds writer) and validates its OWN literal.
+    const publicProse = validSchema40Baseline_fixture();
+    expect(validateSchema40Baseline(publicProse)).toBe(publicProse);
+    expect(() => validateSchema40Baseline(live)).toThrow(/is not schema 40/);
+    expect(() => validateSchema41Baseline(publicProse)).toThrow(/is not schema 41/);
+    // ⭐ 41 IS RETIRED at the schema-42 rung (the agreement lane's tier seed (STYLE-2-MERGE point 47, STOP 47a)) and validates its OWN literal.
+    const playedWorlds = validSchema41Baseline_fixture();
+    expect(validateSchema41Baseline(playedWorlds)).toBe(playedWorlds);
+    expect(validateSchema42Baseline(live)).toBe(live);
+    expect(() => validateSchema41Baseline(live)).toThrow(/is not schema 41/);
+    expect(() => validateSchema42Baseline(playedWorlds)).toThrow(/is not schema 42/);
     expect(() => validateSchema30Baseline(live)).toThrow(/is not schema 30/);
     expect(() => validateSchema31Baseline(peopleCast)).toThrow(/is not schema 31/);
     expect(() => validateSchema29Baseline(live)).toThrow(/is not schema 29/);

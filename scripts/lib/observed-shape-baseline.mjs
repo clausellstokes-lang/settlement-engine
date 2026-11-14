@@ -7,7 +7,99 @@
  *
  * ── ⭐⭐ EIGHT IDENTITY DEFINITIONS LIVE HERE, AND ONLY ONE IS THE AUTHORITY ──
  *
- * `BASELINE_SCHEMA` is **32**: schema 31's tagged numeric heuristic-leaf envelope, tag law, roster
+ * `BASELINE_SCHEMA` is **42**: schema 41's tagged numeric heuristic-leaf envelope, tag law, roster and bank (78/52)
+ * UNCHANGED, re-governed to THE AGREEMENT LANE'S TIER SEED (STYLE-2-MERGE point 47, COHERENCE-AGREE; the chair's
+ * ruling on STOP 47a, 2026-11-13): ONE rung, ONE cause — the agreement lane's generation moved the tier seed's
+ * town out of the overlap, so producer 2b's seed is re-searched by its own rule (osr-tier-14 -> osr-tier-19) in the
+ * corpus builder, a detector source. Its full rationale lives beside `AGREE_TIER_SEED_TARGET_SCHEMA` in
+ * `migrate-observed-shape-readers.mjs`.
+ *
+ * `RETIRED_PLAYED_WORLDS_BASELINE_SCHEMA` is **41**: schema 40's tagged numeric heuristic-leaf envelope, tag law and corpus
+ * definition UNCHANGED, re-governed to THE PLAYED-WORLDS WRITER'S ADMISSION (STYLE-2-MERGE closing act 5, the
+ * chair's FINAL RULING of 2026-11-09 21:2x: "a TRUE schema change, admitted by the ONE rung at the final tip"):
+ * ONE rung, ONE cause — a NEW writer class, `played-worlds-writer` ("a writer that runs only in campaign time
+ * and is dormant in the birth corpus"), and its FIRST declaration, `outcome on outcome` (writer
+ * `src/domain/worldPulse/convergence.js`, the minted proposal record behind interventionActive), the writer
+ * behind `src/domain/display/newsBody.js :: itemSettlementIds`. The roster 15 -> 16, the bank 77/51 -> 78/52,
+ * and the one row (newsBody.js x1, admitted ordinary at 40) TAGGED; nothing else moves. Its full rationale
+ * lives beside `PLAYED_WORLDS_TARGET_SCHEMA` in `migrate-observed-shape-readers.mjs`.
+ *
+ * `RETIRED_PUBLIC_PROSE_BASELINE_SCHEMA` is **40**: schema 39's tagged numeric heuristic-leaf envelope, tag law and corpus
+ * definition UNCHANGED, re-governed to THE PUBLIC PROSE WRITER'S ADMISSION (lane SW-B7b PROJECTION, the
+ * chair's grant of 2026-11-09 13:5x, STYLE-RULINGS-2 B10(a)): ONE rung, ONE cause, ONE declaration of the
+ * save-time-writer class, `publicProse on settlement` (writer `src/lib/saves.js`, the cloud row builder
+ * that stamps the public prose projection; the corpus executes generation and never the save path). The
+ * roster 14 -> 15, the bank 76/50 -> 77/51, and the one new row (src/domain/display/publicProse.js x1)
+ * admitted TAGGED (RETIRED). Its full rationale lives beside `PUBLIC_PROSE_TARGET_SCHEMA` in
+ * `migrate-observed-shape-readers.mjs`.
+ *
+ * `RETIRED_TRAIN_CAR4_BASELINE_SCHEMA` is **39**: schema 38's tagged numeric heuristic-leaf envelope, tag law, roster and
+ * corpus definition UNCHANGED, re-governed to MERGE-TRAIN AT THE ALLEGIANCE-CAR4 MERGE (824a8ce2f; the
+ * chair's ruling of 2026-11-09): ONE rung, TWO causes, every moved row with exactly one and its class.
+ * Cause 1, the goals rebuilt (03ff59084, A9): 7 rows ADMITTED (class I, `… on intent` at envoyEncounter.js),
+ * 4 retired by repair (class R, npcGenerator.js's retired goal draw, `_government` 3 -> 1) and 16 GONE as
+ * UNCURED INSTRUMENT EROSION (class E, recorded as such, not a repair: warSeatBooks.js `on facets`,
+ * drawDeclared.js / factVocabulary.js `on merchant`). Cause 2, the structural fingerprint re-based
+ * (0a18ff311): 1 row ADMITTED (class I, `family on intent`). Nothing is declared; the bank holds at 76/50
+ * (RETIRED). Its full rationale lives beside `TRAIN_CAR4_TARGET_SCHEMA` in `migrate-observed-shape-readers.mjs`.
+ *
+ * `RETIRED_TRAIN_CAR3_BASELINE_SCHEMA` is **38**: schema 37's tagged numeric heuristic-leaf envelope, tag law, roster and
+ * corpus definition UNCHANGED, re-governed to MERGE-TRAIN AT THE ALLEGIANCE-CAR3 MERGE (c6ded8e3a; the
+ * chair's ruling of 2026-11-09): ONE rung, TWO causes, every moved row with exactly one. Cause 1, the dial
+ * e9070d614 (ALLEGIANCE_TUNING.organizedCrime 0.10 -> 0.05, the corpus's year re-dealt; CONFIRMED by a
+ * single-revert scan of the merged tip): 13 rows ADMITTED (`nearbyResourcesState on config`,
+ * `resourceHistory on settlement`, the rows rung 37 retired) and 5 GONE (pulse reads whose writers the
+ * re-dealt year reaches). Cause 2, the bought watch a63effa93 (the read moved behind isOustedNpc): 1 GONE,
+ * `ousted on npcs` at corruption.js. Nothing is declared; the bank holds at 76/50 (RETIRED). Its full rationale
+ * lives beside `TRAIN_CAR3_TARGET_SCHEMA` in `migrate-observed-shape-readers.mjs`.
+ *
+ * `RETIRED_TRAIN_CAR2_BASELINE_SCHEMA` is **37**: schema 36's tagged numeric heuristic-leaf envelope, tag law, roster and
+ * corpus definition UNCHANGED, re-governed to MERGE-TRAIN AT THE ALLEGIANCE-CAR2 MERGE (f51058995; the
+ * chair's ruling of 2026-11-09): ONE rung, ONE cause. The car's own rung 36 (the guild's push, bbb1a4abc,
+ * A3: castPowers.js weights hidden agents in the rank deal, so the corpus's year re-deals) is re-minted
+ * here: 13 rows GONE (`nearbyResourcesState on config`, `resourceHistory on settlement` — the re-dealt year
+ * reaches their writers again); nothing new, nothing declared, the bank holds at 76/50 (RETIRED). Its full rationale
+ * lives beside `TRAIN_CAR2_TARGET_SCHEMA` in `migrate-observed-shape-readers.mjs`.
+ *
+ * `RETIRED_TRAIN_CAR1_BASELINE_SCHEMA` is **36**: schema 35's tagged numeric heuristic-leaf envelope, tag law, roster and
+ * corpus definition UNCHANGED, re-governed to MERGE-TRAIN AT THE ALLEGIANCE-CAR1 MERGE (e5f88930b; the
+ * chair's ruling of 2026-11-09, the public-veil option-B idiom): ONE rung, TWO causes, every moved row with
+ * exactly one. The car minted three rungs after schema 32: its 33 IS the veil merge this line already
+ * minted as 35 and is NOT re-minted; its 34 and 35 are re-minted here as one. Cause 1, the hidden
+ * allegiance (5902f1a4a, the car's rung 34): 11 rows ADMITTED (the allegiance's sub-fields read on the
+ * allegiance; the retired mark's readers), 17 GONE (the same sub-fields on corruptTies; the year over the
+ * new cast), 1 INCREASED (`migrationReports on settlement`, 2 -> 4). Cause 2, the J-19 cure (d131ab158,
+ * the car's rung 35: the corpus's year re-dealt): 13 rows ADMITTED (`nearbyResourcesState on config`,
+ * `resourceHistory on settlement`). Nothing is declared; the bank holds at 76/50 (RETIRED). Its full rationale lives
+ * beside `TRAIN_CAR1_TARGET_SCHEMA` in `migrate-observed-shape-readers.mjs`.
+ *
+ * `RETIRED_WAVE_VEIL_BASELINE_SCHEMA` is **35**: schema 34's tagged numeric heuristic-leaf envelope, tag law and roster,
+ * re-governed to MERGE-WAVE AT THE FIX-PUBLIC-VEIL MERGE (7e65c7bec; the chair's ruling of 2026-11-08,
+ * option B): ONE rung, TWO causes, every row with exactly one. Cause 1, the corpus definition gains
+ * producer 1b′ (the infiltrated topology, the veil lane's own rung 32), which moves no row (measured
+ * NEW 0 · GONE 0 on the lane). Cause 2, the veiled re-deal (the veil lane's rung 33): 4 rows ADMITTED
+ * (`covert on impairments`), 13 GONE (the re-dealt year now observes nearbyResourcesState and
+ * resourceHistory). Nothing is declared; the bank holds at 76/50 (RETIRED). Its full rationale lives beside
+ * `WAVE_VEIL_TARGET_SCHEMA` in `migrate-observed-shape-readers.mjs`.
+ *
+ * `RETIRED_WAVE_FOOD_BASELINE_SCHEMA` is **34**: schema 33's tagged numeric heuristic-leaf envelope, tag law, roster
+ * and corpus definition UNCHANGED, re-governed to MERGE-WAVE AT THE FIX-FOOD-ISOLATION MERGE (c6e8a4ad6;
+ * the chair's ruling of 2026-11-08: one rung per cause): ONE new row ADMITTED with attribution by cause —
+ * `nearbyResourcesState on config` at src/generators/foodGenerator.js, the land arithmetic's depletion arm, foodGenerator's own
+ * existing read newly observed on the isolation receipt's call path (the lane's §S4). Nothing goes,
+ * nothing is declared and the bank holds at 76/50. Its full rationale lives beside
+ * `WAVE_FOOD_TARGET_SCHEMA` in `migrate-observed-shape-readers.mjs`.
+ *
+ * `RETIRED_WAVE_W2_BASELINE_SCHEMA` is **33**: schema 32's tagged numeric heuristic-leaf envelope, tag law, roster
+ * and corpus definition UNCHANGED, re-governed to MERGE-WAVE AT THE W2 DEF MERGE (82a4e2856; the
+ * chair's ruling of 2026-11-08: one rung per cause): ONE new row ADMITTED with attribution by cause —
+ * `direction on stress` at src/domain/migrationDirection.js, whose receiver the W2 DEF composition
+ * grounds to the `stress` shape (its DS-DEF-3/-8 desks read settlement.stress entries inline); the
+ * writer is W0-1's draw (343bd4eec) and no corpus seed draws a mass migration. Nothing goes, nothing
+ * is declared and the bank holds at 76/50. Its full rationale lives beside `WAVE_W2_TARGET_SCHEMA` in
+ * `migrate-observed-shape-readers.mjs`.
+ *
+ * `RETIRED_CAR_MERGE_BASELINE_SCHEMA` is **32**: schema 31's tagged numeric heuristic-leaf envelope, tag law, roster
  * and corpus definition UNCHANGED, re-governed to MERGE-CAR: the people car merged into the
  * integration branch over the rung-2 landing (the chair's brief, 2026-11-08: "the car's genesis at
  * schema 31 STANDS; the integration side's schema-30 reads — R2's census readers — admitted at a new
@@ -511,7 +603,48 @@ export const RETIRED_PEOPLE_CAST_BASELINE_SCHEMA = 30;
  *  the census readers' reads admitted by cause. Never redefined, never deleted, so a schema-31
  *  PREDECESSOR is still validated as schema 31. */
 export const RETIRED_PEOPLE_LANDING_BASELINE_SCHEMA = 31;
-export const BASELINE_SCHEMA = 32;
+/** The RETIRED car-merge definition — schema 33's predecessor. Same tagged topology envelope, theta,
+ *  roster, corpus definition and fence; schema 33 re-governs it to MERGE-WAVE at the W2 DEF merge, the
+ *  one grounded read admitted by cause. Never redefined, never deleted, so a schema-32 PREDECESSOR is
+ *  still validated as schema 32. */
+export const RETIRED_CAR_MERGE_BASELINE_SCHEMA = 32;
+/** The RETIRED W2-merge definition — schema 34's predecessor. Same tagged topology envelope, theta,
+ *  roster, corpus definition and fence; schema 34 re-governs it to MERGE-WAVE at the FIX-FOOD-ISOLATION
+ *  merge. Never redefined, never deleted, so a schema-33 PREDECESSOR is still validated as schema 33. */
+export const RETIRED_WAVE_W2_BASELINE_SCHEMA = 33;
+/** The RETIRED food-isolation definition — schema 35's predecessor. Schema 35 re-governs it to MERGE-WAVE
+ *  at the FIX-PUBLIC-VEIL merge (the corpus's producer 1b′ and the veiled re-deal). Never redefined, never
+ *  deleted, so a schema-34 PREDECESSOR is still validated as schema 34. */
+export const RETIRED_WAVE_FOOD_BASELINE_SCHEMA = 34;
+/** The RETIRED public-veil definition — schema 36's predecessor. Schema 36 re-governs it to MERGE-TRAIN at
+ *  the ALLEGIANCE-CAR1 merge (the hidden allegiance and the J-19 re-deal). Never redefined, never deleted,
+ *  so a schema-35 PREDECESSOR is still validated as schema 35. */
+export const RETIRED_WAVE_VEIL_BASELINE_SCHEMA = 35;
+/** The RETIRED allegiance-car1 definition — schema 37's predecessor. Schema 37 re-governs it to MERGE-TRAIN
+ *  at the ALLEGIANCE-CAR2 merge (the guild's push re-dealing the year). Never redefined, never deleted, so a
+ *  schema-36 PREDECESSOR is still validated as schema 36. */
+export const RETIRED_TRAIN_CAR1_BASELINE_SCHEMA = 36;
+/** The RETIRED allegiance-car2 definition — schema 38's predecessor. Schema 38 re-governs it to MERGE-TRAIN
+ *  at the ALLEGIANCE-CAR3 merge (car 3's dial re-dealing the year; the bought watch). Never redefined, never
+ *  deleted, so a schema-37 PREDECESSOR is still validated as schema 37. */
+export const RETIRED_TRAIN_CAR2_BASELINE_SCHEMA = 37;
+/** The RETIRED allegiance-car3 definition — schema 39's predecessor. Schema 39 re-governs it to MERGE-TRAIN
+ *  at the ALLEGIANCE-CAR4 merge (the goals rebuilt; the structural fingerprint re-based). Never redefined,
+ *  never deleted, so a schema-38 PREDECESSOR is still validated as schema 38. */
+export const RETIRED_TRAIN_CAR3_BASELINE_SCHEMA = 38;
+/** The RETIRED allegiance-car4 definition — schema 40's predecessor. Schema 40 re-governs it to the public
+ *  prose writer's admission (SW-B7b). Never redefined, never deleted, so a schema-39 PREDECESSOR is still
+ *  validated as schema 39. */
+export const RETIRED_TRAIN_CAR4_BASELINE_SCHEMA = 39;
+/** The RETIRED public-prose definition — schema 41's predecessor. Schema 41 re-governs it to the played-worlds
+ *  writer's admission (the chair's FINAL RULING 21:2x). Never redefined, never deleted, so a schema-40
+ *  PREDECESSOR is still validated as schema 40. */
+export const RETIRED_PUBLIC_PROSE_BASELINE_SCHEMA = 40;
+/** The RETIRED played-worlds definition — schema 42's predecessor. Schema 42 re-governs it to the agreement
+ *  lane's tier seed (STOP 47a). Never redefined, never deleted, so a schema-41 PREDECESSOR is still validated
+ *  as schema 41. */
+export const RETIRED_PLAYED_WORLDS_BASELINE_SCHEMA = 41;
+export const BASELINE_SCHEMA = 42;
 /** The RETIRED exact per-site definition. Never redefined, never deleted. */
 export const RETIRED_EXACT_BASELINE_SCHEMA = 3;
 /** The RETIRED UNFILTERED heuristic-leaf definition — schema 5's predecessor.
@@ -1216,10 +1349,110 @@ export function validateSchema31Baseline(baseline) {
   );
 }
 
+/** The RETIRED authority — schema 32's tagged envelope (MERGE-CAR), re-governed by schema 33 to
+ *  MERGE-WAVE at the W2 DEF merge. Re-bound to its own LITERAL now that the authority has moved to 33. */
+export function validateSchema32Baseline(baseline) {
+  return validateLeafBaseline(
+    baseline,
+    RETIRED_CAR_MERGE_BASELINE_SCHEMA,
+    { tagged: true },
+  );
+}
+
+/** The RETIRED authority — schema 33's tagged envelope (MERGE-WAVE, W2 DEF), re-governed by schema 34 to
+ *  MERGE-WAVE at the FIX-FOOD-ISOLATION merge. Re-bound to its own LITERAL now that the authority has moved. */
+export function validateSchema33Baseline(baseline) {
+  return validateLeafBaseline(
+    baseline,
+    RETIRED_WAVE_W2_BASELINE_SCHEMA,
+    { tagged: true },
+  );
+}
+
+/** The RETIRED authority — schema 34's tagged envelope (MERGE-WAVE, FIX-FOOD-ISOLATION), re-governed by
+ *  schema 35 to MERGE-WAVE at the FIX-PUBLIC-VEIL merge. Re-bound to its own LITERAL. */
+export function validateSchema34Baseline(baseline) {
+  return validateLeafBaseline(
+    baseline,
+    RETIRED_WAVE_FOOD_BASELINE_SCHEMA,
+    { tagged: true },
+  );
+}
+
+/** The RETIRED authority — schema 35's tagged envelope (MERGE-WAVE, FIX-PUBLIC-VEIL), re-governed by
+ *  schema 36 to MERGE-TRAIN at the ALLEGIANCE-CAR1 merge. Re-bound to its own LITERAL. */
+export function validateSchema35Baseline(baseline) {
+  return validateLeafBaseline(
+    baseline,
+    RETIRED_WAVE_VEIL_BASELINE_SCHEMA,
+    { tagged: true },
+  );
+}
+
+/** The RETIRED authority — schema 36's tagged envelope (MERGE-TRAIN, ALLEGIANCE-CAR1), re-governed by
+ *  schema 37 to MERGE-TRAIN at the ALLEGIANCE-CAR2 merge. Re-bound to its own LITERAL. */
+export function validateSchema36Baseline(baseline) {
+  return validateLeafBaseline(
+    baseline,
+    RETIRED_TRAIN_CAR1_BASELINE_SCHEMA,
+    { tagged: true },
+  );
+}
+
+/** The RETIRED authority — schema 37's tagged envelope (MERGE-TRAIN, ALLEGIANCE-CAR2), re-governed by
+ *  schema 38 to MERGE-TRAIN at the ALLEGIANCE-CAR3 merge. Re-bound to its own LITERAL. */
+export function validateSchema37Baseline(baseline) {
+  return validateLeafBaseline(
+    baseline,
+    RETIRED_TRAIN_CAR2_BASELINE_SCHEMA,
+    { tagged: true },
+  );
+}
+
+/** The RETIRED authority — schema 38's tagged envelope (MERGE-TRAIN, ALLEGIANCE-CAR3), re-governed by
+ *  schema 39 to MERGE-TRAIN at the ALLEGIANCE-CAR4 merge. Re-bound to its own LITERAL. */
+export function validateSchema38Baseline(baseline) {
+  return validateLeafBaseline(
+    baseline,
+    RETIRED_TRAIN_CAR3_BASELINE_SCHEMA,
+    { tagged: true },
+  );
+}
+
+/** The RETIRED authority — schema 39's tagged envelope (MERGE-TRAIN, ALLEGIANCE-CAR4), re-governed by
+ *  schema 40 to the public prose writer's admission (SW-B7b). Re-bound to its own LITERAL. */
+export function validateSchema39Baseline(baseline) {
+  return validateLeafBaseline(
+    baseline,
+    RETIRED_TRAIN_CAR4_BASELINE_SCHEMA,
+    { tagged: true },
+  );
+}
+
+/** The RETIRED authority — schema 40's tagged envelope (SW-B7b, the public prose writer), re-governed by
+ *  schema 41 to the played-worlds writer's admission. Re-bound to its own LITERAL. */
+export function validateSchema40Baseline(baseline) {
+  return validateLeafBaseline(
+    baseline,
+    RETIRED_PUBLIC_PROSE_BASELINE_SCHEMA,
+    { tagged: true },
+  );
+}
+
+/** The RETIRED authority — schema 41's tagged envelope (the played-worlds writer), re-governed by schema 42
+ *  to the agreement lane's tier seed (STOP 47a). Re-bound to its own LITERAL. */
+export function validateSchema41Baseline(baseline) {
+  return validateLeafBaseline(
+    baseline,
+    RETIRED_PLAYED_WORLDS_BASELINE_SCHEMA,
+    { tagged: true },
+  );
+}
+
 /** The LIVE envelope validator. Bound to `BASELINE_SCHEMA` rather than a literal,
  *  so the retired rungs above keep validating their own numbers while this one
  *  always names the authority. */
-export function validateSchema32Baseline(baseline) {
+export function validateSchema42Baseline(baseline) {
   return validateLeafBaseline(baseline, BASELINE_SCHEMA, { tagged: true });
 }
 

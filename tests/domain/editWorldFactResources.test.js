@@ -112,16 +112,16 @@ const FIXED = Object.freeze([0, 21, 42]);
  */
 const PRE_CHANGE = Object.freeze({
   0: Object.freeze({
-    derived: '2c5389ddec4c0713b2a36a0d552343f75b92b5db3f8dc84de9d6800025cf6ef2',
-    replay: 'ff15041645ef7997c65d9494e56df51b91848c0a6e8b17d20cc9af8d031efe7d',
+    derived: '4e2e2dfbb830302a9f7ad93c17ccd39c4eb3bca0876e692d2668ffb112635f66',
+    replay: 'a4eebdfbb85f19af94cf1a7803a53d087a1e46859d5d8d259546b7ffde1701e7',
   }),
   21: Object.freeze({
-    derived: '882e592f4fb18052d4936695d3714658365fa133af6a55313eab5867335f1521',
-    replay: 'ec6de9f8186472abc16a4f026de67a5c3a1c69f30e738fa3d8b6dd79437f693a',
+    derived: 'f4fc47a0ffe9036b899c2ce86a4fbb071857e321eb222599108adc3f6ccea662',
+    replay: '69c46ce542681449b420576c69191385f3959f939a872e1aae9dcf54a6b70687',
   }),
   42: Object.freeze({
-    derived: '063432463fdde016cac3e7395e4521becb80e9a287f1be6f8abf6791b5b93d0e',
-    replay: '6c58173e70ef360cd38746d02a5c1e8469868504cdfe1f872fa8a7f82d7af9a3',
+    derived: '6e83fa8a8459ff8b9ffd2ea42d4edc06c02d682bd9310c083a4e8c6a3930c6dd',
+    replay: 'f40acc529b4fd137982fdba6d60b754a9fe6ed6e2429b0e8ef43c9d159d614f3',
   }),
 });
 // ── RE-CAPTURED 2026-10-01, the urban band (ODQ §934.86), BY THE SAME PLANT AND NEVER FROM THE LIVE STEP ALONE ─────
@@ -229,6 +229,48 @@ describe('EM-B2b2 — the DM\'s nearby-resources word survives resolveResources'
 // SAME six digests, so EM-B2b2 still moves no byte of the no-edit path; on every row the fresh generation equals the
 // dormant re-derivation (twice and equal). Row 21's `derived` (882e592f) is record B's golden control row
 // (generationForkCensus GOLDEN_CONTROL_HASH).
+// ── RE-CAPTURED 2026-11-10, the merge wave and the lanes after it (GREEN-TIP), BY THE SAME PLANT ──────────────────────────
+// All three rows moved (six digests). MEASURED by an untracked probe of A2/A6 at 8308f13f8 (0 drift) and at every first-
+// parent stage of 8308f13f8..bf14617ca touching src/, the helpers or scripts (73 stages, git-archive trees); the stages
+// that moved a row's digests:
+// W2 DEF 82a4e2856 (rows 0), W3 POW 1a160d599 (rows 0, 21, 42), W4 PEOPLE 66c23bfea (rows 0, 21, 42),
+// W5 HIS e510409b1 (rows 0, 21, 42), W7 HOOKS 501c97412 (rows 0, 21, 42),
+// FIX-PUBLIC-VEIL 7e65c7bec (rows 0, 21, 42), ALLEGIANCE-CAR1 e5f88930b (rows 0, 21, 42),
+// ALLEGIANCE-CAR4 824a8ce2f (rows 0, 21, 42), SW-2 INSTITUTIONS ef4645832 (rows 21, 42),
+// SW-B5 FRAMES 46e0121c2 (rows 0, 21, 42), SW-7 POWER-SIDE a3062d919 (rows 0, 21, 42),
+// SW-B1 CONTRADICTIONS 0f2cb865c (rows 21, 42), SW-10 HOOKS 856de8427 (rows 0, 21, 42),
+// SW-6 CRISIS-SURFACES ac1442a3d (rows 0, 21, 42), SW-8 RENAME-POWERS 56f3b2df7 (rows 0, 21, 42),
+// URBAN-FIX 17b814803 (rows 0, 21, 42).
+// Each is a lane merge with its own signed shift record; the first mover inside W2 DEF's merge is 979f45857 (safetyProfile.js,
+// measured by reverting it alone on the merge); the movers inside the later merges are not isolated (PLAUSIBLE per commit,
+// CONFIRMED per stage). At every stage the fresh digest equals the dormant re-derivation. Re-captured as above: the
+// pre-EM-B2b2 step (`git show dde845c15^:src/generators/steps/resolveResources.js`, sha256 62e16d59...) planted over a
+// COPY of this lane's tree (a detached probe worktree at 5af109812, never this checkout, removed afterwards), and the
+// planted step and the live step produced the SAME six digests (cmp-equal), so EM-B2b2 still moves no byte of the
+// no-edit path.
+// ── RE-CAPTURED 2026-11-12, STYLE-2-MERGE point 42 (STYLE-2-MERGE-8), BY THE SAME PLANT ── Rows 0 and 42 moved (four digests;
+// row 21, the golden control row, unmoved) by the COHERENCE-QUARREL merge d4723749a (lane/coherence-quarrel-2026-11-11 at
+// 1c7b5786c, record docs/shift-records/2026-11-12-style-2-merge-42-coherence-quarrel.json: the quarrels' issues, stakes,
+// descriptions and hooks, the safety record's plot hooks); the line's tip decc7bf15 reads all six green. Re-captured: the
+// pre-EM-B2b2 step (12c437de4, sha256 62e16d59...) planted over a COPY of the merged tree (a detached probe worktree, never
+// this checkout) and the live step produced the SAME six digests (cmp-equal, the live run twice and equal), so EM-B2b2
+// still moves no byte of the no-edit path; on every row the fresh generation equals the dormant re-derivation.
+
+// ── RE-CAPTURED 2026-11-12, STYLE-2-MERGE point 43 (STYLE-2-MERGE-8), BY THE SAME PLANT ── Rows 0, 21, 42 moved by the COHERENCE-PRESUME
+// merge f922124d0 (docs/shift-records/2026-11-12-style-2-merge-43-coherence-presume.json: a line names a thing the town does not have: the culture lines, the re-titled watch role and the ties it re-deals, the history and institution texts); the line before the merge reads all six green. Re-captured: the pre-EM-B2b2 step (12c437de4,
+// sha256 62e16d59...) planted over a COPY of the merged tree and the live step produced the SAME six digests (cmp-equal,
+// the live run twice and equal); on every row the fresh generation equals the dormant re-derivation.
+
+// ── RE-CAPTURED 2026-11-12, STYLE-2-MERGE point 46 (STYLE-2-MERGE-9), BY THE SAME PLANT ── Rows 0, 21, 42 moved by the COHERENCE-POWERS
+// merge 6aeaa4154 (docs/shift-records/2026-11-13-style-2-merge-46-coherence-powers.json: the dual hat re-deals the cast); the line before the merge reads all six green. Re-captured: the pre-EM-B2b2 step (12c437de4,
+// sha256 62e16d59...) planted over a COPY of the merged tree and the live step produced the SAME six digests (cmp-equal,
+// the live run twice and equal); on every row the fresh generation equals the dormant re-derivation.
+
+// ── RE-CAPTURED 2026-11-13, STYLE-2-MERGE point 47 (STYLE-2-MERGE-11), BY THE SAME PLANT ── Rows 0, 21, 42 moved by the COHERENCE-AGREE
+// merge 22cc9ef7d (docs/shift-records/2026-11-13-style-2-merge-47-coherence-agree.json: one fact, one answer: the resource roll's refused members refilled, the economy and defence read off the town's own record); the line before the merge reads all six green. Re-captured: THE LANE-ERA pre-EM-B2b2 step (the live
+// resolveResources.js less EM-B2b2's own 31 lines, sha256 adfd3ba4...; the same removal on the line's file reproduces 12c437de4's
+// blob, sha256 62e16d59..., byte for byte; COHERENCE-AGREE rewrote the step, so 12c437de4's copy would revert the lane) planted over a COPY of the merged tree and the live step produced the SAME six digests (cmp-equal,
+// the live run twice and equal); on every row the fresh generation equals the dormant re-derivation.
 
     const layer = layerOf([[ROOT_KEY, [...DM_ROSTER]]]);
 

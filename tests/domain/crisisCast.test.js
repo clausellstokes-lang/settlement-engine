@@ -36,7 +36,7 @@ function town({ legitimacy = 'crisis', extraFactions = [], extraNpcs = [], insti
       { id: 'n3', name: 'Ilse Brand', role: 'High Priest', power: 5, memberships: [{ power: 'Religious Authorities', rank: 1 }], personality: { flaw: 'vain' } },
       { id: 'n4', name: 'Oda Fenn', role: 'Healer', power: 1, memberships: [{ power: 'Religious Authorities', rank: 2 }], personality: {} },
       { id: 'n5', name: 'Cass Morrow', role: 'Merchant Prince', power: 7, memberships: [{ power: 'Merchant Guilds', rank: 1 }], personality: { flaw: 'greedy' } },
-      { id: 'n6', name: 'Pell Rook', role: 'Grain Factor', power: 4, memberships: [{ power: 'Grain Holders', rank: 1 }], institution: { kind: 'house', key: 'Town granary', title: 'the granary reeve' }, corrupt: true, corruptTies: { criminalInstitution: 'Thieves den', thievesGuild: 'Thieves den' }, personality: { flaw: 'greedy' } },
+      { id: 'n6', name: 'Pell Rook', role: 'Grain Factor', power: 4, memberships: [{ power: 'Grain Holders', rank: 1 }], institution: { kind: 'house', key: 'Town granary', title: 'the granary reeve' }, allegiance: { power: null, house: 'Thieves den', vector: 'greed', via: 'office', handler: null, share: 0.15, veiled: true, covert: true }, personality: { flaw: 'greedy' } }, // ALLEGIANCE-CAR1 (2026-11-08): the retired mark is the card's hidden allegiance
       { id: 'n7', name: 'Wil Dunn', role: 'Blacksmith', power: 2, memberships: [{ power: 'Craft Guilds', rank: 1 }], personality: {} },
       { id: 'n8', name: 'Ren Hale', role: 'Baker', power: 1, memberships: [{ power: 'Craft Guilds', rank: 2 }], personality: {} },
       ...extraNpcs,
@@ -87,6 +87,16 @@ describe('the eleven rules, each over a hand-built town', () => {
     const eng = instigatorCandidates(calm, 'infiltrated', deriveStakes(calm, 'infiltrated'));
     expect(eng.candidates).toEqual([]); // anchored: the absence reason is asserted on the next line
     expect(eng.absent).toBe(CAST_ABSENCES.outsideHand);
+  });
+
+  it('rule 3, E-3 (SW-9b-B, URBAN-AUDIT §5; the chair\'s words): a small name whose house the gaining power ranks by its backing gets the fixed backed reason', () => {
+    const miller = (power) => ({ id: 'n9', name: 'Banan Mill', role: 'Miller', power, memberships: [{ power: 'Noble Families', rank: 1 }], institution: { kind: 'house', key: 'Mills (2-5)', title: 'the miller' }, personality: {} });
+    const at = (power) => town({ extraFactions: [{ faction: 'Noble Families', category: 'noble', power: 40 }], extraNpcs: [miller(power)] });
+    const rowAt = (power) => { const s = at(power); return instigatorCandidates(s, 'insurgency', deriveStakes(s, 'insurgency')).candidates.find((r) => r.name === 'Banan Mill'); };
+    expect(rowAt(2)?.reason).toBe(CAST_REASONS.instigatorBacked);
+    expect(CAST_REASONS.instigatorBacked).toBe('speaks for the power that gains from the crisis, from a house that power backs');
+    // the negative control, same town: a card of standing keeps the rule's reason
+    expect(rowAt(8)?.reason).toBe(CAST_REASONS.instigatorRival);
   });
 
   it('rule 4: the target is the seat\'s named holder, then the governing house', () => {
@@ -410,4 +420,26 @@ describe('the defence stands: a closed house is never the defender (the ruin fil
     expectNoSeedFailures(failures, 'no defender of 120 stamped towns names a closed house');
     expect(houses).toBeGreaterThan(40);
   }, 240000);
+});
+
+// SW-6 CRISIS-SURFACES (STYLE-RULINGS-2 B3, the crisis page's Stakes, A·C4): the stake reasons print as plain
+// clauses — never the rule's own word ("the crisis hits its base") nor R3's old echo ("outranks the seat").
+describe('STAKE_REASONS in plain words (SW-6)', () => {
+  it('the losing house and the outranking rival are told in what the reader can see', () => {
+    expect(STAKE_REASONS.loses).toBe('its own people feel the crisis first');
+    expect(STAKE_REASONS.gainsRival).toBe('already carries more weight than whoever holds the seat');
+    // anchored: the subject is the exact text or constant asserted positively beside it (SW-6), so it cannot have drifted away
+    expect(Object.values(STAKE_REASONS).join(' ')).not.toMatch(/\bbase\b|outranks/);
+  });
+});
+
+describe('the selector-rule reasons in plain words (SW-6 second seat)', () => {
+  it('the contested seat, the scapegoats and the merchant who would treat say what the person faces, never the rule', () => {
+    const rule = [CAST_REASONS.targetSeatContested, CAST_REASONS.scapegoatSeat, CAST_REASONS.scapegoatLever, CAST_REASONS.treaterMerchant];
+    expect(rule.every((r) => /in dispute/.test(r))).toBe(true);
+    // anchored: the subject is the four constants asserted positively above (each says the dispute in plain words)
+    expect(rule.join(' ')).not.toMatch(/legitimacy|contested|\blever\b|being contested/);
+    // anchored: the same constant; membersOf reads any member of a merchant house, so the line claims no leadership
+    expect(CAST_REASONS.treaterMerchant).not.toMatch(/^leads/);
+  });
 });

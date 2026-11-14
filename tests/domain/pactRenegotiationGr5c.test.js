@@ -215,13 +215,21 @@ describe('GR-5c — renegotiation from strength: a believed swing past the band 
 
   it('A2: every road the base already walked is byte-identical, hashed', () => {
     // Recorded at 57b52b510 by this same harness, before a line of GR-5c existed.
-    expect(verbDigest(), 'every clause word the dial offered at the base, against the war door instrument').toBe('b93cec824f5b9e21efa985ad00cffada79e98c2fec18d9d48a68208f667ee65f');
+    // RE-RECORDED 2026-11-09 by FIX-PULSE-DEFECTS (audit C1b·112/·113, one cause): a drafted clause's receipt and
+    // a refusal's turning point printed the courts' raw ids; they print the names the caller reads, and a sheet
+    // drafted without names (the DM's verb path) reads "one court" / "the other court". This verb digest was
+    // b93cec824f5b9e21efa985ad00cffada79e98c2fec18d9d48a68208f667ee65f; with the receipt's fallback set back to the
+    // raw id it passes (executed), so the move is this cause's alone.
+    expect(verbDigest(), 'every clause word the dial offered at the base, against the war door instrument').toBe('80403a0b1b5c73cbcdce5c2508fa3a5dc94e5bb494151cedc8b5de4c139564ac');
     // RE-RECORDED 2026-10-02 by cure lane PACT-ANSWER (FP-42 at ODQ §934.89, FPQ-73, one cause): the answering
     // court has learned no risk appetite, and `reserveFor` now spends the appetite reader's own neutral stock where
     // it read the absence as zero (reserve 0.5 to 0.375 at a neutral posture). Was
     // 795315b7e9bc796bd7a7eed84790685c95588ec55a113c70531a3955c5808efb; with `: 0` restored in `reserveFor` it passes
     // (executed), so the move is FP-42's alone. The verb, below-band and dark digests do not move.
-    expect(answerDigest(), 'a trade question and an in-window renewal, answered').toBe('d02ee5077c16b2d82c36e5aae313e40d510777643e971b4adf00f9aa9a22d848');
+    // RE-RECORDED 2026-11-09 by FIX-PULSE-DEFECTS (the same one cause as the verb digest above; the named courts
+    // of this world now print in the receipts and the refusal memory, its unnamed ones the neutral nouns). Was
+    // d02ee5077c16b2d82c36e5aae313e40d510777643e971b4adf00f9aa9a22d848.
+    expect(answerDigest(), 'a trade question and an in-window renewal, answered').toBe('50540d051047631a7087b37905e0f5fe5d60468d2481365e259c9c9cc61dd555');
     expect(belowBandDigest(), 'the lit year-turn with the swing below the band').toBe('602f545d44e37a794e4afec55bdecd9f1836a0ffc4a4174cdfd5be1bff48c06a');
     expect(darkDigest(), 'the year-turn past the band with the layer absent, then false').toBe('5a390d1cb673c222be906dbe2b14c0ec07571fd5b45526504b896a656a2280a5');
   });

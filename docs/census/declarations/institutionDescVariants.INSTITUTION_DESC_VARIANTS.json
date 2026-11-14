@@ -83,7 +83,7 @@
   "rows": [
     {
       "id": "thorp|Economy|Subsistence farming#0",
-      "text": "Every household works some 12-16 acres, enough to stay alive and no more.",
+      "text": "Every household works just enough land to stay alive, and no more.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -91,7 +91,7 @@
     },
     {
       "id": "thorp|Economy|Subsistence farming#1",
-      "text": "Each family tills roughly 12-16 acres, all of it for the table.",
+      "text": "Each family tills a small holding, all of it for the table.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -197,7 +197,7 @@
     },
     {
       "id": "thorp|Religious|Access to parish church#0",
-      "text": "Services mean a 2-5km walk to the village house of worship.",
+      "text": "Services mean a walk of a few miles to the village house of worship.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -205,7 +205,7 @@
     },
     {
       "id": "thorp|Religious|Access to parish church#1",
-      "text": "The nearest house of worship is the village's, a 2-5km walk away for services.",
+      "text": "The nearest house of worship is the village's, a walk of a few miles away for services.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -287,7 +287,7 @@
     },
     {
       "id": "thorp|Government|Household elder#1",
-      "text": "One head of household carries the settlement's voice by common habit rather than any appointment. Nobody named them to it; everybody defers to it anyway.",
+      "text": "One head of household carries the settlement's voice by common habit, with no appointment behind it. Nobody named them to it; everybody defers to it anyway.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -311,7 +311,7 @@
     },
     {
       "id": "thorp|Infrastructure|Water source#0",
-      "text": "A well or a spring, yielding at least 2-4 gallons a person each day.",
+      "text": "A well or a spring, yielding at least a bucketful a person each day.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -319,7 +319,7 @@
     },
     {
       "id": "thorp|Infrastructure|Water source#1",
-      "text": "Water from a well or spring, a bare 2-4 gallons per person daily.",
+      "text": "Water from a well or spring, barely a bucketful per person each day.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -351,7 +351,7 @@
     },
     {
       "id": "thorp|Defense|Household levy#1",
-      "text": "One fit adult musters from every household when the alarm is raised. Their arms are hunting bows, spears, and sharpened tools rather than a soldier's kit.",
+      "text": "One fit adult musters from every household when the alarm is raised. Their arms are hunting bows, spears, and sharpened tools; no one has a soldier's kit.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -795,7 +795,7 @@
     },
     {
       "id": "hamlet|Religious|Access to parish church#0",
-      "text": "The nearest house of worship is the village's, a typical 2-5km off.",
+      "text": "The nearest house of worship is the village's, usually a few miles off.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -803,7 +803,7 @@
     },
     {
       "id": "hamlet|Religious|Access to parish church#1",
-      "text": "None of its own; the village's lies a usual 2-5km away.",
+      "text": "None of its own; the village's lies usually a few miles away.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -820,7 +820,7 @@
     },
     {
       "id": "hamlet|Religious|Burial ground#1",
-      "text": "A gated ground at the settlement edge, tended household by household. Families lie in rows by house rather than by standing, which is custom here and not want.",
+      "text": "A gated ground at the settlement edge, tended household by household. Families lie in rows by house, whatever their standing; that is custom here, not want.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -870,7 +870,7 @@
     },
     {
       "id": "hamlet|Government|Village headman#1",
-      "text": "A single trusted figure runs things by common agreement rather than any office. The rulings are matters of sense, not procedure.",
+      "text": "A single trusted figure runs things by common agreement, holding no office. The rulings are matters of sense, not procedure.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1020,7 +1020,7 @@
     },
     {
       "id": "hamlet|Criminal|Smuggling waypoint#1",
-      "text": "Contraband moves through here, skirting the tolls and the customs checks. The hamlet takes its cut in goods rather than coin.",
+      "text": "Contraband moves through here, skirting the tolls and the customs checks. The hamlet takes its cut in goods, not coin.",
       "needs": [
         "tier: ≤ hamlet"
       ],
@@ -2135,7 +2135,7 @@
     },
     {
       "id": "town|Economy|Weekly market#0",
-      "text": "Held by royal charter. The town's chief economic engine.",
+      "text": "Held by royal charter. The heart of the town's trade.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2151,7 +2151,7 @@
     },
     {
       "id": "town|Economy|Market square#0",
-      "text": "The central plaza where the weekly market and the fairs are held. Fifty to a hundred yards to a side.",
+      "text": "The central plaza where the weekly market and the fairs are held.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2159,7 +2159,7 @@
     },
     {
       "id": "town|Economy|Market square#1",
-      "text": "A broad open square, 50 to 100 yards across, given over to market days and fairs.",
+      "text": "A broad open square given over to market days and fairs.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2283,7 +2283,7 @@
     },
     {
       "id": "town|Economy|Caravaneer's post#0",
-      "text": "Coordinates caravan assembly, departure times, and word of the roads. Merchants register cargo, take on guards, and pool ventures here. The town's forerunner to the city's Caravan masters' exchange.",
+      "text": "Coordinates caravan assembly, departure times, and word of the roads. Merchants register cargo, take on guards, and pool ventures here.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2291,7 +2291,7 @@
     },
     {
       "id": "town|Economy|Caravaneer's post#1",
-      "text": "Where regional caravans are mustered, scheduled, and briefed on their routes. Traders enrol their goods, hire escorts, and strike joint ventures, on the scale that precedes a city's Caravan masters' exchange.",
+      "text": "Where regional caravans are mustered, scheduled, and briefed on their routes. Traders enrol their goods, hire escorts, and strike joint ventures.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2664,17 +2664,15 @@
     },
     {
       "id": "town|Crafts|Bowyers & fletchers (guild)#0",
-      "text": "Several craftsmen banded into a guild. Standard arrows by the sheaf, specialty broadheads, and composite bows made to order. They restock the merchant caravans and arm the town militias.",
-      "needs": [
-        "militia"
-      ],
+      "text": "Several craftsmen banded into a guild. Standard arrows by the sheaf, specialty broadheads, and composite bows made to order. They restock the merchant caravans and arm their guards.",
+      "needs": [],
       "excludes": [],
       "crisis": [],
       "colour": false
     },
     {
       "id": "town|Crafts|Bowyers & fletchers (guild)#1",
-      "text": "A guild of bowyers and fletchers. Arrows come by the sheaf, broadheads to specialty, and composite bows on commission. Enough to resupply the caravans and outfit the militias.",
+      "text": "A guild of bowyers and fletchers. Arrows come by the sheaf, broadheads to specialty, and composite bows on commission. Enough to resupply the caravans and outfit their guards.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -3730,7 +3728,7 @@
     },
     {
       "id": "town|Entertainment|Charlatan fortune tellers#1",
-      "text": "Fortunes told by Deception rather than any real magic, for a few coins each.",
+      "text": "Fortunes told by Deception, with no real magic in them, for a few coins each.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -3852,7 +3850,7 @@
     },
     {
       "id": "city|Economy|Caravan masters' exchange#0",
-      "text": "The city-scale form: permanent offices where caravan masters, merchants, and armed escorts do business. It handles bonded freight, route intelligence, the assembly of armed convoys, and the settling of commercial disputes.",
+      "text": "Permanent offices where caravan masters, merchants, and armed escorts do business. It handles bonded freight, route intelligence, the assembly of armed convoys, and the settling of commercial disputes.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -4016,7 +4014,7 @@
     },
     {
       "id": "city|Economy|Chroniclers' exchange#0",
-      "text": "The guild scale of the listening trade. Correspondents kept on several roads, an archive that sets one report against another, and a fixed price for an answer in writing. Costly, and the only counter that grades a claim before selling it.",
+      "text": "A guild house of the listening trade. Correspondents kept on several roads, an archive that sets one report against another, and a fixed price for an answer in writing. Costly, and the only counter that grades a claim before selling it.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -4637,7 +4635,7 @@
     },
     {
       "id": "city|Defense|Professional city watch#1",
-      "text": "Full-time keepers of order, numbering about 1% of the city.",
+      "text": "Full-time keepers of order, about one for every hundred people in the city.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -4859,7 +4857,7 @@
     },
     {
       "id": "city|Criminal|Whisper market#0",
-      "text": "The covert guild scale. Brokers deal in knowledge by the piece, attach a grade to it, and will build a claim to order for a patron with the coin. It settles where the talk already runs thickest.",
+      "text": "A covert guild. Brokers deal in knowledge by the piece, attach a grade to it, and will build a claim to order for a patron with the coin. It settles where the talk already runs thickest.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -4891,7 +4889,7 @@
     },
     {
       "id": "city|Criminal|Contract killer#0",
-      "text": "A lone hand or small cell, working below the level that would sustain an assassins guild. Work comes through criminal go-betweens: less dependable, but deniable.",
+      "text": "A lone hand or small cell, in a place too small to keep an assassins guild. Work comes through criminal go-betweens: less dependable, but deniable.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -4900,7 +4898,7 @@
     },
     {
       "id": "city|Criminal|Contract killer#1",
-      "text": "One killer, or a handful, operating beneath the threshold an assassins guild would need. Contracts arrive by way of criminal intermediaries, less reliable and for that reason harder to trace back.",
+      "text": "One killer, or a handful, in a place too small to keep an assassins guild. Contracts arrive by way of criminal intermediaries, less reliable and for that reason harder to trace back.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -5020,7 +5018,7 @@
     },
     {
       "id": "city|Exotic|Golem workforce#1",
-      "text": "Servants made rather than born, if magic permits it.",
+      "text": "Servants made, not born, if magic permits it.",
       "needs": [],
       "excludes": [],
       "crisis": [],

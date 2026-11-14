@@ -34,7 +34,7 @@ const NEITHER = withFacts({ sacredHouse: false, faith: { seniorCleric: null } })
 
 const LINES = Object.freeze([
   ['DEVOTION: lukewarm', /the clergy preach to the same few households/],
-  ['ARC: trend: rising', /What the clergy record/],
+  ['ARC: trend: rising', /The clergy's register counts more people/], // W4 PEOPLE second seat 2026-11-07: re-keyed to the line's text after the first seat's faith style pass (05da0e050, the owner's style law)
 ]);
 
 describe('CENSUS-5e unit 3 · "the clergy" declares `clergy` (R-AE)', () => {

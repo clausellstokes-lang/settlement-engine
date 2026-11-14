@@ -1,0 +1,76 @@
+# ── THE BRAND MINT (re-mints tests/fixtures/brand-derivatives.mint.json on its own stack) ──
+# WHAT IT IS FOR. scripts/derive-brand-marks.mjs certifies the ten brand derivatives it cuts
+# from the painting with a MINT RECORD: the minting stack's signature, the sha256 of every
+# input it reads, and the sha256 of every file it wrote. Any change to a declared input —
+# most often a new row in scripts/ai-media-provenance.json, which the derivation reads to
+# stamp the two painted crops' credit — reds tests/build/brandDerivatives.test.js on every
+# platform until the record is re-minted through its one door, `--record`.
+#
+# WHY IT RUNS ON macOS. The record names darwin/arm64 as its minting stack, and `--record`
+# refuses to write unless the bytes it derives equal the committed art. sharp ships a
+# different prebuilt libvips per platform, so on linux/x64 the fresh bytes differ and the
+# door (correctly) refuses. `macos-latest` is an arm64 runner: the record's own stack, so
+# the art never moves and the minting platform never changes. On this account `macos-14`
+# was cancelled twice with no runner assigned and no reason readable (runs 42760980917 and
+# 42761658250); `macos-latest` ran. The label does not decide the stack: the door's
+# signature check does. The job prints the host signature first; the reader checks it
+# against the record's `mintedOn` before trusting anything below it.
+#
+# IT WRITES NOTHING BACK. contents: read, no secrets, no push. It prints the record
+# between two marker lines (base64) and uploads it as an artifact; a session reads the
+# log, checks the signature and the diff, and commits the record itself.
+#
+# Triggers: manual, or a push to a `lane/brand-mint-**` branch only. Outside ci.yml by
+# construction, so outside ciCheckParity and the deploy gate.
+name: Brand mint (darwin/arm64)  # deploy-gate: optional — manual / brand-mint lanes only
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ['lane/brand-mint-**']
+
+permissions:
+  contents: read
+
+jobs:
+  brand-mint:  # deploy-gate: optional
+    name: Re-mint the brand derivatives record
+    runs-on: macos-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+      - run: npm ci
+      - name: Host signature (must equal the record's mintedOn)
+        run: |
+          node --input-type=module -e "
+          import sharp from 'sharp';
+          import { readFileSync } from 'node:fs';
+          const rec = JSON.parse(readFileSync('tests/fixtures/brand-derivatives.mint.json', 'utf8'));
+          const host = { platform: process.platform, arch: process.arch, sharp: sharp.versions.sharp, vips: sharp.versions.vips };
+          console.log('host signature:   ' + JSON.stringify(host));
+          console.log('record mintedOn:  ' + JSON.stringify(rec.mintedOn));
+          console.log(JSON.stringify(host) === JSON.stringify(rec.mintedOn) ? 'SIGNATURE MATCH' : 'SIGNATURE MISMATCH');
+          "
+      - name: Re-mint through the door (refuses on any shipped-byte mismatch)
+        run: node scripts/derive-brand-marks.mjs --record
+      - name: Only the record may differ
+        run: |
+          git status --porcelain
+          git diff --stat
+          other=$(git status --porcelain | grep -v ' tests/fixtures/brand-derivatives.mint.json$' || true)
+          if [ -n "$other" ]; then echo "UNEXPECTED CHANGES:"; echo "$other"; exit 1; fi
+      - name: Print the record (base64, between markers)
+        run: |
+          shasum -a 256 tests/fixtures/brand-derivatives.mint.json
+          echo '=====BEGIN BRAND MINT RECORD BASE64====='
+          node -e "process.stdout.write(require('node:fs').readFileSync('tests/fixtures/brand-derivatives.mint.json').toString('base64') + '\n')"
+          echo '=====END BRAND MINT RECORD BASE64====='
+      - uses: actions/upload-artifact@v4
+        with:
+          name: brand-derivatives-mint-record
+          path: tests/fixtures/brand-derivatives.mint.json
+          if-no-files-found: error

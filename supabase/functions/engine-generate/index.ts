@@ -33,7 +33,17 @@
  * Web Worker and the in-thread fallback run, so the reply is the worker's result packet
  * and the client's `remote` transport (`src/lib/engineRemote.js`) hands phase B the same
  * shape. With no neighbour, no previous settlement and no locks the core's settlement IS
- * `generateSettlementPipeline(birthConfig(config), null, { seed, customContent: {} })`.
+ * `generateSettlementPipeline(birthConfig(config), null, { seed, customContent: {}, contentProvenance })`
+ * with the store's own standalone vanilla provenance (THE STAMP, below).
+ *
+ * THE STAMP (remote-path R2, 2026-11-10). The store hands every standalone generation the
+ * provenance `{ scope: 'standalone', environment, bindingHash: null }`, where `environment` is
+ * `VANILLA_CONTENT_ENVIRONMENT` for an account with no content environment
+ * (`src/store/settlementContentRuntime.js`), and none at all when the config turned custom
+ * content off (`useCustomContent === false`). The client admits only that vanilla stamp to this
+ * service (`engineRemote.js :: remoteUnsupportedInputs`), so the birth below hands the pipeline
+ * the same provenance by the same rule, and the pipeline's own `buildSettlementContentProvenance`
+ * writes `customContentProvenance` on both sides: the service's record is the local record.
  *
  * Runs the app's own generator, bundled: `_shared/engineBundle.js` is esbuild's bundle of
  * `src/engine/serviceEntry.js` (scripts/build-edge-shared.mjs), and
@@ -44,7 +54,7 @@
  *
  * THE SPINE (the order is the contract):
  *   CORS preflight → method gate (POST) → bot guard (403) → body cap + parse (413/400)
- *   → shape (400) → version pin (409 `engine_version_retired`, carrying the served
+ *   → shape (400) → a `generate` body's rest without its toggle bags (413 over 32 KB) → version pin (409 `engine_version_retired`, carrying the served
  *   version) → OPTIONAL identity (a Bearer JWT that resolves to a user; anything else is
  *   anonymous) → for a signed-in caller: single-session gate (401) and account_is_active
  *   (403; the design's spine, docs/DESIGN_ENGINE_SERVICE.md "The contract") → staff read →
@@ -86,6 +96,7 @@ import {
   regenHistoryPipeline,
   regenNPCsPipeline,
   runGenerationRequest,
+  VANILLA_CONTENT_ENVIRONMENT,
 } from '../_shared/engineBundle.js';
 import engineMeta from '../_shared/engineBundle.meta.json' with { type: 'json' };
 import { EVENTS as ANALYTICS_EVENTS, EVENTS_REV as ANALYTICS_EVENTS_REV } from '../_shared/analyticsEventsBundle.js';
@@ -105,7 +116,28 @@ const STAFF_ROLES: ReadonlyArray<string> = Object.freeze(['developer', 'admin'])
 export const ENGINE_VERSION: string = engineMeta.engineVersion;
 
 const FN = 'engine-generate';
-const MAX_BODY_BYTES = 32 * 1024;
+/**
+ * The `generate` cap (remote-path R4, 2026-11-10). The generate action sends EVERY stored toggle
+ * of every bag, and the wizard's own bulk presses fill them: the largest body they can build is
+ * DERIVED from the catalogs by `tests/build/engineGenerateBodyCap.test.js` (233,119 bytes at this
+ * writing), which holds this cap at least 1.1× that bound and at most the chair's 256 KB
+ * ceiling, and reds the day the catalogs outgrow it. It was 32 KB, which refused an account
+ * whose grid had been "excluded all" on every generation.
+ */
+const MAX_BODY_BYTES = 256 * 1024;
+/**
+ * THE 256 KB ADMITS ONLY WHAT IT WAS RAISED FOR (remote-path FU-1, the review's F1, the chair's
+ * ruling 2026-11-10). The function validates nothing inside `config`, so the cap was the only bound
+ * on one call's work: a hostile list at 256 KB cost seconds of CPU and megabytes of reply. The four
+ * toggle bags the wizard's bulk presses fill may use the whole cap; the REST of a `generate` body,
+ * serialised without them, is held to the old 32 KB. Checked on bytes, before any account read or
+ * generation. A real shape validator for `config` is the durable cure (the lane's record, the first
+ * hardening item after the deploy).
+ */
+const GENERATE_TOGGLE_BAGS: ReadonlyArray<string> = Object.freeze([
+  '_institutionToggles', '_categoryToggles', '_goodsToggles', '_servicesToggles',
+]);
+const MAX_GENERATE_REST_BYTES = 32 * 1024;
 /**
  * `derive` carries a pins bag cut from a whole settlement record (a city's record is ~250 KB);
  * `regenSection` carries the record itself. Both are held to this cap.
@@ -220,6 +252,19 @@ async function logGeneration(admin: EngineAdmin, row: {
   }
 }
 
+/**
+ * The content runtime the store hands its own standalone vanilla generation, by the store's
+ * rule (`settlementContentRuntime.js :: settlementContentRuntimeOptions`): stamped with the
+ * vanilla environment unless the config turned custom content off. No homebrew, no tunables.
+ */
+function storeVanillaContentRuntime(config: Record<string, unknown>) {
+  if (config.useCustomContent === false) return { customContent: {} };
+  return {
+    customContent: {},
+    contentProvenance: { scope: 'standalone', environment: VANILLA_CONTENT_ENVIRONMENT, bindingHash: null },
+  };
+}
+
 function isPlainObject(v: unknown): v is Record<string, unknown> {
   return typeof v === 'object' && v !== null && !Array.isArray(v);
 }
@@ -235,7 +280,7 @@ export async function handleEngineGenerate(req: Request, deps: Deps = {}): Promi
 
   // ── Body: capped, parsed, shaped ───────────────────────────────────────────────────
   // The larger cap is read first (no body exceeds it); a `generate` body is then held to its
-  // own 32 KB once the op is known.
+  // own cap (MAX_BODY_BYTES) once the op is known.
   const raw = await req.text();
   const rawBytes = new TextEncoder().encode(raw).length;
   if (rawBytes > MAX_DERIVE_BODY_BYTES) {
@@ -261,6 +306,14 @@ export async function handleEngineGenerate(req: Request, deps: Deps = {}): Promi
       return json({ error: 'invalid_seed', maxChars: MAX_SEED_CHARS }, 400, cors);
     }
     if (!isPlainObject(config)) return json({ error: 'invalid_config' }, 400, cors);
+  }
+  if (op === 'generate') {
+    const rest: Record<string, unknown> = { ...(config as Record<string, unknown>) };
+    for (const bag of GENERATE_TOGGLE_BAGS) delete rest[bag];
+    const restBytes = new TextEncoder().encode(JSON.stringify({ ...body, config: rest })).length;
+    if (restBytes > MAX_GENERATE_REST_BYTES) {
+      return json({ error: 'payload_too_large', maxBytes: MAX_GENERATE_REST_BYTES }, 413, cors);
+    }
   }
   if (op === 'regenSection') {
     if (typeof section !== 'string' || !REGEN_SECTIONS.includes(section)) {
@@ -360,7 +413,12 @@ export async function handleEngineGenerate(req: Request, deps: Deps = {}): Promi
     const { settlement, pipelineHistory } = runGenerationRequest({
       op: 'settlement',
       requestId: null,
-      payload: { fullConfig: birthConfig(config), neighbour: null, seed, contentRuntime: { customContent: {} } },
+      payload: {
+        fullConfig: birthConfig(config),
+        neighbour: null,
+        seed,
+        contentRuntime: storeVanillaContentRuntime(config as Record<string, unknown>),
+      },
     });
     const generatedAt = (deps.now ?? (() => new Date()))().toISOString();
     return metered(json({ settlement, pipelineHistory, engineVersion: ENGINE_VERSION, generatedAt }, 200, cors), 'ok');

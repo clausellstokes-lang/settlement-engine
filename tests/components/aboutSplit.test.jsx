@@ -60,6 +60,15 @@ const LEGACY_MANIFESTO_BANDS = ['hero', 'premise', 'covenant', 'mechanism', 'ai'
 // was ALSO the page's entire deep-link grammar (`/how-to?tab=<id>`).
 const LEGACY_HANDBOOK_TABS = ['quick', 'power', 'living', 'ref', 'compare', 'faq'];
 const LEGACY_UNITS = [...LEGACY_MANIFESTO_BANDS, ...LEGACY_HANDBOOK_TABS];
+// ── Sections BORN after the split, each by name with its cause ───────────────
+// 'table' — ABOUT-CURRENT A1 (2026-11-10). The owner: "Treat Settlementforge as both
+// canvas and world to explore for everyone at the table." Placed after the premise
+// and before the covenant on What this Is. Not a pre-split unit, so it carries no
+// legacy ?tab= and the legacy census above is unchanged.
+const ADDED_UNITS = ['table'];
+const ALL_UNITS = [...LEGACY_UNITS, ...ADDED_UNITS];
+// What this Is in reading order: the manifesto bands with the added section in its place.
+const WHAT_THIS_IS_ORDER = ['hero', 'premise', 'table', 'covenant', 'mechanism', 'ai', 'close', 'compare'];
 
 /**
  * THE INDEPENDENT ANCHOR CONTRACT — the published `#anchor` of every unit, and
@@ -77,6 +86,7 @@ const LEGACY_UNITS = [...LEGACY_MANIFESTO_BANDS, ...LEGACY_HANDBOOK_TABS];
 const PUBLISHED_ANCHORS = Object.freeze({
   hero: ['about-what-this-is', 'what-this-is'],
   premise: ['about-what-this-is', 'the-premise'],
+  table: ['about-what-this-is', 'for-everyone-at-the-table'],
   covenant: ['about-what-this-is', 'the-covenant'],
   mechanism: ['about-what-this-is', 'how-it-works'],
   ai: ['about-what-this-is', 'where-the-ai-fits'],
@@ -102,7 +112,11 @@ describe('About split — pin 1: the mapping is a TOTALITY, not a vibe', () => {
   it('every unit of the pre-split page appears in the manifest exactly once', () => {
     const ids = ABOUT_UNITS.map((u) => u.id);
     expect(new Set(ids).size, 'a unit id is listed twice').toBe(ids.length);
-    expect([...ids].sort()).toEqual([...LEGACY_UNITS].sort());
+    expect([...ids].sort()).toEqual([...ALL_UNITS].sort());
+    // Every non-legacy unit is marked as born after the split; every legacy one is not.
+    for (const u of ABOUT_UNITS) {
+      expect(u.source === 'added', `${u.id} source`).toBe(ADDED_UNITS.includes(u.id));
+    }
   });
 
   it('no unit is ORPHANED — each names a real destination view and a non-empty anchor', () => {
@@ -124,7 +138,7 @@ describe('About split — pin 1: the mapping is a TOTALITY, not a vibe', () => {
     const whatIds = unitsForView(ABOUT_WHAT_VIEW).map((u) => u.id);
     const guideIds = unitsForView(ABOUT_GUIDE_VIEW).map((u) => u.id);
     // Every manifesto band is conceptual; the operational tabs stay on the guide.
-    expect(whatIds).toEqual([...LEGACY_MANIFESTO_BANDS, 'compare']);
+    expect(whatIds).toEqual(WHAT_THIS_IS_ORDER);
     expect(guideIds).toEqual(['quick', 'power', 'living', 'ref', 'faq']);
     // The crossing is deliberate: "How We Compare" IS the positioning ladder,
     // which design §1 names as conceptual. If this flips, the /compare* redirects
@@ -134,7 +148,7 @@ describe('About split — pin 1: the mapping is a TOTALITY, not a vibe', () => {
 
   it('the two pages together re-home the whole inventory (nothing evaporated)', () => {
     const homed = [...unitsForView(ABOUT_WHAT_VIEW), ...unitsForView(ABOUT_GUIDE_VIEW)];
-    expect(homed.length).toBe(LEGACY_UNITS.length);
+    expect(homed.length).toBe(ALL_UNITS.length);
   });
 });
 
@@ -511,6 +525,8 @@ describe('About split — the anchor landing, on the OTHER page', () => {
   const OWNER = Object.freeze({
     'what-this-is': 'howto/AboutManifesto.jsx',
     'the-premise': 'howto/AboutManifesto.jsx',
+    // ABOUT-CURRENT A1 (2026-11-10), the owner's "for everyone at the table" section.
+    'for-everyone-at-the-table': 'howto/AboutManifesto.jsx',
     'the-covenant': 'howto/AboutManifesto.jsx',
     'how-it-works': 'howto/AboutManifesto.jsx',
     'where-the-ai-fits': 'howto/AboutManifesto.jsx',

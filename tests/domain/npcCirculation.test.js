@@ -325,6 +325,7 @@ describe('W-H3 §6 — a rejection REFERENCES THE ORIGINAL SCANDAL', () => {
     const attempt = attemptRehost({
       worldState: world, settlement: councilTown(), settlementId: 'b',
       settlementName: 'Bramwell', wnpcId: graduated.wnpcId, tick: 2, force: true,
+      nameFor: (/** @type {string} */ id) => ({ a: 'Ashford', b: 'Bramwell' })[id],
     });
     expect(attempt.admission.outcome).toBe('rejected');
     const item = attempt.news;
@@ -336,7 +337,16 @@ describe('W-H3 §6 — a rejection REFERENCES THE ORIGINAL SCANDAL', () => {
     expect(item.rejectionReason).toBe('scandal_class_unacceptable');
     // The address chain names BOTH ends: the gate that shut and the town it happened in.
     expect(item.settlementIds).toEqual(['b', 'a']);
-    expect(item.reasons[0]).toContain('a');
+    // FIX-PULSE-DEFECTS (audit C1b·46, npcCirculation :: rejectionNewsItem): the pill printed
+    // the origin's raw id ("… over the matter at a."); it names the town, and without a
+    // name read it never falls back to the id. (Re-keyed from `toContain('a')`, which the
+    // id itself satisfied.)
+    expect(item.reasons[0]).toBe('The gate was shut against them over the matter at Ashford.');
+    const unnamed = attemptRehost({
+      worldState: world, settlement: councilTown(), settlementId: 'b',
+      settlementName: 'Bramwell', wnpcId: graduated.wnpcId, tick: 2, force: true,
+    });
+    expect(unnamed.news.reasons[0]).toBe('The gate was shut against them over the matter at their last home.');
     expect(item.reasons.join(' ')).toContain('conspiracy');
   });
 
@@ -361,9 +371,13 @@ describe('W-H3 §6 — a rejection REFERENCES THE ORIGINAL SCANDAL', () => {
     const attempt = attemptRehost({
       worldState: graduated.worldState, settlement: councilTown(), settlementId: 'far',
       settlementName: 'Farholt', wnpcId: graduated.wnpcId, tick: 2, force: true,
+      nameFor: (/** @type {string} */ id) => ({ a: 'Ashford', far: 'Farholt' })[id],
     });
     expect(attempt.news.candidateType).toBe(ARRIVAL_NEWS_TYPE);
     expect(attempt.news.factionName).toBe('Town Council');
+    // FIX-PULSE-DEFECTS (audit C1b·48, npcCirculation :: arrivalNewsItem): the pill printed the
+    // origin's raw id ("They came from a."); it names the town.
+    expect(attempt.news.reasons[1]).toBe('They came from Ashford.');
     expect(attempt.news.admissionOutcome).toBe('admitted_lowest');
     // CONSERVATION: the soul MOVED between the two maps and is in exactly one of them.
     const ledger = npcLedgerOf(attempt.worldState);

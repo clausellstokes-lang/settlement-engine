@@ -68,6 +68,25 @@ export function fnv1a32(str) {
  * Pick a phrasing variant deterministically from a pool. A FALSY seed ⇒ index 0 (the
  * canonical string), so seedless callers are byte-identical. A function entry is resolved
  * with `interp`. Pure.
+ *
+ * Two signatures (strict-tip): a pool whose lines name their slot bag (`TierLineSlots`,
+ * `OccupationLineSlots`, ...) takes THAT bag as `interp`, so the slots a line reads are
+ * checked at the call; an untyped pool keeps the open bag.
+ * @template {Record<string, unknown>} T
+ * @overload
+ * @param {readonly (string | ((interp: T) => string))[]} pool
+ * @param {string | null | undefined} seed
+ * @param {T} interp
+ * @returns {string}
+ */
+/**
+ * @overload
+ * @param {readonly ProseVariant[]} pool
+ * @param {string | null | undefined} seed
+ * @param {Record<string, unknown>} [interp]
+ * @returns {string}
+ */
+/**
  * @param {readonly ProseVariant[]} pool
  * @param {string | null | undefined} seed
  * @param {Record<string, unknown>} [interp]

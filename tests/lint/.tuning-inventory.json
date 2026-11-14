@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "9e0d5577607b69db32e65e2b8147293c6ccf7174",
-  "measuredBy": "MERGE-WAVE (W1 ECO merge point)",
-  "date": "2026-11-08",
-  "note": "the W1 ECO merge at ea0e269a9: economyStateProse.js gains three named share thresholds (W1 construction 725b62eb5), 2 -> 5, attributed by their DECLARED_GROWTH row; refrozen at the merged tip, Register VII v2 stands",
+  "measuredAtSha": "08c9f15bdcfbdc14c0afd571169ef31bc6744acb",
+  "measuredBy": "W2-A-LEAVES-2",
+  "date": "2026-11-13",
+  "note": "ALLEGIANCE_TUNING gains one dependent: src/domain/facts/officialsInPay.js reads allegianceOf (the leaf an official in a criminal pay, REVIEW-W2A F3); no value moved",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -192,6 +192,7 @@
       },
       "dependents": [
         "src/domain/display/galleryVeil.js",
+        "src/domain/people/cardVeil.js",
         "src/domain/worldPulse/brokerageFidelity.js",
         "src/domain/worldPulse/brokerageServices.js",
         "src/domain/worldPulse/brokerageServicesFeed.js",
@@ -354,7 +355,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 5,
-      "line": 157,
+      "line": 158,
       "spanDigest": "ab4bbb15a6220283cf96e3ac4a1e58f4fe4f109b123d949bde65cc949f4c2149",
       "leaves": {
         "spawn.base": 0.1,
@@ -383,11 +384,14 @@
       },
       "dependents": [
         "src/domain/causalState.js",
+        "src/domain/corruptionLeash.js",
         "src/domain/crimeSignal.js",
         "src/domain/display/deityEffects.js",
         "src/domain/display/glossary.js",
         "src/domain/events/affordanceManifest.js",
         "src/domain/events/mutateEntities.js",
+        "src/domain/people/allegiance.js",
+        "src/domain/settlementMigrations.js",
         "src/domain/undercity/colonization.js",
         "src/domain/undercity/monotoneComponents.js",
         "src/domain/undercity/sewerDerivation.js",
@@ -405,8 +409,7 @@
         "src/domain/worldPulse/npcVerdictTable.js",
         "src/domain/worldPulse/religionLegitimacy.js",
         "src/domain/worldPulse/roadsKernel.js",
-        "src/domain/worldPulse/thievesGuild.js",
-        "src/generators/steps/corruptionPass.js"
+        "src/domain/worldPulse/thievesGuild.js"
       ],
       "namedDependents": [
         "src/domain/worldPulse/npcAgency.js"
@@ -416,7 +419,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 2,
-      "line": 190,
+      "line": 191,
       "spanDigest": "2a49e9c408346df030d11c747be66131ccfe77729e738127e5a7c88fc21db844",
       "leaves": {
         "span": 0.4,
@@ -426,11 +429,14 @@
       },
       "dependents": [
         "src/domain/causalState.js",
+        "src/domain/corruptionLeash.js",
         "src/domain/crimeSignal.js",
         "src/domain/display/deityEffects.js",
         "src/domain/display/glossary.js",
         "src/domain/events/affordanceManifest.js",
         "src/domain/events/mutateEntities.js",
+        "src/domain/people/allegiance.js",
+        "src/domain/settlementMigrations.js",
         "src/domain/undercity/colonization.js",
         "src/domain/undercity/monotoneComponents.js",
         "src/domain/undercity/sewerDerivation.js",
@@ -448,8 +454,7 @@
         "src/domain/worldPulse/npcVerdictTable.js",
         "src/domain/worldPulse/religionLegitimacy.js",
         "src/domain/worldPulse/roadsKernel.js",
-        "src/domain/worldPulse/thievesGuild.js",
-        "src/generators/steps/corruptionPass.js"
+        "src/domain/worldPulse/thievesGuild.js"
       ],
       "namedDependents": [
         "src/domain/display/deityEffects.js"
@@ -459,7 +464,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 3,
-      "line": 247,
+      "line": 248,
       "spanDigest": "a3c3e37b7b4a4536d47b43c602db8ea57c4399d9ff2f01beda024a59d5219374",
       "leaves": {
         "axisSign.lawful": 1,
@@ -470,11 +475,14 @@
       },
       "dependents": [
         "src/domain/causalState.js",
+        "src/domain/corruptionLeash.js",
         "src/domain/crimeSignal.js",
         "src/domain/display/deityEffects.js",
         "src/domain/display/glossary.js",
         "src/domain/events/affordanceManifest.js",
         "src/domain/events/mutateEntities.js",
+        "src/domain/people/allegiance.js",
+        "src/domain/settlementMigrations.js",
         "src/domain/undercity/colonization.js",
         "src/domain/undercity/monotoneComponents.js",
         "src/domain/undercity/sewerDerivation.js",
@@ -492,8 +500,7 @@
         "src/domain/worldPulse/npcVerdictTable.js",
         "src/domain/worldPulse/religionLegitimacy.js",
         "src/domain/worldPulse/roadsKernel.js",
-        "src/domain/worldPulse/thievesGuild.js",
-        "src/generators/steps/corruptionPass.js"
+        "src/domain/worldPulse/thievesGuild.js"
       ],
       "namedDependents": [
         "src/domain/causalState.js",
@@ -504,7 +511,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 2,
-      "line": 485,
+      "line": 491,
       "spanDigest": "46dfbf0bcd35ae64408fa01882b20e375d0fbaf356c2772c76dce112f190b3cf",
       "leaves": {
         "advance.base": 0.05,
@@ -521,11 +528,14 @@
       },
       "dependents": [
         "src/domain/causalState.js",
+        "src/domain/corruptionLeash.js",
         "src/domain/crimeSignal.js",
         "src/domain/display/deityEffects.js",
         "src/domain/display/glossary.js",
         "src/domain/events/affordanceManifest.js",
         "src/domain/events/mutateEntities.js",
+        "src/domain/people/allegiance.js",
+        "src/domain/settlementMigrations.js",
         "src/domain/undercity/colonization.js",
         "src/domain/undercity/monotoneComponents.js",
         "src/domain/undercity/sewerDerivation.js",
@@ -543,8 +553,7 @@
         "src/domain/worldPulse/npcVerdictTable.js",
         "src/domain/worldPulse/religionLegitimacy.js",
         "src/domain/worldPulse/roadsKernel.js",
-        "src/domain/worldPulse/thievesGuild.js",
-        "src/generators/steps/corruptionPass.js"
+        "src/domain/worldPulse/thievesGuild.js"
       ],
       "namedDependents": []
     },
@@ -552,7 +561,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 6,
-      "line": 514,
+      "line": 520,
       "spanDigest": "8b5da2da126aac3dbd4cc464fa1c170614cc9a73aef82131bf1d8c984c405f6f",
       "leaves": {
         "powerRate": 0.9,
@@ -564,11 +573,14 @@
       },
       "dependents": [
         "src/domain/causalState.js",
+        "src/domain/corruptionLeash.js",
         "src/domain/crimeSignal.js",
         "src/domain/display/deityEffects.js",
         "src/domain/display/glossary.js",
         "src/domain/events/affordanceManifest.js",
         "src/domain/events/mutateEntities.js",
+        "src/domain/people/allegiance.js",
+        "src/domain/settlementMigrations.js",
         "src/domain/undercity/colonization.js",
         "src/domain/undercity/monotoneComponents.js",
         "src/domain/undercity/sewerDerivation.js",
@@ -586,8 +598,7 @@
         "src/domain/worldPulse/npcVerdictTable.js",
         "src/domain/worldPulse/religionLegitimacy.js",
         "src/domain/worldPulse/roadsKernel.js",
-        "src/domain/worldPulse/thievesGuild.js",
-        "src/generators/steps/corruptionPass.js"
+        "src/domain/worldPulse/thievesGuild.js"
       ],
       "namedDependents": [
         "src/domain/worldPulse/thievesGuild.js"
@@ -597,7 +608,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 3,
-      "line": 632,
+      "line": 638,
       "spanDigest": "1eda2a9a19616521403191b4fa770f2d1f9010a2f4e4b978917f9fc9a3aad5d6",
       "leaves": {
         "dragPerInstitution": 0.15,
@@ -606,11 +617,14 @@
       },
       "dependents": [
         "src/domain/causalState.js",
+        "src/domain/corruptionLeash.js",
         "src/domain/crimeSignal.js",
         "src/domain/display/deityEffects.js",
         "src/domain/display/glossary.js",
         "src/domain/events/affordanceManifest.js",
         "src/domain/events/mutateEntities.js",
+        "src/domain/people/allegiance.js",
+        "src/domain/settlementMigrations.js",
         "src/domain/undercity/colonization.js",
         "src/domain/undercity/monotoneComponents.js",
         "src/domain/undercity/sewerDerivation.js",
@@ -628,10 +642,10 @@
         "src/domain/worldPulse/npcVerdictTable.js",
         "src/domain/worldPulse/religionLegitimacy.js",
         "src/domain/worldPulse/roadsKernel.js",
-        "src/domain/worldPulse/thievesGuild.js",
-        "src/generators/steps/corruptionPass.js"
+        "src/domain/worldPulse/thievesGuild.js"
       ],
       "namedDependents": [
+        "src/domain/corruptionLeash.js",
         "src/domain/worldPulse/npcAgency.js"
       ]
     },
@@ -639,7 +653,7 @@
       "exported": true,
       "idiom": "mixed",
       "keys": 2,
-      "line": 47,
+      "line": 48,
       "spanDigest": "6b3d0a1b34604e0b09ffa63b1642dffa44a7552fa114d2ca602253156c8db98e",
       "leaves": {
         "rates.exploiter": {
@@ -1020,7 +1034,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 450,
+      "line": 451,
       "spanDigest": "3812788e098c702a89d72a5b51c0007f969391069da9b98b2fdd4f2e789ff838",
       "leaves": {
         "value": 50
@@ -1034,7 +1048,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 451,
+      "line": 452,
       "spanDigest": "a6b1340215d65b0c4945f4b657854f6756ff2217a648606b9e467ee5ac00bbda",
       "leaves": {
         "value": 20
@@ -1048,7 +1062,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 943,
+      "line": 987,
       "spanDigest": "d8ad20f683ec92a4a0b123ebd6748169b8712e96577f567cd56d3cdd08f76113",
       "leaves": {
         "value": 0.05
@@ -1063,13 +1077,13 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 366,
+      "line": 368,
       "spanDigest": "861a71e24fdda07cea9d8f740fbe51ca1685d27dfd0a9f822f579ea609747fe2",
       "leaves": {
         "value": 0.15
       },
       "dependents": [
-        "src/components/new/tabs/PowerTab.jsx",
+        "src/components/new/powerDeskRead.js",
         "src/domain/display/stateProse/printProse.js"
       ],
       "namedDependents": []
@@ -1078,13 +1092,13 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 582,
+      "line": 599,
       "spanDigest": "d8c363dde6af24802c24ec308fde1963fd20f88ef9f80765dbeb6bd7c6899e55",
       "leaves": {
         "value": 3
       },
       "dependents": [
-        "src/components/new/tabs/PowerTab.jsx",
+        "src/components/new/powerDeskRead.js",
         "src/domain/display/stateProse/printProse.js"
       ],
       "namedDependents": []
@@ -1093,13 +1107,13 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 584,
+      "line": 601,
       "spanDigest": "61090f7451b7f2aadae1709fa76edc9f360ae61664c9f8fd48b677a1e8ecfa07",
       "leaves": {
         "value": 0.35
       },
       "dependents": [
-        "src/components/new/tabs/PowerTab.jsx",
+        "src/components/new/powerDeskRead.js",
         "src/domain/display/stateProse/printProse.js"
       ],
       "namedDependents": []
@@ -1108,13 +1122,13 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 586,
+      "line": 603,
       "spanDigest": "0b8b01d51be797cd0143574956002d9faabb6345790cafa0a91e78f63118f528",
       "leaves": {
         "value": 0.08
       },
       "dependents": [
-        "src/components/new/tabs/PowerTab.jsx",
+        "src/components/new/powerDeskRead.js",
         "src/domain/display/stateProse/printProse.js"
       ],
       "namedDependents": []
@@ -1123,13 +1137,13 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 588,
+      "line": 605,
       "spanDigest": "013116d8a083862271257454b6e161900d075e0a05df61a52dfd7e61938389e3",
       "leaves": {
         "value": 0.15
       },
       "dependents": [
-        "src/components/new/tabs/PowerTab.jsx",
+        "src/components/new/powerDeskRead.js",
         "src/domain/display/stateProse/printProse.js"
       ],
       "namedDependents": []
@@ -1144,7 +1158,7 @@
         "value": 0.25
       },
       "dependents": [
-        "src/components/new/tabs/OverviewTab.jsx",
+        "src/components/new/stressorsDeskRead.js",
         "src/domain/display/stateProse/printProse.js"
       ],
       "namedDependents": []
@@ -1207,6 +1221,87 @@
       "dependents": [
         "src/domain/npc/characterReadModel.js",
         "src/domain/npc/livedExperienceSources.js"
+      ],
+      "namedDependents": []
+    },
+    "src/domain/people/allegiance.js#ALLEGIANCE_TUNING": {
+      "exported": true,
+      "idiom": "literal",
+      "keys": 7,
+      "line": 68,
+      "spanDigest": "0534913bf7da44d769d779cf750b6934ec7ab9ae94925492cb9a6a1344dbfcdf",
+      "leaves": {
+        "organizedCrime": 0.05,
+        "organizedFull": 8,
+        "powerBonus": 0.25,
+        "share": 0.15,
+        "frontWeight": 1,
+        "weightZeroHouse": 0.5,
+        "bossJoinsAbove": 4
+      },
+      "dependents": [
+        "src/components/new/npcComponents.jsx",
+        "src/domain/corruptionLeash.js",
+        "src/domain/crisis/crisisCast.js",
+        "src/domain/display/npcInteriorityRead.js",
+        "src/domain/events/affordanceManifest.js",
+        "src/domain/events/mutateEntities.js",
+        "src/domain/facts/officialsInPay.js",
+        "src/domain/npcProfile.js",
+        "src/domain/people/hallCapture.js",
+        "src/domain/people/patronage.js",
+        "src/domain/settlementMigrations.js",
+        "src/domain/tableLedger.js",
+        "src/domain/worldPulse/npcAgency.js",
+        "src/generators/generateSettlementPipeline.js",
+        "src/generators/narrativeGenerator.js",
+        "src/generators/people/castPowers.js",
+        "src/generators/people/goals.js",
+        "src/generators/people/ties.js",
+        "src/generators/steps/assembleSettlement.js",
+        "src/lib/structuralFingerprint.js"
+      ],
+      "namedDependents": [
+        "src/domain/events/mutateEntities.js",
+        "src/domain/settlementMigrations.js"
+      ]
+    },
+    "src/domain/people/hallCapture.js#HALL_CAPTURE_TUNING": {
+      "exported": true,
+      "idiom": "literal",
+      "keys": 4,
+      "line": 55,
+      "spanDigest": "2bb0ffc6f86418b17fecd53db76d3a9ffd3bff8a351df2e8962216a0a9a50aa0",
+      "leaves": {
+        "weight.1": 3,
+        "weight.2": 2,
+        "weight.3": 1,
+        "captureScore": 5,
+        "corruptedScore": 3,
+        "climateCap": 2
+      },
+      "dependents": [
+        "src/generators/narrativeGenerator.js"
+      ],
+      "namedDependents": []
+    },
+    "src/domain/people/patronage.js#RULING_PATRONAGE_TUNING": {
+      "exported": true,
+      "idiom": "literal",
+      "keys": 4,
+      "line": 55,
+      "spanDigest": "9acdd8bbb6d33f13f0160b4fb859db40ed62562fc613d4cd950fa2f3358584d1",
+      "leaves": {
+        "byRank.1": 0.15,
+        "byRank.2": 0.1,
+        "byRank.3": 0.05,
+        "steward": 0.1,
+        "cap": 0.25,
+        "ceilingGap": 1
+      },
+      "dependents": [
+        "src/components/new/tabs/WhoRunsThisTownPanel.jsx",
+        "src/pdf/lib/viewModel.js"
       ],
       "namedDependents": []
     },
@@ -1603,11 +1698,11 @@
         "NATURAL_ENEMY.gate": 0.55
       },
       "dependents": [
-        "src/components/new/tabs/PowerTab.jsx",
-        "src/domain/display/galleryVeil.js",
+        "src/components/new/powerDeskRead.js",
         "src/domain/display/stateProse/printProse.js",
         "src/domain/interior/interiorTemplates.js",
         "src/domain/npc/npcBank.js",
+        "src/domain/people/cardVeil.js",
         "src/domain/spatial/navalLayer.js",
         "src/domain/undercity/monotoneComponents.js",
         "src/domain/undercity/sewerDerivation.js",
@@ -2209,7 +2304,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 1,
-      "line": 112,
+      "line": 132,
       "spanDigest": "00c0e1f99fc53d650cd628cdac047d1e9e3d7d94218abe8ed2eed18c7a49b8ea",
       "leaves": {
         "value": 18
@@ -2995,7 +3090,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 10,
-      "line": 104,
+      "line": 107,
       "spanDigest": "dbfcfab0b85ba11ba37df86f68c8a9d37aa788b3f5ec60b8be4eb7d9065dee53",
       "leaves": {
         "RESOLUTION_HOLD_TICKS": 4,
@@ -3018,7 +3113,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 3,
-      "line": 77,
+      "line": 80,
       "spanDigest": "c660c4758dad012b0bbbd9b49c030a7f5bfad7dad7e6ef335e7c301b4857ce76",
       "leaves": {
         "SCORE_LOW": 40,
@@ -4192,7 +4287,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 3,
-      "line": 175,
+      "line": 176,
       "spanDigest": "a5da95dcebc47ef008491d904306a7794fbd2c92eb510eadee04d12cfba2f3b0",
       "leaves": {
         "DWELL_INTERVAL_TICKS": 2,
@@ -4364,7 +4459,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 4,
-      "line": 452,
+      "line": 457,
       "spanDigest": "bfb9f3afad0fbf5a97b4267b6097e8e11f95abf8950fc1e2b5ff9ad9cc7133ec",
       "leaves": {
         "YEAR_WEEKS": 52,
@@ -4572,7 +4667,7 @@
       "exported": true,
       "idiom": "aggregator",
       "keys": 9,
-      "line": 338,
+      "line": 353,
       "spanDigest": "37a1bc4094de284a2324ceb0b235fa40705f16fc96c789ba973a7bdfed1ade87",
       "leaves": {
         "PLAUSIBLE_FLOOR": {
@@ -4834,7 +4929,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 9,
-      "line": 94,
+      "line": 95,
       "spanDigest": "09e93aab2bbb8b3d83f42fd6bd9c9e05df6f7f4aca5d19765371dd777e54709e",
       "leaves": {
         "maxHousesPerSettlement": 2,
@@ -4954,7 +5049,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 7,
-      "line": 82,
+      "line": 83,
       "spanDigest": "d3c62cf5484d9ffcb88f33ab78dcf1cb7bafe07335e8da5d00ad37c5c63747d6",
       "leaves": {
         "thresholds.prosperous": 0.62,
@@ -5431,7 +5526,7 @@
       "exported": true,
       "idiom": "aggregator",
       "keys": 11,
-      "line": 511,
+      "line": 530,
       "spanDigest": "7061eadeb2ee83e8b5629b7de376192218aa48ca400a1b1359702038c688986a",
       "leaves": {
         "RAMP_BASE_RATE": {
@@ -5482,7 +5577,7 @@
       "exported": true,
       "idiom": "aggregator",
       "keys": 3,
-      "line": 349,
+      "line": 366,
       "spanDigest": "8126b0186c8d8295f80dc5cbc055b5ac1d7272d21d8c57291b08e5ce954d4765",
       "leaves": {
         "REACT_SEVERITY": {
@@ -5617,7 +5712,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 12,
-      "line": 44,
+      "line": 45,
       "spanDigest": "b2e6323b207c85c58ad5133e15bdec03f366d8ed9337ffcedb107fc2203f80fd",
       "leaves": {
         "MAX_STEP": 0.12,
@@ -5960,7 +6055,7 @@
       "exported": true,
       "idiom": "aggregator",
       "keys": 17,
-      "line": 1615,
+      "line": 1666,
       "spanDigest": "0f3911d51b455117b7b82ce58ac87d572ada6ecc2f80814f3976a5355f931b84",
       "leaves": {
         "STATE_LADDER": {
@@ -7226,7 +7321,7 @@
       "exported": true,
       "idiom": "aggregator",
       "keys": 3,
-      "line": 1307,
+      "line": 1339,
       "spanDigest": "eb5d52fecaa15a2aacf6803f04e7dc8dd4c5d7422aa0757424f18cf39d0ab480",
       "leaves": {
         "STRATEGY_K": {
@@ -8100,7 +8195,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 1,
-      "line": 89,
+      "line": 90,
       "spanDigest": "5d423d06ea6e3cf77788e82c97fa0946ae7c7fbf8d6e6830cb848773ffb8cd0c",
       "leaves": {
         "value": 6
@@ -8108,7 +8203,8 @@
       "dependents": [
         "src/generators/economy/economicState.js",
         "src/generators/economy/viability.js",
-        "src/generators/foodGenerator.js"
+        "src/generators/foodGenerator.js",
+        "src/generators/foodLand.js"
       ],
       "namedDependents": []
     },
@@ -8116,7 +8212,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 1,
-      "line": 58,
+      "line": 52,
       "spanDigest": "80a30b61941b4ce767eb70294da0e598be1b01e5d109279817fa9898c18c919a",
       "leaves": {
         "value": 12
@@ -8131,7 +8227,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 60,
+      "line": 54,
       "spanDigest": "d70a3c36f3d2b697eda6a63ffcd293fc11e35364c9d6dc4619e552583b9f41a9",
       "leaves": {
         "value": 0.1
@@ -8146,7 +8242,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 4,
-      "line": 61,
+      "line": 55,
       "spanDigest": "d2e49a612404d3d5836706cd0d20b875f6f1f6758ac155284dcebb2f44a36782",
       "leaves": {
         "rationFloorPct": 5,
@@ -8164,13 +8260,102 @@
       "exported": true,
       "idiom": "literal",
       "keys": 2,
-      "line": 65,
+      "line": 68,
       "spanDigest": "27e8cae7f714b6255ed46d5145a6bb53f4257fda9c347798c877bf6108baa529",
       "leaves": {
         "RANKS": 3,
         "WEIGHT_ZERO_HOUSE": 0.5
       },
       "dependents": [
+        "src/generators/narrativeGenerator.js"
+      ],
+      "namedDependents": []
+    },
+    "src/generators/people/castPowers.js#GUILD_PUSH_TUNING": {
+      "exported": true,
+      "idiom": "literal",
+      "keys": 4,
+      "line": 86,
+      "spanDigest": "a163ac8776fc0929e33ec0597e5327711e48c4ce474f669233879f93a30401d7",
+      "leaves": {
+        "strength": 0.6,
+        "strengthFull": 30,
+        "organized": 0.4,
+        "max": 2
+      },
+      "dependents": [
+        "src/generators/narrativeGenerator.js"
+      ],
+      "namedDependents": []
+    },
+    "src/generators/people/goals.js#GOAL_FAMILY_TUNING": {
+      "exported": true,
+      "idiom": "literal",
+      "keys": 3,
+      "line": 65,
+      "spanDigest": "9ce244b1dbb17502d5534d5ea33f9f9bafe8cec4c191d4f934be6e6673dbba1e",
+      "leaves": {
+        "base.RANK": 1,
+        "base.POWER": 1,
+        "base.INSTITUTION": 1,
+        "base.SUPPLY": 1,
+        "base.TIES": 1,
+        "base.PERSONALITY": 1,
+        "base.ALLEGIANCE": 1,
+        "base.CRISIS": 1,
+        "fit.rankClimb": 1.5,
+        "fit.powerFirst": 1.3,
+        "fit.supplyTrade": 1.5,
+        "fit.institutionImpaired": 1.3,
+        "fit.allegianceAgentShort": 3,
+        "fit.allegianceHandler": 2,
+        "fit.crisisStress": 2,
+        "fit.personality": 0.6,
+        "uncanny.perCard.thorp": 0.003,
+        "uncanny.perCard.hamlet": 0.004,
+        "uncanny.perCard.village": 0.006,
+        "uncanny.perCard.town": 0.008,
+        "uncanny.perCard.city": 0.011,
+        "uncanny.perCard.metropolis": 0.013,
+        "uncanny.capPerSettlement": 2,
+        "uncanny.vantage": "short"
+      },
+      "dependents": [
+        "src/generators/generateSettlementPipeline.js",
+        "src/generators/narrativeGenerator.js"
+      ],
+      "namedDependents": []
+    },
+    "src/generators/people/goals.js#LAW_PURSUIT_TUNING": {
+      "exported": true,
+      "idiom": "literal",
+      "keys": 5,
+      "line": 90,
+      "spanDigest": "9959eec349933f6bf2320b936780466dfea07d1f4bedbbed8da671fd806ce7ab",
+      "leaves": {
+        "strengthFull": 30,
+        "warrant.base": 0.2,
+        "warrant.enforcer": 0.4,
+        "warrant.guild": 0.25,
+        "warrant.min": 0.05,
+        "warrant.max": 0.6,
+        "suspicion.base": 0.1,
+        "suspicion.enforcer": 0.3,
+        "suspicion.guild": 0.2,
+        "suspicion.organized": 0.1,
+        "suspicion.min": 0.02,
+        "suspicion.max": 0.4,
+        "exposure.open": 1,
+        "exposure.front": 0.5,
+        "exposure.office": 0.75,
+        "exposure.retainer": 0.4,
+        "importance.pillar": 4,
+        "importance.key": 3,
+        "importance.notable": 2,
+        "importance.minor": 1
+      },
+      "dependents": [
+        "src/generators/generateSettlementPipeline.js",
         "src/generators/narrativeGenerator.js"
       ],
       "namedDependents": []
@@ -8434,7 +8619,8 @@
     "src/domain/worldPulse/worldState.js": 7,
     "src/generators/demandProfile.js": 1,
     "src/generators/economy/viability.js": 1,
-    "src/generators/foodGenerator.js": 5,
+    "src/generators/foodGenerator.js": 1,
+    "src/generators/foodLand.js": 4,
     "src/generators/generationReceiptJudgments.js": 1,
     "src/generators/historyGenerator.js": 1,
     "src/generators/people/ties.js": 1,
@@ -8469,6 +8655,7 @@
     "src/domain/display/settlementBeliefs.js": 6,
     "src/domain/display/settlementPestilence.js": 5,
     "src/domain/display/settlementRumors.js": 3,
+    "src/domain/display/stateProse/warFaithStateProse.js": 1,
     "src/domain/display/threatAssessment.js": 1,
     "src/domain/display/visibilityAudit.js": 2,
     "src/domain/display/warResolve.js": 12,
@@ -8652,7 +8839,7 @@
     "src/domain/worldPulse/habit/habitCurve.js": 7,
     "src/domain/worldPulse/hegemony.js": 2,
     "src/domain/worldPulse/informationStatecraft.js": 24,
-    "src/domain/worldPulse/institutionLifecycle.js": 17,
+    "src/domain/worldPulse/institutionLifecycle.js": 15,
     "src/domain/worldPulse/lawWord.js": 2,
     "src/domain/worldPulse/lineageNews.js": 3,
     "src/domain/worldPulse/magicSubstitution.js": 10,
@@ -8740,7 +8927,7 @@
     "src/domain/worldPulse/supplyKernel.js": 6,
     "src/domain/worldPulse/supplyWebWarfare.js": 56,
     "src/domain/worldPulse/thievesGuild.js": 2,
-    "src/domain/worldPulse/tierResourceDynamics.js": 40,
+    "src/domain/worldPulse/tierResourceDynamics.js": 39,
     "src/domain/worldPulse/tradeSalience.js": 25,
     "src/domain/worldPulse/tradeWar.js": 25,
     "src/domain/worldPulse/traditionsKernel.js": 5,
@@ -8783,7 +8970,8 @@
     "src/generators/economy/prosperity.js": 13,
     "src/generators/factionCorrelation.js": 4,
     "src/generators/factionDynamics.js": 38,
-    "src/generators/foodGenerator.js": 48,
+    "src/generators/foodGenerator.js": 41,
+    "src/generators/foodLand.js": 7,
     "src/generators/generationCoherence.js": 1,
     "src/generators/history/historyEventStrands.js": 47,
     "src/generators/historyGenerator.js": 13,
@@ -8794,7 +8982,7 @@
     "src/generators/narrativeGenerator.js": 2,
     "src/generators/neighbourGenerator.js": 43,
     "src/generators/npc/factionLeaderSecret.js": 48,
-    "src/generators/npcGenerator.js": 60,
+    "src/generators/npcGenerator.js": 59,
     "src/generators/npcStructure.js": 2,
     "src/generators/people/ties.js": 1,
     "src/generators/power/relationshipArchetypes.js": 13,
@@ -8818,11 +9006,11 @@
   },
   "unclosed": [],
   "totals": {
-    "tables": 271,
-    "keys": 2222,
+    "tables": 277,
+    "keys": 2249,
     "unregisteredNamed": 539,
-    "bareDecimals": 6934,
+    "bareDecimals": 6931,
     "zeroDependentTables": 10,
-    "zeroNamedDependentTables": 180
+    "zeroNamedDependentTables": 185
   }
 }

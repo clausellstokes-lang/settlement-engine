@@ -13,7 +13,7 @@
   },
   {
     "path": "src/components/OutputContainer.jsx",
-    "line": 994,
+    "line": 991,
     "category": "floatInterpolation",
     "snippet": "{displayProgress || 'Regenerating\\u2026'}"
   },
@@ -175,7 +175,7 @@
   },
   {
     "path": "src/components/map/BeliefDivergenceBand.jsx",
-    "line": 78,
+    "line": 77,
     "category": "floatInterpolation",
     "snippet": "{CONFIDENCE_LABEL[belief.confidence] || belief.confidence}"
   },
@@ -259,61 +259,37 @@
   },
   {
     "path": "src/components/map/WorldPulsePanel.jsx",
-    "line": 499,
-    "category": "floatInterpolation",
-    "snippet": "`memory ${percent(stressor.memoryStrength ?? 0)}`"
-  },
-  {
-    "path": "src/components/map/WorldPulsePanel.jsx",
-    "line": 499,
-    "category": "floatInterpolation",
-    "snippet": "{[`memory ${percent(stressor.memoryStrength ?? 0)}`, 'fading', human(stressor.type)]}"
-  },
-  {
-    "path": "src/components/map/WorldPulsePanel.jsx",
-    "line": 499,
-    "category": "percentToken",
-    "snippet": "{[`memory ${percent(stressor.memoryStrength ?? 0)}`, 'fading', human(stressor.type)]}"
-  },
-  {
-    "path": "src/components/map/WorldPulsePanel.jsx",
-    "line": 538,
-    "category": "floatInterpolation",
-    "snippet": "`Resolution roll ${percent(stressor.resolutionRoll)} against ${percent(stressor.resolutionChance)} chance.`"
-  },
-  {
-    "path": "src/components/map/WorldPulsePanel.jsx",
-    "line": 604,
+    "line": 632,
     "category": "floatInterpolation",
     "snippet": "{percent(roll.roll)}"
   },
   {
     "path": "src/components/map/WorldPulsePanel.jsx",
-    "line": 604,
+    "line": 632,
     "category": "percentToken",
     "snippet": "{percent(roll.roll)}"
   },
   {
     "path": "src/components/map/WorldPulsePanel.jsx",
-    "line": 605,
+    "line": 633,
     "category": "floatInterpolation",
     "snippet": "{percent(roll.probability)}"
   },
   {
     "path": "src/components/map/WorldPulsePanel.jsx",
-    "line": 605,
+    "line": 633,
     "category": "percentToken",
     "snippet": "{percent(roll.probability)}"
   },
   {
     "path": "src/components/map/WorldPulsePanel.jsx",
-    "line": 606,
+    "line": 634,
     "category": "floatInterpolation",
     "snippet": "{percent(roll.severity)}"
   },
   {
     "path": "src/components/map/WorldPulsePanel.jsx",
-    "line": 606,
+    "line": 634,
     "category": "percentToken",
     "snippet": "{percent(roll.severity)}"
   },
@@ -343,19 +319,19 @@
   },
   {
     "path": "src/components/new/npcComponents.jsx",
-    "line": 154,
+    "line": 157,
     "category": "floatInterpolation",
     "snippet": "{rel.strength}"
   },
   {
     "path": "src/components/new/npcComponents.jsx",
-    "line": 160,
+    "line": 163,
     "category": "floatInterpolation",
     "snippet": "{rel.tension}"
   },
   {
     "path": "src/components/new/tabs/DailyLifeTab.jsx",
-    "line": 242,
+    "line": 249,
     "category": "floatInterpolation",
     "snippet": "{storeAiProgress || 'Regenerating…'}"
   },
@@ -391,133 +367,91 @@
   },
   {
     "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 441,
+    "line": 436,
     "category": "floatInterpolation",
     "snippet": "{src.percentage}"
   },
   {
     "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 441,
+    "line": 436,
     "category": "percentToken",
     "snippet": "{src.percentage}"
   },
   {
     "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 443,
+    "line": 438,
     "category": "floatInterpolation",
     "snippet": "{src.percentage}"
   },
   {
     "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 443,
+    "line": 438,
     "category": "percentToken",
     "snippet": "{src.percentage}"
   },
   {
     "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 577,
+    "line": 572,
     "category": "floatInterpolation",
     "snippet": "{Math.round((fb.agricultureModifier||1)*100)}"
   },
   {
     "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 577,
+    "line": 572,
     "category": "percentToken",
     "snippet": "{Math.round((fb.agricultureModifier||1)*100)}"
   },
   {
     "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 578,
+    "line": 573,
     "category": "multiplier",
     "snippet": "{fb.stressModifier}"
   },
   {
     "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 579,
+    "line": 574,
     "category": "floatInterpolation",
     "snippet": "{Math.round(fb.importCoverage/(fb.rawDeficit||fb.importCoverage)*100)}"
   },
   {
     "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 579,
+    "line": 574,
     "category": "percentToken",
     "snippet": "{Math.round(fb.importCoverage/(fb.rawDeficit||fb.importCoverage)*100)}"
   },
   {
     "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 584,
-    "category": "floatInterpolation",
-    "snippet": "{foodDeficit ? fb.importCoverage>0 ? `What is grown here covers ${Math.round(fb.dailyProduction/fb.dailyNeed*100)}% of the food people need. Trade brings in about ${Math.round(fb.importCoverage/(fb.rawDeficit||1)*100)}% of the rest, and ..."
-  },
-  {
-    "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 586,
-    "category": "floatInterpolation",
-    "snippet": "`What is grown here covers ${Math.round(fb.dailyProduction/fb.dailyNeed*100)}% of the food people need. Trade brings in about ${Math.round(fb.importCoverage/(fb.rawDeficit||1)*100)}% of the rest, and ${fbal.deficitPct}% of what people ne..."
-  },
-  {
-    "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 586,
-    "category": "percentToken",
-    "snippet": "`What is grown here covers ${Math.round(fb.dailyProduction/fb.dailyNeed*100)}% of the food people need. Trade brings in about ${Math.round(fb.importCoverage/(fb.rawDeficit||1)*100)}% of the rest, and ${fbal.deficitPct}% of what people ne..."
-  },
-  {
-    "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 587,
-    "category": "floatInterpolation",
-    "snippet": "`No trade brings food in here, and ${fbal.deficitPct}% of what people need goes unmet.`"
-  },
-  {
-    "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 587,
-    "category": "percentToken",
-    "snippet": "`No trade brings food in here, and ${fbal.deficitPct}% of what people need goes unmet.`"
-  },
-  {
-    "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 588,
-    "category": "floatInterpolation",
-    "snippet": "`Agricultural surplus of ${Math.round((fb.surplus/Math.max(1,fb.dailyNeed))*100)}% above daily needs.`"
-  },
-  {
-    "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 588,
-    "category": "percentToken",
-    "snippet": "`Agricultural surplus of ${Math.round((fb.surplus/Math.max(1,fb.dailyNeed))*100)}% above daily needs.`"
-  },
-  {
-    "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 668,
+    "line": 663,
     "category": "percentToken",
     "snippet": "`Shadow Economy: ${bmc}% capture`"
   },
   {
     "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 674,
+    "line": 669,
     "category": "percentToken",
     "snippet": "{bmc}"
   },
   {
     "path": "src/components/new/tabs/PowerTab.jsx",
-    "line": 310,
+    "line": 298,
     "category": "floatInterpolation",
     "snippet": "{leg.score}"
   },
   {
     "path": "src/components/new/tabs/PowerTab.jsx",
-    "line": 505,
+    "line": 510,
     "category": "floatInterpolation",
     "snippet": "{Math.round(instab*100)}"
   },
   {
     "path": "src/components/new/tabs/PowerTab.jsx",
-    "line": 505,
+    "line": 510,
     "category": "percentToken",
     "snippet": "{Math.round(instab*100)}"
   },
   {
     "path": "src/components/new/tabs/PowerTab.jsx",
-    "line": 543,
+    "line": 536,
     "category": "floatInterpolation",
     "snippet": "{Math.round(rung.standing*100)}"
   },
@@ -529,25 +463,25 @@
   },
   {
     "path": "src/components/new/tabs/power/PowerStrata.jsx",
-    "line": 276,
+    "line": 277,
     "category": "floatInterpolation",
     "snippet": "`${r.name}: ${pct} percent (power ${r.power})`"
   },
   {
     "path": "src/components/new/tabs/power/PowerStrata.jsx",
-    "line": 276,
+    "line": 277,
     "category": "percentToken",
     "snippet": "`${r.name}: ${pct} percent (power ${r.power})`"
   },
   {
     "path": "src/components/new/tabs/power/PowerStrata.jsx",
-    "line": 278,
+    "line": 279,
     "category": "floatInterpolation",
     "snippet": "{pct}"
   },
   {
     "path": "src/components/new/tabs/power/PowerStrata.jsx",
-    "line": 328,
+    "line": 331,
     "category": "floatInterpolation",
     "snippet": "{r.power}"
   },
@@ -595,37 +529,37 @@
   },
   {
     "path": "src/components/region/RegionalGraphSummary.jsx",
-    "line": 200,
+    "line": 177,
     "category": "floatInterpolation",
     "snippet": "{Math.round((channel.confidence || 0) * 100)}"
   },
   {
     "path": "src/components/region/RegionalGraphSummary.jsx",
-    "line": 200,
+    "line": 177,
     "category": "floatInterpolation",
     "snippet": "{Math.round((channel.strength || 0) * 100)}"
   },
   {
     "path": "src/components/region/RegionalGraphSummary.jsx",
-    "line": 200,
+    "line": 177,
     "category": "percentToken",
     "snippet": "{Math.round((channel.confidence || 0) * 100)}"
   },
   {
     "path": "src/components/region/RegionalGraphSummary.jsx",
-    "line": 200,
+    "line": 177,
     "category": "percentToken",
     "snippet": "{Math.round((channel.strength || 0) * 100)}"
   },
   {
     "path": "src/components/region/RegionalGraphSummary.jsx",
-    "line": 239,
+    "line": 216,
     "category": "floatInterpolation",
     "snippet": "{Math.round((impact.severity || 0) * 100)}"
   },
   {
     "path": "src/components/region/RegionalGraphSummary.jsx",
-    "line": 239,
+    "line": 216,
     "category": "percentToken",
     "snippet": "{Math.round((impact.severity || 0) * 100)}"
   },
@@ -655,49 +589,49 @@
   },
   {
     "path": "src/components/settlement/FaithSection.jsx",
-    "line": 54,
+    "line": 56,
     "category": "floatInterpolation",
     "snippet": "{pct}"
   },
   {
     "path": "src/components/settlement/FaithSection.jsx",
-    "line": 54,
+    "line": 56,
     "category": "percentToken",
     "snippet": "{pct}"
   },
   {
     "path": "src/components/settlement/FaithSection.jsx",
-    "line": 58,
+    "line": 60,
     "category": "floatInterpolation",
     "snippet": "`${label}: ${pct} percent`"
   },
   {
     "path": "src/components/settlement/FaithSection.jsx",
-    "line": 58,
+    "line": 60,
     "category": "percentToken",
     "snippet": "`${label}: ${pct} percent`"
   },
   {
     "path": "src/components/settlement/FaithSection.jsx",
-    "line": 240,
+    "line": 242,
     "category": "floatInterpolation",
     "snippet": "{d.standing}"
   },
   {
     "path": "src/components/settlement/FaithSection.jsx",
-    "line": 244,
+    "line": 246,
     "category": "floatInterpolation",
     "snippet": "`${d.name} adherent share ${d.share} percent`"
   },
   {
     "path": "src/components/settlement/FaithSection.jsx",
-    "line": 244,
+    "line": 246,
     "category": "percentToken",
     "snippet": "`${d.name} adherent share ${d.share} percent`"
   },
   {
     "path": "src/components/settlement/FaithSection.jsx",
-    "line": 254,
+    "line": 256,
     "category": "percentToken",
     "snippet": "{unaffiliated}"
   },
@@ -817,7 +751,7 @@
   },
   {
     "path": "src/domain/display/worldSnapshotPublic.js",
-    "line": 628,
+    "line": 615,
     "category": "floatInterpolation",
     "snippet": "Math.floor(finiteNum(options.maxHeadlinesPerTick, 12))"
   },
@@ -985,7 +919,7 @@
   },
   {
     "path": "src/generators/steps/generateEconomy.js",
-    "line": 416,
+    "line": 417,
     "category": "floatInterpolation",
     "snippet": "`Chain depends on ${state.dependency.institution} (${state.dependency.severity || 'unspecified'}).`"
   },
@@ -997,13 +931,13 @@
   },
   {
     "path": "src/generators/steps/resolveResources.js",
-    "line": 586,
+    "line": 631,
     "category": "floatInterpolation",
     "snippet": "`Tier-weighted depletion (${Math.round((DEPLETION_PROB[tier] ?? 0.25) * 100)}%) marked this resource as depleted.`"
   },
   {
     "path": "src/generators/steps/resolveResources.js",
-    "line": 586,
+    "line": 631,
     "category": "percentToken",
     "snippet": "`Tier-weighted depletion (${Math.round((DEPLETION_PROB[tier] ?? 0.25) * 100)}%) marked this resource as depleted.`"
   },
@@ -1066,12 +1000,6 @@
     "line": 83,
     "category": "floatInterpolation",
     "snippet": "Math.round(population)"
-  },
-  {
-    "path": "src/pdf/lib/headlines.js",
-    "line": 206,
-    "category": "floatInterpolation",
-    "snippet": "`${total} named figure${total === 1 ? '' : 's'}: ${top.name}${top.title ? `, ${top.title}` : ''}, the most powerful (power ${top.power}).`"
   },
   {
     "path": "src/pdf/primitives/Visuals.jsx",
@@ -1177,43 +1105,43 @@
   },
   {
     "path": "src/pdf/sections/NotableNPCs.jsx",
-    "line": 328,
+    "line": 329,
     "category": "floatInterpolation",
     "snippet": "{npc.power}"
   },
   {
     "path": "src/pdf/sections/NotableNPCs.jsx",
-    "line": 381,
+    "line": 382,
     "category": "floatInterpolation",
     "snippet": "{npc.power}"
   },
   {
     "path": "src/pdf/sections/Overview.jsx",
-    "line": 541,
+    "line": 542,
     "category": "floatInterpolation",
     "snippet": "` · imports cover ${fb.coveragePct}% of gap`"
   },
   {
     "path": "src/pdf/sections/Overview.jsx",
-    "line": 541,
+    "line": 542,
     "category": "floatInterpolation",
     "snippet": "{fb.coveragePct != null ? ` · imports cover ${fb.coveragePct}% of gap` : ''}"
   },
   {
     "path": "src/pdf/sections/Overview.jsx",
-    "line": 541,
+    "line": 542,
     "category": "percentToken",
     "snippet": "` · imports cover ${fb.coveragePct}% of gap`"
   },
   {
     "path": "src/pdf/sections/PowerStructure.jsx",
-    "line": 99,
+    "line": 102,
     "category": "floatInterpolation",
     "snippet": "{p.criminalCapture.score}"
   },
   {
     "path": "src/pdf/sections/PowerStructure.jsx",
-    "line": 229,
+    "line": 236,
     "category": "floatInterpolation",
     "snippet": "{f.power}"
   },

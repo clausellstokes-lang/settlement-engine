@@ -129,18 +129,28 @@ export const DEFENSE_BUCKET_KEYS = Object.freeze(Object.keys(DEFENSE_BUCKET_KEYW
  * typed, which is how a bucket member gets read for a property nothing writes. Under
  * `unknown` a caller must prove a field before reading it, which is the whole point.
  *
+ * ⚡ ONE NAME READING PER INSTITUTION PER CALL (GEN-SPEED cure 1, 2026-11-10). The name was read
+ * and lowercased once PER KEYWORD per bucket — up to 34 times per institution per call, and this
+ * runs for every candidate line of every hook draw (a third of the CPU of the wizard's heaviest
+ * request). It is now read once, before the buckets, and every bucket tests that one string.
+ * EXACT: `nativeSemanticName` is a pure read of the member's own fields, and nothing runs between
+ * the reading and the last bucket's test but `String.prototype.includes` on that reading, so the
+ * string each keyword is tested against is the string it was tested against before. Members are
+ * still kept by identity and in roster order (`filter` by index over the same list).
+ * `tests/domain/defenseInstitutionBucketsWork.test.js` counts the reads.
+ *
  * @param {unknown} institutions the roster to classify
  * @returns {Record<string, unknown[]>} one array per bucket, in DEFENSE_BUCKET_KEYS order
  */
 export function partitionDefenseInstitutions(institutions) {
+  /** @type {ReadonlyArray<unknown>} */
   const list = Array.isArray(institutions) ? institutions : [];
-  /** @param {unknown} inst @param {ReadonlyArray<string>} keywords */
-  const matches = (inst, keywords) =>
-    keywords.some((kw) => nativeSemanticName(inst).toLowerCase().includes(kw));
+  const lowered = list.map((inst) => nativeSemanticName(inst).toLowerCase());
   /** @type {Record<string, unknown[]>} */
   const buckets = {};
   for (const bucket of DEFENSE_BUCKET_KEYS) {
-    buckets[bucket] = list.filter((inst) => matches(inst, DEFENSE_BUCKET_KEYWORDS[bucket]));
+    const keywords = DEFENSE_BUCKET_KEYWORDS[bucket];
+    buckets[bucket] = list.filter((_, i) => keywords.some((kw) => lowered[i].includes(kw)));
   }
   return buckets;
 }

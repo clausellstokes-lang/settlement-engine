@@ -107,9 +107,9 @@ export const TREATY_COMPLIANCE_VOICE = Object.freeze({
   // and PEOPLE — the things a treaty can actually bind — and the theological question the
   // engine never answers stays unasked.
   faith: Object.freeze({
-    honored: 'The strangers\' priests walk the roads and speak in the squares, and no hand is raised against them.',
-    strained: 'The strangers\' priests find the roads longer than they were, and the squares oddly empty when they arrive.',
-    defaulted: 'The doors are shut to the strangers\' priests, and what was written about the rites is no longer kept.',
+    honored: 'The foreign priests walk the roads and speak in the squares, and no hand is raised against them.',
+    strained: 'The foreign priests find the roads longer than they were, and the squares oddly empty when they arrive.',
+    defaulted: 'The doors are shut to the foreign priests, and what was written about the rites is no longer kept.',
   }),
   population: Object.freeze({
     honored: 'The families cross as the compact allows, and the fields they clear are theirs to work.',
@@ -119,7 +119,7 @@ export const TREATY_COMPLIANCE_VOICE = Object.freeze({
   commercial: Object.freeze({
     honored: 'The named house trades on the terms it was promised, and the tollmen wave its wagons through.',
     strained: 'The named house still trades, but the tollmen find new reasons to count, and the counting takes all day.',
-    defaulted: 'The promised terms of trade are withdrawn; the named house pays what any stranger pays, or is turned away.',
+    defaulted: 'The promised terms of trade are withdrawn; the named house pays what any outsider pays, or is turned away.',
   }),
   // ⭐ BOTH NEW FAMILIES ARE MERCIES, AND A MERCY FRAYS BY BEING SLOW. Neither `strained`
   // line below refuses anything, on the GR-3 reading this table already keeps: a granted
@@ -133,7 +133,7 @@ export const TREATY_COMPLIANCE_VOICE = Object.freeze({
   amnesty: Object.freeze({
     honored: 'The named are let be; the lists are not read out, and men who were owed a rope walk to market unremarked.',
     strained: 'The lists are not read out, but neither are they burned, and a pardoned man finds honest work harder to come by than he did.',
-    defaulted: 'The old lists are read out again, and the pardon is kept as though it had never been written.',
+    defaulted: 'The old lists are read out again, and the pardon counts for nothing.',
   }),
   // WC-0D — the jubilee family. A release is a mercy about TERMS, so its register is the
   // ledger: honoured, the books close at the appointed term; strained, they close slowly
@@ -153,7 +153,7 @@ export const TREATY_COMPLIANCE_VOICE = Object.freeze({
  *  the read-model total). @type {Readonly<Record<'honored'|'strained'|'defaulted', string>>} */
 export const TREATY_COMPLIANCE_FLOOR = Object.freeze({
   honored: 'The term is kept as written, and the peace holds here.',
-  strained: 'The term is kept only barely; the strain of it shows, and grows.',
+  strained: 'The term is kept only barely, and the strain on it is growing.',
   defaulted: 'The term is broken, and this seam of the peace has torn.',
 });
 
@@ -353,10 +353,10 @@ function decorate(doc, treaty = null, worldState = null) {
     ? `The seam that will tear first: the ${termLabel(doc.frayingType)}.`
     : null;
   const mediatorLine = doc.mediator && doc.mediator.name
-    ? `Brokered by ${doc.mediator.name}, torn between the courts. The terms came the lighter for it.`
+    ? `Brokered by ${doc.mediator.name}, who had ties to both courts; the terms were gentler for it.`
     : null;
   const coalitionLine = doc.separateExit && doc.fracture
-    ? `A separate peace: ${doc.victorName} peeled from a coalition of ${doc.fracture.coalitionSize}, its co-besiegers abandoned at the walls.`
+    ? `A separate peace: ${doc.victorName} left a coalition of ${doc.fracture.coalitionSize} and made terms alone, leaving its fellow besiegers at the walls.`
     : (doc.coalitionScope && doc.coalitionScope.length > 1
       ? `A coalition peace binding ${doc.loserName}: ${doc.coalitionScope.length} besiegers, the spoils split by the strength each brought.`
       : null);

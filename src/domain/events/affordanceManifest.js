@@ -37,6 +37,8 @@ import { canonExports, canonImports, canonStressors } from '../canonicalAccessor
 // LAZY leaf; the EAGER handler mirrors the constant under a parity pin instead).
 import { qualifiesForGenerosity, normalizeBondKind } from '../spatial/generosityGate.js';
 import { STOCKPILE_TUNING } from '../worldPulse/foodStockpile.js';
+import { allegianceOf } from '../people/allegiance.js'; // ALLEGIANCE-CAR1: the hidden allegiance's one reader (J-1)
+import { firstRankMembershipOf, powerOrderOf } from '../people/membership.js';
 
 // The loose open-object shape of the events layer ("schemaless open objects at
 // this layer" — mutateEntities.js's own words). Aliased to the schema's OWN
@@ -207,8 +209,11 @@ const factionsOf = (/** @type {Mut} */ s) => s?.powerStructure?.factions || s?.f
 
 const npcSwapPairsExist = (/** @type {Mut} */ s) => {
   const byFaction = new Map();
+  // A card's power is its FIRST-RANK membership (people/membership.js), re-pointed by PULSE-SITES (2026-11-10)
+  // from the retired `factionAffiliation`, which no current card carries.
+  const order = powerOrderOf(s);
   for (const npc of s?.npcs || []) {
-    const f = npc?.factionAffiliation;
+    const f = firstRankMembershipOf(npc, order)?.power;
     if (!f || !npc?.name) continue;
     byFaction.set(f, (byFaction.get(f) || 0) + 1);
     if (byFaction.get(f) >= 2) return true;
@@ -272,7 +277,7 @@ const generosityVerbPredicate = (/** @type {Mut} */ s) => {
 const compromisedTargets = (/** @type {Mut} */ s) => {
   const out = [];
   for (const n of s?.npcs || []) {
-    if (n?.corrupt) out.push({ id: String(n.id || n.name), name: String(n.name || n.id) });
+    if (allegianceOf(n)) out.push({ id: String(n.id || n.name), name: String(n.name || n.id) });
   }
   const marked = (/** @type {Mut} */ e) => (e?.impairments || []).some((/** @type {Mut} */ i) => i?.type === 'corruption');
   for (const i of s?.institutions || []) if (marked(i)) out.push({ id: String(i.id || i.name), name: String(i.name || i.id) });
@@ -415,7 +420,7 @@ export const AFFORDANCE_MANIFEST = Object.freeze({
     type: 'PROMOTE_NPC', family: 'People', entityKind: 'npcs',
     coversVetoCodes: ['swap_pair_incomplete', 'swap_pair_invalid', 'swap_cross_faction'],
     predicate: (/** @type {Mut} */ s) => gate(npcSwapPairsExist(s),
-      'No faction has two members to swap standing.', 'Needs a faction with two seated members.'),
+      'No power has two members to swap standing.', 'Needs a power with two seated members.'),
   }),
 
   // ── Power ──────────────────────────────────────────────────────────────
@@ -435,7 +440,7 @@ export const AFFORDANCE_MANIFEST = Object.freeze({
   IMPAIR_FACTION: entry({
     type: 'IMPAIR_FACTION', family: 'Power',
     coversVetoCodes: ['faction_not_found'],
-    predicate: (/** @type {Mut} */ s) => gate(factionsOf(s).length > 0, 'No factions to impair.'),
+    predicate: (/** @type {Mut} */ s) => gate(factionsOf(s).length > 0, 'No powers to weaken.'),
   }),
   RESTORE_FACTION: entry({
     type: 'RESTORE_FACTION', family: 'Power',
@@ -444,7 +449,7 @@ export const AFFORDANCE_MANIFEST = Object.freeze({
       .filter(o => impairedEntities(factionsOf(s)).some((/** @type {Mut} */ e) =>
         String(e.id || e.faction || e.name) === o.id || String(e.faction || e.name) === o.name)),
     predicate: (/** @type {Mut} */ s) => gate(impairedEntities(factionsOf(s)).length > 0,
-      'No faction is impaired.', 'Only a wounded faction can recover.'),
+      'No power is weakened.', 'Only a wounded power can recover.'),
   }),
   CHANGE_RULING_POWER: entry({
     type: 'CHANGE_RULING_POWER', family: 'Power', targetsFrom: 'factions',
@@ -455,9 +460,9 @@ export const AFFORDANCE_MANIFEST = Object.freeze({
     targetOptions: rulingPowerTargets,
     predicate(/** @type {Mut} */ s) {
       const governing = governingFactionOf(s);
-      if (!governing) return no(['No faction currently holds the governing seat.'], ['Seat a governing faction first.']);
+      if (!governing) return no(['No power currently holds the governing seat.'], ['Seat a governing power first.']);
       return gate(rulingPowerTargets(s).length > 0,
-        'No other faction can take the seat.', 'Add a second faction first.');
+        'No other power can take the seat.', 'Add a second power first.');
     },
   }),
   EXPOSE_CORRUPTION: entry({
@@ -476,11 +481,11 @@ export const AFFORDANCE_MANIFEST = Object.freeze({
     coversVetoCodes: ['npc_not_found', 'npc_already_corrupt', 'no_criminal_org', 'no_beneficiary'],
     dials: [enumDial('scope', ['individual', 'individual_institution'], 'individual', 'How far the rot reaches')],
     targetOptions: (/** @type {Mut} */ s) => buildTargetOptions(s, 'npcs')
-      .filter(o => !(s?.npcs || []).find((/** @type {Mut} */ n) => String(n.id || n.name) === o.id)?.corrupt),
+      .filter(o => !allegianceOf((s?.npcs || []).find((/** @type {Mut} */ n) => String(n.id || n.name) === o.id))),
     predicate(/** @type {Mut} */ s) {
       // The SAME climate read the imposeCorruption handler runs.
       const climate = readCorruptionClimate(s);
-      const cleanNpc = (s?.npcs || []).some((/** @type {Mut} */ n) => n?.name && !n.corrupt);
+      const cleanNpc = (s?.npcs || []).some((/** @type {Mut} */ n) => n?.name && !allegianceOf(n));
       if (!climate.criminalInstitutions.length) {
         return no(['No criminal organization operates here.'], ['Requires a criminal organization (add one, e.g. a Thieves\' Guild).']);
       }
@@ -671,15 +676,15 @@ export const AFFORDANCE_MANIFEST = Object.freeze({
 /** @type {Record<string, (d: string) => string>} */
 const VETO_PROSE = {
   institution_not_found: d => `No institution "${d}" is here to act on.`,
-  faction_not_found: d => `No faction "${d}" is here to act on.`,
-  faction_already_present: d => `${d || 'That faction'} is already present; impair or restore it instead of adding it again.`,
+  faction_not_found: d => `No power "${d}" is here to act on.`,
+  faction_already_present: d => `${d || 'That power'} is already present; impair or restore it instead of adding it again.`,
   npc_not_found: d => `No NPC "${d}" is here to act on.`,
-  target_not_found: d => `No corrupt NPC, faction, or institution "${d}" to expose.`,
+  target_not_found: d => `No corrupt NPC, power, or institution "${d}" to expose.`,
   npc_already_corrupt: d => `${d || 'That NPC'} is already compromised.`,
   no_criminal_org: () => 'No criminal organization operates here to link the NPC to.',
   swap_pair_incomplete: () => 'The standing swap needs both an NPC and a counterpart.',
   swap_pair_invalid: () => 'The standing swap needs two distinct NPCs that exist here.',
-  swap_cross_faction: d => `${d || 'The pair'} belong to different factions: standing swaps stay inside one faction.`,
+  swap_cross_faction: d => `${d || 'The pair'} belong to different powers: standing swaps stay inside one power.`,
   cult_invalid: () => 'The cult names no deity.',
   cult_is_patron: d => `${d || 'That deity'} already holds the patron seat. A patron cannot also be a cult.`,
   cult_no_cult_slots: () => 'No cult slot at this settlement tier.',
@@ -694,9 +699,9 @@ const VETO_PROSE = {
   trade_good_already_present: d => `${d} already moves through the settlement's markets.`,
   trade_good_not_found: d => `No trade good "${d}" moves through the settlement's markets.`,
   resource_not_found: d => `"${d}" is not a worked resource here.`,
-  power_faction_not_found: d => `No faction "${d}" to hand power to.`,
-  power_already_governing: d => `${d || 'That faction'} already holds power here.`,
-  power_no_governing_faction: () => 'No faction currently holds the governing seat to transfer from.',
+  power_faction_not_found: d => `No power "${d}" to hand the seat to.`,
+  power_already_governing: d => `${d || 'That power'} already holds power here.`,
+  power_no_governing_faction: () => 'No power currently holds the governing seat to transfer from.',
   relief_unqualified: d => `${d || 'That neighbour'} holds no qualifying bond. Grain relief needs an ally, trade partner, or vassal/patron (a decree overrides the willingness, never the law).`,
   relief_nothing_to_send: () => 'The granary holds nothing above the reserve floor. No grain can be decreed away.',
   credit_unqualified: d => `${d || 'That neighbour'} holds no qualifying bond. Grain credit needs an ally, trade partner, or vassal/patron.`,

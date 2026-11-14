@@ -27,13 +27,16 @@ function routed(sections) {
 describe('the crisis page names a thorp a thorp', () => {
   beforeAll(async () => { await ensureLaws(); });
 
-  it('soak1k-48 (a thorp): the event line reads "a crisis of the thorp itself"', () => {
+  // W4 PEOPLE second seat (STYLE-AUDIT row 21): the event line no longer prints the classification
+  // ("a crisis of the town itself"), so it carries no place noun at all; the pin is re-keyed to the
+  // line the thorp now prints, the kind as its heading.
+  it('soak1k-48 (a thorp): the event line is the kind, with no classification', () => {
     const { settlement } = birth(48);
     expect(settlement.tier).toBe('thorp');
     const page = composeCrisisPage(settlement);
     expect(page.length).toBeGreaterThan(0);
     expect(routed(page)).not.toMatch(/\bthe town\b/i); // anchored: page.length > 0 above, and the next line pins the thorp's own event line in this page
-    expect(page.map((s) => s.line).join(' ')).toMatch(/a crisis of the thorp itself/);
+    expect(page.map((s) => s.line)).toEqual(page.map((s) => `${s.label}.`));
   });
 
   // 2026-11-07 PEOPLE-1 CAST: re-keyed from soak1k-85 to a crafted hamlet record. The house-fallback reason ("the
@@ -64,6 +67,6 @@ describe('the crisis page names a thorp a thorp', () => {
       name: 'Testholm',
       stress: [{ type: 'succession_void', label: 'Succession Void', cast: { nature: 'social', roles: [], absent: [], stakes: [], levers: [] } }],
     });
-    expect(page[0].line).toBe('Succession Void, a crisis of the town itself.');
+    expect(page[0].line).toBe('Succession Void.');
   });
 });

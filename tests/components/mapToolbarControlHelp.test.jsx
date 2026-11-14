@@ -99,6 +99,10 @@ describe('WorldMapToolbar — in-theme control reference (map-title tranche)', (
     // session-only caveat and the Clear-Image effect were title-only before.
     expect(panel.textContent).toMatch(/current session only/);
     expect(panel.textContent).toMatch(/returns to the generated terrain/);
+    // STYLE-2 SW-12 (ledger D·75): no "pulse", no "engine waves", and no promise that every change waits.
+    expect(panel.textContent).toMatch(/What needs your word waits in the World Pulse panel\./);
+    expect(panel.textContent).toMatch(/the settings that decide how the realm changes\./);
+    expect(panel.textContent).not.toMatch(/runs a pulse|engine waves/); // anchored: the same live panel matched the two new lines above
 
     // Toggling again hides it.
     fireEvent.click(screen.getByRole('button', { name: 'About the map controls' }));
@@ -112,6 +116,7 @@ describe('WorldMapToolbar — in-theme control reference (map-title tranche)', (
     expect(advance.getAttribute('title')).toBeNull();
     // Undo Advance keeps its native title (interval-folding + test-pinned).
     const undo = screen.getByText('Undo Advance').closest('button');
-    expect(undo.getAttribute('title')).toMatch(/current session only/);
+    // STYLE-2 SW-12 (ledger D·74): the pinned caveat in plain words.
+    expect(undo.getAttribute('title')).toMatch(/This undo lasts only for this session/);
   });
 });

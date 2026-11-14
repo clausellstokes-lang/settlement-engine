@@ -14,7 +14,8 @@ const NPC = () => ({
   personality: { dominant: 'stern', ambition: 'reclaim his house', ideal: 'order above all' },
   loyalty: 'the crown', fear: 'the mob',
 });
-const CORRUPT_NPC = () => ({ ...NPC(), corrupt: true, corruptTies: { criminalInstitution: 'The Coin Rats' }, secret: { what: 'skims the temple alms' } });
+// ALLEGIANCE-CAR1 (2026-11-08): the retired `corrupt` mark is the card's hidden `allegiance` (allegianceOf)
+const CORRUPT_NPC = () => ({ ...NPC(), allegiance: { power: null, house: 'The Coin Rats', vector: 'greed', via: 'retainer', handler: null, share: 0.15, veiled: true, covert: true }, secret: { what: 'skims the temple alms' } });
 // The engine sidecar: bonds/grudges (npcLadder) + credibility — DM truth by construction.
 const WORLD = () => ({
   spatialLedgers: {

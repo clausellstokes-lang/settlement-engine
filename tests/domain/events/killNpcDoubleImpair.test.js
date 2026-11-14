@@ -15,8 +15,23 @@
 
 import { describe, it, expect } from 'vitest';
 import { mutateSettlement } from '../../../src/domain/events/mutate.js';
+import { migrateV1toV2 } from '../../../src/domain/settlementMigrations.js';
 
-const settlement = () => ({
+// GREEN-TIP (2026-11-10, re-keyed by cause 57b0de61e, people-5b step 2): the dead NPC stands in the militia by a
+// MEMBERSHIP — killNpc stamps its direct faction impairments on the powers its memberships name
+// (entities/npcs.js :: membershipPowers), and propagation's NPC hop now reads the same memberships
+// (entities/propagate.js). The retired `linkedFactionIds` is read by neither. Each fixture is written in its v1
+// shape and handed through the product's own door, the save migration, which moves the link onto a membership.
+/** @param {object} v1 */
+const current = (v1) => {
+  const { settlement } = migrateV1toV2(v1);
+  // anti-vacuity: the card holds its membership in the militia, so BOTH the direct stamp and the propagated hop
+  // reach it — the double application this file guards is live, not absent
+  expect(settlement.npcs[0].memberships).toEqual([expect.objectContaining({ power: 'Town Militia' })]);
+  return settlement;
+};
+
+const settlement = () => current({
   name: 'Town',
   institutions: [{ id: 'inst.watch', name: 'City Watch', impairments: [] }],
   powerStructure: { factions: [{ id: 'faction.militia', name: 'Town Militia', impairments: [] }] },
@@ -64,7 +79,7 @@ describe('KILL_NPC double-application', () => {
     // weight-0.7 edge to LEADERSHIP, so the faction ended with BOTH membership
     // (direct) AND a phantom leadership impairment (propagated) — a faction
     // double-wounded across two dimensions by one death.
-    const keySettlement = () => ({
+    const keySettlement = () => current({
       name: 'Town',
       institutions: [{ id: 'inst.watch', name: 'City Watch', impairments: [] }],
       powerStructure: { factions: [{ id: 'faction.militia', name: 'Town Militia', impairments: [] }] },

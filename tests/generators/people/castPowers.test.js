@@ -16,15 +16,17 @@ import { describe, expect, it } from 'vitest';
 import { goldenCorpus } from '../../helpers/goldenMasterCorpus.js';
 import { generateSettlementPipeline } from '../../../src/generators/generateSettlementPipeline.js';
 import { birth, ensureLaws } from '../../../scripts/audit/soak-review/corpus.mjs';
-import { backingArchetypeOf, dealDoubledNiches, houseBacksOf } from '../../../src/domain/dossier/powerSupport.js';
+import { backingArchetypeOf, dealDoubledNiches, houseBacksOf, RULER_KINDS } from '../../../src/domain/dossier/powerSupport.js';
 import { backingRowFor } from '../../../src/data/institutionBacking.js';
 import { faceOfInstitution } from '../../../src/data/institutionalCatalog.js';
 import { FACTION_ARCHETYPES as A } from '../../../src/domain/factionArchetypes.js';
 import { governingFactionOf, nameOf } from '../../../src/domain/rulingPower.js';
 import { OTHER_CARD_PREFIX, RANKS, assignCastPowers, rollWeightOf } from '../../../src/generators/people/castPowers.js';
-import { SEAT_CARD_ID, seatHouseOf } from '../../../src/generators/people/representatives.js';
+import { houseKindOf, SEAT_CARD_ID, seatHouseOf } from '../../../src/generators/people/representatives.js';
 import { otherMintRowFor } from '../../../src/generators/people/mintTitles.js';
 import { expectAbsentWithAnchor } from '../../helpers/anchoredNegatives.js';
+import { isVeiledPower, veiledOfPower, VEILED_CARD_PREFIX } from '../../../src/domain/people/cardVeil.js';
+import { leaderHouseOf, officeLiteralOf } from '../../helpers/dualHatOracle.js'; // COHERENCE-POWERS-3 (F9): the expectation's own oracle, literals
 
 /** Two military claimants (the density law's doubled niche), one seat, four military houses. */
 const FIXTURE = Object.freeze({
@@ -62,7 +64,14 @@ function assertPowers(s, label) {
     for (const m of card.memberships) {
       expect(powerSet.has(m.power), `${label}: ${card.id} names a power that exists (${m.power})`).toBe(true);
       expect([1, 2, 3, null], `${label}: ${card.id} rank`).toContain(m.rank);
-      expect(m.share, `${label}: ${card.id} share > 0`).toBeGreaterThan(0);
+      // COHERENCE-POWERS re-key (the dual hat, the chair's ruling of 2026-11-11): the one membership at share 0 is
+      // the leader's office — the governing power's first, held whatever its house backs. COHERENCE-POWERS-5 (N8;
+      // REVIEW-POWERS-2): restored to its strictness, re-keyed BY IDENTITY: every membership is a share > 0, but the
+      // dual-hat leader's office (a house's face carrying the office in its role, first of the governing power), which
+      // is exactly 0 where its house backs elsewhere and > 0 where it backs the governing power
+      const office = m.power === governing && m.rank === 1 && card.institution?.kind === 'house' && card.role !== card.title;
+      if (office && m.share === 0) expect(Object.is(m.share, 0), `${label}: ${card.id} the office at share exactly 0`).toBe(true);
+      else expect(m.share, `${label}: ${card.id} share > 0`).toBeGreaterThan(0);
     }
     expect(new Set(card.memberships.map((m) => m.power)).size, `${label}: ${card.id} one membership per power`).toBe(card.memberships.length);
   }
@@ -74,8 +83,15 @@ function assertPowers(s, label) {
     const members = cards.filter((c) => c.memberships.some((m) => m.power === power));
     expect(ranked.length, `${label}: ${power} ranks the faces it has`).toBe(Math.min(RANKS, members.length));
   }
-  // FLOOR 1 — the governing power's first is the seat's face
-  if (governing) {
+  // FLOOR 1 — the governing power's first is the dual-hat leader's face (COHERENCE-POWERS re-key: the house the
+  // leader comes from, its office in `role`), else the seat's face as before (a government that sends its own man)
+  const hat = governing ? leaderHouseOf(s.institutions, nameOf(governingFactionOf(s)), backingArchetypeOf(governingFactionOf(s))) : null;
+  if (hat) {
+    const first = cards.find((c) => c.memberships.some((m) => m.power === governing && m.rank === 1));
+    expect(first?.institution, `${label}: floor 1, the dual hat first`).toMatchObject({ kind: 'house', key: hat });
+    expect(first.role, `${label}: the leader's office`).toBe(officeLiteralOf(governing, s.tier));
+    expect(cards.some((c) => c.id === SEAT_CARD_ID), `${label}: no seat minted where a house leads`).toBe(false);
+  } else if (governing) {
     const first = cards.find((c) => c.memberships.some((m) => m.power === governing && m.rank === 1));
     if (seat) {
       const seatCard = cards.find((c) => c.institution.kind === 'house' && c.institution.key === seat.house.name);
@@ -91,9 +107,23 @@ function assertPowers(s, label) {
     if (backingArchetypeOf(f) !== A.OTHER || name === governing) continue;
     const mint = cards.find((c) => c.institution.kind === 'power' && c.institution.key === name);
     expect(mint, `${label}: the other power ${name} has its minted face`).toBeDefined();
-    expect(mint.id.startsWith(OTHER_CARD_PREFIX)).toBe(true);
+    // FIX-PUBLIC-VEIL (the second seat, re-keyed with the cause): a hidden or criminal power's face is born
+    // with the opaque id (people/cardVeil.js :: veiledCardIdFor, salted by the record's seed); an open one keeps
+    // its power-slug id
+    if (isVeiledPower(f)) {
+      expect(mint.id).toMatch(new RegExp(`^${VEILED_CARD_PREFIX}[0-9a-f]{16}(_\\d+)?$`));
+    } else expect(mint.id.startsWith(OTHER_CARD_PREFIX)).toBe(true);
     expect(mint.title).toBe(otherMintRowFor(name).title);
-    expect(mint.memberships).toEqual([{ power: name, rank: 1, share: 1 }]);
+    // FIX-PUBLIC-VEIL (re-keyed with the cause): the membership carries THAT power's veil bit
+    expect(mint.memberships).toEqual([{ power: name, rank: 1, share: 1, veiled: isVeiledPower(f) }]);
+  }
+  // FIX-PUBLIC-VEIL (the chair's ruling, the same law per entry): every membership is stamped at birth,
+  // a boolean equal to the one predicate applied to THAT power on the final record
+  for (const card of cards) {
+    for (const m of card.memberships) {
+      expect(typeof m.veiled, `${label}: ${card.id} -> ${m.power} carries the veil bit`).toBe('boolean');
+      expect(m.veiled, `${label}: ${card.id} -> ${m.power}'s bit is the predicate's`).toBe(veiledOfPower(m.power, s));
+    }
   }
   // PEOPLE-LAND re-key, cause M-2 (the shim out): the shim's `factionAffiliation` / `secondaryAffiliation` are no
   // fields of a returned card; the memberships are the card's powers, each naming a power on the roster.
@@ -160,6 +190,33 @@ describe('the people car — the powers\' people (step 3)', () => {
     expect(landingsOf(after, 'Small prison/stocks')).toEqual(['Elder Council:1']);
   });
 
+  it('the ruler is its own kind\'s first claimant: a Church Council beside Religious Authorities is dealt the churches first, heaviest first (COHERENCE-POWERS, rule A)', () => {
+    const church = {
+      tier: 'town',
+      config: { culture: 'germanic' },
+      powerStructure: { factions: [
+        { faction: 'Church Council', category: 'religious', power: 30, isGoverning: true },
+        { faction: 'Religious Authorities', category: 'religious', power: 20 },
+      ] },
+      institutions: [{ name: 'Parish church' }, { name: 'Great cathedral' }, { name: 'Parish churches (2-5)' }, { name: 'Mayor and council' }],
+    };
+    const before = houseBacksOf(church);
+    // the raw landing is unchanged: a ruler competes for its own kind only when no other power of it is seated
+    expect(landingsOf(before, 'Great cathedral')).toEqual(['Religious Authorities:1']);
+    const after = dealDoubledNiches(church, before);
+    // weight order: Great cathedral 3, Parish church 2 (roster first), Parish churches 2 — the ruler picks first
+    expect(landingsOf(after, 'Great cathedral')).toEqual(['Church Council:1']);
+    expect(landingsOf(after, 'Parish church')).toEqual(['Religious Authorities:1']);
+    expect(landingsOf(after, 'Parish churches (2-5)')).toEqual(['Church Council:1']);
+    expect(landingsOf(after, 'Mayor and council')).toEqual(['Church Council:1']);
+    // a criminal ruler is not its kind's claimant (the veil; the chair's ruling of 2026-11-11)
+    const corrupt = { ...church, powerStructure: { factions: [
+      { faction: 'Corrupt Council', category: 'criminal', power: 30, isGoverning: true },
+      { faction: "Thieves' Guild", category: 'criminal', power: 20 },
+    ] }, institutions: [{ name: 'Front businesses' }, { name: 'Mayor and council' }] };
+    expect(landingsOf(dealDoubledNiches(corrupt, houseBacksOf(corrupt)), 'Front businesses')).toEqual(landingsOf(houseBacksOf(corrupt), 'Front businesses'));
+  });
+
   it('the roll weight: share × house weight, 0.5 for weight 0, 1 for a minted face', () => {
     expect(rollWeightOf(0.6, 3)).toBeCloseTo(1.8);
     expect(rollWeightOf(1, 0)).toBe(0.5);
@@ -216,8 +273,155 @@ describe('the people car — the powers\' people (step 3)', () => {
     ];
     const out = assignCastPowers(FIXTURE, cards, null);
     const by = Object.fromEntries(out.map((c) => [c.id, c.memberships]));
-    expect(by.npc_mayor_and_council).toEqual([{ power: 'Elder Council', rank: 1, share: 1 }]);
-    expect(by.npc_citadel).toEqual([{ power: 'Military/Guard', rank: 1, share: 0.6 }, { power: 'Elder Council', rank: 2, share: 0.4 }]);
-    expect(by.npc_barracks).toEqual([{ power: 'The Shield Compact', rank: 1, share: 1 }]);
+    // FIX-PUBLIC-VEIL (re-keyed with the cause): each membership carries its power's veil bit (none of the
+    // fixture's three powers is hidden or criminal)
+    // COHERENCE-POWERS-2 (re-keyed with the cause, the chair's ruling of 2026-11-12 item 1 (ii)): a civic ruler whose town has no
+    // trade or landed house is led from its heaviest open house of another kind (representatives.js :: dualHatHouseOf), so the
+    // castellan leads the Elder Council with both hats and the office's hall is its second
+    expect(by.npc_mayor_and_council).toEqual([{ power: 'Elder Council', rank: 2, share: 1, veiled: false }]);
+    expect(by.npc_citadel).toEqual([{ power: 'Military/Guard', rank: 1, share: 0.6, veiled: false }, { power: 'Elder Council', rank: 1, share: 0.4, veiled: false }]);
+    expect(by.npc_barracks).toEqual([{ power: 'The Shield Compact', rank: 1, share: 1, veiled: false }]);
+    // and a hidden power's membership is stamped veiled (the stress infiltrator's shape)
+    const hidden = { ...FIXTURE, powerStructure: { ...FIXTURE.powerStructure,
+      factions: FIXTURE.powerStructure.factions.map((f) => (f.faction === 'The Shield Compact' ? { ...f, hidden: true } : f)) } };
+    const barracks = assignCastPowers(hidden, [{ ...cards[1], memberships: [] }], null)[0];
+    expect(barracks.memberships).toEqual([{ power: 'The Shield Compact', rank: 1, share: 1, veiled: true }]);
   });
+});
+
+/**
+ * THE GUILD'S PUSH (the allegiance train, car 2, ALLEGIANCE-CAR2, 2026-11-08; the design §3.2, §4 I-5 and I-13; the
+ * chair's J-11: "the push never moves FLOOR 1 or FLOOR 2. Only the weighted ranks move"). Written red-first: at car
+ * 1's tip (7395b5dab) `GUILD_PUSH_TUNING` and `guildPushOf` do not exist and `rankPowers` takes no tuning, so every
+ * arm below reds; the floor checker reds on a planted floor breach (its control).
+ */
+describe('the guild\'s push (car 2): I-5 the floors hold under a maximal push; I-13 keyed', () => {
+  const SLICE = Array.from({ length: 240 }, (_, i) => i).filter((i) => i % 6 === 4 || i % 6 === 5);
+  /** @type {Map<number, any>} */
+  const BORN = new Map();
+  const born = async () => { await ensureLaws(); for (const i of SLICE) if (!BORN.has(i)) BORN.set(i, birth(i).settlement); return SLICE.map((i) => ({ i, s: BORN.get(i) })); };
+  const MAXIMAL = Object.freeze({ strength: 1e6, strengthFull: 30, organized: 1e6, max: 1e6 });
+  const NONE = Object.freeze({ strength: 0, strengthFull: 30, organized: 0, max: 1 });
+
+  /** Re-deal a born town's ranks under a push tuning: the cast's memberships re-landed, its allegiances kept. */
+  async function redeal(s, i, tuning, drop = null) {
+    const { landMemberships, rankPowers } = await import('../../../src/generators/people/castPowers.js');
+    const { createPRNG } = await import('../../../src/kernel/prng.js');
+    const cast = JSON.parse(JSON.stringify(s.npcs)).filter((n) => n.id !== drop);
+    const view = { tier: s.tier, institutions: s.institutions, powerStructure: s.powerStructure, economicState: s.economicState, config: s.config, _seed: s._seed };
+    const landed = landMemberships(view, cast, createPRNG(`push-${i}`), s._seed);
+    const plan = landed.plan;
+    const floors = new Map();
+    if (plan) {
+      for (const power of plan.powers) {
+        const pool = plan.members.get(power);
+        if (!pool.length) continue;
+        const picks = [];
+        const isGov = power === plan.governing;
+        // COHERENCE-POWERS re-key: the governing power's first is the dual-hat leader's face where a house leads
+        const rulerRow = isGov ? governingFactionOf(view) : null;
+        const hat = rulerRow ? leaderHouseOf(view.institutions, nameOf(rulerRow), backingArchetypeOf(rulerRow)) : null;
+        const hatCard = hat ? cast.find((c) => c.institution?.kind === 'house' && c.institution.key === hat) : null;
+        const f1 = isGov
+          ? (hatCard ? { card: hatCard } : pool.find((m) => (plan.seatKey ? m.card.institution?.key === plan.seatKey && m.card.institution?.kind === 'house' : m.card.id === SEAT_CARD_ID)))
+          : pool.find((m) => m.card.institution?.kind === 'power' && m.card.institution?.key === power);
+        if (f1) picks.push(f1.card.id);
+        // FLOOR 2: a ruler of a kind whose first is not of its kind seats its heaviest kind house; else the landmark
+        const kindOf = (m) => (m.card.institution?.kind === 'house' ? houseKindOf({ name: m.card.institution.key }) : null);
+        const rk = rulerRow ? backingArchetypeOf(rulerRow) : null;
+        const kin = isGov && RULER_KINDS.includes(rk) && !(f1 && kindOf(f1) === rk)
+          ? pool.filter((m) => m.weight !== null && kindOf(m) === rk && !m.card.institution?.veiled && !picks.includes(m.card.id))
+            .sort((x, y) => (y.weight - x.weight) || (y.share - x.share) || (x.at - y.at))[0]
+          : null;
+        const landmark = kin || pool.filter((m) => m.largest && m.weight !== null && !picks.includes(m.card.id))
+          .sort((x, y) => (y.weight - x.weight) || (y.share - x.share) || (x.at - y.at))[0];
+        if (landmark && picks.length < RANKS) picks.push(landmark.card.id);
+        floors.set(power, picks);
+      }
+    }
+    const out = rankPowers(view, landed, tuning);
+    return { out, floors };
+  }
+  /** power -> [rank-1 id, rank-2 id, rank-3 id] */
+  const ranksOf = (cards) => {
+    const by = new Map();
+    for (const c of cards) for (const m of c.memberships || []) if (m.rank) { if (!by.has(m.power)) by.set(m.power, []); by.get(m.power)[m.rank - 1] = c.id; }
+    return by;
+  };
+  /** I-5 by the deal: every power's floor picks hold their ranks (FLOOR 1 rank 1; FLOOR 2 the next). */
+  const floorFindings = (cards, floors) => {
+    const ranks = ranksOf(cards); const out = [];
+    for (const [power, picks] of floors) picks.forEach((id, k) => { if ((ranks.get(power) || [])[k] !== id) out.push(`${power} rank ${k + 1}: ${(ranks.get(power) || [])[k]} where the floor is ${id}`); });
+    return out;
+  };
+
+  it('the dials: a draft table of four leaves, and the push of a clean card is 1, an agent\'s within [1, max]', async () => {
+    const { GUILD_PUSH_TUNING, guildPushOf } = await import('../../../src/generators/people/castPowers.js');
+    expect(GUILD_PUSH_TUNING).toEqual({ strength: 0.6, strengthFull: 30, organized: 0.4, max: 2.0 });
+    expect(Object.isFrozen(GUILD_PUSH_TUNING)).toBe(true);
+    const s = { powerStructure: { factions: [{ faction: "Thieves' Guild", category: 'criminal', power: 15 }] }, institutions: [] };
+    const agent = { allegiance: { power: "Thieves' Guild", house: 'Rookery', vector: 'greed', via: 'office', handler: 'h', share: 0.15 } };
+    expect(guildPushOf({}, s)).toBe(1);
+    // 1 + 0.6·(15 ÷ 30) + 0.4·organized, organized = 0.25 (the independent power's bonus; no criminal house)
+    expect(guildPushOf(agent, s)).toBeCloseTo(1 + 0.6 * 0.5 + 0.4 * 0.25, 10);
+    expect(guildPushOf(agent, s, { organized: 1, tuning: { ...GUILD_PUSH_TUNING, strength: 5 } })).toBe(2);
+    expect(guildPushOf({ allegiance: { ...agent.allegiance, power: null } }, s, { organized: 1 })).toBeCloseTo(1.4, 10);
+  });
+
+  it('I-5: under a MAXIMAL push every floor holds on the soak slice, and the push is live (it moves weighted ranks)', async () => {
+    const rows = await born();
+    let floorsSeen = 0; let moved = 0; const agentWeighted = { none: 0, max: 0 };
+    const found = [];
+    for (const { i, s } of rows) {
+      if (!(s.npcs || []).some((n) => n.allegiance)) continue;
+      const max = await redeal(s, i, MAXIMAL);
+      const none = await redeal(s, i, NONE);
+      found.push(...floorFindings(max.out, max.floors).map((f) => `${i} ${f}`));
+      floorsSeen += [...max.floors.values()].reduce((a, p) => a + p.length, 0);
+      const rm = ranksOf(max.out); const rn = ranksOf(none.out);
+      for (const [power, ids] of rm) if (JSON.stringify(ids) !== JSON.stringify(rn.get(power))) moved += 1;
+      const agents = new Set(max.out.filter((c) => c.allegiance).map((c) => c.id));
+      const weighted = (r, floors) => [...r].reduce((a, [p, ids]) => a + ids.filter((id, k) => k >= (floors.get(p) || []).length && agents.has(id)).length, 0);
+      agentWeighted.max += weighted(rm, max.floors); agentWeighted.none += weighted(rn, none.floors);
+    }
+    expect(found).toEqual([]);
+    expect(floorsSeen).toBeGreaterThan(200);
+    expect(moved, 'the maximal push moves some power\'s weighted ranks').toBeGreaterThan(5);
+    expect(agentWeighted.max, 'agents hold more weighted ranks under the push').toBeGreaterThan(agentWeighted.none);
+  }, 180_000);
+
+  it('I-5\'s control: the floor checker reds on a planted floor breach', async () => {
+    const rows = await born();
+    const { i, s } = rows.find(({ s }) => (s.npcs || []).some((n) => n.allegiance));
+    const { out, floors } = await redeal(s, i, MAXIMAL);
+    const [power, picks] = [...floors].find(([, p]) => p.length);
+    const holder = out.find((c) => c.id === picks[0]);
+    const other = out.find((c) => c.id !== picks[0] && (c.memberships || []).some((m) => m.power === power));
+    const planted = out.map((c) => JSON.parse(JSON.stringify(c)));
+    const swap = (id, rank) => { const m = planted.find((c) => c.id === id).memberships.find((x) => x.power === power); m.rank = rank; };
+    const was = other.memberships.find((m) => m.power === power).rank;
+    swap(holder.id, was); swap(other.id, 1);
+    expect(floorFindings(planted, floors).length).toBeGreaterThan(0);
+  }, 180_000);
+
+  it('I-13: removing a card leaves every other card\'s push, and the ranks of every power it held no membership in, byte-identical', async () => {
+    const { guildPushOf } = await import('../../../src/generators/people/castPowers.js');
+    const rows = await born();
+    let compared = 0;
+    for (const { i, s } of rows.slice(0, 20)) {
+      const victim = (s.npcs || []).find((n) => n.institution?.kind === 'house' && !n.allegiance && (n.memberships || []).length);
+      if (!victim) continue;
+      const whole = await redeal(s, i, undefined);
+      const less = await redeal(s, i, undefined, victim.id);
+      const held = new Set((whole.out.find((c) => c.id === victim.id)?.memberships || []).map((m) => m.power));
+      const rw = ranksOf(whole.out); const rl = ranksOf(less.out);
+      for (const [power, ids] of rw) {
+        if (held.has(power)) continue;
+        expect(`${i} ${power} ${JSON.stringify(rl.get(power))}`).toBe(`${i} ${power} ${JSON.stringify(ids)}`);
+        compared += 1;
+      }
+      for (const c of less.out) expect(guildPushOf(c, s)).toBe(guildPushOf(whole.out.find((x) => x.id === c.id), s));
+    }
+    expect(compared).toBeGreaterThan(50);
+  }, 180_000);
 });

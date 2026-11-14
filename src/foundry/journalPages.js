@@ -22,6 +22,7 @@
 // THE ONE markdown/HTML escaper, shared with the standalone world importer. It
 // lives under foundry-module/ because that folder IS the shipped Foundry module
 // and must stay self-contained, so the dependency runs app → module.
+import { stripViabilityToken } from '../domain/display/viabilityFilter.js';
 import { escapeMarkdown } from '../../foundry-module/scripts/markdownEscape.js';
 import { PDF_VARIANTS, shouldInclude, faithChapterVisible } from '../pdf/variants.js';
 import {
@@ -31,6 +32,9 @@ import {
 import { gateFaithEvents } from '../domain/display/faithEventFilter.js';
 import { composeTonightSheet, printsAsWant, secretLeadOf, TONIGHT_COPY } from '../domain/summary/tonightSheet.js';
 import { composeCrisisPage, CRISIS_PAGE_COPY } from '../domain/crisis/crisisPage.js';
+// ⛔ ONE HOME PER SENTENCE (STYLE-0 §3's keep-on rules, applied by STYLE-RULINGS-2 B4, 2026-11-09):
+// the crisis page's two print rules are the PDF's, from one module.
+import { stakeLines, unprintedFacts } from '../pdf/lib/crisisPrint.js';
 import { institutionDisplayName } from '../domain/display/institutionDisplayName.js';
 import { resourceDisplayName } from '../domain/display/resourceDisplayName.js';
 import { displayTradeList, revenuesOffTheLists } from '../domain/display/tradeListDisplay.js';
@@ -89,7 +93,7 @@ function notableNpcs(sorted) {
 
 // ── page builders (each: vm → markdown string or null) ──────────────────────
 
-function overviewPage(vm) {
+function overviewPage(vm, { historyPrinted = true } = {}) {
   const o = vm.overview; const id = vm.identity;
   return md(
     lede(overviewHeadline(o, id)),
@@ -107,7 +111,9 @@ function overviewPage(vm) {
     o.arrivalScene ? md('', '## Arrival', `> ${esc(o.arrivalScene)}`) : null,
     o.pressureSentence ? md('', `*${esc(o.pressureSentence)}*`) : null,
     o.settlementReason ? md('', '## Why this place exists', esc(o.settlementReason)) : null,
-    o.character ? md('', '## Character', esc(o.character)) : null,
+    // The historical character prints once per journal: on the History page where the variant has
+    // one, else here (the keep-on rule; the chair's B4 ruling (2), 2026-11-09).
+    !historyPrinted && o.character ? md('', '## Character', esc(o.character)) : null,
   );
 }
 
@@ -137,14 +143,16 @@ function statePage(vm) {
  */
 function tonightPage(settlement) {
   const sheet = composeTonightSheet(settlement);
+  // THE OWNER'S VETO 3 (no connective lines): each hook prints its own text here, as it does on the
+  // Plot Hooks page; no line points from one page to the other.
+  const hookLine = (h) => `- ${esc(h.text)}${h.source ? ` *(${esc(h.source)})*` : ''}`;
   const why = { seat: TONIGHT_COPY.seat, secret: TONIGHT_COPY.secret, cleric: TONIGHT_COPY.cleric };
   return md(
     sheet.opening ? md(`## ${sheet.crisis ? TONIGHT_COPY.crisis : TONIGHT_COPY.urgent}`, esc(sheet.opening)) : null,
     sheet.people.length ? md('', `## ${TONIGHT_COPY.people}`, sheet.people.map(p =>
       `- **${esc(p.name)}** (${esc([p.role, p.castLabel || why[p.why]].filter(Boolean).join(' · '))})${p.line ? `: ${!printsAsWant(p) ? esc([secretLeadOf(p), p.line].filter(Boolean).join(' ')) : p.sameAs ? `${TONIGHT_COPY.wantsSame} ${esc(p.sameAs)}.` : `${TONIGHT_COPY.wants} ${esc(p.line)}`}` : ''}`)) : null,
     sheet.facts.length ? md('', `## ${TONIGHT_COPY.facts}`, sheet.facts.map(f => `- **${esc(f.label)}**: ${esc(f.text)}`)) : null,
-    sheet.hooks.length ? md('', `## ${TONIGHT_COPY.hooks}`, sheet.hooks.map(h =>
-      `- ${esc(h.text)}${h.source ? ` *(${esc(h.source)})*` : ''}`)) : null,
+    sheet.hooks.length ? md('', `## ${TONIGHT_COPY.hooks}`, sheet.hooks.map(hookLine)) : null,
   ) || null;
 }
 
@@ -156,12 +164,18 @@ function tonightPage(settlement) {
 function crisisJournalPage(settlement) {
   const sections = composeCrisisPage(settlement);
   if (!sections.length) return null;
-  return md(...sections.map(s => md(
+  // The two facts print once, on the Tonight page this page rides; every house keeps its own stake row
+  // (the PDF's rules, pdf/lib/crisisPrint.js; veto 3). A cast row reads as the tab's does: "{name} · {reason}"
+  // (SW-9b-B A13: the reason is a lower-case fragment, never a sentence after a full stop).
+  const printedFacts = composeTonightSheet(settlement).facts;
+  return md(...sections.map(s => ({ ...s, stakeLines: stakeLines(s.stakes), seeFirst: unprintedFacts(s.seeFirst, printedFacts) })).map(s => md(
     '', `## ${esc(s.line)}`,
     s.summary ? esc(s.summary) : null,
     '', `### ${CRISIS_PAGE_COPY.cast}`,
-    s.cast.length ? s.cast.map(r => `- **${esc(r.roleLabel)}**: ${esc(r.name)}. ${esc(r.reason)}.`) : `- ${CRISIS_PAGE_COPY.nobody}`,
-    s.stakes.length ? md('', `### ${CRISIS_PAGE_COPY.stakes}`, s.stakes.map(k => `- **${esc(k.factionId)}** ${CRISIS_PAGE_COPY.stake[k.stake]}: ${esc(k.reason)}.`)) : null,
+    s.cast.length ? s.cast.map(r => `- **${esc(r.roleLabel)}**: ${esc(r.name)} · ${esc(r.reason)}`) : `- ${CRISIS_PAGE_COPY.nobody}`,
+    s.stakes.length ? md('', `### ${CRISIS_PAGE_COPY.stakes}`,
+      s.stakeLines.rows.map(k => `- **${esc(k.factionId)}** ${CRISIS_PAGE_COPY.stake[k.stake]}: ${esc(k.reason)}.`),
+      s.stakeLines.untouched ? `- ${esc(s.stakeLines.untouched)}` : null) : null,
     '', `### ${CRISIS_PAGE_COPY.levers}`,
     s.levers.length ? s.levers.map(l => `- ${esc(l.institution)}${l.holderName ? `, held by ${esc(l.holderName)}` : ''}`) : `- ${CRISIS_PAGE_COPY.noLevers}`,
     s.seeFirst.length ? md('', `### ${CRISIS_PAGE_COPY.seeFirst}`, s.seeFirst.map(f => `- **${esc(f.label)}**: ${esc(f.text)}`)) : null,
@@ -175,7 +189,7 @@ function npcQuickRefPage(vm) {
   return md(
     lede(npcsHeadline(vm.npcs)),
     '',
-    '| Name | Role | Faction | Power |',
+    '| Name | Role | Member of | Power |',
     '| --- | --- | --- | --- |',
     npcs.map(n => `| ${esc(n.name)} | ${esc(n.title || '')} | ${esc(n.factionLabel || '')} | ${esc(n.power || 0)} |`),
   );
@@ -185,7 +199,7 @@ function notableNpcPage(n) {
   return md(
     kv('Role', n.title),
     kv('Race', n.race),
-    kv('Faction', n.factionLabel),
+    kv('Member of', n.factionLabel),
     kv('House', n.house),
     kv('Standing', n.powerLine),
     kv('Power', n.power),
@@ -195,11 +209,15 @@ function notableNpcPage(n) {
     n.motivation ? md('', '## Wants', esc(n.motivation)) : null,
     n.secrets.length ? md('', '## Secrets (GM only)', n.secrets.map(s =>
       bullet(typeof s === 'string' ? s : (s.text || s.description || s.what || '')))) : null,
-    n.plotHooks.length ? md('', '## Hooks', n.plotHooks.map(h => bullet(hookText(h)))) : null,
+    // ⛔ An NPC's hooks print on the Plot Hooks page only, under People (the PDF's VERIFIER N6 rule
+    // and STYLE-0 §3's keep-on rule; STYLE-RULINGS-2 B4, 2026-11-09).
     n.relationships.length ? md('', '## Relationships', n.relationships.map(r =>
       bullet(typeof r === 'string' ? r : `${r.with || r.target || r.name || ''}${r.type ? `: ${r.type}` : ''}${r.description ? `. ${r.description}` : ''}`)) ) : null,
   ) || null;
 }
+
+/** The hook groups a reader knows, for the catalogue's category keys. */
+const HOOK_GROUP_WORDS = Object.freeze({ npc: 'People', npcs: 'People', faction: 'Powers', factions: 'Powers' }); // SW-8: the hook group "Faction" (map B3)
 
 function plotHooksPage(vm) {
   const all = vm.hooks.all || [];
@@ -207,14 +225,16 @@ function plotHooksPage(vm) {
   const byCategory = new Map();
   for (const h of all) {
     const cat = h.category || h.source || 'other';
+    // The category key is the catalogue's ("npc"); the page prints the group a reader knows.
     if (!byCategory.has(cat)) byCategory.set(cat, []);
     byCategory.get(cat).push(h);
   }
   return md(
     lede(hooksHeadline(vm.hooks)),
     [...byCategory.entries()].map(([cat, hooks]) => md(
-      '', `## ${esc(cap(humanize(cat)))}`,
-      hooks.map(h => `- ${esc(hookText(h.hook))} *(${esc(h.sourceName)}${h.priority ? ` · ${esc(h.priority)}` : ''})*`),
+      '', `## ${esc(HOOK_GROUP_WORDS[String(cat).toLowerCase()] || cap(humanize(cat)))}`,
+      // The source in words, no priority key (the owner's style law of 2026-11-07: the machinery out).
+      hooks.map(h => `- ${esc(hookText(h.hook))}${h.sourceName ? ` *(${esc(cap(humanize(h.sourceName)))})*` : ''}`),
     )),
   );
 }
@@ -226,11 +246,14 @@ function powerPage(vm) {
     '',
     kv('Government', p.governmentType),
     kv('Stability', typeof p.stability === 'object' ? (p.stability?.label ?? p.stability?.value) : p.stability),
-    p.legitimacy?.score != null ? kv('Public legitimacy', p.legitimacy.score) : null,
-    p.factions.length ? md('', '## Factions', p.factions.map(f =>
-      `- **${esc(f.name)}**${f.isGoverning ? ' *(governing)*' : ''}: power ${esc(f.power)}${f.description ? `. ${esc(f.description)}` : ''}`)) : null,
+    // The band in words, not the score (the machinery off the reader's page; B4).
+    p.legitimacy?.label ? kv('Public legitimacy', cap(p.legitimacy.label)) : null,
+    p.factions.length ? md('', '## Powers', p.factions.map(f =>
+      // No "power N": the score is the engine's, not the reader's (the owner's style law of 2026-11-07).
+      `- **${esc(f.name)}**${f.isGoverning ? ' *(governing)*' : ''}${f.description ? `: ${esc(f.description)}` : ''}`)) : null,
     p.tensions.length ? md('', '## Tensions', p.tensions.map(tn =>
-      `- **${esc(tn.label || 'Tension')}**${tn.severity ? ` (${esc(tn.severity)})` : ''}${tn.description ? `: ${esc(tn.description)}` : ''}`)) : null,
+      // The tension's key in words ("Resource scarcity"), no severity range ("minor / major").
+      `- **${esc(tn.label ? cap(humanize(tn.label)) : 'Tension')}**${tn.description ? `: ${esc(tn.description)}` : ''}`)) : null,
     p.conflicts.length ? md('', '## Conflicts', p.conflicts.map(c =>
       `- **${esc((c.parties || []).join(' vs '))}**${c.intensity ? ` (${esc(c.intensity)})` : ''}${c.issue ? `: ${esc(c.issue)}` : ''}${c.stakes ? ` Stakes: ${esc(c.stakes)}` : ''}`)) : null,
   );
@@ -242,7 +265,7 @@ function identityPage(vm, settlement = vm.raw) {
     kv('Layout', id.layout),
     kv('Age', id.age),
     kv('Trade access', id.tradeAccess ? humanize(id.tradeAccess) : null),
-    kv('Governing faction', id.anchor.governingName),
+    kv('Governing power', id.anchor.governingName),
     kv('Cultural notes', id.anchor.culturalNotes),
     // FOOD-4: the food record's foodways line, through the one reader — the PDF chapter's row.
     kv('Foodways', foodwaysLineOf(settlement)),
@@ -252,10 +275,15 @@ function identityPage(vm, settlement = vm.raw) {
 
 function servicesPage(vm) {
   const s = vm.services;
-  const avail = Object.entries(s.available || {}).filter(([, v]) => v);
+  // A category is listed only where something is on offer: every category key is present on the
+  // slice, most as an empty list, so a truthiness filter printed all eleven (Magic in a world
+  // without it) (W7 HOOKS, the owner's style law of 2026-11-07).
+  const avail = Object.entries(s.available || {}).filter(([, v]) => (Array.isArray(v) ? v.length > 0 : !!v));
   return md(
     lede(servicesHeadline(s)),
-    avail.length ? md('', '## Available services', avail.map(([k]) => bullet(humanize(k)))) : null,
+    // The category only: the service rows themselves are the catalogue's, and some name a food
+    // source the place does not hold (coh:food-words convicted 183 of 1,000 when they were listed).
+    avail.length ? md('', '## Available services', avail.map(([k]) => bullet(cap(humanize(k))))) : null,
     (s.notableAbsences || []).length ? md('', '## Notably absent for the tier',
       s.notableAbsences.map(a => bullet(typeof a === 'string' ? humanize(a) : (a?.label || a?.name || '')))) : null,
   ) || null;
@@ -345,6 +373,8 @@ function historyPage(vm) {
   const f = h.founding || {};
   return md(
     lede(historyHeadline(h)),
+    // The historical character's one home in the journal, as in the PDF (the keep-on rule; B4).
+    h.historicalCharacter ? md('', esc(h.historicalCharacter)) : null,
     '',
     kv('Age', h.age),
     kv('Founded by', f.foundedBy),
@@ -363,7 +393,8 @@ function viabilityPage(vm) {
     lede(viabilityHeadline(v)),
     '',
     kv('Verdict', v.verdict ? humanize(v.verdict) : null),
-    v.summary ? md('', esc(v.summary)) : null,
+    // The summary without its opening verdict token: the Verdict row above is the label (W7 HOOKS).
+    v.summary ? md('', esc(stripViabilityToken(v.summary))) : null,
     (v.issues || []).length ? md('', '## Issues', v.issues.map(i =>
       `- **${esc(i.title || 'Issue')}**${i.severity ? ` (${esc(i.severity)})` : ''}${i.description ? `: ${esc(i.description)}` : ''}`)) : null,
   );
@@ -409,8 +440,9 @@ function faithWarPage(vm) {
   if (!lw) return null;
   const deity = lw.deity;
   return md(
-    kv('Posture', lw.posture ? `${lw.posture.label} (aggression ×${lw.posture.value.toFixed(2)})` : null),
-    lw.exhaustion ? kv('War-weary', `${cap(lw.exhaustion.band)} (${lw.exhaustion.value.toFixed(2)})`) : null,
+    // The bands in words; the multiplier and the exhaustion figure are the engine's (B4).
+    kv('Posture', lw.posture ? lw.posture.label : null),
+    lw.exhaustion ? kv('War-weary', cap(lw.exhaustion.band)) : null,
     lw.standing ? kv('Standing', `${lw.standing.wins}W / ${lw.standing.losses}L (net ${lw.standing.score > 0 ? '+' : ''}${lw.standing.score})`) : null,
     (lw.besiegingTargets || []).length ? kv('At war', `its army besieges ${lw.besiegingTargets.join(', ')}`) : null,
     (lw.besiegedBy || []).length ? kv('Under siege', `${lw.besiegedBy.join(', ')} at the walls`) : null,
@@ -478,7 +510,7 @@ export function buildJournalPages(vm, { variant = 'canon_dossier', faithUnlocked
     if (trimmed) pages.push({ name, markdown: trimmed });
   };
 
-  if (inc('overview'))            push('Overview', overviewPage(vm));
+  if (inc('overview'))            push('Overview', overviewPage(vm, { historyPrinted: inc('historyFounding') }));
   if (inc('systemState'))         push('Settlement State', statePage(vm));
   if (inc('tonightAtTheTable'))   push(TONIGHT_COPY.title, tonightPage(settlement));
   if (inc('tonightAtTheTable'))   push(CRISIS_PAGE_COPY.tab, crisisJournalPage(settlement));
@@ -489,7 +521,7 @@ export function buildJournalPages(vm, { variant = 'canon_dossier', faithUnlocked
     }
   }
   if (inc('plotHooks'))           push('Plot Hooks', plotHooksPage(vm));
-  if (inc('powerStructure'))      push('Power & Factions', powerPage(vm));
+  if (inc('powerStructure'))      push('Power', powerPage(vm));
   if (inc('identityDailyLife'))   push('Identity & Daily Life', identityPage(vm, settlement));
   if (inc('services'))            push('Services', servicesPage(vm));
   if (inc('institutions'))        push('Institutions', institutionsPage(vm));

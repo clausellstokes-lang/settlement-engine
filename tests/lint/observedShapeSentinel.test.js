@@ -91,6 +91,16 @@ import {
   validateSchema30Baseline,
   validateSchema31Baseline,
   validateSchema32Baseline,
+  validateSchema33Baseline,
+  validateSchema34Baseline,
+  validateSchema35Baseline,
+  validateSchema36Baseline,
+  validateSchema37Baseline,
+  validateSchema38Baseline,
+  validateSchema39Baseline,
+  validateSchema40Baseline,
+  validateSchema41Baseline,
+  validateSchema42Baseline,
 } from '../../scripts/lib/observed-shape-baseline.mjs';
 import {
   artifactBaselineSchemaOf,
@@ -119,6 +129,16 @@ import {
   PEOPLE_CAST_TARGET_SCHEMA,
   PEOPLE_LANDING_TARGET_SCHEMA,
   CAR_MERGE_TARGET_SCHEMA,
+  WAVE_W2_TARGET_SCHEMA,
+  WAVE_FOOD_TARGET_SCHEMA,
+  WAVE_VEIL_TARGET_SCHEMA,
+  TRAIN_CAR1_TARGET_SCHEMA,
+  TRAIN_CAR2_TARGET_SCHEMA,
+  TRAIN_CAR3_TARGET_SCHEMA,
+  TRAIN_CAR4_TARGET_SCHEMA,
+  PUBLIC_PROSE_TARGET_SCHEMA,
+  PLAYED_WORLDS_TARGET_SCHEMA,
+  AGREE_TIER_SEED_TARGET_SCHEMA,
 } from '../../scripts/migrate-observed-shape-readers.mjs';
 
 const HASH_A = 'a'.repeat(64);
@@ -1170,6 +1190,14 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
       // stamped by generators/steps/stressConfirmPass.js only when a mass migration survives,
       // which no corpus world draws — the fifth class again.
       'migrationDirection on config',
+      // ⭐⭐ THE FIFTEENTH, DECLARED AT THE SCHEMA-40 RUNG (SW-B7b PROJECTION, the chair's grant of
+      // 2026-11-09 13:5x): the public prose projection, stamped by lib/saves.js at every cloud save,
+      // which the corpus never runs — the save-time-writer class, the `decrees` precedent.
+      'publicProse on settlement',
+      // ⭐⭐ THE SIXTEENTH, DECLARED AT THE SCHEMA-41 RUNG (STYLE-2-MERGE closing act 5, the chair's FINAL
+      // RULING of 2026-11-09 21:2x), and the FIRST of the sixth class: the minted proposal's outcome,
+      // written by worldPulse/convergence.js only in campaign time — the played-worlds writer.
+      'outcome on outcome',
     ]);
     // ⚠ INDEX-ALIGNED WITH THE ROSTER ABOVE, one entry per line so a removal cannot
     // silently re-pair the survivors. The retired `factions on locks` was the OTHER
@@ -1189,6 +1217,8 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
       'conditional-generator-branch', // temporaryKind on npcs
       'conditional-generator-branch', // crisisIds on npcs
       'conditional-generator-branch', // migrationDirection on config
+      'save-time-writer', // publicProse on settlement
+      'played-worlds-writer', // outcome on outcome
     ]);
     expect(EXPLAINED_WRITER_EXEMPTIONS.map(({ writer }) => writer)).toEqual([
       'src/generators/economy/economicState.js',
@@ -1218,6 +1248,10 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
       // The confirm pass's projection, re-spelled at the schema-29 rung as the object-literal
       // write `Object.assign(effectiveConfig, { migrationDirection })` so gate 0 sees it.
       'src/generators/steps/stressConfirmPass.js',
+      // The cloud row builder's stamp (SW-B7b): `withPublicProse`'s object-literal key.
+      'src/lib/saves.js',
+      // The minted proposal (21:2x): `mintedProposals.push({ … outcome, … })`, the shorthand key.
+      'src/domain/worldPulse/convergence.js',
     ]);
     // ⚠ THE M9 eventLog BANK NAMES ONE RULING, AND THE SAME ONE FOR ALL FOUR.
     // At genesis this exact string is stamped into every tagged row's `reason`,
@@ -1318,6 +1352,10 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
       'crisisIds on npcs',
       // ⭐ THE SCHEMA-29 ONE, re-proved out of the scanned stressConfirmPass.js on every scan.
       'migrationDirection on config',
+      // ⭐ THE SCHEMA-40 ONE (SW-B7b), re-proved out of the scanned saves.js on every scan.
+      'publicProse on settlement',
+      // ⭐ THE SCHEMA-41 ONE (21:2x), re-proved out of the scanned convergence.js on every scan.
+      'outcome on outcome',
     ]);
     expect(evidence.map(({ key }) => key)).toEqual([
       'isCriminal',
@@ -1326,6 +1364,8 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
       'decrees', 'kind',
       'temporary', 'temporaryKind', 'crisisIds',
       'migrationDirection',
+      'publicProse',
+      'outcome',
     ]);
     // ⚠ THE M9 SPLIT IS MACHINE-DRAWN, NOT ARGUED. The same probe that admits
     // the four banked keys on `applyEvent.js` REFUSES the two nearest
@@ -1605,7 +1645,22 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // ⭐ AND 31 HOLDS IT; 32 (MERGE-CAR) shrinks it by the census readers' one banked gone row.
     expect(declaredBankOf(PEOPLE_LANDING_TARGET_SCHEMA)).toEqual({ bankedReads: 77, taggedRows: 51 });
     expect(declaredBankOf(CAR_MERGE_TARGET_SCHEMA)).toEqual({ bankedReads: 76, taggedRows: 50 });
-    expect(declaredBankOf(BASELINE_SCHEMA)).toEqual(declaredBankOf(CAR_MERGE_TARGET_SCHEMA));
+    // ⭐ AND 33 (MERGE-WAVE, W2 DEF) HOLDS IT: one ordinary admitted row.
+    expect(declaredBankOf(WAVE_W2_TARGET_SCHEMA)).toEqual({ bankedReads: 76, taggedRows: 50 });
+    expect(declaredBankOf(WAVE_FOOD_TARGET_SCHEMA)).toEqual({ bankedReads: 76, taggedRows: 50 });
+    expect(declaredBankOf(WAVE_VEIL_TARGET_SCHEMA)).toEqual({ bankedReads: 76, taggedRows: 50 });
+    expect(declaredBankOf(TRAIN_CAR1_TARGET_SCHEMA)).toEqual({ bankedReads: 76, taggedRows: 50 });
+    expect(declaredBankOf(TRAIN_CAR2_TARGET_SCHEMA)).toEqual({ bankedReads: 76, taggedRows: 50 });
+    expect(declaredBankOf(TRAIN_CAR3_TARGET_SCHEMA)).toEqual({ bankedReads: 76, taggedRows: 50 });
+    expect(declaredBankOf(TRAIN_CAR4_TARGET_SCHEMA)).toEqual({ bankedReads: 76, taggedRows: 50 });
+    // ⭐ AND 40 GROWS IT BY ONE (SW-B7b): one declaration (the public prose projection), one address,
+    // one read, so the pair goes 76/50 -> 77/51. MEASURED off the live scan.
+    expect(declaredBankOf(PUBLIC_PROSE_TARGET_SCHEMA)).toEqual({ bankedReads: 77, taggedRows: 51 });
+    // ⭐ AND 41 GROWS IT BY ONE (STYLE-2-MERGE closing act 5, 21:2x): the first played-worlds writer, one address,
+    // one read, so the pair goes 77/51 -> 78/52. MEASURED off the live scan.
+    expect(declaredBankOf(PLAYED_WORLDS_TARGET_SCHEMA)).toEqual({ bankedReads: 78, taggedRows: 52 });
+    expect(declaredBankOf(AGREE_TIER_SEED_TARGET_SCHEMA)).toEqual({ bankedReads: 78, taggedRows: 52 });
+    expect(declaredBankOf(BASELINE_SCHEMA)).toEqual(declaredBankOf(AGREE_TIER_SEED_TARGET_SCHEMA));
     expect(declaredBankOf(RETIRED_MIGRATION_DIRECTION_BASELINE_SCHEMA)).toEqual({ bankedReads: 77, taggedRows: 51 });
     expect(declaredBankOf(RETIRED_TIER_COVERAGE_BASELINE_SCHEMA)).toEqual({ bankedReads: 76, taggedRows: 50 });
     expect(declaredBankOf(RETIRED_WINDOW_RUNG1_BASELINE_SCHEMA)).toEqual({ bankedReads: 76, taggedRows: 50 });
@@ -1697,7 +1752,9 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // ⭐ SCHEMA 28: THE TIER-CHANGE COVERAGE PASS (the chair's corpus-coverage ruling of 2026-11-06, the militia precedent): schema 27's envelope, tag law, roster and register UNCHANGED, re-governed to a corpus builder whose producer 2b pulses one town generated over the city cut so the stamp law mints the tier candidate R-B1 took from producer 2; its reconciliation must be, and measurably is, EMPTY.
     // ⭐ SCHEMA 29: THE MIGRATION-DIRECTION DECLARATION (the chair's ruling of 2026-11-07 03:55 UTC, ODQ §934.105, lane WIRING-W0): schema 28's envelope, tag law, corpus and register re-governed to ONE declaration of the fifth class, `migrationDirection on config` (the roster 13 -> 14, the bank 77/51); its one new row is admitted tagged and nothing else moves.
     // ⭐ SCHEMA 30: THE PEOPLE CAR'S CAST (the owner's charter, ODQ §934.105; lane PEOPLE-1 CAST, 2026-11-07): schema 29's envelope, tag law, roster and corpus definition UNCHANGED, re-governed to a register that admits 19 ordinary rows the cast's year exposes and lets 0 go; nothing declared, the bank 77/51.
-    expect(BASELINE_SCHEMA).toBe(32); // the car-merge rung, 2026-11-08 (MERGE-CAR)
+    // ⭐ SCHEMA 40: THE PUBLIC PROSE WRITER'S ADMISSION (SW-B7b PROJECTION, the chair's grant of 2026-11-09 13:5x): ONE save-time-writer declaration, `publicProse on settlement` (the roster 14 -> 15, the bank 77/51); its one new row is admitted tagged and nothing else moves.
+    // ⭐ SCHEMA 41: THE PLAYED-WORLDS WRITER'S ADMISSION (STYLE-2-MERGE closing act 5, the chair's FINAL RULING of 2026-11-09 21:2x): a NEW writer class, played-worlds-writer, and its first declaration, `outcome on outcome` (the roster 15 -> 16, the bank 78/52); its one row is tagged and nothing else moves.
+    expect(BASELINE_SCHEMA).toBe(42); // the tier-seed rung, 2026-11-13 (STYLE-2-MERGE point 47, STOP 47a)
     expect(RETIRED_MIGRATION_DIRECTION_BASELINE_SCHEMA).toBe(29);
     expect(RETIRED_TIER_COVERAGE_BASELINE_SCHEMA).toBe(28);
     expect(RETIRED_WINDOW_RUNG1_BASELINE_SCHEMA).toBe(27);
@@ -1726,7 +1783,17 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // ⭐ 15 retired at §893.4, 16 at the stress-topology rung, 17 at the lineage-reanchor
     // rung, 18 at the exemption-retirement rung, 19 at the bank-fence rung; the LIVE
     // envelope is validated by 20 now.
-    expect(validateSchema32Baseline(live)).toBe(live); // the car-merge rung (32), 2026-11-08
+    expect(validateSchema42Baseline(live)).toBe(live); // the tier-seed rung (42), 2026-11-13 (STYLE-2-MERGE point 47, STOP 47a)
+    expect(() => validateSchema41Baseline(live)).toThrow(/is not schema 41/);
+    expect(() => validateSchema40Baseline(live)).toThrow(/is not schema 40/);
+    expect(() => validateSchema39Baseline(live)).toThrow(/is not schema 39/);
+    expect(() => validateSchema38Baseline(live)).toThrow(/is not schema 38/);
+    expect(() => validateSchema37Baseline(live)).toThrow(/is not schema 37/);
+    expect(() => validateSchema36Baseline(live)).toThrow(/is not schema 36/);
+    expect(() => validateSchema35Baseline(live)).toThrow(/is not schema 35/);
+    expect(() => validateSchema34Baseline(live)).toThrow(/is not schema 34/);
+    expect(() => validateSchema33Baseline(live)).toThrow(/is not schema 33/);
+    expect(() => validateSchema32Baseline(live)).toThrow(/is not schema 32/);
     expect(() => validateSchema31Baseline(live)).toThrow(/is not schema 31/);
     expect(() => validateSchema30Baseline(live)).toThrow(/is not schema 30/);
     expect(() => validateSchema29Baseline(live)).toThrow(/is not schema 29/);
@@ -1876,7 +1943,7 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // `artifactBaselineSchemaOf` exists to prevent.
     expect(artifactBaselineSchemaOf('legacy-leaf')).toBe(2);
     expect(artifactBaselineSchemaOf('exact-origin')).toBe(3);
-    expect(BASELINE_SCHEMA).toBe(32); // the car-merge rung, 2026-11-08 (MERGE-CAR)
+    expect(BASELINE_SCHEMA).toBe(42); // the tier-seed rung, 2026-11-13 (STYLE-2-MERGE point 47, STOP 47a)
     expect(() => artifactBaselineSchemaOf('heuristic')).toThrow(/scan mode is unsupported/);
   });
 

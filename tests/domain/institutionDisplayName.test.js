@@ -161,10 +161,13 @@ describe('institutionDisplayName — the enumeration is pinned to the catalogue'
     // hold nothing else beside the parish family — and nothing the catalogue does not hold.
     const keys = new Set(everyCatalogueKey());
     const others = Object.keys(INSTITUTION_DISPLAY_NAMES).filter((k) => !isParishKey(k)).sort();
+    // SW-8 RENAME-POWERS (2026-11-09, the owner's map row A12): the retired word's one institution
+    // name joins the seam, "Multiple criminal factions" → "Rival gangs"; the key stays the identifier.
     expect(others).toEqual([
       'Bakers (5-15)', 'Blacksmiths (3-10)', 'Butchers (3-8)', 'Carpenters (5-15)',
-      'Cathedral (10,000+ only)', 'Gates (if walled)', 'Mills (2-5)',
+      'Cathedral (10,000+ only)', 'Gates (if walled)', 'Mills (2-5)', 'Multiple criminal factions',
     ]);
+    expect(institutionDisplayName('Multiple criminal factions')).toBe('Rival gangs');
     for (const key of others) expect({ key, inCatalogue: keys.has(key) }).toEqual({ key, inCatalogue: true });
     // …and no relabel keeps a count, so a city reader never sees a town's number.
     for (const key of others) {

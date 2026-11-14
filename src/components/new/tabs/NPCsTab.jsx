@@ -54,7 +54,7 @@ export function NPCsTab({
   if (!npcs?.length) {
     return (
       <div>
-        <Empty message="No NPCs generated. Generate a settlement to see key figures."/>
+        <Empty message="No key figures are recorded for this settlement."/>
         {unaffiliates}
       </div>
     );
@@ -107,8 +107,8 @@ export function NPCsTab({
         <div style={{position:'relative',flex:1,minWidth:140}}>
           <span style={{position:'absolute',left:9,top:'50%',transform:'translateY(-50%)',display:'inline-flex',color:MUTED,pointerEvents:'none'}}><Search size={14}/></span>
           <input value={search} onChange={e=>setSearch(e.target.value)}
-            aria-label="Filter by name, role, or faction"
-            placeholder="Filter by name, role, or faction…"
+            aria-label="Filter by name, role, or power"
+            placeholder="Filter by name, role, or power…"
             style={{width:'100%',padding:'7px 28px 7px 28px',border:'1px solid #c8b89a',fontSize:FS.sm,fontFamily:'Nunito,sans-serif',color:swatch.inkMag,background:swatch['#FAF8F4'],boxSizing:'border-box'}}/>
           {search&&<span style={{position:'absolute',right:8,top:'50%',transform:'translateY(-50%)',display:'inline-flex'}}><IconButton Icon={X} label="Clear filter" onClick={()=>setSearch('')} tone="ghost" size="sm" /></span>}
         </div>

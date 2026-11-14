@@ -93,6 +93,13 @@ export const SIMULATION_FLAG_PATTERN = /^[a-z][A-Za-z0-9]*Enabled$/;
  * so the row is struck rather than kept alive on a constructed dial (dead stays dead), and the identity is now
  * judged normally.
  *
+ * ⭐ `archetypeKey on relationships` IS STRUCK BY CLAUSE S (2026-11-09, ALLEGIANCE-CAR3; the allegiance design §9, the chair's
+ * dispatch): the DM view "who really runs this town" (domain/people/patronage.js :: dmPowerViewOf, mounted by the Power
+ * tab's DM panel and the PDF's Power Structure chapter) reads a covert handler tie's archetype key and prints the tie's
+ * kind in plain words (HANDLER_TIE_WORDS: "a silent partnership", "held over them: a debt" …). The key now reaches a
+ * customer surface (the DM's), so the identity is LIT-NAME, not DARK; the row's premise ("never the key") has gone with it.
+ * The row's dark-cohort arithmetic follows: forty-two became forty-one.
+ *
  * ⭐ THE SIXTH ROW IS RETIRED BY CLAUSE S (2026-11-05, LANDING-5 under the cloud chair's ruling 3, ODQ §934.105),
  * with the cause as measured: the executed corpus's 327 proposals carry no `supersessionReason` at all, the writer
  * (proposalAdmission.js, last changed by CURE-PEACE-2 400e8e5a6 / d5eda0aa0) is unchanged, and the identity left
@@ -146,24 +153,6 @@ export const WRITER_DARK_REGISTER = Object.freeze([
     charter: '§7 WRWALKER, the drafted register row 3, adjudicated DARK by Car 0 at C-prime',
   }),
   Object.freeze({
-    identity: 'archetypeKey on relationships',
-    key: 'archetypeKey',
-    shape: 'relationships',
-    writer: 'src/generators/people/ties.js', // PEOPLE-4 TIES (2026-11-07, R-P7): the tie writer moved here; npcGenerator.js :: generateRelationships retired
-    reason: 'engine-internal',
-    consumer: Object.freeze({
-      file: 'src/generators/generateSettlementPipeline.js',
-      symbol: 'the rename path, which re-renders a tie\'s description and tension from its archetype key',
-    }),
-    why: 'The relationship archetype KEY is the seed of the tie\'s description and tension prose: the generator '
-      + 'writes it so the rename path can re-render both sentences for new names, and that read sits inside '
-      + 'src/generators, behind the closure STOP. Its one surface read was the Plot Hooks collector, which used it to '
-      + 'theme relationship-tension cards; the chair\'s ruling X-2 (2026-10-30, under the owner\'s delegation) moved '
-      + 'a tie\'s tension back to the Relationships tab beside its tie and dropped that card category, so what a '
-      + 'player is shown is the tension and type name the key produced, never the key.',
-    charter: 'ODQ §934.101 (the chair, 2026-10-30, ruling X-2 in docs/UX_CONSOLIDATION_2026-10-30.md), consumer CONFIRMED at generateSettlementPipeline.js:250',
-  }),
-  Object.freeze({
     identity: 'proseVariant on relationships',
     key: 'proseVariant',
     shape: 'relationships',
@@ -181,54 +170,32 @@ export const WRITER_DARK_REGISTER = Object.freeze([
       + 'index selected, never the index.',
     charter: 'ODQ §934.101 (the chair, 2026-10-31, ruling GS-1 on G-SEAMS S1 and the G3 item-1 ruling), consumer CONFIRMED at generateSettlementPipeline.js:250',
   }),
+  // SW-B7b PROJECTION (2026-11-09, STYLE-RULINGS-2 B10(a)): the Economics tab's legacy `situationDesc` fallback LEFT with
+  // the economy desk's public branch (the shared page prints the owner's shipped DS-ECO-1 draw), so the key's one
+  // web-display read is gone. Its writer is its own lane's; what remains are the engine's own reads, named here.
   Object.freeze({
-    identity: 'isolationSupport on settlement',
-    key: 'isolationSupport',
-    shape: 'settlement',
-    writer: 'src/generators/steps/assembleSettlement.js',
-    reason: 'pending-surface',
-    surface: 'web-display',
-    car: '§12 WRW-2, the owner row that rules whether the isolation-support finding is shown',
-    carArtifact: 'docs/GENERATION_CONTRACTS.md',
-    why: 'Every settlement carries a full isolation-support finding — whether the place can be supplied at all, by '
-      + 'which paths, at what tier, and what it would take to close the gap — and no component, display read model '
-      + 'or PDF reads the container. It is one of exactly three settlement-root facts that reach no customer '
-      + 'surface. This is not plumbing: it is a generated judgement about the settlement that a player would want, '
-      + 'and the owner rules whether it is shown and where. Until that ruling it is an owed car, not an exemption.',
-    charter: '§7 WRWALKER, the drafted register row 6, measured DARK by Car 0 at C-prime',
+    identity: 'situationDesc on economicState',
+    key: 'situationDesc',
+    shape: 'economicState',
+    writer: 'src/generators/economy/economicState.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/generators/narrativeGenerator.js',
+      symbol: 'the church-controls test, which reads the situation description to find a church-run economy',
+    }),
+    why: 'The generator\'s one-line economic situation was the public Economics lead only while the economy desk was '
+      + 'silent on a shared page. The desk now speaks there (the owner\'s player-view draw, shipped at the save), and '
+      + 'no owner view reached the line (0 of 300 towns), so the page reads DS-ECO-1 everywhere. The key stays written '
+      + 'for the engine: the narrative generator reads it for the church-run economy, and the coherence battery '
+      + 'reads it, both inside src/generators behind the closure STOP. Retiring the writer is its own lane\'s act.',
+    charter: 'ODQ §885.3 as lifted by STYLE-RULINGS-2 B10(a) (the chair, 2026-11-09 12:5x; SW-B7b item 6: the legacy fallbacks leave in their desks\' causes)',
   }),
-  Object.freeze({
-    identity: 'magicDependent on isolationSupport',
-    key: 'magicDependent',
-    shape: 'isolationSupport',
-    writer: 'src/generators/isolationSupport.js',
-    reason: 'pending-surface',
-    surface: 'web-display',
-    car: '§12 WRW-2, the owner row that rules whether the isolation-support finding is shown',
-    carArtifact: 'docs/GENERATION_CONTRACTS.md',
-    why: 'Whether a settlement depends on magic to stay supplied is a striking fact about the place, and it is one '
-      + 'of only two keys on the isolation-support shape that no surface reads even at name level — its seven '
-      + 'siblings all read LIT-NAME. That asymmetry is the evidence it was overlooked rather than declined: a '
-      + 'surface that shows the status and the tier is already in front of this fact and does not print it. The '
-      + 'owner rules it with the container it belongs to.',
-    charter: '§7 WRWALKER, the drafted register row 6, measured DARK by Car 0 at C-prime',
-  }),
-  Object.freeze({
-    identity: 'requiredCapacity on isolationSupport',
-    key: 'requiredCapacity',
-    shape: 'isolationSupport',
-    writer: 'src/generators/isolationSupport.js',
-    reason: 'pending-surface',
-    surface: 'web-display',
-    car: '§12 WRW-2, the owner row that rules whether the isolation-support finding is shown',
-    carArtifact: 'docs/GENERATION_CONTRACTS.md',
-    why: 'The capacity a settlement would REQUIRE to end its isolation is the actionable half of the finding — the '
-      + 'number that turns a status into something a player can plan against — and it reaches no surface, while the '
-      + 'deficit and capacity beside it read LIT-NAME. Showing a settlement it is isolated without showing what '
-      + 'would fix it is the half-told version of the fact, so this key rides with the container to the same owner '
-      + 'ruling rather than being banked as unreviewed.',
-    charter: '§7 WRWALKER, the drafted register row 6, measured DARK by Car 0 at C-prime',
-  }),
+  // W2 DEF (2026-11-07, construction C3–C5, the third seat): the three §12 WRW-2 pending-surface rows —
+  // `isolationSupport on settlement`, `magicDependent on isolationSupport`, `requiredCapacity on isolationSupport` —
+  // LEFT this register. WIRING-RULINGS R-W1 (ODQ §934.105) ruled the finding SAID, and the new block DS-DEF-12
+  // (`defenseStateProse.js :: defenseIsolationSupportProse`, mounted at `viability.isolationSupport`, drawn by
+  // ViabilityTab and the print chapter) reads all three, so each identity is LIT at web-display (clause P) and the
+  // pending-surface debt is paid. Retired with that cause; the HOLD line's debt clears with them.
   Object.freeze({
     identity: 'appliedHeadline on candidates',
     key: 'appliedHeadline',
@@ -320,23 +287,11 @@ export const WRITER_DARK_REGISTER = Object.freeze([
   // outside every surface closure; the rung-2 landing's chunk cure (computeActiveChains reads the food gate from
   // domain/foodSurplus.js, LANDING-R2 phase 2 step 4) brought that file inside the dossier-pdf closure, so at the
   // merged tip the identity is LIT and the row would be wrong about its own reason (clause E). Retired with that cause.
-  Object.freeze({
-    identity: 'isSurplus on foodSecurity',
-    key: 'isSurplus',
-    shape: 'foodSecurity',
-    writer: 'src/data/bandLadders.js',
-    reason: 'engine-internal',
-    consumer: Object.freeze({
-      file: 'src/domain/conditionPromotion.js',
-      symbol: 'the condition-promotion weight, which lowers the crisis promotion chance for a town in food surplus',
-    }),
-    why: 'A boolean restatement of the food band, which the food ledger already prints as its band. The '
-      + 'condition promotion reads it (conditionPromotion.js:120) as one weight on whether a condition '
-      + 'escalates; it is a numeric input to a roll, not a fact a player reads, and the band beside it is the '
-      + 'customer fact.',
-    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
-      + 'W6, section ECO), consumer CONFIRMED at src/domain/conditionPromotion.js:120',
-  }),
+  // W4 PEOPLE second seat (2026-11-07, DS-CND-1, the stress type in the pool key, STYLE-RULINGS §1a): `isSurplus on
+  // foodSecurity` LEFT this register. Its consumer, src/domain/conditionPromotion.js, entered the dossier-pdf closure when
+  // the condition desk (stressorsStateProse.js :: conditionCrisisKind) began reading `archetypeForStressor` to name the
+  // crisis a condition was promoted from; at this tip the identity is LIT and the row would be wrong about its own reason
+  // (clause E). Retired with that cause, as MERGE-R2 retired `growsMoreThanEats on foodRecord` above.
   Object.freeze({
     identity: 'effectiveAgriculture on foodSecurity',
     key: 'effectiveAgriculture',
@@ -500,22 +455,10 @@ export const WRITER_DARK_REGISTER = Object.freeze([
     charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
       + 'W6, section ECO), consumer PLAUSIBLE at src/generators/steps/assembleInstitutions.js:286',
   }),
-  Object.freeze({
-    identity: 'dependencyCount on metrics',
-    key: 'dependencyCount',
-    shape: 'metrics',
-    writer: 'src/generators/economy/viability.js',
-    reason: 'engine-internal',
-    consumer: Object.freeze({
-      file: 'src/domain/edit/recordInvariants.js',
-      symbol: 'the V-DEPCOUNT invariant, which checks the stored count against the dependency list it counts',
-    }),
-    why: 'A count of a list printed in its own right (the viability dependencies). The record invariants read '
-      + 'it (recordInvariants.js:337, V-DEPCOUNT) to prove the stored count still agrees with the list after '
-      + 'an edit; a consistency check, not a customer fact, since the list itself is what a player reads.',
-    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
-      + 'W6, section ECO), consumer CONFIRMED at src/domain/edit/recordInvariants.js:337',
-  }),
+  // W7 HOOKS (2026-11-07, the owner's style law of 2026-11-07, WAVE-RULINGS item 1): `dependencyCount on metrics` LEFT
+  // this register. The PDF and Foundry viability headline (src/pdf/lib/headlines.js :: viabilityHeadline) now says the
+  // count in words ("Viable, as long as the two trade routes it depends on stay open"), so the identity is LIT on
+  // dossier-pdf, foundry and web-display (clause S: a row that outlives its darkness is struck). Retired with that cause.
   Object.freeze({
     identity: 'warningCount on metrics',
     key: 'warningCount',
@@ -537,40 +480,12 @@ export const WRITER_DARK_REGISTER = Object.freeze([
   // at the merged tip the identity is LIT-NAME — the rung-2 landing's closures reach a reader that names the key
   // (its writer-reach row reads dossier-pdf=N foundry=N on that side, web-transitive=N alone on the integration side
   // that registered it, W6 ECO ba1737b88). Struck with that cause (PLAUSIBLE: the surface that names it is the tool's).
-  Object.freeze({
-    identity: 'magicDependent on _isolationSupport',
-    key: 'magicDependent',
-    shape: '_isolationSupport',
-    writer: 'src/generators/isolationSupport.js',
-    reason: 'engine-internal',
-    consumer: Object.freeze({
-      file: 'src/generators/structuralValidator.js',
-      symbol: 'the isolation check, which reads config._isolationSupport and words the magical-transit finding',
-    }),
-    why: 'A pass-through copy of the isolation finding, stashed on the effective config for the validation and '
-      + 'repair passes. The structural validator reads it there (structuralValidator.js:676, :684) inside '
-      + 'src/generators behind the closure STOP. The customer fact is the settlement\'s own isolationSupport, '
-      + 'registered pending-surface under §12 WRW-2; this twin stays internal whatever the owner rules there.',
-    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
-      + 'W6, section DEF), consumer CONFIRMED at src/generators/structuralValidator.js:684',
-  }),
-  Object.freeze({
-    identity: 'requiredCapacity on _isolationSupport',
-    key: 'requiredCapacity',
-    shape: '_isolationSupport',
-    writer: 'src/generators/isolationSupport.js',
-    reason: 'engine-internal',
-    consumer: Object.freeze({
-      file: 'src/generators/structuralValidator.js',
-      symbol: 'the isolation check, which reads config._isolationSupport and words the capacity shortfall',
-    }),
-    why: 'A pass-through copy of the isolation finding, stashed on the effective config for the validation and '
-      + 'repair passes. The structural validator reads it there (structuralValidator.js:676, :703) inside '
-      + 'src/generators behind the closure STOP. The customer fact is the settlement\'s own isolationSupport, '
-      + 'registered pending-surface under §12 WRW-2; this twin stays internal whatever the owner rules there.',
-    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
-      + 'W6, section DEF), consumer CONFIRMED at src/generators/structuralValidator.js:703',
-  }),
+  // W2 DEF (2026-11-07, the third seat): `magicDependent on _isolationSupport` and `requiredCapacity on
+  // _isolationSupport` LEFT this register by clause S. W6 (section DEF) convicted them engine-internal (the
+  // structural validator reads the effective-config twin); once DS-DEF-12 read the settlement's own
+  // `isolationSupport.{magicDependent, requiredCapacity}` on the Viability tab, the same key names are read inside
+  // the web-display closure and both twins grade LIT-NAME, not DARK. Retired with that cause; the validator's read
+  // is unchanged.
   Object.freeze({
     identity: 'cascadeAdded on charter',
     key: 'cascadeAdded',
@@ -755,16 +670,17 @@ export const WRITER_DARK_REGISTER = Object.freeze([
     writer: 'src/generators/steps/resolveResources.js',
     reason: 'engine-internal',
     consumer: Object.freeze({
-      file: 'src/generators/foodGenerator.js',
-      symbol: 'the food generator, which reads the custom resource definitions to count the food a custom resource '
+      file: 'src/generators/foodLand.js',
+      symbol: 'the food writer\'s land reader (foodLand.js :: foodLandOf, moved from foodGenerator.js by GREEN-TIP '
+        + 'b46048140, the cycle cure), which reads the custom resource definitions to count the food a custom resource '
         + 'yields',
     }),
     why: 'Content identity sidecars (refId and localUid) for custom nearby resources, so a custom resource '
-      + 'keeps its identity through regeneration and import. The food generator reads them on the config '
-      + '(foodGenerator.js:85); the resource NAMES are LIT through nearbyResources, and an identity sidecar '
+      + 'keeps its identity through regeneration and import. The food writer\'s land reader reads them on the config '
+      + '(foodLand.js :: foodLandOf); the resource NAMES are LIT through nearbyResources, and an identity sidecar '
       + 'is not a fact a player reads.',
     charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
-      + 'W6, section META), consumer CONFIRMED at src/generators/foodGenerator.js:85',
+      + 'W6, section META), consumer CONFIRMED at src/generators/foodGenerator.js:85; the read moved verbatim to src/generators/foodLand.js :: foodLandOf (GREEN-TIP b46048140)',
   }),
   Object.freeze({
     identity: 'nearbyResourceDefinitionsDepleted on config',
@@ -773,16 +689,17 @@ export const WRITER_DARK_REGISTER = Object.freeze([
     writer: 'src/generators/steps/resolveResources.js',
     reason: 'engine-internal',
     consumer: Object.freeze({
-      file: 'src/generators/foodGenerator.js',
-      symbol: 'the food generator, which reads the custom resource definitions to count the food a custom resource '
+      file: 'src/generators/foodLand.js',
+      symbol: 'the food writer\'s land reader (foodLand.js :: foodLandOf, moved from foodGenerator.js by GREEN-TIP '
+        + 'b46048140, the cycle cure), which reads the custom resource definitions to count the food a custom resource '
         + 'yields',
     }),
     why: 'Content identity sidecars (refId and localUid) for custom nearby resources, so a custom resource '
-      + 'keeps its identity through regeneration and import. The food generator reads them on the config '
-      + '(foodGenerator.js:90); the resource NAMES are LIT through nearbyResources, and an identity sidecar '
+      + 'keeps its identity through regeneration and import. The food writer\'s land reader reads them on the config '
+      + '(foodLand.js :: foodLandOf); the resource NAMES are LIT through nearbyResources, and an identity sidecar '
       + 'is not a fact a player reads.',
     charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
-      + 'W6, section META), consumer CONFIRMED at src/generators/foodGenerator.js:90',
+      + 'W6, section META), consumer CONFIRMED at src/generators/foodGenerator.js:90; the read moved verbatim to src/generators/foodLand.js :: foodLandOf (GREEN-TIP b46048140)',
   }),
   Object.freeze({
     identity: 'slavery on contentBoundaries',

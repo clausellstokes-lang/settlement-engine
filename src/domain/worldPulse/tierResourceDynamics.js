@@ -10,6 +10,10 @@ import {
   nativeSemanticResourceKeys,
 } from '../content/customContentSemanticAuthority.js';
 import { stablePart } from './worldState.js';
+// STYLE-2 C2 (SW-12): the depletion summary's vantages, chosen by the house idiom — the
+// zero-import selection kernel keyed on the candidate's own stable id (no rng draw).
+import { pickLine } from './proseSelection.js';
+/** The slots a prose line fills (STYLE-2 SW-12). @typedef {Record<string, string|number|boolean>} TierLineSlots */
 import { formatCount } from '../formatNumber.js';
 import { intensityMultiplier, normalizeSimulationRules } from './simulationRules.js';
 // CL-0: every candidate family consults the per-domain change-authority policy.
@@ -155,7 +159,9 @@ function tierEligibility(item, pressureIdx, demography = null) {
       toTier: nextTier,
       support,
       severity: clamp01((pop / (/** @type {any} */ (POPULATION_RANGES)[nextTier]?.min || pop)) * 0.45 + support * 0.55),
-      reason: `${currentTier} is near ${nextTier} population and has sustained trade, defense, and legitimacy support.`,
+      // STYLE-2 C2 (SW-12): the town leads, never the lower-cased tier token; the support
+      // vector is trade, defence and legitimacy, said as trade, walls and rule.
+      reason: `${item.name || item.id} has nearly the people of a ${nextTier}, and the trade, walls and rule to keep them.`,
     };
   }
 
@@ -182,8 +188,8 @@ function tierEligibility(item, pressureIdx, demography = null) {
       support,
       severity: clamp01((1 - support) * 0.6 + (currentMin ? Math.max(0, 1 - pop / currentMin) : 0) * 0.4),
       reason: demographicOnly && demography
-        ? `${currentTier} can no longer be fed or housed at its own scale: the ${demography.binding === 'granary' ? 'granaries' : 'walls'} hold about ${formatCount(demography.bound)} souls, under the ${formatCount(currentMin)} a ${currentTier} needs.`
-        : `${currentTier} is no longer supported by population, economy, defense, or legitimacy conditions.`,
+        ? `${item.name || item.id} can no longer be fed or housed as a ${currentTier}: the ${demography.binding === 'granary' ? 'granaries' : 'walls'} hold about ${formatCount(demography.bound)} souls, under the ${formatCount(currentMin)} a ${currentTier} needs.`
+        : `${item.name || item.id} no longer has the people, trade, walls or rule a ${currentTier} needs.`,
     };
   }
 
@@ -264,8 +270,9 @@ function tierCandidate(item, drift, tick, rules) {
       : `${item.name || item.id} has been losing people and trade steadily.`,
     reasons: [
       drift.reason,
-      `Minimum streak ${minimum}; current streak ${drift.streak}.`,
-      chance >= 0.5 ? 'The change is now likelier than not.' : 'The change is possible, not yet likely.',
+      // STYLE-2 C2 (SW-12): the eligibility streak stays in the receipt (the Voice Program's
+      // pin), in words; the odds line is struck (the roll is the engine's, not the reader's).
+      pickLine(STREAK_REASON, `candidate.tier.${drift.direction}.${stablePart(item.id)}.${tick}`, { n: drift.streak, unit: drift.streak === 1 ? 'pulse' : 'pulses', min: minimum }),
     ],
     tierChange: {
       saveId: item.id,
@@ -461,6 +468,35 @@ export function resourceEconomicRole(settlement, resource) {
   return 'local_resource';
 }
 
+// STYLE-2 C2 (SW-12) — the tier change's streak receipt (pinned to stay in the receipt), in
+// words: how long the drift has held and how long the change needed.
+const STREAK_REASON = Object.freeze([
+  (/** @type {TierLineSlots} */ x) => `This has held for ${x.n} ${x.unit} in a row, and the change needed ${x.min}.`,
+  (/** @type {TierLineSlots} */ x) => `It has gone this way ${x.n} ${x.unit} running; ${x.min} were needed before the change.`,
+  (/** @type {TierLineSlots} */ x) => `For ${x.n} ${x.unit} it has kept on this way, and the change needed ${x.min}.`,
+]);
+
+// STYLE-2 C2 (SW-12) — the depletion summary, four vantages on the same fact: the town takes
+// more from a resource than it gives back. The resource may be singular or plural ("stone
+// quarry", "grain fields"), so no line makes a verb agree with it.
+const DEPLETION_SUMMARY = Object.freeze([
+  (/** @type {TierLineSlots} */ x) => `${x.name} is taking more from its ${x.res} than the land can give back.`,
+  (/** @type {TierLineSlots} */ x) => `Those who work ${x.name}'s ${x.res} come back with less than they used to.`,
+  (/** @type {TierLineSlots} */ x) => `${x.name}'s rulers will soon need another source than its ${x.res}.`,
+  (/** @type {TierLineSlots} */ x) => `There is less to take from ${x.name}'s ${x.res} than there was, and still ${x.name} takes.`,
+]);
+const DEPLETION_DRAW_HEAVY = Object.freeze([
+  (/** @type {TierLineSlots} */ x) => `${x.name} is drawing heavily on its ${x.res}.`,
+  (/** @type {TierLineSlots} */ x) => `${x.name} takes hard from its ${x.res}.`,
+  (/** @type {TierLineSlots} */ x) => `Much is being taken from ${x.name}'s ${x.res}.`,
+]);
+// The city floor's receipt (a city or larger depletes under a lighter draw).
+const DEPLETION_TIER = Object.freeze([
+  (/** @type {TierLineSlots} */ x) => `A ${x.tier} takes a great deal from the land around it.`,
+  (/** @type {TierLineSlots} */ x) => `A ${x.tier} the size of ${x.name} needs more than the land can easily give.`,
+  (/** @type {TierLineSlots} */ x) => `${x.name} is a ${x.tier}, and a ${x.tier} uses a great deal.`,
+]);
+
 /**
  * @param {any} item
  * @param {any} pressureIdx
@@ -530,10 +566,15 @@ function resourceCandidatesFor(item, pressureIdx, rules, tick, previousDrift, rn
         // ⛔ THE HERALD SPEAKS IN DEEDS (owner, 2026-10-02: "Updates like these need to reflect actions not to potential"): under way, then done.
         headline: `${item.name || item.id} is exhausting its ${resource.replace(/_/g, ' ')}`,
         appliedHeadline: `${item.name || item.id} has exhausted its ${resource.replace(/_/g, ' ')}`,
-        summary: `${item.name || item.id} is consuming ${resource.replace(/_/g, ' ')} faster than it recovers.`,
+        summary: pickLine(DEPLETION_SUMMARY, `candidate.resource.deplete.${stablePart(item.id)}.${stablePart(resource)}.${tick}`, { name: item.name || item.id, res: resource.replace(/_/g, ' ') }),
         reasons: [
-          effectivePressure >= 0.5 ? 'The draw on it is heavy, and a settlement of this standing draws hard.' : 'The draw on it is real but not yet heavy, though a settlement of this standing draws hard.',
-          'Higher settlement tiers consume local resources more aggressively.',
+          effectivePressure >= 0.5
+            ? pickLine(DEPLETION_DRAW_HEAVY, `candidate.resource.deplete.${stablePart(item.id)}.${stablePart(resource)}.${tick}:draw`, { name: item.name || item.id, res: resource.replace(/_/g, ' ') })
+            : `${item.name || item.id} is drawing steadily, if not yet heavily, on its ${resource.replace(/_/g, ' ')}.`,
+          // The city floor: a city or larger depletes under a lighter draw (the gate above).
+          rank >= tierRank('city')
+            ? pickLine(DEPLETION_TIER, `candidate.resource.deplete.${stablePart(item.id)}.${stablePart(resource)}.${tick}:tier`, { name: item.name || item.id, tier: settlement.tier })
+            : null,
           economicRole !== 'local_resource' ? `Economic role: ${economicRole.replace(/_/g, ' ')}.` : null,
         ].filter(Boolean),
         resourcePatch: { saveId: item.id, resource, state: 'depleted' },
@@ -582,11 +623,11 @@ function resourceCandidatesFor(item, pressureIdx, rules, tick, previousDrift, rn
         applyMode: authorityFor(rules, 'resource_recovery', 'auto'),
         headline: `${item.name || item.id}'s ${resource.replace(/_/g, ' ')} is recovering`,
         appliedHeadline: `${item.name || item.id}'s ${resource.replace(/_/g, ' ')} recovers`,
-        summary: `${item.name || item.id} consumes less ${resource.replace(/_/g, ' ')}, allowing it to become available again.`,
+        summary: `${item.name || item.id} is taking less from its ${resource.replace(/_/g, ' ')}, and the land is giving back.`,
         reasons: [
           'The draw on it has eased enough for the ground to recover.',
           recovery.reason,
-          previousDrift?.direction === 'demotion' ? 'Demotion pressure implies reduced consumption.' : null,
+          previousDrift?.direction === 'demotion' ? `With ${item.name || item.id} shrinking, less is taken from it.` : null,
           economicRole !== 'local_resource' ? `Economic role: ${economicRole.replace(/_/g, ' ')}.` : null,
         ].filter(Boolean),
         resourcePatch: { saveId: item.id, resource, state: previousDrift?.direction === 'demotion' ? 'abundant' : 'allow' },

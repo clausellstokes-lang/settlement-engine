@@ -26,8 +26,10 @@ describe('row 95: the scope clause is read against the record', () => {
     expect(cultureScopeLine(meso([]))).toMatch(/on tribute and the ritual calendar/);
     expect(cultureScopeLine(meso([]))).not.toMatch(/market/); // anchored: the same call is proven to print its twin on the line above
   });
-  it('an undeclared scope prints as before', () => {
+  it('an undeclared scope prints as before, its guild read against the roster (STYLE-2 A·O2)', () => {
     expect(cultureScopeLine({ ...meso([]), culturalIdentity: { key: 'germanic', label: 'Germanic' } }))
+      .toMatch(/run by its estates/);
+    expect(cultureScopeLine({ culturalIdentity: { key: 'germanic', label: 'Germanic' } }))
       .toMatch(/guild and estate/);
   });
 });

@@ -12,6 +12,7 @@ import {NeighbourLinkCard} from '../neighbourComponents';
 import { useStore } from '../../../store/index.js';
 import { NEIGHBOUR_MIRROR_HEADING, neighbourMirrorLines } from '../../../domain/display/neighbourMirror.js';
 import { relationshipsDeskLists } from '../../../domain/display/stateProse/relationshipsDeskRead.js'; // DS-REL-1 · the two lists, assembled ONCE
+import { plainConflictNature } from '../../../generators/crossSettlementConflicts.js'; // SW-9b-A: the pill speaks the description's plain words
 
 /** A tie's card palette by its type (the NPC relationship cards and the neighbour cards), hoisted
  *  from the tab (BUILD-W2-SEARCH U2, no behaviour change) so the dossier search styles a tie as
@@ -28,7 +29,7 @@ export const relationshipTypeStyle=(t)=>({
   family:{color:'#6a3a1a',bg:'#faf4ee',border:'#d8b898'},
 }[t]||{color:'#1a4a6a',bg:'#f0f8ff',border:'#a8c8e8'});
 
-export function RelationshipsTab({ settlement:r, saveId=null, viewerIsPremium=false, playerView=false, publicDossier=false }) {
+export function RelationshipsTab({ settlement:r, saveId=null, playerView=false, publicDossier=false }) {
   const mobile = useIsMobile();
   const [typeFilter,setTypeFilter]=useState('all');
   const [fromFilter,setFromFilter]=useState('all');
@@ -36,12 +37,11 @@ export function RelationshipsTab({ settlement:r, saveId=null, viewerIsPremium=fa
   // What our OWN durable record says each counterpart has been shown of us. The
   // one gate stands a layer down at the collector, so nothing here reads it:
   // dark, the read-model answers an empty list by identity and no Section
-  // renders at all. The DM seam is composed HERE from props the container
-  // already had (the landed RumorsTab convention), so no second premium
-  // comparison is minted anywhere on this surface.
+  // renders at all. The DM seam is composed HERE from the render path alone
+  // (the landed RumorsTab convention): the view and the data, never the tier.
   const campaigns = useStore(s => s.campaigns);
   const savedSettlements = useStore(s => s.savedSettlements);
-  const includeGroundTruth = viewerIsPremium && !playerView && !publicDossier;
+  const includeGroundTruth = !playerView && !publicDossier;
   // `sid` is derived OUTSIDE the memo deliberately: it keeps `r` out of the memo
   // body entirely, so the inferred dependency is this one string rather than the
   // whole settlement object that re-allocates on unrelated state changes.
@@ -190,7 +190,7 @@ export function RelationshipsTab({ settlement:r, saveId=null, viewerIsPremium=fa
                       <span style={{fontSize:FS.sm,fontWeight:700,color:col}}>{c.partnerName}</span>
                       <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:MUTED}}>({c.partnerRole}, {c.partnerSettlement})</span></>}
                 <span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:col,background:`${col}18`,border:`1px solid ${col}40`,padding:'1px 7px',marginLeft:'auto',flexShrink:0}}>
-                  {isFaction ? 'faction' : (c.conflictNature||'conflict')}
+                  {isFaction ? 'power' : (c.conflictNature ? plainConflictNature(c.conflictNature) : 'conflict')}
                 </span>
               </div>
               {c.description&&<div style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag2,lineHeight:1.5}}>{c.description}</div>}
@@ -250,8 +250,11 @@ export function RelationshipsTab({ settlement:r, saveId=null, viewerIsPremium=fa
         {mirrorLines.map(l=><div key={l.counterpartId} style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.5,marginBottom:6}}>{l.line}{l.basis&&l.basis.length>0&&<details style={{marginTop:3}}><summary style={{cursor:'pointer',fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED}}>DM truth</summary><div style={{fontSize:proseFontSize(FS.xxs, mobile),color:MUTED,lineHeight:1.45}}>Built from {l.basis.join('; ')}.</div></details>}</div>)}
       </Section>}
 
-      {!hasAny&&<div style={{padding:'32px 16px',textAlign:'center',color:MUTED,fontSize:proseFontSize(FS.md,mobile)}}>
-        Generate a settlement to see relationship data.
+      {/* The empty state says what the record holds, not an instruction to generate: it printed
+          "Generate a settlement to see relationship data." on a generated thorp (STYLE-RULINGS-2
+          B10(b); SW-9). `hasAny` reads exactly the three lists the line names. */}
+      {!hasAny&&<div data-testid="relationships-empty" style={{padding:'32px 16px',textAlign:'center',color:MUTED,fontSize:proseFontSize(FS.md,mobile)}}>
+        No neighbours, ties between people or conflicts are recorded for this settlement.
       </div>}
     </div>
   );

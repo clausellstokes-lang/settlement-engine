@@ -313,6 +313,20 @@ describe('W-OPS O1 — the candidate rides the EXISTING grammar, and stays a pro
     expect(core.filter((field) => !(field in candidate))).toEqual([]);
   });
 
+  // FIX-PULSE-DEFECTS (audit C2·52): the headline, applied headline and summary printed the
+  // raw principal and subject ids ("court.a is sending to learn the truth about court.b").
+  test('the candidate\'s prose names the courts through the caller\'s nameFor, never by id', () => {
+    const names = { 'court.a': 'Ashford', 'court.b': 'Brindle' };
+    const named = dispatch([staleDemand('d1', 'court.b')], { nameFor: (/** @type {string} */ id) => names[id] }).candidates[0];
+    expect(named.headline).toBe('Ashford is sending to learn the truth about Brindle');
+    expect(named.appliedHeadline).toBe('Ashford sends to learn the truth about Brindle');
+    expect(named.summary).toBe('Ashford wants what is said of Brindle confirmed before acting on it.');
+    const bare = dispatch([staleDemand('d1', 'court.b')]).candidates[0];
+    expect(bare.headline).toBe('A court is sending to learn the truth about a rival court');
+    // anchored: the bare headline is pinned verbatim on the line above, so the prose is live.
+    expect(`${bare.headline} ${bare.appliedHeadline} ${bare.summary}`).not.toMatch(/court\.[ab]/);
+  });
+
   test('THE PARITY PIN — every core field is still a field of npcAgency\'s own literal', () => {
     const agency = readFileSync(join(ROOT, 'src/domain/worldPulse/npcAgency.js'), 'utf8');
     const core = [

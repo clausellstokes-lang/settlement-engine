@@ -75,7 +75,7 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
   const ctx = extractSettlementContext(r);
   // THE ECONOMY DESK, through its one caller. DS-ECO-8 — the prosperity rung read ON ITS
   // OWN — speaks HERE, and this is the only page-set position where it does.
-  const deskProse = economyDeskRead(r, { publicDossier, playerView, tier: r?.tier });
+  const deskProse = economyDeskRead(r, { publicDossier, playerView, publicSite: 'economy:daily_life', tier: r?.tier });
 
   const loading = isConfigured ? storeAiLoading : localLoading;
   const regenerating = isConfigured ? storeAiRegenerating : false;
@@ -191,7 +191,12 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
           The unsaved hint and the empty state were one pitch told twice; they are one plain
           line now, shown until there is prose, with the button beneath it once the
           settlement is saved. */}
-      {!hasContent && !loading && (
+      {/* ⭐ #37 (STYLE-RULINGS §1, W4 PEOPLE 2026-11-07): THE CAPTION LEAVES THE BODY. Where the
+          button stands, the offer line is the BUTTON'S caption (its title, the words a reader
+          meets on the control), never a paragraph of the dossier: it printed as body text in
+          500 of 1,000 towns. Where no button stands (an unsaved settlement), the line is the
+          instruction that says how to get one, and it stays. The heading and the lines stay. */}
+      {!hasContent && !loading && !dailyLifeEnabled && (
         <p data-testid="daily-life-offer" style={{ margin: '0 0 10px', fontSize: proseFontSize(FS.sm, mobile), color: SECOND, lineHeight: 1.5 }}>
           {/* CENSUS-2 (R10): names only the market, tavern and watch the place has */}
           {dailyLifeOfferLine(r, dailyLifeEnabled)}
@@ -204,9 +209,11 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
           fullWidth
           onClick={generate}
           busy={loading}
+          data-testid={!hasContent && !loading ? 'daily-life-offer' : undefined}
+          data-caption={!hasContent && !loading ? dailyLifeOfferLine(r, dailyLifeEnabled) : undefined}
           title={hasContent
             ? `Regenerate replaces the current daily-life prose with a fresh narrative pass against the simulator output. Spends ${getCost('dailyLife')} credits.`
-            : `Refine the simulator output into daily-life prose for this settlement. Spends ${getCost('dailyLife')} credits.`}
+            : `${dailyLifeOfferLine(r, dailyLifeEnabled)} Refine the simulator output into daily-life prose for this settlement. Spends ${getCost('dailyLife')} credits.`}
           style={{ marginBottom: 16 }}
         >
           {buttonLabel}
@@ -331,14 +338,14 @@ function buildLocalDailyLifeNarrative(ctx) {
   const institutions = Object.values(ctx.keyInsts || {}).flat().map(institutionDisplayName).filter(Boolean).slice(0, 5);
   const anchors = listText(institutions, 'the wells, the lanes, and the common ground');
   const stress = ctx.stressTypes.length
-    ? `The talk of the day keeps returning to ${listText(ctx.stressTypes.map(humanize), 'the current strain')}.`
-    : 'The place is not peaceful so much as practiced: people know its routines and work around its frictions.';
+    ? `Most talk in the street comes back to the same trouble: ${listText(ctx.stressTypes.map(humanize), 'the current strain')}.`
+    : 'No single trouble hangs over the place just now. People keep to their routines and work around the small ones.';
 
   return [
-    `Morning starts around ${anchors}. ${terrain} and ${trade} shape the pace: carts, tools, and gossip move where the ground and roads allow, while ${culture} gives even routine bargains a recognizable local rhythm.`,
-    textOf({ text: `${food}. Work is divided by habit more than proclamation. Farmers, haulers, priests, guards, and tradespeople all know which shortages can be endured and which ones will turn into arguments before sundown.`, needs: ['guardPresence', 'priest'], crisis: ['any'] }),
-    `Power is felt through ${ctx.govFaction || 'whoever can make orders stick this week'}. ${ctx.stability < 45 ? "Promises are weighed carefully because yesterday's bargain may not survive tomorrow." : textOf({ text: 'Most residents know where authority lives and how to petition it without making themselves memorable.', excludes: ['crisis: succession'], crisis: ['any'] })} ${order}.`,
-    `${stress} By evening, daily life narrows to lamplight, shared meals, debts remembered, and news carried from door to door. The settlement feels less like a map marker than a set of bargains people keep renewing because leaving would cost more than staying.`,
+    `Morning starts around ${anchors}. ${terrain} and ${trade} set the pace: carts, tools and news move only as fast as the ground and the roads allow, and ${culture} shapes even the smallest bargain.`,
+    textOf({ text: `${food}. Everyone knows their work without being told. Farmers, haulers, priests, guards, and tradespeople know which shortages they can live with and which will start a quarrel before sundown.`, needs: ['guardPresence', 'priest'], crisis: ['any'] }),
+    `Orders come from ${ctx.govFaction || 'whoever can make them stick this week'}. ${ctx.stability < 45 ? "People weigh every promise, since yesterday's bargain may not hold tomorrow." : textOf({ text: 'Most residents know whom to petition, and how to do it without drawing notice.', excludes: ['crisis: succession'], crisis: ['any'] })} ${order}.`,
+    `${stress} By evening the lamps are lit, families eat together, debts are remembered, and news goes from door to door. People stay because leaving would cost them more.`,
   ].join('\n\n');
 }
 

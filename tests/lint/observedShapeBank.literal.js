@@ -36,8 +36,8 @@
  * figures live here.
  */
 export const OBSERVED_SHAPE_BANK_LITERAL = Object.freeze({
-  reads: 76,
-  addresses: 50,
+  reads: 78,
+  addresses: 52,
   // Keyed BY THE ROSTER (EXPLAINED_WRITER_EXEMPTIONS). A declaration that banks nothing is
   // written 0/0 rather than omitted — "declared and unexercised" and "retired" are
   // different facts, and the walker refuses a map whose keys are not the roster.
@@ -71,5 +71,11 @@ export const OBSERVED_SHAPE_BANK_LITERAL = Object.freeze({
     // ⭐ THE SCHEMA-29 RUNG'S ONE (the migration direction's config projection; WIRING-W0, the
     // chair's ruling of 2026-11-07 03:55 UTC): the one accessor in src/domain/migrationDirection.js.
     'migrationDirection on config': Object.freeze({ reads: 1, addresses: 1 }),
+    // ⭐ THE SCHEMA-40 RUNG'S ONE (the public prose projection; SW-B7b PROJECTION, the chair's grant of
+    // 2026-11-09 13:5x): the one read in src/domain/display/publicProse.js :: publicProseOf.
+    'publicProse on settlement': Object.freeze({ reads: 1, addresses: 1 }),
+    // ⭐ THE SCHEMA-41 RUNG'S ONE, THE FIRST PLAYED-WORLDS WRITER (STYLE-2-MERGE closing act 5, the chair's FINAL
+    // RULING of 2026-11-09 21:2x): the one read in src/domain/display/newsBody.js :: itemSettlementIds.
+    'outcome on outcome': Object.freeze({ reads: 1, addresses: 1 }),
   }),
 });

@@ -27,7 +27,7 @@ function asObject(v) {
  *  legacy shape uses `.name`/`.label`. Without the `.faction` arm every real faction
  *  slugified to `fac.unknown` and the ladder merged them into one — THE FACTION-KEY BUG.
  *  Single chokepoint for both the key and the membership match. @param {Record<string, unknown>} f @returns {string} */
-function factionName(f) {
+export function factionName(f) {
   const canonical = factionDisplayNameOf(f);
   if (canonical) return canonical;
   if (typeof f.label === 'string' && f.label) return f.label;
@@ -51,6 +51,8 @@ function normalizeToken(value) {
 /** The NPC's faction handle (the generator's canonical affiliation fields, first present).
  *  @param {Record<string, unknown>} npc @returns {string} */
 function npcFactionHandle(npc) {
+  // LEGACY (PULSE-SITES 2026-11-10): read for ANY card whose memberships do not name the faction asked about; it finds a value only
+  // on a card carrying a retired handle (today the pulse-written cards, which GREEN-TIP's writer cure ends): a later seat may remove it.
   for (const key of ['factionAffiliation', 'factionId', 'factionLink', 'faction', 'organizationId']) {
     const v = npc[key];
     if (typeof v === 'string' && v) return v;

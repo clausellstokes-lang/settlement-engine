@@ -253,11 +253,13 @@ describe('generators-domain-4 — single-writer food model', () => {
     const balance = settlement.economicViability.metrics.foodBalance;
 
     expect(balance.deficitPercent).toBe(26);
+    // RE-KEYED 2026-11-09 (STYLE-2 SW-7, A2): the band's words for 26 (Import-Dependent) in place of the per cent.
+    // Was /After imports, 26% of daily need goes uncovered/i.
     expect(settlement.economicState.situationDesc).toMatch(
-      /After imports, 26% of daily need goes uncovered/i,
+      /Even with what is brought in, people here go short of part of the food they need each day/i,
     );
     expect(settlement.economicState.situationDesc).toMatch(
-      /rationing and outside supply/i,
+      /has to ration and buy from outside/i, // RE-KEYED 2026-11-09 (SW-7, A2): was /rationing and outside supply/i
     );
     // The 26%-uncovered figure and the rationing clause are both pinned on this
     // same string above, so this exclusion measures wording, not absence.
@@ -424,7 +426,15 @@ describe('FIX-G1 — the viability summary counts the list the record publishes'
     // NON-VACUITY: the corpus really does reach the sentence that states a count. Measured
     // at 370 of 525 before and after the cure; the floor is well under it so an unrelated
     // corpus edit cannot red this, while a corpus that stopped producing the sentence does.
-    expect(stating, 'no row stated a dependency count — the sweep judged nothing').toBeGreaterThan(300);
+    // RE-KEYED 300 → 250 BY MEASUREMENT (FIX-FOOD-ISOLATION, 2026-11-07), one cause: 305 at the
+    // base → 274. An isolated town is fed from outside only as far as its support receipt carries,
+    // so 31 golden isolated towns (receipt `untenable`) now carry an uncovered local food deficit
+    // and read NOT VIABLE — the "has N operational dependencies" sentence is the VIABLE verdict's.
+    // RE-KEYED 250 → 220 BY MEASUREMENT (STYLE-2-MERGE point 47, 2026-11-13; the COHERENCE-AGREE merge 22cc9ef7d, a figure its
+    // drafted record names for the merge seat: "272 rows state a count -> 241, the floor > 250; offenders 0"), one cause: 272 on
+    // the lane's base -> 241 at the merge (the seventh seat's (c) re-deal re-judges the re-dealt holders' viability). The floor keeps the
+    // FIX-FOOD-ISOLATION ratio under the measure (250 of 274; 220 of 241), and the offenders below stay 0: the invariant itself.
+    expect(stating, 'no row stated a dependency count — the sweep judged nothing').toBeGreaterThan(220);
     expect(offenders, `\n${offenders.join('\n')}\n`).toEqual([]);
   }, 120_000);
 });

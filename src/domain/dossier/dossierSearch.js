@@ -447,7 +447,73 @@ export function enumerateDossierObjects(settlement, viewer = {}, options = {}) {
   pushChains('partial', exploitation.partiallyExploited);
   pushChains('full', exploitation.fullyExploited);
 
+  // THE SHIPPED PROSE (STYLE-RULINGS-2 B10(a), SW-B7b item 3) — PLAYER VIEW ONLY. The blocks the
+  // owner's save composed as text (`publicProse`), one object per shipped site keyed by its
+  // address and tabbed to the tab that prints it, so a search finds what the page prints. NO NEW
+  // WORDS: the object's text is the carried block's own strings, verbatim. THE VEIL FIRST: on a
+  // shared page `view` is the VEILED projection (gallery.js projects and veils before any reader),
+  // so a block the share veil hides for this viewer was dropped before it could be indexed.
+  if (playerView) {
+    const blocks = asRecord(asRecord(view.publicProse)?.blocks) || {};
+    for (const site of Object.keys(blocks)) {
+      const tab = PROSE_SITE_TAB[site];
+      if (!tab) continue;
+      const strings = printedProseOf(publicProseOf(/** @type {Parameters<typeof publicProseOf>[0]} */ (view), site));
+      if (!strings.length) continue;
+      push({
+        type: 'prose', key: `prose:${site}`, tab, id: null,
+        names: [],
+        text: strings,
+        prominence: 0,
+        raw: strings, meta: { site },
+      });
+    }
+  }
+
   return { settlement: view, objects };
+}
+
+// Imported HERE, below the enumeration, not with the imports above: the legacy-faction walker's
+// FPZ list keys this file's reads by LINE, and a line added above them would move every key.
+// An import declaration is hoisted wherever it sits at the top level.
+import { publicProseOf } from '../display/publicProse.js';
+
+/**
+ * The tab that prints each shipped site (the hosts of `publicProseCompose.js :: PUBLIC_PROSE_SITES`).
+ * @type {Readonly<Record<string, string>>}
+ */
+const PROSE_SITE_TAB = Object.freeze({
+  'economy:economics': 'economics', 'economy:services': 'services', 'economy:resources': 'resources',
+  'economy:daily_life': 'daily_life', 'general:overview': 'overview', 'general:history': 'history',
+  'general:viability': 'viability', 'general:economics': 'economics', 'stressors:overview': 'overview',
+  'overview:identity': 'overview', 'defense:state': 'defense', 'defense:threat': 'defense',
+  'defense:forces': 'defense', 'defense:posture': 'defense', 'defense:status': 'defense',
+  'defense:wall': 'defense', 'defense:supporting': 'defense', 'defense:criminal': 'defense',
+  'power:desk': 'power', 'power:governance': 'power', 'power:ladder': 'power',
+  'warFaith:faith': 'faith', 'magic': 'magic', 'viability': 'viability', 'viewModel:viability': 'viability',
+});
+
+/**
+ * The strings a page prints from one shipped site, in the block's own order: every rung's
+ * `sentence` and every plain string the site carries (a paragraph, a `beside` line, a summary),
+ * never a rung's `glance` or `detail` (the page draws those at other depths, if at all).
+ * @param {unknown} shipped @returns {string[]}
+ */
+function printedProseOf(shipped) {
+  /** @type {string[]} */
+  const out = [];
+  /** @param {unknown} v @param {string} key */
+  const walk = (v, key) => {
+    if (key === 'glance' || key === 'detail') return;
+    if (typeof v === 'string') {
+      if (v.trim().split(/\s+/).length >= 4 && !out.includes(v)) out.push(v);
+      return;
+    }
+    if (Array.isArray(v)) { v.forEach((item) => walk(item, key)); return; }
+    if (v && typeof v === 'object') for (const [k, child] of Object.entries(v)) walk(child, k);
+  };
+  walk(shipped, '');
+  return out;
 }
 
 /**

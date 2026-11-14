@@ -36,7 +36,8 @@ import { cardTieLines } from '../../domain/relationships/cardTies.js';
 import { relationshipEngagementCards } from '../../domain/display/stateProse/relationshipsDeskRead.js';
 import { buildDossierEntityIndex, entityIdFor, slugifyEntity } from '../../domain/dossier/entityLinks.js';
 import { factionIdFromName } from '../../lib/entities.js';
-import { cardHouseOf, cardPowerLine, firstPowerOf, powerOrderOf } from '../../domain/people/cardPowers.js';
+import { cardHouseOf, cardPowerLine, firstPowerOf, governingNameOf, powerOrderOf } from '../../domain/people/cardPowers.js';
+import { seatKeeperOf } from '../../domain/people/seatKeeper.js';
 import { ownerGenerationContracts } from './generationContracts.js';
 // The four settlement-body chapters and the shared small readers moved out under
 // THE DECOMPOSITION WAVE (lane D); buildViewModel below still calls them in the
@@ -44,6 +45,8 @@ import { ownerGenerationContracts } from './generationContracts.js';
 import { economicsSlice, defenseSlice, servicesSlice, resourcesSlice } from './viewModelBodySlices.js';
 import { stressArray, foodCore, avgScore } from './viewModelPrimitives.js';
 import { crisisHookFor } from '../../domain/crisis/crisisHooks.js';
+import { crisisSummaryForSurface } from '../../domain/crisis/crisisSummaryVantage.js';
+import { dmPowerViewOf } from '../../domain/people/patronage.js';
 
 // Human labels for the publicLegitimacy breakdown factors
 // (factionDynamics.computePublicLegitimacy emits { prosperity, safety, defense,
@@ -129,7 +132,12 @@ export function buildViewModel({
   // anon export is byte-identical (the Faith & War chapter renders nothing, and
   // SettlementPDF additionally gates it on the faith premium seam).
   campaign = null,
-} = /** @type {{ settlement?: any, aiSettlement?: any, aiDailyLife?: any, narrativeMode?: boolean, systemState?: any, eventLog?: any[], phase?: string, campaign?: any }} */ ({})) {
+  // THE DM LAYER (the allegiance train, car 3, design §9): "who really runs this town" — hidden
+  // allegiances, handlers, covert ties, a hidden power's boost. Built ONLY when the caller asks
+  // (SettlementPDF, the DM's own dossier); the Foundry journal and every other caller leave it off,
+  // and the view model then carries no `dm` key at all (byte-identical).
+  dmView = false,
+} = /** @type {{ settlement?: any, aiSettlement?: any, aiDailyLife?: any, narrativeMode?: boolean, systemState?: any, eventLog?: any[], phase?: string, campaign?: any, dmView?: boolean }} */ ({})) {
   const raw = settlement || {};
   const ai = aiSettlement || null;
   const useAi = !!(narrativeMode && ai);
@@ -174,6 +182,8 @@ export function buildViewModel({
     hooks:         hooksSlice(active),
     relationships: relationshipsSlice(active),
     aiAppendix:    useAi ? appendixSlice(ai) : null,
+    // read from the canonical save (`raw`): the allegiance and the ranks are owner facts
+    ...(dmView ? { dm: dmPowerViewOf(raw) } : {}),
   };
 }
 
@@ -220,7 +230,8 @@ function summarySlice(active, ai, useAi, aiDailyLife) {
     crisis: stress.length > 0 ? {
       active: true,
       chips: stress.map(x => ({
-        icon: x?.icon, label: x?.label, summary: x?.summary, hook: crisisHookFor(s, x),
+        // #29 (STYLE-RULINGS §1(c)): the cover prints the traveller's vantage; the crisis page keeps the full text.
+        icon: x?.icon, label: x?.label, summary: crisisSummaryForSurface(x, s?.name, 'cover'), hook: crisisHookFor(s, x),
       })),
     } : { active: false, chips: [] },
     arrivalScene: useAi ? (ai?.arrivalScene || ai?.aiNarrative?.arrivalScene || null) : null,
@@ -323,7 +334,8 @@ function overviewSlice(active, ai, useAi) {
   const stress = stressArray(s).map(x => ({
     icon:    x?.icon,
     label:   x?.label,
-    summary: x?.summary,
+    // #29 (STYLE-RULINGS §1(c)): the Overview prints the local's vantage; the crisis page keeps the full text.
+    summary: crisisSummaryForSurface(x, s?.name, 'overview'),
     hook:    crisisHookFor(s, x),
   }));
   const tensions = (s?.history?.currentTensions || []).map(t => ({
@@ -687,6 +699,8 @@ function npcsSlice(active) {
   const s = active || {};
   const culture = s?.config?.dominantCulture || s?.dominantCulture || s?.culture || null;
   const powerOrder = powerOrderOf(s);
+  const governingName = governingNameOf(s);
+  const keeper = seatKeeperOf(s); // COHERENCE-POWERS-3 (F7)
   const npcs = (s?.npcs || []).map(n => {
     // Engine's `personality` is an object { dominant, flaw, modifier, tell, speech }.
     // X-48 (the owner, 2026-11-03): NO LOOK, VOICE OR TELL ANYWHERE. The temperament and
@@ -757,7 +771,7 @@ function npcsSlice(active) {
       powers: Array.isArray(n?.memberships)
         ? n.memberships.map((m) => ({ power: m?.power || null, rank: m?.rank ?? null }))
         : [],
-      powerLine: cardPowerLine(n, powerOrder) || null,
+      powerLine: cardPowerLine(n, powerOrder, governingName, !!keeper && keeper.id === n.id) || null, // COHERENCE-POWERS: the leader's office (screen parity; F7: an empty seat's keeper)
       power: n?.power || 0,
       influence: inf,
       influenceLabel,
@@ -765,6 +779,8 @@ function npcsSlice(active) {
       blurb: n?.blurb || n?.description || null,
       personality: personalityStr,
       motivation: motivationStr,
+      // WIRING W3 C9 (R-W6): how the face deals with strangers, the birth-drawn `presentation.behaviour`.
+      dealing: typeof n?.presentation?.behaviour === 'string' ? n.presentation.behaviour.trim() || null : null,
       secrets: cleanSecrets,
       plotHooks: cleanHooks(n?.plotHooks),
       // THE PEOPLE CAR (PEOPLE-4 TIES, R-P7): the card's OWN directed tie first, then the ties

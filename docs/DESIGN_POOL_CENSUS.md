@@ -302,6 +302,137 @@ The wide end is driven by the draw sites with content-dependent roll counts (§2
 6. Are the world-pulse and Herald pools in scope?
 7. Who owns the wiring census re-take through `gen:dossier-prose`'s door? It has been bypassed since F9, and wave 1 cannot extend a stale census.
 
+## 6. The dominance guard: what it reds, and on what corpus (POOL-GUARD, 2026-11-12)
+
+`scripts/census/pool-dominance.mjs`, its register `scripts/census/pool-dominance.register.json`, its walker `tests/lint/poolDominance.walker.test.js`. Born in COHERENCE-QUARREL (2026-11-11) to keep a pool from coming to print more of one line without anyone deciding it. The purpose has not changed. This section records why the rule changed, and the evidence for the change.
+
+### 6.1 Why the exact ceiling had to go
+
+The guard banked each pool at its EXACT share on a fixed 360-settlement corpus, and redded on any rise. I re-seeded that corpus with no source change, and 104, 102 and 105 rows read above their ceilings (noiseA, B, C). Not one of the 51 rows COHERENCE-AGREE read red rose by even one standard error of a share (the largest was 0.86). Neither did any of the five rows re-banked upward at point 43 (0.06 to 0.78). The guard was measuring the dice.
+
+### 6.2 The rule
+
+A row reds when:
+1. **beyond its own noise:** its share rises above the ceiling by more than **three standard errors of a share at the ceiling**. The error is taken **over settlements**: the ratio estimator's cluster variance, `sqrt(N/(N-1) · Σ_towns (x_i − c·n_i)²) / Σ n_i`. It is never taken below the binomial error. Draws inside one town are not independent: with the binomial error alone, `npcData:NPC_FACTION_LOYALTY` read 30 SE over its ceiling on a re-seed.
+2. **across the dominated line:** whatever the noise, a pool read over **30 or more draws** whose commonest line crosses **0.75** from a ceiling below it reds. I measured the line before choosing it: with no draw floor, 0.5 added 5 to 15 chance crossings per re-seed, 0.75 added 3 to 7 and even 1.0 added 1 to 4, all on pools of a handful of draws.
+3. **a collapse:** a pool banked with two or more distinct lines that prints one reds when chance does not explain it. The test is that `top1 ^ towns` falls below 1/1000. That needs at least 10 towns at a commonest line of one half, and 66 towns at 0.9. It reds whatever the share's error, because the share test cannot see a pool whose commonest line was already most of it.
+
+A cured pool's **target** is judged exactly, with no allowance. A ceiling is **loose** only when its measure sits below it by more than the 0.02 slack AND by more than three standard errors. Row-set checks (no row, no longer drawn) are exact on the banked corpus. Under `--seed-prefix=<p>` they print as notes.
+
+### 6.3 The corpus
+
+The corpus covers thorp 150, hamlet 200, village 350, town 550, city 350 and metropolis 150, all on the browser's random dials. Forced stresses are added on top: famine (village 50, town 50), wartime (town 50, city 50) and siege (town 50, city 50). That makes 2,050 settlements, with seeds `quarrel-<tier>[-<stress>]-<i>`; the old 360 are a subset. The run takes **137 seconds alone** on the seat's machine; the walker took 137 to 145 s. `--seed-prefix=<p>` runs the same guard on towns nobody tuned to.
+
+### 6.4 The re-base, and the control that makes it one
+
+A pool a lane's change newly draws gets its row through `--bank-new` (COHERENCE-AGREE-4, the chair's ruling of 2026-11-12): the row alone, at the higher of the two corpora's readings, with no other row touched; `--tighten` lowers every ceiling to the tree it runs on, and a lane's tree is a re-dealt sample, so it is the chair's door, used on a ruling as `--rebase` is.
+
+A ceiling is a statement about one pool on ONE population of towns. The register now names its corpus (`corpus`). The walker reds when that name no longer matches the corpus in use, and `--tighten` refuses to compare across corpora. A corpus change goes through `--rebase`, on a chair's ruling, which banks every row at the new corpus's measure. The door refuses while the register already names this corpus. Each `--hold` keeps a row at a lower ceiling where the rule holds it there, and refuses where it does not.
+
+**CONTROL: the old 360-settlement corpus at the lane's base (f72262c68), judged against the old ceilings, reads exit 0** (POOL-GUARD 1, the walker 9/9). Nothing regressed. 49 rows (46 pools) rise numerically because they measure higher on towns the old corpus never drew. 45 of those rises are within 3 SE of the old ceiling. The four beyond 3 SE are **findings for the second wave**, not reds; the register's `census.secondWave` holds them. The chair ruled this re-base on 2026-11-12; the owner may veto it.
+
+The five rows re-banked upward at point 43 are held at their original ceilings, or at the measure where that is lower. All five hold: ARRIVAL_PEOPLE.greek top1 0.3449 · ARRIVAL_SENSES.cloth.dominant 0.3507 · faith.dominant 0.4856 · herbs.dominant 0.375 · npcData STRESS_ECONOMIC_EFFECTS.genuine_respect top5 0.6656. The cured targets are exactly as they were. Five rows carry them: conflicts:ISSUES, record:conflicts.issue, conflicts:HOOKS, record:conflicts.plotHooks and record:safetyProfile.plotHooks.
+
+The 49 rows follow. Each slice's share is that slice's share of the pool's own commonest line (or its five commonest), with the slice's draws in brackets. "Driven by" names the slice that reads highest. "Size alone" means the same four tiers at the new sizes.
+
+| pool | m | old ceiling | new measure | SE | draws | small tiers | four tiers | stress | driven by |
+|---|---|---|---|---|---|---|---|---|---|
+| `historyData:HISTORICAL_EVENTS_DATA.plotHooks:religious_tension` | top1 | 0.794 | 0.849 | 3.57 | 834 | 0.841 (113) | 0.834 (615) | 0.943 (106) | a stress |
+| `npcData:NPC_FACTION_LOYALTY` | top1 | 0.1207 | 0.1565 | 3.45 | 68422 | 0.232 (1360) | 0.152 (56005) | 0.171 (11057) | the small tiers |
+| `npcData:NPC_FACTION_LOYALTY` | top5 | 0.2914 | 0.3202 | 3.43 | 68422 | 0.396 (1360) | 0.312 (56005) | 0.350 (11057) | the small tiers |
+| `historyData:HISTORICAL_EVENTS_DATA.plotHooks:tyranny` | top1 | 0.5775 | 0.66 | 3.11 | 347 | 0.771 (35) | 0.630 (270) | 0.762 (42) | the small tiers |
+| `historyData:HISTORICAL_EVENTS_DATA.plotHooks:infiltration_fear` | top1 | 0.8406 | 0.8691 | 2.59 | 1497 | 0.888 (197) | 0.850 (1091) | 0.952 (209) | a stress |
+| `stressNarrative:STRESS_SUMMARY_SIBLINGS` | top1 | 0.9167 | 0.9711 | 2.31 | 138 | 1.000 (16) | 0.937 (63) | 1.000 (59) | the small tiers |
+| `npcData:NPC_HOOK_SIBLINGS` | top1 | 0.5579 | 0.6209 | 2.11 | 422 | 1.000 (3) | 0.620 (355) | 0.609 (64) | the small tiers |
+| `POLITICAL_FLAVOR.stable` | top5 | 0.6797 | 0.7166 | 2.09 | 702 | 0.653 (170) | 0.683 (442) | 1.000 (90) | a stress |
+| `institutionDescVariants:village|Economy|River boatyard` | top1 | 0.4445 | 0.6 | 2.01 | 45 | — | 0.610 (41) | 0.500 (4) | size alone |
+| `historyData:HISTORICAL_EVENTS_DATA.plotHooks:great_fire` | top1 | 0.6843 | 0.7279 | 1.84 | 441 | 0.815 (54) | 0.693 (339) | 0.875 (48) | a stress |
+| `historyData:HISTORICAL_EVENTS_DATA.plotHooks:wild_magic` | top1 | 0.6529 | 0.6946 | 1.79 | 419 | 0.704 (54) | 0.674 (331) | 0.882 (34) | a stress |
+| `institutionDescVariants:town|Religious|Parish burial grounds` | top1 | 0.3375 | 0.37 | 1.78 | 700 | — | 0.362 (550) | 0.400 (150) | a stress |
+| `historyData:HISTORICAL_EVENTS_DATA.plotHooks:succession_crisis` | top1 | 0.616 | 0.6402 | 1.48 | 881 | 0.741 (162) | 0.632 (611) | 0.537 (108) | the small tiers |
+| `historyData:HISTORICAL_EVENTS_DATA.plotHooks:heresy_trial` | top1 | 0.6445 | 0.6777 | 1.38 | 394 | 0.627 (51) | 0.663 (309) | 0.882 (34) | a stress |
+| `foodBalance:OUTLOOK_HOOK_SIBLINGS` | top1 | 0.6285 | 0.649 | 1.37 | 1051 | 0.544 (57) | 0.641 (749) | 0.698 (245) | a stress |
+| `historyData:HISTORICAL_EVENTS_DATA.plotHooks:guild_conflict` | top1 | 0.3704 | 0.387 | 1.33 | 1512 | 0.564 (39) | 0.377 (1364) | 0.450 (109) | the small tiers |
+| `FOODWAYS.FRAMES.more` | top1 | 0.5 | 0.75 | 1.32 | 8 | — | 0.600 (5) | 1.000 (3) | a stress |
+| `institutionDescVariants:metropolis|Government|Town crier` | top1 | 0.3667 | 0.4261 | 1.27 | 115 | — | 0.426 (115) | — | size alone |
+| `historyData:HISTORICAL_EVENTS_DATA.plotHooks:plague_years` | top1 | 0.6982 | 0.7254 | 1.09 | 415 | 0.722 (36) | 0.680 (319) | 0.967 (60) | a stress |
+| `historyData:HISTORICAL_EVENTS_DATA.plotHooks:magical_controversy` | top1 | 0.7821 | 0.8007 | 0.99 | 662 | 0.793 (87) | 0.785 (512) | 0.937 (63) | a stress |
+| `historyData:HISTORICAL_EVENTS_DATA.plotHooks:popular_uprising` | top1 | 0.5642 | 0.5888 | 0.93 | 355 | 0.565 (46) | 0.566 (281) | 0.857 (28) | a stress |
+| `STRESS_DESCS.politically_fractured` | top1 | 0.25 | 0.3019 | 0.81 | 53 | 0.400 (10) | 0.279 (43) | — | the small tiers |
+| `institutionDescVariants:metropolis|Economy|Harbour master's office` | top1 | 0.3334 | 0.4167 | 0.80 | 24 | — | 0.417 (24) | — | size alone |
+| `ARRIVAL_SENSES.tanners.dominant` | top1 | 0.4 | 0.4688 | 0.76 | 32 | — | 0.464 (28) | 0.500 (4) | a stress |
+| `CULTURE_PROFILES.south_asian.architecturalDetails` | top1 | 0.5 | 0.6 | 0.75 | 15 | 0.714 (7) | 0.500 (8) | — | the small tiers |
+| `STRESS_DESCS.politically_fractured` | top5 | 0.9167 | 0.9434 | 0.70 | 53 | 1.000 (10) | 0.930 (43) | — | the small tiers |
+| `POLITICAL_FLAVOR.stable` | top1 | 0.1554 | 0.1653 | 0.70 | 702 | 0.194 (170) | 0.143 (442) | 0.222 (90) | a stress |
+| `historyData:HISTORICAL_EVENTS_DATA.plotHooks:pilgrimage_surge` | top1 | 0.6512 | 0.6675 | 0.69 | 418 | 0.606 (33) | 0.652 (322) | 0.778 (63) | a stress |
+| `institutionDescVariants:metropolis|Crafts|Bowyers & fletchers (guild)` | top1 | 0.3514 | 0.3788 | 0.65 | 132 | — | 0.379 (132) | — | size alone |
+| `historyData:HISTORICAL_EVENTS_DATA.plotHooks:crime_wave` | top1 | 0.3389 | 0.3456 | 0.54 | 1502 | 0.452 (93) | 0.339 (1155) | 0.339 (254) | the small tiers |
+| `FOODWAYS.FRAMES.two` | top1 | 0.5455 | 0.5693 | 0.54 | 130 | 0.559 (34) | 0.557 (79) | 0.647 (17) | a stress |
+| `institutionDescVariants:city|Defense|Citadel` | top1 | 0.3489 | 0.3673 | 0.50 | 177 | — | 0.360 (150) | 0.407 (27) | a stress |
+| `ARRIVAL_SENSES.market.lines` | top1 | 0.4 | 0.4667 | 0.50 | 15 | — | 0.364 (11) | 0.750 (4) | a stress |
+| `institutionDescVariants:city|Economy|Harbour master's office` | top1 | 0.4 | 0.4269 | 0.49 | 82 | — | 0.377 (61) | 0.571 (21) | a stress |
+| `ARRIVAL_SENSES.bread.lines` | top1 | 0.3334 | 0.375 | 0.48 | 32 | — | 0.391 (23) | 0.333 (9) | size alone |
+| `historyData:HISTORICAL_EVENTS_DATA.plotHooks:disputed_land` | top1 | 0.5653 | 0.5798 | 0.47 | 257 | 0.667 (24) | 0.559 (222) | 0.818 (11) | a stress |
+| `historyData:HISTORICAL_EVENTS_DATA.plotHooks:market_crash` | top1 | 0.5 | 0.5122 | 0.44 | 328 | 0.346 (26) | 0.518 (272) | 0.600 (30) | a stress |
+| `STRESS_DESCS.indebted` | top1 | 0.3334 | 0.3637 | 0.41 | 44 | 0.750 (8) | 0.278 (36) | — | the small tiers |
+| `ARRIVAL_MEMORIES.plague_years` | top1 | 0.4 | 0.4546 | 0.34 | 11 | — | 0.455 (11) | — | size alone |
+| `institutionDescVariants:metropolis|Defense|Citadel` | top1 | 0.3847 | 0.4 | 0.32 | 105 | — | 0.400 (105) | — | size alone |
+| `ARRIVAL_MEMORIES.great_flood` | top1 | 0.5 | 0.5455 | 0.29 | 11 | 0.000 (1) | 0.600 (10) | — | size alone |
+| `STRESS_DESCS.plague_onset` | top1 | 0.3334 | 0.3637 | 0.29 | 22 | 1.000 (7) | 0.067 (15) | — | the small tiers |
+| `npcData:STRESS_ECONOMIC_EFFECTS.gov_econ_dependence` | top1 | 0.1459 | 0.1491 | 0.23 | 644 | 0.000 (9) | 0.151 (624) | 0.182 (11) | a stress |
+| `STRESS_DESCS.religious_conversion` | top1 | 0.4 | 0.4211 | 0.18 | 19 | 0.250 (4) | 0.467 (15) | — | size alone |
+| `institutionDescVariants:metropolis|Economy|Barge and river transport company` | top1 | 0.6 | 0.6191 | 0.18 | 21 | — | 0.619 (21) | — | size alone |
+| `npcData:HANDLER_TIE_ARCHETYPES.handler_leverage_loved` | top1 | 0.3077 | 0.312 | 0.10 | 125 | 0.000 (1) | 0.333 (99) | 0.240 (25) | size alone |
+| `FOODWAYS.FRAMES.one` | top1 | 0.5129 | 0.514 | 0.06 | 751 | 0.486 (183) | 0.531 (473) | 0.484 (95) | size alone |
+| `FOODWAYS.SOURCE_PHRASES.game` | top1 | 0.5455 | 0.5469 | 0.03 | 128 | 0.517 (60) | 0.569 (58) | 0.600 (10) | a stress |
+| `institutionDescVariants:city|Crafts|Bakers (5-15)` | top1 | 0.3803 | 0.3811 | 0.03 | 328 | — | 0.389 (257) | 0.352 (71) | size alone |
+
+Of the 49: 23 are driven by a stress, 13 by the small tiers and 13 by size alone.
+
+### 6.5 The proofs, on the final rule and corpus
+
+| proof | run | result |
+|---|---|---|
+| false alarm | `--seed-prefix=noiseA` | 1 row over (village River boatyard, crossing 0.75 on 40 draws); 1 loose; 7 notes |
+| false alarm | `--seed-prefix=noiseB` | 1 row over (plotHooks:popular_uprising, 3.4 SE); 4 notes |
+| false alarm | `--seed-prefix=noiseC` | 1 row over (city River ferry, 3.7 SE over 79 draws); 5 notes |
+| false alarm | `--seed-prefix=dominance` | 0; exit 0 |
+| power, small | ARRIVAL_PEOPLE.greek, 4 → 2 lines | reds: top1 0.5625 > 0.3449, 5.6 SE over 192 draws |
+| power, middling | POLITICAL_FLAVOR.stable, 9 → 5 lines | reds: top1 5.7 SE, top5 16.7 SE over 702 draws |
+| power, large | npcData:NPC_FACTION_LOYALTY, every category halved | reds: top1 17.0 SE, top5 18.2 SE |
+| power, one line | ARRIVAL_MEMORIES.heresy_trial, 3 → 1 | reds by the collapse arm alone (10 draws in 10 towns; chance 1.0e-4; the share arm allows 1.0) |
+| power, one line | village Dairy farmer, variants emptied | the pool leaves the ledger (its one line is undeclared): reds as no longer drawn |
+
+Under the old exact rule the same four re-seeds put 146, 135, 144 and 138 rows over their ceilings.
+
+### 6.6 What it does not catch
+
+It does not catch a rise inside the pool's own noise; on a pool of twenty draws that is a wide band, and only a larger corpus narrows it. It does not see a pool the corpus never draws. It cannot see variety lost among lines that the pool's line id merges: `npcData:NPC_FACTION_LOYALTY` keys a line by its index inside its category, so its commonest "line" is seven categories' first lines added together. That is charged to the second wave.
+
+### 6.7 A rise must repeat (the chair's ruling, 2026-11-12), and the residue's procedure
+
+Any lane that changes the generator re-deals births, so every merge point is reading what amounts to a fresh sample. On five fresh prefixes (noiseA, noiseB, noiseC, chairA, chairB), the rule in §6.2 put exactly one row over on each, and every time it was a different row: plotHooks:popular_uprising, then city River ferry, then metropolis River ferry, then village River boatyard, then Town council.Public works. Four of those five pick their line by a hash of the seed. A merge point does not re-deal such a pick; it re-deals only whether the institution is born. So the guard now works like this. When the corpus reads a row over by the noise arm or the dominated line, the guard reads the same corpus shape again under the fixed second prefix `confirm`, at the same tree, against the same ceiling, by the same rule. The row reds only if it is over on BOTH readings. A row over on one alone prints as a note carrying both readings, and the guard exits 0.
+
+These are NOT confirmed and stay exact on the one reading: a cured pool's target, the collapse arm, and the row-set checks. The second corpus is read only when there is a row to confirm. So a green tree costs nothing more, and a tree with a row to confirm costs about one more run.
+
+I measured three ways to stop chance alarms. Repeating the rise (the one adopted) gave 0, 0, 1, 0, 0 alarms over the five prefixes. Banking the highest reading of three corpora gave 1, 0, 0, 1, 0, raised 180 ceilings, weakened the plants and redded the loose check at base. Both together gave 0 on all five, at the second option's costs. Power under the repeat rule, on the banked corpus and on `confirm`: greek 5.6 and 4.9 SE; POLITICAL_FLAVOR.stable 5.7 and 6.6; NPC_FACTION_LOYALTY 17.0 and 17.5.
+
+**THE RESIDUE.** A ceiling banked low reads over on both corpora. At this re-base the register was banked so that both corpora read zero at the banking tree (§6.8). That still leaves a case for later.
+
+**The procedure for later, which a seat runs without waiting:** when a row reds on both corpora at a tip, measure that pool on the SECOND corpus at the tip's BASE tree (its merge base with the line).
+- If the base tree reads it over there too, the ceiling predates the change. It goes to the chair with four readings: the banked corpus and `confirm`, at the tip and at the base. The chair may authorise a re-base of that one row to the base tree's `confirm` reading, through the door, by name. A seat never does that alone.
+- If the base tree does not read it over, the rise belongs to the change, and the cure is to write the lines the pool lacks.
+
+A single-row door that refuses without the base tree's reading is NOT built here. It would have to measure a second tree from inside the first, which is more than an hour's honest work, so it is charged to the second wave.
+
+### 6.8 Both corpora start from zero (the chair's ruling, 2026-11-12)
+
+Suppose the second corpus reads a row over, by the rule, at the very tree that row was banked on. Nothing in the code differs between the two readings, so that row was banked low. The door `--level-second` deals with such rows at a re-base. It refuses unless the banked corpus reads zero. It raises such a row's ceiling to the second corpus's reading (ceil4) and writes both readings into the row's reason. It never raises a target, and it stops for a ruling if it would raise more than five rows. At this re-base it raised ONE row: `institutionDescVariants:city|Economy|River ferry`, top1 0.5157 → 0.7778 (quarrel 0.5156 over 64 draws; confirm 0.7778 over 81). From here, the banked corpus and the second corpus start from the same zero. Two consequences keep them there. First, a levelled metric (`levelled`) is never loose on the banked reading, because its ceiling is the higher of the two readings by ruling. Second, `--tighten` lowers a ceiling only to the HIGHER of the two corpora's readings. A door that lowered it to the banked corpus's reading alone would bank it low again. Run at this commit, `--tighten` leaves the register byte-identical.
+
+### 6.9 A loose ceiling must repeat too
+
+The loose prompt is the rise's mirror, and the dice deal it the same way. On the five fresh prefixes it fired 1, 1, 0, 0 and 2 times, each one a different row: plotHooks:population_friction, city River ferry before its levelling, and plotHooks:occupation_legacy. So under a foreign prefix it is a note, because `--tighten` reads the banked corpus alone. On the banked corpus it is read again on `confirm`, and it reds only when loose on both. A ceiling the dice left loose by chance is never tightened into a low bank.
+
 ## Appendix A — the fact readers (sub-seat table, file:line)
 
 ### Unit 1: record facts a DM-facing line can presume, and who reads them
@@ -327,7 +458,7 @@ Instrument key: `coh:*` = coherenceBattery (`src/domain/coherence/coherenceBatte
 | **tier** | thorp…metropolis | Field `settlement.tier`. Helpers: `tierAtLeast` `data/constants.js:137` (19 uses), `popToTier` :140 (37), `isCityScale` `viability.js :: isCityScale` (2), `tierNounFor` `stateProse/weaveBlock.js:119` (22). SCATTERED comparisons: 120 `tier === '<x>'` + 49 `[...].includes(tier)` + 80 `TIER_ORDER.indexOf`. Top files: rulingStructure.js (30), narrativeGenerator.js (11), factionDynamics.js (8), structuralValidator.js (7), safetyProfile.js (7), defenseGenerator.js (6) | coh:tier-noun; A-14:guild-power-small / lord-mayor-small; reader:scale-lists `[luxury-imports]` | The value has one home. "Small place" thresholds are spelled per site. |
 | **population band** | population vs tier band | SCATTERED. `TIER_STAMP_CUTS`/`popToTier` (constants.js:140) vs `OWNER_BANDS` checks.mjs:37 (roll bands). | X-46:population-outside-band | The two are different cuts by design (stamp vs roll). |
 | **terrain class** | plains/hills/forest/riverside/coastal/mountain/desert (`resolveConfig.js:39`) | SCATTERED. Field `config.terrainType`. Fallback chains: readerBattery `terrainOf` :40 (terrainType ?? terrainOverride ?? terrain ?? resourceAnalysis.terrain) vs checks.mjs:208 `hasWater` (terrainType ?? terrain ?? config.terrainOverride …). Comparisons: 29 `terrain === '<x>'` (+13 coast tests, 17 river tests), e.g. `defenseGenerator.js:140-144 computeDefenseScores`, `thorpSecondRole.js:22-27`, `narrativeGenerator.js:233-253 genArrivalDetail`, `settlementOriginProse.js:164 originArmKey`, `traditions/genesis.js:210`, `mapProfile.js:189 deriveDefensiveTerrain`, `foodGenerator.js:396` | reader:traditions-water, reader:hook-pools, reader:validation-on-page, A-11 (all through terrain) | No reader. Two different fallback chains in the instruments. |
-| **water (sea/coast, river, lake, port/docks, navigable)** | maritime/river/none | **READER** `waterAccessKind(terrain, route)` `src/domain/tradeRouteSemantics.js:211` (6 callers: generationContext:250, foodGenerator:138, resourceGenerator:432, defenseStateProse:1515, settlementQuickGuide:569). Competitors: readerBattery `hasNavigableWater` :52 (regex coast\|river\|lake\|marsh\|swamp\|island\|delta\|fjord\|wetland\|sea, or route port\|river); readerBattery `WATER_TERRAIN` :412 (coast\|river\|lake); checks.mjs:207 `hasWater`; `generationContext.js:252 riverTradeSupported` (hand-spelled beside waterAccessKind); `viability.js:209 deriveWaterDependencyAnalysis` (WATER_ROUTES on terrain.name); `npcGenerator.js:1438 generateNPCs` (route in port\|river\|**coastal**, or /port\|harbou?r/ name); `tradeGoods.js:61 deriveNecessityImports isPort`; `priorityHelpers.js:65 hasPort` (PORT_INFRA_RE); `seaLanes.js:186 hasWaterAccessInstitution`; `tabHelpers.js:66-68 foodNarrative`. Route port/river compares: 43 sites | reader:hook-pools `[sea]` (hasNavigableWater); reader:traditions-water (WATER_TERRAIN); A-11:sea-words-landlocked (checks hasWater); reader:validation-on-page `[requires-on-water]` | **COMPETING, 4+ water rules, none of them the domain reader.** No instrument calls `waterAccessKind`. They disagree on: `coastal` route (npcGenerator: water; the others: not); marsh/swamp/lake/island (hasNavigableWater: water; waterAccessKind: none; these are not generated terrain values, so they only matter for authored or legacy input); docks as an institution (priorityHelpers.hasPort) vs terrain or route. |
+| **water (sea/coast, river, lake, port/docks, navigable)** | maritime/river/none | **READER** `waterAccessKind(terrain, route)` `src/domain/tradeRouteSemantics.js:211` (6 callers: generationContext:250, foodGenerator:138, resourceGenerator:432, defenseStateProse:1515, settlementQuickGuide:569). Competitors: readerBattery `hasNavigableWater` :52 (regex coast\|river\|lake\|marsh\|swamp\|island\|delta\|fjord\|wetland\|sea, or route port\|river); readerBattery `WATER_TERRAIN` :412 (coast\|river\|lake); checks.mjs:207 `hasWater`; `generationContext.js:252 riverTradeSupported` (hand-spelled beside waterAccessKind); `viability.js:209 deriveWaterDependencyAnalysis` (WATER_ROUTES on terrain.name); `npcGenerator.js :: generateNPCs` (its `hasPort` read; re-addressed to the symbol 2026-11-09, ALLEGIANCE-CAR4: the retired goal draw shortened the file) (route in port\|river\|**coastal**, or /port\|harbou?r/ name); `tradeGoods.js:61 deriveNecessityImports isPort`; `priorityHelpers.js:65 hasPort` (PORT_INFRA_RE); `seaLanes.js:186 hasWaterAccessInstitution`; `tabHelpers.js:66-68 foodNarrative`. Route port/river compares: 43 sites | reader:hook-pools `[sea]` (hasNavigableWater); reader:traditions-water (WATER_TERRAIN); A-11:sea-words-landlocked (checks hasWater); reader:validation-on-page `[requires-on-water]` | **COMPETING, 4+ water rules, none of them the domain reader.** No instrument calls `waterAccessKind`. They disagree on: `coastal` route (npcGenerator: water; the others: not); marsh/swamp/lake/island (hasNavigableWater: water; waterAccessKind: none; these are not generated terrain values, so they only matter for authored or legacy input); docks as an institution (priorityHelpers.hasPort) vs terrain or route. |
 | **trade route kind** | road/river/crossroads/port/isolated/mountain_pass (+legacy) | **READER** `tradeRouteSemantics`/`tradeRouteTier` (tradeRouteSemantics.js:~100, 13 uses), `isTradeRouteDisconnected`/`isIsolatedRoute` (14), `hasTradeRouteConnection` :141. Raw field `config.tradeRouteAccess`; readerBattery `routeOf` :45. SCATTERED raw compares: port 31, isolated 29, crossroads 14, river 12, road 7, e.g. `prosperity.js:187 computeBaseProsperity`, `economicState.js:186,242 generateEconomicState`, `tradeGoods.js:94 deriveIsEntrepot`, `historyRouteContext.js:34,72`, `institutionProbability.js:159-184 getBaseChance`, `settlementOriginProse.js:161-168`, `foodGenerator.js:338`, `stressGenerator.js:~118` | reader:traditions-water (NO_WATER_ROUTE), reader:hook-pools, A-11 | Tier semantics have one home. Route-kind prose branches spell the raw string (~93 sites). |
 | **magic functions** | bool | **READER** `magicWorksAt` `src/domain/worldPulse/magicWorksAt.js:49` (through `magicLedger`; 17 uses). Competitors: 58 raw `magicExists !== false` / `=== false` reads, e.g. `priorityHelpers.js` (×3), `magicProfile.js` (×3), `pdf/lib/viewModel.js` (×3), `foodGenerator.js:116`, `prosperity.js`, `foodBalance.js`, `generationContext.js:240`, `dossierViewModel.js`; `computeEffectiveMagicPresence` (priorityHelpers, 3 uses) | coh:magic-words; coh:magic-absent-prose (text vs text only); A-04:dragon / alchemist-magic-off; hook-truth `magicFunctions` | **COMPETING, one disagreement found:** `scripts/audit/soak-review/features.mjs:97` prints `config.magicExists ? 'on':'off'`, so a missing value prints 'off' while magicWorksAt (and the raw `!== false` reads) treat missing as on. |
 | **magic level** | none/low/medium/high, priorityMagic 0..100 | **READER** `magicLedger` `src/domain/magicLedger.js:95` (18 uses); reliance `deriveMagicReliance` `magicReliance.js:184` (7). SCATTERED: 16 raw `magicLevel === '…'` / `priorityMagic <n` sites, e.g. `foodGenerator.js:226,372`, `historyEventStrands.js:197 generateTradeNarrative2`, `magicProfile.js:324 deriveRoles`, `magicBufferApply.js:140`, `threatProfile.js:406`; `priorityHelpers.js:72 hasMagicInst` (name regex) | coh:magic-words (integral vs deriveMagicReliance) | Raw band compares can miss the legacy vocabulary magicLedger folds (moderate/common/pervasive). |
@@ -339,7 +470,7 @@ Instrument key: `coh:*` = coherenceBattery (`src/domain/coherence/coherenceBatte
 | **institutions present (general)** | live roster | **READER** `liveInstitutions` `src/domain/institutions/institutionRoster.js:53` (47 uses) + `nativeSemanticName` (57). Competing: 69 raw `.institutions \|\| []` reads, `getInstitutionNames` priorityHelpers.js:45 (flag bag, birth names, feeds 18 `getInstFlags` callers), `stressGenerator.js:105-115` flag bag | reader:scale-lists `[~strength-no-house]` (STRENGTH_HOUSES); reader:hook-pools / daily-life (raw `houseNames`) | Instruments use the raw roster (readerBattery.js:101 `houseNames`); defenseFacts uses the live one, so a ruined watch counts for daily-life but not for defense-words. |
 | ↳ mill | | SCATTERED: `hasImportProcessor` foodBalance.js:~640 (grain processor, 3 uses) is the nearest reader. Also `foodGenerator.js:176`, `serviceClassifier.js:62`, `foodBalance.js:142`, `tradeGoods.js:29`, `institutionClassify.js:129 foodAnchorPredicate`. 16 sites / 5 files | reader:scale-lists (Milling) | |
 | ↳ smith | | SCATTERED: `serviceClassifier.js:428`, `foodBalance.js:653`, `tradeGoods.js:30`, `economicState.js:309`, `historyGenerator.js:87`, `events/registry.js:86`. 8 sites / 6 files | reader:scale-lists (Metalworking) | |
-| ↳ docks / port | | SCATTERED: `priorityHelpers.js:65 hasPort` (PORT_INFRA_RE), `seaLanes.js:186 hasWaterAccessInstitution`, `npcGenerator.js:1438`, `institutionProbability.js:161`, `historyEventStrands.js:114`, `serviceClassifier.js:138`, `foodBalance.js:156`, `economicState.js:134`. 20 sites / 13 files | A-11 airship licence (checks.mjs:148, /airship/) | |
+| ↳ docks / port | | SCATTERED: `priorityHelpers.js:65 hasPort` (PORT_INFRA_RE), `seaLanes.js:186 hasWaterAccessInstitution`, `npcGenerator.js :: generateNPCs` (`hasPort`), `institutionProbability.js:161`, `historyEventStrands.js:114`, `serviceClassifier.js:138`, `foodBalance.js:156`, `economicState.js:134`. 20 sites / 13 files | A-11 airship licence (checks.mjs:148, /airship/) | |
 | ↳ quarry / mine | | SCATTERED: mine 12 sites / 10 files (`foodGenerator.js:269`, `factionDynamics.js:35`, `prosperity.js:159`, `tradeGoods.js:64`, `economicState.js:552`, `narrativeGenerator.js:629` …); quarry 1 | reader:scale-lists (Mining, Stone quarrying) | |
 | ↳ fishery | | see food sources | coh:food-words; A-11 | |
 | ↳ tavern / inn | | SCATTERED: `serviceClassifier.js:49 classifyService` only (4 sites) | X-47:tavern-name (name leak only) | Daily Life names "the tavern" without asking. |
@@ -460,7 +591,7 @@ Groups: GEN = generation-time (stored on the settlement) · DISP = display-time 
 | 68 | GEN | generators/power/rulingStructure.js:221-430 | councilName / govDescByLabel / govDescByFaction | Power | 53 | rulingStructure.js inline | T | F10 defenceTwinLine (:355) | — |
 | 69 | GEN | generators/power/governanceNarrative.js | governance narrative branches (≈95 literals) | Power | 95 | governanceNarrative.js inline | T | F10 twin (:746) | — |
 | 70 | GEN | generators/power/stressFactions.js | stress-faction desc lines (≈39 literals) | Factions, Power | 39 | stressFactions.js inline | T | F1 force words (:51) | — |
-| 71 | GEN | generators/power/conflicts.js:106 | issueTemplates (issue/stakes) + buildConflictPlotHooks | Factions, Plot Hooks | 12 | conflicts.js:271 pick | R | worldLaw.allowsGeneratedContent + maritime pre-filter (falls back) | 1 roll |
+| 71 | GEN | generators/power/conflicts.js:106 | issueTemplates (issue/stakes) + buildConflictPlotHooks | Factions, Plot Hooks | 12 | conflicts.js:185 pick | R | worldLaw.allowsGeneratedContent + maritime pre-filter (falls back) | 1 roll |
 | 72 | GEN | generators/crossSettlementConflicts.js:33 | CONFLICT_NATURE (8 rel types) | Neighbours/Relationships, Factions | 44 | crossSettlementConflicts.js:235 rng.pick | R | none | ⚠ `if(!poolA.length\|\|!poolB.length) continue` skips 3+ picks |
 | 73 | GEN | generators/crossSettlementConflicts.js:81/129 | buildConflictDesc / buildFactionDesc templates | Neighbours/Relationships | 23 | crossSettlementConflicts.js:123/160 rng.pick | R | none | 1 roll each |
 | 74 | GEN | generators/neighbourGenerator.js:312/391/462 | mirror/oppose faction labels + MUNDANE_LORE_LABELS | Factions (neighbour) | 64 | neighbourGenerator.js:456 index from neighbourFactions.js:51 rng.randInt(0,3) | R | mundane-lore (magic off) | 1 roll, modulus by pool length |
@@ -539,7 +670,7 @@ Groups: GEN = generation-time (stored on the settlement) · DISP = display-time 
 11. settlementNarrative.js:205 genRelNarrative: ⚠ one roll per relationship.
 12. historyGenerator.js:446-460 fill loop: ⚠ rejection loop. :556-582 timeline loop: ⚠ rerolls and skip. :190-230 token picks, :279, :760.
 13. historyEventStrands.js:123-208 token picks.
-14. power/conflicts.js:271, crossSettlementConflicts.js:123/160/229-235 (⚠ continue-skip), neighbourGenerator.js:456 (index from neighbourFactions.js:51).
+14. power/conflicts.js:185, crossSettlementConflicts.js:123/160/229-235 (⚠ continue-skip), neighbourGenerator.js:456 (index from neighbourFactions.js:51).
 15. services/institutionServices.js:69/203 service roll: ⚠ one roll per eligible definition.
 16. factionGrouping.js generateFactions name loop (⚠ draw-count-variable retry), applyDensityLaw.js:280.
 17. traditions/genesis.js:251-409 and politics.js:275-279: ⚠ shuffle costs pool.length−1 rolls; the PRNG is local and forked.

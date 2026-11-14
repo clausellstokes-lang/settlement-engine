@@ -104,7 +104,7 @@ export const HERALD_FACETS = Object.freeze([
   }),
   Object.freeze({
     id: 'faction',
-    label: 'Faction or house',
+    label: 'Power or house',
     status: 'live',
     // A merchant house is a faction with books; the subject slot carries both,
     // and the typed `houseId` spelling is read beside it for the day it lands.

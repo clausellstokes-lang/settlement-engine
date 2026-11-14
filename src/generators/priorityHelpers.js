@@ -4,7 +4,7 @@
  * Extracted from helpers.js to keep it focused.
  */
 
-import {clamp} from './helpers.js'; import { hasMarketInstitution } from '../domain/facts/market.js';
+import {clamp} from './helpers.js'; import { defenseFactsOf } from '../domain/defense/defenseFacts.js'; import { hasMarketInstitution } from '../domain/facts/market.js';
 import {
   isMaterializedCustomContent,
   nativeSemanticNames,
@@ -45,18 +45,23 @@ const PORT_INFRA_RE = /\b(?:port|docks?|harbou?r|shipyard|navy)\b/;
 const getInstitutionNames = (institutions = []) => {
   const names = nativeSemanticNames(institutions)
     .map(name => name.toLowerCase());
+  const home = defenseFactsOf({ institutions });
   return {
     hasMilitaryInst:  hasAny(names, ['garrison','barracks','guard','watch','citadel','walls','militia','mercenary','navy','charter hall']),
     hasGarrison:      hasAny(names, ['garrison','barracks','professional guard',PROFESSIONAL_CITY_WATCH,'multiple garrison']),
     hasMilitia:       hasAny(names, ['citizen militia','militia']),
     hasWatch:         hasAny(names, ['town watch','city watch',PROFESSIONAL_CITY_WATCH,'village watch']), // F1: the village rung
-    hasMercenary:     hasAny(names, ['mercenary company','mercenary quarter','hired muscle','hireling hall','free company hall','veteran\'s lodge']),
+    // COHERENCE-AGREE: a hired company and a gate are the defence home's answers (defenseFactsOf):
+    // this list counted a hireling hall and a veteran's lodge as a company, and a palisade as gates.
+    hasMercenary:     home.hasMercenary,
     hasFreeCompany:   hasAny(names, ['free company hall']),
     hasCharterHall:   hasAny(names, ["adventurers' charter hall","adventurers' guild hall","multiple adventurers'","adventurers' guild","hireling hall"]),
     hasWalls:         hasAny(names, ['walls','citadel','gates (if walled)','inner citadel','massive walls','palisade','earthwork']),
-    hasGates:         hasAny(names, ['gates','town walls','city walls','massive walls','palisade']),
-    hasPrison:        hasAny(names, ['prison','stocks','large prison','massive prison']),
-    hasCourtSystem:   hasAny(names, ['courthouse','court buildings','democratic assembly','city hall','town hall']),
+    hasGates:         home.hasGate,
+    hasPrison:        home.hasPrison, // COHERENCE-AGREE-6 (F8 (ii)): the prison is the defence home's atom (defenseFactsOf.hasPrison)
+    // COHERENCE-AGREE: the court is the defence home's answer (defenseFactsOf.hasCourt), the same names
+    // off the live roster — a ruined courthouse tries no case.
+    hasCourtSystem:   home.hasCourt,
     hasMarket:        hasMarketInstitution(institutions), // CENSUS-1 fact 5: the market home ('black market' and 'stock exchange' are not markets)
     hasGuild:         hasAny(names, ['guild','guild consortium','guild governance']),
     hasMerchantGuild: hasAny(names, ['merchant guild','merchant oligarchy']),
@@ -65,7 +70,7 @@ const getInstitutionNames = (institutions = []) => {
     hasPort:          names.some(n => PORT_INFRA_RE.test(n)),
     hasNavy:          hasAny(names, ['navy','major port']),
     hasGranary:       hasAny(names, ['granar']),
-    hasHospital:      hasAny(names, ['hospital','monastery','healer','friary']),
+    hasHospital:      home.hasHospital || home.hasHealer, // COHERENCE-AGREE-7 (P1): the defence home's hospital or healer (the plural monasteries tend the sick; a ruined hospital does not)
     hasChurch:        hasAny(names, ['church','cathedral','temple','monastery','friary','shrine','priest','abbey']),
     hasCathedral:     hasAny(names, ['cathedral','great cathedral']),
     hasMonastery:     hasAny(names, ['monastery','friary','major monasteries']),
@@ -235,26 +240,26 @@ export const evaluateWaterDependency = (config = {}, institutions = []) => {
   if (tradeRoute === 'isolated') {
     return hasTeleportationInfra(institutions, config)
       ? { buffered: true,  strength: 'moderate',
-          note: 'Magical trade infrastructure (teleportation) enables limited craft imports despite isolation.' }
+          note: 'No trade route reaches this place, but magic brings in a little of what its crafts need.' }
       : { buffered: false, strength: 'none',
-          note: 'No trade pipeline: isolated settlement cannot import raw materials.' };
+          note: 'No trade route reaches this place, so its crafts get no materials from outside.' };
   }
 
   if (effectiveEconomy < 40) {
     return { buffered: false, strength: 'none',
-      note: `Economy too weak (≈${Math.round(effectiveEconomy)}/100) to sustain craft imports at scale.` };
+      note: 'Trade here is too weak to bring in craft materials in any quantity.' };
   }
   if ((tradeRoute === 'port' || tradeRoute === 'crossroads') && effectiveEconomy >= 55) {
     const label = tradeRoute === 'port' ? 'Port' : 'Crossroads';
     return { buffered: true, strength: 'strong',
-      note: `${label} trade at strong economy (≈${Math.round(effectiveEconomy)}/100) sustains craft via imported materials.` };
+      note: `${label} trade is strong, and it brings in the materials the crafts work.` };
   }
   if ((tradeRoute === 'river' || tradeRoute === 'road') && effectiveEconomy >= 65) {
     return { buffered: true, strength: 'moderate',
-      note: `${tradeRoute} trade at solid economy (≈${Math.round(effectiveEconomy)}/100) sustains craft via consistent imports.` };
+      note: `The ${tradeRoute} trade is steady, and it brings in enough for the crafts to keep working.` };
   }
   return { buffered: false, strength: 'none',
-    note: `Trade route (${tradeRoute}) and economy (≈${Math.round(effectiveEconomy)}/100) insufficient to sustain craft without local resources.` };
+    note: `The ${String(tradeRoute).replace(/_/g, ' ')} trade is too thin to keep the crafts supplied without materials of their own.` };
 };
 
 // ─── Core influence scoring ──────────────────────────────────────────────────

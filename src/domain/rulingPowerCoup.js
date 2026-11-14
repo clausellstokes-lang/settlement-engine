@@ -151,7 +151,7 @@ export function resolveCoupVerdict({ settlement, rng, severity = 0.6, rulingAuth
   if (!challengers.length) {
     return {
       holds: true, pHold: 1, roll: 0, winner: null, challengers, incumbent,
-      reason: 'No faction holds enough power to move against the seat. The plot collapses on its own.',
+      reason: 'No power is strong enough to move against the seat. The plot collapses on its own.',
     };
   }
 

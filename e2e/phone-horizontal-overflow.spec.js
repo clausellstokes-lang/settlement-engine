@@ -73,8 +73,9 @@ test.use({ viewport: { width: 375, height: 812 } });
 
 /**
  * Every indexable public path, origin stripped, de-duplicated. `staticUrls()` fans
- * the compendium out to one URL per section; those are the same DOCUMENT with a
- * different tab, so the query is kept — a tab can overflow on its own.
+ * the compendium out to one URL per section page (/compendium/<slug>, the owner's
+ * word of 2026-11-10); each section can overflow on its own. The query is kept for
+ * any route that still carries one.
  */
 const ROUTES = [...new Set(
   staticUrls().map(({ loc }) => new URL(loc).pathname + new URL(loc).search),

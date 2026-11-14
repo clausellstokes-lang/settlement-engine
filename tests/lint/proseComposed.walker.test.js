@@ -205,8 +205,13 @@ describe('GUARD THE GUARD — the inputs this file judges are the real ones', ()
     // census-2b item 5 70d05b25b +4, census-5 unit 2 06b59812f +1, census-3c unit 4 e3295d168 +10,
     // census-5b unit 3 c00b30eb6 +4. 2342 -> 2343 at LANDING-R2 helper G (the chair's §934.105 ruling (1): DS-GEN-17 PROVISIONED v3, the hospital-only line) +1.
     // 2343 -> 2344 at LANDING-R2 helper G2 (the chair's 06:5x DS-CND-1 boom line (ODQ §934.105, ruling (2)): ARCHETYPE: boom v4 `[street · crisis: any]`) +1.
-    expect(corpus.length, 'the shipped state corpus').toBe(2344);
-    expect(census.rows.length, 'the committed wiring census').toBe(709);
+    // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6 (+8 pools, +19 variants): 2344 -> 2363.
+    // WIRING W3 second seat (2026-11-07), the owner's style law over DS-POW-1 (the #23 tier twins, Endorsed v5 and Legitimacy Crisis v5, +2 variants): 2363 -> 2365.
+    // W3 POW fourth seat (2026-11-08): DS-POW-1 governanceFractured `[newcomer]` v5 (STYLE-AUDIT §2a #24), +1: 2365 -> 2366.
+    // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6 (+8 pools, +19 variants): 709 -> 717.
+    // 2344 -> 2354 / 709 -> 714 at W5 HIS construction (2026-11-07, ODQ §934.105): DS-GEN-16 gains five two-variant pools.
+    expect(corpus.length, 'the shipped state corpus').toBe(2779); // STYLE-2-MERGE at the SW-B2 merge (2026-11-09): DS-GEN-11's vouching zero pool leaves (3e9de356e, B·#28): 2764 -> 2761 // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 2348 -> 2356 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 2356 -> 2362 // W2 DEF C8/C10 (DS-DEF-5 ARCANE pools, 2026-11-07): 2362 -> 2374 // W2 DEF (FIXTURE: gates v3-v4, the referee's frame cure, 2026-11-07): 2374 -> 2376 // W2 DEF C3–C5 (DS-DEF-12, 2026-11-07): 2376 -> 2391 // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 2391 -> 2405 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 2405 -> 2504 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 2504 -> 2505 // MERGE-WAVE at the W2 DEF merge (2026-11-08): W1 ECO's +77 variants / +26 pools composed with W2 DEF's (measured at the merged tip) // MERGE-WAVE at the W3 POW merge: both lanes' deltas composed (2344 -> 2604) // W4 PEOPLE 2026-11-07: +7 pools/+18 variants, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants); W4 PEOPLE second seat 2026-11-07: re-measured, DS-STR-1 the style law (+4 departures lines) // MERGE-WAVE at the W4 PEOPLE merge: both lanes' deltas composed (2344 -> 2754) // MERGE-WAVE at the W5 HIS merge: both lanes' deltas composed (2344 -> 2764) // STYLE-2-MERGE at the SW-B5 merge (2026-11-09): SW-B5 FRAMES' vantage variants composed over SW-B2's zero-pool exit (the lane re-keyed this pin from its own base): 2761 -> 2779
+    expect(census.rows.length, 'the committed wiring census').toBe(856); // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 711 -> 715 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 715 -> 718 // W2 DEF C8/C10 (DS-DEF-5 ARCANE pools, 2026-11-07): 718 -> 724 // W2 DEF C3–C5 (DS-DEF-12, 2026-11-07): 724 -> 729 // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 729 -> 733 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 733 -> 766 // MERGE-WAVE at the W2 DEF merge (2026-11-08): W1 ECO's +77 variants / +26 pools composed with W2 DEF's (measured at the merged tip) // MERGE-WAVE at the W3 POW merge: both lanes' deltas composed (709 -> 800) // W4 PEOPLE 2026-11-07: re-measured, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants) // MERGE-WAVE at the W4 PEOPLE merge: both lanes' deltas composed (709 -> 852) // MERGE-WAVE at the W5 HIS merge: both lanes' deltas composed (709 -> 857) // STYLE-2-MERGE at the SW-B2 merge (2026-11-09): DS-GEN-11's vouching zero pool leaves (3e9de356e, B·#28): 857 -> 856
     expect(Object.keys(DOSSIER_RELATIONS).length, 'the committed relation leaf').toBe(165);
     // Every arm this module owns is exercised below; a roster that quietly shrank would make
     // a whole describe disappear with nothing red.
@@ -458,7 +463,80 @@ describe('A0b — the text claims every declared field and no other', () => {
     // 61 -> 62 OWED at LANDING-R2 helper G2 (the chair's 06:5x DS-CND-1 boom line (ODQ §934.105, ruling (2)): ARCHETYPE: boom v4 `[street · crisis: any]`): the line inherits its pool's per-line debt
     // as boom v1-3 do (`condition.archetype`, the pool's one declared read, unclaimed; 1343 -> 1344
     // measured, the one new under-claim is DS-CND-1 :: ARCHETYPE: boom v4).
-    const UNDER_CLAIM_OWED = 62;
+    // 62 -> 70 OWED at W2 DEF C1/C2 (2026-11-07, ODQ §934.105, WIRING-RULINGS R-W1/R-W9): DS-DEF-9's two FLAG pools
+    // (magic fills the void; magic militarized), two lines each, inherit their pools' declared reads unclaimed
+    // (`safetyProfile.flags` and the flag itself, which no sentence names as a word): 1344 -> 1352 measured, the eight new
+    // under-claims are FLAG: magicFillsVoid v1 and v2 (2 each) and FLAG: magicMilitarized v1 (1) and v2 (3: the flags, the
+    // flag, and the key function's first test `magicFillsVoid`, which the militarized branch also evaluates).
+    // 70 -> 87 OWED at W2 DEF C7 (2026-11-07, ODQ §934.105, WIRING-RULINGS R-W1/R-W3): DS-DEF-4's four FIXTURE pools
+    // (black market, thieves' guild, smuggling, gangs), two lines each, inherit their pools' declared reads unclaimed:
+    // the container `economicState.compound.inst` (8, one per line, no sentence names it as a word) and the key
+    // function's earlier tests, false on the branch that reaches the pool (black market 0; guild 2; smuggling 3; gangs 4):
+    // 1352 -> 1369 measured, the seventeen new under-claims all on the eight FIXTURE lines; no existing line moved.
+    // 87 -> 97 OWED at W2 DEF C9 (2026-11-07, ODQ §934.105, WIRING-RULINGS R-W1/R-W3): DS-DEF-5's three FIXTURE pools
+    // (gates, charter hall, free company), two lines each, inherit their declared reads unclaimed: the container
+    // `economicState.compound.inst` (6, one per line) and, for the gates and the charter hall, the group's
+    // `forces.*.present` guard, which every DS-DEF-5 line already leaves unclaimed (4): 1369 -> 1379 measured, the ten
+    // new under-claims all on the six FIXTURE lines.
+    // 97 -> 176 OWED at W2 DEF C8/C10 (2026-11-07, ODQ §934.105, WIRING-RULINGS R-W1/R-W9): DS-DEF-5's six ARCANE pools
+    // (wizard's tower, mages' guild, alchemists, divine, druidic, practitioners), two lines each, inherit their declared
+    // reads unclaimed: the two containers and the magicDef guard on every line, and on each later pool the key
+    // function's earlier tests, false on the branch that reaches it (no sentence names a flag as a word): 1379 -> 1458
+    // measured, the seventy-nine new under-claims all on the twelve ARCANE lines.
+    // 176 -> 180 OWED at W2 DEF (2026-11-07), the referee's frame cure: FIXTURE: gates gains v3 and v4 (its v1 entered the
+    // twenty most-repeated story frames at 309 of 1,000 towns), each inheriting the pool's two unclaimed reads: 1458 -> 1462.
+    // 180 -> 183 OWED at W2 DEF (2026-11-07), the owner's reading (WAVE-RULINGS item 16: the ledger vantage names the
+    // record and its cost): FIXTURE: gangs v2's old wording ("{settlement} has organised gangs") claimed the key's three
+    // earlier flags only through the token "has"; the rewrite names the tax lists instead and the three inherited
+    // reads fall due as on every other FIXTURE line: 1462 -> 1465 measured, no other line moved.
+    // 183 -> 249 OWED at W2 DEF C3–C5 (2026-11-07, the third seat, ODQ §934.105, WIRING-RULINGS R-W1): DS-DEF-12's five
+    // pools (MAGIC-DEPENDENT and the four CAPACITY steps), three lines each, inherit their declared reads unclaimed — no
+    // sentence names `isolationSupport`, `applicable`, `capacity`, `requiredCapacity` or `magicDependent` as a word
+    // (the twelve CAPACITY lines 5 each; the three MAGIC-DEPENDENT lines 2 each, `magicDependent` claimed by "magic"):
+    // 1465 -> 1531 measured line by line against the parent, all sixty-six on the fifteen DS-DEF-12 lines; no other line moved.
+    // 249 -> 271 OWED at W2 DEF C6 (2026-11-07, the third seat, ODQ §934.105, WIRING-RULINGS R-W1/R-W9): DS-DEF-2's four
+    // CHAIN clause pools inherit their declared reads unclaimed — the `chainModifiers` container, and the military pools'
+    // `force` guard (the eight military lines 2 each, the six food lines 1 each): 1531 -> 1553 measured line by line
+    // against the parent, all twenty-two on the fourteen CHAIN lines; no other line moved.
+    // 271 -> 289 OWED at W2 DEF's stress-type keys (2026-11-07, the third seat; STYLE-RULINGS §1a): DS-DEF-3's
+    // seventeen COMPOUND condition pools and DS-DEF-8's sixteen override pools; the table-keyed pools claim nothing
+    // new (their one read is the table label), and the four MIGRATION pools inherit their direction reads unclaimed
+    // (DS-DEF-3 arrivals/departures 2 each x 3 lines, DS-DEF-8 1 each x 3): 1553 -> 1571 measured line by line
+    // against the parent, all eighteen on those twelve lines; no other line moved.
+    // 289 -> 431 OWED at MERGE-WAVE's W2 DEF merge point (2026-11-08, the chair's ruling: W1 ECO's A0b debt, unrecorded on its
+    // lane, attributed to its new and rewritten pools by block, W2 DEF's idiom; the census wave buys them back): measured by
+    // armA0b over the shipped corpus, the composed tip against W2 DEF's tip 091b23bb3, so the delta is W1 ECO's — DS-ECO-9 53
+    // (its eight food-lens pools), DS-GEN-13 34 (five), DS-ECO-6 21 (four), DS-ECO-12 16 (four), DS-ECO-11 13 (two), DS-ECO-8 9
+    // (three), DS-SUP-2 1 (the mounted pool), DS-ECO-2 -3 (a style rewrite claims three reads it left): +144 gross; W2 DEF's tip sat
+    // 2 under its own ceiling, so 1571 -> 1713 measured is +142 on the ceiling. Red at W1 ECO's own tip b7e54f1b4 (1,488 / 1,344).
+    // 62 -> 114 OWED at WIRING W3 C1-C6 (2026-11-07, ODQ §934.105, WIRING-RULINGS R-W1; the W2 DEF DS-DEF-9 precedent of
+    // the same day): the six DS-POW-5 FLAG pools and DS-POW-6's commander advisory inherit their pools' declared reads
+    // unclaimed — `safetyProfile.flags`, the flag itself, and the flags `structureFlagPoolKey` tests BEFORE the drawn
+    // one in its gravity order (crimeIsGovt > stateCrime > merchantArmy > merchantCriminalBlur > secularBrutalism),
+    // which no sentence can name: 1344 -> 1396 measured at the second seat, the 52 new under-claims are FLAG:
+    // crimeIsGovt 6, stateCrime 9, stateCrime heavy 9, merchantArmy 6, merchantCriminalBlur 8, secularBrutalism 12,
+    // GM ADVISORY: the commander 2 (`power.factionRelationships`). The four over-claims the same pools first carried
+    // ("criminal"/"merchant" read as merchantCriminalBlur) were CURED in the lines, not owed: 71 -> 67.
+    // 114 -> 116 OWED at W3 POW's fourth seat (2026-11-08, STYLE-AUDIT §2a #24): DS-POW-1 governanceFractured's
+    // `[newcomer]` v5 inherits its pool's per-line debt as v1-v4 do (the pool's declared reads `legitimacy` and
+    // `legitimacy.governanceFractured`, unclaimed by name; 1396 -> 1398 measured, both new under-claims on that line).
+    // 62 -> 67 OWED at W4 PEOPLE second seat 2026-11-07 (the owner's style law of 2026-11-07, DS-CND-1, STYLE-RULINGS
+    // §1a): the style law strikes the machinery word "condition" from the block's plain pools, and that word was the
+    // token this arm read as the claim of the pools' declared `condition` read. 1344 -> 1349 measured, the five new
+    // under-claims are DIRECTION: worsening v3, DIRECTION: easing v3, DURATION v1, PROVENANCE traced v1, PROVENANCE
+    // untraced v1 (`condition` unclaimed); the same five lines' over-claims leave (66 -> 61 below, bought back), so the
+    // debt moves between the two limbs and the sum of the two ceilings falls by one. The forty-five crisis-keyed pools
+    // add none: their one read is the crisis kind, which every line names.
+    // 490 -> 493 OWED at MERGE-WAVE's W5 HIS merge point (2026-11-08), W2 DEF's idiom: W5 HIS's DS-REL-2 rewrite +4 (its
+    // pools inherit their declared reads unclaimed), DS-GEN-13 -1; measured by armA0b pool by pool against the W4 merge point
+    // (the lane's own slack hid it there). The census wave buys them back.
+    // 493 -> 515 OWED at SW-B5 FRAMES (2026-11-09, STYLE-RULINGS-2 B5, the owner's style law §7–§8): the eighteen vantage
+    // variants appended to five frame pools each inherit their pool's per-line debt exactly as their siblings carry it,
+    // measured line by line by armA0b against the parent (1775 -> 1797): DS-GEN-18 BOUGHT-IN v4-v6 5 each (15, as v1-v3),
+    // DS-GEN-14 FOUNDED-OLD v4-v7 1 each (4, as v1-v3), DS-ECO-10 POSTURE: established v4-v6 1 each (3, as v1-v3); the
+    // DS-ECO-8 STRUGGLING and DS-POW-2 unclassified lines add none; no existing line moved. The census wave buys them back.
+    // (Composed by STYLE-2-MERGE at the SW-B5 merge, the lane's own row; the line reads 1793 under it after SW-B2's exit.)
+    const UNDER_CLAIM_OWED = 515;
     const UNDER_CLAIM_CEILING = UNDER_CLAIM_BASE + UNDER_CLAIM_OWED;
     // ⛔ THE OVER-CLAIM CEILING, RE-KEYED THE SAME WAY (census-1b unit A (d), 427f7b112). From that
     // commit the wiring census records `settlement` among DS-GEN-17's fieldsRead (the roster key
@@ -472,8 +550,18 @@ describe('A0b — the text claims every declared field and no other', () => {
     // 11 -> 12 OWED at LANDING-R2 helper G (the chair's §934.105 ruling (1): DS-GEN-17 PROVISIONED v3, the hospital-only line): the pool's twelfth line fills
     // the same `{settlement}` name slot and inherits the same finding (66 -> 67 measured, the one
     // new over-claim is DS-GEN-17 :: PROVISIONED v3); the same buy-back pays it.
-    const OVER_CLAIM_BASE = 55;
-    const OVER_CLAIM_OWED = 12;
+    const OVER_CLAIM_BASE = 45;
+    // 12 -> 6 OWED at W4 PEOPLE second seat 2026-11-07 (DS-CND-1, the same cause as UNDER_CLAIM_OWED's 67): 66 -> 61
+    // measured, the five lines that said "The condition …" (SEVERITY low v1, medium v3, high v3, critical v3;
+    // PROVENANCE traced v2) no longer claim `condition` beside a read they do not hold; the ceiling is lowered to the
+    // measurement (55 + 6), a buy-back.
+    // 6 -> 0 OWED and BASE 55 -> 45 at MERGE-WAVE's W5 HIS merge point (2026-11-08), a buy-back banked: W5 HIS's rewrites cure
+    // SIXTEEN over-claims, measured by armA0b pool by pool against the W4 merge point — DS-GEN-17 ADMINISTERED 11 -> 4 and
+    // PROVISIONED 12 -> 5 (the `{settlement}` name-slot debt this OWED was opened for), DS-GEN-6 port 1 -> 0, DS-GEN-8 steading
+    // charterPending 2 -> 1. The ceiling is lowered to the measurement LESS W1 ECO's held seven (DS-GEN-13 COMMERCE: a bank 4,
+    // a merchant guild, no bank 4, DS-ECO-1 C4 +1, DS-ECO-10 -1; the chair's ruling: cured at source by the W1-A0b writer, never
+    // attributed): 61 - 16 = 45. The arm reads 52 > 45, RED by exactly W1's seven until W1-A0b merges.
+    const OVER_CLAIM_OWED = 0;
     const OVER_CLAIM_CEILING = OVER_CLAIM_BASE + OVER_CLAIM_OWED;
     const tally = {
       'over-claim': 0, 'under-claim': 0, 'implicit-negation': 0,
@@ -505,7 +593,7 @@ describe('A0b — the text claims every declared field and no other', () => {
       + `\n  over-claims          ${tally['over-claim']}   ceiling ${OVER_CLAIM_CEILING}`
       + ` = ${OVER_CLAIM_BASE} + ${OVER_CLAIM_OWED} OWED (427f7b112: DS-GEN-17's name slot)`
       + `\n  under-claims         ${tally['under-claim']}   ceiling ${UNDER_CLAIM_CEILING}`
-      + ` = ${UNDER_CLAIM_BASE} + ${UNDER_CLAIM_OWED} OWED (R-F5 26 + the pool census 34 + DS-GEN-17 PROVISIONED v3 1 + DS-CND-1 boom v4 1: the census wave buys them back)`
+      + ` = ${UNDER_CLAIM_BASE} + ${UNDER_CLAIM_OWED} OWED (R-F5 26 + the pool census 34 + DS-GEN-17 PROVISIONED v3 1 + DS-CND-1 boom v4 1 + W2 DEF DS-DEF-9 FLAG pools 8 + W2 DEF DS-DEF-4 FIXTURE pools 17 + W2 DEF DS-DEF-5 FIXTURE pools 10 + W2 DEF DS-DEF-5 ARCANE pools 79 + FIXTURE: gates v3-v4 4 + the ledger rewrite of FIXTURE: gangs v2 3 + W2 DEF DS-DEF-12 isolation support 66 + W2 DEF DS-DEF-2 CHAIN clauses 22 + W2 DEF stress-type migration pools 18 + W1 ECO's pools 142 (MERGE-WAVE) + W3 POW DS-POW-5/-6 FLAG and advisory pools 52 + W3 POW DS-POW-1 newcomer v5 2 + W4 DS-CND-1 style law 5 + W5 HIS DS-REL-2 net 3 (MERGE-WAVE): the census wave buys them back)`
       + `\n  implicit negations   ${tally['implicit-negation']}`
       + `\n  absences claimed by silence (R-F4, REPORT) ${silent}`
       + `\n  NOT-EXECUTABLE reads ${notExecutable}   pools carrying a finding ${pools.size}\n`);
@@ -517,7 +605,17 @@ describe('A0b — the text claims every declared field and no other', () => {
     expect(tally['over-claim']).toBeLessThanOrEqual(OVER_CLAIM_CEILING);
     expect(tally['under-claim']).toBeLessThanOrEqual(UNDER_CLAIM_CEILING);
     expect(tally['implicit-negation']).toBeLessThanOrEqual(13);
-    expect(pools.size).toBeLessThanOrEqual(240);
+    // 240 -> 242 at W2 DEF C1/C2 (2026-11-07): the two DS-DEF-9 FLAG pools carry the under-claim debt above.
+    // 242 -> 246 at W2 DEF C7 (2026-11-07): the four DS-DEF-4 FIXTURE pools carry the under-claim debt above.
+    // 246 -> 249 at W2 DEF C9 (2026-11-07): the three DS-DEF-5 FIXTURE pools carry the under-claim debt above.
+    // 249 -> 255 at W2 DEF C8/C10 (2026-11-07): the six DS-DEF-5 ARCANE pools carry the under-claim debt above.
+    // 255 -> 260 at W2 DEF C3–C5 (2026-11-07, the third seat): the five DS-DEF-12 pools carry the under-claim debt above.
+    // 260 -> 264 at W2 DEF C6 (2026-11-07, the third seat): the four DS-DEF-2 CHAIN pools carry the under-claim debt above.
+    // 264 -> 268 at W2 DEF's stress-type keys (2026-11-07): the four migration pools carry the under-claim debt above.
+    // 268 -> 295 at MERGE-WAVE's W2 DEF merge point (2026-11-08, the chair's ruling): W1 ECO's twenty-seven new pools carrying
+    // the under-claim debt above (DS-ECO-9 8, DS-GEN-13 5, DS-ECO-12 4, DS-ECO-6 4, DS-ECO-8 3, DS-ECO-11 2, DS-SUP-2 1).
+    // 240 -> 247 at WIRING W3 C1-C6 (2026-11-07): the seven pools above carry the under-claim debt they owe.
+    expect(pools.size).toBeLessThanOrEqual(302); // MERGE-WAVE at the W3 POW merge: both lanes' deltas composed (240 -> 302)
   });
 });
 
@@ -1308,10 +1406,10 @@ describe('A13 — the PROVENANCE move, EXECUTABLE since the holder census landed
   const CAPTURED_TREASURY_TOWN = Object.freeze({
     config: {
       settType: 'town',
-      tradeRouteAccess: 'port',
-      monsterThreat: 'heartland',
-      culture: 'arabic',
-      terrainOverride: 'desert',
+      tradeRouteAccess: 'isolated',
+      monsterThreat: 'random_threat',
+      culture: 'latin',
+      terrainOverride: 'hills',
     },
     // rate-9-2 -> rate-11-9 on 2026-09-30, with tests/fixtures/tasteTowns.js INTERESTED_TOWNS: the
     // same-seed shift left rate-9-2's Town hall without a tax service (urban band, ODQ §934.86).
@@ -1325,7 +1423,17 @@ describe('A13 — the PROVENANCE move, EXECUTABLE since the holder census landed
     // to rate-93-0 by the X-46 compose) met at the merge onto rung 1's tip; the same scan in
     // rateGrid's order at the merged tip names rate-69-0 (index 276) first of three (rate-93-0,
     // rate-135-1). The arm returns to the grid shape. The assertions are unchanged.
-    seed: 'rate-69-0',
+    // rate-69-0 -> rate-105-2 on 2026-11-08 (ALLEGIANCE-CAR2), with INTERESTED_TOWNS and by identity with its cause: the
+    // capture state is derived from the ruling three's agents (J-13), and rate-69-0's strengths-only hall reads
+    // 'equilibrium'. The same scan at the car's tip names rate-105-2 (index 422) first of two (rate-165-1). The assertions
+    // are unchanged.
+    // rate-105-2 -> rate-33-1 on 2026-11-13 (STYLE-2-MERGE point 46, the COHERENCE-POWERS merge 6aeaa4154; the chair's ruling on
+    // STOP 46c), with INTERESTED_TOWNS and by identity with its cause: under the dual hat rate-105-2's seat is held by Supriya
+    // Prasad, the senior guild master (Merchant guilds (3-8)), no agent, so its hall reads 'equilibrium' (at 3575cf061: Bhavana
+    // Khanna, the mayor, a Thieves' Guild agent via the office). The rule: the first rateGrid town cell captured at birth, in the
+    // grid's own order: rate-33-1 (index 133). k of n: 2 of 3 (rate-69-0 too; rate-135-2 reads the treasury LICENSED). The
+    // assertions are unchanged.
+    seed: 'rate-33-1',
   });
 
   it('⭐⭐ THE FAIL LIMB IS REACHABLE ON REAL INPUT: a citing variant whose holder this town has captured', () => {

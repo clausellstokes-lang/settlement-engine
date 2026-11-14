@@ -33,6 +33,8 @@ import { settlementContentRuntimeOptions } from '../../src/store/settlementConte
 import { eligibleCustomContent } from '../../src/domain/customContentSchema.js';
 import { contentRuntimeFromCampaignBinding } from '../../src/domain/content/contentEnvironment.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { useStore } from '../../src/store/index.js';
+import { VANILLA_CONTENT_ENVIRONMENT } from '../../src/domain/content/contentEnvironmentDefaults.js';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { engineVersion as LOCAL_ENGINE_VERSION } from '../../supabase/functions/_shared/engineBundle.meta.json';
@@ -41,9 +43,18 @@ const URL_ = 'https://stub.supabase.co/functions/v1/engine-generate';
 // The service built from THESE sources serves the committed bundle's version.
 const SERVED = LOCAL_ENGINE_VERSION;
 
-/** The request the generate action builds for a signed-in, no-homebrew, standalone forge. */
+/**
+ * The request the generate action builds for a signed-in, no-homebrew, standalone forge. The
+ * content runtime is the store's own: its `getActiveCustomContentRuntime` answers the vanilla
+ * environment for an account with none, which stamps the provenance (remote-path R1/R2).
+ */
 function actionRequest(seed, settType) {
-  const state = { config: { ...DEFAULT_CONFIG, settType }, customContent: {}, configExplicitFields: {} };
+  const state = {
+    config: { ...DEFAULT_CONFIG, settType },
+    customContent: {},
+    configExplicitFields: {},
+    getActiveCustomContentRuntime: useStore.getState().getActiveCustomContentRuntime,
+  };
   const fullConfig = birthConfig({
     ...DEFAULT_CONFIG,
     settType,
@@ -70,14 +81,21 @@ function actionRequest(seed, settType) {
 
 /**
  * What engine-generate computes for a body: a birth through the ONE core with the
- * service's inputs (no neighbour, no custom content), answered over JSON.
+ * service's inputs (no neighbour, no custom content, the store's standalone vanilla stamp
+ * unless the config turned custom content off), answered over JSON.
  */
 function serviceReply(bodyText) {
   const { seed, config } = JSON.parse(bodyText);
+  const contentRuntime = config.useCustomContent === false
+    ? { customContent: {} }
+    : {
+        customContent: {},
+        contentProvenance: { scope: 'standalone', environment: VANILLA_CONTENT_ENVIRONMENT, bindingHash: null },
+      };
   const served = runGenerationRequest({
     op: 'settlement',
     requestId: null,
-    payload: { fullConfig: birthConfig(config), neighbour: null, seed, contentRuntime: { customContent: {} } },
+    payload: { fullConfig: birthConfig(config), neighbour: null, seed, contentRuntime },
   });
   return JSON.parse(JSON.stringify({
     settlement: served.settlement,

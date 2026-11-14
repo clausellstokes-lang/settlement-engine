@@ -27,8 +27,8 @@
  */
 const PAIRS = [
   [
-    "Every household works some 12-16 acres, enough to stay alive and no more.",
-    "Each family tills roughly 12-16 acres, all of it for the table.",
+    "Every household works just enough land to stay alive, and no more.",
+    "Each family tills a small holding, all of it for the table.",
   ],
   [
     "A shared cellar for grain, roots, and preserved food. It is what stands between the thorp and a failed harvest.",
@@ -55,8 +55,8 @@ const PAIRS = [
     "Plain wayside shrine for prayer. Unstaffed.",
   ],
   [
-    "Services mean a 2-5km walk to the village house of worship.",
-    "The nearest house of worship is the village's, a 2-5km walk away for services.",
+    "Services mean a walk of a few miles to the village house of worship.",
+    "The nearest house of worship is the village's, a walk of a few miles away for services.",
   ],
   [
     "A turf-banked corner of the holding, kept out of the plough and marked with fieldstones. No clergy is near enough to speak, so the words fall to whoever knew the dead best.",
@@ -76,15 +76,15 @@ const PAIRS = [
   ],
   [
     "A single household head speaks for the settlement without ever being chosen to. No office, no title, no vote. Simply the door people knock on when a thing has to be settled.",
-    "One head of household carries the settlement's voice by common habit rather than any appointment. Nobody named them to it; everybody defers to it anyway.",
+    "One head of household carries the settlement's voice by common habit, with no appointment behind it. Nobody named them to it; everybody defers to it anyway.",
   ],
   [
     "Wattle-and-daub or timber, one or two rooms to a household.",
     "Timber or wattle-and-daub houses, each of a room or two.",
   ],
   [
-    "A well or a spring, yielding at least 2-4 gallons a person each day.",
-    "Water from a well or spring, a bare 2-4 gallons per person daily.",
+    "A well or a spring, yielding at least a bucketful a person each day.",
+    "Water from a well or spring, barely a bucketful per person each day.",
   ],
   [
     "A ring of sharpened stakes around the settlement. Little real defence, but enough to turn away an idle raider.",
@@ -92,7 +92,7 @@ const PAIRS = [
   ],
   [
     "When danger reaches the fields, each household sends one able-bodied adult with a hunting bow, spear, or whatever farm tool can serve as a weapon.",
-    "One fit adult musters from every household when the alarm is raised. Their arms are hunting bows, spears, and sharpened tools rather than a soldier's kit.",
+    "One fit adult musters from every household when the alarm is raised. Their arms are hunting bows, spears, and sharpened tools; no one has a soldier's kit.",
   ],
   [
     "Someone here takes goods and never asks their history. The name is common knowledge. It is simply not spoken aloud.",
@@ -199,12 +199,12 @@ const PAIRS = [
     "Modest prayer marker. Unattended.",
   ],
   [
-    "The nearest house of worship is the village's, a typical 2-5km off.",
-    "None of its own; the village's lies a usual 2-5km away.",
+    "The nearest house of worship is the village's, usually a few miles off.",
+    "None of its own; the village's lies usually a few miles away.",
   ],
   [
     "A walled plot gated against livestock, kept by the households in turn. The rite waits for a priest passing through; the burial does not.",
-    "A gated ground at the settlement edge, tended household by household. Families lie in rows by house rather than by standing, which is custom here and not want.",
+    "A gated ground at the settlement edge, tended household by household. Families lie in rows by house, whatever their standing; that is custom here, not want.",
   ],
   [
     "A free hamlet, with no lord's man set over it; the elders, agreeing among themselves, settle what the community holds in common.",
@@ -216,7 +216,7 @@ const PAIRS = [
   ],
   [
     "One well-regarded resident holds sway without a mandate. Nobody voted, nobody appointed, everybody accepts it. What gets decided is practical, never ceremonial.",
-    "A single trusted figure runs things by common agreement rather than any office. The rulings are matters of sense, not procedure.",
+    "A single trusted figure runs things by common agreement, holding no office. The rulings are matters of sense, not procedure.",
   ],
   [
     "Timber-framed houses under thatch.",
@@ -252,7 +252,7 @@ const PAIRS = [
   ],
   [
     "Goods route through the hamlet to slip past the toll roads and customs posts. It is paid for the service in kind, and glad of it.",
-    "Contraband moves through here, skirting the tolls and the customs checks. The hamlet takes its cut in goods rather than coin.",
+    "Contraband moves through here, skirting the tolls and the customs checks. The hamlet takes its cut in goods, not coin.",
   ],
   [
     "Open fields worked in rotation.",
@@ -519,12 +519,12 @@ const PAIRS = [
     "Masons dress the stone in yards beside the working face. The quarry supplies walls and churches across half the region.",
   ],
   [
-    "Held by royal charter. The town's chief economic engine.",
+    "Held by royal charter. The heart of the town's trade.",
     "Requires a charter from the crown. A principal source of the town's trade.",
   ],
   [
-    "The central plaza where the weekly market and the fairs are held. Fifty to a hundred yards to a side.",
-    "A broad open square, 50 to 100 yards across, given over to market days and fairs.",
+    "The central plaza where the weekly market and the fairs are held.",
+    "A broad open square given over to market days and fairs.",
   ],
   [
     "Merchants from across the region, and luxuries to be had.",
@@ -555,8 +555,8 @@ const PAIRS = [
     "A house made for travellers by coach: fresh horses stabled, departures timed, fixed mealtimes, and a passengers' waiting room. The teams are swapped out, not just given a rest.",
   ],
   [
-    "Coordinates caravan assembly, departure times, and word of the roads. Merchants register cargo, take on guards, and pool ventures here. The town's forerunner to the city's Caravan masters' exchange.",
-    "Where regional caravans are mustered, scheduled, and briefed on their routes. Traders enrol their goods, hire escorts, and strike joint ventures, on the scale that precedes a city's Caravan masters' exchange.",
+    "Coordinates caravan assembly, departure times, and word of the roads. Merchants register cargo, take on guards, and pool ventures here.",
+    "Where regional caravans are mustered, scheduled, and briefed on their routes. Traders enrol their goods, hire escorts, and strike joint ventures.",
   ],
   [
     "A guild of carters, teamsters, and pack-drivers who haul goods overland for pay. They know every road, every toll, and every road shut by season, and price their work by it.",
@@ -647,8 +647,8 @@ const PAIRS = [
     "An established herbalist's shop, well stocked, with a back room for private consultation. On offer are herbalism kit supplies, common antidotes, medicinal herbs, and simple surgical dressings, and some apothecaries here double as chirurgeons.",
   ],
   [
-    "Several craftsmen banded into a guild. Standard arrows by the sheaf, specialty broadheads, and composite bows made to order. They restock the merchant caravans and arm the town militias.",
-    "A guild of bowyers and fletchers. Arrows come by the sheaf, broadheads to specialty, and composite bows on commission. Enough to resupply the caravans and outfit the militias.",
+    "Several craftsmen banded into a guild. Standard arrows by the sheaf, specialty broadheads, and composite bows made to order. They restock the merchant caravans and arm their guards.",
+    "A guild of bowyers and fletchers. Arrows come by the sheaf, broadheads to specialty, and composite bows on commission. Enough to resupply the caravans and outfit their guards.",
   ],
   [
     "A mill driven by water or ox, cutting planks and beams for builders. Sited near timber, it can meet a whole region's building needs. The crew is permanent.",
@@ -900,7 +900,7 @@ const PAIRS = [
   ],
   [
     "'Divination' with no magic in it, done by Deception, a few coins a reading.",
-    "Fortunes told by Deception rather than any real magic, for a few coins each.",
+    "Fortunes told by Deception, with no real magic in them, for a few coins each.",
   ],
   [
     "Fur processors, traders, and retailers gathered into one quarter. It is high-value work, for good fur is a luxury good.",
@@ -931,7 +931,7 @@ const PAIRS = [
     "More than one quarter of inns, serving the merchant, the traveller, and the lingering guest.",
   ],
   [
-    "The city-scale form: permanent offices where caravan masters, merchants, and armed escorts do business. It handles bonded freight, route intelligence, the assembly of armed convoys, and the settling of commercial disputes.",
+    "Permanent offices where caravan masters, merchants, and armed escorts do business. It handles bonded freight, route intelligence, the assembly of armed convoys, and the settling of commercial disputes.",
     "A city-scale exchange with standing offices, where caravan masters meet merchants and armed escorts to transact. Bonded freight, route intelligence, armed convoy assembly, and commercial dispute resolution are all conducted here.",
   ],
   [
@@ -971,7 +971,7 @@ const PAIRS = [
     "Chartered by state or noble to make coin, it standardises the region's currency and yields significant ongoing revenue by seigniorage.",
   ],
   [
-    "The guild scale of the listening trade. Correspondents kept on several roads, an archive that sets one report against another, and a fixed price for an answer in writing. Costly, and the only counter that grades a claim before selling it.",
+    "A guild house of the listening trade. Correspondents kept on several roads, an archive that sets one report against another, and a fixed price for an answer in writing. Costly, and the only counter that grades a claim before selling it.",
     "A chartered house of correspondents. Reports arrive from several roads and are checked against each other before anything is sold. The written answer carries a standing rate and a grade.",
   ],
   [
@@ -1116,7 +1116,7 @@ const PAIRS = [
   ],
   [
     "A standing force of the law, roughly one in a hundred residents.",
-    "Full-time keepers of order, numbering about 1% of the city.",
+    "Full-time keepers of order, about one for every hundred people in the city.",
   ],
   [
     "Professional soldiers, kept by noble or crown.",
@@ -1171,7 +1171,7 @@ const PAIRS = [
     "Excavated ways running under walls and wards alike; whole shipments pass below the city without touching a street.",
   ],
   [
-    "The covert guild scale. Brokers deal in knowledge by the piece, attach a grade to it, and will build a claim to order for a patron with the coin. It settles where the talk already runs thickest.",
+    "A covert guild. Brokers deal in knowledge by the piece, attach a grade to it, and will build a claim to order for a patron with the coin. It settles where the talk already runs thickest.",
     "A hidden guild of information brokers. They sell by the piece, grade what they sell, and take commissions to put a story into circulation. Always sited among the fences and the houses that keep late hours.",
   ],
   [
@@ -1179,8 +1179,8 @@ const PAIRS = [
     "Illicit wares, bought and sold in hidden places.",
   ],
   [
-    "A lone hand or small cell, working below the level that would sustain an assassins guild. Work comes through criminal go-betweens: less dependable, but deniable.",
-    "One killer, or a handful, operating beneath the threshold an assassins guild would need. Contracts arrive by way of criminal intermediaries, less reliable and for that reason harder to trace back.",
+    "A lone hand or small cell, in a place too small to keep an assassins guild. Work comes through criminal go-betweens: less dependable, but deniable.",
+    "One killer, or a handful, in a place too small to keep an assassins guild. Contracts arrive by way of criminal intermediaries, less reliable and for that reason harder to trace back.",
   ],
   [
     "It seizes free persons and slips them into slavery on forged provenance papers. No lawful market stands here to absorb them, so it keeps its own holding and its own routes.",
@@ -1208,7 +1208,7 @@ const PAIRS = [
   ],
   [
     "Constructed servants, put to the heavy work.",
-    "Servants made rather than born, if magic permits it.",
+    "Servants made, not born, if magic permits it.",
   ],
   [
     "Corpses raised to labour. Not everyone approves.",
@@ -1919,7 +1919,7 @@ export const DESC_VARIANT_DECLARATIONS = Object.freeze({
   "A plain hall held under a regional adventurers' charter. It posts bounties, houses monster hunters, and takes up the local defence no garrison is here to keep. You find them along dangerous frontiers.": Object.freeze({ excludes: Object.freeze(["garrison"]) }), // hamlet|Adventuring|Adventurers' charter hall#0
   "Chartered by the region's adventuring order and little more than a rough hall for it. Bounties go up on its board, monster hunters bed down inside, and with no garrison to call on it musters the defence. A frontier fixture where the country is dangerous.": Object.freeze({ excludes: Object.freeze(["garrison"]) }), // hamlet|Adventuring|Adventurers' charter hall#1
   "Goods route through the hamlet to slip past the toll roads and customs posts. It is paid for the service in kind, and glad of it.": Object.freeze({ needs: Object.freeze(["tier: ≤ hamlet"]) }), // hamlet|Criminal|Smuggling waypoint#0
-  "Contraband moves through here, skirting the tolls and the customs checks. The hamlet takes its cut in goods rather than coin.": Object.freeze({ needs: Object.freeze(["tier: ≤ hamlet"]) }), // hamlet|Criminal|Smuggling waypoint#1
+  "Contraband moves through here, skirting the tolls and the customs checks. The hamlet takes its cut in goods, not coin.": Object.freeze({ needs: Object.freeze(["tier: ≤ hamlet"]) }), // hamlet|Criminal|Smuggling waypoint#1
   "An open stall or small roofed market for selling the day's catch. The price falls quickly, for fish keeps no better than a day.": Object.freeze({ needs: Object.freeze(["navigable"]) }), // village|Economy|Fish market#0
   "Where the day's catch is sold, from an open stall or a small covered market. Prices sink fast. Fish will not wait.": Object.freeze({ needs: Object.freeze(["navigable"]) }), // village|Economy|Fish market#1
   "Runs cattle or goats for their milk, butter, and soft cheese. Vital protein and fat when the grain runs thin. What isn't used goes to the weekly market.": Object.freeze({ needs: Object.freeze(["market"]) }), // village|Economy|Dairy farmer#0
@@ -1941,7 +1941,6 @@ export const DESC_VARIANT_DECLARATIONS = Object.freeze({
   "River barges run in fleet, some to a schedule and some to order. Bulk freight, passengers, and army supply all move on them through the river network.": Object.freeze({ needs: Object.freeze(["river"]) }), // town|Economy|Barge and river transport company#1
   "Traffic is regulated here, anchorage fees collected, berths handed out, and sea-law enforced.": Object.freeze({ needs: Object.freeze(["coast"]) }), // town|Economy|Harbour master's office#1
   "The modest end of the news trade. A paid register of who came into the city and what they reported, kept openly and taxed like any other counter.": Object.freeze({ needs: Object.freeze(["tier: ≥ city"]) }), // town|Economy|Listening post#1
-  "Several craftsmen banded into a guild. Standard arrows by the sheaf, specialty broadheads, and composite bows made to order. They restock the merchant caravans and arm the town militias.": Object.freeze({ needs: Object.freeze(["militia"]) }), // town|Crafts|Bowyers & fletchers (guild)#0
   "A full tannery of many vats and a guild-trained workforce, turning out fine leather for shoes, armour, and saddlery.": Object.freeze({ needs: Object.freeze(["guild"]) }), // town|Crafts|Tanner (established)#0
   "Multiple vats, trained hands from the guild. A proper tannery whose leather is good enough for footwear, armour, and saddlery.": Object.freeze({ needs: Object.freeze(["guild"]) }), // town|Crafts|Tanner (established)#1
   "The town's bread. Prices fixed by the guild.": Object.freeze({ needs: Object.freeze(["guild"]) }), // town|Crafts|Bakers (5-15)#0

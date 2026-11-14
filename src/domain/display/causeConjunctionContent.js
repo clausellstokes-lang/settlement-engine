@@ -49,22 +49,22 @@ export const FULL_CONTENT = Object.freeze({
     'compromised-covert': {
       underfunded: {
         attributed: [
-          "The garrison's pay has run short too many seasons, and the captain has quietly started taking a merchant house's coin to cover the muster; the men are paid, the gate rota bends, and nobody asks the right question yet.",
+          "The garrison's pay has run short for too many seasons, and the captain has quietly started taking outside coin to make up the muster. The soldiers are paid, the gate watches bend, and no one has asked why yet.",
           'Watch the captain on pay day: the chest is light, the men are made whole anyway, and the difference walks in through a side door after dark. The garrison is bought and does not know it.',
         ],
       },
       captured: {
         attributed: [
-          'To the town the captain is the law; to the syndicate the captain is a line item. The raids that matter are sold before they march, and the only tell is how calm certain streets stay.',
-          "The watch still drills, still patrols, still salutes its captain, and every order that threatens the syndicate dies between the captain's desk and the duty sergeant. No one has noticed the pattern. Someone will.",
+          'The town thinks the captain is the law, but the underworld pays the captain. Raids that matter are sold before they march, and the only sign is how quiet certain streets stay.',
+          "The watch still drills, patrols and salutes its captain, but every order that threatens the underworld dies between the captain's desk and the duty sergeant. No one has noticed yet.",
         ],
       },
     },
     'compromised-revealed': {
       captured: {
         'exposed-public': [
-          "The town now knows what the syndicate always did: the captain was theirs. Every empty raid, every stalled warrant, every convenient escape has an author now, and the watch's own men are the angriest in the square.",
-          'The capture of the watch is public, and the captain wears its face; the underworld ran the law through the very desk sworn against it, and the town is deciding whether anything the watch did was real.',
+          "The town now knows the captain was the underworld's man. Every empty raid, stalled warrant and easy escape is laid at the captain's door, and the watch's own men are the angriest in the square.",
+          'It is now known that the underworld ran the watch through its captain, and the town is asking whether anything the watch did was real.',
         ],
       },
     },
@@ -73,22 +73,22 @@ export const FULL_CONTENT = Object.freeze({
     'compromised-covert': {
       'conduct-drift': {
         attributed: [
-          'The priest still keeps the hours, still blesses the harvest, still hears confession, and serves something else entirely; a darker patron rewards what happens after the candles are out, and the congregation kneels to a fiction.',
-          "Listen closely to the priest's sermons: the doctrine is correct and the conviction is real, but the conviction belongs to another altar. The dark work is the true liturgy, and the patron pays for it in quiet power.",
+          'The priest still keeps the hours, blesses the harvest and hears confession, but serves another master. A dark patron rewards what happens after the candles are out, and the congregation does not know.',
+          "The priest's sermons follow the doctrine and sound sincere, but the devotion behind them goes to a dark patron, who pays in quiet favors for the work done after dark.",
         ],
       },
       secularization: {
         historicized: [
-          'The pews were empty once, and the priest learned to live by other means; the pews have long since refilled, and the means continue. What the cold season taught, no revival has untaught.',
-          "The faith came back to this town, but not to its priest; the habits learned while the altars stood empty run on beneath the restored rite, and the congregation prays over a hollow it cannot see.",
+          'The pews emptied when the faith went cold, and the priest found other ways to live. The pews are full again, but the priest has not given up those other ways.',
+          'The faith came back to the town but not to its priest. What the priest took up while the altars stood empty goes on behind the restored rites, and the congregation does not see it.',
         ],
       },
     },
     'compromised-revealed': {
       'clergy-scandal': {
         'exposed-public': [
-          "The priest's trade in the priesthood's own disgrace is out: silence bought from sinning brothers and sold as absolution of the record. A town that forgave its clergy once is not in the mood to do it twice.",
-          'It is public now, and it is the worst kind of public: the priest profited from the very scandal the pulpit condemned, and every sermon on repentance is being read back as an invoice.',
+          'It is out that the priest took money from guilty brothers to keep their sins quiet, and the town is in no mood to forgive its clergy.',
+          'It is now known that the priest made money from the scandal the pulpit preached against, and the congregation no longer listens to the priest on repentance.',
         ],
       },
     },
@@ -97,7 +97,7 @@ export const FULL_CONTENT = Object.freeze({
     'compromised-covert': {
       occupation: {
         attributed: [
-          "The ruler's seal still stamps the town's decrees, and the occupier's clerk reads them first; the seat survives on service, the service is quiet, and the town mistakes the quiet for protection.",
+          "The ruler's seal still stamps the town's decrees, and the occupier's clerk reads them first. The ruler keeps the seat by serving quietly, and the town takes the quiet for protection.",
           'The town believes its ruler shields it from the occupier. The requisition lists say otherwise: signed in the familiar hand, delivered on schedule, and the names on them chosen with care.',
         ],
       },
@@ -105,8 +105,8 @@ export const FULL_CONTENT = Object.freeze({
     'compromised-revealed': {
       scandal: {
         'exposed-public': [
-          "The scandal has reached the seat itself, and it is public: the ruler sold the reckoning, pardons priced and prosecutions bought, and the town has learned that even its outrage was somebody's revenue.",
-          'It is out, and there is no smaller word for it: the ruler ran the corruption scandal as a market from the seat sworn to end it. The town watched the trials and did not know it was watching an auction.',
+          'It is now known that the ruler sold pardons and bought prosecutions while the scandal was being judged, and the people who demanded the trials learn that the ruler profited from every one.',
+          'It is out that the ruler, sworn to end the corruption, sold its verdicts instead. Everyone who watched the trials now knows the outcomes were bought.',
         ],
       },
     },
@@ -115,8 +115,8 @@ export const FULL_CONTENT = Object.freeze({
     'compromised-covert': {
       captured: {
         attributed: [
-          'The crews call the boss the power in this town, and the boss lets them; the truth sits in a ledger audited quarterly from elsewhere. The streets belong to the syndicate, and their king is a clerk.',
-          "Every oath in the boss's outfit runs upward to a chair the crews have never seen; the boss holds the town like a steward holds an estate, and the real owners have never once visited.",
+          "The crews think the boss runs this town, and the boss lets them think it. In truth the boss's books are checked every quarter by people from elsewhere.",
+          "Every oath in the boss's outfit runs up to someone the crews have never seen. The boss runs the town like a steward runs an estate, for owners who have never visited.",
         ],
       },
     },
@@ -125,7 +125,7 @@ export const FULL_CONTENT = Object.freeze({
     'compromised-covert': {
       'trade-strangled': {
         attributed: [
-          "The embargo ruined every honest house in town, and the guildmaster's alone stands unbowed; the bonded crates roll out on schedule, the customs stamps are perfect, and perfection is precisely the tell.",
+          "The embargo ruined every honest house in town except the guildmaster's. The crates roll out on schedule, the customs stamps are perfect, and that is what gives it away.",
           'Ask the ruined merchants what they notice about the guildmaster: the warehouses stay full, the caravans stay moving, and the embargo that beggared everyone else seems to make way. No one has said the word smuggler aloud. Yet.',
         ],
       },
@@ -135,8 +135,8 @@ export const FULL_CONTENT = Object.freeze({
     'compromised-covert': {
       depleted: {
         attributed: [
-          'The medicine chest is nearly empty, and the healer decides who gets what remains; the connected recover, the poor drink colored water with a steady hand and a kind word, and the graves keep the accounts.',
-          "The sickroom's two shelves look identical from the door. One holds physic, one holds hope dissolved in water, and the healer's choice between them tracks the patient's purse with terrible precision.",
+          'The medicine chest is nearly empty, and the healer decides who gets what is left. The well-connected recover, the poor get colored water and a kind word, and some of them die.',
+          "From the door the sickroom's two shelves look the same. One holds medicine and one holds colored water, and which a patient gets depends on the size of their purse.",
         ],
       },
     },
@@ -145,8 +145,8 @@ export const FULL_CONTENT = Object.freeze({
     'compromised-revealed': {
       occupation: {
         'exposed-public': [
-          "It is public, and the movement is breaking on it: the agitator sold every serious plan to the occupier before it ripened. The resistance's failures were not misfortune, they were merchandise.",
-          'The one resistance the occupation tolerated was tolerated for a reason, and the reason is now public: its leader reported upward. The survivors of the failed nights are learning they were sold by the voice that rallied them.',
+          'It is out that the agitator sold every serious plan to the occupier before it could happen, and the movement is breaking apart over it.',
+          'It is now known why the occupier let this one resistance survive: the agitator who led it reported to them. The survivors of the failed nights now know who sold them.',
         ],
       },
     },

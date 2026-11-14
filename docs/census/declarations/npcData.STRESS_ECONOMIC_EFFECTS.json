@@ -28,7 +28,7 @@
     },
     "lines": 306,
     "declaring": 30,
-    "note": "Tie prose; {A}/{B} are the tie parties (guaranteed, not atoms); the parties' categories (economy/criminal/military/religious/magic/government) are the archetype's tie rule, so a line about {B}'s operation, {A}'s pulpit/altar/congregation or {B}'s company presumes the party's role, not a record atom. keyDeclares from priorityHelpers.js stress flags: econ_crim_* only under merchantCriminalBlur (hasMerchantGuild && hasCriminalInst); rel_mil_crusader only under crusaderSynthesis (hasGarrison && hasChurch; hasChurch also matches monastery/priest, so temple is NOT key-guaranteed and the 'shrine' lines declare it); rel_crim_fraud under religiousFraud (hasChurch && hasCriminalInst); mag_crim_market under arcaneBlackMarket (hasMagicInst, which includes alchemist, && hasCriminalInst). mil_crim_corruption is reachable without stateCrime, so garrison is not key-guaranteed there. FORCE WORDS substituted per place by forceWordsOf (rendered as default garrison words, treated as substituted, not atoms): mil_crim_corruption.tension#7, econ_mil_contract.desc#5, rel_mil_crusader.desc#1/#3/#4, tension#3/#6, gov_mil_friction.desc#3, tension#3/#7. LITERAL force words that are NOT substituted and are declared: 'The watch reports' (mil_crim_corruption.desc#5), 'under the watch's command' (econ_mil_contract.tension#6), 'the watch ... the barracks' (gov_mil_friction.desc#5). 'ruler: council' is used for lines presuming a governing council exists here (before the council, council session/bloc/committee, a councillor's son, {A}'s council); a presence atom 'council' would be more exact (a council may sit under another ruler kind) -- reported. INEXPRESSIBLE (colour:false, empty arrays): customs house/customs officer (econ_crim_blur.desc#3, tension#4); magistrate/court/a case judged (econ_crim_exploitation.tension#6, mil_crim_suppression.tension#3, bitter_history.desc#3, tension#3, rel_mil_crusader.tension#6 church trial/court-martial); 'the capital' = an overlord realm (gov_mil_friction.tension#2, #5); an expected riot, unrest-like but not a crisis kind (gov_mil_friction.tension#6); a hired mercenary company (econ_mil_contract.desc#0 and the archetype generally: no mercenary atom). Season presumptions (no atom): 'two winters' (mil_crim_suppression.desc#7), midsummer (gov_econ_dependence.tension#1, peer_rivalry.tension#4), winter grain stores (gov_econ_dependence.tension#7). LABELS 'Mentor and Successor', 'Professional Rivalry', 'Jurisdictional Tension' presume a relation between the two parties (shared trade/office; two offices, civil vs military) -- handled by a tie rule, not a record atom."
+    "note": "Tie prose; {A}/{B} are the tie parties (guaranteed, not atoms); the parties' categories (economy/criminal/military/religious/magic/government) are the archetype's tie rule, so a line about {B}'s operation, {A}'s pulpit/altar/congregation or {B}'s company presumes the party's role, not a record atom. keyDeclares from priorityHelpers.js stress flags: econ_crim_* only under merchantCriminalBlur (hasMerchantGuild && hasCriminalInst); rel_mil_crusader only under crusaderSynthesis (hasGarrison && hasChurch; hasChurch also matches monastery/priest, so temple is NOT key-guaranteed and the 'shrine' lines declare it); rel_crim_fraud under religiousFraud (hasChurch && hasCriminalInst); mag_crim_market under arcaneBlackMarket (hasMagicInst, which includes alchemist, && hasCriminalInst). mil_crim_corruption is reachable without stateCrime, so garrison is not key-guaranteed there. FORCE WORDS substituted per place by forceWordsOf (rendered as default garrison words, treated as substituted, not atoms): mil_crim_corruption.tension#7, econ_mil_contract.desc#5, rel_mil_crusader.desc#1/#2/#3/#4, tension#3/#6, gov_mil_friction.desc#3, tension#3/#7. LITERAL force words that are NOT substituted and are declared: 'The watch reports' (mil_crim_corruption.desc#5), 'under the watch's command' (econ_mil_contract.tension#6), 'the watch ... the barracks' (gov_mil_friction.desc#5). 'ruler: council' is used for lines presuming a governing council exists here (before the council, council session/bloc/committee, a councillor's son, {A}'s council); a presence atom 'council' would be more exact (a council may sit under another ruler kind) -- reported. INEXPRESSIBLE (colour:false, empty arrays): customs house/customs officer (econ_crim_blur.desc#3, tension#4); magistrate/court/a case judged (econ_crim_exploitation.tension#6, mil_crim_suppression.tension#3, bitter_history.desc#3, tension#3, rel_mil_crusader.tension#6 church trial/court-martial); 'the capital' = an overlord realm (gov_mil_friction.tension#2, #5); an expected riot, unrest-like but not a crisis kind (gov_mil_friction.tension#6); a hired mercenary company (econ_mil_contract.desc#0 and the archetype generally: no mercenary atom). Season presumptions (no atom): 'two winters' (mil_crim_suppression.desc#7), midsummer (gov_econ_dependence.tension#1, peer_rivalry.tension#4), winter grain stores (gov_econ_dependence.tension#7). LABELS 'Mentor and Successor', 'Professional Rivalry', 'Jurisdictional Tension' presume a relation between the two parties (shared trade/office; two offices, civil vs military) -- handled by a tie rule, not a record atom."
   },
   "rows": [
     {
@@ -41,7 +41,7 @@
     },
     {
       "id": "econ_crim_blur.desc#0",
-      "text": "{A} and {B} maintain a relationship that exists in legal grey territory. {A} provides legitimate cover, {B} ensures market access that official channels wouldn't permit.",
+      "text": "{A} lends {B}'s business an honest name, and {B} gets {A}'s goods into markets the law keeps closed.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -49,7 +49,7 @@
     },
     {
       "id": "econ_crim_blur.desc#1",
-      "text": "The books of {A} are clean because {B} keeps certain entries off them; the arrangement benefits both parties and would survive scrutiny by neither.",
+      "text": "{A}'s account books look clean because {B} keeps certain sales out of them. Both of them grow richer for it.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -57,7 +57,7 @@
     },
     {
       "id": "econ_crim_blur.desc#2",
-      "text": "What {A} sells is respectability, and {B} is a steady customer. Goods move through channels no inspector has thought to draw on a map.",
+      "text": "{B} pays {A} for a respectable name, and {B}'s goods travel under it, past inspectors who never look inside.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -107,7 +107,7 @@
     },
     {
       "id": "econ_crim_blur.tension#0",
-      "text": "If either is investigated, the other is implicated. Both know this. Neither mentions it.",
+      "text": "If {A} is investigated, {B} is implicated, and the other way round. Both know it, and neither mentions it.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -115,7 +115,7 @@
     },
     {
       "id": "econ_crim_blur.tension#1",
-      "text": "A clerk has begun cross-referencing the ledgers. Neither party has decided what to do about it.",
+      "text": "A clerk has begun checking {A}'s ledgers against each other. Neither {A} nor {B} has decided what to do about it.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -195,7 +195,7 @@
     },
     {
       "id": "econ_crim_exploitation.desc#2",
-      "text": "The \"security fee\" {B} collects from {A} buys exactly one thing: the absence of {B}. It is paid punctually.",
+      "text": "{B} collects a \"security fee\" from {A}, and what it buys is that {B}'s people stay away. {A} pays on the day it falls due.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -331,7 +331,7 @@
     },
     {
       "id": "mil_crim_corruption.desc#2",
-      "text": "{A}'s clearance record looks respectable because {B} decides which crimes get cleared. The price of the arrangement is itemised and paid on time.",
+      "text": "{A}'s arrest record looks good because {B} chooses which crimes get solved, and {B}'s silver pays for the favour.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -381,7 +381,7 @@
     },
     {
       "id": "mil_crim_corruption.tension#0",
-      "text": "A new superior has started asking uncomfortable questions about clearance rates. One of them will have to act before the other does.",
+      "text": "A new superior has started asking {A} awkward questions about how few arrests are made. {A} or {B} will have to act before the other does.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -397,7 +397,7 @@
     },
     {
       "id": "mil_crim_corruption.tension#2",
-      "text": "The payments have started arriving late. In this trade, late is a message.",
+      "text": "{B}'s payments to {A} have started arriving late. In this trade, late is a message.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -597,7 +597,7 @@
     },
     {
       "id": "econ_mil_contract.desc#0",
-      "text": "{B}'s company is retained by {A}'s interests on an exclusive basis. The arrangement works well enough that official channels have stopped asking questions.",
+      "text": "{A} pays {B}'s fighters to guard {A}'s goods and nobody else's. It has gone on so long that no one in authority asks about it any more.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -677,7 +677,7 @@
     },
     {
       "id": "econ_mil_contract.tension#2",
-      "text": "The last shipment was short, and each side privately blames the other. The next one will settle the question.",
+      "text": "The last shipment was short, and {A} and {B} each privately blame the other. The next one will settle the question.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -738,7 +738,7 @@
     },
     {
       "id": "rel_mil_crusader.desc#0",
-      "text": "{A} and {B} operate as a unified authority: temporal and spiritual power reinforcing each other. Dissent against one is dissent against both.",
+      "text": "{A} preaches and {B} enforces, so whoever crosses one of them answers to both.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -746,7 +746,7 @@
     },
     {
       "id": "rel_mil_crusader.desc#1",
-      "text": "Between {A}'s pulpit and {B}'s garrison, the settlement is governed twice over; the sermons and the patrol routes have a way of agreeing.",
+      "text": "What {A} preaches from the pulpit on the holy day, {B}'s garrison enforces in the street that week.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -754,7 +754,7 @@
     },
     {
       "id": "rel_mil_crusader.desc#2",
-      "text": "{A} blesses what {B} enforces, and {B} enforces what {A} blesses. Where one authority ends and the other begins is a question neither permits.",
+      "text": "{A} blesses whatever {B}'s garrison enforces, and nobody dares ask which of the two has the final word.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -804,7 +804,7 @@
     },
     {
       "id": "rel_mil_crusader.tension#0",
-      "text": "They disagree on a fundamental question of method that neither will put into writing.",
+      "text": "{A} and {B} disagree on a question of method that neither will put into writing.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -812,7 +812,7 @@
     },
     {
       "id": "rel_mil_crusader.tension#1",
-      "text": "A penitent has brought a case that pits doctrine against order. It has not been resolved. It will not stay private.",
+      "text": "A penitent has brought {A} a case that pits doctrine against {B}'s order. It has not been resolved, and it will not stay private.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -878,7 +878,7 @@
     },
     {
       "id": "rel_crim_fraud.desc#0",
-      "text": "{A}'s religious position provides {B}'s operation with legitimacy, meeting spaces, and an excuse for financial flows that would otherwise attract scrutiny.",
+      "text": "{A}'s good name gives {B}'s crew a respectable face, a room to meet in, and a reason for money nobody could otherwise explain.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -886,7 +886,7 @@
     },
     {
       "id": "rel_crim_fraud.desc#1",
-      "text": "{B}'s money passes through {A}'s offertory and comes out consecrated; the meeting rooms are sanctified, the accounts are not examined.",
+      "text": "{B}'s money goes into {A}'s alms box and comes out clean, and nobody checks {A}'s accounts.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -894,7 +894,7 @@
     },
     {
       "id": "rel_crim_fraud.desc#2",
-      "text": "{A} provides the sanctity, {B} provides the income, and the congregation provides the cover (unknowingly), which is what makes it work.",
+      "text": "{A} lends the holiness and {B} brings the money, and the faithful, knowing nothing, provide the cover.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1022,7 +1022,7 @@
     },
     {
       "id": "mag_crim_market.desc#0",
-      "text": "{A} provides {B}'s network with components, identification services, and the occasional forged document that only a skilled practitioner could produce.",
+      "text": "{A} supplies {B}'s people with reagents, false papers and the odd forgery only a trained hand could make.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1164,7 +1164,7 @@
     },
     {
       "id": "gov_econ_dependence.desc#0",
-      "text": "The settlement's civic functions run on credit extended by {B}. {A} cannot take any action that seriously threatens {B}'s interests, and {B} does not let this be forgotten.",
+      "text": "{A} pays for the common works with money borrowed from {B}. {A} cannot cross {B}, and {B} makes sure {A} remembers it.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1172,7 +1172,7 @@
     },
     {
       "id": "gov_econ_dependence.desc#1",
-      "text": "{B} holds the settlement's debts and therefore, in every way that matters, its agenda; {A} governs within the margin {B} allows.",
+      "text": "{B} holds the debts {A} has run up, and so {B} decides what {A} can afford to do.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1213,7 +1213,9 @@
     {
       "id": "gov_econ_dependence.desc#6",
       "text": "{B} lends and {A} spends. The council's decisions are made in {A}'s chamber and approved in {B}'s counting-house.",
-      "needs": [],
+      "needs": [
+        "institution: bank"
+      ],
       "excludes": [
         "ruler: lord",
         "ruler: occupier"
@@ -1247,7 +1249,7 @@
     },
     {
       "id": "gov_econ_dependence.tension#2",
-      "text": "A faction on the council wants the debt repudiated outright. {A} has stopped disagreeing in public.",
+      "text": "One camp on the council wants the debt repudiated outright. {A} has stopped disagreeing in public.",
       "needs": [],
       "excludes": [
         "ruler: lord",
@@ -1314,7 +1316,7 @@
     },
     {
       "id": "gov_mil_friction.desc#0",
-      "text": "{A} and {B} disagree fundamentally about where civil authority ends and military authority begins. The argument has been running for years and occasionally generates paperwork.",
+      "text": "{A} and {B} have argued for years over where {A}'s authority ends and {B}'s begins, and neither has given ground.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1322,7 +1324,7 @@
     },
     {
       "id": "gov_mil_friction.desc#1",
-      "text": "{A} issues orders {B} regards as suggestions, and {B} takes actions {A} regards as insubordination; the settlement runs in the gap between.",
+      "text": "{A} gives orders that {B} treats as advice, and {B} acts in ways {A} calls disobedience.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1330,7 +1332,7 @@
     },
     {
       "id": "gov_mil_friction.desc#2",
-      "text": "The line between {A}'s authority and {B}'s has been redrawn four times and honoured never. Each keeps the map that favours them.",
+      "text": "The line between {A}'s authority and {B}'s has been redrawn four times, and each of them still follows whichever version suits them.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1384,7 +1386,7 @@
     },
     {
       "id": "gov_mil_friction.tension#0",
-      "text": "An incident is coming that will force the issue. Both are positioning for it.",
+      "text": "An incident is coming that will force the issue between {A} and {B}, and both are positioning for it.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1392,7 +1394,7 @@
     },
     {
       "id": "gov_mil_friction.tension#1",
-      "text": "A prisoner is currently held by both jurisdictions at once. Neither will release the paperwork first.",
+      "text": "A prisoner is held under {A}'s authority and {B}'s at once, and neither will release the paperwork first.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1466,7 +1468,7 @@
     },
     {
       "id": "peer_rivalry.desc#0",
-      "text": "{A} and {B} compete for the same resource, position, or reputation. The competition is vigorous but bounded. Neither has crossed the line into genuine enmity. Yet.",
+      "text": "{A} and {B} want the same thing and compete hard for it, but neither has let it turn into hatred.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1474,7 +1476,7 @@
     },
     {
       "id": "peer_rivalry.desc#1",
-      "text": "{A} and {B} want the same thing and cannot both have it. The contest is conducted with scrupulous courtesy and total commitment.",
+      "text": "Only one of {A} and {B} can come out ahead, and both know it. They stay polite and give no ground.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1482,7 +1484,7 @@
     },
     {
       "id": "peer_rivalry.desc#2",
-      "text": "Every advance {A} makes is answered by {B} within the season; the rivalry has become its own institution, with rules neither wrote and both obey.",
+      "text": "Every gain {A} makes, {B} answers within the season, and people here have learned to expect it.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1530,7 +1532,7 @@
     },
     {
       "id": "peer_rivalry.tension#0",
-      "text": "A decision coming in the next season will advantage one significantly. The other knows this.",
+      "text": "A decision coming next season will favour {A} or {B} heavily, and both of them know it.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1538,7 +1540,7 @@
     },
     {
       "id": "peer_rivalry.tension#1",
-      "text": "A mutual patron has let it be known there is room for only one of them at the next table.",
+      "text": "A patron they share has let it be known there is room for only {A} or {B} at the next table.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1546,7 +1548,7 @@
     },
     {
       "id": "peer_rivalry.tension#2",
-      "text": "One of them has recently broken an unwritten rule of the contest. The other is deciding what that permits.",
+      "text": "{A} has recently broken an unwritten rule of the contest. {B} is deciding what that permits.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1605,7 +1607,7 @@
     },
     {
       "id": "mentor_legacy.desc#0",
-      "text": "{A} shaped {B}'s career in ways that {B} has not fully acknowledged. The debt is real; the gratitude is complicated.",
+      "text": "{A} made {B}'s career, and {B} rarely says so.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1613,7 +1615,7 @@
     },
     {
       "id": "mentor_legacy.desc#1",
-      "text": "{B} stands where {A} put them, by a ladder {A} built and {B} has since pulled up. Both remember it differently.",
+      "text": "{B} owes their place to {A} and has kept others from climbing the same way. The two of them remember it differently.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1621,7 +1623,7 @@
     },
     {
       "id": "mentor_legacy.desc#2",
-      "text": "What {B} knows, {A} taught (including, inconveniently, how to outmanoeuvre a teacher).",
+      "text": "{A} taught {B} everything, including how to get the better of {A}.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1749,7 +1751,7 @@
     },
     {
       "id": "mutual_leverage.desc#1",
-      "text": "What {A} knows would ruin {B}; what {B} holds would finish {A}. On this foundation they have built an excellent working relationship.",
+      "text": "{A} knows enough to ruin {B}, and {B} holds enough to finish {A}, so the two of them work together very carefully.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1757,7 +1759,7 @@
     },
     {
       "id": "mutual_leverage.desc#2",
-      "text": "{A} and {B} deal with each other like men carrying lit lanterns in a powder store, carefully, and with great mutual politeness.",
+      "text": "{A} and {B} deal with each other slowly and politely, each knowing one slip could ruin them both.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1805,7 +1807,7 @@
     },
     {
       "id": "mutual_leverage.tension#0",
-      "text": "The balance of leverage has recently shifted. One party has noticed; the other hasn't yet.",
+      "text": "The balance between {A} and {B} has recently shifted. {B} has noticed; {A} has not, yet.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1813,7 +1815,7 @@
     },
     {
       "id": "mutual_leverage.tension#1",
-      "text": "A document each believed only they possessed has surfaced in a third set of hands.",
+      "text": "A document {A} and {B} each believed only they possessed has turned up in someone else's hands.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1877,7 +1879,7 @@
     },
     {
       "id": "wary_alliance.desc#0",
-      "text": "{A} and {B} work together because the alternative (working against each other) is worse for both. The alliance holds as long as the calculation holds.",
+      "text": "{A} and {B} work together because fighting each other would cost them both more, and both of them know it.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1885,7 +1887,7 @@
     },
     {
       "id": "wary_alliance.desc#1",
-      "text": "{A} and {B} are allies by arithmetic: each has counted the cost of the other as an enemy and found it too high. The friendship is warm, public, and entirely conditional.",
+      "text": "{A} and {B} are allies because each has reckoned what the other would cost as an enemy. The friendship is warm and public, and it lasts only while that reckoning holds.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1893,7 +1895,7 @@
     },
     {
       "id": "wary_alliance.desc#2",
-      "text": "The alliance between {A} and {B} was born of a shared threat and has outlived it; both are quietly recalculating what it is now for.",
+      "text": "{A} and {B} joined against a threat that has since passed, and each is now asking what the alliance is still for.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1944,7 +1946,7 @@
     },
     {
       "id": "wary_alliance.tension#0",
-      "text": "A third party is actively working to change that calculation.",
+      "text": "Someone else is working to pull {A} and {B} apart.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1952,7 +1954,7 @@
     },
     {
       "id": "wary_alliance.tension#1",
-      "text": "The threat that made the alliance necessary is gone. Neither has said so aloud.",
+      "text": "The threat that brought {A} and {B} together is gone. Neither has said so aloud.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2016,7 +2018,7 @@
     },
     {
       "id": "genuine_respect.desc#0",
-      "text": "{A} and {B} have earned each other's regard through demonstrated competence. They don't agree on everything but they trust each other's judgment within their respective domains.",
+      "text": "{A} and {B} have each watched the other do good work. They argue, but each trusts the other's judgment in their own field.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2083,7 +2085,7 @@
     },
     {
       "id": "genuine_respect.tension#0",
-      "text": "They are about to be on opposite sides of a significant decision.",
+      "text": "{A} and {B} are about to be on opposite sides of an important decision.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2091,7 +2093,7 @@
     },
     {
       "id": "genuine_respect.tension#1",
-      "text": "One of them is being pressured to act against the other, and has not yet mentioned it.",
+      "text": "{A} is being pressed to act against {B}, and has not mentioned it.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2099,7 +2101,7 @@
     },
     {
       "id": "genuine_respect.tension#2",
-      "text": "The respect is real and the interests are diverging. Both can read a map.",
+      "text": "{A} and {B} still respect each other, but what each of them wants is pulling apart, and both can see it.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2158,7 +2160,7 @@
     },
     {
       "id": "old_debt.desc#0",
-      "text": "{A} owes {B} something significant: a favour, a secret kept, a crisis managed. The debt has never been formally acknowledged. It doesn't need to be.",
+      "text": "{A} owes {B} a great deal, and neither has ever said so aloud.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2166,7 +2168,7 @@
     },
     {
       "id": "old_debt.desc#1",
-      "text": "Years ago {B} did for {A} the kind of favour that cannot be repaid, only serviced. {A} has been servicing it ever since.",
+      "text": "Years ago {B} did {A} a favour too large to repay, and {A} has been paying it back in small ways ever since.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2174,7 +2176,7 @@
     },
     {
       "id": "old_debt.desc#2",
-      "text": "Between {A} and {B} stands an old kindness with the structure of a mortgage. Neither names it; both know the balance to the penny.",
+      "text": "{A} owes {B} for an old kindness. Neither mentions it, and both know exactly how much is still owed.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2238,7 +2240,7 @@
     },
     {
       "id": "old_debt.tension#2",
-      "text": "A third party has learned what the original favour was. The debt just changed hands.",
+      "text": "Someone else has learned what favour {A} owes {B}, and now has a hold on {A} too.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2294,7 +2296,7 @@
     },
     {
       "id": "family_complication.desc#0",
-      "text": "{A} and {B} are connected by blood or marriage in a way that neither finds professionally convenient. The connection is known; its implications are not discussed.",
+      "text": "{A} and {B} are family, which suits neither of their careers. Everyone knows it, and nobody mentions it.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2310,7 +2312,7 @@
     },
     {
       "id": "family_complication.desc#2",
-      "text": "{A} and {B} share a family and avoid sharing anything else; every professional dealing between them is conducted as though the relation were a rumour.",
+      "text": "{A} and {B} are family, but in business they deal with each other as if they were not related.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2358,7 +2360,7 @@
     },
     {
       "id": "family_complication.tension#0",
-      "text": "An inheritance, title, or secret is about to make the connection impossible to ignore.",
+      "text": "An inheritance, a title or a secret is about to make the tie between {A} and {B} impossible to ignore.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2366,7 +2368,7 @@
     },
     {
       "id": "family_complication.tension#1",
-      "text": "A younger relative has begun trading on the connection both of them refuse to use.",
+      "text": "A younger relative has begun trading on the connection {A} and {B} both refuse to use.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2374,7 +2376,7 @@
     },
     {
       "id": "family_complication.tension#2",
-      "text": "The family has taken a side in a dispute between them. It is the wrong side, in both their opinions.",
+      "text": "The family has taken a side in a quarrel between {A} and {B}, and both of them think it is the wrong side.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2438,7 +2440,7 @@
     },
     {
       "id": "bitter_history.desc#1",
-      "text": "{A} and {B} were something to each other once (partners, friends, perhaps more), and the wreck of it is the one subject on which both are permanently silent.",
+      "text": "{A} and {B} were close once, and whatever broke between them is the one subject neither will discuss.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2494,7 +2496,7 @@
     },
     {
       "id": "bitter_history.tension#0",
-      "text": "The circumstances that caused the original rupture are repeating. Both of them know it.",
+      "text": "What first broke {A} and {B} apart is happening again, and both of them know it.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2502,7 +2504,7 @@
     },
     {
       "id": "bitter_history.tension#1",
-      "text": "An apology is owed in one direction and expected in the other, and they disagree about which.",
+      "text": "{A} and {B} each think the other owes the apology.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2510,7 +2512,7 @@
     },
     {
       "id": "bitter_history.tension#2",
-      "text": "A newcomer keeps trying to reconcile them, and is about to learn why nobody else does.",
+      "text": "A newcomer keeps trying to reconcile {A} and {B}, and is about to learn why nobody else does.",
       "needs": [],
       "excludes": [],
       "crisis": [],

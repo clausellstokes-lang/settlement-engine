@@ -400,6 +400,7 @@ export function applyRealmVerbOrder({ state, snapshot, settlementUpdates, outcom
       const r = declareCasus(state, {
         fromId: args.fromId, toId: args.toId, type: String(args.type || ''),
         severity01: num(args.severity01, 0.6), receipt: String(args.receipt || ''), tick: nowTick,
+        toName: nameOf(shim, args.toId) === String(args.toId) ? '' : nameOf(shim, args.toId),
       });
       if (r.ok !== true) return refused(refuse(r.code, r.detail));
       return applied(r.worldState, [orderNews(verb,

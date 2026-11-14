@@ -4,6 +4,7 @@
  * Mirrors PowerTab.jsx in full:
  *   - Public legitimacy banner with breakdown chips
  *   - Stability + governing authority (with the governing modifier, STOP-1) + governance fractured warning
+ *   - Governance: the screen's one governance paragraph (OWNER-WORDS-DOSSIER item 3)
  *   - Stacked power-distribution bar (all factions in one viz)
  *   - Per-faction full card: power meter, description, category, crisis note,
  *     modifiers with deltas, sub-faction members
@@ -26,8 +27,10 @@ import { cap, label, humanize } from '../lib/format.js';
 import { anchorTarget } from '../primitives/EntityRef.jsx';
 import { StateProse } from '../primitives/StateProse.jsx';
 import { governingFactionOf } from '../../domain/rulingPower.js';
+import { WhoRunsThisTown } from './WhoRunsThisTown.jsx';
+import { governanceAccountOf } from '../../domain/display/governanceAccount.js';
 
-export function PowerStructure({ settlement, narrativeMode, vm, stateProse }) {
+export function PowerStructure({ settlement, narrativeMode, vm, stateProse, primaryStress = null }) {
   const p = vm.power;
   const index = vm.entityIndex; // Phase-D id»card resolver
   const governing = p.factions.find(f => f.isGoverning);
@@ -58,7 +61,7 @@ export function PowerStructure({ settlement, narrativeMode, vm, stateProse }) {
           scoreLabel={cap(p.legitimacy.label) || ''}
           tone={legitTone(p.legitimacy.score)}
           breakdown={p.legitimacyBreakdown}
-          footer={p.governanceFractured ? 'Governance fractured. No faction holds clear authority' : null}
+          footer={p.governanceFractured ? 'Governance fractured.' : null}
         />
       )}
 
@@ -103,20 +106,21 @@ export function PowerStructure({ settlement, narrativeMode, vm, stateProse }) {
         )}
       </View>
 
-      {/* ── Recent conflict ───────────────────────────────────────── */}
+      {/* ── Governance, in one paragraph (OWNER-WORDS-DOSSIER item 3, 2026-11-09) ──────────
+          The screen's governance paragraph (domain/display/governanceAccount.js), printed where the
+          standalone vignette printed: the seat, the standing and its causes, the estranged powers named,
+          the consequence, and the vignette itself only where no estranged power is named. The
+          DS-POW-1/2 readings above glance at their registry rows, as on the screen. Kicker GOVERNANCE:
+          "WHO RUNS IT" vetoed by the owner (2026-11-09 03:5x, "No."; SW-9), not "RECENT EVENT". */}
       {(() => {
-        const rc = p.recentConflict;
-        if (!rc) return null;
-        const text = typeof rc === 'string'
-          ? rc
-          : (rc.description || rc.summary || rc.text || rc.label || '');
-        if (!text || !String(text).trim()) return null;
+        const text = governanceAccountOf(settlement, { primaryStress })?.text || '';
+        if (!text.trim()) return null;
         return (
-          <Callout tone="warn" kicker="RECENT EVENT">
+          <Callout tone="warn" kicker="GOVERNANCE">
             <EditableProse
-              name="power.recentConflict"
+              name="power.governance"
               defaultValue={text}
-              lines={2}
+              lines={4}
               style={{ ...type.body, fontSize: pt['9.5'] }}
             />
           </Callout>
@@ -143,7 +147,7 @@ export function PowerStructure({ settlement, narrativeMode, vm, stateProse }) {
 
       {/* ── Faction cards ─────────────────────────────────────────── */}
       <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3, marginTop: space.sm }}>
-        FACTIONS
+        POWERS
       </Text>
       {p.factions.map((f, i) => (
         <FactionCard key={`f-${i}`} faction={f} index={i} entityIndex={index} />
@@ -155,6 +159,9 @@ export function PowerStructure({ settlement, narrativeMode, vm, stateProse }) {
 
       {/* ── Rule & Succession (self-gating: regime lineage / conquest) ──── */}
       <RuleAndSuccession lineage={p.lineage} occupied={vm?.liveWorld?.occupied || null} />
+
+      {/* ── Who really runs this town (the DM view, car 3; self-gating on vm.dm) ── */}
+      <WhoRunsThisTown dm={vm?.dm} />
     </PageChrome>
   );
 }
@@ -233,7 +240,9 @@ function FactionCard({ faction, index, entityIndex }) {
         value={f.power}
         max={100}
         label={f.powerLabel || 'Influence'}
-        sublabel={f.rawPower != null ? `raw ${f.rawPower}` : null}
+        // SW-7 POWER-SIDE (STYLE-2 B4/B7, SURFACES P49): "raw 76" was a machinery figure on the reader's page; the
+        // bar's own band word stays, and no second number is printed beside it.
+        sublabel={null}
         tone={f.isGoverning ? 'gold' : 'muted'}
         height={3}
       />
@@ -273,7 +282,7 @@ function FactionCard({ faction, index, entityIndex }) {
       )}
       {f.subFactions?.length > 0 && (
         <View style={{ marginTop: 3 }}>
-          <Text style={{ ...type.label, fontSize: pt['7'], color: palette.muted }}>SUB-FACTIONS / GROUPS</Text>
+          <Text style={{ ...type.label, fontSize: pt['7'], color: palette.muted }}>GROUPS WITHIN</Text>
           {f.subFactions.map((sf, si) => (
             <Text key={`sf-${index}-${si}`} style={{ ...type.caption, fontSize: pt['8'], color: palette.second }}>
               · {label(sf)}

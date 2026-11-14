@@ -15,6 +15,7 @@ import {
 import { propagateImpairment } from '../../src/domain/entities/propagate.js';
 import { inferSuccessors } from '../../src/domain/entities/successors.js';
 import { mutateSettlement } from '../../src/domain/events/mutate.js';
+import { migrateV1toV2 } from '../../src/domain/settlementMigrations.js';
 import { applyFactionRenameToSettlement } from '../../src/domain/factionRename.js';
 import { readClergyPlane } from '../../src/domain/worldPulse/clergyTraitPlane.js';
 import { ladderFactionKey, npcInFaction } from '../../src/domain/worldPulse/npcLadderState.js';
@@ -58,7 +59,11 @@ describe('FactionRef production', () => {
 describe('FactionRef consumers', () => {
   test('an id-bearing structural link propagates to the authored faction record', () => {
     const faction = religiousSeat({ id: 'faction.temple.stable', impairments: [] });
-    const settlement = {
+    // GREEN-TIP (2026-11-10, re-keyed with the propagation re-point): propagation's NPC hop reads the card's
+    // MEMBERSHIPS (entities/propagate.js; the retired `linkedFactionIds` is on no current card). The id-bearing v1
+    // link is handed through the product's own door, the save migration, which resolves the id to its power and
+    // writes the membership — so the id still joins the authored record, now at the door that carries it.
+    const { settlement } = migrateV1toV2({
       institutions: [],
       powerStructure: { factions: [faction] },
       npcs: [{
@@ -67,7 +72,8 @@ describe('FactionRef consumers', () => {
         importance: 'pillar',
         linkedFactionIds: ['faction.temple.stable'],
       }],
-    };
+    });
+    expect(settlement.npcs[0].memberships).toEqual([expect.objectContaining({ power: faction.faction })]);
 
     const next = propagateImpairment({
       settlement,
@@ -176,11 +182,15 @@ describe('FactionRef consumers', () => {
       { id: 'two', faction: 'Shared Name' },
     ], 'Shared Name')).toBeNull();
 
-    const settlement = {
+    // GREEN-TIP (2026-11-10, re-keyed with the propagation re-point): the handle 'Temple' is resolved id-first by the
+    // save migration (powerFor -> resolveFactionRef) onto the id owner's membership, and propagation and KILL_NPC
+    // join that membership — so the id owner, never the name owner, is the one wounded.
+    const { settlement } = migrateV1toV2({
       institutions: [],
       powerStructure: { factions },
       npcs: [{ id: 'npc.linked', importance: 'key', linkedFactionIds: ['Temple'] }],
-    };
+    });
+    expect(settlement.npcs[0].memberships).toEqual([expect.objectContaining({ power: 'Council of Bells' })]);
     const next = propagateImpairment({
       settlement,
       origin: {

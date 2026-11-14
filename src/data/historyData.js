@@ -9,7 +9,7 @@
 //      EVENT_TYPE_NAMES) consumed by historyGenerator.js.
 
 import { HISTORY_DESC_VARIANTS } from './historyDescVariants.js';
-import { pickVariant } from '../kernel/proseHash.js';
+import { pickVariant } from '../kernel/proseHash.js'; import { migrationDirectionOfConfig } from '../domain/migrationDirection.js';
 
 // Notable power-holder roles by domain (government, religious, crafts,
 // military, economy, criminal, magic, other). Each entry describes a role that
@@ -1144,14 +1144,14 @@ export const HISTORICAL_EVENTS_DATA = [
   },
   {
     type: 'economic_disparity',
-    description: 'Growing wealth gap between merchant class and common laborers creates resentment',
+    description: 'The merchants are getting richer and the labourers are not, and the labourers have noticed',
     factions: ['Wealthy merchants', 'Poor workers', 'Moderate reformers'],
     lastingEffects: [
       'Wage disputes settled by a standing arbitration council since founded',
       "The merchant quarter and the labourers' quarter remain walled apart",
     ],
     plotHooks: [
-      'A reformer has been found dead. Suicide or silenced?',
+      'A reformer has been found hanged in their own house, and their papers are missing',
       { text: "A hidden ledger documenting wage theft is circulating in the workers' quarter", needs: ['tier: >= town'] }, // CENSUS-3d unit 6
       'A merchant is funding both the reform movement and the suppression of it',
     ],
@@ -1160,7 +1160,7 @@ export const HISTORICAL_EVENTS_DATA = [
   {
     type: 'religious_tension',
     description: 'Different faiths or interpretations competed for influence and converts',
-    factions: ['Orthodox believers', 'Reformists', 'Secular faction'],
+    factions: ['Orthodox believers', 'Reformists', 'Secular camp'],
     lastingEffects: [
       "Two rival congregations still divide the settlement's faithful",
       'Public preaching restricted to licensed grounds after the unrest',
@@ -1168,13 +1168,13 @@ export const HISTORICAL_EVENTS_DATA = [
     plotHooks: [
       'A relic claimed by both sides has resurfaced in a private collection',
       'The reformist leader is being blackmailed into silence',
-      'Someone is staging miracles for one side. The question is who benefits',
+      'Someone is staging miracles for one side, and whoever is paying for them has not been named',
     ],
     severity: ['minor', 'major'],
   },
   {
     type: 'guild_conflict',
-    description: 'Rival guilds competed for market share and political influence',
+    description: 'Rival guilds fought over who may sell what, and over a say in how the place is run',
     factions: ['Established guilds', 'Upstart guilds', 'Non-guild workers'],
     lastingEffects: [
       'Guild membership rolls now audited by an outside adjudicator',
@@ -1197,7 +1197,7 @@ export const HISTORICAL_EVENTS_DATA = [
     ],
     plotHooks: [
       'The threat is being exaggerated by someone who profits from wartime contracts',
-      'A diplomatic channel exists that the war faction is suppressing',
+      'A diplomatic channel exists that the war party is suppressing',
       'The threat has an agent already inside the settlement',
     ],
     severity: ['major', 'catastrophic'],
@@ -1207,11 +1207,11 @@ export const HISTORICAL_EVENTS_DATA = [
     description: 'A critical resource became scarce, causing hoarding and price gouging',
     factions: ['Hoarders', 'Desperate poor', 'Price regulators'],
     lastingEffects: [
-      'Emergency granary reserves mandated by ordinance since the shortage',
+      'Emergency grain reserves mandated by ordinance since the shortage',
       'Price ceilings on the affected goods still enforced in lean seasons',
     ],
     plotHooks: [
-      { text: 'A warehouse full of the resource is being held off the market deliberately', needs: ['market'] }, // CENSUS-3d unit 6
+      { text: 'A warehouse full of the scarce goods is being kept off the market on purpose', needs: ['market'] }, // CENSUS-3d unit 6
       'The scarcity was engineered. Someone destroyed the competing supply route',
       'An alternative source exists but the information is being suppressed',
     ],
@@ -1249,10 +1249,10 @@ export const HISTORICAL_EVENTS_DATA = [
   },
   {
     type: 'generational_divide',
-    description: 'Old ways vs new ideas creates conflict between age groups',
+    description: 'The young want to change how things are done, and the old will not let them',
     factions: ['Traditionalists', 'Progressives', 'Pragmatic middle'],
     lastingEffects: [
-      'Council seats now formally split between the old and young factions',
+      'Council seats now formally split between the old guard and the young',
       'A youth assembly won a permanent advisory voice in the aftermath',
     ],
     plotHooks: [
@@ -1305,6 +1305,10 @@ export const HISTORICAL_EVENTS_DATA = [
       'Former resistance',
       'New generation wanting to move on',
     ],
+    // URBAN-FIX D-1: the tension's words when its own event sits on the timeline older than 80 years (historyGenerator.js :: tensionByMemory)
+    byMemory: { dated: { description: 'The occupation ended long ago, but the families who collaborated and the families who resisted still keep apart', factions: ['Collaborator families', 'Resistance families', 'Those who want it forgotten'] },
+      // URBAN-FIX D-1b: the words when the timeline holds no occupation at all: the template's own lasting effects, naming no past event
+      unanchored: { description: 'Collaborator and resistance families still keep to separate quarters, and old property seizures remain legally unresolved', factions: ['Collaborator families', 'Resistance families', 'Those who want it forgotten'] } },
     lastingEffects: [
       'Collaborator and resistance families still keep to separate quarters',
       'Wartime property seizures remain legally unresolved',
@@ -1332,7 +1336,7 @@ export const HISTORICAL_EVENTS_DATA = [
     plotHooks: [
       'One of the loudest voices warning about infiltration is themselves an agent',
       'An innocent person has been identified as a spy and is about to be executed',
-      "The agents' handler is someone in a position of trust, and the PCs have already met them",
+      "The agents' handler is someone the town trusts, and the players have already met them",
     ],
     severity: ['major'],
   },
@@ -1428,9 +1432,9 @@ export const HISTORICAL_EVENTS_DATA = [
   {
     type: 'great_fire',
     description: 'A fire that began in {location} consumed {building_type} across whole districts before it could be checked',
-    factions: ['Survivors seeking someone to blame', 'Rebuilders and profiteers', 'Those accused of setting it'],
+    factions: ['Survivors seeking someone to blame', 'Rebuilders and profiteers', 'Those accused of setting it'], byMemory: { dated: { factions: ['Families still seeking someone to blame', 'Rebuilders and profiteers', 'Those accused of setting it'] } }, // URBAN-FIX D-1 (historyGenerator.js :: tensionByMemory)
     plotHooks: [
-      'The fire spared exactly the properties one faction wanted cleared. Coincidence is doubted',
+      'The fire spared exactly the houses one power wanted cleared, and nobody believes it was chance',
       'A confession was extracted from a scapegoat; the real arsonist still lives in town',
       'Rebuilding uncovered something in the ashes that predates the settlement',
     ],
@@ -1442,7 +1446,7 @@ export const HISTORICAL_EVENTS_DATA = [
     factions: ['Quarantine hardliners', 'The bereaved and the blamed', 'Healers and charlatans alike'],
     plotHooks: [
       'A healer who profited enormously during the plague is being asked how they stayed untouched',
-      'A mass grave from the years holds a body that does not belong to any recorded victim',
+      'The plague pit holds a body that matches no one on the list of the dead',
       'The quarantine was used to settle old scores, and the survivors remember exactly who',
     ],
     severity: ['major', 'catastrophic'],
@@ -1454,7 +1458,7 @@ export const HISTORICAL_EVENTS_DATA = [
     plotHooks: [
       'The old property boundaries washed away, and the new map favours whoever drew it',
       { text: 'A structure meant to hold back the water had been quietly left to rot, and someone knew', needs: ['navigable'] }, // CENSUS-3d unit 6
-      { text: 'The flood exposed a foundation, a wreck, or a cache that had been submerged for lifetimes', needs: ['navigable'] }, // CENSUS-3d unit 6
+      { text: 'The flood uncovered an old foundation under the mud, and someone has been digging there at night', needs: ['navigable'] }, // CENSUS-3d unit 6
     ],
     severity: ['major', 'catastrophic'],
   },
@@ -1495,6 +1499,7 @@ export const HISTORICAL_EVENTS_DATA = [
     type: 'tyranny',
     description: 'A single figure seized power through {method} and ruled without check for a time, and the memory still shapes who is trusted with authority',
     factions: ['Old loyalists', 'Those who suffered under the regime', 'Beneficiaries who kept their gains'],
+    byMemory: { dated: { factions: ['Loyalist families', 'Families the regime wronged', "Families who kept the regime's gains"] } }, // URBAN-FIX D-1 (historyGenerator.js :: tensionByMemory)
     plotHooks: [
       "The tyrant's private records survived, and they implicate respectable families in the worst of it",
       'A fortune the regime confiscated was never returned, and the rightful heirs have surfaced',
@@ -1524,14 +1529,20 @@ export const HISTORICAL_EVENTS_DATA = [
     factions: ['The sitting authority', 'Those who deny its mandate', 'Pragmatists who want any stable answer'],
     plotHooks: [
       'A document that would settle the question of legitimacy exists, and both sides would rather it stayed lost',
-      'The authority is quietly manufacturing the consent it can no longer command',
+      'Those in power are paying people to speak for them at the gatherings, because no one will do it for free',
       'A third party is keeping the question open on purpose, because an unsettled claim is easier to bargain with',
     ],
     severity: ['major', 'catastrophic'],
   },
   {
     type: 'demographic_pressure',
-    description: 'The population changed faster than the settlement’s institutions could absorb (through arrivals, departures, or both) and the strain reshaped daily life',
+    description: 'Newcomers have come faster than they can be housed or given work, and the old families and the new now compete for the same jobs',
+    // #20 (STYLE-RULINGS §1(b), WAVE-RULINGS item 8; W4 PEOPLE second seat 2026-11-07): one description per
+    // direction, never the both-ways hedge; the live tension reads its own (`tensionDescription`).
+    descriptionByDirection: {
+      arrivals: 'Newcomers have come faster than they can be housed or given work, and the old families and the new now compete for the same jobs',
+      departures: 'Season after season families have moved away, and the houses, fields and posts they left are hard to fill',
+    },
     factions: ['Established residents', 'The newly arrived or departing', 'Those profiting from the churn'],
     // CENSUS-3e (R-AA): one template, two directions, is two lines. The migration direction is
     // homed (`facts/migration.js`), so each hook declares the direction it presumes, and a tension's
@@ -1545,7 +1556,7 @@ export const HISTORICAL_EVENTS_DATA = [
   },
   {
     type: 'trade_dispute',
-    description: 'A dispute over the terms of trade with a partner settlement soured into something that touched every merchant and every purse in the market',
+    description: 'A dispute over the terms of trade with a partner settlement soured into something that touched every merchant and every purse in town',
     factions: ['Merchants tied to the old partner', 'Those who want new partners', 'Authorities caught between them'],
     plotHooks: [
       'The dispute is being kept alive by someone who profits from the uncertainty on both sides',
@@ -1606,6 +1617,27 @@ export const EVENT_TYPE_NAMES = {
  * @param {string|number|null} [seed]
  * @returns {string}
  */
+/**
+ * #20 (W4 PEOPLE second seat, 2026-11-07): a live tension's description, in the migration direction the
+ * config's projection declares (`config.migrationDirection`, W0) where its template is keyed by direction;
+ * else the template's own. Departures only where the record says so; arrivals is the ruled default.
+ * @param {{description: string, descriptionByDirection?: {arrivals: string, departures: string}}} tension
+ * @param {unknown} config
+ * @returns {string}
+ */
+export const tensionDescription = (tension, config) => {
+  const byDirection = tension?.descriptionByDirection;
+  if (!byDirection) return tension.description;
+  return byDirection[migrationDirectionOfConfig(/** @type {any} */ (config)) === 'departures' ? 'departures' : 'arrivals'] || tension.description;
+};
+
+/**
+ * COHERENCE-PRESUME: a template's authored description variants (none → empty), for the current tension
+ * that must not repeat its own past event word for word (historyGenerator.js :: apartFromOwnEvent).
+ * @param {string} type @returns {ReadonlyArray<string>}
+ */
+export const historyDescVariantsOf = (type) => HISTORY_DESC_VARIANTS[type] || [];
+
 export const historyDescription = (eventTemplate, seed) => {
   const variants = HISTORY_DESC_VARIANTS[eventTemplate.type];
   return variants

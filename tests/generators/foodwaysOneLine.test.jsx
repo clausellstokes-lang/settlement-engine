@@ -29,6 +29,9 @@ import { buildViewModel } from '../../src/pdf/lib/viewModel.js';
 import { buildJournalPages } from '../../src/foundry/journalPages.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { recordBatteryFindings } from '../../src/generators/recordBatteryFindings.js';
+import { foodwaysLineOf, sourcesNamedIn } from '../../src/domain/foodways.js';
+import { goldenCorpus, keyOf } from '../helpers/goldenMasterCorpus.js';
 
 afterEach(cleanup);
 
@@ -47,7 +50,9 @@ function pdfText(node, out = []) {
   return out;
 }
 /** Journal markdown back to plain words: the shared escaper's backslashes and the bold marks. */
-const unmark = (md) => String(md).replace(/\\(.)/g, '$1').replace(/\*\*/g, '');
+// The journal escapes an apostrophe as an HTML entity, which Foundry renders as the apostrophe (COHERENCE-AGREE:
+// a livestock line, "the herds' milk", first reached this corpus when grazing became a source by its own name).
+const unmark = (md) => String(md).replace(/\\(.)/g, '$1').replace(/\*\*/g, '').replace(/&#39;/g, "'");
 const count = (text, line) => text.split(line).length - 1;
 
 describe('the foodways line: one writer on the record, the same line on every surface', () => {
@@ -85,5 +90,68 @@ describe('the foodways line: one writer on the record, the same line on every su
     expect(wrong).toEqual([]);
     // Measured 6 distinct lines over these 12 seeds (default configs share culture and terrain).
     expect(lines.size, 'the line is the place\'s own, not one sentence for all').toBeGreaterThanOrEqual(5);
+  });
+});
+
+/**
+ * URBAN-FIX C-1: THE FOODWAYS LINE HAS ONE HOME ON THE STORED RECORD (the chair's urban ruling C,
+ * 2026-11-09; URBAN-AUDIT §3). From town up no settlement in the 1,000 holds grain or livestock as a
+ * source of its own, so the culture's raw sentence (cultureProfiles.js :: materializeCulturalIdentity)
+ * named a staple the place lacks and the receipt's food-words check flagged the STORED line no page
+ * prints. Where the food record exists, `culturalIdentity.foodways` now stores the record's line
+ * (assembleSettlement.js); the receipt (recordBatteryFindings.js :: recordTextSurfaces) skips the
+ * superseded line BY PATH, so a record stored before the cure reads the same.
+ */
+describe('C-1 — the stored foodways line is the food record\'s line', () => {
+  /** Golden rows whose receipt carried `battery.food-words` at the base (fe55408b9), town and up. */
+  const ROWS = [
+    'town|germanic|hills|road|civilized|golden-master-v3',
+    // COHERENCE-AGREE (the chair's food-sources ruling, 2026-11-11): the plains city's grazing is a livestock
+    // source now; the planted condition (no staple held) is carried by the coastal port city, which holds fish.
+    'city|germanic|coastal|port|civilized|golden-master-v3',
+    'metropolis|germanic|plains|road|civilized|golden-master-v3',
+  ];
+  const birthOf = (key) => {
+    const { _seed, ...cfg } = goldenCorpus().find((c) => keyOf(c) === key);
+    return generateSettlementPipeline(cfg, null, { seed: _seed, customContent: {} });
+  };
+  const foodWords = (s) => recordBatteryFindings(s).filter((f) => f.path === 'battery.food-words');
+
+  it('three golden rows: the stored line is the printed line, and the receipt finds no food word', () => {
+    const failures = collectSeedFailures(ROWS, (key) => {
+      const s = birthOf(key);
+      const printed = foodwaysLineOf(s);
+      expect(printed, `${key}: the food record carries its composed line`).toBeTruthy();
+      expect(s.culturalIdentity.foodways, `${key}: one sentence, stored = printed`).toBe(printed);
+      expect(foodWords(s), `${key}: no food-words finding on the stored record`).toEqual([]);
+    });
+    expectNoSeedFailures(failures, 'every row stores the record\'s line');
+  });
+
+  it('the planted condition holds: the place holds no staple, and the record\'s line claims none', () => {
+    const s = birthOf(ROWS[1]);
+    const held = new Set(s.economicState.foodSecurity.foodRecord.foodSources);
+    expect(held.has('grain') || held.has('livestock')).toBe(false);
+    expect(sourcesNamedIn(foodwaysLineOf(s)).every((src) => held.has(src))).toBe(true);
+  });
+
+  // anchored: invented wording (a culture-pool sentence quoted here would be a literal anchor)
+  const RAW = 'Rye breads and smoked herd meat fill ordinary meals.';
+  const planted = (extra = {}) => ({
+    tier: 'city',
+    economicState: { foodSecurity: { foodRecord: { foodSources: ['fish'], foodwaysLine: 'Most meals start from the day\'s catch.' } } },
+    culturalIdentity: { foodways: RAW },
+    ...extra,
+  });
+  it('the fallback, by PATH: a record stored before the cure does not read its superseded culture line', () => {
+    expect(foodWords(planted())).toEqual([]);
+  });
+  it('control: the same sentence under another path\'s `foodways` key is still read', () => {
+    expect(foodWords(planted({ customNotes: { foodways: RAW } })).length).toBeGreaterThan(0);
+  });
+  it('control: with no food record line, the culture line is the only line and is read', () => {
+    const s = planted();
+    s.economicState.foodSecurity.foodRecord.foodwaysLine = '';
+    expect(foodWords(s).length).toBeGreaterThan(0);
   });
 });

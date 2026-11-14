@@ -639,6 +639,51 @@ export function faithTeaserPoolKey(hasPatron) {
   return hasPatron ? null : 'PRIVATE DOSSIER';
 }
 
+// ── DS-FTH-4 · THE CHURCH'S STANDING WITH THE TOWN'S OTHER POWERS (the generation lens) ──
+/*
+ * The four birth-time flag pools (W4 PEOPLE, 2026-11-07; the wiring inventory's C1–C4). Each
+ * lens is drawn ONLY WHEN its flag in `safetyProfile.flags` is true, and is silent otherwise.
+ */
+/**
+ * @param {{crusaderSynthesis?: unknown}|null|undefined} flags `safetyProfile.flags`
+ * @returns {string|null}
+ */
+export function crusaderPoolKey(flags) {
+  if (!flags || flags.crusaderSynthesis !== true) return null;
+  return CORPUS['DS-FTH-4'].pools['FLAG: crusaderSynthesis'] ? 'FLAG: crusaderSynthesis' : null;
+}
+
+/**
+ * `heresyIntensity` bands the pool: at or above one half the church hunts, below it preaches.
+ * @param {{heresySuppression?: unknown, heresyIntensity?: unknown}|null|undefined} flags
+ * @returns {string|null}
+ */
+export function heresyPoolKey(flags) {
+  if (!flags || flags.heresySuppression !== true) return null;
+  if (typeof flags.heresyIntensity === 'number' && flags.heresyIntensity >= 0.5) {
+    return CORPUS['DS-FTH-4'].pools['FLAG: heresySuppression: hunted'] ? 'FLAG: heresySuppression: hunted' : null;
+  }
+  return CORPUS['DS-FTH-4'].pools['FLAG: heresySuppression: preached'] ? 'FLAG: heresySuppression: preached' : null;
+}
+
+/**
+ * @param {{religiousFraud?: unknown}|null|undefined} flags `safetyProfile.flags`
+ * @returns {string|null}
+ */
+export function religiousFraudPoolKey(flags) {
+  if (!flags || flags.religiousFraud !== true) return null;
+  return CORPUS['DS-FTH-4'].pools['FLAG: religiousFraud'] ? 'FLAG: religiousFraud' : null;
+}
+
+/**
+ * @param {{mageTheocracy?: unknown}|null|undefined} flags `safetyProfile.flags`
+ * @returns {string|null}
+ */
+export function mageTheocracyPoolKey(flags) {
+  if (!flags || flags.mageTheocracy !== true) return null;
+  return CORPUS['DS-FTH-4'].pools['FLAG: mageTheocracy'] ? 'FLAG: mageTheocracy' : null;
+}
+
 // ── DS-FTH-3 · CREED STANDING ────────────────────────────────────────────────────────
 
 /**
@@ -761,6 +806,9 @@ export function nicheContestPoolKey(ranks) {
  * @property {unknown} [patronFallCause] `faithProfile.patronFall.cause`, when the world
  *   materialised one (it only exists behind the `faithUnseatingEnabled` fence)
  * @property {unknown} [settlementId]
+ * @property {Record<string, unknown>|null} [faithFlags] `economicState.safetyProfile.flags` (DS-FTH-4's
+ *   generation lens: crusaderSynthesis, heresySuppression, heresyIntensity, religiousFraud,
+ *   mageTheocracy)
  */
 /**
  * ⚠ WHY `hasPatron` AND `patronFallCause` ARRIVE AS READINGS RATHER THAN BEING READ HERE.
@@ -924,6 +972,12 @@ export function warFaithStateProse(settlement, readings = {}, options = {}) {
     creedLegitimacy: paragraph(line('DS-FTH-3', creedLegitimacyPoolKey(patronBand))),
     creedNiche: paragraph(line('DS-FTH-3', nicheContestPoolKey(faith?.ranks))),
     creedFall: paragraph(line('DS-FTH-3', patronFallPoolKey(readings.patronFallCause))),
+
+    // ── faith.templeGround (DS-FTH-4) — the church beside the town's other powers ──
+    templeCrusader: paragraph(line('DS-FTH-4', crusaderPoolKey(readings.faithFlags))),
+    templeHeresy: paragraph(line('DS-FTH-4', heresyPoolKey(readings.faithFlags))),
+    templeFraud: paragraph(line('DS-FTH-4', religiousFraudPoolKey(readings.faithFlags))),
+    templeMageTheocracy: paragraph(line('DS-FTH-4', mageTheocracyPoolKey(readings.faithFlags))),
 
     // ── faith.nicheRow (DS-FTH-3, GLANCE) — the band the row already prints ──
     // The ONLY rung on this desk that carries a glance, because it is the only position

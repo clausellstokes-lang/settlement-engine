@@ -45,11 +45,11 @@
  *
  * ── §0d, THE DIGIT BAN ───────────────────────────────────────────────────────────────
  * The banner keeps its own datum (label, summary, hook); the prose bands the same fact.
- *
  * @enforced-by tests/domain/stressorsStateProseDesk.test.js
  */
 import { STRESS_TYPE_MAP } from '../../../data/stressTypes.js';
 import { severityBand } from '../../activeConditions.js';
+import { archetypeForStressor } from '../../conditionPromotion.js';
 import { DOSSIER_STATE_PROSE_STRESSORS } from '../../../data/dossierStateProse/stressors.generated.js';
 import { composeStateProse } from './composeStateProse.js';
 import { stressorsStateProseCandidates } from './stressorsStateProseCandidates.js';
@@ -300,6 +300,122 @@ export function conditionDurationPoolKey(condition) {
 }
 
 /**
+ * ⭐ THE STRESS TYPE IN THE POOL KEY (STYLE-RULINGS §1a; W4 PEOPLE, second seat, 2026-11-07).
+ * On a crisis card the condition IS the crisis (chair ruling T1-3), so the direction line names
+ * WHAT is worsening, holding or easing: one variant set per crisis kind. Three closed maps, one
+ * per direction, crisis kind → its pool, written out as literals so the wiring census resolves
+ * every pool to the token it reads (the CRISIS_POOL_OF precedent). NOT EXPORTED, for the reason
+ * CRISIS_POOL_OF gives: an exported string map is read as a fill table by the projection contract.
+ * A kind with no pool here, or a condition with no crisis behind it, keeps the plain pools.
+ * @type {Readonly<Record<string, string>>}
+ */
+const CRISIS_WORSENING_POOL_OF = Object.freeze({
+  under_siege: 'DIRECTION: worsening · CRISIS: under_siege',
+  famine: 'DIRECTION: worsening · CRISIS: famine',
+  occupied: 'DIRECTION: worsening · CRISIS: occupied',
+  politically_fractured: 'DIRECTION: worsening · CRISIS: politically_fractured',
+  indebted: 'DIRECTION: worsening · CRISIS: indebted',
+  recently_betrayed: 'DIRECTION: worsening · CRISIS: recently_betrayed',
+  infiltrated: 'DIRECTION: worsening · CRISIS: infiltrated',
+  plague_onset: 'DIRECTION: worsening · CRISIS: plague_onset',
+  succession_void: 'DIRECTION: worsening · CRISIS: succession_void',
+  monster_pressure: 'DIRECTION: worsening · CRISIS: monster_pressure',
+  insurgency: 'DIRECTION: worsening · CRISIS: insurgency',
+  religious_conversion: 'DIRECTION: worsening · CRISIS: religious_conversion',
+  slave_revolt: 'DIRECTION: worsening · CRISIS: slave_revolt',
+  wartime: 'DIRECTION: worsening · CRISIS: wartime',
+  mass_migration: 'DIRECTION: worsening · CRISIS: mass_migration',
+});
+/** @type {Readonly<Record<string, string>>} the stable (and FLAT) direction, by crisis kind */
+const CRISIS_STABLE_POOL_OF = Object.freeze({
+  under_siege: 'DIRECTION: stable · CRISIS: under_siege',
+  famine: 'DIRECTION: stable · CRISIS: famine',
+  occupied: 'DIRECTION: stable · CRISIS: occupied',
+  politically_fractured: 'DIRECTION: stable · CRISIS: politically_fractured',
+  indebted: 'DIRECTION: stable · CRISIS: indebted',
+  recently_betrayed: 'DIRECTION: stable · CRISIS: recently_betrayed',
+  infiltrated: 'DIRECTION: stable · CRISIS: infiltrated',
+  plague_onset: 'DIRECTION: stable · CRISIS: plague_onset',
+  succession_void: 'DIRECTION: stable · CRISIS: succession_void',
+  monster_pressure: 'DIRECTION: stable · CRISIS: monster_pressure',
+  insurgency: 'DIRECTION: stable · CRISIS: insurgency',
+  religious_conversion: 'DIRECTION: stable · CRISIS: religious_conversion',
+  slave_revolt: 'DIRECTION: stable · CRISIS: slave_revolt',
+  wartime: 'DIRECTION: stable · CRISIS: wartime',
+  mass_migration: 'DIRECTION: stable · CRISIS: mass_migration',
+});
+/** @type {Readonly<Record<string, string>>} the easing direction, by crisis kind */
+const CRISIS_EASING_POOL_OF = Object.freeze({
+  under_siege: 'DIRECTION: easing · CRISIS: under_siege',
+  famine: 'DIRECTION: easing · CRISIS: famine',
+  occupied: 'DIRECTION: easing · CRISIS: occupied',
+  politically_fractured: 'DIRECTION: easing · CRISIS: politically_fractured',
+  indebted: 'DIRECTION: easing · CRISIS: indebted',
+  recently_betrayed: 'DIRECTION: easing · CRISIS: recently_betrayed',
+  infiltrated: 'DIRECTION: easing · CRISIS: infiltrated',
+  plague_onset: 'DIRECTION: easing · CRISIS: plague_onset',
+  succession_void: 'DIRECTION: easing · CRISIS: succession_void',
+  monster_pressure: 'DIRECTION: easing · CRISIS: monster_pressure',
+  insurgency: 'DIRECTION: easing · CRISIS: insurgency',
+  religious_conversion: 'DIRECTION: easing · CRISIS: religious_conversion',
+  slave_revolt: 'DIRECTION: easing · CRISIS: slave_revolt',
+  wartime: 'DIRECTION: easing · CRISIS: wartime',
+  mass_migration: 'DIRECTION: easing · CRISIS: mass_migration',
+});
+
+/**
+ * The crisis kind one condition was promoted from, or null. A generation condition is minted
+ * from a `stress[]` entry by `conditionPromotion.js :: promoteStressorsToConditions`, through
+ * `archetypeForStressor` — so the kind is the banner that promotes to the condition's own
+ * archetype, read off the caller's banner list (the list the crisis cards render, so the line
+ * and the card read one crisis truth). Two banners can promote to one archetype (a siege and a
+ * war are both `war_pressure`); promotion keeps the first unless a later one is strictly more
+ * severe, and this reads the same rule, so the line names the crisis the condition carries.
+ * The import is free: `conditionPromotion.js` is already in the first-paint closure (beside
+ * `activeConditions.js`, measured). A condition no banner owns (an event, the world pulse)
+ * answers null and keeps the plain direction pools; so does a token the closed banner map
+ * does not know, since guessing a crisis is how a page says something false.
+ * @param {{archetype?: unknown}|null|undefined} condition
+ * @param {unknown} banners the caller's `stress[]` reading
+ * @returns {string|null}
+ */
+export function conditionCrisisKind(condition, banners) {
+  const archetype = text(condition?.archetype);
+  if (!archetype || !Array.isArray(banners)) return null;
+  /** @type {string|null} */ let kind = null;
+  /** @type {number|null} */ let held = null;
+  for (const banner of banners) {
+    const type = text(banner?.type);
+    if (!type || !CRISIS_POOL_OF[type] || archetypeForStressor(banner) !== archetype) continue;
+    const severity = typeof banner?.severity === 'number' ? banner.severity : null;
+    if (kind === null || (severity !== null && (held === null || severity > held))) {
+      kind = type;
+      held = severity;
+    }
+  }
+  return kind;
+}
+
+/**
+ * DS-CND-1's direction key WITH the crisis kind (`conditionCrisisKind`): the crisis's own pool
+ * for that direction speaks instead of the plain one, which stays the fallback, never a second
+ * line. A kind no map names, or no kind at all, answers exactly `conditionDirectionPoolKey`.
+ * @param {{status?: unknown}|null|undefined} condition
+ * @param {string|null} [crisisKind] the kind `conditionCrisisKind` read, or null
+ * @returns {string|null}
+ */
+export function crisisDirectionPoolKey(condition, crisisKind = null) {
+  const plain = conditionDirectionPoolKey(condition);
+  const kind = text(crisisKind);
+  if (!plain || !kind) return plain;
+  const map = plain === 'DIRECTION: worsening' ? CRISIS_WORSENING_POOL_OF
+    : plain === 'DIRECTION: easing' ? CRISIS_EASING_POOL_OF
+      : CRISIS_STABLE_POOL_OF;
+  const keyed = map[kind];
+  return keyed && CORPUS['DS-CND-1'].pools[keyed] ? keyed : plain;
+}
+
+/**
  * ⛔ THE TRACED-PROVENANCE POOL IS ROUTED BUT SILENT, AND IT IS THE `{complexity}` SHAPE.
  *
  * ALL THREE variants of `PROVENANCE: causes[] or traceable…populated` name `{reason}` —
@@ -502,7 +618,7 @@ export function stressorsStateProse(settlement, readings = {}, options = {}) {
   const arityKey = crisisArityPoolKey(banners);
   const framingKey = crisisFramingPoolKey(banners);
   const severityKey = conditionSeverityPoolKey(condition);
-  const directionKey = conditionDirectionPoolKey(condition);
+  const directionKey = crisisDirectionPoolKey(condition, conditionCrisisKind(condition, banners));
   const archetypeKey = conditionArchetypePoolKey(condition);
   const provenanceKey = conditionProvenancePoolKey(condition);
   const durationKey = conditionDurationPoolKey(condition);

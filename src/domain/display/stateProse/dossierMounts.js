@@ -287,10 +287,14 @@ export const DOSSIER_MOUNTS = Object.freeze([
     mount: 'economics.tradeFlow', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-3', rung: 'sentence', dimensions: ['walls'],
   }),
   Object.freeze({
-    mount: 'power.legitimacyBanner', tab: 'power', desk: 'power', blockId: 'DS-POW-1', rung: 'sentence',
+    // ⛔ GLANCES since the owner's word of 2026-11-09 (OWNER-WORDS-DOSSIER item 3): the Power tab's governance
+    // block is ONE paragraph read off the record (governanceAccount.js); the desk and the corpus are untouched.
+    mount: 'power.legitimacyBanner', tab: 'power', desk: 'power', blockId: 'DS-POW-1', rung: 'glance',
   }),
   Object.freeze({
-    mount: 'power.stabilityHeader', tab: 'power', desk: 'power', blockId: 'DS-POW-2', rung: 'sentence', dimensions: ['walls'],
+    // ⛔ GLANCES since the owner's word of 2026-11-09 (OWNER-WORDS-DOSSIER item 3): the Power tab's governance
+    // block is ONE paragraph read off the record (governanceAccount.js); the desk and the corpus are untouched.
+    mount: 'power.stabilityHeader', tab: 'power', desk: 'power', blockId: 'DS-POW-2', rung: 'glance', dimensions: ['walls'],
   }),
   Object.freeze({
     mount: 'power.criminalUnderside', tab: 'power', desk: 'power', blockId: 'DS-POW-6', rung: 'sentence', dimensions: ['walls'],
@@ -370,8 +374,14 @@ export const DOSSIER_MOUNTS = Object.freeze([
   Object.freeze({
     mount: 'overview.warnings', tab: 'overview', desk: 'general', blockId: 'DS-GEN-7', rung: 'glance',
   }),
+  // ⛔ THE GROUND GLANCES (the owner, 2026-11-09, OWNER-WORDS-DOSSIER item 2: "In 'the place' the second
+  // paragraph seems redundant. The first was amazing."). DS-GEN-12's lenses ("In {settlement} the water
+  // comes first…", "{settlement} sits where the ground let it stand…") opened the woven block by
+  // re-introducing the place the arrival scene above it had just drawn. Struck here, at the door: the
+  // screen and the print both read this row, the desk and the corpus are untouched, the block stays
+  // MOUNTED (never parked dark), and restoring it is this one word.
   Object.freeze({
-    mount: 'overview.ground', tab: 'overview', desk: 'general', blockId: 'DS-GEN-12', rung: 'sentence',
+    mount: 'overview.ground', tab: 'overview', desk: 'general', blockId: 'DS-GEN-12', rung: 'glance',
   }),
   Object.freeze({
     mount: 'overview.market', tab: 'overview', desk: 'general', blockId: 'DS-GEN-13', rung: 'sentence',
@@ -450,11 +460,23 @@ export const DOSSIER_MOUNTS = Object.freeze([
   Object.freeze({
     mount: 'faith.nicheRow', tab: 'faith', desk: 'warFaith', blockId: 'DS-FTH-3', rung: 'glance',
   }),
+  // DS-FTH-4 MOUNTED (W4 PEOPLE, 2026-11-07; WAVE-RULINGS item 10): its generation lens reads
+  // the birth-time stress flags (`safetyProfile.flags`), which every settlement carries, so the
+  // block speaks on the deity-free town too. The four religion-state pools stay undrawable
+  // until the religion state and `templeWealth` reach the record (the desk keys none of them).
+  Object.freeze({
+    mount: 'faith.templeGround', tab: 'faith', desk: 'warFaith', blockId: 'DS-FTH-4', rung: 'sentence',
+  }),
   Object.freeze({
     mount: 'defense.supportingCapabilities', tab: 'defense', desk: 'defense', blockId: 'DS-DEF-6', rung: 'sentence', dimensions: ['threat', 'walls'],
   }),
   Object.freeze({
     mount: 'viability.magicDependency', tab: 'viability', desk: 'defense', blockId: 'DS-DEF-9', rung: 'sentence',
+  }),
+  // DS-DEF-12 (W2 DEF construction C3–C5, 2026-11-07): the isolation-support finding, said on
+  // the Viability tab where the finding applies (no dependable road, river or port); silent elsewhere.
+  Object.freeze({
+    mount: 'viability.isolationSupport', tab: 'viability', desk: 'defense', blockId: 'DS-DEF-12', rung: 'sentence',
   }),
   Object.freeze({
     mount: 'economics.exportPosture', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-10', rung: 'sentence', dimensions: ['hunger'],
@@ -483,6 +505,13 @@ export const DOSSIER_MOUNTS = Object.freeze([
   // sentence the history page keeps, inside Founding. DS-GEN-16 has no speaking position.
   Object.freeze({
     mount: 'history.record', tab: 'history', desk: 'general', blockId: 'DS-GEN-16', rung: 'glance',
+  }),
+  // W5 construction 2026-11-07 (WIRING-RULINGS R-W1; WAVE-RULINGS item 10, "a line that prints
+  // nowhere is not construction"): DS-GEN-16's ONE speaking position, beneath the events list —
+  // the record's past-to-present link (`legacyAnnotations[]`) and the recent blow still in
+  // living memory (`siegeNarrative`). The record line above stays a glance (H3).
+  Object.freeze({
+    mount: 'history.legacy', tab: 'history', desk: 'general', blockId: 'DS-GEN-16', rung: 'sentence',
   }),
   Object.freeze({
     mount: 'viability.verdict', tab: 'viability', desk: 'general', blockId: 'DS-GEN-11', rung: 'sentence',
@@ -546,15 +575,10 @@ export const UNMOUNTED_BLOCKS = Object.freeze([
   //     aftermath, blockade and treaty-burden pools need activeConditions/spatialLedgers
   //     reads the war tab does not perform. Lit by a token-returning resistance ladder and
   //     an aftermath reader on the tab.
-  //   DS-FTH-4 — ⛔ `templeWealth` HAS NO WRITER IN THE ENGINE (a WF-7 design-doc future;
-  //     the estate's own DESIGN_FP_ARCH_WF.md V27 row records `grep templeWealth in
-  //     src/domain: 0` as VERIFIED), and `tenure` is not among the seven fields
-  //     `projectReligionStateOntoSettlement` puts on `config.faithProfile.deities[]`. Its
-  //     one remaining pool (CONTESTED) is the fact DS-FTH-1 already speaks on that tab.
-  //     Lit by the banded temple stock plus `tenure` in the projection.
+  //   (DS-FTH-4 left this list on 2026-11-07, W4 PEOPLE: mounted at `faith.templeGround` on its
+  //     generation lens; its religion-state pools stay undrawn, see the mount row.)
   'DS-WAR-4',
   'DS-WAR-5',
-  'DS-FTH-4',
 ]);
 
 /**

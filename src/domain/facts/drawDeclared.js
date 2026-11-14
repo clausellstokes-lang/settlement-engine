@@ -39,18 +39,22 @@ import { UNTYPED } from '../hookThemes.js';
 /**
  * The text a line of type T prints: a declared row's `text`, else the line itself.
  * @template T
- * @typedef {T extends { text: string } ? string : T} LineText
+ * @typedef {T extends { text: infer X } ? (X extends string ? string : X extends Function ? X : T) : T} LineText
  */
 
 /**
- * The text a pool line prints: a bare string is itself; a declared line is `{ text, … }`.
+ * The text a pool line prints: a bare string or template is itself; a declared line is
+ * `{ text, … }` around either, and gives back its `text` — a string, or a template function the
+ * caller applies (FIX-HOOK-OBJECT, 2026-11-09: a function-valued `text` was handed back as the
+ * row and printed "[object Object]"; `tests/lint/declaredLineShape.test.js` holds the shape).
  * @template T
  * @param {T} line
  * @returns {LineText<T>}
  */
 export function lineText(line) {
-  if (line && typeof line === 'object' && typeof (/** @type {{text?: unknown}} */ (line)).text === 'string') {
-    return /** @type {LineText<T>} */ (/** @type {{text?: unknown}} */ (line).text);
+  if (line && typeof line === 'object') {
+    const text = /** @type {{text?: unknown}} */ (line).text;
+    if (typeof text === 'string' || typeof text === 'function') return /** @type {LineText<T>} */ (text);
   }
   return /** @type {LineText<T>} */ (line);
 }

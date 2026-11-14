@@ -44,6 +44,7 @@ import { deriveSystemState } from '../domain/state/deriveSystemState.js';
 import { reconcileSettlementChange } from '../domain/settlementReconciliation.js';
 import { anonAtCap, incrementAnonFull, incrementAnonReroll } from '../lib/anonGenCounter.js';
 import { REFUSAL_REASONS, refusalOf } from '../lib/refusalReasons.js';
+import { engineRefusalOf } from '../lib/engineRefusal.js';
 import { GENERATION_INTENT_SAMPLE_FORK, intentOf } from '../lib/generationIntent.js';
 import { isChunkLoadError } from '../lib/staleDeploy.js';
 import { DEFAULT_CONFIG } from './configSlice.js';
@@ -502,7 +503,14 @@ export async function generateSettlementAction(set, get, seedOverride, options) 
     // "Random" slider mode: resolveConfig rolls the priorities per
     // generation (fresh seed per regenerate) instead of silently using
     // flat 50s — and never writes the rolls back into the stored config.
-    ...(state.randomSliderMode === true ? { _randomizePriorities: true } : {}),
+    // ⛔ EXCEPT A SAMPLE FORK (FOUNDING-WORLDS, the chair's ruling N5b, under the owner's
+    // word of 2026-11-10: "regeenrate mossgate, cnocby, and black crag vwith the updated
+    // system"). A Founding World's card states its five priorities, and this flag, spread
+    // after the config, threw them away on every fresh visitor's "Visit" (the store ships
+    // randomSliderMode true). Scoped by the same fail-closed `isSampleFork` as the
+    // allowance exemption and the curated tier floor; the visitor's mode is not written.
+    // tests/store/sampleForkPriorities.test.js.
+    ...(state.randomSliderMode === true && !isSampleFork ? { _randomizePriorities: true } : {}),
     ...(neighbor ? { _importedNeighbor: neighbor } : {}),
   });
 
@@ -580,10 +588,15 @@ export async function generateSettlementAction(set, get, seedOverride, options) 
     // the lane does not statically pull the remote leaf; tests/components/refusalNotice.test.jsx
     // raises it through that constant) when the server no longer serves the engine this page
     // pinned. As with a stale chunk, only a reload helps.
+    // The service's limit (429) and its absence are their own sentences too (remote-path R3):
+    // "try once more" is false advice for a limit. `engineRefusalOf` maps the named codes.
+    // A request the service cannot make yet (a neighbour, homebrew, a campaign) names what was
+    // asked for (FU-3): `engineRefusalOf` builds the record's `{what}` from the refusal's inputs.
+    const engineSaid = engineRefusalOf(genErr);
     set(s => {
-      s.lastRefusal = refusedAt(/** @type {any} */ (genErr)?.code === 'engine_version_retired'
-        ? REFUSAL_REASONS.ENGINE_VERSION_RETIRED
-        : isChunkLoadError(genErr)
+      s.lastRefusal = engineSaid
+        ? refusedAt(engineSaid.reason, engineSaid.vars)
+        : refusedAt(isChunkLoadError(genErr)
           ? REFUSAL_REASONS.STALE_BUILD
           : REFUSAL_REASONS.GENERATION_FAILED);
     });

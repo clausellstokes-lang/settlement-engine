@@ -60,10 +60,10 @@ describe('governance narrative precedence', () => {
     });
 
     expect(result.stability).toBe(
-      'Critical (active siege — survival priority); monster threat active',
+      'Critical (under siege); monsters on the roads', // W3 POW (the owner's style law of 2026-11-07): re-keyed with the producer's words
     );
     expect(result.recentConflict).toBe(
-      'The settlement is under active siege. Every resource decision is a military decision. The debate is no longer about policy. It is about survival.',
+      'The settlement is under siege. Its stores and every able pair of hands now go to the defence, and nothing else is discussed.',
     );
   });
 
@@ -75,7 +75,7 @@ describe('governance narrative precedence', () => {
 
     expect(result.stability).toBe('Desperate — hunger is eroding order');
     expect(result.recentConflict).toBe(
-      'Food shortages have sharpened every tension in the settlement. Those with stocks are not advertising the fact. Those without are watching those with.',
+      'Food is short, and every quarrel in the settlement has grown sharper for it. Those with stocks are not advertising the fact. Those without are watching those with.',
     );
   });
 
@@ -153,7 +153,7 @@ describe('governance narrative institutional phrasing', () => {
 
     expect(result).toEqual({
       stability: 'Tense (external threat)',
-      recentConflict: 'Ongoing tensions with Grimhold',
+      recentConflict: 'Relations with Grimhold have soured, and everyone here knows it.',
     });
   });
 });
@@ -208,7 +208,7 @@ describe('an active crisis never reads as Stable (owner order 2026-09-17)', () =
 
   test('infiltration beside a PUBLIC crisis no longer masks that crisis', () => {
     expect(deriveGovernance({ stressTypes: ['infiltrated', 'indebted'] }).stability)
-      .toBe('Strained — debt obligations constrain every decision');
+      .toBe('Strained — the creditors have a say in every decision');
     expect(deriveGovernance({ stressTypes: ['infiltrated', 'monster_pressure'] }).stability)
       .toBe('Tense (monster pressure from surrounding region)');
     for (const [stressType, label] of Object.entries(PUBLIC_UNREST)) {
@@ -224,7 +224,7 @@ describe('an active crisis never reads as Stable (owner order 2026-09-17)', () =
   test('a plagued town keeps the crisis label and annotates it, never replacing it', () => {
     for (const [stressType, label] of Object.entries(PUBLIC_UNREST)) {
       expect(deriveGovernance({ config: { monsterThreat: 'plagued' }, stressTypes: [stressType] }).stability, stressType)
-        .toBe(`${label}; monster threat active`);
+        .toBe(`${label}; monsters on the roads`);
     }
   });
 

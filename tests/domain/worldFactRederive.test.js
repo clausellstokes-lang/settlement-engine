@@ -155,8 +155,14 @@ const CULTURE_READERS = Object.freeze([
   'src/generators/computeActiveChains.js',
   'src/generators/demandProfile.js',
   'src/generators/economy/foodBalance.js',
-  'src/generators/economy/prosperity.js',
+  // 2026-11-09 (STYLE-2 SW-7, 6f340466f): economy/prosperity.js LEFT the set. It was a "reader" only through the word
+  // "agriculture" in one situation line ("efficient agriculture"), which the A2 rewrite replaced; it reads no culture.
   'src/generators/foodGenerator.js',
+  // 2026-11-10 (GREEN-TIP b46048140, the foodGenerator <-> isolationSupport cycle cure): foodLand.js JOINED the set through
+  // the word "agriculture" (`agricultureCapacity`, the terrain table's farming figure), moved verbatim with foodLandOf; it
+  // reads no culture (the prosperity.js and pipeline.js precedents: reported, not filtered). foodGenerator.js stays a real
+  // reader (CULTURE_PROFILES).
+  'src/generators/foodLand.js',
   'src/generators/generateSettlementPipeline.js',
   'src/generators/generationCoherence.js',
   'src/generators/generationContext.js',
@@ -167,6 +173,14 @@ const CULTURE_READERS = Object.freeze([
   'src/generators/npc/generatedNpcTitle.js',
   'src/generators/npcGenerator.js',
   'src/generators/pipeline.js',
+  // 2026-11-10 (STYLE-2-MERGE point 25, URBAN-FIX C-1 935c961fd): recordBatteryFindings.js JOINED the set through the word
+  // "culture's" in one comment line beside the superseded foodways path; it reads no culture (the pipeline.js precedent:
+  // reported, not filtered). Red on the lane's own tip 9ee7df1ba.
+  'src/generators/recordBatteryFindings.js',
+  // 2026-11-11 (COHERENCE-AGREE): resourceGenerator.js JOINED the set through the word "Agriculture", the riverside
+  // terrain's strength as TERRAIN_DATA spells it, now a key of STRENGTH_SUPPORT; it reads no culture (the foodLand.js
+  // precedent: reported, not filtered).
+  'src/generators/resourceGenerator.js',
   'src/generators/steps/assembleSettlement.js',
   'src/generators/steps/buildGenerationContext.js',
   'src/generators/steps/economyReconcilePass.js',
@@ -471,10 +485,78 @@ describe('EM-B2b — world facts by consequence: the route, the refusals and the
     // (1,050 of 1,050 rows against record 0b's post-state). Record B, the people car's merge (docs/shift-records/2026-11-08-
     // merge-car-b-people-car-composition.json), from the stage at 8dff691f3: the generator master 6d651bde.. -> 9be37cae..
     // (525 of 525 rows) and the prose manifest 1a6351f1.. -> f2d3410b.. (832 of 1,050 rows).
+    // Then the wave (MERGE-WAVE, ODQ §934.105, 2026-11-08), the same law: one record per moving first-parent merge point,
+    // restated here in the same act; the prose manifest is signed ONCE at the wave's step 3.
+    // Record 1, the W1 ECO merge (2026-11-08-merge-wave-1-w1-eco.json), from the stage at ea0e269a9:
+    // the generator master 9be37cae.. -> 0580a38d.. (210 of 525 rows).
+    // Record 2, the W2 DEF merge (2026-11-08-merge-wave-2-w2-def.json), from the stage at 82a4e2856:
+    // the generator master 0580a38d.. -> 8e80cd6a.. (422 of 525 rows).
+    // Record 3, the W3 POW merge (2026-11-08-merge-wave-3-w3-pow.json), from the stage at 1a160d599:
+    // the generator master 8e80cd6a.. -> 20eca11e.. (525 of 525 rows).
+    // Record 4, the W4 PEOPLE merge (2026-11-08-merge-wave-4-w4-people.json), from the stage at 66c23bfea:
+    // the generator master 20eca11e.. -> 3873f90e.. (523 of 525 rows).
+    // Record 5, the W5 HIS merge (2026-11-08-merge-wave-5-w5-his.json), from the stage at e510409b1:
+    // the generator master 3873f90e.. -> 0fa3e014.. (525 of 525 rows).
+    // Record 6, the W7 HOOKS merge (2026-11-08-merge-wave-6-w7-hooks.json), from the stage at 501c97412:
+    // the generator master 0fa3e014.. -> ac300c3b.. (525 of 525 rows).
+    // Record 7, the FIX-FOOD-ISOLATION merge (2026-11-08-merge-wave-7-food-isolation.json), from the stage at c6e8a4ad6:
+    // the generator master ac300c3b.. -> 3c3ba783.. (73 of 525 rows).
+    // Record 8, the FIX-PUBLIC-VEIL merge (2026-11-08-merge-wave-8-public-veil.json), from the stage at 7e65c7bec:
+    // the generator master 3c3ba783.. -> b35d56c0.. (525 of 525 rows).
+    // Record 10, the docks read (W5 HIS #10's gate; 2026-11-08-merge-wave-10-docks-read.json), from the stage at bcf3e7f8a:
+    // the generator master b35d56c0.. -> 5f77f02f.. (37 of 525 rows).
+    // Record 1 of the train, the ALLEGIANCE-CAR1 merge (2026-11-09-merge-train-1-car1.json), from the stage at e5f88930b:
+    // the generator master 5f77f02f.. -> eb2db45f.. (525 of 525 rows).
+    // Record 2 of the train, the ALLEGIANCE-CAR2 merge over the integration branch (2026-11-09-merge-train-2-car2.json), from the stage at f51058995:
+    // the generator master eb2db45f.. -> 38229dd6.. (101 of 525 rows).
+    // Record 3 of the train, the ALLEGIANCE-CAR3 merge over the integration branch (2026-11-09-merge-train-3-car3.json), from the stage at c6ded8e3a:
+    // the generator master 38229dd6.. -> daedf3c6.. (170 of 525 rows).
+    // Record 9 of the train, the ALLEGIANCE-CAR4 merge over the integration branch (2026-11-09-merge-train-9-car4.json), from the stage at 824a8ce2f:
+    // the generator master daedf3c6.. -> e8901fee.. (525 of 525 rows).
+    // Record 1 of the style wave's merge, the chair's words at SW-0's point (2026-11-09-style-2-merge-1-sw0.json), from the stage at ca15421ff:
+    // the generator master e8901fee.. -> c46e7d69.. (1 of 525 rows).
+    // Record 3 of the style wave's merge, the sw-2 institutions merge over the integration branch (2026-11-09-style-2-merge-3-sw2.json), from the stage at ef4645832:
+    // the generator master c46e7d69.. -> 13d47ef6.. (369 of 525 rows).
+    // Record 4 of the style wave's merge, the sw-3 realm-prose merge over the integration branch (2026-11-09-style-2-merge-4-sw3.json), from the stage at 1ef46ca30:
+    // the generator master 13d47ef6.. -> 3bb1c433.. (34 of 525 rows).
+    // Record 6 of the style wave's merge, the sw-5 crisis-vantages merge over the integration branch (2026-11-09-style-2-merge-6-sw5.json), from the stage at a7770ecfe:
+    // the generator master 3bb1c433.. -> b9a9e693.. (192 of 525 rows).
+    // Record 7 of the style wave's merge, the sw-b2 first-impressions merge over the integration branch (2026-11-09-style-2-merge-7-swb2.json), from the stage at 52da4542c:
+    // the generator master b9a9e693.. -> ab57c9db.. (110 of 525 rows).
+    // Record 9 of the style wave's merge, the sw-b5 frames merge over the integration branch (2026-11-09-style-2-merge-9-swb5.json), from the stage at 46e0121c2:
+    // the generator master ab57c9db.. -> 3f587a09.. (524 of 525 rows).
+    // Record 16 of the style wave's merge, the sw-7 power-side merge over the integration branch (2026-11-09-style-2-merge-16-sw7.json), from the stage at a3062d919:
+    // the generator master 3f587a09.. -> 25824515.. (525 of 525 rows).
+    // Record 17 of the style wave's merge, the sw-b1 contradictions merge over the integration branch (2026-11-09-style-2-merge-17-swb1.json), from the stage at 0f2cb865c:
+    // the generator master 25824515.. -> 21b50e30.. (464 of 525 rows).
+    // Record 19 of the style wave's merge, the sw-10 hooks merge over the integration branch (2026-11-09-style-2-merge-19-sw10.json), from the stage at 856de8427:
+    // the generator master 21b50e30.. -> 16c01856.. (525 of 525 rows).
+    // Record 22 of the style wave's merge, the sw-6 crisis-surfaces merge over the integration branch (2026-11-09-style-2-merge-22-sw6.json), from the stage at ac1442a3d:
+    // the generator master 16c01856.. -> 2908b7a3.. (525 of 525 rows).
+    // Record 24 of the style wave's merge, the sw-8 rename-powers merge over the integration branch (2026-11-10-style-2-merge-24-sw8.json), from the stage at c0433a1c7:
+    // the generator master 2908b7a3.. -> 5020a5aa.. (525 of 525 rows).
+    // Record 25 of the style wave's merge, the urban-fix merge over the integration branch (2026-11-10-style-2-merge-25-urban-fix.json), from the stage at fe81a843e:
+    // the generator master 5020a5aa.. -> a1374044.. (387 of 525 rows).
+    // Record 27 of the style wave's merge, the sw-9b-b merge over the integration branch (2026-11-10-style-2-merge-27-sw9b-b.json), from the stage at ee364b3ef:
+    // the generator master a1374044.. -> 97936ac1.. (167 of 525 rows).
+    // Record 42 of the style wave's merge, the coherence-quarrel merge over the integration branch (2026-11-12-style-2-merge-42-coherence-quarrel.json), from the stage at d4723749a:
+    // the generator master 97936ac1.. -> 6f8317a8.. (476 of 525 rows).
+    // Record 43 of the style wave's merge, the coherence-presume merge over the integration branch (2026-11-12-style-2-merge-43-coherence-presume.json), from the stage at f922124d0:
+    // the generator master 6f8317a8.. -> 083542bb.. (505 of 525 rows).
+    // Record 46 of the style wave's merge, the coherence-powers merge over the integration branch (2026-11-13-style-2-merge-46-coherence-powers.json), from the stage at 6aeaa4154:
+    // the generator master 083542bb.. -> 5ef18089.. (393 of 525 rows).
     expect(shaOfFile(GOLDEN), 'tests/fixtures/generator-golden-master.json moved')
-      .toBe('9be37cae1ba04e0c06ea01066364960c1ee01b82f0d13c7048ab6156b9f93f9c');
+    // Record 47 of the style wave's merge, the coherence-agree merge over the integration branch (2026-11-13-style-2-merge-47-coherence-agree.json), from the stage at 9e2ae9035:
+    // the generator master 5ef18089.. -> 7b7089fd.. (525 of 525 rows).
+      .toBe('7b7089fd5e5c45e1f0a5fc247a249c80aa72df0f99dcb3a83946256300ceebb5');
+    // Record 9, the composed-prose manifest signed ONCE at the wave's final tip (2026-11-08-merge-wave-9-composed-prose-
+    // manifest.json), from the stage at 0c93f0ca0: the prose manifest f2d3410b.. -> 7bdc431e.. (1,050 of 1,050 rows).
+    // Record 10 of the train, the composed-prose manifest signed ONCE at the train's final tip (2026-11-09-merge-train-10-
+    // composed-prose-manifest.json), from the stage at 09c4435e0: the prose manifest 7bdc431e.. -> 083c8dd7.. (181 of 1,050 rows).
+    // Closing act 2 of the style wave's merge, the composed-prose manifest signed ONCE at the final tip (2026-11-11-style-2-merge-
+    // closing-2-composed-prose-manifest.json), from the stage at a3ea0d325: the prose manifest 083c8dd7.. -> 3b9ee8b6.. (1,050 of 1,050 rows).
     expect(shaOfFile(PROSE_GOLDEN), 'tests/fixtures/dossier-prose-manifest-golden.json moved')
-      .toBe('f2d3410b20c0b4757a48f03afd96598a643d861bd763c6a9172c5a466ef9728e');
+      .toBe('3b9ee8b68fbe36183170cf0f6f1204a455c3c04abee124e6867f23e41601e2d7');
 
     // AND THE REASON THEY CANNOT MOVE: fresh generation passes no layer, so no world fact is ever
     // routed and `config′` is `config` itself. Measured against the committed manifest.

@@ -88,6 +88,7 @@ export const DEFENSE_STRESS_STATUS = Object.freeze(
  * @property {{ tradeRouteAccess?: string }} [config]
  * @property {Array<{ reason?: unknown, severity?: unknown }>} [structuralViolations]
  * @property {{ factions?: Array<{ category?: unknown } | null | undefined> }} [powerStructure] the roster `deriveCriminalStructure` reads for a criminal faction
+ * @property {unknown} [_seed] the record's seed — the ring note's vantage picker reads it (`withRingVantage`, SW-B5)
  */
 
 const DEFENSE_VULNERABILITY_RE = /fort|milit|wall|garrison|defense|guard|structural|survival/i;
@@ -152,10 +153,10 @@ export function criminalOpNote(name) {
   if (n.includes('underground'))
     return 'An entire secondary economy operating below street level. Beyond enforcement reach without extraordinary effort.';
   if (n.includes('assassin'))
-    return 'Professional killing for hire. The existence of this market reflects deeply embedded political violence.';
+    return 'Professional killers for hire. That there is work for them says how politics is done here.';
   if (n.includes('fence'))
-    return 'Moves stolen goods into legitimate circulation. The fence is the clearinghouse that makes theft economically viable.';
-  return 'Criminal infrastructure with local territorial or economic influence.';
+    return 'Buys stolen goods and sells them on as honest stock; without the fence, theft would not pay.';
+  return 'A criminal operation with a hold on part of the place or its trade.';
 }
 
 // `criminalOpEcon` LIVED HERE and was a passenger: this module never called it, while the
@@ -166,15 +167,15 @@ export function criminalOpNote(name) {
 const CRIM_STRUCTURE_DATA = Object.freeze({
   organized: {
     key: 'organized', label: 'Organized Syndicate', color: '#8b1a1a', bg: '#fdf4f4',
-    note: 'A structured criminal hierarchy controls what crime is permitted. Predictable rules, a hierarchy to negotiate with. Or cross. Random violence is suppressed because it draws enforcement. The real danger is systematic: protection, extortion, corruption of officials.',
+    note: 'One criminal ring decides what crime is allowed here. Its rules are predictable and it can be bargained with; it puts down random violence because that brings the law, and it lives on protection money and on any official it can buy.',
   },
   'semi-organized': {
     key: 'semi-organized', label: 'Semi-Organized Networks', color: '#8a3010', bg: '#fdf0e8',
-    note: 'Criminal activity is coordinated enough to maintain routes and territories but lacks a single controlling authority. Multiple factions may be competing. Less predictable than a guild, more structured than street crime.',
+    note: 'Criminal activity is coordinated enough to maintain routes and territories but lacks a single controlling authority. Several gangs may be competing. Less predictable than a guild, more structured than street crime.',
   },
   diffuse: {
     key: 'diffuse', label: 'Diffuse Criminal Presence', color: '#7a5010', bg: '#faf8e0',
-    note: 'Opportunistic crime without organizational infrastructure. Fences, bandits, and minor operators work independently. Less politically dangerous but harder to suppress. No single node to threaten or buy off.',
+    note: 'Thieves, fences and bandits each work for themselves; there is no boss to threaten or to bribe, which makes them harder to stamp out.',
   },
 });
 
@@ -217,11 +218,14 @@ export function deriveCriminalStructure(settlement) {
   // Either makes the null answer SEMI-ORGANIZED, the same reading a criminal house gets above.
   const listed = (r.economicState?.safetyProfile?.criminalInstitutions || []).length > 0
     || runningCriminalChains(r).length > 0;
-  const key = ladder
-    ?? (signal.factions.length ? 'organized'
-      : signal.houses.length || listed ? 'semi-organized'
-        : null);
-  return key ? CRIM_STRUCTURE_DATA[key] : null;
+  // ⛔ A GANG IS A GANG (W2-A-LEAVES 5b, 2026-11-12; the second wave's ruling): the crime signal's FACTIONS outrank
+  // the name ladder. The ladder read a fence's house as "diffuse" and never asked the roster, so the Defense tab
+  // printed "Diffuse, no gang" beside a criminal power on the Power tab (2 of the census's 720). A criminal power
+  // is a hierarchy, the pool's own reading of one; the ladder answers only where no criminal power stands.
+  // (The ladder is a reader of the crime fact: tests/lint/factLayers.walker.test.js counts it, family crime.)
+  const key = signal.factions.length ? 'organized'
+    : ladder ?? (signal.houses.length || listed ? 'semi-organized' : null);
+  return key ? withRingVantage(CRIM_STRUCTURE_DATA[key], r) : null;
 }
 
 /** The supply-chain statuses that mean a chain runs (`supplyChainStatus`, less vulnerable/impaired). */
@@ -408,7 +412,7 @@ export function deriveSupportingCapabilities(settlement) {
       color: facts.hasHospital ? '#1a5a28' : (facts.hasHealer || f.hasChurch) ? '#7a5010' : '#8b1a1a', score: null,
       note: facts.hasHospital ? 'Casualty treatment, outbreak containment, recovery capacity.'
         : facts.hasHealer ? `${facts.healerName}. Wounds and fevers treated one at a time; no beds to contain an outbreak.`
-          : f.hasChurch ? 'Clerical care. Basic wound and disease management.' : 'No dedicated healers. Plague burns unchecked.',
+          : f.hasChurch ? 'Clerical care. Basic wound and disease management.' : 'No healer is kept here; the sick are tended by their own families.',
     },
     // ⛔ THE LOGISTICS & SUPPLY ROW IS GONE FROM THE DEFENSE SURFACES (the owner's word,
     // 2026-11-03: "Do add storehouse months the economy tab."). It was the granary read; stored
@@ -434,7 +438,7 @@ export function deriveSupportingCapabilities(settlement) {
               ? 'A hostile fleet blockades the sea approaches. Airships run the blockade, impaired by siege countermeasures.'
               : 'A hostile fleet blockades the sea approaches. The port is choked, and no magical channel runs the line.')
         : f.hasNavy
-          ? 'Naval force controls sea approaches. Amphibious assault requires fleet superiority.'
+          ? 'The place\'s own ships hold the sea approaches; an attack by water would have to beat them first.'
           : 'Port facility but no naval force. Sea approaches are accessible to any vessel.',
     });
   }
@@ -601,7 +605,11 @@ export function foodEnduranceLine(settlement) {
   if (!end) return null;
   const tier = typeof settlement?.tier === 'string' ? settlement.tier : '';
   const noun = TIER_NOUNS.includes(tier) ? tier : 'place';
-  const opening = end.besieged ? 'the siege has taken the outlying fields' : 'under siege the outlying fields are lost';
+  // 2 + 20 (W2-A-LEAVES, 2026-11-12; the second wave's ruling): THE SIEGE FIGURE IS A CONDITION. Only a besieged
+  // place reads it in the indicative; everywhere else it is what a siege WOULD do to the stores the Economy tab's
+  // row states (the census counted "under siege the outlying fields are lost" outside a siege in 689 of 720).
+  const actual = end.besieged === true;
+  const opening = actual ? 'the siege has taken the outlying fields' : 'under siege the outlying fields would be lost';
   const lead = end.hasGranary
     ? `${opening.charAt(0).toUpperCase()}${opening.slice(1)}`
     : `No granary: ${opening}`;
@@ -616,9 +624,10 @@ export function foodEnduranceLine(settlement) {
   // granary simply carries the place.
   const held = end.storesHeld ? `, but ${HELD_STORES_WORDS} it` : '';
   if (end.fullRationMonths === null) {
-    before = `${lead}, but what the ${noun} still grows feeds it at full rations; `;
+    before = `${lead}, but what the ${noun} still grows ${actual ? 'feeds' : 'would feed'} it at full rations; `;
     door = end.hasGranary ? 'the granary' : 'its household stores';
-    after = end.hasGranary ? ` stands in reserve${held}.` : ' stand in reserve.';
+    const stand = actual ? (end.hasGranary ? 'stands' : 'stand') : 'would stand';
+    after = end.hasGranary ? ` ${stand} in reserve${held}.` : ` ${stand} in reserve.`;
   } else {
     const stretched = end.keptShare > 0 ? 'with what is still harvested, ' : '';
     const half = end.halfRationMonths === null
@@ -626,8 +635,51 @@ export function foodEnduranceLine(settlement) {
       : `, ${monthsInWords(end.halfRationMonths)} on half`;
     before = `${lead}; ${stretched}`;
     door = end.hasGranary ? 'the granary' : 'household stores';
-    const carries = end.storesHeld ? 'would carry' : end.hasGranary ? 'carries' : 'carry';
+    const carries = end.storesHeld || !actual ? 'would carry' : end.hasGranary ? 'carries' : 'carry';
     after = ` ${carries} the ${noun} for ${monthsInWords(end.fullRationMonths)} at full rations${half}${held}.`;
   }
   return { label: FOOD_ENDURANCE_LABEL, before, door, after, sentence: `${before}${door}${after}` };
+}
+
+// ─── SW-B5 FRAMES: the criminal ring's note gets vantages ─────────────────────
+// ⚠ AT THE END OF THE FILE so no line above moves (lines of this module are cited elsewhere).
+import { hashKey } from './stateProse/stateProseKernel.js';
+
+/**
+ * ⭐ THE RING'S NOTE GETS VANTAGES (lane SW-B5 FRAMES, 2026-11-09; STYLE-RULINGS-2 B5, the
+ * chair's widening of the lane's manifest to this one note; the owner's style law §7–§8). The
+ * `organized` note printed word for word in 306 of the 1,000 towns, as two frames (#12–15 of
+ * STYLE-0's twenty). Index 0 is the original; the others say the SAME facts — one ring decides
+ * what crime is allowed, it is predictable and can be bargained with, it puts down random
+ * violence because that brings the law, it lives on protection money and bought officials —
+ * from another vantage. No new fact is read. The settlement's own seed chooses (`_seed`, the
+ * birth's identity) through the kernel's avalanched `hashKey`, with no draw; a record with no seed prints the original. Only the note
+ * varies: `key`, `label` and the colours are the table's, so every reader of `key` is unmoved.
+ * @type {ReadonlyArray<string>}
+ */
+const ORGANIZED_RING_NOTES = Object.freeze([
+  CRIM_STRUCTURE_DATA.organized.note,
+  'Crime here answers to one ring. It keeps the streets quiet because trouble brings the law, lives on protection money and on whatever official it can pay, and anyone who needs something from it can bargain.',
+  'Shopkeepers here pay one ring for protection, and the ring pays any official who will take its money. It stamps out random violence, which would bring the law, and its terms are known and can be negotiated.',
+  'Ask who runs crime here and the answer is one ring. It sets the rules and keeps to them, it can be bargained with, and it puts down any violence that would bring the law; it lives on protection money and on any official it can bribe.',
+]);
+
+/**
+ * W2-A-LEAVES-2 (2026-11-13; REVIEW-W2A F3, F3c). Each vantage said the ring "lives on protection money and bought
+ * officials" (the officials it pays, pays officials in turn, bribed officials): FALSE in 87 of the census's 720
+ * organised rings, where no official answers to a criminal house and the hall is not the criminals'. Whether one
+ * does is VEILED (the cast's allegiances and the hall's rung are stripped from the public record), and this note is
+ * one value printed on the DM's Defense tab and the public page alike, so it may not read it. The four vantages now
+ * say what is true in every town and read nothing hidden: the ring lives on "any official it can buy" (pays "any
+ * official who will take its money"), which presumes no buyer; the DM's "Who answers to whom" names those it has.
+ * The pick is the settlement's seed, as before (SW-B5); for the owner's veto, as new words.
+ * @param {{ key: string, label: string, color: string, bg: string, note: string }} row
+ * @param {{ _seed?: unknown }} settlement
+ * @returns {{ key: string, label: string, color: string, bg: string, note: string }}
+ */
+function withRingVantage(row, settlement) {
+  const seed = settlement?._seed;
+  if (row.key !== 'organized' || typeof seed !== 'string' || !seed) return row;
+  const note = ORGANIZED_RING_NOTES[hashKey(`${seed}::defenseDisplay:organizedRing`) % ORGANIZED_RING_NOTES.length];
+  return note === row.note ? row : Object.freeze({ ...row, note });
 }

@@ -67,7 +67,7 @@ function hierarchyDecision({ currentType, overlordType, vassalState }) {
     }
     return {
       toType: 'cold_war',
-      reason: 'The relationship is suspended under the overlord conflict posture.',
+      reason: 'Its overlord\'s quarrels now decide whom it may deal with, and this friendship is set aside.',
     };
   }
 

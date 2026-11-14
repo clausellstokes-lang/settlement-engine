@@ -10,16 +10,14 @@
  * only — no store reads, no worldState, no leak surface.
  */
 
-import { deriveMagicPosture, deriveMagicRelianceView, magicRelianceDeskSettlement } from '../../../domain/display/dossierViewModel.js';
+import { deriveMagicPosture, deriveMagicRelianceView, deriveMagicSupplyView } from '../../../domain/display/dossierViewModel.js';
 import { describeDeityEffects } from '../../../domain/display/deityEffects.js';
 import { FS, INK, MUTED, BODY, BORDER, CARD, CARD_HDR, SLATE, sans, SP } from '../../theme.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import NameColumns from '../../primitives/NameColumns.jsx';
-import { defenseMagicDependencyProse } from '../../../domain/display/stateProse/defenseStateProse.js';
+import { magicDeskRead } from '../magicDeskRead.js';
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
-import { tierNounFor } from '../../../domain/display/stateProse/weaveBlock.js';
-import { magicWorksAt } from '../../../domain/worldPulse/magicWorksAt.js';
 import { FLUSH } from '../../../design/flush.js';
 
 /**
@@ -73,8 +71,8 @@ export default function MagicTab({ settlement, publicDossier = false, playerView
 
   // ── MAGIC DEPENDENCE: ONE BLOCK, THE ROLES' FRAMING (T2-15 MERGE + MOVE, R2/R3) ──────────
   // The frozen `magicDependency` record (its title and its chain notes) and DS-DEF-9's reading
-  // are one idea. DS-DEF-9 REPLACES the static explanation where the desk speaks; the static
-  // explanation stands on public. The block draws on a FALSE flag too when DS-DEF-9 has its
+  // are one idea. DS-DEF-9 REPLACES the static explanation where the desk speaks (on a shared page, where the
+  // owner's draw speaks); the static explanation stands where it is silent. The block draws on a FALSE flag too when DS-DEF-9 has its
   // `magicDependency false` reading (a finding, not an absence). Where magic does not function
   // nothing here is true (T2-24), so the desk is not drawn and the block does not render.
   // The block carries the page's only first-survey stamp: `magicDependency` is a G5
@@ -88,13 +86,12 @@ export default function MagicTab({ settlement, publicDossier = false, playerView
   // reading (relied-upon or integral ⇒ true), and the block's own fallback reads the same.
   // The siege/famine/plague flag no longer decides anything on this tab.
   const reliance = deriveMagicRelianceView(settlement);
-  const magicProse = publicDossier || magicWorksAt({ settlement }) === false
-    ? Object.freeze({ arcaneReliance: null })
-    : defenseMagicDependencyProse(magicRelianceDeskSettlement(settlement), {
-      seed: String(settlement?._seed ?? settlement?.id ?? ''),
-      audience: playerView ? 'player' : 'dm',
-      tierNoun: tierNounFor(settlement.tier),
-    });
+  // ROW 3 (W2-A-LEAVES, 2026-11-12, the chair's ruling): the reliance line names where the magic comes from, read
+  // from the leaf (`facts/magicSource.js`); where nothing on the record supplies it, the line does not print.
+  const supply = deriveMagicSupplyView(settlement);
+  // THE PUBLIC BRANCH (STYLE-RULINGS-2 B10(a), SW-B7b): a shared page prints the lens the
+  // owner's player view drew, shipped at the save (`magic`); unstamped, SILENT (magicDeskRead.js).
+  const magicProse = magicDeskRead(settlement, { publicDossier, playerView });
   const magicLine = drawnAtMount(MAGIC_DEPENDENCY_MOUNT, magicProse.arcaneReliance)?.sentence || null;
   const magicFrozen = posture.magicExists && reliance.reliesOnMagic;
 
@@ -142,9 +139,10 @@ export default function MagicTab({ settlement, publicDossier = false, playerView
               background: CARD_HDR, padding: `${SP.sm}px ${SP.md}px`, borderBottom: `1px solid ${BORDER}`,
             }}>Roles</div>
             <div style={{ padding: `${SP.xs}px ${SP.md}px` }} data-testid="magic-roles">
-              {reliance.shown && (
+              {reliance.shown && supply.statable && (
                 <div data-testid="magic-reliance" style={{ fontSize: proseFontSize(FS.sm, mobile), color: INK, fontWeight: 700, padding: `${SP.xs}px 0` }}>
                   Reliance on magic: {reliance.word}
+                  {supply.supply && <span data-testid="magic-reliance-source" style={{ fontWeight: 400 }}> · supplied by {supply.supply}</span>}
                 </div>
               )}
               {posture.roleLines.map((line, i) => (
@@ -166,14 +164,13 @@ export default function MagicTab({ settlement, publicDossier = false, playerView
               {magicLine
                 ? <p style={{ fontSize: proseFontSize(FS.sm, mobile), color: BODY, lineHeight: 1.55, margin: 0, fontStyle: 'italic' }}>{magicLine}</p>
                 : magicFrozen && <p style={{ fontSize: proseFontSize(FS.sm, mobile), color: BODY, lineHeight: 1.5, margin: 0 }}>
-                  This settlement's resilience relies on active magical infrastructure. One or more supply
-                  chains are magically sustained, or stress conditions are being offset by arcane, divine,
-                  or druidic intervention. Losing those practitioners through conflict, plague, or
-                  political disruption would immediately expose critical vulnerabilities.
+                  This place leans on its spellcasters: some of what it eats or makes, or some of the
+                  trouble it keeps at bay, depends on their work. Lose them to war, plague or politics
+                  and the gap would show at once.
                 </p>}
               {magicFrozen && (settlement.economicState?.activeChains || []).filter(c => c.magicNote).map((c, i) => (
                 <div key={i} style={{ fontSize: proseFontSize(FS.xs, mobile), color: BODY, marginTop: 6, paddingLeft: 8, borderLeft: `2px solid ${BORDER}`, fontStyle: 'italic' }}>
-                  {c.label}: {c.magicNote}
+                  {chainPrintName(c, settlement).label}: {c.magicNote}
                 </div>
               ))}
             </div>
@@ -200,3 +197,4 @@ export default function MagicTab({ settlement, publicDossier = false, playerView
     </div>
   );
 }
+import { chainPrintName } from '../../../domain/display/chainPrintName.js'; // COHERENCE-AGREE-6 (F1): what a chain prints under

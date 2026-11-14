@@ -24,6 +24,8 @@ import { settleCrimeLinesToSignal } from '../safetyProfile.js';
 // at assembly so existing pipeline NPCs are deduplicated against.
 import { ensureFactionStructuralNpcs } from '../factionRoles.js';
 import { drawTies } from '../people/ties.js';
+import { seatFacesFoldedByDualHat } from '../people/representatives.js';
+import { settleNarrativesToRoster, settleStandingToRoster, settleTensionsToRoster, standingForceOf, standingRosterOf } from '../power/rosterText.js';
 // ODQ §810's tier-gated density law: sizes the political roster to the tier's
 // faction band. Dormant (returns its input by reference, no draw) for any world
 // whose own config carries no density-law marker.
@@ -43,12 +45,14 @@ import {
   clearActiveRng,
   setActiveRng,
 } from '../../kernel/rngContext.js';
-import { culturalNotesFor } from '../../domain/cultureProfiles.js';
+import { culturalNotesFor } from '../../domain/cultureProfiles.js'; import { foodwaysLineOf } from '../../domain/foodways.js'; // URBAN-FIX C-1: one line, so no cited line moves
 import {
   buildGenerationCoherenceReceipt,
 } from '../generationCoherence.js';
 import { storeTrueHooksOnly } from '../../domain/coherence/hookTruthRecord.js'; import { fishTradeTwinned } from '../../data/fishTradeTwinLines.js'; // F11: one line, so no cited line moves
 import { truePersonHooks } from '../people/personHooks.js';
+import { takeAllegianceReceipts } from '../../domain/people/allegiance.js';
+import { recordTrace } from '../../domain/trace.js';
 import { resolveGenerationWorldLaw } from '../generationContext.js';
 import {
   assertPowerEconomyFreshness,
@@ -91,7 +95,7 @@ const UNPINNED = Symbol('assembleSettlement:unpinned');
 registerStep('assembleSettlement', {
   // structuralValidationPass provides ctx.structural — the coherence receipt
   // for the FINAL roster (Wave 4b moved it out of assembleInstitutions).
-  deps: ['generateNarratives', 'generatePopulation', 'corruptionPass', 'structuralValidationPass'],
+  deps: ['generateNarratives', 'generatePopulation', 'structuralValidationPass'], // ALLEGIANCE-CAR1 (J-2): corruptionPass retired; its roll is the seam's (domain/people/allegiance.js)
   reads: ['availableServices', 'culture', 'culturalIdentity', 'economicState', 'economicViability', 'effectiveConfig', 'generationContext', 'generationRepairs', 'history', 'institutions', 'isolationSupport', 'neighbourProfile', 'npcs', 'population', 'powerIntent', 'powerStructure', 'rawNeighbour', 'relationships', 'resourceAnalysis', 'settlementReason', 'spatialLayout', 'stress', 'structural', 'tier'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
   // The terminal step bundles the FINAL value of every re-derived key. Declared rather than
   // assumed: 'it runs last' is a fact about today's order, and the contract now checks it.
@@ -166,7 +170,7 @@ registerStep('assembleSettlement', {
     // the same local expression of the culture choice. culturalNotes keeps the
     // established PDF/AI compatibility field while the structured record gives
     // future engineers the seven explicit dimensions behind it.
-    culturalIdentity,
+    culturalIdentity: culturalIdentity && foodwaysLineOf({ economicState }) ? Object.freeze({ ...culturalIdentity, foodways: foodwaysLineOf({ economicState }) }) : culturalIdentity, // URBAN-FIX C-1 ONE HOME: where the food record exists the stored foodways line IS the record's composed line (domain/foodways.js), the one the page prints; draw-free
     culturalNotes: culturalNotesFor(culturalIdentity),
     // Tier 1.2 — dual-write the stress array under both the legacy
     // `stress` name AND the canonical `stressors` name. Consumers that
@@ -272,6 +276,8 @@ registerStep('assembleSettlement', {
   // Runs BEFORE generateCoherence below, which is where the dispersal reads the
   // roster. Version-gated: a world whose own config carries no density-law
   // marker gets its powerStructure back by reference, with no draw taken.
+  // COHERENCE-POWERS-3 (F2): the roster the power step's standing sentences were written on, before the resize
+  const standingRoster = standingRosterOf(settlement.powerStructure?.factions || []);
   const resized = resizePoliticalRoster({
     tier,
     // X-46 car 4: the population tilt (read only under Register VII; no draw).
@@ -282,11 +288,15 @@ registerStep('assembleSettlement', {
     economicState: settlement.economicState,
     // The roster the population step actually produced is the TRUE mass here,
     // so the seat ceiling (R17: a house the mass cannot crew must not exist) is
-    // computed against a fact rather than against a second mass roll.
-    massOverride: (settlement.npcs || []).length,
+    // computed against a fact rather than against a second mass roll. COHERENCE-POWERS-3 (F1): the leader's office
+    // and the leader's house count as two, as they did before the dual hat folded the office's face into the house's.
+    massOverride: (settlement.npcs || []).length + seatFacesFoldedByDualHat(settlement),
+    // COHERENCE-POWERS 2B: the fold reads the final houses (applyDensityLaw.js :: foldKin)
+    institutions: settlement.institutions,
     rng,
   });
-  if (resized.powerStructure !== settlement.powerStructure) {
+  const rosterResized = resized.powerStructure !== settlement.powerStructure; // COHERENCE-POWERS-3 (F2), read below
+  if (rosterResized) {
     settlement.powerStructure = resized.powerStructure;
   }
 
@@ -309,9 +319,13 @@ registerStep('assembleSettlement', {
   const coherenceUpdates = inAssemblySubstream(
     rng,
     'canonical-coherence',
-    coherenceRng => generateCoherence(settlement, coherenceRng, pins),
+    // FIX-PUBLIC-VEIL (the second seat): the record's seed salts a veiled mint's opaque id at the cast seam
+    coherenceRng => generateCoherence(settlement, coherenceRng, pins, ctx._seed),
   );
   Object.assign(settlement, coherenceUpdates);
+  // ALLEGIANCE-CAR1 (2026-11-08): the hidden allegiances' receipts, left by the coherence seam, recorded on the
+  // run's deterministic clock under the step label `people-allegiance` (domain/edit/tracePartition.js).
+  for (const receipt of takeAllegianceReceipts(settlement)) recordTrace(ctx, /** @type {any} */ (receipt));
   // Rung 1 N1: faction power totals 100 on every path, the held-roster one included (whose
   // coherence tail skips the dispersal that conserves it). By reference for v1 and for a
   // roster already at 100; no draw. A HELD powerStructure is the DM's and is not rewritten.
@@ -320,6 +334,13 @@ registerStep('assembleSettlement', {
       config: settlement.config, powerStructure: settlement.powerStructure,
     });
     if (conserved !== settlement.powerStructure) settlement.powerStructure = conserved;
+    // COHERENCE-POWERS-3 (F2): every text that names a power reads the final roster (power/rosterText.js). Only where
+    // the density law moved the roster; the power's last write is the conservation just above.
+    if (rosterResized) {
+      settlement.powerStructure = settleStandingToRoster(settlement.powerStructure, standingRoster, standingForceOf(settlement.institutions));
+      settlement.powerStructure = settleNarrativesToRoster(settlement.powerStructure, standingRoster);
+      settlement.history = settleTensionsToRoster(settlement.history, settlement.powerStructure, standingRoster);
+    }
   }
 
   // Faction-to-NPC coupling. Walks every faction; for each archetype

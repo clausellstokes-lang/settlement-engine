@@ -134,6 +134,6 @@ export const STRESSOR_SPINE_SIBLINGS = Object.freeze({
   ]),
   [STRESSOR_SPINE_PHRASES.politically_fractured.strain]: Object.freeze([
     Object.freeze({ text: STRESSOR_SPINE_PHRASES.politically_fractured.strain, needs: ['ruler: council'] }),
-    Object.freeze({ text: 'factions that each hold part of the place and will not yield', twinOf: STRESSOR_SPINE_PHRASES.politically_fractured.strain, excludes: ['ruler: council'] }),
+    Object.freeze({ text: 'powers that each hold part of the place and will not yield', twinOf: STRESSOR_SPINE_PHRASES.politically_fractured.strain, excludes: ['ruler: council'] }),
   ]),
 });

@@ -22,9 +22,9 @@ export const COMPENDIUM_DATA = Object.freeze({
     "variableEntries": [
       {"id":"food_security","label":"Food security","description":"How reliably the settlement can feed its population, weighing food production and stores against demand. It falls toward famine when granaries and trade cannot cover the mouths to feed."},
       {"id":"labor_capacity","label":"Labor capacity","description":"The workforce available for production, services, and building. It reflects population, health, and how much labor is already committed elsewhere."},
-      {"id":"public_legitimacy","label":"Public legitimacy","description":"How far the populace accepts the ruling power as rightful. Low legitimacy invites unrest, defiance, and factional challenge."},
+      {"id":"public_legitimacy","label":"Public legitimacy","description":"How far the populace accepts the ruling power as rightful. Low legitimacy invites unrest, defiance, and challenges from rival powers."},
       {"id":"ruling_authority","label":"Ruling authority","description":"The reach and grip of the governing power over the settlement. It measures how effectively decisions are enforced, not whether they are welcomed."},
-      {"id":"faction_power","label":"Faction power","description":"The collective strength of organized factions competing for influence. When it is high, rival blocs rather than the ruler increasingly set the agenda."},
+      {"id":"faction_power","label":"Strength of the powers","description":"The combined strength of organised powers competing for influence. When it is high, rival blocs rather than the ruler increasingly set the agenda."},
       {"id":"trade_connectivity","label":"Trade connectivity","description":"How well the settlement is tied into trade routes and partners. It governs the flow of goods in and out, and the wealth that flow brings."},
       {"id":"healing_capacity","label":"Healing capacity","description":"The settlement's ability to treat injury and disease through its healers, temples, and institutions. When it is low, plague and wounds run unchecked."},
       {"id":"defense_readiness","label":"Defense readiness","description":"How prepared the settlement is to withstand attack, from walls and garrison to trained militia. It rises with fortification and falls under siege or neglect."},
@@ -35,7 +35,7 @@ export const COMPENDIUM_DATA = Object.freeze({
       {"id":"magical_stability","label":"Magical stability","description":"How stable and well-governed the settlement's magical forces are. Low stability signals unchecked arcane hazard, leakage, or contested magical authority."},
       {"id":"social_trust","label":"Social trust","description":"The cohesion binding the populace together, the everyday confidence that neighbours and institutions will hold. It frays under stress, division, and betrayal."},
       {"id":"economic_capacity","label":"Economic capacity","description":"The overall productive and financial strength of the settlement's economy. It underwrites what the settlement can afford to build, field, and endure."},
-      {"id":"law_order","label":"Law & order","description":"How firmly the rule of law holds day to day, from courts and watch to the plain absence of disorder. It falls as crime, faction violence, and unrest rise."}
+      {"id":"law_order","label":"Law & order","description":"How firmly the rule of law holds day to day, from courts and watch to the plain absence of disorder. It falls as crime, fighting between powers, and unrest rise."}
     ],
     "bands": ["surplus","adequate","strained","critical","collapsed"],
     "bandCount": 5
@@ -46,7 +46,7 @@ export const COMPENDIUM_DATA = Object.freeze({
     "entries": [
       {"id":"food","label":"Food","description":"Strain from the settlement failing to feed itself, rising as production and stores fall short of demand. It is the pressure behind famine and food riots."},
       {"id":"disease","label":"Disease","description":"Strain from sickness and poor sanitation outpacing the settlement's ability to treat it. It is the pressure behind plague and its social fallout."},
-      {"id":"conflict","label":"Conflict","description":"Internal strain from factions, classes, or rivals pulling against each other. It is the pressure behind feuds, unrest, and political fracture."},
+      {"id":"conflict","label":"Conflict","description":"Internal strain from powers, classes, or rivals pulling against each other. It is the pressure behind feuds, unrest, and political fracture."},
       {"id":"hostility","label":"Hostility","description":"External strain from hostile neighbours and threats pressing on the settlement. It is the pressure behind raids, a war footing, and closed gates."},
       {"id":"trade","label":"Trade","description":"Strain from the settlement's trade being disrupted or unable to meet its needs. It rises when routes, partners, or exports falter."},
       {"id":"economy","label":"Economy","description":"Strain from economic weakness, scarcity, or collapse of livelihoods. It is the pressure behind hardship, debt, and decline."},
@@ -86,11 +86,11 @@ export const COMPENDIUM_DATA = Object.freeze({
     {"id":"magic-legality","concept":"Magic Legality","blurb":"Where magic exists, its standing in law runs from forbidden to celebrated. Only a major god can shift a realm's legality (see the deity axes above). A world with no magic reads as absent.","tab":"arcane","anchor":"magic","levels":[{"name":"Forbidden","reading":"Magic is outlawed; practicing it is a crime."},{"name":"Restricted","reading":"Magic is tightly controlled, permitted only in narrow licensed forms."},{"name":"Regulated","reading":"Magic is legal but overseen, with rules on who may practice and how."},{"name":"Tolerated","reading":"Magic is accepted as an ordinary part of life."},{"name":"Celebrated","reading":"Magic is embraced and openly honored."}]}
   ],
   "operations": {
-    "count": 160,
+    "count": 159,
     "exemptCount": 70,
     "byKlass": {
       "canon": 6,
-      "macro": 48,
+      "macro": 47,
       "mechanical": 106
     },
     "scopes": ["campaign","global","save"],
@@ -116,7 +116,6 @@ export const COMPENDIUM_DATA = Object.freeze({
       {"opType":"injectCampaignStressor","label":"Inject a regional stressor","description":"Adds a normalized stressor, such as a famine or a raid, into the campaign's region to be resolved later. The change can be undone.","klass":"macro","slice":"campaignRegionalSlice","targetScope":"campaign","receiptRef":"normalized-stressor","undoToken":"undoCampaignStressorBridge"},
       {"opType":"resolveCampaignStressor","label":"Resolve a regional stressor","description":"Resolves an active regional stressor, producing residual proposals for its aftermath. The change can be undone.","klass":"macro","slice":"campaignRegionalSlice","targetScope":"campaign","receiptRef":"residual-proposals","undoToken":"undoCampaignStressorBridge"},
       {"opType":"undoCampaignStressorBridge","label":"Undo a stressor change","description":"Reverses the most recent regional stressor injection or resolution on the campaign.","klass":"macro","slice":"campaignRegionalSlice","targetScope":"campaign","receiptRef":null,"undoToken":null},
-      {"opType":"advanceCampaignRegionalImpacts","label":"Advance regional impacts","description":"Steps the campaign's queued regional impacts forward, updating the regional graph as their effects land.","klass":"macro","slice":"campaignRegionalSlice","targetScope":"campaign","receiptRef":"regionalGraph","undoToken":null},
       {"opType":"applyQueuedRegionalImpact","label":"Apply a queued regional impact","description":"Applies one queued regional impact to its target settlement and records the result.","klass":"macro","slice":"campaignRegionalSlice","targetScope":"campaign","receiptRef":"impact-result","undoToken":null},
       {"opType":"resolveRegionalImpact","label":"Resolve a regional impact","description":"Marks a regional impact as resolved and records its outcome.","klass":"macro","slice":"campaignRegionalSlice","targetScope":"campaign","receiptRef":"impact-result","undoToken":null},
       {"opType":"requestNarrative","label":"Request narrative refinement","description":"Sends the settlement for AI narrative refinement and records the result to the chronicle. It can be reverted to the raw generated text.","klass":"macro","slice":"aiSlice","targetScope":"save","receiptRef":"AI_GENERATION_COMPLETED+chronicle","undoToken":"revertCurrentToRaw"},
@@ -163,7 +162,7 @@ export const COMPENDIUM_DATA = Object.freeze({
       {"opType":"removeSavedSettlement","label":"Remove a saved settlement","description":"Deletes one settlement from the saved-settlements list.","klass":"mechanical","slice":"settlementSlice","targetScope":"save","receiptRef":null,"undoToken":null},
       {"opType":"updateSavedSettlement","label":"Update a saved settlement","description":"Writes changed fields onto one saved settlement in the list.","klass":"mechanical","slice":"settlementSlice","targetScope":"save","receiptRef":null,"undoToken":null},
       {"opType":"renameNPC","label":"Rename an NPC","description":"Renames a named NPC within the settlement and carries the new name through its references.","klass":"mechanical","slice":"settlementSlice","targetScope":"save","receiptRef":null,"undoToken":null},
-      {"opType":"renameFaction","label":"Rename a faction","description":"Renames a faction and carries the new name through the settlement: its place in the power structure, the governing seat, every member, the institutions it founded, and any neighbouring settlement that names it.","klass":"mechanical","slice":"settlementSlice","targetScope":"save","receiptRef":null,"undoToken":null},
+      {"opType":"renameFaction","label":"Rename a power","description":"Renames a power and carries the new name through the settlement: its place in the power structure, the governing seat, every member, the institutions it founded, and any neighbouring settlement that names it.","klass":"mechanical","slice":"settlementSlice","targetScope":"save","receiptRef":null,"undoToken":null},
       {"opType":"applyUserEditAction","label":"Apply a manual edit","description":"Applies a manual user edit to the settlement. It can be reversed with Revert a manual edit.","klass":"mechanical","slice":"settlementSlice","targetScope":"save","receiptRef":null,"undoToken":"revertUserEditAction"},
       {"opType":"revertUserEditAction","label":"Revert a manual edit","description":"Reverses a previously applied manual user edit.","klass":"mechanical","slice":"settlementSlice","targetScope":"save","receiptRef":null,"undoToken":"applyUserEditAction"},
       {"opType":"persistActiveSaveEdit","label":"Persist an edit to the active save","description":"Writes an edit to the active save so the change survives a reload.","klass":"mechanical","slice":"settlementSlice","targetScope":"save","receiptRef":null,"undoToken":null},
@@ -306,14 +305,14 @@ export const COMPENDIUM_DATA = Object.freeze({
     {"id":"outsider","label":"Outsider","reading":"A foreign or external power with a foothold."},
     {"id":"occupation","label":"Occupation","reading":"An occupying force holding the settlement."},
     {"id":"civic","label":"Civic","reading":"Civic bodies and community institutions."},
-    {"id":"other","label":"Other","reading":"A faction that fits none of the above."}
+    {"id":"other","label":"Other","reading":"A power that fits none of the above."}
   ],
   "governance": {
     "labels": [
       {"label":"Stable","reading":"Settled governance with no dominant strain."},
       {"label":"Ordered","reading":"Stable under a strong military presence."},
       {"label":"Tense","reading":"Stable but under external threat or monster pressure."},
-      {"label":"Fragile","reading":"Held by private security, with no public law."},
+      {"label":"Fragile","reading":"Held by private security more than by the public law."},
       {"label":"Vulnerable","reading":"Prosperous but underdefended."},
       {"label":"Unstable","reading":"Pervasive organized crime, up to outright criminal governance."},
       {"label":"Enforced Order","reading":"Authoritarian control."},
@@ -351,7 +350,7 @@ export const COMPENDIUM_DATA = Object.freeze({
       {"id":"conquest","label":"Conquest","reading":"Imposed by an outside conqueror."},
       {"id":"appointment","label":"Appointment","reading":"Installed by a higher authority."}
     ],
-    "note": "A settlement's government type is the name of its governing faction. Power changes hands by one of these causes, which the chronicle stamps on each regime change."
+    "note": "A settlement's government type is the name of the power that governs it. Rule changes hands by one of these causes, which the chronicle stamps on each regime change."
   },
   "corruption": {
     "vectors": [
@@ -402,7 +401,7 @@ export const COMPENDIUM_DATA = Object.freeze({
     {"id":"provenance","label":"The provenance ledger","flag":"provenanceLedgerEnabled","blurb":"Records the true parent cause of each durable outcome into a ledger, so the chronicle can mark a link as genuinely recorded rather than merely inferred from time and place.","presetGated":true,"dormant":false,"presets":["realistic_regional","dramatic_campaign","living_realm","full_simulation"]},
     {"id":"urbanFabric","label":"Urban fabric","flag":"urbanFabricEnabled","blurb":"Gives each district a slowly decaying sense of prominence, so old power and wealth linger after a regime or economy shifts instead of flipping at once. It also tracks a gradual alignment grain and fading scars from past disasters.","presetGated":true,"dormant":false,"presets":["realistic_regional","dramatic_campaign","living_realm","full_simulation"]},
     {"id":"npcGrowth","label":"NPC growth","flag":"npcGrowthEnabled","blurb":"Lets NPCs slowly change: lived events like calamity, betrayal, or a golden age build pressure that can, rarely, add an acquired trait over an NPC's authored core, never overwriting it.","presetGated":true,"dormant":false,"presets":["realistic_regional","dramatic_campaign","living_realm","full_simulation"]},
-    {"id":"npcLadder","label":"The contested court","flag":"npcLadderEnabled","blurb":"Gives each faction a persistent rank ladder. NPCs rise by displacing a named rival and fall when displaced, so advancement changes the court without creating titles or resolving anyone's fate.","presetGated":true,"dormant":false,"presets":["realistic_regional","dramatic_campaign","living_realm","full_simulation"]},
+    {"id":"npcLadder","label":"The contested court","flag":"npcLadderEnabled","blurb":"Gives each power a persistent rank ladder. NPCs rise by displacing a named rival and fall when displaced, so advancement changes the court without creating titles or resolving anyone's fate.","presetGated":true,"dormant":false,"presets":["realistic_regional","dramatic_campaign","living_realm","full_simulation"]},
     {"id":"traditions","label":"Living traditions","flag":"traditionsEnabled","blurb":"Gives every settlement recurring observances with a durable origin, an accountable keeper, and outcomes shaped by the local economy. Traditions can flourish, fail, migrate, or be imposed without losing their history.","presetGated":true,"dormant":false,"presets":["realistic_regional","dramatic_campaign","living_realm","full_simulation"]},
     {"id":"roads","label":"Named travellers on the roads","flag":"roadsEnabled","blurb":"Lets named NPCs travel for diplomacy, trade, dominion, and observance across a canonized realm. Journeys take time and can lead to capture, ransom, rescue, or return, but the engine never resolves a traveller's life.","presetGated":true,"dormant":false,"presets":["realistic_regional","dramatic_campaign","living_realm","full_simulation"]},
     {"id":"calamity","label":"The Great Calamity","flag":"disastersEnabled","blurb":"A rare seeded disaster can strike a settlement, knocking out a few of its non-essential institutions and killing a bounded share of its people. The aftermath, from severed supply chains to exodus and unrest, emerges from the other systems rather than being scripted.","presetGated":true,"dormant":false,"presets":["realistic_regional","dramatic_campaign","full_simulation"]}
@@ -447,7 +446,7 @@ export const COMPENDIUM_DATA = Object.freeze({
       {"cat":"Criminal","name":"Merchant-Criminal Blur","cond":"Economy ≥65, Criminal ≥58","desc":"Legitimate and criminal commerce are indistinguishable. Guilds run protection."},
       {"cat":"Criminal","name":"Lawless Frontier","cond":"Criminal ≥60, Military ≤30","desc":"Beyond the reach of law. Survival is personal."},
       {"cat":"Balanced","name":"Safe Province Capital","cond":"All sliders 40-65, threat: heartland","desc":"Stable, diverse, prosperous. The baseline of successful governance."},
-      {"cat":"Balanced","name":"Balanced","cond":"No slider exceeds 60","desc":"No dominant faction. Power distributed. Politics negotiated."},
+      {"cat":"Balanced","name":"Balanced","cond":"No slider exceeds 60","desc":"No one power dominates. Strength is spread; politics is negotiated."},
       {"cat":"Balanced","name":"Merchant Hunters Lodge","cond":"Military ≥60, threat: plagued","desc":"Organized monster hunters are a significant institution."},
       {"cat":"Balanced","name":"Mining Colony","cond":"Resource: ore or stone nearby, isolated","desc":"Exists to extract a resource. Company-town dynamics."},
       {"cat":"Balanced","name":"Plague of Beasts","cond":"Stress: Beast & Raider Threat active","desc":"Under active monster pressure. Civilian life constrained to fortified areas."}

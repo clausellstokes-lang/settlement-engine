@@ -153,7 +153,7 @@
     {
       "pool": "faction_challenge",
       "keyGuarantees": [
-        "an active condition of archetype faction_challenge (its own label: \"Faction challenge\")",
+        "an active condition of archetype faction_challenge (its own label: \"Challenge to the rulers\")",
         "conditions are reported by crisisOf as conditionKinds and NOT folded into crisis kinds (crisisKind.js (c)), so no poolCrisis"
       ],
       "poolNeeds": [],
@@ -165,7 +165,7 @@
       "lines": [
         {
           "lineId": "CONDITION_ARCHETYPE_TEMPLATES.faction_challenge.description",
-          "text": "A major faction is maneuvering to alter the settlement power balance.",
+          "text": "A major power is working to change who holds sway in town.",
           "needs": [],
           "excludes": [],
           "crisis": null,

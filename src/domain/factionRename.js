@@ -224,7 +224,10 @@ export const NPC_HOMES = Object.freeze(['npcs[]']);
  * holding an ARRAY of names rather than one; `kind` is the declared surface kind
  * (exact-key rewrite vs whole-word prose substitution).
  *
- * @type {ReadonlyArray<{ parent: string | null, key: string, kind: 'key' | 'prose', list?: boolean, each?: boolean, when?: { key: string, equals: unknown }, why: string }>}
+ * A list-of-records field (`each`) always names its parent list; only a single field may sit on the
+ * record itself (`parent: null`).
+ * @type {ReadonlyArray<({ parent: string, each: true } | { parent: string | null, each?: false })
+ *   & { key: string, kind: 'key' | 'prose', list?: boolean, when?: { key: string, equals: unknown }, why: string }>}
  */
 const NPC_FACTION_FIELDS = Object.freeze([
   // 2026-11-07 PEOPLE-1 CAST (R-P3): the card's powers — `memberships[]` holds one record per power the
@@ -235,6 +238,9 @@ const NPC_FACTION_FIELDS = Object.freeze([
   // a MINTED face (the seat of R-P2, an `other` power's of R-P4) is the face of the POWER itself:
   // `institution.key` holds the power's name (`when` kind === 'power'; a house-kind card's key is the
   // house's roster name, owned by the institution ledger) and its title is built from the name.
+  // ALLEGIANCE-CAR1 (2026-11-08): the hidden allegiance names the criminal power it answers to by the power's name
+  { parent: 'allegiance', key: 'power', kind: 'key',
+    why: 'the hidden allegiance: the criminal power a card secretly answers to (domain/people/allegiance.js)' },
   { parent: 'institution', key: 'key', kind: 'key', when: { key: 'kind', equals: 'power' },
     why: 'a minted face\'s institution is the power it stands for, keyed by the power\'s name' },
   { parent: 'institution', key: 'title', kind: 'prose',
@@ -262,10 +268,19 @@ const NPC_FACTION_FIELDS = Object.freeze([
   // ADDED 2026-09-30, the same latent class as role and the (retired) factionGoal above: npcGenerator's
   // succession-void goal ("Position themselves before {topFaction} moves first") has always
   // named a faction, and no denominator seed rolled it until the urban band's same-seed
-  // shift (ODQ §934.86) did. Cascading it is repair under the same ratified prose policy;
-  // goal.long never names a faction, so it is not declared.
+  // shift (ODQ §934.86) did. Cascading it is repair under the same ratified prose policy.
   { parent: 'goal', key: 'short', kind: 'prose',
     why: 'the succession-void goal names the faction the character means to move before' },
+  // ALLEGIANCE-CAR4 (2026-11-09): the goals rebuilt name the card's powers and their rivals in BOTH vantages (the RANK and
+  // POWER families), so goal.long joins goal.short under the same ratified prose policy; and a goal that targets a POWER
+  // stores the power's name as its keyed intent's target id (`kind === 'power'`), the simulation's join, so it is a KEY
+  // (a target of another kind holds a card id, a house key or a chain id, owned by their own ledgers).
+  { parent: 'goal', key: 'long', kind: 'prose',
+    why: 'the goal families name the card\'s power and its rival in the long goal as in the short' },
+  { parent: 'goal.intent.short.target', key: 'id', kind: 'key', when: { key: 'kind', equals: 'power' },
+    why: 'the keyed short goal\'s target, when it is a power, is the power\'s name (generators/people/goals.js)' },
+  { parent: 'goal.intent.long.target', key: 'id', kind: 'key', when: { key: 'kind', equals: 'power' },
+    why: 'the keyed long goal\'s target, when it is a power, is the power\'s name (generators/people/goals.js)' },
 ]);
 
 /**
@@ -386,6 +401,8 @@ export const NON_CASCADED_SURFACES = Object.freeze([
   { path: 'campaign.wizardNews.entries[]', why: 'campaign state this writer never holds, and a byte-identity golden surface: rewriting it would be a declared golden shift' },
   { path: 'townScene manifest labels', why: 'derived per compile from the roster; the scene schema carries no district-to-faction identity at all' },
   { path: 'aiData', why: 'cascaded by the registered applyCosmeticRename operation instead' },
+  // ALLEGIANCE-CAR1 (2026-11-08): the hidden allegiance's receipt names the criminal power it answers to
+  { path: 'simulationTrace[].downstreamEffects[].target', why: 'the generation RECEIPT (domain/people/allegiance.js :: leaveAllegianceReceipts names the criminal power): a recorded statement of what the generator decided while the power still bore its old name, the same ruling as the institution ledger\'s receipt row and causes[].reason below' },
   { path: 'simulationTrace[].causes[].reason', why: 'the generation TRACE, a recorded statement of what the generator decided while the faction still bore its old name; rewriting it would falsify the receipt, the same ruling as previousGovernments. It is also not a live reference: the fingerprint extractors read the trace enums and drop the reason prose' },
   // RUNG1B-F7 (walker over 120 soak records): the governing body's faction is named after
   // the body for two forms ('Merchant oligarchy', 'Democratic assembly'), so the HOUSE of
@@ -466,6 +483,10 @@ export const NPC_RENAME_SURFACES = Object.freeze([
 export const NPC_NON_CASCADED_SURFACES = Object.freeze([
   { path: `${NPC_HOMES[0]}.secret.what`, why: 'the secret is generated prose that names the characters it implicates; prose policy for people is owner-gated (see above)' },
   { path: `${NPC_HOMES[0]}.secret.stakes`, why: 'the stakes sentence names who would pay to bury the secret; prose policy for people is owner-gated' },
+  // ALLEGIANCE-CAR4 (2026-11-09): the goals rebuilt name the people a goal binds (the card above, the tie's other end, the
+  // handler, a pursuit's target); the simulation's join is the durable id in `goal.intent.*.target`, never the name.
+  { path: `${NPC_HOMES[0]}.goal.short`, why: 'the short goal is generated prose that names the people it binds (its durable join is goal.intent.short.target.id); prose policy for people is owner-gated' },
+  { path: `${NPC_HOMES[0]}.goal.long`, why: 'the long goal is generated prose that names the people it binds (its durable join is goal.intent.long.target.id); prose policy for people is owner-gated' },
   { path: 'relationships[].description', why: 'the generated relationship paragraph names both ends; prose policy for people is owner-gated' },
   { path: 'relationships[].tension', why: 'the generated tension line names both ends; prose policy for people is owner-gated' },
   { path: 'interSettlementRelationships[].description', why: 'the generated contact sentence names both people and the partner settlement; prose policy for people is owner-gated' },
@@ -721,7 +742,8 @@ function renameNpcRecord(npc, home, oldName, newName, mark) {
       mark(npcFieldPath(home, field), movedAny);
       continue;
     }
-    const owner = field.parent ? npc[field.parent] : npc;
+    // a dotted parent ('goal.intent.short.target') walks existing records only, as a single one does
+    const owner = field.parent ? field.parent.split('.').reduce((/** @type {unknown} */ o, k) => (isRecord(o) ? o[k] : undefined), npc) : npc;
     if (!isRecord(owner)) continue;
     if (field.when && owner[field.when.key] !== field.when.equals) continue;
     const moved = field.list

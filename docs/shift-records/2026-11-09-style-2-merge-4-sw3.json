@@ -1,0 +1,40 @@
+{
+  "_doc": "RECORD 4 OF THE STYLE WAVE'S MERGE (STYLE-2-MERGE), ODQ §934.105 (the cloud chair signs by the owner's delegation of 2026-11-06, vetoable; a successor chair does not inherit this signature). THE LAW OF THE CHAIN (BRIEF-MERGE-CAR §0; BRIEF-STYLE-2-WAVE §3): the integration branch's first-parent line is the golden chain; a lane's unsigned cause commits are components signed at its merge point. THE CAUSE, ONE: THE SW-3 REALM-PROSE MERGE OVER THE INTEGRATION BRANCH — lane/style-2-realm-prose-2026-11-09 at d96ae7a41 merged at 1ef46ca30 (STYLE-2-MERGE point 4), the dated roster composed; its lane signed nothing, its causes are the components signed here with the lane's own figures (docs/chair/2026-11-09/STYLE-2-REALM-PROSE-2026-11-09.md §7): 0991cc9e5, ruling A6, the realm prose to the owner's style law (newsVoice, decreeProsePools, heraldIntegrity, warRemembrance, chroniclersLetter, treatyDocument, newsBody, causeWalk, the war and mirror readers, traditionProse, arrivalProse, roadsProse, CharterRoadCard), gm 34 of 525 (celtic, the arrival line), fence 35 of 360, herald 1 (rr-fresh-full|1 contentSha256), witness 4 of 8 (wizardNewsSha256 of the four presets that light the traditions and roads kernels), prose 0, pdf 0; d1f0a6b27, the letter's twin ('This echoes what I wrote of {when}: {headline}.'), the chronicler's letter golden; every other commit of the lane docs or pins. THE MOVE, MEASURED before the write by scripts/audit/landing-stage.sh measure, stage to stage against the post-state of record 3 (the stage of ef4645832, SW-2): the generator golden master 34 of 525 rows (thorp 1, hamlet 6, village 6, town 7, city 7, metropolis 7) 13d47ef6.. -> 3bb1c433..; the espionage fence's driven corpus 35 of 360 rows (thorp 4, hamlet 4, village 6, town 4, city 13, metropolis 4) 89899e5d.. -> 70b1e6db..; 360/360 distinct; the herald knowledge desk 1 of 441 rows (rr-fresh-full|1 contentSha256; no section or item count moved, the length 441 unchanged); the preset lighting witness 4 of 8 rows (realistic_regional, dramatic_campaign, living_realm, full_simulation: wizardNewsSha256 only); the chronicler's letter golden (V-2, the letter's bytes: the span header and the four letter lines SW-3 rewrote); PDF 0; the prose manifest's movement at this point (0 of 1,050 rows) is signed ONCE at the final tip. Built through the guard with no STOP.",
+  "ownerWords": "I also now give all permissions required now and in the future. I also defer all judgement to you. · I leave all judgement now and in the future to you.",
+  "ownerDate": "2026-11-06",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation of 2026-11-06 to the cloud chair; the style wave's merge STYLE-2-MERGE, 2026-11-09)",
+  "cause": "THE SW-3 REALM-PROSE MERGE OVER THE INTEGRATION BRANCH — lane/style-2-realm-prose-2026-11-09 at d96ae7a41 merged at 1ef46ca30 (STYLE-2-MERGE point 4), the dated roster composed; its lane signed nothing, its causes are the components signed here with the lane's own figures (docs/chair/2026-11-09/STYLE-2-REALM-PROSE-2026-11-09.md §7): 0991cc9e5, ruling A6, the realm prose to the owner's style law (newsVoice, decreeProsePools, heraldIntegrity, warRemembrance, chroniclersLetter, treatyDocument, newsBody, causeWalk, the war and mirror readers, traditionProse, arrivalProse, roadsProse, CharterRoadCard), gm 34 of 525 (celtic, the arrival line), fence 35 of 360, herald 1 (rr-fresh-full|1 contentSha256), witness 4 of 8 (wizardNewsSha256 of the four presets that light the traditions and roads kernels), prose 0, pdf 0; d1f0a6b27, the letter's twin ('This echoes what I wrote of {when}: {headline}.'), the chronicler's letter golden; every other commit of the lane docs or pins",
+  "seat": "STYLE-2-MERGE (Opus 5.5) under the cloud chair, session session_01FbPLbejcfwX5nii12VM673, from the stage at 1ef46ca30",
+  "surfaces": [
+    {
+      "surface": "generator-golden-master",
+      "action": "re-record",
+      "predictedRows": 525,
+      "proofForm": "settlement-hash"
+    },
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant"
+    },
+    {
+      "surface": "herald-knowledge-desk-golden",
+      "action": "re-record",
+      "predictedRows": 441,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "preset-lighting-witness",
+      "action": "re-record",
+      "predictedRows": 15,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "chroniclers-letter-golden",
+      "action": "re-record",
+      "predictedRows": 4,
+      "proofForm": "derived-artefact"
+    }
+  ]
+}

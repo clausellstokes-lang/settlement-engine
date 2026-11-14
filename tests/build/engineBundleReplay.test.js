@@ -34,6 +34,9 @@
  *      loadGenerationLawPayloads + birthConfig + pipeline — what engine-generate runs)
  *      equals the in-process birth. supabase/functions/engine-generate/index.test.ts is
  *      the Deno link: the function's settlement equals the bundle's birth, same cases.
+ *      Since remote-path R2 (2026-11-10) both births carry the STORE's standalone vanilla
+ *      stamp: the fixture's `storeContentProvenance` is pinned to the real store's own value,
+ *      and the in-process side runs under the store's whole content runtime.
  */
 
 import { describe, it, expect } from 'vitest';
@@ -45,6 +48,8 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { goldenCorpus, keyOf } from '../helpers/goldenMasterCorpus.js';
+import { useStore } from '../../src/store/index.js';
+import { loadSettlementContentRuntimeOptions } from '../../src/store/settlementContentRuntime.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 // The file's own address, never the working directory (moduleScopeCwdRatchet; TOOL-31's shape).
@@ -203,16 +208,31 @@ describe('engine bundle replay — the bundle generates what the app generates',
     ctx.skip(reason);
   }, WALL_MS);
 
-  it('the engine-generate birth: for the three service cases, the bundle\'s birth equals the in-process birth', async () => {
-    const { config, seeds } = JSON.parse(readFileSync(SERVICE_CASES, 'utf8'));
+  it('the fixture\'s store provenance IS the real store\'s, in its default state (remote-path R2)', async () => {
+    const { storeContentProvenance } = JSON.parse(readFileSync(SERVICE_CASES, 'utf8'));
+    const runtime = await loadSettlementContentRuntimeOptions(useStore.getState());
+    expect(JSON.parse(JSON.stringify(runtime.contentProvenance))).toEqual(storeContentProvenance);
+    // The function stamps with the bundle's own constant: the same value the store holds.
+    const bundle = await loadBundle(BUNDLE);
+    expect(JSON.parse(JSON.stringify(bundle.VANILLA_CONTENT_ENVIRONMENT))).toEqual(storeContentProvenance.environment);
+  }, WALL_MS);
+
+  it('the engine-generate birth: for the three service cases, the bundle\'s stamped birth equals the in-process birth under the STORE\'s runtime', async () => {
+    const { config, seeds, storeContentProvenance } = JSON.parse(readFileSync(SERVICE_CASES, 'utf8'));
     expect(seeds.length).toBe(3);
     const bundle = await loadBundle(BUNDLE);
     await bundle.loadGenerationLawPayloads();
     await loadGenerationLawPayloads();
+    // The local side is the store's OWN content runtime in its default state (the whole
+    // options bag the generate action hands the core), not a hand-built `{ customContent: {} }`.
+    const storeRuntime = await loadSettlementContentRuntimeOptions(useStore.getState());
     const failures = collectSeedFailures(seeds, (seed) => {
-      const viaBundle = JSON.stringify(bundle.generateSettlementPipeline(bundle.birthConfig(config), null, { seed, customContent: {} }));
-      const inProcess = JSON.stringify(generateSettlementPipeline(birthConfig(config), null, { seed, customContent: {} }));
+      // engine-generate's birth: `customContent: {}` and the store's standalone vanilla stamp.
+      const viaBundle = JSON.stringify(bundle.generateSettlementPipeline(bundle.birthConfig(config), null,
+        { seed, customContent: {}, contentProvenance: storeContentProvenance }));
+      const inProcess = JSON.stringify(generateSettlementPipeline(birthConfig(config), null, { seed, ...storeRuntime }));
       expect(sha256(viaBundle), `seed ${seed}`).toBe(sha256(inProcess));
+      expect(JSON.parse(viaBundle).customContentProvenance?.environment?.environmentId, `seed ${seed}`).toBe('system:vanilla');
     });
     expectNoSeedFailures(failures, 'the bundle\'s birth equals the in-process birth');
   }, WALL_MS);

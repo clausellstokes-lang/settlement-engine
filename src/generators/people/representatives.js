@@ -37,6 +37,7 @@
  * itself (a fork is a derivation, not a draw). The display-name pass is draw-free.
  */
 
+import { PERSON_HOOKS_BY_TITLE } from '../../data/personHooksByTitle.js';
 import { slugify } from '../../kernel/slugify.js';
 import { clearActiveRng, getActiveRng, setActiveRng } from '../../kernel/rngContext.js';
 import {
@@ -53,6 +54,9 @@ import { resolveGenerationWorldLaw } from '../generationContext.js';
 import { disambiguateNPCDisplayNames } from '../npcDisplayNames.js';
 import { hookPoolFor, poolFor, seatPoolFor } from './poolMap.js';
 import { seatMintTitleFor } from './mintTitles.js';
+import { CIVIC_OFFICE_BY_SIZE, OFFICE_TITLES } from '../../data/officeTitles.js';
+import { backingArchetypeOf, RULER_KINDS } from '../../domain/dossier/powerSupport.js';
+import { isHideableHouse, isVeiledPower, veiledCardIdFor } from '../../domain/people/cardVeil.js';
 
 /** The keyed fork every card is drawn under (declared in the fork census). */
 export const FACES_FORK_LABEL = 'people-faces';
@@ -84,7 +88,7 @@ export const YIELDS_TO = Object.freeze({ 'Priest (resident)': 'Access to parish 
  * (castPowers.js), which decides WHICH powers are minted once the powers are final.
  * @param {{ role: string, titleKey: string, category: string }} row the title table's row
  * @param {{ tier: string, culture: string, config: Record<string, any>, economicState: Record<string, any> | null | undefined,
- *   powerStructure: { factions?: Array<{ faction?: string }> } | null | undefined, institutions: RosterRow[],
+ *   powerStructure: { factions?: Array<{ faction?: string }>, government?: unknown } | null | undefined, institutions: RosterRow[],
  *   hookRegistry: Record<string, Set<string>>, worldLaw: any }} ctx
  * @param {{ hook?: boolean }} [options] `{ hook: false }`: the seam draws the card's one hook itself
  *   (lane 3's `drawCardHooks`; MERGE-234, one writer per fact)
@@ -101,7 +105,7 @@ export function mintPowerFace(row, ctx, options = {}) {
 }
 
 /** @typedef {{ name?: string, isCustom?: boolean, source?: string }} RosterRow */
-/** @typedef {{ kind: 'house' | 'power', key: string, family: string | null, title: string }} CardInstitution */
+/** @typedef {{ kind: 'house' | 'power', key: string, family: string | null, title: string, veiled: boolean }} CardInstitution */
 
 /**
  * The house that carries the SEAT on this roster, or null where none does (the mint's case):
@@ -129,12 +133,141 @@ export function seatHouseOf(institutions) {
 }
 
 /**
- * A card's stable id from its house: the roster name's slug (the same name at every regeneration
- * of the same roster), suffixed only where the roster carries the name twice.
- * @param {string} name @param {Set<string>} taken
+ * THE GOVERNMENTS THAT SEND THEIR OWN MAN (COHERENCE-POWERS; the chair's ruling of 2026-11-11, 23:22
+ * UTC, on the owner's word "unless appointed by an appropriate government type"): a government whose own
+ * name says its leader is sent. Its leader is the seat as before (the office's face, or the minted seat),
+ * with no house in the town; every other government's leader wears the dual hat (`dualHatHouseOf`).
  */
-function cardIdFor(name, taken) {
-  const base = `npc_${slugify(name, { sep: '_', max: 60, fallback: 'house', empty: 'house' })}`;
+export const APPOINTED_GOVERNMENTS = Object.freeze([
+  'Feudal Stewardship', 'Feudal Appointee', 'Noble Governorship', 'Ducal Governorship', 'Royal Authority',
+  'Noble Regency', 'Foreign Stewardship', 'Foreign Administration', 'Occupation Authority', 'Martial Administration',
+]);
+/** The kinds of house a civic government's leader comes from: the town's trades and its landed houses. */
+const CIVIC_HOUSE_KINDS = Object.freeze(['craft', 'merchant', 'noble']);
+
+/**
+ * A house's KIND for the dual hat: the largest share of its backing row; 'government' for a
+ * Government-shelf house or a hall (the offices), null for a house the catalogue does not place.
+ * @param {RosterRow} house @returns {string | null}
+ */
+export function houseKindOf(house) {
+  if (faceOfInstitution(house) === FACE_SEAT || familyOfInstitution(house)?.shelf === 'Government') return 'government';
+  const row = backingRowFor(house?.name);
+  if (!row) return null;
+  return Object.entries(row.shares).sort((x, y) => y[1] - x[1])[0][0];
+}
+
+/**
+ * Does the roster hold an open, face-bearing house of `kind` — a house a ruler of that kind could come from
+ * (the candidates `dualHatHouseOf` draws, COHERENCE-POWERS 2B: a council of a kind is drawn only where one stands)?
+ * @param {RosterRow[]} institutions @param {string} kind @returns {boolean}
+ */
+export function hasHouseOfKind(institutions, kind) {
+  return (Array.isArray(institutions) ? institutions : []).some((house) => {
+    if (!house || isFabricInstitution(house) || isHideableHouse(house)) return false;
+    const face = faceOfInstitution(house);
+    return typeof face === 'string' && face !== FACE_SEAT && houseKindOf(house) === kind;
+  });
+}
+
+/**
+ * The roster's houses that bear a face of their own (the cast's house cards: not the fabric, not a hall, not a
+ * family that yields to a faced one, YIELDS_TO), by roster name. Pure over the roster (COHERENCE-POWERS 2B: the
+ * fold asks which powers the deal would leave with no one).
+ * @param {RosterRow[]} institutions @returns {Set<string>}
+ */
+export function faceBearingHouseNames(institutions) {
+  const rows = (Array.isArray(institutions) ? institutions : [])
+    .filter((house) => house && !isFabricInstitution(house) && typeof faceOfInstitution(house) === 'string' && faceOfInstitution(house) !== FACE_SEAT);
+  const families = new Set(rows.map((house) => familyOfInstitution(house)?.key).filter(Boolean));
+  return new Set(rows.filter((house) => {
+    const family = familyOfInstitution(house);
+    return !(family && YIELDS_TO[family.key] && families.has(YIELDS_TO[family.key]));
+  }).map((house) => String(house.name || '')).filter(Boolean));
+}
+
+/**
+ * THE DUAL HAT (COHERENCE-POWERS, the owner's word of 2026-11-11: "whoever leads teh town, in any type
+ * of government is wearing a dual hat (where appropraite) they come from an institution, and are elevated
+ * yet still tied to an institution"): the house the governing power's leader comes from, or null where
+ * the government sends its own man (APPOINTED_GOVERNMENTS), rules in the dark (a criminal ruler: the
+ * veil), or the town has no such house. A ruler of a kind takes the heaviest face-bearing house of that
+ * kind; a civic ruler, the heaviest of the town's trades and landed houses, and where none stands, the heaviest
+ * open house the town has of any other kind (the chair's ruling of 2026-11-12, item 1 (ii): a small place whose
+ * one house is a charter hall is led from it, never by the office in a vacuum). Ties by roster order; a
+ * hideable house never leads. Reads the roster and the governing power only, so the birth step and the
+ * coherence seam answer alike.
+ * @param {RosterRow[]} institutions @param {unknown} governing the governing power's row
+ * @returns {{ index: number, house: RosterRow } | null}
+ */
+export function dualHatHouseOf(institutions, governing) {
+  const name = nameOf(/** @type {any} */ (governing));
+  if (!name || APPOINTED_GOVERNMENTS.includes(name) || isVeiledPower(governing)) return null;
+  const arch = backingArchetypeOf(/** @type {any} */ (governing));
+  if (arch === 'criminal') return null;
+  const kinds = RULER_KINDS.includes(arch) ? [arch] : CIVIC_HOUSE_KINDS;
+  const rows = Array.isArray(institutions) ? institutions : [];
+  /** @param {(kind: string) => boolean} fits @returns {{ index: number, house: RosterRow } | null} */
+  const heaviest = (fits) => {
+    /** @type {{ index: number, house: RosterRow, weight: number } | null} */
+    let best = null;
+    rows.forEach((house, index) => {
+      if (!house || isFabricInstitution(house) || isHideableHouse(house)) return;
+      const face = faceOfInstitution(house);
+      if (typeof face !== 'string' || face === FACE_SEAT) return;
+      if (!fits(String(houseKindOf(house)))) return;
+      const weight = backingRowFor(house.name)?.weight ?? 1;
+      if (!best || weight > best.weight) best = { index, house, weight };
+    });
+    return best ? { index: best.index, house: best.house } : null;
+  };
+  const own = heaviest((kind) => kinds.includes(kind));
+  if (own || RULER_KINDS.includes(arch)) return own;
+  return heaviest((kind) => kind !== 'government' && kind !== 'null');
+}
+
+/**
+ * THE SEAT'S FACE THE DUAL HAT FOLDED (COHERENCE-POWERS-3, F1): 1 where a house of the town leads (`dualHatHouseOf`)
+ * and the cast carries no face of the seat's own (one person, one face: the leader holds the office), else 0. The
+ * density law's seat ceiling reads the cast's size as the town's political mass; before the dual hat the office and the
+ * house it is held from were two cards, and they are two in that count still, so a small place keeps the power the
+ * fold of one face into another would cut. A cast that carries its seat's own face (a save from before the dual hat, a
+ * held roster) folded nothing. Pure over the record.
+ * @param {{ institutions?: unknown, powerStructure?: unknown, npcs?: unknown }} settlement
+ * @returns {0 | 1}
+ */
+export function seatFacesFoldedByDualHat(settlement) {
+  const institutions = /** @type {RosterRow[]} */ (Array.isArray(settlement?.institutions) ? settlement.institutions : []);
+  const governing = governingFactionOf(/** @type {any} */ (settlement));
+  if (!governing || !dualHatHouseOf(institutions, governing)) return 0;
+  const seat = seatHouseOf(institutions);
+  const seatKey = seat ? String(seat.house?.name || '') : '';
+  const cards = Array.isArray(settlement?.npcs) ? settlement.npcs : [];
+  const facesSeat = cards.some((card) => card?.id === SEAT_CARD_ID
+    || (!!seatKey && card?.institution?.kind === 'house' && card.institution.key === seatKey));
+  return facesSeat ? 0 : 1;
+}
+
+// COHERENCE-POWERS-3 (F10): the office-title table moved verbatim to data/officeTitles.js (one source; the card's
+// honorific row reads it too), re-exported here for its importers
+export { OFFICE_TITLES } from '../../data/officeTitles.js';
+
+/** @param {string} government @param {string} tier @returns {string} */
+export function officeTitleFor(government, tier) {
+  return OFFICE_TITLES[government] || CIVIC_OFFICE_BY_SIZE[tier] || 'Mayor';
+}
+
+/**
+ * A card's stable id from its house: the roster name's slug (the same name at every regeneration
+ * of the same roster), suffixed only where the roster carries the name twice. A veiled house's face
+ * (`veil` given) takes the opaque form of people/cardVeil.js :: veiledCardIdFor instead.
+ * @param {string} name @param {Set<string>} taken @param {{ seed: unknown } | null} [veil]
+ */
+function cardIdFor(name, taken, veil = null) {
+  const slug = slugify(name, { sep: '_', max: 60, fallback: 'house', empty: 'house' });
+  // FIX-PUBLIC-VEIL (the second seat): a veiled house's face is born with an opaque id, so the slug
+  // never names the house on a public payload; the loop below is the uniqueness guard for both forms.
+  const base = veil ? veiledCardIdFor(veil.seed, slug) : `npc_${slug}`;
   let id = base;
   for (let n = 2; taken.has(id); n += 1) id = `${base}_${n}`;
   taken.add(id);
@@ -175,7 +308,8 @@ export function drawCardHooks(cards, poolOf, stream, config, hookRegistry, place
     // from an offset keyed by the card's id. Where every one is held, the repeat stands (the
     // writing wave's W7 HOOKS authors by title; the lane's record counts them).
     if (before.has(String(line).trim())) {
-      const spare = spareHookLine(dryPoolWalk(pool), before, String(card.id), place);
+      // W7 HOOKS (WAVE-RULINGS item 15): the card's TITLE pool is walked first, then the category walk.
+      const spare = spareHookLine([titlePoolName(card.title), ...dryPoolWalk(pool)], before, String(card.id), place);
       if (spare !== null) line = spare;
     }
     held.add(String(line).trim());
@@ -196,6 +330,22 @@ export function dryPoolWalk(own) {
   return [...new Set([own, 'other', 'small_settlement', 'economy', 'government', 'criminal', 'military', 'religious'])];
 }
 
+/**
+ * THE TITLE POOL (W7 HOOKS, 2026-11-07; WAVE-RULINGS item 15): a dry-pool walk names a card's own
+ * title pool as `title:<title>`; `spareHookLine` resolves it from data/personHooksByTitle.js. A title
+ * with no authored pool resolves to an empty pool and the walk moves on to the category pools.
+ * @param {unknown} title @returns {string}
+ */
+export function titlePoolName(title) {
+  return `title:${String(title || '').trim().toLowerCase()}`;
+}
+
+/** @param {string} name @returns {ReadonlyArray<string> | null} the title pool's lines, or null for a category pool */
+function titlePoolLines(name) {
+  if (!name.startsWith('title:')) return null;
+  return PERSON_HOOKS_BY_TITLE[name.slice('title:'.length)] || [];
+}
+
 /** A stable non-negative integer from a string (FNV-1a): a walk's offset, no stream read. @param {string} key */
 export function hookOffsetOf(key) {
   let h = 0x811c9dc5;
@@ -206,7 +356,7 @@ export function hookOffsetOf(key) {
 /**
  * Where a card's hook lines are drawn: the world law (its port kind), the roster and the tier — the
  * facts the census's declared rows read (MERGE-CAR).
- * @typedef {{ worldLaw?: { portKind?: string | null } | null, institutions?: unknown[], tier?: string }} HookPlace
+ * @typedef {{ worldLaw?: { portKind?: 'none'|'maritime'|'river' | null } | null, institutions?: unknown[], tier?: string }} HookPlace
  */
 
 /**
@@ -216,15 +366,34 @@ export function hookOffsetOf(key) {
  * row whose `needs` the place's facts refuse is skipped (MERGE-R2's ruling 2: the held set and the
  * declarations refuse together), and the wet line resolves through its declared sibling set
  * (`NPC_HOOK_SIBLINGS`, the F5 inland twin dissolved into its table by CENSUS-1c).
+ *
+ * ⚡ ONE READING OF EACH FACT PER WALK (GEN-SPEED cure 3, C′, the chair's ruling (a), 2026-11-10).
+ * Every row's `resolveDeclared` used to build a NEW `factsOf` and re-read its facts (`guardPresence`
+ * re-partitions the whole roster), so a walk read the same answer once per row: on the wizard's
+ * heaviest request 350 of a walk's 406 `guardPresence` reads repeated. The walk now builds ONE facts
+ * object and reads it through `rememberedFacts`, a memo created here and dropped when the call
+ * returns. `factsOf` itself still remembers nothing. EXACT because nothing the facts read is written
+ * while the walk runs: the record is the `{ institutions, tier }` literal built here, the roster
+ * array and its rows and the world law's port kind are the caller's and are only read, the loop is
+ * synchronous, and the only foreign code it calls is `accept` (below). Pinned, not only argued:
+ * `tests/generators/spareHookLineFactsWork.test.js` walks a deep-frozen place and roster and gets
+ * the lines of the unfrozen walk, so a write would throw instead of going stale.
+ *
  * @param {string[]} pools @param {Set<string>} held @param {string} key
- * @param {HookPlace} [place] @param {(line: string) => boolean} [accept]
+ * @param {HookPlace} [place]
+ * @param {(line: string) => boolean} [accept] a PURE test of a candidate line's text. It MUST NOT
+ *   write to the place, its roster or any roster row (the walk's remembered facts depend on it).
+ *   The two callers today hold: `drawCardHooks` (the default, `() => true`) and
+ *   `personHooks.js :: truePersonHooks` (`isTrue`, a check of the text against facts computed
+ *   before the walk); the frozen-walk pin covers both shapes.
  * @returns {string | null}
  */
 export function spareHookLine(pools, held, key, place = {}, accept = () => true) {
   const institutions = Array.isArray(place?.institutions) ? place.institutions : [];
-  const facts = () => factsOf({ institutions, tier: place?.tier }, { waterKind: place?.worldLaw?.portKind });
+  const once = rememberedFacts(factsOf({ institutions, tier: place?.tier }, { waterKind: place?.worldLaw?.portKind }));
+  const facts = () => once;
   for (const name of [...new Set(pools)]) {
-    const pool = /** @type {unknown[]} */ (NPC_FACTION_LOYALTY[/** @type {keyof typeof NPC_FACTION_LOYALTY} */ (name)] || []);
+    const pool = /** @type {unknown[]} */ (titlePoolLines(name) ?? NPC_FACTION_LOYALTY[/** @type {keyof typeof NPC_FACTION_LOYALTY} */ (name)] ?? []);
     const start = pool.length ? hookOffsetOf(key) % pool.length : 0;
     for (let i = 0; i < pool.length; i += 1) {
       const row = pool[(start + i) % pool.length];
@@ -238,10 +407,36 @@ export function spareHookLine(pools, held, key, place = {}, accept = () => true)
 }
 
 /**
+ * A facts object read through a memo: each property is read from `live` at most once, on first
+ * use, and the same value is answered after. The memo is the returned object itself, so it lives
+ * exactly as long as the caller holds it (`spareHookLine` holds it for one walk). A property whose
+ * value is a function (`hasInstitution`, `hasOtherNpc`) is remembered as that function, whose
+ * calls still read the record live. Frozen, like `factsOf`'s own answer.
+ * @template {object} F @param {F} live @returns {F}
+ */
+function rememberedFacts(live) {
+  /** @type {Map<string, unknown>} */
+  const seen = new Map();
+  /** @type {Record<string, unknown>} */
+  const out = {};
+  for (const key of Object.keys(live)) {
+    Object.defineProperty(out, key, {
+      enumerable: true,
+      get() {
+        if (!seen.has(key)) seen.set(key, /** @type {Record<string, unknown>} */ (live)[key]);
+        return seen.get(key);
+      },
+    });
+  }
+  return /** @type {F} */ (Object.freeze(out));
+}
+
+/**
  * THE CAST: one card per face-bearing house in roster order, the seat always faced.
  *
- * @param {{ tier?: string, institutions?: RosterRow[], powerStructure?: { factions?: Array<Record<string, unknown>> } | null,
- *   economicState?: Record<string, any> | null }} settlement the roster and the powers as they stand
+ * @param {{ tier?: string, institutions?: RosterRow[], powerStructure?: { factions?: Array<Record<string, unknown>>, government?: unknown } | null,
+ *   economicState?: Record<string, any> | null, _seed?: unknown }} settlement the roster and the powers as they
+ *   stand, and the record's seed (the salt of a veiled face's opaque id)
  * @param {string} culture
  * @param {Record<string, any>} config the effective config (stress, priorities, the world law's inputs)
  * @param {unknown} generationContext
@@ -254,12 +449,17 @@ export function generateRepresentatives(settlement, culture = 'germanic', config
   const tier = String(settlement?.tier || 'town');
   const institutions = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
   const powerStructure = settlement?.powerStructure || null;
+  // FIX-PUBLIC-VEIL (the second seat): the record's seed salts a veiled face's opaque id. It rides the
+  // first argument (never the config, whose seed-keyed pickers it would move): the population step
+  // and the section regen pass `_seed`.
+  const veil = { seed: settlement?._seed ?? null };
   const economicState = settlement?.economicState || {};
   const worldLaw = resolveGenerationWorldLaw(generationContext, config);
   const faces = root.fork(FACES_FORK_LABEL);
   const governing = governingFactionOf(/** @type {any} */ ({ powerStructure }));
   const governingName = nameOf(governing) || null;
   const seat = seatHouseOf(institutions);
+  const hat = governingName ? dualHatHouseOf(institutions, governing) : null;
   // The same config context generateNPCs handed every figure: the goal and secret pools read the
   // trade commodity, the dominant power and the prosperity through it.
   const npcConfig = {
@@ -293,7 +493,7 @@ export function generateRepresentatives(settlement, culture = 'germanic', config
   const birth = (id, pool, title, institution, hookPool) => {
     const category = pool.category === 'magic' && !magicFunctions ? 'other' : pool.category;
     const card = onStream(faces.fork(id), () => generateSingleNPC(
-      pool.role, pool.titleKey, category, culture, tier, npcConfig, institutions, hookRegistry, worldLaw, { hook: false },
+      pool.role, pool.titleKey, category, culture, tier, npcConfig, institutions, hookRegistry, worldLaw, { hook: false, title }, // ITEM 15 (ALLEGIANCE-CAR4): the face's title keys its secret and presentation (poolMap.js :: titleLinesFor)
     ));
     // MERGE-234 (the chair's ruling of 10:4x UTC): a magic-swapped face draws its hook from the pool its
     // EFFECTIVE category maps to after the swap (`other` has its own loyalty list, so no further fallback)
@@ -316,25 +516,34 @@ export function generateRepresentatives(settlement, culture = 'germanic', config
     if (family && YIELDS_TO[family.key] && facedFamilies.has(YIELDS_TO[family.key])) return;
     const key = String(house.name || '');
     const isSeat = seat !== null && seat.index === index;
+    // ONE PERSON, ONE FACE (COHERENCE-POWERS, the chair's ruling of 2026-11-11, cure (i)): where a house leads
+    // (the dual hat), the seat's house bears no face of its own — its face IS the leader, as the hall's is the
+    // seat's (R-P1 (c)); the readers that find a house's face by key fall back to the seat holder
+    if (isSeat && hat) return;
     if (face === FACE_SEAT) {
       // R-P1 (c): the hall is the seat's building. Where a Government-shelf house rolls, no face;
       // where none does, the hall IS the seat's house and its face is the seat, titled from the
       // governing power.
       if (!isSeat) return;
       const { title } = seatMintTitleFor(governingName || '');
-      birth(cardIdFor(key, taken), seatPoolFor(tier), title, { kind: 'house', key, family: family?.key ?? null, title }, hookPoolFor(title, null, { seat: true }).pool);
+      birth(cardIdFor(key, taken, isHideableHouse(house) ? veil : null), seatPoolFor(tier), title, { kind: 'house', key, family: family?.key ?? null, title, veiled: isHideableHouse(house) },
+        hookPoolFor(title, null, { seat: true }).pool);
       return;
     }
     const pool = isSeat ? seatPoolFor(tier) : poolFor(face, family?.shelf ?? null);
-    birth(cardIdFor(key, taken), pool, face, { kind: 'house', key, family: family?.key ?? null, title: face },
+    // FIX-PUBLIC-VEIL (the chair's ruling, shape (a)): the veil bit stamped at birth from the ONE predicate
+    // (domain/people/cardVeil.js): a hideable house's face is never named on a public card.
+    birth(cardIdFor(key, taken, isHideableHouse(house) ? veil : null), pool, face, { kind: 'house', key, family: family?.key ?? null, title: face, veiled: isHideableHouse(house) },
       hookPoolFor(face, family?.shelf ?? null, { seat: isSeat }).pool);
   });
 
-  // R-P2: no seat house and no hall — the seat's face is minted from the governing power.
-  if (!seat && governingName) {
+  // R-P2: no seat house and no hall — the seat's face is minted from the governing power; but where the
+  // leader wears the dual hat (a house of the town leads, COHERENCE-POWERS), no seat is minted.
+  if (!seat && governingName && !hat) {
     const { title } = seatMintTitleFor(governingName);
     taken.add(SEAT_CARD_ID);
-    birth(SEAT_CARD_ID, seatPoolFor(tier), title, { kind: 'power', key: governingName, family: null, title }, hookPoolFor(title, null, { seat: true }).pool);
+    birth(SEAT_CARD_ID, seatPoolFor(tier), title, { kind: 'power', key: governingName, family: null, title, veiled: isVeiledPower(governing) },
+      hookPoolFor(title, null, { seat: true }).pool);
   }
 
   // R-P4: the `other` powers' faces are minted at the coherence seam (castPowers.js), where the

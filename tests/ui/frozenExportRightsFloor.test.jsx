@@ -250,7 +250,6 @@ describe('AUDIT-2.2 — the frozen card export is a floor, not a doorway', () =>
             worldState={LIVE_WORLD_STATE}
             regionalGraph={LIVE_REGIONAL_GRAPH}
             nameFor={(id) => String(id)}
-            onAdvanceTime={() => {}}
             onCreateCampaign={() => {}}
             onNavigate={() => {}}
             canManageCampaigns

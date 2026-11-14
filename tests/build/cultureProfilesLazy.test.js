@@ -55,7 +55,8 @@ const EAGER_ANCHOR = resolve(SRC, 'store/index.js');
 // A governed corpus sentence minted in exactly one source module, riding a LIVE
 // property of a frozen profile that lazy consumers read — so minification keeps it
 // and tree-shaking cannot strip it.
-const CORPUS_FINGERPRINT = 'A timber-and-stone, guild-and-estate design grammar.';
+// Re-keyed at W5 HIS's style pass (2026-11-07): the germanic scope, plainly worded (no "design grammar").
+const CORPUS_FINGERPRINT = 'Towns of timber and stone, run by guilds and estates.';
 
 /**
  * Everything `src/main.jsx` reaches over STATIC import edges.

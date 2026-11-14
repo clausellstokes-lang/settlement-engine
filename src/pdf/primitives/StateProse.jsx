@@ -73,13 +73,16 @@ const SCREEN_KICKER = Object.freeze({
   // the place passage's; the print Overview already has one place passage. The kickers of
   // `overview.origin`, `overview.conflicts` and `overview.warnings` are gone with their
   // sentences (those rows glance since the same rulings, so print draws nothing there).
-  'overview.ground': 'The place',
+  // Keyed on `overview.market` since the ground row glances (OWNER-WORDS-DOSSIER item 2, 2026-11-09).
+  // The proposed heading "Trade and the houses" was vetoed by the owner (2026-11-09 03:5x, "No."):
+  // the prior label returns (SW-9).
+  'overview.market': 'The place',
   'overview.stressorLifecycle': 'The pressure from outside',
   'overview.activeConditions': 'What the town is living through',
   // PowerTab.jsx
   'power.legitimacyBanner': 'Public Legitimacy',
   'power.stabilityHeader': 'Stability',
-  'power.criminalUnderside': 'The quieter arithmetic',
+  'power.criminalUnderside': 'Crime and the hall',
   'power.rulingStructure': 'The shape of authority',
   'power.succession': 'Rule and succession',
   // DefenseTab.jsx
@@ -121,6 +124,7 @@ const PRINT_KICKER = Object.freeze({
   'faith.patronSeat': 'The patron seat',
   'faith.teaser': 'What the town keeps faith with',
   'faith.creedStanding': 'The creed\'s standing',
+  'faith.templeGround': 'The church and the town\'s other powers',
 });
 
 /** The label over one position, from whichever map owns it. */

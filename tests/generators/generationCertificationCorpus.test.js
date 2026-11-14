@@ -70,28 +70,33 @@ const ADVISORY_STATUS = new Map();
  * (the advisory judgment, not the overall status: every specimen still certifies). Not bisected per specimen: one
  * cause, the cast (R-P2) with its mints born beside it (R-P4), the mundane draw of a magic-category face where magic
  * does not function, and the pressure line's noun without its article (M-1b) — the battery reads that prose. */
+/* RE-KEYED 2026-11-09 (ALLEGIANCE-CAR4, 03ff59084 THE GOALS REBUILT): 59 -> 52 of 65, MEASURED at the car's tip.
+ * SEVEN SPECIMENS STOPPED FAILING, nothing started: criminal-crossroads-town-dun, isolated-arcane-town-alder, -bracken,
+ * -cinder, mercantile-seaport-town-bracken, -dun, plagued-martial-city-ember. Read at the base f6209c0c5, each one's
+ * ONLY battery finding was the same `battery.defense-words` "hospital without a hospital" on the goal line "Found an
+ * institution (a hospital, a school) that will outlast them by centuries" — a row of the retired role pool
+ * (npcData.js :: NPC_FACTION_GOALS); A9 draws every card's goal from the families its record supports, so the line is no
+ * longer printed. The direction the ladder drives this list. */
+/* RE-KEYED 2026-11-09 (URBAN-FIX B-P1, 1b3436acd, the "old town" licence row): 52 -> 34 of 65, MEASURED at the cause's
+ * tree. EIGHTEEN SPECIMENS STOPPED FAILING, nothing started: every commercial-metropolis, grim-seaport-metropolis,
+ * mundane-river-port-city and plagued-martial-city specimen on the list. Their tier-noun finding was the Shadows
+ * District's "Old town or slums", the instrument's false positive (URBAN-AUDIT §2, B-1). */
+/* RE-KEYED 2026-11-09 (URBAN-FIX C-1, 935c961fd, the foodways line's one home): 34 -> 30 of 65, MEASURED at the cause's
+ * tree. FOUR SPECIMENS STOPPED FAILING, nothing started: subsistence-thorp-alder, population-14999, -15000, -2249. Their
+ * finding was the culture's raw foodways sentence naming a staple the place does not hold, a line no page prints;
+ * the record now stores the food record's own line (URBAN-AUDIT §3). */
+/* RE-KEYED 2026-11-13 (STYLE-2-MERGE point 47, the COHERENCE-AGREE merge 22cc9ef7d; a figure its drafted record names for the merge
+ * seat): 30 -> 31 of 65, MEASURED at the signed tree. ONE SPECIMEN STARTED FAILING, nothing stopped: plagued-martial-city-bracken,
+ * the seventh seat's P3 re-dealt role-only person (the draft: "generationCertificationCorpus's battery pin gains
+ * certification-v1-plagued-martial-city-bracken"). Re-keyed by identity; the advisory direction (toward empty) is the ladder's. */
 const ADVISORY_FAILING = Object.freeze([
-  'certification-v1-commercial-metropolis-alder',
-  'certification-v1-commercial-metropolis-bracken',
-  'certification-v1-commercial-metropolis-cinder',
-  'certification-v1-commercial-metropolis-dun',
-  'certification-v1-commercial-metropolis-ember',
   'certification-v1-criminal-crossroads-town-bracken',
-  'certification-v1-criminal-crossroads-town-dun',
   'certification-v1-criminal-crossroads-town-ember',
   'certification-v1-frontier-hamlet-alder',
   'certification-v1-frontier-hamlet-bracken',
   'certification-v1-frontier-hamlet-cinder',
   'certification-v1-frontier-hamlet-dun',
   'certification-v1-frontier-hamlet-ember',
-  'certification-v1-grim-seaport-metropolis-alder',
-  'certification-v1-grim-seaport-metropolis-bracken',
-  'certification-v1-grim-seaport-metropolis-cinder',
-  'certification-v1-grim-seaport-metropolis-dun',
-  'certification-v1-grim-seaport-metropolis-ember',
-  'certification-v1-isolated-arcane-town-alder',
-  'certification-v1-isolated-arcane-town-bracken',
-  'certification-v1-isolated-arcane-town-cinder',
   'certification-v1-isolated-arcane-town-dun',
   'certification-v1-magical-desert-village-alder',
   'certification-v1-magical-desert-village-bracken',
@@ -99,30 +104,16 @@ const ADVISORY_FAILING = Object.freeze([
   'certification-v1-magical-desert-village-dun',
   'certification-v1-magical-desert-village-ember',
   'certification-v1-mercantile-seaport-town-alder',
-  'certification-v1-mercantile-seaport-town-bracken',
-  'certification-v1-mercantile-seaport-town-dun',
   'certification-v1-mercantile-seaport-town-ember',
-  'certification-v1-mundane-river-port-city-alder',
-  'certification-v1-mundane-river-port-city-cinder',
-  'certification-v1-mundane-river-port-city-dun',
-  'certification-v1-mundane-river-port-city-ember',
-  'certification-v1-plagued-martial-city-alder',
   'certification-v1-plagued-martial-city-bracken',
-  'certification-v1-plagued-martial-city-cinder',
-  'certification-v1-plagued-martial-city-dun',
-  'certification-v1-plagued-martial-city-ember',
   'certification-v1-religious-river-village-alder',
   'certification-v1-religious-river-village-bracken',
   'certification-v1-religious-river-village-dun',
   'certification-v1-religious-river-village-ember',
-  'certification-v1-subsistence-thorp-alder',
   'certification-v1-subsistence-thorp-bracken',
   'certification-v1-subsistence-thorp-cinder',
   'certification-v1-subsistence-thorp-dun',
   'certification-v1-subsistence-thorp-ember',
-  'population-14999',
-  'population-15000',
-  'population-2249',
   'population-2250',
   'population-24',
   'population-25',

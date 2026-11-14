@@ -18,6 +18,7 @@ import { INSTITUTION_DESC_VARIANTS } from '../../../../src/data/institutionDescV
 import { RESOURCE_CHAINS } from '../../../../src/data/resourceChains.js';
 import { institutionalCatalog } from '../../../../src/data/institutionalCatalog.js';
 import { CULTURE_PROFILES } from '../../../../src/data/cultureProfiles.js';
+import { SUPPLY_CHAIN_NEEDS } from '../../../../src/data/supplyChainData.js';
 import { generateSpatialLayout } from '../../../../src/generators/spatialGenerator.js';
 
 /** The self-reference planted beside a kept line: it must still be found. */
@@ -50,9 +51,18 @@ describe('ruling 2 — "Town granary" is a catalogue row\'s proper name, not the
       .map(([tier]) => tier);
     expect(naming).toEqual(['town']);
   });
-  // The leak: the grain chain's row lists its processing institutions by catalogue name at every tier.
-  const row = `Grain » ${RESOURCE_CHAINS.grain.processingInstitutions.join(', ')}`;
-  it('the grain chain row names it', () => expect(row).toContain('Town granary'));
+  // The leak: a chain row lists its processing institutions by catalogue name at every tier. GREEN-BASE (2026-11-08):
+  // the grain chain no longer names it — REVIEW-INTAKE-2 unit 4 (9421e31e4, chair ruling R4: "a granary stores grain
+  // and does not process it") struck it from RESOURCE_CHAINS.grain, pinned there by tests/joins/chainNamesOnlyProcessors
+  // — so the arm reads the row that still prints it below the town: the floodplain-agriculture supply chain
+  // (data/supplyChainData.js, minTier village), whose processing institutions the supply-chain panel and the PDF's
+  // chain rows print by catalogue name. The keep is unchanged; the line it forgives is re-read from its own module.
+  const floodplain = Object.values(SUPPLY_CHAIN_NEEDS).flatMap((need) => need.chains).find((c) => c.id === 'floodplain_agriculture');
+  const row = `${floodplain.label} » ${floodplain.processingInstitutions.join(', ')}`;
+  it('the grain chain no longer names it (R4); the floodplain-agriculture chain row does', () => {
+    expect(RESOURCE_CHAINS.grain.processingInstitutions, 'R4 struck the granary from the grain chain').toEqual(['Mill', 'Bakers (5-15)', 'Access to external mill']);
+    expect(row).toContain('Town granary');
+  });
   it.each(['thorp', 'hamlet', 'village', 'city', 'metropolis'])('is kept on a %s', (tier) => expectKept(row, tier));
 });
 
@@ -79,5 +89,21 @@ describe('ruling 4 — "lower town" is a district of a city, kept for city and m
     // anchored: invented wording; a smaller place has no lower town of its own
     expect(tierNounFindings({ tier }, 'The mill stands in the lower town.')).toHaveLength(1);
     expect(tierNounFindings({ tier }, line)).toHaveLength(1);
+  });
+});
+
+describe('URBAN-FIX B-P1 — "old town" is a district of a larger place, kept for city and metropolis ONLY', () => {
+  // The Shadows District quarter's location, read from its writer: the one stored string behind every urban
+  // tier-noun finding on the 1,000 (URBAN-AUDIT §2, B-1). The twin of ruling 4's "lower town" (the chair's ruling 1).
+  const quarter = generateSpatialLayout('city', [{ name: 'Thieves\' guild' }], 'road', 'plains').quarters
+    .find((q) => q.name === 'Shadows District');
+  const line = quarter?.location;
+  it('the underworld quarter names it', () => expect(line).toBe('Old town or slums'));
+  it.each(['city', 'metropolis'])('is kept on a %s', (tier) => expectKept(line, tier));
+  it.each(['thorp', 'hamlet', 'village', 'town'])('the control on a %s: the licence reads the tier', (tier) => {
+    // anchored: invented wording; a smaller place has no old town of its own
+    const expected = tier === 'town' ? 0 : 1;
+    expect(tierNounFindings({ tier }, 'The shrine stands in the old town.')).toHaveLength(expected);
+    expect(tierNounFindings({ tier }, line)).toHaveLength(expected);
   });
 });

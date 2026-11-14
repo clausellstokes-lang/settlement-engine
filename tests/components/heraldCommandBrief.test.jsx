@@ -182,7 +182,18 @@ describe('Herald command brief', () => {
     expect(screen.getByText('Civic')).toBeTruthy();
     expect(screen.getAllByTestId('command-story-item')).toHaveLength(3);
     expect(screen.getAllByTestId('story-provenance-unavailable')).toHaveLength(2);
+    // STYLE-2 SW-12 (ledger D·40, D·41): the missing-cause line and the phase / resolution
+    // pills in the reader's words, never the read model's tokens.
+    expect(screen.getAllByText('past').length).toBeGreaterThan(0);
+    expect(screen.getAllByText('settled').length).toBeGreaterThan(0);
+    expect(screen.queryByText(/^(historical|resolved|unresolved)$/)).toBeNull();
     expect(headlineItems.find(item => item.headline === civicStory.headline)?.rootId).toBe('root-cause-1');
+  });
+
+  test('STYLE-2 SW-12 (ledger D·40): a story whose source gives no cause reason says so plainly', () => {
+    const bare = { ...routine, id: 'bare-cause', presentationKey: 'bare-cause', headline: 'A quiet market day', cause: { state: 'missing', available: false, rootRecordId: null, receiptId: null, reason: null } };
+    render(<HeraldCommandBody {...baseProps} realmModel={{ items: [bare], ranked: [bare] }} view="stories" onSection={() => {}} />);
+    expect(screen.getByTestId('story-provenance-unavailable').textContent).toBe('The causes behind this story were not kept.');
   });
 
   test('a legacy topic address opens Stories already narrowed to that topic', () => {
@@ -243,6 +254,9 @@ describe('Herald command brief', () => {
     expect(screen.getByText(degraded.headline)).toBeTruthy();
     expect(screen.getByText(deletedSubject.headline)).toBeTruthy();
     expect(screen.getByText(/A settlement no longer in this campaign/i)).toBeTruthy();
+    // STYLE-2 SW-12 (ledger D·40): a lost subject reads plainly, no "original route".
+    expect(screen.getByTestId('story-subject-unavailable').textContent)
+      .toBe('A settlement no longer in this campaign can no longer be opened from here.');
     const degradedHeadline = headlineItems.find(entry => entry.headline === degraded.headline);
     const deletedHeadline = headlineItems.find(entry => entry.headline === deletedSubject.headline);
     expect(degradedHeadline.rootId).toBeNull();
@@ -313,6 +327,9 @@ describe('Herald command brief', () => {
 
     expect(screen.queryByTestId('command-briefing-item')).toBeNull();
     expect(screen.getAllByText(/The realm asks nothing of you just now/i)).toHaveLength(1);
+    // STYLE-2 SW-12 (ledger D·39): the quiet briefing names no "promoted" or "routine record".
+    expect(screen.getByText(/Nothing needs your attention ahead of the ordinary news\./)).toBeTruthy();
+    expect(screen.queryByText(/promoted above the routine record/)).toBeNull();
     expect(screen.getByTestId('herald-command-dashboard-parity').hasAttribute('open')).toBe(false);
   });
 

@@ -429,6 +429,10 @@ const CENSUS = Object.freeze([
     file: 'src/store/editSlice.js', fn: 'scrubDeletedCounterparty', sites: 1, shapes: 'W2', kind: FORWARD,
     why: 'EM-F3d\'s DELETE SCRUB (the verifier\'s STOP-2; the chair\'s judgments 291 and 308): the settlement written is the member row\'s OWN live settlement with its OWN registry moved one status forward — every PENDING entry whose off-stage op named the row the DM has just deleted is withdrawn through EM-C1\'s typed verb, with design §20.3\'s `target_deleted` reason. Both halves are read off the LIVE row an instant earlier in the same function (`get().savedSettlements`, finalized state, never a draft), the registry is rebuilt by a pure verb that copies each entry it does not amend, and no key outside `decrees` is touched — so nothing a timeline, undo ring, version history or draft history could hold can reach a saved record through it. An APPLIED entry is never selected, which is what keeps THE PROMISE here: the scrub can move what has not happened yet and nothing that has.',
   },
+  {
+    file: 'src/store/settlementSlice.js', fn: 'adoptPublicProseAck', sites: 1, shapes: 'W1', kind: FORWARD,
+    why: 'SW-B7b\'s ADOPTION ON ACK (STYLE-RULINGS-2 B10(a); the chair\'s grant of STOP 1, 2026-11-09 13:5x): the settlement written is the cached row\'s OWN live settlement with ONE key set, `publicProse`, to the stamp the save service just wrote to the server for a record byte-equal to that row less the stamp (`{ ...held, publicProse: projection }`, `held` read off finalized state an instant earlier). The stamp is composed from the record being written, never read from a timeline, ring, version history or draft history, and the write lands only where the row still holds the written record, so nothing a snapshot substrate could hold can reach a saved record through it.',
+  },
 ]);
 
 const DECLARED = CENSUS.map((row) => `${row.file}::${row.fn}\t${row.sites}\t${row.shapes}`).sort();

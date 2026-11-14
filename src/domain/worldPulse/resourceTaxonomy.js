@@ -1,4 +1,5 @@
 import { RESOURCE_DATA } from '../../data/goods/identity.js';
+import { pickLine } from './proseSelection.js';
 import {
   resourceKeyForLabel,
   resourceSemanticsFor,
@@ -151,15 +152,28 @@ export function classifyResource(resource) {
 }
 
 /**
+ * The natural recovery's reader line (STYLE-2 C2, SW-12 third seat, A2·101), three orders of
+ * one fact; seeded by the settlement and the resource, never the tick (a recovery is a drift
+ * outcome and its reasons key the feed's metronome).
+ */
+const NATURAL_RECOVERY_REASON = Object.freeze([
+  'Given rest, it comes back on its own.',
+  'Left in peace, it will come back.',
+  'It recovers by itself once the taking slows.',
+]);
+
+/**
  * @param {any} resource
  * @param {import('../settlement.schema.js').SimSettlement} settlement
  * @param {any} [context]
  */
 export function canRecoverResource(resource, settlement, context = {}) {
   const taxonomy = classifyResource(resource);
-  if (context.forceRecovery) return { canRecover: true, taxonomy, reason: 'Recovery was explicitly forced.' };
+  // STYLE-2 C2 (SW-12): a forced recovery carries no reader line (the empty reason is filtered
+  // by the caller); the old 'Recovery was explicitly forced.' spoke the machinery.
+  if (context.forceRecovery) return { canRecover: true, taxonomy, reason: '' };
   if (taxonomy.recoveryMode === 'natural') {
-    return { canRecover: true, taxonomy, reason: 'Renewable or managed resource can recover when pressure drops.' };
+    return { canRecover: true, taxonomy, reason: pickLine(NATURAL_RECOVERY_REASON, `${settlement?.name || ''}:${String(resource || '')}`) };
   }
   if (taxonomy.recoveryMode === 'requires_high_magic') {
     const canRecover = magicLevelScore(settlement) >= 3 || context.magicRecovery === true;
@@ -167,7 +181,7 @@ export function canRecoverResource(resource, settlement, context = {}) {
       canRecover,
       taxonomy,
       reason: canRecover
-        ? 'High magic can re-stabilize this magical resource.'
+        ? 'Strong magic can mend it.'
         : 'Magical resource recovery requires high or pervasive magic.',
     };
   }

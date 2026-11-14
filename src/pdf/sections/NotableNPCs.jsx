@@ -223,6 +223,7 @@ function FullCard({ npc, index }) {
       <View style={{ marginTop: 4 }}>
         <TextRow label="PERSONALITY" value={npc.personality} multiline />
         <TextRow label="MOTIVATION"  value={npc.motivation}  multiline index={index} />
+        <TextRow label="HOW THEY DEAL" value={npc.dealing} multiline />
       </View>
 
       {/* Secrets */}
@@ -259,11 +260,11 @@ function FullCard({ npc, index }) {
           <Text style={{ ...type.label, color: palette.muted, fontSize: pt['7.5'], marginBottom: 1 }}>
             RELATIONSHIPS
           </Text>
+          {/* ⛔ B4 (2026-11-09): the tie's sentence prints once, in Relationships (14); the card names the person and the tie. */}
           {npc.relationships.map((r, ri) => (
             <Text key={`rel-${ri}`} style={{ ...type.caption, color: palette.second, fontSize: pt['8'] }}>
               · {label(r?.with || r?.target || r?.name)}
               {r?.type ? safe(` - ${r.type}`) : ''}
-              {r?.description ? safe(` - ${r.description}`) : ''}
             </Text>
           ))}
         </View>

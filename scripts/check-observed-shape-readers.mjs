@@ -105,11 +105,21 @@ import {
   RETIRED_MIGRATION_DIRECTION_BASELINE_SCHEMA,
   RETIRED_PEOPLE_CAST_BASELINE_SCHEMA,
   RETIRED_PEOPLE_LANDING_BASELINE_SCHEMA,
+  RETIRED_CAR_MERGE_BASELINE_SCHEMA,
+  RETIRED_WAVE_W2_BASELINE_SCHEMA,
+  RETIRED_WAVE_FOOD_BASELINE_SCHEMA,
+  RETIRED_WAVE_VEIL_BASELINE_SCHEMA,
+  RETIRED_TRAIN_CAR1_BASELINE_SCHEMA,
+  RETIRED_TRAIN_CAR2_BASELINE_SCHEMA,
+  RETIRED_TRAIN_CAR3_BASELINE_SCHEMA,
+  RETIRED_TRAIN_CAR4_BASELINE_SCHEMA,
+  RETIRED_PUBLIC_PROSE_BASELINE_SCHEMA,
+  RETIRED_PLAYED_WORLDS_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
-  validateSchema32Baseline,
+  validateSchema42Baseline,
 } from './lib/observed-shape-baseline.mjs';
 import {
   parseExactFlags,
@@ -247,7 +257,48 @@ const BASELINE = join(ROOT, 'scripts/.observed-shape-readers-baseline.json');
  *     people car merged into the integration branch over the rung-2 landing (the chair's brief,
  *     2026-11-08): the car's genesis at 31 STANDS and the integration side's schema-30 reads (R2's
  *     census readers) are admitted by cause. 15 new rows ADMITTED with attribution, 12 go; nothing
- *     declared, the bank 76/50. THE LIVE AUTHORITY.
+ *     declared, the bank 76/50 (RETIRED).
+ * 33 = schema 32's topology, tag law, roster and corpus definition, re-governed to MERGE-WAVE at the
+ *     W2 DEF merge (82a4e2856; the chair's ruling, 2026-11-08: one rung per cause): ONE new row
+ *     ADMITTED with attribution — `direction on stress` at migrationDirection.js, grounded by the W2
+ *     composition, its writer W0-1's draw; nothing goes, nothing declared, the bank 76/50 (RETIRED).
+ * 34 = schema 33's topology, tag law, roster and corpus definition, re-governed to MERGE-WAVE at the
+ *     FIX-FOOD-ISOLATION merge (one rung per cause): ONE new row ADMITTED with attribution —
+ *     `nearbyResourcesState on config` at foodGenerator.js, its own existing read observed on the
+ *     isolation receipt's call path; nothing goes, nothing declared, the bank 76/50 (RETIRED).
+ * 35 = schema 34's topology, tag law and roster, re-governed to MERGE-WAVE at the FIX-PUBLIC-VEIL merge
+ *     (the chair's option B: one rung, two causes, every row with one): the corpus gains producer 1b′
+ *     (the infiltrated topology; no row moves), and the veiled re-deal admits 4 `covert on impairments`
+ *     rows and retires 13; nothing declared, the bank 76/50 (RETIRED).
+ * 36 = schema 35's topology, tag law, roster and corpus definition, re-governed to MERGE-TRAIN at the
+ *     ALLEGIANCE-CAR1 merge (one rung, two causes, every row with one; the car's own 33 is the veil
+ *     merge 35 already minted, not re-minted): the hidden allegiance admits 11 rows, retires 17 and
+ *     raises 1; the J-19 re-deal admits 13; nothing declared, the bank 76/50 (RETIRED).
+ * 37 = schema 36's topology, tag law, roster and corpus definition, re-governed to MERGE-TRAIN at the
+ *     ALLEGIANCE-CAR2 merge (one rung, one cause): the guild's push (bbb1a4abc) re-deals the year and
+ *     retires 13 rows; nothing new, nothing declared, the bank 76/50 (RETIRED).
+ * 38 = schema 37's topology, tag law, roster and corpus definition, re-governed to MERGE-TRAIN at the
+ *     ALLEGIANCE-CAR3 merge (one rung, two causes, every row with one): the dial e9070d614 re-deals the
+ *     year, admitting 13 rows and retiring 5; the bought watch a63effa93 retires 1; nothing declared, the
+ *     bank 76/50 (RETIRED).
+ * 39 = schema 38's topology, tag law, roster and corpus definition, re-governed to MERGE-TRAIN at the
+ *     ALLEGIANCE-CAR4 merge (one rung, two causes, every row with one and its class): the goals rebuilt
+ *     (03ff59084) admit 7, repair 4 and lose 16 to UNCURED INSTRUMENT EROSION (recorded as such); the
+ *     fingerprint re-based (0a18ff311) admits 1; nothing declared, the bank 76/50 (RETIRED).
+ * 40 = schema 39's topology, tag law and corpus definition, re-governed to THE PUBLIC PROSE WRITER'S
+ *     ADMISSION (lane SW-B7b PROJECTION, the chair's grant of 2026-11-09 13:5x): ONE declaration of the
+ *     save-time-writer class, `publicProse on settlement` (writer lib/saves.js; the corpus never runs the
+ *     save path); the roster 14 -> 15, the bank 76/50 -> 77/51, and the one new row
+ *     (src/domain/display/publicProse.js x1) admitted TAGGED (RETIRED).
+ * 41 = schema 40's topology, tag law and corpus definition, re-governed to THE PLAYED-WORLDS WRITER'S
+ *     ADMISSION (STYLE-2-MERGE closing act 5, the chair's FINAL RULING of 2026-11-09 21:2x): a NEW writer
+ *     class, `played-worlds-writer` (a writer that runs only in campaign time and is dormant in the birth
+ *     corpus), and its first declaration, `outcome on outcome` (writer worldPulse/convergence.js, the minted
+ *     proposal behind interventionActive); the roster 15 -> 16, the bank 77/51 -> 78/52, and the one row
+ *     (src/domain/display/newsBody.js x1) TAGGED (RETIRED).
+ * 42 = schema 41's topology, tag law, roster and bank (78/52), re-governed to THE AGREEMENT LANE'S TIER SEED
+ *     (STYLE-2-MERGE point 47, the chair's ruling on STOP 47a): COHERENCE-AGREE moved osr-tier-14's town out
+ *     of the overlap; producer 2b's seed re-searched by its own rule to osr-tier-19. THE LIVE AUTHORITY.
  * ⚠ THIS LIST WENT STALE FOR EIGHT RUNGS — it marked 10 as "THE LIVE AUTHORITY" while
  *   the number stood at 18 — so it is filled in here rather than extended by one. Each
  *   rung's full rationale lives beside its own target constant in
@@ -275,6 +326,16 @@ export {
   RETIRED_MIGRATION_DIRECTION_BASELINE_SCHEMA,
   RETIRED_PEOPLE_CAST_BASELINE_SCHEMA,
   RETIRED_PEOPLE_LANDING_BASELINE_SCHEMA,
+  RETIRED_CAR_MERGE_BASELINE_SCHEMA,
+  RETIRED_WAVE_W2_BASELINE_SCHEMA,
+  RETIRED_WAVE_FOOD_BASELINE_SCHEMA,
+  RETIRED_WAVE_VEIL_BASELINE_SCHEMA,
+  RETIRED_TRAIN_CAR1_BASELINE_SCHEMA,
+  RETIRED_TRAIN_CAR2_BASELINE_SCHEMA,
+  RETIRED_TRAIN_CAR3_BASELINE_SCHEMA,
+  RETIRED_TRAIN_CAR4_BASELINE_SCHEMA,
+  RETIRED_PUBLIC_PROSE_BASELINE_SCHEMA,
+  RETIRED_PLAYED_WORLDS_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA, RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
@@ -1471,6 +1532,43 @@ export const EXPLAINED_WRITER_EXEMPTIONS = Object.freeze([
       + ' so the writer never runs in the corpus and the read has no observed writer by'
       + ' construction, not by defect. Read once by src/domain/migrationDirection.js.',
   }),
+  // ⭐⭐ THE SCHEMA-40 RUNG'S ONE DECLARATION — the public prose projection (lane SW-B7b PROJECTION,
+  // STYLE-RULINGS-2 B10(a); docs/chair/2026-11-09/STYLE-2-PROJECTION-2026-11-09.md §6.4 STOP 2 and §7),
+  // under the chair's grant of 2026-11-09 13:5x. The save-time-writer class, the `decrees on settlement`
+  // precedent: the cloud row builder stamps `data.publicProse` (the owner's player-view desk text,
+  // composed owner-side) on every save, and the corpus executes generation alone, so no generated world
+  // can carry the key. Gate 0 reads the write in saves.js :: withPublicProse, an object-literal key.
+  Object.freeze({
+    identity: 'publicProse on settlement',
+    mechanism: 'save-time-writer',
+    writer: 'src/lib/saves.js',
+    ruling: 'SW-B7b PROJECTION — the chair\'s grant of 2026-11-09 13:5x (STYLE-RULINGS-2 B10(a))',
+    why: 'The cloud row builder stamps the public prose projection onto the record at every save'
+      + ' (withPublicProse, inside mutationRow and supabaseSave), so the shared page can print the'
+      + ' owner\'s drawn desk text without the seed; the corpus runs generation and never the save'
+      + ' path, so the read has no observed writer by construction. Read once by'
+      + ' src/domain/display/publicProse.js :: publicProseOf.',
+  }),
+  // ⭐⭐ THE SCHEMA-41 RUNG'S ONE DECLARATION, AND THE FIRST OF A NEW CLASS — the played-worlds writer
+  // (STYLE-2-MERGE closing act 5; docs/INTEGRATION_STYLE_2_2026-11-09.md §3, the OSR table, and §2d act 5),
+  // under the chair's FINAL RULING of 2026-11-09 21:2x: "a TRUE schema change, admitted by the ONE rung at
+  // the final tip." SW-11's src/domain/display/newsBody.js :: itemSettlementIds reads
+  // `item.outcome?.affectedSettlementIds` (969077590, point 12); its writer is convergence.js's minted
+  // proposal record, which carries the outcome it was minted from (`mintedProposals.push({ … outcome, … })`)
+  // and is minted only behind interventionActive, in campaign time. The ruled remedies before it were
+  // measured and closed: the detector cure (20:5x) does not apply to a byte-frozen reader scanner, and the
+  // virtual-dormant door (21:0x) is shape-scoped (an `outcome = {` / `outcome: {` literal), which a push
+  // literal is not. Gate-0 evidence: the shorthand spelling probe (`outcome,` in the push literal).
+  Object.freeze({
+    identity: 'outcome on outcome',
+    mechanism: 'played-worlds-writer',
+    writer: 'src/domain/worldPulse/convergence.js',
+    ruling: 'STYLE-2-MERGE closing act 5 — the chair\'s FINAL RULING of 2026-11-09 21:2x (a TRUE schema change, admitted by the ONE rung at the final tip)',
+    why: 'A reader bound to the walked outcome shape; the writer a proposal record minted behind'
+      + ' interventionActive; chair ruling 21:2x. convergence.js mints the proposal, carrying its outcome,'
+      + ' only in campaign time, so the birth corpus never observes the write. Read once by'
+      + ' src/domain/display/newsBody.js :: itemSettlementIds (item.outcome?.affectedSettlementIds).',
+  }),
 ]);
 
 /** The mechanisms an entry may claim. TOTAL positive predicate: an unlisted
@@ -1489,6 +1587,13 @@ const EXPLAINED_WRITER_MECHANISMS = Object.freeze([
   // ⚠ WHETHER THIS CLASS DESERVES ITS OWN TYPED DOOR (as virtual-dormant writers got) or
   // stays a one-off admission is TE-GUARDS-1's question, ruled explicitly NOT this lane's.
   'conditional-generator-branch',
+  // ⭐ THE SIXTH CLASS (the chair's FINAL RULING of 2026-11-09 21:2x, admitted by the schema-41 rung at the
+  // style wave's final tip). "played-worlds writer: a writer that runs only in campaign time and is dormant
+  // in the birth corpus." Distinct from the save-time writer (a store or save path the corpus never runs)
+  // and the conditional generator branch (a generator step the corpus runs without taking the branch): the
+  // writer is DOMAIN code the corpus executes, behind a gate the birth corpus does not light. An entry here
+  // must name the domain file that writes the key, and gate 0 proves the write is still there on every scan.
+  'played-worlds-writer',
 ]);
 
 export function assertExplainedWriterReason(reason, label = 'reason') {
@@ -1586,7 +1691,7 @@ export function assertExplainedWriterRowTags(
   baseline,
   entries = EXPLAINED_WRITER_EXEMPTIONS,
 ) {
-  validateSchema32Baseline(baseline);
+  validateSchema42Baseline(baseline);
   assertExplainedWriterExemptions(entries);
   const declarations = new Map(entries.map((entry) => [entry.identity, entry]));
   const genesis = baseline.frozenAtSha === baseline.migrationReview.subjectSha;
@@ -3095,11 +3200,55 @@ export function baselineOf({
       'per-NPC faction fields leave the record at the v2 boundary (M-2, M-7). A NEW GENESIS from a restored',
       'consistent schema-30 predecessor; every new row ADMITTED with attribution by lane cause, the',
       'migration\'s v1 reads one review class (v1-migration-reads); nothing is declared and the bank holds at 77/51 (RETIRED).',
-      'SCHEMA 32 = schema 31\'s topology, tag law, roster and corpus definition, re-governed to MERGE-CAR: the',
+      'SCHEMA 32 (RETIRED) held schema 31\'s topology, tag law, roster and corpus definition, re-governed to MERGE-CAR: the',
       'people car merged into the integration branch over the rung-2 landing. The car\'s genesis at 31 STANDS;',
       'the integration side\'s schema-30 reads (R2\'s census readers) are ADMITTED at this rung by cause, the',
-      'rows they retired go with cause; nothing is declared and the bank is 76/50.',
-      'Of the fourteen declared bank entries THIRTEEN bank reads today; `isCriminal on incomeSources`',
+      'rows they retired go with cause; nothing is declared and the bank is 76/50 (RETIRED).',
+      'SCHEMA 33 (RETIRED) held schema 32\'s topology, tag law, roster and corpus definition, re-governed to MERGE-WAVE at the',
+      'W2 DEF merge (one rung per cause): ONE row ADMITTED by cause, `direction on stress` at migrationDirection.js,',
+      'grounded to the `stress` shape by the W2 composition, its writer W0-1\'s draw (343bd4eec), which no corpus',
+      'seed reaches; nothing goes, nothing is declared and the bank is 76/50 (RETIRED).',
+      'SCHEMA 34 (RETIRED) held schema 33\'s topology, tag law, roster and corpus definition, re-governed to MERGE-WAVE at the',
+      'FIX-FOOD-ISOLATION merge (one rung per cause): ONE row ADMITTED by cause, `nearbyResourcesState on config` at',
+      'foodGenerator.js, its own existing read observed on the isolation receipt\'s call path; nothing goes,',
+      'nothing is declared and the bank is 76/50 (RETIRED).',
+      'SCHEMA 35 (RETIRED) held schema 34\'s topology, tag law and roster, re-governed to MERGE-WAVE at the FIX-PUBLIC-VEIL merge',
+      '(one rung, two causes, every row with one): the corpus gains producer 1b\u2032 (the infiltrated topology; no',
+      'row moves) and the veiled re-deal ADMITS 4 `covert on impairments` rows and retires 13; nothing is declared',
+      'and the bank is 76/50 (RETIRED).',
+      'SCHEMA 36 (RETIRED) held schema 35\'s topology, tag law, roster and corpus definition, re-governed to MERGE-TRAIN at the',
+      'ALLEGIANCE-CAR1 merge (one rung, two causes, every row with one; the car\'s own 33, the veil merge, is not',
+      're-minted): the hidden allegiance (5902f1a4a) ADMITS 11 rows, retires 17 and raises 1; the J-19 re-deal',
+      '(d131ab158) ADMITS 13; nothing is declared and the bank is 76/50 (RETIRED).',
+      'SCHEMA 37 (RETIRED) held schema 36\'s topology, tag law, roster and corpus definition, re-governed to MERGE-TRAIN at the',
+      'ALLEGIANCE-CAR2 merge (one rung, one cause): the guild\'s push (bbb1a4abc) re-deals the year and retires 13',
+      'rows (nearbyResourcesState on config, resourceHistory on settlement); nothing is new, nothing is declared',
+      'and the bank is 76/50 (RETIRED).',
+      'SCHEMA 38 (RETIRED) held schema 37\'s topology, tag law, roster and corpus definition, re-governed to MERGE-TRAIN at the',
+      'ALLEGIANCE-CAR3 merge (one rung, two causes, every row with one): the dial e9070d614 (organizedCrime',
+      '0.10 -> 0.05) re-deals the year, ADMITTING 13 rows and retiring 5; the bought watch (a63effa93) retires',
+      '`ousted on npcs` at corruption.js; nothing is declared and the bank is 76/50 (RETIRED).',
+      'SCHEMA 39 (RETIRED) held schema 38\'s topology, tag law, roster and corpus definition, re-governed to MERGE-TRAIN at the',
+      'ALLEGIANCE-CAR4 merge (one rung, two causes, every row with one and its class): the goals rebuilt (03ff59084)',
+      'ADMIT 7 `on intent` rows, retire 4 by repair and lose 16 to UNCURED INSTRUMENT EROSION (recorded as such, not',
+      'a cure); the fingerprint re-based (0a18ff311) ADMITS 1; nothing is declared and the bank is 76/50 (RETIRED).',
+      'SCHEMA 40 (RETIRED) held schema 39\'s topology, tag law and corpus definition, re-governed to THE PUBLIC PROSE WRITER\'S',
+      'ADMISSION (lane SW-B7b PROJECTION, the chair\'s grant of 2026-11-09 13:5x): the cloud row builder',
+      '(src/lib/saves.js) stamps `publicProse` on the record at every save, and its one guarded read',
+      '(src/domain/display/publicProse.js) has no observed writer because the corpus never runs the save path.',
+      'The save-time-writer class explains it: ONE declaration, `publicProse on settlement`, the roster 14 -> 15;',
+      'the one new row is admitted TAGGED and nothing else moves (RETIRED).',
+      'SCHEMA 41 (RETIRED) held schema 40\'s topology, tag law and corpus definition, re-governed to THE PLAYED-WORLDS WRITER\'S',
+      'ADMISSION (STYLE-2-MERGE closing act 5, the chair\'s FINAL RULING of 2026-11-09 21:2x): a NEW writer class,',
+      'played-worlds-writer (a writer that runs only in campaign time and is dormant in the birth corpus), and its',
+      'first declaration, `outcome on outcome` (src/domain/worldPulse/convergence.js, the proposal record minted',
+      'behind interventionActive), the writer behind src/domain/display/newsBody.js :: itemSettlementIds; the',
+      'roster 15 -> 16; the one row, admitted ordinary at 40, is TAGGED and nothing else moves (RETIRED).',
+      'SCHEMA 42 = schema 41\'s topology, tag law, roster and bank, re-governed to THE AGREEMENT LANE\'S TIER SEED',
+      '(STYLE-2-MERGE point 47, COHERENCE-AGREE; the chair\'s ruling on STOP 47a): the lane\'s generation moved',
+      'osr-tier-14\'s town out of the town/city overlap; producer 2b\'s seed re-searched by its own rule to osr-tier-19.',
+      'The reconciliation, every moved row with its class, is recorded in the re-freeze commit (act 2).',
+      'Of the sixteen declared bank entries FIFTEEN bank reads today; `isCriminal on incomeSources`',
       'has banked nothing since schema 17 made its writer observable, and banked is always a',
       `subset of declared. This envelope banks ${bankPhrase(bankOf(inventory, rowTags))}.`,
       'The byte-frozen detector is unchanged; its output is narrowed by THREE clearing filters —',
@@ -3109,7 +3258,7 @@ export function baselineOf({
       'An untagged row means: a guarded read, of a real record rather than browser or language surface,',
       'of a key no writer the corpus runs produces and no declared out-of-corpus writer explains.',
       'A tagged row stays visible as governed explained-writer debt under its numeric ceiling and reason.',
-      'Schemas 4–31 are the RETIRED numeric predecessors.',
+      'Schemas 4–41 are the RETIRED numeric predecessors.',
     ],
     schema: BASELINE_SCHEMA,
     frozen: new Date().toISOString().slice(0, 10),
@@ -3283,7 +3432,7 @@ export async function run(argv = [], overrides = {}) {
     createScanArtifact,
     validateScanArtifact,
     assertFindingSourceEvidence,
-    validateBaseline: validateSchema32Baseline,
+    validateBaseline: validateSchema42Baseline,
     // ⭐ THE BANK FENCE'S TWO HAND-OWNED SIDES, overridable so the sentinel can drive
     // every refusal: the literal module and the migration script's declared post-bank.
     readBankLiteral: readBankLiteralModule,

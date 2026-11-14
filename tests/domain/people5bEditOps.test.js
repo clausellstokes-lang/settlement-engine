@@ -69,7 +69,8 @@ describe('P2 — reassign: the three seat mirrors move together', () => {
     const target = { memberships: [{ power: 'Temple of Dawn', rank: 2, share: null }], institution: null };
     const out = reassignNpc(s, 0, target);
     expect(out.ok).toBe(true);
-    expect(out.settlement.npcs[0].memberships).toEqual(target.memberships);
+    // FIX-PUBLIC-VEIL (re-keyed with the cause): the writer stamps each membership's veil bit against the record
+    expect(out.settlement.npcs[0].memberships).toEqual([{ ...target.memberships[0], veiled: false }]);
     expect(out.settlement.npcs[0].institution).toBeNull();
     expect(s.npcs[0].memberships[0].power, 'pure: the input is untouched').toBe('Merchant Guilds');
   });
@@ -108,7 +109,8 @@ describe('P2 — reassign: the three seat mirrors move together', () => {
     expect(state.settlement.npcs[0].memberships[0].power).toBe('Merchant Guilds');
     const applied = run({ memberships: [{ power: 'Thieves\' Guild', rank: 2, share: null }] });
     expect(applied.ok).toBe(true);
-    expect(state.settlement.npcs[0].memberships).toEqual([{ power: 'Thieves\' Guild', rank: 2, share: null }]);
+    // FIX-PUBLIC-VEIL (re-keyed with the cause): stamped against the record (the planted guild has no criminal class)
+    expect(state.settlement.npcs[0].memberships).toEqual([{ power: 'Thieves\' Guild', rank: 2, share: null, veiled: false }]);
   });
 });
 
@@ -138,7 +140,7 @@ describe('P3 — rename: the powers and the houses cascade onto the card', () =>
 
   test('on a GENERATED v2 record: a power rename leaves no membership naming the dead power', () => {
     const s = generateSettlementPipeline({ settType: 'town' }, null, { seed: 'people-5b-rename', customContent: {} });
-    expect(s.schemaVersion).toBe(2);
+    expect(s.schemaVersion).toBe(3); // ALLEGIANCE-CAR1 (2026-11-08): a generated record is born at schema 3 (v2 -> v3, the hidden allegiance); the card shape is still v2's
     expect('factions' in s, 'the v2 record carries no grouping').toBe(false);
     const target = s.powerStructure.factions.find((f) => s.npcs.some((n) => (n.memberships || []).some((m) => m.power === (f.faction || f.name))));
     expect(target, 'a power some card stands in').toBeTruthy();

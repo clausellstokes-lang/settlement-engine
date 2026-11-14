@@ -36,7 +36,7 @@ const VAR_LABEL = {
   labor_capacity: 'Labor capacity',
   public_legitimacy: 'Public legitimacy',
   ruling_authority: 'Ruling authority',
-  faction_power: 'Faction power',
+  faction_power: 'Strength of the powers',
   trade_connectivity: 'Trade connectivity',
   healing_capacity: 'Healing capacity',
   defense_readiness: 'Defense readiness',

@@ -140,7 +140,7 @@
     },
     {
       "id": "Governor#1.short",
-      "text": "Root out the faction leaking tax figures to rivals",
+      "text": "Root out whoever is leaking tax figures to rivals",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -286,7 +286,7 @@
     },
     {
       "id": "Guard Captain#1.long",
-      "text": "Die in bed rather than in the street (unusual ambition for the role)",
+      "text": "Die old, in their own bed (an unusual ambition for the role)",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -644,7 +644,7 @@
     },
     {
       "id": "Thieves' Guild Master#1.short",
-      "text": "Negotiate a non-aggression pact with a new criminal faction moving into their territory",
+      "text": "Negotiate a non-aggression pact with a new gang moving into their territory",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -758,7 +758,7 @@
     },
     {
       "id": "Guild Archmage#0.short",
-      "text": "Resolve a dispute between two factions of the mages' guild without taking sides",
+      "text": "Resolve a dispute between two camps within the mages' guild without taking sides",
       "needs": [],
       "excludes": [],
       "crisis": [],

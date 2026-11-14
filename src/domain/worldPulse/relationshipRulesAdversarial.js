@@ -9,7 +9,7 @@ import { clamp01, getRelationshipSettlements, relationLevelWordFor } from './rel
 import { previewRelationshipHierarchyCascade } from './relationshipHierarchy.js';
 import { isBattlefieldPrimary } from './relationshipCompatibility.js';
 import { hash01, mean, candidateBase, labelProposal, internalDrift, pairStableId, hasRecentIncident, itemFor, settlementStrength, subjugationDirection, supplyExposure } from './relationshipRuleHelpers.js';
-import { neutralRules, tradePartnerRules, alliedRules, patronRules, clientRules, vassalRules } from './relationshipRulesCore.js';
+import { neutralRules, tradePartnerRules, alliedRules, patronRules, clientRules, vassalRules, townName, pairNames } from './relationshipRulesCore.js';
 // Phase 4 W-F5 stage 2 (axis retirement re-plumb): temper is DERIVED from the
 // alignment axes — the stored temperamentAxis (and its legacy spellings) is inert.
 import { deityTemper } from './deityAxes.js';
@@ -50,7 +50,7 @@ function rivalRules(/** @type {any} */ ctx) {
         targetSaveId: pairStableId(ctx.edge),
         severity: 0.26 + relState.resentment * 0.36 + Math.max(sourcePressure.trade, targetPressure.trade) * 0.18,
         probability: 0.08 + relState.resentment * 0.18,
-        reasons: ["Economic competition and resentment create sabotage, undercutting, or prestige attacks."],
+        reasons: [`${pairNames(ctx)[0]} and ${pairNames(ctx)[1]} are working against each other in trade, and the resentment between them is growing.`],
         relationshipPatch: {
           trust: clamp01(relState.trust - 0.035),
           resentment: clamp01(relState.resentment + 0.04),
@@ -161,7 +161,7 @@ function coldWarRules(/** @type {any} */ ctx) {
         actorSaveId: exploiterId,
         severity: 0.3 + Math.max(sourcePressure.legitimacy, targetPressure.legitimacy) * 0.38,
         probability: 0.08 + conflictStress * 0.16,
-        reasons: ["Weak legitimacy gives cold-war rivals a proxy faction opening."],
+        reasons: [`${townName(ctx, destabilizedId)}'s rulers are losing their people's trust, and ${townName(ctx, exploiterId)} sees a chance to back a power inside the town against them.`],
         relationshipPatch: {
           leverage: clamp01(relState.leverage + 0.05),
           resentment: clamp01(relState.resentment + 0.04),
@@ -195,11 +195,11 @@ function coldWarRules(/** @type {any} */ ctx) {
         severity: clamp01(0.3 + Math.max(exposure, tradeStress) * 0.42 + relState.leverage * 0.12),
         probability: clamp01(0.08 + Math.max(exposure, tradeStress) * 0.2 + relState.resentment * 0.08),
         reasons: [
-          "Cold-war pressure follows exposed trade and supply channels through inspections, sanctions, and informal embargoes.",
+          `${townName(ctx, imposerId)}'s inspectors are holding up ${townName(ctx, sanctionedId)}'s carts at the border, and some goods no longer cross at all.`,
           `${itemFor(ctx.snapshot, imposerId)?.name || imposerId} squeezes the strained economy of ${itemFor(ctx.snapshot, sanctionedId)?.name || sanctionedId}.`,
           exposure > 0
-            ? `The supply exposure is confirmed, and it is ${relationLevelWordFor(exposure)}.`
-            : `Nothing is confirmed; the trade strain alone is ${relationLevelWordFor(tradeStress)}.`,
+            ? `${townName(ctx, sanctionedId)} depends on that trade, and the dependence is ${relationLevelWordFor(exposure)}.`
+            : `No one has proved ${townName(ctx, sanctionedId)} depends on that trade, but its markets are already hurting.`,
         ],
         relationshipPatch: {
           tradeBalance: clamp01(relState.tradeBalance - 0.05),
@@ -648,7 +648,7 @@ function tradeLeverageCandidate(/** @type {any} */ ctx) {
       severity: sev,
       probability: clamp01(0.06 + info.salience * 0.14),
       reasons: [
-        "A critical-supplier dependency is leverage: the supplier extracts concessions or preferential terms rather than risk war over the relationship.",
+        "A critical-supplier dependency is leverage: the supplier presses for concessions or better terms and stops short of war over it.",
         `What the trade is worth to them is ${relationLevelWordFor(info.salience)}, and there is no other supplier of consequence.`,
       ],
       relationshipPatch: {

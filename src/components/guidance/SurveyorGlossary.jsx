@@ -28,6 +28,7 @@ import { BODY, BORDER, CARD, CARD_ALT, ELEV, FS, GOLD, INK, SP, sans, swatch } f
 import { glossaryEntryFor } from '../../domain/display/glossary.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import { chromeFontSize } from '../../design/proseScale.js';
+import { sectionSlugForTab } from '../../lib/compendiumSections.js';
 
 /** The in-place glossary card (InstitutionCard grammar; neutral ✦ glyph header). */
 function GlossaryCard({ open, entry, onClose }) {
@@ -40,7 +41,12 @@ function GlossaryCard({ open, entry, onClose }) {
   const cardRef = useDialogFocusTrap(open, onClose);
 
   if (!open || !entry) return null;
-  const href = `/compendium?tab=${encodeURIComponent(entry.tab)}#${encodeURIComponent(entry.anchor)}`;
+  // The section's own page since the owner's word of 2026-11-10 (/compendium/<slug>);
+  // a tab with no section page keeps the old address, which the compendium redirects.
+  const sectionSlug = sectionSlugForTab(entry.tab);
+  const href = sectionSlug
+    ? `/compendium/${sectionSlug}#${encodeURIComponent(entry.anchor)}`
+    : `/compendium?tab=${encodeURIComponent(entry.tab)}#${encodeURIComponent(entry.anchor)}`;
 
   return (
     <div

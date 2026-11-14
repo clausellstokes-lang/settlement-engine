@@ -63,7 +63,7 @@ export const en = Object.freeze({
   hero: {
     eyebrow:    'A simulator for Dungeon Masters',
     title:      'Forge a settlement worth running a campaign in.',
-    subtitle:   'Every street, every faction, every reason the place hasn’t collapsed yet. Simulated in seconds, exported in a click.',
+    subtitle:   'Every street, every power, every reason the place hasn’t collapsed yet. Simulated in seconds, exported in a click.',
     antiAi:     'Simulated, not AI-generated. The town is derived from constraints, coherent because it has to be.',
     cta:        'Begin a settlement',
     // ⚠ THE PROMISE IS SCOPED TO WHAT THE CODE ACTUALLY DOES (2026-09-18). It read
@@ -218,9 +218,9 @@ export const en = Object.freeze({
     // Guide's reference row. Only these auth strings and the checklist said
     // "Neighbourhood System", which is a different phrase for the same feature on
     // the two surfaces a new account meets first.
-    subtitle: 'Saves, larger settlements, and the Neighbour System.',
-    signinSubtitle: 'Sign in to keep your work: saves, larger settlements, and the Neighbour System.',
-    signupSubtitle: 'Create a free {tier} account to save your work, reach larger sizes, and link settlements in the Neighbour System.',
+    subtitle: 'Saves and every settlement size.',
+    signinSubtitle: 'Sign in to keep your work: saves and every settlement size.',
+    signupSubtitle: 'Create a free {tier} account to save your work and reach every settlement size.',
     resetPageSubtitle: 'We will email you a secure link to set a new password.',
     discord: {
       label:       'Continue with Discord',
@@ -472,6 +472,37 @@ export const en = Object.freeze({
       rubric: 'Generation failed',
       body:   'The generator on the server has moved on from this page; reload to continue.',
     },
+    // The engine service's rate guard answered 429 (remote-path R3). A limit, not a fault:
+    // waiting cures it, and no clock time is promised (the client cannot tell which window).
+    // "From here", not "you" (the chair's wording, 2026-11-10): a signed-out reader is metered
+    // by address, and behind a shared address other people can spend the limit.
+    engineRateLimited: {
+      rubric: 'Forge limit reached',
+      body:   'The forge has made as many settlements from here as it allows for now. Nothing went wrong; wait a while, then forge again.',
+    },
+    // The engine service could not be reached: a network failure, a server fault, or a build
+    // with no service configured (remote-path R3). The connection first. No "nothing was lost"
+    // (the chair, FU-4): the fork surfaces overwrite the stored dials before a forge that may fail.
+    engineUnavailable: {
+      rubric: 'Forge unreachable',
+      body:   'The forge could not be reached, so no settlement was made. Check your connection, then forge again.',
+    },
+    // The request carries what the engine service cannot make yet (remote-path FU-3): `{what}`
+    // names it from the refusal's own inputs (lib/engineRefusal.js). No date, no "try again".
+    // The `{what}` phrases are THE INTERFACE'S OWN WORDS (the chair, 2026-11-10), so the reader
+    // can find the control that caused the refusal: the wizard's "Neighbour active" banner and its
+    // "Use my custom content" switch. lib/engineRefusal.js picks the KEYS in this order (neighbour,
+    // content, campaign); RefusalNotice resolves them and joins them with `join`.
+    engineUnsupported: {
+      rubric: 'Not in this build yet',
+      body:   'This build’s forge cannot yet make a settlement {what}, so no settlement was made.',
+      join:   ' and ',
+      what: {
+        neighbour: 'with a neighbour active',
+        customContent: 'with your custom content',
+        campaign: 'inside a campaign',
+      },
+    },
     // No door and no price: the admin panel is not sold, so this sentence must
     // not read as an upgrade prompt. It says whose page it is and stops.
     staffOnly: {
@@ -579,7 +610,7 @@ export const en = Object.freeze({
           'Campaigns: link settlements into one living world',
           'The self-ending war layer + the living pantheon',
           'Custom content + import settlements from the Gallery',
-          'Unlimited saves + cloud sync',
+          'Unlimited saves',
           'Unlimited PDF and JSON export of every settlement',
           '30 narrative credits every month, then pay-per-use packs',
         ],
@@ -665,7 +696,7 @@ export const en = Object.freeze({
             'The living pantheon: deities contest converts and rise',
             'Campaigns + a chronicle that writes itself',
             'Custom content + import settlements from the Gallery',
-            'Unlimited saves + cloud sync',   // secondary bullet — storage stays
+            'Unlimited saves',   // secondary bullet — storage stays
             'Unlimited PDF and JSON export of every settlement',
             '30 narrative credits every month, then pay-per-use packs',
           ],
@@ -702,14 +733,14 @@ export const en = Object.freeze({
       tries: {
         eyebrow: 'Try it',
         tier:    'No account',
-        body:    'Generate a coherent town up to town size, no signup. See the moat before you commit.',
+        body:    'Generate a coherent town, no signup. See the moat before you commit.',
         cta:     'Forge a settlement',
       },
       saves: {
         eyebrow: 'Save it',
         tier:    'Free account',
         // Full-size generation belongs to the FREE rung — size is not premium.
-        body:    'A free account generates any size, from hamlet to metropolis, and saves your work. Keep any dossier’s PDF for $2.99.',
+        body:    'A free account generates any size, from thorpe to metropolis, and saves your work. Keep any dossier’s PDF for $2.99.',
         cta:     'Create a free account',
       },
       simulates: {
@@ -826,7 +857,7 @@ export const en = Object.freeze({
       step0Title:   "Let's build your first settlement",
       step0Body:    'Pick a size below (Thorp is small, Metropolis is huge), then click Generate. You can always regenerate or tweak the sliders.',
       step1Title:   'Ready to forge your world',
-      step1Body:    'Hit the Generate button below. Every click rolls a fresh settlement shaped by your choices. Economy, factions, NPCs, crises.',
+      step1Body:    'Hit the Generate button below. Every click rolls a fresh settlement shaped by your choices. Economy, powers, NPCs, crises.',
       step2Title:   'Here it is. Explore the tabs',
       step2Body:    'Each tab reveals a different layer: Summary hooks, Daily Life, Economics, Power, NPCs, History, and more. Click around.',
       step3Title:   "You're all set",
@@ -881,7 +912,7 @@ export const en = Object.freeze({
       },
       culture: {
         title: 'Culture',
-        body: 'Names, naming patterns, institution flavor, faction archetypes. Drives the prose of the place more than the math. A "germanic" town and a "south-asian" town with identical configs read very differently.',
+        body: 'Names, naming patterns, institution flavor, power archetypes. Drives the prose of the place more than the math. A "germanic" town and a "south-asian" town with identical configs read very differently.',
       },
       monsterThreat: {
         title: 'Monster Threat',
@@ -1026,7 +1057,7 @@ export const en = Object.freeze({
   gallery: {
     // The tier's stock painting stands in for a settlement that has no picture of its own
     // (§934.32): the alt says so, so a reader is never told the painting IS the place.
-    stockImageAlt: 'A {tier} of the kind {name} is: the tier’s painting, not a picture of this settlement.',
+    stockImageAlt: 'A painting of a typical {tier}, not of {name} itself.',
     eyebrow:      'From the community',
     pageTitle:    'Gallery',
     pageSubtitle: 'Settlements other DMs have shared. Browse for inspiration; click a tile to read the full dossier.',
@@ -1051,7 +1082,7 @@ export const en = Object.freeze({
   narrativeDrift: {
     headingSeismic:    'This is a big change.',
     headingStructural: 'This change will drift the narrative.',
-    body:              'The narrative layer on this save reasons about the facts you’re changing. A mechanical substitution won’t keep the prose honest. The thesis, faction blurbs, and institution descriptions were written against the old state.',
+    body:              'The narrative layer on this save reasons about the facts you’re changing. A mechanical substitution won’t keep the prose honest. The thesis, power blurbs, and institution descriptions were written against the old state.',
     pickOne:           'Pick one:',
     regenerateTitle:   'Apply & Regenerate Narrative',
     regenerateBody:    'Full re-run against the new state. Spends {cost} credits.',
@@ -1453,7 +1484,7 @@ export const en = Object.freeze({
   moments: {
     first_canonize: {
       headline: 'You just made a town part of your campaign.',
-      body:     'Upgrade adds canon snapshots, timeline export variants, and narrative refinement. The free tier continues to work, just with the basics.',
+      body:     'Cartographer adds editing after generation, the living realm, and unlimited export. Everything else works the same on the free tier.',
     },
     first_ai_use: {
       headline: 'Narrative refinement costs credits per pass.',
@@ -1461,11 +1492,7 @@ export const en = Object.freeze({
     },
     first_canon_export: {
       headline: 'Canon dossiers are the deliverable DMs print.',
-      body:     'Upgrade unlocks unlimited canon-mode exports and the timeline-packet variant.',
-    },
-    cloud_save: {
-      headline: 'Save your campaign across devices.',
-      body:     'Upgrade syncs your settlements, drafts, and canon timelines to your account.',
+      body:     'Upgrade unlocks unlimited exports.',
     },
     first_save: {
       headline: 'Save it. Come back tomorrow.',
@@ -1480,11 +1507,11 @@ export const en = Object.freeze({
     },
     first_pdf_export: {
       headline: 'You just downloaded your first dossier.',
-      body:     'Save this settlement and keep its PDF for $2.99, yours to re-download. Cartographer exports every settlement, unlimited, with cloud sync.',
+      body:     'Save this settlement and keep its PDF for $2.99, yours to re-download. Cartographer exports every settlement, unlimited.',
     },
     third_save: {
       headline: 'You’re building a campaign.',
-      body:     'Wanderer caps at 3 saves. Cartographer unlocks unlimited saves, cloud sync, the neighbour network, and full export.',
+      body:     'Wanderer caps at 3 saves. Cartographer unlocks unlimited saves, the neighbour network, and full export.',
     },
     regen_burst: {
       headline: 'You’re pushing the engine.',
@@ -1620,7 +1647,10 @@ export const en = Object.freeze({
     // whole per-settlement EXPORT BUNDLE (owner ruling): the dossier PDF + every
     // map export for this settlement.
     buySaved: {
-      cta:      'Unlock all exports for this settlement · {price}',
+      // The button's own words (the owner, 2026-11-09: "remove the for 2.99"): no price on
+      // the button. The price stays where a buyer sees it before paying: the dialog title.
+      cta:      'Unlock all exports for this settlement',
+      dialogTitle: 'Unlock all exports for this settlement · {price}',
       subline:  'A one-time purchase unlocks every export for this settlement: the dossier PDF, the town-map images (SVG/PNG/JPEG/WebP), the single-map PDF, and the VTT token map. Yours to re-download for as long as it stays in your library.',
       // The unlock pitch is a POPUP now (owner order 2026-07-22): `checkout` is
       // the popup's confirm CTA, `dismiss` its plain close.
@@ -1807,7 +1837,7 @@ export const en = Object.freeze({
     },
     cancelAnytime: {
       q: 'Can I cancel my subscription?',
-      a: 'Yes. Open the Manage Subscription link in your Stripe portal. Cancellation takes effect at the end of your current billing period; you keep access until then.',
+      a: 'Yes. Open Account and use Manage subscription in the Subscription panel; it opens your Stripe portal. Cancellation takes effect at the end of your current billing period; you keep access until then.',
     },
     refundWindow: {
       q: 'Do you offer refunds?',
@@ -1815,15 +1845,15 @@ export const en = Object.freeze({
     },
     founderLifetime: {
       q: 'What is a Founder chair?',
-      a: 'A place in the credits, and everything the paid Cartographer tier runs, for as long as SettlementForge runs. The Founders’ Hall holds thirty chairs. They are given by invitation and have never been for sale; you can ask for one by letter in the Hall.',
+      a: 'A place in the credits, and everything the paid Cartographer tier runs, for as long as SettlementForge runs. The Founders’ Hall holds {seats} chairs. They are given by invitation and have never been for sale; you can ask for one by letter in the Hall.',
     },
     galleryPrivacy: {
       q: 'Is my settlement private when I save it?',
-      a: 'Yes by default. Only you can see saved settlements. Sharing to the public Gallery is an explicit opt-in per settlement. The toggle lives in the dossier header.',
+      a: 'Yes by default. Only you can see saved settlements. Sharing to the public Gallery is an explicit opt-in per settlement. Use Share to Gallery in a saved settlement’s header, or Export to gallery in a live dossier’s action band.',
     },
     aiOrSim: {
       q: "Does SettlementForge use AI to write my settlement?",
-      a: 'The structural layer (population, factions, supply chains, hooks) is a deterministic simulator, not an LLM. Optional Narrative Refinement spends a credit to turn the simulation into prose. You can keep the raw output and skip the LLM entirely.',
+      a: 'The structural layer (population, powers, supply chains, hooks) is a deterministic simulator, not an LLM. Optional Narrative Refinement spends credits to turn the simulation into prose. You can keep the raw output and skip the LLM entirely.',
     },
   },
 
@@ -1945,7 +1975,7 @@ export const en = Object.freeze({
       card: {
         institution: 'Institution',
         npc:         'Person',
-        faction:     'Faction',
+        faction:     'Power',
         powerSeat:   'Power seat',
         worldFact:   'World facts',
         goods:       'Goods',

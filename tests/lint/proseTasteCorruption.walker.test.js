@@ -30,7 +30,7 @@ import { join } from 'node:path';
 
 import { ROOT } from '../helpers/dossierCorpus.js';
 import { closureCost } from '../../scripts/lib/module-closure.mjs';
-import { compromisedSecurityInstitutions } from '../../src/domain/corruption.js';
+import { compromisedSecurityInstitutions } from '../../src/domain/corruptionLeash.js'; // moved by ALLEGIANCE-CAR3
 import { deskReturns } from '../../scripts/prose-rate-corpus.mjs';
 import {
   PAIRED_TOWN, securityInstitutionsOf, tasteTown, withCorruption,
@@ -96,11 +96,17 @@ describe('the corruption closure is re-measured, and refused above the precedent
     // census-1 wave 0 fact 1 (fda620b75, the crisis-kind home) brought settlement.schema.js into
     // the desk's closure (desk adds 6 -> 5 at it, measured on archives), and census-3b(1)
     // (0fab7c35a, the delegated getters) brought prosperityRank.js (5 -> 4). So the import costs
-    // the shipped desk 4 files / 65,983 B, not the leaf's 6 / 153,025 B.
+    // the shipped desk 4 files / 65,983 B, not the leaf's 6 / 153,025 B. PULSE-SITES (2026-11-10, 0db374102) gave
+    // corruption.js :: npcHomeInstitution an import of people/membership.js, which the desk already ships: the
+    // leaf's added set gains it and the desk's does not (re-keyed by that cause; the byte arm above unmoved).
     const desk = deskCost.files.map((f) => f.replace(`${ROOT}/`, '')).sort();
     const leaf = leafCost.files.map((f) => f.replace(`${ROOT}/`, '')).sort();
     expect(desk.filter((f) => !leaf.includes(f)), 'the desk adds nothing the leaf does not').toEqual([]);
+    // COHERENCE-AGREE-8 (2026-11-13) gave supplyChainState.js an import of display/chainPrintName.js (the toll's printed
+    // name), whose goods identity reaches data/entityTags.js, which the desk now ships: re-keyed by that cause.
     expect(leaf.filter((f) => !desk.includes(f)), 'what the desk already ships').toEqual([
+      'src/data/entityTags.js',
+      'src/domain/people/membership.js',
       'src/domain/prosperityRank.js',
       'src/domain/settlement.schema.js',
     ]);

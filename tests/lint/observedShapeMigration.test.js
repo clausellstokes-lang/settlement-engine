@@ -26,6 +26,16 @@ import {
   PEOPLE_CAST_TARGET_SCHEMA,
   PEOPLE_LANDING_TARGET_SCHEMA,
   CAR_MERGE_TARGET_SCHEMA,
+  WAVE_W2_TARGET_SCHEMA,
+  WAVE_FOOD_TARGET_SCHEMA,
+  WAVE_VEIL_TARGET_SCHEMA,
+  TRAIN_CAR1_TARGET_SCHEMA,
+  TRAIN_CAR2_TARGET_SCHEMA,
+  TRAIN_CAR3_TARGET_SCHEMA,
+  TRAIN_CAR4_TARGET_SCHEMA,
+  PUBLIC_PROSE_TARGET_SCHEMA,
+  PLAYED_WORLDS_TARGET_SCHEMA,
+  AGREE_TIER_SEED_TARGET_SCHEMA,
   declaredBankOf,
   DEAD_DEPENDENCY_TARGET_SCHEMA,
   PRESET_LIGHT_TARGET_SCHEMA,
@@ -1192,7 +1202,16 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
       // ⭐ AND AGAIN AT THE PEOPLE-CAST RUNG: 30 takes a schema-29 predecessor.
       // ⭐ AND AGAIN AT THE PEOPLE-LANDING RUNG: 31 takes a schema-30 predecessor.
       // ⭐ AND AGAIN AT THE CAR-MERGE RUNG: 32 takes a schema-31 predecessor.
-      ])).toThrow(/predecessor baseline must be a schema-31 object/);
+      // ⭐ AND AGAIN AT THE W2-MERGE RUNG (MERGE-WAVE): 33 takes a schema-32 predecessor.
+      // ⭐ AND AGAIN AT THE FOOD-ISOLATION RUNG (MERGE-WAVE): 34 takes a schema-33 predecessor.
+      // ⭐ AND AGAIN AT THE PUBLIC-VEIL RUNG (MERGE-WAVE): 35 takes a schema-34 predecessor.
+      // ⭐ AND AGAIN AT THE ALLEGIANCE-CAR1 RUNG (MERGE-TRAIN): 36 takes a schema-35 predecessor.
+      // ⭐ AND AGAIN AT THE ALLEGIANCE-CAR2 RUNG (MERGE-TRAIN): 37 takes a schema-36 predecessor.
+      // ⭐ AND AGAIN AT THE ALLEGIANCE-CAR3 RUNG (MERGE-TRAIN): 38 takes a schema-37 predecessor.
+      // ⭐ AND AGAIN AT THE ALLEGIANCE-CAR4 RUNG (MERGE-TRAIN): 39 takes a schema-38 predecessor.
+      // ⭐ AND AGAIN AT THE PUBLIC-PROSE RUNG (SW-B7b): 40 takes a schema-39 predecessor.
+      // ⭐ AND AGAIN AT THE PLAYED-WORLDS RUNG (STYLE-2-MERGE closing act 5): 41 takes a schema-40 predecessor.
+      ])).toThrow(/predecessor baseline must be a schema-41 object/); // ⭐ 42 takes a schema-41 predecessor (the agreement lane's tier seed (STYLE-2-MERGE point 47, STOP 47a))
       // …and the RETIRED live target of the previous mint is still reachable by
       // name, still refusing the same schema-2 predecessor for its own reason.
       expect(() => runMigration([
@@ -1244,8 +1263,8 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
       // ⭐ AND UP AGAIN AT THE CAR-MERGE RUNG: 32 became a defined rung on 2026-11-08 (MERGE-CAR),
       // so the probe moves to 33 and the message names 32 as the live leaf.
       expect(() => runMigration([
-        `--predecessor=${predecessorPath}`, `--legacy=${legacyPath}`, '--target-schema=33',
-      ])).toThrow(/--target-schema must be 32/);
+        `--predecessor=${predecessorPath}`, `--legacy=${legacyPath}`, '--target-schema=43',
+      ])).toThrow(/--target-schema must be 42/);
       expect(() => runMigration([`--predecessor=${predecessorPath}`, '--target-schema=3']))
         .toThrow(/usage:/);
     } finally {
@@ -1316,6 +1335,17 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
     // ⚠ 31 IS NOW A RETIRED TARGET AND KEEPS ITS NUMBER, by the same law as 8 above.
     expect(PEOPLE_LANDING_TARGET_SCHEMA).toBe(31);
     expect(CAR_MERGE_TARGET_SCHEMA).toBe(32);
+    // ⚠ 32 IS NOW A RETIRED TARGET AND KEEPS ITS NUMBER (MERGE-WAVE's W2-merge rung is 33).
+    expect(WAVE_W2_TARGET_SCHEMA).toBe(33);
+    expect(WAVE_FOOD_TARGET_SCHEMA).toBe(34);
+    expect(WAVE_VEIL_TARGET_SCHEMA).toBe(35);
+    expect(TRAIN_CAR1_TARGET_SCHEMA).toBe(36);
+    expect(TRAIN_CAR2_TARGET_SCHEMA).toBe(37);
+    expect(TRAIN_CAR3_TARGET_SCHEMA).toBe(38);
+    expect(TRAIN_CAR4_TARGET_SCHEMA).toBe(39);
+    expect(PUBLIC_PROSE_TARGET_SCHEMA).toBe(40);
+    expect(PLAYED_WORLDS_TARGET_SCHEMA).toBe(41);
+    expect(AGREE_TIER_SEED_TARGET_SCHEMA).toBe(42);
     // ⭐ FROM 19 ONWARD A RUNG DECLARES ITS POST-BANK AS DATA, and the checker's write
     // refuses a migration whose measured bank disagrees (`assertBankTwins`). 19's figure
     // is read off the register `fe021a487` froze; 20 moves no row and declares the same.
@@ -1366,6 +1396,28 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
     // canonicalAccessors.js (uncured erosion, 7af3c6797) is on a declared identity, so the pair goes
     // 77/51 -> 76/50; nothing is declared. MEASURED off the live scan at the merged tip.
     expect(declaredBankOf(CAR_MERGE_TARGET_SCHEMA)).toEqual({ bankedReads: 76, taggedRows: 50 });
+    // ⭐ AND 33 HOLDS IT (MERGE-WAVE, W2 DEF): the one admitted row is ordinary debt, on no declared identity.
+    expect(declaredBankOf(WAVE_W2_TARGET_SCHEMA)).toEqual({ bankedReads: 76, taggedRows: 50 });
+    // ⭐ AND 34 HOLDS IT (MERGE-WAVE, FIX-FOOD-ISOLATION): one ordinary admitted row.
+    expect(declaredBankOf(WAVE_FOOD_TARGET_SCHEMA)).toEqual({ bankedReads: 76, taggedRows: 50 });
+    // ⭐ AND 35 HOLDS IT (MERGE-WAVE, FIX-PUBLIC-VEIL): no moved row on a declared identity.
+    expect(declaredBankOf(WAVE_VEIL_TARGET_SCHEMA)).toEqual({ bankedReads: 76, taggedRows: 50 });
+    // ⭐ AND 36 HOLDS IT (MERGE-TRAIN, ALLEGIANCE-CAR1): no moved row on a declared identity.
+    expect(declaredBankOf(TRAIN_CAR1_TARGET_SCHEMA)).toEqual({ bankedReads: 76, taggedRows: 50 });
+    // ⭐ AND 37 HOLDS IT (MERGE-TRAIN, ALLEGIANCE-CAR2): no moved row on a declared identity.
+    expect(declaredBankOf(TRAIN_CAR2_TARGET_SCHEMA)).toEqual({ bankedReads: 76, taggedRows: 50 });
+    // ⭐ AND 38 HOLDS IT (MERGE-TRAIN, ALLEGIANCE-CAR3): no moved row on a declared identity.
+    expect(declaredBankOf(TRAIN_CAR3_TARGET_SCHEMA)).toEqual({ bankedReads: 76, taggedRows: 50 });
+    // ⭐ AND 39 HOLDS IT (MERGE-TRAIN, ALLEGIANCE-CAR4): no moved row on a declared identity.
+    expect(declaredBankOf(TRAIN_CAR4_TARGET_SCHEMA)).toEqual({ bankedReads: 76, taggedRows: 50 });
+    // ⭐ AND 40 GROWS IT BY ONE (SW-B7b): one declaration (the public prose projection), one address and
+    // one read, so the pair goes 76/50 -> 77/51. MEASURED off the live scan at the subject.
+    expect(declaredBankOf(PUBLIC_PROSE_TARGET_SCHEMA)).toEqual({ bankedReads: 77, taggedRows: 51 });
+    // ⭐ AND 41 GROWS IT BY ONE (STYLE-2-MERGE closing act 5, 21:2x): one declaration of the new played-worlds-writer
+    // class (`outcome on outcome`), one address and one read, so the pair goes 77/51 -> 78/52. MEASURED off the live scan.
+    expect(declaredBankOf(PLAYED_WORLDS_TARGET_SCHEMA)).toEqual({ bankedReads: 78, taggedRows: 52 });
+    // ⭐ AND 42 HOLDS IT (the agreement lane's tier seed (STYLE-2-MERGE point 47, STOP 47a)): no declaration moves.
+    expect(declaredBankOf(AGREE_TIER_SEED_TARGET_SCHEMA)).toEqual({ bankedReads: 78, taggedRows: 52 });
     expect(declaredBankOf(LINEAGE_REANCHOR_TARGET_SCHEMA)).toBeNull();
     expect(Object.isFrozen(declaredBankOf(BANK_FENCE_TARGET_SCHEMA))).toBe(true);
     expect(Object.isFrozen(declaredBankOf(RELATIONSHIPS_MOUNT_TARGET_SCHEMA))).toBe(true);
@@ -1380,6 +1432,16 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
     expect(Object.isFrozen(declaredBankOf(PEOPLE_CAST_TARGET_SCHEMA))).toBe(true);
     expect(Object.isFrozen(declaredBankOf(PEOPLE_LANDING_TARGET_SCHEMA))).toBe(true);
     expect(Object.isFrozen(declaredBankOf(CAR_MERGE_TARGET_SCHEMA))).toBe(true);
+    expect(Object.isFrozen(declaredBankOf(WAVE_W2_TARGET_SCHEMA))).toBe(true);
+    expect(Object.isFrozen(declaredBankOf(WAVE_FOOD_TARGET_SCHEMA))).toBe(true);
+    expect(Object.isFrozen(declaredBankOf(WAVE_VEIL_TARGET_SCHEMA))).toBe(true);
+    expect(Object.isFrozen(declaredBankOf(TRAIN_CAR1_TARGET_SCHEMA))).toBe(true);
+    expect(Object.isFrozen(declaredBankOf(TRAIN_CAR2_TARGET_SCHEMA))).toBe(true);
+    expect(Object.isFrozen(declaredBankOf(TRAIN_CAR3_TARGET_SCHEMA))).toBe(true);
+    expect(Object.isFrozen(declaredBankOf(TRAIN_CAR4_TARGET_SCHEMA))).toBe(true);
+    expect(Object.isFrozen(declaredBankOf(PUBLIC_PROSE_TARGET_SCHEMA))).toBe(true);
+    expect(Object.isFrozen(declaredBankOf(PLAYED_WORLDS_TARGET_SCHEMA))).toBe(true);
+    expect(Object.isFrozen(declaredBankOf(AGREE_TIER_SEED_TARGET_SCHEMA))).toBe(true);
     // ⚠⚠ THE CHAIN IS SINGLE-STEP, PINNED AS AN EXACT TABLE. A skipped rung —
     // 2 → 6, which would re-bank a two-mints-old inventory as if four filters
     // had run — is not expressible, because no such pairing exists.
@@ -1435,6 +1497,26 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
       31: 30,
       // ⭐ 32 -> 31, the car-merge rung (MERGE-CAR). The chain stays SINGLE-STEP.
       32: 31,
+      // ⭐ 33 -> 32, the W2-merge rung (MERGE-WAVE). The chain stays SINGLE-STEP.
+      33: 32,
+      // ⭐ 34 -> 33, the food-isolation rung (MERGE-WAVE). The chain stays SINGLE-STEP.
+      34: 33,
+      // ⭐ 35 -> 34, the public-veil rung (MERGE-WAVE). The chain stays SINGLE-STEP.
+      35: 34,
+      // ⭐ 36 -> 35, the allegiance-car1 rung (MERGE-TRAIN). The chain stays SINGLE-STEP.
+      36: 35,
+      // ⭐ 37 -> 36, the allegiance-car2 rung (MERGE-TRAIN). The chain stays SINGLE-STEP.
+      37: 36,
+      // ⭐ 38 -> 37, the allegiance-car3 rung (MERGE-TRAIN). The chain stays SINGLE-STEP.
+      38: 37,
+      // ⭐ 39 -> 38, the allegiance-car4 rung (MERGE-TRAIN). The chain stays SINGLE-STEP.
+      39: 38,
+      // ⭐ 40 -> 39, the public-prose rung (SW-B7b). The chain stays SINGLE-STEP.
+      40: 39,
+      // ⭐ 41 -> 40, the played-worlds rung (STYLE-2-MERGE closing act 5). The chain stays SINGLE-STEP.
+      41: 40,
+      // ⭐ 42 -> 41, the agreement lane's tier seed (STYLE-2-MERGE point 47, STOP 47a). The chain stays SINGLE-STEP.
+      42: 41,
     });
     // The kind is DERIVED from the table, so a target can never name a migration
     // it did not perform.
@@ -1468,13 +1550,13 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
     // schema 10 became live. A probe left pointing at a number the table has
     // since adopted stops proving the predicate is total and starts proving
     // nothing at all, while still passing for the wrong reason.
-    expect(() => heuristicMigrationReport(fixture.predecessor, fixture.legacy, text, 33))
-      .toThrow(/leaf migration target must be 4 or 5 or 6 or 7 or 8 or 9 or 10 or 11 or 12 or 13 or 14 or 15 or 16 or 17 or 18 or 19 or 20 or 21 or 22 or 23 or 24 or 25 or 26 or 27 or 28 or 29 or 30 or 31 or 32;/);
+    expect(() => heuristicMigrationReport(fixture.predecessor, fixture.legacy, text, 43))
+      .toThrow(/leaf migration target must be 4 or 5 or 6 or 7 or 8 or 9 or 10 or 11 or 12 or 13 or 14 or 15 or 16 or 17 or 18 or 19 or 20 or 21 or 22 or 23 or 24 or 25 or 26 or 27 or 28 or 29 or 30 or 31 or 32 or 33 or 34 or 35 or 36 or 37 or 38 or 39 or 40 or 41 or 42;/);
     // ⚠ AND OMITTING IT IS THE SAME REFUSAL, WHICH IS WHY THERE IS NO DEFAULT:
     // a defaulted target is the one input in this chain a caller could get wrong
     // silently, and it would decide which migration ran.
     expect(() => heuristicMigrationReport(fixture.predecessor, fixture.legacy, text))
-      .toThrow(/leaf migration target must be 4 or 5 or 6 or 7 or 8 or 9 or 10 or 11 or 12 or 13 or 14 or 15 or 16 or 17 or 18 or 19 or 20 or 21 or 22 or 23 or 24 or 25 or 26 or 27 or 28 or 29 or 30 or 31 or 32;/);
+      .toThrow(/leaf migration target must be 4 or 5 or 6 or 7 or 8 or 9 or 10 or 11 or 12 or 13 or 14 or 15 or 16 or 17 or 18 or 19 or 20 or 21 or 22 or 23 or 24 or 25 or 26 or 27 or 28 or 29 or 30 or 31 or 32 or 33 or 34 or 35 or 36 or 37 or 38 or 39 or 40 or 41 or 42;/);
 
     // A6 positive arm: one valid schema-6 envelope can advance exactly one rung
     // to 7, retaining the numeric inventory alphabet and reconciliation ledger.

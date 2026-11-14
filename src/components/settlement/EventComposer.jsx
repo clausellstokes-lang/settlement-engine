@@ -676,14 +676,14 @@ export default function EventComposer({ onLink = null }) {
             quality === 'competent'         ? 'Solid capacity recovery' :
             quality === 'weak'              ? 'Minimal recovery'        :
             quality === 'corrupt'           ? 'Capacity up, legitimacy hit' :
-                                              'Faction-controlled appointment'
+                                              'Appointment controlled by a power'
           }>
             <select value={quality} onChange={e => setQuality(e.target.value)} style={selectStyle(mobile)}>
               <option value="weak">Weak</option>
               <option value="competent">Competent</option>
               <option value="popular">Popular</option>
               <option value="corrupt">Corrupt</option>
-              <option value="faction_captured">Faction-captured</option>
+              <option value="faction_captured">Captured by a power</option>
             </select>
           </Field>
         )}

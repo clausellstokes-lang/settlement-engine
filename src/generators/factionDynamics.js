@@ -240,6 +240,87 @@ export function computeCriminalCaptureState(factions, safetyRatio, _instFlags) {
 
 
 /**
+ * The governing ↔ criminal relation row for a capture rung (the row computeFactionRelationships adds; ALLEGIANCE-CAR2
+ * extracted it unchanged so the coherence seam re-reads it from the DERIVED state, the chair's ruling on STOP 3).
+ * @param {{faction: string}} gov @param {{faction: string}} crim @param {string} crimCapture the capture rung
+ * @param {{isLegitimacyCrisis?: boolean, isEndorsed?: boolean}} publicLeg
+ */
+export function govCriminalRelation(gov, crim, crimCapture, publicLeg) {
+  let type, direction, narrative;
+
+  if (crimCapture === 'capture') {
+    type = 'corrupted';
+    narrative = `${gov.faction} is a front. ${crim.faction} decides the taxes, who gets arrested and who gets office; the hall keeps up appearances because that suits ${crim.faction}.`;
+  } else if (crimCapture === 'corrupted') {
+    type = 'corrupted';
+    narrative = `${crim.faction} has bought key people in ${gov.faction}. Its own crimes go unpunished, and its rivals are the ones who get arrested.`;
+  } else if (crimCapture === 'equilibrium') {
+    type = 'tense';
+    narrative = `${gov.faction} leaves ${crim.faction} alone because stamping it out would cost more than it saves. ${crim.faction} keeps its head down, because it needs the hall standing to feed off it.`;
+  } else {
+    type = 'competitive';
+    narrative = `${gov.faction} is hunting ${crim.faction} in earnest but not catching all of it; ${crim.faction} pulls back and regroups, and does not go away.`;
+  }
+
+  direction = publicLeg.isLegitimacyCrisis ? 'escalating'    // governance crisis empowers crime
+            : publicLeg.isEndorsed          ? 'declining'     // strong governance suppresses crime
+            : 'stable';
+
+  return { pair: [gov.faction, crim.faction], type, direction,
+    captureState: crimCapture, narrative,
+    dmNote: crimCapture !== 'adversarial' && crimCapture !== 'none'
+      ? `Ask: which specific officials have arrangements with ${crim.faction}? The answer drives dozens of plot hooks.`
+      : null };
+}
+
+/**
+ * The criminal ↔ military relation row for a capture rung (extracted unchanged, as above).
+ * @param {{faction: string}} crim @param {{faction: string}} mil @param {string} crimCapture the capture rung
+ * @param {{isContested?: boolean, isLegitimacyCrisis?: boolean}} publicLeg
+ */
+export function criminalMilitaryRelation(crim, mil, crimCapture, publicLeg) {
+  let type, direction, narrative;
+
+  if (crimCapture === 'corrupted' || crimCapture === 'capture') {
+    type = 'corrupted';
+    narrative = `${mil.faction} and ${crim.faction} have a working arrangement. Patrol routes avoid certain streets. Certain arrests never happen. The rank and file may not know; the command does.`;
+  } else if (crimCapture === 'equilibrium') {
+    type = 'tense';
+    narrative = `${mil.faction} knows where ${crim.faction} works, and ${crim.faction} knows the patrol rota. Neither pushes the other hard enough to start a fight.`;
+  } else {
+    type = 'competitive';
+    narrative = `${mil.faction} is hunting ${crim.faction} in earnest and making real arrests; ${crim.faction} knows the streets and the people better, hides, and comes back.`;
+  }
+
+  direction = publicLeg.isContested || publicLeg.isLegitimacyCrisis ? 'escalating' : 'stable';
+
+  return { pair: [crim.faction, mil.faction], type, direction, captureState: crimCapture, narrative };
+}
+
+/**
+ * THE CAPTURE ROWS READ THE ONE STATE (ALLEGIANCE-CAR2; J-13 read with the chair's ruling on STOP 3: "a relation row that
+ * carries a `captureState` or 'is a front' is a reader … the rows must read the one writer"). A copy of `powerStructure`
+ * whose relation rows that carry a `captureState` are rebuilt for `state` — the derived hall-capture state the coherence
+ * seam just wrote — by the same two builders, so their type, rung, narrative and DM note follow it. A row whose powers
+ * are no longer on the roster is kept as it is. Draw-free; never mutates its input.
+ * @param {any} powerStructure @param {string} state @returns {any}
+ */
+export function withCaptureRelations(powerStructure, state) {
+  const rows = Array.isArray(powerStructure?.factionRelationships) ? powerStructure.factionRelationships : null;
+  if (!rows || !rows.some((r) => r && r.captureState !== undefined)) return powerStructure;
+  const factions = Array.isArray(powerStructure.factions) ? powerStructure.factions : [];
+  const byName = (name) => factions.find((f) => f?.faction === name) || null;
+  const publicLeg = powerStructure.publicLegitimacy || {};
+  const factionRelationships = rows.map((row) => {
+    if (!row || row.captureState === undefined || !Array.isArray(row.pair)) return row;
+    const [a, b] = row.pair.map(byName);
+    if (!a || !b) return row;
+    return a.isGoverning ? govCriminalRelation(a, b, state, publicLeg) : criminalMilitaryRelation(a, b, state, publicLeg);
+  });
+  return { ...powerStructure, factionRelationships };
+}
+
+/**
  * Compute pairwise faction relationships.
  *
  * @param {Array}  factions
@@ -252,6 +333,19 @@ export function computeCriminalCaptureState(factions, safetyRatio, _instFlags) {
  *   the line unconditional for a caller that holds no roster
  * @returns {Array} relationship objects
  */
+
+/**
+ * THE MERCHANTS' AND CRAFTSMEN'S VOTE, A DECLARED PAIR (COHERENCE-POWERS-3, F2; the chair's ruling (a)). `against` names
+ * the landholding power and NEEDS it on the page; `sibling` names no third power. The relationship is drawn here, at the
+ * power step; the density law may trim the landholding power afterwards, and the assembly's settling pass
+ * (power/rosterText.js :: settleNarrativesToRoster) then takes the sibling by the refused-winner rule, with no roll.
+ */
+export const MERCHANT_CRAFT_VOTE = Object.freeze({
+  needs: 'the landholding power it names',
+  against: (/** @type {string} */ merchants, /** @type {string} */ craft, /** @type {string} */ landholders) => `${merchants} and ${craft} vote together against ${landholders}, then fight over who keeps the profit.`,
+  sibling: (/** @type {string} */ merchants, /** @type {string} */ craft) => `${merchants} and ${craft} vote together whenever trade is at stake, then fight over who keeps the profit.`,
+});
+
 export function computeFactionRelationships(factions, tier, instFlags, publicLeg, stressTypes = [], defenseFacts = null) {
   const rels = [];
   const stressed = t => stressTypes.includes(t);
@@ -298,16 +392,16 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
       // R6 (soak 1000 rung 1, kind 4): the soldiers sentence needs soldiers on the record, a
       // garrison or a hired company (the defence-words check's own reading of the word).
       const soldiersStand = !defenseFacts || defenseFacts.hasGarrison || defenseFacts.hasMercenary;
-      narrative = `${mil.faction} operates as the executive arm of ${gov.faction}.${soldiersStand ? ' Command authority is unambiguous: soldiers enforce rather than govern.' : ''}`;
+      narrative = `${mil.faction} carries out what ${gov.faction} decides.${soldiersStand ? ' The soldiers enforce the law; they do not make it.' : ''}`;
     } else if (ratio <= 0.85) {
       type = 'symbiotic';
-      narrative = `${gov.faction} commands, ${mil.faction} executes. A functional partnership: each depends on the other remaining effective.`;
+      narrative = `${gov.faction} gives the orders and ${mil.faction} carries them out; each needs the other to stay strong.`;
     } else if (ratio <= 1.2) {
       type = 'tense';
-      narrative = `${mil.faction} and ${gov.faction} hold roughly equal power. The commander's cooperation is sought, not commanded. Political decisions increasingly require military endorsement.`;
+      narrative = `${mil.faction} is now about as strong as ${gov.faction}. The hall asks for the commander's agreement instead of giving orders, and less and less is decided without it.`;
     } else {
       type = 'competitive';
-      narrative = `${mil.faction} has outgrown civilian control. ${gov.faction} retains the title of governance; ${mil.faction} makes the consequential decisions.`;
+      narrative = `${mil.faction} no longer takes orders from ${gov.faction}. ${gov.faction} keeps the title; ${mil.faction} makes the decisions that matter.`;
     }
 
     direction = stressed('under_siege') ? 'escalating'  // military power rising in crisis
@@ -316,7 +410,7 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
               : 'stable';
 
     addRel({ pair: [gov.faction, mil.faction], type, direction, ratio: Math.round(ratio*100)/100, narrative,
-      dmNote: type === 'competitive' ? 'The garrison commander is a political actor. His cooperation must be maintained, purchased, or circumvented.' : null });
+      dmNote: type === 'competitive' ? 'The military commander is a political actor. Their cooperation must be maintained, purchased, or circumvented.' : null });
   }
 
   // ── Governing ↔ Merchant ────────────────────────────────────────────────────
@@ -326,13 +420,13 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
 
     if (ratio >= 1.2) {
       type = 'competitive';
-      narrative = `${merc.faction} provides more practical governance of daily commercial life than ${gov.faction}. Tax policy is negotiated, not imposed.`;
+      narrative = `Day-to-day trade here is run by ${merc.faction} more than by ${gov.faction}, and taxes are bargained over, not ordered.`;
     } else if (ratio >= 0.6) {
       type = 'dependent';
-      narrative = `Mutual dependence: ${gov.faction} needs merchant taxes and loans, ${merc.faction} needs contract enforcement and stable law. Neither can afford to destroy the other.`;
+      narrative = `${gov.faction} needs the taxes and loans of ${merc.faction}, and ${merc.faction} needs ${gov.faction} to enforce its contracts and keep the law. Neither can afford to ruin the other.`;
     } else {
       type = 'subordinate';
-      narrative = `${merc.faction} operates within the governance framework ${gov.faction} sets. Political access is purchased, not assumed.`;
+      narrative = `${merc.faction} works under the rules ${gov.faction} sets, and pays for a hearing in the hall when it wants something.`;
     }
 
     direction = (instFlags?.economyOutput > 65) ? 'escalating'    // merchant wealth growing
@@ -354,16 +448,16 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
 
     if (govIsTheocratic) {
       type = 'symbiotic';
-      narrative = `${rel.faction} and ${gov.faction} are functionally the same institution. Religious legitimacy is the foundation of civic authority here.`;
+      narrative = `${rel.faction} and ${gov.faction} are the same people in practice; the hall rules because the faith says it may.`;
     } else if (ratio >= 1.1) {
       type = 'tense';
-      narrative = `${rel.faction} holds more effective influence than ${gov.faction} in significant domains: welfare, marriage, inheritance, moral authority. Jurisdiction disputes are ongoing.`;
+      narrative = `People take their marriages, inheritances and hard times to ${rel.faction}, not to ${gov.faction}, and the two keep quarrelling over who decides what.`;
     } else if (ratio >= 0.5) {
       type = 'dependent';
-      narrative = `${gov.faction} provides the sword; ${rel.faction} provides the moral framework that makes taxation feel just and authority feel ordained. Each legitimises the other.`;
+      narrative = `${gov.faction} keeps order and collects the taxes; ${rel.faction} tells people that both are right and ordained. Each props up the other.`;
     } else {
       type = 'subordinate';
-      narrative = `${rel.faction} operates within civic structures ${gov.faction} controls. Clergy serve a pastoral function without independent political leverage.`;
+      narrative = `${rel.faction} answers to ${gov.faction}. Its priests look after their flocks and have no say in the hall.`;
     }
 
     direction = stressed('religious_conversion') ? 'escalating'  // religious tension rising
@@ -374,33 +468,7 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
   }
 
   // ── Governing ↔ Criminal ────────────────────────────────────────────────────
-  if (gov && crim) {
-    let type, direction, narrative;
-
-    if (crimCapture === 'capture') {
-      type = 'corrupted';
-      narrative = `${gov.faction} is a front. ${crim.faction} makes the actual decisions on taxation, law enforcement priority, and appointments. The fiction of legitimate governance is maintained because it is useful.`;
-    } else if (crimCapture === 'corrupted') {
-      type = 'corrupted';
-      narrative = `${crim.faction} has systematic arrangements with key figures in ${gov.faction}. Enforcement decisions are predictable. Profitable crimes go unpunished, competitive threats are selectively prosecuted.`;
-    } else if (crimCapture === 'equilibrium') {
-      type = 'tense';
-      narrative = `${gov.faction} tolerates ${crim.faction} because suppression costs more than it saves. ${crim.faction} avoids open provocation because it needs the governance structure to remain functional enough to extract from.`;
-    } else {
-      type = 'competitive';
-      narrative = `${gov.faction} actively suppresses ${crim.faction}. Enforcement is genuine but incomplete. ${crim.faction} retreats and reorganises rather than disappearing.`;
-    }
-
-    direction = publicLeg.isLegitimacyCrisis ? 'escalating'    // governance crisis empowers crime
-              : publicLeg.isEndorsed          ? 'declining'     // strong governance suppresses crime
-              : 'stable';
-
-    addRel({ pair: [gov.faction, crim.faction], type, direction,
-      captureState: crimCapture, narrative,
-      dmNote: crimCapture !== 'adversarial' && crimCapture !== 'none'
-        ? `Ask: which specific officials have arrangements with ${crim.faction}? The answer drives dozens of plot hooks.`
-        : null });
-  }
+  if (gov && crim) addRel(govCriminalRelation(gov, crim, crimCapture, publicLeg));
 
   // ── Merchant ↔ Craft ────────────────────────────────────────────────────────
   if (merc && craft) {
@@ -409,13 +477,17 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
 
     if (ratio >= 1.8) {
       type = 'competitive';
-      narrative = `${merc.faction} sets prices, controls material supply, and markets finished goods. ${craft.faction} produces them. The distinction between independent artisan and disguised wage labour is blurring.`;
+      narrative = `${merc.faction} buys the materials, sets the prices and sells the goods; ${craft.faction} only makes them, and its masters are becoming hired hands in all but name.`;
     } else if (ratio >= 0.7) {
       type = 'tense';
-      narrative = `${merc.faction} and ${craft.faction} are structural allies against feudal extraction and structural rivals over value distribution. They vote together, then argue about the proceeds.`;
+      // STYLE-2 B7 (SW-7, P9): "the landlords" was a fixed noun the roster did not hold; the line names the
+      // landholding power when one stands, and otherwise names none.
+      narrative = noble && noble !== merc && noble !== craft
+        ? MERCHANT_CRAFT_VOTE.against(merc.faction, craft.faction, noble.faction)
+        : MERCHANT_CRAFT_VOTE.sibling(merc.faction, craft.faction);
     } else {
       type = 'tense';
-      narrative = `${craft.faction} holds unusual production leverage over ${merc.faction}. Quality monopolies and guild mysteries give artisan masters pricing power the merchants must negotiate around.`;
+      narrative = `Only the masters of ${craft.faction} know how to make what ${merc.faction} sells, so the merchants pay their price.`;
     }
 
     direction = (instFlags?.economyOutput > 65) ? 'escalating'  // expanding economy; who captures the surplus?
@@ -425,24 +497,7 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
   }
 
   // ── Criminal ↔ Military ─────────────────────────────────────────────────────
-  if (crim && mil) {
-    let type, direction, narrative;
-
-    if (crimCapture === 'corrupted' || crimCapture === 'capture') {
-      type = 'corrupted';
-      narrative = `${mil.faction} and ${crim.faction} have a working arrangement. Patrol routes avoid certain streets. Certain arrests never happen. The rank and file may not know; the command does.`;
-    } else if (crimCapture === 'equilibrium') {
-      type = 'tense';
-      narrative = `${mil.faction} knows where ${crim.faction} operates. ${crim.faction} knows the watch rotation. Neither pushes the other hard enough to force a confrontation. This is not peace. It is managed coexistence.`;
-    } else {
-      type = 'competitive';
-      narrative = `${mil.faction} actively hunts ${crim.faction}. Arrests are real, enforcement is genuine. ${crim.faction} uses superior local knowledge and social embeddedness to absorb pressure and reconstitute.`;
-    }
-
-    direction = publicLeg.isContested || publicLeg.isLegitimacyCrisis ? 'escalating' : 'stable';
-
-    addRel({ pair: [crim.faction, mil.faction], type, direction, captureState: crimCapture, narrative });
-  }
+  if (crim && mil) addRel(criminalMilitaryRelation(crim, mil, crimCapture, publicLeg));
 
   // ── Merchant ↔ Religious (at town+ scale) ──────────────────────────────────
   if (merc && rel && ['town','city','metropolis'].includes(tier)) {
@@ -451,13 +506,13 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
 
     if (merP >= 20 && relP >= 15) {
       type = 'tense';
-      narrative = `${merc.faction} and ${rel.faction} compete for the same population's loyalty and resources. Church tithes and merchant contracts both claim priority on household income. Church land exemptions and usury restrictions shape commercial strategy in ways merchants resent.`;
+      narrative = `${merc.faction} and ${rel.faction} want the same households' money: tithes on one side, debts and contracts on the other. Church land exemptions and the church's rules on lending are a standing grievance with the merchants.`;
     } else if (merP > relP * 1.5) {
       type = 'competitive';
-      narrative = `${merc.faction}'s capital has outpaced ${rel.faction}'s institutional influence. Merchants fund churches, ${!defenseFacts || defenseFacts.hasHospital ? 'endow hospitals' : 'endow charities'}, and purchase indulgences, but on their terms.`; // F1: a hospital only where one stands
+      narrative = `${merc.faction} now has more money than ${rel.faction} has sway. Merchants pay for churches, ${!defenseFacts || defenseFacts.hasHospital ? 'hospitals' : 'charities'} and indulgences, and they set the terms.`; // F1: a hospital only where one stands
     } else {
       type = 'dependent';
-      narrative = `${rel.faction} and ${merc.faction} sustain each other: church institutions provide charity that keeps social stability, merchants provide endowments that fund them. Neither is comfortable with the other's power.`;
+      narrative = `The money of ${merc.faction} pays for the charity of ${rel.faction}, and the charity keeps the poor quiet. Each needs the other, and neither likes it.`;
     }
 
     addRel({ pair: [merc.faction, rel.faction], type, direction: 'stable', narrative });
@@ -473,10 +528,10 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
          : 'subordinate';
 
     narrative = ratio >= 0.9
-      ? `${noble.faction} hold hereditary rights ${gov.faction} cannot simply revoke. Council decisions touching land tenure, inheritance, or military levies require noble cooperation, not just noble compliance.`
+      ? `${noble.faction} hold old rights ${gov.faction} cannot take away; nothing about land, inheritance or levies gets done without their agreement.`
       : ratio >= 0.5
-      ? `${noble.faction} operate within ${gov.faction}'s framework but retain enough independent claim (land rights, judicial privilege, military obligation) to negotiate rather than merely obey.`
-      : `${noble.faction} are present in civic life but declining; merchant capital and institutional governance have eroded the leverage that hereditary title once guaranteed.`;
+      ? `${noble.faction} live under the rule of ${gov.faction} but keep enough rights of their own (land, courts, levies) to bargain, not simply obey.`
+      : `${noble.faction} still have their titles, but merchant money and the hall's offices have taken most of their power.`;
 
     addRel({ pair: [noble.faction, gov.faction], type, direction: 'declining', ratio: Math.round(ratio*100)/100, narrative });
   }
@@ -540,7 +595,9 @@ export function applyLegitimacyMultipliers(factions, publicLeg, _tier) {
       // Tag legitimacy crisis on governing faction
       if (publicLeg.governanceFractured) {
         f.legitimacyCrisis = true;
-        f.crisisNote = 'Governing authority is internally fractured. Real decisions are being made informally. The faction that appears to govern is not the faction that governs.';
+        // The owner's style law of 2026-11-07 (W3 POW #189): the note no longer repeats the Power tab's fracture banner and
+        // DS-POW-1's fractured line; it says the one thing they do not, which powerStrata.crisisNoteFor names or drops.
+        f.crisisNote = 'Holds the title, but the decisions that matter are made elsewhere.';
       }
     } else if (isCrim) {
       mult = publicLeg.crimMultiplier;

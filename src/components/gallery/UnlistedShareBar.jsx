@@ -57,8 +57,9 @@ export default function UnlistedShareBar({ copied = false, busy = false, error =
         </span>
       )}
       <span style={{ flexBasis: '100%', fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontStyle: 'italic' }}>
-        Only people with this exact link can open it. It never appears in the public gallery.
-        Rotate the link to revoke every copy you&apos;ve shared.
+        Only people with this exact link can open it. It stays the same for as long as this
+        settlement exists and shows the town as it changes. Listing the town in the gallery
+        neither ends nor changes it. Rotate it for a new link; Stop sharing ends it.
       </span>
     </div>
   );

@@ -43,8 +43,7 @@ export const OTHER_SHAPES = Object.freeze({
   'src/components/settlement/EventComposer.jsx:179': 'the DM\'s custom powers',
   'src/components/dossier/CascadePreviewPanel.jsx:288': 'the preview\'s powers count (MERGE-5AB ruling 1: the preview is the edit layer\'s)',
   'src/lib/editFingerprint.js:63': 'the preview\'s powers count (MERGE-5AB ruling 1)',
-  'src/domain/dossier/plotHooks.js:445': 'a tension\'s camps',
-  'src/domain/display/publicSafe.js': 'the public projection\'s SQL-parity allowlist (migration 189), see FIELD_CONTRACTS',
+  'src/domain/dossier/plotHooks.js:462': 'a tension\'s camps', // re-keyed by identity 445 -> 452 at MERGE-WAVE's FIX-EXPORT-KEYS point: W7 HOOKS's conflict hooks (fdf41ee95) sit above it; 452 -> 462 at SW-6 CRISIS-SURFACES (91622ea6f): the import and `titleOfToken` sit above it
   'src/domain/aiGrounding.js': 'the powers\' profiles', 'src/domain/coherence/readerBattery.js:307': 'a tension',
   'src/domain/density/densityBands.js': 'the signed band', 'src/domain/display/defenseDisplay.js': 'the crime signal',
   'src/domain/dossier/dossierSearch.js:329': 'the search index', 'src/domain/dossier/realmEntityWeb.js:163': 'the search index',
@@ -55,8 +54,12 @@ export const OTHER_SHAPES = Object.freeze({
   'src/foundry/journalPages.js': 'vm.power', 'src/generators/aiLayer.js': 'power labels',
   'src/generators/density/densityRoll.js': 'the band', 'src/generators/historyGenerator.js': 'a tension',
   'src/generators/power/economyReconciliation.js': 'the power projection', 'src/generators/power/governanceNarrative.js': 'the powers (param)',
-  'src/pdf/lib/viewModel.js:334': 'a tension', 'src/pdf/lib/viewModel.js:497': 'a tension', 'src/pdf/lib/viewModel.js:679': 'a tension',
+  // re-keyed by identity 337/500/682 -> 345/508/690 (MERGE-TRAIN at the ALLEGIANCE-CAR3 merge: the same three tension reads, moved 8 lines by car 3's dmPowerViewOf import and the opt-in dmView, composed over the integration's +3)
+  // re-keyed by identity 345/508/690 -> 346/509/691 (COHERENCE-POWERS-4: the same three tension reads, moved one line by the third seat's seatKeeperOf import, F7)
+  'src/pdf/lib/viewModel.js:346': 'a tension', 'src/pdf/lib/viewModel.js:509': 'a tension', 'src/pdf/lib/viewModel.js:691': 'a tension', // W4 PEOPLE second seat (merging the car): re-keyed +3 by line, #29's crisisSummaryForSurface import and cover/overview vantage lines above them
   'src/pdf/sections/PowerStructure.jsx': 'vm.power',
+  // COHERENCE-POWERS-3 F2 (28c93c9da): a tension's parties, re-named for the final roster (settleTensionsToRoster); read as viewModel's are
+  'src/generators/power/rosterText.js:123': 'a tension',
   // density plan / ladder rows that PEOPLE-1 retires with the roster (kept so the draft is exact at the base):
   'src/generators/density/applyDensityLaw.js:269': 'the density plan', 'src/generators/density/applyDensityLaw.js:375': 'a powerStructure copy',
   'src/generators/density/applyDensityLaw.js:476': 'the density plan',
@@ -72,9 +75,10 @@ const GROUPING_DOMINANT_FILES = Object.freeze(['src/components/settlementDetail/
  * A refused FIELD read kept by a contract outside the car, keyed by file:line (or file), each with its reason —
  * reviewed by the landing (PEOPLE-LAND, 2026-11-07), never silent. Nothing generated feeds these on a v2 record.
  */
+// FIX-EXPORT-KEYS (2026-11-07): the publicSafe.js rows (here and in OTHER_SHAPES) left with migration 205 — the
+// public projection's allowlists and publicNpc no longer name the grouping or the two fields, so no exemption is owed.
 export const FIELD_CONTRACTS = Object.freeze({
-  'src/domain/display/publicSafe.js': 'the public projection\'s allowlist and publicNpc literal, parity-pinned to the SQL _gallery_sanitize_public_json (migration 189\'s npc_allowed, tests/security/*): a public data contract whose change is a Supabase migration, the landing\'s named remainder',
-  'src/domain/customContent.js:392': 'a DM-authored custom-content library entity\'s legacy `controlledBy` fallback (not a generated card; no settlement migration covers that store)',
+  'src/domain/customContent.js:393': 'a DM-authored custom-content library entity\'s legacy `controlledBy` fallback (not a generated card; no settlement migration covers that store)',
 });
 
 /**

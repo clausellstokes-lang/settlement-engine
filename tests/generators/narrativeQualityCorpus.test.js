@@ -177,12 +177,12 @@ describe('sentence boundaries and relationship rumors remain grammatical', () =>
   test.each([
     ['religious_tension', {}, /The town council has avoided/],
     ['guild_conflict', {}, /The merchant league has held/],
-    ['external_threat', {}, /The reeve knows the intelligence/],
+    ['external_threat', {}, /The reeve knows, and has told nobody/], // W3 POW (2026-11-08): the four anchors below re-keyed to the style law's words
     ['external_threat', { neighbor: 'Stoneford' }, /The town council and the town watch/],
     ['resource_scarcity', {}, /The merchant league knows.*The town council has/s],
-    ['resource_scarcity', { commodity: null }, /The town council controls the allocation/],
-    ['magical_controversy', {}, /The town council is being pressured/],
-    ['disputed_land', {}, /The town council has delayed ruling/],
+    ['resource_scarcity', { commodity: null }, /the town council decides who gets what is left/],
+    ['magical_controversy', {}, /The town council is being pushed to ban or license it/],
+    ['disputed_land', {}, /The town council keeps putting off a ruling/],
   ])('%s capitalizes values only when they open a sentence', (topTension, overrides, expected) => {
     const prose = genSuccessionNarr({
       ...baseContext,
@@ -233,13 +233,15 @@ describe('sentence boundaries and relationship rumors remain grammatical', () =>
       + `alpha ${emission.alpha}, ${emission.margin} sigma of power). A red here means the `
       + `emission RATE moved, not that a die rolled badly — the corpus is seeded.`,
     ).toBeGreaterThanOrEqual(emission.bound);
-    expect(phrasings.some(text => text.includes('best understood as outstanding debt'))).toBe(true);
+    // W3 POW (2026-11-08): rumour [2] glosses the archetype label in plain words (settlementNarrative :: TIE_GLOSS);
+    // the Outstanding Debt gloss is the live construct now, and the article scan below stays on it.
+    expect(phrasings.some(text => text.includes('are tied by a debt not yet paid'))).toBe(true);
     const corpus = phrasings.join(`\n`);
     // The derived-floor count above proves the corpus is populated; this proves the
     // "outstanding debt" phrase family is genuinely produced, so the malformed-article
     // scan below is a statement about a construct that actually occurs.
     expect(corpus, 'the outstanding-debt phrase family must be live to scan its article')
-      .toMatch(/\boutstanding debt\b/i);
+      .toMatch(/\ba debt not yet paid\b/i);
     // anchored: the derived-floor count and the phrase-family toMatch directly above are the liveness anchors.
     expect(corpus).not.toMatch(/\bthere is a outstanding\b/i);
   });
@@ -249,7 +251,9 @@ describe('safety prose agrees in number and respects settlement scale', () => {
   test('city district-market revenue never claims metropolis scale', () => {
     const economy = withSeed('city-market-scale', () => generateEconomicState(
       'city',
-      [{ name: 'District market' }],
+      // The city's own catalogue market for district-level duties. Whether a market stands is the market home's
+      // answer (COHERENCE-AGREE-3 F9, e373a7836), and it reads the catalogue: an invented name is no market.
+      [{ name: 'Multiple market squares' }],
       'road',
       {},
       {
@@ -317,8 +321,8 @@ describe('safety prose agrees in number and respects settlement scale', () => {
     // of the plural-form negative passing over prose that no longer exists.
     expectAbsentWithAnchor(
       occupiedGarrison.safetyDesc,
-      'garrison, now under occupier command, enforce curfew',
-      'The garrison, now under occupier command, enforces curfew',
+      'garrison, now under occupier command, enforce the curfew',
+      'The garrison, now under occupier command, enforces the curfew',
       'occupied garrison — singular predicate',
     );
 
@@ -327,7 +331,7 @@ describe('safety prose agrees in number and respects settlement scale', () => {
       'town',
       [],
     );
-    expect(occupiedOfficials.safetyDesc).toContain('Occupation authorities enforce curfew');
+    expect(occupiedOfficials.safetyDesc).toContain('Occupation authorities enforce the curfew');
   });
 
   test('state-control and religious-fraud branches retain subject agreement', () => {

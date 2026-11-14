@@ -1,0 +1,22 @@
+{
+  "_doc": "RECORD 5 OF THE WAVE (MERGE-WAVE), ODQ §934.105 (the cloud chair signs by the owner's delegation of 2026-11-06, vetoable; a successor chair does not inherit this signature). THE LAW OF THE CHAIN (BRIEF-MERGE-CAR §0; BRIEF-MERGE-WAVE §1 step 2): the integration branch's first-parent line is the golden chain; a lane's own records are components. THE CAUSE, ONE: THE W5 HIS MERGE OVER THE INTEGRATION BRANCH — lane/w5-his-2026-11-07 at 46741f9cd merged at e510409b1 (MERGE-WAVE step 1), the conflicts composed; its lane records the components (docs/shift-records/2026-11-07-w5-01-legacy-and-living-memory-said.json .. -w5-04-ledger-vantage-names-record-and-cost.json (the lane's four)): what the merge moved beyond record 4's post-state (the stage of 66c23bfea). THE MOVE, MEASURED before the write by scripts/audit/landing-stage.sh measure, stage to stage against record 4's post-state (the stage of 66c23bfea): the generator golden master 525 of 525 rows (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84) -> 0fa3e014..; the espionage fence's driven corpus 360 of 360 rows -> b1144ca6..; 360/360 distinct; the herald 0; the PDF snapshot 0 and the witness 0. The prose manifest's movement at this point is NOT written here: it is signed ONCE at step 3 (the composed-prose manifest), this point named in its cause list. Built through the guard with no STOP.",
+  "ownerWords": "I also now give all permissions required now and in the future. I also defer all judgement to you. · I leave all judgement now and in the future to you.",
+  "ownerDate": "2026-11-06",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation of 2026-11-06 to the cloud chair; the wave MERGE-WAVE, 2026-11-08)",
+  "cause": "THE W5 HIS MERGE OVER THE INTEGRATION BRANCH — lane/w5-his-2026-11-07 at 46741f9cd merged at e510409b1 (MERGE-WAVE step 1), the conflicts composed; its lane records the components (docs/shift-records/2026-11-07-w5-01-legacy-and-living-memory-said.json .. -w5-04-ledger-vantage-names-record-and-cost.json (the lane's four)): what the merge moved beyond record 4's post-state (the stage of 66c23bfea)",
+  "seat": "MERGE-WAVE (Opus 5.5) under the cloud chair, session session_01FbPLbejcfwX5nii12VM673, from the stage at e510409b1",
+  "surfaces": [
+    {
+      "surface": "generator-golden-master",
+      "action": "re-record",
+      "predictedRows": 525,
+      "proofForm": "settlement-hash"
+    },
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant"
+    }
+  ]
+}

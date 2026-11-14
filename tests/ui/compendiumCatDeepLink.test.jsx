@@ -32,22 +32,24 @@ beforeEach(() => { window.history.replaceState(null, '', '/compendium'); });
 
 describe('Compendium ?cat= deep-link', () => {
   it('opens the custom workspace on the named bucket', async () => {
-    window.history.replaceState(null, '', '/compendium?cat=factions');
+    // My Custom Content is its own page since the owner's word of 2026-11-10 ("Custom
+    // content itself now joins the other tabs"): /compendium/custom?cat=<bucket>.
+    window.history.replaceState(null, '', '/compendium/custom?cat=factions');
     const CompendiumPanel = (await import('../../src/components/CompendiumPanel.jsx')).default;
-    const { container, getByLabelText } = render(<CompendiumPanel standalone />);
+    const { container, getByLabelText } = render(<CompendiumPanel standalone routeSection="custom" />);
     // Custom mode marker: the custom-content search input is present.
     expect(getByLabelText('Search custom content')).toBeTruthy();
     // The Factions bucket is the active (pressed) category.
     const pressed = [...container.querySelectorAll('button[aria-pressed="true"]')]
       .map((b) => b.textContent.trim());
-    expect(pressed.some((t) => /Factions/.test(t))).toBe(true);
+    expect(pressed.some((t) => /Powers/.test(t))).toBe(true);
   });
 
-  it('ignores an unknown ?cat= value and opens on the catalog', async () => {
+  it('ignores an unknown ?cat= value and opens on the landing', async () => {
     window.history.replaceState(null, '', '/compendium?cat=not_a_bucket');
     const CompendiumPanel = (await import('../../src/components/CompendiumPanel.jsx')).default;
     const { queryByLabelText } = render(<CompendiumPanel standalone />);
-    // No custom-content search input ⇒ still on the catalog.
+    // No custom-content search input ⇒ still on the landing.
     expect(queryByLabelText('Search custom content')).toBeNull();
   });
 });

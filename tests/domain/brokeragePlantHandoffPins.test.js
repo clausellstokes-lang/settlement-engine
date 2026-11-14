@@ -502,6 +502,10 @@ describe('IN-0a — the counterforces, on seeded ground', () => {
     const exposed = answered.newsEntries.filter((e) => e.kind === 'infowar_lie_exposed');
     expect(exposed).toHaveLength(1);
     expect(exposed[0].reasons.some((r) => r.includes('Whisper market'))).toBe(true);
+    // FIX-PULSE-DEFECTS (audit C2·25): the buyer printed as its raw faction-state key; the
+    // mover reads the power's name off the faction ledger (this fixture's ledger names the
+    // power `ashwater_syndicate`; its key is `aaa:ashwater_syndicate`).
+    expect(exposed[0].reasons).toContain('The lineage holds all the way back to the counter: the order was bought by ashwater_syndicate.');
 
     // THE ANCHOR that stops the disappearance above reading as "plants never survive":
     // a mark whose reckoning sits ON the planted band keeps carrying it another week.
@@ -594,7 +598,15 @@ describe('IN-0a — the take, and the market named at the collapse', () => {
     const lines = plantExposureReasons(folded.record, (/** @type {string} */ id) => id);
     expect(lines.length).toBe(2);
     expect(lines[0]).toContain('Whisper market');
-    expect(lines[1]).toContain(envelope.receipt.patronId);
+    // FIX-PULSE-DEFECTS (audit C2·25): the patron printed as its raw faction-state key
+    // ("… bought by aaa:ashwater_syndicate."). The patron is a POWER, so the caller's
+    // faction-ledger read names it; without one, the key never prints.
+    expect(lines[1]).toBe('The lineage holds all the way back to the counter: the order was bought by a power that paid in secret.');
+    // anchored: lines[1] is pinned verbatim on the line above, so the line is present and live.
+    expect(lines[1]).not.toContain(envelope.receipt.patronId);
+    const named = plantExposureReasons(folded.record, (/** @type {string} */ id) => id,
+      (/** @type {string} */ id) => (id === envelope.receipt.patronId ? 'the Ashwater Syndicate' : ''));
+    expect(named[1]).toBe('The lineage holds all the way back to the counter: the order was bought by the Ashwater Syndicate.');
     // A court's own bluff adds NOTHING, so the built beat is byte-identical for it.
     const ownBluff = { ...folded.record };
     delete ownBluff.commission;

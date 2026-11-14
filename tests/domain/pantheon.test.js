@@ -428,7 +428,8 @@ describe('pantheon — realm arcs (Ascendancy / Twilight / the last altar)', () 
       const beat = synthesizePantheonArcs({ changes: [{ deityId: ref, from: 'cult', to: 'cult', lastSeat: true }], snapshot: lost, tick: 5, now: NOW })[0];
       const floor = deityDisplayNameFromRef(ref);
       expect(beat.headline, ref).toBe(`The Last Altar of ${floor}`);
-      expect(beat.summary.startsWith(`No settlement in the realm still keeps ${floor}'s rite.`), ref).toBe(true);
+      // STYLE-2 C2 (SW-12): the lead re-keyed by identity ("settlement" -> "place"); the name it carries is the pin.
+      expect(beat.summary.startsWith(`No place in the realm still keeps ${floor}'s rite.`), ref).toBe(true);
       expect(beat.reasons[0], ref).toBe(`${floor} holds no seat anywhere in the realm.`);
     }
     // ⛔ NON-VACUITY, TWO WAYS. (1) Four of the five refs carry a '_' or '-' in the tail, so

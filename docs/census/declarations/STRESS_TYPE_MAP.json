@@ -77,7 +77,7 @@
       "lines": [
         {
           "lineId": "STRESS_TYPE_MAP.under_siege.viabilityNote",
-          "text": "Land-based economic activity is suspended. Port access (if present) provides a partial lifeline. The only metric that matters is how long food, water, and ammunition hold out.",
+          "text": "Field work and trade have stopped, and everything now turns on how long the food and water last.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -164,7 +164,7 @@
       "lines": [
         {
           "lineId": "STRESS_TYPE_MAP.famine.viabilityNote",
-          "text": "Short-term economic viability is critically compromised. Normal income projections do not apply.",
+          "text": "No one can earn a normal living while the famine lasts, and every coin goes on food.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -248,7 +248,7 @@
       "lines": [
         {
           "lineId": "STRESS_TYPE_MAP.occupied.viabilityNote",
-          "text": "Revenue flows to the occupying authority. Local institutions continue under oversight.",
+          "text": "The occupiers take the revenue, and local offices work only under their eye.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -304,7 +304,7 @@
       "lines": [
         {
           "lineId": "STRESS_TYPE_MAP.politically_fractured.crisisHook",
-          "text": "Something important (a resource, a prisoner, a decision) falls into the contested space between factions. The players can't avoid taking a side.",
+          "text": "Something important (a resource, a prisoner, a decision) falls into the contested space between the powers. The players can't avoid taking a side.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -332,7 +332,7 @@
       "lines": [
         {
           "lineId": "STRESS_TYPE_MAP.politically_fractured.viabilityNote",
-          "text": "Decision-making is paralysed. Infrastructure maintenance is being neglected. Crisis is deferred, not resolved.",
+          "text": "Nothing gets decided, repairs are put off, and every problem is left for later.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -388,7 +388,7 @@
       "lines": [
         {
           "lineId": "STRESS_TYPE_MAP.indebted.crisisHook",
-          "text": "The creditor has sent a representative to collect (not money, but something specific). Locals are divided between compliance and resistance, and neither option is clean.",
+          "text": "The creditor has sent someone to collect, not money but something particular, and the locals are split between handing it over and refusing.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -416,7 +416,7 @@
       "lines": [
         {
           "lineId": "STRESS_TYPE_MAP.indebted.viabilityNote",
-          "text": "A significant portion of revenue is being extracted by the creditor. Capital investment has stopped.",
+          "text": "Much of what is earned here goes straight to the creditor, and nothing is left to build with.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -500,7 +500,7 @@
       "lines": [
         {
           "lineId": "STRESS_TYPE_MAP.recently_betrayed.viabilityNote",
-          "text": "Trust in institutions is low. Some key systems are not operating at full capacity as a result.",
+          "text": "People no longer trust those in charge, and some of the work that depends on that trust has stopped.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -584,7 +584,7 @@
       "lines": [
         {
           "lineId": "STRESS_TYPE_MAP.infiltrated.viabilityNote",
-          "text": "No economic impact yet. The infiltration is strategic, not extractive (so far).",
+          "text": "Nothing is being taken yet; whoever has got inside wants influence, not money, for now.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -681,7 +681,7 @@
       "lines": [
         {
           "lineId": "STRESS_TYPE_MAP.plague_onset.viabilityNote",
-          "text": "Market activity is reduced. Travel is being discouraged. Some supply chains are disrupted.",
+          "text": "Fewer people come to market, travel is discouraged, and some goods stop arriving.",
           "needs": [
             "market"
           ],
@@ -750,7 +750,7 @@
       "lines": [
         {
           "lineId": "STRESS_TYPE_MAP.succession_void.crisisHook",
-          "text": "Three different factions have approached the players for support, each believing they represent the legitimate or best claim. All three are partly right.",
+          "text": "Three different powers have approached the players for support, each believing they represent the legitimate or best claim. All three are partly right.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -778,7 +778,7 @@
       "lines": [
         {
           "lineId": "STRESS_TYPE_MAP.succession_void.viabilityNote",
-          "text": "Major decisions are deferred. Some institutions are operating autonomously, for better or worse.",
+          "text": "Big decisions wait for a new leader, and in the meantime each office does as it sees fit.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -864,7 +864,7 @@
       "lines": [
         {
           "lineId": "STRESS_TYPE_MAP.monster_pressure.viabilityNote",
-          "text": "Trade disruption is reducing income. Defensive expenditure is increasing. Population anxiety is rising.",
+          "text": "Trade suffers as carts stop coming, more is spent on defence, and people grow afraid.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -920,7 +920,7 @@
       "lines": [
         {
           "lineId": "STRESS_TYPE_MAP.insurgency.crisisHook",
-          "text": "The governing faction knows what is happening but cannot admit it publicly without legitimising the insurgency. They need something done that cannot be official.",
+          "text": "The governing power knows what is happening but cannot admit it publicly without legitimising the insurgency. They need something done that cannot be official.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -948,7 +948,7 @@
       "lines": [
         {
           "lineId": "STRESS_TYPE_MAP.insurgency.viabilityNote",
-          "text": "Tax collection is contested. Several institutions have stopped forwarding revenue to the central authority. Normal governance is functioning on momentum.",
+          "text": "Taxes are disputed, some offices no longer send their revenue on, and the government runs on habit.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -1034,7 +1034,7 @@
       "lines": [
         {
           "lineId": "STRESS_TYPE_MAP.religious_conversion.viabilityNote",
-          "text": "Tithing income splits or redirects. Religious market days and fairs are contested or duplicated. Properties of the old institution are in legal ambiguity. Cross-faith trade is complicated.",
+          "text": "The tithe is split, feast days and fairs are held twice over, the old house's property has no clear owner, and trade across the faiths is harder.",
           "needs": [
             "institution: temple",
             "market"
@@ -1108,7 +1108,7 @@
       "lines": [
         {
           "lineId": "STRESS_TYPE_MAP.slave_revolt.crisisHook",
-          "text": "The revolt's leadership has demands. Some of them are negotiable. The governing faction has not admitted this publicly, and one of them is attempting to open a back channel.",
+          "text": "The revolt's leadership has demands. Some of them are negotiable. The governing power has not admitted this publicly, and one of them is attempting to open a back channel.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -1137,7 +1137,7 @@
       "lines": [
         {
           "lineId": "STRESS_TYPE_MAP.slave_revolt.viabilityNote",
-          "text": "The slave market's commercial operations are suspended. Labour-dependent production is disrupted. The security apparatus is entirely focused on containment.",
+          "text": "Owners keep their gangs only on work they can watch, less gets made, and everyone who keeps order is busy containing the revolt.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -1195,7 +1195,7 @@
       "lines": [
         {
           "lineId": "STRESS_TYPE_MAP.wartime.crisisHook",
-          "text": "A crown officer has arrived with requisition orders that will strip the settlement of something it cannot spare. The governing faction must decide whether to comply, negotiate, or find a third option.",
+          "text": "A crown officer has arrived with requisition orders that will strip the settlement of something it cannot spare. The governing power must decide whether to comply, negotiate, or find a third option.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -1225,7 +1225,7 @@
       "lines": [
         {
           "lineId": "STRESS_TYPE_MAP.wartime.viabilityNote",
-          "text": "Military expenditure dominates the economy. Trade disruption is significant but offset by war contracts for some. Labour shortage from conscription affects agricultural and craft output.",
+          "text": "The war takes most of the money: trade suffers, a few grow rich on army contracts, and the fields are short of the men called up.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -1287,7 +1287,7 @@
       "lines": [
         {
           "lineId": "STRESS_TYPE_MAP.mass_migration.crisisHook",
-          "text": "The question is not whether things will change, but who will shape the change and what they will want in return.",
+          "text": "Whoever takes charge of the migration will decide who may stay and who must go, and will want something in return.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -1317,7 +1317,7 @@
       "lines": [
         {
           "lineId": "STRESS_TYPE_MAP.mass_migration.viabilityNote",
-          "text": "Immigration: food balance stressed, labour market disrupted, criminal opportunity elevated. Emigration: tax base shrinking, institutions hollowing, labour shortage emerging.",
+          "text": "If people arrive: food will run short, there will not be work for everyone, and some newcomers will take what they cannot earn. If people leave: taxes will fall short, offices will stand empty, and the fields will lack the hands to work them.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -1325,7 +1325,7 @@
           ],
           "colour": false,
           "stop": [],
-          "note": "its \"Emigration:\" half describes an exodus, against the kind's one direction (influx, ruling 2 of 2026-10-30); flagged, not declared"
+          "note": "the catalogue note names both directions, each half labelled (\"If people arrive:\" / \"If people leave:\"); a settlement entry carries the ONE half its own direction names (viabilityNoteByDirection, W0); flagged, not declared"
         }
       ]
     }

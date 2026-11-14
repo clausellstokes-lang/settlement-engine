@@ -10,7 +10,7 @@ export { getBaseChance } from './institutionProbability.js';
 
 import {GOODS_MODIFIERS_BY_TIER} from '../data/goods/chains.js';
 import {GATE_FEATURES, INSTITUTION_SPATIAL, GOVERNMENT_INSTITUTIONS} from '../data/spatialData.js';
-import { RESOURCE_DATA } from '../data/goods/identity.js';
+import { RESOURCE_DATA } from '../data/goods/identity.js'; import { requiredTerrainRefusal } from '../domain/resourceTerrainCompatibility.js';
 import {
   nativeSemanticNames,
   nativeSemanticResourceKeys,
@@ -383,7 +383,7 @@ export const checkStructuralValidity = (institutions, config = {}) => {
     magicExists,
     monsterThreat:  threat = 'frontier',
     priorityMagic:  magicPriority,
-    priorityMilitary: milPriority,
+    priorityMilitary: milPriority, terrainType, // COHERENCE-AGREE-7 (P4): the record's terrain, one line so the line-keyed rows below keep their addresses
   } = config;
 
   // Resolve effective magic level.
@@ -430,7 +430,7 @@ export const checkStructuralValidity = (institutions, config = {}) => {
         institution: instName,
         reason:      authoredReason(
           instName,
-          `${instName} requires ${gate.minTier} tier minimum. ${gate.reason}`,
+          `${instName} is found only in a ${gate.minTier} or larger; this is a ${tier}. ${gate.reason}`,
         ),
         severity:    authoredSeverity(instName, 'warning'),
       });
@@ -788,13 +788,22 @@ export const checkStructuralValidity = (institutions, config = {}) => {
   // ── Resource access violations ────────────────────────────────────────────
   nativeSemanticResourceKeys(config).forEach(resourceKey => {
     const data = RESOURCE_DATA[resourceKey];
-    if (data?.forbidden?.includes(route)) {
+    // COHERENCE-AGREE-3 (the chair's ruling of 2026-11-12): a row's required access is read as its forbidden list is,
+    // so a crossroads position forced on a road warns in the same words as one forced on a port.
+    if (data?.forbidden?.includes(route) || (Array.isArray(data?.requires) && !data.requires.includes(route))) {
       violations.push({
         type:        'resource_access_violation',
         institution: data.label,
         reason:      data.incompatibleReason || data.warning || `${data.label} is not compatible with ${route} access.`,
         severity:    'warning',
       });
+      return;
+    }
+    // COHERENCE-AGREE-7 (P4, REVIEW-AGREE-2 F5 (d)'s validator half): the terrain a row requires is read as its access
+    // is. The roll keeps no pass off the mountains (F5 (c)), so only a person's forced pass warns, in the wizard's words.
+    const terrainRefusal = data ? requiredTerrainRefusal(resourceKey, terrainType, { unknownRefuses: false }) : null;
+    if (terrainRefusal !== null) {
+      violations.push({ type: 'resource_access_violation', institution: data.label, reason: terrainRefusal, severity: 'warning' });
     }
   });
 

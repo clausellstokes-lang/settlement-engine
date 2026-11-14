@@ -77,7 +77,7 @@ import { scoreBand } from '../defenseScoreBands.js';
 // stressorsStateProse.js:78) — `timeBandOf`/`timeBandWord` ARE that former, and the
 // declination is stale at this tip rather than wrong when it was written. Measured here,
 // not assumed: see `yearBand` below.
-import { timeBandOf, timeBandWord } from '../heraldCausalGrammar.js';
+import { TIME_BANDS, timeBandOf, timeBandWord } from '../heraldCausalGrammar.js';
 import { composeStateProse } from './composeStateProse.js';
 import { generalStateProseCandidates } from './generalStateProseCandidates.js';
 import { legibilityRung } from './legibilityRung.js';
@@ -448,8 +448,11 @@ function phraseFill(value) {
  * ⚠ THE LADDER TOPS OUT WELL BELOW THIS CHAPTER'S SUBJECT, AND THAT IS THE FINDING BELOW.
  * @param {number} years @returns {ReturnType<typeof timeBandOf>}
  */
-function yearBand(years) {
-  return timeBandOf(years, 52);
+export function yearBand(years) {
+  const band = timeBandOf(years, 52);
+  // COHERENCE-PRESUME (the chair's ruling B): the herald's ladder calls up to twenty-five years "a decade",
+  // and the page printed "a decade old" beside "23y ago". In years, past fifteen a span is a generation.
+  return band.id === 'a_decade' && years > 15 ? (TIME_BANDS.find((b) => b.id === 'a_generation') ?? band) : band;
 }
 
 /**
@@ -669,6 +672,47 @@ export function eventRecordPoolKey(events) {
   return key && CORPUS['DS-GEN-16'].pools[key] ? key : null;
 }
 
+
+/**
+ * DS-GEN-16's LEGACY pool (W5 construction, 2026-11-07: "past-to-present link prose said").
+ * The record's own link from a past event to the present is `history.legacyAnnotations[]`,
+ * written once at birth by `legacyGenerator.js :: deriveLegacyAnnotations` and DATED there
+ * ("As of the founding survey, …", W0 cause 5). That text is machinery (it says
+ * "structurally embedded"), so this desk never prints it: it reads WHICH of the generator's
+ * three relationships the top annotation states — the generator's own fixed clauses,
+ * matched here verbatim (STYLE-2 SW-7, A11: the plain clauses of 2026-11-09, the old ones kept so a saved
+ * world's annotation still keys) — and says that relationship plainly. A row whose clause matches
+ * none of the three is still a link, and draws the plain LINKED line.
+ * @param {unknown} annotations @returns {{key: string, row: {eventName?: unknown, yearsAgo?: unknown}}|null}
+ */
+export function legacyPoolKey(annotations) {
+  const top = Array.isArray(annotations) ? annotations[0] : null;
+  const said = text(/** @type {{annotation?: unknown}} */ (top)?.annotation);
+  if (!top || !said) return null;
+  const key = / (?:left trouble that has never been put right|created pressure that has not been fully resolved): /.test(said) ? 'LEGACY-UNRESOLVED'
+    : / (?:hit the settlement hard, and it has since recovered|was a disruption the settlement has since moved through): /.test(said) ? 'LEGACY-RECOVERED'
+      : / (?:set up ways of doing things that have since changed|established conditions that have since shifted): /.test(said) ? 'LEGACY-SHIFTED'
+        : 'LEGACY-LINKED';
+  return CORPUS['DS-GEN-16'].pools[key] ? { key, row: top } : null;
+}
+
+/**
+ * DS-GEN-16's LIVING-MEMORY pool (W5 construction, 2026-11-07: "recent blow in living memory
+ * said"). `history.siegeNarrative` is the generator's frozen pairing of a recent political
+ * or disaster event with the town's first current tension
+ * (`siegeCapability.js :: generateSiegeCapability`); it exists only when recent history
+ * supports it. The event it names is read back from its own fixed opening, so the
+ * `{calamity}` slot and the pairing name the same blow; a town with no current tension is
+ * refused, because the line speaks of the quarrels the town is having now.
+ * @param {{siegeNarrative?: unknown, currentTensions?: unknown}} hist @returns {string|null}
+ */
+export function livingMemoryEventName(hist) {
+  const said = text(hist?.siegeNarrative);
+  const tensions = Array.isArray(hist?.currentTensions) ? hist.currentTensions : [];
+  const m = /^The (.+?) is still present in living memory: /.exec(said);
+  if (!m || tensions.length === 0 || !CORPUS['DS-GEN-16'].pools['LIVING-MEMORY']) return null;
+  return `The ${m[1]}`;
+}
 
 /**
  * The event DS-GEN-16's `{calamity}` names — the one the pool key was decided by, so the
@@ -994,6 +1038,15 @@ export function originRoutePoolKey(tradeRouteAccess) {
 }
 
 /**
+ * SW-B1 (DS-GEN-6): the route pool key, or null where it is the port pool over a record whose
+ * institution flags say there are no docks.
+ * @param {string|null} key @param {unknown} inst @returns {string|null}
+ */
+export function portLineStruck(key, inst) {
+  return key === 'port' && /** @type {{ hasPort?: unknown } | null | undefined} */ (inst)?.hasPort === false ? null : key;
+}
+
+/**
  * DS-GEN-6's TIER OVERLAY pool — the second sentence, composed AFTER the route line and
  * never instead of it. This is the registry's one written exception to the one-fact-one-
  * sentence law: one mount renders two sentences from two POOLS of one block, which is one
@@ -1183,7 +1236,7 @@ export function marketPoolKey(state) {
  */
 export function commercePoolKey(inst) {
   if (inst?.hasBank === true) return 'COMMERCE: a bank';
-  if (inst?.hasMerchantGuild === true) return 'COMMERCE: a merchant guild, no bank';
+  if (inst?.hasMerchantGuild === true && inst?.hasGuild === true) return 'COMMERCE: a merchant guild, no bank';
   if (inst?.hasGuild === true) return 'COMMERCE: craft guilds, no merchant guild';
   if (inst?.hasMarket === true) return 'COMMERCE: a market, no guild';
   return null;
@@ -1235,12 +1288,37 @@ export function institutionsPoolKey(inst, record = undefined) {
   const hasHospital = record && typeof record === 'object'
     ? defenceOf(/** @type {{ institutions?: unknown }} */ (record)).hospital
     : inst.hasHospital === true;
+  // COHERENCE-AGREE (the chair's note of 2026-11-11): GARRISONED says "paid hands keep the town
+  // safe", so given the record it reads the defence home's paid forces — a garrison, a watch or a
+  // hired company — never the flag bag's military row, which counts walls and a militia too.
+  const defence = record && typeof record === 'object' ? defenceOf(/** @type {{ institutions?: unknown }} */ (record)) : null;
+  const paidHands = defence
+    ? defence.garrison || defence.watch || defence.mercenary || inst.hasNavy === true
+    : inst.hasMilitaryInst === true || inst.hasNavy === true || inst.hasWatch === true;
   const key = (inst.hasCourtSystem === true && inst.hasPrison === true) ? 'ADMINISTERED'
-    : (inst.hasMilitaryInst === true || inst.hasNavy === true || inst.hasWatch === true) ? 'GARRISONED'
+    : paidHands ? 'GARRISONED'
       : inst.hasMagicInst === true ? 'LETTERED'
         : (inst.hasGranary === true || hasHospital) ? 'PROVISIONED'
           : 'BARE';
   return CORPUS['DS-GEN-17'].pools[key] ? key : null;
+}
+
+/**
+ * DS-GEN-17's two GREAT HOUSE lenses (W4 PEOPLE, 2026-11-07; the wiring inventory's C5): the
+ * cathedral and the monastery the roster carries, each keyed on its own composition boolean
+ * (`compound.inst.hasCathedral`, `compound.inst.hasMonastery`) and null where it is false,
+ * which is R-DST-K. A town with both prints both: two houses, two facts.
+ * @param {unknown} hasCathedral @returns {string|null}
+ */
+export function cathedralPoolKey(hasCathedral) {
+  if (hasCathedral !== true) return null;
+  return CORPUS['DS-GEN-17'].pools['GREAT HOUSE: cathedral'] ? 'GREAT HOUSE: cathedral' : null;
+}
+
+/** @param {unknown} hasMonastery @returns {string|null} */
+export function monasteryPoolKey(hasMonastery) {
+  if (hasMonastery !== true) return null;
+  return CORPUS['DS-GEN-17'].pools['GREAT HOUSE: monastery'] ? 'GREAT HOUSE: monastery' : null;
 }
 
 // ── DS-GEN-18 · Economics › Why these workshops (the crafts explained by their feed) ──
@@ -1672,12 +1750,15 @@ export function populationDirectionPoolKey(trend, tradeRouteAccess) {
  *   commerce: LegibilityRung|null,
  *   warehouses: LegibilityRung|null,
  *   institutions: LegibilityRung|null,
+ *   cathedral: LegibilityRung|null,
+ *   monastery: LegibilityRung|null,
  *   notableConnection: ReadonlyArray<LegibilityRung|null>,
  *   populationDirection: LegibilityRung|null,
  * }>, history: Readonly<{
  *   identity: ReadonlyArray<LegibilityRung|null>,
  *   founded: LegibilityRung|null,
  *   record: LegibilityRung|null,
+ *   legacy: ReadonlyArray<LegibilityRung|null>,
  * }>, viability: Readonly<{
  *   verdict: ReadonlyArray<LegibilityRung|null>,
  * }>, hooks: Readonly<{
@@ -1705,6 +1786,8 @@ export const GENERAL_STATE_PROSE_SILENT = Object.freeze({
     commerce: null,
     warehouses: null,
     institutions: null,
+    cathedral: null,
+    monastery: null,
     notableConnection: Object.freeze([]),
     populationDirection: null,
   }),
@@ -1712,6 +1795,7 @@ export const GENERAL_STATE_PROSE_SILENT = Object.freeze({
     identity: Object.freeze([]),
     founded: null,
     record: null,
+    legacy: Object.freeze([]),
   }),
   viability: Object.freeze({ verdict: Object.freeze([]) }),
   hooks: Object.freeze({ framing: Object.freeze([]) }),
@@ -1734,7 +1818,7 @@ export const GENERAL_STATE_PROSE_SILENT = Object.freeze({
  * @param {{scores?: Record<string, unknown>|null, prosperity?: unknown, safetyLabel?: unknown,
  *   viable?: unknown, readinessLabel?: unknown, foodSecurityLabel?: unknown,
  *   terrainType?: unknown, institutions?: unknown, tradeRouteAccess?: unknown,
- *   isEntrepot?: unknown, inst?: object|null, tier?: unknown, primaryStress?: unknown,
+ *   isEntrepot?: unknown, inst?: Record<string, unknown>|null, tier?: unknown, primaryStress?: unknown,
  *   foodBalance?: object|null,
  *   conflicts?: Array<{intensity?: unknown, parties?: unknown, issue?: unknown,
  *     stakes?: unknown}|null>|null,
@@ -1752,6 +1836,7 @@ export const GENERAL_STATE_PROSE_SILENT = Object.freeze({
  *   exploitation?: {fullyExploited?: unknown, partiallyExploited?: unknown,
  *     unexploited?: unknown}|null,
  *   history?: {age?: unknown, historicalCharacter?: unknown,
+ *     legacyAnnotations?: unknown, siegeNarrative?: unknown, currentTensions?: unknown,
  *     founding?: {foundedBy?: unknown, initialChallenge?: unknown}|null,
  *     historicalEvents?: Array<{type?: unknown, name?: unknown, yearsAgo?: unknown,
  *       anchored?: unknown, lastingEffects?: unknown}|null>|null}|null}} [readings]
@@ -1809,7 +1894,13 @@ export function generalStateProse(settlement, readings = {}, options = {}) {
     }), [])
     : null);
   const origin = [
-    originLine(originRoutePoolKey(readings.tradeRouteAccess)),
+    // ⛔ THE PORT LINE READS THE DOCKS (SW-B1, STYLE-RULINGS-2 B1(b); DS-GEN-6, SW-B2's leftover by the
+    // chair's ruling of 02:5x): every port line says the town lives off its quay and harbour, and the
+    // route alone does not hold that (Albamunicipium, soak1k-0: a port route on a mountain thorp with no
+    // docks). The docks are the desk's `inst` reading (`economicState.compound.inst.hasPort`, the flag
+    // generateNarratives.js's #10 gate reads); with no docks the port line is struck and the tier line
+    // stands alone. An unasked record (no flag) reads as before.
+    originLine(portLineStruck(originRoutePoolKey(readings.tradeRouteAccess), readings.inst)),
     originLine(originTierPoolKey(readings.tier)),
   ].filter((line) => line && line.sentence);
 
@@ -1904,6 +1995,15 @@ export function generalStateProse(settlement, readings = {}, options = {}) {
   ].filter((l) => l && l.sentence));
 
   const calamityRow = recordCalamityEvent(events);
+  const legacy = legacyPoolKey(hist.legacyAnnotations);
+  const livingMemoryName = livingMemoryEventName(hist);
+  /** @param {string} key @param {Record<string, unknown>} extra */
+  const legacyLine = (key, extra) => legibilityRung('', composeStateProse(CORPUS, 'DS-GEN-16', {
+    ...options,
+    spineKey: key,
+    candidates: generalStateProseCandidates('DS-GEN-16', readings),
+    slots: { ...slots, ...extra },
+  }), []);
   const recordKey = events.length > 0 ? eventRecordPoolKey(events) : null;
 
   // ── DS-GEN-18 ──────────────────────────────────────────────────────────────────────
@@ -2051,6 +2151,9 @@ export function generalStateProse(settlement, readings = {}, options = {}) {
       commerce: rung('DS-GEN-13', commercePoolKey(readings.inst), ''),
       warehouses: rung('DS-GEN-13', warehousesPoolKey(readings.inst), ''),
       institutions: rung('DS-GEN-17', institutionsPoolKey(readings.inst, settlement), ''),
+      // DS-GEN-17's two GREAT HOUSE lenses (W4 PEOPLE, C5): the cathedral, the monastery.
+      cathedral: rung('DS-GEN-17', cathedralPoolKey(readings.inst?.hasCathedral), ''),
+      monastery: rung('DS-GEN-17', monasteryPoolKey(readings.inst?.hasMonastery), ''),
       // DS-REL-2's two lenses at ONE position: the tie the town names first, then how much
       // of its roll this town's own conditions made. The connection line leads because the
       // page prints its datum directly beneath.
@@ -2110,6 +2213,15 @@ export function generalStateProse(settlement, readings = {}, options = {}) {
           },
         }), [])
         : null,
+      // W5 construction 2026-11-07: the past-to-present link and the recent blow in living
+      // memory, at DS-GEN-16's one speaking position (`history.legacy`).
+      legacy: Object.freeze([
+        livingMemoryName ? legacyLine('LIVING-MEMORY', { calamity: calamityFill(livingMemoryName) }) : null,
+        legacy ? legacyLine(legacy.key, {
+          calamity: calamityFill(text(legacy.row.eventName)),
+          timeband_age: timebandAgeFill(legacy.row.yearsAgo),
+        }) : null,
+      ].filter((line) => line && line.sentence)),
     }),
   });
 }

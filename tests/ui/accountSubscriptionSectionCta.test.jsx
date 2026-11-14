@@ -182,3 +182,15 @@ describe('AccountSubscriptionSection — the hydration gate', () => {
     expect(screen.getByRole('button', { name: /See Cartographer/i }).disabled).toBe(false);
   });
 });
+
+describe('AccountSubscriptionSection — the save-cap nudge sells only what Cartographer adds (SW-9; TIER-PARITY-FIX V6)', () => {
+  test('a free user one save from the cap reads "unlimited saves", never "cloud sync"', () => {
+    const { container } = render(
+      <AccountSubscriptionSection {...BASE_PROPS} activeSaves={2} auth={{ tier: 'free' }} isElevated={false} onNavigatePricing={vi.fn()} />,
+    );
+    const text = container.textContent || '';
+    expect(text).toContain('One save left. Cartographer = unlimited saves.');
+    expect(text).not.toMatch(/cloud sync/i); // anchored: the nudge is asserted present on the line above
+  });
+});
+

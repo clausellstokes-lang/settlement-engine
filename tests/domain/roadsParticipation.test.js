@@ -30,6 +30,11 @@ import { rosterPersonAvailable } from '../../src/domain/worldPulse/envoyCasting.
 import { readWarSeatBooks } from '../../src/domain/worldPulse/warSeatBooks.js';
 import { isOffStage } from '../../src/domain/roads/state.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+// GREEN-TIP (2026-11-10, re-keyed with the writers and the lifecycle re-point): a card stands in a power by a MEMBERSHIP,
+// written through the product's one constructor (people/cardVeil.js :: membershipInPower, the v1 -> v2 migration's
+// shape); the retired `factionAffiliation` is read and written by nothing now.
+import { membershipInPower } from '../../src/domain/people/cardVeil.js';
+import { holdsMembership } from '../../src/domain/people/membership.js';
 
 describe('participation chokepoint — the master gate (buildWorldSnapshot, §8)', () => {
   const npcs = [
@@ -115,7 +120,7 @@ describe('participation chokepoint — the master gate (buildWorldSnapshot, §8)
     // rostered member, 147 of them governing, and 100% of settlements hold at least one.
     const crown = { id: 'fac.crown', name: 'The Crown', faction: 'The Crown', isGoverning: true, power: 40 };
     const weavers = { id: 'fac.weavers', name: 'The Weavers', faction: 'The Weavers', power: 12 };
-    const member = (house, extra) => ({ id: `npc.${house.replace(/\W/g, '')}`, name: `Factor of ${house}`, factionAffiliation: house, status: 'active', importance: 'notable', ...extra });
+    const member = (house, extra) => ({ id: `npc.${house.replace(/\W/g, '')}`, name: `Factor of ${house}`, memberships: [membershipInPower({ faction: house })], status: 'active', importance: 'notable', ...extra });
     const ashfordWith = (weaverExtra) => ({
       id: 'ashford', name: 'Ashford', tier: 'town',
       config: { [DENSITY_LAW_CONFIG_KEY]: REGISTER_VII_DENSITY_LAW_VERSION },
@@ -156,7 +161,7 @@ describe('participation chokepoint — the master gate (buildWorldSnapshot, §8)
     // of those six a SPURIOUS faction_interregnum the cure REMOVES.
     const guild = { id: 'f1', name: 'Guild', faction: 'Guild', isGoverning: true, power: 40 };
     const fkey = ladderFactionKey(guild);
-    const free = { id: 'free', name: 'Alia', importance: 'key', factionAffiliation: 'Guild', structuralRank: 'dominant', status: 'active' };
+    const free = { id: 'free', name: 'Alia', importance: 'key', memberships: [membershipInPower({ faction: 'Guild' })], structuralRank: 'dominant', status: 'active' };
     const shelvedNpc = { ...free, id: 'shelved', name: 'Bram', stasis: { reason: 'imprisoned' } };
     const court = { id: 's', name: 'S', npcs: [free, shelvedNpc], powerStructure: { governingName: 'Guild', factions: [guild], seatOfPower: 'Guild', publicLegitimacy: { score: 55 } } };
     const world = { tick: 4, simulationRules: {} };
@@ -216,8 +221,8 @@ describe('participation chokepoint — the ladder belt (eligibleMembersOf, §8)'
     const fkey = ladderFactionKey(faction);
     const settlement = {
       name: 'S', npcs: [
-        { id: 'a', name: 'Alia', importance: 'key', factionAffiliation: 'Guild', structuralRank: 'dominant' },
-        { id: 'b', name: 'Bram', importance: 'key', factionAffiliation: 'Guild', structuralRank: 'dominant', whereabouts: { state: 'hostage', placeId: 'e', missionId: 'm' } },
+        { id: 'a', name: 'Alia', importance: 'key', memberships: [membershipInPower({ faction: 'Guild' })], structuralRank: 'dominant' },
+        { id: 'b', name: 'Bram', importance: 'key', memberships: [membershipInPower({ faction: 'Guild' })], structuralRank: 'dominant', whereabouts: { state: 'hostage', placeId: 'e', missionId: 'm' } },
       ],
     };
     const rows = eligibleMembersOf('s', settlement, faction, fkey);

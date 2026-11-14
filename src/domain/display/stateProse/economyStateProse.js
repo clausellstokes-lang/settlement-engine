@@ -82,6 +82,7 @@ import { COMPLEXITY_LABEL } from '../labelBands.js';
 import { wallsAnswered } from '../../defense/defenseFacts.js';
 import { crisisAnswered } from '../../crisis/crisisFacts.js';
 import { factsAnswered } from '../../facts/factsAnswered.js';
+import { isLiveInstitution } from '../../institutions/institutionRoster.js';
 
 /**
  * The desk's corpus, typed at the import boundary. The generated leaves stay PURE DATA
@@ -604,7 +605,9 @@ export function theocraticEconomyPoolKey(flags) {
  */
 export function hiddenHouseRow(institutions) {
   if (!Array.isArray(institutions)) return null;
-  return institutions.find((row) => properFill(text(row?.name))
+  // A ruined house is never spoken as standing (the ruin-filter roster's law; MERGE-WAVE, the chair's ruling
+  // on W1 ECO's 725b62eb5): only a LIVE hidden house keys the lens.
+  return institutions.find((row) => isLiveInstitution(row) && properFill(text(row?.name))
     && (row?.facets?.subterranean || row?.facets?.clandestine)) || null;
 }
 

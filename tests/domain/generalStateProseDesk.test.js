@@ -48,12 +48,14 @@ import {
   viabilityVerdictPoolKey,
   eventAnchorDimension,
   eventRecordPoolKey,
+  legacyPoolKey,
+  livingMemoryEventName,
   eventTypePoolKey,
   foundedPoolKey,
   recencyFramingPoolKey,
   significantEvent,
   groundPoolKey,
-  institutionsPoolKey,
+  institutionsPoolKey, cathedralPoolKey, monasteryPoolKey,
   marketPoolKey,
   commercePoolKey,
   warehousesPoolKey,
@@ -110,11 +112,11 @@ const mergedShapes = () => mergeSlotShapes([
 /** Every block this desk lights, and the pool counts the shipped leaf carries. */
 const BLOCK_POOLS = Object.freeze({
   'DS-GEN-2': 3, 'DS-GEN-3': 42, 'DS-GEN-5': 5, 'DS-GEN-6': 9, 'DS-GEN-12': 5, 'DS-GEN-13': 9, /* W1 ECO construction (2026-11-07): +4 COMMERCE, +1 WAREHOUSES */
-  'DS-GEN-7': 8, 'DS-GEN-17': 5,
+  'DS-GEN-7': 8, 'DS-GEN-17': 7, // W4 PEOPLE 2026-11-07: +2, the GREAT HOUSE lens (C5) — composed with W1 ECO's DS-GEN-13 9 (MERGE-WAVE at the W4 PEOPLE merge)
   // The history chapter (DESK-GEN2 car 1).
-  'DS-GEN-9': 15, 'DS-GEN-14': 3, 'DS-GEN-16': 5,
+  'DS-GEN-9': 15, 'DS-GEN-14': 3, 'DS-GEN-16': 10,
   // The viability verdict and the plot-hook framing (DESK-GEN2 car 2).
-  'DS-GEN-11': 6, 'DS-HK-1': 11,
+  'DS-GEN-11': 5, 'DS-HK-1': 11, // STYLE-2 FIRST-IMPRESSIONS (B·#28, 2026-11-09): the zero pool leaves (6 -> 5)
   // The notable connection (DESK-GEN2 car 4).
   'DS-REL-2': 3,
   // Why these workshops (DESK-GEN3 car 1).
@@ -586,7 +588,14 @@ describe('DS-GEN-12 / DS-GEN-13 / DS-GEN-17 — three total partitions', () => {
     // on the `{}` case above, which proves the same function answers on an empty record.
     expect(institutionsPoolKey({ hasCathedral: true, hasBank: true })).toBe('BARE');
     expect(new Set(cases.map(([inst]) => institutionsPoolKey(inst))).size).toBe(5);
-    expect([...new Set(cases.map(([, key]) => key))].sort()).toEqual(poolsOf('DS-GEN-17').sort());
+    // W4 PEOPLE 2026-11-07: the two GREAT HOUSE pools are a second lenses (cathedralPoolKey, monasteryPoolKey),
+    // never a key of the composition partition; the partition covers the other five exactly.
+    expect([...new Set(cases.map(([, key]) => key))].sort())
+      .toEqual(poolsOf('DS-GEN-17').filter((k) => !k.startsWith('GREAT HOUSE: ')).sort());
+    expect(cathedralPoolKey(true)).toBe('GREAT HOUSE: cathedral');
+    expect(monasteryPoolKey(true)).toBe('GREAT HOUSE: monastery');
+    expect(cathedralPoolKey(undefined)).toBeNull();
+    expect(monasteryPoolKey(false)).toBeNull();
   });
 });
 
@@ -705,7 +714,8 @@ describe('the general desk — the mount registry', () => {
     // GLANCES (the stacked sentence list under the bars was removed), so it has no speaking
     // position until its lenses are re-homed. Pinned just below this loop.
     const expected = {
-      'DS-GEN-12': 'overview.ground',
+      // DS-GEN-12 left this table at the owner's word of 2026-11-09 (OWNER-WORDS-DOSSIER item 2): its one
+      // row, overview.ground, GLANCES — the ground lens re-introduced the place the arrival scene draws.
       'DS-GEN-13': 'overview.market',
       'DS-GEN-17': 'overview.institutions',
       // DESK-GEN3 car 1 — the general desk's first position off the overview/history pages.
@@ -741,13 +751,24 @@ describe('the general desk — the mount registry', () => {
     // ⛔ THE CONSOLIDATION CHAIR'S GLANCES (RULINGS-T3, 2026-10-30), on the DS-GEN-3 precedent:
     // each block stays MOUNTED (never parked dark; the unmounted list is shrink-only) at a
     // glance row that strips the sentence.
+    // ⭐ W5 HIS construction (2026-11-07, ODQ §934.105; WAVE-RULINGS item 10): DS-GEN-16 SPEAKS at ONE
+    // new position, `history.legacy` (the past-to-present link and the recent blow in living
+    // memory), while `history.record` — the line H3 glanced — stays a glance.
+    expect(sentenceMountForBlock('DS-GEN-16')?.mount, 'DS-GEN-16 speaks only at history.legacy').toBe('history.legacy');
     for (const [blockId, mount] of [['DS-REL-1', 'relationships.network'], ['DS-GEN-9', 'history.identity'], ['DS-GEN-16', 'history.record']]) {
-      expect(sentenceMountForBlock(blockId), `${blockId} speaks again`).toBeNull();
+      if (blockId !== 'DS-GEN-16') expect(sentenceMountForBlock(blockId), `${blockId} speaks again`).toBeNull();
       expectAbsentWithAnchor(UNMOUNTED_BLOCKS, blockId, UNMOUNTED_BLOCKS[0], `${blockId} was parked dark instead of glanced`);
       const r = { glance: 'x', sentence: 'y', detail: [], provenance: { blockId, poolKey: 'p', angle: 'a' } };
       expect(drawnAtMount(mount, r).glance, `${mount} keeps its glance`).toBe('x');
       expect(drawnAtMount(mount, r).sentence, `${mount} draws no sentence`).toBeNull();
     }
+    // OWNER-WORDS-DOSSIER item 2 (the owner, 2026-11-09: "In 'the place' the second paragraph seems
+    // redundant"): DS-GEN-12 stays MOUNTED at overview.ground, a glance row that strips the sentence.
+    expect(sentenceMountForBlock('DS-GEN-12'), 'DS-GEN-12 speaks again: the ground re-introduces the place').toBeNull();
+    expectAbsentWithAnchor(UNMOUNTED_BLOCKS, 'DS-GEN-12', UNMOUNTED_BLOCKS[0], 'DS-GEN-12 was parked dark instead of glanced');
+    const ground = { glance: 'x', sentence: 'y', detail: [], provenance: { blockId: 'DS-GEN-12', poolKey: 'p', angle: 'a' } };
+    expect(drawnAtMount('overview.ground', ground).glance, 'overview.ground keeps its glance').toBe('x');
+    expect(drawnAtMount('overview.ground', ground).sentence, 'overview.ground draws no sentence').toBeNull();
   });
 });
 
@@ -810,17 +831,26 @@ describe('DS-GEN-6 — the route, the tier overlay, and the demoted deficit dime
     expect(routePools.length).toBe(5);
     const armToPool = new Map();
     for (const route of ['crossroads', 'river', 'port', 'isolated', 'road', 'mountain_pass', 'mountain_road', 'desert_road', '']) {
-      for (const terrainType of [null, 'riverside', 'coastal']) {
+      for (const terrainType of [null, 'riverside', 'coastal', 'mountain']) {
         for (const hasFoodDeficit of [true, false]) {
+          // STYLE-2 FIRST-IMPRESSIONS (A·O16, 2026-11-09): the docks flag is a producer input too —
+          // a port with no docks founds on the `ground` arm (or the river's, or the road's).
+          // (A no-docks port also lands on the river and road arms; those are mapped by their own
+          // routes, so only the arm it alone reaches is recorded from it.)
           const arm = originArmKey({ route, terrainType, hasFoodDeficit });
           armToPool.set(arm, originRoutePoolKey(route));
+          const noDocks = originArmKey({ route, terrainType, hasFoodDeficit, hasDocks: false });
+          if (noDocks === 'ground') armToPool.set(noDocks, originRoutePoolKey(route));
         }
       }
     }
     expect([...armToPool.keys()].sort()).toEqual([...ORIGIN_ARMS].sort());
     expect([...new Set(armToPool.values())].sort()).toEqual(routePools.sort());
-    // Each producer arm folds to the pool its own prefix names.
-    for (const [arm, pool] of armToPool) expect(pool, arm).toBe(arm.split('.')[0]);
+    // Each producer arm folds to the pool its own prefix names. ⚠ The `ground` arm (a port route
+    // with no docks) folds to DS-GEN-6's `port` pool, because the desk reads the ROUTE only — the
+    // same unread docks fact, at a second writer; recorded in STYLE-2-FIRST-IMPRESSIONS's
+    // "What stays" for SW-B1 (generalStateProse.js is outside that lane's manifest).
+    for (const [arm, pool] of armToPool) expect(pool, arm).toBe(arm === 'ground' ? 'port' : arm.split('.')[0]);
   });
 
   it('THE DEFICIT DIMENSION: both values fire, and an unmeasured town is neither', () => {
@@ -900,10 +930,12 @@ describe('DS-GEN-2 — one line per standing quarrel', () => {
   it('THE WHOLE PRODUCER TABLE CONFORMS: every authored issue and stakes fills a phrase seam', () => {
     // The closed vocabulary, extracted from the producer rather than sampled from a run:
     // a value that cannot conform must red HERE, not lose a variant in silence.
-    const body = src('src/generators/power/conflicts.js');
-    mustExtract(body, 'export const generateConflicts', 'the conflict table in conflicts.js');
-    const values = [...body.matchAll(/^\s*(?:issue|stakes): (?:'([^']+)'|"([^"]+)")/gm)]
-      .map((m) => m[1] ?? m[2]);
+    // RE-KEYED (COHERENCE-QUARREL, 2026-11-11): the table moved beside the writer, one row a line.
+    mustExtract(src('src/generators/power/conflicts.js'), 'export const generateConflicts', 'the conflict writer in conflicts.js');
+    const body = src('src/generators/power/conflictIssues.js');
+    mustExtract(body, 'export const BASE_ISSUES', 'the conflict table in conflictIssues.js');
+    const values = [...body.matchAll(/(?:^\s*|\{ )(?:issue|stakes): (?:'([^']+)'|"([^"]+)")|, stakes: (?:'([^']+)'|"([^"]+)")/gm)]
+      .map((m) => m[1] ?? m[2] ?? m[3] ?? m[4]);
     expect(values.length, 'the conflict table extractor found nothing').toBeGreaterThan(30);
     const shapes = mergedShapes();
     for (const value of values) {
@@ -1179,7 +1211,27 @@ describe('the history chapter', () => {
     expect([...new Set([
       eventRecordPoolKey([]), eventRecordPoolKey([blow(true, 5)]), eventRecordPoolKey([blow(true, 500)]),
       eventRecordPoolKey([blow(true, 5), blow(true, 9)]), eventRecordPoolKey([blow(false, 5)]),
+      // W5 HIS construction (2026-11-07): the legacy link, keyed by the relationship clause the
+      // generator's own templates write, and the living-memory pairing.
+      // STYLE-2 SW-7 (A11, 2026-11-09): the generator's clauses re-keyed to its plain words; the old clauses
+      // still key (a saved world's annotation), pinned below.
+      ...[' left trouble that has never been put right: ', ' hit the settlement hard, and it has since recovered: ',
+        ' set up ways of doing things that have since changed: ', ': '].map((clause) => legacyPoolKey(
+        [{ annotation: `As of the founding survey, the siege (40 years ago)${clause}x.`, eventName: 'The Siege', yearsAgo: 40 }],
+      )?.key),
+      livingMemoryEventName({ siegeNarrative: 'The Siege is still present in living memory: x.', currentTensions: [{}] })
+        ? 'LIVING-MEMORY' : null,
     ])].sort()).toEqual(poolsOf('DS-GEN-16').sort());
+    expect(legacyPoolKey([])).toBeNull();
+    expect(legacyPoolKey([{ annotation: '' }])).toBeNull();
+    expect([' created pressure that has not been fully resolved: ', ' was a disruption the settlement has since moved through: ',
+      ' established conditions that have since shifted: '].map((clause) => legacyPoolKey(
+      [{ annotation: `As of the founding survey, the siege (40 years ago)${clause}x.`, eventName: 'The Siege', yearsAgo: 40 }],
+    )?.key), 'a saved world\'s old clause still keys').toEqual(['LEGACY-UNRESOLVED', 'LEGACY-RECOVERED', 'LEGACY-SHIFTED']);
+    expect(livingMemoryEventName({ siegeNarrative: 'The Siege is still present in living memory: x.', currentTensions: [] }),
+      'no current tension, no quarrel to speak of').toBeNull();
+    expect(livingMemoryEventName({ siegeNarrative: 'The Siege is still present in living memory: x.', currentTensions: [{}] }))
+      .toBe('The Siege');
     // ⚠ AN ABSENT `anchored` IS NOT A `false`. A record that has not been asked the question
     // reads UNMARKED when it carries no severe row, and counting it as unanchored would state
     // something the record does not.
@@ -1313,7 +1365,10 @@ describe('the viability verdict and the hook framing', () => {
     expect(criticalIssuePoolKey(2, true)).toBe('criticalIssueCount: critical contradictions on the record');
     // The zero pool vouches for the record, so it needs the receipt's battery judgment
     // (lane SELF-VOUCH): passed → zero; contradicted → the contradiction pool; unasked → nothing.
-    expect(criticalIssuePoolKey(0, true)).toBe('criticalIssueCount zero');
+    // STYLE-2 FIRST-IMPRESSIONS (B·#28, 2026-11-09): the zero pool LEAVES — beside a by-design
+    // list it vouched falsely, and on a clean record the header already says COHERENT; the key
+    // resolves to no pool, so a battery-clean record prints no coherence line.
+    expect(criticalIssuePoolKey(0, true)).toBeNull();
     expect(criticalIssuePoolKey(0, false)).toBe('criticalIssueCount: critical contradictions on the record');
     expect(criticalIssuePoolKey(0), 'a record the battery never read vouched for').toBeNull();
     expect(criticalIssuePoolKey(undefined), 'an unmeasured record read as zero').toBeNull();
@@ -1322,7 +1377,7 @@ describe('the viability verdict and the hook framing', () => {
     // TOTAL the other way: the six pools are claimed by these three lenses and no other.
     expect([...new Set([
       viabilityVerdictPoolKey(true), viabilityVerdictPoolKey(false), viabilityVerdictPoolKey(undefined),
-      criticalIssuePoolKey(1), criticalIssuePoolKey(0, true), 'THE FIRST-SURVEY QUALIFICATION',
+      criticalIssuePoolKey(1), 'THE FIRST-SURVEY QUALIFICATION',
     ])].sort()).toEqual(poolsOf('DS-GEN-11').sort());
   });
 

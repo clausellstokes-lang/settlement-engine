@@ -35,6 +35,8 @@ import { isTradeRouteDisconnected } from '../tradeRouteSemantics.js';
 import { institutionHasAnyTag } from '../../lib/entities.js';
 import { institutionDisplayName } from './institutionDisplayName.js';
 import { resourceDisplayName } from './resourceDisplayName.js';
+import { compareCodepoint } from '../deterministicSort.js';
+import { importsAsPrinted } from './tradeListDisplay.js';
 
 /** @typedef {{ chain: string|null, impact: string, severity: string }} GapLine */
 
@@ -74,9 +76,10 @@ import { resourceDisplayName } from './resourceDisplayName.js';
 
 /**
  * What `arr` hands back for a value of type T: an array's own elements, none for anything else
- * (an `unknown` value may be any array, so its elements stay `unknown`).
+ * (an `unknown` value may be any array, so its elements stay `unknown`). An absent value adds no
+ * element type: `readonly string[] | undefined` hands back `string[]`, not `string[] | never[]`.
  * @template T
- * @typedef {unknown extends T ? unknown[] : T extends ReadonlyArray<infer E> ? E[] : never[]} ArrOf
+ * @typedef {unknown extends T ? unknown[] : NonNullable<T> extends ReadonlyArray<infer E> ? E[] : never[]} ArrOf
  */
 
 /** @param {unknown} x @returns {string} */
@@ -125,8 +128,11 @@ const CHAIN_INPUTS = Object.freeze({
 const ROUTE_HOUSE_TAGS = Object.freeze(['market', 'transport']);
 
 /**
- * The record's own goods, as one searchable text: what the economy produces, imports and
- * exports, and the nearby resources that are not depleted (their keys and their commodities).
+ * The record's own goods, as one searchable text: what the economy produces, what TRADE BRINGS IN
+ * (`tradeListDisplay.js :: importsAsPrinted(s).arriving`), the exports, and the nearby resources that are not
+ * depleted (their keys and their commodities). A good the terrain needs and no trade brings (`.needed`) is NOT a
+ * good the town has: the record's own gap kind for its house is `missing`, so the gap line prints (W2-A-LEAVES-2,
+ * REVIEW-W2A F1: the first seat read the need list as arrivals and silenced 445 true gaps).
  * @param {PageRecord} s
  */
 function recordGoods(s) {
@@ -134,7 +140,7 @@ function recordGoods(s) {
   const keys = availableNativeResourceKeys(s?.config || {});
   /** @type {string[]} */
   const goods = [
-    ...arr(es.localProduction), ...arr(es.primaryImports), ...arr(es.primaryExports),
+    ...arr(es.localProduction), ...importsAsPrinted(/** @type {Parameters<typeof importsAsPrinted>[0]} */ (s)).arriving, ...arr(es.primaryExports),
     ...keys, ...keys.flatMap((/** @type {string} */ k) => arr(/** @type {Readonly<Record<string, { commodities?: unknown } | undefined>>} */ (RESOURCE_DATA)[k]?.commodities)),
   ].map(str);
   return goods.map(norm).join('|');
@@ -239,6 +245,25 @@ export function resourceGapLines(s) {
  */
 export function criticalIssuesOf(v) {
   return arr(v?.issues).filter((i) => str(i?.severity).toLowerCase() === 'critical');
+}
+
+/**
+ * The by-design contradictions the Viability tab lists (SW-B1, STYLE-RULINGS-2 B1(c)): the viability
+ * issues and the structural violations marked `by_design`, one row per (type, institution, reason),
+ * sorted by institution name (codepoint order). ONE reader of the fact: the tab prints this list and the DS-GEN-11 desk reads
+ * its length, so the coherence line can never vouch above a by-design row the tab shows.
+ * @param {ViabilityRecord} v the economicViability record
+ * @param {{ structuralViolations?: ReadonlyArray<ViabilityIssue | null> | null } | null | undefined} s the settlement
+ * @returns {ViabilityIssue[]}
+ */
+export function byDesignItemsOf(v, s) {
+  /** @type {ViabilityIssue[]} */ const rows = [
+    ...arr(v?.issues).filter((i) => i?.severity === 'by_design'),
+    ...arr(s?.structuralViolations).filter((i) => i?.severity === 'by_design').map((i) => /** @type {ViabilityIssue} */ (i)),
+  ];
+  return rows.filter((item, index, all) => all.findIndex((c) => (
+    c?.type === item?.type && c?.institution === item?.institution && c?.reason === item?.reason
+  )) === index).sort((a, b) => compareCodepoint(/** @type {string} */ (a.institution || ''), /** @type {string} */ (b.institution || ''))); // the codepoint order (determinism lint), not the host's collation
 }
 
 /**

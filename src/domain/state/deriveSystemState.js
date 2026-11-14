@@ -199,17 +199,17 @@ function deriveVolatility(s) {
   const factions = power.factions || [];
   if (factions.length >= 5) {
     value += 10;
-    risks.push(`${factions.length} active factions competing`);
+    risks.push(`${factions.length} powers competing`);
   } else if (factions.length <= 2) {
     value -= 5;
-    drivers.push('Few factions: concentrated power');
+    drivers.push('Few powers: rule is concentrated');
   }
 
   // Hostile/rival faction relationships
   const conflicts = (power.conflicts || s.conflicts || []).length;
   if (conflicts > 0) {
     value += Math.min(20, conflicts * 5);
-    risks.push(`${conflicts} active faction conflict${conflicts === 1 ? '' : 's'}`);
+    risks.push(`${conflicts} quarrel${conflicts === 1 ? '' : 's'} between powers`);
   }
 
   // Criminal capture: when shadow networks have outsized influence

@@ -30,13 +30,13 @@ export default function FactionEventBanner() {
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 3 }}>
         <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, color: FACTION, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-          Factions enter through an event
+          Powers enter through an event
         </span>
       </div>
       <div style={{ fontSize: proseFontSize(FS.xs, mobile), color: SEC, lineHeight: 1.5 }}>
-        A custom faction is <strong>not</strong> rolled into a fresh generation. It arrives in an
+        A custom power is <strong>not</strong> rolled into a fresh generation. It arrives in an
         existing settlement or region through an in-world event (a coup, an arrival, a schism) you
-        author in the Event Composer. The faction then lands with consequences, not out of thin air.
+        author in the Event Composer. The power then lands with consequences, not out of thin air.
       </div>
       <div style={{ marginTop: 6 }}>
         <Button variant="secondary" size="sm" onClick={() => navigate('settlements')} style={{ padding: '2px 8px', fontSize: chromeFontSize(FS.xxs, mobile) }}>

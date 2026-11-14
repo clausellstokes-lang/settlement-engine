@@ -39,7 +39,7 @@ import { sev01 } from './mutateHelpers.js';
  * @property {Array<Record<string, unknown>>} [stressors]
  * @property {Array<Record<string, unknown>>} [stress]
  * @property {Array<Record<string, unknown>>} [stresses]
- * @property {Array<{ id?: string, name?: string, factionAffiliation?: string }>} [npcs]
+ * @property {Array<{ id?: string, name?: string }>} [npcs]
  */
 /**
  * One event's impact specification.
@@ -332,7 +332,7 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
   },
 
   IMPAIR_FACTION: {
-    label: 'Impair faction',
+    label: 'Weaken a power',
     requiresTarget: true,
     stateDeltas(event) {
       const sev = sev01(event.payload?.severity, 0.5);
@@ -345,21 +345,21 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
   },
 
   RESTORE_FACTION: {
-    label: 'Restore faction',
+    label: 'Restore a power',
     requiresTarget: true,
     stateDeltas() { return { volatility: -5 }; },
     narrate(event) { return `${labelOf(event.targetId)} recovered.`; },
   },
 
   ADD_FACTION: {
-    label: 'Add faction',
+    label: 'Add a power',
     requiresTarget: true,
     stateDeltas() {
       // A new organized power center adds friction until the balance settles.
       return { volatility: 5 };
     },
     narrate(event) {
-      return `A new faction, ${labelOf(event.targetId)}, has formed.`;
+      return `A new power, ${labelOf(event.targetId)}, has formed.`;
     },
   },
 
@@ -802,7 +802,9 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
       const npc = (settlement?.npcs || []).find(n =>
         String(n.id || '') === String(event.targetId) || String(n.name || '') === String(event.targetId));
       const name = npc?.name || labelOf(event.targetId);
-      const faction = npc?.factionAffiliation || 'their faction';
+      // The narration names NO power (the owner's word, 2026-11-10: the simulation is isolated; the reviewer showed a
+      // named power reaching the public chronicle through narrativeSummary). Naming it is the simulation program's.
+      const faction = 'their power';
       return `${name} rises within ${faction}, displacing a rival on the way up.`;
     },
   },
@@ -817,7 +819,7 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
       const npc = (settlement?.npcs || []).find(n =>
         String(n.id || '') === String(event.targetId) || String(n.name || '') === String(event.targetId));
       const name = npc?.name || labelOf(event.targetId);
-      const faction = npc?.factionAffiliation || 'their faction';
+      const faction = 'their power';
       return `${name} is pushed down the ranks of ${faction}.`;
     },
   },

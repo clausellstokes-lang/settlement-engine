@@ -14,324 +14,338 @@
 export const DIPLOMAT_OUTSIDER_ROLE_CONTENT = {
   underfunded: {
     attributed: [
-      'The mission\'s funding stopped arriving, and the envoy found other readers for the dispatches; the reports still go home, but copies go wherever the retainer comes from.',
-      'An unfunded embassy is a stall in a market, and the envoy has learned to trade; the dispatches are sold by the page, and the buyers are never the addressee.',
+      'The mission\'s money stopped coming, and the envoy found other buyers for the dispatches. The reports still go home, and copies go to whoever pays the envoy.',
+      'With the embassy unfunded, the envoy sells the dispatches by the page, and the buyers are never the people they are addressed to.',
     ],
     're-caused': [
-      'What first bent the envoy has passed; the unfunded mission bends them now, and the sold dispatches are called keeping the embassy open.',
+      'Whatever first drew the envoy in is over, but now the mission\'s money has run short, and the envoy calls the sold dispatches keeping the embassy open.',
     ],
     reformed: [
       'The funding resumed and the envoy stopped the copies; the buyers were named in the next dispatch home, above the envoy\'s own confession.',
       'With the mission funded again, the envoy came clean; the sold pages were listed, and the retainers returned through channels everyone could see.',
     ],
     historicized: [
-      'The funding recovered, but the copies still go out; the poverty that excused them is old accounting.',
+      'The mission has its money again, but copies of the dispatches still go out to the same buyers.',
     ],
     'exposed-public': [
       'It is public that the envoy\'s dispatches had subscribers, and every government that read them is re-reading its decisions.',
-      'The subscription list is out: the envoy retailed the mission\'s eyes, and the town has learned who watched through them.',
+      'It is out that the envoy sold what the mission saw, and the town now knows who was reading its reports.',
+      "The governments that bought the envoy's dispatches are learning the town knows, and the envoy's welcome abroad has gone cold.",
     ],
     're-adjudicated': [
-      'The syndicate paying the envoy is destroyed, but the mission is still unfunded, and the dispatch trade has found new subscribers already.',
+      'Whoever paid the envoy before is gone, but now the mission\'s money runs short, and the envoy sells the dispatches to whoever will pay.',
     ],
   },
   'chain-starved': {
     attributed: [
-      'The courier lines are cut, so the envoy\'s letters travel with smugglers, and the smugglers read as they carry; the envoy knows, and is paid handsomely for the not-minding.',
-      'Correspondence still moves because the envoy hired the only carriers left; the seals arrive broken and re-pressed, and the envoy\'s silence about it has a monthly rate.',
+      'The courier lines are cut, so the envoy\'s letters travel with smugglers, who read them on the way. The envoy knows, and is paid well not to mind.',
+      'Letters still move because the envoy hired the only carriers left. The seals arrive broken and pressed again, and the envoy is paid every month to say nothing.',
     ],
     're-caused': [
-      "The envoy's first reason is gone; the dead courier lines reason for them now, and the read-in-transit letters keep paying the rate.",
+      "The envoy's first reason is gone, but now the courier lines are cut, and the carriers keep paying to read the letters.",
     ],
     reformed: [
       'The courier lines were restored and the envoy dropped the smuggler carriers; the read letters were re-sent sealed, with an accounting of what had leaked.',
       'With honest couriers riding again, the envoy came clean; the not-minding fees were surrendered, and the correspondents warned of every broken seal.',
     ],
     historicized: [
-      'The courier lines are mended, but the letters still ride with the quiet carriers; the necessity that hired them is over.',
+      'The courier lines are open again, but the envoy still sends the letters with the smugglers, who still pay to read them.',
     ],
     'exposed-public': [
-      'It is public that the mission\'s letters were read in transit with the envoy\'s paid consent, and every correspondent is burning old assumptions.',
-      'The broken seals are out: the envoy sold the mail\'s privacy to its carriers, and the town is guessing what traveled unsealed.',
+      'It is now known that the envoy let the mission\'s letters be read on the road for pay, and everyone who wrote to the mission is wondering what was seen.',
+      'It is out that the envoy sold the reading of the mail to its carriers, and the town is guessing what went through unsealed.',
+      'Everyone who wrote to the mission is going back over their letters, because the envoy let them be read on the road for pay.',
     ],
     're-adjudicated': [
-      'The old carriers are destroyed, but the courier lines are still cut, and whoever moves letters now inherited the envoy\'s rate.',
+      'Whoever paid the envoy before is gone, but now the courier lines are cut, and whoever carries the letters pays the envoy to read them.',
     ],
   },
   depleted: {
     attributed: [
-      'The mission has nothing left to offer, so the envoy offers what does not exist; concessions are promised that no one authorized, and the consideration for them stays with the promiser.',
-      'Diplomacy runs on gifts, and the gift chest is empty; the envoy trades in promises instead, and pockets what the promises fetch, knowing none will ever be honored.',
+      'The mission has nothing left to give, so the envoy promises concessions no one authorized and keeps what people pay for them.',
+      'The mission\'s gift chest is empty, so the envoy trades in promises instead and pockets what they fetch, knowing none will be kept.',
     ],
     're-caused': [
-      "The envoy's first cause has passed; the empty gift chest reasons for them now, and the unauthorized promises keep fetching their price.",
+      "Whatever first drew the envoy in is over, but now the gift chest is empty, and the envoy keeps selling promises no one will keep.",
     ],
     reformed: [
       'The mission was resupplied and the envoy recalled the false promises, each with its compensation; the fetched consideration was returned first.',
       'With the gift chest refilled, the envoy came clean; the unauthorized concessions were disavowed by the envoy before any injured party asked.',
     ],
     historicized: [
-      'The mission recovered, but the false promises still circulate; the emptiness that coined them has been resupplied.',
+      'The mission is supplied again, but the envoy still sells false promises to anyone who will pay.',
     ],
     'exposed-public': [
       'It is public that the envoy sold concessions no one authorized, and the holders of those promises are presenting them for payment.',
-      'The promise trade is out: the envoy pocketed the consideration for a future that was never coming, and the buyers have arrived in it.',
+      'It is out that the envoy took payment for promises that were never going to be kept, and the people who paid are at the door.',
+      "The people who paid the envoy for promises no one authorized are at the mission's door with the promises in hand.",
     ],
     're-adjudicated': [
-      'The syndicate is gone, but the mission is still empty-handed, and the promise trade has new brokers holding the envoy\'s signature.',
+      "Whoever paid the envoy before is gone, but the mission's stores have run dry, and the envoy goes on selling promises no one will keep.",
     ],
   },
   'trade-strangled': {
     attributed: [
-      'The embargo terms pass across the envoy\'s desk before they are announced, and certain merchants are never surprised; foreknowledge has a price, and the envoy collects it in advance of every proclamation.',
-      'Trade policy is the envoy\'s trade now; who will be embargoed, when, and for what, sold quietly to those whose fortunes turn on the timing.',
+      'The embargo terms cross the envoy\'s desk before they are announced, and certain merchants are never caught out. The envoy sells them the news before every proclamation.',
+      'The envoy sells word of trade policy: who will be embargoed, when, and for what, quietly, to those whose fortunes turn on knowing first.',
     ],
     're-caused': [
-      'What first held the envoy has passed; the embargo holds them now, and each advance sale of its terms renews the arrangement.',
+      'What first drew the envoy in has passed, but now an embargo chokes the trade, and the envoy sells its terms before they are announced.',
     ],
     reformed: [
       'The embargo lifted and the envoy disclosed the advance sales; the forewarned merchants were named to the ones who were not.',
       'When the trade war ended, the envoy came clean; the timing fees were surrendered, and the desk sealed against the habit.',
     ],
     historicized: [
-      'The embargo is lifted, but the desk still leaks; the terms that made the leaking valuable are repealed.',
+      'The embargo is over, but the envoy still sells word of trade policy to the same merchants before it is announced.',
     ],
     'exposed-public': [
       'It is public that the embargo\'s terms were sold in advance from the envoy\'s desk, and the ruined are matching their losses to the forewarned\'s gains.',
-      'The advance sales are out: the envoy retailed the future of the town\'s trade, and the buyers\' fortunes date the deliveries.',
+      'It is out that the envoy sold the town\'s trade news in advance, and the buyers\' sudden fortunes show when each sale was made.',
+      "Merchants ruined by the embargo can see whose fortunes rose just before it, and the envoy's desk is where the news came from.",
     ],
     're-adjudicated': [
-      'The old buyers are destroyed, but the trade is still strangled, and the foreknowledge trade continues to new subscribers.',
+      'Whoever paid the envoy before is gone, but now an embargo strangles the trade, and the envoy sells its terms in advance to whoever pays.',
     ],
   },
   'levied-away': {
     attributed: [
-      'With the town\'s strength at war, the reports the envoy sends home decide what help comes and when; the reports are edited now, and the editor is paid by those who prefer the help delayed.',
-      'The envoy\'s dispatches are the town\'s voice abroad while its men are away fighting, and the voice has been bought; what home hears is curated by interests home has never met.',
+      "With the town's fighters away at war, the envoy's reports home decide what help comes and when. The envoy cuts them now, paid by those who want the help to come late.",
+      "While the town's fighters are away, the envoy's dispatches are the town's voice abroad, and someone has bought it; what home hears is chosen by whoever pays the envoy.",
     ],
     're-caused': [
-      "The envoy's first cause resolved, but the levy made the dispatches decisive, and the editing fees now sustain the arrangement.",
+      'Whatever first drew the envoy in is over, but now the fighters are away at war, and the envoy keeps taking pay to cut the dispatches.',
     ],
     reformed: [
       'The companies came home and the envoy sent the uncut record after the cut one, with the differences marked and the fees enclosed.',
       'When the strength returned, the envoy came clean; the curated dispatches were confessed, and the curators named to both capitals.',
     ],
     historicized: [
-      'The strength is home, but the dispatches are still curated; the war that made them decisive is over.',
+      'The fighters are home, but the envoy still cuts the dispatches for whoever pays.',
     ],
     'exposed-public': [
       'It is public that the town\'s voice abroad was edited for pay while its men fought, and the withheld paragraphs are being read aloud.',
-      'The editing is out: the envoy sold silence in the dispatches, and the help that never came now has an explanation.',
+      'It is out that the envoy was paid to leave things out of the dispatches, and the town knows now why help never came.',
+      'Families of the men who fought hear now what the envoy cut from the dispatches, and why no help came.',
     ],
     're-adjudicated': [
-      'The syndicate fell, but the strength is still levied away, and the dispatch-editing has been re-commissioned by new interests.',
+      'Whoever paid the envoy before is gone, but now the fighters are levied away to war, and the envoy cuts the dispatches for whoever pays.',
     ],
   },
   'garrison-drained': {
     attributed: [
-      'The envoy\'s foreign patrons pay well for honest assessments, and the honest assessment is that this town cannot defend itself; the envoy files it abroad monthly, itemized, with the gate rotations attached.',
-      'A hollow garrison is valuable intelligence, and the envoy is its exporter; the weakness travels abroad in diplomatic language, and the finder\'s fee travels back.',
+      'Buyers abroad pay the envoy for honest reports, and the honest report is that this town cannot defend itself. The envoy sends it abroad every month, with the gate watches attached.',
+      'The envoy sells word of the emptied garrison abroad; the weakness goes out in polite language, and the envoy\'s fee comes back.',
     ],
     're-caused': [
-      "The envoy's first reason passed, but the garrison hollowed after, and the weakness reports now earn the arrangement's keep.",
+      "Whatever first drew the envoy in is over, but now the garrison is hollowed out, and the envoy is paid for reports on its weakness.",
     ],
     reformed: [
       'The garrison was refilled and the envoy corrected the record abroad; the weakness reports were retracted, and the retraction cost the fees.',
       'With the ranks restored, the envoy came clean; the exported assessments were confessed to the council with the patrons\' names.',
     ],
     historicized: [
-      'The garrison stands full again, but the assessments still go abroad; the weakness they described has been repaired without their notice.',
+      'The garrison is back to strength, but the envoy still sends reports of its weakness abroad to the same buyers.',
     ],
     'exposed-public': [
       'It is public that the envoy exported the town\'s weakness with the gate rotations attached, and the town is changing the rotations first and the locks second.',
-      'The weakness reports are out: the envoy sold the hollow garrison abroad by the month, and the buyers are the town\'s new anxiety.',
+      'It is out that the envoy sold reports on the emptied garrison abroad every month, and the town is worried about who bought them.',
+      'The town is changing the gate rotations because the envoy sold them abroad, along with word of the empty garrison.',
     ],
     're-adjudicated': [
-      'The old patrons are destroyed, but the garrison is still drained, and the weakness trade has found the envoy new readers.',
+      'Whoever paid the envoy before is gone, but the garrison stands hollow now, and the envoy sells reports on it to whoever pays.',
     ],
   },
   'siege-scarred': {
     attributed: [
-      'The envoy carries the peace terms between the camps, and each camp reads the other\'s first; the carrying is the office, the pre-reading is the income.',
-      'War diplomacy runs through the envoy\'s satchel, and the satchel leaks by appointment; both sides negotiate against terms they have already bought.',
+      "The envoy carries peace terms between the camps and sells each camp an early look at the other's terms.",
+      'The war\'s talks go through the envoy\'s satchel, and each side pays to read it, so both bargain against terms they have bought.',
     ],
     're-caused': [
-      "The envoy's old cause cleared, but the war pressed in, and the satchel's leaks now finance the arrangement.",
+      "Whatever first drew the envoy in is over, but now the war presses in, and the envoy sells looks inside the satchel.",
     ],
     reformed: [
       'The war receded and the envoy confessed the pre-readings to both camps at once, which is the only safe order to do it in.',
       'With the pressure lifted, the envoy came clean; the leak fees were surrendered, and the satchel carried its last terms sealed.',
     ],
     historicized: [
-      'The war moved on, but the satchel still leaks by appointment; the negotiations that priced it have concluded.',
+      'The war has moved on, but the envoy still sells looks inside the satchel to anyone who pays.',
     ],
     'exposed-public': [
       'It is public that both camps bought each other\'s terms from the envoy\'s satchel, and the peace they signed is being re-read for what the leaking bought.',
-      'The pre-readings are out: the envoy sold the negotiation to itself, and both signatories want the difference refunded.',
+      'It is out that the envoy sold each side the other\'s terms, and both sides want their money back.',
+      "Both sides of the war learned they bought each other's terms from the same envoy, and the peace they signed is being read again.",
     ],
     're-adjudicated': [
-      'The syndicate is broken, but the war still presses, and the satchel\'s appointments have been rebooked by new clients.',
+      'Whoever paid the envoy before is gone, but now the war presses close, and whoever pays can read the satchel.',
     ],
   },
   occupation: {
     attributed: [
-      'The envoy is accredited to the occupier now, and the accreditation is earned; the protests filed are hollow by agreement, and the townsfolk who ask for intercession are reported for asking.',
-      'The mission survives the occupation by serving it; the envoy\'s official complaints arrive pre-softened, and the occupier\'s answers arrive pre-approved, and the theater fools only the town.',
+      'The envoy now answers to the occupier. The protests the envoy files are empty by agreement, and townsfolk who ask the envoy for help are reported for asking.',
+      "The mission survives the occupation by serving it. The envoy's complaints are softened before they are sent, the occupier's answers are agreed beforehand, and the town believes the protests are real.",
     ],
     're-caused': [
-      "What first compromised the envoy is gone; the occupier's accreditation sustains the mission now, and the hollow protests keep the accreditation.",
+      "Whatever first drew the envoy in is over, but now the mission stands by the occupier's leave, and the empty protests keep it that way.",
     ],
     reformed: [
       'The occupier withdrew and the envoy published the agreement that had hollowed the protests, with every reported name and an unsoftened apology.',
       'With the occupation ended, the envoy came clean; the pre-approved theater was confessed, and the reported petitioners sought out one by one.',
     ],
     historicized: [
-      'The occupier is gone, but the envoy still files protests shaped for a censor; the agreement that shaped them expired with the occupation.',
+      'The occupier is gone, but the envoy still files protests as if the occupier were reading them.',
     ],
     'exposed-public': [
       'It is public that the envoy\'s protests were theater by agreement, and the petitioners who were reported for asking help are the first to speak.',
-      'The accreditation\'s price is out: hollow complaints and reported names, and the envoy\'s signature on the arrangement.',
+      'It is out that the envoy bought the occupier\'s favor with empty complaints and the names of those who asked for help.',
+      'The petitioners who asked the envoy for help, and were reported to the occupier for it, are the first to tell the town.',
     ],
     're-adjudicated': [
-      "The envoy's old paymaster is destroyed, but the occupier remains, and the accreditation has been renewed on the standing terms.",
+      "Whoever paid the envoy before is gone, but now the occupier holds sway, and the envoy files the same empty protests for it.",
     ],
   },
   'conduct-drift': {
     attributed: [
-      'A dark patron prizes betrayal above all offerings, and the envoy\'s office is made of trusts to betray; each broken confidence returns as favor, and the envoy has grown rich in favor.',
-      'The envoy\'s treacheries have acquired a theology; a patron that rewards the betrayed trust sponsors them, and the diplomatic pouch has become a reliquary of other people\'s secrets.',
+      'A dark patron rewards betrayal above all, and the envoy\'s work is full of trusts to betray. Each broken confidence brings the envoy favor, and the envoy has had a great deal of it.',
+      'A patron that rewards betrayed trust pays for the envoy\'s treacheries, and the mission\'s pouch is full of other people\'s secrets.',
     ],
     're-caused': [
-      "The envoy's first cause resolved, but a patron that rewards the deed adopted the treacheries, and its favor now retains them.",
+      "Whatever first drew the envoy in is over, but now a dark patron rewards the betrayals, and its favor keeps them coming.",
     ],
     reformed: [
       "The patron's shadow lifted and the envoy stopped the betrayals; the broken confidences were confessed to their owners, unprompted and complete.",
       'With the rewarding patron gone, the envoy came clean; the sponsored treacheries lost their wages, and the envoy found nothing else in them.',
     ],
     historicized: [
-      'The patron is gone, but the envoy still breaks confidences by habit; the sponsorship that trained the hand is over.',
+      'The patron is gone, but the envoy still betrays whoever trusts the mission.',
     ],
     'exposed-public': [
-      'It is public that the envoy\'s betrayals were devotions to a dark patron, and every broken trust is being recounted as an offering.',
-      'The sponsorship is out: treachery from this mission was paid worship, and the capitals that trusted the envoy have been told.',
+      'It is now known that the envoy\'s betrayals were offerings to a dark patron, and everyone the envoy betrayed is telling their story again.',
+      'It is out that a dark patron paid for the envoy\'s betrayals, and the governments that trusted the envoy have been told.',
+      'Everyone the envoy betrayed is telling their story again, now that a dark patron is known to have paid for it.',
     ],
     're-adjudicated': [
-      "The syndicate fell, but the patron that rewards the deed still stands, and the envoy's treacheries passed into its service whole.",
+      "Whoever paid the envoy before is gone, but now a dark patron rewards betrayal, and the envoy betrays trusts for its favor.",
     ],
   },
   'conversion-pressure': {
     attributed: [
-      'The rival faith funds the mission\'s expenses now, and the mission carries their people; missionaries travel in the envoy\'s baggage as clerks and translators, and the credentials are real because the envoy signs them.',
-      'The envoy\'s diplomatic immunity has become a corridor; the rival faith moves its preachers and its purse through it, and the tolls fund the embassy.',
+      'The rival faith pays the mission\'s expenses now, and its missionaries travel in the envoy\'s train as clerks and translators, on real papers the envoy signs.',
+      'The rival faith moves its preachers and its money through the envoy\'s immunity, and its payments keep the embassy running.',
     ],
     're-caused': [
-      "The envoy's first reason passed; the rival faith's funding replaced it, and the credentialed missionaries keep the corridor open.",
+      "The envoy's first reason is gone, but now a rival faith presses in and pays, and its missionaries travel on the envoy's papers.",
     ],
     reformed: [
       'The rival faith withdrew and the envoy voided the false credentials; the corridor closed, and the funded expenses were repaid.',
       'When the conversion pressure broke, the envoy came clean; the baggage-clerks were named as preachers, and the immunity restored to its purpose.',
     ],
     historicized: [
-      'The rival faith gave up the town, but the corridor is still open; the mission it carried has stopped sending.',
+      'The rival faith has given up on the town, but its people still travel on the envoy\'s papers.',
     ],
     'exposed-public': [
       'It is public that the mission\'s baggage carried the rival faith\'s preachers under real credentials, and the signing hand is known.',
-      'The corridor is out: the envoy rented diplomatic immunity to the conversion, and both congregations are auditing the clerks.',
+      'It is out that the envoy lent the mission\'s immunity to the rival faith for pay, and both congregations are checking the clerks.',
+      "The rival faith's preachers came in with the mission's credentials, and the town has learned the envoy signed them for pay.",
     ],
     're-adjudicated': [
-      'The old patron is gone, but the rival faith still presses, and the corridor\'s tolls have been re-funded by its successors.',
+      'Whoever paid the envoy before is gone, but now a rival faith presses in, and its money buys passage for its people on the envoy\'s papers.',
     ],
   },
   secularization: {
     attributed: [
-      'A diplomatic seal is only as sacred as the oath under it, and the oaths here died with the faith; the envoy opens what should stay sealed and resells safe-conducts that were sworn, once, before a god.',
-      'With the faith gone cold, the envoy\'s sworn instruments became paper; safe-conducts are reissued to second buyers, and the original holders learn at the gate.',
+      'The mission\'s oaths were sworn to a faith gone cold, and the envoy no longer keeps them: sealed letters are opened, and sworn safe-conducts are sold twice.',
+      'With the faith gone cold, the envoy\'s sworn papers mean nothing. Safe-conducts are sold again to second buyers, and the first holders find out at the gate.',
     ],
     're-caused': [
-      "The envoy's first cause resolved, but the faith went cold behind it, and with the oaths dead, the resold instruments simply multiplied.",
+      "Whatever first drew the envoy in is over, but now the faith has gone cold, the oaths mean nothing, and the envoy sells safe-conducts twice.",
     ],
     reformed: [
       'The faith revived and the envoy re-swore the office\'s oaths; the double-issued safe-conducts were honored twice over at the mission\'s cost.',
       'When belief returned, the envoy came clean; the opened seals were confessed, and the instruments made single and sacred again.',
     ],
     historicized: [
-      'The faith warmed again, but the instruments still ride double; the cold season that loosened the seals is past.',
+      'The faith has warmed again, but the envoy still sells safe-conducts twice, and the first holders still find out at the gate.',
     ],
     'exposed-public': [
       'It is public that the envoy resold sworn safe-conducts while the oaths meant nothing, and the stranded holders are presenting both copies.',
-      'The opened seals are out: the envoy treated the sacred instruments as stationery, and the reviving faith is reading the wax.',
+      'It is out that the envoy opened sealed letters while the faith was cold, and the returning faithful are going through them.',
+      'People stranded on a safe-conduct the envoy sold twice are holding up both copies and asking which one was ever good.',
     ],
     're-adjudicated': [
-      "The envoy's paymaster fell, but the faith is still cold, and no revived oath seals the instruments against the habit.",
+      "Whoever paid the envoy before is gone, but now the faith has gone cold, and no oath stops the envoy selling the papers twice.",
     ],
   },
   'clergy-scandal': {
     attributed: [
-      'The temple\'s disgrace must not reach the foreign courts, and the envoy is paid to see it does not; the containment is professional, the retainer is generous, and the leverage compounds monthly.',
-      'Abroad, the clergy\'s scandal is a rumor, and the envoy keeps it one; dispatches are trimmed, inquiries misdirected, and the temple pays the mission\'s best salary for the service.',
+      'The temple\'s disgrace must not reach foreign courts, and the temple pays the envoy well to see it does not. Each month the envoy knows more of the temple\'s secrets.',
+      'Abroad, the clergy scandal is only a rumor, and the envoy keeps it that way: dispatches are cut, questions are sent the wrong way, and the temple pays well for it.',
     ],
     're-caused': [
-      "The envoy's first reason resolved, but the tainted priesthood needed containment abroad, and the retainer now carries the arrangement.",
+      "The envoy's first reason is gone, but now the priesthood is tainted, and the priests pay the envoy to keep the scandal quiet abroad.",
     ],
     reformed: [
       'The priesthood was cleansed and the envoy ended the containment; the trimmed dispatches were completed and re-sent, with the retainer returned.',
       "With the clergy's scandal resolved, the envoy came clean; the misdirected inquiries were answered honestly, however late.",
     ],
     historicized: [
-      'The temple was set in order, but the containment retainer still arrives; the scandal it suppresses is already absolved.',
+      'The temple has been set in order, but the envoy still trims the dispatches about it, and the temple still pays.',
     ],
     'exposed-public': [
-      'It is public that the envoy was the scandal\'s customs officer, and the foreign courts are reading the untrimmed record at last.',
-      'The containment is out: the temple\'s disgrace was managed abroad for a retainer, and the manager\'s name is on the receipts.',
+      'It is now known that the envoy kept the scandal from the foreign courts, and they are reading the full reports at last.',
+      'It is out that the envoy hid the temple\'s disgrace abroad for pay, and the envoy signed for every coin.',
+      "The foreign courts are reading the full story of the temple's disgrace at last, and the envoy signed for every coin paid to hide it.",
     ],
     're-adjudicated': [
-      "The syndicate is gone, but the priesthood's taint remains, and the containment retainer has been assumed by new principals.",
+      'Whoever paid the envoy before is gone, but now the priesthood is tainted, and the temple pays the envoy to keep it quiet abroad.',
     ],
   },
   captured: {
     attributed: [
-      'The syndicate discovered what the envoy always knew: diplomatic baggage is never searched; their goods travel under the mission\'s seals now, and the envoy\'s allowance reflects the tonnage.',
-      'The underworld holds the offices, and the mission\'s immunity is its favorite; the envoy\'s pouches ride heavy, and the weight is never diplomatic.',
+      'The underworld has learned that diplomatic baggage is never searched. Its goods travel under the mission\'s seals, and the envoy is paid by the weight.',
+      'The underworld holds the offices, and it uses the mission\'s immunity most of all. The envoy\'s pouches ride heavy, and not with letters.',
     ],
     're-caused': [
-      "The envoy's old cause resolved, but the underworld holds the offices now, and an immunity it uses is not returned to its owner.",
+      "Whatever first drew the envoy in is over, but now the underworld holds the offices, and it uses the envoy's immunity.",
     ],
     reformed: [
       'The capture was broken and the envoy opened the baggage to the magistrates; the tonnage records were produced from the envoy\'s own files.',
       "With the syndicate's grip broken, the envoy came clean; the heavy pouches were confessed, and the immunity surrendered until trust returned.",
     ],
     historicized: [
-      'The capture was broken, but the pouches still ride heavy; the customer is gone and the route remembers itself.',
+      'The underworld\'s hold on the offices is broken, but the envoy\'s pouches still ride heavy with goods no one searches.',
     ],
     'exposed-public': [
-      'It is public that the mission\'s baggage moved the syndicate\'s goods, and every unsearched crossing is being reweighed from the records.',
-      'The tonnage is out: the envoy rented the seals to the underworld by weight, and the allowance books kept honest track of the dishonesty.',
+      'It is now known that the mission\'s baggage carried the underworld\'s goods, and every unsearched crossing is being checked again.',
+      'It is out that the envoy rented the mission\'s seals to the underworld by weight, and the envoy took a fee on every load.',
+      'Every crossing the mission made unsearched is being checked again, because the envoy rented its seals to the underworld.',
     ],
     're-adjudicated': [
-      'The syndicate that filled the pouches is destroyed, but the offices are still captured, and the new holders have re-booked the route.',
+      "Whoever filled the pouches before is gone, but now the underworld holds the offices, and its goods travel the same route under the envoy's seal.",
     ],
   },
   scandal: {
     attributed: [
-      'The town\'s scandal is valuable abroad, and the envoy is its exporter; the disgrace travels out as intelligence briefs, priced by the name, and the foreign buyers file it for later.',
-      'Every capital wants to know which of this town\'s hands are dirty, and the envoy sells the manicure records; the scandal\'s details leave in the dispatch case and the fees come back in it.',
+      'The town\'s scandal is worth money abroad, and the envoy sells it: names go out in the dispatches, priced one by one, and foreign buyers keep them for later.',
+      'Every foreign government wants to know whose hands are dirty in this town, and the envoy sells the answer. The scandal\'s details leave in the dispatch case, and the fees come back in it.',
     ],
     're-caused': [
-      "The envoy's first cause cleared, but the scandal broke behind it, and exporting its details now sustains the arrangement.",
+      "The envoy's first reason is gone, but now a scandal has broken, and the envoy sells its details abroad.",
     ],
     reformed: [
       'The scandal burned out and the envoy recalled the briefs where recalling was possible, and confessed the rest to the council by name.',
       'When the scandal settled, the envoy came clean; the export fees were surrendered, and the buyers\' identities filed with the magistrates.',
     ],
     historicized: [
-      'The scandal is old news at home, but the envoy still exports it; the foreign appetite outlived the local one.',
+      'The scandal has died down at home, but the envoy still sells its details to buyers abroad.',
     ],
     'exposed-public': [
       'It is public that the envoy sold the town\'s disgrace abroad by the name, and the named are learning which capitals hold their files.',
-      'The export trade is out: the scandal\'s details crossed the border in the dispatch case, and the town\'s shame has foreign shareholders now.',
+      'It is out that the envoy sold the scandal\'s details abroad, and foreign governments now hold the town\'s shame.',
+      'The people named in the scandal are learning which foreign capitals bought their names from the envoy.',
     ],
     're-adjudicated': [
-      "The syndicate is broken, but the scandal's economy survives, and the export trade has been re-brokered to new buyers.",
+      'Whoever paid the envoy before is gone, but now a scandal has broken, and the envoy sells the names in it to whoever pays abroad.',
     ],
   },
 };

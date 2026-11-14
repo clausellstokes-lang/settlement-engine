@@ -37,7 +37,7 @@ export const AXES = [
     title: 'Who decides',
     question: 'May the realm act without your approval?',
     options: [
-      ['dm_only', 'Your word only', 'The world computes consequences; every new move awaits your word.', true],
+      ['dm_only', 'Your word only', 'The world works out what follows; every new move awaits your word.', true],
       ['recommendations', 'Proposes to you', 'The realm suggests its moves and explains itself; you decide.', true],
       ['routine', 'Routine autonomy', 'Ordinary life runs itself; major turns ask you first.', true],
       ['full', 'Full autonomy', 'The realm acts on its own, major turns included.', true],
@@ -119,9 +119,9 @@ const DOMAIN_ROWS = [
 
 const DOMAIN_STATE_LABELS = { off: 'Off', dm: 'By your leave', auto: 'On its own' };
 
-const DRIFT_REASON = 'Needs Diplomacy: war is a relationship dynamic, so a frozen web cannot raise fronts.';
-const WAR_DM_DEFERRED = 'War by-your-leave arrives with the war-layer rework. Off still lets you narrate wars yourself; the engine just never starts one.';
-const SEASONS_DM = 'The year turns of its own accord. There is no leave to ask of winter.';
+const DRIFT_REASON = 'Needs Diplomacy: wars start from the ties between settlements, and with Diplomacy off those ties never change.';
+const WAR_DM_DEFERRED = 'War cannot ask your leave yet. With War off you can still narrate wars yourself; the realm simply never starts one.';
+const SEASONS_DM = 'The seasons turn on their own; they cannot wait for your leave.';
 const DM_STATE_GLOBAL = 'Approval is realm-wide today: set “Who decides” to “Your word only” or “Proposes to you”. Per-domain approval arrives in a later chapter.';
 
 // One selectable world-assumption chip inside an axis card or domain row.

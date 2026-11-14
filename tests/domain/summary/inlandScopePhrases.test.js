@@ -44,8 +44,12 @@ describe('an inland Norse or Slavic birth prints a scope phrase (was mute)', () 
 describe('the waterside forms are untouched', () => {
   it('on water the sea lines print as before', () => {
     expect(cultureScopeLine({ ...soak1k1, config: { terrainType: 'coastal', tradeRouteAccess: 'road' } }))
-      .toBe('Norse-inspired, built around the hall and the water, on assembly and what the season allows.');
+      // STYLE-2 A·O2: the season has no record field, so the water line keeps its kin and oath
+      .toBe('Norse-inspired, built around the hall and the water, on kin, oath and the assembly.');
+    // STYLE-2 A·O2: a riverside city with no forest is "by the river"; the forest prints only on forest ground
     expect(cultureScopeLine({ ...soak1k52, institutions: [], config: { terrainType: 'riverside', tradeRouteAccess: 'road' } }))
+      .toBe('Slavic-inspired, built in timber compounds on common land, by the river.');
+    expect(cultureScopeLine({ ...soak1k52, institutions: [], config: { terrainType: 'forest', tradeRouteAccess: 'river' } }))
       .toBe('Slavic-inspired, built in timber compounds on common land, between river and forest.');
   });
   it('a record with no config reads as it always did', () => {

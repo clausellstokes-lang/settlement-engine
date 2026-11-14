@@ -16,7 +16,7 @@ import { pick, random01, randInt } from './helpers.js';
 import { random as _rng, getActiveRng } from '../kernel/rngContext.js';
 
 import { genArrivalDetail } from './narrativeGenerator.js';
-import { AGE_BY_TIER, HISTORICAL_EVENTS_DATA, EVENT_TYPE_NAMES, historyDescription } from '../data/historyData.js';
+import { AGE_BY_TIER, HISTORICAL_EVENTS_DATA, EVENT_TYPE_NAMES, historyDescription, historyDescVariantsOf, tensionDescription } from '../data/historyData.js';
 import { resolveGenerationWorldLaw } from './generationContext.js'; import { defenseFactsOf } from '../domain/defense/defenseFacts.js'; import { crimeSignalOf } from '../domain/crimeSignal.js'; // R6 (and F4 unit 3b): one line, so no cited line moves
 import {
   STRESS_TO_TENSION,
@@ -208,7 +208,7 @@ const resolveTimelineHook = (drawnRow, eventTemplate, remaining, taken, printed,
 const generateEventNarrative = (eventTemplate, yearsAgo, extraTokens = {}, descSeed = null, hookFacts = null) => {
   // Template variable substitutions (can be overridden by extraTokens)
   const defaultTokens = {
-    '{quarter}': pick(['the market quarter', 'the residential district', 'the waterfront', 'the temple district']),
+    '{quarter}': pick(['the merchants\' quarter', 'the residential district', 'the waterfront', 'the temple district']),
     '{building_type}': pick(['wooden buildings', 'warehouses', 'housing', 'commercial buildings']),
     '{percent}': randInt(15, 60),
     '{duration}': randInt(1, 5),
@@ -298,21 +298,23 @@ const generateEventNarrative = (eventTemplate, yearsAgo, extraTokens = {}, descS
       // For older events (last century: 30–80y), reframe present-tense hooks as
       // historical discoveries — things uncovered now, not things actively happening.
       if (yearsAgo > 30 && drawnText) {
+        // W5 HIS (2026-11-07, the owner's style law): each prefix is a TELLING, so the present-tense hook after it
+        // reads as the story told then, not as a document's machinery.
         // {colour} (CENSUS-2e, R-R and R-AD; ledger ECHO_PREFIXES_DOSSIER.json): each prefix frames a past
         // discovery (old records, a document, an archivist's notes from that period); none asserts what the
         // place holds now, so none is a roster claim.
         const ECHO_PREFIXES = [
-          'Old records suggest ',
-          'A recently surfaced document implies ',
-          'Family accounts passed down from the time claim ',
-          "An archivist's notes from that period reveal ",
-          'Evidence that survived the years indicates ',
+          'An old story from that time: ',
+          'A letter found this year tells it this way: ',
+          'Families who lived through it tell it this way: ',
+          'The records of that time say: ',
+          'What survives from that time says: ',
         ];
         // Only prefix hooks that read as present-tense (contain present-tense signals)
         const presentTenseSignals = [' is ', ' are ', ' has ', ' have ', ' exists', ' exist', ' being '];
         const needsReframe = presentTenseSignals.some(sig => drawnText.toLowerCase().includes(sig));
         if (needsReframe) {
-          const prefix = ECHO_PREFIXES[Math.floor(_rng() * ECHO_PREFIXES.length)];
+          const prefix = ((p) => (yearsAgo > 60 && p === ECHO_PREFIXES[2] ? 'Family accounts passed down from that time tell it this way: ' : p))(ECHO_PREFIXES[Math.floor(_rng() * ECHO_PREFIXES.length)]); // COHERENCE-PRESUME (ruling B): past sixty years (TIME_BANDS: older than its bearers) no family lived through it; the twin, chosen by age after the same roll
           // Lowercase the first letter of the hook when adding prefix (CENSUS-1f: a resolved row that
           // does not read as present tense keeps its own words; the roll was the drawn row's)
           if (hook && presentTenseSignals.some(sig => hook.toLowerCase().includes(sig))) hook = prefix + hook.charAt(0).toLowerCase() + hook.slice(1);
@@ -373,7 +375,7 @@ const buildHistoricalEvent = (
   factions = [],
   context = {},
   worldLaw,
-  hookFacts = null,
+  hookFacts = null, timeline = [], // URBAN-FIX D-1: the timeline, built before the tensions, so a tension's words follow its own event's age
 ) => {
   // Resolve active stress type
   const stresses = config.stressTypes?.length ? config.stressTypes : config.stressType ? [config.stressType] : [];
@@ -431,7 +433,7 @@ const buildHistoricalEvent = (
     if ((economicViability.issues?.length || 0) > 0) {
       const tmpl = HISTORICAL_EVENTS_DATA.find(e => e.type === 'resource_scarcity');
       if (tmpl && _rng() > 0.4) {
-        const commodity = deriveTradeCommodity(economicState) || 'key goods';
+        const commodity = deriveTradeCommodity(economicState); // SW-B5: no 'key goods' fallback; no commodity, no clause
         // Viability issues carry `.description` canonically; only stress-derived ones
         // also set `.message`. Reading `.message` alone interpolated the literal
         // 'undefined' into dossier/PDF/AI-grounding prose for every description-only
@@ -443,10 +445,10 @@ const buildHistoricalEvent = (
         // W1 ECO second seat (the owner's style law, 2026-11-07): the lead names what the place lives
         // by (its first export) and says that trade is strained; the top issue that follows is the
         // evidence (on a migration it is the ARRIVALS food note; a departures record writes none).
-        const lead = `Life here runs mostly on the ${commodity} trade, and that trade is under strain.`;
+        const lead = commodity ? `Life here runs mostly on the ${commodity} trade, and that trade is under strain.` : '';
         selected.push({
           ...tmpl,
-          description: issueText ? `${lead} ${issueText}` : lead,
+          description: [lead, issueText].filter(Boolean).join(' ') || tmpl.description,
           specificIssue: issueText,
         });
         usedTypes.add('resource_scarcity');
@@ -556,12 +558,12 @@ const buildHistoricalEvent = (
   const tensionTokens = buildCurrentTensionTokens(context);
   return selected
     .filter(worldLaw.allowsHistoryEvent)
-    .map(tension => ({
+    .map((tmpl) => tensionByMemory(tmpl, timeline)).map(({ descriptionByDirection, ...tension }) => ({ // #20: the direction table is the template's, never the record's; URBAN-FIX D-1: so is the memory table
       ...tension,
-      description: renderHistoryTemplate(
-        substituteNames(tension.description),
-        tensionTokens,
-      ),
+      description: apartFromOwnEvent(renderHistoryTemplate(
+        substituteNames(tensionDescription({ ...tension, descriptionByDirection }, config)), // #20: the migration's own direction
+        tensionTokens, // COHERENCE-PRESUME: never its own past event's sentence, word for word (apartFromOwnEvent)
+      ), tension.type, timeline, (text) => renderHistoryTemplate(substituteNames(text), tensionTokens)),
       factions: (tension.factions || []).map(substituteNames),
       // CENSUS-3d unit 6: a tension prints its template's whole hook list (kind A), so the list is
       // filtered by the record (a refused row leaves it) and stored as text; a list that declares
@@ -764,7 +766,7 @@ const generateRelationshipEvent = (age, tier, config, context, worldLaw, hookFac
         'After years of disputed grain prices, the major farming families and the merchant guilds negotiated a formal compact regulating grain sale and storage. It held for a generation.',
       lastingEffects: [
         'Grain price regulation persists in modified form',
-        "Compact signatories' families still hold preferential market positions",
+        "Compact signatories' families still hold first call on the grain sales",
       ],
       plotHooks: [
         'A clause in the compact entitles certain families to first refusal on grain sales, and the current shortage makes that clause valuable',
@@ -948,7 +950,7 @@ export const generateHistory = (
     tier,
     economicState,
     config,
-    powerStructure?.factions || [], context, worldLaw, hookFacts,
+    powerStructure?.factions || [], context, worldLaw, hookFacts, timeline,
   );
 
   // Derive historical character from event pattern
@@ -1058,4 +1060,48 @@ function speakFounding(founding, noun) {
   const out = /** @type {Record<string, unknown>} */ ({ ...founding });
   for (const [key, value] of Object.entries(out)) out[key] = speakStored(value, noun);
   return out;
+}
+
+// ─── URBAN-FIX D-1: a tension's words follow what the timeline holds of its own event ────────
+// (the chair's urban ruling D, 2026-11-09; URBAN-AUDIT §4). The tension and the timeline are drawn
+// independently from one table, so a tension's "source" is the timeline event of its own template
+// (`templateType`, the reader battery's own identity, readerBattery.js :: tensionMemoryFindings).
+// At the file's end on purpose, beside the SIZE helpers: nothing is inserted above the producer
+// writes the prose wiring census cites by line. Draw-free: no stream moves.
+
+/**
+ * A selected tension template with its memory table taken off (the table is the template's, never
+ * the record's) and, where the template carries one, the DATED words in place of its own: its own
+ * event sits on the timeline older than 80 years, so no living participant is named. URBAN-FIX D-1b:
+ * where the timeline holds NO event of its template, the UNANCHORED words, which name no past event.
+ * @param {any} tmpl a selected template copy
+ * @param {ReadonlyArray<any>} timeline the history's events, built before the tensions
+ * @returns {any}
+ */
+function tensionByMemory(tmpl, timeline) {
+  const { byMemory, ...tension } = tmpl;
+  if (!byMemory) return tension;
+  const own = (Array.isArray(timeline) ? timeline : []).find((e) => e?.templateType === tension.type);
+  // 80: the page's Ancient boundary (HistoryTab.jsx :: recencyLabel, up to 80 years is "Last century"), the
+  // same line generateEventNarrative draws for the hooks of living memory
+  const words = !own ? byMemory.unanchored : Number(own.yearsAgo) > 80 ? byMemory.dated : null;
+  return words ? { ...tension, ...words } : tension;
+}
+
+// ─── COHERENCE-PRESUME (the chair's ruling B, 2026-11-11): a current tension is not its past event, word for word ──
+// The tension and the timeline are drawn from one table, and an event that draws its template's canonical sentence
+// printed it again as the town's CURRENT tension (38 tensions in 37 of the 360 corpus towns). Where that happens the
+// tension takes the first of its template's authored variants whose words differ. Draw-free: nothing is rolled.
+
+/**
+ * @param {string} description the tension's rendered sentence
+ * @param {string} type its template type
+ * @param {ReadonlyArray<any>} timeline the history's events, built before the tensions
+ * @param {(text: string) => string} render the tension's own renderer
+ * @returns {string}
+ */
+function apartFromOwnEvent(description, type, timeline, render) {
+  const own = (Array.isArray(timeline) ? timeline : []).find((e) => e?.templateType === type);
+  if (!own || own.description !== description) return description;
+  return historyDescVariantsOf(type).map(render).find((text) => text !== own.description) ?? description;
 }

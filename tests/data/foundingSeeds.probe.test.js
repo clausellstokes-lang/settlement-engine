@@ -52,12 +52,15 @@ describe('claims-parity — each synopsis is proven by the forged world', () => 
     const stressTypes = (Array.isArray(t.stress) ? t.stress : [t.stress]).filter(Boolean).map((e) => e.type);
     expect(stressTypes).toContain('plague_onset');
     expect((t.powerStructure?.factions || []).map((f) => f.faction)).toContain('Quarantine Council');
-    // Receipt 3: a figure formalising the independent authority the collapse created.
+    // Receipt 3: the thieves' guild's master placed over the ground the failing seat has stopped watching.
     // R11 unit 3 (73fa1a1e7, the 76 registry goals rewritten in the house register) re-worded the two rows this
     // receipt reads, same registry rows (npcStructure.js): 'Formalize the independent operational authority ...' ->
     // "Get their trade's new freedoms written down ..." and '... identify an exit before the gap between title and
     // authority ...' -> '... or find a quiet way out of it.'
-    expect(goalsOf(t).some((g) => /new freedoms written down|find a quiet way out of it/i.test(g))).toBe(true);
+    // RE-KEYED 2026-11-09 (ALLEGIANCE-CAR4 STOP 4, the chair's ruling, by identity with the cause): the goal is A9's
+    // (people/goals.js), and the structural pass's condition goal this receipt read is retired; the condition register
+    // lives on the master's structural row, so the receipt reads the master as placed there.
+    expect(Boolean(masterOf(t))).toBe(true);
     // THE SPECIFICS THE SYNOPSIS QUOTES, re-pinned 2026-11-06 (LANDING-7 G2, the chair's ruling R-G2: crown-3, the
     // first crown seed forging the essential story; the specifics follow its world). The mining town and the
     // siege ten years past were crown-8826's; crown-3's two are the plague (receipt 2 above) and the thieves' guild.
@@ -127,12 +130,15 @@ describe('claims-parity — each synopsis is proven by the forged world', () => 
     expect(legitOf(t).label).toBe('Contested');
     // Receipt 2: an uprising of the first rank within the last fifteen years.
     expect(eventsOf(t).some((e) => /uprising/i.test(e.name) && e.severity === 'major' && e.yearsAgo <= 15)).toBe(true);
-    // Receipt 3: a figure holding the line around criminal/informal arrangements.
-    // R11 unit 3 (73fa1a1e7) re-worded the three rows this receipt reads, same registry rows (npcStructure.js):
-    // '... the informal arrangements it depends on' -> 'Keep the seat running without crossing the people whose
-    // payments keep it running.'; '... the criminal arrangements ...' -> 'Keep trading without paying the gangs ...';
-    // '... the corrupt interests ...' -> '... the bribers or the inquiry.'
-    expect(goalsOf(t).some((g) => /people whose payments keep it running|without paying the gangs|the bribers or the inquiry/i.test(g))).toBe(true);
+    // Receipt 3: figures in the town answer in secret to its criminal houses (the hidden allegiance, car 1's field).
+    // RE-WORDED 2026-11-09 by the owner's word ("Yes", ~03:5x UTC, relayed by the chair) under the chair's ruling on
+    // ALLEGIANCE-CAR2's STOP (claims-parity: a receipt says what the seed holds): the old receipt read npcStructure's
+    // corruption-condition goals, which printed while the strengths-only classifier called the hall 'corrupted'; the
+    // state is DERIVED from the hall's agents now (A6), and mini-3's ruling three hold no allegiance (its hall reads
+    // 'equilibrium', the climate's). Scanned mini-0..2999: no seed holds Contested + a major uprising + an agent in the
+    // ruling three, so the seed is kept and the receipt says what it holds: cards that carry an allegiance.
+    expect((Array.isArray(t.npcs) ? t.npcs : []).filter((n) => n?.allegiance && typeof n.allegiance === 'object' && n.allegiance.house).length,
+      'figures (plural) in the town answer in secret to its criminal houses').toBeGreaterThanOrEqual(2);
   });
 });
 
@@ -149,8 +155,14 @@ describe('claims-parity — each synopsis is proven by the forged world', () => 
 // commercial dominant row of npcStructure.js). MERGE-CAR, re-keyed by identity with its cause: the rows' WORDING is the
 // rung-2 landing's (R11, 73fa1a1e7: the formalising rows re-worded — the criminal "Take over whatever the seat has
 // stopped watching, and dig in …", the commercial "Get their trade's new freedoms written down …"), the IDENTITY the car's.
+// RE-KEYED 2026-11-09 (ALLEGIANCE-CAR4 STOP 4, the chair's ruling): A9 owns the goal and retired the condition goal this
+// identity read; the identity is now the master's STRUCTURAL ROW — head, governance_fractured, and the DOMINANT criminal
+// position (the subordinate row reads "secondary to the dominant criminal interest", so dominant-vs-subordinate stays).
 const masterOf = (t) => (Array.isArray(t.npcs) ? t.npcs : []).find((n) => (n?.memberships || []).some((m) => m.power === "Thieves' Guild" && m.rank === 1)
-  && /stopped watching, and dig in before it recovers|new freedoms written down/i.test(n?.goal?.short || ''));
+  && n?.settlementCondition === 'governance_fractured' && n?.structuralRank === 'head'
+  // Re-keyed by identity at STYLE-2-MERGE point 24 (red since point 22): SW-6 CRISIS-SURFACES 542d6e6b6 re-said the criminal
+  // head's GOVERNANCE_FRACTURED position in plain words (npcStructure.js); the same row, the same master.
+  && /Heads the leading crew while the seat fails; whatever the seat stops watching is there to take\./.test(n?.structuralPosition || ''));
 const governingOf = (t) => (t.powerStructure?.factions || []).find((f) => f.isGoverning);
 const thievesOf = (t) => (t.powerStructure?.factions || []).find((f) => f.faction === "Thieves' Guild");
 /** The showcase story's six facts, each a predicate on the forged world (the same truths the claims above pin). */
@@ -161,7 +173,7 @@ const FACTS = {
   'title unhonoured': (t) => legitOf(t).label === 'Legitimacy Crisis' && legitOf(t).governanceFractured === true
     && t.powerStructure?.government === 'Guild Council' && governingOf(t)?.faction === 'Guild Council',
   'thieves outweigh': (t) => (thievesOf(t)?.power ?? -1) > (governingOf(t)?.power ?? Infinity),
-  'master formalising': (t) => Boolean(masterOf(t)),
+  'master placed': (t) => Boolean(masterOf(t)),
 };
 
 /**
@@ -187,11 +199,11 @@ const LINK_FIELDS = {
       && (governingOf(t)?.rawPower ?? -1) > (thievesOf(t)?.rawPower ?? Infinity)
       && (thievesOf(t)?.power ?? -1) > (governingOf(t)?.power ?? Infinity) },
   // npcStructure: the master's goal is the template of the settlement condition the record stamps on her.
-  'npcs[].settlementCondition': { cause: 'title unhonoured', effect: 'master formalising',
+  'npcs[].settlementCondition': { cause: 'title unhonoured', effect: 'master placed',
     holds: (t) => masterOf(t)?.settlementCondition === 'governance_fractured' },
   // npcStructure: the master's standing, `head` (rank 1 of her first-rank power), with her power leading its category
   // within reach of the governing power, selects the formalising goal (the subordinate one only advances standing).
-  'npcs[].structuralRank': { cause: 'thieves outweigh', effect: 'master formalising',
+  'npcs[].structuralRank': { cause: 'thieves outweigh', effect: 'master placed',
     holds: (t) => masterOf(t)?.structuralRank === 'head' },
   // The stressor's own trace: would hold "harvests → plague" if a cause named the food record. resolveStress runs
   // before the economy, so its causes name tier, threat and the stress generator.

@@ -30,8 +30,15 @@ describe('the NPC writers read the crime signal', () => {
 
   // 2026-11-07 PEOPLE-1 CAST: re-keyed by identity 22 -> 52 (a city whose cast draws the secret; the probe over the
   // 1,000 at the lane's tip).
-  it("soak1k-52: the thieves'-guild secret takes the pool's own substitution", () => {
-    const { settlement } = birth(52);
+  // RE-KEYED BY IDENTITY AND CAUSE (ALLEGIANCE-CAR4, eabc93dfe ITEM 15): soak1k-52 -> soak1k-255. A face whose title the
+  // title table writes now draws its secret from its title's own lines (poolMap.js :: titleLinesFor), so far fewer faces
+  // draw the category pool's payroll row (a probe over the 1,000: the substituted secret in 3 places at the car's tip,
+  // ~45 at the base f6209c0c5) and 52's cast no longer does. 255 is the first: a town with no criminal power whose senior
+  // craft-guild master draws the row and takes the substitution. The title lines themselves pass the same writer
+  // (mergeNPCLists, after birth) and none names a network. The claim is unchanged.
+  it("soak1k-255: the thieves'-guild secret takes the pool's own substitution", () => {
+    const { settlement } = birth(255);
+    expect(settlement.powerStructure.factions.some((f) => f.category === 'criminal')).toBe(false);
     expect(npcsNaming(settlement, 'secret').map((n) => n.secret.what)).toEqual([]);
     expect(settlement.npcs.some((n) => n.secret?.what === 'On the payroll of a powerful outside interest as a silent informant')).toBe(true);
   });
@@ -39,10 +46,20 @@ describe('the NPC writers read the crime signal', () => {
   // 2026-11-07 PEOPLE-1 CAST: re-keyed by identity 531 -> 20 and 248 -> 5 (the cast draws different goals on the
   // same seeds); found by a probe over the 1,000 at the lane's tip: 20 is a village with no Thieves' Guild on the
   // roster whose cast draws the payroll goal, 5 carries the guild as a power and a card ranked second in it.
+  // RE-KEYED BY CAUSE (ALLEGIANCE-CAR4, 03ff59084 THE GOALS REBUILT): the payroll goal was a row of the role pool
+  // (NPC_FACTION_GOALS, rewritten by mergeNPCLists' crime-signal writer), and that draw is retired: every card's goal is
+  // now drawn at A9 (people/goals.js) from lines whose {power} / {rival} / {guild} slots are filled ONLY from the record,
+  // after mergeNPCLists. The same law on the new writer: no goal names a thieves' guild where the place has none
+  // (soak1k-20, a village with no criminal power), and the writer is not blind — beside a roster Thieves' Guild
+  // (soak1k-5) the goals do name it (the anti-vacuity the retired substitution gave). A probe over the 1,000 at the car's
+  // tip: 0 places without a crime signal print such a goal; 214 places with one print at least one.
   it("soak1k-20: the watch's goal names no thieves' guild", () => {
     const { settlement } = birth(20);
+    expect(settlement.powerStructure.factions.some((f) => f.category === 'criminal')).toBe(false);
     expect(npcsNaming(settlement, 'goal').map((n) => n.goal.short)).toEqual([]);
-    expect(settlement.npcs.some((n) => n.goal?.short === 'Identify which of their officers is on the payroll of a powerful outside interest')).toBe(true);
+    const { settlement: control } = birth(5);
+    expect(control.powerStructure.factions.some((f) => f.faction === "Thieves' Guild")).toBe(true);
+    expect(npcsNaming(control, 'goal').length, "soak1k-5: the A9 goals name the roster's Thieves' Guild").toBeGreaterThan(0);
   });
 
   // PEOPLE-LAND re-key, cause M-2 (the shim out): a card's powers are its memberships; the shim's

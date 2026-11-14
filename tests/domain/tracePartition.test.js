@@ -183,3 +183,52 @@ describe('EM-R5 — the generation trace partitioned by every step about a held 
     expect(out.slice(0, -1).some((entry) => entry.step === 'legacyStep')).toBe(false);
   });
 });
+
+// ALLEGIANCE-CAR1 (2026-11-08; the chair's ruling on the car's first STOP, the LIFECYCLE condition): the hidden
+// allegiance's receipt subject `people-allegiance::npc -> npcs` through birth, a regeneration and the edit layer's
+// partition. The receipt's shape: { step: 'people-allegiance', targetType: 'npc', targetId, result: 'allegiance',
+// causes: [allegiance.gate, flaw.<flaw>, corruption.climate (the chance and its terms), via.<via>],
+// downstreamEffects: [the house, the power when named, the handler] }.
+describe('the allegiance receipt — birth, regeneration and the partition (ALLEGIANCE-CAR1)', () => {
+  const town = async () => {
+    const { birth, ensureLaws } = await import('../../scripts/audit/soak-review/corpus.mjs');
+    await ensureLaws();
+    return birth(5).settlement; // a metropolis of the soak 1,000 that deals agents (measured)
+  };
+  const subject = (trace) => (trace || []).filter((t) => t.step === 'people-allegiance');
+
+  it('birth: one receipt per agent, with the roll\'s inputs; the subject resolves to npcs', async () => {
+    const s = await town();
+    const agents = s.npcs.filter((n) => n.allegiance);
+    expect(agents.length, 'anchored: the town deals agents').toBeGreaterThan(0);
+    const runs = subject(s.simulationTrace);
+    expect(runs.map((t) => t.targetId).sort()).toEqual(agents.map((n) => String(n.id)).sort());
+    for (const t of runs) {
+      expect(t.causes.map((c) => c.source.split('.')[0])).toEqual(['allegiance', 'flaw', 'corruption', 'via']);
+      expect(t.downstreamEffects.some((d) => d.effect === 'handles the agent')).toBe(true);
+    }
+    expect(traceSubjectKey(runs[0])).toBe('npcs');
+  }, 120_000);
+
+  it('a regeneration deals allegiances and records the subject (its run replaces the birth\'s)', async () => {
+    const { regenNPCsPipeline } = await import('../../src/generators/generateSettlementPipeline.js');
+    const s = await town();
+    const r = regenNPCsPipeline(s, s.config || {}, { seed: 'allegiance-regen' });
+    const agents = r.npcs.filter((n) => n.allegiance);
+    expect(agents.length, 'the regenerated cast deals allegiances').toBeGreaterThan(0);
+    expect(subject(r.simulationTrace).map((t) => t.targetId).sort()).toEqual(agents.map((n) => String(n.id)).sort());
+    expect(r.simulationTrace.length - subject(r.simulationTrace).length).toBe(s.simulationTrace.length - subject(s.simulationTrace).length);
+    r.simulationTrace.forEach((t, i) => expect(t.ts).toBe(i));
+  }, 120_000);
+
+  it('the partition carries the recorded subject when npcs is held, and derives it when not', async () => {
+    const s = await town();
+    const recorded = s.simulationTrace;
+    const derived = recorded.filter((t) => t.step !== 'people-allegiance');
+    const held = partitionTrace(recorded, derived, new Set(['npcs']));
+    expect(subject(held)).toEqual(subject(recorded).map((t) => ({ ...t, ts: held.indexOf(held.find((h) => h.targetId === t.targetId && h.step === t.step)) })));
+    expect(subject(held).length).toBeGreaterThan(0);
+    expect(carriedTraceSteps(new Set(['npcs'])).has('people-allegiance')).toBe(true);
+    expect(partitionTrace(recorded, derived, new Set())).toBe(derived);
+  }, 120_000);
+});

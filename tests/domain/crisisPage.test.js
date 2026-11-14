@@ -23,7 +23,7 @@ describe('the Crisis page, one section per active crisis', () => {
     for (const section of page) {
       const entry = entries.find((e) => e.type === section.type);
       expect(section.line.startsWith(entry.label)).toBe(true);
-      expect(section.line).toContain(CRISIS_PAGE_COPY.nature[entry.cast.nature]);
+      expect(section.line).toBe(`${entry.label}.`); // W4 second seat, row 21: the kind is the heading, no classification
       expect(section.cast.map((r) => r.name)).toEqual(entry.cast.roles.map((r) => r.name));
       for (const r of section.cast) expect(r.reason.length).toBeGreaterThan(0);
       expect(section.stakes.length).toBe(entry.cast.stakes.length);
@@ -69,5 +69,23 @@ describe('the Crisis page, one section per active crisis', () => {
   it('a crisis the DM\'s own event began says so; a generated one prints no onset', () => {
     const page = composeCrisisPage({ stress: [{ type: 'famine', label: 'Famine', addedByEventId: 'e1' }, { type: 'wartime', label: 'Wartime' }] });
     expect(page.map((x) => x.line)).toEqual([`Famine, ${CRISIS_PAGE_COPY.begunByYou}.`, 'Wartime.']);
+  });
+});
+
+// SW-6 CRISIS-SURFACES (STYLE-RULINGS-2 B3; STYLE-2-SURFACES A·C4): "Noble Families: split. not touched yet; it
+// could side with either camp." contradicted itself on every untouched row (soak1k-4, -5, -9, -10). The page prints
+// an untouched power as having no stake yet; the record keeps its split for the waverer's rule.
+describe('the Crisis page: an untouched power is never "split"', () => {
+  it('an untouched stake prints "no stake yet", and no row says both split and untouched', () => {
+    const s = gen('crisis-page-pair', 'town', ['famine', 'under_siege']);
+    for (const section of composeCrisisPage(s)) {
+      for (const k of section.stakes) {
+        const printed = `${k.factionId}: ${CRISIS_PAGE_COPY.stake[k.stake]}. ${k.reason}.`;
+        // anchored: the subject is the exact text or constant asserted positively beside it (SW-6), so it cannot have drifted away
+        expect(printed).not.toMatch(/split\. not touched/);
+        if (/either camp/.test(k.reason)) expect(CRISIS_PAGE_COPY.stake[k.stake]).toBe('no stake yet');
+      }
+    }
+    expect(composeCrisisPage(s).some((x) => x.stakes.some((k) => k.stake === 'untouched'))).toBe(true);
   });
 });

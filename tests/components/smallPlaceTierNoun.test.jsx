@@ -66,8 +66,10 @@ const TABS = [
   ['Power', (s) => <PowerTab powerStructure={s.powerStructure} settlement={s} />],
   ['PlotHooks', (s) => <PlotHooksTab settlement={s} />],
 ];
-// W1 ECO (2026-11-07): DS-ECO-1 C4 v2 reworded under the owner's style law ("The {access} into {settlement} is busy and the town is poor").
-const HEADER = /The \p{L}+ into [\p{L}' -]+? is busy and the \p{L}+ is poor/u;
+// W1 ECO (2026-11-07): DS-ECO-1 C4 v2 reworded under the owner's style law; W1-A0b (2026-11-08) drops its {access} slot, an A0b over-claim ("The way into {settlement} is busy and the town is poor").
+// SW-B6 (2026-11-09, STYLE-RULINGS-2 B6): C4 v2 rewritten again ("Plenty passes through {settlement}, and little of it
+// stops. The town is poor, and its people say so to anyone who asks."); the pin follows the same variant by identity.
+const HEADER = /little of it stops\. The \p{L}+ is poor/u;
 
 function expandAll(container) {
   for (let pass = 0; pass < 4; pass += 1) {

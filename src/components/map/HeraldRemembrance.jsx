@@ -122,7 +122,7 @@ function RemembranceRow({ row }) {
       )}
       {row.receiptsRedacted && (
         <div style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontStyle: 'italic' }}>
-          The keeper&rsquo;s record of the cause is sealed to this reader.
+          What caused it is for the DM&rsquo;s eyes only.
         </div>
       )}
     </div>

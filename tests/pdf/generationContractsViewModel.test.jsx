@@ -121,7 +121,10 @@ describe('owner PDF generation-contract projection', () => {
     expect(vm.identity.anchor.culturalNotes).toBe(settlement.culturalNotes);
   });
 
-  it('renders the cultural identity and coherence summary into the DM chapter', () => {
+  // RE-KEYED BY CAUSE (STYLE-RULINGS-2 B4, 2026-11-09): the coherence summary is the engine's
+  // self-check and left the reader's chapter; the view model still projects it (the test above), and
+  // the DM's receipt (VersionsTab :: GenerationReceipt) is its one printed home.
+  it('renders the cultural identity into the DM chapter and keeps the coherence summary off it', () => {
     const vm = buildViewModel({ settlement });
     const text = collectText(
       IdentityDailyLife({ settlement, narrativeMode: false, vm }),
@@ -130,9 +133,10 @@ describe('owner PDF generation-contract projection', () => {
     expect(text).toContain('CULTURAL IDENTITY');
     expect(text).toContain('Latin-inspired');
     expect(text).toContain('Arcaded market fronts define the square.');
-    expect(text).toContain('GENERATION COHERENCE');
-    expect(text).toContain('1/1 checks passed');
-    expect(text).toContain('8/8 formal judgments supported');
+    expect(vm.identity.generationCoherence.passedChecks).toBe(1); // the projection is live, so the cut below is not vacuous
+    expect(text).not.toContain('GENERATION COHERENCE'); // anchored: the chapter rendered (three toContain above)
+    expect(text).not.toContain('checks passed'); // anchored: same
+    expect(text).not.toContain('formal judgments supported'); // anchored: same
   });
 
   it('prints the food record\'s foodways line, not the culture\'s, where the record carries one', () => {

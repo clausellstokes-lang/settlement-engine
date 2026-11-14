@@ -39,7 +39,8 @@ describe('fillSentenceSlots', () => {
 describe('the audited generation-time fallbacks (unit 1b)', () => {
   it('power/settlementNarrative.js :: genSuccessionNarr opens the surplus sentence on a capital when no faction is named', () => {
     const lines = genSuccessionNarr({ name: 'Ashby', prosperity: 'Wealthy', viabilityIssues: [] });
-    expect(lines).toContain('Ashby is prosperous enough that the real conflicts are about who controls the surplus. The dominant faction has the most and wants more.');
+    // Re-keyed by identity 2026-11-09 (SW-8 RENAME-POWERS C9-5, the owner's map): the same fallback, "The dominant power".
+    expect(lines).toContain('Ashby is prosperous enough that the real conflicts are about who controls the surplus. The dominant power has the most and wants more.');
   });
 });
 
@@ -66,7 +67,8 @@ describe('the one-NPC thorps of rung 2', () => {
     expect(s.npcs).toHaveLength(1);
     expect(s.npcs[0].secret).toEqual({
       what: 'Knows who did it and has said nothing. The betrayer is someone they owe a significant debt to',
-      stakes: 'The debt is called in if they speak. The settlement suffers if they don\'t. They\'ve been choosing themselves for six weeks',
+      // SW-5 (STYLE-RULINGS-2 A4, the owner's style law): the stakes' mannered close re-worded, the same row and slot
+      stakes: 'The debt is called in if they speak. The settlement suffers if they don\'t. For six weeks they have kept quiet to save themselves',
     });
     expect(JSON.stringify(s.npcs[0].secret)).not.toMatch(/\bSomeone\b/); // anchored: the secret is pinned to its exact text above
     expect(narrativeQuality(s)?.findings).toEqual([]);

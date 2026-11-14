@@ -55,44 +55,44 @@
   },
   "leaves": {
     "src/data/dossierStateProse/defense.generated.js": {
-      "raw": 172793,
-      "gzip": 24602,
+      "raw": 234445,
+      "gzip": 31731,
       "ceilingRaw": 488168,
       "ceilingGzip": 108482
     },
     "src/data/dossierStateProse/economy.generated.js": {
-      "raw": 168344,
-      "gzip": 23885,
+      "raw": 170255,
+      "gzip": 23958,
       "ceilingRaw": 393810,
       "ceilingGzip": 87513
     },
     "src/data/dossierStateProse/general.generated.js": {
-      "raw": 280083,
-      "gzip": 37435,
+      "raw": 279568,
+      "gzip": 35664,
       "ceilingRaw": 796761,
       "ceilingGzip": 177058
     },
     "src/data/dossierStateProse/power.generated.js": {
-      "raw": 115715,
-      "gzip": 17079,
+      "raw": 124251,
+      "gzip": 17495,
       "ceilingRaw": 357097,
       "ceilingGzip": 79355
     },
     "src/data/dossierStateProse/stressors.generated.js": {
-      "raw": 94080,
-      "gzip": 15105,
+      "raw": 147483,
+      "gzip": 20773,
       "ceilingRaw": 258858,
       "ceilingGzip": 57524
     },
     "src/data/dossierStateProse/warFaith.generated.js": {
-      "raw": 176442,
-      "gzip": 25180,
+      "raw": 178226,
+      "gzip": 24601,
       "ceilingRaw": 505306,
       "ceilingGzip": 112290
     },
     "src/data/dossierCausalProse.generated.js": {
-      "raw": 210260,
-      "gzip": 36700,
+      "raw": 200017,
+      "gzip": 33970,
       "ceilingRaw": 210260,
       "ceilingGzip": 36700
     },
@@ -103,8 +103,8 @@
       "ceilingGzip": 1591
     },
     "src/data/proseNorms.generated.js": {
-      "raw": 19938,
-      "gzip": 4315,
+      "raw": 19872,
+      "gzip": 4310,
       "ceilingRaw": 30380,
       "ceilingGzip": 6751
     },
@@ -371,6 +371,174 @@
       "toRaw": 168361,
       "gzipAfter": 23911,
       "reason": "+165 B raw (gzip level 9: 23895 -> 23911), one commit: the block's REWRITE rows of STYLE-AUDIT §2b-1 taken, each read against the block's declaration (record docs/WIRING_W1_2026-11-07.md); projected through node scripts/generate-dossier-state-prose.mjs; --check exit 0."
+    },
+    {
+      "car": "W2 DEF (the construction-and-wiring wave, 2026-11-07; ODQ §934.105, WIRING-RULINGS R-W1/R-W9): DS-DEF-9 — magic fills the void said; magic militarized said; the owner's style law of 2026-11-07",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 172793,
+      "toRaw": 174036,
+      "gzipAfter": 24812,
+      "reason": "+1243 B raw (gzip level 9: 24,602 -> 24,812), one commit: DS-DEF-9 gains the two FLAG pools (magicFillsVoid, magicMilitarized; two variants each, said beside the dependency line only when the flag is true) and four style rewrites (true v3, v4; NAMED chain v2; availability absent v3). Projected through `node scripts/generate-dossier-state-prose.mjs`; `--check` exit 0."
+    },
+    {
+      "car": "W2 DEF second seat (the construction-and-wiring wave, 2026-11-07; ODQ §934.105, WIRING-RULINGS R-W1/R-W3): DS-DEF-4 — criminal infrastructure present said; the black market said; the owner's style law of 2026-11-07",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 174036,
+      "toRaw": 176749,
+      "gzipAfter": 25174,
+      "reason": "+2713 B raw (gzip level 9: 24,812 -> 25,174), one commit: DS-DEF-4 gains the four FIXTURE pools (black market, thieves' guild, smuggling, gangs; two variants each, said beside the structure line only when the roster carries the fixture) and sixteen style rewrites (structure organized v3, v4; semi-organized v2, v3; diffuse v2, v3; capture none v1, v3; adversarial v1; equilibrium v3; corrupted v1-v3; capture v1-v3). Projected through `node scripts/generate-dossier-state-prose.mjs`; `--check` exit 0."
+    },
+    {
+      "car": "W2 DEF second seat (the construction-and-wiring wave, 2026-11-07; ODQ §934.105, WIRING-RULINGS R-W1/R-W3): DS-DEF-5 — armed and fortified fixtures said; the free company said; the owner's style law of 2026-11-07",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 176749,
+      "toRaw": 178794,
+      "gzipAfter": 25336,
+      "reason": "+2045 B raw (gzip level 9: 25,174 -> 25,336), one commit: DS-DEF-5 gains the three FIXTURE pools (gates, charter hall, free company; two variants each, said beside their group's line only when the roster carries the fixture) and fifteen style rewrites (walls PRESENT v2; walls ABSENT v2; garrison v2, v3; militia v2; watch v3; NO force v2, v3; mercenary v3; charter PRESENT v3; charter ABSENT v2, v3; arcane PRESENT v2; arcane ABSENT v2, v3). Projected through `node scripts/generate-dossier-state-prose.mjs`; `--check` exit 0."
+    },
+    {
+      "car": "W2 DEF second seat (the construction-and-wiring wave, 2026-11-07; ODQ §934.105, WIRING-RULINGS R-W1/R-W9): DS-DEF-5 — arcane establishments present said; magical traditions under arms said",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 178794,
+      "toRaw": 183357,
+      "gzipAfter": 25818,
+      "reason": "+4563 B raw (gzip level 9: 25,336 -> 25,818), one commit: DS-DEF-5 gains the six ARCANE pools (wizard's tower, mages' guild, alchemists, divine, druidic, practitioners; two variants each, said beside `arcane defense PRESENT` only). Projected through `node scripts/generate-dossier-state-prose.mjs`; `--check` exit 0."
+    },
+    {
+      "car": "W2 DEF second seat (2026-11-07; ODQ §934.105, WIRING-RULINGS §7 / STYLE-RULINGS §2 law 2): DS-DEF-5 FIXTURE: gates gains two variants — the referee's frame cure",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 183357,
+      "toRaw": 183888,
+      "gzipAfter": 25872,
+      "reason": "+531 B raw (gzip level 9: 25,818 -> 25,872), one commit: FIXTURE: gates v1 entered the twenty most-repeated story frames on the 1,000 (309 towns); the pool gains v3 (traveller) and v4 (watch) so the frame spreads. Projected through `node scripts/generate-dossier-state-prose.mjs`; `--check` exit 0."
+    },
+    {
+      "car": "W2 DEF second seat (2026-11-07; ODQ §934.105, WAVE-RULINGS item 16): DS-DEF-4, DS-DEF-5, DS-DEF-9 — the owner's reading, 2026-11-07: the ledger vantage names the record and its cost",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 183888,
+      "toRaw": 184656,
+      "gzipAfter": 26137,
+      "reason": "+768 B raw (gzip level 9: 25,872 -> 26,137), one commit: the twenty `[ledger]` lines this lane authored or rewrote (DS-DEF-4 capture none v1, adversarial v1, corrupted v1, capture v1, FIXTURE v1 x3 and gangs v2; DS-DEF-5 walls PRESENT v2, FIXTURE v2 x3, ARCANE v2 x6; DS-DEF-9 FLAG v2 x2) rewritten to name the record in a player's words and what the gap costs. Projected through `node scripts/generate-dossier-state-prose.mjs`; `--check` exit 0."
+    },
+    {
+      "car": "W2 DEF third seat (2026-11-07; ODQ §934.105, WIRING-RULINGS R-W1): DS-DEF-12 — isolation support said (construction C3, C4, C5)",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 184656,
+      "toRaw": 191754,
+      "gzipAfter": 27014,
+      "reason": "+7098 B raw (gzip level 9: 26,137 -> 27,014), one commit: the new block DS-DEF-12 (MAGIC-DEPENDENT and the four CAPACITY steps, three lines each), the lane's twenty new pools braced {colour}, six `· watch` declarations restored on DS-DEF-2/3/10 lines (stripped by c66099791), FLAG: magicMilitarized v2 reworded (\"answers to its military\"). Projected through `node scripts/generate-dossier-state-prose.mjs`; `--check` exit 0."
+    },
+    {
+      "car": "W2 DEF third seat (2026-11-07; ODQ §934.105, WIRING-RULINGS R-W1/R-W9): DS-DEF-2 — the supply-chain defence bonus said (construction C6)",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 191754,
+      "toRaw": 197079,
+      "gzipAfter": 27733,
+      "reason": "+5325 B raw (gzip level 9: 27,014 -> 27,733), one commit: DS-DEF-2 gains four clause pools (CHAIN: defence supplied / defence short, four lines each; CHAIN: food trades working / failing, three each), said beside the Invasion & War and Economic Survival rows where defenseProfile.chainModifiers moved the score. Projected through `node scripts/generate-dossier-state-prose.mjs`; `--check` exit 0."
+    },
+    {
+      "car": "W2 DEF third seat (2026-11-07; ODQ §934.105, STYLE-RULINGS §1a): DS-DEF-3 and DS-DEF-8 — the stress type in the pool key; their style rows; the owner's style law",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 197079,
+      "toRaw": 234278,
+      "gzipAfter": 32212,
+      "reason": "+37199 B raw (gzip level 9: 27,733 -> 32,212), one commit: DS-DEF-3 gains seventeen COMPOUND condition pools and DS-DEF-8 sixteen per-type override pools (three lines each), and both blocks' style rows are rewritten (DS-DEF-3 rows 27-30 and 158-170; DS-DEF-8 rows 49-55, 233, 234). Projected through `node scripts/generate-dossier-state-prose.mjs`; `--check` exit 0."
+    },
+    {
+      "car": "WIRING W3 POW (2026-11-07), the construction: C1-C6 said in DS-POW-5 / DS-POW-6",
+      "leaf": "src/data/dossierStateProse/power.generated.js",
+      "fromRaw": 115715,
+      "toRaw": 125681,
+      "gzipAfter": 18543,
+      "reason": "+9,966 B: eight new pools (the five structure flags, stateCrime banded by intensity, in DS-POW-5; the GM advisory's two in DS-POW-6), 19 variants with their poolMeta. Projected through node scripts/generate-dossier-state-prose.mjs; --check exit 0 at the tip."
+    },
+    {
+      "car": "W4 PEOPLE (2026-11-07, the construction-and-wiring wave; ODQ §934.105): the faith and great-house construction rows C1-C5",
+      "leaf": "src/data/dossierStateProse/general.generated.js",
+      "fromRaw": 280083,
+      "toRaw": 283258,
+      "gzipAfter": 36858,
+      "reason": "+3,175 B raw (gzip level 9: 36,445 -> 36,858): DS-FTH-4 gains five FLAG pools on the birth-time stress flags (crusaderSynthesis, heresySuppression hunted/preached, religiousFraud, mageTheocracy; 10 variants) and is MOUNTED at faith.templeGround; DS-GEN-17 gains the two GREAT HOUSE lenses (cathedral, monastery; 8 variants, four vantages each). Projected through node scripts/generate-dossier-state-prose.mjs; --check exit 0. RE-CHAINED at MERGE-WAVE's W4 PEOPLE merge (2026-11-08): the lane measured 272147 -> 275322 over the base; composed over W1 ECO's two general-leaf rows (272147 -> 280083) the same delta stands from 280083."
+    },
+    {
+      "car": "W4 PEOPLE (2026-11-07, the construction-and-wiring wave; ODQ §934.105): the faith and great-house construction rows C1-C5",
+      "leaf": "src/data/dossierStateProse/warFaith.generated.js",
+      "fromRaw": 176442,
+      "toRaw": 181741,
+      "gzipAfter": 25922,
+      "reason": "+5,299 B raw (gzip level 9: 25,180 -> 25,922): DS-FTH-4 gains five FLAG pools on the birth-time stress flags (crusaderSynthesis, heresySuppression hunted/preached, religiousFraud, mageTheocracy; 10 variants) and is MOUNTED at faith.templeGround; DS-GEN-17 gains the two GREAT HOUSE lenses (cathedral, monastery; 8 variants, four vantages each). Projected through node scripts/generate-dossier-state-prose.mjs; --check exit 0."
+    },
+    {
+      "car": "W4 PEOPLE (2026-11-07): the owner's style law of 2026-11-07 — DS-FTH-1, DS-FTH-3, DS-FTH-4 (48 rewrites); DS-GEN-17 monastery v02",
+      "leaf": "src/data/dossierStateProse/general.generated.js",
+      "fromRaw": 283258,
+      "toRaw": 283292,
+      "gzipAfter": 37813,
+      "reason": "+34 B raw (gzip level 9: 36,858 -> 36,869): the faith blocks' style rows (STYLE-AUDIT §2b-4) rewritten in the plain register; DS-GEN-17 GREAT HOUSE: monastery v02 reworded so it never echoes the cathedral's bells line in a town with both. RE-CHAINED at MERGE-WAVE's W4 PEOPLE merge (2026-11-08): the lane measured 275322 -> 275356 over the base; composed over W1 ECO's two general-leaf rows (272147 -> 280083) the same delta stands from 283258. gzipAfter re-measured on the composed leaf (36869 on the lane)."
+    },
+    {
+      "car": "W4 PEOPLE second seat (2026-11-07): the owner's style law of 2026-11-07 — DS-CND-1, the stress type in the pool key (STYLE-RULINGS §1a)",
+      "leaf": "src/data/dossierStateProse/stressors.generated.js",
+      "fromRaw": 94103,
+      "toRaw": 145959,
+      "gzipAfter": 20614,
+      "reason": "+51,856 B raw over the chain's 94,103 (the committed row stood at 94,080 after a banked shrink; gzip level 9: 15,105 -> 20,614): DS-CND-1 gains forty-five crisis-keyed direction pools (DIRECTION: worsening / stable / easing · CRISIS: <kind>, one set per crisis kind, 128 variants: four vantages on the direction each crisis is born with, two on the others, the migration pools in both directions) and its 33 style rows rewritten in the plain register; most of the bytes are the projection's per-variant metadata (marks, slots, vids, poolMeta). Projected through node scripts/generate-dossier-state-prose.mjs; --check exit 0."
+    },
+    {
+      "car": "W4 PEOPLE second seat (2026-11-07): the owner's style law of 2026-11-07 — DS-STR-1 (rows 5, 128-153; the migration in two sets, WAVE-RULINGS item 8)",
+      "leaf": "src/data/dossierStateProse/stressors.generated.js",
+      "fromRaw": 145959,
+      "toRaw": 147408,
+      "gzipAfter": 20851,
+      "reason": "+1,449 B raw (gzip level 9: 20,614 -> 20,851): DS-STR-1's 27 style rows and eleven tic strikes rewritten in the plain register; MASS MIGRATION's seven arrivals lines declare `migration: influx` and four departures lines (`migration: exodus`) join them, so a departures record never prints an arrival. Projected through node scripts/generate-dossier-state-prose.mjs; --check exit 0."
+    },
+    {
+      "car": "W4 PEOPLE second seat (2026-11-07): the owner's style law of 2026-11-07 — DS-STR-2 (rows 154-183)",
+      "leaf": "src/data/dossierStateProse/stressors.generated.js",
+      "fromRaw": 147408,
+      "toRaw": 147470,
+      "gzipAfter": 20773,
+      "reason": "+62 B raw (gzip level 9: 20,851 -> 20,773, smaller): DS-STR-2's 30 style rows (lifecycle, counterforce, synergy and origin lines) rewritten in the plain register; no pool, variant, mark or slot added. Projected through node scripts/generate-dossier-state-prose.mjs; --check exit 0."
+    },
+    {
+      "car": "W4 PEOPLE second seat (merging the people car, 2026-11-08): DS-CND-1 DIRECTION: stable · CRISIS: indebted v1 re-worded off a test literal",
+      "leaf": "src/data/dossierStateProse/stressors.generated.js",
+      "fromRaw": 147470,
+      "toRaw": 147476,
+      "gzipAfter": 20772,
+      "reason": "+6 B raw (gzip level 9: 20,773 -> 20,772): one line re-worded ('nothing is left over' -> 'there is never enough left') because proseDrawnAnchors read an unrelated assertion message in proseWiringCensus.walker.test.js as a literal anchor on it; no pool, variant, mark or slot added. Projected through node scripts/generate-dossier-state-prose.mjs; --check exit 0."
+    },
+    {
+      "car": "W5 HIS construction 2026-11-07 (WIRING-RULINGS R-W1, ODQ §934.105): DS-GEN-16's living-memory and legacy lines said",
+      "leaf": "src/data/dossierStateProse/general.generated.js",
+      "fromRaw": 283292,
+      "toRaw": 287856,
+      "gzipAfter": 36900,
+      "reason": "+4564 B raw (gzip level 9: 36,445 -> 36,900), one commit: DS-GEN-16 gains LIVING-MEMORY and four LEGACY-* pools, two variants each (10 variants), reading history.siegeNarrative and history.legacyAnnotations[]; projected through `node scripts/generate-dossier-state-prose.mjs`; `--check` exit 0. RE-CHAINED at MERGE-WAVE's W5 HIS merge (2026-11-08): the lane measured 272147 -> 276711 over the base; composed over W1 ECO's and W4 PEOPLE's general-leaf rows (272147 -> 283292) the same +4564 stands from 283292. The lane's later style-law rewrites shrink the leaf with no declaration owed; the committed figure is the composed leaf's."
+    },
+    {
+      "car": "SW-B5 FRAMES 2026-11-09 (STYLE-RULINGS-2 B5; the owner's style law, WIRING-RULINGS §7-§8): the frames get vantage variants",
+      "leaf": "src/data/dossierStateProse/economy.generated.js",
+      "fromRaw": 168361,
+      "toRaw": 170551,
+      "gzipAfter": 24201,
+      "reason": "+2190 B raw over the chain (2234 over the committed 168317; the leaf shrank 44 B undeclared since its last row) (gzip level 9: 23874 -> 24201), one commit: DS-ECO-8 STRUGGLING +4 (local, official, trade, newcomer) and DS-ECO-10 POSTURE: established +3 (trade, local, newcomer) — vantage variants appended with the next vid (the argmax draw moves only the towns that draw the new line), each declaring its siblings' facts; projected through `node scripts/generate-dossier-state-prose.mjs`; `--check` exit 0."
+    },
+    {
+      "car": "SW-B6 ECO-DEF-BLOCKS 2026-11-09 (STYLE-RULINGS-2 B6; banked by STYLE-2-MERGE at its merge point)",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 234278,
+      "toRaw": 234453,
+      "gzipAfter": 31731,
+      "reason": "+175 B raw over the chain (1591 over the committed 232862; the leaf had shrunk 1416 B undeclared since its last row) (gzip level 9: 31654 -> 31731): SW-B6's DS-DEF-1 and DS-DEF-8 rewrites and the DS-DEF-3 COMPOUND insurgency and slave-revolt pools (the lane's widening, ruled ~01:38 UTC), projected through node scripts/generate-dossier-state-prose.mjs (--check exit 0); the lane left the row undeclared, so its growth is banked here at the merged tree with the bytes the lane's tip carries (234453); no pool added."
+    },
+    {
+      "car": "STYLE-2 SW-8 RENAME-POWERS C8 e63c6aae6 (2026-11-09, the owner's map Appendix G1): the retired word leaves 28 composed annex lines",
+      "leaf": "src/data/dossierStateProse/stressors.generated.js",
+      "fromRaw": 147476,
+      "toRaw": 147483,
+      "gzipAfter": 20773,
+      "reason": "+7 B raw (gzip level 9: 20,772 -> 20,773): C8's word-only swaps in the stressors annex lines ('faction' -> 'power' and the map's hand wordings, Appendix X) projected through node scripts/generate-dossier-state-prose.mjs; no pool, variant, mark or slot added. The same commit SHRANK five leaves (defense -6, general -2, power -13, warFaith -7, the causal leaf -10), lowered in the same register commit. Measured per commit over bd07005b9..e63c6aae6: every leaf unmoved until e63c6aae6."
     }
   ],
   "ceilingTransfersNewLeaves": [

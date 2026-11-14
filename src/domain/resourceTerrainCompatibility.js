@@ -41,16 +41,36 @@ const WATER_TERRAIN = new Set(['coastal', 'riverside']);
  * only some arms; the domain layer typechecks strict, so the catalog is read
  * through ONE declared row shape (the resourceDynamicsKernel idiom). Erased at
  * runtime — the values are the same object.
- * @typedef {{ forbidden?: string[], terrain?: string, terrainRequired?: string[],
+ * @typedef {{ forbidden?: string[], requires?: string[], requiresTerrain?: string[], terrain?: string, terrainRequired?: string[],
  *   warning?: string }} ResourceTerrainRow
  */
 const CATALOG = /** @type {Record<string, ResourceTerrainRow & Record<string, unknown>>} */ (
   /** @type {unknown} */ (RESOURCE_DATA));
 
 /**
+ * THE TERRAIN A ROW REQUIRES, AND THE WORDS FOR ITS ABSENCE (COHERENCE-AGREE-7, P4: one home for the wizard's reason
+ * and the structural validator's warning). Null where the row names no terrain law or the terrain meets it; a
+ * terrain left unknown (null or undefined) is answered `unknownRefuses` (the wizard dims an unknown terrain, the
+ * validator makes no claim either way).
+ * @param {string} key a catalogue resource key
+ * @param {string|null|undefined} terrain the settlement's terrain
+ * @param {{ unknownRefuses?: boolean }} [options]
+ * @returns {string|null} "Only available in mountain terrain", or null
+ */
+export const requiredTerrainRefusal = (key, terrain, { unknownRefuses = true } = {}) => {
+  const required = Object.hasOwn(CATALOG, key) ? CATALOG[key].requiresTerrain : undefined;
+  if (!Array.isArray(required)) return null;
+  if (terrain === null || terrain === undefined) return unknownRefuses ? `Only available in ${required.join(' or ')} terrain` : null;
+  return required.includes(String(terrain)) ? null : `Only available in ${required.join(' or ')} terrain`;
+};
+
+/**
  * @param {string} route
  * @param {string|null} [terrain]
- * @returns {Array<{ key: string, compatible: boolean, incompatibleReason: (string|null) } & Record<string, unknown>>}
+ * @returns {Array<{ key: string, compatible: boolean, offered: boolean, incompatibleReason: (string|null) } & Record<string, unknown>>}
+ *   `compatible` is the random roll's pool and is unchanged by `requires`; `offered` is the wizard's answer: compatible,
+ *   and on an access the row `requires` (COHERENCE-AGREE-3, 2026-11-12: a crossroads position off a crossroads is
+ *   dimmed in the wizard, with the row's own warning, and can still be forced, as on a port).
  */
 export const getCompatibleResources = (route, terrain = null) =>
   Object.entries(CATALOG).map(([key, r]) => {
@@ -105,5 +125,13 @@ export const getCompatibleResources = (route, terrain = null) =>
       incompatibleReason = routeBlocked ? (r.warning || 'Not compatible with ' + route + ' access.') : null;
     }
 
-    return { key, ...r, compatible, incompatibleReason };
+    const accessMissing = Array.isArray(r.requires) && !r.requires.includes(resourceRoute);
+    // COHERENCE-AGREE-6 (REVIEW-AGREE-2 F5 (d)): the terrain a row requires (`requiresTerrain`: the mountain pass) is
+    // read as its access is: the pool (`compatible`) is unchanged, the wizard does not offer it elsewhere, and a
+    // person may still force it.
+    const terrainRefusal = requiredTerrainRefusal(key, terrain);
+    const offered = compatible && !accessMissing && terrainRefusal === null;
+    if (compatible && accessMissing) incompatibleReason = r.warning || 'Not compatible with ' + route + ' access.';
+    else if (compatible && terrainRefusal !== null) incompatibleReason = terrainRefusal;
+    return { key, ...r, compatible, offered, incompatibleReason };
   });

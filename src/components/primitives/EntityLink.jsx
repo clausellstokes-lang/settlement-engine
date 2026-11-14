@@ -38,6 +38,7 @@ import { isMentionAllowed } from '../../domain/dossier/linkMentions.js';
  * @param {boolean} [props.verbatim] Render `fallback` verbatim (a pronoun link)
  *                                   rather than the resolved current name.
  * @param {object} [props.style]     Extra inline style merged onto the link.
+ * @param {import('react').Key} [props.key]  A list key; React consumes it, the link never reads it.
  */
 export default function EntityLink({ id, type, fallback = '', verbatim = false, style }) {
   const { index, navigateToEntity, scope } = useDossierEntities();

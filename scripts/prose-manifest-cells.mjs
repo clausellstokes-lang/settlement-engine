@@ -196,7 +196,22 @@ export const MANIFEST_PROVENANCE = Object.freeze({
     + ' 2026-11-08 (THE PEOPLE CAR’S MERGE OVER THE INTEGRATION BRANCH, RECORD B OF THE INTEGRATION LANDING, docs/'
     + 'shift-records/2026-11-08-merge-car-b-people-car-composition.json, ODQ §934.105): re-recorded at the stage of'
     + ' 8dff691f3 (the people car merged, the conflicts composed) because one face per institution re-casts the towns'
-    + ' over the pool census; against record A’s post-state 832 of the 1,050 rows move, 0 added, 0 removed.',
+    + ' over the pool census; against record A’s post-state 832 of the 1,050 rows move, 0 added, 0 removed.'
+    + ' 2026-11-08 (THE COMPOSED-PROSE MANIFEST AT THE WAVE’S FINAL TIP, RECORD 9 OF THE WAVE, docs/shift-records/'
+    + '2026-11-08-merge-wave-9-composed-prose-manifest.json, ODQ §934.105): re-recorded ONCE at the stage of the final'
+    + ' tip 0c93f0ca0 because the wave’s ten lanes (W1, W2, W3, W4, W5 with W1-A0b, W7, FIX-FOOD-ISOLATION, EXPORT-KEYS,'
+    + ' FIX-PUBLIC-VEIL, GREEN-BASE, FIX-ARROW-SECTIONS) moved the composed prose, each point’s cells named in the record;'
+    + ' against record B’s post-state 1050 of the 1,050 rows move, 0 added, 0 removed.'
+    + ' 2026-11-09 (THE COMPOSED-PROSE MANIFEST AT THE ALLEGIANCE TRAIN’S FINAL TIP, RECORD 10 OF THE TRAIN, docs/shift-records/'
+    + '2026-11-09-merge-train-10-composed-prose-manifest.json, ODQ §934.105): re-recorded ONCE at the stage of the final'
+    + ' tip 09c4435e0 because the train’s nine merge points (ALLEGIANCE-CAR1, CAR2, CAR3, WRITE-TITLES-14, OWNER-WORDS-'
+    + 'DOSSIER, FIX-HOOK-OBJECT, FIX-BUY-BUTTON, FIX-ARROW-PLAQUE, CAR4) moved the composed prose, each point’s cells named in'
+    + ' the record; against the wave’s record 9 post-state 181 of the 1,050 rows move, 0 added, 0 removed.'
+    + ' 2026-11-11 (THE COMPOSED-PROSE MANIFEST AT THE STYLE WAVE’S FINAL TIP, CLOSING ACT 2 OF STYLE-2-MERGE, docs/shift-records/'
+    + '2026-11-11-style-2-merge-closing-2-composed-prose-manifest.json, ODQ §934.105): re-recorded ONCE at the stage of the final'
+    + ' tip a3ea0d325 because five of the wave’s forty-one merge points (SW-B5 FRAMES, SW-B6 ECO-DEF-BLOCKS, SW-7 POWER-SIDE,'
+    + ' SW-B1 CONTRADICTIONS, SW-8 RENAME-POWERS) moved the composed prose, each point’s cells named in the record; against the'
+    + ' train’s record 10 post-state 1050 of the 1,050 rows move, 0 added, 0 removed.',
 });
 
 /** This surface's identity in tests/fixtures/.golden-freeze-register.json. */

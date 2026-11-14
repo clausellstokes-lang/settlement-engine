@@ -36,17 +36,20 @@ describe('npcStructure registry goal lookup (CENSUS-1e unit 1)', () => {
     const { result, ledger } = enrich({ stress: [{ type: 'under_siege' }] });
     for (const npc of result) {
       expect(npc.goal).toEqual(ROLE_GOAL);
-      expect(npc.structuralPosition).toBeUndefined();
       expect(npc.activeConstraint).toBeUndefined();
     }
+    // COHERENCE-POWERS-5 (N1): A holds the seat (the seat's home names the governing power's first), so its card states
+    // the bare fact the seat row prints, no calm claimed; B takes no position, as before
+    expect(result.find((n) => n.id === 'a').structuralPosition).toBe('Holds the seat.');
+    expect(result.find((n) => n.id === 'b').structuralPosition).toBeUndefined();
     const rows = ledger.filter((e) => String(e.pool).startsWith('NPC_STRUCTURE.'));
     expect(rows.length).toBe(0); // a refused cell with no admitted member notes nothing (drawDeclared's 'none')
   });
 
   it('(b) under calm the stable entry is admitted, byte-identical, and noted with its atom', () => {
     const { result, ledger } = enrich({});
-    expect(result[0].goal.short).toBe('Fix the weakness in the seat that nobody wants to talk about, before someone uses it.');
-    expect(result[0].structuralPosition).toMatch(/^Holds governing authority in a settlement with functional legitimacy/);
+    expect(result[0].goal.short).toBe("Find and mend the seat's weak spot before a rival finds it first."); // W3 POW: re-keyed with the goal's words
+    expect(result[0].structuralPosition).toMatch(/^Holds the seat, and people accept it; there is room to act/); // SW-6 (B10(b)): re-keyed by identity with the plain line
     expect(result[0].settlementCondition).toBe('stable');
     expect(Object.keys(result[0].goal)).toEqual(['short', 'long']);
     const rows = ledger.filter((e) => String(e.pool).startsWith('NPC_STRUCTURE.'));

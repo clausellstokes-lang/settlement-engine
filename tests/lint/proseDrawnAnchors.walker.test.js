@@ -81,7 +81,11 @@ const MIN_LITERAL = 18;
  * draw rule can move them, because nothing here is drawn.
  */
 const FIXTURE_INPUT_FILES = Object.freeze([
-  'tests/lint/proseWaveGate.walker.test.js',
+  // 'tests/lint/proseWaveGate.walker.test.js' LEFT this list at W2 DEF fourth seat (2026-11-07): its fixture
+  // clauses ("stone keeps itself, and wages do not.", "the threat is on the town's books ...") were DS-DEF-11's
+  // WALLED-STRAINED v1 / WALLED-THREATENED v1, rewritten under the owner's style law; the corpus no longer carries
+  // them, so the file is synthetic fixture text and is scanned like any other (the exemption arm below would
+  // otherwise red on an exempt file with no corpus text).
   'tests/lint/proseEntryContradiction.walker.test.js',
   'tests/lint/proseComposed.walker.test.js',
   // This file itself: its planted sentence is the DETECTOR'S OWN CONTROL, which the
@@ -131,9 +135,10 @@ const FIXTURE_INPUT_FILES = Object.freeze([
  *     sentence is the walker's input, not a draw.
  *   economyReadModelCoverage:414 — a NEEDLE for a source scan ("this sentence is minted in one
  *     module"). It is looking for the string in `src/`, which is the opposite direction.
- *   envoyKindPools:55 — a different pool family's AUTHORED list, pinned as that family's own
- *     roster.
- *   warRemembranceReader:136 — a UI HEADING used as an `expectAbsentWithAnchor` anchor, which
+ *   envoyKindPools:55 — RETIRED at WIRING W3's second seat (2026-11-07): the power-leaf variant its
+ *     authored list coincided with was rewritten under the owner's style law, so the row is spent.
+ *   warRemembranceReader:136 — RETIRED at the car rows of WIRING W3 (2026-11-08, the owner's style law over DS-POW-3 and DS-POW-4, after the people car): the power-leaf variant its heading coincided with was
+ *     rewritten, so the row is spent.
  *     the matcher aligns against a power-leaf variant by coincidence. Not corpus prose.
  *   treatyVoiceCure:157 — ADDED 2026-10-01 (the urban-band chair, a base red picked up under the
  *     owner's "do it all"; vetoable). A NEWS HEADLINE minted by a code template
@@ -142,16 +147,33 @@ const FIXTURE_INPUT_FILES = Object.freeze([
  *     18-character floor. Generator text, never drawn, the same class as the first two rows. The
  *     "never add a file" law stops new DRAWN-prose anchors; a false positive is carried with its
  *     reason rather than split into sub-floor pieces to slip past the matcher.
+ *   envoyKindPools:55 — ADDED 2026-11-08 (MERGE-WAVE at the W3 POW merge): the envoy-kind pool line
+ *     "The messenger has no new vote to cast between one mile and the next." — generator text of the
+ *     envoy kind, never drawn from a state leaf — which the matcher aligns against DS-ECO-11's
+ *     partiallyExploited vid 3 at EXACTLY the 18-character floor, as treatyVoiceCure's row above. It
+ *     appears at the W3 composition (absent at the W2 merge point): the corpus W3 POW adds re-ranks the
+ *     four rarest indexed words that narrow the candidates, so this pool now reaches that vid. A false
+ *     positive, carried with its reason.
+ *   AT MERGE-WAVE's W5 HIS merge (2026-11-08): THREE rows RETIRED, spent (magicRegimeLifecycle,
+ *     stressorAftermath, dossierMountRegistry): the scan no longer finds their literals in any shipped
+ *     variant once W5 HIS's style rewrites land, so the banked wins are banked by deleting the rows. ONE
+ *     row ADDED (demographicReading:117, "Nobody has counted the harvest"): the demographic reader's own
+ *     sentence (src code, never drawn from a state leaf), which the matcher aligns at 19 fixed chars
+ *     against W5 HIS's rewritten DS-POP-2 WINDOW vid 2. A false positive, carried with its reason.
+ *   foundingWorldBones:82 — ADDED 2026-11-11 (STYLE-2-MERGE-7 at the FOUNDING-WORLDS merge, point 41): the
+ *     sample card's own TAG "Religious authority" (src/data/sampleSettlements.js card copy, which the test
+ *     pins as the card's promise; never drawn from a state leaf), which the matcher aligns at 19 fixed chars
+ *     against DS-STR-2 ORIGIN: temple_putsch vid 3. The lane did not run tests/lint; the row is the card's
+ *     data, not drawn prose, so computing it through drawnProse.js would assert the wrong thing. A false
+ *     positive, carried with its reason.
  */
 const FROZEN_LITERAL_ANCHORS = Object.freeze({
-  'tests/domain/magicRegimeLifecycle.test.js': 1,
+  'tests/data/foundingWorldBones.test.js': 1,
+  'tests/domain/demographicReading.test.js': 1,
   'tests/domain/settlementLifecycleFirstClass.test.js': 1,
-  'tests/domain/stressorAftermath.test.js': 1,
   'tests/domain/treatyVoiceCure.test.js': 1,
-  'tests/lint/dossierMountRegistry.walker.test.js': 1,
-  'tests/lint/economyReadModelCoverage.walker.test.js': 1,
   'tests/lint/envoyKindPools.walker.test.js': 1,
-  'tests/ui/warRemembranceReader.test.jsx': 1,
+  'tests/lint/economyReadModelCoverage.walker.test.js': 1,
 });
 
 /**

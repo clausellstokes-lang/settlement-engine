@@ -59,7 +59,7 @@ describe('Edit Names lists the canonical faction roster', () => {
     expect(screen.getByText('Militia')).toBeTruthy();
     // The negative control that WAS the bug: the empty-state must not appear
     // while real factions exist.
-    expect(screen.queryByText(/no named NPCs or factions to rename/)).toBeNull();
+    expect(screen.queryByText(/no named NPCs or powers to rename/)).toBeNull();
   });
 
   test('renaming a canonical faction passes its nameOf-resolved name as the old name', () => {
@@ -80,13 +80,13 @@ describe('Edit Names lists the canonical faction roster', () => {
       factions: [{ name: 'Old Mirror Guild', dominantCategory: 'merchant' }],
       powerStructure: { factions: [] },
     });
-    expect(screen.getByText(/no named NPCs or factions to rename/)).toBeTruthy();
+    expect(screen.getByText(/no named NPCs or powers to rename/)).toBeTruthy();
     expect(screen.queryByText('Old Mirror Guild')).toBeNull();
   });
 
   test('a settlement with neither roster shows the honest empty state', () => {
     renderNames({ npcs: [], factions: [], powerStructure: { factions: [] } });
-    expect(screen.getByText(/no named NPCs or factions to rename/)).toBeTruthy();
+    expect(screen.getByText(/no named NPCs or powers to rename/)).toBeTruthy();
   });
 });
 

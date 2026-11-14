@@ -35,7 +35,7 @@
 
 import { useStore } from '../../store/index.js';
 import { ARCHETYPES, ARCHETYPE_GROUPS, archetypePatch } from './characterPresets.js';
-import { INK, MUTED, SECOND, BORDER, sans, serif_, FS, SP, swatch } from '../theme.js';
+import { INK, BODY, SECOND, BORDER, sans, serif_, FS, SP, swatch } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import PrioritySliders from './PrioritySliders.jsx';
 
@@ -157,8 +157,10 @@ export default function CharacterPresetCard({ advanced = false } = {}) {
   return (
     <div style={{ background: PARCHMENT, border: `1px solid ${BORDER}`, padding: `${SP.md}px ${SP.lg}px`, marginBottom: SP.md }}>
       <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 4 }}>
-        <span style={{ fontFamily: serif_, fontSize: FS.lg, fontWeight: 700, color: INK }}>Character</span>
-        <span style={{ fontSize: FS.xs, color: MUTED }}>Pick a settlement archetype to shape it in one tap</span>
+        {/* One size for the configuration's five section titles (2026-11-10): Exact seed,
+            Character, 1 · Foundations, 2 · Institutions, Place in Region — FS.xl, serif, 700, INK. */}
+        <span style={{ fontFamily: serif_, fontSize: FS.xl, fontWeight: 700, color: INK }}>Character</span>
+        <span style={{ fontSize: FS.sm, color: BODY }}>Pick a settlement archetype to shape it in one tap</span>
       </div>
       <p style={{ fontSize: FS.xs, color: SECOND, margin: `0 0 ${SP.sm}px`, lineHeight: 1.4 }}>
         {explainer}
@@ -182,7 +184,8 @@ export default function CharacterPresetCard({ advanced = false } = {}) {
         )}
         {ARCHETYPE_GROUPS.filter(g => magicExists || g.label !== 'Arcane').map(({ label, keys }) => (
           <div key={label}>
-            <div style={{ fontSize: FS.xxs, fontWeight: 700, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 5 }}>{label}</div>
+            {/* The group label at the passing ink and FS.sm (2026-11-10): MUTED at 10px read 3.3:1. */}
+            <div style={{ fontSize: FS.sm, fontWeight: 700, color: BODY, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 5 }}>{label}</div>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
               {keys.map(key => {
                 const a = ARCHETYPES.find(x => x.key === key);

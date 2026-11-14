@@ -11,27 +11,18 @@
  */
 
 /*
- * §69.3 PROSE-LEAK ALLOWANCE — DM-TOOL TIER, recorded in-file as the ruling requires.
- * The letter's span header states the exact window the letter was composed over,
- * which is the DM's own read-floor control ("Mark as read" moves it).
- *
- * §69.3 splits the tiers: a raw engine tick counter is ALLOWED on a DM-facing
- * instrument, where the number is the control the DM operates, and FORBIDDEN on
- * player, public and PDF surfaces, which cure to the calendar phrase
- * (src/domain/display/humanizeEngineTokens.js).
- *
- * This record is LOAD-BEARING, not decorative: tests/copy/proseLeak.test.js parses
- * the line below, exempts exactly that many hits of that class in this file, and
- * reds both ways — if the file grows one more, and if the allowance outlives the
- * sites it was granted for.
- * prose-leak-allowance: tick 1
+ * §69.3 — NO ALLOWANCE NOW. The letter's span header once printed the raw tick
+ * window (a sanctioned DM-tool counter); STYLE-2 SW-12 (ledger D·8, 2026-11-09)
+ * cured it to the calendar's week phrase (tickCalendarDetailLabel), which keeps
+ * the window to the week, so the allowance line is struck
+ * (tests/copy/proseLeak.test.js reds a grant that outlives its site).
  */
 
 import { useMemo } from 'react';
 import { Mail, Check, Download, Sparkles } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { composeChroniclersLetter, letterToPlainText } from '../../domain/display/chroniclersLetter.js';
-import { tickCalendarLabel } from '../../domain/display/humanizeEngineTokens.js';
+import { tickCalendarDetailLabel, tickCalendarLabel } from '../../domain/display/humanizeEngineTokens.js';
 import { BODY, BORDER, BORDER2, CARD_ALT, FS, GOLD, INK, MUTED, RED, SECOND, SP, sans } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import useIsMobile from '../../hooks/useIsMobile.js';
@@ -80,7 +71,7 @@ export default function ChroniclersLetterPanel({ campaign, audience = 'dm' }) {
           <Mail size={13} /> The Chronicler’s Letter
         </div>
         <span style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile) }}>
-          tick {letter.sinceTick} → {letter.throughTick}
+          {tickCalendarDetailLabel(letter.sinceTick)} to {tickCalendarDetailLabel(letter.throughTick)}
         </span>
       </div>
 
@@ -115,7 +106,7 @@ export default function ChroniclersLetterPanel({ campaign, audience = 'dm' }) {
                   {l.summary ? <div style={{ color: BODY, fontSize: proseFontSize(FS.micro, mobile), lineHeight: 1.4 }}>{l.summary}</div> : null}
                   {l.recalls ? (
                     <div style={{ color: MUTED, fontSize: proseFontSize(FS.micro, mobile), fontStyle: 'italic', lineHeight: 1.4 }}>
-                      In this my earlier record returns, from {l.recalls.when}: {l.recalls.headline}.
+                      This echoes what I wrote of {l.recalls.when}: {l.recalls.headline}.
                     </div>
                   ) : null}
                 </li>

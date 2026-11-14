@@ -38,8 +38,13 @@ describe('the two fixture towns are the ones §R c-22 names, taken as the genera
     // Re-keyed by identity 2026-11-07 (REVIEW-INTAKE-LAND, the merge onto rung 1's tip): both
     // sides' 2026-11-06 re-keys (rate-57-3 / rate-93-0) compose at the merged tip into rate-69-0
     // and the control rate-9-2, by the rule and scan named in tests/fixtures/tasteTowns.js.
-    expect(INTERESTED_TOWNS[0].seed).toBe('rate-69-0');
-    expect(INTERESTED_TOWNS[1].seed).toBe('rate-9-2');
+    // rate-69-0 -> rate-105-2 on 2026-11-08 (ALLEGIANCE-CAR2): the capture state derived from the ruling three's agents
+    // (J-13); the same rule and scan, tests/fixtures/tasteTowns.js names the cause.
+    // rate-105-2 -> rate-33-1 on 2026-11-13 (STYLE-2-MERGE point 46, STOP 46c): the dual hat leaves rate-105-2 uncaptured;
+    // tests/fixtures/tasteTowns.js names the cause, the rule of choice and k of n (2 of 3).
+    expect(INTERESTED_TOWNS[0].seed).toBe('rate-33-1');
+    // rate-9-2 -> rate-15-0 (STYLE-2-MERGE point 47, the rule named in tests/fixtures/tasteTowns.js).
+    expect(INTERESTED_TOWNS[1].seed).toBe('rate-15-0');
     expect(captured.powerStructure?.criminalCaptureState, 'the chair\'s own worked example').toBe('corrupted');
     expect(clean.powerStructure?.criminalCaptureState, 'and the control').toBe('none');
     // The tier matters: §R c-22 measured INTERESTED on town and above, and both are towns, so

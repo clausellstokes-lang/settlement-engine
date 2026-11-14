@@ -48,13 +48,18 @@ for (const k of ['CAST_REASONS','CAST_ABSENCES','STAKE_REASONS']) walk(`crisisCa
 walk('tonightSheet.CAST_WANTS','src/domain/summary/tonightSheet.js',ts.CAST_WANTS,'');
 walk('npcGenerator.STRESS_GOALS','src/generators/npcGenerator.js',inline('src/generators/npcGenerator.js','STRESS_GOALS'),'');
 walk('npcGenerator.STRESS_GOAL_OVERRIDES','src/generators/npcGenerator.js',inline('src/generators/npcGenerator.js','STRESS_GOAL_OVERRIDES'),'');
-walk('npcGenerator.RELATIONSHIP_STRENGTHS','src/generators/npcGenerator.js',inline('src/generators/npcGenerator.js','RELATIONSHIP_STRENGTHS'),'');
-walk('corruptionPass.CORRUPT_SHORT_GOAL','src/generators/steps/corruptionPass.js',inline('src/generators/steps/corruptionPass.js','CORRUPT_SHORT_GOAL'),'');
+// Repaired (SW-6 second seat, 2026-11-09): RELATIONSHIP_STRENGTHS moved to people/ties.js (141383cd4) and CORRUPT_SHORT_GOAL to
+// domain/people/allegiance.js (5902f1a4a, steps/corruptionPass.js deleted); both are exported there, so they are read as modules.
+// The pool ids keep the ledger's file names.
+const ties = await import(R+'src/generators/people/ties.js');
+const allegiance = await import(R+'src/domain/people/allegiance.js');
+walk('npcGenerator.RELATIONSHIP_STRENGTHS','src/generators/people/ties.js',ties.RELATIONSHIP_STRENGTHS,'');
+walk('corruptionPass.CORRUPT_SHORT_GOAL','src/domain/people/allegiance.js',allegiance.CORRUPT_SHORT_GOAL,'');
 walk('factionLeaderSecret.SAFE_SECRET_FALLBACK','src/generators/npc/factionLeaderSecret.js',inline('src/generators/npc/factionLeaderSecret.js','SAFE_SECRET_FALLBACK'),'');
 // generateCrimeLevel inline: the anonymous array passed to pickRandom2
 { const src=fs.readFileSync(R+'src/generators/npcGenerator.js','utf8'); const i=src.indexOf('return pickRandom2(['); const ast=acorn.parseExpressionAt(src,i+'return pickRandom2('.length,{ecmaVersion:'latest'}); walk('npcGenerator.CRIME_LEVEL_OTHER_NPC','src/generators/npcGenerator.js',lit(ast,src),''); }
-// npcStructure T: eval the reg() calls in a sandbox
-{ const src=fs.readFileSync(R+'src/generators/npcStructure.js','utf8'); const body=src.slice(0, src.indexOf('// ── Main export')); const T=new Function(body+'; return T;')(); walk('npcStructure.T','src/generators/npcStructure.js',T,''); }
+// npcStructure T: eval the reg() calls in a sandbox (import lines stripped, STANDING stubbed)
+{ const src=fs.readFileSync(R+'src/generators/npcStructure.js','utf8'); const body='const STANDING={head:"head",inner:"inner_circle"};\n'+src.slice(0, src.indexOf('// ── Main export')).split('\n').filter((l)=>!/^import /.test(l)).join('\n'); /* repaired (SW-6 second seat): the module's imports cannot run in new Function, and the one name the registry body reads from them (STANDING, membership.js) is stubbed */ const T=new Function(body+'; return T;')(); walk('npcStructure.T','src/generators/npcStructure.js',T,''); }
 // Part B
 { const seen=new Map(); for (const [k,arr] of Object.entries(idv.INSTITUTION_DESC_VARIANTS)) { if(seen.has(arr)) continue; seen.set(arr,k); arr.forEach((t,i)=>add('institutionDescVariants.INSTITUTION_DESC_VARIANTS',`${k}#${i}`,t,{file:'src/data/institutionDescVariants.js'})); } }
 for (const [inst,defs] of Object.entries(isv.INSTITUTION_SERVICES)) for (const [svc,d] of Object.entries(defs)) if (d && typeof d.desc==='string') add('institutionServices.INSTITUTION_SERVICES',`${inst}|${svc}`,d.desc,{file:'src/data/institutionServices.js'});

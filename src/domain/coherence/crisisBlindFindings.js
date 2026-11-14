@@ -63,7 +63,7 @@ const CLAIMS = Object.freeze([
   { claim: 'the present peace', re: /\bthe present peace\b/, family: 'threat' },
   { claim: 'no present need for its works', re: /\bstands ahead of any present need\b/, family: 'threat' },
   { claim: 'its works asked little of', re: /\bnow that it asks little of it\b/, family: 'threat' },
-  { claim: 'nothing has arrived by sea', re: /\bnothing has yet arrived that made the second half matter\b/, family: 'threat' },
+  { claim: 'nothing has arrived by sea', re: /\bnothing hostile has come through it yet\b/, family: 'threat' },
   // hunger: famine, under siege; any crisis on a deficit food band (crisisFacts.js :: familyActiveIn)
   { claim: 'feeds itself with a margin', re: /\bfeeds itself with a small margin\b/, family: 'hunger' },
   { claim: 'food is not a subject', re: /\bIt is not a subject anyone raises unprompted\b/, family: 'hunger' },
@@ -73,13 +73,15 @@ const CLAIMS = Object.freeze([
   { claim: 'nobody without bread', re: /\bNobody is going without bread\b/, family: 'hunger' },
   { claim: 'nobody talks about bread', re: /\bNobody here talks about the price of bread\b/, family: 'hunger' },
   // succession: succession void, politically fractured
-  { claim: 'the succession is not live', re: /\bthe succession question is not a live one\b/, family: 'succession' },
+  // SW-7 POWER-SIDE (STYLE-2 B7, 2026-11-09): DS-POW-4 Stable v1 and v3 reworded under the owner's style law; the
+  // claims kept, re-anchored to the new words (v3's twice, below and under unrest).
+  { claim: 'the succession is not live', re: /\bis asking who comes next\b/, family: 'succession' },
   { claim: 'nobody would replace the seat', re: /\bdoes not come up, because there is nobody the \p{L}+ would name\b/u, family: 'succession' },
-  { claim: 'the seat is safe', re: /\bsafe for the plainest reason a seat can be safe\b/, family: 'succession' },
+  { claim: 'the seat is safe', re: /\bis safe in the hall\b/, family: 'succession' },
   // unrest: insurgency, slave revolt, wartime
   // Rung 2D unit 2 (the chair's ruling): an insurgency or a revolt denies the seat's safety as
   // surely as an open succession (rung 2C §3c: `soak1k-1` slave revolt, `-3001` insurgency).
-  { claim: 'the seat is safe', re: /\bsafe for the plainest reason a seat can be safe\b/, family: 'unrest' },
+  { claim: 'the seat is safe', re: /\bis safe in the hall\b/, family: 'unrest' },
   { claim: 'very little street violence', re: /\bvery little street violence\b/, family: 'unrest' },
   { claim: 'random violence is put down', re: /\brandom violence is put down\b/, family: 'unrest' },
   // crisis: any active crisis
@@ -94,7 +96,8 @@ const CLAIMS = Object.freeze([
   // and the desk lines keep their words; the cure is their declarations, not this table.
   // A ruler's want of "current stability" (×4 in the city tier: a fracture, a debt). CENSUS-4b: the
   // three goal rows re-anchored to R11's rewritten wording (efb84c0), the claims unchanged.
-  { claim: 'current stability', re: /\b[Ff]ix the weakness in the seat that nobody wants to talk about\b/, family: 'crisis' },
+  // W3 POW (2026-11-08): the government stable dominant goal reworded under the owner's style law; the claim kept.
+  { claim: 'current stability', re: /\b[Ff]ind and mend the seat.s weak spot\b/, family: 'crisis' },
   // A ruler's want that takes the order as settled, under an open succession or an uprising.
   { claim: 'competent administration', re: /\b[Dd]o every task the seat hands them so well that the seat cannot do without them\b/, family: 'succession' },
   { claim: 'competent administration', re: /\b[Dd]o every task the seat hands them so well that the seat cannot do without them\b/, family: 'unrest' },

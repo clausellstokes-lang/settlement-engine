@@ -9,6 +9,7 @@ import { retainHooks, retentionKey, editedHookTextKeys } from './hookRetention.j
 import { crisisHooksOf, leverAndLoserOf } from '../crisis/crisisHooks.js';
 import { effectiveCastOf } from '../crisis/crisisCast.js';
 import { firstPowerOf as cardFirstPowerOf, powerOrderOf } from '../people/cardPowers.js';
+import { humanizeToken } from '../display/humanizeEngineTokens.js';
 
 const TENSION_LABELS = Object.freeze({
   crime_wave: 'Crime Wave',
@@ -23,6 +24,15 @@ const TENSION_LABELS = Object.freeze({
   succession_crisis: 'Succession Crisis',
 });
 
+/**
+ * A tension type the label map does not hold, titled in words: `corruption_scandal` →
+ * `Corruption Scandal`. '' for a non-string or an empty key.
+ * @param {unknown} token @returns {string}
+ */
+function titleOfToken(token) {
+  return humanizeToken(token).replace(/\b[a-z]/g, (c) => c.toUpperCase());
+}
+
 const EVENT_LABELS = Object.freeze({
   disaster: 'Disaster',
   political: 'Political',
@@ -36,7 +46,7 @@ const EVENT_LABELS = Object.freeze({
 
 export const PLOT_HOOK_CATEGORIES = Object.freeze({
   npc: { color: '#2a3a7a', label: 'NPCs' },
-  faction: { color: '#8b1a1a', label: 'Factions' },
+  faction: { color: '#8b1a1a', label: 'Powers' },
   tension: { color: '#b8860b', label: 'Tensions' },
   economics: { color: '#a0762a', label: 'Economy' },
   safety: { color: '#5a2a8a', label: 'Safety' },
@@ -181,6 +191,13 @@ export function groupPlotHooksBySourcePage(hooks) {
 // reads once live and once reframed. A match list, never printed (CENSUS-1e: row 91); the printed copy
 // in historyGenerator.js is ruled {colour} (CENSUS-2e, R-R).
 const ECHO_PREFIXES = [
+  // W5 HIS (2026-11-07): the five tellings the generator now prints, then the five it printed before,
+  // so a saved page's hooks still fold to their family.
+  'an old story from that time: ',
+  'a letter found this year tells it this way: ',
+  'families who lived through it tell it this way: ',
+  'the records of that time say: ',
+  'what survives from that time says: ', 'family accounts passed down from that time tell it this way: ', // the second: [2]'s twin past sixty years (COHERENCE-PRESUME)
   'old records suggest ',
   'a recently surfaced document implies ',
   'family accounts passed down from the time claim ',
@@ -269,7 +286,7 @@ function dedupeHooks(sorted) {
 // the writer gives them, so a flag-conditioned conflict hook (which IS specific, and true)
 // passes through untouched. SWITCH THIS to a drawn library at the writer when the engine
 // side opens; the matcher is this lane's door, not a preference.
-const FIXED_CONFLICT_HOOK = /^Evidence has surfaced suggesting a third party is deliberately escalating the tension between the two factions\.$|^A neutral figure is being pressured by both .+ to take a side before .+\.$/;
+const FIXED_CONFLICT_HOOK = /^Evidence has surfaced suggesting a third party is deliberately escalating the tension between the two factions\.$|^A letter has turned up showing that someone outside both factions paid for the last clash between them\.$|^A neutral figure is being pressured by both .+ to take a side before .+\.$/;
 
 /**
  * @param {PlotHook[]} out
@@ -543,7 +560,8 @@ export function collectPlotHooks(settlement = {}, options = {}) {
   });
 
   (settlement.history?.currentTensions || []).forEach((tension) => {
-    const label = TENSION_LABELS[/** @type {keyof typeof TENSION_LABELS} */ (tension.type)] || tension.type || 'Tension';
+    // SW-6 CRISIS-SURFACES (B3): a type the map lacks is titled in words, never its raw key ("corruption_scandal").
+    const label = TENSION_LABELS[/** @type {keyof typeof TENSION_LABELS} */ (tension.type)] || titleOfToken(tension.type) || 'Tension';
     (tension.plotHooks || []).forEach((hook) => push(hooks, {
       text: plotHookText(hook),
       source: label,

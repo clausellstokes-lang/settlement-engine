@@ -19,8 +19,11 @@ import { describeCompromiseConjunction } from '../../domain/display/causeConjunc
 import { npcInteriority } from '../../domain/display/npcInteriorityRead.js';
 import { whereaboutsLine, whereaboutsBadge } from '../../domain/roads/whereaboutsDisplay.js';
 import { cardTieLines } from '../../domain/relationships/cardTies.js';
-import { cardPowerLine, cardPowerNames, cardHouseOf } from '../../domain/people/cardPowers.js';
-import { cardInstitutionDoorOf, cardHonorificOf } from '../../domain/people/cardDoor.js';
+import { cardPowerLine, cardPowerNames, cardHouseOf, governingNameOf } from '../../domain/people/cardPowers.js';
+import { cardInstitutionDoorOf } from '../../domain/people/cardDoor.js';
+import { seatKeeperOf } from '../../domain/people/seatKeeper.js';
+import { shownHonorificOf } from '../../domain/people/seatKeeperDisplay.js';
+import { allegianceOf } from '../../domain/people/allegiance.js';
 import {
   NPC_GOALS, NPC_ROLE_ARCHETYPES, npcFacetOf,
 } from '../../domain/npc/npcBank.js';
@@ -258,14 +261,14 @@ export function NPCInlineCard({
   // The card's house, then its standing in each power by rank (PEOPLE-5A, M-1b). PEOPLE-6 LINKS:
   // the house is a door to its Institutions card; a minted face's door is its power's card.
   const cardDoor = cardInstitutionDoorOf(npc, settlement);
-  const cardPowerTail = cardPowerLine(npc);
+  const cardPowerTail = cardPowerLine(npc, [], governingNameOf(settlement), !!npc?.id && seatKeeperOf(settlement)?.id === npc.id); // COHERENCE-POWERS: the leader's office (F7: an empty seat's keeper, its caretaker's form)
   const cardLineTail = cardDoor || cardPowerTail;
   // PEOPLE-6 LINKS step 2 (the owner's word): a face's heading is its full name alone, and its
   // role is the honorific of its institution's title, on its own row under the door. The card's
   // `role`/`title` (the title itself, M-1b) is not printed beside it; a DM's person keeps both.
   // MERGE-CAR: the place's coast picks the pool (A-11) — read from the settlement the card is SHOWN in (the tab's), the
   // store's when absent; the edit layer above keeps the live store record (its roster order resolves the edit's index).
-  const honorific = cardHonorificOf(npc, placeSettlement || settlement);
+  const honorific = shownHonorificOf(npc, settlement, placeSettlement || settlement); // COHERENCE-POWERS-3 (F7): an empty seat's keeper
   const nativeRole = cardDoor ? '' : NPC_ROLE_ARCHETYPES.includes(npc.role)
     ? humanizeNpcFacet(npc.role)
     : (npc.role || '');
@@ -295,6 +298,9 @@ export function NPCInlineCard({
   ));
   const wants = readWants.length > 0 ? readWants : (goalText ? [goalText] : []);
   const disposition = interiority?.disposition || [];
+  // WIRING W3 C9 (R-W6, FOR THE OWNER'S VETO): how the face deals with strangers, the authored
+  // `presentation.behaviour` line drawn at birth. X-48's look-and-voice class (`impression`) stays dark.
+  const dealing = typeof npc.presentation?.behaviour === 'string' ? npc.presentation.behaviour.trim() : '';
   // NO CHIP REPEATS A WANT (2026-09-18). The `Goal:` chip went first, because the
   // card printed that one sentence three times over. The rule behind it is wider
   // than the goal, and keying it on a LABEL would have left the same defect a row
@@ -325,6 +331,13 @@ export function NPCInlineCard({
   // floor). Null unless the world pulse touched this compromise. The npc pin key
   // seeds variant selection so two bearers of one conjunction read differently.
   const compromiseLc = describeCompromiseConjunction(npc.compromiseLifecycle, npcPinKey(npc));
+  // ALLEGIANCE-CAR1 (2026-11-08): the hidden allegiance replaces the "compromised" mark on the card — "an NPC simply
+  // has an allegiance to the thieves guild" (the owner). The DM's line: "answers to {guild}, through {handler}".
+  const allegiance = allegianceOf(npc);
+  const allegianceGuild = allegiance ? (allegiance.power || allegiance.house || null) : null;
+  const allegianceHandler = allegiance?.handler
+    ? ((placeSettlement || settlement)?.npcs || []).find((n) => String(n?.id) === allegiance.handler)?.name || null
+    : null;
 
   // Pin UI is optional. When `onTogglePin` isn't provided (read-only views,
   // unsaved settlements) the icon doesn't render at all. `pinnedIds` is a Set
@@ -379,7 +392,7 @@ export function NPCInlineCard({
           may not sit inside the toggle's <button>; the role row follows it. */}
       {hasSubline && (
         <div data-testid="npc-card-line" style={{padding:'0 12px 8px'}}>
-      <div style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag3}}>
+      <div style={{fontSize:proseFontSize(FS.xs, mobile),color:swatch.inkMag3}}>
         {nativeRole}
         {showRoleArchetype ? `${nativeRole ? ' · ' : ''}${roleArchetype} archetype` : ''}
         {/* THE POWER LINE (PEOPLE-5A, M-1b): the card's house, then its standing in
@@ -406,9 +419,9 @@ export function NPCInlineCard({
               {publicTraits.map((t,i) => <span key={`${t.key}-${i}`} title={t.value} style={{fontSize:chromeFontSize(FS.xxs, mobile),color:swatch.inkMag3,background:swatch['#EDE3CC'],padding:'0 5px'}}>{t.label}: {t.value}</span>)}
             </div>
           )}
-          {(npc.corrupt || npc.ousted) && (
+          {(allegiance || npc.ousted) && (
             <div style={{display:'flex',alignItems:'center',gap:6,flexWrap:'wrap',margin:'6px 0',fontSize:chromeFontSize(FS.xs, mobile)}}>
-              {npc.corrupt ? (
+              {allegiance ? (
                 // W-C5: the lifecycle stage tunes the badge — a historicized compromise
                 // reads muted ("Longstanding"), an exposed one reads "Exposed", the rest
                 // "Compromised". Falls back to the plain badge when the pulse never touched it.
@@ -420,19 +433,19 @@ export function NPCInlineCard({
                       ? { color:swatch.inkMag3, border:`1px solid ${swatch.inkMag3}` }
                       : { color:swatch.danger, border:`1px solid ${swatch.danger}` }),
                   padding:'1px 6px',
-                }}>{(compromiseLc?.badge) || 'Compromised'}</span>
+                }}>{(compromiseLc?.badge) || 'Hidden allegiance'}</span>
               ) : (
                 <span style={{
                   fontWeight:800,color:swatch.inkMag3,
                   border:`1px solid ${swatch.inkMag3}`,padding:'1px 6px',
                 }}>Exposed</span>
               )}
-              {npc.corrupt && npc.corruptTies?.criminalInstitution && (
-                <span style={{color:swatch.inkMag3,fontStyle:'italic'}}>tied to <MentionText text={npc.corruptTies.criminalInstitution} structural/></span>
+              {allegianceGuild && (
+                <span style={{fontSize:proseFontSize(FS.xs, mobile),color:swatch.inkMag3,fontStyle:'italic'}}>answers to <MentionText text={allegianceGuild} structural/>{allegianceHandler && <>, through <MentionText text={allegianceHandler} structural/></>}</span>
               )}
             </div>
           )}
-          {npc.corrupt && compromiseLc?.phrase && (
+          {allegiance && compromiseLc?.phrase && (
             <p style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag3,margin:'2px 0 6px',lineHeight:1.4,fontStyle:'italic'}}>{compromiseLc.phrase}</p>
           )}
           {npc.replacedNpc && (
@@ -453,7 +466,7 @@ export function NPCInlineCard({
             </div>
           )}
           {tieLines.length>0 && (
-            <div data-testid="npc-card-ties" style={{display:'flex',flexDirection:'column',gap:2,margin:'6px 0',fontSize:chromeFontSize(FS.xs, mobile)}}>
+            <div data-testid="npc-card-ties" style={{display:'flex',flexDirection:'column',gap:2,margin:'6px 0',fontSize:proseFontSize(FS.xs, mobile)}}>
               {tieLines.map((t,i)=>(
                 <div key={`tie-${i}`} data-tie-direction={t.direction} style={{display:'flex',alignItems:'baseline',gap:6,flexWrap:'wrap'}}>
                   <span style={{fontWeight:800,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.04em'}}>{t.direction==='own'?(t.kind||'Tie'):'Called by'}</span>
@@ -470,7 +483,7 @@ export function NPCInlineCard({
               <span style={{fontWeight:700}}>Constraint: </span><MentionText text={npc.activeConstraint} selfId={entityIdFor('npc', npc)}/>
             </p>
           )}
-          {(wants.length > 0 || disposition.length > 0) && (
+          {(wants.length > 0 || disposition.length > 0 || dealing) && (
             <div style={{margin:'6px 0',display:'flex',flexDirection:'column',gap:2}}>
               {wants.length > 0 && (
                 // Each want goes through ProseParagraph: the first one is the goal the
@@ -488,6 +501,11 @@ export function NPCInlineCard({
               {disposition.length > 0 && (
                 <div style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag3,lineHeight:1.4}}>
                   <span style={{fontWeight:700,color:MUTED}}>Disposition </span>{disposition.join(', ')}
+                </div>
+              )}
+              {dealing && (
+                <div style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag3,lineHeight:1.4}}>
+                  <span style={{fontWeight:700,color:MUTED}}>How they deal </span>{dealing}
                 </div>
               )}
             </div>

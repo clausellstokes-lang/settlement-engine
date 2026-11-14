@@ -69,6 +69,7 @@ import { factionArchetype, FACTION_ARCHETYPES } from '../factionArchetypes.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { prosperityRank01 } from '../prosperityRank.js';
 import { OFF_STAGE_STATUSES, isOffStage } from '../roads/state.js';
+import { firstRankMembershipOf, powerOrderOf } from '../people/membership.js';
 import { nameOf } from '../rulingPower.js';
 import { dropSpatialLedger, getSpatialLedger, setSpatialLedger } from '../spatial/spatialLedgerAccess.js';
 import { stablePart } from './stablePart.js';
@@ -320,8 +321,11 @@ export function castHouseFactor(settlement, faction) {
   const house = nameOf(/** @type {Parameters<typeof nameOf>[0]} */ (faction));
   if (!house) return '';
   const people = Array.isArray(settlement.npcs) ? settlement.npcs : [];
+  // A member is a card whose FIRST-RANK power is the house (people/membership.js), re-pointed by PULSE-SITES
+  // (2026-11-10) from the retired `factionAffiliation`, which no current card carries.
+  const order = powerOrderOf(settlement);
   const ids = people
-    .filter((npc) => isPlainObject(npc) && isName(npc.id) && npc.factionAffiliation === house
+    .filter((npc) => isPlainObject(npc) && isName(npc.id) && firstRankMembershipOf(npc, order)?.power === house
       && !CONSUMER_PAIRED_STATUSES.includes(String(npc.status ?? '').toLowerCase()) && !isOffStage(npc))
     .map((npc) => String(npc.id))
     .sort(compareCodepoint);

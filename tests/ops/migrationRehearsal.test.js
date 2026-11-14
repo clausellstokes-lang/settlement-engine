@@ -105,8 +105,10 @@ describe('bounded migration rehearsal plan', () => {
 
   it('covers the exact applied-head to repository-head gap in semantic waves', () => {
     expect(plan.appliedHead).toBe(121);
-    expect(plan.repoHead).toBe(204);
-    expect(plan.pendingCount).toBe(83);
+    // TIER-PARITY-FIX (2026-11-09): written for the MERGED chain — 207 (the allegiance cars) and
+    // 208 (the party link) land with their lanes; this lane adds 209 (the Surveyor premium only).
+    expect(plan.repoHead).toBe(210); // STYLE-2-MERGE: 208 at SW-B7a's point, 209 at TIER-PARITY-FIX's, 210 at SW-B7b's
+    expect(plan.pendingCount).toBe(89);
     expect(plan.waves.map(({ from, to }) => [from, to])).toEqual([
       [122, 136],
       [137, 156],
@@ -131,13 +133,19 @@ describe('bounded migration rehearsal plan', () => {
       [202, 202],
       [203, 203],
       [204, 204],
+      [205, 205],
+      [206, 206],
+      [207, 207],
+      [208, 208],
+      [209, 209],
+      [210, 210],
     ]);
     expect(MIGRATION_WAVES.at(-1).to).toBe(MIGRATION_TRAIN_REPO_HEAD);
 
     const covered = plan.waves.flatMap((wave) =>
       wave.migrations.map((migration) => migration.number));
     expect(covered).toEqual(
-      Array.from({ length: 83 }, (_, index) => 122 + index),
+      Array.from({ length: 89 }, (_, index) => 122 + index),
     );
     expect(new Set(covered).size).toBe(covered.length);
 
@@ -389,6 +397,99 @@ describe('bounded migration rehearsal plan', () => {
     const engineReport = plan.waves.flatMap((wave) => wave.migrations).find((migration) => migration.number === 204);
     expect(engineReport.rollback).toMatchObject({ mode: 'documented-manual-reversal', source: 'migration-annotation' });
     expect(engineReport.rollback.note).toMatch(/drop function if exists public\.report_engine_generations/i);
+    // ⭐ THE NEW TAIL WAVE (205, FIX-EXPORT-KEYS, the owner's word of 2026-11-07: the export
+    // allowlist's dead keys go before the deploy): one re-stated function, the public dossier
+    // sanitizer, 189's body less the people car's three retired keys. It only hides; no table,
+    // no column, no policy, no row. Its own @rollback annotation spells the reversal.
+    expect(plan.waves.find((wave) => wave.id === 'retired-faction-public-keys')).toMatchObject({
+      id: 'retired-faction-public-keys',
+      from: 205,
+      to: 205,
+      expectedObjects: [{ kind: 'function', name: '_gallery_sanitize_public_json' }],
+    });
+    const retiredKeys = plan.waves.flatMap((wave) => wave.migrations).find((migration) => migration.number === 205);
+    expect(retiredKeys.rollback).toMatchObject({ mode: 'documented-manual-reversal', source: 'migration-annotation' });
+    expect(retiredKeys.rollback.note).toMatch(/recreate 189's body verbatim/i);
+    // ⭐ THE NEW TAIL WAVE (206, FIX-PUBLIC-VEIL, the chair's ruling of 2026-11-07, shape (a)): one
+    // re-stated function, the public dossier sanitizer, 205's body plus the per-row veil-bit rule.
+    // No table, no column, no policy, no row. Its own @rollback annotation spells the reversal.
+    expect(plan.waves.find((wave) => wave.id === 'public-card-veil-bit')).toMatchObject({
+      id: 'public-card-veil-bit',
+      from: 206,
+      to: 206,
+      expectedObjects: [{ kind: 'function', name: '_gallery_sanitize_public_json' }],
+    });
+    const veilBit = plan.waves.flatMap((wave) => wave.migrations).find((migration) => migration.number === 206);
+    expect(veilBit.rollback).toMatchObject({ mode: 'documented-manual-reversal', source: 'migration-annotation' });
+    expect(veilBit.rollback.note).toMatch(/recreate 205's body verbatim/i);
+    // ⭐ THE NEW TAIL WAVE (207, ALLEGIANCE-CAR2, J-20, the chair's ruling of 2026-11-08): one re-stated function, the
+    // public dossier sanitizer, 206's body plus the hall-capture block. No table, no column, no policy, no row. Its own
+    // @rollback annotation spells the reversal.
+    expect(plan.waves.find((wave) => wave.id === 'public-hall-capture-veil')).toMatchObject({
+      id: 'public-hall-capture-veil',
+      from: 207,
+      to: 207,
+      expectedObjects: [{ kind: 'function', name: '_gallery_sanitize_public_json' }],
+    });
+    const hallVeil = plan.waves.flatMap((wave) => wave.migrations).find((migration) => migration.number === 207);
+    expect(hallVeil.rollback).toMatchObject({ mode: 'documented-manual-reversal', source: 'migration-annotation' });
+    expect(hallVeil.rollback.note).toMatch(/recreate 206's body verbatim/i);
+    // ⭐ THE NEW TAIL WAVE (208, SW-B7a PARTY-LINK; the entry the lane omitted, written by STYLE-2-MERGE at its merge point on
+    // the chair's ruling of 2026-11-09 17:2x): the five settlement party-link RPCs of 168 recreated and `visibility` derived
+    // from the slug under a check constraint after a backfill. Its own @rollback annotation spells the reversal.
+    expect(plan.waves.find((wave) => wave.id === 'party-link-independent-idempotent-veiled')).toMatchObject({
+      id: 'party-link-independent-idempotent-veiled',
+      from: 208,
+      to: 208,
+      expectedObjects: [
+        { kind: 'function', name: 'share_settlement_unlisted' },
+        { kind: 'function', name: 'rotate_settlement_unlisted_slug' },
+        { kind: 'function', name: 'revoke_settlement_unlisted' },
+        { kind: 'function', name: 'get_unlisted_dossier' },
+        { kind: 'function', name: 'list_my_unlisted_dossiers' },
+        { kind: 'table', name: 'settlements' },
+      ],
+    });
+    const partyLink = plan.waves.flatMap((wave) => wave.migrations).find((migration) => migration.number === 208);
+    expect(partyLink.rollback).toMatchObject({ mode: 'documented-manual-reversal', source: 'migration-annotation' });
+    expect(partyLink.rollback.note).toMatch(/at their migration-168 bodies/i);
+    // RE-KEYED BY IDENTITY (VEIL-FIX R10, the re-review of 2026-11-10: the purpose still quoted 208's
+    // pre-amendment "(d)"): every fragment the purpose QUOTES from 208's header (the double-quoted runs,
+    // split at the elisions) is found in that header verbatim, so a header amended under the manifest
+    // reds here instead of leaving a stale quote.
+    const header208 = readFileSync(join(process.cwd(), 'supabase/migrations/208_party_link_independent_idempotent_veiled.sql'), 'utf8')
+      .split('\n').filter((line) => line.startsWith('--')).map((line) => line.replace(/^--\s*/, '')).join(' ').replace(/\s+/g, ' ').replace(/(\w)- (\w)/g, '$1-$2');
+    const partyLinkWave = plan.waves.find((wave) => wave.id === 'party-link-independent-idempotent-veiled');
+    const quoted = String(partyLinkWave.purpose).split('"').filter((_, i) => i % 2 === 1)
+      .flatMap((run) => run.split(' … ')).map((piece) => piece.replace(/\s+/g, ' ').trim()).filter((piece) => piece.length > 12);
+    expect(quoted.length, 'anchored: the purpose quotes the header').toBeGreaterThan(4);
+    for (const piece of quoted) expect(header208.includes(piece), piece).toBe(true);
+    // ⭐ THE SURVEYOR WAVE (209, TIER-PARITY-FIX, the owner, 2026-11-09: "Premium only"): one
+    // re-stated function, has_surveyor_entitlement — staff, an active premium tier, a staff grant.
+    // No table, no column, no policy, no row. Its own @rollback annotation spells the reversal.
+    expect(plan.waves.find((wave) => wave.id === 'surveyor-premium-only')).toMatchObject({
+      id: 'surveyor-premium-only',
+      from: 209,
+      to: 209,
+      expectedObjects: [{ kind: 'function', name: 'has_surveyor_entitlement' }],
+    });
+    const surveyorPremium = plan.waves.flatMap((wave) => wave.migrations).find((migration) => migration.number === 209);
+    expect(surveyorPremium.rollback).toMatchObject({ mode: 'documented-manual-reversal', source: 'migration-annotation' });
+    expect(surveyorPremium.rollback.note).toMatch(/re-run 201's body verbatim/i);
+    // ⭐ THE NEW TAIL WAVE (210, SW-B7b PROJECTION, STYLE-RULINGS-2 B10(a), the chair's ruling of 2026-11-09 12:5x):
+    // one re-stated function, the public dossier sanitizer, 207's body plus ONE top-level allowlist token,
+    // 'publicProse'. No table, no column, no policy, no row. Its own @rollback annotation spells the reversal.
+    // (On SW-B7b's lane alone 208 and 209 are absent, so the gap arm above reads 208–209 there; their lanes'
+    // entries close it at the merge.)
+    expect(plan.waves.find((wave) => wave.id === 'public-prose-text-projection')).toMatchObject({
+      id: 'public-prose-text-projection',
+      from: 210,
+      to: 210,
+      expectedObjects: [{ kind: 'function', name: '_gallery_sanitize_public_json' }],
+    });
+    const publicProseWave = plan.waves.flatMap((wave) => wave.migrations).find((migration) => migration.number === 210);
+    expect(publicProseWave.rollback).toMatchObject({ mode: 'documented-manual-reversal', source: 'migration-annotation' });
+    expect(publicProseWave.rollback.note).toMatch(/re-apply 207's body verbatim.*falls silent where the composed blocks stood/i);
     // …and 199, like 197, takes its posture from its OWN annotation rather than the wave
     // policy — but for the opposite reason: 197's data half is deliberately unscripted,
     // while 199's whole reversal IS one scripted statement. Both are
@@ -530,12 +631,18 @@ describe('bounded migration rehearsal plan', () => {
       rollbackDirectory: ROLLBACK,
       appliedHead: 200,
     });
-    expect(fromWave200).toMatchObject({ appliedHead: 200, repoHead: 204, pendingCount: 4 });
+    expect(fromWave200).toMatchObject({ appliedHead: 200, repoHead: 210, pendingCount: 10 });
     expect(fromWave200.waves.map(({ id, from, to }) => [id, from, to])).toEqual([
       ['staff-unlock-surveyor-entitlement', 201, 201],
       ['edit-registry-public-denylist', 202, 202],
       ['gallery-scanner-client-mirror-totality', 203, 203],
       ['engine-generation-report', 204, 204],
+      ['retired-faction-public-keys', 205, 205],
+      ['public-card-veil-bit', 206, 206],
+      ['public-hall-capture-veil', 207, 207],
+      ['party-link-independent-idempotent-veiled', 208, 208],
+      ['surveyor-premium-only', 209, 209],
+      ['public-prose-text-projection', 210, 210],
     ]);
     // ⭐⭐ THE LEDGER'S OWN HEAD IS ASSERTED RELATIONALLY AND MUST NEVER BE A LITERAL AGAIN.
     // `supabase/applied-head.json` is bumped in the same act as the owner's `supabase db
@@ -585,7 +692,7 @@ describe('bounded migration rehearsal plan', () => {
       migrationDirectory: MIGRATIONS,
       rollbackDirectory: ROLLBACK,
       appliedHead: 150,
-    })).toThrow(/wave boundaries are 121, 136, 156, .*200, 201, 202, 203, 204, but the ledger says 150/);
+    })).toThrow(/wave boundaries are 121, 136, 156, .*200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, but the ledger says 150/);
   });
 
   it('stages no migration beyond the selected wave boundary', () => {
@@ -595,8 +702,8 @@ describe('bounded migration rehearsal plan', () => {
     const numbers = staged.copied.map((name) => Number(name.split('_')[0]));
 
     expect(snapshot).toMatchObject({
-      repoHead: 204,
-      migrationCount: 204,
+      repoHead: 210,
+      migrationCount: 210,
       configSha256: expect.stringMatching(/^[a-f0-9]{64}$/),
       workspaceSourceSha256: expect.stringMatching(/^[a-f0-9]{64}$/),
     });
@@ -718,7 +825,7 @@ describe('clone admission is positive and source-bound', () => {
     const liveAppliedHead = JSON.parse(readFileSync(join(ROOT, 'supabase', 'applied-head.json'), 'utf8')).appliedHead;
     expect(JSON.parse(result.stdout)).toMatchObject({
       appliedHead: liveAppliedHead,
-      repoHead: 204,
+      repoHead: 210,
     });
   });
 });

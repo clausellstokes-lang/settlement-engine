@@ -2,6 +2,7 @@
 // All constants exported for use by npcGenerator.js
 
 import { pickVariant } from '../kernel/proseHash.js';
+import { HANDLER_TIE_LINES } from './people/handlerTieLines.js';
 
 export const MANNERISMS = [
   'drums fingers on surfaces when thinking',
@@ -41,7 +42,7 @@ export const SPEECH_PATTERNS = [
   'Verbose and elaborate; takes three sentences where one would do',
   'Peppers speech with trade or craft jargon even in unrelated contexts',
   'Speaks softly, forcing others to lean in',
-  'Asks rhetorical questions to make points rather than stating them',
+  'Makes every point as a question they do not expect answered',
   "Uses the formal royal 'we' (old habit from a previous station)",
   'Pauses mid-sentence to choose words with visible care',
   'Deflects personal questions with philosophical tangents',
@@ -232,7 +233,7 @@ export const NPC_PLOT_HOOKS = {
       disposition: 'transactional',
     },
     {
-      impression: 'Relaxed in a way that reads as confidence rather than carelessness.',
+      impression: 'Relaxed and sure of themselves, and not careless with it.',
       disposition: 'welcoming',
     },
     {
@@ -272,7 +273,7 @@ export const NPC_PLOT_HOOKS = {
       disposition: 'welcoming',
     },
     {
-      impression: 'Cautious with newcomers. The wariness is professional rather than personal.',
+      impression: 'Cautious with newcomers, because the work requires it; it is nothing personal.',
       disposition: 'cautious',
     },
   ],
@@ -486,7 +487,7 @@ export const NPC_FACTION_GOALS = {
       driven_by: 'power',
     },
     {
-      short: 'Root out the faction leaking tax figures to rivals',
+      short: 'Root out whoever is leaking tax figures to rivals',
       long: 'Retire with a fortune and a clean name (in that order)',
       driven_by: 'wealth',
       colour: true,
@@ -539,7 +540,7 @@ export const NPC_FACTION_GOALS = {
     },
     {
       short: "Identify which of their officers is on the thieves' guild payroll", // CENSUS-4b: NOT declared — F4's writer (npcGenerator, crimeSignalOf) rewrites the guild to 'a powerful outside interest' where no crime signal stands, so the printed line presumes nothing (tests/generators/npcCrimeSignalWriters.test.js soak1k-531)
-      long: 'Die in bed rather than in the street (unusual ambition for the role)',
+      long: 'Die old, in their own bed (an unusual ambition for the role)',
       driven_by: 'personal',
     },
   ],
@@ -684,7 +685,7 @@ export const NPC_FACTION_GOALS = {
       colour: true,
     },
     {
-      short: 'Negotiate a non-aggression pact with a new criminal faction moving into their territory',
+      short: 'Negotiate a non-aggression pact with a new gang moving into their territory',
       long: 'Ensure no one ever proves the connection between them and their operations',
       driven_by: 'personal',
       colour: true,
@@ -733,7 +734,7 @@ export const NPC_FACTION_GOALS = {
   ],
   'Guild Archmage': [
     {
-      short: "Resolve a dispute between two factions of the mages' guild without taking sides",
+      short: "Resolve a dispute between two camps within the mages' guild without taking sides",
       long: 'Establish a magical institution that outlasts their own life and power',
       driven_by: 'power',
       colour: true,
@@ -871,7 +872,7 @@ export const NPC_CRIMINAL_SECRETS_BY_HOLDER = {
     ],
     personal: [
       {
-        secret: 'Has a second family in another settlement that neither family knows about',
+        secret: 'Has a second family elsewhere that neither family knows about',
         stakes: 'Both relationships collapse, along with any claim to moral authority',
       },
       {
@@ -905,7 +906,7 @@ export const NPC_CRIMINAL_SECRETS_BY_HOLDER = {
     ],
     political: [
       {
-        secret: 'Has been feeding strategic intelligence to a rival settlement',
+        secret: 'Has been feeding strategic intelligence to outsiders who pay for it',
         stakes: 'Treason charges; execution or exile in most jurisdictions',
       },
       {
@@ -1156,12 +1157,16 @@ export const FACTION_CONFLICT_TYPES = {
   other: ['economy', 'government'],
 };
 
+// SW-10 HOOKS (2026-11-09): the category pools grown to the measured size (other 40; government, economy,
+// military 24; religious, criminal, small_settlement 18) so a city's cards stop reprinting one town's hooks in the
+// next — the 1,000's hooks figure 0.299 / 0.355 → 0.154 / 0.202; every new line (each pool's tail) is a proposal
+// for the owner's veto, listed in docs/chair/2026-11-09/STYLE-2-HOOKS-2026-11-09.md.
 export const NPC_FACTION_LOYALTY = {
   government: [
     "A sealed letter arrived for them three weeks ago. They haven't opened it. They won't say why.",
     "They've been quietly buying up property in a district that hasn't been announced as a development site. Yet.",
     "One of their staff has started asking questions about records from seven years ago. They've been reassigned twice already.",
-    'A merchant they publicly opposed is now publicly supporting them. No explanation offered.',
+    'A merchant they spoke against has started praising them in public, and will not say why.',
     "Their most trusted advisor hasn't been seen in four days. The official story changes each time it's told.",
     { text: "They know who committed a crime the guard is currently investigating. They're not telling the guard.", needs: ['guardPresence'] }, // CENSUS-3e: the ledger's declaration
     "Someone has been leaving anonymous notes in their office pointing to a colleague's corruption. The notes are accurate.",
@@ -1169,6 +1174,19 @@ export const NPC_FACTION_LOYALTY = {
     'A routine appointment they made three weeks ago has been rescheduled four times. Each time they initiated the change.',
     'Someone who publicly supports them is being paid by someone who opposes them. They know this.',
     'They received a deposition in a civil case that, if acted on, would be correct, and would ruin someone they need.',
+    "A clerk in their office has been copying letters at night, and the copies have turned up in a rival's hands.",
+    'They signed an order last month on bad information, and the family it ruined has learned whose seal is on it.',
+    'A petition they set aside has gathered names from half their street, and the people who signed it want an answer this week.',
+    'Someone is collecting fees in their name, and the people paying think the receipts are honest.',
+    'Their deputy has started answering questions meant for them, and people have begun going to the deputy first.',
+    "An old ruling of theirs is being used to take a widow's house, and they cannot undo it without admitting the mistake.",
+    'They promised the same post to two people, and both have already told their families.',
+    'A ledger they swore was complete is missing the pages for one season, and an auditor is coming to read it.',
+    'Their sister has been taking gifts from people who need their signature, and they found out from the person who paid most.',
+    'They were seen leaving a house they had no business in, on the night its owner disappeared.',
+    'A rule they wrote to stop one abuse has opened the door to another, and the people using it are their friends.',
+    'Someone has forged their seal well enough to fool their own staff, and three orders went out under it before anyone noticed.',
+    'They owe their post to a patron who has started asking for repayment in favours they cannot grant openly.',
   ],
   military: [
     { text: 'Three guards have gone missing in the same district on night patrol. The report filed says they deserted.', needs: ['guardPresence'] }, // CENSUS-3e: the ledger's declaration
@@ -1182,6 +1200,19 @@ export const NPC_FACTION_LOYALTY = {
     'A recruit they turned away has since joined a different outfit. The different outfit is now paying them to monitor this one.',
     'They are carrying out orders they believe are wrong. They have not yet decided at what point they stop carrying them out.',
     { text: "A weapons cache they were responsible for is smaller than it should be. They haven't reported it yet.", needs: ['guardPresence'] }, // CENSUS-3e: the ledger's declaration
+    'Two of the people under their command have been settling a private quarrel with drawn steel, and the rest are picking sides.',
+    'An old comrade has turned up asking for a favour that could cost them their post if anyone learns of it.',
+    'They signed for supplies that never arrived, and the merchant who sold them is already spending the money.',
+    'Someone under their command has been selling duty rosters to people who want to know when the roads are empty.',
+    'A report they wrote years ago blamed the wrong person for a death, and the right one has just come back.',
+    'Their second has been meeting with the people they answer to, and orders have started arriving without passing through them.',
+    'A deserter they let go quietly has been caught elsewhere and is telling everyone who let them walk.',
+    'They have been ordered to clear a family off land the family has worked for generations, and the order is lawful.',
+    'The pay chest came up short again this month, and the only other key belongs to someone they trust.',
+    'A local family has been feeding the people under their command for free, and now expects a favour in return.',
+    'One of their best people has asked to be released, and will not say what they are afraid of.',
+    'Tracks they were told to ignore lead from the edge of the fields to a camp nobody has reported.',
+    'They lost a wager to someone who now wants payment as a closed eye on one particular night.',
   ],
   religious: [
     'A parishioner confessed something to them three months ago. The information is dangerous. They cannot act on it.',
@@ -1190,11 +1221,18 @@ export const NPC_FACTION_LOYALTY = {
     "A novice has the gift. They know what that means for the novice. They're not sure what to do.",
     'They received a directive from the hierarchy that contradicts their own theology. Compliance is expected.',
     "A healing they performed was successful in a way they cannot explain. It's happened twice now.",
-    "The previous holder of their position left a letter, sealed, to be opened after their death. It wasn't.",
+    "Their predecessor left a sealed letter to be opened at their death; it never was, and it is still where it was left.",
     'A member of their congregation is systematically working against the faith. From inside it.',
     'They have been asked to perform a ceremony they have theological objections to. The person asking has leverage.',
     "A donation was made to the institution under conditions the donor didn't disclose publicly. The conditions are becoming relevant.",
     'They know which of the current leadership will be the next to fall from grace. They are waiting.',
+    'A family has asked them to bury someone the faith forbids burying, and has offered a gift too large to refuse quietly.',
+    'The offerings have doubled this season, and they cannot find out who is giving or why.',
+    'A preacher from outside has been drawing their congregation away, and saying things about them that are partly true.',
+    "They married a couple in secret at one family's request, and the other family has just found out.",
+    'A child in their care claims to hear the god speak, and the child has been right three times.',
+    'They have stopped believing, have told no one, and still lead the prayers every week.',
+    'Someone has been reading the private letters kept in their care, and two of those letters were confessions.',
   ],
   economy: [
     "A shipment they weren't expecting arrived and is now in their warehouse. They don't know who sent it or what to do.",
@@ -1208,40 +1246,91 @@ export const NPC_FACTION_LOYALTY = {
     "A contract they signed in difficult times has a clause they didn't fully read. Someone has read it.",
     "They have been slowly acquiring a controlling interest in a competitor through intermediaries. The competitor hasn't noticed yet.",
     'A supplier is providing goods of uncertain provenance. The price is too good to ask questions. People have started asking questions.',
+    'A buyer has paid them in advance for a whole season of goods, far above the price, and will not say what the goods are for.',
+    'Their bookkeeper has been taking a little from every sale for years, and the books balance only because the bookkeeper wrote them.',
+    "A partner died owing them money, and the partner's heir says the debt was paid in a letter nobody can find.",
+    'They sold a batch they knew was bad, and the customer it sickened is now asking who supplied it.',
+    'A rival has hired away their two best hands in one week, on wages the rival cannot afford for long.',
+    'They have promised the same order to two buyers, and both are due to collect on the same morning.',
+    'A lender has bought the note on their shop and wants it settled by the end of the month.',
+    'Their scales were tested and found heavy in their favour, and they swear someone changed them overnight.',
+    'A family they put out of business has opened again under a new name, two doors down.',
+    'Someone has been selling cheaper and worse goods under their mark, and customers are blaming them.',
+    'They have quietly stopped paying a supplier who cannot afford to take them to law.',
+    'A crate came to them by mistake, and the people who meant to receive it have started asking around for it.',
+    'Their apprentice has been offered a partnership by a rival, on condition that the apprentice brings the recipes.',
   ],
   criminal: [
     { text: "One of their people is talking to the guard. They don't know which one yet. They're watching.", needs: ['guardPresence'] }, // CENSUS-3e: the ledger's declaration
     'A valuable item came through their network recently. Three different parties have asked about it quietly.',
-    "Someone in the legitimate government is playing both sides. That's useful, until it isn't.",
+    "Someone in the government takes their money and someone else's, and they do not know which side will be sold first.",
     'A job went wrong in a way that suggests information was leaked. They have three suspects.',
     "They're protecting someone from something worse. The someone doesn't know and wouldn't thank them.",
-    'A new face has appeared in three separate incidents involving their operations. Coincidence or surveillance?',
+    'The same new face has turned up at three of their jobs, and they have put someone on to follow the newcomer.',
     { text: 'The guard captain has a file. They know because someone who works for the guard captain also works for them.', needs: ['guardPresence'] }, // CENSUS-3e: the ledger's declaration
-    "Someone tried to rob one of their fronts. The attempt was professional. That's more worrying than amateur.",
+    "Someone tried to rob one of their fronts, and did it like a professional: no noise, the lock picked, nothing touched but the strongbox.",
+    'Two of their people have started running jobs of their own, and are telling newer hands that the old boss is finished.',
+    'A debt they called in was paid by someone they have never met, and that person now wants to meet.',
+    'A load of theirs was taken on the road by people who knew the day, the route and the password.',
+    'Someone has been using their name to frighten shopkeepers, and the shopkeepers have begun paying the wrong people.',
+    'A child they pay to carry messages has stopped coming, and the last message never arrived.',
+    'An honest official they have never managed to buy has started asking about one of their fronts by name.',
+    'They are holding goods for someone who has stopped answering, and the goods are beginning to draw attention.',
+    'A rival crew has offered peace, and the offer arrived on the same day one of their people went missing.',
+    'Someone in their own crew has been skimming, and the sum matches exactly what a rival is now spending.',
+    'A family they once ruined has a son who has just come of age, and he has started asking where they sleep.',
   ],
   magic: [
     "An experiment failed in a way that shouldn't be possible. The results have been sealed. They're still thinking.",
-    "A student asked a question three weeks ago that they haven't been able to answer. That's new.",
+    "A student asked them a question three weeks ago that they still cannot answer, and the student has not asked again.",
     { text: 'Something in the settlement is absorbing ambient magical energy. The readings are increasing.', needs: ['magic'] }, // CENSUS-3e: the ledger's declaration
     "They've been approached by someone who knows things about their research that were never made public.",
     'An old colleague has sent a message asking for a meeting. The colleague was declared dead six years ago.',
-    { text: 'The magical ward they placed on the vaults was bypassed. Not broken. Bypassed. That requires inside knowledge.', needs: ['magic'] }, // CENSUS-3e: the ledger's declaration
+    { text: 'The ward on their vaults was not broken but bypassed, which only someone who knew how it was made could do.', needs: ['magic'] }, // CENSUS-3e: the ledger's declaration
     { text: 'They have two competing theories about what is happening to magic in this region. Both are alarming.', needs: ['magic'] }, // CENSUS-3e: the ledger's declaration
     'Someone has been making inquiries about their past research. Not the published work, the unpublished work.',
   ],
   other: [
-    "They overheard something they shouldn't have and don't know what to do with the information.",
+    "They overheard two people they know settle a bribe, and do not know whom to tell.",
     "A regular customer has stopped coming. The reason they've been given doesn't make sense.",
     "Someone left an item in their care and hasn't returned. The item is valuable. The absence is now suspicious.",
     'Three different people have asked them the same unusual question. None of them knew each other.',
     "They found something hidden in a place it shouldn't be. They put it back. They haven't told anyone.",
-    'A stranger passed through, asked specific questions, and left before they could follow up.',
-    'Something they were told was destroyed is apparently not destroyed.',
-    "They know something small that connects to something much larger. They haven't realised the connection. Yet.",
-    "Someone they trust completely has started behaving in ways that don't add up.",
+    'A traveller passed through asking which nights their door is left unbarred, and was gone by morning.',
+    'Something they were told had been burned has turned up for sale.',
+    "They have seen the same unmarked cart pass their door three nights running, and have not wondered why.",
+    "Their oldest friend has started paying for drinks with new silver and will not say where it came from.",
     "They've been offered money to not ask questions about something they hadn't even started asking about.",
     'A document they were asked to witness contained a clause they noticed at the time and said nothing about.',
     "Their predecessor left something behind (in a place where it shouldn't have been), and they haven't reported finding it.",
+    'A neighbour has accused them of moving a fence, and the neighbour has witnesses who were not there.',
+    "They lent their savings to a friend who has since left, and the friend's family says there was no loan.",
+    'Their landlord has doubled the rent and will lower it only if they report on the family next door.',
+    'A letter addressed to them was opened before it arrived, and the sender says it carried money.',
+    'Their son has been seen at night with people who do not work, and comes home with coin.',
+    'A customer paid them with a ring that someone else has reported stolen.',
+    'They saw an accident that was no accident, and the person responsible knows they saw it.',
+    "An inheritance they did not expect has arrived from a relative they never met, along with that relative's debts.",
+    'Their spouse has been making payments to someone every month for years, and will not say who.',
+    'Two neighbours have each asked them to stand witness in the same dispute, on opposite sides.',
+    'They told a lie to protect a friend, and the friend is now repeating it to people who matter.',
+    'A child they took in as a favour has family who want the child back, and want paying for the years.',
+    "Their best customer owes them a year's takings and has started avoiding their street.",
+    'Someone has been asking the neighbours what time they leave in the morning and when they come home.',
+    'A tool they lent out came back broken, and the borrower insists it was broken when it left.',
+    'They have been invited to the wedding of someone who once ruined their family, and refusing would be noticed.',
+    'A purse they found and kept has a rightful owner, and that owner has started asking around.',
+    'Their partner in a small venture has disappeared with the takings and left the debts in their name.',
+    'A family they look after has stopped answering the door, and the shutters have stayed closed for a week.',
+    'They agreed to hold a parcel for a traveller, and two different people have since come to collect it.',
+    'An old letter of theirs, written in anger years ago, has been shown to the person it was about.',
+    'Their apprentice has been talking to a rival, and came back with an offer to buy them out.',
+    'Someone keeps paying off their small debts around the place before they can, and has left no name.',
+    'A cousin has arrived to stay without warning, and spends every day watching one particular house.',
+    'They found a name scratched into their door overnight, and it belongs to someone who died last winter.',
+    'Their savings were hidden in a place only one other person knew, and the savings are gone.',
+    "A neighbour's quarrel with them has gone before the people who settle disputes, and the hearing is next week.",
+    'Someone close to them has been ill in a way nobody can name, and recovers whenever one particular visitor stays away.',
   ],
   small_settlement: [
     'Everyone in the settlement is behaving slightly differently toward a visitor from outside. Not unfriendly, careful.',
@@ -1252,6 +1341,16 @@ export const NPC_FACTION_LOYALTY = {
     'A child has been asking questions about a person no one has heard of, insisting this person lived here recently.',
     'The well gives good water. The spring above it dried up three years ago. No one mentions this.',
     "They buried someone last season that they refer to only as 'the traveller'. They will not say more.",
+    'The family that has always mended the common track says it is theirs to close, and has closed it.',
+    "A cow belonging to one family was found dead in another family's field, and the two families no longer speak.",
+    'Someone has been moving the boundary stones at night, a little each time, always in the same direction.',
+    'A young couple from two families who do not speak have been seen together, and both families have noticed.',
+    'The person who settled every quarrel here has died, and two neighbours both expect to take their place.',
+    'A pedlar who comes every spring did not come this year, and the goods everyone ordered were paid for in advance.',
+    'Someone has been taking eggs and bread from doorsteps, a little at a time, and nobody has caught them.',
+    'An outsider has offered to buy the best field for twice what it is worth, and the owner is tempted.',
+    'The oldest family has started keeping its children indoors after dark, and will not say what they saw.',
+    'A letter came for a neighbour who has been dead for years, and the seal on it is one nobody here knows.',
   ],
 };
 
@@ -1312,7 +1411,7 @@ export const NPC_SECRETS = {
     },
     {
       short: 'Find who betrayed them before they do it again',
-      long: 'Accumulate enough to make legitimacy a choice rather than an aspiration',
+      long: 'Put enough by that going straight is a choice they can make',
       driven_by: 'wealth',
     },
   ],
@@ -1343,11 +1442,112 @@ export const NPC_SECRETS = {
 };
 
 export const NPC_PLOT_HOOKS_DATA = {
-  welcoming: 'Offers information freely; asks questions that seem like interest rather than interrogation.',
+  welcoming: 'Offers information freely, and asks questions that sound like interest, not prying.',
   transactional: 'Cooperative within clear limits; every exchange has an implicit value.',
   cautious: 'Answers questions without volunteering; watches who you talk to next.',
   dismissive: 'Polite but brief; makes clear their time is limited.',
 };
+
+/**
+ * STYLE-2 SW-7 (STYLE-RULINGS-2 B10(b)): "How they deal" keyed to the card's OWN traits. Three
+ * disposition lines covered 371 of 405 cards on the twelve; the line now reads the disposition AND
+ * the card's personality (`npcGenerator.js :: generateReligionType` — the flaw first, then the
+ * dominant trait, then the modifier), each trait word mapped to the family of dealing it names. Draw-free:
+ * no roll is added or moved; a card whose traits name no family keeps its disposition line above.
+ * Every line states only what the disposition and the trait word say; nothing else is presumed.
+ */
+export const DEALING_TRAIT_FAMILY = Object.freeze({
+  honest: 'straight', candid: 'straight', forthright: 'straight', 'plain-dealing': 'straight', principled: 'straight', incorruptible: 'straight', 'fair-minded': 'straight', equitable: 'straight',
+  compassionate: 'warm', generous: 'warm', 'warm-hearted': 'warm', hospitable: 'warm', merciful: 'warm', magnanimous: 'warm', 'good-humoured': 'warm', gracious: 'warm', courteous: 'warm', charismatic: 'warm', optimistic: 'warm', humble: 'warm',
+  patient: 'careful', methodical: 'careful', prudent: 'careful', 'level-headed': 'careful', temperate: 'careful', diligent: 'careful', conscientious: 'careful', dependable: 'careful', steadfast: 'careful', stalwart: 'careful', tenacious: 'careful', unflappable: 'careful', perfectionist: 'careful',
+  clever: 'sharp', astute: 'sharp', discerning: 'sharp', perceptive: 'sharp', intuitive: 'sharp', wise: 'sharp', scholarly: 'sharp', resourceful: 'sharp', diplomatic: 'sharp',
+  loyal: 'dutiful', protective: 'dutiful', brave: 'dutiful', pious: 'dutiful', traditionalist: 'dutiful', zealous: 'dutiful',
+  greedy: 'price', 'self-serving': 'price', corrupt: 'price', hedonistic: 'price',
+  arrogant: 'lofty', vain: 'lofty', imperious: 'lofty', domineering: 'lofty', overbearing: 'lofty', dismissive: 'lofty', proud: 'lofty', theatrical: 'lofty',
+  suspicious: 'guarded', paranoid: 'guarded', secretive: 'guarded', cautious: 'guarded', reserved: 'guarded', inscrutable: 'guarded', detached: 'guarded',
+  deceitful: 'slippery', manipulative: 'slippery', mendacious: 'slippery', hypocritical: 'slippery',
+  cruel: 'hard', callous: 'hard', 'cold-blooded': 'hard', ruthless: 'hard', vindictive: 'hard', vengeful: 'hard', wrathful: 'hard', bitter: 'hard',
+  lazy: 'shirking', cowardly: 'shirking', reckless: 'shirking', envious: 'shirking', stubborn: 'shirking', petty: 'shirking', volatile: 'shirking',
+  pragmatic: 'dealmaker', ambitious: 'dealmaker', calculating: 'dealmaker', opportunistic: 'dealmaker',
+});
+
+/** disposition → trait family → the "How they deal" line (FOR THE OWNER'S VETO; SW-7's record §7). */
+export const NPC_DEALING_BY_TRAIT = Object.freeze({
+  welcoming: Object.freeze({
+    straight: "Glad to talk, and says plainly what they know and what they don't.",
+    warm: 'Makes you welcome, finds you a seat, and helps without counting the cost.',
+    careful: 'Friendly, but takes their time; hears the whole question before answering it.',
+    sharp: 'Friendly and quick; by the end of the talk they know more about you than you do about them.',
+    dutiful: 'Open with you until your business touches the people they answer for; then they close up.',
+    price: 'Free with talk and small favours, and remembers every one when they want something back.',
+    lofty: 'Gracious in the way of someone doing you a kindness, and expects to be thanked for it.',
+    guarded: 'Friendly on the surface, but soon asks where you are staying and who sent you.',
+    slippery: 'Tells you what you want to hear, and the story changes with who else is listening.',
+    hard: 'Pleasant until crossed; then the warmth goes at once and does not come back.',
+    shirking: 'Promises help easily, and is hard to find when the time comes to give it.',
+    dealmaker: 'Friendly and useful, and already working out what you might be worth to them.',
+  }),
+  transactional: Object.freeze({
+    straight: 'Names a fair price, keeps to it, and expects you to keep to yours.',
+    warm: 'Strikes a bargain, then gives a little more than was agreed.',
+    careful: 'Wants every term settled before anything changes hands, and writes it down.',
+    sharp: 'Bargains well, and spots a weak offer before you finish making it.',
+    dutiful: 'Deals fairly with you, but never against the people they serve.',
+    price: 'Everything has a price, and the price rises the more you seem to need it.',
+    lofty: 'Deals with you as a favour, and lets you know the terms are theirs to set.',
+    guarded: 'Trades in coin, not talk; asks nothing about you and says nothing of their own business.',
+    slippery: 'Agrees quickly, and the terms are never quite what you remember agreeing to.',
+    hard: 'Holds you to every word of a deal and collects in full, whatever it costs you.',
+    shirking: 'Takes the deal, then does as little as the deal allows.',
+    dealmaker: 'Helps you as far as it pays them to, and no further.',
+  }),
+  cautious: Object.freeze({
+    straight: 'Answers what you ask truthfully, and offers nothing beyond it.',
+    warm: 'Kind but careful; helps once they know who you are and why you came.',
+    careful: 'Answers slowly, checks what you say against what they know, and gives little at a first meeting.',
+    sharp: 'Says little, watches closely, and notices what you leave out.',
+    dutiful: 'Asks your business first, and weighs it against the people they look after.',
+    price: 'Says little until it is clear what you can offer.',
+    lofty: 'Keeps you at a distance, and makes you prove you are worth their time.',
+    guarded: 'Answers questions without volunteering anything, and watches who you talk to next.',
+    slippery: 'Gives careful answers that are true as far as they go, and they never go far.',
+    hard: 'Treats every question as a possible threat, and remembers who asked it.',
+    shirking: 'Keeps out of trouble by keeping away from you, and sends you to someone else when they can.',
+    dealmaker: 'Holds back until they see what knowing you might get them.',
+  }),
+  dismissive: Object.freeze({
+    straight: 'Brief and blunt; tells you what they think of your request and goes back to work.',
+    warm: 'Busy, but not unkind; points you to someone who can help.',
+    careful: 'Polite, brief and busy; asks you to come back when they have time.',
+    sharp: 'Hears you out for a moment, decides you are not worth more, and says so.',
+    dutiful: 'Has no time for strangers while their own people need them.',
+    price: 'Has no time for you unless you are buying.',
+    lofty: 'Barely looks up; you are plainly beneath their notice.',
+    guarded: 'Cuts the talk short and gives no reason.',
+    slippery: 'Agrees with everything you say, to be rid of you sooner.',
+    hard: 'Curt to the point of rudeness, and does not care how it lands.',
+    shirking: 'Waves you off; whatever you need is somebody else\'s job.',
+    dealmaker: 'Polite but brief, until you mention something they want.',
+  }),
+});
+
+/**
+ * The card's "How they deal" line: the disposition's line for the first of the card's traits (flaw,
+ * dominant, modifier) that names a family, else the disposition's own line. Pure; no draw.
+ * @param {string} disposition
+ * @param {{ flaw?: string|null, dominant?: string|null, modifier?: string|null } | null | undefined} personality
+ * @returns {string}
+ */
+export function dealingLineFor(disposition, personality) {
+  const byFamily = NPC_DEALING_BY_TRAIT[disposition];
+  const base = NPC_PLOT_HOOKS_DATA[disposition] || NPC_PLOT_HOOKS_DATA.transactional;
+  if (!byFamily || !personality) return base;
+  for (const trait of [personality.flaw, personality.dominant, personality.modifier]) {
+    const family = trait ? DEALING_TRAIT_FAMILY[trait] : null;
+    if (family && byFamily[family]) return byFamily[family];
+  }
+  return base;
+}
 
 export const NPC_PRESENTATION_MODES = {
   dangerous_presents_safe: [
@@ -1431,22 +1631,32 @@ export const NPC_PRESENTATION_MODES = {
 // (Appendix B site 19, `relationshipArchetypes.js :: createTieProseDraw`: CENSUS-1d's to wire).
 // ⚠ ONE index picks the desc AND the tension line: a refusal of either row refuses the pair.
 const closureOf = variant => (typeof variant === 'function' ? variant : variant.line);
-const pairProse = (salt, variants) => Object.assign((r, s, variant, force) => closureOf(isTieIndex(variant) ? variants[variant % variants.length]
-  : pickVariant(variants, `${r?.name ?? ''}>${s?.name ?? ''}::${salt}`))(r, s, force || TIE_FORCE_WORDS), { size: variants.length, lines: Object.freeze([...variants]) }); // F1: the force words, garrison's by default (`defenseFacts.js :: forceWordsOf`)
+const pairProse = (salt, variants, order = null) => Object.assign((r, s, variant, force) => closureOf(isTieIndex(variant) ? variants[variant % variants.length]
+  : pickVariant(variants, `${r?.name ?? ''}>${s?.name ?? ''}::${salt}`))(...(order ? endsOf(r, s, order[0], order[1]) : [r, s]), force || TIE_FORCE_WORDS), { size: variants.length, lines: Object.freeze([...variants]) }); // F1: the force words, garrison's by default (`defenseFacts.js :: forceWordsOf`)
 const TIE_FORCE_WORDS = Object.freeze({ body: 'garrison', members: 'soldiers', member: 'soldier' });
 /** A drawn tie index is a non-negative integer; anything else takes the pair-hash fallback. */
 const isTieIndex = variant => Number.isInteger(variant) && variant >= 0;
+/**
+ * W5 HIS (the chair's ruling of 2026-11-08, a logic cure): the tie is DIRECTED (people/ties.js :: drawTies), so
+ * `r` is the `from` card and `s` the `to` card whatever their categories. Every line of a CATEGORY-KEYED kind
+ * gives each end a part (the merchant's books, the crew's money, the pulpit, the soldiers) in the kind's own
+ * order, so `pairProse` hands its lines the two cards in that order (its third argument), read from the cards'
+ * categories; it swaps only when BOTH cards say so, and a card without a category (the ledger's stand-ins, a
+ * legacy edge) keeps the drawn order. The draw (the index, the pair-hash fallback) still keys on the drawn pair.
+ * The one orientation in the estate: no other site orients a tie of its own.
+ */
+const endsOf = (r, s, first, second) => (r?.category === second && s?.category === first ? [s, r] : [r, s]);
 
 export const STRESS_ECONOMIC_EFFECTS = {
   econ_crim_blur: {
     label: 'Commercial Complicity',
     desc: pairProse('d', [
       { line: (r, s) =>
-        `${r.name} and ${s.name} maintain a relationship that exists in legal grey territory. ${r.name} provides legitimate cover, ${s.name} ensures market access that official channels wouldn't permit.`, colour: true },
+        `${r.name} lends ${s.name}'s business an honest name, and ${s.name} gets ${r.name}'s goods into markets the law keeps closed.`, colour: true },
       { line: (r, s) =>
-        `The books of ${r.name} are clean because ${s.name} keeps certain entries off them; the arrangement benefits both parties and would survive scrutiny by neither.`, colour: true },
+        `${r.name}'s account books look clean because ${s.name} keeps certain sales out of them. Both of them grow richer for it.`, colour: true },
       { line: (r, s) =>
-        `What ${r.name} sells is respectability, and ${s.name} is a steady customer. Goods move through channels no inspector has thought to draw on a map.`, colour: true },
+        `${s.name} pays ${r.name} for a respectable name, and ${s.name}'s goods travel under it, past inspectors who never look inside.`, colour: true },
       (r, s) =>
         `${r.name} signs the import papers and ${s.name} decides what is actually in the crates. The warehouse keeps two inventories, and only one is shown to the customs house.`,
       { line: (r, s) =>
@@ -1457,10 +1667,10 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${r.name} vouches for ${s.name}'s people at the guild hall. In return, ${s.name}'s people keep ${r.name}'s carts moving on roads where other carts are stopped.`, colour: true },
       { line: (r, s) =>
         `${r.name} holds the licence, ${s.name} supplies the goods, and the profit is split in a back room on the first of every month.`, colour: true },
-    ]),
+    ], ['economy', 'criminal']),
     tension: pairProse('t', [
-      { line: (r, s) => 'If either is investigated, the other is implicated. Both know this. Neither mentions it.', colour: true },
-      { line: (r, s) => 'A clerk has begun cross-referencing the ledgers. Neither party has decided what to do about it.', colour: true },
+      { line: (r, s) => `If ${r.name} is investigated, ${s.name} is implicated, and the other way round. Both know it, and neither mentions it.`, colour: true },
+      { line: (r, s) => `A clerk has begun checking ${r.name}'s ledgers against each other. Neither ${r.name} nor ${s.name} has decided what to do about it.`, colour: true },
       { line: (r, s) => `One profitable season more, ${r.name} keeps saying. The seasons keep being profitable.`, colour: true },
       { line: (r, s) =>
         `${s.name} wants to move a larger cargo through ${r.name}'s warehouse next month. ${r.name} has not agreed and has not refused.`, colour: true },
@@ -1471,7 +1681,7 @@ export const STRESS_ECONOMIC_EFFECTS = {
       { line: (r, s) =>
         `${s.name} has been seen at ${r.name}'s counting-house in daylight. That was never part of the arrangement.`, colour: true },
       { line: (r, s) => `${r.name}'s eldest has found the second ledger and asked what ${s.name}'s initials mean.`, colour: true },
-    ]),
+    ], ['economy', 'criminal']),
     type: 'patron_client',
   },
   econ_crim_exploitation: {
@@ -1482,7 +1692,7 @@ export const STRESS_ECONOMIC_EFFECTS = {
       { line: (r, s) =>
         `Every month ${r.name} pays ${s.name} for protection against dangers that would, on inspection, trace back to ${s.name}. Both sides account for it as a cost of doing business.`, colour: true },
       { line: (r, s) =>
-        `The "security fee" ${s.name} collects from ${r.name} buys exactly one thing: the absence of ${s.name}. It is paid punctually.`, colour: true },
+        `${s.name} collects a "security fee" from ${r.name}, and what it buys is that ${s.name}'s people stay away. ${r.name} pays on the day it falls due.`, colour: true },
       { line: (r, s) =>
         `${r.name} pays ${s.name} a tenth of every sale. The one season ${r.name} paid late, a storehouse burned.`, colour: true },
       { line: (r, s) =>
@@ -1493,7 +1703,7 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${s.name} sets the fee, ${r.name} pays it, and the price goes on every customer's bill without a line of its own.`, colour: true },
       { line: (r, s) =>
         `${r.name}'s premises are the only ones on the row that have never been robbed. ${s.name} reminds ${r.name} of this when the fee is due.`, colour: true },
-    ]),
+    ], ['economy', 'criminal']),
     tension: pairProse('t', [
       { line: (r, s) => `${r.name} is quietly documenting every payment. Someone is being prepared for a fall.`, colour: true },
       { line: (r, s) => `The fee went up this quarter without explanation. ${r.name}'s patience is a finite ledger.`, colour: true },
@@ -1507,7 +1717,7 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${r.name} has written to the magistrate about ${s.name}'s collectors. The letter sits unsent in ${r.name}'s desk.`,
       { line: (r, s) =>
         `${s.name}'s collector was found drunk with ${r.name}'s purse still sealed. Someone will have to explain the delay to ${s.name}.`, colour: true },
-    ]),
+    ], ['economy', 'criminal']),
     type: 'debtor_creditor',
   },
   mil_crim_corruption: {
@@ -1518,7 +1728,7 @@ export const STRESS_ECONOMIC_EFFECTS = {
       { line: (r, s) =>
         `${s.name}'s operation runs on a schedule ${r.name} provides: patrols that turn a street early, raids announced a day in advance. In public the two exchange formal nods.`, colour: true },
       { line: (r, s) =>
-        `${r.name}'s clearance record looks respectable because ${s.name} decides which crimes get cleared. The price of the arrangement is itemised and paid on time.`, colour: true },
+        `${r.name}'s arrest record looks good because ${s.name} chooses which crimes get solved, and ${s.name}'s silver pays for the favour.`, colour: true },
       { line: (r, s) =>
         `${r.name} takes ${s.name}'s silver every quarter day and keeps certain doors unwatched in return. Each treats the other as a reliable colleague.`, colour: true },
       { line: (r, s) =>
@@ -1529,12 +1739,12 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `When ${s.name}'s crew needs a prisoner released, ${r.name} signs the order. When ${r.name} needs an arrest, ${s.name} supplies the culprit.`, colour: true },
       { line: (r, s) =>
         `${r.name} commands the patrols and ${s.name} pays for their routes. The streets ${s.name} uses are the quietest in the settlement.`, colour: true },
-    ]),
+    ], ['military', 'criminal']),
     tension: pairProse('t', [
       { line: (r, s) =>
-        'A new superior has started asking uncomfortable questions about clearance rates. One of them will have to act before the other does.', colour: true },
+        `A new superior has started asking ${r.name} awkward questions about how few arrests are made. ${r.name} or ${s.name} will have to act before the other does.`, colour: true },
       { line: (r, s) => `An honest sergeant has been transferred into ${r.name}'s command. Both parties consider this a problem.`, colour: true },
-      { line: (r, s) => 'The payments have started arriving late. In this trade, late is a message.', colour: true },
+      { line: (r, s) => `${s.name}'s payments to ${r.name} have started arriving late. In this trade, late is a message.`, colour: true },
       { line: (r, s) =>
         `${r.name} was promoted last month, and ${s.name} expects the price of silence to stay the same. ${r.name} does not.`, colour: true },
       { line: (r, s) =>
@@ -1545,7 +1755,7 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${r.name}'s quarter-day payment from ${s.name} arrived with a name attached: someone ${s.name} wants arrested.`, colour: true },
       { line: (r, s, f) =>
         `An auditor from the ${f.body} is counting ${r.name}'s arrest records against the coin in ${r.name}'s house. ${s.name} is watching the count.`, colour: true },
-    ]),
+    ], ['military', 'criminal']),
     type: 'ally',
   },
   mil_crim_suppression: {
@@ -1563,7 +1773,7 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${r.name} and ${s.name} are open enemies. Every raid ${r.name} orders costs ${s.name} money, and every month ${s.name} survives costs ${r.name} standing.`, colour: true },
       { line: (r, s) =>
         `${r.name} hunts ${s.name}'s operation street by street, and ${s.name} moves it one street ahead. The chase has lasted two winters.`, colour: true },
-    ]),
+    ], ['military', 'criminal']),
     tension: pairProse('t', [
       { line: (r, s) => `${s.name} has leverage on someone close to ${r.name}. It hasn't been used yet.`, colour: true },
       { line: (r, s) => `${r.name} is one warrant away from a raid that would end it. The warrant keeps not being signed.`, colour: true },
@@ -1578,14 +1788,14 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${s.name} has hired an advocate to sue ${r.name} over the last raid. The case comes before the council this season.`, excludes: ["ruler: lord","ruler: occupier"] },
       { line: (r, s) =>
         `${r.name} has been ordered to stand down against ${s.name} by someone above ${r.name}. The order did not say why.`, colour: true },
-    ]),
+    ], ['military', 'criminal']),
     type: 'enemy',
   },
   econ_mil_contract: {
     label: 'Security Contract',
     desc: pairProse('d', [
       (r, s) =>
-        `${s.name}'s company is retained by ${r.name}'s interests on an exclusive basis. The arrangement works well enough that official channels have stopped asking questions.`,
+        `${r.name} pays ${s.name}'s fighters to guard ${r.name}'s goods and nobody else's. It has gone on so long that no one in authority asks about it any more.`,
       { line: (r, s) =>
         `${r.name} pays ${s.name}'s company well and exclusively, and in return certain cargoes move unescorted and uninspected. The arrangement predates every official who might question it.`, colour: true },
       { line: (r, s) =>
@@ -1600,12 +1810,12 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${r.name} hired ${s.name}'s company after the last caravan was lost. No caravan has been lost since, and ${s.name}'s fee has doubled.`, colour: true },
       { line: (r, s) =>
         `${s.name} answers to ${r.name}'s purse before any other authority. Everyone in the settlement knows which way ${s.name}'s company would march.`, colour: true },
-    ]),
+    ], ['economy', 'military']),
     tension: pairProse('t', [
       { line: (r, s) =>
         `The contract is up for renewal. ${s.name} has been approached by a competitor. ${r.name} doesn't know yet.`, colour: true },
       { line: (r, s) => `${s.name}'s men have started asking what exactly they are guarding. ${r.name} prefers them incurious.`, colour: true },
-      { line: (r, s) => 'The last shipment was short, and each side privately blames the other. The next one will settle the question.', colour: true },
+      { line: (r, s) => `The last shipment was short, and ${r.name} and ${s.name} each privately blame the other. The next one will settle the question.`, colour: true },
       { line: (r, s) =>
         `${r.name} has cut ${s.name}'s fee by a fifth. ${s.name}'s company still guards the wagons, but more slowly.`, colour: true },
       { line: (r, s) => `${s.name}'s company has taken on a second client, and ${r.name} has learned the client's name.`, colour: true },
@@ -1614,18 +1824,18 @@ export const STRESS_ECONOMIC_EFFECTS = {
       { line: (r, s) =>
         `The council wants ${s.name}'s company under the watch's command. ${r.name} loses the contract's whole value if it agrees.`, needs: ["watch"], excludes: ["ruler: lord","ruler: occupier"] },
       { line: (r, s) => `${r.name} has asked ${s.name} to escort a cargo with no manifest. ${s.name} has named a price.`, colour: true },
-    ]),
+    ], ['economy', 'military']),
     type: 'patron_client',
   },
   rel_mil_crusader: {
     label: 'Sacred Commission',
     desc: pairProse('d', [
       { line: (r, s) =>
-        `${r.name} and ${s.name} operate as a unified authority: temporal and spiritual power reinforcing each other. Dissent against one is dissent against both.`, colour: true },
+        `${r.name} preaches and ${s.name} enforces, so whoever crosses one of them answers to both.`, colour: true },
       { line: (r, s, f) =>
-        `Between ${r.name}'s pulpit and ${s.name}'s ${f.body}, the settlement is governed twice over; the sermons and the patrol routes have a way of agreeing.`, colour: true },
-      { line: (r, s) =>
-        `${r.name} blesses what ${s.name} enforces, and ${s.name} enforces what ${r.name} blesses. Where one authority ends and the other begins is a question neither permits.`, colour: true },
+        `What ${r.name} preaches from the pulpit on the holy day, ${s.name}'s ${f.body} enforces in the street that week.`, colour: true },
+      { line: (r, s, f) =>
+        `${r.name} blesses whatever ${s.name}'s ${f.body} enforces, and nobody dares ask which of the two has the final word.`, colour: true },
       { line: (r, s, f) =>
         `${r.name} preaches the cause and ${s.name} raises the men. The shrine's coffers pay for the ${f.body}'s swords.`, needs: ["institution: temple"] },
       { line: (r, s, f) =>
@@ -1636,10 +1846,10 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${r.name} and ${s.name} hold the settlement between faith and force. The two of them meet after every service to agree the week's orders.`, colour: true },
       { line: (r, s) =>
         `${s.name} carries ${r.name}'s banner on every patrol. Crossing ${s.name} is treated as heresy, and heresy is punished by ${s.name}.`, colour: true },
-    ]),
+    ], ['religious', 'military']),
     tension: pairProse('t', [
-      { line: (r, s) => 'They disagree on a fundamental question of method that neither will put into writing.', colour: true },
-      { line: (r, s) => 'A penitent has brought a case that pits doctrine against order. It has not been resolved. It will not stay private.', colour: true },
+      { line: (r, s) => `${r.name} and ${s.name} disagree on a question of method that neither will put into writing.`, colour: true },
+      { line: (r, s) => `A penitent has brought ${r.name} a case that pits doctrine against ${s.name}'s order. It has not been resolved, and it will not stay private.`, colour: true },
       { line: (r, s) => `The crowd that obeys them both has begun to notice it is one crowd. So has ${s.name}.`, colour: true },
       { line: (r, s, f) =>
         `${r.name} has declared a holy day on which no ${f.member} may bear arms. ${s.name} has a patrol scheduled for it.`, colour: true },
@@ -1650,18 +1860,18 @@ export const STRESS_ECONOMIC_EFFECTS = {
       (r, s, f) =>
         `A ${f.member} under ${s.name} stands accused of sacrilege. ${r.name} demands a church trial; ${s.name} wants a court-martial.`,
       { line: (r, s) => `${s.name} has started giving orders in the name of the faith without consulting ${r.name}.`, colour: true },
-    ]),
+    ], ['religious', 'military']),
     type: 'ally',
   },
   rel_crim_fraud: {
     label: 'Institutional Cover',
     desc: pairProse('d', [
       { line: (r, s) =>
-        `${r.name}'s religious position provides ${s.name}'s operation with legitimacy, meeting spaces, and an excuse for financial flows that would otherwise attract scrutiny.`, colour: true },
+        `${r.name}'s good name gives ${s.name}'s crew a respectable face, a room to meet in, and a reason for money nobody could otherwise explain.`, colour: true },
       { line: (r, s) =>
-        `${s.name}'s money passes through ${r.name}'s offertory and comes out consecrated; the meeting rooms are sanctified, the accounts are not examined.`, colour: true },
+        `${s.name}'s money goes into ${r.name}'s alms box and comes out clean, and nobody checks ${r.name}'s accounts.`, colour: true },
       { line: (r, s) =>
-        `${r.name} provides the sanctity, ${s.name} provides the income, and the congregation provides the cover (unknowingly), which is what makes it work.`, colour: true },
+        `${r.name} lends the holiness and ${s.name} brings the money, and the faithful, knowing nothing, provide the cover.`, colour: true },
       { line: (r, s) =>
         `${s.name}'s crew meets in the crypt beneath ${r.name}'s shrine after evening prayers. ${r.name} keeps the only key.`, needs: ["institution: temple"] },
       { line: (r, s) =>
@@ -1672,7 +1882,7 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${r.name}'s charity runs the soup kitchen, and ${s.name}'s couriers collect their parcels from the kitchen's back door.`, colour: true },
       { line: (r, s) =>
         `${r.name} hears ${s.name}'s confession each week and keeps ${s.name}'s accounts each month. Neither duty is written down.`, colour: true },
-    ]),
+    ], ['religious', 'criminal']),
     tension: pairProse('t', [
       { line: (r, s) => `${r.name} has a genuine crisis of conscience that ${s.name} is not prepared to accommodate.`, colour: true },
       { line: (r, s) => `A visiting cleric has asked to audit the shrine's books. ${s.name} has offered to handle it.`, needs: ["institution: temple"] },
@@ -1686,14 +1896,14 @@ export const STRESS_ECONOMIC_EFFECTS = {
       { line: (r, s) => `${r.name} preached a sermon on theft last week. ${s.name} took it personally.`, colour: true },
       { line: (r, s) =>
         `${s.name} has asked ${r.name} to marry two of the crew under false names. ${r.name} has not set a date.`, colour: true },
-    ]),
+    ], ['religious', 'criminal']),
     type: 'ally',
   },
   mag_crim_market: {
     label: 'Arcane Supplier',
     desc: pairProse('d', [
       { line: (r, s) =>
-        `${r.name} provides ${s.name}'s network with components, identification services, and the occasional forged document that only a skilled practitioner could produce.`, colour: true },
+        `${r.name} supplies ${s.name}'s people with reagents, false papers and the odd forgery only a trained hand could make.`, colour: true },
       { line: (r, s) =>
         `When ${s.name}'s network needs a seal copied, a face forgotten, or a document aged thirty years, the work arrives through ${r.name} and is never signed.`, colour: true },
       { line: (r, s) =>
@@ -1707,7 +1917,7 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${r.name} supplies ${s.name}'s network with wards against detection. Each ward is sold at triple the guild price.`, needs: ["guild"] },
       { line: (r, s) =>
         `${s.name} pays ${r.name} a retainer to be ready at any hour. Twice this year, ${r.name} has been called out before dawn.`, colour: true },
-    ]),
+    ], ['magic', 'criminal']),
     tension: pairProse('t', [
       { line: (r, s) =>
         `The last commission left traces that a determined investigator might find. ${r.name} is reconsidering the relationship.`, colour: true },
@@ -1722,16 +1932,16 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `The guild has summoned ${r.name} to explain a shortfall in licensed components. ${s.name}'s orders account for the missing stock.`, needs: ["guild"] },
       { line: (r, s) =>
         `${r.name} has been offered a guild post that requires a clean record. ${s.name} has a list of everything ${r.name} has made.`, needs: ["guild"] },
-    ]),
+    ], ['magic', 'criminal']),
     type: 'patron_client',
   },
   gov_econ_dependence: {
     label: 'Financial Dependence',
     desc: pairProse('d', [
       { line: (r, s) =>
-        `The settlement's civic functions run on credit extended by ${s.name}. ${r.name} cannot take any action that seriously threatens ${s.name}'s interests, and ${s.name} does not let this be forgotten.`, colour: true },
+        `${r.name} pays for the common works with money borrowed from ${s.name}. ${r.name} cannot cross ${s.name}, and ${s.name} makes sure ${r.name} remembers it.`, colour: true },
       { line: (r, s) =>
-        `${s.name} holds the settlement's debts and therefore, in every way that matters, its agenda; ${r.name} governs within the margin ${s.name} allows.`, colour: true },
+        `${s.name} holds the debts ${r.name} has run up, and so ${s.name} decides what ${r.name} can afford to do.`, colour: true },
       { line: (r, s) =>
         `Every civic project ${r.name} announces has first been costed, quietly, in ${s.name}'s counting-room. The public believes the order is the other way around.`, colour: true },
       { line: (r, s) =>
@@ -1741,13 +1951,13 @@ export const STRESS_ECONOMIC_EFFECTS = {
       { line: (r, s) =>
         `${r.name} owes ${s.name} more than the settlement collects in two years of taxes. ${s.name} is paid first, every quarter.`, colour: true },
       { line: (r, s) =>
-        `${s.name} lends and ${r.name} spends. The council's decisions are made in ${r.name}'s chamber and approved in ${s.name}'s counting-house.`, excludes: ["ruler: lord","ruler: occupier"] },
+        `${s.name} lends and ${r.name} spends. The council's decisions are made in ${r.name}'s chamber and approved in ${s.name}'s counting-house.`, needs: ["institution: bank"], excludes: ["ruler: lord","ruler: occupier"] }, // COHERENCE-POWERS-2: no counting-house where the town has no bank
       { line: (r, s) => `${r.name} governs on ${s.name}'s credit. Every loan renewed adds one more condition to the next.`, colour: true },
-    ]),
+    ], ['government', 'economy']),
     tension: pairProse('t', [
       { line: (r, s) => `${r.name} has identified an alternative creditor. ${s.name} has heard the same rumour.`, colour: true },
       { line: (r, s) => `The interest falls due at midsummer and the treasury will not cover it. ${s.name} has already drafted the terms of the extension.`, colour: true },
-      { line: (r, s) => `A faction on the council wants the debt repudiated outright. ${r.name} has stopped disagreeing in public.`, excludes: ["ruler: lord","ruler: occupier"] },
+      { line: (r, s) => `One camp on the council wants the debt repudiated outright. ${r.name} has stopped disagreeing in public.`, excludes: ["ruler: lord","ruler: occupier"] },
       { line: (r, s) =>
         `${s.name} has asked for a seat on the council as a condition of the next loan. ${r.name} has three weeks to answer.`, excludes: ["ruler: lord","ruler: occupier"] },
       { line: (r, s) =>
@@ -1758,18 +1968,18 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${r.name} has started borrowing small sums from ${s.name}'s rivals. ${s.name}'s clerks have seen the receipts.`, colour: true },
       { line: (r, s) =>
         `${s.name} has refused credit for the winter grain stores. ${r.name} must choose between the creditor and the granary.`, needs: ["institution: granary"] },
-    ]),
+    ], ['government', 'economy']),
     type: 'debtor_creditor',
   },
   gov_mil_friction: {
     label: 'Jurisdictional Tension',
     desc: pairProse('d', [
       { line: (r, s) =>
-        `${r.name} and ${s.name} disagree fundamentally about where civil authority ends and military authority begins. The argument has been running for years and occasionally generates paperwork.`, colour: true },
+        `${r.name} and ${s.name} have argued for years over where ${r.name}'s authority ends and ${s.name}'s begins, and neither has given ground.`, colour: true },
       { line: (r, s) =>
-        `${r.name} issues orders ${s.name} regards as suggestions, and ${s.name} takes actions ${r.name} regards as insubordination; the settlement runs in the gap between.`, colour: true },
+        `${r.name} gives orders that ${s.name} treats as advice, and ${s.name} acts in ways ${r.name} calls disobedience.`, colour: true },
       { line: (r, s) =>
-        `The line between ${r.name}'s authority and ${s.name}'s has been redrawn four times and honoured never. Each keeps the map that favours them.`, colour: true },
+        `The line between ${r.name}'s authority and ${s.name}'s has been redrawn four times, and each of them still follows whichever version suits them.`, colour: true },
       { line: (r, s, f) =>
         `${r.name} controls the ${f.body}'s pay and ${s.name} controls its swords. Each uses their half to bargain for the other's.`, colour: true },
       { line: (r, s) =>
@@ -1780,10 +1990,10 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${r.name} sets the curfew and ${s.name} decides whether to enforce it. The two have not agreed on a curfew in a year.`, colour: true },
       { line: (r, s) =>
         `${s.name} answers ${r.name}'s summons late and leaves early. ${r.name} now issues them in writing so the delays are on record.`, colour: true },
-    ]),
+    ], ['government', 'military']),
     tension: pairProse('t', [
-      { line: (r, s) => 'An incident is coming that will force the issue. Both are positioning for it.', colour: true },
-      { line: (r, s) => 'A prisoner is currently held by both jurisdictions at once. Neither will release the paperwork first.', colour: true },
+      { line: (r, s) => `An incident is coming that will force the issue between ${r.name} and ${s.name}, and both are positioning for it.`, colour: true },
+      { line: (r, s) => `A prisoner is held under ${r.name}'s authority and ${s.name}'s at once, and neither will release the paperwork first.`, colour: true },
       (r, s) => `${s.name} has begun drilling in the square without asking. ${r.name} has begun writing letters to the capital.`,
       { line: (r, s, f) =>
         `${r.name} has cut the ${f.body}'s pay to fund the market repairs. ${s.name} has told the ${f.members} who signed the order.`, needs: ["market"] },
@@ -1795,18 +2005,18 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `A riot is expected on the next market day, and ${r.name} and ${s.name} have issued opposite orders for it.`, needs: ["market"] },
       { line: (r, s, f) =>
         `${s.name} has begun collecting a road toll for the ${f.body}. ${r.name} calls it theft from the treasury.`, colour: true },
-    ]),
+    ], ['government', 'military']),
     type: 'political',
   },
   peer_rivalry: {
     label: 'Professional Rivalry',
     desc: pairProse('d', [
       { line: (r, s) =>
-        `${r.name} and ${s.name} compete for the same resource, position, or reputation. The competition is vigorous but bounded. Neither has crossed the line into genuine enmity. Yet.`, colour: true },
+        `${r.name} and ${s.name} want the same thing and compete hard for it, but neither has let it turn into hatred.`, colour: true },
       { line: (r, s) =>
-        `${r.name} and ${s.name} want the same thing and cannot both have it. The contest is conducted with scrupulous courtesy and total commitment.`, colour: true },
+        `Only one of ${r.name} and ${s.name} can come out ahead, and both know it. They stay polite and give no ground.`, colour: true },
       { line: (r, s) =>
-        `Every advance ${r.name} makes is answered by ${s.name} within the season; the rivalry has become its own institution, with rules neither wrote and both obey.`, colour: true },
+        `Every gain ${r.name} makes, ${s.name} answers within the season, and people here have learned to expect it.`, colour: true },
       { line: (r, s) =>
         `${r.name} and ${s.name} bid for the same contracts and sit at the same tables. Each counts the other's wins more carefully than their own.`, colour: true },
       { line: (r, s) =>
@@ -1819,9 +2029,9 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${r.name} and ${s.name} are rivals for the same patron's favour. Each has spent the year trying to be first through the patron's door.`, colour: true },
     ]),
     tension: pairProse('t', [
-      { line: (r, s) => 'A decision coming in the next season will advantage one significantly. The other knows this.', colour: true },
-      { line: (r, s) => 'A mutual patron has let it be known there is room for only one of them at the next table.', colour: true },
-      { line: (r, s) => 'One of them has recently broken an unwritten rule of the contest. The other is deciding what that permits.', colour: true },
+      { line: (r, s) => `A decision coming next season will favour ${r.name} or ${s.name} heavily, and both of them know it.`, colour: true },
+      { line: (r, s) => `A patron they share has let it be known there is room for only ${r.name} or ${s.name} at the next table.`, colour: true },
+      { line: (r, s) => `${r.name} has recently broken an unwritten rule of the contest. ${s.name} is deciding what that permits.`, colour: true },
       { line: (r, s) => `${r.name} has hired away ${s.name}'s best assistant. ${s.name} has said nothing about it, to anyone.`, colour: true },
       { line: (r, s) => `A post opens at midsummer, and only ${r.name} or ${s.name} can fill it.`, colour: true },
       { line: (r, s) =>
@@ -1835,12 +2045,10 @@ export const STRESS_ECONOMIC_EFFECTS = {
   mentor_legacy: {
     label: 'Mentor and Successor',
     desc: pairProse('d', [
+      { line: (r, s) => `${r.name} made ${s.name}'s career, and ${s.name} rarely says so.`, colour: true },
       { line: (r, s) =>
-        `${r.name} shaped ${s.name}'s career in ways that ${s.name} has not fully acknowledged. The debt is real; the gratitude is complicated.`, colour: true },
-      { line: (r, s) =>
-        `${s.name} stands where ${r.name} put them, by a ladder ${r.name} built and ${s.name} has since pulled up. Both remember it differently.`, colour: true },
-      { line: (r, s) =>
-        `What ${s.name} knows, ${r.name} taught (including, inconveniently, how to outmanoeuvre a teacher).`, colour: true },
+        `${s.name} owes their place to ${r.name} and has kept others from climbing the same way. The two of them remember it differently.`, colour: true },
+      { line: (r, s) => `${r.name} taught ${s.name} everything, including how to get the better of ${r.name}.`, colour: true },
       { line: (r, s) =>
         `${r.name} took ${s.name} in as an apprentice and taught them the trade, the clients, and the names worth knowing.`, colour: true },
       { line: (r, s) =>
@@ -1871,9 +2079,9 @@ export const STRESS_ECONOMIC_EFFECTS = {
       { line: (r, s) =>
         `${r.name} and ${s.name} each hold information or resources the other needs. They cooperate efficiently and neither trusts the other at all.`, colour: true },
       { line: (r, s) =>
-        `What ${r.name} knows would ruin ${s.name}; what ${s.name} holds would finish ${r.name}. On this foundation they have built an excellent working relationship.`, colour: true },
+        `${r.name} knows enough to ruin ${s.name}, and ${s.name} holds enough to finish ${r.name}, so the two of them work together very carefully.`, colour: true },
       { line: (r, s) =>
-        `${r.name} and ${s.name} deal with each other like men carrying lit lanterns in a powder store, carefully, and with great mutual politeness.`, colour: true },
+        `${r.name} and ${s.name} deal with each other slowly and politely, each knowing one slip could ruin them both.`, colour: true },
       { line: (r, s) =>
         `${r.name} and ${s.name} trade favours on a strict count. Neither has ever been more than one favour ahead.`, colour: true },
       { line: (r, s) =>
@@ -1886,8 +2094,8 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${r.name} and ${s.name} sit on opposite sides of most questions and vote together on the few that touch their shared interests.`, colour: true },
     ]),
     tension: pairProse('t', [
-      { line: (r, s) => "The balance of leverage has recently shifted. One party has noticed; the other hasn't yet.", colour: true },
-      { line: (r, s) => 'A document each believed only they possessed has surfaced in a third set of hands.', colour: true },
+      { line: (r, s) => `The balance between ${r.name} and ${s.name} has recently shifted. ${s.name} has noticed; ${r.name} has not, yet.`, colour: true },
+      { line: (r, s) => `A document ${r.name} and ${s.name} each believed only they possessed has turned up in someone else's hands.`, colour: true },
       { line: (r, s) => `${s.name} has recently secured something that makes ${r.name}'s hold obsolete. The politeness continues, for now.`, colour: true },
       { line: (r, s) => `${r.name} has asked ${s.name} for a second favour before repaying the first.`, colour: true },
       { line: (r, s) => `${s.name} has found a new source for what ${r.name} supplies. ${r.name} has not been told.`, colour: true },
@@ -1902,11 +2110,11 @@ export const STRESS_ECONOMIC_EFFECTS = {
     label: 'Pragmatic Alliance',
     desc: pairProse('d', [
       { line: (r, s) =>
-        `${r.name} and ${s.name} work together because the alternative (working against each other) is worse for both. The alliance holds as long as the calculation holds.`, colour: true },
+        `${r.name} and ${s.name} work together because fighting each other would cost them both more, and both of them know it.`, colour: true },
       { line: (r, s) =>
-        `${r.name} and ${s.name} are allies by arithmetic: each has counted the cost of the other as an enemy and found it too high. The friendship is warm, public, and entirely conditional.`, colour: true },
+        `${r.name} and ${s.name} are allies because each has reckoned what the other would cost as an enemy. The friendship is warm and public, and it lasts only while that reckoning holds.`, colour: true },
       { line: (r, s) =>
-        `The alliance between ${r.name} and ${s.name} was born of a shared threat and has outlived it; both are quietly recalculating what it is now for.`, colour: true },
+        `${r.name} and ${s.name} joined against a threat that has since passed, and each is now asking what the alliance is still for.`, colour: true },
       { line: (r, s) => `${r.name} and ${s.name} share a council bloc and a list of enemies. They do not share their plans.`, excludes: ["ruler: lord","ruler: occupier"] },
       { line: (r, s) => `${r.name} and ${s.name} back each other in public and check each other's work in private.`, colour: true },
       { line: (r, s) =>
@@ -1917,8 +2125,8 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${r.name} and ${s.name} are allies with separate interests. They meet to coordinate and leave by different doors.`, colour: true },
     ]),
     tension: pairProse('t', [
-      { line: (r, s) => 'A third party is actively working to change that calculation.', colour: true },
-      { line: (r, s) => 'The threat that made the alliance necessary is gone. Neither has said so aloud.', colour: true },
+      { line: (r, s) => `Someone else is working to pull ${r.name} and ${s.name} apart.`, colour: true },
+      { line: (r, s) => `The threat that brought ${r.name} and ${s.name} together is gone. Neither has said so aloud.`, colour: true },
       { line: (r, s) => `${r.name} has taken a precaution against ${s.name} that ${s.name} was not meant to discover. ${s.name} has discovered it.`, colour: true },
       { line: (r, s) => `${s.name} has been dining with ${r.name}'s rivals. ${r.name} heard about it from a servant.`, colour: true },
       { line: (r, s) =>
@@ -1936,7 +2144,7 @@ export const STRESS_ECONOMIC_EFFECTS = {
     label: 'Genuine Respect',
     desc: pairProse('d', [
       { line: (r, s) =>
-        `${r.name} and ${s.name} have earned each other's regard through demonstrated competence. They don't agree on everything but they trust each other's judgment within their respective domains.`, colour: true },
+        `${r.name} and ${s.name} have each watched the other do good work. They argue, but each trusts the other's judgment in their own field.`, colour: true },
       { line: (r, s) =>
         `${r.name} and ${s.name} disagree often and trust completely. Each has watched the other be right at cost, and neither forgets it.`, colour: true },
       { line: (r, s) =>
@@ -1953,9 +2161,9 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${r.name} trusts ${s.name}'s word over any written contract. ${s.name} has never given a reason to regret it.`, colour: true },
     ]),
     tension: pairProse('t', [
-      { line: (r, s) => 'They are about to be on opposite sides of a significant decision.', colour: true },
-      { line: (r, s) => 'One of them is being pressured to act against the other, and has not yet mentioned it.', colour: true },
-      { line: (r, s) => 'The respect is real and the interests are diverging. Both can read a map.', colour: true },
+      { line: (r, s) => `${r.name} and ${s.name} are about to be on opposite sides of an important decision.`, colour: true },
+      { line: (r, s) => `${r.name} is being pressed to act against ${s.name}, and has not mentioned it.`, colour: true },
+      { line: (r, s) => `${r.name} and ${s.name} still respect each other, but what each of them wants is pulling apart, and both can see it.`, colour: true },
       { line: (r, s) => `${r.name} has learned something about ${s.name}'s family that ${s.name} does not know.`, colour: true },
       { line: (r, s) => `${s.name} has been offered ${r.name}'s post by people who want ${r.name} gone.`, colour: true },
       { line: (r, s) => `${r.name} has made a mistake that ${s.name} is bound to report. ${s.name} has not reported it.`, colour: true },
@@ -1969,12 +2177,11 @@ export const STRESS_ECONOMIC_EFFECTS = {
   old_debt: {
     label: 'Outstanding Debt',
     desc: pairProse('d', [
+      { line: (r, s) => `${r.name} owes ${s.name} a great deal, and neither has ever said so aloud.`, colour: true },
       { line: (r, s) =>
-        `${r.name} owes ${s.name} something significant: a favour, a secret kept, a crisis managed. The debt has never been formally acknowledged. It doesn't need to be.`, colour: true },
+        `Years ago ${s.name} did ${r.name} a favour too large to repay, and ${r.name} has been paying it back in small ways ever since.`, colour: true },
       { line: (r, s) =>
-        `Years ago ${s.name} did for ${r.name} the kind of favour that cannot be repaid, only serviced. ${r.name} has been servicing it ever since.`, colour: true },
-      { line: (r, s) =>
-        `Between ${r.name} and ${s.name} stands an old kindness with the structure of a mortgage. Neither names it; both know the balance to the penny.`, colour: true },
+        `${r.name} owes ${s.name} for an old kindness. Neither mentions it, and both know exactly how much is still owed.`, colour: true },
       { line: (r, s) =>
         `${s.name} paid ${r.name}'s bail eleven years ago and has never mentioned it. ${r.name} mentions it to no one.`, colour: true },
       { line: (r, s) =>
@@ -1988,7 +2195,7 @@ export const STRESS_ECONOMIC_EFFECTS = {
     tension: pairProse('t', [
       { line: (r, s) => `${s.name} is about to call it in.`, colour: true },
       { line: (r, s) => `${r.name} has begun to act like someone who considers the debt paid. ${s.name} does not.`, colour: true },
-      { line: (r, s) => 'A third party has learned what the original favour was. The debt just changed hands.', colour: true },
+      { line: (r, s) => `Someone else has learned what favour ${r.name} owes ${s.name}, and now has a hold on ${r.name} too.`, colour: true },
       { line: (r, s) =>
         `${s.name} has asked ${r.name} for a vote against ${r.name}'s own interests. It is the first payment ${s.name} has asked for.`, colour: true },
       { line: (r, s) => `${r.name} has started repaying the debt in coin. ${s.name} wants it repaid in favours.`, colour: true },
@@ -2002,11 +2209,11 @@ export const STRESS_ECONOMIC_EFFECTS = {
     label: 'Family Complication',
     desc: pairProse('d', [
       { line: (r, s) =>
-        `${r.name} and ${s.name} are connected by blood or marriage in a way that neither finds professionally convenient. The connection is known; its implications are not discussed.`, colour: true },
+        `${r.name} and ${s.name} are family, which suits neither of their careers. Everyone knows it, and nobody mentions it.`, colour: true },
       { line: (r, s) =>
         `Blood ties ${r.name} to ${s.name} in a way that neither career can afford; they meet at funerals and weddings and pretend the rest of the year does not exist.`, colour: true },
       { line: (r, s) =>
-        `${r.name} and ${s.name} share a family and avoid sharing anything else; every professional dealing between them is conducted as though the relation were a rumour.`, colour: true },
+        `${r.name} and ${s.name} are family, but in business they deal with each other as if they were not related.`, colour: true },
       { line: (r, s) =>
         `${r.name} married into ${s.name}'s family. ${s.name} opposed the match and still calls ${r.name} by surname.`, colour: true },
       { line: (r, s) =>
@@ -2018,9 +2225,9 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${r.name} is godparent to ${s.name}'s eldest child. The tie was made before their careers set them against each other.`, colour: true },
     ]),
     tension: pairProse('t', [
-      { line: (r, s) => 'An inheritance, title, or secret is about to make the connection impossible to ignore.', colour: true },
-      { line: (r, s) => 'A younger relative has begun trading on the connection both of them refuse to use.', colour: true },
-      { line: (r, s) => 'The family has taken a side in a dispute between them. It is the wrong side, in both their opinions.', colour: true },
+      { line: (r, s) => `An inheritance, a title or a secret is about to make the tie between ${r.name} and ${s.name} impossible to ignore.`, colour: true },
+      { line: (r, s) => `A younger relative has begun trading on the connection ${r.name} and ${s.name} both refuse to use.`, colour: true },
+      { line: (r, s) => `The family has taken a side in a quarrel between ${r.name} and ${s.name}, and both of them think it is the wrong side.`, colour: true },
       { line: (r, s) => `${r.name}'s child wants to marry into ${s.name}'s household. Neither parent has given an answer.`, colour: true },
       { line: (r, s) =>
         `${s.name} has gone into business against ${r.name}'s partners, and the family expects ${r.name} to keep the peace.`, colour: true },
@@ -2039,7 +2246,7 @@ export const STRESS_ECONOMIC_EFFECTS = {
       { line: (r, s) =>
         `Something happened between ${r.name} and ${s.name} years ago that neither has forgotten. They function professionally. They do not forgive.`, colour: true },
       { line: (r, s) =>
-        `${r.name} and ${s.name} were something to each other once (partners, friends, perhaps more), and the wreck of it is the one subject on which both are permanently silent.`, colour: true },
+        `${r.name} and ${s.name} were close once, and whatever broke between them is the one subject neither will discuss.`, colour: true },
       { line: (r, s) =>
         `The quarrel between ${r.name} and ${s.name} is old enough that no one else remembers the cause. They remember. They have simply stopped explaining.`, colour: true },
       (r, s) =>
@@ -2053,9 +2260,9 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${r.name} and ${s.name} fought a duel in their youth. Both survived, and the scar is on ${s.name}'s face.`, colour: true },
     ]),
     tension: pairProse('t', [
-      { line: (r, s) => 'The circumstances that caused the original rupture are repeating. Both of them know it.', colour: true },
-      { line: (r, s) => 'An apology is owed in one direction and expected in the other, and they disagree about which.', colour: true },
-      { line: (r, s) => 'A newcomer keeps trying to reconcile them, and is about to learn why nobody else does.', colour: true },
+      { line: (r, s) => `What first broke ${r.name} and ${s.name} apart is happening again, and both of them know it.`, colour: true },
+      { line: (r, s) => `${r.name} and ${s.name} each think the other owes the apology.`, colour: true },
+      { line: (r, s) => `A newcomer keeps trying to reconcile ${r.name} and ${s.name}, and is about to learn why nobody else does.`, colour: true },
       (r, s) => `${s.name} has been appointed to judge a case in which ${r.name} is a party.`,
       { line: (r, s) => `${r.name} has found the document that proves what ${s.name} did, and has kept it locked away.`, colour: true },
       { line: (r, s) =>
@@ -2066,6 +2273,20 @@ export const STRESS_ECONOMIC_EFFECTS = {
     type: 'enemy',
   },
 };
+
+// THE HANDLER TIE'S ARCHETYPES (the allegiance train, car 1, ALLEGIANCE-CAR1, 2026-11-08; the design §1.5): an
+// agent's one outgoing tie runs to its handler, its kind from the vector on the card (never re-rolled; fear's four
+// leverage sub-kinds drawn on the agent's tie fork). WRITE-PEOPLE's lines (data/people/handlerTieLines.js, every
+// one for the owner's veto) wrapped in THIS file's own pairProse, so the one-index draw
+// (relationshipArchetypes.js :: createTieProseDraw) holds unchanged; each styles as an existing
+// RELATIONSHIP_STRENGTHS type. A table BESIDE STRESS_ECONOMIC_EFFECTS, never inside it: the stress table's roll
+// (computeRelTension) and its census declarations stay exactly as they were.
+export const HANDLER_TIE_ARCHETYPES = Object.freeze(Object.fromEntries(Object.entries(HANDLER_TIE_LINES).map(([key, row]) => [key, Object.freeze({
+  label: row.label,
+  desc: pairProse('d', row.desc),
+  tension: pairProse('t', row.tension),
+  type: row.type,
+})])));
 
 // TRAIT_AGGRESSION (belligerent↔pacific) and TRAIT_ALIGNMENT (good↔evil) — the two light
 // signed-weight maps over the AUTHORED personality vocabulary — now live in the zero-import

@@ -166,7 +166,38 @@ const GOLDEN_CONTROL_KEY = 'town|germanic|plains|road|civilized|golden-master-v3
 // 2026-11-08, the integration landing (MERGE-CAR, ODQ §934.105), traced the same way at each record's golden-master
 // commit: b58f9562 (the car's, carried) -> 2432ade0 record A, the rung-2 landing's merge (4e22bb6ad) -> 882e592f record B,
 // the people car's merge (6196cdec8).
-const GOLDEN_CONTROL_HASH = '882e592f4fb18052d4936695d3714658365fa133af6a55313eab5867335f1521';
+// 2026-11-08, the wave (MERGE-WAVE, ODQ §934.105), traced the same way at each record's golden-master commit: 882e592f
+// holds through record 1 (W1, 9288badee) and record 2 (W2, 35f9a29c6) -> 0bbb38b0 record 3, W3 (9cf847535) -> 7d900165 record 4,
+// W4 (b2ca867ac) -> 38c21132 record 5, W5 (c895df2dc) -> f776c5dd record 6, W7 (7f374ca60), holding through record 7, FOOD
+// (90950a7d8) -> d88f930b record 8, FIX-PUBLIC-VEIL (d8007f696).
+// 2026-11-09, the train (MERGE-TRAIN, ODQ §934.105), traced the same way: d88f930b holds through the wave's record 10
+// (7a33ae253) -> 772bcdc9 record 1, the ALLEGIANCE-CAR1 merge (c88cc75dd; the v3 save migration's schemaVersion 3 and the
+// hidden allegiance re-shape the control row).
+// -> 6f0047b6 record 9, the ALLEGIANCE-CAR4 merge (the goals A9 and item 15's title-secret draw re-deal the control row; taken
+// in record 9's golden-master act, the chair's note (3) of 09:2x).
+// -> f3e83c3c STYLE-2-MERGE record 3, the SW-2 INSTITUTIONS merge (the catalogue law's 80 identity-text swaps reach the control row's
+// institutions; taken in the same act as the golden re-record, the train's note-3 idiom).
+// -> 3818ab12 STYLE-2-MERGE record 9, the SW-B5 FRAMES merge (the safetyProfile frames re-deal the control row's guard and
+// criminal-structure lines; taken in the same act as the golden re-record).
+// -> 3e522ac1 STYLE-2-MERGE record 16, the SW-7 POWER-SIDE merge (the people's dealing lines, secrets and the power cards'
+// sentences re-deal the control row; taken in the same act as the golden re-record).
+// -> 003d51a5 STYLE-2-MERGE record 17, the SW-B1 CONTRADICTIONS merge (the power cards' standing sentences read the power
+// order, P51/P50, and re-deal the control row's faction descriptions; taken in the same act as the golden re-record).
+// -> 5b81ba52 STYLE-2-MERGE record 19, the SW-10 HOOKS merge (the grown person-hook pools re-deal the control row's plot hooks;
+// taken in the same act as the golden re-record).
+// -> b480bb65 STYLE-2-MERGE record 22, the SW-6 CRISIS-SURFACES merge (the crisis cast's reasons and npcStructure's pools re-deal
+// the control row; taken in the same act as the golden re-record).
+// -> 2cbe4731 STYLE-2-MERGE record 24, the SW-8 RENAME-POWERS merge (the retired word leaves the power generators' and cast pools,
+// re-dealing the control row's text; taken in the same act as the golden re-record).
+// -> c876f033 STYLE-2-MERGE record 25, the URBAN-FIX merge (the one foodways line and the receipt re-deal the control row's text;
+// taken in the same act as the golden re-record).
+// -> 4c561fca STYLE-2-MERGE record 43, the COHERENCE-PRESUME merge (the culture lines and the re-titled watch role re-deal the
+// control row's text; taken in the same act as the golden re-record).
+// -> de99d519 STYLE-2-MERGE record 46, the COHERENCE-POWERS merge (the dual hat re-deals the control row's cast, ranks and ties;
+// taken in the same act as the golden re-record).
+// -> f4fc47a0 STYLE-2-MERGE record 47, the COHERENCE-AGREE merge (one fact, one answer: the control row's resource roll, economy and
+// defence read off its own record; taken in the same act as the golden re-record).
+const GOLDEN_CONTROL_HASH = 'f4fc47a0ffe9036b899c2ce86a4fbb071857e321eb222599108adc3f6ccea662';
 /** EM-P0's own pinned-mode row and its chooser keys, re-measured here under the mocks. */
 const PIN_ROW = {
   settType: 'town', culture: 'germanic', terrainOverride: 'riverside',
@@ -189,7 +220,15 @@ const CHOOSER_KEYS = ['npcs', 'relationships'];
 // merged tree. The car's person-hook draws now run through the rung-2 landing's declared draw (drawDeclared over the
 // census's facts, the held set refusing inside it — MERGE-R2's ruling 2: nothing left, no roll), the composition of
 // silent breaks 1 and 2. PLAUSIBLE, not bisected.
-const POPULATION_UNPINNED_DRAWS = 547;
+// RE-KEYED at MERGE-TRAIN record 9 (2026-11-09, the ALLEGIANCE-CAR4 merge, 824a8ce2f): 547 -> 512, measured by this arm at the
+// merged tree (547 at the point-8 tip 8b75f466a): car 4's A9 (03ff59084) retires the population step's goal draw — the goals are
+// dealt at the seam by people/goals.js :: dealGoals — so 35 fewer unpinned draws reach the population stream on this row.
+// RE-KEYED at STYLE-2-MERGE point 46 (2026-11-13, the COHERENCE-POWERS merge 6aeaa4154; a figure its drafted record names for
+// the merge seat, 'generationForkCensus A1'): 512 -> 493, measured by this arm at the merged tree. The pin row's cast loses ONE
+// card, CONFIRMED by generating the row at 358e072ab and at the merge (28 -> 27 cards; the only one gone is npc_town_council,
+// 'the first councillor', the seat's own office face: the dual hat seats the leader from a house, so the office face is not
+// minted). That the 19 draws are all that card's own is PLAUSIBLE (the step is not instrumented per card).
+const POPULATION_UNPINNED_DRAWS = 493;
 /** The row both side channels are censused on (the pre-proof's probe row). */
 const CENSUS_ROW = {
   settType: 'town', culture: 'germanic', terrainOverride: 'riverside',
@@ -230,6 +269,33 @@ const PICK_VARIANT_CALLS = 31;
 // above): 15 -> 16, MEASURED by this arm at the merged tree. R12's fitter (acd70a977) is retired with its hashes (the
 // chair's SC-1 ruling); R3's tie rule (596cb8b1b, resolveTieKey) is ported into the one tie writer (people/ties.js ::
 // drawTies), one tie per card. PLAUSIBLE attribution, not bisected. The register's fnv1a32External moves with it.
+// RE-KEYED 2026-11-08 (FIX-PUBLIC-VEIL, the second seat): 15 -> 13, measured by A6. A veiled face is born with an
+// opaque id, and its keyed forks (`people-faces::`, `people-ties::`, `people-hooks::<card id>`) re-deal, so two of
+// the probe row's ties draw archetypes whose prose takes no external fnv1a32 hash. The cause is the lane's one
+// UNSIGNED generator move.
+// COMPOSED 2026-11-08 (ALLEGIANCE-CAR1, the veil merged over MERGE-CAR, 744c22d74): 16 -> 14, MEASURED by this arm at
+// the merged tree — the integration side's 16 with the veil's re-deal of the probe row's veiled faces composed in (the
+// veil measured -2 at its lane, 15 -> 13; the same -2 here). The register's fnv1a32External moves with it.
+// RE-KEYED 2026-11-09 (ALLEGIANCE-CAR4): 14 -> 15, MEASURED by A6 at the car's tip and traced call by call against the base
+// f6209c0c5 (a probe recording each external fnv1a32 caller's stack on this probe row): the fourteen base callers are
+// all still there (1 foodways, 6 economy fingerprints, 1 resolveTieKey, 6 tie-prose offsets), and the one new caller is
+// the tie prose's per-archetype offset (power/relationshipArchetypes.js, via people/ties.js :: drawTies) for
+// "Felix Brauer>Kunhild Meyer::family_complication" — a tie that was `old_debt` (an archetype already hashed) at the
+// base. The cause is the BIRTH stream, not goals.js's import graph (A9 runs after drawTies and makes no fnv1a32 call
+// here): the retired goal draw (03ff59084) and item 15's title-secret draw (eabc93dfe) leave a face's fork before its
+// power roll, so the rookery boss's `power` 1 -> 2, the pair's power gap 4 -> 3, and computeRelTension draws another
+// kind. The register's fnv1a32External moves with it.
+// RE-KEYED 2026-11-11 (COHERENCE-QUARREL cure 2): 15 -> 17, MEASURED. The probe row's two quarrels each
+// take one fnv1a32 for their plot hook (power/conflicts.js :: buildConflictPlotHooks: one hash of the seed, the
+// parties and the issue picks the hook and the offer's wording, draw-free). The register's fnv1a32External moves with it.
+// RE-KEYED 2026-11-13 (STYLE-2-MERGE point 46, the COHERENCE-POWERS merge, the chair's ruling on STOP 46b): 17 -> 16,
+// MEASURED by A6 and CONFIRMED caller by caller (a probe recording each external fnv1a32 caller's first src frame on
+// this probe row, at 3575cf061 against the merge): buildConflictPlotHooks 2 = 2, composeFoodwaysLine 1 = 1,
+// fingerprintPowerEconomyInput 6 = 6, the tie prose's per-archetype offset (power/relationshipArchetypes.js) 7 = 7 (the
+// pairs re-dealt: 5 of its 7 strings and one quarrel's parties differ), and resolveTieKey (domain/roles/roleClass.js)
+// 1 -> 0: the base's 'mutual_leverage::npc_town_watch>npc_town_hall' tie key is no longer resolved, the dual hat having
+// re-dealt the probe row's cast and ties. No call site left the code (no changed line under src names fnv1a32); the
+// figure is the probe row's runtime count. The register's fnv1a32External moves with it.
 const FNV_EXTERNAL_CALLS = 16;
 /** The fork law A1 pins: the mint wrapper's equivalence rests on this line and nothing else. */
 const FORK_LAW = 'fork: (label) => createPRNG(`${seed}::${label}`),';
@@ -258,7 +324,7 @@ const OFF_CORPUS_STEP = 'resolveConfig';
  */
 const DISPLAY_NAME_KEYED_SITES = [
   { site: 'src/generators/steps/assembleInstitutions.js:1004', channel: 'hash', marker: 'inst.name' }, // 2026-10-01, the urban band (ODQ §934.86): a pure line move, 774 -> 863; 2026-11-05 (LANDING-6, read per first-parent step): the same pickVariant line, 863 -> 888 terrain-pools (ac09ea83b) -> 891 its re-merge (fb5edb7f5) -> 910 car 3 (90dc22f18) -> 911 PINS (37b1e746d) -> 1004 F6 (6d84aa834)
-  { site: 'src/data/npcData.js:1435', channel: 'hash', marker: '?.name' }, // 2026-11-07 (LANDING-R2, the pool census composed): a pure line move, 1334 -> 1342 census-4c unit 4 (99fbe262f) -> 1400 census-4g unit 2 (6e9cbc676) -> 1435 census-4h unit 4 (ea6b9e1eb), traced through every census commit touching the file; the pickVariant call and its marker unchanged (99fbe262f adds a `lines` field to the wrapper's trailer only)
+  { site: 'src/data/npcData.js:1635', channel: 'hash', marker: '?.name' }, // 2026-11-09 (STYLE-2-MERGE point 19, SW-10 HOOKS composed over SW-7): 1537 -> 1635, a pure line move (SW-10's NPC_FACTION_LOYALTY growth of 98 lines, 4ba2a241d..fbbe4a992, above SW-7's 1537), measured at the merged tree; 2026-11-09 (STYLE-2 SW-7, B10(b) the dealing pool): 1436 -> 1537, a pure line move (DEALING_TRAIT_FAMILY, NPC_DEALING_BY_TRAIT and dealingLineFor above it); 2026-11-08 (ALLEGIANCE-CAR1): 1435 -> 1436, a pure line move (the HANDLER_TIE_LINES import above it); 2026-11-07 (LANDING-R2, the pool census composed): a pure line move, 1334 -> 1342 census-4c unit 4 (99fbe262f) -> 1400 census-4g unit 2 (6e9cbc676) -> 1435 census-4h unit 4 (ea6b9e1eb), traced through every census commit touching the file; the pickVariant call and its marker unchanged (99fbe262f adds a `lines` field to the wrapper's trailer only)
   { site: 'src/domain/townMap/glyphAssign.js:125', channel: 'mint', marker: 'createPRNG(`glyph:${seedId}`)' },
 ];
 
@@ -320,7 +386,7 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     ).toEqual([]);
   };
 
-  it('A1 — the instrument reaches the generator graph: mints split 4 direct / 106 via fork, no golden moves, 547 draws unpinned and 0 pinned', () => {
+  it('A1 — the instrument reaches the generator graph: mints split 4 direct / 106 via fork, no golden moves, 493 draws unpinned and 0 pinned', () => {
     // ── C0 — the mocks lose no export. A replacement that dropped a name would break
     // importers silently, and every figure below would be measured on a crippled module.
     expect(mintCensus.actualKeys.length, 'the prng mock factory never ran').toBeGreaterThan(0);
@@ -361,6 +427,9 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     // 'people-faces' and one keyed fork per card (28 on this row); PEOPLE-3 HOOKS (0f930ce95) forks each card's key again
     // for its one hook and adds ['people-hooks']: 58 labels, 30 distinct, unmoved to the tip. Measured at
     // every stage with its own produced manifest; pinned EXACTLY, in order (a new, lost or re-ordered fork reds).
+    // STYLE-2-MERGE point 46 (2026-11-13, the COHERENCE-POWERS merge): 28 -> 27 cards, 58 -> 56 labels, 30 -> 29 distinct; the one
+    // card gone, in both passes, is npc_town_council (the seat's office face, not minted under the dual hat; CONFIRMED with
+    // POPULATION_UNPINNED_DRAWS above).
     expect(unpinnedPopulation.forkLabels, 'the step mints exactly the cast\'s declared streams').toEqual([
       'people-faces',
       'npc_charcoal_burner',
@@ -380,7 +449,6 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
       'npc_bakers_5_15',
       'npc_craft_guilds_5_15',
       'npc_parish_churches_2_5',
-      'npc_town_council',
       'npc_courthouse',
       'npc_small_prison_stocks',
       'npc_town_watch',
@@ -409,7 +477,6 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
       'npc_bakers_5_15',
       'npc_craft_guilds_5_15',
       'npc_parish_churches_2_5',
-      'npc_town_council',
       'npc_courthouse',
       'npc_small_prison_stocks',
       'npc_town_watch',
@@ -480,12 +547,18 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     // keyed forks; fnv1a32External 15 -> 18) -> 91 PEOPLE-3 HOOKS (0f930ce95: 'people-hooks' and each card's hook fork) ->
     // 110 PEOPLE-4 TIES (c7d552370: each card's tie on its own keyed fork, R-P7; fnv1a32External 18 -> 15), unmoved to the
     // tip; direct 4, foreign 0 throughout. The bound is re-keyed to the tip's figure, never above it.
-    expect(seen.mints.length, 'total mints is row-dependent but bounded').toBeLessThanOrEqual(110);
+    // 2026-11-09, the train (MERGE-TRAIN at the ALLEGIANCE-CAR1 merge, this arm's census at the merged tree): 110 -> 118, car 1's
+    // hidden allegiance (5902f1a4a, domain/people/allegiance.js :: dealAllegiances): one `allegiance` family fork and one keyed
+    // fork per eligible card on this row (+8); direct 4, foreign 0. Re-keyed to the measured figure, never above it.
+    // 2026-11-09, MERGE-TRAIN record 9 (the ALLEGIANCE-CAR4 merge, this arm's census at the merged tree): 118 -> 138, car 4's A9
+    // (03ff59084, people/goals.js :: dealGoals): one `people-goals` family fork and one keyed fork per card on this row (+20);
+    // direct 4, foreign 0. Re-keyed to the measured figure, never above it.
+    expect(seen.mints.length, 'total mints is row-dependent but bounded').toBeLessThanOrEqual(138);
     expect(viaFork.length, 'STOP-6: mints via the re-implemented fork').toBeGreaterThanOrEqual(31);
     expect(foreign.map((record) => record.seed), 'every minted seed is root-prefixed').toEqual([]);
   }, 120_000);
 
-  it('A3e — the classification re-executed: the declared corpus is 63 rows, 13 steps draw, and every stepDraws and keyMoves reproduces', () => {
+  it('A3e — the classification re-executed: the declared corpus is 63 rows, 12 steps draw, and every stepDraws and keyMoves reproduces', () => {
     const corpus = censusCorpus();
     const grid = [];
     const pairsSeen = new Set();
@@ -506,7 +579,8 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     expect(fresh.rows.length, 'the measured pair set is the registry"s, not a literal').toBe(GENERATION_TIER1.length);
     expect(fresh.rows.length, 'anti-vacuity: the pair set is real before any equality is claimed').toBeGreaterThan(70);
     expect(fresh.steps.length, 'every registered step was perturbed').toBe(getStepOrder().length);
-    expect(fresh.drawingSteps.length, 'steps that draw at all').toBe(13);
+    // ALLEGIANCE-CAR1 (2026-11-08, J-2): 13 -> 12, MEASURED — corruptionPass, a drawing step, retired (its roll is the seam's)
+    expect(fresh.drawingSteps.length, 'steps that draw at all').toBe(12);
     process.stdout.write(`\n[A3e] corpus=${fresh.corpusRows} pairs=${fresh.rows.length}`
       + ` wall=${fresh.wallMs}ms drawingSteps=${fresh.drawingSteps.length}\n`);
 
@@ -760,8 +834,11 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     expect(wrongOrigin, 'a declared origin disagrees with its holding-step perturbation').toEqual([]);
     // RE-KEYED 2026-11-07 (the people car): 5 -> 7. The NPC's role and the placeholder's status no longer move
     // under the population step's perturbed stream (a card's role is its house's), so they are `computed` too.
+    // RE-KEYED 2026-11-08 (ALLEGIANCE-CAR2, the guild's push): 7 -> 6. The role list moves under the population step's
+    // perturbed stream again (7/42, measured by ARM C above): the flaws drawn there decide the hidden agents, whom the push
+    // now weights in the rank deal (src/domain/generation/generationForkRegistry.js names the chain), so it is `drawn`.
     expect(GENERATION_TIER2.filter((row) => row.origin === 'computed').length,
-      'the power structure consumes zero draws, the role and status are the house\'s, and all ten rows stay editable anyway').toBe(7);
+      'the power structure consumes zero draws, the placeholder\'s status is the appender\'s, and all ten rows stay editable anyway').toBe(6);
 
     // ── THE ANCHORED NEGATIVE. `powerStructure.seats[].holder` is the path the version-2 design
     // joined on and it exists NOWHERE; `powerStructure.governingName` is the real seat and

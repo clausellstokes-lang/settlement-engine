@@ -80,67 +80,105 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 // 27 (ee38718de1b929c9 -> 9057c386767a53ef) and 43 (a57cae4ca1a8eaf8 -> 20d12b33835a0846): measured by this file's own
 // loop, 4c39885fc reads the sixty as captured at 2c7437030 and the tip 3f95e3484 moves exactly these three; between them only b19740ab3 touches generation (9fd906c23 is display-only,
 // record C 3f95e3484 is fence-only). Re-captured at 3f95e3484 with the factor forced to 1.0, twice and equal.
+// RE-KEYED BY IDENTITY 2026-11-10 (GREEN-TIP, the chair's ruling on the census's group (6)): 60 of 60 moved, none by the
+// budget (densityFactor is still forced to 1). MEASURED, this file's own loop (an untracked probe reproducing it) at
+// 8308f13f8 (the MERGE-CAR re-key, 0 moved) and every first-parent stage of 8308f13f8..bf14617ca touching src/, the
+// helpers or scripts (73 stages, git-archive trees); the stages that moved a hash, with how many of the sixty each moved:
+// W1 ECO ea0e269a9 (40), W2 DEF 82a4e2856 (54), W3 POW 1a160d599 (59), W4 PEOPLE 66c23bfea (47),
+// W5 HIS e510409b1 (60), W7 HOOKS 501c97412 (60), FIX-FOOD-ISOLATION c6e8a4ad6 (10),
+// FIX-PUBLIC-VEIL 7e65c7bec (60), MERGE-WAVE ruling (a) docks read bcf3e7f8a (5), ALLEGIANCE-CAR1 e5f88930b (60),
+// ALLEGIANCE-CAR2 f51058995 (15), ALLEGIANCE-CAR3 c6ded8e3a (22), OWNER-WORDS-DOSSIER 5f6160284 (1),
+// ALLEGIANCE-CAR4 824a8ce2f (60), SW-0 point fix ca15421ff (6), SW-2 INSTITUTIONS ef4645832 (47),
+// SW-3 REALM-PROSE 1ef46ca30 (5), SW-5 CRISIS-VANTAGES a7770ecfe (45), SW-B2 FIRST-IMPRESSIONS 52da4542c (17),
+// SW-B5 FRAMES 46e0121c2 (44), SW-B6 ECO-DEF-BLOCKS 8de6c4a1a (1), SW-7 POWER-SIDE a3062d919 (60),
+// SW-B1 CONTRADICTIONS 0f2cb865c (43), SW-10 HOOKS 856de8427 (60), SW-6 CRISIS-SURFACES ac1442a3d (60),
+// SW-8 RENAME-POWERS 56f3b2df7 (60), URBAN-FIX 17b814803 (52).
+// Every stage is a lane merge with its own signed shift record under docs/shift-records/ (the movers inside each merge
+// are not isolated: PLAUSIBLE per commit, CONFIRMED per stage). Re-captured at the green-tip lane over bf14617ca (whose
+// generation is bf14617ca's byte for byte) with the factor forced to 1.0, twice and equal.
+// RE-KEYED BY IDENTITY 2026-11-10 (RESIDUE, the chair's packet item 4, at the simulation batch's merged tip — STYLE-2-MERGE
+// point 36, GREEN-TIP and PULSE-SITES): 3 of 60 moved, none by the budget (densityFactor is still forced to 1; no commit in
+// bf14617ca..the tip or in either lane touches src/data/institutionBudget.js; with the factor planted at 1.25 all 60 move, so
+// the pin is armed). MEASURED, this file's own loop (an untracked probe reproducing it) at bf14617ca (0 moved against the
+// GREEN-TIP sixty) and at every first-parent stage of bf14617ca..90774f2fa touching src/ or the soak config: ONE stage moves,
+// SW-9b-B 8e532a663 (point 27) — seeds 21 (79379bee35da9918 -> 7bee45ae807037d6), 52 (dd6681b153dad267 -> b50ff039d9ebf891) and 53 (8347fa12cbf96c74 -> 5e0de535fa6d748f); points 28-35 and
+// the line's hygiene stages move none. Inside point 27, by merging each lane prefix onto its first parent: b23e4e91b (SW-9b-B
+// row 2b, E-3: the small-name instigator says it speaks for the gaining power from a house it backs) moves exactly these three;
+// the four lane commits before it move none. The batch itself (GREEN-TIP + PULSE-SITES over the line) moves none. Re-captured at
+// the merged tip with the factor forced to 1.0, twice and equal.
+// RE-KEYED BY IDENTITY 2026-11-12 (STYLE-2-MERGE-8): 37 of 60 moved, none by the budget (densityFactor still forced to 1),
+// by the COHERENCE-QUARREL merge d4723749a (STYLE-2-MERGE point 42; lane/coherence-quarrel-2026-11-11 at 1c7b5786c, record docs/shift-records/2026-11-12-style-2-merge-42-coherence-quarrel.json: the quarrels' issues, stakes, descriptions and hooks, and the safety record's plot hooks); the line's tip decc7bf15 reads all sixty green, the merge these 37 red (the lane's own predicted 37).
+// Re-captured at the merge with the factor forced to 1.0, this file's own loop (an untracked probe), twice and equal.
+// RE-KEYED BY IDENTITY 2026-11-12 (STYLE-2-MERGE-8, point 43): 56 of 60 moved, none by the budget (densityFactor still
+// forced to 1), by the COHERENCE-PRESUME merge f922124d0 (docs/shift-records/2026-11-12-style-2-merge-43-coherence-presume.json: a line names a thing the town does not have: the culture lines, the re-titled watch role and the ties it re-deals, the history and institution texts); the line before the merge reads all sixty green.
+// Re-captured at the merge with the factor forced to 1.0, this file's own loop (an untracked probe), twice and equal.
+// RE-KEYED BY IDENTITY 2026-11-12 (STYLE-2-MERGE-9, point 46): 50 of 60 moved, none by the budget (densityFactor still
+// forced to 1), by the COHERENCE-POWERS merge 6aeaa4154 (docs/shift-records/2026-11-13-style-2-merge-46-coherence-powers.json: the dual hat re-deals the cast); the line before the merge reads all sixty green.
+// Re-captured at the merge with the factor forced to 1.0, this file's own loop (an untracked probe), twice and equal.
+// RE-KEYED BY IDENTITY 2026-11-13 (STYLE-2-MERGE-11, point 47): 60 of 60 moved, none by the budget (densityFactor still
+// forced to 1), by the COHERENCE-AGREE merge 22cc9ef7d (docs/shift-records/2026-11-13-style-2-merge-47-coherence-agree.json: one fact, one answer: the resource roll's refused members refilled, the economy and defence read off the town's own record); the line before the merge reads all sixty green.
+// Re-captured at the merge with the factor forced to 1.0, this file's own loop (an untracked probe), twice and equal.
 const BEFORE = Object.freeze([
-  'a218c33e0b07fdbf', // 0
-  'e54bcb6a762cd333', // 1
-  '3c1040b8606c57a5', // 2
-  '8ec0881d50b4ced1', // 3
-  '612ab7970edcea30', // 4
-  '05dff2518f76c0ea', // 5
-  '2416408d696a144a', // 6
-  'c85d6c3fb548276f', // 7
-  '20a4d9e836903d88', // 8
-  '81ac6cd106e8bd44', // 9
-  '05a98c1fbc272d66', // 10
-  '9b6f9b9f0584580f', // 11
-  '12affc0a0fcd136a', // 12
-  '59ed1a5564aca2c4', // 13
-  'e69dccaa1d7a6cb2', // 14
-  '346f5628f55d761a', // 15
-  '01ec7ed5f56b5c9a', // 16
-  '056d359c2e6e8544', // 17
-  '51db271e4ef6e8b0', // 18
-  '7157dfc6f8a8da56', // 19
-  'ae6b07d20ab1f304', // 20
-  '463e8f7a3e88d12f', // 21
-  'c7162439da1debef', // 22
-  '314029460c5b6b15', // 23
-  'a87a741e59a35fbe', // 24
-  '2e8b03858f465561', // 25
-  '5a5d83c4d318d68f', // 26
-  '9057c386767a53ef', // 27
-  'e8bfebc77f27f23f', // 28
-  'b934701f5e9a2021', // 29
-  '78e56e6b81505156', // 30
-  'fe4b466ac7c79ed4', // 31
-  'b16cba79d26e9918', // 32
-  'c4e552994de08e8a', // 33
-  '79fe65f6003eefa7', // 34
-  '0801f635bca220ad', // 35
-  '5b434f746a4628bd', // 36
-  '284523bee3281a86', // 37
-  '6ae4fb2965cebb14', // 38
-  '2c77009c8b2eb986', // 39
-  '5e7ebade242e392a', // 40
-  'dd364453155de218', // 41
-  '4b44cdd1845ac7a2', // 42
-  '20d12b33835a0846', // 43
-  'e8713ee6471a6254', // 44
-  '0b925ad0ec0b04ec', // 45
-  '18232e2beeb3393c', // 46
-  '24e494c6b58e84bc', // 47
-  'eb8018f81482688c', // 48
-  '5c529604051af62a', // 49
-  '27eb2c526291d1a8', // 50
-  'a520a9b640464baa', // 51
-  'a697e52552f7fa30', // 52
-  '5fc78ebcfde32be7', // 53
-  'ff9d6533e474a67a', // 54
-  '0f587f30e28a0c69', // 55
-  '20b1d41950121bec', // 56
-  'b821cb47cbc4e625', // 57
-  'd95cd1565227f122', // 58
-  '97d1424a0a11724d', // 59
+  '5846eb303e8ba516', // 0
+  '4995df767a612f94', // 1
+  '5d33c4fdc59d7f54', // 2
+  '92058181fabb379a', // 3
+  'fe63bd3821950b4a', // 4
+  '249ba08c1ca0ec02', // 5
+  'f31d6451479eb329', // 6
+  '029d750b2334bb07', // 7
+  'e186f30d21203608', // 8
+  '193d6286570ea98c', // 9
+  '786563116be92224', // 10
+  'e5c3de10fc7c175e', // 11
+  '292591d34a813144', // 12
+  '9b5e1d1469351341', // 13
+  'f5f10a7fcff76dcd', // 14
+  'ea102a6c9253a407', // 15
+  '1413b1473f378700', // 16
+  '2e2d2299b1dae456', // 17
+  'a6383fa022c4e283', // 18
+  'df7521324a6f5454', // 19
+  'e705e4fa503944a0', // 20
+  'ef7721cf7fb643ed', // 21
+  'd2b5134667e49da4', // 22
+  '343d2bc95388df18', // 23
+  '281e20ca5bfd1a29', // 24
+  'c4ac235f46933a9e', // 25
+  '75854a2e5961a709', // 26
+  '266fcb74c48a99e8', // 27
+  'f9224e0ed4d3bc5d', // 28
+  '7983caa001eee7da', // 29
+  '712ad4f148b53607', // 30
+  '98bab608996c9883', // 31
+  '61de1e198ead9183', // 32
+  '22ce1afc5e775697', // 33
+  '18703c4fb3f9e229', // 34
+  '27457d262f44c5b1', // 35
+  'ef693b7b839585ae', // 36
+  'a342a643fda176a3', // 37
+  'f1ef4fc4047259fc', // 38
+  '07015de5e6b7cffe', // 39
+  'caad5676d4326a51', // 40
+  '6fce6e3d180fc1be', // 41
+  '7aeabecf762d9569', // 42
+  '7e44d8330739caeb', // 43
+  '00bac639c8e3061f', // 44
+  '07d65c0a80c9ed19', // 45
+  '8ad4cc8130b6d3ab', // 46
+  'e7cb33a42a3ab4fb', // 47
+  '4fe39e5407bffd9f', // 48
+  '9270867ba13a3544', // 49
+  '8f7d4ea8f6a7fb78', // 50
+  'efd1558c0bba487e', // 51
+  '884f68d1963e4adb', // 52
+  'a0939636e94032a4', // 53
+  '55efbde5e39ea54c', // 54
+  'e0f1b369eb044ed4', // 55
+  'dfcabc726908a708', // 56
+  '83f39ca5ae1d03cc', // 57
+  '27d71132630829a6', // 58
+  '7593b8429756cab7', // 59
 ]);
 
 const hashOf = (value) => createHash('sha256').update(JSON.stringify(value)).digest('hex').slice(0, 16);

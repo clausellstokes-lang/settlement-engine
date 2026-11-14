@@ -66,8 +66,11 @@ const declaredSet = (text, needs, twin) => Object.freeze([
  * Military/Guard entry is keyed by the military PRIORITY and the tier, not by the roster). Keyed by
  * the printed text; each printing branch resolves through `said` → `resolveSibling` (CENSUS-1e
  * unit 2). Measured on the 1,000, printed / false by the record: "Town watch
- * and militia" 48 / 0 on `watch` (it would be 48 / 48 on `militia`: the line's town holds a watch,
- * and "militia" reads as the watch's own levy, so it declares the watch alone), the city garrison
+ * and militia" 48 / 0 on `watch` (48 / 48 on `militia`). THE CHARTER OVERRIDES R-C (COHERENCE-PRESUME,
+ * the owner's order of 2026-11-11, the chair's ruling): R-C read "militia" as the watch's own levy; an
+ * outside reader read two forces, and 91 of 91 corpus towns printing it had no militia. The militia
+ * is not settled at this step (R-Q), so the line cannot declare it; it prints its twin, the watch
+ * alone ("Town watch; it enforces ordinances, …"), the city garrison
  * lines 101 / 0 and 30 / 0, the market-day traders 8 / 0. The part-time militia (7 / 1) and the
  * armed patrol (34 / 13) sets LEFT this table (CENSUS-5c, the chair's ruling of 05:25: the militia
  * is not settled at this draw, so R-U rewords both lines at their branch to their twins' wording), and
@@ -79,12 +82,28 @@ const declaredSet = (text, needs, twin) => Object.freeze([
  * so the atom would refuse a true line; they wait for a council-presence atom (the lane doc).
  */
 export const FACTION_DESC_SIBLINGS = Object.freeze({
-  'Town watch and militia; enforce ordinances, manage disorder, and report to the council.': declaredSet(
-    'Town watch and militia; enforce ordinances, manage disorder, and report to the council.', ['watch']),
-  'Well-funded city watch; a reliable instrument of civic order with growing institutional confidence.': declaredSet(
-    'Well-funded city watch; a reliable instrument of civic order with growing institutional confidence.', ['watch']),
+  'Town watch; it enforces ordinances, manages disorder, and reports to the council.': declaredSet(
+    'Town watch; it enforces ordinances, manages disorder, and reports to the council.', ['watch']),
+  'Well-funded city watch; it keeps order reliably and is growing more sure of its own authority.': declaredSet(
+    'Well-funded city watch; it keeps order reliably and is growing more sure of its own authority.', ['watch']),
   'City watch; law enforcement and external defence, stretched between multiple responsibilities.': declaredSet(
     'City watch; law enforcement and external defence, stretched between multiple responsibilities.', ['watch']),
-  'A small trader community present at market days; politically active in minor disputes, limited in broader leverage.': declaredSet(
-    'A small trader community present at market days; politically active in minor disputes, limited in broader leverage.', ['market']),
+  'A small group of traders who come on market days; they speak up in small disputes but carry little weight beyond them.': declaredSet(
+    'A small group of traders who come on market days; they speak up in small disputes but carry little weight beyond them.', ['market']),
+});
+
+/**
+ * SW-B1 CONTRADICTIONS (STYLE-RULINGS-2 B1(b), the SURFACES audit's P50; 2026-11-09): the government
+ * line of the seats that neither of `rulingStructure.js`'s two tables names. They fell back to the Mixed
+ * Council's "Power is distributed across multiple factions without a clear dominant authority." — a claim
+ * the writer never read (Haifeng's Household Council beside a Dominant 63). Each line says only what the
+ * seat's name holds. A table here, not there, by R-AB's precedent (the power module's line ceiling).
+ */
+export const GOV_DESC_OF_UNNAMED_SEAT = Object.freeze({
+  'Elder Consensus': 'The elders of the hamlet decide things together, and people follow them out of respect.',
+  'Free Elder Council': 'The elders of the hamlet decide things together, and no lord stands over them.',
+  "Headman's Authority": 'A headman settles disputes and gives the orders here.',
+  'Priestly Guidance': 'The priest guides the community, and disputes are brought to the priest to settle.',
+  'Town Mayor': "A mayor runs the town's day-to-day business.",
+  'Grand Guild Council': 'The guilds of the metropolis govern together; the richer the guild, the more say it has.',
 });

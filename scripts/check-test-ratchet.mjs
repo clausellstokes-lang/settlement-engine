@@ -198,6 +198,25 @@ export function runnerCommandOf({ verifyDist = false, outputFile }) {
 }
 
 /**
+ * THE FLAGGED DIST (DIST-FLAGGED, 2026-11-10; the chair's D1). The production artifact is the
+ * FLAGGED build — docs/DEPLOY.md sets VITE_ENGINE_REMOTE=true on Vercel, and a flagged build
+ * carries no generator (vite.config.js :: engineAbsentWhenRemote) — yet until this line no gate
+ * built it, so tests/build/engineAbsentWhenRemote.test.js's "read from the build" arms were
+ * SKIPPED rows that strict dist reads as a failure (red since ENGINE-3 unit 1, a9bbf581e), and
+ * the boot smoke never saw the artifact that ships. `--verify-dist` therefore BUILDS it first,
+ * at the test's own default path, with the production builder's heap (vercel.json), and runs
+ * its strict phase with VERIFY_ENGINE_REMOTE_DIST=1 so a missing flagged dist is a hard red,
+ * never a skip. It lives HERE rather than in a new npm script because package.json is a
+ * governed detector source (docs/OPERATING_STANDARD.md rule 11): `verify:dist`, `npm run check`
+ * and CI's build job keep calling the one unchanged line. Exported so the meta-gate pins the
+ * live bytes; TEST_RATCHET_REMOTE_BUILD_CMD is the testability seam beside TEST_RATCHET_RUN_CMD.
+ */
+export const ENGINE_REMOTE_DIST_DIR = 'node_modules/.cache/engine-remote-dist';
+export function remoteDistBuildCommandOf(outDir = ENGINE_REMOTE_DIST_DIR) {
+  return `VITE_ENGINE_REMOTE=true NODE_OPTIONS=--max-old-space-size=4096 npx vite build --outDir ${JSON.stringify(outDir)} --emptyOutDir`;
+}
+
+/**
  * Split the READ-ONLY flags out of argv, leaving the MODE words untouched.
  *
  * ⛔ EVERY EXISTING CALLER IS UNTOUCHED BY CONSTRUCTION, and that is the point of
@@ -876,6 +895,11 @@ export async function run(argv = []) {
         discovered = `⚠ discovery WOULD REFUSE: ${error.message}`;
       }
       lines.push(`  strict corpus:   ${discovered}`);
+      lines.push(
+        `  flagged dist:    ${process.env.TEST_RATCHET_REMOTE_BUILD_CMD || remoteDistBuildCommandOf()}`
+        + (process.env.TEST_RATCHET_REMOTE_BUILD_CMD ? ' (TEST_RATCHET_REMOTE_BUILD_CMD, the injected seam)' : ''),
+        '                   built BEFORE the strict runner, which then has VERIFY_ENGINE_REMOTE_DIST=1',
+      );
     }
     lines.push(`  baseline:        ${BASELINE}`);
     if (!fs.existsSync(BASELINE)) {
@@ -960,6 +984,29 @@ export async function run(argv = []) {
     const runnerEnv = { ...process.env, TEST_RATCHET_OUTPUT_FILE: OUT };
     if (VERIFY_DIST) runnerEnv.VERIFY_DIST = '1';
     else delete runnerEnv.VERIFY_DIST;
+    // THE FLAGGED DIST (D1; remoteDistBuildCommandOf above). Built before the strict runner,
+    // and the runner told to REQUIRE it. A build that fails is a closed failure, never a
+    // skip. Under the injected runner seam alone (the meta-gate's fake vitest, which reads
+    // no dist) nothing is built unless TEST_RATCHET_REMOTE_BUILD_CMD names a command; the
+    // real runner always gets the real build.
+    if (VERIFY_DIST) {
+      runnerEnv.VERIFY_ENGINE_REMOTE_DIST = '1';
+      const remoteBuild = process.env.TEST_RATCHET_REMOTE_BUILD_CMD
+        || (process.env.TEST_RATCHET_RUN_CMD ? null : remoteDistBuildCommandOf());
+      if (remoteBuild) {
+        try {
+          execSync(remoteBuild, {
+            cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'], maxBuffer: 256 * 1024 * 1024,
+          });
+        } catch (e) {
+          return fail([
+            '[test-ratchet] STRICT DIST: the FLAGGED build (the production artifact) FAILED — failing closed.',
+            `  command: ${remoteBuild}`,
+            `  output (tail): ${`${e.stdout || ''}${e.stderr || ''}`.trim().slice(-2000) || '(none)'}`,
+          ]);
+        }
+      }
+    } else delete runnerEnv.VERIFY_ENGINE_REMOTE_DIST;
     try {
       runnerOutput = execSync(
         process.env.TEST_RATCHET_RUN_CMD

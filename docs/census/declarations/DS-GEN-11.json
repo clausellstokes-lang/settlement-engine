@@ -198,47 +198,6 @@
       ]
     },
     {
-      "pool": "criticalIssueCount zero",
-      "keyGuarantees": [
-        "criticalIssueCount is 0 and the coherence battery passed"
-      ],
-      "poolNeeds": [],
-      "poolExcludes": [],
-      "poolCrisis": null,
-      "crisisScoped": false,
-      "colour": true,
-      "ruling": "Colour, not scoped: the coherence it asserts is the record's, guaranteed by the key, not the town's calm.",
-      "lines": [
-        {
-          "lineId": "vid:1",
-          "text": "Nothing in {settlement}'s record contradicts anything else in it. The town is what it says it is, throughout.",
-          "needs": [],
-          "excludes": [],
-          "crisis": null,
-          "colour": true,
-          "stop": []
-        },
-        {
-          "lineId": "vid:2",
-          "text": "A stranger who reads {settlement} closely finds no seam in it, which is rarer than the absence of trouble.",
-          "needs": [],
-          "excludes": [],
-          "crisis": null,
-          "colour": true,
-          "stop": []
-        },
-        {
-          "lineId": "vid:3",
-          "text": "{settlement} carries pressures that would show up as contradictions in a less coherent place, and the record holds together regardless.",
-          "needs": [],
-          "excludes": [],
-          "crisis": null,
-          "colour": true,
-          "stop": []
-        }
-      ]
-    },
-    {
       "pool": "THE FIRST-SURVEY QUALIFICATION",
       "keyGuarantees": [
         "the reading is the first survey's"

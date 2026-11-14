@@ -15,323 +15,337 @@ export const CIVIC_ROLE_CONTENT = {
   underfunded: {
     attributed: [
       'The office fees stopped covering the office, so the official found the margin: the permit queue moves for coin, and the fines collected do not all reach the strongbox.',
-      'A starved bureau and a patient official: every stamp has a speed, every speed has a price, and the price list exists nowhere in writing.',
+      'The office is short of money, so every stamp from the official can be had faster for a price, and the prices are never written down.',
     ],
     're-caused': [
-      'What first bent the official has passed; the starved bureau bends them now, and the queue-money is called making the office work.',
+      "The official's first reason is gone, but now the office is short of money, and the official calls the queue money keeping the office open.",
     ],
     reformed: [
       'The bureau was funded and the official trued the queue; the skimmed fines were restored to the strongbox with an accounting nobody demanded.',
       'With the fees covering the office again, the official came clean; the unwritten price list was written down at last, as a confession.',
     ],
     historicized: [
-      'The bureau recovered, but the queue still moves for coin; the shortfall that started the practice is old accounting.',
+      'The office has its money again, but the official still moves the permit queue for whoever pays.',
     ],
     'exposed-public': [
       'It is public that the permit queue was auctioned while the bureau starved, and everyone who waited honestly knows now what the waiting bought.',
-      'The skimming is out: the official pocketed fines against short wages, and the strongbox arithmetic is being done in the square.',
+      'It is out that the official pocketed fines while wages ran short, and people in the square are counting what went missing from the strongbox.',
+      'Those who stood in the permit queue without paying know now why they waited, and where the fines went while the office went short.',
     ],
     're-adjudicated': [
-      'The syndicate holding the official is destroyed, but the bureau is still starved, and the queue-money now flows to the shortfall itself.',
+      'Whoever paid the official before is gone, but now the office is short of money, and the queue money keeps coming.',
     ],
   },
   'chain-starved': {
     attributed: [
-      'The requisitions come back stamped and empty, so the official forges the paperwork the black channel needs; goods appear, files agree, and none of it happened.',
-      'When the supply lines failed, the official discovered that paper is a supply line too; the forms move contraband as smoothly as wagons ever moved grain.',
+      'The requisitions come back stamped and empty, so the official forges the papers the black market needs. Goods appear, the files agree, and none of it happened.',
+      'When the supply lines failed, the official found that papers can move goods too. The forms now move contraband as smoothly as wagons once moved grain.',
     ],
     're-caused': [
-      "The official's first reason is gone; the dead requisition channel reasons for them now, and the forged forms keep the office stocked.",
+      'Whatever first drew the official in is over, but now the requisitions come back empty, and the forged forms keep the office supplied.',
     ],
     reformed: [
       'The supply lines were restored and the official pulped the forged forms; the files were corrected to say what actually happened, all of it.',
       'With the wagons running, the official came clean; the paper channel was closed and its architecture handed to the auditors.',
     ],
     historicized: [
-      'The supply lines are mended, but the paper channel stays open; the shortage that drew it is long resupplied.',
+      'The supply lines are open again, but the official still forges papers for the black market.',
     ],
     'exposed-public': [
-      'It is public that the official forged the requisition record, and every file with their stamp is being re-read against reality.',
-      'The paper channel is out: the official made contraband bureaucratically true, and the auditors are unwinding the fiction form by form.',
+      'It is public that the official forged the requisition papers, and every file with that stamp is being checked against what happened.',
+      'It is out that the official made contraband look lawful on paper, and the auditors are undoing it form by form.',
+      "Merchants holding papers with the official's stamp are waiting to hear whether their goods were ever lawful.",
     ],
     're-adjudicated': [
-      'The old partners are destroyed, but the supply lines are still cut, and the paper channel has new cargo and the same clerk.',
+      'Whoever paid the official before is gone, but now the supply lines are cut, and the official forges papers for whoever brings goods in.',
     ],
   },
   depleted: {
     attributed: [
-      'The relief stores are empty and the dole list is not; the official curates it now, and a place on it costs exactly what the desperate can pay.',
-      'Scarcity gave the official a new power: the list of who is fed. Names appear and vanish for consideration, and the register never shows the erasures.',
+      'The relief stores are empty and the dole list is not. The official decides who is on it now, and a place costs whatever the desperate can pay.',
+      'Since the stores ran dry, the official decides who is fed. Names go on and come off the list for payment, and the list never shows what was struck out.',
     ],
     're-caused': [
-      "The official's first cause has passed; the empty relief stores reason for them now, and the curated list pays its keeper.",
+      "The official's first reason is gone, but now the relief stores are empty, and the official goes on selling places on the dole list.",
     ],
     reformed: [
       'The stores were refilled and the official restored the true list; the paid placements were struck, and the fees returned in front of the queue.',
       'With relief flowing again, the official came clean; the erasures were confessed, and the register rewritten by need alone.',
     ],
     historicized: [
-      'The stores recovered, but the list is still curated; the famine that made it valuable has ended.',
+      'The stores are full again, but the official still sells places on the dole list to whoever can pay.',
     ],
     'exposed-public': [
       'It is public that the dole list was sold by the name while the stores ran dry, and the struck-off are reading the register aloud.',
-      'The erasures are out: the official priced hunger, and the town is matching the vanished names to the graves.',
+      'It is out that the official sold places on the dole list, and the town is matching the names struck off to the graves.',
+      'Families struck off the dole list while the stores ran dry are standing in the square with the names of those who bought their places.',
     ],
     're-adjudicated': [
-      'The syndicate is gone, but the stores are still empty, and the curated list has passed to new curators with the official attached.',
+      'Whoever held the official before is gone, but now the relief stores are empty, and the official sells places on the dole list to whoever pays.',
     ],
   },
   'trade-strangled': {
     attributed: [
-      'The embargo is absolute, except on paper; the official stamps exemptions for coin, and the stamped wagons roll past inspectors who trust the stamp.',
-      'Trade is strangled by decree, and the official sells the loopholes; each exemption is technically lawful, which is the service being purchased.',
+      'The embargo allows nothing through, except on paper: the official stamps exemptions for coin, and the stamped wagons roll past inspectors who trust the stamp.',
+      'The embargo is law, and the official sells the ways around it. Each exemption is lawful on paper, which is what the buyers pay for.',
     ],
     're-caused': [
-      'What first held the official has passed; the embargo holds them now, and each stamped exemption renews the fee.',
+      'Whatever first drew the official in is over, but now the embargo holds, and each stamped exemption brings another fee.',
     ],
     reformed: [
       'The embargo lifted and the official published the exemption record entire, buyers and fees included, before any auditor asked.',
       'When trade reopened, the official came clean; the stamp went back to meaning what it says, and the fees went to the treasury.',
     ],
     historicized: [
-      'The embargo is lifted, but the official still sells the stamp; the decree that priced it is repealed.',
+      'The embargo is over, but the official still sells exemption stamps to any merchant who pays.',
     ],
     'exposed-public': [
-      'It is public that the embargo had a price list at the records office, and the merchants who obeyed the law are reading the buyers\' names.',
-      'The exemption record is out: the official retailed the law\'s exceptions, and the law is deciding what its stamp is worth now.',
+      'It is public that the embargo had a price list in the clerk\'s office, and the merchants who obeyed the law are reading the buyers\' names.',
+      'It is out that the official sold exemptions from the embargo, and every stamped exemption is being checked again.',
+      'Merchants who kept the embargo and lost trade by it are reading out who bought an exemption from the official.',
     ],
     're-adjudicated': [
-      'The old paymaster is gone, but the trade is still strangled, and the exemption trade has new principals holding the same stamp.',
+      'Whoever paid the official before is gone, but now the embargo holds, and whoever pays gets the same stamp.',
     ],
   },
   'levied-away': {
     attributed: [
-      'The auditors marched with the levy, and the records have been fluid since; deeds amend themselves, debts vanish, and the official\'s hand is behind every helpful correction.',
-      'With the strength levied away, no one checks the files against the facts; the official has been retailing corrections, and the archive is becoming a work of fiction with subscribers.',
+      'The auditors marched with the levy, and the files have been changing ever since: deeds altered, debts gone, and the official\'s hand behind every change.',
+      'With the levy away at war, no one checks the files against the facts. The official sells changes to them, and the archive no longer matches what happened.',
     ],
     're-caused': [
-      "The official's first cause resolved, but the levy emptied the town of auditors, and the correction trade now rests on the absence alone.",
+      "The official's first reason is gone, but now the auditors are away with the levy, and the official sells changes to the files.",
     ],
     reformed: [
       'The companies came home and the official restored the archive first; every sold correction was reversed before the auditors sat down.',
       'When the strength returned, the official came clean; the fluid records were confessed, and the true copies produced from a locked drawer.',
     ],
     historicized: [
-      'The auditors are back, but the sold corrections stand; the absence that permitted them has ended and its fictions are load-bearing now.',
+      'The auditors are back, but the official still alters deeds and debts for whoever pays.',
     ],
     'exposed-public': [
       'The returned auditors have compared the files to the facts, and it is public: the official sold corrections the whole time the town stood unwatched.',
-      'It is out that the archive was for sale during the levy, and every deed and debt of the period is being re-proved from scratch.',
+      'It is now known that the archive was for sale during the levy, and every deed and debt from that time is being proved again from scratch.',
+      'Anyone who bought, borrowed or inherited while the levy was away must prove it again, because the official sold the archive.',
     ],
     're-adjudicated': [
-      'The syndicate fell, but the strength is still levied away, and the correction trade continues on the absence it always ran on.',
+      'Whoever paid the official before is gone, but now the auditors are away at war, and the official goes on selling changes to the files.',
     ],
   },
   'garrison-drained': {
     attributed: [
-      'The garrison cannot serve a warrant, so the official sells judgments that will never be enforced; justice is pronounced, priced, and shelved, and everyone involved knows the sequence.',
-      'With enforcement hollow, the official\'s rulings are theater with fees; the guilty pay for verdicts against them that will never be executed, and call it settling out.',
+      'The garrison cannot enforce a ruling, so the official sells judgments that will never be carried out. Everyone involved knows it.',
+      'With no one to enforce them, the official\'s rulings are for show. The guilty pay for verdicts against them that will never be enforced, and call it settling.',
     ],
     're-caused': [
-      "The official's first reason passed, but the garrison hollowed after, and the unenforceable-judgment trade now anchors the arrangement.",
+      'Whatever first drew the official in is over, but now the garrison is thin, and the official sells rulings that no one will enforce.',
     ],
     reformed: [
       'The garrison was refilled and the shelved judgments came down; the official executed every one, beginning with the paid-for.',
       'With enforcement restored, the official came clean; the theater was confessed, and the fees refunded on the courthouse steps.',
     ],
     historicized: [
-      'The garrison stands full again, but the judgments stay shelved; the hollowness that excused it is repaired.',
+      'The garrison is back to strength, but the official still takes money from the guilty to leave their judgments unenforced.',
     ],
     'exposed-public': [
-      'It is public that the official priced verdicts nobody would enforce, and the shelved judgments are being read like a menu.',
-      'The theater is out: justice here was pronounced for show and paid for quiet, and the official ran the box office.',
+      'It is now known that the official sold verdicts nobody would enforce, and the shelved judgments are being read out.',
+      "It is out that the official's justice was for show, and the official took money for keeping it that way.",
+      'People whose cases were decided and never enforced are learning the official was paid to keep it that way.',
     ],
     're-adjudicated': [
-      'The old paymaster is destroyed, but the garrison is still drained, and the judgment trade has re-opened under new patrons.',
+      'Whoever paid the official before is gone, but now the garrison is thin, and whoever wants a ruling left unenforced pays the official.',
     ],
   },
   'siege-scarred': {
     attributed: [
-      'The war brought rationing, and rationing brought the books; the official keeps them, and a household\'s allotment tracks its generosity to the keeper.',
-      'Under the war\'s pressure the ration books became currency, and the official is the mint; extra pages for the accommodating, short weights for the difficult.',
+      'The war brought rationing, and the official keeps the ration books. A household\'s share depends on how generous it is to the official.',
+      'With the war pressing, the ration books are worth money, and the official keeps them: extra for those who pay, short weight for those who argue.',
     ],
     're-caused': [
-      "The official's old cause cleared, but the war pressed in, and the ration books now carry the arrangement page by page.",
+      "The official's first reason is gone, but now the war presses in, and the official sells the ration books page by page.",
     ],
     reformed: [
       'The war receded and the official trued the ration books; the short-weighted were repaid in full from the office\'s own stores.',
       'With the pressure lifted, the official came clean; the sold pages were confessed, and the rationing records opened to every household.',
     ],
     historicized: [
-      'The war moved on, but the ration books still track generosity; the emergency that opened them is closed.',
+      "The war has moved on, but a household's ration still depends on what it gives the official.",
     ],
     'exposed-public': [
       'It is public that the ration books were kept crooked through the war, and the short-weighted households are presenting their pages.',
-      'The mint is out of business publicly: the official sold the war\'s bread by the signature, and the town has kept every stub.',
+      'It is out that the official sold the war\'s bread by the signature, and the town has kept every stub.',
+      "Households that went short through the war are bringing their ration pages to the square to set beside the official's books.",
     ],
     're-adjudicated': [
-      'The syndicate is broken, but the war still presses, and the ration books have been transferred, keeper and all.',
+      'Whoever paid the official before is gone, but now the war presses in, and the official sells the ration books to whoever pays.',
     ],
   },
   occupation: {
     attributed: [
-      'The occupier asked for the census, and the official provided it annotated: who resists, who complies, who has sons of fighting age; the administration runs smoothly, as does the collecting.',
-      'Under the occupation the official kept every office and earned the keeping; the town\'s records serve the occupier now, and the official curates what they see.',
+      'The occupier asked for the census, and the official handed it over with notes: who resists, who complies, who has sons of fighting age.',
+      'Under the occupation the official kept every office and earned it. The town\'s files serve the occupier now, and the official chooses what it sees.',
     ],
     're-caused': [
-      "What first compromised the official is gone; the occupier's administration sustains the office now, and the annotated files sustain the official.",
+      "Whatever first drew the official in is over, but now the official serves the occupier, and the noted census keeps the office in the official's hands.",
     ],
     reformed: [
       'The occupier withdrew and the official produced the annotations for the town to read, their own entries first.',
       'With the occupation ended, the official came clean; what the census had carried to the occupier was confessed to those it named.',
     ],
     historicized: [
-      'The occupier is gone, but the official still annotates the census; the reader it was curated for has marched away.',
+      'The occupier is gone, but the official still marks in the census who resists and who complies.',
     ],
     'exposed-public': [
       'It is public that the census went to the occupier annotated, and every family the occupation visited is finding its entry.',
-      'The annotations are out, in the official\'s hand: the town\'s compliance, graded and delivered, and the collections that followed each grade.',
+      'It is out, in the official\'s own hand: the town\'s households, graded by how far they complied, and the collections that followed each grade.',
+      "Families the occupier visited are finding their own names in the official's census, each with a mark beside it.",
     ],
     're-adjudicated': [
-      "The official's old paymaster is destroyed, but the occupier remains, and the annotated census has a new and equally attentive reader.",
+      'Whoever paid the official before is gone, but now the occupier rules, and the official hands the noted census to the occupier.',
     ],
   },
   'conduct-drift': {
     attributed: [
-      'A dark patron reads the official\'s verdicts like offerings, and pays for the reading; injustice from this bench has a sponsor, and the sponsor has taste.',
-      'The official\'s rulings have drifted toward cruelty, and the drift is subsidized; a patron that delights in the twisted verdict rewards each one.',
+      "A dark patron rewards the official's cruel verdicts, and the official is paid for each one handed down.",
+      'The official\'s rulings have grown cruel, and a patron that delights in a twisted verdict rewards each one.',
     ],
     're-caused': [
-      "The official's first cause resolved, but a patron that rewards the deed adopted the bench, and its favor now retains the verdicts.",
+      "The official's first reason is gone, but now a dark patron rewards the cruel verdicts, and its favor keeps them coming.",
     ],
     reformed: [
       "The patron's shadow lifted and the official re-heard every sponsored case; unpaid, the verdicts came out the way the law reads.",
       'With the rewarding patron gone, the official came clean; the twisted rulings were vacated, and the bench asked to be judged by them.',
     ],
     historicized: [
-      'The patron is gone, but the verdicts still bend the way it liked; the sponsorship ended and the bench never noticed itself.',
+      'The patron is gone, but the official still hands down cruel verdicts to whoever stands before the bench.',
     ],
     'exposed-public': [
-      'It is public that the bench\'s cruelties were sponsored devotions, and every twisted verdict is being re-read as a receipt.',
+      'It is now known that the bench\'s cruel verdicts were offerings to a dark patron, and every one is being heard again.',
       'The sponsorship is out: a dark patron paid for injustice from this office, and the wronged are lining up with their case numbers.',
+      'Everyone the bench treated cruelly can now bring the case back, because a dark patron paid for those verdicts.',
     ],
     're-adjudicated': [
-      "The syndicate fell, but the patron that rewards the deed still stands, and the bench's arrangement was assumed into its keeping.",
+      'Whoever paid the official before is gone, but now a dark patron rewards the cruel verdicts, and the bench answers to it.',
     ],
   },
   'conversion-pressure': {
     attributed: [
-      'The rival faith needs deeds, licenses, and registrations, and the official expedites; temple land changes hands smoothly where their mission works, and the fees find the official at home.',
-      'Conversion is paperwork in the end, and the official does the paperwork; the rival faith\'s acquisitions clear in days while everything else waits its month.',
+      'The rival faith needs deeds, licenses and registrations, and the official hurries them through. Temple land changes hands easily where the mission works, and the fees reach the official at home.',
+      'The official handles the rival faith\'s paperwork. Its purchases clear in days while everything else waits a month.',
     ],
     're-caused': [
-      "The official's first reason passed; the rival faith's filing fees replaced it, and the expedited deeds are the record of it.",
+      'Whatever first drew the official in is over, but now the rival faith presses in, and its filing fees put its deeds first in the queue.',
     ],
     reformed: [
       'The rival faith withdrew and the official re-examined the expedited transfers; the improper ones were voided, fees returned.',
       'When the conversion pressure broke, the official came clean; the home-paid fees were surrendered, and the registry re-dated honestly.',
     ],
     historicized: [
-      'The rival faith gave up the town, but the expedited transfers stand; the fees that moved them are spent and unremembered.',
+      'The rival faith has given up the town, but the official still hurries deeds through for whoever pays the fee.',
     ],
     'exposed-public': [
       'It is public that the rival mission\'s paperwork jumped every queue for a fee, and the registry\'s dates tell the story plainly.',
-      'The expediting is out: the official sold the speed of the law to the rival faith, and both congregations are auditing the deeds.',
+      'It is out that the official sold the rival faith faster filings, and both congregations are checking the deeds.',
+      "The town's own families who waited months at the registry are learning the rival mission paid to go ahead of them.",
     ],
     're-adjudicated': [
-      'The old patron is gone, but the rival faith still presses, and its filing fees now route through new hands to the same desk.',
+      "Whoever paid the official before is gone, but now the rival faith presses in, and its fees reach the official's desk.",
     ],
   },
   secularization: {
     attributed: [
-      'Testimony here is sworn before a god no one fears, and the official has drawn the conclusion; sworn statements are drafted to order now, and the oath is part of the stationery.',
-      'With the faith gone cold, the courtroom oath became a formality, and the official trades in formalities; witnesses say what the paying party needs, hands on the book, straight-faced.',
+      'Testimony here is sworn before a god no one fears, and the official has noticed: sworn statements are written to order, and the oath is a formality.',
+      'With the faith gone cold, the court\'s oath means nothing, and the official sells testimony. Witnesses say what the paying side needs, with a hand on the book and a straight face.',
     ],
     're-caused': [
-      "The official's first cause resolved, but the faith went cold behind it, and with the oath toothless, the testimony trade simply continued.",
+      "The official's first reason is gone, but now the faith has gone cold, and with the oath meaning nothing, the official goes on selling testimony.",
     ],
     reformed: [
       'The faith revived and the oath got its teeth back; the official confessed the drafted testimony and re-opened every case built on it.',
       'When belief returned, the official came clean; the to-order statements were withdrawn, and the book sworn on meant something again.',
     ],
     historicized: [
-      'The faith warmed again, but the testimony trade never closed; the cold oath that opened it has been rewarmed without effect.',
+      'The faith has warmed again, but the official still sells sworn testimony to whichever side pays.',
     ],
     'exposed-public': [
-      'It is public that sworn testimony was drafted for sale while the oath meant nothing, and every verdict of the period is appealing itself.',
-      'The trade is out: the official sold the court\'s truth while no god watched it, and the reviving congregation watched instead.',
+      'It is now known that sworn testimony was sold while the oath meant nothing, and every verdict from that time is being appealed.',
+      'It is out that the official sold the court\'s testimony while the faith was cold, and the returning congregation wants answers.',
+      'Anyone judged on sworn testimony while the faith was cold is appealing, because the official sold that testimony.',
     ],
     're-adjudicated': [
-      "The official's paymaster fell, but the faith is still cold, and the testimony trade runs on with no oath in its way.",
+      'Whoever paid the official before is gone, but now the faith has gone cold, and the testimony trade goes on with no oath to stop it.',
     ],
   },
   'clergy-scandal': {
     attributed: [
-      'The temple\'s troubles live in the town records, and the official is their landlord; files about the clergy go missing by subscription, and the subscription is current.',
-      'What the archive knows about the priesthood would feed the scandal for a year, and the official rents the not-knowing; the relevant drawers stay locked and the retainer arrives on the tithe schedule.',
+      'The temple\'s troubles are in the town\'s files, and the official keeps them. Files about the clergy go missing for a regular fee, and the fee is paid up.',
+      'The archive holds enough about the priesthood to feed the scandal for a year, and the official is paid to keep it locked. The money arrives with the tithe.',
     ],
     're-caused': [
-      "The official's first reason resolved, but the tainted priesthood offered a subscription, and the locked drawers now carry the arrangement.",
+      'Whatever first drew the official in is over, but now the priesthood is disgraced, and its money keeps the drawers locked.',
     ],
     reformed: [
       'The priesthood was cleansed and the official unlocked the drawers; the withheld files went to the synod complete, retainers returned.',
       "With the clergy's scandal resolved, the official came clean; the subscription was confessed, and the archive made whole.",
     ],
     historicized: [
-      'The temple was set in order, but the drawers stay locked and the retainer still arrives; the scandal it hides is already absolved.',
+      "The temple has been set in order, but the official still keeps the clergy's files locked away for the temple's money.",
     ],
     'exposed-public': [
-      'It is public that the archive hid the clergy\'s record for a retainer, and the drawers are being opened in front of witnesses.',
-      'The subscription is out: the official rented silence to the temple, and the town is reading what the rent concealed.',
+      'It is now known that the official hid the clergy\'s files for pay, and the drawers are being opened in front of witnesses.',
+      "It is out that the official took the temple's money for silence, and the town is reading what was hidden.",
+      "The clergy's hidden files are being read out before witnesses, and the official who kept them for pay is being asked why.",
     ],
     're-adjudicated': [
-      "The syndicate is gone, but the priesthood's taint remains, and the locked-drawer retainer has been assumed by new subscribers.",
+      'Whoever paid the official before is gone, but now the priesthood is disgraced, and whoever fears the files pays to keep the drawers locked.',
     ],
   },
   captured: {
     attributed: [
-      'The underworld holds the offices, and the official\'s desk is one of them; warrants leak before they are served, and the cases that matter die quietly in the third drawer.',
-      'The syndicate reads everything the official files, before the magistrate does; the office runs on their schedule, and the third drawer is where justice goes to wait forever.',
+      'The underworld holds the offices, and the official\'s desk is one of them. Warrants leak before they are served, and the cases that matter go into the third drawer and stay there.',
+      'The underworld reads everything the official files before the magistrate does. The office runs on its schedule, and the third drawer is where cases go to wait.',
     ],
     're-caused': [
-      "The official's old cause resolved, but the underworld holds the offices now, and a desk it holds keeps its drawers the way it is told.",
+      "The official's first reason is gone, but now the underworld holds the offices, and the official does as it says.",
     ],
     reformed: [
       'The capture was broken and the official emptied the third drawer onto the magistrate\'s bench; every buried case, dated and intact.',
       "With the syndicate's grip broken, the official came clean; the leaked warrants were listed, and the leaks sealed by testimony.",
     ],
     historicized: [
-      'The capture was broken, but the third drawer still swallows cases; the master who required it has gone and the drawer has not noticed.',
+      "The underworld's hold on the offices is broken, but the official still buries the cases that matter in the third drawer.",
     ],
     'exposed-public': [
       'It is public that warrants leaked from this desk and cases died in it, and the third drawer has been opened in front of the town.',
-      'The capture has a filing system, and it is out: the official kept the underworld\'s calendar, and justice waited on it.',
+      "It is out that the official ran the office on the underworld's schedule, and the cases left in the third drawer are being opened.",
+      "People whose cases went quiet at the official's desk are coming to see what was left in the third drawer.",
     ],
     're-adjudicated': [
-      'The syndicate that ran the desk is destroyed, but the offices are still captured, and the third drawer has a new and identical patron.',
+      'Whoever ran the desk before is gone, but now the underworld holds the offices, and the third drawer swallows cases for whoever holds the desk.',
     ],
   },
   scandal: {
     attributed: [
-      'The scandal filled the archive with dangerous paper, and the official owns the filing; documents implicate or exonerate depending on the fee, and the fee is never in writing.',
-      'Everyone named in the scandal needs something from the records office, and the official has organized the needing; the files everyone fears are indexed by what their subjects will pay.',
+      'The scandal filled the archive with dangerous papers, and the official keeps them. A document can damn someone or clear them, depending on the fee, and the fee is never written down.',
+      'Everyone named in the scandal needs something from the archive, and the official has made the most of it: the files are sorted by what the people in them will pay.',
     ],
     're-caused': [
-      "The official's first cause cleared, but the scandal broke behind it, and the fear-indexed files now sustain the arrangement.",
+      'Whatever first drew the official in is over, but now a scandal has broken, and the official sells the files to the frightened.',
     ],
     reformed: [
       'The scandal burned out and the official published the index; every fee taken was listed beside the file it moved.',
       'When the scandal settled, the official came clean; the dangerous paper went to the court intact, and the payments to the treasury.',
     ],
     historicized: [
-      'The scandal is old news, but the files are still indexed by fear; the panic that priced them has subsided.',
+      'The scandal is old news, but the official still sells files to whoever is afraid of them.',
     ],
     'exposed-public': [
-      'It is public that the scandal\'s paper was priced at the records office, and the index of fees is the new scandal.',
-      'The filing is out: the official sold the archive\'s memory to the frightened, and the town is reading who paid to be forgotten.',
+      "It is now known that the scandal's papers were sold at the archive, and people are reading the list of fees.",
+      'It is out that the official sold the archive\'s files to the frightened, and the town is reading who paid to be left out.',
+      'The frightened who paid the official to keep their names out of the archive are finding their names on the list of fees.',
     ],
     're-adjudicated': [
-      "The syndicate is broken, but the scandal's economy survives, and the fear-indexed files have been re-shelved under new ownership.",
+      'Whoever paid the official before is gone, but now a scandal has broken, and the official sells the files to whoever is named in them.',
     ],
   },
 };

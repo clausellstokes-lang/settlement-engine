@@ -465,7 +465,7 @@
     },
     {
       "id": "politically_fractured#0.secret",
-      "text": "Has been playing both factions simultaneously, feeding each the other's plans",
+      "text": "Has been playing both powers simultaneously, feeding each the other's plans",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -502,7 +502,7 @@
     },
     {
       "id": "politically_fractured#2.secret",
-      "text": "Has already agreed to support whichever faction wins in exchange for a specific appointment they have not disclosed",
+      "text": "Has already agreed to support whichever power wins in exchange for a specific appointment they have not disclosed",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -518,7 +518,7 @@
     },
     {
       "id": "politically_fractured#3.secret",
-      "text": "Was responsible for the incident that triggered the fracture: an act of deliberate sabotage they've successfully blamed on the other faction",
+      "text": "Was responsible for the incident that triggered the fracture: an act of deliberate sabotage they've successfully blamed on the other power",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -526,7 +526,7 @@
     },
     {
       "id": "politically_fractured#3.stakes",
-      "text": "One member of the faction they framed knows the truth and has been building a case",
+      "text": "One member of the power they framed knows the truth and has been building a case",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1550,7 +1550,7 @@
     },
     {
       "id": "slave_revolt#0.secret",
-      "text": "Has been in secret contact with the revolt's leadership, brokering terms the governing faction has refused to authorise",
+      "text": "Has been in secret contact with the revolt's leadership, brokering terms the governing power has refused to authorise",
       "needs": [],
       "excludes": [],
       "crisis": [],

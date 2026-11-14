@@ -24,6 +24,7 @@ import { customSupplyChainViewModel } from './customSupplyChains.js';
 import { stressArray, foodCore, avgScore } from './viewModelPrimitives.js';
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 import { resourceGapLines } from '../../domain/display/validationOnPage.js';
+import { crisisSummaryForSurface } from '../../domain/crisis/crisisSummaryVantage.js';
 
 // Pull the human resource name off an exploitation chain entry (engine stores
 // it as `rawResource`; tolerate a few legacy shapes + bare strings).
@@ -141,7 +142,10 @@ export function defenseSlice(active) {
   // Active military status override (from stress). Match on the stressor TYPE the
   // engine emits, via the SHARED DEFENSE_STRESS_STATUS set the web DefenseTab uses,
   // so print and screen can never drift (pdf-4).
-  const militaryStress = stress.find(x => DEFENSE_STRESS_STATUS[x?.type]);
+  // #29 (STYLE-RULINGS §1(c)): Defence prints the watch's vantage of the crisis summary; the crisis
+  // page keeps the full text.
+  const militaryEntry = stress.find(x => DEFENSE_STRESS_STATUS[x?.type]);
+  const militaryStress = militaryEntry ? { ...militaryEntry, summary: crisisSummaryForSurface(militaryEntry, s?.name, 'defence') } : militaryEntry;
 
   // Criminal architecture. Operations come from the safety profile's criminal
   // institutions (the source the web Defense tab uses), each carrying an

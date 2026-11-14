@@ -14,8 +14,9 @@ import { renderStressSummary, STRESS_SUMMARY_SIBLINGS } from '../../src/generato
 import { factsOf } from '../../src/domain/facts/factsOf.js';
 import { crisisBlindFindings } from '../../src/domain/coherence/crisisBlindFindings.js';
 
-const FOOD = 'New arrivals come faster than housing, food, and employment can absorb them.';
-const FED = 'New arrivals come faster than housing and employment can absorb them.';
+// W4 PEOPLE second seat 2026-11-07: re-keyed to the summary's plain wording (the owner's style law; rows 43-48, 254-260)
+const FOOD = 'Newcomers arrive faster than housing, food and work can be found for them.';
+const FED = 'Newcomers arrive faster than housing and work can be found for them.';
 
 /** a record under these stressors whose food record stands on `band` */
 const recordOf = (types, band) => ({ stress: types.map((type) => ({ type })), economicState: { foodSecurity: { foodRecord: { band } } } });
@@ -26,7 +27,7 @@ describe('mass_migration: the food line needs hunger (R-P 1)', () => {
     // anchored: the next two assertions pin the twin in the refused line's place and the paragraph's head
     expect(text).not.toContain(FOOD);
     expect(text).toContain(FED);
-    expect(text.startsWith('Avel is receiving more people than its infrastructure was built for. ')).toBe(true);
+    expect(text.startsWith('Avel is taking in more people than it has houses or work for. ')).toBe(true);
   });
   it('an influx the record cannot feed (a deficit band) keeps the food line', () => {
     expect(renderStressSummary('mass_migration', 'Avel', null, undefined, factsOf(recordOf(['mass_migration'], 'deficit')))).toContain(FOOD);
@@ -35,7 +36,7 @@ describe('mass_migration: the food line needs hunger (R-P 1)', () => {
     expect(renderStressSummary('mass_migration', 'Avel', null, undefined, factsOf(recordOf(['famine', 'mass_migration'], 'famine')))).toContain(FOOD);
   });
   it('the provisional render (no facts) is byte-identical to the old paragraph', () => {
-    expect(renderStressSummary('mass_migration', 'Avel', null)).toBe(`Avel is receiving more people than its infrastructure was built for. ${FOOD} The old residents and the new ones are not yet the same community.`);
+    expect(renderStressSummary('mass_migration', 'Avel', null)).toBe(`Avel is taking in more people than it has houses or work for. ${FOOD} The old residents and the new ones keep apart.`);
   });
   it('the sibling set is keyed by the original text and declares crisis: hunger; the twin the complementary atom', () => {
     const set = STRESS_SUMMARY_SIBLINGS[FOOD];

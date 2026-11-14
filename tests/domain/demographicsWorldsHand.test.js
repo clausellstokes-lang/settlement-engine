@@ -683,7 +683,10 @@ describe('P4.5 THE HERALD — the address chain, and no raw number in the prose'
 
   test('the design\'s own sentence, with both places BY NAME', () => {
     const exodus = entries().find((e) => e.causeClass === 'flight');
-    expect(exodus.summary).toBe('several hundred left Ashford and took the road to Brill.');
+    // FIX-PULSE-DEFECTS (audit C1·69): the headline and summary opened lower-case on the
+    // quantity phrase ("several hundred left Ashford…"); the lead is capitalised.
+    expect(exodus.summary).toBe('Several hundred left Ashford and took the road to Brill.');
+    expect(exodus.headline).toBe('Several hundred left Ashford');
     expect(exodus.settlementNames).toEqual(['Ashford', 'Brill']);
     const hunger = entries().find((e) => e.causeClass === 'hunger');
     expect(hunger.headline).toBe('Grain ran short in Ashford');
@@ -727,7 +730,8 @@ describe('P4.5 THE HERALD — the address chain, and no raw number in the prose'
       nameOf,
     });
     expect(refused.length).toBe(1);
-    expect(refused[0].summary).toBe('dozens would have left Ashford, and the realm had nowhere to put them.');
+    expect(refused[0].summary).toBe('Dozens would have left Ashford, and the realm had nowhere to put them.');
+    expect(refused[0].headline).toBe('Dozens left Ashford');
     expect(quantityWords(0)).toBe('nobody');
     expect(quantityWords(3)).toBe('a few souls');
     expect(quantityWords(9000)).toBe('thousands');

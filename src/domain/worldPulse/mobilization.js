@@ -47,6 +47,25 @@ import { readinessMobilizationMult } from './martialReadiness.js';
 // peaceTerms reaches THIS module (warReasons → corruptionWeb → settlementPolitics →
 // mobilization), so importing the mover would close a cycle.
 import { demilitarizationCapFor } from './treatyEnforcement.js';
+// STYLE-2 C2 (SW-12): the zero-import selection kernel — the ramp reason varies by the
+// settlement and the tick, with no rng (this layer never forks one).
+import { pickLine } from './proseSelection.js';
+
+// STYLE-2 C2 (SW-12, A2·91) — the climb said as quick or slow, the one fact the readiness
+// multiplier (will, money and backing: rampReadiness) holds; four lines each so no one
+// frame prints on every war card.
+const RAMP_QUICK = Object.freeze([
+  'Its people are making ready for war, and quickly.',
+  'The preparations for war are moving quickly.',
+  'The call to arms is being answered fast.',
+  'It is readying for war faster than most could.',
+]);
+const RAMP_SLOW = Object.freeze([
+  'Its people are making ready for war, but slowly.',
+  'The preparations for war are moving slowly.',
+  'The call to arms is being answered, but slowly.',
+  'It is readying for war, though without much haste.',
+]);
 
 /** @param {string} a @param {string} b @returns {number} */
 const codepoint = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
@@ -224,9 +243,10 @@ export function rampReadiness(item, worldState) {
  */
 export function shouldCool(item) {
   const reasons = [];
-  if (economicCapacityOf(item) < COOL_ECONOMY_FLOOR) reasons.push('economic strain: the treasury cannot sustain a war economy');
-  if (legitimacyOf(item) < COOL_LEGITIMACY_FLOOR) reasons.push('low legitimacy: the home front will not hold a war footing');
-  if (foodMonthsOf(item) < COOL_FOOD_MONTHS_FLOOR) reasons.push('food shortage: a mobilized army cannot be fed');
+  // STYLE-2 C2 (SW-12, A2·92): each trigger said as the plain fact it reads.
+  if (economicCapacityOf(item) < COOL_ECONOMY_FLOOR) reasons.push('The treasury cannot pay for a war.');
+  if (legitimacyOf(item) < COOL_LEGITIMACY_FLOOR) reasons.push('The people will not stand behind a war.');
+  if (foodMonthsOf(item) < COOL_FOOD_MONTHS_FLOOR) reasons.push('There is not food enough to feed an army in the field.');
   return { cool: reasons.length > 0, reasons };
 }
 
@@ -389,7 +409,7 @@ export function stepPosture({ prev, item, worldState, tick, hasArmyDeployed, war
     const transitioned = nextState !== prev.state;
     return {
       next: { state: /** @type {PostureState} */ (nextState), progress: nextProgress, sinceTick: transitioned ? tick : prev.sinceTick, covert: prev.covert && nextIdx >= RAMP_INDEX.war_preparation },
-      transitioned, cooled: true, reasons: ['the threat eased, so winding the war footing down'],
+      transitioned, cooled: true, reasons: ['The danger has passed, and the war footing is eased.'],
     };
   }
 
@@ -410,10 +430,9 @@ export function stepPosture({ prev, item, worldState, tick, hasArmyDeployed, war
   }
   const nextState = RAMP[nextIdx];
   const transitioned = nextState !== prev.state;
-  const levyWord = readiness >= 1
-    ? 'better drilled than the peacetime standard'
-    : 'still short of the peacetime standard';
-  reasons.push(`ramping toward war (the levy is ${levyWord})`);
+  // STYLE-2 C2 (SW-12, A2·91): the readiness multiplier blends will, money and backing
+  // (rampReadiness); the reason says only whether the climb is quick or slow.
+  reasons.push(pickLine(readiness >= 1 ? RAMP_QUICK : RAMP_SLOW, `mobilization-ramp:${item?.id ?? ''}:${tick}`));
   return {
     next: { state: /** @type {PostureState} */ (nextState), progress: clamp01(nextProgress), sinceTick: transitioned ? tick : prev.sinceTick, covert: prev.covert },
     transitioned, cooled: false, reasons,

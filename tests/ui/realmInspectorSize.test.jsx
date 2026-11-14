@@ -174,7 +174,9 @@ describe('RealmInspector — settlement portrait handoff', () => {
     );
 
     expect(screen.getByRole('heading', { name: 'The Covered Market' })).toBeTruthy();
-    expect(screen.getByText('institution: market')).toBeTruthy();
+    // The exact context is restored: the canonical record rides on the card as data, no longer
+    // printed (D2·12, STYLE-2-PULSE-FOLLOWUP; re-keyed by cause from the printed 'institution: market').
+    expect(screen.getByTestId('herald-scene-context').getAttribute('data-canonical-ref')).toBe('institution:market');
     fireEvent.click(screen.getByRole('button', {
       name: 'Dismiss settlement portrait context',
     }));

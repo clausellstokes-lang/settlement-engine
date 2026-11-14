@@ -64,6 +64,32 @@ import { EMPTY_PATCH, razingSiegeEmission } from './razingExecution.js';
 import { seedDeploymentState, ensureStatefulRecord, computeSackTransfer } from './warArmyRecord.js';
 import { clamp01 } from '../region/contestMath.js';
 import { stablePart } from './worldState.js';
+// STYLE-2 C2 (SW-12): the march, withdrawal and conquest lines carry variants by vantage, chosen
+// by the house idiom — the zero-import selection kernel keyed on the outcome's stable id.
+import { pickLine } from './proseSelection.js';
+/** The slots a prose line fills (STYLE-2 SW-12). @typedef {Record<string, string>} WarDeploymentLineSlots */
+const DEPLOY_SUMMARY = Object.freeze([
+  (/** @type {WarDeploymentLineSlots} */ x) => `${x.from}'s army has marched to lay siege to ${x.target}.`,
+  (/** @type {WarDeploymentLineSlots} */ x) => `${x.from}'s soldiers are on the road to ${x.target}, to put it under siege.`,
+  (/** @type {WarDeploymentLineSlots} */ x) => `${x.target} will soon have ${x.from}'s army at its walls.`,
+  (/** @type {WarDeploymentLineSlots} */ x) => `${x.from} has sent its army against ${x.target}, and means to besiege it.`,
+]);
+const DEPLOY_READY_REASON = Object.freeze([
+  (/** @type {WarDeploymentLineSlots} */ x) => `${x.from}'s army is ready, and ${x.target} is within its reach.`,
+  (/** @type {WarDeploymentLineSlots} */ x) => `${x.from} has an army fit to march, and ${x.target} is a target it can hope to take.`,
+  (/** @type {WarDeploymentLineSlots} */ x) => `${x.from} is ready for war, and judges ${x.target} open to attack.`,
+]);
+const RUSTY_LEAD = Object.freeze(['Its commanders, out of practice,', 'Out of practice, its captains', 'Its rusty captains']);
+const WITHDRAW_SUMMARY = Object.freeze([
+  (/** @type {WarDeploymentLineSlots} */ x) => `${x.name}'s army cannot take ${x.target} and is marching home.`,
+  (/** @type {WarDeploymentLineSlots} */ x) => `${x.name} has given up the siege of ${x.target}; its army is coming home.`,
+  (/** @type {WarDeploymentLineSlots} */ x) => `The siege of ${x.target} is over: ${x.name}'s army could not take it and has turned for home.`,
+]);
+const CONQUEST_SUMMARY = Object.freeze([
+  (/** @type {WarDeploymentLineSlots} */ x) => `${x.target} has fallen. ${x.occ}'s soldiers hold its walls, and ${x.occ}'s governors now give the orders.`,
+  (/** @type {WarDeploymentLineSlots} */ x) => `${x.occ}'s army has taken ${x.target}, and rules it now in ${x.occ}'s name.`,
+  (/** @type {WarDeploymentLineSlots} */ x) => `The walls of ${x.target} are ${x.occ}'s now; its people answer to ${x.occ}'s officers.`,
+]);
 import { classifyFeasibility, verdictPermitsSiege, siegeMatchupWordFor, feasibilityVerdictClause } from './feasibilityGate.js';
 // M9d — THE WAR INITIATE/RESOLVE SPLIT: siege INITIATION routes its applyMode through
 // the SAME per-domain authority policy every candidate family consults. Under legacy
@@ -664,7 +690,7 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
               targetSaveId: attackerId,
               severity: clamp01(0.3 + (warExhaustion[attackerId] || 0) * 0.4),
               headline: `${name} breaks off the siege of ${targetName}`,
-              summary: `${name}'s army can no longer plausibly take ${targetName}. It withdraws, the campaign abandoned.`,
+              summary: pickLine(WITHDRAW_SUMMARY, withdrawalOutcomeId, { name, target: targetName }),
               reasons: verdict.reasons,
               tick,
               sourceEventTargetId: targetId,
@@ -844,13 +870,13 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
       targetSaveId: targetId,
       severity: clamp01(0.6 + coalitionStrength01 * 0.2),
       headline: `${occupierName} storms ${targetName}`,
-      summary: `The siege of ${targetName} broke. ${occupierName}'s army holds the walls; an occupation authority now rules in the conqueror's name.`,
+      summary: pickLine(CONQUEST_SUMMARY, `conquest.${stablePart(occupierId)}.${stablePart(targetId)}.${tick}`, { occ: occupierName, target: targetName }),
       // TE-HERALD-1: both capacities, the ratio, the fall chance and the roll all stay
       // on `verdict` for any consumer that needs them; what the reader is told is what
       // they MEANT — how the two hosts weighed against each other, why the gate let the
       // storm happen at all, and whether the walls were expected to break.
       reasons: [
-        `Weighed against the walls, the besiegers were ${siegeMatchupWordFor(verdict.ratio)}: ${feasibilityVerdictClause(verdict.verdict)}.`,
+        `Against the walls of ${targetName}, the besiegers were ${siegeMatchupWordFor(verdict.ratio)}: ${feasibilityVerdictClause(verdict.verdict)}.`,
         `Before the walls broke, the storm looked ${siegeFallOddsWordFor(verdict.pFall)}.`,
       ],
       powerTransfer: {
@@ -1223,7 +1249,8 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
           `The court weighed the wider retaliation the march could awaken before committing its own army.`,
           `Casus belli: a sworn alliance obligation under the same living cause.`,
         ])
-      : [`${fromName} is war-ready and ${chosenName} is a feasible target.`];
+      // Seeded without the tick: the march's receipts are the feed's repeat key.
+      : [pickLine(DEPLOY_READY_REASON, `deploy.${stablePart(fromId)}.${stablePart(chosenTarget)}`, { from: fromName, target: chosenName })];
     // TE-HERALD-1. Both multipliers stay on the ARMY RECORD (warArmyRecord stamps
     // `sizingBias` and `deployedQuality` only when non-trivial), so nothing diagnostic is
     // lost by telling the reader what they meant instead of what they were.
@@ -1239,9 +1266,8 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
       // to, and it is right to — the cure is to decide in code and interpolate words.
       const overCommitted = seededRec.sizingBias > 1;
       const wildly = Math.abs(seededRec.sizingBias - 1) >= FIDELITY_TUNING.BASE_ERROR;
-      deployReasons.push(
-        `A rusty command ${overCommitted ? 'over' : 'under'}-committed the force${wildly ? ', and not by a little' : ''}.`,
-      );
+      deployReasons.push(pickLine(RUSTY_LEAD, `deploy.${stablePart(fromId)}.${stablePart(chosenTarget)}:rust`)
+        + (overCommitted ? ` sent ${wildly ? 'far ' : ''}more soldiers than the march needs.` : ` sent ${wildly ? 'far ' : ''}too few soldiers for the march.`));
     }
     if (!coalitionDecision && Number.isFinite(seededRec?.deployedQuality) && seededRec.deployedQuality !== 1) {
       deployReasons.push("Thin war-supply degraded the army's kit before it ever marched.");
@@ -1274,7 +1300,7 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
         ? (coalitionProposal
           ? `${fromName} would commit its own army against ${chosenName} if the answer is approved; each ally would keep a separate command.`
           : `${fromName} commits its own army against ${chosenName}; the alliance is now a set of separate wars, not a shared command.`)
-        : `${fromName} commits its army to a siege of ${chosenName}. The campaign is opened.`,
+        : pickLine(DEPLOY_SUMMARY, `world_outcome.strategy_deploy.${stablePart(fromId)}.${stablePart(chosenTarget)}.${tick}`, { from: fromName, target: chosenName }),
       reasons: deployReasons,
       sourceEventTargetId: chosenTarget,
       ...(coalitionDecision ? {

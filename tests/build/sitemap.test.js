@@ -16,6 +16,7 @@ import { dirname, join } from 'node:path';
 import { ROUTES } from '../../src/lib/routes.js';
 import { GALLERY_HUBS } from '../../src/lib/galleryHubs.js';
 import { COMPENDIUM_INDEX } from '../../src/domain/compendium/searchIndex.js';
+import { COMPENDIUM_SECTIONS } from '../../src/lib/compendiumSections.js';
 import { buildSitemap, staticUrls, galleryHubUrls, compendiumEntryUrls, NOINDEX_VIEWS, RETIRED_VIEWS } from '../../scripts/generate-sitemap.mjs';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
@@ -74,12 +75,20 @@ describe('public/sitemap.xml', () => {
     expect(paths.has('/admin')).toBe(false);
   });
 
-  it('canonicalizes home to / and fans the compendium out to its 12 sections', () => {
+  // The owner's word of 2026-11-10 made every compendium section its own page
+  // (/compendium/<slug>); the old ?tab= URLs redirect there, so the sitemap lists the
+  // eleven catalog section pages (My Custom Content is per-reader) and no ?tab= URL.
+  // The twelfth old ?tab= URL was the dead `deities` section, which this re-key drops.
+  it('canonicalizes home to / and fans the compendium out to its 11 catalog section pages', () => {
     const locs = staticUrls().map((u) => u.loc);
     expect(locs).toContain('https://settlementforge.com/');
     expect(locs).not.toContain('https://settlementforge.com/home');
-    const tabs = locs.filter((l) => l.includes('/compendium?tab='));
-    expect(tabs).toHaveLength(12);
+    const sections = COMPENDIUM_SECTIONS.filter((x) => x.tab !== 'custom').map((x) => `https://settlementforge.com/compendium/${x.slug}`);
+    expect(sections).toHaveLength(11);
+    for (const loc of sections) expect(locs, loc).toContain(loc);
+    expect(locs.filter((l) => l.includes('/compendium?tab='))).toEqual([]);
+    expectAbsentWithAnchor(locs, 'https://settlementforge.com/compendium/custom', 'https://settlementforge.com/compendium/tiers', 'sitemap section pages');
+    for (const loc of sections) expect(committed, loc).toContain(`<loc>${loc}</loc>`);
   });
 
   // Owner order 2026-09-16: the Map Lenses and Facets pages left the Compendium, so the
@@ -88,7 +97,8 @@ describe('public/sitemap.xml', () => {
     const locs = [...committed.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
     const O = 'https://settlementforge.com';
     for (const tab of ['lenses', 'facets']) {
-      expectAbsentWithAnchor(locs, `${O}/compendium?tab=${tab}`, `${O}/compendium?tab=calamity`, 'committed sitemap sections');
+      expectAbsentWithAnchor(locs, `${O}/compendium/${tab}`, `${O}/compendium/calamity`, 'committed sitemap sections');
+      expectAbsentWithAnchor(locs, `${O}/compendium?tab=${tab}`, `${O}/compendium/calamity`, 'committed sitemap sections');
     }
     for (const id of ['lens-parchment', 'lens-watercolor', 'lens-darkfantasy', 'lens-vtt', 'lens-accessible']) {
       expectAbsentWithAnchor(locs, `${O}/compendium/${id}`, `${O}/compendium/calamity-flood`, 'committed sitemap entries');

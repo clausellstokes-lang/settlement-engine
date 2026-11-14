@@ -140,7 +140,7 @@ export const generateTradeIncomeStreams = (tier, institutions = [], route = 'roa
     bonuses.push({
       source: 'Entrepôt Trade',
       percentage: tier === 'metropolis' ? 25 : tier === 'city' ? 20 : 18,
-      desc: 'Transit duties, warehouse fees, and re-export premiums from goods passing through the crossroads position.',
+      desc: 'Transit duties, warehouse fees, and re-export premiums from goods passing through the crossroads.',
     });
   if (
     route === 'port'

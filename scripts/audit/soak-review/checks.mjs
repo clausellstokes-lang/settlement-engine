@@ -37,6 +37,7 @@ import { hasMarketInstitution } from '../../../src/domain/facts/market.js';
 import { READER_BATTERY_CHECKS, readerBattery } from '../../../src/domain/coherence/readerBattery.js';
 import { crisisEntries } from '../../../src/domain/facts/crisisKind.js';
 import { storesMonthsOf } from '../../../src/domain/facts/storesMonths.js';
+import { allegianceOf, criminalHousesOf, criminalPowersOf } from '../../../src/domain/people/allegiance.js';
 import { famineOf } from '../../../src/domain/facts/famine.js';
 import { terrainClassOf, tradeRouteOf } from '../../../src/domain/facts/terrain.js';
 import { waterAccessKind } from '../../../src/domain/tradeRouteSemantics.js';
@@ -60,6 +61,13 @@ export const KIND_OF = Object.freeze({
   // contradiction about WHO (the chair: a contradiction kind the stop rule reads, not repetition
   // 6); keyed with the people family, 7.
   'coh:roster-duplicate-secret': 7, 'coh:roster-duplicate-goal': 7,
+  // ALLEGIANCE-CAR1 (2026-11-08; the allegiance design I-2, I-3): a hidden allegiance whose handler is missing, off the
+  // roster, itself, an agent, or no criminal face — a contradiction about WHO, keyed with the people family.
+  'coh:allegiance-handler': 7,
+  // ALLEGIANCE-CAR2 (2026-11-08; the allegiance design I-1, J-13): a hall read 'capture' or 'corrupted' with no agent in
+  // the ruling three and no criminal governing power (or a 'capture' hall whose lord is no agent) — the strengths-only
+  // state the derivation retired. A certification failure: STOP from the first.
+  'coh:capture-without-agent': -1,
   'A-05:lacks-access-lines': -2,
   // CENSUS-1b wave 1 (2026-11-04): the runtime self-check (`facts/presumptionCheck.js`) — a drawn
   // line's declared atom the FINAL record contradicts. A certification failure: STOP from the
@@ -269,7 +277,7 @@ export function migrationDirectionFindings(s, r) {
 }
 
 /** DS-DEF-4's `structure null` variants and the Defense tab's static no-organised-crime line. */
-const DS_DEF4_DENIAL = /No criminal infrastructure has been identified|goes wrong one thing at a time and belongs to whoever did it|met with genuine incomprehension|No organized criminal infrastructure detected\./;
+const DS_DEF4_DENIAL = /books record no gang, guild or racket|goes wrong one thing at a time and belongs to whoever did it|who runs things on the quiet and you get blank looks|No organized criminal infrastructure detected\./;
 /** The Defense block's "Active crime patterns" heading. */
 const CRIME_PATTERNS_HEADING = 'Active crime patterns';
 /** A screen line that closes a sentence (a pattern's description); a pattern's name does not. */
@@ -307,7 +315,7 @@ export function crimePatternRows(tab) {
  * @returns {string|null} the finding's detail, or null
  */
 export function crimeAbsentAndOrganised(screenText, defense) {
-  if (/No criminal infrastructure/i.test(screenText) && /criminal network|thieves['’] guild|crime boss|kingpin/i.test(screenText)) return 'and an organised network elsewhere';
+  if (/No criminal infrastructure|no gang, guild or racket/i.test(screenText) && /criminal network|thieves['’] guild|crime boss|kingpin/i.test(screenText)) return 'and an organised network elsewhere';
   const tab = String(defense || '');
   if (!DS_DEF4_DENIAL.test(tab)) return null;
   const rows = crimePatternRows(tab);
@@ -349,6 +357,52 @@ export function rosterDuplicate(npcs, textOf) {
   }
   return hit ? { ...hit, repeated: repeated.size } : null;
 }
+/**
+ * ALLEGIANCE-CAR1 (I-2, I-3): every hidden allegiance holds exactly one handler — a roster card, not itself, holding no
+ * allegiance, a member of `allegiance.power` or the face of a roster criminal house (or a criminal power's mint).
+ * @param {object} s @returns {Array<{ card: string, detail: string }>}
+ */
+export function allegianceHandlerFindings(s) {
+  const cast = (s?.npcs || []).filter((n) => n && n.id != null);
+  const byId = new Map(cast.map((n) => [String(n.id), n]));
+  const crim = new Set(criminalHousesOf(s).map((i) => String(i.name)));
+  const crimPowers = new Set(criminalPowersOf(s).map((p) => String(p.faction || p.name)));
+  const crimFace = (n) => (n?.institution?.kind === 'house' && crim.has(String(n.institution.key)))
+    || (n?.institution?.kind === 'power' && crimPowers.has(String(n.institution.key)));
+  const out = [];
+  for (const card of cast) {
+    const a = allegianceOf(card);
+    if (!a) continue;
+    const h = a.handler ? byId.get(a.handler) : null;
+    let why = null;
+    if (!a.handler) why = 'no handler';
+    else if (!h) why = `handler ${a.handler} is not on the roster`;
+    else if (h === card) why = 'its own handler';
+    else if (allegianceOf(h)) why = `handler ${h.id} holds an allegiance itself`;
+    else if (!(a.power && (h.memberships || []).some((m) => m?.power === a.power)) && !crimFace(h)) why = `handler ${h.id} is no criminal face`;
+    if (why) out.push({ card: String(card.id), detail: why });
+  }
+  return out;
+}
+/**
+ * ALLEGIANCE-CAR2 (I-1): a captured or corrupted hall has a criminal in the ruling three — an agent (a card holding an
+ * allegiance, ranked 1–3 in the governing power) or a criminal governing power; a 'capture' hall's lord is an agent.
+ * Reads the record's raw fields.
+ * @param {object} s @returns {Array<{ state: string, detail: string }>}
+ */
+export function captureWithoutAgentFindings(s) {
+  const state = s?.powerStructure?.criminalCaptureState;
+  if (state !== 'capture' && state !== 'corrupted') return [];
+  const gov = (s?.powerStructure?.factions || []).find((f) => f?.isGoverning) || null;
+  const ruler = gov ? String(gov.faction || gov.name || '') : '';
+  const ranks = (s?.npcs || []).filter((n) => allegianceOf(n))
+    .map((n) => (n.memberships || []).find((m) => m?.power === ruler && [1, 2, 3].includes(m?.rank))?.rank)
+    .filter(Boolean);
+  const rulerCriminal = !!gov && (String(gov.category || '').toLowerCase() === 'criminal' || /thie/i.test(ruler));
+  if (state === 'capture' && !ranks.includes(1)) return [{ state, detail: `a 'capture' hall whose lord (${ruler}) is no agent` }];
+  if (!ranks.length && !rulerCriminal) return [{ state, detail: `a '${state}' hall with no agent in ${ruler}'s ruling three and no criminal governing power` }];
+  return [];
+}
 const secretTextOf = (npc) => (typeof npc?.secret === 'string' ? npc.secret : npc?.secret?.what);
 const goalTextOf = (npc) => (typeof npc?.goal === 'string' ? npc.goal : npc?.goal?.short);
 
@@ -377,6 +431,8 @@ export function reviewSettlement(s, config, r) {
     const dup = rosterDuplicate(s.npcs, textOf);
     if (dup) add(check, 'record', dup.text, `${dup.first} and ${dup.second}; ${dup.repeated} text(s) repeat on this roster`);
   }
+  for (const f of allegianceHandlerFindings(s)) add('coh:allegiance-handler', 'record', f.card, f.detail);
+  for (const f of captureWithoutAgentFindings(s)) add('coh:capture-without-agent', 'record', f.state, f.detail);
 
   // ── coh:migration-direction (lane WIRING-W0, 2026-11-07, R-W7 e): a mass migration runs ONE way.
   // The crisis text, the pressure line (the Tonight opening when no crisis line exists), the Power
@@ -481,7 +537,7 @@ export function reviewSettlement(s, config, r) {
   if (crimeAbsent) add('A-06:crime-absent-and-organised', 'screen', 'No criminal infrastructure', crimeAbsent);
 
   // ── A-08: the fixed hidden-ruler note that never says who
-  const hidden = sentencesOf(screenText).find((x) => /appears to govern is not the faction that governs/i.test(x));
+  const hidden = sentencesOf(screenText).find((x) => /Holds the title, but the decisions that matter are made elsewhere/i.test(x));
   if (hidden) add('A-08:hidden-ruler-note', 'screen', hidden);
 
   // ── A-09: one behaviour line covering much of a roster
@@ -506,7 +562,9 @@ export function reviewSettlement(s, config, r) {
   }
 
   // ── A-12: the page vouches for itself while the battery finds a contradiction
-  const vouch = sentencesOf(screenText).find((x) => /contradicts anything else in it/i.test(x));
+  // The DS-GEN-11 `criticalIssueCount zero` lines, as W5 HIS reworded them under the owner's style law
+  // (2026-11-07); the old wording ("contradicts anything else in it") is kept so a saved page still reads.
+  const vouch = sentencesOf(screenText).find((x) => /contradicts anything else|nothing contradicting anything else|nothing about it fails to add up|account of itself (?:is|stays) clean/i.test(x));
   const contradictions = out.filter((f) => (KIND_OF[f.check] || 0) >= 1 && KIND_OF[f.check] !== 6).length;
   if (vouch && contradictions) add('A-12:self-vouch-false', 'screen', vouch, `${contradictions} contradiction findings`);
 

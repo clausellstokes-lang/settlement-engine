@@ -22,7 +22,7 @@ import { type, palette, space, pt, swatch } from '../theme.js';
 import { cap, label, noteText, smart, humanize, stripZwnj, safe } from '../lib/format.js';
 import { tokenCase } from '../../domain/display/labelCase.js';
 import { viabilityVerdict } from '../../domain/display/viabilityVerdict.js';
-import { trimViabilitySummary } from '../../domain/display/viabilityFilter.js';
+import { stripViabilityToken, trimViabilitySummary } from '../../domain/display/viabilityFilter.js';
 import { StateProse } from '../primitives/StateProse.jsx';
 
 const SEVERITY_TONE = {
@@ -64,7 +64,7 @@ export function ViabilityAssessment({ settlement, narrativeMode, vm, stateProse 
       <Callout tone={verdict.tone} kicker="VERDICT" title={verdict.label}>
         <EditableProse
           name="viability.summary"
-          defaultValue={trimViabilitySummary(v.summary || '')}
+          defaultValue={trimViabilitySummary(stripViabilityToken(v.summary || ''))}
           lines={2}
           style={{ ...type.body, fontSize: pt['9.5'] }}
         />
@@ -168,7 +168,7 @@ export function ViabilityAssessment({ settlement, narrativeMode, vm, stateProse 
             ACTIVE ISSUES · {issues.length}
           </Text>
           {issues.map((iss, i) => (
-            <IssueRow key={`iss-${i}`} iss={iss} idx={i} />
+            <IssueRow key={`iss-${i}`} iss={iss} idx={i} lead={viabilityHeadline(v)} />
           ))}
         </View>
       )}
@@ -226,13 +226,18 @@ export function ViabilityAssessment({ settlement, narrativeMode, vm, stateProse 
       )}
 
       {/* ── Metrics ────────────────────────────────────────── */}
-      {v.metrics && Object.keys(v.metrics).length > 0 && (
+      {/* ⛔ THE MACHINERY OFF THE PAGE (STYLE-RULINGS-2 B4, 2026-11-09): the assessment's own tallies
+          (`criticalIssueCount`, `dependencyCount`, `warningCount`) are the engine's bookkeeping, and the
+          chapter already counts what it lists ("ACTIVE ISSUES · 1"); they leave. The labelled stats the
+          law keeps stay, a stored key read in words ("mountain_pass" reads "Mountain Pass").
+          tests/pdf/restoredSubsections.test.js (B4) */}
+      {readerMetrics(v.metrics).length > 0 && (
         <View>
           <HairRule />
           <Text style={{ ...type.label, color: palette.muted, fontSize: pt['8'], marginBottom: 3 }}>
             KEY METRICS
           </Text>
-          {Object.entries(v.metrics).slice(0, 12).map(([k, val]) => (
+          {readerMetrics(v.metrics).slice(0, 12).map(([k, val]) => (
             <View
               key={`m-${k}`}
               style={{
@@ -264,7 +269,11 @@ export function ViabilityAssessment({ settlement, narrativeMode, vm, stateProse 
   );
 }
 
-function IssueRow({ iss, idx }) {
+function IssueRow({ iss, idx, lead = '' }) {
+  // ⛔ ONE HOME PER SENTENCE (STYLE-RULINGS-2 B4, 2026-11-09): where the chapter's lead already
+  // carries the issue's sentence word for word, the row keeps its title and its fixes, not the
+  // sentence again.
+  const said = !!iss.description && typeof lead === 'string' && lead.includes(String(iss.description).trim());
   const tone = SEVERITY_TONE[(iss.severity || '').toLowerCase()] || 'gold';
   return (
     <View
@@ -289,7 +298,7 @@ function IssueRow({ iss, idx }) {
           {humanize(iss.institution)}
         </Text>
       )}
-      {iss.description && (
+      {iss.description && !said && (
         <Text style={{ ...type.body, fontSize: pt['9'], marginTop: 1 }}>{safe(iss.description)}</Text>
       )}
       {iss.suggestedFixes?.length > 0 && (
@@ -321,10 +330,15 @@ function IssueRow({ iss, idx }) {
   );
 }
 
+/** The metrics a reader is shown: every entry but the assessment's own counts (`…Count`). */
+function readerMetrics(metrics) {
+  return Object.entries(metrics || {}).filter(([k]) => !/count$/i.test(k));
+}
+
 function formatVal(val) {
   if (val == null || val === '') return '–';
   if (typeof val === 'number') return smart(val);
-  if (typeof val === 'string') return val;
+  if (typeof val === 'string') return /^[a-z]+(_[a-z]+)+$/.test(val) ? cap(humanize(val)) : val;
   if (typeof val === 'boolean') return val ? 'yes' : 'no';
   if (typeof val === 'object') {
     if (val.deficit != null && val.deficit > 0) return `−${smart(val.deficit)}`;

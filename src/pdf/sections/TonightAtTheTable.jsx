@@ -94,6 +94,8 @@ export function TonightAtTheTable({ settlement, narrativeMode }) {
       {sheet.hooks.length > 0 ? (
         <View style={{ marginBottom: space.sm }}>
           <Eyebrow color={palette.gold}>{TONIGHT_COPY.hooks}</Eyebrow>
+          {/* THE OWNER'S VETO 3 (2026-11-09, "No." to the connective lines): the pointer into Plot Hooks is struck;
+              each hook prints its own text here, the prior state. */}
           {sheet.hooks.map((h) => (
             <View key={h.text} style={{ marginBottom: 4, paddingLeft: 8, borderLeft: `2pt solid ${palette.gold}` }} wrap={false}>
               {h.source ? <Text style={{ ...type.body_em, color: palette.ink, fontSize: pt['9'] }}>{h.source}</Text> : null}
@@ -104,7 +106,8 @@ export function TonightAtTheTable({ settlement, narrativeMode }) {
       ) : null}
 
       {/* THE CRISIS PAGE IN PRINT (docs/DESIGN_CRISIS_TAB.md): the Crisis tab's sections, one per crisis. */}
-      <CrisisSections settlement={settlement} />
+      {/* The two facts print once, on this sheet: the crisis page drops its copy (B4). */}
+      <CrisisSections settlement={settlement} printedFacts={sheet.facts} />
 
       <GoldRule />
 

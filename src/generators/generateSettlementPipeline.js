@@ -14,9 +14,10 @@ import { setActiveRng, clearActiveRng, getActiveRng } from '../kernel/rngContext
 import { runPipeline } from './pipeline.js';
 import { drawTies } from './people/ties.js';
 import { generateRepresentatives } from './people/representatives.js';
+import { dealGoals } from './people/goals.js';
 import { generateConflicts } from './powerGenerator.js';
 import { generateHistory } from './historyGenerator.js';
-import { enrichNpcCoherence } from './narrativeGenerator.js'; // MERGE-CAR: CENSUS-4 R12's fitFactionRoster retired (the chair's SC-1 ruling: superseded by construction — memberships born by rank)
+import { enrichNpcCoherence, withHallCapture } from './narrativeGenerator.js'; // MERGE-CAR: CENSUS-4 R12's fitFactionRoster retired (the chair's SC-1 ruling: superseded by construction — memberships born by rank)
 import { enrichHistoryCoherence } from './narrative/historyCoherence.js';
 import { withCustomContent } from '../lib/dependencyEngine.js';
 // THE whole-word substitution, shared with the faction-rename convergence. The
@@ -46,6 +47,7 @@ import { createGenerationContext } from './generationContext.js';
 
 // Side-effect: registers all pipeline steps
 import './steps/index.js';
+import { takeAllegianceReceipts } from '../domain/people/allegiance.js';
 
 /**
  * Generate a complete settlement using the pipeline.
@@ -531,6 +533,8 @@ export function regenNPCsPipeline(settlement, config, options = {}) {
       institutions: settlement.institutions || [],
       powerStructure: settlement.powerStructure,
       economicState: settlement.economicState,
+      // FIX-PUBLIC-VEIL (the second seat): the record's seed salts a veiled face's opaque id
+      _seed: settlement._seed,
     }, config.culture || 'germanic', config, generationContext);
     // GS-2 (ODQ §934.101): the faction groups and the conflicts are derived from the FINAL
     // roster below, exactly as assembly derives them, because an NPC's power affiliation is
@@ -545,7 +549,11 @@ export function regenNPCsPipeline(settlement, config, options = {}) {
     // (the seam mints the `other` powers' faces; their ties to the seat are drawn by drawTies below —
     // MERGE-234, one tie writer — so the seam is handed no ties). MERGE-CAR: CENSUS-4 R12's roster fitter
     // is retired here (the chair's SC-1 ruling): a card's powers are its memberships, born by rank.
-    const enrichedNpcs = enrichNpcCoherence({ ...settlement, npcs, config });
+    const view = { ...settlement, npcs, config };
+    const enrichedNpcs = enrichNpcCoherence(view);
+    // ALLEGIANCE-CAR1 (2026-11-08; the chair's ruling on the trace partition, the LIFECYCLE condition): the seam dealt
+    // the regenerated cast's hidden allegiances; their receipts replace the record's `people-allegiance` run.
+    const allegianceReceipts = takeAllegianceReceipts(view);
 
     // The user's canon rides OVER the finished roll rather than through it. Every
     // draw above has already happened, so preservation cannot perturb a seeded
@@ -576,10 +584,33 @@ export function regenNPCsPipeline(settlement, config, options = {}) {
     // moves no draw above it; a fresh tie names the cast as it stands, so no projection refresh.
     const finalRelationships = drawTies(roster, { config, institutions: settlement.institutions || [], tier: settlement.tier, government: settlement.powerStructure?.government ?? null }, getActiveRng());
     const conflicts = generateConflicts(settlement.powerStructure?.factions || [], finalRelationships, config, settlement.institutions || [], roster);
+    // ALLEGIANCE-CAR4 (A9, the design §2): the regenerated cast's goals, dealt over the FINAL roster and its ties on this
+    // regen's own keyed family, as birth deals them (people/goals.js); a preserved keeper's goal is the user's and is kept.
+    const goaledRoster = dealGoals({ ...settlement, config, conflicts }, roster, finalRelationships, getActiveRng(), { keep: new Set(preserved.map((p) => String(p.id))) });
+    // FIX-SECTION-REGEN (2026-11-09; car 2's finding): the hall-capture state is DERIVED from the cast, so a new cast
+    // re-derives it, and the record must hold it — the seam above derives it on this regen's private view, which is
+    // dropped. It is re-derived here over the FINAL roster (the user's canon merged in) through the full generation's
+    // own seam and ONE writer (narrativeGenerator.js :: withHallCapture → hallCapture.js :: writeHallCapture), from the
+    // RECORD's power structure, re-reading the writer's own birth seed (`rederive`) — draw-free, so it moves no draw.
+    const powerStructure = withHallCapture({ ...settlement, config, npcs: goaledRoster }, goaledRoster, { rederive: true });
+    // the record's trace keeps every other step's run; the subject's run is the regeneration's (re-stamped on the
+    // trace's own clock, ts = position). Dormant: a record with no allegiance before or after carries no new key.
+    const priorTrace = Array.isArray(/** @type {any} */ (settlement).simulationTrace) ? /** @type {any} */ (settlement).simulationTrace : [];
+    const traceParts = (allegianceReceipts.length || priorTrace.some((/** @type {any} */ t) => t?.step === 'people-allegiance'))
+      ? { simulationTrace: [...priorTrace.filter((/** @type {any} */ t) => t?.step !== 'people-allegiance'), ...allegianceReceipts]
+        .map((t, ts) => ({ causes: [], downstreamEffects: [], ...t, ts })) }
+      : {};
     return {
-      npcs: roster,
+      npcs: goaledRoster,
       relationships: finalRelationships,
       conflicts,
+      // the derived hall, returned so the record holds what a full generation of this cast holds (absent on a record
+      // with no power structure, so its parts keep the key set they always had). FIX-SECTION-REGEN cause 2: the
+      // conflicts are DUAL-WRITTEN as assembly writes them (steps/assembleSettlement.js, GS-2's seam fix), so the
+      // record's `powerStructure.conflicts` — the address aiLayer, dailyLifeLogic and generate-narrative read — is the
+      // regenerated list, not the born cast's.
+      ...(powerStructure ? { powerStructure: { ...powerStructure, conflicts } } : {}),
+      ...traceParts,
       _regenSeed: seed,
       // The preservation REPORT, out of band of the settlement parts. A keeper
       // inherits its slot's id, so a caller holding id-keyed state (the lock map)

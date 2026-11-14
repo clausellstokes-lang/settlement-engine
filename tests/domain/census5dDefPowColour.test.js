@@ -32,11 +32,15 @@ describe('CENSUS-5d unit 2b · DS-DEF / DS-POW: every read line declares or is c
     expect(marksOf('DS-DEF-7', 'besiegedBy present', /There is an army at/)).toEqual(expect.arrayContaining(['walls', 'gate']));
     expect(marksOf('DS-DEF-10', 'posture UNDER TRIBUTE (indebted)', /the garrison is met afterwards/)).toContain('garrison');
     expect(marksOf('DS-DEF-6', 'Naval Defense: Under blockade', /a magical channel/)).toContain('magic');
-    expect(marksOf('DS-POW-1', 'breakdown dominated by FOOD, adverse', /granary door/)).toContain('institution: granary');
+    // Re-anchored at WIRING W3's second seat (2026-11-07): the owner's style law rewrote FOOD adverse v1 ("…judged at
+    // the granary door…" -> "The granary at {settlement} is running low…"); the line keeps its `institution: granary` mark.
+    expect(marksOf('DS-POW-1', 'breakdown dominated by FOOD, adverse', /The granary at/)).toContain('institution: granary');
     // Endorsed v4 is reworded rather than declared (R-U): it is the pool's one {settlement}-only line, the
     // anchored-liveness floor under a refused {seat} fill (powerStateProseDesk.test.js), so a watch it named
     // would mute the banner in a watch-less town: "the watch is not the reason" -> "enforcement is not the reason".
-    expect(marksOf('DS-POW-1', 'Endorsed', /enforcement is not the reason/)).toContain('colour');
+    // Re-anchored at WIRING W3's second seat (2026-11-07): the style law rewrote v4 again ("Crime has little hold … People
+    // trust their rulers …"); it still names neither the watch nor the {seat}, so it stays the {settlement}-only floor.
+    expect(marksOf('DS-POW-1', 'Endorsed', /People trust their rulers/)).toContain('colour');
   });
 
   it('no line puts the court and the prison on a square the record does not hold', () => {

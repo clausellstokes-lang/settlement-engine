@@ -39,11 +39,21 @@ describe('Herald settlement-portrait context', () => {
 
     expect(screen.getByRole('heading', { name: 'The Covered Market' })).toBeTruthy();
     expect(screen.getByText('Review recorded causes')).toBeTruthy();
-    expect(screen.getByText('building:market')).toBeTruthy();
-    expect(screen.getByText('institution: market')).toBeTruthy();
+    // D2·12 + D·89 (STYLE-2-PULSE-FOLLOWUP; re-keyed by cause): plain words on the face — the
+    // kind and the family humanized, a cause without a description said so — and the ids
+    // (scene, canonical record, provenance reference) kept as data, never printed.
+    expect(screen.getByText('Building')).toBeTruthy();
     expect(screen.getByText(/regional-grain: river terrace/)).toBeTruthy();
-    expect(screen.getByText('Recorded reference: provenance:missing-detail')).toBeTruthy();
-    expect(screen.getByText(/has not guessed a story identity/i)).toBeTruthy();
+    expect(screen.getByText(/· Region/)).toBeTruthy();
+    expect(screen.getByText('A cause the portrait noted, without a description.')).toBeTruthy();
+    expect(screen.getByText(/has not guessed which story this place belongs to/i)).toBeTruthy();
+    // STYLE-2 SW-12 (ledger D·89): the same honesty, in plain words — no "compiler", no "story identity".
+    expect(screen.getByText(/These are the notes the settlement’s portrait was built from\. The Herald has\s+not guessed which story this place belongs to\./)).toBeTruthy();
+    const card = screen.getByTestId('herald-scene-context');
+    expect(card.getAttribute('data-scene-id')).toBe('building:market');
+    expect(card.getAttribute('data-canonical-ref')).toBe('institution:market');
+    // anchored: the card's own data attributes above prove it rendered with the ids in hand.
+    expect(card.textContent).not.toMatch(/building:market|institution: ?market|provenance:/);
 
     fireEvent.click(screen.getByRole('button', {
       name: 'Dismiss settlement portrait context',

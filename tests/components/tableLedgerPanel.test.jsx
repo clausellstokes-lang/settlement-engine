@@ -59,7 +59,8 @@ describe('TableLedgerPanel — exposure offers only the compromised roster', () 
   const settlement = {
     name: 'Ash',
     npcs: [
-      { id: 'npc.aldis', name: 'Aldis', corrupt: true },
+      // ALLEGIANCE-CAR1 (2026-11-08): the retired `corrupt` mark is the card's hidden `allegiance`
+      { id: 'npc.aldis', name: 'Aldis', allegiance: { power: null, house: 'The Guild', vector: 'greed', via: 'retainer', handler: null, share: 0.15, veiled: true, covert: true } },
       { id: 'npc.cato', name: 'Cato' }, // clean — EXPOSE_CORRUPTION would veto
     ],
     institutions: [

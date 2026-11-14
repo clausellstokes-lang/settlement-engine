@@ -64,7 +64,39 @@ const LANES = Object.freeze({ mechanicalOutcomes: 8, selectedOutcomes: 24 });
 // 400/1/399/40, 7b3ffb6ee 266/0/266/44). −4 introductions, all applied|tradition, no home in or out (recorded once, at the voice
 // contract's copy; PLAUSIBLE, not bisected). ADDRESS_TOTALS below, noted. RAW_LIVENESS HOLDS (49/26, 165/96, 214/96, measured);
 // REWRITE_TOTALS and KNOWN_INERT_HEADLINE_REWRITES hold (all 26 inert; no gap, overlap or indicative match).
-const CORPUS = Object.freeze({ pulseRoots: 12, introductions: 396, retirements: 1, finalEntries: 395, homes: 40 });
+// ── RE-RECORDED 2026-11-08 AT MERGE-WAVE's FIX-PUBLIC-VEIL MERGE POINT (7e65c7bec; the brief §0.6: the news family re-recorded in
+// ONE act, PEOPLE-1's precedent), the cause the veil lane's own: a veiled face's opaque id re-deals its keyed forks, which moves
+// the corpus's AO-0 year (the lane left these walkers red for this act). ONE corpus build at the merged tip, each library's own
+// functions (the voice throw disabled in an untracked scratch copy only). CORPUS 396/1/395/40 → 391/1/390/41: one home ARRIVES, applied|resource_depletion
+// (1/1 headline and summary); conservation 391 − 1 = 390.
+// ── RE-RECORDED 2026-11-09 AT MERGE-TRAIN's ALLEGIANCE-CAR1 MERGE POINT (e5f88930b, car 1 = lane/allegiance-car1-2026-11-08 at
+// 7395b5dab; the news family re-recorded in ONE act, MERGE-WAVE's 460b1b0d9 form), the cause car 1's own generator moves re-dealing
+// the corpus's AO-0 year: the hidden allegiance (5902f1a4a, dealt at the seam on its own keyed forks) and chiefly J-19 (d131ab158:
+// ensureNpcStates reads the hidden allegiance, so the lit pulse's knowledge desk changes; herald 443 → 450 on its lane). ONE corpus
+// build at the merged tip, each library's own functions (the voice throw disabled in an untracked scratch copy only).
+// CORPUS 391/1/390/41 → 396/0/396/43 (equal to the observed-shape walker's rung-36 pin 396/2525/396): four homes ARRIVE
+// (applied|commons_gathering, applied|npc_verdict, queued|npc_sabotage, queued|trade_pressure) and two LEAVE
+// (applied|resource_depletion, queued|npc_reform); the one retirement is gone; conservation 396 − 0 = 396.
+// ── RE-RECORDED 2026-11-09 AT MERGE-TRAIN's ALLEGIANCE-CAR2 MERGE POINT (f51058995, car 2 = lane/allegiance-car2-2026-11-08 at
+// 46715e751; record 2, rung 37; the news family re-recorded in ONE act, 460b1b0d9's form), the cause car 2's own: the guild's push
+// (bbb1a4abc, GUILD_PUSH_TUNING / guildPushOf, the one draw line in rankPowers) re-deals the corpus's AO-0 year, with A6 the hall
+// (ce90cf16e) and the capture rows read from the one state (aca93cbc5) beside it (docs/allegiance/ALLEGIANCE_CAR2_2026-11-08.md §4).
+// ONE corpus build at the merged tip (562582982), each library's own functions (the voice throw disabled in an untracked scratch copy only).
+// CORPUS 396/0/396/43 → 396/0/396/44 (the observed-shape walker's rung-37 pin 396/2535/396/81): applied|resource_depletion
+// RETURNS (1/1 headline and summary) and no home leaves; conservation 396 − 0 = 396.
+// ── RE-RECORDED 2026-11-09 AT MERGE-TRAIN's ALLEGIANCE-CAR3 MERGE POINT (c6ded8e3a, car 3 = lane/allegiance-car3-2026-11-08 at
+// 6ea8fb318; record 3, rung 38; the news family re-recorded in ONE act, 460b1b0d9's form), the cause car 3's own: e9070d614
+// ALLEGIANCE_TUNING.organizedCrime 0.10 → 0.05 re-deals the corpus's AO-0 year (bisected by the OSR seat as the one generator cause;
+// 8567f490d and 2f89aaeef are fence-only; docs/allegiance/ALLEGIANCE_CAR3_2026-11-08.md §8). ONE corpus build at the merged tip
+// (5f8f76238), each library's own functions (the voice throw disabled in an untracked scratch copy only).
+// CORPUS 396/0/396/44 → 395/1/394/43 (the observed-shape walker's rung-38 pin 394/2525/395/81): queued|npc_reform ARRIVES and two
+// homes LEAVE (applied|resource_depletion, queued|trade_pressure); one retirement returns; conservation 395 − 1 = 394.
+// ── RE-DECLARED 2026-11-10 BY THE RESIDUE SEAT AT THE SIMULATION BATCH (STYLE-2-MERGE point 36), IN THE SAME ACT AS THE NEWS-VOICE
+// CONTRACT (the cause, the bisect and the named home recorded once, at the voice contract's copy): CORPUS 395/1/394/43 →
+// 395/1/394/44 — applied|npc_expose ARRIVES by GREEN-TIP ae6693ccb (the pulse seats an NPC by its first-rank membership); no home
+// leaves; conservation 395 − 1 = 394. ADDRESS_TOTALS and RAW_LIVENESS are NOT moved here: the content-totality rows are the merge
+// seat's closing act.
+const CORPUS = Object.freeze({ pulseRoots: 12, introductions: 395, retirements: 1, finalEntries: 394, homes: 44 });
 // ── RE-RECORDED 2026-09-01 BY T8 · SHIFT (ODQ §858 + §860) ─────────────────────────────────────
 // 53/106/14/92/400/544 → 51/102/12/90/393/536. `fields` holds at 2, as it must: the address grammar
 // is still headline-and-summary and nothing was added to it.
@@ -125,7 +157,30 @@ const CORPUS = Object.freeze({ pulseRoots: 12, introductions: 396, retirements: 
 // a count: applied|tradition headline and summary 22/22 → 18/18 (the integration parent 7b3ffb6ee's own 18/18; the car parent
 // 373a2947b reproduces 596/800 and digest 77f91347 exactly). Every row stays indicative; digest 77f91347 → c62116c2, re-derived
 // with the rows in the baseline. PLAUSIBLE (the car's re-dealt cast × the rung-2 landing's pool census), not bisected.
-const ADDRESS_TOTALS = Object.freeze({ homes: 40, fields: 2, identities: 80, prospectiveIdentities: 0, indicativeIdentities: 80, distinctValues: 588, occurrences: 792 });
+// 2026-11-08 (MERGE-WAVE at the FIX-PUBLIC-VEIL merge, the veiled re-deal's year): 40/2/80/0/80/588/792 → 41/2/82/0/82/596/782 —
+// applied|resource_depletion arrives (2 rows 1/1); roads 101 → 103, npc_contest 39/49 dv 69 → 40/50 dv 62 occ, npc_reform 24 → 23,
+// cause_lifecycle 4 → 5, rival_sabotage 3 → 2 occ. Every row stays indicative.
+// 2026-11-09 (MERGE-TRAIN at the ALLEGIANCE-CAR1 merge, car 1's re-dealt year — the hidden allegiance, then J-19): 41/2/82/0/82/596/782 →
+// 43/2/86/0/86/606/792 — four homes arrive (applied|commons_gathering 1/1, applied|npc_verdict 3/3 and 1/3, queued|npc_sabotage 1/1,
+// queued|trade_pressure 1/1) and two leave (applied|resource_depletion 1/1, queued|npc_reform 2/2); cause_lifecycle 5 → 9 occ,
+// commons_petition 8 → 5, conflict_pressure 9 → 8, npc_protect 17 → 18, npc_reform 23 → 25, queued|neutral_to_rival 1 → 2,
+// queued|npc_seek_promotion 5 → 4, queued|strategy_sue_for_peace 4 → 3 (both fields). Every row stays indicative.
+// 2026-11-09 (MERGE-TRAIN at the ALLEGIANCE-CAR2 merge, the guild's push's year): 43/2/86/0/86/606/792 → 44/2/88/0/88/606/792 —
+// applied|resource_depletion returns (2 rows 1/1); applied|npc_reform 25/25 → 24/24 (both fields). Every row stays indicative.
+// 2026-11-09 (MERGE-TRAIN at the ALLEGIANCE-CAR3 merge, e9070d614's organized-crime rate's year): 44/2/88/0/88/606/792 →
+// 43/2/86/0/86/602/790 — queued|npc_reform arrives (1/1), applied|resource_depletion and queued|trade_pressure leave (1/1 each);
+// cause_lifecycle 8/9 → 6/7, conflict_pressure 3/8 → 3/9, queued|npc_seek_promotion 4 → 3, queued|strategy_sue_for_peace 3 → 5
+// (both fields). Every row stays indicative.
+// 2026-11-11 (STYLE-2-MERGE-7, closing act 4: the content-totality contracts re-keyed ONCE at the style wave's final tip, by
+// measurement, each figure attributed by the walker's own functions at four trees: 3ce63ccc6 = the frozen value, 8acfc52f1, 90774f2fa,
+// 2cbe72ca1): 43/2/86/0/86/602/790 → 44/2/88/0/88/623/790. ONE HOME ARRIVES, applied|npc_expose (2 rows 1/1; RESIDUE's 44th home), none
+// leaves. SIX rows at STYLE-2-MERGE point 18 (SW-12 PULSE-LINES, 8acfc52f1; the stressor and realm lines given their own tellings):
+// cause_lifecycle summary 6/7 → 7/7, strategy_deploy summary 2/4 → 4/4, stressor_aftermath headline 3/9 → 7/9, stressor_residual
+// headline and summary 3/9 → 9/9, realm_insurgency summary 2/3 → 3/3; nothing from 8acfc52f1 to 90774f2fa; NINE at point 36 (the
+// simulation batch; GREEN-TIP ae6693ccb seats an NPC by its first-rank membership: npc_exploit 2/2 → 1/1, npc_reform 24/24 → 25/25,
+// npc_suppress 6/6 → 5/5, both fields each, and the npc_expose pair; PULSE-SITES' prefixes 1–4: npc_verdict summary 1/3 → 2/3),
+// the RESIDUE seat's bisect; nothing after. Every row stays indicative; digest re-derived with the rows in the baseline.
+const ADDRESS_TOTALS = Object.freeze({ homes: 44, fields: 2, identities: 88, prospectiveIdentities: 0, indicativeIdentities: 88, distinctValues: 623, occurrences: 790 });
 const RAW_LIVENESS = Object.freeze({
   pulseRecords: 12,
   lanes: Object.freeze([
@@ -160,7 +215,14 @@ const RAW_LIVENESS = Object.freeze({
     // 165/96, union 211/82 → 214/96. Lane 1 dc655f712 49/26, 165/96, 214/96; lane 2 3aa160a70 mechanical 50/27, union 215/96;
     // lanes 3, 4, 5A hold; lane 5B a725df7e4 mechanical 49/26, union 214/96; 2981f23f6 and the tip as now. All indicative; the
     // union's distinct count still equals the selected lane's (96 = 96).
-    Object.freeze({ field: 'mechanicalOutcomes', capPerPulse: 8, headlineOccurrences: 49, distinctValues: 26, prospectiveOccurrences: 0, prospectiveDistinctValues: 0, indicativeOccurrences: 49, indicativeDistinctValues: 26 }),
+    // 2026-11-09 (MERGE-TRAIN at the ALLEGIANCE-CAR1 merge, car 1's re-dealt year): mechanical 50/26 → 50/25, selected 164/96 →
+    // 164/97, union 214/96 → 214/97. All indicative; the union's distinct count still equals the selected lane's (97 = 97).
+    // 2026-11-09 (MERGE-TRAIN at the ALLEGIANCE-CAR2 merge, the guild's push's year): mechanical 50/25 → 52/26, selected HOLDS at
+    // 164/97, union 214/97 → 216/97. All indicative; the union's distinct count still equals the selected lane's (97 = 97).
+    // 2026-11-09 (MERGE-TRAIN at the ALLEGIANCE-CAR3 merge, e9070d614's year): mechanical 52/26 → 50/25, selected 164/97 → 165/97,
+    // union 216/97 → 215/97. All indicative; the union's distinct count still equals the selected lane's (97 = 97).
+    // 2026-11-11 (STYLE-2-MERGE-7, closing act 4): mechanical 50/25 → 51/26, at point 36 (the simulation batch); nothing at point 18.
+    Object.freeze({ field: 'mechanicalOutcomes', capPerPulse: 8, headlineOccurrences: 51, distinctValues: 26, prospectiveOccurrences: 0, prospectiveDistinctValues: 0, indicativeOccurrences: 51, indicativeDistinctValues: 26 }),
     // ⭐ THE CONTROL THAT HELD FOR TWO RE-RECORDS NOW MOVES, AND THAT IS THE POINT OF KEEPING IT.
     // T8 recorded this lane byte-identical twice running because the corruption work never authors
     // into it. WAR LANDING (§876): 151/80/95/66/56/14 → 153/78/95/63/58/15, and the shape names the
@@ -171,7 +233,8 @@ const RAW_LIVENESS = Object.freeze({
     // reach, and the first cause in three re-records that does.
     // 2026-10-01 (the urban band + the druid rulings): 154/78/96/63/58/15 → 155/75/93/59/62/16.
     // 2026-10-02 (THE VOICE PROGRAM wave 1): every persisted headline in this lane is now a deed; its prospective half is zero.
-    Object.freeze({ field: 'selectedOutcomes', capPerPulse: 24, headlineOccurrences: 165, distinctValues: 96, prospectiveOccurrences: 0, prospectiveDistinctValues: 0, indicativeOccurrences: 165, indicativeDistinctValues: 96 }),
+    // 2026-11-11 (STYLE-2-MERGE-7, closing act 4): selected 165/97 → 165/103, at point 18 (SW-12 PULSE-LINES, 8acfc52f1); nothing after.
+    Object.freeze({ field: 'selectedOutcomes', capPerPulse: 24, headlineOccurrences: 165, distinctValues: 103, prospectiveOccurrences: 0, prospectiveDistinctValues: 0, indicativeOccurrences: 165, indicativeDistinctValues: 103 }),
   ]),
   // TE36: the union follows the mechanical lane alone — 228 → 207 (−21, the same 21),
   // 83 → 80 distinct, 168 → 147 prospective. The indicative halves do not move at all.
@@ -188,7 +251,12 @@ const RAW_LIVENESS = Object.freeze({
   // 2026-10-01 (the urban band + the druid rulings): 207/78/145/63/62/15 → 204/75/137/59/67/16, and THE STRUCTURAL FACT SURVIVES:
   // union.distinctValues equals the selected lane's (75 = 75), so the mechanical spellings are still a subset of the public lane's.
   // 2026-10-02 (THE VOICE PROGRAM wave 1): the union's prospective half is zero for the first time.
-  union: Object.freeze({ headlineOccurrences: 214, distinctValues: 96, prospectiveOccurrences: 0, prospectiveDistinctValues: 0, indicativeOccurrences: 214, indicativeDistinctValues: 96 }),
+  // 2026-11-09 (MERGE-TRAIN at the ALLEGIANCE-CAR1 merge): 214/96 → 214/97, following the selected lane's distinct count (97 = 97).
+  // 2026-11-09 (MERGE-TRAIN at the ALLEGIANCE-CAR2 merge): 214/97 → 216/97, following the mechanical lane's +2.
+  // 2026-11-09 (MERGE-TRAIN at the ALLEGIANCE-CAR3 merge): 216/97 → 215/97 (mechanical −2, selected +1).
+  // 2026-11-11 (STYLE-2-MERGE-7, closing act 4): 215/97 → 216/103 (selected +6 distinct at point 18; mechanical +1 occurrence at point 36);
+  // the union's distinct count still equals the selected lane's (103 = 103).
+  union: Object.freeze({ headlineOccurrences: 216, distinctValues: 103, prospectiveOccurrences: 0, prospectiveDistinctValues: 0, indicativeOccurrences: 216, indicativeDistinctValues: 103 }),
 });
 // TE36 (ODQ §271): 17/9 → 16/10 and 69/168 → 66/147. THE RULE COUNT IS UNCHANGED AT 26 —
 // no rewrite rule was added or deleted; one CROSSED from active to inert because the corpus

@@ -35,6 +35,7 @@
  */
 
 import { NPC_FACTION_GOALS, NPC_FACTION_LOYALTY } from '../../data/npcData.js';
+import { TITLE_PRESENTATIONS, TITLE_SECRETS } from '../../data/people/titleSecretsPresentations.js';
 
 /** The seven categories the pools are keyed by. */
 export const POOL_CATEGORIES = Object.freeze(['government', 'military', 'religious', 'economy', 'criminal', 'magic', 'other']);
@@ -302,6 +303,17 @@ export function poolFor(title, shelf) {
 }
 
 /**
+ * THE POWER BANDS (COHERENCE-POWERS-5, N2): the three bands a role's keywords place it in (npcGenerator.js ::
+ * powerBandOfRole), each the card's `influence` word and its `power` span on the 1-10 scale the card and the PDF print —
+ * the spans `generateNPCPowerLevel` has always drawn within (high 8-10, moderate 4-7, low 1-3), lowest first.
+ */
+export const POWER_BANDS = Object.freeze({
+  low: Object.freeze({ level: 'low', floor: 1, span: 3, order: 0 }),
+  moderate: Object.freeze({ level: 'moderate', floor: 4, span: 4, order: 1 }),
+  high: Object.freeze({ level: 'high', floor: 8, span: 3, order: 2 }),
+});
+
+/**
  * The seat's pool row at a tier: the tier's seat role, the government pools.
  * @param {string | null | undefined} tier
  * @returns {PoolRow & { fallback: boolean, via: 'seat' }}
@@ -340,4 +352,23 @@ export function hookPoolFor(title, shelf, options = {}) {
   const { category, via } = poolFor(title, shelf);
   const pool = HOOK_POOLS.includes(category) ? category : 'other';
   return { pool, via, fallback: via !== 'title' || pool !== category };
+}
+
+// ── ITEM 15: THE SECRET AND THE PRESENTATION BY TITLE (the allegiance train, car 4, ALLEGIANCE-CAR4, 2026-11-09;
+// the design §6.5, the chair's ruling J-16; the writers' records WRITE_PEOPLE_2026-11-08.md and
+// WRITE_PEOPLE_3_2026-11-08.md) ──────────────────────────────────────────────────────────────────────────────────
+// The 147 fallback titles' lines (data/people/titleSecretsPresentations.js) are reached HERE, by the face's title: a
+// title the table holds draws its secret and its presentation from its own three; every other title — the house
+// titles that hold their own pools, the mints' titles, a stranger's house — keeps its CATEGORY pool, as today. NO GOAL
+// BY TITLE (J-16): the goal is the goal families' (people/goals.js), which read the house and its record, never this.
+
+/**
+ * The secret and presentation lines a face's title holds, or null for a title the table does not write.
+ * @param {string | null | undefined} title the face's title ("the miller")
+ * @returns {{ secrets: ReadonlyArray<Readonly<{ secret: string, stakes: string }>>, presentations: ReadonlyArray<Readonly<{ impression: string, disposition: string, behaviour: string }>> } | null}
+ */
+export function titleLinesFor(title) {
+  const key = typeof title === 'string' ? title : '';
+  if (!key || !Object.prototype.hasOwnProperty.call(TITLE_SECRETS, key)) return null;
+  return { secrets: TITLE_SECRETS[key], presentations: TITLE_PRESENTATIONS[key] || [] };
 }
