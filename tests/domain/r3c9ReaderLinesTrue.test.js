@@ -10,6 +10,13 @@
  *   composer's own claimless sentence. Agiospolis (bar0-city-under_siege+famine-rand-1): "The table rests on fish from
  *   the local waters." beside `failedSource: "fish"`.
  *
+ * n240 · the faith's subordinate line ("{faith} answers to {hall}. Its priests look after their flocks and have no say
+ *   in the hall.", factionDynamics.js) reads the faith's standing the same record prints: World/Faith gives the strongest
+ *   religious power a voice in the town's affairs (faithReading.js :: factionLine: a small voice, a voice, real weight)
+ *   wherever it stands, so the line is not drawn. Gortfell (bar0-town-calm-rand-1): beside "Clergy and church
+ *   institutions exercise meaningful civic influence ..." and "A voice in the town's affairs belongs to the Religious
+ *   Authorities."
+ *
  * The towns are born as the reader's probes bear them (REVIEW-R3-CODE-C births.mjs :: cfgFor; the bar's towns by
  * REVIEW-BAR-0 render.bar0.jsx :: cfgFor, the rr pattern). Each arm collects first and asserts on the collection, and
  * asserts that it saw its line print (a guard that never sees its line proves nothing).
@@ -19,6 +26,7 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { foodwaysLineOf, sourcesNamedIn } from '../../src/domain/foodways.js';
+import { faithLinesOf, faithReadingOf } from '../../src/domain/dossier/faithReading.js';
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 const SIZES = '(thorp|hamlet|village|town|city|metropolis)';
@@ -49,15 +57,21 @@ const FAMINE_TOWNS = ['bar0-city-under_siege+famine-rand-1', 'rr3p-thorp-famine-
 /** Towns with no famine: their line is the record's, untouched. */
 const CALM_TOWNS = ['r2r-village-35', 'bar0-town-calm-rand-1'];
 
+/** n240's towns: Gortfell, villages, towns and cities whose faith stood below half the hall, under siege and occupation. */
+const FAITH_TOWNS = ['bar0-town-calm-rand-1', 'r2r-village-12', 'r2r-village-15', 'r2s-occupied-town-1', 'rr3-town-under_siege-rand-0', 'rr3-city-under_siege-rand-2', 'r2r-metropolis-0'];
+const NO_SAY = 'have no say in the hall';
+
 /** The sources a famine's failure stops: the failed one; grain and the mill together (the mill grinds the grain). @param {unknown} failed */
 const stoppedBy = (failed) => (failed === 'grain' || failed === 'mill' ? ['grain', 'mill'] : failed ? [String(failed)] : []);
 
 /** @type {Array<any>} */ let famineTowns = [];
 /** @type {Array<any>} */ let calmTowns = [];
+/** @type {Array<any>} */ let faithTowns = [];
 beforeAll(async () => {
   await loadGenerationLawPayloads();
   famineTowns = FAMINE_TOWNS.map(bear);
   calmTowns = CALM_TOWNS.map(bear);
+  faithTowns = FAITH_TOWNS.map(bear);
 }, 180000);
 
 describe('n80: the foodways line names no source the famine failed', () => {
@@ -86,5 +100,28 @@ describe('n80: the foodways line names no source the famine failed', () => {
   it('a town with no famine keeps the record\'s own line, unchanged', () => {
     const seen = calmTowns.map((s) => ({ town: s.name, failed: s.economicState.foodSecurity.foodRecord.failedSource, same: foodwaysLineOf(s) === s.economicState.foodSecurity.foodRecord.foodwaysLine.trim() }));
     expect(seen.map((t) => [t.failed, t.same])).toEqual(CALM_TOWNS.map(() => [null, true]));
+  });
+});
+
+describe('n240: the faith is not said to have no say in the hall where the record gives it a voice', () => {
+  it('no relationship line says it beside the World/Faith voice the same town prints', () => {
+    const seen = faithTowns.map((s) => {
+      const voice = faithLinesOf(faithReadingOf(s)).find((line) => /voice in|political weight/.test(line)) || '';
+      const rows = (s.powerStructure?.factionRelationships || []).filter((/** @type {any} */ r) => String(r.narrative || '').includes(NO_SAY));
+      return { town: s.name, voice, noSay: rows.map((/** @type {any} */ r) => r.narrative) };
+    });
+    // The arm saw the faith's voice print in every town it reads.
+    expect(seen.filter((t) => !t.voice)).toEqual([]);
+    expect(seen.filter((t) => t.noSay.length)).toEqual([]);
+  });
+
+  it('the faith and the hall still stand in each town (the arm reads the pair it means)', () => {
+    const pairs = faithTowns.map((s) => {
+      const ps = s.powerStructure || {};
+      const gov = (ps.factions || []).find((/** @type {any} */ f) => f.isGoverning);
+      const faith = (ps.factions || []).find((/** @type {any} */ f) => f.category === 'religious' && !f.isGoverning);
+      return Boolean(gov && faith && faith.power / Math.max(1, gov.power) < 0.5);
+    });
+    expect(pairs).toEqual(FAITH_TOWNS.map(() => true));
   });
 });

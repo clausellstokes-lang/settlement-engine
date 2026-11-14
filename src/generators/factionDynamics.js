@@ -482,7 +482,15 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
               : stressed('plague_onset')         ? 'escalating'  // church gains legitimacy in crisis
               : 'stable';
 
-    addRel({ pair: [gov.faction, rel.faction], type, direction, ratio: Math.round(ratio*100)/100, narrative });
+    // R3-CODE-C-9 (the bar's n240; the chair's ruling of 2026-11-14, vetoable by the owner: the line reads the
+    // relationship's own standing, the fact the record prints beside it, and is not drawn where the record contradicts
+    // it; 77f0e6792's form). The subordinate line says the faith has "no say in the hall"; World/Faith gives the
+    // strongest religious power a voice in the town's affairs wherever one stands (dossier/faithReading.js ::
+    // factionLine: a small voice below 15, a voice, real weight from 30), and its own card on the Power tab gives it
+    // civic reach in every band (rulingStructure.js's religious desc: "limited" at the least). So it is not drawn.
+    // Gortfell (bar0-town-calm-rand-1): beside "A voice in the town's affairs belongs to the Religious Authorities."
+    // 149 of the reader's 1,722 births.
+    if (type !== 'subordinate') addRel({ pair: [gov.faction, rel.faction], type, direction, ratio: Math.round(ratio*100)/100, narrative });
   }
 
   // ── Governing ↔ Criminal ────────────────────────────────────────────────────
