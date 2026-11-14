@@ -1,0 +1,15 @@
+factions.desc :: 128 towns, 197
+npcs.activeConstraint :: 348 towns, 480
+npcs.goal.intent :: 339 towns, 468
+npcs.goal.long :: 389 towns, 871
+npcs.goal.short :: 391 towns, 985
+npcs.presentation.behaviour :: 32 towns, 32
+npcs.presentation.disposition :: 32 towns, 32
+npcs.presentation.impression :: 32 towns, 32
+npcs.secret.stakes :: 116 towns, 128
+npcs.secret.what :: 116 towns, 128
+npcs.settlementCondition :: 279 towns, 362
+npcs.structuralPosition :: 348 towns, 480
+npcs: -field activeConstraint :: 279 towns, 362
+npcs: -field settlementCondition :: 279 towns, 362
+npcs: -field structuralPosition :: 279 towns, 362

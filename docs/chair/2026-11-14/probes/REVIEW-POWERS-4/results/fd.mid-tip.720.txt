@@ -1,0 +1,98 @@
+(volatile) generationCoherenceReceipt :: 150 towns, 150
+(volatile) simulationTrace :: 308 towns, 308
+activeConditions :: 4 towns, 4
+arrivalScene :: 39 towns, 39
+availableServices :: 91 towns, 91
+coherenceNotes :: 7 towns, 7
+config :: 218 towns, 218
+conflicts :: 57 towns, 57
+conflicts.desc :: 54 towns, 90
+conflicts.intensity :: 31 towns, 36
+conflicts.issue :: 37 towns, 54
+conflicts.parties :: 49 towns, 81
+conflicts.plotHooks :: 44 towns, 68
+conflicts.stakes :: 37 towns, 54
+culturalIdentity :: 151 towns, 151
+defenseProfile :: 226 towns, 226
+economicState :: 637 towns, 637
+economicViability :: 295 towns, 295
+factions +field captureState :: 1 towns, 1
+factions.captureState :: 3 towns, 3
+factions.crisisNote :: 2 towns, 2
+factions.desc :: 39 towns, 67
+factions.legitimacyCrisis :: 2 towns, 2
+factions.modifier :: 2 towns, 2
+factions.power :: 46 towns, 120
+factions.powerLabel :: 32 towns, 50
+factions.rawPower :: 48 towns, 104
+history :: 91 towns, 91
+institutions :: 87 towns, 87
+npcs.activeConstraint :: 33 towns, 69
+npcs.allegiance :: 24 towns, 105
+npcs.goal.intent :: 111 towns, 1937
+npcs.goal.long :: 111 towns, 1818
+npcs.goal.short :: 107 towns, 1377
+npcs.importance :: 65 towns, 401
+npcs.influence :: 19 towns, 24
+npcs.memberships :: 67 towns, 793
+npcs.name :: 2 towns, 2
+npcs.personality.speech :: 60 towns, 692
+npcs.personality.tell :: 60 towns, 625
+npcs.plotHooks :: 70 towns, 882
+npcs.power :: 19 towns, 24
+npcs.presentation.behaviour :: 54 towns, 145
+npcs.presentation.disposition :: 50 towns, 104
+npcs.presentation.impression :: 54 towns, 145
+npcs.role :: 22 towns, 27
+npcs.secret.stakes :: 64 towns, 434
+npcs.secret.what :: 74 towns, 484
+npcs.settlementCondition :: 37 towns, 69
+npcs.stressNote :: 2 towns, 3
+npcs.structuralPosition :: 37 towns, 74
+npcs.structuralRank :: 65 towns, 405
+npcs: +field activeConstraint :: 24 towns, 29
+npcs: +field allegiance :: 1 towns, 2
+npcs: +field settlementCondition :: 27 towns, 32
+npcs: +field stressNote :: 2 towns, 2
+npcs: +field structuralPosition :: 27 towns, 32
+npcs: -field activeConstraint :: 22 towns, 28
+npcs: -field allegiance :: 2 towns, 2
+npcs: -field settlementCondition :: 24 towns, 29
+npcs: -field stressNote :: 1 towns, 1
+npcs: -field structuralPosition :: 24 towns, 29
+npcs: card added :: 57 towns, 294
+npcs: card removed :: 66 towns, 362
+powerStructure.conflicts.desc :: 54 towns, 90
+powerStructure.conflicts.intensity :: 31 towns, 36
+powerStructure.conflicts.issue :: 37 towns, 54
+powerStructure.conflicts.parties :: 49 towns, 81
+powerStructure.conflicts.plotHooks :: 44 towns, 68
+powerStructure.conflicts.stakes :: 37 towns, 54
+powerStructure.criminalCaptureState :: 6 towns, 6
+powerStructure.economyInputFingerprint :: 11 towns, 11
+powerStructure.factionRelationships :: 46 towns, 46
+powerStructure.factions: roster/order :: 37 towns, 37
+powerStructure.governingName :: 15 towns, 15
+powerStructure.government :: 15 towns, 15
+powerStructure.publicLegitimacy :: 23 towns, 23
+powerStructure.recentConflict :: 10 towns, 10
+powerStructure.stability :: 2 towns, 2
+pressureSentence :: 34 towns, 34
+prominentRelationship :: 54 towns, 54
+relationships.archetypeKey :: 5 towns, 6
+relationships.description :: 80 towns, 934
+relationships.flagDriven :: 4 towns, 5
+relationships.npc1Name :: 1 towns, 1
+relationships.npc1Role :: 5 towns, 5
+relationships.npc2Role :: 5 towns, 10
+relationships.proseVariant :: 80 towns, 934
+relationships.strength :: 5 towns, 6
+relationships.tension :: 80 towns, 934
+relationships.type :: 5 towns, 6
+relationships.typeName :: 5 towns, 6
+relationships: count :: 63 towns, 63
+relationships: pair new :: 87 towns, 2541
+resourceAnalysis :: 696 towns, 696
+spatialLayout :: 30 towns, 30
+stress :: 33 towns, 33
+stressors :: 33 towns, 33

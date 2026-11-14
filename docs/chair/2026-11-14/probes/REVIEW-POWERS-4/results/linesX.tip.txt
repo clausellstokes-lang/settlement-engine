@@ -1,0 +1,72 @@
+L0 honorific the alewife · Alewife :: prints 12 in 12 towns; true 12 false 0; new 0 (t 0 f 0); sizes village:12; crisis towns 10
+L0 honorific the alewife · Brewster :: prints 30 in 30 towns; true 30 false 0; new 0 (t 0 f 0); sizes hamlet:25 village:5; crisis towns 28
+L0 honorific the district madam · Madam :: prints 77 in 77 towns; true 77 false 0; new 0 (t 0 f 0); sizes city:37 metropolis:40; crisis towns 68
+L0 honorific the district madam · Master :: prints 66 in 66 towns; true 65 false 1; new 0 (t 0 f 0); sizes city:35 metropolis:31; crisis towns 51
+L0 honorific the madam · Madam :: prints 51 in 51 towns; true 51 false 0; new 0 (t 0 f 0); sizes town:4 city:19 metropolis:28; crisis towns 46
+L0 honorific the madam · Master :: prints 67 in 67 towns; true 67 false 0; new 0 (t 0 f 0); sizes town:3 city:26 metropolis:38; crisis towns 55
+L0 honorific the midwife · Goodman :: prints 101 in 101 towns; true 101 false 0; new 0 (t 0 f 0); sizes village:7 town:7 city:29 metropolis:58; crisis towns 85
+L0 honorific the midwife · Goodwife :: prints 117 in 117 towns; true 117 false 0; new 0 (t 0 f 0); sizes village:3 town:5 city:43 metropolis:66; crisis towns 97
+L10 body row (criminal) :: prints 65 in 58 towns; true 65 false 0; new 0 (t 0 f 0); sizes town:16 city:28 metropolis:21; crisis towns 46
+L10 body row (government) :: prints 30 in 29 towns; true 30 false 0; new 0 (t 0 f 0); sizes village:1 town:23 city:6; crisis towns 20
+L10 body row (magic) :: prints 39 in 39 towns; true 39 false 0; new 0 (t 0 f 0); sizes town:1 city:14 metropolis:24; crisis towns 27
+L10 body row (other) :: prints 43 in 32 towns; true 43 false 0; new 0 (t 0 f 0); sizes hamlet:1 village:5 town:11 city:15 metropolis:11; crisis towns 19
+L10 body row (religious) :: prints 196 in 179 towns; true 196 false 0; new 3 (t 3 f 0); sizes village:46 town:56 city:51 metropolis:43; crisis towns 139
+L10r body row removed (criminal) :: prints 15 in 15 towns; true 15 false 0; new 15 (t 15 f 0); sizes thorp:9 hamlet:2 town:1 city:1 metropolis:2; crisis towns 14
+L10r body row removed (government) :: prints 32 in 31 towns; true 32 false 0; new 32 (t 32 f 0); sizes hamlet:3 village:5 town:11 city:7 metropolis:6; crisis towns 31
+L10r body row removed (magic) :: prints 3 in 3 towns; true 3 false 0; new 3 (t 3 f 0); sizes hamlet:1 town:1 metropolis:1; crisis towns 3
+L10r body row removed (other) :: prints 154 in 117 towns; true 154 false 0; new 154 (t 154 f 0); sizes thorp:7 hamlet:30 village:69 town:33 city:13 metropolis:2; crisis towns 88
+L10r body row removed (religious) :: prints 5 in 4 towns; true 5 false 0; new 5 (t 5 f 0); sizes village:1 town:3 metropolis:1; crisis towns 3
+L11a LEADING merchants rung "though other powers set the course here" :: prints 43 in 34 towns; true 34 false 9; new 43 (t 34 f 9); sizes town:5 city:20 metropolis:18; crisis towns 29
+L11b local merchants "without yet being the dominant commercial voice" :: prints 98 in 76 towns; true 73 false 25; new 28 (t 27 f 1); sizes town:8 city:40 metropolis:50; crisis towns 67
+L11c clergy at the margins :: prints 130 in 104 towns; true 129 false 1; new 57 (t 57 f 0); sizes village:1 town:10 city:59 metropolis:60; crisis towns 84
+L11d lesser landed families :: prints 72 in 57 towns; true 72 false 0; new 63 (t 63 f 0); sizes town:3 city:2 metropolis:67; crisis towns 49
+L11e gentry "outpaced by merchant capital" :: prints 3 in 3 towns; true 0 false 3; new 0 (t 0 f 0); sizes town:3; crisis towns 3
+L11f nobles "competitive with merchant capital" :: prints 27 in 22 towns; true 13 false 14; new 0 (t 0 f 0); sizes city:9 metropolis:18; crisis towns 17
+L11g city watch rungs :: prints 183 in 139 towns; true 103 false 80; new 9 (t 7 f 2); sizes city:78 metropolis:105; crisis towns 111
+L11h criminal "present in council discussions" :: prints 63 in 49 towns; true 49 false 14; new 1 (t 1 f 0); sizes town:6 city:36 metropolis:21; crisis towns 40
+L11i criminal Minor rung where no council :: prints 19 in 16 towns; true 16 false 3; new 16 (t 16 f 0); sizes city:9 metropolis:10; crisis towns 10
+L12 sovereign wartime well-supplied :: prints 1 in 1 towns; true 1 false 0; new 0 (t 0 f 0); sizes metropolis:1; crisis towns 1
+L4 SUPPLY impaired.long: Be the one who kept the work at {house} alive through the shortage. :: prints 46 in 43 towns; true 46 false 0; new 46 (t 46 f 0); sizes town:4 city:7 metropolis:35; crisis towns 39
+L4 SUPPLY impaired.long: Bring the work at {house} back to its full strength, and keep it there :: prints 47 in 41 towns; true 47 false 0; new 47 (t 47 f 0); sizes village:1 town:3 city:11 metropolis:32; crisis towns 37
+L4 SUPPLY impaired.long: Build up stores large enough that the work at {house} never stops for  :: prints 65 in 55 towns; true 65 false 0; new 65 (t 65 f 0); sizes village:1 town:6 city:13 metropolis:45; crisis towns 45
+L4 SUPPLY impaired.long: Change the way the work is done at {house}, so it needs less of what k :: prints 53 in 45 towns; true 53 false 0; new 52 (t 52 f 0); sizes town:5 city:17 metropolis:31; crisis towns 40
+L4 SUPPLY impaired.long: Find a lasting replacement for what the work at {house} lost in the sh :: prints 37 in 34 towns; true 37 false 0; new 37 (t 37 f 0); sizes city:9 metropolis:28; crisis towns 30
+L4 SUPPLY impaired.long: Make the work at {house} safe from the next shortage, with more than o :: prints 44 in 41 towns; true 44 false 0; new 44 (t 44 f 0); sizes village:1 town:1 city:12 metropolis:30; crisis towns 37
+L4 SUPPLY impaired.short: Bring in from outside what the work at {house} can no longer get close :: prints 29 in 25 towns; true 29 false 0; new 29 (t 29 f 0); sizes hamlet:1 town:1 city:3 metropolis:24; crisis towns 23
+L4 SUPPLY impaired.short: Find a new source of supply for the work at {house} before what is lef :: prints 28 in 26 towns; true 28 false 0; new 28 (t 28 f 0); sizes town:3 city:7 metropolis:18; crisis towns 23
+L4 SUPPLY impaired.short: Find whoever can still supply {house}, and pay them what they ask. :: prints 44 in 37 towns; true 44 false 0; new 44 (t 44 f 0); sizes town:5 city:5 metropolis:34; crisis towns 32
+L4 SUPPLY impaired.short: Keep the work going at {house} through the season, whatever it takes. :: prints 69 in 54 towns; true 69 false 0; new 68 (t 68 f 0); sizes hamlet:1 village:1 town:7 city:13 metropolis:47; crisis towns 52
+L4 SUPPLY impaired.short: Ration what is left at {house} so the work lasts until new supply arri :: prints 62 in 52 towns; true 62 false 0; new 61 (t 61 f 0); sizes village:2 town:5 city:16 metropolis:39; crisis towns 47
+L4 SUPPLY impaired.short: Waste nothing at {house} while the supply is short. :: prints 53 in 46 towns; true 53 false 0; new 53 (t 53 f 0); sizes town:6 city:15 metropolis:32; crisis towns 40
+L4-6 SUPPLY house slot fills :: prints 3710 in 472 towns; true 3710 false 0; new 1543 (t 1543 f 0); sizes hamlet:73 village:86 town:417 city:1337 metropolis:1797; crisis towns 402
+L5 SUPPLY dependency.long: Build up a store of {resource} at {house} large enough to last two bad :: prints 132 in 105 towns; true 132 false 0; new 2 (t 2 f 0); sizes hamlet:2 village:2 town:13 city:41 metropolis:74; crisis towns 91
+L5 SUPPLY dependency.long: Free {house} from depending on a single source of {resource}. :: prints 120 in 98 towns; true 120 false 0; new 1 (t 1 f 0); sizes town:22 city:41 metropolis:57; crisis towns 80
+L5 SUPPLY dependency.long: Learn to do the work at {house} with half as much {resource}. :: prints 135 in 114 towns; true 135 false 0; new 5 (t 5 f 0); sizes hamlet:1 village:1 town:15 city:46 metropolis:72; crisis towns 97
+L5 SUPPLY dependency.long: Make sure the work at {house} never stops for want of {resource}. :: prints 134 in 111 towns; true 134 false 0; new 2 (t 2 f 0); sizes hamlet:1 village:1 town:17 city:32 metropolis:83; crisis towns 88
+L5 SUPPLY dependency.long: Own a share in the supply of {resource}, so the work at {house} can ne :: prints 133 in 110 towns; true 133 false 0; new 4 (t 4 f 0); sizes village:1 town:19 city:47 metropolis:66; crisis towns 95
+L5 SUPPLY dependency.long: Secure a steady supply of {resource} for {house} that no one else can  :: prints 136 in 110 towns; true 136 false 0; new 4 (t 4 f 0); sizes hamlet:3 town:15 city:53 metropolis:65; crisis towns 89
+L5 SUPPLY dependency.short: Buy {resource} at the market in bulk this season, while the price is s :: prints 117 in 89 towns; true 117 false 0; new 1 (t 1 f 0); sizes town:17 city:43 metropolis:57; crisis towns 73
+L5 SUPPLY dependency.short: Find a second supplier of {resource}, so one lost cart cannot stop the :: prints 124 in 105 towns; true 124 false 0; new 2 (t 2 f 0); sizes hamlet:2 town:24 city:41 metropolis:57; crisis towns 89
+L5 SUPPLY dependency.short: Find a way to make do with less {resource} at {house}. :: prints 125 in 107 towns; true 125 false 0; new 11 (t 11 f 0); sizes hamlet:1 town:17 city:51 metropolis:56; crisis towns 91
+L5 SUPPLY dependency.short: Keep {house} working through the season even if the supply of {resourc :: prints 140 in 114 towns; true 140 false 0; new 19 (t 19 f 0); sizes hamlet:3 town:21 city:52 metropolis:64; crisis towns 95
+L5 SUPPLY dependency.short: Lay in a season of {resource} at {house} while it can still be had. :: prints 114 in 101 towns; true 114 false 0; new 0 (t 0 f 0); sizes hamlet:3 town:17 city:36 metropolis:58; crisis towns 84
+L5 SUPPLY dependency.short: Learn who controls the supply of {resource}, and get on good terms wit :: prints 140 in 117 towns; true 140 false 0; new 20 (t 20 f 0); sizes hamlet:1 village:1 town:19 city:46 metropolis:73; crisis towns 101
+L6 SUPPLY expansion.long: Bring every step of the trade, from the first goods to the last, under :: prints 124 in 105 towns; true 124 false 0; new 122 (t 122 f 0); sizes hamlet:3 village:5 town:12 city:54 metropolis:50; crisis towns 87
+L6 SUPPLY expansion.long: Build the work at {house} into a trade that will feed the next generat :: prints 130 in 108 towns; true 130 false 0; new 130 (t 130 f 0); sizes hamlet:5 village:5 town:9 city:52 metropolis:59; crisis towns 88
+L6 SUPPLY expansion.long: Carry the name of {house} beyond this place, so people come from far o :: prints 115 in 98 towns; true 115 false 0; new 8 (t 8 f 0); sizes hamlet:4 village:3 town:10 city:59 metropolis:39; crisis towns 86
+L6 SUPPLY expansion.long: Double the work at {house}, and find the hands to do it. :: prints 128 in 108 towns; true 128 false 0; new 10 (t 10 f 0); sizes hamlet:6 village:3 town:14 city:49 metropolis:56; crisis towns 91
+L6 SUPPLY expansion.long: Grow the work at {house} until no one nearby can match it. :: prints 113 in 87 towns; true 113 false 0; new 9 (t 9 f 0); sizes hamlet:2 village:2 town:12 city:56 metropolis:41; crisis towns 73
+L6 SUPPLY expansion.long: Make the work at {house} the thing this place is known for. :: prints 144 in 122 towns; true 144 false 0; new 142 (t 142 f 0); sizes hamlet:8 village:9 town:11 city:65 metropolis:51; crisis towns 105
+L6 SUPPLY expansion.short: Get the most out of the work at {house} while it runs well, and put th :: prints 116 in 103 towns; true 116 false 0; new 116 (t 116 f 0); sizes hamlet:5 village:13 town:12 city:50 metropolis:36; crisis towns 85
+L6 SUPPLY expansion.short: Grow the work at {house} by one more pair of hands, then another. :: prints 121 in 100 towns; true 121 false 0; new 7 (t 7 f 0); sizes hamlet:3 village:6 town:15 city:49 metropolis:48; crisis towns 81
+L6 SUPPLY expansion.short: Look for a way to do more at {house} with the same hands. :: prints 169 in 129 towns; true 169 false 0; new 168 (t 168 f 0); sizes hamlet:7 village:13 town:13 city:70 metropolis:66; crisis towns 109
+L6 SUPPLY expansion.short: Take on more hands at {house}, and keep them busy all season. :: prints 115 in 92 towns; true 115 false 0; new 115 (t 115 f 0); sizes village:8 town:13 city:49 metropolis:45; crisis towns 70
+L6 SUPPLY expansion.short: Train an apprentice at {house} to take on part of the work. :: prints 156 in 118 towns; true 156 false 0; new 56 (t 56 f 0); sizes hamlet:6 village:3 town:17 city:65 metropolis:65; crisis towns 103
+L6 SUPPLY expansion.short: Win new business for {house} beyond the people who already come. :: prints 152 in 113 towns; true 152 false 0; new 15 (t 15 f 0); sizes hamlet:5 village:4 town:17 city:62 metropolis:64; crisis towns 93
+L7 charter goal printed :: prints 3989 in 474 towns; true 3989 false 0; new 179 (t 179 f 0); sizes thorp:4 hamlet:46 village:149 town:390 city:1395 metropolis:2005; crisis towns 401
+L7r charter refused: what prints in its place :: prints 597 in 322 towns; true 597 false 0; new 597 (t 597 f 0); sizes thorp:45 hamlet:21 village:20 town:52 city:193 metropolis:266; crisis towns 276
+L8 persons-held line printed :: prints 15 in 12 towns; true 15 false 0; new 0 (t 0 f 0); sizes town:2 city:5 metropolis:8; crisis towns 10
+L8r persons-held replaced (presentation) :: prints 28 in 28 towns; true 28 false 0; new 28 (t 28 f 0); sizes town:1 city:8 metropolis:19; crisis towns 24
+L8r persons-held replaced (secret) :: prints 133 in 112 towns; true 133 false 0; new 133 (t 133 f 0); sizes town:10 city:41 metropolis:82; crisis towns 92
+L9a "Leads a squad…" row :: prints 36 in 35 towns; true 36 false 0; new 3 (t 3 f 0); sizes hamlet:6 village:8 town:15 city:6 metropolis:1; crisis towns 31
+L9b "Commands those under arms…" row :: prints 145 in 143 towns; true 144 false 1; new 78 (t 77 f 1); sizes hamlet:2 village:5 town:33 city:54 metropolis:51; crisis towns 104

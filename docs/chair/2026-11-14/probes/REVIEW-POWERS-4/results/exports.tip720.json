@@ -1,0 +1,87 @@
+{
+ "claim rungs (L11) · pdf": {
+  "prints": 3236,
+  "towns": 237,
+  "ex": [
+   "r2r-village-12: Clergy are present but operate at the margins",
+   "r2r-village-15: Clergy are present but operate at the margins",
+   "r2r-village-26: Clergy are present but operate at the margins",
+   "r2r-town-9: Merchants with local reach; a consistent civic presence, though other powers set the course here"
+  ]
+ },
+ "claim rungs (L11) · foundry": {
+  "prints": 527,
+  "towns": 237,
+  "ex": [
+   "r2r-village-12: Clergy are present but operate at the margins",
+   "r2r-village-15: Clergy are present but operate at the margins",
+   "r2r-village-26: Clergy are present but operate at the margins",
+   "r2r-town-9: Merchants with local reach; a consistent civic presence, though other powers set the course here"
+  ]
+ },
+ "SUPPLY goals (L4-L6) · pdf": {
+  "prints": 14150,
+  "towns": 462,
+  "ex": [
+   "r2r-hamlet-2: Bring every step of the trade, from the first goods to the last",
+   "r2r-hamlet-5: Bring every step of the trade, from the first goods to the last",
+   "r2r-hamlet-8: the work at the fisher's landing the thing this place is known for",
+   "r2r-hamlet-10: Bring every step of the trade, from the first goods to the last"
+  ]
+ },
+ "SUPPLY goals (L4-L6) · foundry": {
+  "prints": 222,
+  "towns": 187,
+  "ex": [
+   "r2r-hamlet-2: Bring every step of the trade, from the first goods to the last",
+   "r2r-hamlet-8: the work at the fisher&#39",
+   "r2r-hamlet-12: the work at the alehouse",
+   "r2r-hamlet-13: the work at the fisher&#39"
+  ]
+ },
+ "army vignette (L12) · pdf": {
+  "prints": 0,
+  "towns": 0,
+  "ex": []
+ },
+ "army vignette (L12) · foundry": {
+  "prints": 0,
+  "towns": 0,
+  "ex": []
+ },
+ "structural rows (L9-L10) · pdf": {
+  "prints": 1404,
+  "towns": 244,
+  "ex": [
+   "r2r-hamlet-6: Leads a squad",
+   "r2r-hamlet-10: Leads a squad",
+   "r2r-hamlet-11: Leads a squad",
+   "r2r-hamlet-16: Leads a squad"
+  ]
+ },
+ "structural rows (L9-L10) · foundry": {
+  "prints": 0,
+  "towns": 0,
+  "ex": []
+ },
+ "persons-held (L8) · pdf": {
+  "prints": 0,
+  "towns": 0,
+  "ex": []
+ },
+ "persons-held (L8) · foundry": {
+  "prints": 0,
+  "towns": 0,
+  "ex": []
+ },
+ "honorifics (L1-L3) · pdf": {
+  "prints": 0,
+  "towns": 0,
+  "ex": []
+ },
+ "honorifics (L1-L3) · foundry": {
+  "prints": 0,
+  "towns": 0,
+  "ex": []
+ }
+}
