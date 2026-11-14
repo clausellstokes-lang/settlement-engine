@@ -62,10 +62,10 @@ export const ARRIVAL_SENSES = Object.freeze([
       () => 'A smith quenches a blade in a hiss of steam, and the sound follows you down the lane.',
     ],
     dominant: [ // W2-FIX-DATA-3 (REVIEW-W2A-3 #366): these four lines speak of many forges; a village or smaller has one (a hamlet's part-time smith, a village's blacksmith), so they declare tier: ≥ town. A one-forge place then draws none and its sense beat is left out (the redraw finds no clean line and draws nothing more); a line of its own would lengthen the pool and re-deal the arrival in every town that draws it (measured: 44 of 720)
-      { text: (n) => `The hammering echoes through all of ${n}, and the place plainly lives by its forges.`, needs: ['tier: ≥ town'] },
-      { text: () => 'Forge smoke hangs over everything here, and the ring of the anvils never quite stops.', needs: ['tier: ≥ town'] },
-      { text: () => 'Racks of new ironwork stand outside the workshops, waiting for the carts.', needs: ['tier: ≥ town'], excludes: ['crisis: under_siege'] }, // W2-FIX-DATA: the carts a siege stops (c22)
-      { text: (n) => `${n} lives by its forges: the clang of iron is in every lane.`, needs: ['tier: ≥ town'] },
+      { text: (n) => `The hammering of the forges echoes through all of ${n}.`, needs: ['institution: smith', 'tier: ≥ town'] }, // W2-FIX-DATA-12 item 3: no claim the place lives by them (false in 16 of 16: metalwork 3 to 12% of the income, never first)
+      { text: () => 'Forge smoke hangs over everything here, and the ring of the anvils never quite stops.', needs: ['institution: smith', 'tier: ≥ town'] }, // W2-FIX-DATA-12 item 3: the anvils stand on the roster (a town with only a Smelter printed it)
+      { text: () => 'Racks of new ironwork stand outside the workshops, waiting for the carts.', needs: ['institution: smith', 'tier: ≥ town'], excludes: ['crisis: under_siege'] }, // W2-FIX-DATA: the carts a siege stops (c22)
+      { text: (n) => `The clang of iron from the smithies carries down the lanes of ${n}.`, needs: ['institution: smith', 'tier: ≥ town'] }, // W2-FIX-DATA-12 item 3 (the reader's A04): no claim the place lives by them, and a smith stands
     ] },
   // ARMS speaks only where the settlement EXPORTS weapons or armour (no `lines`, so it is never a candidate on a
   // smithy alone): the owner's own example, "if a big part of their output is in making military weapons".
@@ -77,7 +77,7 @@ export const ARRIVAL_SENSES = Object.freeze([
       // W2-FIX-DATA-4 (REVIEW-W2A-3 #184; ROUND-3 #600): the arms key is reached by a bowyer or a trade word with no smith on the roster, and
       // three of its lines speak of many forges and workshops: each needs a smith, and the three a town (a hamlet has one part-time smith)
       { text: (n) => `The hammering echoes throughout ${n}, and most of it is the sound of blades being made.`, needs: ['institution: smith', 'tier: ≥ town'], crisis: ['any'] },
-      { text: () => 'Racks of spearheads and helms stand outside the workshops, waiting for the carts.', needs: ['institution: smith', 'tier: ≥ town'], crisis: ['any'] },
+      { text: () => 'Racks of spearheads and helms stand outside the workshops, waiting for the carts.', needs: ['institution: smith', 'tier: ≥ town'], excludes: ['crisis: under_siege'], crisis: ['any'] }, // W2-FIX-DATA-12 item 5 (the reader's A06): the twin carries its siblings' siege exclusion: no cart reaches a besieged town
       { text: () => 'Every forge you pass is making something meant for a war, and the carts on the road out are full of it.', needs: ['institution: smith', 'tier: ≥ town'], excludes: ['crisis: under_siege'], crisis: ['wartime', 'insurgency'] }, // W2-FIX-DATA-5 (ww-1157): a war the record holds
       { text: () => 'A smith tests a new blade against a post, frowns, and sends it back to the fire.', needs: ['institution: smith'], crisis: ['any'] },
     ] },
@@ -355,7 +355,7 @@ export const ARRIVAL_PEOPLE = Object.freeze({
     { text: () => 'Two citizens argue a point of law loudly enough for a crowd to gather.', excludes: ['crisis: occupied'], crisis: ['any'] },
     { text: () => 'A notice of the next assembly is chalked on a wall, and someone has corrected the spelling.', excludes: ['crisis: occupied'], crisis: ['any'] },
     { text: () => 'A money changer sits at his table with coins from many mints.', needs: ['institution: bank'], crisis: ['any'] }, // COHERENCE-PRESUME: it printed in towns with no money changer
-    { text: () => 'A patron stands drinks at a wine shop, and makes sure everyone knows who is paying.', crisis: ['any'] },
+    { text: () => 'A patron stands drinks at a wine shop, and makes sure everyone knows who is paying.', needs: ['institution: tavern', 'tier: ≥ village'], crisis: ['any'] }, // W2-FIX-DATA-12 (REVIEW-R2-CODE-A, the chair's 10:57): a wine shop stands on the roster, and a thorp or hamlet has none to stand drinks in
   ],
   mixed: [
     { text: () => 'You hear three languages in as many steps, and nobody seems to find it strange.', crisis: ['any'] },

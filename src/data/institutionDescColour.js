@@ -261,8 +261,6 @@ export const DESC_VARIANT_COLOUR_DECLARATIONS = Object.freeze({
   "A guild of master clothiers who make up finished cloth into everything from labourers' wear to noble livery.": COLOUR,
   "Meat dressed and sold, under close regulation.": COLOUR,
   "The butchering trade, strictly overseen.": COLOUR,
-  "Charcoal furnaces reduce raw ore to refined metal. It stands between the mine and the smithy.": COLOUR,
-  "Refines crude ore into workable metal over charcoal fire. The industrial step from what the mine yields to what the smith uses.": COLOUR,
   "Candles from tallow and beeswax, and soap and rope besides from much the same stock. Without it there is no light.": COLOUR,
   "Makes candles of tallow and beeswax, and turns like materials to soap and rope. The town depends on it for lighting.": COLOUR,
   "Glass worked on a small scale: bottles, window panes, goblets. It calls for silica sand, potash, and a skilled hand at the furnace.": COLOUR,

@@ -42,7 +42,7 @@ import { checkInstCompat } from '../structuralValidator.js';
 import { resolveGenerationWorldLaw } from '../generationContext.js';
 import { nativeSemanticNames } from '../../domain/content/customContentSemanticAuthority.js';
 import { defenseWordsFindings } from '../../domain/coherence/defenseWordsFindings.js'; // F1: one line
-import { CULTURE_PROFILES, resolveCultureProfileKey } from '../../data/cultureProfiles.js';
+import { CULTURE_PROFILES, architecturalDetailRefused, resolveCultureProfileKey } from '../../data/cultureProfiles.js';
 import { speakTierNoun } from '../../domain/display/stateProse/stateProseKernel.js';
 import { tierNounFor } from '../../domain/display/stateProse/weaveBlock.js';
 import { marketOf } from '../../domain/facts/market.js';
@@ -312,9 +312,7 @@ export function composeArrivalScene(settlement) {
       // palisade, a river, a bathhouse). Refused there (and not already redrawn for a market it lacks), the sight beat is
       // left out: no redraw, so no draw is added and no later beat moves (a redraw would land small places on a line their
       // size makes false).
-      const materializedRow = materialized ? details.find((d) => typeof d === 'object' && d !== null && String(textOf(d)).trim() === materialized) : undefined;
-      const materializedRefused = materializedRow !== undefined
-        && !declarationAdmits(declarationOf(materializedRow), /** @type {any} */ (facts()), { crisisScoped: false }).admitted;
+      const materializedRefused = architecturalDetailRefused(materialized, profileKey, facts); // W2-FIX-DATA-12 item 2: the one reading, the PDF's too
       const drawnDetail = (!materialized || !speaks(materialized)) && details.length
         ? drawAdmitted(details, { poolId: `CULTURE_PROFILES.${profileKey}.architecturalDetails`, scoped: false, facts, speaks: (d) => speaks(textOf(d)), cleanOnly: Boolean(materialized) })
         : null;
