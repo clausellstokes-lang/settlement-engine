@@ -29,6 +29,7 @@ THE CHAIR'S RULINGS SENT AFTER THE BRIEF: none so far.
 |---|---|---|---|---|---|---|
 | 1 | r2-code-a-2026-11-13 | e5064e855 (15:48) | bc9194bf7 (JOIN-4 merge 3) | 1a039553d | none | — |
 | 2 | w2-fix-data-2026-11-13 | e6e1893f4 (15:52) | 8e814883c (JOIN-4 merge 5) | e9601b6b3 | none | `.lighting-census-baseline.json` (the lane's re-take 6f86693a5 yielded in its own merge 81df6fb80) |
+| 3 | w2-write-2026-11-13 (the corpus) | 9b08e5b69 (15:55) | 525541b42 (JOIN-4 merge 6) | 88bfa6885 | none | lane-only, taken from the lane: `wiring-census.json` (re-take e28e1305f), `presumedThings.widened.register.json` (b159401a1), `defense.generated.js` (leaf; (g) below) |
 
 ## 3. Every code resolution
 
