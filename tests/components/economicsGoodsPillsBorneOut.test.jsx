@@ -54,7 +54,7 @@ describe('the goods pills print only where the record bears them out (item 2)', 
     expect(roster(town).some((n) => /print|scriptor|librar|bookbind/i.test(n)), 'anchored: no house makes books').toBe(false);
     const exports = pillsUnder(town, 'Exports');
     expect(exports).toContain('Glassware');
-    expect(exports).not.toContain('Books and manuscripts');
+    expect(exports).not.toContain('Books and manuscripts'); // anchored: the line above finds Glassware among the same pills
     expect(exports).toContain('Rare spices and exotic dyes (transit)');
   }, 60000);
 
@@ -62,23 +62,27 @@ describe('the goods pills print only where the record bears them out (item 2)', 
     const town = birthApp('rww-village-famine-1');
     expect(town.economicState.localProduction, 'anchored: the record lists them').toEqual(expect.arrayContaining(['Guild-manufactured goods', 'Barrels and containers', 'Fine wool cloth']));
     const local = pillsUnder(town, 'Produced locally');
-    for (const good of ['Guild-manufactured goods', 'Barrels and containers', 'Fine wool cloth']) expect(local, good).not.toContain(good);
+    expect(local, 'the list prints').toContain('Preserved foods');
+    for (const good of ['Guild-manufactured goods', 'Barrels and containers', 'Fine wool cloth']) expect(local, good).not.toContain(good); // anchored: the line above
   }, 60000);
 
   test('a famine that failed the grain mills no flour and grows no grain (rww-metropolis-famine-1)', () => {
     const town = birthApp('rww-metropolis-famine-1');
     expect(town.economicState.foodSecurity.foodRecord.failedSource, 'anchored: the grain failed').toBe('grain');
     expect(town.economicState.primaryExports, 'anchored: the record exports flour').toContain('Milled flour');
-    expect(pillsUnder(town, 'Exports')).not.toContain('Milled flour');
+    expect(pillsUnder(town, 'Exports'), 'the exports print').toContain('Quarried stone');
+    expect(pillsUnder(town, 'Exports')).not.toContain('Milled flour'); // anchored: the line above finds Quarried stone among the same pills
     const local = pillsUnder(town, 'Produced locally').map((p) => p.toLowerCase());
-    expect(local).not.toContain('grain');
-    expect(local).not.toContain('flour');
+    expect(local, 'the list prints').toContain('stone');
+    expect(local).not.toContain('grain'); // anchored: the line above finds stone among the same pills
+    expect(local).not.toContain('flour'); // anchored: stone was found among the same pills two lines above
   }, 60000);
 
   test('a key that is not a good never prints as one (rr2s-hamlet-under_siege-rand-1, #196: "Date export")', () => {
     const town = birthApp('rr2s-hamlet-under_siege-rand-1');
     expect(town.economicState.localProduction, 'anchored').toContain('Date export');
-    expect(pillsUnder(town, 'Produced locally')).not.toContain('Date export');
+    expect(pillsUnder(town, 'Produced locally'), 'the list prints').toContain('Honey and beeswax');
+    expect(pillsUnder(town, 'Produced locally')).not.toContain('Date export'); // anchored: the line above finds Honey and beeswax
   }, 60000);
 
   test('guard: a made good whose house stands still prints (rww-town-slave_revolt-1: an Apothecary, a guild)', () => {

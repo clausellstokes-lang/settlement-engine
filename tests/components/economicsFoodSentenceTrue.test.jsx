@@ -54,7 +54,7 @@ describe('the food sentence is true of the figures and the town (item 3)', () =>
       expect(Math.round((100 * fb.dailyProduction) / fb.dailyNeed), `${seed} anchored`).toBeGreaterThanOrEqual(40);
       const t = foodSentence(town);
       expect(t, seed).toContain('grows about two parts in five of what it eats');
-      expect(t, seed).not.toContain('about a third');
+      expect(t, seed).not.toContain('about a third'); // anchored: the line above finds the sentence's share
     }
   }, 60000);
 
@@ -62,7 +62,7 @@ describe('the food sentence is true of the figures and the town (item 3)', () =>
     const town = birthApp('rww-metropolis-under_siege-1'); const fb = fbOf(town);
     expect(fb.magicFoodOffset, 'anchored').toBeGreaterThan(2 * fb.dailyProduction);
     const t = foodSentence(town);
-    expect(t).not.toContain('a little more');
+    expect(t).not.toContain('a little more'); // anchored: the next line finds the sentence's provision clause
     expect(t).toMatch(/provision makes up about a third of what it eats/);
   }, 60000);
 
@@ -70,7 +70,8 @@ describe('the food sentence is true of the figures and the town (item 3)', () =>
     const hamlet = birthApp('rr2s-hamlet-plague_onset-rand-1');
     expect(hamlet.economicState.tradeAccess, 'anchored: a port').toBe('port');
     expect(hamlet.institutions.some((/** @type {any} */ i) => /dock|wharf|quay|harbou?r/i.test(i.name)), 'anchored: no wharf').toBe(false);
-    expect(foodSentence(hamlet)).not.toContain('ships');
+    expect(foodSentence(hamlet), 'the hamlet\'s food sentence prints').toMatch(/^(?:What is grown here|No food comes into |\S.* grows )/);
+    expect(foodSentence(hamlet)).not.toContain('ships'); // anchored: the line above finds the same sentence
     expect(foodSentence(birthApp('fr4-town-famine-1'))).toContain('ships bring in');
   }, 60000);
 
@@ -78,7 +79,7 @@ describe('the food sentence is true of the figures and the town (item 3)', () =>
     const town = birthApp('fr4-town-under_siege+famine-5');
     expect(fbOf(town).importCoverage, 'anchored: the record still counts an import').toBeGreaterThan(0);
     const t = foodSentence(town);
-    expect(t).not.toMatch(/bring in|brings in/);
+    expect(t).not.toMatch(/bring in|brings in/); // anchored: the next line finds "by trade" in the same sentence
     expect(t).toContain('by trade');
   }, 60000);
 

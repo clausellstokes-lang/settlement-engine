@@ -74,7 +74,8 @@ describe('the food balance row reads the food record and adds up as printed (ite
     const town = birthApp('rr2s-town-under_siege-rand-1');
     expect(town.economicState.foodSecurity.importCoverage, 'anchored: the record imports nothing').toBe(0);
     const r = rowOf(town);
-    expect(r.text).not.toContain('imported');
+    expect(r.text, 'the row prints').toMatch(/^Production: [\d,]+ lbs\/day/);
+    expect(r.text).not.toContain('imported'); // anchored: the line above finds the row
     expect(r.short, r.text).toBe(town.economicState.foodSecurity.dailyNeed - town.economicState.foodSecurity.dailyProduction);
     expect(addsUp(r)).toBe(r.need);
   }, 60000);
@@ -84,7 +85,8 @@ describe('the food balance row reads the food record and adds up as printed (ite
     expect(town.economicState.foodSecurity.importCoverage, 'anchored: the record still counts an import').toBeGreaterThan(0);
     expect(town.economicState.tradeAccess, 'anchored: no port').not.toBe('port');
     const r = rowOf(town);
-    expect(r.text).not.toContain('imported');
+    expect(r.text, 'the row prints').toMatch(/^Production: [\d,]+ lbs\/day/);
+    expect(r.text).not.toContain('imported'); // anchored: the line above finds the row
     expect(addsUp(r), r.text).toBe(r.need);
   }, 60000);
 
@@ -93,7 +95,8 @@ describe('the food balance row reads the food record and adds up as printed (ite
     expect(fs.deficit, 'anchored: the record has no shortfall').toBe(0);
     expect(fs.dailyProduction + fs.importCoverage + fs.magicOffset, 'anchored: its rounded parts fall a pound short').toBe(fs.dailyNeed - 1);
     const r = rowOf(town);
-    expect(r.text).not.toContain('imported');
-    expect(r.text).not.toContain('Short');
+    expect(r.text, 'the row prints').toMatch(/^Production: [\d,]+ lbs\/day/);
+    expect(r.text).not.toContain('imported'); // anchored: the line above finds the row
+    expect(r.text).not.toContain('Short'); // anchored: the row was found two lines above
   }, 60000);
 });

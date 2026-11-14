@@ -57,7 +57,8 @@ describe('the clergy\'s provision reads the defence\'s tradition (item 5)', () =
     const divine = notesOf(town, 'divine');
     expect(divine, 'anchored: the record writes divine notes').toContain('Blessed stores; divine provision fills the gap');
     const t = tabText(town);
-    for (const n of divine) expect(t, n).not.toContain(n);
+    expect(t, 'the same cards print: the card whose note left').toContain('Divine & Magical Healing');
+    for (const n of divine) expect(t, n).not.toContain(n); // anchored: the line above finds the note's own card in this text
   }, 60000);
 
   test('a town whose clergy have powers keeps its divine notes (rww-metropolis-calm-1), and a druid\'s note stands beside a denied divine one (rww-metropolis-infiltrated-1)', () => {
@@ -70,7 +71,8 @@ describe('the clergy\'s provision reads the defence\'s tradition (item 5)', () =
     const mixed = birthApp('rww-metropolis-infiltrated-1');
     expect([defenceHoldsDivine(mixed), defenceHoldsDruidic(mixed)], 'anchored').toEqual([false, true]);
     const tm = tabText(mixed);
-    for (const n of notesOf(mixed, 'divine')) expect(tm, n).not.toContain(n);
+    expect(tm, 'the druid\'s note prints in the same text').toContain('Druidic cultivation supplements depleted farmland');
+    for (const n of notesOf(mixed, 'divine')) expect(tm, n).not.toContain(n); // anchored: the line above finds a druid's note in this text
     for (const n of notesOf(mixed, 'druid')) expect(tm, n).toContain(n);
   }, 120000);
 
@@ -78,7 +80,9 @@ describe('the clergy\'s provision reads the defence\'s tradition (item 5)', () =
     for (const seed of ['rr2s-metropolis-calm-rand-1', 'rww-metropolis-famine-1', 'rww-city-under_siege-1']) {
       const town = birthApp(seed);
       expect((town.economicState.activeChains || []).some((/** @type {any} */ c) => c.magicRecovery), `anchored: ${seed} carries a recovery fraction`).toBe(true);
-      expect(tabText(town), seed).not.toMatch(/\d+% recovery/);
+      const recovering = (town.economicState.activeChains || []).find((/** @type {any} */ c) => c.magicRecovery);
+      expect(tabText(town), `${seed}: the recovering chain's card prints`).toContain(recovering.label);
+      expect(tabText(town), seed).not.toMatch(/\d+% recovery/); // anchored: the line above finds the recovering card in this text
     }
   }, 120000);
 
@@ -89,7 +93,7 @@ describe('the clergy\'s provision reads the defence\'s tradition (item 5)', () =
     expect(tabText(town)).toContain('by divine provision');
     const denied = { ...town, defenseProfile: { ...town.defenseProfile, traditions: { ...town.defenseProfile.traditions, hasDivine: false } } };
     const t = tabText(denied);
-    expect(t).not.toMatch(/divine provision/i);
+    expect(t).not.toMatch(/divine provision/i); // anchored: the next line finds the row's own figure in this text
     expect(t, 'the figure stands').toContain(`+ ${town.economicState.foodSecurity.magicOffset.toLocaleString('en-US')} by magical provision`);
   }, 60000);
 });
