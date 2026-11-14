@@ -1748,14 +1748,16 @@ export const HISTORY_DESC_SIBLINGS = Object.freeze({
   ]),
   // W2-FIX-DATA-13 (2026-11-14; the chair's 12:11 ruling on REVIEW-W2-FIX-DATA-4's HIGH, r2r-thorp-58 and r2s-indebted-thorp-0):
   // QUARTERS AND DISTRICTS BELONG TO A TOWN OR LARGER, whatever the head count. The two lasting effects of the event
-  // tables that name them (the migration's districts, the economic divide's quarters) take the size; no twin is written.
-  // A refused effect resolves draw-free (`historyGenerator.js :: sizedLastingEffects`) to the template's next effect
-  // whose own test holds, else silence; a tension, which prints its template's whole list, leaves it out.
+  // tables that name them (the migration's districts, the economic divide's quarters) take the size. The chair's 12:50
+  // ruling: A TIER TWIN where the event can be said of a small place in its own words, ELSE SILENCE; resolved draw-free
+  // (`generators/history/sizedLastingEffects.js`). VETOABLE wording (the owner's).
   "Newcomer and old-family districts remain socially distinct": Object.freeze([
     Object.freeze({ text: "Newcomer and old-family districts remain socially distinct", needs: Object.freeze(['tier: ≥ town']) }),
+    Object.freeze({ text: "Newcomers and the old families still keep apart", twinOf: "Newcomer and old-family districts remain socially distinct", needs: Object.freeze(['tier: ≤ village']) }),
   ]),
   "The merchant quarter and the labourers' quarter remain walled apart": Object.freeze([
     Object.freeze({ text: "The merchant quarter and the labourers' quarter remain walled apart", needs: Object.freeze(['tier: ≥ town']) }),
+    Object.freeze({ text: "The merchant families and the labouring families still keep apart", twinOf: "The merchant quarter and the labourers' quarter remain walled apart", needs: Object.freeze(['tier: ≤ village']) }),
   ]),
 });
 

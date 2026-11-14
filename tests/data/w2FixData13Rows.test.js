@@ -54,6 +54,7 @@ describe('W2-FIX-DATA-13: the measured rows in the data lane\'s files', () => {
       const town = bornCensus(seed);
       const effects = ['historicalEvents', 'currentTensions'].flatMap((k) => (town.history?.[k] || []).flatMap((/** @type {any} */ e) => e.lastingEffects || []));
       expect(effects.filter((line) => SMALL.test(String(line))), `${seed} (${town.tier})`).toEqual([]);
+      expect(effects.some((line) => /^(Newcomers and the old families|The merchant families and the labouring families) still keep apart$/.test(String(line))), `${seed} keeps the event's effect in its own words`).toBe(true);
     }), 'no lasting effect below a town names a district, a quarter or a ward');
     const guard = JSON.stringify(bornCensus('r2r-town-1').history);
     expect(guard).toContain('Newcomer and old-family districts remain socially distinct');
