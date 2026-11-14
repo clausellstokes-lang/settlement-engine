@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "6eb0dcbda227077a5a664392b5ba8340909b1825",
+  "measuredAtSha": "6d462720515a6c14645309de2e5d75c60bff9363",
   "measuredBy": "R3-CODE-C-6",
   "date": "2026-11-14",
-  "note": "round three code lane after merging the line at 976db5b19: the lane brings five test files (plagueVantageQuarantine, dailyLifeGrammar, embattledReasonNoSlider, fenceWordOfMouthTavern, occupierRelationLine) and its titles",
-  "files": 3250,
+  "note": "the guard file of the chair ruling of 2026-11-14 04:05Z, tests/generators/r3cRekeyedLinesTrue.test.js, and its three titles",
+  "files": 3251,
   "parked": 402,
-  "credited": 2848,
-  "titles": 29452,
-  "suiteTitles": 7988
+  "credited": 2849,
+  "titles": 29455,
+  "suiteTitles": 7990
 }
