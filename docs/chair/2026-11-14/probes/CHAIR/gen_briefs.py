@@ -6173,6 +6173,81 @@ SEATS2['SURFACES-3'] = dict(
 )
 
 
+SEATS2['R2-CODE-B-13'] = dict(
+    title="R2-CODE-B-13 · round two's second code lane, now holding the joined line: fifteen reds classed first, the journal's provenance tag (two towns in three), then its reader's rows",
+    branch='lane/r2-code-b-2026-11-13', tip='a86646b8', statement=False,
+    intro=("You are R2-CODE-B-13, the thirteenth seat on round two's second code lane of the settlement-engine integration program "
+           "(lane/r2-code-b-2026-11-13). The lane holds who is cast in a town's crisis, the people minted to stand in where the roster has "
+           "nobody, the Tonight sheet, and what those rows print on the Crisis tab, the hooks, the PDF and the Foundry journal. Its reader "
+           "read its stage NOT CLEAR (no HIGH of its own, fourteen MEDIUM). The twelfth seat cured the minted stand-in's words (141 towns "
+           "to 0) and four catalogue grades printed raw (618 to 0), and MERGED THE JOINED LINE INTO THE LANE to make a ruling where two "
+           "lanes' cures of one line had composed red (the plague hook: 39 of 39 green). It handed back with FIFTEEN TESTS RED IN EIGHT "
+           "FILES AFTER THAT MERGE, NOT CLASSED, and its list unfinished. Yours: the reds classed FIRST, then the widest row, then the "
+           "list. The lane lands as points on the joined line: NO whole suite, NO new statement: an ADDENDUM at the end."),
+    read=("1. docs/OPERATING_STANDARD.md (sections 1, 4 and 6: what efficiency may never buy; measure first; honesty) and CONTRIBUTING.md at your checkout.\n"
+          "2. On your lane, docs/chair/2026-11-13/R2-CODE-B-HANDBACK.md: ONLY \"# PART 12\" (from that line to the end, by script): the "
+          "rulings copied (THEY STAND, with PART 11's (a) to (n) that it points to); the cures as made (the form of a cure here); the "
+          "merge of the joined line (what conflicted and which side was taken); the plague hook as composed; THE FIFTEEN REDS BY FILE "
+          "AND TITLE; (d) as stopped and named; EVERY NEW OR CHANGED LINE; WHAT IS LEFT, in its order: YOUR LIST; the instruments. Of "
+          "PART 11 only the chair's rulings (a) to (n) and its WHAT IS LEFT, by heading.\n"
+          "3. THE READER'S VERDICT, for a row you are curing (`git fetch origin lane/review-r2-code-b-2026-11-14`; `git show "
+          "origin/lane/review-r2-code-b-2026-11-14:docs/chair/2026-11-14/REVIEW-R2-CODE-B-2026-11-14.md`: its section 9 (M1 to M14) and "
+          "section 4 (the plants), by heading); its probes (its 1,536 births) by git archive, run from outside every repository tree.\n"
+          "4. THE CENSUS'S ONE COMMAND (`git fetch origin lane/census-3-2026-11-14`; `git show "
+          "origin/lane/census-3-2026-11-14:docs/chair/2026-11-14/CENSUS-3-2026-11-14.md`: ONLY \"THE ONE COMMAND\" and \"PRECISION, AS "
+          "READ\", by script); its probes by git archive."),
+    first=("FIRST ACT. FULL HISTORY (`git fetch --depth=2147483647 origin lane/r2-code-b-2026-11-13 lane/join-2026-11-14 "
+           "lane/integration-2026-11-07`; `git rev-parse --is-shallow-repository` prints false). Read your lane's tip back from origin: it "
+           "was a86646b84 when this was written; any difference is a stop: tell the chair. Your lane ALREADY HOLDS the joined line as "
+           "merged at 0a296575c; merge its tip again ONLY if the merge is clean (`git merge --no-ff origin/lane/join-2026-11-14`; a "
+           "register, a baseline, a generated file or a bundle that conflicts takes THE JOINED LINE'S side), and say which tip you hold."),
+    work=("THE CHAIR'S RULINGS SINCE PART 12'S COPY (2026-11-14; each vetoable by the owner; copy them into your part):\n"
+          "(r1) THE FIFTEEN REDS ARE CLASSED BEFORE ANYTHING IS CURED. For each red test (file, title): run that FILE in three trees "
+          "(detached worktrees; node_modules linked where the lockfile is the same): your tip; the joined line's tip you hold "
+          "(0a296575c or the later one you merged); the lane's own tip before the merge (the first parent of the merge commit). "
+          "CLASS: (A) RED ON THE JOINED LINE TOO: carried: named with one line, NOT YOURS (a register's or another lane's); (B) RED AT "
+          "THE LANE'S OWN TIP BEFORE THE MERGE: the lane's own: yours to cure or re-key BY IDENTITY; (C) GREEN ON BOTH, RED TOGETHER: "
+          "COMPOSED AT YOUR MERGE: read the two intents; where both cures can stand each in its own case, make it so (as the plague "
+          "hook was made); where they cannot: STOP for that test, one message to the chair with the two intents in a sentence each. "
+          "THE TABLE (file, title, class, what was done) in your hand-back; ONE MESSAGE TO THE CHAIR with the counts by class.\n"
+          "(r2) REGISTERS ARE RE-DERIVED ONCE, AT THE CLOSE: a red that is a stale register (a census, a baseline, a bundle's meta) is "
+          "class (A) or NAMED: never re-taken, banked or hand-edited. A pin your cure moves is re-keyed BY IDENTITY in the same commit.\n"
+          "(r3) YOUR OWN WORKLIST BY WIDTH: after (r1), the census's one command at your tip with `--files` for this lane's files "
+          "(about 22 minutes of machine time): the writers of your files by false towns; TEN hit lines of a writer are READ where they "
+          "print before it is cured (a hit is a candidate, not a fault); the rows take their place among your list's by FALSE towns.\n"
+          "(r4) (d) STAYS STOPPED AS NAMED (the journal's power slot: its writer is the view model, 4,395 cards): it goes to the "
+          "exports' seats; not yours.\n"
+          "THE WORK, in this order, each cause its own commit, measured first on the reader's 1,536 births RE-BORN AT YOUR TIP (your "
+          "base counts are re-taken ONCE: the merge moved the pages), red first (a collected arm; a keep-guard and a taken-off guard; "
+          "each arm shown able to red by a plant you do not commit, made in a tree no suite or render is running in), pushed as made:\n"
+          "1. (r1), then the twin lines of the composed plague hook READ ON SIX SURFACES in three towns of each case (a roster healer; "
+          "a stand-in; nobody): PART 12 left that read owed.\n"
+          "2. THE WIDEST ROW OF YOUR READER: M10: the Foundry journal prints a provenance tag on a force (\"… (required)\") in 1,017 of "
+          "1,536 towns: the tag goes off the line this lane rewrote (if the line's writer is not this lane's after all: NAME it with "
+          "its count for the exports' seats). ONE MESSAGE TO THE CHAIR (the tip; the count before and after), then THE COUNT.\n"
+          "3. THEN BY WIDTH, (r3)'s rows among them: M12 (\"Real political weight rests with the Religious Authorities\" returns where "
+          "the contender outweighs the governor: 150 towns); M11 (a substitute chain whose own input is present names that input); M4 "
+          "(the one who holds the lever does not bear the brunt); M6's other half (the plague hook names a healer only where the "
+          "roster holds one: re-measure: the composed hook may answer it); M13, M14 with (h) (\"Acting …\" only where the keeper's "
+          "title names an office; \"built around the harbour\" only where a harbour house stands; \"Palace/government complex\" through "
+          "the house-label leaf); (e), (f), (g) as ruled in PART 11; (o), (p), (q) as ruled in the twelfth seat's brief and copied in "
+          "PART 12; the two guards that stayed green on the reader's plants, made able to red.\n"
+          "4. PART 11's item 9, ONCE, AFTER YOUR LAST CAST CURE: the 720 field diff of the whole stage by family; the shift record's "
+          "rows re-measured; THE ADDENDUM to the statement. (The edge bundles are NOT rebuilt: named.)\n"
+          "A CURE IN GENERATOR CODE IS A DECLARED MOVE: families and counts; A PERSON OR A POWER RE-DRAWN OUTSIDE THE ROW'S OWN ROLE IS A "
+          "STOP. EVERY LINE A CURE NOW PRINTS IN A NEW TOWN, OR NEWLY LEAVES SILENT, IS READ WHERE IT PRINTS on every surface that "
+          "prints it before it is pushed: three towns of its cells, a siege, a famine or an occupation among them, the smallest and the "
+          "largest size it reaches. A WORDING IS BORN WHOLE BEFORE ITS PUSH.\n"
+          "AFTER EVERY CURE: the presumed-things walker (a rise over your base is a stop); the strict-domain gate, the type ratchet and "
+          "eslint on the touched files; the twelve-birth grid (`node scripts/census/page-census.mjs --grid`: a rise is a stop); the "
+          "test files that name the files you touched; castDerived's floor (held by growing the corpus, never lowered).\n"
+          "THE HAND-BACK, kept current after every item: a new \"# PART 13\" at the end of the lane's hand-back file, in PART 12's form."),
+    merges='; a clean merge of the joined line into YOUR lane, as the first act allows',
+    when="for a stop that blocks everything you have left, with (r1)'s counts by class, for a composed red whose two cures cannot both stand, after M10 (the tip; the counts), and with your hand-back",
+    turns='',
+)
+
+
 def build2(seat):
     s = _r3c6() if seat == 'R3-CODE-C-6' else SEATS2[seat]
     head = (
