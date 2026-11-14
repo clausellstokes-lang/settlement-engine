@@ -25,7 +25,7 @@ import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { liveInstitutionNames } from '../../src/domain/facts/institutions.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
-import { chainOutputsShown } from '../../src/domain/display/tradeListDisplay.js';
+import { chainOutputsShown, exportsAsPrinted, localProductionAsPrinted } from '../../src/domain/display/tradeListDisplay.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 /** The app's own shape (the readers' cfgFor). @param {string} seed */
@@ -105,6 +105,46 @@ describe('a chain card prints only the outputs its houses bear out (item 7)', ()
       else expect(shown, `${seed}: ${good} beside the house that makes it`).toContain(good);
     }), 'a card names a good no house of the town makes');
   }, 120000);
+
+  // W2-C-LEAVES-13, the chair's ruling (r2) of 2026-11-14: TWO TRUE OUTPUTS GIVEN BACK THEIR MAKERS. The twelfth seat's maker
+  // table silenced "Rare spices and exotic dyes" on every Spices & Dyes card (507 of the reader's 1,824 births: the merchants
+  // carry them) and the bards' "Magical entertainment" (585). A line is in its pool unless the town makes it false: the spices
+  // print where a house that carries them stands, through a table ONLY THE CARD reads (the Exports keep them as transit; the
+  // local list never names them); the bards' good where a bardic college stands and magic works here.
+  test('the spices print where their carriers stand, the exports still transit; the bards\' magic where a bardic college stands (r2)', () => {
+    const spices = { chainId: 'spices_dyes', status: 'running', entrepot: true, resource: null, processingInstitutions: ['Merchant guilds (3-8)', 'Luxury goods quarter', 'Annual fair'],
+      outputs: ['Rare spices and exotic dyes'] };
+    /** @param {string[]} houses @param {object} [extra] */
+    const held = (houses, extra = {}) => ({ name: 'Testford', tier: 'town', config: { settType: 'town' }, institutions: houses.map((name) => ({ name })), economicState: { activeChains: [spices],
+      primaryExports: ['Rare spices and exotic dyes (transit)'], localProduction: ['Rare spices and exotic dyes'] }, ...extra });
+    for (const h of ['Merchant guilds (3-8)', 'Luxury goods quarter', 'Major annual fairs']) {
+      expect(chainOutputsShown(spices, held([h])), `${h} carries the spices`).toEqual(['Rare spices and exotic dyes']);
+    }
+    expect(chainOutputsShown(spices, held(['Merchant warehouses'])), 'a warehouse stores: it carries no trade').toEqual([]);
+    expect(chainOutputsShown(spices, held(['Access to merchant guilds (3-8)'])), 'a road to elsewhere carries nothing here').toEqual([]);
+    expect(exportsAsPrinted(held(['Merchant guilds (3-8)'])), 'the export stays transit').toEqual(['Rare spices and exotic dyes (transit)']);
+    expect(localProductionAsPrinted(held(['Merchant guilds (3-8)'])), 'never made here').toEqual([]);
+    const bards = { chainId: 'performance', entrepot: false, resource: null, processingInstitutions: ['Traveling performers', 'Theater', 'Bardic college'],
+      outputs: ['Performances', 'Music and song', 'Musical education', 'Magical entertainment'] };
+    /** @param {string[]} houses @param {object} [config] */
+    const town = (houses, config = { priorityMagic: 50 }) => ({ name: 'Testford', config, institutions: houses.map((name) => ({ name })), economicState: { activeChains: [bards] } });
+    expect(chainOutputsShown(bards, town(['Bardic college'])), 'the bards\' college').toContain('Magical entertainment');
+    expect(chainOutputsShown(bards, town(['Multiple theaters', 'Traveling performers'])), 'a theatre makes no magic').not.toContain('Magical entertainment');
+    expect(chainOutputsShown(bards, town(['Bardic college'], { priorityMagic: 50, magicExists: false })), 'no magic works here').not.toContain('Magical entertainment');
+    // …and on the births: a siege, a famine and an occupation among them, the smallest and the largest towns that reach each
+    for (const seed of ['r2s-infiltrated-town-1', 'r2s-under_siege-town-0', 'rr3-city-occupied-rand-4', 'r2r-metropolis-8']) {
+      const t = /** @type {any} */ (birthAny(seed));
+      expect(liveInstitutionNames(t).some((n) => /merchant guilds|luxury goods quarter|annual fair/i.test(n)), `${seed}: anchored, a carrier stands`).toBe(true);
+      expect(chainOutputsShown(chainOf(t, 'spices_dyes'), t), `${seed}: the spices the merchants carry`).toContain('Rare spices and exotic dyes');
+      expect(localProductionAsPrinted(t), `${seed}: not made here`).not.toContain('Rare spices and exotic dyes');
+      for (const x of exportsAsPrinted(t).filter((e) => e.startsWith('Rare spices'))) expect(x, `${seed}: carried through`).toMatch(/\(transit\)/);
+    }
+    for (const [seed, kept] of [['r2s-famine-city-0', true], ['r2s-occupied-metropolis-0', true], ['r2r-town-0', false]]) {
+      const t = /** @type {any} */ (birthAny(seed));
+      expect(liveInstitutionNames(t).some((n) => /bardic college/i.test(n)), `${seed}: anchored`).toBe(kept);
+      expect(chainOutputsShown(chainOf(t, 'performance'), t).includes('Magical entertainment'), `${seed}: the bards' magic`).toBe(kept);
+    }
+  }, 180000);
 
   test('a house of worship reached only by an "Access to" row offers nothing here (rww-hamlet-calm-1); a church that stands keeps its outputs (rww-metropolis-calm-1)', () => {
     const hamlet = birthApp('rww-hamlet-calm-1');
