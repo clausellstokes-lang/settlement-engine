@@ -7972,16 +7972,16 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "magicDependency true, with a NAMED dependent chain": [
         {
           "angle": "ledger",
-          "text": "The {good} made at {settlement} cannot be made without arcane work, which puts the whole line behind a very small number of people.",
+          "text": "At {settlement} the usual work no longer yields enough {good}, and part of the shortfall is made up by means beyond it.",
           "slots": [
-            "good",
-            "settlement"
+            "settlement",
+            "good"
           ],
           "vid": 1
         },
         {
           "angle": "unfolding",
-          "text": "{settlement}'s trade in {good} rests on a few practitioners, not on the land.",
+          "text": "If the help beyond ordinary work failed at {settlement}, its {good} would fall further short than it already does.",
           "slots": [
             "settlement",
             "good"
@@ -7990,7 +7990,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The town's living at {settlement} passes through a workshop that could not run without the arcane, and everybody in the trade knows which workshop.",
+          "text": "People at {settlement} know that part of the town's work now holds up only with help beyond ordinary labour.",
           "slots": [
             "settlement"
           ],

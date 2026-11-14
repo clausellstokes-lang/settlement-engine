@@ -3810,9 +3810,9 @@ relied on by nothing.
 4. `[visitor]` {settlement} does better than its ground and roads would explain, and the reason is the arcane work done here.
 
 **`magicDependency` true, with a NAMED dependent chain** {colour}
-1. `[ledger]` The {good} made at {settlement} cannot be made without arcane work, which puts the whole line behind a very small number of people.
-2. `[unfolding]` {settlement}'s trade in {good} rests on a few practitioners, not on the land.
-3. `[street]` The town's living at {settlement} passes through a workshop that could not run without the arcane, and everybody in the trade knows which workshop.
+1. `[ledger]` At {settlement} the usual work no longer yields enough {good}, and part of the shortfall is made up by means beyond it.
+2. `[unfolding]` If the help beyond ordinary work failed at {settlement}, its {good} would fall further short than it already does.
+3. `[street]` People at {settlement} know that part of the town's work now holds up only with help beyond ordinary labour.
 
 **`magicDependency` false**
 1. `[ledger · colour]` Nothing structural at {settlement} depends on arcane work. What the town makes it makes with hands and ground, and would go on making without a practitioner in it.
