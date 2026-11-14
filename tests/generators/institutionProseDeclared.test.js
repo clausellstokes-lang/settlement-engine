@@ -32,10 +32,11 @@ describe('the institution descriptions declare by text (CENSUS-4c unit 5)', () =
     // COHERENCE-PRESUME (2026-11-11): the town bowyers' line #0 reworded to presume no militia, so it declares nothing (65 → 64, 62 → 61)
     // W2-FIX-DATA (2026-11-13, the REVIEW-W2B cold list): eleven variant texts read false now declare what makes them false (alehouse, port, bank, famine, metropolis, navigable water) and carry a twin in DESC_VARIANT_SIBLINGS (64 → 75, 61 → 72)
     // W2-FIX-DATA-3 (2026-11-13, REVIEW-W2-FIX-DATA F4): the Elder Grove Council's two variants no longer say "the city"; they speak the corpus's "town", which the draw speaks in the place's own noun, so their `tier: ≥ city` declaration went with the word (75 → 73, 72 → 70)
-    expect(rows).toHaveLength(73);
+    // W2-FIX-DATA-8 (2026-11-14, HANDBACK-6 section 8 row 3, ww-1415): the village brewer's two variants name the alehouses it supplies and need one on the roster, each with its twin in DESC_VARIANT_SIBLINGS (73 → 75, 70 → 72)
+    expect(rows).toHaveLength(75);
     const cols = /** @type {Record<string, any>} */ (D.DESC_VARIANT_DECLARATIONS);
     const want = rows.filter((/** @type {any} */ r) => !WAITING_ON_ORDER.includes(r.id));
-    expect(Object.keys(cols)).toHaveLength(70);
+    expect(Object.keys(cols)).toHaveLength(72);
     for (const r of want) {
       expect({ id: r.id, ...shape(V.declarationOf(cols[r.text])) }).toEqual({ id: r.id, needs: r.needs, excludes: r.excludes, crisis: r.crisis });
     }

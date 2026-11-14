@@ -76,3 +76,25 @@ describe('W2-FIX-DATA-7: the census writers in the data lane\'s files (the seven
     expect(crisisOf(bornCensus('r2s-religious_conversion-town-0'), 'religious_conversion').viabilityNote).toMatch(/feast days and fairs are held twice over/);
   }, 240_000);
 });
+
+describe('W2-FIX-DATA-8: the census writers in the data lane\'s files (the eighth seat)', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); }, 120_000);
+
+  test('HANDBACK-6 row 3 (ww-1415): the village brewer names alehouses only where one stands; where none does, it supplies the households (r2r-village-16, r2s-monster_pressure-village-1, r2s-insurgency-village-0, r2s-wartime-village-1); a village with an alehouse at the draw keeps the line (r2r-village-15)', async () => {
+    const { hasInstitution } = await import('../../src/domain/facts/institutions.js');
+    expectNoSeedFailures(collectSeedFailures(['r2r-village-16', 'r2s-monster_pressure-village-1', 'r2s-insurgency-village-0', 'r2s-wartime-village-1'], (seed) => {
+      const town = bornCensus(seed);
+      expect(hasInstitution(town, 'tavern'), seed).toBe(false);
+      const brewer = (town.institutions || []).find((/** @type {any} */ i) => i.name === 'Brewer');
+      expect(String(brewer.desc), seed).not.toMatch(/alehouse/i);
+      expect(String(brewer.desc), seed).toMatch(/households|homes/);
+    }), 'no tavern, inn or alehouse: the brewer supplies none');
+    const kept = bornCensus('r2r-village-15');
+    expect(hasInstitution(kept, 'tavern')).toBe(true);
+    expect((kept.institutions || []).find((/** @type {any} */ i) => i.name === 'Brewer').desc).toBe('Converts malted grain to ale in quantity. The largest consumer of grain after bread. Supplies alehouses and households.');
+    // the order, measured: the cascade adds r2r-village-24's Ale house after the draw, so it prints the twin, which is true there too
+    const late = bornCensus('r2r-village-24');
+    expect((late.institutions || []).find((/** @type {any} */ i) => i.name === 'Ale house').cascadeAdded).toBe(true);
+    expect((late.institutions || []).find((/** @type {any} */ i) => i.name === 'Brewer').desc).toBe('Makes ale in bulk from malted grain. The second-greatest draw on the grain supply after bread. The households are stocked from here.');
+  }, 240_000);
+});

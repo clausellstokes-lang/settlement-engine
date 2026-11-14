@@ -1910,6 +1910,23 @@ export const DESC_VARIANT_SIBLINGS = Object.freeze({
     Object.freeze({ text: "Malts barley for brewing on a modest scale, supplying the alehouses nearby. It needs grain to spare before it can work at all.", needs: Object.freeze(["institution: tavern"]) }),
     Object.freeze({ text: "Malts barley on a modest scale for brewing at home. It needs grain to spare before it can work at all.", twinOf: "Malts barley for brewing on a modest scale, supplying the alehouses nearby. It needs grain to spare before it can work at all.", excludes: Object.freeze(["institution: tavern"]) }),
   ]),
+  // W2-FIX-DATA-8 (2026-11-14; HANDBACK-6 section 8 row 3, ROUND-3-CUT-INCREMENT ww-1415): the village brewer's three lines
+  // name the alehouses it supplies; each needs one on the roster, and its twin, in the same voice, supplies the households
+  // (VETOABLE wording, the owner's). The twins presume no alehouse either way (the Town watch's shape): the cascade adds
+  // an Ale house AFTER the description draw (r2r-village-24, -54: 2 of the census's 6 brewer villages with one), so a twin
+  // that excluded it would be false there by the final record.
+  "Converts malted grain to ale in quantity. The largest consumer of grain after bread. Supplies alehouses and households.": Object.freeze([
+    Object.freeze({ text: "Converts malted grain to ale in quantity. The largest consumer of grain after bread. Supplies alehouses and households.", needs: Object.freeze(["institution: tavern"]) }),
+    Object.freeze({ text: "Converts malted grain to ale in quantity. The largest consumer of grain after bread. Supplies the households.", twinOf: "Converts malted grain to ale in quantity. The largest consumer of grain after bread. Supplies alehouses and households." }),
+  ]),
+  "Turns malted grain into ale by the barrel. After the bakers, no trade eats more grain. It supplies both alehouses and homes.": Object.freeze([
+    Object.freeze({ text: "Turns malted grain into ale by the barrel. After the bakers, no trade eats more grain. It supplies both alehouses and homes.", needs: Object.freeze(["institution: tavern"]) }),
+    Object.freeze({ text: "Turns malted grain into ale by the barrel. After the bakers, no trade eats more grain. It supplies the homes hereabouts.", twinOf: "Turns malted grain into ale by the barrel. After the bakers, no trade eats more grain. It supplies both alehouses and homes." }),
+  ]),
+  "Makes ale in bulk from malted grain. The second-greatest draw on the grain supply after bread. Alehouses and households alike are stocked from here.": Object.freeze([
+    Object.freeze({ text: "Makes ale in bulk from malted grain. The second-greatest draw on the grain supply after bread. Alehouses and households alike are stocked from here.", needs: Object.freeze(["institution: tavern"]) }),
+    Object.freeze({ text: "Makes ale in bulk from malted grain. The second-greatest draw on the grain supply after bread. The households are stocked from here.", twinOf: "Makes ale in bulk from malted grain. The second-greatest draw on the grain supply after bread. Alehouses and households alike are stocked from here." }),
+  ]),
   "Part-time guards. Night patrol and gate duty.": Object.freeze([
     Object.freeze({ text: "Part-time guards. Night patrol and gate duty.", needs: Object.freeze(["gate"]) }),
     Object.freeze({ text: "Part-time guards. Night patrols through the lanes.", twinOf: "Part-time guards. Night patrol and gate duty." }),
@@ -2169,6 +2186,8 @@ export const DESC_VARIANT_DECLARATIONS = Object.freeze({
   "Walls within walls: an outer line, an inner line, and the citadel ring. Garrison districts and gatehouses at every stage.": Object.freeze({ needs: Object.freeze(["garrison"]) }), // metropolis|Defense|Massive walls and fortifications#0
   "A defence built in layers: outer wall, inner wall, and the ring about the citadel, with garrisons and gatehouses throughout.": Object.freeze({ needs: Object.freeze(["garrison"]) }), // metropolis|Defense|Massive walls and fortifications#1
   "Turns barley into malt for the brewers. A small concern feeding the local alehouses, and one that only runs when grain is in surplus.": Object.freeze({ needs: Object.freeze(["institution: tavern"]) }), // W2-FIX-DATA (REVIEW-W2B cold list)
+  "Turns malted grain into ale by the barrel. After the bakers, no trade eats more grain. It supplies both alehouses and homes.": Object.freeze({ needs: Object.freeze(["institution: tavern"]) }), // W2-FIX-DATA-8 row 3 (ww-1415)
+  "Makes ale in bulk from malted grain. The second-greatest draw on the grain supply after bread. Alehouses and households alike are stocked from here.": Object.freeze({ needs: Object.freeze(["institution: tavern"]) }), // W2-FIX-DATA-8 row 3 (ww-1415)
   "Malts barley for brewing on a modest scale, supplying the alehouses nearby. It needs grain to spare before it can work at all.": Object.freeze({ needs: Object.freeze(["institution: tavern"]) }), // W2-FIX-DATA (REVIEW-W2B cold list)
   "Duties are taken here on goods passing through the port or the main roads. Royal or municipal officers run it.": Object.freeze({ needs: Object.freeze(["institution: docks"]) }), // W2-FIX-DATA (REVIEW-W2B cold list)
   "Levies charged on all trade in and out by road or harbour, collected by officials of crown or town.": Object.freeze({ needs: Object.freeze(["institution: docks"]) }), // W2-FIX-DATA (REVIEW-W2B cold list)

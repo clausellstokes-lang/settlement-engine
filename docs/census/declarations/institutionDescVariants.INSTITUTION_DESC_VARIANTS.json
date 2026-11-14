@@ -1544,7 +1544,9 @@
     {
       "id": "village|Crafts|Brewer#0",
       "text": "Turns malted grain into ale by the barrel. After the bakers, no trade eats more grain. It supplies both alehouses and homes.",
-      "needs": [],
+      "needs": [
+        "institution: tavern"
+      ],
       "excludes": [],
       "crisis": [],
       "colour": false,
@@ -1553,7 +1555,9 @@
     {
       "id": "village|Crafts|Brewer#1",
       "text": "Makes ale in bulk from malted grain. The second-greatest draw on the grain supply after bread. Alehouses and households alike are stocked from here.",
-      "needs": [],
+      "needs": [
+        "institution: tavern"
+      ],
       "excludes": [],
       "crisis": [],
       "colour": false,
