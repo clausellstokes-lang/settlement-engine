@@ -1,0 +1,172 @@
+{"id":"21293","town":"r2r-thorp-48","sev":"MED","kind":"STATE","why":"names rival party 'Popular candidate' against Household Council; GOVERNMENT lists only Household Council as a power and QUARRELS is none","other":""}
+{"id":"12946","town":"r2r-thorp-48","sev":"LOW","kind":"STATE","why":"'Popular candidate' is not a power in GOVERNMENT (only Household Council); no quarrel or relation recorded","other":"21293"}
+{"id":"21900","town":"r2r-thorp-53","sev":"MED","kind":"LACKS","why":"names Pro Magic / Anti Magic / Regulation factions in a thorp of 18; GOVERNMENT lists only Household Council, QUARRELS none","other":""}
+{"id":"21318","town":"r2r-thorp-53","sev":"MED","kind":"LACKS","why":"Parties: three magic factions set against each other; GOVERNMENT lists only Household Council, QUARRELS none, PAST has no such split","other":""}
+{"id":"15945","town":"r2r-thorp-53","sev":"MED","kind":"STATE","why":"says debate over magic divided the community; PAST records only a Trade Collapse; no faction powers or quarrels exist","other":""}
+{"id":"22389","town":"r2r-thorp-53","sev":"LOW","kind":"STATE","why":"says it was founded to trade by water; FOUNDING reason is a seasonal camp for deep-water fishers","other":""}
+{"id":"12357","town":"r2r-thorp-7","sev":"LOW","kind":"BROKEN","why":"opens with the stray fragment 'Holds the seat):' with an unmatched close paren","other":""}
+{"id":"12439","town":"r2r-thorp-0","sev":"LOW","kind":"BROKEN","why":"opens with the stray fragment 'Holds the seat):' with an unmatched close paren","other":""}
+{"id":"05247","town":"r2r-thorp-0","sev":"MED","kind":"STATE","why":"gives Cuauhtli Ahau 'second of Elder Council'; PEOPLE brackets show him no council or power seat","other":""}
+{"id":"12583","town":"r2r-thorp-21","sev":"LOW","kind":"BROKEN","why":"opens with the stray fragment 'Holds the seat):' with an unmatched close paren","other":""}
+{"id":"12498","town":"r2r-thorp-33","sev":"LOW","kind":"BROKEN","why":"opens with the stray fragment 'Holds the seat):' with an unmatched close paren","other":""}
+{"id":"12527","town":"r2r-thorp-4","sev":"LOW","kind":"BROKEN","why":"opens with the stray fragment 'Holds the seat):' with an unmatched close paren","other":""}
+{"id":"22388","town":"r2r-thorp-49","sev":"MED","kind":"STATE","why":"says it exists because travellers had to stop; FOUNDING reason is herders gathering seasonally until it became permanent","other":""}
+{"id":"31188","town":"r2r-thorp-50","sev":"MED","kind":"LACKS","why":"wholesale purchase by taverns and institutions; HOUSES has no tavern or institution in a thorp of 28; tag reaches siege and occupation","other":""}
+{"id":"02985","town":"r2r-thorp-50","sev":"MED","kind":"STATE","why":"refers to a revolt and its concession; PAST records only Occupation, Religious Conflict and Wild Magic, no uprising","other":""}
+{"id":"14168","town":"r2r-thorp-12","sev":"MED","kind":"STATE","why":"states Infiltration Fear caused denunciations here; PAST lists only Religious Conflict, Migration, Succession Crisis","other":""}
+{"id":"04496","town":"r2r-thorp-12","sev":"MED","kind":"STATE","why":"an innocent spy-accused is about to be executed; no infiltration event in PAST and safety is Safe","other":"14168"}
+{"id":"12486","town":"r2r-thorp-12","sev":"LOW","kind":"BROKEN","why":"opens with the stray fragment 'Holds the seat):' with an unmatched close paren","other":""}
+{"id":"12579","town":"r2r-thorp-34","sev":"LOW","kind":"BROKEN","why":"opens with the stray fragment 'Holds the seat):' with an unmatched close paren","other":""}
+{"id":"21361","town":"r2r-hamlet-0","sev":"MED","kind":"STATE","why":"offers grazing for travellers' beasts for a fee; town is under active siege and nothing comes in by road","other":"05155"}
+{"id":"11307","town":"r2r-hamlet-0","sev":"MED","kind":"STATE","why":"prints Grain & Bread as impaired; LAND gives the chain as running on available grain fields","other":""}
+{"id":"01020","town":"r2r-hamlet-0","sev":"LOW","kind":"BROKEN","why":"fragment 'Tassilo Bauer (the steward' with an unmatched open paren","other":"12490"}
+{"id":"12490","town":"r2r-hamlet-0","sev":"LOW","kind":"BROKEN","why":"opens with the stray fragment 'Holds the seat):' with an unmatched close paren","other":"01020"}
+{"id":"00585","town":"r2r-hamlet-0","sev":"MED","kind":"STATE","why":"gives the steward 'first of Feudal Stewardship'; PEOPLE brackets show him no power seat (builder: verify roster brackets)","other":""}
+{"id":"15703","town":"r2s-under_siege-hamlet-0","sev":"MED","kind":"STATE","why":"prints Livestock & Dairy as impaired; LAND gives the chain as running on available grazing land","other":""}
+{"id":"22764","town":"r2s-under_siege-hamlet-0","sev":"MED","kind":"STATE","why":"prints River Fishing as impaired; LAND gives the chain as running on available river fisheries","other":""}
+{"id":"08510","town":"r2s-under_siege-hamlet-0","sev":"LOW","kind":"STATE","why":"'EXPORT yes' where TRADE gives exports: none and the town is under siege","other":""}
+{"id":"00478","town":"r2s-under_siege-hamlet-0","sev":"MED","kind":"STATE","why":"gives the innkeeper 'second of Headman's Authority'; PEOPLE brackets show her no power seat (builder: verify roster brackets)","other":""}
+{"id":"24897","town":"r2s-under_siege-hamlet-0","sev":"MED","kind":"STATE","why":"'second of Headman's Authority'; PEOPLE brackets show Egeria Varro no power seat","other":"00478"}
+{"id":"20919","town":"r2s-under_siege-hamlet-0","sev":"LOW","kind":"STATE","why":"offers 'the gossip of the road' to arrivals; under active siege nothing comes in by road","other":""}
+{"id":"12553","town":"r2s-under_siege-hamlet-0","sev":"LOW","kind":"BROKEN","why":"opens with the stray fragment 'Holds the seat):' with an unmatched close paren","other":""}
+{"id":"00973","town":"r2s-under_siege-hamlet-0","sev":"LOW","kind":"BROKEN","why":"fragment 'Egeria Varro (the innkeeper' with an unmatched open paren","other":"12553"}
+{"id":"23375","town":"r2s-under_siege-hamlet-0","sev":"LOW","kind":"BROKEN","why":"opens with the stray fragment 'Secret):' with an unmatched close paren","other":""}
+{"id":"21584","town":"r2s-under_siege-hamlet-1","sev":"MED","kind":"STATE","why":"prints Pilgrimage & Holy Sites as impaired; LAND gives the chain as running on available hot springs","other":""}
+{"id":"10663","town":"r2s-under_siege-hamlet-1","sev":"MED","kind":"STATE","why":"offers daily fresh milk; LAND gap says the dairy farmer lacks access to livestock","other":""}
+{"id":"07713","town":"r2s-under_siege-hamlet-1","sev":"LOW","kind":"STATE","why":"says the dairy farmer runs cattle or goats; LAND gap says the dairy farmer lacks access to livestock","other":"10663"}
+{"id":"05269","town":"r2s-under_siege-hamlet-1","sev":"MED","kind":"STATE","why":"gives the dairy farmer 'second of Headman's Authority'; PEOPLE brackets show no power seat; 'second' also 'comes first'","other":""}
+{"id":"12449","town":"r2s-under_siege-hamlet-1","sev":"LOW","kind":"BROKEN","why":"opens with the stray fragment 'Holds the seat):' with an unmatched close paren","other":""}
+{"id":"00946","town":"r2s-under_siege-hamlet-1","sev":"LOW","kind":"BROKEN","why":"fragment 'Radmila Bogdanov (the dairy farmer' with an unmatched open paren","other":"12449"}
+{"id":"23389","town":"r2s-under_siege-hamlet-1","sev":"LOW","kind":"BROKEN","why":"opens with the stray fragment 'Secret):' with an unmatched close paren","other":""}
+{"id":"14071","town":"r2r-hamlet-0","sev":"MED","kind":"STATE","why":"puts Tassilo Bauer of Feudal Stewardship at the seat; PEOPLE brackets give him no power seat (builder: verify roster brackets)","other":"00585"}
+{"id":"35166","town":"r2r-hamlet-0","sev":"LOW","kind":"STATE","why":"table row gives the steward Feudal Stewardship as his power; PEOPLE brackets show none","other":"00585"}
+{"id":"14075","town":"r2s-under_siege-hamlet-0","sev":"MED","kind":"STATE","why":"puts Gaius Corvinus of Headman's Authority at the seat; PEOPLE brackets give him no power seat","other":"00478"}
+{"id":"34052","town":"r2s-under_siege-hamlet-0","sev":"LOW","kind":"STATE","why":"table row gives the innkeeper Headman's Authority; PEOPLE brackets show no power seat","other":"00478"}
+{"id":"33562","town":"r2s-under_siege-hamlet-1","sev":"LOW","kind":"STATE","why":"table row gives the dairy farmer Headman's Authority; PEOPLE brackets show no power seat","other":"05269"}
+{"id":"00408","town":"r2s-under_siege-hamlet-2","sev":"MED","kind":"STATE","why":"'the boat-headman, Headman, first of Headman's Authority': doubled title; PEOPLE brackets show him no power seat","other":""}
+{"id":"00486","town":"r2s-under_siege-hamlet-3","sev":"MED","kind":"STATE","why":"gives the master of the hunt 'first of War Council'; PEOPLE brackets show no power seat (builder: verify roster brackets)","other":""}
+{"id":"24845","town":"r2s-under_siege-hamlet-3","sev":"LOW","kind":"STATE","why":"'Standing: first of War Council'; PEOPLE brackets show Gebhard Wolf no power seat","other":"00486"}
+{"id":"16458","town":"r2s-under_siege-hamlet-3","sev":"LOW","kind":"STATE","why":"'Member of: War Council'; PEOPLE brackets show Gebhard Wolf no power seat","other":"00486"}
+{"id":"24732","town":"r2s-under_siege-hamlet-3","sev":"LOW","kind":"STATE","why":"'third of Elder Council' for the stable keeper; PEOPLE brackets show no power seat","other":"00486"}
+{"id":"24857","town":"r2s-under_siege-hamlet-3","sev":"LOW","kind":"STATE","why":"'member of Elder Council'; PEOPLE brackets show no power seat for the person","other":"00486"}
+{"id":"14081","town":"r2s-under_siege-hamlet-3","sev":"LOW","kind":"STATE","why":"puts Gebhard Wolf of War Council in the lead; PEOPLE brackets show no power seat; DEFENCE has no force","other":"00486"}
+{"id":"00987","town":"r2s-under_siege-hamlet-3","sev":"LOW","kind":"BROKEN","why":"fragment 'Gebhard Wolf (the master of the hunt' with an unmatched open paren","other":"31935"}
+{"id":"31935","town":"r2s-under_siege-hamlet-3","sev":"LOW","kind":"BROKEN","why":"opens 'defends):' with an unmatched close paren","other":"00987"}
+{"id":"12687","town":"r2s-under_siege-hamlet-3","sev":"LOW","kind":"BROKEN","why":"opens with the stray fragment 'Holds the seat):' with an unmatched close paren","other":""}
+{"id":"00915","town":"r2s-under_siege-hamlet-3","sev":"LOW","kind":"BROKEN","why":"fragment 'Mathilde Wagner (the alewife' with an unmatched open paren","other":""}
+{"id":"23396","town":"r2s-under_siege-hamlet-3","sev":"LOW","kind":"BROKEN","why":"opens with the stray fragment 'Secret):' with an unmatched close paren","other":""}
+{"id":"07711","town":"r2s-under_siege-hamlet-3","sev":"LOW","kind":"STATE","why":"says the dairy farmer keeps cattle or goats; LAND gap says the dairy farmer lacks access to livestock","other":""}
+{"id":"21555","town":"r2s-under_siege-hamlet-3","sev":"MED","kind":"STATE","why":"describes a monthly or seasonal trading day; town is under active siege, nothing comes in or goes out","other":""}
+{"id":"24620","town":"r2s-under_siege-hamlet-3","sev":"LOW","kind":"STATE","why":"stable yard for travellers to lodge mounts; active siege, nothing arrives by road","other":""}
+{"id":"13079","town":"r2s-under_siege-hamlet-3","sev":"MED","kind":"STATE","why":"prints Hunting & Trapping as impaired; LAND gives the chain as running on available hunting grounds","other":""}
+{"id":"14328","town":"r2s-under_siege-hamlet-3","sev":"MED","kind":"STATE","why":"prints Iron & Metalwork as impaired; LAND gives the chain as running on available iron ore","other":""}
+{"id":"10751","town":"r2s-under_siege-hamlet-3","sev":"MED","kind":"STATE","why":"prints Furs & Pelts as impaired; LAND gives the chain as running on available hunting grounds","other":""}
+{"id":"16469","town":"r2s-occupied-hamlet-0","sev":"MED","kind":"STATE","why":"makes the occupying governor the eldest's protege; relations give Elder Council and Occupation Authority as competitive, escalating, and under occupation the elders do not rule freely","other":""}
+{"id":"00999","town":"r2s-occupied-hamlet-0","sev":"LOW","kind":"BROKEN","why":"fragment 'Toghan Jadaran (the occupying governor' with an unmatched open paren","other":"31984"}
+{"id":"31984","town":"r2s-occupied-hamlet-0","sev":"LOW","kind":"BROKEN","why":"opens 'exploits it):' with an unmatched close paren","other":"00999"}
+{"id":"05299","town":"r2r-hamlet-24","sev":"LOW","kind":"STATE","why":"gives the headman 'first of Headman's Authority'; PEOPLE brackets show no power seat (likely roster omission; builder: verify)","other":""}
+{"id":"31793","town":"r2r-hamlet-24","sev":"LOW","kind":"BROKEN","why":"opens 'bears the brunt):' with an unmatched close paren","other":""}
+{"id":"10282","town":"r2r-hamlet-28","sev":"MED","kind":"STATE","why":"offers salted fish, smoked seafood, fish oil; FOOD failed source is fish and the town is in famine","other":""}
+{"id":"00406","town":"r2r-hamlet-28","sev":"MED","kind":"BROKEN","why":"'the boat-headman, Elder, first of Elder Council': stray doubled title; PEOPLE brackets show Varg Asgersson no power seat","other":""}
+{"id":"31781","town":"r2r-hamlet-28","sev":"LOW","kind":"BROKEN","why":"opens 'bears the brunt):' with an unmatched close paren","other":""}
+{"id":"10241","town":"r2r-hamlet-28","sev":"MED","kind":"STATE","why":"prints Fishing & Seafood as impaired; LAND gives the chain as running on available fishing grounds","other":""}
+{"id":"29212","town":"r2s-famine-hamlet-1","sev":"LOW","kind":"STATE","why":"'Timber trade' where TRADE has no exports or imports, isolated, and LAND gap says timber is not being processed","other":""}
+{"id":"00438","town":"r2s-famine-hamlet-1","sev":"LOW","kind":"STATE","why":"gives the eldest 'first of Free Elder Council'; PEOPLE brackets show no power seat (likely roster omission; builder: verify)","other":""}
+{"id":"31791","town":"r2s-famine-hamlet-1","sev":"LOW","kind":"BROKEN","why":"opens 'bears the brunt):' with an unmatched close paren","other":""}
+{"id":"03873","town":"r2s-insurgency-hamlet-0","sev":"MED","kind":"LACKS","why":"a standing levy roster in the hamlet archive; DEFENCE gives militia none and HOUSES has no archive","other":""}
+{"id":"31842","town":"r2s-insurgency-hamlet-0","sev":"LOW","kind":"BROKEN","why":"opens 'bears the brunt):' with an unmatched close paren","other":""}
+{"id":"31815","town":"r2s-recently_betrayed-hamlet-2","sev":"LOW","kind":"BROKEN","why":"opens 'bears the brunt):' with an unmatched close paren","other":""}
+{"id":"23272","town":"r2s-famine-hamlet-0","sev":"MED","kind":"STATE","why":"offers salted fish as a service line; FOOD failed source is fish and the town is in active famine","other":""}
+{"id":"31845","town":"r2s-famine-hamlet-0","sev":"LOW","kind":"BROKEN","why":"opens 'bears the brunt):' with an unmatched close paren","other":""}
+{"id":"31772","town":"r2s-insurgency-hamlet-2","sev":"LOW","kind":"BROKEN","why":"opens 'bears the brunt): Fair-minded.' with an unmatched close paren and no subject","other":""}
+{"id":"29223","town":"r2s-occupied-hamlet-1","sev":"MED","kind":"LACKS","why":"collects the lord's dues and the temple tithe; HOUSES has no lord, manor or temple, only a village headman and access to a parish church","other":""}
+{"id":"12108","town":"r2s-occupied-hamlet-1","sev":"LOW","kind":"STATE","why":"says Headman's Authority 'governs' freely; under occupation the town's own officers do not rule freely; both powers are Significant","other":""}
+{"id":"02763","town":"r2s-occupied-hamlet-1","sev":"MED","kind":"STATE","why":"occupying governor names the village headman her successor; relations give their powers as tense and escalating","other":""}
+{"id":"31804","town":"r2s-occupied-hamlet-1","sev":"LOW","kind":"BROKEN","why":"opens 'bears the brunt):' with an unmatched close paren","other":""}
+{"id":"07626","town":"r2r-hamlet-16","sev":"MED","kind":"STATE","why":"offers dressed cut stone; TRADE imports Cut stone and masonry and LAND gap says stone is limited to intermediate products","other":""}
+{"id":"30854","town":"r2r-hamlet-16","sev":"MED","kind":"STATE","why":"says what goes out is mostly river fish; FOOD failed source is fish and the town is in active famine","other":""}
+{"id":"15745","town":"r2r-hamlet-16","sev":"MED","kind":"STATE","why":"quarry sells dressed stone for reliable income; TRADE exports no stone and imports cut stone; LAND gap limits stone to intermediate products","other":""}
+{"id":"14621","town":"r2r-hamlet-16","sev":"MED","kind":"STATE","why":"'sends out cut stone and stone blocks'; TRADE imports cut stone and exports none; LAND gap: stone cannot produce final goods","other":"15745"}
+{"id":"10234","town":"r2r-hamlet-16","sev":"MED","kind":"STATE","why":"Fish oil EXPORT; TRADE exports lists no fish oil, and FOOD failed source is fish","other":""}
+{"id":"23268","town":"r2r-hamlet-16","sev":"LOW","kind":"STATE","why":"Salted fish EXPORT while FOOD failed source is fish and the town is in active famine","other":""}
+{"id":"24079","town":"r2r-hamlet-16","sev":"LOW","kind":"STATE","why":"Smoked seafood EXPORT while FOOD failed source is fish and the town is in active famine","other":""}
+{"id":"05318","town":"r2r-hamlet-16","sev":"LOW","kind":"STATE","why":"'third of Elder Council' who 'comes first'; PEOPLE brackets show the militia captain no power seat","other":""}
+{"id":"00993","town":"r2r-hamlet-16","sev":"LOW","kind":"BROKEN","why":"fragment 'Jade Ek (the militia captain' with an unmatched open paren","other":"31831"}
+{"id":"31831","town":"r2r-hamlet-16","sev":"LOW","kind":"BROKEN","why":"opens 'bears the brunt):' with an unmatched close paren","other":"00993"}
+{"id":"12499","town":"r2r-hamlet-16","sev":"LOW","kind":"BROKEN","why":"opens with the stray fragment 'Holds the seat):' with an unmatched close paren","other":""}
+{"id":"31812","town":"r2s-famine-hamlet-2","sev":"LOW","kind":"BROKEN","why":"opens 'bears the brunt):' with an unmatched close paren","other":""}
+{"id":"23376","town":"r2s-famine-hamlet-2","sev":"LOW","kind":"BROKEN","why":"opens with the stray fragment 'Secret):' with an unmatched close paren","other":""}
+{"id":"33560","town":"r2s-famine-hamlet-2","sev":"LOW","kind":"STATE","why":"table row gives the dairy farmer Feudal Stewardship; PEOPLE brackets show no power seat; LAND gap says dairy lacks livestock","other":""}
+{"id":"10617","town":"r2s-occupied-hamlet-2","sev":"MED","kind":"LACKS","why":"lists Reformers and Complicit beneficiaries as powers; GOVERNMENT lists only Free Elder Council and Occupation Authority; QUARRELS none","other":""}
+{"id":"21279","town":"r2s-occupied-hamlet-2","sev":"MED","kind":"LACKS","why":"Parties: Reformers and Complicit beneficiaries set against Free Elder Council; not powers in GOVERNMENT, omits Occupation Authority, QUARRELS none","other":"10617"}
+{"id":"10620","town":"r2s-occupied-hamlet-2","sev":"LOW","kind":"STATE","why":"Occupation Authority 'pressing close behind'; GOVERNMENT gives both powers Dominant; under occupation elders do not govern freely","other":""}
+{"id":"14179","town":"r2s-occupied-hamlet-2","sev":"MED","kind":"STATE","why":"calls it 'a free hamlet'; GOVERNMENT has Occupation Authority Dominant, stability Suppressed under occupation","other":""}
+{"id":"12360","town":"r2s-occupied-hamlet-2","sev":"LOW","kind":"BROKEN","why":"opens with the stray fragment 'Holds the seat):' with an unmatched close paren","other":""}
+{"id":"06517","town":"r2s-occupied-hamlet-3","sev":"LOW","kind":"STATE","why":"offers cheese; LAND gap says the dairy farmer lacks access to livestock","other":""}
+{"id":"12650","town":"r2s-occupied-hamlet-3","sev":"LOW","kind":"BROKEN","why":"opens with the stray fragment 'Holds the seat):' with an unmatched close paren","other":""}
+{"id":"23404","town":"r2s-occupied-hamlet-3","sev":"LOW","kind":"BROKEN","why":"opens with the stray fragment 'Secret):' with an unmatched close paren","other":""}
+{"id":"24904","town":"r2s-occupied-hamlet-3","sev":"LOW","kind":"STATE","why":"gives the charter master 'second of Occupation Authority'; PEOPLE brackets show Eberhard Klein no power seat","other":""}
+{"id":"00485","town":"r2s-plague_onset-hamlet-0","sev":"MED","kind":"BROKEN","why":"'the master of the hunt, Elder, first of Elder Council': stray doubled title; PEOPLE brackets show no power seat","other":""}
+{"id":"11934","town":"r2s-plague_onset-hamlet-0","sev":"MED","kind":"LACKS","why":"game sold 'in the market'; HOUSES has no market and the town is under plague","other":""}
+{"id":"12706","town":"r2s-plague_onset-hamlet-0","sev":"LOW","kind":"BROKEN","why":"opens with the stray fragment 'Holds the seat):' with an unmatched close paren","other":""}
+{"id":"05254","town":"r2s-plague_onset-hamlet-2","sev":"MED","kind":"BROKEN","why":"'the collier, Headman, first of Headman's Authority': stray title; PEOPLE has no headman though HOUSES lists a Village headman","other":""}
+{"id":"28776","town":"r2s-plague_onset-hamlet-2","sev":"LOW","kind":"STATE","why":"a wedding invitation they cannot refuse; under plague people do not gather as usual","other":""}
+{"id":"00496","town":"r2s-plague_onset-hamlet-1","sev":"LOW","kind":"STATE","why":"gives the militia captain 'second of Elder Council'; PEOPLE brackets show no power seat","other":""}
+{"id":"26287","town":"r2s-plague_onset-hamlet-1","sev":"LOW","kind":"LACKS","why":"'The church and the town's other powers': HOUSES has no church of its own (access only); GOVERNMENT lists only Elder Council","other":""}
+{"id":"12399","town":"r2s-plague_onset-hamlet-1","sev":"LOW","kind":"BROKEN","why":"opens with the stray fragment 'Holds the seat):' with an unmatched close paren","other":""}
+{"id":"12402","town":"r2s-infiltrated-hamlet-2","sev":"LOW","kind":"BROKEN","why":"opens with the stray fragment 'Holds the seat):' with an unmatched close paren","other":""}
+{"id":"22479","town":"r2s-infiltrated-hamlet-3","sev":"MED","kind":"LACKS","why":"names Reformists and Secular camp as parties; GOVERNMENT lists only Elder Council as a power, QUARRELS none","other":""}
+{"id":"21320","town":"r2s-infiltrated-hamlet-3","sev":"MED","kind":"LACKS","why":"Parties: Reformists vs Secular camp; neither is a power in GOVERNMENT, and QUARRELS is none","other":"22479"}
+{"id":"12364","town":"r2s-infiltrated-hamlet-3","sev":"LOW","kind":"BROKEN","why":"opens with the stray fragment 'Holds the seat):' with an unmatched close paren","other":""}
+{"id":"00792","town":"r2s-infiltrated-hamlet-3","sev":"MED","kind":"STATE","why":"says 'the mountain trade' built the settlement; terrain is Forest and FOUNDING is a logging camp","other":""}
+{"id":"22370","town":"r2s-monster_pressure-hamlet-0","sev":"MED","kind":"LACKS","why":"lives from travellers' stabling and small repairs; HOUSES has only an alehouse, no stable or smith, and no one travels the roads","other":"13689"}
+{"id":"00397","town":"r2s-monster_pressure-hamlet-0","sev":"MED","kind":"BROKEN","why":"'the alewife, Headman, first of Headman's Authority': stray doubled title; PEOPLE brackets show no power seat","other":""}
+{"id":"28931","town":"r2r-hamlet-34","sev":"MED","kind":"LACKS","why":"'They're not telling the guard'; DEFENCE gives garrison none and watch none, only a citizen militia","other":""}
+{"id":"12574","town":"r2r-hamlet-34","sev":"LOW","kind":"BROKEN","why":"opens with the stray fragment 'Holds the seat):' with an unmatched close paren","other":""}
+{"id":"12111","town":"r2r-hamlet-35","sev":"MED","kind":"STATE","why":"Headman's Authority 'governs' with the Bloc 'close behind'; GOVERNMENT gives the Bloc Strong over Significant and stability Fractured, no governing authority","other":""}
+{"id":"05338","town":"r2r-hamlet-35","sev":"MED","kind":"BROKEN","why":"'the mine captain, Headman, first of Headman's Authority': stray doubled title; PEOPLE brackets show no power seat; Bloc is the stronger power","other":""}
+{"id":"32333","town":"r2r-hamlet-35","sev":"LOW","kind":"BROKEN","why":"opens 'instigator):' with an unmatched close paren","other":""}
+{"id":"32298","town":"r2s-politically_fractured-hamlet-3","sev":"LOW","kind":"BROKEN","why":"opens 'instigator):' with an unmatched close paren","other":""}
+{"id":"12461","town":"r2s-politically_fractured-hamlet-3","sev":"LOW","kind":"BROKEN","why":"opens with the stray fragment 'Holds the seat):' with an unmatched close paren","other":""}
+{"id":"05312","town":"r2s-slave_revolt-hamlet-3","sev":"MED","kind":"BROKEN","why":"'the master of the hunt, Elder, first of Elder Council': stray doubled title; PEOPLE brackets show no power seat","other":""}
+{"id":"12694","town":"r2s-slave_revolt-hamlet-3","sev":"LOW","kind":"BROKEN","why":"opens with the stray fragment 'Holds the seat):' with an unmatched close paren","other":""}
+{"id":"05240","town":"r2s-succession_void-hamlet-3","sev":"LOW","kind":"PAIR","why":"names an Acting Elder, 'first of Elder Council'; PEOPLE brackets show no power seat and 05148 says no one holds the seat","other":"05148"}
+{"id":"11964","town":"r2s-succession_void-hamlet-3","sev":"MED","kind":"LACKS","why":"the fence manages 'the archive'; HOUSES has no archive or record house","other":""}
+{"id":"23374","town":"r2s-succession_void-hamlet-3","sev":"LOW","kind":"LACKS","why":"removing records from 'the archive'; HOUSES has no archive; also opens 'Secret):' with an unmatched paren","other":"11964"}
+{"id":"20868","town":"r2s-wartime-hamlet-1","sev":"MED","kind":"STATE","why":"shows the Caravanserai producing water trade and caravan resupply; LAND gap says it lacks access to camel herds","other":""}
+{"id":"06293","town":"r2s-wartime-hamlet-1","sev":"LOW","kind":"STATE","why":"caravan organization as a working service; LAND gap says the caravanserai lacks access to camel herds","other":"20868"}
+{"id":"00414","town":"r2s-wartime-hamlet-1","sev":"MED","kind":"BROKEN","why":"'the caravanserai keeper, Household Elder, first of Household Council': stray doubled title; PEOPLE brackets show no power seat","other":""}
+{"id":"06314","town":"r2s-wartime-hamlet-1","sev":"MED","kind":"LACKS","why":"calls the caravanserai a 'walled' waystation; DEFENCE walls: none","other":""}
+{"id":"00413","town":"r2r-hamlet-33","sev":"MED","kind":"BROKEN","why":"'the camp foreman, Headman, first of Headman's Authority': stray doubled title; PEOPLE brackets show no power seat and no headman is on the roster","other":""}
+{"id":"12661","town":"r2r-hamlet-33","sev":"LOW","kind":"BROKEN","why":"opens with the stray fragment 'Holds the seat):' with an unmatched close paren","other":""}
+{"id":"00472","town":"r2r-hamlet-9","sev":"LOW","kind":"STATE","why":"gives the horse-coper 'second of Elder Council'; PEOPLE brackets show no power seat","other":""}
+{"id":"17125","town":"r2r-hamlet-9","sev":"LOW","kind":"STATE","why":"charcoal sacks bulked with damp wood; LAND gap says the charcoal burner lacks access to timber; no smith in HOUSES","other":""}
+{"id":"12582","town":"r2r-hamlet-9","sev":"LOW","kind":"BROKEN","why":"opens with the stray fragment 'Holds the seat):' with an unmatched close paren","other":""}
+{"id":"00505","town":"r2s-indebted-hamlet-3","sev":"MED","kind":"BROKEN","why":"'the mine captain, Headman, first of Headman's Authority': stray doubled title; PEOPLE brackets show no power seat","other":""}
+{"id":"12533","town":"r2s-indebted-hamlet-3","sev":"LOW","kind":"BROKEN","why":"opens with the stray fragment 'Holds the seat):' with an unmatched close paren","other":""}
+{"id":"12326","town":"r2s-mass_migration-hamlet-0","sev":"LOW","kind":"LACKS","why":"Hiring hall finding workers and mercenaries; HOUSES has no hiring hall and DEFENCE gives hired: none","other":""}
+{"id":"00396","town":"r2s-mass_migration-hamlet-0","sev":"MED","kind":"BROKEN","why":"'the alewife, Elder, first of Free Elder Council': stray doubled title; PEOPLE brackets show no power seat","other":""}
+{"id":"12633","town":"r2s-mass_migration-hamlet-0","sev":"LOW","kind":"BROKEN","why":"opens with the stray fragment 'Holds the seat):' with an unmatched close paren","other":""}
+{"id":"01018","town":"r2s-mass_migration-hamlet-0","sev":"LOW","kind":"BROKEN","why":"fragment 'Prima Caesar (the stable keeper' with an unmatched open paren","other":"23349"}
+{"id":"23349","town":"r2s-mass_migration-hamlet-0","sev":"LOW","kind":"BROKEN","why":"opens with the stray fragment 'Secret):' with an unmatched close paren","other":"01018"}
+{"id":"00407","town":"r2s-mass_migration-hamlet-2","sev":"MED","kind":"BROKEN","why":"'the boat-headman, Elder, first of Free Elder Council': stray doubled title; PEOPLE brackets show no power seat","other":""}
+{"id":"00966","town":"r2s-mass_migration-hamlet-2","sev":"LOW","kind":"BROKEN","why":"fragment 'Liv Bjarnarson (the head shepherd' with an unmatched open paren","other":"23395"}
+{"id":"23395","town":"r2s-mass_migration-hamlet-2","sev":"LOW","kind":"BROKEN","why":"opens with the stray fragment 'Secret):' with an unmatched close paren","other":"00966"}
+{"id":"09844","town":"r2s-mass_migration-hamlet-3","sev":"MED","kind":"STATE","why":"Feudal Stewardship 'governs' with Military/Guard 'close behind'; GOVERNMENT gives Military/Guard Dominant over Strong, so it is ahead; slash-joined label used as a name","other":""}
+{"id":"00493","town":"r2s-mass_migration-hamlet-3","sev":"LOW","kind":"STATE","why":"gives the militia captain 'first of The Guard'; GOVERNMENT names the power Military/Guard; PEOPLE brackets show no power seat","other":""}
+{"id":"30553","town":"r2s-mass_migration-hamlet-3","sev":"MED","kind":"STATE","why":"an informant's report triggered a purge; PAST records only an Occupation 5 years ago, no purge","other":""}
+{"id":"15286","town":"r2s-mass_migration-hamlet-3","sev":"LOW","kind":"BROKEN","why":"uses the slash-joined label 'Military/Guard' as a name in prose","other":"12383"}
+{"id":"12383","town":"r2s-mass_migration-hamlet-3","sev":"LOW","kind":"BROKEN","why":"slash-joined 'Military/Guard' used as a name in prose; opens with the stray fragment 'Holds the seat):'","other":"15286"}
+{"id":"16971","town":"r2s-mass_migration-hamlet-3","sev":"LOW","kind":"BROKEN","why":"slash-joined 'Military/Guard' used as a subject name","other":""}
+{"id":"31988","town":"r2s-mass_migration-hamlet-3","sev":"LOW","kind":"BROKEN","why":"opens 'exploits it):' with an unmatched close paren","other":""}
+{"id":"12365","town":"r2s-monster_pressure-hamlet-3","sev":"LOW","kind":"BROKEN","why":"opens with the stray fragment 'Holds the seat):' with an unmatched close paren","other":""}
+{"id":"00503","town":"r2s-recently_betrayed-hamlet-1","sev":"MED","kind":"BROKEN","why":"'the mine captain, Elder, first of Elder Council': stray doubled title; PEOPLE brackets show no power seat","other":""}
+{"id":"12505","town":"r2s-recently_betrayed-hamlet-1","sev":"LOW","kind":"BROKEN","why":"opens with the stray fragment 'Holds the seat):' with an unmatched close paren","other":""}
+{"id":"23386","town":"r2s-recently_betrayed-hamlet-1","sev":"LOW","kind":"BROKEN","why":"opens with the stray fragment 'Secret):' with an unmatched close paren","other":""}
+{"id":"00571","town":"r2s-religious_conversion-hamlet-1","sev":"MED","kind":"BROKEN","why":"'the dairy farmer, Elder, first of Free Elder Council': stray doubled title; PEOPLE brackets show no power seat","other":""}
+{"id":"23582","town":"r2s-religious_conversion-hamlet-1","sev":"LOW","kind":"STATE","why":"sells milk, butter and cheese; LAND gap says the dairy farmer lacks access to livestock","other":""}
+{"id":"11933","town":"r2s-religious_conversion-hamlet-1","sev":"LOW","kind":"STATE","why":"grazing the herd on a neighbour's land; LAND gap says the dairy farmer lacks access to livestock","other":"23582"}
+{"id":"12362","town":"r2s-religious_conversion-hamlet-1","sev":"LOW","kind":"BROKEN","why":"opens with the stray fragment 'Holds the seat):' with an unmatched close paren","other":""}
+{"id":"12708","town":"r2s-religious_conversion-hamlet-3","sev":"LOW","kind":"BROKEN","why":"opens with the stray fragment 'Holds the seat):' with an unmatched close paren","other":""}
+{"id":"05324","town":"r2s-succession_void-hamlet-2","sev":"LOW","kind":"STATE","why":"militia captain 'second of Feudal Stewardship' who 'comes first' ahead of the steward; PEOPLE brackets show no power seat","other":""}
+{"id":"DONE","lines":2687,"blocks":63,"flags":171}
