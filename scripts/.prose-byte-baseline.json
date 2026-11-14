@@ -73,7 +73,7 @@
       "ceilingGzip": 177058
     },
     "src/data/dossierStateProse/power.generated.js": {
-      "raw": 130016,
+      "raw": 130031,
       "gzip": 18283,
       "ceilingRaw": 357097,
       "ceilingGzip": 79355
@@ -923,6 +923,14 @@
       "toRaw": 130016,
       "gzipAfter": 18283,
       "reason": "+70 B raw over the committed 129946 (gzip level 9: 18267 -> 18283): DS-POW-5 council v3 declared off a succession crisis (the increment's pf#220, pf#569)"
+    },
+    {
+      "car": "W2-WRITE-SIDE-REST-3",
+      "leaf": "src/data/dossierStateProse/power.generated.js",
+      "fromRaw": 130016,
+      "toRaw": 130031,
+      "gzipAfter": 18283,
+      "reason": "+15 B raw over the committed 130016 (gzip level 9: 18283 -> 18283): DS-POW-5 council v3 re-said without the comparison with rivals (the increment's ww#79)"
     }
   ],
   "ceilingTransfersNewLeaves": [

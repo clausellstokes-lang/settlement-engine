@@ -2084,7 +2084,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no crisis: succession"
           ],
-          "text": "The {seat} at {settlement} worries less about rivals than about the town turning on it.",
+          "text": "The {seat} at {settlement} watches the town's temper closely: what it fears is the town turning on it.",
           "slots": [
             "seat",
             "settlement"
