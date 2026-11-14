@@ -7,8 +7,10 @@
   "kind": "d",
   "sentence": "Visitors to Saltosinum are told which few streets to avoid, and the advice turns out to be right.",
   "fact": "population 87, tier \"hamlet\", institutions \"Dwellings (5-25)\": no streets to choose among.",
-  "source": "src/data/dossierStateProse/defense.generated.js:2596",
-  "mechanism": "a size"
+  "mechanism": "a size",
+  "writer_file": "src/data/dossierStateProse/defense.generated.js",
+  "writer_line_on_the_rehearsal_tree": 2596,
+  "writer_note": ""
  },
  {
   "n": 75,
@@ -18,8 +20,10 @@
   "kind": "g|c",
   "sentence": "Agiospolis was poor even while its trade moved freely, and the siege has stopped it moving at all.",
   "fact": "economicState.prosperityStanding \"Prosperous\"; same tab two lines above: \"Prosperous before the siege and the famine; Struggling while they last.\"",
-  "source": "src/data/dossierStateProse/economy.generated.js:181 (DS-ECO-1, COMBINATION C4 vid 5)",
-  "mechanism": "two homes that disagree"
+  "mechanism": "two homes that disagree",
+  "writer_file": "src/data/dossierStateProse/economy.generated.js",
+  "writer_line_on_the_rehearsal_tree": 181,
+  "writer_note": "(DS-ECO-1, COMBINATION C4 vid 5)"
  },
  {
   "n": 116,
@@ -29,8 +33,10 @@
   "kind": "b|g|h",
   "sentence": "timber leaves Naranjotzin half-finished, and nobody in the city is troubled by it.",
   "fact": "institutions[] has \"Sawmill (commercial)\" (sawyer Coatlicue Zam); primaryExports has \"Milled lumber\"; Systems/Economics Timber & Lumber flow 'Via Sawmill (commercial) Outputs Milled lumber'; resourceAnalysis.gaps[timber].missing wrongly lists 'Sawmill'. Sentence also starts lower-case.",
-  "source": "src/data/dossierStateProse/economy.generated.js:5544",
-  "mechanism": "denies a house, force or crossing the town has"
+  "mechanism": "denies a house, force or crossing the town has",
+  "writer_file": "src/data/dossierStateProse/economy.generated.js",
+  "writer_line_on_the_rehearsal_tree": 5544,
+  "writer_note": ""
  },
  {
   "n": 246,
@@ -40,8 +46,10 @@
   "kind": "a|g",
   "sentence": "Faith carries real weight in Torriplenum's money. What the religious houses take in and spend is a large part of the hamlet's business.",
   "fact": "institutions[] religious: only 'Wayside shrine' (no clergy), 'Access to parish church' (outside the hamlet) and 'Burial ground'; economicState.incomeSources is only [['Agricultural Rents',100]]; World/Faith: 'The hamlet has no church of its own'",
-  "source": "src/data/dossierStateProse/economy.generated.js:6419",
-  "mechanism": "names a house, a role or a force the town lacks"
+  "mechanism": "names a house, a role or a force the town lacks",
+  "writer_file": "src/data/dossierStateProse/economy.generated.js",
+  "writer_line_on_the_rehearsal_tree": 6419,
+  "writer_note": ""
  },
  {
   "n": 10,
@@ -51,41 +59,10 @@
   "kind": "c|g",
   "sentence": "Shankou feeds itself with a small margin.",
   "fact": "economicState.foodSecurity.importPct 45, foodRecord.grownPct 55 / normalImportPct 45, surplusPct 0; same tab: \"A good part of what Shankou eats is brought in\" and \"Production: 48,348 lbs/day+ 39,608 importedNeed: 87,956 lbs/day\"",
-  "source": "src/data/dossierStateProse (DS-ECO-9 SECURE)",
-  "mechanism": "a figure against the record's"
- },
- {
-  "n": 279,
-  "severity": "MED",
-  "town": "bar0-village-famine-rand-1",
-  "tab": "Systems/Defense",
-  "kind": "g",
-  "sentence": "Nothing has come for Zelenoki, and nothing about the village would stop whatever did.",
-  "fact": "history.historicalEvents: 'The Occupation' (64 years ago, catastrophic): 'When the occupiers left...'; Overview/History quote 'Everything before the Occupation...'",
-  "source": "src/data/dossierStateProse/defense.generated.js:1087",
-  "mechanism": "a ruler, a power, a threat or a history state that is not so"
- },
- {
-  "n": 205,
-  "severity": "MED",
-  "town": "bar0-town-occupied-rand-1",
-  "tab": "Systems/Defense",
-  "kind": "g|c",
-  "sentence": "Whatever the present trouble costs Longyuan, the town is paying it from money it had put by.",
-  "fact": "economicState.prosperity \"Poor\"; Economics \"The town is poor, and its people say so\"; Bao Kimura constraint \"Cannot pay for the repairs and relief people want without coin the place does not have.\"; viabilityNote \"The occupiers take the revenue\".",
-  "source": "src/data/dossierStateProse/defense.generated.js:1393",
-  "mechanism": "two homes that disagree"
- },
- {
-  "n": 278,
-  "severity": "MED",
-  "town": "bar0-village-famine-rand-1",
-  "tab": "Systems/Defense",
-  "kind": "a,g",
-  "sentence": "The longer the hunger lasts at Zelenoki, the less its defenders can do, and nothing is filling the stores again yet.",
-  "fact": "defenseProfile.institutions: walls/garrison/militia/watch all []; readiness 'Undefended'; same tab: 'No organized force.' and 'Nobody here is paid to keep order.'",
-  "source": "src/data/dossierStateProse/defense.generated.js:6935",
-  "mechanism": "names a house, a role or a force the town lacks"
+  "mechanism": "a figure against the record's",
+  "writer_file": "src/data/dossierStateProse",
+  "writer_line_on_the_rehearsal_tree": null,
+  "writer_note": "(DS-ECO-9 SECURE)"
  },
  {
   "n": 203,
@@ -95,19 +72,23 @@
   "kind": "g|c",
   "sentence": "A visitor to Longyuan would not guess at the trouble from the streets; the town is shaken but standing.",
   "fact": "Overview \"At Longyuan's gate the queue divides in two: residents with papers ... where the soldiers can hear\"; same tab \"Occupation authorities enforce the curfew at the checkpoints\"; \"Only those holding the occupiers' passes may be out after dark\".",
-  "source": "src/data/dossierStateProse/defense.generated.js:7544",
-  "mechanism": "presumes normal times under a crisis in force"
+  "mechanism": "presumes normal times under a crisis in force",
+  "writer_file": "src/data/dossierStateProse/defense.generated.js",
+  "writer_line_on_the_rehearsal_tree": 7544,
+  "writer_note": ""
  },
  {
-  "n": 297,
+  "n": 205,
   "severity": "MED",
-  "town": "bar0-village-calm-rand-1",
-  "tab": "Systems/Magic",
-  "kind": "g",
-  "sentence": "Tzulco does better than its ground and roads would explain, and the reason is the arcane work done here.",
-  "fact": "Defense tab: 'Arcane SupportNone' / 'No arcane practitioners on the rolls.'; Overview 'Magical CapabilityCritical'; defenseProfile.traditions all false (hasArcane, hasDivine, hasDruid, hasAlchemy); no magic house in institutions[]",
-  "source": "src/data/dossierStateProse/defense.generated.js:7969",
-  "mechanism": "two homes that disagree"
+  "town": "bar0-town-occupied-rand-1",
+  "tab": "Systems/Defense",
+  "kind": "g|c",
+  "sentence": "Whatever the present trouble costs Longyuan, the town is paying it from money it had put by.",
+  "fact": "economicState.prosperity \"Poor\"; Economics \"The town is poor, and its people say so\"; Bao Kimura constraint \"Cannot pay for the repairs and relief people want without coin the place does not have.\"; viabilityNote \"The occupiers take the revenue\".",
+  "mechanism": "two homes that disagree",
+  "writer_file": "src/data/dossierStateProse/defense.generated.js",
+  "writer_line_on_the_rehearsal_tree": 1393,
+  "writer_note": ""
  },
  {
   "n": 259,
@@ -117,41 +98,49 @@
   "kind": "g",
   "sentence": "Whatever magic reaches Torriplenum, the hamlet does not rest on it: nothing it lives by would stop without it.",
   "fact": "foodSecurity.magicOffset 37 beside dailyProduction 37 (half of what is eaten); Systems/Economics: 'Production: 37 lbs/day+ 37 by magical provision' and 'the hamlet would go shorter without it'",
-  "source": "src/data/dossierStateProse/defense.generated.js:8021",
-  "mechanism": "two homes that disagree"
+  "mechanism": "two homes that disagree",
+  "writer_file": "src/data/dossierStateProse/defense.generated.js",
+  "writer_line_on_the_rehearsal_tree": 8021,
+  "writer_note": ""
  },
  {
-  "n": 168,
-  "severity": "MED",
-  "town": "bar0-thorp-calm-rand-1",
-  "tab": "World/Daily Life",
-  "kind": "c|d|g",
-  "sentence": "Tyrby has money to spend and spends it on its halls and its defences.",
-  "fact": "defenseProfile.readiness \"Lightly Defended\" (35); only Household levy, no walls; Defense: \"Tyrby has no wall\", \"could not hold off a raid\"; no hall in institutions[]",
-  "source": "src/data/dossierStateProse/economy.generated.js:2785",
-  "mechanism": "two homes that disagree"
- },
- {
-  "n": 154,
-  "severity": "MED",
-  "town": "bar0-thorp-calm-rand-1",
-  "tab": "Systems/Economics",
-  "kind": "f|g",
-  "sentence": "Tyrby is fed, but only just. A poor harvest is felt at every table; a good one means a little put by.",
-  "fact": "foodSecurity.foodRatio 1.38, surplusPct 38, foodRecord.grownPct 139, growsMoreThanEats true; same tab: \"Tyrby grows far more than it eats, with some to put by against a bad year.\" and \"Production: 78 lbs/dayNeed: 56 lbs/day\"",
-  "source": "src/data/dossierStateProse/economy.generated.js:3251",
-  "mechanism": "a figure against the record's"
- },
- {
-  "n": 275,
+  "n": 278,
   "severity": "MED",
   "town": "bar0-village-famine-rand-1",
-  "tab": "Systems/Economics",
+  "tab": "Systems/Defense",
+  "kind": "a,g",
+  "sentence": "The longer the hunger lasts at Zelenoki, the less its defenders can do, and nothing is filling the stores again yet.",
+  "fact": "defenseProfile.institutions: walls/garrison/militia/watch all []; readiness 'Undefended'; same tab: 'No organized force.' and 'Nobody here is paid to keep order.'",
+  "mechanism": "names a house, a role or a force the town lacks",
+  "writer_file": "src/data/dossierStateProse/defense.generated.js",
+  "writer_line_on_the_rehearsal_tree": 6935,
+  "writer_note": ""
+ },
+ {
+  "n": 279,
+  "severity": "MED",
+  "town": "bar0-village-famine-rand-1",
+  "tab": "Systems/Defense",
   "kind": "g",
-  "sentence": "The trade here is in the moving of things. Very little of what leaves began here.",
-  "fact": "same tab Exports: 'CoalRaw woolLivestock' - all produced locally (record primaryExports Milled flour, Coal, Raw wool, Livestock; 'Produced locally livestock wool ...'); Resources: coal deposits worked",
-  "source": "src/data/dossierStateProse/economy.generated.js:4578",
-  "mechanism": "two homes that disagree"
+  "sentence": "Nothing has come for Zelenoki, and nothing about the village would stop whatever did.",
+  "fact": "history.historicalEvents: 'The Occupation' (64 years ago, catastrophic): 'When the occupiers left...'; Overview/History quote 'Everything before the Occupation...'",
+  "mechanism": "a ruler, a power, a threat or a history state that is not so",
+  "writer_file": "src/data/dossierStateProse/defense.generated.js",
+  "writer_line_on_the_rehearsal_tree": 1087,
+  "writer_note": ""
+ },
+ {
+  "n": 297,
+  "severity": "MED",
+  "town": "bar0-village-calm-rand-1",
+  "tab": "Systems/Magic",
+  "kind": "g",
+  "sentence": "Tzulco does better than its ground and roads would explain, and the reason is the arcane work done here.",
+  "fact": "Defense tab: 'Arcane SupportNone' / 'No arcane practitioners on the rolls.'; Overview 'Magical CapabilityCritical'; defenseProfile.traditions all false (hasArcane, hasDivine, hasDruid, hasAlchemy); no magic house in institutions[]",
+  "mechanism": "two homes that disagree",
+  "writer_file": "src/data/dossierStateProse/defense.generated.js",
+  "writer_line_on_the_rehearsal_tree": 7969,
+  "writer_note": ""
  },
  {
   "n": 12,
@@ -161,8 +150,49 @@
   "kind": "g|c",
   "sentence": "Nobody at Shankou bothers with the open grazing land this year: there is nothing left worth taking, and the people who lived off the open grazing land have turned to other work until the ground recovers.",
   "fact": "activeChains livestock status \"magically_sustained\", animal_husbandry \"vulnerable\" (still running); Economics flows print \"Livestock & Dairy ... Magically Sustained ... Druidic cultivation supplements depleted farmland\" and \"Horse & Animal Trade ... Druidic animal husbandry sustains the herd\"",
-  "source": "src/data/dossierStateProse/economy.generated.js:5664",
-  "mechanism": "two homes that disagree"
+  "mechanism": "two homes that disagree",
+  "writer_file": "src/data/dossierStateProse/economy.generated.js",
+  "writer_line_on_the_rehearsal_tree": 5664,
+  "writer_note": ""
+ },
+ {
+  "n": 154,
+  "severity": "MED",
+  "town": "bar0-thorp-calm-rand-1",
+  "tab": "Systems/Economics",
+  "kind": "f|g",
+  "sentence": "Tyrby is fed, but only just. A poor harvest is felt at every table; a good one means a little put by.",
+  "fact": "foodSecurity.foodRatio 1.38, surplusPct 38, foodRecord.grownPct 139, growsMoreThanEats true; same tab: \"Tyrby grows far more than it eats, with some to put by against a bad year.\" and \"Production: 78 lbs/dayNeed: 56 lbs/day\"",
+  "mechanism": "a figure against the record's",
+  "writer_file": "src/data/dossierStateProse/economy.generated.js",
+  "writer_line_on_the_rehearsal_tree": 3251,
+  "writer_note": ""
+ },
+ {
+  "n": 168,
+  "severity": "MED",
+  "town": "bar0-thorp-calm-rand-1",
+  "tab": "World/Daily Life",
+  "kind": "c|d|g",
+  "sentence": "Tyrby has money to spend and spends it on its halls and its defences.",
+  "fact": "defenseProfile.readiness \"Lightly Defended\" (35); only Household levy, no walls; Defense: \"Tyrby has no wall\", \"could not hold off a raid\"; no hall in institutions[]",
+  "mechanism": "two homes that disagree",
+  "writer_file": "src/data/dossierStateProse/economy.generated.js",
+  "writer_line_on_the_rehearsal_tree": 2785,
+  "writer_note": ""
+ },
+ {
+  "n": 275,
+  "severity": "MED",
+  "town": "bar0-village-famine-rand-1",
+  "tab": "Systems/Economics",
+  "kind": "g",
+  "sentence": "The trade here is in the moving of things. Very little of what leaves began here.",
+  "fact": "same tab Exports: 'CoalRaw woolLivestock' - all produced locally (record primaryExports Milled flour, Coal, Raw wool, Livestock; 'Produced locally livestock wool ...'); Resources: coal deposits worked",
+  "mechanism": "two homes that disagree",
+  "writer_file": "src/data/dossierStateProse/economy.generated.js",
+  "writer_line_on_the_rehearsal_tree": 4578,
+  "writer_note": ""
  },
  {
   "n": 38,
@@ -172,19 +202,10 @@
   "kind": "c|h",
   "sentence": "Agiospolis's market grew up on the road's trade.",
   "fact": "config.tradeRouteAccess \"river\"; economicState.tradeAccess \"river\"; resourceAnalysis.economicStrengths [\"River trade\"]; history.founding.reason \"grew around a ferry crossing\"; the source line goes on \"and with the siege closing the road it has almost nobody left to sell to\" but prints cut at the first clause, so it reads as normal trade",
-  "source": "src/data/dossierStateProse/general.generated.js:9453 (DS-GEN-13 vid 5)",
-  "mechanism": "names a resource, a good or a chain state that is not so"
- },
- {
-  "n": 114,
-  "severity": "MED",
-  "town": "bar0-city-wartime-rand-1",
-  "tab": "Summary/Overview",
-  "kind": "a",
-  "sentence": "Members of Naranjotzin's merchant guild do most of the buying and selling that matters.",
-  "fact": "institutions[] has no merchant guild (only Craft guilds (30-80), Tailor's guild, Merchant oligarchy as government); compound.inst.hasMerchantGuild is true only by inference",
-  "source": "src/data/dossierStateProse/general.generated.js:9682",
-  "mechanism": "names a house, a role or a force the town lacks"
+  "mechanism": "names a resource, a good or a chain state that is not so",
+  "writer_file": "src/data/dossierStateProse/general.generated.js",
+  "writer_line_on_the_rehearsal_tree": 9453,
+  "writer_note": "(DS-GEN-13 vid 5)"
  },
  {
   "n": 39,
@@ -194,8 +215,23 @@
   "kind": "c",
   "sentence": "A merchant at Agiospolis can store a cargo in the city's warehouses and sell it when the price suits.",
   "fact": "economicState.situationDesc \"The market is shut and the caravans have stopped coming\"; activeChains warehouse_logistics status \"impaired\"; stress under_siege \"nothing comes in by road\"",
-  "source": "src/data/dossierStateProse/general.generated.js:9809",
-  "mechanism": "presumes normal times under a crisis in force"
+  "mechanism": "presumes normal times under a crisis in force",
+  "writer_file": "src/data/dossierStateProse/general.generated.js",
+  "writer_line_on_the_rehearsal_tree": 9809,
+  "writer_note": ""
+ },
+ {
+  "n": 114,
+  "severity": "MED",
+  "town": "bar0-city-wartime-rand-1",
+  "tab": "Summary/Overview",
+  "kind": "a",
+  "sentence": "Members of Naranjotzin's merchant guild do most of the buying and selling that matters.",
+  "fact": "institutions[] has no merchant guild (only Craft guilds (30-80), Tailor's guild, Merchant oligarchy as government); compound.inst.hasMerchantGuild is true only by inference",
+  "mechanism": "names a house, a role or a force the town lacks",
+  "writer_file": "src/data/dossierStateProse/general.generated.js",
+  "writer_line_on_the_rehearsal_tree": 9682,
+  "writer_note": ""
  },
  {
   "n": 200,
@@ -205,7 +241,9 @@
   "kind": "c|g",
   "sentence": "Whoever holds Longyuan's streets now, nobody is watching its officials, and they are paid poorly enough to be bought.",
   "fact": "stress.viabilityNote \"The occupiers take the revenue, and local offices work only under their eye.\" (printed on Crisis and Defense tabs); Overview \"Longyuan's own officials take their orders\".",
-  "source": "src/data/dossierStateProse/power.generated.js:3055",
-  "mechanism": "presumes normal times under a crisis in force"
+  "mechanism": "presumes normal times under a crisis in force",
+  "writer_file": "src/data/dossierStateProse/power.generated.js",
+  "writer_line_on_the_rehearsal_tree": 3055,
+  "writer_note": ""
  }
 ]

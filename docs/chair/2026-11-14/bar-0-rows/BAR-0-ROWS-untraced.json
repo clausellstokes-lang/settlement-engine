@@ -7,8 +7,10 @@
   "kind": "c|g",
   "sentence": "Food endurance: The siege has taken the outlying fields; the granary carries the city for about three months at full rations, about six months on half, and what is still harvested stretches it further.",
   "fact": "Outlook: \"the outlying farms are abandoned or burned. What is already in store is all there will be until it lifts.\"; Defense: \"Field work and trade have stopped\"; fertile_floodplain depleted",
-  "source": "",
-  "mechanism": "presumes normal times under a crisis in force"
+  "mechanism": "presumes normal times under a crisis in force",
+  "writer_file": null,
+  "writer_line_on_the_rehearsal_tree": null,
+  "writer_note": ""
  },
  {
   "n": 113,
@@ -18,8 +20,10 @@
   "kind": "g|f",
   "sentence": "Food: Pressured. Stores: a granary, about nine months of grain.",
   "fact": "economicState.foodSecurity.label \"Secure\" (isPressured:false, isSecure:true); Summary/Overview prints \"Food SecuritySecure\", Summary/Foundations \"FoodSecure\"",
-  "source": "",
-  "mechanism": "two homes that disagree"
+  "mechanism": "two homes that disagree",
+  "writer_file": null,
+  "writer_line_on_the_rehearsal_tree": null,
+  "writer_note": ""
  },
  {
   "n": 118,
@@ -29,8 +33,10 @@
   "kind": "c|g",
   "sentence": "The table rests on fish from the local waters. Intensive plots, terraces, raised fields, and tribute redistribution support dense populations.",
   "fact": "foodSecurity.chains 'Grain & agriculture': false; foodRecord.foodSources [\"fish\"]; resourceAnalysis.imports.reasons.grain 'not available in Coastal terrain'; Economics prints 'the country around the city produces none' (grain)",
-  "source": "",
-  "mechanism": "names a resource, a good or a chain state that is not so"
+  "mechanism": "names a resource, a good or a chain state that is not so",
+  "writer_file": null,
+  "writer_line_on_the_rehearsal_tree": null,
+  "writer_note": ""
  },
  {
   "n": 124,
@@ -40,8 +46,10 @@
   "kind": "a|g",
   "sentence": "Medical treatmentSurgeryQuarantine",
   "fact": "the only healing house is the Almshouse (poor relief; no hospital/physician in institutions[]); Systems/Defense says 'Medical Readiness Infirmary ... no beds to contain an outbreak'",
-  "source": "",
-  "mechanism": "two homes that disagree"
+  "mechanism": "two homes that disagree",
+  "writer_file": null,
+  "writer_line_on_the_rehearsal_tree": null,
+  "writer_note": ""
  },
  {
   "n": 129,
@@ -51,8 +59,10 @@
   "kind": "g",
   "sentence": "Merchant oligarchy gives the orders and War Council carries them out; each needs the other to stay strong.",
   "fact": "powerStructure.conflicts: Merchant oligarchy vs War Council intensity 'high', 'A ruling that one power refuses to obey' (printed on Summary/Overview and Plot Hooks); the Web marks the pair 'stable'",
-  "source": "",
-  "mechanism": "two homes that disagree"
+  "mechanism": "two homes that disagree",
+  "writer_file": null,
+  "writer_line_on_the_rehearsal_tree": null,
+  "writer_note": ""
  },
  {
   "n": 130,
@@ -62,8 +72,10 @@
   "kind": "e",
   "sentence": "Institutions behind this power (32)",
   "fact": "the list under it prints 29 houses (11 commercial + 16 held + 2 worship)",
-  "source": "",
-  "mechanism": "a count"
+  "mechanism": "a count",
+  "writer_file": null,
+  "writer_line_on_the_rehearsal_tree": null,
+  "writer_note": ""
  },
  {
   "n": 131,
@@ -73,8 +85,10 @@
   "kind": "e",
   "sentence": "Institutions behind this power (4)",
   "fact": "Arcane Orders list prints 3: Wizard's tower, Scroll scribe, Golem workforce",
-  "source": "",
-  "mechanism": "a count"
+  "mechanism": "a count",
+  "writer_file": null,
+  "writer_line_on_the_rehearsal_tree": null,
+  "writer_note": ""
  },
  {
   "n": 132,
@@ -84,8 +98,10 @@
   "kind": "g",
   "sentence": "Crown-appointed emergency body with powers over requisition, conscription, and price controls. Unpopular. Accused of favouritism in contract awards. Probably correct on the military decisions.",
   "fact": "printed for The Shield Compact (military, 11, led by garrison commander Malinalxochitl Kab) as well as for War Council; two separate powers given the identical description of the one crown body",
-  "source": "",
-  "mechanism": "two homes that disagree"
+  "mechanism": "two homes that disagree",
+  "writer_file": null,
+  "writer_line_on_the_rehearsal_tree": null,
+  "writer_note": ""
  },
  {
   "n": 134,
@@ -95,8 +111,10 @@
   "kind": "c|g",
   "sentence": "Naranjotzin's accounts have money in hand: the city can keep its defenders paid and buy what a bad season needs without going begging.",
   "fact": "stress 'wartime'; same tab: 'The war takes most of the money: trade suffers...'",
-  "source": "",
-  "mechanism": "presumes normal times under a crisis in force"
+  "mechanism": "presumes normal times under a crisis in force",
+  "writer_file": null,
+  "writer_line_on_the_rehearsal_tree": null,
+  "writer_note": ""
  },
  {
   "n": 136,
@@ -106,8 +124,10 @@
   "kind": "g",
   "sentence": "Pressured",
   "fact": "Daily Life Food tile prints Pressured; economicState.foodSecurity.label \"Secure\", isPressured false; Summary/Overview \"Food SecuritySecure\"",
-  "source": "",
-  "mechanism": "two homes that disagree"
+  "mechanism": "two homes that disagree",
+  "writer_file": null,
+  "writer_line_on_the_rehearsal_tree": null,
+  "writer_note": ""
  },
  {
   "n": 137,
@@ -117,8 +137,10 @@
   "kind": "g",
   "sentence": "Food Pressured. Stores: a granary, about nine months of grain.",
   "fact": "economicState.foodSecurity.label \"Secure\" (isPressured false); Summary/Overview \"Food SecuritySecure\"",
-  "source": "",
-  "mechanism": "two homes that disagree"
+  "mechanism": "two homes that disagree",
+  "writer_file": null,
+  "writer_line_on_the_rehearsal_tree": null,
+  "writer_note": ""
  },
  {
   "n": 138,
@@ -128,8 +150,10 @@
   "kind": "a|g",
   "sentence": "Secret: Lied about the death of a prisoner who died in the cells after a beating ordered from above",
   "fact": "compound.inst.hasPrison false; Systems/Defense: \"A court exists, though there is nowhere to hold the guilty.\" and \"Courts without detention. Fines and exile only.\"",
-  "source": "",
-  "mechanism": "two homes that disagree"
+  "mechanism": "two homes that disagree",
+  "writer_file": null,
+  "writer_line_on_the_rehearsal_tree": null,
+  "writer_note": ""
  },
  {
   "n": 160,
@@ -139,8 +163,10 @@
   "kind": "g",
   "sentence": "More than half of what Tyrby earns comes from a single trade, and most households depend on it one way or another. Whatever Tyrby's people give for their faith is given elsewhere, or not at all: the place keeps no house to take it. The country around Tyrby produces no timber, so the thorp has none but what it buys.",
   "fact": "same tab: \"Needed, and not brought in: timber, stone, metals.\"; primaryImports [\"Salt\"] only",
-  "source": "",
-  "mechanism": "two homes that disagree"
+  "mechanism": "two homes that disagree",
+  "writer_file": null,
+  "writer_line_on_the_rehearsal_tree": null,
+  "writer_note": ""
  },
  {
   "n": 165,
@@ -150,8 +176,10 @@
   "kind": "f|g",
   "sentence": "Food endurance: No granary: under siege the outlying fields would be lost; household stores would carry the thorp for about two months at full rations, about three months on half, and what is still harvested would stretch them further.",
   "fact": "foodSecurity.storageMonths 1.5; Economics and Tonight sheet: \"about a month and a half in household stores\"",
-  "source": "",
-  "mechanism": "a figure against the record's"
+  "mechanism": "a figure against the record's",
+  "writer_file": null,
+  "writer_line_on_the_rehearsal_tree": null,
+  "writer_note": ""
  },
  {
   "n": 169,
@@ -161,8 +189,10 @@
   "kind": "g",
   "sentence": "The Charter Fair",
   "fact": "Summary/Overview: \"No market or fair stands in Tyrby\"; hasMarket false",
-  "source": "",
-  "mechanism": "two homes that disagree"
+  "mechanism": "two homes that disagree",
+  "writer_file": null,
+  "writer_line_on_the_rehearsal_tree": null,
+  "writer_note": ""
  },
  {
   "n": 170,
@@ -172,8 +202,10 @@
   "kind": "g",
   "sentence": "The Greening Fair",
   "fact": "Summary/Overview: \"No market or fair stands in Tyrby\"; hasMarket false",
-  "source": "",
-  "mechanism": "two homes that disagree"
+  "mechanism": "two homes that disagree",
+  "writer_file": null,
+  "writer_line_on_the_rehearsal_tree": null,
+  "writer_note": ""
  },
  {
   "n": 182,
@@ -183,162 +215,10 @@
   "kind": "g|f",
   "sentence": "Public legitimacyCritical",
   "fact": "powerStructure.publicLegitimacy {score:33,label:\"Contested\",isLegitimacyCrisis:false}; Power tab prints \"33Contested\".",
-  "source": "",
-  "mechanism": "two homes that disagree"
- },
- {
-  "n": 198,
-  "severity": "MED",
-  "town": "bar0-town-occupied-rand-1",
-  "tab": "Systems/Power",
-  "kind": "c|g",
-  "sentence": "The powerMerchant oligarchy (strong)corruption-riddled",
-  "fact": "Under occupation (stress.type \"occupied\"); Overview \"nothing it decides stands until the occupiers agree\"; factionRelationships \"Merchant oligarchy carries out what Occupation Authority decides.\"",
-  "source": "",
-  "mechanism": "a ruler, a power, a threat or a history state that is not so"
- },
- {
-  "n": 213,
-  "severity": "MED",
-  "town": "bar0-town-occupied-rand-1",
-  "tab": "World/Daily Life",
-  "kind": "g|f",
-  "sentence": "Pressured",
-  "fact": "economicState.foodSecurity.label \"Secure\"; Overview \"Food SecuritySecure\".",
-  "source": "",
-  "mechanism": "two homes that disagree"
- },
- {
-  "n": 219,
-  "severity": "MED",
-  "town": "bar0-hamlet-calm-rand-1",
-  "tab": "World/Daily Life",
-  "kind": "g|f",
-  "sentence": "Pressured",
-  "fact": "economicState.foodSecurity.label \"Secure\", isPressured false, foodRecord.band \"secure\"; Overview \"Food SecuritySecure\", Foundations \"FoodSecure\".",
-  "source": "",
-  "mechanism": "two homes that disagree"
- },
- {
-  "n": 235,
-  "severity": "MED",
-  "town": "bar0-town-calm-rand-1",
-  "tab": "Systems/Economics",
-  "kind": "a|g",
-  "sentence": "Stone Quarrying",
-  "fact": "income line 'Stone Quarrying' 7% (economicState.incomeSources); institutions[] has no quarry or masons; resourceAnalysis.gaps {chain:'stone', missing:['Stone quarry','Stonemasons\\' guild']}; primaryImports includes 'Cut stone and masonry'; same page Systems/Resources: 'Unexploited Stone' and 'No one here works the stone near Gortfell.'",
-  "source": "",
-  "mechanism": "names a house, a role or a force the town lacks"
- },
- {
-  "n": 247,
-  "severity": "MED",
-  "town": "bar0-hamlet-under_siege-rand-1",
-  "tab": "Systems/Institutions",
-  "kind": "c|g",
-  "sentence": "Services mean the walk to the village house of worship, usually a few miles off.",
-  "fact": "stress.type 'under_siege': 'nothing comes in by road'; World/Faith: 'the siege keeps its people from the next village’s parish church'",
-  "source": "",
-  "mechanism": "presumes normal times under a crisis in force"
- },
- {
-  "n": 248,
-  "severity": "MED",
-  "town": "bar0-hamlet-under_siege-rand-1",
-  "tab": "Systems/Services",
-  "kind": "c|g",
-  "sentence": "The weekly service. Attendance expected of all residents.",
-  "fact": "the house of worship is outside the hamlet (Access to parish church) and stress under_siege cuts the roads; World/Faith: 'the siege keeps its people from the next village’s parish church'; the mill service on the same tab is siege-adjusted ('With the roads cut...')",
-  "source": "",
-  "mechanism": "presumes normal times under a crisis in force"
- },
- {
-  "n": 249,
-  "severity": "MED",
-  "town": "bar0-hamlet-under_siege-rand-1",
-  "tab": "Systems/Economics",
-  "kind": "c|g",
-  "sentence": "Faith & WorshipReligion & civic✓ Running",
-  "fact": "chain 'parish' runs through 'Access to a house of worship' outside the hamlet; under_siege cuts every road; World/Faith: 'the siege keeps its people from the next village’s parish church'",
-  "source": "",
-  "mechanism": "names a resource, a good or a chain state that is not so"
- },
- {
-  "n": 250,
-  "severity": "MED",
-  "town": "bar0-hamlet-under_siege-rand-1",
-  "tab": "Systems/Services",
-  "kind": "c",
-  "sentence": "Assemble merchants with compatible routes into shared caravans for safety and economy.",
-  "fact": "stress under_siege: 'nothing comes in by road'; economicState.situationDesc: 'The caravans have stopped coming and nothing is bought or sold.'",
-  "source": "",
-  "mechanism": "presumes normal times under a crisis in force"
- },
- {
-  "n": 257,
-  "severity": "MED",
-  "town": "bar0-hamlet-under_siege-rand-1",
-  "tab": "Systems/Magic",
-  "kind": "g|f",
-  "sentence": "Reliance on magic: None",
-  "fact": "economicState.foodSecurity.foodRecord.magicPct 29, magicOffset 37 of 74 lbs/day eaten; Systems/Economics: 'some of what the hamlet eats is provided by spell or by prayer, and the hamlet would go shorter without it' with a 43% gap already",
-  "source": "",
-  "mechanism": "two homes that disagree"
- },
- {
-  "n": 258,
-  "severity": "MED",
-  "town": "bar0-hamlet-under_siege-rand-1",
-  "tab": "Summary/Foundations",
-  "kind": "g|f",
-  "sentence": "Reliance on magic: None",
-  "fact": "foodRecord.magicPct 29 (37 lbs/day of magical provision, half of what is eaten); Systems/Economics: 'the hamlet would go shorter without it'",
-  "source": "",
-  "mechanism": "two homes that disagree"
- },
- {
-  "n": 276,
-  "severity": "MED",
-  "town": "bar0-village-famine-rand-1",
-  "tab": "Systems/Resources",
-  "kind": "c",
-  "sentence": "✓ Fully exploitedGrainmedium value",
-  "fact": "stress.type famine; economicState.foodSecurity.foodRecord.failedSource:'grain', famineCutPct:50; same page Economics 'Grain & BreadFood securityImpaired' and 'The grain harvest failed this year'",
-  "source": "",
-  "mechanism": "names a resource, a good or a chain state that is not so"
- },
- {
-  "n": 293,
-  "severity": "MED",
-  "town": "bar0-village-calm-rand-1",
-  "tab": "Summary/Overview",
-  "kind": "h",
-  "sentence": "Safety",
-  "fact": "the Systems Health 'Safety' row prints with no value (next line is 'Viability'); record economicState.safetyProfile.safetyLabel:'Moderate'",
-  "source": "",
-  "mechanism": "broken text"
- },
- {
-  "n": 294,
-  "severity": "MED",
-  "town": "bar0-village-calm-rand-1",
-  "tab": "Systems/Services",
-  "kind": "e",
-  "sentence": "Lodging(2)▲",
-  "fact": "the Lodging group lists one service only ('Hospitality' / Dwellings) before 'Transportation(4)▲'",
-  "source": "",
-  "mechanism": "a count"
- },
- {
-  "n": 296,
-  "severity": "MED",
-  "town": "bar0-village-calm-rand-1",
-  "tab": "Systems/Economics",
-  "kind": "g",
-  "sentence": "Needed, and not brought in: stone (for major construction), luxury goods.",
-  "fact": "same tab Imports: 'Quetzal feathers and jade' (record primaryImports) - a luxury good that is brought in",
-  "source": "",
-  "mechanism": "two homes that disagree"
+  "mechanism": "two homes that disagree",
+  "writer_file": null,
+  "writer_line_on_the_rehearsal_tree": null,
+  "writer_note": ""
  },
  {
   "n": 195,
@@ -348,8 +228,23 @@
   "kind": "a",
   "sentence": "Fish & Maritime Produce",
   "fact": "foodSecurity.chains \"Fishing & water\": false; foodRecord.foodSources []; no fishery institution in institutions[].",
-  "source": "economicState.incomeSources",
-  "mechanism": "names a house, a role or a force the town lacks"
+  "mechanism": "names a house, a role or a force the town lacks",
+  "writer_file": null,
+  "writer_line_on_the_rehearsal_tree": null,
+  "writer_note": "economicState.incomeSources"
+ },
+ {
+  "n": 198,
+  "severity": "MED",
+  "town": "bar0-town-occupied-rand-1",
+  "tab": "Systems/Power",
+  "kind": "c|g",
+  "sentence": "The powerMerchant oligarchy (strong)corruption-riddled",
+  "fact": "Under occupation (stress.type \"occupied\"); Overview \"nothing it decides stands until the occupiers agree\"; factionRelationships \"Merchant oligarchy carries out what Occupation Authority decides.\"",
+  "mechanism": "a ruler, a power, a threat or a history state that is not so",
+  "writer_file": null,
+  "writer_line_on_the_rehearsal_tree": null,
+  "writer_note": ""
  },
  {
   "n": 210,
@@ -359,7 +254,178 @@
   "kind": "g|f",
   "sentence": "The occupiers are fed from local stores, so the food has to stretch about a fifth further than before.",
   "fact": "economicState.foodSecurity (dailyNeed 3770, label \"Secure\", foodRecord.famineCutPct 0) carries no occupier mouths; Economics prints \"Need: 3,770 lbs/day\" and \"Short: 103 lbs/day\" (3%), Overview \"Food SecuritySecure\". The fifth is only in economicViability.issues.",
-  "source": "economicViability.issues (stress_consequence)",
-  "mechanism": "a figure against the record's"
+  "mechanism": "a figure against the record's",
+  "writer_file": null,
+  "writer_line_on_the_rehearsal_tree": null,
+  "writer_note": "economicViability.issues (stress_consequence)"
+ },
+ {
+  "n": 213,
+  "severity": "MED",
+  "town": "bar0-town-occupied-rand-1",
+  "tab": "World/Daily Life",
+  "kind": "g|f",
+  "sentence": "Pressured",
+  "fact": "economicState.foodSecurity.label \"Secure\"; Overview \"Food SecuritySecure\".",
+  "mechanism": "two homes that disagree",
+  "writer_file": null,
+  "writer_line_on_the_rehearsal_tree": null,
+  "writer_note": ""
+ },
+ {
+  "n": 219,
+  "severity": "MED",
+  "town": "bar0-hamlet-calm-rand-1",
+  "tab": "World/Daily Life",
+  "kind": "g|f",
+  "sentence": "Pressured",
+  "fact": "economicState.foodSecurity.label \"Secure\", isPressured false, foodRecord.band \"secure\"; Overview \"Food SecuritySecure\", Foundations \"FoodSecure\".",
+  "mechanism": "two homes that disagree",
+  "writer_file": null,
+  "writer_line_on_the_rehearsal_tree": null,
+  "writer_note": ""
+ },
+ {
+  "n": 235,
+  "severity": "MED",
+  "town": "bar0-town-calm-rand-1",
+  "tab": "Systems/Economics",
+  "kind": "a|g",
+  "sentence": "Stone Quarrying",
+  "fact": "income line 'Stone Quarrying' 7% (economicState.incomeSources); institutions[] has no quarry or masons; resourceAnalysis.gaps {chain:'stone', missing:['Stone quarry','Stonemasons\\' guild']}; primaryImports includes 'Cut stone and masonry'; same page Systems/Resources: 'Unexploited Stone' and 'No one here works the stone near Gortfell.'",
+  "mechanism": "names a house, a role or a force the town lacks",
+  "writer_file": null,
+  "writer_line_on_the_rehearsal_tree": null,
+  "writer_note": ""
+ },
+ {
+  "n": 247,
+  "severity": "MED",
+  "town": "bar0-hamlet-under_siege-rand-1",
+  "tab": "Systems/Institutions",
+  "kind": "c|g",
+  "sentence": "Services mean the walk to the village house of worship, usually a few miles off.",
+  "fact": "stress.type 'under_siege': 'nothing comes in by road'; World/Faith: 'the siege keeps its people from the next village’s parish church'",
+  "mechanism": "presumes normal times under a crisis in force",
+  "writer_file": null,
+  "writer_line_on_the_rehearsal_tree": null,
+  "writer_note": ""
+ },
+ {
+  "n": 248,
+  "severity": "MED",
+  "town": "bar0-hamlet-under_siege-rand-1",
+  "tab": "Systems/Services",
+  "kind": "c|g",
+  "sentence": "The weekly service. Attendance expected of all residents.",
+  "fact": "the house of worship is outside the hamlet (Access to parish church) and stress under_siege cuts the roads; World/Faith: 'the siege keeps its people from the next village’s parish church'; the mill service on the same tab is siege-adjusted ('With the roads cut...')",
+  "mechanism": "presumes normal times under a crisis in force",
+  "writer_file": null,
+  "writer_line_on_the_rehearsal_tree": null,
+  "writer_note": ""
+ },
+ {
+  "n": 249,
+  "severity": "MED",
+  "town": "bar0-hamlet-under_siege-rand-1",
+  "tab": "Systems/Economics",
+  "kind": "c|g",
+  "sentence": "Faith & WorshipReligion & civic✓ Running",
+  "fact": "chain 'parish' runs through 'Access to a house of worship' outside the hamlet; under_siege cuts every road; World/Faith: 'the siege keeps its people from the next village’s parish church'",
+  "mechanism": "names a resource, a good or a chain state that is not so",
+  "writer_file": null,
+  "writer_line_on_the_rehearsal_tree": null,
+  "writer_note": ""
+ },
+ {
+  "n": 250,
+  "severity": "MED",
+  "town": "bar0-hamlet-under_siege-rand-1",
+  "tab": "Systems/Services",
+  "kind": "c",
+  "sentence": "Assemble merchants with compatible routes into shared caravans for safety and economy.",
+  "fact": "stress under_siege: 'nothing comes in by road'; economicState.situationDesc: 'The caravans have stopped coming and nothing is bought or sold.'",
+  "mechanism": "presumes normal times under a crisis in force",
+  "writer_file": null,
+  "writer_line_on_the_rehearsal_tree": null,
+  "writer_note": ""
+ },
+ {
+  "n": 257,
+  "severity": "MED",
+  "town": "bar0-hamlet-under_siege-rand-1",
+  "tab": "Systems/Magic",
+  "kind": "g|f",
+  "sentence": "Reliance on magic: None",
+  "fact": "economicState.foodSecurity.foodRecord.magicPct 29, magicOffset 37 of 74 lbs/day eaten; Systems/Economics: 'some of what the hamlet eats is provided by spell or by prayer, and the hamlet would go shorter without it' with a 43% gap already",
+  "mechanism": "two homes that disagree",
+  "writer_file": null,
+  "writer_line_on_the_rehearsal_tree": null,
+  "writer_note": ""
+ },
+ {
+  "n": 258,
+  "severity": "MED",
+  "town": "bar0-hamlet-under_siege-rand-1",
+  "tab": "Summary/Foundations",
+  "kind": "g|f",
+  "sentence": "Reliance on magic: None",
+  "fact": "foodRecord.magicPct 29 (37 lbs/day of magical provision, half of what is eaten); Systems/Economics: 'the hamlet would go shorter without it'",
+  "mechanism": "two homes that disagree",
+  "writer_file": null,
+  "writer_line_on_the_rehearsal_tree": null,
+  "writer_note": ""
+ },
+ {
+  "n": 276,
+  "severity": "MED",
+  "town": "bar0-village-famine-rand-1",
+  "tab": "Systems/Resources",
+  "kind": "c",
+  "sentence": "✓ Fully exploitedGrainmedium value",
+  "fact": "stress.type famine; economicState.foodSecurity.foodRecord.failedSource:'grain', famineCutPct:50; same page Economics 'Grain & BreadFood securityImpaired' and 'The grain harvest failed this year'",
+  "mechanism": "names a resource, a good or a chain state that is not so",
+  "writer_file": null,
+  "writer_line_on_the_rehearsal_tree": null,
+  "writer_note": ""
+ },
+ {
+  "n": 293,
+  "severity": "MED",
+  "town": "bar0-village-calm-rand-1",
+  "tab": "Summary/Overview",
+  "kind": "h",
+  "sentence": "Safety",
+  "fact": "the Systems Health 'Safety' row prints with no value (next line is 'Viability'); record economicState.safetyProfile.safetyLabel:'Moderate'",
+  "mechanism": "broken text",
+  "writer_file": null,
+  "writer_line_on_the_rehearsal_tree": null,
+  "writer_note": ""
+ },
+ {
+  "n": 294,
+  "severity": "MED",
+  "town": "bar0-village-calm-rand-1",
+  "tab": "Systems/Services",
+  "kind": "e",
+  "sentence": "Lodging(2)▲",
+  "fact": "the Lodging group lists one service only ('Hospitality' / Dwellings) before 'Transportation(4)▲'",
+  "mechanism": "a count",
+  "writer_file": null,
+  "writer_line_on_the_rehearsal_tree": null,
+  "writer_note": ""
+ },
+ {
+  "n": 296,
+  "severity": "MED",
+  "town": "bar0-village-calm-rand-1",
+  "tab": "Systems/Economics",
+  "kind": "g",
+  "sentence": "Needed, and not brought in: stone (for major construction), luxury goods.",
+  "fact": "same tab Imports: 'Quetzal feathers and jade' (record primaryImports) - a luxury good that is brought in",
+  "mechanism": "two homes that disagree",
+  "writer_file": null,
+  "writer_line_on_the_rehearsal_tree": null,
+  "writer_note": ""
  }
 ]

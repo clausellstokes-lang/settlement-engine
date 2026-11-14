@@ -7,8 +7,10 @@
   "kind": "a,g",
   "sentence": "Elder Council has been debating market levies for three months.",
   "fact": "economicState.compound.inst.hasMarket:false; no market in institutions[]; Overview: 'No market or fair stands in Tzulco: what trade the village does is done house to house and on the road.'",
-  "source": "src/generators/power/governanceNarrative.js:481",
-  "mechanism": "names a house, a role or a force the town lacks"
+  "mechanism": "names a house, a role or a force the town lacks",
+  "writer_file": "src/generators/power/governanceNarrative.js",
+  "writer_line_on_the_rehearsal_tree": 481,
+  "writer_note": ""
  },
  {
   "n": 272,
@@ -18,8 +20,10 @@
   "kind": "a",
   "sentence": "The powerElder Council (significant)mage-advised",
   "fact": "record institutions have no mage or magic house (economicState.compound.inst.hasMagicInst:false, hasMagesGuild:false, hasWizardTower:false); defenseProfile.traditions.hasArcane:false; page Defense: 'No arcane practitioners on the rolls.'; Overview 'Reliance on magic None', 'Magical CapabilityCritical'. Label comes from the priorityMagic slider (config.priorityMagic:79), not from any adviser.",
-  "source": "src/generators/power/rulingStructure.js:317",
-  "mechanism": "names a house, a role or a force the town lacks"
+  "mechanism": "names a house, a role or a force the town lacks",
+  "writer_file": "src/generators/power/rulingStructure.js",
+  "writer_line_on_the_rehearsal_tree": 317,
+  "writer_note": ""
  },
  {
   "n": 62,
@@ -29,8 +33,10 @@
   "kind": "h",
   "sentence": "Connection: Mother Ioannes Comnenus",
   "fact": "npcs[npc_foundling_home] gender \"male\", title \"the foundling-mother\"",
-  "source": "src/data/faceHonorifics.js:138",
-  "mechanism": "other: a female title on a male NPC"
+  "mechanism": "other: a female title on a male NPC",
+  "writer_file": "src/data/faceHonorifics.js",
+  "writer_line_on_the_rehearsal_tree": 138,
+  "writer_note": ""
  },
  {
   "n": 98,
@@ -40,8 +46,10 @@
   "kind": "h",
   "sentence": "Mother",
   "fact": "Ioannes Comnenus, npcs[npc_foundling_home] gender \"male\", title \"the foundling-mother\"",
-  "source": "src/data/faceHonorifics.js:138",
-  "mechanism": "other: a female title on a male NPC"
+  "mechanism": "other: a female title on a male NPC",
+  "writer_file": "src/data/faceHonorifics.js",
+  "writer_line_on_the_rehearsal_tree": 138,
+  "writer_note": ""
  },
  {
   "n": 26,
@@ -51,8 +59,10 @@
   "kind": "c",
   "sentence": "How they deal Sells ore by the cart; hires workers by the week.",
   "fact": "Satoshi Hayashi, the mine captain: config.nearbyResourcesDepleted [coal_deposits, precious_metals, gemstone_deposits] (every minable deposit); activeChains precious_metals_mining \"impaired\"; Resources tab lists them as Depleted",
-  "source": "src/data/people/titleSecretsPresentations.js:1025",
-  "mechanism": "names a resource, a good or a chain state that is not so"
+  "mechanism": "names a resource, a good or a chain state that is not so",
+  "writer_file": "src/data/people/titleSecretsPresentations.js",
+  "writer_line_on_the_rehearsal_tree": 1025,
+  "writer_note": ""
  },
  {
   "n": 101,
@@ -62,8 +72,10 @@
   "kind": "c|g",
   "sentence": "How they deal Offers food, a bed and a fresh team; full of news of the road.",
   "fact": "Chrysoberge Chortasmenos (Coaching inn); famine in force; Services: \"with the roads held the rooms stand mostly empty\", \"while the siege holds the roads, none go out\"",
-  "source": "src/data/people/titleSecretsPresentations.js:783",
-  "mechanism": "presumes normal times under a crisis in force"
+  "mechanism": "presumes normal times under a crisis in force",
+  "writer_file": "src/data/people/titleSecretsPresentations.js",
+  "writer_line_on_the_rehearsal_tree": 783,
+  "writer_note": ""
  },
  {
   "n": 18,
@@ -73,8 +85,10 @@
   "kind": "f|g",
   "sentence": "They are roughly even with the military: the garrison can arrest their people, and the guild can make every investigation costly.",
   "fact": "factions Thieves' Guild power 8 (\"Suppressed\") vs Military/Guard power 15; same tab prints \"Military/Guard ... 15\" and \"Thieves' Guild Criminal8\"",
-  "source": "src/generators/power/factionStanding.js:126",
-  "mechanism": "a figure against the record's"
+  "mechanism": "a figure against the record's",
+  "writer_file": "src/generators/power/factionStanding.js",
+  "writer_line_on_the_rehearsal_tree": 126,
+  "writer_note": ""
  },
  {
   "n": 292,
@@ -84,8 +98,10 @@
   "kind": "a",
   "sentence": "The merchants have stopped attending the sessions.",
   "fact": "powerStructure.factions are only 'Elder Council' and 'Religious Authorities'; no merchant guild or merchant house (hasMerchantGuild:false, hasMarket:false); the Elder Council's 9 members are fishers, millers, crafters",
-  "source": "src/generators/power/governanceNarrative.js:481",
-  "mechanism": "names a house, a role or a force the town lacks"
+  "mechanism": "names a house, a role or a force the town lacks",
+  "writer_file": "src/generators/power/governanceNarrative.js",
+  "writer_line_on_the_rehearsal_tree": 481,
+  "writer_note": ""
  },
  {
   "n": 17,
@@ -95,7 +111,9 @@
   "kind": "g|c",
   "sentence": "Well-funded city watch; it keeps order reliably and is growing more sure of its own authority.",
   "fact": "Defense tab (economicState.safetyProfile.guardEffectivenessDesc): \"The garrison and city watch is disciplined but resource-constrained: motivated with inadequate equipment and irregular pay.\"; powerStructure.stability \"Unstable (pervasive organized crime)\"; printed for Military/Guard and again for The Martial Alliance, whose members are Sujin Yang (garrison), Gang Tian (veterans' lodge), Huilan Ma (mercenaries), not the watch",
-  "source": "src/generators/power/rulingStructure.js:562",
-  "mechanism": "two homes that disagree"
+  "mechanism": "two homes that disagree",
+  "writer_file": "src/generators/power/rulingStructure.js",
+  "writer_line_on_the_rehearsal_tree": 562,
+  "writer_note": ""
  }
 ]

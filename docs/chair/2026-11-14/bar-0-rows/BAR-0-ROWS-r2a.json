@@ -7,8 +7,10 @@
   "kind": "c|g",
   "sentence": "Agiospolis's gates are open but attended: every person entering is noted, every cart searched.",
   "fact": "stress under_siege: \"Enemies are camped around Agiospolis, and nothing comes in by road\"; Defense tab: \"Agiospolis's gates are shut and barred, and nothing has come through them since the siege began.\"",
-  "source": "src/data/narrativeData.js:165",
-  "mechanism": "presumes normal times under a crisis in force"
+  "mechanism": "presumes normal times under a crisis in force",
+  "writer_file": "src/data/narrativeData.js",
+  "writer_line_on_the_rehearsal_tree": 165,
+  "writer_note": ""
  },
  {
   "n": 300,
@@ -18,8 +20,10 @@
   "kind": "a,g",
   "sentence": "Origin:grew around a ferry crossing that became the first bridge only three generations ago",
   "fact": "no bridge in institutions[]; the crossing is still a 'River ferry' (Institutions: 'A flat-bottomed ferry over the river, the crossing rights held in one family for generations'; Services 'River crossing')",
-  "source": "src/data/narrativeData.js:108",
-  "mechanism": "names a house, a role or a force the town lacks"
+  "mechanism": "names a house, a role or a force the town lacks",
+  "writer_file": "src/data/narrativeData.js",
+  "writer_line_on_the_rehearsal_tree": 108,
+  "writer_note": ""
  },
  {
   "n": 44,
@@ -29,8 +33,10 @@
   "kind": "c",
   "sentence": "One of their most reliable suppliers has gone dark. The goods are still arriving. Someone else is sending them.",
   "fact": "Kyr Nestongos, master of granaries; stress under_siege \"nothing comes in by road\"; foodSecurity.importCoverage 0; Economics: \"since the siege nothing has come in\"",
-  "source": "src/data/npcData.js:1240",
-  "mechanism": "presumes normal times under a crisis in force"
+  "mechanism": "presumes normal times under a crisis in force",
+  "writer_file": "src/data/npcData.js",
+  "writer_line_on_the_rehearsal_tree": 1240,
+  "writer_note": ""
  },
  {
   "n": 167,
@@ -40,8 +46,10 @@
   "kind": "c|d|g",
   "sentence": "Járnsaxa Ragnarsson has asked Gunnar Sigmundsson to back a candidate Gunnar Sigmundsson distrusts. Refusing would cost the alliance its majority.",
   "fact": "powerStructure.factions is one power (Feudal Stewardship 100), relationships of 2 NPCs; Power: \"it has no rival, and nobody in the thorp is asking who comes next\" (no candidacy, no majority to lose)",
-  "source": "src/data/npcData.js:2139",
-  "mechanism": "a ruler, a power, a threat or a history state that is not so"
+  "mechanism": "a ruler, a power, a threat or a history state that is not so",
+  "writer_file": "src/data/npcData.js",
+  "writer_line_on_the_rehearsal_tree": 2139,
+  "writer_note": ""
  },
  {
   "n": 281,
@@ -51,8 +59,10 @@
   "kind": "c,g",
   "sentence": "Secret: Helped engineer the original supply disruption that triggered the famine, believing it would only last a week",
   "fact": "stress.cast.nature:'natural'; stress.summary 'lost its harvest for a second season'; foodRecord.failedSource:'grain'; page: 'The grain harvest failed this year' - a crop failure, not a supply disruption, and not a week-long one",
-  "source": "src/data/stressInstitutionEffects.js:97",
-  "mechanism": "a ruler, a power, a threat or a history state that is not so"
+  "mechanism": "a ruler, a power, a threat or a history state that is not so",
+  "writer_file": "src/data/stressInstitutionEffects.js",
+  "writer_line_on_the_rehearsal_tree": 97,
+  "writer_note": ""
  },
  {
   "n": 159,
@@ -62,8 +72,10 @@
   "kind": "g",
   "sentence": "Founded at a junction on the oldest logic there is: whoever holds the meeting of roads holds what moves along them.",
   "fact": "history.founding.reason \"was founded on rich farmland granted to a favoured noble\", foundedBy \"a healer who stopped to treat a traveller\" (World/History Founding)",
-  "source": "src/generators/narrative/settlementOriginProse.js:103",
-  "mechanism": "two homes that disagree"
+  "mechanism": "two homes that disagree",
+  "writer_file": "src/generators/narrative/settlementOriginProse.js",
+  "writer_line_on_the_rehearsal_tree": 103,
+  "writer_note": ""
  },
  {
   "n": 155,
@@ -73,7 +85,9 @@
   "kind": "c|g",
   "sentence": "What little the place grows or makes is mostly used at home; there is not much left to sell.",
   "fact": "economicState.prosperity \"Prosperous\"; primaryExports [\"Grain surplus\",\"Transit trade\",\"Toll revenue\"]; foodRecord.grownPct 139 (surplus 38%); Economics: \"Tyrby lives on a farm surplus and ends each year with money to spare\"",
-  "source": "src/generators/narrativeGenerator.js:751",
-  "mechanism": "two homes that disagree"
+  "mechanism": "two homes that disagree",
+  "writer_file": "src/generators/narrativeGenerator.js",
+  "writer_line_on_the_rehearsal_tree": 751,
+  "writer_note": ""
  }
 ]
