@@ -1,0 +1,4 @@
+# REVIEW-UPKEEP-CAPACITY probes (2026-11-14)
+Trees (detached worktrees outside the repository): tip 9354d792a; DEF = 6e61d042a (the defence lane's tip, second parent of 722dcf408: git diff 6e61d042a 9354d792a is exactly the stage's own 17 files, so DEF is the tip without the stage); base 8ef42a051.
+Births: all.seeds = the SECOND-WAVE-CENSUS 720 (its births.mjs shape) + own.seeds (252, the app's shape: selectedStresses, selectedStressesRandom:false, magic on; calm, siege, famine, occupation, wartime, monster pressure, siege+famine x 6 sizes x 6).
+render5.mjs: every surface (tabs, Tonight, PDF text, Foundry, AI prompt/grounding, register, world export) + the record, gz. pairdiff5.py: DEF->tip line diff by masked line (pairdiff.def-tip.txt). agree.py: readiness label on every surface vs record. ladders.mjs: every scaled part's ladder and factor at the tip (ladders.tip.txt). mono.mjs/swap.mjs/why*.mjs: step 8(b).
