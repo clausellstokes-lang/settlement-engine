@@ -16,6 +16,9 @@ import { DEFAULT_CONFIG } from '../../../src/store/configSlice.js';
 import { leadingExploitation } from '../../../src/domain/display/stateProse/economyStateProse.js';
 import { exploitationForDesk, exploitationGroupsShown } from '../../../src/domain/display/validationOnPage.js';
 import { economyDeskRead } from '../../../src/components/new/economyDeskRead.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../../helpers/seedFailures.js';
+import { exportsAsPrinted } from '../../../src/domain/display/tradeListDisplay.js';
+import { liveInstitutions } from '../../../src/domain/institutions/institutionRoster.js';
 
 /** The app's own shape, as the reader REVIEW-R2-STAGES born its towns (render.rr2s.jsx :: cfgFor). @param {string} seed */
 const birthApp = (seed) => {
@@ -32,6 +35,20 @@ const READER_SEEDS = [
   'rr2s-town-indebted-port-1', 'rr2s-city-calm-rand-1', 'rr2s-city-famine-rand-1', 'rr2s-city-under_siege+famine-rand-1',
   'rr2s-city-occupied-rand-1', 'rr2s-metropolis-calm-rand-1', 'rr2s-metropolis-wartime-rand-1', 'rr2s-metropolis-plague_onset-port-1',
 ];
+/** The census's shapes (REVIEW-W2-C-LEAVES render.rr3s.jsx :: cfgFor: r2r, r2s). @param {string} seed */
+const birthCensus = (seed) => {
+  const dials = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true,
+    selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
+  const m = /** @type {RegExpMatchArray} */ (seed.match(/^r2r-(\w+)-\d+$/) || seed.match(/^r2s-(\w+)-(\w+)-\d+$/));
+  const cfg = seed.startsWith('r2r-') ? { ...DEFAULT_CONFIG, ...dials, settType: m[1] }
+    : { ...DEFAULT_CONFIG, ...dials, selectedStresses: [m[1]], selectedStressesRandom: false, settType: m[2] };
+  return generateSettlementPipeline(birthConfig(cfg), null, { seed, customContent: {} });
+};
+/** W2-C-LEAVES-11 (ruling (2)): towns whose full row named a house the roster lacks or a good no export holds (at 92d36e5f9). */
+const FULL_SILENT = ['r2r-village-5', 'r2r-thorp-36', 'r2r-thorp-13', 'r2s-under_siege-hamlet-0', 'r2r-metropolis-3'];
+/** …and towns where the roster holds the house and an export the good: the sentence stands, filled from the record. */
+const FULL_KEPT = ['r2s-under_siege-city-3', 'r2s-famine-metropolis-2', 'r2r-village-2', 'r2r-town-9', 'r2r-metropolis-43'];
+
 const BUCKET = /** @type {const} */ ({ unexploited: 'unexploited', partiallyExploited: 'partial', fullyExploited: 'full' });
 
 describe('DS-ECO-11\'s exploitation line reads the grade the cards print (P1-c)', () => {
@@ -51,9 +68,18 @@ describe('DS-ECO-11\'s exploitation line reads the grade the cards print (P1-c)'
     expect(sold?.row.processingInstitutions, 'the houses still needed: the weavers stand').toEqual(["Dyers' guild", 'Fulling mill']);
     expect(leadingExploitation(exploitationForDesk(town({ partiallyExploited: [WOOL] }, ['Weavers/Textile workers'], []))), 'no raw good sold: no Partial line').toBeNull();
     expect(leadingExploitation(exploitationForDesk(town({ partiallyExploited: [WOOL] }, ['Weaver', 'Dyer', 'Fuller'], ['Raw wool']))), 'every finisher stands: no Partial line').toBeNull();
+    // W2-C-LEAVES-11, ruling (2): the full row's house and good are the record's, else no line
+    const FISH = { rawResource: 'fish', processingInstitutions: ['Fishmonger', "Salters' guild"], finalProducts: ['preserved fish', 'fish oil'] };
+    expect(leadingExploitation(exploitationForDesk(town({ fullyExploited: [FISH] }, ['Fisher\'s landing'], ['Sea salt']))), 'no fishmonger, no fish export: no line').toBeNull();
+    expect(leadingExploitation(exploitationForDesk(town({ fullyExploited: [FISH] }, ['Fishmonger'], ['Sea salt']))), 'a fishmonger, no fish export: no line').toBeNull();
+    expect(leadingExploitation(exploitationForDesk(town({ fullyExploited: [FISH] }, ['Access to fishmonger'], ['Fish oil']))), 'a road to a neighbour\'s house: no line').toBeNull();
+    const held = leadingExploitation(exploitationForDesk(town({ fullyExploited: [FISH] }, ["Salters' guild"], ['Fish oil (barrel)'])));
+    expect(held?.bucket).toBe('fullyExploited');
+    expect(held?.row.processingInstitutions, 'the house the roster holds').toEqual(["Salters' guild"]);
+    expect(held?.row.finalProducts, 'the good as the export names it, in running prose').toEqual(['fish oil']);
   });
 
-  test('on the reader\'s twenty towns: the line\'s grade is the card\'s, and the drawn sentence is of that pool', () => {
+  test('on the reader\'s twenty towns: the line\'s grade is the card\'s, and the drawn sentence is of that pool; a full line names the record\'s house and export', () => {
     /** @type {string[]} */ const faults = [];
     for (const seed of READER_SEEDS) {
       const town = birthApp(seed);
@@ -66,6 +92,16 @@ describe('DS-ECO-11\'s exploitation line reads the grade the cards print (P1-c)'
       if (desk && !String(desk.provenance?.poolKey).includes(lead.bucket)) faults.push(`${seed}: drawn from ${desk.provenance?.poolKey}`);
     }
     expect(faults).toEqual([]);
+    expectNoSeedFailures(collectSeedFailures([...FULL_SILENT, ...FULL_KEPT], (seed) => {
+      const town = /** @type {any} */ (birthCensus(seed));
+      expect(exploitationGroupsShown(town).full.length, `${seed}: anchored, a card filed full`).toBeGreaterThan(0);
+      const lead = leadingExploitation(exploitationForDesk(town));
+      if (FULL_SILENT.includes(seed)) { expect(lead?.bucket, `${seed}: no "worked all the way through" line`).not.toBe('fullyExploited'); return; }
+      expect(lead?.bucket, seed).toBe('fullyExploited');
+      const house = String(lead?.row.processingInstitutions?.[0]);
+      expect(liveInstitutions(town).some((/** @type {any} */ i) => String(i.name).startsWith(house)), `${seed}: ${house} on the roster`).toBe(true);
+      expect(exportsAsPrinted(town).some((x) => x.toLowerCase().startsWith(String(lead?.row.finalProducts?.[0]))), `${seed}: the good exported`).toBe(true);
+    }), 'a full line names what the town lacks');
   }, 240000);
 
   test('the reader\'s town: the hides a Tanner (established) works are not "unexploited" to the desk (rr2s-city-occupied-rand-1)', () => {
