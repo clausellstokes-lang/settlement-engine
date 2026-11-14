@@ -1,0 +1,758 @@
+[
+ {
+  "id": "A01",
+  "seed": "r2r-town-13",
+  "verdict": "FALSE",
+  "severity": "medium",
+  "kind": "c",
+  "sentence": "you cannot. The old families and the newcomers trade at the same stalls and do not quite look at each other. Everyone is doing business. No one is comfortable. The hammering echoes through all of Vatankher, and the place plainly lives by its forges. A caravan broker shouts terms to a line of laden animals and the people leading them.",
+  "fact": "Record: Iron & Metalwork is 7% of income (7th of 8), iron is imported (\"Iron imported from mining regions\"), Quality weapons and armour are imported, no iron/weapons chain; exports are transit trade, tolls, spices, legal and military services. The town lives by its crossroads trade and tolls, not its forges."
+ },
+ {
+  "id": "A01",
+  "seed": "r2s-infiltrated-metropolis-3",
+  "verdict": "FALSE",
+  "severity": "medium",
+  "kind": "c",
+  "sentence": " changes on the hour, the market closes at dusk, the innkeeper remembers your name on the second morning. It is all exactly as a well-run metropolis should be. The hammering echoes through all of Vatantash, and the place plainly lives by its forges. Guests are greeted with a cup before a word of business is spoken.",
+  "fact": "Record: iron, smelting and weapons_armor chains all IMPAIRED; iron_deposits depleted (imports \"Iron ore (local iron mines exhausted)\"); Iron & Metalwork 4% of a metropolis income led by market taxes, guild licensing, finance. Page (Plot Hooks/Outlook) also says \"the smiths are mending tools with scrap. Work slows\" (g)."
+ },
+ {
+  "id": "A01",
+  "seed": "r2s-under_siege-town-0",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "family from the outlying fields is sleeping under a neighbour's roof, the livestock are penned between the houses, and someone is always watching the treeline. The hammering echoes through all of Ulffoss, and the place plainly lives by its forges. A household leader hands out gifts in the open, and everyone watching keeps count.",
+  "fact": "Iron chain running on local iron deposits (mine + blacksmiths), weapons_armor chain present; exports are \"Quality tools and weapons\" and pilgrimage only. Metalwork is a small income share (5%) but forging is the town's export trade; acceptable."
+ },
+ {
+  "id": "A01",
+  "seed": "r2s-insurgency-city-1",
+  "verdict": "FALSE",
+  "severity": "medium",
+  "kind": "c",
+  "sentence": " Qaracaravansarai's walls faster than the watch can scrub it. By now the scrubbed patches themselves mark every corner. The censorship has become the graffiti. The hammering echoes through all of Qaracaravansarai, and the place plainly lives by its forges. Felt tents stand beside the houses, and their owners seem at home in either.",
+  "fact": "Record: Iron & Metalwork 3% (12th of 17 sources); no iron chain (iron bought in); exports are wool, livestock, transit, tolls, flour, stone, coal, magic, finance. Page hook: \"The iron carts are three weeks late ... The smiths are rationing what they have, and work waits\" (g). A city of 14,488 does not live by its forges."
+ },
+ {
+  "id": "A05",
+  "seed": "r2s-infiltrated-town-0",
+  "verdict": "DOUBTFUL",
+  "severity": "low",
+  "kind": null,
+  "sentence": "Tighwood looks normal. There is a moment at the gate (a guard glancing at another guard after you answer a question) that is probably nothing. The hammering echoes throughout Tighwood, and most of it is the sound of blades being made. An old judge listens to two neighbours by a gate and says nothing until both are finished.",
+  "fact": "Blacksmiths offer weapon smithing (marked Vulnerable) and exports include \"Quality tools and weapons\", but there is no weapons_armor chain, iron is imported, metalwork is 8% of income and the export list is mostly alchemy/herbs/magic. \"Most of the hammering is blades\" is a stretch the record cannot settle."
+ },
+ {
+  "id": "A05",
+  "seed": "r2s-insurgency-metropolis-3",
+  "verdict": "FALSE",
+  "severity": "medium",
+  "kind": "c",
+  "sentence": "cil building is occupied. But the orders that leave that building are not always the orders that get followed, and everyone in the street knows which is which. The hammering echoes throughout Yuling, and most of it is the sound of blades being made. Each lane seems to keep to its own trade, and each trade to its own lane.",
+  "fact": "Record: weapons_armor, iron and smelting chains all IMPAIRED; iron_deposits depleted (imports \"Iron ore (local iron mines exhausted)\"); page hook \"the smiths are mending tools with scrap. Work slows\". Blade-making is not the running sound of this city."
+ },
+ {
+  "id": "A05",
+  "seed": "r2r-metropolis-41",
+  "verdict": "FALSE",
+  "severity": "low",
+  "kind": "c",
+  "sentence": "is clearly a daily occurrence. A cathedral dominates the skyline. Larger than anything else in the settlement, which may say something about what matters here. The hammering echoes throughout Hvaliko, and most of it is the sound of blades being made. Strings of dried mushrooms hang in the doorways beside barrels of pickled cabbage.",
+  "fact": "Record: no weapons_armor or iron chain; iron imported; exports list no weapons (only weapon enchantment); Iron & Metalwork 4%. Page hook: \"The iron carts are three weeks late ... smiths are rationing\". Nothing in the record makes blades the main sound of Hvaliko."
+ },
+ {
+  "id": "A05",
+  "seed": "r2s-insurgency-city-2",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "arrison of Jalalkul patrols in daylight only, and along routes a stranger could predict by the third day. After dark the city belongs to whoever it belongs to. The hammering echoes throughout Jalalkul, and most of it is the sound of blades being made. Felt tents stand beside the houses, and their owners seem at home in either.",
+  "fact": "Specialized metalworkers (swordsmiths, armourers), hired blades and blacksmiths present; exports \"Quality tools and weapons\" and military contract services; local production includes weapons training. Plausible, though no weapons_armor chain is recorded."
+ },
+ {
+  "id": "A10",
+  "seed": "r2r-village-12",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": " wheel, the knock of boats against a jetty, someone calling a tally across the water. Fountains, steps, and reused columns give the civic center a layered age. Pilgrims in travel-stained cloaks queue patiently for their turn at the holy places. A benefactor's name is carved fresh above a mended well, and people make sure you notice it. A tidemark from the flood still",
+  "fact": "Parish church + priest; hot springs; Pilgrimage & Holy Sites chain Running; exports \"Pilgrim hospitality\"; inn serves pilgrims."
+ },
+ {
+  "id": "A10",
+  "seed": "r2s-indebted-metropolis-0",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Darhannuur gets by. The market is busy enough, the streets clean enough and the civic buildings kept up just enough, and nothing more is being spent. Pilgrims in travel-stained cloaks queue patiently for their turn at the holy places. Horse traders show their animals at the edge of the settlement, where herders and townsfolk meet.",
+  "fact": "Great cathedral described as \"Pilgrimage destination\"; Pilgrimage services; exports include pilgrimage & religious tourism; relic hooks. Indebted crisis does not stop pilgrims."
+ },
+ {
+  "id": "A10",
+  "seed": "r2r-town-40",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "s and the drying nets, into a settlement that plainly considers the water its front door. Courtyard gates reveal planted interiors and carefully managed water. Pilgrims in travel-stained cloaks queue patiently for their turn at the holy places. A merchant swears an oath on his scales, and the buyer watches the scales anyway.",
+  "fact": "Parish churches, monastery; hot springs; Pilgrimage & Holy Sites chain Running; exports pilgrimage & religious tourism."
+ },
+ {
+  "id": "A10",
+  "seed": "r2r-village-13",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "se: a place where people live and work and argue and sleep, which is most of what places are for. Broad lanes are sized for herds, carts, and mounted movement. Pilgrims in travel-stained cloaks queue patiently for their turn at the holy places. Felt tents stand beside the houses, and their owners seem at home in either.",
+  "fact": "Wayside shrine + parish church; Pilgrim Trade income (\"Offerings ... from visiting pilgrims\")."
+ },
+ {
+  "id": "A14",
+  "seed": "r2s-insurgency-thorp-1",
+  "verdict": "FALSE",
+  "severity": "medium",
+  "kind": "g",
+  "sentence": "crubbed away by morning. People read them on the way past without stopping, which is how you know they agree. The smell of the byres reaches you on the breeze. People argue law in the open as freely as they trade.",
+  "fact": "Same paragraph: slogans are scrubbed by morning and people read them \"without stopping, which is how you know they agree\" (dissent kept covert); Law & order Critical; \"Ulfset keeps no court\"; \"No market or fair stands in Ulfset\". Open, free argument about law contradicts the page."
+ },
+ {
+  "id": "A14",
+  "seed": "r2s-religious_conversion-metropolis-3",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "arters, and the people watching each are counting who watches the other. Stacks of seasoning planks line the road in, taller than the carts that wait for them. People argue law in the open as freely as they trade.",
+  "fact": "Metropolis under a religious-conversion tension, Law & order Adequate, busy market; no occupation, siege or crackdown. Fine."
+ },
+ {
+  "id": "A14",
+  "seed": "r2r-village-29",
+  "verdict": "FALSE",
+  "severity": "medium",
+  "kind": "g",
+  "sentence": "g. People read them on the way past without stopping, which is how you know they agree. Voices raised in a hymn carry, faintly, from somewhere among the roofs. People argue law in the open as freely as they trade.",
+  "fact": "Same paragraph: slogans scrubbed overnight, people read them without stopping (covert agreement under insurgency); Law & order Collapsed; no market or fair. \"Argue law in the open as freely as they trade\" contradicts it."
+ },
+ {
+  "id": "A14",
+  "seed": "r2s-recently_betrayed-thorp-1",
+  "verdict": "FALSE",
+  "severity": "high",
+  "kind": "g",
+  "sentence": "Something has happened in Grímberg lately. Conversations drop to a murmur as you pass, and people watch the street from their doorways. People argue law in the open as freely as they trade.",
+  "fact": "The sentence directly before it: \"Conversations drop to a murmur as you pass, and people watch the street from their doorways.\" Crisis: strangers questioned, every new face suspect; Law & order Critical; no court, no market. The two adjacent sentences contradict."
+ },
+ {
+  "id": "C01",
+  "seed": "r2r-town-31",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": " river; the approach by road brings you in the rear way, past the yards and the drying nets, into a settlement that plainly considers the water its front door. Steep roofs, enclosed craft yards, and carved lintels mark the older wards. Half of Oberberg seems to be gutting, salting or selling fish. An apprentice hurries past on an errand, a master's mark stitched on his sleeve.",
+  "fact": "Germanic town of 2,335, 276 years old, with craft guilds, blacksmiths, tanners, carpenters and a riverside quarter; older wards and craft yards fit."
+ },
+ {
+  "id": "C03t",
+  "seed": "r2r-hamlet-11",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "You hear Riparipa's harbour before you see it: rigging knocking against masts, dock crews calling cargo tallies, and surf working against the outer wall. Warm tile roofs and enclosed yards keep close together. Racks of drying fish line the way in, and the smell of salt and catch is everywhere. People argue politics in the open, loudly, and seem to enjoy it.",
+  "fact": "Architectural flavour (Latin-inspired); nothing in the record contradicts it."
+ },
+ {
+  "id": "C03t",
+  "seed": "r2r-village-36",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "You hear Pianofossae's harbour before you see it: rigging knocking against masts, dock crews calling cargo tallies, and surf working against the outer wall. Warm tile roofs and enclosed yards keep close together. Half of Pianofossae seems to be gutting, salting or selling fish. A benefactor's name is carved fresh above a mended well, and people make sure you notice it.",
+  "fact": "Architectural flavour; nothing in the record contradicts it."
+ },
+ {
+  "id": "C06",
+  "seed": "r2r-town-10",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": " merchant argues with a carter on the road into Madinatchowk about the size of a load. Nobody else pays them any attention. This is clearly a daily occurrence. Caravan courts and covered lanes make movement through the merchant quarter deliberate. The air prickles faintly, the way it does where a great deal of spellwork is done. A merchant swears an oath on his scales, and the buyer watches the scales a",
+  "fact": "Market present (weekly market, market square, annual fair); spatialLayout has a \"Market Quarter\"; Arabic culture on the caravan road. No caravanserai is recorded, but \"caravan courts\" is architectural flavour."
+ },
+ {
+  "id": "C08t",
+  "seed": "r2r-hamlet-21",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": " river; the approach by road brings you in the rear way, past the yards and the drying nets, into a settlement that plainly considers the water its front door. Painted gables and fenced garden plots face the lane. Strings of dried mushrooms hang in the doorways beside barrels of pickled cabbage. The goods on offer are mostly second-hand, and even those go slowly.",
+  "fact": "Architectural flavour; fits a hamlet; nothing contradicts it."
+ },
+ {
+  "id": "C08t",
+  "seed": "r2r-village-3",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A merchant argues with a carter on the road into Malonitsa about the size of a load. Nobody else pays them any attention. This is clearly a daily occurrence. Painted gables and fenced garden plots face the lane. Spoil heaps rise beyond the houses, and the sound of the workings never quite stops. People gather at the well, and the news of the whole place passes through",
+  "fact": "Architectural flavour; nothing contradicts it."
+ },
+ {
+  "id": "C08t",
+  "seed": "r2r-hamlet-51",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A child runs past you on the road into Velipol, chasing something or being chased by something (unclear which). Nobody in the street pays attention. Painted gables and fenced garden plots face the lane. The smell of the byres reaches you on the breeze. A work party heads out together, singing, with tools on their shoulders. Patched roofs and patched clothes s",
+  "fact": "Architectural flavour; nothing contradicts it."
+ },
+ {
+  "id": "C08t",
+  "seed": "r2r-hamlet-26",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "udya runs along the water the way settlements do when water is the reason they exist: practical, a little chaotic at the waterfront, tidier as you move inland. Painted gables and fenced garden plots face the lane. People gather at the well, and the news of the whole place passes through it. The goods on offer are mostly second-hand, and even those go slowly.",
+  "fact": "Architectural flavour; nothing contradicts it."
+ },
+ {
+  "id": "C11",
+  "seed": "r2r-town-41",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Xochioatl is ordinary in the best sense: a place where people live and work and argue and sleep, which is most of what places are for. A raised ceremonial precinct overlooks a broad and busy open plaza. The reek of the tanning pits hangs over Xochioatl, and the locals have long since stopped noticing it. Craftspeople sit in rows, each row a different trade, e",
+  "fact": "Mesoamerican \"civic-ritual plaza\" culture; market square and weekly market; Stable, no crisis, so \"busy\" is fine."
+ },
+ {
+  "id": "C13t",
+  "seed": "r2r-thorp-33",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A child runs past you on the road into Prabhamala, chasing something or being chased by something (unclear which). Nobody in the street pays attention. Plastered courtyards and shaded doorways stand among the houses. Sawn planks stand stacked to season against a wall. Food is being handed out to anyone who asks, and the line is patient. Fresh paint and well-kept roofs say ",
+  "fact": "Architectural flavour; nothing contradicts it."
+ },
+ {
+  "id": "C13t",
+  "seed": "r2r-hamlet-49",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "The first person you meet on the road into Vishnugram wants to know your business, and the second already knows it. Plastered courtyards and shaded doorways stand among the houses. The smell of the byres reaches you on the breeze. Food is being handed out to anyone who asks, and the line is patient. People mend what they have, and nobody",
+  "fact": "Architectural flavour; nothing contradicts it."
+ },
+ {
+  "id": "C20",
+  "seed": "r2r-hamlet-11",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Most meals start from fish from the local waters. Public ovens, market vendors, and shared dining customs make food distribution visibly civic.",
+  "fact": "Periodic market present; fish & maritime produce 13% of income. Communal ovens at hamlet scale are plausible."
+ },
+ {
+  "id": "C20",
+  "seed": "r2s-under_siege-metropolis-1",
+  "verdict": "FALSE",
+  "severity": "medium",
+  "kind": "g",
+  "sentence": "Most meals start from the day's catch. Public ovens, market vendors, and shared dining customs make food distribution visibly civic.",
+  "fact": "The C20 clause itself is fine (markets, bakers, state granary; civic rationing under siege). The joined lead sentence \"Most meals start from the day's catch\" is false: fishing_grounds DEPLETED in the record, and the Resources tab says \"Nobody at Torriplenum bothers with the fishing grounds this year: there is nothing left worth taking\"."
+ },
+ {
+  "id": "C20",
+  "seed": "r2s-occupied-town-0",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Public ovens, market vendors, and shared dining customs make food distribution visibly civic.",
+  "fact": "Weekly market, market square, town granary; under occupation with smaller portions, civic food distribution still fits."
+ },
+ {
+  "id": "C20",
+  "seed": "r2r-city-35",
+  "verdict": "DOUBTFUL",
+  "severity": "low",
+  "kind": "c",
+  "sentence": "The table is fish from the local waters, with flour from the mill beside it. Public ovens, market vendors, and shared dining customs make food distribution visibly civic.",
+  "fact": "The C20 clause is fine (daily markets, bakers, granaries). The joined lead \"The table is fish from the local waters\" leans on river_fish, which the record lists as DEPLETED, though the river_fishing chain is still Vulnerable (not dead) and the page says fishing is its main food source."
+ },
+ {
+  "id": "H02",
+  "seed": "r2s-religious_conversion-hamlet-2",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Someone is poisoning the ruler slowly, and someone in the household knows",
+  "fact": "Ruled by a Feudal Stewardship; seat held by one person (the steward Jamilah ibn Rashid), right to rule disputed. A single ruler with a household fits."
+ },
+ {
+  "id": "H02",
+  "seed": "r2s-recently_betrayed-metropolis-2",
+  "verdict": "DOUBTFUL",
+  "severity": "low",
+  "kind": null,
+  "sentence": "Someone is poisoning the ruler slowly, and someone in the household knows",
+  "fact": "Governed by \"High Theocratic Council\" (a council, which the line's declared rule excludes), though its seat is held by one man (Arslankhan Jadaran, Lord Protector of the Faith). \"The ruler ... the household\" fits a single seat-holder loosely; the council form makes it doubtful."
+ },
+ {
+  "id": "H02",
+  "seed": "r2s-famine-city-0",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Someone is poisoning the ruler slowly, and someone in the household knows",
+  "fact": "Royal Authority; Li Ma, the monarch, holds the seat. Fits."
+ },
+ {
+  "id": "H02",
+  "seed": "r2s-religious_conversion-city-0",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Someone is poisoning the ruler slowly, and someone in the household knows",
+  "fact": "Noble Governorship; Shahrukh Arulad, the governor, holds the seat (contested). Fits."
+ },
+ {
+  "id": "H06",
+  "seed": "r2r-town-36",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "The affected district is slowly spreading its strangeness, and the authorities are pretending otherwise",
+  "fact": "Record currentTensions has wild_magic: \"An uncontrolled surge of magic left its mark on the merchants' quarter\" (shown on the page in Tensions). The hook is grounded. Only nuance: a quarter/district in a town of 440."
+ },
+ {
+  "id": "H06",
+  "seed": "r2s-infiltrated-metropolis-3",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "The affected district is slowly spreading its strangeness, and the authorities are pretending otherwise",
+  "fact": "wild_magic tension (riverside wharves) and the history event The Wild Magic (merchants' quarter) are both on record."
+ },
+ {
+  "id": "H06",
+  "seed": "r2s-under_siege-city-1",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "The affected district is slowly spreading its strangeness, and the authorities are pretending otherwise",
+  "fact": "wild_magic tension on record (surge marked the merchants' quarter), shown in Tensions."
+ },
+ {
+  "id": "H06",
+  "seed": "r2r-city-49",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "The affected district is slowly spreading its strangeness, and the authorities are pretending otherwise",
+  "fact": "wild_magic tension on record (surge marked the lumber yards and sawmill district), shown in Tensions."
+ },
+ {
+  "id": "H11",
+  "seed": "r2r-village-20",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A period of ambitious stone building transformed the settlement's character, its larger houses raised from local quarry stone. The quarry workers became a political force.",
+  "fact": "stone_quarry resource; Stone quarry institution with a Quarrymaster; Stone Quarrying income; Mining & Quarrying chain."
+ },
+ {
+  "id": "H11",
+  "seed": "r2s-religious_conversion-metropolis-1",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A period of ambitious stone construction transformed the settlement's character. Walls, civic buildings, or a cathedral raised from local quarry stone. The quarry workers became a political force.",
+  "fact": "stone_quarry resource and Stone quarry institution; Massive walls and fortifications on record."
+ },
+ {
+  "id": "H11",
+  "seed": "r2s-under_siege-village-1",
+  "verdict": "FALSE",
+  "severity": "medium",
+  "kind": "g",
+  "sentence": "A period of ambitious stone building transformed the settlement's character, its larger houses raised from local quarry stone. The quarry workers became a political force.",
+  "fact": "No quarry institution in the record. The Resources tab says stone is \"Unexploited ... Needs: Stone quarry, Stonemasons' guild\" and \"stone has been there for Neaddale to take for as long as the village has stood, and nobody has found it worth the trouble\". So no larger houses of local quarry stone and no quarry workers to become a political force (village of 95)."
+ },
+ {
+  "id": "H11",
+  "seed": "r2r-town-34",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A period of ambitious stone construction transformed the settlement's character. Walls, civic buildings, or a cathedral raised from local quarry stone. The quarry workers became a political force.",
+  "fact": "stone_quarry resource + Stone quarry institution; Town walls on record."
+ },
+ {
+  "id": "H16",
+  "seed": "r2r-thorp-56",
+  "verdict": "FALSE",
+  "severity": "low",
+  "kind": "c",
+  "sentence": "Among the trades the place lives by, the fish trade is under strain. The levy has taken workers from the fields, and less will be harvested this year.",
+  "fact": "The fish trade is named as under strain, but the cause given is the levy taking field workers and a short harvest. Record: no fishing chain at all, grain chain Running, Agricultural Rents 80% vs fish 10%; Trade tab: \"It is doing well enough now\". The strain is on the fields, not the fish trade."
+ },
+ {
+  "id": "H16",
+  "seed": "r2s-plague_onset-metropolis-3",
+  "verdict": "FALSE",
+  "severity": "low",
+  "kind": "c",
+  "sentence": "Among the trades the place lives by, the wool trade is under strain. The plague has killed or sickened many who work the fields. Those still standing face a short harvest and a hard winter.",
+  "fact": "The wool trade is named as under strain, but the cause is plague in the fields and a short harvest. Record: livestock, animal_husbandry and textiles chains Running; Wool & Textile 3%. The named trade does not match the strain described."
+ },
+ {
+  "id": "H16",
+  "seed": "r2r-hamlet-16",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Among the trades the place lives by, the fish trade is under strain. The fishing failed this year and took most of the food produced here with it. The winter ahead will be hungry.",
+  "fact": "Famine; fishing is the main food source (fishing chain Vulnerable); \"the fishing failed this year\" matches Fish & Preserved Produce and the famine."
+ },
+ {
+  "id": "H16",
+  "seed": "r2s-mass_migration-town-3",
+  "verdict": "DOUBTFUL",
+  "severity": "low",
+  "kind": "c",
+  "sentence": "Among the trades the place lives by, the timber trade is under strain. Newcomers keep arriving, and every one of them has to be fed from the same fields and stores.",
+  "fact": "The timber trade is named as under strain (timber chain is Vulnerable, timber 5% of income), but the cause given is feeding newcomers from the same fields and stores. The clauses do not connect; the record partly supports the strain."
+ },
+ {
+  "id": "I02",
+  "seed": "r2r-thorp-0",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Nets, traps, and racks for drying. Whoever fishes the water here keeps them.",
+  "fact": "Fishing community institution; riverside thorp (forest/river). Generic description fits."
+ },
+ {
+  "id": "I02",
+  "seed": "r2s-under_siege-thorp-3",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Nets, traps, and racks for drying. Whoever fishes the water here keeps them.",
+  "fact": "Fishing community institution on a river; fishing is the main food source on the page."
+ },
+ {
+  "id": "I02",
+  "seed": "r2r-thorp-27",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Nets, traps, and racks for drying. Whoever fishes the water here keeps them.",
+  "fact": "Fishing community; riverside; page \"lives off its fishing\"."
+ },
+ {
+  "id": "I02",
+  "seed": "r2s-infiltrated-thorp-1",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Nets, traps, and racks for drying. Whoever fishes the water here keeps them.",
+  "fact": "Fishing community; coastal port; Fish & Maritime Produce income."
+ },
+ {
+  "id": "I06",
+  "seed": "r2r-town-11",
+  "verdict": "FALSE",
+  "severity": "medium",
+  "kind": "c",
+  "sentence": "A shaft driven into the deposits, with winding gear and ore carts at the pithead. Where they ran deep, the settlement grew around the mine.",
+  "fact": "The Mine works gemstone_deposits, which the record lists as DEPLETED (imports \"Gemstones (local gem deposits exhausted)\"; Resources: \"Nothing more can be taken from the gemstone deposits at Ardbridge\"); no mining chain runs. Settlement Origin on the page: \"Founded roadside\", not grown around a mine (g)."
+ },
+ {
+  "id": "I06",
+  "seed": "r2s-wartime-metropolis-0",
+  "verdict": "FALSE",
+  "severity": "low",
+  "kind": "g",
+  "sentence": "A mine of shafts and adits, with winding gear and ore carts at the head. Where the deposits ran deep, the mine is why the place grew at all.",
+  "fact": "The iron mine runs (iron chain Running), but \"the mine is why the place grew at all\" contradicts Settlement Origin on the page: \"Founded at a junction ... whoever holds the meeting of roads\". The \"Where the deposits ran deep\" hedge softens it."
+ },
+ {
+  "id": "I06",
+  "seed": "r2s-famine-town-0",
+  "verdict": "FALSE",
+  "severity": "low",
+  "kind": "g",
+  "sentence": "A shaft driven into the deposits, with winding gear and ore carts at the pithead. Where they ran deep, the settlement grew around the mine.",
+  "fact": "The iron mine runs, but \"the settlement grew around the mine\" contradicts Settlement Origin: \"Built at a major crossroads, and trade comes in on every road.\""
+ },
+ {
+  "id": "I06",
+  "seed": "r2r-metropolis-39",
+  "verdict": "FALSE",
+  "severity": "low",
+  "kind": "g",
+  "sentence": "A mine of shafts and adits, with winding gear and ore carts at the head. Where the deposits ran deep, the mine is why the place grew at all.",
+  "fact": "The iron mine runs, but \"the mine is why the place grew at all\" contradicts Settlement Origin: \"Sited at the water's edge because the river was the only road worth having\"."
+ },
+ {
+  "id": "I10",
+  "seed": "r2r-city-34",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Where the bulk trade is loaded and unloaded, and the cargoes are tallied in and out.",
+  "fact": "Docks/port facilities on a seaport, with a wharfinger and cargo services."
+ },
+ {
+  "id": "I10",
+  "seed": "r2s-wartime-metropolis-1",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Where the bulk trade is loaded and unloaded, and the cargoes are tallied in and out.",
+  "fact": "Docks/port facilities (Vulnerable) on a river metropolis with a barge company; wartime does not void it."
+ },
+ {
+  "id": "I10",
+  "seed": "r2s-famine-city-0",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Where the bulk trade is loaded and unloaded, and the cargoes are tallied in and out.",
+  "fact": "Docks/port facilities on a river city, with harbour master and cargo services."
+ },
+ {
+  "id": "I10",
+  "seed": "r2s-religious_conversion-city-2",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Where the bulk trade is loaded and unloaded, and the cargoes are tallied in and out.",
+  "fact": "Docks/port facilities on a port city, with harbour master and shipyard."
+ },
+ {
+  "id": "I15",
+  "seed": "r2r-village-16",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Makes ale in bulk from malted grain. The second-greatest draw on the grain supply after bread. The households are stocked from here.",
+  "fact": "Brewer; grain chain and brewing chain Running; food Secure."
+ },
+ {
+  "id": "I15",
+  "seed": "r2s-wartime-village-1",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Makes ale in bulk from malted grain. The second-greatest draw on the grain supply after bread. The households are stocked from here.",
+  "fact": "Brewer; farmland (REQ) and grain sold at harvest on record; food Pressured, not famine."
+ },
+ {
+  "id": "I15",
+  "seed": "r2r-village-24",
+  "verdict": "FALSE",
+  "severity": "medium",
+  "kind": "c",
+  "sentence": "Makes ale in bulk from malted grain. The second-greatest draw on the grain supply after bread. The households are stocked from here.",
+  "fact": "Active famine: Food Security \"Deficit, active famine\" (42% short), \"only about a third of the usual harvest will come in\", grain imported, no grain or brewing chain. Bulk brewing as \"the second-greatest draw on the grain supply\" and stocking the households presumes normal plenty."
+ },
+ {
+  "id": "I15",
+  "seed": "r2s-insurgency-village-0",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Makes ale in bulk from malted grain. The second-greatest draw on the grain supply after bread. The households are stocked from here.",
+  "fact": "Brewer; farmland on record; food Pressured (6% short), not famine."
+ },
+ {
+  "id": "S01",
+  "seed": "r2s-monster_pressure-village-1",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Ale by the barrel, for households laying in a stock. Priced by barrel.",
+  "fact": "Brewer offers Ale (barrel); farmland, food Secure. \"Priced by barrel\" is a plain pricing note."
+ },
+ {
+  "id": "S05",
+  "seed": "r2r-town-11",
+  "verdict": "FALSE",
+  "severity": "medium",
+  "kind": "c",
+  "sentence": "Ore cut underground by the crews and brought out by cart for sorting.",
+  "fact": "The mine's only deposit is gemstone_deposits, DEPLETED (\"Nothing more can be taken from the gemstone deposits at Ardbridge\"; gemstones imported); no mining chain. Ore is not being cut and carted out."
+ },
+ {
+  "id": "S05",
+  "seed": "r2s-wartime-metropolis-0",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Ore cut underground by the crews and brought out by cart for sorting.",
+  "fact": "Mine on iron_deposits (available); iron chain Running."
+ },
+ {
+  "id": "S05",
+  "seed": "r2s-famine-town-0",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Ore cut underground by the crews and brought out by cart for sorting.",
+  "fact": "Mine on iron_deposits (available); iron chain Running."
+ },
+ {
+  "id": "S05",
+  "seed": "r2r-metropolis-39",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Ore cut underground by the crews and brought out by cart for sorting.",
+  "fact": "Mine on iron_deposits (available); iron chain Running."
+ },
+ {
+  "id": "S09",
+  "seed": "r2s-under_siege-town-0",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Beds, meals, and stabling, though with the roads held the rooms stand mostly empty.",
+  "fact": "Under siege; inn present; roads cut, so empty rooms fit."
+ },
+ {
+  "id": "S09",
+  "seed": "r2s-under_siege-metropolis-3",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Beds, meals, and stabling, though with the roads held the rooms stand mostly empty.",
+  "fact": "Under siege; inns/coaching inn present."
+ },
+ {
+  "id": "S09",
+  "seed": "r2s-under_siege-town-1",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Beds, meals, and stabling, though with the roads held the rooms stand mostly empty.",
+  "fact": "Under siege; inn/caravanserai present."
+ },
+ {
+  "id": "S09",
+  "seed": "r2s-under_siege-metropolis-0",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Beds, meals, and stabling, though with the roads held the rooms stand mostly empty.",
+  "fact": "Under siege; inns, coaching inn present."
+ },
+ {
+  "id": "S13",
+  "seed": "r2r-village-13",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Transport foot travelers and small goods across the river.",
+  "fact": "River ferry; riverside terrain, river_fish."
+ },
+ {
+  "id": "S13",
+  "seed": "r2s-wartime-metropolis-1",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Transport foot travelers and small goods across the river.",
+  "fact": "River ferry; riverside, river access."
+ },
+ {
+  "id": "S13",
+  "seed": "r2s-famine-village-1",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Transport foot travelers and small goods across the river.",
+  "fact": "River ferry; riverside, river access."
+ },
+ {
+  "id": "S13",
+  "seed": "r2s-slave_revolt-town-3",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Transport foot travelers and small goods across the river.",
+  "fact": "River ferry; river trade access."
+ },
+ {
+  "id": "F1c",
+  "seed": "r2r-city-1",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "dead are lifted once their term is up and their bones stacked in the charnel house to make room for the next. New ground has been bought outside the gates, and the carts that go out at dusk are a fixed part of the city's evening. Who is lifted and who is left where they lie is settled by what a family endowed.",
+  "fact": "City walls and gates + Burial grounds and charnel house on record; no siege."
+ },
+ {
+  "id": "F1c",
+  "seed": "r2s-wartime-city-3",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Carts go out at dusk to ground bought beyond the walls, and the charnel house holds what the old plots gave up. What a family endowed decides who is lifted and who is left.",
+  "fact": "City walls and gates + charnel house; wartime, not siege."
+ },
+ {
+  "id": "F1c",
+  "seed": "r2r-city-44",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "dead are lifted once their term is up and their bones stacked in the charnel house to make room for the next. New ground has been bought outside the gates, and the carts that go out at dusk are a fixed part of the city's evening. Who is lifted and who is left where they lie is settled by what a family endowed.",
+  "fact": "City walls and gates + charnel house; famine, not siege."
+ },
+ {
+  "id": "F1c",
+  "seed": "r2s-famine-city-2",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "dead are lifted once their term is up and their bones stacked in the charnel house to make room for the next. New ground has been bought outside the gates, and the carts that go out at dusk are a fixed part of the city's evening. Who is lifted and who is left where they lie is settled by what a family endowed.",
+  "fact": "City walls and gates + charnel house; famine, not siege."
+ },
+ {
+  "id": "I19",
+  "seed": "r2s-under_siege-village-2",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A toll house guards this bridge; its keeper gathers the crossing fees and handles the basic repairs. Since the siege closed the roads, there are none to gather.",
+  "fact": "Toll bridge on record; under siege with roads cut (\"nothing comes in by road\"), so no fees fits."
+ },
+ {
+  "id": "I19",
+  "seed": "r2s-under_siege-metropolis-3",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A toll house guards this bridge; its keeper gathers the crossing fees and handles the basic repairs. Since the siege closed the roads, there are none to gather.",
+  "fact": "Toll bridge on record; under siege with roads cut (\"nothing comes in by road\"), so no fees fits."
+ },
+ {
+  "id": "I19",
+  "seed": "r2s-under_siege-city-0",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A toll house guards this bridge; its keeper gathers the crossing fees and handles the basic repairs. Since the siege closed the roads, there are none to gather.",
+  "fact": "Toll bridge on record; under siege with roads cut (\"nothing comes in by road\"), so no fees fits."
+ },
+ {
+  "id": "I19",
+  "seed": "r2s-under_siege-metropolis-0",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A bridge with a toll house. The keeper collects passage fees and performs basic maintenance. With the roads held, no one crosses and nothing is taken.",
+  "fact": "Toll bridge on record; under siege with roads cut (\"nothing comes in by road\"), so no fees fits."
+ }
+]

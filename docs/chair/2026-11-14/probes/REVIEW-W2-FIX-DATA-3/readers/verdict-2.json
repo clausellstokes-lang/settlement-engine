@@ -1,0 +1,776 @@
+[
+ {
+  "id": "A02",
+  "seed": "r2r-town-26",
+  "verdict": "FALSE",
+  "severity": "medium",
+  "kind": "a",
+  "sentence": "Forge smoke hangs over everything here, and the ring of the anvils never quite stops.",
+  "fact": "Roster has no smith of any kind (no Blacksmith/Blacksmiths, no metalworkers); only a Smelter. Anvils \"never quite stop\" names smiths the town lacks, and the forge is not its character (Iron & Metalwork is a minor income; riverside trade/guild town). Same page, Plot Hooks: \"The iron carts are three weeks late... Broken tools stay broken, and work waits.\""
+ },
+ {
+  "id": "A02",
+  "seed": "r2s-under_siege-metropolis-2",
+  "verdict": "FALSE",
+  "severity": "medium",
+  "kind": "c",
+  "sentence": "Forge smoke hangs over everything here, and the ring of the anvils never quite stops.",
+  "fact": "Under siege: page lists Blacksmiths and Specialized metalworkers among \"22 institutions critically impaired by siege\" (both cards marked Impaired); iron is imported (\"vulnerable to supply disruption\"), coal_deposits depleted. Anvils that never stop presumes full working."
+ },
+ {
+  "id": "A02",
+  "seed": "r2s-under_siege-town-3",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Forge smoke hangs over everything here, and the ring of the anvils never quite stops.",
+  "fact": "Blacksmiths (3-10) and Bowyers & fletchers on roster; Iron & Metalwork flow \"Running\"; iron_deposits nearby; smiths not in the siege-impaired list."
+ },
+ {
+  "id": "A02",
+  "seed": "r2s-under_siege-city-0",
+  "verdict": "FALSE",
+  "severity": "medium",
+  "kind": "c",
+  "sentence": "Forge smoke hangs over everything here, and the ring of the anvils never quite stops.",
+  "fact": "Under siege: Blacksmiths card \"Impaired\", Specialized metalworkers \"Impaired\" (Precision metalwork Impaired); iron imported, \"vulnerable to supply disruption\". Ceaseless anvils presumes full working under a siege that has impaired the smiths."
+ },
+ {
+  "id": "A06",
+  "seed": "r2r-town-48",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Racks of spearheads and helms stand outside the workshops, waiting for the carts.",
+  "fact": "Blacksmiths (3-10) with Weapon smithing, Bowyers & fletchers, Smelter; exports \"Quality tools and weapons\". (Plot-hook Outlook says iron price doubled and smiths mend with scrap: a hook, mild tension only.)"
+ },
+ {
+  "id": "A06",
+  "seed": "r2s-recently_betrayed-metropolis-2",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Racks of spearheads and helms stand outside the workshops, waiting for the carts.",
+  "fact": "Blacksmiths, Specialized metalworkers (swordsmiths, armourers), Bowyers, Smelter, Multiple garrisons; Iron & Metalwork Running."
+ },
+ {
+  "id": "A06",
+  "seed": "r2s-under_siege-city-3",
+  "verdict": "DOUBTFUL",
+  "severity": "low",
+  "kind": "c",
+  "sentence": "Racks of spearheads and helms stand outside the workshops, waiting for the carts.",
+  "fact": "Smiths, armourers and garrison present and Iron & Metalwork Running, so racks of arms are true; but \"waiting for the carts\" reads as outbound trade while page says \"Current effective trade is likely zero\" under the siege. Could be carts to the walls; record cannot settle."
+ },
+ {
+  "id": "A06",
+  "seed": "r2r-town-56",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Racks of spearheads and helms stand outside the workshops, waiting for the carts.",
+  "fact": "Blacksmiths (3-10), Smelter; exports \"Quality tools and weapons\"; Iron & Metalwork income."
+ },
+ {
+  "id": "A11",
+  "seed": "r2r-village-11",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Stacks of seasoning planks line the road in, taller than the carts that wait for them.",
+  "fact": "Sawmill on roster (Lumber milling), Timber Trade income, exports Milled lumber."
+ },
+ {
+  "id": "A11",
+  "seed": "r2s-religious_conversion-metropolis-3",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Stacks of seasoning planks line the road in, taller than the carts that wait for them.",
+  "fact": "Sawmill (commercial), Carpenters, Woodcarver; Timber Trade income; managed_forest; exports Milled timber."
+ },
+ {
+  "id": "A11",
+  "seed": "r2s-succession_void-town-0",
+  "verdict": "FALSE",
+  "severity": "medium",
+  "kind": "g",
+  "sentence": "Stacks of seasoning planks line the road in, taller than the carts that wait for them.",
+  "fact": "No sawmill on roster (Carpenters only). Same page, Resource analysis: \"Unexploited Timber ... Needs: Sawmill, Carpenters' guild\" and \"There is timber out there and nobody has ever thought it worth the trouble.\" Stacks of seasoning planks on the road in contradict that."
+ },
+ {
+  "id": "A11",
+  "seed": "r2r-village-16",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Stacks of seasoning planks line the road in, taller than the carts that wait for them.",
+  "fact": "Sawmill on roster; Timber & Lumber flow \"Running\"; managed_forest; exports Milled timber."
+ },
+ {
+  "id": "A15",
+  "seed": "r2s-indebted-town-1",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Tea is poured for a merchant before the bargaining begins, and the bargaining waits for it.",
+  "fact": "Weekly market, Market square, Annual fair; east_asian culture; page \"the market is functioning\"."
+ },
+ {
+  "id": "A15",
+  "seed": "r2s-religious_conversion-metropolis-0",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Tea is poured for a merchant before the bargaining begins, and the bargaining waits for it.",
+  "fact": "District markets, International trade center, Merchant guilds (50-100+); east_asian."
+ },
+ {
+  "id": "A15",
+  "seed": "r2r-city-43",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Tea is poured for a merchant before the bargaining begins, and the bargaining waits for it.",
+  "fact": "Daily markets, Multiple market squares, Merchant guilds (15-40); east_asian."
+ },
+ {
+  "id": "A15",
+  "seed": "r2s-indebted-town-2",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Tea is poured for a merchant before the bargaining begins, and the bargaining waits for it.",
+  "fact": "Weekly market, Market square, Fish market; page \"The market is busy enough\"; east_asian."
+ },
+ {
+  "id": "C01t",
+  "seed": "r2r-thorp-14",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Steep roofs, enclosed yards, and carved lintels mark the older houses.",
+  "fact": "Germanic thorp, 255 years old, timber-and-stone; \"older houses\" fits a handful of houses (wattle-and-daub/timber, rebuilt after the Occupation). No record field contradicts."
+ },
+ {
+  "id": "C01t",
+  "seed": "r2r-village-27",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Steep roofs, enclosed yards, and carved lintels mark the older houses.",
+  "fact": "Germanic village, timber and stone; nothing contradicts."
+ },
+ {
+  "id": "C01t",
+  "seed": "r2r-thorp-30",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Steep roofs, enclosed yards, and carved lintels mark the older houses.",
+  "fact": "Germanic thorp, 204 years old; nothing contradicts."
+ },
+ {
+  "id": "C04",
+  "seed": "r2r-village-12",
+  "verdict": "FALSE",
+  "severity": "low",
+  "kind": "d",
+  "sentence": "Fountains, steps, and reused columns give the civic center a layered age.",
+  "fact": "Village of 80 (Dwellings 15-100): roster has farmland, inn, mill, parish church, wells and springs (\"Multiple water sources: Wells and springs throughout village\"), no fountain, no civic hall, no ruins resource. \"Fountains ... reused columns ... the civic center\" sizes it as a town; page itself also says housing is \"Timber construction with stone foundations\"."
+ },
+ {
+  "id": "C06t",
+  "seed": "r2r-thorp-12",
+  "verdict": "DOUBTFUL",
+  "severity": "low",
+  "kind": "d",
+  "sentence": "Covered lanes and shaded gateways make movement between the houses deliberate.",
+  "fact": "Thorp of 23, Dwellings (1-8), behind a palisade: \"covered lanes and shaded gateways\" between a handful of houses is a size stretch; record holds no street layout to settle it."
+ },
+ {
+  "id": "C06t",
+  "seed": "r2r-hamlet-8",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Covered lanes and shaded gateways make movement between the houses deliberate.",
+  "fact": "Arabic hamlet of 57, Dwellings (5-25); lanes between houses plausible."
+ },
+ {
+  "id": "C06t",
+  "seed": "r2r-hamlet-13",
+  "verdict": "DOUBTFUL",
+  "severity": "low",
+  "kind": "d",
+  "sentence": "Covered lanes and shaded gateways make movement between the houses deliberate.",
+  "fact": "Hamlet of 28 (Dwellings 5-25): plural covered lanes and gateways is a mild size stretch; record cannot settle."
+ },
+ {
+  "id": "C06t",
+  "seed": "r2r-thorp-9",
+  "verdict": "DOUBTFUL",
+  "severity": "low",
+  "kind": "d",
+  "sentence": "Covered lanes and shaded gateways make movement between the houses deliberate.",
+  "fact": "Isolated forest thorp of 20, Dwellings (1-8): \"covered lanes and shaded gateways\" between four or five houses is a size stretch; record cannot settle."
+ },
+ {
+  "id": "C09t",
+  "seed": "r2r-hamlet-22",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Gates, low walls, and planted courtyards divide public from household space.",
+  "fact": "Household-scale gates, low walls and courtyards fit a hamlet of 73; no fortification claim."
+ },
+ {
+  "id": "C09t",
+  "seed": "r2r-hamlet-44",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Gates, low walls, and planted courtyards divide public from household space.",
+  "fact": "Household-scale features; fits a hamlet of 21."
+ },
+ {
+  "id": "C11t",
+  "seed": "r2r-hamlet-50",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Plastered house platforms face one another across a swept open yard.",
+  "fact": "Mesoamerican hamlet of 78; nothing contradicts."
+ },
+ {
+  "id": "C11t",
+  "seed": "r2r-village-7",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Plastered house platforms face one another across a swept open yard.",
+  "fact": "Mesoamerican village of 359; nothing contradicts."
+ },
+ {
+  "id": "C14t",
+  "seed": "r2r-thorp-2",
+  "verdict": "FALSE",
+  "severity": "low",
+  "kind": "g",
+  "sentence": "Households cluster around shared wells and water channels.",
+  "fact": "Roster has one \"Water source\": page card reads \"A well or a spring, yielding at least a bucketful a person each day.\" No multiple wells and no water channels, so \"shared wells and water channels\" disagrees with the page (thorp of 27, Dwellings 1-8)."
+ },
+ {
+  "id": "C14t",
+  "seed": "r2r-village-23",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Households cluster around shared wells and water channels.",
+  "fact": "Multiple water sources: \"Wells and springs across the village\"; hot springs; village of 271."
+ },
+ {
+  "id": "C14t",
+  "seed": "r2r-thorp-57",
+  "verdict": "FALSE",
+  "severity": "medium",
+  "kind": "g",
+  "sentence": "Households cluster around shared wells and water channels.",
+  "fact": "Thorp of 11 with one \"Water source\" whose page card reads \"Water from a well or spring, barely a bucketful per person each day.\" Plural shared wells and water channels contradict a single, scarce source."
+ },
+ {
+  "id": "C21",
+  "seed": "r2r-village-38",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Herds and field grain set a strongly seasonal food calendar.",
+  "fact": "grain_fields and grazing_land resources, Farmland and Common grazing; Grain & Bread Running; exports livestock, wool, dairy. Fisher's landing on roster backs the fish clause."
+ },
+ {
+  "id": "H03",
+  "seed": "r2r-hamlet-47",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A store of the scarce goods is being kept off the market on purpose",
+  "fact": "Periodic market on roster; Overview tension: \"A critical resource became scarce, causing hoarding and price gouging\" (active), so \"the scarce goods\" has a referent."
+ },
+ {
+  "id": "H03",
+  "seed": "r2s-wartime-metropolis-3",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A store of the scarce goods is being kept off the market on purpose",
+  "fact": "Many markets; wartime; whisper market and black market bazaar; food short 871 lbs/day. Plausible."
+ },
+ {
+  "id": "H03",
+  "seed": "r2s-under_siege-hamlet-3",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A store of the scarce goods is being kept off the market on purpose",
+  "fact": "Periodic market; under siege, scarcity real."
+ },
+ {
+  "id": "H03",
+  "seed": "r2r-city-44",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A store of the scarce goods is being kept off the market on purpose",
+  "fact": "Daily markets, City granaries; famine in force."
+ },
+ {
+  "id": "H08",
+  "seed": "r2r-thorp-15",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Waters rose with little warning and reshaped the low ground, drowning livelihoods and redrawing who owned what",
+  "fact": "Hills thorp, no river; \"the low ground\" avoids naming one; a flash flood in hills is possible. Great Flood is a record event."
+ },
+ {
+  "id": "H08",
+  "seed": "r2s-under_siege-village-0",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Waters rose with little warning and reshaped the low ground, drowning livelihoods and redrawing who owned what",
+  "fact": "Hills with marshlands; \"the low ground\" fits; record event The Flood."
+ },
+ {
+  "id": "H08",
+  "seed": "r2r-thorp-45",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A fire that began in the houses nearest the river burned through the houses and their outbuildings before it could be checked",
+  "fact": "River thorp (route river); \"houses nearest the river\" fits."
+ },
+ {
+  "id": "H08",
+  "seed": "r2s-famine-hamlet-0",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A fire that began in the houses nearest the shore burned through the houses and their outbuildings before it could be checked",
+  "fact": "Coastal hamlet \"Founded on the shore\"; \"houses nearest the shore\" fits."
+ },
+ {
+  "id": "H13",
+  "seed": "r2r-thorp-30",
+  "verdict": "FALSE",
+  "severity": "low",
+  "kind": "d",
+  "sentence": "After years of disputed grain prices, the major farming families agreed a formal compact regulating grain sale and storage. It held for a generation.",
+  "fact": "Thorp of 15 on Subsistence farming, Dwellings (1-8), no granary; page: \"Every household works just enough land to stay alive, and no more.\" \"The major farming families\", \"years of disputed grain prices\" and a compact \"regulating grain sale and storage\" (121y ago) size it as a grain-trading town. Population then is not recorded."
+ },
+ {
+  "id": "H13",
+  "seed": "r2s-religious_conversion-metropolis-0",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "After years of disputed grain prices, the major farming families and the guilds negotiated a formal compact regulating grain sale and storage. It held for a generation.",
+  "fact": "Metropolis with grain_fields (now depleted), State granary complex, many guilds; 135y ago."
+ },
+ {
+  "id": "H13",
+  "seed": "r2r-hamlet-0",
+  "verdict": "FALSE",
+  "severity": "low",
+  "kind": "d",
+  "sentence": "After years of disputed grain prices, the major farming families agreed a formal compact regulating grain sale and storage. It held for a generation.",
+  "fact": "Hamlet of 22 on Subsistence farming, no granary, Dwellings (5-25), run by a lord's steward: \"the major farming families\" and a compact regulating grain sale and storage (49y ago) overstate it. Population then is not recorded."
+ },
+ {
+  "id": "H13",
+  "seed": "r2s-famine-village-0",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "After years of disputed grain prices, the major farming families agreed a formal compact regulating grain sale and storage. It held for a generation.",
+  "fact": "Village of 114 with Farmland, Mill, grain_fields; grain sold by the sack. Plausible (77y ago, \"minor\")."
+ },
+ {
+  "id": "D01",
+  "seed": "r2r-village-0",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "An open stall or small roofed shed selling salted and smoked fish. Packed in barrels, it keeps for months.",
+  "fact": "Fish market on roster; services Preserved fish. (Adjacent card line \"Backs Merchant Guilds\" names a body the village lacks; not this sentence.)"
+ },
+ {
+  "id": "D01",
+  "seed": "r2s-wartime-village-1",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "An open stall or small roofed shed selling salted and smoked fish. Packed in barrels, it keeps for months.",
+  "fact": "Fish market on roster; Preserved fish."
+ },
+ {
+  "id": "D01",
+  "seed": "r2r-village-55",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "An open stall or small roofed shed selling salted and smoked fish. Packed in barrels, it keeps for months.",
+  "fact": "Fish market on roster; preserved stock fits a siege."
+ },
+ {
+  "id": "D01",
+  "seed": "r2r-village-7",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "An open stall or small roofed shed selling salted and smoked fish. Packed in barrels, it keeps for months.",
+  "fact": "Fish market on roster; Preserved fish."
+ },
+ {
+  "id": "I03",
+  "seed": "r2r-thorp-30",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "The nets, the traps, the drying racks: what the water gives, the fishing households take.",
+  "fact": "Fishing community on roster; river thorp; drying nets on the arrival line."
+ },
+ {
+  "id": "I03",
+  "seed": "r2s-recently_betrayed-thorp-2",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "The nets, the traps, the drying racks: what the water gives, the fishing households take.",
+  "fact": "Fishing community; coastal, fishing_grounds; Fish & Maritime income."
+ },
+ {
+  "id": "I03",
+  "seed": "r2r-thorp-58",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "The nets, the traps, the drying racks: what the water gives, the fishing households take.",
+  "fact": "Fishing community; riverside, river_fish. A timeless card description; siege does not falsify it."
+ },
+ {
+  "id": "I03",
+  "seed": "r2s-famine-thorp-0",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "The nets, the traps, the drying racks: what the water gives, the fishing households take.",
+  "fact": "Fishing community; riverside. Famine page says \"The fishing failed this year\", but the card describes what the trade is, not a good catch."
+ },
+ {
+  "id": "I07",
+  "seed": "r2r-town-15",
+  "verdict": "FALSE",
+  "severity": "medium",
+  "kind": "g",
+  "sentence": "A stone quarry, with yards beside it for dressing the stone. Half the region's building stone was cut here.",
+  "fact": "No stone_quarry resource in the record. Same page, income: \"Stone Quarrying: Stone masons work imported material; the quarrying income notation reflects processing margin only.\" \"Half the region's building stone was cut here\" contradicts imported stone."
+ },
+ {
+  "id": "I07",
+  "seed": "r2s-wartime-metropolis-3",
+  "verdict": "FALSE",
+  "severity": "low",
+  "kind": "c",
+  "sentence": "A stone quarry with yards for dressing the stone. Much of the region's building stone was cut here.",
+  "fact": "No stone_quarry resource in the record (deep_harbour, salt_flats, ancient_ruins, shipbuilding_timber, fishing_grounds); no stone in exports or produced-locally; no stone flow. \"Much of the region's building stone was cut here\" rests on a resource the town lacks."
+ },
+ {
+  "id": "I07",
+  "seed": "r2s-famine-town-0",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A stone quarry, with yards beside it for dressing the stone. Half the region's building stone was cut here.",
+  "fact": "stone_quarry resource; Stone & Construction Running; exports Quarried stone."
+ },
+ {
+  "id": "I07",
+  "seed": "r2r-metropolis-4",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A stone quarry, with yards beside it for dressing the stone. Half the region's building stone was cut here.",
+  "fact": "stone_quarry resource; Stone & Construction Running; Stone Quarrying income; exports Quarried stone."
+ },
+ {
+  "id": "I11",
+  "seed": "r2r-village-0",
+  "verdict": "DOUBTFUL",
+  "severity": "low",
+  "kind": "g",
+  "sentence": "Herbal medicines, poultices, and everyday remedies for sale. Nothing magical here, no acid flasks. The proprietor knows the roots that break a fever and the mushrooms that end a life. Herbalism supplies on hand.",
+  "fact": "Roster has only an Apothecary (no alchemist), which backs \"Nothing magical here\". But the same page, income: \"Apothecary & Alchemy: A thriving alchemical trade in reagents, preparations, and curative potions\", and Produced locally lists \"Potions and elixirs\". The page disagrees with itself; the income line is the likelier fault."
+ },
+ {
+  "id": "I11",
+  "seed": "r2s-succession_void-village-3",
+  "verdict": "DOUBTFUL",
+  "severity": "low",
+  "kind": "g",
+  "sentence": "Sells herbal medicines, poultices, and common remedies. No magical compounds, no acid flasks. Knows which roots treat fever and which mushrooms kill. Stocked with herbalism supplies.",
+  "fact": "Roster has only an Apothecary (no alchemist). Same page, income: \"Herbal remedies, minor alchemical preparations, and potion sales. The local alchemist supplements conventional trade\"; exports Potions and elixirs. Disagrees with \"No magical compounds\"; the income line is the likelier fault."
+ },
+ {
+  "id": "I11",
+  "seed": "r2s-occupied-village-3",
+  "verdict": "DOUBTFUL",
+  "severity": "low",
+  "kind": "g",
+  "sentence": "Herbal medicines, poultices, and everyday remedies for sale. Nothing magical here, no acid flasks. The proprietor knows the roots that break a fever and the mushrooms that end a life. Herbalism supplies on hand.",
+  "fact": "Roster has only an Apothecary. Same page, income: \"...potion sales. The local alchemist supplements conventional trade\"; Produced locally lists Potions and elixirs. Disagrees with \"Nothing magical here\"; the income line is the likelier fault."
+ },
+ {
+  "id": "I11",
+  "seed": "r2r-village-7",
+  "verdict": "DOUBTFUL",
+  "severity": "low",
+  "kind": "g",
+  "sentence": "Herbal medicines, poultices, and everyday remedies for sale. Nothing magical here, no acid flasks. The proprietor knows the roots that break a fever and the mushrooms that end a life. Herbalism supplies on hand.",
+  "fact": "Roster has only an Apothecary. Same page, income: \"Apothecary & Alchemy: A thriving alchemical trade in reagents, preparations, and curative potions\". Disagrees with \"Nothing magical here\"; the income line is the likelier fault."
+ },
+ {
+  "id": "I16",
+  "seed": "r2r-village-11",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Builds and repairs flat-bottomed craft for shallow water: punts, ferries, fishing boats. Specialist knowledge: shallow draft, flexible hull, replaceable parts.",
+  "fact": "Boatyard on roster, coastal port; shallow-water craft and the River ferry fit. (Card title still reads \"River boatyard\" on a coast; not this sentence.)"
+ },
+ {
+  "id": "I16",
+  "seed": "r2s-insurgency-city-0",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Builds and repairs flat-bottomed craft for shallow water: punts, ferries, fishing boats. Specialist knowledge: shallow draft, flexible hull, replaceable parts.",
+  "fact": "Boatyard on roster; coastal with marshlands, river route."
+ },
+ {
+  "id": "I16",
+  "seed": "r2s-famine-town-2",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Builds and repairs flat-bottomed craft for shallow water: punts, ferries, fishing boats. Specialist knowledge: shallow draft, flexible hull, replaceable parts.",
+  "fact": "River boatyard and River ferry on roster; coastal port."
+ },
+ {
+  "id": "I16",
+  "seed": "r2s-mass_migration-village-0",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Builds and mends flat-bottomed boats for shallow water: punts, ferries, fishing craft. The work turns on a shallow draft, a hull that flexes, and parts made to be replaced.",
+  "fact": "River boatyard, River ferry, Fisher's landing; coastal port."
+ },
+ {
+  "id": "I20",
+  "seed": "r2r-thorp-0",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A corner of the holding left out of the plough, banked with turf and marked with fieldstones. A priest says the words when one can be brought in time; when one cannot, whoever knew the dead best says them. The oldest markers have lost their names to the weather and are kept clear anyway.",
+  "fact": "Access to parish church and Burial ground on roster; no resident priest, so \"when one can be brought\" fits."
+ },
+ {
+  "id": "I20",
+  "seed": "r2s-wartime-thorp-3",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A corner of the holding left out of the plough, banked with turf and marked with fieldstones. A priest says the words when one can be brought in time; when one cannot, whoever knew the dead best says them. The oldest markers have lost their names to the weather and are kept clear anyway.",
+  "fact": "Access to parish church; isolated mountain thorp, so the conditional fits."
+ },
+ {
+  "id": "I20",
+  "seed": "r2r-thorp-1",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Fieldstones on a low bank at the edge of the ploughland. The rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless.",
+  "fact": "Access to parish church; Subsistence farming fits \"ploughland\"."
+ },
+ {
+  "id": "I20",
+  "seed": "r2s-famine-thorp-0",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Fieldstones on a low bank at the edge of the ploughland. The rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless.",
+  "fact": "Access to parish church; Subsistence farming."
+ },
+ {
+  "id": "S02",
+  "seed": "r2r-village-15",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Bulk supply to alehouses. Priced by barrel.",
+  "fact": "Brewer and Ale house on roster."
+ },
+ {
+  "id": "S02",
+  "seed": "r2r-village-54",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Bulk supply to alehouses. Priced by barrel.",
+  "fact": "Brewer and Ale house on roster."
+ },
+ {
+  "id": "S02",
+  "seed": "r2r-village-40",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Bulk supply to alehouses. Priced by barrel.",
+  "fact": "Brewer, Ale house and Travelers' inn on roster."
+ },
+ {
+  "id": "S06",
+  "seed": "r2r-hamlet-10",
+  "verdict": "FALSE",
+  "severity": "medium",
+  "kind": "c",
+  "sentence": "Surface-level ore extraction. Lower yield than shaft mining but cheaper to operate.",
+  "fact": "Mine (open cast) on roster but no ore in the record: resources are fishing_grounds, salt_flats, magical_node. Same page, income: \"Iron imported from mining regions and worked locally\"; no mining flow. The ore-extraction service presumes a deposit the town lacks."
+ },
+ {
+  "id": "S06",
+  "seed": "r2s-recently_betrayed-village-3",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Surface-level ore extraction. Lower yield than shaft mining but cheaper to operate.",
+  "fact": "Mine on roster, iron_deposits; \"Local ore feeds the smithy directly\"."
+ },
+ {
+  "id": "S06",
+  "seed": "r2s-occupied-village-1",
+  "verdict": "FALSE",
+  "severity": "medium",
+  "kind": "c",
+  "sentence": "Surface-level ore extraction. Lower yield than shaft mining but cheaper to operate.",
+  "fact": "Its only ore, precious_metals, is depleted (no iron deposits). Same page: \"Nothing more can be taken from the precious metal veins at Celoichi. Until somebody pays to open new workings, the hands that worked there are idle or gone elsewhere.\" The ore-extraction service presumes a working deposit."
+ },
+ {
+  "id": "S06",
+  "seed": "r2s-recently_betrayed-hamlet-1",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Surface-level ore extraction. Lower yield than shaft mining but cheaper to operate.",
+  "fact": "Mine (open cast), iron_deposits; Iron & Metalwork \"Local ore feeds the smithy directly\"."
+ },
+ {
+  "id": "S10",
+  "seed": "r2s-under_siege-town-1",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Relay horses kept for coaches and dispatch riders; while the siege holds the roads, none go out.",
+  "fact": "Under siege; Coaching inn on roster; page agrees: \"With the roads cut, the wagons stand idle\"."
+ },
+ {
+  "id": "S10",
+  "seed": "r2s-under_siege-metropolis-3",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Relay horses kept for coaches and dispatch riders; while the siege holds the roads, none go out.",
+  "fact": "Under siege; Post relay station and Coaching inn. (Adjacent service \"Pass dispatches and letters along the relay chain. Fresh horses at each station.\" states normal running; not this sentence.)"
+ },
+ {
+  "id": "S10",
+  "seed": "r2r-metropolis-14",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Relay horses kept for coaches and dispatch riders; while the siege holds the roads, none go out.",
+  "fact": "Under siege; Post relay station, Coaching inn. (Adjacent relay lines state normal running; not this sentence.)"
+ },
+ {
+  "id": "S10",
+  "seed": "r2s-under_siege-metropolis-0",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Relay horses kept for coaches and dispatch riders; while the siege holds the roads, none go out.",
+  "fact": "Under siege; Post relay station, Coaching inn. (Adjacent relay lines state normal running; not this sentence.)"
+ },
+ {
+  "id": "K01",
+  "seed": "r2r-thorp-17",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Someone here still has food put by, enough to matter. They will sell it, but their price is not money. The players can intervene in how this plays out.",
+  "fact": "Famine; no mill; page: \"the wealthy are hoarding\"; Hoarders in conflicts."
+ },
+ {
+  "id": "K01",
+  "seed": "r2s-wartime-hamlet-3",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Someone here still has food put by, enough to matter. They will sell it, but their price is not money. The players can intervene in how this plays out.",
+  "fact": "Famine (with wartime); no mill; hoarders on page."
+ },
+ {
+  "id": "K01",
+  "seed": "r2r-thorp-38",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Someone here still has food put by, enough to matter. They will sell it, but their price is not money. The players can intervene in how this plays out.",
+  "fact": "Famine; no mill; hoarders on page."
+ },
+ {
+  "id": "K01",
+  "seed": "r2r-hamlet-16",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Someone here still has food put by, enough to matter. They will sell it, but their price is not money. The players can intervene in how this plays out.",
+  "fact": "Famine; no mill; hoarders on page."
+ },
+ {
+  "id": "F1d",
+  "seed": "r2s-under_siege-city-1",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "The charnel house holds what the old plots gave up, and with the roads cut it now holds the newly dead as well. What a family endowed decides who is lifted and who is left.",
+  "fact": "Under siege; Burial grounds and charnel house on roster. (Services line \"Interment outside the gates. The bearers and the cart are found by the ground.\" contradicts the siege; that line is the fault, not this one.)"
+ },
+ {
+  "id": "F1d",
+  "seed": "r2s-under_siege-city-3",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "ons ago, so the dead are lifted once their term is up and their bones stacked in the charnel house to make room for the next. Since the siege closed the roads, no cart goes out to the new ground, and the newly dead wait in the charnel house. Who is lifted and who is left where they lie is settled by what a family endowed.",
+  "fact": "Under siege; Burial grounds and charnel house. (Services line \"Interment outside the gates ... the cart\" contradicts it; that line is the fault.)"
+ },
+ {
+  "id": "F1d",
+  "seed": "r2s-under_siege-city-2",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "ons ago, so the dead are lifted once their term is up and their bones stacked in the charnel house to make room for the next. Since the siege closed the roads, no cart goes out to the new ground, and the newly dead wait in the charnel house. Who is lifted and who is left where they lie is settled by what a family endowed.",
+  "fact": "Under siege; Burial grounds and charnel house. (Services line \"Interment outside the gates ... the cart\" contradicts it; that line is the fault.)"
+ }
+]

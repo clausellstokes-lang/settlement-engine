@@ -1,0 +1,1433 @@
+[
+ {
+  "id": "A04",
+  "kind": "declared",
+  "file": "src/data/arrivalProse.js",
+  "fn": "arrivalScene.js :: composeArrivalScene (senses/people)",
+  "pattern": ".+ lives by its forges: the clang of iron is in every lane",
+  "declared": {
+   "needs": [
+    "tier: ≥ town"
+   ]
+  },
+  "printsInTowns": 7,
+  "read": [
+   {
+    "seed": "r2r-town-47",
+    "name": "Mahapeth",
+    "tier": "town",
+    "pop": 1410,
+    "crisis": [],
+    "views": [
+     "Summary/Overview"
+    ],
+    "sentence": "Mahapeth is ordinary in the best sense: a place where people live and work and argue and sleep, which is most of what places are for. The gatehouse arch frames the main road. Mahapeth lives by its forges: the clang of iron is in every lane. Food is being handed out to anyone who asks, and the line is patient. Well-fed children run errands through a busy street."
+   },
+   {
+    "seed": "r2s-succession_void-metropolis-2",
+    "name": "Dar-al-chowk",
+    "tier": "metropolis",
+    "pop": 76347,
+    "crisis": [
+     "succession_void"
+    ],
+    "views": [
+     "Summary/Overview"
+    ],
+    "sentence": "Dar-al-chowk has the specific quality of a settlement waiting for news. People are going about their business, but there is a particular alertness to the street: people checking who is talking to whom. Dar-al-chowk lives by its forges: the clang of iron is in every lane. A merchant swears an oath on his scales, and the buyer watches the scales anyway."
+   },
+   {
+    "seed": "r2r-metropolis-14",
+    "name": "Prabhapeta",
+    "tier": "metropolis",
+    "pop": 271164,
+    "crisis": [
+     "under_siege"
+    ],
+    "views": [
+     "Summary/Overview"
+    ],
+    "sentence": "The gates of Prabhapeta are closed. There are people on the walls. This is not the relaxed watch of a settlement going about its day. These are people watching the treeline. A runner comes out of the small side gate, sees your group, stops. Prabhapeta lives by its forges: the clang of iron is in every lane. Food is being handed out to anyone who asks, and the line is patient."
+   },
+   {
+    "seed": "r2s-mass_migration-town-0",
+    "name": "Zelenotsy",
+    "tier": "town",
+    "pop": 649,
+    "crisis": [
+     "mass_migration"
+    ],
+    "views": [
+     "Summary/Overview"
+    ],
+    "sentence": "Zelenotsy's market speaks three languages you can pick out and more you cannot. The old families and the newcomers trade at the same stalls and do not quite look at each other. Everyone is doing business. No one is comfortable. Zelenotsy lives by its forges: the clang of iron is in every lane. People gather at the well, and the news of the whole place passes through it."
+   }
+  ]
+ },
+ {
+  "id": "A09",
+  "kind": "declared",
+  "file": "src/data/arrivalProse.js",
+  "fn": "arrivalScene.js :: composeArrivalScene (senses/people)",
+  "pattern": "The bells of .+ answer one another across the roofs",
+  "declared": {
+   "needs": [
+    "church",
+    "tier: ≥ town"
+   ]
+  },
+  "printsInTowns": 23,
+  "read": [
+   {
+    "seed": "r2r-town-2",
+    "name": "Olymptopia",
+    "tier": "town",
+    "pop": 914,
+    "crisis": [],
+    "views": [
+     "Summary/Overview"
+    ],
+    "sentence": "reet at a point you can't precisely identify. The settlement grows around you gradually. Whitewashed courts and stone steps catch the light between the houses. The bells of Olymptopia answer one another across the roofs, and the streets slow for them. A patron stands drinks at a wine shop, and makes sure everyone knows who is paying. A merchant shows off a new cloak, and sever"
+   },
+   {
+    "seed": "r2s-under_siege-metropolis-0",
+    "name": "Grünmoor",
+    "tier": "metropolis",
+    "pop": 46527,
+    "crisis": [
+     "under_siege"
+    ],
+    "views": [
+     "Summary/Overview"
+    ],
+    "sentence": "thrown stone sits half-buried a hundred paces short of Grünmoor's wall, left where it landed. Nobody has hauled it away. There are fresher things to attend to. The bells of Grünmoor answer one another across the roofs, and the streets slow for them. A notice of the next fair is nailed up beside a doorway, and someone is reading it aloud for the others."
+   },
+   {
+    "seed": "r2s-under_siege-city-1",
+    "name": "Torrivilla",
+    "tier": "city",
+    "pop": 2679,
+    "crisis": [
+     "under_siege"
+    ],
+    "views": [
+     "Summary/Overview"
+    ],
+    "sentence": "rown stone sits half-buried a hundred paces short of Torrivilla's wall, left where it landed. Nobody has hauled it away. There are fresher things to attend to. The bells of Torrivilla answer one another across the roofs, and the streets slow for them. A notary's clerk hurries past with a satchel of contracts."
+   },
+   {
+    "seed": "r2r-metropolis-40",
+    "name": "Hongtian",
+    "tier": "metropolis",
+    "pop": 44114,
+    "crisis": [],
+    "views": [
+     "Summary/Overview"
+    ],
+    "sentence": "ense: a place where people live and work and argue and sleep, which is most of what places are for. The great cathedral's spire is the tallest thing for miles. The bells of Hongtian answer one another across the roofs, and the streets slow for them. An elder settles a quarrel in a quiet voice before it can grow loud enough to need anyone else. Even the outbuildings have new "
+   }
+  ]
+ },
+ {
+  "id": "A13",
+  "kind": "declared",
+  "file": "src/data/arrivalProse.js",
+  "fn": "arrivalScene.js :: composeArrivalScene (senses/people)",
+  "pattern": "A merchant swears an oath on his scales",
+  "declared": {
+   "needs": [
+    "market"
+   ]
+  },
+  "printsInTowns": 10,
+  "read": [
+   {
+    "seed": "r2r-town-10",
+    "name": "Madinatchowk",
+    "tier": "town",
+    "pop": 754,
+    "crisis": [],
+    "views": [
+     "Summary/Overview"
+    ],
+    "sentence": "rts and covered lanes make movement through the merchant quarter deliberate. The air prickles faintly, the way it does where a great deal of spellwork is done. A merchant swears an oath on his scales, and the buyer watches the scales anyway. People here still say \"since they left\" the way other places say \"last year\"."
+   },
+   {
+    "seed": "r2s-wartime-metropolis-0",
+    "name": "Qasrchowk",
+    "tier": "metropolis",
+    "pop": 49155,
+    "crisis": [
+     "wartime"
+    ],
+    "views": [
+     "Summary/Overview"
+    ],
+    "sentence": "rking age has a receipt where it used to be, and the receipts do not say when the crown returns them. Every other doorway seems to sell a remedy for something. A merchant swears an oath on his scales, and the buyer watches the scales anyway."
+   },
+   {
+    "seed": "r2r-metropolis-19",
+    "name": "Mintaroasis",
+    "tier": "metropolis",
+    "pop": 76626,
+    "crisis": [],
+    "views": [
+     "Summary/Overview"
+    ],
+    "sentence": "ything else in the settlement, which may say something about what matters here. Kiln smoke hangs over Mintaroasis, and the dust of fired clay is on everything. A merchant swears an oath on his scales, and the buyer watches the scales anyway. Even the outbuildings have new roofs, and nobody looks hungry."
+   },
+   {
+    "seed": "r2r-town-23",
+    "name": "Qaryatfort",
+    "tier": "town",
+    "pop": 1317,
+    "crisis": [],
+    "views": [
+     "Summary/Overview"
+    ],
+    "sentence": "ear that this settlement has been defended before and expects to be again. Racks of drying fish line the way in, and the smell of salt and catch is everywhere. A merchant swears an oath on his scales, and the buyer watches the scales anyway."
+   }
+  ]
+ },
+ {
+  "id": "A17",
+  "kind": "declared",
+  "file": "src/data/arrivalProse.js",
+  "fn": "arrivalScene.js :: composeArrivalScene (senses/people)",
+  "pattern": "Craftspeople sit in rows, each row a different trade",
+  "declared": {
+   "needs": [
+    "market"
+   ]
+  },
+  "printsInTowns": 10,
+  "read": [
+   {
+    "seed": "r2r-village-49",
+    "name": "Yaxchtzal",
+    "tier": "village",
+    "pop": 168,
+    "crisis": [],
+    "views": [
+     "Summary/Overview"
+    ],
+    "sentence": "econd already knows it. Causeways and managed water divide the settlement into organized neighborhoods. Charcoal smoke lingers in the lane, thick and sweetish. Craftspeople sit in rows, each row a different trade, each worker deep in their own work. Well-fed children run errands through a busy street."
+   },
+   {
+    "seed": "r2s-politically_fractured-metropolis-0",
+    "name": "Xochiatl",
+    "tier": "metropolis",
+    "pop": 25141,
+    "crisis": [
+     "politically_fractured"
+    ],
+    "views": [
+     "Summary/Overview"
+    ],
+    "sentence": "have learned to be careful about what they say in earshot of strangers. Sacks of herbs and spices fill the carts, and the smell of them clings to your clothes. Craftspeople sit in rows, each row a different trade, each worker deep in their own work."
+   },
+   {
+    "seed": "r2s-occupied-city-3",
+    "name": "Muulchihua",
+    "tier": "city",
+    "pop": 4671,
+    "crisis": [
+     "occupied"
+    ],
+    "views": [
+     "Summary/Overview"
+    ],
+    "sentence": " long you intend to stay. This is not the usual question. Magic is a trade in Muulchihua like any other: signs offer enchanting and identification by the hour. Craftspeople sit in rows, each row a different trade, each worker deep in their own work."
+   },
+   {
+    "seed": "r2s-succession_void-town-2",
+    "name": "Kulubpeten",
+    "tier": "town",
+    "pop": 2154,
+    "crisis": [
+     "succession_void"
+    ],
+    "views": [
+     "Summary/Overview"
+    ],
+    "sentence": "g is empty. Someone removed the standard and hasn't replaced it yet. The hammering echoes through all of Kulubpeten, and the place plainly lives by its forges. Craftspeople sit in rows, each row a different trade, each worker deep in their own work."
+   }
+  ]
+ },
+ {
+  "id": "C03",
+  "kind": "declared",
+  "file": "src/data/cultureProfiles.js",
+  "fn": "resolveConfig.js -> cultureProfiles.js :: materializeCulturalIdentity (culturalIdentity.*); arrival sight beat",
+  "pattern": "[wW]arm tile roofs and enclosed courtyards break up the stone streets",
+  "declared": {
+   "needs": [
+    "tier: ≥ town"
+   ]
+  },
+  "printsInTowns": 1,
+  "read": [
+   {
+    "seed": "r2r-town-21",
+    "name": "Campoplenum",
+    "tier": "town",
+    "pop": 1181,
+    "crisis": [],
+    "views": [
+     "Summary/Overview"
+    ],
+    "sentence": " river; the approach by road brings you in the rear way, past the yards and the drying nets, into a settlement that plainly considers the water its front door. Warm tile roofs and enclosed courtyards break up the stone streets. Pilgrims crowd the road in, and every second stall sells candles, tokens or someone's blessing. People argue politics in the open, loudly, and seem to enjoy i"
+   }
+  ]
+ },
+ {
+  "id": "C05t",
+  "kind": "new twin",
+  "file": "src/data/cultureProfiles.js",
+  "fn": "resolveConfig.js -> cultureProfiles.js :: materializeCulturalIdentity (culturalIdentity.*); arrival sight beat",
+  "pattern": "[lL]atticed windows look out on the lane between the houses",
+  "declared": {
+   "needs": [
+    "tier: ≤ hamlet"
+   ]
+  },
+  "printsInTowns": 4,
+  "read": [
+   {
+    "seed": "r2r-thorp-13",
+    "name": "Mintarshahr",
+    "tier": "thorp",
+    "pop": 17,
+    "crisis": [],
+    "views": [
+     "Summary/Overview"
+    ],
+    "sentence": "tarshahr is neither impressive nor disappointing from the approach. It is what it is, which is a working settlement of reasonable size doing reasonable things. Latticed windows look out on the lane between the houses. Someone is churning butter in a doorway, and the rhythm of it carries. Two partners go over their accounts in a courtyard with a mediator sitting between them"
+   },
+   {
+    "seed": "r2r-hamlet-48",
+    "name": "Markazmela",
+    "tier": "hamlet",
+    "pop": 70,
+    "crisis": [],
+    "views": [
+     "Summary/Overview"
+    ],
+    "sentence": "A merchant argues with a carter on the road into Markazmela about the size of a load. Nobody else pays them any attention. This is clearly a daily occurrence. Latticed windows look out on the lane between the houses. The lowing of penned cattle carries across Markazmela at every hour. Travellers are offered water before anyone asks their business."
+   },
+   {
+    "seed": "r2r-hamlet-37",
+    "name": "Madinatdarya",
+    "tier": "hamlet",
+    "pop": 46,
+    "crisis": [],
+    "views": [
+     "Summary/Overview"
+    ],
+    "sentence": "The first person you meet on the road into Madinatdarya wants to know your business, and the second already knows it. Latticed windows look out on the lane between the houses. A dog drives a handful of animals across the road, and you wait for them. Two partners go over their accounts in a courtyard with a mediator sitting between t"
+   },
+   {
+    "seed": "r2r-hamlet-19",
+    "name": "Deirkala",
+    "tier": "hamlet",
+    "pop": 84,
+    "crisis": [],
+    "views": [
+     "Summary/Overview"
+    ],
+    "sentence": "The road into Deirkala descends toward a forest of masts. Tar, salt, fish, and woodsmoke mark the boundary between the coast and the working port. Latticed windows look out on the lane between the houses. Travellers are offered water before anyone asks their business. People walk quickly and do not stop to talk to anyone they do not know."
+   }
+  ]
+ },
+ {
+  "id": "C07t",
+  "kind": "new twin",
+  "file": "src/data/cultureProfiles.js",
+  "fn": "resolveConfig.js -> cultureProfiles.js :: materializeCulturalIdentity (culturalIdentity.*); arrival sight beat",
+  "pattern": "[cC]arved roof beams and a long hall ridge stand above the other roofs",
+  "declared": {
+   "needs": [
+    "tier: ≤ village"
+   ]
+  },
+  "printsInTowns": 3,
+  "read": [
+   {
+    "seed": "r2r-village-20",
+    "name": "Naglsund",
+    "tier": "village",
+    "pop": 269,
+    "crisis": [],
+    "views": [
+     "Summary/Overview"
+    ],
+    "sentence": "A child runs past you on the road into Naglsund, chasing something or being chased by something (unclear which). Nobody in the street pays attention. Carved roof beams and a long hall ridge stand above the other roofs. Sacks of herbs and spices fill the carts, and the smell of them clings to your clothes. A household leader hands out gifts in the open, and everyone watching "
+   },
+   {
+    "seed": "r2r-village-32",
+    "name": "Jómsland",
+    "tier": "village",
+    "pop": 268,
+    "crisis": [],
+    "views": [
+     "Summary/Overview"
+    ],
+    "sentence": "A child runs past you on the road into Jómsland, chasing something or being chased by something (unclear which). Nobody in the street pays attention. Carved roof beams and a long hall ridge stand above the other roofs. Barrels are stacked by every doorway, and the carts on the road out are loaded with more. People argue law in the open as freely as they trade. Patched roofs "
+   },
+   {
+    "seed": "r2r-village-22",
+    "name": "Jómsland",
+    "tier": "village",
+    "pop": 328,
+    "crisis": [],
+    "views": [
+     "Summary/Overview"
+    ],
+    "sentence": "The first person you meet on the road into Jómsland wants to know your business, and the second already knows it. Carved roof beams and a long hall ridge stand above the other roofs. People argue law in the open as freely as they trade."
+   }
+  ]
+ },
+ {
+  "id": "C10t",
+  "kind": "new twin",
+  "file": "src/data/cultureProfiles.js",
+  "fn": "resolveConfig.js -> cultureProfiles.js :: materializeCulturalIdentity (culturalIdentity.*); arrival sight beat",
+  "pattern": "[aA] straight lane runs between the houses to the oldest courtyard",
+  "declared": {
+   "needs": [
+    "tier: ≤ village"
+   ]
+  },
+  "printsInTowns": 5,
+  "read": [
+   {
+    "seed": "r2r-thorp-47",
+    "name": "Hongzhou",
+    "tier": "thorp",
+    "pop": 15,
+    "crisis": [],
+    "views": [
+     "Summary/Overview"
+    ],
+    "sentence": "Hongzhou is neither impressive nor disappointing from the approach. It is what it is, which is a working settlement of reasonable size doing reasonable things. A straight lane runs between the houses to the oldest courtyard. A clerk records every cartload that passes in a careful ledger. Patched roofs and patched clothes say money is short here."
+   },
+   {
+    "seed": "r2r-village-54",
+    "name": "Yunpo",
+    "tier": "village",
+    "pop": 372,
+    "crisis": [],
+    "views": [
+     "Summary/Overview"
+    ],
+    "sentence": "Yunpo is neither impressive nor disappointing from the approach. It is what it is, which is a working settlement of reasonable size doing reasonable things. A straight lane runs between the houses to the oldest courtyard. Every other doorway seems to sell a remedy for something. A clerk records every cartload that passes in a careful ledger."
+   },
+   {
+    "seed": "r2r-hamlet-42",
+    "name": "Zhongzhen",
+    "tier": "hamlet",
+    "pop": 37,
+    "crisis": [],
+    "views": [
+     "Summary/Overview"
+    ],
+    "sentence": "A child runs past you on the road into Zhongzhen, chasing something or being chased by something (unclear which). Nobody in the street pays attention. A straight lane runs between the houses to the oldest courtyard. The smell of incense drifts out into the press of the lane. An elder settles a quarrel in a quiet voice before it can grow loud enough to need anyone else. Pa"
+   },
+   {
+    "seed": "r2r-thorp-48",
+    "name": "Huawan",
+    "tier": "thorp",
+    "pop": 28,
+    "crisis": [],
+    "views": [
+     "Summary/Overview"
+    ],
+    "sentence": "The smoke above Huawan stands straight up in the still air, a dozen thin columns that mark the settlement's shape on the sky like a map drawn in grey. A straight lane runs between the houses to the oldest courtyard. The smell of incense drifts out into the press of the lane. A clerk records every cartload that passes in a careful ledger. Children in outgrown clothes run e"
+   }
+  ]
+ },
+ {
+  "id": "C12t",
+  "kind": "new twin",
+  "file": "src/data/cultureProfiles.js",
+  "fn": "resolveConfig.js -> cultureProfiles.js :: materializeCulturalIdentity (culturalIdentity.*); arrival sight beat",
+  "pattern": "[aA] raised path and a water channel run between the house compounds",
+  "declared": {
+   "needs": [
+    "tier: ≤ hamlet"
+   ]
+  },
+  "printsInTowns": 2,
+  "read": [
+   {
+    "seed": "r2r-thorp-44",
+    "name": "Tikalahau",
+    "tier": "thorp",
+    "pop": 12,
+    "crisis": [],
+    "views": [
+     "Summary/Overview"
+    ],
+    "sentence": "Tikalahau is ordinary in the best sense: a place where people live and work and argue and sleep, which is most of what places are for. A raised path and a water channel run between the house compounds. Racks of drying fish line the way in, and the smell of salt and catch is everywhere. Festival banners hang above the doors, faded from one year and waiting fo"
+   },
+   {
+    "seed": "r2r-hamlet-2",
+    "name": "Tulumac",
+    "tier": "hamlet",
+    "pop": 76,
+    "crisis": [],
+    "views": [
+     "Summary/Overview"
+    ],
+    "sentence": "The road into Tulumac becomes a street at a point you can't precisely identify. The settlement grows around you gradually. A raised path and a water channel run between the house compounds. Porters bent under loaded frames file past, and someone counts them in. Patched roofs and patched clothes say money is short here."
+   }
+  ]
+ },
+ {
+  "id": "C19",
+  "kind": "reworded",
+  "file": "src/data/cultureProfiles.js",
+  "fn": "resolveConfig.js -> cultureProfiles.js :: materializeCulturalIdentity (culturalIdentity.*); arrival sight beat",
+  "pattern": "[Ww]hitewashed courts and stone steps catch the light between the houses",
+  "declared": {},
+  "printsInTowns": 1,
+  "read": [
+   {
+    "seed": "r2r-town-2",
+    "name": "Olymptopia",
+    "tier": "town",
+    "pop": 914,
+    "crisis": [],
+    "views": [
+     "Summary/Overview"
+    ],
+    "sentence": "The road into Olymptopia becomes a street at a point you can't precisely identify. The settlement grows around you gradually. Whitewashed courts and stone steps catch the light between the houses. The bells of Olymptopia answer one another across the roofs, and the streets slow for them. A patron stands drinks at a wine shop, and makes sure everyone kno"
+   }
+  ]
+ },
+ {
+  "id": "H01",
+  "kind": "declared",
+  "file": "src/data/historyData.js",
+  "fn": "historyGenerator.js :: tension/timeline hooks",
+  "pattern": "The ailing ruler wants a final errand completed before naming a successor",
+  "declared": {
+   "excludes": [
+    "ruler: council",
+    "ruler: elder",
+    "crisis: succession_void"
+   ]
+  },
+  "printsInTowns": 22,
+  "read": [
+   {
+    "seed": "r2s-insurgency-hamlet-2",
+    "name": "Farolitus",
+    "tier": "hamlet",
+    "pop": 72,
+    "crisis": [
+     "insurgency",
+     "famine"
+    ],
+    "views": [
+     "Summary/Plot Hooks"
+    ],
+    "sentence": "The ailing ruler wants a final errand completed before naming a successor"
+   },
+   {
+    "seed": "r2s-politically_fractured-metropolis-2",
+    "name": "Xinwan",
+    "tier": "metropolis",
+    "pop": 160904,
+    "crisis": [
+     "politically_fractured"
+    ],
+    "views": [
+     "Summary/Plot Hooks"
+    ],
+    "sentence": "The ailing ruler wants a final errand completed before naming a successor"
+   },
+   {
+    "seed": "r2s-famine-metropolis-1",
+    "name": "Hongji",
+    "tier": "metropolis",
+    "pop": 35674,
+    "crisis": [
+     "famine"
+    ],
+    "views": [
+     "Summary/Plot Hooks"
+    ],
+    "sentence": "The ailing ruler wants a final errand completed before naming a successor"
+   },
+   {
+    "seed": "r2r-city-42",
+    "name": "Mingjin",
+    "tier": "city",
+    "pop": 7313,
+    "crisis": [],
+    "views": [
+     "Summary/Plot Hooks"
+    ],
+    "sentence": "The ailing ruler wants a final errand completed before naming a successor"
+   }
+  ]
+ },
+ {
+  "id": "H05",
+  "kind": "declared",
+  "file": "src/data/historyData.js",
+  "fn": "historyGenerator.js :: hooks",
+  "pattern": "A healer who profited enormously during the plague",
+  "declared": {
+   "needs": [
+    "healer"
+   ]
+  },
+  "printsInTowns": 6,
+  "read": [
+   {
+    "seed": "r2r-metropolis-15",
+    "name": "Nandamala",
+    "tier": "metropolis",
+    "pop": 34901,
+    "crisis": [],
+    "views": [
+     "Summary/Plot Hooks"
+    ],
+    "sentence": "A healer who profited enormously during the plague is being asked how they stayed untouched"
+   },
+   {
+    "seed": "r2s-slave_revolt-metropolis-1",
+    "name": "Tikalkin",
+    "tier": "metropolis",
+    "pop": 45942,
+    "crisis": [
+     "slave_revolt"
+    ],
+    "views": [
+     "Summary/Plot Hooks"
+    ],
+    "sentence": "A healer who profited enormously during the plague is being asked how they stayed untouched"
+   },
+   {
+    "seed": "r2s-occupied-metropolis-1",
+    "name": "Dionpetra",
+    "tier": "metropolis",
+    "pop": 105466,
+    "crisis": [
+     "occupied"
+    ],
+    "views": [
+     "Summary/Plot Hooks"
+    ],
+    "sentence": "A healer who profited enormously during the plague is being asked how they stayed untouched"
+   },
+   {
+    "seed": "r2r-metropolis-45",
+    "name": "Chandraganj",
+    "tier": "metropolis",
+    "pop": 198530,
+    "crisis": [],
+    "views": [
+     "Summary/Plot Hooks"
+    ],
+    "sentence": "A healer who profited enormously during the plague is being asked how they stayed untouched"
+   }
+  ]
+ },
+ {
+  "id": "H10",
+  "kind": "declared",
+  "file": "src/data/historyData.js",
+  "fn": "historyGenerator.js :: fire originals",
+  "pattern": "across whole districts before it could be checked|across entire districts before anyone|street by street until whole quarters were gone",
+  "declared": {
+   "needs": [
+    "tier: ≥ town"
+   ]
+  },
+  "printsInTowns": 77,
+  "read": [
+   {
+    "seed": "r2r-town-14",
+    "name": "Nahrkhel",
+    "tier": "town",
+    "pop": 1359,
+    "crisis": [],
+    "views": [
+     "World/History"
+    ],
+    "sentence": "A fire that began in the lower districts consumed wooden buildings and merchant stalls across whole districts before it could be checked"
+   },
+   {
+    "seed": "r2s-under_siege-metropolis-2",
+    "name": "Raassaray",
+    "tier": "metropolis",
+    "pop": 33734,
+    "crisis": [
+     "under_siege"
+    ],
+    "views": [
+     "World/History"
+    ],
+    "sentence": "A fire that began in the lower districts consumed wooden buildings and merchant stalls across whole districts before it could be checked"
+   },
+   {
+    "seed": "r2s-famine-city-3",
+    "name": "Vatanabad",
+    "tier": "city",
+    "pop": 11818,
+    "crisis": [
+     "famine"
+    ],
+    "views": [
+     "World/History"
+    ],
+    "sentence": "A fire that began in the lower districts consumed wooden buildings and merchant stalls across whole districts before it could be checked"
+   },
+   {
+    "seed": "r2r-metropolis-14",
+    "name": "Prabhapeta",
+    "tier": "metropolis",
+    "pop": 271164,
+    "crisis": [
+     "under_siege"
+    ],
+    "views": [
+     "World/History"
+    ],
+    "sentence": "A fire that began in the lower districts consumed wooden buildings and merchant stalls across whole districts before it could be checked"
+   }
+  ]
+ },
+ {
+  "id": "H15",
+  "kind": "new twin",
+  "file": "src/data/historyData.js",
+  "fn": "historyGenerator.js :: Iron Dispute",
+  "pattern": "shaped who (controls extraction|holds those rights) to this day|cheated out of the original (mining contract|rights to the deposits)|Fortified extraction sites",
+  "declared": {},
+  "printsInTowns": 46,
+  "read": [
+   {
+    "seed": "r2r-thorp-1",
+    "name": "Terrapolis",
+    "tier": "thorp",
+    "pop": 30,
+    "crisis": [
+     "occupied"
+    ],
+    "views": [
+     "World/History"
+    ],
+    "sentence": "Rights to the local iron deposits became the subject of a prolonged dispute between the settlement and a rival lord. The outcome shaped who holds those rights to this day."
+   },
+   {
+    "seed": "r2r-metropolis-0",
+    "name": "Baigang",
+    "tier": "metropolis",
+    "pop": 28304,
+    "crisis": [],
+    "views": [
+     "World/History"
+    ],
+    "sentence": "Rights to the local iron deposits became the subject of a prolonged dispute between the settlement and a rival lord. The outcome shaped who controls extraction to this day."
+   },
+   {
+    "seed": "r2r-thorp-40",
+    "name": "Malotsy",
+    "tier": "thorp",
+    "pop": 20,
+    "crisis": [
+     "occupied"
+    ],
+    "views": [
+     "Summary/Plot Hooks",
+     "World/History"
+    ],
+    "sentence": "A rival family claims their ancestor was cheated out of the original rights to the deposits"
+   },
+   {
+    "seed": "r2r-village-39",
+    "name": "Beikou",
+    "tier": "village",
+    "pop": 136,
+    "crisis": [
+     "religious_conversion"
+    ],
+    "views": [
+     "World/History"
+    ],
+    "sentence": "Rights to the local iron deposits became the subject of a prolonged dispute between the settlement and a rival lord. The outcome shaped who holds those rights to this day."
+   }
+  ]
+ },
+ {
+  "id": "I01",
+  "kind": "reworded",
+  "file": "src/data/institutionalCatalog.js + institutionDescVariants.js",
+  "fn": "assembleInstitutions.js / cascadePass.js inst.desc",
+  "pattern": "Nets, traps, and drying racks, kept by the households that fish the water",
+  "declared": {},
+  "printsInTowns": 6,
+  "read": [
+   {
+    "seed": "r2r-thorp-50",
+    "name": "Tlalatl",
+    "tier": "thorp",
+    "pop": 28,
+    "crisis": [],
+    "views": [
+     "Systems/Institutions"
+    ],
+    "sentence": "Nets, traps, and drying racks, kept by the households that fish the water."
+   },
+   {
+    "seed": "r2s-under_siege-thorp-0",
+    "name": "Qaradavan",
+    "tier": "thorp",
+    "pop": 9,
+    "crisis": [
+     "under_siege"
+    ],
+    "views": [
+     "Systems/Institutions"
+    ],
+    "sentence": "Nets, traps, and drying racks, kept by the households that fish the water."
+   },
+   {
+    "seed": "r2s-monster_pressure-thorp-0",
+    "name": "Umabagh",
+    "tier": "thorp",
+    "pop": 16,
+    "crisis": [
+     "monster_pressure"
+    ],
+    "views": [
+     "Systems/Institutions"
+    ],
+    "sentence": "Nets, traps, and drying racks, kept by the households that fish the water."
+   },
+   {
+    "seed": "r2r-thorp-57",
+    "name": "Brahmawadi",
+    "tier": "thorp",
+    "pop": 11,
+    "crisis": [],
+    "views": [
+     "Systems/Institutions"
+    ],
+    "sentence": "Nets, traps, and drying racks, kept by the households that fish the water."
+   }
+  ]
+ },
+ {
+  "id": "I05",
+  "kind": "reworded",
+  "file": "src/data/institutionalCatalog.js + institutionDescVariants.js",
+  "fn": "assembleInstitutions.js / cascadePass.js inst.desc",
+  "pattern": "Felling crews and a stacking yard at the forest edge, cutting timber and charcoal wood and carting both",
+  "declared": {},
+  "printsInTowns": 4,
+  "read": [
+   {
+    "seed": "r2r-hamlet-33",
+    "name": "Puripuram",
+    "tier": "hamlet",
+    "pop": 32,
+    "crisis": [
+     "indebted"
+    ],
+    "views": [
+     "Systems/Institutions"
+    ],
+    "sentence": "Felling crews and a stacking yard at the forest edge, cutting timber and charcoal wood and carting both."
+   },
+   {
+    "seed": "r2s-slave_revolt-village-1",
+    "name": "Deirmandi",
+    "tier": "village",
+    "pop": 89,
+    "crisis": [
+     "slave_revolt"
+    ],
+    "views": [
+     "Systems/Institutions"
+    ],
+    "sentence": "Felling crews and a stacking yard at the forest edge, cutting timber and charcoal wood and carting both."
+   },
+   {
+    "seed": "r2r-village-8",
+    "name": "Khandavan",
+    "tier": "village",
+    "pop": 316,
+    "crisis": [],
+    "views": [
+     "Systems/Institutions"
+    ],
+    "sentence": "Felling crews and a stacking yard at the forest edge, cutting timber and charcoal wood and carting both."
+   },
+   {
+    "seed": "r2r-village-19",
+    "name": "Chinggistash",
+    "tier": "village",
+    "pop": 237,
+    "crisis": [],
+    "views": [
+     "Systems/Institutions"
+    ],
+    "sentence": "Felling crews and a stacking yard at the forest edge, cutting timber and charcoal wood and carting both."
+   }
+  ]
+ },
+ {
+  "id": "I09",
+  "kind": "reworded",
+  "file": "src/data/institutionalCatalog.js + institutionDescVariants.js",
+  "fn": "assembleInstitutions.js / cascadePass.js inst.desc",
+  "pattern": "A quarry of building stone, laid out in ordered workings|A building-stone quarry laid out in an ordered working|A quarry for building stone, opened with method",
+  "declared": {},
+  "printsInTowns": 7,
+  "read": [
+   {
+    "seed": "r2r-village-20",
+    "name": "Naglsund",
+    "tier": "village",
+    "pop": 269,
+    "crisis": [],
+    "views": [
+     "Systems/Institutions"
+    ],
+    "sentence": "A building-stone quarry laid out in an ordered working. A village sitting on good quarry ground can furnish half a region's building, and the quarry master is well aware of the fact."
+   },
+   {
+    "seed": "r2s-religious_conversion-village-3",
+    "name": "Archodion",
+    "tier": "village",
+    "pop": 351,
+    "crisis": [
+     "religious_conversion"
+    ],
+    "views": [
+     "Systems/Institutions"
+    ],
+    "sentence": "A quarry of building stone, laid out in ordered workings. A village on good quarry land can supply half a region's construction needs, and the quarry master knows it."
+   },
+   {
+    "seed": "r2r-village-45",
+    "name": "Mönkhkul",
+    "tier": "village",
+    "pop": 270,
+    "crisis": [],
+    "views": [
+     "Systems/Institutions"
+    ],
+    "sentence": "A building-stone quarry laid out in an ordered working. A village sitting on good quarry ground can furnish half a region's building, and the quarry master is well aware of the fact."
+   },
+   {
+    "seed": "r2r-village-22",
+    "name": "Jómsland",
+    "tier": "village",
+    "pop": 328,
+    "crisis": [],
+    "views": [
+     "Systems/Institutions"
+    ],
+    "sentence": "A quarry of building stone, laid out in ordered workings. A village on good quarry land can supply half a region's construction needs, and the quarry master knows it."
+   }
+  ]
+ },
+ {
+  "id": "I13",
+  "kind": "reworded",
+  "file": "src/data/institutionalCatalog.js + institutionDescVariants.js",
+  "fn": "assembleInstitutions.js / cascadePass.js inst.desc",
+  "pattern": "council of senior druids who govern their circle's relationship with the settlement|Senior druids who govern how their circle deals with the town|charged with their circle's standing in the town",
+  "declared": {},
+  "printsInTowns": 71,
+  "read": [
+   {
+    "seed": "r2r-town-1",
+    "name": "Karakabad",
+    "tier": "town",
+    "pop": 1590,
+    "crisis": [
+     "indebted"
+    ],
+    "views": [
+     "Systems/Institutions"
+    ],
+    "sentence": "A council of senior druids who govern their circle's relationship with the settlement around it. They may maintain a hidden grove beneath the streets, mediate between the settlement's growth and wild places, or serve as ecological advisors to th"
+   },
+   {
+    "seed": "r2s-wartime-metropolis-0",
+    "name": "Qasrchowk",
+    "tier": "metropolis",
+    "pop": 49155,
+    "crisis": [
+     "wartime"
+    ],
+    "views": [
+     "Systems/Institutions"
+    ],
+    "sentence": "A council of senior druids who govern their circle's relationship with the settlement around it. They may maintain a hidden grove beneath the streets, mediate between the settlement's growth and wild places, or serve as ecological advisors to th"
+   },
+   {
+    "seed": "r2s-famine-town-1",
+    "name": "Hongcheng",
+    "tier": "town",
+    "pop": 1336,
+    "crisis": [
+     "famine"
+    ],
+    "views": [
+     "Systems/Institutions"
+    ],
+    "sentence": "A council of senior druids who govern their circle's relationship with the settlement around it. They may maintain a hidden grove beneath the streets, mediate between the settlement's growth and wild places, or serve as ecological advisors to th"
+   },
+   {
+    "seed": "r2r-metropolis-13",
+    "name": "Athenapetra",
+    "tier": "metropolis",
+    "pop": 328486,
+    "crisis": [],
+    "views": [
+     "Systems/Institutions"
+    ],
+    "sentence": "A council of senior druids who govern their circle's relationship with the settlement around it. They may maintain a hidden grove beneath the streets, mediate between the settlement's growth and wild places, or serve as ecological advisors to th"
+   }
+  ]
+ },
+ {
+  "id": "I18",
+  "kind": "new twin",
+  "file": "src/data/institutionalCatalog.js + institutionDescVariants.js",
+  "fn": "assembleInstitutions.js / cascadePass.js inst.desc",
+  "pattern": "None can reach it while the roads are held|cut off while the siege holds the roads|though none can come while the roads are held",
+  "declared": {
+   "crisis": [
+    "under_siege"
+   ]
+  },
+  "printsInTowns": 2,
+  "read": [
+   {
+    "seed": "r2s-under_siege-town-0",
+    "name": "Ulffoss",
+    "tier": "town",
+    "pop": 2137,
+    "crisis": [
+     "under_siege"
+    ],
+    "views": [
+     "Systems/Institutions",
+     "Systems/Services"
+    ],
+    "sentence": "A yearly fair for regional merchants. None can reach it while the roads are held."
+   },
+   {
+    "seed": "r2s-under_siege-town-2",
+    "name": "Yekehiid",
+    "tier": "town",
+    "pop": 2453,
+    "crisis": [
+     "under_siege"
+    ],
+    "views": [
+     "Systems/Institutions",
+     "Systems/Services"
+    ],
+    "sentence": "A yearly fair for regional merchants. None can reach it while the roads are held."
+   }
+  ]
+ },
+ {
+  "id": "I23",
+  "kind": "declared",
+  "file": "src/data/institutionalCatalog.js + institutionDescVariants.js",
+  "fn": "assembleInstitutions.js / cascadePass.js inst.desc",
+  "pattern": "Minor but steady revenue|The income is small but never fails|Modest revenue, but steady",
+  "declared": {
+   "excludes": [
+    "crisis: under_siege"
+   ]
+  },
+  "printsInTowns": 149,
+  "read": [
+   {
+    "seed": "r2r-village-2",
+    "name": "Staroka",
+    "tier": "village",
+    "pop": 388,
+    "crisis": [],
+    "views": [
+     "Systems/Institutions"
+    ],
+    "sentence": "A bridge with a toll house upon it. The keeper takes the passage fees and sees to simple upkeep. The income is small but never fails."
+   },
+   {
+    "seed": "r2s-wartime-metropolis-3",
+    "name": "Nanwan",
+    "tier": "metropolis",
+    "pop": 43550,
+    "crisis": [
+     "wartime"
+    ],
+    "views": [
+     "Systems/Institutions"
+    ],
+    "sentence": "A bridge with a toll house upon it. The keeper takes the passage fees and sees to simple upkeep. The income is small but never fails."
+   },
+   {
+    "seed": "r2s-occupied-town-3",
+    "name": "Lykopetra",
+    "tier": "town",
+    "pop": 2018,
+    "crisis": [
+     "occupied"
+    ],
+    "views": [
+     "Systems/Institutions"
+    ],
+    "sentence": "A bridge with a toll house upon it. The keeper takes the passage fees and sees to simple upkeep. The income is small but never fails."
+   },
+   {
+    "seed": "r2r-metropolis-19",
+    "name": "Mintaroasis",
+    "tier": "metropolis",
+    "pop": 76626,
+    "crisis": [],
+    "views": [
+     "Systems/Institutions"
+    ],
+    "sentence": "A bridge with a toll house. The keeper collects passage fees and performs basic maintenance. Minor but steady revenue."
+   }
+  ]
+ },
+ {
+  "id": "S04",
+  "kind": "declared",
+  "file": "src/data/institutionServices.js",
+  "fn": "services (availableServices / institution cards)",
+  "pattern": "Once-a-year market drawing merchants from across the region",
+  "declared": {
+   "excludes": [
+    "crisis: under_siege"
+   ]
+  },
+  "printsInTowns": 32,
+  "read": [
+   {
+    "seed": "r2r-town-10",
+    "name": "Madinatchowk",
+    "tier": "town",
+    "pop": 754,
+    "crisis": [],
+    "views": [
+     "Systems/Services"
+    ],
+    "sentence": "Once-a-year market drawing merchants from across the region."
+   },
+   {
+    "seed": "r2s-wartime-town-3",
+    "name": "Schwarzsteig",
+    "tier": "town",
+    "pop": 1949,
+    "crisis": [
+     "wartime"
+    ],
+    "views": [
+     "Systems/Services"
+    ],
+    "sentence": "Once-a-year market drawing merchants from across the region."
+   },
+   {
+    "seed": "r2s-famine-town-1",
+    "name": "Hongcheng",
+    "tier": "town",
+    "pop": 1336,
+    "crisis": [
+     "famine"
+    ],
+    "views": [
+     "Systems/Services"
+    ],
+    "sentence": "Once-a-year market drawing merchants from across the region."
+   },
+   {
+    "seed": "r2r-town-51",
+    "name": "Tighleigh",
+    "tier": "town",
+    "pop": 2465,
+    "crisis": [],
+    "views": [
+     "Systems/Services"
+    ],
+    "sentence": "Once-a-year market drawing merchants from across the region."
+   }
+  ]
+ },
+ {
+  "id": "S08",
+  "kind": "declared",
+  "file": "src/data/institutionServices.js",
+  "fn": "services (availableServices / institution cards)",
+  "pattern": "Flat-bottomed cargo barges for river transport|River traffic takes constant punishment",
+  "declared": {
+   "needs": [
+    "river"
+   ]
+  },
+  "printsInTowns": 61,
+  "read": [
+   {
+    "seed": "r2r-village-13",
+    "name": "Yurttala",
+    "tier": "village",
+    "pop": 347,
+    "crisis": [],
+    "views": [
+     "Systems/Services"
+    ],
+    "sentence": "Flat-bottomed cargo barges for river transport. Simpler than sea vessels."
+   },
+   {
+    "seed": "r2s-wartime-metropolis-1",
+    "name": "Vysokoichi",
+    "tier": "metropolis",
+    "pop": 25818,
+    "crisis": [
+     "wartime"
+    ],
+    "views": [
+     "Systems/Services"
+    ],
+    "sentence": "Flat-bottomed cargo barges for river transport. Simpler than sea vessels."
+   },
+   {
+    "seed": "r2s-occupied-village-2",
+    "name": "Caerwood",
+    "tier": "village",
+    "pop": 386,
+    "crisis": [
+     "occupied"
+    ],
+    "views": [
+     "Systems/Services"
+    ],
+    "sentence": "Flat-bottomed cargo barges for river transport. Simpler than sea vessels."
+   },
+   {
+    "seed": "r2s-slave_revolt-town-0",
+    "name": "Novafossae",
+    "tier": "town",
+    "pop": 1243,
+    "crisis": [
+     "slave_revolt"
+    ],
+    "views": [
+     "Systems/Services"
+    ],
+    "sentence": "Flat-bottomed cargo barges for river transport. Simpler than sea vessels."
+   }
+  ]
+ },
+ {
+  "id": "S12",
+  "kind": "new twin",
+  "file": "src/data/institutionServices.js",
+  "fn": "services (availableServices / institution cards)",
+  "pattern": "Transport foot travelers and small goods across the water|Move small amounts of cargo across the water",
+  "declared": {
+   "excludes": [
+    "river"
+   ]
+  },
+  "printsInTowns": 48,
+  "read": [
+   {
+    "seed": "r2r-village-10",
+    "name": "Skáldal",
+    "tier": "village",
+    "pop": 229,
+    "crisis": [],
+    "views": [
+     "Systems/Services"
+    ],
+    "sentence": "Transport foot travelers and small goods across the water."
+   },
+   {
+    "seed": "r2s-wartime-metropolis-3",
+    "name": "Nanwan",
+    "tier": "metropolis",
+    "pop": 43550,
+    "crisis": [
+     "wartime"
+    ],
+    "views": [
+     "Systems/Services"
+    ],
+    "sentence": "Transport foot travelers and small goods across the water."
+   },
+   {
+    "seed": "r2s-famine-town-2",
+    "name": "Vatanserai",
+    "tier": "town",
+    "pop": 407,
+    "crisis": [
+     "famine"
+    ],
+    "views": [
+     "Systems/Services"
+    ],
+    "sentence": "Transport foot travelers and small goods across the water."
+   },
+   {
+    "seed": "r2s-plague_onset-town-2",
+    "name": "Tarkhankul",
+    "tier": "town",
+    "pop": 1264,
+    "crisis": [
+     "plague_onset"
+    ],
+    "views": [
+     "Systems/Services"
+    ],
+    "sentence": "Transport foot travelers and small goods across the water."
+   }
+  ]
+ },
+ {
+  "id": "F1b",
+  "kind": "prior F1 twin",
+  "file": "src/data/institutionDescVariants.js",
+  "fn": "granary famine twin",
+  "pattern": "meant to carry the town through bad harvests|The famine is drawing them down",
+  "declared": {
+   "crisis": [
+    "famine"
+   ]
+  },
+  "printsInTowns": 4,
+  "read": [
+   {
+    "seed": "r2s-famine-town-0",
+    "name": "Gründorf",
+    "tier": "town",
+    "pop": 1696,
+    "crisis": [
+     "famine"
+    ],
+    "views": [
+     "Systems/Institutions"
+    ],
+    "sentence": "Communal grain storage, meant to carry the town through bad harvests. This year it has not been enough."
+   },
+   {
+    "seed": "r2s-famine-town-3",
+    "name": "Shattkarez",
+    "tier": "town",
+    "pop": 737,
+    "crisis": [
+     "famine"
+    ],
+    "views": [
+     "Systems/Institutions"
+    ],
+    "sentence": "Shared grain stores, built to even out the harvests. The famine is drawing them down faster than any harvest could refill them."
+   },
+   {
+    "seed": "r2s-famine-town-1",
+    "name": "Hongcheng",
+    "tier": "town",
+    "pop": 1336,
+    "crisis": [
+     "famine"
+    ],
+    "views": [
+     "Systems/Institutions"
+    ],
+    "sentence": "Shared grain stores, built to even out the harvests. The famine is drawing them down faster than any harvest could refill them."
+   },
+   {
+    "seed": "r2s-famine-town-2",
+    "name": "Vatanserai",
+    "tier": "town",
+    "pop": 407,
+    "crisis": [
+     "famine"
+    ],
+    "views": [
+     "Systems/Institutions"
+    ],
+    "sentence": "Communal grain storage, meant to carry the town through bad harvests. This year it has not been enough."
+   }
+  ]
+ },
+ {
+  "id": "F4",
+  "kind": "prior F4",
+  "file": "src/data/institutionDescVariants.js",
+  "fn": "Elder Grove city word",
+  "pattern": "relationship with the city|deals with the city|standing in the city|the city's spread",
+  "declared": {
+   "needs": [
+    "tier: ≥ city"
+   ]
+  },
+  "printsInTowns": 14,
+  "read": [
+   {
+    "seed": "r2r-city-11",
+    "name": "Puripat",
+    "tier": "city",
+    "pop": 11691,
+    "crisis": [],
+    "views": [
+     "Systems/Institutions"
+    ],
+    "sentence": "Senior druids who govern how their circle deals with the city. They may keep a grove hidden beneath the streets, hold the line between the city's spread and the wild, or advise its rulers on the land."
+   },
+   {
+    "seed": "r2s-wartime-city-2",
+    "name": "Langkirche",
+    "tier": "city",
+    "pop": 13169,
+    "crisis": [
+     "wartime"
+    ],
+    "views": [
+     "Systems/Institutions"
+    ],
+    "sentence": "Senior druids who govern how their circle deals with the city. They may keep a grove hidden beneath the streets, hold the line between the city's spread and the wild, or advise its rulers on the land."
+   },
+   {
+    "seed": "r2s-famine-city-3",
+    "name": "Vatanabad",
+    "tier": "city",
+    "pop": 11818,
+    "crisis": [
+     "famine"
+    ],
+    "views": [
+     "Systems/Institutions"
+    ],
+    "sentence": "A council of elder druids charged with their circle's standing in the city: sometimes tending a concealed grove below the streets, sometimes mediating between expansion and wild ground, sometimes counselling those in power on ecologic"
+   },
+   {
+    "seed": "r2s-insurgency-city-0",
+    "name": "Fionnhurst",
+    "tier": "city",
+    "pop": 10271,
+    "crisis": [
+     "insurgency"
+    ],
+    "views": [
+     "Systems/Institutions"
+    ],
+    "sentence": "A council of elder druids charged with their circle's standing in the city: sometimes tending a concealed grove below the streets, sometimes mediating between expansion and wild ground, sometimes counselling those in power on ecologic"
+   }
+  ]
+ }
+]

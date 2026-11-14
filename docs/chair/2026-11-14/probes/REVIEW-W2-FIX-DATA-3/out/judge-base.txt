@@ -1,0 +1,126 @@
+A01     23 prints; breaks its declaration: 8 r2r-hamlet-35 [vocab: needs tier: ≥ town =false; raw: needs tier: ≥ town =false] ; r2r-hamlet-47 [vocab: needs tier: ≥ town =false; raw: needs tier: ≥ town =false] ; r2r-village-4 [vocab: needs tier: ≥ town =false; raw: needs tier: ≥ town =false] ; r2r-village-48 [vocab: needs tier: ≥ town =false; raw: needs tier: ≥ town =false]
+A02     25 prints; breaks its declaration: 5 r2r-hamlet-53 [vocab: needs tier: ≥ town =false; raw: needs tier: ≥ town =false] ; r2r-village-22 [vocab: needs tier: ≥ town =false; raw: needs tier: ≥ town =false] ; r2r-village-55 [vocab: needs tier: ≥ town =false; raw: needs tier: ≥ town =false] ; r2s-indebted-hamlet-0 [vocab: needs tier: ≥ town =false; raw: needs tier: ≥ town =false]
+A03      7 prints; breaks its declaration: 2 r2s-mass_migration-village-2 [vocab: needs tier: ≥ town =false; raw: needs tier: ≥ town =false] ; r2s-wartime-village-3 [vocab: needs tier: ≥ town =false; raw: needs tier: ≥ town =false]
+A04     19 prints; breaks its declaration: 12 r2r-hamlet-2 [vocab: needs tier: ≥ town =false; raw: needs tier: ≥ town =false] ; r2r-hamlet-26 [vocab: needs tier: ≥ town =false; raw: needs tier: ≥ town =false] ; r2r-hamlet-5 [vocab: needs tier: ≥ town =false; raw: needs tier: ≥ town =false] ; r2r-village-25 [vocab: needs tier: ≥ town =false; raw: needs tier: ≥ town =false]
+A05      4 prints; breaks its declaration: 0 
+A06      6 prints; breaks its declaration: 0 
+A07     13 prints; breaks its declaration: 13 r2r-city-22 [raw: crisis wartime,insurgency not in []] ; r2r-city-56 [raw: crisis wartime,insurgency not in [politically_fractured,indebted]] ; r2r-metropolis-39 [raw: crisis wartime,insurgency not in [politically_fractured]] ; r2r-town-38 [vocab: needs institution: smith =false; raw: needs institution: smith =false; raw: crisis wartime,insurgency not in []]
+A08      8 prints; breaks its declaration: 0 
+A09     33 prints; breaks its declaration: 8 r2r-hamlet-21 [vocab: needs church =false; raw: needs church =false; vocab: needs tier: ≥ town =false; raw: needs tier: ≥ town =false] ; r2r-village-12 [vocab: needs tier: ≥ town =false; raw: needs tier: ≥ town =false] ; r2r-village-19 [vocab: needs tier: ≥ town =false; raw: needs tier: ≥ town =false] ; r2r-village-26 [vocab: needs tier: ≥ town =false; raw: needs tier: ≥ town =false]
+A10     11 prints; breaks its declaration: 1 r2r-thorp-41 [vocab: needs church =false; raw: needs church =false]
+A11     11 prints; breaks its declaration: 1 r2s-under_siege-town-2 [vocab: excludes crisis: under_siege =true; raw: excludes crisis: under_siege =true]
+A12     21 prints; breaks its declaration: 0 
+A13     20 prints; breaks its declaration: 9 r2r-hamlet-19 [vocab: needs market =false; raw: needs market =false] ; r2r-hamlet-30 [vocab: needs market =false; raw: needs market =false] ; r2r-hamlet-37 [vocab: needs market =false; raw: needs market =false] ; r2r-village-5 [vocab: needs market =false; raw: needs market =false]
+A14     20 prints; breaks its declaration: 0 
+A15     17 prints; breaks its declaration: 7 r2r-hamlet-42 [vocab: needs market =false; raw: needs market =false] ; r2r-hamlet-44 [vocab: needs market =false; raw: needs market =false] ; r2r-thorp-56 [vocab: needs market =false; raw: needs market =false] ; r2r-village-18 [vocab: needs market =false; raw: needs market =false]
+A16     23 prints; breaks its declaration: 9 r2r-hamlet-22 [vocab: needs tier: ≥ town =false; raw: needs tier: ≥ town =false] ; r2r-hamlet-31 [vocab: needs tier: ≥ town =false; raw: needs tier: ≥ town =false] ; r2r-thorp-47 [vocab: needs tier: ≥ town =false; raw: needs tier: ≥ town =false] ; r2r-village-54 [vocab: needs tier: ≥ town =false; raw: needs tier: ≥ town =false]
+A17     13 prints; breaks its declaration: 5 r2s-insurgency-thorp-2 [vocab: needs market =false; raw: needs market =false] ; r2s-mass_migration-hamlet-3 [vocab: needs market =false; raw: needs market =false] ; r2s-politically_fractured-thorp-1 [vocab: needs market =false; raw: needs market =false] ; r2s-religious_conversion-thorp-0 [vocab: needs market =false; raw: needs market =false]
+C01      4 prints; breaks its declaration: 3 r2r-thorp-14 [vocab: needs tier: ≥ town =false; raw: needs tier: ≥ town =false] ; r2r-thorp-30 [vocab: needs tier: ≥ town =false; raw: needs tier: ≥ town =false] ; r2r-village-27 [vocab: needs tier: ≥ town =false; raw: needs tier: ≥ town =false]
+C01t     0 prints; breaks its declaration: 0 
+C02      0 prints; breaks its declaration: 0 
+C02t     0 prints; breaks its declaration: 0 
+C03      5 prints; breaks its declaration: 4 r2r-hamlet-11 [vocab: needs tier: ≥ town =false; raw: needs tier: ≥ town =false] ; r2r-hamlet-17 [vocab: needs tier: ≥ town =false; raw: needs tier: ≥ town =false] ; r2r-thorp-35 [vocab: needs tier: ≥ town =false; raw: needs tier: ≥ town =false] ; r2r-village-36 [vocab: needs tier: ≥ town =false; raw: needs tier: ≥ town =false]
+C03t     0 prints; breaks its declaration: 0 
+C04      5 prints; breaks its declaration: 4 r2r-hamlet-23 [vocab: needs tier: ≥ village =false; raw: needs tier: ≥ village =false] ; r2r-hamlet-39 [vocab: needs tier: ≥ village =false; raw: needs tier: ≥ village =false] ; r2r-hamlet-47 [vocab: needs tier: ≥ village =false; raw: needs tier: ≥ village =false] ; r2r-thorp-6 [vocab: needs tier: ≥ village =false; raw: needs tier: ≥ village =false]
+C04t     0 prints; breaks its declaration: 0 
+C05      0 prints; breaks its declaration: 0 
+C05t     0 prints; breaks its declaration: 0 
+C06      7 prints; breaks its declaration: 6 r2r-hamlet-13 [vocab: needs market =false; raw: needs market =false; vocab: needs tier: ≥ town =false; raw: needs tier: ≥ town =false] ; r2r-hamlet-48 [vocab: needs market =false; raw: needs market =false; vocab: needs tier: ≥ town =false; raw: needs tier: ≥ town =false] ; r2r-hamlet-8 [vocab: needs market =false; raw: needs market =false; vocab: needs tier: ≥ town =false; raw: needs tier: ≥ town =false] ; r2r-thorp-12 [vocab: needs market =false; raw: needs market =false; vocab: needs tier: ≥ town =false; raw: needs tier: ≥ town =false]
+C06t     0 prints; breaks its declaration: 0 
+C07      4 prints; breaks its declaration: 3 r2r-village-20 [vocab: needs tier: ≥ town =false; raw: needs tier: ≥ town =false] ; r2r-village-22 [vocab: needs tier: ≥ town =false; raw: needs tier: ≥ town =false] ; r2r-village-32 [vocab: needs tier: ≥ town =false; raw: needs tier: ≥ town =false]
+C07t     0 prints; breaks its declaration: 0 
+C08      6 prints; breaks its declaration: 6 r2r-hamlet-21 [vocab: needs palisade =false; vocab: needs tier: ≥ town =false; raw: needs tier: ≥ town =false] ; r2r-hamlet-26 [vocab: needs river =false; vocab: needs tier: ≥ town =false; raw: needs tier: ≥ town =false] ; r2r-hamlet-51 [vocab: needs river =false; vocab: needs tier: ≥ town =false; raw: needs tier: ≥ town =false] ; r2r-town-29 [vocab: needs palisade =false]
+C08t     0 prints; breaks its declaration: 0 
+C09      2 prints; breaks its declaration: 2 r2r-hamlet-22 [vocab: needs tier: ≥ town =false; raw: needs tier: ≥ town =false] ; r2r-hamlet-44 [vocab: needs tier: ≥ town =false; raw: needs tier: ≥ town =false]
+C09t     0 prints; breaks its declaration: 0 
+C10      7 prints; breaks its declaration: 5 r2r-hamlet-42 [vocab: needs tier: ≥ town =false; raw: needs tier: ≥ town =false] ; r2r-thorp-47 [vocab: needs tier: ≥ town =false; raw: needs tier: ≥ town =false] ; r2r-thorp-48 [vocab: needs tier: ≥ town =false; raw: needs tier: ≥ town =false] ; r2r-village-4 [vocab: needs tier: ≥ town =false; raw: needs tier: ≥ town =false]
+C10t     0 prints; breaks its declaration: 0 
+C11      3 prints; breaks its declaration: 2 r2r-hamlet-50 [vocab: needs tier: ≥ town =false; raw: needs tier: ≥ town =false] ; r2r-village-7 [vocab: needs tier: ≥ town =false; raw: needs tier: ≥ town =false]
+C11t     0 prints; breaks its declaration: 0 
+C12      3 prints; breaks its declaration: 2 r2r-hamlet-2 [vocab: needs tier: ≥ village =false; raw: needs tier: ≥ village =false] ; r2r-thorp-44 [vocab: needs tier: ≥ village =false; raw: needs tier: ≥ village =false]
+C12t     0 prints; breaks its declaration: 0 
+C13      4 prints; breaks its declaration: 4 r2r-hamlet-49 [vocab: needs market =false; raw: needs market =false; vocab: needs tier: ≥ village =false; raw: needs tier: ≥ village =false] ; r2r-thorp-33 [vocab: needs market =false; raw: needs market =false; vocab: needs tier: ≥ village =false; raw: needs tier: ≥ village =false] ; r2r-thorp-59 [vocab: needs market =false; raw: needs market =false; vocab: needs tier: ≥ village =false; raw: needs tier: ≥ village =false] ; r2r-village-40 [vocab: needs market =false; raw: needs market =false]
+C13t     0 prints; breaks its declaration: 0 
+C14      5 prints; breaks its declaration: 5 r2r-hamlet-43 [vocab: needs tier: ≥ town =false; raw: needs tier: ≥ town =false] ; r2r-thorp-2 [vocab: needs tier: ≥ town =false; raw: needs tier: ≥ town =false] ; r2r-thorp-57 [vocab: needs tier: ≥ town =false; raw: needs tier: ≥ town =false] ; r2r-village-23 [vocab: needs tier: ≥ town =false; raw: needs tier: ≥ town =false]
+C14t     0 prints; breaks its declaration: 0 
+C15      0 prints; breaks its declaration: 0 
+C15t     0 prints; breaks its declaration: 0 
+C16      0 prints; breaks its declaration: 0 
+C16t     0 prints; breaks its declaration: 0 
+C17      0 prints; breaks its declaration: 0 
+C17t     0 prints; breaks its declaration: 0 
+C18      0 prints; breaks its declaration: 0 
+C18t     0 prints; breaks its declaration: 0 
+C19      0 prints; breaks its declaration: 0 
+C20      0 prints; breaks its declaration: 0 
+C21      0 prints; breaks its declaration: 0 
+C22      0 prints; breaks its declaration: 0 
+E01    183 prints; breaks its declaration: 0 
+H01     73 prints; breaks its declaration: 51 r2r-hamlet-10 [vocab: excludes ruler: elder =true] ; r2r-hamlet-11 [vocab: excludes ruler: elder =true] ; r2r-hamlet-24 [vocab: excludes ruler: elder =true] ; r2r-hamlet-31 [vocab: excludes ruler: elder =true]
+H02     47 prints; breaks its declaration: 33 r2r-hamlet-23 [vocab: excludes ruler: elder =true] ; r2r-hamlet-31 [vocab: excludes ruler: elder =true] ; r2r-metropolis-8 [vocab: excludes crisis: succession_void =true; raw: excludes crisis: succession_void =true] ; r2r-thorp-22 [vocab: excludes ruler: elder =true]
+H03      0 prints; breaks its declaration: 0 
+H04     96 prints; breaks its declaration: 28 r2r-thorp-1 [vocab: excludes crisis: occupied =true; raw: excludes crisis: occupied =true] ; r2r-thorp-24 [vocab: excludes crisis: occupied =true; raw: excludes crisis: occupied =true] ; r2r-thorp-27 [vocab: excludes crisis: occupied =true; raw: excludes crisis: occupied =true] ; r2r-thorp-40 [vocab: excludes crisis: occupied =true; raw: excludes crisis: occupied =true]
+H05     23 prints; breaks its declaration: 16 r2r-city-31 [vocab: needs healer =false] ; r2r-city-38 [vocab: needs healer =false] ; r2r-hamlet-12 [vocab: needs healer =false; raw: needs healer =false] ; r2r-hamlet-33 [vocab: needs healer =false; raw: needs healer =false]
+H06     16 prints; breaks its declaration: 3 r2r-village-16 [vocab: needs tier: ≥ town =false; raw: needs tier: ≥ town =false] ; r2r-village-46 [vocab: needs tier: ≥ town =false; raw: needs tier: ≥ town =false] ; r2r-village-49 [vocab: needs tier: ≥ town =false; raw: needs tier: ≥ town =false]
+H07    144 prints; breaks its declaration: 0 
+H08      0 prints; breaks its declaration: 0 
+H09      0 prints; breaks its declaration: 0 
+H10     98 prints; breaks its declaration: 21 r2r-hamlet-17 [vocab: needs tier: ≥ town =false; raw: needs tier: ≥ town =false] ; r2r-hamlet-18 [vocab: needs tier: ≥ town =false; raw: needs tier: ≥ town =false] ; r2r-hamlet-23 [vocab: needs tier: ≥ town =false; raw: needs tier: ≥ town =false] ; r2r-hamlet-44 [vocab: needs tier: ≥ town =false; raw: needs tier: ≥ town =false]
+H11     24 prints; breaks its declaration: 0 
+H12      0 prints; breaks its declaration: 0 
+H13      0 prints; breaks its declaration: 0 
+H14     15 prints; breaks its declaration: 0 
+H15     47 prints; breaks its declaration: 0 
+H16     52 prints; breaks its declaration: 0 
+D01      0 prints; breaks its declaration: 0 
+D02     14 prints; breaks its declaration: 0 
+I01      0 prints; breaks its declaration: 0 
+I02      0 prints; breaks its declaration: 0 
+I03      0 prints; breaks its declaration: 0 
+I04      0 prints; breaks its declaration: 0 
+I05      0 prints; breaks its declaration: 0 
+I06      0 prints; breaks its declaration: 0 
+I07      0 prints; breaks its declaration: 0 
+I08      0 prints; breaks its declaration: 0 
+I09      0 prints; breaks its declaration: 0 
+I10      0 prints; breaks its declaration: 0 
+I11      0 prints; breaks its declaration: 0 
+I12      0 prints; breaks its declaration: 0 
+I13      0 prints; breaks its declaration: 0 
+I14      0 prints; breaks its declaration: 0 
+I15      0 prints; breaks its declaration: 0 
+I16      0 prints; breaks its declaration: 0 
+I17      0 prints; breaks its declaration: 0 
+I18      0 prints; breaks its declaration: 0 
+I19      0 prints; breaks its declaration: 0 
+I20      0 prints; breaks its declaration: 0 
+I21    120 prints; breaks its declaration: 120 r2r-thorp-0 [vocab: excludes church access =true; raw: excludes church access =true] ; r2r-thorp-1 [vocab: excludes church access =true; raw: excludes church access =true] ; r2r-thorp-10 [vocab: excludes church access =true; raw: excludes church access =true] ; r2r-thorp-11 [vocab: excludes church access =true; raw: excludes church access =true]
+I22     34 prints; breaks its declaration: 2 r2s-under_siege-town-0 [vocab: excludes crisis: under_siege =true; raw: excludes crisis: under_siege =true] ; r2s-under_siege-town-2 [vocab: excludes crisis: under_siege =true; raw: excludes crisis: under_siege =true]
+I23    160 prints; breaks its declaration: 8 r2r-metropolis-14 [vocab: excludes crisis: under_siege =true; raw: excludes crisis: under_siege =true] ; r2s-under_siege-city-0 [vocab: excludes crisis: under_siege =true; raw: excludes crisis: under_siege =true] ; r2s-under_siege-city-3 [vocab: excludes crisis: under_siege =true; raw: excludes crisis: under_siege =true] ; r2s-under_siege-metropolis-0 [vocab: excludes crisis: under_siege =true; raw: excludes crisis: under_siege =true]
+S01      0 prints; breaks its declaration: 0 
+S02      4 prints; breaks its declaration: 1 r2s-monster_pressure-village-1 [vocab: needs institution: tavern =false; raw: needs institution: tavern =false]
+S03      0 prints; breaks its declaration: 0 
+S04     34 prints; breaks its declaration: 2 r2s-under_siege-town-0 [vocab: excludes crisis: under_siege =true; raw: excludes crisis: under_siege =true] ; r2s-under_siege-town-2 [vocab: excludes crisis: under_siege =true; raw: excludes crisis: under_siege =true]
+S05      0 prints; breaks its declaration: 0 
+S06    124 prints; breaks its declaration: 95 r2r-city-21 [vocab: excludes tier: ≥ town =true; raw: excludes tier: ≥ town =true] ; r2r-city-27 [vocab: excludes tier: ≥ town =true; raw: excludes tier: ≥ town =true] ; r2r-city-29 [vocab: excludes tier: ≥ town =true; raw: excludes tier: ≥ town =true] ; r2r-city-30 [vocab: excludes tier: ≥ town =true; raw: excludes tier: ≥ town =true]
+S07      0 prints; breaks its declaration: 0 
+S08     80 prints; breaks its declaration: 19 r2r-city-14 [vocab: needs river =false] ; r2r-city-44 [vocab: needs river =false] ; r2r-town-3 [vocab: needs river =false] ; r2r-town-4 [vocab: needs river =false]
+S09      0 prints; breaks its declaration: 0 
+S10      0 prints; breaks its declaration: 0 
+S11    176 prints; breaks its declaration: 7 r2r-metropolis-14 [vocab: excludes crisis: under_siege =true; raw: excludes crisis: under_siege =true] ; r2s-under_siege-city-2 [vocab: excludes crisis: under_siege =true; raw: excludes crisis: under_siege =true] ; r2s-under_siege-metropolis-0 [vocab: excludes crisis: under_siege =true; raw: excludes crisis: under_siege =true] ; r2s-under_siege-metropolis-2 [vocab: excludes crisis: under_siege =true; raw: excludes crisis: under_siege =true]
+S12      0 prints; breaks its declaration: 0 
+S13    119 prints; breaks its declaration: 48 r2r-city-12 [vocab: needs river =false] ; r2r-city-13 [vocab: needs river =false] ; r2r-city-14 [vocab: needs river =false] ; r2r-city-38 [vocab: needs river =false]
+K01      0 prints; breaks its declaration: 0 
+K02     25 prints; breaks its declaration: 25 r2r-hamlet-16 [vocab: needs institution: mill =false; raw: needs institution: mill =false] ; r2r-hamlet-24 [vocab: needs institution: mill =false; raw: needs institution: mill =false] ; r2r-hamlet-28 [vocab: needs institution: mill =false; raw: needs institution: mill =false] ; r2r-thorp-17 [vocab: needs institution: mill =false; raw: needs institution: mill =false]
+K03      0 prints; breaks its declaration: 0 
+K04      6 prints; breaks its declaration: 6 r2r-thorp-41 [vocab: needs healer =false; raw: needs healer =false] ; r2s-plague_onset-hamlet-0 [vocab: needs healer =false; raw: needs healer =false] ; r2s-plague_onset-hamlet-1 [vocab: needs healer =false; raw: needs healer =false] ; r2s-plague_onset-hamlet-2 [vocab: needs healer =false; raw: needs healer =false]
+K05      0 prints; breaks its declaration: 0 
+K06     28 prints; breaks its declaration: 11 r2r-thorp-41 [vocab: needs market =false; raw: needs market =false] ; r2r-village-50 [vocab: needs market =false; raw: needs market =false] ; r2s-plague_onset-hamlet-0 [vocab: needs market =false; raw: needs market =false] ; r2s-plague_onset-hamlet-2 [vocab: needs market =false; raw: needs market =false]
+K07      0 prints; breaks its declaration: 0 
+K08     28 prints; breaks its declaration: 8 r2s-religious_conversion-hamlet-0 [vocab: needs institution: temple =false; raw: needs institution: temple =false] ; r2s-religious_conversion-hamlet-1 [raw: needs institution: temple =false] ; r2s-religious_conversion-hamlet-2 [vocab: needs institution: temple =false; raw: needs institution: temple =false] ; r2s-religious_conversion-hamlet-3 [vocab: needs institution: temple =false; raw: needs institution: temple =false]
+F1a     85 prints; breaks its declaration: 4 r2s-famine-town-0 [vocab: excludes crisis: famine =true; raw: excludes crisis: famine =true] ; r2s-famine-town-1 [vocab: excludes crisis: famine =true; raw: excludes crisis: famine =true] ; r2s-famine-town-2 [vocab: excludes crisis: famine =true; raw: excludes crisis: famine =true] ; r2s-famine-town-3 [vocab: excludes crisis: famine =true; raw: excludes crisis: famine =true]
+F1b      0 prints; breaks its declaration: 0 
+F1c     77 prints; breaks its declaration: 3 r2s-under_siege-city-1 [vocab: excludes crisis: under_siege =true; raw: excludes crisis: under_siege =true] ; r2s-under_siege-city-2 [vocab: excludes crisis: under_siege =true; raw: excludes crisis: under_siege =true] ; r2s-under_siege-city-3 [vocab: excludes crisis: under_siege =true; raw: excludes crisis: under_siege =true]
+F1d      0 prints; breaks its declaration: 0 
+F2      46 prints; breaks its declaration: 0 
+F4     120 prints; breaks its declaration: 11 r2r-town-1 [vocab: needs tier: ≥ city =false; raw: needs tier: ≥ city =false] ; r2r-town-10 [vocab: needs tier: ≥ city =false; raw: needs tier: ≥ city =false] ; r2r-town-14 [vocab: needs tier: ≥ city =false; raw: needs tier: ≥ city =false] ; r2r-town-29 [vocab: needs tier: ≥ city =false; raw: needs tier: ≥ city =false]

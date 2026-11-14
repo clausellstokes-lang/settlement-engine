@@ -1,0 +1,70 @@
+## families moved (towns of 720 )
+ 464 institutions[].desc | r2r-thorp-0 institutions[1].desc: "Nets, traps, and racks for drying. The thorp lives by the water and cannot be parted from -> "Nets, traps, and racks for drying. Whoever fishes the water here keeps them."
+ 204 history.historicalEvents[].description | r2r-thorp-0 history.historicalEvents[1].description: "The merchants are getting richer and the labourers are not, and the labourers have notice -> "Scarcity of a critical good drove some to hoard it and others to gouge on the price"
+ 202 history.currentTensions[].plotHooks[] | r2r-thorp-4 history.currentTensions[0].plotHooks[0]: "A healer who profited enormously during the plague is being asked how they stayed untouch -> "The plague pit holds a body that matches no one on the list of the dead"
+ 188 economicState.foodSecurity.foodRecord | r2r-thorp-1 economicState.foodSecurity.foodRecord.foodwaysLine: "Public ovens, neighborhood vendors, and shared dining customs make food distribution visi -> "Meals follow the season and what the household has put by."
+ 188 culturalIdentity.foodways | r2r-thorp-1 culturalIdentity.foodways: "Public ovens, neighborhood vendors, and shared dining customs make food distribution visi -> "Meals follow the season and what the household has put by."
+ 174 history.currentTensions[].description | r2r-thorp-9 history.currentTensions[0].description: "A fire that began in the lower districts consumed wooden buildings and merchant stalls ac -> "A fire that began in the low ground burned through the houses and their outbuildings befo
+ 173 culturalIdentity.architecturalDetail | r2r-thorp-1 culturalIdentity.architecturalDetail: "fountains, steps, and reused columns give the civic center a layered age" -> "a well, worn steps, and an old carved stone give the houses a layered age"
+ 144 generationCoherenceReceipt.judgments[].evidence[] | r2r-thorp-1 generationCoherenceReceipt.judgments[3].evidence[0].evidence: "3 historical events" -> "4 historical events"
+ 139 history.historicalEvents[].plotHooks[] | r2r-thorp-0 history.historicalEvents[1].plotHooks[0]: "Family accounts passed down from that time tell it this way: a reformer has been found ha -> "The scarcity was engineered. Someone destroyed the competing supply route"
+ 127 arrivalScene | r2r-thorp-2 arrivalScene: "Indrapat is neither impressive nor disappointing from the approach. It is what it is, whi -> "Indrapat is neither impressive nor disappointing from the approach. It is what it is, whi
+ 118 history.historicalEvents[].lastingEffects[] | r2r-thorp-0 history.historicalEvents[1].lastingEffects[0]: "The merchant quarter and the labourers' quarter remain walled apart" -> "Price ceilings on the affected goods still enforced in lean seasons"
+  98 history.currentTensions[].type | r2r-thorp-20 history.currentTensions[0].type: "market_crash" -> "tyranny"
+  98 history.currentTensions[].factions[] | r2r-thorp-20 history.currentTensions[0].factions[0]: "Ruined speculators" -> "Old loyalists"
+  97 availableServices.equipment[].desc | r2r-town-11 availableServices.equipment[7].desc: "Surface-level ore extraction. Lower yield than shaft mining but cheaper to operate." -> "Ore cut underground by the crews and brought out by cart for sorting."
+  86 history.legacyAnnotations[].annotation | r2r-thorp-0 history.legacyAnnotations[0].annotation: "As of the founding survey, the Economic Divide (73 years ago) set up ways of doing things -> "As of the founding survey, the Shortage (73 years ago) set up ways of doing things that h
+  83 history.historicalEvents[].name | r2r-thorp-0 history.historicalEvents[1].name: "The Economic Divide" -> "The Shortage"
+  83 history.historicalEvents[].templateType | r2r-thorp-0 history.historicalEvents[1].templateType: "economic_disparity" -> "resource_scarcity"
+  83 history.eventsTimeline[].name | r2r-thorp-0 history.eventsTimeline[1].name: "The Economic Divide" -> "The Shortage"
+  83 history.currentTensions[].severity[] | r2r-thorp-20 history.currentTensions[0].severity[0]: "minor" -> "major"
+  69 history.legacyAnnotations[].eventName | r2r-thorp-0 history.legacyAnnotations[0].eventName: "The Economic Divide" -> "The Shortage"
+  63 history.historicalEvents[].anchored | r2r-thorp-1 history.historicalEvents[0].anchored: true -> undefined
+  59 history.eventsTimeline[].anchored | r2r-thorp-1 history.eventsTimeline[0].anchored: true -> false
+  54 availableServices.transport[].desc | r2r-village-2 availableServices.transport[0].desc: "Flat-bottomed cargo barges for river transport. Simpler than sea vessels." -> "Flat-bottomed cargo boats for shallow water. Simpler than sea vessels."
+  53 history.currentTensions[].lastingEffects[] | r2r-thorp-33 history.currentTensions[0].lastingEffects[0]: "Collaborator and resistance families still keep apart" -> "Council seats now formally split between the old guard and the young"
+  51 history.historicalEvents[].severity | r2r-thorp-5 history.historicalEvents[0].severity: "minor" -> "major"
+  50 history.historicalCharacter | r2r-thorp-1 history.historicalCharacter: "This place made its name in trade, not war, and the Economic Divide showed it that money  -> "Money is discussed openly here in a way that scandalises visitors from more genteel place
+  47 history.currentTensions[].lastingEffects | r2r-thorp-26 history.currentTensions[0].lastingEffects: ["A standing security office and informant network persist","Denunciation records from the -> undefined
+  43 economicState.tradeDependencies[].affectedServices[] | r2r-city-1 economicState.tradeDependencies[7].affectedServices[2]: "magical licensing" -> undefined
+  43 economicState.activeChains[].dependency | r2r-city-1 economicState.activeChains[4].dependency.affectedServices[2]: "magical licensing" -> undefined
+  40 history.legacyAnnotations[].severity | r2r-thorp-5 history.legacyAnnotations[0].severity: "minor" -> "major"
+  39 generationCoherenceReceipt.judgments[].findings[] | r2r-thorp-0 generationCoherenceReceipt.judgments[7].findings[1]: {"path":"battery.defense-words","detail":"walls without walls, a palisade or earthworks"," -> undefined
+  36 history.currentTensions[] | r2r-thorp-1 history.currentTensions[1]: {"type":"occupation_legacy","description":"Collaborator and resistance families still keep -> undefined
+  35 history.historicalEvents[].yearsAgo | r2r-thorp-1 history.historicalEvents[2].yearsAgo: 39 -> 147
+  35 history.eventsTimeline[].year | r2r-thorp-1 history.eventsTimeline[2].year: 245 -> 137
+  35 history.eventsTimeline[].yearsAgo | r2r-thorp-1 history.eventsTimeline[2].yearsAgo: 39 -> 147
+  35 stress.crisisHook | r2r-thorp-17 stress.crisisHook: "A grain merchant has food, enough to matter. They will sell it, but their price is not mo -> "Someone here still has food put by, enough to matter. They will sell it, but their price 
+  35 stressors.crisisHook | r2r-thorp-17 stressors.crisisHook: "A grain merchant has food, enough to matter. They will sell it, but their price is not mo -> "Someone here still has food put by, enough to matter. They will sell it, but their price 
+  30 history.siegeNarrative | r2r-thorp-1 history.siegeNarrative: "The Uprising is still present in living memory: A surge in criminal activity overwhelmed  -> null
+  28 culturalIdentity.builtForm | r2r-thorp-27 culturalIdentity.builtForm: "Stone and plaster courtyard houses rise around an agora, stoas, shrines, and steep connec -> "Stone and plaster houses with whitewashed courts stand close together."
+  28 culturalNotes | r2r-thorp-27 culturalNotes: "Household, citizenship, association, patronage, public rhetoric, and military service def -> "Household, citizenship, association, patronage, public rhetoric, and military service def
+  26 history.historicalEvents[] | r2r-thorp-1 history.historicalEvents[3]: undefined -> {"yearsAgo":39,"type":"political","name":"The Uprising","description":"The common people r
+  26 history.eventsTimeline[] | r2r-thorp-1 history.eventsTimeline[3]: undefined -> {"year":245,"yearsAgo":39,"name":"The Uprising","type":"political","anchored":false}
+  25 history.historicalEvents[].type | r2r-thorp-1 history.historicalEvents[2].type: "political" -> "economic"
+  25 history.eventsTimeline[].type | r2r-thorp-1 history.eventsTimeline[2].type: "political" -> "economic"
+  25 stress.viabilityNote | r2r-thorp-41 stress.viabilityNote: "Fewer people come to market, travel is discouraged, and some goods stop arriving." -> "Travel is discouraged, and some goods stop arriving."
+  25 stressors.viabilityNote | r2r-thorp-41 stressors.viabilityNote: "Fewer people come to market, travel is discouraged, and some goods stop arriving." -> "Travel is discouraged, and some goods stop arriving."
+  19 history.legacyAnnotations[].yearsAgo | r2r-thorp-34 history.legacyAnnotations[1].yearsAgo: 41 -> 68
+  18 generationCoherenceReceipt.judgments[].status | r2r-thorp-53 generationCoherenceReceipt.judgments[7].status: "needs_review" -> "pass"
+  10 history.currentTensions[].specificIssue | r2r-thorp-54 history.currentTensions[0].specificIssue: undefined -> "Settlement cannot cover ~13 lbs of food per day (38% of needs) and has no dependable trad
+  10 stress[].crisisHook | r2s-occupied-thorp-1 stress[1].crisisHook: "A grain merchant has food, enough to matter. They will sell it, but their price is not mo -> "Someone here still has food put by, enough to matter. They will sell it, but their price 
+  10 stressors[].crisisHook | r2s-occupied-thorp-1 stressors[1].crisisHook: "A grain merchant has food, enough to matter. They will sell it, but their price is not mo -> "Someone here still has food put by, enough to matter. They will sell it, but their price 
+   9 history.legacyAnnotations[].eventType | r2r-thorp-34 history.legacyAnnotations[1].eventType: "economic" -> "religious"
+   8 history.legacyAnnotations[] | r2r-thorp-1 history.legacyAnnotations[1]: undefined -> {"annotation":"As of the founding survey, the Iron Dispute (147 years ago) set up ways of 
+   6 availableServices.lodging[].desc | r2r-metropolis-14 availableServices.lodging[1].desc: "Beds, meals, and stabling for travelers on the road. Priced by quality." -> "Beds, meals, and stabling, though with the roads held the rooms stand mostly empty."
+   1 history.legacyAnnotations | r2r-thorp-17 history.legacyAnnotations: [{"annotation":"As of the founding survey, the Great Construction (125 years ago) set up w -> undefined
+   1 availableServices.food[].desc | r2s-monster_pressure-village-1 availableServices.food[0].desc: "Bulk supply to alehouses. Priced by barrel." -> "Ale by the barrel, for households laying in a stock. Priced by barrel."
+## keys new at B
+   26 history.currentTensions[].lastingEffects
+   19 history.historicalEvents[].anchored
+   15 history.historicalEvents[].templateType
+    4 history.currentTensions[].specificIssue
+## keys gone at B
+   79 history.historicalEvents[].anchored
+   33 history.currentTensions[].lastingEffects
+   12 history.historicalEvents[].templateType
+    7 stress.viabilityNote
+    7 stressors.viabilityNote
+    6 history.currentTensions[].specificIssue
+    1 history.legacyAnnotations

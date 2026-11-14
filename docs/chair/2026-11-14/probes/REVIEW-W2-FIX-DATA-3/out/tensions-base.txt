@@ -1,0 +1,42 @@
+  47 cur:corruption_scandal 
+ 177 cur:crime_wave 
+  32 cur:demographic_pressure 
+  19 cur:disputed_land 
+  19 cur:economic_disparity 
+  84 cur:external_threat 
+  19 cur:generational_divide 
+  16 cur:great_fire 
+  20 cur:great_flood 
+ 118 cur:guild_conflict 
+  10 cur:heresy_trial 
+  43 cur:infiltration_fear 
+  53 cur:leadership_vacuum 
+ 100 cur:legitimacy_crisis 
+  18 cur:magical_controversy 
+  20 cur:market_crash 
+  73 cur:occupation_legacy 
+  53 cur:outside_debt 
+  15 cur:pilgrimage_surge 
+  19 cur:plague_years 
+  19 cur:popular_uprising 
+  15 cur:population_friction 
+   8 cur:religious_tension 
+ 166 cur:resource_scarcity 
+  46 cur:succession_crisis 
+  18 cur:trade_collapse 
+  15 cur:trade_dispute 
+  13 cur:tyranny 
+  13 cur:wild_magic 
+  64 economic_disparity event, no market r2r-thorp-0 thorp ; r2r-thorp-1 thorp ; r2r-thorp-5 thorp ; r2r-thorp-22 thorp ; r2r-thorp-26 thorp ; r2r-thorp-31 thorp
+   4 economic_disparity tension, no market r2r-hamlet-1 hamlet ; r2r-hamlet-49 hamlet ; r2r-hamlet-55 hamlet ; r2s-infiltrated-village-3 village
+  11 guild_conflict event, no guild r2r-village-1 v=true r=false village ; r2r-village-3 v=false r=false village ; r2r-village-17 v=true r=false village ; r2r-village-55 v=false r=false village ; r2s-occupied-thorp-0 v=false r=false thorp ; r2s-politically_fractured-village-1 v=false r=false village
+   2 guild_conflict tension, no guild r2r-hamlet-43 v=false r=false hamlet ; r2r-village-12 v=false r=false village
+  30 infiltration_fear under infiltrated r2r-thorp-26 ; r2r-village-44 ; r2r-village-48 ; r2r-town-25 ; r2r-city-40 ; r2r-metropolis-29
+   8 market_crash event, no market r2r-thorp-3 thorp ; r2r-thorp-14 thorp ; r2r-thorp-54 thorp ; r2r-hamlet-34 hamlet ; r2s-plague_onset-thorp-3 thorp ; r2s-succession_void-hamlet-2 hamlet
+   8 market_crash tension, no market r2r-thorp-20 thorp ; r2r-thorp-31 thorp ; r2r-thorp-36 thorp ; r2r-hamlet-2 hamlet ; r2r-hamlet-52 hamlet ; r2r-village-27 village
+   4 market_crash while rich r2r-city-18 Prosperous ; r2r-city-40 Prosperous ; r2r-metropolis-1 Prosperous ; r2r-metropolis-42 Prosperous
+  28 occupation_legacy under occupation r2r-thorp-1 ; r2r-thorp-24 ; r2r-thorp-27 ; r2r-thorp-40 ; r2s-occupied-thorp-0 ; r2s-occupied-thorp-1
+  42 occupation_legacy without its event r2r-thorp-1 ; r2r-thorp-27 ; r2r-thorp-33 ; r2r-thorp-40 ; r2r-thorp-45 ; r2r-thorp-58
+   5 trade_collapse while rich r2r-village-2 Wealthy ; r2r-town-50 Prosperous ; r2r-city-1 Prosperous ; r2r-metropolis-3 Prosperous ; r2r-metropolis-37 Prosperous
+   3 trade_dispute tension, no market r2r-thorp-47 thorp ; r2r-hamlet-22 hamlet ; r2r-village-13 village
+   9 vacuum under settled r2r-hamlet-39 Stable ; r2r-hamlet-58 Stable ; r2r-town-52 Stable ; r2r-town-56 Stable ; r2r-city-23 Stable ; r2r-city-36 Stable

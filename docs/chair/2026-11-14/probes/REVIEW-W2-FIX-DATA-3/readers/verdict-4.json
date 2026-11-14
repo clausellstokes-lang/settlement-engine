@@ -1,0 +1,803 @@
+[
+ {
+  "id": "A04",
+  "seed": "r2r-town-47",
+  "verdict": "FALSE",
+  "severity": "medium",
+  "kind": "g",
+  "sentence": "Mahapeth lives by its forges: the clang of iron is in every lane.",
+  "fact": "Economics tab (p.435): 'Mahapeth is not known for any one trade; it lives on many small ones.' Iron & Metalwork is 11% (tied 3rd, behind Market Taxes 18, Guild Fees 15); iron is bought in (p.427, 521). Blacksmiths (3-10) exist, but 'lives by its forges' contradicts the page."
+ },
+ {
+  "id": "A04",
+  "seed": "r2s-succession_void-metropolis-2",
+  "verdict": "FALSE",
+  "severity": "medium",
+  "kind": "g",
+  "sentence": "Dar-al-chowk lives by its forges: the clang of iron is in every lane.",
+  "fact": "Economics tab (p.1234): 'Dar-al-chowk lives on a spread of trades'. Iron & Metalwork 6% of income (7th). Hooks (p.313): 'The iron carts are three weeks late... The smiths are rationing what they have'; Blacksmiths and Specialized metalworkers marked Vulnerable."
+ },
+ {
+  "id": "A04",
+  "seed": "r2r-metropolis-14",
+  "verdict": "FALSE",
+  "severity": "medium",
+  "kind": "c",
+  "sentence": "Prabhapeta lives by its forges: the clang of iron is in every lane.",
+  "fact": "Under siege. Blacksmiths/Specialized metalworkers marked Impaired; Services: iron supply route severed; hook (p.290): 'War has taken the iron... the smiths have nothing to mend tools with. Work slows'. Iron & Metalwork 3% of income; Economics: 'Highly diversified'. The clang of iron is not in every lane."
+ },
+ {
+  "id": "A04",
+  "seed": "r2s-mass_migration-town-0",
+  "verdict": "FALSE",
+  "severity": "high",
+  "kind": "a",
+  "sentence": "Zelenotsy lives by its forges: the clang of iron is in every lane.",
+  "fact": "Record has no Blacksmiths/forge; the only metal house is a Smelter, and the page says (p.440) 'Zelenotsy's Smelter stands idle: its supply has failed upstream'. Economics (p.365): 'Zelenotsy is not known for any one trade; it lives on many small ones.' Iron & Metalwork 6%."
+ },
+ {
+  "id": "A09",
+  "seed": "r2r-town-2",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "The bells of Olymptopia answer one another across the roofs, and the streets slow for them.",
+  "fact": "Parish churches (2-5) in the record; several churches' bells is consistent."
+ },
+ {
+  "id": "A09",
+  "seed": "r2s-under_siege-metropolis-0",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "The bells of Grünmoor answer one another across the roofs, and the streets slow for them.",
+  "fact": "Parish churches (50-100+), Great cathedral, monasteries; theocratic council. Bells ringing under siege is not contradicted."
+ },
+ {
+  "id": "A09",
+  "seed": "r2s-under_siege-city-1",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "The bells of Torrivilla answer one another across the roofs, and the streets slow for them.",
+  "fact": "Parish churches (10-30); Ecclesiastical Council governs."
+ },
+ {
+  "id": "A09",
+  "seed": "r2r-metropolis-40",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "The bells of Hongtian answer one another across the roofs, and the streets slow for them.",
+  "fact": "Parish churches (50-100+), Great cathedral, monasteries."
+ },
+ {
+  "id": "A13",
+  "seed": "r2r-town-10",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A merchant swears an oath on his scales, and the buyer watches the scales anyway.",
+  "fact": "Weekly market, Market square, Annual fair; Merchant oligarchy governs."
+ },
+ {
+  "id": "A13",
+  "seed": "r2s-wartime-metropolis-0",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A merchant swears an oath on his scales, and the buyer watches the scales anyway.",
+  "fact": "District markets, multiple market squares, international trade center; wartime crisis says trade is profitable (army contracts)."
+ },
+ {
+  "id": "A13",
+  "seed": "r2r-metropolis-19",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A merchant swears an oath on his scales, and the buyer watches the scales anyway.",
+  "fact": "District markets, market squares, international trade center; Market Taxes 31%."
+ },
+ {
+  "id": "A13",
+  "seed": "r2r-town-23",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A merchant swears an oath on his scales, and the buyer watches the scales anyway.",
+  "fact": "Weekly market, Market square, Annual fair, Fish market; Market Taxes 23%."
+ },
+ {
+  "id": "A17",
+  "seed": "r2r-village-49",
+  "verdict": "FALSE",
+  "severity": "medium",
+  "kind": "d",
+  "sentence": "Craftspeople sit in rows, each row a different trade, each worker deep in their own work.",
+  "fact": "Village of 168; Services 'Goods & crafts(3)' (Mill, Potter, Thatcher); Overview (p.24): 'The village keeps few institutions and needs few.' Rows of craftspeople, each row a different trade, is a size the record does not have."
+ },
+ {
+  "id": "A17",
+  "seed": "r2s-politically_fractured-metropolis-0",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Craftspeople sit in rows, each row a different trade, each worker deep in their own work.",
+  "fact": "Metropolis with Craft guilds (100-150+), many trades, district markets."
+ },
+ {
+  "id": "A17",
+  "seed": "r2s-occupied-city-3",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Craftspeople sit in rows, each row a different trade, each worker deep in their own work.",
+  "fact": "City with Craft guilds (30-80), daily markets, many trades (smiths, carpenters, coopers, tanners, weavers...)."
+ },
+ {
+  "id": "A17",
+  "seed": "r2s-succession_void-town-2",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Craftspeople sit in rows, each row a different trade, each worker deep in their own work.",
+  "fact": "Town 2154 with Craft guilds (5-15), weekly market and ~10 craft houses."
+ },
+ {
+  "id": "C03",
+  "seed": "r2r-town-21",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Warm tile roofs and enclosed courtyards break up the stone streets.",
+  "fact": "Latin-culture town of 1181, 'built in masonry around a civic square' (p.3); nothing on the page contradicts stone streets or courtyards."
+ },
+ {
+  "id": "C05t",
+  "seed": "r2r-thorp-13",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Latticed windows look out on the lane between the houses.",
+  "fact": "Arabic-culture thorp, Dwellings (1-8); a lane between houses is within size."
+ },
+ {
+  "id": "C05t",
+  "seed": "r2r-hamlet-48",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Latticed windows look out on the lane between the houses.",
+  "fact": "Arabic-culture hamlet, Dwellings (5-25)."
+ },
+ {
+  "id": "C05t",
+  "seed": "r2r-hamlet-37",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Latticed windows look out on the lane between the houses.",
+  "fact": "Arabic-culture hamlet, Dwellings (5-25)."
+ },
+ {
+  "id": "C05t",
+  "seed": "r2r-hamlet-19",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Latticed windows look out on the lane between the houses.",
+  "fact": "Arabic-culture hamlet, Dwellings (5-25)."
+ },
+ {
+  "id": "C07t",
+  "seed": "r2r-village-20",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Carved roof beams and a long hall ridge stand above the other roofs.",
+  "fact": "Norse village; page p.3 'built around the hall' and Power tab 'The hall'."
+ },
+ {
+  "id": "C07t",
+  "seed": "r2r-village-32",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Carved roof beams and a long hall ridge stand above the other roofs.",
+  "fact": "Norse village; page p.3 'built around the hall', Power tab 'The hall'."
+ },
+ {
+  "id": "C07t",
+  "seed": "r2r-village-22",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Carved roof beams and a long hall ridge stand above the other roofs.",
+  "fact": "Norse village; page p.3 'built around the hall', Power tab 'The hall'."
+ },
+ {
+  "id": "C10t",
+  "seed": "r2r-thorp-47",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A straight lane runs between the houses to the oldest courtyard.",
+  "fact": "East-Asian thorp, Dwellings (1-8); a single lane to a courtyard is within size."
+ },
+ {
+  "id": "C10t",
+  "seed": "r2r-village-54",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A straight lane runs between the houses to the oldest courtyard.",
+  "fact": "East-Asian village, Dwellings (15-100)."
+ },
+ {
+  "id": "C10t",
+  "seed": "r2r-hamlet-42",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A straight lane runs between the houses to the oldest courtyard.",
+  "fact": "East-Asian hamlet, Dwellings (5-25)."
+ },
+ {
+  "id": "C10t",
+  "seed": "r2r-thorp-48",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A straight lane runs between the houses to the oldest courtyard.",
+  "fact": "East-Asian thorp, Dwellings (1-8)."
+ },
+ {
+  "id": "C12t",
+  "seed": "r2r-thorp-44",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A raised path and a water channel run between the house compounds.",
+  "fact": "Mesoamerican riverside thorp with a Fishing community; a water channel fits."
+ },
+ {
+  "id": "C12t",
+  "seed": "r2r-hamlet-2",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A raised path and a water channel run between the house compounds.",
+  "fact": "Mesoamerican mountain hamlet, Dwellings (5-25), water source; nothing contradicts a path and channel."
+ },
+ {
+  "id": "C19",
+  "seed": "r2r-town-2",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Whitewashed courts and stone steps catch the light between the houses.",
+  "fact": "Greek-culture town of 914; nothing on the page contradicts."
+ },
+ {
+  "id": "H01",
+  "seed": "r2s-insurgency-hamlet-2",
+  "verdict": "DOUBTFUL",
+  "severity": "low",
+  "kind": "g",
+  "sentence": "The ailing ruler wants a final errand completed before naming a successor",
+  "fact": "Feudal Stewardship (Aemilia Corvinus 'holds the seat'). The only succession on the page is History 'The Succession Crisis... As the ailing ruler declined', 49y ago; nothing says the present ruler is ailing. The hook (filed under History) reads as current. Record cannot settle the ruler's health."
+ },
+ {
+  "id": "H01",
+  "seed": "r2s-politically_fractured-metropolis-2",
+  "verdict": "FALSE",
+  "severity": "medium",
+  "kind": "g",
+  "sentence": "The ailing ruler wants a final errand completed before naming a successor",
+  "fact": "Page: Overview 'Fractured: no stable governing authority'; Tensions 'The last strong leader died or left, and no one has yet consolidated their position'; the next hook: 'The departed leader left a sealed document designating a successor'. A living ailing ruler who will name a successor contradicts them."
+ },
+ {
+  "id": "H01",
+  "seed": "r2s-famine-metropolis-1",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "The ailing ruler wants a final errand completed before naming a successor",
+  "fact": "Ducal Governorship; Current Tensions 'Succession Crisis: The ruler of the time was aging or ill, and potential heirs jockeyed for position'; the hook beside it ('Someone is poisoning the ruler slowly') agrees."
+ },
+ {
+  "id": "H01",
+  "seed": "r2r-city-42",
+  "verdict": "DOUBTFUL",
+  "severity": "low",
+  "kind": "g",
+  "sentence": "The ailing ruler wants a final errand completed before naming a successor",
+  "fact": "Noble Governorship, Stable. The only succession event is History 'The Succession Crisis' 74y ago ('The ruler of the time was aging or ill'); the hook presents an ailing ruler now. Record cannot settle the current ruler's health."
+ },
+ {
+  "id": "H05",
+  "seed": "r2r-metropolis-15",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A healer who profited enormously during the plague is being asked how they stayed untouched",
+  "fact": "Hospital network, Apothecary district, Midwife; History Current Tensions: 'Plague years' (major-catastrophic)."
+ },
+ {
+  "id": "H05",
+  "seed": "r2s-slave_revolt-metropolis-1",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A healer who profited enormously during the plague is being asked how they stayed untouched",
+  "fact": "Hospital network, Apothecary district; Current Tensions include 'Plague years'."
+ },
+ {
+  "id": "H05",
+  "seed": "r2s-occupied-metropolis-1",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A healer who profited enormously during the plague is being asked how they stayed untouched",
+  "fact": "Hospital network, Apothecary district; Current Tensions include 'Plague years'."
+ },
+ {
+  "id": "H05",
+  "seed": "r2r-metropolis-45",
+  "verdict": "FALSE",
+  "severity": "low",
+  "kind": "g",
+  "sentence": "A healer who profited enormously during the plague is being asked how they stayed untouched",
+  "fact": "Healers exist (Hospital network), and Current Tensions list 'Plague years', but the History timeline dates 'The Plague Years' to 511y ago. A healer 'being asked' now how they stayed untouched cannot be from a plague five centuries back; the page disagrees on when the plague was."
+ },
+ {
+  "id": "H10",
+  "seed": "r2r-town-14",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A fire that began in the lower districts consumed wooden buildings and merchant stalls across whole districts before it could be checked",
+  "fact": "Town of 1359 with four quarters in the record (Market, Religious, Noxious Trades, Government); Great Fire 35y ago. 'Whole districts' fits the record's quarters."
+ },
+ {
+  "id": "H10",
+  "seed": "r2s-under_siege-metropolis-2",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A fire that began in the lower districts consumed wooden buildings and merchant stalls across whole districts before it could be checked",
+  "fact": "Metropolis; Great Fire 354y ago."
+ },
+ {
+  "id": "H10",
+  "seed": "r2s-famine-city-3",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A fire that began in the lower districts consumed wooden buildings and merchant stalls across whole districts before it could be checked",
+  "fact": "City of 11818; Great Fire 46y ago."
+ },
+ {
+  "id": "H10",
+  "seed": "r2r-metropolis-14",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A fire that began in the lower districts consumed wooden buildings and merchant stalls across whole districts before it could be checked",
+  "fact": "Metropolis; Great Fire 169y ago."
+ },
+ {
+  "id": "H15",
+  "seed": "r2r-thorp-1",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Rights to the local iron deposits became the subject of a prolonged dispute between the settlement and a rival lord. The outcome shaped who holds those rights to this day.",
+  "fact": "iron_deposits=available; History 'The Iron Dispute' 147y ago."
+ },
+ {
+  "id": "H15",
+  "seed": "r2r-metropolis-0",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Rights to the local iron deposits became the subject of a prolonged dispute between the settlement and a rival lord. The outcome shaped who controls extraction to this day.",
+  "fact": "iron_deposits=available, Mine and Smelter present; 'The Iron Dispute' 143y ago."
+ },
+ {
+  "id": "H15",
+  "seed": "r2r-thorp-40",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A rival family claims their ancestor was cheated out of the original rights to the deposits",
+  "fact": "iron_deposits=available; 'The Iron Dispute' 72y ago; the hook 'Old deed to the iron rights has resurfaced' agrees."
+ },
+ {
+  "id": "H15",
+  "seed": "r2r-village-39",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Rights to the local iron deposits became the subject of a prolonged dispute between the settlement and a rival lord. The outcome shaped who holds those rights to this day.",
+  "fact": "iron_deposits=available; 'The Iron Dispute' 85y ago."
+ },
+ {
+  "id": "I01",
+  "seed": "r2r-thorp-50",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Nets, traps, and drying racks, kept by the households that fish the water.",
+  "fact": "Fishing community; river_fish=available; riverside."
+ },
+ {
+  "id": "I01",
+  "seed": "r2s-under_siege-thorp-0",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Nets, traps, and drying racks, kept by the households that fish the water.",
+  "fact": "Fishing community; river_fish=available; riverside. The siege stops field work, but the sentence describes the house's gear and keepers."
+ },
+ {
+  "id": "I01",
+  "seed": "r2s-monster_pressure-thorp-0",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Nets, traps, and drying racks, kept by the households that fish the water.",
+  "fact": "Fishing community; coastal; Fish & Maritime Produce 11%; 'The table rests on fish from the local waters'."
+ },
+ {
+  "id": "I01",
+  "seed": "r2r-thorp-57",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Nets, traps, and drying racks, kept by the households that fish the water.",
+  "fact": "Fishing community; river_fish=available; riverside."
+ },
+ {
+  "id": "I05",
+  "seed": "r2r-hamlet-33",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Felling crews and a stacking yard at the forest edge, cutting timber and charcoal wood and carting both.",
+  "fact": "Woodcutter's camp; Forest terrain; its NPC 'Sells timber and firewood by the load'."
+ },
+ {
+  "id": "I05",
+  "seed": "r2s-slave_revolt-village-1",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Felling crews and a stacking yard at the forest edge, cutting timber and charcoal wood and carting both.",
+  "fact": "Woodcutter's camp; Forest terrain."
+ },
+ {
+  "id": "I05",
+  "seed": "r2r-village-8",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Felling crews and a stacking yard at the forest edge, cutting timber and charcoal wood and carting both.",
+  "fact": "Woodcutter's camp; Forest terrain; managed_forest=available; the Timber chain is Running."
+ },
+ {
+  "id": "I05",
+  "seed": "r2r-village-19",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Felling crews and a stacking yard at the forest edge, cutting timber and charcoal wood and carting both.",
+  "fact": "Woodcutter's camp; Forest terrain; its NPC sells timber."
+ },
+ {
+  "id": "I09",
+  "seed": "r2r-village-20",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A building-stone quarry laid out in an ordered working. A village sitting on good quarry ground can furnish half a region's building, and the quarry master is well aware of the fact.",
+  "fact": "stone_quarry=available ('Abundant' on Resources); Stone Quarrying 8% of income."
+ },
+ {
+  "id": "I09",
+  "seed": "r2s-religious_conversion-village-3",
+  "verdict": "FALSE",
+  "severity": "medium",
+  "kind": "c",
+  "sentence": "A quarry of building stone, laid out in ordered workings. A village on good quarry land can supply half a region's construction needs, and the quarry master knows it.",
+  "fact": "Record resources: river_fish, foraging, hot_springs, coal (depleted), managed_forest. No stone_quarry resource; the Resources tab lists no stone and there is no quarrying income. 'A village on good quarry land' is ground the record does not have."
+ },
+ {
+  "id": "I09",
+  "seed": "r2r-village-45",
+  "verdict": "FALSE",
+  "severity": "medium",
+  "kind": "c",
+  "sentence": "A building-stone quarry laid out in an ordered working. A village sitting on good quarry ground can furnish half a region's building, and the quarry master is well aware of the fact.",
+  "fact": "Record resources: fishing_grounds (depleted), shipbuilding_timber, ancient_ruins, salt_flats. No stone_quarry resource; the Resources tab lists no stone and there is no quarrying income."
+ },
+ {
+  "id": "I09",
+  "seed": "r2r-village-22",
+  "verdict": "FALSE",
+  "severity": "medium",
+  "kind": "c",
+  "sentence": "A quarry of building stone, laid out in ordered workings. A village on good quarry land can supply half a region's construction needs, and the quarry master knows it.",
+  "fact": "Record resources: marshlands, ancient_grove, coal (depleted), managed_forest (depleted). No stone_quarry resource; the Resources tab lists no stone; income is Agricultural Rents 89 and Iron & Metalwork 11, with no quarrying."
+ },
+ {
+  "id": "I13",
+  "seed": "r2r-town-1",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A council of senior druids who govern their circle's relationship with the settlement around it. They may maintain a hidden grove beneath the streets, mediate between the settlement's growth and wild places, or serve as ecological advisors to th",
+  "fact": "Elder Grove Council present; town tier."
+ },
+ {
+  "id": "I13",
+  "seed": "r2s-wartime-metropolis-0",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A council of senior druids who govern their circle's relationship with the settlement around it. They may maintain a hidden grove beneath the streets, mediate between the settlement's growth and wild places, or serve as ecological advisors to th",
+  "fact": "Elder Grove Council present."
+ },
+ {
+  "id": "I13",
+  "seed": "r2s-famine-town-1",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A council of senior druids who govern their circle's relationship with the settlement around it. They may maintain a hidden grove beneath the streets, mediate between the settlement's growth and wild places, or serve as ecological advisors to th",
+  "fact": "Elder Grove Council present; town tier."
+ },
+ {
+  "id": "I13",
+  "seed": "r2r-metropolis-13",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A council of senior druids who govern their circle's relationship with the settlement around it. They may maintain a hidden grove beneath the streets, mediate between the settlement's growth and wild places, or serve as ecological advisors to th",
+  "fact": "Elder Grove Council present."
+ },
+ {
+  "id": "I18",
+  "seed": "r2s-under_siege-town-0",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A yearly fair for regional merchants. None can reach it while the roads are held.",
+  "fact": "Annual fair present; crisis: 'Enemies are camped around Ulffoss, and nothing comes in by road.'"
+ },
+ {
+  "id": "I18",
+  "seed": "r2s-under_siege-town-2",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A yearly fair for regional merchants. None can reach it while the roads are held.",
+  "fact": "Annual fair present; crisis: 'nothing comes in by road.'"
+ },
+ {
+  "id": "I23",
+  "seed": "r2r-village-2",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A bridge with a toll house upon it. The keeper takes the passage fees and sees to simple upkeep. The income is small but never fails.",
+  "fact": "Toll bridge present; no crisis."
+ },
+ {
+  "id": "I23",
+  "seed": "r2s-wartime-metropolis-3",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A bridge with a toll house upon it. The keeper takes the passage fees and sees to simple upkeep. The income is small but never fails.",
+  "fact": "Toll bridge present; wartime does not cut the roads."
+ },
+ {
+  "id": "I23",
+  "seed": "r2s-occupied-town-3",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A bridge with a toll house upon it. The keeper takes the passage fees and sees to simple upkeep. The income is small but never fails.",
+  "fact": "Toll bridge present; under occupation 'The occupiers take the revenue', but the fee is still collected, so the sentence holds."
+ },
+ {
+  "id": "I23",
+  "seed": "r2r-metropolis-19",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A bridge with a toll house. The keeper collects passage fees and performs basic maintenance. Minor but steady revenue.",
+  "fact": "Toll bridge present (Desert/Arid terrain with marshlands; there is no river, but the sentence names none)."
+ },
+ {
+  "id": "S04",
+  "seed": "r2r-town-10",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Once-a-year market drawing merchants from across the region.",
+  "fact": "Annual fair present; no crisis."
+ },
+ {
+  "id": "S04",
+  "seed": "r2s-wartime-town-3",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Once-a-year market drawing merchants from across the region.",
+  "fact": "Annual fair present. Wartime ('The army has the carts and the road') may thin the fair, but the roads are not cut."
+ },
+ {
+  "id": "S04",
+  "seed": "r2s-famine-town-1",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Once-a-year market drawing merchants from across the region.",
+  "fact": "Annual fair present; the famine does not close the roads."
+ },
+ {
+  "id": "S04",
+  "seed": "r2r-town-51",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Once-a-year market drawing merchants from across the region.",
+  "fact": "Annual fair present; no crisis."
+ },
+ {
+  "id": "S08",
+  "seed": "r2r-village-13",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Flat-bottomed cargo barges for river transport. Simpler than sea vessels.",
+  "fact": "Riverside; River boatyard, River ferry."
+ },
+ {
+  "id": "S08",
+  "seed": "r2s-wartime-metropolis-1",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Flat-bottomed cargo barges for river transport. Simpler than sea vessels.",
+  "fact": "Riverside; River boatyard, barge company, docks."
+ },
+ {
+  "id": "S08",
+  "seed": "r2s-occupied-village-2",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Flat-bottomed cargo barges for river transport. Simpler than sea vessels.",
+  "fact": "Riverside; River boatyard."
+ },
+ {
+  "id": "S08",
+  "seed": "r2s-slave_revolt-town-0",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Flat-bottomed cargo barges for river transport. Simpler than sea vessels.",
+  "fact": "Riverside; River boatyard; River Tolls 15%."
+ },
+ {
+  "id": "S12",
+  "seed": "r2r-village-10",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Transport foot travelers and small goods across the water.",
+  "fact": "Coastal, with a River ferry; 'across the water' fits. (The adjacent service label 'River crossing' is a separate line.)"
+ },
+ {
+  "id": "S12",
+  "seed": "r2s-wartime-metropolis-3",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Transport foot travelers and small goods across the water.",
+  "fact": "Coastal port with a River ferry; 'across the water' is neutral."
+ },
+ {
+  "id": "S12",
+  "seed": "r2s-famine-town-2",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Transport foot travelers and small goods across the water.",
+  "fact": "Coastal port with a River ferry."
+ },
+ {
+  "id": "S12",
+  "seed": "r2s-plague_onset-town-2",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Transport foot travelers and small goods across the water.",
+  "fact": "Coastal, with a River ferry and docks."
+ },
+ {
+  "id": "F1b",
+  "seed": "r2s-famine-town-0",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Communal grain storage, meant to carry the town through bad harvests. This year it has not been enough.",
+  "fact": "Town granary; famine; 'Stores: a granary, five months of grain'; 'lost its harvest for a second season'."
+ },
+ {
+  "id": "F1b",
+  "seed": "r2s-famine-town-3",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Shared grain stores, built to even out the harvests. The famine is drawing them down faster than any harvest could refill them.",
+  "fact": "Town granary; famine; 'Stores: a granary, three months of grain'."
+ },
+ {
+  "id": "F1b",
+  "seed": "r2s-famine-town-1",
+  "verdict": "FALSE",
+  "severity": "medium",
+  "kind": "g",
+  "sentence": "Shared grain stores, built to even out the harvests. The famine is drawing them down faster than any harvest could refill them.",
+  "fact": "Crisis tab: 'Stores: a granary of six months that the hall will not open'; Overview: 'whoever holds the food... holds the power... fighting over the stores'. Stores the hall will not open are not being drawn down by the famine."
+ },
+ {
+  "id": "F1b",
+  "seed": "r2s-famine-town-2",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Communal grain storage, meant to carry the town through bad harvests. This year it has not been enough.",
+  "fact": "Town granary; famine; 'Stores: a granary, five months of grain'."
+ },
+ {
+  "id": "F4",
+  "seed": "r2r-city-11",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Senior druids who govern how their circle deals with the city. They may keep a grove hidden beneath the streets, hold the line between the city's spread and the wild, or advise its rulers on the land.",
+  "fact": "City tier; Elder Grove Council present."
+ },
+ {
+  "id": "F4",
+  "seed": "r2s-wartime-city-2",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Senior druids who govern how their circle deals with the city. They may keep a grove hidden beneath the streets, hold the line between the city's spread and the wild, or advise its rulers on the land.",
+  "fact": "City tier; Elder Grove Council present."
+ },
+ {
+  "id": "F4",
+  "seed": "r2s-famine-city-3",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A council of elder druids charged with their circle's standing in the city: sometimes tending a concealed grove below the streets, sometimes mediating between expansion and wild ground, sometimes counselling those in power on ecologic",
+  "fact": "City tier; Elder Grove Council present."
+ },
+ {
+  "id": "F4",
+  "seed": "r2s-insurgency-city-0",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A council of elder druids charged with their circle's standing in the city: sometimes tending a concealed grove below the streets, sometimes mediating between expansion and wild ground, sometimes counselling those in power on ecologic",
+  "fact": "City tier; Elder Grove Council present."
+ }
+]

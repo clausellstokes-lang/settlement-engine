@@ -1,0 +1,767 @@
+[
+ {
+  "id": "A03",
+  "seed": "r2s-plague_onset-town-2",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Racks of new ironwork stand outside the workshops, waiting for the carts.",
+  "fact": "Record has Blacksmiths (3-10); Iron & Metalwork chain Running from local iron ore; tier town. Plague onset is a partial, resisted quarantine; carts still move (food carts come in most days). True."
+ },
+ {
+  "id": "A03",
+  "seed": "r2s-famine-metropolis-3",
+  "verdict": "FALSE",
+  "severity": "low",
+  "kind": "g",
+  "sentence": "Racks of new ironwork stand outside the workshops, waiting for the carts.",
+  "fact": "Same page, Plot Hooks (Strategic Resource): \"The iron carts are three weeks late and the carters will not say why. The smiths are rationing what they have, and work waits on mended tools.\" Record: iron_deposits depleted; Iron & Metalwork income \"vulnerable to supply disruption\"; Blacksmiths and Specialized metalworkers marked Vulnerable. Racks of NEW ironwork waiting for carts disagrees with the page (hook text, hence low)."
+ },
+ {
+  "id": "A03",
+  "seed": "r2s-infiltrated-city-1",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Racks of new ironwork stand outside the workshops, waiting for the carts.",
+  "fact": "Record has Blacksmiths (3-10), Specialized metalworkers, Smelter; \"Local ore feeds the smithy directly\"; iron deposits not depleted. Infiltration does not stop trade. True."
+ },
+ {
+  "id": "A03",
+  "seed": "r2r-city-46",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Racks of new ironwork stand outside the workshops, waiting for the carts.",
+  "fact": "Record has Blacksmiths (3-10) and Specialized metalworkers; iron imported and worked locally; no crisis; city on a road. True."
+ },
+ {
+  "id": "A08",
+  "seed": "r2r-hamlet-36",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A smith tests a new blade against a post, frowns, and sends it back to the fire.",
+  "fact": "Record has Resident smith (part-time) with Basic smithing; local ore feeds the smithy. A spear-keeping hamlet under monster pressure plausibly forges blades. True."
+ },
+ {
+  "id": "A08",
+  "seed": "r2s-monster_pressure-metropolis-0",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A smith tests a new blade against a post, frowns, and sends it back to the fire.",
+  "fact": "Record has Blacksmiths (3-10), Specialized metalworkers, Smelter. True."
+ },
+ {
+  "id": "A08",
+  "seed": "r2r-city-5",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A smith tests a new blade against a post, frowns, and sends it back to the fire.",
+  "fact": "Record has Blacksmiths (3-10), Specialized metalworkers, Smelter. True."
+ },
+ {
+  "id": "A08",
+  "seed": "r2r-hamlet-38",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A smith tests a new blade against a post, frowns, and sends it back to the fire.",
+  "fact": "Record has Resident smith (part-time), Basic smithing, open-cast mine with local iron. True. (Out of scope: the preceding beat calls a 47-person hamlet's core a \"merchant district\".)"
+ },
+ {
+  "id": "A12",
+  "seed": "r2r-thorp-35",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "People argue politics in the open, loudly, and seem to enjoy it.",
+  "fact": "Stable thorp of 20 with an Elder Council whose right to rule is contested; open political argument fits. True."
+ },
+ {
+  "id": "A12",
+  "seed": "r2s-slave_revolt-city-1",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "People argue politics in the open, loudly, and seem to enjoy it.",
+  "fact": "Slave revolt, Unstable (revolt not contained); rival powers paying people to speak at gatherings. Loud political argument is consistent; \"seem to enjoy it\" is a mild stretch only."
+ },
+ {
+  "id": "A12",
+  "seed": "r2r-thorp-54",
+  "verdict": "FALSE",
+  "severity": "medium",
+  "kind": "c",
+  "sentence": "People argue politics in the open, loudly, and seem to enjoy it.",
+  "fact": "Famine in force: header \"Desperate — hunger is eroding order\"; Overview \"the rations shrink each week\"; \"the fact that nobody complains is the most alarming part\"; the sentence two before says \"nobody in the settlement will discuss it with a stranger\". People openly and happily arguing politics presumes a calm the page denies. (Out of scope: the beat right before, \"A dog drives a handful of animals across the road\", follows \"The dogs of Forteripa are gone\".)"
+ },
+ {
+  "id": "A12",
+  "seed": "r2r-village-25",
+  "verdict": "FALSE",
+  "severity": "high",
+  "kind": "g",
+  "sentence": "People argue politics in the open, loudly, and seem to enjoy it.",
+  "fact": "The sentence immediately before it on the same Overview paragraph: \"Lagosinum is quieter than it should be ... the particular quiet of a place where people have learned to be careful about what they say in earshot of strangers.\" Crisis politically_fractured; \"neighbours who took different sides have stopped speaking\". The two sentences contradict each other outright."
+ },
+ {
+  "id": "A16",
+  "seed": "r2r-town-48",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Each lane seems to keep to its own trade, and each trade to its own lane.",
+  "fact": "Town of 1,728 with Craft guilds (5-15), Blacksmiths (3-10), Carpenters (5-15), Tanners, Tailors, Cobblers, etc. Trade-by-lane fits. True."
+ },
+ {
+  "id": "A16",
+  "seed": "r2s-wartime-metropolis-3",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Each lane seems to keep to its own trade, and each trade to its own lane.",
+  "fact": "Metropolis of 43,550 with district markets, Luxury goods quarter, Furrier's district and dozens of craft houses. True."
+ },
+ {
+  "id": "A16",
+  "seed": "r2s-famine-town-1",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Each lane seems to keep to its own trade, and each trade to its own lane.",
+  "fact": "Town of 1,336 with Craft guilds (5-15), Tanners, Tailor's guild, Glassblower, Potter, Brickmaker, Bowyers. True."
+ },
+ {
+  "id": "A16",
+  "seed": "r2r-metropolis-26",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Each lane seems to keep to its own trade, and each trade to its own lane.",
+  "fact": "Metropolis of 21,872 with Craft guilds (100-150+), Luxury goods quarter, Apothecary district. True."
+ },
+ {
+  "id": "C02t",
+  "seed": "r2r-thorp-35",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Deep eaves shade the open ground between the houses.",
+  "fact": "Architectural flavour for a thorp of 20 with Dwellings (1-8); nothing on the record or page contradicts it."
+ },
+ {
+  "id": "C02t",
+  "seed": "r2r-hamlet-17",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Deep eaves shade the open ground between the houses.",
+  "fact": "Hamlet of 40, Dwellings (5-25); nothing contradicts it."
+ },
+ {
+  "id": "C02t",
+  "seed": "r2r-thorp-6",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Deep eaves shade the open ground between the houses.",
+  "fact": "Thorp of 19, Dwellings (1-8); nothing contradicts it."
+ },
+ {
+  "id": "C04t",
+  "seed": "r2r-hamlet-23",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A well, worn steps, and an old carved stone give the houses a layered age.",
+  "fact": "Hamlet 95 years old; Water source on record; \"layered age\" fits. True."
+ },
+ {
+  "id": "C04t",
+  "seed": "r2r-hamlet-47",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A well, worn steps, and an old carved stone give the houses a layered age.",
+  "fact": "Hamlet 112 years old with Water source. True."
+ },
+ {
+  "id": "C04t",
+  "seed": "r2r-hamlet-39",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A well, worn steps, and an old carved stone give the houses a layered age.",
+  "fact": "Hamlet 71 years old with Water source. True."
+ },
+ {
+  "id": "C07",
+  "seed": "r2r-town-38",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Carved roof beams and long hall ridges dominate the older quarter.",
+  "fact": "Norse town of 1,393, 112 years old; an older quarter and hall architecture fit. True."
+ },
+ {
+  "id": "C10",
+  "seed": "r2r-town-48",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "The main street ends at the administrative precinct.",
+  "fact": "Record has Town hall and Lord's appointee (Administrative orders). True."
+ },
+ {
+  "id": "C10",
+  "seed": "r2r-town-52",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "The main street ends at the administrative precinct.",
+  "fact": "Record has Town hall, Courthouse, Guild governance, Harbour master's office. True."
+ },
+ {
+  "id": "C12",
+  "seed": "r2r-village-49",
+  "verdict": "FALSE",
+  "severity": "medium",
+  "kind": "a",
+  "sentence": "Causeways and managed water divide the settlement into organized neighborhoods.",
+  "fact": "Record: terrain hills, route road; nearby resources grazing land, ancient grove, coal, stone quarry, hunting grounds: no river, lake or marsh. The only water is \"Several wells and springs\" (Multiple water sources). Causeways and managed water dividing the place need standing water the record lacks; \"organized neighborhoods\" is also large for a village of 168."
+ },
+ {
+  "id": "C15t",
+  "seed": "r2r-hamlet-12",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A low wall and a shade tree mark the open ground between the houses.",
+  "fact": "Hamlet of 27; a low wall and shade tree are flavour; nothing contradicts it (it is not a defensive wall claim)."
+ },
+ {
+  "id": "C22",
+  "seed": "r2r-thorp-16",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Fermentation, careful use of water, and intensive garden plots shape the food supply.",
+  "fact": "East-Asian culture food line; subsistence farming and household stores; nothing contradicts it."
+ },
+ {
+  "id": "C22",
+  "seed": "r2s-wartime-metropolis-3",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Fermentation, careful use of water, and intensive garden plots shape the food supply.",
+  "fact": "Fishing plus farming metropolis with granary; cultural food line. True."
+ },
+ {
+  "id": "C22",
+  "seed": "r2s-occupied-thorp-2",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Fermentation, careful use of water, and intensive garden plots shape the food supply.",
+  "fact": "Thorp fed by fishing and farming; cultural food line. True."
+ },
+ {
+  "id": "C22",
+  "seed": "r2s-famine-town-1",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Fermentation, careful use of water, and intensive garden plots shape the food supply.",
+  "fact": "Grain-fed town whose harvest failed (stated in the next sentence); the cultural line names food methods, not plenty. True."
+ },
+ {
+  "id": "H04",
+  "seed": "r2r-thorp-36",
+  "verdict": "DOUBTFUL",
+  "severity": "low",
+  "kind": "d",
+  "sentence": "A former occupier officer has returned under a false identity",
+  "fact": "History has The Occupation (catastrophic) and The Purge, so a former occupier is grounded. But a stranger \"under a false identity\" in a thorp of 5 people, some of whom lived through the occupation, is barely possible. Record cannot settle it."
+ },
+ {
+  "id": "H04",
+  "seed": "r2s-wartime-metropolis-2",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A former occupier officer has returned under a false identity",
+  "fact": "History: an occupation ended years before, collaborators and resisters still neighbours. Metropolis of 160,267: a hidden returner fits."
+ },
+ {
+  "id": "H04",
+  "seed": "r2r-village-21",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A former occupier officer has returned under a false identity",
+  "fact": "History: Occupation Legacy and The Occupation. Under siege now, but the return can predate the siege. True."
+ },
+ {
+  "id": "H04",
+  "seed": "r2s-under_siege-town-1",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A former occupier officer has returned under a false identity",
+  "fact": "History: Occupation Legacy, The Purge, The Occupation. Under siege now, but the return can predate it. True."
+ },
+ {
+  "id": "H09",
+  "seed": "r2r-thorp-34",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A fire out of the low ground spread from roof to roof before anyone could bring it under control",
+  "fact": "Great Fire 12y ago in a 91-year-old thorp of Dwellings (1-8); roof to roof fits. True."
+ },
+ {
+  "id": "H09",
+  "seed": "r2s-recently_betrayed-village-2",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A fire that began in the low ground burned through the houses and their outbuildings before it could be checked",
+  "fact": "Village of 394, hills; fire through houses and outbuildings fits the size. True."
+ },
+ {
+  "id": "H09",
+  "seed": "r2r-thorp-45",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A fire that began in the houses nearest the river burned through the houses and their outbuildings before it could be checked",
+  "fact": "Riverside forest thorp (route river) 163 years old; fire 154y ago \"nearest the river\". True."
+ },
+ {
+  "id": "H09",
+  "seed": "r2s-famine-hamlet-0",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A fire that began in the houses nearest the shore burned through the houses and their outbuildings before it could be checked",
+  "fact": "Coastal port hamlet, 69 years old; fire 10y ago \"nearest the shore\". True."
+ },
+ {
+  "id": "H14",
+  "seed": "r2s-mass_migration-thorp-0",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A catastrophic or transformative event tied to the local ley line concentration occurred, permanently altering part of the settlement and the lives of its inhabitants.",
+  "fact": "Record has a magical_node resource; hooks tie the incident to misuse of the node; \"part of the settlement\" fits a thorp. True."
+ },
+ {
+  "id": "H14",
+  "seed": "r2r-metropolis-58",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A catastrophic or transformative event tied to the local ley line concentration occurred, permanently altering a district of the settlement and the lives of its inhabitants.",
+  "fact": "Magical ley line node on record (now depleted, event 153y ago); \"a district\" fits a metropolis of 88,224. True."
+ },
+ {
+  "id": "H14",
+  "seed": "r2s-under_siege-thorp-1",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A catastrophic or transformative event tied to the local ley line concentration occurred, permanently altering part of the settlement and the lives of its inhabitants.",
+  "fact": "Record has magical_node; \"part of the settlement\" fits a thorp. True."
+ },
+ {
+  "id": "H14",
+  "seed": "r2s-mass_migration-hamlet-2",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A catastrophic or transformative event tied to the local ley line concentration occurred, permanently altering part of the settlement and the lives of its inhabitants.",
+  "fact": "Record has magical_node; \"part of the settlement\" fits a hamlet. True."
+ },
+ {
+  "id": "D02",
+  "seed": "r2s-famine-town-0",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A formal house for the sale of costly goods: estates, livestock, art, and now and then a whole household's goods.",
+  "fact": "Record has Auction house (Estate sales, Public auction). True."
+ },
+ {
+  "id": "D02",
+  "seed": "r2s-wartime-metropolis-2",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A formal house for the sale of costly goods: estates, livestock, art, and now and then a whole household's goods.",
+  "fact": "Record has Auction house. True."
+ },
+ {
+  "id": "D02",
+  "seed": "r2s-famine-city-1",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A formal house for the sale of costly goods: estates, livestock, art, and now and then a whole household's goods.",
+  "fact": "Record has Auction house. True."
+ },
+ {
+  "id": "D02",
+  "seed": "r2r-metropolis-39",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A formal house for the sale of costly goods: estates, ships, livestock, art, and now and then a whole household's goods.",
+  "fact": "Record has Auction house plus Docks/port facilities and Harbour master (river), so \"ships\" holds. True."
+ },
+ {
+  "id": "I04",
+  "seed": "r2r-hamlet-10",
+  "verdict": "FALSE",
+  "severity": "medium",
+  "kind": "c",
+  "sentence": "A rough jetty and its salting-and-drying racks, where the hamlet's catch is landed and cured.",
+  "fact": "Record: fishing_grounds depleted; Economic Flows \"Fishing & Seafood ... Impaired, From Fishing grounds (depleted)\"; Resources: \"It has worked out its fishing grounds ... the hamlet buys what it used to take, or goes without.\" A jetty where \"the hamlet's catch is landed and cured\" presumes a running catch the record says is gone. (Same page also says \"Half of Bellanovum seems to be gutting, salting or selling fish\" and \"The table rests on fish from the local waters\", out of scope.)"
+ },
+ {
+  "id": "I04",
+  "seed": "r2s-under_siege-hamlet-1",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A rough jetty and its salting-and-drying racks, where the hamlet's catch is landed and cured.",
+  "fact": "Record has Fisher's landing on a river (plains, route river); fish are its fallback food under siege. True."
+ },
+ {
+  "id": "I04",
+  "seed": "r2r-hamlet-16",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A rough jetty and its salting-and-drying racks, where the hamlet's catch is landed and cured.",
+  "fact": "Record has Fisher's landing, river_fish resource not depleted. This year's fishing failed (famine), but the jetty is still where the catch is landed. True."
+ },
+ {
+  "id": "I04",
+  "seed": "r2r-hamlet-50",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A rough jetty and its salting-and-drying racks, where the hamlet's catch is landed and cured.",
+  "fact": "Riverside hamlet with Fisher's landing; nearly every meal goes back to the fishing. True."
+ },
+ {
+  "id": "I08",
+  "seed": "r2r-hamlet-16",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A stone quarry, opened by quarrymen with picks and wedges.",
+  "fact": "Record has Stone quarry institution and stone_quarry resource. True."
+ },
+ {
+  "id": "I08",
+  "seed": "r2s-wartime-hamlet-0",
+  "verdict": "DOUBTFUL",
+  "severity": "low",
+  "kind": "c",
+  "sentence": "A quarry opened with picks and wedges, its stone cut and dressed for building by hand.",
+  "fact": "Record has a Stone quarry institution, but nearby resources (river fish (depleted), managed forest, ancient grove, coal) list no stone quarry, and the page's Mining & Quarrying flow runs only from iron ore and coal. The line matches the institution; the record contradicts itself about the stone it works."
+ },
+ {
+  "id": "I08",
+  "seed": "r2s-indebted-hamlet-2",
+  "verdict": "DOUBTFUL",
+  "severity": "low",
+  "kind": "c",
+  "sentence": "A stone quarry, its blocks cut and dressed by a gang of quarrymen with picks and wedges.",
+  "fact": "Record has a Stone quarry institution, but nearby resources (grain fields (depleted), ancient grove, iron, foraging) list no stone quarry; the Mining & Quarrying flow runs from the open-cast mine (iron ore). The record does not settle what stone is cut."
+ },
+ {
+  "id": "I08",
+  "seed": "r2r-hamlet-23",
+  "verdict": "DOUBTFUL",
+  "severity": "low",
+  "kind": "c",
+  "sentence": "A stone quarry, opened by quarrymen with picks and wedges.",
+  "fact": "Record has a Stone quarry institution (its master holds the Elder seat), but nearby resources are only ancient grove, grazing land, precious metals: no stone quarry. The line matches the institution; the record does not back the stone."
+ },
+ {
+  "id": "I12",
+  "seed": "r2r-metropolis-1",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Parishes by the score, anywhere from fifty to past a hundred.",
+  "fact": "Record has Parish churches (50-100+) and a Great cathedral in a metropolis of 38,474. The prose restates the catalogue range; no exact count exists to contradict. (Out of scope: the card heading reads \"Houses of worship (50-100+)\", a count range in a name, kind h.)"
+ },
+ {
+  "id": "I12",
+  "seed": "r2s-wartime-metropolis-3",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Parishes by the score, anywhere from fifty to past a hundred.",
+  "fact": "Record has Parish churches (50-100+). True. (Card heading \"Houses of worship (50-100+)\", out of scope.)"
+ },
+ {
+  "id": "I12",
+  "seed": "r2s-famine-metropolis-1",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Scores of parishes, from fifty to a hundred and more.",
+  "fact": "Record has Parish churches (50-100+). \"The faith reaches every street\" is about the parishes' reach, not devotion (the page says few keep rites beyond weddings and burials). True."
+ },
+ {
+  "id": "I12",
+  "seed": "r2r-metropolis-6",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Parishes by the score, anywhere from fifty to past a hundred.",
+  "fact": "Record has Parish churches (50-100+) and a Great cathedral. True."
+ },
+ {
+  "id": "I17",
+  "seed": "r2r-village-10",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A flat-bottomed ferry across the water.",
+  "fact": "Record has River ferry; the village faces the river. True."
+ },
+ {
+  "id": "I17",
+  "seed": "r2s-wartime-metropolis-3",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A flat-bottomed ferry over the water, the crossing rights held in one family for generations.",
+  "fact": "Record has River ferry; coastal port; the sentence says only \"over the water\". True. (Out of scope: the card is titled \"River ferry\" with service \"River crossing\" in a coastal town whose record has no river.)"
+ },
+ {
+  "id": "I17",
+  "seed": "r2s-famine-town-2",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A flat-bottomed ferry over the water, the crossing rights held in one family for generations.",
+  "fact": "Record has River ferry; coastal port; the sentence says only \"over the water\". True. (Same out-of-scope note: \"River ferry\"/\"River crossing\" with no river on record.)"
+ },
+ {
+  "id": "I17",
+  "seed": "r2s-plague_onset-town-2",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A flat-bottomed ferry across the water.",
+  "fact": "Record has River ferry; route river (\"A river settlement\"). True."
+ },
+ {
+  "id": "I22",
+  "seed": "r2r-town-10",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Merchants from across the region, and luxuries to be had.",
+  "fact": "Record has Annual fair; no crisis. True."
+ },
+ {
+  "id": "I22",
+  "seed": "r2s-wartime-town-3",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A yearly draw for regional traders, with fine goods on offer.",
+  "fact": "Record has Annual fair; wartime, but roads open and food secure. True."
+ },
+ {
+  "id": "I22",
+  "seed": "r2s-famine-town-1",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "A yearly draw for regional traders, with fine goods on offer.",
+  "fact": "Record has Annual fair and Caravaneer's post; famine does not close the roads (carts bring in most food). True."
+ },
+ {
+  "id": "I22",
+  "seed": "r2r-town-51",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Regional merchants. Luxury goods available.",
+  "fact": "Record has Annual fair; no crisis. True."
+ },
+ {
+  "id": "S03",
+  "seed": "r2s-under_siege-town-0",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "The yearly fair that draws merchants from across the region. None can reach it while the roads are held.",
+  "fact": "Record has Annual fair; under siege, \"nothing comes in by road\". True."
+ },
+ {
+  "id": "S03",
+  "seed": "r2s-under_siege-town-2",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "The yearly fair that draws merchants from across the region. None can reach it while the roads are held.",
+  "fact": "Record has Annual fair; under siege, \"nothing comes in by road\". True."
+ },
+ {
+  "id": "S07",
+  "seed": "r2r-village-11",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Flat-bottomed cargo boats for shallow water.",
+  "fact": "Record has River boatyard (Barge construction). True."
+ },
+ {
+  "id": "S07",
+  "seed": "r2s-insurgency-city-0",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Flat-bottomed cargo boats for shallow water.",
+  "fact": "Record has River boatyard. True."
+ },
+ {
+  "id": "S07",
+  "seed": "r2s-famine-town-2",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Flat-bottomed cargo boats for shallow water.",
+  "fact": "Record has River boatyard. True."
+ },
+ {
+  "id": "S07",
+  "seed": "r2s-mass_migration-village-0",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Flat-bottomed cargo boats for shallow water.",
+  "fact": "Record has River boatyard; shipbuilding timber is depleted, but flat-bottomed boats are still offered and no chain is marked impaired. True."
+ },
+ {
+  "id": "S11",
+  "seed": "r2r-town-15",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Beds, meals, and stabling for travelers on the road.",
+  "fact": "Record has Coaching inn, Inn (multiple); no crisis. True."
+ },
+ {
+  "id": "S11",
+  "seed": "r2s-wartime-metropolis-2",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Beds, meals, and stabling for travelers on the road.",
+  "fact": "Record has Coaching inn and Stable district; wartime requisition does not close inns. True."
+ },
+ {
+  "id": "S11",
+  "seed": "r2s-famine-city-1",
+  "verdict": "DOUBTFUL",
+  "severity": "low",
+  "kind": "c",
+  "sentence": "Beds, meals, and stabling for travelers on the road.",
+  "fact": "Record has Coaching inn and Stable district, but famine is in force: header \"Desperate — hunger is eroding order\". Meals for travellers \"priced by quality\" reads as normal times; a stretch, not a plain falsehood."
+ },
+ {
+  "id": "S11",
+  "seed": "r2s-succession_void-city-1",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Beds, meals, and stabling for travelers on the road.",
+  "fact": "Record has Coaching inn and Stable district; succession void does not stop the road. True."
+ },
+ {
+  "id": "F1a",
+  "seed": "r2r-town-0",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Buffers harvests, prevents famine.",
+  "fact": "Record has Town granary, seven months of grain, Food Security Secure, no famine. True."
+ },
+ {
+  "id": "F1a",
+  "seed": "r2s-wartime-town-3",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Shared grain stores that even out the harvests and hold off famine.",
+  "fact": "Town granary, seven months of grain, Food Secure; no famine. True."
+ },
+ {
+  "id": "F1a",
+  "seed": "r2s-occupied-town-0",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Shared grain stores that even out the harvests and hold off famine.",
+  "fact": "Town granary, six months of grain; food Pressured by occupiers eating from local stores but no famine. True."
+ },
+ {
+  "id": "F1a",
+  "seed": "r2s-indebted-town-2",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Shared grain stores that even out the harvests and hold off famine.",
+  "fact": "Town granary, six months of grain, Food Secure. True."
+ },
+ {
+  "id": "F2",
+  "seed": "r2r-town-3",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Levies charged on all trade in and out by road or harbour, collected by officials of crown or town.",
+  "fact": "Record has Customs house, Docks/port facilities, Harbour master's office, roads. True."
+ },
+ {
+  "id": "F2",
+  "seed": "r2s-wartime-metropolis-3",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Levies charged on all trade in and out by road or harbour, collected by officials of crown or town.",
+  "fact": "Record has Customs house, Docks/port facilities, Harbour master's office. True."
+ },
+ {
+  "id": "F2",
+  "seed": "r2s-under_siege-city-0",
+  "verdict": "FALSE",
+  "severity": "medium",
+  "kind": "c",
+  "sentence": "Levies charged on all trade in and out by road or harbour, collected by officials of crown or town.",
+  "fact": "Under siege in force: \"Enemies are camped around Bellaurbs, and nothing comes in by road\"; Harbour and Maritime flow Impaired; Daily markets Impaired; the card itself has lost its Cargo inspection service. \"Levies charged on all trade in and out by road or harbour\" states normal road trade under a siege that cuts every road."
+ },
+ {
+  "id": "F2",
+  "seed": "r2r-metropolis-15",
+  "verdict": "TRUE",
+  "severity": null,
+  "kind": null,
+  "sentence": "Levies charged on all trade in and out by road or harbour, collected by officials of crown or town.",
+  "fact": "Record has Customs house, Docks/port facilities, River boatyard, Barge company (river port). True."
+ }
+]

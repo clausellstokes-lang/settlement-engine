@@ -1,0 +1,642 @@
+## families moved (towns of 720 )
+ 588 generationCoherenceReceipt.judgments[].evidence[] | r2r-thorp-0 generationCoherenceReceipt.judgments[0].evidence[0].evidence: "3 NPCs / 3 relationships" -> "2 NPCs / 2 relationships"
+ 575 npcs[].goal.short | r2r-thorp-0 npcs[0].goal.short: "Settle one quarrel inside Elder Council before Cosij Chan can settle it and take the cred -> "Collect what is owed to the fishing community before the season is out."
+ 574 npcs[].goal.long | r2r-thorp-0 npcs[0].goal.long: "Be free of what is owed to Cuauhtli Ahau, completely." -> "Leave the family stronger, with Cuauhtli Ahau on the same side."
+ 574 simulationTrace[].causes[].effect | r2r-thorp-0 simulationTrace[19].causes[0].effect: "3 npcs" -> "2 npcs"
+ 572 npcs[].goal.intent | r2r-thorp-0 npcs[0].goal.intent.short.family: "RANK" -> "INSTITUTION"
+ 566 npcs[].role | r2r-thorp-0 npcs[0].role: "the eldest" -> "Elder"
+ 566 npcs[].title | r2r-thorp-0 npcs[0].title: "the eldest" -> "the boat-headman"
+ 566 npcs[].presentation.impression | r2r-thorp-0 npcs[0].presentation.impression: "Tired and set in their ways. Strangers are a bother." -> "Weathered and steady, with hands like rope and an eye always on the sky."
+ 566 npcs[].institution.key | r2r-thorp-0 npcs[0].institution.key: "Informal elder consensus" -> "Fishing community"
+ 566 npcs[].institution.title | r2r-thorp-0 npcs[0].institution.title: "the eldest" -> "the boat-headman"
+ 565 npcs[].presentation.behaviour | r2r-thorp-0 npcs[0].presentation.behaviour: "Says little and sends you to someone younger." -> "Talks about the catch, the weather and the boats; quick to offer a meal of fish."
+ 563 npcs[].secret.what | r2r-thorp-0 npcs[0].secret.what: "Gave a dying neighbour's land to their own family, and the others agreed because they wer -> "Let a boat go out in weather they knew was coming, because its owner owed them money"
+ 563 npcs[].secret.stakes | r2r-thorp-0 npcs[0].secret.stakes: "The neighbour's grandchild has come back, and remembers what their grandparent really wan -> "The boat did not come back, and the dead man's widow has started asking who sent him out"
+ 563 npcs[].structuralPosition | r2r-thorp-0 npcs[0].structuralPosition: "Holds the seat, and people accept it; there is room to act, not just to hold on." -> "Holds the seat, and people accept it; there is room to act, not just to hold on. Still th
+ 561 npcs[].id | r2r-thorp-0 npcs[0].id: "npc_informal_elder_consensus" -> "npc_fishing_community"
+ 561 npcs[].name | r2r-thorp-0 npcs[0].name: "Zuma Chuc" -> "Cosij Chan"
+ 561 npcs[].personality.modifier | r2r-thorp-0 npcs[0].personality.modifier: "methodical" -> "detached"
+ 561 npcs[].personality.tell | r2r-thorp-0 npcs[0].personality.tell: "refuses to sit with their back to a door" -> "deflects personal questions with a counter-question"
+ 561 npcs[].personality.speech | r2r-thorp-0 npcs[0].personality.speech: "Speaks in analogies and metaphors, even when clarity would serve better" -> "Ends disagreements by restating the other position, slightly wrong"
+ 561 npcs[].plotHooks[] | r2r-thorp-0 npcs[0].plotHooks[0]: "Someone has been leaving anonymous notes in their office pointing to a colleague's corrup -> "They saw an accident that was no accident, and the person responsible knows they saw it."
+ 559 npcs[].physical.age | r2r-thorp-0 npcs[0].physical.age: "late forties" -> "mid-fifties"
+ 558 npcs[].physical.clothes | r2r-thorp-0 npcs[0].physical.clothes: "court attire with discreet personal touches" -> "a good coat inherited from a larger relative"
+ 556 npcs[].physical.feature | r2r-thorp-0 npcs[0].physical.feature: "eyes that are slightly different colours" -> "a network of small scars on their knuckles"
+ 556 npcs[].institution.family | r2r-thorp-0 npcs[0].institution.family: "Informal elder consensus" -> "Fisher's landing"
+ 553 npcs[].personality.flaw | r2r-thorp-0 npcs[0].personality.flaw: "mendacious" -> "manipulative"
+ 549 npcs[].physical.build | r2r-thorp-0 npcs[0].physical.build: "lean and wiry" -> "slight: smaller than expected for the role"
+ 544 npcs[].category | r2r-thorp-0 npcs[0].category: "government" -> "other"
+ 541 npcs[].personality.dominant | r2r-thorp-0 npcs[0].personality.dominant: "level-headed" -> null
+ 535 npcs[].power | r2r-thorp-0 npcs[1].power: 1 -> 2
+ 532 npcs[].presentation.disposition | r2r-thorp-0 npcs[0].presentation.disposition: "dismissive" -> "welcoming"
+ 500 npcs[].gender | r2r-thorp-1 npcs[2].gender: "female" -> "male"
+ 496 relationships[].description | r2r-thorp-0 relationships[0].description: "Zuma Chuc owes Cuauhtli Ahau a large sum in coin, borrowed in a bad year and repaid in sm -> "Cosij Chan and Cuauhtli Ahau are family, but in business they deal with each other as if 
+ 496 relationships[].tension | r2r-thorp-0 relationships[0].tension: "Zuma Chuc has started repaying the debt in coin. Cuauhtli Ahau wants it repaid in favours -> "The family has taken a side in a quarrel between Cosij Chan and Cuauhtli Ahau, and both o
+ 496 relationships[].npc1Role | r2r-thorp-0 relationships[0].npc1Role: "the eldest" -> "Elder"
+ 496 relationships[].npc2Role | r2r-thorp-0 relationships[1].npc2Role: "the camp foreman" -> "Elder"
+ 495 relationships[].id | r2r-thorp-0 relationships[0].id: "tie_npc_informal_elder_consensus" -> "tie_npc_fishing_community"
+ 495 relationships[].from | r2r-thorp-0 relationships[0].from: "npc_informal_elder_consensus" -> "npc_fishing_community"
+ 495 relationships[].npc1Name | r2r-thorp-0 relationships[0].npc1Name: "Zuma Chuc" -> "Cosij Chan"
+ 494 npcs[] | r2r-thorp-0 npcs[2]: {"id":"npc_woodcutter_s_camp","name":"Cuauhtli Ahau","gender":"male","role":"the camp fore -> undefined
+ 494 relationships[].strength | r2r-thorp-0 relationships[0].strength: "minor" -> "inseparable"
+ 494 relationships[].proseVariant | r2r-thorp-0 relationships[0].proseVariant: 4 -> 2
+ 494 relationships[].to | r2r-thorp-0 relationships[1].to: "npc_woodcutter_s_camp" -> "npc_fishing_community"
+ 494 relationships[].npc2Name | r2r-thorp-0 relationships[1].npc2Name: "Cuauhtli Ahau" -> "Cosij Chan"
+ 494 relationships[] | r2r-thorp-0 relationships[2]: {"id":"tie_npc_woodcutter_s_camp","from":"npc_woodcutter_s_camp","to":"npc_informal_elder_ -> undefined
+ 490 relationships[].type | r2r-thorp-0 relationships[0].type: "debtor_creditor" -> "family"
+ 490 relationships[].typeName | r2r-thorp-0 relationships[0].typeName: "Outstanding Debt" -> "Family Complication"
+ 490 relationships[].archetypeKey | r2r-thorp-0 relationships[0].archetypeKey: "old_debt" -> "family_complication"
+ 483 institutions[].desc | r2r-thorp-0 institutions[1].desc: "Nets, traps, and racks for drying. The thorp lives by the water and cannot be parted from -> "Nets, traps, and racks for drying. Whoever fishes the water here keeps them."
+ 425 npcs[].structuralRank | r2r-thorp-1 npcs[1].structuralRank: "unaffiliated" -> "head"
+ 420 npcs[].memberships[] | r2r-thorp-1 npcs[1].memberships[0]: undefined -> {"power":"Elder Council","rank":1,"share":1,"veiled":false}
+ 370 npcs[].memberships[].power | r2r-thorp-1 npcs[0].memberships[0].power: "Elder Council" -> "Occupation Authority"
+ 369 npcs[].influence | r2r-thorp-1 npcs[0].influence: "low" -> "high"
+ 331 npcs[].memberships[].rank | r2r-thorp-27 npcs[1].memberships[0].rank: 2 -> 1
+ 316 npcs[].importance | r2r-thorp-1 npcs[1].importance: "minor" -> "notable"
+ 312 npcs[].activeConstraint | r2r-thorp-1 npcs[0].activeConstraint: "Cannot pay for the repairs and relief people want without coin the place does not have." -> undefined
+ 311 npcs[].memberships[].share | r2r-hamlet-10 npcs[0].memberships[0].share: 0.5 -> 1
+ 293 simulationTrace[].causes[].reason | r2r-thorp-2 simulationTrace[18].causes[0].reason: "Tier baseline plus tier-scaled archetype multiplier for religious." -> "Tier baseline plus tier-scaled archetype multiplier for government."
+ 290 powerStructure.factions[].desc | r2r-thorp-1 powerStructure.factions[0].desc: "Respected elders guide the community; authority is moral and traditional rather than form -> "External administrative body; all significant decisions require approval or reversal. Loc
+ 283 prominentRelationship.phrasing | r2r-thorp-0 prominentRelationship.phrasing: "The family has taken a side in a quarrel between Cosij Chan and Cuauhtli Ahau, and both o -> "Cuauhtli Ahau and Cosij Chan each hold something over the other. Cuauhtli Ahau has asked 
+ 273 prominentRelationship.full | r2r-thorp-0 prominentRelationship.full: "Cosij Chan and Cuauhtli Ahau are family, but in business they deal with each other as if  -> "Cuauhtli Ahau and Cosij Chan trade favours on a strict count. Neither has ever been more 
+ 273 prominentRelationship.tension | r2r-thorp-0 prominentRelationship.tension: "The family has taken a side in a quarrel between Cosij Chan and Cuauhtli Ahau, and both o -> "Cuauhtli Ahau has asked Cosij Chan for a second favour before repaying the first."
+ 253 simulationTrace[].causes[].source | r2r-thorp-6 simulationTrace[11].causes[1].source: "terrain.hills" -> "nearbyResources"
+ 234 prominentRelationship.npc2 | r2r-thorp-0 prominentRelationship.npc2: "Cuauhtli Ahau" -> "Cosij Chan"
+ 229 stress.cast.roles[] | r2r-thorp-1 stress.cast.roles[0]: undefined -> {"role":"face","kind":"npc","id":"npc_power_occupation_authority","name":"Lepidus Brutus",
+ 229 stressors.cast.roles[] | r2r-thorp-1 stressors.cast.roles[0]: undefined -> {"role":"face","kind":"npc","id":"npc_power_occupation_authority","name":"Lepidus Brutus",
+ 220 history.historicalEvents[].description | r2r-thorp-0 history.historicalEvents[1].description: "The merchants are getting richer and the labourers are not, and the labourers have notice -> "Scarcity of a critical good drove some to hoard it and others to gouge on the price"
+ 220 simulationTrace[].downstreamEffects[].target | r2r-thorp-2 simulationTrace[18].downstreamEffects[0].target: "welfareCapacity" -> "publicLegitimacy"
+ 218 prominentRelationship.npc1 | r2r-thorp-0 prominentRelationship.npc1: "Cosij Chan" -> "Cuauhtli Ahau"
+ 217 npcs[].institution.veiled | r2r-thorp-1 npcs[1].institution.veiled: true -> false
+ 215 history.currentTensions[].plotHooks[] | r2r-thorp-4 history.currentTensions[0].plotHooks[0]: "A healer who profited enormously during the plague is being asked how they stayed untouch -> "The plague pit holds a body that matches no one on the list of the dead"
+ 208 simulationTrace[].targetId | r2r-thorp-2 simulationTrace[18].targetId: "faction.priestly_guidance" -> "faction.elder_council"
+ 205 economicState.foodSecurity.foodRecord | r2r-thorp-1 economicState.foodSecurity.foodRecord.foodwaysLine: "Public ovens, neighborhood vendors, and shared dining customs make food distribution visi -> "Meals follow the season and what the household has put by."
+ 201 history.currentTensions[].factions[] | r2r-thorp-6 history.currentTensions[0].factions[0]: "Military/Guard" -> "Vigilantes"
+ 199 npcs[].settlementCondition | r2r-thorp-1 npcs[0].settlementCondition: "economic_stress" -> undefined
+ 198 culturalIdentity.foodways | r2r-thorp-1 culturalIdentity.foodways: "Public ovens, neighborhood vendors, and shared dining customs make food distribution visi -> "Meals follow the season and what the household has put by."
+ 190 history.currentTensions[].description | r2r-thorp-9 history.currentTensions[0].description: "A fire that began in the lower districts consumed wooden buildings and merchant stalls ac -> "A fire that began in the low ground burned through the houses and their outbuildings befo
+ 185 powerStructure.conflicts[].desc | r2r-hamlet-41 powerStructure.conflicts[0].desc: "Priestly Guidance and Military/Guard are in moderate conflict over punishment of a member -> "Headman's Authority and Military/Guard are in moderate conflict over who commands when da
+ 185 conflicts[].desc | r2r-hamlet-41 conflicts[0].desc: "Priestly Guidance and Military/Guard are in moderate conflict over punishment of a member -> "Headman's Authority and Military/Guard are in moderate conflict over who commands when da
+ 184 resourceAnalysis.availableResources[] | r2r-thorp-6 resourceAnalysis.availableResources[3]: "defended_pass" -> "ancient_grove"
+ 183 npcs[].institution.kind | r2r-thorp-1 npcs[0].institution.kind: "house" -> "power"
+ 182 economicState.localProduction[] | r2r-thorp-6 economicState.localProduction[2]: "trade access" -> "stone"
+ 178 economicState.primaryExports[] | r2r-thorp-6 economicState.primaryExports[2]: "Toll revenue" -> "Sacred wood"
+ 177 resourceAnalysis.resourceConditions[].key | r2r-thorp-6 resourceAnalysis.resourceConditions[1].key: "defended_pass" -> "ancient_grove"
+ 177 resourceAnalysis.resourceConditions[].label | r2r-thorp-6 resourceAnalysis.resourceConditions[1].label: "Mountain Pass" -> "Ancient Grove"
+ 177 config.nearbyResources[] | r2r-thorp-6 config.nearbyResources[1]: "defended_pass" -> "ancient_grove"
+ 177 config.nearbyResourcesNative[] | r2r-thorp-6 config.nearbyResourcesNative[1]: "defended_pass" -> "ancient_grove"
+ 173 culturalIdentity.architecturalDetail | r2r-thorp-1 culturalIdentity.architecturalDetail: "fountains, steps, and reused columns give the civic center a layered age" -> "a well, worn steps, and an old carved stone give the houses a layered age"
+ 171 pressureSentence | r2r-thorp-8 pressureSentence: "Otgontuya Jadaran has asked Enkhbold Kiyad for a second favour before repaying the first. -> "Enkhbold Kiyad has recently secured something that makes Otgontuya Jadaran's hold obsolet
+ 170 resourceAnalysis.resourceConditions[].type | r2r-thorp-6 resourceAnalysis.resourceConditions[1].type: "positional" -> "renewable"
+ 170 resourceAnalysis.resourceConditions[].randomDepletionEligible | r2r-thorp-6 resourceAnalysis.resourceConditions[1].randomDepletionEligible: false -> true
+ 170 resourceAnalysis.resourceConditions[].recoveryMode | r2r-thorp-6 resourceAnalysis.resourceConditions[1].recoveryMode: "not_applicable" -> "natural"
+ 165 simulationTrace[].causes[] | r2r-thorp-6 simulationTrace[11].causes[2]: undefined -> {"source":"terrain.hills","effect":"context","reason":"Selection occurred in a hills setti
+ 163 simulationTrace[].downstreamEffects[].effect | r2r-thorp-2 simulationTrace[18].downstreamEffects[0].effect: "reinforced" -> "anchored"
+ 163 economicState.activeChains[].status | r2r-thorp-6 economicState.activeChains[1].status: "operational" -> "running"
+ 159 powerStructure.conflicts[].parties[] | r2r-hamlet-41 powerStructure.conflicts[0].parties[0]: "Priestly Guidance" -> "Headman's Authority"
+ 159 conflicts[].parties[] | r2r-hamlet-41 conflicts[0].parties[0]: "Priestly Guidance" -> "Headman's Authority"
+ 157 npcs[].allegiance | r2r-thorp-1 npcs[0].allegiance: undefined -> {"power":null,"house":"Local fence","vector":"greed","via":"office","handler":"npc_veiled_
+ 157 relationships[].covert | r2r-thorp-1 relationships[0].covert: undefined -> true
+ 157 relationships[].handler | r2r-thorp-1 relationships[0].handler: undefined -> true
+ 157 economicState.activeChains[].activatedByResource | r2r-thorp-6 economicState.activeChains[1].activatedByResource: false -> true
+ 156 simulationTrace[].downstreamEffects[] | r2r-thorp-2 simulationTrace[18].downstreamEffects[1]: {"target":"publicLegitimacy","effect":"influenced"} -> undefined
+ 156 simulationTrace[].result | r2r-thorp-10 simulationTrace[20].result: "stable" -> "strained"
+ 154 history.historicalEvents[].plotHooks[] | r2r-thorp-0 history.historicalEvents[1].plotHooks[0]: "Family accounts passed down from that time tell it this way: a reformer has been found ha -> "The scarcity was engineered. Someone destroyed the competing supply route"
+ 154 prominentRelationship.type | r2r-thorp-0 prominentRelationship.type: "Family Complication" -> "Mutual Leverage"
+ 152 economicState.safetyProfile.compound | r2r-thorp-6 economicState.safetyProfile.compound.magicInfluence: 36.76 -> 40.589166666666664
+ 150 arrivalScene | r2r-thorp-2 arrivalScene: "Indrapat is neither impressive nor disappointing from the approach. It is what it is, whi -> "Indrapat is neither impressive nor disappointing from the approach. It is what it is, whi
+ 142 economicState.activeChains[].chainId | r2r-thorp-6 economicState.activeChains[1].chainId: "black_market" -> "parish"
+ 142 economicState.activeChains[].label | r2r-thorp-6 economicState.activeChains[1].label: "Black market" -> "Faith & Worship"
+ 142 economicState.activeChains[].outputs[] | r2r-thorp-6 economicState.activeChains[1].outputs[0]: "Contraband goods" -> "Religious services"
+ 141 economicState.activeChains[].processingInstitutions[] | r2r-thorp-6 economicState.activeChains[1].processingInstitutions[0]: "Local fence" -> "Parish church"
+ 141 economicState.activeChains[].services[] | r2r-thorp-6 economicState.activeChains[1].services[0]: "criminal" -> "healing"
+ 139 economicState.activeChains[].needKey | r2r-thorp-6 economicState.activeChains[1].needKey: "criminal_economy" -> "religion_civic"
+ 139 economicState.activeChains[].needLabel | r2r-thorp-6 economicState.activeChains[1].needLabel: "Criminal Economy" -> "Religion & Civic"
+ 139 economicState.activeChains[].needColor | r2r-thorp-6 economicState.activeChains[1].needColor: "#4a1a4a" -> "#5a3a1a"
+ 138 powerStructure.conflicts[].plotHooks[] | r2r-hamlet-41 powerStructure.conflicts[0].plotHooks[0]: "The man who was struck has not been seen since, and his family wants him found." -> "At the last alarm two sets of orders were given, and the men did not know whom to obey."
+ 138 conflicts[].plotHooks[] | r2r-hamlet-41 conflicts[0].plotHooks[0]: "The man who was struck has not been seen since, and his family wants him found." -> "At the last alarm two sets of orders were given, and the men did not know whom to obey."
+ 132 history.historicalEvents[].lastingEffects[] | r2r-thorp-0 history.historicalEvents[1].lastingEffects[0]: "The merchant quarter and the labourers' quarter remain walled apart" -> "Price ceilings on the affected goods still enforced in lean seasons"
+ 128 simulationTrace[] | r2r-thorp-1 simulationTrace[31]: undefined -> {"causes":[{"source":"allegiance.gate","effect":"eligible","reason":"A corruptible callous
+ 127 economicState.activeChains[].resourceInputKey | r2r-thorp-10 economicState.activeChains[0].resourceInputKey: null -> "ancient_grove"
+ 125 simulationTrace[].targetType | r2r-thorp-10 simulationTrace[21].targetType: "npc" -> "supply_chain"
+ 125 simulationTrace[].step | r2r-thorp-10 simulationTrace[21].step: "generatePopulation" -> "economyReconcilePass"
+ 125 availableServices.equipment[].desc | r2r-town-10 availableServices.equipment[0].desc: "Consistent, high-volume arrow production for military and hunting." -> "Produce and sell charcoal for smithing, heating, and industrial use."
+ 124 powerStructure.factions[].power | r2r-thorp-1 powerStructure.factions[0].power: 100 -> 57
+ 123 economicState.activeChains[].resource | r2r-thorp-10 economicState.activeChains[0].resource: null -> "Foraging areas"
+ 123 economicState.activeChains[].resourceKey | r2r-thorp-10 economicState.activeChains[0].resourceKey: null -> "foraging_areas"
+ 116 history.currentTensions[].type | r2r-thorp-20 history.currentTensions[0].type: "market_crash" -> "tyranny"
+ 115 powerStructure.conflicts[].issue | r2r-hamlet-41 powerStructure.conflicts[0].issue: "Punishment of a member who struck a local man" -> "Who commands when danger comes"
+ 115 powerStructure.conflicts[].stakes | r2r-hamlet-41 powerStructure.conflicts[0].stakes: "Honour and order" -> "Command"
+ 115 conflicts[].issue | r2r-hamlet-41 conflicts[0].issue: "Punishment of a member who struck a local man" -> "Who commands when danger comes"
+ 115 conflicts[].stakes | r2r-hamlet-41 conflicts[0].stakes: "Honour and order" -> "Command"
+ 113 economicState.incomeSources[].desc | r2r-thorp-2 economicState.incomeSources[2].desc: "Local coal fires the forges, but the iron is bought in; this income stream leans on the t -> "Coal is dug here and sold to the forges of other towns; no forge here burns it, so this i
+ 112 economicState.compound.magicInfluence | r2r-thorp-6 economicState.compound.magicInfluence: 36.76 -> 40.589166666666664
+ 110 economicState.activeChains[].dependency | r2r-town-2 economicState.activeChains[0].dependency: {"institution":"Town watch","resource":"Iron","severity":"vulnerable","impact":"Dependent  -> undefined
+ 109 economicState.activeChains[].entrepot | r2r-hamlet-14 economicState.activeChains[1].entrepot: undefined -> false
+ 108 economicState.activeChains[].upstreamChains[] | r2r-village-3 economicState.activeChains[2].upstreamChains[0]: "warehouse_logistics" -> undefined
+ 106 history.legacyAnnotations[].annotation | r2r-thorp-0 history.legacyAnnotations[0].annotation: "As of the founding survey, the Economic Divide (73 years ago) set up ways of doing things -> "As of the founding survey, the Shortage (73 years ago) set up ways of doing things that h
+ 104 economicState.activeChains[] | r2r-thorp-10 economicState.activeChains[1]: undefined -> {"needKey":"religion_civic","needLabel":"Religion & Civic","needColor":"#5a3a1a","chainId"
+ 100 powerStructure.factions[].faction | r2r-thorp-1 powerStructure.factions[0].faction: "Elder Council" -> "Occupation Authority"
+ 100 powerStructure.factions[].rawPower | r2r-thorp-1 powerStructure.factions[0].rawPower: 40 -> 43
+  99 history.historicalEvents[].name | r2r-thorp-0 history.historicalEvents[1].name: "The Economic Divide" -> "The Shortage"
+  99 history.eventsTimeline[].name | r2r-thorp-0 history.eventsTimeline[1].name: "The Economic Divide" -> "The Shortage"
+  99 powerStructure.factions[].category | r2r-thorp-1 powerStructure.factions[0].category: "government" -> "military"
+  99 powerStructure.conflicts[].intensity | r2r-village-45 powerStructure.conflicts[0].intensity: "moderate" -> "high"
+  99 conflicts[].intensity | r2r-village-45 conflicts[0].intensity: "moderate" -> "high"
+  98 history.historicalEvents[].templateType | r2r-thorp-0 history.historicalEvents[1].templateType: "economic_disparity" -> "resource_scarcity"
+  98 economicState.activeChains[].exportable | r2r-hamlet-14 economicState.activeChains[1].exportable: true -> false
+  97 economicState.activeChains[].resourceCondition | r2r-thorp-10 economicState.activeChains[0].resourceCondition: "available" -> "absent"
+  96 economicState.activeChains[].resourceActive | r2r-thorp-10 economicState.activeChains[0].resourceActive: true -> false
+  93 history.currentTensions[].severity[] | r2r-thorp-20 history.currentTensions[0].severity[0]: "minor" -> "major"
+  91 economicState.activeChains[].substituteActive | r2r-thorp-10 economicState.activeChains[0].substituteActive: false -> true
+  89 economicState.activeChains[].upstreamNote | r2r-village-3 economicState.activeChains[2].upstreamNote: "Needs imported warehouse_logistics: no local source" -> undefined
+  89 economicState.tradeDependencies[].affectedServices[] | r2r-town-10 economicState.tradeDependencies[5].affectedServices[0]: "fresh meat" -> "teleportation"
+  87 economicState.primaryImports[] | r2r-village-4 economicState.primaryImports[1]: "Warehousing and logistics services" -> "Route maps and intelligence"
+  86 history.legacyAnnotations[].eventName | r2r-thorp-0 history.legacyAnnotations[0].eventName: "The Economic Divide" -> "The Shortage"
+  86 stress.cast.stakes[] | r2r-thorp-1 stress.cast.stakes[0].factionId: "Elder Council" -> "Occupation Authority"
+  86 stressors.cast.stakes[] | r2r-thorp-1 stressors.cast.stakes[0].factionId: "Elder Council" -> "Occupation Authority"
+  84 economicState.activeChains[].upstreamMissing | r2r-village-3 economicState.activeChains[2].upstreamMissing: ["warehouse_logistics"] -> undefined
+  82 powerStructure.factionRelationships[].narrative | r2r-hamlet-41 powerStructure.factionRelationships[0].narrative: "Priestly Guidance gives the orders and Military/Guard carries them out; each needs the ot -> "Headman's Authority gives the orders and Military/Guard carries them out; each needs the 
+  81 powerStructure.conflicts[] | r2r-hamlet-18 powerStructure.conflicts[0]: undefined -> {"parties":["Headman's Authority","Military/Guard"],"issue":"Precedence at public gatherin
+  81 conflicts[] | r2r-hamlet-18 conflicts[0]: undefined -> {"parties":["Headman's Authority","Military/Guard"],"issue":"Precedence at public gatherin
+  78 availableServices.transport[].desc | r2r-hamlet-20 availableServices.transport[0].desc: "Feed and shelter for traveler's horses during stays." -> "Grazing on the common for a traveller's beasts, for a small fee."
+  77 history.historicalEvents[].anchored | r2r-thorp-1 history.historicalEvents[0].anchored: true -> undefined
+  76 resourceAnalysis.economicStrengths[] | r2r-thorp-1 resourceAnalysis.economicStrengths[0]: "Milling" -> "Agriculture"
+  73 history.eventsTimeline[].anchored | r2r-thorp-1 history.eventsTimeline[0].anchored: true -> false
+  72 economicState.compound.inst | r2r-thorp-46 economicState.compound.inst.names[2]: "access to parish church" -> "wayside shrine"
+  71 powerStructure.factions[] | r2r-thorp-1 powerStructure.factions[1]: undefined -> {"faction":"Elder Council","modifier":null,"power":43,"desc":"Respected elders guide the c
+  71 npcs[].memberships[].veiled | r2r-village-53 npcs[1].memberships[0].veiled: true -> false
+  67 history.currentTensions[].lastingEffects[] | r2r-thorp-33 history.currentTensions[0].lastingEffects[0]: "Collaborator and resistance families still keep apart" -> "Council seats now formally split between the old guard and the young"
+  67 defenseProfile.readiness.score | r2r-village-4 defenseProfile.readiness.score: 14 -> 15
+  66 history.historicalEvents[].severity | r2r-thorp-5 history.historicalEvents[0].severity: "minor" -> "major"
+  64 powerStructure.factionRelationships[] | r2r-thorp-1 powerStructure.factionRelationships[0]: undefined -> {"pair":["Elder Council","Occupation Authority"],"type":"competitive","direction":"escalat
+  61 history.historicalCharacter | r2r-thorp-1 history.historicalCharacter: "This place made its name in trade, not war, and the Economic Divide showed it that money  -> "Money is discussed openly here in a way that scandalises visitors from more genteel place
+  60 economicState.tradeDependencies[] | r2r-town-10 economicState.tradeDependencies[6]: {"institution":"Teleportation circle","category":"Magic","resource":"Magical ley lines","d -> undefined
+  59 history.legacyAnnotations[].severity | r2r-thorp-5 history.legacyAnnotations[0].severity: "minor" -> "major"
+  58 institutions[].name | r2r-thorp-46 institutions[2].name: "Access to parish church" -> "Wayside shrine"
+  58 institutions[].catalogId | r2r-thorp-46 institutions[2].catalogId: "access_to_parish_church" -> "wayside_shrine"
+  57 history.currentTensions[].lastingEffects | r2r-thorp-26 history.currentTensions[0].lastingEffects: ["A standing security office and informant network persist","Denunciation records from the -> undefined
+  57 institutions[].baseChance | r2r-thorp-46 institutions[2].baseChance: 0.78 -> 0.3
+  56 institutions[].tags[] | r2r-thorp-46 institutions[2].tags[0]: "essential" -> "religious"
+  56 institutions[].exclusiveGroup | r2r-thorp-46 institutions[4].exclusiveGroup: "government" -> undefined
+  56 institutions[].priorityCategory | r2r-thorp-46 institutions[4].priorityCategory: "government" -> "religion"
+  55 powerStructure.factions[].powerLabel | r2r-thorp-41 powerStructure.factions[0].powerLabel: "Dominant" -> "Significant"
+  55 economicState.tradeDependencies[].institution | r2r-town-10 economicState.tradeDependencies[5].institution: "Butchers (3-8)" -> "Teleportation circle"
+  55 economicState.tradeDependencies[].resource | r2r-town-10 economicState.tradeDependencies[5].resource: "Livestock / game" -> "Magical ley lines"
+  55 economicState.tradeDependencies[].detail | r2r-town-10 economicState.tradeDependencies[5].detail: "live animals for slaughter" -> "stable ley line for permanent teleportation circle"
+  54 institutions[].source | r2r-thorp-46 institutions[3].source: "required" -> "generated"
+  53 resourceAnalysis.gaps[] | r2r-thorp-42 resourceAnalysis.gaps[0]: undefined -> {"chain":"medicinal herbs","missing":["Apothecary","Alchemist shop"],"impact":"Raw resourc
+  53 institutions[].required | r2r-thorp-46 institutions[3].required: true -> false
+  53 institutions[].category | r2r-thorp-46 institutions[4].category: "Government" -> "Religious"
+  53 resourceAnalysis.gaps[].impact | r2r-hamlet-12 resourceAnalysis.gaps[1].impact: "Dairy farmer exists but lacks access to livestock" -> "Raw resource available but not being processed"
+  53 economicState.tradeDependencies[].category | r2r-town-10 economicState.tradeDependencies[5].category: "Crafts" -> "Magic"
+  53 economicViability.warnings[].description | r2r-town-10 economicViability.warnings[0].description: "7 institutions depend on imported materials (Trade access + grain, Trade access, Grain).  -> "6 institutions depend on imported materials (Trade access + grain, Trade access, Grain). 
+  52 institutions[] | r2r-thorp-46 institutions[7]: undefined -> {"category":"Infrastructure","name":"Water source","required":true,"baseChance":1,"exclusi
+  52 relationships[].flagDriven | r2r-town-14 relationships[2].flagDriven: true -> false
+  48 history.historicalEvents[].yearsAgo | r2r-thorp-1 history.historicalEvents[2].yearsAgo: 39 -> 147
+  48 history.eventsTimeline[].year | r2r-thorp-1 history.eventsTimeline[2].year: 245 -> 137
+  48 history.eventsTimeline[].yearsAgo | r2r-thorp-1 history.eventsTimeline[2].yearsAgo: 39 -> 147
+  48 resourceAnalysis.gaps[].chain | r2r-hamlet-12 resourceAnalysis.gaps[1].chain: "livestock" -> "medicinal herbs"
+  47 resourceAnalysis.gaps[].severity | r2r-hamlet-12 resourceAnalysis.gaps[1].severity: "high" -> "low"
+  46 history.currentTensions[] | r2r-thorp-1 history.currentTensions[1]: {"type":"occupation_legacy","description":"Collaborator and resistance families still keep -> undefined
+  46 resourceAnalysis.resourceChains[] | r2r-thorp-42 resourceAnalysis.resourceChains[0]: undefined -> {"rawResource":"medicinal herbs","processingTags":["alchemy","healing"],"processingInstitu
+  46 economicState.incomeSources[].percentage | r2r-village-49 economicState.incomeSources[0].percentage: 58 -> 53
+  45 resourceAnalysis.gaps[].kind | r2r-hamlet-12 resourceAnalysis.gaps[1].kind: "missing" -> undefined
+  43 generationCoherenceReceipt.judgments[].findings[] | r2r-thorp-0 generationCoherenceReceipt.judgments[7].findings[1]: {"path":"battery.defense-words","detail":"walls without walls, a palisade or earthworks"," -> undefined
+  43 defenseProfile.scores.magical | r2r-village-44 defenseProfile.scores.magical: 44 -> 48
+  42 powerStructure.factionRelationships[].ratio | r2r-hamlet-59 powerStructure.factionRelationships[0].ratio: 0.71 -> 0.79
+  42 institutions[].cascadeBoost | r2r-town-10 institutions[25].cascadeBoost: undefined -> 1.55
+  41 history.historicalEvents[].type | r2r-thorp-1 history.historicalEvents[2].type: "political" -> "economic"
+  41 history.eventsTimeline[].type | r2r-thorp-1 history.eventsTimeline[2].type: "political" -> "economic"
+  41 prominentRelationship | r2r-thorp-2 prominentRelationship: {"npc1":"Jagannath Acharya","npc2":"Satyajit Bajaj","type":"Pragmatic Alliance","phrasing" -> null
+  41 institutions[].tier | r2r-town-10 institutions[25].tier: undefined -> "town"
+  41 institutions[].cascadeAdded | r2r-town-10 institutions[25].cascadeAdded: undefined -> true
+  41 availableServices.equipment[].name | r2r-town-10 availableServices.equipment[0].name: "Arrow production" -> "Charcoal supply"
+  41 availableServices.equipment[].institution | r2r-town-10 availableServices.equipment[0].institution: "Bowyers & fletchers (guild)" -> "Charcoal burner"
+  40 powerStructure.governingName | r2r-thorp-2 powerStructure.governingName: "Priestly Guidance" -> "Elder Council"
+  40 powerStructure.government | r2r-thorp-2 powerStructure.government: "Priestly Guidance" -> "Elder Council"
+  40 economicState.incomeSources[].weight | r2r-town-10 economicState.incomeSources[4].weight: 20 -> 22
+  40 economicState.activeChains[].entrepotNote | r2r-town-10 economicState.activeChains[3].entrepotNote: null -> "Magical items are among the highest-value trade goods. Cities near magical nodes become d
+  39 resourceAnalysis.gaps[].institution | r2r-hamlet-12 resourceAnalysis.gaps[1].institution: "Dairy farmer" -> undefined
+  39 economicState.incomeSources[].source | r2r-town-10 economicState.incomeSources[4].source: "Property Rents" -> "Grain Sales"
+  38 availableServices.equipment[] | r2r-village-22 availableServices.equipment[6]: undefined -> {"name":"Weapon creation","desc":"Simple arms, hunting knives, farm tools","institution":"
+  37 npcs[].stressNote | r2r-thorp-11 npcs[0].stressNote: undefined -> "Since the war began, every decision here comes back to the army, and the crown's requisit
+  37 simulationTrace[].downstreamEffects[].reason | r2r-hamlet-34 simulationTrace[21].downstreamEffects[0].reason: "Capacity 34/28." -> undefined
+  37 economicState.incomeSources[] | r2r-village-49 economicState.incomeSources[4]: undefined -> {"source":"Stone Quarrying","percentage":8,"desc":"Local quarry provides dressed stone to 
+  37 economicState.activeChains[].resourceInputCondition | r2r-town-1 economicState.activeChains[1].resourceInputCondition: "depleted" -> "available"
+  37 economicState.activeChains[].resourceInputAvailable | r2r-town-1 economicState.activeChains[1].resourceInputAvailable: false -> true
+  37 institutions[].forbiddenTradeRoutes | r2r-town-10 institutions[13].forbiddenTradeRoutes: undefined -> ["isolated"]
+  37 npcs[].allegiance.handler | r2r-town-31 npcs[14].allegiance.handler: "npc_veiled_db7404858b113aaf" -> "npc_veiled_cb30a4db05e63182"
+  37 economicState.activeChains[].upstreamWeak | r2r-city-21 economicState.activeChains[9].upstreamWeak: ["smelting"] -> undefined
+  36 availableServices.legal[].institution | r2r-town-10 availableServices.legal[1].institution: "Merchant guilds (3-8)" -> "Town hall"
+  35 stress.crisisHook | r2r-thorp-17 stress.crisisHook: "A grain merchant has food, enough to matter. They will sell it, but their price is not mo -> "Someone here still has food put by, enough to matter. They will sell it, but their price 
+  35 stressors.crisisHook | r2r-thorp-17 stressors.crisisHook: "A grain merchant has food, enough to matter. They will sell it, but their price is not mo -> "Someone here still has food put by, enough to matter. They will sell it, but their price 
+  35 availableServices.legal[].name | r2r-town-10 availableServices.legal[1].name: "Credit letters" -> "Dispute arbitration"
+  35 availableServices.legal[].desc | r2r-town-10 availableServices.legal[1].desc: "Issue letters of credit honored at affiliated guilds in other cities." -> "Bring commercial and civil disputes before a magistrate."
+  34 powerStructure.factions[].modifier | r2r-thorp-1 powerStructure.factions[0].modifier: null -> undefined
+  34 history.historicalEvents[] | r2r-thorp-1 history.historicalEvents[3]: undefined -> {"yearsAgo":39,"type":"political","name":"The Uprising","description":"The common people r
+  34 history.eventsTimeline[] | r2r-thorp-1 history.eventsTimeline[3]: undefined -> {"year":245,"yearsAgo":39,"name":"The Uprising","type":"political","anchored":false}
+  34 institutions[].magicLicense | r2r-town-10 institutions[13].magicLicense: undefined -> "none"
+  33 history.legacyAnnotations[].yearsAgo | r2r-thorp-34 history.legacyAnnotations[1].yearsAgo: 41 -> 68
+  32 powerStructure.factions[].isGoverning | r2r-thorp-1 powerStructure.factions[0].isGoverning: true -> undefined
+  32 stress.cast.absent[] | r2r-thorp-1 stress.cast.absent[0]: {"role":"face","reason":"no occupying power on the roster"} -> undefined
+  32 stressors.cast.absent[] | r2r-thorp-1 stressors.cast.absent[0]: {"role":"face","reason":"no occupying power on the roster"} -> undefined
+  32 availableServices.healing[].name | r2r-thorp-46 availableServices.healing[1].name: "Weekly rite" -> "Wayside blessing"
+  32 availableServices.healing[].desc | r2r-thorp-46 availableServices.healing[1].desc: "The weekly service. Attendance expected of all residents." -> "A brief blessing for travelers on the road. Costs nothing; donations welcomed."
+  31 resourceAnalysis.exploitation.unexploited[] | r2r-thorp-42 resourceAnalysis.exploitation.unexploited[0]: undefined -> {"rawResource":"medicinal herbs","processingTags":["alchemy","healing"],"processingInstitu
+  31 availableServices.information[] | r2r-hamlet-20 availableServices.information[2]: undefined -> {"name":"Record keeping","desc":"Maintain accounts, rental rolls, and estate documents.","
+  31 availableServices.information[].name | r2r-city-0 availableServices.information[0].name: "Archive consultation" -> "Claim grading"
+  31 availableServices.information[].desc | r2r-city-0 availableServices.information[0].desc: "Search the archive that cross-checks one road's report against another's." -> "Have a claim graded against every road the exchange keeps."
+  30 availableServices.healing[].institution | r2r-thorp-46 availableServices.healing[1].institution: "Access to parish church" -> "Wayside shrine"
+  30 availableServices.healing[] | r2r-thorp-46 availableServices.healing[2]: undefined -> {"name":"Weekly rite","desc":"The weekly service. Attendance expected of all residents.","
+  30 availableServices.information[].institution | r2r-city-0 availableServices.information[1].institution: "Chroniclers' exchange" -> "Cartographer's guild"
+  29 availableServices.legal[] | r2r-town-10 availableServices.legal[7]: {"name":"Night patrol","desc":"Patrol the streets after dark. Deter crime and respond to i -> undefined
+  28 history.siegeNarrative | r2r-thorp-1 history.siegeNarrative: "The Uprising is still present in living memory: A surge in criminal activity overwhelmed  -> null
+  28 culturalIdentity.builtForm | r2r-thorp-27 culturalIdentity.builtForm: "Stone and plaster courtyard houses rise around an agora, stoas, shrines, and steep connec -> "Stone and plaster houses with whitewashed courts stand close together."
+  28 culturalNotes | r2r-thorp-27 culturalNotes: "Household, citizenship, association, patronage, public rhetoric, and military service def -> "Household, citizenship, association, patronage, public rhetoric, and military service def
+  28 resourceAnalysis.gaps[].missing | r2r-hamlet-12 resourceAnalysis.gaps[1].missing: undefined -> ["Apothecary","Alchemist shop"]
+  28 defenseProfile.scores.economic | r2r-hamlet-36 defenseProfile.scores.economic: 9 -> 10
+  28 powerStructure.factionRelationships[].pair[] | r2r-hamlet-41 powerStructure.factionRelationships[0].pair[0]: "Priestly Guidance" -> "Headman's Authority"
+  28 powerStructure.criminalCaptureState | r2r-hamlet-54 powerStructure.criminalCaptureState: "corrupted" -> "none"
+  28 powerStructure.factionRelationships[].type | r2r-town-2 powerStructure.factionRelationships[1].type: "subordinate" -> "tense"
+  28 availableServices.employment[].name | r2r-town-10 availableServices.employment[0].name: "Apprenticeship programs" -> "Guard hire"
+  28 availableServices.employment[].desc | r2r-town-10 availableServices.employment[0].desc: "Formal training under a master craftsperson. Multi-year commitment." -> "Soldiers available for static guard duty on contract."
+  28 availableServices.employment[].institution | r2r-town-10 availableServices.employment[0].institution: "Craft guilds (5-15)" -> "Barracks"
+  27 powerStructure.factions[].captureState | r2r-hamlet-54 powerStructure.factions[0].captureState: "corrupted" -> undefined
+  26 availableServices.transport[] | r2r-hamlet-20 availableServices.transport[1]: {"name":"Pasturage","desc":"Grazing on the common for a traveller's beasts, for a small fe -> undefined
+  26 powerStructure.factions[].name | r2r-city-7 powerStructure.factions[5].name: "The Guild Alliance" -> "The Martial Alliance"
+  26 powerStructure.factions[].contestsNiche | r2r-city-7 powerStructure.factions[5].contestsNiche: "Merchant Guilds" -> "Military/Guard"
+  26 institutions[].exclusiveGroupCoexists | r2r-city-17 institutions[45].exclusiveGroupCoexists: undefined -> true
+  25 stress.viabilityNote | r2r-thorp-41 stress.viabilityNote: "Fewer people come to market, travel is discouraged, and some goods stop arriving." -> "Travel is discouraged, and some goods stop arriving."
+  25 stressors.viabilityNote | r2r-thorp-41 stressors.viabilityNote: "Fewer people come to market, travel is discouraged, and some goods stop arriving." -> "Travel is discouraged, and some goods stop arriving."
+  25 npcs[].allegiance.vector | r2r-village-10 npcs[1].allegiance.vector: "greed" -> "hunger_for_status"
+  25 stress.cast.levers[] | r2r-town-3 stress.cast.levers[1].holderId: "npc_mayor_and_council" -> "npc_docks_port_facilities"
+  25 stressors.cast.levers[] | r2r-town-3 stressors.cast.levers[1].holderId: "npc_mayor_and_council" -> "npc_docks_port_facilities"
+  25 availableServices.employment[] | r2r-town-16 availableServices.employment[2]: {"name":"Tax collection","desc":"Toll collected on goods sold. A share goes to the lord or -> undefined
+  25 npcs[].allegiance.house | r2r-town-31 npcs[12].allegiance.house: "Street gang" -> "Front businesses"
+  25 availableServices.entertainment[].name | r2r-town-33 availableServices.entertainment[0].name: "Private entertainment" -> "Games of chance"
+  25 availableServices.entertainment[].desc | r2r-town-33 availableServices.entertainment[0].desc: "Hire the troupe for private events and festivals." -> "Dice, cards, and other games of chance. House always wins in aggregate."
+  24 availableServices.transport[].name | r2r-hamlet-20 availableServices.transport[0].name: "Basic horse care" -> "Pasturage"
+  24 availableServices.transport[].institution | r2r-hamlet-20 availableServices.transport[0].institution: "Stable yard" -> "Common grazing land"
+  24 resourceAnalysis.resourceConditions[].condition | r2r-village-50 resourceAnalysis.resourceConditions[3].condition: "depleted" -> "available"
+  24 resourceAnalysis.resourceConditions[].conditionDescription | r2r-village-50 resourceAnalysis.resourceConditions[3].conditionDescription: "The grove has been damaged or over-harvested beyond present use." -> null
+  24 resourceAnalysis.conditionNotes[] | r2r-village-50 resourceAnalysis.conditionNotes[0]: "The grove has been damaged or over-harvested beyond present use." -> "The workable quarry face is exhausted."
+  24 config.nearbyResourcesDepleted[] | r2r-village-50 config.nearbyResourcesDepleted[0]: "ancient_grove" -> "stone_quarry"
+  24 config.nearbyResourcesNativeDepleted[] | r2r-village-50 config.nearbyResourcesNativeDepleted[0]: "ancient_grove" -> "stone_quarry"
+  24 economicState.activeChains[].resourceDepleted | r2r-town-1 economicState.activeChains[2].resourceDepleted: true -> false
+  24 availableServices.entertainment[].institution | r2r-town-33 availableServices.entertainment[0].institution: "Traveling performers" -> "Gambling den"
+  24 institutions[].serviceKeys | r2r-city-17 institutions[71].serviceKeys: undefined -> ["info_calibration","info_query","info_feed","info_plant"]
+  23 history.founding.reason | r2r-hamlet-12 history.founding.reason: "grew from a logging camp" -> "was founded by foresters managing the woodland under charter"
+  23 resourceAnalysis.imports.critical[] | r2r-village-44 resourceAnalysis.imports.critical[3]: "medicinal herbs" -> "hot_springs_mineral"
+  23 resourceAnalysis.imports.reasons | r2r-village-44 resourceAnalysis.imports.reasons.medicinal herbs: "Required by Apothecary but not available in Plains terrain" -> undefined
+  23 availableServices.food[] | r2r-town-10 availableServices.food[4]: undefined -> {"name":"Meals and drink","desc":"Hot meals and a range of drinks at multiple venues.","in
+  22 history.legacyAnnotations[].eventType | r2r-thorp-34 history.legacyAnnotations[1].eventType: "economic" -> "religious"
+  22 resourceAnalysis.exports[] | r2r-village-4 resourceAnalysis.exports[1]: undefined -> {"product":"leather goods, cheese, preserved meat","chain":"livestock","value":"medium","r
+  22 availableServices.criminal[].name | r2r-city-0 availableServices.criminal[3].name: "Discreet passage" -> "Customs bypass"
+  22 availableServices.criminal[].desc | r2r-city-0 availableServices.criminal[3].desc: "Move people beneath the walls unseen." -> "Get shipments past checkpoints without inspection."
+  21 availableServices.entertainment[] | r2r-town-33 availableServices.entertainment[1]: {"name":"Public performance","desc":"Street and square performances: juggling, music, come -> undefined
+  20 powerStructure.factions[].modifiers | r2r-thorp-1 powerStructure.factions[0].modifiers: ["occupied"] -> undefined
+  20 availableServices.lodging[].desc | r2r-village-22 availableServices.lodging[0].desc: "Beds for travelers. Range from dormitory to private room." -> "A bed by the hearth and a place at a shared table, for a traveller who asks."
+  20 availableServices.food[].desc | r2r-city-0 availableServices.food[4].desc: "Tripe, tallow, bone, hide. Nothing wasted. By-products sold to chandlers and tanners." -> "Pies, tarts, and pastries. More expensive, available to those who can afford it."
+  20 availableServices.criminal[].institution | r2r-city-0 availableServices.criminal[3].institution: "Underground network" -> "Smuggling network"
+  19 defenseProfile.scores.military | r2r-town-10 defenseProfile.scores.military: 56 -> 91
+  19 availableServices.food[].name | r2r-city-0 availableServices.food[4].name: "Offal and by-products" -> "Pastries"
+  19 availableServices.food[].institution | r2r-city-0 availableServices.food[4].institution: "Butchers (3-8)" -> "Bakers (5-15)"
+  18 generationCoherenceReceipt.judgments[].status | r2r-thorp-53 generationCoherenceReceipt.judgments[7].status: "needs_review" -> "pass"
+  18 economicState.activeChains[].magicNote | r2r-town-1 economicState.activeChains[0].magicNote: "Druidic cultivation supplements depleted farmland" -> "Alchemical remedies supplement treatment"
+  18 economicState.activeChains[].magicRecovery | r2r-town-1 economicState.activeChains[0].magicRecovery: 0.65 -> undefined
+  18 institutions[].coherenceRepair | r2r-town-47 institutions[28].coherenceRepair: "threat_defense" -> undefined
+  18 institutions[].facets | r2r-city-0 institutions[54].facets: {"clandestine":"clandestine","subterranean":"subterranean"} -> undefined
+  17 npcs[].personality | r2r-thorp-5 npcs[1].personality: {"dominant":null,"flaw":"cold-blooded","modifier":"opportunistic","tell":"flinches slightl -> undefined
+  17 npcs[].physical | r2r-thorp-5 npcs[1].physical: {"age":"early fifties","build":"tall with a slight stoop","feature":"laugh lines that run  -> undefined
+  17 npcs[].goal | r2r-thorp-5 npcs[1].goal: {"short":"Pay every hand at the shepherd collective in full and on time this season.","lon -> undefined
+  17 npcs[].secret | r2r-thorp-5 npcs[1].secret: {"what":"Has been reading Cnoc O'Brien's correspondence through an intermediary. Nothing d -> undefined
+  17 npcs[].plotHooks | r2r-thorp-5 npcs[1].plotHooks: ["The well gives good water. The spring above it dried up three years ago. No one mentions -> undefined
+  17 npcs[].presentation | r2r-thorp-5 npcs[1].presentation: {"impression":"Watchful of strangers near the flocks. The dog does not take its eyes off y -> undefined
+  17 npcs[].institution | r2r-thorp-5 npcs[1].institution: {"kind":"house","key":"Shepherd collective","family":"Shepherd","title":"the head shepherd -> undefined
+  17 npcs[].temporary | r2r-thorp-5 npcs[1].temporary: undefined -> true
+  17 npcs[].temporaryKind | r2r-thorp-5 npcs[1].temporaryKind: undefined -> "warden"
+  17 npcs[].crisisIds | r2r-thorp-5 npcs[1].crisisIds: undefined -> ["monster_pressure"]
+  17 powerStructure.factions[].legitimacyCrisis | r2r-thorp-16 powerStructure.factions[0].legitimacyCrisis: undefined -> true
+  17 powerStructure.factions[].crisisNote | r2r-thorp-16 powerStructure.factions[0].crisisNote: undefined -> "Holds the title, but the decisions that matter are made elsewhere."
+  17 availableServices.lodging[] | r2r-village-22 availableServices.lodging[1]: {"name":"Hospitality","desc":"A bed by the hearth and a place at a shared table, for a tra -> undefined
+  17 availableServices.criminal[] | r2r-city-0 availableServices.criminal[9]: undefined -> {"name":"Unofficial arbitration","desc":"Commercial disputes resolved outside the courts: 
+  17 defenseProfile.chainModifiers.military | r2r-city-5 defenseProfile.chainModifiers.military: -5 -> 5
+  16 powerStructure.recentConflict | r2r-hamlet-41 powerStructure.recentConflict: "The church is demanding veto power over council appointments. Priestly Guidance has not y -> "The church is demanding veto power over council appointments. Headman's Authority has not
+  16 economicState.safetyProfile.criminalInstitutions[] | r2r-town-33 economicState.safetyProfile.criminalInstitutions[1]: undefined -> "Gambling Den"
+  16 powerStructure.factionRelationships[].captureState | r2r-town-40 powerStructure.factionRelationships[2].captureState: "equilibrium" -> "capture"
+  15 resourceAnalysis.priorityNotes[] | r2r-thorp-42 resourceAnalysis.priorityNotes[0]: undefined -> "Strong economic focus creates pressure to develop untapped medicinal herbs: significant t
+  15 resourceAnalysis.exploitation.fullyExploited[] | r2r-village-4 resourceAnalysis.exploitation.fullyExploited[0].rawResource: "livestock" -> "grain"
+  15 powerStructure.factionRelationships[].dmNote | r2r-town-13 powerStructure.factionRelationships[0].dmNote: null -> undefined
+  15 availableServices.magic[].name | r2r-city-0 availableServices.magic[0].name: "Arcane identification" -> "Enchantment services"
+  15 availableServices.magic[].desc | r2r-city-0 availableServices.magic[0].desc: "Identify the properties of magical items and substances." -> "Apply magical properties to weapons, armour, tools, and objects to commission."
+  14 history.legacyAnnotations[] | r2r-thorp-1 history.legacyAnnotations[1]: undefined -> {"annotation":"As of the founding survey, the Iron Dispute (147 years ago) set up ways of 
+  14 npcs[].allegiance.via | r2r-village-10 npcs[4].allegiance.via: "retainer" -> "front"
+  14 availableServices.lodging[].name | r2r-village-22 availableServices.lodging[0].name: "Accommodation" -> "Hospitality"
+  14 availableServices.lodging[].institution | r2r-village-22 availableServices.lodging[0].institution: "Travelers' inn" -> "Dwellings (15-100)"
+  14 defenseProfile.scores.monster | r2r-town-10 defenseProfile.scores.monster: 35 -> 45
+  14 spatialLayout.quarters[].landmarks[] | r2r-city-0 spatialLayout.quarters[3].landmarks[0]: "Wizard's tower" -> "The Rat's Nest (tavern)"
+  14 availableServices.magic[] | r2r-city-0 availableServices.magic[1]: undefined -> {"name":"Item identification","desc":"Identify the properties and history of magical items
+  13 history.currentTensions[].specificIssue | r2r-thorp-54 history.currentTensions[0].specificIssue: undefined -> "Settlement cannot cover ~13 lbs of food per day (38% of needs) and has no dependable trad
+  13 economicState.foodSecurity.resilienceScore | r2r-hamlet-36 economicState.foodSecurity.resilienceScore: 39 -> 50
+  13 defenseProfile.scores.disaster | r2r-hamlet-36 defenseProfile.scores.disaster: 25 -> 32
+  13 spatialLayout.quarters[] | r2r-city-0 spatialLayout.quarters[6]: {"name":"Common Residential","location":"Spread throughout","desc":"Dense timber tenements -> undefined
+  13 economicState.institutionalServices[].institutions[] | r2r-city-36 economicState.institutionalServices[3].institutions[1]: undefined -> "mercenary quarter"
+  12 economicState.foodSecurity.chains | r2r-hamlet-36 economicState.foodSecurity.chains.Hunting & foraging: false -> true
+  12 economicState.foodSecurity.activeChains[] | r2r-hamlet-36 economicState.foodSecurity.activeChains[0]: undefined -> "Hunting & foraging"
+  12 economicState.foodSecurity.activeChainsCount | r2r-hamlet-36 economicState.foodSecurity.activeChainsCount: 0 -> 1
+  12 economicState.foodSecurity.diversityNote | r2r-hamlet-36 economicState.foodSecurity.diversityNote: "lives from its own plots and commons; nothing grown beyond the table" -> "single food source"
+  12 availableServices.magic[].institution | r2r-city-0 availableServices.magic[0].institution: "Wizard's tower" -> "Enchanter's shop"
+  11 powerStructure.publicLegitimacy.breakdown | r2r-hamlet-20 powerStructure.publicLegitimacy.breakdown.prosperity: 8 -> 0
+  11 resourceAnalysis.resourceChains[].rawResource | r2r-village-4 resourceAnalysis.resourceChains[1].rawResource: "livestock" -> "grain"
+  11 resourceAnalysis.resourceChains[].processingTags[] | r2r-village-4 resourceAnalysis.resourceChains[1].processingTags[1]: "leather" -> "agriculture"
+  11 resourceAnalysis.resourceChains[].processingInstitutions[] | r2r-village-4 resourceAnalysis.resourceChains[1].processingInstitutions[0]: "Butcher" -> "Mill"
+  11 resourceAnalysis.resourceChains[].intermediateGoods[] | r2r-village-4 resourceAnalysis.resourceChains[1].intermediateGoods[0]: "meat" -> "flour"
+  11 resourceAnalysis.resourceChains[].finalProducts[] | r2r-village-4 resourceAnalysis.resourceChains[1].finalProducts[0]: "leather goods" -> "bread"
+  11 resourceAnalysis.resourceChains[].dependsOn[] | r2r-village-4 resourceAnalysis.resourceChains[1].dependsOn[0]: "grazing land" -> "farmland"
+  11 resourceAnalysis.resourceChains[].chainKey | r2r-village-4 resourceAnalysis.resourceChains[1].chainKey: "livestock" -> "grain"
+  11 economicViability.metrics.foodBalance | r2r-village-4 economicViability.metrics.foodBalance.dailyProduction: 983 -> 1036
+  11 resourceAnalysis.exploitation.partiallyExploited[] | r2r-town-5 resourceAnalysis.exploitation.partiallyExploited[0]: undefined -> {"rawResource":"medicinal herbs","processingTags":["alchemy","healing"],"processingInstitu
+  11 institutions[].nativeTier | r2r-city-21 institutions[77].nativeTier: "city" -> undefined
+  11 economicViability.plotHooks[].hook | r2r-metropolis-1 economicViability.plotHooks[0].hook: "The iron carts are three weeks late and the carters will not say why. The smiths are rati -> "The iron merchants have doubled their price this season, and the smiths are mending tools
+  10 powerStructure.publicLegitimacy.score | r2r-hamlet-20 powerStructure.publicLegitimacy.score: 57 -> 49
+  10 economicState.safetyProfile.plotHooks[] | r2r-city-0 economicState.safetyProfile.plotHooks[1]: "The smuggling network is moving something unusual this week, not the normal contraband. S -> "The smugglers have stopped moving their usual goods this week, and nobody can say why."
+  10 spatialLayout.quarters[].name | r2r-city-0 spatialLayout.quarters[3].name: "Mages' Quarter" -> "Shadows District"
+  10 spatialLayout.quarters[].location | r2r-city-0 spatialLayout.quarters[3].location: "Isolated area (safety concerns)" -> "Old town or slums"
+  10 spatialLayout.quarters[].desc | r2r-city-0 spatialLayout.quarters[3].desc: "Towers, arcane shops, strange lights and sounds at night" -> "Narrow alleys, hidden markets, criminal activity"
+  10 stress[].crisisHook | r2s-occupied-thorp-1 stress[1].crisisHook: "A grain merchant has food, enough to matter. They will sell it, but their price is not mo -> "Someone here still has food put by, enough to matter. They will sell it, but their price 
+  10 stressors[].crisisHook | r2s-occupied-thorp-1 stressors[1].crisisHook: "A grain merchant has food, enough to matter. They will sell it, but their price is not mo -> "Someone here still has food put by, enough to matter. They will sell it, but their price 
+   9 economicViability.suggestions[] | r2r-hamlet-22 economicViability.suggestions[0]: undefined -> {"category":"Resource Chain","title":"Opportunity: process marshlands","description":"mars
+   9 economicState.foodSecurity.dailyProduction | r2r-village-4 economicState.foodSecurity.dailyProduction: 983 -> 1036
+   9 economicState.institutionalServices[] | r2r-city-0 economicState.institutionalServices[2]: {"type":"institutional_service","label":"Entertainment & Culture","color":"#7a3a1a","outpu -> undefined
+   9 economicState.safetyProfile.crimeTypes[] | r2r-city-50 economicState.safetyProfile.crimeTypes[0].desc: "Members of the mages' guild who operate outside legal channels supply a sophisticated und -> "Alchemists and members of the mages' guild who operate outside legal channels supply a so
+   8 economicState.activeChains[].externalMillNote | r2r-thorp-13 economicState.activeChains[0].externalMillNote: "Grain is processed at the lord's mill under feudal monopoly (banalité). Local food securi -> null
+   8 institutions[].forbiddenResources | r2r-city-0 institutions[54].forbiddenResources: ["marshlands","fertile_floodplain"] -> undefined
+   8 economicState.foodSecurity.rawDeficit | r2r-city-0 economicState.foodSecurity.rawDeficit: 3355 -> 3659
+   8 economicState.foodSecurity.importCoverage | r2r-city-0 economicState.foodSecurity.importCoverage: 3355 -> 3659
+   8 defenseProfile.institutions.magicDef[] | r2r-city-0 defenseProfile.institutions.magicDef[0]: {"name":"Wizard's tower","category":"Magic","tier":"city","required":false,"baseChance":0. -> undefined
+   8 generationCoherenceReceipt.repairs[] | r2r-city-0 generationCoherenceReceipt.repairs[0]: {"id":"repair.1","type":"hard_dependency","action":"added","subject":"Bardic college","rea -> undefined
+   8 npcs[].allegiance.power | r2r-city-50 npcs[31].allegiance.power: "The Black Circle" -> "Thieves' Guild"
+   7 economicState.foodSecurity.storageMonths | r2r-hamlet-36 economicState.foodSecurity.storageMonths: 1.5 -> 1.8
+   7 economicState.foodSecurity.foodRatio | r2r-village-4 economicState.foodSecurity.foodRatio: 1.26 -> 1.33
+   7 resourceAnalysis.resourceChains[].exportValue | r2r-village-4 resourceAnalysis.resourceChains[2].exportValue: "high" -> "medium"
+   7 economicState.safetyProfile.guardEffectivenessDesc | r2r-town-10 economicState.safetyProfile.guardEffectivenessDesc: "You will see the town watch on the rounds most hours of the day; it catches the careless  -> "The garrison and town watch is well paid, well equipped and patrols properly. They come w
+   7 powerStructure.factionRelationships[].direction | r2r-town-13 powerStructure.factionRelationships[3].direction: "stable" -> "declining"
+   7 economicState.foodSecurity.importPct | r2r-city-0 economicState.foodSecurity.importPct: 31 -> 34
+   7 economicState.foodSecurity.importNote | r2r-city-0 economicState.foodSecurity.importNote: "31% imported: meaningful external dependency" -> "34% imported: meaningful external dependency"
+   7 defenseProfile.readiness.label | r2r-city-21 defenseProfile.readiness.label: "Well-Defended" -> "Fortress"
+   7 defenseProfile.readiness.color | r2r-city-21 defenseProfile.readiness.color: "#1a3a6a" -> "#1a4a2a"
+   7 defenseProfile.readiness.background | r2r-city-21 defenseProfile.readiness.background: "#f0f4fa" -> "#f0faf2"
+   7 defenseProfile.readiness.border | r2r-city-21 defenseProfile.readiness.border: "#a8c0d8" -> "#a8d8b0"
+   7 institutions[].factionSource | r2r-city-26 institutions[61].factionSource: undefined -> "Thieves' Guild"
+   7 economicState.institutionalServices[].label | r2r-city-50 economicState.institutionalServices[2].label: "Religious Revenue" -> "Military Contracts"
+   7 economicState.institutionalServices[].output | r2r-city-50 economicState.institutionalServices[2].output: "Religious services" -> "Armed escort & mercenary hire"
+   7 economicState.institutionalServices[].exportLabel | r2r-city-50 economicState.institutionalServices[2].exportLabel: "Pilgrimage & religious tourism" -> "Military contract services"
+   6 defenseProfile.chainModifiers.economic | r2r-village-4 defenseProfile.chainModifiers.economic: 0 -> 5
+   6 defenseProfile.scores.traditions | r2r-town-10 defenseProfile.scores.traditions.hasDruid: true -> false
+   6 resourceAnalysis.strategicValue | r2r-town-27 resourceAnalysis.strategicValue: "Low-Medium - provides game, difficult to besiege" -> "Low-Medium - provides timber and game, difficult to besiege"
+   6 resourceAnalysis.gaps[].missing[] | r2r-town-47 resourceAnalysis.gaps[0].missing[0]: "Sawmill" -> "Weavers' guild"
+   6 economicState.activeChains[].upstreamMissing[] | r2r-town-57 economicState.activeChains[7].upstreamMissing[0]: "warehouse_logistics" -> "food_processing"
+   6 defenseProfile.institutions.walls[] | r2r-city-0 defenseProfile.institutions.walls[1]: {"name":"Citadel","category":"Defense","tier":"city","required":false,"baseChance":0.4,"de -> undefined
+   6 stress[].cast.roles[] | r2r-city-33 stress[0].cast.roles[1].id: "npc_merchant_oligarchy" -> "npc_merchant_guilds_15_40"
+   6 stressors[].cast.roles[] | r2r-city-33 stressors[0].cast.roles[1].id: "npc_merchant_oligarchy" -> "npc_merchant_guilds_15_40"
+   6 economicState.foodSecurity.deficitPct | r2r-city-36 economicState.foodSecurity.deficitPct: 5 -> 0
+   6 economicState.foodSecurity.deficit | r2r-city-36 economicState.foodSecurity.deficit: 1348 -> 0
+   6 economicState.institutionalServices[].color | r2r-city-50 economicState.institutionalServices[2].color: "#5a3a1a" -> "#8b1a1a"
+   5 powerStructure.economyInputFingerprint | r2r-hamlet-20 powerStructure.economyInputFingerprint: "power-economy-v1:aa0a66be" -> "power-economy-v1:78c3574d"
+   5 resourceAnalysis.exports[].product | r2r-village-4 resourceAnalysis.exports[0].product: "leather goods, cheese, preserved meat" -> "bread, beer, animal feed"
+   5 resourceAnalysis.exports[].chain | r2r-village-4 resourceAnalysis.exports[0].chain: "livestock" -> "grain"
+   5 defenseProfile.traditions.hasDruid | r2r-town-10 defenseProfile.traditions.hasDruid: true -> false
+   5 economicState.foodSecurity.storageNote | r2r-town-47 economicState.foodSecurity.storageNote: "6.3 months buffer" -> "6.5 months buffer"
+   5 stress[].cast.stakes[] | r2r-city-56 stress[0].cast.stakes[3].factionId: "Craft Guilds" -> "Arcane Orders"
+   5 stressors[].cast.stakes[] | r2r-city-56 stressors[0].cast.stakes[3].factionId: "Craft Guilds" -> "Arcane Orders"
+   5 defenseProfile.institutions.charter[] | r2r-metropolis-1 defenseProfile.institutions.charter[0].nativeTier: "metropolis" -> undefined
+   4 economicViability.suggestions[].description | r2r-town-10 economicViability.suggestions[0].description: "Processing marshlands but missing Chandler, Ropemaker for the full chain." -> "marshlands is available locally. Add Chandler or Ropemaker or Merchant guilds (3-8) to un
+   4 defenseProfile.scores.magicDependency | r2r-city-0 defenseProfile.scores.magicDependency: true -> false
+   4 defenseProfile.magicDependency | r2r-city-0 defenseProfile.magicDependency: true -> false
+   4 economicState.safetyProfile.flags | r2r-metropolis-41 economicState.safetyProfile.flags.arcaneBlackMarket: false -> true
+   4 economicState.foodSecurity.magicOffset | r2r-metropolis-41 economicState.foodSecurity.magicOffset: 2850 -> 1315
+   4 economicViability.issues[].description | r2s-under_siege-town-1 economicViability.issues[2].description: "10 institutions critically impaired by siege: Weekly market, Market square, Taverns (5-20 -> "9 institutions critically impaired by siege: Weekly market, Market square, Taverns (5-20)
+   4 stress[].cast.absent[] | r2s-occupied-thorp-1 stress[0].cast.absent[0]: {"role":"face","reason":"no occupying power on the roster"} -> undefined
+   4 stressors[].cast.absent[] | r2s-occupied-thorp-1 stressors[0].cast.absent[0]: {"role":"face","reason":"no occupying power on the roster"} -> undefined
+   4 economicViability.summary | r2s-occupied-metropolis-0 economicViability.summary: "✓ VIABLE: Settlement can survive but has 4 operational dependencies that require active m -> "✓ VIABLE: Settlement can survive but has 3 operational dependencies that require active m
+   3 economicState.safetyProfile.safetyDesc | r2r-town-10 economicState.safetyProfile.safetyDesc: "Crime exists but is well-managed. The watch is present and responsive. Petty theft is the -> "Crime exists but is well-managed. The garrison is present and responsive. Petty theft is 
+   3 defenseProfile.scores.internal | r2r-town-10 defenseProfile.scores.internal: 48 -> 68
+   3 economicViability.warnings[] | r2r-town-47 economicViability.warnings[0]: {"severity":"note","title":"Trade Dependencies","description":"4 institutions depend on im -> undefined
+   3 economicViability.metrics.warningCount | r2r-town-47 economicViability.metrics.warningCount: 1 -> 0
+   3 powerStructure.publicLegitimacy.label | r2r-city-26 powerStructure.publicLegitimacy.label: "Tolerated" -> "Approved"
+   3 powerStructure.publicLegitimacy.color | r2r-city-26 powerStructure.publicLegitimacy.color: "#a0762a" -> "#4a7a2a"
+   3 powerStructure.publicLegitimacy.bg | r2r-city-26 powerStructure.publicLegitimacy.bg: "#faf8ec" -> "#f4faf0"
+   3 powerStructure.publicLegitimacy.govMultiplier | r2r-city-26 powerStructure.publicLegitimacy.govMultiplier: 1 -> 1.15
+   3 powerStructure.publicLegitimacy.crimMultiplier | r2r-city-26 powerStructure.publicLegitimacy.crimMultiplier: 1 -> 0.9
+   3 defenseProfile.institutions.mercenary[] | r2r-city-36 defenseProfile.institutions.mercenary[0]: undefined -> {"category":"Defense","name":"Mercenary quarter","required":false,"baseChance":0.6,"desc":
+   3 economicState.institutionalServices[].exportable | r2r-metropolis-2 economicState.institutionalServices[4].exportable: false -> true
+   3 resourceAnalysis.exports[].reason | r2r-metropolis-4 resourceAnalysis.exports[0].reason: "Partial processing - exports semi-finished goods" -> "Complete production chain in place"
+   3 economicViability.plotHooks[] | r2s-occupied-metropolis-0 economicViability.plotHooks[1]: {"category":"Strategic Resource","severity":"medium","hook":"War has taken the iron: the m -> undefined
+   2 history.legacyAnnotations | r2r-thorp-17 history.legacyAnnotations: [{"annotation":"As of the founding survey, the Great Construction (125 years ago) set up w -> undefined
+   2 economicState.prosperity | r2r-hamlet-20 economicState.prosperity: "Comfortable" -> "Moderate"
+   2 economicState.compound.militaryEffective | r2r-town-10 economicState.compound.militaryEffective: 58.59 -> 78.9
+   2 economicState.safetyProfile.safetyRatio | r2r-town-10 economicState.safetyProfile.safetyRatio: 2.1 -> 2.8
+   2 economicState.foodSecurity.magicSupplement | r2r-town-10 economicState.foodSecurity.magicSupplement: 34 -> 25
+   2 economicViability.suggestions[].title | r2r-town-10 economicViability.suggestions[0].title: "Incomplete chain: marshlands" -> "Opportunity: process marshlands"
+   2 economicViability.suggestions[].impact | r2r-town-10 economicViability.suggestions[0].impact: "Exports intermediate goods instead of final products (Reeds and thatch, Peat fuel, Waterf -> undefined
+   2 economicViability.suggestions[].suggestedFixes | r2r-town-10 economicViability.suggestions[0].suggestedFixes: ["Add Chandler and Ropemaker to complete the production chain"] -> undefined
+   2 economicState.safetyProfile.safetyLabel | r2r-city-26 economicState.safetyProfile.safetyLabel: "Unsafe" -> "Moderate"
+   2 powerStructure.publicLegitimacy.isTolerated | r2r-city-26 powerStructure.publicLegitimacy.isTolerated: true -> false
+   2 economicViability.suggestions[].suggestedFixes[] | r2r-city-26 economicViability.suggestions[0].suggestedFixes[0]: "Add Elder Grove Council and Midwife to complete the production chain" -> "Add Elder Grove Council and Chandler and Midwife to complete the production chain"
+   2 economicState.incomeSources[].isCriminal | r2r-city-29 economicState.incomeSources[1].isCriminal: undefined -> true
+   2 generationCoherenceReceipt.repairs[].subject | r2r-metropolis-1 generationCoherenceReceipt.repairs[0].subject: "Multiple adventurers' guilds" -> "Fighting pits"
+   2 generationCoherenceReceipt.repairs[].reason | r2r-metropolis-1 generationCoherenceReceipt.repairs[0].reason: "Dungeon delving supply district requires a compatible supporting institution." -> "Colosseum/arena requires a compatible supporting institution."
+   2 institutions[].facets.clandestine | r2r-metropolis-18 institutions[69].facets.clandestine: "clandestine" -> undefined
+   2 coherenceNotes[].note | r2r-metropolis-40 coherenceNotes[0].note: "Economic activity flows through religious institutions, but formal governance rests with  -> "Economic activity flows through religious institutions, but formal governance rests with 
+   2 economicViability.dependencies[].category | r2s-occupied-metropolis-0 economicViability.dependencies[1].category: "Resource Import" -> "Provisioning at Scale"
+   2 economicViability.dependencies[].title | r2s-occupied-metropolis-0 economicViability.dependencies[1].title: "Imports metals" -> "Imports bulk materials and fuel"
+   2 economicViability.dependencies[].description | r2s-occupied-metropolis-0 economicViability.dependencies[1].description: "Settlement must import metals to support local industries." -> "A metropolis consumes building materials and fuel faster than any local hinterland can su
+   2 economicViability.dependencies[].impact | r2s-occupied-metropolis-0 economicViability.dependencies[1].impact: "Creates trade dependency and vulnerability." -> "Construction and industry stall when material convoys are interrupted."
+   2 economicViability.dependencies[].suggestedFixes[] | r2s-occupied-metropolis-0 economicViability.dependencies[1].suggestedFixes[0]: "Establish stable trade relationship with metals supplier" -> "Diversify material supply routes and hold strategic reserves"
+   2 economicViability.dependencies[] | r2s-occupied-metropolis-0 economicViability.dependencies[3]: {"severity":"dependency","category":"Provisioning at Scale","title":"Imports finished good -> undefined
+   2 economicViability.metrics.dependencyCount | r2s-occupied-metropolis-0 economicViability.metrics.dependencyCount: 4 -> 3
+   2 economicViability.warnings[].severity | r2s-politically_fractured-city-2 economicViability.warnings[0].severity: "note" -> "implausible"
+   2 economicViability.warnings[].title | r2s-politically_fractured-city-2 economicViability.warnings[0].title: "Trade Dependencies" -> "Insufficient Craft Industries"
+   2 economicViability.warnings[].category | r2s-politically_fractured-city-2 economicViability.warnings[0].category: undefined -> "Economic Diversity"
+   2 economicViability.warnings[].impact | r2s-politically_fractured-city-2 economicViability.warnings[0].impact: undefined -> "Lacks diversity to employ the population."
+   2 economicViability.warnings[].suggestedFixes | r2s-politically_fractured-city-2 economicViability.warnings[0].suggestedFixes: undefined -> ["Add craft guilds: smiths, weavers, tanners, etc.","Improve trade access and economy for 
+   2 economicState.economicComplexity | r2s-succession_void-town-3 economicState.economicComplexity: "Specialized production and trade" -> "Diversified market economy"
+   2 activeConditions[].severity | r2s-succession_void-town-3 activeConditions[0].severity: 0.61 -> 0.51
+   2 economicState.compound.religionInfluence | r2s-wartime-thorp-0 economicState.compound.religionInfluence: 21.46044939970396 -> 42.92089879940792
+   1 economicState.foodSecurity.surplusPct | r2r-village-4 economicState.foodSecurity.surplusPct: 26 -> 33
+   1 economicState.foodSecurity.effectiveAgriculture | r2r-village-4 economicState.foodSecurity.effectiveAgriculture: 1.6 -> 1.85
+   1 history.founding.overcoming | r2r-village-49 history.founding.overcoming: "by making enough right decisions to survive the wrong ones" -> "by attracting the right people at the right time"
+   1 coherenceNotes[] | r2r-town-2 coherenceNotes[0]: {"type":"power_economic","severity":"notable","tab":"power","note":"Economic activity flow -> undefined
+   1 powerStructure.stability | r2r-town-10 powerStructure.stability: "Stable" -> "Ordered (strong military presence)"
+   1 defenseProfile.institutions.garrison[] | r2r-town-10 defenseProfile.institutions.garrison[0]: undefined -> {"name":"Barracks","category":"Defense","tier":"town","required":false,"baseChance":0.3,"d
+   1 powerStructure.publicLegitimacy.isApproved | r2r-city-26 powerStructure.publicLegitimacy.isApproved: false -> true
+   1 powerStructure.publicLegitimacy.isEndorsed | r2r-city-46 powerStructure.publicLegitimacy.isEndorsed: false -> true
+   1 institutions[].forcedByIsolation | r2r-city-49 institutions[50].forcedByIsolation: true -> undefined
+   1 institutions[].forbiddenTradeRoutes[] | r2s-under_siege-town-1 institutions[36].forbiddenTradeRoutes[1]: undefined -> "port"
+   1 resourceAnalysis.exports[].value | r2s-under_siege-city-3 resourceAnalysis.exports[1].value: "medium" -> "very high"
+   1 stress[].cast.links[] | r2s-occupied-hamlet-0 stress[0].cast.links[0]: undefined -> "famine"
+   1 stressors[].cast.links[] | r2s-occupied-hamlet-0 stressors[0].cast.links[0]: undefined -> "famine"
+   1 economicState.activeChains[].upstreamWeak[] | r2s-infiltrated-metropolis-0 economicState.activeChains[17].upstreamWeak[0]: "food_processing" -> "smelting"
+   1 institutions[].tradeRouteRequired | r2s-insurgency-village-1 institutions[6].tradeRouteRequired: undefined -> ["river","port"]
+   1 institutions[].terrainAccess | r2s-insurgency-village-1 institutions[6].terrainAccess: undefined -> ["riverside"]
+   1 spatialLayout.layout | r2s-insurgency-town-1 spatialLayout.layout: "Stone-walled hill town, the keep visible above the market quarter" -> "Hill town of stone houses climbing above the market quarter"
+   1 economicViability.warnings[].priorityNote | r2s-insurgency-town-1 economicViability.warnings[0].priorityNote: undefined -> "Military priority is 90. Defence institutions are expected."
+   1 defenseProfile.institutions.watch[] | r2s-insurgency-town-1 defenseProfile.institutions.watch[0].desc: "Watchmen serving part-time. Night patrols and gate duty." -> "Men and women serving part-time, walking the night rounds."
+   1 defenseProfile.traditions.hasArcaneGuild | r2s-religious_conversion-city-3 defenseProfile.traditions.hasArcaneGuild: true -> false
+   1 economicState.situationDesc | r2s-mass_migration-city-2 economicState.situationDesc: "Trade proceeds at an ordinary pace for a settlement of this size." -> "Honest trade gets by, but a busy black market undercuts it."
+   1 economicState.compound.criminalEffective | r2s-mass_migration-city-2 economicState.compound.criminalEffective: 36.67617917511833 -> 66.68396213657877
+   1 economicState.compound.economyOutput | r2s-mass_migration-city-2 economicState.compound.economyOutput: 50.10410166017234 -> 45.14730992515913
+   1 economicState.safetyProfile.blackMarketCapture | r2s-mass_migration-city-2 economicState.safetyProfile.blackMarketCapture: 16 -> 26
+   1 economicState.foodSecurity.label | r2s-mass_migration-city-2 economicState.foodSecurity.label: "Pressured" -> "Secure"
+   1 economicState.foodSecurity.color | r2s-mass_migration-city-2 economicState.foodSecurity.color: "#7a5010" -> "#2a6a38"
+   1 economicState.foodSecurity.bg | r2s-mass_migration-city-2 economicState.foodSecurity.bg: "#faf8e8" -> "#f4fbf6"
+   1 economicState.foodSecurity.isPressured | r2s-mass_migration-city-2 economicState.foodSecurity.isPressured: true -> false
+   1 economicState.foodSecurity.isSecure | r2s-mass_migration-city-2 economicState.foodSecurity.isSecure: false -> true
+   1 economicState.foodSecurity.prosperityMod | r2s-mass_migration-city-2 economicState.foodSecurity.prosperityMod: {"type":"penalty","value":-1,"reason":"Food pressure reduces prosperity by one level"} -> null
+   1 powerStructure.publicLegitimacy.isContested | r2s-mass_migration-city-2 powerStructure.publicLegitimacy.isContested: true -> false
+   1 defenseProfile.economicGates.military | r2s-mass_migration-city-2 defenseProfile.economicGates.military: 1 -> 0.96
+   1 defenseProfile.economicGates.monster | r2s-mass_migration-city-2 defenseProfile.economicGates.monster: 1 -> 0.97
+   1 defenseProfile.economicGates.internal | r2s-mass_migration-city-2 defenseProfile.economicGates.internal: 1 -> 0.97
+   1 defenseProfile.economicGates.economic | r2s-mass_migration-city-2 defenseProfile.economicGates.economic: 1 -> 0.95
+   1 defenseProfile.economicGates.disaster | r2s-mass_migration-city-2 defenseProfile.economicGates.disaster: 1 -> 0.96
+## keys new at B
+  480 npcs[].allegiance
+  480 relationships[].covert
+  480 relationships[].handler
+  282 economicState.activeChains[].entrepot
+  272 institutions[].exclusiveGroup
+  136 economicState.activeChains[].upstreamNote
+  105 simulationTrace[].causes[].effect
+  105 institutions[].magicLicense
+  104 economicState.activeChains[].upstreamMissing
+   97 npcs[].structuralPosition
+   97 npcs[].settlementCondition
+   84 institutions[].forbiddenTradeRoutes
+   76 economicState.activeChains[].dependency
+   52 institutions[].tier
+   52 institutions[].cascadeAdded
+   52 institutions[].cascadeBoost
+   38 history.historicalEvents[].anchored
+   34 npcs[].stressNote
+   34 economicState.activeChains[].upstreamWeak
+   32 history.currentTensions[].lastingEffects
+   32 institutions[].serviceKeys
+   28 resourceAnalysis.gaps[].missing
+   28 institutions[].exclusiveGroupCoexists
+   26 simulationTrace[].downstreamEffects[].reason
+   22 institutions[].facets
+   20 institutions[].catalogId
+   19 powerStructure.factions[].isGoverning
+   17 npcs[].temporary
+   17 npcs[].temporaryKind
+   17 npcs[].crisisIds
+   17 powerStructure.factions[].modifier
+   15 history.historicalEvents[].templateType
+   15 npcs[].activeConstraint
+   12 institutions[].coherenceRepair
+   11 resourceAnalysis.imports.reasons
+   11 economicState.activeChains[].magicNote
+   11 economicState.activeChains[].magicRecovery
+   10 powerStructure.factions[].legitimacyCrisis
+   10 powerStructure.factions[].crisisNote
+    8 powerStructure.factions[].captureState
+    8 powerStructure.factions[].modifiers
+    7 institutions[].nativeTier
+    7 defenseProfile.institutions.magicDef[]
+    6 history.currentTensions[].specificIssue
+    6 institutions[].forbiddenResources
+    6 institutions[].factionSource
+    6 defenseProfile.institutions.charter[]
+    5 powerStructure.factionRelationships[].dmNote
+    4 institutions[].required
+    4 powerStructure.factionRelationships[].captureState
+    3 institutions[].priorityCategory
+    3 defenseProfile.institutions.walls[]
+    2 powerStructure.factionRelationships[].ratio
+    2 economicState.incomeSources[].isCriminal
+    2 powerStructure.factions[].name
+    2 powerStructure.factions[].contestsNiche
+    2 economicViability.warnings[].category
+    2 economicViability.warnings[].impact
+    2 economicViability.warnings[].suggestedFixes
+    1 history.legacyAnnotations
+    1 institutions[].baseChance
+    1 institutions[].facets.clandestine
+    1 institutions[].tradeRouteRequired
+    1 institutions[].terrainAccess
+    1 economicViability.warnings[].priorityNote
+## keys gone at B
+  474 npcs[].allegiance
+  473 relationships[].covert
+  473 relationships[].handler
+  267 institutions[].exclusiveGroup
+  244 economicState.activeChains[].entrepot
+  176 economicState.activeChains[].dependency
+  121 economicState.activeChains[].upstreamNote
+  113 npcs[].activeConstraint
+  111 npcs[].structuralPosition
+  111 npcs[].settlementCondition
+  106 institutions[].magicLicense
+  102 institutions[].forbiddenTradeRoutes
+  100 history.historicalEvents[].anchored
+   97 simulationTrace[].causes[].effect
+   86 economicState.activeChains[].upstreamMissing
+   47 institutions[].catalogId
+   37 history.currentTensions[].lastingEffects
+   36 economicState.activeChains[].upstreamWeak
+   33 institutions[].serviceKeys
+   32 institutions[].cascadeAdded
+   32 institutions[].cascadeBoost
+   31 npcs[].stressNote
+   31 institutions[].exclusiveGroupCoexists
+   29 economicState.activeChains[].magicNote
+   29 institutions[].tier
+   28 resourceAnalysis.gaps[].institution
+   28 resourceAnalysis.gaps[].kind
+   28 economicState.activeChains[].magicRecovery
+   23 institutions[].facets
+   21 resourceAnalysis.imports.reasons
+   20 simulationTrace[].downstreamEffects[].reason
+   18 powerStructure.factions[].isGoverning
+   17 npcs[].title
+   17 npcs[].personality
+   17 npcs[].physical
+   17 npcs[].goal
+   17 npcs[].secret
+   17 npcs[].plotHooks
+   17 npcs[].presentation
+   17 npcs[].institution
+   17 npcs[].importance
+   17 npcs[].structuralRank
+   16 powerStructure.factions[].modifier
+   16 powerStructure.factions[].modifiers
+   15 history.historicalEvents[].templateType
+   12 powerStructure.factions[].captureState
+   10 institutions[].coherenceRepair
+    9 powerStructure.factions[].legitimacyCrisis
+    9 powerStructure.factions[].crisisNote
+    8 institutions[].forbiddenResources
+    7 history.currentTensions[].specificIssue
+    7 powerStructure.factionRelationships[].ratio
+    7 stress.viabilityNote
+    7 stressors.viabilityNote
+    6 defenseProfile.institutions.magicDef[]
+    5 powerStructure.factionRelationships[].dmNote
+    5 defenseProfile.institutions.charter[]
+    5 institutions[].required
+    4 institutions[].nativeTier
+    3 institutions[].factionSource
+    3 institutions[].priorityCategory
+    2 economicViability.suggestions[].impact
+    2 economicViability.suggestions[].suggestedFixes
+    2 economicState.incomeSources[].isCriminal
+    2 economicViability.metrics.foodBalance
+    2 powerStructure.factions[].name
+    2 powerStructure.factions[].contestsNiche
+    1 history.legacyAnnotations
+    1 institutions[].forcedByIsolation
+    1 institutions[].facets.clandestine
+    1 institutions[].tradeRouteRequired
+    1 institutions[].terrainAccess
+    1 defenseProfile.institutions.walls[]
