@@ -1,0 +1,153 @@
+PATTERN a: towns 712 · distinct lines 612 (NEW 335) · writers 103 (NEW 46) · untraced lines 46
+PATTERN b: towns 70 · distinct lines 101 (NEW 59) · writers 39 (NEW 18) · untraced lines 16
+PATTERN c: towns 291 · distinct lines 298 (NEW 173) · writers 43 (NEW 21) · untraced lines 8
+PATTERN d: towns 382 · distinct lines 40 (NEW 20) · writers 10 (NEW 4) · untraced lines 15
+PATTERN e: towns 60 · distinct lines 20 (NEW 14) · writers 5 (NEW 3) · untraced lines 3
+PATTERN f: towns 720 · distinct lines 344 (NEW 191) · writers 13 (NEW 6) · untraced lines 124
+PATTERN g: towns 720 · distinct lines 14 (NEW 0) · writers 3 (NEW 0) · untraced lines 8
+PATTERN h: towns 20 · distinct lines 63 (NEW 60) · writers 15 (NEW 13) · untraced lines 26
+FILE src/data/dossierStateProse/defense.generated.js [wc,wr]: b 9 towns/4 lines/3 fns · c 53 towns/9 lines/9 fns · a 45 towns/41 lines/5 fns · e 14 towns/2 lines/1 fns
+FILE src/domain/dossier/plotHooks.js [none]: a 17 towns/8 lines/2 fns · c 4 towns/4 lines/1 fns
+  HIT b/occupied:order-own r2r-thorp-1 Systems/Defense [DS-DEF-2 › Internal Security: no legal infrastructure · v1] NEW: Terrapolis keeps no court and no gaol, and no wrong done there is written down; order is kept by whoever is armed and standing there, and when they leave, nothing keeps it.
+  HIT c/streets r2r-thorp-2 Systems/Defense [DS-DEF-3 › Moderate · v3] NEW: Visitors to Indrapat are told which few streets to avoid, and the advice turns out to be right.
+  HIT c/streets r2r-thorp-3 Systems/Defense [DS-DEF-3 › Moderate · v3] NEW: Visitors to Gantulgaabad are told which few streets to avoid, and the advice turns out to be right.
+  HIT c/streets r2r-thorp-4 Systems/Defense [DS-DEF-3 › Moderate · v3] NEW: Visitors to Hochthal are told which few streets to avoid, and the advice turns out to be right.
+  HIT c/streets r2r-thorp-9 Systems/Defense [DS-DEF-3 › Moderate · v3] NEW: Visitors to Raasmahal are told which few streets to avoid, and the advice turns out to be right.
+  HIT c/streets r2r-thorp-15 Systems/Defense [DS-DEF-3 › Moderate · v3] NEW: Visitors to Buyanshari are told which few streets to avoid, and the advice turns out to be right.
+  HIT c/streets r2r-thorp-20 Systems/Defense [DS-DEF-3 › Moderate · v3] NEW: Visitors to Bergdal are told which few streets to avoid, and the advice turns out to be right.
+  HIT a/merchants r2r-thorp-22 Summary/Plot Hooks [ECHO_PREFIXES] NEW: Families who lived through it tell it this way: a merchant is funding both the reform movement and the suppression of it
+  HIT c/districts r2r-thorp-22 Systems/Defense [DS-DEF-3 › COMPOUND: insurgency · v3] NEW: Some districts of Kaanche are closed off now, and whatever happens there goes unrecorded and unpunished.
+  HIT b/occupied:order-own r2r-thorp-27 Systems/Defense [DS-DEF-2 › Internal Security: no legal infrastructure · v1] NEW: Olympnea keeps no court and no gaol, and no wrong done there is written down; order is kept by whoever is armed and standing there, and when they leave, nothing keeps it.
+  HIT a/merchants r2r-thorp-31 Summary/Plot Hooks [ECHO_PREFIXES] NEW: The records of that time say: a merchant is funding both the reform movement and the suppression of it
+  HIT c/streets r2r-thorp-31 Systems/Defense [DS-DEF-3 › Moderate · v3] NEW: Visitors to Breitensteig are told which few streets to avoid, and the advice turns out to be right.
+  HIT c/streets r2r-thorp-44 Systems/Defense [DS-DEF-3 › Moderate · v3] NEW: Visitors to Tikalahau are told which few streets to avoid, and the advice turns out to be right.
+  HIT c/districts r2r-thorp-47 Summary/Plot Hooks [ECHO_PREFIXES] NEW: A letter found this year tells it this way: the affected district is slowly spreading its strangeness, and the authorities are pretending otherwise
+  HIT c/streets r2r-thorp-47 Systems/Defense [DS-DEF-3 › Moderate · v3] NEW: Visitors to Hongzhou are told which few streets to avoid, and the advice turns out to be right.
+  HIT c/streets r2r-thorp-50 Systems/Defense [DS-DEF-3 › Moderate · v3] NEW: Visitors to Tlalatl are told which few streets to avoid, and the advice turns out to be right.
+  HIT a/merchants r2r-thorp-51 Summary/Plot Hooks [ECHO_PREFIXES] NEW: Families who lived through it tell it this way: a merchant is funding both the reform movement and the suppression of it
+  HIT c/districts r2r-thorp-52 Systems/Defense [DS-DEF-3 › COMPOUND: insurgency · v3] NEW: Some districts of Fjordaker are closed off now, and whatever happens there goes unrecorded and unpunished.
+  HIT c/streets r2r-thorp-53 Systems/Defense [DS-DEF-3 › Moderate · v3] NEW: Visitors to Grünfurt are told which few streets to avoid, and the advice turns out to be right.
+  HIT c/streets r2r-thorp-59 Systems/Defense [DS-DEF-3 › Moderate · v3] NEW: Visitors to Prabhapura are told which few streets to avoid, and the advice turns out to be right.
+  HIT c/streets r2r-hamlet-2 Systems/Defense [DS-DEF-3 › Moderate · v3] NEW: Visitors to Tulumac are told which few streets to avoid, and the advice turns out to be right.
+  HIT c/districts r2r-hamlet-4 Systems/Defense [DS-DEF-3 › COMPOUND: political fracture · v1] NEW: Which power holds a district of Gantulgaiin decides which rules apply there.
+  HIT c/streets r2r-hamlet-12 Systems/Defense [DS-DEF-3 › Moderate · v3] NEW: Visitors to Aristoburg are told which few streets to avoid, and the advice turns out to be right.
+  HIT c/streets r2r-hamlet-15 Systems/Defense [DS-DEF-3 › Moderate · v3] NEW: Visitors to Sübeteiordu are told which few streets to avoid, and the advice turns out to be right.
+  HIT b/famine:plenty r2r-hamlet-16 Systems/Defense [DS-DEF-2 › CHAIN: defence supplied · v2] cut#812: The trades that feed and equip Oxteha's defenders are busy and well stocked, and the defenders know it.
+  HIT a/merchants r2r-hamlet-18 Summary/Plot Hooks [ECHO_PREFIXES] NEW: A letter found this year tells it this way: a merchant is funding both the reform movement and the suppression of it
+  HIT c/streets r2r-hamlet-20 Systems/Defense [DS-DEF-3 › Moderate · v3] NEW: Visitors to Jómsmark are told which few streets to avoid, and the advice turns out to be right.
+  HIT c/streets r2r-hamlet-20 Systems/Defense [DS-DEF-4 › structure semi-organized · v3] NEW: Rival crews at Jómsmark are fighting over who runs the streets, and until one wins, people pay both the cut and the brawling.
+  HIT a/merchants r2r-hamlet-24 Summary/Plot Hooks [ECHO_PREFIXES] NEW: A letter found this year tells it this way: a merchant is funding both the reform movement and the suppression of it
+  HIT c/streets r2r-hamlet-31 Systems/Defense [DS-DEF-3 › Moderate · v3] NEW: Visitors to Xinhu are told which few streets to avoid, and the advice turns out to be right.
+  HIT c/districts r2r-hamlet-35 Systems/Defense [DS-DEF-3 › COMPOUND: political fracture · v1] NEW: Which power holds a district of Sundoy decides which rules apply there.
+  HIT c/streets r2r-hamlet-37 Systems/Defense [DS-DEF-3 › Moderate · v3] NEW: Visitors to Madinatdarya are told which few streets to avoid, and the advice turns out to be right.
+  HIT a/merchants r2r-hamlet-38 Summary/Plot Hooks [ECHO_PREFIXES] NEW: A letter found this year tells it this way: a merchant is funding both the reform movement and the suppression of it
+  HIT c/streets r2r-hamlet-39 Systems/Defense [DS-DEF-3 › Moderate · v3] NEW: Visitors to Fortecastra are told which few streets to avoid, and the advice turns out to be right.
+  HIT c/streets r2r-hamlet-42 Systems/Defense [DS-DEF-3 › Moderate · v3] NEW: Visitors to Zhongzhen are told which few streets to avoid, and the advice turns out to be right.
+  HIT a/guild r2r-hamlet-43 Summary/Plot Hooks [TENSION_LABELS] ww#980: Guild Conflict
+  HIT c/streets r2r-hamlet-43 Systems/Defense [DS-DEF-3 › Moderate · v3] NEW: Visitors to Devamala are told which few streets to avoid, and the advice turns out to be right.
+  HIT c/streets r2r-hamlet-49 Systems/Defense [DS-DEF-3 › Moderate · v3] NEW: Visitors to Vishnugram are told which few streets to avoid, and the advice turns out to be right.
+  HIT a/workshops r2r-hamlet-51 Systems/Defense [DS-DEF-2 › CHAIN: defence supplied · v3] NEW: You can see the defence at Velipol is kept supplied: food and gear come from the hamlet's own workshops.
+  HIT c/streets r2r-hamlet-52 Systems/Defense [DS-DEF-3 › Moderate · v3] NEW: Visitors to Ormdal are told which few streets to avoid, and the advice turns out to be right.
+  HIT c/streets r2r-hamlet-58 Systems/Defense [DS-DEF-3 › Moderate · v3] NEW: Visitors to Vatanbulag are told which few streets to avoid, and the advice turns out to be right.
+  HIT a/guild r2r-village-12 Summary/Plot Hooks [TENSION_LABELS] ww#980: Guild Conflict
+  HIT a/merchants r2r-village-16 Summary/Plot Hooks [ECHO_PREFIXES] NEW: A letter found this year tells it this way: a merchant is funding both the reform movement and the suppression of it
+  HIT c/districts r2r-village-25 Systems/Defense [DS-DEF-3 › COMPOUND: political fracture · v1] NEW: Which power holds a district of Lagosinum decides which rules apply there.
+  HIT c/districts r2r-village-26 Systems/Defense [DS-DEF-3 › COMPOUND: insurgency · v3] NEW: Some districts of Terracolonia are closed off now, and whatever happens there goes unrecorded and unpunished.
+  HIT c/districts r2r-village-30 Systems/Defense [DS-DEF-3 › COMPOUND: political fracture · v1] NEW: Which power holds a district of Celono decides which rules apply there.
+  HIT c/districts r2r-village-34 Systems/Defense [DS-DEF-3 › COMPOUND: insurgency · v3] NEW: Some districts of Lagoorum are closed off now, and whatever happens there goes unrecorded and unpunished.
+  HIT c/districts r2r-village-42 Systems/Defense [DS-DEF-3 › COMPOUND: political fracture · v3] NEW: Each power at Rossholme keeps its own list of offences, so a wrong punished in one district goes unpunished in the next.
+  HIT a/merchants r2r-village-46 Summary/Plot Hooks [ECHO_PREFIXES] NEW: Families who lived through it tell it this way: a merchant is funding both the reform movement and the suppression of it
+  HIT c/districts r2r-village-53 Systems/Defense [DS-DEF-3 › COMPOUND: political fracture · v3] NEW: Each power at Dongan keeps its own list of offences, so a wrong punished in one district goes unpunished in the next.
+  HIT e/force r2r-town-4 Systems/Defense [DS-DEF-2 › Invasion & War: neither walls nor force · v1] NEW: Jayagiri has no line and no force.
+  HIT e/force r2r-town-24 Systems/Defense [DS-DEF-2 › Invasion & War: neither walls nor force · v1] NEW: Anorema has no line and no force.
+  HIT a/court-generic r2r-town-25 Systems/Defense [DS-DEF-2 › Internal Security: full legal chain (court AND prison) · v1] NEW: Offenders at Brahmamandal are arrested, tried and held, and each case is written into the court's lists, so people expect a hearing, not a beating.
+  HIT e/force r2r-town-33 Systems/Defense [DS-DEF-2 › Invasion & War: neither walls nor force · v1] NEW: Kilby has no line and no force.
+  HIT e/force r2r-town-41 Systems/Defense [DS-DEF-2 › Invasion & War: neither walls nor force · v1] NEW: Xochioatl has no line and no force.
+  HIT e/force r2r-town-42 Systems/Defense [DS-DEF-2 › Invasion & War: neither walls nor force · v1] NEW: Navaabad has no line and no force.
+  HIT e/force r2r-town-48 Systems/Defense [DS-DEF-2 › Invasion & War: neither walls nor force · v1] NEW: Hongpu has no line and no force.
+  HIT a/healer r2r-town-53 Summary/Plot Hooks [ECHO_PREFIXES] NEW: What survives from that time says: a healer who profited enormously during the plague is being asked how they stayed untouched
+  HIT a/alchemist r2r-city-48 Systems/Defense [DS-DEF-5 › ARCANE: alchemists · v1] cut#1392: The magical help at Vishnumala comes from its alchemists, who brew for the defenders.
+  HIT a/alchemist r2r-city-49 Systems/Defense [DS-DEF-5 › ARCANE: alchemists · v1] cut#1392: The magical help at Fontecivitas comes from its alchemists, who brew for the defenders.
+  HIT a/alchemist r2r-metropolis-1 Systems/Defense [DS-DEF-5 › ARCANE: alchemists · v1] cut#1392: The magical help at Varapeth comes from its alchemists, who brew for the defenders.
+  HIT a/alchemist r2r-metropolis-4 Systems/Defense [DS-DEF-5 › ARCANE: alchemists · v2] cut#1275~: Anoousa buys its magical support from its alchemists by the batch, and the metropolis's accounts carry it as a purchase, not a defence.
+  HIT a/alchemist r2r-metropolis-6 Systems/Defense [DS-DEF-5 › ARCANE: alchemists · v2] cut#1275~: Becanatl buys its magical support from its alchemists by the batch, and the metropolis's accounts carry it as a purchase, not a defence.
+  HIT a/alchemist r2r-metropolis-14 Systems/Defense [DS-DEF-5 › ARCANE: alchemists · v2] cut#1275~: Prabhapeta buys its magical support from its alchemists by the batch, and the metropolis's accounts carry it as a purchase, not a defence.
+  HIT a/alchemist r2r-metropolis-18 Systems/Defense [DS-DEF-5 › ARCANE: alchemists · v1] cut#1392: The magical help at Víkthorpe comes from its alchemists, who brew for the defenders.
+  HIT a/alchemist r2r-metropolis-24 Systems/Defense [DS-DEF-5 › ARCANE: alchemists · v2] cut#1275~: Achillimani buys its magical support from its alchemists by the batch, and the metropolis's accounts carry it as a purchase, not a defence.
+  HIT a/alchemist r2r-metropolis-25 Systems/Defense [DS-DEF-5 › ARCANE: alchemists · v2] cut#1275~: Mönkhköl buys its magical support from its alchemists by the batch, and the metropolis's accounts carry it as a purchase, not a defence.
+  HIT a/alchemist r2r-metropolis-31 Systems/Defense [DS-DEF-5 › ARCANE: alchemists · v2] cut#1275~: Chinggishan buys its magical support from its alchemists by the batch, and the metropolis's accounts carry it as a purchase, not a defence.
+  HIT a/alchemist r2r-metropolis-33 Systems/Defense [DS-DEF-5 › ARCANE: alchemists · v2] cut#1275~: Hvaliya buys its magical support from its alchemists by the batch, and the metropolis's accounts carry it as a purchase, not a defence.
+  HIT a/alchemist r2r-metropolis-38 Systems/Defense [DS-DEF-5 › ARCANE: alchemists · v2] cut#1275~: Ulfstrand buys its magical support from its alchemists by the batch, and the metropolis's accounts carry it as a purchase, not a defence.
+  HIT a/alchemist r2r-metropolis-39 Systems/Defense [DS-DEF-5 › ARCANE: alchemists · v2] cut#1275~: Lykopolis buys its magical support from its alchemists by the batch, and the metropolis's accounts carry it as a purchase, not a defence.
+  HIT a/alchemist r2r-metropolis-42 Systems/Defense [DS-DEF-5 › ARCANE: alchemists · v2] cut#1275~: Kallipyrgos buys its magical support from its alchemists by the batch, and the metropolis's accounts carry it as a purchase, not a defence.
+  HIT a/alchemist r2r-metropolis-45 Systems/Defense [DS-DEF-5 › ARCANE: alchemists · v2] cut#1275~: Chandraganj buys its magical support from its alchemists by the batch, and the metropolis's accounts carry it as a purchase, not a defence.
+  HIT a/alchemist r2r-metropolis-47 Systems/Defense [DS-DEF-5 › ARCANE: alchemists · v2] cut#1275~: Tumeniin buys its magical support from its alchemists by the batch, and the metropolis's accounts carry it as a purchase, not a defence.
+  HIT a/alchemist r2r-metropolis-49 Systems/Defense [DS-DEF-5 › ARCANE: alchemists · v1] cut#1392: The magical help at Inverholme comes from its alchemists, who brew for the defenders.
+  HIT a/alchemist r2r-metropolis-50 Systems/Defense [DS-DEF-5 › ARCANE: alchemists · v1] cut#1392: The magical help at Penham comes from its alchemists, who brew for the defenders.
+  HIT a/alchemist r2r-metropolis-53 Systems/Defense [DS-DEF-5 › ARCANE: alchemists · v2] cut#1275~: Gantulgashari buys its magical support from its alchemists by the batch, and the metropolis's accounts carry it as a purchase, not a defence.
+  HIT a/alchemist r2r-metropolis-58 Systems/Defense [DS-DEF-5 › ARCANE: alchemists · v1] cut#1392: The magical help at Eldmark comes from its alchemists, who brew for the defenders.
+  HIT c/streets r2s-under_siege-thorp-2 Systems/Defense [DS-DEF-3 › COMPOUND: active siege · v1] NEW: With the thorp under siege, quarrels over rations and theft of food are the trouble on Agioslimani's streets now.
+  HIT c/streets r2s-under_siege-hamlet-1 Systems/Defense [DS-DEF-3 › COMPOUND: active siege · v1] NEW: With the hamlet under siege, quarrels over rations and theft of food are the trouble on Zlatoko's streets now.
+  HIT c/streets r2s-under_siege-hamlet-3 Systems/Defense [DS-DEF-3 › COMPOUND: active siege · v1] NEW: With the hamlet under siege, quarrels over rations and theft of food are the trouble on Rotholz's streets now.
+  HIT e/force r2s-under_siege-town-0 Systems/Defense [DS-DEF-2 › Invasion & War: neither walls nor force · v1] NEW: Ulffoss has no line and no force, and the threat now at hand has noticed both.
+  HIT e/force r2s-under_siege-town-1 Systems/Defense [DS-DEF-2 › Invasion & War: neither walls nor force · v1] NEW: Fengling has no line and no force, and the threat now at hand has noticed both.
+  HIT a/court-generic r2s-under_siege-town-2 Systems/Defense [DS-DEF-2 › Internal Security: full legal chain (court AND prison) · v1] NEW: Offenders at Yekehiid are arrested, tried and held, and each case is written into the court's lists, so people expect a hearing, not a beating.
+  HIT a/court-generic r2s-under_siege-town-3 Systems/Defense [DS-DEF-2 › Internal Security: full legal chain (court AND prison) · v1] NEW: Offenders at Rathwell are arrested, tried and held, and each case is written into the court's lists, so people expect a hearing, not a beating.
+  HIT b/siege:road-open r2s-under_siege-city-0 Systems/Defense [DS-DEF-1 › readiness STRONG · v1] NEW: Bellaurbs reads as a defended place from the road in: the approaches are watched, the works are kept up, and none of it looks like it was thrown together.
+  HIT b/siege:road-open r2s-under_siege-metropolis-2 Systems/Defense [DS-DEF-1 › readiness STRONG · v1] NEW: Raassaray reads as a defended place from the road in: the approaches are watched, the works are kept up, and none of it looks like it was thrown together.
+  HIT a/alchemist r2s-famine-metropolis-1 Systems/Defense [DS-DEF-5 › ARCANE: alchemists · v1] cut#1392: The magical help at Hongji comes from its alchemists, who brew for the defenders.
+  HIT b/famine:plenty r2s-famine-metropolis-2 Systems/Defense [DS-DEF-2 › CHAIN: defence supplied · v2] cut#812: The trades that feed and equip Caththwaite's defenders are busy and well stocked, and the defenders know it.
+  HIT b/occupied:order-own r2s-occupied-thorp-2 Systems/Defense [DS-DEF-2 › Internal Security: no legal infrastructure · v1] NEW: Shanxian keeps no court and no gaol, and no wrong done there is written down; order is kept by whoever is armed and standing there, and when they leave, nothing keeps it.
+  HIT a/merchants r2s-occupied-village-0 Summary/Plot Hooks [ECHO_PREFIXES] NEW: A letter found this year tells it this way: a merchant is funding both the reform movement and the suppression of it
+  HIT b/occupied:order-own r2s-occupied-village-0 Systems/Defense [DS-DEF-2 › Internal Security: no legal infrastructure · v1] NEW: Spitzfeld keeps no court and no gaol, and no wrong done there is written down; order is kept by whoever is armed and standing there, and when they leave, nothing keeps it.
+  HIT b/occupied:order-own r2s-occupied-village-1 Systems/Defense [DS-DEF-2 › Internal Security: no legal infrastructure · v1] NEW: Celoichi keeps no court and no gaol, and no wrong done there is written down; order is kept by whoever is armed and standing there, and when they leave, nothing keeps it.
+  HIT a/court-generic r2s-occupied-town-1 Systems/Defense [DS-DEF-2 › Internal Security: full legal chain (court AND prison) · v1] NEW: Offenders at Sundnes are arrested, tried and held, and each case is written into the court's lists, so people expect a hearing, not a beating.
+  HIT a/alchemist r2s-occupied-metropolis-2 Systems/Defense [DS-DEF-5 › ARCANE: alchemists · v2] cut#1275~: Nokhoihan buys its magical support from its alchemists by the batch, and the metropolis's accounts carry it as a purchase, not a defence.
+  HIT c/districts r2s-politically_fractured-thorp-0 Systems/Defense [DS-DEF-3 › COMPOUND: political fracture · v3] NEW: Each power at Langhof keeps its own list of offences, so a wrong punished in one district goes unpunished in the next.
+  HIT c/districts r2s-politically_fractured-thorp-1 Systems/Defense [DS-DEF-3 › COMPOUND: political fracture · v1] NEW: Which power holds a district of Mayanek decides which rules apply there.
+  HIT c/districts r2s-politically_fractured-thorp-2 Systems/Defense [DS-DEF-3 › COMPOUND: political fracture · v1] NEW: Which power holds a district of Ripavetum decides which rules apply there.
+  HIT c/districts r2s-politically_fractured-thorp-3 Systems/Defense [DS-DEF-3 › COMPOUND: political fracture · v3] NEW: Each power at Suryakota keeps its own list of offences, so a wrong punished in one district goes unpunished in the next.
+  HIT c/districts r2s-politically_fractured-village-0 Systems/Defense [DS-DEF-3 › COMPOUND: political fracture · v3] NEW: Each power at Capofundus keeps its own list of offences, so a wrong punished in one district goes unpunished in the next.
+  HIT c/districts r2s-politically_fractured-village-3 Systems/Defense [DS-DEF-3 › COMPOUND: political fracture · v3] NEW: Each power at Medinashahr keeps its own list of offences, so a wrong punished in one district goes unpunished in the next.
+  HIT e/force r2s-politically_fractured-town-3 Systems/Defense [DS-DEF-2 › Invasion & War: neither walls nor force · v1] NEW: Ioannovrysi has no line and no force.
+  HIT e/force r2s-indebted-town-3 Systems/Defense [DS-DEF-2 › Invasion & War: neither walls nor force · v1] NEW: Kamalabari has no line and no force.
+  HIT a/alchemist r2s-indebted-metropolis-2 Systems/Defense [DS-DEF-5 › ARCANE: alchemists · v2] cut#1275~: Fenghu buys its magical support from its alchemists by the batch, and the metropolis's accounts carry it as a purchase, not a defence.
+  HIT a/alchemist r2s-indebted-metropolis-3 Systems/Defense [DS-DEF-5 › ARCANE: alchemists · v1] cut#1392: The magical help at Lidocastra comes from its alchemists, who brew for the defenders.
+  HIT c/districts r2s-recently_betrayed-hamlet-1 Summary/Plot Hooks [ECHO_PREFIXES] NEW: Families who lived through it tell it this way: the affected district is slowly spreading its strangeness, and the authorities are pretending otherwise
+  HIT e/force r2s-recently_betrayed-town-2 Systems/Defense [DS-DEF-2 › Invasion & War: neither walls nor force · v1] NEW: Umanagar has no line and no force.
+  HIT a/alchemist r2s-recently_betrayed-metropolis-0 Systems/Defense [DS-DEF-5 › ARCANE: alchemists · v2] cut#1275~: Ormstrand buys its magical support from its alchemists by the batch, and the metropolis's accounts carry it as a purchase, not a defence.
+  HIT a/alchemist r2s-recently_betrayed-metropolis-1 Systems/Defense [DS-DEF-5 › ARCANE: alchemists · v2] cut#1275~: Vatanserai buys its magical support from its alchemists by the batch, and the metropolis's accounts carry it as a purchase, not a defence.
+  HIT a/merchants r2s-infiltrated-thorp-0 Summary/Plot Hooks [ECHO_PREFIXES] NEW: The records of that time say: a merchant is funding both the reform movement and the suppression of it
+  HIT c/districts r2s-infiltrated-thorp-2 Summary/Plot Hooks [ECHO_PREFIXES] NEW: The records of that time say: the affected district is slowly spreading its strangeness, and the authorities are pretending otherwise
+  HIT c/streets r2s-infiltrated-thorp-2 Systems/Defense [DS-DEF-3 › Moderate · v3] NEW: Visitors to Schwarzfeld are told which few streets to avoid, and the advice turns out to be right.
+  HIT c/streets r2s-infiltrated-hamlet-1 Systems/Defense [DS-DEF-3 › Moderate · v3] NEW: Visitors to Sundland are told which few streets to avoid, and the advice turns out to be right.
+  HIT c/districts r2s-infiltrated-village-2 Summary/Plot Hooks [ECHO_PREFIXES] NEW: An old story from that time: the affected district is slowly spreading its strangeness, and the authorities are pretending otherwise
+  HIT a/force r2s-infiltrated-village-2 Systems/Defense [DS-DEF-3 › Safe · v2] cut#105: The village's record of crimes at Bayarserai stays short: there is crime, but enforcement keeps it down and keeps it from growing.
+  HIT e/force r2s-infiltrated-town-3 Systems/Defense [DS-DEF-2 › Invasion & War: neither walls nor force · v1] NEW: Padmagiri has no line and no force.
+  HIT a/alchemist r2s-infiltrated-metropolis-0 Systems/Defense [DS-DEF-5 › ARCANE: alchemists · v1] cut#1392: The magical help at Xibu comes from its alchemists, who brew for the defenders.
+  HIT a/alchemist r2s-succession_void-metropolis-0 Systems/Defense [DS-DEF-5 › ARCANE: alchemists · v2] cut#1275~: Kulubtitlan buys its magical support from its alchemists by the batch, and the metropolis's accounts carry it as a purchase, not a defence.
+  HIT a/alchemist r2s-succession_void-metropolis-3 Systems/Defense [DS-DEF-5 › ARCANE: alchemists · v2] cut#1275~: Erdenbalik buys its magical support from its alchemists by the batch, and the metropolis's accounts carry it as a purchase, not a defence.
+  HIT e/force r2s-monster_pressure-town-2 Systems/Defense [DS-DEF-2 › Invasion & War: neither walls nor force · v1] NEW: Velipol has no line and no force, and the threat now at hand has noticed both.
+  HIT a/alchemist r2s-monster_pressure-metropolis-3 Systems/Defense [DS-DEF-5 › ARCANE: alchemists · v1] cut#1392: The magical help at Brahmabagh comes from its alchemists, who brew for the defenders.
+  HIT c/districts r2s-insurgency-thorp-0 Systems/Defense [DS-DEF-3 › COMPOUND: insurgency · v1] NEW: Patrols at Llanheath have changed their routes, and some districts are closed to anyone without business there.
+  HIT c/districts r2s-insurgency-thorp-3 Systems/Defense [DS-DEF-3 › COMPOUND: insurgency · v3] NEW: Some districts of Hochkirche are closed off now, and whatever happens there goes unrecorded and unpunished.
+  HIT c/districts r2s-insurgency-village-1 Systems/Defense [DS-DEF-3 › COMPOUND: insurgency · v1] NEW: Patrols at Collenovum have changed their routes, and some districts are closed to anyone without business there.
+  HIT c/districts r2s-insurgency-village-2 Systems/Defense [DS-DEF-3 › COMPOUND: insurgency · v3] NEW: Some districts of Xiji are closed off now, and whatever happens there goes unrecorded and unpunished.
+  HIT a/alchemist r2s-insurgency-metropolis-0 Systems/Defense [DS-DEF-5 › ARCANE: alchemists · v2] cut#1275~: Medinapara buys its magical support from its alchemists by the batch, and the metropolis's accounts carry it as a purchase, not a defence.
+  HIT a/alchemist r2s-insurgency-metropolis-3 Systems/Defense [DS-DEF-5 › ARCANE: alchemists · v1] cut#1392: The magical help at Yuling comes from its alchemists, who brew for the defenders.
+  HIT a/court-generic r2s-religious_conversion-town-2 Systems/Defense [DS-DEF-2 › Internal Security: full legal chain (court AND prison) · v1] NEW: Offenders at Warmthal are arrested, tried and held, and each case is written into the court's lists, so people expect a hearing, not a beating.
+  HIT a/alchemist r2s-religious_conversion-metropolis-1 Systems/Defense [DS-DEF-5 › ARCANE: alchemists · v1] cut#1392: The magical help at Tyrhammer comes from its alchemists, who brew for the defenders.
+  HIT a/alchemist r2s-religious_conversion-metropolis-3 Systems/Defense [DS-DEF-5 › ARCANE: alchemists · v2] cut#1275~: Hákonsund buys its magical support from its alchemists by the batch, and the metropolis's accounts carry it as a purchase, not a defence.
+  HIT a/merchants r2s-slave_revolt-thorp-1 Summary/Plot Hooks [ECHO_PREFIXES] NEW: A letter found this year tells it this way: a merchant is funding both the reform movement and the suppression of it
+  HIT c/streets r2s-slave_revolt-thorp-2 Systems/Defense [DS-DEF-3 › COMPOUND: slave revolt · v2] NEW: People at Fenggang keep away from the streets where the revolt is being fought, and nobody walks them after dark.
+  HIT c/streets r2s-slave_revolt-hamlet-0 Systems/Defense [DS-DEF-3 › COMPOUND: slave revolt · v2] NEW: People at Velikoichi keep away from the streets where the revolt is being fought, and nobody walks them after dark.
+  HIT c/streets r2s-slave_revolt-hamlet-2 Systems/Defense [DS-DEF-4 › structure semi-organized · v3] NEW: Rival crews at Cnocthwaite are fighting over who runs the streets, and until one wins, people pay both the cut and the brawling.
+  HIT a/guild r2s-wartime-hamlet-0 Summary/Plot Hooks [ECHO_PREFIXES] NEW: What survives from that time says: a guild master's records have gone missing ahead of an audit
+  HIT a/healer r2s-wartime-hamlet-3 Summary/Plot Hooks [ECHO_PREFIXES] NEW: Families who lived through it tell it this way: a healer who profited enormously during the plague is being asked how they stayed untouched
+  HIT a/healer r2s-wartime-village-0 Summary/Plot Hooks [ECHO_PREFIXES] NEW: A letter found this year tells it this way: a healer who profited enormously during the plague is being asked how they stayed untouched
+  HIT e/force r2s-wartime-town-2 Systems/Defense [DS-DEF-2 › Invasion & War: neither walls nor force · v1] NEW: Shivapalli has no line and no force.
+  HIT a/alchemist r2s-wartime-metropolis-0 Systems/Defense [DS-DEF-5 › ARCANE: alchemists · v1] cut#1392: The magical help at Qasrchowk comes from its alchemists, who brew for the defenders.
+  HIT a/alchemist r2s-wartime-metropolis-2 Systems/Defense [DS-DEF-5 › ARCANE: alchemists · v1] cut#1392: The magical help at Nanwan comes from its alchemists, who brew for the defenders.
+  HIT c/crowds r2s-mass_migration-hamlet-1 Systems/Defense [DS-DEF-8 › override: MIGRATION, arrivals · v1] NEW: More people are arriving at Eleftakra than its guards can keep in order, so they spend their days on the crowds, not on the roads.
+  HIT a/alchemist r2s-mass_migration-metropolis-0 Systems/Defense [DS-DEF-5 › ARCANE: alchemists · v2] cut#1275~: Xiaguan buys its magical support from its alchemists by the batch, and the metropolis's accounts carry it as a purchase, not a defence.
+  HIT a/alchemist r2s-mass_migration-metropolis-1 Systems/Defense [DS-DEF-5 › ARCANE: alchemists · v1] cut#1392: The magical help at Unterthal comes from its alchemists, who brew for the defenders.

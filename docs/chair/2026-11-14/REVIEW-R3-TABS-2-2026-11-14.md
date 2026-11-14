@@ -67,7 +67,18 @@ eslint on the stage's 30 touched source and test files: exit 0. `typecheck:domai
 
 ## Step 7 — CENSUS-2 (`census2.sh`, the census's 720, `--files` the stage's src files)
 
-PENDING at this commit (running at bb2bf91c5 and aac79b808; the tip done: see the next commit).
+Each run's own exit was 0. Distinct lines by kind are given as aac79b808 → bb2bf91c5 → 301572583 (towns in brackets where they moved):
+
+| kind | aac79b808 | bb2bf91c5 | tip |
+|---|---|---|---|
+| a | 612 | 610 | 610 |
+| b | 101 | 100 | **98** |
+| c | 298 (291 towns) | 298 (301) | 298 (301) |
+| d | 40 (382 towns) | 37 (105) | 37 (105) |
+| e | 20 (60 towns) | 18 (46) | 18 (46) |
+| f, g, h | 344 / 14 / 63 | same | same |
+
+In the stage's own files, `defense.generated.js` kind b fell 9 → 7 → 5 towns and kind e fell 14 → 0. `plotHooks.js` is unchanged (a 17, c 4). **No kind rises in the cure.** Across the whole stage, kind c's towns rose 291 → 301 in the line's files, not the stage's: the stage's files hold the same c counts. `HistoryTab.jsx` gains a row (2 towns, 1 line): "Guild Conflict" (TENSION_META, known ww#980, 0 new lines). That is the same carried label, now traced to the file this lane edited. It is not a new line.
 
 ## Step 8 — the whole stage aac79b808..301572583
 
