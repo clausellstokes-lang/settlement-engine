@@ -1677,3 +1677,70 @@ Pushes by docs/chair/2026-11-14/probes/POWERS-14/push.sh (POWERS-11's, pointed a
   `+refs/heads/lane/*:refs/remotes/origin/lane/*` first); gates.sh <tree> <logdir> <files>: eslint, presumed things, both type
   gates, the grid, fact layers, observed shapes, each through gate-tail; push.sh. Pages: CENSUS-2's census2.sh with --seeds
   (inn.seeds, inn6.seeds) and REVIEW-BAR-0's render2.sh for bar0- seeds, both archived from their lanes to /home/user/probes/.
+
+# PART 9 — POWERS-15, the lane's tenth seat: the toll, the fork pin, then L3, T2 and the medium rows (kept current after every item)
+
+The lane was read back from origin at **0ea65f574** before the first act, equal to the brief's. The builder is POWERS-15 (session
+session_01ACmDYakWyawtoSChziuhmY; the chair session_01ACmDYZrFEVXyZEUg1NDxxC; brief docs/chair/2026-11-14/briefs/BRIEF-POWERS-15.md on
+the chair's lane). A fresh container: scratch worktree /home/user/p15 (branch p15, `npm ci` once: it wrote `core.hooksPath=.husky/_`
+as for every seat before), detached /home/user/wtline (the line, 976db5b19, node_modules linked from p15). Long runs to /home/user/runs/.
+Pushes by probes/POWERS-15/push.sh (POWERS-14's, pointed at p15: fetch, fast-forward check, the rev-list test, refs and config compare).
+
+## P9.0 The rulings worked to
+- THE BRIEF (the chair's rulings of 2026-11-14 10:57 UTC, record 440, copied whole in P8.0): (1) a red title the stage leaves at its
+  tip bars CLEAR: tests only, re-keyed BY IDENTITY, never loosened; (2) THE TOLL: "no slot prints a chain label" STANDS;
+  tollNamePrintedEverywhere re-keyed by identity (a goal about the toll names the toll's HOUSE as the roster prints it; the
+  protective half unchanged; a plant reds it), MEASURED FIRST on the 720; (3) L3: the title word follows the honorific through
+  the same leaf; (4) T2 (rulingStructure.js), with T1 and T3 where the cure is the same. Then P8.4's rows marked left, widest first
+  by false count, each read on its page; then P8.5's L4, the last reader's L5 and L4, the courts candidate, the coaching-inn pair.
+- THE CHAIR, 2026-11-14 11:25 UTC (to this seat), copied: "ONE PIN MORE, yours, from the merge seat's measure of the joined tree
+  and of every lane's merged tip: tests/generators/generationForkCensus.test.js, A1 (the mint bound): this lane's tip reads 139
+  against the pinned 138, RED AT THE LANE'S OWN TIP and never re-keyed: the lane mints a landed-gentry card at the seam, five forks
+  (people-powers::mint::landed_gentry and its hooks, allegiance, ties and goals). RULED: A FORK A LANE ADDS IS DECLARED OR IT IS A
+  FINDING. Find the commit that added the mint and the ruling or statement row that declares it (the mint of a face was ruled on
+  this lane): if declared, re-key the pin BY IDENTITY at your tip through the pin's own instrument (the merge book's Appendix B,
+  `stagepins.py --control`; section 2n's step 7 (c) is the form), every new fork named in the note with its cause; if no ruling
+  declares it, tell me with the commit. It goes after the toll, before the medium rows; tests and the pin only; one line in your
+  hand-back. A6 fell at the join (24 to 23: your re-dealt tie prose): the merge seat keyed it; nothing for you."
+
+## P9.1 Item by item
+- **THE TOLL: RE-KEYED BY IDENTITY, 0eb30242f (tests only).** MEASURED FIRST (probes/POWERS-15/toll.mjs over the 720 born at
+  0ea65f574 by b14.sh): every NPC goal, short and long, naming a house of the toll's chain (toll bridge, caravaneer's post,
+  coaching inn, customs house): 397 mentions (a goal naming two houses counts twice), every one a house the roster holds: 0
+  false, so no line was cured before the re-key. The identity: the goal whose intent targets the chain crossroads_trade
+  (r2r-city-8 the coaching-inn keeper; r2r-metropolis-8 the toll-keeper; r2r-metropolis-49 the toll-keeper and the customs
+  collector, anchored by count 1/1/2) names its speaker's house as the roster prints it (houseFill of the roster's own name; on
+  the roster; a house of the toll's chain). Strengthened: no goal prints the toll's label, the catalogue's or the access's.
+  Protective half unchanged. Red at 0ea65f574 (3); green re-keyed (12 of 12). Plants (goals.js, reverted, cmp'd): the SUPPLY
+  house filled with the access's label: 3 red; with the catalogue's: 3 red + the sweep's 3; "the toll bridge" for every SUPPLY
+  goal: r2r-city-8 and r2r-metropolis-49 red, r2r-metropolis-8 (the toll-keeper's own) green. The lighting census 34/34 after
+  the three titles' rename (identity count unchanged).
+- **THE SIX TITLES, EXECUTED at 0eb30242f** (the four files: mintedFaceUnderworld, styledTitleOnRows, tollNamePrintedEverywhere,
+  pageCensus.walker): 4 files, 35 passed, 0 red. Sent to the chair.
+- **THE FORK PIN (the chair's 11:25 row): RE-KEYED BY IDENTITY, 60b89e5ce (tests only).** DECLARED by 9fae351e1 (COHERENCE-POWERS-6
+  item 1, under the chair's ruling of 2026-11-13; its commit names the +5 streams). Measured (probes/POWERS-15/forkmeasure.test.js.txt,
+  a copy of the file with C1's three hash equalities removed and the mint seeds dumped, run at both trees, deleted; mintdiff.mjs):
+  the line 976db5b19 134, the tip 139; exactly five seeds 0 -> 1, all keyed to npc_power_landed_gentry (mint, hook, allegiance,
+  tie, goals), none other moved. Bound 138 -> 139 with the dated note. A plant (one extra fork in castPowers.js): 140, red. NOT
+  DONE BY `stagepins.py --control`: that instrument writes the control hash (C1) with the golden's header and A7 pin, the signed
+  door's act; this lane runs no golden door and the manifest row is the line's, so A1 stays red at C1 here until the golden's
+  re-record at the join (as fce41f2b7). The file at 60b89e5ce: 5 passed, A1 (C1) and A6 (15 vs 16) red, both red at 0eb30242f.
+
+## P9.2 EVERY NEW OR CHANGED LINE, with the towns it was read in
+- None yet: the two items are tests only.
+
+## P9.3 FOR THE JOIN (this seat's)
+- generationForkCensus A1: the bound 139 is this lane's tip figure; re-measure at the joined tree (ten lanes carry their own
+  commits on the file, none on the bound's lines; the upkeep lanes add npc_town_council to the pin row's population fork labels,
+  their effect on this row's total NOT measured here). C1's control hash moves with the generator master's re-record.
+
+## P9.4 THE TABLE (P8.4 brought current)
+- Unchanged from P8.4 so far.
+
+## P9.5 WHAT IS LEFT, line by line
+- L3 (faceHonorifics.js :: styledTitleOf: the title word through the honorific's leaf); T2 (rulingStructure.js) with T1/T3 where
+  the same cure; then P8.4's rows left, widest first by false count (ww#850, ww#440, bar #17, pf#520, bar #26, then the rest);
+  then P8.5's L4, the last reader's L5 and L4, the courts candidate, the two coaching-inn candidates.
+
+## P9.6 `git diff --stat 0ea65f574..HEAD -- src/`
+- (none)
