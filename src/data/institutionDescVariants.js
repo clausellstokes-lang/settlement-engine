@@ -654,9 +654,11 @@ const PAIRS = [
     "A mill driven by water or ox, cutting planks and beams for builders. Sited near timber, it can meet a whole region's building needs. The crew is permanent.",
     "Water or ox power turns logs into planks and beams for the construction trade. A town with timber to hand supplies the region's building work, and keeps a standing crew to do it.",
   ],
+  // BAR3-PLACES (H4, 2026-11-15): no beer sent beyond the town (a brewery stands where no beer is exported): both texts
+  // claim the taverns, the grain and the hands only.
   [
-    "Ale and beer brewed at commercial scale, supplying the town's taverns and the wider region. It eats grain and hires hands in quantity.",
-    "A brewery working at commercial scale. It keeps the taverns stocked and sends beer across the region, and stands among the larger buyers of grain and employers in the town.",
+    "Ale and beer brewed at commercial scale, supplying the town's taverns. It eats grain and hires hands in quantity.",
+    "A brewery working at commercial scale. It keeps the taverns stocked, and stands among the larger buyers of grain and employers in the town.",
   ],
   [
     "A cellar of presses and casks for wine, from grapes grown near or must brought in, whenever either can be had. Such wine as it holds goes by the barrel, and by the bottle to the rich.",

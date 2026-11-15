@@ -310,7 +310,7 @@ export function wartimeGoesWell(stress) {
 }
 
 /** wartime (loss)'s caravans sentence: printed only off an isolated route (R2-CODE-B-6 item 0). */
-const WARTIME_CARAVANS = 'Supply caravans pass through on crown requisition. ';
+const WARTIME_CARAVANS = 'Supply caravans pass through on army requisition. '; // BAR3-PLACES (H2, 2026-11-15): no crown, no kingdom: a city-state at war answers to no higher lord, so the line names the war's own officers (true wherever it prints).
 
 /**
  * wartime's two texts for one place (`s` = the name, or "the settlement"): the profit text, true only
@@ -323,9 +323,9 @@ const WARTIME_CARAVANS = 'Supply caravans pass through on crown requisition. ';
  */
 function WARTIME_VARIANTS(s, isolated = false, fedIsolated = false) {
   return [
-    { id: 'profit', text: s + " is in a kingdom at war and doing well out of it: army contracts pay, prices are high, and merchants with the right friends are getting rich. The bill will come later." },
+    { id: 'profit', text: s + " is at war and doing well out of it: army contracts pay, prices are high, and merchants with the right friends are getting rich. The bill will come later." },
     // TAIL-CRISIS (READ-ALL 20648): no army contract reaches an isolated place (the same route fact as the caravans').
-    { id: 'loss', text: s + " is in a kingdom fighting a war it may not win. Conscription has taken a third of the working-age men. " + (isolated ? '' : WARTIME_CARAVANS) + (fedIsolated ? '' : WARTIME_PRICES + ' ') + (isolated ? WARTIME_SACRIFICE_ISOLATED : "The governing authority is demanding sacrifice while certain families are quietly thriving on contracts.") },
+    { id: 'loss', text: s + " is fighting a war it may not win. Conscription has taken a third of the working-age men. " + (isolated ? '' : WARTIME_CARAVANS) + (fedIsolated ? '' : WARTIME_PRICES + ' ') + (isolated ? WARTIME_SACRIFICE_ISOLATED : "The governing authority is demanding sacrifice while certain families are quietly thriving on contracts.") },
   ];
 }
 

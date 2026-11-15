@@ -639,7 +639,7 @@ const genCoherence = settlement => {
       type: 'power_economic',
       severity: 'notable',
       tab: 'power',
-      note: `Economic activity flows through religious institutions, but formal governance rests with ${govFaction.faction}. Whoever controls trade and tithes holds more practical power than whoever holds the official seat.`,
+      note: `Economic activity flows through religious institutions, but formal governance rests with ${govFaction.faction}. Whoever controls trade and tithes has a say the official seat must reckon with.`, // BAR3-PLACES (C18651, 2026-11-15): no power over the seat claimed (a Strong governorship beside a Minor clergy printed it)
     });
   }
 

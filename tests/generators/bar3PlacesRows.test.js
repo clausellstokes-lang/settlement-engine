@@ -1,0 +1,117 @@
+/**
+ * tests/generators/bar3PlacesRows.test.js — BAR3-PLACES (REVIEW-BAR-3 and the wide read, 2026-11-15; the seat's directions
+ * H1-H4 and H6): the rows of the seat's four groups, cured at their writers and read on births (the census's own seeds and
+ * the readers' towns, born as the census bears them, CENSUS-3 seedcfg.mjs). Each CURED row names the line that must no
+ * longer print in that town AND what prints in its place (asserted first); each KEEP row is a true sibling that must still
+ * print. Every CURED row was red at the base (59185b62a): that seed's record held the old line.
+ *
+ * - H2 the crown (stressTypes.js, stressNarrative.js, narrativeData.js, narrativeText.js, crisisSummaryVantage.js): the war's
+ *   lines name no crown and no kingdom (a city-state at war answers to no higher lord); the army's officers instead.
+ * - H1 the arrival and the crisis (arrivalProse.js, narrativeData.js, stressInstitutionEffects.js): no runner out of a shut
+ *   gate, no herd on the road and no lanes of stalls under a siege, no broker of far goods where no market stands, no wine
+ *   shop, no cloth in every yard, no living from the ground claimed, no covert grain route under a siege (its twin).
+ * - H3 the history (historyGenerator.js): no trade list's mark inside history prose; a trade collapse at the founding takes
+ *   its founding twin.
+ * - H4 the houses (institutionDescVariants.js, institutionalCatalog.js, supplyChainData.js): no beer sent across the region,
+ *   no seigniorage revenue claimed, no royal charter, no northern furs.
+ * - H6 the tensions (narrativeText.js, narrativeGenerator.js): no one kind of tension, no stability, no power over the seat.
+ */
+import { beforeAll, describe, expect, it } from 'vitest';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
+import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { CRISIS_SUMMARY_POOLS } from '../../src/domain/crisis/crisisSummaryVantage.js';
+
+const dials = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
+/** The census's own configuration for its two seed families (CENSUS-3 seedcfg.mjs, r2r- and r2s-). @param {string} seed */
+const cfgFor = (seed) => {
+  let m = seed.match(/^r2r-(thorp|hamlet|village|town|city|metropolis)-\d+$/);
+  if (m) return birthConfig({ ...DEFAULT_CONFIG, ...dials, settType: m[1] });
+  // the bar's own read (REVIEW-BAR-0 render.bar0.jsx's cfgFor, its bar0- arm, as CENSUS-3 seedcfg.mjs copies it)
+  m = seed.match(/^bar0-(thorp|hamlet|village|town|city|metropolis)-([a-z_+]+)-([a-z_]+)-\d+$/);
+  if (m) {
+    const st = m[2] === 'calm' ? [] : m[2].split('+'); const route = m[3] === 'rand' ? {} : { tradeRouteAccess: m[3] };
+    return birthConfig({ ...DEFAULT_CONFIG, ...route, settType: m[1], selectedStressesRandom: false, selectedStresses: st, _randomizePriorities: true });
+  }
+  m = /** @type {RegExpMatchArray} */ (seed.match(/^r2s-(\w+)-(thorp|hamlet|village|town|city|metropolis)-\d+$/));
+  return birthConfig({ ...DEFAULT_CONFIG, ...dials, selectedStresses: [m[1]], selectedStressesRandom: false, settType: m[2] });
+};
+/** @type {Map<string, any>} */
+const births = new Map();
+/** @param {string} seed @returns {any} */
+const born = (seed) => {
+  if (!births.has(seed)) births.set(seed, generateSettlementPipeline(cfgFor(seed), null, { seed, customContent: {} }));
+  return births.get(seed);
+};
+/** Every string the record holds, joined (the rows below live in several fields: origin, arrival, foodways, houses). @param {string} seed */
+const textOfRecord = (seed) => JSON.stringify(born(seed));
+
+describe('BAR3-PLACES: the rows read the town', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+
+  /** [row, seed, must not print, what prints instead] */
+  const CURED = /** @type {Array<[string, string, RegExp, RegExp]>} */ ([
+    ['C8742 no crown officer', 'r2r-hamlet-5', /A crown officer has arrived/, /An army requisition officer has arrived with orders/],
+    ['C8717 no kingdom (profit)', 'r2s-wartime-village-0', /is in a kingdom at war/, /is at war and doing well out of it/],
+    ['C8717 class: no kingdom (loss)', 'r2r-hamlet-53', /is in a kingdom fighting/, /is fighting a war it may not win/],
+    ['C8717 class: no crown requisition', 'r2r-hamlet-53', /on crown requisition/, /Supply caravans pass through on army requisition\./],
+    ['H2 class: no crown receipts', 'r2r-hamlet-5', /when the crown returns them/, /the receipts do not say when the army returns them\./],
+    ['H2 class: no crown colours', 'r2s-wartime-town-0', /clerk in crown colours/, /a clerk with an army seal records what comes and goes\. This is a war.s traffic, not trade.s\./],
+    ['H2 class: no crown paying', 'r2s-wartime-city-1', /the crown is paying/, /and the war chest is paying\./],
+    ['C4391 no runner out of a shut gate', 'r2s-under_siege-metropolis-2', /A runner comes out of the small side gate/, /A face shows at the grille of the small side gate, sees your group, and is gone\./],
+    ['C30302 no wine shop', 'r2r-city-3', /at a wine shop/, /A patron stands drinks for the whole room/],
+    ['C2300 not every yard', 'r2r-city-20', /across every yard/, /Bolts of cloth hang drying in long bright strips across the yards\./],
+    ['C0013 no living from the ground', 'r2r-city-18', /lives on what comes out of the ground/, /living comes out of the ground, and its dust is on the doorsteps nearest the workings\./],
+    ['C53735 no press of the lane', 'r2r-hamlet-20', /press of the lane/, /The smell of incense drifts out into the lane\./],
+    ['C35876 no export decisions', 'r2r-city-44', /caused by export decisions/, /the famine was made worse by decisions taken by/],
+    ['C29348 no beer across the region', 'r2r-town-28', /sends beer across the region/, /It keeps the taverns stocked, and stands among the larger buyers/],
+    ['C29348 class: no wider region', 'r2r-town-18', /and the wider region\. It eats grain/, /supplying the town's taverns\. It eats grain/],
+    ['C13819 no seigniorage revenue claimed', 'r2r-city-13', /Significant ongoing revenue via seigniorage/, /Its seigniorage is revenue while precious metal reaches the dies\./],
+    ['H2/H4 class: no royal charter', 'r2r-town-1', /Requires noble or royal charter/, /under the charter of whoever rules\. Revenue for the granting authority while metal comes in\./],
+    ['C14378 no northern furs', 'r2r-city-0', /Furs originate in frontier/, /Furs travel from the hunting grounds through trading posts/],
+    ['C15699 no trade built upon at the founding', 'r2s-succession_void-hamlet-2', /was built upon failed|what it was collapsed|depended on failed/, /The trade the settlement was founded to serve failed within its first few years/],
+    ['C24238 no one kind of tension', 'r2r-city-36', /The tensions here are the domestic kind/, /Beside whatever else divides it, its oldest quarrels are the domestic kind/],
+    ['C24620 no stability claimed', 'r2r-city-18', /Stable enough that its tensions/, /Its oldest tensions are the slow kind/],
+    ['C18651 no power over the seat', 'r2r-town-8', /holds more practical power than whoever holds the official seat/, /has a say the official seat must reckon with/],
+    ['C5938 no grain by a covert route under a siege', 'bar0-city-under_siege+famine-rand-8', /through a covert route/, /before the siege closed the roads, and is selling it at triple the official price after dark/],
+    ['C8742 the sovereign city: no crown officer', 'bar0-city-wartime-rand-7', /A crown officer has arrived/, /An army requisition officer has arrived with orders/],
+    ['C8717 the sovereign city: no kingdom', 'bar0-city-wartime-rand-7', /is in a kingdom/, /is at war and doing well out of it/],
+    ['C34091 the sovereign city: no kingdom', 'bar0-city-wartime-rand-13', /is in a kingdom/, /is at war and doing well out of it/],
+    ['C31794 no trade mark inside the history', 'bar0-town-occupied-rand-7', /\(taxed by occupation\) and property/, /A speculative frenzy in [^"(]*(\([a-z]+\) )?and property collapsed/],
+    ['C30302 no wine shop (the town read)', 'bar0-town-occupied-rand-7', /at a wine shop/, /A patron stands drinks for the whole room/],
+    ['C30299 no busy streets under the occupation', 'bar0-town-occupied-rand-7', /the streets are busy/, /The market is open, the streets are orderly/],
+    ['C15699 no trade built upon at the founding (the town read)', 'bar0-hamlet-under_siege-rand-8', /was built upon failed/, /The trade the settlement was founded to serve failed within its first few years/],
+    ['C4391 no runner out of a shut gate (the town read)', 'bar0-city-under_siege+famine-rand-12', /A runner comes out of the small side gate/, /A face shows at the grille of the small side gate/],
+    ['C13758 no herd across the road under a siege', 'bar0-hamlet-under_siege-rand-6', /A dog drives a handful/, /Someone is churning butter in a doorway/],
+    ['C13759 no lanes of stalls in a besieged hamlet', 'bar0-hamlet-under_siege-rand-6', /Each lane of stalls/, /An old woman sits at a low table by her door/],
+    ['C24627 no broker of far goods with no market', 'bar0-thorp-calm-rand-7', /matching buyers to goods from routes/, /Two partners go over their accounts in a courtyard/],
+  ]);
+  it('the flagged line no longer prints, and its slot says what the record bears (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(CURED, ([id, seed, gone, instead]) => {
+      const text = textOfRecord(seed);
+      expect(text, `${id} ${seed}: what prints instead`).toMatch(instead);
+      expect(text, `${id} ${seed}: the flagged line`).not.toMatch(gone); // anchored: the line above asserts the slot printed
+    }), 'the flagged line no longer prints');
+  });
+
+  /** [row, seed, the true sibling that must still print] */
+  const KEEP = /** @type {Array<[string, string, RegExp]>} */ ([
+    ['H1: the herd on the road where no siege stands', 'r2r-hamlet-18', /A dog drives a handful of animals across the road, and you wait for them\./],
+    ['H1: the lanes of stalls in a market town', 'r2r-city-32', /Each lane of stalls has someone who speaks for it, and they are all speaking at once\./],
+    ['H1: the broker of far goods where a market stands', 'r2s-monster_pressure-city-0', /A broker sits in the shade, matching buyers to goods from routes you have never travelled\./],
+    ['H1: the covert grain route where no siege stands', 'r2r-city-44', /through a covert route and selling them at triple the official price after dark/],
+  ]);
+  it('the true siblings still print (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(KEEP, ([id, seed, kept]) => {
+      expect(textOfRecord(seed), `${id} ${seed}`).toMatch(kept);
+    }), 'the true siblings still print');
+  });
+
+  it('H2: the wartime vantage pools name no crown and no kingdom (the page-only lines; every surface)', () => {
+    const lines = Object.values(CRISIS_SUMMARY_POOLS.wartime).flatMap((col) => Object.values(col));
+    expect(lines.length).toBeGreaterThan(10);
+    expect(lines.filter((l) => /\b(crown|kingdom)/i.test(String(l)))).toEqual([]);
+    expect(lines).toContain('On the roads near {name} you meet army carts and the army\'s officers, and give way to both.');
+  });
+});

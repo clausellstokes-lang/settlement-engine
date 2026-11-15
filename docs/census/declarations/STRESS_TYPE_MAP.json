@@ -1197,7 +1197,7 @@
       "lines": [
         {
           "lineId": "STRESS_TYPE_MAP.wartime.crisisHook",
-          "text": "A crown officer has arrived with requisition orders that will strip the settlement of something it cannot spare. The governing power must decide whether to comply, negotiate, or find a third option.",
+          "text": "An army requisition officer has arrived with orders that will strip the settlement of something it cannot spare. The governing power must decide whether to comply, negotiate, or find a third option.",
           "needs": [],
           "excludes": [],
           "crisis": [

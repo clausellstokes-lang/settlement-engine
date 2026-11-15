@@ -4968,24 +4968,6 @@
     "d5f859a7367c021f"
    ],
    [
-    "house: tavern",
-    "family",
-    "Ale and beer brewed at commercial scale, supplying the town's taverns and the wider region. It eats grain and hires hand",
-    "c7c6dd9a95a0f6f3"
-   ],
-   [
-    "house: brewery",
-    "family",
-    "A brewery working at commercial scale. It keeps the taverns stocked and sends beer across the region, and stands among t",
-    "e1f6a11d4dbda793"
-   ],
-   [
-    "house: tavern",
-    "family",
-    "A brewery working at commercial scale. It keeps the taverns stocked and sends beer across the region, and stands among t",
-    "e1f6a11d4dbda793"
-   ],
-   [
     "house: tannery",
     "family",
     "A full tannery of many vats and a guild-trained workforce, turning out fine leather for shoes, armour, and saddlery.",
@@ -7508,18 +7490,6 @@
    [
     "armedForce",
     "family",
-    " is going about its business. The market is open, the streets are busy, the gates are attended by soldiers whose armour ",
-    "2e243571570b8ae4"
-   ],
-   [
-    "streets",
-    "family",
-    " is going about its business. The market is open, the streets are busy, the gates are attended by soldiers whose armour ",
-    "2e243571570b8ae4"
-   ],
-   [
-    "armedForce",
-    "family",
     "'s gate the queue divides in two: residents with papers, and everyone else. The residents' line is longer and moves slow",
     "659f4087a2a7d255"
    ],
@@ -8866,12 +8836,6 @@
    [
     "watch",
     "implied",
-    "Well-funded city watch; it keeps order reliably and is growing more sure of its own authority.",
-    "ee08d7b2a92c842c"
-   ],
-   [
-    "watch",
-    "implied",
     "City watch; law enforcement and external defence, stretched between multiple responsibilities.",
     "a4feae8fbd269116"
    ],
@@ -9464,12 +9428,6 @@
     "word",
     "Helped cause the original shortfall that triggered the famine, believing it would only last a week",
     "5d4570b895149c66"
-   ],
-   [
-    "famine",
-    "word",
-    "Has documentation proving the famine was caused by export decisions made by {faction}, and has been paid to lose it",
-    "f567a2e72faaa215"
    ],
    [
     "occupation",
@@ -11706,38 +11664,14 @@
    [
     "war",
     "root",
-    "{name} is in a kingdom at war: army carts pass through, and the war is all anyone talks about.",
-    "6954ef7511e49b06"
-   ],
-   [
-    "war",
-    "root",
     "The war drives {name}'s prices: some goods grow scarce, and a few people grow rich on the army's contracts.",
     "cda638768171719c"
    ],
    [
     "war",
     "root",
-    "{name} watches its roads for deserters and spies, now that the kingdom is at war.",
-    "3844f93e3fb7061c"
-   ],
-   [
-    "war",
-    "root",
     "The war is far from {name}, but it touches every household: the prices, the news, the carts going by.",
     "5292777072428efd"
-   ],
-   [
-    "war",
-    "root",
-    "The war takes much of the kingdom's money, and in {name} prices move with every piece of news from the front.",
-    "a00595f34a4d83a1"
-   ],
-   [
-    "war",
-    "root",
-    "Every season the crown asks {name} for more, and its leaders must weigh what they owe the war against what the place nee",
-    "3603b5c3f175666f"
    ],
    [
     "war",
@@ -27077,12 +27011,6 @@
    ],
    [
     "garrison",
-    "after-base: close-true",
-    " is at war and, for now, on the right side of it: contracts are flowing, the garrison is reinforced, and the crown is pa",
-    "477f2721e5d2d6ad"
-   ],
-   [
-    "garrison",
     "after-base: close-unprinted",
     " is prospering on the right side of it: full warehouses, a reinforced garrison, coin moving fast, and all of it lost if ",
     "65cf322223134a9b"
@@ -27256,12 +27184,6 @@
     "after-base: close-true",
     "The local clergy serve a real pastoral role; their moral authority has limited political reach but is genuinely respecte",
     "9107f9a290c307d1"
-   ],
-   [
-    "watch",
-    "after-base: close-true",
-    "Well-funded city watch; it keeps order reliably and is growing more sure of its own authority.",
-    "ee08d7b2a92c842c"
    ],
    [
     "watch",
@@ -27604,12 +27526,6 @@
     "implied",
     "Town watch; it enforces ordinances, manages disorder, and reports to the council.",
     "a7cf3311b12549dc"
-   ],
-   [
-    "watch",
-    "implied",
-    "Well-funded city watch; it keeps order reliably and is growing more sure of its own authority.",
-    "ee08d7b2a92c842c"
    ],
    [
     "watch",

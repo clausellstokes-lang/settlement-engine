@@ -173,8 +173,9 @@ export const STRESS_TYPE_MAP = {
     colour: "#5a2a0a",
     probability: 0.026,
     requiresTier: null,
+    // BAR3-PLACES (H2, 2026-11-15): no crown, no kingdom: a city-state at war answers to no higher lord, so the line names the war's own officers (true wherever it prints).
     crisisHook:
-      "A crown officer has arrived with requisition orders that will strip the settlement of something it cannot spare. The governing power must decide whether to comply, negotiate, or find a third option.",
+      "An army requisition officer has arrived with orders that will strip the settlement of something it cannot spare. The governing power must decide whether to comply, negotiate, or find a third option.",
     viabilityNote:
       "The war takes most of the money: trade suffers, a few grow rich on army contracts, and the fields are short of the men called up.",
     historyColour: "military",

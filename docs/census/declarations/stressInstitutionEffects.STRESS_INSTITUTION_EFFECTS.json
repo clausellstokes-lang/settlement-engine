@@ -333,7 +333,7 @@
     },
     {
       "id": "famine#7.secret",
-      "text": "Has documentation proving the famine was caused by export decisions made by {faction}, and has been paid to lose it",
+      "text": "Has documentation proving the famine was made worse by decisions taken by {faction}, and has been paid to lose it",
       "needs": [],
       "excludes": [],
       "crisis": [],

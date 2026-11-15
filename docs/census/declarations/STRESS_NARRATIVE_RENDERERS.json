@@ -485,7 +485,7 @@
       "lines": [
         {
           "lineId": "RENDERERS.wartime(loss)",
-          "text": "${name} is in a kingdom fighting a war it may not win. Conscription has taken a third of the working-age men. Supply caravans pass through on crown requisition. Food prices have doubled. The governing authority is demanding sacrifice while certain families are quietly thriving on contracts.",
+          "text": "${name} is fighting a war it may not win. Conscription has taken a third of the working-age men. Supply caravans pass through on army requisition. Food prices have doubled. The governing authority is demanding sacrifice while certain families are quietly thriving on contracts.",
           "needs": [],
           "excludes": [],
           "crisis": [

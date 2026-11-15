@@ -406,28 +406,29 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
     },
   }),
   wartime: pools({
+    // BAR3-PLACES (H2, 2026-11-15): no crown, no kingdom: a city-state at war answers to no higher lord, so the line names the war's own officers (true wherever it prints).
     cover: {
-      traveller: '{name} is in a kingdom at war: army carts pass through, and the war is all anyone talks about.',
+      traveller: '{name} is at war: army carts pass through, and the war is all anyone talks about.',
       newcomer: 'Newcomers to {name} are asked whether they come from the front, and what news they bring.',
       trade: 'The war drives {name}\'s prices: some goods grow scarce, and a few people grow rich on the army\'s contracts.',
-      watch: '{name} watches its roads for deserters and spies, now that the kingdom is at war.',
+      watch: '{name} watches its roads for deserters and spies, now that the war has come.',
     },
     overview: {
       local: 'The war is far from {name}, but it touches every household: the prices, the news, the carts going by.',
-      trade: 'The war takes much of the kingdom\'s money, and in {name} prices move with every piece of news from the front.',
-      official: 'Every season the crown asks {name} for more, and its leaders must weigh what they owe the war against what the place needs.',
+      trade: 'The war takes much of the money there is, and in {name} prices move with every piece of news from the front.',
+      official: 'Every season the war asks {name} for more, and its leaders must weigh what they owe the war against what the place needs.',
       newcomer: 'Anyone new in {name} might be a deserter, a spy or a recruiter, and is treated warily until known.',
     },
     defence: {
       watch: 'In wartime {name} watches its roads for deserters, spies and the army\'s own requisition officers alike.',
       official: 'With men called away to the war, {name} has fewer hands than before to see to its own safety.', // R3-CODE-C-5: no keepers of its safety
       local: 'In {name} the families whose men were called up wait for news, and the rest keep an eye on the road.',
-      traveller: 'On the roads near {name} you meet army carts and the crown\'s officers, and give way to both.',
+      traveller: 'On the roads near {name} you meet army carts and the army\'s officers, and give way to both.',
     },
     tonight: {
-      official: 'The kingdom\'s war makes its demands on {name}, in men, carts and supplies, and its leaders must decide how much to give.',
-      watch: 'In {name} the crown\'s officers come for requisitions, and people watch closely what they take.',
-      newcomer: 'A crown officer wants more from {name} than it can spare, and someone new might find a way between giving in and refusing.',
+      official: 'The war makes its demands on {name}, in men, carts and supplies, and its leaders must decide how much to give.',
+      watch: 'In {name} the army\'s officers come for requisitions, and people watch closely what they take.',
+      newcomer: 'An army requisition officer wants more from {name} than it can spare, and someone new might find a way between giving in and refusing.',
       trade: 'In wartime {name}\'s trade follows the army: what the war needs sells, and the rest waits.',
     },
   }),

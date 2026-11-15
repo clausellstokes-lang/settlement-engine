@@ -61,7 +61,7 @@ const FALSE = [
 
 /** [seed, a true sibling that must still print] */
 const KEEP = [
-  ['r2s-wartime-thorp-2', '{name} is in a kingdom at war: army carts pass through, and the war is all anyone talks about.'], // parked (the walker's door): unchanged
+  ['r2s-wartime-thorp-2', '{name} is at war: army carts pass through, and the war is all anyone talks about.'], // parked (the walker's door): unchanged
 ];
 
 describe('TAIL-CRISIS batch 5: the vantage lines claim nothing the town does not hold', () => {

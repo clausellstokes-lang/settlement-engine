@@ -160,7 +160,7 @@ export const TERRAIN_NARRATIVE_HOOKS = {
 export const STRESS_DESCS = {
   under_siege: [
     { text: r =>
-      `The gates of ${r} are closed. There are people on the walls. This is not the relaxed watch of a settlement going about its day. These are people watching the treeline. A runner comes out of the small side gate, sees your group, stops.`, needs: ['gate', 'walls'] },
+      `The gates of ${r} are closed. There are people on the walls. This is not the relaxed watch of a settlement going about its day. These are people watching the treeline. A face shows at the grille of the small side gate, sees your group, and is gone.`, needs: ['gate', 'walls'] },
     { text: r =>
       `${r}'s gates are shut and barred. The guards on them are professional about it, which makes it worse: nobody comes near without being challenged, and nothing is let through. Professional means they expect this to last.`, needs: ['gate', 'guardPresence'] }, // R2-CODE-A-10 (the bar's HIGH #35): a siege's gates are shut; it said them open, every cart searched
     { text: r =>
@@ -207,7 +207,7 @@ export const STRESS_DESCS = {
     { text: r =>
       `The approach to ${r} looks like any other settlement. There is graffiti on the wall near the gate that someone has attempted to scrub off. The symbol is still readable.`, needs: ['gate'] },
     { text: r =>
-      `${r} is going about its business. The market is open, the streets are busy, the gates are attended by soldiers whose armour is not local. Everyone is doing what they are supposed to be doing, which is the point.`, needs: ['market', 'gate'] },
+      `${r} is going about its business. The market is open, the streets are orderly, the gates are attended by soldiers whose armour is not local. Everyone is doing what they are supposed to be doing, which is the point.`, needs: ['market', 'gate'] },
     r =>
       `${r}'s notices are posted in two languages now, the local one second. The new lettering is neat, official, and on every door that matters, which is how you learn the occupation intends to stay.`,
     { text: r =>
@@ -369,7 +369,7 @@ export const STRESS_DESCS = {
   ],
   wartime: [
     { text: r =>
-      `The road to ${r} has been rutted deep by heavy wagons moving in one direction: toward the settlement loaded, away from it loaded differently. At the gate a clerk in crown colours records what comes and goes. This is not a market town's traffic.`, needs: ['gate'] },
+      `The road to ${r} has been rutted deep by heavy wagons moving in one direction: toward the settlement loaded, away from it loaded differently. At the gate a clerk with an army seal records what comes and goes. This is a war's traffic, not trade's.`, needs: ['gate'] },
     { text: r =>
       `${r}'s young men are not in ${r}. You notice it at the gate and it holds true inside: the people working the stalls and the fields are the old, the very young, and the women. A recruiting notice is nailed to the gatepost, its edges soft with weather.`, needs: ['gate', 'market'] },
     { text: r =>
@@ -379,7 +379,7 @@ export const STRESS_DESCS = {
     r =>
       `${r}'s noticeboard is a wall of requisition orders, each stamped, each superseding the last. At its foot, a smaller paper, hand-lettered: prayers offered nightly, all welcome.`,
     r =>
-      `The horses in ${r}'s paddocks are old, or lame, or foals. Every sound animal of working age has a receipt where it used to be, and the receipts do not say when the crown returns them.`,
+      `The horses in ${r}'s paddocks are old, or lame, or foals. Every sound animal of working age has a receipt where it used to be, and the receipts do not say when the army returns them.`, // BAR3-PLACES (H2, 2026-11-15): no crown, no kingdom: a city-state at war answers to no higher lord, so the line names the war's own officers (true wherever it prints).
     // TAIL-NARRATIVE-5 (N18 (1)): THE SLOT IS KEPT: a poor town at war takes the twin that says what the war takes, reached
     // only by resolution where [3] is drawn and refused (arrivalScene.js :: drawAdmitted), so no draw moves.
     { text: r =>

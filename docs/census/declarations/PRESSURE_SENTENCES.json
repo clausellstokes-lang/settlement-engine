@@ -1098,7 +1098,7 @@
       "lines": [
         {
           "lineId": "PRESSURE_SENTENCES.wartime(winning)[0]",
-          "text": "${name} is at war and, for now, on the right side of it: contracts are flowing, the garrison is reinforced, and the crown is paying. The men who left to fight have not come back.",
+          "text": "${name} is at war and, for now, on the right side of it: contracts are flowing, the garrison is reinforced, and the war chest is paying. The men who left to fight have not come back.",
           "needs": [
             "garrison"
           ],
