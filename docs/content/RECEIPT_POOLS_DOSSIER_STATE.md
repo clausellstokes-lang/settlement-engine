@@ -2305,12 +2305,12 @@ did not die.
 **PDF PARITY:** parity.
 
 **`riskLabel: Stable` (no challengers)**
-1. `[ledger · succession settled · no crisis: unrest]` Nobody at {settlement} is in a position to take {faction}'s place; it has no rival, and nobody in the town is asking who comes next.
-2. `[street · succession settled · no crisis: unrest]` The question of who might replace the {seat} at {settlement} does not come up, because there is nobody the town would name if it did.
-3. `[counterforce · succession settled · no unrest]` People at {settlement} grumble, but nobody in the town stands ready to lead them, so {faction} is safe in the hall.
+1. `[ledger · succession settled · no crisis: unrest]` Nobody at {settlement} is in a position to take the {seat}'s place: whatever the town thinks of the {seat}, no contender stands ready to try.
+2. `[street · succession settled · no crisis: unrest]` If anyone at {settlement} asked who might replace the {seat}, the town would have no contender to name.
+3. `[counterforce · succession settled · no unrest]` People at {settlement} may grumble, but nobody in the town stands ready to lead them against the {seat}.
 4. `[ledger · succession open]` No contender stands at {settlement} to take the {seat}, and the absence settles nothing: who governs is an open question, and nobody is strong enough to close it.
 5. `[street · succession open]` The {seat} at {settlement} has no rival and no secure holder either; the town asks who governs and gets no answer it can act on.
-6. `[ledger · succession settled · unrest]` No rival stands at {settlement} to take {faction}'s place, and in a season of fighting that is small comfort: what threatens {faction} now is the fighting across the town.
+6. `[ledger · succession settled · unrest]` In a season of fighting, having no rival at {settlement} is small comfort to the {seat}: what threatens it now is the fighting itself.
 
 **`riskLabel: Holding`** {colour}
 1. `[ledger]` {faction} outweighs everyone at {settlement} who wants its place, and the whole town knows who they are. {faction} holds on, but has to watch them.
@@ -2321,12 +2321,12 @@ did not die.
 1. `[ledger]` {counterpart} could now take the hall from {faction} at {settlement}; {faction} keeps it only because the office is still its own.
 2. `[street]` {settlement} is no longer sure the hall belongs to {faction}, and {faction} governs as though it is not sure either.
 3. `[unfolding]` The challenger at {settlement} could now take the hall, but the {seat} has not changed hands yet. What happens next depends on who moves first.
-4. `[visitor]` Visitors to {settlement} are quietly told to stay polite to {counterpart} as well as to {faction}, and nobody says why.
+4. `[visitor · no crisis: under_siege]` Visitors to {settlement} are quietly told to stay polite to {counterpart} as well as to {faction}, and nobody says why.
 
 **`riskLabel: Critical. The seat could fall`** {colour}
-1. `[ledger]` Nothing at {settlement} protects the {seat} now. {counterpart} has the strength, and the {seat} has only the office.
+1. `[ledger]` The office no longer shields the {seat} at {settlement}: against a move by {counterpart}, holding the title will not be enough.
 2. `[street]` {settlement} is waiting. The hall could change hands within the season and the town has already begun arranging itself for both answers.
-3. `[unfolding]` Everyone at {settlement} can see {faction} could lose the hall, and {counterpart} has not yet moved to take it.
+3. `[unfolding · no crisis: occupied]` Everyone at {settlement} can see {faction} could lose the hall, and {counterpart} has not yet moved to take it.
 
 **`legitimacyHold`: public backing hardens the hold** {colour}
 1. `[street]` The town stands behind whoever sits at {settlement}, and that lets its ruler do things a ruler without the town could not try.
