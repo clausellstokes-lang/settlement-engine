@@ -51,7 +51,11 @@ describe('the goods pills print only where the record bears them out (item 2)', 
 
   test('books by Glassmakers alone are not exported; the glass is; spices from distant lands pass through as transit (rww-city-famine-1)', () => {
     const town = birthApp('rww-city-famine-1');
-    expect(town.economicState.primaryExports, 'anchored: the record exports both').toEqual(expect.arrayContaining(['Glassware', 'Books and manuscripts', 'Rare spices and exotic dyes']));
+    // Re-keyed by identity (TAIL-DEFECON-C-2, C1-E, the chair's D18): the record exported both, and since C1-E it exports
+    // the books no more (no scribe, printer, library, monastery, sage or wizard works them); the glass and the spices it
+    // still exports, so the pills below still read the record's own list.
+    expect(town.economicState.primaryExports, 'anchored: the record exports the glass and the spices').toEqual(expect.arrayContaining(['Glassware', 'Rare spices and exotic dyes']));
+    expect(town.economicState.primaryExports, 'C1-E: the record no longer exports the books').not.toContain('Books and manuscripts');
     expect(roster(town).some((n) => /print|scriptor|librar|bookbind/i.test(n)), 'anchored: no house makes books').toBe(false);
     const exports = pillsUnder(town, 'Exports');
     expect(exports).toContain('Glassware');
@@ -61,7 +65,10 @@ describe('the goods pills print only where the record bears them out (item 2)', 
 
   test('no guild goods without a guild, no barrels by a thatcher, no cloth by a shepherd (rww-village-famine-1)', () => {
     const town = birthApp('rww-village-famine-1');
-    expect(town.economicState.localProduction, 'anchored: the record lists them').toEqual(expect.arrayContaining(['Guild-manufactured goods', 'Barrels and containers', 'Fine wool cloth']));
+    expect(town.economicState.localProduction, 'anchored: the record lists them').toEqual(expect.arrayContaining(['Guild-manufactured goods', 'Fine wool cloth']));
+    // RE-KEYED BY IDENTITY (TAIL-DEFECON-C-3, D30 (a)): the record itself no longer lists barrels where no cooper stands
+    // (the whole table, GOOD_WORKING_HOUSES); the page claim below is unchanged.
+    expect(town.economicState.localProduction, 'D30 (a): no cooper, no barrels on the record').not.toContain('Barrels and containers');
     const local = pillsUnder(town, 'Produced locally');
     // the list prints (re-keyed by W2-C-LEAVES-12: its anchor was "Preserved foods", which a Shepherd and Common grazing land
     // made by the default read; ruling (3), a good no house of its maker row makes is not printed, takes it off)
