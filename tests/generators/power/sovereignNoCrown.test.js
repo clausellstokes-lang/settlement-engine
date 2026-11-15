@@ -33,6 +33,8 @@ describe('COHERENCE-POWERS-7 · no crown where the town governs itself', () => {
     const texts = [...s.powerStructure.factions.map((f) => f.desc), s.powerStructure.recentConflict];
     expect(texts.filter((t) => /\bcrown\b/i.test(String(t || '')))).toEqual([]);
     expect(String(s.powerStructure.factions.find((f) => f.faction === 'War Council')?.desc)).toMatch(/^Emergency body /);
-    expect(String(s.powerStructure.factions.find((f) => f.faction === 'Military/Guard')?.desc)).toContain('Authority flows through military channels now.');
+    // BAR3-CLOSE-SWEEP-A (2026-11-15): re-keyed by identity to the self-governing twin the powers branch's c0d013098
+    // rewords (its declared cure C9941: `stressFactions.js :: WARTIME_SOVEREIGN_MILITARY`, no rank, no crown)
+    expect(String(s.powerStructure.factions.find((f) => f.faction === 'Military/Guard')?.desc)).toContain('Authority over the war flows through military channels now.');
   }, 60_000);
 });

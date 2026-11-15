@@ -75,7 +75,11 @@ describe('BAR3-PLACES: the rows read the town', () => {
     ['C15699 no trade built upon at the founding', 'r2s-succession_void-hamlet-2', /was built upon failed|what it was collapsed|depended on failed/, /The trade the settlement was founded to serve failed within its first few years/],
     ['C24238 no one kind of tension', 'r2r-city-36', /The tensions here are the domestic kind/, /Beside whatever else divides it, its oldest quarrels are the domestic kind/],
     ['C24620 no stability claimed', 'r2r-city-18', /Stable enough that its tensions/, /Its oldest tensions are the slow kind/],
-    ['C18651 no power over the seat', 'r2r-town-8', /holds more practical power than whoever holds the official seat/, /has a say the official seat must reckon with/],
+    // BAR3-CLOSE-SWEEP-A (2026-11-15): re-keyed by identity from r2r-town-8, whose theocratic note the defecon branch's
+    // declared cure withdraws (7a4b48a84, BAR3-DEFECON-HANDBACK `flags.theocraticEconomy`: its tithes row, 12%, is not
+    // the income record's largest); r2r-town-54 (a Strong Feudal Appointee beside Strong Religious Authorities) is the
+    // one town of the census's 720 that still prints the note (BAR3-DEFECON-2-HANDBACK: 16 -> 1)
+    ['C18651 no power over the seat', 'r2r-town-54', /holds more practical power than whoever holds the official seat/, /has a say the official seat must reckon with/],
     ['C5938 no grain by a covert route under a siege', 'bar0-city-under_siege+famine-rand-8', /through a covert route/, /before the siege closed the roads, and is selling it at triple the official price after dark/],
     ['C8742 the sovereign city: no crown officer', 'bar0-city-wartime-rand-7', /A crown officer has arrived/, /An army requisition officer has arrived with orders/],
     ['C8717 the sovereign city: no kingdom', 'bar0-city-wartime-rand-7', /is in a kingdom/, /is at war and doing well out of it/],
