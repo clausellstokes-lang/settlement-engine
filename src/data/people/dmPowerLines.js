@@ -224,7 +224,7 @@ export const CAPTURE_LINES = Object.freeze({
   equilibrium: Object.freeze([
     (f) => (f.agents.length
       ? `${answerClause(f)}, but the head does not. ${criminalsOf(f)} has a voice in ${f.ruler}, not the last word.`
-      : `${f.ruler} and ${criminalsOf(f)} leave each other alone. Nobody at the head of ${f.ruler} answers to ${criminalsOf(f)}, and neither side pushes the other.`),
+      : `Nobody at the head of ${f.ruler} answers to ${criminalsOf(f)}, and ${f.ruler} has not set out to stamp ${criminalsOf(f)} out.`), // TAIL-POWERS-B: the rung's tolerance, not a peace a quarrel or an escalation denies
     (f) => (f.agents.length
       ? `${namedAnswerClause(f)}. ${byRank(f)[0].name} can slow what ${f.ruler} decides against ${criminalsOf(f)}, but cannot stop it alone.`
       : `${f.ruler} knows what ${criminalsOf(f)} does and lets most of it go. ${criminalsOf(f)} keeps its business quiet enough to be let go.`),

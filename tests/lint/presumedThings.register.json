@@ -767,7 +767,7 @@
    ["watch", "after-release", "Add Thieves' Guild, Black Market, or City Watch", "653197f17b02acd7"]
   ],
   "src/generators/factionDynamics.js": [
-   ["temple", "after-release", " has sway. Merchants pay for churches, ", "d1a258fb4e72890c"],
+   ["temple", "after-release", " sway. Merchants pay for churches, ", "a714e70379d13152"],
    ["temple", "after-release", " want the same households' money: tithes on one side, debts and contracts on the other. Church land exemptions and the c", "e972b6879d8bee81"]
   ],
   "src/generators/history/historyEventStrands.js": [
