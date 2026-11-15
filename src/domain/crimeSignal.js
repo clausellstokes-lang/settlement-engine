@@ -119,3 +119,12 @@ export function gangHousesOf(institutions) {
 export function criminalSeatGoverns(seats) {
   return (Array.isArray(seats) ? seats : []).some((seat) => seat?.category === 'criminal' && seat?.isGoverning === true);
 }
+
+/**
+ * Whether a criminal house's name is a smuggling house (TAIL-DEFECON-2, B05884: a front business is not one).
+ * TAIL-CLOSE-SRC-3: moved verbatim from `economy/economicState.js`'s criminal-revenue label into the crime home.
+ * @param {string} name @returns {boolean}
+ */
+export function namesSmugglingHouse(name) {
+  return name.toLowerCase().includes('smuggl');
+}
