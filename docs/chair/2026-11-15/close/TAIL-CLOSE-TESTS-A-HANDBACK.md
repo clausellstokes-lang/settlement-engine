@@ -85,6 +85,8 @@ so the cure is in the test files alone. Nothing under src/ changed.
   - w5-hamlet-occupied-104  DS-DEF-11::WALLED-STRAINED v5
   - w5-city-occupied-1  DS-DEF-2::Beasts & Monsters: frontier, credible deterrence v4
    The file's 12 rows already red at the base ("no longer reads <pool>") are unchanged.
+   **The file has left my hands (the chair, 06:06Z):** TAIL-CLOSE-POOLS-1 re-keys those rows by identity from the line's copy of the
+   anchored form; I do not touch it again.
 2. **tests/components/displayEconCrisisMarks.test.jsx**, NOT row `r2s-famine-hamlet-0 does not print the unmarked "Fish & Maritime Produce Catch landed"`:
    `LIVENESS ANCHOR [r2s-famine-hamlet-0: the marked row prints in the unmarked one's place]: the anchor sibling is missing` (the anchor is the row's
    own "instead" column, "Fish & Maritime Produce Scarce in the famine. Catch landed"; its own prints-row was already red at the base).
@@ -113,5 +115,14 @@ conflictRelationsTwin KEEP (`/\S/` plus a kept-row count), w2FixData5 ww-473 (ma
 tests/domain/corpusEcoTailGuards.test.js (tail-corpus-eco), tests/domain/tailCorpusDefGuards.test.js (tail-corpus-def),
 tests/domain/tailCrisisBatch4.test.js (tail-crisis): to do after "SWEPT <tip>".
 
-## Left
-The three held-back files (after "SWEPT <tip>", with a merge of the joined line at that tip and a re-measure).
+## Left (HANDED BACK 06:30Z at the seat's time budget; no "SWEPT" had arrived)
+For the next hand, after "SWEPT <tip>" (merge the joined line at that tip, re-measure with the walkers):
+- the three held-back MOVING files: tests/domain/corpusEcoTailGuards.test.js (neg @224), tests/domain/tailCorpusDefGuards.test.js
+  (neg @153), tests/domain/tailCrisisBatch4.test.js (neg @72, seed loops @70,77; the same shape as batches 1-6: the FALSE/KEEP loops
+  through collectSeedFailures, the not/instead pair through expectAbsentWithAnchor). At 05:46Z the three-dot diff still showed the
+  first and third changing on tail-corpus-def.
+- ARRIVALS in my half on the joined line since 7efc7686 (measured at 74688857): tests/components/crisisTab.test.jsx (neg @102),
+  tests/domain/tailCrisisBatch8.test.js (neg @149), tests/generators/coherenceAgreeCures.test.js (neg @462; generation-facing, so it
+  also reds the quarantine-exact arm). Re-measure at the swept tip: more may have arrived.
+- NOT mine any more: tests/domain/corpusCureGuards.test.js (TAIL-CLOSE-POOLS-1).
+Tip of this branch at the hand-back: see the last commit of lane/tail-close-tests-a-2026-11-15.
