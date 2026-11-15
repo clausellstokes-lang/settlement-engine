@@ -52,7 +52,7 @@ const GONE = [
   { seed: 'r2s-famine-metropolis-2', pool: 'DS-GEN-13::WAREHOUSES', gone: /fill after the harvest/, prints: 2, why: 'a famine: "warehouses fill after the harvest" of a harvest that failed (12197; v3 + `no crisis: famine`)' },
   { seed: 'r2s-occupied-metropolis-0', pool: 'DS-GEN-17::ADMINISTERED', gone: /keeps its own court and its own gaol/, prints: 3, why: 'an occupation: "keeps its own court and its own gaol" where the occupier holds them (21023; v1 + `no crisis: occupied`)' },
   { seed: 'r2s-succession_void-metropolis-1', pool: 'DS-ECO-8::COMFORTABLE', gone: /stores are more than the season needs/, prints: 2, why: 'a food deficit after imports: "the stores are more than the season needs" (20129; v3 + `food: ≥ secure`)' },
-  { seed: 'r2s-under_siege-city-0', pool: 'DS-ECO-6::TIER: significant off-book activity (≥15)', gone: /the trade that plainly goes on there/, prints: 4, why: 'a siege: "the trade that plainly goes on there" where nothing comes in by road (20457; v5 + `no crisis: under_siege`)' },
+  { seed: 'r2s-under_siege-city-0', pool: 'DS-ECO-6::TIER: significant off-book activity (≥15)', gone: /the trade that plainly goes on there/, prints: 8, why: 'a siege: "the trade that plainly goes on there" where nothing comes in by road (20457; v5 + `no crisis: under_siege`; re-keyed by batch 5: v4, its inheritor, is false under a siege too, C13, and the siege twin v8 draws)' },
   { seed: 'r2s-plague_onset-metropolis-2', pool: 'DS-ECO-10::POSTURE: established', gone: /always something going out/, prints: 1, why: 'a plague: "There is always something going out" where travel is discouraged and goods stop (22618; v2-v6 + `no crisis: plague_onset`)' },
   { seed: 'r2s-plague_onset-metropolis-0', pool: 'DS-ECO-10::POSTURE: established', gone: /Buyers from outside come/, prints: 1, why: 'a plague: "Buyers from outside come to X for more than one thing" (04637)' },
   { seed: 'r2s-plague_onset-hamlet-1', pool: 'DS-ECO-10::POSTURE: established', gone: /The carts that leave/, prints: 1, why: 'a plague: "The carts that leave X carry several kinds of goods" (20138)' },
@@ -63,7 +63,7 @@ const GONE = [
   { seed: 'r2r-thorp-17', pool: 'DS-GEN-13::NO-MARKET', gone: /house to house and on the road/, prints: 3, why: 'an isolated thorp: trade "on the road" (14619; v3 reworded "done house to house")' },
   { seed: 'r2r-hamlet-10', pool: 'DS-GEN-18::BOUGHT-IN', gone: /^Much of what changes hands/, prints: 9, why: 'two imports: "Much of what changes hands ... came from somewhere else" (14079; v9 "Some of")' },
   { seed: 'r2r-town-12', pool: 'DS-GEN-13::MARKET-NARROW', gone: /buys mostly what it makes itself/, prints: 2, why: 'grain, wool, dairy brought in: "buys mostly what it makes itself" (00473; v2 reworded)' },
-  { seed: 'r2r-village-11', pool: 'DS-GEN-13::COMMERCE: a market, no guild', gone: /No guild runs/, prints: 2, why: 'a guild power: "No guild runs X\'s market" (14605; v2 "No guild keeps a house at")' },
+  { seed: 'r2r-village-11', pool: 'DS-GEN-13::COMMERCE: a market, no guild', gone: /No guild runs/, prints: 1, why: 'a guild power: "No guild runs X\'s market" (14605; v2 "No guild keeps a house at")' },
   { seed: 'r2r-city-12', pool: 'DS-ECO-10::POSTURE: entrepot', gone: /Very little of what leaves began here/, prints: 2, why: 'every export made here: "Very little of what leaves began here" (23392; v2 reworded)' },
   { seed: 'r2r-thorp-33', pool: 'DS-ECO-8::PROSPEROUS', gone: /its halls and its defences/, prints: 1, why: 'no defence and no hall on the record: "spends it on its halls and its defences" (00755, the bar\'s #168; v1 reworded)' },
   // ── BATCH 3 · the economy desk's header, shadow, strategic, wealth, posture and food lines (TAIL-CORPUS-ECO-2): DECLARED (the replay's inheritor) or REWORDED (the same vid) ──
@@ -87,6 +87,18 @@ const GONE = [
   // ── BATCH 4 · the chair's ruling C12, the siege's sea exception: the two siege lines claim the roads, not every way in (REWORDED, the same vid) ──
   { seed: 'r2s-under_siege-city-0', pool: 'DS-ECO-1::COMBINATION C4: a low rung on a working approach', gone: /every way in/, prints: 4, why: 'a besieged port the sea keeps open (food by ship): "the siege closing every way in" (C12; v4 now "closing the roads")' },
   { seed: 'r2s-under_siege-city-0', pool: 'DS-ECO-9::IMPORT-DEPENDENT', gone: /since the siege closed the roads/, prints: 5, why: 'the same port: "none of it has come since the siege closed the roads" where ships bring food (C12; v5 now "none of it has come by road")' },
+  // ── BATCH 5 · the chair's ruling C13 (TAIL-CORPUS-ECO-3: faults in the group's own new lines) and DS-GEN-13 ENTREPOT, DS-GEN-14 FOUNDED-YOUNG ──
+  { seed: 'r2r-thorp-45', pool: 'DS-ECO-12::CRITICAL IMPORT: the land cannot give it', gone: /so the town buys in what it needs/, prints: 1, why: 'a siege: "so the town buys in what it needs" where nothing comes in (C13 A; v1 now claims the lack alone)' },
+  { seed: 'r2r-thorp-21', pool: 'DS-ECO-12::CRITICAL IMPORT: the land cannot give it', gone: /brings in the rest/, prints: 2, why: 'isolated, the good on no import list: "the town brings in the rest" (C13 A; v2 now claims the lack alone)' },
+  { seed: 'r2r-thorp-11', pool: 'DS-ECO-10::POSTURE: entrepot', gone: /yards are as busy as its workshops/, prints: 3, why: 'a thorp whose one house is access to a mill elsewhere: "yards as busy as its workshops" (C13 B; v2 + `tier: ≥ village`)' },
+  { seed: 'r2s-occupied-city-0', pool: 'DS-ECO-10::POSTURE: entrepot', gone: /yards are as busy as its workshops/, prints: 3, why: 'an occupation (C13 B; v2 + `no crisis: occupied`)' },
+  { seed: 'r2s-plague_onset-hamlet-0', pool: 'DS-ECO-10::POSTURE: entrepot', gone: /yards are as busy as its workshops/, prints: 1, why: 'a plague: no line gathers a crowd (C13 B, Y8; v2 + `no crisis: plague_onset`)' },
+  { seed: 'r2r-village-11', pool: 'DS-GEN-13::COMMERCE: a market, no guild', gone: /No guild keeps a house at/, prints: 1, why: 'a guild power stands: "No guild keeps a house at the market" (C13 C; v2 + `no guild`)' },
+  { seed: 'r2s-indebted-city-1', pool: 'DS-ECO-8::PROSPEROUS', gone: /has money to spend, and spends it/, prints: 2, why: 'indebted to an outside power: "has money to spend, and spends it" (C13 C; v1 + `no crisis: indebted`)' },
+  { seed: 'r2s-under_siege-town-2', pool: 'DS-ECO-6::TIER: significant off-book activity (≥15)', gone: /price a buyer is quoted depends on whether a duty/, prints: 8, why: 'a siege: duties on goods that cannot come in (C13 C; v4 + `no crisis: under_siege`, the siege twin v8)' },
+  { seed: 'r2s-under_siege-town-0', pool: 'DS-ECO-6::TIER: significant off-book activity (≥15)', gone: /merchants who pay their duties and guild fees are undersold/, prints: [8, 2], why: 'a siege (C13 C; v0 + `no crisis: under_siege`)' },
+  { seed: 'r2s-plague_onset-city-0', pool: 'DS-GEN-13::ENTREPOT', gone: /handles more than the town could ever use/, prints: 2, why: 'a quarantine: the market "handles more than the city could ever use" (01563; v1 + `no crisis: plague_onset`)' },
+  { seed: 'r2s-occupied-hamlet-0', pool: 'DS-GEN-14::FOUNDED-YOUNG', gone: /still does the job it began with/, prints: 2, why: 'founded a stronghold, now undefended and occupied: "still does the job it began with" (07396; v2 reworded, v1 with it)' },
 ];
 /** @type {ReadonlyArray<KeepRow>} */
 const KEEP = [
@@ -96,7 +108,7 @@ const KEEP = [
   { seed: 'r2s-wartime-metropolis-3', pool: 'DS-ECO-12::INCOME MIX: a criminal line is present', keep: 2, text: /^Some of the money in \{settlement\} is made outside the law/, why: 'a metropolis with a criminal line under its market' },
   { seed: 'r2s-famine-town-1', pool: 'DS-ECO-12::INCOME MIX: a broad spread, no leader', keep: 1, text: /^\{settlement\} lives on many/, why: 'a famine town, no source near half' },
   { seed: 'r2s-wartime-city-1', pool: 'DS-ECO-12::CRITICAL IMPORT: the land cannot give it', keep: 1, text: /^The country around \{settlement\}/, why: 'a city at war' },
-  { seed: 'r2r-thorp-12', pool: 'DS-ECO-12::CRITICAL IMPORT: the land cannot give it', keep: 2, text: /of the \{good\} used at \{settlement\} comes from the country here/, why: 'the smallest it reaches' },
+  { seed: 'r2r-thorp-12', pool: 'DS-ECO-12::CRITICAL IMPORT: the land cannot give it', keep: 2, text: /^Not enough of the \{good\} .*comes from the country here/, why: 'the smallest it reaches' },
   { seed: 'r2s-wartime-hamlet-3', pool: 'DS-ECO-12::CRITICAL IMPORT: the land cannot give it', keep: 3, text: /so the town must look elsewhere/, why: 'a hamlet at war, no imports' },
   { seed: 'r2s-occupied-town-0', pool: 'DS-ECO-12::CRITICAL IMPORT: a house needs what the land lacks', keep: 1, text: /^Some of \{settlement\}'s work cannot go on without \{good\}/, why: 'an occupied town' },
   { seed: 'r2s-wartime-metropolis-1', pool: 'DS-ECO-12::CRITICAL IMPORT: a house needs what the land lacks', keep: 2, text: /must come from elsewhere; when none comes, that work stands idle/, why: 'a metropolis at war' },
@@ -135,6 +147,14 @@ const KEEP = [
   // ── BATCH 4 (C12) ──
   { seed: 'r2s-under_siege-town-0', pool: 'DS-ECO-1::COMBINATION C4: a low rung on a working approach', keep: 4, text: /has lost what passing trade used to leave behind/, why: 'the stem, old and new' },
   { seed: 'r2s-under_siege-hamlet-2', pool: 'DS-ECO-9::IMPORT-DEPENDENT', keep: 5, text: /^Whatever \{settlement\} used to buy for its table, none of it has come/, why: 'the stem, old and new' },
+  // ── BATCH 5 ──
+  { seed: 'r2r-thorp-45', pool: 'DS-ECO-12::CRITICAL IMPORT: the land cannot give it', keep: 1, text: /^The country around \{settlement\} does not give the town enough \{good\}/, why: 'the stem, old and new' },
+  { seed: 'r2r-city-10', pool: 'DS-ECO-10::POSTURE: entrepot', keep: 2, text: /yards are as busy as its workshops/, why: 'a calm city with yards and workshops' },
+  { seed: 'r2r-hamlet-4', pool: 'DS-GEN-13::COMMERCE: a market, no guild', keep: 2, text: /No guild keeps a house at/, why: 'no guild house and no guild power' },
+  { seed: 'r2r-city-11', pool: 'DS-ECO-8::PROSPEROUS', keep: 1, text: /has money to spend/, why: 'calm, no debt' },
+  { seed: 'r2r-city-26', pool: 'DS-ECO-6::TIER: significant off-book activity (≥15)', keep: 4, text: /without anyone writing them down/, why: 'no siege' },
+  { seed: 'r2r-city-10', pool: 'DS-GEN-13::ENTREPOT', keep: 1, text: /handles more than the town could ever use/, why: 'no plague' },
+  { seed: 'r2r-hamlet-17', pool: 'DS-GEN-14::FOUNDED-YOUNG', keep: 2, text: /^Everything in \{settlement\} looks recently built/, why: 'the stem, old and new' },
 ];
 
 /** CENSUS-3 seedcfg.mjs's r2r-/r2s- arms, verbatim in shape. @param {string} seed */
