@@ -1,0 +1,8 @@
+{"id":"C5821","town":"bar0-city-wartime-rand-3","sev":"MED","kind":"PAIR","why":"'doing well out of it ... merchants getting rich' vs prosperity Moderate while war lasts, 'losing people and resources', 'no power gains'","other":"C5766"}
+{"id":"C6173","town":"bar0-city-wartime-rand-3","sev":"LOW","kind":"LACKS","why":"titles Declan O'Neill 'Lord Mayor'; GOVERNMENT lists no mayoralty, PEOPLE gives him senior guild master, City Council rank 1","other":""}
+{"id":"C6522","town":"bar0-city-wartime-rand-3","sev":"LOW","kind":"PAIR","why":"says the city buys grapes from outside; the same page says grapes are needed and not brought in; TRADE imports list no grapes","other":"C6552"}
+{"id":"C6890","town":"bar0-city-wartime-rand-3","sev":"MED","kind":"PAIR","why":"garrison and watch have 'inadequate equipment and irregular pay'; the same tab says defenders 'still paid on time' and the watch is 'well-funded'","other":"C6914"}
+{"id":"C6878","town":"bar0-city-wartime-rand-3","sev":"LOW","kind":"PAIR","why":"'Well-funded city watch' vs the defence tab's 'resource-constrained ... inadequate equipment and irregular pay'","other":"C6890"}
+{"id":"C6912","town":"bar0-city-wartime-rand-3","sev":"LOW","kind":"PAIR","why":"'nowhere to hold an offender' / 'courts without detention' vs the watch commander's secret of a prisoner who died 'in the cells'","other":"C7052"}
+{"id":"C7665","town":"bar0-city-wartime-rand-3","sev":"LOW","kind":"STATE","why":"'the present occupation' reads as a current occupation; CRISIS is Wartime and PAST puts The Occupation 324 years ago","other":""}
+{"id":"DONE","lines":2000,"blocks":1,"flags":6}
