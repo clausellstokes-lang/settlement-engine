@@ -34,6 +34,8 @@
 
 import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { isMaterializedCustomContent } from '../content/customContentSemanticAuthority.js';
+import { pluralPowerName } from '../display/governanceAccount.js';
+import { faceOfRole } from '../../data/holderTitleForms.js'; // TAIL-TITLES K-C: the rank keys the face
 
 /**
  * @typedef {'cathedral'|'parish'|'monastery'|'temple'|'chapel'|'shrine'} ChurchKind
@@ -57,6 +59,7 @@ import { isMaterializedCustomContent } from '../content/customContentSemanticAut
  * @property {string} name
  * @property {number} power
  * @property {boolean} governs the faction holds the seat
+ * @property {boolean} [suppressed] the power's own standing is Suppressed (its `powerLabel`; TAIL-CRISIS batch 4, READ-ALL 03046)
  * @property {boolean} [anotherGoverns] another power governs, and this one does not outweigh every other power (R2-CODE-B
  *   round 3, #ww-536; R2-CODE-B-13, the reader's M12: a contender that outweighs the governor and every other power is not flagged)
  */
@@ -79,6 +82,8 @@ import { isMaterializedCustomContent } from '../content/customContentSemanticAut
  *   churches and monasteries"); empty when there are none
  * @property {boolean} accessOnly no church here, and the people have access to a neighbour's
  * @property {boolean} roadBarred a siege is in force, so the road to a neighbour's church is barred (R2-CODE-B-SIDE item 7)
+ * @property {boolean} [quarantined] a plague is abroad and the quarantine holds, so the people do not gather or travel for
+ *   the rites (TAIL-CRISIS K2; the census's 720: every plague_onset town carries its Quarantine condition, and no other)
  * @property {boolean} shrine a wayside shrine stands here
  * @property {SeniorCleric|null} seniorCleric
  * @property {ReligiousFaction|null} religiousFaction
@@ -121,9 +126,17 @@ const ACCESS_RE = /^access to (?:a |the )?(?:parish church|house of worship)\b/i
  * @param {FaithReadingSettlement} s @returns {boolean}
  */
 function besieged(s) {
+  return crisisIs(s, 'under_siege');
+}
+
+/**
+ * The record's crisis container holds an entry of this type (the one key `besieged` always read).
+ * @param {FaithReadingSettlement} s @param {string} type @returns {boolean}
+ */
+function crisisIs(s, type) {
   const c = s.stress;
   const entries = Array.isArray(c) ? c : (c && typeof c === 'object' ? [c] : []);
-  return entries.some((e) => !!e && typeof e === 'object' && /** @type {Record<string, unknown>} */ (e).type === 'under_siege');
+  return entries.some((e) => !!e && typeof e === 'object' && /** @type {Record<string, unknown>} */ (e).type === type);
 }
 
 /**
@@ -244,7 +257,7 @@ function seniorClericOf(s) {
   for (const npc of Array.isArray(s.npcs) ? s.npcs : []) {
     const role = text(npc?.role);
     if (!role) continue;
-    const rank = CLERIC_RANKS.findIndex((re) => re.test(role));
+    const rank = CLERIC_RANKS.findIndex((re) => re.test(text(faceOfRole(npc)))); // TAIL-TITLES K-C: the face, not the holder's form
     if (rank < 0 || (best && best.rank <= rank)) continue;
     const spoken = role.split('/')[0].trim();
     const name = text(npc?.name);
@@ -268,7 +281,7 @@ function religiousFactionOf(s) {
     if (!name) continue;
     const power = num(f?.power, 0);
     if (best && best.power >= power) continue;
-    best = { name, power, governs: f?.isGoverning === true };
+    best = { name, power, governs: f?.isGoverning === true, suppressed: text(f?.powerLabel) === 'Suppressed' };
     bestRow = f;
   }
   // R2-CODE-B round 3 (the increment's #ww-536, the chair's ruling): where ANOTHER power governs, the religious power is
@@ -320,6 +333,9 @@ export function faithReadingOf(settlement, { deity = null } = {}) {
     // walks to the next village's church. The crisis container is the canonical accessor's (the one facts/crisisKind.js
     // :: crisisOf reads; not imported here, so this leaf's import graph stays as it was).
     roadBarred: besieged(s),
+    // TAIL-CRISIS K2 (READ-ALL 06517 06518 14027 B19735 B21207): a plague onset carries its quarantine; the people neither
+    // gather for the rites nor walk to a neighbour's church while it holds.
+    quarantined: crisisIs(s, 'plague_onset'),
     shrine: houses.some((h) => h.kind === 'shrine'),
     seniorCleric: seniorClericOf(s),
     religiousFaction: religiousFactionOf(s),
@@ -354,10 +370,24 @@ const cap = (s) => (s ? s[0].toUpperCase() + s.slice(1) : s);
 /**
  * The religion dial as the people's observance, in five bands. Read in every case, so the
  * dial at 0 and at 100 never read alike.
+ * TAIL-CRISIS K2 (the chair's ruling; READ-ALL 06517 06518 14027): the band says a HABIT of gathering, which is false
+ * while a quarantine keeps the people from gathering, and while a siege bars the road to the only church they have (a
+ * neighbour's). In those two states the band takes a twin true there: the habit, said as what they do in better times,
+ * and what the crisis has done to it. A siege where the church stands inside the walls keeps the band as it is.
  * @param {number} dial
+ * @param {'quarantine'|'siege'|null} [kept] the crisis that keeps the people from the rites together
  * @returns {string}
  */
-function observanceOf(dial) {
+function observanceOf(dial, kept = null) {
+  if (kept) {
+    // the siege is named by the access line printed before this one; here the road it bars is enough
+    const clause = kept === 'quarantine' ? 'while the quarantine holds' : 'while the road is barred';
+    if (dial <= 15) return `Few folk keep the rites beyond weddings and burials, and ${clause} even those are kept small.`;
+    if (dial <= 40) return `In better times folk attend on the great feast days; ${clause} they keep the rites at home.`;
+    if (dial <= 60) return `In better times most folk attend the rites through the year; ${clause} they keep them at home.`;
+    if (dial <= 85) return `Devotion runs deep, but ${clause} the rites are kept at home, not together.`;
+    return `Devotion runs through every part of life here; ${clause} the rites are kept at home, and few miss one.`;
+  }
   if (dial <= 15) return 'Few folk keep the rites beyond weddings and burials.';
   if (dial <= 40) return 'Folk attend on the great feast days and keep the lesser rites at home.';
   if (dial <= 60) return 'Most folk attend the rites through the year.';
@@ -407,6 +437,9 @@ function clericLead(c) {
  */
 function factionLine(f, place) {
   if (f.governs) return `${cap(place)} is governed by the ${f.name}.`;
+  // TAIL-CRISIS batch 4 (READ-ALL 03046: "A small voice in the metropolis’s affairs belongs to the New Faith Community" where
+  // the record stands it Suppressed): a suppressed power has no voice in the place's affairs; the twin says its standing.
+  if (f.suppressed) return `The ${f.name} ${pluralPowerName(f.name) ? 'are' : 'is'} suppressed in ${place}.`;
   if (f.power >= 30 && !f.anotherGoverns) return `Real political weight rests with the ${f.name}.`;
   if (f.power >= 15) return `A voice in ${place}’s affairs belongs to the ${f.name}.`;
   return `A small voice in ${place}’s affairs belongs to the ${f.name}.`;
@@ -432,7 +465,10 @@ export function faithLinesOf(reading, { tierNoun = null } = {}) {
   } else if (reading.accessOnly) {
     out.push(reading.roadBarred
       ? `${cap(place)} has no church of its own, and the siege keeps its people from the next village’s parish church.`
-      : `${cap(place)} has no church of its own; its people walk to the next village’s parish church for the rites.`);
+      // TAIL-CRISIS K2 (READ-ALL B19735 B21207): no walk to a neighbour's church while the quarantine holds.
+      : reading.quarantined
+        ? `In better times ${place}’s people walk to the next village for the rites; while the quarantine holds, they do not.`
+        : `${cap(place)} has no church of its own; its people walk to the next village’s parish church for the rites.`);
     const clericNoun = String(cleric?.role || '').replace(/^the\s+/i, ''); // M-1b: the role carries its article
     if (cleric) out.push(cleric.name ? `${cleric.name}, the ${clericNoun}, lives here.` : `A ${clericNoun} lives here.`);
   } else if (faithHasChurchEvidence(reading)) {
@@ -443,7 +479,9 @@ export function faithLinesOf(reading, { tierNoun = null } = {}) {
   }
   if (faction) out.push(factionLine(faction, place));
   if (reading.tithe) out.push('Tithes are collected.');
-  out.push(observanceOf(reading.dial));
+  // TAIL-CRISIS K2: the quarantine keeps every town from gathering; the siege only the town whose one church is a neighbour's.
+  const kept = reading.quarantined ? 'quarantine' : (reading.roadBarred && reading.accessOnly ? 'siege' : null);
+  out.push(observanceOf(reading.dial, kept));
   return Object.freeze(out);
 }
 

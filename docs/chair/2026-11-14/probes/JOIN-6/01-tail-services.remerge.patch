@@ -1,0 +1,16 @@
+commit 7a9a2fffc15f3ec54214bd43125af0c378b75881
+Merge: 48fedbe98 4035c33a5
+Author: Claude <noreply@anthropic.com>
+Date:   Sun Nov 15 00:08:24 2026 +0000
+
+    join(JOIN-6 · 1): merge lane/tail-services-2026-11-14 at 4035c33a5 — the tail wave's first point (the crisis-stopped leaf and its table)
+    
+    The tip read back from origin at 00:08 UTC. Merge base bcad1a358. No conflict.
+    Six files, all the lane's: src/domain/display/crisisStoppedRow.js (new leaf),
+    src/data/crisisDependence.js (new table), ServicesTab.jsx, InstitutionsTab.jsx,
+    tests/components/crisisStoppedRows.test.jsx, the seat's hand-back.
+    Verify (law (e)): every file the lane moved equals the lane's blob; nothing
+    staged that the lane did not move; no file moved by both sides.
+    
+    Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_01ACmDYWy9t9mT4gQk6kHAhe

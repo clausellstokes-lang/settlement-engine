@@ -36,7 +36,6 @@
   {"thing": "market", "path": ".npcs[].physical.clothes", "text": "from a market they want to be asked about", "reason": "hedge", "note": "the clothes came from somewhere else", "towns": 4},
   {"thing": "market", "path": ".npcs[].plotHooks[]", "text": "in a market two settlements away", "reason": "hedge", "note": "the sentence puts the market in another town", "towns": 2},
   {"thing": "market", "path": ".npcs[].secret.stakes", "text": "looking in every market", "reason": "figure", "note": "every market, anywhere", "towns": 2},
-  {"thing": "market", "path": ".npcs[].secret.what", "text": "before it goes to market", "reason": "figure", "note": "\"goes to market\": to sale", "towns": 3},
   {"thing": "mercenary", "path": ".institutions[].desc", "text": "mercenaries put out to pasture", "reason": "past", "note": "put out to pasture: their service is past", "towns": 6},
   {"thing": "mercenary", "path": ".institutions[].desc", "text": "retired soldiers and mercenaries", "reason": "past", "note": "retired: their service is past", "towns": 18},
   {"thing": "mercenary", "path": ".institutions[].desc", "text": "retired soldiers and sellswords", "reason": "past", "note": "retired: their service is past", "towns": 12},
@@ -217,7 +216,6 @@
    ["docks", "after-release", "{settlement} has a harbour and hardly uses it: empty moorings, few dock hands, and a strange sail draws a crowd to stare", "7c8c2bd09a4761ae"],
    ["docks", "after-release", "{settlement}'s living comes off the quay; the fields behind it are a convenience the town could manage without.", "d4553900d420007d"],
    ["market", "after-release", "{faction} holds {band} of the power in {settlement}, a town goods pass through; part of what passes is smuggled, so more", "7b01e74b1bb5265f"],
-   ["market", "after-release", "{settlement} buys mostly what it makes itself, and the market is where its people trade with each other.", "a3689d106d76f455"],
    ["market", "after-release", "{settlement}'s market handles more than the town could ever use; the difference is the town's living.", "51702d5240e70fd8"],
    ["market", "after-release", "{settlement}'s market lives off through-traffic; the town sells to the road as much as to itself.", "9e822479d614eae4"],
    ["market", "after-release", "{settlement}'s market serves the town itself; little passes through that was not always coming here.", "45116905c9070836"],
@@ -227,7 +225,6 @@
    ["market", "after-release", "DS-GEN-13 · Overview/Economics › The market and the roads (where the town trades, and why there) · market-class institut", "14dce4f62ffbc3fa"],
    ["market", "after-release", "Market day is when {settlement} fills: the roads bring buyers, and the stalls are there for them.", "ebf918fef65f97d0"],
    ["market", "after-release", "No great road feeds {settlement}'s market; it serves the town itself, no more.", "afba51dbc0109a22"],
-   ["market", "after-release", "No guild runs {settlement}'s market: the town's only hold on trade is the stall fee.", "6182a6c3b726a265"],
    ["market", "after-release", "Prices in {settlement} hold steady from one market to the next; the town is not living hand to mouth.", "6e4b0029752e1429"],
    ["market", "after-release", "The market stands where carts always stopped; stalls followed the carts, and {settlement} grew around them.", "c608d0c0609dcc27"],
    ["prison", "after-release", "{settlement} is visibly governed: a hall of justice, a gaol, and officers to staff them.", "0efcb879d014c5c9"],
@@ -437,7 +434,6 @@
    ["militia", "after-release", "Professional soldiers available to train militia or household guards.", "b924fa20394945f9"],
    ["mill", "after-release", "Some mills repurposed for fulling wool cloth.", "4355f0046ef2364e"],
    ["mill", "after-release", "Water-powered sawmill function at some larger mills.", "87e23140f5c75346"],
-   ["temple", "after-release", "Every district has a temple. Religious observance accessible to all.", "2e13c962ed3798d2"],
    ["temple", "after-release", "Refuge inside the walls of the great temple. Limited but ancient right.", "75596a6db36ad450"],
    ["temple", "after-release", "Small offerings left at the shrine. Accumulated and forwarded to the temple.", "bdef3e5f6236edd1"],
    ["temple", "after-release", "The temple space serves as a community meeting hall for non-religious purposes.", "3eccf808db6c579f"],
@@ -535,11 +531,9 @@
    ["guildhall", "after-release", "'s people at the guild hall. In return, ", "4f614b425774c135"],
    ["market", "after-release", "'s goods into markets the law keeps closed.", "0a6831485d7fc3e7"],
    ["market", "after-release", "A valuable cargo was reported lost at sea. The manifest has reappeared in a market two settlements away.", "eed8867130fd4997"],
-   ["market", "after-release", "A valuable cargo was reported lost on the road. The manifest has reappeared in a market two settlements away.", "3d22e685370fcea1"],
    ["market", "after-release", "Corner the market on a specific commodity before a rival does", "cae3e1ae968e96a9"],
    ["market", "after-release", "foreign-cut clothes from a market they want to be asked about", "71558ecf51159956"],
-   ["temple", "after-release", "Navigate political pressure from both the church hierarchy and the civil authorities", "380aebaabb00593c"],
-   ["war", "after-release", "The war between ", "a7f7e0f4bcf5e4bd"]
+   ["temple", "after-release", "Navigate political pressure from both the church hierarchy and the civil authorities", "380aebaabb00593c"]
   ],
   "src/data/people/handlerTieLines.js": [
    ["bank", "after-release", " pays for it in coin that never passes through a counting-house. In company the two of them speak only of ordinary busin", "0905eeb1aa0ef3c9"]
@@ -570,7 +564,6 @@
    ["market", "after-release", "The owners have started looking in every market", "310e193ef29c881a"],
    ["market", "after-release", "the slave-market master", "b0a49fb76c3730b4"],
    ["market", "after-release", "Those coins are turning up in other markets, and someone is asking where they came from", "35f6c3a15d9308fb"],
-   ["market", "after-release", "Waters the milk before it goes to market and has done so for years", "ed1a5cc4fbd36138"],
    ["market", "after-release", "Wet to the elbows, loud, and quick with a knife. Calls the prices over every head in the market.", "465854a5b3cda734"],
    ["mill", "after-release", "Has been keeping back a handful from every sack brought to the mill for grinding, and selling the extra flour on the sid", "6c900e7268c0ca92"],
    ["mill", "after-release", "Has been taking timber from the river's driftwood that belongs to the mill upstream", "88bd4ee888f51f46"],
@@ -583,7 +576,6 @@
    ["mill", "after-release", "The other bakers would turn on both of them, and the miller would sell the baker out first", "713fa40696bfed4a"],
    ["prison", "after-release", "the prison warden", "6c7bc86ed84445c8"],
    ["walls", "after-release", "Fires bricks short to save fuel, and the walls built with them crumble in a few hard winters", "9f73115cb16041ee"],
-   ["walls", "after-release", "Has let the walls go unrepaired and pocketed the money that was granted for the work", "b2db5b34722e8984"],
    ["walls", "after-release", "Ink-stained, short-sighted and precise. The walls are covered with charts weighted down by stones.", "3eb4b8e0b8322a46"],
    ["watch", "after-release", "Busy and short with outsiders. The watch has its own business to see to.", "58c46b31f89bdd7e"],
    ["watch", "after-release", "Has been arresting the people who complain the loudest about the watch, on charges that do not hold", "f78519cdf18841c7"],
@@ -731,7 +723,7 @@
    ["garrison", "after-release", "Forced contributions and confiscations collected by the garrison, not formally a tax.", "43cb8d045f731153"],
    ["garrison", "after-release", "Military services — garrison contracts and armed escort", "ae53300ddab3011e"],
    ["garrison", "after-release", "Military services — standing army leasing, siege engineering, garrison contracts", "c7fda6847f46dc50"],
-   ["market", "after-release", "A busy market for spell services. Identification, augury, message sending, and contract-grade enchanting brings steady c", "2c3590eeb9ead422"],
+   ["market", "after-release", "A busy market for spell services. Identification, augury, message sending, and contract-grade enchanting bring steady co", "5531feeb0fdf3e48"],
    ["market", "after-release", "Daily market tolls, stall fees, and weights-and-measures inspections.", "4f90fa3123af427b"],
    ["market", "after-release", "Guild-run fencing, extortion and black-market trade", "1bb7184098f9240d"],
    ["market", "after-release", "Market day stall fees and toll collection on goods entering the market.", "c79b9048611f7e71"],
@@ -766,7 +758,7 @@
    ["watch", "after-release", "Add Thieves' Guild, Black Market, or City Watch", "653197f17b02acd7"]
   ],
   "src/generators/factionDynamics.js": [
-   ["temple", "after-release", " has sway. Merchants pay for churches, ", "d1a258fb4e72890c"],
+   ["temple", "after-release", " sway. Merchants pay for churches, ", "a714e70379d13152"],
    ["temple", "after-release", " want the same households' money: tithes on one side, debts and contracts on the other. Church land exemptions and the c", "e972b6879d8bee81"]
   ],
   "src/generators/history/historyEventStrands.js": [
@@ -883,7 +875,7 @@
    ["war", "after-release", " The pastoral burden of wartime (soldiers praying before departure, families grieving) has made the institution indispen", "caeb27e9d9b0c063"],
    ["war", "after-release", " The pastoral burden of wartime (the called-up praying before departure, families grieving) has made the institution ind", "e79e17a2fcc956e9"],
    ["war", "after-release", " Wartime has transformed this power from a civic institution into a primary power centre. Crown authority flows through ", "5862258693cdbcc2"],
-   ["war", "after-release", "Crown-appointed emergency body coordinating supply, conscription, and military contracting. Currently functioning smooth", "22d80ba50a9ee72f"]
+   ["war", "after-release", "Crown-appointed emergency body coordinating supply, conscription, and military contracting. While the war goes well, few", "f37c733e6716f3be"]
   ],
   "src/generators/priorityHelpers.js": [
    ["guildhall", "after-release", "adventurers' guild hall", "d84d99937b7ed61c"],

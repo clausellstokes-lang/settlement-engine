@@ -11,7 +11,10 @@
  *     chain step records only those the roster has);
  *   • for each chain magic HOLDS UP (a `magicNote`, written only by `generators/chainMagicSubstitution.js`), the
  *     houses here of the tradition that wrote the note: `MAGIC_NOTE_TRADITION` classes every note that step can
- *     write, and the tradition's houses are the generator's own table (`data/magicTraditionHouses.js`).
+ *     write, and the tradition's houses are the generator's own table (`data/magicTraditionHouses.js`);
+ *   • for the food supply, where the food record's own provision feeds the town (`foodMagicShare`, a dependent of the
+ *     reliance reading since TAIL-DISPLAY-ECON-2, X10), the houses here of the provision's tradition: the kind word
+ *     its note opens on (`foodBalanceBar.js :: magicFoodChannelWord`, the word the food sentence prints).
  * Where magic does not work, nothing supplies it.
  *
  * Layer 4 (it reads the cast). Pure: no randomness, no clock, no write.
@@ -19,7 +22,8 @@
 import { MAGIC_TRADITION_HOUSES } from '../../data/magicTraditionHouses.js';
 import { institutionMatchesKeyword } from '../institutions/institutionCategory.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
-import { chainNeedsMagic, isPractisingNpc, magicWorksAt, practisingInstitutions } from '../magicReliance.js';
+import { chainNeedsMagic, foodMagicShare, isPractisingNpc, magicWorksAt, practisingInstitutions } from '../magicReliance.js';
+import { magicFoodChannelWord } from '../display/foodBalanceBar.js';
 import { liveHouseOf } from './presence.js';
 
 /** @typedef {'druid'|'divine'|'arcane'|'alchemy'} MagicTradition */
@@ -47,6 +51,9 @@ export const MAGIC_NOTE_TRADITION = Object.freeze({
   'Arcane fabrication and stone-shaping partially offset depleted extraction': 'arcane',
   'Alchemical remedies supplement treatment': 'alchemy',
 });
+
+/** The tradition each kind word of the food provision's note is of (the food row's own table, `foodRowShown.js`). */
+const FOOD_KIND_TRADITION = /** @type {Readonly<Record<'druidic'|'divine'|'arcane', MagicTradition>>} */ (Object.freeze({ druidic: 'druid', divine: 'divine', arcane: 'arcane' }));
 
 /** @param {unknown} v @returns {Record<string, unknown>} */
 const obj = (v) => (v && typeof v === 'object' && !Array.isArray(v) ? /** @type {Record<string, unknown>} */ (v) : {});
@@ -105,6 +112,11 @@ export function magicSourceOf(settlement) {
       }
     }
     const tradition = MAGIC_NOTE_TRADITION[str(c.magicNote)];
+    if (tradition) for (const house of traditionHouses(rec, tradition)) add(house);
+  }
+  if (foodMagicShare(rec) > 0) {
+    const kind = magicFoodChannelWord(obj(obj(obj(rec.economicViability).metrics).foodBalance).magicFoodNote);
+    const tradition = FOOD_KIND_TRADITION[/** @type {keyof typeof FOOD_KIND_TRADITION} */ (kind)];
     if (tradition) for (const house of traditionHouses(rec, tradition)) add(house);
   }
   return { houses, people };

@@ -269,9 +269,9 @@ export function deriveViability(settlement) {
     } else if (covered) {
       line = pickTrue(pick, [
         `${town} cannot feed itself: part of its food comes in ${route}.`,
-        `${town} grows less than it eats, and the difference arrives ${route}.`,
+        `${town} grows less than it eats, and part of the difference arrives ${route}.`, // TAIL-DEFECON-D: a residual deficit stands
         `${town} keeps order and pays its way, but it has to buy food to get through the year, and the food comes in ${route}.`,
-        `Much of what ${town} eats is brought in ${route}; its own land does not produce enough.`,
+        `Some of what ${town} eats is brought in ${route}; its own land does not produce enough.`, // TAIL-DEFECON-D: 'much' overclaimed
       ], [true, true, seen.keepsOrder && seen.paysItsWay, true], '');
     } else {
       line = pick([
@@ -308,7 +308,7 @@ export function deriveViability(settlement) {
       `${town} feeds itself and pays its own way.`,
       `${town} grows what it eats and makes what it needs, and owes no one for either.`,
       `Nothing ${town} needs to get through the year has to come from outside.`,
-    ], [!seen.buysFood && seen.paysItsWay, !seen.buysFood && !seen.needsImports, !seen.buysFood && !seen.needsImports], `${town} gets through the year, buying in what its own land and trades do not provide.`)}`,
+    ], [!seen.buysFood && seen.paysItsWay, !seen.buysFood && !seen.needsImports, !seen.buysFood && !seen.needsImports], seen.buysIn ? `${town} gets through the year, buying in what its own land and trades do not provide.` : `${town} gets through the year on its own land and trades, and goes without what they do not provide.`)}`, // TAIL-DEFECON-D (#00585): it buys in only where something arrives
     rawSummary,
   };
 }
@@ -809,12 +809,12 @@ function pickTrue(pick, pool, ok, twin) {
  * (the food record's import share), and the imports its printed trade list marks as a necessity or as what the terrain
  * cannot produce (the Economics tab's own list and marks: `EconomicsTab.jsx :: shownImports`).
  * @param {DossierSettlementView | null | undefined} settlement
- * @returns {{ keepsOrder: boolean, paysItsWay: boolean, buysFood: boolean, needsImports: boolean }}
+ * @returns {{ keepsOrder: boolean, paysItsWay: boolean, buysFood: boolean, buysIn: boolean, needsImports: boolean }}
  */
 function outlookFactsOf(settlement) {
   const town = /** @type {OutlookSettlement | null | undefined} */ (/** @type {unknown} */ (settlement));
   const eco = town?.economicState || {};
-  const law = bandForVariable(/** @type {Parameters<typeof bandForVariable>[0]} */ (/** @type {unknown} */ (settlement)), 'law_order');
+  const law = bandForVariable(/** @type {Parameters<typeof bandForVariable>[0]} */ (/** @type {unknown} */ (settlement)), 'law_order'); const rawStress = /** @type {{ stress?: unknown }} */ (/** @type {unknown} */ (settlement))?.stress, stressTypes = (Array.isArray(rawStress) ? rawStress : rawStress ? [rawStress] : []).map((e) => String(/** @type {{ type?: unknown } | null} */ (e)?.type ?? ''));
   const record = eco.foodSecurity?.foodRecord;
   /** @param {unknown} list @returns {string[]} */
   const lower = (list) => (Array.isArray(list) ? list : []).map((x) => String(x).toLowerCase());
@@ -827,9 +827,9 @@ function outlookFactsOf(settlement) {
   const imports = lower(displayTradeList([...recorded, ...terrain.filter((t) => !recorded.some((imp) => imp.toLowerCase().includes(t)))],
     settlement, { side: 'imports', exports: Array.isArray(eco.primaryExports) ? [...eco.primaryExports] : [] })); // a copy read (tradeListWriters)
   return {
-    keepsOrder: law !== 'critical' && law !== 'collapsed',
+    keepsOrder: law !== 'critical' && law !== 'collapsed' && !OPEN_REVOLT.some((t) => stressTypes.includes(t)), // TAIL-DEFECON-D (#01134): not under open revolt
     paysItsWay: !['Subsistence', ...PROSPERITY_LABELS.slice(0, PROSPERITY_LABELS.indexOf('Poor') + 1)].includes(String(eco.prosperity ?? '')),
-    buysFood: Number(record?.normalImportPct) > 0,
+    buysFood: Number(record?.normalImportPct) > 0, buysIn: Number(record?.normalImportPct) > 0 || tradeListsAsPrinted(/** @type {Parameters<typeof tradeListsAsPrinted>[0]} */ (/** @type {unknown} */ (settlement))).imports.length > 0, // TAIL-DEFECON-D: food bought, or an import the Economics tab prints as arriving
     needsImports: imports.some((imp) => necessity.some((n) => imp.includes(n)) || terrain.some((t) => imp.includes(t) || t.includes(imp))),
   };
 }
@@ -848,7 +848,7 @@ export function outputChipBesideWord(score, label) {
   const high = rung >= 1 + PROSPERITY_LABELS.indexOf('Prosperous'), low = rung <= 1 + PROSPERITY_LABELS.indexOf('Poor');
   return !((score < 35 && high) || (score >= 60 && low));
 }
-import { bandForVariable } from '../causalState.js'; import { PROSPERITY_LABELS } from '../prosperityRank.js'; import { displayTradeList } from './tradeListDisplay.js'; // at the END: no line above moves
+import { bandForVariable } from '../causalState.js'; import { PROSPERITY_LABELS } from '../prosperityRank.js'; import { displayTradeList, tradeListsAsPrinted } from './tradeListDisplay.js'; // at the END: no line above moves
 // W2-A-LEAVES (row 3): the leaf the Magic tab's reliance line names its source from (an import at the foot, so the
 // lines the prose wiring census cites above keep their numbers).
 import { magicSourceOf } from '../facts/magicSource.js';
@@ -878,3 +878,5 @@ function recordHoldsMagicFood(settlement) {
     /** @type {unknown} */ (settlement?.economicState?.foodSecurity));
   return (supply?.magicOffset || 0) > 0 || (supply?.foodRecord?.magicPct || 0) > 0;
 }
+/** TAIL-DEFECON-D (#01134): the crises whose own lines say order has broken (a slave revolt, an insurgency): the Outlook's "keeps order" is not said under them. */
+const OPEN_REVOLT = Object.freeze(['slave_revolt', 'insurgency']);

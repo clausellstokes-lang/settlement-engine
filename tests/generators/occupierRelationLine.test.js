@@ -50,9 +50,9 @@ describe('a relation row says only what the powers\' strengths hold', () => {
     const church = { faction: 'Church Council', category: 'government', isGoverning: true, power: 12 };
     const guard = { faction: 'Military/Guard', category: 'military', power: 19 };
     const religious = { faction: 'Religious Authorities', category: 'religious', power: 47 };
-    expect(row([church, guard, religious], 'Church Council', 'Military/Guard')).toBe('Military/Guard no longer takes orders from Church Council.');
+    expect(row([church, guard, religious], 'Church Council', 'Military/Guard')).toBe('The Guard no longer takes orders from Church Council.');
     expect(row([church, guard], 'Church Council', 'Military/Guard'))
-      .toBe('Military/Guard no longer takes orders from Church Council. Church Council keeps the title; Military/Guard makes the decisions that matter.');
+      .toBe('The Guard no longer takes orders from Church Council. Church Council keeps the title; The Guard makes the decisions that matter.');
     const royal = { faction: 'Royal Authority', category: 'government', isGoverning: true, power: 40 };
     const nobles = { faction: 'Noble Families', category: 'noble', power: 10 };
     const craft = { faction: 'Craft Guilds', category: 'economy', power: 7 };

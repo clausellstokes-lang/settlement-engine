@@ -81,6 +81,7 @@ import { TIME_BANDS, timeBandOf, timeBandWord } from '../heraldCausalGrammar.js'
 import { composeStateProse } from './composeStateProse.js';
 import { generalStateProseCandidates } from './generalStateProseCandidates.js';
 import { legibilityRung } from './legibilityRung.js';
+import { powerSentenceName } from '../powerSentenceName.js';
 import { wallsAnswered } from '../../defense/defenseFacts.js';
 import { defenceOf } from '../../facts/defence.js';
 import { marketOf } from '../../facts/market.js';
@@ -1922,8 +1923,10 @@ export function generalStateProse(settlement, readings = {}, options = {}) {
         candidates: generalStateProseCandidates('DS-GEN-2', readings),
         slots: {
           ...slots,
-          faction: properFill(text(parties[0])),
-          faction2: properFill(text(parties[1])),
+          // TAIL-DISPLAY-CIVIC-3 V1: a power named in a sentence takes the one leaf's form ("Military/Guard" -> "The Guard",
+          // display/powerSentenceName.js); no pool of this desk sets an article before {faction} or {faction2}
+          faction: properFill(powerSentenceName(text(parties[0]))),
+          faction2: properFill(powerSentenceName(text(parties[1]))),
           issue: phraseFill(conflict?.issue),
           stakes: phraseFill(conflict?.stakes),
         },
@@ -2120,7 +2123,7 @@ export function generalStateProse(settlement, readings = {}, options = {}) {
       const line = relLine(crossEngagementPoolKey(row), {
         ...slots,
         counterpart: properFill(text(/** @type {{partnerSettlement?: unknown}} */ (row)?.partnerSettlement)),
-        faction: properFill(text(/** @type {{factionName?: unknown}} */ (row)?.factionName)),
+        faction: properFill(powerSentenceName(text(/** @type {{factionName?: unknown}} */ (row)?.factionName))),
       });
       return line && line.sentence ? line : null;
     }));

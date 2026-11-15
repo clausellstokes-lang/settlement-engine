@@ -38,6 +38,7 @@ import { factsOf } from '../facts/factsOf.js';
 import { firstRankMembershipOf, powerOrderOf } from '../people/membership.js';
 import { institutionHouseLabel } from '../display/institutionDisplayName.js';
 import { pluralPowerName } from '../display/governanceAccount.js';
+import { powerSentenceName } from '../display/powerSentenceName.js';
 
 /** @typedef {import('./crisisCast.js').CrisisCast} CrisisCast */
 /** @typedef {import('./crisisCast.js').CastRow} CastRow */
@@ -121,7 +122,8 @@ function holderWords(s, row) {
   if (row.kind === 'npc') {
     const npc = (Array.isArray(s.npcs) ? s.npcs : []).find((n) => !!n && (str(n.id) || str(n.name)) === row.id);
     const house = str(firstRankMembershipOf(npc, powerOrderOf(s))?.power);
-    return house ? `${row.name} of ${house}` : row.name;
+    // TAIL-CRISIS-2 batch 3: a power named in a sentence takes its prose form from its leaf ("Military/Guard" → "The Guard")
+    return house ? `${row.name} of ${powerSentenceName(house)}` : row.name;
   }
   // ROUND THREE item 4 (the chair's ruling): a hook names a house through houseInProse, never raw.
   return row.kind === 'institution' ? `the ${houseInProse(row.name)}` : row.name;
@@ -175,6 +177,31 @@ export function leverAndLoserOf(cast) {
 const castSentence = (noun, clause, reason) => (CLAUSE_SAYS.has(reason) ? `In the ${noun}, ${clause}.` : `In the ${noun}, ${clause}: ${reason}.`);
 
 /**
+ * THE REASONS THAT ARE A VERB'S PREDICATE (TAIL-CRISIS-2 batch 3; READ-ALL 11595 11549 11671 11569 11668 B11049 B11090:
+ * "In the debt crisis, Eir Ragnarsson of Household Council is the one who would come to terms: holds the seat." — the clause
+ * after the colon has no subject). These reasons say what the HOLDER does, so they are said of the holder, as a relative
+ * clause beside its name ("Eir Ragnarsson of Household Council, who holds the seat, is the one who would come to terms."),
+ * never after a colon. The other reasons are a noun or a whole clause, which a colon can hold. No draw; no new words.
+ * @type {ReadonlySet<string>}
+ */
+const PREDICATE_REASONS = new Set(['leverRuns', 'instigatorRival', 'instigatorBacked', 'targetSeat', 'targetSeatContested', 'scapegoatSeat',
+  'scapegoatLever', 'defenderMilitary', 'defenderOffice', 'treaterSeat', 'face'].map((k) => /** @type {Record<string, unknown>} */ (CAST_REASONS)[k]).filter((r) => typeof r === 'string'));
+
+/**
+ * The cast hook's sentence, its reason said of the holder where the reason is a predicate.
+ * @param {string} noun @param {(holder: string) => string} clauseOf @param {string} words the holder's words @param {CastRow} holder
+ * @returns {string}
+ */
+function castSentenceOf(noun, clauseOf, words, holder) {
+  const reason = str(holder.reason);
+  if (CLAUSE_SAYS.has(reason) || !PREDICATE_REASONS.has(reason)) return castSentence(noun, clauseOf(words), reason);
+  // TAIL-CRISIS-3 (batch 3's inheritors read): the rival's reason is its POWER's standing ("already carries more weight than
+  // whoever holds the seat"), never the person's, so the clause is said of the person's power
+  const who = holder.kind !== 'npc' ? 'which' : reason === CAST_REASONS.instigatorRival ? 'whose power' : 'who';
+  return `In the ${noun}, ${clauseOf(`${words}, ${who} ${reason},`)}.`.replace(/,\.$/, '.');
+}
+
+/**
  * The lever hook's sentence for a noun. PROPOSAL L1 (with a loser) and L2 (none loses).
  * @param {string} noun @param {string} house @param {string} holder @param {import('./crisisCast.js').CastStake | null} loser
  */
@@ -196,9 +223,11 @@ function leverSentence(noun, house, holder, loser) {
  * @param {import('./crisisCast.js').CastStake} loser @returns {string}
  */
 function loserClause(loser) {
-  const plural = pluralPowerName(loser.factionId);
+  // TAIL-CRISIS-2 batch 3 (READ-ALL 20875: "Military/Guard loses most"): the power by its prose form (`powerSentenceName`)
+  const name = powerSentenceName(loser.factionId);
+  const plural = pluralPowerName(name);
   const reason = plural ? loser.reason.replace(/\bits\b/g, 'their') : loser.reason;
-  return `${loser.factionId} ${plural ? 'lose' : 'loses'} most, because ${reason}`;
+  return `${name} ${plural ? 'lose' : 'loses'} most, because ${reason}`;
 }
 
 /**
@@ -243,7 +272,7 @@ export function crisisHooksOf(settlement, entry, facts = settlementHookFacts(set
     }).line)
     : null;
   if (holder && clauseOf && str(holder.reason) && !pluralHouseHolder(holder)) {
-    const text = speakTrue((n) => castSentence(n, clauseOf(holderWords(s, holder)), holder.reason), noun, facts);
+    const text = speakTrue((n) => castSentenceOf(n, clauseOf, holderWords(s, holder), holder), noun, facts);
     if (text) out.push({ text, bound: 'cast', link: linkOf(holder) });
   }
 

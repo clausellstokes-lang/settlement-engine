@@ -1,0 +1,31 @@
+commit 5d1e3096b23c81e79bfcaf47d8c4fa5e8a610f5f
+Merge: 747aa26b7 b30c1b7aa
+Author: Claude <noreply@anthropic.com>
+Date:   Sun Nov 15 03:11:30 2026 +0000
+
+    join(JOIN-7 · 31): merge lane/tail-titles-2026-11-15 at b30c1b7aa
+    
+    The tip read back from origin at 03:09 UTC (b30c1b7aa8caff3e664f7fdd03a03e01fac9bf45), merged --no-ff at the full hash by the
+    laws of JOIN-6's hand-back section 1 and the chair's ruling of 2026-11-15 (the fifth landing).
+    Merge base 866041da5. CODE CONFLICT (law b; the chair's lent hunk, ruling: both stand, the chair told): src/domain/dossier/faithReading.js, the import block: crisis d667b50e7 (joined side, point 19) imports pluralPowerName, this lane's 1036bf94b imports faceOfRole, at the same line: both import lines kept; nothing else of the file touched. Hunks that meet other branches, merged clean though both sides moved them: src/generators/npcStructure.js (ties 21's hunks at 114-589; this lane's holderHouseLineOf at 534: apart), src/generators/people/representatives.js (ties 21 at 311-393; this lane at 56 and 559: apart), tests/generators/people/mintedLordKeepsLines.test.js (ties' rows at 34-42, this lane's at 40-46: adjacent, both stand). Measured on the merged tree, 17 test files naming faithReading.js and the title files: 97/99; the two reds (vocabularyPageFindings F1, r3c9ReaderLinesTrue n15) are red at eb054d53f already: carried, listed. DECLARED MOVE 1036bf94b K-C (npcs 360 towns, relationships 270, pressureSentence 1): the golden carried, the owner's door.
+    
+    Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_01ACmDYbFW14mE2ojWhRMpcy
+
+diff --git a/src/domain/dossier/faithReading.js b/src/domain/dossier/faithReading.js
+remerge CONFLICT (content): Merge conflict in src/domain/dossier/faithReading.js
+index 6d3c1361a..1d35c782d 100644
+--- a/src/domain/dossier/faithReading.js
++++ b/src/domain/dossier/faithReading.js
+@@ -34,11 +34,8 @@
+ 
+ import { liveInstitutions } from '../institutions/institutionRoster.js';
+ import { isMaterializedCustomContent } from '../content/customContentSemanticAuthority.js';
+-<<<<<<< 747aa26b7 (docs(JOIN-7): the hand-back after point 30)
+ import { pluralPowerName } from '../display/governanceAccount.js';
+-=======
+ import { faceOfRole } from '../../data/holderTitleForms.js'; // TAIL-TITLES K-C: the rank keys the face
+->>>>>>> b30c1b7aa (docs(TAIL-TITLES): the hand-back's WHAT IS LEFT (class k done at 1036bf94b))
+ 
+ /**
+  * @typedef {'cathedral'|'parish'|'monastery'|'temple'|'chapel'|'shrine'} ChurchKind

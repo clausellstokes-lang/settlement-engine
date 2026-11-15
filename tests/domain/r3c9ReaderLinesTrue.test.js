@@ -146,7 +146,8 @@ describe('n80: the foodways line names no source the famine failed', () => {
 describe('n240: the faith is not said to have no say in the hall where the record gives it a voice', () => {
   it('no relationship line says it beside the World/Faith voice the same town prints', () => {
     const seen = faithTowns.map((s) => {
-      const voice = faithLinesOf(faithReadingOf(s)).find((line) => /voice in|political weight/.test(line)) || '';
+      // TAIL-CRISIS batch 4 (READ-ALL 03046, re-keyed by identity): a faith the record stands Suppressed prints its standing, not a voice
+      const voice = faithLinesOf(faithReadingOf(s)).find((line) => /voice in|political weight| suppressed in /.test(line)) || '';
       const rows = (s.powerStructure?.factionRelationships || []).filter((/** @type {any} */ r) => String(r.narrative || '').includes(NO_SAY));
       return { town: s.name, voice, noSay: rows.map((/** @type {any} */ r) => r.narrative) };
     });

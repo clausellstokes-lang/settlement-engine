@@ -123,7 +123,7 @@
         },
         {
           "lineId": "PRESSURE_SENTENCES.famine[1]",
-          "text": "Since ${failed}, whoever holds the food in ${name} holds the power, and at least three powers are fighting over ${stores}.",
+          "text": "Since ${failed}, whoever holds the food in ${name} holds the power, and its strongest powers are each watching who holds ${stores}.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -803,29 +803,33 @@
         },
         {
           "lineId": "PRESSURE_SENTENCES.monster_pressure[1]",
-          "text": "The defences of ${name} were built for quieter years than these, as ${topNPCName}, the ${topNPCRole}, warned at the last muster.",
-          "needs": [],
+          "text": "The defences of ${name} were built for quieter years than these, as ${topNPC} warned at the last muster.",
+          "needs": [
+            "guardPresence"
+          ],
           "excludes": [],
           "crisis": [
             "monster_pressure"
           ],
-          "colour": true,
+          "colour": false,
           "stop": []
         },
         {
           "lineId": "PRESSURE_SENTENCES.monster_pressure[2]",
           "text": "Three farmsteads have been abandoned in the last month; the families who abandoned them know something about what they saw that they haven't reported to the authorities.",
-          "needs": [],
+          "needs": [
+            "tier: ≥ hamlet"
+          ],
           "excludes": [],
           "crisis": [
             "monster_pressure"
           ],
-          "colour": true,
+          "colour": false,
           "stop": []
         },
         {
           "lineId": "PRESSURE_SENTENCES.monster_pressure[3]",
-          "text": "${name} has drawn its edges inward (fields left unworked, a mill standing idle) trading the ${commodity} it needs for a perimeter ${milForce} can actually hold.",
+          "text": "${name} has drawn its edges inward (fields left unworked, a mill ${millExports}) giving up its outlying ground for a perimeter ${milForce} can actually hold.",
           "needs": [
             "institution: mill"
           ],
@@ -1126,7 +1130,8 @@
           "lineId": "PRESSURE_SENTENCES.wartime(winning)[2]",
           "text": "${name} is prospering on the right side of it: full warehouses, a reinforced garrison, coin moving fast, and all of it lost if the war turns.",
           "needs": [
-            "garrison"
+            "garrison",
+            "prosperity: ≥ comfortable"
           ],
           "excludes": [],
           "crisis": [

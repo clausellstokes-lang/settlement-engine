@@ -28,7 +28,7 @@
     }
   ],
   "statePools": {
-    "DS-ECO-1::COMBINATION C5: a low rung on a narrow approach": 3,
+    "DS-ECO-1::COMBINATION C5: a low rung on a narrow approach": 2,
     "DS-ECO-2::FOOD: deficit": 1,
     "DS-ECO-5::IMPAIRED (canonical scarce), with a named dependency": 3,
     "DS-ECO-5::VULNERABLE (canonical strained)": 3,
@@ -43,7 +43,6 @@
     "DS-SUP-1::ENTREPÔT PASS-THROUGH (no workshop in the line)": 3,
     "DS-SUP-1::BLOCKED: nothing can be got away": 3,
     "DS-ECO-8::SUBSISTENCE": 3,
-    "DS-ECO-8::COMFORTABLE": 1,
     "DS-ECO-9::DEFICIT": 1,
     "DS-ECO-9::ACTIVE FAMINE": 3,
     "DS-SUP-2::STABLE": 3,
@@ -52,7 +51,7 @@
     "DS-SUP-2::BLOCKED": 3,
     "DS-SUP-2::CAPTURED": 3,
     "DS-SUP-2::COLLAPSING": 3,
-    "DS-ECO-10::POSTURE: none": 3,
+    "DS-ECO-10::POSTURE: none": 1,
     "DS-ECO-10::POSTURE: limited": 3,
     "DS-ECO-10::POSTURE: import_dependent": 3,
     "DS-ECO-10::THE FRESHNESS CAVEAT: for any surface printing a derived tally": 3,

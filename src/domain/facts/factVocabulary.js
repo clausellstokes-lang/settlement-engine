@@ -208,9 +208,10 @@ export const ROUTE_WORDS = Object.freeze(['road', 'river', 'port', 'crossroads',
  * @property {string} [terrain] @property {string} [route] @property {string} [tier]
  * @property {(npc: unknown) => boolean|undefined} [hasOtherNpc]
  * @property {(pair: unknown) => boolean|undefined} [sharesPower]
+ * @property {boolean} [rulingBody]
  * @property {boolean} [soldiers] @property {boolean} [commander]
  * @property {Readonly<import('../dossier/faithReading.js').FaithReading>} [faith] @property {boolean} [guardPresence]
- * @property {boolean} [guild] @property {boolean} [sacredHouse]
+ * @property {boolean} [guild] @property {boolean} [sacredHouse] @property {boolean} [rivalPower]
  * @property {ReadonlyArray<string>} [foodSources] @property {ReadonlyArray<unknown>} [imports]
  * @property {ReadonlyArray<unknown>} [exports] @property {string|null} [culture] @property {string} [crime]
  * @property {string} [prosperity]
@@ -286,6 +287,11 @@ export const FACT_DIMENSIONS = Object.freeze({
   // CENSUS-4b (the chair's answer 4): ONE composite — a live guild-type institution ∨ a guild power
   // (`facts/guild.js :: guildOf`); a criminal guild is `organised crime`'s, never this.
   guild: dim({ shape: 'presence', home: 'guild', reader: (f) => bool(f.guild) }),
+  // TAIL-CRISIS-2, THE CHAIR'S RULING K6 of 2026-11-15 ("THE THIRD ATOM IS GRANTED"; vetoable by the owner): the record
+  // holds a power OTHER THAN THE GOVERNING ONE whose own standing is Significant or above (`rivalPower.js`: the power's
+  // own label, one leaf). A line naming "a strong power" that defies the government needs one. The family (shared
+  // power, ruling body, rival power) is named: no fourth without the chair.
+  'rival power': dim({ shape: 'presence', home: 'rivalPower', reader: (f) => bool(f.rivalPower) }),
   famine: dim({ shape: 'presence', home: 'famine', reader: (f) => bool(f.famine?.famine) }),
   starving: dim({ shape: 'presence', home: 'famine', reader: (f) => bool(f.famine?.starvingAllowed) }),
   'other npc': dim({ shape: 'presence', home: 'hasOtherNpc', needsContext: 'npc',
@@ -296,6 +302,11 @@ export const FACT_DIMENSIONS = Object.freeze({
   // about a bloc needs the pair to share a power; the draw hands the pair as `ctx.pair` (`[from, to]`).
   'shared power': dim({ shape: 'presence', home: 'sharesPower', needsContext: 'pair',
     reader: (f, _key, ctx) => (typeof f.sharesPower === 'function' && ctx && 'pair' in ctx ? f.sharesPower(ctx.pair) : undefined) }),
+  // TAIL-TIES, THE CHAIR'S RULING (T5) of 2026-11-14 ("THE WORD IS GRANTED"; vetoable by the owner): ONE atom, the
+  // town is ruled by a BODY OF MORE THAN ONE (`rulingBody.js :: rulingBodyOf`, hookTruth.js's `ruledByCouncil` rule
+  // moved to its home). A line about THE council (a session, a vote of it, "the council has asked") needs it: under a
+  // lone headman, a priest-king, a lord, a mayor or an occupier the line is refused. Unanswered with no government.
+  'ruling body': dim({ shape: 'presence', home: 'rulingBody', reader: (f) => bool(f.rulingBody) }),
   // `priest` = a senior cleric stands among the named people (`faithReadingOf(record).seniorCleric`;
   // the rulings §2, CENSUS-1c).
   priest: dim({ shape: 'presence', home: 'faith', reader: (f) => (f.faith && typeof f.faith === 'object' ? f.faith.seniorCleric != null : undefined) }),

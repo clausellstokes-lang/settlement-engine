@@ -1,0 +1,111 @@
+/** @vitest-environment jsdom */
+/**
+ * tailExportsPdf3Batch3.test.jsx — TAIL-EXPORTS-PDF-3 batch 3 (the chair's rulings E21, E22 and E23 of 2026-11-15):
+ * THE LEAF'S SECOND CAUSE ON THE PDF'S ROWS: a house, its service rows and its pills marked short of the input the page
+ * says never reaches it, as the Services and Institutions tabs print them (crisisStoppedRow.js :: rowShortOf,
+ * rowMarkText, SHORT_WORD), with the leaf's head sentence; the ENTREPÔT tag where a chain on the page is an entrepôt,
+ * as the Economics tab's flows say it (domain/display/entrepotShown.js); the origin line under the heading the
+ * Overview tab prints over it, on the PDF and in the Foundry journal.
+ *
+ * One collected guard on births of the census's 720. Each NOT pair printed at the merged base 36eaba1af and must not
+ * print; each names what prints instead (or null: silent by design). Each NOW line printed nowhere at the base. Each
+ * KEEP pair is a true sibling that must still print.
+ */
+import { beforeAll, describe, expect, test, vi } from 'vitest';
+
+vi.mock('../../src/store/index.js', () => {
+  const data = { campaigns: [] };
+  function useStore(selector) { return selector(data); }
+  useStore.subscribe = () => () => {};
+  useStore.getState = () => data;
+  return { useStore, default: useStore };
+});
+
+import { EconomicsTrade } from '../../src/pdf/sections/EconomicsTrade.jsx';
+import { Institutions } from '../../src/pdf/sections/Institutions.jsx';
+import { Services } from '../../src/pdf/sections/Services.jsx';
+import { Overview } from '../../src/pdf/sections/Overview.jsx';
+import { buildJournalPages } from '../../src/foundry/journalPages.js';
+import { buildViewModel } from '../../src/pdf/lib/viewModel.js';
+import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
+import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+
+const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true,
+  selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
+/** @param {string} seed */
+const birth = (seed) => {
+  const r = seed.match(/^r2r-(\w+)-\d+$/);
+  const s = seed.match(/^r2s-(\w+)-(thorp|hamlet|village|town|city|metropolis)-\d+$/);
+  const cfg = r ? { ...DEFAULT_CONFIG, ...DIALS, settType: r[1] }
+    : { ...DEFAULT_CONFIG, ...DIALS, selectedStresses: [/** @type {RegExpMatchArray} */ (s)[1]], selectedStressesRandom: false, settType: /** @type {RegExpMatchArray} */ (s)[2] };
+  return generateSettlementPipeline(birthConfig(cfg), null, { seed, customContent: {} });
+};
+/** @param {any} node @param {string[]} acc @returns {string[]} */
+const leaves = (node, acc = []) => {
+  if (node == null || typeof node === 'boolean') return acc;
+  if (typeof node === 'string' || typeof node === 'number') { acc.push(String(node)); return acc; }
+  if (Array.isArray(node)) { for (const n of node) leaves(n, acc); return acc; }
+  if (typeof node.type === 'function') return leaves(node.type(node.props), acc);
+  return leaves(node.props?.children, acc);
+};
+const cache = new Map();
+/** @param {string} seed */
+const town = (seed) => { if (!cache.has(seed)) { const t = birth(seed); cache.set(seed, { t, vm: buildViewModel({ settlement: t }) }); } return cache.get(seed); };
+/** The text of one surface of a town. @param {string} seed @param {string} where */
+const text = (seed, where) => {
+  const { t, vm } = town(seed);
+  const props = { settlement: t, narrativeMode: false, vm, stateProse: null };
+  if (where === 'economics') return leaves(EconomicsTrade(props)).join('\n');
+  if (where === 'institutions') return leaves(Institutions(props)).join('\n');
+  if (where === 'services') return leaves(Services(props)).join('\n');
+  if (where === 'overview') return leaves(Overview(props)).join('\n');
+  if (where === 'journal') return buildJournalPages(vm, { settlement: t }).map((p) => p.markdown).join('\n');
+  throw new Error(where);
+};
+
+const SUPPLIED = /A row marked short is what its house makes when supplied\./;
+// [id, seed, surface, must NOT print, what prints instead (one or more; null: the slot is silent by design)]
+const NOT = [
+  // E22: the leaf's second cause: a house short of its input (the Resources tab's "No timber reaches the charcoal burner.")
+  ['E22/house 14345', 'r2r-metropolis-24', 'institutions', /^A collier's kilns under their turf/m, [/^Short of timber\. A collier's kilns under their turf/m, SUPPLIED]],
+  ['E22/service', 'r2r-metropolis-24', 'institutions', /^: Produce and sell charcoal/m, /^: Short of timber\. Produce and sell charcoal/m],
+  ['E22/pill', 'r2r-metropolis-24', 'services', /^Charcoal supply$/m, [/^Charcoal supply \(short\)$/m, SUPPLIED]],
+  ['E22/house 23255', 'r2s-occupied-city-2', 'institutions', /^Broad evaporation pans/m, /^Short of salt\. Broad evaporation pans/m],
+  // E21: ENTREPÔT where a chain on the page is an entrepôt; a thorp whose record flags isEntrepot with no such chain
+  ['08499', 'r2s-under_siege-thorp-0', 'economics', /^ENTREPÔT$/m, null],
+  ['08499/thorp', 'r2r-thorp-2', 'economics', /^ENTREPÔT$/m, null],
+  // E23: the origin line says where, not why: the Overview tab's heading over it
+  ['E23/pdf', 'r2r-city-0', 'overview', /Reason settled:/, /^Settlement Origin: $/m],
+  ['E23/journal', 'r2r-city-0', 'journal', /Why this place exists/, /^## Settlement Origin$/m],
+];
+// [seed, surface, now prints (printed nowhere at the base)]
+const NOW = [
+  ['r2r-city-0', 'economics', /^ENTREPÔT$/m], // the tab's "Entrepôt (1)": the furs chain; the record's flag is absent
+];
+// [seed, surface, must still print]
+const KEEP = [
+  ['r2r-hamlet-17', 'economics', /^ENTREPÔT$/m], // the flag and an entrepôt chain both
+  ['r2r-metropolis-24', 'institutions', /^Charcoal burner$/m],
+  ['r2s-famine-city-3', 'institutions', /^: Scarce in the famine\. Daily bread\./m], // the first cause stands
+];
+// A town no house of which the page says is short prints no short mark and no supplied line.
+const UNSHORT = [['r2s-religious_conversion-hamlet-2', 'institutions'], ['r2s-religious_conversion-hamlet-2', 'services']];
+
+describe('TAIL-EXPORTS-PDF-3 batch 3: the leaf\'s second cause, ENTREPÔT by the page\'s chains, the origin heading', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); }, 120000);
+  test.each(NOT)('%s %s (%s): not printed', (_id, seed, where, not, instead) => {
+    const out = text(seed, where);
+    expect(out).not.toMatch(not);
+    for (const re of instead ? [instead].flat() : []) expect(out).toMatch(re);
+  }, 120000);
+  test.each(NOW)('now %s (%s)', (seed, where, now) => {
+    expect(text(seed, where)).toMatch(now);
+  }, 120000);
+  test.each(KEEP)('keep %s (%s)', (seed, where, keep) => {
+    expect(text(seed, where)).toMatch(keep);
+  }, 120000);
+  test.each(UNSHORT)('unshort %s (%s): no short mark', (seed, where) => {
+    expect(text(seed, where)).not.toMatch(/Short of |\((?:[a-z]+, )?short\)|A row marked short/);
+  }, 120000);
+});

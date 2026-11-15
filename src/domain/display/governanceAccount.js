@@ -25,6 +25,7 @@
  * owner's to veto (docs/chair/2026-11-09/OWNER-WORDS-DOSSIER-2026-11-09.md).
  */
 import { rulingChainOf } from '../dossier/powerStrata.js';
+import { powerNameAfterArticle, powerSentenceName } from './powerSentenceName.js';
 import { seatKeeperOf } from '../people/seatKeeper.js';
 
 /** @param {unknown} v @returns {string} */
@@ -32,14 +33,15 @@ const text = (v) => (typeof v === 'string' ? v.trim() : '');
 
 /**
  * A power's name as a sentence carries it: a trailing parenthetical qualifier ("Merchant Guilds
- * (dominant)") is the roster's annotation, not the name; a name that opens on "The" keeps it, lowered
- * mid-sentence; every other name takes "the".
+ * (dominant)") is the roster's annotation, not the name, and a catalogue label takes its prose form
+ * (`powerSentenceName.js`); a name that opens on "The" keeps it, lowered mid-sentence; every other name takes "the".
  * @param {string} name @param {boolean} [start] @returns {string}
  */
 export function powerNameInProse(name, start = false) {
-  const bare = text(name).replace(/\s*\([^)]*\)\s*$/, '');
-  if (!bare) return '';
-  const body = /^the\s/i.test(bare) ? bare.replace(/^the\s/i, '') : bare;
+  // TAIL-DISPLAY-CIVIC-3 V1 (the chair's ruling of 2026-11-15): the name is the one leaf's prose form, its own "The"
+  // struck for the article this sentence sets ("Military/Guard" -> "the Guard", never "the Military/Guard")
+  const body = powerNameAfterArticle(text(name));
+  if (!body) return '';
   return `${start ? 'The' : 'the'} ${body}`;
 }
 
@@ -67,18 +69,52 @@ const CAUSE_ORDER = Object.freeze(['prosperity', 'safety', 'defense', 'food']);
 const ADVERSE_BANDS = new Set(['Legitimacy Crisis', 'Contested', 'Tolerated']);
 
 /**
+ * ⭐ THE SAFETY CAUSE IS NAMED BY WHAT LOWERED IT (TAIL-DISPLAY-CIVIC, READ-ALL B05826 B05840 06098 06102 B05843 06101
+ * 06043): the breakdown's safety part is `factionDynamics.js :: safetyContrib` over the record's safety label, and a crisis
+ * writes that label with its cause after a dash ("Dangerous — Monster Threat", "Tense — Mass Migration", "Suspicious —
+ * Aftermath of Betrayal"). There "crime" named a cause the town's own label does not hold ("Crime is the reason" in a
+ * migration town with no criminal power, 427 of the census's 720 towns at f663a2699), so the adverse word is "insecurity",
+ * which every such label bears, and "the curfew" under an occupation's curfew alone (a "Controlled" label docks order
+ * without consent, not danger; a curfew joined by another crisis, "+ Famine Conditions", reads "insecurity").
+ * A plain label ("Unsafe", "Dangerous") is the crime ratio's own band, and keeps "crime".
+ * @param {unknown} safetyLabel the record's `economicState.safetyProfile.safetyLabel` @returns {string}
+ */
+function adverseSafetyWord(safetyLabel) {
+  const label = text(safetyLabel);
+  if (!/\s—\s/.test(label)) return CAUSE_WORDS.safety.adverse;
+  return /curfew/i.test(label) && !label.includes('+') ? 'the curfew' : 'insecurity';
+}
+
+/**
  * The one or two causes the breakdown names for the band's direction, largest first; ties break in
  * the fixed order above, so an unrelated edit cannot reorder them.
- * @param {unknown} breakdown @param {boolean} adverse @returns {string[]}
+ * @param {unknown} breakdown @param {boolean} adverse
+ * @param {unknown} [safetyLabel] the record's safety label (a crisis-named label reads "insecurity" or "the curfew", not "crime")
+ * @returns {string[]}
  */
-export function legitimacyCausesOf(breakdown, adverse) {
+export function legitimacyCausesOf(breakdown, adverse, safetyLabel = null) {
   const b = breakdown && typeof breakdown === 'object' ? /** @type {Record<string, unknown>} */ (breakdown) : {};
   return CAUSE_ORDER
     .map((field, order) => ({ field, order, value: typeof b[field] === 'number' && Number.isFinite(b[field]) ? /** @type {number} */ (b[field]) : 0 }))
     .filter(({ value }) => (adverse ? value < 0 : value > 0))
     .sort((a, z) => Math.abs(z.value) - Math.abs(a.value) || a.order - z.order)
     .slice(0, 2)
-    .map(({ field }) => CAUSE_WORDS[/** @type {keyof typeof CAUSE_WORDS} */ (field)][adverse ? 'adverse' : 'favourable']);
+    .map(({ field }) => (field === 'safety' && adverse ? adverseSafetyWord(safetyLabel)
+      : CAUSE_WORDS[/** @type {keyof typeof CAUSE_WORDS} */ (field)][adverse ? 'adverse' : 'favourable']));
+}
+
+/**
+ * ⭐ UNDER AN OCCUPATION THE HALL DOES NOT GOVERN ALONE (TAIL-DISPLAY-CIVIC, READ-ALL 19252 19466 19516 19333 19240): the
+ * occupied stress adds the Occupation Authority to the roster (generators/power/stressFactions.js), in each of the census's
+ * 28 occupied towns at a power near or above the hall's, and the seat sentence said "The Elder Council governs Amarkota."
+ * as in a free town. Where the record holds both, the sentence says the hall governs under it. Null elsewhere.
+ * @param {GovernedRecord} s @param {string} governing @returns {string | null}
+ */
+function occupierOf(s, governing) {
+  if (!governanceStressTypesOf(s).includes('occupied')) return null;
+  const factions = Array.isArray(s.powerStructure?.factions) ? s.powerStructure.factions : [];
+  const occ = factions.find((f) => f && !f.isGoverning && text(f.faction) === 'Occupation Authority' && text(f.faction) !== governing);
+  return occ ? powerNameInProse(text(/** @type {{ faction?: unknown }} */ (occ).faction)) : null;
 }
 
 /**
@@ -179,6 +215,11 @@ export function estrangedPowersOf(settlement, governing) {
     // dmPowerLines.js); it has not broken with the hall, so the account names it neither as refusing the hall's orders
     // nor as a cost to them ("It can no longer make its orders hold alone"). 30 of the reader's 1,722 accounts.
     if (rel.type === 'competitive' && rel.captureState === 'adversarial') continue;
+    // TAIL-DISPLAY-CIVIC (READ-ALL 19954, 18 of the census's 720 towns at f663a2699): the criminal row at the truce rung
+    // (`captureState: 'equilibrium'`) is the hall leaving the underworld alone, and its own narrative says so ("Guild Council
+    // leaves Thieves' Guild alone because stamping it out would cost more than it saves", factionDynamics.js), as does the
+    // tab's DM line ("... leave each other alone", dmPowerLines.js). It is not named as at odds with the hall.
+    if (rel.type === 'tense' && rel.captureState === 'equilibrium') continue;
     const tie = rel.type === 'corrupted' ? (rel.captureState === 'capture' ? 'capture' : 'corrupted')
       : rel.type === 'competitive' ? 'competitive'
         : rel.type === 'tense' ? 'tense' : null;
@@ -213,7 +254,7 @@ const FRACTURE_BLOCS = Object.freeze([
 
 /**
  * The fields of the record the paragraph reads (the rest reach the readers it calls as the record itself).
- * @typedef {{ id?: unknown, name?: unknown, _seed?: unknown, stress?: unknown, powerStructure?: { factions?: Array<{ isGoverning?: unknown, desc?: unknown, faction?: unknown } | null>, publicLegitimacy?: { label?: unknown, breakdown?: unknown } | null, recentConflict?: unknown } }} GovernedRecord
+ * @typedef {{ id?: unknown, name?: unknown, _seed?: unknown, stress?: unknown, powerStructure?: { factions?: Array<{ isGoverning?: unknown, desc?: unknown, faction?: unknown } | null>, publicLegitimacy?: { label?: unknown, breakdown?: unknown } | null, recentConflict?: unknown }, economicState?: { safetyProfile?: { safetyLabel?: unknown } | null } | null }} GovernedRecord
  */
 
 /**
@@ -231,7 +272,7 @@ function fractureBlocsOf(s, already) {
       .map((f) => text(/** @type {{ faction?: unknown }} */ (f).faction)).filter(Boolean);
     if (!of.length) continue;
     names.push(...of);
-    lines.push(reading.line(capFirst(listOf(of.map((n) => powerNameInProse(n)))), of.length > 1 || pluralPowerName(of[0])));
+    lines.push(reading.line(capFirst(listOf(of.map((n) => powerNameInProse(n)))), of.length > 1 || pluralPowerName(powerSentenceName(of[0]))));
     if (reading.withdrawn) withdrawn = true;
   }
   return { lines, withdrawn, names };
@@ -267,6 +308,8 @@ export function governanceAccountOf(settlement, opts = {}) {
   if (!governing) return null;
   const place = text(s.name) || 'this place';
   const ruler = powerNameInProse(governing);
+  const occupier = occupierOf(s, governing);
+  const under = occupier ? ` under ${occupier}` : '';
   const sentences = [];
   const seed = String(s._seed ?? s.id ?? s.name ?? '');
   /** @param {string} slot @param {number} n */
@@ -283,40 +326,46 @@ export function governanceAccountOf(settlement, opts = {}) {
     const who = role ? `${text(chain.npc.name)}, ${role},` : text(chain.npc.name);
     const whoEnd = role ? `${text(chain.npc.name)}, ${role}` : text(chain.npc.name);
     sentences.push([
-      `${place} is governed by ${ruler}. ${who} holds its seat.`,
-      `${who} holds the seat of ${ruler}. ${capFirst(ruler)} governs ${place}.`,
-      `${capFirst(ruler)} governs ${place}. Its seat is held by ${whoEnd}.`,
+      `${place} is governed by ${ruler}${under}. ${who} holds its seat.`,
+      `${who} holds the seat of ${ruler}. ${capFirst(ruler)} governs ${place}${under}.`,
+      `${capFirst(ruler)} governs ${place}${under}. Its seat is held by ${whoEnd}.`,
     ][pick('seat', 3)]);
   } else if (chain.absence?.kind === 'missing_seat') {
     // THE VACANCY IS THE FIRST FACT (the chair's condition (b), 2026-11-09): 65 of the 1,000. Then what
     // fills the gap, from the record: the claimants it names, else the power governing without a head.
     sentences.push(`No one holds the seat at ${place}.`);
-    const claimants = Array.isArray(chain.absence.claimants) ? chain.absence.claimants.map(text).filter(Boolean) : [];
+    // TAIL-DISPLAY-CIVIC-3 V1: a claimant power's catalogue label takes the leaf's prose form ("Noble Claimant (Senior
+    // Line)" -> "The Senior Line"), its "The" lowered after the first; a claimant's own name is left as it is
+    const claimants = (Array.isArray(chain.absence.claimants) ? chain.absence.claimants.map(text).filter(Boolean) : [])
+      .map((n, i) => { const said = powerSentenceName(n); return i > 0 ? said.replace(/^The /, 'the ') : said; });
     // R3-CODE-C-3 (ROUND-3-CUT-INCREMENT #pf-260, rpf-city-succession_void+politically_fractured-13): "governs without
     // a head" beside the same tab's "Acting Governor Iulia Laenas keeps the seat meanwhile". The keeper has one home
     // (people/seatKeeper.js :: seatKeeperOf); where one keeps the seat the power is not headless, and the tab's seat row
     // already names the keeper, so the sentence is left out rather than said twice.
     if (claimants.length) sentences.push(`${listOf(claimants)} ${claimants.length === 1 ? 'contends' : 'contend'} for it.`);
-    else if (!seatKeeperOf(s)) sentences.push(`${capFirst(ruler)} governs without a head.`);
+    else if (!seatKeeperOf(s)) sentences.push(`${capFirst(ruler)} governs${under} without a head.`);
   } else {
-    sentences.push(`${place} is governed by ${ruler}. No one is named to its seat.`);
+    sentences.push(`${place} is governed by ${ruler}${under}. No one is named to its seat.`);
   }
 
   // 2. THE STANDING.
   const leg = s.powerStructure?.publicLegitimacy;
   const label = leg && typeof leg === 'object' ? text(leg.label) : '';
   if (label) {
-    const standing = standingSentence(label, legitimacyCausesOf(/** @type {{ breakdown?: unknown }} */ (leg).breakdown, ADVERSE_BANDS.has(label)), place, ruler, pick);
+    const safetyLabel = s.economicState?.safetyProfile?.safetyLabel;
+    const standing = standingSentence(label, legitimacyCausesOf(/** @type {{ breakdown?: unknown }} */ (leg).breakdown, ADVERSE_BANDS.has(label), safetyLabel), place, ruler, pick);
     if (standing) sentences.push(standing);
   }
 
   // 3 + 4. THE POWERS THAT HAVE BROKEN WITH IT, AND WHAT THAT COSTS THE HALL.
   const estranged = estrangedPowersOf(s, governing);
+  // TAIL-DISPLAY-CIVIC-3 V1: each name's number is read off the form the sentence prints ("Third Bloc (Neutrals)" -> "The
+  // Neutrals": "their"), here and in the fracture's blocs
   /** @param {string} tie @returns {{ names: string, plural: boolean } | null} */
   const named = (tie) => {
     const of = estranged.filter((e) => e.tie === tie);
     if (!of.length) return null;
-    return { names: capFirst(listOf(of.map((e) => powerNameInProse(e.name)))), plural: of.length > 1 || pluralPowerName(of[0].name) };
+    return { names: capFirst(listOf(of.map((e) => powerNameInProse(e.name)))), plural: of.length > 1 || pluralPowerName(powerSentenceName(of[0].name)) };
   };
   const capture = named('capture');
   const corrupted = named('corrupted');

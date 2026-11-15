@@ -220,11 +220,21 @@ export function chooseClosing(settlement, magicReal) {
 function drawAdmitted(pool, { poolId, scoped, facts, speaks = () => true, cleanOnly = false }) {
   const ok = (/** @type {any} */ line) => speaks(line)
     && declarationAdmits(declarationOf(line), /** @type {any} */ (facts()), { crisisScoped: scoped }).admitted;
+  // R2-CODE-A-14 (the chair's ruling (s2)): A DRAW IS NOT MOVED: a refused line whose declared TWIN is admitted keeps
+  // its slot, and drawDeclared resolves it to the twin, so no redraw is spent. A closure table's twin is keyed on its
+  // original's template as the ledger writes it (`{name}`); twins never enter the draw (drawDeclared's domain).
+  const twinOf = (/** @type {any} */ line) => {
+    const t = textOf(line);
+    const own = typeof t === 'function' ? t('{name}') : t;
+    return pool.find((l) => l && typeof l === 'object' && typeof l.twinOf === 'string' && l.twinOf === own) ?? null;
+  };
+  const twinAdmitted = (/** @type {any} */ line) => { const twin = twinOf(line); return twin != null && ok(twin); };
   return drawDeclared(pool, {
+    twin: twinOf,
     draw: (p) => {
       const first = cleanOnly ? null : pickRandom(p);
-      if (!cleanOnly && (first == null || ok(first))) return first;
-      const clean = p.filter(ok);
+      if (!cleanOnly && (first == null || ok(first) || twinAdmitted(first))) return first;
+      const clean = p.filter((l) => ok(l) || twinAdmitted(l));
       return clean.length ? pickRandom(clean) : null;
     },
     facts, poolId, key: `${getActiveRng()?.seed ?? ''}::${poolId}`, surface: 'overview', drawKind: 'R', crisisScoped: scoped, // R-AT (CENSUS-1i unit 5): the settlement's identity

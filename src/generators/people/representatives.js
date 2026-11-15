@@ -56,6 +56,7 @@ import { hookPoolFor, poolFor, seatPoolFor, settleTitleLines } from './poolMap.j
 
 import { resolveGenerationContentProfile } from '../../domain/generationContentProfile.js';
 import { seatMintTitleFor } from './mintTitles.js';
+import { titleForHolder } from '../../data/holderTitleForms.js'; // TAIL-TITLES K-C
 import { CIVIC_OFFICE_BY_SIZE, OFFICE_TITLES } from '../../data/officeTitles.js';
 import { backingArchetypeOf, RULER_KINDS } from '../../domain/dossier/powerSupport.js';
 import { isHideableHouse, isVeiledPower, veiledCardIdFor } from '../../domain/people/cardVeil.js';
@@ -311,7 +312,8 @@ export function drawCardHooks(cards, poolOf, stream, config, hookRegistry, place
     // writing wave's W7 HOOKS authors by title; the lane's record counts them).
     if (before.has(String(line).trim())) {
       // W7 HOOKS (WAVE-RULINGS item 15): the card's TITLE pool is walked first, then the category walk.
-      const spare = spareHookLine([titlePoolName(card.title), ...dryPoolWalk(pool)], before, String(card.id), place);
+      // TAIL-TIES-2, the chair's ruling (T7): the walk reads the crisis the draw read (`birthFactsOf`'s config stress)
+      const spare = spareHookLine([titlePoolName(card.title), ...dryPoolWalk(pool)], before, String(card.id), Array.isArray(config?.stressTypes) ? { ...place, stress: config.stressTypes.map((/** @type {unknown} */ type) => ({ type })) } : place);
       if (spare !== null) line = spare;
     }
     held.add(String(line).trim());
@@ -358,7 +360,7 @@ export function hookOffsetOf(key) {
 /**
  * Where a card's hook lines are drawn: the world law (its port kind), the roster and the tier — the
  * facts the census's declared rows read (MERGE-CAR).
- * @typedef {{ worldLaw?: { portKind?: 'none'|'maritime'|'river' | null } | null, institutions?: unknown[], tier?: string }} HookPlace
+ * @typedef {{ worldLaw?: { portKind?: 'none'|'maritime'|'river' | null } | null, institutions?: unknown[], tier?: string, stress?: unknown[] }} HookPlace
  */
 
 /**
@@ -392,7 +394,7 @@ export function hookOffsetOf(key) {
  */
 export function spareHookLine(pools, held, key, place = {}, accept = () => true) {
   const institutions = Array.isArray(place?.institutions) ? place.institutions : [];
-  const once = rememberedFacts(factsOf({ institutions, tier: place?.tier }, { waterKind: place?.worldLaw?.portKind }));
+  const once = rememberedFacts(factsOf({ institutions, tier: place?.tier, stress: place?.stress }, { waterKind: place?.worldLaw?.portKind })); // TAIL-TIES-2 (T7): the place's crisis
   const facts = () => once;
   for (const name of [...new Set(pools)]) {
     const pool = /** @type {unknown[]} */ (titlePoolLines(name) ?? NPC_FACTION_LOYALTY[/** @type {keyof typeof NPC_FACTION_LOYALTY} */ (name)] ?? []);
@@ -559,6 +561,9 @@ export function generateRepresentatives(settlement, culture = 'germanic', config
   // tied to the seat so the social graph reaches it.
   // ONE HOOK PER CARD (PEOPLE-3 HOOKS), in roster order, each on its own keyed fork.
   drawCardHooks(cards, (card) => hookPools.get(card.id) || 'other', root.fork(HOOKS_FORK_LABEL), npcConfig, hookRegistry, { worldLaw, institutions, tier });
+  // TAIL-TITLES K-C: the face's word in its holder's drawn form, after every draw the face keys; the role with it (M-1b:
+  // role and title stay one word); `institution.title` keeps the face (data/holderTitleForms.js :: faceOfRole)
+  for (const card of cards) { const t = titleForHolder(card.title, card.gender); if (t !== card.title) { card.title = t; if (card.role === card.institution?.title) card.role = t; } }
 
   // Draw-free: a name shared by two cards takes a role qualifier, never a second draw.
   return disambiguateNPCDisplayNames(cards);

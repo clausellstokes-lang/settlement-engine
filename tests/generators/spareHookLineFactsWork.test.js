@@ -9,7 +9,7 @@
  * memo that lives for that one call.
  *
  * PIN 1 counts WORK, never time: an institution whose `name` read is counted is read a bounded
- * number of times over a whole walk (measured 4; bound 8), not once per declared row (24 at the base).
+ * number of times over a whole walk (measured 4; bound 8; TAIL-TIES batch 2: 8.5, bound 12), not once per declared row (24 at the base).
  * PIN 2 is the chair's exactness condition, PINNED rather than argued: the walk over a DEEP-FROZEN
  * record (the roster array and every row, the place, its world law) gives the same lines as over
  * the unfrozen one, under both callers' `accept` shapes. If the walk, or anything it calls, ever
@@ -53,8 +53,11 @@ describe('spareHookLine — one facts reading per walk', () => {
     // accept refuses every line, so the walk passes every row of every pool and answers null
     expect(spareHookLine(POOLS, new Set(), 'pin-key', place, () => false)).toBeNull();
     const perInstitution = counter.n / NAMES.length;
-    // measured: 24 at the base (one reading per declared row), 4 after (one per distinct fact)
-    expect(perInstitution).toBeLessThanOrEqual(8);
+    // measured: 24 at the base (one reading per declared row), 4 after (one per distinct fact).
+    // TAIL-TIES batch 2 (the chair's ruling (T3); re-keyed by identity, told to the chair): the walk's rows now declare two
+    // distinct roster facts more (the guard captain's `watch` and the armoury's `garrison` read the `defence` getter, 2.5;
+    // the drinks line's `institution: tavern`, 2): measured 8.5, still one reading per distinct fact; once per row would be 24+.
+    expect(perInstitution).toBeLessThanOrEqual(12);
   });
 
   it('a deep-frozen record and place give the same lines as the unfrozen ones, under both accept shapes', () => {

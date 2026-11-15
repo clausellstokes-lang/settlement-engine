@@ -61,6 +61,10 @@ describe('a gap says which kind — planted on one roster (a desert Potter, no c
 // the Bakers' imported grain and the Vintner's missing grapes; soak1k-289 (a hamlet; the first
 // of 11 Dairy farmers in soak1k-0..289 whose herds are rolled nearby) for the local dairy.
 // Every other pair holds on its original birth. The assertions are unchanged.
+// RE-KEYED BY IDENTITY (TAIL-DEFECON-R M-V, the chair's ruling of 2026-11-15: grapes and glass sand come by any route),
+// one cause: soak1k-5 (a metropolis on a port) now has its vintner's grapes reach it by trade, so no row is written. The
+// pair "a vintner its grapes do not reach" is re-seated on the FIRST birth in the soak's order that seats a Vintner and
+// reads it missing: soak1k-9 (a town of 1,867, isolated). The assertion is unchanged.
 describe('a gap says which kind — READER R1\'s named births', () => {
   /** @type {Map<number, Array<{institution: string, chain: string, kind?: string, impact: string}>>} */
   const lines = new Map();
@@ -68,7 +72,7 @@ describe('a gap says which kind — READER R1\'s named births', () => {
   const seats = new Map();
   beforeAll(async () => {
     await ensureLaws();
-    for (const i of [0, 4, 5, 8, 12, 22, 24, 289]) {
+    for (const i of [0, 4, 5, 8, 9, 12, 22, 24, 289]) {
       const { settlement } = birth(i);
       lines.set(i, (settlement.resourceAnalysis?.gaps || []).filter((g) => g.institution));
       seats.set(i, new Set((settlement.institutions || []).map((inst) => inst.name)));
@@ -97,7 +101,7 @@ describe('a gap says which kind — READER R1\'s named births', () => {
 
   it('missing: the TRUE gaps stay written — the potter\'s and brickmaker\'s clay, the vintner\'s grapes, the sawmill\'s timber', () => {
     for (const [i, house, good] of [[4, 'Potter', 'clay'], [4, 'Brickmaker', 'clay'],
-      [5, 'Vintner', 'grapes'], [8, 'Sawmill', 'timber']]) {
+      [9, 'Vintner', 'grapes'], [8, 'Sawmill', 'timber']]) {
       const hit = at(i, house, good);
       expect(hit.map((g) => g.kind), `soak1k-${i} ${house} -> ${good}`).toEqual(['missing']);
       expect(hit[0].impact).toMatch(LACKS);
