@@ -34,6 +34,7 @@
 
 import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { isMaterializedCustomContent } from '../content/customContentSemanticAuthority.js';
+import { pluralPowerName } from '../display/governanceAccount.js';
 
 /**
  * @typedef {'cathedral'|'parish'|'monastery'|'temple'|'chapel'|'shrine'} ChurchKind
@@ -57,6 +58,7 @@ import { isMaterializedCustomContent } from '../content/customContentSemanticAut
  * @property {string} name
  * @property {number} power
  * @property {boolean} governs the faction holds the seat
+ * @property {boolean} [suppressed] the power's own standing is Suppressed (its `powerLabel`; TAIL-CRISIS batch 4, READ-ALL 03046)
  * @property {boolean} [anotherGoverns] another power governs, and this one does not outweigh every other power (R2-CODE-B
  *   round 3, #ww-536; R2-CODE-B-13, the reader's M12: a contender that outweighs the governor and every other power is not flagged)
  */
@@ -278,7 +280,7 @@ function religiousFactionOf(s) {
     if (!name) continue;
     const power = num(f?.power, 0);
     if (best && best.power >= power) continue;
-    best = { name, power, governs: f?.isGoverning === true };
+    best = { name, power, governs: f?.isGoverning === true, suppressed: text(f?.powerLabel) === 'Suppressed' };
     bestRow = f;
   }
   // R2-CODE-B round 3 (the increment's #ww-536, the chair's ruling): where ANOTHER power governs, the religious power is
@@ -434,6 +436,9 @@ function clericLead(c) {
  */
 function factionLine(f, place) {
   if (f.governs) return `${cap(place)} is governed by the ${f.name}.`;
+  // TAIL-CRISIS batch 4 (READ-ALL 03046: "A small voice in the metropolis’s affairs belongs to the New Faith Community" where
+  // the record stands it Suppressed): a suppressed power has no voice in the place's affairs; the twin says its standing.
+  if (f.suppressed) return `The ${f.name} ${pluralPowerName(f.name) ? 'are' : 'is'} suppressed in ${place}.`;
   if (f.power >= 30 && !f.anotherGoverns) return `Real political weight rests with the ${f.name}.`;
   if (f.power >= 15) return `A voice in ${place}’s affairs belongs to the ${f.name}.`;
   return `A small voice in ${place}’s affairs belongs to the ${f.name}.`;
