@@ -1,0 +1,5 @@
+{"id":"C16510","town":"bar0-city-under_siege+famine-rand-17","sev":"LOW","kind":"BROKEN","why":"subject-verb disagreement: 'its herds comes first' (plural subject, singular verb)","other":""}
+{"id":"C17217","town":"bar0-city-under_siege+famine-rand-17","sev":"LOW","kind":"PAIR","why":"toll-keeper 'takes the toll and lifts the gate; heavy carts pay more' as ordinary work, though the siege has closed the roads and no tolls are gathered","other":"C16133"}
+{"id":"C17218","town":"bar0-city-under_siege+famine-rand-17","sev":"MED","kind":"STATE","why":"says the famine was caused by Royal Authority's export decisions; FOOD gives failed source livestock and TRADE exports list no food","other":""}
+{"id":"C17349","town":"bar0-city-under_siege+famine-rand-17","sev":"MED","kind":"PAIR","why":"states grain shipments arrive by a covert route; FOOD brought in 0% and the siege has shut every road and gate","other":"C16502"}
+{"id":"DONE","lines":2044,"blocks":1,"flags":4}
