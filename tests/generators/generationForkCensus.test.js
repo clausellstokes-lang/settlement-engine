@@ -200,7 +200,10 @@ const GOLDEN_CONTROL_KEY = 'town|germanic|plains|road|civilized|golden-master-v3
 // -> 7ae63229 the close of the tail round, 2026-11-15 (TAIL-CLOSE-DOORS-4; the owner's word, 2026-11-15 06:00 UTC, in the chair's
 // chat; record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json: the round's declared moves re-deal the control row,
 // a face for every seat of power and the cast drawn after it; the golden re-recorded 525 of 525 at dec4ec241, this row its control).
-const GOLDEN_CONTROL_HASH = '7ae632298ed95e73deedbced63bf64ae9662cf45f61b8d8bfa02e7b2fcc5ee6b';
+// -> b05d0766 the close of the round BAR2, 2026-11-15 (BAR2-CLOSE-DOORS-2; the owner's word, 2026-11-15 20:27:16 UTC, in the chair's
+// chat; record docs/shift-records/2026-11-15-the-close-of-the-round-bar2.json: the places' and people's declared text cures re-word the
+// control row's institutions[].desc, settlementReason[] and relationships[].description; the golden re-recorded 418 of 525 at 1011a8a91).
+const GOLDEN_CONTROL_HASH = 'b05d0766bdc670a051d28dd3b74ae95e5648314f062f9a9ef16bfa070c36df50';
 /** EM-P0's own pinned-mode row and its chooser keys, re-measured here under the mocks. */
 const PIN_ROW = {
   settType: 'town', culture: 'germanic', terrainOverride: 'riverside',

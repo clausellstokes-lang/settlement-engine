@@ -112,16 +112,16 @@ const FIXED = Object.freeze([0, 21, 42]);
  */
 const PRE_CHANGE = Object.freeze({
   0: Object.freeze({
-    derived: '08527941eada6d7d664b3ec337881a8c7f6903a88d5901d5e0ef61fb4e0cb02f',
-    replay: 'c0a716d64a84fd79ebf4e1947459eb34aaaaf6438162b56b6f02823668249dde',
+    derived: '2c934c1571b7877f838370ddd4c349c3c4ef1b33e441aea7fc251cee80850503',
+    replay: 'd4a05254ad672cc32a3c05ea22ec7b73daedce228682fc726b496731d5c98517',
   }),
   21: Object.freeze({
-    derived: '7ae632298ed95e73deedbced63bf64ae9662cf45f61b8d8bfa02e7b2fcc5ee6b',
-    replay: '5bcf025079a5ac8a9f7dc123c11c98bb8e93ca5ae13e80e212b488f77a1042cd',
+    derived: 'b05d0766bdc670a051d28dd3b74ae95e5648314f062f9a9ef16bfa070c36df50',
+    replay: '07de26409a8260c40f420c063a595597d6f57b477f0ed923784035202157ea74',
   }),
   42: Object.freeze({
-    derived: '44fa55fe0638e7f0f04a2fb3a6348cfd225a25ce626d51ce7b843a7fc573aa60',
-    replay: '3e41fd9eede5e48d2c9de8d1bdf6e992f32771f60026fa6c2f96b2951c823769',
+    derived: '95c96d4f4cfed9468ce2d133871c64d39dfc7ab18633e135894479cfd01bb8f5',
+    replay: 'e14f527de702da5664dbc2df1518e84159fa367f487d385c2bc33c4d337df62d',
   }),
 });
 // ── RE-CAPTURED 2026-10-01, the urban band (ODQ §934.86), BY THE SAME PLANT AND NEVER FROM THE LIVE STEP ALONE ─────
@@ -278,6 +278,14 @@ describe('EM-B2b2 — the DM\'s nearby-resources word survives resolveResources'
 // pre-EM-B2b2 step (the live resolveResources.js less EM-B2b2's own 31 lines, sha256 adfd3ba4..., unchanged since point 47) planted over a COPY
 // of the tree and the live step produced the SAME six digests (cmp-equal); on every row the fresh generation equals the dormant re-derivation.
 // Row 21's `derived` is the re-recorded golden's control row (7ae63229, town|germanic|plains|road|civilized).
+
+// ── RE-CAPTURED 2026-11-15, THE CLOSE OF THE ROUND BAR2 (BAR2-CLOSE-DOORS-2), BY THE SAME PLANT ── Rows 0, 21, 42 moved (six digests) by
+// the round's declared text cures (docs/shift-records/2026-11-15-the-close-of-the-round-bar2.json; the owner's word 2026-11-15 20:27:16 UTC:
+// the places' house, origin and foodways rows, the people's tie descriptions), re-captured at the joined line's 1011a8a91 with the golden
+// master in the same commit. Re-captured: THE LANE-ERA pre-EM-B2b2 step (the live resolveResources.js less EM-B2b2's own 31 lines, sha256
+// adfd3ba4..., the step unchanged since point 47) planted over a COPY of the tree and the live step produced the SAME six digests (cmp-equal,
+// the live run twice and equal); on every row the fresh generation equals the dormant re-derivation.
+// Row 21's `derived` is the re-recorded golden's control row (b05d0766, town|germanic|plains|road|civilized).
 
     const layer = layerOf([[ROOT_KEY, [...DM_ROSTER]]]);
 

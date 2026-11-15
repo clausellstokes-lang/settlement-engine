@@ -342,11 +342,11 @@
       "suite": "tests/property/generatorGoldenMaster.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": "e74b93989e4b988e0d1d22da69e60aa34815fdaf3420379b4c16d7d1781af4d5",
+      "sha256": "9fab7487beaf0650bf62de5f21b173c033efc76495853e417ec400c1dbc3ed84",
       "rows": 525,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation to the cloud chair) and, for this signing, the owner's own word in the chair's chat on 2026-11-15 at 06:00 UTC, recorded in the chair's records 454, 456 and 457 on lane/chair-2026-11-08 (docs/chair/2026-11-14/CHAIR-HANDOFF-FIFTH.md, section 1); the chair's ruling GD1 of 2026-11-15 names the moved families",
+      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation to the cloud chair) and, for this signing, the owner's own word in the chair's chat (session_01ACmDYZrFEVXyZEUg1NDxxC) on 2026-11-15 at 20:27:16 UTC, verbatim \"Yes refresh the reference\", answering the chair's ask of 17:56 UTC (repeated 19:03 UTC) for the words \"Yes, refresh the reference files.\": for the three reference files left pending at the last close and this round's refresh of the reference corpus at the joined tree",
       "note": "RE-RECORDED THROUGH THE SIGNED DOOR at the genesis freeze 2026-09-16 (owner: 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); 525 rows moved since the em-dash wave e3f6029b2 (banked §901); the key set unchanged."
     },
     {
