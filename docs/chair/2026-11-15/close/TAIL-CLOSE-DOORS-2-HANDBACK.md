@@ -31,9 +31,22 @@ STATUS: IN PROGRESS (this file is kept current in every push).
 | `node scripts/check-writer-reach.mjs` | exit 0: "WRWALKER HOLD — judged 12661 · LIT 691 · LIT-NAME 10563 · DARK 1407 (reviewable 389) · pending-surface debt: none" | pending |
 | `node scripts/check-observed-shape-readers.mjs` | exit 1: 2 STALE ROWs (`institutionRoster.js` "_worldPulseInactive on institutions"; `settlementQuickGuide.js` "culture on settlement") | pending |
 
-## PART 1b · THE TWO SIZE BUDGETS
+## PART 1b · THE TWO SIZE BUDGETS (re-recorded under the owner's word of 07:50 UTC, the chair's decision A; vetoable)
 
-pending
+`npm run build` at the final tree (exit 0), read by `tests/build/vendorPdfLazy.test.js`'s own arms under `VERIFY_DIST=1`.
+Commit **dfd45489c** (one commit; each figure beside a note in the file's re-record form; the ARCH car 2 pin of the three
+literals moved with them).
+
+| budget | old | new | difference | cause |
+|---|---|---|---|---|
+| first paint, raw (the entry's static closure) | 1,121,260 | **1,130,209** (measured) | +8,949 | the round's generator and data growth reaching the first paint, net of the trim of sixteen riders (e44d42aaf, on the line) |
+| first paint, gzip companion | 357,225 | **360,052** (measured) | +2,827 | the same |
+| first paint, Brotli companion | 299,985 | **302,161** (measured) | +2,176 | the same |
+| the engine chunk's ceiling (strict bound) | 726,454 | **867,093** (measured 867,092 + 1) | +140,639 | the round's generator and data growth (the size measure read 865,589 at its earlier tree) |
+
+Receipt: `VERIFY_DIST=1 npx vitest run tests/build/vendorPdfLazy.test.js` **55/55 GREEN** (before the re-record: 4 red, the
+three closure arms and the engine ceiling); plain run 41 passed, 14 skipped (the dist-gated arms). Not bisected by merge point
+at this pass.
 
 ## PART 2 · THE OWNER'S DOOR
 
