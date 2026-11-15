@@ -37,7 +37,8 @@ import { composeCrisisPage, CRISIS_PAGE_COPY } from '../domain/crisis/crisisPage
 import { stakeLines, unprintedFacts } from '../pdf/lib/crisisPrint.js';
 // ROUND THREE, ruling (a): every house this journal prints is printed by its label, the one display leaf.
 import { houseLabelsInText, institutionHouseLabel } from '../domain/display/institutionDisplayName.js';
-import { tradeListsAsPrinted, revenuesOffTheLists } from '../domain/display/tradeListDisplay.js';
+import { tradeListsAsPrinted, revenuesOffTheLists, plainGoodName } from '../domain/display/tradeListDisplay.js';
+import { resourceDisplayName } from '../domain/display/resourceDisplayName.js'; // TAIL-EXPORTS-JOURNAL batch 2 (E1): the tab's resource name
 import { foodwaysLineOf } from '../domain/foodways.js';
 import { tradePillWord } from '../domain/display/tradePillWord.js'; // SURFACES-3 item 2 (r3): the tab's pill word
 import { foodWordShown } from '../domain/display/foodWordShown.js';
@@ -199,7 +200,9 @@ function npcQuickRefPage(vm) {
     '',
     '| Name | Role | Member of | Power |',
     '| --- | --- | --- | --- |',
-    npcs.map(n => `| ${esc(n.name)} | ${esc(n.title || '')} | ${esc(n.factionLabel || '')} | ${esc(n.power || 0)} |`),
+    // E5 (TAIL-EXPORTS-JOURNAL batch 2): a person who holds no power prints no empty "Member of" cell, which read as a
+    // label cut from its value; the journal's own mark for an empty cell (the Exploitation table's) says there is none.
+    npcs.map(n => `| ${esc(n.name)} | ${esc(n.title || '')} | ${n.factionLabel ? esc(n.factionLabel) : '—'} | ${esc(n.power || 0)} |`),
   );
 }
 
@@ -354,7 +357,10 @@ function resourcesPage(vm) {
     (r.chainRows || []).length ? md('', '## Exploitation',
       '| Resource | Status | Processing | Output |',
       '| --- | --- | --- | --- |',
-      r.chainRows.map(c => `| ${esc(humanize(c.resource))} | ${esc(c.status)} | ${esc(c.processing || '—')} | ${esc(c.output || '—')} |`)) : null,
+      // E1 (TAIL-EXPORTS-JOURNAL batch 2): the resource by the name the Resources tab's card prints, through the tab's own
+      // leaf (ResourcesTab.jsx :: ResourceChainCard: plainGoodName(resourceDisplayName(rawResource))), not a humanize of
+      // the journal's own ("gold/silver ore", "Oasis Water" beside the tab's "Gold and silver ore", "Oasis and water rights").
+      r.chainRows.map(c => `| ${esc(plainGoodName(resourceDisplayName(c.resource)))} | ${esc(c.status)} | ${esc(c.processing || '—')} | ${esc(c.output || '—')} |`)) : null,
   );
 }
 
