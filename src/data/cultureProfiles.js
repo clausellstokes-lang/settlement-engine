@@ -300,7 +300,7 @@ export const CULTURE_PROFILES = Object.freeze({
     ],
     socialTexture: [
       'Household and communal labor obligations are enforced through reputation, assembly, and local office.',
-      { text: 'Shared ovens, bathhouses, wells, and seasonal work make private life unusually communal.', needs: ['institution: bathhouse'] },
+      'Shared water and seasonal work make private life unusually communal.', // BAR2-PLACES-2 (PL1; the chair's grant PT3, vetoable by the owner): no oven house (the vocabulary names none), no bathhouse (its declaration could not be answered at the draw, where only the tier is known: the record held the line in 27 towns of the census's 720, 18 without a bathhouse; the exports' culture row refused it there and printed it in the 9 with one) and no wells (8 of 27 drink from an aqueduct); every town holds its water source (institutionalCatalog.js :: 'Water source', required). Was "Shared ovens, bathhouses, wells, and seasonal work …" with needs institution: bathhouse
     ],
     architecturalDetails: [
       'painted timber fronts and enclosed garden plots line the older lanes',
