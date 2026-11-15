@@ -175,3 +175,191 @@ Batch 1 reached the P1 rows and the power headline. Left, by shape (ids in the w
   `chainStateOnPage.js` reads the Economics tab's `chainAsShown`, and under a siege the page's state is Impaired. (None
   of this batch's rows had that shape.)
 - Instruments as above; this seat's runs were at /tmp (scratch) and are not carried: re-take them.
+
+---
+
+# TAIL-EXPORTS-PDF-2 · the successor's batches (kept current after every batch)
+
+Seat: TAIL-EXPORTS-PDF-2, the successor of TAIL-EXPORTS-PDF, on the same branch (`lane/tail-exports-pdf-2026-11-14`),
+continued from its tip 1ed03ef1e (read back from origin 2026-11-15 01:13 UTC). The batch above (batch 1) is the
+predecessor's and was not redone.
+
+## The chair's rulings since (2026-11-15; each vetoable by the owner)
+
+- **E16** THE ONE KIND OF MERGE THIS SEAT MAKES: origin/lane/join-2026-11-14 AT eb054d53f (a merge commit of its own;
+  `npm ci` again if the lockfile moved). That tip holds the crisis leaf whole (`src/domain/display/crisisStoppedRow.js`:
+  `stoppingCrisesOf`, `rowStoppedBy(settlement, 'service' | 'house' | 'chain' | 'income', row, crises?)`,
+  `crisisMarkText`, `markedDescription`, `ordinaryTimesLine`, `STOPPED_WORD`; its table `src/data/crisisDependence.js`),
+  the first shift of twelve other groups and four declared moves of the record. After the merge, RE-TAKE THE BEFORE
+  and strike any row gone there. A later tip is merged only if the chair names it (one is coming: the leaf's second
+  cause, "Short of <input>.", and more houses in its table).
+- **E17** THE E3 ROWS: the PDF's service, house, chain and income rows under a crisis CALL THE LEAF and print its mark and
+  its head line as the tabs do; the PDF keeps no wording of its own for them. With them REST 25077, 25075 (the chain
+  rows) and 04297 ("Agricultural Rents": checked against the merged tree first; its source is being renamed "Harvest"
+  where no landlord stands, by another seat, not yet landed: if it still prints, leave it and name it).
+- **E15** (1) Row 29296, the cover's "Top export: Salted fish (naval route only)" on a village with no sea access: the
+  route note reads the town's own trade access (or the tab's leaf for it). (2) STRIKE the rows that say a chain prints
+  "(impaired)" where the land says running, under a siege: the PDF calls the same reader as the tab.
+- **E18** (named by the defence display's seat) row 28960, the PDF's "(Powerful)" label beside a thieves' power the
+  record calls Minor or Suppressed: the label reads the power, or is not printed there.
+- **E7 stands**: a gendered title against its holder is another seat's (TAIL-TITLES): struck "the record's: class k".
+
+## The merge (E16)
+
+538c6ea10 `merge(TAIL-EXPORTS-PDF-2, ruling E16): the joined line at eb054d53f`: clean, no conflict; the lockfile did not
+move (one `npm ci` in the scratch tree). THE BEFORE re-taken at 538c6ea10 (census 720 towns, 0 birth errors; exports'
+inventory: 35,855 distinct PDF/Journal sentences; the tabs' inventory: 30,037).
+
+Gone at the merged base (struck "gone at the base"): the power-headline rows 23017, 09844, 12953, 08708, 21874, 09841,
+09847, 29320, 16524, 20306, 06586, 08417 and 12102 (each printed nowhere), 30855 (the river-fish headline under a fish
+famine: printed nowhere).
+
+## Batch 2 — E17 (the crisis leaf on the PDF's rows), E15 (1) (the cover's export), E18 (a criminal house by its label), and the EXPORT badges of the chain flow (E1)
+
+Writers: `src/pdf/sections/Institutions.jsx`, `Services.jsx`, `SupplyChainFlow.jsx`, `EconomicsTrade.jsx`, `Cover.jsx`,
+`DefenseSecurity.jsx`; a new PDF lib file `src/pdf/lib/crisisMarksOnPage.js` (a thin reader over the tabs' leaf
+`crisisStoppedRow.js`: it keeps no word of its own). Display only: no record moves (nothing in generators or data; the
+view model is not touched: the joins are made in the sections, as T1-15's were).
+
+THE CURES:
+- **E17**: under a siege, an outbreak or a famine, the PDF's rows call the leaf (`rowStoppedBy`) and print its words:
+  a house's description and a service row's description lead with the mark ("Stopped by the siege. …", as the
+  Institutions and Services tabs print them); a service pill, which prints no description, takes the leaf's word after
+  its name ("Accommodation (stopped)", as the Institutions tab's doors print it); a chain's card (Services chapter) leads
+  its flow with the mark; a chain's row in the Economics chapter's flow and an income share take the mark; each chapter
+  (Institutions, Services, Economics & Trade) prints the leaf's head line once, where at least one of its rows is
+  marked (`ordinaryTimesLine`). The chair's rows: 11357, 11346 (the grain chains under a grain famine), 25077, 25075
+  (the crossroads chain under a siege and an outbreak).
+- **E15 (1)**: the cover names the first export the tab's Exports print (the economics slice's `exportsShown`,
+  `tradeListsAsPrinted`), with the mark that list keeps, and none where a siege stops trade (`tradeStopped`).
+- **E18**: the PDF's criminal operations name each house by its label (`institutionHouseLabel`): no catalogue grade
+  ("(Powerful)").
+- **E1, the EXPORT badges** (rows 17065, 10234, 21452, 16334, 04302, 07554, 10246, 10709, 22454, 10202, 22983, 25129,
+  04300, 05888, 23156, 15575, 25173, 10860, 22340): an output of the Economics chapter's chain flow is badged EXPORT where
+  the tab's printed Exports (`tradeListsAsPrinted`) hold it BY ITS OWN NAME, none under a siege that stops trade. The
+  flow badged it by the good id, which is a family ("timber", "fuel", "clay", "leather": "Milled lumber" off "Shipbuilding
+  timber", "Peat fuel" off "Coal", "Fired brick" off "Pottery and ceramics"), or by a first-word match ("Milled lumber"
+  off "Milled flour"). The Economics tab's chain cards print no per-output badge (the dumps hold none); the web panel
+  `SupplyChainsPanel.jsx :: ChainRow` carries the same family-and-first-word read and is named below.
+
+Guard: `tests/pdf/tailExportsPdf2Batch2.test.jsx` (births of the census's own seeds; NOT pairs each naming what prints
+instead, with the chapter's head line; KEEP pairs; CALM: a calm town marks nothing). At the merged base 538c6ea10:
+16 NOT red, 7 KEEP/CALM green; at the tip: 23 green.
+
+### Cured (towns printing, before -> after, by the exports' inventory diff; the measure is where the row was false)
+
+| id | sentence | before -> after | measure (false by the record, before) | the cure |
+|---|---|---|---|---|
+| 11357 | Grain fields » Mills » Baked goods (PDF Services) | 3 of 68+3 printings marked "Scarce in the famine." | 3: the towns under a famine that failed the grain; the 68 unmarked are calm (64) or under an outbreak (4), which stops no grain | the leaf's mark (E17) |
+| 11346 | Grain fields » Brewery » Ale (barrel), Beer (barrel), Malt | 2 marked of 12 | 2: the same; the 10 unmarked are calm | the same |
+| 25077 | Strategic Crossroads » Toll bridge + Coaching inn + Customs house » Transit trade profit | 2 marked of 29 | 2: a siege (r2r-metropolis-14, the town read) and an outbreak; the 27 unmarked are calm (26) or a famine (1), which stops no road | the same |
+| 25075 | Strategic Crossroads » Coaching inn » Transit trade profit | 1 marked of 3 | 1: the outbreak (r2s-plague_onset-city-0, the town read) | the same |
+| (E17, the rows of the tabs' table) | 155 service and house rows and pills, 776 town-printings | each now carries the leaf's mark or word where the leaf stops it (e.g. "Hospitality" 369 -> 336 and "Hospitality (stopped)" 0 -> 19; "Gate control" 196 -> 181; "Grain milling (a day away)" 240 -> 224 and "… (scarce)" 0 -> 16) | the leaf's own rule, the tabs' marks | the same |
+| 29296 | Top export: Salted fish (naval route only) | 1 -> 0 | 1: a village under siege whose tab prints "No significant exports." | the cover reads the tab's Exports (E15 (1)) |
+| (E15 (1)) | the cover's "Top export: …" | 61 covers change: 43 name the tab's first export instead ("Transit trade", a toll the tab moves off its Exports, 32 -> 0); 18 print none (13 under a siege; 5 whose tab prints "No significant exports.") | the record's raw first export beside the tab's list | the same |
+| 28960 (the PDF's form) | Thieves' Guild (Powerful) | 44 + 1 -> 0 | 45: of the towns printing it, the record holds no thieves' power in 28, a Minor or Suppressed one in 15, a Significant one in 2; none Powerful | the house's label (E18) |
+| 17065 | Milled lumber EXPORT | 91 -> 13 | 78: not on the printed Exports by name | the badge reads the printed Exports by name |
+| 10234 | Fish oil EXPORT | 77 -> 49 | 28 | the same |
+| 21452 | Peat fuel EXPORT | 76 -> 21 | 55 | the same |
+| 16334, 04302, 07554, 10246, 10709, 22454, 10202, 25129, 04300, 05888, 23156, 15575, 25173, 10860, 22340 | Master-crafted weapons 58, Agricultural surplus 18, Crossbow bolts 17, Fishing boats 13, Fuel wood 8, Refined ingots 8, Fired brick 6, Structural timber 4, Agricultural produce 3, Boots and shoes 2, Saddles and harness 2, Leather armour 2, Surplus food 2, Gem appraisal 2, Raw gemstones 1 · EXPORT | each -> 0 | every printing | the same |
+| 22983 | Roof tiles EXPORT | 6 -> 4 | 2 | the same |
+
+### Struck (true by the record, or the tab's own twin; one line each)
+
+- 10661 Fresh meat, 10652 Fresh bread (under a siege), 21359 Pastries, 10665 Fresh produce (under a famine): the PDF now
+  prints them as the tabs do, through the leaf, and the leaf's table (`crisisDependence.js`) holds no dependence the
+  crisis stops for them (a siege stops travellers and goods, not the town's own meat and bread; the famines read failed
+  fish or livestock where these print, or the table holds Pastries and Fresh produce on nothing). NAMED for TAIL-SERVICES
+  (the table): 274 -> 273, 262 -> 258, 143, 116 (the few now marked are a famine of their own food).
+- 04297 "Agricultural Rents": STILL PRINTS at the merged tree (PDF Economics & Trade and the Economics tab alike,
+  "Payments in kind or coin from tenant farmers"); left, and NAMED for the seat renaming the source "Harvest" (E17).
+- 10343 Flour (PDF Economics & Trade): the tab's "Produced locally" prints flour in every one of the 82 towns the PDF
+  does (`localProductionAsPrinted`); 17068 Milling, 21728 Pottery, 10863 Gemcutting, 25018 Stoneworking (PDF Resources &
+  Production): the Resources tab prints each in every town the PDF does (50, 11, 10, 8). The tab's twin (E1); named for
+  the group of the Resources tab.
+- 07370 "Court only": the Defense tab prints it in the same 102 towns through the same leaf (`defenseDisplay.js`); E1,
+  named for DEFECON.
+- 25228, 25218 "THE RULING THREE OF …": seated by `npcs[].memberships` (ranks 1-3 of that power, r2r-hamlet-12); the Power
+  tab prints the same (E4).
+- The tension parties (12337/21292, 08830/21270, 19353/21313, 08832/21271, 16958/21310, 08229/21260, 21900/21318,
+  10541/21277, 16959/21311, 22265/21319, 21077/21316, 25433, 20948/21314, 21325, 21330, 21327, 21315, 15728/21296,
+  26756/21332, 21320, 32723/21345, 21835, 12102): the parties are the record's live tension's own
+  (`history.currentTensions[].factions`): 34 of the 38 rows match it word for word in the town read; 21900/21318 are its
+  "Pro-magic"/"Anti-magic" humanized; 21077 and 12102 no longer print in the town read at the merged base (E4).
+- 16735, 09845, 09822, 07329 (the power headline, one town each at the base): the governing power is the stronger by the
+  record's own figures there (49/36, 38/37, 33/27, 18/16): true; the batch-1 twin holds the other order.
+- Gone at the base: see the merge, above.
+
+### Every new or changed line (the owner's veto list)
+
+| line (surface) | towns | read in (smallest · largest · a crisis) |
+|---|---|---|
+| "The descriptions here are of ordinary times. While the siege lasts, a row it touches is marked." (PDF Institutions, Services, Economics & Trade; the tabs' leaf, `ordinaryTimesLine`) | 31 | r2r-thorp-45 · r2r-metropolis-14 · (all under the siege) |
+| "… While the famine lasts, a row it touches is marked." | 41 | r2r-thorp-38 · r2s-famine-metropolis-0 |
+| "… While the outbreak lasts, a row it touches is marked." | 28 | r2r-thorp-41 · r2s-plague_onset-metropolis-0 |
+| the leaf's marks before a row's description ("Stopped by the siege.", "Scarce in the famine.", "Curtailed by the outbreak.") on the PDF's houses, service rows, chain cards and flow rows, and income shares | 29 / 41 / 27 | r2r-thorp-45 · r2r-metropolis-14 · r2s-famine-city-3 |
+| the leaf's word after a pill's name ("Accommodation (stopped)", "Fresh bread (scarce)", "Lodging (curtailed)") (PDF Services) | e.g. "Hospitality (stopped)" 19 | r2r-thorp-45 · r2s-under_siege-town-0 · r2s-plague_onset-city-0 |
+| the cover's "Top export:" names the tab's first export, none under a siege or where the tab prints none | 61 covers | r2r-village-21 (none, the siege) · r2r-city-0 (unchanged) · r2r-metropolis-23 |
+| a criminal house by its label ("Thieves' Guild", was "Thieves' Guild (Powerful)") (PDF Defense & Security) | 45 | r2r-metropolis-12 · r2r-metropolis-23 |
+| an output's "EXPORT" badge only where the tab's Exports print it by name (PDF Economics & Trade, the chain flow) | 51 badge sentences, 859 printings silenced | r2s-mass_migration-hamlet-1 · r2r-village-52 · r2s-religious_conversion-hamlet-2 |
+
+### Lines this batch silenced in other towns (explained)
+
+Read whole in the exports' inventory diff (before 538c6ea10 -> this tree; 35,855 -> 36,112 sentences; 38 gone, 295 new,
+180 fewer, 41 more):
+- the EXPORT badges (51 sentences, 859 printings): each an output the tab's printed Exports do not hold by name; the
+  widest: Enchanting services 115 -> 0, Milled lumber 91 -> 13, Peat fuel 76 -> 21, Master-crafted weapons 58 -> 0,
+  Cast iron goods 53 -> 0, Pig iron 53 -> 3, Refined iron ingots 54 -> 7, Advanced weapons and armor 66 -> 27, Building
+  materials 37 -> 0, Coin minting 22 -> 0. By script over the 720 records: Enchanting services, Cast iron goods,
+  Building materials and Coin minting are on the printed Exports of NO town (193, 108, 98, 40 towns make them): every
+  badge they wore came from the good's family. Their INHERITORS are the same outputs unbadged ("Enchanting services"
+  78 -> 193 …);
+- the 155 service and house rows and pills of the E17 cure: not silences: each prints with the leaf's mark ("Hospitality"
+  -> "Hospitality (stopped)"; "Hospitality: A bed by the hearth …" -> "Hospitality: Stopped by the siege. A bed by the
+  hearth …", which the inventory reads as two sentences);
+- the cover's "Top export: …" (61 covers, above); "Thieves' Guild (Powerful)" (45, above).
+- THE INHERITORS (338): the unbadged outputs, the leaf's marks and head lines, the marked rows' descriptions split from
+  their marks, and the covers' new first exports: read (the widest twenty in the diff; the marks by the leaf's rule in
+  their towns; the covers above).
+
+THE TABS' INVENTORY (before -> after; run although this is not this seat's last batch): 0 gone, 0 new, 0 fewer; 3
+sentences in one town more (the premium deity panel's cold start, "Patron deity" 716 -> 717, as at batch 1). No tab
+sentence moved.
+
+The silences over twenty towns (the EXPORT badges; the "(Powerful)" grade) were told to the chair before the push.
+
+### Gates at this tip
+
+Domain strict 1113 / ceiling 1113; type ratchet 167 / ceiling 167; eslint clean on the touched files (one warning
+carried: `Cover.jsx` `num` unused, at the base too). The presumed-things walker (`--check`): fresh 145 · stale 2, the
+same at the base and the tip (red at both, carried). The twelve-birth grid: 2 falls (r2r-city-0 P7a,
+r2s-insurgency-metropolis-0 P7a), the same at the base. The 33 test files naming the touched files: 380 pass, 2 fail at
+the tip: `houseLabelEverySurface` (red identically at the base: carried) and `tradeListWriters.walker` (red at an
+intermediate form of this batch that re-assigned the exports prop; cured before the commit: the flow reads the printed
+list through a helper and writes no list; green).
+
+## Rows named for other groups (batch 2)
+
+- TAIL-SERVICES (the leaf's table, `crisisDependence.js`): Fresh meat and Fresh bread under a siege, Pastries and Fresh
+  produce under a famine (10661, 10652, 21359, 10665) print as the tabs print them; whether they live on what the crisis
+  stops is the table's call. The leaf's second cause, "Short of <input>.", is awaited for the rows of a house that
+  lacks its input: 06926, 06925, 06924, 06927, 14345 (the charcoal burner without timber), 23255 (salt works without
+  salt), 10827 (game meat without hunting grounds), 11208 (glassblower without sand), 17048 (sawmill without timber),
+  06946 (coastal timber unworked), 29819 (vintner without grapes): PARKED with their measures (44, 17, 2, 2, 13, 36, 35,
+  13, 3, 2, 1) until the chair names the tip that holds it.
+- DEFECON: the Defense tab's criminal operations print "Thieves' Guild (Powerful)" in the same 45 towns (`DefenseTab.jsx`,
+  the raw name): its switch to `institutionHouseLabel`. TAIL-EXPORTS-JOURNAL: the journal's "Thieves' Guild (Powerful):
+  Controls the criminal hierarchy." (28960, `foundry/journalPages.js`, 44 + 1 towns).
+- The web panel `SupplyChainsPanel.jsx :: ChainRow` badges an output by the good's family and first word (the PDF's
+  old read): its switch to the printed Exports by name, for the group that holds it.
+- 04297 "Agricultural Rents": the seat renaming the income source.
+
+## What is left of the worklist (after batch 2)
+
+- ENTREPÔT 08499 (148): the PDF tags ENTREPÔT from the record's `economicState.isEntrepot`; the Economics tab says
+  entrepôt only where a chain on its page is an entrepôt. By record, `isEntrepot` stands on 41 thorps, hamlets and
+  villages working no entrepôt chain (16 thorps, 14 hamlets, 11 villages): the next batch (a silence over twenty: to the
+  chair first).
+- 01055 "<N> Trade" (Pilgrim Trade), 17282 (mineral salts headline), 29786 (viability's caravans), 31610 (the crisis
+  lede under a governing power), 01241 (a governing power under a void): not reached.
+- The rows PARKED for the leaf's second cause (above).
