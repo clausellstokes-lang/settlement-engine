@@ -8,6 +8,7 @@
  * Births of the census's own seeds (CENSUS-3 seedcfg.mjs :: cfgFor); every cured pair red at 6cf555801, kept pairs green.
  */
 import { beforeAll, describe, expect, test } from 'vitest';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
@@ -53,8 +54,7 @@ beforeAll(async () => {
 describe('batch B: the crime\'s head, two safety lines', () => {
   test.each(CURED)('%s: "%s" does not print; "%s" does', (seed, gone, instead) => {
     const t = textOf(seed);
-    expect(t).not.toContain(gone);
-    expect(t).toContain(instead);
+    expectAbsentWithAnchor(t, gone, instead);
   });
   test.each(KEPT)('%s keeps "%s"', (seed, kept) => {
     expect(textOf(seed)).toContain(kept);

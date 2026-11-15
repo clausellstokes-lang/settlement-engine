@@ -29,6 +29,8 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { shadowCaptureShown } from '../../src/domain/display/shadowEconomyShown.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const SIZE = '(thorp|hamlet|village|town|city|metropolis)';
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -72,18 +74,22 @@ const KEEP = /** @type {const} */ ([
 describe('TAIL-DISPLAY-ECON-5 (X30): the shadow economy prints where the record holds illicit money', () => {
   test.each(NOT)('%s: %s does not print', (seed, gone, instead) => {
     const text = textOf(town(seed));
-    expect(text).not.toMatch(gone);
-    if (instead === null) expect(text, 'the block is silent: no capture chip either').not.toContain('Off-book');
+    // the liveness anchor first: the row's new words, or (a silent block) the Economic Flows section beside it, in the same text
+    if (instead === null) expect(text, 'the tab printed: its Economic Flows section stands').toContain('Economic Flows');
     else expect(text).toMatch(instead);
+    // anchored: the positive just above reads this same text (the row's new words, or the Economic Flows section)
+    expect(text).not.toMatch(gone);
+    if (instead === null) expectAbsentWithAnchor(text, 'Off-book', 'Economic Flows', 'the block is silent: no capture chip either');
   }, 60000);
   test.each(KEEP)('%s: %s still prints', (seed, kept) => {
     expect(textOf(town(seed))).toContain(kept);
   }, 60000);
   test('ONE HOME: the leaf prints a capture exactly where the record holds a criminal income share', () => {
-    for (const seed of ['r2r-hamlet-0', 'r2r-thorp-8', 'r2r-metropolis-15', 'r2r-city-0']) {
+    const failures = collectSeedFailures(['r2r-hamlet-0', 'r2r-thorp-8', 'r2r-metropolis-15', 'r2r-city-0'], (seed) => {
       const eco = town(seed).economicState;
       const criminal = (eco.incomeSources || []).some((/** @type {any} */ x) => x.isCriminal);
       expect(shadowCaptureShown(eco.safetyProfile) != null, seed).toBe(criminal);
-    }
+    });
+    expectNoSeedFailures(failures, 'the leaf prints a capture exactly where the record holds a criminal income share');
   }, 60000);
 });

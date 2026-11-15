@@ -31,6 +31,7 @@ import MagicTab from '../../src/components/new/tabs/MagicTab.jsx';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { foodMagicShare } from '../../src/domain/display/magicProvisionShown.js';
 import { deriveMagicReliance, foodMagicShare as relianceFoodShare } from '../../src/domain/magicReliance.js';
 
@@ -54,18 +55,19 @@ const textOf = (t, tab) => {
   return out;
 };
 
-/** [seed, tab, the line that must NOT print, what prints instead (or the slot's silence by design)] */
+/** [seed, tab, the line that must NOT print, what prints instead (or the slot's silence by design), the liveness anchor:
+ *  a line the same text prints on the same path (the twin or keep where the test claims one; else a sibling card's share)] */
 const NOT = /** @type {const} */ ([
-  ['r2s-occupied-thorp-1', 'magic', 'Reliance on magic: None', 'Reliance on magic: Relied upon (a third of the need by provision)'],
-  ['r2s-occupied-thorp-1', 'magic', 'Nothing structural at Amarkota depends on arcane work.', 'the desk\'s relied-upon reading'],
-  ['r2r-thorp-54', 'magic', 'Reliance on magic: None', 'Reliance on magic: Relied upon'],
-  ['r2r-hamlet-16', 'economics', 'Oxteha grows about two parts in five of what it eats', 'Oxteha grows about two parts in five of what it needs'],
-  ['r2r-thorp-54', 'economics', 'Magical provision makes up about a quarter of what it eats.', 'Magical provision makes up about a quarter of what it needs.'],
-  ['r2s-under_siege-hamlet-2', 'economics', 'Many households go short, and a bad season would bring real hunger.', 'Many households go short, and hunger is already here.'],
-  ['r2s-famine-town-2', 'economics', 'Law enforcement, patrol and gate control here depend on iron', 'Law enforcement and patrol here depend on iron (no gate, no wall)'],
-  ['r2s-under_siege-town-1', 'economics', 'Law enforcement, patrol and gate control here depend on iron from outside', 'Law enforcement and patrol here depend on iron from outside'],
-  ['r2s-under_siege-town-0', 'economics', 'Contributes to Entrepôt Trade - 11% of income', 'silent: the siege stopped the card'],
-  ['r2s-famine-town-1', 'economics', 'Contributes to Grain Sales - 4% of income', 'silent: the famine failed the grain'],
+  ['r2s-occupied-thorp-1', 'magic', 'Reliance on magic: None', 'Reliance on magic: Relied upon (a third of the need by provision)', 'Reliance on magic: Relied upon'],
+  ['r2s-occupied-thorp-1', 'magic', 'Nothing structural at Amarkota depends on arcane work.', 'the desk\'s relied-upon reading', 'Reliance on magic: Relied upon'],
+  ['r2r-thorp-54', 'magic', 'Reliance on magic: None', 'Reliance on magic: Relied upon', 'Reliance on magic: Relied upon'],
+  ['r2r-hamlet-16', 'economics', 'Oxteha grows about two parts in five of what it eats', 'Oxteha grows about two parts in five of what it needs', 'Oxteha grows about two parts in five of what it needs'],
+  ['r2r-thorp-54', 'economics', 'Magical provision makes up about a quarter of what it eats.', 'Magical provision makes up about a quarter of what it needs.', 'Magical provision makes up about a quarter of what it needs.'],
+  ['r2s-under_siege-hamlet-2', 'economics', 'Many households go short, and a bad season would bring real hunger.', 'Many households go short, and hunger is already here.', 'Many households go short, and hunger is already here.'],
+  ['r2s-famine-town-2', 'economics', 'Law enforcement, patrol and gate control here depend on iron', 'Law enforcement and patrol here depend on iron (no gate, no wall)', 'Law enforcement and patrol here depend on iron'],
+  ['r2s-under_siege-town-1', 'economics', 'Law enforcement, patrol and gate control here depend on iron from outside', 'Law enforcement and patrol here depend on iron from outside', 'Law enforcement and patrol here depend on iron from outside'],
+  ['r2s-under_siege-town-0', 'economics', 'Contributes to Entrepôt Trade - 11% of income', 'silent: the siege stopped the card', 'Contributes to Iron & Metalwork'],
+  ['r2s-famine-town-1', 'economics', 'Contributes to Grain Sales - 4% of income', 'silent: the famine failed the grain', 'Contributes to Entrepôt Trade - 13% of income'],
 ]);
 /** [seed, tab, the twin true in the state that made the old line false] (new or newly reached lines: red at the base by design) */
 const TWIN = /** @type {const} */ ([
@@ -103,8 +105,8 @@ describe('TAIL-DISPLAY-ECON-2 batch 2: the reliance reading counts the food prov
     expect(foodMagicShare(town('r2r-thorp-0')), 'no provision: "None" stands').toBe(0);
   }, 120000);
 
-  test.each(NOT)('%s (%s) does not print "%s"; instead: %s', (seed, tab, line) => {
-    expect(textOf(town(seed), tab)).not.toContain(line);
+  test.each(NOT)('%s (%s) does not print "%s"; instead: %s', (seed, tab, line, _instead, anchor) => {
+    expectAbsentWithAnchor(textOf(town(seed), tab), line, anchor, `${seed} (${tab})`);
   }, 120000);
 
   test.each(TWIN)('%s (%s) prints the twin "%s"', (seed, tab, line) => {

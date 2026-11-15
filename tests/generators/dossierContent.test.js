@@ -15,7 +15,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
 
 import { institutionalCatalog } from '../../src/data/institutionalCatalog.js';
-import { DESC_VARIANT_SIBLINGS, INSTITUTION_DESC_VARIANTS } from '../../src/data/institutionDescVariants.js';
+import { DESC_VARIANT_SIBLINGS, DESC_LATE_SIBLINGS, INSTITUTION_DESC_VARIANTS } from '../../src/data/institutionDescVariants.js';
 import { INLAND_DESCRIPTIONS } from '../../src/data/inlandDescriptions.js';
 import { HISTORY_DESC_VARIANTS } from '../../src/data/historyDescVariants.js';
 import { HISTORICAL_EVENTS_DATA } from '../../src/data/historyData.js';
@@ -113,7 +113,12 @@ describe('institution desc variety at generation (draw-free fnv select)', () => 
         const inland = INLAND_DESCRIPTIONS[key];
         const drawn = [...canonsFor(inst.category, inst.name), ...variants, ...(inland ? [inland] : [])];
         // W2-FIX-DATA (2026-11-13): a member the record refuses resolves to its declared twin (DESC_VARIANT_SIBLINGS), an authored line of the same pool
-        const pool = [...drawn, ...drawn.flatMap((t) => (DESC_VARIANT_SIBLINGS[t] || []).filter((l) => l.twinOf === t).map((l) => l.text))]
+        // TAIL-HOUSES-5 (H20): and a member the SETTLED record refuses resolves at the late re-read to its declared late twin
+        // (DESC_LATE_SIBLINGS: an authored line of the same pool), a twin's late twin included (the customs house's no-docks twin).
+        /** @param {string} t */
+        const twinsOf = (t) => [DESC_VARIANT_SIBLINGS, DESC_LATE_SIBLINGS].flatMap((/** @type {Record<string, ReadonlyArray<any>>} */ tab) => (tab[t] || []).filter((l) => l.twinOf === t).map((l) => l.text));
+        const once = [...drawn, ...drawn.flatMap(twinsOf)];
+        const pool = [...once, ...once.flatMap(twinsOf)]
           .map((line) => speakTierNoun(line, noun));
         expect(pool, `${key} desc from its pool`).toContain(inst.desc);
       }

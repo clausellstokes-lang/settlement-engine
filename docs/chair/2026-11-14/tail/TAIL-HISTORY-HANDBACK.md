@@ -1,12 +1,146 @@
 # TAIL-HISTORY · hand-back (2026-11-15)
 
-Seats: TAIL-HISTORY (batch 1 built, handed back as a patch), then **TAIL-HISTORY-2** (batch 2), then **TAIL-HISTORY-3** (batches 3 and 4), then **TAIL-HISTORY-4** (the first act, batch 5; keeping this file).
+Seats: TAIL-HISTORY (batch 1 built, handed back as a patch), then **TAIL-HISTORY-2** (batch 2), then **TAIL-HISTORY-3** (batches 3 and 4), then **TAIL-HISTORY-4** (the first act, batch 5), then **TAIL-HISTORY-5** (batch 6; keeping this file).
 Base: the joined line `lane/join-2026-11-14` at **f663a2699**. Branch: `lane/tail-history-2026-11-14`.
-**STATE (TAIL-HISTORY-4): batch 5 PUSHED; see the TAIL-HISTORY-4 part first.**
+**STATE (TAIL-HISTORY-5): batch 6 PUSHED; HANDED BACK at the budget (time). See the TAIL-HISTORY-5 part first; its WHAT IS LEFT supersedes every list below.**
 Worklist: `docs/chair/2026-11-14/read-all/WORKLIST-HISTORY.{md,json}` on the chair's lane (211 rows, read at e5b421802).
 
 **STATE (TAIL-HISTORY-3): batch 3 (Y13, every tension type) LANDED; batch 4 (Y14, the arrival pool) LANDED. HANDED BACK at the budget (2026-11-15): what is left is under WHAT IS LEFT (TAIL-HISTORY-3).** TAIL-HISTORY-2's state: **batch 1 LANDED** (3da34c70b: the patch, plus Y6 and Y7). **Batch 2 (Y5) LANDED** (7bef72cbc). **HANDED BACK** at the budget
 (2026-11-15 01:50): what is left is listed under WHAT IS LEFT below.
+
+## TAIL-HISTORY-5 (2026-11-15): the order (Y17), batch 6, WHAT IS LEFT
+
+### The order (ruling Y17, the chair, 2026-11-15 04:05 UTC; vetoable by the owner)
+
+- FIRST, what the bar's readers met in this group's files (ten fresh towns, read whole and cold by two readers each at the landed tip 5d1e3096b; a flag is a candidate: check it at the tip, measure it over every town of the 720 that prints it, cure at the writer):
+  (1) HIGH, `historyDescVariants.js`: "When the occupiers left, they left behind a town of former collaborators and former resisters…" in a town UNDER OCCUPATION NOW: it needs "not occupied now", or a declared twin that speaks of the LAST occupiers.
+  (2) `arrivalProse.js` ARRIVAL_SENSES: the racks of drying fish in a famine whose failed source is the fish (a line a crisis can make false is not colour: Y6).
+  (3) ARRIVAL_PEOPLE: the caravan broker in a famine village with no market; the money changer under a siege; the looms and trade "as usual" under a siege.
+- THEN 03015 (the creditor's agent under a siege); THEN the smaller lasting effects and the worklist's rows printing in five towns or more, widest first; a row in fewer than five towns waits.
+- THE LAWS: a tension with no event of its own is a live quarrel (Y5, Y13); under a plague no line gathers a crowd (Y8); a bare declaration that makes the chooser redraw moves later beats, so use declared twins. `ruling body` is safe at every step; do not key on the governing power's capture state or its legitimacy-crisis note.
+- (U1) Commit and push every batch as it holds, with WHAT IS LEFT current in the same push; hand back at 250,000 (meter at 0: about seventy minutes); one line to the chair at hand-back, at a stop, or for a question.
+- The chair's note of 04:08 UTC (vetoable by the owner): ONE CONDITION FOR THE WHOLE FAMILY of fish-and-catch arrival lines (the stacked salt fish and the nets were met as well). Measure the family, not three rows. Named, not owed: the horse traders under a quarantine, the carts of cloth and wool where none is made or sold, and the reagent stalls where no alchemist or apothecary stands.
+
+### Batch 6: Y17 (1)-(3), 03015, the smaller lasting effects (base d7921a40c; CENSUS-3 before and after, 720 towns)
+
+**The measure** (by record on the census's 720 at d7921a40c, false / printing):
+
+| row | the line | false / prints | the fact |
+|---|---|---|---|
+| Y17 (1) HIGH | "When the occupiers left, they left behind a {size} of…" (past event, `exile_return` → the occupation template's variant) | 4 / 107 | `crisis: occupied` in force |
+| Y17 (2) | the racks of drying fish | 4 / 36 | `crisis: hunger` (3 fish famines, 1 siege) |
+| Y17 (2), family | "Half of {n} seems to be gutting, salting or selling fish" | 2 / 27 | the same |
+| Y17 (2), family | "Barrels of salt fish stand stacked by the water…" | 5 / 18 | the same |
+| Y17 (2), family | "Nets hang drying on poles, and the smell of the catch follows you" | 5 / 11 | the same |
+| Y17 (2), family | the gulls over the fish stalls; the fishmonger's price | 0 / (both) | the same: one condition for the family (the chair's note) |
+| Y17 (3) | the steppe caravan broker | 6 / 16 | no market (none was under a siege or isolated) |
+| Y17 (3) | the greek money changer; the cloth looms through the whole place | 0 / 5; 0 / 23 | under a siege: none of the 720 prints them under one; met in births outside the 720 (`r2s-under_siege-city-8`, `-metropolis-43`; 23 of 201 extra siege seeds print the looms) |
+| 03015 | "A creditor's agent is in town conducting a quiet assessment before enforcement" | 1 / 71 (tabs 64, exports 60) | under a siege (a tension's hook) |
+| X9 | "Price ceilings on the affected goods still enforced in lean seasons" | 26 / 51 | no market |
+| X9 | "Council seats now formally split between the old guard and the young" | 7 / 29 | below a town |
+| X9 | "An oversight office was established to audit officials afterward" | 4 / 30 | below a town |
+| X9 | "Rival charters over the land are both still lodged with the court" | 5 / 25 | below a town |
+| X9 | "A regency council formed in the interim never fully dissolved" | 6 / 30 | below a town |
+
+Not cured, by measure: "Rival claimants still hold competing partial authority" (3 below a village of 28: a claimant with some authority is true of a small place).
+
+**The cure** (the files' forms; NO DRAW IS MOVED: every twin keeps its slot and spends no redraw):
+- `historyData.js :: HISTORY_DESC_SIBLINGS`: the occupation variant `excludes: ['crisis: occupied']`, its twin needs it (through `sizedHistoryText`, draw-free); five lasting-effect sets in batch 5's form (`sizedLastingEffects.js`).
+- `historyData.js` outside debt's plot hook: `{ text, excludes: ['crisis: under_siege'] }`. The timeline's hook gives way draw-free to the event's next admitted hook; the tension's list drops it (`filterDeclared`). It falls silent in 1 town (true).
+- `arrivalProse.js`: each of the six catch lines of the fish sense `excludes: ['crisis: hunger']`, with a twin that needs it and the original's own needs. Batch 1's basket of fish keeps its bare refusal (a twin there would spend no redraw and move the paragraph's later beats). The caravan broker `needs: ['market']`, `excludes: ['crisis: under_siege', 'route: isolated']`, with one twin true in all three states. The money changer and the cloth looms `excludes: ['crisis: under_siege']`, each with a twin under it.
+- **A NOTE ON THE KEY:** no atom names the failed food source (`foodRecord.failedSource`). `crisis: hunger` (a famine or a siege, or any crisis on a deficit) is the file's own key: batch 1's basket of fish uses it. In the census every hunger town that printed a catch line had fish as its failed source, or was under a siege. A grain famine in a fishing place would take the twins too, and they claim little there ("nearly bare", "brought in little"). An atom for the failed source is a vocabulary word for the chair to grant, not built here.
+
+**The after-run** (CENSUS-3 at the cure; the gulls and fishmonger twins were added after it and move no census town, since none of the 720's hunger towns prints either):
+- Tabs: 29,961 → 29,969: 0 gone, 8 new, 9 in fewer towns, **0 in more, 0 moved**. Each row fell by exactly its measure (broker 16 → 10, nets 11 → 6, barrels 18 → 13, racks 36 → 32, gutting 27 → 25, the occupation's metropolis, city and hamlet forms 39 → 37, 27 → 26, 8 → 7, the creditor's agent 64 → 63). The 8 inheritors are the twins, each in exactly its measure.
+- Exports: 35,887 → 35,898: 0 gone, 11 new, 13 in fewer towns, 0 in more, 0 moved. Price ceilings 51 → 25, seats 29 → 22, regency 30 → 24, charters 25 → 20, oversight 30 → 26, the occupation's forms and their dated forms as on the tabs, the agent 64 → 63 (and 60 → 59 with its label). The 11 inheritors are the twins.
+- The deity panel's flake did not show this time.
+- **THE DECLARED MOVE** (record diff by field, the 720): 178 towns in all:
+  - `history.currentTensions[].lastingEffects` in 144 towns (printed on no surface);
+  - `history.historicalEvents[].lastingEffects` in 46;
+  - `history.legacyAnnotations[].annotation` in 40 (it quotes the effect);
+  - `arrivalScene` in 22 (every change is one sentence for its twin);
+  - `history.historicalEvents[].description` in 4;
+  - `history.currentTensions[].plotHooks` in 1 (one hook fewer).
+  - Nothing else moves.
+- **Silenced:** only the creditor's agent, in 1 town (the siege), where it is false. Replaced: price ceilings in 26 towns, all false by the measure (no market), so nothing true was replaced over twenty.
+
+**The guard, red first.** `tests/data/tailHistoryBatch6.test.js`:
+- MUST NOT: 26 pairs (two towns a row; the agent's slot is SILENT by design).
+- KEEP: 14 pairs.
+- A structural check: every catch line of the fish sense refuses `crisis: hunger` and has its twin, with batch 1's basket named.
+- Red at d7921a40c: the first 16 MUST-NOT pairs, 16 of 16 (run). The 10 lasting-effect pairs print their originals at the base by the record (`le.mjs`).
+- Green at the cure. A planted condition (the broker needs a metropolis) reds KEEP 1 of 14; not committed.
+
+**Governing tests, re-keyed BY IDENTITY in the batch's commit** (none loosened):
+- `hookTablesDeclared` 22 → 23 rows (`outside_debt: no crisis: under_siege`);
+- `textOf` arrival objects 124 → 133 (nine twins);
+- `census2fColour` and `arrivalFishKeyDeclared` read the fish lines' originals by identity (the twins shifted their positions).
+
+**Gates** (gate-tail.sh): typecheck:domain:strict 0; typecheck:ratchet 0 (167, ceiling 167); eslint on the touched files 0. The 108 test files that name historyData, arrivalProse, arrivalScene, historyGenerator or sizedLastingEffects show 14 reds at the cure. After the re-keys, 10 remain, and each is red in the base tree as well (carried):
+- worldFactRederive A7
+- nameHeldThroughAssembly A1
+- urbanBandInstitutions G5
+- goldenViewModel pdf.6
+- editCorpusRatchet A3, A4, A7, A8
+- espionageDormancyFence FENCE 1
+- generatorGoldenMaster
+
+The presumed-things walker and the twelve-birth grid were NOT run this batch (the time budget): they are OWED, named here.
+
+**THE VETO LIST (VETOABLE wording, the owner's; the towns it was read in):**
+- "When the last occupiers left, they left behind a {size} of former collaborators and former resisters, and none of it was settled before the new occupation came" (4): r2s-occupied-hamlet-2, r2s-occupied-city-2, r2s-occupied-metropolis-0.
+- "The drying racks along the way in stand nearly bare, and only the smell of salt and old catch is left." (4): r2s-famine-hamlet-0, r2r-village-21 (a siege), r2r-city-44 (a famine).
+- "Half of {n} has worked fish all its life, and there is almost no fish to work." (2): r2r-hamlet-16 (a famine).
+- "Empty salt barrels stand stacked by the water, and even the gulls have given up on them." (5): r2r-thorp-58 (a siege), r2r-hamlet-28 (a famine).
+- "Nets hang drying on poles, and they have brought in little for a long while." (5): r2s-famine-thorp-0, r2s-under_siege-village-1.
+- "Gulls quarrel over the empty fish stalls, and there is no morning catch to smell." and "A fishmonger stands behind an empty slab, with nothing to shout a price for." (0 of the 720; reached only under hunger).
+- "A pair of pack animals stands in a yard, unladen, while their keeper mends a strap." (6): r2r-thorp-8, r2r-hamlet-41, r2s-plague_onset-village-0.
+- "A money changer sits at his table with little to do, counting the same coins from many mints again." (siege; 0 of the 720): r2s-under_siege-city-8, r2s-under_siege-metropolis-43.
+- "Here and there a loom still clatters behind a shutter in {n}, though no cloth has gone out in weeks." (siege; 0 of the 720): r2s-under_siege-town-8, r2s-under_siege-metropolis-67.
+- "In lean seasons the affected goods are still shared out by agreement, not sold to whoever pays most" (26): r2r-thorp-0, r2r-hamlet-16 (a famine), and villages.
+- "The old families and the young still quarrel over who speaks for the place" (7): r2r-thorp-27, r2r-village-37.
+- "Since then, whoever handles the common purse has had to show the accounts to the heads of the families" (4): r2r-hamlet-42, r2r-village-45.
+- "Rival claims to the land are both still pressed, and no one here has the standing to settle them" (5): r2r-thorp-3, r2r-village-57, r2s-under_siege-village-3.
+- "Those who held the place in the interim have never quite stopped expecting to be consulted" (6): r2r-hamlet-5, r2s-famine-village-0, r2s-recently_betrayed-village-1.
+
+### WHAT IS LEFT (TAIL-HISTORY-5's hand-back, widest first; supersedes every list below)
+
+0. **FIRST, THE CHAIR'S RULING U2** (05:06 UTC, received after this seat's budget ran out; vetoable by the owner): the first whole check of the joined line found 198 failing tests, and the line must pass. Before the next batch, run each file alone at the tip (`sh scripts/gate-tail.sh npx vitest run <file>`):
+   - (a) `tests/lint/styleLaw.walker.test.js`: two struck phrases rose in `src/data/historyData.js`. One is "…and keeps the record of it locked away" (`the-record`, about line 1601); the other is "…swears it came in with a stranger, and wants the stranger found" (`a-stranger`, about line 1511). REWRITE both lines as the style law's own text says, keeping the claim, with their declarations. The baseline is not raised.
+   - (b) `tests/generators/hookTruthAtBirth.test.js`, 2 of 13:
+     - rww-thorp-calm-1, "the sealed-walls hook is not stored where no walls stand, and its event keeps a hook" (TypeError: undefined, not a number);
+     - rww-city-insurgency-1, "the poisoning hook is not stored" (an array of 1 where [] was expected).
+     - A regression in this group's files: cure it. A pin a declared move explains: re-key BY IDENTITY, naming the move. A cause outside these files: one line here with the commit (`git log -S`). Never a test skipped or weakened.
+   - EVERY NEW TEST from now on:
+     - anchored negatives (`tests/helpers/anchoredNegatives.js`);
+     - seed loops through the totality helper;
+     - no literal state-prose sentence as an anchor (`tests/helpers/drawnProse.js`);
+     - `scripts/mutation-coverage-manifest.json` is NOT edited (its one writer is a close seat).
+     - Batch 6's guard predates this. It loops through `collectSeedFailures`, but its KEEP and MUST-NOT anchors are literal lines, so bring it to the helpers.
+   - Then Y17 as written, the HIGH first. Y17's four rows and 03015 are cured (batch 6); what is left of Y17 is items 2 and 3 below.
+1. **OWED for batch 6:** the presumed-things walker (`--check`) and the twelve-birth grid (`node scripts/census/page-census.mjs --grid`) at the tip. Neither was run.
+2. **The chair's named singles** (04:08 note, not owed): the horse traders meeting under a quarantine (Y8's form); the carts of cloth and wool where none is made or sold; the reagent stalls where no alchemist or apothecary stands. Measure each first: the arrival scene is on the record (`arrivalScene`), and a script over `corpus.ndjson.gz` is enough.
+3. **The worklist's rows in five towns or more**, as TAIL-HISTORY-3 listed them:
+   - B15078's 28 anchored "Price regulators" (a size law for the template's own factions: the chair's call);
+   - 11894 and 28512 (the foodways, Y3);
+   - B19917 and 07400;
+   - the Y3 culture rows;
+   - the rest of Y4;
+   - **Y8** (no gathering under a plague or a quarantine).
+   - Y9 / Y11 (20031, 20032): `ruling body` is on the joined line (d817736d8), not this branch; the merge waits for a tip the chair names.
+4. **A vocabulary word, for the chair:** the failed food source (`foodRecord.failedSource`) as an atom, if the fish family's `crisis: hunger` key is to be narrowed to a famine of fish.
+5. **Named for other files:** as TAIL-HISTORY-3 listed (siegeCapability.js, crisisSummaryVantage.js, TraditionsTab.jsx, arrivalScene.js). New: none.
+6. **Registers named stale:** the engine bundle carries none of batches 1-6, and the arrival ledgers (`docs/census/declarations/ARRIVAL_*.json`) lack batch 4's and batch 6's declarations.
+7. **Instruments** (re-made in minutes; the census's command as the brief gives it, `--count-only`, about 15-23 minutes):
+   - `le.mjs <tree> <corpus> <regex> <atoms>`: the lasting effects, their printing towns, and the towns each atom fails.
+   - `recdiff.py <corpusA> <corpusB>`: the record diff by field family.
+   - `born2.mjs <tree> <regex> <seed...>`: the matching lines of one fresh birth, for seeds outside the 720.
+   - The inventory: `inventory.py` (and `SURFACES=PDF,Journal` for the exports), then `inventory_diff.py`.
+   - **A HAZARD AT THE PUSH (met 2026-11-15 05:20):** when origin has moved, a push is not a fast-forward. Git hands the pre-push hook no ref lines, so the hook's lane-only path is skipped and it runs the whole `npm run check`. That check's fixture tests then write "fixture base" / "packet authority" commits into the pushing worktree, delete tracked files there, and set `core.bare=true` in the shared `.git/config`.
+     - FETCH AND CONFIRM A FAST-FORWARD BEFORE EVERY PUSH.
+     - If it happens, stop the push. Restore `git config core.bare false` (the main checkout's `git status` fails without it). Cherry-pick the batch onto origin's tip in a fresh worktree.
+     - Batch 6's first push was stopped that way: nothing reached origin. It was cherry-picked onto abe0327eb and landed as ed9f3b549. The polluted scratch tree was left as it was.
+   - **Never edit the tree a census renders from:** cure in a second worktree (node_modules symlinked), and copy the cure in when the render ends.
 
 ## TAIL-HISTORY-4 (2026-11-15): the order, the first act, batch 5, WHAT IS LEFT
 

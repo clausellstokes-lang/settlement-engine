@@ -25,6 +25,8 @@ describe("the reader's three towns, born as the app births them", () => {
       ['rww-village-indebted-1', /merchant district/i],
     ], ([seed, false_]) => {
       const s = born(seed);
+      expect(String(s.arrivalScene), `${seed}: the arrival scene names its own town`).toContain(s.name);
+      // anchored: the toContain(s.name) above proves this same scene is a live, filled render of this town
       expect(String(s.arrivalScene), `${seed}: the arrival names nothing its roster or size lacks`).not.toMatch(false_);
     }), 'the arrival names nothing its roster or size lacks');
   });

@@ -27,7 +27,8 @@ describe('the cold list\'s thorp, born as the app births it', () => {
   it('rw3-thorp-calm-2 (#36): no church and no reeve in its conflict; the devout households in their place', () => {
     const s = /** @type {any} */ (generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: 'thorp', selectedStressesRandom: false, selectedStresses: [], _randomizePriorities: true }), null, { seed: 'rw3-thorp-calm-2', customContent: {} }));
     const all = JSON.stringify(s);
-    expect(all).not.toMatch(/The church wants approval rights/);
     expect(all).toMatch(/The most devout households want a say over who may trade and when, and not everyone here agrees\./);
+    // anchored: the toMatch above proves the devout-households twin printed in this same record
+    expect(all).not.toMatch(/The church wants approval rights/);
   });
 });

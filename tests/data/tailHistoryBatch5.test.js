@@ -68,8 +68,9 @@ describe('TAIL-HISTORY batch 5 (Y16): a lasting effect names only the force, off
       const [i, seed] = key.split('|');
       const [, gone, instead] = MUST_NOT[Number(i)];
       const s = effects(String(seed));
-      expect(s, key).not.toMatch(/** @type {RegExp} */ (gone));
       expect(s, key).toMatch(/** @type {RegExp} */ (instead));
+      // anchored: the same text is shown directly above to print what stands on the slot instead
+      expect(s, key).not.toMatch(/** @type {RegExp} */ (gone));
     }), 'the false lasting effects');
   }, 600_000);
 

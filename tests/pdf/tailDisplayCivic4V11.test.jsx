@@ -8,6 +8,7 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { beforeAll, describe, expect, test, vi } from 'vitest';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { buildViewModel } from '../../src/pdf/lib/viewModel.js';
 import { buildJournalPages } from '../../src/foundry/journalPages.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
@@ -40,8 +41,7 @@ beforeAll(async () => {
 describe('V11: the exports name a nearby resource by the catalogue\'s label', () => {
   test('r2r-city-20: the journal prints "Mountain Pass", never "Defended Pass"', () => {
     const row = journal.split('\n').find((l) => /Nearby resources/.test(l)) || '';
-    expect(row).not.toContain('Defended Pass');
-    expect(row).toContain('Mountain Pass');
+    expectAbsentWithAnchor(row, 'Defended Pass', 'Mountain Pass');
   });
   test('kept: the journal still prints its nearby-resources row', () => {
     expect(journal).toMatch(/Nearby resources/);

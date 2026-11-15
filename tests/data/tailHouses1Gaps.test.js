@@ -10,6 +10,7 @@
  */
 import { beforeAll, describe, expect, test } from 'vitest';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
@@ -32,6 +33,11 @@ const instOf = (t, name) => (t.institutions || []).find((/** @type {any} */ i) =
 /** @param {any} t @param {string} name */
 const missing = (t, name) => (t.resourceAnalysis?.gaps || []).some((/** @type {any} */ g) => g.institution === name && g.kind === 'missing');
 
+/** TAIL-HOUSES-5 (the chair's U2): six pairs RE-KEYED BY IDENTITY at the merged tree 01714675f: the defence lane's declared move
+ * fcf4cae69 ("grapes and glass sand reach their house by any route the town can bring goods in on") closed the Vintner's and
+ * the Glassblower's gap in r2r-city-5, r2r-town-16, r2r-town-32, r2r-town-8 and r2r-town-41, and the Sawmill of r2r-village-3
+ * draws another text; each pair now names a town that still lacks the input and prints the same two texts (the two
+ * Glassblower towns lie beyond the census's 720: none of the 720 prints those texts with the gap). */
 /** [seed, house, the old text's opening (must not print), the rewording's opening (prints instead)] */
 const RED = [
   ['r2r-village-4', 'Potter', 'Wheel-thrown pottery for domestic use.', 'A wheel and a small kiln for domestic pottery'],
@@ -40,9 +46,9 @@ const RED = [
   ['r2r-town-10', 'Brickmaker', 'Moulds and fires clay bricks for construction.', 'Moulds and fires clay bricks for construction whenever clay can be had.'],
   ['r2r-town-45', 'Brickmaker', 'Shapes and fires clay into bricks for building.', 'Shapes and fires clay into bricks for building, whenever clay can be had.'],
   ['r2r-town-28', 'Brickmaker', 'Clay is moulded and fired into building brick here', 'Moulds and a kiln for building brick'],
-  ['r2r-city-5', 'Vintner', 'Produces and ages wine', 'Presses and ages wine'],
-  ['r2r-town-16', 'Vintner', 'Makes and ages wine', 'A cellar of presses and casks for wine'],
-  ['r2r-town-32', 'Vintner', 'Wine pressed and matured, from local fruit or imported must, sold in bulk to the taverns', 'Wine pressed and matured from local fruit or imported must, when either comes to the cellar'],
+  ['r2r-city-48', 'Vintner', 'Produces and ages wine', 'Presses and ages wine'],
+  ['r2r-metropolis-9', 'Vintner', 'Makes and ages wine', 'A cellar of presses and casks for wine'],
+  ['r2r-metropolis-54', 'Vintner', 'Wine pressed and matured, from local fruit or imported must, sold in bulk to the taverns', 'Wine pressed and matured from local fruit or imported must, when either comes to the cellar'],
   ['r2r-hamlet-12', 'Dairy farmer', 'Keeps cattle or goats for milk, butter, and cheese.', 'A dairy for milk, butter, and cheese from cattle or goats'],
   ['r2r-hamlet-27', 'Dairy farmer', 'Keeps a herd of cattle or goats for milk', 'A dairy for milk, butter, and cheese, from a herd'],
   ['r2r-village-14', 'Dairy farmer', 'Runs cattle or goats for their milk', 'Milk, butter, and soft cheese from cattle or goats, whenever livestock can be had.'],
@@ -53,15 +59,15 @@ const RED = [
   ['r2r-hamlet-26', 'Charcoal burner', 'Turf-covered kilns burn wood slowly down to charcoal', 'Turf-covered kilns for burning wood slowly down to charcoal whenever wood can be had'],
   ['r2r-town-17', 'Charcoal burner', 'What they make feeds the hottest fires in the settlement.', 'whenever wood can be had'],
   ['r2r-hamlet-9', 'Charcoal burner', "A collier's kilns, smoking under their turf", "A collier's kilns under their turf, turning wood into charcoal whenever wood can be had"],
-  ['r2r-village-3', 'Sawmill', 'Expands construction and furniture output.', 'whenever logs can be had, for building and furniture'],
+  ['r2r-village-6', 'Sawmill', 'Expands construction and furniture output.', 'whenever logs can be had, for building and furniture'],
   ['r2r-village-14', 'Sawmill', 'It lifts what building and furniture-making the village can do.', 'whenever logs can be had, for building and furniture-making'],
   ['r2r-village-4', 'Sawmill', "widening the settlement's output", 'whenever logs can be had, for building timber and furniture'],
   ['r2r-village-9', 'Tannery', 'Converts hides into leather using oak bark. Foul', 'Converts hides into leather using oak bark, whenever hides can be had.'],
   ['r2r-village-14', 'Tannery', 'Turns hides to leather with oak bark. The stink', 'Turns hides to leather with oak bark, whenever hides can be had.'],
   ['r2r-village-49', 'Fishmonger', 'Buys, salts, and sells fish. The link', 'Buys, salts, and sells fish, whenever fish can be had.'],
   ['r2r-village-36', 'Fishmonger', 'Buys the catch, salts it', 'Buys fish whenever fish can be had'],
-  ['r2r-town-8', 'Glassblower', 'Small-scale glasswork: bottles', 'Small-scale glasswork, when sand can be had'],
-  ['r2r-town-41', 'Glassblower', 'Glass worked on a small scale: bottles', 'Glass worked on a small scale, whenever sand reaches the furnace'],
+  ['r2r-town-293', 'Glassblower', 'Small-scale glasswork: bottles', 'Small-scale glasswork, when sand can be had'],
+  ['r2r-town-406', 'Glassblower', 'Glass worked on a small scale: bottles', 'Glass worked on a small scale, whenever sand reaches the furnace'],
   ['r2r-town-9', 'Glassblower', 'A modest glassworks making bottles', 'A modest glassworks for bottles'],
   ['r2r-city-5', 'Smelter', 'Charcoal furnaces reduce raw ore to refined metal, cast in bars', 'Charcoal furnaces for reducing raw ore to refined metal whenever ore can be had'],
   ['r2r-city-36', 'Smelter', 'Refines crude ore into workable metal over charcoal fire, and sells', 'Refines crude ore into workable metal over charcoal fire whenever ore can be had'],
@@ -89,8 +95,7 @@ describe('TAIL-HOUSES batch 1: a house is not described at work on an input that
       const inst = instOf(t, house);
       expect(inst, `${seed} holds a ${house}`).toBeDefined();
       expect(missing(t, house), `${seed}: the ${house} lacks its input`).toBe(true);
-      expect(String(inst.desc), `${seed} ${house}`).not.toContain(old);
-      expect(String(inst.desc), `${seed} ${house}`).toContain(now);
+      expectAbsentWithAnchor(String(inst.desc), old, now, `${seed} ${house}`);
     }), 'a house without its input is not described at work on it');
   }, 600_000);
 

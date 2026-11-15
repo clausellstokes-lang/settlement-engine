@@ -58,6 +58,7 @@ describe('the hall\'s none rung claims the criminals\' standing only, never that
       expect(hall?.rung, 'anchored: the none rung').toBe('none');
       expect(hall.line, 'anchored: the syndicate line that names the three').toMatch(/^None of the head, the second and the third of /);
       expect(hall.line).toMatch(CLEARED);
+      // anchored: the CLEARED match directly above shows the hall line prints
       expect(hall.line).not.toMatch(SELF_RULE);
     });
   }
