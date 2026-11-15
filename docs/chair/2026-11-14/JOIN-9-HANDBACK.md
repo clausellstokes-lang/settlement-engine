@@ -75,10 +75,13 @@ THE CHAIR'S RULINGS TO JOIN-9 (each vetoable by the owner):
 | 7 | lane/tail-corpus-eco-2026-11-14 | 7ab28d3ef (05:52) | a8ea5ef8e | 744edb899 | none | 1 files outside docs/; declared-move commits: none (golden carried) |
 | 8 | lane/tail-ties-2026-11-14 | d247d8a32 (05:55) | 4ec61102f | 6587c20df | none | 6 files outside docs/; declared-move commits: none (golden carried) |
 | 9 | lane/tail-close-tests-a-2026-11-15 | 432b0330c (05:59) | 7efc76861 | e3c393377 | none | 58 files outside docs/; declared-move commits: none (golden carried); merged clean though both moved: tests/components/displayEconRelianceFoodWords.test.jsx  |
+| 10 | lane/tail-houses-2026-11-14 | 0907dccf2 (06:03) | 3e482b329 | 329f324a0 | **CODE (test)**: `w2FixData6Rows.test.js` row 4, close-tests-a against houses: composed, both stand (§3) | clean-both `tailHouses1Gaps`, `tailHouses4CoastCrown` (5/5 green), `presumedThings.widened.register.json`; DECLARED MOVES 61648f2a2 99438070f 6510d746b 36bcb60b5 5d906f6e4: golden carried |
 
 ## 3. Every code resolution
 
 PIN CONFLICTS (law d), point 3 (corpus-eco a8ea5ef8e against the joined side, whose pins corpus-def moved): the joined side kept inside each conflicted hunk (the conflict markers resolved to HEAD's side hunk by hunk; the lane's clean hunks in the same files stand). Measured on the merged tree (`npx vitest run` of the three files, `/home/user/j9out/pin3.merged.log`) and at the line's tip before the merge in the probe worktree `/home/user/j9probe` (`pin3.pre.log`): before, 6 red in 2 files (variants 2954 vs 2953; leaves+causal 3422 vs 3421; joined 2717 vs 2716; the 2418 row did not load; the trailing pin 371 vs 375; ANCHOR 5's 'exemption on a null column'); after, 8 red in 3 files: variants **2956** vs 2953, leaves+causal **3424** vs 3421, joined **2719** vs 2716, `proseMoveGrammar` uniformSegments **571** vs 570 and CONTROL 4's second half **516** vs 515, the rest as before. Every one is a pin both corpus seats moved: re-keyed by identity at the close, by its door, once. Remerge patch `probes/JOIN-9/03-tail-corpus-eco.remerge.patch`.
+
+**CODE CONFLICT IN A TEST FILE, point 10** (close-tests-a 432b0330c on the line against houses 0907dccf2): `tests/data/w2FixData6Rows.test.js`, HANDBACK-6 row 4 (the town mine of r2r-town-11/12/45). tests-a: `toMatch(/shaft/)` then the anchored negative `/hired crews|worked|go deep|run deep/i`. houses (61648f2a2, TAIL-HOUSES-5, re-keyed by identity after its hedge cure 2c10ddefe): "worked" out of the negative, `toMatch(/worked whenever ore can be had/)` added. PLAIN by the prompt's rule: composed as the shaft and hedge positives, then the anchored negative without "worked", houses' comment kept. Measured: 2 red / 7 green, the same two (row 3 ww-1416; the chair's row ww-924) as at houses' own tip; row 4 green (red at the line before). Remerge patch `probes/JOIN-9/10-tail-houses.remerge.patch`.
 
 ## 4. THE LIST FOR THE CLOSE
 
@@ -227,6 +230,9 @@ Merged clean though both sides moved them (for the close to re-derive or measure
 | golden | history (6) | DECLARED MOVE commits ed9f3b549  (field diffs in their bodies) |
 | `tests/generators/hookTablesDeclared.test.js` | history (6) | merged clean though both sides moved them; not read hunk by hunk: read at the close |
 | `tests/components/displayEconRelianceFoodWords.test.jsx` | close-tests-a (9) | merged clean though both sides moved them; not read hunk by hunk: read at the close |
+| `tests/components/displayEconRelianceFoodWords.test.jsx` (r2s-famine-town-1 NOT row: the anchor) | close-tests-a (9) against display-econ (TAIL-DISPLAY-ECON-5) on the line | COMPOSED RED (§6): the anchor 13% vs the re-keyed 14%; for the tests-a seat on the chair's word, else re-keyed at the close |
+| `tests/data/w2FixData6Rows.test.js` (rows 3 ww-1416 and the chair's ww-924) | houses (10) | red at the branch's own tip and at the line, carried: the houses seat's |
+| golden | houses (10) | DECLARED MOVE commits 61648f2a2 99438070f 6510d746b 36bcb60b5 5d906f6e4 (field diffs in their bodies) |
 
 ## 5. Item 2 at the landed tip
 
@@ -234,7 +240,8 @@ At the line after the ties point (74688857c; code a06cde784): `node scripts/wiri
 
 ## 6. Stops
 
-None yet.
+
+- **06:02 UTC, point 9, A COMPOSED RED FOUND AFTER THE PUSH (told the chair):** lane/tail-close-tests-a-2026-11-15 at 432b0330c merged textually clean and was pushed (merge e3c393377, origin 92fcc4fc5) before the both-moved test file was read. `tests/components/displayEconRelianceFoodWords.test.jsx`: tests-a's NOT row for r2s-famine-town-1 takes as its liveness anchor "Contributes to Entrepôt Trade - 13% of income"; display-econ (TAIL-DISPLAY-ECON-5, on the line) re-keyed that card by identity to **14%** in KEEP. Composed: 1 red / 22 green (`t9.log`: LIVENESS ANCHOR missing); 23/23 green at the line before the merge (`t9.pre.log`, in `/home/user/j9probe`). Not plain; this seat reverted nothing and edited nothing. Recommendation: the tests-a seat re-keys that one anchor to 14% on its branch; land on the chair's word. Since then `auto.sh` stops before the commit on any both-moved test file.
 
 ## 7. Hazards
 
@@ -255,4 +262,4 @@ A worktree at origin's tip (`git worktree add /home/user/j9wt -b join9 <tip>`, `
 
 ## 9. WHAT IS LEFT
 
-Points 1-2 (display-civic, crisis) by the prompt's order; 3 (corpus-eco, pin conflicts) and 4 (corpus-def) landed before the chair's 05:35 reorder reached this seat (read at 05:38; point 4's push was in flight and was let finish); 5 ties on the chair's 05:32 word, then (g) (§5). Next by the 05:35/05:36 order: history, corpus-eco, close-tests-a, houses, the line; then close-tests-b, -c, close-display, close-src, corpus-def, defecon, houses, powers-b.
+Points 1-2 by the prompt's order; 3 (corpus-eco, pin conflicts) and 4 (corpus-def) before the chair's 05:35 reorder reached this seat; 5 ties and (g) on the 05:32 word; 6 history, 7 corpus-eco, 8 ties (the 05:53 word), 9 close-tests-a (a composed red found after its push: §6), 10 houses (a test-file conflict, composed: §3). Next: the line to the chair; then close-tests-b, -c, close-display, close-src, corpus-def, defecon, houses, powers-b.
