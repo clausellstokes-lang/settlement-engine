@@ -1,0 +1,20 @@
+{"id":"00319","town":"r2s-under_siege-village-0","sev":"LOW","kind":"TAG","why":"kilns 'tended day and night' printed unmarked under Active Siege; tag SFOP; wood-gathering and burns stop under siege","other":""}
+{"id":"00607","town":"r2s-under_siege-city-3","sev":"HIGH","kind":"STATE","why":"practitioners 'not formally empowered', but the Arcane Council governs (archmage first of it) and Arcane Orders is a power","other":"01128"}
+{"id":"01128","town":"r2s-under_siege-city-3","sev":"MED","kind":"STATE","why":"mages' influence 'advisory… resented'; Arcane Council is the governing power, Mages' guild head sits rank 1","other":"00607"}
+{"id":"00215","town":"r2s-under_siege-city-3","sev":"LOW","kind":"TAG","why":"a letter 'arrived' (post reaching town) under Active Siege; tag SOP; nothing comes in under siege","other":""}
+{"id":"00240","town":"r2s-under_siege-city-3","sev":"LOW","kind":"TAG","why":"a sealed letter 'arrived' three weeks ago under Active Siege; tag has S; post cannot arrive during siege","other":""}
+{"id":"00993","town":"r2s-famine-thorp-3","sev":"LOW","kind":"STATE","why":"says thorp buys in luxury goods it lacks; TRADE imports only Salt and Grain, and a famine thorp of 16 buys no luxuries","other":""}
+{"id":"00992","town":"r2s-famine-hamlet-3","sev":"LOW","kind":"STATE","why":"says hamlet buys in the timber it lacks; TRADE imports list Salt, Grain, Incense only, no timber","other":""}
+{"id":"00607","town":"r2s-famine-city-2","sev":"MED","kind":"TAG","why":"practitioners 'not formally empowered', but Arcane Orders and The Tower Alliance are listed powers; Mages' guild archmage is first of Arcane Orders","other":"01128"}
+{"id":"01128","town":"r2s-famine-city-2","sev":"LOW","kind":"TAG","why":"mages' influence only 'advisory'; Arcane Orders and The Tower Alliance are powers with ranked heads and quarrels with the ruling oligarchy","other":"00607"}
+{"id":"00998","town":"r2r-thorp-40","sev":"LOW","kind":"STATE","why":"says thorp buys in the timber it lacks; TRADE imports only Salt, no timber","other":""}
+{"id":"00990","town":"r2s-occupied-hamlet-2","sev":"LOW","kind":"STATE","why":"says hamlet buys in the stone it lacks; TRADE imports Salt, arms, incense only, no stone; occupation also taxes its trade","other":""}
+{"id":"00643","town":"r2s-occupied-village-2","sev":"MED","kind":"STATE","why":"'No guild keeps a house' at the market; Merchant Guilds is the Strongest power, boat-headman first of it, fishmonger and boatwright sit on it","other":""}
+{"id":"00262","town":"r2s-occupied-village-1","sev":"LOW","kind":"TAG","why":"'Any surplus goes to neighbours' under Vassal extraction occupation; surplus 0% and the occupier takes what is extracted; tag SO","other":""}
+{"id":"00607","town":"r2s-occupied-city-3","sev":"HIGH","kind":"STATE","why":"practitioners 'not formally empowered', but the Arcane Council governs (guild archmage first of it) and Arcane Orders is a power","other":"01128"}
+{"id":"01128","town":"r2s-occupied-city-3","sev":"MED","kind":"STATE","why":"mages' influence 'advisory… resented'; Arcane Council is the governing power, Mages' guild head sits rank 1","other":"00607"}
+{"id":"01112","town":"r2s-plague_onset-village-1","sev":"MED","kind":"STATE","why":"'yards as busy as its workshops' under Plague Conditions; tag OP; people do not gather or travel as usual, and HOUSES has no yard, stable or caravan post","other":""}
+{"id":"00615","town":"r2r-village-50","sev":"MED","kind":"BROKEN","why":"slash-joined power name 'Military/Guard' used as the subject of a sentence","other":""}
+{"id":"00091","town":"r2r-village-50","sev":"LOW","kind":"STATE","why":"says Supriya Joshi 'holds a third share in The Guard'; PEOPLE shows her first of Military/Guard (rank 1), and 'The Guard' is not a listed power name","other":""}
+{"id":"00510","town":"r2s-plague_onset-metropolis-2","sev":"LOW","kind":"BROKEN","why":"'Insecurity and hunger are the reason' names no subject for what the reason explains; legitimacy is Tolerated and food only Pressured (gap 10%)","other":""}
+{"id":"DONE","lines":3042,"blocks":108,"flags":19}
