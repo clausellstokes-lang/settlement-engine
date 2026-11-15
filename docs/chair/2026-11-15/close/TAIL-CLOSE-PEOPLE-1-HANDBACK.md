@@ -59,6 +59,34 @@ Proof: the red alone 1 failed → 6/6 passed; eslint clean; the negative-anchor 
 offenders at base and after (crisisTab, tailHistoryBatch6, tailCrisisBatch4, tailCrisisBatch8: other seats'), none from this
 file. MOVING: none.
 
+### Reds 1-5 — the people's guards and the RELIGIOUS CAPITAL fixture: (ii) re-keyed by identity, all five
+
+Turning commit for all five: **1036bf94** (TAIL-TITLES K-C, class k, a DECLARED MOVE: "a person's title and role are the
+house's face in its holder's form"), the only code commit of the merge 5d1e3096 (JOIN-7 · 31, titles at b30c1b7aa). M-1b holds:
+the role IS the title, one word; the face stays on `institution.title`; the move's own reader is
+`holderTitleForms.js :: faceOfRole`.
+
+**Every miss at the tip was a woman bearing the face "the lord" as "the lady"** (or, for red 5, "the senior abbot" as "the
+senior abbess"). The person is right, and no keeper heading a contender, no tradesperson and no claimant outside the cast
+appears among them. Read on the misses: nobleFaces 10 + 5, seatKeeperContender 2 + 1 + 7, successionClaimants 3 + 5 + 6 + 12,
+lordNotGovernment's one premise (r2s-recently_betrayed-city-2: its one minted lord is a woman), semanticFixtures'
+fixture-religious-0 (its one religious card, Sarnai Cumans, female). Diffed at 16419737 against the tip, that town's cast
+moves only in two holder forms (the senior abbess; the front man → the nominal owner).
+
+The re-key: each guard reads the card's FACE through the move's own reader, **and only where the printed title (role, for
+the fixture) IS that face's holder form** (`titleForHolder(face, gender)`). So a man printed "the lady", or any wrong word,
+still reds. No literal list is widened ('the lord', 'the monarch', the landed faces and REL_ROLE are unchanged), and no
+assertion is removed.
+- red 1 `nobleFaces.test.js`: the minted face, the landed faces, The Old Houses' face.
+- red 2 `seatKeeperContender.test.js`: NOBLE_FACES and Landed Gentry's face (the keeper-heads-contender check is
+  untouched and was never among the misses).
+- red 3 `successionClaimants.test.js`: OF_THE_LINE, the review towns' claimants, x50-trim-21's two bodies.
+- red 4 `lordNotGovernment.test.js`: `minted()` reads the face (as `npcStructure.js :: isMintedLord` itself does since 1036bf94).
+- red 5 `semanticFixtures.test.js`: the religious-roles row reads each card's face.
+Proof: each red alone before (2/3/4/1/1 failed) → after (3/3, 3/3, 6/6, 2/2, 31/31 passed); eslint clean on the five files.
+MOVING: none of the five files differs on any `lane/tail-*` branch. No source file was changed for these five, so there is
+no census move and the grid is not touched.
+
 ## Declared moves (for the owner's veto list)
 
 - none yet.
