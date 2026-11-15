@@ -181,3 +181,61 @@ which this seat was not chartered to mint. **Named to the chair, one line each, 
   6. "the UNREVIEWED-UI cohort …": `identities: 131` against `129`.
   All six clear only with a re-freeze, and the re-freeze waits on the chair's ruling on the seven eroded rows. Instrument
   one's three corpusMeta reds wait on the same re-freeze.
+
+## RULING OR2 (the chair, 2026-11-15, record 456): the rung, measured and handed on
+
+This seat reached its budget before the rung. Measured so far, and the exact steps for the successor:
+
+**FOR THE OWNER, in plain words.** Seven known reads in the PDF's code (`src/pdf/lib/viewModelBodySlices.js`) are reads
+the instrument can no longer see. They are still in the code and harmless today; owed: the detector taught to follow a
+helper. Thirty-eight reads ask for fields nothing writes. They are dead fallbacks behind fields that are written, and
+none prints a wrong or empty value on any page; owed: their removal after the release (not in the close: an old saved
+record may still feed a fallback).
+
+**Measured for OR2 (2):**
+- **Class (a): NONE of the seven.** The instrument's own derivation: `CLASS_A_PROTECTED_IDENTITIES` (20 identities,
+  `scripts/check-observed-shape-readers.mjs`) contains none of `availableResources`, `exportPotential`,
+  `terrainEffects`, `shadowEconomy on settlement`, `institution`, `processing on exploitation`, `name on activeChains`.
+- **THE BISECT (the chair's suspects REFUTED for three rows).** Method: the legacy scan run on the file alone, at each
+  of its versions since the frozen sha f5622ab8, against tonight's executed corpus (`$SCRATCH/tools/bis.mjs`). Columns:
+  the seven rows in the order above.
+  ```
+  f5622ab8 ----YYY · fc9e73ae ----YYY · d8986c04 ----YYY · 9bcf0127 ----YYY · 36a903f2 ----YYY · 10755758 ----YYY
+  33b12cbe ----YYY · 364c2313 ----YY- · 0537f92f ----YY- · 282b9582 ------- · 63c3f2ae ------- · 9afdf5fa -------
+  ```
+  - `name on activeChains` (`c?.name`, :35) is lost at **364c2313** (UPKEEP-14 (j): "the Foundry journal names each
+    supply chain by its record").
+  - `institution on exploitation` (`iss?.institution`, :96) and `processing on exploitation` (`c?.processing`, :55) are
+    lost at **282b9582** (EXPORTS-B3: "the PDF's and the journal's resource rows print what the tab's card prints").
+  - TAIL-EXPORTS-PDF's 63c3f2ae and 9afdf5fa are NOT the cause of these three: they were already lost before them.
+  - The four `on settlement` rows (`s?.shadowEconomy` :69, `s?.availableResources` :383, `s?.exportPotential` :386,
+    `s?.terrainEffects` :392) are NOT reproduced by a file-only scan at ANY version, the frozen one included. Their
+    binding depends on the whole estate, so their bisect needs a full-tree scan (`--scan-only --scan-mode=legacy-leaf`)
+    at each candidate commit: **not done; the successor's first measurement.**
+
+**THE RUNG'S EXACT STEPS** (the procedure of schema 42, `git show 9e2ae903` act 2 and its act 1 before it; schema 43 is
+next in line):
+1. Bisect the four `on settlement` rows with full-tree scans, as above; name each cause commit. If any of the seven
+   turned out to be class (a), STOP (it is not: see above).
+2. ACT 1, code (one commit): in `scripts/check-observed-shape-readers.mjs` add the header entry "43 = schema 42's
+   topology, tag law, roster and bank, re-governed to THE CLOSE OF THE ROUND OF 2026-11-14/15 (the chair's ruling OR2
+   of 2026-11-15; the chair's record 456)" and its SCHEMA-43 line in the retired-schema prose (the form of 37–42); bump
+   `BASELINE_SCHEMA`; add the 42→43 row to the migration target table and the scanner-transition policy in
+   `scripts/migrate-observed-shape-readers.mjs` exactly as 41→42 did (find `schema-41-to-42-tier-seed-v1`).
+3. ACT 2, the governed ritual on act 1's committed clean tip: (i) `node scripts/check-observed-shape-readers.mjs
+   --scan-only --scan-mode=legacy-leaf --json=<ext>`; (ii) `node scripts/migrate-observed-shape-readers.mjs
+   --target-schema=43 --review-template=<ext>`. Expect Same ≈ 1,513, New 38 reads / Gone 14 (the 7 lawful shrinks, and
+   the 7 erosion rows, which the migrate counts as Gone and whose decisions record them as UNCURED INSTRUMENT EROSION);
+   (iii) the review JSON in `docs/chair/2026-11-15/`, one decision per row: the 38 NEW are admitted by cause with class
+   and lane (the table above: dead fallback (WorldPulseData, newsBody, proposalAdmission, crisisPage, Institutions.jsx,
+   magicProvisionShown); writer outside the corpus (assembleInstitutions: the store's config); writer under another
+   shape name (incomeLineSiblings: activeChains; warCoalitionEvidence: metadata); a data table / local result
+   misbound (defenseGenerator, COHERENCE-UPKEEP-6)), and the entry says no read prints wrong or empty on a page; the
+   7 lawful GONE rows each with its cause (above); the 7 erosion GONE rows each named with key, shape, site and the
+   bisected commit. The review is built by a scratch builder that REFUSES unless the summary is exactly this, with a
+   negative control. (iv) `--review --bundle=<ext>`; (v) `node scripts/check-observed-shape-readers.mjs --write
+   --migrate-schema=43 --migration-review=<bundle>`.
+4. The walker's pins with ⭐ notes in the trail's form (reads 2189→2212, identities 1530→1551, the unreviewed-UI
+   cohort 129→131, the corpus counts, the scalar meta). Then both walkers ALONE with
+   `NODE_OPTIONS=--max-old-space-size=8192`: the observed-shape walker 47/47, the writers' walker 52/52 but for the
+   culture arm (WR2: green when the src seat's commit lands), or each red named.
