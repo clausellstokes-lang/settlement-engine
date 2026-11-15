@@ -1,0 +1,8 @@
+{"id":"C0031","town":"bar0-city-under_siege+famine-rand-3","sev":"MED","kind":"STATE","why":"'Relied upon' for magic, yet C1248-C1251 list every magic role absent; magic rare/low, FOOD by magic 0%, DEFENCE magic none","other":"C1248"}
+{"id":"C0253","town":"bar0-city-under_siege+famine-rand-3","sev":"MED","kind":"BROKEN","why":"slash label 'Military/Guard' used as one power's name beside 'Backs' verb","other":""}
+{"id":"C0365","town":"bar0-city-under_siege+famine-rand-3","sev":"MED","kind":"BROKEN","why":"slash label 'Military/Guard' beside verb 'Backs' (same fault as C0253)","other":"C0253"}
+{"id":"C0434","town":"bar0-city-under_siege+famine-rand-3","sev":"MED","kind":"LACKS","why":"calls merchant guilds 'a power in their own right'; GOVERNMENT lists no merchant power (Religious, Noble, Military/Guard, War Council, Shield Compact)","other":""}
+{"id":"C0776","town":"bar0-city-under_siege+famine-rand-3","sev":"LOW","kind":"PAIR","why":"'Diversified, broad base' while INCOME has one source at 45% (shadow economy) and C0799 says two or three trades carry the living","other":"C0799"}
+{"id":"C1095","town":"bar0-city-under_siege+famine-rand-3","sev":"MED","kind":"PAIR","why":"'Free of the criminals': INCOME Shadow Economy 45% of money; C0800 says the biggest trade cannot be named safely, C1084 says officials take purses","other":"C0800"}
+{"id":"C0960","town":"bar0-city-under_siege+famine-rand-3","sev":"LOW","kind":"STATE","why":"Banking & Finance listed as an export of financial services; TRADE exports are only legal services and waterborne freight","other":"C0805"}
+{"id":"DONE","lines":1965,"blocks":1,"flags":7}
