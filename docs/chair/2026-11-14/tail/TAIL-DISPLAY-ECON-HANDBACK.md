@@ -347,8 +347,14 @@ All are true where they print.
 - **23039, 18036** "✦ Magically Sustained" on the timber cards → `chainStateShown.js` / the step's `status` (already named).
 - **16353, 04474** "Arcane fabrication provides processed goods…" on a Reed & Marsh card in a mountain town and on a bowyer with no bowyer: the step's chain (`generators/chainMagicSubstitution.js`) and the record's chain list. Not a wording of this leaf.
 
+## The chair's ruling X25 (2026-11-15 01:41 UTC; vetoable by the owner), received after batch 3 was pushed: NOT DONE, THE NEXT SEAT'S FIRST BATCH
+
+- **(X25.1) ONE VOICE:** the journal now calls the crisis leaf for income shares, chains and houses (427 rows in 97 towns). The Economics tab does not, so under a siege the journal marks "Toll Revenue" and the tab does not. The leaf is already on this branch through the X21 merge: `src/domain/display/crisisStoppedRow.js` (`rowStoppedBy(settlement, 'chain' | 'income', row)`, keyed by the record's chain id or the income share's source name; `crisisMarkText`, `STOPPED_WORD`, `ordinaryTimesLine`, `stoppingCrisesOf`). THE TAB'S INCOME ROWS AND CHAIN ROWS CALL IT and print its mark as the Services tab does (`ServicesTab.jsx` line 24 and line 151 show the form; `InstitutionsTab.jsx` line 372 does the same for houses). The chair asked for it with the stores call in one batch. The stores call was already pushed as batch 3, so this is batch 4. Mind the overlap with batch 2's silence of "Contributes to X - N% of income" on a stopped card (`EconomicsTab.jsx` lines 119 and 244, `stoppedByCrisis`): one reading should decide both, the leaf's.
+- **(X25.2) NAMED, not this seat's file:** the Resources tab's exploitation rows show the failed food's resource as "full" under a famine (journal rows 35544, 35551, 35555 of `read-all-3/WORKLIST3-EXPORTS-JOURNAL.json`). That table reads `src/domain/display/validationOnPage.js :: exploitationGroupsShown` (line 465), which is not in this group's file list, so it is named to the chair (with B29895 before it).
+
 ## What is left of the worklist (for the next seat), as at this batch
 
+- **X25.1** (above): first.
 - **X23**: switch the tab to `shadowEconomyShown` / `criticalImportsShown` when the chair names a tip that holds them.
 - **B28788, B28789** the resource label (above): the chair's word first.
 - **B28006, B28222** wool → cloth chips (39): verify.
@@ -362,3 +368,7 @@ As above:
 - three detached worktrees: the cure tree, the merge for the before census, and the cure commit for the after census. Each `node_modules` is linked to the cure tree's;
 - the census run on each, and `inventory.py`, `inventory_diff.py <rows>`;
 - the record probes (the chip and pill grounds, the druid note's grounds, the stores sentence with and without the crisis, 29296's route) are node scripts over `corpus.ndjson.gz` that import the tree's own leaves (`tradeListDisplay.js`, `magicProvisionShown.js`, `tonightSheet.js`, `factsOf.js`), kept in the seat's scratch.
+
+## Hand-back (TAIL-DISPLAY-ECON-3)
+
+I handed back by the clock after batch 3, about 45 minutes and a large context into the count. One more batch needs its own census and could not be finished inside 250,000. The branch tip is the hand-back commit after b570b76ea. The after census of batch 3 (at 53e295e5a) is the next seat's before only if it renders that same tree. It was written to this seat's scratch, which does not outlive the container: re-make it with the commands above.
