@@ -1,0 +1,5 @@
+{"id":"C48585","town":"bar0-city-wartime-rand-19","sev":"MED","kind":"PAIR","why":"timber carts 'stopped coming' presumes a timber supply; TRADE imports lack timber and C49080 says timber is needed and not brought in","other":"C49080"}
+{"id":"C49059","town":"bar0-city-wartime-rand-19","sev":"LOW","kind":"PAIR","why":"says the city buys grapes from outside; TRADE imports list no grapes and C49080 says grapes are needed and not brought in","other":"C49080"}
+{"id":"C49434","town":"bar0-city-wartime-rand-19","sev":"LOW","kind":"STATE","why":"food trades 'struggling', less put by than ought; FOOD says Secure, no gap, 9 months in a granary (C49437 'nine months')","other":"C49437"}
+{"id":"C49683","town":"bar0-city-wartime-rand-19","sev":"LOW","kind":"PAIR","why":"says war contracts 'made the settlement rich'; STATE gives prosperity Comfortable, and C49418 says the war takes most of the money","other":"C49418"}
+{"id":"DONE","lines":1707,"blocks":1,"flags":4}
