@@ -775,3 +775,154 @@ this seat's after-census (`runs/c2`, f20ce3151's src, tabs). NONE IS CURED; THE 
    `powerSentenceName`: "of The Guard"; 0 hook sentences with "of Military/Guard" in `runs/c2`). The landed tip 9eb084705 predates
    it. The remaining "first of Military/Guard" / "second of Military/Guard" (248 and 226 towns) are rank chips, not this group's
    writer.
+
+# TAIL-CRISIS-4 · the fourth seat's batch (2026-11-15)
+
+Seat TAIL-CRISIS-4 succeeded TAIL-CRISIS-3 on the same branch, at **572cd48e0** (origin's tip, read back at the start).
+Scratch worktrees outside the main checkout: `wt` (the branch, as local `tc4-work`, pushed by explicit refspec), `base`
+(detached at 572cd48e0), `after6` (detached at batch 6's second commit), each with `node_modules` a symlink to wt's.
+
+## The chair's rulings since (2026-11-15 02:10 UTC; each vetoable by the owner)
+
+- **(K18) THE VANTAGE THAT HIDES A QUARREL.** "Passing through <N>, you would not see the quarrel over who is really in
+  charge unless you asked." printed in 10 insurgency towns whose safety reads Dangerous with open confrontations printed
+  beside it. The line needs a quarrel that is NOT in the open (no insurgency, no open confrontation on the record); else
+  its pool's other line.
+- **(K19) A CULTURE PHRASE NAMES ONLY WHAT STANDS** (the layout line's law, J1, carried to the quick guide): "built around
+  the tank and the bazaar" (11 folds, 43 towns) and "built for a pastoral life half-settled and half-moving" (13 folds, 35
+  towns, a coastal trading port among them). Each physical thing a scope phrase names maps to houses or resources of the
+  record (a bazaar: a market; a tank: a water work; a pastoral life: herds or pasture on the record), or the phrase takes a
+  twin that names none of them, or is silent. `scopeAgainstRecord` is where it belongs. The silence is accepted in advance
+  where the measure shows the phrase false.
+- **(K20) THE CAST'S REASON.** "…takes the worst of it: the only one in the house the crisis hits" and "…the one with the
+  least say in the house the crisis hits" (26 and 13 towns; stored cast reasons). A famine or a siege hits the whole town,
+  and "the house" reads as a household. The reason says in plain words what the record holds (whose seat on which power;
+  what the crisis does to that person's own trade), or the clause after the colon is cut. A DECLARED MOVE of stored text is
+  GRANTED (39 towns' cast reasons), its own commit, measured by the field diff (no family but the cast's reason).
+- **(U1)** The account's weekly usage warning is on: commit and push every batch the moment it holds, with WHAT IS LEFT
+  current in the same push; hand back at 250,000 of the count (about seventy minutes if the meter reads 0).
+
+## Batch 6 (K18 K19 K20): 34b8d9411 (K18, K19, display) and c97caccd9 (K20, the declared move)
+
+### Verified by the record first (probes over `runs/c0/corpus.ndjson.gz` with the base's own writers)
+
+- **K18.** All 37 insurgencies hold `crimeTypes` "political violence" (29 "Street-level confrontations between insurgent
+  supporters and the watch", 8 "Targeted intimidation and occasional violence against officials") and "loyalty testing"
+  (37 of 37: "Both the governing power and the insurgency pressure individuals to declare allegiance"). So every line of the
+  insurgency pool that hides the quarrel is false wherever it prints. The ruling's line and FOUR SIBLINGS OF THE SAME SHAPE
+  in the same pool: the defence watch "There is no fighting in <N>; the danger is quieter …" (14 towns, batch 1's 22640
+  reword), the cover watch "Nobody in <N> fights in the open …" (10, exports), the cover traveller "<N> looks calm, but …"
+  (14, exports), the tonight watch "… grows quietly, and those watching it cannot act in the open." (6). The defence and
+  cover surfaces hand no facts (DefenseTab.jsx, pdf viewModel), so each line is reworded to be true in all 37.
+- **K19, the tank.** Of the 43 towns, the market fact holds in all 43. A water work (`WATERWORKS_HOUSE`: aqueduct, cistern,
+  water system, fountain, bathhouse; or a metropolis's "Advanced water infrastructure": "multiple aqueducts, cisterns") stands
+  in 32. The 11 others hold only "Multiple water sources" ("Wells and springs throughout village"; the file's own rule: a
+  well or a spring is not a water work): r2r-village-1 -village-28 -town-7 -town-18 -town-32 -town-42 -town-49,
+  r2s-indebted-town-3, r2s-succession_void-town-0, r2s-monster_pressure-village-2, r2s-wartime-village-1. The temple the
+  phrase also names stands in all 43.
+- **K19, the pastoral life.** Of the 35 towns (every one a thorp, hamlet or village: the large tiers already take "built on
+  clan lines"), 30 hold neither herds (the vocabulary's `livestock` on the food record's sources) nor pasture
+  (`grazing_land`): among them the coastal ports r2r-hamlet-4, -hamlet-41, -village-45, -village-59, r2s-mass_migration-thorp-0
+  (fed by their fish). Five keep the line (r2r-thorp-29 and r2s-plague_onset-village-1 by their pasture, three by their herds).
+- **K20.** On the stored casts: 26 towns "only" (22 famine, 3 migration, 1 outbreak), 13 "least say", and 10 "one of the
+  house" (`bruntMember`, the lever-holder's rewrite, with the parked nextInLine tail). Each "only" holder is the one member
+  on the roster of exactly one power whose stake is a loss; each "least say" holder is the lowest-ranked member of exactly
+  one such power (12 of 13 the hook's own "of <P>"; r2r-city-19's hook names Royal Authority, the power hit is the Religious
+  Authorities). The claims hold; the fault is "the house" alone.
+
+### The cures
+
+- **K18** (`crisisSummaryVantage.js`, the insurgency pool; five lines reworded, no twin, no condition):
+  defence traveller → "Travellers in <N> are pressed, sooner or later, to say which side they are on, and both sides take
+  note of the answer." (the record's loyalty testing); defence watch → "In <N> the quarrel over who is in charge has turned to
+  violence, and orders go unheeded and dues unpaid."; cover watch → "In <N> both the government and those who defy it press
+  people to say which side they are on, and those watching count who has stopped obeying."; cover traveller → "In <N>
+  orders go unanswered, and some of its people have turned against those in charge."; tonight watch → "The defiance of
+  <N>'s government grows, and those watching it count who still obeys and who has stopped."
+- **K19** (`settlementQuickGuide.js :: scopeAgainstRecord`, display only): the tank where no water work stands is struck
+  ("built around the bazaar"); the bazaar where the market fact is false (none in the 720), and both (the phrase keeps "under
+  …"). The pastoral life where the record holds neither herds nor pasture takes the large tiers' own twin "built on clan
+  lines"; an unanswered record keeps it. `scopeAgainstRule` then says "built on clan lines, held by clan" once
+  ("built on clan lines"). The twin was already on batch 2's veto list.
+- **K20** (`crisisCast.js :: CAST_REASONS`, stored): bruntOnly "the only one named here of a power that loses by the crisis",
+  bruntLeast "the one with the least say in a power that loses by the crisis", bruntMember "one of a power that loses by the
+  crisis". The words name no power, so factionRename.js's law for this vocabulary (a fixed vocabulary that names nobody)
+  holds, and a renamed power can never leave a stale name in a stored reason. The caster's prefix rewrite (least → member)
+  keeps its shape. **bruntMember is beyond the 39 granted** (10 towns more, the same constant family and the same fault):
+  told to the chair with this hand-back; its nextInLine tail stays as parked.
+
+Test: `tests/domain/tailCrisisBatch6.test.js` (12 FALSE pairs, red at 572cd48e0 12 of 12 in an it.each form; 3 KEEP pairs,
+green at both; a plant (the tank read switched off) reds it). Re-keyed by identity in the K18/K19 commit:
+`tests/domain/tailCrisisBatch1.test.js` (r2r-thorp-52's defence watch twin) and `tests/domain/tailCrisisBatch2.test.js`
+(r2s-occupied-hamlet-0's pastoral twin).
+
+### Measured (census at 572cd48e0, `runs/c0`, against c97caccd9's src, `runs/c1`; inventory_diff over the batch's 50 folds)
+
+- **Tabs:** 30,042 → 30,044 distinct sentences; 38 gone, 40 new, 9 in fewer towns, 4 in more, 0 moved. **Exports (PDF,
+  Journal):** 36,090 → 36,092; 60 gone, 62 new, 9 fewer, 4 more.
+- **By the measure before, every row to its true remainder:** "the house the crisis hits" 49 → 0 towns (26 + 13 + 10);
+  "would not see the quarrel" 10 → 0; "There is no fighting" 14 → 0; "grows quietly" 6 → 0; "tank and the bazaar" 43 → 32
+  (the 11); "pastoral life" 35 → 5 (the 30). On the exports also "looks calm" 14 → 0 and "fights in the open" 10 → 0.
+- **Other sentences in fewer towns:** none but the batch's own folds (every one of the 9 is a tank or pastoral frame).
+  **In more towns (4):** the Steppe frames of "built on clan lines" (6→10, 8→11, 12→14, 10→11): the twin, true where no
+  herd or pasture stands.
+- **THE INHERITORS READ** (44 tabs, 66 exports; all are this batch's own lines, each read where it prints): the brunt hooks
+  ("In the famine, <N> of Elder Council takes the worst of it: the only one named here of a power that loses by the crisis.")
+  and the crisis page's "bears the brunt: <N> · …"; the five insurgency lines in all their towns; the scope twins. No line
+  outside the batch inherits.
+- **DECLARED MOVE** (field diff by family, c0 against c1, the 720 records): `stress` and `stressors`, 49 records each, only
+  `cast.roles[].reason` (40 + 9 array-form entries). No other family moves, and no draw moves.
+
+### Gates (at the tree against 572cd48e0)
+
+- eslint on the touched files: 0. typecheck:domain:strict: 0 (a first draft's `atomHolds` argument raised it by one and was
+  cast as crisisSummaryVantage.js casts it). typecheck:ratchet: OK (167, ceiling 167).
+- The presumed-things walker `--check`: 147 fresh at base and tree, the same 147 rows (diffed).
+- The governing tests (57 files naming crisisCast, crisisSummaryVantage, settlementQuickGuide, CAST_REASONS,
+  cultureScopeLine): 10 failing assertions at the base and the same 10 at the tree once the two pins were re-keyed
+  (CARRIED, not this seat's).
+- The twelve-birth grid `page-census.mjs --grid`: 2 falls at both (r2r-city-0 P7a, r2s-insurgency-metropolis-0 P7a), carried.
+
+## THE VETO LIST (batch 6): every new or changed line (smallest town, largest, a crisis town; tabs and exports)
+
+| new line (fold) | towns | smallest | largest | a crisis town |
+|---|---|---|---|---|
+| the only one named here of a power that loses by the crisis (the cast's reason; the hook after "takes the worst of it:") | 26 | r2r-thorp-17 | r2s-plague_onset-town-2 | r2s-famine-thorp-0 |
+| the one with the least say in a power that loses by the crisis | 13 | r2r-hamlet-16 | r2s-plague_onset-city-3 | r2s-famine-village-0 |
+| one of a power that loses by the crisis; next in line, … (the tail parked) | 10 | r2r-hamlet-10 | r2s-monster_pressure-city-2 | r2s-famine-village-1 |
+| In <N> orders go unanswered, and some of its people have turned against those in charge. (exports) | 14 | r2r-thorp-25 | r2s-insurgency-metropolis-3 | r2s-insurgency-thorp-3 |
+| In <N> the quarrel over who is in charge has turned to violence, and orders go unheeded and dues unpaid. | 14 | r2r-thorp-25 | r2s-insurgency-metropolis-3 | r2s-insurgency-thorp-3 |
+| In <N> both the government and those who defy it press people to say which side they are on, and those watching count who has stopped obeying. (exports) | 10 | r2r-thorp-22 | r2s-insurgency-metropolis-2 | r2s-insurgency-thorp-0 |
+| Travellers in <N> are pressed, sooner or later, to say which side they are on, and both sides take note of the answer. | 10 | r2r-thorp-22 | r2s-insurgency-metropolis-2 | r2s-insurgency-thorp-0 |
+| The defiance of <N>'s government grows, and those watching it count who still obeys and who has stopped. | 6 | r2s-insurgency-thorp-1 | r2r-metropolis-26 | r2s-insurgency-thorp-1 |
+| Steppe-inspired…: built on clan lines, held by clan and caravan. (five frames) | 8+4+4+2+1 | r2r-thorp-3 | r2s-slave_revolt-village-2 | r2s-under_siege-thorp-0 |
+| Steppe-inspired…: built on clan lines. (the twin, in more towns) | +4 +3 +2 +1 | r2r-thorp-21 | r2r-village-59 | r2s-mass_migration-thorp-0 |
+| Steppe-inspired: built on clan lines, held, for now, by another power. | 1 | r2s-occupied-hamlet-0 | — | r2s-occupied-hamlet-0 |
+| South-Asian-inspired…: built around the bazaar, in quarters by trade, under temple and guild. (four frames) | 2+2+1+1+1 | r2r-town-7 | r2s-succession_void-town-0 | r2s-indebted-town-3 |
+| South-Asian-inspired…: built around the bazaar, under the temple. (three frames) | 2+1+1 | r2r-village-1 | r2r-village-28 | r2s-wartime-village-1 |
+
+## Registers named stale (this seat)
+
+- The sovereignty walker's estate file count: one more test file (tests/domain/tailCrisisBatch6.test.js), on top of the
+  earlier seats' seven. Re-taken through its own door at the close.
+
+## Rows parked or named (this seat)
+
+- **bruntMember** (10 towns) went with K20, beyond the 39 granted: for the chair's veto.
+- Seen in the inheritors, style only (true): "built on clan lines, held by clan and caravan" says the clan twice (19 towns).
+
+## What is left of the worklist (after this seat)
+
+Every row left is parked, another seat's, waits under five towns, or needs a stored move not granted:
+- **X9 22718** ("Revolt Leadership has no stake yet", 8 towns): `crisisCast.js :: deriveStakes` (a power the stress raised
+  loses or gains by it): a declared move of stored stakes, NOT granted. The widest row left; for the chair.
+- **K16 11705 14131** (2 towns), **X9 20882** (3), **07387** (2), **27012** (1), **13909** (3): under five towns, they wait.
+- **Parked as written:** 01034 and X9 01620 28443 30535 (the walker's K8 wall); the stored cast rows; the five nextInLine rows.
+- **20893:** DEFECON's condition. The Germanic "built in timber and stone" on desert ground (4 towns): waits.
+
+## How this seat's instruments were made
+
+As TAIL-CRISIS-3's: the census with `--count-only`, its count stage stopped once the 720 dumps were written (the inventory
+reads only `dumps/`; the corpus is written at births). The probes (`probes/k1920.mjs`, `k18.mjs`, `k20.mjs`, `scope.mjs`,
+`fielddiff.py` in the scratch directory) import a tree's writers and run them over `corpus.ndjson.gz`; the field diff walks
+the two corpora by family and path.
