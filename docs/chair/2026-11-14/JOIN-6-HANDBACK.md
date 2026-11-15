@@ -14,6 +14,8 @@ JOIN-5's laws (a) to (i) stand as its hand-back §1 gives them (one merge commit
 THE CHAIR'S RULINGS SENT AFTER THE BRIEF:
 - **00:15 UTC:** (1) THE DEFECON GROUP IS THREE BRANCHES by file (ruling D9): lane/tail-defecon-2026-11-14 (the economy generators), lane/tail-defecon-c-2026-11-14 (`computeActiveChains.js` and one call line in `economicState.js`: declared moves C2-A and C1-A, the golden moves), lane/tail-defecon-d-2026-11-14 (`defenseDisplay.js`, `dossierViewModel.js`, the safety files). Each is landed, in that order, where the order has "defecon", once origin holds commits past 345f13157 on it. (2) Successors continue on their predecessors' branches (services, crisis, display-econ, defecon), so a landed branch moves again. Second points come only on "LAND: <branch> at <hash>"; the next services point is wanted EARLY. (3) Both exports branches will hold a merge of the joined line (allowed, at a tip the chair names): they merge as any other.
 - **00:18 UTC:** THE POWERS GROUP IS TWO BRANCHES by file (ruling P10): lane/tail-powers-2026-11-14 (at 40238d3ab: two batches; its successor builds DA there next, a declared move, the golden moves, one pin re-keyed by identity in its commit) and lane/tail-powers-b-2026-11-14 (cut from 40238d3ab: the faction lines, the people's power lines, the title lines). The second is landed where the order has "powers", once origin holds commits past 40238d3ab on it. The chair's read of the tips at 00:18: display-civic 812fa7e1f, display-econ 6e36000a4 or later, crisis 9c07f7461, houses a2550c0ef, ties b85886808 or later, narrative b52481302, powers 40238d3ab, defecon 345f13157, corpus-eco 29271e7bf. The tip read at each merge is the point.
+- **00:24 UTC:** "LAND: lane/tail-services-2026-11-14 at d7c032485" AS THE NEXT MERGE, then ONE LINE with the tip; then the order. Tips moved: display-civic 7148c48c5 or later (four batches), ties b8991a936 (handed back), powers 097dc8bda (handed back).
+- **00:28 UTC:** (1) lane/tail-history-2026-11-14 at 01ff8167e holds NO change under src/ (its batch 1 handed back as a patch file; its successor lands it): SKIPPED until "LAND: lane/tail-history-2026-11-14 at <hash>". (2) lane/tail-corpus-def-2026-11-14 at 4908ad69a (batch 1: a cure and a register commit through its own door) lands in the order before (g), with corpus-eco at 29271e7bf or later.
 
 ## 2. The landings
 
@@ -23,6 +25,7 @@ THE CHAIR'S RULINGS SENT AFTER THE BRIEF:
 | 2 | tail-display-civic-2026-11-14 | 812fa7e1f (00:14) | f663a2699 | 3ff14bc58 | none | — (3 files, the lane's batch 1) |
 | 3 | tail-display-econ-2026-11-14 | 6e36000a4 (00:19) | bcad1a358 | 6b1e0ccf2 | none | — (6 files, the lane's batch 1; the pin in `economicsClergyProvision.test.jsx` moved by the lane alone: code) |
 | 4 | tail-crisis-2026-11-14 | 9c07f7461 (00:24) | bcad1a358 | bdea399e1 | none | DECLARED MOVE (1409e3cbb): stress `summary` in 66 records, economicViability in 7 besieged famines: the golden master's red is carried (§4 [J6]); 3 pins re-keyed by identity in the lane's commit: code |
+| S2 | tail-services-2026-11-14 (the chair's LAND 00:24) | d7c032485 (00:28; equal to the chair's) | 4035c33a5 (point 1) | b6c64d36c | none | — (3 files, ruling S6: chains and income shares in the leaf's table; told to the chair 00:33) |
 
 ## 3. Every code resolution
 
