@@ -113,8 +113,12 @@ const TONIGHT_GRAIN = ['rr3-hamlet-under_siege+famine-rand-2', 'rr3-town-famine-
 const OVERVIEW_GRAIN = ['r2s-famine-town-1', 'rr3-metropolis-famine-rand-4'];
 
 /** (d)'s towns: a commercial sawmill beside a partial timber chain (the smallest, a town of 1,299; a city; the largest, a
- * metropolis of 169,385), and towns whose tanners, weavers or apothecary stand beside a partial chain (one under famine). */
-const KIND_TOWNS = ['r2r-town-56', 'rr3-city-infiltrated-rand-5', 'rr3-metropolis-recently_betrayed-rand-4', 'r2s-religious_conversion-city-0', 'r2s-politically_fractured-city-0', 'rr3-town-famine-isolated-1'];
+ * metropolis of 169,385), and towns whose tanners, weavers or apothecary stand beside a partial chain (one under famine).
+ * RE-KEYED BY IDENTITY (TAIL-DEFECON-6): the catalogue's D34 (a) (680d16b5, a declared move: the hot springs give no herbs;
+ * resourceAnalysis.gaps in 16 of the 720) takes rr3-town-famine-isolated-1's herbs chain off its roster, so it holds no partial
+ * gap; its member is the nearest town of the same shape, rr3-town-famine-isolated-2 (a town of 1,200 under famine, an
+ * established apothecary beside the partial herbs chain, "Alchemist shop" named missing). */
+const KIND_TOWNS = ['r2r-town-56', 'rr3-city-infiltrated-rand-5', 'rr3-metropolis-recently_betrayed-rand-4', 'r2s-religious_conversion-city-0', 'r2s-politically_fractured-city-0', 'rr3-town-famine-isolated-2'];
 /** A house name's kind, as resourceGenerator.js :: houseHead reads it. @param {unknown} name */
 const kindOf = (name) => (String(name || '').toLowerCase().replace(/\([^)]*\)/g, ' ').split(/[\s/]+/).find(Boolean) || '').replace(/['’]/g, '').replace(/s$/, '').replace(/y$/, '');
 
