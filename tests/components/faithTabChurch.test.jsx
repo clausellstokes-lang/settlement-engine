@@ -128,7 +128,8 @@ describe('the line names the church the reading found (acceptance 2)', () => {
         const text = faithText(s, view);
         const where = `${seed} · ${view.label}`;
         if (r.hasChurch && !text.toLowerCase().includes(r.churchWords.toLowerCase())) misses.push(`${where}: church "${r.churchWords}"`);
-        if (r.accessOnly && !/walk to the next village’s parish church/.test(text)) misses.push(`${where}: access`);
+        // TAIL-CRISIS K2: re-keyed by identity: under a siege or a quarantine the access line says what keeps them from the walk
+        if (r.accessOnly && !(r.roadBarred || r.quarantined ? /the next village/ : /walk to the next village’s parish church/).test(text)) misses.push(`${where}: access`);
         if (r.religiousFaction && !text.includes(r.religiousFaction.name)) misses.push(`${where}: faction ${r.religiousFaction.name}`);
         if (r.seniorCleric && !text.includes(r.seniorCleric.role)) misses.push(`${where}: cleric ${r.seniorCleric.role}`);
         // re-keyed by identity (SW-9b-B row 2c): the DM line is the owner's; the shared dossier prints it 0 times

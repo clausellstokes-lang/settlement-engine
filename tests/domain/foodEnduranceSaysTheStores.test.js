@@ -13,9 +13,9 @@ import { foodEnduranceLine } from '../../src/domain/display/defenseDisplay.js';
 const place = (months, grownPct, siege = false) => ({ tier: 'village', economicState: { foodSecurity: { hasSiege: siege, storageMonths: months, foodRecord: { storageMonths: months, grownPct, hasGranary: false } } } });
 
 describe('the Food endurance line says the stores', () => {
-  test('three days of stores are "a few days", never "a few weeks" (#43 #86 #296)', () => {
+  test('three days of stores are "about three days", never "a few weeks" (#43 #86 #296; re-keyed by TAIL-DEFECON-D, D2: the stores row\'s own words)', () => {
     const t = foodEnduranceLine(place(0.1, 60))?.sentence;
-    expect(t).toMatch(/for a few days at full rations/);
+    expect(t).toMatch(/for about three days at full rations/);
     expect(t).not.toMatch(/a few weeks/); // anchored: the days asserted on the line above
   });
   test('the months add up from the stored months: 2.1 months is about two at full rations, about four on half (rww-village-calm-1)', () => {

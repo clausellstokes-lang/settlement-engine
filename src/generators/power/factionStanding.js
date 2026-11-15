@@ -6,6 +6,7 @@
 
 import { powerSentenceName } from '../../domain/display/powerSentenceName.js';
 import { powerLabelOf } from '../factionDynamics.js';
+import { seatIsCouncil } from './claimStanding.js';
 
 // TAIL-POWERS batch 2 (the chair's ruling P1 of 2026-11-14): a standing sentence reads the strength of the power it names. A
 // craft guild the card prints as Minor or Suppressed is not "close behind, contesting every ... decision" nor "running close
@@ -76,7 +77,7 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }) 
           rank === 2 &&
             (gapAbove <= 5 && gapBelow <= 5
               ? (standing = topTwoGap <= 5
-                  ? 'Three powers stand almost level here, and no one leads; every council vote has to be bargained for.'
+                  ? `Three powers stand almost level here, and no one leads; every ${seatIsCouncil(factions.find((x) => x.isGoverning)?.faction) ? 'council vote' : 'decision'} has to be bargained for.` // TAIL-POWERS-B: a vote only where a council sits
                   : 'They are always at the table, but cannot set their own terms.')
               : gapAbove <= 10
                 ? (standing =
@@ -247,7 +248,7 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }) 
             var religiousThievesNote =
               thievesRivalForReligious.power > power
                 ? 'The criminal network is stronger than they are. The clergy preach against it loudly, and few people listen.'
-                : 'They denounce the guild from the pulpit; the guild funds two charitable institutions and makes the denunciations look selective.';
+                : 'They denounce the guild from the pulpit; the guild gives openly to the poor and makes the denunciations look selective.' // TAIL-POWERS-B (22709): no charity house the town may not hold;
             standing = standing ? standing + ' ' + religiousThievesNote : religiousThievesNote;
           }
         }

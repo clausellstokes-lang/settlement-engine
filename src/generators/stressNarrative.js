@@ -171,18 +171,31 @@ const RENDERERS = {
   succession_void: (name) =>
     `${name}'s last strong leader died recently with no clear heir, and several people are racing to take the seat first.`,
 
-  monster_pressure: (name) =>
-    `Something in the country around ${name || 'the settlement'} has grown bolder: caravans go missing, and a farmstead was lost to fire last week. Its defences were built for quieter times.`,
+  // monster_pressure (TAIL-CRISIS K3; READ-ALL 18434 12078): "caravans go missing" presumes trade on the roads, and "Its
+  // defences were built for quieter times" presumes a defence. Each is a pool of two checked here, at its print site,
+  // from the vocabulary's own atoms: where the record brings nothing in (`imports` refused) the losses are the fields'
+  // beasts; where it keeps no wall, palisade, watch, militia or garrison (every one refused) the twin says so. No draw;
+  // an unread record (no facts, or an atom unanswered) keeps the line as it always read.
+  monster_pressure: (name, _roll, facts) => {
+    const place = name || 'the settlement';
+    const noTrade = facts ? atomHolds('imports', facts) === false : false;
+    const undefended = facts ? MONSTER_DEFENCES.every((a) => atomHolds(a, facts) === false) : false;
+    return `Something in the country around ${place} has grown bolder: ${noTrade ? 'beasts go missing from the fields' : 'caravans go missing'}, and a farmstead was lost to fire last week. ${undefended ? 'It has nothing built or kept to hold such things off.' : 'Its defences were built for quieter times.'}`;
+  },
 
   // insurgency: the old closure branched on `typeof getInstFlags == 'function'`
   // (ALWAYS FALSE under ESM) → only the else-branch ever rendered. data-schema.6:
   // dead branch removed; this is exactly that else-branch text.
+  // TAIL-CRISIS K3 (READ-ALL 03091 12113, the reader's HIGH: "A strong power in Dioneia has stopped obeying the government"
+  // where the government is the only power on the record; at bcad1a358, 10 of the census's 37 insurgencies, every hamlet
+  // and six of the eight thorps). The vocabulary holds no atom for a second power, so the line claims no more than every
+  // insurgency bears: some in the place, never "a power", and no singular "it" for them.
   insurgency: (name) => {
     const h = name || "the settlement";
     return (
-      "A strong power in " +
+      "Some in " +
       h +
-      " has stopped obeying the government. Its people stall, its taxes go unpaid, and it waits."
+      " have stopped obeying the government. They stall, their taxes go unpaid, and they wait."
     );
   },
 
@@ -203,10 +216,14 @@ const RENDERERS = {
   // chair's answer 2 to CENSUS-2c). "The slave market's holding facilities have been breached"
   // presumed a slave market, which has no fact home (`institution: slave market` is listed under
   // "needs a home" in docs/CENSUS_2_LANE_2026-11-04.md "CENSUS-2d").
-  slave_revolt: (name) =>
+  // TAIL-CRISIS (READ-ALL 28958): "Whole work gangs" in a thorp or a hamlet (the vocabulary's `tier` band; every thorp
+  // and hamlet revolt of the census's 24 is below a village) presumes a workforce the place has not; there the twin.
+  slave_revolt: (name, _roll, facts) =>
     "The enslaved population of " +
     (name || "the settlement") +
-    " has organised. What began as work stoppages and passive resistance has moved into open defiance. Whole work gangs have downed tools and will not take them up again. The governing authority's first response was inadequate. Its second response is still being decided.",
+    " has organised. What began as work stoppages and passive resistance has moved into open defiance. " +
+    (facts && atomHolds('tier: ≥ village', facts) === false ? "Those set to work have downed tools and will not take them up again." : "Whole work gangs have downed tools and will not take them up again.") +
+    " The governing authority's first response was inadequate. Its second response is still being decided.",
 
   // wartime: the profit text names no garrison (lane DEFENSE-2, 2026-11-03). It is rendered from
   // the stress type and the place's name alone, with no roster in reach, so it says only what
@@ -267,6 +284,12 @@ const RENDERERS = {
   },
 };
 
+/** wartime (loss)'s sacrifice sentence where the place is isolated: no contract reaches it (TAIL-CRISIS, READ-ALL 20648). */
+const WARTIME_SACRIFICE_ISOLATED = 'The governing authority is demanding sacrifice, and not every household gives it in equal measure.';
+
+/** The defences whose absence, every one, makes monster_pressure's "Its defences were built for quieter times" false. */
+const MONSTER_DEFENCES = Object.freeze(['walls', 'palisade', 'watch', 'militia', 'garrison']);
+
 /** wartime (loss)'s caravans sentence: printed only off an isolated route (R2-CODE-B-6 item 0). */
 const WARTIME_CARAVANS = 'Supply caravans pass through on crown requisition. ';
 
@@ -282,7 +305,8 @@ const WARTIME_CARAVANS = 'Supply caravans pass through on crown requisition. ';
 function WARTIME_VARIANTS(s, isolated = false, fedIsolated = false) {
   return [
     { id: 'profit', text: s + " is in a kingdom at war and doing well out of it: army contracts pay, prices are high, and merchants with the right friends are getting rich. The bill will come later." },
-    { id: 'loss', text: s + " is in a kingdom fighting a war it may not win. Conscription has taken a third of the working-age men. " + (isolated ? '' : WARTIME_CARAVANS) + (fedIsolated ? '' : WARTIME_PRICES + ' ') + "The governing authority is demanding sacrifice while certain families are quietly thriving on contracts." },
+    // TAIL-CRISIS (READ-ALL 20648): no army contract reaches an isolated place (the same route fact as the caravans').
+    { id: 'loss', text: s + " is in a kingdom fighting a war it may not win. Conscription has taken a third of the working-age men. " + (isolated ? '' : WARTIME_CARAVANS) + (fedIsolated ? '' : WARTIME_PRICES + ' ') + (isolated ? WARTIME_SACRIFICE_ISOLATED : "The governing authority is demanding sacrifice while certain families are quietly thriving on contracts.") },
   ];
 }
 

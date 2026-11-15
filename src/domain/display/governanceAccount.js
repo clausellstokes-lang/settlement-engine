@@ -81,18 +81,38 @@ const CAUSE_ORDER = Object.freeze(['prosperity', 'safety', 'defense', 'food']);
 const ADVERSE_BANDS = new Set(['Legitimacy Crisis', 'Contested', 'Tolerated']);
 
 /**
+ * ⭐ THE SAFETY CAUSE IS NAMED BY WHAT LOWERED IT (TAIL-DISPLAY-CIVIC, READ-ALL B05826 B05840 06098 06102 B05843 06101
+ * 06043): the breakdown's safety part is `factionDynamics.js :: safetyContrib` over the record's safety label, and a crisis
+ * writes that label with its cause after a dash ("Dangerous — Monster Threat", "Tense — Mass Migration", "Suspicious —
+ * Aftermath of Betrayal"). There "crime" named a cause the town's own label does not hold ("Crime is the reason" in a
+ * migration town with no criminal power, 427 of the census's 720 towns at f663a2699), so the adverse word is "insecurity",
+ * which every such label bears, and "the curfew" under an occupation's curfew alone (a "Controlled" label docks order
+ * without consent, not danger; a curfew joined by another crisis, "+ Famine Conditions", reads "insecurity").
+ * A plain label ("Unsafe", "Dangerous") is the crime ratio's own band, and keeps "crime".
+ * @param {unknown} safetyLabel the record's `economicState.safetyProfile.safetyLabel` @returns {string}
+ */
+function adverseSafetyWord(safetyLabel) {
+  const label = text(safetyLabel);
+  if (!/\s—\s/.test(label)) return CAUSE_WORDS.safety.adverse;
+  return /curfew/i.test(label) && !label.includes('+') ? 'the curfew' : 'insecurity';
+}
+
+/**
  * The one or two causes the breakdown names for the band's direction, largest first; ties break in
  * the fixed order above, so an unrelated edit cannot reorder them.
- * @param {unknown} breakdown @param {boolean} adverse @returns {string[]}
+ * @param {unknown} breakdown @param {boolean} adverse
+ * @param {unknown} [safetyLabel] the record's safety label (a crisis-named label reads "insecurity" or "the curfew", not "crime")
+ * @returns {string[]}
  */
-export function legitimacyCausesOf(breakdown, adverse) {
+export function legitimacyCausesOf(breakdown, adverse, safetyLabel = null) {
   const b = breakdown && typeof breakdown === 'object' ? /** @type {Record<string, unknown>} */ (breakdown) : {};
   return CAUSE_ORDER
     .map((field, order) => ({ field, order, value: typeof b[field] === 'number' && Number.isFinite(b[field]) ? /** @type {number} */ (b[field]) : 0 }))
     .filter(({ value }) => (adverse ? value < 0 : value > 0))
     .sort((a, z) => Math.abs(z.value) - Math.abs(a.value) || a.order - z.order)
     .slice(0, 2)
-    .map(({ field }) => CAUSE_WORDS[/** @type {keyof typeof CAUSE_WORDS} */ (field)][adverse ? 'adverse' : 'favourable']);
+    .map(({ field }) => (field === 'safety' && adverse ? adverseSafetyWord(safetyLabel)
+      : CAUSE_WORDS[/** @type {keyof typeof CAUSE_WORDS} */ (field)][adverse ? 'adverse' : 'favourable']));
 }
 
 /**
@@ -193,6 +213,11 @@ export function estrangedPowersOf(settlement, governing) {
     // dmPowerLines.js); it has not broken with the hall, so the account names it neither as refusing the hall's orders
     // nor as a cost to them ("It can no longer make its orders hold alone"). 30 of the reader's 1,722 accounts.
     if (rel.type === 'competitive' && rel.captureState === 'adversarial') continue;
+    // TAIL-DISPLAY-CIVIC (READ-ALL 19954, 18 of the census's 720 towns at f663a2699): the criminal row at the truce rung
+    // (`captureState: 'equilibrium'`) is the hall leaving the underworld alone, and its own narrative says so ("Guild Council
+    // leaves Thieves' Guild alone because stamping it out would cost more than it saves", factionDynamics.js), as does the
+    // tab's DM line ("... leave each other alone", dmPowerLines.js). It is not named as at odds with the hall.
+    if (rel.type === 'tense' && rel.captureState === 'equilibrium') continue;
     const tie = rel.type === 'corrupted' ? (rel.captureState === 'capture' ? 'capture' : 'corrupted')
       : rel.type === 'competitive' ? 'competitive'
         : rel.type === 'tense' ? 'tense' : null;
@@ -227,7 +252,7 @@ const FRACTURE_BLOCS = Object.freeze([
 
 /**
  * The fields of the record the paragraph reads (the rest reach the readers it calls as the record itself).
- * @typedef {{ id?: unknown, name?: unknown, _seed?: unknown, stress?: unknown, powerStructure?: { factions?: Array<{ isGoverning?: unknown, desc?: unknown, faction?: unknown } | null>, publicLegitimacy?: { label?: unknown, breakdown?: unknown } | null, recentConflict?: unknown } }} GovernedRecord
+ * @typedef {{ id?: unknown, name?: unknown, _seed?: unknown, stress?: unknown, powerStructure?: { factions?: Array<{ isGoverning?: unknown, desc?: unknown, faction?: unknown } | null>, publicLegitimacy?: { label?: unknown, breakdown?: unknown } | null, recentConflict?: unknown }, economicState?: { safetyProfile?: { safetyLabel?: unknown } | null } | null }} GovernedRecord
  */
 
 /**
@@ -330,7 +355,8 @@ export function governanceAccountOf(settlement, opts = {}) {
   const leg = s.powerStructure?.publicLegitimacy;
   const label = leg && typeof leg === 'object' ? text(leg.label) : '';
   if (label) {
-    const standing = standingSentence(label, legitimacyCausesOf(/** @type {{ breakdown?: unknown }} */ (leg).breakdown, ADVERSE_BANDS.has(label)), place, ruler, pick);
+    const safetyLabel = s.economicState?.safetyProfile?.safetyLabel;
+    const standing = standingSentence(label, legitimacyCausesOf(/** @type {{ breakdown?: unknown }} */ (leg).breakdown, ADVERSE_BANDS.has(label), safetyLabel), place, ruler, pick);
     if (standing) sentences.push(standing);
   }
 

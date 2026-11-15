@@ -67,6 +67,7 @@ import EntityLink from '../../primitives/EntityLink.jsx';
 import InfoPill from '../../primitives/InfoPill.jsx';
 import { SECTION_HELP } from '../../../copy/sectionHelp.js';
 import { FLUSH, FLUSH_PAGE, FLUSH_STACK } from '../../../design/flush.js';
+import { stoppingCrisesOf, rowStoppedBy, rowShortOf, rowMarkText, STOPPED_WORD, SHORT_WORD, markedDescription, ordinaryTimesLine } from '../../../domain/display/crisisStoppedRow.js';
 
 // ── The institution provenance badge (R-5b item #10), moved from OverviewTab ──────────
 // The badge reads the ONE derived provenance record (domain/provenance/rosterProvenance.js),
@@ -250,7 +251,7 @@ function BacksEditor({ label, powers, selected, authored, onDone, onRevert, onCl
  * is the house's list from `houseBacksOf`; `canAuthor` and `index` arm the editor. `fabric` (X-46
  * car 3) marks the place rather than a house: no Backs line and no editor.
  */
-export function InstitutionCard({ inst, category, label, services, sets, backs = [], authored = false, canAuthor = false, index = -1, powers = [], fabric = false, face = null, seatFaced: seatFacedRow = false, settlement = null }) {
+export function InstitutionCard({ inst, category, label, services, sets, backs = [], authored = false, canAuthor = false, index = -1, powers = [], fabric = false, face = null, seatFaced: seatFacedRow = false, settlement = null, crisisMark = null, serviceStoppedBy = null, serviceShortBy = null }) {
   const mobile = useIsMobile();
   // COHERENCE-POWERS: a face that is not this house's own (the seat's house, faced by the dual-hat leader)
   const seatFaced = seatFacedRow && !!face && !!cardOfficeOf(face);
@@ -261,7 +262,8 @@ export function InstitutionCard({ inst, category, label, services, sets, backs =
   // X-20 (c): the card is always open; a link to the house scrolls it to the top.
   const { ref: focusRef } = useEntityFocus(entityIdFor('institution', inst));
   const selfId = entityIdFor('institution', inst);
-  const description = institutionDescription(inst);
+  // TAIL-SERVICES (ruling S1): under a crisis that stops what the house lives on, its mark leads the description of ordinary times.
+  const description = crisisMark ? markedDescription(crisisMark, institutionDescription(inst)) : institutionDescription(inst);
   const status = houseStatus(services, sets);
   // X-45: the editor is offered to a viewer who may author, in edit mode, on a house the
   // roster can address (the NPC card's own gate, `authorEditMode`).
@@ -344,6 +346,7 @@ export function InstitutionCard({ inst, category, label, services, sets, backs =
             return (
               <span key={`${entity.id}-${j}`} data-testid="institution-service" style={{ fontSize: FS['12.5'] }}>
                 <EntityLink id={entityIdFor('service', entity)} type="service" fallback={institutionHouseLabel(svc.name)} style={{ color: swatch.inkMag, fontWeight: 600 }} />
+                {(serviceStoppedBy?.get(svc) || serviceShortBy?.get(svc)) && <span data-testid="institution-service-stopped" style={{ color: MUTED, fontStyle: 'italic' }}> ({[serviceStoppedBy?.get(svc) ? STOPPED_WORD[serviceStoppedBy.get(svc)] : null, serviceShortBy?.get(svc) ? SHORT_WORD : null].filter(Boolean).join(', ')})</span>}
               </span>
             );
           })}
@@ -361,6 +364,22 @@ export default function InstitutionsTab({ settlement, canAuthor = false }) {
   // X-45: the editor's choices and each house's address in the roster (the edit action's index).
   const powers = useMemo(() => rosterPowerNames(settlement), [settlement]);
   const roster = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
+  // TAIL-SERVICES (the chair's ruling S1, 2026-11-14): a house that lives on what a siege, an outbreak or a famine stops
+  // is marked before its description; the page says once that the descriptions are of ordinary times (the one leaf,
+  // domain/display/crisisStoppedRow.js; a calm town marks nothing).
+  const stoppedBy = useMemo(() => {
+    const crises = stoppingCrisesOf(settlement);
+    return new Map(entries.map(({ inst }) => [inst, rowStoppedBy(settlement, 'house', inst, crises)]));
+  }, [entries, settlement]);
+  const serviceStoppedBy = useMemo(() => {
+    const crises = stoppingCrisesOf(settlement);
+    return new Map(entries.flatMap(({ services }) => services.map((svc) => [svc, rowStoppedBy(settlement, 'service', svc, crises)])));
+  }, [entries, settlement]);
+  // TAIL-SERVICES-2 (ruling S5): the leaf's second cause, a house (or a service door) short of the input the page says never reaches it.
+  const shortBy = useMemo(() => new Map(entries.map(({ inst }) => [inst, rowShortOf(settlement, 'house', inst)])), [entries, settlement]);
+  const serviceShortBy = useMemo(() => new Map(entries.flatMap(({ services }) => services.map((svc) => [svc, rowShortOf(settlement, 'service', svc)]))), [entries, settlement]);
+  const markOf = (inst) => (stoppedBy.get(inst) || shortBy.get(inst) ? rowMarkText(settlement, 'house', inst) : null);
+  const ordinaryLine = ordinaryTimesLine([...stoppedBy.values(), ...serviceStoppedBy.values()].filter(Boolean), [...shortBy.values(), ...serviceShortBy.values()].some(Boolean));
   if (!entries.length) return <Empty message="No institutions are recorded for this settlement." />;
 
   return (
@@ -370,11 +389,14 @@ export default function InstitutionsTab({ settlement, canAuthor = false }) {
       <div data-testid="institutions-header" style={{ display: 'flex', justifyContent: 'flex-end', padding: '4px 12px' }}>
         <InfoPill text={SECTION_HELP.institutions} />
       </div>
+      {ordinaryLine && (
+        <div data-testid="institutions-ordinary-times" style={{ padding: '2px 12px 6px', fontSize: FS.xs, color: swatch.inkMag3, fontStyle: 'italic' }}>{ordinaryLine}</div>
+      )}
       {/* THE FLUSH RULE (X-44): the houses sit edge to edge, parted by their own hairlines. */}
       <div data-testid="institutions-stack" style={FLUSH_STACK}>
         {houses.map(({ inst, category, label, services, backs, authored, face, seatFaced }, i) => (
           <InstitutionCard key={`${inst.name}-${i}`} inst={inst} category={category} label={label} services={services} backs={backs} authored={authored} sets={sets}
-            canAuthor={canAuthor} index={roster.indexOf(inst)} powers={powers} face={face} seatFaced={seatFaced} settlement={settlement} />
+            canAuthor={canAuthor} index={roster.indexOf(inst)} powers={powers} face={face} seatFaced={seatFaced} settlement={settlement} crisisMark={markOf(inst)} serviceStoppedBy={serviceStoppedBy} serviceShortBy={serviceShortBy} />
         ))}
       </div>
       {/* THE FABRIC OF THE PLACE (X-46 car 3): the dwellings, the well, the church walk — the place
@@ -384,7 +406,7 @@ export default function InstitutionsTab({ settlement, canAuthor = false }) {
           <div data-testid="institutions-fabric-heading" style={{ ...literaryTitle(FS.sm), color: MUTED, padding: '10px 12px 4px' }}>The fabric of the place</div>
           <div style={FLUSH_STACK}>
             {fabric.map(({ inst, category, label, services }, i) => (
-              <InstitutionCard key={`fabric-${i}`} inst={inst} category={category} label={label} services={services} sets={sets} fabric />
+              <InstitutionCard key={`fabric-${i}`} inst={inst} category={category} label={label} services={services} sets={sets} fabric crisisMark={markOf(inst)} serviceStoppedBy={serviceStoppedBy} serviceShortBy={serviceShortBy} />
             ))}
           </div>
         </section>

@@ -33,6 +33,8 @@ import { generateNPCs } from '../../src/generators/npcGenerator.js';
 import { drawTies } from '../../src/generators/people/ties.js';
 import { disambiguateNPCDisplayNames } from '../../src/generators/npcDisplayNames.js';
 import { STRESS_ECONOMIC_EFFECTS } from '../../src/data/npcData.js';
+import { declarationAdmits, declarationOf } from '../../src/domain/facts/factVocabulary.js';
+import { birthFactsOf } from '../../src/domain/facts/factsOf.js';
 import {
   genRelNarrative,
   genSuccessionNarr,
@@ -558,7 +560,17 @@ describe('relationship tie prose is drawn without replacement per settlement (GS
   test('ties of one archetype never share a line until the pool is exhausted, then cycle', () => {
     let overflowing = 0;
     const offenders = [];
-    for (const { seed, relationships } of [...corpus, ...overflowCorpus]) {
+    for (const { seed, npcs, relationships } of [...corpus, ...overflowCorpus]) {
+      // R2-CODE-A-14 (the chair's ruling (s1)): a line may refuse a PAIR (`shared power`), so for one tie the
+      // admitted pool can be smaller than the archetype's; a head repeat is a fault only where an index this tie's
+      // pair admits was still unprinted (the draw's own law: tieDrawUnprinted.test.js). The facts are drawTies's own.
+      const tier = /^tie-prose-draw-(city|metropolis)-/.exec(seed)?.[1];
+      const facts = birthFactsOf({ institutions, config: {}, tier, powerStructure: { government: null } });
+      const byId = new Map(npcs.map(npc => [npc.id, npc]));
+      const admits = (key, i, rel) => ['desc', 'tension'].every((f) => {
+        const lines = STRESS_ECONOMIC_EFFECTS[key][f].lines;
+        return declarationAdmits(declarationOf(lines[i % lines.length]), facts, { ctx: { pair: [byId.get(rel.from), byId.get(rel.to)] } }).admitted;
+      });
       const byKey = new Map();
       for (const rel of relationships) {
         if (!byKey.has(rel.archetypeKey)) byKey.set(rel.archetypeKey, []);
@@ -569,7 +581,10 @@ describe('relationship tie prose is drawn without replacement per settlement (GS
           const size = poolSize(key, field === 'tension' ? 'tension' : 'desc');
           const lines = ties.map(rel => templateOf(rel[field], rel.npc1Name, rel.npc2Name));
           const head = lines.slice(0, size);
-          if (new Set(head).size !== head.length) offenders.push({ seed, key, field, size, head });
+          const printed = ties.slice(0, size).map(rel => rel.proseVariant);
+          const open = head.some((line, t) => head.slice(0, t).includes(line)
+            && Array.from({ length: poolSize(key, 'tension') }, (_, i) => i).some(i => !printed.slice(0, t).includes(i) && admits(key, i, ties[t])));
+          if (open) offenders.push({ seed, key, field, size, head });
         }
         // THE CYCLE ARM: a tie past the pool's end reuses a template, never a sentence.
         const size = poolSize(key, 'tension');

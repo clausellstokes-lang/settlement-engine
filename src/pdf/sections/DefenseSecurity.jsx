@@ -204,7 +204,8 @@ export function DefenseSecurity({ settlement, narrativeMode, vm, stateProse }) {
         })}
         {!FORCE_GROUPS.some(g => (d.armedForces?.[g.key] || []).length) && (
           <Text style={{ ...type.body, fontSize: pt['9'], color: palette.muted, fontStyle: 'italic' }}>
-            No organized defensive force. Defense relies on armed citizens.
+            {/* TAIL-EXPORTS-PDF batch 1 (ruling E1): the Defense tab's own line (noForceLine.js) */}
+            {`${NO_FORCE_LEAD} ${NO_FORCE_REST}`}
           </Text>
         )}
       </View>
@@ -366,3 +367,4 @@ export function DefenseSecurity({ settlement, narrativeMode, vm, stateProse }) {
 }
 
 export default DefenseSecurity;
+import { NO_FORCE_LEAD, NO_FORCE_REST } from '../../domain/display/noForceLine.js'; // TAIL-EXPORTS-PDF batch 1 (ruling E1)

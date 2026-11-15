@@ -23,6 +23,20 @@ const SMALL_TIERS = Object.freeze(['thorp', 'hamlet', 'village']);
 /** @typedef {{ claim: string | RegExp, minor: (tier: string, ctx: RungContext) => string | null, suppressed: (tier: string, ctx: RungContext) => string | null }} ClaimRung */
 const MERCHANT_POWER = /merchant|trade|commerc|consortium|mercantile/i;
 const COUNCIL_SEAT = /council|assembly|senate|parliament|moot/i;
+/** Whether the governing power's name is a council's (one home for the seat's word: claimStanding and factionStanding read it). @param {unknown} governing */
+export const seatIsCouncil = (governing) => COUNCIL_SEAT.test(String(governing ?? ''));
+// TAIL-POWERS-B batch 2 (rows 06725, 18554, 10424 and their siblings: A COUNCIL NAMED WHERE NONE SITS): a claim that names
+// "the council" is printed under a seat that is no council (a Royal Authority, a Ducal or Noble Governorship, a Feudal
+// Stewardship, a Town Mayor: 46 cards of the census's 720 at 40238d3ab); there it names the seat as the estate's lines
+// do, "the hall". And the trade nexus's merchants "control warehousing" only where a warehouse stands (1 of the 5 there
+// held none). No draw; the label rungs above read the claims first.
+/** @type {ReadonlyArray<readonly [string, string]>} */
+const SEAT_WORDS = Object.freeze([
+  ['and fund the council.', 'and fund the hall.'],
+  ['and the council knows it.', 'and the hall knows it.'],
+  ['the council works alongside them, not over them.', 'the hall works alongside them, not over them.'],
+  ['expect council access in return.', 'expect access to the hall in return.'],
+]);
 /** The roster's merchant powers other than this one. @param {RungContext} ctx */
 const merchantsBeside = (ctx) => ctx.roster.filter((x) => x !== ctx.self && MERCHANT_POWER.test(String(x?.faction || '')));
 // POWERS-12 (REVIEW-POWERS-3 M1): a watch stands, read by the defence bucket's own words (the fact the ladder's watch
@@ -167,6 +181,12 @@ export function settleClaimsToLabel(factions, tier, instNames = [], legitimacy =
     const line = label === 'Minor' ? rung.minor(tier, ctx) : rung.suppressed(tier, ctx);
     if (line === null) continue;
     f.desc = line + desc.slice(end);
+  }
+  const warehouse = instNames.some((n) => String(n).includes('warehouse'));
+  for (const f of factions) {
+    if (typeof f?.desc !== 'string') continue;
+    if (!seatIsCouncil(governing)) for (const [said, twin] of SEAT_WORDS) f.desc = f.desc.replace(said, twin);
+    if (!warehouse) f.desc = f.desc.replace('they set prices, control warehousing, and fund', 'they set prices and fund');
   }
 }
 

@@ -44,7 +44,7 @@ import { foodLedger } from '../foodLedger.js';
 import { famineOf } from '../facts/famine.js';
 import { tierNounFor } from '../display/stateProse/weaveBlock.js';
 import { magicWorksAt } from '../worldPulse/magicWorksAt.js';
-import { rulerKindOf } from '../facts/rulerKind.js';
+import { RULED_BY_A_BODY, ruledByBodyOfLabel } from '../facts/rulingBody.js'; // TAIL-TIES (T5): the ruling-body rule's home
 
 /**
  * The bands that license a famine sentence, and the bands that are a real gap short of
@@ -133,7 +133,9 @@ const VILLAGER_TIERS = new Set(['thorp', 'hamlet', 'village']);
  * mayor or an occupier is one ruler and is not refused. An absent government licenses nothing.
  * @type {RegExp}
  */
-const RULED_BY_A_BODY = /\bcouncil\b/i;
+// TAIL-TIES, the chair's ruling (T5) of 2026-11-14: the rule MOVED to its home (`facts/rulingBody.js`, the vocabulary's
+// atom `ruling body`) and is re-exported here, so the hook gate and the atom are one reading.
+export { RULED_BY_A_BODY, ruledByBodyOfLabel };
 
 /**
  * Read the facts a hook can contradict out of one settlement record.
@@ -186,10 +188,8 @@ export function settlementHookFacts(settlement) {
     record.defenseProfile?.institutions && typeof record.defenseProfile.institutions === 'object',
   );
   const defense = defenseFactsOf(/** @type {Parameters<typeof defenseFactsOf>[0]} */ (settlement));
-  const rulerKind = rulerKindOf(/** @type {Parameters<typeof rulerKindOf>[0]} */ (settlement));
   const government = /** @type {{ powerStructure?: { government?: unknown } }} */ (record).powerStructure?.government;
-  const ruledByCouncil = rulerKind === 'council'
-    || ((rulerKind === 'elder' || rulerKind === 'priest') && typeof government === 'string' && RULED_BY_A_BODY.test(government));
+  const ruledByCouncil = ruledByBodyOfLabel(government); // TAIL-TIES (T5): the moved rule, one reading
 
   return Object.freeze({
     tier,

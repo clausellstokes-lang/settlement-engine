@@ -193,7 +193,7 @@ describe('SPATIAL_TEXT (spatialGenerator.js, inline T cells; carried through tex
   // (R-B1 widened to a cell key — the chair's ruling this lane makes, recorded in the lane doc).
   const guaranteed = (lineId, a) => a.startsWith('terrain:')
     || (a === 'institution: temple' && /\.(sacred|shrine)$/.test(lineId))
-    || (a === 'walls' && /^villageLayouts\.(hills|desert)(\.walled)?$/.test(lineId))
+    || (a === 'walls' && /^villageLayouts\.(hills|desert)(\.walled(\.palisade)?)?$/.test(lineId))
     || (a === 'garrison' && lineId === 'townLayouts.mountain.garrison');
   it('every declaring ledger line is declared in place, exactly', () => {
     expect(inlineArm('SPATIAL_TEXT', 'src/generators/spatialGenerator.js', guaranteed)).toEqual([]);
@@ -203,7 +203,8 @@ describe('SPATIAL_TEXT (spatialGenerator.js, inline T cells; carried through tex
     const by = (head) => [...found.entries()].filter(([k]) => k.startsWith(head)).map(([, v]) => v[0]);
     expect(by('Great river city: bridge quarter')).toEqual([{ needs: ['river', 'market'], excludes: [], crisis: [] }]);
     expect(by('${sacredSubject} and green above the tideline')).toEqual([{ needs: ['coast'], excludes: [], crisis: [] }]);
-    expect(by('Close-built stone houses below the ${sacredHouse}')).toEqual([{ needs: ['gate'], excludes: [], crisis: [] }]);
+    // J1 (2026-11-14): the gate line where a gate stands, its twin without the gate where none does.
+    expect(by('Close-built stone houses below the ${sacredHouse}')).toEqual([{ needs: ['gate'], excludes: [], crisis: [] }, { needs: [], excludes: ['gate'], crisis: [] }]);
   });
 });
 
@@ -226,7 +227,8 @@ describe('PRESSURE_SENTENCES (narrativeText.js, R: the rows inside each stressor
     // 17 -> 16 (COHERENCE-PRESUME): the mass-migration line no longer names a market, so it declares nothing
     // 16 -> 18 (R2-CODE-A-3, round three #40 / #4): famine[0] and famine[4] presume a common store and need a granary
     // 18 -> 21 (R2-CODE-A-6, CENSUS-2's writers): succession_void[5] needs a market, insurgency(street)[1] and slave_revolt[0] the middling band
-    expect(declaring).toBe(21);
+    // 21 -> 23 (TAIL-NARRATIVE, READ-ALL 20438/20439 and 00172): monster_pressure[1] needs a force that musters, [2] the hamlet tier
+    expect(declaring).toBe(23);
   });
 });
 
@@ -238,7 +240,9 @@ import { CONDITION_ARCHETYPE_TEMPLATES, CONDITION_ARCHETYPE_SIBLINGS } from '../
 import { QUICK_GUIDE_SIBLINGS } from '../../../src/domain/summary/settlementQuickGuide.js';
 
 /** cells reworded under R-U since Phase A read them (counted by cause in their commit) */
-const REWORDED = new Set(['STRESS_TYPE_MAP.slave_revolt.viabilityNote']);
+// TAIL-HISTORY batch 1 (2026-11-15, the chair's Y2, Y7; READ-ALL 00169, 04385, 18890): the succession void's hook and note
+// and the insurgency's note claimed powers and offices a thorp lacks; reworded, no declaration (1 → 4 cells).
+const REWORDED = new Set(['STRESS_TYPE_MAP.slave_revolt.viabilityNote', 'STRESS_TYPE_MAP.succession_void.crisisHook', 'STRESS_TYPE_MAP.succession_void.viabilityNote', 'STRESS_TYPE_MAP.insurgency.viabilityNote']);
 
 /** @param {string} name @param {Record<string, any[]>} siblings @param {object|null} root the live table (null: by text alone) */
 function siblingArm(name, siblings, root) {
