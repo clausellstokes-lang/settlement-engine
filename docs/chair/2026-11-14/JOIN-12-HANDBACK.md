@@ -93,6 +93,7 @@ THE CHAIR'S RULINGS TO JOIN-12 (each vetoable by the owner):
 | 3 | lane/tail-close-sweep-c-2026-11-15 | 6a4c0c11b (10:02; origin tip 1f3617425, one later docs-only commit: the hash named landed) | ffdd541a0 | 387d7b8e9 | none; no file both sides moved | 2 files outside docs/ (two tests re-keyed by identity, merged as code); the envelopes' manifest untouched by it, so sweep-b's side (point 1) stands; run alone: corpusEcoTailGuards 136/136, defenseInvasionWithinACriticalBand 3/3 |
 | 4 | lane/tail-content-close-2026-11-15 | e4b8e1b00 (10:56; origin tip = the hash named) | bb75314d6 | 8b79a4c59 | none; no file both sides moved | 7 files outside docs/ (4 src: worldPulse/candidateEvents.js, heraldDeeds.js, narrativeGenerator.js, narrativeText.js; one pulse hash re-keyed in modeSpeedsWy1; two guards); declared moves 805452e8f, 0b140b40c (no birth moved, by the branch); run alone: tradeFactMarket 2/2, wartimeForgesSmith 1/1, modeSpeedsWy1 26/26, presumedThings.walker 41/43 |
 | 5 | lane/tail-close-presumed-2026-11-15 (final pass) | bd5618507 (11:15; origin tip = the hash named) | f76fe38fd | 8c101d300 | none; no file both sides moved: its side whole | 1 file outside docs/ (`presumedThings.widened.register.json`, its side); run alone: presumedThings.walker 43/43 |
+| 6 | lane/tail-close-reach-2026-11-15 (final pass) | 093b371ab (11:33; origin tip = the hash named) | f76fe38fd | 7baa15eeb | none; no file both sides moved: its side whole | 8 files outside docs/ (the two baselines, three scripts, three tests; no src/); run alone, default heap: writerReach 52/52, observedShapeReaders 47/47, observedShapeBaseline 59/59, Migration 26/26, Sentinel 35/35 |
 
 ## 3. Every code resolution
 
@@ -107,6 +108,8 @@ JOIN-11's §3 stands on its own file (`docs/chair/2026-11-14/JOIN-11-HANDBACK.md
 **Point 4, the files the chair named run alone** (content-close e4b8e1b00; base bb75314d6; no conflict; no file both sides moved: `tests/domain/modeSpeedsWy1.test.js` moved by the branch alone since the base, so no stop): `tradeFactMarket` 2/2; `wartimeForgesSmith` 1/1; `modeSpeedsWy1` 26/26; `presumedThings.walker` 41/43, the same two ARM 1 tests JOIN-11 carried (rows `src/domain/facts/magic.js` academy; stale `src/generators/priorityHelpers.js` criminal faction; `src/components/home/landingFixture.js` mill, war, market and a stale war row), no new row (`/home/user/j12out/t4.*.log`).
 
 **Point 5, the file the chair named run alone** (close-presumed's final pass bd5618507, holding the line at f76fe38fd; one base, f76fe38fd; no conflict; no file both sides moved; outside docs/ only `tests/lint/presumedThings.widened.register.json`): `presumedThings.walker` 43/43 (98 s): the two ARM 1 reds carried since JOIN-11 point 2 closed (`/home/user/j12out/t5.presumedWalker.log`).
+
+**Point 6, the files the chair named run alone** (close-reach's final pass 093b371ab, holding the line at f76fe38fd; one base, f76fe38fd; no conflict; no file both sides moved; outside docs/ `scripts/.observed-shape-readers-baseline.json`, `scripts/.writer-reach-baseline.json`, `scripts/check-observed-shape-readers.mjs`, `scripts/lib/observed-shape-baseline.mjs`, `scripts/migrate-observed-shape-readers.mjs` and three observed-shape tests), each WITHOUT `NODE_OPTIONS`: `writerReach.walker` 52/52, all ran (102 s); `observedShapeReaders.walker` 47/47 (114 s); `observedShapeBaseline` 59/59; `observedShapeMigration` 26/26; `observedShapeSentinel` 35/35. JOIN-11's carried reach reds (availableServices; the readers' three) closed (`/home/user/j12out/t6.*.log`).
 
 ## 4. THE LIST FOR THE CLOSE
 
@@ -337,6 +340,7 @@ JOIN-10's (by point):
 | golden (if it moves) | tail-content-close (4) | DECLARED MOVES 805452e8f (the trade fact names the market's stalls only where a market stands: the weeks' advance, no birth moved; one pulse hash re-keyed in modeSpeedsWy1) and 0b140b40c (the wartime forges only where a smith stands; no birth of the 720 moved): measured at the close |
 | `presumedThings.walker` ARM 1 (unchanged: magic.js, priorityHelpers.js, landingFixture.js) | carried (JOIN-11 2, 8) | 41/43 at point 4: the presumed seat's final pass, from this tip |
 | `tests/lint/presumedThings.widened.register.json` | tail-close-presumed final pass (5) | its one writer, side whole; walker 43/43 at the merged tree: the carried ARM 1 rows (J11 2, 8; J12 4) CLOSED at this point; a later doors pass that regenerates `landingFixture.js` would need the walker read again |
+| `scripts/.writer-reach-baseline.json`, `scripts/.observed-shape-readers-baseline.json` and the observed-shape scripts | tail-close-reach final pass (6) | its one writer, side whole; all five walkers green at the merged tree: JOIN-11's carried reach rows (point 7) CLOSED; a later code landing would need them read again |
 
 ## 5. Stops
 
@@ -355,6 +359,6 @@ JOIN-11's §7, re-made as written under `/home/user/j12out/` (worktree `/home/us
 
 ## 8. WHAT IS LEFT
 
-Landed: points 1-5 (the table), each at the hash the chair named, pushed with the hook's three gates and this file current.
-1. NOT DONE, each only on the chair's word: tail-close-reach at its final pass; close-veto-list (one document); tail-close-doors final pass LAST OF ALL; then, only on the word, one more pass of presumed or reach.
+Landed: points 1-6 (the table), each at the hash the chair named, pushed with the hook's three gates and this file current.
+1. NOT DONE, each only on the chair's word: close-veto-list (one document); tail-close-doors final pass LAST OF ALL; then, only on the word, one more pass of presumed or reach.
 2. For the close (not this seat's): every row of §4 by its door, once, on the final tree; the whole check once, by the close's seat.
