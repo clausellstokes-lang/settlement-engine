@@ -40,6 +40,8 @@ THE CHAIR'S RULINGS TO JOIN-8 (each vetoable by the owner):
 | 2 | tail-display-econ-2026-11-14 | 7beec164d (03:31; handed back) | fcab8b63d (JOIN-7 18) | 6b16a02d5 | none | — (7 files, display only; no record moved) |
 | 3 | tail-exports-pdf-2026-11-14 | d817edac6 (03:34) | 10c414e9b (JOIN-7 30) | bbbc33b1f | none | — (7 files; new leaf entrepotShown.js stands; journalPages.js heading lent, E23; no record moved) |
 | 4 | tail-defecon-2026-11-14 | 81100e11e (03:38; handed back) | 21e578caa (JOIN-7 25) | 131dfdbb6 | none | clean-both CODE `foodBalance.js` (lane 247/609 in deriveFoodBalanceAnalysis; joined 854: apart, both stand), `resourceGenerator.js` (lane 472; defecon-r 490-677: apart, both stand); DECLARED MOVE b40f795b2 (D27: exports[].reason 152, issues[] 41): golden carried |
+| — | tail-defecon-r-2026-11-14 | a515e1b54 (03:42) | — | — | — | already on the line (JOIN-7 27): nothing to land |
+| 5 | tail-services-2026-11-14 | dc9702c51 (03:42; handed back) | e35851db1 (JOIN-7 15) | 62a1a16e0 | none | — (docs only: the lane's hand-back) |
 
 ## 3. Every code resolution
 
@@ -187,6 +189,6 @@ A worktree at origin's tip (`git worktree add /home/user/j8wt -b join8 <tip>`, `
 
 ## 9. WHAT IS LEFT
 
-1. IN HAND: the sweep (the prompt's order). Landed so far: points 1-4.
+1. IN HAND: the sweep (the prompt's order). Landed so far: points 1-5.
 2. lane/tail-powers-2026-11-14: waits for the chair's "LAND" (P28).
 3. For the close (not this seat's): every row of §4 by its door, once, on the final tree.
