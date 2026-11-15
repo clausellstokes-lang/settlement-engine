@@ -1113,7 +1113,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "crisis: any",
             "no mercenary"
           ],
-          "text": "Nothing has come for {settlement}, and nothing about the town would stop whatever did. Its safety rests on nobody having wanted it.",
+          "text": "If anyone came for {settlement}, nothing about the town would stop them. Its safety rests on nobody wanting it enough to try.",
           "slots": [
             "settlement"
           ],
@@ -4367,6 +4367,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "gate",
             "guardPresence",
+            "no port",
             "no crisis: under_siege"
           ],
           "text": "{settlement} is walled, and every arrival goes through a gate and into the gate tally; trouble can only get in where the town decides.",
@@ -4469,6 +4470,10 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "no crisis: under_siege",
+            "no crisis: occupied"
+          ],
           "text": "You can walk into {settlement} from any direction and pass nobody on the way in.",
           "slots": [
             "settlement"
@@ -4770,7 +4775,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "arcane defense ABSENT": [
         {
           "angle": "ledger",
-          "text": "{settlement}'s defense is conventional throughout. What arrives unseen here goes undetected and therefore unanswered.",
+          "text": "{settlement} has no arcane defense: what arrives unseen here goes undetected and therefore unanswered.",
           "slots": [
             "settlement"
           ],
@@ -4786,7 +4791,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
-          "text": "Nothing unseen is known to have come at {settlement}, but the town keeps no wards or seers that would notice if it had.",
+          "text": "Anything unseen that came at {settlement} would find nothing to meet it: the town keeps no wards or seers to notice it.",
           "slots": [
             "settlement"
           ],
@@ -7156,7 +7161,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "guardPresence"
           ],
-          "text": "The guards at {settlement} have changed their rounds and will not say why, and everyone can guess.",
+          "text": "Those who keep watch at {settlement} have changed their rounds and will not say why, and everyone can guess.",
           "slots": [
             "settlement"
           ],
@@ -7587,7 +7592,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "override active, viability intact": [
         {
           "angle": "ledger",
-          "text": "{settlement} should come through this crisis if nothing else goes wrong, though its defence has had to change to meet it.",
+          "text": "{settlement} should come through this crisis if nothing else goes wrong, though it has had to change its ways to meet it.",
           "slots": [
             "settlement"
           ],
@@ -7596,6 +7601,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "street",
           "marks": [
+            "guardPresence",
             "no crisis: occupied"
           ],
           "text": "Life in the town goes on through the crisis: people work, eat and sleep, and the defence makes do with what is left over.",
@@ -7607,7 +7613,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no crisis: occupied"
           ],
-          "text": "A visitor to {settlement} would not guess at the trouble from the streets; the town is shaken but standing.",
+          "text": "{settlement} is shaken by this trouble, but it is still standing and means to stay that way.",
           "slots": [
             "settlement"
           ],
