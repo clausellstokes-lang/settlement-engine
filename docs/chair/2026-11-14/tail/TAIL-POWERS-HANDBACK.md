@@ -139,3 +139,99 @@ the corpus per town (tier, population, crisis kinds, npcs' title/presentation/se
 a label scan (each sentence's power and its powerLabel; the named rival's label and share); a field diff by family (flatten each
 record, array indices folded to [], towns and values per path).
 
+
+---
+
+# TAIL-POWERS-2 · the successor seat (session_01ACmDYZCZqQsMwqRr8R9gvo), kept current after every batch
+
+Base: this branch at **40238d3ab** (read back from origin; the predecessor's docs commit 097dc8bda landed after and is under my
+commits). Scratch worktrees outside the repository; local branch `tp2-b`, pushed by explicit refspec; the main checkout untouched.
+
+## The chair's rulings since (2026-11-15 00:20 UTC; each vetoable by the owner), copied
+- (P10) THE GROUP IS SPLIT IN TWO SEATS BY FILE. THIS SEAT: `rulingStructure.js` (DA, and its rows 23333, 03509, 04923, 02622,
+  18060, 03925, 11810, 17652), `governanceNarrative.js` (28 rows), `governanceAccount.js`, `governingStressVignettes.js`, and
+  P4's occupation half (02559, 02606, the "no lord stands over" line under an occupation). NOT THIS SEAT (TAIL-POWERS-B, on
+  lane/tail-powers-b-2026-11-14): factionDynamics.js, dmPowerLines.js, factionStanding.js, claimStanding.js, stressFactions.js,
+  handlerTieLines.js, factionProfile.js, powerStrata, conflictIssues.js, stressPowerFaces.js, settlementNarrative's TIE_GLOSS,
+  titleSecretsPresentations.js, faceHonorifics.js (so P5 and P6 are B's).
+- (P7, P8) DA FIRST, ITS OWN COMMIT, A DECLARED MOVE; the pin SW-B1 · P50's military row re-keyed by identity; the golden named.
+- (X9) THE EXPORTS' READ (read-all-3/WORKLIST3-POWERS, 32 rows): take the rows of this seat's files with a batch of the same
+  writer, measured with `SURFACES=PDF,Journal python3 inventory.py`. `powerSentenceName`'s signature is unchanged by this seat.
+- (P11) `rival power` and `ruling body` atoms are being built elsewhere: a line that needs one is PARKED with its measure.
+
+## DA · d68805134 · "Headman's Authority" only where the roster holds a headman's house (rulingStructure.js)
+Built from RECORD-MEASURE-1's da.patch on one line (F31's module ceiling: the test counts `split('\n').length`, so
+rulingStructure.js may hold 799 lines by `wc -l`; it holds 799). Measured: Headman's Authority governs 71 -> 33 towns (38 had
+no headman's house; the 38 seat Elder Council: village 16, hamlet 12, thorp 10; none prints the MIXED line). DECLARED MOVE, the
+field diff (fielddiff.mjs, 720): 38 towns, 23 families, the measuring seat's own figures (in the commit). Page (the inventory
+diff): "Governed by Headman's Authority" and its family 70 -> 32 towns, as the chair measured; the Elder Council family +38.
+Pin re-keyed by identity: powerCardOrderReads SW-B1 · P50 (with a Village headman: "Headman's Authority"; with none: Elder
+Council; never the MIXED line). The generator golden and espionageDormancyFence's driven golden: red at the base, stay red:
+THE OWNER'S DOOR, named, not re-taken.
+THE INHERITORS READ: "Elder Council (dominant/significant) armed backing" (4 + 4), "Elder Council vs Military/Guard" (3): the
+measuring seat's predicted shape (a military-minded thorp reads as an Elder Council with armed backing): true. "The Elder
+Council governs <N>." +28, "The oldest heads ... decide things together; people follow them out of respect" +13 (legitimacy
+not in crisis there), "Few in <N> still accept the Elder Council's right to rule." +17: true at their labels.
+ONE INHERITOR IS A KNOWN FALSE CLASS (NAMED, not cured here): in 14 of DA's 38 towns the Elder Council has ONE member on the
+roster (npcs[].memberships) and the page prints a plural line ("decide things together", "its members cannot agree", "the
+whole ... must agree"). The same 14 printed the plural "its members cannot agree" under the headman's name before; the class
+(a one-member seat with a plural line) is 97 towns at the base and 102 after DA. The council's body is minted after the power
+step (the people step), so the cure reads the roster after birth: the predecessor's "guard owed" below; writers rulingStructure
+(the Elder Council's desc) and dmPowerLines / the temper lines (B's files). One line to the chair.
+
+## Batch 1 · a708f0cf9 · P4's occupation half: the seat answers to the occupiers
+Files: power/governingStressVignettes.js (occupiedSeatLine, a declared pool), power/rulingStructure.js (one call on the
+stress line), domain/display/governanceAccount.js (the seat draws' twins, declared; the occupier off the "orders" line).
+Rows CURED (towns, before -> after): 02559 16 -> 15 · 02606 17 -> 16 · "The elders of the hamlet decide things together, and
+no lord stands over them." 27 -> 26 · 00382 1 -> 0 · the occupier's "no longer takes its orders" / "takes its orders no longer"
+4 + 4 -> 0. Also silenced, false by P4 the same way (28 towns, over twenty: told to the chair): every seat line and every
+"<seat> governs <town>." / "<town> is governed by <seat>." in the 28 occupied towns (66 town-lines; every one in those 28).
+The record coincides: occupation stress = the governing row's `occupied` mark = an Occupation Authority, in 28 of 720.
+Field diff: powerStructure.factions (the governing desc) 28 towns, nothing else. Measured with DA by one census before and one
+after (disjoint towns: DA's 38 are calm or unoccupied small places; checked by script that every lost line lost its town in
+DA's 38 or these 28). The cure was re-formed after the after run (the walker: a line that says "occupation" is declared
+on the crisis atom and drawn through the door): the record re-born byte-equal (fielddiff: 0 towns) and the account's opening
+re-computed equal to the after pages in all 720.
+
+## EVERY NEW OR CHANGED LINE (this seat; the owner's veto), with towns read
+- "<Seat> keeps the seat, but under the occupation nothing it decides stands without the occupiers' approval." (28; the
+  seat's name by powerSentenceName): r2s-occupied-thorp-0 (13 souls), r2s-occupied-hamlet-2 (the Free Elder Council),
+  r2s-occupied-metropolis-3 (262,531). NOTE: the exports print it as "Household Council (governing): Household Council keeps
+  the seat, ..." (the name twice): true, for the veto.
+- "<The seat> answers to the occupiers of <town>." in the account's three seat draws, the headless ("It has no head.") and
+  the unnamed seat (28): r2s-occupied-thorp-0, r2s-occupied-metropolis-2 ("The Ducal Governorship answers to the occupiers
+  of Nokhoihan."), r2s-occupied-metropolis-3.
+- The occupier at the competitive tie now prints on the existing "<X> is at odds with it." / "The hall is at odds with <X>."
+  (4 + 4): r2s-occupied-thorp-1, r2s-occupied-city-0.
+
+## Rows struck or named (this seat)
+- 12720 "Lightly defended" (80): the Defense verdict's readiness label (defenseProfile.readiness.label, printed by the
+  defence views), not governanceNarrative's (the string only names the label there): NAMED for the defence lane.
+- The exports' rows (X9) of this seat's files: 07413, 25617, 25916 GONE AT THE BASE (batch 2's claim rungs); left: 22578
+  (= the tab row 04923), 17038 (= 18060), 24575 (= 15278), 16925 (militia patrol with no militia, 9), 12246 (the High
+  Theocratic Council given the Grand Council's guild-masters line, 6), 17039 (= 18061).
+
+## What is left of this seat's files (by width, measured at 40238d3ab)
+- governanceAccount.js: P3 NOT MET: powerNameInProse does not read powerSentenceName: "The Military/Guard takes its orders no
+  longer." (36 towns), "... is at odds with it." (24), "... no longer takes its orders." (18) and lists: 48 towns print "The
+  Military/Guard" in the account. The cure: powerNameInProse reads the leaf (one line). NEXT, its own batch. Then the
+  "Crime has left ... contested" rows B05801-B05822 (7, one town each: the safety cause read as crime), B11589 / B02095 (the
+  merchant master holds the City/City-State Council's seat beside a quarrel, 4 + 3), 03254 (2), B17765 (1). 19716 (the
+  Merchant Guilds "take its orders no longer" beside a stable tie: the relationship is factionDynamics', B's file). B11586,
+  B11556 (a title word on a woman): P5, B's.
+- governanceNarrative.js (28 rows): the baseline conflict ladder (deriveBaselineConflict): B02464 grazing dispute 57, 20194
+  church veto over "council appointments" 24, 20987 / 00170 the merchants outbuying noble estates in a hamlet 16 + 16, the
+  "military commanders ... civilian courts ... losing ground" family (21057-21067, B20041: 1 each, the governing power
+  "losing ground" while Dominant), B00338 / B13657 rival guilds 5 + 2, B02757 monster incursion 6; the stress vignettes
+  21621 (24), 20273 / B19612 (7), 20963 (5), 21564 / 22394 (2); the stability labels 15278 (13), 16601 / 16602 (5 + 2);
+  B13714 (13). None verified yet.
+- governingStressVignettes.js: 05663 (27), 15434 (21), 22121 (13), 15215 (13), B21342 (13), 21190 (9), 20626 (4).
+- rulingStructure.js: 23333 (34), 03509 (33), 04923 (32), 02622 (18), 18060 (14), 03925 (12), 11810 (11), 17652 (8), 13525 (5),
+  18061 (4), 10422 (2); none verified yet. Line budget: 799 of 799 (F31): a cure there needs a split or a line saved.
+- Guards owed: the one-member seat's plural lines (97 -> 102 towns, above).
+
+## How this seat's instruments are re-made
+As the predecessor's, plus: `births-only.sh` and `fielddiff.mjs` from lane/record-measure-2026-11-14
+(docs/chair/2026-11-14/probes/RECORD-MEASURE-1/) for a record-only check in a minute; a node script that re-computes
+`governanceAccountOf` over a corpus and checks each town's page holds its opening (to re-verify a display cure without a render).
+NEVER edit the tree a census is reading (render and the writers' trace read it to the end): edit in a second worktree.
