@@ -395,7 +395,7 @@ export const MERCHANT_CRAFT_VOTE = Object.freeze({
 
 /** The seat-and-faith row's dependent line (computeFactionRelationships), in either of its seat forms: its parts, for the
  * HIGH twin (withConflictRelations). */
-const ORDAINED_SEAT = /^(.+ holds the seat(?: and collects the taxes| under the occupation)); (.+) (tells|tell) people that (.+) rule is right and ordained\. Each props up the other\.$/;
+const ORDAINED_SEAT = /^(.+ holds the seat(?: and collects the taxes)?); (.+) (tells|tell) people that (.+) rule is right and ordained\. Each props up the other\.$/;
 
 export function computeFactionRelationships(factions, tier, instFlags, publicLeg, stressTypes = [], defenseFacts = null) {
   const rels = [];
@@ -527,8 +527,8 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
     } else if (ratio >= 0.5) {
       type = 'dependent';
       // TAIL-POWERS-B: the seat, not an order a siege, a famine, an insurgency or an occupation denies (was "keeps order")
-      // TAIL-POWERS-B-4 (P31 (5)): under an occupation the occupier takes the levy; the seat is held under it, and no taxes are said
-      narrative = `${say(gov)} holds the seat ${stressed('occupied') ? 'under the occupation' : 'and collects the taxes'}; ${say(rel)} ${verb(rel, 'tells', 'tell')} people that ${powerPossessive(gov.faction)} rule is right and ordained. Each props up the other.`;
+      // TAIL-POWERS-B-4 (P31 (5)): under an occupation the occupier takes the levy; the seat is said held, and no taxes are said
+      narrative = `${say(gov)} holds the seat${stressed('occupied') ? '' : ' and collects the taxes'}; ${say(rel)} ${verb(rel, 'tells', 'tell')} people that ${powerPossessive(gov.faction)} rule is right and ordained. Each props up the other.`;
     } else {
       type = 'subordinate';
       narrative = `${rel.faction} answers to ${gov.faction}. Its priests look after their flocks and have no say in the hall.`;

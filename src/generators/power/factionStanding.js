@@ -93,7 +93,7 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }) 
           rank === 2 &&
             (gapAbove <= 5 && gapBelow <= 5
               ? (standing = topTwoGap <= 5 && levelCount >= 3
-                  ? `${LEVEL_COUNT_WORDS[Math.min(levelCount, LEVEL_COUNT_WORDS.length - 1)]} powers stand almost level here, and no one leads; every ${seatIsCouncil(factions.find((x) => x.isGoverning)?.faction) ? 'council vote' : 'decision'} has to be bargained for.` // TAIL-POWERS-B: a vote only where a council sits
+                  ? `Three powers stand almost level here, and no one leads; every ${seatIsCouncil(factions.find((x) => x.isGoverning)?.faction) ? 'council vote' : 'decision'} has to be bargained for.`.replace(/^Three/, LEVEL_COUNT_WORDS[Math.min(levelCount, LEVEL_COUNT_WORDS.length - 1)]) // TAIL-POWERS-B: a vote only where a council sits; TAIL-POWERS-B-4: their number
                   : 'They are always at the table, but cannot set their own terms.')
               : gapAbove <= 10
                 ? (standing =

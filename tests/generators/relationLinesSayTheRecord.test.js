@@ -56,7 +56,8 @@ function born(seed) {
 const BIRTHS = /** @type {Array<[string, string, string]>} */ ([
   ['r2r-hamlet-3', "Headman's Authority gives the orders and Military/Guard carries them out", "Headman's Authority gives the orders and The Guard carries them out"],
   ['r2r-hamlet-5', "the commander's agreement", 'is now about as strong as'],
-  ['r2s-occupied-town-2', 'keeps order and collects the taxes', 'holds the seat and collects the taxes'],
+  // RE-KEYED BY IDENTITY 2026-11-15 (TAIL-POWERS-B-4, P31 (5), a declared move): under an occupation no taxes are said
+  ['r2s-occupied-town-2', 'keeps order and collects the taxes', 'Guild Council holds the seat; Religious Authorities tell people'],
   ['r2r-metropolis-39', 'Noble Houses live under the rule of', 'Noble Houses still have their titles'],
 ]);
 /** @type {Record<string, any>} */

@@ -356,7 +356,7 @@ step and the density law resizes the roster after it). Text only; no draw moved.
 over every town that prints it (scratch tools/m.py and inline scans), before the cure:
 - (1) CLERGY_AT_MARGINS (98 towns, 123 cards): FALSE on 11 cards in 11 towns: the faith the strongest power (4), at or above the
   seat's power though not first (4), or at Significant (3, villages: the line drawn by rulingStructure.js at a low share, the
-  label raised after). There -> "The clergy hold no office in the hall, but their moral authority is real and their word carries
+  label raised after). There -> "The faith holds no office in the hall, but its moral authority is real and its word carries
   political weight here." 98 -> 88 towns (one town keeps the line on a density rival far behind the seat, true of it), the twin
   0 -> 11. None governs.
 - (2) the potter's clay secret (85, hedged by batch 5): the land holds no clay for the potter in 84 of 85 (the record's gap
@@ -380,8 +380,8 @@ over every town that prints it (scratch tools/m.py and inline scans), before the
 - (5) the seat-and-faith "ordained" row (dependent; 120 towns print "Each props up the other."): beside a HIGH quarrel of the pair
   (6 towns; P19 had appended "Even so, ..." after "Each props up the other.") -> "<seat> holds the seat and collects the taxes;
   Religious Authorities have long told people that <seat>'s rule is right and ordained, but the two are now at odds over
-  <issue>."; under an occupation (4 towns: the occupier takes the levy) the seat "holds the seat under the occupation", no taxes
-  said. 120 -> 114 and the four occupied towns' lines reworded.
+  <issue>."; under an occupation (4 towns: the occupier takes the levy) "<seat> holds the seat; Religious Authorities tell people ...",
+  no taxes said. 120 -> 114 and the four occupied towns' lines reworded.
 - (6) stressFactions.js wartime merchant/guild branch: 'guild' matched the Thieves' Guild (4 cards in 4 towns) -> "Shortage and
   requisition have pushed trade into the black market, where the guild takes its cut." 4 -> 0 on those cards; the merchants keep
   their line (true).
@@ -396,6 +396,16 @@ GUARD tests/generators/powersReadTheRosterP31.test.js: 13 refused pairs red at c
 KEEP green (a Minor faith far behind the seat; the vote with no quarrel; three level at one rung; the ordained row with no
 quarrel; the merchants' wartime line; the density rival's margins line); 19/19 at the cure. Gates at d99bce57a: eslint 0 on the
 touched files; typecheck ratchet 167 = ceiling; domain strict 1113 = ceiling.
+
+THE WALKER (presumed-things --check): the census-measured wording rose it by 3 (147 -> 150; "clergy" in the faith's twin, "under
+the occupation", and the level line's literal re-keyed): the twins were reworded to claim no presumed word ("The faith holds no
+office ...", the occupied seat "holds the seat" with no clause) and the level line keeps its banked literal ("Three powers ...",
+the number put in by replacement): fresh 147 = the base, stale 0. The rewordings print where the measured lines printed (the same
+conditions; text only). THE PINS a declared move of this batch explains, RE-KEYED BY IDENTITY: standingAgainstFigure (the level
+table 20/18/16/15 crosses a rung: the level table is now 24/22/20/15, and 20/18/16/15 asserts the band's own line),
+seatNamedAsItSits (r2s-famine-city-2: the band's own line in place of the level line), relationLinesSayTheRecord
+(r2s-occupied-town-2: no taxes under the occupation). The 36 test files naming the touched files: 2 red, pipelinePinnedChoosers
+A1 and A6, the same 2 red at the base: CARRIED.
 
 ## The chair's U2 reds (five files run alone at cce57ff35 and at this tip; all five red at cce57ff35 and at 40238d3ab too)
 - tests/generators/conflictTouched.test.js "a town with no such power gets no clause": (ii) a pin a DECLARED MOVE explains: the
@@ -412,7 +422,7 @@ touched files; typecheck ratchet 167 = ceiling; domain strict 1113 = ceiling.
   these files; green at fd4db104e (2026-11-12), red at 40238d3ab (before this seat): a first-parent bisect of fd4db104e..40238d3ab (231 merges of the joined line) was started in scratch and not finished at this hand-back: the commit is NOT YET NAMED; re-run: `git bisect start --first-parent 40238d3ab fd4db104e; git bisect run <the -t "overwhelming criminal presence" run>`.
 
 ## EVERY NEW OR CHANGED LINE (the owner's veto), with towns it was read in
-- BATCH 8 (P31): "The clergy hold no office in the hall, but their moral authority is real and their word carries political
+- BATCH 8 (P31): "The faith holds no office in the hall, but its moral authority is real and its word carries political
   weight here." (r2r-village-12 the smallest, r2s-politically_fractured-metropolis-1 the largest, r2s-religious_conversion-town-1
   a crisis) · "Has been selling pots bought in from another workshop as their own throwing, at their own prices" / "The buyers
   who paid for local work would want their money back, and the workshop's name would go with it" (r2r-village-43,
@@ -421,7 +431,7 @@ touched files; typecheck ratchet 167 = ceiling; domain strict 1113 = ceiling.
   here ..." with its number (r2r-metropolis-39 Five, r2s-politically_fractured-metropolis-1 Four, a crisis,
   r2s-succession_void-city-3) · "<seat> holds the seat and collects the taxes; Religious Authorities have long told people that
   <seat>'s rule is right and ordained, but the two are now at odds over <issue>." (r2r-village-26 the smallest, an insurgency,
-  r2r-metropolis-15, r2s-under_siege-metropolis-2 a siege) · "<seat> holds the seat under the occupation; ..." (r2s-occupied-town-2,
+  r2r-metropolis-15, r2s-under_siege-metropolis-2 a siege) · "<seat> holds the seat; Religious Authorities tell people ..." under an occupation (r2s-occupied-town-2,
   r2s-occupied-town-3, r2s-occupied-city-2) · "Shortage and requisition have pushed trade into the black market, where the guild
   takes its cut." (r2s-wartime-town-3, r2s-wartime-city-2, r2r-metropolis-4 the largest).
 - (batch 7) "<the arcane rival> has more say right now, and the clergy cannot accept it." (7, the Arcane Council): r2r-town-1 (the

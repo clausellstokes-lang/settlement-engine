@@ -45,7 +45,7 @@ const watchStands = (ctx) => ctx.names.some((n) => DEFENSE_BUCKET_KEYWORDS.watch
 const CLERGY_AT_MARGINS = 'Clergy are present but operate at the margins of civic life; their moral authority is real but their political leverage is limited.';
 /** TAIL-POWERS-B-4 (the chair's P31 (1), vetoable by the owner; batch 6a's form): "at the margins ... leverage is limited" is false
  * of a faith that stands level with or above the seat on the final roster, or at Significant or above; there it takes this twin. */
-const CLERGY_WITH_WEIGHT = 'The clergy hold no office in the hall, but their moral authority is real and their word carries political weight here.';
+const CLERGY_WITH_WEIGHT = 'The faith holds no office in the hall, but its moral authority is real and its word carries political weight here.';
 const LESSER_LANDED = 'Minor landed families with limited political reach; present in civic life but rarely decisive.';
 const LOCAL_MERCHANTS = 'Merchants with local reach; a consistent civic presence without yet being the dominant commercial voice.';
 // the town's leading merchant power, where no merchant power governs, is not "not yet the dominant commercial voice"

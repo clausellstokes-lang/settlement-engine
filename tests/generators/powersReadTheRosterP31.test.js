@@ -26,7 +26,7 @@ function born(seed) {
   return generateSettlementPipeline(birthConfig(cfg), null, { seed, customContent: {} });
 }
 const CLERGY = 'Clergy are present but operate at the margins of civic life';
-const CLERGY_TWIN = 'The clergy hold no office in the hall, but their moral authority is real and their word carries political weight here.';
+const CLERGY_TWIN = 'The faith holds no office in the hall, but its moral authority is real and its word carries political weight here.';
 const DIG = 'dug clay from land that belongs to someone else';
 const POTS = 'Has been selling pots bought in from another workshop as their own throwing, at their own prices';
 const WAR_MERCH = 'Trade disruption and requisition are hurting the bottom line.';
@@ -44,7 +44,7 @@ const ROWS = /** @type {Array<[string, string, string]>} */ ([
   ['r2r-metropolis-39', 'Three powers stand almost level here', 'Five powers stand almost level here, and no one leads'],
   // (5) a HIGH quarrel between the seat and the faith; an occupation
   ['r2r-metropolis-15', 'Each props up the other. Even so', 'long told people that'],
-  ['r2s-occupied-town-2', 'holds the seat and collects the taxes', 'holds the seat under the occupation; '],
+  ['r2s-occupied-town-2', 'holds the seat and collects the taxes', 'Guild Council holds the seat; Religious Authorities tell people'],
   // (6) the thieves' guild in wartime: its own card (CARD_ROWS)
 ]);
 /** (1) and (6) [town, the card, the text its card must NOT carry, the text it carries instead] */
