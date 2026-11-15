@@ -56,6 +56,7 @@ THE CHAIR'S RULINGS TO JOIN-8 (each vetoable by the owner):
 | — | tail-powers-2026-11-14 | 01ddaba28 (04:20; holds the line's merge at d817736d8) | d817736d8 | — | **STOP**: code conflict, `governanceAccount.js` (§6) | aborted; told the chair 04:22 |
 | 16 | tail-powers-b-2026-11-14 | 4ff449a7b (04:20) | f4eab4088 (JOIN-7 24) | d700bda44 | none | clean-both the two presumed registers (parse); DECLARED MOVES c1263e61c, 594794a67, 127b1f8ac, 4ff449a7b: golden carried |
 | 17 | tail-display-econ-2026-11-14 (re-sweep) | 1322e7d0a (04:24; its merge of the line at 5d1e3096b) | 7beec164d (2) | aa169b05e | none | — (no tree change) |
+| 18 | tail-corpus-def-2026-11-14 (re-sweep) | 7ccad225e (04:28; its merge of the line at d817736d8, C17) | 4e0936879 (7) | c095140d3 | none | — (docs only) |
 
 ## 3. Every code resolution
 
