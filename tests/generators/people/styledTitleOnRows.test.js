@@ -65,7 +65,9 @@ describe('COHERENCE-POWERS-8 R2 · a woman\'s row agrees with her card', () => {
     const s = born('r2r-town-15');
     const mine = ends(s).filter(([c]) => c.name === 'Kyriake Limniotes');
     expect(mine.length).toBeGreaterThan(0);
-    for (const [c, word] of mine) { expect(c.role).toBe('the lord'); expect(word).toBe('the lady'); }
+    // RE-KEYED BY IDENTITY (TAIL-TITLES K-C, the chair's ruling of 2026-11-15): M-1b kept, her role takes her form WITH her
+    // title ("the lady"); the face she holds ("the lord") stays on her card's `institution.title`
+    for (const [c, word] of mine) { expect(c.institution.title).toBe('the lord'); expect(c.role).toBe('the lady'); expect(word).toBe('the lady'); }
   }, 60000);
   it('r2r-town-19: Bayarmaa Mangghud is "the abbess"; r2r-city-3: Komnenou Kamytzes is "the senior abbess"', async () => {
     await loadGenerationLawPayloads();
@@ -87,8 +89,10 @@ describe('COHERENCE-POWERS-8 R2 · a woman\'s row agrees with her card', () => {
     const failures = collectSeedFailures(['p8-town-8', 'p8-town-10', 'p8-city-10', 'p8-metropolis-11', 'p8-city-3', 'p8-city-1', 'p8-village-1'], (seed) => {
       const wrong = ends(born(seed)).filter(([c, word]) => {
         if (c.gender !== 'female') return word !== c.role;
-        if (/^the (?:lord|abbot|senior abbot)$/.test(c.role)) gendered++;
-        return word !== styledTitleOf(c.role, 'female') || (/^the (?:lord|abbot|senior abbot)$/.test(c.role) && MASCULINE.test(word));
+        // RE-KEYED BY IDENTITY (TAIL-TITLES K-C): the exposure is the FACE she holds (`institution.title`); her role now bears its form
+        const face = String(c.institution?.title ?? c.role);
+        if (/^the (?:lord|abbot|senior abbot)$/.test(face)) gendered++;
+        return word !== styledTitleOf(c.role, 'female') || (/^the (?:lord|abbot|senior abbot)$/.test(face) && MASCULINE.test(word));
       }).map(([c, word]) => `${c.name}: "${word}"`);
       expect(wrong, seed).toEqual([]);
     });

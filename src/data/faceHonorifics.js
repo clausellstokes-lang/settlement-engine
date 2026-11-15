@@ -23,6 +23,7 @@
  */
 
 import { pickVariant } from '../kernel/proseHash.js';
+import { titleForHolder } from './holderTitleForms.js'; // TAIL-TITLES K-C: the holder's form, one leaf
 
 /** @typedef {string | { male: string, female: string }} Honorific */
 
@@ -380,6 +381,7 @@ export function honorificOfTitle(title, gender, seed, place = {}) {
  * @template T @param {T} title @param {unknown} gender @returns {T | string}
  */
 export function styledTitleOf(title, gender) {
+  { const held = titleForHolder(title, gender); if (held !== title) return held; } // TAIL-TITLES K-C: the holder's form, one leaf
   if (gender !== 'female' || typeof title !== 'string' || !title) return title;
   const t = title;
   const pool = FACE_HONORIFICS[t.trim()];
