@@ -1,0 +1,7 @@
+{"id":"C36357","town":"bar0-village-famine-rand-7","sev":"MED","kind":"STATE","why":"'Most meals start from game'; FOOD ledger: grown 59%, brought in 22%, magic 8%; no hunted share. Contradicts C36353 (grows three parts in five)","other":"C36353"}
+{"id":"C36333","town":"bar0-village-famine-rand-7","sev":"LOW","kind":"BROKEN","why":"'Not enough of the luxury goods ... comes': plural goods with singular verb; subject and verb do not agree","other":""}
+{"id":"C36557","town":"bar0-village-famine-rand-7","sev":"LOW","kind":"PAIR","why":"Magic gives a military role 'occasional'; DEFENCE magic: none and C36538 says no arcane practitioner stands with the defence","other":"C36538"}
+{"id":"C36846","town":"bar0-village-famine-rand-8","sev":"LOW","kind":"STATE","why":"Hook is for Swanhild Neumann, the miller of Headman's Authority; a preacher drawing away 'their congregation' fits no miller; only Mathilde Wolf is clergy","other":""}
+{"id":"C37257","town":"bar0-village-famine-rand-8","sev":"MED","kind":"PAIR","why":"Says people 'can drive off what attacks' under a Critical monster bar; only a village watch exists and C37290 says it has no specialists against creatures","other":"C37290"}
+{"id":"C37313","town":"bar0-village-famine-rand-8","sev":"LOW","kind":"PAIR","why":"Military role of magic 'occasional'; DEFENCE magic: none, C37293 says arcane support none, and reliance on magic is None","other":"C37293"}
+{"id":"DONE","lines":1563,"blocks":2,"flags":6}
