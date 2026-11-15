@@ -123,6 +123,10 @@ The presumed-things walker and the twelve-birth grid were NOT run this batch (th
    - `recdiff.py <corpusA> <corpusB>`: the record diff by field family.
    - `born2.mjs <tree> <regex> <seed...>`: the matching lines of one fresh birth, for seeds outside the 720.
    - The inventory: `inventory.py` (and `SURFACES=PDF,Journal` for the exports), then `inventory_diff.py`.
+   - **A HAZARD AT THE PUSH (met 2026-11-15 05:20):** when origin has moved, a push is not a fast-forward. Git hands the pre-push hook no ref lines, so the hook's lane-only path is skipped and it runs the whole `npm run check`. That check's fixture tests then write "fixture base" / "packet authority" commits into the pushing worktree, delete tracked files there, and set `core.bare=true` in the shared `.git/config`.
+     - FETCH AND CONFIRM A FAST-FORWARD BEFORE EVERY PUSH.
+     - If it happens, stop the push. Restore `git config core.bare false` (the main checkout's `git status` fails without it). Cherry-pick the batch onto origin's tip in a fresh worktree.
+     - Batch 6's first push was stopped that way: nothing reached origin. It was cherry-picked onto abe0327eb and landed as ed9f3b549. The polluted scratch tree was left as it was.
    - **Never edit the tree a census renders from:** cure in a second worktree (node_modules symlinked), and copy the cure in when the render ends.
 
 ## TAIL-HISTORY-4 (2026-11-15): the order, the first act, batch 5, WHAT IS LEFT
