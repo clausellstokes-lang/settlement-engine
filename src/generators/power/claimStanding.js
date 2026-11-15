@@ -17,6 +17,7 @@
 import { DEFENSE_BUCKET_KEYWORDS } from '../../domain/institutions/defenseInstitutionBuckets.js';
 import { INSTITUTION_FAMILIES, catalogIdForName, familyNamesByTier } from '../../data/institutionalCatalog.js';
 import { TAG } from '../../data/entityTags.js';
+import { magicPractitioners } from '../../domain/magicReliance.js';
 
 const SMALL_TIERS = Object.freeze(['thorp', 'hamlet', 'village']);
 // POWERS-11 (REVIEW-POWERS-3 L2): a rung names no council, no merchant capital and no leading merchant its own roster
@@ -73,6 +74,13 @@ const ARCANE_ADVISORY = 'Magical practitioners are consulted but not formally em
 /** TAIL-POWERS-B-2 (the chair's READ-ALL-4 HIGH, vetoable by the owner): where an arcane power GOVERNS, "not formally empowered" is
  * false of magic; the practitioners outside the seat take this twin, true in that state. */
 const ARCANE_ADVISORY_UNDER_ARCANE_SEAT = 'Magical practitioners outside the seat hold no office of their own; their influence is advisory and transactional.';
+/** TAIL-CONTENT-CLOSE-1 (2026-11-15, the round's law of a cure): the two advisory lines name practitioners, so they print only where the
+ * town holds one (magicReliance.js :: magicPractitioners, the magic reading's own reader, on the final record); where it holds none the
+ * power's standing takes its twin, said without them. @type {ReadonlyArray<readonly [string, string]>} */
+export const ARCANE_WITHOUT_PRACTITIONERS = Object.freeze([
+  [ARCANE_ADVISORY, 'The arcane interest is consulted but not formally empowered. Its influence is advisory, transactional, and quietly resented.'],
+  [ARCANE_ADVISORY_UNDER_ARCANE_SEAT, 'The arcane interest outside the seat holds no office of its own; its influence is advisory and transactional.'],
+]);
 // TAIL-POWERS-B-3 batch 7 (P1; row 29025, 8 Suppressed cards of 36 at 4ff449a7b): a Suppressed network "controls" no illicit
 // trade; it takes this twin, which claims no control.
 const CRIMINAL_IN_SHADOWS = 'Criminal network operating in shadows; controls illicit trade and profits from the gap between law and enforcement.';
@@ -191,6 +199,22 @@ export function settleClergyToFinalRoster(factions) {
     if (!f || f.isGoverning || typeof f.desc !== 'string' || !f.desc.includes(CLERGY_AT_MARGINS)) continue;
     const weighty = (LABEL_RANK[String(f.powerLabel)] ?? 0) >= LABEL_RANK.Significant || (!!seat && Number(f.power || 0) >= Number(seat.power || 0));
     if (weighty) f.desc = f.desc.replace(CLERGY_AT_MARGINS, CLERGY_WITH_WEIGHT);
+  }
+}
+
+/**
+ * THE ARCANE ADVISORY LINES ON THE FINAL RECORD (TAIL-CONTENT-CLOSE-1, 2026-11-15): the lines are written at the power step,
+ * before the town's people and houses are final; read once on the final record (beside settleClergyToFinalRoster), a town
+ * where no one works magic (`magicPractitioners` empty) takes each line's twin (ARCANE_WITHOUT_PRACTITIONERS). Draw-free;
+ * mutates the descriptions in place.
+ * @param {Array<Record<string, any>> | undefined} factions
+ * @param {import('../../domain/magicReliance.js').MagicRelianceSource | null | undefined} record the final settlement record
+ */
+export function settleArcaneToPractitioners(factions, record) {
+  if (!Array.isArray(factions) || !record || magicPractitioners(record).length > 0) return;
+  for (const f of factions) {
+    if (!f || typeof f.desc !== 'string') continue;
+    for (const [said, twin] of ARCANE_WITHOUT_PRACTITIONERS) f.desc = f.desc.replace(said, twin);
   }
 }
 
