@@ -82,6 +82,7 @@ THE CHAIR'S RULINGS TO JOIN-9 (each vetoable by the owner):
 | 12 | lane/tail-close-tests-a-2026-11-15 | a269fc3f8 (06:11) | 92fcc4fc5 | 06a27ccc8 | none | 1 files outside docs/; declared-move commits: a269fc3f8  (golden carried) |
 | 13 | lane/tail-corpus-def-2026-11-14 | e6023e774 (06:15) | b284cbe44 | 2bb269100 | none | 9 files outside docs/; declared-move commits: bb667e110 b7f646c9d dce196895 a84172d8c fbcc5712a 089bccf98 6716dfceb 849bd8679 c6852f7e2 680d16b54 ce69ac520 d7921a40c 0e838bc65 e45e08b0f ba3af4202 07ab77b03 cd0b1ab7b 14724c194 6c2fe3344 6a3692996 89326e707 688e2f3be e046a2ac4 6ce176aff 57a19f800 160c99790 b40f795b2 e040663dd c97caccd9 ea788e17c c1263e61c 6f7786a78 a5a9e4372 112532f64 2ac50c55d 28f86423c ca827fc0f b6a0c074c e35851db1 fcf4cae69 1036bf94b e6700483b e5a24fd85 7bef72cbc f20ce3151 0eaea0870 a10a457e2 f00b248fe 42f7f68c2 cddbc3274 a708f0cf9 53e295e5a  (golden carried); merged clean though both moved: tests/generators/coherenceAgreeCures.test.js  |
 | 14 | lane/tail-defecon-2026-11-14 | ad5720386 (06:20) | 76a735ad5 | 26c3dc456 | none | 11 files outside docs/; declared-move commits: 4d0b097dd 7506b7707 9cc8c6826 7ce6db273  (golden carried) |
+| 15 | lane/tail-powers-b-2026-11-14 | 9c337fc97 (06:23) | 034662313 | 470ff0a7a | **CODE (test)**: `hallDecidesUnderOccupation.test.js`, close-tests-a against powers-b: composed, both stand (§3) | 7/7 green composed; DECLARED MOVE 5706c386b: golden carried |
 
 ## 3. Every code resolution
 
@@ -90,6 +91,8 @@ PIN CONFLICTS (law d), point 3 (corpus-eco a8ea5ef8e against the joined side, wh
 **CODE CONFLICT IN A TEST FILE, point 10** (close-tests-a 432b0330c on the line against houses 0907dccf2): `tests/data/w2FixData6Rows.test.js`, HANDBACK-6 row 4 (the town mine of r2r-town-11/12/45). tests-a: `toMatch(/shaft/)` then the anchored negative `/hired crews|worked|go deep|run deep/i`. houses (61648f2a2, TAIL-HOUSES-5, re-keyed by identity after its hedge cure 2c10ddefe): "worked" out of the negative, `toMatch(/worked whenever ore can be had/)` added. PLAIN by the prompt's rule: composed as the shaft and hedge positives, then the anchored negative without "worked", houses' comment kept. Measured: 2 red / 7 green, the same two (row 3 ww-1416; the chair's row ww-924) as at houses' own tip; row 4 green (red at the line before). Remerge patch `probes/JOIN-9/10-tail-houses.remerge.patch`.
 
 **Point 13, a criss-cross read** (corpus-def e6023e774, which holds a merge of the line at 7163b3099, over its own tip b284cbe44 landed at point 4): two merge bases, b284cbe44 and 7163b3099. Against one base the both-moved list read 264 files; `verify.sh` now intersects over `git merge-base --all`: the branch moved 11 files, 9 staged against the line, both-moved `RECEIPT_POOLS_DOSSIER_STATE.md` and `tests/generators/coherenceAgreeCures.test.js`, the latter READ: both sides hold the identical hunks (the line's own TAIL-DEFECON-3 and TAIL-CORPUS-DEF-4 re-keys, carried in by the branch's merge of the line), nothing staged in it: no meeting. The list's "not read hunk by hunk" for that test file at point 13 is answered here.
+
+**CODE CONFLICT IN A TEST FILE, point 15** (close-tests-a 4865cac17 on the line against powers-b 9c337fc97): `tests/domain/people/hallDecidesUnderOccupation.test.js`, the hall's none rung over OUTSIDE's seeds. tests-a: the syndicate-line and CLEARED positives, then the comment `// anchored: the CLEARED match directly above shows the hall line prints` over the SELF_RULE negative. powers-b (a1351a7e6, TAIL-POWERS-B-5, re-keyed by identity to the defence display's declared rival): `factsOf(s).crime` anchored, then CLEARED where organized, FIRST otherwise. PLAIN: powers-b's block verbatim, tests-a's comment line after it, the negative. Measured: 7/7 green (`t15.m.log`; 6/7 at the line before, 7/7 at the branch's tip). Remerge patch `probes/JOIN-9/15-tail-powers-b.remerge.patch`.
 
 ## 4. THE LIST FOR THE CLOSE
 
@@ -245,6 +248,7 @@ Merged clean though both sides moved them (for the close to re-derive or measure
 | golden | corpus-def (13) | DECLARED MOVE commits bb667e110 b7f646c9d dce196895 a84172d8c fbcc5712a 089bccf98 6716dfceb 849bd8679 c6852f7e2 680d16b54 ce69ac520 d7921a40c 0e838bc65 e45e08b0f ba3af4202 07ab77b03 cd0b1ab7b 14724c194 6c2fe3344 6a3692996 89326e707 688e2f3be e046a2ac4 6ce176aff 57a19f800 160c99790 b40f795b2 e040663dd c97caccd9 ea788e17c c1263e61c 6f7786a78 a5a9e4372 112532f64 2ac50c55d 28f86423c ca827fc0f b6a0c074c e35851db1 fcf4cae69 1036bf94b e6700483b e5a24fd85 7bef72cbc f20ce3151 0eaea0870 a10a457e2 f00b248fe 42f7f68c2 cddbc3274 a708f0cf9 53e295e5a  (field diffs in their bodies) |
 | `tests/generators/coherenceAgreeCures.test.js` | corpus-def (13) | merged clean though both sides moved them; not read hunk by hunk: read at the close |
 | golden | defecon (14) | DECLARED MOVE commits 4d0b097dd 7506b7707 9cc8c6826 7ce6db273  (field diffs in their bodies) |
+| golden | powers-b (15) | DECLARED MOVE commit 5706c386b (field diff in its body) |
 
 ## 5. Item 2 at the landed tip
 
@@ -275,4 +279,4 @@ A worktree at origin's tip (`git worktree add /home/user/j9wt -b join9 <tip>`, `
 
 ## 9. WHAT IS LEFT
 
-Points 1-2 by the prompt's order; 3 (corpus-eco, pin conflicts) and 4 (corpus-def) before the chair's 05:35 reorder reached this seat; 5 ties and (g) on the 05:32 word; 6 history, 7 corpus-eco, 8 ties (the 05:53 word), 9 close-tests-a (a composed red found after its push: §6), 10 houses (a test-file conflict, composed: §3). Next: the line to the chair; then close-tests-b, -c, close-display, close-src, corpus-def, defecon, houses, powers-b.
+Points 1-15 landed (the table); 9 a composed red found after its push, answered at 12; 13 a criss-cross read; 10 and 15 test-file conflicts, composed. Next: crisis (16), then the sweep's end line to the chair; the four close branches tests-b, close-display, tests-c (and tests-a again) ON THE CHAIR'S WORD only.
