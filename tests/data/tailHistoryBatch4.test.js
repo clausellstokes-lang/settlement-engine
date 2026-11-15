@@ -57,8 +57,9 @@ describe('TAIL-HISTORY batch 4 (Y14): an arrival line names only a house, a trad
       const [i, seed] = key.split('|');
       const [, gone, instead] = MUST_NOT[Number(i)];
       const s = scene(String(seed));
-      expect(s, key).not.toMatch(/** @type {RegExp} */ (gone));
       expect(s, key).toMatch(/** @type {RegExp} */ (instead));
+      // anchored: the same text is shown directly above to print what stands on the slot instead
+      expect(s, key).not.toMatch(/** @type {RegExp} */ (gone));
     }), 'the false arrival lines');
   }, 600_000);
 

@@ -11,6 +11,7 @@ import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { criminalOpNote, deriveCriminalStructure, deriveSupportingCapabilities, foodEnduranceLine } from '../../src/domain/display/defenseDisplay.js';
 import { deriveViability } from '../../src/domain/display/dossierViewModel.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 // The census's 720 configuration (SECOND-WAVE-CENSUS births.mjs): every random dial on.
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -62,8 +63,7 @@ beforeAll(async () => {
 describe('TAIL-DEFECON-D batch 1: the Defense tab\'s and the Outlook\'s lines say only what the record holds', () => {
   for (const [row, seed, gone, instead] of GONE) {
     test(`#${row} ${seed}: not "${gone}"; "${instead}"`, () => {
-      expect(towns[seed]).not.toContain(gone);
-      expect(towns[seed]).toContain(instead);
+      expectAbsentWithAnchor(towns[seed], gone, instead, `#${row} ${seed}`);
     });
   }
   for (const [row, seed, kept] of KEEP) {

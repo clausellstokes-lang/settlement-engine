@@ -42,6 +42,10 @@ describe('textOf', () => {
     // 119 → 120 (TAIL-HISTORY-3, 2026-11-15, the chair's Y14; re-keyed by identity): the south-asian moneylender declares
     // (tier: ≥ village), and four twins join (the broker, the clerk and the cloth carts where no route reaches; the
     // moneylender's in a thorp or a hamlet). The broker, the clerk and the cloth carts were objects already.
-    expect(rows.filter((r) => typeof r === 'object').length).toBe(124);
+    // 124 → 133 (TAIL-HISTORY-5, 2026-11-15, the chair's Y17 and its note of 04:08; re-keyed by identity): nine twins join
+    // (the fish family's six catch lines, each under `crisis: hunger`; the steppe caravan broker's, where no market stands,
+    // under a siege or where no route reaches; the greek money changer's and the cloth looms' under a siege). Every
+    // original among them was an object already.
+    expect(rows.filter((r) => typeof r === 'object').length).toBe(133);
   });
 });

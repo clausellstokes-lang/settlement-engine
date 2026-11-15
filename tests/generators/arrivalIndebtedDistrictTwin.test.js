@@ -11,6 +11,7 @@
  * @enforced-by npx vitest run tests/generators/arrivalIndebtedDistrictTwin.test.js
  */
 import { beforeAll, describe, expect, it } from 'vitest';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
@@ -38,17 +39,19 @@ describe('the indebted merchant district needs a market; its slot takes a twin (
   beforeAll(async () => { await loadGenerationLawPayloads(); });
 
   it('D1: the collected towns print the twin, no district, and the rest of the scene unmoved', () => {
-    for (const seed of ['rr3-village-indebted-port-0', 'rr3x-village-indebted-river-2', 'rr3x-village-indebted-road-2', 'rr3x-village-indebted-mountain_pass-2', 'r2r-village-47']) {
+    const failures = collectSeedFailures(['rr3-village-indebted-port-0', 'rr3x-village-indebted-river-2', 'rr3x-village-indebted-road-2', 'rr3x-village-indebted-mountain_pass-2', 'r2r-village-47'], (seed) => {
       const scene = String(born(seed).arrivalScene);
       expect(scene.includes(DISTRICT), seed).toBe(false);
       expect(TWIN.test(scene), `${seed}: ${scene.slice(0, 80)}`).toBe(true);
       if (REST[seed]) expect(scene.replace(TWIN, ''), seed).toBe(REST[seed]);
-    }
+    });
+    expectNoSeedFailures(failures, 'the collected towns print the twin, no district, and the rest unmoved');
   }, 120000);
 
   it('D2 (keep): a town with a market still prints the district', () => {
-    for (const seed of ['rr3-town-indebted-rand-0', 'rr3x-village-indebted-mountain_pass-1']) {
+    const failures = collectSeedFailures(['rr3-town-indebted-rand-0', 'rr3x-village-indebted-mountain_pass-1'], (seed) => {
       expect(String(born(seed).arrivalScene).startsWith(DISTRICT), seed).toBe(true);
-    }
+    });
+    expectNoSeedFailures(failures, 'a town with a market still prints the district');
   }, 120000);
 });

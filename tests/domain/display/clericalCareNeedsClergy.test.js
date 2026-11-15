@@ -74,8 +74,9 @@ describe('clerical care is said only where clergy live (item 3)', () => {
     expectNoSeedFailures(collectSeedFailures(['r2r-metropolis-32', 'r2r-metropolis-51', 'rr3w-metropolis-under_siege+famine-rand-0', 'rr3w-metropolis-occupied-rand-1'], (seed) => {
       const town = seed.startsWith('rr3w-') ? birthReader(seed) : birthCensus(seed);
       expect(town.institutions.some((/** @type {{ name?: string }} */ i) => /\(\d+-\d+\)/.test(String(i.name)) && /monaster/i.test(String(i.name))), `anchored: ${seed} keeps a counted house`).toBe(true);
-      expect(medical(town).note, seed).not.toMatch(/\(\d+\s*-\s*\d+\)/);
       expect(medical(town).note, seed).toMatch(/^Major monasteries\. Wounds/);
+      // anchored: the note's monastery line is asserted directly above
+      expect(medical(town).note, seed).not.toMatch(/\(\d+\s*-\s*\d+\)/);
     }), 'a catalogue count band printed on the Medical Readiness line');
   }, 300000);
 });

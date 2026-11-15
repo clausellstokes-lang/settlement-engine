@@ -8,6 +8,7 @@
  */
 import { beforeAll, describe, expect, it } from 'vitest';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { deriveSupplyRiskAnalysis } from '../../src/generators/economy/foodBalance.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
@@ -40,7 +41,7 @@ describe('the cold list\'s besieged towns, born as the app births them', () => {
       const s = /** @type {any} */ (generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: m[1], selectedStressesRandom: false, selectedStresses: m[2].split('+'), _randomizePriorities: true }), null, { seed, customContent: {} }));
       expect(s.economicState.foodSecurity.importCoverage || 0, `${seed}: no food comes in by trade`).toBe(0);
       const hooks = JSON.stringify((s.economicViability?.plotHooks || []).map((/** @type {any} */ h) => h.hook));
-      expect(hooks, `${seed}: no importer`).not.toMatch(IMPORTER);
+      expectAbsentWithAnchor(hooks, 'One importer now brings in all the grain', 'No food comes in by trade now', `${seed}: no importer`);
       expect(hooks, `${seed}: the no-trade hook prints`).toMatch(/No food comes in by trade now/);
     }), 'no importer while no food comes in by trade');
   });

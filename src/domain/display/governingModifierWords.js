@@ -37,8 +37,27 @@ import { clergyHouseStands } from './clergyHouse.js';
 
 /** @typedef {'arcane'|'force'|'faith'|'commerce'|'crime'} ModifierFamily */
 
-/** The writer's modifier keys, each to its family and its plain words. @type {Readonly<Record<string, { family: ModifierFamily, words: string }>>} */
-const MODIFIER_WORDS = Object.freeze({
+/**
+ * A power as this leaf reads it: the ruling power's record (`rulingPower.js`) with the writer's `modifier` and the
+ * power's `category`.
+ * @typedef {import('../rulingPower.js').RulingFaction & { modifier?: unknown, category?: unknown }} GoverningFaction
+ */
+
+/**
+ * The town as this leaf reads it: the ruling power's seat (`rulingPower.js`), the magic homes' fields
+ * (`magicReliance.js`, `magicLedger.js`) and the hall's stored rung (`powerStructure.criminalCaptureState`).
+ * @typedef {import('../rulingPower.js').RulingPowerSettlement
+ *   & import('../magicReliance.js').MagicRelianceSource
+ *   & import('../magicLedger.js').MagicLedgerSource
+ *   & { powerStructure?: { criminalCaptureState?: unknown } }} GoverningSettlement
+ */
+
+/**
+ * The writer's modifier keys, each to its family and its plain words. Named apart from the NPC paradigm catalog's own
+ * word list (whose consumers are an enrolled roster this leaf is not on): one name for two lists is read by that
+ * roster's walker as a reach into the catalog.
+ * @type {Readonly<Record<string, { family: ModifierFamily, words: string }>>} */
+const WORDS_OF_MODIFIER = Object.freeze({
   'arcane-advised': { family: 'arcane', words: 'mage counsel' },
   'mage-advised': { family: 'arcane', words: 'mage counsel' },
   'military-dominated': { family: 'force', words: 'armed sway' },
@@ -56,25 +75,25 @@ const MODIFIER_WORDS = Object.freeze({
 const HALL_IN_CRIMINAL_HANDS = new Set(['corrupted', 'capture']);
 
 /** The families' keys, for the guard and the census. @type {ReadonlyArray<string>} */
-export const GOVERNING_MODIFIER_KEYS = Object.freeze(Object.keys(MODIFIER_WORDS));
+export const GOVERNING_MODIFIER_KEYS = Object.freeze(Object.keys(WORDS_OF_MODIFIER));
 
 /**
  * Whether the faith's power answers to the seat: a `subordinate` relationship from the ruling power to a religious
  * power (the writer's pair is [the ruling power, the other], `factionDynamics.js`).
- * @param {any} settlement @param {string} rulerName
+ * @param {GoverningSettlement | null | undefined} settlement @param {string} rulerName
  */
 function faithAnswersToSeat(settlement, rulerName) {
-  const ps = settlement?.powerStructure || {};
+  const ps = settlement?.powerStructure || /** @type {NonNullable<GoverningSettlement['powerStructure']>} */ ({});
   const factions = Array.isArray(ps.factions) ? ps.factions : [];
-  const religious = new Set(factions.filter((/** @type {any} */ f) => String(f?.category || '') === 'religious').map(nameOf).filter(Boolean));
+  const religious = new Set(factions.filter((/** @type {GoverningFaction | null | undefined} */ f) => String(f?.category || '') === 'religious').map(nameOf).filter(Boolean));
   const rels = Array.isArray(ps.factionRelationships) ? ps.factionRelationships : [];
-  return rels.some((/** @type {any} */ r) => r?.type === 'subordinate' && Array.isArray(r.pair)
+  return rels.some((r) => r?.type === 'subordinate' && Array.isArray(r.pair)
     && r.pair[0] === rulerName && religious.has(r.pair[1]));
 }
 
 /**
  * Whether the town's record bears out a family of modifier for its ruling power.
- * @param {any} settlement @param {ModifierFamily} family @param {string} rulerName
+ * @param {GoverningSettlement | null | undefined} settlement @param {ModifierFamily} family @param {string} rulerName
  * @returns {boolean}
  */
 export function modifierBorneOut(settlement, family, rulerName) {
@@ -90,13 +109,13 @@ export function modifierBorneOut(settlement, family, rulerName) {
 /**
  * THE ONE DISPLAY READ: the ruling power's modifier in plain words, or '' where it has none, its key belongs to no
  * family, or the town's record does not bear it out.
- * @param {any} settlement
+ * @param {GoverningSettlement | null | undefined} settlement
  * @returns {string}
  */
 export function governingModifierWordsOf(settlement) {
   const ruler = governingFactionOf(settlement);
-  const key = String(/** @type {any} */ (ruler)?.modifier || '');
-  const entry = Object.hasOwn(MODIFIER_WORDS, key) ? MODIFIER_WORDS[key] : null;
+  const key = String(/** @type {GoverningFaction | null} */ (ruler)?.modifier || '');
+  const entry = Object.hasOwn(WORDS_OF_MODIFIER, key) ? WORDS_OF_MODIFIER[key] : null;
   if (!entry) return '';
   return modifierBorneOut(settlement, entry.family, String(nameOf(ruler) || '')) ? entry.words : '';
 }
@@ -108,5 +127,5 @@ export function governingModifierWordsOf(settlement) {
  */
 export function modifierFamilyOf(key) {
   const k = String(key || '');
-  return Object.hasOwn(MODIFIER_WORDS, k) ? MODIFIER_WORDS[k].family : null;
+  return Object.hasOwn(WORDS_OF_MODIFIER, k) ? WORDS_OF_MODIFIER[k].family : null;
 }

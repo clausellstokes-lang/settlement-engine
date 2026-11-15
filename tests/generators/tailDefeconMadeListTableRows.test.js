@@ -17,6 +17,8 @@ import { beforeAll, describe, expect, test } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true,
   selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -74,22 +76,30 @@ const GONE_EXPORT = [
 const KEEP_EXPORT = [['r2r-town-2', 'Baked goods', 'Bakers']];
 
 describe('D33: flour, textiles, glass and pottery are made only where a house of the table makes them', () => {
-  test.each(GONE)('%s lists no "%s"; it still makes "%s"', (seed, gone, still) => {
-    const list = madeIn(seed);
-    expect(list).not.toContain(gone);
-    expect(list).toContain(still);
+  test('each GONE town lists no good no house makes; it still makes its own (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(GONE, ([seed, gone, still]) => {
+      const list = madeIn(seed);
+      expectAbsentWithAnchor(list, gone, still, `${seed} lists no "${gone}"; it still makes "${still}"`);
+      expect(list, `${seed} lists no "${gone}"; it still makes "${still}"`).toContain(still);
+    }), 'D33: no GONE town lists a good no house of it makes, and each still makes its own');
   });
-  test.each(KEEP)('%s still lists "%s" (its %s stands)', (seed, good, house) => {
-    expect(madeIn(seed)).toContain(good);
-    expect(town(seed).institutions.map((/** @type {any} */ i) => String(i.name)).some((n) => n.includes(house))).toBe(true);
+  test('each KEEP town still lists the good its house makes (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(KEEP, ([seed, good, house]) => {
+      expect(madeIn(seed), `${seed} still lists "${good}"`).toContain(good);
+      expect(town(seed).institutions.map((/** @type {any} */ i) => String(i.name)).some((n) => n.includes(house)), `${seed}: its ${house} stands`).toBe(true);
+    }), 'D33: every KEEP town still lists the good, and its house stands');
   });
-  test.each(GONE_EXPORT)('%s exports no "%s"; it still exports "%s"', (seed, gone, still) => {
-    const list = exportedFrom(seed);
-    expect(list).not.toContain(gone);
-    expect(list).toContain(still);
+  test('each GONE_EXPORT town exports no good no house makes; it still exports its own (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(GONE_EXPORT, ([seed, gone, still]) => {
+      const list = exportedFrom(seed);
+      expectAbsentWithAnchor(list, gone, still, `${seed} exports no "${gone}"; it still exports "${still}"`);
+      expect(list, `${seed} exports no "${gone}"; it still exports "${still}"`).toContain(still);
+    }), 'D33: no GONE_EXPORT town exports a good no house of it makes, and each still exports its own');
   });
-  test.each(KEEP_EXPORT)('%s still exports "%s" (its %s stand)', (seed, good, house) => {
-    expect(exportedFrom(seed)).toContain(good);
-    expect(town(seed).institutions.map((/** @type {any} */ i) => String(i.name)).some((n) => n.includes(house))).toBe(true);
+  test('each KEEP_EXPORT town still exports the good its house makes (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(KEEP_EXPORT, ([seed, good, house]) => {
+      expect(exportedFrom(seed), `${seed} still exports "${good}"`).toContain(good);
+      expect(town(seed).institutions.map((/** @type {any} */ i) => String(i.name)).some((n) => n.includes(house)), `${seed}: its ${house} stand`).toBe(true);
+    }), 'D33: every KEEP_EXPORT town still exports the good, and its house stands');
   });
 });

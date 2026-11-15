@@ -8,6 +8,8 @@
  * Births of the census's own seeds (CENSUS-3 seedcfg.mjs :: cfgFor); every cured pair red at 6cf555801, kept pairs green.
  */
 import { beforeAll, describe, expect, test } from 'vitest';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
@@ -51,12 +53,15 @@ beforeAll(async () => {
 }, 900000);
 
 describe('batch B: the crime\'s head, two safety lines', () => {
-  test.each(CURED)('%s: "%s" does not print; "%s" does', (seed, gone, instead) => {
-    const t = textOf(seed);
-    expect(t).not.toContain(gone);
-    expect(t).toContain(instead);
+  test('<seed>: "<gone>" does not print; "<instead>" does (every CURED row)', () => {
+    expectNoSeedFailures(collectSeedFailures(CURED, ([seed, gone, instead]) => {
+      const t = textOf(seed);
+      expectAbsentWithAnchor(t, gone, instead, seed);
+    }), 'V8/V10: each cured line takes its twin');
   });
-  test.each(KEPT)('%s keeps "%s"', (seed, kept) => {
-    expect(textOf(seed)).toContain(kept);
+  test('<seed> keeps "<kept>" (every KEPT row)', () => {
+    expectNoSeedFailures(collectSeedFailures(KEPT, ([seed, kept]) => {
+      expect(textOf(seed), `${seed} keeps "${kept}"`).toContain(kept);
+    }), 'V8/V10: each true sibling still prints');
   });
 });

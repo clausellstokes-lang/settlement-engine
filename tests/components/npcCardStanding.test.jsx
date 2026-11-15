@@ -13,6 +13,7 @@
 import { describe, it, expect, afterEach } from 'vitest';
 import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 import { NPCCategoryGroup } from '../../src/components/new/npcComponents.jsx';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 afterEach(cleanup);
 
@@ -56,7 +57,7 @@ describe('NPC card — the standing prints under its own label', () => {
     const dials = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true,
       selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
     let read = 0;
-    for (const [seed, settType] of [['r2r-thorp-0', 'thorp'], ['r2r-village-31', 'village'], ['r2r-city-0', 'city']]) {
+    const failures = collectSeedFailures([['r2r-thorp-0', 'thorp'], ['r2r-village-31', 'village'], ['r2r-city-0', 'city']], ([seed, settType]) => {
       const town = generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...dials, settType }), null, { seed, customContent: {} });
       for (const npc of (town.npcs || []).slice(0, 12)) {
         const word = STANDING_WORD[String(npc.influence)];
@@ -67,7 +68,8 @@ describe('NPC card — the standing prints under its own label', () => {
         const leaked = Object.values(STANDING_WORD).filter((w) => (rows.Disposition || '').includes(w));
         expect(leaked, `${seed} ${npc.name}: no standing word in Disposition`).toEqual([]);
       }
-    }
+    });
+    expectNoSeedFailures(failures, 'every person with an influence prints its standing under its own label');
     expect(read, 'anchored: the births carry people with an influence').toBeGreaterThan(5);
   }, 180000);
 });

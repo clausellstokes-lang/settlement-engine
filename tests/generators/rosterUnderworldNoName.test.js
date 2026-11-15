@@ -18,6 +18,7 @@ import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { setActiveRng, clearActiveRng } from '../../src/kernel/rngContext.js';
 import { createPRNG } from '../../src/kernel/prng.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const INFORMANT = "On the payroll of the thieves' guild as a silent informant";
 const card = () => ({ name: 'Sophronios Chomatenos', role: 'tavern keeper', secret: { what: INFORMANT, stakes: 'Exposure would cost them their post and likely their safety' } });
@@ -33,7 +34,7 @@ describe("the roster's informant names only the underworld the town has", () => 
   it('A1: a named criminal power and no thieves\' guild — the local underworld, never the power\'s name', () => {
     const what = secretIn([COUNCIL, { faction: 'The Shadow Compact', category: 'criminal', power: 20 }], [{ name: 'Fence (word of mouth)', category: 'Criminal' }]);
     expect(what).toBe('On the payroll of the local underworld as a silent informant');
-    expect(what).not.toMatch(/Shadow Compact/);
+    expectAbsentWithAnchor(what, 'Shadow Compact', 'the local underworld');
   });
 
   it('A2: a thieves\' guild house keeps the line; no crime at all reads a powerful outside interest', () => {

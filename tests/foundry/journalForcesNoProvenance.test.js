@@ -16,6 +16,7 @@ import { institutionHouseLabel } from '../../src/domain/display/institutionDispl
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true,
   selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -44,15 +45,17 @@ const forcesOf = (town) => {
 describe('the journal\'s Armed forces bullets print no provenance key (EXPORTS-B24 · B4)', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
 
-  test.each(['r2r-thorp-1', 'r2s-under_siege-town-0', 'r2s-famine-city-0', 'r2r-metropolis-0'])('%s: no bullet ends in a provenance key; every force still prints', (seed) => {
-    const town = birth720(seed);
-    const forces = forcesOf(town);
-    expect(forces.some((f) => typeof f === 'object' && f?.source), 'anchored: the record carries a provenance key on a force').toBe(true);
-    const bullets = forceBullets(town);
-    expect(bullets.filter((l) => PROVENANCE.test(l))).toEqual([]);
-    expect(bullets.length, 'the guard: one bullet a force').toBe(forces.length);
-    expect(forces.some((f) => typeof f === 'object' && f?.desc), 'anchored: a force with a description').toBe(true);
-    // the guard: each bullet is the force's label and its description, as the PDF's force row prints them
-    expect(bullets).toEqual(forces.map((f) => `- ${esc(typeof f === 'string' ? institutionHouseLabel(f) : `${institutionHouseLabel(f.name || '')}${f.desc ? `: ${f.desc}` : ''}`)}`));
+  test('every seed: no bullet ends in a provenance key; every force still prints (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(['r2r-thorp-1', 'r2s-under_siege-town-0', 'r2s-famine-city-0', 'r2r-metropolis-0'], (seed) => {
+      const town = birth720(seed);
+      const forces = forcesOf(town);
+      expect(forces.some((f) => typeof f === 'object' && f?.source), 'anchored: the record carries a provenance key on a force').toBe(true);
+      const bullets = forceBullets(town);
+      expect(bullets.filter((l) => PROVENANCE.test(l)), `${seed}: no bullet ends in a provenance key`).toEqual([]);
+      expect(bullets.length, 'the guard: one bullet a force').toBe(forces.length);
+      expect(forces.some((f) => typeof f === 'object' && f?.desc), 'anchored: a force with a description').toBe(true);
+      // the guard: each bullet is the force's label and its description, as the PDF's force row prints them
+      expect(bullets, `${seed}: every force still prints`).toEqual(forces.map((f) => `- ${esc(typeof f === 'string' ? institutionHouseLabel(f) : `${institutionHouseLabel(f.name || '')}${f.desc ? `: ${f.desc}` : ''}`)}`));
+    }), 'B4: no journal force bullet ends in a provenance key, and every force still prints');
   }, 180000);
 });

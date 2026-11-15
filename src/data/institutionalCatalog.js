@@ -322,7 +322,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       shared: { front: 'prime', face: 'the senior guild master', tags: ['guild', 'trade'], priorityCategory: 'economy' },
       at: {
         town: { name: 'Merchant guilds (3-8)', baseChance: 0.8, desc: 'Control trade in specific goods.' },
-        city: { name: 'Merchant guilds (15-40)', baseChance: 0.95, desc: 'Powerful political force.' },
+        city: { name: 'Merchant guilds (15-40)', baseChance: 0.95, desc: 'A power in the city\'s trade.' },
         metropolis: { name: 'Merchant guilds (50-100+)', baseChance: 0.95, desc: 'Dozens of merchant guilds representing every major trade good and route. A formal guild parliament.' },
       },
     },
@@ -1073,7 +1073,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       shared: { name: 'City administration', face: 'the chief administrator', exclusiveGroup: 'government', desc: 'An administrative apparatus of officials, clerks, and ward officers carries out the city\'s business, whoever sits above it. Functional, and moved by bureaucratic inertia.', tags: ['civic'], priorityCategory: 'government' },
       at: {
         village: { face: 'the reeve', name: 'Village reeve', baseChance: 0.92, desc: 'Elected from the peasantry. Organises labour obligations, mediates disputes, and represents the village to outside authority.' },
-        town: { face: 'the first councillor', name: 'Town council', baseChance: 0.9, desc: 'An informal council of prominent citizens manages town affairs in the absence of formal authority. Less accountable than an elected council, more stable than nothing.' },
+        town: { face: 'the first councillor', name: 'Town council', baseChance: 0.9, desc: 'A council of prominent citizens sees to the town\'s common affairs. Less accountable than an elected council, but steady.' },
         city: { baseChance: 0.92 },
         metropolis: { baseChance: 0.92 },
       },
@@ -1081,12 +1081,12 @@ export const INSTITUTION_FAMILIES = Object.freeze([
     {
       shared: { name: 'Village elder', face: 'the village elder' },
       at: {
-        village: { baseChance: 0.95, exclusiveGroup: 'government', desc: 'The oldest or most respected resident guides village decisions in the absence of formal authority. Less official than a reeve, more stable than nothing.', tags: ['civic'], priorityCategory: 'government' },
+        village: { baseChance: 0.95, exclusiveGroup: 'government', desc: 'The oldest or most respected resident guides village decisions, by standing rather than by office.', tags: ['civic'], priorityCategory: 'government' },
       },
       ceiling: { tier: 'village', reason: 'A town governs through a council or an appointee.' },
     },
     {
-      shared: { name: 'Mayor and council', face: 'the mayor', baseChance: 0.5, exclusiveGroup: 'government', desc: 'Elected civic council with full administrative apparatus.', tags: ['civic'], priorityCategory: 'government' },
+      shared: { name: 'Mayor and council', face: 'the mayor', baseChance: 0.5, exclusiveGroup: 'government', desc: 'Civic council with full administrative apparatus.', tags: ['civic'], priorityCategory: 'government' },
       at: {
         town: { desc: 'Elected or appointed town leadership.' },
         city: {},

@@ -36,6 +36,7 @@ import { composeTonightSheet } from '../../src/domain/summary/tonightSheet.js';
 import { buildJournalPages } from '../../src/foundry/journalPages.js';
 import { institutionBackers } from '../../src/domain/dossier/powerSupport.js';
 import { institutionHouseLabel } from '../../src/domain/display/institutionDisplayName.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 // Recursively flatten an element tree to its text leaves. Function components are
 // executed (plain functions in src/pdf — no hooks); hosts walked via children.
@@ -209,7 +210,7 @@ describe('#18 PowerStructure — RULE & SUCCESSION subsection (regime lineage / 
     // beside the governing name in the Power tab's own words (display/governingModifierWords.js), never the stored key
     expect(governingModifierWordsOf(modded), 'anchored: the fixture bears the force family out').toBe('armed sway');
     expect(on, 'the modifier prints beside the governing name').toContain('armed sway');
-    expect(on, 'the stored key is never printed').not.toContain('military-dominated');
+    expectAbsentWithAnchor(on, 'military-dominated', 'armed sway', 'the stored key is never printed');
     delete g.modifier;
     const off = joined(PowerStructure({ settlement: modded, vm: buildViewModel({ settlement: modded }) }));
     expect(off).toContain('GOVERNING');

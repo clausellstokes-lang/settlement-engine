@@ -322,7 +322,11 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
                 : ((he.power = Math.round(he.power * 0.8)),
                   (he.desc =
                     (he.desc || '') +
-                    ' Trade disruption and requisition are hurting the bottom line. The power is lobbying for compensation and receiving promises.'))),
+                    // TAIL-POWERS-B-4 (the chair's P31 (6), vetoable by the owner): 'guild' matches the Thieves' Guild, whose crisis
+                    // stake is a gain; a criminal power is not said to lobby for compensation: it takes its twin, true of it
+                    (he.category === 'criminal' || he.faction.toLowerCase().includes('thieves')
+                      ? ' Shortage and requisition have pushed trade into the black market, where the guild takes its cut.'
+                      : ' Trade disruption and requisition are hurting the bottom line. The power is lobbying for compensation and receiving promises.')))),
             (he.faction.toLowerCase().includes('religious') || he.faction.toLowerCase().includes('church')) &&
               ((he.power = Math.round(he.power * 1.2)),
               (he.desc =

@@ -13,6 +13,7 @@
  */
 import { beforeAll, describe, expect, test } from 'vitest';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
@@ -85,8 +86,7 @@ describe('TAIL-HOUSES-2 batch 3: a house text claims no citadel, gate, deposit, 
       const inst = instOf(t, house);
       expect(inst, `${seed} holds a ${house}`).toBeDefined();
       expect(DENIED[denied](t), `${seed}: the record denies the ${house}'s old claim (${denied})`).toBe(true);
-      expect(String(inst.desc), `${seed} ${house}`).not.toContain(old);
-      expect(String(inst.desc), `${seed} ${house}`).toContain(now);
+      expectAbsentWithAnchor(String(inst.desc), old, now, `${seed} ${house}`);
     }), 'a house text claims nothing the record denies');
   }, 600_000);
 

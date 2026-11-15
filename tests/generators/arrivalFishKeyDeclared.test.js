@@ -52,7 +52,9 @@ describe('the fish beat on the soak (R-AP)', () => {
   it('soak1k-170 (a river village whose food record holds fish) keeps its beat, and A-11\'s own water gate is open', () => {
     const b = birth(170); const s = b.settlement;
     expect(factsOf(s).foodSources).toContain('fish');
-    expect(s.arrivalScene).toContain(textOfLine(sense('fish').lines[3], s.name));
+    // TAIL-HISTORY-5 (2026-11-15, the chair's Y17 (2)): the catch lines' twins sit beside them; re-keyed BY IDENTITY over the originals
+    const originals = sense('fish').lines.filter((l) => !(l && typeof l === 'object' && typeof l.twinOf === 'string'));
+    expect(s.arrivalScene).toContain(textOfLine(originals[3], s.name));
     const terrain = terrainClassOf(s) || String(b.config?.terrainOverride ?? '');
     const route = tradeRouteOf(s) || String(b.config?.tradeRouteAccess ?? '');
     // A-11 (scripts/audit/soak-review/checks.mjs) reads sea words only where `waterAccessKind` is 'none'

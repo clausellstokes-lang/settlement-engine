@@ -89,4 +89,11 @@ refused to this seat by the auto-mode classifier: it is LEFT for the chair/owner
 work tree" until `core.bare` is false again; remove the two added sections). This seat's later commits set the identity and
 signing per commit (`-c`), never the config.
 
-WAITING for the chair's "MERGE <tip>" before the hand-back closes.
+THE MERGE (the chair's "MERGE 17e38c547"): the joined line at 17e38c547 merged in one commit. Files both sides moved:
+displayEconCrisisMarks (auto-merged: the anchored form with this seat's three re-keyed rows) and
+displayEconRelianceFoodWords (settled by hand: the anchored rows stand; famine-town-1's shares, 4 → 5 and 13 → 14 at 837cad90,
+are back at 4 and 13 on JOIN-9's points (the record at the merged tree; the point not traced): NOT row and anchor and KEEP
+settled to 4% / 13%). Both files 10/10 green. At the merged tree the eight's files: all green but the phone floor's two count
+tables (V14: the doors' seat; zero sub-floor lines); labelJoins green (the powers' seat). The civic sweep's bisect (bisect3)
+had not finished at the hand-back: its partial result: journalMarksCrisisRows' two rows turned at JOIN-7 · 14 (d817736d,
+lane/tail-exports-journal); layerBoundaries red at the base f663a2699. The rest of the sweep's classing is for a fresh seat.

@@ -54,13 +54,15 @@ describe('the founding rows read the record', () => {
 
   it('A2: the false Origin row is gone and the row in its place is admitted (every row)', () => {
     expectNoSeedFailures(collectSeedFailures([
-      ['rr2s-town-under_siege-rand-1', /the local soil produces something/], // #488: no crop of its own
-      ['rr2s-town-plague_onset-rand-1', /salt deposit/], // #594: no salt near
-      ['rr2s-village-famine-rand-29', /sacred grove/], // #845: no grove near (re-keyed by identity, R2-CODE-A-9: after the line's merge rr2s-city-famine-rand-1 holds an ancient grove, so the row is true there; this famine birth draws the row with none near)
-      ['rww-thorp-plague_onset-1', /mill rights/], // ww-890: no mill of its own
-      ['rww-hamlet-mass_migration-1', /riverside mill settlement/], // ww-915: no mill of its own
-    ], ([seed, gone]) => {
+      ['rr2s-town-under_siege-rand-1', /the local soil produces something/, 'grew as an agricultural market center'], // #488: no crop of its own
+      ['rr2s-town-plague_onset-rand-1', /salt deposit/, 'was founded to exploit rich mineral deposits'], // #594: no salt near
+      ['rr2s-village-famine-rand-29', /sacred grove/, 'grew from a logging camp'], // #845: no grove near (re-keyed by identity, R2-CODE-A-9: after the line's merge rr2s-city-famine-rand-1 holds an ancient grove, so the row is true there; this famine birth draws the row with none near)
+      ['rww-thorp-plague_onset-1', /mill rights/, 'started as a seasonal camp beside a dependable river fishery'], // ww-890: no mill of its own
+      ['rww-hamlet-mass_migration-1', /riverside mill settlement/, 'started as a seasonal camp beside a dependable river fishery'], // ww-915: no mill of its own
+    ], ([seed, gone, prints]) => {
       const s = born(seed);
+      expect(s.history.founding.reason, `${seed}: the row in its place prints`).toContain(prints);
+      // anchored: the line above shows this same Origin row is live and prints its admitted row
       expect(s.history.founding.reason, `${seed}: the false Origin row is gone`).not.toMatch(gone);
       const test = FOUNDING_REASON_ADMITS[s.history.founding.reason];
       expect(!test || test(stateOf(s)), `${seed}: the row in its place is admitted`).toBe(true);
@@ -75,14 +77,18 @@ describe('the founding rows read the record', () => {
 
   it('A3: guard town — the row does not print (every row)', () => {
     expectNoSeedFailures(collectSeedFailures([
-      // guard towns: the record makes the row false, so it does not print
-      ['r2r-thorp-59', /coastal trading port/], // a river route on the coast: not a port by its route
-      ['r2r-hamlet-4', /maritime hub/], // a port hamlet: no hub
-      ['r2r-thorp-8', /agricultural market center/], // a thorp with no market
-      ['r2r-thorp-29', /logging operation/], // sacred wood sold, no timber near
-      ['r2r-hamlet-6', /riverside mill settlement/], // no mill of its own
-    ], ([seed, gone]) => {
-      expect(String(born(seed).history.founding.reason), `${seed}: the row does not print`).not.toMatch(gone);
+      // guard towns: the record makes the row false, so it does not print (third: what the Origin row prints instead; null: it is silent)
+      ['r2r-thorp-59', /coastal trading port/, 'started as a seasonal camp for deep-water fishers'], // a river route on the coast: not a port by its route
+      ['r2r-hamlet-4', /maritime hub/, 'was established to exploit the natural harbour'], // a port hamlet: no hub
+      ['r2r-thorp-8', /agricultural market center/, null], // a thorp with no market
+      ['r2r-thorp-29', /logging operation/, 'grew along a major overland trade route'], // sacred wood sold, no timber near
+      ['r2r-hamlet-6', /riverside mill settlement/, 'developed around an important river ford'], // no mill of its own
+    ], ([seed, gone, prints]) => {
+      const reason = born(seed).history.founding.reason;
+      if (prints === null) expect(reason, `${seed}: the Origin row is silent`).toBeNull();
+      else expect(String(reason), `${seed}: the row in its place prints`).toContain(prints);
+      // anchored: the line above pins what this same Origin row really prints (a phrase of it, or its exact silence)
+      expect(String(reason), `${seed}: the row does not print`).not.toMatch(gone);
     }), 'A3: guard town — the row does not print');
   });
 

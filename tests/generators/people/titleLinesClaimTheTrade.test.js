@@ -8,6 +8,7 @@
  * RED AT THE BASE (700ba76cf): every refused pair; KEEP pairs green before and after.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
+import { expectAbsentWithAnchor } from '../../helpers/anchoredNegatives.js';
 import { generateSettlementPipeline } from '../../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../../src/store/configSlice.js';
@@ -24,7 +25,7 @@ function born(seed) {
 /** [census town (where the record denies the input, or the reader read it), the line that must NOT print, the line its card prints instead] */
 const ROWS = /** @type {Array<[string, string, string]>} */ ([
   ['r2s-famine-city-1', 'Talks while working; shows how a pot is thrown and lets visitors try.', 'Talks while working when there is clay to be had; shows how a pot is thrown and lets visitors try.'],
-  ['r2s-famine-town-1', 'Has been digging clay from land that belongs to someone else and paying nothing for it', 'Has dug clay from land that belongs to someone else, whenever there was clay to be had, and paid nothing for it'],
+  ['r2s-famine-town-1', 'Has been digging clay from land that belongs to someone else and paying nothing for it', 'Has been selling pots bought in from another workshop as their own throwing, at their own prices'],
   ['r2s-occupied-town-0', 'Sells by the thousand and the cart; quick to quote and slow to deliver.', 'Sells by the thousand and the cart when there is clay to be had; quick to quote and slow to deliver.'],
   ['r2s-famine-city-3', 'Has been taking children to tread the clay for a few coppers a day, and one of them was hurt badly', 'Has taken children to tread the clay for a few coppers a day, when there was clay to tread, and one of them was hurt badly'],
   ['r2s-occupied-metropolis-1', 'Sells charcoal by the sack to anyone who can carry it away.', 'Sells charcoal by the sack, when there is timber to be had, to anyone who can carry it away.'],
@@ -52,7 +53,7 @@ beforeAll(async () => {
 describe('TAIL-POWERS-B-2 batch 5 · a title line claims the trade, not an input the record may deny', () => {
   for (const [seed, refused, instead] of ROWS) {
     it(`${seed}: not "${refused.slice(0, 48)}…"; the same card prints the hedge`, () => {
-      expect(cards[seed]).not.toContain(refused);
+      expectAbsentWithAnchor(cards[seed], refused, instead, `${seed}: the refused line; the same card prints the hedge`);
       expect(cards[seed]).toContain(instead);
     });
   }

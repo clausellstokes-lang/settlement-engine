@@ -924,7 +924,7 @@ function healerLabel(name) {
 }
 
 // ─── TAIL-DEFECON-D (D2): THE STORES' SPAN HAS ONE WRITER (at the end of the file, so no line above moves) ───
-import { storesSpanWords } from '../summary/tonightSheet.js';
+import { storesSpanWords } from '../summary/storesSpanWords.js'; // TAIL-TIES-6 (T23): the pure leaf, so this file reaches no tonight sheet
 
 // ─── TAIL-DEFECON-D: THE ONE-RING NOTE NEEDS A RING THE RECORD NAMES (at the end of the file) ───
 /**

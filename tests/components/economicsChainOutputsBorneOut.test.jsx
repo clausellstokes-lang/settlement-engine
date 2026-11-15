@@ -24,7 +24,7 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { liveInstitutionNames } from '../../src/domain/facts/institutions.js';
-import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { expectAbsentWithAnchor, expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 import { chainOutputsShown, exportsAsPrinted, localProductionAsPrinted } from '../../src/domain/display/tradeListDisplay.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
@@ -101,7 +101,7 @@ describe('a chain card prints only the outputs its houses bear out (item 7)', ()
       const town = /** @type {any} */ (birthAny(seed));
       expect(chainOf(town, chainId)?.outputs, `${seed}: anchored, the record's ${chainId} outputs`).toContain(good);
       const shown = chainOutputsShown(chainOf(town, chainId), town);
-      if (OUTPUT_SILENT.includes(row)) expect(shown, `${seed}: ${good} with no house that makes it`).not.toContain(good);
+      if (OUTPUT_SILENT.includes(row)) expectPresentThenAbsent(chainOf(town, chainId)?.outputs, shown, good, `${seed}: ${good} with no house that makes it`);
       else expect(shown, `${seed}: ${good} beside the house that makes it`).toContain(good);
     }), 'a card names a good no house of the town makes');
   }, 120000);
@@ -128,22 +128,24 @@ describe('a chain card prints only the outputs its houses bear out (item 7)', ()
       outputs: ['Performances', 'Music and song', 'Musical education', 'Magical entertainment'] };
     /** @param {string[]} houses @param {object} [config] */
     const town = (houses, config = { priorityMagic: 50 }) => ({ name: 'Testford', config, institutions: houses.map((name) => ({ name })), economicState: { activeChains: [bards] } });
-    expect(chainOutputsShown(bards, town(['Bardic college'])), 'the bards\' college').toContain('Magical entertainment');
-    expect(chainOutputsShown(bards, town(['Multiple theaters', 'Traveling performers'])), 'a theatre makes no magic').not.toContain('Magical entertainment');
-    expect(chainOutputsShown(bards, town(['Bardic college'], { priorityMagic: 50, magicExists: false })), 'no magic works here').not.toContain('Magical entertainment');
+    const college = chainOutputsShown(bards, town(['Bardic college']));
+    expect(college, 'the bards\' college').toContain('Magical entertainment');
+    expectPresentThenAbsent(college, chainOutputsShown(bards, town(['Multiple theaters', 'Traveling performers'])), 'Magical entertainment', 'a theatre makes no magic');
+    expectPresentThenAbsent(college, chainOutputsShown(bards, town(['Bardic college'], { priorityMagic: 50, magicExists: false })), 'Magical entertainment', 'no magic works here');
     // …and on the births: a siege, a famine and an occupation among them, the smallest and the largest towns that reach each
-    for (const seed of ['r2s-infiltrated-town-1', 'r2s-under_siege-town-0', 'rr3-city-occupied-rand-4', 'r2r-metropolis-8']) {
+    expectNoSeedFailures(collectSeedFailures(['r2s-infiltrated-town-1', 'r2s-under_siege-town-0', 'rr3-city-occupied-rand-4', 'r2r-metropolis-8'], (seed) => {
       const t = /** @type {any} */ (birthAny(seed));
       expect(liveInstitutionNames(t).some((n) => /merchant guilds|luxury goods quarter|annual fair/i.test(n)), `${seed}: anchored, a carrier stands`).toBe(true);
       expect(chainOutputsShown(chainOf(t, 'spices_dyes'), t), `${seed}: the spices the merchants carry`).toContain('Rare spices and exotic dyes');
-      expect(localProductionAsPrinted(t), `${seed}: not made here`).not.toContain('Rare spices and exotic dyes');
+      // the anchor: the iron this town's own chain makes, printed by the same reader on the same list
+      expectAbsentWithAnchor(localProductionAsPrinted(t), 'Rare spices and exotic dyes', 'iron', `${seed}: not made here`);
       for (const x of exportsAsPrinted(t).filter((e) => e.startsWith('Rare spices'))) expect(x, `${seed}: carried through`).toMatch(/\(transit\)/);
-    }
-    for (const [seed, kept] of [['r2s-famine-city-0', true], ['r2s-occupied-metropolis-0', true], ['r2r-town-0', false]]) {
+    }), 'the spices are carried, never made here');
+    expectNoSeedFailures(collectSeedFailures(/** @type {Array<[string, boolean]>} */ ([['r2s-famine-city-0', true], ['r2s-occupied-metropolis-0', true], ['r2r-town-0', false]]), ([seed, kept]) => {
       const t = /** @type {any} */ (birthAny(seed));
       expect(liveInstitutionNames(t).some((n) => /bardic college/i.test(n)), `${seed}: anchored`).toBe(kept);
       expect(chainOutputsShown(chainOf(t, 'performance'), t).includes('Magical entertainment'), `${seed}: the bards' magic`).toBe(kept);
-    }
+    }), 'the bards\' magic where a bardic college stands');
   }, 180000);
 
   test('a house of worship reached only by an "Access to" row offers nothing here (rww-hamlet-calm-1); a church that stands keeps its outputs (rww-metropolis-calm-1)', () => {

@@ -96,6 +96,7 @@ describe('the Imports line prints what trade brings; a need prints as a need (it
       expect(importsAsPrinted(town).needed, `${seed}: anchored, the record's need`).toContain('gold/silver ore');
       const { needs } = tradeColumn(town);
       expect(needs, `${seed}: the plain name`).toMatch(/\bgold and silver ore\b/);
+      // anchored: the line above finds the plain name on this same needs line
       expect(needs, `${seed}: no slash label`).not.toMatch(/\//);
     }), 'a slash label on the needs line');
     // the Resources card: the smallest and the largest towns that print the precious-metals card (an occupied hamlet among them)
@@ -105,6 +106,7 @@ describe('the Imports line prints what trade brings; a need prints as a need (it
       const t = container.textContent || ''; unmount();
       expect(t, `${seed}: anchored, the card's chain`).toMatch(/Gold and silver ore→gold and silver bars→/);
       // (the tab's prose fills, "No one here works the gold/silver ore …", are the next row's: economyStateProse / validationOnPage)
+      // anchored: two lines above, the card's chain is found in this same Resources text
       expect(t, `${seed}: no slash label on the card`).not.toMatch(/Gold\/silver ore→|→gold\/silver bars/i);
     }), 'a slash label on the Resources card');
   }, 240000);

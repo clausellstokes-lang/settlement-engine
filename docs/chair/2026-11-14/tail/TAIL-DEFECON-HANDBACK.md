@@ -373,6 +373,91 @@ made list, TAIL-DEFECON-C's), `resourceGenerator.js` (depletion matching ~457, g
 `domain/display/tradeListDisplay.js`, `domain/inferSupplyChains.js`, `domain/display/validationOnPage.js`,
 `domain/worldPulse/resourceTaxonomy.js`, `domain/edit/pools.js`.
 
+## TAIL-DEFECON-5 · five record cures (rulings R1 to R5), each its own commit, each a DECLARED MOVE
+
+Seat TAIL-DEFECON-5, from this branch's tip 81100e11e; FIRST ACT: the joined line merged at **3e482b329** (694621784, a
+merge commit of its own, clean; pushed). The patches were measured at the joined line's c8116d79 (RECORD-MEASURE-3).
+BEFORE: births-only at 694621784 (`/home/user/inst5/b0`, outside every tree); the page census at the same tree
+(`/home/user/inst5/cbefore`). Each cure: births-only in the tree, `fielddiff.mjs` against the commit before.
+
+THE RULINGS (the chair's, 2026-11-15 04:40 UTC, on the third measure's report; each vetoable by the owner):
+- (R3) ONE FOOD LEDGER (c3a; `foodBalance.js`): the viability's view reads the writer's split (its imports, its magic) and
+  its shortfall is the tab's remainder. Expected: `economicViability.metrics.foodBalance` in 226 towns and its readers;
+  `viable` and the stores do not move (if either moves, stop).
+- (R2) ONE SHADOW FIGURE (c2a; `economicState.js`, `incomeLineSiblings.js`): the criminal income row held at the capture in
+  both normalisers. Expected: `incomeSources` 229, `economicComplexity` 35; prosperity does not move. NOT c2b.
+- (R1) THE ECONOMIC RATING'S CAP (c1b; `defenseGenerator.js :: computeDefenseScores`, LENT): where the printed prosperity
+  is Poor or below, the economic score is at most 64. Expected: the score 55, the guard line 30, the conditions 17; the
+  readiness does not move. The 30 guard lines and the 17 conditions read where they print.
+- (R5) THE ENTREPÔT FLAG (c6a; `economicState.js`): the flag only where an entrepôt chain stands, written after the
+  chains: 41 thorps, hamlets and villages; one field.
+- (R4) THE MAGIC SHARE'S ROUNDING (c4a; `foodGenerator.js`, LENT): the share of the pounds published, rounded as the
+  offset is: `foodRecord.magicPct` in 22 towns. NOT c4b.
+- (U1) the account's weekly usage warning: every cure pushed the moment it holds, this file's WHAT IS LEFT in the same push.
+
+| cure | commit | field diff (births, 720) | the report's? |
+|---|---|---|---|
+| R3 c3a | 7ce6db273 (+ e1577f2cd: under the module ceiling, byte-identical) | 226 towns, 7 families: `economicViability.metrics.foodBalance` 226, `.summary` 23, `.issues` 22, `.dependencies` 15, `.plotHooks` 10, `history.currentTensions` 9, `history.siegeNarrative` 1; `viable` and the stores unmoved | YES, family for family |
+| R2 c2a | 9cc8c6826 | 229 towns, 2 families: `economicState.incomeSources` 229, `economicState.economicComplexity` 35; prosperity unmoved | YES |
+
+### R3 · one food ledger (c3a, and one rule more)
+
+c3a as measured, and ONE RULE MORE the tests it did not run asked for: the view's per cent is the share its pounds give
+and **never 0 beside a pound short** (the tab's own floor, `foodRowShown.js`; within V-FOOD-PCT's one step). Without it
+c3a published "16 lb beside 0% of 3216" (STOP-1's view-sign law, red) and the record's summary read "△ VIABLE WITH
+PROVISIONING STRAIN: 0% of daily food need remains uncovered" in 4 towns. With it the field diff is the report's to the
+family (the rule moves only values inside `metrics.foodBalance`). After: the view's pounds equal the tab's remainder in
+720 of 720 (221 differed), its import the writer's (211 differed), its per cent the tab's in 720 (50 differed).
+
+THE INHERITORS, read: "Settlement cannot cover ~65 lbs …" for ~66 (r2s-under_siege-hamlet-2; the tab's "Short: 65");
+"~1879" for ~1881 (r2s-under_siege-town-0); "The crisis is cutting into the food supply now." in place of "There are
+more mouths to feed, but the shortfall is still made up." (r2r-town-36: the tab prints "Short: 1 lbs/day", 1%): each true
+by the tab. NAMED, not this group's file: `src/domain/viabilitySummary.js:50` re-derives the summary's per cent from the
+pounds with no floor, so 4 towns' record summary reads "0% of daily food need remains uncovered" (r2r-town-36,
+r2s-occupied-town-2, r2s-monster_pressure-town-1, r2s-slave_revolt-village-0): it prints on no surface of the 720 (the
+summary reaches no dump); the leaf to read is the view's own `deficitPercent`. Also named: the writer's own rounding (its
+`deficitPct` against its pounds, 17 small towns, e.g. r2r-thorp-32 13% beside a 1 lb remainder of 16), the report's
+"smaller fault inside the writer", `foodGenerator.js`.
+
+RE-KEYED BY IDENTITY (the anchors were the fault R3 removes): `economicsFoodBalanceRowOneHome.test.jsx` (the two homes
+read one import), `economicsFoodTradeUnderSiege.test.jsx` (the metric reads the record: nothing comes in under the
+siege), `foodModelSingleWriter.test.js` CONTRADICTION KILLER (the view's shortfall is the tab row's, pound for pound;
+it was keyed to the writer's per cent, which the writer lets read 0 beside a few pounds), `foodMagicChannelPrint.test.js`
+(the two CONTROL fixtures' writer publishes its own gap and split, as the writer does). Guard:
+`tests/generators/tailDefecon5RecordCures.test.js` (R3: 4 GONE red at 694621784, 2 KEEP green before and after).
+GATES: eslint on the touched files 0; the walker identical to the base (fresh 145 · stale 3 · first-register stale 2);
+the grid identical (the base's 2 falls, r2r-city-0 P7a, r2s-insurgency-metropolis-0 P7a); the 52 test files naming the
+view: the base's 9 reds CARRIED (famineStoresOneRounding, worldFactRederive, foodDiversity (2), tailCrisisIronHooks,
+urbanBandInstitutions G3 and G5, labelJoins, the golden master), none new.
+
+### R3's ceiling (e1577f2cd)
+
+R3 left `foodBalance.js` at 915 lines: `economicStructure.test.js` (every economy/ module under 900) red, missed by R3's
+test list (it names no food file); found running R2's. NO CEILING IS RAISED: R3's arm takes every record that publishes
+the split, so the old proportional arm (which needed the same two fields) was dead; it and its comment went, and R3's
+comments were cut: 870 lines. Births-only on the 720: 0 towns moved against R3.
+
+### R2 · one shadow figure (c2a, in one home)
+
+c2a's rule, written ONCE: `incomeLineSiblings.js :: shareIncomeRows(rows, held)` (a criminal row held at `held`, the lawful
+rows sharing the rest, the residue to the largest lawful row; with no criminal row the old normalisation), called by
+both normalisers (`economicState.js` stage 3, held at the capture it was pushed with; `keepRowsThePageBearsOut`, held at
+the share stage 3 gave it). c2a as patched put `economicState.js` at 909 lines (over the ceiling); in one home it is 885.
+Births-only: the record IDENTICAL to c2a as patched (0 towns against the patch's tree), 229 / 35 against R3. After: the
+criminal row equals the capture in 236 of 236 (8 before); every town's shares sum to 100; no row at 0.
+
+THE INHERITORS, read: (a) the income rows' ORDER (161 towns: the list is sorted by share; no row's text moves: the set of
+"source :: line" is identical in all 720). (b) `economicComplexity` in 35 (the ladder's own cut, a row at 20% or more
+caps the count at 8): r2r-city-17 "Highly diversified — multiple major revenue streams" for "Diversified …" (15 rows,
+none at 20% now: Market Taxes 25 → 19, the syndicate 9 → 18, its capture); r2r-city-19 "Diversified — broad institutional
+economic base" for "Highly diversified …" (the smuggling row at its capture, 23%, now leads; 13 rows): each true by the
+ladder. The page's inheritors (the income mix's leader prose) are read in the census after all five.
+
+Guard: `tailDefecon5RecordCures.test.js` (R2: 4 GONE red at e1577f2cd, 2 KEEP green before and after). GATES: eslint 0;
+the walker and the grid identical to the base; the 62 test files naming the two files or the income rows: the base's 23
+reds CARRIED (crisisStoppedRows (2), coherenceAgreeCures (2), generationForkCensus (4), incomeRowsBorneOut, labelJoins,
+observedShapeReaders.walker (6), proseWiringCensus.walker (5), the golden master, semanticFixtures), none new.
+
 ## The veto list (every new or changed line, with towns it was read in)
 
 Batch 4 (TAIL-DEFECON-4; towns from the before census, where the line now prints: the smallest and the largest, a crisis among them):
@@ -472,6 +557,82 @@ Batch 1:
   Pilgrim Trade income row; NAMED for its group, with the chair's ruling on #15707.
 
 - The page-census grid's register: two falls (r2r-city-0 P7a, r2s-insurgency-metropolis-0 P7a) — stale low, NAMED, not re-taken (re-derived at the close).
+
+## TAIL-DEFECON-6 · the four red files of the food and the stores, classed (2026-11-15)
+
+Seat TAIL-DEFECON-6, from this branch's tip 887ff8eec. FIRST ACT: the joined line merged at **76a735ad** (it holds e81bf16f3):
+139f5d2b, a merge commit of its own, clean. Work tree: a detached scratch worktree with its own `npm ci`, pushed by explicit
+refspec. Each red run ALONE at 139f5d2b first: **7 reds** (famineStoresOneRounding 1, storesSpanFigure 1, r3c10FoodLinesTrue
+3, editWorldFactResources 2). f663a2699 is NOT green for any of the four (all red there too), so each bisect starts from the
+file's own last green point on the joined line's first parent, then inside the lane its merge brought.
+
+| red | turned at (first parent → in the lane) | class | after |
+|---|---|---|---|
+| famineStoresOneRounding (1) | 33b12cbe (JOIN-1 · 9, coherence-upkeep) → **05ec9b60** (COHERENCE-UPKEEP, ruling 6: the full granary keeps `boughtShare('stores', keepOf(prosperity))` of its months; declared 225 of 360, all down) | (ii) RE-KEYED: soak1k-2452 now 5.3 (open, prints five); the only other famine granary at 5.5–5.9 in soak1k-952..3952 is **soak1k-1445** (metropolis, 5.9, held) | 1 failed → 3 passed (7506b770) |
+| storesSpanFigure (1) | 33b12cbe → **05ec9b60** (the same move) | (ii) RE-KEYED: rpf-thorp-succession_void-13 now 1.2; the nearest same-shape thorp (no granary, 1.5) is **-20** | 1 failed → 3 passed (0a6493e0) |
+| r3c10FoodLinesTrue (d) (1) | 3e482b32 (JOIN-8 · 19, tail-defecon-c) → **680d16b5** (the catalogue's D34 (a): the hot springs give no herbs; `resourceAnalysis.gaps` 16 of 720) | (ii) RE-KEYED: rr3-town-famine-isolated-1 holds no partial gap now; nearest same shape **-2** (famine town, an established apothecary beside the partial herbs chain, Alchemist shop missing) | 3 failed → 2 failed (4d0b097d) |
+| r3c10FoodLinesTrue (a) (2) | red since the file's birth merge c2c12792: **825bcf24** (W2-FIX-DATA-HISTORY item B, `src/data/cultureProfiles.js`, first parent 8f222ff8, a declared data move) reworded celtic's "Herding and mixed farming …" to "Herds and field grain set a strongly seasonal food calendar." (stands only where herds AND grain feed the place) | (iii) NAMED: not the economy generators' file; the arm reads the culture by `/\bherding\b/` and its herd towns hold no grain | LEFT, red (the chair's) |
+| editWorldFactResources A2, A6 (2) | green at its re-capture 4182e976; 77e480ac (JOIN-1 · 1, r3-code-c) → **9a3239ae** (R3-CODE-C-2 #457 #1163, `resourceGenerator.js` export rows; declared 54 of 720, `resourceAnalysis` only) | NAMED, NOT RE-CAPTURED: the six PRE_CHANGE digests are whole-world hashes and row 21's `derived` is the golden master's own control row; their re-capture (the file's plant ritual) re-takes a golden, which this seat's brief forbids. Every later generator move (05ec9b60, D34, R3, R2 …) moves them again | LEFT, red (the owner's door / the chair's ruling) |
+
+OWED BY TAIL-DEFECON-5, done (82840f4a): `tailDefecon5RecordCures.test.js`'s R3 rows' bare `.not.toBe(old)` →
+`expectAbsentWithAnchor([viewShort], old, short)` (the same assertion, anchored on the tab's figure); 12 passed before and after.
+
+PROOF (each red alone before/after, above). No source file touched; no assertion changed in a re-key (the member only, the
+move named in the commit and in a comment beside the member). Files naming a touched test (`r3c9ReaderLinesTrue`,
+`houseInputReaches`): 1 failed | 11 passed before and after, the same red. eslint on the four touched files 0; the full type
+ratchet exit 0; the negative-anchor and seed-loop walkers: the base's 4 reds before and after, none naming a touched file;
+the twelve-birth grid (`page-census.mjs --grid`) exit 0, 2 falls (r2r-city-0 P7a, r2s-insurgency-metropolis-0 P7a) at
+139f5d2b and after: no rise. No record moved (tests only): no census owed.
+
+LEFT: r3c10 (a) and editWorldFactResources A2/A6, named above. Not built (ruling U3): R6, R1, R5, R4.
+
+## What is left (TAIL-DEFECON-5, HANDED BACK by time after R2, 2026-11-15 ~05:50 UTC)
+
+Pushed: the merge 694621784; R3 7ce6db273 and its ceiling e1577f2cd; R2 9cc8c6826 (its first push was refused by the type
+ratchet, `isCriminal` on two rows' JSDoc types: fixed in the unpushed commit, behaviour unchanged). The meter read 0;
+judged by time (about seventy minutes): no third cure could carry its tests, gates and push inside it.
+
+LEFT, in this order (the rulings above stand, and R6 below: c2c goes after R2, before R1; each patch applies clean at 9cc8c6826, `git apply --check`):
+1. (R1) c1b, `defenseGenerator.js :: computeDefenseScores` (LENT). Expected 55 / 30 / 17, readiness unmoved; READ the 30
+   guard lines and the 17 conditions where they print. Its comment to be put in the file's form (the patch's names the
+   measure). The reds to expect: the test files naming `scores.economic` / `defenseScoreBands` (not yet run).
+2. (R5) c6a, `economicState.js` (one line, no line added: the module is at 885 of the 900 ceiling). Expected 41, one field.
+3. (R4) c4a, `foodGenerator.js` (LENT). Expected `foodRecord.magicPct` 22. Check `foodGenerator.js` against any size pin.
+4. THE CENSUS AFTER all five (`census3.sh` at the tip, `inventory.py`, `inventory_diff.py before.json after.json`), read
+   through the inventory diff: what each move takes off the page. THE BEFORE is taken: `/home/user/inst5/cbefore` and
+   `/home/user/inst5/before.json` (29,945 tab sentences at 694621784; the container's: re-made by `census3.sh` at
+   694621784 if lost). The births BEFORE: `/home/user/inst5/b0` (694621784), after R3 `b3`, after R2 `b2s`.
+5. The veto list: the five moves with their counts (R3 226 towns, R2 229; the rest when made). No sentence was written by
+   R3 or R2: their moved lines are figures in existing lines (listed in their sections above).
+
+THE CHAIR'S THREE LATER MESSAGES (queued 04:40-05:06, read by this seat only after its hand-back; the next seat's):
+- (R6, 04:44 UTC; vetoable by the owner) A SIXTH CURE, after R2 and with it in the order: THE CAPTURE WITH NOTHING BEHIND
+  IT (c2c, on lane/record-measure-3-2026-11-15 at 0e7f7234, its row-2 section): where NO criminal house stands and the
+  capture is 10 or less, the record holds a capture of nothing (169 towns hold a shadow economy with no house, chain or
+  income behind it). Expected: `blackMarketCapture` 232 towns, `economicDragDesc` 104, NOTHING ELSE (else stop and say
+  it). Its own commit, a declared move; its tests run here, every inheritor read (the capture's tier readers are listed in
+  the report). The measuring seat named no pin for any patch: the tests are the builder's for all six.
+- (U2, 04:49) four red files touching this group's files, each to be classed (a regression cured; a pin a declared move
+  explains, re-keyed by identity; or one line here with the file and the commit that moved it, `git log -S`). MEASURED
+  ALONE by this seat at 694621784 and at 7849e2c32: IDENTICAL, 7 reds (editWorldFactResources 2, famineStoresOneRounding 1,
+  r3c10FoodLinesTrue 3, storesSpanFigure 1): neither R3 nor R2 moves them; NOT YET CLASSED (no `git log -S` taken).
+- (05:06) every NEW test: negatives anchored through `tests/helpers/anchoredNegatives.js`, seed loops through the totality
+  helper, no literal state-prose sentence as an anchor (`tests/helpers/drawnProse.js`); do not edit
+  `scripts/mutation-coverage-manifest.json`. OWED: `tailDefecon5RecordCures.test.js` was written before this was read:
+  its R3 GONE rows carry a bare `.not.toBe(old)` (paired with a positive `toEqual`, but not through the helper); bring it
+  to the helpers with the next cure's rows.
+
+NAMED, not this group's files (from R3): `src/domain/viabilitySummary.js:50` (its own per cent, no floor: 4 towns' record
+summary "0% … remains uncovered"; on no surface); the writer's rounding in `foodGenerator.js` (17 small towns' `deficitPct`
+against its pounds). TESTS: the lesson of R3's ceiling: a cure's test list must include `tests/generators/economicStructure.test.js`
+(size pins name no file).
+
+THE INSTRUMENTS (this seat's): `git archive` CENSUS-3, READ-ALL, RECORD-MEASURE-1 (births-only.sh, fielddiff.mjs, load.cjs)
+and RECORD-MEASURE-3 (the patches) into `/home/user/inst5`; `CENSUS3_PROBES=<CENSUS-3> sh births-only.sh <tree> <out>`
+(~1 min); `node fielddiff.mjs <a>/corpus.ndjson.gz <b>/corpus.ndjson.gz 3`. Ad hoc checks in `/home/user/inst5/scripts`
+(movedtext.cjs: a field's strings that left and arrived, by town; pcttab.cjs: the view against the tab's row; inv.mjs:
+the food invariants), not committed. Work tree `/home/user/wt5` (local branch `tdc5`, pushed by explicit refspec to
+`lane/tail-defecon-2026-11-14`; the main checkout holds that branch name); the census base tree `/home/user/wt5base`.
 
 ## What is left (TAIL-DEFECON-4, after batch 4, 2026-11-15)
 

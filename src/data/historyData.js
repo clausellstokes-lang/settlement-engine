@@ -1310,7 +1310,7 @@ export const HISTORICAL_EVENTS_DATA = [
     ],
     plotHooks: [
       'The original loan documents contain a clause that was never disclosed publicly',
-      "A creditor's agent is in town conducting a quiet assessment before enforcement",
+      { text: "A creditor's agent is in town conducting a quiet assessment before enforcement", excludes: ['crisis: under_siege'] }, // TAIL-HISTORY-5 (the chair's Y17, 2026-11-15; the exports' read X9 03015): no agent comes in under a siege; the timeline's hook gives way draw-free, the tension's list drops it (1 of 71 towns)
       'The debt could be voided, if someone can prove it was obtained through fraud',
     ],
     // TAIL-HISTORY Y13 (the chair's ruling, 2026-11-15: Y5 widened to every type; READ-ALL's aftermath shape): the words where the timeline holds no event of this type (historyGenerator.js :: tensionByMemory): a live quarrel, present tense, no past event (VETOABLE wording, the owner's)
@@ -1911,6 +1911,41 @@ export const HISTORY_DESC_SIBLINGS = Object.freeze({
     Object.freeze({ text: "Emergency grain reserves mandated by ordinance since the shortage", needs: Object.freeze(['tier: ≥ village']), excludes: Object.freeze(['crisis: famine']) }),
     Object.freeze({ text: "Grain was put by against lean years after the shortage, and it has not been enough", needs: Object.freeze(['crisis: famine']) }),
     Object.freeze({ text: "Every household has put grain by against lean years since the shortage", twinOf: "Emergency grain reserves mandated by ordinance since the shortage", needs: Object.freeze(['tier: ≤ hamlet']), excludes: Object.freeze(['crisis: famine']) }),
+  ]),
+  // TAIL-HISTORY-5 batch 6 (the chair's Y17, 2026-11-15; the exports' read X9, the smaller lasting effects): batch 5's form.
+  // Price ceilings are a market's (no market: 26 of 51 printing towns); formal council seats, an oversight office, charters
+  // lodged with a court and a regency council are a town's (below a town: 7 of 29, 4 of 30, 5 of 25, 6 of 30). Measured on
+  // the census's 720 at d7921a40c by `factsOf` + `atomHolds`. Each takes a twin true where it is refused, on the same slot
+  // (draw-free: `generators/history/sizedLastingEffects.js`). VETOABLE wording (the owner's).
+  "Price ceilings on the affected goods still enforced in lean seasons": Object.freeze([
+    Object.freeze({ text: "Price ceilings on the affected goods still enforced in lean seasons", needs: Object.freeze(['market']) }),
+    Object.freeze({ text: "In lean seasons the affected goods are still shared out by agreement, not sold to whoever pays most", twinOf: "Price ceilings on the affected goods still enforced in lean seasons", excludes: Object.freeze(['market']) }),
+  ]),
+  "Council seats now formally split between the old guard and the young": Object.freeze([
+    Object.freeze({ text: "Council seats now formally split between the old guard and the young", needs: Object.freeze(['tier: ≥ town']) }),
+    Object.freeze({ text: "The old families and the young still quarrel over who speaks for the place", twinOf: "Council seats now formally split between the old guard and the young", needs: Object.freeze(['tier: ≤ village']) }),
+  ]),
+  "An oversight office was established to audit officials afterward": Object.freeze([
+    Object.freeze({ text: "An oversight office was established to audit officials afterward", needs: Object.freeze(['tier: ≥ town']) }),
+    Object.freeze({ text: "Since then, whoever handles the common purse has had to show the accounts to the heads of the families", twinOf: "An oversight office was established to audit officials afterward", needs: Object.freeze(['tier: ≤ village']) }),
+  ]),
+  "Rival charters over the land are both still lodged with the court": Object.freeze([
+    Object.freeze({ text: "Rival charters over the land are both still lodged with the court", needs: Object.freeze(['tier: ≥ town']) }),
+    Object.freeze({ text: "Rival claims to the land are both still pressed, and no one here has the standing to settle them", twinOf: "Rival charters over the land are both still lodged with the court", needs: Object.freeze(['tier: ≤ village']) }),
+  ]),
+  "A regency council formed in the interim never fully dissolved": Object.freeze([
+    Object.freeze({ text: "A regency council formed in the interim never fully dissolved", needs: Object.freeze(['tier: ≥ town']) }),
+    Object.freeze({ text: "Those who held the place in the interim have never quite stopped expecting to be consulted", twinOf: "A regency council formed in the interim never fully dissolved", needs: Object.freeze(['tier: ≤ village']) }),
+  ]),
+  // TAIL-HISTORY-5 (the chair's Y17 (1), 2026-11-15; the bar's readers at 5d1e3096b, HIGH): THE OCCUPATION'S PAST EVENT
+  // UNDER AN OCCUPATION IN FORCE. The timeline keeps an occupation the town lived through (`historyGenerator.js ::
+  // HISTORY_TEMPLATE_RECORD_DECLARATIONS`: the past event keeps its account), but the variant "When the occupiers left"
+  // says no occupier stands in the town now: under the occupied crisis it takes its twin, which speaks of the LAST
+  // occupiers, on the same slot (draw-free: `sizedHistoryText`). Measured on the census's 720 at d7921a40c: 4 of 107
+  // printing towns. VETOABLE wording (the owner's).
+  "When the occupiers left, they left behind a town of former collaborators and former resisters, none of it ever settled": Object.freeze([
+    Object.freeze({ text: "When the occupiers left, they left behind a town of former collaborators and former resisters, none of it ever settled", excludes: Object.freeze(['crisis: occupied']) }),
+    Object.freeze({ text: "When the last occupiers left, they left behind a town of former collaborators and former resisters, and none of it was settled before the new occupation came", twinOf: "When the occupiers left, they left behind a town of former collaborators and former resisters, none of it ever settled", needs: Object.freeze(['crisis: occupied']) }),
   ]),
 });
 

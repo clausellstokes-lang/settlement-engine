@@ -26,7 +26,10 @@ const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', mon
 /** seed -> [the hall's rung, the town's crime structure, the hall line's first words] at 0ea65f574 */
 const FALSE_TOWNS = {
   'r2r-thorp-8': ['none', 'Nobody at the head of'], // the reader's own: a diffuse presence, the smallest size the row reaches
-  'r2r-city-3': ['none', 'None of the head, the second and the third of'], // an organized syndicate, the none rung's second line
+  // TAIL-POWERS-B-5, RE-KEYED BY IDENTITY: was "an organized syndicate, the none rung's second line"; a DECLARED MOVE of the
+  // defence display (82e8fab6e W2-C-LEAVES-3, 0044e4f84 W2-C-LEAVES-11, which kept this very town as its rival-rings guard:
+  // "Multiple criminal factions", no criminal seat) reads its structure semi-organized, so the none rung prints its first line
+  'r2r-city-3': ['none', 'Nobody at the head of City-State Council'],
   'r2r-metropolis-52': ['adversarial', "Thieves' Guild works against"], // the largest size
   'r2r-town-31': ['equilibrium', 'Nobody at the head of Guild Council'], // the climate alone (TAIL-POWERS-B re-keyed by identity: "... and Guild Council has not set out to stamp ...")
 };

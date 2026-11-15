@@ -11,6 +11,7 @@ import { beforeAll, describe, expect, it } from 'vitest';
 import { generateSettlementPipeline } from '../../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../../src/store/configSlice.js';
+import { expectAbsentWithAnchor } from '../../helpers/anchoredNegatives.js';
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 /** the census's 720 shape @param {string} seed */
@@ -43,7 +44,7 @@ describe("TAIL-POWERS-4 · batch 2: the seat's own line; a church of weight clai
   for (const [seed, [read, was, now]] of Object.entries(CURED)) {
     it(`${seed}: reads "${now}", not "${was}"`, () => {
       const text = read(born(seed));
-      expect(text, seed).not.toContain(was);
+      expectAbsentWithAnchor(text, was, now, seed);
       expect(text, seed).toContain(now);
     }, 120_000);
   }

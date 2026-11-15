@@ -17,6 +17,7 @@ import { STRESS_ECONOMIC_EFFECTS } from '../../src/data/npcData.js';
 import { createTieProseDraw } from '../../src/generators/power/relationshipArchetypes.js';
 import { birthFactsOf } from '../../src/domain/facts/factsOf.js';
 import { sharesPower } from '../../src/domain/facts/sharedPower.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
@@ -55,16 +56,18 @@ describe('a line about a bloc needs the pair to share a power (s1)', () => {
   });
 
   it('B2: the collected towns print the line only for a pair that shares a power', () => {
-    for (const seed of ['r2r-village-31', 'rr3-village-under_siege-rand-4', 'rr3-village-under_siege+famine-rand-3', 'rr3-town-occupied-rand-0', 'rr3-thorp-infiltrated-rand-4', 'rr3-metropolis-calm-rand-0']) {
+    const failures = collectSeedFailures(['r2r-village-31', 'rr3-village-under_siege-rand-4', 'rr3-village-under_siege+famine-rand-3', 'rr3-town-occupied-rand-0', 'rr3-thorp-infiltrated-rand-4', 'rr3-metropolis-calm-rand-0'], (seed) => {
       expect(blocPrints(born(seed)).filter((p) => !p.share), seed).toEqual([]);
-    }
+    });
+    expectNoSeedFailures(failures, 'the collected towns print the bloc line only for a pair sharing a power');
   }, 120000);
 
   it('B3 (keep): the guard towns still print it, for a pair that shares a power', () => {
-    for (const seed of ['r2r-town-1', 'rr3-town-under_siege-port-0', 'rr3-hamlet-famine-port-0']) {
+    const failures = collectSeedFailures(['r2r-town-1', 'rr3-town-under_siege-port-0', 'rr3-hamlet-famine-port-0'], (seed) => {
       const prints = blocPrints(born(seed));
       expect(prints.length, seed).toBeGreaterThan(0);
       expect(prints.every((p) => p.share), seed).toBe(true);
-    }
+    });
+    expectNoSeedFailures(failures, 'the guard towns still print the bloc line, for a pair sharing a power');
   }, 120000);
 });

@@ -22,6 +22,7 @@ import { factsOf } from '../../src/domain/facts/factsOf.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 /** The history's facts as the generator builds them (`generateHistory :: hookFacts`): the crisis from the config. */
 const factsUnder = (/** @type {string[]} */ stressTypes) => factsOf({ institutions: [], config: { stressTypes }, tier: 'city', powerStructure: null, stress: stressTypes.map((type) => ({ type })) });
@@ -49,8 +50,9 @@ describe('W2-FIX-DATA-5 item 1: the occupation\'s legacy is no tension of an occ
 /** The readers' towns, in the app's own shape (the configuration panel: Random off, the ticked list). */
 const app = (/** @type {string} */ settType, /** @type {string[]} */ stresses) => birthConfig({ ...DEFAULT_CONFIG, settType, selectedStressesRandom: false, selectedStresses: stresses, _randomizePriorities: true });
 const TOWNS = [
-  { seed: 'rr2s-city-occupied-rand-1', settType: 'city', stresses: ['occupied'], row: '#1003' },
-  { seed: 'rw3-town-occupied-1', settType: 'town', stresses: ['occupied'], row: '#1036' },
+  // carried: a current tension the town does hold (read off its birth), the liveness anchor of its tension list
+  { seed: 'rr2s-city-occupied-rand-1', settType: 'city', stresses: ['occupied'], row: '#1003', carried: 'resource_scarcity' },
+  { seed: 'rw3-town-occupied-1', settType: 'town', stresses: ['occupied'], row: '#1036', carried: 'plague_years' },
 ];
 const FALSE_WORDS = ['occupation ended', 'previous occupation', 'former occupier officer', 'Former collaborators', 'Former resistance', 'Those who want it forgotten', 'old property seizures'];
 
@@ -61,7 +63,7 @@ describe('W2-FIX-DATA-5 item 1: the readers\' towns, re-born in the app\'s shape
       const s = generateSettlementPipeline(app(t.settType, t.stresses), null, { seed: t.seed, customContent: {} });
       expect((Array.isArray(s.stress) ? s.stress : [s.stress]).map((x) => x?.type)).toContain('occupied');
       const tensions = s.history.currentTensions || [];
-      expect(tensions.map((x) => x.type)).not.toContain('occupation_legacy');
+      expectAbsentWithAnchor(tensions.map((x) => x.type), 'occupation_legacy', t.carried, `${t.seed}: no occupation_legacy tension`);
       const words = JSON.stringify(tensions);
       expect(FALSE_WORDS.filter((w) => words.includes(w))).toEqual([]);
       expect(tensions.length, 'the town still carries a current tension').toBeGreaterThan(0);

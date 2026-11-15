@@ -13,6 +13,8 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { beforeAll, describe, expect, test } from 'vitest';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
@@ -60,35 +62,40 @@ beforeAll(async () => {
 describe('V5: the campaign is the table\'s campaign', () => {
   test('the Defense tab\'s caption and the vintage sentence say "your campaign goes on", never "the campaign advances"', () => {
     const tab = readFileSync(join(ROOT, 'src/components/new/tabs/DefenseTab.jsx'), 'utf8');
-    expect(tab).not.toMatch(/re-judged as the campaign advances/);
-    expect(tab).toMatch(/Disasters & Famine is re-judged as your campaign goes on/);
+    expectAbsentWithAnchor(tab, 're-judged as the campaign advances', 'Disasters & Famine is re-judged as your campaign goes on');
     expect(SYSTEMS_HEALTH_VINTAGE).toBe('As judged at the first survey · Food Security is re-judged as your campaign goes on.');
   });
 });
 
 describe('V6: the Legal Infrastructure row names the bench that stands', () => {
-  test.each(BENCH)('%s: "%s" does not print; "%s" does', (seed, gone, instead) => {
-    const row = legal(TOWN.get(seed));
-    expect(row?.status).not.toBe(gone);
-    expect(row?.status).toBe(instead);
+  test('<seed>: "<gone>" does not print; "<instead>" does (every BENCH row)', () => {
+    expectNoSeedFailures(collectSeedFailures(BENCH, ([seed, gone, instead]) => {
+      const row = legal(TOWN.get(seed));
+      expect(row?.status, `${seed}: "${gone}" does not print`).not.toBe(gone);
+      expect(row?.status, `${seed}: "${instead}" does`).toBe(instead);
+    }), 'V6: each bench row names the bench that stands, never the court');
   });
-  test.each(KEPT_STATUS)('%s keeps "%s" (a courthouse stands)', (seed, kept) => {
-    expect(legal(TOWN.get(seed))?.status).toBe(kept);
+  test('<seed> keeps "<kept>" (a courthouse stands) (every KEPT_STATUS row)', () => {
+    expectNoSeedFailures(collectSeedFailures(KEPT_STATUS, ([seed, kept]) => {
+      expect(legal(TOWN.get(seed))?.status, `${seed} keeps "${kept}" (a courthouse stands)`).toBe(kept);
+    }), 'V6: where a courthouse stands the court status still prints');
   });
   test('r2r-town-16: the council\'s service row says who hears the pleas', () => {
     const svc = services(TOWN.get('r2r-town-16'));
-    expect(svc).not.toMatch(/Hears civil pleas in the town court/);
-    expect(svc).toMatch(/Dispute adjudication: Hears the town's civil pleas at the council bench/);
+    expectAbsentWithAnchor(svc, 'Hears civil pleas in the town court', "Dispute adjudication: Hears the town's civil pleas at the council bench");
   });
 });
 
 describe('V7: the gates line only where nothing moves beneath the walls', () => {
-  test.each(GATES)('%s: "%s" does not print; "%s" does', (seed, gone, instead) => {
-    const g = String(TOWN.get(seed)?.economicState?.safetyProfile?.guardEffectivenessDesc ?? '');
-    expect(g).not.toContain(gone);
-    expect(g).toContain(instead);
+  test('<seed>: "<gone>" does not print; "<instead>" does (every GATES row)', () => {
+    expectNoSeedFailures(collectSeedFailures(GATES, ([seed, gone, instead]) => {
+      const g = String(TOWN.get(seed)?.economicState?.safetyProfile?.guardEffectivenessDesc ?? '');
+      expectAbsentWithAnchor(g, gone, instead, seed);
+    }), 'V7: where a house moves goods beneath the walls the gates line takes its twin');
   });
-  test.each(KEPT_GATES)('%s keeps "%s"', (seed, kept) => {
-    expect(String(TOWN.get(seed)?.economicState?.safetyProfile?.guardEffectivenessDesc ?? '')).toContain(kept);
+  test('<seed> keeps "<kept>" (every KEPT_GATES row)', () => {
+    expectNoSeedFailures(collectSeedFailures(KEPT_GATES, ([seed, kept]) => {
+      expect(String(TOWN.get(seed)?.economicState?.safetyProfile?.guardEffectivenessDesc ?? ''), `${seed} keeps "${kept}"`).toContain(kept);
+    }), 'V7: where nothing moves beneath the walls the gates line still prints');
   });
 });
