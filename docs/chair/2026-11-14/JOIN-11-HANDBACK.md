@@ -88,6 +88,7 @@ THE CHAIR'S RULINGS TO JOIN-11 (each vetoable by the owner):
 | 6 | lane/tail-close-heap-2026-11-15 | e798161fd (09:12; origin tip = the hash named) | 2d8a6632a | db4e41036 | none | 1 file outside docs/ (`scripts/check-writer-reach.mjs`); nothing run alone (the chair's word) |
 | 7 | lane/tail-close-reach-2026-11-15 | 76528d315 (09:16; origin tip = the hash named) | 061db1367 | bfd5d470c | none; no file both sides moved: its side whole | 11 files outside docs/ (no src/); run alone: writerReach 51/52 on the default heap (all ran), observedShapeReaders 44/47, observedShapeBaseline 59/59, Migration 26/26, Sentinel 35/35 |
 | 8 | lane/tail-record-2026-11-15 | 7ac689418 (09:24; origin tip = the hash named) | 2ff8ab7ee | 4e7c96d56 | none; no file both sides moved | 5 files outside docs/; declared-move commits: b8a82cf4f 7ac689418 (golden carried); run alone: corpusCureGuards 118/118, economicRatingCappedByProsperity 4/4, foodMagicShareOfPublishedPounds 2/2, presumedThings.walker 41/43 |
+| 9 | lane/tail-close-sweep-a-2026-11-15 | 2bd348aec (09:30; origin tip = the hash named) | ae6f0adc8 | 77ac5c46a | none; no file both sides moved: its side whole | 6 files outside docs/ (news and site-coherence baselines and their libs) + `docs/content/prose-shift-register.json`; run alone: siteCoherenceRatchet 9/9, newsHeadlineContract 8/8, newsVoiceContract 8/8, dossierStateProseProjection.contract 79/79 |
 
 ## 3. Every code resolution
 
@@ -324,7 +325,7 @@ JOIN-10's (by point):
 
 ## 5. Stops
 
-None so far.
+None: every point the chair named landed (1-9). One merge opened out of order (reach, before the heap word was read) was aborted uncommitted and landed later as point 7 (§3, point 6).
 
 ## 6. Hazards
 
@@ -345,4 +346,8 @@ A worktree at origin's tip (`git worktree add /home/user/j11wt -b join11 <tip>`,
 
 ## 8. WHAT IS LEFT
 
-Landed: points 1-8 (the table). NOT DONE, each only on the chair's word: tail-close-presumed final pass (its 2 ARM 1 reds); tail-close-doors final pass LAST OF ALL; tail-close-sweep-a; tail-close-sweep-b; tail-close-src at its last tip (after the layer cut); close-veto-list. For the close (not this seat's): every row of §4 by its door, once, on the final tree; the whole check once, by the close's seat.
+HANDED BACK on the chair's word after point 9 (the chair's 09:01 message: "THEN HAND BACK"). Landed: points 1-9 (the table), each at the hash the chair named (origin's tip equal to it at every merge), each pushed with the hook's three gates and this file current; the code tip is point 9's merge (77ac5c46a).
+1. DONE: points 1-9. No conflict at any point; no file both sides moved at any point (intersected over the merge bases). Files the chair named run alone at every point (§3).
+2. NOT DONE, for the next merge seat, each only on the chair's word: tail-close-sweep-b; tail-close-src at its last tip (after the layer cut: its READERS register; `defenceFactReaders` defenseDisplay.js 4); the presumed seat's final pass (ARM 1: magic.js, priorityHelpers.js, landingFixture.js rows) if it lands as a point; the reach seat's final pass (writerReach availableServices; observedShapeReaders 3) if it lands; tail-close-doors final pass LAST OF ALL (poolDominance, tuningRegister, engineBundleReplay stale at point 5); close-veto-list (one document).
+3. The instruments are in §7 (worktree `/home/user/j11wt`, branch `join11`; `/home/user/j11out`; probe worktree `/home/user/j11probe` detached at ae6f0adc8, node_modules a symlink to j11wt's). None survives a new container.
+4. For the close (not this seat's): every row of §4 by its door, once, on the final tree; the whole check once, by the close's seat.
