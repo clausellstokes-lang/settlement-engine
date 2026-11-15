@@ -45,6 +45,15 @@ The marks are four words: the X-50 law ("no sentence twice on one tab", `tests/c
 ### Gates
 eslint on the touched files 0; `typecheck:domain:strict` 0 (1113, ceiling 1113); `typecheck:ratchet` 0 (167, ceiling 167); the presumed-things door `--check` fresh 147 = the base's 147 (exit 1 at both: carried); the twelve-birth grid (`page-census.mjs --grid`) 2 falls = the base's 2 (r2r-city-0 P7a, r2s-insurgency-metropolis-0 P7a, carried). The 85 test files that name the touched files: 9 red titles at bcad1a358, the same 9 here (carried: layerBoundaries cycles, phoneChromeFloor census, entityIndex soak1k-9, servicesStructure line count, upkeepVocation RED-FIRST page, proseWiringCensus ×3, rawColorLiteral), and X-50 green.
 
+## Handed back at the budget (2026-11-15 00:00Z)
+
+The seat's count read 349,093 at its first waking after batch 1 (the line is 250,000): batch 1 is the whole of this seat's cure; no batch 2 was started. The S1 leaf stands on origin in batch 1's commit, 73291c8e2 (with its table), and its path and signature went to the chair (X9: the exports' seats call it).
+
+## What is left of the worklist (for the next seat of this group)
+- **Batch 2, owed, small, this group's files:** (a) `Weekly rite` (Access to parish church: the thorp's walk to another village's service) takes `travellers` beside `gatherings` in `crisisDependence.js`, so a siege marks it too (10 siege thorps; the house is already marked); (b) **11805** a siege twin of "Interment outside the gates…" in `SERVICE_DESC_SIBLINGS` (`excludes: crisis: under_siege` on the row, a declared move of `availableServices` in the siege towns that print it, 14 crisis of 120); (c) **B06916** "Every district has a temple." (Parish churches (10-30), 120 towns) reworded to the church it is; (d) **07253** Horseshoeing's "Essential for transport and cavalry" (34 towns; no cavalry in DEFENCE) reworded; (e) **04603** the fish market's "Bulk purchase by taverns, institutions, and inland traders" in a place with no tavern (`needs: institution: tavern` and a twin, the brewer's form of 2a522e633); (f) **05233** the village headman's "the lord's dues and the temple tithe" printing where the record shows no temple though the row declares `institution: temple` (5 towns): read the temple atom first.
+- **S3 (parked, the chair's word on a vocabulary atom):** listed below.
+- **The exports-only rows (the chair's X9):** `docs/chair/2026-11-14/read-all-3/WORKLIST3-SERVICES.md` / `.json` on the chair's lane (56 rows, 1 HIGH): NOT READ by this seat (it arrived at the budget line). Left whole; measure with `SURFACES=PDF,Journal python3 inventory.py <out> x.json`.
+
 ## Rows struck (by the record)
 - 10714 "Hiring hall" (7 towns): the service is the Alehouse's, and the Alehouse stands in all 7 (the reader read the service as a house).
 - 28960 "Wholesale trade" (119): the Fish market's (118) or the Fishing community's (1), standing in every one.
