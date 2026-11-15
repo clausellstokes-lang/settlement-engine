@@ -89,10 +89,28 @@ that tip (`744edb899`, JOIN-9 point 7) and at every point after it: "L14 ... r2r
 true towns: the line prints only where the stability gives the body no say", `expected 1 to be ≥ 3`. So the cure
 holds on the branch and is undone in the merge, by something already on the line before point 7. Not cured here.
 
-## Red 2, red 3, red 5
+## Red 2 — `foundingWorldBones`: RE-KEYED BY IDENTITY, the move named
 
-Not yet reached at this push (red 3 waits for the chair's word; red 5's test file is MOVING on
-`lane/tail-crisis-2026-11-14`, as the rule expects until `325de515` is on the line).
+The bisect: `f663a2699` is red too (15/20), so no good point lies on the joined line's own stretch. Earlier
+first-parent points: `c4a581007` red, `303396f74` (the test's last change) green; `git bisect --first-parent`
+gives `6aeaa4154` (STYLE-2-MERGE point 46, the merge of COHERENCE-POWERS); a bisect inside that branch gives
+**`1df17289f`** (COHERENCE-POWERS 2B, the fold: a power of the ruler's own kind that no house stands behind folds
+into the ruler; declared and measured in its message, Religious Authorities folded in 41 of 1,000 births). A DECLARED
+MOVE of the powers, not a regression. The chair had already ruled on this very row (2026-11-12, `ad60d76d8`, in
+`COHERENCE-POWERS-shift-record.DRAFT.json`): the promise is read by KIND ("a religious power stands, or rules"), a
+re-key by identity, never a loosening, the card and the fold untouched.
+
+The cure: the clause's predicate reads the backing kind (`powerSupport.js :: backingArchetypeOf`, the reader the
+fold itself uses) of every power on the roster, the governing row included, against the kind of "Religious
+Authorities". Before 2 passed / 1 failed (15/20); after 3/3. Not loosened: keyed to "Arcane Orders" instead the same
+clause reads 0/20. The card (`src/data/sampleSettlements.js`) is untouched. eslint clean; `typecheck:ratchet` OK
+(167 ≤ 167). `tests/lint/proseDrawnAnchors.walker.test.js` (it names the file) is red before and after with the
+identical set of six other files (not this one, not this seat's). What a town prints: unchanged (0 of the 720).
+
+## Red 3, red 5
+
+Not yet reached (red 3 waits for the chair's word; red 5's test file is MOVING on `lane/tail-crisis-2026-11-14`,
+as the rule expects until `325de515` is on the line).
 
 ## Proof at this push
 
