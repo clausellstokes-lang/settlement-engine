@@ -2457,3 +2457,52 @@ export function secretOwes(x, y) {
   const what = typeof x?.secret?.what === 'string' ? x.secret.what : '';
   return typeof y?.name === 'string' && y.name !== '' && what.startsWith(`Owes ${y.name} a debt`);
 }
+
+/**
+ * BAR3-PEOPLE-2, the chair's ruling P7a of 2026-11-15 (vetoable by the owner; C7806, C7914): NO CARD HOLDS A FLAW ITS OWN
+ * TEMPERAMENT DENIES, AND THE FLAW STANDS (the ties, goals and behaviour are drawn from it): THE TEMPERAMENT YIELDS. Each
+ * temperament (`NPC_PERSONALITY_TRAITS.positive`) names the flaws that are its plain contrary ("incorruptible" and
+ * "corrupt"; "honest" and "deceitful"); only contraries are listed, never a tension a person can hold ("loyal" and
+ * "ruthless" stand). Read by `npcGenerator.js :: generateReligionType`, which keeps every draw.
+ * @type {Readonly<Record<string, readonly string[]>>}
+ */
+export const FLAWS_DENIED_BY_TEMPERAMENT = Object.freeze({
+  honest: Object.freeze(['deceitful', 'mendacious', 'corrupt', 'hypocritical']),
+  incorruptible: Object.freeze(['corrupt']),
+  principled: Object.freeze(['corrupt', 'hypocritical']),
+  'fair-minded': Object.freeze(['corrupt']),
+  equitable: Object.freeze(['corrupt']),
+  'plain-dealing': Object.freeze(['deceitful', 'mendacious']),
+  candid: Object.freeze(['deceitful', 'mendacious']),
+  forthright: Object.freeze(['deceitful', 'mendacious']),
+  brave: Object.freeze(['cowardly']),
+  stalwart: Object.freeze(['cowardly']),
+  compassionate: Object.freeze(['cruel', 'callous', 'cold-blooded']),
+  merciful: Object.freeze(['cruel', 'vengeful', 'vindictive']),
+  'warm-hearted': Object.freeze(['cruel', 'callous', 'cold-blooded']),
+  magnanimous: Object.freeze(['petty', 'vindictive']),
+  generous: Object.freeze(['greedy']),
+  patient: Object.freeze(['wrathful', 'volatile']),
+  humble: Object.freeze(['arrogant', 'vain', 'imperious']),
+  diligent: Object.freeze(['lazy']),
+  conscientious: Object.freeze(['lazy']),
+  temperate: Object.freeze(['volatile', 'wrathful']),
+  'level-headed': Object.freeze(['volatile', 'reckless']),
+  unflappable: Object.freeze(['volatile']),
+  prudent: Object.freeze(['reckless']),
+  courteous: Object.freeze(['dismissive']),
+});
+/** @param {string | null} temperament @param {string | null} flaw @returns {boolean} */
+const deniesFlaw = (temperament, flaw) => !!(temperament && flaw && (FLAWS_DENIED_BY_TEMPERAMENT[temperament] || []).includes(flaw));
+/**
+ * The temperament a card holds beside its flaw: the drawn one where it admits the flaw, else the next temperament of its
+ * own pool (in pool order from the drawn one's index, wrapping) that does not deny the flaw. No draw.
+ * @param {string | null} dominant @param {string | null} flaw @returns {string | null}
+ */
+export function temperamentAdmitting(dominant, flaw) {
+  if (!deniesFlaw(dominant, flaw)) return dominant;
+  const pool = NPC_PERSONALITY_TRAITS.positive;
+  const at = pool.indexOf(/** @type {string} */ (dominant));
+  for (let k = 1; k < pool.length; k += 1) { const next = pool[(at + k) % pool.length]; if (!deniesFlaw(next, flaw)) return next; }
+  return dominant;
+}

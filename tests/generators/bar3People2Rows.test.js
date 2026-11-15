@@ -8,6 +8,9 @@
  *   A PERSONAL HONORIFIC THAT NAMES A SEX TAKES THE HOLDER'S FORM (P6, C33899, C35020): "Dairyman", "Goodman", "Tollman",
  *   "Brother Hospitaller", "Merchant Prince" are a man's; a woman takes "Dairy Farmer", "Goodwife", "Toll-Keeper",
  *   "Sister Hospitaller", "Merchant Princess". An office's title (Lord Mayor) is the office's and is untouched.
+ *   NO FLAW ITS OWN TEMPERAMENT DENIES, AND THE FLAW STANDS (P7, the chair's ruling P7a: C7806, C7914): a temperament that
+ *   is the plain contrary of the card's flaw takes the next of its own pool that admits the flaw
+ *   (`npcData.js :: temperamentAdmitting`); every draw stands, the flaw and all it feeds as drawn.
  * RED AT THE BASE (52f0a1684): every refused pair; KEEP pairs green before and after.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
@@ -17,6 +20,7 @@ import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { cardHonorificOf } from '../../src/domain/people/cardDoor.js';
 import { FACE_HONORIFICS } from '../../src/data/faceHonorifics.js';
+import { FLAWS_DENIED_BY_TEMPERAMENT, NPC_PERSONALITY_TRAITS } from '../../src/data/npcData.js';
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 /** the census's 720 shapes (r2r-, r2s-) @param {string} seed */
@@ -45,11 +49,22 @@ const HONORIFICS = /** @type {Array<[string, string, string, string]>} */ ([
   ['r2r-hamlet-2', 'Zipna Caan', 'Dairyman', 'Dairy Farmer'],
   ['r2r-city-3', 'Xenodoche Kataphloron', 'Merchant Prince', 'Merchant Princess'],
 ]);
+/** P7: [town, card, the flaw (it stands), the temperament refused, the temperament it holds] */
+const TEMPERAMENTS = /** @type {Array<[string, string, string, string, string]>} */ ([
+  ['r2r-town-25', 'Hemavati Naidu', 'corrupt', 'incorruptible', 'warm-hearted'],
+  ['r2r-town-12', 'Ola al-Amin', 'cruel', 'merciful', 'tenacious'],
+]);
+/** KEEP P7: [town, card, temperament, flaw] a pair that is no contrary stands as drawn */
+const KEEP_PAIRS = /** @type {Array<[string, string, string, string]>} */ ([
+  ['r2r-town-25', 'Lakshmana Chaudhary', 'scholarly', 'suspicious'],
+  ['r2r-town-12', 'Shahd al-Kindi', 'good-humoured', 'wrathful'],
+]);
+
 /** @type {Record<string, any>} */
 const towns = {};
 beforeAll(async () => {
   await loadGenerationLawPayloads();
-  const seeds = new Set([...ROWS.map((r) => r[0]), ...KEEP.map((r) => r[0]), ...HONORIFICS.map((r) => r[0])]);
+  const seeds = new Set([...ROWS.map((r) => r[0]), ...KEEP.map((r) => r[0]), ...HONORIFICS.map((r) => r[0]), ...TEMPERAMENTS.map((r) => r[0])]);
   for (const seed of seeds) towns[seed] = born(seed);
 }, 600000);
 
@@ -58,7 +73,7 @@ const said = (s) => JSON.stringify({ relationships: s.relationships, secrets: (s
 /** @param {any} s @param {string} name */
 const card = (s, name) => (s.npcs || []).find((/** @type {any} */ n) => n.name === name);
 
-describe('BAR3-PEOPLE-2 · one debt, a sentence name, the holder\'s honorific, (P1, P4, P6)', () => {
+describe('BAR3-PEOPLE-2 · one debt, a sentence name, the holder\'s honorific, (P1, P4, P6, P7)', () => {
   for (const [seed, refused, instead] of ROWS) {
     it(`${seed}: not "${refused.slice(0, 48)}…"; what prints instead`, () => {
       const text = said(towns[seed]);
@@ -87,5 +102,25 @@ describe('BAR3-PEOPLE-2 · one debt, a sentence name, the holder\'s honorific, (
       expect(pool.some((h) => typeof h === 'object' && h.male === form), title).toBe(true);
     }
     expect(FACE_HONORIFICS['the mayor']).toContain('Lord Mayor');
+  });
+  for (const [seed, name, flaw, refused, held] of TEMPERAMENTS) {
+    it(`${seed}: ${name} keeps the flaw "${flaw}" and is no longer "${refused}"; holds "${held}"`, () => {
+      const p = card(towns[seed], name)?.personality ?? {};
+      expect(p.flaw).toBe(flaw);
+      expectAbsentWithAnchor([String(p.dominant)], refused, held, `${seed}: ${name}'s temperament`);
+      expect(p.dominant).toBe(held);
+    });
+  }
+  for (const [seed, name, dominant, flaw] of KEEP_PAIRS) {
+    it(`KEEP ${seed}: ${name}'s ${dominant} / ${flaw} stands as drawn`, () => {
+      const p = card(towns[seed], name)?.personality ?? {};
+      expect([p.dominant, p.flaw]).toEqual([dominant, flaw]);
+    });
+  }
+  it('P7: the table lists only the pools\' own words', () => {
+    for (const [temperament, denied] of Object.entries(FLAWS_DENIED_BY_TEMPERAMENT)) {
+      expect(NPC_PERSONALITY_TRAITS.positive, temperament).toContain(temperament);
+      for (const flaw of denied) expect(NPC_PERSONALITY_TRAITS.negative, `${temperament} / ${flaw}`).toContain(flaw);
+    }
   });
 });

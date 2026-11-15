@@ -33,7 +33,7 @@ import { secretsHeldByFoodRecord } from '../domain/foodSurplus.js'; import { has
 import {
   MANNERISMS,
   SPEECH_PATTERNS,
-  NPC_PERSONALITY_TRAITS,
+  NPC_PERSONALITY_TRAITS, temperamentAdmitting,
   NPC_AGE_DATA,
   NPC_PLOT_HOOKS,
   NPC_BUILDS,
@@ -341,7 +341,7 @@ export const generateReligionType = (reg) => {
     flaw = null;
   }
 
-  return { dominant, flaw, modifier, tell, speech };
+  return { dominant: temperamentAdmitting(dominant, flaw), flaw, modifier, tell, speech }; // BAR3-PEOPLE-2 (P7a, C7806 C7914): the temperament yields to the flaw; no draw
 };
 
 // generateNPCAppearance
