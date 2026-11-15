@@ -160,3 +160,12 @@ export function isCriminalOrThievesPower(seat) {
 export function crimeFactionNameOf(factions) {
   return factions.find((f) => f?.category === 'criminal' || /thieve|criminal|smuggl|underworld/i.test(String(f?.faction || '')))?.faction || null;
 }
+
+/**
+ * The safety profile's crime-type LABEL for a criminal power that has filled the vacuum of civil authority: written by
+ * `generators/safetyProfile.js` (its `crimeTypes` row) and compared by `generators/safetyLineTruth.js ::
+ * settleRosterCrimeLines` (TAIL-CLOSE-SRC-4, the chair's SR3 (c): the label has one home). It lives in the crime home,
+ * which both already import, and not in the writer: the writer imports the reader's module, so a writer-held constant
+ * would close a new dependency cycle (`tests/architecture/layerBoundaries.test.js`, shrink-only).
+ */
+export const CRIMINAL_GOVERNANCE_TYPE = 'Criminal governance';

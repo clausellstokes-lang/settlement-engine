@@ -11,7 +11,7 @@ import {
   institutionMatchesRegex,
 } from '../domain/institutionClassify.js';
 import { institutionCategoryFlags } from './roleCategory.js';
-import { crimeSignalOf } from '../domain/crimeSignal.js';
+import { CRIMINAL_GOVERNANCE_TYPE, crimeSignalOf } from '../domain/crimeSignal.js';
 import { runningCriminalChains } from '../domain/display/defenseDisplay.js';
 import { defenceOf } from '../domain/facts/defence.js';
 import { factsOf } from '../domain/facts/factsOf.js';
@@ -442,7 +442,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
   if (stress.crimeIsGovt) {
     const crimeRef = inst.hasThievesGuild ? "The thieves' guild" : 'Organized crime';
     crimeTypes.push({
-      type: 'Criminal governance',
+      type: CRIMINAL_GOVERNANCE_TYPE, // the label's one home (TAIL-CLOSE-SRC-4)
       desc: `${crimeRef} has filled the power vacuum left by absent or failed civil authority. It provides a form of order and extracts a price for it.`,
     });
   }
