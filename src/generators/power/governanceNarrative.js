@@ -383,6 +383,7 @@ const deriveInstitutionSignals = (institutionNames, magicWorks, instFlags = null
     institutionNames,
     ['church', 'cathedral', 'monastery', 'temple', 'parish', 'shrine'],
   ),
+  hasOwnChurch: (institutionNames || []).some((n) => /church|cathedral|monaster|temple/i.test(String(n)) && !/^access to/i.test(String(n))),
 });
 
 /**
@@ -399,6 +400,9 @@ const deriveBaselineConflict = ({
   monsterThreat,
   hasRoyalAuthority,
   hasNoblePower,
+  theocraticSeat = true, // TAIL-POWERS-3 batch 2: the G3 atom (a religious seat or a religious power of weight)
+  seatIsReligious = false, // TAIL-POWERS-3 batch 2: the governing seat is the church's own
+  seatIsMilitary = false, // TAIL-POWERS-3 batch 2: the governing seat is the commanders' own
 }) => {
   const {
     hasMilitaryInstitution,
@@ -409,6 +413,7 @@ const deriveBaselineConflict = ({
     hasReligiousInstitution,
     hasLiveMarket,
     hasCourt,
+    hasOwnChurch,
   } = institutionSignals;
 
   if (stressFlags.stateCrime) {
@@ -421,7 +426,7 @@ const deriveBaselineConflict = ({
       ? 'The guild and the district council both claim authority over the new market. Violence has settled some of the disputes; more is expected.'
       : 'Two of the stronger families have been resolving disputes between themselves rather than involving the elders. The rest of the community is watching nervously.';
   }
-  if (stressFlags.crusaderSynthesis) {
+  if (stressFlags.crusaderSynthesis && theocraticSeat) { // TAIL-POWERS-3 batch 2: no commander-prelate where no church rules
     return hasMilitaryInstitution
       ? 'The commander-prelate has declared a heresy investigation into a rival settlement. The garrison is mobilizing.'
       : 'The local priest has declared a neighbouring settlement heretical. Relations between the two communities have broken down entirely.';
@@ -431,7 +436,7 @@ const deriveBaselineConflict = ({
       ? "A guild's private soldiers arrested a rival's factor. The public watch is refusing to intervene in what they call a 'merchant matter'."
       : "One household's hired hands roughed up a rival's farmhand over a grazing dispute. Neither side will involve the elders.";
   }
-  if (stressFlags.heresySuppression) {
+  if (stressFlags.heresySuppression && theocraticSeat) { // TAIL-POWERS-3 batch 2: no church court tries anyone where no church holds weight
     if (hasArcaneInstitution) {
       return "A hedge wizard was dragged before the ecclesiastical court. The mages' quarter is very quiet at the moment.";
     }
@@ -466,7 +471,7 @@ const deriveBaselineConflict = ({
       ? 'The merchant class is outbuying noble landholdings. Three estates have changed hands in the last decade. The families that lost them have not forgotten.'
       : "A noble family is contesting a merchant's right to operate in their traditional market territory. The council is hearing the case and wishes it were not.";
   }
-  if (institutionFlags.militaryEffective > 68) {
+  if (institutionFlags.militaryEffective > 68 && !seatIsMilitary) { // TAIL-POWERS-3 batch 2: the commanders' own seat loses no ground to them
     if (hasMilitaryInstitution && hasCourt) { // POWERS-13: the civilian courts it names stand
       return 'The military commanders are pushing for expanded authority over civilian courts, and the council is losing ground.';
     }
@@ -475,8 +480,8 @@ const deriveBaselineConflict = ({
     }
     return "The strongest armed household has started making decisions on everyone's behalf without asking.";
   }
-  if (institutionFlags.religionInfluence > 68) {
-    if (hasCivicInstitution) {
+  if (institutionFlags.religionInfluence > 68 && !seatIsReligious) { // TAIL-POWERS-3 batch 2: the church demands nothing of its own seat
+    if (hasCivicInstitution && hasOwnChurch) { // TAIL-POWERS-3 batch 2: a church of its own, not the access to another's
       return 'The church is demanding veto power over council appointments. The council has not yet refused publicly.';
     }
     if (hasReligiousInstitution) {
@@ -725,6 +730,9 @@ export const buildGovernanceLabels = ({
     monsterThreat: config?.monsterThreat,
     hasRoyalAuthority,
     hasNoblePower,
+    theocraticSeat,
+    seatIsReligious: RELIGIOUS.test(String(governingFactionName || '')),
+    seatIsMilitary: /military|garrison|war council/i.test(String(governingFactionName || '')),
   });
 
   const primaryStress = selectPrimaryStress(
