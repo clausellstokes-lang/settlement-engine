@@ -1081,7 +1081,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
     {
       shared: { name: 'Village elder', face: 'the village elder' },
       at: {
-        village: { baseChance: 0.95, exclusiveGroup: 'government', desc: 'The oldest or most respected resident guides village decisions, by standing rather than by office.', tags: ['civic'], priorityCategory: 'government' },
+        village: { baseChance: 0.95, exclusiveGroup: 'government', desc: 'The oldest or most respected resident guides village decisions on the strength of standing alone; no office goes with it.', tags: ['civic'], priorityCategory: 'government' },
       },
       ceiling: { tier: 'village', reason: 'A town governs through a council or an appointee.' },
     },
