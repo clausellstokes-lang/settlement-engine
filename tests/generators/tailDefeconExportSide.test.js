@@ -55,6 +55,10 @@ const GONE = [
   ['r2s-famine-town-2', 'Ocean-going vessels', 'River craft'],        // no shipyard
   ['r2s-succession_void-town-0', 'Ship construction', 'Ship passage'],
   ['r2s-religious_conversion-city-1', 'Fine textiles', 'Transit trade'], // no weaver or tailor
+  // D25 (the chair, 2026-11-15): the flats' twin name for the same salt; red at e6700483b, where it took Sea salt's place.
+  ['r2r-thorp-53', 'Salt for preservation', 'Salted fish'],
+  ['r2r-village-5', 'Salt for preservation', 'Cargo barges'],
+  ['r2s-insurgency-village-3', 'Salt for preservation', 'Water rights'],
 ];
 
 /** (seed, a good exported where a house that works it stands, that house) */

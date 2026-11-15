@@ -660,6 +660,9 @@ const GOOD_WORKING_HOUSES = Object.freeze({
   'Toll revenue':               ['toll', 'customs', 'gate', 'bridge'],
   'Toll income':                ['toll', 'customs', 'gate', 'bridge'],
   'Sea salt':                   ['salt'],
+  // The flats' second good is the same salt under a twin name (D25, the chair, 2026-11-15): without it, it took Sea
+  // salt's place in 21 towns with no salt works.
+  'Salt for preservation':      ['salt'],
   'Pilgrim hospitality':        ['inn', 'tavern', 'alehouse', 'ale house', 'bath', 'waystation', 'caravanserai'],
   'Hospitality for travellers': ['inn', 'tavern', 'alehouse', 'ale house', 'bath', 'waystation', 'caravanserai'],
   'Glass blanks':               ['glass'],
