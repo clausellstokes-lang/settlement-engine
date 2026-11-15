@@ -21,15 +21,16 @@
         {
           "kind": "integer",
           "over": "the sum of poolMeta.variantCount over all 708 pools",
-          "value": 2954
+          "value": 2959
         },
         {
           "kind": "digest",
           "algo": "sha256",
           "over": "poolMeta.variantCount per pool",
-          "value": "df96ee77d94574fe3ef4872ba5658f58935e838a94d36e4944e37fc0eac13463"
+          "value": "eb801d3f5581a2b094662a560b6c88b2d3e6c73161ba9bf7d195de1c0966536c"
         }
-      ]
+      ],
+      "note": "RE-TAKEN 2026-11-15 by TAIL-CLOSE-SWEEP-A (ruling SW1) at the joined tip dc4bae117: 2954 -> 2959, five pure additions, each a declared twin taking the NEXT vid (no vid renumbered): DS-ECO-1 C1 v4 and DS-GEN-13 COMMERCE a market, no guild v5 (4467cd7d6, TAIL-CORPUS-ECO-4 batch 7); DS-DEF-2 Beasts & Monsters settled, defenses beyond the need v6 (b284cbe44, TAIL-CORPUS-DEF-4 U2); DS-DEF-3 Safe v4 and Very Safe v5 (d4a4bd590, TAIL-CORPUS-DEF-4 batch 6). The two lanes re-took (eco, 2950 -> 2954 at a8ea5ef8e) or left (def) these pins on their own bases; the joins JOIN-9 3 (c46e61abe) and JOIN-9 4 (954340b6f) composed them to 2956 and 2959."
     },
     {
       "id": "face-count-per-variant",
@@ -42,7 +43,7 @@
         {
           "kind": "integer",
           "over": "the sum of every faceCounts entry over all 708 pools",
-          "value": 2954
+          "value": 2959
         },
         {
           "kind": "integer",
@@ -53,9 +54,10 @@
           "kind": "digest",
           "algo": "sha256",
           "over": "poolMeta.faceCounts per pool, joined by commas",
-          "value": "ceb8b6800bd2d87c2f1604ca9e8b9fa794ea546523a9bf82f651900106ba68e3"
+          "value": "f88ec242c8549e5f311f5460763d9961362ad8be0a85a18149b1a5c71e9e30cd"
         }
-      ]
+      ],
+      "note": "RE-TAKEN 2026-11-15 by TAIL-CLOSE-SWEEP-A (ruling SW1) at the joined tip dc4bae117: 2954 -> 2959, five pure additions, each a declared twin taking the NEXT vid (no vid renumbered): DS-ECO-1 C1 v4 and DS-GEN-13 COMMERCE a market, no guild v5 (4467cd7d6, TAIL-CORPUS-ECO-4 batch 7); DS-DEF-2 Beasts & Monsters settled, defenses beyond the need v6 (b284cbe44, TAIL-CORPUS-DEF-4 U2); DS-DEF-3 Safe v4 and Very Safe v5 (d4a4bd590, TAIL-CORPUS-DEF-4 batch 6). The two lanes re-took (eco, 2950 -> 2954 at a8ea5ef8e) or left (def) these pins on their own bases; the joins JOIN-9 3 (c46e61abe) and JOIN-9 4 (954340b6f) composed them to 2956 and 2959."
     },
     {
       "id": "vids",
@@ -68,9 +70,10 @@
           "kind": "digest",
           "algo": "sha256",
           "over": "poolMeta.vids per pool, joined by commas",
-          "value": "1571e6eea152811a0a33ee608816b54db073069dd9034641e5aa109ac22f5f8e"
+          "value": "bd33ab8b65018db16be6c97e95c2b8c4bc1522116888f9ea47e21ebf3f41fd3a"
         }
-      ]
+      ],
+      "note": "RE-TAKEN 2026-11-15 by TAIL-CLOSE-SWEEP-A (ruling SW1) at the joined tip dc4bae117: 2954 -> 2959, five pure additions, each a declared twin taking the NEXT vid (no vid renumbered): DS-ECO-1 C1 v4 and DS-GEN-13 COMMERCE a market, no guild v5 (4467cd7d6, TAIL-CORPUS-ECO-4 batch 7); DS-DEF-2 Beasts & Monsters settled, defenses beyond the need v6 (b284cbe44, TAIL-CORPUS-DEF-4 U2); DS-DEF-3 Safe v4 and Very Safe v5 (d4a4bd590, TAIL-CORPUS-DEF-4 batch 6). The two lanes re-took (eco, 2950 -> 2954 at a8ea5ef8e) or left (def) these pins on their own bases; the joins JOIN-9 3 (c46e61abe) and JOIN-9 4 (954340b6f) composed them to 2956 and 2959."
     },
     {
       "id": "pool-key-rename",
