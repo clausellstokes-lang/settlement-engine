@@ -7,7 +7,9 @@ Every run went to a file in the seat's scratch tree (outside the main checkout, 
 | # | red | commit | verdict |
 |---|---|---|---|
 | 1 | `tests/lint/styleLaw.walker.test.js` (the two historyData rises) | 935b84212 | CURED (the file stays red on three rises not this seat's) |
-| 2 | `tests/generators/hookTruthAtBirth.test.js` (2) | (red 2's commit) | RE-KEYED BY IDENTITY, both: two declared moves of the history's data lane |
+| 2 | `tests/generators/hookTruthAtBirth.test.js` (2) | 3db549883 | RE-KEYED BY IDENTITY, both: two declared moves of the history's data lane |
+| — | merge of the joined line at f714fb6a5 (the chair's SWEPT) | b45905897 | merged; the reds re-run there |
+| 3 | owed by batch 6 (ed9f3b549): the presumed-things walker, the grid, its guard | (red 3's commit) | the grid: no rise; the walker: 3 fresh rows NAMED; the guard brought to the anchoring helpers and one row re-keyed |
 
 ## 1 · the style walker's two historyData rises: CURED
 
@@ -46,3 +48,28 @@ lane/w2-fix-data-2026-11-13 at 166d8b789); inside that branch:
   arm (no data line says "the physician"): a live guard there would need such a line.
 - Proof: the file alone, before 2 failed / 11; after 13 / 13. eslint 0; `typecheck:ratchet` 0; the two anchor walkers: the
   same 4 failures at the tip and after, none naming this file. No source changed.
+
+## 3 · owed by the history's batch 6 (ed9f3b549): RAN; three fresh rows NAMED; its guard anchored
+
+- The grid (`page-census --grid`) at the joined tip 0b45a28dc and after red 1: 2 falls (r2r-city-0 P7a, r2s-insurgency-metropolis-0 P7a), no rise.
+- The presumed-things walker (`presumed-things-door.mjs --check`): fresh 147 at ed9f3b549's parent abe0327eb, 150 at ed9f3b549; the
+  three are batch 6's, still fresh at this branch's tip (fresh 149 there, the rest older):
+  - `src/data/arrivalProse.js` `bank` "A money changer sits at his table with little to do, counting the same coins from many mints again."
+  - `src/data/arrivalProse.js` `house: fishmonger` "A fishmonger stands behind an empty slab, with nothing to shout a price for."
+  - `src/data/historyData.js` `occupation` "When the occupiers left, they left behind a town of former collaborators and former resisters, none of it ever settled"
+  NAMED, not cured: each is the declared TWIN (or the sibling-set key) of a line already banked in the same habitat (the money
+  changer's original under `implied`, the fishmonger's under `family`, the occupiers' line under `word` in
+  historyDescVariants.js); each already declares its atom (`institution: bank`; `fish`, `market`; `crisis: occupied`), but the
+  walker credits no declaration in the arrival table's carrier (`implied`), the house family's atom waits for its factsOf getter
+  (`family`), and the occupiers' word is read whatever its tense (`word`). The door refuses to bank a new line, by design, and a
+  reword to dodge the word would hide the claim. The cure is the habitat's: the arrival table drawn through a door the walker
+  credits, the fishmonger atom's getter, a tense-aware occupation word (the walker's owner's).
+- The walkers named batch 6's guard: `tests/data/tailHistoryBatch6.test.js:106` (a bare `not.toMatch`). Brought to the helpers: a
+  twin row is `expectAbsentWithAnchor` over the patterns the town's texts match (the twin the anchor); the silent row is
+  `expectPresentThenAbsent` from its KEEP town r2r-thorp-28 (the original computed from that town's texts). The negative-anchor
+  walker no longer names the file.
+- The file's own red row: r2s-plague_onset-village-0 (the broker gone, the twin not printing): the town printed the broker only on
+  the history's own branch (abe0327eb); on the joined line the arrival's later beats are dealt otherwise at the merge 796c49ef0
+  and every first-parent point after (no broker, no twin). RE-KEYED BY IDENTITY to r2r-hamlet-41 (the broker refused, the twin on
+  the slot; one of the five census towns that print the twin).
+- Proof: the file alone, before 1 failed / 3 (the MUST NOT row 10); after 3 / 3. eslint 0; `typecheck:ratchet` 0.

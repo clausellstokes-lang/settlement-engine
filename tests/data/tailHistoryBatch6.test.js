@@ -18,6 +18,7 @@
  */
 import { beforeAll, describe, expect, test } from 'vitest';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { expectAbsentWithAnchor, expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
@@ -47,7 +48,7 @@ const textsOf = (/** @type {string} */ seed) => {
 
 const SILENT = null; // the slot is silent by design: the timeline's hook gave way to another of its event's hooks, the tension's list dropped it
 
-/** [seed, the false words, what prints instead on the same slot (the declared twin), or SILENT] */
+/** [seed, the false words, what prints instead on the same slot (the declared twin), or SILENT and the KEEP town that prints the original] */
 const MUST_NOT = [
   ['r2s-occupied-hamlet-2', /When the occupiers left/, /When the last occupiers left, they left behind a hamlet of former collaborators and former resisters, and none of it was settled before the new occupation came/],
   ['r2s-occupied-metropolis-1', /When the occupiers left/, /When the last occupiers left, they left behind a metropolis/],
@@ -59,12 +60,15 @@ const MUST_NOT = [
   ['r2s-famine-thorp-0', /the smell of the catch follows you/, /Nets hang drying on poles, and they have brought in little for a long while\./],
   ['r2s-under_siege-village-1', /the smell of the catch follows you/, /Nets hang drying on poles, and they have brought in little for a long while\./],
   ['r2r-thorp-8', /A caravan broker shouts terms/, /A pair of pack animals stands in a yard, unladen, while their keeper mends a strap\./],
-  ['r2s-plague_onset-village-0', /A caravan broker shouts terms/, /A pair of pack animals stands in a yard, unladen/],
+  // RE-KEYED BY IDENTITY (TAIL-CLOSE-POOLS-2, 2026-11-15): r2s-plague_onset-village-0 printed the broker only on the history's own
+  // branch; on the joined line its arrival's later beats are dealt otherwise (no broker and no twin at 796c49ef0 and every point after).
+  // r2r-hamlet-41 holds the row's identity: the broker refused, its twin on the slot (one of the five census towns that print it).
+  ['r2r-hamlet-41', /A caravan broker shouts terms/, /A pair of pack animals stands in a yard, unladen/],
   ['r2s-under_siege-city-8', /A money changer sits at his table with coins from many mints/, /A money changer sits at his table with little to do, counting the same coins from many mints again\./],
   ['r2s-under_siege-metropolis-43', /A money changer sits at his table with coins from many mints/, /A money changer sits at his table with little to do/],
   ['r2s-under_siege-town-8', /The clatter of looms follows you/, /Here and there a loom still clatters behind a shutter in .+, though no cloth has gone out in weeks\./],
   ['r2s-under_siege-metropolis-67', /The clatter of looms follows you/, /Here and there a loom still clatters behind a shutter/],
-  ['r2s-under_siege-thorp-1', /creditor's agent is in town/i, SILENT],
+  ['r2s-under_siege-thorp-1', /creditor's agent is in town/i, SILENT, 'r2r-thorp-28'],
   ['r2r-thorp-0', /Price ceilings on the affected goods/, /In lean seasons the affected goods are still shared out by agreement, not sold to whoever pays most/],
   ['r2r-hamlet-16', /Price ceilings on the affected goods/, /In lean seasons the affected goods are still shared out by agreement/],
   ['r2r-thorp-27', /Council seats now formally split/, /The old families and the young still quarrel over who speaks for the place/],
@@ -101,10 +105,18 @@ describe('TAIL-HISTORY-5 batch 6: what the bar\'s readers met prints only where 
   test('MUST NOT: no cured line prints where the town makes it false; its twin prints on the same slot', () => {
     expectNoSeedFailures(collectSeedFailures(MUST_NOT.map(([seed], i) => `${i}|${seed}`), (key) => {
       const [i, seed] = key.split('|');
-      const [, gone, instead] = MUST_NOT[Number(i)];
+      const [, gone, instead, witness] = /** @type {[string, RegExp, RegExp | null, string?]} */ (MUST_NOT[Number(i)]);
       const s = textsOf(String(seed));
-      expect(s, key).not.toMatch(/** @type {RegExp} */ (gone));
-      if (instead) expect(s, key).toMatch(/** @type {RegExp} */ (instead));
+      if (instead) {
+        // the patterns the town's texts match: the twin must be among them, the false words must not
+        expectAbsentWithAnchor([gone, instead].filter((re) => re.test(s)), gone, instead, `${key}: the false words out, the twin on the slot`);
+      } else {
+        // a silent slot: the original prints in its KEEP town (computed from that town's texts), and not here
+        const before = textsOf(String(witness));
+        const original = before.match(gone)?.[0];
+        expect(original, `${key}: the original prints in ${witness}`).toBeTruthy();
+        expectPresentThenAbsent(before, s, original, `${key}: the slot is silent where the town makes the line false`);
+      }
     }), 'the false lines');
   }, 600_000);
 
