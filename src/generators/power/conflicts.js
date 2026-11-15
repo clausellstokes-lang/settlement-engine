@@ -46,7 +46,8 @@ const buildConflictPlotHooks = (factionA, factionB, conflict, instFlags, stressF
   const own = Array.isArray(conflict?.hooks) ? conflict.hooks : [];
   if (own.length) {
     // Each hook carries its own text as its id, so the ledger counts a line, not a slot.
-    const drawn = drawDeclared([...own, ...flagHooks].map((line) => ({ id: line, text: line })), {
+    // BAR2-PEOPLE (PP10): a declared hook keeps its declaration (and a twin its `twinOf`); its id is still its text
+    const drawn = drawDeclared([...own, ...flagHooks].map((line) => (typeof line === 'string' ? { id: line, text: line } : { ...line, id: line.text })), {
       draw: (pool) => pool[seedHash % pool.length], facts, key: seedKey,
       poolId: 'conflicts:HOOKS', surface: 'plot_hooks', drawKind: 'H',
     });
@@ -157,7 +158,9 @@ export const generateConflicts = (powers, relationships, config = {}, institutio
       ...BASE_ISSUES,
       ...Object.keys(STRESS_ISSUES).filter((type) => stressTypes.includes(type)).flatMap((type) => STRESS_ISSUES[type]),
     ],
-    facts = () => factsOf({ institutions, config, powerStructure: { factions: powers } });
+    // BAR2-PEOPLE (PP10): the birth's crisis is handed in the stress shape (factsOf.js :: birthFactsOf's rule), so a hook
+    // that excludes the siege reads it; no other line of these pools declares a crisis
+    facts = () => factsOf({ institutions, config, stress: stressTypes.map((type) => ({ type })), powerStructure: { factions: powers } });
   for (let i = 0; i < conflictCount; i++) {
     const { factionA, factionB, ties } = rivalPairs[i];
     const applicableTemplates = issueTemplates.filter((template) => {

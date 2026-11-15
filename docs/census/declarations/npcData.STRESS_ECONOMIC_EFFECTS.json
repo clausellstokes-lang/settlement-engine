@@ -2613,7 +2613,7 @@
     },
     {
       "id": "bitter_history.tension#5",
-      "text": "{A} and {B} have been placed on the same council committee. The first meeting is next week.",
+      "text": "{A} and {B} have been handed the same dispute to settle together. The first meeting is next week.",
       "needs": [
         "ruling body"
       ],

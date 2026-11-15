@@ -8,6 +8,21 @@ import { powerSentenceName } from '../../domain/display/powerSentenceName.js';
 import { pluralPowerName } from '../../domain/display/governanceAccount.js';
 import { powerLabelOf } from '../factionDynamics.js';
 import { seatIsCouncil } from './claimStanding.js';
+import { STRESS_POWER_FACES } from '../../data/stressPowerFaces.js';
+
+// BAR2-PEOPLE (PP10, the chair's ruling of 2026-11-15, vetoable by the owner): A POWER SENT IN BY AN OCCUPATION DECIDES. The
+// ladder's rank lines say a power below the first bargains, petitions or waits ("Behind <top> by too much to challenge openly,
+// so they get their way through petitions and procedure", "in the shadow of", "their support is worth buying"); the occupier
+// (stressPowerFaces.js's appointed row) is outnumbered on the roster yet gives the orders (factionDynamics.js: the hall
+// "carries out what" it "decides"). Below the first, it takes its own line, which says that one fact.
+/** @param {{ faction?: string }} f @returns {boolean} the power is an occupation's appointed one */
+const isAppointedOccupier = (f) => STRESS_POWER_FACES.some((row) => row.appointed && row.power === f.faction);
+/** @param {{ faction: string } | undefined} gov @returns {string} the occupier's standing line, its hall named as the relation line names it */
+const occupierStanding = (gov) => {
+  if (!gov) return 'It does not bargain for its way: what it decides is carried out, whatever its numbers.';
+  const said = powerSentenceName(gov.faction);
+  return `It does not bargain for its way: ${said} ${pluralPowerName(said) ? 'carry' : 'carries'} out what it decides, whatever its numbers.`;
+};
 
 // TAIL-POWERS batch 2 (the chair's ruling P1 of 2026-11-14): a standing sentence reads the strength of the power it names. A
 // craft guild the card prints as Minor or Suppressed is not "close behind, contesting every ... decision" nor "running close
@@ -278,6 +293,7 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }) 
             standing = standing ? standing + ' ' + guardReligiousNote : guardReligiousNote;
           }
         }
+        if (rank > 0 && !faction.isGoverning && isAppointedOccupier(faction)) standing = occupierStanding(factions.find((f) => f.isGoverning)); // BAR2-PEOPLE (PP10)
         standing && (faction.desc = faction.desc ? faction.desc + ' ' + standing : standing);
       });
 };

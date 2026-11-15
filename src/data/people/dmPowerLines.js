@@ -200,7 +200,9 @@ export const PATRONAGE_LINES = Object.freeze({
 export const CAPTURE_RUNG_LABELS = Object.freeze({
   // STYLE-2 SW-7 (FOR THE OWNER'S VETO, the census law: a proposal): the state machine's tokens printed plain; the keys stay.
   // Was 'None' · 'Adversarial' · 'Equilibrium' · 'Corrupted' · 'Capture'.
-  none: 'Free of the criminals', adversarial: 'Fighting the criminals', equilibrium: 'Living with the criminals', corrupted: 'Partly in criminal hands', capture: 'Run by the criminals',
+  // BAR2-PEOPLE (PP1, the chair's ruling of 2026-11-15, vetoable by the owner): the free rung's label claims only what the
+  // rung states, that the seat is not in the criminals' hold; it says nothing of crime in the town (was 'Free of the criminals')
+  none: 'The seat is not in criminal hands', adversarial: 'Fighting the criminals', equilibrium: 'Living with the criminals', corrupted: 'Partly in criminal hands', capture: 'Run by the criminals',
 });
 
 /** @type {Readonly<Record<'none' | 'adversarial' | 'equilibrium' | 'corrupted' | 'capture', readonly CaptureLine[]>>} */

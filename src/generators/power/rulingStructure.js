@@ -559,7 +559,7 @@ export const generatePowerStructure = (
               : tier === 'town'
                 ? 'Town watch; it enforces ordinances, manages disorder, and reports to the council.'
                 : militaryPower > 18
-                  ? 'Well-funded city watch; it keeps order reliably and is growing more sure of its own authority.'
+                  ? 'City watch; it answers for keeping order and is growing more sure of its own authority.'
                   : 'City watch; law enforcement and external defence, stretched between multiple responsibilities.'),
       militaryDescFinal =
         governingFaction && (governingFaction.toLowerCase().includes('military council') || governingFaction.toLowerCase().includes('martial'))
@@ -695,7 +695,7 @@ export const generatePowerStructure = (
     stressTypes,
     stressEntries: stressEntries || [],
     fallbackStressType: stressType,
-    defenseLabel: projection.defenseLabel || null, // POWERS-14 (NEW1): the record's readiness label, on the replay
+    defenseLabel: projection.defenseLabel || null, militaryGate: projection.militaryGate ?? null, // POWERS-14 (NEW1): the record's readiness label, on the replay; PP11: its funding gate
   });
   // ── Public legitimacy & faction dynamics ────────────────────────────────
   // At this point defenseProfile isn't computed yet — we use a provisional

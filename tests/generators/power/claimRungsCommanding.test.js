@@ -30,7 +30,9 @@ const GREAT = 'Hereditary great families with land grants, court appointments, a
 const MILITARISED = "Militarised noble families whose landholdings double as fortified estates; they provide the settlement's heavy cavalry and expect political weight in return.";
 const LESSER = 'Minor landed families with limited political reach; present in civic life but rarely decisive.';
 const ARMY = 'Standing army with genuine political weight; command appointments are patronage, and the council knows it.';
-const WELL_FUNDED = 'Well-funded city watch; it keeps order reliably and is growing more sure of its own authority.';
+// BAR2-PEOPLE (PP6, 2026-11-15; the chair's ruling PT3): RE-KEYED BY IDENTITY, the same line reworded to claim neither funding
+// nor order (it is written at the power step, before the safety profile; was "Well-funded city watch; it keeps order reliably ...")
+const WELL_FUNDED = 'City watch; it answers for keeping order and is growing more sure of its own authority.';
 const CITY_WATCH = 'City watch; law enforcement and external defence, stretched between multiple responsibilities.';
 const CODA = ' Operationally distinct from the command council: these are the soldiers and watchmen, not the officers who govern.';
 
