@@ -43,4 +43,37 @@ describe('TAIL-POWERS-3 · batch 1: the account names a power by its prose form;
       expect(account, seed).toContain(now);
     }, 120_000);
   }
+
+  /** seed -> [the stability that must NOT be written, the stability written instead] */
+  const STABILITY = /** @type {Record<string, [string, string]>} */ ({
+    // G2: a Legitimacy Crisis (thorp and town, the smallest and largest it reaches)
+    'r2r-thorp-23': ['Stable', "Tense (the seat has lost the people's trust)"],
+    'r2r-town-44': ['Stable', "Tense (the seat has lost the people's trust)"],
+    // G3: no religious seat, no religious power of weight
+    'r2r-city-18': ['Rigid (militant theocracy)', 'Ordered (strong military presence)'],
+    'r2r-metropolis-42': ['Rigid (militant theocracy)', 'Stable'],
+    'r2r-metropolis-24': ['Stable (theocratic governance)', 'Stable'],
+    // G5: no garrison stands
+    'r2r-village-49': ['Ordered (strong military presence)', 'Stable'],
+  });
+  for (const [seed, [was, now]] of Object.entries(STABILITY)) {
+    it(`${seed}: the stability reads "${now}", not "${was}"`, () => {
+      const s = born(seed);
+      expect(s.powerStructure.stability, seed).not.toBe(was);
+      expect(s.powerStructure.stability, seed).toBe(now);
+    }, 120_000);
+  }
+
+  /** KEEP: each word where the record bears it. seed -> the stability that still prints */
+  const KEEP = /** @type {Record<string, string>} */ ({
+    'r2r-thorp-0': 'Stable', // no Legitimacy Crisis
+    'r2r-metropolis-11': 'Stable (theocratic governance)', // a High Theocratic Council governs
+    'r2r-town-54': 'Stable (theocratic governance)', // a religious power of weight stands
+    'r2r-town-9': 'Ordered (strong military presence)', // a garrison stands
+  });
+  for (const [seed, keep] of Object.entries(KEEP)) {
+    it(`KEEP ${seed}: "${keep}" still prints where the record bears it`, () => {
+      expect(born(seed).powerStructure.stability, seed).toBe(keep);
+    }, 120_000);
+  }
 });
