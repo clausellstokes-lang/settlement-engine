@@ -1015,7 +1015,7 @@ const ROWS = [
       "Happy to talk about the farms and who brought in what this year."),
   ]],
   ["the mine captain", 160, [
-    S("Has been sending miners into a gallery they know is unsafe, because the ore there is the richest",
+    S("Has sent miners into a gallery they knew was unsafe, because the ore there was the richest",
       "When the gallery falls, the families of the dead will want the captain, and the miners will tell them why"),
     S("Has kept back from the tally what ore the workings still give, and sold it to a smelter elsewhere",
       "The mine's owners count the ore twice a year, and the counts have started not to match"),
@@ -1025,7 +1025,7 @@ const ROWS = [
     P("cautious", "Grime in every line of the face, a lamp at the belt and a cough they do not mention.",
       "Talks about the ore; asks why you want to go below before saying yes or no."),
     P("transactional", "Hard and practical. Talks in loads and shifts.",
-      "Sells ore by the cart; hires workers by the week."),
+      "Sells ore by the cart, from what the workings still give; hires workers by the week."),
     P("dismissive", "Busy and short. The shift change is coming and there is no time for visitors.",
       "Gives a word or two and turns back to the shaft."),
   ]],

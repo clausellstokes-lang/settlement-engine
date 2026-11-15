@@ -39,8 +39,19 @@ const RULE = Object.freeze(['governing', 'government', 'council']);
  * @property {ReadonlyArray<string>} [touches] kinds of power it reaches that need not be a party
  * @property {RegExp} [touchesFirst] among the touched powers, the names it reaches first (apprentices are the crafts')
  * @property {ReadonlyArray<string>} [needs] things the town must have (the pool census's atoms)
- * @property {ReadonlyArray<string>} [hooks] the issue's own plot hooks (one is drawn per quarrel)
+ * @property {ReadonlyArray<string | ConflictHook>} [hooks] the issue's own plot hooks (one is drawn per quarrel)
  */
+
+/**
+ * A declared hook (BAR2-PEOPLE, PP10): a line that moves something by road or water `excludes` the siege, and its twin
+ * (`twinOf` its text, `crisis` the siege) says the same quarrel with nothing moving; the twin is reached only by
+ * resolution, so no draw moves (drawDeclared.js).
+ * @typedef {{ text: string, excludes?: ReadonlyArray<string>, crisis?: ReadonlyArray<string>, twinOf?: string }} ConflictHook
+ */
+/** UNDER A SIEGE nothing comes in or goes out by road, gate or water (the chair's law). */
+const NOT_UNDER_SIEGE = Object.freeze(['crisis: under_siege']);
+/** @param {string} text @param {string} twin @returns {ConflictHook[]} the line refused under a siege, and its siege twin */
+const bySiege = (text, twin) => [Object.freeze({ text, excludes: NOT_UNDER_SIEGE }), Object.freeze({ text: twin, twinOf: text, crisis: Object.freeze(['under_siege']) })];
 
 /** @type {ReadonlyArray<ConflictIssue>} the issues every town may draw */
 export const BASE_ISSUES = Object.freeze(/** @type {Array<Omit<ConflictIssue, 'id'>>} */ ([
@@ -62,7 +73,9 @@ export const BASE_ISSUES = Object.freeze(/** @type {Array<Omit<ConflictIssue, 'i
     'Someone wants proof that the inspector who refuses the permits is being paid to refuse them.',
   ] },
   { issue: 'Control of the dock taxation authority', stakes: 'Port revenue', flag: null, requires: 'water_trade', cast: [['economy', ...RULE]], needs: ['docks'], hooks: [
-    'A boat has been held at the quay for three days because two collectors both demand the duty.',
+    // BAR2-PEOPLE (PP10): under a siege no boat comes to the quay; the twin keeps the quarrel over the duty
+    ...bySiege('A boat has been held at the quay for three days because two collectors both demand the duty.',
+      'A boat has lain at the quay since the water closed, and two collectors both demand the duty on its cargo.'),
     'The tax books for last season are missing, and each side says the other took them.',
   ] },
   { issue: 'Military conscription of guild apprentices', stakes: 'Labor control', flag: null, cast: [['military', 'governing']], touches: ['economy'], touchesFirst: /\bcraft/i, needs: ['guild'], hooks: [
@@ -84,8 +97,11 @@ export const BASE_ISSUES = Object.freeze(/** @type {Array<Omit<ConflictIssue, 'i
     'Two copies of the contract exist, and the terms on them are not the same.',
   ] },
   { issue: 'Control of a key trade route checkpoint', stakes: 'Economic leverage', flag: null, cast: [['economy', 'military', 'noble', ...RULE]], hooks: [
-    'Carters are waiting at the post because two sets of men each claim the right to collect the toll.',
-    'A wagon was waved through without paying, and each side says the other let it go.',
+    // BAR2-PEOPLE (PP10, the chair's ruling of 2026-11-15): under a siege nothing moves by road; the twins keep the quarrel
+    ...bySiege('Carters are waiting at the post because two sets of men each claim the right to collect the toll.',
+      'The toll post has stood idle since the road closed, and two sets of men each claim the right to collect when it opens.'),
+    ...bySiege('A wagon was waved through without paying, and each side says the other let it go.',
+      'A wagon was waved through without paying in the last days before the road closed, and each side says the other let it go.'),
     'The post burned down last week, and both sides want it rebuilt by their own people.',
   ] },
 
