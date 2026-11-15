@@ -18,7 +18,7 @@
       "src/domain/display/stateProse/stressorsStateProseCandidates.js": "ee0548fc8b662da76e4bf85a1fae30433e9f738277c774e16c6a7abd7fb93552",
       "src/domain/display/stateProse/warFaithStateProseCandidates.js": "b5b193dd2a2c83d077da5f82fd4a5fc5f5ad15a3b6a214725daf41ede442324b"
     },
-    "producerIndexFiles": 1380
+    "producerIndexFiles": 1381
   },
   "totals": {
     "pools": 856,
@@ -54069,18 +54069,19 @@
       "name": "ARRIVAL_SENSES",
       "drawKind": "R",
       "drawSite": "src/generators/narrative/arrivalScene.js:150-165 chooseSense (pickRandom over keys within one point of best) then :283-2",
-      "lines": 328,
+      "lines": 329,
       "declares": [],
       "lineDeclares": {
         "church": 2,
         "colour": 5,
-        "crisis: any": 42,
+        "crisis: any": 43,
         "crisis: hunger": 6,
         "crisis: under_siege": 1,
         "crisis: wartime, insurgency": 1,
         "fish": 11,
         "institution: mill": 2,
-        "institution: smith": 8,
+        "institution: smith": 9,
+        "iron at hand": 1,
         "market": 10,
         "navigable": 6,
         "no crisis: hunger": 14,
@@ -54088,10 +54089,11 @@
         "no crisis: threat": 4,
         "no crisis: under_siege": 13,
         "no crisis: unrest": 1,
+        "no iron at hand": 1,
         "no route: isolated": 1,
         "route: isolated": 1,
         "sacredHouse": 3,
-        "tier: ≥ town": 8
+        "tier: ≥ town": 9
       },
       "undeclared": 257,
       "crisisScoped": false
@@ -54201,12 +54203,12 @@
       "name": "STRESS_DESCS",
       "drawKind": "R",
       "drawSite": "src/generators/narrative/arrivalScene.js:213-227 (primary stress; filter at :224; one pickRandom at :227 on the ’arrival",
-      "lines": 105,
+      "lines": 106,
       "declares": [],
       "lineDeclares": {
         "garrison": 1,
         "gate": 36,
-        "guardPresence": 15,
+        "guardPresence": 14,
         "healer": 2,
         "institution: bank": 1,
         "institution: granary": 2,
@@ -54222,8 +54224,10 @@
         "no crisis: under_siege": 2,
         "no crisis: unrest": 5,
         "no market": 1,
+        "no patrol": 1,
         "no prosperity: ≥ moderate": 1,
         "no war: front": 2,
+        "patrol": 1,
         "population: ≥ middling": 6,
         "prosperity: ≥ moderate": 1,
         "sacredHouse": 1,
@@ -54265,7 +54269,7 @@
       "name": "CAST_REASONS",
       "drawKind": "T",
       "drawSite": "crisisCast.js:461-701 (src/domain/crisis/crisisCast.js)",
-      "lines": 50,
+      "lines": 51,
       "declares": [],
       "lineDeclares": {
         "crisis: hunger": 1,
@@ -54277,7 +54281,7 @@
         "no walls": 1,
         "walls": 1
       },
-      "undeclared": 42,
+      "undeclared": 43,
       "crisisScoped": false
     },
     {

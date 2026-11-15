@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-11-15T15:30:06.774Z",
+  "generatedAt": "2026-11-15T18:44:29.772Z",
   "entry": "src/domain/aiGrounding.js",
-  "sourceHash": "c10a5e566c713057",
+  "sourceHash": "f3a894bccb3c4cf8",
   "inputs": [
     "src/data/bandLadders.js",
     "src/data/chainAccessNames.js",
@@ -61,6 +61,7 @@
     "src/domain/facts/famine.js",
     "src/domain/facts/guild.js",
     "src/domain/facts/institutions.js",
+    "src/domain/facts/ironAtHand.js",
     "src/domain/facts/keep.js",
     "src/domain/facts/liveInstitutionNames.js",
     "src/domain/facts/magic.js",
