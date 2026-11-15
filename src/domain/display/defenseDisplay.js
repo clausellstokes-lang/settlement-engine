@@ -329,6 +329,10 @@ export function deriveSupportingCapabilities(settlement) {
   // healer named as a healer.
   const facts = defenseFactsOf(r);
   const court = courtOnRoster(r);
+  // V6 (TAIL-DISPLAY-CIVIC-4, the chair's ruling of 2026-11-15): where no courthouse stands and a council or a town hall
+  // hears the cases, the row names what stands (the council's bench), not a court.
+  const bench = court ? courtBenchOf(r) : null;
+  const courtWord = bench ?? 'Court';
 
   const caps = [
     {
@@ -405,9 +409,9 @@ export function deriveSupportingCapabilities(settlement) {
     {
       // W2-C-LEAVES-SIDE (the chair's #575): the court is read off the live roster (`courtOnRoster`, below), not the flag.
       label: 'Legal Infrastructure',
-      status: court && f.hasPrison ? 'Court + Prison' : court ? 'Court only' : f.hasPrison ? 'Prison only' : 'None',
+      status: court && f.hasPrison ? `${courtWord} + Prison` : court ? `${courtWord} only` : f.hasPrison ? 'Prison only' : 'None',
       color: court && f.hasPrison ? '#1a3a5a' : court ? '#3a5a7a' : f.hasPrison ? '#7a5a3a' : '#9c8068', score: null,
-      note: court && f.hasPrison ? 'Full enforcement chain. Arrest, prosecute, detain.' : court ? 'Courts without detention. Fines and exile only.' : f.hasPrison ? 'Detention without process. Arbitrary enforcement.' : 'No deterrence beyond force.',
+      note: court && f.hasPrison ? 'Full enforcement chain. Arrest, prosecute, detain.' : court ? (bench ? 'Cases heard without detention. Fines and exile only.' : 'Courts without detention. Fines and exile only.') : f.hasPrison ? 'Detention without process. Arbitrary enforcement.' : 'No deterrence beyond force.',
     },
     {
       label: 'Medical Readiness',
@@ -864,15 +868,43 @@ const COURT_SERVICES = new Set(['Civil disputes', 'Criminal trials', 'Civil liti
  * @returns {boolean}
  */
 function courtOnRoster(settlement) {
+  return courtHoldersOf(settlement).length > 0;
+}
+
+/**
+ * THE HOUSES THAT HOLD THE TOWN'S COURT on the live roster: 'Courthouse' where a courthouse or court buildings stand,
+ * else each live house that drew a court service (its roster name).
+ * @param {DefenseDisplaySettlement} settlement
+ * @returns {string[]}
+ */
+function courtHoldersOf(settlement) {
   const live = liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (/** @type {unknown} */ (settlement)))
     .map((i) => String(/** @type {{ name?: unknown } | null} */ (i)?.name ?? '')).filter(Boolean);
-  if (live.some((n) => COURT_HOUSE.test(n))) return true;
+  if (live.some((n) => COURT_HOUSE.test(n))) return ['Courthouse'];
   const drawn = /** @type {{ availableServices?: unknown }} */ (settlement)?.availableServices;
   const rows = drawn && typeof drawn === 'object' ? Object.values(drawn).flat() : [];
-  return rows.some((row) => {
+  /** @type {string[]} */
+  const holders = [];
+  for (const row of rows) {
     const sv = /** @type {{ name?: unknown, institution?: unknown } | null} */ (row);
-    return typeof sv?.name === 'string' && COURT_SERVICES.has(sv.name) && live.includes(String(sv?.institution ?? ''));
-  });
+    const inst = String(sv?.institution ?? '');
+    if (typeof sv?.name === 'string' && COURT_SERVICES.has(sv.name) && live.includes(inst) && !holders.includes(inst)) holders.push(inst);
+  }
+  return holders;
+}
+
+/**
+ * V6 (TAIL-DISPLAY-CIVIC-4): THE BENCH THAT HEARS THE CASES where no courthouse stands: a council's ("Council bench") or
+ * a town hall's ("Town hall bench"); null where a courthouse stands or the court's holder is another house (a city
+ * administration's courts, a city hall's appeals court: courts by their own service rows).
+ * @param {DefenseDisplaySettlement} settlement
+ * @returns {string | null}
+ */
+function courtBenchOf(settlement) {
+  const holders = courtHoldersOf(settlement);
+  if (holders.length === 0 || holders.includes('Courthouse')) return null;
+  if (holders.some((h) => !/council|town hall/i.test(h))) return null;
+  return holders.some((h) => /council/i.test(h)) ? 'Council bench' : 'Town hall bench';
 }
 
 // ─── W2-C-LEAVES-9: THE RING'S VANTAGES PASS THE LIST DOOR (at the end of the file, so no line above moves) ───
@@ -949,3 +981,4 @@ function sickTendedByOne(settlement) {
   const people = /** @type {{ npcs?: unknown }} */ (/** @type {unknown} */ (settlement))?.npcs;
   return (Array.isArray(people) ? people : []).some((p) => TENDS_THE_SICK.test(String(/** @type {{ role?: unknown } | null} */ (p)?.role ?? '')));
 }
+

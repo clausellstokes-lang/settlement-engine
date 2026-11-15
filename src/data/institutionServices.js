@@ -55,7 +55,7 @@ export const INSTITUTION_SERVICES = {
   },
   "Town council": {
     "Bylaws and ordinances": { on: true, p: 1.0, desc: "Enacts and enforces the town's own rules" },
-    "Dispute adjudication": { on: true, p: 1.0, desc: "Hears civil pleas in the town court" },
+    "Dispute adjudication": { on: true, p: 1.0, desc: "Hears the town's civil pleas at the council bench" },
     "Market charter and tolls": { on: true, p: 0.9, desc: "Grants stalls, sets tolls, licenses the market", needs: ["market"] },
     "Public works": { on: true, p: 0.7, desc: "Walls, wells, roads, and the watch", needs: ["walls","watch"] },
     "Record of custom": { on: true, p: 0.8, desc: "Keeps the charter, rolls, and civic archive" }
