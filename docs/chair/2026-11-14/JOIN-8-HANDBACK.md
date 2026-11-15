@@ -196,14 +196,20 @@ Merged clean though both sides moved them (for the close to re-derive or measure
 | `tests/lint/.prose-numerics-baseline.json` | display-econ (23) | lane-only, taken from the lane: the close re-derives it once |
 | golden | powers-b (24) | DECLARED MOVE dd5887961 P29/P1 (factions[].desc 19 towns, text only) |
 | golden; `governanceAccount.js` (P30's resolution) | powers (25) | the branch's DECLARED MOVES (P4's occupied-seat twin, 28 towns; DA; the headman's name): golden carried; `tests/domain/tailDisplayCivic3V1.test.js` (r2r-metropolis-50) red at the line's 5f3c2c138 BEFORE the powers merge and after it: carried, classed for the close |
+| `docs/content/wiring-census.json` (stale against `generalStateProse.js`, `powerStateProse.js`, `warFaithStateProse.js`); `src/domain/crisis/crisisHooks.js:102` (TDZ: `CAST_REASONS`) | display-civic (10) moved the composers; the TDZ red at 72c37436d already | (g) exit 1: the census's door cannot open until the import order is repaired by its seat; then re-taken by its door, then (g) |
 
 ## 5. Item 2 at the landed tip
 
-Not yet run (after the sweep's code points).
+At the landed code tip **475506bf7** (each run to a file in `/home/user/j8out`, read through `scripts/gate-tail.sh`):
+- (g) the corpus door's `--check`: **exit 1, a stop (§6)**: the wiring census (`docs/content/wiring-census.json`) is STALE against three composers (`generalStateProse.js`, `powerStateProse.js`, `warFaithStateProse.js`), moved by display-civic at point 10 (412938baf; the door was exit 0 at 74c2ff310, the point before). The register's own door, `node scripts/wiring-census.mjs` (`--dry`), crashes: `ReferenceError: Cannot access 'CAST_REASONS' before initialization` at `src/domain/crisis/crisisHooks.js:102` (a module-order fault under plain node), red alike at JOIN-7's tip 72c37436d. So the door cannot be opened: nothing was re-taken and nothing rebuilt.
+- The twelve-birth grid (`node scripts/census/page-census.mjs --grid`): **exit 0, 2 falls** (the same tree as 475506bf7; run before point 25's commit for P30's check).
+- `npm run build`: **exit 0** (run last; `dist/` removed).
+- The test files naming a file with a resolved conflict: `proseEntryContradiction.walker.test.js` (pin, point 1): **exit 1, 24/29**: the five reds as at 72c37436d, the trailing pin now 371 vs 375; the 18 files naming `governanceAccount`/`powerSentenceName` (point 25): 6 red, the same 6 as at 5f3c2c138 (§3).
 
 ## 6. Stops
 
 - **04:21 UTC, point 15 STOPPED (law b; the chair's 03:40 word: "if it still meets the line in a code hunk, stop"):** lane/tail-powers-2026-11-14 at 01ddaba28 (base d817736d8), `git merge --abort`. `src/domain/display/governanceAccount.js`: hunk 1, the imports and `powerNameInProse`: display-civic V1 (1f030877d, landed at point 10) strips the name's own "The" with `powerNameAfterArticle` from `powerSentenceName.js`; powers (P3) writes the same cure as `powerSentenceName(...)` and a regex strip, and imports `powerSentenceName` a second time: one cure written twice, keeping either is a choice. Hunk 2, `governanceAccountOf` §3+4: V1's comment lines against P4's `lineOf` helper (both stand). Told the chair 04:22. Recommendation: V1's body (on the line), P4's `lineOf`, one import line.
+- **05:03 UTC, (g) STOPPED:** the corpus door refuses on a stale wiring census (point 10's composer moves); the census's own door crashes on a TDZ in `crisisHooks.js:102` (`CAST_REASONS`), red already at 72c37436d. Not this seat's to repair (a code fault in the crisis seat's file). For the chair: a seat repairs the import order, then the wiring census is re-taken by its door in its own commit and (g) re-run.
 
 ## 7. Hazards
 
@@ -228,6 +234,6 @@ A worktree at origin's tip (`git worktree add /home/user/j8wt -b join8 <tip>`, `
 
 ## 9. WHAT IS LEFT
 
-1. IN HAND: the sweep. Landed: points 1-14, 16-25 (powers at 25, last, by P30). Next: (g), item 2 at the landed tip, ONE message.
+1. DONE: the sweep (points 1-14, 16-25; powers at 25 by P30), item 2 at 475506bf7 (§5), the one message. (g) STOPPED (§6).
 2. lane/tail-powers-2026-11-14: waits for the chair's "LAND" (P28).
 3. For the close (not this seat's): every row of §4 by its door, once, on the final tree.
