@@ -1838,15 +1838,15 @@
       "lines": 3
     },
     "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:resource_scarcity": {
-      "top1": 0.3359,
+      "top1": 0.3771,
       "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening; traced by the PD3 probe (the same reading at e8327afe7 and at the joined line): 009ee1466 (W2-FIX-DATA-HISTORY item G, 2026-11-13, after this ceiling's banking) declared its first hook off a town with no market (needs: market), refused in 167 of the 566 towns that draw it: top1 0.3359 -> 0.3771 (the confirm corpus's higher reading; banked 0.3745); raised by the chair's ruling PD1 of 2026-11-15: variety owed after the release",
       "lines": 3
     },
     "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:succession_crisis": {
-      "top1": 0.639,
+      "top1": 0.8208,
       "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening; DOMINATED (top1 crosses 0.75 on both corpora); traced by the PD3 probe (TAIL-CLOSE-DOORS-1, docs/chair/2026-11-15/probes/TAIL-CLOSE-DOORS-1/pd3-probe.mjs; the same reading at e8327afe7 and at the joined line): 009ee1466 (W2-FIX-DATA-HISTORY item G, 2026-11-13, after this ceiling's banking) declared its two other hooks off ruler: council, ruler: elder and crisis: succession_void, refused in 473 of the 616 towns that draw it, so \"A would-be heir approaches outsiders to investigate a rival's past\" takes the draw: top1 0.639 -> 0.8208 (confirm 0.8073); raised by the chair's ruling PD1 of 2026-11-15: variety owed after the release",
       "lines": 3
     },
     "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:trade_collapse": {
