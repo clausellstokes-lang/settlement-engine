@@ -241,7 +241,28 @@ false). Repaired here: the three config entries restored (the damaged copy kept 
 last real commit (nothing of the fixture's was pushed; the main checkout's tree and branch untouched). ALWAYS FETCH AND SIT ON
 ORIGIN'S TIP BEFORE A PUSH.
 
+## Batch 6a · 127b1f8ac · the chair's READ-ALL-4 HIGH: the arcane advisory line reads the seat
+claimStanding.js :: settleClaimsToLabel: "Magical practitioners are consulted but not formally empowered. Their influence is
+advisory, transactional, and quietly resented." (drawn by rulingStructure.js at a low arcane share, and this file's Minor /
+Suppressed rung) is false where an arcane power GOVERNS (category magic, the Arcane Council: 9 of 147 towns, the chair's
+measure confirmed). There the non-governing practitioners take "Magical practitioners outside the seat hold no office of
+their own; their influence is advisory and transactional." Measured by one census (before = batch 5's after-run, the same
+code as 4b0ffb515; after at 127b1f8ac): the line 147 -> 138, the twin 0 -> 9, nothing else on the tabs moves but "Patron
+deity" 716 -> 719 (the render-timing difference, named). Field diff (the 720): factions[].desc 9 towns, nothing else of this
+batch. The same run CONFIRMS batch 5's stakes rewording on the 720: the coherence receipt's "A handful of things ... cannot
+all be true at once" falls back 41 -> 14 and 36 -> 14 (the base). Read: r2r-city-2, r2s-under_siege-city-3 (a siege),
+r2r-town-1 (the smallest it reaches). GUARD tests/generators/arcaneAdvisoryReadsTheSeat.test.js: 3 red at 4b0ffb515, KEEP
+r2r-city-1 green; 4/4. Gates: eslint 0, strict 1113 = ceiling, ratchet 167 = ceiling, walker fresh 147, the five test files
+naming claimStanding 31/31. P17 (the Arcane Council's DA, the other powers seat's) does not meet it: this is the practitioners'
+line beside the seat, not the seat's.
+The chair's (2) of the same note (slash labels: "Military/Guard is now about as strong as Elder Council" and its three
+siblings, 9 towns at 9eb084705): ALREADY CURED by batch 1 (cd97721f6, P3); it was not in 9eb084705 and is on the joined line's
+tip 615947df8. Not mine and seen while checking: "The Military/Guard no longer takes its orders." (18 towns, the governance
+contest prose: dossierStateProse/warFaith.generated.js's family): for the governance seat.
+
 ## EVERY NEW OR CHANGED LINE (the owner's veto), with towns it was read in
+- (batch 6a) "Magical practitioners outside the seat hold no office of their own; their influence is advisory and
+  transactional." (9): r2r-town-1, r2r-city-2, r2s-under_siege-city-3 (a siege), r2s-occupied-city-3 (an occupation).
 - (batch 4) "<the row's narrative> Even so, the two are now at odds over <the issue>." (51 rows, 47 towns): r2s-under_siege-town-0
   (a siege, the smallest kind it reaches: a town), r2s-famine-town-0 (a famine), r2s-monster_pressure-metropolis-0 (the largest).
 - (batch 5; each read on the card in the town named, the guard's towns) "Talks while working when there is clay to be had; shows how
@@ -298,8 +319,12 @@ None re-taken. The generator golden (tests/property/generatorGoldenMaster.test.j
 merge seat's re-record carries the three families above.
 
 ## What is left (by width), and what is next (kept by TAIL-POWERS-B-2)
-- DONE: P19 (batch 4), P9 + P12 + P18 (batch 5).
-- NEXT, batch 6 (PREPARED, NOT BUILT: scratch tools/b6edit.py holds the exact rewordings): stressFactions.js 05049 / 25870
+- DONE: P19 (batch 4), P9 + P12 + P18 (batch 5), the READ-ALL-4 HIGH (batch 6a). HANDED BACK at 03:15 UTC by the clock.
+- P26 (the chair, 01:47): the ties seat's rows 28616 (family), 23160, 03038 where the writer is claimStanding.js: NOT STARTED
+  (WORKLIST-TIES.json on the chair's lane; find each writer by script). relationshipArchetypes.js is the TIES seat's (T6).
+- The hold on `ruling body` is LIFTED (the chair, 02:26; the joined line at d817736d8 holds the atom): P24's lines may be
+  built on a merge of it (the only merge a seat makes).
+- NEXT, batch 6b (PREPARED, NOT BUILT; widest first, per the chair: scratch tools/b6edit.py holds the exact rewordings): stressFactions.js 05049 / 25870
   (37+19 towns: "controls a distinct district or institution" -> "and has a following of its own"), 06241 (3: the War Council
   "functioning smoothly ... authority isn't contested" beside a Suppressed council -> "While the war goes well, few people ask
   what it does."), 15394 (1: the hunters "temporarily powerful" -> "they are wanted while the monsters are"), B00215 (4: "the
