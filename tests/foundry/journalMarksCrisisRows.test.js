@@ -38,7 +38,15 @@ const HEAD = (noun) => `*The descriptions here are of ordinary times. While ${no
 
 /** RED: [seed, page, a line that must not print (whole), the line that prints instead (whole)]. */
 const RED = [
-  ['r2s-under_siege-town-3', 'Economics & Trade', '- Gate Tolls: 8%', '- Gate Tolls (stopped): 8%'],
+  // the shares below re-keyed by identity (TAIL-CRISIS-8): TAIL-DEFECON-5's R2, "one shadow figure" (9cc8c6821, landed at
+  // 26c3dc45 (JOIN-9 · 14), a declared move of economicState.incomeSources in 229 towns: the criminal row held at the
+  // capture, the lawful rows share the rest) moved r2s-under_siege-town-3's Gate Tolls 8% -> 7% and Property Rents 8% -> 7%
+  // (its Shadow Economy row 39%) and r2s-famine-town-1's Grain Sales 5% -> 4%; the rows and the marks are the same
+  ['r2s-under_siege-town-3', 'Economics & Trade', '- Gate Tolls: 7%', '- Gate Tolls (stopped): 7%'],
+  // r2s-famine-town-1's shares re-keyed by identity (TAIL-CRISIS-7): TAIL-DEFECON-2's D14 (5f67f382d, landed at ec1a14f27,
+  // a declared move of the income row: Pilgrim Trade only where a house of pilgrimage stands) took the town's pilgrim share
+  // and the rest renormalised: Grain Sales 4% -> 5%, Toll Revenue 14% -> 15%; the rows and the mark are the same
+  // (then 5% -> 4% at 9cc8c6821, above; Toll Revenue stays 15%)
   ['r2s-famine-town-1', 'Economics & Trade', '- Grain Sales: 4%', '- Grain Sales (scarce): 4%'],
   ['r2s-plague_onset-town-0', 'Economics & Trade', '- Market Taxes: 36%', '- Market Taxes (curtailed): 36%'],
   ['r2s-famine-town-1', 'Economics & Trade', '- **Grain & Bread** *(impaired)*', '- **Grain & Bread** *(impaired)*: Scarce in the famine.'],
@@ -55,8 +63,8 @@ const HEADS = [
 ];
 /** KEEP: [seed, page, a line that prints, unmarked, before and after]; and a calm town's pages with no head line. */
 const KEEP = [
-  ['r2s-famine-town-1', 'Economics & Trade', '- Toll Revenue: 14%'],
-  ['r2s-under_siege-town-3', 'Economics & Trade', '- Property Rents: 8%'],
+  ['r2s-famine-town-1', 'Economics & Trade', '- Toll Revenue: 15%'], // re-keyed with the shares above (5f67f382d)
+  ['r2s-under_siege-town-3', 'Economics & Trade', '- Property Rents: 7%'], // re-keyed 8% -> 7% (9cc8c6821, above)
   ['r2s-under_siege-town-3', 'Institutions', '- **Taverns**: Drinking establishments. Social hubs.'],
   ['r2s-famine-town-1', 'Institutions', '- **Inns**: Lodging for traveling merchants.'],
 ];
