@@ -559,8 +559,10 @@ describe('EM-B2b — world facts by consequence: the route, the refusals and the
     // composed-prose-manifest.json), from the stage at 09c4435e0: the prose manifest 7bdc431e.. -> 083c8dd7.. (181 of 1,050 rows).
     // Closing act 2 of the style wave's merge, the composed-prose manifest signed ONCE at the final tip (2026-11-11-style-2-merge-
     // closing-2-composed-prose-manifest.json), from the stage at a3ea0d325: the prose manifest 083c8dd7.. -> 3b9ee8b6.. (1,050 of 1,050 rows).
+    // The close of the round BAR2 (2026-11-15-the-close-of-the-round-bar2.json, BAR2-CLOSE-DOORS-2), at the joined line's 1011a8a91, the
+    // surface left pending at the close of the tail round: the prose manifest 3b9ee8b6.. -> 551a5f5d.. (1,050 of 1,050 rows).
     expect(shaOfFile(PROSE_GOLDEN), 'tests/fixtures/dossier-prose-manifest-golden.json moved')
-      .toBe('3b9ee8b68fbe36183170cf0f6f1204a455c3c04abee124e6867f23e41601e2d7');
+      .toBe('551a5f5d454e8dd3d18edefc414cf63240c5b17c28a89c5a4806860c4970258e');
 
     // AND THE REASON THEY CANNOT MOVE: fresh generation passes no layer, so no world fact is ever
     // routed and `config′` is `config` itself. Measured against the committed manifest.

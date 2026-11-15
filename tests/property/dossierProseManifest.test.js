@@ -207,11 +207,14 @@ describe('the composed-prose manifest — the DRIFT corpus, both audiences', () 
     // 73,469 -> 73,397 (408/394/388 unmoved) at STYLE-2-MERGE CLOSING ACT 2, THE COMPOSED-PROSE MANIFEST AT THE STYLE WAVE'S FINAL TIP (ODQ §934.105, STYLE-2-MERGE, 2026-11-11; record docs/shift-records/2026-11-11-style-2-merge-closing-2-composed-prose-manifest.json),
     // at every merge point's tree (86 trees, point to point): SW-B1 CONTRADICTIONS (point 17) -72, every other point 0 (SW-B5, SW-B6, SW-7 and SW-8 move content, not count).
     // Towns unmoved at 516/3/3/3.
+    // 73,397 -> 72,744 (408/394/388 -> 402/390/394) at THE CLOSE OF THE ROUND BAR2, THE COMPOSED-PROSE MANIFEST AT THE JOINED LINE'S 1011a8a91 (ODQ §934.105 and the owner's word of 2026-11-15 20:27:16 UTC; record docs/shift-records/2026-11-15-the-close-of-the-round-bar2.json, BAR2-CLOSE-DOORS-2),
+    // the measured value of this arm's own failure: the tail round's declared moves since closing act 2, left pending at the last close (the same 72,744 and 402/390/394 measured at 74ded1800, so this round's cures move no count); not bisected by point.
+    // Towns unmoved at 516/3/3/3.
     expect(tally, 'the DRIFT corpus by seed, cells and towns').toEqual({
-      'golden-master-v3': { cells: 73_397, towns: 516 },
-      'gm-seed-a': { cells: 408, towns: 3 },
-      'gm-seed-b': { cells: 394, towns: 3 },
-      'gm-seed-c': { cells: 388, towns: 3 },
+      'golden-master-v3': { cells: 72_744, towns: 516 },
+      'gm-seed-a': { cells: 402, towns: 3 },
+      'gm-seed-b': { cells: 390, towns: 3 },
+      'gm-seed-c': { cells: 394, towns: 3 },
     });
     // The two halves must close against the figures every other arm here reads.
     expect(Object.values(tally).reduce((n, r) => n + r.cells, 0)).toBe(run.cells.length);
