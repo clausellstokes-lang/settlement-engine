@@ -32,7 +32,7 @@ import { houseDoesChainsWork, importsAsPrinted, needMetBy } from './tradeListDis
 import { tradeStoppedHere } from './chainStateShown.js';
 import { filterDeclared, lineText } from '../facts/drawDeclared.js';
 import { factsOf } from '../facts/factsOf.js';
-import { defenceOf } from '../facts/defence.js';
+import { defenceKeepsService } from '../facts/defence.js';
 
 /** The parts of a need label that are no good a cart or a ship brings in. */
 const NOT_BROUGHT = /\btrade access\b|\bcapital\b|\bharbou?r\b|\bwater power\b|\bknowledge\b|\bley lines?\b/i;
@@ -69,11 +69,10 @@ export function chainNeedLine(chain, record, first = true) {
   if (!house || ACCESS_ONLY.test(house) || !liveInstitutionNames(/** @type {Parameters<typeof liveInstitutionNames>[0]} */ (record)).includes(house)) return '';
   if (!houseDoesChainsWork(c, house)) return '';
   // TAIL-DISPLAY-ECON-2 (12560, 12562): a service the town has no house for is not named: "gate control" only where a
-  // gate or a wall stands (`facts/defence.js :: defenceOf`, the one reader of the defence atoms: a palisade has its gate
-  // too); the watch's other work stays.
-  const d = defenceOf(/** @type {Parameters<typeof defenceOf>[0]} */ (record)), gated = d.gate || d.walls;
+  // gate stands; the watch's other work stays. TAIL-CLOSE-SRC-2: the home answers it (`facts/defence.js ::
+  // defenceKeepsService`, over the one reader of the defence atoms), and its gate is the law: a palisade alone keeps none.
   const services = (Array.isArray(dep.affectedServices) ? dep.affectedServices : []).filter((x) => typeof x === 'string' && x.trim()).slice(0, 3).map(String)
-    .filter((x) => gated || !/\bgate\b/i.test(x));
+    .filter((x) => defenceKeepsService(/** @type {Parameters<typeof defenceKeepsService>[0]} */ (record), x));
   if (services.length === 0) return '';
   const goods = goodsBroughtIn(String(dep.resource ?? ''), importsAsPrinted(/** @type {Parameters<typeof importsAsPrinted>[0]} */ (record)).arriving);
   if (goods.length === 0) return '';

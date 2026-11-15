@@ -3285,6 +3285,16 @@
         "sites": 4,
         "introducedAt": "b46048140467b9a597b66259d93cfb54507524d0",
         "cause": "GREEN-TIP (2026-11-10, b46048140, the foodGenerator <-> isolationSupport import-cycle cure; the chair's STOP-2 ruling, ODQ \u00a7934.105): RELOCATION, NET ZERO. The four custom-content food constants CUSTOM_PRODUCER_CAPACITY_PER_ITEM 0.15, CUSTOM_PRODUCER_CAPACITY_CAP 0.6, CUSTOM_CONSUMER_NEED_PER_ITEM 0.1 and CUSTOM_CONSUMER_NEED_CAP 0.5 moved byte-for-byte with foodLandOf from src/generators/foodGenerator.js into the new leaf (the moved 168-line block is cmp-identical to the lines removed); foodGenerator loses exactly these four. No tuning figure enters the product."
+      },
+      "src/domain/display/shadowEconomyShown.js": {
+        "sites": 1,
+        "introducedAt": "63c3f2ae73a7ea8af74950580e3b50f20fba5631",
+        "cause": "TAIL-EXPORTS-PDF batch 1 (63c3f2ae7, the chair's ruling E1: the export prints what the tab prints, through the tab's own leaf) named the Economics tab's Shadow Economy floor SHADOW_CAPTURE_FLOOR instead of the tab's inline bare 3; TAIL-DISPLAY-ECON-5 (1f41c23dc, the chair's ruling X30) set it to 11, the record's own floor for its criminal income share (economicState.js: blackMarketCapture > 10, a whole number). No tuning constant says it: the 10 in economicState.js is a bare integer. The name earns its register row when the owner signs (TAIL-CLOSE-SRC-2, the owner's veto list)."
+      },
+      "src/generators/economy/prosperity.js": {
+        "sites": 1,
+        "introducedAt": "2ac50c55dd0ef292df64b9ac76b2cad18e35f7be",
+        "cause": "TAIL-DEFECON-3 batch 3 (2ac50c55d, D2, #10700: one home for the income mix's spread): INCOME_LEADER_FROM = 20, the income row share at or over which 'Highly diversified' is not said, the same number as LEADER_FROM in display/stateProse/economyStateProse.js (pinned equal by tests/generators/tailDefeconBatch3Lines.test.js); the prose desk stays out of the generators' first-paint graph, so neither file may import the other's. The name earns its register row when the owner signs (TAIL-CLOSE-SRC-2, the owner's veto list)."
       }
     },
     "bareDecimals": {

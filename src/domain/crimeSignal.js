@@ -22,7 +22,7 @@ import { isCriminalInstitution } from './corruption.js';
  * @typedef {object} CrimeSignal
  * @property {boolean} present  a criminal faction or a criminal house exists
  * @property {string[]} factions the criminal factions' names, roster order
- * @property {string[]} houses   the criminal houses' names, estate order
+ * @property {string[]} houses   the criminal houses' names, estate order @property {boolean} seated a criminal power holds a seat on the roster (TAIL-CLOSE-SRC-2: the safety profile's roster lines ask it; one line, so no cited line moves)
  */
 
 /**
@@ -43,7 +43,7 @@ export function crimeSignalOf(lists) {
   const houses = estate
     .filter((inst) => isCriminalInstitution(/** @type {Parameters<typeof isCriminalInstitution>[0]} */ (inst)))
     .map((inst) => String(/** @type {{ name?: unknown }} */ (inst).name ?? ''));
-  return { present: factions.length > 0 || houses.length > 0, factions, houses };
+  return { present: factions.length > 0 || houses.length > 0, factions, houses, seated: factions.length > 0 };
 }
 
 /** A thieves' or criminal guild, with or without the article and the apostrophe. */

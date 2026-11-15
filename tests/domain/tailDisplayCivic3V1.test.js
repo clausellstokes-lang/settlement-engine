@@ -54,6 +54,10 @@ const clauseAfterSentinel = (blockId, poolKey, vid, slots) => {
 const S0 = '\u0000';
 const POW6 = /** @param {string} f */ (f) => clauseAfterSentinel('DS-POW-6', 'GM ADVISORY: the commander is a political actor', 4, { seat: S0, settlement: S0, faction: f });
 const POW4 = /** @param {string} c */ (c) => clauseAfterSentinel('DS-POW-4', 'riskLabel: Contested', 4, { settlement: S0, counterpart: c, faction: 'Merchant Guild Council' });
+// Re-keyed BY IDENTITY (TAIL-CLOSE-DISPLAY-2, red 9): r2r-metropolis-50's pair is DS-POW-4 Critical v1, which
+// TAIL-CORPUS-DEF-2 reworded (51217c0e, DECLARED: "the office no longer shields the seat; no slot as a verb's subject")
+// on the joined line before this guard joined it: the same town, the same vid, computed as the two above.
+const POW4C = /** @param {string} c */ (c) => clauseAfterSentinel('DS-POW-4', 'riskLabel: Critical. The seat could fall', 1, { seat: S0, settlement: S0, counterpart: c });
 // [seed, the sentence that must not print, what prints instead]
 const CURED = [
   ['r2r-city-44', 'The Military/Guard takes its orders no longer.', 'The Guard takes its orders no longer.'],
@@ -62,7 +66,7 @@ const CURED = [
   ['r2r-village-50', 'The hall is at odds with the Military/Guard and the Religious Authorities.', 'The hall is at odds with the Guard and the Religious Authorities.'],
   ['r2r-town-27', POW6('Military/Guard'), POW6(powerSentenceName('Military/Guard'))],
   ['r2r-city-37', POW4('Military/Guard'), POW4(powerSentenceName('Military/Guard'))],
-  ['r2r-metropolis-50', 'Military/Guard has the strength', 'The Guard has the strength, and the Grand Council has only the office.'],
+  ['r2r-metropolis-50', POW4C('Military/Guard'), POW4C(powerSentenceName('Military/Guard'))],
   ['r2r-hamlet-27', 'Military/Guard answers to the Elder Council', 'The Guard answers to the Elder Council'],
   ['r2r-metropolis-8', 'Noble Claimant (Senior Line) and Noble Claimant (Reform Line) contend for it.', 'The Senior Line and the Reform Line contend for it.'],
   ['r2r-metropolis-39', 'Bloc will back whichever side meets its price.', 'The Neutrals will back whichever side meets their price.'],

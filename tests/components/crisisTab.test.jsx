@@ -99,7 +99,11 @@ describe('the Crisis page', () => {
       const stakeRows = q.queryAllByTestId('crisis-stake').length;
       expect(stakeRows).toBeGreaterThanOrEqual(entry.cast.stakes.filter((k) => k.reason !== 'it could side with either camp').length);
       expect(stakeRows).toBeLessThanOrEqual(entry.cast.stakes.length);
-      expect(q.queryAllByTestId('crisis-stake').map((r) => r.textContent).join(' ')).not.toMatch(/no stake yet/);
+      const stakeText = q.queryAllByTestId('crisis-stake').map((r) => r.textContent).join(' ');
+      // TAIL-CLOSE-TESTS-C: the liveness anchor: every stake the record gives a row prints its reason in the rows read here
+      entry.cast.stakes.filter((k) => k.reason !== 'it could side with either camp').forEach((k) => expect(stakeText).toContain(k.reason));
+      // anchored: the line above shows the stake rows' text is live (each held stake's reason prints in it)
+      expect(stakeText).not.toMatch(/no stake yet/);
       expect(q.queryAllByTestId('crisis-lever').length).toBe(entry.cast.levers.length);
       expect(q.getAllByTestId('crisis-see-first').length).toBeGreaterThan(0);
       expect(q.getByTestId('crisis-if-nothing').textContent).toBe(entry.viabilityNote);

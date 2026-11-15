@@ -200,6 +200,24 @@ const SET_ASIDE = Object.freeze({
   "DS-STR-1 :: Overview's own section framing": 'the empty `stress[]` (the no-banner rung; R-DST-K): its key requires no crisis, so it cannot be mute under one — ratified by construction, the chair 2026-11-07 06:5x',
 });
 
+/**
+ * THE CELLS SET ASIDE BY POOL AND FAMILY (the chair's ruling K31, 2026-11-15, vetoable by the owner; the shape the
+ * crisis seat's TAIL-CRISIS-7 hand-back asked for). `SET_ASIDE` above lifts a pool WHOLE, so a pool declared mute under
+ * ONE family would red when it speaks under any other. A cell here is a pool-and-family DECLARED mute, named with its
+ * declaring commit: it must be mute (the arm reds if it speaks), and every other family that pool denies is still held
+ * to the law below (it must speak). Keyed `<block> :: <pool> :: <family>`, exact; a listed cell the walk never reaches
+ * is stale and reds. Measured by TAIL-CLOSE-POOLS-1 at the joined line 0b1248dbf: these five, each the `threat` family
+ * (read under a siege), and no other mute cell.
+ * @type {Readonly<Record<string, string>>}
+ */
+const SET_ASIDE_CELLS = Object.freeze({
+  'DS-POW-6 :: operation role duty evasion :: threat': 'f8e7326ce (W2-WRITE-SIDE-REST-2 D): v1-v3 declared off a siege (nothing arrives by road to evade the gate)',
+  'DS-GEN-13 :: ENTREPOT :: threat': '32ab37da (W2-WRITE-SIDE-REST-2 D): the siege Overview\'s road lines, v1 among them, declared off a siege',
+  'DS-ECO-10 :: POSTURE: vulnerable :: threat': 'c21abdd5 (W2-WRITE-SIDE-ECO-3 E ww500): v1-v3 declared off a siege (the way out is closed, not unreliable)',
+  'DS-DEF-2 :: Beasts & Monsters: settled, nothing organized :: threat': '35acb7794 (W2-WRITE-5 A, H4): the threat twins v4-v6 declared off a siege and an occupation; v1-v3 speak only with no threat at hand',
+  'DS-ECO-12 :: INCOME WEIGHT: the religious houses :: threat': '13c6618e0 (W2-WRITE-5 A, H5): the no-house lines v3, v4 declared off a siege; the house lines v1, v2 read the compound `sacredHouse` the synthesised place cannot hold, and they still speak under a siege where a house stands (w5-village-under_siege-3 draws v1, v2, TAIL-CLOSE-POOLS-1\'s census)',
+});
+
 /** The instrument's claims about one variant's text under one place. */
 const claimsOf = (text, place) => crisisBlindFindings(place, { page: text });
 
@@ -252,6 +270,7 @@ describe('F12 · the crisis dimensions on the state-prose desks', () => {
     const mute = [];
     const blind = [];
     const setAsideHeard = [];
+    /** @type {string[]} */ const cellsSeen = [];
     for (const [blockId, block] of Object.entries(LEAVES)) {
       if (UNMOUNTED_BLOCKS.includes(blockId)) continue;
       for (const [poolKey, pool] of Object.entries(block.pools || {})) {
@@ -266,6 +285,12 @@ describe('F12 · the crisis dimensions on the state-prose desks', () => {
             if (eligible.length > 0) setAsideHeard.push(`${blockId} :: ${poolKey} :: ${family}`);
             continue;
           }
+          const cell = `${blockId} :: ${poolKey} :: ${family}`;
+          if (cell in SET_ASIDE_CELLS) {
+            cellsSeen.push(cell);
+            if (eligible.length > 0) setAsideHeard.push(`${cell} (declared mute by ${SET_ASIDE_CELLS[cell]})`);
+            continue;
+          }
           const compound = compoundReadsOf(pool, read);
           if (eligible.length === 0) mute.push(`${blockId} :: ${poolKey} :: ${family}${compound.length ? ` (reads the compound ${compound.join(' · ')}: set it aside by name)` : ''}`);
           for (const v of eligible) if (claimsOf(v.text, placeUnder(type)).length) blind.push(`${blockId} :: ${poolKey} :: v${v.vid}`);
@@ -274,6 +299,8 @@ describe('F12 · the crisis dimensions on the state-prose desks', () => {
     }
     // The set-aside pools are each MUTE under every family they deny, or the entry is stale.
     expect(setAsideHeard, 'a set-aside pool now yields a line: lift it from SET_ASIDE').toEqual([]);
+    // Every set-aside cell is a cell the walk reaches (a pool that denies that family), or the entry is stale.
+    expect([...new Set(cellsSeen)].sort(), 'a set-aside cell the walk no longer reaches: lift it from SET_ASIDE_CELLS').toEqual(Object.keys(SET_ASIDE_CELLS).sort());
     // Measured at the ruling (2026-11-07): on the minimal place 46 mute cells, all but DS-STR-1's
     // and DS-CND-1's the fixture's lie (a market, a temple, a watch, a value the pool reads, absent);
     // on the pool's own record 8, of which DS-STR-1's 5 are set aside above and DS-CND-1 boom's 3

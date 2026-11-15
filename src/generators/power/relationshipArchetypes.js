@@ -240,7 +240,8 @@ export const createTieProseDraw = (force, facts = null) => {
     draw.printed.add(index);
     // TAIL-TIES-2, the chair's ruling (T6): a second tie of the same kind between the same two cards, drawn the other way
     // round, is written in the first tie's order (the pair's direction has one home); its index and draw are untouched.
-    const from = String(npc?.id ?? npc?.name ?? ''); const to = String(partner?.id ?? partner?.name ?? '');
+    const from = String(npc?.id ?? npc?.name ?? '');
+    const to = String(partner?.id ?? partner?.name ?? '');
     const pairKey = `${archetypeKey ?? archetype?.label}::${[from, to].sort().join('\u0000')}`;
     if (!firstOfPair.has(pairKey)) firstOfPair.set(pairKey, `${from}>${to}`);
     const reversed = from !== to && firstOfPair.get(pairKey) === `${to}>${from}`;

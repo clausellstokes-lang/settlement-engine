@@ -46,6 +46,12 @@ const textsOf = (/** @type {string} */ seed) => {
     ...events.flatMap((/** @type {any} */ e) => [...(e.plotHooks || []), ...(e.lastingEffects || [])]), ...tensions.flatMap((/** @type {any} */ t) => t.plotHooks || [])].join(' · ');
 };
 
+/** The hooks a SILENT row's line would stand among (the timeline's and the tensions'): its liveness anchor. */
+const hooksOf = (/** @type {string} */ seed) => {
+  const h = /** @type {any} */ (bornCensus(seed)).history || {};
+  return [...(h.historicalEvents || []).flatMap((/** @type {any} */ e) => e.plotHooks || []), ...(h.currentTensions || []).flatMap((/** @type {any} */ t) => t.plotHooks || [])];
+};
+
 const SILENT = null; // the slot is silent by design: the timeline's hook gave way to another of its event's hooks, the tension's list dropped it
 
 /** [seed, the false words, what prints instead on the same slot (the declared twin), or SILENT and the KEEP town that prints the original] */
@@ -117,6 +123,11 @@ describe('TAIL-HISTORY-5 batch 6: what the bar\'s readers met prints only where 
         expect(original, `${key}: the original prints in ${witness}`).toBeTruthy();
         expectPresentThenAbsent(before, s, original, `${key}: the slot is silent where the town makes the line false`);
       }
+      // TAIL-CLOSE-TESTS-C: the liveness anchor first: the twin on the same slot, or for a SILENT row the hooks it stands among
+      if (instead) expect(s, key).toMatch(/** @type {RegExp} */ (instead));
+      else expect(hooksOf(String(seed)).length, `${key}: the hooks the silent line stood among still print`).toBeGreaterThan(0);
+      // anchored: the branch above shows this town's slot is live (its twin prints, or its hooks print), so the absence is a cure
+      expect(s, key).not.toMatch(/** @type {RegExp} */ (gone));
     }), 'the false lines');
   }, 600_000);
 

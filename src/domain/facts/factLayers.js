@@ -123,6 +123,8 @@ export const LEAVES = Object.freeze({
   imports: home('imports', 2, ['economicState']),
   exports: home('exports', 2, ['economicState']),
   prosperity: home('prosperity', 2, ['economicState']),
+  // TAIL-CLOSE-SRC-2 (the chair's SR2): what the place can keep up (`keep.js :: keepOf`, d7d7f7787), read off the prosperity label
+  keep: home('keep', 2, ['economicState']),
   magicDependents: leaf({ layer: 2, module: 'domain/magicReliance.js', exported: 'magicDependents', call: 'record', reads: ['economicState'] }),
   foodEndurance: leaf({ layer: 2, module: 'domain/defense/defenseFacts.js', exported: 'foodEnduranceOf', call: 'record', reads: ['economicState'] }),
   chainCarrier: leaf({ layer: 2, module: 'domain/facts/chainCarrier.js', exported: 'chainCarrierOf', call: 'perChain', reads: ['config', 'economicState'] }),
@@ -160,8 +162,9 @@ export const LEAVES = Object.freeze({
   sharesPower: home('sharesPower', 4, ['npcs'], { call: 'factsCall' }),
   magicPractitioners: leaf({ layer: 4, module: 'domain/magicReliance.js', exported: 'magicPractitioners', call: 'record', reads: ['institutions', 'npcs'] }),
   magicReliance: leaf({ layer: 4, module: 'domain/magicReliance.js', exported: 'deriveMagicReliance', call: 'record', reads: ['config', 'economicState', 'institutions', 'npcs'] }),
-  magicSource: leaf({ layer: 4, module: 'domain/facts/magicSource.js', exported: 'magicSourceOf', call: 'record', reads: ['config', 'economicState', 'institutions', 'npcs'],
-    note: 'where the magic the place relies on comes from (census row 3): the practitioners, then the houses that supply a dependent chain' }),
+  magicSource: leaf({ layer: 4, module: 'domain/facts/magicSource.js', exported: 'magicSourceOf', call: 'record', reads: ['config', 'economicState', 'economicViability', 'institutions', 'npcs'],
+    note: 'where the magic the place relies on comes from (census row 3): the practitioners, then the houses that supply a dependent chain; '
+      + 'the magic food channel\'s word from the viability metrics (`economicViability.metrics.foodBalance.magicFoodNote`, layer 3; f9b957cbd, declared TAIL-CLOSE-SRC-2)' }),
   captureClimate: leaf({ layer: 4, module: 'domain/facts/factLayers.js', exported: 'powerStructure.criminalCaptureState', call: 'record', reads: ['powerStructure.criminalCaptureState'], stored: true,
     note: 'the stored capture climate, written at assembly from the cast (a back-write)' }),
   // ── layer 5 ──

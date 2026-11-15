@@ -14,6 +14,7 @@ import { beforeAll, describe, expect, test } from 'vitest';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 beforeAll(async () => { await loadGenerationLawPayloads(); });
 
@@ -38,14 +39,22 @@ describe('the readers\' towns: the Outlook names no machinery, and its rows are 
     expect(rowsOf(s).map((r) => r.description)).toContain('The town is set on arms, but it has no walls, garrison, or barracks.');
   });
 
+  // RE-KEYED BY IDENTITY 2026-11-15 (TAIL-CLOSE-PEOPLE-1, red 6): TAIL-DEFECON-3's DECLARED MOVE 2ac50c55 (#04271 #B04151
+  // #B10921) prints the bank row's "does little trade" only where the record's export list is short (fewer than four
+  // goods). This town stands banks beside a merchant guild and exports seventeen goods: the row is rightly gone, so the
+  // guard reads what it guards on the record (the banks, the merchants, the exports) and the row's absence beside its
+  // sibling warning; no row names a priority (#823 #825) and none denies the merchants it holds (#824).
   test('#823 #824 #825 rr2s-city-famine-rand-1: the bank row, no priority, no denial of its merchants', () => {
     const s = born(readerCfg('rr2s-city-famine-rand-1'), 'rr2s-city-famine-rand-1');
-    expect((s.institutions || []).some((i) => /merchant guild/i.test(String(i.name)))).toBe(true);
+    const names = (s.institutions || []).map((i) => String(i.name).toLowerCase());
+    expect(names.some((n) => /merchant guild/.test(n))).toBe(true);
+    expect(names.some((n) => n.includes('bank') || n.includes('money'))).toBe(true);
+    expect((s.economicState?.primaryExports ?? []).length).toBeGreaterThanOrEqual(4);
     expect(machineryIn(s)).toEqual([]);
-    const bank = rowsOf(s).find((r) => r.title === 'Banking Without Economic Focus');
-    expect(bank?.description).toBe('Banks stand here, but the city does little trade.');
-    expect(bank?.suggestedFixes).toEqual(['Give the city more trade, or remove the banks']);
-    expect(bank?.impact).toBe('Its banks find little business to do.');
+    expect(rowsOf(s).flatMap(textsOf).filter((t) => /without a merchant class/i.test(t))).toEqual([]);
+    const warningTitles = (s.economicViability?.warnings || []).map((r) => r.title);
+    expectAbsentWithAnchor(warningTitles, 'Banking Without Economic Focus', 'Trade Dependencies',
+      'a city that exports four goods or more is not told it does little trade');
   });
 
   test('the hedge suggestion, rr2s-thorp-calm-port-1: a thorp is offered no house its catalogue cannot hold', () => {

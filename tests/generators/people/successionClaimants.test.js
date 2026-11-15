@@ -28,6 +28,7 @@ import { rulingChainOf } from '../../../src/domain/dossier/powerStrata.js';
 import { leaderlessLineOf, stressPowerRowOf } from '../../../src/domain/people/stressPowerFaces.js';
 import { seatKeeperOf } from '../../../src/domain/people/seatKeeper.js';
 import { DEFAULT_CONFIG } from '../../../src/store/configSlice.js';
+import { faceOfRole, titleForHolder } from '../../../src/data/holderTitleForms.js';
 
 const DIALS = Object.freeze({
   tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat',
@@ -44,6 +45,11 @@ const bornCensus = (settType, seed, stress = null) => generateSettlementPipeline
   ...(stress ? { selectedStresses: [stress], selectedStressesRandom: false } : {}) }), null, { seed, customContent: {} });
 /** The titles of the noble line (a claimant minted as the occupier's governor is; a royal house's face), literals. */
 const OF_THE_LINE = Object.freeze(['the lord', 'the monarch']);
+/** RE-KEYED BY IDENTITY 2026-11-15 (TAIL-CLOSE-PEOPLE-1): TAIL-TITLES K-C's DECLARED MOVE 1036bf94 prints a face in its holder's
+ *  form ("the lord" -> "the lady" for a woman; M-1b: the role is that title). The guard reads the card's FACE through the move's
+ *  own reader (faceOfRole), and only where the printed title IS that face's holder form, so a wrong word still reds.
+ *  @param {any} c */
+const faceOf = (c) => { const f = faceOfRole(c); return c && c.title === titleForHolder(f, c.gender) ? f : c?.title; };
 /** @param {any} s @param {string} power */
 const firstOf = (s, power) => (s.npcs || []).find((c) => (c.memberships || []).some((m) => m.power === power && m.rank === 1)) || null;
 /** @param {any} c */
@@ -69,7 +75,7 @@ function missesOf(s, key) {
     if (!row || row.stress !== 'succession_void' || /claimant/i.test(f.faction || '')) continue;
     const first = firstOf(s, f.faction);
     if (!first) out.push(`${key}: ${f.faction} has no one on the page`);
-    else if (!OF_THE_LINE.includes(first.title)) out.push(`${key}: ${f.faction} is faced by ${first.name}, ${first.title} (${first.institution?.key})`);
+    else if (!OF_THE_LINE.includes(faceOf(first))) out.push(`${key}: ${f.faction} is faced by ${first.name}, ${first.title} (${first.institution?.key})`);
     if (leaderlessLineOf(s, f.faction)) out.push(`${key}: ${f.faction} prints "${leaderlessLineOf(s, f.faction)}"`);
   }
   return out;
@@ -94,7 +100,7 @@ describe('COHERENCE-POWERS-4 (F3) — a claimant is the succession crisis\'s own
       expect(claimants).toEqual(['Noble Claimant (Senior Line)', 'Noble Claimant (Reform Line)']);
       for (const power of claimants) {
         const first = firstOf(s, power);
-        if (!first || first.title !== 'the lord' || first.institution?.kind !== 'power') misses.push(`${key}: ${power} faced by ${first ? first.title : 'no one'}`);
+        if (!first || faceOf(first) !== 'the lord' || first.institution?.kind !== 'power') misses.push(`${key}: ${power} faced by ${first ? first.title : 'no one'}`);
       }
       misses.push(...missesOf(s, key));
     }
@@ -123,7 +129,7 @@ describe('COHERENCE-POWERS-4 (F3) — a claimant is the succession crisis\'s own
   it('two bodies on one tab (x50-trim-21): each faced by its own claimant of the line, neither prints a line', () => {
     const s = generateSettlementPipeline({ settType: 'town', culture: 'mediterranean' }, null, { seed: 'x50-trim-21', customContent: {} });
     for (const power of ['The Highborn Circle', 'The Peerage']) {
-      expect(firstOf(s, power)?.title).toBe('the lord');
+      expect(faceOf(firstOf(s, power))).toBe('the lord');
       expect(leaderlessLineOf(s, power)).toBe('');
     }
     expect(firstOf(s, 'The Highborn Circle')).not.toBe(firstOf(s, 'The Peerage'));
