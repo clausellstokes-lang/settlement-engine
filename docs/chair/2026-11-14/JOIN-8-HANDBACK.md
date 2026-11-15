@@ -31,6 +31,7 @@ THE CHAIR'S RULINGS TO JOIN-7 (each vetoable by the owner):
 
 THE CHAIR'S RULINGS TO JOIN-8 (each vetoable by the owner):
 - **The prompt (2026-11-15, the sixth landing):** THE SWEEP (the standing rule): land every `lane/tail-*` branch on origin whose tip is not an ancestor of the joined line, each at the tip read back at its merge, as one point. THE ORDER, where they qualify: FIRST the branches whose seats have finished for now (corpus-eco, display-econ, exports-pdf, defecon, defecon-r, services, titles: lane/tail-titles-2026-11-15, its last commit display text only); THEN the moving ones (corpus-def, crisis, defecon-c, display-civic, history, houses, narrative, ties, powers-b); THEN THE CORPUS'S DOOR (g) if a corpus branch landed. lane/tail-powers-2026-11-14 IS SKIPPED until the chair says "LAND lane/tail-powers-2026-11-14" (P28). RULED BEFOREHAND (lent hunks, both sides stand, none is "a seat that left its group"): `safetyProfile.js`, `safetyLineTruth.js` from display-civic (D26); the `commodities` arrays of `src/data/resourceData.js` from defecon-c (D32); lines under `src/pdf/` and `src/foundry/` that print a resource's name from display-civic (V4), and the two headings over the origin line from exports-pdf (E23); hunks of `assembleSettlement.js` from crisis (K21, the late re-read); in `src/data/powerSiblings.js` FACTION_DESC_SIBLINGS and BASELINE_CONFLICT_SIBLINGS from powers, the rest from ties (P26). A branch may hold a merge of the joined line at a tip the chair named (display-civic, exports-pdf, defecon hold d817736d8): it merges as any other. Declared moves: THE GOLDEN MOVES WITH THEM AND IS THE OWNER'S DOOR: carried and listed, never re-taken. NOT MERGED, whoever asks: lane/coherence-veil-2026-11-11, any review, `lane/read-all-…`, `lane/record-measure-…`, `lane/order-measure-…` or `lane/close-measure-…` branch, the chair's lane. Then item 2 at the landed tip, ONE message with the landed CODE tip; then the rule again on "SWEEP", a single point on "LAND <branch>". RULING U1 (the weekly usage warning): every point pushed as it lands with this list current in the same push; one line at a sweep's end, a stop or the hand-back; hand back at 250,000, read every eight points. Every push a fast-forward; `core.bare` read after every push.
+- **03:40 UTC:** "LAND lane/tail-powers-2026-11-14" in the sweep's order with the moving branches: its holder merged the joined line at d817736d8 into it and resolved `governanceAccount.js` by P28 (the declared twin stands; X2's phrase and two unused helpers removed; X2's guard re-keyed by identity); tip eb5e2ab0d at 03:40, read back at the merge. If it still meets the line in a code hunk: a stop for that branch, the hunk named.
 
 ## 2. The landings
 
@@ -42,6 +43,7 @@ THE CHAIR'S RULINGS TO JOIN-8 (each vetoable by the owner):
 | 4 | tail-defecon-2026-11-14 | 81100e11e (03:38; handed back) | 21e578caa (JOIN-7 25) | 131dfdbb6 | none | clean-both CODE `foodBalance.js` (lane 247/609 in deriveFoodBalanceAnalysis; joined 854: apart, both stand), `resourceGenerator.js` (lane 472; defecon-r 490-677: apart, both stand); DECLARED MOVE b40f795b2 (D27: exports[].reason 152, issues[] 41): golden carried |
 | — | tail-defecon-r-2026-11-14 | a515e1b54 (03:42) | — | — | — | already on the line (JOIN-7 27): nothing to land |
 | 5 | tail-services-2026-11-14 | dc9702c51 (03:42; handed back) | e35851db1 (JOIN-7 15) | 62a1a16e0 | none | — (docs only: the lane's hand-back) |
+| 6 | tail-titles-2026-11-15 | 688e2f3be (03:45; handed back) | b30c1b7aa (JOIN-7 31) | 66f44805c | none | — (`faceHonorifics.js`, lent; KT1 display text only: 0 of 720 towns moved, by the lane's census) |
 
 ## 3. Every code resolution
 
@@ -189,6 +191,6 @@ A worktree at origin's tip (`git worktree add /home/user/j8wt -b join8 <tip>`, `
 
 ## 9. WHAT IS LEFT
 
-1. IN HAND: the sweep (the prompt's order). Landed so far: points 1-5.
+1. IN HAND: the sweep (the prompt's order). Landed so far: points 1-6 (the finished branches); the chair's 03:40 "LAND lane/tail-powers-2026-11-14" (eb5e2ab0d or later, in the order with the moving branches) received.
 2. lane/tail-powers-2026-11-14: waits for the chair's "LAND" (P28).
 3. For the close (not this seat's): every row of §4 by its door, once, on the final tree.
