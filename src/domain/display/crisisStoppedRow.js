@@ -61,7 +61,7 @@ import { resourceShortageImport } from '../resourceSemantics.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { SERVICE_DESC_SIBLINGS } from '../../data/institutionServices.js';
 import {
-  SERVICE_DEPENDENCE, SERVICE_DEPENDENCE_BY_DESC, HOUSE_DEPENDENCE, CHAIN_DEPENDENCE, INCOME_DEPENDENCE, INPUT_GAP_HELD_EVERYWHERE, SERVICE_FREE_OF_HOUSE, SPENT_GROUND_YIELD, SPENT_GROUND_WORKERS,
+  SERVICE_DEPENDENCE, SERVICE_DEPENDENCE_BY_DESC, HOUSE_DEPENDENCE, CHAIN_DEPENDENCE, INCOME_DEPENDENCE, INPUT_GAP_HELD_EVERYWHERE, SERVICE_FREE_OF_HOUSE, SPENT_GROUND_YIELD, SPENT_GROUND_WORKERS, GROUNDS_WORKED_OFF_CHAIN,
   TRAVELLERS, GOODS, GATHERINGS, GRAIN, LIVESTOCK, FISH, GAME, INPUT, GATES, NONE,
 } from '../../data/crisisDependence.js';
 
@@ -366,6 +366,16 @@ function housesOnSpentGround(settlement) {
       if (!grounds.has(h)) grounds.set(h, []);
       /** @type {Array<{ resourceKey?: unknown, status?: unknown }>} */ (grounds.get(h)).push(c);
     }
+  }
+  // BAR3-SERVICES (S3): a fishing house no chain names works the chains on the town's own fisheries
+  // (`GROUNDS_WORKED_OFF_CHAIN`), and is judged by the same reading as a house a chain names
+  for (const inst of liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (settlement))) {
+    const house = inst && typeof inst.name === 'string' ? inst.name : '';
+    if (!house || grounds.has(house) || isCustom(inst)) continue;
+    const id = String((typeof inst.catalogId === 'string' && inst.catalogId) || catalogIdForName(house) || '');
+    if (!Object.prototype.hasOwnProperty.call(GROUNDS_WORKED_OFF_CHAIN, id)) continue;
+    const own = chains.filter((c) => c && typeof c.resourceKey === 'string' && GROUNDS_WORKED_OFF_CHAIN[id].includes(c.resourceKey));
+    if (own.length) grounds.set(house, own);
   }
   for (const [house, own] of grounds) {
     const works = SPENT_GROUND_WORKERS.includes(String(catalogIdForName(house) ?? '')); // an import feeds a buyer, never the work on the ground

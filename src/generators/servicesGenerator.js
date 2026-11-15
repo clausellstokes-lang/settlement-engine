@@ -196,10 +196,13 @@ export const generateAvailableServices = (
     });
   }
   if (stressFlags.crimeIsGovt) {
+    // BAR3-SERVICES (S2, 2026-11-15): the rows name no body the town may lack. The stress fires where the only criminal
+    // house is a smuggling waypoint (no guild, no organization of the town's own) as where a Thieves' Guild stands, so the
+    // guild's and the organization's rows are reworded to what both bear: those who run the crime here.
     [
       {
-        name: 'Dispute resolution (guild)',
-        desc: 'The guild adjudicates conflicts. Its judgment is final, and resisting it is unwise.',
+        name: 'Dispute resolution (criminal)',
+        desc: 'Quarrels are settled by those who run the crime here. Their judgment is final, and resisting it is unwise.',
       },
       {
         name: 'Extortion (structured)',
@@ -207,7 +210,7 @@ export const generateAvailableServices = (
       },
       {
         name: 'Contraband licensing',
-        desc: 'The organization decides what flows through here. Anyone who moves goods without its leave is removed.',
+        desc: 'Those who run the crime here decide what moves through. Anyone who moves goods without their leave is removed.',
       },
     ].forEach((item) => {
       if (!buckets.criminal.some((existing) => existing.name === item.name)) {
@@ -249,7 +252,11 @@ export const generateAvailableServices = (
       },
       {
         name: 'Indulgences and dispensations',
-        desc: 'Formal church forgiveness, delivered by clergy with flexible interpretations of canon.',
+        // BAR3-SERVICES (S2): delivered by the town's own clergy only where a house of worship of its own stands; where
+        // the town has only access to a neighbour's, its twin names no body the town lacks.
+        desc: hasInstitution(roster, 'temple')
+          ? 'Formal church forgiveness, delivered by clergy with flexible interpretations of canon.'
+          : "Absolution on paper, sealed in a distant authority's name and sold to whoever will pay.",
       },
       {
         name: 'False prophecy',
