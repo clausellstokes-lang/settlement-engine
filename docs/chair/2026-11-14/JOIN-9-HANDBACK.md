@@ -80,6 +80,7 @@ THE CHAIR'S RULINGS TO JOIN-9 (each vetoable by the owner):
 | 10 | lane/tail-houses-2026-11-14 | 0907dccf2 (06:03) | 3e482b329 | 329f324a0 | **CODE (test)**: `w2FixData6Rows.test.js` row 4, close-tests-a against houses: composed, both stand (§3) | clean-both `tailHouses1Gaps`, `tailHouses4CoastCrown` (5/5 green), `presumedThings.widened.register.json`; DECLARED MOVES 61648f2a2 99438070f 6510d746b 36bcb60b5 5d906f6e4: golden carried |
 | 11 | lane/tail-close-src-2026-11-15 | 5d99786c5 (06:08) | 0be927178 | 8fe1dc904 | none | 9 files outside docs/; declared-move commits: none (golden carried) |
 | 12 | lane/tail-close-tests-a-2026-11-15 | a269fc3f8 (06:11) | 92fcc4fc5 | 06a27ccc8 | none | 1 files outside docs/; declared-move commits: a269fc3f8  (golden carried) |
+| 13 | lane/tail-corpus-def-2026-11-14 | e6023e774 (06:15) | b284cbe44 | 2bb269100 | none | 9 files outside docs/; declared-move commits: bb667e110 b7f646c9d dce196895 a84172d8c fbcc5712a 089bccf98 6716dfceb 849bd8679 c6852f7e2 680d16b54 ce69ac520 d7921a40c 0e838bc65 e45e08b0f ba3af4202 07ab77b03 cd0b1ab7b 14724c194 6c2fe3344 6a3692996 89326e707 688e2f3be e046a2ac4 6ce176aff 57a19f800 160c99790 b40f795b2 e040663dd c97caccd9 ea788e17c c1263e61c 6f7786a78 a5a9e4372 112532f64 2ac50c55d 28f86423c ca827fc0f b6a0c074c e35851db1 fcf4cae69 1036bf94b e6700483b e5a24fd85 7bef72cbc f20ce3151 0eaea0870 a10a457e2 f00b248fe 42f7f68c2 cddbc3274 a708f0cf9 53e295e5a  (golden carried); merged clean though both moved: tests/generators/coherenceAgreeCures.test.js  |
 
 ## 3. Every code resolution
 
@@ -234,10 +235,12 @@ Merged clean though both sides moved them (for the close to re-derive or measure
 | golden | history (6) | DECLARED MOVE commits ed9f3b549  (field diffs in their bodies) |
 | `tests/generators/hookTablesDeclared.test.js` | history (6) | merged clean though both sides moved them; not read hunk by hunk: read at the close |
 | `tests/components/displayEconRelianceFoodWords.test.jsx` | close-tests-a (9) | merged clean though both sides moved them; not read hunk by hunk: read at the close |
-| `tests/components/displayEconRelianceFoodWords.test.jsx` (r2s-famine-town-1 NOT row: the anchor) | close-tests-a (9) against display-econ (TAIL-DISPLAY-ECON-5) on the line | COMPOSED RED (§6): the anchor 13% vs the re-keyed 14%; for the tests-a seat on the chair's word, else re-keyed at the close |
+| `tests/components/displayEconRelianceFoodWords.test.jsx` (r2s-famine-town-1 NOT row: the anchor) | close-tests-a (9) against display-econ (TAIL-DISPLAY-ECON-5) on the line | COMPOSED RED (§6), ANSWERED at point 12 (a269fc3f8: the anchor reads 14%; 23/23 green): nothing left for the close |
 | `tests/data/w2FixData6Rows.test.js` (rows 3 ww-1416 and the chair's ww-924) | houses (10) | red at the branch's own tip and at the line, carried: the houses seat's |
 | golden | houses (10) | DECLARED MOVE commits 61648f2a2 99438070f 6510d746b 36bcb60b5 5d906f6e4 (field diffs in their bodies) |
 | golden | close-tests-a (12) | DECLARED MOVE commits a269fc3f8  (field diffs in their bodies) |
+| golden | corpus-def (13) | DECLARED MOVE commits bb667e110 b7f646c9d dce196895 a84172d8c fbcc5712a 089bccf98 6716dfceb 849bd8679 c6852f7e2 680d16b54 ce69ac520 d7921a40c 0e838bc65 e45e08b0f ba3af4202 07ab77b03 cd0b1ab7b 14724c194 6c2fe3344 6a3692996 89326e707 688e2f3be e046a2ac4 6ce176aff 57a19f800 160c99790 b40f795b2 e040663dd c97caccd9 ea788e17c c1263e61c 6f7786a78 a5a9e4372 112532f64 2ac50c55d 28f86423c ca827fc0f b6a0c074c e35851db1 fcf4cae69 1036bf94b e6700483b e5a24fd85 7bef72cbc f20ce3151 0eaea0870 a10a457e2 f00b248fe 42f7f68c2 cddbc3274 a708f0cf9 53e295e5a  (field diffs in their bodies) |
+| `tests/generators/coherenceAgreeCures.test.js` | corpus-def (13) | merged clean though both sides moved them; not read hunk by hunk: read at the close |
 
 ## 5. Item 2 at the landed tip
 
@@ -247,6 +250,7 @@ At the line after the ties point (74688857c; code a06cde784): `node scripts/wiri
 
 
 - **06:02 UTC, point 9, A COMPOSED RED FOUND AFTER THE PUSH (told the chair):** lane/tail-close-tests-a-2026-11-15 at 432b0330c merged textually clean and was pushed (merge e3c393377, origin 92fcc4fc5) before the both-moved test file was read. `tests/components/displayEconRelianceFoodWords.test.jsx`: tests-a's NOT row for r2s-famine-town-1 takes as its liveness anchor "Contributes to Entrepôt Trade - 13% of income"; display-econ (TAIL-DISPLAY-ECON-5, on the line) re-keyed that card by identity to **14%** in KEEP. Composed: 1 red / 22 green (`t9.log`: LIVENESS ANCHOR missing); 23/23 green at the line before the merge (`t9.pre.log`, in `/home/user/j9probe`). Not plain; this seat reverted nothing and edited nothing. Recommendation: the tests-a seat re-keys that one anchor to 14% on its branch; land on the chair's word. Since then `auto.sh` stops before the commit on any both-moved test file.
+  ANSWERED at point 12: the tests-a seat re-keyed the anchor to 14% (a269fc3f8), landed on the chair's 06:09 word; the file 23/23 green on the line (`t12.log`).
 
 ## 7. Hazards
 
