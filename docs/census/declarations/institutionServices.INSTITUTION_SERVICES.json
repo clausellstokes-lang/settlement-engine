@@ -5283,7 +5283,7 @@
     },
     {
       "id": "Luxury goods quarter|High-end retail",
-      "text": "Jewellery, fine clothing, rare spices, and luxury goods from across the world.",
+      "text": "Jewellery, fine clothing, and luxury goods from across the world.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -7289,7 +7289,7 @@
     },
     {
       "id": "Head-of-household consensus|Family decisions",
-      "text": "Matters affecting multiple families go to a council of heads. Slow but broadly legitimate.",
+      "text": "Matters affecting multiple families go to a council of heads, who settle them slowly, by talk.",
       "needs": [],
       "excludes": [],
       "crisis": [],

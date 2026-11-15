@@ -1069,7 +1069,9 @@ export const INSTITUTION_SERVICES = {
     "Supplier contracts": { on: false, p: 0.5, desc: "Negotiate supply contracts for the lord's household." }
   },
   "Luxury goods quarter": {
-    "High-end retail": { on: true,  p: 1.0, desc: "Jewellery, fine clothing, rare spices, and luxury goods from across the world." },
+    // BAR2-SERVICES (the chair's ruling SV2, 2026-11-15): the row names no good the town may lack (it sold "rare spices" where the
+    // town's own need line says spices are wanted and not brought in: 21 of 97 printing dumps). VETOABLE wording (the owner's).
+    "High-end retail": { on: true,  p: 1.0, desc: "Jewellery, fine clothing, and luxury goods from across the world." },
     [CUSTOM_COMMISSIONS]: { on: true, p: 0.8, desc: "Bespoke luxury items made to the client's specification." },
     "Exotic imports": { on: false, p: 0.6, desc: "Goods sourced from distant regions unavailable elsewhere." },
     "Appraisal": { on: false, p: 0.5, desc: "Professional valuation of luxury goods, heirlooms, and estate items." }
@@ -1484,7 +1486,9 @@ export const INSTITUTION_SERVICES = {
     "Community mediation": { on: true,  p: 0.8, desc: "The elder hears disputes and suggests resolution. No enforcement, but social pressure is real." }
   },
   "Head-of-household consensus": {
-    "Family decisions": { on: true,  p: 0.7, desc: "Matters affecting multiple families go to a council of heads. Slow but broadly legitimate." }
+    // BAR2-SERVICES (the chair's ruling SV3, 2026-11-15): the row says how the families settle a matter, out of the government's
+    // legitimacy register (it printed "broadly legitimate" where the page's word is Contested). VETOABLE wording (the owner's).
+    "Family decisions": { on: true,  p: 0.7, desc: "Matters affecting multiple families go to a council of heads, who settle them slowly, by talk." }
   },
   "Subsistence farming": {
     "Surplus sale": { on: false, p: 0.4, desc: "In good years, small surpluses sold at market. Rare and seasonal." }
@@ -1834,9 +1838,11 @@ export const SERVICE_DESC_SIBLINGS = Object.freeze({
   ]),
   // TAIL-SERVICES-3 (2026-11-15; READ-ALL 04603, X9 31188): the fish market's wholesale names the taverns that buy; where none
   // stands its twin names the households, as the brewer's barrel trade above. VETOABLE wording (the owner's).
+  // BAR2-SERVICES (the chair's ruling SV2, 2026-11-15): the twin prints where no tavern stands, the smallest places, and claims no
+  // inland trader (it printed "inland traders" in a place with no trade at all). VETOABLE wording (the owner's).
   "Bulk purchase by taverns, institutions, and inland traders.": Object.freeze([
     Object.freeze({ text: "Bulk purchase by taverns, institutions, and inland traders.", needs: Object.freeze(['institution: tavern']) }),
-    Object.freeze({ text: "Bulk purchase by households, institutions, and inland traders.", twinOf: "Bulk purchase by taverns, institutions, and inland traders." }),
+    Object.freeze({ text: "Bulk purchase by households and institutions.", twinOf: "Bulk purchase by taverns, institutions, and inland traders." }),
   ]),
   // W2-FIX-DATA-6 (2026-11-13; CENSUS-2 kind b, the coaching inn under a siege: r2r-metropolis-14, r2s-under_siege-*): no
   // traveller comes down a road the siege holds, and no coach or rider goes out. VETOABLE wording (the owner's).

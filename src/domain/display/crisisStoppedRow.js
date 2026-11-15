@@ -43,6 +43,12 @@
  * record's fault, not the town's state. One leaf, two causes: `rowMarkText`
  * gives both marks.
  *
+ * A SERVICE ROW CARRIES THE MARK ITS HOUSE CARRIES (BAR2-SERVICES, the chair's ruling SV1 of 2026-11-15; vetoable by the
+ * owner): a service row lives on its own line AND on its house's (`serviceRowDependence`), so where the house's row is
+ * stopped, curtailed or short of its input, the house's rows that live on the same thing take the same mark (the quarry
+ * "Stopped by the siege." and its "Cut stone" with it; the fair's spectacles with the fair; the bakers' pastries with their
+ * bread). The one exception is declared, row by row: `crisisDependence.js :: SERVICE_FREE_OF_HOUSE`.
+ *
  * Pure: no randomness, no clock, no write.
  */
 import { resourceGapLines } from './validationOnPage.js';
@@ -52,7 +58,7 @@ import { factsOf } from '../facts/factsOf.js';
 import { catalogIdForName } from '../../data/institutionalCatalog.js';
 import { SERVICE_DESC_SIBLINGS } from '../../data/institutionServices.js';
 import {
-  SERVICE_DEPENDENCE, SERVICE_DEPENDENCE_BY_DESC, HOUSE_DEPENDENCE, CHAIN_DEPENDENCE, INCOME_DEPENDENCE, INPUT_GAP_HELD_EVERYWHERE,
+  SERVICE_DEPENDENCE, SERVICE_DEPENDENCE_BY_DESC, HOUSE_DEPENDENCE, CHAIN_DEPENDENCE, INCOME_DEPENDENCE, INPUT_GAP_HELD_EVERYWHERE, SERVICE_FREE_OF_HOUSE,
   TRAVELLERS, GOODS, GATHERINGS, GRAIN, LIVESTOCK, FISH, GAME, INPUT, GATES, NONE,
 } from '../../data/crisisDependence.js';
 
@@ -139,6 +145,47 @@ export function serviceDependenceOf(row) {
   return Object.prototype.hasOwnProperty.call(SERVICE_DEPENDENCE, name) ? SERVICE_DEPENDENCE[name] : NONE;
 }
 
+/** Each record's houses by roster name, read once a record. @type {WeakMap<object, ReadonlyMap<string, Record<string, unknown>>>} */
+const HOUSES_BY_NAME = new WeakMap();
+
+/**
+ * The house a service row belongs to (the record's `institutions[]` entry its `institution` names), else a bare
+ * `{ name }` (the catalogue still knows the name).
+ * @param {object | null | undefined} settlement @param {{ institution?: unknown }} row
+ * @returns {Record<string, unknown> | null}
+ */
+function houseOfServiceRow(settlement, row) {
+  const name = typeof row?.institution === 'string' ? row.institution : '';
+  if (!name) return null;
+  let houses = settlement && typeof settlement === 'object' ? HOUSES_BY_NAME.get(settlement) : undefined;
+  if (!houses && settlement && typeof settlement === 'object') {
+    const list = /** @type {{ institutions?: unknown }} */ (settlement).institutions;
+    houses = new Map((Array.isArray(list) ? list : []).filter((i) => i && typeof i.name === 'string').map((i) => [i.name, i]));
+    HOUSES_BY_NAME.set(settlement, houses);
+  }
+  return houses?.get(name) ?? { name };
+}
+
+/**
+ * What a service row lives on IN THIS PLACE (SV1): its own line, and its house's line but for what
+ * `SERVICE_FREE_OF_HOUSE` declares the row free of. A custom house declares nothing.
+ * @param {object | null | undefined} settlement @param {{ name?: unknown, desc?: unknown, institution?: unknown }} row
+ * @returns {ReadonlyArray<string>}
+ */
+export function serviceRowDependence(settlement, row) {
+  const own = serviceDependenceOf(row);
+  const house = houseOfServiceRow(settlement, row);
+  if (!house || isCustom(house)) return own;
+  const houseDeps = houseDependenceOf(house);
+  if (houseDeps.length === 0) return own;
+  const id = typeof house.catalogId === 'string' && house.catalogId ? house.catalogId : catalogIdForName(typeof house.name === 'string' ? house.name : null);
+  const name = typeof row?.name === 'string' ? row.name : '';
+  const freeOf = id && Object.prototype.hasOwnProperty.call(SERVICE_FREE_OF_HOUSE, id) && Object.prototype.hasOwnProperty.call(SERVICE_FREE_OF_HOUSE[id], name)
+    ? SERVICE_FREE_OF_HOUSE[id][name] : NONE;
+  const inherited = houseDeps.filter((d) => !own.includes(d) && !freeOf.includes(d));
+  return inherited.length ? [...own, ...inherited] : own;
+}
+
 /**
  * What a house lives on, by its catalogue id (the record's `catalogId`, else its name's).
  * @param {{ catalogId?: unknown, name?: unknown }} inst
@@ -169,8 +216,8 @@ export function incomeDependenceOf(income) {
   return Object.prototype.hasOwnProperty.call(INCOME_DEPENDENCE, source) ? INCOME_DEPENDENCE[source] : NONE;
 }
 
-/** Each kind of row's reader of the table. @type {Readonly<Record<string, (row: Record<string, unknown>) => ReadonlyArray<string>>>} */
-const DEPENDENCE_OF = Object.freeze({ service: serviceDependenceOf, house: houseDependenceOf, chain: chainDependenceOf, income: incomeDependenceOf });
+/** Each kind of row's reader of the table (a service row reads its house's line too, SV1). @type {Readonly<Record<string, (row: Record<string, unknown>, settlement: object | null | undefined) => ReadonlyArray<string>>>} */
+const DEPENDENCE_OF = Object.freeze({ service: (row, settlement) => serviceRowDependence(settlement, row), house: houseDependenceOf, chain: chainDependenceOf, income: incomeDependenceOf });
 
 /**
  * Is this row's description the twin written for this crisis?
@@ -205,7 +252,7 @@ export function rowStoppedBy(settlement, kind, row, crises = stoppingCrisesOf(se
   if (!row || typeof row !== 'object' || isCustom(row) || crises.length === 0) return null;
   const read = Object.prototype.hasOwnProperty.call(DEPENDENCE_OF, kind) ? DEPENDENCE_OF[kind] : null;
   if (!read) return null;
-  const deps = read(row);
+  const deps = read(row, settlement);
   if (deps.length === 0) return null;
   const desc = typeof row.desc === 'string' ? row.desc : '';
   for (const crisis of crises) {
@@ -300,7 +347,7 @@ export function housesShortOfInput(settlement) {
  */
 export function rowShortOf(settlement, kind, row) {
   if (!row || typeof row !== 'object' || isCustom(row)) return null;
-  const deps = kind === 'house' ? houseDependenceOf(row) : kind === 'service' ? serviceDependenceOf(row) : NONE;
+  const deps = kind === 'house' ? houseDependenceOf(row) : kind === 'service' ? serviceRowDependence(settlement, row) : NONE;
   if (!deps.includes(INPUT)) return null;
   const house = kind === 'house' ? row.name : row.institution;
   if (typeof house !== 'string' || !house) return null;

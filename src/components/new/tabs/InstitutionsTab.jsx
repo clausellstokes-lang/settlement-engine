@@ -55,6 +55,7 @@ import { institutionProvenanceOf } from '../../../domain/provenance/rosterProven
 import { isFabricInstitution } from '../../../data/institutionalCatalog.js';
 import { entityAnchor, entityIdFor, serviceEntityOf } from '../../../domain/dossier/entityLinks.js';
 import { formatBacksValue, houseBacksOf } from '../../../domain/dossier/powerSupport.js';
+import { powerSentenceName } from '../../../domain/display/powerSentenceName.js';
 import { walkUserEdits } from '../../../domain/userEdits.js';
 import { factionIdFromName } from '../../../lib/entities.js';
 import { cardOfficeOf, facesByHouse } from '../../../domain/people/cardPowers.js';
@@ -312,7 +313,8 @@ export function InstitutionCard({ inst, category, label, services, sets, backs =
         <div data-testid="institution-backs" style={{ display: 'flex', alignItems: 'baseline', gap: '2px 8px', flexWrap: 'wrap', marginTop: 4, fontSize: proseFontSize(FS.xs, mobile), color: swatch.inkMag3 }}>
           <span>Backs</span>
           {backs.map((back) => (
-            <EntityLink key={back.faction} id={factionIdFromName(back.faction) || back.faction} type="faction" fallback={back.faction} style={{ color: swatch.inkMag, fontWeight: 600 }} />
+            // BAR2-SERVICES (SV4): the line names the power in its sentence form, the one leaf's ("Backs The Guard", never the roster's "Military/Guard"), as the Crisis tab's doors do
+            <EntityLink key={back.faction} id={factionIdFromName(back.faction) || back.faction} type="faction" fallback={powerSentenceName(back.faction)} verbatim={powerSentenceName(back.faction) !== back.faction} style={{ color: swatch.inkMag, fontWeight: 600 }} />
           ))}
           {backs.length === 0 && <span style={{ fontStyle: 'italic' }}>nobody</span>}
           {authored && <span data-testid="institution-backs-authored" title="Named by you" style={{ fontSize: chromeFontSize(FS.nano, mobile), fontWeight: 800, color: PROVENANCE_TONE.you }}>✎ YOU</span>}
