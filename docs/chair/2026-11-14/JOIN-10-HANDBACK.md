@@ -83,6 +83,7 @@ THE CHAIR'S RULINGS TO JOIN-10 (each vetoable by the owner):
 | 7 | lane/tail-close-pools-2-2026-11-15 | 1c9ff3933 (07:11) | af1e78989 | f1a47b790 | none | 0 files outside docs/; declared-move commits: none (golden carried) |
 | 8 | lane/tail-close-tests-c-2026-11-15 | 2ef97b6e9 (07:14) | 0b1248dbf | a6b22f58b | `tailHistoryBatch6.test.js` (test), close-tests-c against close-pools-2: both blocks stand verbatim, 3/3 green (§3) | 5 files outside docs/; declared-move commits: 85cefdba5 (golden carried); merged clean though both moved: tests/data/tailHistoryBatch6.test.js |
 | 9 | lane/tail-close-src-2026-11-15 | 74fb74668 (07:18) | f714fb6a5 | feba6c282 | none | 10 files outside docs/; declared-move commits: none (golden carried) |
+| 10 | lane/tail-ties-2026-11-14 | 02de38883 (07:21) | ae50369d4 | 0c72335ce | none | 5 files outside docs/; declared-move commits: f65910b6e (golden carried) |
 
 ## 3. Every code resolution
 
@@ -262,6 +263,7 @@ Merged clean though both sides moved them (for the close to re-derive or measure
 | `tests/data/tailHistoryBatch6.test.js` (MUST NOT body) | close-tests-c (8) against close-pools-2 (6-7) | CODE CONFLICT in a test file, both blocks stand verbatim (§3), 3/3 green at the merged tree: nothing for the close unless the doors re-key it |
 | golden | close-tests-c (8) | DECLARED MOVE commits 85cefdba5 (field diffs in their bodies) |
 | tests/data/tailHistoryBatch6.test.js | close-tests-c (8) | merged clean though both sides moved them: the test files among them run alone at the merged tree, green ; read at the close |
+| golden | ties (10) | DECLARED MOVE commits f65910b6e (field diffs in their bodies) |
 
 **[J10] every pin where the joined side was kept, by file (for the doors' seat to read each once):**
 
@@ -300,4 +302,4 @@ A worktree at origin's tip (`git worktree add /home/user/j10wt -b join10 <tip>`,
 
 ## 8. WHAT IS LEFT
 
-Landed through point 9 (see the table); count 153,836 at 07:11 UTC after point 6; waiting on the chair's LAND words.
+Landed through point 10 (see the table); count 153,836 at 07:11 UTC after point 6; waiting on the chair's LAND words.
