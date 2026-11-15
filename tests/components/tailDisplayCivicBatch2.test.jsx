@@ -35,17 +35,24 @@ function webLines(s) {
   return out;
 }
 
-// [seed, the line that must not print, what prints in its place: the pair without the chip]
+// Re-keyed BY IDENTITY (TAIL-CLOSE-DISPLAY-2, red 8): TAIL-POWERS-B-2's DECLARED move c1263e61 (withConflictRelations: a
+// pair the conflicts hold at HIGH takes the quarrel's twin, its direction 'escalating') reached the line at JOIN-8 · 16
+// (d700bda44), and TAIL-POWERS-B-4's P31 (d99bce57, DECLARED: the merchants' and craftsmen's vote at a HIGH quarrel takes
+// a twin naming it) at JOIN-9 · 15. Where they moved the record, the pair prints the record's own "escalating" chip, never "stable":
+// r2s-occupied-town-3 and r2r-city-10 (cured rows), r2r-metropolis-31 (its keep: was "declining"); the declining arm is
+// kept in r2r-city-10, whose dependent pair with the Highborn Circle still prints "declining".
+// [seed, the line that must not print, what prints in its place: the pair without "stable" (the record's chip, if any)]
 const CURED = [
-  ['r2s-occupied-town-3', 'Merchant Guilds~Craft Guildsstable', 'Merchant Guilds~Craft Guilds'],
+  ['r2s-occupied-town-3', 'Merchant Guilds~Craft Guildsstable', 'Merchant Guilds~Craft Guildsescalating'],
   ['r2r-city-1', 'Military City Council↓Merchant Guildsstable', 'Military City Council↓Merchant Guilds'],
-  ['r2r-city-10', 'Merchant Guild Council↔Merchant Guildsstable', 'Merchant Guild Council↔Merchant Guilds'],
+  ['r2r-city-10', 'Merchant Guild Council↔Merchant Guildsstable', 'Merchant Guild Council↔Merchant Guildsescalating'],
 ];
 // [seed, the true sibling that must still print]
 const KEPT = [
   ['r2r-city-1', 'Merchant Guilds~Craft Guildsstable'],
   ['r2r-city-0', 'Merchant City Council⇌Military/Guardstable'],
-  ['r2r-metropolis-31', 'Noble Houses↔Royal Authoritydeclining'],
+  ['r2r-metropolis-31', 'Noble Houses↔Royal Authorityescalating'],
+  ['r2r-city-10', 'The Highborn Circle↔Merchant Guild Councildeclining'],
 ];
 const LINES = new Map();
 beforeAll(async () => {
