@@ -195,7 +195,9 @@ const PREDICATE_REASONS = new Set(['leverRuns', 'instigatorRival', 'instigatorBa
 function castSentenceOf(noun, clauseOf, words, holder) {
   const reason = str(holder.reason);
   if (CLAUSE_SAYS.has(reason) || !PREDICATE_REASONS.has(reason)) return castSentence(noun, clauseOf(words), reason);
-  const who = holder.kind === 'npc' ? 'who' : 'which';
+  // TAIL-CRISIS-3 (batch 3's inheritors read): the rival's reason is its POWER's standing ("already carries more weight than
+  // whoever holds the seat"), never the person's, so the clause is said of the person's power
+  const who = holder.kind !== 'npc' ? 'which' : reason === CAST_REASONS.instigatorRival ? 'whose power' : 'who';
   return `In the ${noun}, ${clauseOf(`${words}, ${who} ${reason},`)}.`.replace(/,\.$/, '.');
 }
 

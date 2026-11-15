@@ -48,6 +48,7 @@ const FALSE = [
   ['r2s-slave_revolt-thorp-2', 'Elder Council: holds the seat', 'of Elder Council, who holds the seat, and the right to it is already in dispute.'], // 11668
   ['r2s-indebted-city-2', 'come to terms: holds the seat.', 'of City Council, who holds the seat, is the one who would come to terms.'], // B11049
   ['r2r-thorp-22', 'Elder Council: holds the seat', 'it is aimed at Akna Balam of Elder Council, who holds the seat, and the right to it is already in dispute.'], // B11090
+  ['r2r-hamlet-35', 'of The Independent Bloc, who already carries more weight', 'of The Independent Bloc, whose power already carries more weight than whoever holds the seat, and gains as the seat weakens, is stirring it.'], // batch 3's inheritor read: the power's standing, not the person's
   ['r2s-insurgency-town-0', 'Military/Guard loses most', 'if it gives way, The Guard loses most, because its own people feel the crisis first.'], // 20875
 ];
 
