@@ -155,7 +155,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       ceiling: { tier: 'thorp', reason: 'A hamlet stores household by household; the granary is the town rung.' },
     },
     {
-      shared: { name: "Fisher's landing", face: 'the boat-headman', tradeRouteRequired: ['port', 'river'], terrainAccess: ['coastal', 'riverside'], desc: 'A rough landing with racks for drying and salting fish. Primary protein source near water.', tags: ['trade'], priorityCategory: 'economy' },
+      shared: { name: "Fisher's landing", face: 'the boat-headman', tradeRouteRequired: ['port', 'river'], terrainAccess: ['coastal', 'riverside'], desc: 'A rough landing with racks for drying and salting fish. Whenever fish can be had, the primary protein source near water.', tags: ['trade'], priorityCategory: 'economy' },
       at: {
         thorp: { name: 'Fishing community', baseChance: 0.72, desc: "Nets, traps, and drying racks, kept by the households that fish the water.", tags: ['food', 'water', 'economy'] },
         hamlet: { baseChance: 0.55 },
@@ -173,7 +173,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       successor: 'Fish market',
     },
     {
-      shared: { front: 'prime', name: 'Fish market', face: 'the master fishmonger', desc: "A covered fish market under the market wardens. The morning's catch or the week's salted barrels, sold by weight and inspected for rot.", tags: ['market', 'trade'], priorityCategory: 'government' },
+      shared: { front: 'prime', name: 'Fish market', face: 'the master fishmonger', desc: "A covered fish market under the market wardens. Whenever fish can be had, the morning's catch or the week's salted barrels are sold by weight and inspected for rot.", tags: ['market', 'trade'], priorityCategory: 'government' },
       at: {
         village: { baseChance: 0.3, desc: "An open-air stall or small covered market where the day's catch is sold. Prices drop fast. Fish doesn't wait." },
         town: { baseChance: 0.45 },
@@ -442,7 +442,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       },
     },
     {
-      shared: { name: 'River ferry', face: 'the ferryman', tradeRouteRequired: ['river', 'port'], terrainAccess: ['riverside'], desc: "A flat-bottomed ferry crossing the river. The ferryman's family has held the crossing rights for generations, and every crossing pays the family its fare.", tags: ['transport', 'trade'], priorityCategory: 'economy' },
+      shared: { name: 'River ferry', face: 'the ferryman', tradeRouteRequired: ['river', 'port'], terrainAccess: ['riverside'], desc: "A flat-bottomed ferry crossing the river. The ferryman's family holds the crossing rights, and every crossing pays the family its fare.", tags: ['transport', 'trade'], priorityCategory: 'economy' },
       at: {
         village: { baseChance: 0.45 },
         town: { baseChance: 0.4 },
@@ -605,7 +605,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       shared: { front: 'prime', name: 'Mills (2-5)', face: 'the miller', required: true, desc: 'Wheels turn on every usable watercourse, many under guild or civic licence.', tags: ['essential'], priorityCategory: 'economy' },
       at: {
         thorp: { name: 'Access to external mill', fabric: true, desc: 'Must travel to manor/village mill. Home grinding often illegal.', tags: ['essential', 'agriculture'] },
-        hamlet: { name: 'Access to external mill', fabric: true, desc: 'Manor mill with milling monopoly (banalité).', tags: ['essential', 'agriculture'] },
+        hamlet: { name: 'Access to external mill', fabric: true, desc: 'Grain is taken out of the hamlet to be ground.', tags: ['essential', 'agriculture'] },
         village: { name: 'Mill', desc: 'Water or windmill with monopoly milling rights. The miller is often the wealthiest and most resented figure in the village.', tags: ['essential', 'food'], priorityCategory: 'crafts' },
         town: { desc: 'Grain ground at several sites.' },
         city: {},
@@ -1070,7 +1070,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       ceiling: { tier: 'village', reason: 'A town governs through a council or an appointee.' },
     },
     {
-      shared: { name: 'City administration', face: 'the chief administrator', exclusiveGroup: 'government', desc: 'An administrative apparatus of officials, clerks, and ward officers manages city affairs. Less formally constituted than a council but functional. Governance by bureaucratic inertia.', tags: ['civic'], priorityCategory: 'government' },
+      shared: { name: 'City administration', face: 'the chief administrator', exclusiveGroup: 'government', desc: 'An administrative apparatus of officials, clerks, and ward officers carries out the city\'s business, whoever sits above it. Functional, and moved by bureaucratic inertia.', tags: ['civic'], priorityCategory: 'government' },
       at: {
         village: { face: 'the reeve', name: 'Village reeve', baseChance: 0.92, desc: 'Elected from the peasantry. Organises labour obligations, mediates disputes, and represents the village to outside authority.' },
         town: { face: 'the first councillor', name: 'Town council', baseChance: 0.9, desc: 'An informal council of prominent citizens manages town affairs in the absence of formal authority. Less accountable than an elected council, more stable than nothing.' },
@@ -1581,7 +1581,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       shared: { face: 'the musician', noPower: true, tags: [], priorityCategory: 'entertainment' },
       at: {
         village: { name: 'Village musician', baseChance: 0.25, desc: 'A resident singer, fiddler, or piper. Plays at festivals and weddings. Also a keeper of local history through song.' },
-        town: { face: 'the troupe leader', name: 'Traveling performers', baseChance: 0.8, desc: 'Bards, jugglers, acrobats visit during fairs.' },
+        town: { face: 'the troupe leader', name: 'Traveling performers', baseChance: 0.8, desc: 'Bards, jugglers, acrobats visit at festival time.' },
       },
       ceiling: { tier: 'town', reason: 'Cities keep permanent theaters.' },
       successor: 'Theaters',
