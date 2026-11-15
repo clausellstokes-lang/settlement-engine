@@ -43,9 +43,6 @@ const REWORDED = [
   { batch: 1, pool: 'DS-DEF-8::override active, viability intact', vid: 3, gone: /would not guess at the trouble/, now: 'is shaken by this trouble', rows: '03156-03161 B03075: a plague, a war or a revolt shows in the streets' },
   { batch: 1, pool: 'DS-DEF-8::override active, viability intact', vid: 1, gone: /its defence has had to change/, now: 'change its ways', rows: 'the inheritor of v2 in a town with nobody under arms' },
   { batch: 1, pool: 'DS-DEF-8::override: SECURITY COMPROMISED', vid: 2, gone: /^The guards at/, now: 'Those who keep watch at', rows: '20690: a citizen militia keeps no guards' },
-  { batch: 1, pool: 'DS-POW-5::council', vid: 1, gone: /the whole \{seat\} must agree/, now: 'hears everyone out', rows: "06324 06326: a Headman's Authority is one headman" },
-  { batch: 1, pool: 'DS-POW-5::council', vid: 2, gone: /the whole \{seat\}/, now: 'business goes to the {seat}', rows: "04080 04089: a Headman's Authority is one headman" },
-  { batch: 1, pool: 'DS-POW-5::council', vid: 4, gone: /its members cannot agree/, now: 'would satisfy everyone it must answer to', rows: "19461: a Headman's Authority has no members" },
 ];
 
 /** @type {Record<string, any>} */

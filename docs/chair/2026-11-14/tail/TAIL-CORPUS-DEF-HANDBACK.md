@@ -9,8 +9,11 @@ edited through their source `docs/content/RECEIPT_POOLS_DOSSIER_STATE.md` (DS-DE
 - (C1) pools DS-DEF, DS-POW, DS-FTH, DS-CND; a line cured by a declaration or a rewording in the SOURCE, never by striking a
   middle row; leaves rebuilt by `node scripts/generate-dossier-state-prose.mjs`, `--check` passing before every push.
 - (C2) declarations measured BY REPLAY (W2-WRITE-13's `replay.mjs` / `moved.mjs`) over the base render's own eligible lists.
-- (C3) no ceiling raised; a state a declaration would leave mute takes a twin; land pool by pool; the council lines in a
-  headman's town reworded to claim no plurality (done, batch 1).
+- (C3) no ceiling raised; a state a declaration would leave mute takes a twin; land pool by pool.
+- (C5, the chair 23:25 UTC, replacing C3's council clause) THE COUNCIL LINES IN A HEADMAN'S TOWN (DS-POW-5 council v1, v2,
+  v4) ARE NOT REWORDED IN THIS WAVE: the atom `ruling body` (granted 2026-11-14, built on another seat's branch) gives them
+  `needs: ['ruling body']` and a lone-ruler twin in the next wave. (This seat read the ruling only after batch 1 pushed;
+  batch 1 had reworded them; the three lines are RESTORED to the base's words in the correction commit after 4908ad69a.)
 - (C4) no section of DS-ECO, DS-GEN or DS-SUP touched (none was); a power named in a sentence through its slot.
 - BRIEF-TAIL's laws (silence is true; a line in its pool unless the town makes it false; a draw is not moved outside its
   pool; siege / famine / clip laws; one home for one fact; no new vocabulary word; no `src/pdf` or `src/foundry`).
@@ -23,7 +26,7 @@ edited through their source `docs/content/RECEIPT_POOLS_DOSSIER_STATE.md` (DS-DE
 - The test files naming the touched files carry **33 reds at the base** (16 files; e.g. `wiringCensusDeclared` stale census,
   presumedThings ARM 1, proseWaveGate (d)): carried from the joined line, not this seat's.
 
-## Batch 1 — DS-DEF-5, DS-DEF-2, DS-DEF-8, DS-POW-5 (commit 09a1afc81; register 56d3a4757)
+## Batch 1 — DS-DEF-5, DS-DEF-2, DS-DEF-8 (commit 09a1afc81; register 56d3a4757; C5 correction after 4908ad69a)
 Rows verified by script over the census's records (`facts.mjs` = `factsOf` of every town; `verify.py`).
 
 | row(s) | pool · line | false in (by the record) | cure | towns before → after |
@@ -37,7 +40,6 @@ Rows verified by script over the census's records (`facts.mjs` = `factsOf` of ev
 | 03156 03157 03158 03160 03161 B03075 | DS-DEF-8 viability intact v3 "A visitor would not guess at the trouble from the streets" | 134 towns over every crisis (plague, war, revolt, migration show) | REWORDED | all →0 |
 | (inheritor) | viability intact v1 "its defence has had to change" | v2's 24 inheriting towns with nobody under arms | REWORDED | — |
 | 20690 | DS-DEF-8 SECURITY COMPROMISED v2 "The guards at X have changed their rounds" | 1 (r2r-hamlet-34: a citizen militia only) | REWORDED | 6→0 |
-| 19461 06324 04080 04089 06326 | DS-POW-5 council v4 / v1 / v2 "its members cannot agree", "the whole {seat} must agree" | 45 of 47 (a Headman's Authority: one headman) | REWORDED (C3) | all →0 |
 
 STRUCK (true by the record): **29122** gates v3 (the gate is on the record in all 82 towns: the reader's header lacked it);
 **12714** viability intact v2 in the metropolis under plague (it has defenders; the line claims work, food and sleep, not
@@ -48,8 +50,8 @@ v2→v1 24, v2→v3 18 (all with nobody under arms); walls ABSENT v2→v1 4, v2�
 INVENTORY DIFF: 20 rows gone, 4 fewer by exactly their measure; the other 3 lines in fewer towns are the same lines in
 sibling tiers, false there too. INHERITORS read: walls ABSENT v1 ("unfortified … cannot control entry") and v3 under a
 siege; walls PRESENT v1 / v3 at a walled port; viability intact v1 / v3 (reworded) — TRUE.
-GUARD: `tests/domain/tailCorpusDefGuards.test.js` (5 declared rows each with its `instead` sibling, 3 keeps, 9 rewordings):
-14 red at the base, 3 keep green; 17 green after.
+GUARD: `tests/domain/tailCorpusDefGuards.test.js` (5 declared rows each with its `instead` sibling, 3 keeps, 6 rewordings
+after the C5 correction): 11 red at the base, 3 keep green; 14 green after.
 PINS re-keyed by identity: `proseEntryContradiction` trailing coordinate 376→375 (neither v2);
 `proseMoveGrammar` CONTROL 4 568→569 and 0.664→0.665 (arcane ABSENT now uniform).
 REGISTER: presumed-things widened register, 1 stale row shrunk through its own door (`--shrink`), its own commit; fresh 147
@@ -71,11 +73,6 @@ name the touched files: 33 reds at the base, the same 33 after (the 3 new reds w
    152: r2r-thorp-16 · r2s-wartime-metropolis-2 · (the pool is `no crisis: occupied`; no siege or famine reaches it).
 6. SECURITY COMPROMISED v2: "Those who keep watch at {settlement} have changed their rounds …" — 6: r2r-hamlet-34 ·
    r2s-recently_betrayed-city-1 (no siege/famine/occupation reaches it).
-7. DS-POW-5 council v1: "… because the {seat} hears everyone out before it acts …" — 83: r2r-thorp-11 ·
-   r2s-wartime-metropolis-3 · r2r-thorp-38.
-8. council v2: "At {settlement} the town's business goes to the {seat} …" — 89: r2r-thorp-1 · r2s-slave_revolt-metropolis-0.
-9. council v4: "… has left obvious decisions untaken, because no answer to them would satisfy everyone it must answer to."
-   — 94: r2r-thorp-10 · r2r-metropolis-6 · r2r-thorp-27.
 Declared (no new words): walls ABSENT v2, walls PRESENT v2, viability intact v2.
 
 ## Rows verified and struck or parked (not in a batch yet)
@@ -90,6 +87,11 @@ Declared (no new words): walls ABSENT v2, walls PRESENT v2, viability intact v2.
   declare `food: ≥ pressured` on v1–v3, as CAPACITY: enough carries, and a twin `food: ≤ importDependent`);
   **00333 00334 00335** (DS-POW-5 autocrat in a succession void and a fractured town, 2 towns: `no crisis: succession` on
   v1–v4 and a twin `crisis: succession`).
+
+## Waits for the atom (C5)
+- **19461 06324 04080 04089** (DS-POW-5 council v4, v1, v2 in a Headman's Authority town): measure 45 of the 47 printing
+  towns (19461 22, 06324 14, 04080 6, 04089 3 towns of their folds); **06326** (the same v1 in 2 Town Council towns) TRUE.
+  Next wave: `needs: ['ruling body']` and a lone-ruler twin. Left at the base's words.
 
 ## Rows named for other lanes
 - DS-DEF-9 magicDependency (above): the record's lane (`defenseProfile.magicDependency` vs the food record's magic share).
