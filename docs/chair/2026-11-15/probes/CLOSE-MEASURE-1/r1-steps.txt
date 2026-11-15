@@ -1,0 +1,16 @@
+validate:hazard-registry rc=0 secs=0
+validate:premortem rc=0 secs=0
+validate:packets rc=0 secs=1
+validate:data rc=0 secs=0
+validate:custom-content-manifest rc=0 secs=0
+validate:migration-head rc=0 secs=1
+validate:edge rc=0 secs=1
+validate:map rc=0 secs=1
+validate:tuning-bands rc=0 secs=0
+validate:foundry-module rc=0 secs=0
+validate:mcp-server rc=0 secs=1
+typecheck:ratchet rc=0 secs=37
+typecheck:domain:strict rc=0 secs=30
+lint rc=0 secs=140
+test:ratchet rc=1 secs=4682
+build rc=0 secs=47
