@@ -1,5 +1,7 @@
 # BAR3-CORPUS-2 hand-back (the successor of BAR3-CORPUS; groups CORPUS-DEF and CORPUS-ECO)
 
+THIS IS MY HAND-BACK (by time: about eighty minutes; the meter not read). Two pushes of work: the merge (7884dc19d) and batch 2 (b09297a27); this file's last push follows. After it I push nothing more.
+
 Seat BAR3-CORPUS-2, branch `lane/bar3-corpus-2026-11-15`; the tip read cc469b762 at my start. All work in a scratch worktree (detached, pushed by explicit refspec); the repository's main checkout untouched. My predecessor's hand-back (`BAR3-CORPUS-HANDBACK.md`) stands as it is; this file says what I did.
 
 ## Step 0: the line merged
@@ -72,18 +74,22 @@ GREEN AT MY TIP, run alone: the guard (39/39); `defenseWordsFindings` (12/12; re
 
 RED AT BOTH TREES WITH THE SAME MESSAGE (the base's, not mine): `negativeAssertionAnchor`, `seedLoopTotality`, `proseDrawnAnchors` (the `bar2*` files only).
 
-NOT RUN at my tip for batch 2 (budget; the predecessor ran each green or named at cc469b762, and batch 2 touches no generator, no reader and no import): `rosterDuplicateDraws`, `hookThemeDraws`, `upkeepVocation`, `pipelinePinnedMode`, `generationForkCensus`, `layerBoundaries`, `defenceFactReaders`, `noLegacyFactionReaders`, `ruinFilterRoster`, `siteCoherenceRatchet`, `writerReach`, `engineCoreLazyEdge`, `tuningRegister`, `chainPrintSites`; the twelve-birth grid. A successor's first act: run these alone at the tip.
+THE LAW SUITES, run alone at my tip after batch 2 (b09297a27), each GREEN: `rosterDuplicateDraws` (3), `hookThemeDraws` (13), `upkeepVocation` (2), `layerBoundaries` (8), `defenceFactReaders` (22), `noLegacyFactionReaders` (4), `ruinFilterRoster` (12), `siteCoherenceRatchet` (9), `tuningRegister` (76), `chainPrintSites` (6; no `dist/` in my tree), `engineCoreLazyEdge` (3), `writerReach` (52); with `factLayers`, `proseComposed` above. The twelve-birth grid (`node scripts/census/page-census.mjs --grid`): 0 falls. `pipelinePinnedMode` and `generationForkCensus` are golden-derived and RED AT THE BASE ON PURPOSE (amendment 10): not re-taken, not run.
 
 THE 525 REFERENCE CONFIGURATIONS: 0 of 525 move against 52f0a1684 (text and one mark in display leaves only; no record field moves).
 
 No new test file (the guard is my predecessor's; no manifest entry owed). No new module, no new goods import (no roster row owed).
 
+## C3178: STRUCK (after batch 2; no code changed)
+
+DS-ECO-12 CRITICAL IMPORT v3 "Since the siege closed the roads, none of the copper ore that X's work needs has reached it...": born alone (`births.mjs`, seed `bar0-city-under_siege+famine-rand-11`, at my tip): copper ore IS on the record: `resourceAnalysis.imports.critical` = luxury goods, copper ore, gold/silver ore, with `reasons["copper ore"]` = "Required by Smelter but not available in Plains terrain". The slot reads the right bag. The reader's TRADE list is `economicState.primaryImports` (livestock, grain, salt, iron, charcoal, clay...), a DIFFERENT list, which does not carry the critical imports: a display gap between two lists, not a false line: NAMED for the seat that holds the TRADE section's import list (it could show the critical imports, or this line's sibling could name the house: "the smelter's copper ore").
+
 ## What is left, in order (for a successor)
 
-1. Run the law suites listed above as NOT RUN, each alone at the tip, and the twelve-birth grid; class any red at 52f0a1684.
-2. The after census at the tip and `inventory_diff.py` against a base census (the base census at 52f0a1684 is the before), to read the two silenced towns' inheritors and confirm every batch-2 line in exactly its towns.
-3. C3178 (DS-ECO-12 CRITICAL IMPORT v3 names copper ore under a siege): prints in none of the 720; bear the read town (`bar0-city-under_siege+famine-rand-11`, seeds `docs/chair/2026-11-14/probes/READ-ALL/packets9/seeds.wide.txt` on the chair's lane) and read `resourceAnalysis.imports.critical[]` against the TRADE section's list: if the critical import is on the record, strike; if the slot reads another bag, cure the slot's read.
-4. My predecessor's named rows and mine above, for their seats.
+1. The after census at the tip and `inventory_diff.py` against the base census at 52f0a1684 (this seat's before), to read the two silenced towns' inheritors (r2s-under_siege-village-0, r2r-village-55: the no-guild market v2's slot) and to confirm every batch-2 line prints in exactly its towns.
+2. The named rows for their seats: C47622's hook (`outlookHookSiblings.js`), C3178's TRADE list, and my predecessor's four (C4510, `safetyProfile.js`'s gate line, `foodBalance.js:227`, C20093).
+3. My predecessor's directions not yet measured (its hand-back's premises list): C4's "one ring", "no single dominant organisation", "Thieves are scarce now", "nowhere to hold the guilty".
+4. The books at the close: the named rows of the table above (proseMoveGrammar CONTROL 4, proseEntryContradiction's qualify count, observedShapeReaders' mint with five leaves now, the presumed things' 6 fresh hits, the wiring census) go through their doors there, once.
 
 ## How the instruments are re-made
 
