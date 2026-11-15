@@ -626,5 +626,30 @@ lane/tail-close-src-2026-11-15 (three-dot diff) when each was taken.
   (rv2-wartime-hamlet-5 60 Adequate, rv2-calm-hamlet-27 29 Weak, rv2-calm-hamlet-30 59 Adequate). RE-KEYED (ii): the
   nearest Strong hamlet of each crisis: rv2-wartime-hamlet-7, rv2-calm-hamlet-20, rv2-calm-hamlet-50. 3/3.
 
+- **defensePostureAgainstItsFacts** (3 of 10): the military score's declared moves (33b12cbef, 7509b3794, 07ebe8bdc,
+  94c5d408f) took Ingili to Strong / Fortress and Muulcoba to Adequate (both still occupied, strong pool still struck:
+  kept, premise re-keyed to their facts); rv2-calm-hamlet-27 / -30 replaced by -20 / -50 (Strong over Vulnerable). No
+  town of 900 read holds a Weak or Critical bar under a Well-Defended or Fortress badge now, so the reverse arm's record
+  is a MADE one (the file's ruling (e) convention): rr3-town-calm-rand-2 (Well-Defended, readiness 57, at peace, draws
+  STRONG) with only its Invasion & War score set to 30: it draws readiness ADEQUATE. 48ad4da91 (UPKEEP-8, declared)
+  writes the guard's lowest tier by the force and the pay: the premise reads its three leads; rr3-town-insurgency-rand-2
+  (Defensible now) replaced by rr3-city-calm-rand-17. RE-KEYED (ii); plants (reverted) red both arms. 10/10.
+- **defensePostureReadsBadge** (1 of 5), C24: STRONG v5 and v6 read; each true of a besieged town at Strong readiness,
+  neither presumes an open road or peace (no corpus cure needed). RE-KEYED TO THE LAW: under a siege the pool prints v5,
+  v6 or nothing (texts through drawnProse.js), any other member red, a siege line is read (rv2-under_siege-city-5). At
+  war: rv2-wartime-city-0 Fortress now (33b12cbef), still the strong pool; its drawn line is a member the disqualifiers
+  do not strike 'at war'. Plant (reverted: v1 let under a siege, v5/v6 struck there) reds it. 5/5.
+- **defenseWordsFindings** (1 of 12): CURED (i) in src/generators/safetyProfile.js: 6b8a9b993 (TAIL-DEFECON batch 1,
+  #05801) wrote the thorp/hamlet twin "What food is put by goes to whoever can pay the holder's price." ('put by' = stored
+  food on the Defense tab, 7 of 64). Now "What food there is goes to whoever can pay the holder's price." DECLARED MOVE:
+  36 of 720 towns, one field (economicState.safetyProfile.crimeTypes); every reader read (commit body). Pin re-keyed with
+  it: tailDefeconSafetyLines #05801's 'instead'. 12/12; the 30 files naming safetyProfile.js 2 failed / 602 passed before
+  and after (editWorldFactResources, carried); grid 0 rises (2 carried falls); eslint, both type ratchets 0.
+
+### New or changed line (the owner's veto list)
+40. Economics/Defense `Safety & Crime` crime pattern 'black market food' in a thorp or hamlet under a famine or siege:
+    "What food there is goes to whoever can pay the holder's price." (36 of the 720; was "What food is put by …").
+
 ## What is left (TAIL-CORPUS-DEF-5's list, current)
-1. defensePostureAgainstItsFacts (3 of 10 red), defensePostureReadsBadge (1 of 5, C24), defenseWordsFindings (1 of 12).
+1. All seven named U2 reds green at bb667e11 (76/76 with tailDefeconSafetyLines). NEXT: C25, tests/ui/defenseTabFlow.test.js
+   (83883baaa declared: re-key the fixture's premise by identity to a house the roster still files as arcane defence).
