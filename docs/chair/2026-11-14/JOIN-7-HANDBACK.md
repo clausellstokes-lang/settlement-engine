@@ -200,6 +200,7 @@ A worktree at origin's tip (`git worktree add /home/user/j7wt -b join7 <tip>`, `
 
 ## 9. WHAT IS LEFT
 
-1. DONE: item 2 at d817736d8 (§5); ONE message to the chair sent.
-2. THE NEXT SWEEP (on the chair's "SWEEP" or "LAND"): at 02:01 UTC these tips were not ancestors of the line (they moved while the fifth landing ran): corpus-def cff6cd098, corpus-eco 81cd76883, crisis 0a95e14ad, defecon-c a10a457e2, display-civic c1d19f970, display-econ fcab8b63d, exports-pdf 44d3088b4, history 5ed2900cd, houses 9525e011b, powers 288be89f4, powers-b f4eab4088, services 5255ae1b0, ties f00b248fe, titles-2026-11-15 1036bf94b (new; its five lent files: a meeting in a hunk = both stand, tell the chair). Each at the tip read at its merge, in the prompt's order; (g) again after the corpus merges.
-3. For the close (not this seat's): every row of §4 by its door, once, on the final tree.
+1. DONE: the fifth landing (points 1-14), item 2 at d817736d8 (§5), its message; THE SWEEP of 02:09 (points 15-31; titles last of the code points): landed code tip **5d1e3096b**; one line to the chair.
+2. lane/tail-powers-2026-11-14: SKIPPED by P28; LAND it on the chair's word, when its tip holds TAIL-POWERS-4's merge of the line and the two hunks of `governanceAccount.js` resolved by P28.
+3. THE NEXT SWEEP (on "SWEEP" or "LAND"): at 03:16 UTC these tips were not ancestors of the line: corpus-def-2026-11-14 51f0f553a, corpus-eco-2026-11-14 bf6695a6b, crisis-2026-11-14 3f45e6fa9, defecon-2026-11-14 29c670b9e, defecon-c-2026-11-14 6ce176aff, display-civic-2026-11-14 4b29a9f59, display-econ-2026-11-14 7beec164d, exports-pdf-2026-11-14 d817edac6, history-2026-11-14 1918e3d22, houses-2026-11-14 b3ac30f8a, powers-2026-11-14 a207c871b, powers-b-2026-11-14 4140ad9f4, services-2026-11-14 dc9702c51, ties-2026-11-14 2f2f9f12d, titles-2026-11-15 688e2f3be. Each at the tip read at its merge, in the prompt's order, titles last of the code points; (g) after the corpus merges. Expect pin conflicts again where both corpus lanes add variants (law d, §3).
+4. For the close (not this seat's): every row of §4 by its door, once, on the final tree.
