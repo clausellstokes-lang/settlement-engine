@@ -332,8 +332,8 @@ describe('writer-with-no-reader ratchet: the frozen register', () => {
     // Institutions tab's YOU badge reads it, InstitutionsTab.jsx :: institutionBadge); scripts/lib/writer-dark-register.mjs.
     // 34 -> 33 (2026-11-14, R2-CODE-B-6): `gapPct on foodRecord` struck with cause (clause S, LIT: tonightSheet.js :: foodBandOf,
     // the food label's one home since R2-CODE-B-3 item 2b, d94638185); scripts/lib/writer-dark-register.mjs.
-    // 33 -> 32 (2026-11-15, TAIL-CLOSE-REACH-1): `situationDesc on economicState` struck with cause (clause S, LIT: the quick
-    // guide reads the situation sentence, settlementQuickGuide.js, inside a surface closure); scripts/lib/writer-dark-register.mjs.
+    // 33 -> 32 (2026-11-15, TAIL-CLOSE-REACH-1): `situationDesc on economicState` struck with cause (clause S, LIT, file-grained: the quick
+    // guide's file entered the dossier-pdf closure at EXPORTS-B24 · B2, 70047b61); scripts/lib/writer-dark-register.mjs.
     // 32 -> 40 (2026-11-15, TAIL-CLOSE-REACH-1, the chair's ruling WR1): eight of the round's newly DARK identities that HAVE an
     // engine reader the clauses verify join as engine-internal rows (criminalPreStress on compound, recallTargetId x3,
     // rivalTriumphBand x3, warReturnedSettlementIds on pulseHistory); scripts/lib/writer-dark-register.mjs names each consumer.
@@ -552,7 +552,7 @@ describe('writer-with-no-reader ratchet: the live judgment', () => {
     // 42 -> 41 at W7 HOOKS (composed over MERGE-CAR) (2026-11-07): `dependencyCount on metrics` struck, LIT by the viability headline (clause S).
     // 35 -> 34 (2026-11-13, R2-CODE-B item 2): `forcedByToggle on institutions` struck, LIT by the YOU badge (clause S).
     // 34 -> 33 (2026-11-14, R2-CODE-B-6): `gapPct on foodRecord` struck, LIT by foodBandOf, the food label's one home (clause S).
-    // 33 -> 32 (2026-11-15, TAIL-CLOSE-REACH-1): `situationDesc on economicState` struck, LIT by the quick guide's read (clause S).
+    // 33 -> 32 (2026-11-15, TAIL-CLOSE-REACH-1): `situationDesc on economicState` struck, LIT, file-grained, by the quick guide's read (clause S).
     // 32 -> 40 (2026-11-15, TAIL-CLOSE-REACH-1, ruling WR1): the eight engine-internal rows of the close, each DARK and registered.
     expect(registeredAndDark.length).toBe(40); // SW-B7b (2026-11-09): + `situationDesc on economicState` (34 -> 35) // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (43 -> 37) // MERGE-WAVE at the W4 PEOPLE merge: both lanes' deltas composed (42 -> 36) // MERGE-WAVE at the W7 HOOKS merge: both lanes' deltas composed (42 -> 35) // MERGE-TRAIN at the ALLEGIANCE-CAR3 merge: car 3's one strike composed (35 -> 34)
     expect(baseline.darkUnregistered.length).toBe(cohort.length - registeredAndDark.length);

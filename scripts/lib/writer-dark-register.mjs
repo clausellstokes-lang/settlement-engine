@@ -171,11 +171,13 @@ export const WRITER_DARK_REGISTER = Object.freeze([
     charter: 'ODQ §934.101 (the chair, 2026-10-31, ruling GS-1 on G-SEAMS S1 and the G3 item-1 ruling), consumer CONFIRMED at generateSettlementPipeline.js:250',
   }),
   // TAIL-CLOSE-REACH-1 (2026-11-15, the close of the round): `situationDesc on economicState` LEFT this register by clause S
-  // (BANK THE WIN). The settlement quick guide reads the generator's situation sentence (src/domain/summary/
-  // settlementQuickGuide.js :: `cleanText(economy.situationDesc)`), and a surface closure now reaches that file (the web
-  // overview through overviewIdentity.js; the identity's frozen reach is web-transitive=R), so at the joined line the
-  // identity is LIT, not DARK, and the row (engine-internal) would be wrong about its own reason. Struck with that cause;
-  // the coherence battery's read is unchanged, and retiring the writer is still its own lane's act.
+  // (BANK THE WIN, the door's own text). The settlement quick guide reads the situation sentence (src/domain/summary/
+  // settlementQuickGuide.js :: composeMaterialTruth, `cleanText(economy.situationDesc)`), and EXPORTS-B24 · B2 (70047b61, the
+  // PDF's culture block) brought that FILE into the dossier-pdf closure: IdentityDailyLife.jsx imports its cultureScopeLine.
+  // The instrument's reach is file-grained, so the identity is LIT (dossier-pdf=R) and the engine-internal row is refused.
+  // MEASURED, AND SAID PLAINLY: cultureScopeLine does not call composeMaterialTruth, so no page prints the sentence today;
+  // the strike is the instrument's verdict, named in docs/chair/2026-11-15/close/TAIL-CLOSE-REACH-1-HANDBACK.md. The
+  // coherence battery's read is unchanged, and retiring the writer is still its own lane's act.
   // W2 DEF (2026-11-07, construction C3–C5, the third seat): the three §12 WRW-2 pending-surface rows —
   // `isolationSupport on settlement`, `magicDependent on isolationSupport`, `requiredCapacity on isolationSupport` —
   // LEFT this register. WIRING-RULINGS R-W1 (ODQ §934.105) ruled the finding SAID, and the new block DS-DEF-12
