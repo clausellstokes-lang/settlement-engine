@@ -1,0 +1,12 @@
+{"id":"C11863","town":"bar0-village-famine-rand-2","sev":"MED","kind":"STATE","why":"racks of drying fish and smell of catch everywhere; FOOD says the fish failed this year (failed source fish, famine cut 65%)","other":"C11892"}
+{"id":"C11864","town":"bar0-village-famine-rand-2","sev":"MED","kind":"STATE","why":"caravan broker haggling over laden animals; no market stands, trade is house to house, famine, monsters on the roads","other":"C11888"}
+{"id":"C11978","town":"bar0-village-famine-rand-2","sev":"MED","kind":"STATE","why":"a grain-importer monopoly with quadrupled price is in no CRISIS, QUARRELS, TENSIONS or PAST line; the one tension is resource scarcity (hoarders, poor, regulators)","other":""}
+{"id":"C12024","town":"bar0-village-famine-rand-2","sev":"MED","kind":"STATE","why":"'Ferryman' for Dolgorsüren Qonggirad, who is (f) and the ferry keeper in PEOPLE; the title does not fit the sex","other":""}
+{"id":"C12074","town":"bar0-village-famine-rand-2","sev":"MED","kind":"STATE","why":"offers salted fish for sale with no scarcity mark though the fish failed (famine cut 65%); the landing's own row marks it scarce","other":"C12015"}
+{"id":"C12186","town":"bar0-village-famine-rand-2","sev":"LOW","kind":"STATE","why":"Shadow Economy 22% capture; INCOME gives Shadow Economy 23%","other":""}
+{"id":"C12198","town":"bar0-village-famine-rand-2","sev":"MED","kind":"STATE","why":"Fish 'Fully exploited' while FOOD says the fish failed (failed source fish, famine cut 65%) and the fishing chain stands impaired","other":"C12173"}
+{"id":"C12320","town":"bar0-village-famine-rand-2","sev":"LOW","kind":"STATE","why":"defenders 'paid late or not at all'; DEFENCE has only a citizen militia (hired none, garrison none), volunteers per the guard assessment","other":"C12297"}
+{"id":"C12343","town":"bar0-village-famine-rand-2","sev":"MED","kind":"PAIR","why":"'defences are sound' contradicts defence Vulnerable, monster defence Critical, and 'could not survive a serious attack'","other":"C12299"}
+{"id":"C12412","town":"bar0-village-famine-rand-2","sev":"MED","kind":"PAIR","why":"priest wants to learn whether Tserenpuntsag can still pay what is owed, but the debt runs the other way: Zümür Merkit owes Tserenpuntsag","other":"C12493"}
+{"id":"C12504","town":"bar0-village-famine-rand-2","sev":"LOW","kind":"LACKS","why":"a bail paid eleven years ago presumes a court and gaol; HOUSES has none and the page says the town keeps no court and no gaol","other":"C12317"}
+{"id":"DONE","lines":798,"blocks":1,"flags":11}
