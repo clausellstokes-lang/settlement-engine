@@ -1,0 +1,15 @@
+diff --git a/src/generators/safetyProfile.js b/src/generators/safetyProfile.js
+index f11643e3..8a80ec93 100644
+--- a/src/generators/safetyProfile.js
++++ b/src/generators/safetyProfile.js
+@@ -701,7 +701,9 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
+   if (hasStress('slave_revolt'))        stressShadowBonus += 22;
+   stressShadowBonus = Math.round(stressShadowBonus * shadowScale);
+ 
+-  const blackMarketCapture = Math.min(80, baseShadowPercent + stressShadowBonus);
++  // RECORD-MEASURE-3 candidate 2c: below the income row's floor (10) a capture with no criminal house is not held.
++  const blackMarketCapture = criminalInstitutions.length === 0 && Math.min(80, baseShadowPercent + stressShadowBonus) <= 10
++    ? 0 : Math.min(80, baseShadowPercent + stressShadowBonus);
+ 
+   let economicDragDesc = null;
+   if (blackMarketCapture > 15) { // TAIL-DEFECON (#09714, ruling D3): under a siege nothing comes in; no stalls where no market stands

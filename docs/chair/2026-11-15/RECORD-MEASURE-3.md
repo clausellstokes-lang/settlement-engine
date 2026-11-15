@@ -105,6 +105,28 @@ imports and magic and its shortfall is need − grown − imported − magic whe
 its per cent derived from those pounds as before. 221 → 0, imports 211 → 0, magic 76 → 0. 226 towns move, every field a
 reader of the view; `viable` and the stores do not move. **Recommendation: c3a.** It loses nothing the page bears.
 
+## ROW 2, THE CHAIR'S QUESTION (its 04:22 note: the display is cured at the Economics tab's seat; is a capture of 3 to 10 with no criminal house a thing the record should hold)
+
+**What reads the capture**, beyond the tab: `safetyProfile.js` itself (`economicDragDesc`, the drag line, above 5 and above
+15), `economicState.js` (the income row above 10), and at read or advance `causalState.js`, `state/deriveSystemState.js`,
+`corruption.js`, `undercity/colonization.js`, `galleryVeil.js`, `shadowEconomyShown.js :: criminalsStandHere` (the
+capture alone makes "criminals stand here" true), `economyStateProse.js`, `DefenseTab.jsx`, and the PDF
+(`Overview.jsx`, `EconomicsTrade.jsx`, `viewModelBodySlices.js`). **Candidate c2c** (patched): where no criminal house
+stands and the capture is 10 or less, the record holds 0. The 169 → **0** (the shown towns 476 → 307; 71 with a criminal
+house and no row remain, all town and above); field diff **232** towns, 2 fields only: `safetyProfile.blackMarketCapture`
+232 (the 169 and the unshown 1–2s), `safetyProfile.economicDragDesc` 104 (the "a little changes hands … between
+neighbours" lines go). Nothing else moves at birth; the advance readers (causal state, corruption, colonisation) then read
+0 for those towns. **Recommendation: c2c with c2a**: the record stops holding a shadow economy nobody runs, and the
+figure that is held is one figure. What it loses: the trace of petty untaxed barter in 104 small places' drag line.
+
+## ROW 4, THE CHAIR'S QUESTION (the foodways text)
+
+c4a is the rounding at the source (one line, `foodGenerator.js`'s call of `deriveFoodRecord`). The foodways line
+"provided by spell or by prayer" reads the food record's `magicPct` (`foodRecord.foodwaysLine` and the culture's
+`foodways` read the record built by that call), so with c4a the 4 towns' share is 0 and the line that keys on a share
+above nothing is not drawn; c4a's field diff shows no foodways field moving at birth because none of the 4 drew it with a
+1 per cent share (measured: `culturalIdentity.foodways` absent from c4a's diff).
+
 ## COSTS
 
 (pending: the pins and goldens each candidate reds, named from a run of `tests/generators tests/domain tests/components
