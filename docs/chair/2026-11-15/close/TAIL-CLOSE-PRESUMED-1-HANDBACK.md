@@ -12,8 +12,22 @@ Law: the chair's ruling PT1 of 2026-11-15 (vetoable by the owner).
   - **53 banked UNPRINTED**: the line never printed in the 1,080 towns (only the source scan sees it);
   - **7 banked FALSE**: the line prints in towns that lack its thing. **These are the first rows of the next round**, listed below.
 - The 7 stale rows and the 10 stale arm-2 rows were removed through the door's own shrink commands.
-- **One red remains: the strip in `src/generators/foodGenerator.js`.** I could not bank it lawfully (see below), and I did not change the walker. The receipt is **42 of 43**.
+- **The strip in `src/generators/foodGenerator.js`** was banked by hand under the chair's ruling PT2: the pool passes the door's filter before its lines are unwrapped. **The receipt is 43 of 43** (see RECEIPT).
 - No line was reworded, no pool re-shaped, and no walker rule touched. The only files changed are the two registers, plus this hand-back and its probe scripts.
+
+### The seven false lines: false to a reader, or only to the instrument?
+
+The chair asked for this first. **Of the seven, one is false as a reader would read it (row 7), and two more are questions about the town rather than the sentence (rows 3–4). The other four are false only by the instrument's reading.**
+
+| # | as a reader would read it | why |
+|---|---|---|
+| 1 occupation | **only the instrument** | a past occupation told as past ("When the occupiers left …"), in the history's past events; the word's reader asks whether an occupation is in force NOW |
+| 2 quarters | **only the instrument** (a reader would accept it) | "the residential district" of a town-tier place in the small population band; the size word reads "district" as a claim of a large place |
+| 3 stone quarry (variants) | **true as printed; a question about the town** | the line is the quarry house's own description, and the house stands. A reader who also reads the country's resources finds a quarry in a country with no stone: the roster and the resources disagree, not the sentence |
+| 4 stone quarry (catalogue) | as 3 | as 3 |
+| 5 house: druid | **only the instrument** | it describes the Elder Grove Council, which stands wherever the line prints |
+| 6 house: hired blade | **only the instrument** | it describes the Mercenary quarter, which stands wherever the line prints |
+| 7 smith (forges) | **false as a reader reads it** (1 town of 3) | "keeps the forges of {town} running day and night" in presume-town-25, which has no smithy and no smith among its people |
 
 ### The seven false lines, written out
 
@@ -54,14 +68,16 @@ For each of the 19 I looked for the widening that made it visible, and found non
 
 So no `--bank … --base` through the door was made: no widening exists for it to name.
 
-## THE STRIP (named, left red)
+## THE STRIP (banked by hand under the chair's ruling PT2)
 
 `src/generators/foodGenerator.js :: filterDeclared([...rows], { facts: () => factsOf(record), poolId: \`cultureProfiles:${String(key)}.fo…` (in `cultureFoodwaysOf`, written by UPKEEP-9 step 2(a), `4ff5b11e3`).
 
 - No other `lane/tail-*` branch holds the file (three-dot diff against the joined line, every branch, after `git fetch origin`).
 - **Handing the door the pool itself does not clear it.** I tested it in memory with the rule book's `stripSites`: `filterDeclared(rows, …).map((row) => String(lineText(row)))` is still a strip site. The ban reads `.map(lineText)` on any receiver; it does not read the spread. So the one-edit cure the brief offers does not exist.
 - `--bank-strip` needs the receiver to stand at a base, and this receiver did not exist at `origin/master`: that version passed the culture's foodways lines whole (`composeFoodwaysLine({ cultureLines: … })`).
-- It is therefore **named here and left**. It is not a strip-before-draw: the door's own filter has already run, and the text is taken off its output. **It is the ban's own gap:** the ban exempts a `.text` taken off a door's call (`STRIP_DOORS`) but not a `.map(lineText)` over a door's returned list. Freeing it means widening that exemption, which is not the close's to do.
+- **PT2 (the chair, 2026-11-15):** I read the site whole (`cultureFoodwaysOf`, lines 532–537). The pool goes to the door first (`filterDeclared([...rows], { facts: () => factsOf(record), … })`), and only the KEPT rows are unwrapped (`.map((row) => String(lineText(row)))`). They are unwrapped for the composer (`composeFoodwaysLine`'s `cultureLines`), which picks among them. The declarations are enforced before the unwrap, and nothing is lost before the pick. So the site is the ruling's first case: **banked by hand** under the new reason `after-base: close-strip` (the chair's text), in the register's own form `[file, receiver, reason]`, by `probes/TAIL-CLOSE-PRESUMED-1/bank-close-strip.mjs`, in its own commit.
+- One word for the owner: the reason's text says "unwrapped only to be printed". The kept lines are unwrapped to be PICKED from by the composer, but only after the door has kept them.
+- Before the ruling I named it and left it. It is not a strip-before-draw: the door's own filter has already run, and the text is taken off its output. **It is the ban's own gap:** the ban exempts a `.text` taken off a door's call (`STRIP_DOORS`) but not a `.map(lineText)` over a door's returned list. Freeing it means widening that exemption, which is not the close's to do.
 
 ## THE WALKER'S OWN CREDIT GAPS (named; not widened in the close)
 
@@ -86,9 +102,14 @@ The close found three more reader gaps that the next round should rule on:
 
 - After the first receipt: the joined line at `d5d1208ee` (JOIN-10 points 11–16) merged in (a merge commit). Its `src` changes touch `claimStanding.js` and `relationshipArchetypes.js` and bring no fresh row: the door's `--check` reads fresh 0 · stale 0 · first-register stale 0 · strips fresh 1, and the walker still reads 42 of 43, the same strip. The table did not need extending.
 
+- Then the joined line at `2ff8ab7ee` (the houses' three reworded lines, in `institutionDescVariants.js` and `institutionalCatalog.js`) merged in. It brought no fresh or stale row: the door's `--check` reads **fresh 0 · stale 0 · first-register stale 0 · strips fresh 0 stale 0** (exit 0).
+
 ## RECEIPT
 
-`tests/lint/presumedThings.walker.test.js` alone, at this branch's tip: **42 of 43**. The one red is `ARM 3 — the strip ban > ⛔ no strip without its row`, with `src/generators/foodGenerator.js :: filterDeclared([...rows], …)` (above).
+`tests/lint/presumedThings.walker.test.js` alone, at this branch's tip after PT2 and the merge of `2ff8ab7ee`: see the last line of this section.
+
+- Before PT2, at `91efe4aba` and `0d18473a8`: 42 of 43, the strip red.
+- **After PT2 and the merge of `2ff8ab7ee`: 43 of 43** (the walker alone, exit 0).
 
 ## THE TABLE (every fresh row)
 
