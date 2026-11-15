@@ -243,14 +243,14 @@ export const FOUNDER_AGREES = /** @type {ReadonlyMap<string, ReadonlySet<string>
  * @returns {string | null}
  */
 export const oneFounderRow = (pool, reason, foundedBy, admits, state) => {
-  const agentRefused = reason != null && !agentAgrees(reason, foundedBy); // FA (ruling N3): a group the founder cannot be
+  const agentRefused = reason != null && !(agentAgrees(reason, foundedBy) && purposeAgrees(reason, foundedBy)); // FA (ruling N3): a group the founder cannot be; FB (N17): a purpose it cannot have
   if (!state || reason == null || (!NAMES_A_FOUNDER.has(String(reason)) && !agentRefused)) return reason;
   if (!agentRefused && FOUNDER_AGREES.get(String(reason))?.has(String(foundedBy))) return reason;
   const at = pool.indexOf(reason);
   for (let k = 1; k < pool.length; k++) {
     const row = pool[(at + k) % pool.length];
     const test = admits[String(row)];
-    if ((test && !test(state)) || NAMES_A_FOUNDER.has(String(row)) || !agentAgrees(row, foundedBy)) continue;
+    if ((test && !test(state)) || NAMES_A_FOUNDER.has(String(row)) || !agentAgrees(row, foundedBy) || !purposeAgrees(row, foundedBy)) continue;
     return row;
   }
   return null;
@@ -261,6 +261,8 @@ export const oneFounderRow = (pool, reason, foundedBy, admits, state) => {
  * @type {Readonly<Record<string, (st: FoundingState) => boolean>>}
  */
 export const FOUNDER_ADMITS = Object.freeze({
+  // FB (TAIL-NARRATIVE-4, ruling N17): the founder that names THIS CROSSROADS is said only where the route is one
+  'a dynastic decision that this crossroads would anchor the realm': (st) => holds(st, 'route: crossroads'),
   'merchants recognising economic potential before anyone else did': (st) => holds(st, 'market'),
   'a merchant consortium that needed a waypoint and decided to own it': (st) => holds(st, 'market'),
   'religious authorities who wanted a centre for their regional operations': (st) => holds(st, 'sacredHouse'),
@@ -312,4 +314,69 @@ export const admittedRow = (pool, drawn, admits, state, passOver = null) => {
     return row;
   }
   return passed ? null : drawn;
+};
+
+/**
+ * FB (TAIL-NARRATIVE-4, the chair's ruling (N17); RECORD-MEASURE-1's candidate, FA's table turned the other way): THE
+ * FOUNDER AGAINST THE ORIGIN. The founder rows that state their own founding PURPOSE (a refuge beyond reach, a religious
+ * centre or community, a fortification), and the Origin rows that state the founding's own purpose (a "was founded as /
+ * to", "was established as / to / because", "began as" row) with the founder purposes that can be it: escaped serfs do
+ * not found a trading port or a waystation, religious authorities do not found a mine, a fortification does not begin as
+ * a mill. A founder or an Origin row not keyed here states no purpose of that kind and agrees with any.
+ * @type {Readonly<Record<string, string>>}
+ */
+export const FOUNDER_PURPOSE = Object.freeze({
+  'escaped serfs seeking a place beyond the reach of their former masters': 'refuge',
+  'religious authorities who wanted a centre for their regional operations': 'religious',
+  'a small religious community whose members drifted into secular life over two generations': 'religious',
+  'a military command that built fortifications and found civilians followed': 'military',
+});
+/** @type {Readonly<Record<string, readonly string[]>>} the founder purposes each purpose-stating Origin row admits */
+export const ORIGIN_PURPOSE_ADMITS = Object.freeze({
+  'was founded as a coastal trading port': [],
+  'was established to exploit the natural harbour': [],
+  'was founded to exploit rich mineral deposits': [],
+  "was established because the local stone cuts cleanly and doesn't crack in frost: a property worth more than it sounds": [],
+  'was founded the week someone hit iron three feet below the surface and word reached the nearest city': [],
+  'was established as a market town where merchants could meet': [],
+  'was established as a market metropolis where merchants could meet': [],
+  'was established as a waystation for travelers': ['religious', 'military'],
+  'began as a riverside mill settlement': ['refuge', 'religious'],
+});
+/**
+ * Can this founder have the purpose this Origin row states? A row or a founder not keyed above agrees with any.
+ * @param {unknown} reason @param {unknown} foundedBy @returns {boolean}
+ */
+export function purposeAgrees(reason, foundedBy) {
+  const purposes = ORIGIN_PURPOSE_ADMITS[String(reason)], purpose = FOUNDER_PURPOSE[String(foundedBy || '').trim()];
+  return !purposes || !purpose || purposes.includes(purpose);
+}
+/**
+ * Can this founder and this Origin row both be? Its agent (`agentAgrees`, FA's table), its purpose (above), and, for a
+ * row that names a founder of its own, the agreement table (`FOUNDER_AGREES`). A null row agrees with anyone.
+ * @param {string | null} reason @param {string} foundedBy @returns {boolean}
+ */
+export const founderAgrees = (reason, foundedBy) => {
+  if (reason == null) return true;
+  const row = String(reason), by = String(foundedBy || '').trim();
+  if (!agentAgrees(row, by) || !purposeAgrees(row, by)) return false;
+  return !NAMES_A_FOUNDER.has(row) || Boolean(FOUNDER_AGREES.get(row)?.has(by));
+};
+/**
+ * THE FOUNDER THE ORIGIN ROW KEEPS (FB): the founder as `admittedRow` resolved it stands where it agrees with the Origin
+ * row; where it does not, it resolves DRAW-FREE onward through the same tier's table (wrapping) to the first founder
+ * whose own test holds and that agrees. Where none does, the founder stands and `oneFounderRow` moves the Origin row, as
+ * before (FA). No state in reach keeps the founder.
+ * @param {readonly string[]} founders @param {string} founder @param {string | null} reason @param {FoundingState | null} state
+ * @returns {string}
+ */
+export const founderForOrigin = (founders, founder, reason, state) => {
+  if (!state || founderAgrees(reason, founder)) return founder;
+  const at = founders.indexOf(founder);
+  for (let k = 1; k < founders.length; k++) {
+    const f = founders[(at + k) % founders.length];
+    const test = FOUNDER_ADMITS[f];
+    if ((!test || test(state)) && founderAgrees(reason, f)) return f;
+  }
+  return founder;
 };
