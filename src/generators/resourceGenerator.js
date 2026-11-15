@@ -16,7 +16,7 @@ import {
   nativeSemanticResourceKeys,
 } from '../domain/content/customContentSemanticAuthority.js';
 import { availableNativeResourceKeys, nativeResourceConditionRecords } from '../domain/resourceSemantics.js';
-import { waterAccessKind } from '../domain/tradeRouteSemantics.js';
+import { hasTradeRouteConnection, waterAccessKind } from '../domain/tradeRouteSemantics.js';
 import { MATERIAL_RESOURCE_KEYS, liveMaterialFor } from './economy/localMaterials.js';
 
 // ─── THE TOWN'S OWN ANSWER OVER THE TERRAIN'S TABLE (COHERENCE-AGREE, 2026-11-11) ──────────────
@@ -487,9 +487,17 @@ const evaluateInstitutionDeps = (exploitation, institutions = [], gaps = [], res
 //                producer (`localInstitutionSupplies`) holds it: NOT a gap, so no line;
 //   'imported' — the economy's `primaryImports` names it, or (grain) the food record imports a
 //                share of the staple: the house runs on bought input;
+//   'route'    — TAIL-DEFECON-R M-V (the chair's ruling of 2026-11-15, vetoable by the owner): GRAPES AND GLASS SAND
+//                COME BY ANY ROUTE. An input a house may run on by trade (the vintner's must, the glassblower's sand:
+//                "grapes grown near or must brought in") reaches it wherever the town can bring goods in
+//                (`hasTradeRouteConnection`) and no siege shuts the road (UNDER A SIEGE nothing comes in: the record's
+//                `stressTypes`, as the economy's income lines read it): NOT a gap, so no line, as 'local'. No record yields grapes, and no import
+//                list names them, so before this every census vintner "lacked grapes" (184 of 184). The import list is
+//                the economy's (computeActiveChains.js :: deriveImportsFromChains): no row here says "imported";
 //   'missing'  — none of these: the line as before.
 // A record entry's parenthetical is its reason ("Iron ore (local mines exhausted)"), not a good.
 const FOOD_STAPLE_INPUTS = new Set(['grain']);
+const ROUTE_FED_INPUTS = new Set(['grapes', 'glass sand']);
 const recordHoldsGood = (list, rawResource) => {
   const goods = [rawResource, ...terrainSynonymsFor(rawResource)];
   return (Array.isArray(list) ? list : [])
@@ -502,6 +510,7 @@ const supplyOfInput = (rawResource, institutions, evidence = {}) => {
     || recordHoldsGood(evidence.localProduction, rawResource)
     || localInstitutionSupplies(rawResource, institutions)
   ) return 'local';
+  if (ROUTE_FED_INPUTS.has(normalizeToken(rawResource)) && hasTradeRouteConnection(evidence.tradeAccess) && !evidence.besieged) return 'route';
   if (
     recordHoldsGood(evidence.primaryImports, rawResource)
     || (FOOD_STAPLE_INPUTS.has(normalizeToken(rawResource)) && Number(evidence.foodImportPct) > 0)
@@ -561,7 +570,7 @@ const evaluateInstitutionChain = (exploitation, institutions, evidence = {}) => 
         exploitation.partiallyExploited?.some(c => c.rawResource === chain.rawResource);
       if (alreadyInGaps) return;
       const kind = supplyOfInput(chain.rawResource, institutions, evidence);
-      if (kind === 'local') return; // the place holds the input: an inactive chain is not a gap
+      if (kind === 'local' || kind === 'route') return; // the place holds the input, or trade brings it: not a gap
       // TAIL-DEFECON-R M-S (the chair's ruling of 2026-11-15, vetoable by the owner): A HOUSE IS SHORT ONLY IF NONE OF ITS
       // INPUTS REACHES IT. The Smelter works three chains (iron ore, copper ore, gold/silver ore); judged chain by chain,
       // every smelter "lacked copper" (238 of 238 census towns) while it smelted iron. An input reaches the house where its
@@ -665,6 +674,8 @@ export const generateResourceAnalysis = (
       localProduction:    economicState?.localProduction,
       primaryImports:     economicState?.primaryImports,
       foodImportPct:      economicState?.foodSecurity?.importPct,
+      tradeAccess:        config.tradeRouteAccess, // M-V: a route-fed input reaches its house on any route
+      besieged:           (config.stressTypes || []).includes('under_siege'), // ... that no siege shuts
     },
   );
   const resourceConditions = nativeResourceConditionRecords(config);
