@@ -24,8 +24,9 @@
  *                                                       the town, not the power structure's recentConflict)
  *   <a person>.presentation.impression                  NOT BY IDENTITY (COHERENCE-VEIL-12, ruling (2): its composer
  *                                                       never builds it from the appearance): its person's appearance
- *                                                       eye, where a CLAUSE of the one stands inside the other, either
- *                                                       way (withholdImpression, clausePieces)
+ *                                                       eye, where the two share a RUN OF TWELVE code points in the
+ *                                                       one fold, wherever it begins and ends (VEIL-15, the chair's
+ *                                                       re-ruling; withholdImpression, runWindows)
  * A copy whose source the record does not name (an entry with no such event, a prominentRelationship with no such
  * tie) follows EVERY event's, EVERY tie's eye: closed. WHERE ONLY THE WORDS TIE A COPY TO ITS SOURCE they are
  * matched IN BOTH DIRECTIONS (a piece of the source inside the copy, or a piece of the copy inside the source), on
@@ -44,7 +45,7 @@
  *                                                       one of those names; an entry that holds one elsewhere,
  *                                                       whole
  *
- * SQL TWIN, rule for rule: migration 212 :: _gallery_veil_pieces, _gallery_veil_clauses, _gallery_veil_embeds, _gallery_veil_sources,
+ * SQL TWIN, rule for rule: migration 212 :: _gallery_veil_pieces, _gallery_veil_runs, _gallery_veil_embeds, _gallery_veil_sources,
  * _gallery_veil_tie_pieces, _gallery_veil_second_homes, the impression arm of _gallery_veil_card, and THE NAME SEARCH
  * (section 4c: _gallery_veil_name_search and its helpers; below, buildNameSearch and sweepHiddenNames); and VEIL-13's ruling (5),
  * withholdCovertCopies (a covert tie's four strings, run by galleryPayloadFor): _gallery_apply_member_overrides. PINNED BY EXECUTION: tests/security/gallerySecondHomes.pglite.test.js (planted markers,
@@ -89,12 +90,14 @@ function recAt(s, key) {
 }
 
 /**
- * Two lengths, one frozen record (not tuning: a twin's exact copy of the SQL's `char_length(t) >= 12` and
- * `left(lower(v), 12)`). `pieceMin`: a piece shorter than this is never searched for (a word or a name is no
- * sentence). `processorPrefix`: the engine's processor match reads this many characters of a pattern
- * (computeActiveChains.js :: fuzzyProcessorMatch).
+ * Three lengths, one frozen record (not tuning: a twin's exact copy of the SQL's `char_length(t) >= 12`,
+ * `left(lower(v), 12)` and _gallery_veil_runs' window of a code point and eleven lead()s). `pieceMin`: a piece shorter
+ * than this is never searched for (a word or a name is no sentence). `processorPrefix`: the engine's processor match
+ * reads this many characters of a pattern (computeActiveChains.js :: fuzzyProcessorMatch). `run`: the chair's re-ruling
+ * of 2026-11-14 07:42 UTC: an impression goes with its person's shut appearance where the two share a run of this many
+ * code points (runWindows).
  */
-export const SECOND_HOME_LIMITS = Object.freeze({ pieceMin: 12, processorPrefix: 12 });
+export const SECOND_HOME_LIMITS = Object.freeze({ pieceMin: 12, processorPrefix: 12, run: 12 });
 
 /**
  * The engine's five criminal-house booleans and the substrings of a lower-cased house name that raise each
@@ -593,42 +596,45 @@ const embedsAny = (text, pieces) => {
 };
 
 /**
- * THE IMPRESSION'S PIECES, CLAUSE BY CLAUSE (COHERENCE-VEIL-12; ruling (2), the chair's ruling on PART 12's section 6):
- * each string leaf of a value IN THE ONE FOLD (caseFold), trimmed, and each run of it between the sentence stops, the
- * dashes (U+2014), the comma, the semicolon and the colon, of SECOND_HOME_LIMITS.pieceMin code points or more. Cut AFTER
- * the fold, so a mark the fold writes as one of these is one (the full-width, small and vertical forms of the three marks;
- * the Greek question mark U+037E, which NFKD writes ';'). The impression's call ALONE (withholdImpression): every other
- * words-rule keeps the sentence pieces of secondHomePieces. SQL twin: _gallery_veil_clauses.
- * @param {unknown} v @param {string[]} [out] @returns {string[]}
+ * THE IMPRESSION'S WINDOWS (VEIL-15; the chair's re-ruling of 2026-11-14 07:42 UTC, which withdrew COHERENCE-VEIL-12's
+ * clause by clause): every run of exactly SECOND_HOME_LIMITS.run CODE POINTS of each string leaf of a value, the leaf
+ * folded WHOLE by the one fold (caseFold) and then read as code points (Array.from, never UTF-16 units); no cut at any
+ * mark, nothing trimmed; a leaf shorter than that has none. Two values share a run of twelve or more exactly where these
+ * sets meet (a longer shared run holds a shared window; a shared window is a shared run): the set meet is the ruling's
+ * "a window of twelve at every code point of the shorter string, sought in the other". The code points are read once and
+ * each window is one slice, so the cost is the length's. The impression's call ALONE (withholdImpression): every other
+ * words-rule keeps the sentence pieces of secondHomePieces. SQL twin: _gallery_veil_runs (the same set).
+ * @param {unknown} v @param {Set<string>} [out] @returns {Set<string>}
  */
-export function clausePieces(v, out = []) {
+export function runWindows(v, out = new Set()) {
   if (typeof v === 'string') {
-    const f = caseFold(v);
-    for (const p of [f, ...f.split(/[.!?,;:—]+/)]) {
-      const t = p.replace(/^[ \t\n\r]+|[ \t\n\r]+$/g, '');
-      if (Array.from(t).length >= SECOND_HOME_LIMITS.pieceMin) out.push(t);
-    }
-  } else if (Array.isArray(v)) v.forEach(x => clausePieces(x, out));
-  else if (isRec(v)) Object.values(v).forEach(x => clausePieces(x, out));
+    const cps = Array.from(caseFold(v));
+    const n = SECOND_HOME_LIMITS.run;
+    for (let i = 0; i + n <= cps.length; i += 1) out.add(cps.slice(i, i + n).join(''));
+  } else if (Array.isArray(v)) v.forEach(x => runWindows(x, out));
+  else if (isRec(v)) Object.values(v).forEach(x => runWindows(x, out));
   return out;
 }
 
 /**
- * THE IMPRESSION BY ITS WORDS, CLAUSE BY CLAUSE (COHERENCE-VEIL-12; ruling (2), the chair's ruling on PART 12's section
- * 6): the composer never builds an impression from the appearance (npcGenerator.js: the presentation is drawn whole from
- * the title's or the category's table), so no identity ties them; COHERENCE-VEIL-10's "by its person" (V7-2) withheld
- * every impression whose person's appearance eye was shut. The impression on a person's face goes with THAT PERSON's
- * shut appearance, whole, where one's words hold the other's: a clause of the appearance inside the impression, or a
- * clause of the impression inside the appearance (clausePieces; a whole string is among them). The record keeps one
- * wording of each. Called on a card whose `physical` eye is shut. SQL twin: the impression arm of _gallery_veil_card.
+ * THE IMPRESSION BY A SHARED RUN OF TWELVE (VEIL-15; the chair's re-ruling of 2026-11-14 07:42 UTC, which withdrew
+ * COHERENCE-VEIL-12's clause by clause): the composer never builds an impression from the appearance (npcGenerator.js:
+ * the presentation is drawn whole from the title's or the category's table), so no identity ties them; COHERENCE-VEIL-10's
+ * "by its person" (V7-2) withheld every impression whose person's appearance eye was shut. The impression on a person's
+ * face goes with THAT PERSON's shut appearance, whole, where the two share any run of twelve code points or more in the
+ * one fold, wherever it begins and ends: no cut at any mark, so no edge an amendment can move (runWindows: the windows of
+ * the appearance in a Set, the impression's sought in it). The record keeps one wording of each. Called only on a card
+ * whose `physical` eye is shut. SQL twin: the impression arm of _gallery_veil_card.
  * @param {Rec} card
  */
 export function withholdImpression(card) {
   const pres = card.presentation;
   if (!isRec(pres)) return;
-  const a = clausePieces(card.physical);
-  const b = clausePieces(pres.impression);
-  if (!a.some(x => b.some(y => y.includes(x) || x.includes(y)))) return;
+  const a = runWindows(card.physical);
+  if (!a.size) return;
+  let shared = false;
+  for (const w of runWindows(pres.impression)) if (a.has(w)) { shared = true; break; }
+  if (!shared) return;
   const next = { ...pres };
   delete next.impression;
   card.presentation = next;

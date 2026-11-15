@@ -35,15 +35,19 @@
  *                        names), each with its hidden source as born, amended by appending, amended by a prefix,
  *                        rewritten wholly, lower-cased and upper-cased; and what must STILL ARRIVE: another event's
  *                        annotation, another tie's copies, another person's impression, a narrative with no shut tension,
- *                        the events' names, the people, the tie's ends. A person's impression BY THE WORDS, CLAUSE BY
- *                        CLAUSE (COHERENCE-VEIL-12, ruling (2), the chair's ruling on PART 12's section 6; re-keyed from
- *                        V7-2's by its person): withheld where a clause of the appearance stands inside the impression or
- *                        a clause of the impression inside the appearance (the reader's e06 shape as born, appended,
- *                        prefixed, lower-cased, upper-cased and reversed, in Latin and in Greek with a dotted capital I and
- *                        a sharp s; cut at a full-width comma and at U+037E), arriving where none does (rewritten wholly,
- *                        a shared clause of eleven, a run across a comma); the controls: the appearance open, another
- *                        person's impression, and the other words-rules on a comma-clause only (they keep sentence pieces);
- *                        and the clause cut the same in both engines over the basic plane.
+ *                        the events' names, the people, the tie's ends. A person's impression BY A SHARED RUN OF TWELVE
+ *                        (VEIL-15; the chair's re-ruling of 2026-11-14 07:42 UTC, which withdrew VEIL-12's clause by
+ *                        clause; re-keyed from V7-2's by its person): withheld with its person's shut appearance where the
+ *                        two share any run of twelve code points or more in the one fold, wherever it begins and ends (the
+ *                        clause rows kept: the reader's e06 shape as born, appended, prefixed, lower-cased, upper-cased and
+ *                        reversed, in Latin, in Greek with a dotted capital I and a sharp s, in Han; and Saltmere's appearance
+ *                        appended with no mark, a run across a comma, a semicolon, a colon, a full stop and a dash, a run of
+ *                        exactly twelve, a run in Greek and in Cyrillic holding U+0130 and U+00DF, a run of symbols only,
+ *                        upper against lower, either string the shorter), arriving where none does (rewritten wholly, a
+ *                        shared run of eleven with marks inside and without, eleven astral symbols); the controls: the
+ *                        appearance open, another person's impression, and the other words-rules on a comma-clause only
+ *                        (they keep sentence pieces); and THE RUN IS ONE: the windows the same in both engines over the
+ *                        basic plane, and the test the same as its literal form over the basic plane and the plants.
  *         THE PRESSURE SENTENCE   the one home the record gives no tie for: by the two ends it names; where nothing
  *                        else accounts for it (no stress on the town, not the power structure's recentConflict); and,
  *                        where only the words tie it, on the current and the stored wording, in both directions. What
@@ -618,18 +622,19 @@ describe('COHERENCE-VEIL-10: the veil\'s design on rows written by hand (REVIEW-
     return bad;
   }
 
-  it('V7-2 THE FIVE HOMES: the legacy annotation, the siege narrative, prominentRelationship\'s copies and pressureSentence go with their source\'s eye, with the source as born, amended by appending, by a prefix, rewritten wholly, lower-cased and upper-cased; a person\'s impression goes with its appearance where a clause of the one holds the other\'s (VEIL-12, ruling (2)), in either direction and in any script, and arrives where none does; what is open stays', async () => {
+  it('V7-2 THE FIVE HOMES: the legacy annotation, the siege narrative, prominentRelationship\'s copies and pressureSentence go with their source\'s eye, with the source as born, amended by appending, by a prefix, rewritten wholly, lower-cased and upper-cased; a person\'s impression goes with its shut appearance where the two share a run of twelve code points in the one fold, wherever it begins and ends, in any script (VEIL-15, the chair\'s re-ruling), and arrives where they share none; what is open stays', async () => {
     const bad = []; const differs = []; let reads = 0;
     const HOMES = [['history', 'legacyAnnotations', 0, 'annotation'], ['history', 'siegeNarrative'], ['prominentRelationship', 'full'], ['prominentRelationship', 'tension'],
       ['prominentRelationship', 'phrasing'], ['pressureSentence']];
-    // COHERENCE-VEIL-12, RULING (2) CLAUSE BY CLAUSE (the chair's ruling on PART 12's section 6): the impression is no home
-    // of the appearance BY IDENTITY (its composer never builds it from the appearance); it goes where a clause of the one
-    // holds a clause of the other, in either direction, and arrives where none does. Hale's impression ('Weathered and
-    // slow to speak, with a rope burn across the right palm that never quite healed.') holds his born appearance after
-    // 'with', inside one clause: as born, behind a prefix cut off by a comma, lower-cased and upper-cased, the appearance's
-    // clause stands inside it; appended with no clause mark ('... healed (or so the harbour clerk has it)') or rewritten
-    // wholly, no clause of either stands inside the other, and the impression ARRIVES, as stored
-    const IMPRESSION_GOES = Object.freeze({ 'as born': true, 'amended by appending': false, 'amended by a prefix': true, 'rewritten wholly': false, 'lower-cased': true, 'upper-cased': true });
+    // VEIL-15, THE IMPRESSION BY A SHARED RUN OF TWELVE (the chair's re-ruling of 2026-11-14 07:42 UTC; VEIL-12's clause by
+    // clause is withdrawn): the impression is no home of the appearance BY IDENTITY (its composer never builds it from the
+    // appearance); it goes with its person's shut appearance where the two share any run of twelve code points or more in
+    // the one fold, wherever it begins and ends: no cut at any mark, so no edge an amendment can move. Hale's impression
+    // ('Weathered and slow to speak, with a rope burn across the right palm that never quite healed.') holds his born
+    // appearance: as born, behind a prefix, lower-cased, upper-cased AND appended with no mark ('... healed (or so the
+    // harbour clerk has it)', which the clause cut sent) the two share the born wording, and the impression is WITHHELD;
+    // rewritten wholly, they share no run of twelve, and the impression ARRIVES, as stored
+    const IMPRESSION_GOES = Object.freeze({ 'as born': true, 'amended by appending': true, 'amended by a prefix': true, 'rewritten wholly': false, 'lower-cased': true, 'upper-cased': true });
     for (const [how, amend] of Object.entries(AMENDED)) {
       const { town, deltas } = saltmere(amend);
       const r = await sharesOf(town, deltas);
@@ -641,7 +646,7 @@ describe('COHERENCE-VEIL-10: the veil\'s design on rows written by hand (REVIEW-
         for (const path of HOMES) if (at(doc, path) !== undefined) bad.push(`${t}: ${path.join('.')} is sent: ${JSON.stringify(at(doc, path)).slice(0, 110)}`);
         const impression = person(doc, 'Hale Dunmore')?.presentation?.impression;
         if (IMPRESSION_GOES[how] && impression !== undefined) bad.push(`${t}: the impression is sent: ${JSON.stringify(impression).slice(0, 110)}`);
-        if (!IMPRESSION_GOES[how] && impression !== town.npcs[0].presentation.impression) bad.push(`${t}: the impression, which shares no clause with the appearance, is ${JSON.stringify(impression)}`);
+        if (!IMPRESSION_GOES[how] && impression !== town.npcs[0].presentation.impression) bad.push(`${t}: the impression, which shares no run of twelve with the appearance, is ${JSON.stringify(impression)}`);
         for (const [k, needle] of Object.entries(NEEDLE)) {
           const where = k === 'palm' && !IMPRESSION_GOES[how] ? { notAt: /^\$\.npcs\[0\]\.presentation\.impression$/ } : {};
           bad.push(...arrivals(doc, needle, where).map(a => `${t}: the born wording of '${k}' arrives: ${a}`));
@@ -679,15 +684,22 @@ describe('COHERENCE-VEIL-10: the veil\'s design on rows written by hand (REVIEW-
       if (person(doc, 'Hale Dunmore')?.presentation?.impression !== c3.town.npcs[0].presentation.impression) bad.push(`nothing shut, ${tag}: the impression is gone`);
     }
 
-    // ── THE IMPRESSION BY ITS WORDS, CLAUSE BY CLAUSE (COHERENCE-VEIL-12, ruling (2): the chair's ruling on PART 12's
-    // section 6). One person a row, the appearance and the impression written by hand. The pieces of both are each string
-    // and each run of it between the sentence stops, the dashes, the comma, the semicolon and the colon, cut IN THE ONE
-    // FOLD (a full-width comma and the Greek question mark U+037E are what the fold makes them: ',' and ';'), a run of
-    // fewer than twelve code points no piece; the impression goes where a piece of the one stands inside the other.
+    // ── THE IMPRESSION BY A SHARED RUN OF TWELVE (VEIL-15; the chair's re-ruling of 2026-11-14 07:42 UTC, which withdrew
+    // VEIL-12's clause by clause). One person a row, the appearance and the impression written by hand. Each string is
+    // folded WHOLE by the one fold and read as CODE POINTS; the impression goes with its person's shut appearance where
+    // the two share any run of twelve code points or more, wherever it begins and ends: no cut at any mark. The fourteen
+    // rows the clause cut withheld stay withheld (a shared clause of twelve is a shared run of twelve); each row after them
+    // the clause cut SENT, and the run withholds. A run across a mark below shares only five code points left of it and
+    // nine right of it (' back' and ' slow to '): it reaches twelve only by crossing the mark.
     const E06 = 'Soot-stained apron, and a burn scar across the left forearm.';
     const SCAR = 'A burn scar across the left forearm';
     const GREEK = 'Ένα σημάδι από το καμίνι της İlse Weiß στον αριστερό πήχη';
     const GREEK_IMPRESSION = `Ποδιά λερωμένη με καπνιά, και ${lowerFirst(GREEK)}.`;
+    // twelve symbols, four of them astral (sixteen UTF-16 units); eleven astral symbols (twenty-two units: a reading by
+    // UTF-16 units would find a run of twelve in them, a reading by code points does not)
+    const STARS = '✦✧★☆\u{1F701}\u{1F702}\u{1F703}\u{1F704}✦✧★☆';
+    const ASTRAL11 = '\u{1F701}\u{1F702}\u{1F703}\u{1F704}\u{1F705}\u{1F706}\u{1F707}\u{1F708}\u{1F709}\u{1F70A}\u{1F70B}';
+    const across = (name, mark) => [`a shared run of twelve that crosses ${name}`, `Broad back${mark} slow to rise`, `Narrow back${mark} slow to anger.`];
     /** [what, the appearance, the impression]: WITHHELD where the appearance is shut */
     const GOES = [
       ['e06 as born', SCAR, E06],
@@ -704,13 +716,25 @@ describe('COHERENCE-VEIL-10: the veil\'s design on rows written by hand (REVIEW-
       ['Greek, the reverse direction, cut at the Greek question mark U+037E', `Ποδιά με καπνιά και ${lowerFirst(GREEK)}, δεμένο πρόσφατα`, `Ποιος δεν το πρόσεξε; ${lowerFirst(GREEK)}`],
       ['Han, cut at the full-width comma U+FF0C', '左前臂上有一道很长的烧伤疤痕，最近才包扎好', '围裙上满是煤灰，左前臂上有一道很长的烧伤疤痕。'],
       ['a shared clause of twelve code points', 'Broad shoulders and a slow walk; a broad nose', 'A broad nose, and a laugh that carries across the yard.'],
+      // the clause cut sent each row below; the run withholds it
+      ['a shared run that crosses a comma and holds no whole clause of twelve (an arrival of the clause cut)', 'Strong hands at the anvil, sleeves rolled to the elbow', 'Calm hands at the anvil, sleeves rolled and patched.'],
+      across('a comma', ','), across('a semicolon', ';'), across('a colon', ':'), across('a full stop', '.'), across('a dash (U+2014)', ' —'),
+      ['a run of exactly twelve code points', 'A lopsided grin', 'Has a lopsided gait.'],
+      ['a run in Greek holding a dotted capital I and a sharp s, upper-cased against lower', 'Η ποδιά της İlse Weiß κρέμεται στον τοίχο', 'ΜΙΛΑ ΣΥΧΝΑ ΓΙΑ ΤΗΝ ΠΟΔΙΑ ΤΗΣ İLSE WEISS ΣΤΟ ΣΠΙΤΙ'],
+      ['a run in Cyrillic holding a dotted capital I and a sharp s, upper-cased against lower', 'Фартук İlse Weiß висит у горна', 'Говорят, ФАРТУК İLSE WEISS ВИСИТ НА ГВОЗДЕ.'],
+      ['a run of symbols only (four of them astral)', `Inked ${STARS} in blue`, `Branded(${STARS})`],
+      ['upper-cased against lower-cased (the one fold)', 'HIS LEFT EAR NOTCHED BY A BLADE', 'Old soldier, the left ear notched by a blade long ago.'],
+      ['the appearance the shorter string', 'A notched left ear and a slow smile', 'Watchful at the door, with the notched left ear and a slow smile of a fox.'],
+      ['the impression the shorter string', 'Watchful at the door, with the notched left ear and a slow smile of a fox', 'A notched left ear and a slow smile.'],
     ];
-    /** ARRIVING where the appearance is shut: they share no clause of twelve code points or more */
+    /** ARRIVING where the appearance is shut: they share no run of twelve code points */
     const ARRIVES = [
       ['rewritten wholly', 'An old injury kept out of sight under a sleeve', E06],
       ['Greek, rewritten wholly', 'Ένα παλιό τραύμα κρυμμένο κάτω από το μανίκι', GREEK_IMPRESSION],
-      ['a shared clause of eleven code points', 'Narrow shoulders and a quick step; a bent nose', 'A bent nose, and a voice that carries over the hammering.'],
-      ['a shared run that crosses a comma and holds no whole clause of twelve', 'Strong hands at the anvil, sleeves rolled to the elbow', 'Calm hands at the anvil, sleeves rolled and patched.'],
+      ['a shared run of eleven code points, no mark inside (a clause)', 'Narrow shoulders and a quick step; a bent nose', 'A bent nose, and a voice that carries over the hammering.'],
+      ['a shared run of eleven code points, no mark inside', 'A lopsided grin', 'His lopsided gait.'],
+      ['a shared run of eleven code points, marks inside', 'Wide-eyed; dourly, slyly', 'Bleary; dourly, shy.'],
+      ['a shared run of eleven astral symbols (twenty-two UTF-16 units)', `Tattoo:${ASTRAL11};`, `Marked=${ASTRAL11}!`],
     ];
     // another person, the appearance OPEN, whose impression holds the whole of a shut person's appearance: the impression
     // goes with ITS OWN person's appearance only
@@ -721,15 +745,15 @@ describe('COHERENCE-VEIL-10: the veil\'s design on rows written by hand (REVIEW-
       return { town: { name: 'Emberford', tier: 'town', institutions: [{ name: 'Forge row', category: 'Economy', desc: 'Forges.' }], npcs },
         deltas: npcs.filter((_, i) => shutAt(i)).map(p => fieldEye('npc', p, 'physical')) };
     };
-    let clauseReads = 0;
+    let runReads = 0;
     for (const [arm, rows, shutAt] of [['goes', GOES, () => true], ['arrives', [...ARRIVES, OTHER], (i) => i < ARRIVES.length], ['open', GOES, () => false]]) {
       const { town, deltas } = emberford(rows, shutAt);
       const r = await sharesOf(town, deltas);
-      differs.push(...twinDiffers(r).map(d => `the clauses, ${arm}: ${d}`));
+      differs.push(...twinDiffers(r).map(d => `the run, ${arm}: ${d}`));
       for (const { tag, doc } of each(r)) {
-        clauseReads += 1;
+        runReads += 1;
         rows.forEach(([what], i) => {
-          const t = `the clauses, ${arm}, ${what}, ${tag}`;
+          const t = `the run, ${arm}, ${what}, ${tag}`;
           const p = person(doc, town.npcs[i].name);
           if (!p) { bad.push(`${t}: the person is gone`); return; }
           if (p.presentation?.disposition !== 'guarded') bad.push(`${t}: the rest of the presentation is gone`);
@@ -738,10 +762,13 @@ describe('COHERENCE-VEIL-10: the veil\'s design on rows written by hand (REVIEW-
           if (arm === 'goes' && p.presentation?.impression !== undefined) bad.push(`${t}: the impression is sent: ${JSON.stringify(p.presentation.impression).slice(0, 110)}`);
           if (arm !== 'goes' && p.presentation?.impression !== town.npcs[i].presentation.impression) bad.push(`${t}: the impression is ${JSON.stringify(p.presentation?.impression)}`);
         });
-        if (arm === 'goes') for (const needle of ['burn scar across the left forearm', 'σημάδι από το καμίνι', '很长的烧伤疤痕', 'a broad nose']) bad.push(...arrivals(doc, needle).map(a => `the clauses, goes, ${tag}: ${a}`));
+        if (arm === 'goes') {
+          for (const needle of ['burn scar across the left forearm', 'σημάδι από το καμίνι', '很长的烧伤疤痕', 'a broad nose', 'hands at the anvil', 'back, slow to', 'a lopsided g',
+            'İlse Weiß', 'ποδιά της', 'фартук', STARS, 'ear notched by a blade', 'notched left ear']) bad.push(...arrivals(doc, needle).map(a => `the run, goes, ${tag}: ${a}`));
+        }
       }
     }
-    expect(clauseReads).toBe(3 * 8);
+    expect(runReads).toBe(3 * 8);
     // THE CONTROLS OF THE OTHER WORDS-RULES: each keeps its SENTENCE pieces, so a copy that shares only a comma-clause with
     // its shut source ARRIVES, as at the base: the pressure sentence (a town under a stress, naming no tie's two ends: only
     // the words tie it), the siege narrative (no tension shut) and the legacy annotation of an open event
@@ -761,24 +788,65 @@ describe('COHERENCE-VEIL-10: the veil\'s design on rows written by hand (REVIEW-
       if (at(doc, ['history', 'legacyAnnotations', 1, 'annotation']) !== ANNOTATION) bad.push(`a comma-clause only, ${tag}: the open event's annotation is ${JSON.stringify(at(doc, ['history', 'legacyAnnotations', 1, 'annotation']))}`);
     }
     if (process.env.VEIL_HAND_OUT) writeFileSync(process.env.VEIL_HAND_OUT, `${[...new Set([...bad, ...differs.map(d => `DIFFERS ${d}`)])].join('\n')}\n`);
-    // THE CLAUSES ARE ONE: _gallery_veil_clauses and the twin's clausePieces cut the same pieces from every code point of
-    // the basic plane, alone and inside a word (the fold is one: VEIL-11; the marks are cut after it)
+    // THE RUN IS ONE (VEIL-15; replaces VEIL-12's THE CLAUSES ARE ONE). (1) THE WINDOWS: _gallery_veil_runs and the twin's
+    // runWindows give the same set of twelve-code-point windows, in the one fold, from every code point of the basic plane,
+    // alone and inside a word (the fold is one: VEIL-11). (2) THE TEST AND ITS LITERAL FORM: on the plant strings (every row
+    // above, and Saltmere's six) and on two pairs a block of the basic plane (a block against its upper case; a block against
+    // itself reversed), the server's impression arm (_gallery_veil_card itself), the twin's (withholdImpression) and the
+    // ruling's literal form in each engine (a window of twelve at every code point of the shorter string, sought in the
+    // other: position() over the server's fold, includes() over the twin's code points) give one verdict; the plants give
+    // the rows' own verdicts, and the basic plane gives both.
     const sh = await import('../../src/domain/display/gallerySecondHomes.js');
     const cut = [];
+    const RUN = 12;
+    const block = (c) => { const part = []; for (let k = c; k < c + 1024 && k <= 0xffff; k += 1) if (k < 0xd800 || k > 0xdfff) part.push(String.fromCodePoint(k)); return part; };
+    const setOf = (xs) => JSON.stringify([...new Set(xs)].sort());
     for (let c = 1; c <= 0xffff; c += 1024) {
-      const part = [];
-      for (let k = c; k < c + 1024 && k <= 0xffff; k += 1) if (k < 0xd800 || k > 0xdfff) part.push(String.fromCodePoint(k));
+      const part = block(c);
       for (const text of [part.join(' '), part.map(ch => `xx${ch}yy`).join(', ')]) {
-        const server = (await db.query('select public._gallery_veil_clauses($1::jsonb) as c', [JSON.stringify({ a: [text] })])).rows[0].c;
-        if (JSON.stringify([...server].sort()) !== JSON.stringify(sh.clausePieces({ a: [text] }).sort())) cut.push(`from U+${c.toString(16)}: server ${server.length} pieces, twin ${sh.clausePieces({ a: [text] }).length}`);
+        const server = (await db.query('select coalesce(array_agg(w), \'{}\') as w from public._gallery_veil_runs($1::jsonb) w', [JSON.stringify({ a: [text] })])).rows[0].w;
+        const twin = [...sh.runWindows({ a: [text] })];
+        if (setOf(server) !== setOf(twin)) cut.push(`the windows from U+${c.toString(16)}: server ${new Set(server).size}, twin ${new Set(twin).size}`);
       }
     }
-    for (const [, a, b] of [...GOES, ...ARRIVES, OTHER]) {
-      for (const text of [a, b]) {
-        const server = (await db.query('select public._gallery_veil_clauses($1::jsonb) as c', [JSON.stringify(text)])).rows[0].c;
-        if (JSON.stringify([...server].sort()) !== JSON.stringify(sh.clausePieces(text).sort())) cut.push(`${JSON.stringify(text)}: server ${JSON.stringify(server)}, twin ${JSON.stringify(sh.clausePieces(text))}`);
+    const strs = (v) => valuesOf(v).map(l => l.text);
+    const literalTwin = (a, b) => strs(a).some(x => strs(b).some(y => {
+      const [s, l] = [sh.caseFold(x), sh.caseFold(y)].sort((p, q) => Array.from(p).length - Array.from(q).length);
+      const cs = Array.from(s);
+      for (let i = 0; i + RUN <= cs.length; i += 1) if (l.includes(cs.slice(i, i + RUN).join(''))) return true;
+      return false;
+    }));
+    const literalServer = async (a, b) => {
+      for (const x of strs(a)) for (const y of strs(b)) {
+        const q = await db.query(`select exists (select 1 from (select public._gallery_veil_case_fold($1) as fa, public._gallery_veil_case_fold($2) as fb) f,
+            lateral (select case when char_length(fa) <= char_length(fb) then fa else fb end as s, case when char_length(fa) <= char_length(fb) then fb else fa end as l) o,
+            generate_series(1, char_length(o.s) - ${RUN - 1}) i where position(substr(o.s, i, ${RUN}) in o.l) > 0) as hit`, [x, y]);
+        if (q.rows[0].hit) return true;
+      }
+      return false;
+    };
+    const cardOf = (a, b) => ({ id: 'npc.run', name: 'Run Probe', physical: typeof a === 'string' ? { feature: a } : a, presentation: { impression: b, disposition: 'guarded' } });
+    const serverGoes = async (a, b) => (await db.query(`select public._gallery_veil_card('npc', $1::jsonb, '["physical"]', '{}', '{}', '[]') #> '{presentation,impression}' is null as gone`,
+      [JSON.stringify(cardOf(a, b))])).rows[0].gone;
+    const twinGoes = (a, b) => { const card = cardOf(a, b); sh.withholdImpression(card); return card.presentation.impression === undefined; };
+    const saltmerePairs = Object.entries(AMENDED).map(([how, amend]) => { const hale = saltmere(amend).town.npcs[0]; return [`Saltmere ${how}`, hale.physical, hale.presentation.impression]; });
+    const planePairs = [];
+    for (let c = 1; c <= 0xffff; c += 1024) {
+      const part = block(c);
+      planePairs.push([`U+${c.toString(16)} against its upper case`, part.join(''), part.map(ch => ch.toUpperCase()).join('')],
+        [`U+${c.toString(16)} against itself reversed`, part.join(' '), [...part].reverse().join(' ')]);
+    }
+    const verdicts = { plants: [0, 0], plane: [0, 0] };
+    for (const [where, pairs] of [['plants', [...GOES, ...ARRIVES, OTHER, ...saltmerePairs]], ['plane', planePairs]]) {
+      for (const [what, a, b] of pairs) {
+        const v = [await serverGoes(a, b), twinGoes(a, b), await literalServer(a, b), literalTwin(a, b)];
+        if (new Set(v).size !== 1) cut.push(`${where}, ${what}: server ${v[0]}, twin ${v[1]}, the literal form ${v[2]} (server's fold) and ${v[3]} (twin's)`);
+        verdicts[where][v[0] ? 0 : 1] += 1;
       }
     }
+    // withheld, arriving: every GOES row and five of Saltmere's six; every ARRIVES row, OTHER's own pair and Saltmere rewritten wholly
+    if (JSON.stringify(verdicts.plants) !== JSON.stringify([GOES.length + 5, ARRIVES.length + 2])) cut.push(`the plants' verdicts ${JSON.stringify(verdicts.plants)}, not ${JSON.stringify([GOES.length + 5, ARRIVES.length + 2])}`);
+    if (!verdicts.plane[0] || !verdicts.plane[1]) cut.push(`the basic plane gave one verdict only: ${JSON.stringify(verdicts.plane)}`);
     expect(bad).toEqual([]);
     expect(differs).toEqual([]);
     expect(cut).toEqual([]);

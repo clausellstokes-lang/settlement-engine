@@ -1,0 +1,30 @@
+VEIL-15 ITEM 1, RED FIRST AT THE BASE'S BYTES (the impression by a shared run of twelve)
+Where: /var/tmp/v15/red-625, a git archive of 625e2a8ef (9419 files, node_modules linked). The re-keyed
+tests/security/galleryVeilHandRows.pglite.test.js copied in, run there, then restored from `git show 625e2a8ef:<path>`
+(cmp-clean). The mutex refused the shared tier (worker cap 3 over its ceiling of 2), so each run went through
+`sh scripts/gate-tail.sh npx vitest run --maxWorkers=3 ...`, as the adaptation allows.
+
+The whole file at the base's bytes: exit 1; 13 of 14 arms green; the one red: V7-2 THE FIVE HOMES (re-keyed).
+The arm alone (`-t "V7-2 THE FIVE HOMES"`, so VEIL_HAND_OUT holds its rows only; two later arms write the same file):
+  exit 1; 216 lines, 0 of them DIFFERS (server and twin agree at the base, as both cut clauses)
+  RED, the impression SENT with its person's appearance shut, in each of 8 reads (veil and Reveal DM x gallery, link,
+  import, twin):
+    Saltmere, the appearance amended by appending with no mark (the born wording held): 8 reads sent, and its born
+      wording 'rope burn across the right palm' arrives in the 8 (16 lines)
+    13 Emberford rows, 104 row-reads sent and 96 needle arrivals (each row's run found in the doc; the Greek row's
+      accented needle is not spelled in its upper-cased impression):
+      a shared run that crosses a comma and holds no whole clause of twelve (the clause cut's arrival)
+      a shared run of twelve that crosses a comma / a semicolon / a colon / a full stop / a dash (U+2014): each side of
+        the mark alone shares 5 and 9 code points (' back', ' slow to '), the run across it 15 (16 with the dash)
+      a run of exactly twelve code points ('a lopsided g')
+      a run in Greek holding U+0130 and U+00DF, upper-cased against lower (' ποδια τησ ilse weiss ', 22 in the fold)
+      a run in Cyrillic holding U+0130 and U+00DF, upper-cased against lower ('фартук ilse weiss висит ', 24)
+      a run of symbols only, four of them astral (12 code points, 16 UTF-16 units)
+      upper-cased against lower-cased (' left ear notched by a blade', 28)
+      the appearance the shorter string; the impression the shorter string (' notched left ear and a slow smile', 34)
+  THE RUN IS ONE: absent at the base (error: function public._gallery_veil_runs(jsonb) does not exist)
+  GREEN at the base, by identity: the 14 rows the clause cut withheld (still withheld), every ARRIVING row (rewritten
+  wholly in Latin and Greek, Saltmere rewritten wholly, eleven with marks inside and without, eleven astral symbols),
+  another person's impression, the appearance open, and the other words-rules' comma-clause controls: 0 lines.
+Pre-check of every row by execution (the base's clausePieces and caseFold, the longest shared run of code points): each
+new WITHHELD row arrives at the base and shares a run of 12 to 57; each ARRIVING row shares at most 11.
