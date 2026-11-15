@@ -86,6 +86,7 @@ THE CHAIR'S RULINGS TO JOIN-10 (each vetoable by the owner):
 | 10 | lane/tail-ties-2026-11-14 | 02de38883 (07:21) | ae50369d4 | 0c72335ce | none | 5 files outside docs/; declared-move commits: f65910b6e (golden carried) |
 | 11 | lane/tail-close-pools-2026-11-15 | 0711a6a39 (07:24) | 0b1248dbf | 0a30642d4 | `crisisBlindProse.test.js` (test), close-pools against crisis: the joined side whole by ruling C31, the branch's edit dropped; 8/8 green (§3) | 4 files outside docs/; declared-move commits: none (golden carried); merged clean though both moved: tests/domain/coherence/crisisBlindProse.test.js |
 | 12 | lane/tail-close-display-2026-11-15 | bc19f7a5d (07:31) | ceeaeec84 | 029f1de88 | none | 8 files outside docs/; declared-move commits: 6cd5f374f adbe29e11 9a13dd0a4 (golden carried) |
+| 13 | lane/tail-close-pools-2026-11-15 | 1d3fef703 (07:34) | 0711a6a39 4e58ed8ba | a3378d243 | none | 1 files outside docs/; declared-move commits: none (golden carried) |
 
 ## 3. Every code resolution
 
@@ -94,6 +95,8 @@ THE CHAIR'S RULINGS TO JOIN-10 (each vetoable by the owner):
 **CODE CONFLICT IN A TEST FILE, point 8** (close-tests-c 2ef97b6e9, holding the line at 0b1248dbf, against close-pools-2 1c9ff3933 landed at points 6-7): `tests/data/tailHistoryBatch6.test.js`, the MUST NOT test's per-row body (one hunk). close-pools-2 (bb7b3ede3, TAIL-CLOSE-POOLS-2 red 3): the twin row through `expectAbsentWithAnchor`, the SILENT row through `expectPresentThenAbsent` against its KEEP witness. close-tests-c (2f3e3a21e): the liveness anchor first (the twin matches, or the silent row's hooks print), then the plain negative. BOTH STAND, verbatim: close-pools-2's block, then close-tests-c's block after it (every name each uses is defined in the file; nothing of either side dropped or reworded). Measured: the file alone at the merged tree 3/3 green (`/home/user/j10out/t8.m.log`); eslint on the file exit 0. Remerge patch `probes/JOIN-10/08-tail-close-tests-c-2026-11-15.remerge.patch`.
 
 **CONFLICT IN A TEST FILE, RULED BEFOREHAND (C31), point 11** (close-pools 0711a6a39 against crisis b75ca93c7, landed at point 5): `tests/domain/coherence/crisisBlindProse.test.js`, the soak1k-4800 case, moved by both sides through the chair's own double assignment (crisis TAIL-CRISIS-8 retired it by name; close-pools 0711a6a39 re-shaped the same case: +13/-2). THE JOINED SIDE STANDS WHOLE (`git checkout --ours` inside the merge); THE BRANCH'S EDIT TO THAT FILE IS DROPPED (its commit 0711a6a39's hunk in that file). Measured: the file alone at the merged tree 8/8 green (`/home/user/j10out/t11.m.log`). Every other file of the branch is its own.
+
+**Point 13, the files the chair named run alone** (close-pools 1d3fef703 over its point 11; two merge bases 0711a6a39 and 4e58ed8ba; the branch took the joined side of `crisisBlindProse.test.js` itself, C31 done on the branch): staged only `tests/lint/factLayers.poolTable.json` (one row) and the seat's hand-back; `crisisBlindProse.test.js` and `tests/domain/corpusCureGuards.test.js` (the chair wrote tests/lint/: the file lives under tests/domain/) alone at the merged tree: 126/126 green (`/home/user/j10out/t13.m.log`).
 
 ## 4. THE LIST FOR THE CLOSE
 
@@ -309,4 +312,4 @@ A worktree at origin's tip (`git worktree add /home/user/j10wt -b join10 <tip>`,
 
 ## 8. WHAT IS LEFT
 
-Landed through point 12 (see the table); count 153,836 at 07:11 UTC after point 6; waiting on the chair's LAND words.
+Landed through point 13 (see the table); count 153,836 at 07:11 UTC after point 6; waiting on the chair's LAND words.
