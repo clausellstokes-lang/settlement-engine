@@ -90,6 +90,7 @@ THE CHAIR'S RULINGS TO JOIN-12 (each vetoable by the owner):
 |---|---|---|---|---|---|---|
 | 1 | lane/tail-close-sweep-b-2026-11-15 | 4712d06e4 (09:40; origin tip = the hash named) | dc4bae117 | 07e6d2792 | none; no file both sides moved: its side whole | 4 files outside docs/ (1 src line; the envelopes' manifest, its side; two envelope tests); run alone: captureBirthScale 8/8, tierInertiaEnvelope 17/17, urbanBandInstitutions 20/20 |
 | 2 | lane/tail-close-src-2026-11-15 | c0c2ce70a (09:53; origin tip = the hash named) | 22b3cc82e | d3ec3f8dc | none; no file both sides moved: its side whole | 7 files outside docs/ (4 src: crimeSignal.js, defenseDisplay.js, facts/criminalStructureKey.js, facts/defence.js; the readers' register, its side; two tests); no declared move; run alone: layerBoundaries 8/8, engineCoreLazyEdge 3/3, factLayers.walker 15/15, defenceFactReaders 22/22, ruinFilterRoster 12/12, noLegacyFactionReaders 4/4, informantNoThievesGuild 6/6 |
+| 3 | lane/tail-close-sweep-c-2026-11-15 | 6a4c0c11b (10:02; origin tip 1f3617425, one later docs-only commit: the hash named landed) | ffdd541a0 | 387d7b8e9 | none; no file both sides moved | 2 files outside docs/ (two tests re-keyed by identity, merged as code); the envelopes' manifest untouched by it, so sweep-b's side (point 1) stands; run alone: corpusEcoTailGuards 136/136, defenseInvasionWithinACriticalBand 3/3 |
 
 ## 3. Every code resolution
 
@@ -98,6 +99,8 @@ JOIN-11's §3 stands on its own file (`docs/chair/2026-11-14/JOIN-11-HANDBACK.md
 **Point 1, the files the chair named run alone** (sweep-b 4712d06e4; base dc4bae117; no conflict; no file both sides moved: `src/domain/magicAssertionText.js`, `tests/fixtures/distribution-envelopes.manifest.json`, `tests/generators/captureBirthScale.test.js`, `tests/simulation/tierInertiaEnvelope.test.js` moved by the branch alone since the base): `captureBirthScale` 8/8 (245 s); `tierInertiaEnvelope` 17/17 (50 s); `urbanBandInstitutions` 20/20 (107 s), all green at the merged tree: the record cures beneath did not move their measures out of the re-derived envelopes (`/home/user/j12out/t1.*.log`).
 
 **Point 2, the files the chair named run alone** (close-src c0c2ce70a, holding the line at 22b3cc82e through 4782f6bfd; one base, 22b3cc82e; no conflict; no file both sides moved): `layerBoundaries` 8/8 and `engineCoreLazyEdge` 3/3 (the two architecture files green: no abort); `factLayers.walker` 15/15 (THE WHOLE WALKER GREEN; JOIN-11's carried READERS red closed); `defenceFactReaders.walker` 22/22 (JOIN-11's carried defenseDisplay.js 4 closed); `ruinFilterRoster.walker` 12/12; `noLegacyFactionReaders.walker` 4/4; `informantNoThievesGuild` 6/6 (`/home/user/j12out/t2.*.log`).
+
+**Point 3, the files the chair named run alone** (sweep-c 6a4c0c11b, holding the line at ffdd541a0 through d5c5b922f; one base, ffdd541a0; no conflict; no file both sides moved; origin's tip at the merge 1f3617425, one docs-only commit past the hash named, not landed): `corpusEcoTailGuards` 136/136 (36 s); `defenseInvasionWithinACriticalBand` 3/3 (`/home/user/j12out/t3.*.log`).
 
 ## 4. THE LIST FOR THE CLOSE
 
@@ -324,6 +327,7 @@ JOIN-10's (by point):
 |---|---|---|
 | `tests/fixtures/distribution-envelopes.manifest.json` (the `captureBirthScale` town-drift ceiling 43 -> 59; the criminal-city equilibrium floor 372 -> 300) | tail-close-sweep-b (1) | re-derived on the branch by the tests' own derivation; lane-only, taken whole; its writer tonight is the LATER of sweep-b and sweep-c to land: the close confirms it once on the final tree |
 | `tests/lint/factLayers.register.json` | tail-close-src (2) | banked through its own door on the branch (c8f7e2322), taken whole; the walker 15/15 at the merged tree: JOIN-11's two carried rows (factLayers READERS; defenceFactReaders defenseDisplay.js 4) CLOSED at this point |
+| `tests/fixtures/distribution-envelopes.manifest.json` | sweep-c (3) | sweep-c holds no change to it: of the two writers, sweep-b's side (point 1) is the manifest on the line |
 
 ## 5. Stops
 
@@ -342,6 +346,6 @@ JOIN-11's §7, re-made as written under `/home/user/j12out/` (worktree `/home/us
 
 ## 8. WHAT IS LEFT
 
-Landed: points 1-2 (the table), each at the hash the chair named, pushed with the hook's three gates and this file current.
-1. NOT DONE, each only on the chair's word: tail-close-sweep-c (its manifest side would then be the envelopes' writer, whole); tail-close-presumed and tail-close-reach at their final passes; close-veto-list (one document); tail-close-doors final pass LAST OF ALL; then, only on the word, one more pass of presumed or reach.
+Landed: points 1-3 (the table), each at the hash the chair named, pushed with the hook's three gates and this file current.
+1. NOT DONE, each only on the chair's word: tail-close-presumed and tail-close-reach at their final passes; close-veto-list (one document); tail-close-doors final pass LAST OF ALL; then, only on the word, one more pass of presumed or reach.
 2. For the close (not this seat's): every row of §4 by its door, once, on the final tree; the whole check once, by the close's seat.
