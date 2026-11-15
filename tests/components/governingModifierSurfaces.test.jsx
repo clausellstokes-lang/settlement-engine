@@ -65,6 +65,7 @@ describe('the ruling power\'s modifier prints through one reader on the Power ta
       const { container } = render(<SummaryTab settlement={s} />);
       const text = container.textContent || '';
       expect(text, 'anchored: the Summary legend names the ruler').toContain(String(ruler.faction));
+      // anchored: the line above finds the ruler's name in this same Summary text (lower-cased here only to catch the key in any case)
       expect(text.toLowerCase(), 'the Summary prints no stored key').not.toContain(key);
       if (words) expect(text, `the Summary prints "${words}"`).toContain(words);
     });

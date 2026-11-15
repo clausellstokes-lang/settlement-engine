@@ -43,7 +43,7 @@ const OVERVIEW_TAB = 'src/components/new/tabs/OverviewTab.jsx';
 // The Systems Health caption — ONE sentence, kept byte-identical between the web tab's ? pill
 // and its PDF twin by BOTH reading copy/sectionHelp.js :: SYSTEMS_HEALTH_VINTAGE (X-42; parity by
 // construction: one constant, two readers).
-const SYSTEMS_HEALTH_CAPTION = 'As judged at the first survey · Food Security is re-judged as the campaign advances.';
+const SYSTEMS_HEALTH_CAPTION = 'As judged at the first survey · Food Security is re-judged as your campaign goes on.';
 
 describe('G5 first-survey framing — PDF ViabilityAssessment twin', () => {
   // ⭐ ONE LABEL PER CHAPTER (RULINGS-CROSS X-8, the chair's reading of owner-queue #28,

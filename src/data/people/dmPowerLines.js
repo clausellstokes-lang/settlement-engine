@@ -24,7 +24,7 @@
  * OWNER'S VETO; nothing here is imported by the generator, and the one import is the possessive leaf (a pure leaf).
  */
 
-import { powerPossessive, powerSentenceName } from '../../domain/display/powerSentenceName.js'; // COHERENCE-POWERS-7 (R3): a power's possessive through the one leaf, never a hand-formed "'s"
+import { powerPossessive, powerSentenceName } from './powerSentenceName.js'; // COHERENCE-POWERS-7 (R3): a power's possessive through the one leaf, never a hand-formed "'s"
 
 /**
  * One patron's receipt (a face of the ruling power's ranked three, or the steward of its empty seat).

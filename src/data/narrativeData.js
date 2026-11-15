@@ -373,11 +373,17 @@ export const STRESS_DESCS = {
     { text: r =>
       `There are more soldiers than citizens visible on ${r}'s main street, and the citizens are the ones stepping aside. A requisition column is being loaded in the square: grain, cloth, iron, and the settlement's own carts to carry it away.`, needs: ['market', 'soldiers'] },
     { text: r =>
-      `${r} is busy in a way that feels wrong. The forge fires burn past dark, the coin is moving, and all of it points one direction, toward a war that is not fought here but is paid for here.`, needs: ['institution: smith'], excludes: ['crisis: hunger', 'crisis: under_siege', 'war: front'] },
+      `${r} is busy in a way that feels wrong. The forge fires burn past dark, the coin is moving, and all of it points one direction, toward a war that is not fought here but is paid for here.`, needs: ['institution: smith', 'prosperity: ≥ moderate'], excludes: ['crisis: hunger', 'crisis: under_siege', 'war: front'] }, // TAIL-NARRATIVE-5 (N18 (1)): the coin moves only where the record's prosperity is not below moderate
     r =>
       `${r}'s noticeboard is a wall of requisition orders, each stamped, each superseding the last. At its foot, a smaller paper, hand-lettered: prayers offered nightly, all welcome.`,
     r =>
       `The horses in ${r}'s paddocks are old, or lame, or foals. Every sound animal of working age has a receipt where it used to be, and the receipts do not say when the crown returns them.`,
+    // TAIL-NARRATIVE-5 (N18 (1)): THE SLOT IS KEPT: a poor town at war takes the twin that says what the war takes, reached
+    // only by resolution where [3] is drawn and refused (arrivalScene.js :: drawAdmitted), so no draw moves.
+    { text: r =>
+      `${r} is busy in a way that feels wrong for a place this poor. The forge fires burn past dark, but the coin they earn leaves with the carts, and all of it points one direction, toward a war that is not fought here but is paid for here.`,
+    twinOf: '{name} is busy in a way that feels wrong. The forge fires burn past dark, the coin is moving, and all of it points one direction, toward a war that is not fought here but is paid for here.',
+    needs: ['institution: smith'], excludes: ['prosperity: ≥ moderate', 'crisis: hunger', 'crisis: under_siege', 'war: front'] },
   ],
   religious_conversion: [
     { text: r =>
@@ -413,22 +419,22 @@ export const STRESS_NOTES = {
     under_siege: [
       'Whatever the settlement was built for, it is under siege now, and nothing else matters until the siege is broken.',
       'Whatever the site was chosen for matters little to the people now deciding whether its walls can hold.',
-      'The founders built walls in case they were ever needed. They are needed now.',
+      'These walls were built in case they were ever needed. They are needed now.', // TAIL-NARRATIVE-5 (N18 (2)): a note claims nothing of the founding; who built the walls is not on the record
     ],
     famine: [
-      'The settlers chose this land because it fed them well. Now the harvests are failing and families are going hungry.',
-      'This ground fed the founders well enough to make them stay. This year it has not fed their grandchildren.',
-      'The land that drew the first families here is the same land, but the harvests have come in short, and the winter ahead will be hard.',
+      'This place has fed its people well enough in other years. Now its food is failing and families are going hungry.', // TAIL-NARRATIVE-5 (N18 (2)): no founding cause; no harvest where the failed source may be the catch or the herds
+      'Whatever fed the settlement in other years has failed it this year, and its children are going hungry.',
+      'The country around the settlement looks the same as ever, but the food has come in short, and the winter ahead will be hard.',
     ],
     occupied: [
-      'The founders governed themselves. Now foreign officers give the orders, and the settlement\'s own rulers answer to them.',
-      "The founders came here to be far from other people's rule. Other people rule it now.",
-      'The founders assumed the settlement would always make its own decisions. Under occupation, it no longer does.',
+      'The settlement\'s own rulers used to give the orders. Now foreign officers give them, and those rulers answer to them.', // TAIL-NARRATIVE-5 (N18 (2)): no founding claimed: a crown's or a consortium's founding did not govern itself
+      "Nobody here chose the people who rule it now, and they answer to someone far away.",
+      'The settlement always made its own decisions, or believed it did. Under occupation, it no longer does.',
     ],
     politically_fractured: [
       'The people of the settlement no longer agree on what it is for, and nobody expects them to agree again soon.',
       'Its people work as hard as they ever did, but no longer agree on where the settlement is going.',
-      'Every faction here tells the settlement\'s story its own way, and the settlement has split along those lines.',
+      'Every power here tells the settlement\'s story its own way, and the settlement has split along those lines.', // TAIL-NARRATIVE-5 (the chair's style-law red): the retired word's word; every printing town holds two powers or more
     ],
     indebted: [
       'The first settlers built something worth having. Their descendants have borrowed against it until the settlement owes more than it owns.',
@@ -441,9 +447,9 @@ export const STRESS_NOTES = {
       'People here trusted each other without thinking about it. Someone inside has just made them think about it.',
     ],
     infiltrated: [
-      'The founders all knew each other, and the settlement still trusts familiar faces. Someone living here now is using that trust to hide.',
+      'The settlement has always trusted familiar faces, and it still does. Someone living here now is using that trust to hide.', // TAIL-NARRATIVE-5 (N18 (2)): no founders who all knew each other beside a consortium, a decree or three merged places
       'A place this size still trusts faces it knows, and one of those faces is not what it seems.',
-      'The founding families could name every soul inside the walls, and the settlement still assumes it can. That is how someone who does not belong goes unnoticed.',
+      'The settlement still believes it knows who lives inside its walls. That is how someone who does not belong goes unnoticed.',
     ],
     plague_onset: [
       'The sickness came in the way everything else here comes in: from outside, and before anyone thought to stop it.',
@@ -466,9 +472,9 @@ export const STRESS_NOTES = {
       'The rules the founders set have outlived the reasons for them, and people have stopped obeying.',
     ],
     mass_migration: [
-      'The founders built for a few families who knew each other. Now newcomers crowd in, and half the faces are strangers.', // R2-CODE-A-4 (CENSUS-2 c/streets): no streets said of a thorp or a hamlet; true at every size
-      'The settlement was laid out for the families that founded it. Its houses and its water were never meant for this many people.', // R2-CODE-A-4 (CENSUS-2 c/streets): as above
-      'The founders knew every name inside the walls. Now no one does: too many have arrived too fast.',
+      'The settlement was never built for this many. Now newcomers crowd in, and half the faces are strangers.', // TAIL-NARRATIVE-5 (N18 (2)): no founding of a few families beside a decree, a consortium or a noble's grant; R2-CODE-A-4 (CENSUS-2 c/streets): no streets said of a thorp or a hamlet; true at every size
+      'The settlement was laid out for the people it used to hold. Its houses and its water were never meant for this many.', // R2-CODE-A-4 (CENSUS-2 c/streets): as above
+      'The settlement once knew the faces inside its walls. Now it does not: too many have arrived too fast.',
     ],
     wartime: [
       'The settlement grew up in quieter years. Now it feeds and arms a war.',
@@ -495,7 +501,7 @@ export const STRESS_NOTES = {
  * as one that is crowding. Same register and length as the arrivals set; index 0 is canonical.
  */
 export const MASS_MIGRATION_DEPARTURE_NOTES = [
-  'The founders built for the families that would stay. Now those families are leaving, and houses stand empty on every street.',
-  'The settlement was laid out for more people than it now holds; whole rows the founders filled are shuttered.',
-  'The founders knew every name in the settlement. Fewer names are left each season, as household after household takes the road.',
+  'The settlement was built for families that would stay. Now those families are leaving, and houses stand empty on every street.', // TAIL-NARRATIVE-5 (N18 (2)): as the arrivals set: no founding claimed
+  'The settlement was laid out for more people than it now holds; whole rows that were once full are shuttered.',
+  'The settlement once knew its households by name. Fewer names are left each season, as household after household takes the road.',
 ];

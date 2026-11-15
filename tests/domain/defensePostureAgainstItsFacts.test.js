@@ -119,7 +119,9 @@ describe('under an occupation the posture row is silent (ruling (c))', () => {
  * too; a walled town keeps the line.
  */
 const UNWALLED = ['r2r-town-52', 'rr3-town-religious_conversion-rand-1', 'rr3-town-occupied-rand-1'];
-const WALLED_KEEPS = 'rr3-town-monster_pressure-rand-4';
+// TAIL-CORPUS-DEF-4 (U2, 2026-11-15): re-keyed by identity: rand-4 now draws DS-DEF-1 readiness STRONG v6, the threat line
+// 7a2774754 / 47f8bdd8e (W2-WRITE-3) added; rand-8 is a walled monster-pressure town with its watch that keeps the line
+const WALLED_KEEPS = 'rr3-town-monster_pressure-rand-8';
 const NAMES_WORKS = /the works are kept up|the approaches are watched/;
 /** The watch half alone: the walled town's own record with its watch and garrison taken off the roster. */
 const UNWATCHED_FROM = 'rr3-town-slave_revolt-rand-5';

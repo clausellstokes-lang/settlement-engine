@@ -4,7 +4,8 @@
  *
  * The rule MOVED here verbatim from `domain/coherence/hookTruth.js :: settlementHookFacts` (R3-CODE-C-3,
  * ROUND-3-CUT-INCREMENT #ww-868), which re-exports it, so the hook gate and the vocabulary's atom
- * `ruling body` are one reading. WHY NOT `ruler: council`: the ruler-kind home (`facts/rulerKind.js`) sorts
+ * `ruling body` are one reading. WHY NOT `ruler: council`: the ruler-kind home (`facts/rulerKind.js`, its table in
+ * the leaf `facts/rulerKindLabel.js`) sorts
  * a government by WHO holds it, so an Elder Council, a Household Council and a Free Elder Council read
  * `elder` beside the one-person Headman's Authority, and an Ecclesiastical, Church or High Theocratic
  * Council reads `priest` beside the one-person Priestly Guidance: `ruler: council` holds only for the
@@ -14,7 +15,9 @@
  *
  * Pure: no randomness, no clock.
  */
-import { rulerKindOf, rulerKindOfLabel } from './rulerKind.js';
+// TAIL-TIES-5, ruling (T22): the kind table's PURE LEAF, not `rulerKind.js`. This module is generator-reached and rides
+// the eager engine-core chunk; `rulerKind.js` is pinned lazy, and the edge into it put the lazy chunks in first paint.
+import { rulerKindOfLabel } from './rulerKindLabel.js';
 
 /** An elder or priestly government whose label names a council is a body. @type {RegExp} */
 export const RULED_BY_A_BODY = /\bcouncil\b/i;
@@ -36,6 +39,7 @@ export function ruledByBodyOfLabel(government) {
  * @returns {boolean|undefined} undefined when the record names no government
  */
 export function rulingBodyOf(record) {
-  if (rulerKindOf(record) === null) return undefined;
-  return ruledByBodyOfLabel(record?.powerStructure?.government);
+  const government = record?.powerStructure?.government;
+  if (rulerKindOfLabel(government) === null) return undefined;
+  return ruledByBodyOfLabel(government);
 }

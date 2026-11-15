@@ -654,42 +654,10 @@ function wantsOnce(people) {
   });
 }
 
-/** The days a month of stores is read as (the food record counts stores in months): a year of
- *  1461 days in four, over 48 months. */
-export const DAYS_PER_MONTH = 1461 / 48;
-
-/**
- * THE SPAN OF THE STORES IN WORDS — ONE HOME (R2-CODE-B item 3; the cold list REVIEW-W2A-3 #149
- * #856 #872: "No granary; a few weeks in the larder." and "a granary, a few weeks of grain" where
- * the record holds `storageMonths` 0.1, about three days). Every span under a month was "a few
- * weeks". It is now true at days, weeks and months, read from the record's months: under a day,
- * "less than a day"; up to ten days, "about N days"; under a month, "about N weeks"; from a month,
- * the months as before ("about a month", "N months"). Any line that speaks of the stores' span in
- * words reads this (the Defence tab's food endurance line is owed the same switch:
- * defenseDisplay.js :: monthsInWords, the third leaves seat's file).
- * ROUND THREE (the chair's ruling on the increment's #472 #668 #769: "No granary; two months in household stores" where the
- * record holds 1.5): THE WORDS CONTAIN THE FIGURE, and a band's word is true of every figure in the band. From a month up
- * the span is said with "about", to the nearest half month below three months ("about a month and a half", "about two and a
- * half months") and to the nearest month from there ("about three months"): never a whole number rounded up and said bare.
- * @param {number} months the record's `storageMonths` @returns {string} '' for no stores
- */
-export function storesSpanWords(months) {
-  if (!Number.isFinite(months) || months <= 0) return '';
-  if (months >= 1) {
-    const halves = Math.round(months * 2);
-    if (halves >= 6) return `about ${numberWord(Math.round(months))} months`; // three months and up: the nearest month
-    const whole = Math.floor(halves / 2);
-    const half = halves % 2 === 1;
-    if (whole <= 1) return half ? 'about a month and a half' : 'about a month';
-    return half ? `about ${numberWord(whole)} and a half months` : `about ${numberWord(whole)} months`;
-  }
-  const days = months * DAYS_PER_MONTH;
-  if (days < 1) return 'less than a day';
-  const d = Math.round(days);
-  if (d <= 1) return 'about a day';
-  if (d <= 10) return `about ${numberWord(d)} days`;
-  return `about ${numberWord(Math.max(2, Math.round(days / 7)))} weeks`;
-}
+// TAIL-TIES-6 (the chair's ruling (T23)): the span of the stores in words lives in the pure leaf `storesSpanWords.js` (one
+// home; the Defence tab's food endurance line reads it there, so no eager module reaches this sheet through it).
+import { DAYS_PER_MONTH, storesSpanWords } from './storesSpanWords.js';
+export { DAYS_PER_MONTH, storesSpanWords };
 
 /**
  * The stores in plain words, from the one food record: the span in store and the granary.
@@ -741,12 +709,6 @@ export function foodBandOf(record) {
   if ((band === 'secure' || band === 'surplus') && Number.isFinite(gap) && gap > 0) key = 'pressured';
   else if (band === 'importDependent' && record?.normalImportPct === 0) key = 'deficit';
   return { key, label: bands[key].label, color: bands[key].color };
-}
-
-/** @param {number} n @returns {string} */
-function numberWord(n) {
-  const words = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve'];
-  return n >= 0 && n < words.length ? words[n] : String(n);
 }
 
 /** @param {TonightSource} source @returns {TonightFact | null} */

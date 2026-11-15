@@ -11,7 +11,6 @@
 import React from 'react';
 import { afterEach, beforeAll, describe, expect, test, vi } from 'vitest';
 import { cleanup, render } from '@testing-library/react';
-import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 vi.mock('../../src/store/index.js', () => {
   const data = { campaigns: [] };
@@ -27,8 +26,10 @@ import MagicTab from '../../src/components/new/tabs/MagicTab.jsx';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { foodStoresWords } from '../../src/domain/summary/tonightSheet.js';
 import { factsOf } from '../../src/domain/facts/factsOf.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const SIZE = '(thorp|hamlet|village|town|city|metropolis)';
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -50,14 +51,15 @@ const textOf = (t, tab) => {
   return out;
 };
 
-/** [seed, tab, the line that must NOT print, what prints instead (or the slot's silence by design)] */
+/** [seed, tab, the line that must NOT print, what prints instead (or the slot's silence by design), the liveness anchor:
+ *  the twin the test claims for the same town, else the row's own instead] */
 const NOT = /** @type {const} */ ([
-  ['r2r-metropolis-14', 'economics', 'Stores: a granary, about 15 months of grain.', 'Stores: a granary, about 15 months of grain, and the siege is eating into them.'],
-  ['r2s-under_siege-town-0', 'economics', 'Stores: a granary, about seven months of grain.', 'Stores: a granary, about seven months of grain, and the siege is eating into them.'],
-  ['r2s-famine-town-3', 'economics', 'Stores: a granary, about three months of grain.', 'Stores: a granary, about three months of grain, and the famine is eating into them.'],
-  ['r2r-town-1', 'magic', 'guild_controlled', 'Institutional control: guild controlled'],
-  ['r2r-city-57', 'magic', 'Timber & Lumber: Druidic forest management accelerates regrowth and sustainable yield', 'Timber & Lumber: Druidic forest management speeds the regrowth of the cleared woodland'],
-  ['r2s-under_siege-metropolis-2', 'magic', 'Reed & Marsh Harvest: Druidic forest management accelerates regrowth and sustainable yield', 'Reed & Marsh Harvest: Druidic tending speeds the regrowth of the depleted ground'],
+  ['r2r-metropolis-14', 'economics', 'Stores: a granary, about 15 months of grain.', 'Stores: a granary, about 15 months of grain, and the siege is eating into them.', 'Stores: a granary, about 15 months of grain, and the siege is eating into them.'],
+  ['r2s-under_siege-town-0', 'economics', 'Stores: a granary, about seven months of grain.', 'Stores: a granary, about seven months of grain, and the siege is eating into them.', 'Stores: a granary, about seven months of grain, and the siege is eating into them.'],
+  ['r2s-famine-town-3', 'economics', 'Stores: a granary, about three months of grain.', 'Stores: a granary, about three months of grain, and the famine is eating into them.', 'Stores: a granary, about three months of grain, and the famine is eating into them.'],
+  ['r2r-town-1', 'magic', 'guild_controlled', 'Institutional control: guild controlled', 'guild controlled'],
+  ['r2r-city-57', 'magic', 'Timber & Lumber: Druidic forest management accelerates regrowth and sustainable yield', 'Timber & Lumber: Druidic forest management speeds the regrowth of the cleared woodland', 'Druidic forest management speeds the regrowth of the cleared woodland'],
+  ['r2s-under_siege-metropolis-2', 'magic', 'Reed & Marsh Harvest: Druidic forest management accelerates regrowth and sustainable yield', 'Reed & Marsh Harvest: Druidic tending speeds the regrowth of the depleted ground', 'Druidic tending speeds the regrowth of the depleted ground'],
 ]);
 /** [seed, tab, the twin true in the state that made the old line false] (new or newly reached lines: red at the base by design) */
 const TWIN = /** @type {const} */ ([
@@ -80,18 +82,19 @@ describe('TAIL-DISPLAY-ECON-3 batch 3: the stores sentence takes the crisis; a f
   beforeAll(async () => { await loadGenerationLawPayloads(); });
 
   test('one home: the tab prints the Tonight sheet\'s own stores sentence, crisis and all', () => {
-    expectNoSeedFailures(collectSeedFailures(['r2r-metropolis-14', 'r2s-famine-town-3', 'r2r-town-6'], (seed) => {
+    const failures = collectSeedFailures(['r2r-metropolis-14', 'r2s-famine-town-3', 'r2r-town-6'], (seed) => {
       const t = town(seed);
       const tonight = foodStoresWords(t.economicState.foodSecurity.foodRecord, factsOf(t).crisis);
       expect(tonight, seed).toMatch(/^Stores: /);
       expect(textOf(t, 'economics'), seed).toContain(tonight);
-    }), "one home: the tab prints the Tonight sheet's own stores sentence");
+    });
+    expectNoSeedFailures(failures, 'the tab prints the Tonight sheet\'s own stores sentence');
   }, 120000);
 
   test('every NOT row: its seed\'s tab does not print the line (every row runs; each failure names its seed, tab, line and what prints instead)', () => {
-    expectNoSeedFailures(collectSeedFailures(NOT, ([seed, tab, line, instead]) => {
+    expectNoSeedFailures(collectSeedFailures(NOT, ([seed, tab, line, instead, anchor]) => {
       try {
-        expect(textOf(town(seed), tab), `${seed} (${tab}) does not print "${line}"; instead: ${instead}`).not.toContain(line);
+        expectAbsentWithAnchor(textOf(town(seed), tab), line, anchor, `${seed} (${tab}) does not print "${line}"; instead: ${instead}`);
       } finally { cleanup(); }
     }), 'every NOT row: the false line does not print');
   }, 120000);

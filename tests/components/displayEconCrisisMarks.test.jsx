@@ -27,6 +27,7 @@ import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { rowStoppedBy } from '../../src/domain/display/crisisStoppedRow.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const SIZE = '(thorp|hamlet|village|town|city|metropolis)';
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -86,7 +87,7 @@ describe('TAIL-DISPLAY-ECON-4 batch 4: the Economics tab marks what the crisis s
   test('each NOT row does not print the unmarked line; instead: the marked one (every row)', () => {
     expectNoSeedFailures(collectSeedFailures(NOT, ([seed, line, instead]) => {
       try {
-        expect(textOf(town(seed)), `${seed} does not print the unmarked "${line}"; instead: ${instead}`).not.toContain(line);
+        expectAbsentWithAnchor(textOf(town(seed)), line, instead, `${seed}: the marked row prints in the unmarked one's place`);
       } finally { cleanup(); }
     }), 'every NOT row: the Economics tab does not print the unmarked line');
   }, 120000);

@@ -29,6 +29,7 @@ import MagicTab from '../../src/components/new/tabs/MagicTab.jsx';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { foodMagicShare, MAGIC_FOOD_NOTES } from '../../src/domain/display/magicProvisionShown.js';
 import { MAGIC_NOTE_TRADITION } from '../../src/domain/facts/magicSource.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
@@ -53,14 +54,16 @@ const textOf = (t, tab) => {
   return out;
 };
 
-/** [seed, tab, the line that must NOT print, what prints instead (or the slot's silence by design)] */
+/** [seed, tab, the line that must NOT print, what prints instead (or the slot's silence by design), the liveness anchor:
+ *  a line the same text prints on the same path (the twin or keep where the test claims one; else the slot's own header,
+ *  or a sibling chain card's magic note)] */
 const NOT = /** @type {const} */ ([
-  ['r2r-thorp-0', 'economics', 'Economic Flows (1 active)', 'Economic Flows: its one card prints no state (a neighbour\'s house)'],
-  ['r2r-town-9', 'economics', 'Economic Flows (15 active · 2 impaired)', 'the count of the cards at work'],
-  ['r2r-metropolis-11', 'economics', 'Blessed stores; divine provision fills the gap', 'silent: the food record credits no provision'],
-  ['r2r-town-9', 'economics', 'Blessed stores; divine provision fills the gap', 'Blessed stores; divine provision eases the shortfall'],
-  ['r2s-famine-city-2', 'economics', 'Druidic cultivation supplements depleted farmland', 'Druidic cultivation supplements the depleted ground'],
-  ['r2r-village-25', 'magic', 'Blessed stores; divine provision fills the gap', 'silent: the card\'s own note, none'],
+  ['r2r-thorp-0', 'economics', 'Economic Flows (1 active)', 'Economic Flows: its one card prints no state (a neighbour\'s house)', 'Economic Flows'],
+  ['r2r-town-9', 'economics', 'Economic Flows (15 active · 2 impaired)', 'the count of the cards at work', 'Economic Flows'],
+  ['r2r-metropolis-11', 'economics', 'Blessed stores; divine provision fills the gap', 'silent: the food record credits no provision', 'Arcane fabrication provides processed goods from alternative sources'],
+  ['r2r-town-9', 'economics', 'Blessed stores; divine provision fills the gap', 'Blessed stores; divine provision eases the shortfall', 'Blessed stores; divine provision eases the shortfall'],
+  ['r2s-famine-city-2', 'economics', 'Druidic cultivation supplements depleted farmland', 'Druidic cultivation supplements the depleted ground', 'Druidic cultivation supplements the depleted ground'],
+  ['r2r-village-25', 'magic', 'Blessed stores; divine provision fills the gap', 'silent: the card\'s own note, none', 'Reliance on magic: Relied upon'],
 ]);
 /** [seed, tab, the twin true in the state that made the old line false] (new or newly reached lines: red at the base by design) */
 const TWIN = /** @type {const} */ ([
@@ -90,9 +93,9 @@ describe('TAIL-DISPLAY-ECON batch 1: the flows header counts its cards; magic cl
   }, 120000);
 
   test('each NOT row does not print its line; instead: what the row names (every row)', () => {
-    expectNoSeedFailures(collectSeedFailures(NOT, ([seed, tab, line, instead]) => {
+    expectNoSeedFailures(collectSeedFailures(NOT, ([seed, tab, line, _instead, anchor]) => {
       try {
-        expect(textOf(town(seed), tab), `${seed} (${tab}) does not print "${line}"; instead: ${instead}`).not.toContain(line);
+        expectAbsentWithAnchor(textOf(town(seed), tab), line, anchor, `${seed} (${tab})`);
       } finally { cleanup(); }
     }), 'every NOT row: the tab does not print the old line');
   }, 120000);

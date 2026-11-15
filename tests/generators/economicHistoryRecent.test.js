@@ -43,9 +43,13 @@ describe('the cold list\'s town, born as the app births it', () => {
   it('rw3-hamlet-calm-1 (#181): an 88-year-old event is not called recent', () => {
     const seed = 'rw3-hamlet-calm-1';
     const s = /** @type {any} */ (generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: 'hamlet', selectedStressesRandom: false, selectedStresses: [], _randomizePriorities: true }), null, { seed, customContent: {} }));
-    const divide = (s.history.historicalEvents || []).find((/** @type {any} */ e) => /Economic Divide/.test(e.name));
-    expect(divide?.yearsAgo).toBeGreaterThan(60);
-    expect(s.history.historicalCharacter).toMatch(/Economic Divide/);
-    expectAbsentWithAnchor(s.history.historicalCharacter, RECENT, 'Economic Divide', '#181: the character names the event, and not as recent');
+    // re-keyed by identity (TAIL-NARRATIVE-5, the chair's U2): the town's 88-year economic event was "the Economic Divide"
+    // when this was written; the joined line's history now names it "the Shortage" (same type, same age): the pin reads the
+    // economic event the line names, not a literal name
+    const character = String(s.history.historicalCharacter);
+    const named = (s.history.historicalEvents || []).find((/** @type {any} */ e) => e.type === 'economic' && character.includes(String(e.name).replace(/^The /, '')));
+    expect(named?.yearsAgo, character).toBeGreaterThan(60);
+    expect(character).toMatch(/^Economically dynamic/);
+    expectAbsentWithAnchor(character, RECENT, 'Economically dynamic', '#181: the character opens on its economic line, and does not call its event recent');
   });
 });

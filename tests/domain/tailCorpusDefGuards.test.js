@@ -42,6 +42,10 @@ const DECLARED = [
   { batch: 5, seed: 'r2s-wartime-town-0', pool: 'DS-DEF-2::Beasts & Monsters: plagued, perimeter AND organized force', vid: 2, instead: 1, why: 'a war: "not an emergency arrangement … nobody treats any of it as unusual" (row B06130)' },
   { batch: 5, seed: 'r2s-monster_pressure-city-0', pool: 'DS-DEF-2::Beasts & Monsters: plagued, perimeter AND organized force', vid: 2, instead: 4, why: 'a monster crisis: "not an emergency arrangement" (row B06130\'s class)' },
   { batch: 5, seed: 'r2r-town-42', pool: 'DS-DEF-2::Economic Survival: STRONG', vid: 8, instead: 1, why: 'a food deficit even now (pressured): "nobody lies awake over a lean year" (row 14935)' },
+  { batch: 6, seed: 'r2s-wartime-thorp-0', pool: 'DS-DEF-11::UNWALLED-SMALL', vid: 4, instead: 1, why: 'a war: "nothing threatens it now that a wall would keep out" (C18, UNWALLED)' },
+  { batch: 6, seed: 'r2s-infiltrated-village-2', pool: 'DS-DEF-3::Safe', vid: 2, instead: 4, why: 'nobody under arms: "enforcement keeps it down" (C18, Safe v2)' },
+  { batch: 6, seed: 'r2r-thorp-28', pool: 'DS-DEF-3::Safe', vid: 3, instead: 4, why: 'nobody under arms: "plain that somebody keeps it that way" (Safe v2\'s sibling)' },
+  { batch: 6, seed: 'r2r-village-49', pool: 'DS-DEF-3::Very Safe', vid: 3, instead: 5, why: 'nobody under arms: "enforcement far outweighs the criminals" (Safe v2\'s class)' },
 ];
 /** @type {ReadonlyArray<{batch: number, seed: string, pool: string, vid: number, why: string}>} */
 const KEEP = [
@@ -58,6 +62,9 @@ const KEEP = [
   { batch: 4, seed: 'r2s-succession_void-city-0', pool: 'DS-CND-1::DIRECTION: stable · CRISIS: succession_void', vid: 3, why: 'a succession void in a city with a market: merchants deal season to season' },
   { batch: 5, seed: 'r2r-city-34', pool: 'DS-DEF-2::Beasts & Monsters: plagued, perimeter AND organized force', vid: 2, why: 'a plagued walled city at peace: the defence is the week\'s work' },
   { batch: 5, seed: 'r2r-town-16', pool: 'DS-DEF-2::Economic Survival: STRONG', vid: 8, why: 'a secure food record, no crisis: a lean year would not frighten it' },
+  { batch: 6, seed: 'r2r-hamlet-1', pool: 'DS-DEF-11::UNWALLED-SMALL', vid: 4, why: 'an unwalled hamlet at peace, no threat and no war' },
+  { batch: 6, seed: 'r2r-town-10', pool: 'DS-DEF-3::Safe', vid: 2, why: 'a Safe town with a watch: enforcement keeps crime down' },
+  { batch: 6, seed: 'r2r-town-6', pool: 'DS-DEF-3::Very Safe', vid: 3, why: 'a Very Safe town with its defenders: enforcement outweighs the criminals' },
 ];
 /** @type {ReadonlyArray<{batch: number, pool: string, vid: number, gone: RegExp, now: string, rows: string}>} */
 const REWORDED = [
@@ -85,6 +92,16 @@ const REWORDED = [
   { batch: 5, pool: 'DS-DEF-2::Economic Survival: WEAK', vid: 2, gone: /are already owed/, now: 'know there is no money to pay them for it', rows: 'v1\'s sibling: an unpaid levy is owed nothing' },
   { batch: 5, pool: 'DS-DEF-2::CHAIN: food trades failing', vid: 1, gone: /so little food is being put by/, now: 'less food is being put by than should be', rows: '01541: stores of 6 to 15 months in every printing town' },
   { batch: 5, pool: 'DS-DEF-2::CHAIN: food trades failing', vid: 2, gone: /little is being put by against/, now: 'less is being put by against the town being cut off than ought to be', rows: 'B19529: a granary and 15 months of stores' },
+  { batch: 6, pool: 'DS-DEF-11::UNWALLED-SMALL', vid: 4, gone: /nothing has yet come against it/, now: 'nothing threatens it now that a wall would keep out', rows: 'C18 UNWALLED: 27 of 78 towns hold a past Occupation or Siege' },
+  { batch: 6, pool: 'DS-DEF-5::garrison PRESENT', vid: 3, gone: /Everyone entering/, now: "Everyone who comes through {settlement}'s gate is counted there", rows: 'C18 garrison: 17 of 64 towns keep an underground house reached by passages under the town' },
+  { batch: 6, pool: 'DS-DEF-4::structure semi-organized', vid: 1, gone: /not coordinated enough to have a head/, now: 'though not yet tight enough to run the whole town', rows: 'C18 structure: 14 of 53 towns hold a criminal power among the powers' },
+  { batch: 6, pool: 'DS-DEF-3::Moderate', vid: 5, gone: /keeps order well enough by itself/, now: 'what order the place has, its own people keep', rows: 'C18 Moderate: 22 of 36 towns read Law & order Critical or Collapsed' },
+  { batch: 6, pool: 'DS-DEF-3::Moderate', vid: 6, gone: /no great need of anyone yet/, now: 'trouble here is left for neighbours to settle between themselves', rows: 'v5\'s sibling: 23 of 34 towns, the same' },
+  { batch: 6, pool: 'DS-DEF-8::override: INTERNAL PRESSURE (famine)', vid: 1, gone: /The guards' rations/, now: 'Those who defend {settlement} eat cut rations', rows: 'C18 DS-DEF-8: a militia only (r2s-famine-village-1)' },
+  { batch: 6, pool: 'DS-DEF-11::WALLED-STRAINED', vid: 1, gone: /defences are sound/, now: 'so the defences stand and too few people man them', rows: 'C18 WALLED: readiness Vulnerable beside "sound"' },
+  { batch: 6, pool: 'DS-DEF-11::WALLED-STRAINED', vid: 2, gone: /defences are sound/, now: 'keeps its {defwork} in repair, but fewer people turn out', rows: 'C18 WALLED: 29 of 49 towns Vulnerable' },
+  { batch: 6, pool: 'DS-DEF-11::WALLED-STRAINED', vid: 6, gone: /stand sound/, now: 'still keeps its {defwork} in repair', rows: 'C18 WALLED: 3 of 4 towns Vulnerable' },
+  { batch: 6, pool: 'DS-DEF-11::WALLED-STRAINED', vid: 7, gone: /defences are sound/, now: 'keeps its {defwork} in repair, and the only people', rows: 'C18 WALLED: 26 of 28 towns Vulnerable' },
 ];
 
 /** @type {Record<string, any>} */

@@ -14,7 +14,6 @@
 import React from 'react';
 import { afterEach, beforeAll, describe, expect, test, vi } from 'vitest';
 import { cleanup, fireEvent, render } from '@testing-library/react';
-import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 vi.mock('../../src/store/index.js', () => {
   const data = { campaigns: [] };
@@ -30,6 +29,8 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { shadowCaptureShown } from '../../src/domain/display/shadowEconomyShown.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const SIZE = '(thorp|hamlet|village|town|city|metropolis)';
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -75,9 +76,12 @@ describe('TAIL-DISPLAY-ECON-5 (X30): the shadow economy prints where the record 
     expectNoSeedFailures(collectSeedFailures(NOT, ([seed, gone, instead]) => {
       try {
         const text = textOf(town(seed));
-        expect(text, `${seed}: ${gone} does not print`).not.toMatch(gone);
-        if (instead === null) expect(text, 'the block is silent: no capture chip either').not.toContain('Off-book');
+        // the liveness anchor first: the row's new words, or (a silent block) the Economic Flows section beside it, in the same text
+        if (instead === null) expect(text, 'the tab printed: its Economic Flows section stands').toContain('Economic Flows');
         else expect(text, `${seed}: ${instead} prints instead`).toMatch(instead);
+        // anchored: the positive just above reads this same text (the row's new words, or the Economic Flows section)
+        expect(text, `${seed}: ${gone} does not print`).not.toMatch(gone);
+        if (instead === null) expectAbsentWithAnchor(text, 'Off-book', 'Economic Flows', 'the block is silent: no capture chip either');
       } finally { cleanup(); }
     }), 'every NOT row: the line does not print, and the block is silent or prints what it counts');
   }, 60000);
@@ -89,10 +93,11 @@ describe('TAIL-DISPLAY-ECON-5 (X30): the shadow economy prints where the record 
     }), 'every KEEP row: the line still prints');
   }, 60000);
   test('ONE HOME: the leaf prints a capture exactly where the record holds a criminal income share', () => {
-    expectNoSeedFailures(collectSeedFailures(['r2r-hamlet-0', 'r2r-thorp-8', 'r2r-metropolis-15', 'r2r-city-0'], (seed) => {
+    const failures = collectSeedFailures(['r2r-hamlet-0', 'r2r-thorp-8', 'r2r-metropolis-15', 'r2r-city-0'], (seed) => {
       const eco = town(seed).economicState;
       const criminal = (eco.incomeSources || []).some((/** @type {any} */ x) => x.isCriminal);
       expect(shadowCaptureShown(eco.safetyProfile) != null, seed).toBe(criminal);
-    }), 'ONE HOME: a capture prints exactly where the record holds a criminal income share');
+    });
+    expectNoSeedFailures(failures, 'the leaf prints a capture exactly where the record holds a criminal income share');
   }, 60000);
 });

@@ -15,6 +15,7 @@ import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { powerDeskRead, powerDeskReadings, governanceAccountRead, powerLadderRead } from '../../src/components/new/powerDeskRead.js';
 import { powerNameAfterArticle, powerSentenceName } from '../../src/domain/display/powerSentenceName.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true,
   selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -73,8 +74,8 @@ describe('V1: a power named in a sentence takes the one leaf\'s form', () => {
   test('CURED (every row) seed: the slashed sentence does not print; what prints instead does', () => {
     expectNoSeedFailures(collectSeedFailures(CURED, ([seed, gone, instead]) => {
       const t = TEXT.get(seed);
-      expect(t).not.toContain(gone);
-      expect(t).toContain(instead);
+      expectAbsentWithAnchor(t, gone, instead, seed);
+      // anchored: the helper call above shows the cured sentence prints in this text
       expect(t).not.toMatch(/\bthe The\b/i);
     }), 'CURED: each seed prints the leaf\'s form, never the slashed label nor "the The"');
   });

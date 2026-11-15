@@ -7,6 +7,7 @@
  * place is not the line true there.
  */
 import { beforeAll, describe, expect, test } from 'vitest';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
@@ -42,8 +43,9 @@ describe('W2-FIX-DATA-5: round three\'s rows in the data lane\'s files', () => {
     const rites = servicesOf(town).filter((v) => v.institution === 'Access to parish church' && v.name === 'Last rites').map((v) => String(v.desc));
     expect(rites, 'the service says the parish priest comes').toEqual(['Funeral rites, said by the parish priest, who comes or is sent for.']);
     const burial = String(named(town, 'Burial ground')?.desc);
-    expect(burial).not.toMatch(/No clergy|nobody else to say them/);
     expect(burial).toMatch(/\ba priest\b/i);
+    // anchored: the same burial text is shown directly above to name a priest
+    expect(burial).not.toMatch(/No clergy|nobody else to say them/);
   }, 60_000);
   test('#331: a village\'s great fire burns no districts, quarters or streets, and names no wharves it lacks (rr2s-village-monster_pressure-rand-1)', () => {
     const town = bornRr2s('rr2s-village-monster_pressure-rand-1');
@@ -56,26 +58,29 @@ describe('W2-FIX-DATA-5: round three\'s rows in the data lane\'s files', () => {
     const town = bornInc('rww-thorp-calm-1');
     expect(town.tier).toBe('thorp');
     expect(town.history.founding, 'the thorp keeps its founding (its one event was the Great Construction: silence, record 386, 4)').toBeTruthy();
+    expect(historyText(town), 'the history text carries the founding kept above').toContain(town.history.founding.foundedBy);
+    // anchored: the same history text is shown directly above to carry the thorp's founding
     expect(historyText(town)).not.toMatch(/civic buildings|cathedral|The Great Construction/i);
   }, 60_000);
 
   test('ww-544 (HIGH): no hook of an ailing or poisoned ruler while the seat stands empty (rww-hamlet-succession_void-1)', () => {
     const town = bornInc('rww-hamlet-succession_void-1');
     expect((Array.isArray(town.stress) ? town.stress : [town.stress]).map((/** @type {any} */ x) => x?.type)).toContain('succession_void');
-    expect(historyText(town)).not.toMatch(/ailing ruler wants|poisoning the ruler/);
     expect(historyText(town)).toContain('A would-be heir approaches outsiders');
+    // anchored: the same history text is shown directly above to print the would-be heir's hook
+    expect(historyText(town)).not.toMatch(/ailing ruler wants|poisoning the ruler/);
   }, 60_000);
 
   test('ww-473 (HIGH): no open, cheerful politics in the arrival under a siege (rww-town-under_siege-1)', () => {
     const town = bornInc('rww-town-under_siege-1');
     expect(arrivalText(town).length).toBeGreaterThan(100);
+    // anchored: the same arrival text's length (over 100) is asserted directly above, so the scene printed
     expect(arrivalText(town)).not.toMatch(/argue politics in the open|argue law in the open/);
   }, 60_000);
 
   test('ww-1157 (HIGH): no forge making for a war in a famine city with no war (rww-city-famine-1)', () => {
     const town = bornInc('rww-city-famine-1');
-    expect(arrivalText(town)).not.toContain('making something meant for a war');
-    expect(arrivalText(town)).toContain('blades being made');
+    expectAbsentWithAnchor(arrivalText(town), 'making something meant for a war', 'blades being made', 'rww-city-famine-1 arrival');
   }, 60_000);
 
   test('ww-494 (HIGH): the fair\'s trading under a siege says no merchant can reach it (rww-town-under_siege-1)', () => {
@@ -85,10 +90,12 @@ describe('W2-FIX-DATA-5: round three\'s rows in the data lane\'s files', () => {
   }, 60_000);
   test('R2 #973, #238: under a siege the fair\'s merchants and the toll bridge\'s steady fees are not claimed (rw3-town-under_siege-1, rw3-metropolis-under_siege-1)', () => {
     const fair = named(bornRw3('rw3-town-under_siege-1'), 'Annual fair');
-    expect(String(fair?.desc)).not.toMatch(/Merchants from across the region, and luxuries|Luxury goods available|fine goods on offer/);
     expect(String(fair?.desc)).toMatch(/roads are held|siege holds the roads/);
+    // anchored: the same fair text is shown directly above to say the roads are held
+    expect(String(fair?.desc)).not.toMatch(/Merchants from across the region, and luxuries|Luxury goods available|fine goods on offer/);
     const bridge = named(bornRw3('rw3-metropolis-under_siege-1'), 'Toll bridge');
-    expect(String(bridge?.desc)).not.toMatch(/never fails|but steady|steady revenue/);
     expect(String(bridge?.desc)).toMatch(/roads were cut|roads held|closed the roads/);
+    // anchored: the same bridge text is shown directly above to say the roads were cut
+    expect(String(bridge?.desc)).not.toMatch(/never fails|but steady|steady revenue/);
   }, 60_000);
 });
