@@ -365,20 +365,20 @@ r2s-insurgency-metropolis-0 P7a): no rise.
 - (P25) the ties seat's rows named for these files: 23160 (37: "Town watch; it enforces ordinances ... and reports to the
   council." under a Feudal Appointee), 03038 (4), 22409 (2: "The village reeve disagrees." in a hamlet), B19180 (2: "The
   church wants approval rights ..." with only "Access to parish church"). By script their WRITER is
-   (FACTION_DESC_SIBLINGS, BASELINE_CONFLICT_SIBLINGS), the sibling tables rulingStructure.js
+  `src/data/powerSiblings.js` (FACTION_DESC_SIBLINGS, BASELINE_CONFLICT_SIBLINGS), the sibling tables rulingStructure.js
   and governanceNarrative.js read, not these files: the successor cures them at the selector in this seat's files
-  (a condition or a twin) or the chair rules powerSiblings.js into the group. NOT VERIFIED. 
+  (a condition or a twin) or the chair rules powerSiblings.js into the group. NOT VERIFIED. `relationshipArchetypes.js`
   is the ties seat's (T6): not touched.
 - READ-ALL-4 FAULTS IN NEW LINES (1) governanceAccount.js "The Military/Guard is at odds with it." / "The hall is at odds
   with the Military/Guard and the Religious Authorities.": CURED by 0b1b41459 (0 towns after; "The The" prints nowhere:
   powerNameInProse strips the leaf's "The" and sets its own article). (2) deriveBaselineConflict's monster rung "The
   <force> is stretched thin and <seat> cannot agree on whether to raise a levy or hire mercenaries." (config monsterThreat
-  ): MEASURED at a5a9e4372: 11 towns print it; safety Very Safe 1 (r2s-infiltrated-village-3), Safe 5 (r2r-hamlet-6,
+  `plagued`): MEASURED at a5a9e4372: 11 towns print it; safety Very Safe 1 (r2s-infiltrated-village-3), Safe 5 (r2r-hamlet-6,
   -26, -51, r2r-village-7 ...), Moderate 5; 10 hire no company (the line debates hiring, it does not claim one). The false
   core is "stretched thin" beside a Safe or Very Safe label (6 towns): NEXT for the successor, with B02757 (the same rung's
   "A monster incursion last season destroyed outlying farms", 11, every one plagued, no event in PAST). NOT CURED.
 - P21's HOLD IS LIFTED (the chair, 02:26 UTC): the density resize never changes the governing power (720 of 720), so
-   takes new lines (the joined line at d817736d8 holds it: the one merge allowed). Not to be keyed on: the
+  `ruling body` takes new lines (the joined line at d817736d8 holds it: the one merge allowed). Not to be keyed on: the
   seat's capture state (moves after the write in 103 towns), its legitimacy crisis note (11). The one-member council's
   plural lines are the successor's to key; "Elder Council is being asked to do something about it and cannot agree what"
   is the record's class, named: leave it.
@@ -415,3 +415,11 @@ third for edits; never more than one census and one test run at once on this mac
 cost a count to the memory killer). `acct.mjs` (scratch): governanceAccountOf over a corpus, a JSON line a town, to
 diff a display cure without a render. `rc.py` (scratch): a pickled index of the corpus (recentConflict, government,
 the roster's labels, the houses, stress, monster threat) and a regex query over the conflict line.
+
+## Handed back (02:45 UTC, at the mark; the account's usage warning on)
+This seat stops after batch 2 at its budget, by file. The successor's order, widest first: the monster rung's "stretched
+thin" beside a Safe label (6) with B02757 (11); B02464 (58, a size-true twin); the rulingStructure.js rows (21207 49,
+07269 45, 23333 34, 04923 32, 03509 31 ...); the governingStressVignettes.js rows (05663 27, 15434 21 ...); P25's rows
+(their text in data/powerSiblings.js: the chair's word on the file first); the one-member council's plural lines (P21,
+the hold lifted: merge the joined line at d817736d8, re-take BEFORE there). The scratch trees are this container's
+only: re-make the instruments as above.
