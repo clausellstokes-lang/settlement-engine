@@ -38,7 +38,8 @@ const GONE = [
   ['B14103', 'r2s-occupied-thorp-1', 'Nobody here is paid to keep order', 'No one of the place is paid to keep order; the occupiers keep their own.'],
   ['02876', 'r2s-wartime-town-2', "A part from the wizard's tower", SILENT],
   ['B03371', 'r2s-under_siege-metropolis-2', 'smuggling operation moves contraband through the settlement', 'The siege has shut the roads, so what contraband is already inside is hoarded and sold dear'],
-  ['05801', 'r2s-under_siege-thorp-2', 'Controlled goods (grain, salt, preserved meat)', "What food is put by goes to whoever can pay the holder's price."],
+  // TAIL-CORPUS-DEF-5: the twin re-keyed to its cure's words (no stored food on the Defense tab: defenseWordsFindings)
+  ['05801', 'r2s-under_siege-thorp-2', 'Controlled goods (grain, salt, preserved meat)', "What food there is goes to whoever can pay the holder's price."],
   ['18708', 'r2s-insurgency-thorp-2', 'insurgent supporters and those who keep order', "Confrontations between the rebels' supporters and those loyal to the current authority."],
   ['16495', 'r2s-religious_conversion-thorp-0', 'Religious buildings, land, and endowments', SILENT],
   ['18752', 'r2s-wartime-thorp-3', 'Suppliers adulterating grain and leather sold to crown contracts', 'Deserters passing through need food and discretion, and some here give both.'], // TAIL-DISPLAY-CIVIC-3 V3, re-keyed by identity: an isolated thorp sells nothing to an army's buyers
