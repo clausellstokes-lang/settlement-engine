@@ -12,21 +12,39 @@ register row naming its reader. The other 26 were banked, once, by the chair's r
 player or a DM today, and each is owed after the release: a page line that shows it, or its writer retired, by its lane.
 What each one is:
 
-- **How many soldiers came home, and how many fell** (`survivors` on a homecoming outcome's record; the war return
-  writer, `deploymentReturn.js`). The homecoming sentence already says the number in words (its form: "<n> of <town>'s host
-  return to the muster; <m> did not"). The stored count beside it is read by nothing at all.
-- **A held captive's ransom record** (`ransoms` on the roads record; the roads kernel, `roadsKernel.js`). The engine
-  reads it every tick to carry a captivity forward, and projects the captive onto the NPC's whereabouts as a
-  hostage. The ransom record itself (who holds them, the terms) is shown nowhere. The register cannot hold it as
-  plumbing: its write is an assignment the instrument cannot see, so it is banked instead (the W6 precedent).
-- **22 facts filed under a test world's save id.** The same facts are already banked on other save ids. The round's test
-  worlds re-dealt their towns and casts, so the facts came up again under new save ids: a war army's quality, supply
-  burden, reinforcement flow, return condition and sizing bias (on test town osr006); an upswing's end tick (osr007); a
-  trade good, alchemical goods (osr003); eleven NPCs' weakness and three NPCs' pride on their living-agency records
-  (the noble-family and landed-gentry seats and a miller of test towns osr001–osr008, osr013–osr015); and one NPC's id
-  as a key of the NPC map (the osr008 miller). The instrument's own reporting rule calls these synthetic save-id
-  shapes "not review material". No page reads them under these names. Whether a page shows the underlying facts
-  elsewhere is the business of their own identities, which are already judged on their real shapes.
+The 26, by class. **Which lane wrote them, said exactly:** no lane of tonight's round wrote any of these 26 writers.
+Each writer is older than the history this seat holds (before 2026-11-11). What the round changed is its test worlds:
+the lanes' new casts, seeds and war paths re-dealt the corpus, so the corpus now reaches writes it never reached
+before. The one fact a lane of the round did write, `criminalPreStress` (COHERENCE-UPKEEP-6, fe5786c9), is not among
+the 26: a generator reads it, so it is a register row.
+
+*Class 1: nothing reads it anywhere (3).*
+- **How many soldiers came home from a war** (`survivors` on a homecoming outcome's record, its `metadata`, and the two
+  lists that carry the outcome, `selected` and `autoApplied`; written by the war return, `deploymentReturn.js`). The
+  homecoming sentence already says the number in words (its form: "<n> of <town>'s host return to the muster; <m> did
+  not"). The stored count beside it is read by nothing at all: no page, no generator, no simulation step.
+
+*Class 2: the engine reads it, but the instrument cannot see the write (1).*
+- **A held captive's ransom record** (`ransoms` on the roads record; written by the roads kernel, `roadsKernel.js`).
+  The engine reads it every tick to carry a captivity forward, and it puts the captive in the NPC's whereabouts as a
+  hostage. The ransom record itself (who holds the captive, the terms) is shown on no page. It cannot be a register
+  row because its write is an assignment the register cannot see, so it is banked instead (the W6 precedent).
+
+*Class 3: facts filed under a test town's save id (22).* No page reads any of them under these names. The same facts
+are already banked on other save ids, and the round's re-dealt test worlds brought them up again under new ones.
+- On test town osr006's war records (5): a war army's deployed quality, its supply burden, its reinforcement flow,
+  its return condition and its sizing bias (`deployedQuality`, `logisticsBurden`, `reinforcementFlow`,
+  `returnCondition`, `sizingBias`; the war deployment and reinforcement writers). The same five are banked on osr000.
+- On test town osr007 (1): when an upswing ends (`endsTick`; the upswing kernel). Banked already on osr004 and osr005.
+- On test town osr003 (1): a trade good, alchemical goods (`alchemical_goods`). Banked already on osr004 to osr006.
+- On the NPCs' living-agency records (14): eleven NPCs' weakness (`weakness`) and three NPCs' pride (`proud`), on the
+  new cast's noble-family and landed-gentry seats and one miller, in test towns osr001 to osr008 and osr013 to
+  osr015. These records each crossed the instrument's 40-row floor tonight (87 to 107 rows now; none was judged at
+  the freeze). Twelve `proud` and three `weakness` identities on the old cast's ids left the bank at the same door.
+- On the NPC map (1): the osr008 miller's id itself, used as a key (`osr008:npc_mill on npcs`; the map holds 26,828
+  rows now, 26,161 then). The osr009 to osr011 millers were banked the same way at §934.105.
+The instrument's own reporting rule calls these synthetic save-id shapes "not review material". Whether a page shows
+the underlying facts is judged on their real shapes, where they are already counted.
 
 **One correction, said out loud.** The register row `situationDesc on economicState` (the economy's one-line situation
 sentence) was struck because the instrument now calls it LIT. I measured the cause: the PDF's culture block
@@ -83,8 +101,22 @@ siblings the same way.
   LIT-NAME 10567 · DARK 1407 (reviewable 389) · pending-surface debt: none`.
 - `--write`: no shrink remains after the rebank folded the 36 stale members, so `--write` was not run (it would only
   re-stamp the sha).
-- `tests/lint/writerReach.walker.test.js` alone: it needs `NODE_OPTIONS=--max-old-space-size=8192`. At the default heap
-  its fork dies after 8 tests ("Worker exited unexpectedly"). With the larger heap: **48 of 52 green, 4 red**:
+- **THE HEAP (the chair's question, measured).** The writer walker does NOT pass inside the repository's own test
+  configuration. The repository sets no heap anywhere (`vite.config.js` has no pool, `execArgv` or heap option;
+  `scripts/gate-mutex.sh` sets no `NODE_OPTIONS`), and this machine's default V8 heap limit is 2,096 MB.
+  - Command: `sh scripts/gate-tail.sh npm run test -- tests/lint/writerReach.walker.test.js` at 9b02e43f.
+    Result: `Tests  2 failed | 6 passed (52)`, `Errors  1 error`. The fork prints `FATAL ERROR: Reached heap limit
+    Allocation failed - JavaScript heap out of memory` after `Mark-Compact (reduce) 2045.0 (2088.3) -> 2044.9 (2085.6)
+    MB` at 72 s. Vitest then reports `Error: [vitest-pool]: Worker forks emitted error … Caused by: Error: Worker exited
+    unexpectedly` and `Timeout terminating forks worker`. 44 of the 52 tests never run.
+  - **It predates this seat's rows and rebank.** The same file at 27b43242 (the joined line plus the strike alone), run
+    through `npx vitest run`, dies the same way: `FATAL ERROR: Reached heap limit`, `Tests  1 failed | 4 passed (52)`.
+    It went unseen on the joined line because the walker failed at load there (the lit row), before the heavy arms
+    ran.
+  - The same file passes its run with `NODE_OPTIONS=--max-old-space-size=8192` (all 52 run).
+  - Not this seat's to change: the heap is the test configuration's, and the whole check must carry it, or the walker's
+    own corpus builds must shrink. **Named to the chair.**
+- `tests/lint/writerReach.walker.test.js` alone, with `NODE_OPTIONS=--max-old-space-size=8192`: **48 of 52 green, 4 red**:
   1. "the frozen corpusMeta EQUALS the observed-shape register corpusMeta": `corpusMeta.originCount must equal OSR's
      frozen value: expected 15016 to be 14835`. This is instrument two's frozen corpus; its re-freeze clears it.
   2. "the frozen shapesDigest EQUALS the in-process digest": `live corpusMeta.originCount still equals OSR's frozen
@@ -96,7 +128,9 @@ siblings the same way.
      cause as row 0: EXPORTS-B24 · B2 (70047b61) put the quick guide's file back in the dossier-pdf closure, so the
      guide's `settlement.culture?.label` (`composeIdentity`, a fallback behind `culturalIdentity.label`) is seen again.
      No page calls `composeIdentity`. The arm says "bank the win, never loosen the assertion". It is not this seat's to
-     loosen, and the fix is not a one-line rename at the read. **Named to the chair.**
+     loosen. **RULED WR2 by the chair:** the src close seat strikes the dead fallback at its root
+     (`composeIdentity`'s `|| settlement.culture?.label`, on lane/tail-close-src-2026-11-15); the arm stands untouched and
+     turns green when that commit reaches the line, to be confirmed at the FINAL PASS.
 
 ## INSTRUMENT TWO — READERS WITH NO WRITER (`tests/lint/observedShapeReaders.walker.test.js`)
 
