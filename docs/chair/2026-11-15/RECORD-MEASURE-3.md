@@ -128,7 +128,26 @@ beside "Reliance on magic: None" (r2s-occupied-thorp-0, r2s-indebted-thorp-2, r2
 another lens). With c4a their share is 0, so the key is not raised and the line is not drawn: the cure is at the record,
 the line moves with it.
 
-## COSTS
+## COSTS · NOT YET READ (said plainly)
 
-(pending: the pins and goldens each candidate reds, named from a run of `tests/generators tests/domain tests/components
-tests/ui tests/pdf tests/dossier tests/property tests/generation.test.js` in each candidate tree against the base.)
+No pin or golden is named here yet. One run was started, on c3a only (`costs.sh <tree> <out>`: `tests/generators
+tests/domain tests/components tests/ui tests/pdf tests/dossier tests/property tests/generation.test.js`, JSON reporter,
+failed files listed to `<out>.failed.txt`); it had not finished at the hand-back, and the base's own run (needed to tell
+a candidate's reds from the base's) was not started. **Expected, not measured:** every candidate here moves generator
+output, so each will red the same-seed golden masters (generator, and the dossier-prose manifest where a drawn line
+moves); c1b, c2a, c2c, c4a and c6a move one or two record fields each and should red only the goldens and the pins that
+quote those fields. A successor re-makes it: `sh costs.sh <base tree> out/base` and `sh costs.sh <candidate> out/<c>`,
+then diff the two `.failed.txt`.
+
+## HOW THE INSTRUMENTS ARE RE-MADE
+
+1. RECORD-MEASURE-1's `births-only.sh`, `fielddiff.mjs`, `load.cjs` (git-archived from lane/record-measure-2026-11-14)
+   and CENSUS-3's `census3.sh` (lane/census-3-2026-11-14), outside every tree. BEFORE: `census3.sh <base> before 4`.
+2. A candidate: `git apply <c>.patch` in a worktree of `c8116d79` (its `node_modules` symlinked), `births-only.sh`,
+   then `fielddiff.mjs before/corpus.ndjson.gz <c>/corpus.ndjson.gz [depth]`.
+3. The classes, by row: `row1.cjs` (1e, 1m), `row1m.mjs`, `row1p.cjs` (the power chip), `row2.cjs`, `row3p.cjs`
+   (against the tab's own remainder; `row3.cjs` against the writer's `deficit`, `row3m.cjs` magic), `row4.mjs` and
+   `row4b.mjs` (`TREE=` the tree: they import `foodLandOf` and `deriveMagicReliance`), `row6.cjs`, `row6b.cjs`. Row 5 is
+   a dump count (`r5.who-leads-council.txt`: dump, the count of members' lines, the heading). `one.mjs` births one seed.
+4. The page: `pageprint3.mjs <corpus> <dumps>` (rows 1 to 3).
+5. Patches, each `git apply` at `c8116d79`: c1b c2a c2b c2c c3a c4a c4b c6a c6b.
