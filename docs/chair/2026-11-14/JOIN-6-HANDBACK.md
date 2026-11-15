@@ -29,6 +29,7 @@ THE CHAIR'S RULINGS SENT AFTER THE BRIEF:
 | 5 | tail-houses-2026-11-14 | a2550c0ef (00:31) | bcad1a358 | 96b4015f4 | none | lane-only registers taken from the lane: `presumedThings.widened.register.json`, `docs/census/declarations/institutionDescVariants.INSTITUTION_DESC_VARIANTS.json`; DECLARED MOVE institutions[].desc: the golden carried |
 | 6 | tail-ties-2026-11-14 | b8991a936 (00:37; handed back) | f663a2699 | e7de70116 | none (code); `presumedThings.widened.register.json` merged clean, both moved | the register (clean-both with houses 5: the union of two disjoint shrinks); lane-only `docs/census/declarations/npcData.STRESS_ECONOMIC_EFFECTS.json`; the vocabulary atom `ruling body` (known meeting (1)); DECLARED MOVES e0d38e6c4 (tension, 358 towns) and 97685dc01 (plotHooks, 194 towns): goldens carried |
 | — | tail-history-2026-11-14 | SKIPPED (the chair 00:28: no src change; waits for LAND) | — | — | — | — |
+| 7 | tail-narrative-2026-11-14 | 9bd853fd0 (00:42) | f663a2699 | 866041da5 | none | lane-only declarations `POLITICAL_FLAVOR.json`, `PRESSURE_SENTENCES.json`; 4 pins re-keyed in the lane: code; DECLARED MOVE 9bd853fd0 (founding.reason, 154 towns): golden carried |
 
 ## 3. Every code resolution
 
@@ -82,6 +83,8 @@ Merged clean though both sides moved them (for the close to re-derive or measure
 | `docs/census/declarations/institutionDescVariants.INSTITUTION_DESC_VARIANTS.json` | tail-houses (5): lane-only, taken from the lane | the close re-derives it once |
 | `tests/property/generatorGoldenMaster.test.js`, `tests/property/espionageDormancyFence.test.js` (its driven golden) | tail-ties (6) | the DECLARED MOVES of e0d38e6c4 (relationships[].tension, 358 towns) and 97685dc01 (npcs[].plotHooks[], 194 towns; no tie re-drawn) |
 | `docs/census/declarations/npcData.STRESS_ECONOMIC_EFFECTS.json` | tail-ties (6): lane-only, taken from the lane | the close re-derives it once |
+| `tests/property/generatorGoldenMaster.test.js` | tail-narrative (7) | the DECLARED MOVE of 9bd853fd0 (history.founding.reason in 154 towns: the founder against the Origin row; 48 towns newly print no Origin row) |
+| `docs/census/declarations/POLITICAL_FLAVOR.json`, `PRESSURE_SENTENCES.json` | tail-narrative (7): lane-only, taken from the lane | the close re-derives them once |
 
 ## 5. Item 2 at the landed tip
 
