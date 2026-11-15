@@ -125,6 +125,23 @@ seat's census of red 1). After: 5/5. Red-first: with `no crisis: under_siege` st
 ("DS-POW-6 :: operation role duty evasion :: threat (declared mute by f8e7326ce …)"); restored. eslint clean;
 `typecheck:ratchet` OK. What a town prints: unchanged.
 
+## The seventh — `tests/domain/coherence/crisisBlindProse.test.js` F12 soak1k-4800: RETIRED BY NAME (owner's veto list)
+
+1 of 9 red at the merged tip: "'the succession question is not a live one' in a succession void is a finding":
+`expected [] to deeply equal ['succession']`. The bisect (good `d817736d8`): first-parent `31a6f72eb` (JOIN-7 · 29, the
+merge of lane/tail-corpus-def at `cff6cd098`), inside it **`51217c0e5`** (TAIL-CORPUS-DEF-2 batch 3): DS-POW-4 Stable v1,
+v2, v3 reworded off claims no printing town bears (v1's "nobody … is asking who comes next" false in 41 of 52 census
+towns), and the commit names "crisisBlindFindings' dead patterns". A cure, not a finder regression: no line of the
+corpus is succession-blind any more (every variant of all six leaves read through the finder under a succession void:
+none), and the finder's silence on the new words is the corpus seat's ruled reading (`seatSafetyUnrest.test.js`
+pins it for v3, with the instrument's liveness shown on the retired words). THE CASE RETIRED BY NAME, IN THAT SHAPE: its
+fixture is v1's RETIRED words as soak1k-4800 printed them (planted, no corpus line's), on which the instrument still
+finds `succession`; beside it, v1 as the corpus writes it now is silent. The finder (`crisisBlindFindings.js`) is
+untouched (a re-anchoring of its patterns to the new words was tried and reverted: it reds `seatSafetyUnrest`, which
+pins the retirement). FOR THE VETO LIST: row "soak1k-4800 · DS-POW-4 Stable v1 · the succession is not live", claim
+"nobody is asking who comes next, under a succession void", why nothing can show it: `51217c0e5` reworded the line off
+the claim. After: 9/9; eslint clean; the prose-anchors walker green; the negative-anchor walker's red names other files.
+
 ## Red 3
 
 Waits for the chair's "THE DISPLAY'S BRANCH IS ON THE LINE AT <tip>".

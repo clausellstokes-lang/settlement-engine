@@ -29,8 +29,17 @@ const nothingPresses = speakTierNoun(variantByVid({
   leaf: 'defense', blockId: 'DS-DEF-1', poolKey: 'readiness STRONG', vid: 4, slots: { settlement: 'Rundfeld' },
 }), 'city');
 
-/** DS-POW-4 `riskLabel: Stable (no challengers)` v1, as soak1k-4800 printed it. */
-const noRival = speakTierNoun(variantByVid({
+/**
+ * DS-POW-4 `riskLabel: Stable (no challengers)` v1, as soak1k-4800 printed it: THE RETIRED WORDS. RETIRED BY NAME
+ * (TAIL-CLOSE-POOLS-1, the chair's seventh, 2026-11-15, on the owner's veto list): TAIL-CORPUS-DEF-2 batch 3 (51217c0e5)
+ * reworded v1 off "nobody … is asking who comes next" (false in 41 of 52 census towns) and named this pattern dead; no
+ * line of the corpus makes the claim now, so no town can print it. As `seatSafetyUnrest.test.js` does for v3, the
+ * instrument's liveness is shown on the retired words, planted (they are no corpus line's any more), and its silence
+ * on the line's new words (`v1Now`).
+ */
+const noRival = speakTierNoun("Nobody at Grudets is in a position to take Headman's Authority's place; it has no rival, and nobody in the town is asking who comes next.", 'thorp');
+/** DS-POW-4 `riskLabel: Stable (no challengers)` v1 as the corpus writes it now. */
+const v1Now = speakTierNoun(variantByVid({
   leaf: 'power', blockId: 'DS-POW-4', poolKey: 'riskLabel: Stable (no challengers)', vid: 1,
   slots: { settlement: 'Grudets', seat: 'headman', faction: "Headman's Authority" },
 }), 'thorp');
@@ -65,6 +74,8 @@ describe('F12 · coh:crisis-blind-prose, the instrument', () => {
   it('soak1k-4800: "the succession question is not a live one" in a succession void is a finding', () => {
     const found = crisisBlindFindings(placeUnder('succession_void'), { power: noRival });
     expect(found.map((f) => f.family)).toEqual(['succession']);
+    // anchored: the instrument found the claim in the retired words just above; the line's new words make no claim
+    expect(crisisBlindFindings(placeUnder('succession_void'), { power: v1Now })).toEqual([]);
   });
 
   it('soak1k-0: families leaving under a mass-migration influx is a finding (counted; the cure is the migration lane\'s)', () => {
