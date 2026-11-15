@@ -170,28 +170,14 @@ export const WRITER_DARK_REGISTER = Object.freeze([
       + 'index selected, never the index.',
     charter: 'ODQ §934.101 (the chair, 2026-10-31, ruling GS-1 on G-SEAMS S1 and the G3 item-1 ruling), consumer CONFIRMED at generateSettlementPipeline.js:250',
   }),
-  // SW-B7b PROJECTION (2026-11-09, STYLE-RULINGS-2 B10(a)): the Economics tab's legacy `situationDesc` fallback LEFT with
-  // the economy desk's public branch (the shared page prints the owner's shipped DS-ECO-1 draw), so the key's one
-  // web-display read is gone. Its writer is its own lane's; what remains are the engine's own reads, named here.
-  Object.freeze({
-    identity: 'situationDesc on economicState',
-    key: 'situationDesc',
-    shape: 'economicState',
-    writer: 'src/generators/economy/economicState.js',
-    reason: 'engine-internal',
-    consumer: Object.freeze({
-      file: 'src/generators/generationCoherence.js',
-      symbol: 'the coherence battery, whose market and prosperity findings read the situation description',
-    }),
-    why: 'The generator\'s one-line economic situation was the public Economics lead only while the economy desk was '
-      + 'silent on a shared page. The desk now speaks there (the owner\'s player-view draw, shipped at the save), and '
-      + 'no owner view reached the line (0 of 300 towns), so the page reads DS-ECO-1 everywhere. The key stays written '
-      + 'for the engine: the coherence battery reads it, inside src/generators behind the closure STOP. The narrative '
-      + 'generator\'s church-controls read LEFT with W2-B-DECLARE item 5 (1ae138b47: the church note reads the stored '
-      + 'flag safetyProfile.flags.theocraticEconomy, not this sentence); the consumer was re-pointed by identity at '
-      + 'STYLE-2-MERGE point 49 (the chair\'s ruling on STOP 49c, record 405). Retiring the writer is its own lane\'s act.',
-    charter: 'ODQ §885.3 as lifted by STYLE-RULINGS-2 B10(a) (the chair, 2026-11-09 12:5x; SW-B7b item 6: the legacy fallbacks leave in their desks\' causes)',
-  }),
+  // TAIL-CLOSE-REACH-1 (2026-11-15, the close of the round): `situationDesc on economicState` LEFT this register by clause S
+  // (BANK THE WIN, the door's own text). The settlement quick guide reads the situation sentence (src/domain/summary/
+  // settlementQuickGuide.js :: composeMaterialTruth, `cleanText(economy.situationDesc)`), and EXPORTS-B24 · B2 (70047b61, the
+  // PDF's culture block) brought that FILE into the dossier-pdf closure: IdentityDailyLife.jsx imports its cultureScopeLine.
+  // The instrument's reach is file-grained, so the identity is LIT (dossier-pdf=R) and the engine-internal row is refused.
+  // MEASURED, AND SAID PLAINLY: cultureScopeLine does not call composeMaterialTruth, so no page prints the sentence today;
+  // the strike is the instrument's verdict, named in docs/chair/2026-11-15/close/TAIL-CLOSE-REACH-1-HANDBACK.md. The
+  // coherence battery's read is unchanged, and retiring the writer is still its own lane's act.
   // W2 DEF (2026-11-07, construction C3–C5, the third seat): the three §12 WRW-2 pending-surface rows —
   // `isolationSupport on settlement`, `magicDependent on isolationSupport`, `requiredCapacity on isolationSupport` —
   // LEFT this register. WIRING-RULINGS R-W1 (ODQ §934.105) ruled the finding SAID, and the new block DS-DEF-12
@@ -757,6 +743,152 @@ export const WRITER_DARK_REGISTER = Object.freeze([
       + '(viability.js:208, :333) to expect a religious centre; the stored copy is not itself re-read.',
     charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
       + 'W6, section META), consumer PLAUSIBLE at src/generators/economy/viability.js:333',
+  }),
+  // TAIL-CLOSE-REACH-1 (2026-11-15, the close of the round; the chair's ruling WR1, record 455): the eight identities
+  // of the round's thirty-four newly DARK ones that HAVE an engine reader this register's clauses can verify (a
+  // write in a measured spelling, a code read outside every counting closure). The rest went to the bank through the
+  // one governed growth door, each named in docs/chair/2026-11-15/close/TAIL-CLOSE-REACH-1-HANDBACK.md.
+  Object.freeze({
+    identity: 'criminalPreStress on compound',
+    key: 'criminalPreStress',
+    shape: 'compound',
+    writer: 'src/generators/priorityHelpers.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/generators/defenseGenerator.js',
+      symbol: 'the defence profile\'s Crime part, which starts from the crime reading before the stress multiplier',
+    }),
+    why: 'The crime reading before the stress multiplier, stamped on the economy\'s institution flags '
+      + '(economicState.compound). The defence generator\'s Crime part reads it (defenseGenerator.js:243, '
+      + 'flags.criminalPreStress) and multiplies in each crisis row\'s crime effect; that read is on its own '
+      + 'getInstFlags call, the recomputed twin of the stored copy, inside src/generators behind the closure STOP. '
+      + 'What a player sees is the crime score the reading yields, never the reading.',
+    charter: '§934 the chair\'s ruling WR1 of 2026-11-15 (the close of the round; the chair\'s record 455), consumer '
+      + 'PLAUSIBLE at src/generators/defenseGenerator.js:243',
+  }),
+  Object.freeze({
+    identity: 'recallTargetId on metadata',
+    key: 'recallTargetId',
+    shape: 'metadata',
+    writer: 'src/domain/worldPulse/settlementStrategy.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/domain/worldPulse/applyWorldPulse.js',
+      symbol: 'the pulse applier, which stamps a deployment\'s recall when a return-home outcome applies',
+    }),
+    why: 'The save id of the war a strategy_return_home outcome calls its army home from. The settlement strategy '
+      + 'stamps it on the outcome\'s metadata (settlementStrategy.js:1152), and the pulse applier reads it '
+      + '(applyWorldPulse.js:928) to stamp the deployment\'s recall; that is the simulation, outside every counting '
+      + 'closure. What a player sees is the army coming home, never the id. On metadata: the metadata itself.',
+    charter: '§934 the chair\'s ruling WR1 of 2026-11-15 (the close of the round; the chair\'s record 455), consumer '
+      + 'CONFIRMED at src/domain/worldPulse/applyWorldPulse.js:928',
+  }),
+  Object.freeze({
+    identity: 'recallTargetId on selected',
+    key: 'recallTargetId',
+    shape: 'selected',
+    writer: 'src/domain/worldPulse/settlementStrategy.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/domain/worldPulse/applyWorldPulse.js',
+      symbol: 'the pulse applier, which stamps a deployment\'s recall when a return-home outcome applies',
+    }),
+    why: 'The save id of the war a strategy_return_home outcome calls its army home from. The settlement strategy '
+      + 'stamps it on the outcome\'s metadata (settlementStrategy.js:1152), and the pulse applier reads it '
+      + '(applyWorldPulse.js:928) to stamp the deployment\'s recall; that is the simulation, outside every counting '
+      + 'closure. What a player sees is the army coming home, never the id. On selected: the stored outcome that '
+      + 'carries the metadata the applier reads.',
+    charter: '§934 the chair\'s ruling WR1 of 2026-11-15 (the close of the round; the chair\'s record 455), consumer '
+      + 'PLAUSIBLE at src/domain/worldPulse/applyWorldPulse.js:928',
+  }),
+  Object.freeze({
+    identity: 'recallTargetId on autoApplied',
+    key: 'recallTargetId',
+    shape: 'autoApplied',
+    writer: 'src/domain/worldPulse/settlementStrategy.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/domain/worldPulse/applyWorldPulse.js',
+      symbol: 'the pulse applier, which stamps a deployment\'s recall when a return-home outcome applies',
+    }),
+    why: 'The save id of the war a strategy_return_home outcome calls its army home from. The settlement strategy '
+      + 'stamps it on the outcome\'s metadata (settlementStrategy.js:1152), and the pulse applier reads it '
+      + '(applyWorldPulse.js:928) to stamp the deployment\'s recall; that is the simulation, outside every counting '
+      + 'closure. What a player sees is the army coming home, never the id. On autoApplied: the stored outcome that '
+      + 'carries the metadata the applier reads.',
+    charter: '§934 the chair\'s ruling WR1 of 2026-11-15 (the close of the round; the chair\'s record 455), consumer '
+      + 'PLAUSIBLE at src/domain/worldPulse/applyWorldPulse.js:928',
+  }),
+  Object.freeze({
+    identity: 'rivalTriumphBand on warTerminationReads',
+    key: 'rivalTriumphBand',
+    shape: 'warTerminationReads',
+    writer: 'src/domain/worldPulse/warTermination.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/domain/worldPulse/warRulingsEvidence.js',
+      symbol: 'hasRivalTriumph, which asks whether a rival stands to profit before a peace is credited',
+    }),
+    why: 'The band (present, pressing, decisive) of a rival\'s chance to profit if a war ends now, copied from the '
+      + 'seat\'s books onto the war termination read (warTermination.js:930). The war rulings evidence reads it '
+      + '(warRulingsEvidence.js:51, hasRivalTriumph) to decide whether a peace was earned by the realm; that is the '
+      + 'simulation\'s ruling plumbing, outside every counting closure. What a player sees is the war\'s outcome, never'
+      + ' the band. On warTerminationReads: the read itself.',
+    charter: '§934 the chair\'s ruling WR1 of 2026-11-15 (the close of the round; the chair\'s record 455), consumer '
+      + 'CONFIRMED at src/domain/worldPulse/warRulingsEvidence.js:51',
+  }),
+  Object.freeze({
+    identity: 'rivalTriumphBand on metadata',
+    key: 'rivalTriumphBand',
+    shape: 'metadata',
+    writer: 'src/domain/worldPulse/warTermination.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/domain/worldPulse/warRulingsEvidence.js',
+      symbol: 'hasRivalTriumph, which asks whether a rival stands to profit before a peace is credited',
+    }),
+    why: 'The band (present, pressing, decisive) of a rival\'s chance to profit if a war ends now, copied from the '
+      + 'seat\'s books onto the war termination read (warTermination.js:930). The war rulings evidence reads it '
+      + '(warRulingsEvidence.js:51, hasRivalTriumph) to decide whether a peace was earned by the realm; that is the '
+      + 'simulation\'s ruling plumbing, outside every counting closure. What a player sees is the war\'s outcome, never'
+      + ' the band. On metadata: a stored copy of the read.',
+    charter: '§934 the chair\'s ruling WR1 of 2026-11-15 (the close of the round; the chair\'s record 455), consumer '
+      + 'PLAUSIBLE at src/domain/worldPulse/warRulingsEvidence.js:51',
+  }),
+  Object.freeze({
+    identity: 'rivalTriumphBand on pulseHistory',
+    key: 'rivalTriumphBand',
+    shape: 'pulseHistory',
+    writer: 'src/domain/worldPulse/warTermination.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/domain/worldPulse/warRulingsEvidence.js',
+      symbol: 'hasRivalTriumph, which asks whether a rival stands to profit before a peace is credited',
+    }),
+    why: 'The band (present, pressing, decisive) of a rival\'s chance to profit if a war ends now, copied from the '
+      + 'seat\'s books onto the war termination read (warTermination.js:930). The war rulings evidence reads it '
+      + '(warRulingsEvidence.js:51, hasRivalTriumph) to decide whether a peace was earned by the realm; that is the '
+      + 'simulation\'s ruling plumbing, outside every counting closure. What a player sees is the war\'s outcome, never'
+      + ' the band. On pulseHistory: a stored copy of the read.',
+    charter: '§934 the chair\'s ruling WR1 of 2026-11-15 (the close of the round; the chair\'s record 455), consumer '
+      + 'PLAUSIBLE at src/domain/worldPulse/warRulingsEvidence.js:51',
+  }),
+  Object.freeze({
+    identity: 'warReturnedSettlementIds on pulseHistory',
+    key: 'warReturnedSettlementIds',
+    shape: 'pulseHistory',
+    writer: 'src/domain/worldPulse/pulseKernel.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/domain/worldPulse/applyWorldPulse.js',
+      symbol: 'the pulse applier, which asks whether a besieger came home this tick',
+    }),
+    why: 'The save ids of the settlements whose armies came home on a pulse, stamped on the pulse\'s history record '
+      + '(pulseKernel.js:2930). The pulse applier reads the current tick\'s record (applyWorldPulse.js:435) to know '
+      + 'whether a besieger has gone home before it holds a coalition obligation; that is the simulation, outside '
+      + 'every counting closure. What a player sees is the homecoming, never the id list.',
+    charter: '§934 the chair\'s ruling WR1 of 2026-11-15 (the close of the round; the chair\'s record 455), consumer '
+      + 'CONFIRMED at src/domain/worldPulse/applyWorldPulse.js:435',
   }),
 ]);
 
