@@ -37,7 +37,10 @@ const NAME_RED = [
   ['r2r-thorp-4', '| gold/silver ore |', '| Gold and silver ore |'],
   ['r2r-thorp-4', '| Oasis Water |', '| Oasis and water rights |'],
   ['r2r-thorp-7', '| Hot Springs Mineral |', '| Mineral hot springs |'],
-  ['r2r-thorp-0', '| medicinal herbs |', '| Medicinal herbs |'],
+  // Re-keyed BY IDENTITY (TAIL-CLOSE-DISPLAY-2, red 2): r2r-thorp-0's herbs were its hot springs', which file none since
+  // TAIL-DEFECON-C's DECLARED D34 (a) (680d16b54: "the hot springs no herbs"); the nearest thorp whose Exploitation
+  // table still names the herbs (a scan of r2r-thorp-0..19) is r2r-thorp-9.
+  ['r2r-thorp-9', '| medicinal herbs |', '| Medicinal herbs |'],
 ];
 /** E5 RED: [seed, the person who holds no power, the row that prints instead]. */
 const CELL_RED = [['r2r-city-16', 'Muluc Zuyua', '| Muluc Zuyua | the dean | — | 7 |']];

@@ -36,10 +36,16 @@ describe('a chain works a resource only through a house of that trade (R3)', () 
     expect(chainWorksResource(rec({ chainId: 'forage', resourceInputKey: 'ancient_grove', processingInstitutions: ['Subsistence farming'] }), 'ancient_grove', 'medicinal herbs')).toBe(true);
   });
 
-  test('the reader\'s towns: the true lines are back (palisade r2r-village-56, walls r2r-town-8, clergy r2r-village-38)', () => {
+  // RETIRED BY NAME (TAIL-CLOSE-DISPLAY-2, red 4; the chair's ruling V16 (b), vetoable by the owner): the births arm
+  // "clergy r2r-village-38: No one here works the medicinal herbs near …". Its shape (clergy chains at the hot springs
+  // read as working the herbs the springs yield) no birth can reach since TAIL-DEFECON-C's DECLARED D34 (a) (680d16b54:
+  // the hot springs give no herbs): a scan of 270 towns (r2r thorp..city 0..129, rr2s city/metropolis/town calm-rand
+  // 1..130) holds none; the one village where clergy chains stand beside another ground's herbs (r2r-village-125) prints
+  // its line with NOT_WORKED_THROUGH's clergy entry switched off, so it cannot guard it. The unit arm above (springs,
+  // 'the herbs') still guards the entry, untouched.
+  test('the reader\'s towns: the true lines are back (palisade r2r-village-56, walls r2r-town-8)', () => {
     const lines = (/** @type {string} */ seed) => resourceGapLines(birthCensus(seed)).map((g) => g.impact);
     expect(lines('r2r-village-56').some((l) => /^No one here works the stone near /.test(l))).toBe(true);
     expect(lines('r2r-town-8').some((l) => /^No one here works the stone near /.test(l))).toBe(true);
-    expect(lines('r2r-village-38').some((l) => /^No one here works the medicinal herbs near /.test(l))).toBe(true);
   }, 120000);
 });

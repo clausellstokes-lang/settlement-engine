@@ -34,6 +34,8 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { SAMPLE_SETTLEMENTS, forkConfigFor, forkSeedFor } from '../../src/data/sampleSettlements.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
+import { backingArchetypeOf } from '../../src/domain/dossier/powerSupport.js';
+import { inferFactionCategory } from '../../src/generators/power/factionCategories.js';
 
 const FORK_SAMPLE = 20;
 const FORK_LINE = 19;
@@ -62,6 +64,10 @@ const conditionOf = (s, key) => (s.resourceAnalysis?.resourceConditions || []).f
 const hasInstitution = (s, re) => (s.institutions || []).some((/** @type {any} */ i) => re.test(String(i.name)));
 /** @param {any} s @param {RegExp} re */
 const hasFaction = (s, re) => (s.powerStructure?.factions || []).some((/** @type {any} */ f) => re.test(String(f.faction)));
+/** The backing kind of a power (powerSupport.js :: backingArchetypeOf, the reader the fold itself uses). @param {any} f */
+const kindOf = (f) => backingArchetypeOf({ ...f, category: f.category || inferFactionCategory(String(f.faction || '')) });
+/** A power of the kind `name` is of stands on the roster, or rules (the governing row is on the roster). @param {any} s @param {string} name */
+const hasPowerOfKind = (s, name) => (s.powerStructure?.factions || []).some((/** @type {any} */ f) => kindOf(f) === kindOf({ faction: name }));
 
 /**
  * @typedef {{ clause: string, holds: (s: any) => boolean }} Promise
@@ -84,7 +90,12 @@ const PROMISES = {
       { clause: 'a harbour town · tag Coastal trade', holds: (s) => s.tier === 'town' && s.config.terrainType === 'coastal' && s.config.tradeRouteAccess === 'port' },
       { clause: 'with docks and a harbour master', holds: (s) => hasInstitution(s, /^Docks\/port facilities$/) && hasInstitution(s, /^Harbour master's office$/) },
       { clause: 'the merchant guilds hold power · tag Merchant guilds', holds: (s) => hasFaction(s, /^Merchant Guilds$/) },
-      { clause: 'the religious authorities hold power · tag Religious authority', holds: (s) => hasFaction(s, /^Religious Authorities$/) },
+      // RE-KEYED BY IDENTITY (TAIL-CLOSE-POOLS-1, on the chair's ruling of 2026-11-12, "the founding worlds' cards, re-matched
+      // when the worlds are made again": the promise is read by KIND, "a religious power stands, or rules"). The card's words are
+      // unchanged. The move: 1df17289f (COHERENCE-POWERS 2B, the fold, declared and measured: a power of the ruler's own kind
+      // that no house stands behind folds into the ruler), so where the Church Council rules (5 of the 20 forks) the houseless
+      // Religious Authorities fold into it, and a check by NAME read 15/20. Not loosened: a power of another kind still fails.
+      { clause: 'the religious authorities hold power · tag Religious authority', holds: (s) => hasPowerOfKind(s, 'Religious Authorities') },
     ],
   },
   'sample-blackcrag': {

@@ -48,7 +48,12 @@ describe('the gap reader reads what trade brings; a need is not an import (patte
     expect(arriving.some((x) => x.toLowerCase().includes('clay'))).toBe(false);
   }, 60000);
 
-  for (const seed of ['r2r-city-30', 'r2s-plague_onset-town-0', 'r2s-politically_fractured-city-2']) {
+  // Re-keyed BY IDENTITY (TAIL-CLOSE-DISPLAY-2, red 3): TAIL-DEFECON-R's DECLARED move M-V (fcf4cae6, JOIN-7 · 27, 4b19b744:
+  // grapes and glass sand reach their house by any route the town can bring goods in on) took the gaps these towns' live
+  // arm read (r2r-city-30 and r2s-politically_fractured-city-2 grapes, r2s-plague_onset-town-0 glass sand); their gaps
+  // still name nothing that arrives. Each is replaced by the nearest town of its own shape (size, crisis) whose page
+  // still prints a gap the lists name: r2r-city-28, r2s-politically_fractured-city-4, r2s-plague_onset-town-5.
+  for (const seed of ['r2r-city-28', 'r2s-plague_onset-town-5', 'r2s-politically_fractured-city-4']) {
     test(`${seed}: no gap names a good that arrives by trade; every gap good the lists name is a need`, () => {
       const town = birth(seed);
       const { arriving, needed } = importsAsPrinted(town);
