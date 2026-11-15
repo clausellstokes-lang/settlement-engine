@@ -8,7 +8,7 @@ Every run went to a file in the seat's scratch tree; the search is one script ov
 | --- | --- | --- | --- | --- |
 | `tests/domain/corpusEcoTailGuards.test.js` | 3 of 136 | **9cc8c6826** (TAIL-DEFECON-5 R2, "one shadow figure", a DECLARED MOVE; landed at 26c3dc456, JOIN-9 · 14) | (ii) re-keyed by identity | 136 of 136 |
 | `tests/domain/defenseInvasionWithinACriticalBand.test.js` | 2 of 3 | **07ebe8bdc** (COHERENCE-UPKEEP, "the five upkeep gates read the one home", a DECLARED move of the readiness labels; landed at 33b12cbef, JOIN-1 · 9) | (ii) re-keyed by identity | 3 of 3 |
-| item 3: `captureBirthScale`, `tierInertiaEnvelope` | — | — | waiting on the chair's word "THE ENVELOPES AT <tip>" | — |
+| item 3: `captureBirthScale`, `tierInertiaEnvelope` | — | — | closed without work by the chair's read (see the last line) | — |
 
 **After the record cures landed** (lane/tail-record at 7ac689418, JOIN-11 point 8): the joined line at ffdd541a0 merged
 into this branch (d5c5b922f, a merge, no rebase); both files re-run alone there: 139 of 139 green. The economic
@@ -54,3 +54,5 @@ ratcheted debt elsewhere; none names either file).
    Adequate). It now reads two census thorps that are Critical and would otherwise say "credible against
    raiders" / "would see off a raid": r2s-occupied-thorp-0 and r2r-thorp-8. On the census, only thorps with
    walls and townspeople are in that position now.
+
+**Item 3 was closed by the chair's read:** the envelopes are green at the line's bb75314d6 (the record cures and the second sweep both on it): the merge seat ran both alone on the merged tree, `captureBirthScale` 8 of 8, `tierInertiaEnvelope` 17 of 17. The economic rating's cap did not move them, so this seat re-derived nothing.
