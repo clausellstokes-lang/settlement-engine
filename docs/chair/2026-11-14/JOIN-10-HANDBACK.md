@@ -89,6 +89,7 @@ THE CHAIR'S RULINGS TO JOIN-10 (each vetoable by the owner):
 | 13 | lane/tail-close-pools-2026-11-15 | 1d3fef703 (07:34) | 0711a6a39 4e58ed8ba | a3378d243 | none | 1 files outside docs/; declared-move commits: none (golden carried) |
 | 14 | lane/tail-corpus-def-2026-11-14 | c358b4832 (07:38) | 922cfa66c | 355bfc1b2 | none | 0 files outside docs/; declared-move commits: none (golden carried) |
 | 15 | lane/tail-ties-2026-11-14 | 319362b0a (07:41) | 2f8ffcaa3 02de38883 | 7d6d807ec | none | 0 files outside docs/; declared-move commits: none (golden carried) |
+| 16 | lane/tail-close-people-2026-11-15 | 5a751f365 (07:44) | 0b1248dbf | 90733e58e | none | 9 files outside docs/; declared-move commits: e81dea035 fc9772001 1ec823d12 8a7183589 42747ad8b 0d6ef7e93 (golden carried) |
 
 ## 3. Every code resolution
 
@@ -276,6 +277,7 @@ Merged clean though both sides moved them (for the close to re-derive or measure
 | `tests/domain/coherence/crisisBlindProse.test.js` | close-pools (11): its edit DROPPED by ruling C31, the joined (crisis) side kept whole | 8/8 green at the merged tree; the dropped hunk is in 0711a6a39 for the doors seat to read |
 | tests/domain/coherence/crisisBlindProse.test.js | close-pools (11) | merged clean though both sides moved them: the test files among them run alone at the merged tree, green ; read at the close |
 | golden | close-display (12) | DECLARED MOVE commits 6cd5f374f adbe29e11 9a13dd0a4 (field diffs in their bodies) |
+| golden | close-people (16) | DECLARED MOVE commits e81dea035 fc9772001 1ec823d12 8a7183589 42747ad8b 0d6ef7e93 (field diffs in their bodies) |
 
 **[J10] every pin where the joined side was kept, by file (for the doors' seat to read each once):**
 
@@ -314,4 +316,4 @@ A worktree at origin's tip (`git worktree add /home/user/j10wt -b join10 <tip>`,
 
 ## 8. WHAT IS LEFT
 
-Landed through point 15 (see the table); waiting on the chair's LAND words.
+Landed through point 16 (see the table); count 192,380 at 07:40 UTC after point 15; waiting on the chair's LAND words.
