@@ -13,7 +13,7 @@ import { cap, humanize, label as labelOf } from './format.js';
 import { coverageRatioPct } from './foodCoverage.js';
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 import { plotHookSourcePage } from '../../domain/dossier/plotHooks.js';
-import { withPowerSentenceNames } from '../../domain/display/powerSentenceName.js';
+import { withPowerSentenceNames, powerSentenceName } from '../../domain/display/powerSentenceName.js';
 
 // ── Shared plain-word helpers (the owner's style law of 2026-11-07: the label stays as the
 // first word, the machinery leaves, the town's own nouns fill the slots) ──────────────────
@@ -160,13 +160,22 @@ export function powerHeadline(power, _identity) {
   const bits = [];
   // powerSlice factions expose `.name` (mapped from f.faction); the old `.faction`
   // reads were always undefined so the headline never named the governing body.
-  if (top?.name) bits.push(`${top.name}${govType ? ` (${govType.toLowerCase()})` : ''} governs`);
+  // TAIL-EXPORTS-PDF batch 1 (ruling E2): a power named in the sentence takes its prose form (powerSentenceName.js), and
+  // A POWER'S STANDING IN A SENTENCE READS THE POWER'S OWN STRENGTH: where the strongest rival outweighs the governing
+  // power, the line says so ("holds the seat, but more weight lies with …"), never "pressing close behind".
+  const topName = top?.name ? powerSentenceName(top.name) : null;
+  const chName = challenger?.name ? powerSentenceName(challenger.name) : null;
+  const outweighed = !!(topName && chName && challenger?.power && top?.power && challenger.power > top.power);
+  if (topName && outweighed) bits.push(`${topName}${govType ? ` (${govType.toLowerCase()})` : ''} holds the seat, but more weight lies with ${chName}`);
+  else if (topName) bits.push(`${topName}${govType ? ` (${govType.toLowerCase()})` : ''} governs`);
   else if (govType) bits.push(`${govType} rule`);
   // The ', with …' continuation weaves onto a LEAD clause — only add it when a lead
   // exists, or a nameless governing faction with no governmentType (no lead pushed)
   // would make the comma clause the first and only element, opening the headline on a comma.
-  if (bits.length && challenger?.name && challenger?.power && top?.power && challenger.power >= top.power * 0.7) {
-    bits.push(`, with ${challenger.name} pressing close behind`);
+  if (outweighed) {
+    // the order is said in the lead clause
+  } else if (bits.length && challenger?.name && challenger?.power && top?.power && challenger.power >= top.power * 0.7) {
+    bits.push(`, with ${chName} pressing close behind`);
   } else if (bits.length && factions.length > 2) {
     bits.push(`, with ${factions.length - 1} other power${factions.length - 1 === 1 ? '' : 's'} competing for influence`);
   }
@@ -189,7 +198,10 @@ export function economicsHeadline(eco) {
   // in words. The complexity gloss doubled "economy economy" and the per cent was machinery
   // (STYLE-AUDIT §2a #2); both stay in the section's own rows.
   const lead = eco.prosperity ? `${cap(String(eco.prosperity).toLowerCase())}.` : null;
-  const topExport = eco.primaryExports?.[0] ? plainName(labelOf(eco.primaryExports[0])).toLowerCase() : null;
+  // TAIL-EXPORTS-PDF batch 1 (ruling E1; the law of a siege): what it sells as the tab's Exports print it
+  // (`exportsShown`, tradeListsAsPrinted), and nothing named as going out where a siege stops trade.
+  const exportList = Array.isArray(eco.exportsShown) ? eco.exportsShown : (eco.primaryExports || []);
+  const topExport = !eco.tradeStopped && exportList[0] ? plainName(labelOf(exportList[0])).toLowerCase() : null;
   const fb = eco.foodBalance || {};
   let food = null;
   if (fb?.deficit > 0) {
@@ -254,7 +266,7 @@ export function defenseHeadline(def, _identity) {
   if (wall && force) what = `${wall}, held by ${force}`;
   else if (wall) what = `${wall}, and no one trained to hold it`;
   else if (force) what = `no walls; ${force} is all that stands guard`;
-  else what = 'no walls and no one under arms';
+  else what = 'no walls and no organized force'; // TAIL-EXPORTS-PDF batch 1: the Defense tab's words (noForceLine.js), beside its "armed citizens"
   // The readiness label carries the grade; the 0-100 mean stays in the section's bars (a digit
   // in prose is the machinery the owner struck).
   const head = readiness ? sentenceCase(readiness) : 'Defences';
