@@ -143,3 +143,96 @@ describe('B2 the Origin row\'s group agrees with the founder (TAIL-NARRATIVE FA)
     }), 'a group row beside a founder of its kind still prints');
   });
 });
+
+/**
+ * BATCH 3 — `settlementOriginProse.js :: ORIGIN_POOLS` (TAIL-NARRATIVE-2; the chair's ruling (N6): the origin pools as
+ * TAIL-NARRATIVE verified and proposed; READ-ALL's tabs rows and the exports' rows (X9) of the same writer). The origin
+ * line (`settlementReason[0]`) says WHERE the place stands and what the record holds; the founding CAUSE is the History's
+ * (`history.founding.reason`, drawn after it): no row claims a cause ("founded for", "because", "exists because", "on
+ * the reasoning that", "meant to trade by water"); a shortfall says "must make do with", never that it gets by; a
+ * channel is said to ease the gap, never to meet or close it; the seasonal path is the tracks, not caravans that come.
+ */
+describe('B3 the origin line says where the place stands and what the record holds (TAIL-NARRATIVE-2 batch 3)', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  /** @param {string} seed @returns {string} */
+  const origin = (seed) => String(born(seed).settlementReason?.[0]);
+  /** [id, seed, must not print, what prints instead] */
+  const CURED = /** @type {Array<[string, string, RegExp, RegExp]>} */ ([
+    ['B20939', 'r2s-plague_onset-thorp-0', /most of what it owns arrived/, /for generations its news came on somebody else's cart\.$/],
+    ['09370', 'r2s-famine-city-3', /^Founded at a junction/, /^Built at a junction, and the oldest logic there is applies/],
+    ['11941', 'r2r-metropolis-14', /^It exists because travellers/, /^It stands where the roads meet, on ground travellers stopped at long before anyone built here\.$/],
+    ['09398', 'r2s-famine-town-2', /for the shelter of its anchorage/, /^Built on the coast around the shelter of its anchorage, and the sea has set the terms/],
+    ['B20803', 'r2s-under_siege-metropolis-1', /The sea gives the settlement its living/, /the sea has set the terms of its living ever since\.$/],
+    ['B13256', 'r2s-under_siege-city-0', /Most of what it eats/, /; most of its trade has always gone by sea\.$/],
+    ['15081', 'r2s-wartime-thorp-2', /gets by on/, /Nothing comes in from outside; it must make do with what it produces itself\.$/],
+    ['15101', 'r2s-succession_void-thorp-1', /gets by on/, /every season it must make do with what it produces itself\.$/],
+    ['22030', 'r2s-under_siege-thorp-2', /gets by on/, /The siege has closed the roads; it must make do with what it produces itself\.$/],
+    ['14593', 'r2r-thorp-38', /gets by on|does not quite feed it/, /does not fully feed it\. No food reaches it from outside, and it must make do with/],
+    ['11943', 'r2s-under_siege-town-2', /gets by on/, /It must make do with what it has in store and what it produces itself\.$/],
+    ['17926', 'r2s-under_siege-town-2', /does not quite feed it/, /^Set apart from the trade roads, on ground that does not fully feed it, and now cut off by a siege\./],
+    ['22014', 'r2s-famine-village-3', /The shortfall is met through/, /For what it lacks it looks to carts from the country around it or the tracks in a good season\. Every season the terms/],
+    ['18781', 'r2r-town-54', /caravans that still come/, /Survival here rests on carriage by magic, the tracks in a good season, or the favour of a patron/],
+    ['deficit[1]', 'r2s-mass_migration-town-2', /The gap is closed through/, /To close the gap it turns to the tracks in a good season — at a price/],
+    ['22398', 'r2s-famine-hamlet-3', /on the reasoning that/, /before anyone built here; a road a century old will not be abandoned in one\.$/],
+    ['22397', 'r2s-under_siege-hamlet-2', /because the river was the only road/, /^Sited at the water's edge, where the river was the only road worth having/],
+    ['22375', 'r2r-hamlet-28', /meant to trade by water/, /^Built on the shore; its trade has always gone by water\.$/],
+    ['22396', 'r2r-thorp-9', /The distance is why it was founded/, /^Set apart from the trade roads\. The distance has kept it small and whole\.$/],
+  ]);
+  it('the flagged origin line no longer prints, and the slot says what the record bears (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(CURED, ([id, seed, gone, instead]) => {
+      const text = origin(seed);
+      expect(text, `${id} ${seed}: what prints instead`).toMatch(instead);
+      expect(text, `${id} ${seed}: the flagged line`).not.toMatch(gone); // anchored: the line above asserts the slot printed
+    }), 'the flagged origin line no longer prints');
+  });
+  /** [the struck or untouched row, seed, the true line that must still print] */
+  const KEEP = /** @type {Array<[string, string, RegExp]>} */ ([
+    ['09400 struck: a place, not a cause', 'r2r-thorp-40', /^Founded roadside, where the day is measured in traffic/],
+    ['22374 struck: trade on every road, no siege', 'r2s-famine-town-0', /^Built at a major crossroads, and trade comes in on every road\.$/],
+    ['port.coastal[1]', 'r2r-town-51', /^A seaport\. The tide sets the working day/],
+    ['unsupplied[0] at an 8% gap', 'r2r-thorp-23', /^Isolated from major trade routes\. The settlement cannot fully feed itself, and no food comes in from outside: /],
+    ['the magic path the receipt holds', 'r2r-town-12', /through carriage by magic or the tracks in a good season — or not at all\.$/],
+    ['the country around it', 'r2r-village-0', /through carts from the country around it or the tracks in a good season — or not at all\.$/],
+  ]);
+  it('the true sibling still prints where the record bears it out (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(KEEP, ([id, seed, kept]) => {
+      expect(origin(seed), `${id} ${seed}`).toMatch(kept);
+    }), 'the true sibling still prints');
+  });
+});
+
+/**
+ * BATCH 3, the chair's ruling (N9) — `narrativeText.js :: POLITICAL_FLAVOR.political_heavy`: "Authority here has a
+ * provisional quality …" (B00042: 4 towns, false in the 2 whose public legitimacy is Approved; the fact it needs is not
+ * an atom) LEFT THE POOL; its one pick re-draws inside the pool. Its inheritors read: "… but not whether they deserve it,
+ * and the powers are still arguing the second point" was false in all 4 towns that print it (Approved or Endorsed in
+ * three, one power in the fourth): reworded to claim neither a contested right nor a plurality of powers.
+ */
+describe('B3 (N9) the political flavour claims no legitimacy the record lacks (TAIL-NARRATIVE-2 batch 3)', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  /** [id, seed, must not print, what prints instead] */
+  const CURED = /** @type {Array<[string, string, RegExp, RegExp]>} */ ([
+    ['B00042', 'r2r-town-57', /provisional quality/, /The current governing arrangements are a compromise nobody fully chose: shaped more by the Succession Crisis/],
+    ['B00042', 'r2s-infiltrated-metropolis-1', /provisional quality/, /The current governing arrangements are a compromise nobody fully chose/],
+    ['B00042', 'r2r-metropolis-34', /provisional quality|not whether they deserve it/, /The Land Dispute decided who holds power here, and every household still tells it the way its own side remembers it/],
+    ['B00042', 'r2s-insurgency-hamlet-3', /provisional quality|the powers are still arguing/, /The Interregnum decided who holds power here, and every household still tells it/],
+    ['political_heavy[4]', 'r2r-city-16', /not whether they deserve it/, /decided who holds power here, and every household still tells it the way its own side remembers it/],
+    ['political_heavy[4]', 'r2r-metropolis-46', /not whether they deserve it/, /decided who holds power here, and every household still tells it the way its own side remembers it/],
+  ]);
+  it('the line that left the pool prints nowhere it printed; the slot holds a line of the same pool (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(CURED, ([id, seed, gone, instead]) => {
+      const text = read(born(seed), 'history');
+      expect(text, `${id} ${seed}: what prints instead`).toMatch(instead);
+      expect(text, `${id} ${seed}: the flagged line`).not.toMatch(gone); // anchored: the line above asserts the slot printed
+    }), 'the political flavour claims no legitimacy the record lacks');
+  });
+  const KEEP = /** @type {Array<[string, string, RegExp]>} */ ([
+    ['27424 struck: a Legitimacy Crisis', 'r2s-succession_void-town-3', /The offices here are filled and the seals are real, but people still ask in private/],
+    ['political_heavy[1]', 'r2r-metropolis-36', /People here still argue about the Succession Crisis, and every family still teaches its children/],
+  ]);
+  it('the true siblings still print (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(KEEP, ([id, seed, kept]) => {
+      expect(read(born(seed), 'history'), `${id} ${seed}`).toMatch(kept);
+    }), 'the true siblings still print');
+  });
+});

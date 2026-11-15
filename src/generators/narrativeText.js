@@ -314,10 +314,14 @@ export const POLITICAL_FLAVOR = {
     },
     (r) =>
       `The current governing arrangements are a compromise nobody fully chose: shaped more by the ${pickRandom2(r.filter((s) => s.type === "political"))?.name || "this event"} than by any founding design`,
+    // TAIL-NARRATIVE-2 (the chair's ruling (N9), READ-ALL B00042): "Authority here has a provisional quality …" LEFT THIS
+    // POOL: it printed in 4 towns and was false in 2 (the public's legitimacy Approved), no rewording held, and the fact it
+    // needs (the legitimacy label) is not an atom for four towns; the one pick re-draws inside this pool.
+    // TAIL-NARRATIVE-2 (N9's inheritors read): "… but not whether they deserve it, and the powers are still arguing the
+    // second point" was false in all 4 towns that print it (legitimacy Approved or Endorsed in three, one power in the
+    // fourth): the line keeps its event and claims neither a contested right nor a plurality of powers.
     (r) =>
-      `Authority here has a provisional quality, as though everyone is still waiting for the arrangement that followed the ${pickRandom2(r.filter((s) => s.type === "political"))?.name || "this event"} to be replaced by a permanent one that never comes`,
-    (r) =>
-      `The ${pickRandom2(r.filter((s) => s.type === "political"))?.name || "this event"} decided who holds power here, but not whether they deserve it, and the powers are still arguing the second point`,
+      `The ${pickRandom2(r.filter((s) => s.type === "political"))?.name || "this event"} decided who holds power here, and every household still tells it the way its own side remembers it`,
     (r) =>
       `The offices here are filled and the seals are real, but people still ask in private whether the ${pickRandom2(r.filter((s) => s.type === "political"))?.name || "this event"} gave the present rulers any right to rule, and nobody in charge wants the question asked aloud`,
   ],
