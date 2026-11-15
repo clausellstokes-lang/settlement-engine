@@ -1,0 +1,17 @@
+{"id":"C8329","town":"bar0-thorp-calm-rand-2","sev":"MED","kind":"STATE","why":"Reliance on magic None; FOOD shows 1% made by magic (and C8460 says food came by spell or prayer)","other":"C8460"}
+{"id":"C8343","town":"bar0-thorp-calm-rand-2","sev":"MED","kind":"STATE","why":"devout households' dispute over who may trade is a live tension in none of CRISIS, QUARRELS, TENSIONS (only the flood), PAST","other":""}
+{"id":"C8586","town":"bar0-thorp-calm-rand-2","sev":"MED","kind":"STATE","why":"says enforcement keeps crime down; DEFENCE has no watch, garrison or force and neighbours deal with wrongs themselves","other":"C8562"}
+{"id":"C8585","town":"bar0-thorp-calm-rand-2","sev":"LOW","kind":"PAIR","why":"organized crime has a limited foothold, but the same page says the hall is free of criminals and no criminal power exists","other":"C8554"}
+{"id":"C8592","town":"bar0-thorp-calm-rand-2","sev":"MED","kind":"STATE","why":"says nothing has yet come against it; PAST records The Purge, a major occupation-infiltration 205 years ago","other":""}
+{"id":"C8626","town":"bar0-thorp-calm-rand-2","sev":"LOW","kind":"STATE","why":"all made by hands and ground without a practitioner; FOOD records 1% of food made by magic","other":"C8460"}
+{"id":"C8661","town":"bar0-thorp-calm-rand-2","sev":"LOW","kind":"LACKS","why":"names halls and roads better than required; a thorp of 11 with seven houses, none a hall","other":""}
+{"id":"C8762","town":"bar0-town-calm-rand-2","sev":"LOW","kind":"PAIR","why":"guilds settle quarrels among themselves; QUARRELS has Church Council vs Merchant Guilds high over apprentices and a guild conflict tension","other":"C8768"}
+{"id":"C8996","town":"bar0-town-calm-rand-2","sev":"MED","kind":"STATE","why":"says no formal government in place and the council answers to no one; GOVERNMENT has Church Council dominant, Stable, Tolerated, with rival powers","other":""}
+{"id":"C8936","town":"bar0-town-calm-rand-2","sev":"LOW","kind":"LACKS","why":"names market wardens, an office GOVERNMENT and PEOPLE do not list","other":""}
+{"id":"C9234","town":"bar0-town-calm-rand-2","sev":"MED","kind":"STATE","why":"says households go short and a bad season would hurt; FOOD gap 0%, deficit 0%, Secure, six months in a granary","other":"C9237"}
+{"id":"C8741","town":"bar0-town-calm-rand-2","sev":"LOW","kind":"PAIR","why":"stalls piled with spice; trade page lists spices as needed and not brought in, imports have no spice","other":"C9222"}
+{"id":"C9371","town":"bar0-town-calm-rand-2","sev":"MED","kind":"PAIR","why":"Merchant and Craft Guilds vote together whenever trade is at stake; elsewhere merchants consistently outvote craft masters, and the relation is tense","other":"C9433"}
+{"id":"C9437","town":"bar0-town-calm-rand-2","sev":"MED","kind":"PAIR","why":"watch exists only on paper; DEFENCE lists a Town watch, a captain sits in PEOPLE, and the page says it walks night rounds","other":"C9457"}
+{"id":"C9393","town":"bar0-town-calm-rand-2","sev":"LOW","kind":"PAIR","why":"hall free of criminals, no criminal power strong; the page records semi-organized networks, gangs and rival crews fighting over the streets","other":"C9469"}
+{"id":"C9500","town":"bar0-town-calm-rand-2","sev":"LOW","kind":"PAIR","why":"religious acceptance of magic hostile, yet the page says houses of worship and the monastery supply the magic the town relies upon","other":"C9503"}
+{"id":"DONE","lines":1732,"blocks":2,"flags":16}
