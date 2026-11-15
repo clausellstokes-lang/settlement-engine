@@ -1,0 +1,5 @@
+{"id":"C0062","town":"bar0-city-under_siege+famine-rand-6","sev":"MED","kind":"STATE","why":"says seasons keep being profitable; STATE is Struggling under siege and famine, no trade comes in (C0066 says income is pre-siege only)","other":"C0026"}
+{"id":"C0943","town":"bar0-city-under_siege+famine-rand-6","sev":"MED","kind":"STATE","why":"magic is a large part of its money; INCOME gives Arcane Industry 2%, Spellcasting 2%, Apothecary 1% against Smuggling 60%","other":"C0925"}
+{"id":"C0980","town":"bar0-city-under_siege+famine-rand-6","sev":"LOW","kind":"PAIR","why":"calls arcane growth a minor food supplement; FOOD has magic making 27%, about a quarter, and reliance on magic is Integral","other":"C0960"}
+{"id":"C1755","town":"bar0-city-under_siege+famine-rand-6","sev":"LOW","kind":"STATE","why":"a guild tailor (Beatrix Weber, no War Council seat) is said to have authorised a military sortie; command lies with the War Council","other":""}
+{"id":"DONE","lines":2339,"blocks":1,"flags":4}
