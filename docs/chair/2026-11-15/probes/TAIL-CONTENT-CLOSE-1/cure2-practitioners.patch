@@ -1,0 +1,122 @@
+diff --git a/src/generators/generateSettlementPipeline.js b/src/generators/generateSettlementPipeline.js
+index e93887ff7..4b80443d9 100644
+--- a/src/generators/generateSettlementPipeline.js
++++ b/src/generators/generateSettlementPipeline.js
+@@ -1,5 +1,5 @@
+ import { keepOneDominant, withConflictRelations } from './factionDynamics.js'; // RECORD-MEASURE-2 G1; P19
+-import { settleClergyToFinalRoster } from './power/claimStanding.js'; // TAIL-POWERS-B-4 P31 (1)
++import { settleArcaneToPractitioners, settleClergyToFinalRoster } from './power/claimStanding.js'; // TAIL-POWERS-B-4 P31 (1); TAIL-CONTENT-CLOSE-1
+ /**
+  * generateSettlementPipeline.js — Pipeline-based settlement generation.
+  *
+@@ -199,6 +199,7 @@ export function generateSettlementPipeline(config = {}, importedNeighbour = null
+ 
+   keepOneDominant(finalCtx.settlement?.powerStructure?.factions); // RECORD-MEASURE-2 G1: on the final roster, the label only
+   settleClergyToFinalRoster(finalCtx.settlement?.powerStructure?.factions); // TAIL-POWERS-B-4 (P31 (1)): the margins line reads the final roster
++  settleArcaneToPractitioners(finalCtx.settlement?.powerStructure?.factions, finalCtx.settlement); // TAIL-CONTENT-CLOSE-1: practitioners named only where one works magic
+   // TAIL-POWERS-B-2 (P19): a pair the conflicts hold at HIGH, called symbiotic or dependent, names the quarrel (draw-free)
+   if (finalCtx.settlement?.powerStructure) finalCtx.settlement.powerStructure = withConflictRelations(finalCtx.settlement.powerStructure, finalCtx.settlement.conflicts);
+   if (typeof options.onComplete === 'function') {
+diff --git a/src/generators/power/claimStanding.js b/src/generators/power/claimStanding.js
+index c58885e7f..5e9bd771d 100644
+--- a/src/generators/power/claimStanding.js
++++ b/src/generators/power/claimStanding.js
+@@ -17,6 +17,7 @@
+ import { DEFENSE_BUCKET_KEYWORDS } from '../../domain/institutions/defenseInstitutionBuckets.js';
+ import { INSTITUTION_FAMILIES, catalogIdForName, familyNamesByTier } from '../../data/institutionalCatalog.js';
+ import { TAG } from '../../data/entityTags.js';
++import { magicPractitioners } from '../../domain/magicReliance.js';
+ 
+ const SMALL_TIERS = Object.freeze(['thorp', 'hamlet', 'village']);
+ // POWERS-11 (REVIEW-POWERS-3 L2): a rung names no council, no merchant capital and no leading merchant its own roster
+@@ -73,6 +74,13 @@ const ARCANE_ADVISORY = 'Magical practitioners are consulted but not formally em
+ /** TAIL-POWERS-B-2 (the chair's READ-ALL-4 HIGH, vetoable by the owner): where an arcane power GOVERNS, "not formally empowered" is
+  * false of magic; the practitioners outside the seat take this twin, true in that state. */
+ const ARCANE_ADVISORY_UNDER_ARCANE_SEAT = 'Magical practitioners outside the seat hold no office of their own; their influence is advisory and transactional.';
++/** TAIL-CONTENT-CLOSE-1 (2026-11-15, the round's law of a cure): the two advisory lines name practitioners, so they print only where the
++ * town holds one (magicReliance.js :: magicPractitioners, the magic reading's own reader, on the final record); where it holds none the
++ * power's standing takes its twin, said without them. @type {ReadonlyArray<readonly [string, string]>} */
++export const ARCANE_WITHOUT_PRACTITIONERS = Object.freeze([
++  [ARCANE_ADVISORY, 'The arcane interest is consulted but not formally empowered. Its influence is advisory, transactional, and quietly resented.'],
++  [ARCANE_ADVISORY_UNDER_ARCANE_SEAT, 'The arcane interest outside the seat holds no office of its own; its influence is advisory and transactional.'],
++]);
+ // TAIL-POWERS-B-3 batch 7 (P1; row 29025, 8 Suppressed cards of 36 at 4ff449a7b): a Suppressed network "controls" no illicit
+ // trade; it takes this twin, which claims no control.
+ const CRIMINAL_IN_SHADOWS = 'Criminal network operating in shadows; controls illicit trade and profits from the gap between law and enforcement.';
+@@ -194,6 +202,22 @@ export function settleClergyToFinalRoster(factions) {
+   }
+ }
+ 
++/**
++ * THE ARCANE ADVISORY LINES ON THE FINAL RECORD (TAIL-CONTENT-CLOSE-1, 2026-11-15): the lines are written at the power step,
++ * before the town's people and houses are final; read once on the final record (beside settleClergyToFinalRoster), a town
++ * where no one works magic (`magicPractitioners` empty) takes each line's twin (ARCANE_WITHOUT_PRACTITIONERS). Draw-free;
++ * mutates the descriptions in place.
++ * @param {Array<Record<string, any>> | undefined} factions
++ * @param {import('../../domain/magicReliance.js').MagicRelianceSource | null | undefined} record the final settlement record
++ */
++export function settleArcaneToPractitioners(factions, record) {
++  if (!Array.isArray(factions) || !record || magicPractitioners(record).length > 0) return;
++  for (const f of factions) {
++    if (!f || typeof f.desc !== 'string') continue;
++    for (const [said, twin] of ARCANE_WITHOUT_PRACTITIONERS) f.desc = f.desc.replace(said, twin);
++  }
++}
++
+ /**
+  * Each power whose description opens with a commanding claim its final label (Minor, Suppressed) denies takes its
+  * ladder's rung for that label in place of the claim; the rest of the description (a coda another writer added) is
+diff --git a/tests/generators/power/arcanePractitioners.test.js b/tests/generators/power/arcanePractitioners.test.js
+new file mode 100644
+index 000000000..ad27e0b54
+--- /dev/null
++++ b/tests/generators/power/arcanePractitioners.test.js
+@@ -0,0 +1,48 @@
++/**
++ * THE ARCANE ADVISORY LINES NAME PRACTITIONERS ONLY WHERE SOMEONE WORKS MAGIC (TAIL-CONTENT-CLOSE-1, 2026-11-15).
++ *
++ * "Magical practitioners are consulted but not formally empowered …" printed as a power's description in 9 of the
++ * census's 720 births (20 of 245 in the presumed-things walker's corpus) where the magic reading's own reader
++ * (magicReliance.js :: magicPractitioners) finds no one. The line is settled on the final record
++ * (claimStanding.js :: settleArcaneToPractitioners): where no one works magic it takes its twin, said without them.
++ * The anchors are the shipped pairs (ARCANE_WITHOUT_PRACTITIONERS), never a literal sentence.
++ */
++import { beforeAll, describe, expect, it } from 'vitest';
++import { collectSeedFailures, expectNoSeedFailures } from '../../helpers/seedFailures.js';
++import { expectAbsentWithAnchor } from '../../helpers/anchoredNegatives.js';
++import { ARCANE_WITHOUT_PRACTITIONERS } from '../../../src/generators/power/claimStanding.js';
++import { magicPractitioners } from '../../../src/domain/magicReliance.js';
++import { generateSettlementPipeline } from '../../../src/generators/generateSettlementPipeline.js';
++import { birthConfig, loadGenerationLawPayloads } from '../../../src/domain/density/densityCreateBoundary.js';
++import { DEFAULT_CONFIG } from '../../../src/store/configSlice.js';
++
++// the census's own dials (CENSUS-3 seedcfg.mjs, the r2r- arm): the births where the line was measured
++const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true,
++  selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
++const SEEDS = Array.from({ length: 30 }, (_, i) => `r2r-metropolis-${i + 1}`);
++
++/** @param {string} seed */
++const birth = (seed) => generateSettlementPipeline(
++  birthConfig({ ...DEFAULT_CONFIG, ...DIALS, settType: 'metropolis' }), null, { seed, customContent: {} });
++
++describe('the arcane advisory lines read the town\'s practitioners', () => {
++  beforeAll(async () => { await loadGenerationLawPayloads(); });
++
++  it('a town where no one works magic hears the twin; a town with practitioners hears them named', () => {
++    const seen = { none: 0, some: 0 };
++    // seed-loop: collected — every birth is judged, and a red names each seed that printed a false line
++    const failures = collectSeedFailures(SEEDS, (seed) => {
++      const town = birth(seed);
++      const text = (town.powerStructure?.factions || []).map((f) => String(f?.desc || '')).join('\n');
++      const pair = ARCANE_WITHOUT_PRACTITIONERS.find(([said, twin]) => text.includes(said) || text.includes(twin));
++      if (!pair) return;
++      const [said, twin] = pair;
++      if (magicPractitioners(town).length === 0) { seen.none++; expectAbsentWithAnchor(text, said, twin, `${seed}: no one works magic`); }
++      else { seen.some++; expectAbsentWithAnchor(text, twin, said, `${seed}: practitioners stand`); }
++    });
++    expectNoSeedFailures(failures, 'the arcane advisory line reads the practitioners');
++    // both arms live
++    expect(seen.none, 'no town without practitioners printed the line').toBeGreaterThan(0);
++    expect(seen.some, 'no town with practitioners printed the line').toBeGreaterThan(0);
++  }, 120_000);
++});
