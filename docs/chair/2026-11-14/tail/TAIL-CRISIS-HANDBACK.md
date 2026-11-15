@@ -1325,3 +1325,33 @@ amends, by kind, stored untouched / on the roster), `probes/fielddiff.mjs` (by f
 `probes/moved.mjs` (each stake whose reason moved), `probes/veto.mjs` (each new line's towns), `probes/iron2.mjs` (K27).
 THE TAG TREE: a worktree at the base whose `rulingStructure.js` wraps `applyStressEventFactions` (each new power gets
 `__raised`, each amended one `__amended`, `__powerMoved`): births-only over the 720 (about a minute); never committed.
+
+## THE CHAIR'S RULINGS RECEIVED AT THE HAND-BACK (2026-11-15 04:49 to 05:12 UTC; each vetoable by the owner): NOT STARTED, FOR THE NEXT SEAT
+
+These arrived after this seat's batch was pushed and its line sent (read at 05:12, about 64 minutes into the budget; the meter
+read 0). None is begun; nothing was changed for them.
+
+- **(K28, FIRST, PUSHED ALONE)** the temporal dead zone under plain node: `node scripts/wiring-census.mjs --dry` crashes with
+  "Cannot access 'CAST_REASONS' before initialization" at `src/domain/crisis/crisisHooks.js:102`: `const CLAUSE_SAYS = new
+  Set([CAST_REASONS.face, CAST_REASONS.defenderMilitary]);` reads `crisisCast.js`'s binding AT MODULE EVALUATION (line 35
+  imports it), so wherever the cycle enters at `crisisCast.js`, `crisisHooks.js` evaluates first and the read throws. The cure the
+  chair named: the read moves inside its function (build the set on first use), or the two reasons move to a pure leaf both
+  import; nothing a town prints moves (the 720 births byte-identical, `bytecmp.mjs`), `wiring-census --dry` runs to its end,
+  `tests/architecture/layerBoundaries.test.js` no worse. ONE LINE to the chair with the tip. The four "undefined.face"
+  collection crashes (crisisCast ×3, dualHatReaders) are TAIL-TIES-5's (`defenseDisplay.js:895` → `tonightSheet.js`): LEAVE that
+  function and its export in `tonightSheet.js` alone.
+- **(U2) five red files in this area**, each run ALONE at the tip: `tests/domain/crisisBlindDossierProse.test.js` ("expected 21
+  to be ≥ 29"), `crisisBlindWidened.test.js`, `facts/composeBareCrisis.test.js`, `tests/components/crisisStoppedRows.test.jsx`
+  (the renamed rents row "Harvest" has no row in `src/data/crisisDependence.js`: that table and its leaf are LENT),
+  `tests/foundry/journalMarksCrisisRows.test.js` ("- Grain Sales (scarce): 4%"). Each: a regression → cure it; a pin a declared
+  move explains → re-key by identity, naming the move; a cause outside these files → one line here with file and commit (`git
+  log -S`). Never skip, weaken or delete a test. NOTE: none of these files is in the 75 this seat ran (the 10 reds there are the
+  base's); this batch's display cure (K25 c) changes only the stake rows, so `crisisBlindDossierProse`'s count is to be read
+  against it first.
+- **(styleLaw)** `tests/lint/styleLaw.walker.test.js`: the struck word "faction" in `src/data/crisisDependence.js:354`
+  ("Faction information"): if it is a service's catalogue name used as a key, read it from the catalogue (no new literal); if
+  prose, reword; the baseline is not raised.
+- **For every new test:** negatives anchored (`tests/helpers/anchoredNegatives.js`), seed loops through the totality helper, no
+  literal state-prose sentence as an anchor (`tests/helpers/drawnProse.js`); never edit `scripts/mutation-coverage-manifest.json`.
+  This seat's `tailCrisisBatch8.test.js` predates that note: its `not.toContain`/`not.toBe` negatives each sit beside the
+  positive they are anchored to, but are not routed through `anchoredNegatives.js`: the next seat should route them.
