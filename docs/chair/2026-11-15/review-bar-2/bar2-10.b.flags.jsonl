@@ -1,0 +1,3 @@
+{"id":"C18444","town":"bar0-metropolis-calm-rand-4","sev":"MED","kind":"BROKEN","why":"slash label 'Military/Guard' used as one power's name beside 'Backs' verb (brief's own example fault)","other":""}
+{"id":"C20059","town":"bar0-metropolis-calm-rand-4","sev":"MED","kind":"PAIR","why":"says the dean is 'at peace with the seat'; Religious Authorities contests the seat and 'the clergy cannot accept' the Senate's lead","other":"C19775"}
+{"id":"DONE","lines":2756,"blocks":1,"flags":2}
