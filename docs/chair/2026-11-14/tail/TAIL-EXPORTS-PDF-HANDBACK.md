@@ -363,3 +363,20 @@ list through a helper and writes no list; green).
 - 01055 "<N> Trade" (Pilgrim Trade), 17282 (mineral salts headline), 29786 (viability's caravans), 31610 (the crisis
   lede under a governing power), 01241 (a governing power under a void): not reached.
 - The rows PARKED for the leaf's second cause (above).
+
+## For the successor of TAIL-EXPORTS-PDF-2 (handed back at the budget line, 2026-11-15 02:05 UTC; count 337,230)
+
+- The branch's tip is 44d3088b4 (batch 2 on the E16 merge 538c6ea10). No further merge is named: merge only a tip the
+  chair names (the leaf's second cause, "Short of <input>.", is the one awaited; it un-parks the eleven rows above).
+- FIRST ACT: the BEFORE is this seat's AFTER of batch 2 only if the tree is unchanged; this seat's runs were in its
+  scratchpad and are not carried: re-take the census at the tip (`census3.sh <tree> <out> 4`, about 14 minutes of
+  births and render here, 7 of count and trace; the inventory reads only `corpus.ndjson.gz` and `dumps/`, so it can be
+  taken as soon as the render ends) and `SURFACES=PDF,Journal inventory.py`.
+- NEXT, by width: ENTREPÔT 08499 (148; the cure: the tag where a chain on the page is an entrepôt, as the Economics
+  tab's flows say it; it silences 41 small towns whose record flags `isEntrepot` with no entrepôt chain: tell the chair
+  before the push). Then 01055, 17282, 29786, 31610, 01241 (one to four towns each: behind every wider row, the chair's
+  2026-11-15 rule).
+- Instruments: as the predecessor's, above. The probe pattern that saved most reads: a vitest file that births a seed
+  and renders one PDF section by calling its function component (the batch tests' `text()`), writing to a file
+  (console output is silenced in this repo's vitest config).
+- A census run reads the tree it is given live at worker start: never edit the tree while its render runs.
