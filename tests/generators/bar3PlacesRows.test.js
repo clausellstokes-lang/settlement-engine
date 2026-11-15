@@ -215,8 +215,8 @@ describe('BAR3-PLACES-2 batch 2: the origin, the war and the table read the town
  * guild is a faction of the power structure when its history is written and gone by the end of its birth (a late write:
  * the declaration cannot refuse the line at the draw; the self-check now names it, and the late write is named for the chair).
  * THE SIEGE (the chair, 21:45 UTC): its description (stressTypes.js, stressTypesMeta.js) said "Field work and trade have stopped"
- * and the food note (foodBalance.js) that the store "is all there will be", where the food record still grows a part (14 to 43
- * in a hundred) in all 31 siege towns of the 720: trade by road, gate and water stops; a part is still produced.
+ * where the food record still grows a part (14 to 43 in a hundred) in all 31 siege towns of the 720: trade by road, gate and
+ * water stops; a part is still produced. (The siege's food note in foodBalance.js is the economy seat's cure: the chair, 22:27 UTC.)
  */
 describe('BAR3-PLACES-3: the compact and the guild war read the town', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
@@ -235,7 +235,6 @@ describe('BAR3-PLACES-3: the compact and the guild war read the town', () => {
   const CURED = /** @type {Array<[string, string, RegExp, RegExp]>} */ ([
     ['C54896 no shortage claimed where the food record holds none (a secure hamlet)', 'r2r-hamlet-17', /the current shortage makes that clause valuable/, /first refusal on grain sales, and in a lean year that clause is worth fighting over/],
     ['the siege: no field work stopped where a part is still grown (a besieged town)', 'r2s-under_siege-town-0', /Field work and trade have stopped/, /Trade by road, gate and water has stopped, only part of the usual food is still produced here/],
-    ['the siege: the store is not all there will be (a besieged town)', 'r2s-under_siege-town-0', /What is already in store is all there will be until it lifts/, /What is in store, and what can still be raised close by, must last until it lifts\./],
   ]);
   it('the flagged line no longer prints, and its slot says what the record bears (every row)', () => {
     expectNoSeedFailures(collectSeedFailures(CURED, ([id, seed, gone, instead]) => {
@@ -254,7 +253,7 @@ describe('BAR3-PLACES-3: the compact and the guild war read the town', () => {
   /** [row, seed, the true sibling that must still print] */
   const KEEP = /** @type {Array<[string, string, RegExp]>} */ ([
     ["C54896: the compact's other hook stands", 'r2r-hamlet-17', /The original compact was signed under duress; someone wants that history exposed/],
-    ["the siege: the food note's road and farms stand", 'r2s-under_siege-thorp-0', /The siege has cut every road in, and the outlying farms are abandoned or burned\./],
+    ['the siege: its sibling, the famine\'s own description, stands', 'r2s-famine-village-0', /No one can earn a normal living while the famine lasts, and every coin goes on food\./],
   ]);
   it('the true siblings still print (every row)', () => {
     expectNoSeedFailures(collectSeedFailures(KEEP, ([id, seed, kept]) => {
