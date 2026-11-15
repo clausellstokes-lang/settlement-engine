@@ -1,0 +1,17 @@
+{"id":"00658","town":"r2s-under_siege-town-2","sev":"LOW","kind":"STATE","why":"Says Chagatai Arlat and Ghazan Bukhara 'cooperate efficiently'; QUARRELS has Feudal Appointee~Military/Guard competitive, escalating, under a siege.","other":"00018"}
+{"id":"00723","town":"r2s-under_siege-metropolis-3","sev":"LOW","kind":"BROKEN","why":"Nested parentheses in 'the keeper of the house (Brothel (red light district))'; the fragment 'handled by' names no thing handled.","other":""}
+{"id":"00148","town":"r2s-famine-thorp-3","sev":"MED","kind":"STATE","why":"Says part of its trade is done out of sight; INCOME is Harvest 100% with no untaxed or black-market source.","other":""}
+{"id":"00596","town":"r2s-famine-thorp-3","sev":"LOW","kind":"STATE","why":"A famine thorp of 16 'needs' luxury goods; TRADE imports only salt and grain, and hunger is the want.","other":""}
+{"id":"00459","town":"r2s-famine-thorp-2","sev":"LOW","kind":"STATE","why":"'May grumble' understates a Legitimacy Crisis with order eroding from hunger; TENSIONS also has a crime wave with Vigilantes.","other":""}
+{"id":"00460","town":"r2s-famine-thorp-0","sev":"LOW","kind":"STATE","why":"'May grumble' understates a Legitimacy Crisis with order eroding from hunger.","other":""}
+{"id":"00147","town":"r2s-occupied-hamlet-0","sev":"MED","kind":"STATE","why":"Says part of its trade is done out of sight; INCOME is Harvest 100% with no untaxed or black-market source.","other":""}
+{"id":"00281","town":"r2s-occupied-hamlet-0","sev":"LOW","kind":"STATE","why":"'Looks recently built, because most of it was': town is 55 years old and PAST records no fire, siege or flood that would force a rebuild.","other":""}
+{"id":"00458","town":"r2r-hamlet-24","sev":"LOW","kind":"STATE","why":"'May grumble' understates a Legitimacy Crisis (score 1) with order eroding from hunger.","other":""}
+{"id":"00207","town":"r2r-hamlet-28","sev":"MED","kind":"STATE","why":"Stacked barrels of salt fish by the water in a famine whose failed food source is fish; stores are about one month.","other":""}
+{"id":"00150","town":"r2s-famine-village-0","sev":"MED","kind":"STATE","why":"Says part of its trade is done out of sight; INCOME is Harvest 86% and Church Tithes 14%, with no untaxed or black-market source.","other":""}
+{"id":"00586","town":"r2s-famine-village-2","sev":"LOW","kind":"STATE","why":"Ale brewed and sold as usual in a famine whose failed source is grain, stores 0.1 months; ordinary grain brewing under the shortage.","other":""}
+{"id":"00710","town":"r2s-famine-city-3","sev":"MED","kind":"STATE","why":"Hook says iron goes out in rations; the famine's failed source is grain, no iron shortage in CRISIS or TENSIONS, and iron ore is absent from LAND.","other":""}
+{"id":"00009","town":"r2s-famine-city-3","sev":"MED","kind":"STATE","why":"'Three powers stand almost level' but GOVERNMENT shows five powers at Significant and the governing Noble Governorship at Minor.","other":""}
+{"id":"00164","town":"r2s-famine-city-3","sev":"LOW","kind":"STATE","why":"'A real portion' of trade out of sight, open traders disadvantaged; INCOME's Black Market Revenue is only 8%, while a town with 11% prints 'a little'.","other":"00149"}
+{"id":"00406","town":"r2s-famine-city-2","sev":"MED","kind":"STATE","why":"Religious Authorities tell people the Merchant oligarchy's rule is ordained, yet QUARRELS has the two in a high-intensity quarrel over an account of public money.","other":""}
+{"id":"DONE","lines":1750,"blocks":58,"flags":16}
