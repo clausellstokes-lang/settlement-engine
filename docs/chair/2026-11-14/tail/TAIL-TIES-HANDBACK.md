@@ -818,3 +818,20 @@ numbers were not touched.
 **Scratch (this seat's, removable):** the trees `tt8`, `tt8a` (the ruled shape, uncommitted) and `tt8c`, the instruments
 `instr/` and the run files, all in this session's scratchpad. The baseline run's red list is `t0.fails` and the ruled
 shape's is `tA.fails`.
+
+### TAIL-TIES-8: ruling T28 (the chair, 07:12 UTC; the key-only leaf as the fact's home): STOPPED at its condition (2), nothing of A pushed
+- **The measure (CONFIRMED).** The READERS arm (`tests/lint/factLayers.shared.mjs :: readerArm`) skips a line only in a
+  family's `homes`, and those are hard-coded in that test helper's `FAMILIES` table:
+  - crime: `src/domain/crimeSignal.js` and `src/domain/corruption.js`;
+  - market: `src/domain/facts/market.js`.
+- **It never reads `factLayers.js :: LEAVES`.** So a LEAVES row there gives a declared leaf no standing in this arm.
+- **The probe.** The moved ladder was placed at `src/domain/facts/criminalStructure.js` in the scratch tree. The arm
+  counts it as 1 market row (`hasSemiOrg`) and 6 crime rows (`hasGuild`, `hasSyndicate`, `hasSemiOrg`, `hasDiffuse`, the
+  running-chain filter, …), all new rows under the new file. That is the rise T28's condition (2) names.
+- **What stands in the way.** The leaf's lines are the home's only if `FAMILIES` names the leaf as a home of crime (and of
+  market, for the `black market` word), which is an edit to a test file. Otherwise the 7 rows must move file in the
+  register, and the door has only `--shrink`. Both are the chair's or the owner's to rule.
+- **Not done:** the leaf, the `factsOf.js` getter, the `defenseDisplay.js` call and condition (3)'s doc re-addresses.
+  Condition (2) stops first.
+- **Per the ruling:** the cycle `defenseDisplay.js` <-> `factsOf.js` predates the tail (it is red at the line's base). It
+  goes on the owner's list as a named debt. The four court-bench reads (walker (i), `d5839e51`) are another seat's.
