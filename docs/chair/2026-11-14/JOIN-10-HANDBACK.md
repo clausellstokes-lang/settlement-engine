@@ -75,6 +75,7 @@ THE CHAIR'S RULINGS TO JOIN-10 (each vetoable by the owner):
 | # | branch | tip merged (read at the merge, UTC) | merge base | merge commit | conflicts | listed for the close |
 |---|---|---|---|---|---|---|
 | 1 | lane/tail-crisis-2026-11-14 | 573c92b6d (06:50) | f714fb6a5 | b5e508ea9 | none | 11 files outside docs/; declared-move commits: 573c92b6d c08dbb65a fca2cf259 ab49049c8 375a55474 39dd18406 (golden carried) |
+| 2 | lane/tail-close-tests-c-2026-11-15 | 39af70713 (06:54) | f714fb6a5 | 92414b166 | none | 8 files outside docs/; declared-move commits: none (golden carried) |
 
 ## 3. Every code resolution
 
@@ -285,4 +286,4 @@ A worktree at origin's tip (`git worktree add /home/user/j10wt -b join10 <tip>`,
 
 ## 8. WHAT IS LEFT
 
-Ready at ae50369d4 (code tip 3880756f1); no point landed yet. For the next merge seat: the chair's LAND words; JOIN-9's stop at its point 17 (crisis at 325de5153) waits for its seat and the chair's word.
+Landed through point 2 (see the table); waiting on the chair's LAND words. JOIN-9's stop at its point 17 (crisis) ANSWERED by point 1 (573c92b6d, settled on its branch).
