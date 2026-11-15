@@ -1,27 +1,27 @@
 # The owner's veto list
 
-> **Not yet covered:** DRAFT 1, pushed early. Not yet in this document: the powers hand-backs (two) and the houses hand-back may be missing or partial; the merge hand-backs (JOIN) and the chair's own rulings are still being read; the later hand-backs the chair will send (people, houses, presumed things, reach instruments, doors, layer cut, source seat) are not yet added. In the appendix table, rows marked MISSING are lines not yet accounted for. Item numbers will change in the next draft.
+> **Not yet covered:** DRAFT 2. Covered: all 22 cure hand-backs and the 9 close hand-backs. Not yet covered: the merge hand-backs (JOIN) and the chair's own rulings are still being read, so the appendix rows for those files read MISSING and a few items from them may be added; the later hand-backs the chair will send (people, houses, presumed things, reach instruments, doors, layer cut, source seat) are not yet added. Item numbers may change in the next draft.
 
 **Summary (read this first)**
 
-- Part A (what a page says): 479 items. Part B (checks retired or reshaped): 92. Part C (lists or ceilings grown by ruling): 13. Part D (still wrong, left for later): 286. Part E (the owner's alone): 100. Total: 970.
+- Part A (what a page says): 539 items. Part B (checks retired or reshaped): 105. Part C (lists or ceilings grown by ruling): 13. Part D (still wrong, left for later): 314. Part E (the owner's alone): 110. Total: 1081.
 - The five widest changes to a page, by sample towns touched (the sample is a fixed set of 720 generated towns):
-  - Item 263: The Foundations and Summary line 'Public legitimacy' now prints the Power tab's own label (Legitimacy crisis, Contested, Tolerated, Approved, Endorsed). (720 of 720 sample towns had a legitimacy row that differed from the record; the five labels now print in 278, 149, 135, 90 and 68 towns (the hand-back does not say which count belongs to which label)).
-  - Item 178: The two sentences about threat bars now say the table's campaign: 'is re-judged as your campaign goes on'. (720 of 720 sample towns (two sentences, each in all 720)).
-  - Item 449: The PDF's Defense & Security caption takes the same new words as the tab ('your campaign goes on'), and the PDF's Overview reads the same constant. The helper calls this its own judgment, because the file was not named as lent. (720 of 720 sample towns).
-  - Item 319: In the PDF Overview, the line "Reason settled: <the origin line>" now reads "Settlement Origin: <the origin line>". (720 of 720 sample towns).
-  - Item 320: In the Foundry journal's Overview page, the heading "Why this place exists" now reads "Settlement Origin". (720 of 720 sample towns).
+  - Item 265: The Foundations and Summary line 'Public legitimacy' now prints the Power tab's own label (Legitimacy crisis, Contested, Tolerated, Approved, Endorsed). (720 of 720 sample towns had a legitimacy row that differed from the record; the five labels now print in 278, 149, 135, 90 and 68 towns (the hand-back does not say which count belongs to which label)).
+  - Item 180: The two sentences about threat bars now say the table's campaign: 'is re-judged as your campaign goes on'. (720 of 720 sample towns (two sentences, each in all 720)).
+  - Item 509: The PDF's Defense & Security caption takes the same new words as the tab ('your campaign goes on'), and the PDF's Overview reads the same constant. The helper calls this its own judgment, because the file was not named as lent. (720 of 720 sample towns).
+  - Item 368: In the PDF Overview, the line "Reason settled: <the origin line>" now reads "Settlement Origin: <the origin line>". (720 of 720 sample towns).
+  - Item 369: In the Foundry journal's Overview page, the heading "Why this place exists" now reads "Settlement Origin". (720 of 720 sample towns).
 - Every change here was made on the understanding that the owner may veto it. Each item says what a veto would do.
 - "Count not recorded" means the seat's hand-back gave no town count. Where two hand-backs disagree, both numbers are given.
 - Technical handles in square brackets at the end of each item are for the engineer who would carry out a veto.
 - The last section is a table that accounts for every line of the hand-backs that mentions a veto or the owner.
 - Nothing on this list has been merged or deployed; the merge, the deploy and every database migration remain the owner's.
 
-## Part A. Changes to what a town's page says (479 items)
+## Part A. Changes to what a town's page says (539 items)
 
 Each item is one change to what a page prints. The widest (most sample towns) come first within each page area.
 
-### Economy and trade (136 items)
+### Economy and trade (137 items)
 
 **1. The Nearby Resources chips now print the catalogue's own name for each resource; 23 of the catalogue's 33 names differ from the old words.**
 
@@ -360,8 +360,8 @@ Each item is one change to what a page prints. The widest (most sample towns) co
   | Before | After | Towns |
   |---|---|---|
   | A guild of professional cartographers producing regional maps, sea charts, property surveys, and military reco... | – | 64 |
-  | – | – | 55 |
-  | – | – | 57 |
+  | second variant; its old sentence is not quoted in the hand-back | – | 55 |
+  | third variant; its old sentence is not quoted in the hand-back | – | 57 |
   | – | Professional cartographers, guild-organised, producing regional maps, property surveys, and reconnaissance maps for the army. | 48 |
   | – | A guild of professional cartographers producing regional maps, property surveys, and military reconnaissance maps. | 51 |
   | – | A guild of professional cartographers turning out regional maps, property surveys, and military reconnaissance. | 48 |
@@ -1254,7 +1254,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 **86. The Woodcutter's camp sentences now say the camp's whole living is timber and its carting, instead of "keeps the place alive".**
 
 - Towns touched: 9 of 720 sample towns for each sentence; 3 true lines replaced.
-- Why: Timber is in none of the income sources in 15 of 18 printing towns, because the harvest is most of the income.
+- Why: The old sentences said timber keeps the place alive, but timber is in none of the income sources in 15 of 18 printing towns (the harvest is most of the income).
 - If vetoed: The old sentences return; 3 true lines were replaced.
 - Every form:
 
@@ -1623,7 +1623,16 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The "Salt Sales" row returns in those 4 towns.
 - [TAIL-DEFECON-C seat; ruling D25; commit 28f86423c; src/generators/computeActiveChains.js, src/generators/economy/economicState.js]
 
-**120. Nine tie lines between a trader and a military figure that said "{B}'s company" or "under the watch's command" now say "{B}'s people" or name the council.**
+**120. In wartime, a thieves' guild's card no longer says trade disruption is hurting its bottom line; it says shortage and requisition have pushed trade into the black market where the guild takes its cut.**
+
+- Towns touched: 4 of 720 sample towns.
+- Before: “Trade disruption and requisition are hurting the bottom line.”
+- After: “Shortage and requisition have pushed trade into the black market, where the guild takes its cut.”
+- Why: The wartime merchant branch matched the word "guild" in "Thieves' Guild" (4 cards in 4 towns), whose crisis stake says it gains.
+- If vetoed: The old line would print again on those 4 cards.
+- [TAIL-POWERS-B seat 4; ruling P31 (6); d99bce57a; src/generators/power/stressFactions.js]
+
+**121. Nine tie lines between a trader and a military figure that said "{B}'s company" or "under the watch's command" now say "{B}'s people" or name the council.**
 
 - Towns touched: 1 to 4 of 720 sample towns each, 9 lines (to 0 each); false in 1 to 4 towns.
 - Before: “{B}'s company”
@@ -1642,7 +1651,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-TIES-4 batch 1; rows 00899, 20323, 01624, 02650, B01441, B01440, B01442 and two unnumbered; ruling T19; 14724c194; src/data/npcData.js STRESS_ECONOMIC_EFFECTS]
 
-**121. The "Produced locally" row no longer prints in 3 towns.**
+**122. The "Produced locally" row no longer prints in 3 towns.**
 
 - Towns touched: 1 town (r2r-village-5), then 2 more (r2r-village-57, r2s-mass_migration-hamlet-1); count of the row printing: 658 to 657, then 657 to 655.
 - Before: “Produced locally (row printed)”
@@ -1650,7 +1659,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The row returns in those towns, listing goods the hand-back found no house to make.
 - [TAIL-DEFECON-C seat; commits 358d6afea, 6ce176aff; C1-A, D30 (b); src/generators/computeActiveChains.js, src/generators/economy/economicState.js]
 
-**122. Three towns gain an export pill after the cleanup.**
+**123. Three towns gain an export pill after the cleanup.**
 
 - Towns touched: 3 towns: r2s-wartime-town-0, r2r-village-4, r2r-hamlet-44.
 - After: “Dyed cloth (r2s-wartime-town-0, a Dyer stands) / Preserved foods (r2r-village-4, cheese and butter by a Dairy farmer) / Processed grain (r2r-hamlet-44, a Maltster)”
@@ -1658,7 +1667,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DEFECON-C seat; ruling D33; commit 0e838bc65; src/generators/computeActiveChains.js, src/generators/economy/economicState.js]
 
-**123. The warning that banks stand but the city does little trade no longer prints where the town has four or more exports.**
+**124. The warning that banks stand but the city does little trade no longer prints where the town has four or more exports.**
 
 - Towns touched: 3 of 720 sample towns.
 - Before: “Banks stand here, but the city does little trade.  /  Its banks find little business to do.”
@@ -1666,7 +1675,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence would return in those towns, including where it is false.
 - [TAIL-DEFECON-3; commit 2ac50c55d; src/generators/economy/incomeLineSiblings.js and neighbours]
 
-**124. The line about tolls taken at the gate no longer prints in 2 towns.**
+**125. The line about tolls taken at the gate no longer prints in 2 towns.**
 
 - Towns touched: 2 of 720 sample towns (9 to 7): r2r-town-20, r2s-plague_onset-town-1.
 - Before: “Also earned, with no share recorded: Tolls, taken at the gate on the road traffic.”
@@ -1674,7 +1683,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The line returns in those 2 towns, with no gate house.
 - [TAIL-DEFECON-C seat; commit a10a457e2; C1-E; src/generators/computeActiveChains.js, src/generators/economy/economicState.js]
 
-**125. The quarry line has a second version where no stone is sold out of town.**
+**126. The quarry line has a second version where no stone is sold out of town.**
 
 - Towns touched: 2 of 720 sample towns.
 - Before: “Local quarry provides dressed stone to regional builders …”
@@ -1683,7 +1692,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence would return in those towns, including where it is false.
 - [TAIL-DEFECON-3; commit 2ac50c55d; src/generators/economy/incomeLineSiblings.js and neighbours]
 
-**126. Two military-focus notes about a processing gap no longer print.**
+**127. Two military-focus notes about a processing gap no longer print.**
 
 - Towns touched: 2 of 720 sample towns.
 - Before: “Military focus highlights gap: mountain_timber processing is incomplete, strategic vulnerability.  /  Military focus highlights gap: iron ore processing is incomplete, strategic vulnerability.”
@@ -1691,7 +1700,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The two notes would return in those 2 towns.
 - [TAIL-DEFECON-R; commit 5a446d29b (M-S); src/generators/resourceGenerator.js]
 
-**127. The sentence about the trade that plainly goes on no longer prints in towns under siege.**
+**128. The sentence about the trade that plainly goes on no longer prints in towns under siege.**
 
 - Towns touched: 2 of 720 sample towns (a siege) lose it; 20 to 18 print it.
 - Before: “the trade that plainly goes on there”
@@ -1699,7 +1708,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The sentence returns in those 2 besieged towns, where it is false.
 - [TAIL-CORPUS-ECO; DS-ECO-6 significant off-book v5; C1 C2; 29271e7bf (after run); src/data/dossierStateProse/economy.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**128. The sentence 'Goods come, goods go' no longer prints in towns under plague.**
+**129. The sentence 'Goods come, goods go' no longer prints in towns under plague.**
 
 - Towns touched: 2 of 720 sample towns (a plague) lose it; 43 to 41 print it.
 - Before: “Goods come, goods go”
@@ -1707,7 +1716,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The sentence returns in those 2 plague towns, where it is false.
 - [TAIL-CORPUS-ECO; POSTURE entrepot v3 (DS-ECO-10); C1 C2; 29271e7bf (after run); src/data/dossierStateProse/economy.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**129. The sentence saying the market handles more than the town could ever use no longer prints in towns under plague.**
+**130. The sentence saying the market handles more than the town could ever use no longer prints in towns under plague.**
 
 - Towns touched: 2 of 53 printing sample towns lose it; 53 to 51 print it.
 - Before: “market handles more than the town could ever use”
@@ -1715,7 +1724,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The sentence returns in those 2 plague towns, where it is false.
 - [TAIL-CORPUS-ECO-3; DS-GEN-13 ENTREPOT v1 (rows 01563 B01502); 84a41a687 (after run); src/data/dossierStateProse/general.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**130. The herb card of r2r-village-8 moves from "Unexploited" to "Partial".**
+**131. The herb card of r2r-village-8 moves from "Unexploited" to "Partial".**
 
 - Towns touched: 1 town: r2r-village-8.
 - Before: “herb card: Unexploited”
@@ -1724,7 +1733,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DEFECON-C seat; ruling D34; commit 680d16b54; validationOnPage.js, resourceGenerator.js; src/generators/computeActiveChains.js, src/generators/economy/economicState.js]
 
-**131. The advice to add craft guilds names only the crafts the town lacks.**
+**132. The advice to add craft guilds names only the crafts the town lacks.**
 
 - Towns touched: 1 of 720 sample towns.
 - Before: “Add craft guilds: smiths, weavers, tanners, etc.”
@@ -1733,7 +1742,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence would return in those towns, including where it is false.
 - [TAIL-DEFECON-3; commit 2ac50c55d; src/generators/economy/incomeLineSiblings.js and neighbours]
 
-**132. The sentence 'has money to spend, and spends it' no longer prints in indebted towns.**
+**133. The sentence 'has money to spend, and spends it' no longer prints in indebted towns.**
 
 - Towns touched: 1 of 32 printing sample towns loses it; 32 to 31 print it.
 - Before: “has money to spend, and spends it”
@@ -1741,7 +1750,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The sentence returns in that indebted town, where it is false.
 - [TAIL-CORPUS-ECO-3; DS-ECO-8 PROSPEROUS v1; C13 C; 84a41a687 (after run); src/data/dossierStateProse/economy.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**133. In the one town with a fish market and no tavern, the fish market's wholesale row now has a second version of the line.**
+**134. In the one town with a fish market and no tavern, the fish market's wholesale row now has a second version of the line.**
 
 - Towns touched: 1 of 720 sample towns (r2r-thorp-50); the other 118 keep the old sentence.
 - Before: “Bulk purchase by taverns, institutions, and inland traders.”
@@ -1750,7 +1759,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The tavern sentence returns in that town, where it is false.
 - [TAIL-SERVICES-3; ruling S11; e35851db1; src/data/institutionServices.js, docs/census/declarations/institutionServices.INSTITUTION_SERVICES.json]
 
-**134. Under a siege the money changer sits with little to do instead of doing business as usual.**
+**135. Under a siege the money changer sits with little to do instead of doing business as usual.**
 
 - Towns touched: 0 of 720 sample towns (the sentence printed in 5 sample towns, none under siege); it is reached only under a siege.
 - Before: “A money changer sits at his table with coins from many mints.”
@@ -1759,7 +1768,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns under a siege, including where it is false; no sample town is affected.
 - [TAIL-HISTORY-5; ruling Y17 (3); batch 6, ed9f3b549; src/data/arrivalProse.js]
 
-**135. Under a siege the line about cloth looms working through the whole place gives way to a loom clattering behind a shutter, with no cloth going out.**
+**136. Under a siege the line about cloth looms working through the whole place gives way to a loom clattering behind a shutter, with no cloth going out.**
 
 - Towns touched: 0 of 720 sample towns (the cloth-loom line printed in 23 sample towns, none under siege; 23 of 201 extra siege test towns printed it).
 - After: “Here and there a loom still clatters behind a shutter in {n}, though no cloth has gone out in weeks.”
@@ -1767,16 +1776,16 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old line returns under a siege, including where it is false; no sample town is affected.
 - [TAIL-HISTORY-5; ruling Y17 (3); batch 6, ed9f3b549; src/data/arrivalProse.js]
 
-**136. An iron hook now prints only in towns whose import list holds iron.**
+**137. An iron hook now prints only in towns whose import list holds iron.**
 
 - Towns touched: count not recorded (two example hamlets, r2r-hamlet-35 and r2r-hamlet-30, now print no iron hook).
 - Why: A hook about iron printed where the town imports none (reason as the hand-back gives it: a declared move of the economy family).
 - If vetoed: The iron hook returns in towns that import no iron.
 - [TAIL-DEFECON-3; declared move commit 2ac50c55; reported by TAIL-CLOSE-TESTS-B]
 
-### Food and stores (41 items)
+### Food and stores (42 items)
 
-**137. Three sentences calling one food source 'the whole' are reworded to say it comes first among others.**
+**138. Three sentences calling one food source 'the whole' are reworded to say it comes first among others.**
 
 - Towns touched: 112, 151 and 93 of 720 sample towns draw the three versions; 283 of the 356 sit beside a farm house or farm income.
 - After: “{settlement}'s own food comes first of all from its {good}, so one bad year for the {good} is felt across the whole town. / Of the food {settlement} raises for itself, its {good} comes first, and after a poor season for the {good} there is less to go round. / {settlement} leans first on its {good} for its food, so a bad season for the {good} is felt at every table.”
@@ -1792,7 +1801,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-CORPUS-ECO-4; DS-ECO-9 FOOD SOURCES one source v1 v2 v3; C20; 4467cd7d6 (base); src/data/dossierStateProse/economy.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**138. The PDF Overview's food line now reads the Economics tab's food row: "Deficit: N · imports cover N% of gap" and the magical or divine provision follow the tab.**
+**139. The PDF Overview's food line now reads the Economics tab's food row: "Deficit: N · imports cover N% of gap" and the magical or divine provision follow the tab.**
 
 - Towns touched: "Deficit: #" 274 to 306 of 720 sample towns; "imports cover N% of gap" 255 to 252; "divine provision covers #" 82 to 50, 32 of these now read "magical provision covers #".
 - Before: “imports cover N% of gap”
@@ -1801,7 +1810,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The Overview's own figures return, beside the tab's own row, which says something else.
 - [TAIL-EXPORTS-PDF; rulings E1 P1; batch 1; tip 1ed03ef1e (base 48fedbe98); src/pdf/sections/Overview.jsx; src/domain/display/foodCarrier.js; row 32248]
 
-**139. The food-endurance line now gives the span in the same words as the stores row ("about a month and a half", "about three days", "about two and a half months"); year words are kept.**
+**140. The food-endurance line now gives the span in the same words as the stores row ("about a month and a half", "about three days", "about two and a half months"); year words are kept.**
 
 - Towns touched: 282 of 720 sample towns.
 - Before: “… household stores would carry the thorp for about two months …”
@@ -1810,7 +1819,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old words would return and disagree with the stores row.
 - [TAIL-DEFECON-D; commit d98f781f3; src/domain/display/defenseDisplay.js, src/domain/display/dossierViewModel.js]; ruling D2
 
-**140. The food sentence now says its shares are 'of what it needs' instead of 'of what it eats'.**
+**141. The food sentence now says its shares are 'of what it needs' instead of 'of what it eats'.**
 
 - Towns touched: 259 of 720 sample towns (370 printings, 36 folds of the sentence).
 - Before: “X grows about … of what it eats, and carts bring in … of the rest.”
@@ -1826,7 +1835,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-DISPLAY-ECON-2; X12; rows 00600, 12888; src/components/tabs/EconomicsTab.jsx foodSentence]
 
-**141. The food shortfall figures in the viability summary are now the same as the Economy tab (for example "~65 lbs" for "~66"), and a tiny shortfall never reads 0 percent.**
+**142. The food shortfall figures in the viability summary are now the same as the Economy tab (for example "~65 lbs" for "~66"), and a tiny shortfall never reads 0 percent.**
 
 - Towns touched: 226 of 720 sample towns.
 - Before: “Settlement cannot cover ~66 lbs …  /  ~1881  /  There are more mouths to feed, but the shortfall is still made up.”
@@ -1843,7 +1852,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-DEFECON-5; commit 7ce6db273 and e1577f2cd; src/generators/economy/foodBalance.js; ruling R3 of the chair, 2026-11-15 04:40]
 
-**142. When the food record's band is Secure, the short-of-food line now reads 'Between them, nearly every household is fed, and a bad season would leave some of them short.'**
+**143. When the food record's band is Secure, the short-of-food line now reads 'Between them, nearly every household is fed, and a bad season would leave some of them short.'**
 
 - Towns touched: 178 of 720 sample towns; the old line fell from 183 to 6 (the Pressured six).
 - Before: “A few households still go short, and a bad season would leave more of them hungry.”
@@ -1860,7 +1869,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-DISPLAY-ECON-5; X31; commit a4cd78c81; src/components/tabs/EconomicsTab.jsx shortWords]
 
-**143. Six Fish market sentences now say the catch is sold "whenever fish can be had" and no longer say that fresh or carted salt fish is weighed out.**
+**144. Six Fish market sentences now claim the fresh catch or the carted salt fish only "whenever fish can be had".**
 
 - Towns touched: up to 58 of 720 sample towns for one sentence; the plain line was true in 72 of 104 towns that now print the reworded one.
 - Why: The old sentences described a catch in towns where the fisheries are spent (false in 32 of 104) and carted salt fish where no fish is imported (false in 152 of 152).
@@ -1885,7 +1894,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [third houses seat; ruling H7; src/data/institutionDescVariants.js; guard tests/data/tailHouses5ExportsTerrain.test.js]
 
-**144. The hamlet's outside grain mill no longer says it is the lord's or manor's mill held by an old right ("banalité") and now says "Grain is taken out of the hamlet to be ground." and similar; the lord's mill right is silent in the 16 lord-ruled hamlets.**
+**145. The hamlet's outside grain mill no longer says it is the lord's or manor's mill held by an old right ("banalité") and now says "Grain is taken out of the hamlet to be ground." and similar; the lord's mill right is silent in the 16 lord-ruled hamlets.**
 
 - Towns touched: up to 44 of 720 sample towns for one sentence; false in 104 of 120 hamlets.
 - Why: The old sentences named the lord's mill where the ruler is not a lord: false in 104 of 120 hamlets.
@@ -1901,7 +1910,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [third houses seat; ruling H7; src/data/institutionalCatalog.js, src/data/institutionDescVariants.js, src/data/institutionDescColour.js]
 
-**145. The Fisher's landing's three sentences now say the catch is landed and cured "whenever fish can be had".**
+**146. The Fisher's landing's three sentences now say the catch is landed and cured "whenever fish can be had".**
 
 - Towns touched: up to 31 of 720 sample towns for one sentence; false in 12 of 76 landings; the hedge replaced a true line in 64 towns.
 - Why: The old sentences said the landing handles a catch where the town's fisheries are spent and none live (12 of 76 landings).
@@ -1916,7 +1925,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [fourth houses seat (TAIL-HOUSES-4); ruling H17; src/data/institutionalCatalog.js, src/data/institutionDescVariants.js; guard tests/data/tailHouses6FishersLanding.test.js]
 
-**146. A sentence about food carts coming in most days is reworded to say food comes in most days.**
+**147. A sentence about food carts coming in most days is reworded to say food comes in most days.**
 
 - Towns touched: 23 of 66 printing sample towns were wrong; 66 print it.
 - Before: “Food carts come into X most days”
@@ -1925,7 +1934,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence comes back in those towns, including where it is false.
 - [TAIL-CORPUS-ECO-2; DS-ECO-9 HOW THE NEED much brought in v1; C1; bb4c95eb8 (after run); src/data/dossierStateProse/economy.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**147. A river fishery no longer counts as a source of salt; those towns list salt as imported instead.**
+**148. A river fishery no longer counts as a source of salt; those towns list salt as imported instead.**
 
 - Towns touched: 59 of 720 sample towns (the list of resources); 50 made lists, 29 needs lists, 25 import lists.
 - Why: A river fishery does not make salt (ruling D34).
@@ -1942,7 +1951,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-DEFECON-C seat; ruling D34 (chair 03:20 UTC); commit 680d16b54; src/data/resourceData.js commodities; src/generators/computeActiveChains.js, src/generators/economy/economicState.js]
 
-**148. The Outlook line "Much of what <N> eats is brought in" now says "Some of what <N> eats …".**
+**149. The Outlook line "Much of what <N> eats is brought in" now says "Some of what <N> eats …".**
 
 - Towns touched: 53 of 720 sample towns print the new wording (30, 6 and 3 were false).
 - Before: “Much of what <N> eats is brought in <route>; its own land does not produce enough.”
@@ -1951,7 +1960,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence would return in those towns, including where it is false.
 - [TAIL-DEFECON-D; commit d98f781f3; src/domain/display/defenseDisplay.js, src/domain/display/dossierViewModel.js]; ruling D11
 
-**149. The Outlook line about the food difference arriving by road now says "part of the difference".**
+**150. The Outlook line about the food difference arriving by road now says "part of the difference".**
 
 - Towns touched: 43 of 720 sample towns print the new wording (26 were false).
 - Before: “<N> grows less than it eats, and the difference arrives by road.”
@@ -1960,7 +1969,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence would return in those towns, including where it is false.
 - [TAIL-DEFECON-D; commit d98f781f3; src/domain/display/defenseDisplay.js, src/domain/display/dossierViewModel.js]
 
-**150. The food note heading "Crisis Cutting the Food Supply" becomes "Crisis Adding Mouths to Feed" where the crisis adds mouths (occupiers or newcomers).**
+**151. The food note heading "Crisis Cutting the Food Supply" becomes "Crisis Adding Mouths to Feed" where the crisis adds mouths (occupiers or newcomers).**
 
 - Towns touched: 41 of 720 sample towns (the heading prints in 106 towns).
 - Before: “Crisis Cutting the Food Supply”
@@ -1969,7 +1978,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence would return in those towns, including where it is false.
 - [TAIL-DEFECON-4; commit b40f795b2; src/generators/economy/foodBalance.js, resourceGenerator.js, incomeLineSiblings.js]
 
-**151. The note about the lord's mill is reworded in 40 small towns and stays printed.**
+**152. The note about the lord's mill is reworded in 40 small towns and stays printed.**
 
 - Towns touched: 40 of 720 sample towns (15 thorps, 25 hamlets).
 - Before: “Grain is processed at the lord's mill under feudal monopoly (banalité). Local food security is maintained but surplus flour cannot be exported: the mill toll takes any surplus. Without the lord's mill, there would be no flour at all.”
@@ -1978,7 +1987,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old note returns in those 40 towns, including where there is no lord or mill.
 - [TAIL-DEFECON-C seat; rows 15738, 11365, 31448; commit e44627128; PDF Services section; src/generators/computeActiveChains.js, src/generators/economy/economicState.js]
 
-**152. Under a famine, a row that lives on the food that failed (grain, livestock, fish or game) now starts with the mark "Scarce in the famine.", on both tabs.**
+**153. Under a famine, a row that lives on the food that failed (grain, livestock, fish or game) now starts with the mark "Scarce in the famine.", on both tabs.**
 
 - Towns touched: 40 of 720 sample towns (40 of the 44 famine towns; the other four print no row of the failed food; 58 service rows and 54 house rows marked; 0 marked in calm towns). The PDF hand-back counts 41 famine towns for the related head line..
 - After: “Scarce in the famine. Grain carted to a mill outside the settlement…”
@@ -1986,7 +1995,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The marked rows would print without the mark, as before this batch (the hand-back says neither tab read the crisis on a row before); the description of ordinary times would print again in those towns, including where it is false.
 - [TAIL-SERVICES; ruling S1; 73291c8e2; src/data/crisisDependence.js, src/domain/display/crisisStoppedRow.js, src/components/new/tabs/ServicesTab.jsx, src/components/new/tabs/InstitutionsTab.jsx]
 
-**153. In thorps and hamlets the line about controlled goods (grain, salt, preserved meat) has a second version that names no food.**
+**154. In thorps and hamlets the line about controlled goods (grain, salt, preserved meat) has a second version that names no food.**
 
 - Towns touched: 36 of 720 sample towns (thorps and hamlets).
 - Before: “Controlled goods (grain, salt, preserved meat) … through unofficial channels”
@@ -1995,7 +2004,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence would return in those towns, including where it is false.
 - [TAIL-DEFECON batch 1; commit 6b8a9b993; src/generators/safetyProfile.js, src/generators/safetyLineTruth.js]
 
-**154. Chain notes about food made by magic no longer print on an economy card or on the Magic tab in towns where the food record shows no provision by magic.**
+**155. Chain notes about food made by magic no longer print on an economy card or on the Magic tab in towns where the food record shows no provision by magic.**
 
 - Towns touched: up to 35 of 720 sample towns printed each line before; each line fell as shown in the rows.
 - Before: “Blessed stores; divine provision fills the gap”
@@ -2025,14 +2034,14 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-DISPLAY-ECON batch 1; X3; src/domain/display/magicProvisionShown.js magicNoteShown, foodMagicShare]
 
-**155. Fishing grounds make salt on the "Produced locally" list only where a Salt works stands.**
+**156. Fishing grounds make salt on the "Produced locally" list only where a Salt works stands.**
 
 - Towns touched: 25 of 720 sample towns (salt leaves 23; 2 reorder). The predecessor's count was 21, taken with other house tests; with the ruling's letter it would be 61.
 - Why: Fishing grounds do not make salt without a salt works (ruling D34).
 - If vetoed: Salt returns to the list in 23 towns with no salt works.
 - [TAIL-DEFECON-C seat; ruling D34; commit after 680d16b54 ("D34 (b)"); src/generators/computeActiveChains.js, src/generators/economy/economicState.js]
 
-**156. A sentence saying the town grows a little less food than it needs is reworded to say it falls a little short and tightens belts.**
+**157. A sentence saying the town grows a little less food than it needs is reworded to say it falls a little short and tightens belts.**
 
 - Towns touched: 19 of 25 printing sample towns were wrong; 25 print it.
 - Before: “grows a little less food than it needs”
@@ -2041,7 +2050,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence comes back in those towns, including where it is false.
 - [TAIL-CORPUS-ECO-2; DS-ECO-9 PRESSURED v1; C1; bb4c95eb8 (after run); src/data/dossierStateProse/economy.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**157. The famine hook 'The settlement is starving, and its hungriest are turning to banditry' no longer prints in towns under siege; they get a new line.**
+**158. The famine hook 'The settlement is starving, and its hungriest are turning to banditry' no longer prints in towns under siege; they get a new line.**
 
 - Towns touched: 24 of 720 sample towns printed the old line; the new line prints in 7.
 - Before: “The settlement is starving, and its hungriest are turning to banditry.”
@@ -2050,7 +2059,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old line returns in the besieged famine towns.
 - [TAIL-CRISIS; batch 1; 21965; src/generators/economy/outlookHookSiblings.js]
 
-**158. The slave-revolt harvest line no longer says nobody is bringing in the harvest.**
+**159. The slave-revolt harvest line no longer says nobody is bringing in the harvest.**
 
 - Towns touched: 24 of 720 sample towns (slave revolt).
 - Before: “With the enslaved workers in revolt, the outlying fields lie idle and nobody is bringing in the harvest.”
@@ -2059,7 +2068,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence would return in those towns, including where it is false.
 - [TAIL-DEFECON-4; commit b40f795b2; src/generators/economy/foodBalance.js, resourceGenerator.js, incomeLineSiblings.js]
 
-**159. The timber note 'Druidic forest management accelerates regrowth and sustainable yield' now reads as a second version of the line on a ground the record holds depleted: 'speeds the regrowth of the cleared woodland'.**
+**160. The timber note 'Druidic forest management accelerates regrowth and sustainable yield' now reads as a second version of the line on a ground the record holds depleted: 'speeds the regrowth of the cleared woodland'.**
 
 - Towns touched: 22 of 720 sample towns (48 of the 49 cards that print the note).
 - Before: “Druidic forest management accelerates regrowth and sustainable yield”
@@ -2078,7 +2087,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-DISPLAY-ECON-3; row 23037; commit 53e295e5a; src/domain/display/magicProvisionShown.js magicNoteShown]
 
-**160. The salt fish arrival line no longer mentions carts and says the gulls have opinions about every barrel.**
+**161. The salt fish arrival line no longer mentions carts and says the gulls have opinions about every barrel.**
 
 - Towns touched: 18 of 720 sample towns (r2r-hamlet-17, r2r-thorp-58 and r2s-under_siege-hamlet-0 read).
 - Before: “Barrels of salt fish stand stacked for the carts…”
@@ -2087,7 +2096,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: effect not stated in the hand-back
 - [TAIL-HISTORY; batch 1; src/data/arrivalProse.js]
 
-**161. On the Tonight sheet the stores line now says what a famine or a siege is doing to the grain. The Economics tab was not changed and still prints the old line.**
+**162. On the Tonight sheet the stores line now says what a famine or a siege is doing to the grain. The Economics tab was not changed and still prints the old line.**
 
 - Towns touched: 16 of 720 sample towns on the Tonight sheet (13 'and the siege is eating into them', 3 'and the famine is eating into them'); the line printed in 350.
 - Before: “Stores: a granary, about five months of grain.”
@@ -2103,7 +2112,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-CRISIS, TAIL-CRISIS-2; K1, K4, K7; 18671; 5e75be951; src/domain/summary/tonightSheet.js]
 
-**162. The Economics tab's stores line now says the crisis is eating into the stores (the crisis helper's words, already on the Tonight sheet) under a siege or a famine.**
+**163. The Economics tab's stores line now says the crisis is eating into the stores (the crisis helper's words, already on the Tonight sheet) under a siege or a famine.**
 
 - Towns touched: 16 of 720 sample towns (13 sieges with a gap, 3 famines); the old line fell from 350 to 334 towns.
 - Before: “Stores: a granary, about # months of grain.”
@@ -2112,7 +2121,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: the old stores line returns in the 16 towns, including where the crisis is eating into the stores
 - [TAIL-DISPLAY-ECON-3; X21; commit 53e295e5a; src/components/tabs/EconomicsTab.jsx foodStoresWords]
 
-**163. The Outlook line has a second version where nothing is bought in.**
+**164. The Outlook line has a second version where nothing is bought in.**
 
 - Towns touched: 14 of 720 sample towns (the line prints in 161).
 - Before: “<N> gets through the year, buying in what its own land and trades do not provide.”
@@ -2121,7 +2130,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence would return in those towns, including where it is false.
 - [TAIL-DEFECON-D; commit d98f781f3; src/domain/display/defenseDisplay.js, src/domain/display/dossierViewModel.js]; ruling D2
 
-**164. The same timber note reads 'Druidic tending speeds the regrowth of the depleted ground' on a marsh, where there is no forest.**
+**165. The same timber note reads 'Druidic tending speeds the regrowth of the depleted ground' on a marsh, where there is no forest.**
 
 - Towns touched: 9 of 720 sample towns (the Reed & Marsh Harvest card).
 - Before: “Druidic forest management accelerates regrowth and sustainable yield”
@@ -2136,7 +2145,16 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-DISPLAY-ECON-3; commit 53e295e5a; src/domain/display/magicProvisionShown.js]
 
-**165. The sentence saying the rest of the food comes in from the farms and from trade no longer prints in towns under famine.**
+**166. The bread hook no longer says a baker was told to raise the price; it says one of the sellers was.**
+
+- Towns touched: 9 of 720 sample towns.
+- Before: “Bread went up twice this month, and a baker says he was told to raise it.”
+- After: “Bread went up twice this month, and one of the sellers says they were told to raise it.”
+- Why: 2 of the 9 towns hold no baker.
+- If vetoed: The old sentence would print again in those 9 towns, including the 2 with no baker.
+- [TAIL-POWERS-B seat 3; ruling P29 (6b); 4ff449a7b; rows 04491, 05973, 05970; src/generators/power/conflictIssues.js]
+
+**167. The sentence saying the rest of the food comes in from the farms and from trade no longer prints in towns under famine.**
 
 - Towns touched: 7 of 720 sample towns (a famine) lose it; 72 to 65 print it.
 - Before: “the rest comes in from the farms ... and from trade”
@@ -2144,7 +2162,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The sentence returns in those famine towns, where it is false.
 - [TAIL-CORPUS-ECO; HOW THE NEED much brought in v2 (DS-ECO-9); C1 C2; 29271e7bf (after run); src/data/dossierStateProse/economy.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**166. The sentence saying the shortage shows in small things no longer prints in towns under famine.**
+**168. The sentence saying the shortage shows in small things no longer prints in towns under famine.**
 
 - Towns touched: 6 of 720 sample towns (a famine) lose it; 9 to 3 print it.
 - Before: “the shortage shows in small things”
@@ -2152,7 +2170,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The sentence returns in those 6 famine towns, where it is false.
 - [TAIL-CORPUS-ECO; STRUGGLING v3 (DS-ECO-8); C1 C2; 29271e7bf (after run); src/data/dossierStateProse/economy.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**167. Two sentences saying the other food sources carry the town, or that it manages without going hungry, now print only where food is at least secure.**
+**169. Two sentences saying the other food sources carry the town, or that it manages without going hungry, now print only where food is at least secure.**
 
 - Towns touched: 3 of 35 and 3 of 34 printing sample towns lose a line; 35 to 32 and 34 to 31.
 - Before: “the others carry it / without going hungry”
@@ -2167,7 +2185,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-CORPUS-ECO-2; DS-ECO-9 FOOD SOURCES several v2 v3; C1 C2; bb4c95eb8 (after run); src/data/dossierStateProse/economy.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**168. Six sentences about fish and the catch (drying racks, gutting and salting, salt barrels, nets, gulls, a fishmonger) now have a second version that is used when the town is in hunger, famine or siege.**
+**170. Six sentences about fish and the catch (drying racks, gutting and salting, salt barrels, nets, gulls, a fishmonger) now have a second version that is used when the town is in hunger, famine or siege.**
 
 - Towns touched: Racks 4, gutting 2, barrels 5, nets 5, gulls 0, fishmonger 0 of 720 sample towns (the fish lines print in 36, 27, 18 and 11 sample towns)..
 - Why: In hunger the catch may have failed, so racks full of fish and busy nets were false in 4 to 5 towns per sentence (3 fish famines and 1 siege for the racks).
@@ -2185,7 +2203,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-HISTORY-5; ruling Y17 (2) and the chair's note of 04:08; batch 6, ed9f3b549; src/data/arrivalProse.js]
 
-**169. The warehouse sentence about filling after the harvest no longer prints in towns under famine.**
+**171. The warehouse sentence about filling after the harvest no longer prints in towns under famine.**
 
 - Towns touched: 4 of 720 sample towns (a famine) lose it; 69 to 65 print it.
 - Before: “fill after the harvest”
@@ -2193,7 +2211,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The sentence returns in those 4 famine towns, where it is false.
 - [TAIL-CORPUS-ECO; WAREHOUSES v3 (DS-GEN-13); C1 C2; 29271e7bf (after run); src/data/dossierStateProse/general.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**170. The sentence saying the town has reserves deep enough to ride out most of what could happen now prints only in towns with at least 3 months of stores.**
+**172. The sentence saying the town has reserves deep enough to ride out most of what could happen now prints only in towns with at least 3 months of stores.**
 
 - Towns touched: 4 of 12 printing sample towns lose it; 12 to 8 print it.
 - Before: “reserves deep enough to ride out most of what could happen”
@@ -2201,7 +2219,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The sentence returns in those 4 towns, where the stores are thin.
 - [TAIL-CORPUS-ECO-2; DS-ECO-8 WEALTHY v1; C1 C2; bb4c95eb8 (after run); src/data/dossierStateProse/economy.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**171. Two sentences about a town that depends on imported food are reworded so they no longer say it is fed and nothing is failing.**
+**173. Two sentences about a town that depends on imported food are reworded so they no longer say it is fed and nothing is failing.**
 
 - Towns touched: 4 of 4 and 3 of 4 printing sample towns were wrong.
 - Before: “is fed and dependent. Nothing about the arrangement is failing”
@@ -2217,7 +2235,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-CORPUS-ECO-2; DS-ECO-9 IMPORT-DEPENDENT v3 v1 (row 15068 flagged HIGH); C1; bb4c95eb8 (after run); src/data/dossierStateProse/economy.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**172. A sentence saying no food has come since the siege closed the roads is reworded to say none has come by road.**
+**174. A sentence saying no food has come since the siege closed the roads is reworded to say none has come by road.**
 
 - Towns touched: 1 of 3 printing sample towns was wrong; 3 print it.
 - Before: “... none of it has come since the siege closed the roads.”
@@ -2226,7 +2244,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence comes back in those towns, including where it is false.
 - [TAIL-CORPUS-ECO-2; DS-ECO-9 IMPORT-DEPENDENT v5; C12; no after run of its own (text only); src/data/dossierStateProse/economy.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**173. The sentence saying the stores are more than the season needs no longer prints where food is below secure.**
+**175. The sentence saying the stores are more than the season needs no longer prints where food is below secure.**
 
 - Towns touched: 1 of 720 sample towns loses it; 41 to 40 print it.
 - Before: “the stores are more than the season needs”
@@ -2234,7 +2252,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The sentence returns in that 1 town, where it is false.
 - [TAIL-CORPUS-ECO; COMFORTABLE v3 (DS-ECO-8); C1 C2; 29271e7bf (after run); src/data/dossierStateProse/economy.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**174. A second version of the line 'Blessed stores; divine provision fills the gap' now reads 'eases the shortfall' wherever the food record still has a deficit.**
+**176. A second version of the line 'Blessed stores; divine provision fills the gap' now reads 'eases the shortfall' wherever the food record still has a deficit.**
 
 - Towns touched: count not recorded (the hand-back says every town with divine provision in the sample has a deficit); read in r2s-mass_migration-village-0, r2r-metropolis-12, r2s-under_siege-town-0, r2r-town-9.
 - Before: “Blessed stores; divine provision fills the gap”
@@ -2243,7 +2261,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: the old sentence returns where the town still has a food shortfall, including where it is false
 - [TAIL-DISPLAY-ECON batch 1; X3; src/domain/display/magicProvisionShown.js]
 
-**175. A second version of the line 'Druidic cultivation supplements depleted farmland' now reads 'the depleted ground' on a chain whose ground is not grain fields or floodplain.**
+**177. A second version of the line 'Druidic cultivation supplements depleted farmland' now reads 'the depleted ground' on a chain whose ground is not grain fields or floodplain.**
 
 - Towns touched: count not recorded; read in r2s-famine-city-2, r2r-metropolis-49 (salt flats), r2s-occupied-metropolis-3.
 - Before: “Druidic cultivation supplements depleted farmland”
@@ -2252,7 +2270,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: the old sentence returns on those chains, including where it is false
 - [TAIL-DISPLAY-ECON batch 1; X3; src/domain/display/magicProvisionShown.js]
 
-**176. The sentence 'is not hungry and has no cushion' now prints only in towns with fewer than 3 months of stores.**
+**178. The sentence 'is not hungry and has no cushion' now prints only in towns with fewer than 3 months of stores.**
 
 - Towns touched: prints in 0 of 720 sample towns at this tip (only in a fresh town the readers made).
 - Before: “is not hungry and has no cushion”
@@ -2260,7 +2278,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CORPUS-ECO-4; DS-ECO-9 PRESSURED v3; C19; src/data/dossierStateProse/economy.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**177. Under a famine, the subsistence farm's row "Every household works just enough land to stay alive" now starts with "Scarce in the famine."**
+**179. Under a famine, the subsistence farm's row "Every household works just enough land to stay alive" now starts with "Scarce in the famine."**
 
 - Towns touched: count not recorded.
 - Before: “Every household works just enough land to stay alive”
@@ -2271,7 +2289,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 ### Defence and safety (85 items)
 
-**178. The two sentences about threat bars now say the table's campaign: 'is re-judged as your campaign goes on'.**
+**180. The two sentences about threat bars now say the table's campaign: 'is re-judged as your campaign goes on'.**
 
 - Towns touched: 720 of 720 sample towns (two sentences, each in all 720).
 - Before: “… re-judged as the campaign advances”
@@ -2286,7 +2304,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-DISPLAY-CIVIC-4; V5; commit e6f534310; src/components/tabs/DefenseTab.jsx; src/data/sectionHelp.js SYSTEMS_HEALTH_VINTAGE]
 
-**179. In the PDF's Defense and Security chapter, the line about armed citizens now matches what the Defense tab says.**
+**181. In the PDF's Defense and Security chapter, the line about armed citizens now matches what the Defense tab says.**
 
 - Towns touched: 240 of 720 sample towns.
 - Before: “Defense relies on armed citizens.”
@@ -2295,7 +2313,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The shorter line returns in 240 towns, beside the headline it contradicted.
 - [TAIL-EXPORTS-PDF; rulings E1 P1; batch 1; tip 1ed03ef1e (base 48fedbe98); src/domain/display/noForceLine.js, src/pdf/sections/DefenseSecurity.jsx; row 07849]
 
-**180. The line about arcane defence when a town has none is reworded.**
+**182. The line about arcane defence when a town has none is reworded.**
 
 - Towns touched: 195 of 720 sample towns (the old sentence read 40 and 48 in two size folds).
 - Before: “defense is conventional throughout”
@@ -2304,7 +2322,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in those 195 towns, including where it is false.
 - [TAIL-CORPUS-DEF seat; ruling C1; commit 09a1afc81; rows 20784, 22421; pool DS-DEF-5 arcane defense ABSENT v1; src/data/dossierStateProse/defense.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**181. The first viability-intact line is reworded so it no longer says the defence had to change where nobody is under arms.**
+**183. The first viability-intact line is reworded so it no longer says the defence had to change where nobody is under arms.**
 
 - Towns touched: 163 of 720 sample towns.
 - Before: “its defence has had to change”
@@ -2313,7 +2331,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in those 163 towns, including where it is false.
 - [TAIL-CORPUS-DEF seat; ruling C1; commit 09a1afc81; DS-DEF-8 viability intact v1; src/data/dossierStateProse/defense.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**182. The second version of the arcane-defence-absent line is reworded.**
+**184. The second version of the arcane-defence-absent line is reworded.**
 
 - Towns touched: 157 of 720 sample towns (the old line read 39 and 5 in size folds).
 - Before: “Nothing unseen is known to have come”
@@ -2322,7 +2340,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in those 157 towns, including where it is false.
 - [TAIL-CORPUS-DEF seat; ruling C1; commit 09a1afc81; rows B14309, B14310; DS-DEF-5 arcane ABSENT v3; src/data/dossierStateProse/defense.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**183. The threat row's court line is reworded: 'There is a court but almost nowhere to hold anyone.' now reads 'Cases are heard here, but there is almost nowhere to hold anyone.'**
+**185. The threat row's court line is reworded: 'There is a court but almost nowhere to hold anyone.' now reads 'Cases are heard here, but there is almost nowhere to hold anyone.'**
 
 - Towns touched: 154 of 720 sample towns (62 of them a town hall).
 - Before: “There is a court but almost nowhere to hold anyone.”
@@ -2331,7 +2349,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: the old sentence returns in 154 towns, including the 62 where a town hall hears the cases
 - [TAIL-DISPLAY-CIVIC-2 C2-1; commit 7125b132e]
 
-**184. The viability-intact line about a visitor not guessing at the trouble is reworded.**
+**186. The viability-intact line about a visitor not guessing at the trouble is reworded.**
 
 - Towns touched: 152 of 720 sample towns (the old line was false in 134 towns, over every crisis).
 - Before: “A visitor would not guess at the trouble from the streets”
@@ -2340,7 +2358,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in those 152 towns, including where it is false.
 - [TAIL-CORPUS-DEF seat; ruling C1; commit 09a1afc81; rows 03156 03157 03158 03160 03161 B03075; DS-DEF-8 viability intact v3; src/data/dossierStateProse/defense.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**185. The Defense headline in the PDF and the journal now says "no organized force" instead of "no one under arms".**
+**187. The Defense headline in the PDF and the journal now says "no organized force" instead of "no one under arms".**
 
 - Towns touched: three forms of the headline: 146 + 72 + 23 of 720 sample towns.
 - Before: “no one under arms”
@@ -2357,7 +2375,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-EXPORTS-PDF; rulings E1 P1; batch 1; tip 1ed03ef1e (base 48fedbe98); src/pdf/lib/headlines.js; src/domain/display/noForceLine.js]
 
-**186. The guard line 'Everyone comes and goes by the gates, so smugglers have to get past the garrison and city watch.' now takes a second version where a smuggling or underground house stands.**
+**188. The guard line 'Everyone comes and goes by the gates, so smugglers have to get past the garrison and city watch.' now takes a second version where a smuggling or underground house stands.**
 
 - Towns touched: 135 of 720 sample towns (the line printed in 188; it fell 188 to 60, 49 to 45, 13 to 10).
 - Before: “Everyone comes and goes by the gates, so smugglers have to get past the garrison and city watch.”
@@ -2372,14 +2390,14 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-DISPLAY-CIVIC-4; V7; commit fa5c964b5; src/generators/safetyLineTruth.js gatesSmugglersLine]
 
-**187. The stored record changed in some towns (a record move, not a draw): the guard-effectiveness description in 135 towns (V7) and the legal services list in 24 (V6).**
+**189. The stored record changed in some towns (a record move, not a draw): the guard-effectiveness description in 135 towns (V7) and the legal services list in 24 (V6).**
 
 - Towns touched: 135 and 24 of 720 sample towns.
 - Why: It is the record side of the gates line and the council's service row.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-CIVIC-4 batch A; economicState.safetyProfile.guardEffectivenessDesc; availableServices.legal[]]
 
-**188. The criminal-operation note names the pleasure quarter instead of an unnamed criminal operation.**
+**190. The criminal-operation note names the pleasure quarter instead of an unnamed criminal operation.**
 
 - Towns touched: 132 of 720 sample towns.
 - Before: “A criminal operation with a hold on part of the place or its trade.”
@@ -2388,7 +2406,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence would return in those towns, including where it is false.
 - [TAIL-DEFECON-D; commit d98f781f3; src/domain/display/defenseDisplay.js, src/domain/display/dossierViewModel.js]
 
-**189. The line 'Violence and organised crime are the main danger here.' no longer prints beside a Dangerous label that already names its cause.**
+**191. The line 'Violence and organised crime are the main danger here.' no longer prints beside a Dangerous label that already names its cause.**
 
 - Towns touched: 101 of 720 sample towns (104 to 3 printings).
 - Before: “Violence and organised crime are the main danger here.”
@@ -2396,7 +2414,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: the line returns in 101 towns, including where the label names another cause
 - [TAIL-DISPLAY-CIVIC-2 C2-1; commit 7125b132e]
 
-**190. Two hooks of the external-threat tension ('profits from wartime contracts' and 'the war party is suppressing') are no longer printed where no war is in force.**
+**192. Two hooks of the external-threat tension ('profits from wartime contracts' and 'the war party is suppressing') are no longer printed where no war is in force.**
 
 - Towns touched: 74 and 79 of 720 sample towns where no war is in force (the hooks printed in 107, 108 and 19 sample towns, falling to 33, 29 and 2).
 - Why: The hooks speak of a war and a war party, which is false in a town at peace.
@@ -2411,7 +2429,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-HISTORY; ruling Y1; batch 1, 3da34c70b; src/data/historyData.js]
 
-**191. The "neither walls nor force" line is reworded so it no longer claims nothing has come for the town.**
+**193. The "neither walls nor force" line is reworded so it no longer claims nothing has come for the town.**
 
 - Towns touched: 77 of 720 sample towns (the old line read 26, 27, 24 and 77 in folds).
 - Before: “Nothing has come for X … nobody having wanted it”
@@ -2420,7 +2438,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in those 77 towns, including where it is false.
 - [TAIL-CORPUS-DEF seat; ruling C1; commit 09a1afc81; rows B14258 B14259 B14260 B11532; DS-DEF-2 Invasion & War neither walls nor force v2; src/data/dossierStateProse/defense.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**192. The short-crisis money line no longer says 'a long siege'; it says 'a long one'.**
+**194. The short-crisis money line no longer says 'a long siege'; it says 'a long one'.**
 
 - Towns touched: 73 printings in the 720 sample towns (no siege in the 7 read).
 - Before: “a long siege (in the short-crisis money line)”
@@ -2429,7 +2447,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: 'a long siege' returns in all 73 printings, including where there is no siege
 - [TAIL-DISPLAY-CIVIC-2 C2-1; commit 7125b132e]
 
-**193. The unwalled-small line "nothing has yet come against it that a wall would have stopped" is reworded so it claims no past.**
+**195. The unwalled-small line "nothing has yet come against it that a wall would have stopped" is reworded so it claims no past.**
 
 - Towns touched: 72 of 720 sample towns (the old line read 78 towns before, 0 after).
 - Before: “nothing has yet come against it that a wall would have stopped”
@@ -2438,7 +2456,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in those 72 towns, including where it is false.
 - [TAIL-CORPUS-DEF seat; ruling C18; commit d4a4bd590 (batch 6); DS-DEF-11 UNWALLED-SMALL v4, also declared "no crisis: wartime"; src/data/dossierStateProse/defense.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**194. The garrison-present line "Everyone entering X is counted at the gate" is reworded to say only the gate's traffic is counted.**
+**196. The garrison-present line "Everyone entering X is counted at the gate" is reworded to say only the gate's traffic is counted.**
 
 - Towns touched: 64 of 720 sample towns (the old line read 64 before, 0 after).
 - Before: “Everyone entering X is counted at the gate”
@@ -2447,7 +2465,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in those 64 towns, including where it is false.
 - [TAIL-CORPUS-DEF seat; ruling C18; commit d4a4bd590 (batch 6); DS-DEF-5 garrison PRESENT v3; src/data/dossierStateProse/defense.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**195. Where the Defense tab finds no criminal house, no crime pattern and no shadow share, the PDF Overview's enforcement row now says no criminal infrastructure has been identified, in place of three sentences comparing the criminals with those who keep order.**
+**197. Where the Defense tab finds no criminal house, no crime pattern and no shadow share, the PDF Overview's enforcement row now says no criminal infrastructure has been identified, in place of three sentences comparing the criminals with those who keep order.**
 
 - Towns touched: 62 of 720 sample towns (3 + 41 + 18).
 - After: “No criminal infrastructure has been identified.”
@@ -2463,7 +2481,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-EXPORTS-PDF; rulings E1 P1; batch 1; tip 1ed03ef1e (base 48fedbe98); src/pdf/sections/Overview.jsx; rows 26502 29174 29175]
 
-**196. The semi-organized crime line "not coordinated enough to have a head" is reworded so it does not claim there is no head.**
+**198. The semi-organized crime line "not coordinated enough to have a head" is reworded so it does not claim there is no head.**
 
 - Towns touched: 53 of 720 sample towns.
 - Before: “not coordinated enough to have a head”
@@ -2472,14 +2490,14 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in those 53 towns, including where it is false.
 - [TAIL-CORPUS-DEF seat; ruling C18; commit d4a4bd590 (batch 6); DS-DEF-4 semi-organized v1; src/data/dossierStateProse/defense.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**197. The stored flag that says a town's defence depends on magic changes from false to true in 52 towns (a record move, not a draw).**
+**199. The stored flag that says a town's defence depends on magic changes from false to true in 52 towns (a record move, not a draw).**
 
 - Towns touched: 52 of 720 sample towns.
 - Why: The one reading of magic reliance also feeds the defence generator, and the food provision now counts.
 - If vetoed: the flag stays false in those 52 towns, including where the food rests on magic
 - [TAIL-DISPLAY-ECON-2; declared move; src/generators/defenseGenerator.js generateDefenseProfile; defenseProfile.magicDependency]
 
-**198. The walled-strained line "X's defences are sound" (second version) is reworded.**
+**200. The walled-strained line "X's defences are sound" (second version) is reworded.**
 
 - Towns touched: 46 of 720 sample towns (v2 false in 29 of 49).
 - Before: “X's defences are sound”
@@ -2488,7 +2506,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in those 46 towns, including where it is false.
 - [TAIL-CORPUS-DEF seat; ruling C18; commit d4a4bd590 (batch 6); DS-DEF-11 WALLED-STRAINED v2; src/data/dossierStateProse/defense.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**199. Where the guard names two forces joined together ("garrison and city watch"), the verb is now plural in every guard sentence.**
+**201. Where the guard names two forces joined together ("garrison and city watch"), the verb is now plural in every guard sentence.**
 
 - Towns touched: 46 of 720 sample towns for the widest sentence; the table says 35 and 25 for the two sentences it names.
 - Before: “The garrison and city watch is well paid …  /  … walks the usual rounds.”
@@ -2517,7 +2535,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-DEFECON batch 1; commit 6b8a9b993; src/generators/safetyProfile.js, src/generators/safetyLineTruth.js]
 
-**200. Three Garrison sentences no longer say the soldiers are in "noble or royal pay" and now say only that they are a professional or standing force, with no named payer.**
+**202. Three Garrison sentences no longer say the soldiers are in "noble or royal pay" and now say only that they are a professional or standing force, with no named payer.**
 
 - Towns touched: 45 of 720 sample towns for the widest sentence.
 - Why: The old sentences named noble or royal pay where the ruler is no lord (false in 25 of 32, 36 of 45 and 33 of 43 towns).
@@ -2535,7 +2553,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [second houses seat; ruling H7; src/data/institutionalCatalog.js, src/data/institutionDescVariants.js, src/data/institutionDescColour.js]
 
-**201. A criminal house in the PDF Defense and Security chapter now prints by its label ("Thieves' Guild"), without the grade "(Powerful)".**
+**203. A criminal house in the PDF Defense and Security chapter now prints by its label ("Thieves' Guild"), without the grade "(Powerful)".**
 
 - Towns touched: 45 of 720 sample towns (44 + 1).
 - Before: “Thieves' Guild (Powerful)”
@@ -2544,7 +2562,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: "Thieves' Guild (Powerful)" returns in 45 towns, including where no thieves' power exists; the hand-back says the chair did not veto it.
 - [TAIL-EXPORTS-PDF-2; rulings E3 E16 E17 E15 E18 E1; batch 2; tip 44d3088b4 (merge 538c6ea10); src/pdf/sections/DefenseSecurity.jsx; ruling E18; row 28960]
 
-**202. The line "the defence makes do" no longer prints in towns where nobody is under arms.**
+**204. The line "the defence makes do" no longer prints in towns where nobody is under arms.**
 
 - Towns touched: 42 of 720 sample towns (24 move to the first version, 18 to the third).
 - Before: “the defence makes do”
@@ -2552,7 +2570,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old line returns in those 42 towns, where it is false.
 - [TAIL-CORPUS-DEF seat; ruling C1; commit 09a1afc81; row B11985; DS-DEF-8 viability intact v2, declared on guard presence; src/data/dossierStateProse/defense.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**203. Three wall descriptions for metropolises no longer name a citadel ring and now speak only of an outer wall, an inner wall and gatehouses.**
+**205. Three wall descriptions for metropolises no longer name a citadel ring and now speak only of an outer wall, an inner wall and gatehouses.**
 
 - Towns touched: 41 of 720 sample towns for the widest sentence; false in 36 of them with no Citadel.
 - Why: The old sentences named a citadel ring in towns where no Citadel is born: 36 towns print a massive-walls sentence with no Citadel (10 + 8 + 18).
@@ -2570,7 +2588,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [second houses seat; ruling H7, chair approval 01:00 UTC; src/data/institutionDescVariants.js, src/data/institutionalCatalog.js; guard tests/data/tailHouses3DefenceDeposit.test.js]
 
-**204. The Defense tab's 'Court + Prison' and 'Court only' labels now name the bench that stands: a council or a town hall hears the cases where no courthouse stands.**
+**206. The Defense tab's 'Court + Prison' and 'Court only' labels now name the bench that stands: a council or a town hall hears the cases where no courthouse stands.**
 
 - Towns touched: 38 of 720 sample towns (6 'Court + Prison' and 32 'Court only').
 - Before: “Court + Prison”
@@ -2589,7 +2607,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-DISPLAY-CIVIC-4; V6; commit d5839e513; src/domain/display/defenseDisplay.js]
 
-**205. The black-market crime pattern line about food in thorps and hamlets is reworded.**
+**207. The black-market crime pattern line about food in thorps and hamlets is reworded.**
 
 - Towns touched: 36 of 720 sample towns (thorps and hamlets under famine or siege).
 - Before: “What food is put by …”
@@ -2598,7 +2616,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in those 36 towns, including where it is false.
 - [TAIL-CORPUS-DEF seat (session 5); commit 6b8a9b993 by the other seat; src/generators/safetyProfile.js; test tailDefeconSafetyLines]
 
-**206. The "Moderate" crime line "keeps order well enough by itself" is reworded so it claims no order holds.**
+**208. The "Moderate" crime line "keeps order well enough by itself" is reworded so it claims no order holds.**
 
 - Towns touched: 36 of 720 sample towns.
 - Before: “keeps order well enough by itself”
@@ -2607,7 +2625,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in those 36 towns, including where it is false.
 - [TAIL-CORPUS-DEF seat; ruling C18; commit d4a4bd590 (batch 6); DS-DEF-3 Moderate v5; src/data/dossierStateProse/defense.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**207. The organised-ring notes now say what the houses show where no criminal seat and no thieves' guild house stands, and the crime label itself (organised) is unchanged.**
+**209. The organised-ring notes now say what the houses show where no criminal seat and no thieves' guild house stands, and the crime label itself (organised) is unchanged.**
 
 - Towns touched: 35 of 720 sample towns for the two new versions together (32 and 3); the old sentences were false in 6, 6, 12 and 6 towns.
 - Before: “One criminal ring decides …  /  Shopkeepers here pay one ring …  /  Ask who runs crime here …”
@@ -2623,7 +2641,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-DEFECON-D; commit d98f781f3; src/domain/display/defenseDisplay.js, src/domain/display/dossierViewModel.js]
 
-**208. Five lines about attacks, defences and lost carts no longer presume a watch, a militia, imports or caravans in the town; some have a second version for the towns that lack them.**
+**210. Five lines about attacks, defences and lost carts no longer presume a watch, a militia, imports or caravans in the town; some have a second version for the towns that lack them.**
 
 - Towns touched: 12078 printed in 34 towns and was false in 17; the new lines print in 17, 12, 9, 5 and 3 of 720 sample towns.
 - Why: They were false in towns with no wall, watch, militia or garrison (17), no watch or militia (12 and 5), or towns that import nothing (9 and 3).
@@ -2640,7 +2658,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-CRISIS; batch 1; 12078 28783 20063 07290 18434; src/generators/stressNarrative.js; src/domain/crisis/crisisSummaryVantage.js]
 
-**209. The "Moderate" crime line "no great need of anyone yet" is reworded.**
+**211. The "Moderate" crime line "no great need of anyone yet" is reworded.**
 
 - Towns touched: 34 of 720 sample towns.
 - Before: “no great need of anyone yet”
@@ -2649,7 +2667,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in those 34 towns, including where it is false.
 - [TAIL-CORPUS-DEF seat; ruling C18; commit d4a4bd590 (batch 6); DS-DEF-3 Moderate v6; src/data/dossierStateProse/defense.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**210. The line about market stalls that pay fees losing custom has two second versions, one for a siege and one for a town with no market.**
+**212. The line about market stalls that pay fees losing custom has two second versions, one for a siege and one for a town with no market.**
 
 - Towns touched: 33 of 720 sample towns (15 under siege, 18 with no market).
 - Before: “… and the stalls that pay their fees lose custom to the ones that do not”
@@ -2665,14 +2683,14 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-DEFECON batch 1; commit 6b8a9b993; src/generators/safetyProfile.js, src/generators/safetyLineTruth.js]
 
-**211. The stored safety record changed in some towns (a record move, not a draw): the guard-effectiveness description in 30 towns, and the crime-type list in 12 (4 lose war profiteering, 2 the deserters' food, 8 the migrants' passage).**
+**213. The stored safety record changed in some towns (a record move, not a draw): the guard-effectiveness description in 30 towns, and the crime-type list in 12 (4 lose war profiteering, 2 the deserters' food, 8 the migrants' passage).**
 
 - Towns touched: 30 and 12 of 720 sample towns.
 - Why: It is the record side of the patrol, deserters, passage and profiteering lines.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-CIVIC-3; V3 declared move; economicState.safetyProfile.guardEffectivenessDesc, crimeTypes[]]
 
-**212. The walled-strained line "X's defences are sound" (seventh version) is reworded.**
+**214. The walled-strained line "X's defences are sound" (seventh version) is reworded.**
 
 - Towns touched: 28 of 720 sample towns (v7 false in 26 of 28).
 - Before: “X's defences are sound”
@@ -2681,7 +2699,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in those 28 towns, including where it is false.
 - [TAIL-CORPUS-DEF seat; ruling C18; commit d4a4bd590 (batch 6); DS-DEF-11 WALLED-STRAINED v7; src/data/dossierStateProse/defense.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**213. The line about a part from the wizard's tower going missing no longer prints where no wizard's tower stands.**
+**215. The line about a part from the wizard's tower going missing no longer prints where no wizard's tower stands.**
 
 - Towns touched: 25 of 720 sample towns.
 - Before: “A part from the wizard's tower has gone missing …”
@@ -2689,7 +2707,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence would return in those towns, including where it is false. One heading, "Safety & Crime", also went in one town (186 to 185 towns) because its only line there was this one.
 - [TAIL-DEFECON batch 1; commit 6b8a9b993; src/generators/safetyProfile.js, src/generators/safetyLineTruth.js]
 
-**214. The second weak economic-survival line "are already owed" is reworded.**
+**216. The second weak economic-survival line "are already owed" is reworded.**
 
 - Towns touched: 24 of 720 sample towns.
 - Before: “are already owed”
@@ -2698,7 +2716,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in those 24 towns, including where it is false.
 - [TAIL-CORPUS-DEF seat; batch 5; row 01607; DS-DEF-2 Economic Survival WEAK v2; src/data/dossierStateProse/defense.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**215. A town with an empty defence roster now reads at most "Vulnerable" instead of "Lightly Defended" (23 towns) or "Defensible" (1 town).**
+**217. A town with an empty defence roster now reads at most "Vulnerable" instead of "Lightly Defended" (23 towns) or "Defensible" (1 town).**
 
 - Towns touched: 24 of 720 sample towns (17 thorps, 4 hamlets, 3 villages).
 - Before: “Lightly Defended  /  Defensible”
@@ -2714,7 +2732,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-DEFECON-D; ruling D20; commit db505beb1; src/data/bandLadders.js (lent for it)]
 
-**216. The council's service row 'Hears civil pleas in the town court' now reads 'Hears the town's civil pleas at the council bench'.**
+**218. The council's service row 'Hears civil pleas in the town court' now reads 'Hears the town's civil pleas at the council bench'.**
 
 - Towns touched: 24 of 720 sample towns (r2r-town-1, r2r-town-16, r2s-occupied-town-1).
 - Before: “Hears civil pleas in the town court”
@@ -2723,7 +2741,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: the old service row returns in 24 towns, including where no town court stands
 - [TAIL-DISPLAY-CIVIC-4; V6; commit d5839e513; src/data/institutionServices.js]
 
-**217. Fifteen tie lines between a military figure and a criminal (patrol schedules, raids, arrests, a watch's reports) were reworded so they no longer name a watch, an arrest or a raid; the wording now fits any card of that kind.**
+**219. Fifteen tie lines between a military figure and a criminal (patrol schedules, raids, arrests, a watch's reports) were reworded so they no longer name a watch, an arrest or a raid; the wording now fits any card of that kind.**
 
 - Towns touched: 13 to 24 of 720 sample towns each, 15 lines (to 0 each); false in 8 to 19 towns per line.
 - Why: In 8 to 19 towns per line the card's house held no policing office (watch, militia or warden), so the old words were false.
@@ -2750,7 +2768,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-TIES-4 batch 1; rows B01216, B01427, X9 07276, B01285, X9 07278, B27789, B27787, B00530, B02765, B03387 and seven unnumbered; ruling T19; 14724c194; src/data/npcData.js STRESS_ECONOMIC_EFFECTS]
 
-**218. The walled-strained line "the defences are sound" is reworded.**
+**220. The walled-strained line "the defences are sound" is reworded.**
 
 - Towns touched: 22 of 720 sample towns (v1 false in 6 of 22).
 - Before: “the defences are sound”
@@ -2759,7 +2777,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in those 22 towns, including where it is false.
 - [TAIL-CORPUS-DEF seat; ruling C18; commit d4a4bd590 (batch 6); DS-DEF-11 WALLED-STRAINED v1; src/data/dossierStateProse/defense.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**219. The 'Quiet country' threat lines no longer print for a heartland under a siege, an occupation, a war or a monster pressure; they read from the crisis instead.**
+**221. The 'Quiet country' threat lines no longer print for a heartland under a siege, an occupation, a war or a monster pressure; they read from the crisis instead.**
 
 - Towns touched: 21, 10, 7 and 1 of 720 sample towns (a siege, an occupation, a war or a monster pressure).
 - Before: “Quiet country…”
@@ -2779,7 +2797,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-DISPLAY-CIVIC-2 C2-1; commit 7125b132e; rows 22279, 22277, 22278]
 
-**220. Nine tie lines between a military figure and a criminal suppressing them (raids, warrants, patrol routes, orders to stand down) were reworded so they no longer name a raid, a warrant or a command.**
+**222. Nine tie lines between a military figure and a criminal suppressing them (raids, warrants, patrol routes, orders to stand down) were reworded so they no longer name a raid, a warrant or a command.**
 
 - Towns touched: 6 to 21 of 720 sample towns each, 9 lines (to 0 each); false in 4 to 15 towns per line.
 - Why: In 4 to 15 towns per line the card's house held no policing office, so the old words were false.
@@ -2800,7 +2818,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-TIES-4 batch 1; rows B21428, X9 04213, B17413, B00871, X9 04209, B00671 and five unnumbered; ruling T19; 14724c194; src/data/npcData.js STRESS_ECONOMIC_EFFECTS]
 
-**221. The note "It keeps the streets quiet because trouble brings the law …" no longer prints where the safety label is Dangerous, Desperate, Unsafe, Critical or Volatile; the table's own note prints instead.**
+**223. The note "It keeps the streets quiet because trouble brings the law …" no longer prints where the safety label is Dangerous, Desperate, Unsafe, Critical or Volatile; the table's own note prints instead.**
 
 - Towns touched: 18 of 720 sample towns lose the line (48 to 30); 11 are refused for a bad safety label and 7 more take the second version.
 - Before: “It keeps the streets quiet because trouble brings the law …”
@@ -2808,14 +2826,14 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence would return in those towns, including where it is false.
 - [TAIL-DEFECON-D; commit d98f781f3; src/domain/display/defenseDisplay.js, src/domain/display/dossierViewModel.js]
 
-**222. The stored record changed in a few towns (a record move, not a draw): the safety description in 18 towns (16 after the narrowing) and the plot hooks list in 3.**
+**224. The stored record changed in a few towns (a record move, not a draw): the safety description in 18 towns (16 after the narrowing) and the plot hooks list in 3.**
 
 - Towns touched: 18 (16 after the narrowing) and 3 of 720 sample towns.
 - Why: It is the record side of the crime-structure note and the smuggling hook.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-CIVIC-4 batch B; economicState.safetyProfile.safetyDesc, plotHooks[]]
 
-**223. The food-trades-failing line "so little food is being put by" is reworded.**
+**225. The food-trades-failing line "so little food is being put by" is reworded.**
 
 - Towns touched: 17 of 720 sample towns (the old line read 10, 4 and 3 in folds).
 - Before: “so little food is being put by”
@@ -2824,7 +2842,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in those 17 towns, including where it is false.
 - [TAIL-CORPUS-DEF seat; batch 5; rows 01541, B19529; DS-DEF-2 CHAIN food trades failing v1; src/data/dossierStateProse/defense.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**224. 'Petty theft is the primary risk; organized crime has a limited foothold.' now reads '… organized crime has found no foothold.' beside 'No criminal infrastructure has been identified'.**
+**226. 'Petty theft is the primary risk; organized crime has a limited foothold.' now reads '… organized crime has found no foothold.' beside 'No criminal infrastructure has been identified'.**
 
 - Towns touched: 16 of 720 sample towns after the narrowing (18 before it); the old line fell 33 to 15.
 - Before: “Petty theft is the primary risk; organized crime has a limited foothold.”
@@ -2833,7 +2851,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: the old line returns in the 16 towns, beside 'No criminal infrastructure has been identified'
 - [TAIL-DISPLAY-CIVIC-4; V10b; commits 089bccf98 and fb1bd892e; r2r-thorp-12, r2r-town-4, r2r-city-38, r2s-infiltrated-village-2]
 
-**225. The weak economic-survival line about a pay book and wages owed is reworded.**
+**227. The weak economic-survival line about a pay book and wages owed is reworded.**
 
 - Towns touched: 15 of 720 sample towns (the old line was false in 13 of 15).
 - Before: “pay book … people owed wages”
@@ -2842,7 +2860,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in those 15 towns, including where it is false.
 - [TAIL-CORPUS-DEF seat; ruling C16; batch 5; row 01607; DS-DEF-2 Economic Survival WEAK v1; src/data/dossierStateProse/defense.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**226. In wartime thorps and hamlets, three lines about army contracts, deserters and sending sons to the army change: two get second versions and one no longer prints.**
+**228. In wartime thorps and hamlets, three lines about army contracts, deserters and sending sons to the army change: two get second versions and one no longer prints.**
 
 - Towns touched: 15 of 720 sample towns (thorps and hamlets in wartime).
 - Before: “the war-profiteering line (crown contracts, inspectors, the reputation for supply)”
@@ -2859,7 +2877,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-DEFECON batch 1; commit 6b8a9b993; src/generators/safetyProfile.js, src/generators/safetyLineTruth.js]
 
-**227. The line about street fights between insurgent supporters and those who keep order has a second version.**
+**229. The line about street fights between insurgent supporters and those who keep order has a second version.**
 
 - Towns touched: 14 of 720 sample towns (towns where an uprising is under way).
 - Before: “Street-level confrontations between insurgent supporters and those who keep order.”
@@ -2868,7 +2886,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence would return in those towns, including where it is false.
 - [TAIL-DEFECON batch 1; commit 6b8a9b993; src/generators/safetyProfile.js, src/generators/safetyLineTruth.js]
 
-**228. The walls-present line "every arrival goes through a gate" no longer prints in towns that are ports.**
+**230. The walls-present line "every arrival goes through a gate" no longer prints in towns that are ports.**
 
 - Towns touched: 11 of 720 sample towns (all ports: 8 move to the third version, 3 to the first).
 - Before: “every arrival goes through a gate”
@@ -2876,7 +2894,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old line returns in those 11 ports, where it is false.
 - [TAIL-CORPUS-DEF seat; ruling C1; commit 09a1afc81; rows 01111, 01113; DS-DEF-5 walls PRESENT v2, declared "no port"; src/data/dossierStateProse/defense.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**229. The "Safe" line "is a quiet town" is reworded to say that crime stays small.**
+**231. The "Safe" line "is a quiet town" is reworded to say that crime stays small.**
 
 - Towns touched: 10 of 720 sample towns (the old line was false in 6 of 10).
 - Before: “{settlement} is a quiet town.”
@@ -2885,7 +2903,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in those 10 towns, including where it is false.
 - [TAIL-CORPUS-DEF seat; ruling C10; batch 4; row B00937; DS-DEF-3 Safe v1; src/data/dossierStateProse/defense.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**230. Patrol lines now take a second version of the line under a siege, an occupation or a famine, and the hunger line under a famine.**
+**232. Patrol lines now take a second version of the line under a siege, an occupation or a famine, and the hunger line under a famine.**
 
 - Towns touched: 9 towns under siege, 10 under occupation and 10 under famine of 720 sample towns (false by the record: 4 + 8 + 4 + 8 lines).
 - Before: “… maintain standard patrol coverage.”
@@ -2908,14 +2926,14 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-DISPLAY-CIVIC-3; V3; commit 89326e707; src/generators/safetyLineTruth.js patrolCrisisOf, patrolTwin]
 
-**231. In ten towns the 'External Threat' heading above plot hooks no longer prints, because the war hook under it is gone and the remaining hook prints once under the event.**
+**233. In ten towns the 'External Threat' heading above plot hooks no longer prints, because the war hook under it is gone and the remaining hook prints once under the event.**
 
 - Towns touched: 10 of 720 sample towns (r2r-city-54, r2r-thorp-19 and eight more).
 - Why: A silence that follows from the war hooks no longer printing; the hand-back says no false line results.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-HISTORY; batch 1; src/data/historyData.js]
 
-**232. The second food-trades-failing line "little is being put by" is reworded.**
+**234. The second food-trades-failing line "little is being put by" is reworded.**
 
 - Towns touched: 9 of 720 sample towns (the old line read 6 and 3).
 - Before: “little is being put by”
@@ -2924,7 +2942,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in those 9 towns, including where it is false.
 - [TAIL-CORPUS-DEF seat; batch 5; rows 01541, B19529; DS-DEF-2 CHAIN food trades failing v2; src/data/dossierStateProse/defense.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**233. The line "No single dominant organisation" has a second version where a criminal power stands on the list of powers.**
+**235. The line "No single dominant organisation" has a second version where a criminal power stands on the list of powers.**
 
 - Towns touched: 9 of 720 sample towns.
 - Before: “No single dominant organisation: just the steady pressure …”
@@ -2933,7 +2951,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence would return in those towns, including where it is false.
 - [TAIL-DEFECON batch 1; commit 6b8a9b993; src/generators/safetyProfile.js, src/generators/safetyLineTruth.js]
 
-**234. The line about forged residence documents and underground routes has a second version in thorps and hamlets.**
+**236. The line about forged residence documents and underground routes has a second version in thorps and hamlets.**
 
 - Towns touched: 8 of 720 sample towns (thorps and hamlets).
 - Before: “Forged residence documents, unofficial lodging, underground routes for those authorities have turned away.”
@@ -2942,7 +2960,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence would return in those towns, including where it is false.
 - [TAIL-DEFECON batch 1; commit 6b8a9b993; src/generators/safetyProfile.js, src/generators/safetyLineTruth.js]
 
-**235. 'Lodging and a way onward, sold quietly to newcomers who were told to move on.' is reworded to 'A way onward, sold quietly to newcomers who were told to move on.'**
+**237. 'Lodging and a way onward, sold quietly to newcomers who were told to move on.' is reworded to 'A way onward, sold quietly to newcomers who were told to move on.'**
 
 - Towns touched: 8 of 720 sample towns (reaches no village or larger).
 - Before: “Lodging and a way onward, sold quietly to newcomers who were told to move on.”
@@ -2951,7 +2969,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: 'Lodging and' returns in the 8 towns, which have no lodging house
 - [TAIL-DISPLAY-CIVIC-3; V3; commit 89326e707]
 
-**236. Under a siege, the line about everyone coming and going by the gates has a second version saying the gates are shut.**
+**238. Under a siege, the line about everyone coming and going by the gates has a second version saying the gates are shut.**
 
 - Towns touched: 7 of 720 sample towns (towns under siege).
 - Before: “Everyone comes and goes by the gates, so smugglers have to get past the …”
@@ -2967,7 +2985,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-DEFECON batch 1; commit 6b8a9b993; src/generators/safetyProfile.js, src/generators/safetyLineTruth.js]
 
-**237. The line about religious buildings, land and endowments being contested no longer prints where no religious house stands.**
+**239. The line about religious buildings, land and endowments being contested no longer prints where no religious house stands.**
 
 - Towns touched: 7 of 720 sample towns.
 - Before: “Religious buildings, land, and endowments … contested”
@@ -2975,7 +2993,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence would return in those towns, including where it is false.
 - [TAIL-DEFECON batch 1; commit 6b8a9b993; src/generators/safetyProfile.js, src/generators/safetyLineTruth.js]
 
-**238. The Medical Readiness line "No healer is kept here" has a second version where one of the town's people tends the sick.**
+**240. The Medical Readiness line "No healer is kept here" has a second version where one of the town's people tends the sick.**
 
 - Towns touched: 7 of 720 sample towns (the line prints in 240).
 - Before: “No healer is kept here; the sick are tended by their own families.”
@@ -2984,7 +3002,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence would return in those towns, including where it is false.
 - [TAIL-DEFECON-D; commit d98f781f3; src/domain/display/defenseDisplay.js, src/domain/display/dossierViewModel.js]
 
-**239. The line "The guards ... have changed their rounds" is reworded.**
+**241. The line "The guards ... have changed their rounds" is reworded.**
 
 - Towns touched: 6 of 720 sample towns.
 - Before: “The guards at X have changed their rounds”
@@ -2993,7 +3011,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in those 6 towns, including where it is false.
 - [TAIL-CORPUS-DEF seat; ruling C1; commit 09a1afc81; row 20690; DS-DEF-8 SECURITY COMPROMISED v2; src/data/dossierStateProse/defense.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**240. Hook lines about the guard captain's file, three guards in one district, and weapons from the armoury now print only where the town has a watch or a garrison.**
+**242. Hook lines about the guard captain's file, three guards in one district, and weapons from the armoury now print only where the town has a watch or a garrison.**
 
 - Towns touched: 1 to 6 of 720 sample towns each (81 to 80, 80 to 79, 46 to 40).
 - Before: “The guard captain has a file …”
@@ -3009,7 +3027,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-TIES batch 2; rows 20685, 22757, 00183, 28599; ruling T3; src/data/npcData.js NPC_FACTION_LOYALTY]
 
-**241. The walls-absent line "pass nobody on the way in" no longer prints in towns under siege or occupation; another version prints.**
+**243. The walls-absent line "pass nobody on the way in" no longer prints in towns under siege or occupation; another version prints.**
 
 - Towns touched: 5 of 720 sample towns (4 sieges, 1 occupation).
 - Before: “pass nobody on the way in”
@@ -3017,7 +3035,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old line returns in those 5 towns, where it is false.
 - [TAIL-CORPUS-DEF seat; ruling C1; commit 09a1afc81; row 29118; DS-DEF-5 walls ABSENT v2, declared "no crisis: under_siege, no crisis: occupied"; src/data/dossierStateProse/defense.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**242. The court-without-detention lines "money and exile" and "the purse or the road" no longer print under a siege.**
+**244. The court-without-detention lines "money and exile" and "the purse or the road" no longer print under a siege.**
 
 - Towns touched: 4 of 720 sample towns (sieges: city-1, city-3, town-1, town-0); on the PDF and journal 18 to 16, 32 to 31, 26 to 25.
 - Before: “money and exile / the purse or the road”
@@ -3025,7 +3043,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old lines return in those 4 sieges, where they are false.
 - [TAIL-CORPUS-DEF seat; ruling X9; batch 4; row 26310; DS-DEF-2 court without detention v1, v2, declared "no crisis: under_siege"; src/data/dossierStateProse/defense.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**243. The famine line "The guards' rations" is reworded to "those who defend".**
+**245. The famine line "The guards' rations" is reworded to "those who defend".**
 
 - Towns touched: 4 of 720 sample towns.
 - Before: “The guards' rations”
@@ -3034,7 +3052,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in those 4 towns, including where it is false.
 - [TAIL-CORPUS-DEF seat; ruling C18; commit d4a4bd590 (batch 6); DS-DEF-8 override INTERNAL PRESSURE (famine) v1; src/data/dossierStateProse/defense.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**244. The walled-strained line "still stand sound" is reworded.**
+**246. The walled-strained line "still stand sound" is reworded.**
 
 - Towns touched: 4 of 720 sample towns (v6 false in 3 of 4).
 - Before: “still stand sound”
@@ -3043,7 +3061,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in those 4 towns, including where it is false.
 - [TAIL-CORPUS-DEF seat; ruling C18; commit d4a4bd590 (batch 6); DS-DEF-11 WALLED-STRAINED v6; src/data/dossierStateProse/defense.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**245. The line about organized crime filling a power gap now reads differently where no criminal seat governs.**
+**247. The line about organized crime filling a power gap now reads differently where no criminal seat governs.**
 
 - Towns touched: 4 of 720 sample towns.
 - Before: “Organized crime has filled the power vacuum left by absent or failed civil authority”
@@ -3052,7 +3070,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence would return in those towns, including where it is false.
 - [TAIL-DEFECON batch 1; commit 6b8a9b993; src/generators/safetyProfile.js, src/generators/safetyLineTruth.js]
 
-**246. Under a siege the line about an active smuggling operation has a second version saying the roads are shut.**
+**248. Under a siege the line about an active smuggling operation has a second version saying the roads are shut.**
 
 - Towns touched: 4 of 720 sample towns (towns under siege).
 - Before: “An active overland smuggling operation moves contraband through the settlement”
@@ -3061,7 +3079,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence would return in those towns, including where it is false. The note after it ("Arrests do happen.") is part of the same second version, and the gate note was dropped.
 - [TAIL-DEFECON batch 1; commit 6b8a9b993; src/generators/safetyProfile.js, src/generators/safetyLineTruth.js]
 
-**247. The 'war profiteering' entry (the line about what the army's buyers will take) is no longer written where no trade route runs.**
+**249. The 'war profiteering' entry (the line about what the army's buyers will take) is no longer written where no trade route runs.**
 
 - Towns touched: 4 of 720 sample towns (15 to 11); r2s-wartime-thorp-1, -2, -3, -hamlet-3.
 - Before: “Whatever the army's buyers will take is sold to them dear…”
@@ -3069,7 +3087,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: the entry returns in the 4 towns that have no trade route
 - [TAIL-DISPLAY-CIVIC-3; V3; commit 89326e707; src/generators/safetyProfile.js]
 
-**248. Under an occupation the line "Nobody here is paid to keep order." has a second version naming the occupiers.**
+**250. Under an occupation the line "Nobody here is paid to keep order." has a second version naming the occupiers.**
 
 - Towns touched: 3 of 720 sample towns (occupied towns).
 - Before: “Nobody here is paid to keep order.”
@@ -3078,7 +3096,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence would return in those towns, including where it is false.
 - [TAIL-DEFECON batch 1; commit 6b8a9b993; src/generators/safetyProfile.js, src/generators/safetyLineTruth.js]
 
-**249. For an adventurers' charter hall with no garrison, watch or militia, the line about enforcers who can be bought is no longer used; the hall's own lines print instead.**
+**251. For an adventurers' charter hall with no garrison, watch or militia, the line about enforcers who can be bought is no longer used; the hall's own lines print instead.**
 
 - Towns touched: 3 of 720 sample towns (villages with an adventurers' charter hall).
 - Before: “… enforcers who can be bought”
@@ -3087,7 +3105,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence would return in those towns, including where it is false.
 - [TAIL-DEFECON batch 1; commit 6b8a9b993; src/generators/safetyProfile.js, src/generators/safetyLineTruth.js]
 
-**250. The smuggling hook 'Someone wants to know what it is before it arrives.' takes a siege version.**
+**252. The smuggling hook 'Someone wants to know what it is before it arrives.' takes a siege version.**
 
 - Towns touched: 3 of 720 sample towns (the hook fell 49 to 46); the second siege version prints in 0 towns today.
 - Before: “Someone wants to know what it is before it arrives.”
@@ -3102,7 +3120,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-DISPLAY-CIVIC-4; V10a; commit 089bccf98; r2r-metropolis-14, r2s-under_siege-metropolis-0, -2]
 
-**251. Second versions of the "Safe" crime lines print in towns with no watch, garrison, militia or company; the old lines "enforcement keeps it down" and "plain that somebody keeps it that way" no longer print there.**
+**253. Second versions of the "Safe" crime lines print in towns with no watch, garrison, militia or company; the old lines "enforcement keeps it down" and "plain that somebody keeps it that way" no longer print there.**
 
 - Towns touched: 2 of 720 sample towns: r2r-thorp-28, r2s-infiltrated-village-2.
 - Before: “enforcement keeps it down / plain that somebody keeps it that way”
@@ -3111,7 +3129,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old lines return in those 2 towns, where they are false.
 - [TAIL-CORPUS-DEF seat; ruling C18; commit d4a4bd590 (batch 6); DS-DEF-3 Safe v2, v3 declared "guardPresence"; new Safe v4; src/data/dossierStateProse/defense.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**252. The "ample capacity" lines no longer print in towns whose food is short; a second version of the line prints there instead.**
+**254. The "ample capacity" lines no longer print in towns whose food is short; a second version of the line prints there instead.**
 
 - Towns touched: 2 of 720 sample towns: r2s-famine-village-3 (famine), r2s-under_siege-town-2 (siege).
 - Before: “more than enough to get through a hard year”
@@ -3120,7 +3138,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old ample-capacity line returns in those 2 towns, where food is short.
 - [TAIL-CORPUS-DEF seat; ruling C2; rows 23220, 23219; DS-DEF-12 CAPACITY ample v1-v3 declared "food: at least pressured", second version v4; src/data/dossierStateProse/defense.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**253. The perimeter-and-force line "not an emergency arrangement … nobody treats any of it as unusual" no longer prints in a monster crisis or a war.**
+**255. The perimeter-and-force line "not an emergency arrangement … nobody treats any of it as unusual" no longer prints in a monster crisis or a war.**
 
 - Towns touched: 2 of 720 sample towns (8 to 6): r2s-monster_pressure-city-0, r2s-wartime-town-0.
 - Before: “not an emergency arrangement … nobody treats any of it as unusual”
@@ -3128,7 +3146,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old line returns in those 2 towns, where it is false.
 - [TAIL-CORPUS-DEF seat; batch 5; row B06130; DS-DEF-2 Beasts plagued, perimeter AND force v2, declared "no crisis: monster_pressure, wartime"; src/data/dossierStateProse/defense.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**254. The strong economic-survival line "Nobody … lies awake over a lean year" no longer prints in two towns whose food is under pressure.**
+**256. The strong economic-survival line "Nobody … lies awake over a lean year" no longer prints in two towns whose food is under pressure.**
 
 - Towns touched: 2 of 720 sample towns: r2r-town-42, r2r-town-9 (town fold 15 to 13).
 - Before: “Nobody … lies awake over a lean year”
@@ -3136,7 +3154,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old line returns in those 2 towns, where it is false.
 - [TAIL-CORPUS-DEF seat; batch 5; row 14935 (sibling fold); DS-DEF-2 Economic Survival STRONG v8, declared "food: at least secure"; src/data/dossierStateProse/defense.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**255. The line about tribute paid to whoever controls the street has a second version in hamlets.**
+**257. The line about tribute paid to whoever controls the street has a second version in hamlets.**
 
 - Towns touched: 2 of 720 sample towns (hamlets).
 - Before: “… tribute paid to whoever controls their street”
@@ -3145,7 +3163,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence would return in those towns, including where it is false.
 - [TAIL-DEFECON batch 1; commit 6b8a9b993; src/generators/safetyProfile.js, src/generators/safetyLineTruth.js]
 
-**256. The Outlook line "<N> keeps order and pays its way, but it has to buy food …" no longer prints under a slave revolt or an insurgency.**
+**258. The Outlook line "<N> keeps order and pays its way, but it has to buy food …" no longer prints under a slave revolt or an insurgency.**
 
 - Towns touched: 2 of 720 sample towns (the line prints in 4).
 - Before: “<N> keeps order and pays its way, but it has to buy food …”
@@ -3154,7 +3172,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence would return in those towns, including where it is false.
 - [TAIL-DEFECON-D; commit d98f781f3; src/domain/display/defenseDisplay.js, src/domain/display/dossierViewModel.js]
 
-**257. The deserters' line takes a second version under hunger: 'Deserters passing through need food and discretion, and some here give both.' reads 'need shelter and discretion'.**
+**259. The deserters' line takes a second version under hunger: 'Deserters passing through need food and discretion, and some here give both.' reads 'need shelter and discretion'.**
 
 - Towns touched: 2 of 720 sample towns (15 to 13); read in r2s-wartime-thorp-2, r2s-wartime-hamlet-3.
 - Before: “Deserters passing through need food and discretion, and some here give both.”
@@ -3169,7 +3187,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-DISPLAY-CIVIC-3; V3; commit 89326e707]
 
-**258. A second version of the "Very Safe" crime line prints in a town with no watch, garrison, militia or company.**
+**260. A second version of the "Very Safe" crime line prints in a town with no watch, garrison, militia or company.**
 
 - Towns touched: 1 of 720 sample towns: r2r-village-49.
 - Before: “enforcement far outweighs”
@@ -3178,7 +3196,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old line returns in that town, where it is false.
 - [TAIL-CORPUS-DEF seat; ruling C18; commit d4a4bd590 (batch 6); DS-DEF-3 Very Safe v3 declared "guardPresence", new Very Safe v5; src/data/dossierStateProse/defense.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**259. The clause saying the local guard keeps crime low is cut where no garrison, watch or militia is named.**
+**261. The clause saying the local guard keeps crime low is cut where no garrison, watch or militia is named.**
 
 - Towns touched: 1 of 720 sample towns.
 - Before: “Visitors can walk anywhere at any hour, and there is little crime; the local guard sees to that”
@@ -3187,7 +3205,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence would return in those towns, including where it is false.
 - [TAIL-DEFECON batch 1; commit 6b8a9b993; src/generators/safetyProfile.js, src/generators/safetyLineTruth.js]
 
-**260. A new line is added for an occupied town beside settled country: "works were seldom tested ... and now they stand in the occupiers' hands."**
+**262. A new line is added for an occupied town beside settled country: "works were seldom tested ... and now they stand in the occupiers' hands."**
 
 - Towns touched: 0 of 720 sample towns (the state is the test's own made town).
 - After: “{settlement}'s works were seldom tested by the settled country around it, and now they stand in the occupiers' hands.”
@@ -3195,7 +3213,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The check goes back to red until the line (or another) fills the occupied state.
 - [TAIL-CORPUS-DEF seat; ruling U2; DS-DEF-2 Beasts & Monsters: settled, defenses beyond the need v6; src/data/dossierStateProse/defense.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**261. Two unwalled-small lines print in 6 more towns (the war towns): "No wall marks where X ends" (106 to 110 towns) and "too small to wall and knows it" (19 to 21).**
+**263. Two unwalled-small lines print in 6 more towns (the war towns): "No wall marks where X ends" (106 to 110 towns) and "too small to wall and knows it" (19 to 21).**
 
 - Towns touched: count of extra towns not recorded as one figure: 106 to 110 and 19 to 21 towns.
 - After: “No wall marks where X ends / too small to wall and knows it”
@@ -3203,16 +3221,16 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CORPUS-DEF seat; ruling C18; commit d4a4bd590; DS-DEF-11 UNWALLED-SMALL v1, v2]
 
-**262. The alchemist's shop and quarter now count as a trade, not as retained casters, in the defence reading.**
+**264. The alchemist's shop and quarter now count as a trade, not as retained casters, in the defence reading.**
 
 - Towns touched: count not recorded.
 - Why: reason not stated in the hand-back beyond the chair's ruling G5
 - If vetoed: The alchemist is read as a retained caster again in the defence reading.
 - [TAIL-CLOSE-SRC-1 (reports it); declared move G5, commit 83883baaa (UPKEEP-CAPACITY C6)]
 
-### Powers and government (56 items)
+### Powers and government (103 items)
 
-**263. The Foundations and Summary line 'Public legitimacy' now prints the Power tab's own label (Legitimacy crisis, Contested, Tolerated, Approved, Endorsed).**
+**265. The Foundations and Summary line 'Public legitimacy' now prints the Power tab's own label (Legitimacy crisis, Contested, Tolerated, Approved, Endorsed).**
 
 - Towns touched: 720 of 720 sample towns had a legitimacy row that differed from the record; the five labels now print in 278, 149, 135, 90 and 68 towns (the hand-back does not say which count belongs to which label).
 - Why: The row did not match the record in all 720 towns (one home for one fact).
@@ -3227,7 +3245,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-DISPLAY-CIVIC batch 1; X2; commit 812fa7e1f; rows 16110 and others]
 
-**264. The governance paragraph's cause 'crime' is reworded to 'insecurity' (or 'the curfew' for an occupation curfew alone) wherever the safety label names another cause.**
+**266. The governance paragraph's cause 'crime' is reworded to 'insecurity' (or 'the curfew' for an occupation curfew alone) wherever the safety label names another cause.**
 
 - Towns touched: 427 of 720 sample towns (405 towns for 'insecurity', 22 for 'the curfew'); 7 printings remain, all under plain labels.
 - After: “Insecurity is the reason.”
@@ -3242,7 +3260,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-DISPLAY-CIVIC batch 1; X8; accepted on the owner's veto list; commit 812fa7e1f]
 
-**265. The Power headline gets a second version of the line for towns where the second power is the stronger.**
+**267. The Power headline gets a second version of the line for towns where the second power is the stronger.**
 
 - Towns touched: 188 of 720 sample towns (of the 332 that print the line).
 - Before: “X governs, with Y pressing close behind.”
@@ -3251,7 +3269,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old line returns in 188 towns, including where the second power is the stronger.
 - [TAIL-EXPORTS-PDF; rulings E1 P1; batch 1; tip 1ed03ef1e (base 48fedbe98); src/pdf/lib/headlines.js; ruling E2; rows 01243 11772 01239 07328 08661 12107 16891 08662]
 
-**266. The 'Ruling authority' row is no longer printed above what the record says of the same government: at most Strained under a legitimacy crisis or fractured governance, at most Adequate under a contested legitimacy.**
+**268. The 'Ruling authority' row is no longer printed above what the record says of the same government: at most Strained under a legitimacy crisis or fractured governance, at most Adequate under a contested legitimacy.**
 
 - Towns touched: 164 of 720 sample towns (116 now read Strained, 48 Surplus to Adequate). The chair's first count was 199, which counted 'Adequate' beside a contested legitimacy; the helper's count is 164 by the ruling's own law.
 - Before: “Ruling authority: Adequate”
@@ -3267,7 +3285,67 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-DISPLAY-CIVIC batch 4; X8; commit 7148c48c5; rows 16764, 16767]
 
-**267. The Web's 'stable' chip is no longer printed over a high quarrel of the same pair of powers; the pair and its narrative still print.**
+**269. The relation line between the seat and the faith no longer says the faith "keeps order" or that both are right; it says the seat holds the seat and collects the taxes and the faith tells people the seat's rule is right and ordained.**
+
+- Towns touched: 120 of 720 sample towns.
+- Before: “... keeps order ... that both are right and ordained”
+- After: “<G> holds the seat and collects the taxes; <R> tell(s) people that <G>'s rule is right and ordained. Each props up the other.”
+- Why: The old wording was false under a siege, a famine, an insurgency, or a Fractured or occupied hall (row B12633: 5 towns to 0).
+- If vetoed: The old "keeps order" wording would print again, including under a siege, famine, insurgency or occupation.
+- [TAIL-POWERS-B seat 1; rulings P1, P3; cd97721f6; src/generators/factionDynamics.js]
+
+**270. Power cards in some towns no longer print sentences that give a weak power more standing than it has (for example "close behind", "holds real influence", "contesting every decision" on a power that is Suppressed or Minor).**
+
+- Towns touched: 111 of 720 sample towns at most (the widest row: 111 to 0); the rest are in the rows.
+- Why: The sentences were false of a power the town's data gives as Suppressed or Minor.
+- If vetoed: The old sentences would print again in the towns listed, including where the power is too weak for them.
+- Every form:
+
+  | Before | After | Towns |
+  |---|---|---|
+  | row 12831 (sentence not quoted) | no longer printed | 111 |
+  | row 20360 | no longer printed | 94 |
+  | row 16773 | no longer printed | 84 |
+  | row 28617 | no longer printed | 50 |
+  | row 13421 | printed in 50 towns instead of 73 (none of the 29 Suppressed cases) | 73 |
+  | row 06026 | printed in 17 towns instead of 55 (none of the 49 Suppressed cases) | 55 |
+  | row 07269 | printed in 45 towns instead of 51 (none of the 7 Suppressed cases) | 51 |
+  | "Craft masters ... present in every civic dispute" | printed in 8 towns instead of 29 (the 21 towns have a Minor or Suppressed craft guild) | 29 |
+  | the leading merchants' "consistent civic presence" | printed in 30 towns instead of 31 (Suppressed) | 31 |
+
+- [TAIL-POWERS seat 1; ruling P1; 21dc7fa4b; src/generators/factionDynamics.js, power/claimStanding.js, power/factionStanding.js]
+
+**271. Three existing power-card sentences now print in more towns, in towns where a stopped sentence used to print.**
+
+- Towns touched: 111 of 720 sample towns at most (the arcane advisory line prints in 111 more towns).
+- Why: They were read as true at their labels in the added towns.
+- If vetoed: effect not stated in the hand-back
+- Every form:
+
+  | Before | After | Towns |
+  |---|---|---|
+  | – | the arcane advisory line (sentence not quoted here) | 111 |
+  | – | The merchants consistently outvote them ... | 84 |
+  | – | The craft guilds are present but outpaced ... | 77 |
+
+- [TAIL-POWERS seat 1; ruling P1; 21dc7fa4b; src/generators/power/claimStanding.js, factionStanding.js]
+
+**272. In towns where the people have lost trust in the elders, the page no longer says people follow the elders out of respect.**
+
+- Towns touched: 108 of 720 sample towns at most (the widest row: 108 to 37); the other row is 31 to 16.
+- Before: “People follow the elders out of respect (the ruling quotes this part of the sentence)”
+- Why: The line was false beside a legitimacy crisis (row 21207: crisis cases 71 to 0; row 16581: crisis cases 15 to 0).
+- If vetoed: The old line would print again in those towns, including beside a legitimacy crisis.
+- Every form:
+
+  | Before | After | Towns |
+  |---|---|---|
+  | row 21207 (the elders' seat line) | printed in 37 towns instead of 108 | 108 |
+  | row 16581 | printed in 16 towns instead of 31 | 31 |
+
+- [TAIL-POWERS seat 1; ruling P4; 21dc7fa4b; src/generators/power/rulingStructure.js]
+
+**273. The Web's 'stable' chip is no longer printed over a high quarrel of the same pair of powers; the pair and its narrative still print.**
 
 - Towns touched: 107 of 720 sample towns (114 chips).
 - Before: “stable chip over a high-intensity conflict of the same pair”
@@ -3275,11 +3353,53 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: the 'stable' chip returns over the quarrel in 107 towns
 - [TAIL-DISPLAY-CIVIC batch 2; X2; commit efface11b]
 
-**268. The city's Merchant guilds sentences no longer say the guilds are a "powerful political force" and now say they are "a power in the city's trade".**
+**274. Where the faith is the strongest power or contends for the seat, the line saying clergy operate at the margins of civic life is replaced.**
+
+- Towns touched: 11 of 720 sample towns change (98 to 88).
+- Before: “Clergy are present but operate at the margins of civic life ...”
+- After: “The faith holds no office in the hall, but its moral authority is real and its word carries political weight here.”
+- Why: The old line was false on 11 cards in 11 towns: the faith is the strongest power (4), at or above the seat's power (4), or Significant (3).
+- If vetoed: The old line would print again in those 11 towns.
+- [TAIL-POWERS-B seat 4; ruling P31 (1); d99bce57a; src/generators/power/claimStanding.js, generateSettlementPipeline.js (lent)]
+
+**275. The relation line between the seat and the faith no longer says they "keep quarrelling over" matters where the town holds no conflict between them.**
+
+- Towns touched: 83 of 720 sample towns.
+- Before: “keep quarrelling over (the old sentence is not quoted in full)”
+- After: “People take their marriages, inheritances and hard times to <R>, not to <G>, and the two do not agree on who decides what.”
+- Why: In 61 of the 83 printing towns the town holds no conflict of the pair.
+- If vetoed: The old "keep quarrelling" wording would print again in those 83 towns, including the 61 with no conflict.
+- Every form:
+
+  | Before | After | Towns |
+  |---|---|---|
+  | row B14785 | printed in 0 towns instead of 5 | 5 |
+  | row B14789 | printed in 0 towns instead of 2 | 2 |
+
+- [TAIL-POWERS-B seat 1; rows B14785, B14789; cd97721f6; src/generators/factionDynamics.js]
+
+**276. Where the conflicts hold merchants and craft guilds at HIGH, the line about voting together then fighting over profit gets a second version saying they are at odds over the issue.**
+
+- Towns touched: 77 of 720 sample towns (the sibling line 77 to 65; the "against landholders" form 21 to 14; 12 towns at HIGH).
+- Before: “Merchant Guilds and Craft Guilds vote together whenever trade is at stake, then fight over ...”
+- After: “<merchants> and <craft> are at odds over <issue>, and fight over who keeps the profit of the trade.”
+- Why: The old line sat beside a HIGH quarrel of the same pair in 12 towns; it stays where the dispute is moderate (8 towns).
+- If vetoed: The old line would print again in the 12 towns that hold a HIGH quarrel.
+- Every form:
+
+  | Before | After | Towns |
+  |---|---|---|
+  | sibling line | printed in 65 towns instead of 77 | 77 |
+  | the "against <landholders>" form | printed in 14 towns instead of 21 (7 more at HIGH) | 21 |
+  | – | second version printed in 19 towns | 19 |
+
+- [TAIL-POWERS-B seat 4; ruling P31 (3); d99bce57a; src/generators/factionDynamics.js]
+
+**277. The city's Merchant guilds sentences no longer say the guilds are a "powerful political force" and now say they are "a power in the city's trade".**
 
 - Towns touched: 42, 32 and 33 of 720 sample towns; 76 true lines replaced.
 - Why: The old sentences claimed political power where no merchant, guild or trade power stands among the city's powers (false in 16 of 42, 7 of 32 and 8 of 33 towns).
-- If vetoed: The political wording returns; the new wording replaced a line that was true in about 76 towns, which the chair told the owner's veto list to carry with the count.
+- If vetoed: The political wording returns; the new wording replaced a line that was true in 76 towns, and the chair put that count on the owner's veto list instead of a veto of his own.
 - Every form:
 
   | Before | After | Towns |
@@ -3290,7 +3410,15 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [fifth houses seat; ruling H20 (i), H21; commit 6510d746b; src/data/institutionalCatalog.js, src/data/institutionDescColour.js; guard tests/data/tailHouses10OwnTrade.test.js]
 
-**269. The Headman's Authority line no longer says the headman gives the orders.**
+**278. A new second version of the elders' sentence for towns where fewer and fewer people accept the elders' word.**
+
+- Towns touched: 71 of 720 sample towns.
+- After: “The oldest heads of the community still decide things together, but fewer and fewer people accept their word.”
+- Why: The old line said people follow the elders out of respect, which is false beside a legitimacy crisis (71 towns lost it).
+- If vetoed: The old line would print again in those 71 towns, including in a legitimacy crisis.
+- [TAIL-POWERS seat 1; ruling P4; 21dc7fa4b; src/generators/power/rulingStructure.js]
+
+**279. The Headman's Authority line no longer says the headman gives the orders.**
 
 - Towns touched: 71 of 720 sample towns (71 to 0).
 - Before: “A headman settles disputes and gives the orders here.”
@@ -3299,7 +3427,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in those 71 towns, including 2 where it is false.
 - [TAIL-TIES-2 batch 1; row 02676; src/data/powerSiblings.js]
 
-**270. Nine sentences of the Town council, the Village elder and the Mayor and council no longer claim an absence of formal government or an election ("where nothing official exists", "in the absence of formal authority", "elected council").**
+**280. Nine sentences of the Town council, the Village elder and the Mayor and council no longer claim an absence of formal government or an election ("where nothing official exists", "in the absence of formal authority", "elected council").**
 
 - Towns touched: up to 11 of 720 sample towns for one sentence; 66 records change.
 - Why: Every sample town that prints these sentences has a named government that denies the claim (24 of 24 Town councils, 24 of 24 Village elders; 29 Mayor and council towns under non-elected councils).
@@ -3320,7 +3448,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [fifth houses seat; ruling H20 (i); commit 36bcb60b5; src/data/institutionalCatalog.js, src/data/institutionDescVariants.js, src/data/institutionDescColour.js; guard tests/data/tailHouses9GovernanceAbsence.test.js]
 
-**271. 'Economic role: occasional' (or absent) on the Magic tab now reads 'Economic role: common' where the food record holds a provision by magic.**
+**281. 'Economic role: occasional' (or absent) on the Magic tab now reads 'Economic role: common' where the food record holds a provision by magic.**
 
 - Towns touched: 63 of 720 sample towns (50 food alone, 13 food and a magic chain).
 - Before: “Economic role: occasional”
@@ -3335,7 +3463,26 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-DISPLAY-ECON-5; X32; commit 756ba4bda; src/domain/display/magicProvisionShown.js economicRoleBandShown; src/components/tabs/MagicTab.jsx]
 
-**272. The quick guide no longer says the clause 'run by its estates' (Germanic culture) in 57 towns. The clause is no longer printed there.**
+**282. The governance account now writes "The Guard" where it used to write "Military/Guard", with the verb matching, and writes "The Neutrals will back whichever side meets their price."**
+
+- Towns touched: 62 of 720 sample towns (an earlier count by a second seat was 48 towns, before the fix; the figures differ).
+- Before: “The Military/Guard no longer takes its orders.”
+- After: “The Guard no longer takes its orders.”
+- Why: The slashed label "Military/Guard" is not prose; the ruling P3 says every power named in a sentence uses the leaf's prose form.
+- If vetoed: The slashed label "Military/Guard" would print again in those towns.
+- Every form:
+
+  | Before | After | Towns |
+  |---|---|---|
+  | The Military/Guard takes its orders no longer. | The Guard takes its orders no longer. | 36 |
+  | The Military/Guard is at odds with it. | The Guard is at odds with it. | 24 |
+  | The Military/Guard no longer takes its orders. | The Guard no longer takes its orders. | 18 |
+  | The hall is at odds with the Military/Guard and the Religious Authorities. | The hall is at odds with the Guard ... (full sentence not quoted) | – |
+  | The # Bloc will back whichever side meets its price. | The Neutrals will back whichever side meets their price. (the leaf's name for "Third Bloc (Neutrals)" is plural, so the verb agrees) | 3 |
+
+- [TAIL-POWERS seat 2 and seat 3; ruling P3; 0b1b41459; src/domain/display/governanceAccount.js, display/powerSentenceName.js]
+
+**283. The quick guide no longer says the clause 'run by its estates' (Germanic culture) in 57 towns. The clause is no longer printed there.**
 
 - Towns touched: 57 of 720 sample towns lose this clause.
 - Before: “run by its estates”
@@ -3343,7 +3490,15 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The clause returns in those towns, including where it is false.
 - [TAIL-CRISIS-2, TAIL-CRISIS-3; batch 2; K15 (silences accepted as told); src/domain/summary/settlementQuickGuide.js]
 
-**273. The hall's consequence lines no longer print where the truce row they followed has gone.**
+**284. A new second version of a power-card sentence about the trades (craft guilds) carrying little weight.**
+
+- Towns touched: 55 of 720 sample towns.
+- After: “The trades regulate their own production and apprenticeships, but carry little weight beyond the workshops.”
+- Why: reason not stated beside this line; it sits in the batch that stops cards giving a weak power more standing than it has
+- If vetoed: The new sentence would go and the older sentence would print again in those 55 towns.
+- [TAIL-POWERS seat 1; ruling P1; 21dc7fa4b; src/generators/power/claimStanding.js]
+
+**285. The hall's consequence lines no longer print where the truce row they followed has gone.**
 
 - Towns touched: 49, 44 and 54 towns before; 34, 34 and 45 after.
 - Before: “Nothing large is settled in the hall without bargaining with them first.”
@@ -3357,7 +3512,15 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-DISPLAY-CIVIC batches 2 and 3]
 
-**274. The "Stable" line saying the question of who replaces the ruler does not come up is reworded.**
+**286. A new second version of a power-card sentence about the trades (craft guilds) as a secondary presence in civic life.**
+
+- Towns touched: 54 of 720 sample towns.
+- After: “The trades regulate their own production and apprenticeships; a reliable secondary presence in civic life.”
+- Why: reason not stated beside this line; it sits in the batch that stops cards giving a weak power more standing than it has
+- If vetoed: The new sentence would go and the older sentence would print again in those 54 towns.
+- [TAIL-POWERS seat 1; ruling P1; 21dc7fa4b; src/generators/power/claimStanding.js]
+
+**287. The "Stable" line saying the question of who replaces the ruler does not come up is reworded.**
 
 - Towns touched: 53 of 720 sample towns (the old line was false in 39 of 53: Contested 21, Crisis 18).
 - Before: “The question of who might replace the {seat} … does not come up”
@@ -3366,7 +3529,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in those 53 towns, including where it is false.
 - [TAIL-CORPUS-DEF seat; batch 3; rows 21584 21590 21587 21595; DS-POW-4 Stable v2; src/data/dossierStateProse/power.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**275. The "Stable" line saying nobody is asking who comes next is reworded.**
+**288. The "Stable" line saying nobody is asking who comes next is reworded.**
 
 - Towns touched: 52 of 720 sample towns (the old line was false in 41 of 52: Legitimacy Crisis 28, Contested 13).
 - Before: “it has no rival, and nobody in the town is asking who comes next”
@@ -3375,7 +3538,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in those 52 towns, including where it is false.
 - [TAIL-CORPUS-DEF seat; commit after c66510264, batch 3; rows 14859 14856 14852 14857 14854 B14026; DS-POW-4 Stable v1; src/data/dossierStateProse/power.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**276. The 'Reliance on magic' reading now counts the food a town gets from magic, so towns that read 'None' beside a food provision by magic now read 'Relied upon' (and 'Present' becomes 'Integral' in two). The 'supplied by' line names the houses of the provision's tradition.**
+**289. The 'Reliance on magic' reading now counts the food a town gets from magic, so towns that read 'None' beside a food provision by magic now read 'Relied upon' (and 'Present' becomes 'Integral' in two). The 'supplied by' line names the houses of the provision's tradition.**
 
 - Towns touched: 52 of 720 sample towns (50 'None' towns and 2 'Present' towns; 29 print the house of worship form).
 - Before: “Reliance on magic: None”
@@ -3393,7 +3556,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-DISPLAY-ECON-2; X10; src/domain/magicReliance.js deriveMagicReliance; src/domain/facts/magicSource.js]
 
-**277. The quick guide no longer says the clause 'held by clan and caravan' (Steppe culture) in about 50 towns. The clause is no longer printed there.**
+**290. The quick guide no longer says the clause 'held by clan and caravan' (Steppe culture) in about 50 towns. The clause is no longer printed there.**
 
 - Towns touched: about 50 of 720 sample towns lose this clause.
 - Before: “held by clan and caravan”
@@ -3401,7 +3564,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The clause returns in those towns, including where it is false.
 - [TAIL-CRISIS-2, TAIL-CRISIS-3; batch 2; K15 (silences accepted as told); src/domain/summary/settlementQuickGuide.js]
 
-**278. The "Stable" line saying a faction "is safe in the hall" is reworded.**
+**291. The "Stable" line saying a faction "is safe in the hall" is reworded.**
 
 - Towns touched: 49 of 720 sample towns (the old line was false in 27 of 49).
 - Before: “{faction} is safe in the hall”
@@ -3410,7 +3573,47 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in those 49 towns, including where it is false.
 - [TAIL-CORPUS-DEF seat; batch 3; rows 15533 15536 15531 B14699 B14695 B14704; DS-POW-4 Stable v3; the check seatSafetyUnrest was re-keyed; src/data/dossierStateProse/power.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**279. Twelve rows for a town whose seat of power is doubted (government, office, military, squad, trade, faith, crew, casters) no longer say a rival claims the seat or that sides fight for it; they now say many doubt the seat's right.**
+**292. Where the town's conflicts hold a pair at HIGH and its relation row says symbiotic or dependent, the row keeps its sentence and adds "Even so, the two are now at odds over <the issue>."**
+
+- Towns touched: 47 of 720 sample towns.
+- Before: “<its narrative>”
+- After: “<its narrative> Even so, the two are now at odds over <the issue>.”
+- Why: A relation row said "stable" and "each needs the other" beside a quarrel of the same pair at HIGH.
+- If vetoed: The row would say "stable" without the quarrel in those 47 towns (51 pairs).
+- Every form:
+
+  | Before | After | Towns |
+  |---|---|---|
+  | Grand Merchant Oligarchy ~ Military/Guard stable | printed in 3 towns instead of 5 | 5 |
+  | Ducal Governorship ~ Military/Guard stable | printed in 1 town instead of 3 | 3 |
+  | Merchant Guilds ~ Religious Authorities stable | printed in 103 towns instead of 107 | 107 |
+  | the conflict's own line "High tension <A> vs <B>" (the plot hook's title; true) | still printed (3/2/2/2/2/2/1/1/1/1 towns) | 3 |
+
+- [TAIL-POWERS-B seat 2; ruling P19 (P13 (1)); c1263e61c; src/generators/factionDynamics.js, generateSettlementPipeline.js (lent)]
+
+**293. Claims on a power's card no longer mention a council where the town's seat is not a council (a Feudal Stewardship, a Town Mayor, a Royal Authority); they mention the hall instead.**
+
+- Towns touched: 45 of 720 sample towns at most ("expect council access in return" 45 to 31); counts per row in the rows.
+- Before: “expect council access in return”
+- After: “expect access to the hall in return.”
+- Why: A council was named where none sits.
+- If vetoed: The council wording would print again in towns under a seat that is no council.
+- Every form:
+
+  | Before | After | Towns |
+  |---|---|---|
+  | row 06725 | printed in 5 towns instead of 14 (the 5 left sit under a council and a warehouse) | 14 |
+  | row 18554 | printed in 6 towns instead of 13 | 13 |
+  | row 10424 | printed in 0 towns instead of 11 | 11 |
+  | row 00339 | printed in 20 towns instead of 37 | 37 |
+  | row 22709 | reworded, printed in 0 towns instead of 22 | 22 |
+  | expect council access in return | printed in 31 towns instead of 45 (14 towns under no council) | 45 |
+  | ... and fund the hall. | the sentence now names the hall; read at r2r-hamlet-15, r2r-town-40, r2r-metropolis-31, r2r-city-16 | – |
+  | they set prices and fund the hall. (no warehouse) / and the hall knows it. / the hall works alongside them, not over them. | new wording for towns whose seat is no council | – |
+
+- [TAIL-POWERS-B seat 1; rulings P1, P10; cc834166f; src/generators/power/claimStanding.js, factionStanding.js]
+
+**294. Twelve rows for a town whose seat of power is doubted (government, office, military, squad, trade, faith, crew, casters) no longer say a rival claims the seat or that sides fight for it; they now say many doubt the seat's right.**
 
 - Towns touched: 42 of 720 sample towns for the widest row (42 to 0); 17 and 13 for the next two.
 - Before: “Holds the seat, but a rival claims it, and the matter is not settled.”
@@ -3453,7 +3656,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-TIES-3 batch 1; rows B10211, 12589, 16777 and nine more entries; 112532f64; src/generators/npcStructure.js]
 
-**280. The Magic tab now prints the same chain notes as the economy card, so a note the card withholds no longer prints on the Magic tab.**
+**295. The Magic tab now prints the same chain notes as the economy card, so a note the card withholds no longer prints on the Magic tab.**
 
 - Towns touched: 41 to 29 of 720 sample towns for the first line; one town 1 to 0 on 'Divine & Magical Healing: Divine healing supplements mundane medicine'.
 - Before: “Herbalism & Remedies: Divine healing supplements mundane medicine”
@@ -3461,7 +3664,28 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: the Magic tab prints the raw note again in those towns, including where the card withholds it
 - [TAIL-DISPLAY-ECON batch 1; X1; src/components/tabs/MagicTab.jsx]
 
-**281. The Household elder's three sentences keep the old wording only where the finished town has an elder ruler and no ruling body; elsewhere (all 37 of 37 sample towns) a second version prints that no longer says one head of household "speaks for the settlement" without being chosen.**
+**296. In 38 small towns with no headman's house, the page no longer says the town is governed by Headman's Authority and names the Elder Council instead.**
+
+- Towns touched: 38 of 720 sample towns.
+- Before: “Governed by Headman's Authority”
+- After: “the Elder Council governs (sentence form not quoted in the hand-back)”
+- Why: The town had no headman's house on its list of people, so Headman's Authority was named without a headman.
+- If vetoed: Headman's Authority would be named again in those 38 towns, including where there is no headman's house.
+- Every form:
+
+  | Before | After | Towns |
+  |---|---|---|
+  | Headman's Authority governs 71 towns | Headman's Authority governs 33 towns (38 fewer) | 71 |
+  | "Governed by Headman's Authority" and its family printed 70 times | printed in 32 towns | 70 |
+  | – | Elder Council family printed in 38 more towns (village 16, hamlet 12, thorp 10) | 38 |
+  | – | "Elder Council (dominant/significant) armed backing" (4 + 4 towns) and "Elder Council vs Military/Guard" (3 towns) print where a military-minded thorp now reads as an Elder Council | 8 |
+  | – | "The Elder Council governs <N>." prints in 28 more towns | 28 |
+  | – | "The oldest heads ... decide things together; people follow them out of respect" prints in 13 more towns (legitimacy not in crisis there) | 13 |
+  | – | "Few in <N> still accept the Elder Council's right to rule." prints in 17 more towns | 17 |
+
+- [TAIL-POWERS seat 1 and seat 2; rulings P7 and P8; d68805134; src/generators/power/rulingStructure.js]
+
+**297. The Household elder's three sentences keep the old wording only where the finished town has an elder ruler and no ruling body; elsewhere (all 37 of 37 sample towns) a second version prints that no longer says one head of household "speaks for the settlement" without being chosen.**
 
 - Towns touched: 37 of 720 sample towns (13, 13 and 11); the second version prints in all 37; counts in the rows are for the second version.
 - Why: The old sentences said one unchosen household head speaks for the settlement where the town is governed by an Elder Council or a Household Council (false in 11 of 13, 11 of 13 and 10 of 13 towns in the earlier measure).
@@ -3476,7 +3700,41 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [fifth houses seat (TAIL-HOUSES-5); ruling H20 (ii); commit 5d906f6e4; merge 01714675f; src/data/institutionDescVariants.js DESC_LATE_SIBLINGS; src/generators/steps/assembleSettlement.js readHouseDescsLate; guard tests/generators/houseDescLateReRead.test.js]
 
-**282. The quick guide no longer says the clause 'run by patronage and law' (Latin culture) in 34 towns. The clause is no longer printed there.**
+**298. In 37 towns the relation line between the hall and a force no longer says "the commander's agreement"; it names the force.**
+
+- Towns touched: 37 of 720 sample towns.
+- Before: “the commander's agreement”
+- After: “The hall asks for <the force>'s agreement instead of giving orders, and less and less is decided without it.”
+- Why: A War Council has no one commander.
+- If vetoed: "The commander's agreement" would print again in those 37 towns, including where the force has no single commander.
+- [TAIL-POWERS-B seat 1; rulings P1, P3; cd97721f6; src/generators/factionDynamics.js]
+
+**299. The line about the Independent Bloc (and the copies for The Free Alliance, The Grey Council and The Common Interest) no longer says it controls a distinct district or institution.**
+
+- Towns touched: 37 of 720 sample towns.
+- Before: “Claims legitimate authority through different means; controls a distinct district or institution.”
+- After: “Claims legitimate authority through different means and has a following of its own.”
+- Why: The town's data gives the bloc no district and no house in any of the 37 towns (thorps of ten, Dominant to Minor).
+- If vetoed: The old line would print again in those 37 towns, including where the bloc has no district or house.
+- [TAIL-POWERS-B seat 3; ruling P29 (6b); 4ff449a7b; rows 05049, 25870; src/generators/power/stressFactions.js]
+
+**300. The line "Three powers stand almost level" now reads the final list of powers: with fewer than three level it prints another sentence, with three or more it says their number.**
+
+- Towns touched: 27 of 720 sample towns are false (37 to 10); 4 to 7 powers stand level in 9 of the 10 true ones.
+- Before: “Three powers stand almost level here, and no one leads; every decision has to be bargained for.”
+- After: “They are always at the table, but cannot set their own terms. / Five powers stand almost level here ... (the number is put in by replacement)”
+- Why: The line was false in 27 towns (the third power more than five below the first in 15; the level powers across a rung in 12) and wrong by count in 9 of the 10 true ones.
+- If vetoed: The old line would print again in those 27 false towns (it is a silence over twenty towns, of false lines, told first).
+- Every form:
+
+  | Before | After | Towns |
+  |---|---|---|
+  | sibling standing line (They are always at the table, but cannot set their own terms.) | printed in 189 towns instead of 162 (27 inheritors) | 162 |
+  | Three powers stand almost level ... | printed in 10 towns instead of 37 | 37 |
+
+- [TAIL-POWERS-B seat 4; ruling P31 (4); d99bce57a; src/generators/power/factionStanding.js]
+
+**301. The quick guide no longer says the clause 'run by patronage and law' (Latin culture) in 34 towns. The clause is no longer printed there.**
 
 - Towns touched: 34 of 720 sample towns lose this clause.
 - Before: “run by patronage and law”
@@ -3484,7 +3742,40 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The clause returns in those towns, including where it is false.
 - [TAIL-CRISIS-2, TAIL-CRISIS-3; batch 2; K15 (silences accepted as told); src/domain/summary/settlementQuickGuide.js]
 
-**283. The "Stable" line saying what threatens a faction is the fighting across the town is reworded.**
+**302. Only one power at a time is called Dominant on the final list of powers: in 34 towns the "Dominant" chips and the seat's "(dominant)" become "(strong)" where the power tied or ran second.**
+
+- Towns touched: 34 of 720 sample towns.
+- Before: “(dominant)”
+- After: “(strong)”
+- Why: Two powers could both read Dominant (ruling P14).
+- If vetoed: Two powers could again be called Dominant in the same town, including where one ties or runs second.
+- Every form:
+
+  | Before | After | Towns |
+  |---|---|---|
+  | "Dominant" chips | printed 351 times instead of 358 and 191 instead of 194 | 358 |
+  | Elder Council (dominant) | printed in 74 towns instead of 80 | 80 |
+  | Household Council (dominant) | printed in 48 towns instead of 52 | 52 |
+
+- [TAIL-POWERS-B seat 1; ruling P14 (G1); cddbc3274; src/generators/factionDynamics.js, generateSettlementPipeline.js (lent)]
+
+**303. The line saying tithes, land and courts are all ecclesiastical now prints only under an Ecclesiastical Council; other towns print the church's temporal-power line instead.**
+
+- Towns touched: 32 of 720 sample towns (32 to 3).
+- Before: “tithes, land, and courts are all ecclesiastical”
+- After: “Church holds substantial temporal power; tithes fund civic works and the clergy's opinion on appointments carries decisive weight.”
+- Why: The line claimed everything is ecclesiastical where the seat is not an Ecclesiastical seat.
+- If vetoed: The old line would print again in those 29 towns, including where the church does not hold the seat.
+- Every form:
+
+  | Before | After | Towns |
+  |---|---|---|
+  | tithes, land, and courts are all ecclesiastical | printed in 3 towns instead of 32 | 32 |
+  | – | Church holds substantial temporal power; ... : prints in 29 more towns | 29 |
+
+- [TAIL-POWERS seat 4; ruling P27; e046a2ac4; src/generators/power/rulingStructure.js]
+
+**304. The "Stable" line saying what threatens a faction is the fighting across the town is reworded.**
 
 - Towns touched: 31 of 720 sample towns (the old line was false in 13 of 31).
 - Before: “what threatens {faction} now is the fighting across the town”
@@ -3493,7 +3784,53 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in those 31 towns, including where it is false.
 - [TAIL-CORPUS-DEF seat; batch 3; rows 14648 14646 14639; DS-POW-4 Stable v6; src/data/dossierStateProse/power.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**284. The quick guide no longer says the clause 'run by civic association' (Greek culture) in 29 towns. The clause is no longer printed there.**
+**305. In towns where the body is a Town Council but another power holds the seat, the page no longer prints the council's line about merchants, guilds and families competing for seats; it prints the seat's own line.**
+
+- Towns touched: 31 of 720 sample towns (31 to 6).
+- Before: “merchants, guilds, and prominent families compete for seats”
+- After: “the seat's own line from the existing tables, for example: Clergy hold substantial political authority ... / Merchant interests dominate the council ... / Military commanders hold direct political authority ... / The governing body is systematically compromised ... / Mages govern ...”
+- Why: The council's line was printed as the governing line over another seat (Arcane 4, Military 5, Church 6, Merchant 6, Corrupt 4 of the 31).
+- If vetoed: The council's competing-for-seats line would print again in those 25 towns that do not have a Town Council seat.
+- Every form:
+
+  | Before | After | Towns |
+  |---|---|---|
+  | merchants, guilds, and prominent families compete for seats | printed in 6 towns instead of 31 | 31 |
+  | – | Clergy hold substantial political authority ...: prints in 6 more towns | 6 |
+  | – | Merchant interests dominate the council ...: prints in 6 more towns | 6 |
+  | – | Military commanders hold direct political authority ...: prints in 5 more towns | 5 |
+  | – | The governing body is systematically compromised ...: prints in 4 more towns | 4 |
+  | – | Mages govern ...: prints in 4 more towns | 4 |
+
+- [TAIL-POWERS seat 4; ruling P27; e046a2ac4; src/generators/power/rulingStructure.js]
+
+**306. A new second version of a power-card sentence about merchants with only local reach.**
+
+- Towns touched: 30 of 720 sample towns.
+- After: “Merchants with local reach; they trade here, but have little say in how the place is run.”
+- Why: reason not stated beside this line; it sits in the batch that stops cards giving a weak power more standing than it has
+- If vetoed: The new sentence would go and the older sentence would print again in those 30 towns.
+- [TAIL-POWERS seat 1; ruling P1; 21dc7fa4b; src/generators/power/claimStanding.js]
+
+**307. Existing relation sentences now print in more towns after the first two batches; each was read as true where it prints.**
+
+- Towns touched: 30 of 720 sample towns at most; counts per sentence in the rows.
+- Why: They take over in towns where a stopped sentence used to print.
+- If vetoed: effect not stated in the hand-back
+- Every form:
+
+  | Before | After | Towns |
+  |---|---|---|
+  | – | The hall asks for The Guard's agreement ... | 30 |
+  | – | Merchant Guilds buy the materials, set the prices and sell the goods; Craft Guilds only make them, and their masters ... | 28 |
+  | – | Merchant Guilds now have more money than Religious Authorities have sway. | 28 |
+  | – | They denounce the guild from the pulpit; the guild gives openly to the poor and makes the denunciations look selective. | 22 |
+  | – | Three powers stand almost level here, and no one leads; every decision has to be bargained for. (no council) | 17 |
+  | – | Established merchant community; fund civic works and expect access to the hall in return. | 14 |
+
+- [TAIL-POWERS-B seat 1; cd97721f6, cc834166f; src/generators/factionDynamics.js, claimStanding.js]
+
+**308. The quick guide no longer says the clause 'run by civic association' (Greek culture) in 29 towns. The clause is no longer printed there.**
 
 - Towns touched: 29 of 720 sample towns lose this clause.
 - Before: “run by civic association”
@@ -3501,7 +3838,32 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The clause returns in those towns, including where it is false.
 - [TAIL-CRISIS-2, TAIL-CRISIS-3; batch 2; K15 (silences accepted as told); src/domain/summary/settlementQuickGuide.js]
 
-**285. In occupied towns the seat sentence now says the town is governed under the Occupation Authority.**
+**309. In 29 towns, a background-quarrel sentence about the seat's rival (a church, a crusade, a heresy, a military body) no longer prints where the town has no such rival; the next sentence of the same list prints instead.**
+
+- Towns touched: 29 of 720 sample towns.
+- Why: The sentences named a rival the town does not have (for example a church court, a church veto, a crusading commander).
+- If vetoed: Those quarrel sentences would print again in the towns listed, including where the rival does not exist.
+- Every form:
+
+  | Before | After | Towns |
+  |---|---|---|
+  | row 20273 (a commander-prelate quarrel) | no longer printed | 7 |
+  | The garrison is mobilizing. | no longer printed | 7 |
+  | row 21564 / 22394 (a church court quarrel) | no longer printed | 2 |
+  | row 21066 | no longer printed | 2 |
+  | row 21067 | no longer printed | 1 |
+  | row 21062 | no longer printed | 1 |
+  | row 20194 (a church veto over council appointments) | printed in 16 towns instead of 24 | 24 |
+  | The mages' # is very quiet (row 20963) | printed in 2 towns instead of 5 (the 2 left stand under a High Theocratic Council) | 5 |
+  | – | <seat> has been debating market levies ... the merchants have stopped attending: prints in 7 more towns | 7 |
+  | – | A monster incursion last season destroyed outlying farms: prints in 5 more towns | 5 |
+  | – | The merchant class is outbuying noble landholdings: prints in 4 more towns | 4 |
+  | – | The most devout households want a say ...: prints in 3 more towns | 3 |
+  | – | The military commanders ... and Ducal Governorship / Democratic assembly is losing ground: prints in 2 more towns | 2 |
+
+- [TAIL-POWERS seat 3; batch 2 (uses ruling P16 facts); a5a9e4372; src/generators/power/governanceNarrative.js]
+
+**310. In occupied towns the seat sentence now says the town is governed under the Occupation Authority.**
 
 - Towns touched: 28 of 720 sample towns (the occupied towns; 'governs' 469 to 449 printings, 'is governed by' 220 to 212).
 - After: “{place} is governed by {ruler} under the Occupation Authority.”
@@ -3517,7 +3879,57 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-DISPLAY-CIVIC batch 1; commit 812fa7e1f]
 
-**286. The quick guide no longer says the clause 'built around the hall' (Norse culture) in 27 towns. The clause is no longer printed there.**
+**311. In the 28 towns under occupation, the page no longer prints lines that say a ruler or council governs the town as if nothing had changed.**
+
+- Towns touched: 28 of 720 sample towns.
+- Before: “<seat> governs <town>. / <town> is governed by <seat>.”
+- Why: The lines were false under an occupation (the governing line must read the occupation).
+- If vetoed: Those lines would print again in the 28 occupied towns (66 lines), including where the occupiers rule.
+- Every form:
+
+  | Before | After | Towns |
+  |---|---|---|
+  | row 02559 "Duke governs" | printed in 15 towns instead of 16 | 16 |
+  | row 02606 (a consortium governs) | printed in 16 towns instead of 17 | 17 |
+  | The elders of the hamlet decide things together, and no lord stands over them. | printed in 26 towns instead of 27 | 27 |
+  | row 00382 | printed in 0 towns instead of 1 | 1 |
+  | the occupier "no longer takes its orders" / "takes its orders no longer" | printed in 0 towns instead of 4 + 4 | 8 |
+  | every seat line and every "<seat> governs <town>." / "<town> is governed by <seat>." in the 28 occupied towns | no longer printed (66 lines in those 28 towns) | 28 |
+
+- [TAIL-POWERS seat 2; ruling P4 (occupation half); a708f0cf9; src/generators/power/governingStressVignettes.js, rulingStructure.js, domain/display/governanceAccount.js]
+
+**312. A new sentence in the 28 occupied towns says the seat keeps its place but nothing it decides stands without the occupiers' approval.**
+
+- Towns touched: 28 of 720 sample towns.
+- After: “<Seat> keeps the seat, but under the occupation nothing it decides stands without the occupiers' approval.”
+- Why: The old governing lines were false under an occupation.
+- If vetoed: effect not stated in the hand-back
+- [TAIL-POWERS seat 2; ruling P4; a708f0cf9; src/generators/power/governingStressVignettes.js]
+
+**313. In the 28 occupied towns the governance account says the seat answers to the occupiers (three versions: a seat with a head, a headless seat, an unnamed seat).**
+
+- Towns touched: 28 of 720 sample towns.
+- After: “<The seat> answers to the occupiers of <town>.”
+- Why: reason not stated beside this line; the batch makes the governing line read the occupation. The chair later chose this wording over another wording ("under the Occupation Authority").
+- If vetoed: effect not stated in the hand-back
+- Every form:
+
+  | Before | After | Towns |
+  |---|---|---|
+  | under the Occupation Authority (the other wording, now printed in 0 towns) | <the hall> answers to the occupiers of <place>. | 28 |
+
+- [TAIL-POWERS seat 2 and seat 4; rulings P4 and P28; a708f0cf9, eb5e2ab0d; src/domain/display/governanceAccount.js]
+
+**314. On a criminal network's Suppressed card, the line no longer says it controls illicit trade; it says it keeps out of the law's sight and takes what it can.**
+
+- Towns touched: 7 of 720 sample towns change (28 to 21; 8 cards in 7 towns).
+- Before: “Criminal network operating in shadows; controls illicit trade and profits from the gap between law and enforcement.”
+- After: “Criminal network operating in shadows; it keeps out of the law's sight and takes what it can from illicit trade.”
+- Why: The card is Suppressed, so "controls illicit trade" claimed too much; Minor cards keep the line (true at Minor).
+- If vetoed: The old line would print again on those Suppressed cards.
+- [TAIL-POWERS-B seat 3; ruling P29; batch 7; src/generators/power/claimStanding.js]
+
+**315. The quick guide no longer says the clause 'built around the hall' (Norse culture) in 27 towns. The clause is no longer printed there.**
 
 - Towns touched: 27 of 720 sample towns lose this clause.
 - Before: “built around the hall”
@@ -3525,7 +3937,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The clause returns in those towns, including where it is false.
 - [TAIL-CRISIS-2, TAIL-CRISIS-3; batch 2; K15 (silences accepted as told); src/domain/summary/settlementQuickGuide.js]
 
-**287. The Free Elder Council's line no longer says no lord stands over the elders.**
+**316. The Free Elder Council's line no longer says no lord stands over the elders.**
 
 - Towns touched: 27 of 720 sample towns (27 to 0).
 - Before: “The elders … decide things together, and no lord stands over them.”
@@ -3534,7 +3946,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in those 27 towns, including 2 where it is false.
 - [TAIL-TIES-2 batch 1; rows 20473, X9 10615, 00909; src/data/powerSiblings.js GOV_DESC_OF_UNNAMED_SEAT]
 
-**288. The crime-structure note '…lacks a single controlling authority.' now has a second version where one criminal power with a named head stands.**
+**317. The crime-structure note '…lacks a single controlling authority.' now has a second version where one criminal power with a named head stands.**
 
 - Towns touched: 26 of 720 sample towns (the three sentences of the note fell 168 to 142).
 - Before: “…lacks a single controlling authority.”
@@ -3552,10 +3964,10 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-DISPLAY-CIVIC-4; V8; commit 9b6adf3b4; src/domain/display/defenseDisplay.js CRIM_STRUCTURE_DATA]
 
-**289. The City administration's three sentences no longer say it is "less formally constituted than a council" and now say the officials "carry out the city's business, whoever sits above it".**
+**318. The City administration's three sentences no longer say it is "less formally constituted than a council" and now say the officials "carry out the city's business, whoever sits above it".**
 
 - Towns touched: 26 of 720 sample towns for the widest sentence.
-- Why: The old sentences said the city has no council where every printing town is governed by a council, senate or assembly (26 of 26, 18 of 18 and 15 of 15).
+- Why: The old sentences said the city is run by something less formal than a council, but every town that prints them is governed by a council, senate or assembly (26 of 26, 18 of 18 and 15 of 15).
 - If vetoed: The "less formal than a council" wording returns in 59 towns, where a council governs.
 - Every form:
 
@@ -3567,7 +3979,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [fourth houses seat; ruling H18 (i); src/data/institutionalCatalog.js, src/data/institutionDescVariants.js; guard tests/data/tailHouses7GovernanceWords.test.js]
 
-**290. The Merchant oligarchy's three sentences keep the old wording where another power of standing exists; in 23 of 37 sample towns where none does, a second version prints that no longer says merchant families hold "exclusive" or "sole" power.**
+**319. The Merchant oligarchy's three sentences keep their old wording only where no other power of standing exists (14 of 37 sample towns); in the other 23, where another power at Significant strength or above exists, a second version prints that no longer says merchant families hold "exclusive" or "sole" power.**
 
 - Towns touched: 37 of 720 sample towns (14, 14 and 9); the second version prints in 23 of them, 14 keep the original.
 - Why: The old sentences said merchant families alone hold civic power where another power at Significant strength or above stands beside them.
@@ -3582,7 +3994,38 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [fifth houses seat; ruling H20 (ii); commit 5d906f6e4; src/data/institutionDescVariants.js DESC_LATE_SIBLINGS; src/generators/steps/assembleSettlement.js]
 
-**291. The criminal truce row is no longer named 'at odds with it', and the matching hall arrangement line is gone.**
+**320. In tiny settlements (thorps) a background quarrel about grazing and water now says those on each side no longer speak to one another, instead of speaking of families on each side.**
+
+- Towns touched: 23 of 720 sample towns (58 towns printed the old line; 35 still do).
+- Before: “... between the families on each side (the old sentence is not quoted in full)”
+- After: “A dispute over grazing rights and water access has run for two seasons, and those on each side of it no longer speak to one another.”
+- Why: The old wording spoke of families on each side, which is false in a thorp of 6 to 30 souls; 41 of the 57 printing towns hold no grazing resource.
+- If vetoed: The old wording would print again in those 23 thorps.
+- [TAIL-POWERS seat 4; ruling P27; 160c99790; src/generators/power/governanceNarrative.js, data/powerSiblings.js]
+
+**321. In 6 hamlets and villages a quarrel about merchants outbuying noble estates now says one merchant bought land the old landholding family once held.**
+
+- Towns touched: 20 of 720 sample towns (20 towns printed the old line; 6 now print the second version and 14 keep the old one).
+- Before: “... three estates ... The families that lost them have not forgotten. (the old sentence is not quoted in full)”
+- After: “A merchant has bought land the old landholding family once held, and the family has not forgotten.”
+- Why: The old wording spoke of three estates in places of 42 to 291 people.
+- If vetoed: The old wording would print again in those 6 towns.
+- [TAIL-POWERS seat 4; ruling P27; 160c99790; src/generators/power/governanceNarrative.js]
+
+**322. A relation row (14478) prints in 9 towns instead of 20; the hand-back says the 11 escalating rows now say "yet".**
+
+- Towns touched: 20 of 720 sample towns.
+- Why: The 11 rows say the quarrel is escalating, so the old row was false there.
+- If vetoed: The old row would print again in those 11 towns.
+- Every form:
+
+  | Before | After | Towns |
+  |---|---|---|
+  | row 14478 (sentence not quoted) | printed in 9 towns instead of 20 | 20 |
+
+- [TAIL-POWERS-B seat 1; row 14478; cd97721f6; src/generators/factionDynamics.js]
+
+**323. The criminal truce row is no longer named 'at odds with it', and the matching hall arrangement line is gone.**
 
 - Towns touched: 19 of 720 sample towns (18 for the truce row, 19 for the other arrangement).
 - Before: “at odds with it”
@@ -3597,7 +4040,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-DISPLAY-CIVIC batch 3; commit ef9371250; row 19954]
 
-**292. The village elder's row about dispute mediation changes.**
+**324. The village elder's row about dispute mediation changes.**
 
 - Towns touched: 19 of 720 sample towns (villages).
 - Before: “Arbitrates quarrels before they reach the lord's court”
@@ -3606,7 +4049,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in those 19 towns, including where it is false.
 - [TAIL-SERVICES-3; ruling S12; e35851db1; src/data/institutionServices.js]
 
-**293. A religious power whose standing is Suppressed no longer gets 'A small voice in the <tier>'s affairs belongs to the Religious Authorities'; the page now says it is suppressed.**
+**325. A religious power whose standing is Suppressed no longer gets 'A small voice in the <tier>'s affairs belongs to the Religious Authorities'; the page now says it is suppressed.**
 
 - Towns touched: 17 of 720 sample towns by one count and 18 by another (the page row prints in 18).
 - Before: “A small voice in the <tier>'s affairs belongs to the Religious Authorities.”
@@ -3615,7 +4058,31 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The 'small voice' line returns in the 17 to 18 towns where the faction is Suppressed, including where it is false.
 - [TAIL-CRISIS-3; batch 4; 03046; d667b50e7; src/domain/dossier/faithReading.js (factionLine, religiousFactionOf)]
 
-**294. The 'church guidance' / 'church sway' chip no longer prints over a wayside shrine alone; the power's chipless line prints instead.**
+**326. The faith's card line about the arcane orders having more say now names the arcane power the faith really faces where that is the Arcane Council.**
+
+- Towns touched: 7 of 720 sample towns change (the line printed in 17, now 10).
+- Before: “The arcane orders have more say right now, and the clergy cannot accept it.”
+- After: “Arcane Council has more say right now, and the clergy cannot accept it.”
+- Why: The line was false in 7 of 17 towns: the rival it read is the governing Arcane Council and the Arcane Orders stand behind the clergy.
+- If vetoed: The old line would print again in those 7 towns, including where it names the wrong rival.
+- [TAIL-POWERS-B seat 3; ruling P29, P1; batch 7; src/generators/power/factionStanding.js]
+
+**327. The stability word "Ordered (strong military presence)" no longer prints where the town has no garrison; some towns now print it instead because they gained it from the theocracy change.**
+
+- Towns touched: 3 of 720 sample towns lose the line; "Ordered (strong military presence)" then prints in 16 instead of 13.
+- Before: “Ordered (strong military presence)”
+- Why: The word claims a strong military presence where no garrison stands.
+- If vetoed: The word would print again in the 3 towns that have no garrison.
+- Every form:
+
+  | Before | After | Towns |
+  |---|---|---|
+  | Ordered (strong military presence) printed in 13 towns | printed in 16 towns (1 without a garrison gone, 2 with the monster suffix; 4 gained from the theocracy change); all 16 hold a garrison | 16 |
+  | – | Tense - regional monster threat prints in 2 more towns | 2 |
+
+- [TAIL-POWERS seat 3; ruling P16 (G5); 0eaea0870; src/generators/power/rulingStructure.js, governanceNarrative.js]
+
+**328. The 'church guidance' / 'church sway' chip no longer prints over a wayside shrine alone; the power's chipless line prints instead.**
 
 - Towns touched: 15 of 720 sample towns (the chip printed in 68 towns before and 53 after; in the PDF 'church guidance' 17 to 8, 'church sway' 51 to 45).
 - Before: “church guidance / church sway (chip)”
@@ -3623,7 +4090,32 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: the chip returns in the 15 towns, including where only a wayside shrine stands
 - [TAIL-DISPLAY-CIVIC-2 C2-2; X14; commit a51f3628e; rows 21394, 21466]
 
-**295. Defence desk lines and role lines that follow the reliance reading changed in a few towns: the lines that say the town would go on without magic fell where the food now depends on it, and the 'relied upon' lines grew.**
+**329. A new second version of the elders' sentence for small places where fewer and fewer people accept the elders' word.**
+
+- Towns touched: 15 of 720 sample towns.
+- After: “Elders guide the community by custom, not by formal authority, but fewer and fewer people accept their word.”
+- Why: The old line said people follow the elders out of respect, which is false beside a legitimacy crisis (15 towns lost it). The words were changed after the sample run to fit the style rule on "rather than", in the same 15 towns.
+- If vetoed: The old line would print again in those 15 towns, including in a legitimacy crisis.
+- [TAIL-POWERS seat 1; ruling P4; 21dc7fa4b; src/generators/power/rulingStructure.js]
+
+**330. At the truce rung, the hall-and-thieves relation reads "stable" whatever the legitimacy; it no longer reads "escalating".**
+
+- Towns touched: 15 of 720 sample towns.
+- Before: “<seat>~Thieves' Guild escalating”
+- After: “<seat>~Thieves' Guild stable”
+- Why: The row was escalating at a truce; ruling P13(2) says it reads its rung.
+- If vetoed: The "escalating" reading would print again at the truce in those 15 towns (14 sentences).
+- Every form:
+
+  | Before | After | Towns |
+  |---|---|---|
+  | rows 07646, 16740, 23138, 03799 ("~escalating") | printed in 0 towns | – |
+  | <C> keeps its head down, because it needs the hall standing to feed off it. | printed in 50 towns instead of 35 (back again; true beside "stable") | 50 |
+  | With the hall's own authority in question, <C> grows bolder each season (batch 1's second sentence) | withdrawn, printed in 0 towns instead of 15 | 15 |
+
+- [TAIL-POWERS-B seat 1; ruling P13 (2); 42f7f68c2; src/generators/factionDynamics.js]
+
+**331. Defence desk lines and role lines that follow the reliance reading changed in a few towns: the lines that say the town would go on without magic fell where the food now depends on it, and the 'relied upon' lines grew.**
 
 - Towns touched: 4 to 8 towns each for the lines that fell; +14 for the relied-upon lines.
 - Before: “The <size> would go on if the arcane went away…”
@@ -3645,7 +4137,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-DISPLAY-ECON-2; X10; src/domain/magicProfile.js]
 
-**296. The Magic tab's facet value 'guild_controlled' now prints as words.**
+**332. The Magic tab's facet value 'guild_controlled' now prints as words.**
 
 - Towns touched: 14 of 720 sample towns.
 - Before: “Institutional control guild_controlled”
@@ -3654,7 +4146,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: the raw key 'guild_controlled' returns in 14 towns
 - [TAIL-DISPLAY-ECON-3; row 11782; commit 53e295e5a; src/components/tabs/MagicTab.jsx Facet]
 
-**297. The line 'Nothing structural at X depends on arcane work.' no longer prints in towns where the food record holds a provision by magic.**
+**333. The line 'Nothing structural at X depends on arcane work.' no longer prints in towns where the food record holds a provision by magic.**
 
 - Towns touched: 13 of 720 sample towns (printing 135 to 122).
 - Before: “Nothing structural at X depends on arcane work.”
@@ -3662,7 +4154,16 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: the line returns in those 13 towns, including where the food record shows a provision by magic
 - [TAIL-DISPLAY-ECON-2; row 15124; src/domain/magicReliance.js]
 
-**298. The Message network's two sentences no longer say "only the crown and the great guilds keep them" and now say "only the richest powers".**
+**334. Where the seat is stronger than the guild, the line about the underworld no longer says it controls smuggling and the government tolerates it; it says the seat is stronger and has not moved to break its hold.**
+
+- Towns touched: 5 of 720 sample towns change (13 to 8; 8 cards in 5 towns).
+- Before: “Underworld effectively controls vice, smuggling, and key officials; the nominal government tolerates this because it cannot currently change it.”
+- After: “Underworld effectively controls vice and key officials; the seat is stronger, but has not moved to break its hold.”
+- Why: The seat's own label stands above the guild's.
+- If vetoed: The old line would print again on those cards.
+- [TAIL-POWERS-B seat 3; ruling P29; batch 7; src/generators/power/claimStanding.js]
+
+**335. The Message network's two sentences no longer say "only the crown and the great guilds keep them" and now say "only the richest powers".**
 
 - Towns touched: 12 of 720 sample towns for the widest sentence.
 - Why: The old sentences said only the crown and the great guilds keep a station, which was false in 8 of 12 and 8 of 11 towns.
@@ -3678,7 +4179,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [second houses seat; ruling H7; src/data/institutionDescColour.js, src/data/institutionalCatalog.js]
 
-**299. Lines that say "three powers" now print only where the town holds three powers. Elsewhere they say "each" or "every" power.**
+**336. Lines that say "three powers" now print only where the town holds three powers. Elsewhere they say "each" or "every" power.**
 
 - Towns touched: 11 of 720 sample towns before and 2 after for "Three powers" (false in 9); the "all three powers" lines are gone (false in 7).
 - Before: “Three powers”
@@ -3695,7 +4196,107 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-NARRATIVE; batch 1; base f663a2699, tree b52481302; src/generators/narrativeText.js] 00338 politically_fractured[1]; 01722, 01760, 01720, B01841 [2]
 
-**300. The "Critical" line saying nothing protects the ruler and the counterpart has the strength is reworded.**
+**337. In 11 towns with a monster threat, the quarrel about raising a levy no longer says the force is stretched thin or that a raid destroyed farms last season; the new sentence says monsters prowl near the farms and no one can agree how to respond.**
+
+- Towns touched: 11 of 720 sample towns.
+- Before: “The <force> is stretched thin and <seat> cannot agree on whether to raise a levy or hire mercenaries. / A monster incursion last season destroyed outlying farms”
+- After: “Monsters prowl near the outlying farms, and no one here can agree whether to raise a levy or pay others to drive them off.”
+- Why: The old lines were false: no monster raid is in the town's past, and the order label is Safe or Very Safe in 6 of the 11 towns.
+- If vetoed: The old sentences would print again in those 11 towns, including where the town is Safe and no raid is on record.
+- [TAIL-POWERS seat 4; ruling P27; 160c99790; src/generators/power/governanceNarrative.js]
+
+**338. An existing relation sentence about two powers (a merchant group and a criminal group) that have not yet fought now prints in 11 towns.**
+
+- Towns touched: 11 of 720 sample towns.
+- After: “<M> knows where <C> works, and <C> knows the patrol rota. Neither has yet pushed the other hard enough to start a fight.”
+- Why: reason not stated beside this line
+- If vetoed: effect not stated in the hand-back
+- [TAIL-POWERS-B seat 1; cd97721f6; src/generators/factionDynamics.js]
+
+**339. A town with a legitimacy crisis no longer reads "Stable" in its stability line; it reads a new word "Tense (the seat has lost the people's trust)".**
+
+- Towns touched: 9 of 720 sample towns.
+- Before: “Stable”
+- After: “Tense (the seat has lost the people's trust)”
+- Why: A bare "Stable" beside a Legitimacy Crisis was false.
+- If vetoed: "Stable" would print again beside a legitimacy crisis in those 9 towns, and the new stability word would be removed.
+- [TAIL-POWERS seat 3; ruling P16 (G2); 0eaea0870; src/generators/power/rulingStructure.js, governanceNarrative.js]
+
+**340. Relation lines name the Guard as "The Guard" and no longer "Military/Guard", and the verbs agree with plural power names ("Religious Authorities tell", "Merchant Guilds work / need / buy / have", "Noble Houses ... their").**
+
+- Towns touched: 9 of 720 sample towns for the first four sentences; the hand-back gives no total for the rest.
+- Before: “Military/Guard is now about as strong as Elder Council”
+- After: “(the same sentence with "The Guard" in place of "Military/Guard")”
+- Why: The slashed label is not prose (ruling P3); the verbs did not agree with plural names.
+- If vetoed: The slashed label "Military/Guard" and the old verbs would print again.
+- Every form:
+
+  | Before | After | Towns |
+  |---|---|---|
+  | rows 13613, 04979, 13188, 10488, 14719, 07155, 07034, 13550, 13600, 13601, 13602, 13607 (slashed label in the sentence) | these sentences no longer print; their towns print "The Guard ..." | – |
+
+- [TAIL-POWERS-B seat 1; rulings P1, P3; cd97721f6; src/generators/factionDynamics.js]
+
+**341. Several relation rows in the first batch no longer print; the hand-back gives the counts but not the sentences.**
+
+- Towns touched: 9 of 720 sample towns.
+- Why: Each drop equals the row's measure by the town's data; the sentences are not quoted in the hand-back.
+- If vetoed: effect not stated in the hand-back
+- Every form:
+
+  | Before | After | Towns |
+  |---|---|---|
+  | row 01132 | – | 9 |
+  | row 10164 | – | 8 |
+  | row 03772 | – | 6 |
+  | row 09870 | – | 4 |
+  | row 13195 | – | 3 |
+  | row 07631 | – | 2 |
+  | row 04940 | – | 1 |
+  | rows B12634, B04763, B13899, B07201, B22104, B03654 (the tolerance row: its second sentence on the hall's authority in a legitimacy crisis; this was withdrawn in batch 3b) | – | 15 |
+
+- [TAIL-POWERS-B seat 1; cd97721f6; src/generators/factionDynamics.js, data/people/dmPowerLines.js]
+
+**342. Where an arcane power governs, the non-governing mages now read "Magical practitioners outside the seat hold no office of their own; their influence is advisory and transactional."**
+
+- Towns touched: 9 of 720 sample towns.
+- Before: “Magical practitioners are consulted but not formally empowered. Their influence is advisory, transactional, and quietly resented.”
+- After: “Magical practitioners outside the seat hold no office of their own; their influence is advisory and transactional.”
+- Why: The old line is false where an arcane power governs (9 of 147 towns).
+- If vetoed: The old line would print again in those 9 towns, including where an arcane power governs.
+- Every form:
+
+  | Before | After | Towns |
+  |---|---|---|
+  | the old line, printed in 147 towns | printed in 138 towns | 147 |
+
+- [TAIL-POWERS-B seat 3; chair's READ-ALL-4 HIGH; 127b1f8ac; src/generators/power/claimStanding.js]
+
+**343. Under an occupation, the existing lines "<X> is at odds with it." and "The hall is at odds with <X>." now name the occupier at a tied contest.**
+
+- Towns touched: 4 + 4 of 720 sample towns.
+- After: “<X> is at odds with it. / The hall is at odds with <X>.”
+- Why: reason not stated in the hand-back beside this line
+- If vetoed: effect not stated in the hand-back
+- [TAIL-POWERS seat 2; ruling P4; a708f0cf9; src/domain/display/governanceAccount.js]
+
+**344. The stability words about a theocracy ("Rigid (militant theocracy)" and "Stable (theocratic governance)") no longer print in towns with no religious seat or religious power of weight.**
+
+- Towns touched: 8 of 720 sample towns for each of the two words (the hand-back also gives 5 + 2 and 5 to 4 for single sentences).
+- Before: “Rigid (militant theocracy)”
+- Why: The words claim a theocracy where no religious seat or religious power of weight stands.
+- If vetoed: The two words would print again in those 8 + 8 towns, including where there is no theocracy.
+- Every form:
+
+  | Before | After | Towns |
+  |---|---|---|
+  | Rigid (militant theocracy) | printed in 0 towns instead of 5 | 5 |
+  | Rigid (militant theocracy); monsters on the roads | printed in 0 towns instead of 2 (also 2 to 0 in the exports) | 2 |
+  | Stable (theocratic governance) | printed in 4 towns instead of 5 | 5 |
+
+- [TAIL-POWERS seat 3; ruling P16 (G3); 0eaea0870; src/generators/power/governanceNarrative.js, rulingStructure.js]
+
+**345. The "Critical" line saying nothing protects the ruler and the counterpart has the strength is reworded.**
 
 - Towns touched: 7 of 720 sample towns.
 - Before: “Nothing at {settlement} protects the {seat} now. {counterpart} has the strength”
@@ -3704,7 +4305,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in those 7 towns, including where it is false.
 - [TAIL-CORPUS-DEF seat; ruling C10 for rows 15073, B14249; DS-POW-4 Rule and succession Critical v1; batch 3; src/data/dossierStateProse/power.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**301. The empty defence roster also lowers the public-legitimacy score in 7 towns and changes one stability line.**
+**346. The empty defence roster also lowers the public-legitimacy score in 7 towns and changes one stability line.**
 
 - Towns touched: 7 of 720 sample towns (the public-legitimacy score); 1 town for the stability line.
 - Before: “Ordered (strong military presence) (r2r-village-49)”
@@ -3719,7 +4320,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-DEFECON-D; ruling D20; commit db505beb1]
 
-**302. The line about "the local clergy" no longer prints where the only holy place is a wayside shrine.**
+**347. The line about "the local clergy" no longer prints where the only holy place is a wayside shrine.**
 
 - Towns touched: 7 of 720 sample towns before and 5 after.
 - Before: “the local clergy”
@@ -3727,7 +4328,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The line returns in the 2 sample towns where it was withheld.
 - [TAIL-NARRATIVE; batch 1; base f663a2699, tree b52481302; src/generators/narrativeText.js] 00014 religious_heavy[2]
 
-**303. A list that named the Thieves' Guild beside another power now names the other power alone.**
+**348. A list that named the Thieves' Guild beside another power now names the other power alone.**
 
 - Towns touched: 6 of 720 sample towns (+6).
 - After: “The Religious Authorities are at odds with it.”
@@ -3735,7 +4336,37 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-CIVIC batches 2 and 3]
 
-**304. The village headman's row on tithe and dues no longer says "temple" tithe.**
+**349. Where a noble power is Suppressed, its relation row now takes the subordinate form; the existing line "Noble Houses still have their titles, but the hall's offices have taken most of their power." prints in 2 more towns.**
+
+- Towns touched: 6 of 720 sample towns.
+- After: “Noble Houses still have their titles, but the hall's offices have taken most of their power.”
+- Why: A Suppressed noble power was given a relation row that did not fit its strength (ruling P1).
+- If vetoed: effect not stated in the hand-back
+- Every form:
+
+  | Before | After | Towns |
+  |---|---|---|
+  | row 14783 | printed in 0 towns instead of 1 | 1 |
+  | row 14787 | printed in 0 towns instead of 1 | 1 |
+
+- [TAIL-POWERS-B seat 1; ruling P1; rows 14783, 14787; cd97721f6; src/generators/factionDynamics.js]
+
+**350. Beside a HIGH quarrel of the seat and the faith, and under an occupation, the "ordained" relation line is reworded: the first says the two are now at odds over the issue; the second drops the tax claim.**
+
+- Towns touched: 6 + 4 of 720 sample towns.
+- Before: “<G> holds the seat and collects the taxes; <R> tell(s) people that <G>'s rule is right and ordained. Each props up the other.”
+- After: “<seat> holds the seat and collects the taxes; Religious Authorities have long told people that <seat>'s rule is right and ordained, but the two are now at odds over <issue>. / under an occupation: <seat> holds the seat; Religious Authorities tell people ...”
+- Why: The old line said each props up the other beside a HIGH quarrel (6 towns) and said the seat collects the levy under an occupation, where the occupier takes it (4 towns).
+- If vetoed: The old line would print again in those 10 towns, including beside a quarrel and under an occupation.
+- Every form:
+
+  | Before | After | Towns |
+  |---|---|---|
+  | Each props up the other. | printed in 114 towns instead of 120 | 120 |
+
+- [TAIL-POWERS-B seat 4; ruling P31 (5); d99bce57a; src/generators/factionDynamics.js]
+
+**351. The village headman's row on tithe and dues no longer says "temple" tithe.**
 
 - Towns touched: 5 of 720 sample towns.
 - Before: “the lord's dues and the temple tithe”
@@ -3744,7 +4375,28 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old words return in those 5 towns; the hand-back does not say whether they are false there.
 - [TAIL-SERVICES-3; ruling S11; e35851db1; src/data/institutionServices.js]
 
-**305. The "Contested" line "Visitors … are quietly told to stay polite" no longer prints in towns under siege.**
+**352. A line about the hall and a criminal power that leave each other alone no longer prints in towns where the only reason is the climate; the new sentence says nobody at the head of the faith answers to the criminal group.**
+
+- Towns touched: 4 of 720 sample towns at most for one row; the hand-back gives no total.
+- Before: “<R> and <C> leave each other alone. ... neither side pushes the other”
+- After: “Nobody at the head of <R> answers to <C>, and <R> has not set out to stamp <C> out.”
+- Why: The old line claimed the two leave each other alone from the climate alone.
+- If vetoed: The old line would print again in those towns.
+- Every form:
+
+  | Before | After | Towns |
+  |---|---|---|
+  | row B09621 | printed in 0 towns | 4 |
+  | row 13160 | printed in 0 towns | 3 |
+  | row 14717 | printed in 0 towns | 3 |
+  | row 16697 | printed in 0 towns | 3 |
+  | row B14087 | printed in 0 towns | 3 |
+  | rows B07194, B14061, B06497 | printed in 0 towns | 2 |
+  | rows 07095, 07154, 14886, 13187, B22098, B14093, B03644, B14045, B04756, B14081 | printed in 0 towns | 1 |
+
+- [TAIL-POWERS-B seat 1; cd97721f6; src/generators/factionDynamics.js]
+
+**353. The "Contested" line "Visitors … are quietly told to stay polite" no longer prints in towns under siege.**
 
 - Towns touched: 3 of 720 sample towns (sieges).
 - Before: “Visitors … are quietly told to stay polite”
@@ -3752,7 +4404,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old line returns in those 3 sieges, where it is false.
 - [TAIL-CORPUS-DEF seat; batch 3; rows B22476 23484; DS-POW-4 Contested v4, declared "no crisis: under_siege"; src/data/dossierStateProse/power.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**306. Where no estranged power is left, the record's own vignette prints as the composer's designed fallback.**
+**354. Where no estranged power is left, the record's own vignette prints as the composer's designed fallback.**
 
 - Towns touched: 3 of 720 sample towns for the first line, 1 for the second.
 - After: “Several merchants have been found murdered this season, and people say the guard is doing nothing about it.”
@@ -3766,7 +4418,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-DISPLAY-CIVIC batches 2 and 3; powerStructure.recentConflict]
 
-**307. 'The Neutrals will back whichever side meets their price.' replaces a sentence that said 'its price'.**
+**355. 'The Neutrals will back whichever side meets their price.' replaces a sentence that said 'its price'.**
 
 - Towns touched: 3 of 720 sample towns.
 - Before: “The Third Bloc … its price”
@@ -3775,7 +4427,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-CIVIC-3; V1 number fix; r2s-politically_fractured-town-3, r2r-metropolis-39, r2s-politically_fractured-metropolis-0]
 
-**308. The sentence saying the town keeps its own court and its own gaol no longer prints in occupied towns; they get another sentence of the same group.**
+**356. The sentence saying the town keeps its own court and its own gaol no longer prints in occupied towns; they get another sentence of the same group.**
 
 - Towns touched: 3 of 720 sample towns (an occupation) lose it; 74 to 71 print it.
 - Before: “keeps its own court and its own gaol”
@@ -3783,7 +4435,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The sentence returns in those occupied towns, where the hand-back calls it false.
 - [TAIL-CORPUS-ECO; ADMINISTERED v1 (DS-GEN-17); C1 C2; 29271e7bf (after run); src/data/dossierStateProse/general.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**309. "the practitioners who work here" is replaced by a sentence about the event.**
+**357. "the practitioners who work here" is replaced by a sentence about the event.**
 
 - Towns touched: 3 of 720 sample towns; false in 3 of 3.
 - Before: “the practitioners who work here”
@@ -3792,7 +4444,21 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in the 3 sample towns that printed it, where it contradicts the page's own line.
 - [TAIL-NARRATIVE; batch 1; base f663a2699, tree b52481302; src/generators/narrativeText.js] 00010 magical_heavy[2]
 
-**310. The line "one person decides" no longer prints in towns with no stable ruler; a second version of the line says who speaks for the seat is an open question.**
+**358. Under an occupation, a trade line about bargained taxes prints in fewer towns, and a new sentence says day-to-day trade is run by the merchants more than by the seat.**
+
+- Towns touched: row 06303: 3 of 720 sample towns to 2; the new sentence is read in 1 town (the two counts differ).
+- After: “Day-to-day trade here is run by <M> more than by <G>.”
+- Why: There are no bargained taxes under an occupation (row 06303).
+- If vetoed: effect not stated in the hand-back
+- Every form:
+
+  | Before | After | Towns |
+  |---|---|---|
+  | row 06303 (the bargained-taxes line) | printed in 2 towns instead of 3 | 3 |
+
+- [TAIL-POWERS-B seat 1; row 06303; cd97721f6; src/generators/factionDynamics.js]
+
+**359. The line "one person decides" no longer prints in towns with no stable ruler; a second version of the line says who speaks for the seat is an open question.**
 
 - Towns touched: 2 of 720 sample towns: r2s-succession_void-town-0, r2s-politically_fractured-town-2.
 - Before: “one person decides … quickly”
@@ -3801,7 +4467,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old line returns in those 2 towns, where there is no stable ruler.
 - [TAIL-CORPUS-DEF seat; ruling C2; row 00333; DS-POW-5 autocrat v1-v4 declared "no crisis: succession", second version v5; src/data/dossierStateProse/power.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**311. The "Critical" line "has not yet moved to take it" no longer prints in an occupied town.**
+**360. The "Critical" line "has not yet moved to take it" no longer prints in an occupied town.**
 
 - Towns touched: 1 of 720 sample towns: r2s-occupied-city-0.
 - Before: “{counterpart} has not yet moved to take it”
@@ -3809,7 +4475,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old line returns in that town, where it is false.
 - [TAIL-CORPUS-DEF seat; batch 3; row 07358; DS-POW-4 Critical v3, declared "no crisis: occupied"; src/data/dossierStateProse/power.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**312. 'The Senior Line and the Reform Line contend for it.' is the re-spelled form of a sentence that held slashed labels.**
+**361. 'The Senior Line and the Reform Line contend for it.' is the re-spelled form of a sentence that held slashed labels.**
 
 - Towns touched: 1 of 720 sample towns (r2r-metropolis-8).
 - After: “The Senior Line and the Reform Line contend for it.”
@@ -3817,7 +4483,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-CIVIC-3; V1; commit 1f030877d]
 
-**313. A power's catalogue label inside a sentence now reads its prose form ('Military/Guard' reads 'The Guard'); chips and rank lines keep the roster's label.**
+**362. A power's catalogue label inside a sentence now reads its prose form ('Military/Guard' reads 'The Guard'); chips and rank lines keep the roster's label.**
 
 - Towns touched: count of towns not recorded; 80 distinct sentences in 168 printings held a slashed label before and 28 sentences in 60 printings after (54 sentences changed), in the 720 sample towns.
 - Before: “Military/Guard”
@@ -3834,7 +4500,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-DISPLAY-CIVIC-3; V1; commit 1f030877d; src/domain/display/powerSentenceName.js; stateProse files; governanceAccount.js]
 
-**314. A power named in the headline now prints in its prose form ("The Guard"), not as a slash label.**
+**363. A power named in the headline now prints in its prose form ("The Guard"), not as a slash label.**
 
 - Towns touched: count not fully recorded (the hand-back gives "4 + 3 + …").
 - After: “…with The Guard pressing close behind / …more weight lies with The Guard”
@@ -3842,7 +4508,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: effect not stated in the hand-back
 - [TAIL-EXPORTS-PDF; rulings E1 P1; batch 1; tip 1ed03ef1e (base 48fedbe98); src/pdf/lib/headlines.js; powerSentenceName.js]
 
-**315. The council's 'Dispute adjudication' row now reads that it hears civil pleas at the council bench, not in the town court.**
+**364. The council's 'Dispute adjudication' row now reads that it hears civil pleas at the council bench, not in the town court.**
 
 - Towns touched: count not recorded.
 - Before: “Hears the town's civil pleas … in the town court”
@@ -3851,7 +4517,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The earlier wording returns in the towns that print the row.
 - [TAIL-CLOSE-DISPLAY-2 (reports it); declared move V6 of TAIL-DISPLAY-CIVIC-4, commit d5839e51; docs/census/declarations/]
 
-**316. A line about an office losing its shield (the 'Critical' line for a power) was reworded.**
+**365. A line about an office losing its shield (the 'Critical' line for a power) was reworded.**
 
 - Towns touched: count not recorded.
 - Before: “Nothing at … protects the {seat} now. {counterpart} has the strength …”
@@ -3860,14 +4526,14 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The earlier wording returns in the towns that print it.
 - [TAIL-CLOSE-DISPLAY-2 (reports it); declared rewording by TAIL-CORPUS-DEF-2, commit 51217c0e; example town r2r-metropolis-50]
 
-**317. Under an occupation, a seat that does not govern now prints a second version of its seat line.**
+**366. Under an occupation, a seat that does not govern now prints a second version of its seat line.**
 
 - Towns touched: count not recorded (example towns r2s-occupied-hamlet-2 and r2s-occupied-hamlet-1).
 - Why: The first version said the seat governs while the town is occupied (reason as the hand-back gives it: a declared move of the powers).
 - If vetoed: The first version returns in occupied towns.
 - [TAIL-POWERS-2 batch 1 (P4), commit a708f0cf; reported by TAIL-CLOSE-TESTS-C; src/generators/governingStressVignettes.js]
 
-**318. A pair of powers that depend on each other and are in a high quarrel now prints the quarrel's second version, with the chip 'escalating' instead of 'stable'.**
+**367. A pair of powers that depend on each other and are in a high quarrel now prints the quarrel's second version, with the chip 'escalating' instead of 'stable'.**
 
 - Towns touched: count not recorded.
 - Before: “stable”
@@ -3878,7 +4544,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 ### History and founding (44 items)
 
-**319. In the PDF Overview, the line "Reason settled: <the origin line>" now reads "Settlement Origin: <the origin line>".**
+**368. In the PDF Overview, the line "Reason settled: <the origin line>" now reads "Settlement Origin: <the origin line>".**
 
 - Towns touched: 720 of 720 sample towns.
 - Before: “Reason settled: <line>”
@@ -3887,7 +4553,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: "Reason settled:" returns in all 720 towns.
 - [TAIL-EXPORTS-PDF-3; rulings E21 E22 E23; batch 3; merge 36eaba1af; src/pdf/sections/Overview.jsx; ruling E23]
 
-**320. In the Foundry journal's Overview page, the heading "Why this place exists" now reads "Settlement Origin".**
+**369. In the Foundry journal's Overview page, the heading "Why this place exists" now reads "Settlement Origin".**
 
 - Towns touched: 720 of 720 sample towns.
 - Before: “## Why this place exists”
@@ -3896,7 +4562,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: "Why this place exists" returns in all 720 towns.
 - [TAIL-EXPORTS-PDF-3; rulings E21 E22 E23; batch 3; merge 36eaba1af; src/foundry/journalPages.js (lent for this heading); ruling E23]
 
-**321. Thirteen kinds of town tension that the timeline does not hold as a past event are now told as a quarrel going on now, with present-tense words, new parties and new hooks.**
+**370. Thirteen kinds of town tension that the timeline does not hold as a past event are now told as a quarrel going on now, with present-tense words, new parties and new hooks.**
 
 - Towns touched: 635 sentence changes in 492 of 720 sample towns (descriptions); parties in 427 towns; hooks in 287 towns; per type see rows.
 - Why: The old words described a past event with aftermath ('began to form', 'fought', 'died or left'), which is false when no such event is on the town's timeline.
@@ -3921,7 +4587,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-HISTORY-3; ruling Y13 (widens Y5); batch 3, base 5ed2900cd; src/data/historyData.js, src/generators/historyGenerator.js]
 
-**322. Four sentences about a legacy that is a given age are reworded so the age belongs to the legacy and not to the calamity.**
+**371. Four sentences about a legacy that is a given age are reworded so the age belongs to the legacy and not to the calamity.**
 
 - Towns touched: 352 of 720 sample towns print one of the four lines.
 - Before: “...the {calamity}...; that legacy is {timeband_age}.”
@@ -3939,7 +4605,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-CORPUS-ECO-4; DS-GEN-16 LEGACY-RESOLVED-WELL v1 v2, LEGACY-SHIFTED v1 v2; C23; dba1a16c4 (the earlier cure); src/data/dossierStateProse/general.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**323. Seventeen founding notes no longer say why or by whom the place was founded. They now speak only of the settlement and its people.**
+**372. Seventeen founding notes no longer say why or by whom the place was founded. They now speak only of the settlement and its people.**
 
 - Towns touched: 179 of 720 sample towns (17 notes; the hand-back pairs old and new notes by town count only).
 - Why: Each old note claimed the founders' agreement, trust, kind or purpose (for example "founded by people who agreed on its purpose", "a few families who trusted each other", "chosen for trade, water and good ground", "the roads and river that made this a good place", "From its first season this place ran on enslaved hands"), and the claim was false in most towns that printed it.
@@ -3968,7 +4634,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-NARRATIVE-3; batch 5; base ca827fc0f; ruling N13; src/data/narrativeData.js; STRESS_NOTES]
 
-**324. In 154 sample towns the line that says why the place was founded now agrees with who founded it.**
+**373. In 154 sample towns the line that says why the place was founded now agrees with who founded it.**
 
 - Towns touched: 154 of 720 sample towns.
 - Why: The origin line named a group that began the place (herders, fishers, a military post, a religious settlement, a fair's traders) and the founder was not of that kind.
@@ -4000,7 +4666,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-NARRATIVE; batch FA; ruling N3; tree b52481302; src/generators/narrative/foundingRowAdmits.js]
 
-**325. In 142 sample towns the "Founded by:" line, the "Origin:" line or both changed, because the founder now moves to one that fits the origin line. 25 towns regain an origin line they had lost.**
+**374. In 142 sample towns the "Founded by:" line, the "Origin:" line or both changed, because the founder now moves to one that fits the origin line. 25 towns regain an origin line they had lost.**
 
 - Towns touched: 142 of 720 sample towns (founder changed in 140, origin line in 123); towns with no origin line went from 99 to 74.
 - Why: The founder and the origin line could not both be so. No new sentence was written; the change is which founder and which origin line print together.
@@ -4025,7 +4691,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-NARRATIVE-4; batch FB; ruling N17(1); base 78eadedc5; src/generators/narrative/foundingRowAdmits.js; founder.js]
 
-**326. Ten kinds of town tension that the timeline holds no event for (plague years, great fire, great flood, popular uprising, tyranny, wild magic, trade collapse, market crash, heresy trial, pilgrimage surge) now read as a live quarrel with new words, three parties and three hooks.**
+**375. Ten kinds of town tension that the timeline holds no event for (plague years, great fire, great flood, popular uprising, tyranny, wild magic, trade collapse, market crash, heresy trial, pilgrimage surge) now read as a live quarrel with new words, three parties and three hooks.**
 
 - Towns touched: 135 tensions in 131 of 720 sample towns (descriptions); parties 349 changes; hooks 327 changes.
 - Why: The old words told of an event and its aftermath that the town's timeline does not hold, so 711 printed lines were false.
@@ -4047,7 +4713,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-HISTORY-2; ruling Y5; batch 2, landed as 7bef72cbc; src/data/historyData.js, src/generators/historyGenerator.js]
 
-**327. Twelve more founding notes (occupation, infiltration, mass migration, famine, siege) and three notes for people leaving were reworded so they no longer say why or by whom the place was founded.**
+**376. Twelve more founding notes (occupation, infiltration, mass migration, famine, siege) and three notes for people leaving were reworded so they no longer say why or by whom the place was founded.**
 
 - Towns touched: 122 of 720 sample towns (the notes of the reworded rows); the three "people leaving" notes print in 0 towns.
 - Why: The old notes named the founders (for example "The founders governed themselves", "The founders all knew each other", "The settlers chose this land because it fed them well", "The founders built walls") and the claim was false in most towns that printed them.
@@ -4072,7 +4738,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-NARRATIVE-5; batch 6; ruling N18; base df81604da; after-tree e8302fc3d; src/data/narrativeData.js; STRESS_NOTES; MASS_MIGRATION_DEPARTURE_NOTES]
 
-**328. Seven 'lasting effect' sentences of past events (the alarm drills, the levy roll, the informant office, the denunciation records, two rival congregations, wage disputes, grain reserves) are replaced by second versions in the towns where they are false.**
+**377. Seven 'lasting effect' sentences of past events (the alarm drills, the levy roll, the informant office, the denunciation records, two rival congregations, wage disputes, grain reserves) are replaced by second versions in the towns where they are false.**
 
 - Towns touched: Between 5 and 65 of 720 sample towns per sentence (see rows); the lasting-effect sentences printed in 202, 184, 157, 142, 136, 112 and 46 sample towns.
 - Why: Each old sentence names an office, an archive, a council or a force that does not exist in the smaller or poorer towns (false in 5 to 65 towns per sentence).
@@ -4092,7 +4758,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-HISTORY-4; ruling Y16 (X9 30563, 07927, 03878, 03872-03877, 00590, 29930, 08729); batch 5; src/data/historyData.js, src/data/sizedLastingEffects.js]
 
-**329. The origin line "most of what it owns arrived on somebody else's cart" is reworded to a past-tense line.**
+**378. The origin line "most of what it owns arrived on somebody else's cart" is reworded to a past-tense line.**
 
 - Towns touched: 56 of 720 sample towns before and 0 after.
 - Before: “most of what it owns arrived on somebody else's cart”
@@ -4101,14 +4767,14 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in the 56 sample towns that printed it.
 - [TAIL-NARRATIVE-2; batch 3; base 9bd853fd0; src/generators/narrative/settlementOriginProse.js; B20939 road[1]]
 
-**330. 48 more sample towns now print no origin line at all.**
+**379. 48 more sample towns now print no origin line at all.**
 
 - Towns touched: 48 of 720 sample towns (towns with no origin line went from 51 to 99); the hand-back lists the 48 towns.
 - Why: No origin line agrees with the founder in those towns, and the seat accepted silence there.
 - If vetoed: The origin line returns in those 48 towns, beside a founder it does not agree with.
 - [TAIL-NARRATIVE; batch FA; ruling N3; tree b52481302; src/generators/narrative/foundingRowAdmits.js]
 
-**331. Origin lines that said the place was founded "to trade by water" now say its trade has gone by water. Five new lines replace the old ones.**
+**380. Origin lines that said the place was founded "to trade by water" now say its trade has gone by water. Five new lines replace the old ones.**
 
 - Towns touched: 44 of 720 sample towns (false in 28).
 - Before: “it was founded to trade by water”
@@ -4128,7 +4794,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-NARRATIVE-2; batch 3; base 9bd853fd0; src/generators/narrative/settlementOriginProse.js; B11462 ground[2]; ruling N10; export 22375]
 
-**332. The founder "a dynastic decision that this crossroads would anchor the realm" now prints only where the town's route is a crossroads. Elsewhere another founder that fits prints.**
+**381. The founder "a dynastic decision that this crossroads would anchor the realm" now prints only where the town's route is a crossroads. Elsewhere another founder that fits prints.**
 
 - Towns touched: 28 of 720 sample towns before and 7 after; false in 21 (road 12, port 4, river 4, isolated 1).
 - Before: “a dynastic decision that this crossroads would anchor the realm”
@@ -4136,7 +4802,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The founder returns in the 28 sample towns that printed it, and it is false in 21.
 - [TAIL-NARRATIVE-4; batch FB; ruling N17(1); base 78eadedc5; src/generators/narrative/foundingRowAdmits.js; founder.js]
 
-**333. The origin line "Founded at a junction on the oldest logic there is" is reworded so it no longer gives a cause.**
+**382. The origin line "Founded at a junction on the oldest logic there is" is reworded so it no longer gives a cause.**
 
 - Towns touched: 27 of 720 sample towns before and 0 after; false in 18.
 - Before: “Founded at a junction on the oldest logic there is: wh…”
@@ -4145,7 +4811,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in the 27 sample towns that printed it, and it is false in 18.
 - [TAIL-NARRATIVE-2; batch 3; base 9bd853fd0; src/generators/narrative/settlementOriginProse.js; 09370 crossroads[3]; export 22379]
 
-**334. Two history hook sentences were reworded: a plague line and a tyranny line.**
+**383. Two history hook sentences were reworded: a plague line and a tyranny line.**
 
 - Towns touched: 27 of 720 sample towns (16 the plague line, 11 the tyranny line).
 - Why: reason not stated in the hand-back (the style-law check counted the old words as rises)
@@ -4159,7 +4825,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-CLOSE-POOLS-2; commit 935b84212; src/data/historyData.js]
 
-**335. The 'lasting effect' sentence about price ceilings in lean seasons is replaced in the towns where it is false by a second version that claims less.**
+**384. The 'lasting effect' sentence about price ceilings in lean seasons is replaced in the towns where it is false by a second version that claims less.**
 
 - Towns touched: 26 of 720 sample towns (the sentence printed in 51 sample towns).
 - Before: “Price ceilings on the affected goods still enforced in lean seasons”
@@ -4168,7 +4834,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in those 26 towns, including where the hand-back measured it false.
 - [TAIL-HISTORY-5; ruling Y17 (X9 rows); batch 6, ed9f3b549; src/data/historyData.js, src/data/sizedLastingEffects.js]
 
-**336. "made its name in trade" no longer prints in towns that export nothing. The other branch of the same line ("Records here are kept carefully …") now prints in fewer towns.**
+**385. "made its name in trade" no longer prints in towns that export nothing. The other branch of the same line ("Records here are kept carefully …") now prints in fewer towns.**
 
 - Towns touched: "made its name in trade" 4 to 3 of 720 sample towns (the Great Harvest Compact form 2 to 1, the Shortage form 4 to 3); "Records here are kept carefully …" 26 to 22.
 - Before: “made its name in trade”
@@ -4183,7 +4849,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-NARRATIVE; batch 1; base f663a2699, tree b52481302; src/generators/narrativeText.js] 00138 stable[5]; exports 29068, 22423
 
-**337. In ten origin lines for cut-off towns, "it gets by on" becomes "it must make do with".**
+**386. In ten origin lines for cut-off towns, "it gets by on" becomes "it must make do with".**
 
 - Towns touched: 26 of 720 sample towns (ten lines).
 - Before: “it gets by on {holds}”
@@ -4200,7 +4866,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-NARRATIVE-2; batch 3; base 9bd853fd0; src/generators/narrative/settlementOriginProse.js; 15081, 15101, 22030, 14593, 11943; isolated.unsupplied and isolated.besieged]
 
-**338. The origin line "It exists because travellers had to stop somewhere" is reworded so it no longer gives a cause.**
+**387. The origin line "It exists because travellers had to stop somewhere" is reworded so it no longer gives a cause.**
 
 - Towns touched: 16 of 720 sample towns before and 0 after; false in 9.
 - Before: “It exists because travellers had to stop somewhere, an…”
@@ -4209,7 +4875,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in the 16 sample towns that printed it, and it is false in 9.
 - [TAIL-NARRATIVE-2; batch 3; base 9bd853fd0; src/generators/narrative/settlementOriginProse.js; 11941 crossroads[4]; export 22388]
 
-**339. Two sentences saying the town still does the job it was founded for are reworded to say only that the town is young.**
+**388. Two sentences saying the town still does the job it was founded for are reworded to say only that the town is young.**
 
 - Towns touched: 15 and 2 printing sample towns.
 - Before: “the town still does the job it began with / still lives by its first reason”
@@ -4225,14 +4891,14 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-CORPUS-ECO-3; DS-GEN-14 FOUNDED-YOUNG v2 v1 (rows 07396 07397); C13; 84a41a687 (after run); src/data/dossierStateProse/general.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**340. In 14 towns the arrival scene (the opening description of coming into the town) is drawn again, so some of its lines are new, because the pilgrim row left the income list.**
+**389. In 14 towns the arrival scene (the opening description of coming into the town) is drawn again, so some of its lines are new, because the pilgrim row left the income list.**
 
 - Towns touched: 14 of 720 sample towns.
 - Why: The chair accepted the re-draw as the price of removing a false pilgrim row; the hand-back reads each new line against its town (10 true, 4 judged false, listed in a later item).
 - If vetoed: The pilgrim row would return in 26 towns and the arrival scenes would revert in 14.
 - [TAIL-DEFECON-2; ruling D14; commit 5f67f382d; src/generators/narrative/arrivalScene.js reads the row]
 
-**341. The line "nobody expects it" no longer prints where a siege is on the town's record. Another line from the same list prints there instead.**
+**390. The line "nobody expects it" no longer prints where a siege is on the town's record. Another line from the same list prints there instead.**
 
 - Towns touched: 12 of 720 sample towns before and 10 after; false in 1.
 - Before: “Every plan made here now allows for the Siege happening again; nobody …”
@@ -4240,7 +4906,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The line returns in the 2 sample towns where it was withheld: 1 where it is false and 1 plague city where it was true.
 - [TAIL-NARRATIVE; batch 1; base f663a2699, tree b52481302; src/generators/narrativeText.js] HIGH 00053 / 08875
 
-**342. In 12 sample towns where the founder is "the slow accretion of three smaller settlements", the founder or the origin line moved so the two no longer contradict each other (an origin line that says the place was founded at a stroke).**
+**391. In 12 sample towns where the founder is "the slow accretion of three smaller settlements", the founder or the origin line moved so the two no longer contradict each other (an origin line that says the place was founded at a stroke).**
 
 - Towns touched: 12 of 720 sample towns of the 58 towns the accretion founds (founder changed in 7, origin line in 5).
 - Why: A place that grew slowly from three settlements cannot also have been founded at a stroke (a coastal trading port 4 towns, a waystation 2, the clean-cutting stone 2, the natural harbour 1, the mineral deposits 1, the market metropolis 1, the river navigable 1).
@@ -4259,7 +4925,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-NARRATIVE-5; batch 6; ruling N18(5); base df81604da; src/generators/narrative/foundingRowAdmits.js (FOUNDER_PURPOSE table)]
 
-**343. The batch-5 founding note "Every faction here tells…" is reworded to use the word "power", in 12 towns.**
+**392. The batch-5 founding note "Every faction here tells…" is reworded to use the word "power", in 12 towns.**
 
 - Towns touched: 12 of 720 sample towns.
 - Before: “Every faction here tells…”
@@ -4268,7 +4934,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The earlier note returns in the 12 sample towns that printed it.
 - [TAIL-NARRATIVE-5; after batch 6; src/data/narrativeData.js politically_fractured[2]; tests/lint/styleLaw.walker.test.js]
 
-**344. The coastal origin line "Founded on the coast for the shelter of its anchorage …" is reworded so it gives no cause and no claim about the living.**
+**393. The coastal origin line "Founded on the coast for the shelter of its anchorage …" is reworded so it gives no cause and no claim about the living.**
 
 - Towns touched: 11 of 720 sample towns before and 0 after; false in 7.
 - Before: “Founded on the coast for the shelter of its anchorage. The sea gives the settlement its living”
@@ -4277,7 +4943,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in the 11 sample towns that printed it, and it is false in 7.
 - [TAIL-NARRATIVE-2; batch 3; base 9bd853fd0; src/generators/narrative/settlementOriginProse.js; 09398, B20803 port.coastal[2]]
 
-**345. The coastal origin line "Most of what it eats, sells, and fears arrives the same way" is replaced.**
+**394. The coastal origin line "Most of what it eats, sells, and fears arrives the same way" is replaced.**
 
 - Towns touched: 9 of 720 sample towns before and 0 after; false in 9.
 - Before: “Most of what it eats, sells, and fears arrives the same way”
@@ -4286,7 +4952,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in the 9 sample towns that printed it, and it is false in all 9.
 - [TAIL-NARRATIVE-2; batch 3; base 9bd853fd0; src/generators/narrative/settlementOriginProse.js; B13256 port.coastal[3]]
 
-**346. The founding sentence about salt workings leaves 5 towns that have no salt works; in 2 more the founding reason moves between harbour reasons.**
+**395. The founding sentence about salt workings leaves 5 towns that have no salt works; in 2 more the founding reason moves between harbour reasons.**
 
 - Towns touched: 7 of 720 sample towns (5 lose the sentence, 2 change reason).
 - Before: “grew around salt workings that made everything they touched last longer …”
@@ -4294,7 +4960,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The founding sentence returns in those 5 towns, with no salt works.
 - [TAIL-DEFECON-C seat; ruling D25; commit 28f86423c; src/generators/computeActiveChains.js, src/generators/economy/economicState.js]
 
-**347. The 'lasting effect' sentence about council seats split between old guard and young is replaced in the towns where it is false by a second version that claims less.**
+**396. The 'lasting effect' sentence about council seats split between old guard and young is replaced in the towns where it is false by a second version that claims less.**
 
 - Towns touched: 7 of 720 sample towns (the sentence printed in 29 sample towns).
 - Before: “Council seats now formally split between the old guard and the young”
@@ -4303,7 +4969,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in those 7 towns, including where the hand-back measured it false.
 - [TAIL-HISTORY-5; ruling Y17 (X9 rows); batch 6, ed9f3b549; src/data/historyData.js, src/data/sizedLastingEffects.js]
 
-**348. "Nothing has ever forced this place to change" is replaced by a sentence that names the town's events.**
+**397. "Nothing has ever forced this place to change" is replaced by a sentence that names the town's events.**
 
 - Towns touched: 7 of 720 sample towns before and 0 after.
 - Before: “Nothing has ever forced this place to change much.”
@@ -4312,7 +4978,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in the 7 sample towns that printed it, and it is false in all 7.
 - [TAIL-NARRATIVE; batch 1; base f663a2699, tree b52481302; src/generators/narrativeText.js] B00101 stable[7] / 20759
 
-**349. "on ground that does not quite feed it" becomes "on ground that does not fully feed it" in three lines.**
+**398. "on ground that does not quite feed it" becomes "on ground that does not fully feed it" in three lines.**
 
 - Towns touched: 7 of 720 sample towns (three lines).
 - Before: “on ground that does not quite feed it”
@@ -4321,7 +4987,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old wording returns in the 7 sample towns that printed these three lines.
 - [TAIL-NARRATIVE-2; batch 3; base 9bd853fd0; src/generators/narrative/settlementOriginProse.js; 17926; unsupplied[2], besieged[2], deficit[2]; export 22394]
 
-**350. A founder that states why it came (a refuge, a religious centre, a fortification) no longer prints beside an origin line that gives the founding another purpose. Another founder that fits prints instead.**
+**399. A founder that states why it came (a refuge, a religious centre, a fortification) no longer prints beside an origin line that gives the founding another purpose. Another founder that fits prints instead.**
 
 - Towns touched: 7 of 720 sample towns; the pair of escaped serfs beside a coastal trading port stands in none of the 720.
 - Why: The two could not both be so (for example a refuge beyond reach founded as a coastal trading port).
@@ -4338,7 +5004,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-NARRATIVE-4; batch FB; ruling N17(1); base 78eadedc5; src/generators/narrative/foundingRowAdmits.js; founder.js]
 
-**351. The 'lasting effect' sentence about a regency council that never dissolved is replaced in the towns where it is false by a second version that claims less.**
+**400. The 'lasting effect' sentence about a regency council that never dissolved is replaced in the towns where it is false by a second version that claims less.**
 
 - Towns touched: 6 of 720 sample towns (the sentence printed in 30 sample towns).
 - Before: “A regency council formed in the interim never fully dissolved”
@@ -4347,7 +5013,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in those 6 towns, including where the hand-back measured it false.
 - [TAIL-HISTORY-5; ruling Y17 (X9 rows); batch 6, ed9f3b549; src/data/historyData.js, src/data/sizedLastingEffects.js]
 
-**352. The 'lasting effect' sentence about rival charters lodged with the court is replaced in the towns where it is false by a second version that claims less.**
+**401. The 'lasting effect' sentence about rival charters lodged with the court is replaced in the towns where it is false by a second version that claims less.**
 
 - Towns touched: 5 of 720 sample towns (the sentence printed in 25 sample towns).
 - Before: “Rival charters over the land are both still lodged with the court”
@@ -4356,7 +5022,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in those 5 towns, including where the hand-back measured it false.
 - [TAIL-HISTORY-5; ruling Y17 (X9 rows); batch 6, ed9f3b549; src/data/historyData.js, src/data/sizedLastingEffects.js]
 
-**353. A line about the time when the occupiers left no longer says so in a town that is under an occupation right now; it speaks of the last occupiers and of a new occupation.**
+**402. A line about the time when the occupiers left no longer says so in a town that is under an occupation right now; it speaks of the last occupiers and of a new occupation.**
 
 - Towns touched: 4 of 720 sample towns (the sentence printed in 107 sample towns; 4 of them were under an occupation now). An earlier list in the same hand-back said 12 towns; the two counts disagree..
 - Before: “When the occupiers left, they left behind a town of former collaborators and former resisters…”
@@ -4365,7 +5031,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in those 4 towns, including where the hand-back measured it false.
 - [TAIL-HISTORY-5; ruling Y17 (1); batch 6, pushed and landed as ed9f3b549; src/data/historyData.js, src/data/historyDescVariants.js]
 
-**354. The 'lasting effect' sentence about an oversight office to audit officials is replaced in the towns where it is false by a second version that claims less.**
+**403. The 'lasting effect' sentence about an oversight office to audit officials is replaced in the towns where it is false by a second version that claims less.**
 
 - Towns touched: 4 of 720 sample towns (the sentence printed in 30 sample towns).
 - Before: “An oversight office was established to audit officials afterward”
@@ -4374,7 +5040,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in those 4 towns, including where the hand-back measured it false.
 - [TAIL-HISTORY-5; ruling Y17 (X9 rows); batch 6, ed9f3b549; src/data/historyData.js, src/data/sizedLastingEffects.js]
 
-**355. The line "Little has happened here" is replaced by a sentence that names the major event.**
+**404. The line "Little has happened here" is replaced by a sentence that names the major event.**
 
 - Towns touched: 4 of 720 sample towns before and 0 after; false in 4.
 - Before: “Little has happened here worth writing down, and the people here are p…”
@@ -4383,7 +5049,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in the 4 sample towns that printed it, and it is false in all 4.
 - [TAIL-NARRATIVE; batch 1; base f663a2699, tree b52481302; src/generators/narrativeText.js] HIGH B00096 / 15690
 
-**356. "The shortfall is met through …" is replaced by a line that only says where the town turns.**
+**405. "The shortfall is met through …" is replaced by a line that only says where the town turns.**
 
 - Towns touched: 4 of 720 sample towns before and 0 after.
 - Before: “The shortfall is met through …”
@@ -4392,7 +5058,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in the 4 sample towns that printed it, where it is false.
 - [TAIL-NARRATIVE-2; batch 3; base 9bd853fd0; src/generators/narrative/settlementOriginProse.js; 22014 deficit[4]; B20992]
 
-**357. The sentence "Authority here has a provisional quality …" is removed from its list of lines. Four towns lose it, and other lines print in their place.**
+**406. The sentence "Authority here has a provisional quality …" is removed from its list of lines. Four towns lose it, and other lines print in their place.**
 
 - Towns touched: 4 of 720 sample towns before and 0 after; false in 2.
 - Before: “Authority here has a provisional quality, as though everyone is still waiting for the arrangement that followed the <event> to be replaced by a permanent one that never comes”
@@ -4407,7 +5073,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-NARRATIVE-2; batch 3; base 9bd853fd0; src/generators/narrative/settlementOriginProse.js; B00042 political_heavy[3]; ruling N9 (the chair's) and N5; src/generators/narrativeText.js]
 
-**358. The line "… decided who holds power here, but not whether they deserve it, and the powers are still arguing the second point" is reworded.**
+**407. The line "… decided who holds power here, but not whether they deserve it, and the powers are still arguing the second point" is reworded.**
 
 - Towns touched: 4 of 720 sample towns; false in 4.
 - Before: “… decided who holds power here, but not whether they deserve it, and the powers are still arguing the second point”
@@ -4416,14 +5082,14 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in the 4 sample towns that printed it, and it is false in all 4.
 - [TAIL-NARRATIVE-2; batch 3; base 9bd853fd0; src/generators/narrative/settlementOriginProse.js; political_heavy[4] (the old [4]); ruling N9]
 
-**359. The plot-hook count line ('N hooks to pull; most of them belong to ...') names a different group in 3 towns.**
+**408. The plot-hook count line ('N hooks to pull; most of them belong to ...') names a different group in 3 towns.**
 
 - Towns touched: 3 of 720 sample towns (r2r-hamlet-2, r2r-village-17, r2s-insurgency-village-2).
 - Why: A second version of a hook declares differently from the one it replaced, and the line is counted from the hooks that print.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-HISTORY-2; batch 2; src/data/historyData.js]
 
-**360. "The gap is closed through …" is replaced by a line that only says where the town turns.**
+**409. "The gap is closed through …" is replaced by a line that only says where the town turns.**
 
 - Towns touched: 3 of 720 sample towns before and 0 after.
 - Before: “The gap is closed through …”
@@ -4432,7 +5098,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in the 3 sample towns that printed it, where it is false.
 - [TAIL-NARRATIVE-2; batch 3; base 9bd853fd0; src/generators/narrative/settlementOriginProse.js; 20609 deficit[1]; ruling N10]
 
-**361. The outside-debt hook 'A creditor's agent is in town' is no longer printed in a town under siege.**
+**410. The outside-debt hook 'A creditor's agent is in town' is no longer printed in a town under siege.**
 
 - Towns touched: 1 of 720 sample towns (the hook printed in 71 per the measure, 64 on the tabs and 60 in the exports: the hand-back gives three counts that disagree).
 - Before: “A creditor's agent is in town conducting a quiet assessment before enforcement”
@@ -4440,7 +5106,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The sentence returns in that 1 town, where the hand-back measured it false.
 - [TAIL-HISTORY-5; ruling Y17 03015 (X9 03015); batch 6, ed9f3b549; src/data/historyData.js]
 
-**362. "the caravans that still come" becomes "the tracks in a good season" where the seasonal path holds a caravan house.**
+**411. "the caravans that still come" becomes "the tracks in a good season" where the seasonal path holds a caravan house.**
 
 - Towns touched: 1 of 720 sample towns where false (r2r-town-54); 1 more town where it was true (r2r-town-9).
 - Before: “the caravans that still come”
@@ -4449,9 +5115,9 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old words return in 1 sample town where they are false and in 1 where they were true.
 - [TAIL-NARRATIVE-2; batch 3; base 9bd853fd0; src/generators/narrative/settlementOriginProse.js; 18781; CHANNEL_OF_PATH]
 
-### People and titles (15 items)
+### People and titles (20 items)
 
-**363. A person's title and role on every page now take the form that fits the holder's sex (a woman who holds the lord's seat is 'the lady'; a man who holds the madam's face is 'the keeper of the house').**
+**412. A person's title and role on every page now take the form that fits the holder's sex (a woman who holds the lord's seat is 'the lady'; a man who holds the madam's face is 'the keeper of the house').**
 
 - Towns touched: 360 of 720 sample towns had a title moved (1,975 sentences in all); towns printing the old face as a title 360 to 0.
 - Why: The title was copied from the house's face with no reading of the holder's sex, so 268 towns showed a title of the wrong sex.
@@ -4477,7 +5143,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-TITLES (K-C); ruling K-C (the chair, 2026-11-15 00:50 UTC) and the chair's words for the madam faces; commit 1036bf94b; src/data/holderTitleForms.js, src/generators/people/representatives.js, src/generators/people/castPowers.js]
 
-**364. A tie line about a debt no longer says repayment has started; it now says an offer to clear the debt in one payment has been made.**
+**413. A tie line about a debt no longer says repayment has started; it now says an offer to clear the debt in one payment has been made.**
 
 - Towns touched: 340 of 720 sample towns (340 to 0).
 - Before: “{A} has started repaying the debt in coin. {B} wants it repaid in favours.”
@@ -4486,7 +5152,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in those 340 towns, beside the other debt line it contradicts.
 - [TAIL-TIES batch 1; rows 00828, ruling T2; e0d38e6c4; src/data/npcData.js STRESS_ECONOMIC_EFFECTS]
 
-**365. On the Institutions tab, the honorific printed beside a person who holds one of seven house faces now fits that person's sex (for example a woman is no longer called 'Frontman').**
+**414. On the Institutions tab, the honorific printed beside a person who holds one of seven house faces now fits that person's sex (for example a woman is no longer called 'Frontman').**
 
 - Towns touched: 170 of 720 sample towns printed an old word before a moved name, 0 after; the ruling's own count was 174 (the two counts disagree; 4 of the 174 are not accounted for in the hand-back); the connection line in 174 towns per the ruling.
 - Why: The old honorific named the wrong sex for the holder (women called 'Frontman', 'Ferryman', 'Foreman', 'Headman'; men called 'Mother').
@@ -4505,7 +5171,32 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-TITLES-2; ruling KT1 (the chair, 2026-11-15 02:12 UTC); commit on lane/tail-titles-2026-11-15; src/data/faceHonorifics.js]
 
-**366. Eight secrets that crisis towns give to their people were reworded or no longer name things the town lacks (a force, an archive, a slave market, imports).**
+**415. People cards in some towns no longer print a title line that offers a meal, bread, a room or hunting as usual when the town cannot give it (under a famine, a siege, or a worked-out resource).**
+
+- Towns touched: 126 of 720 sample towns at most (one sentence 126 to 115); the other sentences are in the rows.
+- Why: The lines offered food, a room or hunting that the town's data says is not there (no failed food under a famine, no used-up ground, no traveller's welcome under a siege).
+- If vetoed: Those lines would print again in the towns listed, including where the offer is false.
+- Every form:
+
+  | Before | After | Towns |
+  |---|---|---|
+  | row 11127 (sentence not quoted in the hand-back) | printed in 115 towns instead of 126 | 126 |
+  | row 11047 | printed in 114 towns instead of 121 | 121 |
+  | row 11229 | printed in 92 towns instead of 94 | 94 |
+  | row 11327 | printed in 80 towns instead of 83 | 83 |
+  | row 11289 | printed in 31 towns instead of 36 | 36 |
+  | row 11315 (the siege half) | printed in 83 towns instead of 89 | 89 |
+  | row B10713 | printed in 36 towns instead of 39 (it still prints under an occupation; read as true there) | 39 |
+  | row B10741 | printed in 34 towns instead of 36 | 36 |
+  | row 17122 | printed in 53 towns instead of 57 | 57 |
+  | row B16114 (the siege half) | printed in 14 towns instead of 16 | 16 |
+  | row 17060 | printed in 5 towns instead of 9 | 9 |
+  | the master of the hunt's "best places to hunt." | printed in 12 towns instead of 13 (under a siege) | 13 |
+  | the postmaster's riders' news | printed in 42 towns instead of 43 (under a siege) | 43 |
+
+- [TAIL-POWERS seat 1; ruling P2; 12d8fd0a9; src/data/people/titleSecretsPresentations.js]
+
+**416. Eight secrets that crisis towns give to their people were reworded or no longer name things the town lacks (a force, an archive, a slave market, imports).**
 
 - Towns touched: 115 of 720 sample towns (143 secrets; paired with the old lines by town count only).
 - Why: Each old secret named a thing many printing towns lack. A first draft that made the secrets depend on a force or on imports was withdrawn because it changed other people's secrets in three towns.
@@ -4525,7 +5216,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-NARRATIVE-3; batch 5; base ca827fc0f; ruling N13; src/data/narrativeData.js; STRESS_INSTITUTION_EFFECTS; src/data/stressInstitutionEffects.js]
 
-**367. A second tie between the same two people now prints its kind's own line with the two names in the first tie's order (mentor, debt and rivalry lines).**
+**417. A second tie between the same two people now prints its kind's own line with the two names in the first tie's order (mentor, debt and rivalry lines).**
 
 - Towns touched: 98 of 720 sample towns (102 second ties); the lines were false in 4 and 9 towns.
 - Before: “… learned the work at …'s side for seven years.”
@@ -4541,7 +5232,41 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-TIES-2 batch 1; rows 01167, 00699; ruling T6; src/data/npcData.js REVERSED_TIE, src/generators/power/relationshipArchetypes.js]
 
-**368. Nine tie lines about a vote no longer print where one ruler rules alone (headmen, and also lords, mayors, an elected reeve and priest-kings); another line of the same pool prints instead.**
+**418. Title lines for people who work with an input the town may lack (clay, timber, hides, stone, ore, milk, hunting grounds) now claim the trade and add a hedge such as "when there is clay to be had", instead of claiming present work on the input.**
+
+- Towns touched: 93 of 720 sample towns (the widest row).
+- Why: The town's data may deny the input, so the line claimed work the town may not have (rows with a gap that varies by town).
+- If vetoed: The old lines would print again in those towns, including where the input is missing.
+- Every form:
+
+  | Before | After | Towns |
+  |---|---|---|
+  | row B10797 (the potter: clay missing in 172 of 269 towns that hold one) | Talks while working when there is clay to be had; shows how a pot is thrown and lets visitors try. | 93 |
+  | row B16083 (the potter's secret) | Has dug clay from land that belongs to someone else, whenever there was clay to be had, and paid nothing for it (later replaced again, see the potter's secret item) | 85 |
+  | row B10668 (the brickmaker: clay missing in 132 of 228) | Sells by the thousand and the cart when there is clay to be had; quick to quote and slow to deliver. | 89 |
+  | row B16204 (the brickmaker's secret) | Has taken children to tread the clay for a few coppers a day, when there was clay to tread, and one of them was hurt badly | 71 |
+  | row B10676 (the charcoal burner: timber missing in 69 of 153) | Sells charcoal by the sack, when there is timber to be had, to anyone who can carry it away. | 40 |
+  | row B16114 (the mine captain: ore depleted in 8 of 14; the siege exclusion re-keyed) | Has kept back from the tally what ore the workings still give, and sold it to a smelter elsewhere | 14 |
+  | row B10693 (the quarry master: stone depleted in 14 of 52) | Sells stone by the block and the cart, from what the quarry still gives; wants half paid before cutting begins. | 52 |
+  | row B10687 (the tanner: hides) | Sells leather to anyone when there are hides to be had; cash only. | 47 |
+  | row B10584 (the dairy farmer: livestock missing 36 of 42 = 86%) | Offers a cup and talk of the weather and the price of milk. | 16 |
+  | a dairy farmer's secret (rows B16106, B16107 and B16648 each print in 9 towns; which sentence goes with which row is not stated) | Has watered the milk for years, whenever there was milk to sell | 9 |
+  | a dairy farmer's secret (row B16648 also no longer says "goes to market") | Has grazed the herd on a neighbour's land at night, whenever there was a herd to graze | 9 |
+  | row B10689 (dairy) | Sells milk, butter and cheese at the posted price, when the cows are giving. | 8 |
+  | row 11315 and its second version (hunting grounds depleted in 22 of 95) | Talks about the woods, the game and where the hunting has been best (; easy to fall into talk with). | 83 |
+
+- [TAIL-POWERS-B seat 2; rulings P9, P12; 594794a67; src/data/people/titleSecretsPresentations.js]
+
+**419. The potter's secret no longer talks about digging clay from someone else's land; it now says he sold pots bought in from another workshop as his own.**
+
+- Towns touched: 85 of 720 sample towns.
+- Before: “Has dug clay from land that belongs to someone else, whenever there was clay to be had, and paid nothing for it”
+- After: “Has been selling pots bought in from another workshop as their own throwing, at their own prices / The buyers who paid for local work would want their money back, and the workshop's name would go with it”
+- Why: The land holds no clay for the potter in 84 of 85 towns; one true clay line is silenced in the one town that holds clay.
+- If vetoed: The clay secret would print again in those 85 towns, including the 84 with no clay.
+- [TAIL-POWERS-B seat 4; ruling P31 (2); d99bce57a; src/data/people/titleSecretsPresentations.js]
+
+**420. Nine tie lines about a vote no longer print where one ruler rules alone (headmen, and also lords, mayors, an elected reeve and priest-kings); another line of the same pool prints instead.**
 
 - Towns touched: 71 to 81 of 720 sample towns each, nine lines (e.g. 331 to 250, 312 to 237, 301 to 228).
 - Before: “… asked … for a vote against … own interests.”
@@ -4562,7 +5287,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-TIES-2 batch 1; rows 00669, 01204, 22432 and six declared lines; rulings T1 T5 T6 T13; src/data/npcData.js, src/data/powerSiblings.js]
 
-**369. 26 sentences of 21 houses (reeve, shepherd, cooper, ale house, woodcarver, mapmaker, jeweller, scribe, musician, blacksmiths and others) no longer give the house's one person a sex, and three side phrases (the shepherd's cloth trade, the woodcarver's "for the church", the scribe's "the priest's helper") leave with them.**
+**421. 26 sentences of 21 houses (reeve, shepherd, cooper, ale house, woodcarver, mapmaker, jeweller, scribe, musician, blacksmiths and others) no longer give the house's one person a sex, and three side phrases (the shepherd's cloth trade, the woodcarver's "for the church", the scribe's "the priest's helper") leave with them.**
 
 - Towns touched: up to 70 of 720 sample towns for one sentence; 139 false house lines before.
 - Why: The old sentences said "his" or "women" while the town draws that person as a man or a woman either way; false in 139 house lines across the sample towns.
@@ -4610,7 +5335,25 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [first houses seat; ruling H2; commit this file's batch 2 commit; src/data/institutionalCatalog.js, src/data/institutionDescVariants.js, src/data/institutionDescColour.js; guard tests/data/tailHouses2Pronouns.test.js]
 
-**370. A person's secret no longer says they have been shorting investments they recommend; it now says they bet against ventures they talk their neighbours into.**
+**422. A secret on a person's card about buying up grain was reworded so it no longer says the bakers cannot match the price.**
+
+- Towns touched: 65 of 720 sample towns.
+- Before: “... the bakers cannot match”
+- After: “Secret: Buys up grain that was meant for bread in the lean months, at a price no household can match”
+- Why: reason not stated in the hand-back beside this line
+- If vetoed: The older wording (the bakers) would return in those 65 towns.
+- [TAIL-POWERS seat 1; ruling P2; 12d8fd0a9; worklist row 16932 has the same count and is listed as reworded; src/data/people/titleSecretsPresentations.js]
+
+**423. The castellan's secret no longer says he let the walls go unrepaired; it says what he did and hid: he pocketed the wall-repair money and buried the survey.**
+
+- Towns touched: 61 of 720 sample towns.
+- Before: “let the walls go unrepaired”
+- After: “Pocketed the money that was granted for the wall repairs, and buried the survey that said where they were needed / If the survey is found, everyone will know where the wall money went and who signed for it”
+- Why: The old secret claimed what the walls look like; 16 of the 61 towns also print "Fresh repairs show on <town>'s town walls". The chair's ruling P18 says the secret yields to the walls' visible state.
+- If vetoed: The old secret would print again in those 61 towns, including where fresh repairs show on the walls.
+- [TAIL-POWERS-B seat 2; ruling P18; 594794a67; row 17190; src/data/people/titleSecretsPresentations.js]
+
+**424. A person's secret no longer says they have been shorting investments they recommend; it now says they bet against ventures they talk their neighbours into.**
 
 - Towns touched: 51 of 720 sample towns (51 to 0); 21 to 0 in the exports.
 - Before: “Has been quietly shorting investments they publicly recommend, profiting from collapse”
@@ -4619,7 +5362,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old secret returns in those 51 towns, including the 12 where it is false.
 - [TAIL-TIES-4 batch 1; rows 17103, X9 11965; ruling T21; 14724c194; src/data/npcData.js NPC_CRIMINAL_SECRETS_BY_HOLDER]
 
-**371. A small trade card in a town that has no power of that trade no longer prints a position or a constraint line (for example "Runs a smaller house behind the leading one in quiet times.").**
+**425. A small trade card in a town that has no power of that trade no longer prints a position or a constraint line (for example "Runs a smaller house behind the leading one in quiet times.").**
 
 - Towns touched: 12, 31, 8, 3 and 7 of 720 sample towns by row (68 cards; the rows overlap); e.g. 89 to 77, 44 to 13, 18 to 10, 8 to 5.
 - Before: “Runs a smaller house behind the leading one in quiet times.”
@@ -4637,7 +5380,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-TIES-3 batch 1; rows 16774, 05688, B15824, 16778, 05716 and one unnumbered; 112532f64; src/generators/npcStructure.js]
 
-**372. Hook lines about a traveller who passes through, or a cousin who arrives, no longer print in towns under a siege or without open roads.**
+**426. Hook lines about a traveller who passes through, or a cousin who arrives, no longer print in towns under a siege or without open roads.**
 
 - Towns touched: 17 of 720 sample towns lose the line (236 to 219), 13 more for the cousin (219 to 206); 3 and 3 left on representative cards, cured in the next batch.
 - Before: “passed through … gone by morning”
@@ -4652,7 +5395,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-TIES batch 2; rows 03130, 02506; ruling T3; src/data/npcData.js NPC_FACTION_LOYALTY, src/domain/hookThemes.js]
 
-**373. Tie lines about a council session, a council request, a bloc, a committee or what was told to the council no longer print where one ruler rules alone; another line of the same pool prints instead.**
+**427. Tie lines about a council session, a council request, a bloc, a committee or what was told to the council no longer print where one ruler rules alone; another line of the same pool prints instead.**
 
 - Towns touched: 12 of 720 sample towns lose the line (233 to 221); 5 more for the audit line (190 to 185).
 - Before: “… will both present proposals at the next council session.”
@@ -4670,7 +5413,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-TIES batch 1; rows 00438, 20322; rulings T1 T5; e0d38e6c4; src/data/npcData.js STRESS_ECONOMIC_EFFECTS]
 
-**374. The hook line about the person who settled every quarrel having died now prints only where the town is in a succession crisis.**
+**428. The hook line about the person who settled every quarrel having died now prints only where the town is in a succession crisis.**
 
 - Towns touched: 12 of 720 sample towns lose the line (15 to 3).
 - Before: “The person who settled every quarrel here has died …”
@@ -4678,14 +5421,14 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old line returns in those towns, including where nobody has died.
 - [TAIL-TIES batch 2; row 21278; ruling T3; src/data/npcData.js NPC_FACTION_LOYALTY]
 
-**375. When a pool of tie lines runs out, an overflow tie now prints a line that names both people instead of a line that names one.**
+**429. When a pool of tie lines runs out, an overflow tie now prints a line that names both people instead of a line that names one.**
 
 - Towns touched: 7 of 720 sample towns for ties (10 ties), 2 for hook lines, between the first and the final after-run.
 - Why: Once the vote lines were refused under one ruler, an overflow tie fell back to a one-name line (10 ties in 7 towns).
 - If vetoed: Effect not stated in the hand-back beyond that the one-name lines return in 7 towns.
 - [TAIL-TIES-2 batch 1; createTieProseDraw; src/data/npcData.js]
 
-**376. The Lord's appointee sentence now says "One of the lord's choosing governs" instead of "A man of the lord's choosing governs".**
+**430. The Lord's appointee sentence now says "One of the lord's choosing governs" instead of "A man of the lord's choosing governs".**
 
 - Towns touched: 6 of 720 sample towns (5 false).
 - Why: The old sentence called the appointee a man where the appointee is a woman (5 of 6 towns).
@@ -4698,16 +5441,16 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [fourth houses seat; ruling H18 (i); src/data/institutionDescVariants.js; guard tests/data/tailHouses7GovernanceWords.test.js]
 
-**377. The traveller and cousin hook lines on representative cards take the town's crisis into account, so they no longer print under a siege or a plague.**
+**431. The traveller and cousin hook lines on representative cards take the town's crisis into account, so they no longer print under a siege or a plague.**
 
 - Towns touched: 4 of 720 sample towns (6 false lines).
 - Why: Those cards were drawn with no crisis, so six false lines printed (4 towns).
 - If vetoed: The six false lines return in those 4 towns.
 - [TAIL-TIES-2 batch 1; rows 03130, 02506, X9 03950, 03004; ruling T7; src/generators/people/representatives.js]
 
-### Crisis (71 items)
+### Crisis (77 items)
 
-**378. The crisis page's stake line for a power the crisis did not touch was re-said: 'already at odds' where the town's own quarrels name that power; 'must answer for it · it governs here' for the governing power; 'has/have no stake yet' only for the rest, with the verb added and 'they' for plural names.**
+**432. The crisis page's stake line for a power the crisis did not touch was re-said: 'already at odds' where the town's own quarrels name that power; 'must answer for it · it governs here' for the governing power; 'has/have no stake yet' only for the rest, with the verb added and 'they' for plural names.**
 
 - Towns touched: 268 of 720 sample towns re-say their stake lines; B12521 printed in 89 and was false in 60; 160, 125, 106, 76 and 51 for the new forms.
 - Before: “<P> no stake yet”
@@ -4726,7 +5469,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-CRISIS-3; batch 4; K12; d667b50e7; B12521 B13860 B18039 13199 06464 13370; src/domain/crisis/crisisPage.js (stakeShown, CRISIS_PAGE_COPY)]
 
-**379. The stake row that said '<power> has/have no stake yet · it/they could side with either camp' is no longer printed at all on the tabs, the PDF and the journal, where the power is truly untouched. Silence is held to be true there.**
+**433. The stake row that said '<power> has/have no stake yet · it/they could side with either camp' is no longer printed at all on the tabs, the PDF and the journal, where the power is truly untouched. Silence is held to be true there.**
 
 - Towns touched: 312 printings in 145 of 720 sample towns at the time of the change (accepted in advance); the later page measure counts 468 printings in 47 forms going to 0 on the tabs, and 936 to 0 on the exports (the two counts are from different stages of the batch).
 - Before: “<P> has no stake yet · it could side with either camp”
@@ -4734,7 +5477,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The 'no stake yet' row returns for the powers that are truly untouched, in about 145 towns.
 - [TAIL-CRISIS-6; batch 8; K25 c; 7a2b36543; src/domain/crisis/crisisPage.js (composeCrisisPage); tests/domain/crisisPage.test.js]
 
-**380. On the crisis page, the PDF and the journal, a power's name in a stake row now takes its sentence form: 'Military/Guard' prints as 'The Guard', and four other names change. A renamed power would still show the sentence form on the stake row (not the new name).**
+**434. On the crisis page, the PDF and the journal, a power's name in a stake row now takes its sentence form: 'Military/Guard' prints as 'The Guard', and four other names change. A renamed power would still show the sentence form on the stake row (not the new name).**
 
 - Towns touched: 125 rows in 122 of 720 sample towns.
 - Why: The slashed and bracketed names read badly inside a sentence ('Military/Guard has no stake yet').
@@ -4751,7 +5494,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-CRISIS-7; K26; c08dbb65; src/pdf/sections/CrisisSections.jsx; src/foundry/journalPages.js; src/components/new/tabs/CrisisTab.jsx; tests/components/tailCrisisK26.test.jsx]
 
-**381. The cast hooks on the crisis page now say what a reason is of the person who holds the seat ('..., who holds the seat, is the one who would come to terms'), never after a colon. A power with a slash in its name takes its sentence form ('The Guard' for 'Military/Guard'). One reason ('whose power already carries more weight than whoever holds the seat') was then reworded in a follow-up fix so it speaks of the power, not the person.**
+**435. The cast hooks on the crisis page now say what a reason is of the person who holds the seat ('..., who holds the seat, is the one who would come to terms'), never after a colon. A power with a slash in its name takes its sentence form ('The Guard' for 'Military/Guard'). One reason ('whose power already carries more weight than whoever holds the seat') was then reworded in a follow-up fix so it speaks of the power, not the person.**
 
 - Towns touched: 121 changed hook sentences (282 of 722 hook lines in a first probe); the widest named reason: 19 towns for The Independent Bloc; 'of The Guard' prints in 11 + 8 + 6 towns.
 - Before: “<N> of Household Council ... holds the seat (old form: 'the one who would come to terms: ..., who holds the seat' after a colon)”
@@ -4768,7 +5511,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-CRISIS-2, TAIL-CRISIS-3; batch 3; K14; b22761233 a99c01e78; 11595 11549 11671 11569 11668 B11049 B11090 20875; src/domain/crisis/crisisHooks.js]
 
-**382. The line 'The descriptions here are of ordinary times. While the siege / the outbreak / the famine lasts, a row it touches is marked.' now prints on the Economics tab too, where any income or chain row is marked.**
+**436. The line 'The descriptions here are of ordinary times. While the siege / the outbreak / the famine lasts, a row it touches is marked.' now prints on the Economics tab too, where any income or chain row is marked.**
 
 - Towns touched: 100 of 720 sample towns after (99 before); read in r2s-under_siege-town-1, r2r-town-37, r2s-famine-hamlet-0, r2s-famine-hamlet-3.
 - After: “The descriptions here are of ordinary times.”
@@ -4776,7 +5519,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: the line is no longer printed on the Economics tab
 - [TAIL-DISPLAY-ECON-4; X25.1; commit bb5ebff5c]
 
-**383. On the Institutions tab, a service door now carries one word in brackets after its name when a crisis stops it: "(stopped)", "(curtailed)" or "(scarce)".**
+**437. On the Institutions tab, a service door now carries one word in brackets after its name when a crisis stops it: "(stopped)", "(curtailed)" or "(scarce)".**
 
 - Towns touched: the same 99 of 720 sample towns as the marks (31 siege, 28 plague, 40 famine); 428 marked doors; "Hospitality (stopped)" in 19 towns and "Hospitality (curtailed)" in 14 towns.
 - Before: “Hospitality”
@@ -4792,7 +5535,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-SERVICES; ruling S1; 73291c8e2; src/components/new/tabs/InstitutionsTab.jsx]
 
-**384. Where a crisis marks a row, the head of both tabs now says the descriptions are of ordinary times and that a touched row is marked. Forms: siege, outbreak, famine, and two crises together.**
+**438. Where a crisis marks a row, the head of both tabs now says the descriptions are of ordinary times and that a touched row is marked. Forms: siege, outbreak, famine, and two crises together.**
 
 - Towns touched: 99 of 720 sample towns (31 siege + 28 plague + 40 famine).
 - After: “The descriptions here are of ordinary times. While the siege lasts, a row it touches is marked.”
@@ -4809,7 +5552,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-SERVICES; ruling S1; 73291c8e2; src/domain/display/crisisStoppedRow.js, src/components/new/tabs/ServicesTab.jsx, src/components/new/tabs/InstitutionsTab.jsx]
 
-**385. The journal's Economics and Institutions pages now mark rows that a crisis stops, and print one head line saying the descriptions are of ordinary times.**
+**439. The journal's Economics and Institutions pages now mark rows that a crisis stops, and print one head line saying the descriptions are of ordinary times.**
 
 - Towns touched: 97 of 720 sample towns (427 rows marked: 253 houses, 100 chains, 74 income shares).
 - Why: Under a siege, outbreak or famine the journal printed income, chain and house rows as if nothing had stopped, while the tabs mark them.
@@ -4825,7 +5568,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-EXPORTS-JOURNAL-2; rulings E3, E11, E12, E19; commit fcf0febe7; src/foundry/journalPages.js; src/domain/display/crisisStoppedRow.js]
 
-**386. The crisis cast's stored reason no longer says the person is 'the only one in the house the crisis hits'; it says what the town's record holds. The stored text of 49 towns changes.**
+**440. The crisis cast's stored reason no longer says the person is 'the only one in the house the crisis hits'; it says what the town's record holds. The stored text of 49 towns changes.**
 
 - Towns touched: 49 of 720 sample towns (26 + 13 + 10); the chair granted 39, and the last 10 (one of a power) went beyond the grant, then stood with no veto from the chair.
 - Why: A famine or a siege hits the whole town, so 'the house' reads as a household and was misleading.
@@ -4840,7 +5583,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-CRISIS-4; batch 6; K20, K23; c97caccd9; src/domain/crisis/crisisCast.js (CAST_REASONS)]
 
-**387. The Economics tab now marks an income row and a flow card that a crisis stops, in the same words as the Services and Institutions tabs: 'Stopped by the siege.', 'Curtailed by the outbreak.', 'Scarce in the famine.'**
+**441. The Economics tab now marks an income row and a flow card that a crisis stops, in the same words as the Services and Institutions tabs: 'Stopped by the siege.', 'Curtailed by the outbreak.', 'Scarce in the famine.'**
 
 - Towns touched: 74 income rows in 48 of 720 sample towns; 100 chain cards in 43 towns.
 - Before: “Pilgrim Trade Offerings, hospitality fees, …”
@@ -4866,7 +5609,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-DISPLAY-ECON-4; X25.1; commit bb5ebff5c; src/domain/display/economicsCrisisMarks.js; src/domain/display/crisisStoppedRow.js]
 
-**388. In the PDF's Institutions, Services and Economics and Trade chapters, a head line now says the descriptions are of ordinary times where a crisis marks a row, once per chapter.**
+**442. In the PDF's Institutions, Services and Economics and Trade chapters, a head line now says the descriptions are of ordinary times where a crisis marks a row, once per chapter.**
 
 - Towns touched: siege 31, famine 41, outbreak 28 of 720 sample towns (the Services tabs count 40 famine towns for the same head line: the two counts disagree by one).
 - After: “The descriptions here are of ordinary times. While the siege lasts, a row it touches is marked.”
@@ -4882,7 +5625,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-EXPORTS-PDF-2; rulings E3 E16 E17 E15 E18 E1; batch 2; tip 44d3088b4 (merge 538c6ea10); src/pdf/lib/crisisMarksOnPage.js, src/domain/display/crisisStoppedRow.js]
 
-**389. In the PDF, houses, service rows, chain cards, chain flow rows and income shares now begin with the crisis mark ("Stopped by the siege.", "Scarce in the famine.", "Curtailed by the outbreak.").**
+**443. In the PDF, houses, service rows, chain cards, chain flow rows and income shares now begin with the crisis mark ("Stopped by the siege.", "Scarce in the famine.", "Curtailed by the outbreak.").**
 
 - Towns touched: 29 siege, 41 famine, 27 outbreak of 720 sample towns; 155 service and house rows and pills, 776 town-printings.
 - After: “Stopped by the siege. / Scarce in the famine. / Curtailed by the outbreak. (before the description)”
@@ -4900,7 +5643,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-EXPORTS-PDF-2; rulings E3 E16 E17 E15 E18 E1; batch 2; tip 44d3088b4 (merge 538c6ea10); src/pdf/sections/Institutions.jsx, Services.jsx, SupplyChainFlow.jsx, EconomicsTrade.jsx; rows 11357 11346 25077 25075]
 
-**390. In batch 1 the insurgency summary stopped saying a strong power has stopped obeying the government; it said 'some' have, in all 37 insurgency towns. A later change (K21, see the next item) put the strong-power wording back in 21 of them.**
+**444. In batch 1 the insurgency summary stopped saying a strong power has stopped obeying the government; it said 'some' have, in all 37 insurgency towns. A later change (K21, see the next item) put the strong-power wording back in 21 of them.**
 
 - Towns touched: 37 of 720 sample towns (every insurgency town).
 - Before: “A strong power in X has stopped obeying the government. Its people stall, its taxes go unpaid, and it waits.”
@@ -4916,7 +5659,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-CRISIS, TAIL-CRISIS-2; batch 1; K6, K10; 03091 12113; src/generators/stressNarrative.js]
 
-**391. Three crisis sentences (a succession void and an insurgency) no longer speak of several powers or of offices, and say the town gets by on habit instead.**
+**445. Three crisis sentences (a succession void and an insurgency) no longer speak of several powers or of offices, and say the town gets by on habit instead.**
 
 - Towns touched: 31 of 720 sample towns for the first two sentences, 37 of 720 for the third (these are the towns under that crisis).
 - Why: The old sentences claimed three powers, or offices that act as they see fit, which is false in a town with one power and no office (12, 15 and 19 towns).
@@ -4931,7 +5674,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-HISTORY then TAIL-HISTORY-2; ruling Y2; batch 1, landed 3da34c70b; src/data/stressTypes.js and src/data/stressTypesMeta.js (two lines lent)]
 
-**392. Where a crisis's own party was stored untouched but the page showed it 'already at odds' (a true quarrel line), the page now shows its crisis stake instead. Both lines were true; the row keeps one. This was reported to the chair.**
+**446. Where a crisis's own party was stored untouched but the page showed it 'already at odds' (a true quarrel line), the page now shows its crisis stake instead. Both lines were true; the row keeps one. This was reported to the chair.**
 
 - Towns touched: 44 rows in 34 of 720 sample towns (Merchant Guilds 19, Craft Guilds 9, Grain Holders 5, ...).
 - Before: “<P> is already at odds · in its own quarrel with <Q>”
@@ -4940,7 +5683,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: 'already at odds' wins again in those towns (one condition in the page code, per the hand-back).
 - [TAIL-CRISIS-6; batch 8; K12, K25; src/domain/crisis/crisisPage.js (stakeShown)]
 
-**393. Named service rows are now marked in some of their crisis towns: for example Hospitality in 33 of 64, the great fair in 13 of 17, the weekly market in 11 of 16.**
+**447. Named service rows are now marked in some of their crisis towns: for example Hospitality in 33 of 64, the great fair in 13 of 17, the weekly market in 11 of 16.**
 
 - Towns touched: marked in the crisis towns that print each row, counts in the rows below (calm towns: unmarked).
 - Why: These rows lived on what a siege, an outbreak or a famine stops, yet printed as in ordinary times.
@@ -4962,7 +5705,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-SERVICES; ruling S1; 73291c8e2; worklist rows 09820 B10271 02383 13413 B19912 06254 B14644 16399 B19452 07802 12206 04168]
 
-**394. Under a siege, a service row or a house row that lives on travellers or goods from outside now starts with the mark "Stopped by the siege.", on the Services tab and the Institutions tab.**
+**448. Under a siege, a service row or a house row that lives on travellers or goods from outside now starts with the mark "Stopped by the siege.", on the Services tab and the Institutions tab.**
 
 - Towns touched: 31 of 720 sample towns (all 31 siege towns; 170 service rows and 111 house rows marked; 0 marked in calm towns).
 - After: “Stopped by the siege. A bed by the hearth…”
@@ -4977,7 +5720,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-SERVICES; ruling S1; 73291c8e2; src/data/crisisDependence.js, src/domain/display/crisisStoppedRow.js, src/components/new/tabs/ServicesTab.jsx, src/components/new/tabs/InstitutionsTab.jsx]
 
-**395. Under an outbreak of plague, a service row or a house row that lives on travellers or gatherings now starts with the mark "Curtailed by the outbreak.", on both tabs.**
+**449. Under an outbreak of plague, a service row or a house row that lives on travellers or gatherings now starts with the mark "Curtailed by the outbreak.", on both tabs.**
 
 - Towns touched: 28 of 720 sample towns (all 28 plague towns; 182 service rows and 88 house rows marked; 0 marked in calm towns).
 - After: “Curtailed by the outbreak. The weekly service. Attendance expected of all residents.”
@@ -4985,7 +5728,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The marked rows would print without the mark, as before this batch (the hand-back says neither tab read the crisis on a row before); the description of ordinary times would print again in those towns, including where it is false.
 - [TAIL-SERVICES; ruling S1; 73291c8e2; src/data/crisisDependence.js, src/domain/display/crisisStoppedRow.js, src/components/new/tabs/ServicesTab.jsx, src/components/new/tabs/InstitutionsTab.jsx]
 
-**396. The shared rule now also marks nine more kinds of house under a crisis (fish market, chroniclers' exchange, cartographer's workshop, carriers' guild, periodic market, daily markets, stone quarry, cemetery network, hunter's lodge).**
+**450. The shared rule now also marks nine more kinds of house under a crisis (fish market, chroniclers' exchange, cartographer's workshop, carriers' guild, periodic market, daily markets, stone quarry, cemetery network, hunter's lodge).**
 
 - Towns touched: two counts that disagree: 45 house rows in 25 of 720 sample towns (the first measure; siege 35, outbreak 10) and 50 house rows in 28 towns (the later read, which includes 3 fish-market famine rows and 2 more rows); calm towns: 0.
 - After: “Stopped by the siege. / Curtailed by the outbreak. / Scarce in the famine. (before the house's description)”
@@ -4993,7 +5736,16 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: Those house rows would print without the crisis mark, as before.
 - [TAIL-SERVICES-2 and TAIL-SERVICES-3; ruling S8; 8df172bf0; src/data/crisisDependence.js]
 
-**397. The 'work gangs have downed tools' line for a slave revolt has a second version for thorps and hamlets.**
+**451. In 27 wartime towns, the war-stress line no longer speaks of "farms and workshops"; it says conscription has taken the workers.**
+
+- Towns touched: 27 of 720 sample towns.
+- Before: “... the farms and workshops ... (the old sentence is not quoted in full)”
+- After: “Conscription has taken the workers, and every household is short-handed.”
+- Why: A thorp of 8 holds no workshop; 8 of the 27 are thorps of 6 to 30 souls and 5 are hamlets.
+- If vetoed: The old wording would print again in those 27 towns, including where there is no workshop.
+- [TAIL-POWERS seat 4; ruling P27; 6c2fe3344; src/generators/power/governingStressVignettes.js]
+
+**452. The 'work gangs have downed tools' line for a slave revolt has a second version for thorps and hamlets.**
 
 - Towns touched: 24 of 720 sample towns printed the old line; the new line prints in 8.
 - Before: “Whole work gangs have downed tools …”
@@ -5002,7 +5754,15 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old line returns in those 8 thorps and hamlets.
 - [TAIL-CRISIS; batch 1; 28958; src/generators/stressNarrative.js]
 
-**398. The insurgency summary says 'A strong power in <N> has stopped obeying the government...' again, but only in the 21 insurgency towns that hold a rival power of real standing, once the town's powers have settled. The other 16 keep the plain 'Some in <N>...' line. The same change also lets the line 'Its defences were built for quieter times' print only where a defence exists (17 of 34 monster-pressure towns); no town's page moves for that line.**
+**453. In the 24 slave-revolt towns, the line about the rebels' buildings no longer says "streets" are contested; it says parts of the settlement are.**
+
+- Towns touched: 24 of 720 sample towns.
+- After: “The rebels' buildings are marked, and parts of the settlement are contested.”
+- Why: Thorps and hamlets have no streets.
+- If vetoed: The wording about streets would print again in those 24 towns, including in thorps and hamlets.
+- [TAIL-POWERS seat 4; ruling P27; 160c99790; src/generators/power/governanceNarrative.js]
+
+**454. The insurgency summary says 'A strong power in <N> has stopped obeying the government...' again, but only in the 21 insurgency towns that hold a rival power of real standing, once the town's powers have settled. The other 16 keep the plain 'Some in <N>...' line. The same change also lets the line 'Its defences were built for quieter times' print only where a defence exists (17 of 34 monster-pressure towns); no town's page moves for that line.**
 
 - Towns touched: 21 of 720 sample towns get the strong line (37 to 16 keep the plain line); the stored text of 21 towns changes.
 - Before: “Some in <N> have stopped obeying the government. They stall, their taxes go unpaid, and they wait.”
@@ -5017,7 +5777,16 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-CRISIS-5; K21; 07ab77b03 (batch 7); src/generators/stressNarrative.js; src/generators/steps/assembleSettlement.js; tests/generators/stressLateReRead.test.js]
 
-**399. For every power a crisis itself raises (or writes its own sentence into), the stake row on the crisis page and the exports now gives that power its own stake reason, instead of 'has no stake yet'. The list has 20 reasons beside the Grain Holders row. The stored stake text of 135 towns changes.**
+**455. In 21 towns in political unrest, the vignette no longer says guild masters stayed away; it says pamphlets pass from hand to hand and several who were expected stayed away.**
+
+- Towns touched: 21 of 720 sample towns.
+- Before: “... two guild masters stayed away ... (the old sentence is not quoted in full)”
+- After: “Pamphlets against those in charge pass from hand to hand, and several who were expected stayed away from the last assembly.”
+- Why: 13 of the 21 towns hold no guild.
+- If vetoed: The old wording would print again in those 21 towns, including the 13 with no guild.
+- [TAIL-POWERS seat 4; ruling P27; 6c2fe3344; src/generators/power/governingStressVignettes.js]
+
+**456. For every power a crisis itself raises (or writes its own sentence into), the stake row on the crisis page and the exports now gives that power its own stake reason, instead of 'has no stake yet'. The list has 20 reasons beside the Grain Holders row. The stored stake text of 135 towns changes.**
 
 - Towns touched: the widest row prints in 19 of 720 sample towns; 135 towns' stored stake text changes (27 for the first three powers, 108 more for the rest).
 - Before: “<P> has no stake yet · it could side with either camp”
@@ -5051,7 +5820,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-CRISIS-6; batch 8; K24, K25 a; c6852f7e2 6716dfceb; src/domain/crisis/crisisCast.js (RAISED_BY_CRISIS); src/domain/crisis/crisisPage.js]
 
-**400. In the PDF Services chapter, a service pill now carries the crisis word after its name ("Accommodation (stopped)", "Fresh bread (scarce)", "Lodging (curtailed)").**
+**457. In the PDF Services chapter, a service pill now carries the crisis word after its name ("Accommodation (stopped)", "Fresh bread (scarce)", "Lodging (curtailed)").**
 
 - Towns touched: for example "Hospitality (stopped)" 0 to 19 of 720 sample towns.
 - Before: “Hospitality”
@@ -5068,7 +5837,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-EXPORTS-PDF-2; rulings E3 E16 E17 E15 E18 E1; batch 2; tip 44d3088b4 (merge 538c6ea10); src/pdf/sections/Services.jsx; src/pdf/lib/crisisMarksOnPage.js]
 
-**401. The access house's rites (weekly rite, rite of entry, marriage ceremony, confession) and burial beyond the gates are now marked under a siege or an outbreak.**
+**458. The access house's rites (weekly rite, rite of entry, marriage ceremony, confession) and burial beyond the gates are now marked under a siege or an outbreak.**
 
 - Towns touched: 17 of 720 sample towns (all siege or plague towns).
 - After: “Stopped by the siege. / Curtailed by the outbreak. (before the row)”
@@ -5087,7 +5856,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-SERVICES-3; ruling S11; e35851db1; src/data/crisisDependence.js]
 
-**402. Under a famine, the resource that failed (grain, livestock or fish) now moves out of the 'Fully exploited' group into a new 'Failed this year' group on the Resources tab, the PDF and the journal.**
+**459. Under a famine, the resource that failed (grain, livestock or fish) now moves out of the 'Fully exploited' group into a new 'Failed this year' group on the Resources tab, the PDF and the journal.**
 
 - Towns touched: 15 of the 44 famine towns of the 720 sample towns (7 fish, 5 grain, 3 livestock).
 - Before: “✓ Fully exploited Fish”
@@ -5108,7 +5877,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-DISPLAY-CIVIC-3; V2; commit 1e52acf0e; src/domain/display/validationOnPage.js; src/components/tabs/ResourcesTab.jsx; src/pdf/sections/ResourcesProduction.jsx]
 
-**403. Six crisis vantage lines about an insurgency no longer presume a second power or offices in the town; each was reworded so it is true everywhere it prints.**
+**460. Six crisis vantage lines about an insurgency no longer presume a second power or offices in the town; each was reworded so it is true everywhere it prints.**
 
 - Towns touched: 14, 14, 7, 6, 8 and 6 of 720 sample towns (the counts of the six new lines).
 - Why: Each was false in towns with only one power or with no offices (one-power towns, thorps with no officials, towns with no offices).
@@ -5126,7 +5895,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-CRISIS; batch 1; 22640 22983 11471 21315 18222 15481; src/domain/crisis/crisisSummaryVantage.js; src/generators/stressNarrative.js]
 
-**404. Five lines about an insurgency that said the quarrel is hidden or quiet were reworded to say it has turned to violence and people are pressed to take sides. This replaces the earlier wording of three of them.**
+**461. Five lines about an insurgency that said the quarrel is hidden or quiet were reworded to say it has turned to violence and people are pressed to take sides. This replaces the earlier wording of three of them.**
 
 - Towns touched: 14, 14, 10, 10 and 6 of 720 sample towns (the old lines printed in 10, 14, 10, 14 and 6).
 - Why: Every insurgency town has political violence and loyalty testing on its record, so lines that hide the quarrel were false wherever they printed.
@@ -5143,7 +5912,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-CRISIS-4; batch 6; K18; 34b8d9411; src/domain/crisis/crisisSummaryVantage.js]
 
-**405. The fractured-town line "Fights between X's powers break out" is reworded so it claims no fight.**
+**462. The fractured-town line "Fights between X's powers break out" is reworded so it claims no fight.**
 
 - Towns touched: 13 of 720 sample towns.
 - Before: “Fights between X's powers break out”
@@ -5152,7 +5921,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in those 13 towns, including where it is false.
 - [TAIL-CORPUS-DEF seat; batch 4; row B07294; DS-CND-1 worsening, fractured v4; src/data/dossierStateProse/stressors.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**406. 'Contributes to X - N% of income' is no longer printed on a flow card that a crisis stops (siege field work or trade, a famine's failed ground).**
+**463. 'Contributes to X - N% of income' is no longer printed on a flow card that a crisis stops (siege field work or trade, a famine's failed ground).**
 
 - Towns touched: 13 of 720 sample towns, 20 cards.
 - Before: “Contributes to Grain Sales - N% of income”
@@ -5170,7 +5939,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-DISPLAY-ECON-2; rows 05779, 05780; src/components/tabs/EconomicsTab.jsx; later superseded in part by ECON-4 batch 4]
 
-**407. 'Contributes to X - N% of income' prints again on 13 siege cards that the siege left impaired, for Iron & Metalwork, Timber Trade and Apothecary & Alchemy. The earlier silence (batch 2) gave way to the crisis leaf, which holds the forge, the mine, the woods and the still at work under a siege. 'Contributes to Entrepôt Trade' fell 69 to 68 in one town.**
+**464. 'Contributes to X - N% of income' prints again on 13 siege cards that the siege left impaired, for Iron & Metalwork, Timber Trade and Apothecary & Alchemy. The earlier silence (batch 2) gave way to the crisis leaf, which holds the forge, the mine, the woods and the still at work under a siege. 'Contributes to Entrepôt Trade' fell 69 to 68 in one town.**
 
 - Towns touched: 13 of 720 sample towns.
 - After: “Contributes to Iron & Metalwork - N% of income”
@@ -5187,7 +5956,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-DISPLAY-ECON-4; X25.1; commit bb5ebff5c; src/components/tabs/EconomicsTab.jsx]
 
-**408. Five lines of the crisis scene a visitor reads on arrival were reworded to claim only what every printing town has.**
+**465. Five lines of the crisis scene a visitor reads on arrival were reworded to claim only what every printing town has.**
 
 - Towns touched: 13, 8, 7, 5 and 6 of 720 sample towns (62 towns changed in all across these and the two arrival-scene lines).
 - Why: Each old line named something many printing towns lack (street signs in tiny places, a crossroads, warehouses and forges, quarters, field gangs).
@@ -5204,7 +5973,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-NARRATIVE-3; batch 5; base ca827fc0f; ruling N13; src/data/narrativeData.js; STRESS_DESCS; 01626, 18689, 01080, 20552, 00340, 01529]
 
-**409. Six crisis summary lines on the PDF cover and overview were reworded so they are true in every town that prints them (food, market, watch and granary claims were removed).**
+**466. Six crisis summary lines on the PDF cover and overview were reworded so they are true in every town that prints them (food, market, watch and granary claims were removed).**
 
 - Towns touched: 12, 5, 11, 9, 8 and 9 of 720 sample towns (the old lines' printing counts); the new lines print in 12, 11, 9, 9, 8 and 5.
 - Why: The old lines were false in towns with a Secure food band, no granary or watch, no market, or no militia (counts of printed vs false: 12/11, 5/5, 11/8, 9/5, 8/2, 9/4).
@@ -5222,7 +5991,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-CRISIS-3; batch 5; 94106a10b; 10399 16309 31407 13667 09896 29529 08228 15776; src/domain/crisis/crisisSummaryVantage.js]
 
-**410. The famine line "less of it comes in" is reworded.**
+**467. The famine line "less of it comes in" is reworded.**
 
 - Towns touched: 11 of 720 sample towns (the old line was false in 3 of 11: no imports).
 - Before: “less of it comes in”
@@ -5231,7 +6000,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in those 11 towns, including where it is false.
 - [TAIL-CORPUS-DEF seat; batch 4; row 09250; DS-CND-1 worsening, famine v3; src/data/dossierStateProse/stressors.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**411. The insurgency line "trust fewer of their own officers" is reworded.**
+**468. The insurgency line "trust fewer of their own officers" is reworded.**
 
 - Towns touched: 11 of 720 sample towns (the old line read 9).
 - Before: “trust fewer of their own officers”
@@ -5240,7 +6009,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in those 11 towns, including where it is false.
 - [TAIL-CORPUS-DEF seat; batch 4; row 22986; DS-CND-1 worsening, insurgency v4; src/data/dossierStateProse/stressors.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**412. Three crisis vantage lines were reworded: the 'you would see nothing amiss' line for an insurgency beside a famine, the empty-seat line where an acting steward holds the seat, and the 'people feel safe' line beside a line that says something has changed.**
+**469. Three crisis vantage lines were reworded: the 'you would see nothing amiss' line for an insurgency beside a famine, the empty-seat line where an acting steward holds the seat, and the 'people feel safe' line beside a line that says something has changed.**
 
 - Towns touched: 10, 10 and 8 of 720 sample towns.
 - Why: Each was false in the towns named: an insurgency beside a famine, a seat held by an acting steward, and a town whose page also says something has changed.
@@ -5255,7 +6024,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-CRISIS; batch 1; B14649 B27943 15568; src/domain/crisis/crisisSummaryVantage.js]
 
-**413. Two succession-void lines that said 'each office does as it sees fit' no longer print; they have new wordings. They print on the exported pages only.**
+**470. Two succession-void lines that said 'each office does as it sees fit' no longer print; they have new wordings. They print on the exported pages only.**
 
 - Towns touched: 10 and 7 of 720 sample towns (the old lines also printed in those towns).
 - Why: The old lines were false in towns with no office to do anything (3 of 10 and 2 of 7).
@@ -5269,7 +6038,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-CRISIS-2; batch 2; K11; src/domain/crisis/crisisSummaryVantage.js]
 
-**414. The Grain Holders' stake row in a famine now reads 'split · it holds what is left of the food stores'. The chair ruled it ('holds the grain'); the seat kept it on the list for the owner.**
+**471. The Grain Holders' stake row in a famine now reads 'split · it holds what is left of the food stores'. The chair ruled it ('holds the grain'); the seat kept it on the list for the owner.**
 
 - Towns touched: 10 of 720 sample towns (the stored stake of 10 towns changes).
 - Before: “Grain Holders has no stake yet · it could side with either camp”
@@ -5278,7 +6047,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old 'has no stake yet' row would return in the 10 famine towns (before it was dropped by the later change on the same page).
 - [TAIL-CRISIS-6; batch 8; K24; c6852f7e2; holdsFood; src/domain/crisis/crisisCast.js]
 
-**415. The fractured-town line "a different answer in every street" is reworded.**
+**472. The fractured-town line "a different answer in every street" is reworded.**
 
 - Towns touched: 9 of 720 sample towns.
 - Before: “a different answer in every street”
@@ -5287,7 +6056,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in those 9 towns, including where it is false.
 - [TAIL-CORPUS-DEF seat; batch 4; row 04039; DS-CND-1 worsening, fractured v3; src/data/dossierStateProse/stressors.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**416. In the threat rows under the record's outbreak, the care sentence now reads from the outbreak and the houses on the roster.**
+**473. In the threat rows under the record's outbreak, the care sentence now reads from the outbreak and the houses on the roster.**
 
 - Towns touched: 9 of 720 sample towns (9, 9 and 1 outbreak towns).
 - After: “The outbreak has come, and no house here is kept to treat the sick.”
@@ -5304,7 +6073,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-DISPLAY-CIVIC-2 C2-1; commit 7125b132e; src/domain/display threatAssessment.js]
 
-**417. The clergy's own sentence is kept after a lead line 'The outbreak has come.' in towns under the outbreak.**
+**474. The clergy's own sentence is kept after a lead line 'The outbreak has come.' in towns under the outbreak.**
 
 - Towns touched: 9 of 720 sample towns (the clergy line 250 to 241 in exports).
 - After: “The outbreak has come.”
@@ -5312,7 +6081,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-CIVIC-2 C2-1b; commit a432539d4]
 
-**418. The faith page's lines about how often folk attend the rites now have a second version for towns under plague quarantine or a siege that bars the road (or cuts off a neighbour's church).**
+**475. The faith page's lines about how often folk attend the rites now have a second version for towns under plague quarantine or a siege that bars the road (or cuts off a neighbour's church).**
 
 - Towns touched: 8 of 720 sample towns for the widest second version (the old lines printed in 210, 157, 81, 115 and 93).
 - Why: The old lines said folk gather for the rites, which is false under a plague (up to 8 towns per line) and where a siege cuts off a neighbour's church.
@@ -5335,7 +6104,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-CRISIS; batch 1; K2; 06517 14027 06518 B19735 B21207; src/domain/dossier/faithReading.js]
 
-**419. The slave revolt's own leadership no longer shows as 'has no stake yet'; the crisis page and the exports say it leads the revolt. The stored text of 8 towns changes.**
+**476. The slave revolt's own leadership no longer shows as 'has no stake yet'; the crisis page and the exports say it leads the revolt. The stored text of 8 towns changes.**
 
 - Towns touched: 8 of 720 sample towns (the stored stake of 8 towns changes).
 - Before: “Revolt Leadership has no stake yet · it could side with either camp”
@@ -5350,7 +6119,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-CRISIS-5; K22; 07ab77b03; src/domain/crisis/crisisCast.js (deriveStakes); tests/domain/tailCrisisBatch7.test.js]
 
-**420. The insurgency line "more of X's officials stop answering" is reworded.**
+**477. The insurgency line "more of X's officials stop answering" is reworded.**
 
 - Towns touched: 8 of 720 sample towns.
 - Before: “more of X's officials stop answering”
@@ -5359,7 +6128,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in those 8 towns, including where it is false.
 - [TAIL-CORPUS-DEF seat; batch 4; row 06991; DS-CND-1 worsening, insurgency v1; src/data/dossierStateProse/stressors.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**421. The line "Three farmsteads … the authorities" no longer prints in the smallest settlements (thorps).**
+**478. The line "Three farmsteads … the authorities" no longer prints in the smallest settlements (thorps).**
 
 - Towns touched: 8 of 720 sample towns before and 7 after (3 thorps lose it, 2 hamlets gain it through the next line in the list).
 - Before: “Three farmsteads … the authorities”
@@ -5367,7 +6136,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The line returns in the 3 thorps where it was withheld, where it is false.
 - [TAIL-NARRATIVE; batch 1; base f663a2699, tree b52481302; src/generators/narrativeText.js] 00172 monster_pressure[2]
 
-**422. In towns of prosperity below Moderate, the wartime arrival line "busy in a way that feels wrong" gets a second version for a poor place.**
+**479. In towns of prosperity below Moderate, the wartime arrival line "busy in a way that feels wrong" gets a second version for a poor place.**
 
 - Towns touched: 7 of 720 sample towns print the line; the second version prints in 1 (r2s-wartime-village-3).
 - Before: “<N> is busy in a way that feels wrong. The forge fires burn past dark, the coin is moving…”
@@ -5376,7 +6145,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in the 7 sample towns that printed it, including 1 poor town where it is false.
 - [TAIL-NARRATIVE-5; batch 6; ruling N18; base df81604da; after-tree e8302fc3d; src/data/narrativeData.js; STRESS_DESCS.wartime[6]]
 
-**423. The occupation line "Merchants … pay the occupiers the same share of every sale" no longer prints where the town has no market.**
+**480. The occupation line "Merchants … pay the occupiers the same share of every sale" no longer prints where the town has no market.**
 
 - Towns touched: 6 of 720 sample towns without a market (the line read 9 towns, 9 to 3).
 - Before: “Merchants … pay the occupiers the same share of every sale”
@@ -5384,7 +6153,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old line returns in those 6 towns, where it is false.
 - [TAIL-CORPUS-DEF seat; batch 4; row 13414; DS-CND-1 stable, occupied v4, declared "market"; src/data/dossierStateProse/stressors.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**424. The iron-delay story hooks (such as "The iron carts are three weeks late …") no longer print where the town's import list holds no iron; other hooks fill the freed place.**
+**481. The iron-delay story hooks (such as "The iron carts are three weeks late …") no longer print where the town's import list holds no iron; other hooks fill the freed place.**
 
 - Towns touched: 6 of 720 sample towns (the iron lines print in 39, 27, 23 and 11 towns; they leave 6, 2, 4 and 2).
 - Before: “The iron carts are three weeks late …”
@@ -5392,7 +6161,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence would return in those towns, including where it is false. Counts that fall with it: "Strategic Resource" 104 to 90, "Outlook" 258 to 245, "Warnings (#)" 56 to 53, and the summary count of plot hooks.
 - [TAIL-DEFECON-3; commit 2ac50c55d; src/generators/economy/incomeLineSiblings.js and neighbours]; ruling D8
 
-**425. The succession-void line "merchants deal season to season" no longer prints where the town has no market.**
+**482. The succession-void line "merchants deal season to season" no longer prints where the town has no market.**
 
 - Towns touched: 5 of 720 sample towns without a market (6 to 1).
 - Before: “merchants deal season to season”
@@ -5400,7 +6169,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old line returns in those 5 towns, where it is false.
 - [TAIL-CORPUS-DEF seat; batch 4; row 15102; DS-CND-1 stable, succession_void v3, declared "market"; src/data/dossierStateProse/stressors.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**426. The religious-conversion line saying things have "settled into habit" is reworded.**
+**483. The religious-conversion line saying things have "settled into habit" is reworded.**
 
 - Towns touched: 5 of 720 sample towns.
 - Before: “settled into habit … the neighbours do not ask”
@@ -5409,7 +6178,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in those 5 towns, including where it is false.
 - [TAIL-CORPUS-DEF seat; batch 4; row 21580; DS-CND-1 stable, religious_conversion v1; src/data/dossierStateProse/stressors.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**427. The slave-revolt line "spreads to more work gangs" is reworded.**
+**484. The slave-revolt line "spreads to more work gangs" is reworded.**
 
 - Towns touched: 5 of 720 sample towns.
 - Before: “spreads to more work gangs”
@@ -5418,7 +6187,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in those 5 towns, including where it is false.
 - [TAIL-CORPUS-DEF seat; batch 4; row 21712; DS-CND-1 worsening, slave_revolt v1; src/data/dossierStateProse/stressors.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**428. "paints its civic buildings" is replaced by a second version of the line for towns with no town hall.**
+**485. "paints its civic buildings" is replaced by a second version of the line for towns with no town hall.**
 
 - Towns touched: 5 of 720 sample towns before and 2 after; false in 2, plus one town (village-1) whose only hall is an adventurers' charter hall.
 - Before: “paints its civic buildings”
@@ -5427,7 +6196,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in the towns that now take the second version, including where there is no civic hall.
 - [TAIL-NARRATIVE; batch 1; base f663a2699, tree b52481302; src/generators/narrativeText.js] 01333 indebted[4]
 
-**429. The war's sacrifice sentence for an isolated war has a new wording.**
+**486. The war's sacrifice sentence for an isolated war has a new wording.**
 
 - Towns touched: 4 of 720 sample towns.
 - After: “The governing authority is demanding sacrifice, and not every household gives it in equal measure.”
@@ -5435,7 +6204,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: Effect not stated in the hand-back.
 - [TAIL-CRISIS; batch 1; src/generators/stressNarrative.js; tests/generators/stressNarrativeDeclared.test.js]
 
-**430. The insurgency line "Fewer merchants … pay its rivals" no longer prints where the town has no market.**
+**487. The insurgency line "Fewer merchants … pay its rivals" no longer prints where the town has no market.**
 
 - Towns touched: 4 of 720 sample towns without a market (the line read 11 towns, 11 to 7).
 - Before: “Fewer merchants … pay its rivals”
@@ -5443,7 +6212,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old line returns in those 4 towns, where it is false.
 - [TAIL-CORPUS-DEF seat; batch 4; row 07715; DS-CND-1 worsening, insurgency v3, declared "market"; src/data/dossierStateProse/stressors.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**431. The succession-void line "the old officers do what they did before" is reworded.**
+**488. The succession-void line "the old officers do what they did before" is reworded.**
 
 - Towns touched: 4 of 720 sample towns (the line read 1 town before, new words print in 4).
 - Before: “the old officers do what they did before”
@@ -5452,7 +6221,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in those 4 towns, including where it is false.
 - [TAIL-CORPUS-DEF seat; batch 4; DS-CND-1 stable, succession_void v2; src/data/dossierStateProse/stressors.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**432. Under a siege that stopped the trade, the short-of-food clause takes the famine's words.**
+**489. Under a siege that stopped the trade, the short-of-food clause takes the famine's words.**
 
 - Towns touched: 4 of 720 sample towns (the siege towns); 12 to 8 towns print the old line.
 - Before: “Many households go short, and a bad season would bring real hunger.”
@@ -5461,7 +6230,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: the old sentence returns in the 4 siege towns, where hunger is already present
 - [TAIL-DISPLAY-ECON-2; row 12961; src/components/tabs/EconomicsTab.jsx shortWords]
 
-**433. "the men <gov> sends to enforce" is replaced by a second version of the line for towns with no force.**
+**490. "the men <gov> sends to enforce" is replaced by a second version of the line for towns with no force.**
 
 - Towns touched: 4 of 720 sample towns to 1 for one form, 1 to 0 for the other, and "Headman's Authority" 2 to 1.
 - Before: “the men <gov> sends to enforce”
@@ -5470,7 +6239,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in the towns that now take the second version, including towns with no force to send.
 - [TAIL-NARRATIVE; batch 1; base f663a2699, tree b52481302; src/generators/narrativeText.js] 11487, B10954 insurgency(street)[2]
 
-**434. "a warehouse here" is replaced by a second version of the line for towns with no warehouse.**
+**491. "a warehouse here" is replaced by a second version of the line for towns with no warehouse.**
 
 - Towns touched: 4 of 720 sample towns before and 1 after; false in 3.
 - Before: “a warehouse here”
@@ -5479,7 +6248,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in the towns that now take the second version, including where there is no warehouse.
 - [TAIL-NARRATIVE; batch 1; base f663a2699, tree b52481302; src/generators/narrativeText.js] 20366 indebted[3]
 
-**435. The monster-pressure line "… trading the harvest it needs for a perimeter …" is reworded to describe fields left unworked and a mill.**
+**492. The monster-pressure line "… trading the harvest it needs for a perimeter …" is reworded to describe fields left unworked and a mill.**
 
 - Towns touched: 4 of 720 sample towns.
 - Before: “… trading the harvest it needs for a perimeter the able-bodied can actually hold”
@@ -5488,7 +6257,16 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in the 4 sample towns that printed it, where it is false.
 - [TAIL-NARRATIVE-2; batch 4; base 9bd853fd0 after batch 3; src/generators/narrativeText.js] PRESSURE_SENTENCES.monster_pressure[3]
 
-**436. The siege note "Settlement is under active siege. Trade income above reflects pre-siege operations…" no longer prints in 3 towns, because Pilgrim Trade was their only trade row.**
+**493. Under a religious conversion, the faith's line no longer says it is one of two rival sides claiming the legitimate succession; it says each side claims to be the true faith.**
+
+- Towns touched: 4 of 720 sample towns.
+- Before: “One of two rival sides claiming the legitimate succession”
+- After: “One of two rival sides, each claiming to be the true faith: the legal standing of their records is contested.”
+- Why: All 4 towns are religious conversions with no succession in force.
+- If vetoed: The old line would print again in those 4 towns.
+- [TAIL-POWERS-B seat 3; ruling P29 (6b); 4ff449a7b; row B00215; src/generators/power/stressFactions.js]
+
+**494. The siege note "Settlement is under active siege. Trade income above reflects pre-siege operations…" no longer prints in 3 towns, because Pilgrim Trade was their only trade row.**
 
 - Towns touched: 3 of 720 sample towns (under siege).
 - Before: “Settlement is under active siege. Trade income above reflects pre-siege operations. Current effective trade is likely zero or severely restricted.”
@@ -5496,7 +6274,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The note would return in the 3 towns (r2s-under_siege-village-0, -town-1, -city-1).
 - [TAIL-DEFECON-2; ruling D21; commit 5f67f382d; src/generators/narrative/narrativeGenerator.js is the writer]
 
-**437. Seven arrival lines (food handed out, a notice of the next fair, porters, a broker, a clerk, a basket of fish, baking since dawn) are no longer printed in a town under siege or in famine.**
+**495. Seven arrival lines (food handed out, a notice of the next fair, porters, a broker, a clerk, a basket of fish, baking since dawn) are no longer printed in a town under siege or in famine.**
 
 - Towns touched: Between 1 and 3 of 720 sample towns per line (the lines printed in 24, 9, 19, 14, 21, 8 and 2 sample towns).
 - Why: A fair, handed-out food, busy porters or fresh fish are false in a town under siege or in famine.
@@ -5515,7 +6293,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-HISTORY; ruling Y4 and Y6; batch 1, 3da34c70b; src/data/arrivalProse.js]
 
-**438. The line about defences and "the last muster" no longer prints in towns with no armed force. The next fitting line from the same list prints there.**
+**496. The line about defences and "the last muster" no longer prints in towns with no armed force. The next fitting line from the same list prints there.**
 
 - Towns touched: 3 to 2 of 720 sample towns for one form and 1 to 0 for the other; false in 2.
 - Before: “defences … the last muster”
@@ -5523,7 +6301,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The line returns where it was withheld, including 2 sample towns where it is false.
 - [TAIL-NARRATIVE; batch 1; base f663a2699, tree b52481302; src/generators/narrativeText.js] HIGH 20438, 20439; monster_pressure[1]
 
-**439. Four lines now print in a few more towns because other lines were withheld there.**
+**497. Four lines now print in a few more towns because other lines were withheld there.**
 
 - Towns touched: 2 hamlets, 3 thorps, 1 hamlet and 1 town (the lines are true where read).
 - Why: The lines took the place of withheld lines; the hand-back read them and found them true where they print.
@@ -5539,7 +6317,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-NARRATIVE; batch 1; base f663a2699, tree b52481302; src/generators/narrativeText.js] inherited lines
 
-**440. The famine line "… and its strongest powers are fighting over the stores" is reworded to say the powers are each watching who holds the food.**
+**498. The famine line "… and its strongest powers are fighting over the stores" is reworded to say the powers are each watching who holds the food.**
 
 - Towns touched: 3 of 720 sample towns; none print the "two powers" form.
 - Before: “… and its strongest powers are fighting over the stores”
@@ -5554,7 +6332,16 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-NARRATIVE-2; batch 4; base 9bd853fd0 after batch 3; src/generators/narrativeText.js] famineFoodIsPower; ruling READ-ALL-4
 
-**441. In a thorp, "its own officials: taxes held back" is replaced by a line for the smallest places.**
+**499. The War Council's line no longer says it is functioning smoothly because the war is going well; it says few people ask what it does while the war goes well.**
+
+- Towns touched: 3 of 720 sample towns.
+- Before: “Currently functioning smoothly: the war is going well enough that its authority isn't contested.”
+- After: “While the war goes well, few people ask what it does.”
+- Why: The council is Suppressed in all 3 towns, so the old line claimed too much.
+- If vetoed: The old line would print again in those 3 wartime towns, though the council is Suppressed.
+- [TAIL-POWERS-B seat 3; ruling P29 (6b); 4ff449a7b; row 06241; src/generators/power/stressFactions.js]
+
+**500. In a thorp, "its own officials: taxes held back" is replaced by a line for the smallest places.**
 
 - Towns touched: 1 of 720 sample towns.
 - Before: “its own officials: taxes held back”
@@ -5563,7 +6350,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: effect not stated in the hand-back
 - [TAIL-NARRATIVE; batch 1; base f663a2699, tree b52481302; src/generators/narrativeText.js] 20149 insurgency(institutional)[0]
 
-**442. "a mill standing idle" becomes "a mill kept turning for its buyers" where the town's trade record sells the mill's flour.**
+**501. "a mill standing idle" becomes "a mill kept turning for its buyers" where the town's trade record sells the mill's flour.**
 
 - Towns touched: 1 of 720 sample towns; read in 2 towns (r2s-monster_pressure-village-3, r2s-monster_pressure-metropolis-0).
 - Before: “a mill standing idle”
@@ -5572,7 +6359,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in the sample town where it is false.
 - [TAIL-NARRATIVE; batch 1; base f663a2699, tree b52481302; src/generators/narrativeText.js] 00708 monster_pressure[3]
 
-**443. "is prospering" no longer prints unless the town has a garrison and at least a comfortable prosperity.**
+**502. "is prospering" no longer prints unless the town has a garrison and at least a comfortable prosperity.**
 
 - Towns touched: 1 of 720 sample towns.
 - Before: “is prospering”
@@ -5580,7 +6367,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in the sample town where it is false.
 - [TAIL-NARRATIVE; batch 1; base f663a2699, tree b52481302; src/generators/narrativeText.js] 01079 wartime(winning)[2]
 
-**444. A line that named one power in both places and called the difference "a distinction" is replaced.**
+**503. A line that named one power in both places and called the difference "a distinction" is replaced.**
 
 - Towns touched: 1 of 720 sample towns.
 - Before: “a distinction”
@@ -5589,7 +6376,16 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in the sample town where it is false.
 - [TAIL-NARRATIVE; batch 1; base f663a2699, tree b52481302; src/generators/narrativeText.js] 03831 indebted[1]
 
-**445. "the first power leader" is reworded in every town that printed it.**
+**504. The Monster Hunters' line no longer says they are temporarily powerful because they are useful.**
+
+- Towns touched: 1 of 720 sample towns.
+- Before: “temporarily powerful because they are useful”
+- After: “Outside professionals brought in or passing through; wanted while the monsters are.”
+- Why: The power is Suppressed in the one town.
+- If vetoed: The old line would print again in that town.
+- [TAIL-POWERS-B seat 3; ruling P29 (6b); 4ff449a7b; row 15394; src/generators/power/stressFactions.js]
+
+**505. "the first power leader" is reworded in every town that printed it.**
 
 - Towns touched: count not recorded (all towns that printed it).
 - Before: “the first power leader”
@@ -5598,7 +6394,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: effect not stated in the hand-back
 - [TAIL-NARRATIVE; batch 1; base f663a2699, tree b52481302; src/generators/narrativeText.js] 07115, 10848, 07638 insurgency(street)[0]
 
-**446. "the timber that made it worth holding" is reworded to "what made it worth holding".**
+**506. "the timber that made it worth holding" is reworded to "what made it worth holding".**
 
 - Towns touched: count not recorded.
 - Before: “the timber that made it worth holding”
@@ -5607,7 +6403,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: effect not stated in the hand-back
 - [TAIL-NARRATIVE; batch 1; base f663a2699, tree b52481302; src/generators/narrativeText.js] 11478 slave_revolt[3]
 
-**447. The famine line "at least three powers are fighting" is reworded to "its strongest powers are fighting". (Batch 4 reworded it again.)**
+**507. The famine line "at least three powers are fighting" is reworded to "its strongest powers are fighting". (Batch 4 reworded it again.)**
 
 - Towns touched: count not recorded.
 - Before: “at least three powers are fighting”
@@ -5616,7 +6412,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: effect not stated in the hand-back
 - [TAIL-NARRATIVE; batch 1; base f663a2699, tree b52481302; src/generators/narrativeText.js] B17142 famine
 
-**448. "nor keep them fed" is reworded to "nor find them all work".**
+**508. "nor keep them fed" is reworded to "nor find them all work".**
 
 - Towns touched: count not recorded.
 - Before: “nor keep them fed”
@@ -5627,7 +6423,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 ### Exports and pdf (14 items)
 
-**449. The PDF's Defense & Security caption takes the same new words as the tab ('your campaign goes on'), and the PDF's Overview reads the same constant. The helper calls this its own judgment, because the file was not named as lent.**
+**509. The PDF's Defense & Security caption takes the same new words as the tab ('your campaign goes on'), and the PDF's Overview reads the same constant. The helper calls this its own judgment, because the file was not named as lent.**
 
 - Towns touched: 720 of 720 sample towns.
 - Before: “… re-judged as the campaign advances”
@@ -5636,7 +6432,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: the PDF caption keeps the old words while the tab changes, which the screen-to-PDF check would reject
 - [TAIL-DISPLAY-CIVIC-4; V5; src/pdf/sections/DefenseSecurity.jsx; tests/components/frozenTenseDefenseCopy.test.js]
 
-**450. The PDF's ENTREPÔT tag now stands where a chain on the page is an entrepôt, as the Economics tab's chip says, not where the town's data flags an entrepôt.**
+**510. The PDF's ENTREPÔT tag now stands where a chain on the page is an entrepôt, as the Economics tab's chip says, not where the town's data flags an entrepôt.**
 
 - Towns touched: 148 to 320 of 720 sample towns (41 lose the tag, 213 gain it).
 - Before: “ENTREPÔT (tag on the record's town-wide flag)”
@@ -5652,7 +6448,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-EXPORTS-PDF-3; rulings E21 E22 E23; batch 3; merge 36eaba1af; src/domain/display/entrepotShown.js, src/pdf/lib/viewModelBodySlices.js; ruling E21; row 08499]
 
-**451. The PDF's nearby-resource tags and the journal's Nearby and Depleted rows now print the catalogue's own label (for example 'Mountain Pass' for 'Defended Pass').**
+**511. The PDF's nearby-resource tags and the journal's Nearby and Depleted rows now print the catalogue's own label (for example 'Mountain Pass' for 'Defended Pass').**
 
 - Towns touched: 29 towns for 'Defended Pass'; 255 towns for 'Iron Deposits' and so on (783 old lines gone, 784 new); the tabs did not move for it.
 - Before: “Defended Pass”
@@ -5674,7 +6470,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-DISPLAY-CIVIC-4; V11 (the earlier V4); commit 561c773ff; src/pdf/sections/ResourcesProduction.jsx; src/foundry/journalPages.js; resourceDisplayName.js]
 
-**452. The PDF follows the same floor: its black market capture line is silent in the same 240 towns, and its enforcement line gives way in 15 towns to 'No criminal infrastructure has been identified.'**
+**512. The PDF follows the same floor: its black market capture line is silent in the same 240 towns, and its enforcement line gives way in 15 towns to 'No criminal infrastructure has been identified.'**
 
 - Towns touched: 240 of 720 sample towns for the capture line; 15 towns for the enforcement line.
 - Before: “The criminals outmatch those who keep order.”
@@ -5693,7 +6489,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-DISPLAY-ECON-5; X30; src/pdf/sections; criminalsStandHere]
 
-**453. In the PDF Economics chapter's chain flow, an output is badged EXPORT only where the Economics tab's printed exports hold it by its own name, and never under a siege that stops trade.**
+**513. In the PDF Economics chapter's chain flow, an output is badged EXPORT only where the Economics tab's printed exports hold it by its own name, and never under a siege that stops trade.**
 
 - Towns touched: 51 badge sentences, 859 printings silenced of 720 sample towns; the widest: Enchanting services 115 to 0.
 - Before: “<output> EXPORT”
@@ -5733,7 +6529,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-EXPORTS-PDF-2; rulings E3 E16 E17 E15 E18 E1; batch 2; tip 44d3088b4 (merge 538c6ea10); src/pdf/sections/SupplyChainFlow.jsx, src/pdf/sections/EconomicsTrade.jsx; ruling E1; rows 17065 10234 21452 16334 04302 07554 10246 10709 22454 10202 22983 25129 04300 05888 23156 15575 25173 10860 22340]
 
-**454. On the exports page, "on the reasoning that a road a century old" is replaced. The same origin line prints on the page tabs.**
+**514. On the exports page, "on the reasoning that a road a century old" is replaced. The same origin line prints on the page tabs.**
 
 - Towns touched: 104 of 720 sample towns before and 0 after; false in 42.
 - Before: “Reason settled: Sited on a route already worn deep before anyone built…”
@@ -5742,7 +6538,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in the 104 sample towns that printed it, and it is false in 42.
 - [TAIL-NARRATIVE-2; batch 3; base 9bd853fd0; src/generators/narrative/settlementOriginProse.js; 22398 road[4]]
 
-**455. The journal's Exploitation table now names resources the way the tab's card names them (twelve resources differed).**
+**515. The journal's Exploitation table now names resources the way the tab's card names them (twelve resources differed).**
 
 - Towns touched: up to 75 of 720 sample towns per resource (32 rows, 352 town-prints in all).
 - Why: The journal used its own spelling; the tab's card prints the plain good name.
@@ -5765,7 +6561,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-EXPORTS-JOURNAL; ruling E1; commit 39315b391; src/foundry/journalPages.js]
 
-**456. The PDF cover's "Top export:" line now names the first export the Economics tab prints, and none where a siege stops trade or where the tab prints "No significant exports."**
+**516. The PDF cover's "Top export:" line now names the first export the Economics tab prints, and none where a siege stops trade or where the tab prints "No significant exports."**
 
 - Towns touched: 61 of 720 sample covers (43 name the tab's first export, 18 print none: 13 under a siege, 5 where the tab prints "No significant exports."); "Transit trade" 32 to 0; row 29296: 1 to 0.
 - Before: “Top export: Salted fish (naval route only)”
@@ -5781,7 +6577,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-EXPORTS-PDF-2; rulings E3 E16 E17 E15 E18 E1; batch 2; tip 44d3088b4 (merge 538c6ea10); src/pdf/sections/Cover.jsx, src/pdf/lib/viewModelBodySlices.js; ruling E15; row 29296]
 
-**457. The alliance tie line about a threat that has passed (and the line saying the threat is gone) no longer prints under a siege, an occupation, monsters or a war.**
+**517. The alliance tie line about a threat that has passed (and the line saying the threat is gone) no longer prints under a siege, an occupation, monsters or a war.**
 
 - Towns touched: 44 of 720 sample towns false before (286 to 249 in the exports).
 - Before: “… joined against a threat that has since passed …”
@@ -5789,7 +6585,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old lines return in those towns, including where the threat is still there.
 - [TAIL-TIES-2 batch 1; row X9 21809; src/data/npcData.js]
 
-**458. On the exports page, "because the river was the only road" becomes "where the river was the only road worth having".**
+**518. On the exports page, "because the river was the only road" becomes "where the river was the only road worth having".**
 
 - Towns touched: 34 of 720 sample towns before and 0 after; false in 7.
 - Before: “Reason settled: Sited at the water's edge because the river was the on…”
@@ -5798,7 +6594,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in the 34 sample towns that printed it, and it is false in 7.
 - [TAIL-NARRATIVE-2; batch 3; base 9bd853fd0; src/generators/narrative/settlementOriginProse.js; 22397 river[3]]
 
-**459. The line about a private meeting with someone from outside the settlement no longer prints under a siege or a plague.**
+**519. The line about a private meeting with someone from outside the settlement no longer prints under a siege or a plague.**
 
 - Towns touched: 11 of 720 sample towns false before (159 to 148 in the exports).
 - Before: “… meeting privately with someone from outside the settlement …”
@@ -5806,7 +6602,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old line returns in those towns.
 - [TAIL-TIES-2 batch 1; row X9 28943; src/data/npcData.js]
 
-**460. On the exports page, "The distance is why it was founded" no longer prints. The line "The distance has kept it small and whole." prints in its place.**
+**520. On the exports page, "The distance is why it was founded" no longer prints. The line "The distance has kept it small and whole." prints in its place.**
 
 - Towns touched: 1 of 720 sample towns.
 - Before: “The distance is why it was founded”
@@ -5815,7 +6611,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: effect not stated in the hand-back
 - [TAIL-NARRATIVE-2; batch 3; base 9bd853fd0; src/generators/narrative/settlementOriginProse.js; 22396 sustained[2]; r2r-thorp-9]
 
-**461. Lines that mention the lost exports print in fewer towns on the tabs, the PDF and the journal.**
+**521. Lines that mention the lost exports print in fewer towns on the tabs, the PDF and the journal.**
 
 - Towns touched: count not recorded as one figure; the counts per line are in the rows.
 - Why: They follow the shorter export lists.
@@ -5833,7 +6629,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-DEFECON-C seat; commit a10a457e2; C1-E; page measure at e6700483b; src/generators/computeActiveChains.js, src/generators/economy/economicState.js]
 
-**462. In the journal's NPC Quick Reference, an empty 'Member of' cell now prints a dash.**
+**522. In the journal's NPC Quick Reference, an empty 'Member of' cell now prints a dash.**
 
 - Towns touched: 2,040 rows of the 720 sample towns (count of towns not recorded).
 - Before: “(empty cell)”
@@ -5844,21 +6640,21 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 ### Other (17 items)
 
-**463. Two lines about whether the town's facts agree print in fewer towns: "A handful of things about this thorp cannot all be true at once…" and, on the exports page, "The verdict, in the town's own voice".**
+**523. Two lines about whether the town's facts agree print in fewer towns: "A handful of things about this thorp cannot all be true at once…" and, on the exports page, "The verdict, in the town's own voice".**
 
 - Towns touched: "A handful of things …" 60 to 52 and "The verdict …" 266 to 258 of 720 sample towns.
 - Why: The founders now fit the origin lines, so the town's consistency check passes in more towns (12 towns go from needs-review to pass, 3 the other way).
 - If vetoed: The two lines return in 8 more sample towns each.
 - [TAIL-NARRATIVE-4; batch FB; ruling N17(1); base 78eadedc5; src/generators/narrative/foundingRowAdmits.js; founder.js] coherence receipt
 
-**464. Stored text that no sample page prints also changed: the lasting effects kept on events and tensions, a note that quotes the effect, one arrival scene line and a few event descriptions.**
+**524. Stored text that no sample page prints also changed: the lasting effects kept on events and tensions, a note that quotes the effect, one arrival scene line and a few event descriptions.**
 
 - Towns touched: 245 of 720 sample towns in batch 5 (stored text only) and 178 of 720 in batch 6; prints on no sample page.
 - Why: These follow from the sentence changes above, because each place copies the same text.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-HISTORY-4 and TAIL-HISTORY-5; batches 5 and 6; history.currentTensions, history.historicalEvents, history.legacyAnnotations, arrivalScene]
 
-**465. The parish church's sentence about coverage changes.**
+**525. The parish church's sentence about coverage changes.**
 
 - Towns touched: 120 of 720 sample towns (cities only).
 - Before: “Every district has a temple.”
@@ -5867,7 +6663,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in those 120 towns, including where it is false.
 - [TAIL-SERVICES-3; ruling S11; e35851db1; src/data/institutionServices.js, docs/census/declarations/institutionServices.INSTITUTION_SERVICES.json]
 
-**466. The robbery hook line no longer says the thief robbed "one of their fronts"; it now says they were robbed by a professional.**
+**526. The robbery hook line no longer says the thief robbed "one of their fronts"; it now says they were robbed by a professional.**
 
 - Towns touched: 90 of 720 sample towns (90 to 0).
 - Before: “… rob one of their fronts, …”
@@ -5876,7 +6672,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in those 90 towns, including the 21 where it is false.
 - [TAIL-TIES batch 2; row B17460; src/data/npcData.js NPC_FACTION_LOYALTY criminal#7]
 
-**467. The woodcarver's row about religious carvings changes.**
+**527. The woodcarver's row about religious carvings changes.**
 
 - Towns touched: 87 of 720 sample towns.
 - Before: “Crucifixes, reliquaries, saints' images.”
@@ -5885,7 +6681,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in those 87 towns, including where it is false.
 - [TAIL-SERVICES-3; ruling S12; e35851db1; src/data/institutionServices.js]
 
-**468. The layout line of a town no longer names a gate, a citadel, a keep, stone walls, warehouses or chandlers where the town has none.**
+**528. The layout line of a town no longer names a gate, a citadel, a keep, stone walls, warehouses or chandlers where the town has none.**
 
 - Towns touched: 57 of 720 sample towns changed; each noun's false count is in the rows.
 - Why: The line named things the town does not have (for example 'a single defended gate' in 13 of 13 mountain villages that print it, with no gate).
@@ -5904,7 +6700,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-EXPORTS-JOURNAL; ruling J1; batch 1 commit 26e9210a0; src/generators/spatialGenerator.js; docs/census/declarations/SPATIAL_TEXT.json]
 
-**469. The town burial-ground sentence no longer says burial lies "beyond the gate" and now says "burial out beyond the houses where a ground has filled".**
+**529. The town burial-ground sentence no longer says burial lies "beyond the gate" and now says "burial out beyond the houses where a ground has filled".**
 
 - Towns touched: 42 of 720 sample towns (false in 18).
 - Why: The old sentence named a gate in towns whose defence has none (false in 18 of 42 towns).
@@ -5919,7 +6715,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [second houses seat; ruling H7; src/data/institutionDescVariants.js; the line leaves its wait for a gate]
 
-**470. The quick guide no longer says a town is 'built for a pastoral life half-settled and half-moving' where the record holds neither herds nor pasture; it says 'built on clan lines'. The Steppe 'held by clan and caravan' wording also changes to 'held by clan' once.**
+**530. The quick guide no longer says a town is 'built for a pastoral life half-settled and half-moving' where the record holds neither herds nor pasture; it says 'built on clan lines'. The Steppe 'held by clan and caravan' wording also changes to 'held by clan' once.**
 
 - Towns touched: 30 of 35 sample towns lose the pastoral wording (35 to 5).
 - Before: “built for a pastoral life half-settled and half-moving”
@@ -5936,7 +6732,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-CRISIS-4; batch 6; K19; 34b8d9411; src/domain/summary/settlementQuickGuide.js]
 
-**471. The Travelling performers' three sentences no longer say performers come "for the fairs" and now say "for the festivals".**
+**531. The Travelling performers' three sentences no longer say performers come "for the fairs" and now say "for the festivals".**
 
 - Towns touched: 7 of 720 sample towns for the widest sentence; false in 11 of 20.
 - Why: The old sentences named fairs where the town has no Annual fair or Major annual fairs (false in 11 of 20 towns).
@@ -5951,7 +6747,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [third houses seat; ruling H7; src/data/institutionalCatalog.js, src/data/institutionDescVariants.js]
 
-**472. The theatre manager's hook line no longer says the house is full every night.**
+**532. The theatre manager's hook line no longer says the house is full every night.**
 
 - Towns touched: 20 of 720 sample towns (20 to 0).
 - Before: “The new play mocks someone powerful by another name, and the house is full every night.”
@@ -5960,7 +6756,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The old sentence returns in those 20 towns, including 2 under a curfew.
 - [TAIL-TIES batch 2; row 21114; src/data/npcData.js NPC_FACTION_LOYALTY]
 
-**473. Two lines of the arrival scene a visitor reads were reworded to claim only what every printing town has.**
+**533. Two lines of the arrival scene a visitor reads were reworded to claim only what every printing town has.**
 
 - Towns touched: 6 and 17 of 720 sample towns.
 - Why: "a working waterfront" was false where there are no docks and no fishers, and "becomes a street … the settlement grows around you" was false in thorps and hamlets.
@@ -5974,7 +6770,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-NARRATIVE-3; batch 5; base ca827fc0f; ruling N13; src/data/narrativeData.js; ARRIVAL_SCENES.river B21058; ARRIVAL_SCENES.ordinary 21748]
 
-**474. The quick guide's 'scope' line (culture, ground and how the place is run) has new wordings: it drops any clause that is false for the town, and adds 'held, for now, by another power' for an occupied town. All the new lines are listed here.**
+**534. The quick guide's 'scope' line (culture, ground and how the place is run) has new wordings: it drops any clause that is false for the town, and adds 'held, for now, by another power' for an occupied town. All the new lines are listed here.**
 
 - Towns touched: the widest new line prints in 15 of 720 sample towns; 74 new sentences in all (this item lists each with its town count).
 - Why: The old clauses presumed a ruler, a hall, a harbour, an agora, a civic association or timber compounds the town lacks (35 rows of the worklist; 33 false pairs).
@@ -6054,7 +6850,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-CRISIS-2; batch 2; 5e75be951; src/domain/summary/settlementQuickGuide.js]
 
-**475. Eight second versions of the layout line now print in the towns where a noun was taken out (a gate, a citadel, a keep or the waterfront houses are not there).**
+**535. Eight second versions of the layout line now print in the towns where a noun was taken out (a gate, a citadel, a keep or the waterfront houses are not there).**
 
 - Towns touched: 13, 11, 10, 6, 6, 5, 3 and 3 of 720 sample towns (the hand-back also gives the exact lines below); one line is now also printed in walled towns with no Citadel (3 to 14 towns).
 - Why: The first version of the line named something the town does not have.
@@ -6074,7 +6870,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-EXPORTS-JOURNAL; ruling J1; commit 26e9210a0; src/generators/spatialGenerator.js]
 
-**476. The quick guide no longer says a town is 'built around the tank and the bazaar' where no water work stands; it says 'built around the bazaar'.**
+**536. The quick guide no longer says a town is 'built around the tank and the bazaar' where no water work stands; it says 'built around the bazaar'.**
 
 - Towns touched: 11 of 43 sample towns that printed the phrase (43 to 32 towns keep the tank).
 - Before: “built around the tank and the bazaar”
@@ -6090,7 +6886,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 
 - [TAIL-CRISIS-4; batch 6; K19; 34b8d9411; src/domain/summary/settlementQuickGuide.js]
 
-**477. The words 'warehouses' and 'chandlers' no longer print where only one of the two houses stands; the line names both or neither.**
+**537. The words 'warehouses' and 'chandlers' no longer print where only one of the two houses stands; the line names both or neither.**
 
 - Towns touched: 11 of 720 sample towns.
 - Before: “warehouses and chandlers at the waterfront (where only one of the two houses stands)”
@@ -6098,7 +6894,7 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: The line naming both houses returns in those 11 towns, including where only one stands.
 - [TAIL-EXPORTS-JOURNAL; ruling J1; commit 26e9210a0; src/generators/spatialGenerator.js]
 
-**478. The first lines a visitor reads change in 8 towns; the hand-back names three new lines.**
+**538. The first lines a visitor reads change in 8 towns; the hand-back names three new lines.**
 
 - Towns touched: 3 towns named (r2r-city-57, r2r-hamlet-21, r2r-thorp-41); 8 arrival scenes move in all.
 - After: “Flour dust lies pale on the doorsteps / Nets hang drying on poles / Curls of shavings … from a carpenter's bench”
@@ -6106,25 +6902,25 @@ Each item is one change to what a page prints. The widest (most sample towns) co
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DEFECON-C seat; commit a10a457e2; C1-E; src/generators/computeActiveChains.js, src/generators/economy/economicState.js]
 
-**479. A line on the Institutions tab that printed below the phone text-size floor now prints at the floor size.**
+**539. A line on the Institutions tab that printed below the phone text-size floor now prints at the floor size.**
 
 - Towns touched: count not recorded.
 - Why: The line printed at a size under the floor for phone screens.
 - If vetoed: The line returns to the smaller size in the phone view.
 - [TAIL-CLOSE-DISPLAY-1; commit f6e70b89; src/components/InstitutionsTab.jsx]
 
-## Part B. Checks that were retired, reshaped, muted or re-keyed (92 items)
+## Part B. Checks that were retired, reshaped, muted or re-keyed (105 items)
 
 A check is a test that guards the pages. These are the checks a seat itself listed as retired, reshaped, muted or re-keyed.
 
-**480. In the list of which facts each pool may read, the pool 'a market, no guild' moves from layer 3 to layer 4.**
+**540. In the list of which facts each pool may read, the pool 'a market, no guild' moves from layer 3 to layer 4.**
 
 - Towns touched: 42 of 720 sample towns read the pool (v1 4, v2 5, v3 3, v4 6, v5 24); the other hand-back (TAIL-CLOSE-SRC-2) calls the same row forbidden and not lent, so the two hand-backs disagree.
 - Why: Its lines are false beside a guild power, so it reads the guild power (layer 3); the facts' law lets a pool read only lower layers.
 - If vetoed: The layer-law check goes red again for that pool.
 - [TAIL-CLOSE-POOLS-1; ruling C30 (vetoable by the owner); tests/lint/factLayers.poolTable.json; TAIL-CORPUS-ECO-4 batch 7 commit 4467cd7d6 (C19)]
 
-**481. Many checks that held an old sentence were re-keyed by identity to the new sentence, in the same change as each cure (batches 1 to 8). The hand-back lists them by file.**
+**541. Many checks that held an old sentence were re-keyed by identity to the new sentence, in the same change as each cure (batches 1 to 8). The hand-back lists them by file.**
 
 - Towns touched: count not recorded.
 - Why: Each check held a sentence the cure changed; the check now holds the new sentence.
@@ -6144,14 +6940,14 @@ A check is a test that guards the pages. These are the checks a seat itself list
 
 - [TAIL-CRISIS to TAIL-CRISIS-6; tests/generators/outlookHooksResolved.test.js; tests/generators/stressNarrativeDeclared.test.js; tests/components/faithTabChurch.test.jsx; tests/domain/settlementQuickGuide.test.js; tests/domain/summary/inlandScopePhrases.test.js; tests/domain/crisisHooks.test.js; tests/domain/crisisPage.test.js; tests/domain/r3c9ReaderLinesTrue.test.js; tests/generators/hookTablesDeclared.test.js; tests/domain/tailCrisisBatch1.test.js; tests/domain/tailCrisisBatch2.test.js; tests/domain/facts/rivalPower.test.js; tests/domain/tailCrisisBatch4.test.js; tests/components/crisisTab.test.jsx]
 
-**482. The floor of a check that the crisis-blind-prose test finds enough calm claims was lowered from 29 to 17 to match what is now measured.**
+**542. The floor of a check that the crisis-blind-prose test finds enough calm claims was lowered from 29 to 17 to match what is now measured.**
 
 - Towns touched: count not recorded.
 - Why: Writing seats cured calm claims at the source, so fewer remain to be found (29, then 23, 22, 21, 17 at named commits).
 - If vetoed: The check that enough calm claims are found would go red again at the old floor of 29 until more such claims were present.
 - [TAIL-CRISIS-7; K30 (a); 7eea6a515; tests/domain/crisisBlindDossierProse.test.js]
 
-**483. Four checks of the crisis area were re-keyed in the landing to follow new text: the widened crisis-blind check (the claim cured at the source, both halves asserted), the bare-crisis facts check (new text), the stopped-rows check (the Harvest row and the house's hedged description), and the Tonight own-goal check (it follows the role in the re-cast town). A style check on the crisis dependence data was cured so the key is read from the services file.**
+**543. Four checks of the crisis area were re-keyed in the landing to follow new text: the widened crisis-blind check (the claim cured at the source, both halves asserted), the bare-crisis facts check (new text), the stopped-rows check (the Harvest row and the house's hedged description), and the Tonight own-goal check (it follows the role in the re-cast town). A style check on the crisis dependence data was cured so the key is read from the services file.**
 
 - Towns touched: count not recorded.
 - Why: Other seats' changes made the old pinned text or town stale.
@@ -6167,7 +6963,7 @@ A check is a test that guards the pages. These are the checks a seat itself list
 
 - [TAIL-CRISIS-7; 375a5547 39dd1840 ab49049c e4799144 fdb23220; tests/domain/crisisBlindWidened.test.js; tests/domain/facts/composeBareCrisis.test.js; tests/components/crisisStoppedRows.test.jsx; tests/domain/tonightOwnGoal.test.js; src/data/crisisDependence.js]
 
-**484. Two checks of the journal's crisis rows were re-keyed to the shares the page now prints: in the landing, Grain Sales 4% to 5% and Toll Revenue 14% to 15%; later, Grain Sales 5% to 4%, Gate Tolls 8% to 7% and Property Rents 8% to 7%.**
+**544. Two checks of the journal's crisis rows were re-keyed to the shares the page now prints: in the landing, Grain Sales 4% to 5% and Toll Revenue 14% to 15%; later, Grain Sales 5% to 4%, Gate Tolls 8% to 7% and Property Rents 8% to 7%.**
 
 - Towns touched: count not recorded.
 - Why: Other seats' changes shifted the printed shares (a one-row income change in 229 towns).
@@ -6184,21 +6980,21 @@ A check is a test that guards the pages. These are the checks a seat itself list
 
 - [TAIL-CRISIS-7, TAIL-CRISIS-8; fca2cf25 573c92b6d; tests/foundry/journalMarksCrisisRows.test.js]
 
-**485. One test case of the crisis-blind-prose check (a line saying 'the succession question is not a live one' in a succession void counts as a finding) was retired by name.**
+**545. One test case of the crisis-blind-prose check (a line saying 'the succession question is not a live one' in a succession void counts as a finding) was retired by name.**
 
 - Towns touched: count not recorded.
 - Why: The page text lines it looked for were reworded, so the phrases it finds no longer exist; the hand-back calls this a cure, not a finder gone blind.
 - If vetoed: The case returns and fails (1 of 9 red) until a succession-void line says the question is not live.
 - [TAIL-CRISIS-8; case soak1k-4800; 51217c0e (DS-POW-4 riskLabel 'Stable (no challengers)'); chair's 'one more'; tests/domain/coherence/crisisBlindProse.test.js]
 
-**486. Eight stale rows were removed from the list of known presumed-thing exceptions through its own door (six of the smith family, two of the market family) in the iron-hook commit; nothing was added.**
+**546. Eight stale rows were removed from the list of known presumed-thing exceptions through its own door (six of the smith family, two of the market family) in the iron-hook commit; nothing was added.**
 
 - Towns touched: count not recorded.
 - Why: The old literals those rows banked no longer exist in the files.
 - If vetoed: The rows would return; effect not stated beyond that.
 - [TAIL-CRISIS-3; K17; f20ce3151; tests/lint/presumedThings.register.json]
 
-**487. Counted figures held fixed in several checks were moved by one or two after new second versions and rewordings were added.**
+**547. Counted figures held fixed in several checks were moved by one or two after new second versions and rewordings were added.**
 
 - Towns touched: count not recorded.
 - Before: “old figures (see rows)”
@@ -6220,14 +7016,14 @@ A check is a test that guards the pages. These are the checks a seat itself list
 
 - [TAIL-CORPUS-DEF seat; commits 09a1afc81, batches 2, 3, 4, 6, U2; tests composeStateProse, proseEntryContradiction, proseMoveGrammar, proseWaveGate]
 
-**488. One stale row of the widened presumed-things list of exceptions was shrunk through its own door.**
+**548. One stale row of the widened presumed-things list of exceptions was shrunk through its own door.**
 
 - Towns touched: one stale row.
 - Why: It was stale; the list only shrinks (batch 1).
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CORPUS-DEF seat; commit 56d3a4757; presumed-things widened register]
 
-**489. The check seatSafetyUnrest was moved off the retired words "is safe in the hall" and now keys the second version of that line by its id.**
+**549. The check seatSafetyUnrest was moved off the retired words "is safe in the hall" and now keys the second version of that line by its id.**
 
 - Towns touched: count not recorded.
 - Before: “subject: Stable v3's retired claim found by a pattern match on "is safe in the hall"”
@@ -6236,7 +7032,7 @@ A check is a test that guards the pages. These are the checks a seat itself list
 - If vetoed: This check goes back to red until the old words return.
 - [TAIL-CORPUS-DEF seat; batch 3; test seatSafetyUnrest.test.js]
 
-**490. The check coherenceAgreeCures now accepts either "gate" or "no gate" as the mark on the walls-present lines.**
+**550. The check coherenceAgreeCures now accepts either "gate" or "no gate" as the mark on the walls-present lines.**
 
 - Towns touched: count not recorded.
 - Before: “the mark test accepted "gate" only”
@@ -6245,7 +7041,7 @@ A check is a test that guards the pages. These are the checks a seat itself list
 - If vetoed: This check goes back to red for two towns.
 - [TAIL-CORPUS-DEF seat; ruling U2; test coherenceAgreeCures; commits 91592cbf1, bc5ee968b, 07f53f717]
 
-**491. Eleven checks that were red were re-pointed to other sample towns or to the new words.**
+**551. Eleven checks that were red were re-pointed to other sample towns or to the new words.**
 
 - Towns touched: count not recorded.
 - Why: The scores, rebuilds or rewordings of other groups moved the towns or words each check used; no check was skipped, weakened or deleted.
@@ -6264,7 +7060,7 @@ A check is a test that guards the pages. These are the checks a seat itself list
 
 - [TAIL-CORPUS-DEF seat; ruling U2; tests defenseSupplyUnderACrisis, defenseInvasionWithinACriticalBand, defensePostureAgainstItsFacts, defenseWatchIsNotTheLevy, threatRowsTrueUnderBand, defenceTraditionReaders, defenseWithinTheBar]
 
-**492. The check defensePostureReadsBadge was rewritten from "the strong posture says nothing under a siege" to a law: under a siege the pool prints the second, third or no version, any other version is red.**
+**552. The check defensePostureReadsBadge was rewritten from "the strong posture says nothing under a siege" to a law: under a siege the pool prints the second, third or no version, any other version is red.**
 
 - Towns touched: count not recorded.
 - Before: “the strong posture says nothing under a siege”
@@ -6273,7 +7069,7 @@ A check is a test that guards the pages. These are the checks a seat itself list
 - If vetoed: This check goes back to its old shape and stays in conflict with the siege lines.
 - [TAIL-CORPUS-DEF seat; ruling C24; seat 5; test defensePostureReadsBadge]
 
-**493. The check defenseTabFlow was re-pointed to the live data of r2r-city-0 (Scroll scribe, Enchanter's shop, magic dial off).**
+**553. The check defenseTabFlow was re-pointed to the live data of r2r-city-0 (Scroll scribe, Enchanter's shop, magic dial off).**
 
 - Towns touched: one check (STOP-2), 21 of 21.
 - Before: “premise built on dead-magic births with a house filed as arcane defence”
@@ -6282,7 +7078,7 @@ A check is a test that guards the pages. These are the checks a seat itself list
 - If vetoed: This check goes back to red until such a town exists.
 - [TAIL-CORPUS-DEF seat; ruling C25; commit 83883baaa; test defenseTabFlow]
 
-**494. The check vocabularyPageFindings had its test line moved twice: first to the one page line that still names the alchemists' house, then to a "CAPACITY: short" line.**
+**554. The check vocabularyPageFindings had its test line moved twice: first to the one page line that still names the alchemists' house, then to a "CAPACITY: short" line.**
 
 - Towns touched: one check, twice.
 - Before: “plant: DS-DEF-5 ARCANE alchemists v1; then DS-ECO-9 FOOD SOURCES one source v1”
@@ -6291,7 +7087,7 @@ A check is a test that guards the pages. These are the checks a seat itself list
 - If vetoed: The check goes back to red.
 - [TAIL-CORPUS-DEF seat; rulings C28, C29; test vocabularyPageFindings; commits 8e70d2bed, 91592cbf1, 3f5da151e, a8ea5ef8]
 
-**495. Two checks on the "Produced locally" list were re-pointed to other sample towns or other goods after the list changed.**
+**555. Two checks on the "Produced locally" list were re-pointed to other sample towns or other goods after the list changed.**
 
 - Towns touched: count not recorded.
 - Before: “thorp anchor listed "timber" and "luxury"; a resource-update check added "luxury"”
@@ -6300,7 +7096,7 @@ A check is a test that guards the pages. These are the checks a seat itself list
 - If vetoed: These two checks go back to red until the lists print the old goods again.
 - [TAIL-DEFECON-C seat; rulings D6, D7; tests/components/economicsProducedLocally.test.jsx, tests/domain/resourceDynamicsApply.test.js; commits 10e1cf0ea, 358d6afea]
 
-**496. The check that goods on the page are borne out by houses was re-pointed three times to a different claim for the same towns.**
+**556. The check that goods on the page are borne out by houses was re-pointed three times to a different claim for the same towns.**
 
 - Towns touched: count not recorded.
 - Why: The record no longer lists the exports or goods the old claim relied on.
@@ -6316,7 +7112,7 @@ A check is a test that guards the pages. These are the checks a seat itself list
 
 - [TAIL-DEFECON-C seat; rulings D18, D30, D33; tests/components/economicsGoodsPillsBorneOut.test.jsx; commits a10a457e2, ea788e17c, 0e838bc65]
 
-**497. The check that an income row is borne out was moved from r2r-thorp-24 to r2s-succession_void-town-0.**
+**557. The check that an income row is borne out was moved from r2r-thorp-24 to r2s-succession_void-town-0.**
 
 - Towns touched: count not recorded.
 - Before: “r2r-thorp-24 titled "Salt Sales"”
@@ -6325,7 +7121,7 @@ A check is a test that guards the pages. These are the checks a seat itself list
 - If vetoed: This check goes back to red until the thorp lists "Salt Sales" again.
 - [TAIL-DEFECON-C seat; ruling D25; tests/generators/incomeRowsBorneOut.test.js; commit 28f86423c]
 
-**498. Two checks on the made list were re-pointed to other towns after herbs, clay and pottery left some lists.**
+**558. Two checks on the made list were re-pointed to other towns after herbs, clay and pottery left some lists.**
 
 - Towns touched: count not recorded.
 - Before: “checks on r2r-thorp-0 (herbs as sibling), r2r-hamlet-18 ("clay"/"pottery"), and the thorp "local production" anchor of tradeListsThreeSurfaces”
@@ -6334,7 +7130,7 @@ A check is a test that guards the pages. These are the checks a seat itself list
 - If vetoed: These checks go back to red until the old lists return.
 - [TAIL-DEFECON-C seat; ruling D30; tests/generators/tailDefeconMadeList.test.js, tests/components/tradeListsThreeSurfaces.test.jsx; commit 6ce176aff]
 
-**499. The export check for r2r-hamlet-44 was turned from a "keeps" row into "gone" rows, and the keep claim moved to r2r-village-27.**
+**559. The export check for r2r-hamlet-44 was turned from a "keeps" row into "gone" rows, and the keep claim moved to r2r-village-27.**
 
 - Towns touched: count not recorded.
 - Before: “r2r-hamlet-44 exports Flour and meal where a Maltster stands (KEEP)”
@@ -6343,7 +7139,7 @@ A check is a test that guards the pages. These are the checks a seat itself list
 - If vetoed: This check goes back to red until the Maltster town exports flour again.
 - [TAIL-DEFECON-C seat; ruling D33; tests/generators/tailDefeconExportSide.test.js; commit 0e838bc65]
 
-**500. Seven checks were re-pointed after the catalogue change (river fishery salt, vein gems, springs herbs left the data).**
+**560. Seven checks were re-pointed after the catalogue change (river fishery salt, vein gems, springs herbs left the data).**
 
 - Towns touched: count not recorded.
 - Before: “apothecaryWorksTheHerbs built on the springs' herbs; the edit-pool size 34; resourceDynamicsApply anchor on the vein's gems; r2r-hamlet-18 rows with a Jeweller's "gems"; thorp-27 pottery row”
@@ -6352,7 +7148,7 @@ A check is a test that guards the pages. These are the checks a seat itself list
 - If vetoed: These checks go back to red until the data names the goods again.
 - [TAIL-DEFECON-C seat; ruling D34; tests apothecaryWorksTheHerbs.test.js, editPools.test.js, resourceDynamicsApply.test.js, tailDefeconMadeList.test.js, tailDefeconMadeListWhole.test.js, tailDefeconMadeListTableRows.test.js; commit 680d16b54]
 
-**501. The list of words a town can be a source of ("commodity vocabulary" of the edit pool) shrinks from 34 to 33 because no resource names "gems" any more.**
+**561. The list of words a town can be a source of ("commodity vocabulary" of the edit pool) shrinks from 34 to 33 because no resource names "gems" any more.**
 
 - Towns touched: count not recorded.
 - Before: “edit pool vocabulary: 34”
@@ -6361,42 +7157,42 @@ A check is a test that guards the pages. These are the checks a seat itself list
 - If vetoed: The vocabulary returns to 34 if the data names gems again.
 - [TAIL-DEFECON-C seat; ruling D34; tests/domain/editPools.test.js; src/data/resourceData.js]
 
-**502. A test that checks the guard lines was changed so it accepts plural verbs ("are", "walk") as well as singular ones.**
+**562. A test that checks the guard lines was changed so it accepts plural verbs ("are", "walk") as well as singular ones.**
 
 - Towns touched: count not recorded.
 - Why: The plural-verb change moved the sentences this check looks for.
 - If vetoed: The check would go red again until the plural verbs are taken out.
 - [TAIL-DEFECON batch 1; commit 6b8a9b993; tests/generators/safetyLinesSayTheRecord.test.js (#459)]
 
-**503. Three checks and one saved sentence list were changed to follow the income-row moves: the first row is "Harvest" where no lord's man stands, the farming row may carry either name, and the spell line has a new saved fingerprint.**
+**563. Three checks and one saved sentence list were changed to follow the income-row moves: the first row is "Harvest" where no lord's man stands, the farming row may carry either name, and the spell line has a new saved fingerprint.**
 
 - Towns touched: count not recorded.
 - Why: The renamed income row and the reworded spell line moved what those checks look for; each was re-aimed at the same fact by town identity.
 - If vetoed: These checks would go red until the old name and wording return.
 - [TAIL-DEFECON-2; commit df2fa5ca9; tests/generators/houseOfWorkEarns.test.js, tests/generators/coherenceAgreeCures.test.js, tests/lint/presumedThings.register.json]
 
-**504. The list of known sentence exceptions lost two craft-advice rows and moved two others (entrepôt and harbour lines) to follow the batch 3 moves; one check on iron hooks was re-aimed.**
+**564. The list of known sentence exceptions lost two craft-advice rows and moved two others (entrepôt and harbour lines) to follow the batch 3 moves; one check on iron hooks was re-aimed.**
 
 - Towns touched: count not recorded.
 - Why: The literals those rows named no longer stand (craft advice) or moved to another file or wording (entrepôt, harbour).
 - If vetoed: These rows would be stale again until the old sentences return.
 - [TAIL-DEFECON-3; commit 2ac50c55d; tests/lint/presumedThings.register.json; tests/generators/coherenceAgreeCures.test.js]
 
-**505. The check on the food crisis heading was changed: a note about added mouths is headed by its mouths, and a field crisis says "Cutting" only where a food gap stands.**
+**565. The check on the food crisis heading was changed: a note about added mouths is headed by its mouths, and a field crisis says "Cutting" only where a food gap stands.**
 
 - Towns touched: count not recorded.
 - Why: The heading rule moved with the batch 4 reword.
 - If vetoed: The check would go red until the old heading returns.
 - [TAIL-DEFECON-4; commit b40f795b2; tests/generators/foodCrisisHeadingReadsRecord.test.js]
 
-**506. Four food checks were re-aimed so that the viability view and the Economy tab agree pound for pound (the old checks had been aimed at the fault R3 removed).**
+**566. Four food checks were re-aimed so that the viability view and the Economy tab agree pound for pound (the old checks had been aimed at the fault R3 removed).**
 
 - Towns touched: count not recorded.
 - Why: The anchors were the fault that R3 removes.
 - If vetoed: These checks would go red until the viability view again reads its own figures.
 - [TAIL-DEFECON-5; commit 7ce6db273; tests/components/economicsFoodBalanceRowOneHome.test.jsx, economicsFoodTradeUnderSiege.test.jsx, tests/generators/foodModelSingleWriter.test.js, foodMagicChannelPrint.test.js]
 
-**507. Three food-and-stores checks that had gone red were re-aimed at the nearest town of the same shape; two others were left red.**
+**567. Three food-and-stores checks that had gone red were re-aimed at the nearest town of the same shape; two others were left red.**
 
 - Towns touched: count not recorded.
 - Why: Earlier moves by other seats (a granary rule, the hot-springs herbs, a culture reword, resource export rows) had moved the towns those checks stood on.
@@ -6411,14 +7207,14 @@ A check is a test that guards the pages. These are the checks a seat itself list
 
 - [TAIL-DEFECON-6; commits 7506b7707, 0a6493e09, 4d0b097dd; tests/generators/famineStoresOneRounding.test.js, storesSpanFigure.test.js, r3c10FoodLinesTrue.test.js]
 
-**508. The gap-says-which-kind check was moved from one sample town to another where a vintner is still short (the check itself is unchanged).**
+**568. The gap-says-which-kind check was moved from one sample town to another where a vintner is still short (the check itself is unchanged).**
 
 - Towns touched: count not recorded.
 - Why: The old town (soak1k-5, a port reached by trade) no longer has a gap row after M-V.
 - If vetoed: The check would go red until the old town again has a gap row.
 - [TAIL-DEFECON-R; commit fcf4cae69; tests/generators/gapSaysWhichKind.test.js]
 
-**509. The food-endurance check "three days of stores" was re-aimed from "a few days" to the stores row's "about three days".**
+**569. The food-endurance check "three days of stores" was re-aimed from "a few days" to the stores row's "about three days".**
 
 - Towns touched: count not recorded.
 - Before: “a few days”
@@ -6427,56 +7223,56 @@ A check is a test that guards the pages. These are the checks a seat itself list
 - If vetoed: The check would go red until the old wording returns.
 - [TAIL-DEFECON-D; commit d98f781f3; tests/domain/foodEnduranceSaysTheStores.test.js]
 
-**510. A check on the clergy provision notes was re-keyed so that it reads the notes as the card prints them.**
+**570. A check on the clergy provision notes was re-keyed so that it reads the notes as the card prints them.**
 
 - Towns touched: count not recorded.
 - Why: The kept divine and druid notes now follow the cure of the food notes; the town and the claim are the same.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-ECON batch 1; tests/components/economicsClergyProvision.test.jsx]
 
-**511. The check 'the legal row reads the roster' was red because of V6 and was re-keyed to the new labels (commit beeceb0f4).**
+**571. The check 'the legal row reads the roster' was red because of V6 and was re-keyed to the new labels (commit beeceb0f4).**
 
 - Towns touched: count not recorded.
 - Why: V6 changed the court labels the check reads.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-CIVIC-4; V6; commit beeceb0f4; legalRowReadsTheRoster.test.js]
 
-**512. Three checks were re-keyed by identity so they follow the food sentence's new words 'of what it needs'; the same towns and the same shares are checked.**
+**572. Three checks were re-keyed by identity so they follow the food sentence's new words 'of what it needs'; the same towns and the same shares are checked.**
 
 - Towns touched: count not recorded.
 - Why: The sentence changed from 'of what it eats' to 'of what it needs'.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-ECON-2; tests/components/economicsFoodSentenceTrue.test.jsx; tests/components/economicsTabMalformedFlows.test.jsx; tests/ui/economicsTabFlow.test.js]
 
-**513. Checks re-keyed by identity to follow the new words: a line-keyed number row of the economics tab, the tab-flow anchor for the shadow row, and the 'Contributes to' pair (re-keyed to '14% of income').**
+**573. Checks re-keyed by identity to follow the new words: a line-keyed number row of the economics tab, the tab-flow anchor for the shadow row, and the 'Contributes to' pair (re-keyed to '14% of income').**
 
 - Towns touched: count not recorded.
 - Why: The words of the shadow row changed; and the record's Entrepôt share moved from 13 to 14 under the economy family's record moves.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-ECON-5; tests/ui/economicsTabFlow.test.js; the prose-numerics row of src/components/tabs/EconomicsTab.jsx; tests/components/displayEconRelianceFoodWords.test.jsx]
 
-**514. Checks re-keyed by identity so they follow the new 'Failed this year' group: a list-naming check (the new list of failed resources, its verdict written), the resource-grade check (the groups' new key) and the PDF's group-order check.**
+**574. Checks re-keyed by identity so they follow the new 'Failed this year' group: a list-naming check (the new list of failed resources, its verdict written), the resource-grade check (the groups' new key) and the PDF's group-order check.**
 
 - Towns touched: count not recorded.
 - Why: The Resources tab, the PDF and the journal gained a fourth group.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-CIVIC-3; V2; commit 1e52acf0e; tests/lint/nameListColumns.walker.test.js; tests/components/resourceGradeReadsChainLeaf.test.jsx; tests/pdf/resourceChainsLikeTheTab.test.jsx]
 
-**515. Checks re-keyed by identity so they follow the second version of the patrol lines: the tail-defecon safety line check (three entries) and the safety-lines check (the siege patrol line prints the siege's second version).**
+**575. Checks re-keyed by identity so they follow the second version of the patrol lines: the tail-defecon safety line check (three entries) and the safety-lines check (the siege patrol line prints the siege's second version).**
 
 - Towns touched: count not recorded.
 - Why: The patrol slot now prints a second version under a siege, an occupation or a famine.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-CIVIC-3; V3; commit 89326e707; tests/generators/tailDefeconSafetyLines.test.js; tests/generators/safetyLinesSayTheRecord.test.js]
 
-**516. Checks re-keyed for batch A: the list of presumed things (V5's caption row given its new hash; V6's stale 'Court + Prison' row removed, shrink-only) and three copy checks (the frozen-tense defence copy and the first-survey copy, screen and PDF) to the new words.**
+**576. Checks re-keyed for batch A: the list of presumed things (V5's caption row given its new hash; V6's stale 'Court + Prison' row removed, shrink-only) and three copy checks (the frozen-tense defence copy and the first-survey copy, screen and PDF) to the new words.**
 
 - Towns touched: count not recorded.
 - Why: The caption and the court labels changed.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-CIVIC-4; V5, V6; tests/lint/presumedThings.widened.register.json; tests/components/frozenTenseDefenseCopy.test.js; g5FirstSurveyCopy.test.js; g5FirstSurveyPdfTwins.test.js]
 
-**517. The list of lines that have no rule on them lost the economy-page prosperity group's last such line, and a stale entry was removed from the list of banked rows.**
+**577. The list of lines that have no rule on them lost the economy-page prosperity group's last such line, and a stale entry was removed from the list of banked rows.**
 
 - Towns touched: count not recorded.
 - Before: “DS-ECO-8 COMFORTABLE on the list of lines with no rule”
@@ -6485,7 +7281,7 @@ A check is a test that guards the pages. These are the checks a seat itself list
 - If vetoed: The entry goes back on the list of exceptions and the old banked rows stay; the hand-back does not say more.
 - [TAIL-CORPUS-ECO; batch 2; tests/lint/undeclaredLines.register.json; the presumed-lines door's --shrink; 29271e7bf; tests/lint/undeclaredLines.register.json]
 
-**518. Counts held by checks were re-set: the list of lines with no rule (two groups), the count of trailing clauses, and the fill count for a fed town.**
+**578. Counts held by checks were re-set: the list of lines with no rule (two groups), the count of trailing clauses, and the fill count for a fed town.**
 
 - Towns touched: count not recorded.
 - Why: Batch 3 gave rules to lines (C5 3 to 2, POSTURE none 3 to 1), reworded two lines without their trailing clause (376 to 374), and a test town was made a fed town because the new rule reads food (the fill measured 2, not 3). One more banked row went stale and was shrunk in its own commit.
@@ -6500,7 +7296,7 @@ A check is a test that guards the pages. These are the checks a seat itself list
 
 - [TAIL-CORPUS-ECO-2; batch 3; tests/lint/undeclaredLines.register.json, tests/lint/proseEntryContradiction.walker.test.js, tests/domain/economyStateProseDesk.test.js; bb4c95eb8; tests/lint/undeclaredLines.register.json, tests/lint/proseEntryContradiction.walker.test.js, tests/domain/economyStateProseDesk.test.js]
 
-**519. Counts held by checks were re-set after batch 5 added one new second version of a line: line-count checks, a trailing-clause count, and one row that now declares a rule.**
+**579. Counts held by checks were re-set after batch 5 added one new second version of a line: line-count checks, a trailing-clause count, and one row that now declares a rule.**
 
 - Towns touched: count not recorded.
 - Why: Batch 5 added one new line (the siege version), so the variant count went 2951 to 2952, rows 3419 to 3420, joined 2714 to 2715, anchors 2417 to 2418 and 6160 to 6161, and trailing clauses 374 to 373; a canonical row for the hidden-trade line now carries a guild and siege rule. Two earlier test rows were re-keyed to the new inheriting line.
@@ -6515,7 +7311,7 @@ A check is a test that guards the pages. These are the checks a seat itself list
 
 - [TAIL-CORPUS-ECO-3; batch 5; composeStateProse.test.js, proseEntryContradiction.walker.test.js, canonicalRowsDeclared.test.js, tests/domain/corpusEcoTailGuards.test.js; 84a41a687; tests/domain/composeStateProse.test.js, tests/lint/proseEntryContradiction.walker.test.js, tests/data/canonicalRowsDeclared.test.js, tests/domain/corpusEcoTailGuards.test.js]
 
-**520. Counts held by checks were re-set after batch 7 added two new second versions of lines and one line became a single sentence.**
+**580. Counts held by checks were re-set after batch 7 added two new second versions of lines and one line became a single sentence.**
 
 - Towns touched: count not recorded.
 - Why: Batch 7 added two new lines, so variants 2952 to 2954, rows 3420 to 3422, joined 2715 to 2717, anchors 2418 to 2419 and 6161 to 6162, and the move-grammar counts 568 to 569 and 0.664 to 0.665; test rows were re-keyed to the new inheriting lines.
@@ -6530,7 +7326,7 @@ A check is a test that guards the pages. These are the checks a seat itself list
 
 - [TAIL-CORPUS-ECO-4; batch 7; composeStateProse.test.js, proseEntryContradiction.walker.test.js, proseMoveGrammar.walker.test.js, tests/domain/corpusEcoTailGuards.test.js; 4467cd7d6; tests/domain/composeStateProse.test.js, tests/lint/proseEntryContradiction.walker.test.js, tests/lint/proseMoveGrammar.walker.test.js, tests/domain/corpusEcoTailGuards.test.js]
 
-**521. A check on canonical rows was changed: the hidden-trade (small) first line moved from the list of unruled rows to the list of ruled rows.**
+**581. A check on canonical rows was changed: the hidden-trade (small) first line moved from the list of unruled rows to the list of ruled rows.**
 
 - Towns touched: count not recorded.
 - Before: “DS-ECO-6 minor v0 listed among the unruled rows”
@@ -6539,7 +7335,7 @@ A check is a test that guards the pages. These are the checks a seat itself list
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CORPUS-ECO-4; U2 (i); tests/data/canonicalRowsDeclared.test.js; b760d37d3 (the earlier rule); tests/data/canonicalRowsDeclared.test.js]
 
-**522. Five saved counts of line variants (and their fingerprints) in the list of known shifts were re-set to the new total.**
+**582. Five saved counts of line variants (and their fingerprints) in the list of known shifts were re-set to the new total.**
 
 - Towns touched: count not recorded.
 - Before: “variants 2950; face count 2950; per-pool and vids digests of 2950”
@@ -6548,203 +7344,298 @@ A check is a test that guards the pages. These are the checks a seat itself list
 - If vetoed: The five counts go back to 2950 and the check goes red again, as the hand-back describes it.
 - [TAIL-CORPUS-ECO-4; U2 (ii); tests/data/dossierStateProseProjection.contract.test.js and the shift register; re-taken by measurement; tests/data/dossierStateProseProjection.contract.test.js, docs/content/prose-shift-register.json]
 
-**523. A check on which arrival lines count as scenery (the colour list) was changed: the baking line was taken off the list.**
+**583. A check on which arrival lines count as scenery (the colour list) was changed: the baking line was taken off the list.**
 
 - Towns touched: count not recorded.
 - Why: The ruling says a line a crisis can make false is not scenery, so the baking line must carry its own condition.
 - If vetoed: The check would expect the baking line to be scenery again, and the line could not carry its condition.
 - [TAIL-HISTORY-2; ruling Y6; batch 1; tests/domain/facts/census2fColour.test.js; src/data/arrivalProse.js; docs/census/declarations/ARRIVAL_SENSES.json]
 
-**524. A check on one arrival sentence in the isolated town r2r-village-47 was changed to expect the reworded herbs line.**
+**584. A check on one arrival sentence in the isolated town r2r-village-47 was changed to expect the reworded herbs line.**
 
 - Towns touched: count not recorded.
 - Why: The herbs line was reworded in batch 4, so the old expectation no longer held.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-HISTORY-3; batch 4; tests/generators/arrivalIndebtedDistrictTwin.test.js]
 
-**525. A check that a flood still prints in one sample town (seed review-w2b-1) now also accepts the live-quarrel words.**
+**585. A check that a flood still prints in one sample town (seed review-w2b-1) now also accepts the live-quarrel words.**
 
 - Towns touched: count not recorded.
 - Why: That town has a flood tension but no flood on its timeline, so the flood words no longer print there.
 - If vetoed: The check would go red for that town until the old flood words print again.
 - [TAIL-HISTORY-2; batch 2; tests/.../w2FixData2History.test.js (c01-thorp-none)]
 
-**526. A check that no random draw moved was re-shaped: it now strips the stored siege narrative together with the tensions before comparing.**
+**586. A check that no random draw moved was re-shaped: it now strips the stored siege narrative together with the tensions before comparing.**
 
 - Towns touched: count not recorded.
 - Why: The siege narrative copies the first tension's description, which batch 3 changed in 42 towns.
 - If vetoed: The check would go red in the towns where the siege narrative changed.
 - [TAIL-HISTORY-3; batch 3; tests/.../tensionTemplateDeclaration.test.js (soak1k-2)]
 
-**527. Two checks (the colour list check and the fish-line declaration check) now find the fish lines by their own identity, not by their place in the list.**
+**587. Two checks (the colour list check and the fish-line declaration check) now find the fish lines by their own identity, not by their place in the list.**
 
 - Towns touched: count not recorded.
 - Why: The new second versions of the fish lines shifted the places of the old lines.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-HISTORY-5; batch 6; tests/domain/facts/census2fColour.test.js, tests/.../arrivalFishKeyDeclared.test.js]
 
-**528. The check that counts house sentences declared to wait for a later fact now counts 74 instead of 75, because the burial-ground sentence no longer waits for a gate.**
+**588. The check that counts house sentences declared to wait for a later fact now counts 74 instead of 75, because the burial-ground sentence no longer waits for a gate.**
 
 - Towns touched: count not recorded.
 - Why: The burial-ground sentence now names no gate, so it is true with or without one and leaves the wait.
 - If vetoed: effect not stated in the hand-back
 - [second houses seat; ruling H7, R-Q; test institutionProseDeclared; set DESC_VARIANT_DECLARATIONS]
 
-**529. The check that a house missing its input no longer prints a sentence claiming the work was re-keyed twice: once for the one standard form (five sentence fragments) and later for 6 of its 31 pairs, which now name towns that still lack the input.**
+**589. The check that a house missing its input no longer prints a sentence claiming the work was re-keyed twice: once for the one standard form (five sentence fragments) and later for 6 of its 31 pairs, which now name towns that still lack the input.**
 
 - Towns touched: 6 of 31 pairs red at the merged tree.
 - Why: A move by the defence group (fcf4cae69, "grapes and glass sand reach their house by any route the town can bring goods in on") closed the input gap in five towns the pairs named, so the old precondition no longer held.
 - If vetoed: This check goes back to red in 6 of 31 pairs until its towns are re-keyed again.
 - [houses seat; ruling U2; commits 61648f2a2 and batch 4; tests/data/tailHouses1Gaps.test.js]
 
-**530. The check on the Mine sentence in an older repair batch was re-keyed so it now requires "worked whenever ore can be had" and still refuses the crews and the depths.**
+**590. The check on the Mine sentence in an older repair batch was re-keyed so it now requires "worked whenever ore can be had" and still refuses the crews and the depths.**
 
 - Towns touched: 3 pairs red at the merged tree.
 - Why: This group's own batch 4 put the mine sentence in that form, which the old check (it refused the word "worked") rejected; 3 pairs were red.
 - If vetoed: This check goes back to red in 3 pairs.
 - [houses seat; ruling U2; commit 61648f2a2; tests/data/w2FixData6Rows.test.js]
 
-**531. Three checks were adjusted after batch 8 to know the new final check: one lists where writers hold a key (the final pass's two imports are classed), one counts declaration channels (the new list of swapped sentences counts as one), and one reads the dossier (the swapped sentences count as pool lines); the colour marks and ledger rows of the texts declared that way were taken off.**
+**591. Three checks were adjusted after batch 8 to know the new final check: one lists where writers hold a key (the final pass's two imports are classed), one counts declaration channels (the new list of swapped sentences counts as one), and one reads the dossier (the swapped sentences count as pool lines); the colour marks and ledger rows of the texts declared that way were taken off.**
 
 - Towns touched: 3 checks; 60 records change.
 - Why: Batch 8's change made these three red; they were repaired in commit ee83c8cb5.
-- If vetoed: These three checks go back to red until batch 8's late re-check is removed.
+- If vetoed: These three checks stay red, as they were after batch 8's change, until they are adjusted.
 - [fifth houses seat; commit ee83c8cb5; tests heldKeyWriterCensus, wiringCensusDeclared, dossierContent; src/data/institutionDescColour.js]
 
-**532. The checker's list of known exceptions (presumed-things) was shrunk after the rewordings: 10 stale rows (batch 1), 3 stale and 2 first-time rows (batch 2), 10 widened and 1 first-time row (batch 3), 3 first-time rows for the old mill sentences (batch 5), and three "house: reeve" rows (batch 9; 4,547 to 4,544 banked).**
+**592. The checker's list of known exceptions (presumed-things) was shrunk after the rewordings: 10 stale rows (batch 1), 3 stale and 2 first-time rows (batch 2), 10 widened and 1 first-time row (batch 3), 3 first-time rows for the old mill sentences (batch 5), and three "house: reeve" rows (batch 9; 4,547 to 4,544 banked).**
 
 - Towns touched: count not recorded.
 - Why: The old sentences those rows named no longer exist; the seat's first wordings made fresh hits and were reworded before the commit instead of being added.
 - If vetoed: effect not stated in the hand-back
 - [houses seat; checker scripts/presumed-things-door.mjs --shrink; batches 1, 2, 3, 5, 9]
 
-**533. A check that held the herders' origin line was moved from one test town to another.**
+**593. A check that held the herders' origin line was moved from one test town to another.**
 
 - Towns touched: count not recorded.
 - Why: The first test town's founder (the slow accretion of three settlements) cannot be herders, so the check could not hold there.
 - If vetoed: effect not stated in the hand-back; the seat says the check was not loosened.
 - [TAIL-NARRATIVE; batch FA; ruling N4; foundingWalkLandsTested.test.js; tests/generators/tailNarrativeRows.test.js]
 
-**534. Checks on the origin lines were re-keyed: two test files now expect the new words ("the tracks in a good season", "must make do with", the ground line's trade gone by water). Two lists of declarations were also re-keyed, one with the removed line taken out.**
+**594. Checks on the origin lines were re-keyed: two test files now expect the new words ("the tracks in a good season", "must make do with", the ground line's trade gone by water). Two lists of declarations were also re-keyed, one with the removed line taken out.**
 
 - Towns touched: count not recorded.
 - Why: The words they check were changed by the cures above.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-NARRATIVE-2; batch 3; originChannelsRead.test.js; settlementReason.test.js; docs/census/declarations/POLITICAL_FLAVOR.json]
 
-**535. Checks on the famine and monster lines were re-keyed to the new words, and the list of declarations for them was updated.**
+**595. Checks on the famine and monster lines were re-keyed to the new words, and the list of declarations for them was updated.**
 
 - Towns touched: count not recorded.
 - Why: The words they check were reworded.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-NARRATIVE-2; batch 4; famineFrameStore.test.js; docs/census/declarations/PRESSURE_SENTENCES.json]
 
-**536. Checks tied to the reworded lines were re-keyed by identity: four known-phrase rows kept their banked word under new text, and the lists of declarations for the lines were kept.**
+**596. Checks tied to the reworded lines were re-keyed by identity: four known-phrase rows kept their banked word under new text, and the lists of declarations for the lines were kept.**
 
 - Towns touched: count not recorded.
 - Why: The reworded lines changed the text the checks look up.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-NARRATIVE-3; batch 5; tests/lint/presumedThings.widened.register.json rows 120273b1af3cb1b5, 89fccab00f0ef11d, c835d792041e5066, 49d03bfa7cbe9332; docs/census/declarations/STRESS_DESCS.json, ARRIVAL_SCENES.json, stressInstitutionEffects.STRESS_INSTITUTION_EFFECTS.json]
 
-**537. Checks on the eight founder and origin test towns were re-keyed: the same eight towns and refused pairs are kept, and where another founder fits, the founder now moves while the drawn origin line stays.**
+**597. Checks on the eight founder and origin test towns were re-keyed: the same eight towns and refused pairs are kept, and where another founder fits, the founder now moves while the drawn origin line stays.**
 
 - Towns touched: count not recorded.
 - Why: The new founder rule changes which of the two moves.
 - If vetoed: effect not stated in the hand-back; the seat says three towns are unchanged and the checks that keep a pair are unchanged.
 - [TAIL-NARRATIVE-4; batch FB; tests/generators/tailNarrativeRows.test.js B2]
 
-**538. Checks were re-keyed by identity after batch 6: one wartime check (01080) now expects the second version for a struggling town, the siege check keeps the walls but not the founders, one test town changed, a test of the migration note was re-keyed, and one known-phrase row got new text with the same word kept.**
+**598. Checks were re-keyed by identity after batch 6: one wartime check (01080) now expects the second version for a struggling town, the siege check keeps the walls but not the founders, one test town changed, a test of the migration note was re-keyed, and one known-phrase row got new text with the same word kept.**
 
 - Towns touched: count not recorded.
 - Why: The reworded notes and the new wartime line changed what the checks look up.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-NARRATIVE-5; batch 6; tests/generators/tailNarrativeRows.test.js B5 and B6; tests/data/stressNotesAnySize.test.js; tests/lint/presumedThings.widened.register.json 0e70e61e21695b43 -> d376443dec338868; docs/census/declarations/STRESS_DESCS.json]
 
-**539. Two further checks were re-keyed: a check of the style rule (batch 5's note 03015) now expects the reworded note, and a check on a long-past economic event (economicHistoryRecent) now looks at the event the line names (age over sixty), with no assertion dropped.**
+**599. Two further checks were re-keyed: a check of the style rule (batch 5's note 03015) now expects the reworded note, and a check on a long-past economic event (economicHistoryRecent) now looks at the event the line names (age over sixty), with no assertion dropped.**
 
 - Towns touched: count not recorded.
 - Why: The style rule retired the word "faction"; and an earlier change renamed that town's economic event "the Shortage".
 - If vetoed: effect not stated in the hand-back
 - [TAIL-NARRATIVE-5; tests/generators/economicHistoryRecent.test.js; tests/generators/tailNarrativeRows.test.js B5 03015; commit 0bdeef11c explains the rename]
 
-**540. Checks tied to batch 1 were re-keyed: the famine check was re-keyed to the reworded row, one table check's count of declared rows rose from 21 to 23, one table check now expects the church need on the religious line, and the lists of declarations for the pressure and political lines were updated.**
+**600. Checks tied to batch 1 were re-keyed: the famine check was re-keyed to the reworded row, one table check's count of declared rows rose from 21 to 23, one table check now expects the church need on the religious line, and the lists of declarations for the pressure and political lines were updated.**
 
 - Towns touched: count not recorded.
 - Why: The reworded and newly conditioned lines changed what these checks look up.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-NARRATIVE; batch 1; famineFrameStore.test.js; census2dTables.test.js; census2eTables.test.js; docs/census/declarations/PRESSURE_SENTENCES.json, POLITICAL_FLAVOR.json]
 
-**541. A check on unproven words in page sentences had three entries removed (two widened rows and one first-list row) that belonged to the old sentence "Every district has a temple."**
+**601. A check that two people in a power's card read as the same people when the power is Suppressed was re-keyed to follow the changed wording.**
+
+- Towns touched: count not recorded.
+- Why: The sentence cure for Suppressed powers moved what the check expected.
+- If vetoed: effect not stated in the hand-back
+- [TAIL-POWERS seat 1; batch 2; 21dc7fa4b; tests/generators/power/claimRungsCommanding.test.js]
+
+**602. The check on the order of power cards (row SW-B1 P50, the military row) was re-keyed: with a village headman the card reads "Headman's Authority", with none it reads the Elder Council; the card never prints the mixed line.**
+
+- Towns touched: count not recorded.
+- Why: The change to Headman's Authority (38 towns) moved what the check expected.
+- If vetoed: effect not stated in the hand-back
+- [TAIL-POWERS seat 1 and seat 2; ruling P8; d68805134; tests/generators/powerCardOrderReads.test.js]
+
+**603. A check on a heresy town (GS-4) was re-keyed: the town now keeps its governing row and gains a religious power of 30; the question about world law is unchanged.**
+
+- Towns touched: count not recorded.
+- Why: The baseline-quarrel change needed a religious power in that test town.
+- If vetoed: effect not stated in the hand-back
+- [TAIL-POWERS seat 3; batch 2; a5a9e4372; tests/generators/governanceNarrative.test.js]
+
+**604. A check named "repairs defense before power prose" was re-keyed to the new military wording; it is green before and after.**
+
+- Towns touched: count not recorded.
+- Why: The monster-line wording changed (batch 1 of the fourth seat).
+- If vetoed: effect not stated in the hand-back
+- [TAIL-POWERS seat 4; batch 1; 160c99790; tests/generators/coherenceRepairPass.test.js]
+
+**605. A check from another seat (X2) on the three occupied towns was re-keyed to read "<the hall> answers to the occupiers of <place>." in place of its own wording.**
+
+- Towns touched: count not recorded.
+- Why: The chair's ruling P28 kept the occupation wording above.
+- If vetoed: effect not stated in the hand-back
+- [TAIL-POWERS seat 4; ruling P28; eb5e2ab0d; tests/components/tailDisplayCivicBatch1.test.jsx]
+
+**606. Three rows were removed from the lists of phrases the checks accept as known (streets, garrison and mercenary), because the old lines that needed them were reworded; the removal can only shrink the lists.**
+
+- Towns touched: 3 rows removed.
+- Why: The reworded monster and revolt lines no longer need those entries.
+- If vetoed: effect not stated in the hand-back
+- [TAIL-POWERS seat 4; batch 1; 160c99790; presumed-things lists: streets 75da3dc0, garrison and mercenary 664e6208]
+
+**607. Three checks on the hall's lines (under an occupation, on crime, on criminal sway) were re-keyed: they now expect the first line of the hall's "no criminal power" rung in three test towns that hold no criminal power and a house called "Multiple criminal factions".**
+
+- Towns touched: count not recorded; 0 of 720 sample town pages move.
+- Why: Two earlier declared changes to the defence display read that house as rival criminal rings (semi-organized), so the old checks expected "organized"; the hand-back reads the new line as true beside rival rings.
+- If vetoed: These three checks would go back to red.
+- [TAIL-POWERS-B seat 5; U2 reds; a1351a7e6; tests/domain/people/hallDecidesUnderOccupation.test.js, hallLineReadsCrime.test.js, tests/domain/display/criminalSwayReadsHall.test.js; changes 82e8fab6e, 0044e4f84]
+
+**608. A check that no file adds a place where it joins labels by their text was satisfied by changing the warehouse test to use the catalogue's own ids; one unit test's made-up name "bonded warehouse" was re-keyed to "warehouse district".**
+
+- Towns touched: 0 of 720 sample town pages move.
+- Before: “bonded warehouse”
+- After: “warehouse district”
+- Why: The warehouse condition (batch 2 of the first B seat) held one text-matching site; renaming a variable to slip the scan was not accepted as a cure.
+- If vetoed: The label-joins check would go back to red.
+- [TAIL-POWERS-B seat 5; rulings P33, P34, P35; 833566cf2; tests/joins/labelJoins.test.js; src/generators/power/claimStanding.js]
+
+**609. A check on the hall lines of one town (Ainkarez, test r3c9) was re-keyed; its town-size seat moves to a different town (Zhongba, r2s-slave_revolt-town-3).**
+
+- Towns touched: 0 of 720 sample town pages move.
+- Why: An earlier declared change to the defence lane's upkeep gates moved the Merchant Council 36 Dominant to 29 Strong, the Thieves' Guild 14 to 17, and the rung from adversarial to equilibrium; its account prints no false line.
+- If vetoed: This check would go back to red.
+- [TAIL-POWERS-B seat 5; RED 4; 5706c386b; tests/domain/r3c9ReaderLinesTrue.test.js; change 07ebe8bdc]
+
+**610. A check that a town with no such power gets no clause was re-keyed so it expects each party by the leaf's prose form ("The Guard") instead of "Military/Guard".**
+
+- Towns touched: count not recorded.
+- Before: “Military/Guard”
+- After: “The Guard”
+- Why: A declared change (ruling P3) made the sentence name each party by its prose form.
+- If vetoed: The check would go back to red.
+- [TAIL-POWERS-B seat 4; rulings U2, P3; 582b8acad; tests/generators/conflictTouched.test.js]
+
+**611. Three checks were re-keyed after the "level" and "ordained" lines changed: the level-standing table now reads 24/22/20/15 (and 20/18/16/15 asserts the band's own line), one famine town expects the band's own line, and one occupied town expects no taxes.**
+
+- Towns touched: count not recorded.
+- Why: The declared changes of batch 8 (the level table crosses a rung; the occupation drops the tax claim) moved what these checks expected.
+- If vetoed: These checks would go back to red.
+- [TAIL-POWERS-B seat 4; ruling P31; d99bce57a; tests: standingAgainstFigure, seatNamedAsItSits (r2s-famine-city-2), relationLinesSayTheRecord (r2s-occupied-town-2)]
+
+**612. Checks on the title lines were re-keyed: two refused lines in the "title lines need what they offer" check, the guard row for the potter's secret, and the siege exclusion for the mine captain.**
+
+- Towns touched: count not recorded.
+- Why: The hedged and replaced title lines moved what the checks expected.
+- If vetoed: These checks would go back to red.
+- [TAIL-POWERS-B seats 2 and 4; rulings P9, P31; 594794a67, d99bce57a; tests/generators/people/titleLinesNeedWhatTheyOffer.test.js and the batch 5 guard]
+
+**613. The lists of phrases the checks accept as known were shrunk or re-keyed after rewording: 3 rows removed after batch 5 ("market" the milk, "walls" the castellan, "before it goes to market"); 2 rows ("house: baker", "quarters") removed and the War Council's first-list row re-keyed after batch 6b; two banked rows re-keyed in batch 8, with 3 new phrases kept out by rewording.**
+
+- Towns touched: 5 rows removed or re-keyed.
+- Why: The old lines that needed those entries no longer print.
+- If vetoed: effect not stated in the hand-back
+- [TAIL-POWERS-B seats 2-4; 594794a67, 4ff449a7b, d99bce57a; the presumed-things lists]
+
+**614. A check on unproven words in page sentences had three entries removed (two widened rows and one first-list row) that belonged to the old sentence "Every district has a temple."**
 
 - Towns touched: count not recorded.
 - Why: The old sentence is gone, so the entries were stale; the check's own shrink door removed them.
 - If vetoed: The entries would stand again for a sentence that no longer prints; effect not otherwise stated in the hand-back.
 - [TAIL-SERVICES-3; ruling S11; e35851db1; presumed-things walker --shrink]
 
-**542. A check that counts the declared rows of institution texts was re-set from 60 to 61.**
+**615. A check that counts the declared rows of institution texts was re-set from 60 to 61.**
 
 - Towns touched: count not recorded.
 - Why: The fish market's wholesale row gained a condition (a tavern must stand), which adds one declared row.
 - If vetoed: The check would count 60 and go red against the 61 declared rows; effect not otherwise stated in the hand-back.
 - [TAIL-SERVICES-3; ruling S11; e35851db1; institutionProseDeclared; docs/census/declarations/institutionServices.INSTITUTION_SERVICES.json]
 
-**543. After the hook lines were cured, two checks on the hook lines were re-keyed to the new lines: the list of declared hook conditions, and the list of known exceptions was shrunk by three rows.**
+**616. After the hook lines were cured, two checks on the hook lines were re-keyed to the new lines: the list of declared hook conditions, and the list of known exceptions was shrunk by three rows.**
 
 - Towns touched: count not recorded.
 - Why: The cured lines no longer match the old keys, so the checks were re-keyed by identity (the hand-back does not say more).
 - If vetoed: effect not stated in the hand-back
 - [TAIL-TIES batch 2; npcLoyaltyGuardRows' declared map; the presumed-things widened register (3 rows cured); src/data/npcData.js, tests/lint]
 
-**544. The list of known exceptions had its "headman" row re-keyed to the reworded seat line (7285d794 to abd2ed1a); its check stands at 147 fresh and 0 stale.**
+**617. The list of known exceptions had its "headman" row re-keyed to the reworded seat line (7285d794 to abd2ed1a); its check stands at 147 fresh and 0 stale.**
 
 - Towns touched: count not recorded.
 - Why: The seat line was reworded, so the row follows the new line.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-TIES-2 batch 1; presumed-things widened register, house: headman row; 7285d794 to abd2ed1a]
 
-**545. Three checks on the structure lines were re-keyed to the reworded rows: the minted lords' lines, the head-of-power row and the goal lookup; one town's vintner now claims no row.**
+**618. Three checks on the structure lines were re-keyed to the reworded rows: the minted lords' lines, the head-of-power row and the goal lookup; one town's vintner now claims no row.**
 
 - Towns touched: count not recorded.
 - Why: The doubted-seat rows were reworded and the small-trade rows refused, so the checks were re-keyed by identity.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-TIES-3 batch 1; mintedLordKeepsLines, headOfItsPowerRow, npcStructureGoalLookup; 112532f64; tests/generators/tailTies3Batch1.test.js (new); src/generators/npcStructure.js]
 
-**546. Five checks were re-keyed after the tie and hook lines were reworded: the ledger of 33 tie texts, the ledger of one secret, the declared hook map (three more rows), the road-version check, and a hash of the secrets table; two lists of known exceptions were shrunk.**
+**619. Five checks were re-keyed after the tie and hook lines were reworded: the ledger of 33 tie texts, the ledger of one secret, the declared hook map (three more rows), the road-version check, and a hash of the secrets table; two lists of known exceptions were shrunk.**
 
 - Towns touched: count not recorded.
 - Why: The reworded lines changed the texts those checks held, so they were re-keyed by identity.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-TIES-4 batch 1; tie ledger (docs/census/declarations/npcData.STRESS_ECONOMIC_EFFECTS.json), npcData.NPC_CRIMINAL_SECRETS.json, npcLoyaltyGuardRows map (+3), tailTiesBatch2 INSTEAD pin, criminalSecretsByHolder hash ba46807b to 0ac68575, presumed-things registers; 14724c194]
 
-**547. A driven reference value in the espionage check moved with batch 1 (50011ad3 to bab4e09c); the check was already red before.**
+**620. A driven reference value in the espionage check moved with batch 1 (50011ad3 to bab4e09c); the check was already red before.**
 
 - Towns touched: count not recorded.
 - Why: Batch 1 changed what the driven town prints.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-TIES-4 batch 1; tests/property/espionageDormancyFence.test.js]
 
-**548. One test of the tie lines ("under one ruler no tie names the council") had a town moved from its "must not print" list to its "may print" list, because the town is now ruled by an Elder Council.**
+**621. One test of the tie lines ("under one ruler no tie names the council") had a town moved from its "must not print" list to its "may print" list, because the town is now ruled by an Elder Council.**
 
 - Towns touched: 1 of 720 sample towns named (r2r-village-50); count of other towns not recorded.
 - Why: Another group's change turned the town's government from Headman's Authority to Elder Council, so a body now rules and the audit line prints.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-TIES-7; tests/generators/tailTiesBatch1.test.js; join-6 00e8ba474; d6880513]
 
-**549. A check's source citation was re-addressed from a line of the old file to the moved symbol.**
+**622. A check's source citation was re-addressed from a line of the old file to the moved symbol.**
 
 - Towns touched: count not recorded.
 - Why: Cut 2 moved the symbol, so the old line address no longer held.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-TIES-6; tests sourceCitationIntegrity ARM 2; ACCESS_ONLY]
 
-**550. The check "each keeps one hook" now exempts a crisis cast's minted temporary stand-in, read by the record's own mark; any other person left without exactly one hook still fails the check.**
+**623. The check "each keeps one hook" now exempts a crisis cast's minted temporary stand-in, read by the record's own mark; any other person left without exactly one hook still fails the check.**
 
 - Towns touched: 2 of 7 test towns (r2r-thorp-17, r2s-recently_betrayed-hamlet-2); the other five towns were not counted face by face.
 - Why: Two stand-ins carry no hook; no check decided whether a stand-in needs one, and the cure belongs to the crisis seat or a ruling that a temporary person is exempt.
 - If vetoed: The check goes back to red in 2 of 7 towns until a stand-in carries a hook.
 - [TAIL-TIES-8; ruling T27; tests/generators/clerkHookSmallPlace.test.js; resolveCrisisCast.js mintTemporary; ef0b6208, 3a6de5c7]
 
-**551. Four checks that found a woman lord by her old title were re-keyed to find her by the house's face.**
+**624. Four checks that found a woman lord by her old title were re-keyed to find her by the house's face.**
 
 - Towns touched: count not recorded.
 - Why: Her title and role now read 'the lady', so the old way no longer finds her.
@@ -6759,7 +7650,7 @@ A check is a test that guards the pages. These are the checks a seat itself list
 
 - [TAIL-TITLES (K-C); tests/data/styledTitleOnRows.test.js (2 cases), tests/generators/mintedLordKeepsLines.test.js (1), tests/generators/mintedFaceUnderworld.test.js (1)]
 
-**552. Two checks of the layout line were re-keyed: one test's fixture gains a Citadel, and the gate and wall checks now expect the second version of the line.**
+**625. Two checks of the layout line were re-keyed: one test's fixture gains a Citadel, and the gate and wall checks now expect the second version of the line.**
 
 - Towns touched: count not recorded.
 - Why: The layout line no longer names a gate, citadel or walls the town does not have.
@@ -6773,7 +7664,7 @@ A check is a test that guards the pages. These are the checks a seat itself list
 
 - [TAIL-EXPORTS-JOURNAL; commit 26e9210a0; tests/generators/spatialGenerator.test.js, tests/generators/census2dTables.test.js]
 
-**553. Two sample-town checks of the page findings (P1a and P1b) were retired by name.**
+**626. Two sample-town checks of the page findings (P1a and P1b) were retired by name.**
 
 - Towns touched: count not recorded.
 - Why: Their sample lines were reworded and no longer carry the words 'is fed, but only just' or 'feeds itself with a small margin'; the reworded lines state nothing the data can deny (the chair's V13).
@@ -6787,7 +7678,7 @@ A check is a test that guards the pages. These are the checks a seat itself list
 
 - [TAIL-CLOSE-DISPLAY-1; ruling V13; commit 8f195e93; tests/domain/pageCensusFindings.test.js and its list of retired checks]
 
-**554. Several display checks were re-keyed to other towns or other expected values after declared moves.**
+**627. Several display checks were re-keyed to other towns or other expected values after declared moves.**
 
 - Towns touched: count not recorded.
 - Why: The old towns or values no longer print what the checks expected (declared moves of the data, powers and economy).
@@ -6804,14 +7695,14 @@ A check is a test that guards the pages. These are the checks a seat itself list
 
 - [TAIL-CLOSE-DISPLAY-1; commits c3788c2b, 93fe0a4b, 036e8243, 45c0b621; tests/domain/powerStateProseDesk.test.js, heraldCausalVoice.test.js, entityIndex.test.js, displayEconCrisisMarks.test.jsx, displayEconRelianceFoodWords.test.jsx]
 
-**555. The field-manifest check was changed: the Economics tab leaves the list of readers of 'magicRecovery', and the Magic tab is replaced by the one leaf that reads the Magic note.**
+**628. The field-manifest check was changed: the Economics tab leaves the list of readers of 'magicRecovery', and the Magic tab is replaced by the one leaf that reads the Magic note.**
 
 - Towns touched: count not recorded.
 - Why: The magic chip left the tab and the Magic note now has one home (declared moves).
 - If vetoed: The check goes red again until the tabs read those fields as before.
 - [TAIL-CLOSE-DISPLAY-1; commit 96eaeff3; tests/components/fieldManifest.test.js; src/components/EconomicsTab.jsx, MagicTab.jsx]
 
-**556. Two sample-town checks were retired by name: the clergy-chain line in r2r-village-38, and the P1-a test in rr2s-metropolis-calm-rand-1.**
+**629. Two sample-town checks were retired by name: the clergy-chain line in r2r-village-38, and the P1-a test in rr2s-metropolis-calm-rand-1.**
 
 - Towns touched: count not recorded.
 - Why: A declared move gave the hot springs no herbs, so no sample town now has the shape these checks guard; one of them, r2r-village-125, guards nothing.
@@ -6825,14 +7716,14 @@ A check is a test that guards the pages. These are the checks a seat itself list
 
 - [TAIL-CLOSE-DISPLAY-2; ruling V16 (b), vetoable; tests/domain/chainWorksThroughItsTrade.test.js, resourceGradeReadsChainLeaf.test.jsx]
 
-**557. A check about a depleted herb ground (#1163) now runs on a record made by the test, not on a sample town.**
+**630. A check about a depleted herb ground (#1163) now runs on a record made by the test, not on a sample town.**
 
 - Towns touched: count not recorded.
 - Why: No sample town has a full herbs row beside a depleted herb ground any more (declared move D34 (a)).
 - If vetoed: The check goes back to a sample town that no longer holds the shape, so it fails.
 - [TAIL-CLOSE-DISPLAY-2; ruling V16 (a), vetoable; tests/domain/resourceAnalysisCoupling.test.js]
 
-**558. Six display checks were re-keyed by identity to other towns, titles or wording after declared moves.**
+**631. Six display checks were re-keyed by identity to other towns, titles or wording after declared moves.**
 
 - Towns touched: count not recorded.
 - Why: Declared moves of the economy, civic, powers and herb data changed what the old towns print.
@@ -6850,7 +7741,7 @@ A check is a test that guards the pages. These are the checks a seat itself list
 
 - [TAIL-CLOSE-DISPLAY-2; tests/generators/incomeRowsBorneOut.test.js, tests/domain/institutionProseDeclared.test.js, tests/domain/tailDisplayCivic3V1.test.js, tests/components/tailDisplayCivicBatch2.test.jsx, tests/domain/gapReadsPrintedImports.test.js, tests/foundry/journalPrintsTheTabsLeaf.test.js]
 
-**559. Fifty checks of the cure guards now use a 'declared mute' shape: each says the town reads the pool and the pool has no line left that may speak.**
+**632. Fifty checks of the cure guards now use a 'declared mute' shape: each says the town reads the pool and the pool has no line left that may speak.**
 
 - Towns touched: count not recorded.
 - Why: In those pools every line now carries the cure's own reason to stay silent, so the old check (a cured line is not chosen) read an empty set and proved nothing.
@@ -6882,14 +7773,14 @@ A check is a test that guards the pages. These are the checks a seat itself list
 
 - [TAIL-CLOSE-POOLS-1; rulings C26 and C27 (vetoable by the owner); commits b46b83871, 9d19441bf; tests/domain/corpusCureGuards.test.js]
 
-**560. Four checks of the 'readiness adequate' pools under an occupation were anchored on another pool, because the site is silent there and cannot be read.**
+**633. Four checks of the 'readiness adequate' pools under an occupation were anchored on another pool, because the site is silent there and cannot be read.**
 
 - Towns touched: count not recorded.
 - Why: The readiness pools are not read at all under an occupation, so the rule 'the town reads the pool' cannot hold.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CLOSE-POOLS-1; this seat's call, vetoable; commit 1ad5ca6e7; tests/domain/corpusCureGuards.test.js]
 
-**561. Six checks for states no sample town reaches were rebuilt on a record the test makes itself, or re-keyed to another town; none was retired.**
+**634. Six checks for states no sample town reaches were rebuilt on a record the test makes itself, or re-keyed to another town; none was retired.**
 
 - Towns touched: count not recorded.
 - Why: No sample town reaches those states (for example a fully exploited resource under a siege).
@@ -6904,7 +7795,7 @@ A check is a test that guards the pages. These are the checks a seat itself list
 
 - [TAIL-CLOSE-POOLS-1; ruling C27 (ii); tests/domain/corpusCureGuards.test.js]
 
-**562. The check that every pool must speak under a crisis now has a list of five set-aside cells that must stay mute.**
+**635. The check that every pool must speak under a crisis now has a list of five set-aside cells that must stay mute.**
 
 - Towns touched: count not recorded.
 - Why: Five pools' 'threat' lines are declared mute under a siege by earlier commits; the old check wanted them to speak.
@@ -6921,7 +7812,7 @@ A check is a test that guards the pages. These are the checks a seat itself list
 
 - [TAIL-CLOSE-POOLS-1; ruling K31 (vetoable by the owner); commit 85770b123; tests/domain/crisisBlindDossierProse.test.js; commits f8e7326ce, 32ab37da, c21abdd5, 35acb7794, 13c6618e0]
 
-**563. A check of a line about nobles keeping their titles now accepts both number forms ('still has its titles, but' and 'still have their titles, but').**
+**636. A check of a line about nobles keeping their titles now accepts both number forms ('still has its titles, but' and 'still have their titles, but').**
 
 - Towns touched: count not recorded.
 - Before: “still have their titles, but”
@@ -6930,14 +7821,14 @@ A check is a test that guards the pages. These are the checks a seat itself list
 - If vetoed: The check goes red against the singular form.
 - [TAIL-CLOSE-POOLS-1; commit 7105cf317; tests/domain/r3c8ReaderLinesTrue.test.js]
 
-**564. A check that a founding card promises a religious power was re-keyed to the kind of power, not the name.**
+**637. A check that a founding card promises a religious power was re-keyed to the kind of power, not the name.**
 
 - Towns touched: count not recorded.
 - Why: A declared move folds a religious power that no house stands behind into the ruler; the chair ruled on this row on 2026-11-12.
 - If vetoed: The check goes red again in the towns where that power folds into the ruler.
 - [TAIL-CLOSE-POOLS-1; commit 6a3871de1; COHERENCE-POWERS 2B, commit 1df17289f; tests/data/foundingWorldBones.test.js]
 
-**565. Several history and houses checks were re-keyed by identity to other towns after declared moves of the history and services data.**
+**638. Several history and houses checks were re-keyed by identity to other towns after declared moves of the history and services data.**
 
 - Towns touched: count not recorded.
 - Why: The old towns no longer hold the shape (for example a thorp has its founding and no event; a struggling village lost its barrel row).
@@ -6954,35 +7845,35 @@ A check is a test that guards the pages. These are the checks a seat itself list
 
 - [TAIL-CLOSE-POOLS-2; commits 3db549883, bb7b3ede3, d894c0782; tests/generators/hookTruthAtBirth.test.js, tests/data/tailHistoryBatch6.test.js, tests/data/w2FixData6Rows.test.js]
 
-**566. The check that every list of casters is totalled lost its row for the alchemist's shop (now a trade), and now holds an empty list.**
+**639. The check that every list of casters is totalled lost its row for the alchemist's shop (now a trade), and now holds an empty list.**
 
 - Towns touched: count not recorded.
 - Why: The alchemist was named at 83883baaa as a trade; the evidence that returned it (UPKEEP-13: scroll scribe and Enchanter's shop practise wards) shows 9 member sets, 7 distinct sums and no total.
 - If vetoed: The row returns and the check goes red.
 - [TAIL-CLOSE-SRC-2; commit d5c4a76ac; tests recordRegisterTotality A7 (magicDef); chair's ruling G5]
 
-**567. A check of iron hooks (the reworded line prints in place of the false words) was re-keyed from two hamlets to r2r-town-20 and r2r-town-1.**
+**640. A check of iron hooks (the reworded line prints in place of the false words) was re-keyed from two hamlets to r2r-town-20 and r2r-town-1.**
 
 - Towns touched: count not recorded.
 - Why: Since the iron hook prints only where the import list holds iron, both hamlets import only Salt and Incense and print no iron hook at all.
 - If vetoed: The check goes red in the two hamlets.
 - [TAIL-CLOSE-TESTS-B; answered through the chair; commit 2ac50c55; tests/generators/tailCrisisIronHooks.test.js]
 
-**568. A check named 'the 34 literal fragments' of reworded lines was dropped in favour of a check that the line at that slot is the one the pool holds and carries none of the old claim.**
+**641. A check named 'the 34 literal fragments' of reworded lines was dropped in favour of a check that the line at that slot is the one the pool holds and carries none of the old claim.**
 
 - Towns touched: count not recorded.
 - Why: The 34 literal fragments fixed each member's new words; those words move whenever a line is reworded.
 - If vetoed: The 34 literal fragments return; a later rewording of the same line goes red again.
 - [TAIL-CLOSE-TESTS-C; a call for the chair to veto; tests/domain/tailCorpusDefGuards.test.js]
 
-**569. A check of the line 'Nobody here is paid to keep order' reads its sentence from the generator's own exported list, not through the shared drawing helper.**
+**642. A check of the line 'Nobody here is paid to keep order' reads its sentence from the generator's own exported list, not through the shared drawing helper.**
 
 - Towns touched: count not recorded.
 - Why: The sentence is generator text that no state leaf draws; the helper would assert a different sentence.
 - If vetoed: The check goes back to the shared helper and asserts a different sentence.
 - [TAIL-CLOSE-TESTS-C; deviation ruled by the chair 05:19Z; tests/generators/tailDefeconSafetyLines.test.js; src/generators/safetyProfile.js]
 
-**570. Two probe test files were renamed so the test runner no longer collects them.**
+**643. Two probe test files were renamed so the test runner no longer collects them.**
 
 - Towns touched: count not recorded.
 - Why: Both reds were imports from an undefined tree (reason as the hand-back gives it); contents unchanged.
@@ -6996,7 +7887,7 @@ A check is a test that guards the pages. These are the checks a seat itself list
 
 - [TAIL-CLOSE-TESTS-C; docs/chair/2026-11-14/probes/POWERS-16/sumpdf.probe.jsx, surf.probe.jsx]
 
-**571. Two 'NOT' checks of tie lines (T6 and powerSiblings) were re-keyed after declared moves of the powers.**
+**644. Two 'NOT' checks of tie lines (T6 and powerSiblings) were re-keyed after declared moves of the powers.**
 
 - Towns touched: count not recorded.
 - Why: Two hamlets and villages are now Elder Council towns (declared move d6880513); under an occupation the seat line takes its second version (declared move a708f0cf).
@@ -7014,28 +7905,28 @@ A check is a test that guards the pages. These are the checks a seat itself list
 
 A list of exceptions (or a ceiling) is where known cases are written down so a check lets them pass. These grew because the chair ruled so, not because the check's own rule allowed it.
 
-**572. The list of 'declaring' hook rows grew from 20 to 22 (the two war hooks) and then to 23 (the outside-debt hook under a siege).**
+**645. The list of 'declaring' hook rows grew from 20 to 22 (the two war hooks) and then to 23 (the outside-debt hook under a siege).**
 
 - Towns touched: count not recorded.
 - Why: The chair ruled that the list be re-counted by name each time a hook is given a condition, instead of loosening the check.
 - If vetoed: The check would go red until the new hook conditions are removed.
 - [TAIL-HISTORY-2 and TAIL-HISTORY-5; rulings Y7 and Y17; tests/generators/hookTablesDeclared.test.js]
 
-**573. The list of arrival-line objects (lines with a condition) grew from 115 to 119, then 124, then 133.**
+**646. The list of arrival-line objects (lines with a condition) grew from 115 to 119, then 124, then 133.**
 
 - Towns touched: count not recorded.
 - Why: Each batch gave arrival lines a condition or a second version, and the chair ruled the count be re-keyed by name, none loosened.
 - If vetoed: The check would go red until the added conditions and second versions are removed.
 - [TAIL-HISTORY-2, -3, -5; rulings Y7, Y14, Y17; tests/domain/facts/textOf.test.js]
 
-**574. The list of reworded cells that the crisis-text checks accept grew from 1 to 4 cells.**
+**647. The list of reworded cells that the crisis-text checks accept grew from 1 to 4 cells.**
 
 - Towns touched: count not recorded.
 - Why: The three reworded crisis texts take the 'reworded' branch of the check instead of a ledger line each.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-HISTORY-2; ruling Y7; tests/domain/facts/census2dTables.test.js, census2eTables.test.js]
 
-**575. A new list of house sentences that swap to a second version in a final check made after the whole town is written was created and grew: the Household elder (3 sentences), the Merchant oligarchy (3) and the Customs house (2 isolated-town lines).**
+**648. A new list of house sentences that swap to a second version in a final check made after the whole town is written was created and grew: the Household elder (3 sentences), the Merchant oligarchy (3) and the Customs house (2 isolated-town lines).**
 
 - Towns touched: 8 sentences listed; count of towns in the three items above.
 - Why: The chair asked for a final check that reaches a house's description; the list is that mechanism, and it cannot change which houses a town is born with.
@@ -7050,63 +7941,63 @@ A list of exceptions (or a ceiling) is where known cases are written down so a c
 
 - [fifth houses seat; ruling H20 (ii); commits 5d906f6e4 and 99438070f; src/data/institutionDescVariants.js; guard tests/generators/houseDescLateReRead.test.js counts its keys]
 
-**576. The list of what each service and house depends on in a crisis (travellers, goods, gatherings, food) was created: 875 service names and 282 house ids, each declared.**
+**649. The list of what each service and house depends on in a crisis (travellers, goods, gatherings, food) was created: 875 service names and 282 house ids, each declared.**
 
 - Towns touched: 875 service names and 282 house ids.
 - Why: The chair's ruling S1 set that every service and house be declared in one list so that one rule can mark rows.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-SERVICES; ruling S1; 73291c8e2; src/data/crisisDependence.js]
 
-**577. The same list grew to cover supply chains (74 chain ids) and income shares (47 titles).**
+**650. The same list grew to cover supply chains (74 chain ids) and income shares (47 titles).**
 
 - Towns touched: 74 chain ids and 47 income titles declared; no page change at that commit.
 - Why: The chair's ruling S6 asked the rule to answer for chains and income shares from the same list.
 - If vetoed: Nothing prints in another way yet (no tab or export calls it at that point), so a veto would have no effect on a page until a caller uses it; this is the hand-back's own statement.
 - [TAIL-SERVICES-2; ruling S6; d7c032485; src/data/crisisDependence.js, src/domain/display/crisisStoppedRow.js]
 
-**578. The same list grew by 35 service names and 14 house ids that live on a raw material (potter, brickmaker, dairy farmer, salt works, charcoal burner, sawmill, tannery, fishmonger, smelter, apothecary, alchemist shop, bakers, vintner, glassblower).**
+**651. The same list grew by 35 service names and 14 house ids that live on a raw material (potter, brickmaker, dairy farmer, salt works, charcoal burner, sawmill, tannery, fishmonger, smelter, apothecary, alchemist shop, bakers, vintner, glassblower).**
 
 - Towns touched: 35 service names and 14 house ids.
 - Why: The chair's ruling S5 asked for a second cause: a row whose house lacks its input by the page's own gap line.
 - If vetoed: The "Short of <input>." marks would lose their list of rows.
 - [TAIL-SERVICES-2; rulings S5 and S7; 2b3736a6d; src/data/crisisDependence.js]
 
-**579. The same list grew by nine house ids and a new word, "beyond the gates", for the town's own work outside the walls (cemetery network, hunter's lodge): a siege stops it, an outbreak does not.**
+**652. The same list grew by nine house ids and a new word, "beyond the gates", for the town's own work outside the walls (cemetery network, hunter's lodge): a siege stops it, an outbreak does not.**
 
 - Towns touched: nine houses (fish market, chroniclers' exchange, cartographer's workshop, carriers' guild, periodic market, daily markets, stone quarry, cemetery network, hunter's lodge).
 - Why: The chair's ruling S8 added the houses the houses seat found undeclared; as people in or out by road, an outbreak would have marked a cemetery whose burials go on.
 - If vetoed: Those house rows would print without the crisis mark, as before.
 - [TAIL-SERVICES-2; ruling S8; 8df172bf0; src/data/crisisDependence.js]
 
-**580. The same list grew by five service names of the parish access house (weekly rite, rite of entry, marriage ceremony, confession) and the burial row "Interment outside the gates".**
+**653. The same list grew by five service names of the parish access house (weekly rite, rite of entry, marriage ceremony, confession) and the burial row "Interment outside the gates".**
 
 - Towns touched: 17 of 720 sample towns carry a mark from these entries.
 - Why: The chair's ruling S11 asked for the batch owed by the earlier seat.
 - If vetoed: Those rows would print unmarked in siege and plague towns.
 - [TAIL-SERVICES-3; ruling S11; e35851db1; src/data/crisisDependence.js]
 
-**581. A new list names the houses left unmarked although the page says no input reaches them: the vintner (184 of 184 towns that hold it) and the glassblower (13 of 13).**
+**654. A new list names the houses left unmarked although the page says no input reaches them: the vintner (184 of 184 towns that hold it) and the glassblower (13 of 13).**
 
 - Towns touched: vintner 184 of 184 and glassblower 13 of 13 towns that hold the house.
 - Why: The chair's ruling S7: a gap present in every town is a fault of the town's data, not a state of the town.
 - If vetoed: The vintner and glassblower rows would be marked "Short of <input>." in all those towns.
 - [TAIL-SERVICES-2; ruling S7; 2b3736a6d; src/data/crisisDependence.js INPUT_GAP_HELD_EVERYWHERE]
 
-**582. The work limit on the spare hook line (spareHookLineFactsWork) was raised from 8 to 12.**
+**655. The work limit on the spare hook line (spareHookLineFactsWork) was raised from 8 to 12.**
 
 - Towns touched: bound 8 to 12, measured 4 to 8.5.
 - Why: The measure rose from 4 to 8.5 because two more facts about the roster are now read, still one read per fact.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-TIES batch 2 and ruling T9; spareHookLineFactsWork bound; told to the chair; src/domain/hookThemes.js]
 
-**583. The list of known exceptions to the tuning rule grew by two names: SHADOW_CAPTURE_FLOOR = 11 and INCOME_LEADER_FROM = 20.**
+**656. The list of known exceptions to the tuning rule grew by two names: SHADOW_CAPTURE_FLOOR = 11 and INCOME_LEADER_FROM = 20.**
 
 - Towns touched: count not recorded.
 - Why: Both numbers are population-growth settings that the tuning check had not met before.
 - If vetoed: The two rows leave the list and the tuning check goes red again for both names.
 - [TAIL-CLOSE-SRC-2; two declaredGrowth.unregisteredNamed rows, commits 63c3f2ae7, 1f41c23dc, 2ac50c55d; commit 6a7ca7621]
 
-**584. Two ceilings were raised by the chair's ruling TU1: the unregistered names from 539 to 541, and the declared growth from 12 to 14.**
+**657. Two ceilings were raised by the chair's ruling TU1: the unregistered names from 539 to 541, and the declared growth from 12 to 14.**
 
 - Towns touched: count not recorded.
 - Why: The two new names above needed room; the ruling is the chair's (2026-11-15 06:20 UTC).
@@ -7120,32 +8011,48 @@ A list of exceptions (or a ceiling) is where known cases are written down so a c
 
 - [TAIL-CLOSE-SRC-2; ruling TU1, vetoable by the owner; commit 2a43d1285]
 
-## Part D. Things known to be still wrong, left for the next round (286 items)
+## Part D. Things known to be still wrong, left for the next round (314 items)
 
 These are false sentences found and not cured, words the vocabulary lacks, and rows held, owed or named without a cure.
 
-**585. Still stale: the saved comparison of generated towns (the generator baseline test) is red at the base, and the safety strings moved by V3, V7 and V10 are not yet re-derived; to be re-derived at the close.**
+**658. Still stale: the saved comparison of generated towns (the generator baseline test) is red at the base, and the safety strings moved by V3, V7 and V10 are not yet re-derived; to be re-derived at the close.**
 
 - Towns touched: 525 settings in the comparison; 30 + 12 towns' safety strings move for V3.
 - Why: Re-derived at the close, not in these batches.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-CIVIC-3/4; tests/property/generatorGoldenMaster.test.js]
 
-**586. Still stale: the saved comparison of 525 generated-town settings is already out of date at the base, and this batch's record move (52 towns' stored magic flag) adds to what its next re-take must bank.**
+**659. Still stale: the saved comparison of 525 generated-town settings is already out of date at the base, and this batch's record move (52 towns' stored magic flag) adds to what its next re-take must bank.**
 
 - Towns touched: 525 of 525 settings in that comparison; 52 more towns' flags move.
 - Why: The helper took no re-take of it; named stale.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-ECON-2; tests/generatorGoldenMaster]
 
-**587. The income source "Agricultural Rents" ("Payments in kind or coin from tenant farmers") still prints in thorps, hamlets and villages that have no landlord, on the PDF and the Economics tab.**
+**660. The power chips on many cards do not follow the documented strength ladder (Dominant at 35 and up, Strong 25, Significant 18, Minor 10, else Suppressed); 302 cards follow neither the ladder nor the raw power.**
+
+- Towns touched: 893 cards in 495 of 720 sample towns.
+- Why: The density rule re-normalises shares after the label is set; the measurement is for the chair and nothing was built.
+- If vetoed: effect not stated in the hand-back
+- Every form:
+
+  | Before | After | Towns |
+  |---|---|---|
+  | cards that follow the ladder read on the raw power | – | 591 |
+  | of those, below the final power's rung (211 are density rivals labelled from the host) | – | 354 |
+  | of those, above the final power's rung | – | 237 |
+  | cards that follow neither (266 below, 36 above; 178 of the 266 are governing seats such as a thorp's Elder Council at 43 reading Strong) | – | 302 |
+
+- [TAIL-POWERS-B seat 4; powerLabelOf; applyPerformanceMultipliers; applyDensityLaw.js]
+
+**661. The income source "Agricultural Rents" ("Payments in kind or coin from tenant farmers") still prints in thorps, hamlets and villages that have no landlord, on the PDF and the Economics tab.**
 
 - Towns touched: 360 of 720 sample towns read; example r2r-thorp-58.
 - Why: It is written by the economy generator, not by the PDF; another seat is to rename it "Harvest" where no landlord stands.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-EXPORTS-PDF-2 and TAIL-EXPORTS-PDF-3; row 04297; src/generators/economy/economicState.js]
 
-**588. The Economics tab still prints 'Stores: a granary, about five months of grain.' beside a famine or siege. It calls the stores function with one argument, so it did not get the Tonight sheet's fix. It belongs to another seat.**
+**662. The Economics tab still prints 'Stores: a granary, about five months of grain.' beside a famine or siege. It calls the stores function with one argument, so it did not get the Tonight sheet's fix. It belongs to another seat.**
 
 - Towns touched: the old line prints in 350 of 720 sample towns on the tab, 16 of them false.
 - Before: “Stores: a granary, about five months of grain.”
@@ -7153,7 +8060,7 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: A veto does not apply to a sentence left as it is; the sentence keeps printing as it does now.
 - [TAIL-CRISIS-2; K7; src/components/new/tabs/EconomicsTab.jsx; src/domain/summary/tonightSheet.js (foodStoresWords)]
 
-**589. The mentor and successor tie (or a pact) between an occupier's governor and the local headman still prints a line that says mentor even where another kind of tie is true.**
+**663. The mentor and successor tie (or a pact) between an occupier's governor and the local headman still prints a line that says mentor even where another kind of tie is true.**
 
 - Towns touched: 2 to 312 of 720 sample towns as folded.
 - Why: Re-drawing the tie would change a random draw, which the program's law forbids; it is left for a measuring seat.
@@ -7166,35 +8073,63 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 
 - [TAIL-TIES-2; rows X9 16470, 16469, 00634, 02763, B01171, B01192, B00422, B21732; ruling T14; src/generators/power/computeRelTension]
 
-**590. Still wrong and left: Traditions lines 'Kept in …' print under a plague, while the Traditions tabs are silent on the plague. The display withholds nothing true; the generator would need a tradition's 'Last held' outcome under a plague (gatherings suspended).**
+**664. The first seat's list of rows left in files later given to another seat: some may now be cured there.**
+
+- Towns touched: 297 of 720 sample towns at most (governance file, 28 rows); counts per row in the rows.
+- Why: The files were split to another seat after this list was written.
+- If vetoed: effect not stated in the hand-back
+- Every form:
+
+  | Before | After | Towns |
+  |---|---|---|
+  | claimStanding rows 06725, 18554, 10424 (a council named where none sits) | later cured by the other seat | – |
+  | factionStanding rows 22803 (53), 00339 (37), 22709 (22), 04348, 20686 | – | 53 |
+  | the governance file's quarrel rows (28 rows) | – | 297 |
+  | factionDynamics computeFactionRelationships (33 rows) | – | 130 |
+  | dmPowerLines (30 rows) | – | 157 |
+  | governanceAccount standingSentence: "Crime has left ... contested" with no crime (7 rows) | – | – |
+  | governingStressVignettes (7 rows), stressFactions (4), handlerTieLines (2), settlementNarrative TIE_GLOSS (2), factionProfile (2), powerStrata (2), conflictIssues (1), stressPowerFaces (1) | – | – |
+
+- [TAIL-POWERS seat 1; ruling P10; factionDynamics, dmPowerLines, governingStressVignettes and others]
+
+**665. Still wrong and left: Traditions lines 'Kept in …' print under a plague, while the Traditions tabs are silent on the plague. The display withholds nothing true; the generator would need a tradition's 'Last held' outcome under a plague (gatherings suspended).**
 
 - Towns touched: 23 rows print 378 times in 264 towns; under the plague 28 printings in 9 towns (of 720 sample towns).
 - Why: A record move for the generator, named, not made (X5).
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-CIVIC; X5; rows B11732 and 22 more; the traditions writer]
 
-**591. Still doubtful and left to the record's measuring helper: in 240 towns the record holds a capture (3 to 10) without its criminal money (71 with a criminal house, 79 with a criminal chain); and in 4 towns the record's food magic share is 1% while no pound of provision and no practitioner stand (r2s-occupied-thorp-0, r2s-occupied-thorp-2, r2s-indebted-thorp-2, r2s-insurgency-thorp-2). The label 'Reliance on magic: None' is left as true by the pounds, and the foodways sentence 'some of what the thorp eats is provided by spell or by prayer' reads the same 1% in those 4 towns.**
+**666. Still doubtful and left to the record's measuring helper: in 240 towns the record holds a capture (3 to 10) without its criminal money (71 with a criminal house, 79 with a criminal chain); and in 4 towns the record's food magic share is 1% while no pound of provision and no practitioner stand (r2s-occupied-thorp-0, r2s-occupied-thorp-2, r2s-indebted-thorp-2, r2s-insurgency-thorp-2). The label 'Reliance on magic: None' is left as true by the pounds, and the foodways sentence 'some of what the thorp eats is provided by spell or by prayer' reads the same 1% in those 4 towns.**
 
 - Towns touched: 240 and 4 of 720 sample towns.
 - Why: The record's figure is the doubtful thing, not the display.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-ECON-5; X30, X32; src/generators/foodGenerator.js deriveFoodRecord; src/domain/foodways.js]
 
-**592. A sixth cure was ordered and not built: where no criminal house stands and the shadow-economy capture is 10 or less, the town's data would hold a capture of nothing.**
+**667. A sixth cure was ordered and not built: where no criminal house stands and the shadow-economy capture is 10 or less, the town's data would hold a capture of nothing.**
 
 - Towns touched: 232 towns for the capture; 104 for the drag line; 169 towns hold a shadow economy with nothing behind it (expected measure, not built).
 - Why: In 169 towns a shadow economy stands with no house, chain or income behind it.
 - If vetoed: Effect not stated in the hand-back.
 - [TAIL-DEFECON-5; ruling of the chair; not built]; ruling R6 (vetoable by the owner)
 
-**593. Still wrong and left: the food record and the viability view disagree on the import figure in 207 of 447 towns that print an import. The page row reads the food record.**
+**668. In 221 towns the quarrel sentences use the bare seat name for "the council" ("... and Elder Council cannot agree", "Household Council filed a formal protest") with no article.**
+
+- Towns touched: 221 of 720 sample towns.
+- Before: “... and Elder Council cannot agree”
+- After: “(a version with "the" and the leaf's prose form was not built)”
+- Why: It was found by the fourth seat; the cure is a reword in 221 towns and was told before being built; the chair's call.
+- If vetoed: effect not stated in the hand-back
+- [TAIL-POWERS seat 4; P3's class; src/generators/power/governanceNarrative.js]
+
+**669. Still wrong and left: the food record and the viability view disagree on the import figure in 207 of 447 towns that print an import. The page row reads the food record.**
 
 - Towns touched: 207 of 447 sample towns that print an import.
 - Why: A disagreement between two homes of the record; named for the record's own seat.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-ECON; foodSecurity vs economicViability.metrics.foodBalance]
 
-**594. The vintner's must and the glassblower's sand are not on the town's import list, so a line such as "runs on imported grapes" has nothing behind it in the town's data.**
+**670. The vintner's must and the glassblower's sand are not on the town's import list, so a line such as "runs on imported grapes" has nothing behind it in the town's data.**
 
 - Towns touched: 191 of 720 sample towns (a trial measure, not built).
 - Before: “runs on imported grapes”
@@ -7202,7 +8137,7 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: Effect not stated in the hand-back.
 - [TAIL-DEFECON-R; rulings M-V and 01:41; src/generators/economy/computeActiveChains.js :: deriveImportsFromChains]
 
-**595. The town record gives every Vintner no grapes (184 of 184) and every Glassblower no sand (13 of 13), so their sentences still describe a house whose input the record says is missing, and they were left out of the later 'one standard form' rewording.**
+**671. The town record gives every Vintner no grapes (184 of 184) and every Glassblower no sand (13 of 13), so their sentences still describe a house whose input the record says is missing, and they were left out of the later 'one standard form' rewording.**
 
 - Towns touched: 184 of 184 Vintners and 13 of 13 Glassblowers in the sample towns; Potter 172, Brickmaker 132, Charcoal burner 69, Dairy farmer 36, Salt works 25 houses stand with the input missing (count of houses, not of towns).
 - Why: The chair called it the record's fault, not the page text's: the town draws these houses without their input, and a description change may not change which houses a town is born with.
@@ -7223,7 +8158,25 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 
 - [first houses seat and second houses seat; rulings H3, H6, 00:38 note; passed to the record seat; src/data/institutionalCatalog.js]
 
-**596. 56 sentences that are false only under a crisis were struck from the cure list and left as printed, because the new crisis table marks that house on every page.**
+**672. The vintner's lines about grapes still print although the grapes are missing in every town that holds a vintner; the potter stands without clay in 84 of the 85 towns that print his secret.**
+
+- Towns touched: 184 of 720 sample towns (vintner; clay missing in 84 of 85 for the potter).
+- Why: A gap that holds in 90% or more of the towns is the town data's fault (ruling P12); the lines were left as ruled and named for the town-data seat.
+- If vetoed: effect not stated in the hand-back
+- Every form:
+
+  | Before | After | Towns |
+  |---|---|---|
+  | row 11176 (vintner) | – | 68 |
+  | row 11202 | – | 60 |
+  | row B15974 | – | 58 |
+  | row B10758 | – | 56 |
+  | row 17453 | – | 55 |
+  | the potter's secret (clay missing in 84 of 85) | – | 85 |
+
+- [TAIL-POWERS seat 1; TAIL-POWERS-B seats 2 and 4; rulings P9, P12; src/data/people/titleSecretsPresentations.js; rows 11176, 11202, B15974, B10758, 17453]
+
+**673. 56 sentences that are false only under a crisis were struck from the cure list and left as printed, because the new crisis table marks that house on every page.**
 
 - Towns touched: up to 177 of 720 sample towns for one sentence; each row's count is in the row.
 - Why: The house or chain is in the crisis table for the crisis that makes the row false, and the chair ruled that no text is rewritten for a crisis.
@@ -7291,7 +8244,7 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 
 - [second houses seat; rulings H1 and H5; src/domain/display/crisisStoppedRow.js; src/data/crisisDependence.js]
 
-**597. 24 groups of crisis-reason sentences were measured over every town that prints them and struck as true in ordinary times (for the crisis table to mark), so they were left unchanged.**
+**674. 24 groups of crisis-reason sentences were measured over every town that prints them and struck as true in ordinary times (for the crisis table to mark), so they were left unchanged.**
 
 - Towns touched: up to 177 of 720 sample towns for one row; counts are in the rows.
 - Why: The ordinary-times fact each sentence names was read in every printing town and holds (or is false in fewer than five towns).
@@ -7300,41 +8253,41 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 
   | Before | After | Towns |
   |---|---|---|
-  | – | – | 177 |
-  | – | – | 87 |
-  | – | – | 83 |
-  | – | – | 82 |
-  | – | – | 65 |
-  | – | – | 59 |
-  | – | – | 52 |
-  | – | – | 50 |
-  | – | – | 49 |
-  | – | – | 46 |
-  | – | – | 42 |
-  | – | – | 42 |
-  | – | – | 41 |
-  | – | – | 40 |
-  | – | – | 41 |
-  | – | – | 36 |
-  | – | – | 33 |
-  | – | – | 20 |
-  | – | – | 20 |
-  | – | – | 18 |
-  | – | – | 17 |
-  | – | – | 8 |
-  | – | – | 8 |
-  | – | – | 7 |
+  | printing 177; in ordinary times 148; false in ordinary times 0; the furs chain card's entrepôt note: the trade's geography, said of the trade, not of the town; prints only on an active furs chain | – | 177 |
+  | printing 87, 71, 66; in ordinary times 71, 64, 57; false in ordinary times 0; apothecaries' "imported medicines": every printing town imports (the 6 isolated ones too: `primaryImports` non-empty) | – | 87 |
+  | printing 83 / 23; in ordinary times 77 / 17; false in ordinary times 0; a brewery's regional trade (05276's "ships" is the verb) | – | 83 |
+  | printing 82, 43, 37; in ordinary times 71, 33, 33; false in ordinary times 0; markets in more than one square: city and metropolis only | – | 82 |
+  | printing 65 / 62 / 54; in ordinary times 53 / 56 / 48; false in ordinary times 3 / 0 / 2; the watch, the garrison and the caravans: every ordinary town holds a garrison; the caravans fail only where the town is isolated (3 and 2 towns: fewer than five, WAITS) | – | 65 |
+  | printing 59, 43, 36; in ordinary times 53, 37, 28; false in ordinary times 1 each; foreign traders / international merchants: false only in one isolated town each (WAITS; the roster seats a fair or a trade centre with no route: H3, NAMED) | – | 59 |
+  | printing 52, 49, 31; in ordinary times 41, 38, 24; false in ordinary times 0; the coaching inn's relay horses: the roster forbids it where isolated; a coaching inn stands in every printing town | – | 52 |
+  | printing 50; in ordinary times 43; false in ordinary times 0; grain stores: city only | – | 50 |
+  | printing 49, 32; in ordinary times 40, 27; false in ordinary times 0; the fish market already in the one hedge form ("whenever fish can be had") | – | 49 |
+  | printing 46; in ordinary times 39; false in ordinary times 0; the region's chief religious authority: metropolis only | – | 46 |
+  | printing 42; in ordinary times 39; false in ordinary times 0; a market square for market days and fairs (a town's square) | – | 42 |
+  | printing 42, 34; in ordinary times 39, 29; false in ordinary times 0; burial beyond every gate: walls with gates in every printing town | – | 42 |
+  | printing 41, 41; in ordinary times 33, 27; false in ordinary times 0; subsistence farming: thorps only | – | 41 |
+  | printing 40, 33, 33, 32; in ordinary times 32, 28, 27, 21; false in ordinary times 0; the village house of worship a walk away / a passing priest: every printing hamlet and thorp holds "Access to parish church" | – | 40 |
+  | printing 41, 12; in ordinary times 33, 9; false in ordinary times 0; the caravan chain cards: no printing town is isolated | – | 41 |
+  | printing 36, 28, 18; in ordinary times 28, 23, 17; false in ordinary times 1 / 0 / 0; customs by road, harbour or port: the harbour and port texts need `institution: docks` (06937's seven river towns hold docks); 12702 false in one isolated town (WAITS) | – | 36 |
+  | printing 33; in ordinary times 29; false in ordinary times 0; reports from several roads: no printing town isolated | – | 33 |
+  | printing 20, 17; in ordinary times 14, 14; false in ordinary times 0; the ferry's bank and landing | – | 20 |
+  | printing 20; in ordinary times 18; false in ordinary times 1; the harbour master: one river town (WAITS) | – | 20 |
+  | printing 18; in ordinary times 13; false in ordinary times 0; the caravans' own guards (not the garrison) | – | 18 |
+  | printing 17, 13; in ordinary times 14, 9; false in ordinary times 0 / 1; the caravan exchange (no printing town isolated) and the carters' guild (one isolated town: WAITS) | – | 17 |
+  | printing 8, 8; in ordinary times 6, 6; false in ordinary times 0; river barges: river towns only | – | 8 |
+  | printing 8, 8, 6, 7; in ordinary times 7, 6, 5, 5; false in ordinary times 0; the road's trade and travellers (an isolated village still has its track: "whoever the road brings") | – | 8 |
+  | printing 7, 7, 7, 5, 5, 5; in ordinary times 6, 5, 6, 3, 3, 3; false in ordinary times read, no predicate; the house's own trade, read in its ordinary towns: a shipyard (port towns only), a weekly sale, "requires grain surplus", a stable, "where caravans come" (already hedged), a trading day | – | 7 |
 
 - [fourth houses seat (TAIL-HOUSES-4); ruling H16; measure over the sample towns]
 
-**598. Still wrong and left (record gap): 'No one here works the {raw} near {place}.' prints where the local production lists a raw that the exploitation record calls unexploited (the Resources tab prints both).**
+**675. Still wrong and left (record gap): 'No one here works the {raw} near {place}.' prints where the local production lists a raw that the exploitation record calls unexploited (the Resources tab prints both).**
 
 - Towns touched: 138 of the 197 printings (12 forms of the line), in the 720 sample towns.
 - Why: The gap line agrees with the exploitation record and is not silenced; the production list is the economy generator's.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-CIVIC; row 14552; economicState.localProduction; src/domain/display/validationOnPage.js]
 
-**599. 20 sentence rows that the record bears (titles, governance houses, requirement lists, terrain properties and others) were struck and left as printed.**
+**676. 20 sentence rows that the record bears (titles, governance houses, requirement lists, terrain properties and others) were struck and left as printed.**
 
 - Towns touched: up to 126 of 720 sample towns for one row; counts are in the rows.
 - Why: Each was measured against the record and found true in every printing town, or false in fewer than five.
@@ -7343,30 +8296,30 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 
   | Before | After | Towns |
   |---|---|---|
-  | – | – | 16 |
-  | – | – | 13 |
-  | – | – | 69 |
-  | – | – | 39 |
-  | – | – | 22 |
-  | – | – | 11 |
-  | – | – | 40 |
-  | – | – | 67 |
-  | – | – | 54 |
-  | – | – | 3 |
-  | – | – | 69 |
-  | – | – | 7 |
-  | – | – | 40 |
-  | – | – | 33 |
-  | – | – | 126 |
+  | "Alderman": the named person holds rank 1 in the governing power (16 of 16), and that power is a Guild Council, whose office is Alderman (`officeTitles.js`): the record bears the title | – | 16 |
+  | "Lord Marshal": rank 1 in the governing power, a Military City Council or Grand Military Council (Lord Marshal): 13 of 13 | – | 13 |
+  | "Draws on: herb gathering areas" under the Resources tab's medicinal-herbs exploitation, which the terrain (forest) gives: the line names the kind of source, not a LAND resource | – | 69 |
+  | "Draws on: mountain forest, logging routes": every printing town is mountain terrain with `mountain_timber` or `managed_forest` | – | 39 |
+  | the hot-springs chain is printed under its exploitation state ("Unexploited", with its Needs): every printing town holds a hot-springs resource | – | 22 |
+  | "not brought in: stone, metals": no ordinary printing town imports a metal or stone | – | 11 |
+  | "Refined ingots" with no smelter, mint or foundry: 2 of 37 (WAITS) | – | 40 |
+  | 16376 / 25093 (67; "agricultural heartland, but exposed to raids", read under a famine): the clause is already conditioned at its writer (`resourceGenerator.js :: STRATEGIC_CLAUSES`, grain or grazing land; else "open country"); grazing land is farmland; the famine is H1's class. | – | 67 |
+  | 15808 / 25089 (54) and 15809 / 25090 (13) ("difficult to besiege", read under a siege or a weak defence): a property of the forest ground (the desk's FAVOURABLE terrain map, `defenseStateProse.js :: TERRAIN_DEFENCE_OF`, bound by `defenseStateProseDesk.test.js`); a siege under way does not make the ground easy; the defence's strength prints on its own line. | – | 54 |
+  | 06314 (3; the caravanserai "walled" where the town has no walls): the walls are the waystation's own compound's, not the town's defence. | – | 3 |
+  | B06447 (69) / 06832 (39) ("Draws on: ..." where the resource is absent): a requirement list, not a claim of presence (`registeredWords.js`: "NOT A CLAIM: ... 'Draws on: …'"). | – | 69 |
+  | 22677 (7) / 22676 (6) (the Free company hall's "salaried men" where the defence hires none): the hall is the band's own billet "between campaigns"; its men are soldiers for hire whether or not this town has hired them. | – | 7 |
+  | 16366 (40; "Refined ingots" under Mining & Coinage with a Jeweller and no Smelter or Mint): refining precious metal to the ingot is the goldsmith's own work; the chain's processor holds. | – | 40 |
+  | B13188 (33; the toll bridge's "Modest revenue, but steady" where isolated, 3 of 33): isolation is the trade route's abstraction, not an empty bridge; the keeper takes fees from whoever crosses (the siege twin already speaks for the cut roads). | – | 33 |
+  | Refined iron ingots / Cast iron goods: struck, the card already says Normally yields where the chain is refused | – | 126 |
   | A principal source of the town's trade. | – | – |
-  | – | – | 14 |
-  | – | – | – |
-  | – | – | – |
-  | – | – | – |
+  | governance houses whose text states their own government: true in every printing town | – | 14 |
+  | X9 16720 "Merchant guilds: Each holds a grip on the trade in its particular wares." (21): STRUCK: it claims the house's own trade (what H18 (i) asks a house to claim); a Suppressed or absent merchant POWER does not deny a guild's hold on its wares. | – | – |
+  | X9 14179 "A free hamlet with no lord's representative." (9): false in ONE town (r2s-occupied-hamlet-2, an Occupation Authority at Strong): WAITS (fewer than five). | – | – |
+  | The governance rows TAIL-HOUSES-4 struck stand (03031, 14953, 03033, 02668, 28580, 20701, 02494, B05076, 02643, B02540). | – | – |
 
 - [second to fifth houses seats; rulings H7, H16, H18, H19; verified by the record]
 
-**600. Next to a granary that holds more than a year, a state-prose line still says "little is being put by against the town being cut off"; and "Fresh repairs show on <town>'s town walls" is also named.**
+**677. Next to a granary that holds more than a year, a state-prose line still says "little is being put by against the town being cut off"; and "Fresh repairs show on <town>'s town walls" is also named.**
 
 - Towns touched: 111 of 720 sample towns for the granary line; 1 for the walls line.
 - Before: “little is being put by against the town being cut off  /  Fresh repairs show on <town>'s town walls …”
@@ -7374,7 +8327,7 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: Effect not stated in the hand-back.
 - [TAIL-DEFECON-D; ruling D13; src/data/dossierStateProse/defense.generated.js]
 
-**601. Eight doubtful pairs in the resource catalogue (a fishery giving salt, date palms giving grain, precious metals giving gems and others) were measured and none was changed by this group.**
+**678. Eight doubtful pairs in the resource catalogue (a fishery giving salt, date palms giving grain, precious metals giving gems and others) were measured and none was changed by this group.**
 
 - Towns touched: up to 109 of 720 sample towns (hot springs herbs on the made list); other pairs 15 to 80.
 - Why: The chair ruled that the lists are gated at the made and export lists first, and the data moves only for a pair that still prints false after that (hot springs herbs the likely one).
@@ -7394,7 +8347,7 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 
 - [TAIL-DEFECON-4; rulings D28, D31; src/data/resourceData.js]
 
-**602. Three families of hedged sentences (fisher's landing, fish market, river ferry) cannot take their plain line back where the record bears it, because the vocabulary has no word for a live input; the same missing word blocks a guard for the input-gap shape.**
+**679. Three families of hedged sentences (fisher's landing, fish market, river ferry) cannot take their plain line back where the record bears it, because the vocabulary has no word for a live input; the same missing word blocks a guard for the input-gap shape.**
 
 - Towns touched: 64 true landing towns, 72 fish-market towns and 109 ferry towns print the hedged line where the plain line was true.
 - Why: No existing word says a fishery, input or crossing is live; adding a vocabulary word is the chair's decision.
@@ -7409,21 +8362,35 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 
 - [fifth houses seat; ruling H20 (2); src/domain/facts/chainWorking.js; proposed word worked: <resource>]
 
-**603. The Defense tab's own "Court only" line (102 towns) was read as false by a reader and is left; the PDF prints it the same way through the same rule.**
+**680. In some towns the Elder Council has only one member on the list of people, yet the page prints plural lines such as "decide things together", "its members cannot agree" and "the whole ... must agree".**
+
+- Towns touched: 102 of 720 sample towns after this change (97 before); 14 of the 38 towns above.
+- Why: The council's members are made after the power step, so the line cannot yet read how many there are; it was named and not cured.
+- If vetoed: effect not stated in the hand-back
+- Every form:
+
+  | Before | After | Towns |
+  |---|---|---|
+  | class of one-member councils with a plural line | 97 towns before the change to Headman's Authority, 102 after | 102 |
+  | "The Elder Council is being asked to do something about it and cannot agree what" | – | – |
+
+- [TAIL-POWERS seat 1 and seat 2; ruling P21 (hold later lifted) and P24; src/generators/power/rulingStructure.js, data/people/dmPowerLines.js]
+
+**681. The Defense tab's own "Court only" line (102 towns) was read as false by a reader and is left; the PDF prints it the same way through the same rule.**
 
 - Towns touched: 102 of 720 sample towns.
 - Why: The PDF follows the tab; the tab's group (Defense and Economy) holds the question.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-EXPORTS-PDF-2; row 07370; named for DEFECON]
 
-**604. The faction line "Well-funded city watch; it keeps order reliably and is growing more sure of its own authority." is still false in 43 factions in 101 towns (a famine, a plague, a fracture, a debt, a succession void).**
+**682. The faction line "Well-funded city watch; it keeps order reliably and is growing more sure of its own authority." is still false in 43 factions in 101 towns (a famine, a plague, a fracture, a debt, a succession void).**
 
 - Towns touched: 101 towns print it; 43 factions false, of 720 sample towns.
 - Why: The line is written in another group's files; the declared set here sees only the roster's names, which hold no crisis or standing.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-TIES-2; rows 28616, X9 17043, 25907, 25995, 26057; src/generators/power/rulingStructure.js, claimStanding.js]
 
-**605. Eight PDF chain-flow lines ("resource > house > outputs") still print as made where the chain's input is absent or depleted, although the tab's own card says "Normally yields".**
+**683. Eight PDF chain-flow lines ("resource > house > outputs") still print as made where the chain's input is absent or depleted, although the tab's own card says "Normally yields".**
 
 - Towns touched: up to 99 of 720 sample towns for one line.
 - Why: The PDF file is another group's; one cure is for the flow to read the same chain state as the card.
@@ -7443,7 +8410,7 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 
 - [third houses seat; named for another group; src/pdf SupplyChainFlow, EconomicsTrade.jsx; src/domain/chainYield.js]
 
-**606. Left as it is: the missing apostrophe in 'Charter hall handles anything above the garrison usual remit.' (97 towns). The line is banked shrink-only, and the corrected line would count as a new line; a typo-class re-key is owed.**
+**684. Left as it is: the missing apostrophe in 'Charter hall handles anything above the garrison usual remit.' (97 towns). The line is banked shrink-only, and the corrected line would count as a new line; a typo-class re-key is owed.**
 
 - Towns touched: 97 of 720 sample towns.
 - Before: “Charter hall handles anything above the garrison usual remit.”
@@ -7451,14 +8418,14 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-CIVIC-2; row 06493; src/domain/display/threatAssessment.js]
 
-**607. Still wrong and left: '{power} no stake yet' is said of a power that the record's quarrels or the crisis's own choice name.**
+**685. Still wrong and left: '{power} no stake yet' is said of a power that the record's quarrels or the crisis's own choice name.**
 
 - Towns touched: 89 of 720 sample towns for the first row.
 - Why: reason not stated in the hand-back
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-CIVIC; rows B12521, B13860, B18039, 13199, 06464, 13370; src/domain/crisis/crisisCast.js, crisisPage.js]
 
-**608. 41 house, chain and export sentences are false only under a crisis (a siege, plague or famine) and their houses are missing from the crisis table, so they print unmarked; they were sent to the chair for the services seat and not changed.**
+**686. 41 house, chain and export sentences are false only under a crisis (a siege, plague or famine) and their houses are missing from the crisis table, so they print unmarked; they were sent to the chair for the services seat and not changed.**
 
 - Towns touched: up to 87 of 720 sample towns for one sentence; each row's count is in the row.
 - Why: Each is written for ordinary times, but under the named crisis it claims something the crisis stops (imported medicines, passing travellers, regional goods), and the crisis table has no entry for the house.
@@ -7511,7 +8478,7 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 
 - [second houses seat (TAIL-HOUSES-2); rulings H1 and H5; crisis table src/data/crisisDependence.js; worklist rows from WORKLIST-HOUSES and WORKLIST3-HOUSES]
 
-**609. Five PDF words are left as the tabs print them, though a reader flagged them: Flour (82 towns), Milling (50), Pottery (11), Gemcutting (10), Stoneworking (8).**
+**687. Five PDF words are left as the tabs print them, though a reader flagged them: Flour (82 towns), Milling (50), Pottery (11), Gemcutting (10), Stoneworking (8).**
 
 - Towns touched: 82, 50, 11, 10, 8 of 720 sample towns.
 - Why: The tab prints each in every town the PDF does, so the PDF follows the tab; the tab's group (the Resources tab) holds the question.
@@ -7528,7 +8495,27 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 
 - [TAIL-EXPORTS-PDF-2; rows 10343 17068 21728 10863 25018; named for the Resources tab group]
 
-**610. The "critical dependency" lines of the PDF name needed imports by terrain ("stone (for major construction)" in a thorp of 7, "timber (for large vessels)" with no shipyard) without reading the town's own imports.**
+**688. Several background-quarrel and stability sentences are still on the list of rows left in the governance file.**
+
+- Towns touched: 80 of 720 sample towns at most (the widest row, 12720); the other rows are smaller.
+- Why: They were left for a later round; some need the final list of powers at a step that does not have it.
+- If vetoed: effect not stated in the hand-back
+- Every form:
+
+  | Before | After | Towns |
+  |---|---|---|
+  | row 12720 "Lightly defended" (the defence display's own label; not this file's) | – | 80 |
+  | the grazing quarrel in hamlets and villages (true by size) | – | 35 |
+  | row 20987 / 00170 in towns and up | – | 14 |
+  | row B13714 | – | 13 |
+  | row B00338 | – | 6 |
+  | row B13657 | – | 2 |
+  | row 20963 | – | 2 |
+  | "<seat> is losing ground" where the seat is Dominant and the guard Minor (rows 21057, 21060, 21061, 21063, 21064, 21065, B20041) | – | 1 |
+
+- [TAIL-POWERS seats 2-4; src/generators/power/governanceNarrative.js]
+
+**689. The "critical dependency" lines of the PDF name needed imports by terrain ("stone (for major construction)" in a thorp of 7, "timber (for large vessels)" with no shipyard) without reading the town's own imports.**
 
 - Towns touched: up to 76 of 720 sample towns for one line.
 - Why: The classification is by terrain, not by tier or imports; the seat judged the texts true as terrain words and left them.
@@ -7546,14 +8533,14 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 
 - [third houses seat; src/domain/generators resourceGenerator buildViabilityReport; named for another group]
 
-**611. The journal's event count differs from the history's own event list in 70 towns; it was noticed and not chased.**
+**690. The journal's event count differs from the history's own event list in 70 towns; it was noticed and not chased.**
 
 - Towns touched: 70 of 720 sample towns.
 - Why: The view's events are not that list alone; the line was not flagged as false.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-EXPORTS-JOURNAL; row 10566 'Founded N years ago, with N events on record ...']
 
-**612. "Several inn districts" still prints in a city under 5,000 people (6 of 67 towns).**
+**691. "Several inn districts" still prints in a city under 5,000 people (6 of 67 towns).**
 
 - Towns touched: 6 of 67 sample towns false.
 - Before: “Several inn districts, given over to merchants, travellers, and those who stay long.”
@@ -7561,7 +8548,7 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: effect not stated in the hand-back
 - [houses seat; rulings H2, H16; src/domain/populationBand.js; src/data/institutionDescColour.js]
 
-**613. On the PDF the origin line prints under the label "Reason settled:" and in the journal under "Why this place exists". Both make a line about the place read like a founding cause, beside the history's own reason. The labels were not changed.**
+**692. On the PDF the origin line prints under the label "Reason settled:" and in the journal under "Why this place exists". Both make a line about the place read like a founding cause, beside the history's own reason. The labels were not changed.**
 
 - Towns touched: up to 67 of 720 sample towns per line.
 - Why: The labels belong to the exports' group, not this one; the seat suggests "Setting", or the founding reason beside it.
@@ -7581,7 +8568,7 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 
 - [TAIL-NARRATIVE-2; named for the exports' group; src/pdf/sections/Overview.jsx; src/foundry/journalPages.js]
 
-**614. Six chain labels print "(impaired)" where the land record says the chain is running (Cloth Finishing & Clothing 64 towns, Boatbuilding & River Transport 15, and four others).**
+**693. Six chain labels print "(impaired)" where the land record says the chain is running (Cloth Finishing & Clothing 64 towns, Boatbuilding & River Transport 15, and four others).**
 
 - Towns touched: up to 64 of 720 sample towns for one label.
 - Why: The label is written by the chain-state writer, which is another group's.
@@ -7599,7 +8586,7 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 
 - [third houses seat; named for the chain-state writer; src/data/supplyChainData.js; 21584 pilgrimage and 08266 divine healing are held as H4 items]
 
-**615. Two rows were never started: a clergy hook given to a militia captain (61 towns) and a goal that runs the debt the wrong way (56 towns).**
+**694. Two rows were never started: a clergy hook given to a militia captain (61 towns) and a goal that runs the debt the wrong way (56 towns).**
 
 - Towns touched: 61 and 56 of 720 sample towns.
 - Why: Neither was started when the seat handed back.
@@ -7613,7 +8600,7 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 
 - [TAIL-TIES-5 left; src/domain/hookThemes.js, src/data/people/goalFamilies.js]
 
-**616. Founding lines the seat did not measure as false stay as they are: the Poor-prosperity line "by giving up more than the founders intended" (59 towns) and the founding notes for debt, a vacant seat, monster pressure, insurgency and religious conversion.**
+**695. Founding lines the seat did not measure as false stay as they are: the Poor-prosperity line "by giving up more than the founders intended" (59 towns) and the founding notes for debt, a vacant seat, monster pressure, insurgency and religious conversion.**
 
 - Towns touched: 59 of 720 sample towns for the Poor line.
 - Before: “by giving up more than the founders intended”
@@ -7621,14 +8608,14 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: effect not stated in the hand-back
 - [TAIL-NARRATIVE-5; OVERCOMING_BY_PROSPERITY.Poor; STRESS_NOTES indebted, succession_void[0] and [2], monster_pressure, insurgency, religious_conversion]
 
-**617. A cure capping the economic rating at 64 where the printed prosperity is Poor or below was ordered and not built.**
+**696. A cure capping the economic rating at 64 where the printed prosperity is Poor or below was ordered and not built.**
 
 - Towns touched: 55 towns for the score, 30 guard lines, 17 conditions (expected measure, not built).
 - Why: The seat handed back by time before it could carry its tests and gates; the 30 guard lines and 17 conditions were still to be read where they print.
 - If vetoed: Effect not stated in the hand-back.
 - [TAIL-DEFECON-5; ruling of the chair; not built]; ruling R1; src/generators/defenseGenerator.js :: computeDefenseScores
 
-**618. The notes "Courts without detention." and "Legal Infrastructure · Court only" still print in 47 towns that have a town hall or council with a court service but no court building; "Hears civil pleas in the town court" is kept on the same ruling.**
+**697. The notes "Courts without detention." and "Legal Infrastructure · Court only" still print in 47 towns that have a town hall or council with a court service but no court building; "Hears civil pleas in the town court" is kept on the same ruling.**
 
 - Towns touched: 47 of 124 sample towns.
 - Before: “Courts without detention.  /  Legal Infrastructure · Court only  /  Hears civil pleas in the town court”
@@ -7636,14 +8623,14 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: Effect not stated in the hand-back.
 - [TAIL-DEFECON-D; ruling D16 and #575; src/data/institutionServices.js]
 
-**619. The council lines in a Headman's Authority town still say a council of many rules (rows 19461, 06324, 04080, 04089); they are left at their old words.**
+**698. The council lines in a Headman's Authority town still say a council of many rules (rows 19461, 06324, 04080, 04089); they are left at their old words.**
 
 - Towns touched: 45 of the 47 printing towns (19461 22, 06324 14, 04080 6, 04089 3).
 - Why: The line needs the "ruling body" word and a second version for a lone ruler; the chair held the lines back, then opened them; they were not begun at the hand-back.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CORPUS-DEF seat; rows 19461 06324 04080 04089; DS-POW-5 council v4, v1, v2; rulings C5, C7, C11, C14, C17]
 
-**620. The staff-panel note "Military focus highlights gap: iron ore processing is incomplete, strategic vulnerability." still prints where the smelter runs on imported iron ore.**
+**699. The staff-panel note "Military focus highlights gap: iron ore processing is incomplete, strategic vulnerability." still prints where the smelter runs on imported iron ore.**
 
 - Towns touched: 45 of the 125 sample towns that hold the note.
 - Before: “Military focus highlights gap: iron ore processing is incomplete, strategic vulnerability.”
@@ -7651,49 +8638,97 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: Effect not stated in the hand-back.
 - [TAIL-DEFECON-R; src/generators/resourceGenerator.js]
 
-**621. The shadow-economy tier fires in 45 towns where no hidden income source is on the town's data.**
+**700. The shadow-economy tier fires in 45 towns where no hidden income source is on the town's data.**
 
 - Towns touched: 45 of 55 printing sample towns.
 - Why: The tier's own figure (a shadow-economy share) is another seat's to cure; this group's line only hedges.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CORPUS-ECO-4; DS-ECO-6 TIER minor, blackMarketCapture >= 3; C19; src/data/dossierStateProse/economy.generated.js]
 
-**622. "Thieves' Guild (Powerful)" still prints on the Defense tab (45 towns) and in the journal (44 + 1 towns).**
+**701. A merchants' line ("Established merchant community; fund civic works and expect council access in return.") prints on cards of a weak merchant power in some towns.**
+
+- Towns touched: 54 of 720 sample towns by one count, 45 by another; the two counts disagree.
+- Before: “Established merchant community; fund civic works and expect council access in return.”
+- Why: One seat found 44 of 54 printing under a Minor merchant power (false of Minor); a later seat found 45 towns, none Suppressed, with 8 density-rival cards at a low power whose chip reads Minor or Significant. The cure belongs to another file and was not built.
+- If vetoed: effect not stated in the hand-back
+- [TAIL-POWERS seat 4; TAIL-POWERS-B seat 4; row 07269; src/generators/power/claimStanding.js, applyDensityLaw.js]
+
+**702. "Thieves' Guild (Powerful)" still prints on the Defense tab (45 towns) and in the journal (44 + 1 towns).**
 
 - Towns touched: 45 of 720 sample towns (tab); 44 + 1 (journal).
 - Why: The tab and the journal are other groups' files; only the PDF was cured.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-EXPORTS-PDF-2; row 28960; src/components/new/tabs/DefenseTab.jsx, src/foundry/journalPages.js; named for DEFECON and TAIL-EXPORTS-JOURNAL]
 
-**623. 45 women who hold the office of chancellor print 'Lord Chancellor'.**
+**703. 45 women who hold the office of chancellor print 'Lord Chancellor'.**
 
 - Towns touched: 45 of 720 sample towns.
 - Why: It is an office's title, kept by the K-C office ruling; one line in the honorific file would change it if the chair rules otherwise.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-TITLES-2 (KT1); src/data/faceHonorifics.js, the chancellor's pool]
 
-**624. A cure making the entrepôt flag appear only where an entrepôt chain stands (thorps, hamlets, villages) was ordered and not built.**
+**704. Several lines about who rules and how are still on the list of rows not yet read or cured in the ruling file.**
+
+- Towns touched: 42 of 720 sample towns at most (row 23333); counts per row in the rows.
+- Why: They were left for a later round: the file is at its size limit, and rows printing in fewer than five towns wait.
+- If vetoed: effect not stated in the hand-back
+- Every form:
+
+  | Before | After | Towns |
+  |---|---|---|
+  | row 23333 (see its own item) | – | 42 |
+  | row 02622 | – | 18 |
+  | row 06026 | – | 17 |
+  | row 02606 (true where it prints) | – | 16 |
+  | row 02559 (true where it prints) | – | 15 |
+  | row 18060 | – | 14 |
+  | row 16581 | – | 14 |
+  | row 03925: "thin economy" in a prosperous town (needs prosperity in the rung's context) | – | 12 |
+  | row 11810 | – | 11 |
+  | row 17652 | – | 8 |
+  | row 13525 | – | 5 |
+  | row 18061 | – | 4 |
+  | row 10422 | – | 2 |
+
+- [TAIL-POWERS seats 1-4; ruling P20; src/generators/power/rulingStructure.js]
+
+**705. A line saying the force is undermanned and underfunded and cannot enforce law prints beside a Fortress or Well-Defended readiness label.**
+
+- Towns touched: 42 of 720 sample towns by the town data (34 in the first count).
+- Before: “Undermanned and underfunded; unable to enforce law consistently”
+- Why: The line is drawn by the military priority before the defence profile; the readiness label does not reach it. A cure would reword it to the force's political weight (41 of 42 are Suppressed or Minor); not built because of the size limit and no time for a sample run.
+- If vetoed: effect not stated in the hand-back
+- Every form:
+
+  | Before | After | Towns |
+  |---|---|---|
+  | beside a Fortress readiness | – | 21 |
+  | beside a Well-Defended readiness | – | 17 |
+
+- [TAIL-POWERS seats 1, 2, 4; src/generators/power/rulingStructure.js]
+
+**706. A cure making the entrepôt flag appear only where an entrepôt chain stands (thorps, hamlets, villages) was ordered and not built.**
 
 - Towns touched: 41 of 720 sample towns (expected measure, not built).
 - Why: The seat handed back by time before it could carry the cure.
 - If vetoed: Effect not stated in the hand-back.
 - [TAIL-DEFECON-5; ruling of the chair; not built]; ruling R5; src/generators/economy/economicState.js
 
-**625. Still wrong and left: income-row words of the kind 'Coin minting' with no mint (40 towns, row 05224) and 'lives on a surplus farm trade' (1 town, row 01192) were named for the helpers who own the income words; rows 05780, B09326, 05779, 23075 were also named.**
+**707. Still wrong and left: income-row words of the kind 'Coin minting' with no mint (40 towns, row 05224) and 'lives on a surplus farm trade' (1 town, row 01192) were named for the helpers who own the income words; rows 05780, B09326, 05779, 23075 were also named.**
 
 - Towns touched: 40 of 720 sample towns for 'Coin minting' with no mint; 1 town for the farm trade line; other rows count not recorded.
 - Why: The income source's words are written by the economic-state file of another group.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-ECON; X4; src/domain/economicState.js]
 
-**626. Sentences about one food source or several food sources are still false in some towns: the food data names one source where the houses and trade list name others.**
+**708. Sentences about one food source or several food sources are still false in some towns: the food data names one source where the houses and trade list name others.**
 
 - Towns touched: 38 towns on the widest row (20541), then 10, 9, 7, 5, 4, 3, 2, 12 and 1 on others.
 - Why: The cure belongs to the writer of the food data, not to the line group; the one-source rows were then cured by the batch 8 rewording, but the several-source rows and the rest of the 23 stay named.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CORPUS-ECO-3; DS-ECO-9 FOOD SOURCES one source / several, about 20 rows (20541 38, 21004 10, 00743 9, 01591 7, ...); foodBalance deriveFoodRecord; src/data/dossierStateProse/economy.generated.js]
 
-**627. The line "it stood here before" still prints and is false in 1 sample town (the town whose Siege fell in its founding year).**
+**709. The line "it stood here before" still prints and is false in 1 sample town (the town whose Siege fell in its founding year).**
 
 - Towns touched: prints in 38 of 720 sample towns; false in 1 (r2s-recently_betrayed-hamlet-2).
 - Before: “it stood here before”
@@ -7701,7 +8736,7 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: effect not stated in the hand-back
 - [TAIL-NARRATIVE; B00015 catastrophic[5]; parked; historyCoherence.js / the events' writer]
 
-**628. Export-page rows were read but not checked or cured: lines about the Siege, an economic divide, a great fire, an arrival detail, and secrets about the debt, an archive and export decisions.**
+**710. Export-page rows were read but not checked or cured: lines about the Siege, an economic divide, a great fire, an arrival detail, and secrets about the debt, an archive and export decisions.**
 
 - Towns touched: between 1 and 38 of 720 sample towns per row.
 - Why: The reading round lacked the town's seats and current tensions, so this seat did not verify them. Later batches reworded some secrets of the same writer; the hand-back does not say whether those rows were reached.
@@ -7727,14 +8762,32 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 
 - [TAIL-NARRATIVE; exports worklist X9 (read-all-3/WORKLIST3-NARRATIVE); src/generators/narrativeText.js, src/data/narrativeData.js, src/data/stressInstitutionEffects.js, narrativeGenerator.js]
 
-**629. The faction line "Town watch; … reports to the council." is still false for 1 of 6 factions under a one-ruler government.**
+**711. Several lines from the shared sibling tables are still wrong in some towns, for example a town watch that reports to the council under a Feudal Appointee, and a village reeve who disagrees in a hamlet.**
+
+- Towns touched: 37 of 720 sample towns at most (row 23160).
+- Before: “Town watch; it enforces ordinances ... and reports to the council.”
+- Why: The lines are written in the sibling tables, lent to the governance seat only for two tables; the selector there was not verified and not yet cured.
+- If vetoed: effect not stated in the hand-back
+- Every form:
+
+  | Before | After | Towns |
+  |---|---|---|
+  | row 23160 (under a Feudal Appointee) | – | 37 |
+  | row 03038 | – | 4 |
+  | row 22409: "The village reeve disagrees." in a hamlet | – | 2 |
+  | row B19180: "The church wants approval rights ..." with only "Access to parish church" | – | 2 |
+  | row 28616 (family) | – | – |
+
+- [TAIL-POWERS seats 3-4; TAIL-POWERS-B; rulings P25, P26; src/data/powerSiblings.js]
+
+**712. The faction line "Town watch; … reports to the council." is still false for 1 of 6 factions under a one-ruler government.**
 
 - Towns touched: 37 of 720 sample towns print it; 1 of 6 factions false.
 - Why: It is written in another group's file, which hands no government to this set, so the new condition cannot be declared there.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-TIES-2; row 23160; src/generators/power/rulingStructure.js]
 
-**630. The iron hook 'What iron there is goes out in rations, and work waits on mended tools.' prints in 36 towns, and the rationing claim stands on nothing in 35 of them (the record has no word for an iron shortage). It is parked for a decision about a new word ('iron short').**
+**713. The iron hook 'What iron there is goes out in rations, and work waits on mended tools.' prints in 36 towns, and the rationing claim stands on nothing in 35 of them (the record has no word for an iron shortage). It is parked for a decision about a new word ('iron short').**
 
 - Towns touched: 36 of 720 sample towns (false in 35).
 - Before: “What iron there is goes out in rations, and work waits on mended tools.”
@@ -7742,14 +8795,14 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: A veto does not apply to a sentence left as it is; the sentence keeps printing as it does now.
 - [TAIL-CRISIS-6; K27; src/generators/economy/outlookHookSiblings.js; src/generators/economy/foodBalance.js]
 
-**631. Still wrong and left as a candidate: 'Economic role: occasional' under 'Reliance on magic: Relied upon' where the reliance is a chain that needs magic and not the food (36 towns), and 'Economic role: absent' beside it (8). Also left as a candidate: narrowing the silenced shadow desk lines back to where the raw capture was 3 or more.**
+**714. Still wrong and left as a candidate: 'Economic role: occasional' under 'Reliance on magic: Relied upon' where the reliance is a chain that needs magic and not the food (36 towns), and 'Economic role: absent' beside it (8). Also left as a candidate: narrowing the silenced shadow desk lines back to where the raw capture was 3 or more.**
 
 - Towns touched: 36 and 8 of 720 sample towns.
 - Why: X32 was about the food only; this would read the whole reliance reading.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-ECON-5; src/domain/display/magicProvisionShown.js; DS-ECO-6 DeskLines]
 
-**632. "Game meat: Venison, boar, rabbit." prints in 35 towns whose Hunter's lodge has no gap line; a reader read the Furs and Pelts chain's gap.**
+**715. "Game meat: Venison, boar, rabbit." prints in 35 towns whose Hunter's lodge has no gap line; a reader read the Furs and Pelts chain's gap.**
 
 - Towns touched: 35 of 720 sample towns.
 - Before: “Game meat: Venison, boar, rabbit.”
@@ -7757,7 +8810,7 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: effect not stated in the hand-back
 - [TAIL-EXPORTS-PDF-3; row 10827]
 
-**633. Still wrong and left: 'Access to a house of worship: A walk of a few miles to the village house of worship for services.' (and its variant) prints under a siege, when nothing goes out by road; the journal prints the description.**
+**716. Still wrong and left: 'Access to a house of worship: A walk of a few miles to the village house of worship for services.' (and its variant) prints under a siege, when nothing goes out by road; the journal prints the description.**
 
 - Towns touched: 33 + 32 towns print the two forms; 1 + 3 of them are besieged (r2r-thorp-58, r2r-hamlet-0 …).
 - Before: “A walk of a few miles to the village house of worship for services.”
@@ -7765,7 +8818,26 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-CIVIC-2; X9; rows 04153, 04155; src/data/institutionalCatalog.js; src/data/institutionDescVariants.js]
 
-**634. The succession void's viability note 'in the meantime each office does as it sees fit.' still prints in 31 towns, 15 of which have no office (every succession-void thorp, hamlet and village).**
+**717. Some sentences that only the PDF and the journal print were not read by the first seat; later seats read the rows of their own files and left six.**
+
+- Towns touched: 32 rows in the export pages (PDF and journal) only; towns per row not recorded together.
+- Why: The rows were handed over after the seat's last batch and left whole for the next seat.
+- If vetoed: effect not stated in the hand-back
+- Every form:
+
+  | Before | After | Towns |
+  |---|---|---|
+  | 32 rows in all (1 marked HIGH) | not read by the first seat | 32 |
+  | row 22578 (the same as tab row 04923) | left | – |
+  | row 17038 (= 18060) | left | – |
+  | row 24575 (= 15278) | cured by the stability change | – |
+  | row 16925: a militia patrol with no militia | left | 9 |
+  | row 12246: the High Theocratic Council given the Grand Council's guild-masters line | left | 6 |
+  | row 17039 (= 18061) | left | – |
+
+- [TAIL-POWERS seats 1-3; ruling X9; read-all-3/WORKLIST3-POWERS; src/generators/power/rulingStructure.js and others]
+
+**718. The succession void's viability note 'in the meantime each office does as it sees fit.' still prints in 31 towns, 15 of which have no office (every succession-void thorp, hamlet and village).**
 
 - Towns touched: 31 of 720 sample towns (15 with no office).
 - Before: “... in the meantime each office does as it sees fit.”
@@ -7773,7 +8845,7 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: A veto does not apply to a sentence left as it is; the sentence keeps printing as it does now.
 - [TAIL-CRISIS-2; named for HISTORY; src/data/stressTypes.js; src/data/stressTypesMeta.js]
 
-**635. The resource label "Defended Pass" prints in 29 towns; in 12 there is no fort, garrison, toll, watch, wall, militia or gate.**
+**719. The resource label "Defended Pass" prints in 29 towns; in 12 there is no fort, garrison, toll, watch, wall, militia or gate.**
 
 - Towns touched: 29 towns print it, false in 12.
 - Before: “Defended Pass”
@@ -7781,21 +8853,21 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: Effect not stated in the hand-back.
 - [TAIL-DEFECON-4; ruling D24; src/data/resourceData.js; src/domain/display/tracePresentation.js]
 
-**636. The casters' line "Heads the casters in quiet times; their place is secure …" is still false where the casters' power is labelled Suppressed (18 of 29 cards); the same "secure" claim for the trade's head is false under a Suppressed house (13 of 41).**
+**720. The casters' line "Heads the casters in quiet times; their place is secure …" is still false where the casters' power is labelled Suppressed (18 of 29 cards); the same "secure" claim for the trade's head is false under a Suppressed house (13 of 41).**
 
 - Towns touched: 29 of 720 sample towns for the first row.
 - Why: Not started: the seat handed back before the next batch.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-TIES-4 left; row 10338; src/generators/npcStructure.js]
 
-**637. Other layout lines may name things the town lacks and were not cured: 'Hill city: castle district commanding the heights' (29 cities), 'fortified harbour' and 'fortress crown'. The one-house waterfront lines still wait for a new word in the vocabulary.**
+**721. Other layout lines may name things the town lacks and were not cured: 'Hill city: castle district commanding the heights' (29 cities), 'fortified harbour' and 'fortress crown'. The one-house waterfront lines still wait for a new word in the vocabulary.**
 
 - Towns touched: 29 cities for the castle line; others count not recorded.
 - Why: The seat noticed them in the same table but did not flag or cure them; the vocabulary word for a citadel, a warehouse and a chandler is owed (the chair's).
 - If vetoed: effect not stated in the hand-back
 - [TAIL-EXPORTS-JOURNAL; src/data/registeredWords.js HOUSE_FAMILIES]
 
-**638. The party name 'Price regulators' still prints in small places in the 28 towns where the tension has its own event.**
+**722. The party name 'Price regulators' still prints in small places in the 28 towns where the tension has its own event.**
 
 - Towns touched: 28 of 720 sample towns (anchored ones); the sentence printed in 165 and fell to 28.
 - Before: “Price regulators”
@@ -7803,7 +8875,7 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: effect not stated in the hand-back
 - [TAIL-HISTORY-3, -4, -5; B15078; src/data/historyData.js]
 
-**639. "Pilgrim hospitality" is printed where no house of pilgrimage stands (no shrine, relic site, temple, cathedral, abbey or monastery).**
+**723. "Pilgrim hospitality" is printed where no house of pilgrimage stands (no shrine, relic site, temple, cathedral, abbey or monastery).**
 
 - Towns touched: 27 of the 83 towns that print it.
 - Before: “Pilgrim hospitality”
@@ -7811,7 +8883,7 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DEFECON-C seat; row B14842; deriveExportsFromChains]
 
-**640. The export "Pilgrim hospitality" prints in 83 towns, 27 of which have no inn, lodging, hostel, hospice, tavern, caravanserai or bath house.**
+**724. The export "Pilgrim hospitality" prints in 83 towns, 27 of which have no inn, lodging, hostel, hospice, tavern, caravanserai or bath house.**
 
 - Towns touched: 27 of 83 towns that print it.
 - Before: “Pilgrim hospitality”
@@ -7819,7 +8891,7 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: Effect not stated in the hand-back.
 - [TAIL-DEFECON-4; row B14842; src/generators/economy/computeActiveChains.js; src/data/resourceData.js]
 
-**641. A woman who holds a house and also the council's office 'Headman' still prints 'Headman' before her name.**
+**725. A woman who holds a house and also the council's office 'Headman' still prints 'Headman' before her name.**
 
 - Towns touched: 27 of 720 sample towns (the head shepherd 3, the boat-headman 6, the miller 3, the innkeeper 3, and others).
 - Before: “Connection: Headman Thecla Schulz, the boat-master”
@@ -7827,21 +8899,21 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: effect not stated in the hand-back
 - [TAIL-TITLES-2 (KT1); src/domain/seatKeeperDisplay.js or the office table; ruling K-C keeps an office's title]
 
-**642. The doubted pairs of catalogue goods (river fishery salt, fishing grounds salt, vein gems, hot springs herbs, river mills' textiles) were named; the first four were later cured by ruling D34; river mills' textiles are handled by the table rows of D33.**
+**726. The doubted pairs of catalogue goods (river fishery salt, fishing grounds salt, vein gems, hot springs herbs, river mills' textiles) were named; the first four were later cured by ruling D34; river mills' textiles are handled by the table rows of D33.**
 
 - Towns touched: river mills' processed textiles 14; hot springs' herbs 26 before the cure; river fishery salt 42; fishing grounds 21; gems 17.
 - Why: The land check works by resource, not by good, so one house admits the whole commodity list.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DEFECON-C seat; D31 (chair note of 02:31)]
 
-**643. Still wrong and left: a 'Magically Sustained' state still prints on a food chain whose magic note was withdrawn because the food record has no provision. In 26 towns the only dependents are chains with a withheld note, and the town still reads 'Relied upon' and prints 'Magically Sustained'.**
+**727. Still wrong and left: a 'Magically Sustained' state still prints on a food chain whose magic note was withdrawn because the food record has no provision. In 26 towns the only dependents are chains with a withheld note, and the town still reads 'Relied upon' and prints 'Magically Sustained'.**
 
 - Towns touched: 26 of 720 sample towns (the first case has no count recorded).
 - Why: Named for the helper who owns the chain-state leaf and the step's status; not this helper's file.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-ECON batches 1 and 2; src/domain/display/chainStateShown.js]
 
-**644. Three rows are named for other groups and not cured here: the rank chip "First Magnate, first of Merchant oligarchy" (25 towns), "answers to Underground city through …" (1 town), and one row (20796) of another seat.**
+**728. Three rows are named for other groups and not cured here: the rank chip "First Magnate, first of Merchant oligarchy" (25 towns), "answers to Underground city through …" (1 town), and one row (20796) of another seat.**
 
 - Towns touched: 25 of 720 sample towns for the widest row.
 - Why: They are written in other groups' files (the rank chip in the components, the title word in the title files, the other in the powers' lines).
@@ -7855,7 +8927,14 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 
 - [TAIL-TIES-3; rows B07353, B28204, 20796; ruling T11; src/components/new/npcComponents.jsx, src/data/people/dmPowerLines.js]
 
-**645. Several chain lines still print goods the town does not make: the oasis line, fish chain goods under a fish famine, and a Brickmaker with no clay.**
+**729. In 24 towns the elders' line "people follow them out of respect" prints beside a legitimacy that reads "Contested"; no ruling covers "Contested".**
+
+- Towns touched: 24 of 49 sample towns that print the line.
+- Why: The ruling P4 covered a legitimacy crisis only; the remaining line was named for the chair.
+- If vetoed: effect not stated in the hand-back
+- [TAIL-POWERS seat 4; row 21207; src/generators/power/rulingStructure.js]
+
+**730. Several chain lines still print goods the town does not make: the oasis line, fish chain goods under a fish famine, and a Brickmaker with no clay.**
 
 - Towns touched: 16 of 720 sample towns for the oasis line; 23 for the brickmaker; fish goods 11, 10, 9 and 8.
 - Before: “It sends out dried dates, date wine and water rights”
@@ -7874,7 +8953,7 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 
 - [TAIL-DEFECON-4; rows 14622, 22820, 10282, 22836, 22837, 24992; src/data/resourceChains.js]
 
-**646. The "one person decides" lines still print in 22 towns whose ruling seat is a Military Council or similar council of many.**
+**731. The "one person decides" lines still print in 22 towns whose ruling seat is a Military Council or similar council of many.**
 
 - Towns touched: 22 of the 36 towns that print it (v1 5, v2 7, v3 4, v4 6).
 - Before: “One person decides …”
@@ -7882,7 +8961,7 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CORPUS-DEF seat; row 00335; DS-POW-5 autocrat v1-v4]
 
-**647. The line "X keeps the title; Y makes the decisions that matter" is left (row 00334, r2s-under_siege-town-2).**
+**732. The line "X keeps the title; Y makes the decisions that matter" is left (row 00334, r2s-under_siege-town-2).**
 
 - Towns touched: 22 towns across every kind of seat.
 - Before: “Feudal Appointee keeps the title; Military/Guard makes the decisions that matter”
@@ -7890,14 +8969,14 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CORPUS-DEF seat; row 00334; DS-POW-5; atom rival power]
 
-**648. A cure rounding the magic-food share the same way as the offset was ordered and not built.**
+**733. A cure rounding the magic-food share the same way as the offset was ordered and not built.**
 
 - Towns touched: 22 of 720 sample towns (expected measure, not built).
 - Why: The seat handed back by time before it could carry the cure.
 - If vetoed: Effect not stated in the hand-back.
 - [TAIL-DEFECON-5; ruling of the chair; not built]; ruling R4; src/generators/foodGenerator.js
 
-**649. Left unmade: on an Unexploited card, 'Draws on: hot spring source, knowledge of properties' could read 'Would draw on:'. The reader took 'No one here works the mineral hot springs' (22 towns) for a contradiction; the helper struck that row and did not reword the card.**
+**734. Left unmade: on an Unexploited card, 'Draws on: hot spring source, knowledge of properties' could read 'Would draw on:'. The reader took 'No one here works the mineral hot springs' (22 towns) for a contradiction; the helper struck that row and did not reword the card.**
 
 - Towns touched: 22 of 720 sample towns.
 - Before: “Draws on: hot spring source, knowledge of properties”
@@ -7905,7 +8984,7 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-ECON-4; row 14551]
 
-**650. Three arrival lines still print and are false in a few towns each: horse traders at the edge of the settlement (false in 3 of 21), a shrine set into a wall (false in 3 of 8), bolts of cloth and bales of wool on the carts (false in 1 of 22).**
+**735. Three arrival lines still print and are false in a few towns each: horse traders at the edge of the settlement (false in 3 of 21), a shrine set into a wall (false in 3 of 8), bolts of cloth and bales of wool on the carts (false in 1 of 22).**
 
 - Towns touched: 21, 8 and 22 of 720 sample towns; false in 3, 3 and 1.
 - Why: None is false in five towns or more, so by the chair's threshold they were named and not begun; the cure would change how the arrival scene is picked.
@@ -7920,21 +8999,38 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 
 - [TAIL-NARRATIVE-4 and -5; ruling N12; src/generators/narrative/arrivalScene.js; src/data/arrivalProse.js]
 
-**651. The line "{A} governs on {B}'s credit." is still false where the government end is a mint master in a City-State Council.**
+**736. The tie gloss "are rivals in the same line of work" prints between people of different work in most of the 20 towns that print it.**
+
+- Towns touched: 20 of 720 sample towns (row B00397).
+- Before: “are rivals in the same line of work”
+- After: “are rivals for standing (a gloss that claims no work; measured, not built)”
+- Why: The measured wording claims no work and silences nothing; left for the next seat.
+- If vetoed: effect not stated in the hand-back
+- [TAIL-POWERS-B seats 3-4; row B00397; src/domain/display/settlementNarrative.js TIE_GLOSS]
+
+**737. The heading "Popular Uprising" (and "Popular uprising") and its lines ("The common people rose against the ruling powers ...", "Former rebels / The restored order ...") print on Plot Hooks and History; they were found mis-traced to the powers files and named for the history group.**
+
+- Towns touched: 20 of 720 sample towns.
+- Before: “Popular Uprising”
+- Why: They come from the older history data, not from the files of these seats.
+- If vetoed: effect not stated in the hand-back
+- [TAIL-POWERS-B seat 3; rows B14921, B14924; src/data/historyData.js]
+
+**738. The line "{A} governs on {B}'s credit." is still false where the government end is a mint master in a City-State Council.**
 
 - Towns touched: 20 of 720 sample towns.
 - Why: Not started: the same role-based shape as the other tie rows, left for the next seat.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-TIES-4 left; row 00587; ruling T11; gov_econ_dependence]
 
-**652. A sentence about one expected category of service missing is still wrong where more than one category is missing.**
+**739. A sentence about one expected category of service missing is still wrong where more than one category is missing.**
 
 - Towns touched: 18 of 720 sample towns.
 - Why: The count that decides the line comes from the service catalogue, not from the line.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CORPUS-ECO-3; DS-SUP-3 ONE EXPECTED CATEGORY MISSING v2 (row 07394); EXPECTED_SERVICES_BY_TIER vs availableServices; src/data/dossierStateProse/general.generated.js]
 
-**653. The council line "its members cannot agree" is left where the cast seats one person.**
+**740. The council line "its members cannot agree" is left where the cast seats one person.**
 
 - Towns touched: 17 of 47 towns.
 - Before: “its members cannot agree”
@@ -7942,28 +9038,28 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CORPUS-DEF seat; rulings C14, C17; DS-POW-5 council v4]
 
-**654. Sentences saying a resource is unworked or nobody bothers with it are still false in some towns: a working house stands on it, or the town builds with its stone, or the resource is not on the resource list.**
+**741. Sentences saying a resource is unworked or nobody bothers with it are still false in some towns: a working house stands on it, or the town builds with its stone, or the resource is not on the resource list.**
 
 - Towns touched: 17, 14, 9, 7, 5 and smaller counts per row of 720 sample towns.
 - Why: The cure belongs to the writer of the resource-use data, not to the line group; these rows stay named.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CORPUS-ECO-3; DS-ECO-11 RESOURCE CONDITION / EXPLOITATION unexploited, about 20 rows (rows 14837 14846 21008 20758 named); resourceAnalysis.exploitation; src/data/dossierStateProse/economy.generated.js]
 
-**655. The slow accretion of three settlements still stands beside origin lines that say the place "began as", "started", "grew" or "developed".**
+**742. The slow accretion of three settlements still stands beside origin lines that say the place "began as", "started", "grew" or "developed".**
 
 - Towns touched: 17 of 720 sample towns after batch FB (the predecessor's count).
 - Why: One of three merged places can have begun so; the seat kept them uncounted. (The predecessor's count of such pairs was 17 after batch FB.)
 - If vetoed: effect not stated in the hand-back
 - [TAIL-NARRATIVE-4 and -5; batch FB and batch 6; named, the chair's to rule]
 
-**656. Still wrong and left: '✦ Magically Sustained' on timber cards where timber is imported because the woodland is cleared (16 towns, rows 23037, 23039, 18036), and 'Arcane fabrication provides processed goods…' on a Reed & Marsh card in a mountain town and on a bowyer with no bowyer (rows 16353, 04474).**
+**743. Still wrong and left: '✦ Magically Sustained' on timber cards where timber is imported because the woodland is cleared (16 towns, rows 23037, 23039, 18036), and 'Arcane fabrication provides processed goods…' on a Reed & Marsh card in a mountain town and on a bowyer with no bowyer (rows 16353, 04474).**
 
 - Towns touched: 16 of 720 sample towns for the timber chips; the other rows count not recorded.
 - Why: The chip belongs to the chain-state leaf and the note to the substitution step, not to the wording leaf.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-ECON-3; src/domain/display/chainStateShown.js; src/generators/chainMagicSubstitution.js]
 
-**657. The house name "Thieves' guild (powerful)" still prints beside a thieves' power that the record calls Minor or Suppressed.**
+**744. The house name "Thieves' guild (powerful)" still prints beside a thieves' power that the record calls Minor or Suppressed.**
 
 - Towns touched: 15 of 720 sample towns.
 - Before: “Thieves' guild (powerful)”
@@ -7971,7 +9067,43 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: effect not stated in the hand-back
 - [second houses seat; rulings H9, H11; src/data/institutionalCatalog.js; src/domain/display/crisisStoppedRow.js; catalogIdForName]
 
-**658. Still wrong and left: a fire 'in the lower districts' prints in towns that hold no such tension.**
+**745. The title line "Knows of a path over the hills that no one else uses" prints on Plains in 10 of the 15 towns that print it (3 hills, 1 mountain, 1 riverside).**
+
+- Towns touched: 15 of 720 sample towns (10 are Plains).
+- Before: “Knows of a path over the hills that no one else uses”
+- After: “Knows of a path that no one else uses, and guides people along it for a fee (a possible wording, not built)”
+- Why: There is no terrain word in the title vocabulary; a hidden path out under a siege must be checked first.
+- If vetoed: effect not stated in the hand-back
+- [TAIL-POWERS-B seats 3-4; row 15267; src/data/people/titleSecretsPresentations.js]
+
+**746. Several lines in the governance account are still on the list of rows left: the styled title of the seat-holder, a merchant master holding a council's seat beside a quarrel, and "Crime has left ... contested" with no crime.**
+
+- Towns touched: 15 of 720 sample towns at most per row.
+- Before: “<N>, the boat-headman and Elder, holds its seat”
+- Why: The seat-holder's honorific is made elsewhere; one seat judged the rows true by the town's data, a later seat listed them as left.
+- If vetoed: effect not stated in the hand-back
+- Every form:
+
+  | Before | After | Towns |
+  |---|---|---|
+  | row B11535 (the seat-holder's styled title) | – | 15 |
+  | row B01698 | – | 15 |
+  | row B11562 | – | 8 |
+  | row B11564 | – | 4 |
+  | row B01914 | – | 3 |
+  | row B11541 | – | 2 |
+  | row B01715 | – | 2 |
+  | row B11563 | – | 1 |
+  | row B01720 | – | 1 |
+  | rows B11589 / B02095: the merchant master holds the City or City-State Council's seat beside a quarrel | – | 4 |
+  | row 03254 | – | 2 |
+  | row B17765 | – | 1 |
+  | "Crime has left ... contested" with no crime (rows B05801 to B05822) | – | 1 |
+  | row 19716: the Merchant Guilds "take its orders no longer" beside a stable tie | – | – |
+
+- [TAIL-POWERS seats 1-3; src/domain/display/governanceAccount.js, data/faceHonorifics.js]
+
+**747. Still wrong and left: a fire 'in the lower districts' prints in towns that hold no such tension.**
 
 - Towns touched: 14 of 20 printing towns.
 - Before: “a fire in the lower districts”
@@ -7979,28 +9111,45 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-CIVIC; row B02506; src/generators/historyGenerator.js]
 
-**659. The lines "Kept in Deepwinter" and "Kept in Harvest, the first week" (a festival kept under a plague) were not cured.**
+**748. The lines "Kept in Deepwinter" and "Kept in Harvest, the first week" (a festival kept under a plague) were not cured.**
 
 - Towns touched: 14 and 13 of 720 sample towns.
 - Why: They were traced to a line in the crisis secrets that says "since the first week" in an occupation secret; the festival calendar belongs to another group.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-NARRATIVE-3; B11654, B11678; src/data/stressInstitutionEffects.js; named for the festival calendar's group]
 
-**660. In 14 towns the Defense tab prints its "no organized force" line and the PDF does not.**
+**749. Lines on rival blocs made by the density rule are still wrong in some towns: "Resident agent of the external creditor" on The Free Alliance, The Independent Bloc and The Common Interest beside the real Creditor's Representative, "External administrative body" on The Garrison Bloc and The Shield Compact, and the craft guilds "carry more weight than they do" on The Merchant Bloc (false by label in 6 of 14).**
+
+- Towns touched: 14 + 8 + 6 of 720 sample towns (varies by row).
+- Before: “The craft guilds currently carry more weight than they do”
+- After: “Resident agent of the external creditor / External administrative body”
+- Why: The density rule copies the host's words onto the rival and reads the rival's label from the host's raw power; named for the density seat.
+- If vetoed: effect not stated in the hand-back
+- Every form:
+
+  | Before | After | Towns |
+  |---|---|---|
+  | row 20362 | every one is on The Merchant Bloc; true by power in all 14, false by label in 6 | 14 |
+  | rows 25719, 25872, 25630 | – | – |
+  | row 25733 | – | – |
+
+- [TAIL-POWERS-B seats 3-4; rows 20362, 25719, 25872, 25630, 25733, 07269; src/generators/power/applyDensityLaw.js]
+
+**750. In 14 towns the Defense tab prints its "no organized force" line and the PDF does not.**
 
 - Towns touched: 14 of 720 sample towns.
 - Why: The PDF and the tab read the forces in different ways; the PDF's side was left for a later batch.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-EXPORTS-PDF; src/domain/display/noForceLine.js; named for DEFECON]
 
-**661. Still wrong and left for other helpers' files: 'Military role: common' with no magic on the defence (11 towns, row 13538); 'It has worked out its river fisheries.' beside a fishing community (13 towns), hide work that 'stops half-way' beside tanners, and the missing article in 'what it lacks is Smelter' (rows 11963, 29070, 22229).**
+**751. Still wrong and left for other helpers' files: 'Military role: common' with no magic on the defence (11 towns, row 13538); 'It has worked out its river fisheries.' beside a fishing community (13 towns), hide work that 'stops half-way' beside tanners, and the missing article in 'what it lacks is Smelter' (rows 11963, 29070, 22229).**
 
 - Towns touched: 11 towns for the role line and 13 towns for the fisheries line (of 720 sample towns); the other rows count not recorded.
 - Why: Their writers (the magic profile file, the page-validation file) are not this group's.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-ECON-2/3/4; src/domain/magicProfile.js; src/domain/display/validationOnPage.js]
 
-**662. Left as it is: 'Needed, and not brought in: spices.' prints in 13 towns beside arrivals of 'Luxury textiles and exotic goods'; whether 'exotic goods' holds spices is the trade record's to say.**
+**752. Left as it is: 'Needed, and not brought in: spices.' prints in 13 towns beside arrivals of 'Luxury textiles and exotic goods'; whether 'exotic goods' holds spices is the trade record's to say.**
 
 - Towns touched: 13 of 720 sample towns.
 - Before: “Needed, and not brought in: spices.”
@@ -8008,21 +9157,38 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-ECON-4; row B13482; src/domain/display/tradeListDisplay.js needMetBy]
 
-**663. The entrepot sentence 'some of what leaves the town entered it as imports the same season' is still false in ports with no transit good and no entrepot income.**
+**753. The entrepot sentence 'some of what leaves the town entered it as imports the same season' is still false in ports with no transit good and no entrepot income.**
 
 - Towns touched: 13 of the 48 sample towns printing the second version (r2r-city-12 -13 -16 -34 -38 -52 -9, r2r-metropolis-13 -21 -48 -55, r2s-religious_conversion-city-2, r2s-slave_revolt-metropolis-3).
 - Why: The rule that decides whether a town is an entrepot is the trade data's to cure; the second-version line was reworded, this one was not.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CORPUS-ECO; DS-ECO-10 POSTURE entrepot v1; deriveIsEntrepot in tradeGoods (the bar's #275); src/generators/economy/tradeGoods.js]
 
-**664. The vintner (1 PDF town) and glassblower (13) rows are not marked short in the PDF, though the page says no input reaches them.**
+**754. Four war and unrest vignette lines are still on the list of rows not yet cured.**
+
+- Towns touched: 13 of 720 sample towns at most.
+- Why: They were left for a later round.
+- If vetoed: effect not stated in the hand-back
+- Every form:
+
+  | Before | After | Towns |
+  |---|---|---|
+  | row B21342 | – | 13 |
+  | row 22121 | – | 13 |
+  | row 15215 | – | 13 |
+  | row 21190 | – | 9 |
+  | row 20626 | – | 4 |
+
+- [TAIL-POWERS seats 2-4; src/generators/power/governingStressVignettes.js]
+
+**755. The vintner (1 PDF town) and glassblower (13) rows are not marked short in the PDF, though the page says no input reaches them.**
 
 - Towns touched: 1 and 13 of 720 sample towns (gap in 184 of 184 and 13 of 13).
 - Why: The gap stands in all 184 vintner and 13 glassblower towns (the town data's fault, not the town's state); the tabs print them unmarked.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-EXPORTS-PDF-3; ruling S7 of the services seat; rows 11208 29819; named for the record]
 
-**665. The occupation line "The occupiers in X's streets …" still prints in 11 towns, 5 of them small, although it names streets.**
+**756. The occupation line "The occupiers in X's streets …" still prints in 11 towns, 5 of them small, although it names streets.**
 
 - Towns touched: 11 towns, 5 of them thorps or hamlets (2 thorps and a hamlet at the base).
 - Before: “The occupiers in X's streets …”
@@ -8030,21 +9196,21 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CORPUS-DEF seat; DS-CND-1 stable, occupied v2]
 
-**666. The Bakers are not marked under a siege.**
+**757. The Bakers are not marked under a siege.**
 
 - Towns touched: 10 sample siege towns hold the Bakers (of 720 sample towns).
 - Why: All 10 sample siege towns that hold the Bakers also hold a town granary or mills, so "Stopped by the siege." of the whole house would be false there; the reader's claim of imported grain is not borne out (the Bakers are short in 0 of 262 towns).
 - If vetoed: effect not stated in the hand-back
 - [TAIL-SERVICES-3; ruling S14; row 05600; bakers_5_15]
 
-**667. Three wartime vantage lines ('army carts pass through', 'the carts going by'; rows 01620, 28443, 30535) still print in 9 towns each and are false in an isolated thorp. Ready wording: '{name} is in a kingdom at war, and the war is all anyone talks about.' / 'The war is far from {name}, but it touches every household: the prices and the news.'**
+**758. Three wartime vantage lines ('army carts pass through', 'the carts going by'; rows 01620, 28443, 30535) still print in 9 towns each and are false in an isolated thorp. Ready wording: '{name} is in a kingdom at war, and the war is all anyone talks about.' / 'The war is far from {name}, but it touches every household: the prices and the news.'**
 
 - Towns touched: 9 towns each, of 720 sample towns.
 - Why: Their old wording is banked in the exceptions list, so a reword would count as a new hit (149 against 147).
 - If vetoed: A veto does not apply to a sentence left as it is; the sentence keeps printing as it does now.
 - [TAIL-CRISIS-3; K8 wall; X9 01620 28443 30535; tests/lint/presumedThings.register.json]
 
-**668. Twelve rows of the memory-and-legacy lines (DS-GEN-16) no longer print in their old reader form; the same line group still prints its template wording, and whether it is false there was not measured.**
+**759. Twelve rows of the memory-and-legacy lines (DS-GEN-16) no longer print in their old reader form; the same line group still prints its template wording, and whether it is false there was not measured.**
 
 - Towns touched: 9 of 720 sample towns for LIVING-MEMORY v2 (not measured further).
 - Before: “Ask about the village's present quarrels in X and before long somebody brings up the succession crisis.”
@@ -8052,7 +9218,7 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CORPUS-ECO; DS-GEN-16 LIVING-MEMORY v2 / LEGACY-* (rows 03994 B21024 B03874 B21019 21304 B14751 B19451 B14745 B14746 B03823 B00464 B21016); src/data/dossierStateProse/general.generated.js]
 
-**669. The Brewery sentence "It keeps the taverns stocked and sends beer across the region, and stands among the larger buyers of grain" was not reworded and still prints where the town exports no beer.**
+**760. The Brewery sentence "It keeps the taverns stocked and sends beer across the region, and stands among the larger buyers of grain" was not reworded and still prints where the town exports no beer.**
 
 - Towns touched: false in 1 of 9 sample towns (r2s-occupied-town-2 exports none).
 - Before: “It keeps the taverns stocked and sends beer across the region, and stands among the larger buyers of grain and ...”
@@ -8060,7 +9226,15 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: effect not stated in the hand-back
 - [second houses seat; rulings H13 and H11; checker presumed-things; src/data/institutionDescVariants.js]
 
-**670. The war line "Every capable pair of hands <name> could spare, and several it could not, has gone to the war…" still prints in 8 towns, 7 of them beside "Conscription has taken a third of the working-age men".**
+**761. Under an infiltration, the hall line says "no criminal power here is strong enough to push it".**
+
+- Towns touched: 9 + 3 of 720 sample towns (rows 14875 and B14050).
+- Before: “no criminal power here is strong enough to push it”
+- Why: The variant is chosen in another file (the hall chooser), not this seat's.
+- If vetoed: effect not stated in the hand-back
+- [TAIL-POWERS-B seat 1; rows 14875, B14050; src/domain/people/patronage.js hallOf]
+
+**762. The war line "Every capable pair of hands <name> could spare, and several it could not, has gone to the war…" still prints in 8 towns, 7 of them beside "Conscription has taken a third of the working-age men".**
 
 - Towns touched: 8 of 720 sample towns; 7 beside the conscription line.
 - Before: “Every capable pair of hands <name> could spare, and several it could not, has gone to the war…”
@@ -8069,7 +9243,7 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: effect not stated in the hand-back
 - [TAIL-NARRATIVE-4 and -5; PRESSURE_SENTENCES (war); src/generators/narrativeText.js]
 
-**671. Seven metropolises on a road with no water route still print "Waterborne freight services".**
+**763. Seven metropolises on a road with no water route still print "Waterborne freight services".**
 
 - Towns touched: 1 town each for 7 rows (16 metropolises in the class).
 - Before: “Waterborne freight services”
@@ -8077,7 +9251,7 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DEFECON-C seat; worklist rows 09148, 09208, 09296, 09508, 09234, 09214, 09511]
 
-**672. The line "accepted within the week … nobody asking" still prints and is false in 4 of the 7 towns that print it.**
+**764. The line "accepted within the week … nobody asking" still prints and is false in 4 of the 7 towns that print it.**
 
 - Towns touched: false in 4 of 7 of 720 sample towns.
 - Before: “accepted within the week … nobody asking”
@@ -8085,28 +9259,28 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: effect not stated in the hand-back
 - [TAIL-NARRATIVE; 20302 religious_conversion[2]; parked; governingStressVignettes.js]
 
-**673. The gap-line check by house kind (7 towns) and part (a) of the round 3c10 food-line check (2 red) were not started.**
+**765. The gap-line check by house kind (7 towns) and part (a) of the round 3c10 food-line check (2 red) were not started.**
 
 - Towns touched: 7 towns for the gap-line check.
 - Why: The seat ran out of time; part (a) turns on a reworded culture line ('Herding…' to 'Herds and field grain…').
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CLOSE-POOLS-2; tests/domain/display/gapLineHousesByKind.test.js, tests/domain/r3c10FoodLinesTrue.test.js; commit 825bcf24; src/data/cultureProfiles.js]
 
-**674. A merchant-guild sentence (6 towns) and a bank sentence (1 town) are still false where a guild power is Suppressed.**
+**766. A merchant-guild sentence (6 towns) and a bank sentence (1 town) are still false where a guild power is Suppressed.**
 
 - Towns touched: 6 and 1 of 720 sample towns.
 - Why: The page has no word for a Suppressed guild power, and a new word is the chair's.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CORPUS-ECO-3; DS-GEN-13 merchant guild v2 (row 12095), bank v1 (row 03133); src/data/dossierStateProse/general.generated.js]
 
-**675. Some origin lines still say a town's shortfall is met by "carriage by magic" where the food record gives magic 0 percent.**
+**767. Some origin lines still say a town's shortfall is met by "carriage by magic" where the food record gives magic 0 percent.**
 
 - Towns touched: 6 of 720 sample towns.
 - Why: The origin writer is not given the food record's magic share; the cure needs a change at the call site in another group's file. The seat says it is arguably not false (a teleportation circle or airship dock is not magic provision), but readers read it so.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-NARRATIVE-2; B20992, B27626; ruling N14; src/generators/steps/generateNarratives.js]
 
-**676. Six more role-based tie lines still say things false for the card's house: four about a customs house ("only one is shown to the customs house", "A customs officer has asked …", "{A} signs the import papers …", "… through {A}'s warehouse") and two about a pious donor and an altar ("records … payments as gifts from a pious donor", "weapons beneath {A}'s altar").**
+**768. Six more role-based tie lines still say things false for the card's house: four about a customs house ("only one is shown to the customs house", "A customs officer has asked …", "{A} signs the import papers …", "… through {A}'s warehouse") and two about a pious donor and an altar ("records … payments as gifts from a pious donor", "weapons beneath {A}'s altar").**
 
 - Towns touched: 6 of 720 sample towns each.
 - Why: Not started: the seat handed back first; the economy end is a quarry master with no customs house, the religious end a hospital's master.
@@ -8124,14 +9298,14 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 
 - [TAIL-TIES-4 left; rows 22483, 02528, B01249, B01375, B01217, B01376; ruling T19]
 
-**677. Six women hold the face 'the lord's appointee', and the title-against-sex check still flags them, though the sentence is true.**
+**769. Six women hold the face 'the lord's appointee', and the title-against-sex check still flags them, though the sentence is true.**
 
 - Towns touched: 6 of 720 sample towns (r2r-town-27, r2r-town-37, r2r-town-59, r2s-plague_onset-town-2, r2s-succession_void-town-0, r2s-insurgency-town-2).
 - Why: The word 'lord' names the appointer, not the holder; nothing false prints, so nothing was changed. Her honorific is 'Bailiff' (pool also holds 'Lord's Bailiff').
 - If vetoed: effect not stated in the hand-back
 - [TAIL-TITLES-2; RECORD-MEASURE-1's predicate; probes appointee.mjs]
 
-**678. The opening scene of a few towns still prints sentences the town data does not support (cloth and wool carts, horse traders, stables, grain carts toward the mills and ovens).**
+**770. The opening scene of a few towns still prints sentences the town data does not support (cloth and wool carts, horse traders, stables, grain carts toward the mills and ovens).**
 
 - Towns touched: 5 of the 720 sample towns named.
 - Before: “Bolts of cloth and bales of wool fill the carts waiting on the road out. (r2s-infiltrated-town-1)  /  Horse traders show their animals at the edge of the settlement … (r2s-plague_onset-village-0)  /  The smell of horses and hay comes from the stables. (r2s-under_siege-city-1)  /  Carts of grain rattle toward the mills while the ovens send the smell of bread down every lane. (r2r-village-3)  /  Someone has left fresh flowers at a small shrine set into a wall. (r2r-village-19)”
@@ -8150,28 +9324,54 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 
 - [TAIL-DEFECON-2 and -3; src/generators/narrative/arrivalScene.js; named for the history seat]
 
-**679. Five towns still print a line about practitioners carrying a large part of the town's business although the page says no arcane practitioners are on the rolls.**
+**771. Five towns still print a line about practitioners carrying a large part of the town's business although the page says no arcane practitioners are on the rolls.**
 
 - Towns touched: 5 of 54 printing sample towns (r2r-town-29, r2r-village-2, r2s-indebted-hamlet-0, r2s-indebted-village-0, r2s-recently_betrayed-thorp-3).
 - Why: The page has no way to read 'a practitioner is on the rolls', and the chair ruled that no such word be added (C6); the five rows stay parked.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CORPUS-ECO; INCOME WEIGHT the practice of magic v1 v2 (rows B12119 28731 28726 28745 21275); C6; src/data/dossierStateProse/economy.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**680. A sentence saying a resource is unworked, or a good comes only from the carts, is still false where the trade data lists the good as made here.**
+**772. A sentence saying a resource is unworked, or a good comes only from the carts, is still false where the trade data lists the good as made here.**
 
 - Towns touched: 5, 3 and 1 of 720 sample towns per row.
 - Why: A good made with no house that makes it, or the reverse, is the trade data's own fault, not the line's.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CORPUS-ECO-3; DS-GEN-18 UNWORKED v1 / BOUGHT-IN v4, 8 rows (22267 5, 20984 3, 20909 04027 04020 04025 04037 1); same data class as RECORD-MEASURE-2; src/data/dossierStateProse/general.generated.js]
 
-**681. A sentence about a weak upstream is still wrong in some towns.**
+**773. A sentence about a weak upstream is still wrong in some towns.**
 
 - Towns touched: 5 and 2 of 720 sample towns.
 - Why: The weak-upstream state is the supply chain's own and no cure was found in the line group.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CORPUS-ECO-3; DS-SUP-2 UPSTREAM WEAK (rows 18251 5, 23280 2); src/data/dossierStateProse/general.generated.js]
 
-**682. The sentence 'X is in a kingdom at war and doing well out of it ...' still prints in 4 sample towns. It contradicts the war's own state prose ('losing people and resources by attrition'). It is parked with a proposed wording: 'X is in a kingdom at war, and some here are doing well out of it: ...'.**
+**774. Several small rows are still on the list: a leaderless War Council card beside "Crown-appointed emergency body" on the same council in a hamlet (B29842), the maltster under a siege (B10688), the game sold "in the market" (17060), and power-strata rows 10759 and 10748 (the slash label).**
+
+- Towns touched: 5 of 720 sample towns at most per row.
+- Before: “It has no one captain: the able-bodied householders sit on it by turns / Crown-appointed emergency body”
+- Why: They were left under the five-town rule; which line is false on the War Council was still to be read.
+- If vetoed: effect not stated in the hand-back
+- Every form:
+
+  | Before | After | Towns |
+  |---|---|---|
+  | row B29842 | – | 5 |
+  | row B10688 | – | 5 |
+  | row 17060 | – | 5 |
+  | row 10759 | – | 4 |
+  | row 10748 | – | 1 |
+
+- [TAIL-POWERS-B seats 3-4; ruling P29; rows B29842, B10688, 17060, 10759, 10748; src/generators/power/stressPowerFaces.js, powerStrata]
+
+**775. The relation line "leaves <C> alone" prints beside a HIGH conflict of the same pair (for example row B12464), and other "cooperative" lines are not qualified by the pair's quarrel.**
+
+- Towns touched: 5 of 720 sample towns (plus every cooperative row; no total given).
+- Before: “leaves <C> alone”
+- Why: The relation rows are drawn before the conflicts, so a second version needs a seam after both; it is not in this seat's files.
+- If vetoed: effect not stated in the hand-back
+- [TAIL-POWERS-B seat 1; rows B12464 and others; src/generators/generateSettlementPipeline.js]
+
+**776. The sentence 'X is in a kingdom at war and doing well out of it ...' still prints in 4 sample towns. It contradicts the war's own state prose ('losing people and resources by attrition'). It is parked with a proposed wording: 'X is in a kingdom at war, and some here are doing well out of it: ...'.**
 
 - Towns touched: 4 of 720 sample towns.
 - Before: “X is in a kingdom at war and doing well out of it ...”
@@ -8179,14 +9379,14 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: A veto does not apply to a sentence left as it is; the sentence keeps printing as it does now.
 - [TAIL-CRISIS, TAIL-CRISIS-2, TAIL-CRISIS-3; K8; 01034; tests/lint/presumedThings.register.json]
 
-**683. The phrase 'built in timber and stone' still prints on desert ground in 4 towns (the same shape as the Slavic timber cured earlier).**
+**777. The phrase 'built in timber and stone' still prints on desert ground in 4 towns (the same shape as the Slavic timber cured earlier).**
 
 - Towns touched: 4 of 720 sample towns.
 - Why: Seen while reading the quick guide; it prints in fewer than five towns and waits.
 - If vetoed: A veto does not apply to a sentence left as it is; the sentence keeps printing as it does now.
 - [TAIL-CRISIS-2; src/domain/summary/settlementQuickGuide.js]
 
-**684. The saved summary says "0% of daily food need remains uncovered" beside a shortfall in 4 towns, and the food writer's own per cent is off in 17 small towns (for example 13% beside a 1 lb remainder of 16).**
+**778. The saved summary says "0% of daily food need remains uncovered" beside a shortfall in 4 towns, and the food writer's own per cent is off in 17 small towns (for example 13% beside a 1 lb remainder of 16).**
 
 - Towns touched: 4 of 720 sample towns for the 0 percent; 17 small towns for the rounding.
 - Before: “0% of daily food need remains uncovered”
@@ -8194,7 +9394,14 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: Effect not stated in the hand-back.
 - [TAIL-DEFECON-5; src/domain/viabilitySummary.js; src/generators/foodGenerator.js; r2r-town-36, r2s-occupied-town-2, r2s-monster_pressure-town-1, r2s-slave_revolt-village-0]
 
-**685. Five PDF rows are left because each prints in fewer than five towns: "<N> Trade" Pilgrim Trade (01055, 3 towns), the crisis lede under a governing power (31610, 3), the mineral salts headline (17282, 4), a governing power under a void (01241, 1) and the viability's caravans (29786, 1).**
+**779. In a few towns the first town a render worker draws prints without the premium religion panel and the troops line, though the town's data are equal.**
+
+- Towns touched: 1 to 4 of 720 sample towns per run (the number varies).
+- Why: It looks like a timing difference in the page-drawing run, not a change from any seat; it was named, not cured.
+- If vetoed: effect not stated in the hand-back
+- [TAIL-POWERS seats 3-4 and TAIL-POWERS-B; tail render timing]
+
+**780. Five PDF rows are left because each prints in fewer than five towns: "<N> Trade" Pilgrim Trade (01055, 3 towns), the crisis lede under a governing power (31610, 3), the mineral salts headline (17282, 4), a governing power under a void (01241, 1) and the viability's caravans (29786, 1).**
 
 - Towns touched: 3, 3, 4, 1 and 1 of 720 sample towns.
 - Why: The chair's rule: a row in fewer than five towns waits.
@@ -8211,28 +9418,28 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 
 - [TAIL-EXPORTS-PDF-3; rows 01055 31610 17282 01241 29786]
 
-**686. The line "A small group of traders who come on market days …" is still false in the 4 towns that print it (all have guilds of their own).**
+**781. The line "A small group of traders who come on market days …" is still false in the 4 towns that print it (all have guilds of their own).**
 
 - Towns touched: 4 of 720 sample towns.
 - Why: The line is written in another group's file, and a second version of it keyed on guild is refused by a check.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-TIES-2; row 03038; src/generators/power/rulingStructure.js]
 
-**687. The stored stake 'Occupation Authority gains: the military gains in a vacuum of governance' (X9 20882) still prints in 3 towns.**
+**782. The stored stake 'Occupation Authority gains: the military gains in a vacuum of governance' (X9 20882) still prints in 3 towns.**
 
 - Towns touched: 3 of 720 sample towns.
 - Why: The cure is in the stored stake rules and would change stored text; it was not granted or taken.
 - If vetoed: A veto does not apply to a sentence left as it is; the sentence keeps printing as it does now.
 - [TAIL-CRISIS-3; X9 20882; src/domain/crisis/crisisCast.js (deriveStakes)]
 
-**688. The hook '... of Merchant Guilds is the one who would come to terms: a member of the merchants' power, with the seat itself in dispute' (X9 13909) still prints in 3 towns.**
+**783. The hook '... of Merchant Guilds is the one who would come to terms: a member of the merchants' power, with the seat itself in dispute' (X9 13909) still prints in 3 towns.**
 
 - Towns touched: 3 of 720 sample towns.
 - Why: It sits in a clause table of the hooks file and was not taken.
 - If vetoed: A veto does not apply to a sentence left as it is; the sentence keeps printing as it does now.
 - [TAIL-CRISIS-3; X9 13909; src/domain/crisis/crisisHooks.js (LINE_ROLE_CLAUSE)]
 
-**689. The fractured-town line "The quarrel among X's powers grows sharper" was struck as true, but 3 of 7 towns show it beside an empty list of relationships and conflicts.**
+**784. The fractured-town line "The quarrel among X's powers grows sharper" was struck as true, but 3 of 7 towns show it beside an empty list of relationships and conflicts.**
 
 - Towns touched: 3 of 7 towns.
 - Before: “The quarrel among X's powers grows sharper”
@@ -8240,7 +9447,7 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CORPUS-DEF seat; row B20559; DS-CND-1 worsening, fractured v1]
 
-**690. The "Stable" line "Nobody … is in a position to take the X's place" prints beside a recorded succession crisis in 3 towns.**
+**785. The "Stable" line "Nobody … is in a position to take the X's place" prints beside a recorded succession crisis in 3 towns.**
 
 - Towns touched: 3 towns: r2r-hamlet-31, r2r-hamlet-39, r2r-thorp-48.
 - Before: “Nobody … is in a position to take the X's place”
@@ -8248,7 +9455,7 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CORPUS-DEF seat; DS-POW-4 Stable v1; riskLabel]
 
-**691. Waterborne freight services are still exported under a siege: r2s-under_siege-city-0 and -metropolis-1 (ports) and r2s-under_siege-metropolis-3 (river, false).**
+**786. Waterborne freight services are still exported under a siege: r2s-under_siege-city-0 and -metropolis-1 (ports) and r2s-under_siege-metropolis-3 (river, false).**
 
 - Towns touched: 3 sieged towns (1 false).
 - Before: “Waterborne freight services (cargo, pilotage)”
@@ -8256,7 +9463,7 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DEFECON-C seat; row 28528; economicState.js]
 
-**692. Three plot hooks that now show in the freed place may be false: an exaggerated threat from wartime profit with no war, vigilantes with no stress, and paid speakers with no cause.**
+**787. Three plot hooks that now show in the freed place may be false: an exaggerated threat from wartime profit with no war, vigilantes with no stress, and paid speakers with no cause.**
 
 - Towns touched: 3 named sample towns.
 - Before: “The threat is being exaggerated by someone who profits from wartime contracts. (r2s-monster_pressure-hamlet-2)  /  The vigilantes have begun targeting innocents … (r2r-village-4)  /  Those in power are paying people to speak for them at the gatherings … (r2r-hamlet-30)”
@@ -8264,7 +9471,7 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: Effect not stated in the hand-back.
 - [TAIL-DEFECON-3; named for the history seat]
 
-**693. About eleven rows of false or doubtful sentences, each printing in fewer than five towns, were left waiting behind the wider ones.**
+**788. About eleven rows of false or doubtful sentences, each printing in fewer than five towns, were left waiting behind the wider ones.**
 
 - Towns touched: 1 to 3 towns each; 11 small rows.
 - Why: The chair ordered widest first, and a row in fewer than five towns waits.
@@ -8284,7 +9491,7 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 
 - [TAIL-DEFECON-3, -4; rows 23808 (1), 16293 (1), B29907 (2), 22847 and 10284 (3), 22821 (2), 22838 and 09012 (1)]
 
-**694. The sentence 'Nobody here talks about the price of bread' prints in 3 towns where the page itself says Food Security Pressured.**
+**789. The sentence 'Nobody here talks about the price of bread' prints in 3 towns where the page itself says Food Security Pressured.**
 
 - Towns touched: 3 of 31 printing sample towns (r2r-city-39, r2r-metropolis-38, r2r-metropolis-46).
 - Before: “Nobody here talks about the price of bread”
@@ -8292,7 +9499,7 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CORPUS-ECO-4; DS-ECO-1 C1 v3; C19; factsOf famine band vs foodSecurity.label; src/data/dossierStateProse/economy.generated.js]
 
-**695. The sentence 'Nothing has come into X since the siege closed the roads' prints where the food data counts 12 percent as imported.**
+**790. The sentence 'Nothing has come into X since the siege closed the roads' prints where the food data counts 12 percent as imported.**
 
 - Towns touched: 3 of 720 sample towns.
 - Before: “Nothing has come into X since the siege closed the roads”
@@ -8300,7 +9507,7 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CORPUS-ECO-2; DS-ECO-9 DEFICIT v5 (row B14264); src/data/dossierStateProse/economy.generated.js]
 
-**696. The line 'Rival claimants still hold competing partial authority' still prints in 3 towns below a village.**
+**791. The line 'Rival claimants still hold competing partial authority' still prints in 3 towns below a village.**
 
 - Towns touched: 3 towns below a village of 28 that printed it.
 - Before: “Rival claimants still hold competing partial authority”
@@ -8308,7 +9515,7 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: effect not stated in the hand-back
 - [TAIL-HISTORY-5; X9 22748]
 
-**697. A group of sentences that print in, or are false in, fewer than five towns were left as printed under the chair's five-town rule; the rows named are below.**
+**792. A group of sentences that print in, or are false in, fewer than five towns were left as printed under the chair's five-town rule; the rows named are below.**
 
 - Towns touched: each row's count is in the row (1 to 3 towns).
 - Why: The chair ruled that a row printing in fewer than five towns waits, and a row false in fewer than five ordinary towns waits as well.
@@ -8340,7 +9547,7 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 
 - [houses seat; ruling H13; rows of WORKLIST-HOUSES and WORKLIST3-HOUSES]
 
-**698. Rows that print in fewer than five towns were left uncured; the hand-back lists them.**
+**793. Rows that print in fewer than five towns were left uncured; the hand-back lists them.**
 
 - Towns touched: 1 to 3 of 720 sample towns per row.
 - Why: The chair's order was widest first; a row in fewer than five towns waits.
@@ -8362,14 +9569,14 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 
 - [TAIL-NARRATIVE-3 and -2; ruling N13; src/data/narrativeData.js; src/data/stressInstitutionEffects.js; narrativeGenerator.js]
 
-**699. The town's coherence check now flags 3 towns as needing review, because it reads a founder "long discharged" as a soldier with no garrison.**
+**794. The town's coherence check now flags 3 towns as needing review, because it reads a founder "long discharged" as a soldier with no garrison.**
 
 - Towns touched: 3 of 720 sample towns.
 - Why: The change comes from the founder move; the check belongs to the coherence group.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-NARRATIVE-4; generationCoherenceReceipt; named for the coherence battery's group]
 
-**700. The Imports line still prints 'grapes' and 'glass sand' as needed in three towns where the declared move M-V reads them as reaching by route.**
+**795. The Imports line still prints 'grapes' and 'glass sand' as needed in three towns where the declared move M-V reads them as reaching by route.**
 
 - Towns touched: 3 of 720 sample towns (r2r-city-30, r2s-plague_onset-town-0, r2s-politically_fractured-city-2).
 - Before: “Imports: grapes / glass sand (needed)”
@@ -8377,42 +9584,42 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CLOSE-DISPLAY-2; src/domain/display/tradeListDisplay.js importsAsPrinted]
 
-**701. The stored stake 'Craft Guilds gains: the merchants gain while the seat is endorsed' (X9 07387) still prints in 2 towns.**
+**796. The stored stake 'Craft Guilds gains: the merchants gain while the seat is endorsed' (X9 07387) still prints in 2 towns.**
 
 - Towns touched: 2 of 720 sample towns.
 - Why: The cure is in the stored stake rules and would change stored text; it was not taken.
 - If vetoed: A veto does not apply to a sentence left as it is; the sentence keeps printing as it does now.
 - [TAIL-CRISIS-3; X9 07387; src/domain/crisis/crisisCast.js (deriveStakes)]
 
-**702. The hook 'In the war, the adventurers' charter hall leads the defence ... with no one named to lead' (rows 11705 and 14131) still prints in 2 towns where the roster names the charter master of that hall.**
+**797. The hook 'In the war, the adventurers' charter hall leads the defence ... with no one named to lead' (rows 11705 and 14131) still prints in 2 towns where the roster names the charter master of that hall.**
 
 - Towns touched: 2 of 720 sample towns.
 - Why: The cast reads the people of the house it names; the cure changes stored cast rows and was not taken.
 - If vetoed: A veto does not apply to a sentence left as it is; the sentence keeps printing as it does now.
 - [TAIL-CRISIS-3; K16; 11705 14131; src/domain/crisis/crisisCast.js]
 
-**703. The Tonight sheet's food label 'Import-Dependent' still prints under a siege in 2 towns (r2s-under_siege-city-0 and -metropolis-3), where nothing comes in.**
+**798. The Tonight sheet's food label 'Import-Dependent' still prints under a siege in 2 towns (r2s-under_siege-city-0 and -metropolis-3), where nothing comes in.**
 
 - Towns touched: 2 of 720 sample towns.
 - Why: Seen while reading the sheet; it prints in fewer than five towns and waits.
 - If vetoed: A veto does not apply to a sentence left as it is; the sentence keeps printing as it does now.
 - [TAIL-CRISIS-2; src/domain/summary/tonightSheet.js]
 
-**704. "X is governed by the Elder Council" still prints under an occupation (rows 01008, 01022).**
+**799. "X is governed by the Elder Council" still prints under an occupation (rows 01008, 01022).**
 
 - Towns touched: 2 rows.
 - Why: Written by governanceAccount.js, outside this group.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CORPUS-DEF seat; rows 01008 01022; src/domain/display/governanceAccount.js]
 
-**705. Two crisis export rows are not cured: fish exported under a fish famine (09013) and pilgrim trade exported under a plague (09282).**
+**800. Two crisis export rows are not cured: fish exported under a fish famine (09013) and pilgrim trade exported under a plague (09282).**
 
 - Towns touched: 1 town each.
 - Why: Not taken for budget.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DEFECON-C seat; rows 09013, 09282; deriveExportsFromChains, economicState.js]
 
-**706. The row named "Iron & Metalwork" prints the line "Coal is dug here and sold on …" in towns that dig coal and have no forge; the line is true and the row name is false.**
+**801. The row named "Iron & Metalwork" prints the line "Coal is dug here and sold on …" in towns that dig coal and have no forge; the line is true and the row name is false.**
 
 - Towns touched: 2 of 2 towns that print it.
 - Before: “Iron & Metalwork (row name) with "Coal is dug here and sold on …"”
@@ -8420,7 +9627,7 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: Effect not stated in the hand-back.
 - [TAIL-DEFECON-3; row B11285; src/domain/worldPulse/treasury.js; r2r-town-39, r2s-wartime-hamlet-0]
 
-**707. Still wrong and left: 'Trade connectivity Collapsed' prints in a prosperous trading city.**
+**802. Still wrong and left: 'Trade connectivity Collapsed' prints in a prosperous trading city.**
 
 - Towns touched: 2 of 720 sample towns.
 - Before: “Trade connectivity Collapsed”
@@ -8428,7 +9635,7 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-CIVIC; row 23195; src/domain/causalState.js]
 
-**708. Still wrong and left: 'Stability: Rigid (militant theocracy); monsters on the roads' prints under a Royal Authority or a democratic assembly.**
+**803. Still wrong and left: 'Stability: Rigid (militant theocracy); monsters on the roads' prints under a Royal Authority or a democratic assembly.**
 
 - Towns touched: 2 of 720 sample towns (r2r-city-18 read).
 - Before: “Stability: Rigid (militant theocracy); monsters on the roads”
@@ -8436,7 +9643,7 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-CIVIC-2; X9; row 24578; src/generators/governanceNarrative.js deriveBaselineStability]
 
-**709. The sentence 'With the fishing gone' prints beside fish exports in a famine town.**
+**804. The sentence 'With the fishing gone' prints beside fish exports in a famine town.**
 
 - Towns touched: 2 of 720 sample towns.
 - Before: “With the fishing gone”
@@ -8444,49 +9651,49 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CORPUS-ECO-2; DS-ECO-9 ACTIVE FAMINE (row 29009); src/data/dossierStateProse/economy.generated.js]
 
-**710. The patron-deity panel printed in 718 towns instead of 716 in two towns (r2r-thorp-0 and r2r-thorp-1) after the economy leaves changed text only.**
+**805. The patron-deity panel printed in 718 towns instead of 716 in two towns (r2r-thorp-0 and r2r-thorp-1) after the economy leaves changed text only.**
 
 - Towns touched: 2 of 720 sample towns.
 - Why: The seat named it as the render's own variance and did not measure it further.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CORPUS-ECO-4; patron-deity panel 716 to 718; bf6695a6b; not touched]
 
-**711. The line "The church wants approval rights over market day activities. The village reeve disagrees." is still false in both towns that print it (no church of its own in one, ruled by Priestly Guidance in the other; neither has a reeve).**
+**806. The line "The church wants approval rights over market day activities. The village reeve disagrees." is still false in both towns that print it (no church of its own in one, ruled by Priestly Guidance in the other; neither has a reeve).**
 
 - Towns touched: 2 of 720 sample towns.
 - Why: The line comes from a branch in another group's file that fires only where the roster has no civic house, so its reeve is never true.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-TIES-2; rows 22409, B19180; src/generators/power/governanceNarrative.js]
 
-**712. Two towns' people (Ehecatl Chel in r2r-thorp-17, famine; Anna Choniates in r2s-recently_betrayed-hamlet-2) still carry no hook.**
+**807. Two towns' people (Ehecatl Chel in r2r-thorp-17, famine; Anna Choniates in r2s-recently_betrayed-hamlet-2) still carry no hook.**
 
 - Towns touched: 2 of 7 test towns.
 - Why: They are the crisis cast's minted stand-ins, made after the hook draw; the cure is the crisis seat's or a ruling that a stand-in is exempt.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-TIES-5 to 7; clerkHookSmallPlace; resolveCrisisCast.js mintTemporary; ef0b6208, 3a6de5c7]
 
-**713. Two towns (r2r-hamlet-4 and r2r-village-16) fail a test of the vote lines because the test assumes a headman; their government changed to an Elder Council.**
+**808. Two towns (r2r-hamlet-4 and r2r-village-16) fail a test of the vote lines because the test assumes a headman; their government changed to an Elder Council.**
 
 - Towns touched: 2 of 720 sample towns.
 - Why: The test seat re-keys it; its file was not committed here.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-TIES-7; tests/generators/tailTies2Batch1.test.js NOT (T6); d6880513]
 
-**714. The stored line '... if it gives way, Military/Guard loses most' (X9 27012) still prints in 1 town, although a Suppressed power is not the one that loses most.**
+**809. The stored line '... if it gives way, Military/Guard loses most' (X9 27012) still prints in 1 town, although a Suppressed power is not the one that loses most.**
 
 - Towns touched: 1 of 720 sample towns.
 - Why: The cure is in the stored stake rules and would change stored text; it was not taken.
 - If vetoed: A veto does not apply to a sentence left as it is; the sentence keeps printing as it does now.
 - [TAIL-CRISIS-3; X9 27012; src/domain/crisis/crisisCast.js (deriveStakes)]
 
-**715. The hook tail '...; next in line, the first choice already holding a role that contradicts this one' still prints (rows 13939 13943 13999 14045 14043, 1 town each); the same tail follows the 10 towns of the new 'one of a power that loses by the crisis' wording.**
+**810. The hook tail '...; next in line, the first choice already holding a role that contradicts this one' still prints (rows 13939 13943 13999 14045 14043, 1 town each); the same tail follows the 10 towns of the new 'one of a power that loses by the crisis' wording.**
 
 - Towns touched: 1 town each, of 720 sample towns.
 - Why: It is internal wording that leaks into the hook and the page; it was parked as written.
 - If vetoed: A veto does not apply to a sentence left as it is; the sentence keeps printing as it does now.
 - [TAIL-CRISIS-3, TAIL-CRISIS-4; X9 13939 13943 13999 14045 14043; src/domain/crisis/crisisCast.js (CAST_REASONS.nextInLine)]
 
-**716. The Invasion line "has walls and nobody to put on them. A determined attacker takes this town …" prints beside an Adequate bar (60).**
+**811. The Invasion line "has walls and nobody to put on them. A determined attacker takes this town …" prints beside an Adequate bar (60).**
 
 - Towns touched: 1 town: rv2-wartime-hamlet-5.
 - Before: “has walls and nobody to put on them. A determined attacker takes this town …”
@@ -8494,28 +9701,28 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CORPUS-DEF seat; seat 5; rv2-wartime-hamlet-5; test threatRowsTrueUnderBand]
 
-**717. r2r-town-2 loses "salt" from its list although a Salt works stands.**
+**812. r2r-town-2 loses "salt" from its list although a Salt works stands.**
 
 - Towns touched: 1 town: r2r-town-2.
 - Why: The salt came bundled with fishing grounds and was gated by fishers; seen, not cured.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DEFECON-C seat; commit 358d6afea]
 
-**718. r2r-town-53 exports "Beer (barrel)" because a Cooper processes the brewing chain; the class (a cooper's beer) is not cured.**
+**813. r2r-town-53 exports "Beer (barrel)" because a Cooper processes the brewing chain; the class (a cooper's beer) is not cured.**
 
 - Towns touched: 1 town: r2r-town-53.
 - Why: A chain kept by a processor that does not make its outputs; named, not built.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DEFECON-C seat; commit a10a457e2; D30]
 
-**719. The herb card of r2r-village-8 reads "Partial" although the hand-back calls this false.**
+**814. The herb card of r2r-village-8 reads "Partial" although the hand-back calls this false.**
 
 - Towns touched: 1 town: r2r-village-8.
 - Why: The page reader's grading and the record's filing disagree; named for the page reader's seat.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DEFECON-C seat; validationOnPage.js; resourceGenerator.js]
 
-**720. Under a siege the export "Waterborne freight services (cargo, pilotage)" still prints, and so do six other exports in the same town.**
+**815. Under a siege the export "Waterborne freight services (cargo, pilotage)" still prints, and so do six other exports in the same town.**
 
 - Towns touched: 1 of 3 towns that print it (the class is every export under a siege).
 - Before: “Waterborne freight services (cargo, pilotage)”
@@ -8523,7 +9730,7 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: Effect not stated in the hand-back.
 - [TAIL-DEFECON-3; row 28528; named for TAIL-DEFECON-C and the chair]
 
-**721. A line in r2r-hamlet-1, "small enough to annoy the clerks", puts clerks in a hamlet.**
+**816. A line in r2r-hamlet-1, "small enough to annoy the clerks", puts clerks in a hamlet.**
 
 - Towns touched: 1 of 720 sample towns.
 - Before: “small enough to annoy the clerks”
@@ -8531,7 +9738,7 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: Effect not stated in the hand-back.
 - [TAIL-DEFECON batch 1; seen, not cured]
 
-**722. The PDF prints the raw catalogue bracket "(Powerful)" in "Thieves' Guild (Powerful): Controls the criminal hierarchy." beside a Suppressed seat.**
+**817. The PDF prints the raw catalogue bracket "(Powerful)" in "Thieves' Guild (Powerful): Controls the criminal hierarchy." beside a Suppressed seat.**
 
 - Towns touched: 1 of 720 sample towns.
 - Before: “Thieves' Guild (Powerful): Controls the criminal hierarchy.”
@@ -8539,14 +9746,14 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: Effect not stated in the hand-back.
 - [TAIL-DEFECON-D; row 28960; src/pdf/ (institutionDisplayName)]
 
-**723. Not done by the fourth civic helper at its clock: the herb card row (a herb card prints 'Partial' where it read otherwise after the catalogue's herbs left the hot springs, r2r-village-8) was NOT MEASURED. V9 (the food ledgers) was withdrawn by the chair.**
+**818. Not done by the fourth civic helper at its clock: the herb card row (a herb card prints 'Partial' where it read otherwise after the catalogue's herbs left the hot springs, r2r-village-8) was NOT MEASURED. V9 (the food ledgers) was withdrawn by the chair.**
 
 - Towns touched: 1 town read (r2r-village-8); count not recorded.
 - Why: It needs a sample run at the joined line's 3e482b329, and the helper ran out of time.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-CIVIC-4; V9 withdrawn by ruling V12; src/domain/display/validationOnPage.js; src/domain/foodBalance.js]
 
-**724. Still wrong and left: 'Defended Pass' among the nearby resources, where no force or wall stands (the geography calls it a mountain pass). The journal's words were later changed to the catalogue's label under V11.**
+**819. Still wrong and left: 'Defended Pass' among the nearby resources, where no force or wall stands (the geography calls it a mountain pass). The journal's words were later changed to the catalogue's label under V11.**
 
 - Towns touched: 1 town each.
 - Before: “Defended Pass”
@@ -8554,7 +9761,7 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-CIVIC-2; X9; rows 19746, 19744; src/data/resourceData.js defended_pass]
 
-**725. Still wrong and left: the Foundations line 'Isolated from major trade routes, and short of what it eats. Nothing is brought in to close the gap; it gets by on what it produces itself.' prints beside a quarter of the need met by provision (read in r2r-thorp-54).**
+**820. Still wrong and left: the Foundations line 'Isolated from major trade routes, and short of what it eats. Nothing is brought in to close the gap; it gets by on what it produces itself.' prints beside a quarter of the need met by provision (read in r2r-thorp-54).**
 
 - Towns touched: 1 of 720 sample towns (r2r-thorp-54).
 - Before: “Isolated from major trade routes, and short of what it eats. Nothing is brought in to close the gap; it gets by on what it produces itself.”
@@ -8562,7 +9769,7 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-ECON-2; src/generators/narrative/settlementOriginProse.js]
 
-**726. Still wrong in one town and waiting: the wool chain's goods 'Wool→cloth→dyed fabric' / 'cloth, dyed fabric' print in r2r-hamlet-48, where the only supporting house is a shepherd with no weaver, dyer or fulling mill. True in the other 38 of 39 towns.**
+**821. Still wrong in one town and waiting: the wool chain's goods 'Wool→cloth→dyed fabric' / 'cloth, dyed fabric' print in r2r-hamlet-48, where the only supporting house is a shepherd with no weaver, dyer or fulling mill. True in the other 38 of 39 towns.**
 
 - Towns touched: 1 of 39 sample towns that print the line (r2r-hamlet-48); the others are true.
 - Before: “Wool→cloth→dyed fabric”
@@ -8570,14 +9777,14 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-ECON-3/4; rows B28006, B28222; src/generators/resourceGenerator.js evaluateInstitutions]
 
-**727. Left waiting (1 town each): 'Needed, and not brought in: …' naming fish beside a fish market (rows 14395, 14400, 14242) and one one-town chip row (B28459).**
+**822. Left waiting (1 town each): 'Needed, and not brought in: …' naming fish beside a fish market (rows 14395, 14400, 14242) and one one-town chip row (B28459).**
 
 - Towns touched: 1 of 720 sample towns each.
 - Why: Waits by the chair's order: a row in fewer than five towns waits.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-ECON-3/4; src/domain/display/tradeListDisplay.js importsAsPrinted]
 
-**728. The sentence 'a subsistence living keeps everyone busy' prints in a Wealthy town, where the town's data names a survival economy.**
+**823. The sentence 'a subsistence living keeps everyone busy' prints in a Wealthy town, where the town's data names a survival economy.**
 
 - Towns touched: 1 of 720 sample towns.
 - Before: “a subsistence living keeps everyone busy”
@@ -8585,14 +9792,14 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CORPUS-ECO-2; DS-ECO-1 C1 v1 (row 23230); src/data/dossierStateProse/economy.generated.js]
 
-**729. In one town the 'stores are more than the season needs' sentence still prints although the ledger shows the town 3 percent short after imports.**
+**824. In one town the 'stores are more than the season needs' sentence still prints although the ledger shows the town 3 percent short after imports.**
 
 - Towns touched: 1 of 720 sample towns.
 - Why: The town's food band reads secure while its ledger is short, so the band's cut is the question; the hand-back leaves it named.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CORPUS-ECO; DS-ECO-8 COMFORTABLE v3 (row 20129; r2s-succession_void-metropolis-1); src/data/dossierStateProse/economy.generated.js]
 
-**730. The Mercenary quarter "Major forces (hundreds to thousands)" prints in a city of 2,679 where it is false.**
+**825. The Mercenary quarter "Major forces (hundreds to thousands)" prints in a city of 2,679 where it is false.**
 
 - Towns touched: 1 of 26 sample towns false (r2s-under_siege-city-1).
 - Before: “Major forces (hundreds to thousands).”
@@ -8600,21 +9807,43 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: effect not stated in the hand-back
 - [third houses seat; named for another group; faction_boost step]
 
-**731. On the Services tab, a marked row's description is dropped with its mark by the tab's no-sentence-twice law, so the row prints its bare name while the Institutions door says "(stopped)".**
+**826. Some lines about a criminal group's agent name a house label as if it were a power ("Fence (word of mouth)", "Smuggling waypoint", "Multiple criminal factions has", "The head of Church Council answers to Street gang").**
+
+- Towns touched: 1 of 720 sample towns per row (rows 19016, 18705, 19010, 07609, 19011, 18181, 14103, 20796).
+- Before: “Fence (word of mouth) / Smuggling waypoint / Multiple criminal factions has / The head of Church Council answers to Street gang”
+- Why: The names are built in another file (the hall chooser); the house's label should pass the house-label filter there.
+- If vetoed: effect not stated in the hand-back
+- [TAIL-POWERS-B seats 1-2; rows 19016, 18705, 19010, 07609, 19011, 18181, 14103, 20796; src/domain/people/patronage.js hallOf]
+
+**827. In a town with a conversion crisis, the faith's relation row still says it blesses the hall, because it names the first religious power (the Conversion Enforcement Office or Reform Congregation) as the other side.**
+
+- Towns touched: 1 of 720 sample towns per row (rows 10837 and 07105).
+- Why: Choosing the established faith instead would move the row's pair (a declared change); it was left and measured.
+- If vetoed: effect not stated in the hand-back
+- [TAIL-POWERS-B seat 1; rows 10837, 07105]
+
+**828. In a town whose route is isolated yet holds a Caravanserai, the caravanserai keeper's title lines all presume caravans on a road.**
+
+- Towns touched: 1 of 720 sample towns (r2r-town-54).
+- Why: The town's own data are incoherent (an isolated route and a Caravanserai); named for the people-and-buildings group.
+- If vetoed: effect not stated in the hand-back
+- [TAIL-POWERS seat 1; row 17541]
+
+**829. On the Services tab, a marked row's description is dropped with its mark by the tab's no-sentence-twice law, so the row prints its bare name while the Institutions door says "(stopped)".**
 
 - Towns touched: 1 of 720 sample towns (r2s-under_siege-town-0: the Market square's "Weekly market").
 - Why: The cure would sit in the Services tab; it waits because it concerns under five towns.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-SERVICES-3; src/components/new/tabs/ServicesTab.jsx; r2s-under_siege-town-0]
 
-**732. One person's hook line, "Three guards … the same district …", is still false in 1 town (r2s-occupied-town-2).**
+**830. One person's hook line, "Three guards … the same district …", is still false in 1 town (r2s-occupied-town-2).**
 
 - Towns touched: 1 of 720 sample towns.
 - Why: It was true when drawn and false because the town's population moved afterwards (a town of 310 reads middling); no draw is moved for it.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-TIES batch 2; row 00183; ruling T8; ORDER-MEASURE-1]
 
-**733. Three goal lines are still left false in 1 town each: "Pay every hand at the undead labor …", "Keep the accounts of the local fence's people balanced …", and "Learn why people favour Church Council …" under a legitimacy crisis.**
+**831. Three goal lines are still left false in 1 town each: "Pay every hand at the undead labor …", "Keep the accounts of the local fence's people balanced …", and "Learn why people favour Church Council …" under a legitimacy crisis.**
 
 - Towns touched: 1 of 720 sample towns each.
 - Why: Each needs a per-house word the vocabulary lacks (parked); one refusal belongs to another file.
@@ -8629,7 +9858,7 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 
 - [TAIL-TIES-4 left; rows 26926, 26039, 26467]
 
-**734. The insurgency's viability note 'Taxes are disputed, some offices no longer send their revenue on ...' still presumes offices that a town may not have.**
+**832. The insurgency's viability note 'Taxes are disputed, some offices no longer send their revenue on ...' still presumes offices that a town may not have.**
 
 - Towns touched: count not recorded.
 - Before: “Taxes are disputed, some offices no longer send their revenue on ...”
@@ -8637,7 +9866,7 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: A veto does not apply to a sentence left as it is; the sentence keeps printing as it does now.
 - [TAIL-CRISIS; named for HISTORY; src/data/stressTypes.js]
 
-**735. The plague's viability note 'Fewer people come to market, travel is discouraged, and some goods stop arriving.' still presumes a market.**
+**833. The plague's viability note 'Fewer people come to market, travel is discouraged, and some goods stop arriving.' still presumes a market.**
 
 - Towns touched: count not recorded.
 - Before: “Fewer people come to market, travel is discouraged, and some goods stop arriving.”
@@ -8645,14 +9874,14 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: A veto does not apply to a sentence left as it is; the sentence keeps printing as it does now.
 - [TAIL-CRISIS-3; named for HISTORY; src/data/stressTypes.js; src/data/stressTypesMeta.js]
 
-**736. The crisis page's 'gains' and 'loses' do not agree with a plural power name ('Merchant Guilds gains', 'Craft Guilds gains').**
+**834. The crisis page's 'gains' and 'loses' do not agree with a plural power name ('Merchant Guilds gains', 'Craft Guilds gains').**
 
 - Towns touched: count not recorded.
 - Why: Only the new labels were made to agree; the rest of the copy table was left.
 - If vetoed: A veto does not apply to a sentence left as it is; the sentence keeps printing as it does now.
 - [TAIL-CRISIS-3; src/domain/crisis/crisisPage.js (CRISIS_PAGE_COPY, gainsMany, losesMany)]
 
-**737. The war iron hook ('... and the smiths have nothing to mend tools with') still says 'the smiths'.**
+**835. The war iron hook ('... and the smiths have nothing to mend tools with') still says 'the smiths'.**
 
 - Towns touched: count not recorded.
 - Before: “... and the smiths have nothing to mend tools with”
@@ -8660,77 +9889,77 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: A veto does not apply to a sentence left as it is; the sentence keeps printing as it does now.
 - [TAIL-CRISIS-3; WAR_IRON_HOOK; src/generators/economy/foodBalance.js]
 
-**738. A tension line names 'the orthodox clergy' in a thorp with no religious house (seen in r2s-infiltrated-thorp-3).**
+**836. A tension line names 'the orthodox clergy' in a thorp with no religious house (seen in r2s-infiltrated-thorp-3).**
 
 - Towns touched: count not recorded.
 - Why: Seen while reading the 'Religious Tension' label; it is the history writer's.
 - If vetoed: A veto does not apply to a sentence left as it is; the sentence keeps printing as it does now.
 - [TAIL-CRISIS-3; named for HISTORY; src/data/historyData.js]
 
-**739. The crisis writes its merchants' sentence onto any power whose name has 'guild' or 'merchant' (for example 'Thieves' Guild'), 6 untouched printings.**
+**837. The crisis writes its merchants' sentence onto any power whose name has 'guild' or 'merchant' (for example 'Thieves' Guild'), 6 untouched printings.**
 
 - Towns touched: 6 printings on the 720 sample towns.
 - Why: That sentence is written in the stress faction file, which belongs to another seat; the stake table skips criminal powers because of it.
 - If vetoed: A veto does not apply to a sentence left as it is; the sentence keeps printing as it does now.
 - [TAIL-CRISIS-6; named for the stressFactions.js seat; src/generators/power/stressFactions.js]
 
-**740. The crisis-blind dossier check is still red on its half about quiet pools: five pools of page text are silent under a siege by declared design, or read a compound fact the check says to set aside.**
+**838. The crisis-blind dossier check is still red on its half about quiet pools: five pools of page text are silent under a siege by declared design, or read a compound fact the check says to set aside.**
 
 - Towns touched: five pools.
 - Why: The fix needs a set-aside keyed by pool and family, which is the chair's to approve.
 - If vetoed: A veto does not apply to a sentence left as it is; the sentence keeps printing as it does now.
 - [TAIL-CRISIS-7, TAIL-CRISIS-8; pools DS-POW-6 DS-GEN-13 DS-ECO-10 DS-ECO-12 DS-DEF-2; tests/domain/crisisBlindDossierProse.test.js]
 
-**741. In the crisis-blind check, one half of the famine case now asserts nothing, and the finder's three succession phrases are dead.**
+**839. In the crisis-blind check, one half of the famine case now asserts nothing, and the finder's three succession phrases are dead.**
 
 - Towns touched: count not recorded.
 - Why: The page text lines they looked for were reworded; the finder was lent, not cured.
 - If vetoed: A veto does not apply to a sentence left as it is; the sentence keeps printing as it does now.
 - [TAIL-CRISIS-8; 51217c0e; power: noRival; DS-POW-4; tests/domain/coherence/crisisBlindProse.test.js]
 
-**742. The iron-hooks check fails on two hamlets (r2r-hamlet-35 and -30): since the later iron-import rule, no iron hook prints there. The test seat is to re-key it to other towns (r2r-town-20, r2r-town-1).**
+**840. The iron-hooks check fails on two hamlets (r2r-hamlet-35 and -30): since the later iron-import rule, no iron hook prints there. The test seat is to re-key it to other towns (r2r-town-20, r2r-town-1).**
 
 - Towns touched: 2 hamlets.
 - Why: The two hamlets import only salt and incense, so the hooks no longer print there; the premise of the check changed.
 - If vetoed: A veto does not apply to a sentence left as it is; the sentence keeps printing as it does now.
 - [TAIL-CRISIS-7; tailCrisisIronHooks; tests/generators/tailCrisisIronHooks.test.js]
 
-**743. Other seats' reds in this area stay red: three lines of the style check on the history and narrative data (the words 'the record', 'a stranger' and 'faction'), and three checks of the display-economy crisis marks.**
+**841. Other seats' reds in this area stay red: three lines of the style check on the history and narrative data (the words 'the record', 'a stranger' and 'faction'), and three checks of the display-economy crisis marks.**
 
 - Towns touched: count not recorded.
 - Why: They are not this group's files; they are named for the history, narrative and display-economy seats.
 - If vetoed: A veto does not apply to a sentence left as it is; the sentence keeps printing as it does now.
 - [TAIL-CRISIS-7; tests/lint/styleLaw.walker.test.js; tests/components/displayEconCrisisMarks.test.jsx]
 
-**744. No check guards the shape of a habit line under a quarantine ('attend', 'gather', 'walk to the next village' beside a plague); the writer was cured but nothing watches it. A word for 'a power other than the governing one' was also missing before 'rival power' was granted.**
+**842. No check guards the shape of a habit line under a quarantine ('attend', 'gather', 'walk to the next village' beside a plague); the writer was cured but nothing watches it. A word for 'a power other than the governing one' was also missing before 'rival power' was granted.**
 
 - Towns touched: count not recorded.
 - Why: The seat asked the chair for the word and for a check kind; neither existed at that point.
 - If vetoed: A veto does not apply to a sentence left as it is; the sentence keeps printing as it does now.
 - [TAIL-CRISIS; src/domain/dossier/faithReading.js]
 
-**745. The new test for the stake rows (batch 8) has negative assertions that are not routed through the shared anchored-negatives helper, as the chair's later note requires.**
+**843. The new test for the stake rows (batch 8) has negative assertions that are not routed through the shared anchored-negatives helper, as the chair's later note requires.**
 
 - Towns touched: count not recorded.
 - Why: The note arrived after the test was written; the next seat was told to route them.
 - If vetoed: A veto does not apply to a sentence left as it is; the sentence keeps printing as it does now.
 - [TAIL-CRISIS-6; tests/domain/tailCrisisBatch8.test.js; tests/helpers/anchoredNegatives.js]
 
-**746. Carried failures not caused by this group, failing at both the base and the tree in the tests that name the touched writers (18 in batch 1, 32 in batch 2, 1 in batch 3, 4 in batch 4, 9 in the iron-hook batch, 10 in batch 6, 19 in the late re-read batch, 8 for the stake row, 10 in batch 8), the presumed-thing check at 147 or 149 hits, the twelve-town page grid with 2 falls (r2r-city-0 and r2s-insurgency-metropolis-0), and the sovereignty check's estate file count and each-park debt.**
+**844. Carried failures not caused by this group, failing at both the base and the tree in the tests that name the touched writers (18 in batch 1, 32 in batch 2, 1 in batch 3, 4 in batch 4, 9 in the iron-hook batch, 10 in batch 6, 19 in the late re-read batch, 8 for the stake row, 10 in batch 8), the presumed-thing check at 147 or 149 hits, the twelve-town page grid with 2 falls (r2r-city-0 and r2s-insurgency-metropolis-0), and the sovereignty check's estate file count and each-park debt.**
 
 - Towns touched: count not recorded.
 - Why: They were already red at the base; the seats listed them and did not repair them.
 - If vetoed: A veto does not apply to a sentence left as it is; the sentence keeps printing as it does now.
 - [TAIL-CRISIS to TAIL-CRISIS-6; tests/lint/sovereigntyLightingContract.walker.test.js; tests/lint/presumedThings.register.json]
 
-**747. The "magic dependency" lines still contradict the food records in 93 towns.**
+**845. The "magic dependency" lines still contradict the food records in 93 towns.**
 
 - Towns touched: 13 rows, 93 towns (the class); 4 rows named first.
 - Why: The defence record says a chain is sustained by magic beside a food ledger that holds none; it is the record's, outside this group (rule C9).
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CORPUS-DEF seat; rows B27765, B27760, B19765, 28742, B14709, 04098, 11437, B10908, B03973; DS-DEF-9 magicDependency; defenseProfile.magicDependency]
 
-**748. The "Holding", "Contested" and "Critical" power lines (19 rows) disagree with the page's GOVERNMENT table.**
+**846. The "Holding", "Contested" and "Critical" power lines (19 rows) disagree with the page's GOVERNMENT table.**
 
 - Towns touched: count not recorded as one figure; 19 rows named.
 - Why: Two homes for one fact: the contenders model and the power table; the record's lane.
@@ -8745,7 +9974,7 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 
 - [TAIL-CORPUS-DEF seat; rows 13371 19242 13139 13169 16423 13247 13583 20174 13579 16375 20172 15175 13581 16424 01055 28453 13595 14680 13596; DS-POW-4]
 
-**749. Power names with a slash ("Military/Guard") are still printed raw inside sentences.**
+**847. Power names with a slash ("Military/Guard") are still printed raw inside sentences.**
 
 - Towns touched: 429 distinct sentences, 2,892 printings.
 - Before: “if Military/Guard refuses it”
@@ -8753,14 +9982,14 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CORPUS-DEF seat; rulings C4, C15; powerStateProse.js; powerSentenceName.js]
 
-**750. The coherence file crisisBlindFindings still holds patterns for the retired words "is safe in the hall"; they are dead patterns.**
+**848. The coherence file crisisBlindFindings still holds patterns for the retired words "is safe in the hall"; they are dead patterns.**
 
 - Towns touched: count not recorded.
 - Why: Outside this group; its owner's group may retire or re-word them.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CORPUS-DEF seat; src/domain/coherence/crisisBlindFindings.js]
 
-**751. The "Economic Survival: STRONG" lines still read "went into this trouble with money in hand" in towns rated Poor or Struggling.**
+**849. The "Economic Survival: STRONG" lines still read "went into this trouble with money in hand" in towns rated Poor or Struggling.**
 
 - Towns touched: STRONG v12: 43 towns (12 Poor or Struggling), v3: 41 (15).
 - Before: “went into this trouble with money in hand”
@@ -8768,7 +9997,7 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CORPUS-DEF seat; rows 20245 21035 22321; DS-DEF-2 Economic Survival STRONG v12, v3; ruling C18; defenseGenerator.js]
 
-**752. Test failures named for other files or for the chair were not cured by this seat.**
+**850. Test failures named for other files or for the chair were not cured by this seat.**
 
 - Towns touched: count not recorded.
 - Why: The cause is outside this group's files (ruling U2 case iii), or a conflict of two cures that is the chair's.
@@ -8790,7 +10019,7 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 
 - [TAIL-CORPUS-DEF seat; ruling U2; tests defenseInvasionWithinACriticalBand, defensePostureAgainstItsFacts, defenseWatchIsNotTheLevy, threatRowsTrueUnderBand, defenseWithinTheBar, defenseWordsFindings, defenceTraditionReaders, defenseTabFlow, crimeLineDisqualifiers, defensePostureReadsBadge]
 
-**753. Many lines are known to be false or doubtful and were not reached: the rows printing in five towns or more, and 44 rows in fewer than five towns.**
+**851. Many lines are known to be false or doubtful and were not reached: the rows printing in five towns or more, and 44 rows in fewer than five towns.**
 
 - Towns touched: each row prints in 5 to 19 towns (counts in the rows); plus 44 rows in fewer than five towns.
 - Why: The work stopped at its hand-back; the list is measured at an earlier base.
@@ -8826,42 +10055,42 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 
 - [TAIL-CORPUS-DEF seat; worklist WORKLIST-CORPUS-DEF; rows listed in rows]
 
-**754. Lists of known exceptions and checks named stale or red: the wiring count, the prose byte baseline and the shift list were not re-taken; the presumed-things list shows stale 2 after a merge; some test files stay red.**
+**852. Lists of known exceptions and checks named stale or red: the wiring count, the prose byte baseline and the shift list were not re-taken; the presumed-things list shows stale 2 after a merge; some test files stay red.**
 
 - Towns touched: count not recorded.
 - Why: Carried from the base or the merge; not this seat's files.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CORPUS-DEF seat; wiringCensusDeclared; presumed-things fresh 145 stale 2 (narrativeText.js, computeActiveChains.js); 33 to 36 reds at base, 32 after U2; page-census grid 2 falls (r2r-city-0, r2s-insurgency-metropolis-0 P7a)]
 
-**755. The page was not counted again after the last change (the occupied-town line), and batch 4 and 5 were not on the readers' line.**
+**853. The page was not counted again after the last change (the occupied-town line), and batch 4 and 5 were not on the readers' line.**
 
 - Towns touched: count not recorded.
 - Why: Replay shows no draw of the 720 moved by the new second version of the line; the rest are test edits.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CORPUS-DEF seat; seat 4 hand-back]
 
-**756. Coal and peat are still listed as made and exported with no house needed.**
+**854. Coal and peat are still listed as made and exported with no house needed.**
 
 - Towns touched: coal 116 and peat 94 towns listed as made; 102 and 42 exported.
 - Why: They were left ungated by design; re-deciding them is the chair's.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DEFECON-C seat; rulings D7, D18, D30; computeActiveChains.js]
 
-**757. When a resource event happens in play, the town's "Produced locally" list is worked out again without the town's houses (and without terrain), so the old land reading comes back until the next town is made.**
+**855. When a resource event happens in play, the town's "Produced locally" list is worked out again without the town's houses (and without terrain), so the old land reading comes back until the next town is made.**
 
 - Towns touched: count not recorded.
 - Why: The code that does it is another file's (named, not built).
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DEFECON-C seat; resourceDynamicsKernel.js; computeActiveChains.js]
 
-**758. The founding reason "grew around salt workings" may still print where no salt works stands.**
+**856. The founding reason "grew around salt workings" may still print where no salt works stands.**
 
 - Towns touched: count not recorded; not measured.
 - Why: The reason is drawn from the exports, not from a salt works; not measured here, named for the founding's file.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DEFECON-C seat; commit 28f86423c; founding file]
 
-**759. Fish-chain goods still print under a fish famine (rows 22820, 10282, 22836, 22837, 22847, 10284, 22821, 22838, 09012), and a Brickmaker with no clay still shows its chain (row 24992).**
+**857. Fish-chain goods still print under a fish famine (rows 22820, 10282, 22836, 22837, 22847, 10284, 22821, 22838, 09012), and a Brickmaker with no clay still shows its chain (row 24992).**
 
 - Towns touched: the fish chain goods: 11, 10, 9, 8, 3, 3, 2, 1, 1 towns by row; the Brickmaker with no clay 23 towns.
 - Why: Under a famine no line should offer the food that failed; not begun.
@@ -8883,7 +10112,7 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 
 - [TAIL-DEFECON-C seat; rows 22820 10282 22836 22837 22847 10284 22821 22838 09012 24992; activeChains]
 
-**760. The "Port Revenue" income row is not renamed for an air dock.**
+**858. The "Port Revenue" income row is not renamed for an air dock.**
 
 - Towns touched: count not recorded.
 - Before: “Port Revenue”
@@ -8891,21 +10120,21 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DEFECON-C seat; ruling D19]
 
-**761. Other lists named stale and checks red before and after: lists of known exceptions are out of date and some checks stay red.**
+**859. Other lists named stale and checks red before and after: lists of known exceptions are out of date and some checks stay red.**
 
 - Towns touched: count not recorded.
 - Why: Carried from the base, named stale; not re-taken.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DEFECON-C seat; presumed-things register (2 stale: the retired banalité literals 2aaeb82d8032d31f, 26f1ab483e468e4b); page-census grid (r2r-city-0 P7a, r2s-insurgency-metropolis-0 P7a); reds generatorGoldenMaster, worldFactRederive A7, coherenceAgreeCures x2, urbanBandInstitutions G3/G5, recordRegisterTotality A7 x2]
 
-**762. Not done at the hand-back: the page was not counted again after the last three changes, and the full checks for the fishing-grounds salt change were not run.**
+**860. Not done at the hand-back: the page was not counted again after the last three changes, and the full checks for the fishing-grounds salt change were not run.**
 
 - Towns touched: count not recorded.
 - Why: Hand-back came at the time limit; owed to the next seat.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DEFECON-C seat; commits 0e838bc65, 680d16b54 and the D34 (b) commit]
 
-**763. The viability summary text "has 1 operational dependency that require active management. 1 plot hooks available." has two agreement faults.**
+**861. The viability summary text "has 1 operational dependency that require active management. 1 plot hooks available." has two agreement faults.**
 
 - Towns touched: count not recorded (every town with one dependency or one hook).
 - Before: “has 1 operational dependency that require active management. 1 plot hooks available.”
@@ -8913,21 +10142,21 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: Effect not stated in the hand-back.
 - [TAIL-DEFECON-3 and -4; src/domain/viabilitySummary.js, src/domain/display/viabilityFilter.js]
 
-**764. A whole class of sentences is written before their facts are final: true when drawn, false after the town data moved later.**
+**862. A whole class of sentences is written before their facts are final: true when drawn, false after the town data moved later.**
 
 - Towns touched: about a hundred sentences across the whole read; count of towns not recorded.
 - Why: The class is not this group's to move; each such row is named with that reason (ruling D23).
 - If vetoed: Effect not stated in the hand-back.
 - [TAIL-DEFECON; ruling D23]
 
-**765. The income-mix cut is written twice (two copies of the same threshold), held together only by a test; a single shared home is owed.**
+**863. The income-mix cut is written twice (two copies of the same threshold), held together only by a test; a single shared home is owed.**
 
 - Towns touched: count not recorded.
 - Why: One copy lives in a file of another group; building a shared home was not this group's to do alone.
 - If vetoed: Effect not stated in the hand-back.
 - [TAIL-DEFECON-3; ruling D29; src/generators/economy/prosperity.js :: INCOME_LEADER_FROM, economyStateProse.js :: LEADER_FROM]
 
-**766. A culture line "Herds and field grain set a strongly seasonal food calendar." stands only where herds and grain both feed the place; a test on it stays red.**
+**864. A culture line "Herds and field grain set a strongly seasonal food calendar." stands only where herds and grain both feed the place; a test on it stays red.**
 
 - Towns touched: count not recorded; the herd towns hold no grain.
 - Before: “Herding and mixed farming …”
@@ -8936,7 +10165,7 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: Effect not stated in the hand-back; the test is left red.
 - [TAIL-DEFECON-6; commit 825bcf24 (another seat); src/data/cultureProfiles.js; tests/generators/r3c10FoodLinesTrue.test.js]
 
-**767. The line "… leads the defence: the defence of the place, with no one named to lead it." is still printed.**
+**865. The line "… leads the defence: the defence of the place, with no one named to lead it." is still printed.**
 
 - Towns touched: count not recorded (two sentences).
 - Before: “… leads the defence: the defence of the place, with no one named to lead it.”
@@ -8944,21 +10173,21 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: Effect not stated in the hand-back.
 - [TAIL-DEFECON-D; src/domain/crisis/crisisCast.js, crisisHooks.js]
 
-**768. Still wrong and left: the Outlook line 'Much of what X eats is brought in …; its own land does not produce enough.' (rows 14073, 14072, 14075) prints without a share condition. The chair later moved these rows to another group's helper.**
+**866. Still wrong and left: the Outlook line 'Much of what X eats is brought in …; its own land does not produce enough.' (rows 14073, 14072, 14075) prints without a share condition. The chair later moved these rows to another group's helper.**
 
 - Towns touched: count not recorded.
 - Why: The file that writes it belongs to another group; the cure named is a share condition on the fourth line of the covered pool.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-ECON; X13; src/domain/dossierViewModel.js]
 
-**769. Not run to the end: the 244 test files that name the touched files; one run was voided by the helper's own checkout. Five files red at two tips (powerStateProseDesk 2, heraldCausalVoice 1, pageCensusFindings 2, entityIndex 1, dossierPhoneFloorAllViews 2) show the same counts at both, and their cause was NOT TRACED.**
+**867. Not run to the end: the 244 test files that name the touched files; one run was voided by the helper's own checkout. Five files red at two tips (powerStateProseDesk 2, heraldCausalVoice 1, pageCensusFindings 2, entityIndex 1, dossierPhoneFloorAllViews 2) show the same counts at both, and their cause was NOT TRACED.**
 
 - Towns touched: count not recorded.
 - Why: The helper's clock ran out; the first lead is the power-desk check's 'toMatch() expects a string, got object'.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-CIVIC-4; ruling U2; tests/domain/powerStateProseDesk.test.js and four more]
 
-**770. Still wrong and left: 28 sentences still print a slashed power label: the crisis hooks' Plot Hooks lines ('In the war, <N> of Military/Guard leads the defence', '… if it gives way, Military/Guard loses most'; 56 printings), a vacancy row of the ruling chain (1), an Overview line (1) and a Tonight-sheet secret (1).**
+**868. Still wrong and left: 28 sentences still print a slashed power label: the crisis hooks' Plot Hooks lines ('In the war, <N> of Military/Guard leads the defence', '… if it gives way, Military/Guard loses most'; 56 printings), a vacancy row of the ruling chain (1), an Overview line (1) and a Tonight-sheet secret (1).**
 
 - Towns touched: 56 printings and 3 more in the 720 sample towns; count of towns not recorded.
 - Before: “In the war, <N> of Military/Guard leads the defence”
@@ -8966,14 +10195,14 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-CIVIC-3; V1; src/domain/crisis/crisisHooks.js; src/domain/dossier/powerStrata.js]
 
-**771. A guard is owed to the sample-taking tools: the sample dump's per-section dedupe misleads a reader on counts and repeated values.**
+**869. A guard is owed to the sample-taking tools: the sample dump's per-section dedupe misleads a reader on counts and repeated values.**
 
 - Towns touched: count not recorded.
 - Why: It is the chair's, not the helper's (X16).
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-CIVIC; X4, X16; render.census3.jsx]
 
-**772. Still wrong and left: the 'Current Tensions' and Plot Hooks lines on the World/History page and the Overview camps print the record's own current tension, but the tension pool draws past-tense events ('Great flood', 'Plague years', 'Heresy trial') and camps ('Price regulators' in a thorp of 7) that the town's history never holds and its size cannot bear.**
+**870. Still wrong and left: the 'Current Tensions' and Plot Hooks lines on the World/History page and the Overview camps print the record's own current tension, but the tension pool draws past-tense events ('Great flood', 'Plague years', 'Heresy trial') and camps ('Price regulators' in a thorp of 7) that the town's history never holds and its size cannot bear.**
 
 - Towns touched: about 28 rows; town count not recorded.
 - Before: “Price regulators”
@@ -8981,35 +10210,35 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-CIVIC; rows B07041 and about 27 more; src/data/historyData.js; history.currentTensions]
 
-**773. Still wrong and left: crisis hook lines 'takes the worst of it' and 'holds the key to it' name a person who is not of the house named.**
+**871. Still wrong and left: crisis hook lines 'takes the worst of it' and 'holds the key to it' name a person who is not of the house named.**
 
 - Towns touched: count not recorded.
 - Why: reason not stated in the hand-back
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-CIVIC; rows B11070, B11113, B11121; src/domain/crisis/crisisHooks.js]
 
-**774. Still wrong and left (record gap): 'X vs Y High' prints beside the same pair read symbiotic or stable, because the record's relation field and its conflicts field disagree. Batch 2 only stops the 'stable' chip; the generator must reconcile the two.**
+**872. Still wrong and left (record gap): 'X vs Y High' prints beside the same pair read symbiotic or stable, because the record's relation field and its conflicts field disagree. Batch 2 only stops the 'stable' chip; the generator must reconcile the two.**
 
 - Towns touched: 10 rows; town count not recorded.
 - Why: Named for the relations generator.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-CIVIC; rows 09930 and 9 more; src/generators/factionDynamics.js]
 
-**775. Still wrong and left (record gap): a criminal row's direction 'escalating' prints at the truce rung 'equilibrium' (for example 'Feudal Appointee~Thieves' Guild escalating' beside 'leave each other alone').**
+**873. Still wrong and left (record gap): a criminal row's direction 'escalating' prints at the truce rung 'equilibrium' (for example 'Feudal Appointee~Thieves' Guild escalating' beside 'leave each other alone').**
 
 - Towns touched: 6 rows; town count not recorded.
 - Why: reason not stated in the hand-back
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-CIVIC; rows 07646, 16740, 23138, 03799, B12623, B14083; src/generators/factionDynamics.js govCriminalRelation; src/data/people/dmPowerLines.js]
 
-**776. Still wrong and left: NPC constraint, relationship and goal lines claim offices or houses that the roster does not give.**
+**874. Still wrong and left: NPC constraint, relationship and goal lines claim offices or houses that the roster does not give.**
 
 - Towns touched: 7 rows; town count not recorded.
 - Why: reason not stated in the hand-back
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-CIVIC; rows 05688, B00530, 00587, 26926, B07353, B28204, 20796; src/data/npcData.js; src/data/people]
 
-**777. Still wrong and left: a gendered house title ('the alewife') on a male holder.**
+**875. Still wrong and left: a gendered house title ('the alewife') on a male holder.**
 
 - Towns touched: count not recorded.
 - Before: “the alewife”
@@ -9017,7 +10246,7 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-CIVIC; row B01667; src/generators/people/mintTitles.js]
 
-**778. Still wrong and left: 'Legal Infrastructure Court only' prints where no court is on the roster.**
+**876. Still wrong and left: 'Legal Infrastructure Court only' prints where no court is on the roster.**
 
 - Towns touched: count not recorded.
 - Before: “Legal Infrastructure Court only”
@@ -9025,7 +10254,7 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-CIVIC; row B11922; src/domain/display/defenseDisplay.js]
 
-**779. Still wrong and left: 'a quiet hamlet' prints beside a regional monster threat.**
+**877. Still wrong and left: 'a quiet hamlet' prints beside a regional monster threat.**
 
 - Towns touched: count not recorded.
 - Before: “a quiet hamlet”
@@ -9033,7 +10262,7 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-CIVIC; row B00937; src/data/dossierStateProse/defense.generated.js]
 
-**780. Still wrong and left: 'Nothing at {place} protects the {seat} now' prints where the seat is the strongest power or has a symbiotic guard.**
+**878. Still wrong and left: 'Nothing at {place} protects the {seat} now' prints where the seat is the strongest power or has a symbiotic guard.**
 
 - Towns touched: count not recorded.
 - Before: “Nothing at {place} protects the {seat} now”
@@ -9041,7 +10270,7 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-CIVIC; rows 15073, B14249; src/data/dossierStateProse/power.generated.js]
 
-**781. Still wrong and left: a founding reason 'founded to trade by water' and a food line 'the gap is closed through the tracks' that the record contradicts.**
+**879. Still wrong and left: a founding reason 'founded to trade by water' and a food line 'the gap is closed through the tracks' that the record contradicts.**
 
 - Towns touched: count not recorded.
 - Before: “founded to trade by water”
@@ -9049,7 +10278,7 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-CIVIC; rows B11462, 20609; src/generators/narrative/settlementOriginProse.js]
 
-**782. Still wrong and left: 'run by patronage and law' prints for a town governed by household consensus.**
+**880. Still wrong and left: 'run by patronage and law' prints for a town governed by household consensus.**
 
 - Towns touched: count not recorded.
 - Before: “run by patronage and law”
@@ -9057,21 +10286,21 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-CIVIC; row 12547; src/domain/summary/settlementQuickGuide.js]
 
-**783. Not taken: the chair's third point in X8, 'prefer the label's own one plain word' for the cause words. The crisis labels name their cause in phrases ('Famine Conditions', 'Active Siege', 'Aftermath of Betrayal', 'Plague Unrest — Plague Conditions', compound '+' labels), and a word table would cost more than the reword; it would also say 'famine' beside the food cause's 'hunger'.**
+**881. Not taken: the chair's third point in X8, 'prefer the label's own one plain word' for the cause words. The crisis labels name their cause in phrases ('Famine Conditions', 'Active Siege', 'Aftermath of Betrayal', 'Plague Unrest — Plague Conditions', compound '+' labels), and a word table would cost more than the reword; it would also say 'famine' beside the food cause's 'hunger'.**
 
 - Towns touched: count not recorded.
 - Why: A word table would cost more than the reword.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-CIVIC; X8]
 
-**784. Left as it is and named: the Economics tab's stores call did not yet pass the crisis to the stores sentence.**
+**882. Left as it is and named: the Economics tab's stores call did not yet pass the crisis to the stores sentence.**
 
 - Towns touched: count not recorded.
 - Why: A later helper passes the crisis in after the crisis helper's work lands (cured in batch 3).
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-ECON-2; X11; src/components/tabs/EconomicsTab.jsx]
 
-**785. Named for the chair: 'ships bring in about a third of the rest' under a siege, and the PDF cover's 'Top export: Salted fish (naval route only)', where the siege law and the sea exception disagree. Both lines were gone at the base once the sample was re-taken, and the chair struck them.**
+**883. Named for the chair: 'ships bring in about a third of the rest' under a siege, and the PDF cover's 'Top export: Salted fish (naval route only)', where the siege law and the sea exception disagree. Both lines were gone at the base once the sample was re-taken, and the chair struck them.**
 
 - Towns touched: count not recorded.
 - Before: “ships bring in about a third of the rest”
@@ -9079,14 +10308,14 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-ECON-2/3; X18, X20; rows 00615, 29296; src/domain/foodCarrier.js carriersOf; src/domain/chainStateShown.js seaOpenTo]
 
-**786. Still wrong and left: state chips that name work with no house for it: 'Mining & Coinage Running' with no mine or mint (13751), 'Almshouse Care Operational' with no almshouse (03456), 'Bowyer & fletcher Magically Sustained' (04478).**
+**884. Still wrong and left: state chips that name work with no house for it: 'Mining & Coinage Running' with no mine or mint (13751), 'Almshouse Care Operational' with no almshouse (03456), 'Bowyer & fletcher Magically Sustained' (04478).**
 
 - Towns touched: count not recorded.
 - Why: Not this helper's leaves; named for the chain-state and service-state writers.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-ECON-2; src/domain/display/chainStateShown.js serviceStateShown]
 
-**787. Still wrong and left: the Resources tab prints 'Fully exploited Livestock' under a famine that failed the herds, and its exploitation rows show the failed food's resource as 'full' under a famine (journal rows 35544, 35551, 35555).**
+**885. Still wrong and left: the Resources tab prints 'Fully exploited Livestock' under a famine that failed the herds, and its exploitation rows show the failed food's resource as 'full' under a famine (journal rows 35544, 35551, 35555).**
 
 - Towns touched: count not recorded.
 - Before: “✓ Fully exploited Livestock”
@@ -9094,7 +10323,7 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-ECON-2/3/4; B29895; X25.2; X27; src/domain/display/validationOnPage.js exploitationGroupsShown]
 
-**788. Still doubtful and left as data: the catalogue of commodities pairs some resources with goods the readers doubted, behind about 45 chip rows. The display prints them as the record's facts; the cure is a change to the data, which the chair named for the record's next measure.**
+**886. Still doubtful and left as data: the catalogue of commodities pairs some resources with goods the readers doubted, behind about 45 chip rows. The display prints them as the record's facts; the cure is a change to the data, which the chair named for the record's next measure.**
 
 - Towns touched: about 45 chip rows; town count not recorded.
 - Why: It is data and a record move, not a display condition; named, not changed (ruling X28).
@@ -9113,147 +10342,147 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 
 - [TAIL-DISPLAY-ECON-3/4; X28; src/data/goods/identity.js RESOURCE_DATA]
 
-**789. Still wrong and left: 'Its own food comes from its X and little else' (rows B11520, 12110, 12104, 12111) and 'The table rests on …' (rows 22206, 16853, B19491), where under a siege the hunters cannot leave and the houses the table names are missing.**
+**887. Still wrong and left: 'Its own food comes from its X and little else' (rows B11520, 12110, 12104, 12111) and 'The table rests on …' (rows 22206, 16853, B19491), where under a siege the hunters cannot leave and the houses the table names are missing.**
 
 - Towns touched: count not recorded.
 - Why: Named for the food-source writer; the readers' rows are not yet verified.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-ECON-2/3/4; src/domain/foodways.js]
 
-**790. Still different and left: the PDF's Resources & Production page and the journal's Resources page still print the old formatter words (for example 'Defended Pass'), while the tab now prints the catalogue's words. Named for the helpers who own the exports. The civic helper's V11 later changed the PDF and the journal to the catalogue's label.**
+**888. Still different and left: the PDF's Resources & Production page and the journal's Resources page still print the old formatter words (for example 'Defended Pass'), while the tab now prints the catalogue's words. Named for the helpers who own the exports. The civic helper's V11 later changed the PDF and the journal to the catalogue's label.**
 
 - Towns touched: count not recorded.
 - Why: The three surfaces agreed before; now the tab prints the catalogue's word and the two exports do not.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-ECON-4; X26; src/pdf/sections/ResourcesProduction.jsx; src/foundry/journalPages.js resourcesPage]
 
-**791. Different words left: the PDF says 'Black market capture: N% of economy' while the tab says 'N% of trade unrecorded' for the same figure.**
+**889. Different words left: the PDF says 'Black market capture: N% of economy' while the tab says 'N% of trade unrecorded' for the same figure.**
 
 - Towns touched: count not recorded.
 - Why: The PDF's words are its own; named for the exports helpers.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-ECON-5; src/pdf/]
 
-**792. Still red and carried: two of this group's own checks (displayEconCrisisMarks, 3 failures, and displayEconRelianceFoodWords) fail at the joined line because later record changes moved their sample towns; they are to be re-keyed by identity. Two other checks fail for reasons outside this group (the field manifest's consumer list for the magic recovery field; a label-join site added in the claim-standing file).**
+**890. Still red and carried: two of this group's own checks (displayEconCrisisMarks, 3 failures, and displayEconRelianceFoodWords) fail at the joined line because later record changes moved their sample towns; they are to be re-keyed by identity. Two other checks fail for reasons outside this group (the field manifest's consumer list for the magic recovery field; a label-join site added in the claim-standing file).**
 
 - Towns touched: count not recorded.
 - Why: Not this helper's files, or left for the next helper.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-ECON-5; tests/components/displayEconCrisisMarks.test.jsx; tests/joins/fieldManifest.test.js; tests/joins/labelJoins.test.js]
 
-**793. Rows under five towns were left unread for the next reading.**
+**891. Rows under five towns were left unread for the next reading.**
 
 - Towns touched: count not recorded.
 - Why: The chair's ruling C19 said they wait.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CORPUS-ECO-4; C19 rows under five towns; src/data/dossierStateProse/economy.generated.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md]
 
-**794. The six narrowest sentences that printed in fewer towns after batch 3 were not read.**
+**892. The six narrowest sentences that printed in fewer towns after batch 3 were not read.**
 
 - Towns touched: count not recorded.
 - Why: The seat read the widest twelve of the eighteen and left the other six.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CORPUS-ECO-2; batch 3 after run; bb4c95eb8; src/data/dossierStateProse/economy.generated.js]
 
-**795. Several checks stay red at the base and were carried, not cured: the foundingWorldBones test (Mossgate religious authorities hold power 15/20) and the heraldCausalVoice test (a time band's predicate leans on a pronoun).**
+**893. Several checks stay red at the base and were carried, not cured: the foundingWorldBones test (Mossgate religious authorities hold power 15/20) and the heraldCausalVoice test (a time band's predicate leans on a pronoun).**
 
 - Towns touched: count not recorded.
 - Why: The seat changed no generator file, so the founding-bones red is not this group's; the pronoun red is in the time band's predicate, not in these lines.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CORPUS-ECO-4; U2 (iii), C23 carried; tests/data/foundingWorldBones.test.js, tests/domain/heraldCausalVoice.test.js; tests/data/foundingWorldBones.test.js, tests/domain/heraldCausalVoice.test.js]
 
-**796. The list of known prose shifts and the prose size baseline were already red at the base and every reword moves them again; they are named stale and to be re-derived once at the close.**
+**894. The list of known prose shifts and the prose size baseline were already red at the base and every reword moves them again; they are named stale and to be re-derived once at the close.**
 
 - Towns touched: count not recorded.
 - Why: Re-deriving them at each batch was not done.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CORPUS-ECO; Registers named stale; docs/content/prose-shift-register.json (SEAM car 4); docs/content/prose-shift-register.json]
 
-**797. The batch 8 after run (sample towns after the food-source wording) was not taken.**
+**895. The batch 8 after run (sample towns after the food-source wording) was not taken.**
 
 - Towns touched: count not recorded.
 - Why: The batch changed text only and no draw moved; the next seat's before run is its after run.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CORPUS-ECO-4; batch 8; 4467cd7d6 (base); src/data/dossierStateProse/economy.generated.js]
 
-**798. Two whole-program checks were not run at the end of batch 6: the check for things the page presumes, and the grid over twelve test towns.**
+**896. Two whole-program checks were not run at the end of batch 6: the check for things the page presumes, and the grid over twelve test towns.**
 
 - Towns touched: count not recorded.
 - Why: The time budget ran out.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-HISTORY-5; batch 6; node scripts/census/page-census.mjs --grid]
 
-**799. Three arrival scenes are known to be still wrong and not yet cured: horse traders meeting under a quarantine, carts of cloth and wool where none is made or sold, and reagent stalls where no alchemist or apothecary stands.**
+**897. Three arrival scenes are known to be still wrong and not yet cured: horse traders meeting under a quarantine, carts of cloth and wool where none is made or sold, and reagent stalls where no alchemist or apothecary stands.**
 
 - Towns touched: count not recorded.
 - Why: They were named by the chair on the 04:08 note, not owed; they still need measuring.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-HISTORY-5; the chair's note of 04:08; arrivalScene]
 
-**800. Other worklist rows printing in five towns or more are not cured: the foodways rows (11894, 28512), B19917, 07400, the culture rows, the rest of the arrival rows under siege and with no market, and the rows about gathering under a plague.**
+**898. Other worklist rows printing in five towns or more are not cured: the foodways rows (11894, 28512), B19917, 07400, the culture rows, the rest of the arrival rows under siege and with no market, and the rows about gathering under a plague.**
 
 - Towns touched: count not recorded.
 - Why: They were left for the next batch.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-HISTORY-5; worklist rows 11894, 28512, B19917, 07400; Y3, Y4, Y8]
 
-**801. Under a plague or a quarantine, lines that gather a crowd (a fair, a market day, a procession, a festival, a full tavern) still print as in ordinary times.**
+**899. Under a plague or a quarantine, lines that gather a crowd (a fair, a market day, a procession, a festival, a full tavern) still print as in ordinary times.**
 
 - Towns touched: count not recorded.
 - Why: The rule exists (Y8) but the rows were not worked.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-HISTORY-5; ruling Y8]
 
-**802. Two rows (20031, 20032) about an ailing ruler under an appointed or priestly seat are parked: no word for heredity exists, so the sentences stay as they are.**
+**900. Two rows (20031, 20032) about an ailing ruler under an appointed or priestly seat are parked: no word for heredity exists, so the sentences stay as they are.**
 
 - Towns touched: count not recorded.
 - Why: A second version keyed by what the program already reads of the government is needed, or the rows stay parked.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-HISTORY-5; rulings Y9, Y11; 20031, 20032]
 
-**803. The program lacks a word for 'the failed food source', so the fish second versions are keyed on hunger in general.**
+**901. The program lacks a word for 'the failed food source', so the fish second versions are keyed on hunger in general.**
 
 - Towns touched: count not recorded.
 - Why: Adding a word to the vocabulary is the chair's to grant; it is not built.
 - If vetoed: A grain famine in a fishing place would still use the fish second versions.
 - [TAIL-HISTORY-5; foodRecord.failedSource]
 
-**804. The siege-narrative copy of the first tension's description is changed in 42 and 4 towns by earlier batches and is not in this group's files.**
+**902. The siege-narrative copy of the first tension's description is changed in 42 and 4 towns by earlier batches and is not in this group's files.**
 
 - Towns touched: count not recorded.
 - Why: The file belongs to another group and prints on none of the sample pages.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-HISTORY-2, -3; src/generators/narrative/siegeCapability.js]
 
-**805. Three crisis-summary lines repeat 'each office does as it sees fit' and 'some offices no longer send their revenue on' and are not yet reworded.**
+**903. Three crisis-summary lines repeat 'each office does as it sees fit' and 'some offices no longer send their revenue on' and are not yet reworded.**
 
 - Towns touched: count not recorded.
 - Why: The file is not in this group (the crisis group's file).
 - If vetoed: effect not stated in the hand-back
 - [TAIL-HISTORY; src/domain/crisis/crisisSummaryVantage.js]
 
-**806. The traditions' 'Last held' line under a plague is not cured.**
+**904. The traditions' 'Last held' line under a plague is not cured.**
 
 - Towns touched: count not recorded.
 - Why: It is written by a tab component and a PDF section that are not in this group; the chair named it for a display group.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-HISTORY-3; ruling Y15; src/components/new/tabs/TraditionsTab.jsx, src/pdf/sections/Traditions.jsx]
 
-**807. The four arrival scenes written by the scene chooser (shrine, stables, carts of cloth, horse traders) are not cured here.**
+**905. The four arrival scenes written by the scene chooser (shrine, stables, carts of cloth, horse traders) are not cured here.**
 
 - Towns touched: count not recorded.
 - Why: The chooser file is not in this group's list; it is named for the chair to rule.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-HISTORY-2; ruling Y12; src/generators/narrative/arrivalScene.js]
 
-**808. Two lists are out of date: the engine bundle carries none of batches 1 to 6, and the arrival ledgers lack batch 4's and batch 6's changes and still mark the baking line as scenery.**
+**906. Two lists are out of date: the engine bundle carries none of batches 1 to 6, and the arrival ledgers lack batch 4's and batch 6's changes and still mark the baking line as scenery.**
 
 - Towns touched: count not recorded.
 - Why: They are for the close's re-take.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-HISTORY-5; docs/census/declarations/ARRIVAL_*.json, supabase/functions/_shared/engineBundle.js]
 
-**809. Two struck phrases in the history data are known to break the style law and are not yet rewritten: '…and keeps the record of it locked away' and '…swears it came in with a stranger, and wants the stranger found'.**
+**907. Two struck phrases in the history data are known to break the style law and are not yet rewritten: '…and keeps the record of it locked away' and '…swears it came in with a stranger, and wants the stranger found'.**
 
 - Towns touched: count not recorded.
 - Before: “…and keeps the record of it locked away”
@@ -9261,35 +10490,35 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: The style-law check stays red until both are rewritten.
 - [TAIL-HISTORY-5; ruling U2; tests/lint/styleLaw.walker.test.js; src/data/historyData.js]
 
-**810. Two checks of a hook at the start of a town fail: the sealed-walls hook in a calm thorp and the poisoning hook in a city under insurgency.**
+**908. Two checks of a hook at the start of a town fail: the sealed-walls hook in a calm thorp and the poisoning hook in a city under insurgency.**
 
 - Towns touched: count not recorded.
 - Why: Ruling U2: the whole joined line must pass; the cause is not yet known to be in this group's files.
 - If vetoed: The two checks stay red.
 - [TAIL-HISTORY-5; tests/generators/hookTruthAtBirth.test.js (rww-thorp-calm-1, rww-city-insurgency-1)]
 
-**811. Ten checks are red both before and after the batches and are left as they are; the twelve-town grid also shows 2 falls (in r2r-city-0 and r2s-insurgency-metropolis-0) that were there at the start.**
+**909. Ten checks are red both before and after the batches and are left as they are; the twelve-town grid also shows 2 falls (in r2r-city-0 and r2s-insurgency-metropolis-0) that were there at the start.**
 
 - Towns touched: count not recorded.
 - Why: Each is red in the base tree as well, so the seat did not cure it.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-HISTORY-5; worldFactRederive A7, nameHeldThroughAssembly A1, urbanBandInstitutions G5, goldenViewModel pdf.6, editCorpusRatchet A3 A4 A7 A8, espionageDormancyFence FENCE 1, generatorGoldenMaster; grid P7a]
 
-**812. Batch 6's own guard test still uses literal sentences as anchors and must be brought to the new test helpers.**
+**910. Batch 6's own guard test still uses literal sentences as anchors and must be brought to the new test helpers.**
 
 - Towns touched: count not recorded.
 - Why: The new test rules (ruling U2) came after it was written.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-HISTORY-5; tests/data/tailHistoryBatch6.test.js]
 
-**813. The leadership vacuum's second version under an occupation claims no more than the words it replaced ('no one has yet consolidated their position'), and its dated form (an interregnum 319 years ago) still reads as not yet consolidated.**
+**911. The leadership vacuum's second version under an occupation claims no more than the words it replaced ('no one has yet consolidated their position'), and its dated form (an interregnum 319 years ago) still reads as not yet consolidated.**
 
 - Towns touched: count not recorded.
 - Why: The hand-back says it is not false by the record and leaves it for the chair; the dated form was not covered by Y13.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-HISTORY-3; B19917; src/data/historyData.js]
 
-**814. The line 'A fire that began in the lower districts…' still prints in 15 towns (20 before), from the timeline event's description.**
+**912. The line 'A fire that began in the lower districts…' still prints in 15 towns (20 before), from the timeline event's description.**
 
 - Towns touched: count not recorded.
 - Before: “A fire that began in the lower districts…”
@@ -9297,7 +10526,7 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: effect not stated in the hand-back
 - [TAIL-HISTORY-2; Y10 (2) B02506]
 
-**815. Three Services-column lines ("Pottery and ceramics: Plates, jugs, storage crocks.", "Fired brick: Standard-size fired clay bricks by the cartload.", "Table wine") still print in the towns where no clay or no grapes reach the house.**
+**913. Three Services-column lines ("Pottery and ceramics: Plates, jugs, storage crocks.", "Fired brick: Standard-size fired clay bricks by the cartload.", "Table wine") still print in the towns where no clay or no grapes reach the house.**
 
 - Towns touched: count not recorded.
 - Why: They sit in the services seat's own column beside the same card, so this seat named them and did not change them.
@@ -9309,10 +10538,12 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
   | Pottery and ceramics: Plates, jugs, storage crocks. | – | – |
   | Fired brick: Standard-size fired clay bricks by the cartload. | – | – |
   | Table wine | – | – |
+  | Fresh meat: Beef, pork, mutton. | – | – |
+  | Fresh bread: Daily bread. | – | – |
 
 - [first houses seat; named for the services seat]
 
-**816. Four lines that mention a sex were not reworded: the Town crier ("his wage"), the Sage's quarter ("learned men"), the Druid Circle ("when they trouble men"), and the Lord's appointee ("A man of the lord's choosing", cured later in a different batch).**
+**914. Four lines that mention a sex were not reworded: the Town crier ("his wage"), the Sage's quarter ("learned men"), the Druid Circle ("when they trouble men"), and the Lord's appointee ("A man of the lord's choosing", cured later in a different batch).**
 
 - Towns touched: count not recorded.
 - Why: The seat marked them gendered but not flagged; rewording the Town crier line would count as a new hit on the checker's list of known exceptions until a word goes, and the Druid line is generic.
@@ -9328,98 +10559,120 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 
 - [second houses seat; batch 2 NOT TAKEN list; checker presumed-things]
 
-**817. Four red checks in the houses' area were classed but not all cured: the house-label check on every page (1 pair red, named), the gap-line check (7 of 7 anchor towns red, a re-key owed), two Brewer and income-source rows of an older repair check (named), and two checks that name earlier groups' standing negative assertions (the closing groups' to cure).**
+**915. Four red checks in the houses' area were classed but not all cured: the house-label check on every page (1 pair red, named), the gap-line check (7 of 7 anchor towns red, a re-key owed), two Brewer and income-source rows of an older repair check (named), and two checks that name earlier groups' standing negative assertions (the closing groups' to cure).**
 
 - Towns touched: 1 and 7 of 7 red.
 - Why: The causes sit outside this group's files or need a search the seat did not have time for.
 - If vetoed: These checks stay red.
 - [fifth houses seat; ruling U2; tests/components/houseLabelEverySurface.test.jsx, tests/domain/display/gapLineHousesByKind.test.js, tests/data/w2FixData6Rows.test.js; defence lane commits d98f781f3, 44d3088b4 named as candidates]
 
-**818. Old copies of the catalogue and variant sentences remain in the built engine bundles (no bundle was rebuilt), and the generation worker's size ceiling was not re-measured.**
+**916. Old copies of the catalogue and variant sentences remain in the built engine bundles (no bundle was rebuilt), and the generation worker's size ceiling was not re-measured.**
 
 - Towns touched: count not recorded.
 - Why: No build was run; the rewordings are near neutral in length (batch 1 adds roughly 1.2 KB, batch 2 removes a little).
 - If vetoed: effect not stated in the hand-back
 - [houses seat; supabase/functions/_shared/engineBundle.js; tests/build/generationWorkerLazy.test.js]
 
-**819. Where a famine says the herds or the fishing failed, the trade section still lists exports of that very good (livestock, fish) in the same towns.**
+**917. Where a famine says the herds or the fishing failed, the trade section still lists exports of that very good (livestock, fish) in the same towns.**
 
 - Towns touched: count not recorded.
 - Why: The famine line was found true by the record; the contradicting exports belong to the trade writer, another group.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-NARRATIVE; 18099 livestock, 18092 fish; named for the trade writer]
 
-**820. A founder that states a personal motive (a discharged soldier who liked the view, a healer, a pair of siblings, families) can still stand beside an origin line that gives the founding a purpose.**
+**918. A founder that states a personal motive (a discharged soldier who liked the view, a healer, a pair of siblings, families) can still stand beside an origin line that gives the founding a purpose.**
 
 - Towns touched: count not recorded.
 - Why: The seat judged that one person's reason to stay is not the founding's purpose; it left the pair uncounted for the chair to rule.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-NARRATIVE-4; batch FB; named, the chair's to rule]
 
-**821. A founder at a stroke (a royal or imperial decree, a dynastic decision) can still stand beside an origin line that grew slowly.**
+**919. A founder at a stroke (a royal or imperial decree, a dynastic decision) can still stand beside an origin line that grew slowly.**
 
 - Towns touched: count not recorded.
 - Why: A decree can come to a place already growing, so the seat did not count it as a fault.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-NARRATIVE-5; batch 6; named, the chair's to rule]
 
-**822. The list of known presumed-thing phrases holds rows that no line uses any more. Two went stale in batch 1 (clergy, practitioner), one in batch 5 (warehouse) and two in batch 6 (walls). They were left, not removed.**
+**920. The list of known presumed-thing phrases holds rows that no line uses any more. Two went stale in batch 1 (clergy, practitioner), one in batch 5 (warehouse) and two in batch 6 (walls). They were left, not removed.**
 
 - Towns touched: count not recorded.
 - Why: The list only shrinks, and the seat left the shrinking to the close of the program.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-NARRATIVE; -3; -5; tests/lint/presumedThings.widened.register.json rows cc79cf804fe5ed09, fa104bd22874f27f, 33cd6edee138e74a, f9fa0758aa958785, 9187b0e524e0b0c8]
 
-**823. Saved-output checks that were already red at the base stay red; they were named, not re-taken (the generator's saved output, the espionage fence, the world-fact and roster checks, and one prose-wiring check).**
+**921. Saved-output checks that were already red at the base stay red; they were named, not re-taken (the generator's saved output, the espionage fence, the world-fact and roster checks, and one prose-wiring check).**
 
 - Towns touched: count not recorded.
 - Why: They were red before these batches; re-taking them is not this group's job.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-NARRATIVE and successors; generatorGoldenMaster, espionageDormancyFence, worldFactRederive, rosterFinalUnderHeldRoster, proseWiringCensus.walker; carried]
 
-**824. Three tests were red at the base and are not in this group's files: a dossier-age test, a hunted-underworld test and a goal test. They were left.**
+**922. Three tests were red at the base and are not in this group's files: a dossier-age test, a hunted-underworld test and a goal test. They were left.**
 
 - Towns touched: count not recorded.
 - Why: Their causes are in the dossier-state prose file, the power and capture writers and the tonight sheet and goals; the seat did not trace the last two commits.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-NARRATIVE-5; tests/domain/r3c8ReaderLinesTrue.test.js; tests/domain/r3c9ReaderLinesTrue.test.js; tests/domain/tonightOwnGoal.test.js]
 
-**825. One test file (the new guard for these lines) does not yet follow the chair's later test rules (negatives through one helper, seed loops through the totality helper, no literal state-prose anchor).**
+**923. One test file (the new guard for these lines) does not yet follow the chair's later test rules (negatives through one helper, seed loops through the totality helper, no literal state-prose anchor).**
 
 - Towns touched: count not recorded.
 - Why: The rules came after the guard was written; the conversion is named for the next seat or the close.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-NARRATIVE-5; tests/generators/tailNarrativeRows.test.js B7; helpers tests/helpers/anchoredNegatives.js, tests/helpers/drawnProse.js]
 
-**826. Rows with a vintner or a glassblower (wine by the jug with no grapes, glass with no sand) are false by the page's own gap line, but are left unmarked.**
+**924. When people are drawn again after birth, the conflicts are drawn again but the relation rows are kept, so a second version of a line written at birth can name a quarrel the town no longer holds.**
+
+- Towns touched: count not recorded.
+- Why: The cure is one more call after the people-regen seam, outside the lent code; named for the chair.
+- If vetoed: effect not stated in the hand-back
+- [TAIL-POWERS-B seat 2; ruling P19; src/generators/generateSettlementPipeline.js regenNPCsPipeline]
+
+**925. Six lines the first B seat could not find in its files (office titles, officials in pay, tonight's sheet) are left for the ties seat.**
+
+- Towns touched: count not recorded.
+- Why: They are not written in the dmPowerLines file; they come from other writers.
+- If vetoed: effect not stated in the hand-back
+- [TAIL-POWERS-B seat 1; rows 05688, B00530, 00587, 26926, B07353, B28204; npcData, officeTitles, officialsInPay, tonightSheet]
+
+**926. Some title words do not fit the person who bears them (for example "the senior guild master and Alderman" on a woman, "Lord Mayor" on a woman); the rule for the title word on a person was not started by these seats.**
+
+- Towns touched: count not recorded.
+- Before: “the senior guild master and Alderman / Lord Mayor (on a woman)”
+- Why: The ruling P5 gave the title word on a person to another seat (the titles seat, ruling P15); these seats left it.
+- If vetoed: effect not stated in the hand-back
+- [TAIL-POWERS seats 1-3; TAIL-POWERS-B; rulings P5, P6, P15; rows B11586, B11556, 00956; src/data/faceHonorifics.js]
+
+**927. Rows with a vintner or a glassblower (wine by the jug with no grapes, glass with no sand) are false by the page's own gap line, but are left unmarked.**
 
 - Towns touched: vintner 184 of 184 and glassblower 13 of 13 towns that hold the house.
 - Why: The town data holds the gap in every town (184 of 184 vintners, 13 of 13 glassblowers); the chair left it to the seat that measures the data, and a later ruling says that seat is curing it.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-SERVICES-2 and TAIL-SERVICES-3; rulings S7 and S10; rows 10827 28979 B17807 25280 31383 B04346 B17195 31374 11208 29819]
 
-**827. Rows of the smelter, the mine, the quarry and similar houses whose ground is depleted (ore and stone rows) still print as present work.**
+**928. Rows of the smelter, the mine, the quarry and similar houses whose ground is depleted (ore and stone rows) still print as present work.**
 
 - Towns touched: the smelter's ore row prints in 238 towns (26 under a crisis); wild game (31242) in 4 towns; other rows: count not recorded.
 - Why: These are not a gap line but the state of the chain's ground; no word marks it, and the seat waits for the cure of the town data's gap to re-measure.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-SERVICES-2 and TAIL-SERVICES-3; rows B17202 14371 04369 15282 22336 B15735 07626 31242]
 
-**828. Preserved fish for inland trade in a town with no fish (18167), the workhouse's textiles (B15121) and rare medicines under a siege (16285) still print as true.**
+**929. Preserved fish for inland trade in a town with no fish (18167), the workhouse's textiles (B15121) and rare medicines under a siege (16285) still print as true.**
 
 - Towns touched: count not recorded.
 - Why: The page prints no gap line for them; the chain's ground or cut-off supply is what is false, and no marking word covers it.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-SERVICES and TAIL-SERVICES-2; rows 18167 B15121 16285]
 
-**829. Grain at harvest under a siege still prints as ordinary work.**
+**930. Grain at harvest under a siege still prints as ordinary work.**
 
 - Towns touched: count not recorded.
 - Why: Field work stops under a siege because the fields lie outside the walls, and no marking word covers it.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-SERVICES; row 09820]
 
-**830. Several house texts stay as written under a crisis: the great cathedral (the faithful travel to it), the burial ground (the rite waits for a priest passing through), the markets (permanent markets in every quarter, under a siege), the bowyers (the caravans buy here), the apothecaries (imported medicine), the river barges.**
+**931. Several house texts stay as written under a crisis: the great cathedral (the faithful travel to it), the burial ground (the rite waits for a priest passing through), the markets (permanent markets in every quarter, under a siege), the bowyers (the caravans buy here), the apothecaries (imported medicine), the river barges.**
 
 - Towns touched: count not recorded.
 - Why: Marking the whole house "stopped" would be false; the one clause is the houses seat's text to reword. The shared rule also does not mark apothecary district, brewery, bowyers and fletchers guild, great cathedral, burial ground, shipyard or maltster.
@@ -9437,42 +10690,42 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 
 - [TAIL-SERVICES and TAIL-SERVICES-2; ruling S2 and S8; rows 21670 B20720 B21481 B09671 B17798 B17254 B02399 B00206 16646 04601; multiple_market_squares city_granaries]
 
-**831. Some rows read by the exports' seats are left, each waiting for a ruling: occupation curfews and isolated pasturage (21361, 08780, 22486), a guild monopoly where guilds are suppressed (16263), the livestock auction under a siege (15710), caravan organization with camels (06293, 1 town), and the siege second versions clipped by the export (23335, 10649).**
+**932. Some rows read by the exports' seats are left, each waiting for a ruling: occupation curfews and isolated pasturage (21361, 08780, 22486), a guild monopoly where guilds are suppressed (16263), the livestock auction under a siege (15710), caravan organization with camels (06293, 1 town), and the siege second versions clipped by the export (23335, 10649).**
 
 - Towns touched: 06293: 1 town; other counts not recorded.
 - Why: An occupation is no crisis the shared rule reads; a suppressed guild is a power state with no word; a siege stops neither gatherings nor herds by the list's words; the clip is the exports' seat's.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-SERVICES-3; rulings S12; rows 21361 08780 22486 16263 15710 06293 23335 10649]
 
-**832. Three chain rows read by the exports' seats are left: taverns under a famine (25393), and the floodplain grain export in a deficit (09797, 09798).**
+**933. Three chain rows read by the exports' seats are left: taverns under a famine (25393), and the floodplain grain export in a deficit (09797, 09798).**
 
 - Towns touched: count not recorded.
 - Why: Neither is a crisis cause the shared rule reads.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-SERVICES-3; rows 25393 09797 09798]
 
-**833. The mark "Short of salt." before a salt works names the output, while the house's own text names the input (brine).**
+**934. The mark "Short of salt." before a salt works names the output, while the house's own text names the input (brine).**
 
 - Towns touched: count not recorded.
 - Why: The gap noun comes from the check code that prints the page's gap line, not from this seat; no fault is claimed beyond the noun.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-SERVICES-2 and TAIL-SERVICES-3; src/domain/display/validationOnPage.js CHAIN_INPUTS]
 
-**834. Services and houses are still printed unmarked on the dossier search, and on the PDF and journal wherever their seats have not yet called the shared rule (rows 30715, 22730, 06145 print unmarked there).**
+**935. Services and houses are still printed unmarked on the dossier search, and on the PDF and journal wherever their seats have not yet called the shared rule (rows 30715, 22730, 06145 print unmarked there).**
 
 - Towns touched: count not recorded.
 - Why: The marks were built for the two tabs; the other pages are other seats' to switch.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-SERVICES and TAIL-SERVICES-3; rows 30715 22730 06145]
 
-**835. The list of known stale entries in the prose wiring check is out of date at the base and is not re-made by this seat.**
+**936. The list of known stale entries in the prose wiring check is out of date at the base and is not re-made by this seat.**
 
 - Towns touched: count not recorded.
 - Why: The check was already red at the base; the seat carried it and left it to be re-derived at the close.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-SERVICES, TAIL-SERVICES-2 and TAIL-SERVICES-3; docs/content/wiring-census.json (a file path); proseWiringCensus]
 
-**836. Eight chain cards in the PDF Services chapter print with no "short" mark where the page says their house is short of its input (charcoal burner's chain, Mill and Sawmill, Salt works to preserved foods, coastal timber to river ferry).**
+**937. Eight chain cards in the PDF Services chapter print with no "short" mark where the page says their house is short of its input (charcoal burner's chain, Mill and Sawmill, Salt works to preserved foods, coastal timber to river ferry).**
 
 - Towns touched: counts 44, 17, 2, 2, 13, 3, 36, 2 of 720 sample towns.
 - Why: The shared rule gives the second cause to a house and its rows, not to a chain card, and the tabs' chain cards print none; the PDF prints them as the tab does.
@@ -9492,7 +10745,7 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 
 - [TAIL-EXPORTS-PDF-3; rows 06926 06925 06924 06927 14345 17048 23255 06946; named for TAIL-SERVICES]
 
-**837. Fresh meat and fresh bread under a siege, and pastries and fresh produce under a famine, print with no crisis mark (printed by the PDF as the tabs print them).**
+**938. Fresh meat and fresh bread under a siege, and pastries and fresh produce under a famine, print with no crisis mark (printed by the PDF as the tabs print them).**
 
 - Towns touched: 274 to 273, 262 to 258, 143, 116 of 720 sample towns.
 - Why: The shared list holds no dependence the crisis stops for them; whether they live on what the crisis stops is the list's call, named for the services seat.
@@ -9508,42 +10761,42 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 
 - [TAIL-EXPORTS-PDF-2; rows 10661 10652 21359 10665; named for TAIL-SERVICES]
 
-**838. The web chain panel still badges an output by the good's family and first word, as the PDF did before this seat.**
+**939. The web chain panel still badges an output by the good's family and first word, as the PDF did before this seat.**
 
 - Towns touched: count not recorded.
 - Why: The panel is another group's file.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-EXPORTS-PDF-2; src/components/SupplyChainsPanel.jsx]
 
-**839. The town data's entrepôt flag is wrong: it stands on 41 thorps, hamlets and villages that work no entrepôt chain and is absent from 213 towns that work one (64 cities, 68 metropolises, 45 towns).**
+**940. The town data's entrepôt flag is wrong: it stands on 41 thorps, hamlets and villages that work no entrepôt chain and is absent from 213 towns that work one (64 cities, 68 metropolises, 45 towns).**
 
 - Towns touched: 41 and 213 of 720 sample towns.
 - Why: The seat cured the PDF's tag only; the flag is named for the next measure of the data.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-EXPORTS-PDF-3; ruling E21; economicState.isEntrepot]
 
-**840. Guards owed: the Economics and Defense tabs and the Overview tab must switch to the new shared rules for the black market line, critical goods, "no organized force" and the entrepôt chip; the heading "Settlement Origin" is a literal in the Overview tab; and a guard that the tab and the PDF read one rule for each.**
+**941. Guards owed: the Economics and Defense tabs and the Overview tab must switch to the new shared rules for the black market line, critical goods, "no organized force" and the entrepôt chip; the heading "Settlement Origin" is a literal in the Overview tab; and a guard that the tab and the PDF read one rule for each.**
 
 - Towns touched: count not recorded.
 - Why: The PDF was cured first; the tabs are other groups' files.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-EXPORTS-PDF and TAIL-EXPORTS-PDF-3; src/components/new/tabs/EconomicsTab.jsx, DefenseTab.jsx, OverviewTab.jsx]
 
-**841. The hook text prefixes for history echoes (7 rows) are named for the history group and not cured here.**
+**942. The hook text prefixes for history echoes (7 rows) are named for the history group and not cured here.**
 
 - Towns touched: 7 rows; town count not recorded.
 - Why: The hook text is written by the history generator.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-TIES-4 left; plotHooks.js ECHO_PREFIXES]
 
-**842. The rest of the two worklists' rows that print in fewer than five towns are not done.**
+**943. The rest of the two worklists' rows that print in fewer than five towns are not done.**
 
 - Towns touched: count not recorded.
 - Why: The ruling put rows in fewer than five towns behind every wider row.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-TIES-4 left; ruling T21; WORKLIST-TIES.json, WORKLIST3-TIES.json]
 
-**843. The list of known exceptions still holds a row for the reworded line "is fought in raids, informants, and paperwork" that covers no printed line; shrinking it is owed at the close.**
+**944. The list of known exceptions still holds a row for the reworded line "is fought in raids, informants, and paperwork" that covers no printed line; shrinking it is owed at the close.**
 
 - Towns touched: count not recorded; the shrink covers 360 test towns.
 - Before: “is fought in raids, informants, and paperwork”
@@ -9551,7 +10804,7 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: effect not stated in the hand-back
 - [TAIL-TIES-4 batch 1; tests/lint/presumedThings.register.json ARM 2; --shrink-arm2]
 
-**844. Several checks stay red and are named, not cured: the first-paint and engine size checks, a cycle between two files, the storage-months check in one town, and three others.**
+**945. Several checks stay red and are named, not cured: the first-paint and engine size checks, a cycle between two files, the storage-months check in one town, and three others.**
 
 - Towns touched: count not recorded.
 - Why: They belong to other lanes or to the owner's re-record, and the seat's cuts did not cause them.
@@ -9567,21 +10820,21 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 
 - [TAIL-TIES-5, -6, -7; vendorPdfLazy, layerBoundaries, storesSpanFigure (rpf-thorp-succession_void-13: 1.2 against the wanted 1.5), presumedThings walker (146 undeclared literals), w2FixData6Rows (3), factLayers walker, observedShapeReaders (6 rows)]
 
-**845. The last layer cycle (between the defence display and the facts file) is not cut; the chair chose option 2 and the seat's attempt stopped on a measure.**
+**946. The last layer cycle (between the defence display and the facts file) is not cut; the chair chose option 2 and the seat's attempt stopped on a measure.**
 
 - Towns touched: count not recorded.
 - Why: The cut cannot meet "no test touched" and "no import" together, so it was put to the chair.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-TIES-7, -8; ruling T25 (a); layerBoundaries]
 
-**846. A man who holds the madam's or the district madam's face is called 'Master' as an honorific, while his title reads 'the keeper of the house(s)': two words for one face.**
+**947. A man who holds the madam's or the district madam's face is called 'Master' as an honorific, while his title reads 'the keeper of the house(s)': two words for one face.**
 
 - Towns touched: 80 + 52 cards (the hand-back does not give the towns).
 - Why: It is not a word against his sex, so it was outside the ruling; the cure would be a pair 'Keeper' / 'Madam' in the honorific file, if the chair wants it.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-TITLES-2 (KT1); src/data/faceHonorifics.js]
 
-**847. The journal and PDF still print sentences the PDF headline writer gets wrong, and these were named for the PDF group and not cured.**
+**948. The journal and PDF still print sentences the PDF headline writer gets wrong, and these were named for the PDF group and not cured.**
 
 - Towns touched: count not recorded.
 - Why: They belong to the PDF's headline file (src/pdf/lib/headlines.js), which is not this seat's.
@@ -9599,7 +10852,7 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 
 - [TAIL-EXPORTS-JOURNAL; EXPORTS-PDF group; src/pdf/lib/headlines.js]
 
-**848. Under a famine the journal's Exploitation table still prints 'full' for fish, grain and livestock, and one bakers' row under a siege still prints unmarked, because the crisis leaf cannot answer for them.**
+**949. Under a famine the journal's Exploitation table still prints 'full' for fish, grain and livestock, and one bakers' row under a siege still prints unmarked, because the crisis leaf cannot answer for them.**
 
 - Towns touched: count not recorded.
 - Why: The leaf has no kind for a resource row, and declares bakers as living on grain only. Named for the services and economy seats.
@@ -9615,70 +10868,70 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 
 - [TAIL-EXPORTS-JOURNAL-2; rulings E12, E13; src/foundry/journalPages.js; src/domain/display/crisisStoppedRow.js; src/domain/display/validationOnPage.js]
 
-**849. The Economics tab and the PDF's Economics chapter print income shares and chain cards unmarked under a crisis, while the journal now marks them.**
+**950. The Economics tab and the PDF's Economics chapter print income shares and chain cards unmarked under a crisis, while the journal now marks them.**
 
 - Towns touched: count not recorded.
 - Why: The Economics tab does not yet call the crisis leaf for these rows; the journal calls it by ruling E12.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-EXPORTS-JOURNAL-2; named for DISPLAY-ECON and EXPORTS-PDF]
 
-**850. The word '(impaired)' prints beside chains that the land calls running (journal and Economics tab).**
+**951. The word '(impaired)' prints beside chains that the land calls running (journal and Economics tab).**
 
 - Towns touched: of the chains the journal prints impaired, the data says impaired 999 times, running 83, entrepot 11 (towns not recorded).
 - Why: The chain-state leaf re-grades them; whether 'Impaired' is true of a running chain was asked as a question, not as a fault.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-EXPORTS-JOURNAL; src/domain/display/chainStateShown.js, src/pdf/lib/chainStateOnPage.js]
 
-**851. The phone-size tables of the dossier (desktop and mobile line counts per view) were not edited and still need a single re-measure at the end.**
+**952. The phone-size tables of the dossier (desktop and mobile line counts per view) were not edited and still need a single re-measure at the end.**
 
 - Towns touched: no count of towns; the tables list per-view line counts that moved (for example Summary/Overview chrome 2 to 4, Systems/Institutions prose 71 to 73).
 - Why: The doors' seat re-measures them once at the end under the owner's 06:00 word; both move with the lines and neither is a below-floor count.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CLOSE-DISPLAY-1; ruling V14; tests/components/dossierPhoneFloorAllViews.test.jsx DESKTOP_BASELINE and MOBILE_BASELINE]
 
-**852. A check of the 'warehouse' wording in the powers' claim file (labelJoins) is still red.**
+**953. A check of the 'warehouse' wording in the powers' claim file (labelJoins) is still red.**
 
 - Towns touched: count not recorded.
 - Why: A powers commit added a read of 'warehouse' to the claim-standing file, which the display checks do not expect; named to the chair (the powers' seat).
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CLOSE-DISPLAY-1; red 8; commit cc834166; src/generators/power/claimStanding.js; tests/components/labelJoins.test.js]
 
-**853. The shared git configuration was damaged by a test fixture (bare repository flag set, a fixture author added, signing turned off) and was left unrepaired.**
+**954. The shared git configuration was damaged by a test fixture (bare repository flag set, a fixture author added, signing turned off) and was left unrepaired.**
 
 - Towns touched: count not recorded.
 - Why: The repair was refused to the seat by the safety classifier; it is left for the chair or the owner.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CLOSE-DISPLAY-1; incident 06:32 UTC; .git/config core.bare = true]
 
-**854. Forty-nine tests in 26 files are red at the joined line (display, saved-output, count and generator checks); they were classed and not cured.**
+**955. Forty-nine tests in 26 files are red at the joined line (display, saved-output, count and generator checks); they were classed and not cured.**
 
 - Towns touched: 49 tests in 26 files (not towns).
 - Why: Every one is red the same way at the joined tip and none comes from the seat's branch; the sweep's classing is left for a fresh seat.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CLOSE-DISPLAY-1; civic sweep V5 to V11]
 
-**855. Three style-law rises remain, and three further 'rather-than' lines in house descriptions were not reworded: a crisis table's 'Faction information', two lines in the house description variants and one in the catalogue.**
+**956. Three style-law rises remain, and three further 'rather-than' lines in house descriptions were not reworded: a crisis table's 'Faction information', two lines in the house description variants and one in the catalogue.**
 
 - Towns touched: count not recorded (towns that print each were to be counted in H22).
 - Why: The houses' lines were not in the seat's brief (asked of the chair; H22 not started); the crisis table lands with the crisis branch.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CLOSE-POOLS-2; src/data/crisisDependence.js, src/data/institutionDescVariants.js, src/data/institutionalCatalog.js]
 
-**856. Three history and arrival lines were named, not cured: 'A money changer sits at his table with little to do, counting the same coins from many mints again.', 'A fishmonger stands behind an empty slab, with nothing to shout a price for.', and 'When the occupiers left, they left behind a town of former collaborators and former resisters, none of it ever settled'.**
+**957. Three history and arrival lines were named, not cured: 'A money changer sits at his table with little to do, counting the same coins from many mints again.', 'A fishmonger stands behind an empty slab, with nothing to shout a price for.', and 'When the occupiers left, they left behind a town of former collaborators and former resisters, none of it ever settled'.**
 
 - Towns touched: count not recorded (one second version prints in five sample towns).
 - Why: Each is the second version of a line already accepted, and the check refuses to accept a new line; the cure belongs to the arrival table, the fishmonger word and a tense-aware occupation word.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CLOSE-POOLS-2; batch 6 commit ed9f3b549; src/data/arrivalProse.js, src/data/historyData.js]
 
-**857. The house-label check keeps a defence allowance row for rr2s-town-under_siege-rand-1 that is no longer needed ('allowed 1, found 0').**
+**958. The house-label check keeps a defence allowance row for rr2s-town-under_siege-rand-1 that is no longer needed ('allowed 1, found 0').**
 
 - Towns touched: count not recorded.
 - Why: The commit that earned the win was not found in time (about nine bisect runs); the row should be struck once found.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CLOSE-POOLS-2; tests/components/houseLabelEverySurface.test.jsx DEFENCE_ALLOWANCE]
 
-**858. No sample town can now exercise the 'physician' check in the hook-truth test.**
+**959. No sample town can now exercise the 'physician' check in the hook-truth test.**
 
 - Towns touched: count not recorded.
 - Before: “...and the physician knows”
@@ -9687,42 +10940,42 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CLOSE-POOLS-2; tests/generators/hookTruthAtBirth.test.js; tests/domain/coherence/hookTruth.test.js]
 
-**859. Four reads in the defence display file still use a private test for the gate or court (the last red of that group), and a crime leaf reads the people list, which the law forbids.**
+**960. Four reads in the defence display file still use a private test for the gate or court (the last red of that group), and a crime leaf reads the people list, which the law forbids.**
 
 - Towns touched: count not recorded.
 - Why: The first file is the boot seat's, and the second is forbidden and not declared.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CLOSE-SRC-2; src/domain/display/defenseDisplay.js; headedPowerAmongRivals; commit 9b6adf3b4]
 
-**860. The fact-layers readers check lists 101 files against 97 banked, with many rises (private name tests of a homed fact) and four falls; none was banked.**
+**961. The fact-layers readers check lists 101 files against 97 banked, with many rises (private name tests of a homed fact) and four falls; none was banked.**
 
 - Towns touched: no town count; 101 files against 97.
 - Why: The facts' law forbids each rise; each needs a cure through its home or the chair's ruling; the doors' seat runs it once on the final tree.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CLOSE-SRC-2; scripts/fact-layers-door.mjs]
 
-**861. The inventory of site-coherence sentences moved (added 2, grown 9, shrunk 4, vanished 1) and was not banked. Added and grown rows are treated as regressions until shown otherwise.**
+**962. The inventory of site-coherence sentences moved (added 2, grown 9, shrunk 4, vanished 1) and was not banked. Added and grown rows are treated as regressions until shown otherwise.**
 
 - Towns touched: count not recorded.
 - Why: The earning commits are inside two merges that were not bisected.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CLOSE-SRC-2; commits 22cc9ef7d, 390168d6b; tests siteCoherenceRatchet]
 
-**862. The vocabulary page test no longer finds the planted 'alchemist' house, and the cause was not found.**
+**963. The vocabulary page test no longer finds the planted 'alchemist' house, and the cause was not found.**
 
 - Towns touched: count not recorded.
 - Why: Pool lines were reworded so the planted alchemist phrase is gone; each branch is green alone and red on the joined line.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CLOSE-SRC-1; TAIL-CLOSE-SRC-2 (7b); commits 8e70d2bed, 91592cbf1, 3f5da151e, ba4cc210b; tests/domain/vocabularyPageFindings.test.js]
 
-**863. The news headline and voice check counts 417 introductions against 395 banked, and a tier-inertia envelope exceeds its ceiling; neither was reached.**
+**964. The news headline and voice check counts 417 introductions against 395 banked, and a tier-inertia envelope exceeds its ceiling; neither was reached.**
 
 - Towns touched: 395 to 417 introductions (not towns).
 - Why: News: the law has a re-record door in the news-voice contract; the cause must be bisected first. Envelope: see the owner's items.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CLOSE-SRC-2; scripts/lib/news-voice-contract.mjs; tests newsHeadline, newsVoice]
 
-**864. A group of style-law lines in other seats' files, and three crisis tests, were held until the crisis branch landed; one new test arrival was not cured at the time.**
+**965. A group of style-law lines in other seats' files, and three crisis tests, were held until the crisis branch landed; one new test arrival was not cured at the time.**
 
 - Towns touched: count not recorded.
 - Why: They were moving files held for the chair's 'SWEPT' word.
@@ -9739,88 +10992,88 @@ These are false sentences found and not cured, words the vocabulary lacks, and r
 
 - [TAIL-CLOSE-TESTS-A, TESTS-B, TESTS-C]
 
-**865. Some anchors in the strengthened checks are weak and were named so a reviewer can strengthen them: tailHistoryBatch2 and 3 KEEP, w2FixData6 (second anchor), conflictRelationsTwin KEEP and w2FixData5 ww-473.**
+**966. Some anchors in the strengthened checks are weak and were named so a reviewer can strengthen them: tailHistoryBatch2 and 3 KEEP, w2FixData6 (second anchor), conflictRelationsTwin KEEP and w2FixData5 ww-473.**
 
 - Towns touched: count not recorded.
 - Why: They prove that a sentence prints, not what it says.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CLOSE-TESTS-A]
 
-**866. A test file (tailCrisisBatch7) cannot load at all, so its rows have never run in this tree.**
+**967. A test file (tailCrisisBatch7) cannot load at all, so its rows have never run in this tree.**
 
 - Towns touched: count not recorded.
 - Why: A circular import in the crisis files makes 'face' undefined; the conversion was checked by reading only. The fault is under src and not the seat's.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CLOSE-TESTS-B; tests/domain/tailCrisisBatch7.test.js; src/domain/crisis/crisisHooks.js]
 
-**867. The lighting check of the test estate is red: 3,603 files against a frozen 3,448; it was named to the chair and not re-frozen.**
+**968. The lighting check of the test estate is red: 3,603 files against a frozen 3,448; it was named to the chair and not re-frozen.**
 
 - Towns touched: 3,603 against 3,448 files (not towns).
 - Why: Re-freezing is the lighting check's own regeneration (CONTRIBUTING / LANE_LAW_ADDENDUM_EFF1 section 3) and is outside the seat's brief.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CLOSE-TESTS-C; tests/lint/sovereigntyLightingContract.walker.test.js]
 
-**868. Seven test files have rationales but no red-first test on record, and the check was not run for them: prosperityStanding, defenceParts, npcStructureBody, defenceDerived, tailHistoryBatch1, tailTies3Batch1 and holderTitleForms (plus tailDefecon5RecordCures).**
+**969. Seven test files have rationales but no red-first test on record, and the check was not run for them: prosperityStanding, defenceParts, npcStructureBody, defenceDerived, tailHistoryBatch1, tailTies3Batch1 and holderTitleForms (plus tailDefecon5RecordCures).**
 
 - Towns touched: 7 of 161 entries (not towns).
 - Why: Every manifest entry is a written reason only (none 'uncovered'; baseline stays 186); where neither the commit nor the file records a red-first, the rationale says so.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CLOSE-TESTS-C; tests/lint/mutationCoverageManifest.test.js]
 
-**869. After the merge several checks are still red and are not the seat's: tailHistoryBatch6 MUST NOT (r2s-plague_onset-village-0), corpusEcoTailGuards (three DS-ECO-12 rows), displayEconRelianceFoodWords KEEP, tailDisplayCivic3V1 (r2r-metropolis-50), economicHistoryRecent (rw3-hamlet-calm-1), upkeepVocation, and the other half's lists.**
+**970. After the merge several checks are still red and are not the seat's: tailHistoryBatch6 MUST NOT (r2s-plague_onset-village-0), corpusEcoTailGuards (three DS-ECO-12 rows), displayEconRelianceFoodWords KEEP, tailDisplayCivic3V1 (r2r-metropolis-50), economicHistoryRecent (rw3-hamlet-calm-1), upkeepVocation, and the other half's lists.**
 
 - Towns touched: count not recorded.
 - Why: They were red at the base and left to the builders.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CLOSE-TESTS-B, TESTS-C]
 
-**870. The check of the SRC-1 list for the first-member and court-gate readers was named 'not cured: stop' because none of four lines routes through the home without re-deciding; the chair's door.**
+**971. The check of the SRC-1 list for the first-member and court-gate readers was named 'not cured: stop' because none of four lines routes through the home without re-deciding; the chair's door.**
 
 - Towns touched: count not recorded.
 - Why: Both lists say no row is ever added; later cured in SRC-2 (A i to A iv).
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CLOSE-SRC-1 (item 4), cured by TAIL-CLOSE-SRC-2; commits f1929eab3, 973a132c8, 3d8ad050e, 846fdcee2]
 
-## Part E. Decisions that are the owner's alone (100 items)
+## Part E. Decisions that are the owner's alone (110 items)
 
 These are decisions a seat or the chair wrote down as the owner's, not theirs.
 
-**871. The chair ruled that curing the food data is not granted and a lone food source is 'the first', not 'the whole', unless no farm row or harvest income stands; a gate word for it is the chair's to grant.**
+**972. The chair ruled that curing the food data is not granted and a lone food source is 'the first', not 'the whole', unless no farm row or harvest income stands; a gate word for it is the chair's to grant.**
 
 - Towns touched: 356 towns draw a one-source sentence; 267 hold a farm row or harvest income beside a lone source.
 - Why: The chair set this ruling (C20) and wrote that it is vetoable by the owner.
 - If vetoed: If the chair grants a word for the gate, three sentences can take it and a 'the whole' second version can return for the lone towns, as the hand-back says.
 - [TAIL-CORPUS-ECO-4; C20; docs/chair/2026-11-14/tail/TAIL-CORPUS-ECO-HANDBACK.md]
 
-**872. The checks that compare whole generated towns with saved copies are red and can only be re-taken through the owner's door; this group's batches 8 to 11 change what 60 + 66 + 125 + 13 records of the 720 sample towns print.**
+**973. The checks that compare whole generated towns with saved copies are red and can only be re-taken through the owner's door; this group's batches 8 to 11 change what 60 + 66 + 125 + 13 records of the 720 sample towns print.**
 
 - Towns touched: 264 records of the 720 sample towns in batches 8 to 11 (60 + 66 + 125 + 13); earlier batches also change descriptions.
 - Why: The re-take is the owner's decision and was not done; it adds to what the owner's door will show.
 - If vetoed: effect not stated in the hand-back
 - [houses seat; owner's door; tests/property/generatorGoldenMaster.test.js; espionageDormancyFence]
 
-**873. The role-based tie lines were decided as option (B): reword to what any card of the category bears, with no new table of houses to offices, because no existing file tells a policing office from a hired company from a garrison's command.**
+**974. The role-based tie lines were decided as option (B): reword to what any card of the category bears, with no new table of houses to offices, because no existing file tells a policing office from a hired company from a garrison's command.**
 
 - Towns touched: 33 lines reworded, 162 towns at the base.
 - Why: The leaf read (the defence roster by kind) does not tell the three apart: 75 ends fall in no bucket and a castellan's citadel is classed as walls.
 - If vetoed: effect not stated in the hand-back
 - [rulings T17, T19; src/domain/institutions/defenseInstitutionBuckets.js]
 
-**874. The hook line "… a crime the guard is currently investigating." is kept in all 147 towns; a town holding a militia alone counts as holding a force (3 towns: r2r-hamlet-34, r2r-village-56, r2s-insurgency-village-1).**
+**975. The hook line "… a crime the guard is currently investigating." is kept in all 147 towns; a town holding a militia alone counts as holding a force (3 towns: r2r-hamlet-34, r2r-village-56, r2s-insurgency-village-1).**
 
 - Towns touched: 147 of 720 sample towns print it (147 to 147); 3 hold a militia alone.
 - Why: By ruling T3 the line is not false where a militia is the force; it is flagged for the owner's veto.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-TIES batch 2; rows 22767, X9 28931; ruling T3]
 
-**875. The word "ruling body" is safe to key on (the governing power's kind never moves after it is written, 720 of 720) but must not be keyed on the governing power's capture state (it moves after the write in 103 towns) or its legitimacy crisis note (11).**
+**976. The word "ruling body" is safe to key on (the governing power's kind never moves after it is written, 720 of 720) but must not be keyed on the governing power's capture state (it moves after the write in 103 towns) or its legitimacy crisis note (11).**
 
 - Towns touched: 103 and 11 of 720 sample towns.
 - Why: A ruling lifted the earlier hold on new lines using this word.
 - If vetoed: effect not stated in the hand-back
 - [rulings T16, T16 LIFTED, T20; hookTruth.js ruledByCouncil]
 
-**876. The pilgrimage, divine healing and fortification rows of the supply-chain data are parked for the owner and were not changed.**
+**977. The pilgrimage, divine healing and fortification rows of the supply-chain data are parked for the owner and were not changed.**
 
 - Towns touched: 57 of 720 sample towns (the no-lane seat's count); row counts: 60, 7, 4 and 1 towns (see the rows).
 - Why: An earlier ruling parks these rows for the owner; they do not move before the release; the no-lane seat counted them at 57 of 720 towns.
@@ -9836,217 +11089,226 @@ These are decisions a seat or the chair wrote down as the owner's, not theirs.
 
 - [houses seat; ruling H4; src/data/supplyChainData.js]
 
-**877. The chair ruled the hedged small-hidden-trade sentence stands and goes on the owner's veto list as a hedge form; the canonical row agrees (the first line has its rule, the second is the hedge).**
+**978. The chair ruled the hedged small-hidden-trade sentence stands and goes on the owner's veto list as a hedge form; the canonical row agrees (the first line has its rule, the second is the hedge).**
 
 - Towns touched: 55 of 720 sample towns.
 - Why: The chair set this ruling (C21, C22); the hand-back writes it is vetoable by the owner.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CORPUS-ECO-4; C21 C22; DS-ECO-6 minor v1; docs/chair/2026-11-14/tail/TAIL-CORPUS-ECO-HANDBACK.md]
 
-**878. A new word, 'rival power', was added to the list of facts a line may depend on. It is true where the town holds a power other than the ruling one whose own standing is Significant or above. The chair limited this word family to three (shared power, ruling body, rival power), with no fourth without the chair.**
+**979. The owner decides whether the heading "The ruling three of <one-head power>" must change: it names the ruling power's three ranked faces, not a joint rule, and was left as it is; a reword to "The first three of" was built and withdrawn.**
+
+- Towns touched: 45 + 22 + 20 + 20 of 720 sample towns (rows 21791, 21783, 21802, 21800).
+- Before: “The ruling three of <one-head power>”
+- After: “The first three of (built and withdrawn)”
+- Why: Two checks outside these files hold the words (the page-findings check for the ruling three and the registered words for the ruling faces).
+- If vetoed: If the heading changes, those two checks must move with it.
+- [TAIL-POWERS-B seat 1; rows 21791, 21783, 21802, 21800; domain/coherence/pageCensusFindings.js P16three, domain/facts/registeredWords.js rulingFaces]
+
+**980. A new word, 'rival power', was added to the list of facts a line may depend on. It is true where the town holds a power other than the ruling one whose own standing is Significant or above. The chair limited this word family to three (shared power, ruling body, rival power), with no fourth without the chair.**
 
 - Towns touched: true in 21 of the 37 insurgency sample towns and false in 16 (the chair expected 27 and 10; 27 is the count with any second power, and 6 of those have only Minor or Suppressed rivals).
 - Why: A new word in the shared vocabulary is the chair's call and was marked open to the owner's veto.
 - If vetoed: Effect not stated in the hand-back.
 - [TAIL-CRISIS, TAIL-CRISIS-2; K6, K10; 30daac9a7; src/domain/facts/rivalPower.js; src/domain/facts/factVocabulary.js; tests/domain/facts/rivalPower.test.js]
 
-**879. The seat did not follow the letter of ruling D34 for fishing grounds: the data keeps the coast's salt and the list asks a Salt works for it.**
+**981. The seat did not follow the letter of ruling D34 for fishing grounds: the data keeps the coast's salt and the list asks a Salt works for it.**
 
 - Towns touched: 25 of 720 sample towns with the cure as built; 61 with the ruling's letter.
 - Why: Following the letter would tell a coastal Salt works that it "lacks access to" salt (6 towns) or "runs on imported" salt (8) in 14 towns: false beside the ruling's own words.
 - If vetoed: The cure as the ruling worded it returns: it moves 61 towns and prints the 14 false lines.
 - [TAIL-DEFECON-C seat; ruling D34 (deviation); commit after 680d16b54]
 
-**880. The ties group was given one exception to the rules of file ownership: the one place where the hook facts are built in the people generator, so the crisis can be passed to it.**
+**982. The ties group was given one exception to the rules of file ownership: the one place where the hook facts are built in the people generator, so the crisis can be passed to it.**
 
 - Towns touched: the ruling says 6 towns' lines change; the batch measured 4 towns (6 false lines); the two counts disagree.
 - Why: The chair ruled it vetoable by the owner; only six towns' lines change.
 - If vetoed: effect not stated in the hand-back
 - [ruling T7; src/generators/people/representatives.js]
 
-**881. The line "Collect the tribute the dragon demands …" is kept: a being the record does not hold, such as a dragon, is flavour only under the owner's own design of 2026-11-08.**
+**983. The line "Collect the tribute the dragon demands …" is kept: a being the record does not hold, such as a dragon, is flavour only under the owner's own design of 2026-11-08.**
 
 - Towns touched: 6 cards on the 720 print a dragon's tribute.
 - Why: The owner's design ("purely fantasy aesthetic goals … magic on only as the gate") strikes the row, flagged for the owner's veto.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-TIES-3; row 06985 X9 HIGH; ruling T11; src/data/npcData.js]
 
-**882. The chair ruled that no new word be added for 'a practitioner is on the rolls'; a town whose income leans on magic and holds no practitioner is the town data's fault, and 54 towns are not gated for 5.**
+**984. The chair ruled that no new word be added for 'a practitioner is on the rolls'; a town whose income leans on magic and holds no practitioner is the town data's fault, and 54 towns are not gated for 5.**
 
 - Towns touched: 5 of 54 printing sample towns.
 - Why: The chair set this ruling (C6) and wrote that it is vetoable by the owner.
 - If vetoed: A veto would reopen the word for the five parked rows; the hand-back does not say what would be added.
 - [TAIL-CORPUS-ECO; C6 (restated in the later rulings); docs/chair/2026-11-14/tail/TAIL-CORPUS-ECO-HANDBACK.md]
 
-**883. Whether a crisis cast's stand-in (a temporary person) should carry a hook at all is a question for the owner, next round.**
+**985. Whether a crisis cast's stand-in (a temporary person) should carry a hook at all is a question for the owner, next round.**
 
 - Towns touched: 2 of 7 test towns.
 - Why: The seat exempted the stand-in from the check by its own mark; the design question is left to the owner.
 - If vetoed: effect not stated in the hand-back
 - [ruling T27; tests/generators/clerkHookSmallPlace.test.js]
 
-**884. The chair's first five rulings (K1 to K5) set what this group of seats may change: the stores line beside a famine, the faith lines under siege or plague, summaries and hooks that name things the town lacks, and which seat owns the Tonight sheet's wording file and the hook-truth file.**
+**986. The chair's first five rulings (K1 to K5) set what this group of seats may change: the stores line beside a famine, the faith lines under siege or plague, summaries and hooks that name things the town lacks, and which seat owns the Tonight sheet's wording file and the hook-truth file.**
 
 - Towns touched: count not recorded.
 - Why: The rulings are the chair's and each is marked as open to the owner's veto.
 - If vetoed: Effect not stated in the hand-back.
 - [TAIL-CRISIS; rulings K1 K2 K3 K4 K5; src/domain/summary/tonightSheet.js; src/domain/coherence/hookTruth.js]
 
-**885. The chair's rulings of 2026-11-15 (K8 changed, K9, K10, K12 to K17) set the order of work and the limits. They name which batch lands first, that the 01034 sentence waits for the close, that the iron hooks take a form with no smith, forge or iron merchant, and that the quick guide's silences are accepted as told.**
+**987. The chair's rulings of 2026-11-15 (K8 changed, K9, K10, K12 to K17) set the order of work and the limits. They name which batch lands first, that the 01034 sentence waits for the close, that the iron hooks take a form with no smith, forge or iron merchant, and that the quick guide's silences are accepted as told.**
 
 - Towns touched: count not recorded.
 - Why: The rulings are the chair's and each is marked as open to the owner's veto.
 - If vetoed: Effect not stated in the hand-back.
 - [TAIL-CRISIS-3; K8 K9 K10 K12 K13 K14 K15 K16 K17; src/domain/dossier/faithReading.js]
 
-**886. The chair's rulings K21 to K23: build the late settling step so a summary can depend on the settled powers; every new dependency of a summary then changes stored text and counts as a declared change to stored text; grant the stored stake change for the revolt leadership (K22); and let the 10-town 'one of a power that loses by the crisis' wording stand with no veto (K23).**
+**988. The chair's rulings K21 to K23: build the late settling step so a summary can depend on the settled powers; every new dependency of a summary then changes stored text and counts as a declared change to stored text; grant the stored stake change for the revolt leadership (K22); and let the 10-town 'one of a power that loses by the crisis' wording stand with no veto (K23).**
 
 - Towns touched: count not recorded.
 - Why: The rulings are the chair's and each is marked as open to the owner's veto.
 - If vetoed: Effect not stated in the hand-back.
 - [TAIL-CRISIS-4, TAIL-CRISIS-5; K21 K22 K23; src/generators/steps/assembleSettlement.js]
 
-**887. The chair's rulings K24 to K27: a power the crisis itself raised takes the stake its name says (K24); the 'has no stake yet' row is not printed where truly untouched, with the silence accepted in advance (K25); a power named in a stake row takes its sentence form, such as 'The Guard' (K26); and the iron hook under a grain famine needs an iron shortage on the record (K27).**
+**989. The chair's rulings K24 to K27: a power the crisis itself raised takes the stake its name says (K24); the 'has no stake yet' row is not printed where truly untouched, with the silence accepted in advance (K25); a power named in a stake row takes its sentence form, such as 'The Guard' (K26); and the iron hook under a grain famine needs an iron shortage on the record (K27).**
 
 - Towns touched: count not recorded.
 - Why: The rulings are the chair's and each is marked as open to the owner's veto.
 - If vetoed: Effect not stated in the hand-back.
 - [TAIL-CRISIS-6; K24 K25 K26 K27; src/domain/crisis/crisisPage.js; src/domain/prose/powerSentenceName.js]
 
-**888. Chair's rulings received at the hand-back, not started by that seat (K28 and others): fix the load-order crash between the cast and hook files (nothing a town prints moves); cure or re-key five red check files in the crisis area, never skipping, weakening or deleting a check; and reword or re-source the struck word 'faction' in the crisis dependence data.**
+**990. Chair's rulings received at the hand-back, not started by that seat (K28 and others): fix the load-order crash between the cast and hook files (nothing a town prints moves); cure or re-key five red check files in the crisis area, never skipping, weakening or deleting a check; and reword or re-source the struck word 'faction' in the crisis dependence data.**
 
 - Towns touched: count not recorded.
 - Why: The rulings are the chair's and each is marked as open to the owner's veto.
 - If vetoed: Effect not stated in the hand-back.
 - [TAIL-CRISIS-6; K28, U2, styleLaw; src/domain/crisis/crisisHooks.js; src/data/crisisDependence.js; tests/lint/styleLaw.walker.test.js]
 
-**889. A new way to set aside a quiet pool in the crisis-blind check: a set-aside keyed by pool AND crisis family (':: threat'), each entry naming its declaring commit. The seat says this shape is the chair's to approve.**
+**991. A new way to set aside a quiet pool in the crisis-blind check: a set-aside keyed by pool AND crisis family (':: threat'), each entry naming its declaring commit. The seat says this shape is the chair's to approve.**
 
 - Towns touched: count not recorded.
 - Why: The current set-aside is keyed by pool only and cannot hold a pool that is silent under a siege by design but speaks under a famine.
 - If vetoed: Without it the check stays red on its half about quiet pools (the five pools named).
 - [TAIL-CRISIS-7, TAIL-CRISIS-8; K30 (b); tests/domain/crisisBlindDossierProse.test.js]
 
-**890. The chair's rulings K18 to K20: a quarrel line must not hide an open quarrel (K18); a culture phrase in the quick guide may name only what stands in the town, so a tank, bazaar or pastoral life needs a water work, market, herd or pasture on the record (K19, carried over from the layout line's law); and the crisis cast's stored reason must say in plain words what the record holds, with stored text of 39 towns granted for change (K20).**
+**992. The chair's rulings K18 to K20: a quarrel line must not hide an open quarrel (K18); a culture phrase in the quick guide may name only what stands in the town, so a tank, bazaar or pastoral life needs a water work, market, herd or pasture on the record (K19, carried over from the layout line's law); and the crisis cast's stored reason must say in plain words what the record holds, with stored text of 39 towns granted for change (K20).**
 
 - Towns touched: count not recorded.
 - Why: The rulings are the chair's and each is marked as open to the owner's veto.
 - If vetoed: Effect not stated in the hand-back.
 - [TAIL-CRISIS-3, TAIL-CRISIS-4; K18 K19 K20; src/domain/summary/settlementQuickGuide.js; src/domain/crisis/crisisCast.js]
 
-**891. The rule for how a false line is cured: by a declaration or a rewording in the source file, never by striking a middle row; the generated files are rebuilt and checked before every push.**
+**993. The rule for how a false line is cured: by a declaration or a rewording in the source file, never by striking a middle row; the generated files are rebuilt and checked before every push.**
 
 - Towns touched: not a count.
 - Why: Chair's ruling C1, vetoable by the owner.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CORPUS-DEF seat; ruling C1]
 
-**892. The rules that no ceiling is raised and that a state a declaration would leave mute takes a second version of the line; land pool by pool; replay is the measure.**
+**994. The rules that no ceiling is raised and that a state a declaration would leave mute takes a second version of the line; land pool by pool; replay is the measure.**
 
 - Towns touched: not a count.
 - Why: Chair's rulings C2 and C3, vetoable by the owner.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CORPUS-DEF seat; rulings C2, C3]
 
-**893. The order of work for the council lines and the new words ("ruling body", "rival power", "shared power"): they wait, then are opened; a fourth new word is asked of the chair.**
+**995. The order of work for the council lines and the new words ("ruling body", "rival power", "shared power"): they wait, then are opened; a fourth new word is asked of the chair.**
 
 - Towns touched: not a count.
 - Why: Chair's rulings C5, C7, C14, C17, vetoable by the owner; the council lines are a page change left in the list above.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CORPUS-DEF seat; rulings C5, C7, C14, C17]
 
-**894. The order of work: the three first rows, then rows printing in five towns or more widest first; a row in fewer than five towns waits.**
+**996. The order of work: the three first rows, then rows printing in five towns or more widest first; a row in fewer than five towns waits.**
 
 - Towns touched: not a count.
 - Why: Chair's ruling C16, vetoable by the owner.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CORPUS-DEF seat; ruling C16]
 
-**895. Which lines the fresh readers flagged to be cured in batch 6; the "Economic Survival: STRONG" question is parked.**
+**997. Which lines the fresh readers flagged to be cured in batch 6; the "Economic Survival: STRONG" question is parked.**
 
 - Towns touched: not a count.
 - Why: Chair's ruling C18, vetoable by the owner; the ratings are the measuring seat's.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CORPUS-DEF seat; ruling C18]
 
-**896. The rule for broken checks: run each alone; cure a regression, re-key a check a declared move explains, or name a cause outside these files; never skip, weaken or delete a test. The chair also said no veto on batch 6's rewordings.**
+**998. The rule for broken checks: run each alone; cure a regression, re-key a check a declared move explains, or name a cause outside these files; never skip, weaken or delete a test. The chair also said no veto on batch 6's rewordings.**
 
 - Towns touched: not a count.
 - Why: Chair's ruling U2, vetoable by the owner.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CORPUS-DEF seat; ruling U2]
 
-**897. The rule for every new check: anchors computed through a helper, negatives anchored, seed loops through a totality helper; no more literal anchors in the guard file; never edit the mutation-coverage manifest.**
+**999. The rule for every new check: anchors computed through a helper, negatives anchored, seed loops through a totality helper; no more literal anchors in the guard file; never edit the mutation-coverage manifest.**
 
 - Towns touched: not a count.
 - Why: Chair's rule of 2026-11-15 05:06 UTC, vetoable by the owner.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CORPUS-DEF seat; chair rule 05:06 UTC; tests/helpers/drawnProse.js, anchoredNegatives.js; scripts/mutation-coverage-manifest.json]
 
-**898. Replacing a true line with a near-synonym that claims less, in more than twenty towns (the twenty-town rule): batch 6 told the chair before the push.**
+**1000. Replacing a true line with a near-synonym that claims less, in more than twenty towns (the twenty-town rule): batch 6 told the chair before the push.**
 
 - Towns touched: not a count.
 - Why: The hand-back says it was told to the chair; the chair answered no veto.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CORPUS-DEF seat; ruling C18; batch 6; commit d4a4bd590]
 
-**899. The rule that rows about the magic-dependency lines stay named, and that prose written before its facts are final is named, not cured by this group.**
+**1001. The rule that rows about the magic-dependency lines stay named, and that prose written before its facts are final is named, not cured by this group.**
 
 - Towns touched: not a count.
 - Why: Chair's rulings C8 and C9, vetoable by the owner.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CORPUS-DEF seat; rulings C8, C9]
 
-**900. The whole-town reference snapshot test is moved by these changes and was never re-taken; the owner re-takes it.**
+**1002. The whole-town reference snapshot test is moved by these changes and was never re-taken; the owner re-takes it.**
 
 - Towns touched: not a count.
 - Why: The hand-back calls the snapshot "the owner's door".
 - If vetoed: The snapshot test stays red until the owner re-takes it.
 - [TAIL-DEFECON-C seat; generatorGoldenMaster; all commits of this file]
 
-**901. The law for the "Produced locally" list: a made good is listed only where a house that makes or works it stands; a gathered or herded good only where the land gives it and it is worked; coal and peat stay as designed.**
+**1003. The law for the "Produced locally" list: a made good is listed only where a house that makes or works it stands; a gathered or herded good only where the land gives it and it is worked; coal and peat stay as designed.**
 
 - Towns touched: not a count.
 - Why: It is the chair's ruling (D6, D7, D30, D33), vetoable by the owner; its page effects are in the items above.
 - If vetoed: The older, longer lists return everywhere the law removed a good.
 - [TAIL-DEFECON-C seat; rulings D6, D7, D15, D30, D33]
 
-**902. The law for exports: a good is exported only where a house that digs, makes or works it stands (one table of goods to houses); the defended pass keeps its toll; coal and peat stay ungated.**
+**1004. The law for exports: a good is exported only where a house that digs, makes or works it stands (one table of goods to houses); the defended pass keeps its toll; coal and peat stay ungated.**
 
 - Towns touched: not a count.
 - Why: It is the chair's ruling D18 (with D25 for salt), vetoable by the owner; its page effects are in the items above.
 - If vetoed: The older, longer export lists return.
 - [TAIL-DEFECON-C seat; rulings D18, D25]
 
-**903. The chair's rules for this group's work: a sentence that is false goes silent; a state with no line takes a second version; no random draw is moved; a siege and a famine are respected; sentences agree; one fact has one home; no new vocabulary word; the PDF and export folders are not touched; every new line is listed for the veto.**
+**1005. The chair's rules for this group's work: a sentence that is false goes silent; a state with no line takes a second version; no random draw is moved; a siege and a famine are respected; sentences agree; one fact has one home; no new vocabulary word; the PDF and export folders are not touched; every new line is listed for the veto.**
 
 - Towns touched: count not recorded.
 - Why: The hand-back marks the rulings of the chair as vetoable by the owner; these rules decide what every changed sentence may say.
 - If vetoed: Effect not stated in the hand-back.
 - [TAIL-DEFECON, -R, -D; BRIEF-TAIL laws; rulings D1 to D3, D11, D12, D17]
 
-**904. The rule that no tail seat changes the defence rating's bands (ruling D4, restated as D12), with the one exception the chair granted in D20.**
+**1006. The rule that no tail seat changes the defence rating's bands (ruling D4, restated as D12), with the one exception the chair granted in D20.**
 
 - Towns touched: count not recorded.
 - Why: The defence rating's rebuild is not touched by these seats; a row needing a band change is a stop for the chair.
 - If vetoed: Effect not stated in the hand-back.
 - [TAIL-DEFECON, -D; rulings D4, D12, D20; src/data/bandLadders.js]
 
-**905. The order of work was set by the chair: widest first, with a row printing in fewer than five towns waiting behind every wider row.**
+**1007. The order of work was set by the chair: widest first, with a row printing in fewer than five towns waiting behind every wider row.**
 
 - Towns touched: count not recorded.
 - Why: It decides which false sentences are cured first and which wait.
 - If vetoed: Effect not stated in the hand-back.
 - [TAIL-DEFECON-4; rulings D27 and U1]
 
-**906. The chair ruled that none of the doubted catalogue pairs is moved now; they are gated at the made list and the export list first, and the data moves only for a pair that still prints false afterwards.**
+**1008. The chair ruled that none of the doubted catalogue pairs is moved now; they are gated at the made list and the export list first, and the data moves only for a pair that still prints false afterwards.**
 
 - Towns touched: count not recorded.
 - Why: It decides whether the resource data itself changes.
 - If vetoed: Effect not stated in the hand-back.
 - [TAIL-DEFECON-4; ruling D31; src/data/resourceData.js]
 
-**907. Under a siege, six towns keep the line "Vintner exists but lacks access to grapes", because nothing comes in by road, gate or water under a siege.**
+**1009. Under a siege, six towns keep the line "Vintner exists but lacks access to grapes", because nothing comes in by road, gate or water under a siege.**
 
 - Towns touched: 6 of 720 sample towns (besieged).
 - Before: “Vintner exists but lacks access to grapes”
@@ -10055,77 +11317,77 @@ These are decisions a seat or the chair wrote down as the owner's, not theirs.
 - If vetoed: The line would go in those 6 towns (r2r-metropolis-14, r2s-under_siege-city-0, -city-2, -metropolis-1, -metropolis-2, -metropolis-3), including where it is true.
 - [TAIL-DEFECON-R; commit fcf4cae69; src/generators/resourceGenerator.js]
 
-**908. The stored reference file of generated towns no longer matches what the generator makes, after these moves; whether to re-take it is the owner's decision and it was not re-taken.**
+**1010. The stored reference file of generated towns no longer matches what the generator makes, after these moves; whether to re-take it is the owner's decision and it was not re-taken.**
 
 - Towns touched: count not recorded.
 - Why: The owner's door: the hand-backs say the stored reference moves with each cure and was named stale, not re-taken.
 - If vetoed: Effect not stated in the hand-back.
 - [TAIL-DEFECON, -R, -D; tests/fixtures/generator-golden-master.json]
 
-**909. Two checks on world-fact resources (A2 and A6) stay red because re-capturing their stored digests would re-take the stored reference file of generated towns.**
+**1011. Two checks on world-fact resources (A2 and A6) stay red because re-capturing their stored digests would re-take the stored reference file of generated towns.**
 
 - Towns touched: 2 saved checks (6 stored digests); count of towns not applicable.
 - Why: Each later generator move moves those digests again; this seat's brief forbids re-taking the stored reference file.
 - If vetoed: The two checks stay red.
 - [TAIL-DEFECON-6; tests/property/editWorldFactResources.test.js; commit 9a3239ae earlier moved them]
 
-**910. The chair's laws for the economy pages: silence is true, but a line stays unless the town makes it false; a mute state gets a second version of the line; no random draw moves; one home for one fact; no new vocabulary word. The helper's rulings X1 to X4 (a chain's state and a house's work have one home; food claims of magic read from one place; the food figures agree with the food record) are each stated as vetoable by the owner.**
+**1012. The chair's laws for the economy pages: silence is true, but a line stays unless the town makes it false; a mute state gets a second version of the line; no random draw moves; one home for one fact; no new vocabulary word. The helper's rulings X1 to X4 (a chain's state and a house's work have one home; food claims of magic read from one place; the food figures agree with the food record) are each stated as vetoable by the owner.**
 
 - Towns touched: count not recorded.
 - Why: These are rules of the program rather than single page sentences.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-ECON; rulings X1 to X4 and the method's laws (BRIEF-TAIL C); docs/chair/2026-11-14/tail/TAIL-DISPLAY-ECON-HANDBACK.md]
 
-**911. The chair's rulings of 2026-11-15 00:10 for the economy helper (X9 to X13) are stated as vetoable by the owner: the exports read one row; the magic reliance reading is read from one home; the stores sentence takes a crisis later; 'of what it eats' may become 'of what it needs'; three Outlook rows go to another group. Their page effects are listed as separate items.**
+**1013. The chair's rulings of 2026-11-15 00:10 for the economy helper (X9 to X13) are stated as vetoable by the owner: the exports read one row; the magic reliance reading is read from one home; the stores sentence takes a crisis later; 'of what it eats' may become 'of what it needs'; three Outlook rows go to another group. Their page effects are listed as separate items.**
 
 - Towns touched: count not recorded.
 - Why: These are rulings of work order and ownership; the page changes they cause are separate items.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-ECON-2; X9 to X13; docs/chair/2026-11-14/tail/TAIL-DISPLAY-ECON-HANDBACK.md]
 
-**912. The chair's rulings of 2026-11-15 for the third economy helper (X19 to X24) are stated as vetoable by the owner: the siege's '(impaired)' state is struck as already right; the siege's sea exception is struck; the one merge the helper may make is named; the order of work after it (the facet key, the resource-chip rows, one export row); the PDF helper's two leaves to be switched to later; hand back early if the list is finished.**
+**1014. The chair's rulings of 2026-11-15 for the third economy helper (X19 to X24) are stated as vetoable by the owner: the siege's '(impaired)' state is struck as already right; the siege's sea exception is struck; the one merge the helper may make is named; the order of work after it (the facet key, the resource-chip rows, one export row); the PDF helper's two leaves to be switched to later; hand back early if the list is finished.**
 
 - Towns touched: count not recorded.
 - Why: These are rules of work order and ownership rather than page sentences.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-ECON-3; X19 to X24; merge e1cd689e6 of eb054d53f; docs/chair/2026-11-14/tail/TAIL-DISPLAY-ECON-HANDBACK.md]
 
-**913. The chair's rulings of 2026-11-15 02:10 for the fourth economy helper (X25.1, X26, X27, X28, X29) are stated as vetoable by the owner. They set the order of work (income and chain marks first, then the resource-name change, then rows in five towns or more, widest first; a row in fewer than five towns waits) and give the exploitation rows to another helper.**
+**1015. The chair's rulings of 2026-11-15 02:10 for the fourth economy helper (X25.1, X26, X27, X28, X29) are stated as vetoable by the owner. They set the order of work (income and chain marks first, then the resource-name change, then rows in five towns or more, widest first; a row in fewer than five towns waits) and give the exploitation rows to another helper.**
 
 - Towns touched: count not recorded.
 - Why: These are rules of work order and ownership; the page changes they cause are separate items.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-ECON-3/4; X25 to X29; docs/chair/2026-11-14/tail/TAIL-DISPLAY-ECON-HANDBACK.md]
 
-**914. The chair's rulings of 2026-11-15 04:02 for the fifth economy helper (X30 to X33) are stated as vetoable by the owner: the shadow economy's figure and where it prints; the short-of-food words read the food record's band; the magic words are read against the food record; X33 struck two other rows. Their page effects are separate items.**
+**1016. The chair's rulings of 2026-11-15 04:02 for the fifth economy helper (X30 to X33) are stated as vetoable by the owner: the shadow economy's figure and where it prints; the short-of-food words read the food record's band; the magic words are read against the food record; X33 struck two other rows. Their page effects are separate items.**
 
 - Towns touched: count not recorded.
 - Why: These are rulings of work order and ownership; the page changes they cause are separate items.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-ECON-5; X30 to X33; docs/chair/2026-11-14/tail/TAIL-DISPLAY-ECON-HANDBACK.md]
 
-**915. The chair's rulings worked to by the civic helpers (X1 to X16) are stated as vetoable by the owner. Among them: a power's chip and the prose beside it read one relation; 'Economic Resilience Strong' is struck if right by its own law; a heading's count is computed from its list; the Tonight sheet and the vocabulary file are not this helper's to edit; the exports' read is checked against the record; ownership of three display files is set.**
+**1017. The chair's rulings worked to by the civic helpers (X1 to X16) are stated as vetoable by the owner. Among them: a power's chip and the prose beside it read one relation; 'Economic Resilience Strong' is struck if right by its own law; a heading's count is computed from its list; the Tonight sheet and the vocabulary file are not this helper's to edit; the exports' read is checked against the record; ownership of three display files is set.**
 
 - Towns touched: count not recorded.
 - Why: These are rules of work order and ownership; the page changes they cause are separate items.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-DISPLAY-CIVIC and CIVIC-2; X1 to X16; docs/chair/2026-11-14/tail/TAIL-DISPLAY-CIVIC-HANDBACK.md]
 
-**916. The rules this group worked to: a line is cured by a rule on it or by rewording, never by striking a middle row; no ceiling is raised and a false line is not parked behind one; a state left with no line gets a second version of the line; under a siege nothing comes in or goes out; under a famine no line offers the food that failed; no new vocabulary word; a silence of true lines in more than twenty towns is told first.**
+**1018. The rules this group worked to: a line is cured by a rule on it or by rewording, never by striking a middle row; no ceiling is raised and a false line is not parked behind one; a state left with no line gets a second version of the line; under a siege nothing comes in or goes out; under a famine no line offers the food that failed; no new vocabulary word; a silence of true lines in more than twenty towns is told first.**
 
 - Towns touched: count not recorded.
 - Why: The chair set these (C1, C2, C3, C4, BRIEF-TAIL) and wrote that each is vetoable by the owner.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CORPUS-ECO; C1 C2 C3 C4; BRIEF-TAIL; U1 U2 (cure a regression, never skip or weaken a test); docs/chair/2026-11-14/tail/TAIL-CORPUS-ECO-HANDBACK.md]
 
-**917. The chair named and closed the family of power words (shared power, ruling body, rival power); a line needing one this branch lacks is parked until the chair names a tip that holds it; a new word is asked of the chair with every line that would use it; 'a chain's input reaches its house' was refused three times.**
+**1019. The chair named and closed the family of power words (shared power, ruling body, rival power); a line needing one this branch lacks is parked until the chair names a tip that holds it; a new word is asked of the chair with every line that would use it; 'a chain's input reaches its house' was refused three times.**
 
 - Towns touched: count not recorded.
 - Why: The chair set these rulings (C7, C11) and wrote that each is vetoable by the owner.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CORPUS-ECO; C7 C11 (merge at the named tip only when a parked row needs one: not merged); docs/chair/2026-11-14/tail/TAIL-CORPUS-ECO-HANDBACK.md]
 
-**918. The first-paint size budget (1,121,260 bytes) is exceeded: the page's eight eager chunks now read 1,164,844 bytes, 43,584 over.**
+**1020. The first-paint size budget (1,121,260 bytes) is exceeded: the page's eight eager chunks now read 1,164,844 bytes, 43,584 over.**
 
 - Towns touched: count not recorded.
 - Why: The budget was already 37,855 over at an earlier commit; about 5,700 bytes came after it. A trim of generator-only tables might recover one to two thirds of the overage, not measured to the byte; the rest is the first-paint screens' own growth and the owner's re-record.
@@ -10138,7 +11400,7 @@ These are decisions a seat or the chair wrote down as the owner's, not theirs.
 
 - [TAIL-TIES-6 T24; commits 7dc7757f, ea52c0805, d247d8a3; vite.config.js]
 
-**919. The engine chunk's size ceiling (726,454 bytes) is exceeded: the chunk reads 857,204 bytes, 130,750 over.**
+**1021. The engine chunk's size ceiling (726,454 bytes) is exceeded: the chunk reads 857,204 bytes, 130,750 over.**
 
 - Towns touched: count not recorded.
 - Why: All of the growth came after 11-11 and is generation code in the lazily loaded chunk; a trim there buys no first-paint byte, so the hand-back says re-recording the ceiling at the measured figure plus one is the owner's.
@@ -10151,98 +11413,98 @@ These are decisions a seat or the chair wrote down as the owner's, not theirs.
 
 - [TAIL-TIES-6 T24; commits 7dc7757f, d247d8a3; vite.config.js]
 
-**920. The order of work for batch 6 (ruling Y17): the readers' flags first, the high one first, then 03015, then the smaller lasting effects and rows in five towns or more, widest first, and a row in fewer than five towns waits.**
+**1022. The order of work for batch 6 (ruling Y17): the readers' flags first, the high one first, then 03015, then the smaller lasting effects and rows in five towns or more, widest first, and a row in fewer than five towns waits.**
 
 - Towns touched: count not recorded.
 - Why: A ruling of the chair that is vetoable by the owner and is a rule of the program.
 - If vetoed: The order of work changes; no page sentence changes by itself.
 - [the chair; ruling Y17, 2026-11-15 04:05 UTC]
 
-**921. One condition for the whole family of fish-and-catch arrival lines is measured as a family, not as three rows.**
+**1023. One condition for the whole family of fish-and-catch arrival lines is measured as a family, not as three rows.**
 
 - Towns touched: count not recorded.
 - Why: The chair's note of 04:08 UTC, vetoable by the owner.
 - If vetoed: The fish lines would be keyed one row at a time again.
 - [the chair; note of 04:08 UTC]
 
-**922. Before any new batch, the 198 failing tests of the joined line must be run file by file and cured; no test may be skipped or weakened.**
+**1024. Before any new batch, the 198 failing tests of the joined line must be run file by file and cured; no test may be skipped or weakened.**
 
 - Towns touched: count not recorded.
 - Why: Ruling U2 (05:06 UTC) is vetoable by the owner.
 - If vetoed: The order of work changes; effect not stated beyond that in the hand-back.
 - [the chair; ruling U2, 05:06 UTC]
 
-**923. Every new test from now on must use the new test helpers, no literal state sentence as an anchor, and must not edit the mutation coverage manifest.**
+**1025. Every new test from now on must use the new test helpers, no literal state sentence as an anchor, and must not edit the mutation coverage manifest.**
 
 - Towns touched: count not recorded.
 - Why: A new rule of the program under ruling U2.
 - If vetoed: effect not stated in the hand-back
 - [the chair; ruling U2; tests/helpers/anchoredNegatives.js, tests/helpers/drawnProse.js, scripts/mutation-coverage-manifest.json]
 
-**924. The order of work for batch 5 (ruling Y16): one count of towns first, then the exports' lasting effects, widest first, then 03015 and the rows in five or more towns.**
+**1026. The order of work for batch 5 (ruling Y16): one count of towns first, then the exports' lasting effects, widest first, then 03015 and the rows in five or more towns.**
 
 - Towns touched: count not recorded.
 - Why: A ruling of the chair vetoable by the owner.
 - If vetoed: The order of work changes; no page sentence changes by itself.
 - [the chair; ruling Y16, 2026-11-15 03:12 UTC]
 
-**925. The live-quarrel form is the law for every tension type: where a tension's text narrates an event the timeline does not hold, it is told as a present quarrel, with the type's label unchanged.**
+**1027. The live-quarrel form is the law for every tension type: where a tension's text narrates an event the timeline does not hold, it is told as a present quarrel, with the type's label unchanged.**
 
 - Towns touched: count not recorded.
 - Why: Ruling Y13 widens Y5 and is vetoable by the owner.
 - If vetoed: Tensions of all types would be told as past events again; see the item on batch 3.
 - [the chair; ruling Y13]
 
-**926. Each arrival line that names a house, a trade or a good must be measured against the towns that print it, and cured with a second version; a draw moved outside the cured line's own pool is a stop.**
+**1028. Each arrival line that names a house, a trade or a good must be measured against the towns that print it, and cured with a second version; a draw moved outside the cured line's own pool is a stop.**
 
 - Towns touched: count not recorded.
 - Why: Ruling Y14 is vetoable by the owner and sets how the arrival lines are cured.
 - If vetoed: effect not stated in the hand-back
 - [the chair; ruling Y14; src/data/arrivalProse.js]
 
-**927. Under a plague or a quarantine no line gathers a crowd as in ordinary times; the siege's form applies (a second version true in that state, or the line stays silent there).**
+**1029. Under a plague or a quarantine no line gathers a crowd as in ordinary times; the siege's form applies (a second version true in that state, or the line stays silent there).**
 
 - Towns touched: count not recorded.
 - Why: Ruling Y8 is vetoable by the owner.
 - If vetoed: effect not stated in the hand-back
 - [the chair; ruling Y8]
 
-**928. Two new words for the program's vocabulary (one about the governing power, one about a rival power): the first was released for new lines at 02:26 UTC, the second stays unsafe for the history; for rows 20031 and 20032 no word for heredity is added.**
+**1030. Two new words for the program's vocabulary (one about the governing power, one about a rival power): the first was released for new lines at 02:26 UTC, the second stays unsafe for the history; for rows 20031 and 20032 no word for heredity is added.**
 
 - Towns touched: count not recorded.
 - Why: Rulings Y9 and Y11 are vetoable by the owner.
 - If vetoed: effect not stated in the hand-back
 - [the chair; rulings Y9, Y11; atoms ruling body, rival power]
 
-**929. The aftermath shape (ruling Y5): a tension whose own event is not on the timeline is told as a live quarrel, the label stays, and the alternatives of setting the tension aside at selection (refused) and adding the event to the timeline (named, not built) are not taken.**
+**1031. The aftermath shape (ruling Y5): a tension whose own event is not on the timeline is told as a live quarrel, the label stays, and the alternatives of setting the tension aside at selection (refused) and adding the event to the timeline (named, not built) are not taken.**
 
 - Towns touched: count not recorded.
 - Why: A ruling of the chair, vetoable by the owner, 00:30 UTC.
 - If vetoed: Tensions with no event would be told as aftermath again; see the item on batch 2.
 - [the chair; ruling Y5]
 
-**930. A line that a crisis can make false is not scenery (ruling Y6): it takes its own condition and loses its scenery mark.**
+**1032. A line that a crisis can make false is not scenery (ruling Y6): it takes its own condition and loses its scenery mark.**
 
 - Towns touched: count not recorded.
 - Why: A ruling of the chair, vetoable by the owner.
 - If vetoed: Such lines would again be treated as scenery and carry no condition.
 - [the chair; ruling Y6]
 
-**931. The governing tests are re-keyed by name in each batch, none loosened; two lines of the crisis meta file are lent so the same two rewords stand there too.**
+**1033. The governing tests are re-keyed by name in each batch, none loosened; two lines of the crisis meta file are lent so the same two rewords stand there too.**
 
 - Towns touched: count not recorded.
 - Why: Ruling Y7 is vetoable by the owner.
 - If vetoed: The batch's governing tests would go red.
 - [the chair; ruling Y7; src/data/stressTypesMeta.js]
 
-**932. The first four rulings (Y1 to Y4): a line a historical event writes is true of its own event; crisis texts that need a second power or offices get a second version; each culture row is held to a condition; arrival prose under siege, with no market or at a size it does not fit takes second versions.**
+**1034. The first four rulings (Y1 to Y4): a line a historical event writes is true of its own event; crisis texts that need a second power or offices get a second version; each culture row is held to a condition; arrival prose under siege, with no market or at a size it does not fit takes second versions.**
 
 - Towns touched: count not recorded.
 - Why: Rulings of the chair of 2026-11-14, each vetoable by the owner.
 - If vetoed: effect not stated in the hand-back
 - [the chair; rulings Y1 to Y4; src/pdf/lib/cultureOnPage.js not edited]
 
-**933. Note for the owner: under a siege the alarm is not past, and the line 'Every household still knows where to run if the alarm is raised again' claims no road out.**
+**1035. Note for the owner: under a siege the alarm is not past, and the line 'Every household still knows where to run if the alarm is raised again' claims no road out.**
 
 - Towns touched: count not recorded.
 - Before: “Every household still knows where to run if the alarm is raised again”
@@ -10250,7 +11512,7 @@ These are decisions a seat or the chair wrote down as the owner's, not theirs.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-HISTORY-4; batch 5; src/data/historyData.js]
 
-**934. The owner decides whether the chair's first working rules for this group stand: a crisis sentence is not this group's to rewrite, a sentence false in ordinary times is, no change may alter which houses a town is born with, no new resource word is added and the "whenever the input can be had" form is used instead, council, charter, citadel and depleted-mine sentences are reworded by shape, sentences written before their facts are final are named and not cured, the PDF and journal are read next, and silence is true.**
+**1036. The owner decides whether the chair's first working rules for this group stand: a crisis sentence is not this group's to rewrite, a sentence false in ordinary times is, no change may alter which houses a town is born with, no new resource word is added and the "whenever the input can be had" form is used instead, council, charter, citadel and depleted-mine sentences are reworded by shape, sentences written before their facts are final are named and not cured, the PDF and journal are read next, and silence is true.**
 
 - Towns touched: not a town count.
 - Why: The hand-back marks these rulings as vetoable by the owner; they decide which page sentences this group may change and which it must leave.
@@ -10259,19 +11521,19 @@ These are decisions a seat or the chair wrote down as the owner's, not theirs.
 
   | Before | After | Towns |
   |---|---|---|
-  | – | – | – |
-  | – | – | – |
-  | – | – | – |
-  | – | – | – |
-  | – | – | – |
-  | – | – | – |
-  | – | – | – |
-  | – | – | – |
-  | – | – | – |
+  | (H1) THE CRISIS CLASS IS NOT YOURS (a house's description of ordinary times printed under a siege, a plague or a famine): the SERVICES seat builds ONE leaf and one table for the Services and the Institutions tabs: you rewrite no description for a crisis: strike those rows as "the SERVICES seat's class" and list them in your hand-back with each house's catalogue id. | – | – |
+  | (H2) YOURS: the rows false in ordinary times: a house described with what the town lacks (sea charts in a town with no water; a vintner selling where no grapes reach him; markets "in every quarter" in a place with one), a description that contradicts the house's own chain state, a catalogue row whose size words the tier cannot hold, a chain printed "Running" that the record's own chain state denies. | – | – |
+  | (H3) A cure in src/data/institutionalCatalog.js that would change which houses a town is BORN with is a declared move of the record and a STOP: you cure descriptions and declarations, not the roster's draws. The record's own incoherence (a house the size cannot hold) is being measured by another seat: NAME what you meet. | – | – |
+  | (H5), 2026-11-15 00:00-00:40 UTC: THE CRISIS-WORDED ROWS ARE THE LEAF'S (H1 stands: no text is rewritten for a crisis). The leaf is built and landed: `src/domain/display/crisisStoppedRow.js` with its table `src/data/crisisDependence.js` (services by name, houses by catalogue id, chains by chain id, income shares by source). THIS SEAT'S PART, by script, no cure: for each H1 candidate and each crisis row of X9, is the row's house (catalogue id) in the table for the crisis that makes the row false? IN THE TABLE: struck "answered by the leaf". NOT IN THE TABLE: the id, the crisis and the row, to the chair in ONE message (the services seat adds them). | – | – |
+  | (H6): NO RESOURCE WORD IN THE VOCABULARY ("a chain's input reaches its house" is the record's own chain state: the leaf marks a house short of its input; a text claims the trade by the hedge form). The Vintner finding (184 of 184 without grapes) is passed to the record's seat. The hedged texts stay as they are. | – | – |
+  | (H7): THE ORDINARY-TIMES ROWS, by shape, in batches: a house text naming a council, a guild rule or a charter the town does not have reads the record (a condition by an atom this branch holds, or a twin that claims no more than every printing town bears; `ruling body` and `rival power` are on other branches: a line that needs one is PARKED with its measure); a mine's or quarry's text over a depleted resource takes the hedge form; a text naming a citadel, a gate or a wall reads the defence, or takes a twin without it; a supply chain's output named where the chain does not run takes the hedge form. | – | – |
+  | (H8): A CLASS BEING MEASURED, not this seat's to move: prose written before its facts are final (true when drawn, false because the record moved afterwards): such a row is NAMED with that reason. | – | – |
+  | (X9): THE EXPORTS' READ, `docs/chair/2026-11-14/read-all-3/WORKLIST3-HOUSES.{md,json}` (98 rows only the PDF and the journal print), measured with `SURFACES=PDF,Journal python3 inventory.py <out-dir> x.json`. Order: H5's check first; then H7's rows by width; then what is left of X9. | – | – |
+  | BRIEF-TAIL's laws as written (silence is true; a twin for a mute state; no draw moved; one home for one fact; no new vocabulary word without the chair). | – | – |
 
 - [houses seat; chair rulings H1, H2, H3, H5, H6, H7, H8, X9, BRIEF-TAIL laws]
 
-**935. The owner decides whether the chair's second set of working rules stands: the council and government sentences stay parked until the town's governing power is known to be safe to read (then they are opened), the order of work is the PDF and journal rows first and then rows printing in five towns or more, a cold read of the newest lines found nothing to take, and each batch is pushed at once.**
+**1037. The owner decides whether the chair's second set of working rules stands: the council and government sentences stay parked until the town's governing power is known to be safe to read (then they are opened), the order of work is the PDF and journal rows first and then rows printing in five towns or more, a cold read of the newest lines found nothing to take, and each batch is pushed at once.**
 
 - Towns touched: not a town count.
 - Why: The hand-back marks these rulings as vetoable by the owner; they set the order of work and which rows wait.
@@ -10280,15 +11542,15 @@ These are decisions a seat or the chair wrote down as the owner's, not theirs.
 
   | Before | After | Towns |
   |---|---|---|
-  | – | – | – |
-  | – | – | – |
-  | – | – | – |
-  | – | – | – |
-  | – | – | – |
+  | (H12) THE GOVERNANCE ROWS STAY PARKED: the atom `ruling body` takes NO NEW LINE until the chair says so (a measuring seat is answering whether the density resize changes the governing power's one-or-many kind after the lines are written). Make no merge for them now. | – | – |
+  | (H13) THE ORDER: the exports' rows first (X9: the 39 still printing on the PDF and the journal: the geography strengths are the widest); then the rows of the first worklist that print in FIVE TOWNS OR MORE; a row in fewer than five towns waits. H9 ("(powerful)") stays parked as H11 wrote it; the brewery's banked text (12014) waits for the close. | – | – |
+  | (H14) Everything NEW on the tabs at the first landed tip was read cold (READ-ALL-4): no row of these files was flagged: nothing to take. | – | – |
+  | (H15), 02:26 UTC (read at 03:00, after batch 5's push): H12 IS LIFTED: on the 720 the density resize NEVER changes the governing power (its name, `government` and category the same when the lines are written as at the end, 720 of 720): `ruling body` is safe at every step and takes new lines again. THE GOVERNANCE ROWS ARE OPEN, in their place by width (the exports' rows still first): merge the joined line at d817736d8 for them (`git fetch origin lane/join-2026-11-14`; it holds both atoms; the only merge this seat makes) and re-take the before there. STILL NOT TO BE KEYED ON: the governing power's capture state (it moves after the write in 103 towns) and its legitimacy crisis note (11). | – | – |
+  | (U1) The account's weekly usage warning: commit and push every batch the moment it holds, WHAT IS LEFT current in the same push; hand back at 250,000; one line to the chair only at the hand-back, a stop, or a question. | – | – |
 
 - [houses seat; chair rulings H12, H13, H14, H15, U1]
 
-**936. The owner decides whether the chair's third set of working rules stands: the widest unchecked rows are measured first, the fisher's landing sentence goes ahead, a governing house's sentence is reworded or waits for the final check after the town is written and is never keyed on a power, titles a person does not hold are checked first, and rows in fewer than five towns wait.**
+**1038. The owner decides whether the chair's third set of working rules stands: the widest unchecked rows are measured first, the fisher's landing sentence goes ahead, a governing house's sentence is reworded or waits for the final check after the town is written and is never keyed on a power, titles a person does not hold are checked first, and rows in fewer than five towns wait.**
 
 - Towns touched: not a town count.
 - Why: The hand-back marks these rulings as vetoable by the owner; they decide which council and government rows are cured by rewording and which are parked.
@@ -10297,16 +11559,16 @@ These are decisions a seat or the chair wrote down as the owner's, not theirs.
 
   | Before | After | Towns |
   |---|---|---|
-  | – | – | – |
-  | – | – | – |
-  | – | – | – |
-  | – | – | – |
-  | – | – | – |
-  | – | – | – |
+  | (H16) FIRST, THE WIDE ROWS NOBODY HAS VERIFIED: the two tables the predecessors left unverified ("Candidates for the H1 strike" and "Left for the next seat: ordinary-times rows"), WIDEST FIRST (B12717 177 towns; B17254 87; then down to five towns): each row measured over EVERY town that prints it. A crisis reason is the services seat's class (the crisis leaf marks the row on every surface): STRIKE it for the leaf if it is true in ordinary times; an ordinary-times reason is this seat's: cure by a condition, a twin or the one hedge form, or strike with the measure. | – | – |
+  | (H17) BATCH 6 as the hand-back has it (the fisher's landing: false in 12 of 76). | – | – |
+  | (H18) THE GOVERNANCE ROWS (about thirty, 5 to 38 towns): a house's description is drawn BEFORE the powers exist (`birthFactsOf` holds no power structure), so a sibling keyed on `ruling body` or `rival power` CANNOT READ at the draw. No merge for them now; two ways only: (i) a rewording true in every town that prints the line that keeps it a good line (it claims the house's own trade and standing, not who governs); (ii) a row no such rewording saves is PARKED with its measure for THE LATE RE-READ (a pass that re-checks a drawn line's declared needs against the settled record and swaps in its twin; being built on the crisis branch; the chair names the tip). Do not key a description on a power  | – | – |
+  | (H19) The titles a person does not hold (B05150 "Alderman", B05317 "Lord Marshal"): check the record's `memberships` first; strike what the record bears. | – | – |
+  | A row printing in fewer than five towns waits. H9 and the brewery's banked text stay as H11 and H13 left them. | – | – |
+  | (U1) the account's weekly usage warning: commit and push every batch the moment it holds, with WHAT IS LEFT current in the same push; hand back at 250,000 (or about seventy minutes); one line to the chair at the hand-back, a stop, or a question only. | – | – |
 
 - [houses seat; chair rulings H16, H17, H18, H19, U1]
 
-**937. The owner decides whether the chair's fourth set of working rules stands: a government sentence takes one of two cures (reword it, or declare a need that the final check after the town is written resolves by swapping in a second version), the hedged sentences may take their plain line back only if a word for a live input exists, two woodcutter rows are taken up, red checks in the houses' area are fixed first, and there is no veto on the merchant-guild batch.**
+**1039. The owner decides whether the chair's fourth set of working rules stands: a government sentence takes one of two cures (reword it, or declare a need that the final check after the town is written resolves by swapping in a second version), the hedged sentences may take their plain line back only if a word for a live input exists, two woodcutter rows are taken up, red checks in the houses' area are fixed first, and there is no veto on the merchant-guild batch.**
 
 - Towns touched: not a town count.
 - Why: The hand-back marks the ruling as vetoable by the owner; it also lets the final check reach a house's description, which changes what 60 sample-town records print.
@@ -10315,202 +11577,282 @@ These are decisions a seat or the chair wrote down as the owner's, not theirs.
 
   | Before | After | Towns |
   |---|---|---|
-  | – | – | – |
-  | – | – | – |
-  | – | – | – |
+  | (H20) (1) THE GOVERNANCE ROWS (about twenty-five, 5 to 38 towns: a house's description that claims who governs or what standing a power has, DRAWN BEFORE THE POWERS EXIST): each takes ONE of two cures, by its measure: (i) a rewording true in every printing town that claims the house's own trade and standing; (ii) A DECLARED NEED RESOLVED AT THE LATE RE-READ, with a twin: the description is drawn as today (no draw moves) and the late pass swaps in the twin where the settled record does not bear the claim. FIRST MAKE THE LATE PASS REACH A HOUSE'S DESCRIPTION if it does not yet (say what it took; the pass must stay BYTE-IDENTICAL on the 720 until a description declares: show it); one row built  | – | – |
+  | (U2), 04:49 UTC: the line must pass first: four red files in the houses' area, each run alone at the merged tree: a regression of an earlier cure in this group's files is cured; a pin a declared move explains is re-keyed by identity; a cause outside these files is named with its commit. Never skip, weaken or delete a test. Then H20 as written. (05:06) every new test: negatives anchored (`tests/helpers/anchoredNegatives.js`), seed loops through the totality helper, no literal state-prose anchor; `scripts/mutation-coverage-manifest.json` not edited. (H21, 05:07) NO VETO on batch 10. | – | – |
+  | (U1) stands: commit and push every batch the moment it holds, WHAT IS LEFT current in the same push; hand back at 250,000 (or about seventy minutes); one line to the chair at the hand-back, a stop, or a question. | – | – |
 
 - [houses seat; chair rulings H20, H21, U1, U2; src/generators/steps/assembleSettlement.js lent to this group]
 
-**938. The form of every cure: a row admitted only where the record agrees, with a second version in the same place and no pick moved (N1). A political or historical line that names a thing (priests, guilds, a court, a harbour) needs it in the town, and a line that states a present state needs the state (N2).**
+**1040. The form of every cure: a row admitted only where the record agrees, with a second version in the same place and no pick moved (N1). A political or historical line that names a thing (priests, guilds, a court, a harbour) needs it in the town, and a line that states a present state needs the state (N2).**
 
 - Towns touched: count not recorded.
 - Why: The hand-back lists these rulings as the chair's and vetoable by the owner.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-NARRATIVE; rulings N1, N2; the chair's, 2026-11-14]
 
-**939. The program's working laws for this group: silence is true (over twenty towns told first); a state left mute takes a second version; no pick moved; under a siege nothing comes in or goes out; under a famine no line offers the food that failed; a place is not the subject of a verb it does not agree with; one home for one fact; no new vocabulary word without the chair; nothing under the PDF or journal code.**
+**1041. The program's working laws for this group: silence is true (over twenty towns told first); a state left mute takes a second version; no pick moved; under a siege nothing comes in or goes out; under a famine no line offers the food that failed; a place is not the subject of a verb it does not agree with; one home for one fact; no new vocabulary word without the chair; nothing under the PDF or journal code.**
 
 - Towns touched: count not recorded.
 - Why: The hand-back lists them as the chair's laws and vetoable by the owner.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-NARRATIVE; BRIEF-TAIL's laws; the chair's, 2026-11-14]
 
-**940. How parked rows are handled: a line is not granted a new word unmeasured (N5); origin lines are built as proposed where a cure is a condition, a second version or a rewording inside the group's files (N6).**
+**1042. How parked rows are handled: a line is not granted a new word unmeasured (N5); origin lines are built as proposed where a cure is a condition, a second version or a rewording inside the group's files (N6).**
 
 - Towns touched: count not recorded.
 - Why: The hand-back lists these rulings as the chair's and vetoable by the owner.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-NARRATIVE-2; rulings N5, N6; the chair's, 2026-11-15 00:15 to 00:45 UTC]
 
-**941. The word list stays closed: no new vocabulary word (N7); "shared power" is on this branch, "ruling body" and "rival power" on others; "ruling body" took no new line until the chair lifted that on 2026-11-15 02:26 UTC (N15, N16), and the other branch is merged only if a parked row needs it (N11). Not to be keyed on: the governing power's capture state and its legitimacy crisis note.**
+**1043. The word list stays closed: no new vocabulary word (N7); "shared power" is on this branch, "ruling body" and "rival power" on others; "ruling body" took no new line until the chair lifted that on 2026-11-15 02:26 UTC (N15, N16), and the other branch is merged only if a parked row needs it (N11). Not to be keyed on: the governing power's capture state and its legitimacy crisis note.**
 
 - Towns touched: count not recorded.
 - Why: The hand-back lists these rulings as the chair's and vetoable by the owner.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-NARRATIVE-2 and -3; rulings N7, N11, N15, N16]
 
-**942. Rows that name a power's standing are left as they are when they were true when written, because the density resize removes or replaces powers in 665 of the 720 sample towns after the history is written; most such rows are false at the write and are cured.**
+**1044. Rows that name a power's standing are left as they are when they were true when written, because the density resize removes or replaces powers in 665 of the 720 sample towns after the history is written; most such rows are false at the write and are cured.**
 
 - Towns touched: count not recorded.
 - Why: The hand-back lists this ruling as the chair's and vetoable by the owner.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-NARRATIVE-2; ruling N8; the chair's]
 
-**943. Which group owns what: the exports' read is taken with a batch of the same writer (X9); the arrival scene's chooser is this group's whole (N12); the magic share and the two headings over the origin line are named for other groups (N14).**
+**1045. Which group owns what: the exports' read is taken with a batch of the same writer (X9); the arrival scene's chooser is this group's whole (N12); the magic share and the two headings over the origin line are named for other groups (N14).**
 
 - Towns touched: count not recorded.
 - Why: The hand-back lists these rulings as the chair's and vetoable by the owner.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-NARRATIVE-2 and -3; rulings X9, N12, N14]
 
-**944. The order of work: widest first (a row printing in fewer than five towns waits); then the founder's kind, then the arrival scene (N13, N17 (2) and (3), N18); and the usage rule to commit and push every batch and hand back at 250,000 or about seventy minutes (U1).**
+**1046. The order of work: widest first (a row printing in fewer than five towns waits); then the founder's kind, then the arrival scene (N13, N17 (2) and (3), N18); and the usage rule to commit and push every batch and hand back at 250,000 or about seventy minutes (U1).**
 
 - Towns touched: count not recorded.
 - Why: The hand-back lists these rulings as the chair's and vetoable by the owner.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-NARRATIVE-2 to -5; rulings N13, N17, N18, U1]
 
-**945. Measure first: a flag from the readers is a candidate; measure it over every one of the 720 sample towns before curing; cure by a condition, a declared second version (which spends no redraw) or a rewording; build the founder move as its own commit (N17, N18).**
+**1047. Measure first: a flag from the readers is a candidate; measure it over every one of the 720 sample towns before curing; cure by a condition, a declared second version (which spends no redraw) or a rewording; build the founder move as its own commit (N17, N18).**
 
 - Towns touched: count not recorded.
 - Why: The hand-back lists these rulings as the chair's and vetoable by the owner.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-NARRATIVE-4 and -5; rulings N17, N18; the chair's, 2026-11-15 03:44 and 04:24 UTC]
 
-**946. The owner decides the rule for crisis towns: a row is not rewritten row by row; a row that lives on what the crisis stops is marked, and one line at the head of each tab says the descriptions are of ordinary times. Mark and head line come from one shared list.**
+**1048. The owner decides the program's laws for the night: silence is true (a silence of true lines over twenty towns is told first), a state left mute takes a second version of the line, no ceiling is raised, a draw is not moved, one home for one fact, no new vocabulary word without the chair, and every new or reworded line is listed for the owner's veto.**
+
+- Towns touched: count not recorded.
+- Why: These laws are the rules the seats worked to; the hand-back lists them as vetoable.
+- If vetoed: effect not stated in the hand-back
+- [TAIL-POWERS and TAIL-POWERS-B; brief BRIEF-TAIL.md]
+
+**1049. The owner decides the size limit on one program file (799 lines): the ruling says a cure that adds lines there must move an equal weight into a new file, and the limit is not raised.**
+
+- Towns touched: not a town count: a limit of 799 lines.
+- Why: The limit is a size budget; the chair ruled it stands.
+- If vetoed: effect not stated in the hand-back
+- [TAIL-POWERS-2 and TAIL-POWERS-3; ruling P20; F31's module ceiling; src/generators/power/rulingStructure.js]
+
+**1050. The owner decides whether to re-record two stored whole-town sample results (the main one and the driven one) that are red because declared changes moved what pages say; the seats left them red.**
+
+- Towns touched: count not recorded.
+- Why: Both were already red at the start; the chair called it the owner's door, and the hand-back says the merge seat's re-record carries these moves.
+- If vetoed: effect not stated in the hand-back
+- [TAIL-POWERS seats 1-4; tests/property/generatorGoldenMaster.test.js, espionageDormancyFence's driven golden]
+
+**1051. The owner decides the order the fourth seat worked in (ruling P27): widest first as the list of what is left gives it (the small-thorp quarrel, the elders' respect line, the merchants' line, the lent tables' row, the council lines, the vignettes, down to 13 towns); a row printing in fewer than five towns waits.**
+
+- Towns touched: count not recorded.
+- Why: It is the chair's order of work, listed as vetoable.
+- If vetoed: effect not stated in the hand-back
+- [TAIL-POWERS seat 4; ruling P27]
+
+**1052. The owner decides whether to accept or change a statistical floor: a test that expects at least 372 of 400 criminal cities to reach a state now sees 326, because many declared changes moved the town data.**
+
+- Towns touched: floor 372 against 326 (the sweep's 400 criminal cities).
+- Why: The chair called it the owner's door: a measured envelope moved by declared changes, not the powers' files.
+- If vetoed: effect not stated in the hand-back
+- Every form:
+
+  | Before | After | Towns |
+  |---|---|---|
+  | sweep result at 9e3880dd1 | 392 of 400 | 392 |
+  | at the merge 33b12cbef | 325 of 400 | 325 |
+  | at the branch's merge | 326 of 400 | 326 |
+  | registered floor | 372 | 372 |
+
+- [TAIL-POWERS-B seat 4 and seat 5; RED 3 captureBirthScale; first-parent bisect bfab7bdd8..4f24025c2; turns at 33b12cbef; floor capture.criminalCity.equilibrium, alpha 1e-3, 3.809 sigma; tests/generators/captureBirthScale.test.js]
+
+**1053. The owner decides the order of work for the second B seat (ruling P29): first the stress factions and the conflict issues (each rewording measured before it is built), then this seat's rows printing in five towns or more, widest first; a row in fewer than five towns waits.**
+
+- Towns touched: count not recorded.
+- Why: It is the chair's order of work, listed as vetoable.
+- If vetoed: effect not stated in the hand-back
+- [TAIL-POWERS-B seat 3; ruling P29, 2026-11-15 03:10 UTC]
+
+**1054. The owner decides the order of work for the fourth B seat (ruling P31): first the eight rows two cold reads found (the clergy line, the potter's clay secret, the merchant-craft vote, "Three powers stand almost level", the "ordained" kin, the thieves' guild wartime line), then two measured rows, then rows in five towns or more; measure only the chips that follow neither ladder.**
+
+- Towns touched: count not recorded.
+- Why: It is the chair's order of work, listed as vetoable.
+- If vetoed: effect not stated in the hand-back
+- [TAIL-POWERS-B seat 4; ruling P31, 2026-11-15 04:48 UTC; U2 order of reds first]
+
+**1055. The owner decides a rule: a relation line that claims a structural bargain ("each needs the other to stay strong", "Neither can afford to ruin the other", "works under the rules ... pays for a hearing") is true beside a conflict of the same pair over a named issue, so those lines were left; a line that claims the two leave each other alone is not true there and was cured.**
+
+- Towns touched: count not recorded.
+- Why: The conflict row is drawn from the people's rival ties (for example over precedence at public gatherings, or an account of public money), which does not break a structural bargain.
+- If vetoed: effect not stated in the hand-back
+- Every form:
+
+  | Before | After | Towns |
+  |---|---|---|
+  | rows 01218, 04943, B09963, B09516 (the merchants' dependent row) | left printed (true) | – |
+  | rows 13188, 10488, 14719, 07155, 23096, 07034 (the guard's symbiotic row) | left printed (the slashed name is cured) | – |
+  | rows 13334, 13330 (works under the rules; the Suppressed merchants work under them all the more) | left printed | – |
+
+- [TAIL-POWERS-B seat 1; rule on the structural bargain; cd97721f6]
+
+**1056. The owner decides the 90% rule for the parked title lines: a title line whose house lacks its input in 90% or more of the towns that hold it is named for the town-data seat and not reworded; only a gap that varies by town gets the hedge form, one short phrase, listed for the owner's veto.**
+
+- Towns touched: count not recorded.
+- Why: A gap that holds in nearly every town is a fault of the town data, not of the sentence.
+- If vetoed: effect not stated in the hand-back
+- [TAIL-POWERS-B seat 2; rulings P9, P12; 594794a67]
+
+**1057. The owner decides the rule for crisis towns: a row is not rewritten row by row; a row that lives on what the crisis stops is marked, and one line at the head of each tab says the descriptions are of ordinary times. Mark and head line come from one shared list.**
 
 - Towns touched: count not recorded.
 - Why: Ruling S1 of the chair, set as a rule of the program (with S2: the houses seat keeps the house texts; S3: a row false in ordinary times is declared on the row; S4: the PDF and journal files are not touched here).
 - If vetoed: effect not stated in the hand-back
 - [TAIL-SERVICES; rulings S1 S2 S3 S4]
 
-**947. The owner decides the rule that a chain's missing raw material is a second cause: a row whose house lacks its input by the page's own gap line is marked "Short of <input>." and framed as what the house makes when supplied, on both tabs, from the same list.**
+**1058. The owner decides the rule that a chain's missing raw material is a second cause: a row whose house lacks its input by the page's own gap line is marked "Short of <input>." and framed as what the house makes when supplied, on both tabs, from the same list.**
 
 - Towns touched: count not recorded.
 - Why: Ruling S5 of the chair; no word in the facts vocabulary says that a chain's input reaches its house, so the chair made the marking rule the home for it.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-SERVICES-2; ruling S5; 2b3736a6d]
 
-**948. The owner decides the order of work and the rule that the shared rule also answers for supply chains and income shares (no page change until a tab or export calls it).**
+**1059. The owner decides the order of work and the rule that the shared rule also answers for supply chains and income shares (no page change until a tab or export calls it).**
 
 - Towns touched: count not recorded.
 - Why: Ruling S6 of the chair: first S6, then S5, then batch 2, then the exports' rows (X9).
 - If vetoed: Nothing prints in another way until a caller uses it; the hand-back says no tab and no export was changed for it.
 - [TAIL-SERVICES-2; rulings S6 and X9; d7c032485]
 
-**949. The owner decides the guard on "short" marks: the rule marks only a gap that varies (under 90% of the towns that hold the house); a house at 90% or above is left unmarked and listed.**
+**1060. The owner decides the guard on "short" marks: the rule marks only a gap that varies (under 90% of the towns that hold the house); a house at 90% or above is left unmarked and listed.**
 
 - Towns touched: count not recorded.
 - Why: Ruling S7 of the chair: a gap the data holds in every town is the data's fault, not a state of the town.
 - If vetoed: The vintner and the glassblower rows would be marked in all their towns.
 - [TAIL-SERVICES-2; ruling S7; 2b3736a6d]
 
-**950. The owner decides the rule for adding houses to the crisis list: each is added only after the seat verifies by the row that "stopped" of the whole house is true; three siege cases were doubtful by the data (daily markets, multiple market squares, city granaries). A later seat's wish to change the rule's signature is told to the chair first.**
+**1061. The owner decides the rule for adding houses to the crisis list: each is added only after the seat verifies by the row that "stopped" of the whole house is true; three siege cases were doubtful by the data (daily markets, multiple market squares, city granaries). A later seat's wish to change the rule's signature is told to the chair first.**
 
 - Towns touched: count not recorded.
 - Why: Rulings S8, S13 and S14 of the chair; seven houses were refused as false for the whole house.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-SERVICES-2 and TAIL-SERVICES-3; rulings S8 S13 S14; 8df172bf0, da3826342]
 
-**951. The owner decides the order of work set after the second hand-back: first read what the earlier seat owed, then build batch 2 as written, take the exports' rows that belong to this group, and let the cure of the town data's gap (S10) lead.**
+**1062. The owner decides the order of work set after the second hand-back: first read what the earlier seat owed, then build batch 2 as written, take the exports' rows that belong to this group, and let the cure of the town data's gap (S10) lead.**
 
 - Towns touched: count not recorded.
 - Why: Rulings S9, S10, S11 and S12 of the chair.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-SERVICES-3; rulings S9 S10 S11 S12]
 
-**952. The owner decides the rule that the PDF and the journal print what the tab prints, through the tab's own shared rule, fact by fact; where the tab has no rule for a fact, the chapter's own content stays and is judged by the data.**
+**1063. The owner decides the rule that the PDF and the journal print what the tab prints, through the tab's own shared rule, fact by fact; where the tab has no rule for a fact, the chapter's own content stays and is judged by the data.**
 
 - Towns touched: count not recorded.
 - Why: Ruling E1 of the chair (with E5: a label with no value is cured by not printing it without its value; E6: every batch measured; P1: widest rows first).
 - If vetoed: effect not stated in the hand-back
 - [TAIL-EXPORTS-PDF; rulings E1 E5 E6 P1]
 
-**953. The owner decides the rule that, under a crisis, a PDF row that lives on what the crisis stops is marked by the shared rule of the services seat, and the PDF keeps no wording of its own for it.**
+**1064. The owner decides the rule that, under a crisis, a PDF row that lives on what the crisis stops is marked by the shared rule of the services seat, and the PDF keeps no wording of its own for it.**
 
 - Towns touched: count not recorded.
 - Why: Rulings E3 and E17 of the chair, with E16 (the one merge the seat makes) and E15 (strike a row saying a chain is impaired where the page says it is running).
 - If vetoed: effect not stated in the hand-back
 - [TAIL-EXPORTS-PDF-2; rulings E3 E15 E16 E17]
 
-**954. The owner decides the rule that a row printed in fewer than five towns waits (is named, not cured), and that the PDF's work is done when only such rows are left.**
+**1065. The owner decides the rule that a row printed in fewer than five towns waits (is named, not cured), and that the PDF's work is done when only such rows are left.**
 
 - Towns touched: count not recorded.
 - Why: Chair's rule of 2026-11-15, applied to five narrow rows.
 - If vetoed: The five narrow rows would be cured now; effect not otherwise stated in the hand-back.
 - [TAIL-EXPORTS-PDF-2 and TAIL-EXPORTS-PDF-3; chair's 2026-11-15 rule]
 
-**955. The owner decides the rule that a gendered title against its holder is the town data's question, not the PDF's (struck as the data's, for another seat).**
+**1066. The owner decides the rule that a gendered title against its holder is the town data's question, not the PDF's (struck as the data's, for another seat).**
 
 - Towns touched: count not recorded.
 - Why: Ruling E7 of the chair.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-EXPORTS-PDF; ruling E7; TAIL-TITLES]
 
-**956. A new word was added to the program's vocabulary: "ruling body" (the town is ruled by a body of more than one); lines about a vote or a council session now need it.**
+**1067. A new word was added to the program's vocabulary: "ruling body" (the town is ruled by a body of more than one); lines about a vote or a council session now need it.**
 
 - Towns touched: count not recorded.
 - Why: The chair granted the word and marked the ruling vetoable by the owner.
 - If vetoed: effect not stated in the hand-back
 - [ruling T5, 2026-11-14 23:25 UTC; src/domain/facts/ (new home file), src/data/factVocabulary.js, hookTruth.js re-export]
 
-**957. The first rule: a line about a vote, a council session or a body that must agree needs a body of more than one; under one ruler the slot draws another line of its pool.**
+**1068. The first rule: a line about a vote, a council session or a body that must agree needs a body of more than one; under one ruler the slot draws another line of its pool.**
 
 - Towns touched: count not recorded.
 - Why: A rule of the program, vetoable by the owner.
 - If vetoed: effect not stated in the hand-back
 - [ruling T1; src/data/npcData.js]
 
-**958. The second rule: two beats of one pair must not contradict; the pair's direction and state have one home, and the second beat is cured where it is drawn.**
+**1069. The second rule: two beats of one pair must not contradict; the pair's direction and state have one home, and the second beat is cured where it is drawn.**
 
 - Towns touched: count not recorded.
 - Why: A rule of the program, vetoable by the owner.
 - If vetoed: effect not stated in the hand-back
 - [ruling T2]
 
-**959. The third rule: a hook where a traveller arrives or passes needs open roads; "the guard is investigating" needs a force; "their street", "paying for drinks" and "their best customer" need the street, tavern or market the town has.**
+**1070. The third rule: a hook where a traveller arrives or passes needs open roads; "the guard is investigating" needs a force; "their street", "paying for drinks" and "their best customer" need the street, tavern or market the town has.**
 
 - Towns touched: count not recorded.
 - Why: A rule of the program, vetoable by the owner.
 - If vetoed: effect not stated in the hand-back
 - [ruling T3; src/domain/hookThemes.js]
 
-**960. The title word on a person belongs to the powers group's file of honorifics; a row of this group written there is named for it.**
+**1071. The title word on a person belongs to the powers group's file of honorifics; a row of this group written there is named for it.**
 
 - Towns touched: count not recorded.
 - Why: Ruled 23:13 UTC that the title word on a person is its design.
 - If vetoed: effect not stated in the hand-back
 - [ruling T4; src/data/faceHonorifics.js]
 
-**961. The file of relationship archetypes belongs to the ties group, and two tables of power siblings are lent to the powers' governance seat.**
+**1072. The file of relationship archetypes belongs to the ties group, and two tables of power siblings are lent to the powers' governance seat.**
 
 - Towns touched: count not recorded.
 - Why: No group held the first file; the ruling is the chair's correction of its own earlier word.
 - If vetoed: effect not stated in the hand-back
 - [rulings T6, T15, P26, T12; src/generators/power/relationshipArchetypes.js, src/data/powerSiblings.js]
 
-**962. The work order: rows are taken widest first; a row printing in fewer than five towns waits behind every wider row.**
+**1073. The work order: rows are taken widest first; a row printing in fewer than five towns waits behind every wider row.**
 
 - Towns touched: count not recorded.
 - Why: An order of work set by the chair.
 - If vetoed: effect not stated in the hand-back
 - [ruling T21]
 
-**963. The two size limits are over: first paint by 43,693 raw bytes against 1,121,260 (Brotli 310,922 against 299,985), and the engine by 132,162 against 726,453; re-recording them is the owner's alone.**
+**1074. The two size limits are over: first paint by 43,693 raw bytes against 1,121,260 (Brotli 310,922 against 299,985), and the engine by 132,162 against 726,453; re-recording them is the owner's alone.**
 
 - Towns touched: count not recorded.
 - Why: The seat measured the cause (generator code and eager chunks) and did not touch the numbers; it says never to re-record without the owner's ruling.
 - If vetoed: effect not stated in the hand-back
 - [ruling T24; vendorPdfLazy; docs/chair/2026-11-15/close/SIZE-BUDGETS-MEASURE.md; 7dc7757f, 188a2c49]
 
-**964. A trim of 16 modules from first paint (a separate branch, not landed) would cut 34,844 raw bytes, leaving the size limit red by 8,849 raw until the owner re-records.**
+**1075. A trim of 16 modules from first paint (a separate branch, not landed) would cut 34,844 raw bytes, leaving the size limit red by 8,849 raw until the owner re-records.**
 
 - Towns touched: count not recorded.
 - Why: The budget numbers stay untouched by the chair's ruling; the owner decides the re-record.
 - If vetoed: effect not stated in the hand-back
 - [ruling T26; branch lane/close-trim-first-paint-2026-11-15; ENGINE_SHARED_DOMAIN_EXCISIONS]
 
-**965. The first-paint size budget is red: 1,164,953 bytes against the recorded 1,121,260 (+43,693 raw; gzip +13,787; Brotli +10,931). The owner decides whether it is a re-record or a trim.**
+**1076. The first-paint size budget is red: 1,164,953 bytes against the recorded 1,121,260 (+43,693 raw; gzip +13,787; Brotli +10,931). The owner decides whether it is a re-record or a trim.**
 
 - Towns touched: size budget (not towns): +43,693 raw over; after the safe trim 8,849 raw still over.
 - Why: A budget is a measured envelope; a re-record is the owner's door and a trim is the program's. The seat measured: 16 new modules riding on first paint can be cut for -34,844 (boots safely, each in its own lane); about 8.8 kB raw remains and is not recoverable without per-module trials.
@@ -10524,28 +11866,28 @@ These are decisions a seat or the chair wrote down as the owner's, not theirs.
 
 - [SIZE-BUDGETS-MEASURE (TAIL-TIES-7); ruling T24; tests/build/vendorPdfLazy.test.js; recording commit 7dc7757f]
 
-**966. The engine chunk is red: 858,616 bytes against a ceiling of 726,454 (+132,162 over). The owner decides on a re-record at the measured figure plus 1, or a ruling that the ceiling becomes an envelope with headroom.**
+**1077. The engine chunk is red: 858,616 bytes against a ceiling of 726,454 (+132,162 over). The owner decides on a re-record at the measured figure plus 1, or a ruling that the ceiling becomes an envelope with headroom.**
 
 - Towns touched: size budget (not towns): +132,162 bytes over.
 - Why: All of the growth is the product's own generation code (truth and coherence work since 2026-11-09); no trim recovers it.
 - If vetoed: effect not stated in the hand-back
 - [SIZE-BUDGETS-MEASURE (TAIL-TIES-7); ruling T24; tests/build/vendorPdfLazy.test.js; recording commit 188a2c49; also docs/chair/2026-11-14/tail/TAIL-TIES-T24-SIZES.md (145b79cd)]
 
-**967. The saved-output check for the whole generator, and the other counted lists, are not re-taken; they move with every changed title, role and layout word and are the owner's door.**
+**1078. The saved-output check for the whole generator, and the other counted lists, are not re-taken; they move with every changed title, role and layout word and are the owner's door.**
 
 - Towns touched: 525 test configurations red at the base (EXPORTS-JOURNAL); not towns.
 - Why: Many seats changed what pages say; the saved output cannot be taken again until the program ends.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-TITLES; TAIL-EXPORTS-JOURNAL; TAIL-CLOSE-DISPLAY-1; tests/property/generatorGoldenMaster.test.js]
 
-**968. The tier-inertia envelope shows a town drift of 45 against a ceiling of 43 (0.225 at N=400). The owner decides once the landing is named.**
+**1079. The tier-inertia envelope shows a town drift of 45 against a ceiling of 43 (0.225 at N=400). The owner decides once the landing is named.**
 
 - Towns touched: 45 against 43 (not towns).
 - Why: The seat did not reach it and did not re-take it.
 - If vetoed: effect not stated in the hand-back
 - [TAIL-CLOSE-SRC-2; tests tierInertiaEnvelope]
 
-**969. The rules the exports seat worked to (each vetoable by the owner): the export prints what the tab prints through the tab's leaf; slash labels take the power's prose form; crisis rows are marked by one leaf; a flag of 'no seat' is checked against the data first; an empty label is cured by not printing it; the layout line names only what stands; and, since 2026-11-15, the journal calls the crisis leaf and prints its marks.**
+**1080. The rules the exports seat worked to (each vetoable by the owner): the export prints what the tab prints through the tab's leaf; slash labels take the power's prose form; crisis rows are marked by one leaf; a flag of 'no seat' is checked against the data first; an empty label is cured by not printing it; the layout line names only what stands; and, since 2026-11-15, the journal calls the crisis leaf and prints its marks.**
 
 - Towns touched: count not recorded.
 - Why: They set how the journal and the PDF are written, so they are the owner's to veto as rules.
@@ -10567,7 +11909,7 @@ These are decisions a seat or the chair wrote down as the owner's, not theirs.
 
 - [TAIL-EXPORTS-JOURNAL and -2; rulings E1 to E5, E7, E11 to E14, E19, J1, J2 (the chair, 2026-11-14 and 2026-11-15)]
 
-**970. The law for people's titles: the plain neutral word a reader would not notice; a pair only where both words are ordinary; one face, one word across its title, its role and its honorific; an office's title stays the office's; the midwife, the priest and the 'master' faces keep one word for both sexes.**
+**1081. The law for people's titles: the plain neutral word a reader would not notice; a pair only where both words are ordinary; one face, one word across its title, its role and its honorific; an office's title stays the office's; the midwife, the priest and the 'master' faces keep one word for both sexes.**
 
 - Towns touched: count not recorded.
 - Why: It decides what words every town page uses for titles; the midwife for a man is marked as the owner's veto.
@@ -10747,280 +12089,280 @@ Every line of the hand-backs and rulings that says "veto" or "the owner" has a r
 | docs/chair/2026-11-14/JOIN-9-HANDBACK.md | 155 | tests/property/generatorGoldenMaster.test.js (and the goldens it pins) tail-crisis (4) the DECLARED | MISSING |
 | docs/chair/2026-11-14/JOIN-9-HANDBACK.md | 156 | tests/property/generatorGoldenMaster.test.js tail-houses (5) the DECLARED MOVE of a2550c0ef (institutions[].desc only; | MISSING |
 | docs/chair/2026-11-14/JOIN-9-HANDBACK.md | 178 | tests/property/generatorGoldenMaster.test.js (and espionageDormancyFence.test.js where it drives the golden) display-econ (4) | MISSING |
-| docs/chair/2026-11-14/tail/TAIL-CORPUS-DEF-HANDBACK.md | 8 | ## The rulings worked to (the chair's, 2026-11-14; each vetoable | 891 |
-| docs/chair/2026-11-14/tail/TAIL-CORPUS-DEF-HANDBACK.md | 76 | ### New or changed lines (the owner's veto list; towns | 180 |
-| docs/chair/2026-11-14/tail/TAIL-CORPUS-DEF-HANDBACK.md | 166 | ### New lines (the owner's veto list) | 252 |
-| docs/chair/2026-11-14/tail/TAIL-CORPUS-DEF-HANDBACK.md | 224 | ### New or changed lines (the owner's veto list) | 275 |
-| docs/chair/2026-11-14/tail/TAIL-CORPUS-DEF-HANDBACK.md | 288 | ## The chair's rulings since (2026-11-15 02:10 UTC; each vetoable | 893 |
-| docs/chair/2026-11-14/tail/TAIL-CORPUS-DEF-HANDBACK.md | 347 | ### New or changed lines (the owner's veto list; towns | 229 |
-| docs/chair/2026-11-14/tail/TAIL-CORPUS-DEF-HANDBACK.md | 398 | ### New or changed lines (the owner's veto list) | 225 |
-| docs/chair/2026-11-14/tail/TAIL-CORPUS-DEF-HANDBACK.md | 433 | Two batches landed (4: 13 rows cured, 1 struck; 5: | 225 (not an item: summary count of the veto list (items 14 to 26), repeat of the items recorded elsewhere) |
-| docs/chair/2026-11-14/tail/TAIL-CORPUS-DEF-HANDBACK.md | 447 | ## The chair's ruling since (C18, 2026-11-15 04:03 UTC; vetoable | 895 |
-| docs/chair/2026-11-14/tail/TAIL-CORPUS-DEF-HANDBACK.md | 458 | - (U2, the chair 2026-11-15 04:49 UTC) NO VETO on | 896 |
-| docs/chair/2026-11-14/tail/TAIL-CORPUS-DEF-HANDBACK.md | 502 | ### New or changed lines (the owner's veto list; towns | 193 |
-| docs/chair/2026-11-14/tail/TAIL-CORPUS-DEF-HANDBACK.md | 581 | ### New line (the owner's veto list) | 260 |
-| docs/chair/2026-11-14/tail/TAIL-CORPUS-DEF-HANDBACK.md | 649 | ### New or changed line (the owner's veto list) | 205 |
-| docs/chair/2026-11-14/tail/TAIL-CORPUS-DEF-HANDBACK.md | 681 | SWEPT merge after C29. One record move (36 of 720, | 205 |
-| docs/chair/2026-11-14/tail/TAIL-CORPUS-ECO-HANDBACK.md | 14 | ## The rulings worked to (the chair's, 2026-11-14; each vetoable | 916 |
-| docs/chair/2026-11-14/tail/TAIL-CORPUS-ECO-HANDBACK.md | 33 | - THE CHAIR'S RULINGS SINCE (2026-11-14 23:58 to 2026-11-15 00:30 | 882 |
+| docs/chair/2026-11-14/tail/TAIL-CORPUS-DEF-HANDBACK.md | 8 | ## The rulings worked to (the chair's, 2026-11-14; each vetoable | 993 |
+| docs/chair/2026-11-14/tail/TAIL-CORPUS-DEF-HANDBACK.md | 76 | ### New or changed lines (the owner's veto list; towns | 182 |
+| docs/chair/2026-11-14/tail/TAIL-CORPUS-DEF-HANDBACK.md | 166 | ### New lines (the owner's veto list) | 254 |
+| docs/chair/2026-11-14/tail/TAIL-CORPUS-DEF-HANDBACK.md | 224 | ### New or changed lines (the owner's veto list) | 288 |
+| docs/chair/2026-11-14/tail/TAIL-CORPUS-DEF-HANDBACK.md | 288 | ## The chair's rulings since (2026-11-15 02:10 UTC; each vetoable | 995 |
+| docs/chair/2026-11-14/tail/TAIL-CORPUS-DEF-HANDBACK.md | 347 | ### New or changed lines (the owner's veto list; towns | 231 |
+| docs/chair/2026-11-14/tail/TAIL-CORPUS-DEF-HANDBACK.md | 398 | ### New or changed lines (the owner's veto list) | 227 |
+| docs/chair/2026-11-14/tail/TAIL-CORPUS-DEF-HANDBACK.md | 433 | Two batches landed (4: 13 rows cured, 1 struck; 5: | 227 (not an item: summary count of the veto list (items 14 to 26), repeat of the items recorded elsewhere) |
+| docs/chair/2026-11-14/tail/TAIL-CORPUS-DEF-HANDBACK.md | 447 | ## The chair's ruling since (C18, 2026-11-15 04:03 UTC; vetoable | 997 |
+| docs/chair/2026-11-14/tail/TAIL-CORPUS-DEF-HANDBACK.md | 458 | - (U2, the chair 2026-11-15 04:49 UTC) NO VETO on | 998 |
+| docs/chair/2026-11-14/tail/TAIL-CORPUS-DEF-HANDBACK.md | 502 | ### New or changed lines (the owner's veto list; towns | 195 |
+| docs/chair/2026-11-14/tail/TAIL-CORPUS-DEF-HANDBACK.md | 581 | ### New line (the owner's veto list) | 262 |
+| docs/chair/2026-11-14/tail/TAIL-CORPUS-DEF-HANDBACK.md | 649 | ### New or changed line (the owner's veto list) | 207 |
+| docs/chair/2026-11-14/tail/TAIL-CORPUS-DEF-HANDBACK.md | 681 | SWEPT merge after C29. One record move (36 of 720, | 207 |
+| docs/chair/2026-11-14/tail/TAIL-CORPUS-ECO-HANDBACK.md | 14 | ## The rulings worked to (the chair's, 2026-11-14; each vetoable | 1018 |
+| docs/chair/2026-11-14/tail/TAIL-CORPUS-ECO-HANDBACK.md | 33 | - THE CHAIR'S RULINGS SINCE (2026-11-14 23:58 to 2026-11-15 00:30 | 984 |
 | docs/chair/2026-11-14/tail/TAIL-CORPUS-ECO-HANDBACK.md | 52 | - (C13, 2026-11-15 02:05 UTC, handed to TAIL-CORPUS-ECO-3; vetoable by | 33 |
 | docs/chair/2026-11-14/tail/TAIL-CORPUS-ECO-HANDBACK.md | 61 | - (C19, 2026-11-15 04:08 UTC, handed to TAIL-CORPUS-ECO-4; vetoable by | 53 |
-| docs/chair/2026-11-14/tail/TAIL-CORPUS-ECO-HANDBACK.md | 76 | - (C20, 2026-11-15 04:38 UTC; vetoable) THE FISHING ROW IS | 871 |
-| docs/chair/2026-11-14/tail/TAIL-CORPUS-ECO-HANDBACK.md | 80 | - (C21, 2026-11-15 04:44 UTC; vetoable) C19's FIRST ROW WITHDRAWN: | 877 |
-| docs/chair/2026-11-14/tail/TAIL-CORPUS-ECO-HANDBACK.md | 88 | reworded line listed for the veto with three towns. | 916 |
+| docs/chair/2026-11-14/tail/TAIL-CORPUS-ECO-HANDBACK.md | 76 | - (C20, 2026-11-15 04:38 UTC; vetoable) THE FISHING ROW IS | 972 |
+| docs/chair/2026-11-14/tail/TAIL-CORPUS-ECO-HANDBACK.md | 80 | - (C21, 2026-11-15 04:44 UTC; vetoable) C19's FIRST ROW WITHDRAWN: | 978 |
+| docs/chair/2026-11-14/tail/TAIL-CORPUS-ECO-HANDBACK.md | 88 | reworded line listed for the veto with three towns. | 1018 |
 | docs/chair/2026-11-14/tail/TAIL-CORPUS-ECO-HANDBACK.md | 276 | tests/domain/corpusEcoTailGuards.test.js (now 83). A GONE row may name TWO vids | not an item: the 'owner's read' there means a reading of the page by the owner-facing reader, not a decision for the owner |
 | docs/chair/2026-11-14/tail/TAIL-CORPUS-ECO-HANDBACK.md | 277 | draw the pool (DS-ECO-6 significant at r2r-hamlet-17: the public v6, | not an item: same sentence as the previous line (the owner's read of a town page); a note on a test row |
-| docs/chair/2026-11-14/tail/TAIL-CORPUS-ECO-HANDBACK.md | 453 | (C22, the chair 05:07: the hedge KEPT, on the owner's | 877 |
-| docs/chair/2026-11-14/tail/TAIL-CORPUS-ECO-HANDBACK.md | 463 | lines' joints. Veto list: the four lines above, read in | 322 |
+| docs/chair/2026-11-14/tail/TAIL-CORPUS-ECO-HANDBACK.md | 453 | (C22, the chair 05:07: the hedge KEPT, on the owner's | 978 |
+| docs/chair/2026-11-14/tail/TAIL-CORPUS-ECO-HANDBACK.md | 463 | lines' joints. Veto list: the four lines above, read in | 371 |
 | docs/chair/2026-11-14/tail/TAIL-CORPUS-ECO-HANDBACK.md | 469 | ## The veto list (every new or reworded line, with | 25 |
-| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 9 | ## The rulings worked to (the chair's, 2026-11-14; each vetoable | 884 |
-| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 35 | away from "power" (22983 21315 11471 and the cover/traveller line) | 878 |
-| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 65 | veto list below). The widest, "Some in X have stopped | 390 |
-| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 139 | ## THE VETO LIST: every new or changed line (read | 390 |
-| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 228 | ## The chair's rulings since (2026-11-14 23:57 to 2026-11-15 00:41 | 878 |
-| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 311 | - **THE INHERITORS:** 74 sentences, all of them this batch's | 474 |
-| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 322 | estate readings are the widest calls, and the owner may | 272 |
-| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 414 | ## THE VETO LIST (batch 2): every new line, with | 474 |
-| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 532 | ## The chair's rulings since (2026-11-15; each vetoable by the | 885 |
-| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 548 | the veto list with what prints instead. | 272 |
-| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 649 | - **THE INHERITORS READ:** all 214 (tabs) and 455 (exports) | 378 |
-| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 658 | ## THE VETO LIST (this seat): every new or changed | 381 |
-| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 785 | ## The chair's rulings since (2026-11-15 02:10 UTC; each vetoable | 890 |
-| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 846 | ("built on clan lines"). The twin was already on batch | 470 |
-| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 886 | ## THE VETO LIST (batch 6): every new or changed | 386 |
-| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 911 | - **bruntMember** (10 towns) went with K20, beyond the 39 | 386 |
-| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 916 | **(DONE by TAIL-CRISIS-5: cd0b1ab7b; see its part below.)** **FIRST: K21, | 398 |
-| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 958 | ## The chair's rulings since (2026-11-15; each vetoable by the | 886 |
-| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 969 | - **(K23) NO VETO on K20's reach** (the same constant | 386 |
-| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 1069 | CAST_REASONS.bruntMember ("one of a power that loses by the crisis", | 386 |
-| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 1070 | on batch 6's veto list as written. | 386 |
-| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 1072 | ## THE VETO LIST (this seat): every new or changed | 398 |
-| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 1150 | ## The chair's rulings since (2026-11-15 04:08 UTC; each vetoable | 887 |
-| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 1213 | ## THE VETO LIST (batch 8): every new line, as | 399 |
-| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 1242 | the chair ruled it (K24, "holds the grain"); it stays | 414 |
-| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 1301 | - **THE INHERITORS READ** (57 on the tabs, every one | 399 |
+| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 9 | ## The rulings worked to (the chair's, 2026-11-14; each vetoable | 986 |
+| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 35 | away from "power" (22983 21315 11471 and the cover/traveller line) | 980 |
+| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 65 | veto list below). The widest, "Some in X have stopped | 444 |
+| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 139 | ## THE VETO LIST: every new or changed line (read | 444 |
+| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 228 | ## The chair's rulings since (2026-11-14 23:57 to 2026-11-15 00:41 | 980 |
+| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 311 | - **THE INHERITORS:** 74 sentences, all of them this batch's | 534 |
+| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 322 | estate readings are the widest calls, and the owner may | 283 |
+| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 414 | ## THE VETO LIST (batch 2): every new line, with | 534 |
+| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 532 | ## The chair's rulings since (2026-11-15; each vetoable by the | 987 |
+| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 548 | the veto list with what prints instead. | 283 |
+| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 649 | - **THE INHERITORS READ:** all 214 (tabs) and 455 (exports) | 432 |
+| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 658 | ## THE VETO LIST (this seat): every new or changed | 435 |
+| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 785 | ## The chair's rulings since (2026-11-15 02:10 UTC; each vetoable | 992 |
+| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 846 | ("built on clan lines"). The twin was already on batch | 530 |
+| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 886 | ## THE VETO LIST (batch 6): every new or changed | 440 |
+| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 911 | - **bruntMember** (10 towns) went with K20, beyond the 39 | 440 |
+| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 916 | **(DONE by TAIL-CRISIS-5: cd0b1ab7b; see its part below.)** **FIRST: K21, | 454 |
+| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 958 | ## The chair's rulings since (2026-11-15; each vetoable by the | 988 |
+| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 969 | - **(K23) NO VETO on K20's reach** (the same constant | 440 |
+| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 1069 | CAST_REASONS.bruntMember ("one of a power that loses by the crisis", | 440 |
+| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 1070 | on batch 6's veto list as written. | 440 |
+| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 1072 | ## THE VETO LIST (this seat): every new or changed | 454 |
+| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 1150 | ## The chair's rulings since (2026-11-15 04:08 UTC; each vetoable | 989 |
+| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 1213 | ## THE VETO LIST (batch 8): every new line, as | 456 |
+| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 1242 | the chair ruled it (K24, "holds the grain"); it stays | 471 |
+| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 1301 | - **THE INHERITORS READ** (57 on the tabs, every one | 456 |
 | docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 1325 | probes/moved.mjs (each stake whose reason moved), probes/veto.mjs (each new line's | not an item: names the scratch tools that measured each new line's towns |
-| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 1329 | ## THE CHAIR'S RULINGS RECEIVED AT THE HAND-BACK (2026-11-15 04:49 | 888 |
+| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 1329 | ## THE CHAIR'S RULINGS RECEIVED AT THE HAND-BACK (2026-11-15 04:49 | 990 |
 | docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 1388 | **THE VETO LIST (red 4, a declared move of display).** | 78 |
-| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 1431 | power). THE VETO LIST, on the 720 at e4799144: **125 | 380 |
-| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 1436 | and the four walkers: the same 10 red at base | 380 |
-| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 1446 | - **Red 1 under the chair's K30 (2026-11-15 05:48, vetoable | 482 |
-| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 1513 | CALM_ONLY tags.) So the case is RETIRED BY NAME in | 485 |
-| docs/chair/2026-11-14/tail/TAIL-DEFECON-C-HANDBACK.md | 8 | ## The rulings worked to (the chair's, 2026-11-14; each vetoable | 901 |
+| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 1431 | power). THE VETO LIST, on the 720 at e4799144: **125 | 434 |
+| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 1436 | and the four walkers: the same 10 red at base | 434 |
+| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 1446 | - **Red 1 under the chair's K30 (2026-11-15 05:48, vetoable | 542 |
+| docs/chair/2026-11-14/tail/TAIL-CRISIS-HANDBACK.md | 1513 | CALM_ONLY tags.) So the case is RETIRED BY NAME in | 545 |
+| docs/chair/2026-11-14/tail/TAIL-DEFECON-C-HANDBACK.md | 8 | ## The rulings worked to (the chair's, 2026-11-14; each vetoable | 1003 |
 | docs/chair/2026-11-14/tail/TAIL-DEFECON-C-HANDBACK.md | 25 | vocabulary word; no src/pdf/ or src/foundry/ ; every new line | not an item: general remark naming the laws of the program brief; each new line is listed as its own item |
-| docs/chair/2026-11-14/tail/TAIL-DEFECON-C-HANDBACK.md | 96 | ## The veto list (every new or changed line) | 151 |
-| docs/chair/2026-11-14/tail/TAIL-DEFECON-C-HANDBACK.md | 146 | (r2r-city-0 P7a, r2s-insurgency-metropolis-0 P7a, stale low, as at the base); | 900 |
+| docs/chair/2026-11-14/tail/TAIL-DEFECON-C-HANDBACK.md | 96 | ## The veto list (every new or changed line) | 152 |
+| docs/chair/2026-11-14/tail/TAIL-DEFECON-C-HANDBACK.md | 146 | (r2r-city-0 P7a, r2s-insurgency-metropolis-0 P7a, stale low, as at the base); | 1002 |
 | docs/chair/2026-11-14/tail/TAIL-DEFECON-C-HANDBACK.md | 152 | Same branch, same files. Worked to D18 and D19 (the | 26 |
 | docs/chair/2026-11-14/tail/TAIL-DEFECON-C-HANDBACK.md | 223 | ### The veto list (successor's) | 100 |
-| docs/chair/2026-11-14/tail/TAIL-DEFECON-C-HANDBACK.md | 234 | stale 2, exit 1 at the base too); grid 2 | 900 |
+| docs/chair/2026-11-14/tail/TAIL-DEFECON-C-HANDBACK.md | 234 | stale 2, exit 1 at the base too); grid 2 | 1002 |
 | docs/chair/2026-11-14/tail/TAIL-DEFECON-C-HANDBACK.md | 251 | - "Airship freight services (cargo, mooring)" 11 (D19; the veto | 100 |
 | docs/chair/2026-11-14/tail/TAIL-DEFECON-C-HANDBACK.md | 299 | twin name true of an air dock, listed for the | 100 |
-| docs/chair/2026-11-14/tail/TAIL-DEFECON-C-HANDBACK.md | 316 | Same branch, same files. Worked to **D30** (the chair, 2026-11-15 | 901 |
-| docs/chair/2026-11-14/tail/TAIL-DEFECON-C-HANDBACK.md | 353 | eslint: exit 0. The golden master moves (the owner's door): | 900 |
-| docs/chair/2026-11-14/tail/TAIL-DEFECON-C-HANDBACK.md | 388 | type ratchet, eslint: exit 0. The golden master moves again | 900 |
-| docs/chair/2026-11-14/tail/TAIL-DEFECON-C-HANDBACK.md | 446 | 5. REGISTERS NAMED STALE (re-derived at the close): the golden | 900 |
-| docs/chair/2026-11-14/tail/TAIL-DEFECON-C-HANDBACK.md | 472 | The rulings worked to (the chair, 2026-11-15 03:20 UTC; each | 901 |
-| docs/chair/2026-11-14/tail/TAIL-DEFECON-C-HANDBACK.md | 522 | the base (r2r-city-0 P7a, r2s-insurgency-metropolis-0 P7a). The golden master moves | 900 |
-| docs/chair/2026-11-14/tail/TAIL-DEFECON-C-HANDBACK.md | 560 | ### D34 (b): fishing grounds' salt (A DEVIATION FROM THE | 879 |
-| docs/chair/2026-11-14/tail/TAIL-DEFECON-C-HANDBACK.md | 593 | 6. REGISTERS NAMED STALE: the golden master (the owner's door, | 900 |
-| docs/chair/2026-11-14/tail/TAIL-DEFECON-D-HANDBACK.md | 13 | ## The rulings worked to (the chair's; each vetoable by | 903 |
+| docs/chair/2026-11-14/tail/TAIL-DEFECON-C-HANDBACK.md | 316 | Same branch, same files. Worked to **D30** (the chair, 2026-11-15 | 1003 |
+| docs/chair/2026-11-14/tail/TAIL-DEFECON-C-HANDBACK.md | 353 | eslint: exit 0. The golden master moves (the owner's door): | 1002 |
+| docs/chair/2026-11-14/tail/TAIL-DEFECON-C-HANDBACK.md | 388 | type ratchet, eslint: exit 0. The golden master moves again | 1002 |
+| docs/chair/2026-11-14/tail/TAIL-DEFECON-C-HANDBACK.md | 446 | 5. REGISTERS NAMED STALE (re-derived at the close): the golden | 1002 |
+| docs/chair/2026-11-14/tail/TAIL-DEFECON-C-HANDBACK.md | 472 | The rulings worked to (the chair, 2026-11-15 03:20 UTC; each | 1003 |
+| docs/chair/2026-11-14/tail/TAIL-DEFECON-C-HANDBACK.md | 522 | the base (r2r-city-0 P7a, r2s-insurgency-metropolis-0 P7a). The golden master moves | 1002 |
+| docs/chair/2026-11-14/tail/TAIL-DEFECON-C-HANDBACK.md | 560 | ### D34 (b): fishing grounds' salt (A DEVIATION FROM THE | 981 |
+| docs/chair/2026-11-14/tail/TAIL-DEFECON-C-HANDBACK.md | 593 | 6. REGISTERS NAMED STALE: the golden master (the owner's door, | 1002 |
+| docs/chair/2026-11-14/tail/TAIL-DEFECON-D-HANDBACK.md | 13 | ## The rulings worked to (the chair's; each vetoable by | 1005 |
 | docs/chair/2026-11-14/tail/TAIL-DEFECON-D-HANDBACK.md | 40 | no new vocabulary word; no src/pdf/ or src/foundry/ ; every | not an item: repeat of the item on the chair's laws (see the main hand-back) |
-| docs/chair/2026-11-14/tail/TAIL-DEFECON-D-HANDBACK.md | 140 | (the ladder's own word): nothing for the veto list. | 215 |
-| docs/chair/2026-11-14/tail/TAIL-DEFECON-D-HANDBACK.md | 142 | ## The veto list (every new or changed line, with | 238 |
-| docs/chair/2026-11-14/tail/TAIL-DEFECON-HANDBACK.md | 10 | ## The rulings worked to (the chair's, 2026-11-14; each vetoable | 903 |
+| docs/chair/2026-11-14/tail/TAIL-DEFECON-D-HANDBACK.md | 140 | (the ladder's own word): nothing for the veto list. | 217 |
+| docs/chair/2026-11-14/tail/TAIL-DEFECON-D-HANDBACK.md | 142 | ## The veto list (every new or changed line, with | 240 |
+| docs/chair/2026-11-14/tail/TAIL-DEFECON-HANDBACK.md | 10 | ## The rulings worked to (the chair's, 2026-11-14; each vetoable | 1005 |
 | docs/chair/2026-11-14/tail/TAIL-DEFECON-HANDBACK.md | 57 | listed for the veto); the readers keep working ( incomeLineSiblings.js | 4 |
-| docs/chair/2026-11-14/tail/TAIL-DEFECON-HANDBACK.md | 112 | no new vocabulary word; no src/pdf/ or src/foundry/ ; every | 903 |
-| docs/chair/2026-11-14/tail/TAIL-DEFECON-HANDBACK.md | 383 | THE RULINGS (the chair's, 2026-11-15 04:40 UTC, on the third | 141 |
-| docs/chair/2026-11-14/tail/TAIL-DEFECON-HANDBACK.md | 461 | ## The veto list (every new or changed line, with | 245 |
+| docs/chair/2026-11-14/tail/TAIL-DEFECON-HANDBACK.md | 112 | no new vocabulary word; no src/pdf/ or src/foundry/ ; every | 1005 |
+| docs/chair/2026-11-14/tail/TAIL-DEFECON-HANDBACK.md | 383 | THE RULINGS (the chair's, 2026-11-15 04:40 UTC, on the third | 142 |
+| docs/chair/2026-11-14/tail/TAIL-DEFECON-HANDBACK.md | 461 | ## The veto list (every new or changed line, with | 247 |
 | docs/chair/2026-11-14/tail/TAIL-DEFECON-HANDBACK.md | 472 | - (200) "Diversified — broad institutional economic base" (the ladder's | 18 |
 | docs/chair/2026-11-14/tail/TAIL-DEFECON-HANDBACK.md | 484 | - (329) source **"Harvest"** (the rents row's twin name; the | 4 |
-| docs/chair/2026-11-14/tail/TAIL-DEFECON-HANDBACK.md | 575 | editWorldFactResources A2, A6 (2) green at its re-capture 4182e976; 77e480ac | 909 |
-| docs/chair/2026-11-14/tail/TAIL-DEFECON-HANDBACK.md | 605 | 5. The veto list: the five moves with their counts | 141 |
-| docs/chair/2026-11-14/tail/TAIL-DEFECON-HANDBACK.md | 609 | - (R6, 04:44 UTC; vetoable by the owner) A SIXTH | 592 |
+| docs/chair/2026-11-14/tail/TAIL-DEFECON-HANDBACK.md | 575 | editWorldFactResources A2, A6 (2) green at its re-capture 4182e976; 77e480ac | 1011 |
+| docs/chair/2026-11-14/tail/TAIL-DEFECON-HANDBACK.md | 605 | 5. The veto list: the five moves with their counts | 142 |
+| docs/chair/2026-11-14/tail/TAIL-DEFECON-HANDBACK.md | 609 | - (R6, 04:44 UTC; vetoable by the owner) A SIXTH | 667 |
 | docs/chair/2026-11-14/tail/TAIL-DEFECON-R-HANDBACK.md | 8 | ## THE RULINGS WORKED TO (the chair's, 2026-11-15 00:44 UTC | 13 |
-| docs/chair/2026-11-14/tail/TAIL-DEFECON-R-HANDBACK.md | 20 | nothing comes in by road, gate or water; the golden | 908 |
-| docs/chair/2026-11-14/tail/TAIL-DEFECON-R-HANDBACK.md | 63 | THE SIEGE, this seat's addition (vetoable): under msmv and the | 907 |
+| docs/chair/2026-11-14/tail/TAIL-DEFECON-R-HANDBACK.md | 20 | nothing comes in by road, gate or water; the golden | 1010 |
+| docs/chair/2026-11-14/tail/TAIL-DEFECON-R-HANDBACK.md | 63 | THE SIEGE, this seat's addition (vetoable): under msmv and the | 1009 |
 | docs/chair/2026-11-14/tail/TAIL-DEFECON-R-HANDBACK.md | 112 | NO NEW OR REWORDED LINE (nothing for the veto list | not an item: says no new or reworded sentence beyond the two moves, which are recorded as the items for M-S and M-V |
-| docs/chair/2026-11-14/tail/TAIL-DEFECON-R-HANDBACK.md | 152 | priorityNotes ): THE OWNER'S DOOR, not re-taken. No other register | 908 |
-| docs/chair/2026-11-14/tail/TAIL-DISPLAY-CIVIC-HANDBACK.md | 5 | ## The rulings worked to (the chair's, 2026-11-14; each vetoable | 915 |
-| docs/chair/2026-11-14/tail/TAIL-DISPLAY-CIVIC-HANDBACK.md | 14 | - **X8** (23:30 UTC) "Ruling authority": neither struck nor renamed; | 264 |
-| docs/chair/2026-11-14/tail/TAIL-DISPLAY-CIVIC-HANDBACK.md | 48 | ## The veto list: every new or changed line, with | 263 |
-| docs/chair/2026-11-14/tail/TAIL-DISPLAY-CIVIC-HANDBACK.md | 143 | ## TAIL-DISPLAY-CIVIC-3: the three jobs (the chair's rulings of 2026-11-15 | 313 |
-| docs/chair/2026-11-14/tail/TAIL-DISPLAY-CIVIC-HANDBACK.md | 188 | ## TAIL-DISPLAY-CIVIC-4: the seven jobs (the chair's rulings V5 to | 178 |
-| docs/chair/2026-11-14/tail/TAIL-DISPLAY-CIVIC-HANDBACK.md | 218 | - **V5's PDF twin:** src/pdf/sections/DefenseSecurity.jsx 's caption is the tab's | 449 |
-| docs/chair/2026-11-14/tail/TAIL-DISPLAY-CIVIC-HANDBACK.md | 221 | ### The veto list (TAIL-DISPLAY-CIVIC-4): every new or changed line, | 178 |
-| docs/chair/2026-11-14/tail/TAIL-DISPLAY-CIVIC-HANDBACK.md | 232 | - **The veto list:** V8: the two notes above (r2r-city-15, | 288 |
-| docs/chair/2026-11-14/tail/TAIL-DISPLAY-ECON-HANDBACK.md | 5 | ## The rulings worked to (the chair's, 2026-11-14; each vetoable | 910 |
+| docs/chair/2026-11-14/tail/TAIL-DEFECON-R-HANDBACK.md | 152 | priorityNotes ): THE OWNER'S DOOR, not re-taken. No other register | 1010 |
+| docs/chair/2026-11-14/tail/TAIL-DISPLAY-CIVIC-HANDBACK.md | 5 | ## The rulings worked to (the chair's, 2026-11-14; each vetoable | 1017 |
+| docs/chair/2026-11-14/tail/TAIL-DISPLAY-CIVIC-HANDBACK.md | 14 | - **X8** (23:30 UTC) "Ruling authority": neither struck nor renamed; | 266 |
+| docs/chair/2026-11-14/tail/TAIL-DISPLAY-CIVIC-HANDBACK.md | 48 | ## The veto list: every new or changed line, with | 265 |
+| docs/chair/2026-11-14/tail/TAIL-DISPLAY-CIVIC-HANDBACK.md | 143 | ## TAIL-DISPLAY-CIVIC-3: the three jobs (the chair's rulings of 2026-11-15 | 362 |
+| docs/chair/2026-11-14/tail/TAIL-DISPLAY-CIVIC-HANDBACK.md | 188 | ## TAIL-DISPLAY-CIVIC-4: the seven jobs (the chair's rulings V5 to | 180 |
+| docs/chair/2026-11-14/tail/TAIL-DISPLAY-CIVIC-HANDBACK.md | 218 | - **V5's PDF twin:** src/pdf/sections/DefenseSecurity.jsx 's caption is the tab's | 509 |
+| docs/chair/2026-11-14/tail/TAIL-DISPLAY-CIVIC-HANDBACK.md | 221 | ### The veto list (TAIL-DISPLAY-CIVIC-4): every new or changed line, | 180 |
+| docs/chair/2026-11-14/tail/TAIL-DISPLAY-CIVIC-HANDBACK.md | 232 | - **The veto list:** V8: the two notes above (r2r-city-15, | 317 |
+| docs/chair/2026-11-14/tail/TAIL-DISPLAY-ECON-HANDBACK.md | 5 | ## The rulings worked to (the chair's, 2026-11-14; each vetoable | 1012 |
 | docs/chair/2026-11-14/tail/TAIL-DISPLAY-ECON-HANDBACK.md | 79 | **THE VETO LIST: every new or changed line, with the | 3 |
-| docs/chair/2026-11-14/tail/TAIL-DISPLAY-ECON-HANDBACK.md | 150 | ## The chair's rulings since (2026-11-15 00:10 UTC; each vetoable | 911 |
-| docs/chair/2026-11-14/tail/TAIL-DISPLAY-ECON-HANDBACK.md | 155 | - **(X12)** "of what it eats" (00600, 12888): "of what | 140 |
-| docs/chair/2026-11-14/tail/TAIL-DISPLAY-ECON-HANDBACK.md | 198 | **THE VETO LIST: every new or changed line, with the | 140 |
-| docs/chair/2026-11-14/tail/TAIL-DISPLAY-ECON-HANDBACK.md | 202 | 4. "Reliance on magic: Relied upon · supplied by Access | 276 |
-| docs/chair/2026-11-14/tail/TAIL-DISPLAY-ECON-HANDBACK.md | 264 | ## The chair's rulings since (2026-11-15; each vetoable by the | 912 |
-| docs/chair/2026-11-14/tail/TAIL-DISPLAY-ECON-HANDBACK.md | 279 | - **29296** (PDF cover) "Top export: Salted fish (naval route | 785 |
-| docs/chair/2026-11-14/tail/TAIL-DISPLAY-ECON-HANDBACK.md | 315 | **THE VETO LIST: every new or changed line, with the | 162 |
-| docs/chair/2026-11-14/tail/TAIL-DISPLAY-ECON-HANDBACK.md | 350 | ## The chair's ruling X25 (2026-11-15 01:41 UTC; vetoable by | 913 |
-| docs/chair/2026-11-14/tail/TAIL-DISPLAY-ECON-HANDBACK.md | 382 | ## The chair's rulings since (2026-11-15 02:10 UTC; each vetoable | 913 |
+| docs/chair/2026-11-14/tail/TAIL-DISPLAY-ECON-HANDBACK.md | 150 | ## The chair's rulings since (2026-11-15 00:10 UTC; each vetoable | 1013 |
+| docs/chair/2026-11-14/tail/TAIL-DISPLAY-ECON-HANDBACK.md | 155 | - **(X12)** "of what it eats" (00600, 12888): "of what | 141 |
+| docs/chair/2026-11-14/tail/TAIL-DISPLAY-ECON-HANDBACK.md | 198 | **THE VETO LIST: every new or changed line, with the | 141 |
+| docs/chair/2026-11-14/tail/TAIL-DISPLAY-ECON-HANDBACK.md | 202 | 4. "Reliance on magic: Relied upon · supplied by Access | 289 |
+| docs/chair/2026-11-14/tail/TAIL-DISPLAY-ECON-HANDBACK.md | 264 | ## The chair's rulings since (2026-11-15; each vetoable by the | 1014 |
+| docs/chair/2026-11-14/tail/TAIL-DISPLAY-ECON-HANDBACK.md | 279 | - **29296** (PDF cover) "Top export: Salted fish (naval route | 883 |
+| docs/chair/2026-11-14/tail/TAIL-DISPLAY-ECON-HANDBACK.md | 315 | **THE VETO LIST: every new or changed line, with the | 163 |
+| docs/chair/2026-11-14/tail/TAIL-DISPLAY-ECON-HANDBACK.md | 350 | ## The chair's ruling X25 (2026-11-15 01:41 UTC; vetoable by | 1015 |
+| docs/chair/2026-11-14/tail/TAIL-DISPLAY-ECON-HANDBACK.md | 382 | ## The chair's rulings since (2026-11-15 02:10 UTC; each vetoable | 1015 |
 | docs/chair/2026-11-14/tail/TAIL-DISPLAY-ECON-HANDBACK.md | 385 | - **(X26)** YES to the predecessor's ask on the "defended | 1 |
-| docs/chair/2026-11-14/tail/TAIL-DISPLAY-ECON-HANDBACK.md | 417 | - **"Contributes to Iron & Metalwork" 149 → 158, "Timber | 407 |
-| docs/chair/2026-11-14/tail/TAIL-DISPLAY-ECON-HANDBACK.md | 423 | **THE VETO LIST (batch 4): every new or changed line, | 387 |
+| docs/chair/2026-11-14/tail/TAIL-DISPLAY-ECON-HANDBACK.md | 417 | - **"Contributes to Iron & Metalwork" 149 → 158, "Timber | 464 |
+| docs/chair/2026-11-14/tail/TAIL-DISPLAY-ECON-HANDBACK.md | 423 | **THE VETO LIST (batch 4): every new or changed line, | 441 |
 | docs/chair/2026-11-14/tail/TAIL-DISPLAY-ECON-HANDBACK.md | 455 | **THE VETO LIST (X26): every chip reworded, old → new, | 1 |
-| docs/chair/2026-11-14/tail/TAIL-DISPLAY-ECON-HANDBACK.md | 522 | ## The chair's rulings for this seat (2026-11-15 04:02 UTC; | 914 |
+| docs/chair/2026-11-14/tail/TAIL-DISPLAY-ECON-HANDBACK.md | 522 | ## The chair's rulings for this seat (2026-11-15 04:02 UTC; | 1016 |
 | docs/chair/2026-11-14/tail/TAIL-DISPLAY-ECON-HANDBACK.md | 557 | ## THE VETO LIST (this seat): every new or changed | 16 |
-| docs/chair/2026-11-14/tail/TAIL-EXPORTS-JOURNAL-HANDBACK.md | 10 | ## The rulings worked to (the chair's, 2026-11-14; each vetoable | 969 |
-| docs/chair/2026-11-14/tail/TAIL-EXPORTS-JOURNAL-HANDBACK.md | 25 | The chair's rulings since (2026-11-15; each vetoable by the owner), | 969 |
-| docs/chair/2026-11-14/tail/TAIL-EXPORTS-JOURNAL-HANDBACK.md | 95 | twins of the veto list; no other sentence inherits. | 475 |
-| docs/chair/2026-11-14/tail/TAIL-EXPORTS-JOURNAL-HANDBACK.md | 153 | ## New or changed lines (the owner's veto list) | 475 |
-| docs/chair/2026-11-14/tail/TAIL-EXPORTS-JOURNAL-HANDBACK.md | 250 | New lines for the owner's veto (the words are the | 385 |
-| docs/chair/2026-11-14/tail/TAIL-EXPORTS-PDF-HANDBACK.md | 9 | ## The rulings worked to (the chair's, 2026-11-14; each vetoable | 952 |
-| docs/chair/2026-11-14/tail/TAIL-EXPORTS-PDF-HANDBACK.md | 74 | ### Every new or changed line (the owner's veto list) | 179 |
+| docs/chair/2026-11-14/tail/TAIL-EXPORTS-JOURNAL-HANDBACK.md | 10 | ## The rulings worked to (the chair's, 2026-11-14; each vetoable | 1080 |
+| docs/chair/2026-11-14/tail/TAIL-EXPORTS-JOURNAL-HANDBACK.md | 25 | The chair's rulings since (2026-11-15; each vetoable by the owner), | 1080 |
+| docs/chair/2026-11-14/tail/TAIL-EXPORTS-JOURNAL-HANDBACK.md | 95 | twins of the veto list; no other sentence inherits. | 535 |
+| docs/chair/2026-11-14/tail/TAIL-EXPORTS-JOURNAL-HANDBACK.md | 153 | ## New or changed lines (the owner's veto list) | 535 |
+| docs/chair/2026-11-14/tail/TAIL-EXPORTS-JOURNAL-HANDBACK.md | 250 | New lines for the owner's veto (the words are the | 439 |
+| docs/chair/2026-11-14/tail/TAIL-EXPORTS-PDF-HANDBACK.md | 9 | ## The rulings worked to (the chair's, 2026-11-14; each vetoable | 1063 |
+| docs/chair/2026-11-14/tail/TAIL-EXPORTS-PDF-HANDBACK.md | 74 | ### Every new or changed line (the owner's veto list) | 181 |
 | docs/chair/2026-11-14/tail/TAIL-EXPORTS-PDF-HANDBACK.md | 110 | ### The three silences told to the chair before the | 14 |
-| docs/chair/2026-11-14/tail/TAIL-EXPORTS-PDF-HANDBACK.md | 187 | ## The chair's rulings since (2026-11-15; each vetoable by the | 953 |
-| docs/chair/2026-11-14/tail/TAIL-EXPORTS-PDF-HANDBACK.md | 293 | ### Every new or changed line (the owner's veto list) | 388 |
-| docs/chair/2026-11-14/tail/TAIL-EXPORTS-PDF-HANDBACK.md | 384 | ## The chair's answer after the hand-back (2026-11-15 02:10 UTC; | 453 |
-| docs/chair/2026-11-14/tail/TAIL-EXPORTS-PDF-HANDBACK.md | 386 | 1. NO VETO on batch 2's two silences: the EXPORT | 453 |
-| docs/chair/2026-11-14/tail/TAIL-EXPORTS-PDF-HANDBACK.md | 410 | ## The chair's rulings since (2026-11-15 02:15 UTC; each vetoable | 954 |
-| docs/chair/2026-11-14/tail/TAIL-EXPORTS-PDF-HANDBACK.md | 412 | - **E20** NO VETO on batch 2's two silences (the | 453 |
-| docs/chair/2026-11-14/tail/TAIL-EXPORTS-PDF-HANDBACK.md | 448 | - **E23**: "Reason settled: <line>" -> "Settlement Origin: <line>" (PDF | 319 |
+| docs/chair/2026-11-14/tail/TAIL-EXPORTS-PDF-HANDBACK.md | 187 | ## The chair's rulings since (2026-11-15; each vetoable by the | 1064 |
+| docs/chair/2026-11-14/tail/TAIL-EXPORTS-PDF-HANDBACK.md | 293 | ### Every new or changed line (the owner's veto list) | 442 |
+| docs/chair/2026-11-14/tail/TAIL-EXPORTS-PDF-HANDBACK.md | 384 | ## The chair's answer after the hand-back (2026-11-15 02:10 UTC; | 513 |
+| docs/chair/2026-11-14/tail/TAIL-EXPORTS-PDF-HANDBACK.md | 386 | 1. NO VETO on batch 2's two silences: the EXPORT | 513 |
+| docs/chair/2026-11-14/tail/TAIL-EXPORTS-PDF-HANDBACK.md | 410 | ## The chair's rulings since (2026-11-15 02:15 UTC; each vetoable | 1065 |
+| docs/chair/2026-11-14/tail/TAIL-EXPORTS-PDF-HANDBACK.md | 412 | - **E20** NO VETO on batch 2's two silences (the | 513 |
+| docs/chair/2026-11-14/tail/TAIL-EXPORTS-PDF-HANDBACK.md | 448 | - **E23**: "Reason settled: <line>" -> "Settlement Origin: <line>" (PDF | 368 |
 | docs/chair/2026-11-14/tail/TAIL-EXPORTS-PDF-HANDBACK.md | 488 | ### Every new or changed line (the owner's veto list) | 19 |
-| docs/chair/2026-11-14/tail/TAIL-HISTORY-HANDBACK.md | 13 | ### The order (ruling Y17, the chair, 2026-11-15 04:05 UTC; | 920 |
-| docs/chair/2026-11-14/tail/TAIL-HISTORY-HANDBACK.md | 22 | - The chair's note of 04:08 UTC (vetoable by the | 921 |
-| docs/chair/2026-11-14/tail/TAIL-HISTORY-HANDBACK.md | 90 | **THE VETO LIST (VETOABLE wording, the owner's; the towns it | 353 |
-| docs/chair/2026-11-14/tail/TAIL-HISTORY-HANDBACK.md | 108 | 0. **FIRST, THE CHAIR'S RULING U2** (05:06 UTC, received after | 922 |
-| docs/chair/2026-11-14/tail/TAIL-HISTORY-HANDBACK.md | 149 | ### The order (ruling Y16, the chair, 2026-11-15 03:12 UTC; | 924 |
+| docs/chair/2026-11-14/tail/TAIL-HISTORY-HANDBACK.md | 13 | ### The order (ruling Y17, the chair, 2026-11-15 04:05 UTC; | 1022 |
+| docs/chair/2026-11-14/tail/TAIL-HISTORY-HANDBACK.md | 22 | - The chair's note of 04:08 UTC (vetoable by the | 1023 |
+| docs/chair/2026-11-14/tail/TAIL-HISTORY-HANDBACK.md | 90 | **THE VETO LIST (VETOABLE wording, the owner's; the towns it | 402 |
+| docs/chair/2026-11-14/tail/TAIL-HISTORY-HANDBACK.md | 108 | 0. **FIRST, THE CHAIR'S RULING U2** (05:06 UTC, received after | 1024 |
+| docs/chair/2026-11-14/tail/TAIL-HISTORY-HANDBACK.md | 149 | ### The order (ruling Y16, the chair, 2026-11-15 03:12 UTC; | 1026 |
 | docs/chair/2026-11-14/tail/TAIL-HISTORY-HANDBACK.md | 161 | - Tabs: 29,957 → 29,961. 3 gone, 7 new, 4 | 77 |
-| docs/chair/2026-11-14/tail/TAIL-HISTORY-HANDBACK.md | 200 | **THE VETO LIST (VETOABLE wording, the owner's; read in the | 328 |
-| docs/chair/2026-11-14/tail/TAIL-HISTORY-HANDBACK.md | 201 | - "Every household still knows where to run if the | 933 |
-| docs/chair/2026-11-14/tail/TAIL-HISTORY-HANDBACK.md | 226 | ## TAIL-HISTORY-3 (2026-11-15): the chair's rulings since (each vetoable by | 925 |
-| docs/chair/2026-11-14/tail/TAIL-HISTORY-HANDBACK.md | 274 | **THE VETO LIST (VETOABLE wording, the owner's; read in the | 321 |
+| docs/chair/2026-11-14/tail/TAIL-HISTORY-HANDBACK.md | 200 | **THE VETO LIST (VETOABLE wording, the owner's; read in the | 377 |
+| docs/chair/2026-11-14/tail/TAIL-HISTORY-HANDBACK.md | 201 | - "Every household still knows where to run if the | 1035 |
+| docs/chair/2026-11-14/tail/TAIL-HISTORY-HANDBACK.md | 226 | ## TAIL-HISTORY-3 (2026-11-15): the chair's rulings since (each vetoable by | 1027 |
+| docs/chair/2026-11-14/tail/TAIL-HISTORY-HANDBACK.md | 274 | **THE VETO LIST (VETOABLE wording, the owner's; read in the | 370 |
 | docs/chair/2026-11-14/tail/TAIL-HISTORY-HANDBACK.md | 339 | **THE VETO LIST (VETOABLE wording, the owner's; the towns read):** | 77 |
-| docs/chair/2026-11-14/tail/TAIL-HISTORY-HANDBACK.md | 379 | ## The chair's rulings since (2026-11-15 00:30 UTC; each vetoable | 929 |
-| docs/chair/2026-11-14/tail/TAIL-HISTORY-HANDBACK.md | 385 | - Ten types: plague_years, great_fire, great_flood, popular_uprising, tyranny, wild_magic, trade_collapse, | 326 |
-| docs/chair/2026-11-14/tail/TAIL-HISTORY-HANDBACK.md | 465 | **THE VETO LIST: every new line (VETOABLE wording, the owner's; | 326 |
-| docs/chair/2026-11-14/tail/TAIL-HISTORY-HANDBACK.md | 585 | ## The rulings worked to (the chair's, 2026-11-14; each vetoable | 932 |
-| docs/chair/2026-11-14/tail/TAIL-HISTORY-HANDBACK.md | 738 | ## New and reworded lines (the owner's veto), with towns | 391 |
-| docs/chair/2026-11-14/tail/TAIL-HOUSES-HANDBACK.md | 5 | ## The rulings worked to (the chair's, 2026-11-14; each vetoable | MISSING |
-| docs/chair/2026-11-14/tail/TAIL-HOUSES-HANDBACK.md | 89 | ### The veto list, batch 1: every new line (towns | MISSING |
-| docs/chair/2026-11-14/tail/TAIL-HOUSES-HANDBACK.md | 158 | ### The veto list, batch 2 | MISSING |
-| docs/chair/2026-11-14/tail/TAIL-HOUSES-HANDBACK.md | 345 | ### The veto list, batch 3 | MISSING |
-| docs/chair/2026-11-14/tail/TAIL-HOUSES-HANDBACK.md | 375 | ### The veto list, batch 4 (every new line; towns | MISSING |
-| docs/chair/2026-11-14/tail/TAIL-HOUSES-HANDBACK.md | 472 | - The measure script measure3.mjs <tree> <corpus.ndjson.gz> <rows.json> <out.json> : | MISSING |
-| docs/chair/2026-11-14/tail/TAIL-HOUSES-HANDBACK.md | 477 | ## TAIL-HOUSES-3 · the chair's rulings since (2026-11-15 02:10 UTC; | MISSING |
-| docs/chair/2026-11-14/tail/TAIL-HOUSES-HANDBACK.md | 527 | ### The veto list, batch 5 (every new line; towns | MISSING |
-| docs/chair/2026-11-14/tail/TAIL-HOUSES-HANDBACK.md | 562 | - THE CHAIN STATE'S "(impaired)" against LAND's "running" (upstream / | MISSING |
-| docs/chair/2026-11-14/tail/TAIL-HOUSES-HANDBACK.md | 584 | ## TAIL-HOUSES-4 · the chair's rulings (2026-11-15 03:06 UTC; each | MISSING |
-| docs/chair/2026-11-14/tail/TAIL-HOUSES-HANDBACK.md | 609 | ### The veto list, batch 6 (towns printing; the smallest | MISSING |
-| docs/chair/2026-11-14/tail/TAIL-HOUSES-HANDBACK.md | 631 | ### The veto list, batch 7 (towns printing; the smallest | MISSING |
-| docs/chair/2026-11-14/tail/TAIL-HOUSES-HANDBACK.md | 730 | ## TAIL-HOUSES-5 · the chair's ruling (2026-11-15 04:42 UTC; vetoable | MISSING |
-| docs/chair/2026-11-14/tail/TAIL-HOUSES-HANDBACK.md | 733 | - **(U2)**, 04:49 UTC: the line must pass first: four | MISSING |
-| docs/chair/2026-11-14/tail/TAIL-HOUSES-HANDBACK.md | 783 | - The city's Merchant guilds (15-40) (15890, 15765, 02600): a | MISSING |
-| docs/chair/2026-11-14/tail/TAIL-HOUSES-HANDBACK.md | 804 | GATES (this tip): eslint 0 on every touched file; typecheck:domain:strict | MISSING |
-| docs/chair/2026-11-14/tail/TAIL-HOUSES-HANDBACK.md | 814 | ### The veto list, batches 8-11 (towns printing; the smallest | MISSING |
-| docs/chair/2026-11-14/tail/TAIL-HOUSES-HANDBACK.md | 855 | 5. GATES OWED AT THE CLOSE: the golden family re-taken | MISSING |
-| docs/chair/2026-11-14/tail/TAIL-HOUSES-HANDBACK.md | 868 | ### Parked for the owner (H4: the fortification, divine-healing and | MISSING |
-| docs/chair/2026-11-14/tail/TAIL-HOUSES-HANDBACK.md | 1035 | - **(H4)**, 23:08 UTC: THE FORTIFICATION, DIVINE-HEALING AND PILGRIMAGE ROWS | MISSING |
-| docs/chair/2026-11-14/tail/TAIL-NARRATIVE-HANDBACK.md | 7 | ## The rulings worked to (the chair's, 2026-11-14; each vetoable | 938 |
-| docs/chair/2026-11-14/tail/TAIL-NARRATIVE-HANDBACK.md | 58 | THE LINES NEW OR REWORDED (the veto list; read where | 355 |
-| docs/chair/2026-11-14/tail/TAIL-NARRATIVE-HANDBACK.md | 165 | ## The chair's rulings since (2026-11-15 00:15 to 00:45 UTC, | 940 |
-| docs/chair/2026-11-14/tail/TAIL-NARRATIVE-HANDBACK.md | 172 | - (N9) B00042 is MEASURED (4 towns, false in 2 | 357 |
-| docs/chair/2026-11-14/tail/TAIL-NARRATIVE-HANDBACK.md | 197 | N9 ( political_heavy[3] , B00042, LINE REMOVED, for the owner's | 357 |
-| docs/chair/2026-11-14/tail/TAIL-NARRATIVE-HANDBACK.md | 210 | THE LINES NEW OR REWORDED (the veto list; three towns | 357 |
-| docs/chair/2026-11-14/tail/TAIL-NARRATIVE-HANDBACK.md | 232 | ## The chair's notes since batch 3 (copied; each vetoable | 943 |
-| docs/chair/2026-11-14/tail/TAIL-NARRATIVE-HANDBACK.md | 245 | - THE VETO LIST: the two lines above, read in | 440 |
-| docs/chair/2026-11-14/tail/TAIL-NARRATIVE-HANDBACK.md | 271 | ## The chair's rulings since (2026-11-15 02:22 UTC; each vetoable | 944 |
-| docs/chair/2026-11-14/tail/TAIL-NARRATIVE-HANDBACK.md | 294 | THE LINES NEW OR REWORDED (the veto list; each read | 323 |
-| docs/chair/2026-11-14/tail/TAIL-NARRATIVE-HANDBACK.md | 346 | ## The chair's ruling (2026-11-15 03:44 UTC; vetoable by the | 945 |
-| docs/chair/2026-11-14/tail/TAIL-NARRATIVE-HANDBACK.md | 369 | LINES NEW OR REWORDED: none (no text written; the move | 325 |
-| docs/chair/2026-11-14/tail/TAIL-NARRATIVE-HANDBACK.md | 393 | ## The chair's ruling (2026-11-15 04:24 UTC; vetoable by the | 945 |
-| docs/chair/2026-11-14/tail/TAIL-NARRATIVE-HANDBACK.md | 410 | THE PAGE (inventory diff, before census -> after census): tabs | 327 |
-| docs/chair/2026-11-14/tail/TAIL-NARRATIVE-HANDBACK.md | 414 | THE LINES NEW OR REWORDED (the veto list; every founding | 327 |
-| docs/chair/2026-11-14/tail/TAIL-NARRATIVE-HANDBACK.md | 443 | - tests/lint/styleLaw.walker.test.js ( faction 0 -> 1 in narrativeData.js ): | 343 |
-| docs/chair/2026-11-14/tail/TAIL-POWERS-B-HANDBACK.md | 24 | - RED 3, captureBirthScale ("floor 372 > 326"): NAMED, THE | MISSING |
-| docs/chair/2026-11-14/tail/TAIL-POWERS-B-HANDBACK.md | 59 | ## The rulings worked to (each vetoable by the owner), | MISSING |
-| docs/chair/2026-11-14/tail/TAIL-POWERS-B-HANDBACK.md | 70 | give"): true in every town that prints it; nothing silenced; | MISSING |
-| docs/chair/2026-11-14/tail/TAIL-POWERS-B-HANDBACK.md | 97 | there is clay to be had"); text only; no draw | MISSING |
-| docs/chair/2026-11-14/tail/TAIL-POWERS-B-HANDBACK.md | 103 | - (P29, the chair, 2026-11-15 03:10 UTC; vetoable by the | MISSING |
-| docs/chair/2026-11-14/tail/TAIL-POWERS-B-HANDBACK.md | 112 | - (P31, the chair, 2026-11-15 04:48 UTC; vetoable by the | MISSING |
-| docs/chair/2026-11-14/tail/TAIL-POWERS-B-HANDBACK.md | 129 | reworded line listed for the owner's veto. | MISSING |
-| docs/chair/2026-11-14/tail/TAIL-POWERS-B-HANDBACK.md | 152 | - THE STRUCTURAL BARGAIN BESIDE A QUARREL (a rule, for | MISSING |
-| docs/chair/2026-11-14/tail/TAIL-POWERS-B-HANDBACK.md | 167 | P16three, domain/facts/registeredWords.js rulingFaces). FOR THE OWNER'S VETO: if the heading | MISSING |
-| docs/chair/2026-11-14/tail/TAIL-POWERS-B-HANDBACK.md | 476 | ## EVERY NEW OR CHANGED LINE (the owner's veto), with | MISSING |
-| docs/chair/2026-11-14/tail/TAIL-POWERS-HANDBACK.md | 7 | ## The rulings worked to (the chair's, 2026-11-14; each vetoable | MISSING |
-| docs/chair/2026-11-14/tail/TAIL-POWERS-HANDBACK.md | 21 | for one fact; no new vocabulary word without the chair; | MISSING |
-| docs/chair/2026-11-14/tail/TAIL-POWERS-HANDBACK.md | 78 | ## EVERY NEW OR CHANGED LINE (the owner's veto), with | MISSING |
-| docs/chair/2026-11-14/tail/TAIL-POWERS-HANDBACK.md | 83 | present but outpaced; merchants set prices ..." (prices in the | MISSING |
-| docs/chair/2026-11-14/tail/TAIL-POWERS-HANDBACK.md | 150 | ## The chair's rulings since (2026-11-15 00:20 UTC; each vetoable | MISSING |
-| docs/chair/2026-11-14/tail/TAIL-POWERS-HANDBACK.md | 170 | THE OWNER'S DOOR, named, not re-taken. | MISSING |
-| docs/chair/2026-11-14/tail/TAIL-POWERS-HANDBACK.md | 196 | ## EVERY NEW OR CHANGED LINE (this seat; the owner's | MISSING |
-| docs/chair/2026-11-14/tail/TAIL-POWERS-HANDBACK.md | 200 | the seat, ..." (the name twice): true, for the veto. | MISSING |
-| docs/chair/2026-11-14/tail/TAIL-POWERS-HANDBACK.md | 215 | - FIRST (the chair's rulings P16 and P17, 00:45 UTC, | MISSING |
-| docs/chair/2026-11-14/tail/TAIL-POWERS-HANDBACK.md | 221 | commit, a declared move; the new stability word listed for | MISSING |
-| docs/chair/2026-11-14/tail/TAIL-POWERS-HANDBACK.md | 233 | church veto over "council appointments" 24, 20987 / 00170 the | MISSING |
-| docs/chair/2026-11-14/tail/TAIL-POWERS-HANDBACK.md | 258 | ## The chair's rulings since (2026-11-15; each vetoable by the | MISSING |
-| docs/chair/2026-11-14/tail/TAIL-POWERS-HANDBACK.md | 263 | the new stability word on the veto list. | MISSING |
-| docs/chair/2026-11-14/tail/TAIL-POWERS-HANDBACK.md | 319 | 21062 1 -> 0 GONE · 20194 church veto 24 | MISSING |
-| docs/chair/2026-11-14/tail/TAIL-POWERS-HANDBACK.md | 343 | ## EVERY NEW OR CHANGED LINE (this seat; the owner's | MISSING |
-| docs/chair/2026-11-14/tail/TAIL-POWERS-HANDBACK.md | 362 | ## The chair's notes reaching this seat after its batches | MISSING |
-| docs/chair/2026-11-14/tail/TAIL-POWERS-HANDBACK.md | 435 | ## The chair's rulings since (2026-11-15; each vetoable by the | MISSING |
-| docs/chair/2026-11-14/tail/TAIL-POWERS-HANDBACK.md | 501 | REWORDED to claim what every printing town bears (above, the | MISSING |
-| docs/chair/2026-11-14/tail/TAIL-POWERS-HANDBACK.md | 525 | ## EVERY NEW OR CHANGED LINE (this seat; the owner's | MISSING |
+| docs/chair/2026-11-14/tail/TAIL-HISTORY-HANDBACK.md | 379 | ## The chair's rulings since (2026-11-15 00:30 UTC; each vetoable | 1031 |
+| docs/chair/2026-11-14/tail/TAIL-HISTORY-HANDBACK.md | 385 | - Ten types: plague_years, great_fire, great_flood, popular_uprising, tyranny, wild_magic, trade_collapse, | 375 |
+| docs/chair/2026-11-14/tail/TAIL-HISTORY-HANDBACK.md | 465 | **THE VETO LIST: every new line (VETOABLE wording, the owner's; | 375 |
+| docs/chair/2026-11-14/tail/TAIL-HISTORY-HANDBACK.md | 585 | ## The rulings worked to (the chair's, 2026-11-14; each vetoable | 1034 |
+| docs/chair/2026-11-14/tail/TAIL-HISTORY-HANDBACK.md | 738 | ## New and reworded lines (the owner's veto), with towns | 445 |
+| docs/chair/2026-11-14/tail/TAIL-HOUSES-HANDBACK.md | 5 | ## The rulings worked to (the chair's, 2026-11-14; each vetoable | 1036 |
+| docs/chair/2026-11-14/tail/TAIL-HOUSES-HANDBACK.md | 89 | ### The veto list, batch 1: every new line (towns | 39 |
+| docs/chair/2026-11-14/tail/TAIL-HOUSES-HANDBACK.md | 158 | ### The veto list, batch 2 | 421 |
+| docs/chair/2026-11-14/tail/TAIL-HOUSES-HANDBACK.md | 345 | ### The veto list, batch 3 | 205 |
+| docs/chair/2026-11-14/tail/TAIL-HOUSES-HANDBACK.md | 375 | ### The veto list, batch 4 (every new line; towns | 42 |
+| docs/chair/2026-11-14/tail/TAIL-HOUSES-HANDBACK.md | 472 | - The measure script measure3.mjs <tree> <corpus.ndjson.gz> <rows.json> <out.json> : | not an item: names the measuring and veto-list scripts only |
+| docs/chair/2026-11-14/tail/TAIL-HOUSES-HANDBACK.md | 477 | ## TAIL-HOUSES-3 · the chair's rulings since (2026-11-15 02:10 UTC; | 1037 |
+| docs/chair/2026-11-14/tail/TAIL-HOUSES-HANDBACK.md | 527 | ### The veto list, batch 5 (every new line; towns | 37 |
+| docs/chair/2026-11-14/tail/TAIL-HOUSES-HANDBACK.md | 562 | - THE CHAIN STATE'S "(impaired)" against LAND's "running" (upstream / | 693 |
+| docs/chair/2026-11-14/tail/TAIL-HOUSES-HANDBACK.md | 584 | ## TAIL-HOUSES-4 · the chair's rulings (2026-11-15 03:06 UTC; each | 1038 |
+| docs/chair/2026-11-14/tail/TAIL-HOUSES-HANDBACK.md | 609 | ### The veto list, batch 6 (towns printing; the smallest | 146 |
+| docs/chair/2026-11-14/tail/TAIL-HOUSES-HANDBACK.md | 631 | ### The veto list, batch 7 (towns printing; the smallest | 318 |
+| docs/chair/2026-11-14/tail/TAIL-HOUSES-HANDBACK.md | 730 | ## TAIL-HOUSES-5 · the chair's ruling (2026-11-15 04:42 UTC; vetoable | 1039 |
+| docs/chair/2026-11-14/tail/TAIL-HOUSES-HANDBACK.md | 733 | - **(U2)**, 04:49 UTC: the line must pass first: four | 1039 |
+| docs/chair/2026-11-14/tail/TAIL-HOUSES-HANDBACK.md | 783 | - The city's Merchant guilds (15-40) (15890, 15765, 02600): a | 277 |
+| docs/chair/2026-11-14/tail/TAIL-HOUSES-HANDBACK.md | 804 | GATES (this tip): eslint 0 on every touched file; typecheck:domain:strict | 973 |
+| docs/chair/2026-11-14/tail/TAIL-HOUSES-HANDBACK.md | 814 | ### The veto list, batches 8-11 (towns printing; the smallest | 297 |
+| docs/chair/2026-11-14/tail/TAIL-HOUSES-HANDBACK.md | 855 | 5. GATES OWED AT THE CLOSE: the golden family re-taken | 973 |
+| docs/chair/2026-11-14/tail/TAIL-HOUSES-HANDBACK.md | 868 | ### Parked for the owner (H4: the fortification, divine-healing and | 977 |
+| docs/chair/2026-11-14/tail/TAIL-HOUSES-HANDBACK.md | 1035 | - **(H4)**, 23:08 UTC: THE FORTIFICATION, DIVINE-HEALING AND PILGRIMAGE ROWS | 977 |
+| docs/chair/2026-11-14/tail/TAIL-NARRATIVE-HANDBACK.md | 7 | ## The rulings worked to (the chair's, 2026-11-14; each vetoable | 1040 |
+| docs/chair/2026-11-14/tail/TAIL-NARRATIVE-HANDBACK.md | 58 | THE LINES NEW OR REWORDED (the veto list; read where | 404 |
+| docs/chair/2026-11-14/tail/TAIL-NARRATIVE-HANDBACK.md | 165 | ## The chair's rulings since (2026-11-15 00:15 to 00:45 UTC, | 1042 |
+| docs/chair/2026-11-14/tail/TAIL-NARRATIVE-HANDBACK.md | 172 | - (N9) B00042 is MEASURED (4 towns, false in 2 | 406 |
+| docs/chair/2026-11-14/tail/TAIL-NARRATIVE-HANDBACK.md | 197 | N9 ( political_heavy[3] , B00042, LINE REMOVED, for the owner's | 406 |
+| docs/chair/2026-11-14/tail/TAIL-NARRATIVE-HANDBACK.md | 210 | THE LINES NEW OR REWORDED (the veto list; three towns | 406 |
+| docs/chair/2026-11-14/tail/TAIL-NARRATIVE-HANDBACK.md | 232 | ## The chair's notes since batch 3 (copied; each vetoable | 1045 |
+| docs/chair/2026-11-14/tail/TAIL-NARRATIVE-HANDBACK.md | 245 | - THE VETO LIST: the two lines above, read in | 498 |
+| docs/chair/2026-11-14/tail/TAIL-NARRATIVE-HANDBACK.md | 271 | ## The chair's rulings since (2026-11-15 02:22 UTC; each vetoable | 1046 |
+| docs/chair/2026-11-14/tail/TAIL-NARRATIVE-HANDBACK.md | 294 | THE LINES NEW OR REWORDED (the veto list; each read | 372 |
+| docs/chair/2026-11-14/tail/TAIL-NARRATIVE-HANDBACK.md | 346 | ## The chair's ruling (2026-11-15 03:44 UTC; vetoable by the | 1047 |
+| docs/chair/2026-11-14/tail/TAIL-NARRATIVE-HANDBACK.md | 369 | LINES NEW OR REWORDED: none (no text written; the move | 374 |
+| docs/chair/2026-11-14/tail/TAIL-NARRATIVE-HANDBACK.md | 393 | ## The chair's ruling (2026-11-15 04:24 UTC; vetoable by the | 1047 |
+| docs/chair/2026-11-14/tail/TAIL-NARRATIVE-HANDBACK.md | 410 | THE PAGE (inventory diff, before census -> after census): tabs | 376 |
+| docs/chair/2026-11-14/tail/TAIL-NARRATIVE-HANDBACK.md | 414 | THE LINES NEW OR REWORDED (the veto list; every founding | 376 |
+| docs/chair/2026-11-14/tail/TAIL-NARRATIVE-HANDBACK.md | 443 | - tests/lint/styleLaw.walker.test.js ( faction 0 -> 1 in narrativeData.js ): | 392 |
+| docs/chair/2026-11-14/tail/TAIL-POWERS-B-HANDBACK.md | 24 | - RED 3, captureBirthScale ("floor 372 > 326"): NAMED, THE | 1052 |
+| docs/chair/2026-11-14/tail/TAIL-POWERS-B-HANDBACK.md | 59 | ## The rulings worked to (each vetoable by the owner), | 1056 |
+| docs/chair/2026-11-14/tail/TAIL-POWERS-B-HANDBACK.md | 70 | give"): true in every town that prints it; nothing silenced; | 418 |
+| docs/chair/2026-11-14/tail/TAIL-POWERS-B-HANDBACK.md | 97 | there is clay to be had"); text only; no draw | 1056 |
+| docs/chair/2026-11-14/tail/TAIL-POWERS-B-HANDBACK.md | 103 | - (P29, the chair, 2026-11-15 03:10 UTC; vetoable by the | 1053 |
+| docs/chair/2026-11-14/tail/TAIL-POWERS-B-HANDBACK.md | 112 | - (P31, the chair, 2026-11-15 04:48 UTC; vetoable by the | 1054 |
+| docs/chair/2026-11-14/tail/TAIL-POWERS-B-HANDBACK.md | 129 | reworded line listed for the owner's veto. | 1048 |
+| docs/chair/2026-11-14/tail/TAIL-POWERS-B-HANDBACK.md | 152 | - THE STRUCTURAL BARGAIN BESIDE A QUARREL (a rule, for | 1055 |
+| docs/chair/2026-11-14/tail/TAIL-POWERS-B-HANDBACK.md | 167 | P16three, domain/facts/registeredWords.js rulingFaces). FOR THE OWNER'S VETO: if the heading | 979 |
+| docs/chair/2026-11-14/tail/TAIL-POWERS-B-HANDBACK.md | 476 | ## EVERY NEW OR CHANGED LINE (the owner's veto), with | 274 |
+| docs/chair/2026-11-14/tail/TAIL-POWERS-HANDBACK.md | 7 | ## The rulings worked to (the chair's, 2026-11-14; each vetoable | 270 |
+| docs/chair/2026-11-14/tail/TAIL-POWERS-HANDBACK.md | 21 | for one fact; no new vocabulary word without the chair; | 1048 |
+| docs/chair/2026-11-14/tail/TAIL-POWERS-HANDBACK.md | 78 | ## EVERY NEW OR CHANGED LINE (the owner's veto), with | 306 |
+| docs/chair/2026-11-14/tail/TAIL-POWERS-HANDBACK.md | 83 | present but outpaced; merchants set prices ..." (prices in the | 306 |
+| docs/chair/2026-11-14/tail/TAIL-POWERS-HANDBACK.md | 150 | ## The chair's rulings since (2026-11-15 00:20 UTC; each vetoable | 296 |
+| docs/chair/2026-11-14/tail/TAIL-POWERS-HANDBACK.md | 170 | THE OWNER'S DOOR, named, not re-taken. | 1050 |
+| docs/chair/2026-11-14/tail/TAIL-POWERS-HANDBACK.md | 196 | ## EVERY NEW OR CHANGED LINE (this seat; the owner's | 312 |
+| docs/chair/2026-11-14/tail/TAIL-POWERS-HANDBACK.md | 200 | the seat, ..." (the name twice): true, for the veto. | 312 |
+| docs/chair/2026-11-14/tail/TAIL-POWERS-HANDBACK.md | 215 | - FIRST (the chair's rulings P16 and P17, 00:45 UTC, | 339 |
+| docs/chair/2026-11-14/tail/TAIL-POWERS-HANDBACK.md | 221 | commit, a declared move; the new stability word listed for | 339 |
+| docs/chair/2026-11-14/tail/TAIL-POWERS-HANDBACK.md | 233 | church veto over "council appointments" 24, 20987 / 00170 the | 309 |
+| docs/chair/2026-11-14/tail/TAIL-POWERS-HANDBACK.md | 258 | ## The chair's rulings since (2026-11-15; each vetoable by the | 339 |
+| docs/chair/2026-11-14/tail/TAIL-POWERS-HANDBACK.md | 263 | the new stability word on the veto list. | 339 |
+| docs/chair/2026-11-14/tail/TAIL-POWERS-HANDBACK.md | 319 | 21062 1 -> 0 GONE · 20194 church veto 24 | 309 |
+| docs/chair/2026-11-14/tail/TAIL-POWERS-HANDBACK.md | 343 | ## EVERY NEW OR CHANGED LINE (this seat; the owner's | 282 |
+| docs/chair/2026-11-14/tail/TAIL-POWERS-HANDBACK.md | 362 | ## The chair's notes reaching this seat after its batches | 711 |
+| docs/chair/2026-11-14/tail/TAIL-POWERS-HANDBACK.md | 435 | ## The chair's rulings since (2026-11-15; each vetoable by the | 1051 |
+| docs/chair/2026-11-14/tail/TAIL-POWERS-HANDBACK.md | 501 | REWORDED to claim what every printing town bears (above, the | 451 |
+| docs/chair/2026-11-14/tail/TAIL-POWERS-HANDBACK.md | 525 | ## EVERY NEW OR CHANGED LINE (this seat; the owner's | 320 |
 | docs/chair/2026-11-14/tail/TAIL-SERVICES-HANDBACK.md | 7 | ## FIRST FOR THE SUCCESSOR: the chair's ruling S5 (2026-11-15 | 8 |
-| docs/chair/2026-11-14/tail/TAIL-SERVICES-HANDBACK.md | 11 | ## The rulings worked to (the chair's, 2026-11-14; each vetoable | 946 |
-| docs/chair/2026-11-14/tail/TAIL-SERVICES-HANDBACK.md | 30 | ### The new lines (THE VETO LIST), each read where | 394 |
-| docs/chair/2026-11-14/tail/TAIL-SERVICES-HANDBACK.md | 35 | "Scarce in the famine." both tabs, famine towns, the failed | 152 |
-| docs/chair/2026-11-14/tail/TAIL-SERVICES-HANDBACK.md | 95 | ## The chair's rulings since (2026-11-15 00:01 to 00:10 UTC; | 948 |
-| docs/chair/2026-11-14/tail/TAIL-SERVICES-HANDBACK.md | 110 | - **(S7)** (the chair, 2026-11-15 00:36Z; vetoable by the owner), | 949 |
-| docs/chair/2026-11-14/tail/TAIL-SERVICES-HANDBACK.md | 111 | - **(S8)** (the chair, 2026-11-15 00:50Z; vetoable by the owner): | 950 |
+| docs/chair/2026-11-14/tail/TAIL-SERVICES-HANDBACK.md | 11 | ## The rulings worked to (the chair's, 2026-11-14; each vetoable | 1057 |
+| docs/chair/2026-11-14/tail/TAIL-SERVICES-HANDBACK.md | 30 | ### The new lines (THE VETO LIST), each read where | 448 |
+| docs/chair/2026-11-14/tail/TAIL-SERVICES-HANDBACK.md | 35 | "Scarce in the famine." both tabs, famine towns, the failed | 153 |
+| docs/chair/2026-11-14/tail/TAIL-SERVICES-HANDBACK.md | 95 | ## The chair's rulings since (2026-11-15 00:01 to 00:10 UTC; | 1059 |
+| docs/chair/2026-11-14/tail/TAIL-SERVICES-HANDBACK.md | 110 | - **(S7)** (the chair, 2026-11-15 00:36Z; vetoable by the owner), | 1060 |
+| docs/chair/2026-11-14/tail/TAIL-SERVICES-HANDBACK.md | 111 | - **(S8)** (the chair, 2026-11-15 00:50Z; vetoable by the owner): | 1061 |
 | docs/chair/2026-11-14/tail/TAIL-SERVICES-HANDBACK.md | 130 | ## The veto list, new lines of these batches | 8 |
-| docs/chair/2026-11-14/tail/TAIL-SERVICES-HANDBACK.md | 166 | ## The chair's rulings since (2026-11-15; each vetoable by the | 951 |
-| docs/chair/2026-11-14/tail/TAIL-SERVICES-HANDBACK.md | 198 | ### The veto list (new or changed lines, read where | 401 |
-| docs/chair/2026-11-14/tail/TAIL-TIES-HANDBACK.md | 7 | ## The rulings worked to (the chair's, 2026-11-14; each vetoable | 956 (pointer to the item(s) this ruling or list produced) |
-| docs/chair/2026-11-14/tail/TAIL-TIES-HANDBACK.md | 27 | ## The rulings since (the chair's, 2026-11-15, to TAIL-TIES-2; each | 880 (pointer to the item(s) this ruling or list produced) |
-| docs/chair/2026-11-14/tail/TAIL-TIES-HANDBACK.md | 45 | read, one read a fact): it stays on the veto | 582 |
-| docs/chair/2026-11-14/tail/TAIL-TIES-HANDBACK.md | 53 | ## The rulings since (the chair's, 2026-11-15, to TAIL-TIES-3; each | 961 (pointer to the item(s) this ruling or list produced) |
-| docs/chair/2026-11-14/tail/TAIL-TIES-HANDBACK.md | 69 | body of more than one; it stays on the veto | 368 |
-| docs/chair/2026-11-14/tail/TAIL-TIES-HANDBACK.md | 83 | what any card of the category bears, veto-listed; no new | 873 |
-| docs/chair/2026-11-14/tail/TAIL-TIES-HANDBACK.md | 93 | ## The rulings since (the chair's, 2026-11-15 02:36 UTC, to | 962 (pointer to the item(s) this ruling or list produced) |
-| docs/chair/2026-11-14/tail/TAIL-TIES-HANDBACK.md | 107 | LEAF TELLS IT, the lines are reworded to what any | 873 |
-| docs/chair/2026-11-14/tail/TAIL-TIES-HANDBACK.md | 172 | 22767 "… a crime the guard is currently investigating." 147 | 874 |
-| docs/chair/2026-11-14/tail/TAIL-TIES-HANDBACK.md | 241 | card's structural position, which every card outside the cut already | 371 |
-| docs/chair/2026-11-14/tail/TAIL-TIES-HANDBACK.md | 271 | - 06985 (X9, HIGH, 1): "Collect the tribute the dragon | 881 |
-| docs/chair/2026-11-14/tail/TAIL-TIES-HANDBACK.md | 273 | STRUCK by that design, FOR THE OWNER'S VETO (6 cards | 881 |
-| docs/chair/2026-11-14/tail/TAIL-TIES-HANDBACK.md | 322 | ## The veto list (every new or changed line, with | 364 (pointer to the item(s) this ruling or list produced) |
-| docs/chair/2026-11-14/tail/TAIL-TIES-HANDBACK.md | 376 | - (TAIL-TIES-3) 06985's dragon (UNCANNY): struck by the owner's own | 881 |
-| docs/chair/2026-11-14/tail/TAIL-TIES-HANDBACK.md | 613 | - vendorPdfLazy first-paint closure: raw 1,164,844 against the budget 1,121,260, | 963 |
-| docs/chair/2026-11-14/tail/TAIL-TIES-HANDBACK.md | 627 | **The first-paint overage could not be attributed further.** A build | 963 |
-| docs/chair/2026-11-14/tail/TAIL-TIES-HANDBACK.md | 684 | - **The engine:** +132,162 over, all of it generator code. | 963 |
-| docs/chair/2026-11-14/tail/TAIL-TIES-HANDBACK.md | 736 | - The budget numbers stay UNTOUCHED: the tests stay red | 964 |
-| docs/chair/2026-11-14/tail/TAIL-TIES-HANDBACK.md | 740 | - **T27 (C red 1, vetoable by the owner):** | 550 |
-| docs/chair/2026-11-14/tail/TAIL-TIES-HANDBACK.md | 748 | - Whether a stand-in should carry a hook at all | 883 |
-| docs/chair/2026-11-14/tail/TAIL-TIES-T24-SIZES.md | 36 | labelBands and stressPowerFaces are read by first-paint screens: that is | 918 |
-| docs/chair/2026-11-14/tail/TAIL-TIES-T24-SIZES.md | 52 | A trim inside a lazy chunk buys no first-paint byte. | 919 |
-| docs/chair/2026-11-14/tail/TAIL-TITLES-HANDBACK.md | 13 | **The ruling, copied (KT1, the chair, 2026-11-15 02:12 UTC; vetoable | 365 |
-| docs/chair/2026-11-14/tail/TAIL-TITLES-HANDBACK.md | 21 | holds an honorific word; the veto table. ALSO, ONE PARAGRAPH: | 365 |
-| docs/chair/2026-11-14/tail/TAIL-TITLES-HANDBACK.md | 29 | **THE VETO TABLE (the owner's): every form, old to new, | 365 |
-| docs/chair/2026-11-14/tail/TAIL-TITLES-HANDBACK.md | 124 | - **K-C (the chair, 2026-11-15 00:50 UTC; vetoable by the | 363 |
-| docs/chair/2026-11-14/tail/TAIL-TITLES-HANDBACK.md | 188 | the owner's veto; a woman's office "Lord Marshal"): green before | 970 |
-| docs/chair/2026-11-14/tail/TAIL-TITLES-HANDBACK.md | 198 | ## THE VETO LIST: the whole face table as built | 363 |
-| docs/chair/2026-11-14/tail/TAIL-TITLES-HANDBACK.md | 229 | the golden master (the owner's door). The seat is handed | 967 |
-| docs/chair/2026-11-14/tail/TAIL-TITLES-HANDBACK.md | 238 | - **The golden master moves** (every npc title/role word above): | 967 |
-| docs/chair/2026-11-14/tail/TAIL-TITLES-HANDBACK.md | 251 | None re-taken. The golden master (the owner's door) moves. | 967 |
-| docs/chair/2026-11-15/close/SIZE-BUDGETS-MEASURE.md | 4 | measured envelope: a re-record is the owner's door and a | 965 |
-| docs/chair/2026-11-15/close/SIZE-BUDGETS-MEASURE.md | 95 | **For the owner (first paint):** | 965 |
-| docs/chair/2026-11-15/close/SIZE-BUDGETS-MEASURE.md | 100 | growing in place. It is not recoverable without per-module trials, | 965 |
-| docs/chair/2026-11-15/close/SIZE-BUDGETS-MEASURE.md | 141 | **For the owner (engine):** the whole +132,162 over is the | 966 |
-| docs/chair/2026-11-15/close/SIZE-BUDGETS-MEASURE.md | 150 | - the engine is the owner's re-record. | 966 |
-| docs/chair/2026-11-15/close/TAIL-CLOSE-DISPLAY-1-HANDBACK.md | 24 | ## The phone floor's two tables (V14: re-measured ONCE at | 851 |
-| docs/chair/2026-11-15/close/TAIL-CLOSE-DISPLAY-1-HANDBACK.md | 59 | - REGISTERS / GOLDENS / CENSUSES (the close's or the | 967 |
-| docs/chair/2026-11-15/close/TAIL-CLOSE-DISPLAY-2-HANDBACK.md | 19 | 5 resourceAnalysisCoupling.test.js (1) fp 72, 3e482b329: D34 (a) (680d16b54, DECLARED): | 557 |
-| docs/chair/2026-11-15/close/TAIL-CLOSE-DISPLAY-2-HANDBACK.md | 20 | 4 chainWorksThroughItsTrade.test.js (1) fp 72, 3e482b329: D34 (a) (680d16b54, DECLARED): | 556 |
-| docs/chair/2026-11-15/close/TAIL-CLOSE-DISPLAY-2-HANDBACK.md | 21 | 1 resourceGradeReadsChainLeaf.test.jsx (1) fp 72, 3e482b329: D34 (a) (680d16b54, DECLARED): | 556 |
-| docs/chair/2026-11-15/close/TAIL-CLOSE-DISPLAY-2-HANDBACK.md | 40 | ## For the owner's veto list (V16) | 556 |
-| docs/chair/2026-11-15/close/TAIL-CLOSE-POOLS-1-HANDBACK.md | 17 | ## Red 1 — the corpus's cure guards: GREEN, 118/118 | 559 |
-| docs/chair/2026-11-15/close/TAIL-CLOSE-POOLS-1-HANDBACK.md | 59 | THIS SEAT'S CALL (vetoable): DS-DEF-1's readiness pools are not READ | 560 |
-| docs/chair/2026-11-15/close/TAIL-CLOSE-POOLS-1-HANDBACK.md | 112 | ## Red 5 — crisisBlindDossierProse , the set-aside table: GREEN | 562 |
-| docs/chair/2026-11-15/close/TAIL-CLOSE-POOLS-1-HANDBACK.md | 151 | C30 (the chair, vetoable by the owner): the declaration stays | 480 |
-| docs/chair/2026-11-15/close/TAIL-CLOSE-SRC-2-HANDBACK.md | 19 | B tuningRegister POPULATION_GREW: SHADOW_CAPTURE_FLOOR = 11 , INCOME_LEADER_FROM = 20 | 583 |
-| docs/chair/2026-11-15/close/TAIL-CLOSE-SRC-2-HANDBACK.md | 21 | B' the two ceilings RAISED by the chair's ruling TU1 | 584 |
-| docs/chair/2026-11-15/close/TAIL-CLOSE-SRC-2-HANDBACK.md | 29 | D 7e tierInertiaEnvelope town drift 45 > ceiling 43 (0.225 | 968 |
-| docs/chair/2026-11-15/close/TAIL-CLOSE-TESTS-C-HANDBACK.md | 31 | - tailCorpusDefGuards : **a call for the chair to veto.** | 568 |
+| docs/chair/2026-11-14/tail/TAIL-SERVICES-HANDBACK.md | 166 | ## The chair's rulings since (2026-11-15; each vetoable by the | 1062 |
+| docs/chair/2026-11-14/tail/TAIL-SERVICES-HANDBACK.md | 198 | ### The veto list (new or changed lines, read where | 458 |
+| docs/chair/2026-11-14/tail/TAIL-TIES-HANDBACK.md | 7 | ## The rulings worked to (the chair's, 2026-11-14; each vetoable | 1067 (pointer to the item(s) this ruling or list produced) |
+| docs/chair/2026-11-14/tail/TAIL-TIES-HANDBACK.md | 27 | ## The rulings since (the chair's, 2026-11-15, to TAIL-TIES-2; each | 982 (pointer to the item(s) this ruling or list produced) |
+| docs/chair/2026-11-14/tail/TAIL-TIES-HANDBACK.md | 45 | read, one read a fact): it stays on the veto | 655 |
+| docs/chair/2026-11-14/tail/TAIL-TIES-HANDBACK.md | 53 | ## The rulings since (the chair's, 2026-11-15, to TAIL-TIES-3; each | 1072 (pointer to the item(s) this ruling or list produced) |
+| docs/chair/2026-11-14/tail/TAIL-TIES-HANDBACK.md | 69 | body of more than one; it stays on the veto | 420 |
+| docs/chair/2026-11-14/tail/TAIL-TIES-HANDBACK.md | 83 | what any card of the category bears, veto-listed; no new | 974 |
+| docs/chair/2026-11-14/tail/TAIL-TIES-HANDBACK.md | 93 | ## The rulings since (the chair's, 2026-11-15 02:36 UTC, to | 1073 (pointer to the item(s) this ruling or list produced) |
+| docs/chair/2026-11-14/tail/TAIL-TIES-HANDBACK.md | 107 | LEAF TELLS IT, the lines are reworded to what any | 974 |
+| docs/chair/2026-11-14/tail/TAIL-TIES-HANDBACK.md | 172 | 22767 "… a crime the guard is currently investigating." 147 | 975 |
+| docs/chair/2026-11-14/tail/TAIL-TIES-HANDBACK.md | 241 | card's structural position, which every card outside the cut already | 425 |
+| docs/chair/2026-11-14/tail/TAIL-TIES-HANDBACK.md | 271 | - 06985 (X9, HIGH, 1): "Collect the tribute the dragon | 983 |
+| docs/chair/2026-11-14/tail/TAIL-TIES-HANDBACK.md | 273 | STRUCK by that design, FOR THE OWNER'S VETO (6 cards | 983 |
+| docs/chair/2026-11-14/tail/TAIL-TIES-HANDBACK.md | 322 | ## The veto list (every new or changed line, with | 413 (pointer to the item(s) this ruling or list produced) |
+| docs/chair/2026-11-14/tail/TAIL-TIES-HANDBACK.md | 376 | - (TAIL-TIES-3) 06985's dragon (UNCANNY): struck by the owner's own | 983 |
+| docs/chair/2026-11-14/tail/TAIL-TIES-HANDBACK.md | 613 | - vendorPdfLazy first-paint closure: raw 1,164,844 against the budget 1,121,260, | 1074 |
+| docs/chair/2026-11-14/tail/TAIL-TIES-HANDBACK.md | 627 | **The first-paint overage could not be attributed further.** A build | 1074 |
+| docs/chair/2026-11-14/tail/TAIL-TIES-HANDBACK.md | 684 | - **The engine:** +132,162 over, all of it generator code. | 1074 |
+| docs/chair/2026-11-14/tail/TAIL-TIES-HANDBACK.md | 736 | - The budget numbers stay UNTOUCHED: the tests stay red | 1075 |
+| docs/chair/2026-11-14/tail/TAIL-TIES-HANDBACK.md | 740 | - **T27 (C red 1, vetoable by the owner):** | 623 |
+| docs/chair/2026-11-14/tail/TAIL-TIES-HANDBACK.md | 748 | - Whether a stand-in should carry a hook at all | 985 |
+| docs/chair/2026-11-14/tail/TAIL-TIES-T24-SIZES.md | 36 | labelBands and stressPowerFaces are read by first-paint screens: that is | 1020 |
+| docs/chair/2026-11-14/tail/TAIL-TIES-T24-SIZES.md | 52 | A trim inside a lazy chunk buys no first-paint byte. | 1021 |
+| docs/chair/2026-11-14/tail/TAIL-TITLES-HANDBACK.md | 13 | **The ruling, copied (KT1, the chair, 2026-11-15 02:12 UTC; vetoable | 414 |
+| docs/chair/2026-11-14/tail/TAIL-TITLES-HANDBACK.md | 21 | holds an honorific word; the veto table. ALSO, ONE PARAGRAPH: | 414 |
+| docs/chair/2026-11-14/tail/TAIL-TITLES-HANDBACK.md | 29 | **THE VETO TABLE (the owner's): every form, old to new, | 414 |
+| docs/chair/2026-11-14/tail/TAIL-TITLES-HANDBACK.md | 124 | - **K-C (the chair, 2026-11-15 00:50 UTC; vetoable by the | 412 |
+| docs/chair/2026-11-14/tail/TAIL-TITLES-HANDBACK.md | 188 | the owner's veto; a woman's office "Lord Marshal"): green before | 1081 |
+| docs/chair/2026-11-14/tail/TAIL-TITLES-HANDBACK.md | 198 | ## THE VETO LIST: the whole face table as built | 412 |
+| docs/chair/2026-11-14/tail/TAIL-TITLES-HANDBACK.md | 229 | the golden master (the owner's door). The seat is handed | 1078 |
+| docs/chair/2026-11-14/tail/TAIL-TITLES-HANDBACK.md | 238 | - **The golden master moves** (every npc title/role word above): | 1078 |
+| docs/chair/2026-11-14/tail/TAIL-TITLES-HANDBACK.md | 251 | None re-taken. The golden master (the owner's door) moves. | 1078 |
+| docs/chair/2026-11-15/close/SIZE-BUDGETS-MEASURE.md | 4 | measured envelope: a re-record is the owner's door and a | 1076 |
+| docs/chair/2026-11-15/close/SIZE-BUDGETS-MEASURE.md | 95 | **For the owner (first paint):** | 1076 |
+| docs/chair/2026-11-15/close/SIZE-BUDGETS-MEASURE.md | 100 | growing in place. It is not recoverable without per-module trials, | 1076 |
+| docs/chair/2026-11-15/close/SIZE-BUDGETS-MEASURE.md | 141 | **For the owner (engine):** the whole +132,162 over is the | 1077 |
+| docs/chair/2026-11-15/close/SIZE-BUDGETS-MEASURE.md | 150 | - the engine is the owner's re-record. | 1077 |
+| docs/chair/2026-11-15/close/TAIL-CLOSE-DISPLAY-1-HANDBACK.md | 24 | ## The phone floor's two tables (V14: re-measured ONCE at | 952 |
+| docs/chair/2026-11-15/close/TAIL-CLOSE-DISPLAY-1-HANDBACK.md | 59 | - REGISTERS / GOLDENS / CENSUSES (the close's or the | 1078 |
+| docs/chair/2026-11-15/close/TAIL-CLOSE-DISPLAY-2-HANDBACK.md | 19 | 5 resourceAnalysisCoupling.test.js (1) fp 72, 3e482b329: D34 (a) (680d16b54, DECLARED): | 630 |
+| docs/chair/2026-11-15/close/TAIL-CLOSE-DISPLAY-2-HANDBACK.md | 20 | 4 chainWorksThroughItsTrade.test.js (1) fp 72, 3e482b329: D34 (a) (680d16b54, DECLARED): | 629 |
+| docs/chair/2026-11-15/close/TAIL-CLOSE-DISPLAY-2-HANDBACK.md | 21 | 1 resourceGradeReadsChainLeaf.test.jsx (1) fp 72, 3e482b329: D34 (a) (680d16b54, DECLARED): | 629 |
+| docs/chair/2026-11-15/close/TAIL-CLOSE-DISPLAY-2-HANDBACK.md | 40 | ## For the owner's veto list (V16) | 629 |
+| docs/chair/2026-11-15/close/TAIL-CLOSE-POOLS-1-HANDBACK.md | 17 | ## Red 1 — the corpus's cure guards: GREEN, 118/118 | 632 |
+| docs/chair/2026-11-15/close/TAIL-CLOSE-POOLS-1-HANDBACK.md | 59 | THIS SEAT'S CALL (vetoable): DS-DEF-1's readiness pools are not READ | 633 |
+| docs/chair/2026-11-15/close/TAIL-CLOSE-POOLS-1-HANDBACK.md | 112 | ## Red 5 — crisisBlindDossierProse , the set-aside table: GREEN | 635 |
+| docs/chair/2026-11-15/close/TAIL-CLOSE-POOLS-1-HANDBACK.md | 151 | C30 (the chair, vetoable by the owner): the declaration stays | 540 |
+| docs/chair/2026-11-15/close/TAIL-CLOSE-SRC-2-HANDBACK.md | 19 | B tuningRegister POPULATION_GREW: SHADOW_CAPTURE_FLOOR = 11 , INCOME_LEADER_FROM = 20 | 656 |
+| docs/chair/2026-11-15/close/TAIL-CLOSE-SRC-2-HANDBACK.md | 21 | B' the two ceilings RAISED by the chair's ruling TU1 | 657 |
+| docs/chair/2026-11-15/close/TAIL-CLOSE-SRC-2-HANDBACK.md | 29 | D 7e tierInertiaEnvelope town drift 45 > ceiling 43 (0.225 | 1079 |
+| docs/chair/2026-11-15/close/TAIL-CLOSE-TESTS-C-HANDBACK.md | 31 | - tailCorpusDefGuards : **a call for the chair to veto.** | 641 |
