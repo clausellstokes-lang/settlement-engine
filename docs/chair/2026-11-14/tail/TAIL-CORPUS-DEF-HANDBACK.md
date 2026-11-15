@@ -261,3 +261,16 @@ Declared (no new words): Contested v4 `no crisis: under_siege`; Critical v3 `no 
    and the CHAIN lines (14 rows); DS-POW-5 FLAG merchantArmy (7); DS-POW-6; DS-DEF-5/-8/-11/-3 smaller rows; DS-FTH-4.
 5. DS-DEF-9 magicDependency (13 rows, 93 towns): C9 — named with their towns; a measuring seat takes the class.
 
+## After the hand-back: the chair's READ-ALL-4 note (2026-11-15 01:56 UTC), answered, not cured
+- THE SLASH LABEL IN DS-POW-6 GM ADVISORY ("… if Military/Guard refuses it", "Military/Guard answers to the Elder Council
+  … in name only"): the corpus's words are slots; THE FILLER is `src/domain/display/stateProse/powerStateProse.js`
+  (outside this group's files), every power name passing `properFill(text(…))` raw: `:654` (`{faction}`, the people
+  rungs), `:960` (`{seat}` / `{faction}` = `governingName`), `:1101` (`{counterpart}` = the first challenger), `:1113`
+  (`{faction}` = the advised party of DS-POW-6). ONE CHANGE there (the name through `powerSentenceName.js ::
+  powerSentenceName` before `properFill`) covers every DS-POW pool that composer draws (DS-POW-3/-4/-5/-6); the other
+  desks of this group fill no power slot but `warFaithStateProse.js:883` (`{faction}` = the religious faction).
+  MEASURE before (the after-census of batch 3, tabs, every writer): 429 distinct sentences, 2,892 printings, carry a
+  slash label. NAMED for that file's group.
+- DS-POW-5 council v4 ("its members cannot agree") where the cast seats one person (17 of 47): the chair names it a class
+  of the RECORD; the line is left.
+
