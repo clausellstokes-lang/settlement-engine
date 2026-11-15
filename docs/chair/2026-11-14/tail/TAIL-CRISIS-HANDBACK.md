@@ -219,6 +219,298 @@ outlookHookSiblings) cure every surface they feed, so any WORKLIST3 row of those
 instrument for the switch) and checks each row against the record first: that read's header showed no seats and
 lacked `history.currentTensions`.
 
+# TAIL-CRISIS-2 · the successor's batches (2026-11-15)
+
+Seat TAIL-CRISIS-2 succeeded TAIL-CRISIS on the same branch, at **9c07f7461** (origin's tip, read back at the start). It
+handed back at its count: about 340,000 tokens when it read the count, against the brief's 250,000. It read the count
+late, while batch 2's census was in flight. Pushed: **30daac9a7** (the atom, K6), **5e75be951** (batch 2), and this hand-back.
+
+## The chair's rulings since (2026-11-14 23:57 to 2026-11-15 00:41 UTC; each vetoable by the owner)
+
+- **(K5)** `hookTruth.js :: ruledByCouncil` is moved by the TIES seat only (it builds the atom `ruling body`), with its one
+  re-export edit in hookTruth.js. This seat did not touch it.
+- **(K6)** The third atom, `rival power`, is granted: true where the record holds a power other than the governing one whose
+  own standing is Significant or above (the power's own strength: one leaf). It goes in its own commit with its test, apart
+  from the end of the vocabulary's list. The family is named (shared power, ruling body, rival power): no fourth without the chair.
+- **(K7)** 18671: no declared move. `foodStoresWords` takes an OPTIONAL second argument (the crisis), which the Tonight sheet
+  passes. The Economics tab's call (`EconomicsTab.jsx`, another seat's) passes one argument and prints as before: NAMED below.
+- **(K8)** 01034: the predecessor's wording is accepted ("…and some here are doing well out of it"). The banked row is to be
+  re-keyed by identity through the walker's own door, in the same commit. If the door cannot re-key one row, stop and tell
+  the chair its modes.
+- **(K9)** The iron hooks (20893 22079 22080 20908): one commit, by exception: the three literals of PEACE_IRON_HOOKS in
+  `foodBalance.js` (those only, to the proposed wordings), with their keys here. The iron carts row's condition stays the
+  DEFECON seat's.
+- **(X9)** The exports' rows (WORKLIST3-CRISIS, 29): take each with a batch of the same writer, measured with `SURFACES=PDF,Journal`.
+- **(K10)** (00:19, on this seat's K6 stop) THE SUMMARY STAYS ON ITS TRUE FALLBACK: the strong line is not keyed. The atom
+  stands, with its hazard written on it: it is true of the SETTLED record, so a line rendered before the powers settle must
+  not be keyed by it.
+- **(K11)** (00:28, named by TAIL-HISTORY) the trade and official vantages in `crisisSummaryVantage.js` that presume offices.
+- **(K12)** (00:41, named by TAIL-DISPLAY-CIVIC) "{power} no stake yet" (B12521 89 towns, B13860 B18039 13199 06464 13370);
+  B11070 B11113 B11121 ("of the house named"); 12547 (the quick guide).
+
+## The atom (K6): 30daac9a7
+
+`src/domain/facts/rivalPower.js :: rivalPowerOf` reads each power's own `powerLabel`, never a share recomputed. It is true
+where a power with `isGoverning !== true` stands Significant, Strong or Dominant, false where powers are listed and none is,
+and undefined where the record has no power list. In the vocabulary, `'rival power'` sits after `guild`; there is a getter
+`factsOf().rivalPower` and a factLayers row (layer 3, powerStructure). Test: `tests/domain/facts/rivalPower.test.js`
+(9 tests; a plant with the reader always true reds 3).
+
+**Measured on the 720 final records: true in 21 of the 37 insurgencies, false in 16.** The chair expected 27/10, but 27 is
+the count with ANY second power; 6 of those have only Minor or Suppressed rivals.
+
+**THE STOP (K10):** the stress summaries are rendered at `assembleSettlement.js:219`, BEFORE `reconcilePowerStructure` and
+`resizePoliticalRoster` (:248 on). On births of the 37, 31 hold a rival at render time, and 10 of those lose it when the
+roster settles: r2s-insurgency-hamlet-0 printed "A strong power" with one power left. The keying was reverted. The summary
+keeps "Some in X have stopped obeying the government…" in all 37.
+
+**THE CLASS (K10's ask), named for a measuring seat; it is not this seat's to move.** Two of this group's writers run BEFORE
+the powers settle:
+- `generators/stressNarrative.js :: RENDERERS` (the summaries, assembly :219);
+- `generators/economy/outlookHookSiblings.js` (the outlook hooks, born with the food record in the economy step, before
+  assembly).
+
+Their lines that name a power's standing, a council or a force read a roster that may still change. The group's
+display-time writers (faithReading, crisisSummaryVantage, settlementQuickGuide, tonightSheet, and crisisCast/crisisHooks
+where they are read at display) read the settled record.
+
+## Batch 2: the quick guide (35 rows), K1/K7 (18671), K11 — 5e75be951
+
+Writers:
+- `settlementQuickGuide.js :: scopeAgainstRule`: new, called at the end of scopeAgainstRoster, display-time only.
+- `tonightSheet.js :: foodStoresWords` (the optional crisis) and `foodFact`.
+- `crisisSummaryVantage.js`: the succession void's trade and official vantages.
+
+The test, `tests/domain/tailCrisisBatch2.test.js`, has 33 scope FALSE pairs and 7 NOW pairs. Every one was red at 9c07f7461
+in an it.each form (40 of 40). The 9 KEEP pairs and 1 STILL pair are green at both. A plant (the desert read switched off)
+reds it. Re-keyed by identity in the same commit: the hall pins in `tests/domain/settlementQuickGuide.test.js` and
+`tests/domain/summary/inlandScopePhrases.test.js` (records with no seat and no hall).
+
+### Measured (census at 9c07f7461 against 5e75be951's src; inventory_diff over the batch's 36 rows)
+
+Tabs: 29,890 distinct sentences before and 29,922 after: 38 gone, 70 new, 24 in fewer towns, 2 in more. Exports (PDF,
+Journal): 35,796 → 35,828. **The 720 records are byte-identical before and after: no declared move.**
+- **GONE, 21 rows:** 18583 12545 15013 09626 03984 12542 03970 15016 10044 03987 15015 15026 10071 10045 10066 03969 10054
+  10072 10049 10048 10046.
+- **FEWER, 13 rows, each down to its true remainder.** The towns left print the line truly: a lord or a standing landed
+  power; a council's or a mayor's rule; a guild that stands; a hall that is a seat; ground that is not desert. 18585 13→9,
+  03971 10→9, 09631 10→1, 12540 9→1, 03978 8→2, 09628 8→2, 18124 8→7, 18128 8→6, 09633 7→1, 09630 7→1, B03858 7→1,
+  18459 6→5, 09632 5→1.
+- **Still in the town read, 2 rows:**
+  - **03974, STRUCK.** In r2s-plague_onset-village-1 the Elder Council governs and the crossroads trades both ways. It went
+    5→3; the other two towns are elder rule with no trade.
+  - **18671, by its fold 350→350 on the TABS**, because the Economics tab (one argument, not this seat's) still prints it
+    everywhere. On the Tonight sheet the twin prints in exactly the 16 towns the predecessor counted false (13 "…and the
+    siege is eating into them", 3 "…and the famine is eating into them"). On the exports the old line went 350→334.
+- **K11:** "…and each office does as it sees fit meanwhile" printed in 10 towns, false in 3 (r2s-succession_void-hamlet-2,
+  -village-0, -village-3). "Each office in X now runs itself…" printed in 7, false in 2 (-thorp-0, -thorp-1). Both are now
+  at 0, and their rewordings print in the same 10 and 7. Both lines print on the exports only.
+- **Other sentences now in fewer towns:** every one is another frame (of the scope line's five) of the same cured clauses,
+  false in the same states. **In more towns (2):** "Greek-inspired, built on desert ground." and "…built in forest
+  country." went 1→2 each, where a town whose civic association was struck now prints its ground alone. Both are true.
+- **THE INHERITORS:** 74 sentences, all of them this batch's own lines (the veto list below). The widest are
+  "Germanic-inspired: built in timber and stone." (15) and "Steppe-inspired, and it shows: built on clan lines." (12).
+- **THE SILENCE OVER TWENTY TOWNS (told to the chair with this hand-back).** These clauses leave many towns:
+  - the Germanic estates clause: 57;
+  - the Steppe "held by clan and caravan": about 50 (every non-elder rule; elder rule with no trade keeps "held by clan");
+  - the Latin "patronage and law": 34;
+  - the Greek "civic association": 29;
+  - the Norse hall: 27.
+
+  Each was judged FALSE where it leaves. An Elder Council, a headman or a household council does not rule by estates, by
+  patronage and law, or by civic association. A Merchant Council city is not "held by clan". No hall stands. The clan and
+  estate readings are the widest calls, and the owner may veto them.
+
+### Rows struck (true by the record)
+
+- **03974**: above.
+- **B11090 B11061 B11043 B11046 B11037 B11041 B11151** ("X of <power>" in the cast hooks): every named person holds a
+  membership in that power. The readers' PEOPLE line gave first titles only.
+  - Akna Balam: rank 1 of the Elder Council.
+  - Reiko Inoue: rank 1 of Merchant Guilds.
+  - Wen Ma: a member of the Merchant oligarchy.
+  - Güchlüg Jirgin: a member of the power named "Town Mayor".
+  - Maisa al-Qadir: a member of the Arcane Council.
+  - Christoph Fischbach: a member of the Guild Council.
+  - Yan Kimura: rank 2 of Noble Houses.
+
+  B11090's subjectless "…: holds the seat" is a real fault; the batch 3 patch cures it.
+- **B11070 B11121 B11113** (K12 (2)): Jade Ek is rank 3 of the Elder Council; Anusaya Mishra is a member of Merchant
+  Guilds; Sorcha Tobin holds the outbreak's lever house (the parish church).
+- **B19085 B19857 B21139** ("the town/city hall, run by X"): each X is first rank of the governing power (the
+  Captain-Mayor, the Archmage of the Council), and the seat's head runs the seat.
+- **20852**: the loser stake is the cast's own reading, and nothing in the record makes it false.
+
+## BATCH 3, BUILT AND NOT PUSHED (handed back at the count): TAIL-CRISIS-2-batch3.patch beside this file
+
+The patch applies clean at 5e75be951: run git apply with the patch's path from the tree root.
+
+In crisisHooks.js:
+- The cast hook's reasons that are a verb's predicate (PREDICATE_REASONS: leverRuns, instigatorRival, instigatorBacked,
+  targetSeat, targetSeatContested, scapegoatSeat, scapegoatLever, defenderMilitary, defenderOffice, treaterSeat, face) are
+  said of the holder, as a relative clause, never after a colon:
+  - "Eir Ragnarsson of Household Council, who holds the seat, is the one who would come to terms."
+  - "it is aimed at X of Elder Council, who holds the seat, and the right to it is already in dispute."
+- A power named in the hook (holderWords, loserClause) takes its prose form from powerSentenceName ("Military/Guard" →
+  "The Guard").
+
+It cures 11595 11549 11671 11569 11668 B11049 B11090 20875. A probe over the 720 records: 282 of the 722 hook lines change,
+all of them these shapes. Its test, tests/domain/tailCrisisBatch3.test.js (in the patch), has 8 FALSE pairs, all red at
+9c07f7461 (8 of 8, in an it.each form), and 2 KEEP pairs, green.
+
+**OWED before it is pushed:**
+- the gates: eslint, strict, the ratchet, the walker's check against 147, the grid;
+- the governing tests of crisisHooks;
+- its census before (= batch 2's after) and after.
+
+The wording "In the betrayal, it is aimed at…" keeps "it": its antecedent is the crisis named in the same sentence.
+
+## Rows parked or named (this seat)
+
+- **K8, 01034: STOP. The door has no mode that re-keys one row.** The row is in the FIRST register
+  (presumedThings.register.json: war, after-release, "…doing well out of it…", 294c5b817f35c257). The door's modes:
+  - check;
+  - bank with a reason and a base, with or without one thing: these bank only hits whose literal STOOD in its file at the
+    base. A reworded literal never did, so the door exits 1 and names it;
+  - bank-strip;
+  - shrink and shrink-arm2: these only remove rows;
+  - rekey-whole: this re-hashes rows that have no hash, and refuses a row that matches no hit.
+
+  None of them re-keys one row to a new literal. For the chair.
+- **K9 (the iron hooks): not reached.** The predecessor's wordings stand ready in batch 1's "parked" list above.
+- **K12 (1) "{power} no stake yet": not taken.** The words are written at crisisPage.js:58, which is not this group's file.
+  Their truth rests on the cast's stakes (crisisCast.js, rule 11), which are STORED on the record (stress[].cast), so a cure
+  there is a declared move. The exports' "Merchant Guilds no stake yet" also lacks a verb; that belongs to crisisPage.js's
+  holder.
+- **NAMED for the Economics tab's seat (K7):** src/components/new/tabs/EconomicsTab.jsx:304 calls foodStoresWords(record)
+  with one argument. Passing the crisis (factsOf(settlement).crisis) makes the tab say what the famine or the siege is doing,
+  as the Tonight sheet now does. Until then the tab still prints "Stores: a granary, about five months of grain." beside a
+  famine.
+- **NAMED for HISTORY:** src/data/stressTypes.js:114 and its mirror stressTypesMeta.js:69 hold the succession void's
+  viabilityNote "…in the meantime each office does as it sees fit.". It prints in 31 towns, 15 of which have no office on
+  the roster (every succession_void thorp, hamlet and village).
+- **Seen, not on the worklist:**
+  - the Germanic "built in timber and stone" on desert ground (4 towns), the same shape as the Slavic timber cured here;
+  - the Tonight sheet's food label "Import-Dependent" under a siege (r2s-under_siege-city-0, -metropolis-3), where nothing
+    comes in.
+
+## Gates (batch 2, at the tree against 9c07f7461)
+
+- eslint (the touched files): 0.
+- typecheck:domain:strict: 0. typecheck:ratchet: 0.
+- The presumed-things walker's check: 147 fresh at base and tree. Two first drafts raised it to 149: "built around the
+  harbour, " as a literal, and "held, for now, by an occupying power". Both were reworded: the strike is now a regex that
+  prints nothing, and the twin says "another power".
+- The grid: 2 falls at both (r2r-city-0 P7a, r2s-insurgency-metropolis-0 P7a), carried.
+- The governing tests (142 files naming the touched writers): 32 failing at the base, and the same 32 at the tree once the
+  four hall pins were re-keyed. They are CARRIED; among them are factLayers.walker's two, coherenceAgreeCures' two and
+  vocabularyPageFindings' one.
+
+## Registers named stale
+
+- The sovereignty walker's estate file count: 2 more test files (tests/domain/facts/rivalPower.test.js,
+  tests/domain/tailCrisisBatch2.test.js) on top of batch 1's one. It is re-taken through its own door at the close.
+
+## THE VETO LIST (batch 2): every new line, with its smallest and largest town and a crisis town
+
+| new line (fold) | towns | smallest | largest | a crisis town |
+|---|---|---|---|---|
+| Germanic-inspired: built in timber and stone. | 15 | r2r-thorp-32 | r2s-under_siege-metropolis-0 | r2s-succession_void-thorp-1 |
+| Stores: a granary, about # months of grain, and the siege is eating into them. | 13 | r2s-under_siege-town-0 | r2s-under_siege-metropolis-3 | r2s-under_siege-town-0 |
+| Steppe-inspired, and it shows: built on clan lines. | 12 | r2r-town-13 | r2s-succession_void-metropolis-3 | r2s-infiltrated-metropolis-3 |
+| Germanic-inspired, built in timber and stone. | 11 | r2r-thorp-18 | r2s-wartime-city-2 | r2s-infiltrated-thorp-3 |
+| Ask about the place and you are told it is built on clan lines. | 10 | r2s-infiltrated-town-2 | r2r-metropolis-7 | r2s-infiltrated-town-2 |
+| Ask about the place and you are told it is built in timber and stone. | 9 | r2r-thorp-7 | r2r-metropolis-12 | r2s-indebted-village-2 |
+| Germanic-inspired; people here live in a place built in timber and stone. | 9 | r2r-thorp-30 | r2s-under_siege-city-3 | r2s-infiltrated-thorp-2 |
+| Germanic-inspired, and it shows: built in timber and stone. | 8 | r2r-thorp-45 | r2r-metropolis-16 | r2s-insurgency-thorp-3 |
+| Steppe-inspired, built on clan lines. | 8 | r2r-town-20 | r2s-politically_fractured-metropolis-1 | r2s-religious_conversion-city-3 |
+| Steppe-inspired: built on clan lines. | 8 | r2r-town-53 | r2r-metropolis-47 | r2s-famine-town-2 |
+| Latin-inspired, and it shows: run by custom more than by law. | 6 | r2r-thorp-35 | r2s-succession_void-hamlet-3 | r2s-politically_fractured-thorp-2 |
+| Norse-inspired; people here live in a place built on kin, oath and the assembly. | 6 | r2r-thorp-52 | r2r-village-29 | r2s-occupied-thorp-3 |
+| Latin-inspired: run by custom more than by law. | 6 | r2r-thorp-54 | r2s-under_siege-hamlet-0 | r2s-indebted-thorp-3 |
+| Steppe-inspired; people here live in a place built on clan lines. | 6 | r2r-town-19 | r2s-plague_onset-metropolis-0 | r2s-religious_conversion-city-0 |
+| Latin-inspired; people here live in a place run by custom more than by law. | 5 | r2r-thorp-6 | r2r-hamlet-32 | r2s-famine-thorp-3 |
+| Norse-inspired, and it shows: built on kin, oath and the assembly. | 5 | r2r-thorp-20 | r2r-village-32 | r2s-indebted-thorp-1 |
+| Norse-inspired: built on kin, oath and the assembly. | 5 | r2r-hamlet-20 | r2r-village-20 | r2s-politically_fractured-hamlet-2 |
+| Latin-inspired, run by custom more than by law. | 4 | r2s-recently_betrayed-thorp-3 | r2r-hamlet-47 | r2s-recently_betrayed-thorp-3 |
+| Ask about the place and you are told it is built on hillside ground. | 4 | r2s-under_siege-thorp-2 | r2s-recently_betrayed-village-2 | r2s-under_siege-thorp-2 |
+| Norse-inspired, built on kin, oath and the assembly. | 3 | r2r-hamlet-59 | r2r-village-0 | r2s-infiltrated-hamlet-2 |
+| Latin-inspired, built in masonry around a civic square, and run by custom more than by law. | 3 | r2r-village-26 | r2s-recently_betrayed-village-3 | r2s-recently_betrayed-village-3 |
+| Stores: a granary, about # months of grain, and the famine is eating into them. | 3 | r2s-famine-town-0 | r2s-famine-town-3 | r2s-famine-town-0 |
+| Ask about the place and you are told it is built in timber and stone, held, for now, by another power. | 3 | r2s-occupied-hamlet-2 | r2s-occupied-city-0 | r2s-occupied-hamlet-2 |
+| Ask about the place and you are told it is built on kin, oath and the assembly. | 3 | r2s-insurgency-thorp-1 | r2s-infiltrated-hamlet-1 | r2s-insurgency-thorp-1 |
+| Latin-inspired, and it shows: held, for now, by another power. | 2 | r2r-thorp-1 | r2r-thorp-24 | — |
+| Steppe-inspired; people here live in a place built for a pastoral life #-settled and #-moving, held by clan. | 2 | r2r-thorp-38 | r2r-thorp-46 | — |
+| Slavic-inspired: built in compounds on land held in common, kin by kin. | 2 | r2r-thorp-51 | r2s-succession_void-city-3 | r2s-succession_void-city-3 |
+| Steppe-inspired; people here live in a place built for a pastoral life #-settled and #-moving. | 2 | r2r-hamlet-7 | r2r-village-59 | — |
+| Ask about the place and you are told it is built for a pastoral life #-settled and #-moving. | 2 | r2s-slave_revolt-thorp-0 | r2r-hamlet-15 | r2s-slave_revolt-thorp-0 |
+| Norse-inspired, built by the water, on kin, oath and the assembly. | 2 | r2r-hamlet-28 | r2r-village-10 | — |
+| Steppe-inspired: built for a pastoral life #-settled and #-moving, held by clan. | 2 | r2r-hamlet-34 | r2r-village-8 | — |
+| Ask about the place and you are told it is run by custom more than by law. | 2 | r2r-hamlet-39 | r2s-succession_void-hamlet-0 | r2s-succession_void-hamlet-0 |
+| Ask about the place and you are told it is built on the open plain. | 2 | r2s-recently_betrayed-thorp-0 | r2r-village-9 | r2s-recently_betrayed-thorp-0 |
+| Norse-inspired; people here live in a place built by the water, on kin, oath and the assembly. | 2 | r2s-mass_migration-hamlet-2 | r2r-village-14 | r2s-mass_migration-hamlet-2 |
+| Latin-inspired: built in masonry around a civic square, and run by custom more than by law. | 2 | r2r-village-25 | r2s-insurgency-village-1 | r2s-insurgency-village-1 |
+| Greek-inspired, and it shows: built on mountain ground. | 2 | r2s-religious_conversion-thorp-2 | r2s-under_siege-village-2 | r2s-religious_conversion-thorp-2 |
+| Steppe-inspired, and it shows: built on clan lines, held, for now, by another power. | 2 | r2s-occupied-town-2 | r2s-occupied-city-1 | r2s-occupied-town-2 |
+| Latin-inspired; people here live in a place built in masonry around a civic square, and run by custom more than by law. | 2 | r2s-insurgency-village-3 | r2s-politically_fractured-village-0 | r2s-insurgency-village-3 |
+| Greek-inspired; people here live in a place built on the coast. | 2 | r2s-indebted-village-1 | r2s-indebted-village-3 | r2s-indebted-village-1 |
+| South-Asian-inspired, built around the tank and the bazaar, in # by trade, under the temple. | 2 | r2s-plague_onset-metropolis-1 | r2s-plague_onset-metropolis-3 | r2s-plague_onset-metropolis-1 |
+| Greek-inspired; people here live in a place built on riverside ground. | 2 | r2s-religious_conversion-village-3 | r2s-wartime-village-2 | r2s-religious_conversion-village-3 |
+| Slavic-inspired, built in compounds on land held in common, kin by kin. | 1 | r2r-thorp-10 | r2r-thorp-10 | — |
+| Steppe-inspired, and it shows: built for a pastoral life #-settled and #-moving, held by clan. | 1 | r2r-thorp-21 | r2r-thorp-21 | — |
+| Greek-inspired: built on riverside ground, held, for now, by another power. | 1 | r2r-thorp-27 | r2r-thorp-27 | — |
+| Ask about the place and you are told it is built on riverside ground. | 1 | r2r-hamlet-5 | r2r-hamlet-5 | — |
+| Greek-inspired; people here live in a place built in forest country. | 1 | r2r-hamlet-12 | r2r-hamlet-12 | — |
+| Ask about the place and you are told it is built in masonry around a civic square, and run by custom more than by law. | 1 | r2r-village-12 | r2r-village-12 | — |
+| Steppe-inspired, and it shows: built for a pastoral life #-settled and #-moving. | 1 | r2r-village-45 | r2r-village-45 | — |
+| Ask about the place and you are told it is built around the agora, on hillside ground. | 1 | r2r-village-55 | r2r-village-55 | — |
+| Slavic-inspired; people here live in a place built in compounds on land held in common, kin by kin. | 1 | r2r-city-39 | r2r-city-39 | — |
+| Ask about the place and you are told it is built around the tank and the bazaar, in # by trade, under the temple. | 1 | r2r-metropolis-14 | r2r-metropolis-14 | — |
+| Greek-inspired, and it shows: built on riverside ground. | 1 | r2s-famine-thorp-0 | r2s-famine-thorp-0 | r2s-famine-thorp-0 |
+| Germanic-inspired; people here live in a place built in timber and stone, held, for now, by another power. | 1 | r2s-occupied-thorp-0 | r2s-occupied-thorp-0 | r2s-occupied-thorp-0 |
+| Steppe-inspired: built for a pastoral life #-settled and #-moving, held, for now, by another power. | 1 | r2s-occupied-hamlet-0 | r2s-occupied-hamlet-0 | r2s-occupied-hamlet-0 |
+| Germanic-inspired, built in timber and stone, held, for now, by another power. | 1 | r2s-occupied-village-0 | r2s-occupied-village-0 | r2s-occupied-village-0 |
+| Latin-inspired; people here live in a place built in masonry around a civic square, and held, for now, by another power. | 1 | r2s-occupied-town-0 | r2s-occupied-town-0 | r2s-occupied-town-0 |
+| Greek-inspired, built around the agora, on riverside ground, held, for now, by another power. | 1 | r2s-occupied-town-3 | r2s-occupied-town-3 | r2s-occupied-town-3 |
+| Greek-inspired, built around the agora, in forest country, held, for now, by another power. | 1 | r2s-occupied-metropolis-0 | r2s-occupied-metropolis-0 | r2s-occupied-metropolis-0 |
+| Greek-inspired, built around the agora, on hillside ground, held, for now, by another power. | 1 | r2s-occupied-metropolis-1 | r2s-occupied-metropolis-1 | r2s-occupied-metropolis-1 |
+| Steppe-inspired, built on clan lines, held, for now, by another power. | 1 | r2s-occupied-metropolis-2 | r2s-occupied-metropolis-2 | r2s-occupied-metropolis-2 |
+| South-Asian-inspired: built around the tank and the bazaar, in # by trade, held, for now, by another power. | 1 | r2s-occupied-metropolis-3 | r2s-occupied-metropolis-3 | r2s-occupied-metropolis-3 |
+| Greek-inspired, and it shows: built on the open plain. | 1 | r2s-politically_fractured-hamlet-3 | r2s-politically_fractured-hamlet-3 | r2s-politically_fractured-hamlet-3 |
+| Ask about the place and you are told it is built on mountain ground. | 1 | r2s-recently_betrayed-hamlet-2 | r2s-recently_betrayed-hamlet-2 | r2s-recently_betrayed-hamlet-2 |
+| Ask about the place and you are told it is built by the water, on kin, oath and the assembly. | 1 | r2s-succession_void-hamlet-1 | r2s-succession_void-hamlet-1 | r2s-succession_void-hamlet-1 |
+| Greek-inspired, and it shows: built on the coast. | 1 | r2s-succession_void-village-1 | r2s-succession_void-village-1 | r2s-succession_void-village-1 |
+| Greek-inspired, built on mountain ground. | 1 | r2s-insurgency-hamlet-0 | r2s-insurgency-hamlet-0 | r2s-insurgency-hamlet-0 |
+| Ask about the place and you are told it is built in forest country. | 1 | r2s-insurgency-hamlet-3 | r2s-insurgency-hamlet-3 | r2s-insurgency-hamlet-3 |
+| Greek-inspired, and it shows: built on hillside ground. | 1 | r2s-religious_conversion-hamlet-1 | r2s-religious_conversion-hamlet-1 | r2s-religious_conversion-hamlet-1 |
+| Steppe-inspired: built for a pastoral life #-settled and #-moving. | 1 | r2s-mass_migration-thorp-0 | r2s-mass_migration-thorp-0 | r2s-mass_migration-thorp-0 |
+| Greek-inspired, built on the coast. | 1 | r2s-mass_migration-hamlet-1 | r2s-mass_migration-hamlet-1 | r2s-mass_migration-hamlet-1 |
+| Nothing large is decided in <N> until the seat is filled, and meanwhile everyone does as they see fit. | 10 | r2s-succession_void-hamlet-2 | r2s-succession_void-metropolis-2 | r2s-succession_void-hamlet-2 |
+| With the seat empty, no # in <N> has the standing to make anyone answer. | 7 | r2s-succession_void-thorp-0 | r2s-succession_void-metropolis-3 | r2s-succession_void-thorp-0 |
+
+## What is left of the worklist (after this seat)
+
+- The cast and hooks: batch 3's patch (8 rows) still has to be gated, measured and pushed. The rest of that group is struck above.
+- K8: stopped, for the chair.
+- K9: not reached.
+- hookTruth.js VILLAGER_TIERS (4 rows: "the war party", "the reformist leader" in one-power thorps): not reached.
+- activeConditions.js CONDITION_ARCHETYPE_TEMPLATES (2 rows: "Religious Tension" with no religious record): not reached.
+- faithReading.js :: factionLine (03046: a Suppressed faction given "a small voice"): not reached.
+- The exports' 29 rows (X9): not taken as a batch. Batch 2 cured its own writers on every surface.
+- K12 (1): named above.
+
+## How this seat's instruments were made
+
+As above, with one change: THREE scratch worktrees outside the main checkout, each with node_modules symlinked to wt's:
+- wt: the work, on the branch;
+- base: detached at the batch's base, which the before census renders from;
+- after: detached at the batch commit, which the after census renders from.
+
+A census renders from its tree's src, so rendering the before run from the tree being edited would mix the two. This seat's
+first before run did exactly that; it was stopped and re-run from base. Probes over corpus.ndjson.gz that call the tree's
+own writers (cultureScopeLine, composeTonightSheet, crisisHooksOf) gave each row's before and after per town in seconds,
+ahead of the census.
+
 ## How the instruments are re-made
 
 ```

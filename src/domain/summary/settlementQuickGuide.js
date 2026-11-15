@@ -420,6 +420,80 @@ function scopeAgainstRoster(phrase, source) {
   if (NOT_CIVIC_RULE.has(String(facts.rulerKind))) {
     out = out.replace(', and run by civic association', '').replace(' and civic association', '');
   }
+  return scopeAgainstRule(out, source, facts);
+}
+
+/** A landed power: a noble house, the gentry, a lord's family (the power structure carries names). */
+const ESTATE_POWER = /\b(?:noble|gentry|landed|lord)/i;
+/** A guild power (never a criminal one: `facts/guild.js`'s own exclusion). */
+const GUILD_POWER = /\bguilds?\b/i;
+const CRIMINAL_POWER = /\b(?:thie(?:f|ves)|assassin|beggar|smuggler|criminal)/i;
+/** THE ONE TWIN under an occupation: who holds the place now. */
+const OCCUPIED_RULE = 'held, for now, by another power';
+
+/**
+ * The powers on the record whose names match, each with its own standing.
+ * @param {SettlementQuickGuideSource} source @param {RegExp} re
+ * @returns {Array<{ standing: string }>}
+ */
+function powersNamed(source, re) {
+  const factions = /** @type {{ powerStructure?: { factions?: unknown } | null }} */ (source)?.powerStructure?.factions;
+  return (Array.isArray(factions) ? factions : [])
+    .map((/** @type {{ faction?: unknown, powerLabel?: unknown } | null} */ f) => ({ name: cleanText(f?.faction), standing: cleanText(f?.powerLabel) }))
+    .filter((f) => !!f.name && re.test(f.name) && !CRIMINAL_POWER.test(f.name));
+}
+
+/**
+ * THE RULE THE PHRASE NAMES, READ AGAINST WHO RULES (TAIL-CRISIS-2, READ-ALL's quick-guide rows: "run by its estates"
+ * under an Elder Council, "run by patronage and law" in a thorp of household consensus, "run by civic association" under
+ * a headman, "held by clan and caravan" in an isolated occupied hamlet, "under temple and guild" where every guild is
+ * Suppressed, "built around the hall" where the roster holds none, "the harbour" where no docks stand, "timber" in the
+ * desert). Each clause prints only where the record holds its fact, from the record's own readers (`rulerKind`, the
+ * crisis, the route and the trade lists, the roster, a power's own standing):
+ *   estates          a lord rules, or a landed power stands (not Suppressed); else the clause is struck
+ *   patronage, law   not an elder's rule (an elder, headman or household council rules by custom: the twin says so)
+ *   civic association not an elder's rule (the lord's, priest's and occupier's are struck above)
+ *   clan             an elder's rule; caravan: a road that is not isolated, and goods in or out
+ *   guild            where the record holds guild powers, one of them stands (not Suppressed)
+ *   the hall         the seat (`seatIntoPhrase` names it) or nothing: no other hall stands on any roster
+ *   the harbour      docks on the roster
+ *   timber           not desert ground
+ * UNDER AN OCCUPATION (the crisis or the ruler), the rule clause says who holds the place: OCCUPIED_RULE.
+ * A record with no government is unread. Display-time only.
+ * @param {string} phrase @param {SettlementQuickGuideSource} source @param {ReturnType<typeof factsOf>} facts @returns {string}
+ */
+function scopeAgainstRule(phrase, source, facts) {
+  let out = phrase;
+  if (facts.terrain === 'desert') out = out.replace('built in timber compounds', 'built in compounds');
+  if (facts.hasInstitution('docks') === false) {
+    out = out.replace('the agora and the harbour', 'the agora').replace(/\bbuilt around the harbour, /, 'built ');
+  }
+  // a seat on the roster has already taken "the hall"'s place (`seatIntoPhrase`): what is left names a hall none holds
+  out = out.replace('built around the hall and the water, ', 'built by the water, ').replace('built around the hall, ', 'built ');
+  const kind = facts.rulerKind;
+  if (kind == null) return out;
+  const occupied = kind === 'occupier' || facts.crisis?.has?.('occupied') === true;
+  const elder = kind === 'elder';
+  const guilds = powersNamed(source, GUILD_POWER);
+  if (guilds.length && guilds.every((g) => g.standing === 'Suppressed')) {
+    out = out.replace('run by guild and estate', 'run by its estates').replace(', under temple and guild', ', under the temple');
+  }
+  const estates = kind === 'lord' || powersNamed(source, ESTATE_POWER).some((p) => !!p.standing && p.standing !== 'Suppressed');
+  const caravan = facts.route !== 'isolated' && ((facts.imports || []).length > 0 || (facts.exports || []).length > 0);
+  /** @type {ReadonlyArray<readonly [string, boolean, string]>} [the clause, does the record bear it, what prints if not] */
+  const clauses = [
+    [', and run by guild and estate', estates, ''],
+    [', and run by its estates', estates, ''],
+    ['run by patronage and law', !elder, 'run by custom more than by law'],
+    [', and run by civic association', !elder, ''],
+    [', held by clan and caravan', elder && caravan, elder ? ', held by clan' : ''],
+  ];
+  for (const [clause, holds, twin] of clauses) {
+    if (!out.includes(clause)) continue;
+    if (occupied) out = out.replace(clause, clause.startsWith(',') ? `, ${OCCUPIED_RULE}` : OCCUPIED_RULE);
+    else if (!holds) out = out.replace(clause, twin);
+  }
+  if (occupied) out = out.replace(', under temple and guild', `, ${OCCUPIED_RULE}`).replace(', under the temple', `, ${OCCUPIED_RULE}`);
   return out;
 }
 
