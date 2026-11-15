@@ -103,8 +103,13 @@ THE OTHER LAW SUITES (amendment 2): `defenceFactReaders`, `ruinFilterRoster`, `f
 names my guard.
 `defenseWordsFindings` (a file that pins the defence lines): RED, 2 arms, IDENTICALLY AT 7a4b48a84: BAR3-CORPUS's C6, not mine.
 
+AT THE FINAL TIP (08859baf5's tree, the chair's 21:02 word): `node scripts/wiring-census.mjs --dry` reads STALE with
+`sections that would move: stamp`, ROWS that would move 0, bytes 2,635,207 committed and fresh (delta 0), no stamped sha
+moving; IDENTICAL at 7a4b48a84; CURRENT at 52f0a1684: the predecessor's (the stamp section only), my batches move nothing
+there. `generationForkCensus` at the final tip: the same four tallies as batch 1 (above), A1 as at the base: batch 2 moves
+no tally.
 THE BOOKS MY CURES MOVE (named, not re-taken): the 525 (61 mine; 97 the branch's against 52f0a1684); the fork register's
-four tallies (above); the predecessor's: the wiring census's committed JSON (`proseWiringCensus` car 0) and the presumed
+four tallies (above); `tradeListWriters` F2's row for `economicState.js` (8 -> 9, batch 2); the predecessor's: the wiring census's committed JSON (`proseWiringCensus` car 0) and the presumed
 things' five fresh hits.
 THE FILES THAT PIN A SYMBOL I CHANGED (`settleCrimeLinesToSignal`, `deriveCriminalStructure` and the ring notes,
 `OUTLOOK_HOOK_SIBLINGS` / `TIMBER_RAFT_HOOK` / `deriveSupplyRiskAnalysis`, and the changed lines' words: 32 files, each
@@ -144,15 +149,32 @@ STRONG economic survival, 3 of 78 by its count): not measured by me; left, in or
   that sentence gone (the flag false there by the record), the Underground line leads and names its town. The same house,
   the same fact: nothing to narrow.
 
+## My batches' inventory diff (the census's 720 rendered at 7a4b48a84 and at my final tip 08859baf5), read whole
+30,008 -> 30,012 sentences: gone 0, new 4, fewer 9, more 0, moved 0. Every cured line fell by exactly its measure where the
+page prints it: "Crime exists but is well-managed." 33 -> 24 (9); "Thieves are scarce now; …" 28 -> 22 (6); "It is noticed,
+and so far it does little harm." 52 -> 34 (18: the record holds the line in 136 towns and the page prints it in 52; every
+crime-wave town among the 52 lost it, none other); the timber carts 30 -> 11 (19), the rafts 16 -> 15 (1); the one-ring
+vantages 6 towns in all ("Shopkeepers here pay one ring…" and its sibling sentence 24 -> 20; "Ask who runs crime here and
+the answer is one ring." and its sibling 26 -> 24). No other sentence moved. THE INHERITORS are my four twins only: "Timber
+is short this season…" + 20 (e.g. r2r-city-53), "Crime is on the rise." + 9 (e.g. r2r-city-21), "Theft is rising even under
+the curfew…" + 6 (e.g. r2r-thorp-1), "Ask who runs crime here and the answer depends on the street…" + 6 (e.g.
+r2r-metropolis-0): each read true where it prints by the measures above. The dates rule moves no sentence (an export list's
+entry).
+
 ## Registrations owed
 None: no new test file under `tests/generators` (my guard is `tests/domain/bar3Defecon2Lines.test.js`); no new import of a
 goods module; no new module.
 
 ## What is left, IN ORDER
-1. (item 0's diff: done, above.)
-2. My batches' inventory diff: the census's render at my tip against 7a4b48a84 (the record diff above is by births only; the
-   page lines it moves are the 52 crime lines, the 20 hooks and the 6 towns' ring note).
-3. C47622 (named to me by the chair at 21:04, then "no further rows" at 21:27): MODERATE_GAP_TWIN's "…at a price the
+1. C47622 (named to me by the chair at 21:04, then "no further rows" at 21:27): MODERATE_GAP_TWIN's "…at a price the
    settlement cannot pay in coin." beside a STRONG economic survival: measure on the 720, then a twin that reads the
    survival band or the purse.
 (T28b: the chair's word at 21:27 holds my reading; do not widen it. The dates: cured, batch 2.)
+
+## Instruments (scratchpad; each a few lines; re-made from the probes)
+- The census: `census3.sh <tree> <out> <workers> --count-only` from `lane/census-3-2026-11-14`'s probes, git-archived out;
+  `inventory.py` / `inventory_diff.py` from the chair's READ-ALL probes; births alone: `births.mjs` (TREE, OUT, SEEDS).
+- The measures: `cw.mjs` (the crime-wave lines), `ring2.mjs` (the gang count among organized towns), `depl.mjs` (a depleted
+  ground's commodity; a shortage import beside an export), `hired.mjs` (the hired blades against the page), `timber.mjs`,
+  `c6c.mjs` (the complete chain against the chain model), `fdiff.mjs <a.gz> <b.gz>` (the field diff by family), `g525.mjs` /
+  `g525cmp.mjs` (the 525's hashes and families, `TREE= OUTF=`), `runall.sh <tree> <label> <files>` (each file alone).
