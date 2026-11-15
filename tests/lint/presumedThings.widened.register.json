@@ -1457,12 +1457,6 @@
     "bc5e3a2806bf3e02"
    ],
    [
-    "house: carpenter",
-    "family",
-    "Curls of shavings blow across the lane from a carpenter's bench.",
-    "f5f59685ccebbdd8"
-   ],
-   [
     "house: apothecary",
     "family",
     "The bitter smell of drying herbs drifts from an apothecary's door.",
@@ -1639,12 +1633,6 @@
     "family",
     "A household levy is the common defense; a retinue stands beside it only where a lord can keep one.",
     "1ab073b6dd2be7ef"
-   ],
-   [
-    "house: bathhouse",
-    "family",
-    "Shared ovens, bathhouses, wells, and seasonal work make private life unusually communal.",
-    "df619364bd557acb"
    ],
    [
     "house: bathhouse",
@@ -6624,12 +6612,6 @@
     "word",
     "Consecrated ground beside the house of worship, on its own plot, with a resident priest to close it. The rite is held on",
     "059d72d8e808ac2c"
-   ],
-   [
-    "religiousHouses",
-    "word",
-    "Each congregation keeps its own ground beside its house of worship, and one that has filled its ground buries beyond the",
-    "1bfa75dd16092dac"
    ],
    [
     "practitioner",

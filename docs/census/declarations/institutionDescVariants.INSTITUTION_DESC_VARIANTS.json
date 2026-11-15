@@ -3819,7 +3819,7 @@
     },
     {
       "id": "city|Economy|Merchant guilds (15-40)#0",
-      "text": "A force to be reckoned with in the city's trade.",
+      "text": "Much of the city's trade is in their hands.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -3827,7 +3827,7 @@
     },
     {
       "id": "city|Economy|Merchant guilds (15-40)#1",
-      "text": "In trade, a power in their own right.",
+      "text": "Between them they handle much of the city's trade.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -5437,7 +5437,7 @@
     },
     {
       "id": "metropolis|Criminal|Thieves' guild (powerful)#0",
-      "text": "The ruling criminal syndicate, suffered because open gang war would be worse.",
+      "text": "The criminal syndicate the city has never rooted out, for fear that open gang war would be worse.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -5445,7 +5445,7 @@
     },
     {
       "id": "metropolis|Criminal|Thieves' guild (powerful)#1",
-      "text": "A dominant underworld power the city tolerates, the alternative being the bloodshed of rival gangs.",
+      "text": "An underworld power the city has never rooted out, the alternative being the bloodshed of rival gangs.",
       "needs": [],
       "excludes": [],
       "crisis": [],

@@ -919,8 +919,8 @@ const PAIRS = [
     "Foreign traders attend, and credit by letter is taken.",
   ],
   [
-    "A force to be reckoned with in the city's trade.",
-    "In trade, a power in their own right.",
+    "Much of the city's trade is in their hands.",
+    "Between them they handle much of the city's trade.",
   ],
   [
     "Loans, coin exchange, and letters of credit. The beginnings of banking.",
@@ -1303,8 +1303,8 @@ const PAIRS = [
     "The standing diplomatic mission of a planar power: commerce, intelligence, and the occasional intervention.",
   ],
   [
-    "The ruling criminal syndicate, suffered because open gang war would be worse.",
-    "A dominant underworld power the city tolerates, the alternative being the bloodshed of rival gangs.",
+    "The criminal syndicate the city has never rooted out, for fear that open gang war would be worse.",
+    "An underworld power the city has never rooted out, the alternative being the bloodshed of rival gangs.",
   ],
   [
     "Miles of tunnel and catacomb turned to shelter for criminals and refugees alike.",

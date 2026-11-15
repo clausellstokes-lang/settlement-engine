@@ -424,7 +424,7 @@
     },
     {
      "lineId": "CULTURE_PROFILES.latin.foodways[1]",
-     "text": "Public ovens, market vendors, and shared dining customs make food distribution visibly civic.",
+     "text": "Market vendors and shared dining customs make food distribution visibly civic.",
      "needs": [
       "market"
      ],
@@ -1494,7 +1494,7 @@
     },
     {
      "lineId": "CULTURE_PROFILES.slavic.foodways[1]",
-     "text": "Fermentation, pickling, drying, and shared ovens stretch the harvest through winter.",
+     "text": "Fermentation, pickling, and drying stretch the harvest through winter.",
      "needs": [],
      "excludes": [],
      "colour": false,
@@ -1601,15 +1601,12 @@
     },
     {
      "lineId": "CULTURE_PROFILES.slavic.socialTexture[1]",
-     "text": "Shared ovens, bathhouses, wells, and seasonal work make private life unusually communal.",
-     "needs": [
-      "institution: bathhouse"
-     ],
+     "text": "Shared water and seasonal work make private life unusually communal.",
+     "needs": [],
      "excludes": [],
      "colour": false,
-     "stop": [
-      "shared ovens"
-     ]
+     "stop": [],
+     "note": "BAR2-PLACES-2 (2026-11-15, re-keyed by its text): was \"Shared ovens, bathhouses, wells, and seasonal work …\" needing institution: bathhouse (never answerable at the draw); no oven house, no bathhouse, no wells claimed"
     }
    ],
    "rendered": false

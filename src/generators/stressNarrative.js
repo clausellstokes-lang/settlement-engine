@@ -293,6 +293,22 @@ const WARTIME_SACRIFICE_ISOLATED = 'The governing authority is demanding sacrifi
 /** The defences whose absence, every one, makes monster_pressure's "Its defences were built for quieter times" false. */
 const MONSTER_DEFENCES = Object.freeze(['walls', 'palisade', 'watch', 'militia', 'garrison']);
 
+/**
+ * HOW THE WAR GOES FOR THE TOWN, ONE FACT (BAR2-PLACES, the chair's ruling (PL6), 2026-11-15): the crisis summary decides it
+ * (its coin and its refusals, above), and every other line that says it reads it here, off the entry the summary was written
+ * to: true where the summary is the profit text, false where it is the loss text, null where no wartime summary stands (a
+ * caller then keeps its own reading). The Overview said "on the right side of it" beside a crisis page that said a war it may
+ * not win.
+ * @param {unknown} stress the record's `stress` (an entry or a list)
+ * @returns {boolean|null}
+ */
+export function wartimeGoesWell(stress) {
+  const entries = Array.isArray(stress) ? stress : stress ? [stress] : [];
+  const e = entries.find((x) => x && typeof x === 'object' && x.type === 'wartime' && typeof x.summary === 'string');
+  if (!e) return null;
+  return e.summary.endsWith(WARTIME_VARIANTS('')[0].text); // the profit text after the name (no name, so its tail)
+}
+
 /** wartime (loss)'s caravans sentence: printed only off an isolated route (R2-CODE-B-6 item 0). */
 const WARTIME_CARAVANS = 'Supply caravans pass through on crown requisition. ';
 

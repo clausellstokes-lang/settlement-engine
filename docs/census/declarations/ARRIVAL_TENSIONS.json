@@ -237,7 +237,7 @@
         },
         {
           "lineId": "ARRIVAL_TENSIONS.prosperous[1]",
-          "text": "Well-fed children run errands through a busy street.",
+          "text": "Well-fed children run errands from door to door.",
           "needs": [],
           "excludes": [
             "deficit",

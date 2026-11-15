@@ -29,7 +29,8 @@ const DISTRICT = 'The merchant district of';
 const TWIN = /^The best-kept street of (\S+) looks prosperous\. The rest of the settlement, visible further in, looks like it has been waiting for that street's prosperity to reach it for some years\. /;
 /** The base's scenes after the hook (560d1687c → 21032205a: the lane before this cure), beat for beat. */
 const REST = {
-  'rr3-village-indebted-port-0': 'Half of Vysokoka seems to be gutting, salting or selling fish. Smoke rises from a shared oven, and neighbours queue to bake together.',
+  // BAR2-PLACES (PL1, 2026-11-15; re-keyed by identity): the slavic oven line's reword, same slot
+  'rr3-village-indebted-port-0': 'Half of Vysokoka seems to be gutting, salting or selling fish. Smoke rises from a household oven, and a neighbour stops in to share its warmth.',
   'rr3x-village-indebted-mountain_pass-2': 'Bolts of cloth hang drying in long bright strips across every yard. The neighbours turn out together to sweep and mend their own street.',
   // TAIL-HISTORY-3 (the chair's Y14; re-keyed by identity): r2r-village-47 is isolated, so its herb sacks no longer fill carts (the line's reword, same slot)
   'r2r-village-47': 'Sacks of herbs and spices stand open in the doorways, and the smell of them clings to your clothes. People draw water in an order nobody needs to explain.',

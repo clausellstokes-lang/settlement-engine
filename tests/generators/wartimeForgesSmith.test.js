@@ -17,7 +17,10 @@ import { loadGenerationLawPayloads } from '../../src/domain/density/densityCreat
 import { corpusConfig } from '../lint/presumedThings.shared.mjs';
 
 // the walker's own corpus (presumedThings.shared.mjs :: corpusConfig, its town seeds), where the false line was measured
-const SEEDS = Array.from({ length: 60 }, (_, i) => `presume-town-${i}`);
+// BAR2-PLACES (the chair's ruling (PL6), 2026-11-15; re-keyed by identity): the war's side is now the crisis summary's, so
+// presume-town-25 tells the loss and no longer reaches the right-side pool; the three towns below (measured: no smith, the
+// right side of the war) keep the arm live.
+const SEEDS = [...Array.from({ length: 60 }, (_, i) => `presume-town-${i}`), 'presume-town-655', 'presume-town-743', 'presume-town-975'];
 
 /** the forges row's and its twin's heads (their text up to the commodity), at this town's own name @param {string} name */
 const forgesHeads = (name) => {
@@ -43,7 +46,7 @@ describe('the wartime pressure line names the forges only where a smith stands',
       expectAbsentWithAnchor(sentence, forges, twin, `${seed}: no smith`);
     });
     expectNoSeedFailures(failures, 'the forges line reads the smith');
-    // the arm is live: the measured town (presume-town-25) takes the twin
+    // the arm is live: the measured towns (presume-town-655, -743, -975) take the twin
     expect(seen.twin, 'no town without a smith reached the twin').toBeGreaterThan(0);
   }, 120_000);
 });

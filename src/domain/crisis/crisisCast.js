@@ -188,6 +188,12 @@ export const CAST_REASONS = Object.freeze({
   exploiterCorrupt: 'corrupt, with ties to the underworld',
   exploiterTrait: 'grasping by nature, in a power that gains',
   exploiterPower: 'the strongest figure in a power that gains',
+  // BAR2-PLACES-2 (C3396, REVIEW-BAR-2, 2026-11-15; vetoable by the owner; a declared move of stored text): the grade-2 pick
+  // is the gaining powers' member with the highest CARD power, ranked or not (bar0-city-under_siege+famine-rand-5: the
+  // blade captain, card power 9, holds no rank in the War Council). "The strongest figure" is said only of the one ranked
+  // first in a power that gains (membership.js :: membersByRank, the order membersOf reads); any other is one of it (the
+  // brunt's own form, bruntMember). The pick is kept: no draw moves. The words name no power (factionRename.js's law).
+  exploiterMember: 'one of a power that gains by the crisis',
   exploiterLinked: "the siege's profiteer, still selling what the siege cut off",
   scapegoatSeat: 'holds the seat, and takes the blame while the right to it is in dispute', // SW-6 second seat (B3)
   scapegoatLever: 'runs the office the crisis turns on, and takes the blame while the seat is in dispute', // SW-6 second seat (B3): "the lever" is the engine's word
@@ -874,7 +880,12 @@ export function exploiterCandidates(s, stakes, role) {
   const grade = (n) => (allegianceOf(n) ? 0 : traitsOf(n).some((t) => GRASPING_TRAITS.includes(t)) ? 1 : 2);
   pool.sort((a, b) => (grade(a.n) - grade(b.n)) || (numOf(b.n.power) - numOf(a.n.power)) || (a.at - b.at));
   const reasons = [CAST_REASONS.exploiterCorrupt, CAST_REASONS.exploiterTrait, CAST_REASONS.exploiterPower];
-  return { candidates: pool.map(({ n }) => npcRow(n, role, reasons[grade(n)])), absent: CAST_ABSENCES.noGains };
+  const key = (/** @type {CastNpc} */ n) => str(n.id) || str(n.name);
+  /** BAR2-PLACES-2 (C3396): true when the card is ranked first in a power that gains. @param {CastNpc} n */
+  const headsAGainer = (n) => [...gainers].some((p) => { const top = membersOf(s, p)[0]; return !!top && key(top) === key(n); });
+  /** @param {CastNpc} n */
+  const reasonOf = (n) => (grade(n) === 2 && !headsAGainer(n) ? CAST_REASONS.exploiterMember : reasons[grade(n)]);
+  return { candidates: pool.map(({ n }) => npcRow(n, role, reasonOf(n))), absent: CAST_ABSENCES.noGains };
 }
 
 /**
