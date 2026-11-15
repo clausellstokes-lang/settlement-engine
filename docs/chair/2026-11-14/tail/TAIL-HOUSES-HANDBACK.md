@@ -613,6 +613,31 @@ MEASURE (before = the base b3ac30f8a; after = this tree): THE INVENTORY DIFF (ta
 
 Gates: eslint 0 on the touched files; typecheck:domain:strict 0; typecheck:ratchet OK (167, ceiling 167); presumed-things `--check` fresh 144, stale 0 (unchanged); page-census `--grid` 0 rises (the same 2 falls, r2r-city-0 and r2s-insurgency-metropolis-0 P7a); the 87 test files naming the touched files (with batch 7's tree): only the carried reds (gapLineHousesByKind, urbanBandInstitutions G5, wiringCensusDeclared, generatorGoldenMaster).
 
+## TAIL-HOUSES-4 · Batch 7 (H18 (i), and batch 2's shape): a governing house claims its own trade, not a government or a sex the record denies
+
+THE SHAPE (verified by the record). "City administration" (the city's and the metropolis's government-group house; `institutionalCatalog.js` shared, and PAIRS[258] for both tiers) says it is "less formally constituted than a council" / "a looser arrangement than a council": every census town that prints one of its three texts is governed by a council, a senate or an assembly (`powerStructure.government`: B14388 and 02783 26 of 26, B03373 18 of 18, 20218 15 of 15). The house's text is drawn before the powers exist (H18), so no sibling can key on the government: the three texts are reworded to claim the house's own trade (its officials carry out the city's business, whoever sits above it), true under any government. "Lord's appointee" (PAIRS[181], the town pool): "A man of the lord's choosing governs" where the appointee (rank 1 of the Feudal Appointee) is a woman, 5 of 6 (02794; X9 15791): now "One of the lord's choosing"; the government is true in 6 of 6. Text only: the same pools, hash and index; the colour declarations and the declaration ledger re-keyed by identity. No draw moved; no power atom read. DECLARED MOVE: `institutions[].desc` only.
+
+THE TRUE LINES IT REPLACES: 1 (the one man-led appointee town, r2s-under_siege-town-2).
+
+| old | new |
+|---|---|
+| An administrative apparatus of officials, clerks, and ward officers manages city affairs. Less formally constituted than a council but functional. Governance by bureaucratic inertia. | An administrative apparatus of officials, clerks, and ward officers carries out the city's business, whoever sits above it. Functional, and moved by bureaucratic inertia. |
+| Officials, clerks, and ward officers run the city's affairs between them. A looser arrangement than a council, but one that works. It governs by the momentum of its own paperwork. | Officials, clerks, and ward officers do the city's daily business between them, whoever gives the orders. It runs by the momentum of its own paperwork. |
+| The city is administered by a standing body of officials, clerks, and ward officers, less formally constituted than a council yet functional all the same. What moves it is bureaucratic inertia. | A standing body of officials, clerks, and ward officers carries out the city's administration, functional whatever rules above it. What moves it is bureaucratic inertia. |
+| A man of the lord's choosing governs, and noble authority overrides whatever the town was accustomed to. | One of the lord's choosing governs, and noble authority overrides whatever the town was accustomed to. |
+
+Guard: `tests/data/tailHouses7GovernanceWords.test.js`: 11 RED pairs (9 City administration towns, each with its council government asserted; 2 woman-led appointee towns; 11 of 11 red at the base), 2 KEEP pairs (the man-led appointee town keeps "noble authority overrides ..."; a town on the appointee's twin keeps "Rule falls to the lord's appointee"; green at the base and after).
+
+### The veto list, batch 7 (towns printing; the smallest and the largest it reaches, and a crisis town)
+- "Officials, clerks, and ward officers do the city's daily business between them, whoever gives the orders. It runs by the momentum of its own paperwork." (26): r2r-city-31 (3,183), r2s-mass_migration-metropolis-3 (248,369), r2s-under_siege-city-3 (under siege)
+- "An administrative apparatus of officials, clerks, and ward officers carries out the city's business, whoever sits above it. Functional, and moved by bureaucratic inertia." (18): r2r-city-44 (2,408; famine), r2s-mass_migration-metropolis-2 (139,708)
+- "A standing body of officials, clerks, and ward officers carries out the city's administration, functional whatever rules above it. What moves it is bureaucratic inertia." (15): r2s-occupied-city-0 (5,170; occupied), r2r-metropolis-14 (271,164; under siege)
+- "One of the lord's choosing governs, and noble authority overrides whatever the town was accustomed to." (6): r2s-succession_void-town-0 (1,089), r2s-under_siege-town-2 (2,453; under siege), r2r-town-37 (plague)
+
+MEASURE (before = batch 6's after, ba3af4202's tree; after = this tree): THE INVENTORY DIFF (tabs): 29,856 -> 29,854; gone 8 (the old texts' sentences: 26, 26, 26, 18, 18, 18, 15, 6), new 6 (their rewordings, the same towns), IN FEWER TOWNS 3: "Patron deity", "Assign a patron god ...", "Upgrade to premium ..." 719 -> 717 in r2r-thorp-0 and r2r-thorp-1 (the first two towns rendered; no City administration or appointee there: the premium prompt's render flake that batches 3 and 4 also saw). The exports: gone 12, new 10, in fewer 0. Rows: B14388 26 -> 0, 02783 26 -> 0, B03373 18 -> 0, 20218 15 -> 0, 02794 6 -> 0 (X9 15791, the same text, with it). THE INHERITORS: the six rewording sentences only, read in place.
+
+Gates (this tree): eslint 0 on the touched files; typecheck:domain:strict 0; typecheck:ratchet OK (167, ceiling 167); presumed-things `--check` fresh 144, stale 0 (the same rows as the base); page-census `--grid` 0 rises (the same 2 falls); the 87 test files naming the touched files: only the carried reds (gapLineHousesByKind, urbanBandInstitutions G5, wiringCensusDeclared, generatorGoldenMaster).
+
 ## TAIL-HOUSES-4 · H16: the two unverified tables measured, widest first (no cure unless named)
 
 THE MEASURE. Base: this branch at b3ac30f8a (the census `census3.sh <base> before 4`: 720 births, 0 errors; the tabs' inventory 29,856 sentences, the exports' 35,765). Each row's `fold` read in the inventory (the towns that print it), each printing town's record read off `corpus.ndjson.gz`: its crisis (`stress[].type` in under_siege, famine, plague_onset, occupied) and, OUTSIDE the crisis, the fact the reader's reason names. "ord" = the printing towns in no crisis; "false" = ordinary towns where the record denies the claim. Every row printing in five towns or more of the two tables is here.
@@ -672,7 +697,7 @@ THE MEASURE. Base: this branch at b3ac30f8a (the census `census3.sh <base> befor
 ### TRUE in every printing town (the house is its own government's, and the text says that government): STRUCK
 03031 (14: Headman's Authority 14 of 14), 14953 (11: the same), 03033 (8: the same), 02668 (14: Merchant oligarchy 8, Grand Merchant Oligarchy 6), 28580 (9: the oligarchies), 20701 (13: Merchant Guild Council 7, Grand Guild Consortium 6), 02494 (11: the same two), B05076 (13: Household Council 13), 02643 (12: Noble Governorship 8, Ducal Governorship 4), B02540 (9: Free Elder Council 9).
 
-### CURED BY REWORDING (H18 (i)): batch 7 (IN HAND at batch 6's push: its census running; if this line still stands, batch 7 was not pushed)
+### CURED BY REWORDING (H18 (i)): batch 7, above
 B14388 (26), 02783 (26), B03373 (18), 20218 (15): City administration "less formal than a council": every printing town is governed by a council, senate or assembly (26, 26, 18, 15 of the same). 02794 (6) and X9 15791 (6): "A man of the lord's choosing" where the appointee is a woman (5 of 6; the government, a Feudal Appointee, is true in 6 of 6).
 
 ### PARKED FOR THE LATE RE-READ (H18 (ii)): no rewording keeps a good line true in every printing town; the measure
@@ -685,9 +710,7 @@ B14388 (26), 02783 (26), B03373 (18), 20218 (15): City administration "less form
 | 03508 / 02461 | 10 / 5 | 10 / 3 | Mayor and council "an elected council" where the government is a theocratic, merchant, military or other council not chosen by vote |
 | X9 16720, 16785, 29353, 14179, 29354, 29352 | 21, 14, 11, 9, 8, 5 | not measured here | as TAIL-HOUSES-3 listed them (the X9 governance rows); owed |
 
-## WHAT IS LEFT (TAIL-HOUSES-4, at batch 6's push; supersedes TAIL-HOUSES-3's list above)
-
-0. **Batch 7 (in hand at this push, NOT pushed yet)**: the City administration's three texts and the Lord's appointee's "A man of the lord's choosing" reworded (H18 (i); listed above under H18).
+## WHAT IS LEFT (TAIL-HOUSES-4, at its hand-back after batch 7; supersedes TAIL-HOUSES-3's list above)
 
 1. **H16 is DONE for every row of the two tables printing in five towns or more** (above: struck for the leaf, struck, gone at the base, or left with the measure). LEFT WITH THE MEASURE, this seat's class: the customs house "by the main roads" in an isolated town (B11971 6, B06555 1: a twin of a twin is not read; a third text keyed `route: isolated`, or the twin reworded "by road" after telling the chair: about 90 true lines); 17954 "Several inn districts" in a city under 5,000 (6 of 58: a `population` twin); 17650 the Hunter's lodge with no hunting grounds (6 of 6: batch 1's hedge, "whenever game can be had").
 2. **H18 PARKED FOR THE LATE RE-READ, with the measure** (above): the merchant guilds' politics (15890 10, 15765 7, 02600 6: a trade rewording exists, about 80 true lines replaced: the chair first); the Household elder (00186 11, 14950 11, 03029 10); the Town council's "nothing official" (28852 11, 29000 8, 03522 5); the Village elder (21211 6); Mayor and council "elected" (03508 10, 02461 3). The X9 governance rows (16720, 16785, 29353, 14179, 29354, 29352) are NOT measured: owed. When the chair names the late re-read's tip on the joined line: each parked row takes a declaration (`ruling body` / `rival power`) and a twin read at the re-read, not at the draw.
@@ -697,6 +720,7 @@ B14388 (26), 02783 (26), B03373 (18), 20218 (15): City administration "less form
 
 ## TAIL-HOUSES-4 · instruments and tips
 
+- Tips: batch 6 ba3af4202; batch 7 and this hand-back are the tip. Handed back by time (about seventy minutes of this seat), after batch 7.
 - `<scratchpad>/wtbase` (detached at the base, node_modules symlinked) for the BEFORE census; `<scratchpad>/wt` (own `npm ci`) for batch 6; `<scratchpad>/wt7` (node_modules symlinked to wt's) for batch 7, so no tree renders mid-edit. Census `census3.sh <tree> <out> 4`: births + render about 25 minutes with gates running beside it; the count/trace stage is not needed for the inventory (stopped once the dumps are in). `inventory.py` twice (the tabs; `SURFACES=PDF,Journal`); `inventory_diff.py before after rows.json`.
 - The measure scripts (`tools/lib.py` and inline Python): corpus by seed; a row's printing towns from the inventory's fold; a desc row's houses by its first 60 characters over `institutions[].desc`; the crisis by `stress[].type`; the government by `powerStructure.government`, the powers by `powerStructure.factions[].faction`, a person's office by `npcs[].memberships[]` (rank 1 of the governing power) and `src/data/officeTitles.js`. Re-made in minutes.
 - THE RECORD'S FACTS FOR THESE SHAPES: a spent fishery is `config.nearbyResourcesDepleted` against `config.nearbyResources` (`fish`, `river_fish`, `fishing_grounds`); the hot springs' keys are `hot_springs` and `hot_springs_mineral`; `route: isolated` is the route atom (`revenueHomes.js` uses it); a twin is found as the FIRST `twinOf` of a sibling set (`institutionDescDraw.js`), so a twin cannot have its own twin; an `institutionalCatalog.js` desc is single-quoted (escape an apostrophe).

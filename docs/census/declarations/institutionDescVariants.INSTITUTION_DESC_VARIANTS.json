@@ -3126,7 +3126,7 @@
     },
     {
       "id": "town|Government|Lord's appointee#0",
-      "text": "A man of the lord's choosing governs, and noble authority overrides whatever the town was accustomed to.",
+      "text": "One of the lord's choosing governs, and noble authority overrides whatever the town was accustomed to.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -4426,7 +4426,7 @@
     },
     {
       "id": "city|Government|City administration#0",
-      "text": "Officials, clerks, and ward officers run the city's affairs between them. A looser arrangement than a council, but one that works. It governs by the momentum of its own paperwork.",
+      "text": "Officials, clerks, and ward officers do the city's daily business between them, whoever gives the orders. It runs by the momentum of its own paperwork.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -4434,7 +4434,7 @@
     },
     {
       "id": "city|Government|City administration#1",
-      "text": "The city is administered by a standing body of officials, clerks, and ward officers, less formally constituted than a council yet functional all the same. What moves it is bureaucratic inertia.",
+      "text": "A standing body of officials, clerks, and ward officers carries out the city's administration, functional whatever rules above it. What moves it is bureaucratic inertia.",
       "needs": [],
       "excludes": [],
       "crisis": [],

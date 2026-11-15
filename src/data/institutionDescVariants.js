@@ -751,7 +751,7 @@ const PAIRS = [
     "A council of elder druids charged with their circle's standing in the town: sometimes tending a concealed grove below the streets, sometimes mediating between expansion and wild ground, sometimes counselling those in power on ecological matters.",
   ],
   [
-    "A man of the lord's choosing governs, and noble authority overrides whatever the town was accustomed to.",
+    "One of the lord's choosing governs, and noble authority overrides whatever the town was accustomed to.",
     "Rule falls to the lord's appointee, whose noble warrant stands above local custom.",
   ],
   [
@@ -1059,8 +1059,8 @@ const PAIRS = [
     "Rule falls to a royal or ducal appointee, the city being worked as a noble's fief.",
   ],
   [
-    "Officials, clerks, and ward officers run the city's affairs between them. A looser arrangement than a council, but one that works. It governs by the momentum of its own paperwork.",
-    "The city is administered by a standing body of officials, clerks, and ward officers, less formally constituted than a council yet functional all the same. What moves it is bureaucratic inertia.",
+    "Officials, clerks, and ward officers do the city's daily business between them, whoever gives the orders. It runs by the momentum of its own paperwork.",
+    "A standing body of officials, clerks, and ward officers carries out the city's administration, functional whatever rules above it. What moves it is bureaucratic inertia.",
   ],
   [
     "An elected council backed by a complete administrative staff.",
