@@ -94,6 +94,8 @@ THE CHAIR'S RULINGS TO JOIN-12 (each vetoable by the owner):
 | 4 | lane/tail-content-close-2026-11-15 | e4b8e1b00 (10:56; origin tip = the hash named) | bb75314d6 | 8b79a4c59 | none; no file both sides moved | 7 files outside docs/ (4 src: worldPulse/candidateEvents.js, heraldDeeds.js, narrativeGenerator.js, narrativeText.js; one pulse hash re-keyed in modeSpeedsWy1; two guards); declared moves 805452e8f, 0b140b40c (no birth moved, by the branch); run alone: tradeFactMarket 2/2, wartimeForgesSmith 1/1, modeSpeedsWy1 26/26, presumedThings.walker 41/43 |
 | 5 | lane/tail-close-presumed-2026-11-15 (final pass) | bd5618507 (11:15; origin tip = the hash named) | f76fe38fd | 8c101d300 | none; no file both sides moved: its side whole | 1 file outside docs/ (`presumedThings.widened.register.json`, its side); run alone: presumedThings.walker 43/43 |
 | 6 | lane/tail-close-reach-2026-11-15 (final pass) | 093b371ab (11:33; origin tip = the hash named) | f76fe38fd | 7baa15eeb | none; no file both sides moved: its side whole | 8 files outside docs/ (the two baselines, three scripts, three tests; no src/); run alone, default heap: writerReach 52/52, observedShapeReaders 47/47, observedShapeBaseline 59/59, Migration 26/26, Sentinel 35/35 |
+| 7 | lane/tail-close-doors-2026-11-15 (final pass, LAST OF ALL) | d6884c590 (16:14; origin tip = the hash named) | f8042b61a (the line an ancestor of it) | 2f0a35387 | none: its side whole in every file (81 files, 61 outside docs/) | merged tree BYTE-IDENTICAL to the doors' tip's tree (7597fe0e3 = 7597fe0e3): the doors' receipt stands; nothing run by this seat (the chair's word) |
+| 8 | lane/close-veto-list-2026-11-15 (one document) | c03e1248a (16:16; origin tip = the hash named) | 609e9c876 | 6a03c3080 | none; the diff against the doors' merge is one file: `docs/chair/2026-11-15/close/VETO-LIST.md` | nothing outside docs/; run alone through gate-tail: sourceCitationIntegrity.walker + ledgerCitationIntegrity 28/28, tests/docs 146/146 |
 
 ## 3. Every code resolution
 
@@ -110,6 +112,10 @@ JOIN-11's §3 stands on its own file (`docs/chair/2026-11-14/JOIN-11-HANDBACK.md
 **Point 5, the file the chair named run alone** (close-presumed's final pass bd5618507, holding the line at f76fe38fd; one base, f76fe38fd; no conflict; no file both sides moved; outside docs/ only `tests/lint/presumedThings.widened.register.json`): `presumedThings.walker` 43/43 (98 s): the two ARM 1 reds carried since JOIN-11 point 2 closed (`/home/user/j12out/t5.presumedWalker.log`).
 
 **Point 6, the files the chair named run alone** (close-reach's final pass 093b371ab, holding the line at f76fe38fd; one base, f76fe38fd; no conflict; no file both sides moved; outside docs/ `scripts/.observed-shape-readers-baseline.json`, `scripts/.writer-reach-baseline.json`, `scripts/check-observed-shape-readers.mjs`, `scripts/lib/observed-shape-baseline.mjs`, `scripts/migrate-observed-shape-readers.mjs` and three observed-shape tests), each WITHOUT `NODE_OPTIONS`: `writerReach.walker` 52/52, all ran (102 s); `observedShapeReaders.walker` 47/47 (114 s); `observedShapeBaseline` 59/59; `observedShapeMigration` 26/26; `observedShapeSentinel` 35/35. JOIN-11's carried reach reds (availableServices; the readers' three) closed (`/home/user/j12out/t6.*.log`).
+
+**Point 7, the doors' final pass** (d6884c590; 70 commits over the line's f8042b61a, which is an ancestor of it; one base, f8042b61a; no conflict): `git rev-parse HEAD^{tree}` = `git rev-parse d6884c590^{tree}` = 7597fe0e35f2abe54c423d9d9ec84a0057c0104c, read on the index before the commit and on HEAD after it. By the chair's word the doors' seat's receipt stands for that tree: no test re-run by this seat.
+
+**Point 8, the veto list** (c03e1248a onto the doors' merge 2f0a35387; base 609e9c876; no conflict): `git diff --cached --stat 2f0a35387` showed one file, `docs/chair/2026-11-15/close/VETO-LIST.md` (17,293 lines added). Run alone through `sh scripts/gate-tail.sh`: `npx vitest run tests/lint/sourceCitationIntegrity.walker.test.js tests/lint/ledgerCitationIntegrity.test.js` first exited 1 with 18/18 tests and the ledger file failing to load (`git ls-tree ... refs/heads/review-fixes-2026-07-08`: the local ledger ref absent in this container); after `git fetch origin review-fixes-2026-07-08:review-fixes-2026-07-08` (the brief's ledger ref for the suite, 235efce1a) 2 files, 28/28, exit 0; `npx vitest run tests/docs` 19 files, 146/146, exit 0 (`/home/user/j12out/t8.*.log`).
 
 ## 4. THE LIST FOR THE CLOSE
 
@@ -341,6 +347,7 @@ JOIN-10's (by point):
 | `presumedThings.walker` ARM 1 (unchanged: magic.js, priorityHelpers.js, landingFixture.js) | carried (JOIN-11 2, 8) | 41/43 at point 4: the presumed seat's final pass, from this tip |
 | `tests/lint/presumedThings.widened.register.json` | tail-close-presumed final pass (5) | its one writer, side whole; walker 43/43 at the merged tree: the carried ARM 1 rows (J11 2, 8; J12 4) CLOSED at this point; a later doors pass that regenerates `landingFixture.js` would need the walker read again |
 | `scripts/.writer-reach-baseline.json`, `scripts/.observed-shape-readers-baseline.json` and the observed-shape scripts | tail-close-reach final pass (6) | its one writer, side whole; all five walkers green at the merged tree: JOIN-11's carried reach rows (point 7) CLOSED; a later code landing would need them read again |
+| every census, register, bundle, baseline, golden and stored pin, and the two size budgets in `tests/build/vendorPdfLazy.test.js` | tail-close-doors final pass (7) | re-taken by their own doors on the branch, over the line's f8042b61a; the merged tree is the doors' tree byte for byte: the rows above that wait on "the doors' final pass" are its to have closed, read by the chair's whole check at the pushed tip |
 
 ## 5. Stops
 
@@ -352,6 +359,7 @@ None.
 - The container was new at this seat's start: JOIN-11's worktree and `/home/user/j11out` were gone; the shared clone was shallow and was deepened (`--depth=2147483647`) before the first merge. The repository's main checkout sits at an older local `lane/join-2026-11-14` (216eeb41f): untouched.
 - `git log --format=%G?` prints N here (no `gpg.ssh.allowedSignersFile`): signatures are the chair's read, not this seat's.
 - Both-moved files are computed INTERSECTED over every merge base.
+- `tests/lint/ledgerCitationIntegrity.test.js` needs the LOCAL ref `review-fixes-2026-07-08` (`git fetch origin review-fixes-2026-07-08:review-fixes-2026-07-08`); a fresh container lacks it and the file fails to load (point 8).
 
 ## 7. How the instruments are re-made
 
@@ -359,6 +367,6 @@ JOIN-11's §7, re-made as written under `/home/user/j12out/` (worktree `/home/us
 
 ## 8. WHAT IS LEFT
 
-Landed: points 1-6 (the table), each at the hash the chair named, pushed with the hook's three gates and this file current.
-1. NOT DONE, each only on the chair's word: close-veto-list (one document); tail-close-doors final pass LAST OF ALL; then, only on the word, one more pass of presumed or reach.
-2. For the close (not this seat's): every row of §4 by its door, once, on the final tree; the whole check once, by the close's seat.
+Landed: points 1-8 (the table), each at the hash the chair named; points 1-6 pushed one by one with the hook's three gates; points 7 (the doors' final pass, LAST OF ALL) and 8 (the veto list) in ONE push on the chair's word, this file current in it. The line's code is the doors' tree plus the veto list.
+1. NOTHING LEFT for this seat on the chair's words to date. Only on the chair's word: one more pass of presumed or reach. This seat pushes nothing after the last push: the chair's whole check runs at that tip.
+2. For the close (not this seat's): the whole check once, at the pushed tip, by the chair; every row of §4 the doors' pass did not close, by its door.

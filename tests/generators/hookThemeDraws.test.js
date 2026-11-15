@@ -287,7 +287,9 @@ describe('HK-3 draws — the corpus, through the real pipeline', () => {
     // RE-KEYED 2026-11-13, STYLE-2-MERGE point 47 (2026-11-13, the COHERENCE-AGREE merge 22cc9ef7d; a figure its drafted record names for the merge seat), hookThemeDraws: the lane
     // moves the one-hook-per-card total by -9 on its base (2157 -> 2148: the re-dealt casts); composed over point 46's 2116 it
     // reads 2107, measured by this file's own corpus at the merged tree; 0 hookless still.
-    expect(total, 'the corpus NPC-hook total moved — HK-3 must never drop a hook').toBe(2107);
+    // RE-KEYED 2026-11-15, the close of the tail round (TAIL-CLOSE-DOORS-4, the owner's word, 2026-11-15 06:00 UTC, in the chair's chat; record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): the round gives a face to every seat of power that had none, so the cast, and with it
+    // the one-hook-per-card total, 2107 -> 2147, measured by this file's own corpus at the golden's tree 8c11f73ea; 0 hookless still.
+    expect(total, 'the corpus NPC-hook total moved — HK-3 must never drop a hook').toBe(2147);
     expect(duplicates, 'the exact-duplicate residual is bounded pool EXHAUSTION and must not move').toBe(HOOK_DUPLICATES_AT_TIP);
 
     // A PRE-EXISTING CONDITION, pinned here so HK-3 cannot be blamed for it and so
@@ -328,7 +330,19 @@ describe('HK-3 draws — the corpus, through the real pipeline', () => {
     // the same rate; it is not evidence of a new leak, and the day it moves for any other
     // reason this comment is what a lane reads first.
     const npcTotal = corpus.reduce((n, s) => n + (s.npcs || []).length, 0);
-    const hookless = corpus.reduce((n, s) => n + (s.npcs || []).filter((x) => !(x.plotHooks || []).length).length, 0);
+    // RE-KEYED BY IDENTITY 2026-11-15, THE CHAIR'S RULING HK1 at the close of the tail round (TAIL-CLOSE-DOORS-4; vetoable, on the
+    // owner's list): PEOPLE-3's law is that every card OF THE CAST draws its one hook at its birth seam. A TEMPORARY CRISIS STAND-IN
+    // is not a card of the cast: the registered step `resolveCrisisCast` (src/generators/steps/resolveCrisisCast.js, since
+    // aaa4ba4932, 2026-11-03) "may append ONE temporary person to its roster", a minimal card by design whose crisis's hook is its
+    // story. In this corpus two: npc_temp_healer (hk-probe-hamlet-2, plague) and npc_temp_grain (hk-probe-hamlet-8, famine); they
+    // reach it at the r2-code-b lane's merge 9e3880dd1. The exemption is by identity and anchored at 2, so it is not vacuous; a
+    // hookless card that is not a stand-in reds as before. For the owner: a person who steps in for a crisis carries no personal
+    // plot hook; giving one is a content decision of a later round.
+    const isStandIn = (x) => x.temporary === true && String(x.id || '').startsWith('npc_temp_')
+      && Array.isArray(x.crisisIds) && x.crisisIds.length > 0;
+    const standIns = corpus.flatMap((s) => (s.npcs || []).filter(isStandIn).map((x) => x.id));
+    const hooklessAll = corpus.flatMap((s) => (s.npcs || []).filter((x) => !(x.plotHooks || []).length));
+    const hookless = hooklessAll.filter((x) => !isStandIn(x)).length;
     // the druid rulings (2026-10-01, ODQ §934.86 addendum 2, J30–J33): 612 -> 613 NPCs and 51 -> 52 hookless, and the movers were LISTED against 4b86da68a
     // rather than argued: every NPC that differs is a structural placeholder (no plotHooks). town-6's Landed Gentry
     // Lord Mayor seat is now filled (-1); town-8's Thieves' Guild Kingpin and Lieutenant seats are now honestly
@@ -369,10 +383,14 @@ describe('HK-3 draws — the corpus, through the real pipeline', () => {
     // the car's tip is 2157 cards, 0 hookless, 2157 hook-bearing (2159 / 16 / 2143 at lane 1), and total === npcTotal.
     // 2157 -> 2116 at STYLE-2-MERGE point 46 (the dual hat: the office face not minted where a house leads; 0 hookless still).
     // 2116 -> 2107 at STYLE-2-MERGE point 47 (the COHERENCE-AGREE re-dealt casts, -9 as on the lane's base; 0 hookless still).
-    expect(npcTotal, 'the NPC denominator must be a real corpus').toBe(2107);
+    // 2107 -> 2149 at the close of the tail round, 2026-11-15 (TAIL-CLOSE-DOORS-4, the owner's word of 06:00 UTC: a face for every seat of power),
+    // measured by this file's own corpus at the golden's tree 8c11f73ea; the hook total above reads 2147 (the hookless arm below is the law's, not re-taken).
+    expect(npcTotal, 'the NPC denominator must be a real corpus').toBe(2149);
     expect(hookless, 'hookless NPCs grew — a hook-bearing record is being dropped downstream').toBe(0);
-    expect(npcTotal - hookless, 'a hook-bearing NPC was dropped (561 at every step of the rung-1 window; 2157 = the cast at the car\'s tip; 2116 at STYLE-2-MERGE point 46; 2107 at point 47)').toBe(2107);
-    expect(total, 'one plot hook per card (PEOPLE-3): the hook total is the cast').toBe(npcTotal);
+    expect(hooklessAll.filter((x) => !isStandIn(x)).map((x) => x.id), 'every hookless card is a crisis stand-in').toEqual([]);
+    expect([...standIns].sort(), 'the crisis stand-ins of this corpus (HK1: the exemption is not vacuous)').toEqual(['npc_temp_grain', 'npc_temp_healer']);
+    expect(npcTotal - standIns.length - hookless, 'a hook-bearing NPC was dropped (561 at every step of the rung-1 window; 2157 = the cast at the car\'s tip; 2116 at STYLE-2-MERGE point 46; 2107 at point 47; 2147 at the close of the tail round)').toBe(2147);
+    expect(total, 'one plot hook per card (PEOPLE-3): the hook total is the cast').toBe(npcTotal - standIns.length);
   });
 
   test('pin:same-seed-survivors — the same seed draws the same hooks, forever', () => {

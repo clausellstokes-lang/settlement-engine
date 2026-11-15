@@ -213,6 +213,10 @@ describe('X-46 car 4 (iii) — dark, the world is byte-identical; lit (in this t
   // RE-KEYED BY IDENTITY 2026-11-13 (STYLE-2-MERGE-11, point 47): 60 of 60 moved by the COHERENCE-AGREE merge 22cc9ef7d (docs/shift-records/2026-11-13-style-2-merge-47-coherence-agree.json:
   // one fact, one answer: the resource roll's refused members refilled, the economy and defence read off the town's own record); the line before the merge reads every digest green. Re-captured at the merge by this file's own loop (an
   // untracked probe), twice and equal.
+  // RE-KEYED BY IDENTITY 2026-11-15 (the close of the tail round, TAIL-CLOSE-DOORS-4; the owner's word, 2026-11-15 06:00 UTC, in the chair's chat; record
+  // docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): 60 of 60 moved by the round's declared generation moves (the golden master
+  // re-recorded 525 of 525 under the same record: a face for every seat of power and the casts drawn after it). Re-captured at the golden's tree
+  // 8c11f73ea by this file's own loop (an untracked probe), twice and equal.
   const DARK =/** @type {Record<string, string>} */ (JSON.parse(readFileSync(
     fileURLToPath(new URL('../fixtures/x46-npc-band-dark-digests.json', import.meta.url)), 'utf8',
   )));

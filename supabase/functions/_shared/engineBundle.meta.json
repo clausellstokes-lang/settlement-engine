@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-11-15T07:38:52.358Z",
+  "generatedAt": "2026-11-15T15:30:07.952Z",
   "entry": "src/engine/serviceEntry.js",
-  "sourceHash": "2e034d4432a00880",
-  "engineVersion": "fad1ae33477ce0c1",
-  "builtFromCommit": "04149c5ef517167c3694b59fd12852f17323148e",
+  "sourceHash": "7e46e7ee2eb96fd5",
+  "engineVersion": "833ce3e435e583d2",
+  "builtFromCommit": "ea5fb1efb1d12c3366bdf9ac3eabbf834d81e1d5",
   "inputs": [
     "node_modules/seedrandom/seedrandom.js",
     "src/data/arrivalProse.js",
@@ -147,6 +147,7 @@
     "src/domain/factionProfile.js",
     "src/domain/factionRefs.js",
     "src/domain/factionRename.js",
+    "src/domain/facts/criminalStructureKey.js",
     "src/domain/facts/crisisKind.js",
     "src/domain/facts/defence.js",
     "src/domain/facts/drawDeclared.js",
