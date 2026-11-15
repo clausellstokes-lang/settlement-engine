@@ -3,7 +3,7 @@
 Seat: TAIL-DEFECON-R, builder. Branch `lane/tail-defecon-r-2026-11-14`, cut from the DEFECON group's tip
 `345f13157` (lane/tail-defecon-2026-11-14 as read at 00:45 UTC). File: `src/generators/resourceGenerator.js`, the gap
 logic only (the line near 46, an income label's key, is TAIL-DEFECON-2's and is untouched). Two declared moves, one
-commit each: M-S `5a446d29b`, M-V (next commit). Nothing merged, no pull request.
+commit each: M-S `5a446d29b`, M-V `fcf4cae69`. Nothing merged, no pull request.
 
 ## THE RULINGS WORKED TO (the chair's, 2026-11-15 00:44 UTC and 01:41 UTC; each vetoable by the owner)
 
@@ -43,7 +43,7 @@ no input at all; their three rows stay). Notes gone: "Military focus highlights 
 incomplete, strategic vulnerability." (r2r-village-20), "... iron ore processing is incomplete, ..."
 (r2s-insurgency-city-1).
 
-## M-V · (next commit) · DECLARED MOVE
+## M-V · `fcf4cae69` · DECLARED MOVE
 
 Cause: no record yields grapes and no import list names grapes, must or wine, so every census vintner "lacked grapes"
 (184 of 184; the page "No grapes reach the vintner.") though the house's text presses must brought in; every
@@ -77,10 +77,39 @@ green at M-S and here.
 
 ## THE PAGE (one census before at `345f13157`, one after at M-S + M-V; tabs and exports)
 
-PENDING: the AFTER census is rendering at this push. The record-side reading (`resourceGapLines` run on the after
-records): "No grapes reach the vintner." 184 -> 11 towns; "No glass sand reaches the glassblower." 13 -> 1; "No iron
-ore, copper ore or gold or silver ore reaches the smelter." 3 -> 3 (unmoved). The inventory diff of tabs and exports
-and the inheritors read come in the next push.
+Both runs `census3.sh` exit 0 (720 births, 720 dumps each); the after record equals the births-only record of M-V
+(0 towns). The inventory diff (`probes/TAIL-DEFECON-R/AFTER.inventory_diff.{tabs,exports}.txt`), whole:
+
+| surface | sentences before / after | gone | new | in fewer towns | in more |
+|---|---|---|---|---|---|
+| tabs | 29,887 / 29,887 | 0 | 0 | 3 | 0 |
+| exports (PDF, Journal) | 35,781 / 35,781 | 0 | 0 | 3 | 0 |
+
+The three, the same on both surfaces:
+- "No grapes reach the vintner." **184 -> 11** towns. Still printed (true: no route, or a siege): r2r-city-48,
+  r2r-city-49, r2r-metropolis-9, r2r-metropolis-44, r2r-metropolis-54 (isolated); r2r-metropolis-14,
+  r2s-under_siege-city-0, -city-2, -metropolis-1, -metropolis-2, -metropolis-3 (besieged). Gone in 173, among them
+  r2r-town-22 (540, the smallest), r2r-city-44 (famine), r2s-occupied-city-3 (occupation), r2r-metropolis-8 (344,689).
+- "No glass sand reaches the glassblower." **13 -> 1** (stays: r2r-town-9, isolated). Gone in 12, among them
+  r2r-town-55 (511), r2s-famine-town-1 (famine), r2r-town-51 (2,465, a port).
+- The heading "Gaps & Opportunities" (exports "GAPS & OPPORTUNITIES") 487 -> 418: 69 towns, every one among the 185
+  that lost a gap line, where that line was the section's only one. The heading goes with its last line: true.
+
+No sentence prints in more towns; the inventory's INHERITORS: **0 sentences**. Smelter lines: unmoved on every surface
+(M-S moved only the raw rows and two notes, on no dump).
+
+THE INHERITORS READ (each house's lines in its town, before against after; the line removed, nothing in its place):
+- Vintner · r2r-town-22, r2s-occupied-city-3, r2r-metropolis-8: "No grapes reach the vintner." leaves; the house's
+  rows print as before ("Vintner", "Master Vintner", the description "Wine pressed and matured, from local fruit or
+  imported must, ... In a region without vines, the vintner turns importer and blender.", "Vintner » Meals and drink").
+  The page no longer says the opposite of the house's own text.
+- Glassblower · r2r-town-55, r2s-famine-town-1, r2r-town-51: "No glass sand reaches the glassblower." leaves; the row
+  "Glassblower: Small-scale glasswork: ... Requires silica sand, potash, and a skilled furnace operator." prints as
+  before (a need, not a lack).
+- Smelter · r2s-infiltrated-town-1 (319), r2s-under_siege-city-3, r2r-metropolis-8: no line moves; the rows print
+  "Iron ore deposits » Smelter [+ Specialized metalworkers] » Refined iron ingots, Pig iron, Cast iron goods".
+
+NO NEW OR REWORDED LINE (nothing for the veto list but the two moves themselves, above).
 
 ## GUARDS
 
@@ -100,7 +129,8 @@ at the base and at each commit (carried red, no rise); the twelve-birth grid 2 f
 REDS CARRIED FROM THE BASE (named, not this seat's): of the 16 test files naming the file, the same six at the base and
 here: coherenceAgreeCures.test.js (the walled-with-no-gate line; the gate-mark fixture), r3c10FoodLinesTrue.test.js (the
 two herding arms), r3c9ReaderLinesTrue.test.js (the rival account), worldFactRederive.test.js A7. Of the 39 golden-master
-readers, the same 69 non-passing assertions at the base and here (generatorGoldenMaster.test.js, engineBundleReplay,
+readers, the same 69 non-passing assertions at the base and at each commit (M-V's lone extra, editCorpusRatchet A5, a
+load timeout that passes alone) (generatorGoldenMaster.test.js, engineBundleReplay,
 vendorPdfLazy, generationForkCensus, the pinned-mode, edit-corpus and prose-manifest arms among them).
 
 ## NAMED FOR OTHER SEATS
@@ -123,10 +153,12 @@ The golden master (`tests/fixtures/generator-golden-master.json`) moves with bot
 
 ## WHAT IS LEFT
 
-1. The page: the AFTER census's inventory diff (tabs; `SURFACES=PDF,Journal`), the gap lines that go with their
-   towns, and the inheritors read (a vintner's, a smelter's and a glassblower's rows, three towns each).
-2. The golden-master readers re-run at M-V (at M-S: the same 69 as the base).
-3. Nothing else of the assignment.
+Nothing of the assignment. The named items above (the economy seat's chain import; the military note) are other
+seats' or the chair's.
+
+The golden-master readers re-run at M-V: the base's 69 non-passing assertions and one more,
+`tests/property/editCorpusRatchet.test.js` A5. That one is a timeout under load (run beside the AFTER census); run alone
+at M-V it passes (462 s). Not a cure's red.
 
 ## HOW THE INSTRUMENTS ARE RE-MADE
 
@@ -140,6 +172,8 @@ The golden master (`tests/fixtures/generator-golden-master.json`) moves with bot
    `SURFACES=PDF,Journal python3 -I inventory.py <out> exp.json`; `inventory_diff.py before.json after.json`.
 4. A candidate's record: `CENSUS3_PROBES=<CENSUS-3> sh births-only.sh <tree> <out>` (~1 min), then
    `node fielddiff.mjs <before corpus> <after corpus> [depth]` and `node inputgap.mjs <tree> <corpus>`.
-5. This seat's two probes (in the scratchpad, not committed; their text is in this file's commit body where it
-   matters): `gapdiff.cjs <load.cjs> <A> <B>` (house rows and priority notes gone or new, by text, with towns) and
-   `pagegap.mjs <tree> <corpus> <load.cjs>` (the Resources reader's vintner, glassblower and smelter lines off the record).
+5. This seat's probes, `docs/chair/2026-11-14/probes/TAIL-DEFECON-R/`: `gapdiff.cjs <load.cjs> <A> <B>` (house rows
+   and priority notes gone or new, by text, with towns); `pagegap.mjs <tree> <corpus> <load.cjs>` (the Resources
+   reader's vintner, glassblower and smelter lines off the record, no render); `soakv.mjs <tree>` (the soak births that
+   seat a Vintner and its row's kind: the re-key's search). Candidates: `ms.patch` / `msmv.patch` applied at
+   `345f13157`, then edited as the commit bodies say (only `missing`; the siege), births-only each.
