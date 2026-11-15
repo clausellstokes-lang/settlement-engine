@@ -120,3 +120,22 @@ function oneOrganisationRules(settlement) {
 }
 /** A thieves' guild house by its roster name ("Thieves' guild chapter", "Thieves' guild (powerful)"). */
 export const THIEVES_GUILD_HOUSE = /thieves'? guild/i;
+
+/**
+ * THE RING'S HOUSES ON THE ROSTER (TAIL-CLOSE-SRC-5, the chair's ruling SR5 (a) of 2026-11-15, vetoable by the owner):
+ * `display/defenseDisplay.js :: ringWithoutSeat`'s lookup of a house by name, moved verbatim to the crime fact's leaf.
+ * It is the name ladder's own question (a thieves' guild, a "Front businesses" or an "Underground city" house is what
+ * makes `criminalStructureKeyOf` ORGANIZED), so it reads the roster the key reads: whether a ruined criminal house
+ * should key the structure (and so name the ring's houses) is the one behaviour question named for the owner on this
+ * leaf, never answered twice. Read as stored; no fact is added.
+ * @param {CrimeKeySettlement | null | undefined} settlement
+ * @returns {Readonly<{ guild: boolean, front: boolean, under: boolean }>}
+ */
+export function ringHousesOf(settlement) {
+  const houses = (settlement?.institutions || []).map((i) => String(i?.name ?? ''));
+  return Object.freeze({
+    guild: houses.some((n) => THIEVES_GUILD_HOUSE.test(n)),
+    front: houses.some((n) => /front business/i.test(n)),
+    under: houses.some((n) => /underground city/i.test(n)),
+  });
+}

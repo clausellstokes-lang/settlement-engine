@@ -18,7 +18,7 @@ import { STRESS_TYPE_MAP } from '../../data/stressTypes.js';
 import { magicWorksAt } from '../worldPulse/magicWorksAt.js';
 import { magicPractitioners } from '../magicReliance.js';
 import { crimeSignalOf, criminalSeatsNotGoverning } from '../crimeSignal.js';
-import { criminalStructureKeyOf, runningCriminalChains, THIEVES_GUILD_HOUSE } from '../facts/criminalStructureKey.js';
+import { criminalStructureKeyOf, ringHousesOf, runningCriminalChains } from '../facts/criminalStructureKey.js';
 
 // The active-military-status POSTURE per stress type. This DISPLAY text lives in
 // this lazy display module — NOT in data/stressTypes.js, which sits in the eager
@@ -830,12 +830,11 @@ const NO_SEAT_RING_NOTE = Object.freeze({
  */
 function ringWithoutSeat(row, settlement) {
   if (row.key !== 'organized') return row;
-  const houses = (settlement?.institutions || []).map((i) => String(i?.name ?? ''));
-  if (houses.some((n) => THIEVES_GUILD_HOUSE.test(n))) return row;
+  const houses = ringHousesOf(settlement); // the crime fact's leaf reads the roster the key reads (TAIL-CLOSE-SRC-5, SR5 (a))
+  if (houses.guild) return row;
   if (crimeSignalOf({ seats: settlement?.powerStructure?.factions, estate: [] }).powerNames.length) return row;
-  const front = houses.some((n) => /front business/i.test(n));
-  if (!front && !houses.some((n) => /underground city/i.test(n))) return row;
-  return Object.freeze({ ...row, note: front ? NO_SEAT_RING_NOTE.front : NO_SEAT_RING_NOTE.under });
+  if (!houses.front && !houses.under) return row;
+  return Object.freeze({ ...row, note: houses.front ? NO_SEAT_RING_NOTE.front : NO_SEAT_RING_NOTE.under });
 }
 
 // ─── TAIL-DEFECON-D: THE SICK ARE NOT TENDED "BY THEIR OWN FAMILIES" BESIDE ONE WHO TENDS THEM (at the end of the file) ───
