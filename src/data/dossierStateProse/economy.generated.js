@@ -102,7 +102,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "{settlement} gets by on a thin margin, and little in its trade is spare.",
+          "text": "{settlement} pays its way from year to year, and nobody here calls the town poor.",
           "slots": [
             "settlement"
           ],
@@ -155,7 +155,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
             "no crisis: under_siege",
             "no crisis: plague_onset"
           ],
-          "text": "{settlement}'s market sells little, though the {access} is busy; most of the traffic does not stop, and the traders here are poor.",
+          "text": "{settlement}'s {access} is busy, but little of what passes leaves its money here, and the traders at the market are poor.",
           "slots": [
             "settlement",
             "access"
@@ -220,6 +220,10 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
+          "marks": [
+            "food: ≥ secure",
+            "no crisis: under_siege"
+          ],
           "text": "{settlement} lives on a {complexity} that feeds it and no more, and the road in is too poor to bring anything extra.",
           "slots": [
             "settlement",
@@ -1967,7 +1971,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
             "dm-only",
             "colour"
           ],
-          "text": "A large share of what {settlement} earns never reaches a ledger. The duties collected fall well short of the trade actually done, and the gap is not an accounting error.",
+          "text": "A large share of what {settlement} earns is earned out of sight, and none of it by accident.",
           "slots": [
             "settlement"
           ],
@@ -2023,7 +2027,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
             "dm-only",
             "colour"
           ],
-          "text": "A real portion of {settlement}'s trade sits outside the rolls, enough that the men who do pay their duties are competing at a disadvantage.",
+          "text": "A real portion of {settlement}'s trade is done out of sight, enough that those who trade openly are at a disadvantage.",
           "slots": [
             "settlement"
           ],
@@ -2113,7 +2117,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
             "dm-only",
             "no organised crime"
           ],
-          "text": "A little of {settlement}'s trade goes unrecorded, small enough to annoy the clerks and too small to change what the town is.",
+          "text": "A little of {settlement}'s trade is done out of sight, too little to change what the town is.",
           "slots": [
             "settlement"
           ],
@@ -2829,7 +2833,8 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "crisis: any"
+            "crisis: any",
+            "stores: ≥ 3"
           ],
           "text": "{settlement} has reserves deep enough to ride out most of what could happen to it.",
           "slots": [
@@ -3310,7 +3315,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "crisis: any"
           ],
-          "text": "{settlement} grows a little less food than it needs, and every season the difference has to be bought or done without.",
+          "text": "{settlement} falls a little short of the food it needs, and every season the difference is made up by tighter belts.",
           "slots": [
             "settlement"
           ],
@@ -3356,7 +3361,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
             "crisis: any",
             "no crisis: under_siege"
           ],
-          "text": "A substantial part of what {settlement} eats is bought rather than grown. The town's food is a trade item, and the trade is not optional.",
+          "text": "A substantial part of what {settlement} needs to eat has to come from outside the town, and when it does not come, the town goes short.",
           "slots": [
             "settlement"
           ],
@@ -3378,7 +3383,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no hunger"
           ],
-          "text": "{settlement} is fed and dependent. Nothing about the arrangement is failing; everything about it rests on the road staying open.",
+          "text": "{settlement} cannot feed itself from its own land, and everything rests on what comes in from outside.",
           "slots": [
             "settlement"
           ],
@@ -3648,7 +3653,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no crisis: plague_onset"
           ],
-          "text": "Food carts come into {settlement} most days, and they matter: a good part of what the town eats is grown elsewhere and brought in.",
+          "text": "Food comes into {settlement} most days, and it matters: a good part of what the town eats is grown elsewhere and brought in.",
           "slots": [
             "settlement"
           ],
@@ -3767,7 +3772,8 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         {
           "angle": "street",
           "marks": [
-            "no crisis: famine"
+            "no crisis: famine",
+            "food: ≥ secure"
           ],
           "text": "The {good} feeds {settlement} first, but not alone; when one source has a lean year, the others carry it.",
           "slots": [
@@ -3779,7 +3785,8 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         {
           "angle": "unfolding",
           "marks": [
-            "no crisis: famine"
+            "no crisis: famine",
+            "food: ≥ secure"
           ],
           "text": "With more than its {good} to rely on, {settlement} can take a bad season in one source without going hungry.",
           "slots": [
@@ -4492,6 +4499,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "POSTURE: none": [
         {
           "angle": "ledger",
+          "marks": [
+            "no crisis: occupied"
+          ],
           "text": "{settlement} sells nothing outward. What the town makes, the town uses, and the accounts have no export column at all.",
           "slots": [
             "settlement"
@@ -4508,6 +4518,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "no crisis: occupied"
+          ],
           "text": "There is no trade out. Whatever surplus there is stays, and is eaten or worn here.",
           "slots": [],
           "vid": 3
@@ -5449,7 +5462,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         {
           "angle": "threshold",
           "marks": [
-            "colour"
+            "no crisis: under_siege"
           ],
           "text": "A newcomer to {settlement} soon hears what its ground is worth to the powers around it, and how little of that worth stays in the town.",
           "slots": [

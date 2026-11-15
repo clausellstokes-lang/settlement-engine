@@ -7,7 +7,7 @@
 // general reads, so a `dm-only` line is read too). The kernel's draw records, per pool, what was eligible and what
 // was drawn.
 //   GONE rows: a sentence that was false in that town must NOT be drawn there; the row NAMES what is drawn instead
-//     (`prints`: a vid of the same pool, or `null` = the pool is silent there by design). Each was red at the base.
+//     (`prints`: a vid of the same pool — two where the public page and the owner's read each draw it — or `null` = the pool is silent there by design). Each was red at the base.
 //   KEEP rows: a true sibling that must still be drawn in its town (green before and after), so a cure that silences
 //     the pool's true lines reds here too.
 // A town that no longer reads the pool reds by name, and the row is re-keyed to a town of the case (by identity, with
@@ -33,7 +33,7 @@ vi.mock('../../src/domain/display/stateProse/stateProseKernel.js', async (import
 });
 
 /**
- * @typedef {{seed: string, pool: string, gone: RegExp, prints: number|null, why: string}} GoneRow
+ * @typedef {{seed: string, pool: string, gone: RegExp, prints: number|number[]|null, why: string}} GoneRow
  * @typedef {{seed: string, pool: string, keep: number, text: RegExp, why: string}} KeepRow
  */
 /** @type {ReadonlyArray<GoneRow>} */
@@ -66,6 +66,24 @@ const GONE = [
   { seed: 'r2r-village-11', pool: 'DS-GEN-13::COMMERCE: a market, no guild', gone: /No guild runs/, prints: 2, why: 'a guild power: "No guild runs X\'s market" (14605; v2 "No guild keeps a house at")' },
   { seed: 'r2r-city-12', pool: 'DS-ECO-10::POSTURE: entrepot', gone: /Very little of what leaves began here/, prints: 2, why: 'every export made here: "Very little of what leaves began here" (23392; v2 reworded)' },
   { seed: 'r2r-thorp-33', pool: 'DS-ECO-8::PROSPEROUS', gone: /its halls and its defences/, prints: 1, why: 'no defence and no hall on the record: "spends it on its halls and its defences" (00755, the bar\'s #168; v1 reworded)' },
+  // ── BATCH 3 · the economy desk's header, shadow, strategic, wealth, posture and food lines (TAIL-CORPUS-ECO-2): DECLARED (the replay's inheritor) or REWORDED (the same vid) ──
+  { seed: 'r2r-thorp-0', pool: 'DS-ECO-1::COMBINATION C3: the middle rungs', gone: /thin margin/, prints: 2, why: 'Comfortable: "gets by on a thin margin" a rung above the margin (00583; v2 reworded: a declaration would leave a Comfortable calm town with no market and no {complexity} mute)' },
+  { seed: 'r2s-famine-city-1', pool: 'DS-ECO-1::COMBINATION C4: a low rung on a working approach', gone: /market sells little/, prints: 3, why: 'daily markets, fairs, a caravan exchange: "the market sells little" (01572; v3 reworded)' },
+  { seed: 'r2r-thorp-17', pool: 'DS-ECO-1::COMBINATION C5: a low rung on a narrow approach', gone: /feeds it and no more/, prints: 3, why: 'a famine, 64% short: "feeds it and no more" (01191; v2 + `food: ≥ secure · no crisis: under_siege`)' },
+  { seed: 'r2r-village-43', pool: 'DS-ECO-1::COMBINATION C5: a low rung on a narrow approach', gone: /feeds it and no more/, prints: 1, why: 'a siege, 71% short (01181)' },
+  { seed: 'r2s-insurgency-hamlet-0', pool: 'DS-ECO-6::TIER: a large share off the books (≥30)', gone: /duties collected/, prints: 1, why: 'no market, no office: "The duties collected fall well short" (20456; v1 reworded)' },
+  { seed: 'r2r-hamlet-17', pool: 'DS-ECO-6::TIER: significant off-book activity (≥15)', gone: /outside the rolls/, prints: [6, 1], why: 'the public page draws v6, the owner\'s v1 (dm-only); no market, no office: "sits outside the rolls ... pay their duties" (02935; v1 reworded)' },
+  { seed: 'r2r-hamlet-0', pool: 'DS-ECO-6::TIER: minor shadow activity (≥3)', gone: /annoy the clerks/, prints: 1, why: 'no office, no clerk: "small enough to annoy the clerks" (02770; v1 reworded)' },
+  { seed: 'r2s-under_siege-city-1', pool: 'DS-ECO-11::STRATEGIC VALUE: the generator\'s assessment, framed', gone: /A newcomer to/, prints: 3, why: 'a siege: "A newcomer soon hears" where nobody arrives (B02776; v4 + `no crisis: under_siege`)' },
+  { seed: 'r2r-village-2', pool: 'DS-ECO-8::WEALTHY', gone: /reserves deep enough/, prints: 3, why: 'two months of stores: "reserves deep enough to ride out most of what could happen" (B00791; v1 + `stores: ≥ 3`)' },
+  { seed: 'r2s-occupied-town-2', pool: 'DS-ECO-10::POSTURE: none', gone: /the town uses/, prints: 2, why: 'an occupation, the occupier levying: "What the town makes, the town uses" (B27697; v1 + `no crisis: occupied`)' },
+  { seed: 'r2s-occupied-village-1', pool: 'DS-ECO-10::POSTURE: none', gone: /surplus there is stays/, prints: 2, why: 'an occupation: "Whatever surplus there is stays" (v3 + `no crisis: occupied`)' },
+  { seed: 'r2r-town-42', pool: 'DS-ECO-9::PRESSURED', gone: /grows a little less food/, prints: 1, why: 'grows 69% and buys the rest bar 6%: "grows a little less food than it needs" (00588; v1 reworded)' },
+  { seed: 'r2s-wartime-thorp-3', pool: 'DS-ECO-9::IMPORT-DEPENDENT', gone: /bought rather than grown/, prints: 1, why: 'isolated, nothing imported, 17% short: "bought rather than grown ... a trade item" (03095 22253; v1 reworded)' },
+  { seed: 'r2s-occupied-village-1', pool: 'DS-ECO-9::IMPORT-DEPENDENT', gone: /fed and dependent/, prints: 3, why: 'HIGH: 21% short, not viable: "is fed ... Nothing about the arrangement is failing" (00991 15068; v3 reworded)' },
+  { seed: 'r2s-under_siege-hamlet-2', pool: 'DS-ECO-9::FOOD SOURCES: several, the largest named', gone: /the others carry it/, prints: 1, why: 'a siege, 35% short: "the others carry it" (20660; v2 + `food: ≥ secure`)' },
+  { seed: 'r2r-thorp-41', pool: 'DS-ECO-9::FOOD SOURCES: several, the largest named', gone: /without going hungry/, prints: 1, why: 'already short: "can take a bad season ... without going hungry" (28996; v3 + `food: ≥ secure`)' },
+  { seed: 'r2r-city-31', pool: 'DS-ECO-9::HOW THE NEED IS MET: much of it brought in', gone: /Food carts/, prints: 1, why: 'a river town, its food by boat: "Food carts come in most days" (09248; v1 reworded)' },
 ];
 /** @type {ReadonlyArray<KeepRow>} */
 const KEEP = [
@@ -95,6 +113,22 @@ const KEEP = [
   { seed: 'r2r-village-55', pool: 'DS-GEN-13::COMMERCE: a market, no guild', keep: 2, text: /the stall fee/, why: 'the stem' },
   { seed: 'r2r-metropolis-57', pool: 'DS-ECO-10::POSTURE: entrepot', keep: 2, text: /^The trade here is in the moving of things/, why: 'the stem' },
   { seed: 'r2r-metropolis-9', pool: 'DS-ECO-8::PROSPEROUS', keep: 1, text: /^\{settlement\} has money to spend/, why: 'the stem' },
+  // ── BATCH 3 (TAIL-CORPUS-ECO-2) ──
+  { seed: 'r2r-hamlet-12', pool: 'DS-ECO-1::COMBINATION C3: the middle rungs', keep: 2, text: /^\{settlement\} /, why: 'Moderate: the same vid' },
+  { seed: 'r2r-town-18', pool: 'DS-ECO-1::COMBINATION C4: a low rung on a working approach', keep: 3, text: /\{access\} is busy/, why: 'the stem (old and new wording)' },
+  { seed: 'r2r-thorp-21', pool: 'DS-ECO-1::COMBINATION C5: a low rung on a narrow approach', keep: 2, text: /feeds it and no more/, why: 'food secure, no siege' },
+  { seed: 'r2r-metropolis-4', pool: 'DS-ECO-6::TIER: a large share off the books (≥30)', keep: 1, text: /^A large share of what \{settlement\} earns/, why: 'the stem' },
+  { seed: 'r2r-city-17', pool: 'DS-ECO-6::TIER: significant off-book activity (≥15)', keep: 1, text: /^A real portion of \{settlement\}'s trade/, why: 'the stem' },
+  { seed: 'r2r-hamlet-1', pool: 'DS-ECO-6::TIER: minor shadow activity (≥3)', keep: 1, text: /^A little of \{settlement\}'s trade/, why: 'the stem' },
+  { seed: 'r2r-city-11', pool: 'DS-ECO-11::STRATEGIC VALUE: the generator\'s assessment, framed', keep: 4, text: /A newcomer to/, why: 'no siege' },
+  { seed: 'r2r-metropolis-16', pool: 'DS-ECO-8::WEALTHY', keep: 1, text: /reserves deep enough/, why: 'fifteen months of stores' },
+  { seed: 'r2r-hamlet-25', pool: 'DS-ECO-10::POSTURE: none', keep: 1, text: /the town uses/, why: 'no occupation' },
+  { seed: 'r2r-hamlet-43', pool: 'DS-ECO-10::POSTURE: none', keep: 3, text: /surplus there is stays/, why: 'no occupation' },
+  { seed: 'r2r-hamlet-49', pool: 'DS-ECO-9::PRESSURED', keep: 1, text: /every season the difference/, why: 'the stem' },
+  { seed: 'r2s-slave_revolt-hamlet-3', pool: 'DS-ECO-9::IMPORT-DEPENDENT', keep: 1, text: /^A substantial part of what \{settlement\}/, why: 'the stem' },
+  { seed: 'r2r-village-50', pool: 'DS-ECO-9::IMPORT-DEPENDENT', keep: 3, text: /everything (about it )?rests on/, why: 'the stem' },
+  { seed: 'r2r-city-14', pool: 'DS-ECO-9::FOOD SOURCES: several, the largest named', keep: 3, text: /without going hungry/, why: 'food secure' },
+  { seed: 'r2r-city-27', pool: 'DS-ECO-9::HOW THE NEED IS MET: much of it brought in', keep: 1, text: /a good part of what the town eats is grown elsewhere and brought in/, why: 'the stem' },
 ];
 
 /** CENSUS-3 seedcfg.mjs's r2r-/r2s- arms, verbatim in shape. @param {string} seed */
@@ -144,7 +178,7 @@ describe('a cured sentence is not drawn in the census town that made it false; w
       expect(Object.keys(pools), `${g.seed} no longer reads ${g.pool}: re-key the row to a town of the case`).toContain(g.pool);
       const drawn = [...pools[g.pool].d.entries()];
       for (const [vid, text] of drawn) expect(text, `${g.pool} v${vid} at ${g.seed}`).not.toMatch(g.gone);
-      expect(drawn.map(([vid]) => vid), `what ${g.pool} draws at ${g.seed}`).toEqual(g.prints === null ? [] : [g.prints]);
+      expect(drawn.map(([vid]) => vid), `what ${g.pool} draws at ${g.seed}`).toEqual(g.prints === null ? [] : [g.prints].flat());
     });
   }
 });
