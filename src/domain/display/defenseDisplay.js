@@ -17,7 +17,7 @@ import { scoreBand, scoreColor, SCORE_BAND_CUTS } from './defenseScoreBands.js';
 import { STRESS_TYPE_MAP } from '../../data/stressTypes.js';
 import { magicWorksAt } from '../worldPulse/magicWorksAt.js';
 import { magicPractitioners } from '../magicReliance.js';
-import { crimeSignalOf } from '../crimeSignal.js';
+import { crimeSignalOf, criminalSeatsNotGoverning } from '../crimeSignal.js';
 import { criminalStructureKeyOf, runningCriminalChains, THIEVES_GUILD_HOUSE } from '../facts/criminalStructureKey.js';
 
 // The active-military-status POSTURE per stress type. This DISPLAY text lives in
@@ -867,8 +867,8 @@ function sickTendedByOne(settlement) {
  */
 function headedPowerAmongRivals(row, settlement) {
   if (row.key !== 'semi-organized') return row;
-  const rings = /** @type {ReadonlyArray<{ category?: unknown, isGoverning?: unknown, faction?: unknown } | null | undefined>} */ (
-    settlement?.powerStructure?.factions || []).filter((f) => f?.category === 'criminal' && f?.isGoverning !== true);
+  const rings = criminalSeatsNotGoverning(/** @type {ReadonlyArray<{ category?: unknown, isGoverning?: unknown, faction?: unknown } | null | undefined>} */ (
+    settlement?.powerStructure?.factions || [])); // the crime home's reader (TAIL-CLOSE-SRC-4)
   if (rings.length !== 1) return row;
   const name = String(rings[0]?.faction ?? '');
   const people = /** @type {{ npcs?: unknown }} */ (/** @type {unknown} */ (settlement))?.npcs;

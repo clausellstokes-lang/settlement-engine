@@ -169,3 +169,14 @@ export function crimeFactionNameOf(factions) {
  * would close a new dependency cycle (`tests/architecture/layerBoundaries.test.js`, shrink-only).
  */
 export const CRIMINAL_GOVERNANCE_TYPE = 'Criminal governance';
+
+/**
+ * The criminal powers that do not govern: each seat whose category is 'criminal' (the signal's own mark) and that does
+ * not hold the governing seat (TAIL-CLOSE-SRC-4: moved verbatim from `display/defenseDisplay.js ::
+ * headedPowerAmongRivals`, V8, into the crime home).
+ * @template {{ category?: unknown, isGoverning?: unknown } | null | undefined} T
+ * @param {ReadonlyArray<T>} seats the roster's seats @returns {T[]}
+ */
+export function criminalSeatsNotGoverning(seats) {
+  return seats.filter((f) => f?.category === 'criminal' && f?.isGoverning !== true);
+}
