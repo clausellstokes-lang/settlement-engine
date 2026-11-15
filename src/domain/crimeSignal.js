@@ -74,6 +74,19 @@ export function withoutCriminalGuild(text) {
 }
 
 /**
+ * Whether the town's crime includes a thieves' or criminal guild: the roster's crime faction, its criminal powers or its
+ * criminal houses, by name (TAIL-CLOSE-SRC-4: the one reading `withTownsOwnUnderworld` and `npcGenerator.js ::
+ * mergeNPCLists`'s `noThievesGuild` each spelled; `/thie/ || namesCriminalGuild` is the latter's `/thie|criminal guild/i`).
+ * @param {CrimeSignal | null | undefined} signal the town's crime signal (`crimeSignalOf`)
+ * @param {unknown} [crimeFaction] the roster's crime faction by name
+ * @returns {boolean}
+ */
+export function crimeHasThievesGuild(signal, crimeFaction = null) {
+  const named = [crimeFaction, ...(signal?.factions || []), ...(signal?.houses || [])];
+  return named.some((n) => /thie/i.test(String(n || '')) || namesCriminalGuild({ short: n }));
+}
+
+/**
  * A minted face's secret (COHERENCE-POWERS-7, the brief's leftover 1; R2-CODE-A item 7's rule, given its home
  * here beside F4's): a thieves' or criminal guild the town does not have is never named. With no crime at all,
  * F4's "a powerful outside interest" (`withoutCriminalGuild`); where crime stands without such a guild, "the
@@ -88,8 +101,7 @@ export function withoutCriminalGuild(text) {
  */
 export function withTownsOwnUnderworld(text, signal, crimeFaction = null) {
   if (typeof text !== 'string' || !new RegExp(CRIMINAL_GUILD, 'i').test(text)) return text;
-  const named = [crimeFaction, ...(signal?.factions || []), ...(signal?.houses || [])];
-  if (named.some((n) => /thie/i.test(String(n || '')) || namesCriminalGuild({ short: n }))) return text; // the criminal guild by its own reader (TAIL-CLOSE-SRC-3)
+  if (crimeHasThievesGuild(signal, crimeFaction)) return text; // the criminal guild by its own reader (TAIL-CLOSE-SRC-3, -4)
   if (!crimeFaction && !signal?.present) return withoutCriminalGuild(text);
   return /** @type {T} */ (/** @type {unknown} */ (text
     .replace(/on (?:the )?thieves['’]? guild payroll/gi, 'on the payroll of the local underworld')
