@@ -795,11 +795,12 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
  *
  * @template {{ safetyProfile?: { crimeTypes?: Array<{ type?: unknown, desc?: unknown }>, criminalInstitutions?: unknown[] } | null, activeChains?: Array<{ needKey?: unknown, status?: unknown, chainId?: unknown } | null> } | null | undefined} E
  * @param {E} economicState
- * @param {Parameters<typeof crimeSignalOf>[0]} lists the FINAL roster's seats and the estate
+ * @param {Parameters<typeof crimeSignalOf>[0] & { tensions?: unknown }} lists the FINAL roster's seats and the estate; the
+ *   record's live tensions (`history.currentTensions`, BAR3-DEFECON-2: a crime wave settles the kept-in-hand lines)
  * @returns {E}
  */
 export function settleCrimeLinesToSignal(economicState, lists) {
-  return settleCrimeLinesOnly(settleTheocraticFlag(economicState, lists?.seats), lists); // BAR3-DEFECON: the theocratic flag, read at the same late point
+  return settleCrimeLinesOnly(settleCrimeWaveLines(settleTheocraticFlag(economicState, lists?.seats), lists?.tensions), lists); // BAR3-DEFECON: the theocratic flag, read at the same late point; BAR3-DEFECON-2 (grant AS1): the crime wave's twins
 }
 /** @param {any} economicState @param {Parameters<typeof settleCrimeLinesToSignal>[1]} lists */
 function settleCrimeLinesOnly(economicState, lists) {
@@ -1118,4 +1119,4 @@ const TINY_MODERATE_LINE = 'The neighbours keep an eye on one another, and what 
 
 // ─── BAR3-DEFECON (2026-11-15): the safety lines against the page's own state (at the end, so no line above moves) ───
 import { hasInstitution } from '../domain/facts/institutions.js';
-import { beneathTheWalls, GATES_KEPT_SMUGGLERS_BENEATH, MONSTER_THREAT_NO_DRILL, oneRingRules, quarrelUnderViolence, RELIGIOUS_FRAUD_NO_CHURCH, settleTheocraticFlag } from './safetyLineTruth.js';
+import { beneathTheWalls, GATES_KEPT_SMUGGLERS_BENEATH, MONSTER_THREAT_NO_DRILL, oneRingRules, quarrelUnderViolence, RELIGIOUS_FRAUD_NO_CHURCH, settleCrimeWaveLines, settleTheocraticFlag } from './safetyLineTruth.js';

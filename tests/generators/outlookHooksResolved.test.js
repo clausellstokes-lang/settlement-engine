@@ -17,8 +17,10 @@ const ORIGINALS = TIMBER_SETS.map((set) => set[0].text);
 const TWINS = TIMBER_SETS.map((set) => set.find((l) => l.twinOf).text);
 const INSTITUTIONS = [{ name: 'Sawmill', category: 'Crafts' }];
 const BALANCE = { deficit: 0, dailyProduction: 10, dailyNeed: 10 };
+// BAR3-DEFECON-2 (2026-11-15, C48585): the timber events say a supply has stopped, so they read the record's own import list
+// (the iron hooks' rule); this fixture town must import timber, so its record now lists the import it presumes.
 const hooksFor = (config) => deriveSupplyRiskAnalysis(800, { mustImport: ['timber'] }, INSTITUTIONS, config,
-  BALANCE, () => factsOf({ institutions: INSTITUTIONS, config, tier: 'town' })).plotHooks.map((h) => h.hook);
+  BALANCE, () => factsOf({ institutions: INSTITUTIONS, config, tier: 'town', economicState: { primaryImports: ['Timber'] } })).plotHooks.map((h) => h.hook);
 
 describe('the outlook hooks resolve (CENSUS-1f unit 3)', () => {
   it('a plains road town is not told its shipbuilding stalls', () => {

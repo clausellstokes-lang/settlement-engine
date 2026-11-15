@@ -296,6 +296,46 @@ export function theocraticEconomyStands(incomeSources, seats) {
  * (read at assembly by `safetyProfile.js :: settleCrimeLinesToSignal`).
  * @param {unknown} economicState @param {{ seats?: unknown, estate?: unknown } | null | undefined} lists @returns {boolean}
  */
+/**
+ * BAR3-DEFECON-2 (C17459 C22802 C31257, the chair's grant AS1): three safety lines say crime is kept in hand, and a live
+ * crime-wave tension (`history.currentTensions`, drawn at the narratives step, after the economy) says it is rising faster
+ * than it is answered. Measured on the census's 720 at 7a4b48a84: false in 9 of 33, 37 of 136 and 6 of 28 printing towns.
+ * Each pair is (the line's words as the economy step spells them, the twin true under a crime wave), settled at assembly
+ * (`safetyProfile.js :: settleCrimeLinesToSignal`); the label is not touched; no draw.
+ */
+export const CRIME_WAVE_TWINS = Object.freeze({
+  safetyDesc: Object.freeze([
+    Object.freeze(['Crime exists but is well-managed. ', 'Crime is on the rise. ']),
+    Object.freeze(['Thieves are scarce now; the danger is informers and occupation officials, and the resistance works out of sight.',
+      'Theft is rising even under the curfew, and the greater danger is informers and occupation officials; the resistance works out of sight.']),
+  ]),
+  economicDragDesc: Object.freeze([
+    Object.freeze(['Some goods change hands here without a licence or a duty paid. It is noticed, and so far it does little harm.',
+      'Some goods change hands here without a licence or a duty paid.']),
+  ]),
+});
+
+/**
+ * The safety profile's crime-kept-in-hand lines settled to a live crime wave (`CRIME_WAVE_TWINS`). Returns the input BY
+ * REFERENCE where no crime wave stands or no line changes, else a copy with a copied safety profile.
+ * @template E @param {E} economicState @param {unknown} tensions the record's `history.currentTensions` @returns {E}
+ */
+export function settleCrimeWaveLines(economicState, tensions) {
+  const sp = /** @type {any} */ (economicState)?.safetyProfile;
+  const wave = Array.isArray(tensions) && tensions.some((t) => t && typeof t === 'object' && /** @type {{ type?: unknown }} */ (t).type === 'crime_wave');
+  if (!wave || !sp || typeof sp !== 'object') return economicState;
+  /** @type {Record<string, string>} */
+  const changed = {};
+  for (const [field, pairs] of Object.entries(CRIME_WAVE_TWINS)) {
+    const text = sp[field];
+    if (typeof text !== 'string') continue;
+    const settled = pairs.reduce((acc, [line, twin]) => acc.replace(line, twin), text);
+    if (settled !== text) changed[field] = settled;
+  }
+  if (!Object.keys(changed).length) return economicState;
+  return /** @type {E} */ ({ .../** @type {any} */ (economicState), safetyProfile: { ...sp, ...changed } });
+}
+
 export function oneRingRules(economicState, lists) {
   return criminalStructureKeyOf(/** @type {never} */ ({ powerStructure: { factions: lists?.seats }, institutions: lists?.estate, economicState })) === 'organized';
 }

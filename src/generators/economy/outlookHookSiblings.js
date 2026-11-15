@@ -100,3 +100,15 @@ export const OUTLOOK_HOOK_SIBLINGS = Object.freeze({
 });
 /** The famine line where no merchant can come (the starving set's third member, read from where it is declared). */
 export const STARVING_SHUT_TWIN = OUTLOOK_HOOK_SIBLINGS[STARVING_HOOK][2].text;
+
+/**
+ * BAR3-DEFECON-2 (the wide read's C48585, "The timber carts stopped coming a month ago…" where the trade record imports no
+ * timber and the page's need row says timber is needed and not brought in). The timber line's two events (the rafts, and the
+ * carts its `navigable` twin names) say a supply that came by road or river has stopped: each needs the record's own import
+ * of timber (`foodBalance.js :: importHeld`, the iron hooks' rule, TAIL-DEFECON-3 D8). Where the import list holds none the
+ * slot keeps its draw (`pick`, no roll) and prints this twin, which names no carts and no rafts. Measured on the census's
+ * 720 at 7a4b48a84: the carts 18 of 30 false, the rafts 1 of 16; the forest line prints in none.
+ */
+export const TIMBER_SHORT_HOOK = 'Timber is short this season, and the builders are bidding against each other for what is left in the yards.';
+/** A timber import on the record's import list ("Timber", "Lumber", "Shipbuilding wood"…). */
+export const TIMBER_IMPORT = /timber|lumber|\bwood\b/i;
