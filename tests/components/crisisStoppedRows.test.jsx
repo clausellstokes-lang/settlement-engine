@@ -15,6 +15,10 @@
  *     unmarked (the chain births table; each pair red at de0a3d237, where the leaf answered for services and houses
  *     only), a chain or share that lives on nothing the crisis stops, or any in a calm town, is marked (its keep
  *     pairs), or the table misses a chain id or an income title the economy writes, or names one it does not (the walker).
+ *   · (the chair's ruling S5, 2026-11-15) a row its house makes from an input the page says never reaches that house
+ *     ("No grapes reach the vintner.") prints without "Short of <input>." before it, on either tab, or the tab without
+ *     the line of what such a row is (the S5 births table; each pair red at d7c032485, where the leaf had one cause);
+ *     a house the input reaches, or a calm town with no such gap, takes the mark (its keep pairs).
  */
 import { beforeAll, describe, expect, test, vi } from 'vitest';
 import { cleanup, render } from '@testing-library/react';
@@ -73,6 +77,24 @@ const KEEP = [
   ['r2s-under_siege-city-1', 'services', 'Beef, pork, mutton. Slaughtered and dressed on premises or nearby.'], // lives on nothing a siege stops
 ];
 const MARKS = [SIEGE, OUTBREAK, FAMINE];
+
+const SUPPLIED = 'A row marked short is what its house makes when supplied.';
+/** S5: (seed, tab, the description, the mark that must lead it). The worklist row each answers is named. */
+const SHORT_MARKED = [
+  ['r2s-famine-hamlet-2', 'services', 'Daily milk from cattle, goats, or sheep depending on region.', 'Short of livestock.'], // 06271
+  ['r2s-famine-town-1', 'services', 'Curved and flat clay tiles.', 'Short of clay.'], // B05939
+  ['r2s-famine-town-1', 'services', 'Standard-size fired clay bricks by the cartload.', 'Short of clay.'], // B17588
+  ['r2s-occupied-city-3', 'services', 'Kiln-fired clay bricks for construction.', 'Short of clay.'], // 12416 (the potter's brick)
+];
+/** S5 keep pairs: (seed, tab, a description that prints with no "Short of" before it): the input reaches the house. */
+const SHORT_KEEP = [
+  ['r2r-town-15', 'services', 'Plates, jugs, storage crocks. Functional and cheap.'], // a potter clay reaches
+  ['r2r-town-15', 'services', 'Kiln-fired clay bricks for construction.'],
+  ['r2s-under_siege-village-3', 'services', 'Evaporation, boiling, or mining to produce raw salt.'], // B06897: the page reads its salt as bought in (no gap line)
+  // S7: the vintner's and the glassblower's gaps hold in every census town that holds the house: the record's fault, unmarked
+  ['r2r-city-44', 'services', 'House wine by the jug or bottle.'], // 10827, left to the record's measuring seat
+  ['r2s-famine-town-1', 'services', 'Bottles, flasks, and cups.'], // B04346, the same
+];
 
 /** S6: (seed, kind, the record's key: a chain's `chainId` or an income source's `source`, the mark it must take). */
 const CHAIN_INCOME_MARKED = [
@@ -218,4 +240,27 @@ describe('TAIL-SERVICES S1: a row of ordinary times under a crisis is marked, on
     const words = new Set(DEPENDENCES);
     expect([...Object.values(CHAIN_DEPENDENCE), ...Object.values(INCOME_DEPENDENCE)].flat().filter((d) => !words.has(d)), 'a word outside the dependences').toEqual([]);
   });
+
+  test('S5, the births table: a row its house makes from an input that never reaches it is marked short, and the tab says what such a row is', async () => {
+    const failures = [];
+    for (const [seed, tab, desc, mark] of SHORT_MARKED) {
+      const text = await tabText(seed, tab);
+      if (!text.includes(desc)) { failures.push(`${seed} ${tab}: the row does not print (${desc})`); continue; }
+      if (!new RegExp(`${mark.replace(/[.]/g, '\\.')} ${desc.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`).test(text)) failures.push(`${seed} ${tab}: "${desc}" prints without "${mark}"`);
+      if (!text.includes(SUPPLIED)) failures.push(`${seed} ${tab}: no line of what a row marked short is`);
+    }
+    expect(failures).toEqual([]);
+  }, 600_000);
+
+  test('S5, the keep pairs: a row whose house the input reaches prints unmarked, and a town with no such gap prints no line of it', async () => {
+    const failures = [];
+    for (const [seed, tab, desc] of SHORT_KEEP) {
+      const text = await tabText(seed, tab);
+      if (!text.includes(desc)) { failures.push(`${seed} ${tab}: the row does not print (${desc})`); continue; }
+      if (new RegExp(`Short of [^.]+\\. ${desc.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`).test(text)) failures.push(`${seed} ${tab}: "${desc}" is marked short`);
+    }
+    // r2r-town-2 holds no short house; r2r-city-44's only short house is its vintner (S7): neither prints the line
+    for (const [seed, tab] of [['r2r-town-2', 'services'], ['r2r-town-2', 'institutions'], ['r2r-city-44', 'services'], ['r2r-city-44', 'institutions']]) if ((await tabText(seed, tab)).includes(SUPPLIED)) failures.push(`${seed} ${tab}: the line of a row marked short, with no row short`);
+    expect(failures).toEqual([]);
+  }, 600_000);
 });

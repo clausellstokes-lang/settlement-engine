@@ -31,16 +31,29 @@
  *              trueIncomeDesc`, SIEGE_CLOSED_SOURCES): the mark is the share's one reading of the siege. The economy's
  *              one income twin of a crisis (the alchemy trade under a siege) is a source that lives on none of these.
  *
+ * THE SECOND CAUSE: A HOUSE SHORT OF ITS INPUT (the chair's ruling S5, 2026-11-15; vetoable by the owner). A row that
+ * is what its house MAKES from what reaches it (declared `input` in the table: the vintner's wine, the potter's pots,
+ * the dairy's milk) prints the trade of a house supplied. Where the page itself says no input reaches that house (the
+ * Resources tab's gap line, `validationOnPage.js :: resourceGapLines`, "No grapes reach the vintner.", read of that
+ * house's own gaps and nothing else: the same reading, so the mark and the gap line never disagree), the row is marked
+ * short of it (`shortMarkText`: "Short of grapes."), and the tab says once that a row so marked is what its house makes
+ * when supplied (`ordinaryTimesLine`'s second sentence). No vocabulary atom: the record's own gap is the fact. A custom
+ * row is never marked; a calm town is read as a crisis town is (a gap is no crisis). A house whose gap the record holds in
+ * nearly every town that holds it (`INPUT_GAP_HELD_EVERYWHERE`, the chair's ruling S7) is not marked: that gap is the
+ * record's fault, not the town's state. One leaf, two causes: `rowMarkText`
+ * gives both marks.
+ *
  * Pure: no randomness, no clock, no write.
  */
+import { resourceGapLines } from './validationOnPage.js';
 import { crisisOf } from '../facts/crisisKind.js';
 import { filterDeclared, lineText } from '../facts/drawDeclared.js';
 import { factsOf } from '../facts/factsOf.js';
 import { catalogIdForName } from '../../data/institutionalCatalog.js';
 import { SERVICE_DESC_SIBLINGS } from '../../data/institutionServices.js';
 import {
-  SERVICE_DEPENDENCE, SERVICE_DEPENDENCE_BY_DESC, HOUSE_DEPENDENCE, CHAIN_DEPENDENCE, INCOME_DEPENDENCE,
-  TRAVELLERS, GOODS, GATHERINGS, GRAIN, LIVESTOCK, FISH, GAME, NONE,
+  SERVICE_DEPENDENCE, SERVICE_DEPENDENCE_BY_DESC, HOUSE_DEPENDENCE, CHAIN_DEPENDENCE, INCOME_DEPENDENCE, INPUT_GAP_HELD_EVERYWHERE,
+  TRAVELLERS, GOODS, GATHERINGS, GRAIN, LIVESTOCK, FISH, GAME, INPUT, NONE,
 } from '../../data/crisisDependence.js';
 
 /** The crises this leaf reads, in the order a row's mark takes them. @type {ReadonlyArray<string>} */
@@ -226,16 +239,98 @@ export function markedDescription(mark, desc) {
   return text ? `${mark} ${text}` : mark;
 }
 
+/** The head's sentence where a row is marked short of its input (S5). VETOABLE wording. */
+export const SUPPLIED_LINE = 'A row marked short is what its house makes when supplied.';
+
 /**
- * The tab's one head line under a crisis, when at least one of its rows is marked; else null. VETOABLE wording.
+ * The tab's one head line where at least one of its rows is marked; else null. VETOABLE wording.
  * @param {string[]} crises the crises that marked a row on this tab, in the leaf's order
+ * @param {boolean} [shortMarked] whether a row of the tab is marked short of its input (S5)
  * @returns {string | null}
  */
-export function ordinaryTimesLine(crises) {
+export function ordinaryTimesLine(crises, shortMarked = false) {
   const nouns = STOPPING_CRISES.filter((k) => crises.includes(k)).map((k) => CRISIS_NOUN[k]);
-  if (nouns.length === 0) return null;
+  const supplied = shortMarked ? SUPPLIED_LINE : null;
+  if (nouns.length === 0) return supplied;
   const list = nouns.length === 1 ? nouns[0] : `${nouns.slice(0, -1).join(', ')} and ${nouns[nouns.length - 1]}`;
-  return nouns.length === 1
+  const head = nouns.length === 1
     ? `The descriptions here are of ordinary times. While ${list} lasts, a row it touches is marked.`
     : `The descriptions here are of ordinary times. While ${list} last, a row they touch is marked.`;
+  return supplied ? `${head} ${supplied}` : head;
 }
+
+/** The page's gap line of a house short of its input: "No <input> reach(es) <the house>." */
+const SHORT_LINE = /^No (.+?) reach(?:es)? .+\.$/;
+
+/** The houses the page says no input reaches, by roster name -> the input as the line names it; read once a record. @type {WeakMap<object, ReadonlyMap<string, string>>} */
+const SHORT_HOUSES = new WeakMap();
+
+/**
+ * The houses of this place short of their input, BY THE PAGE'S OWN GAP LINE: each house's gaps read alone through
+ * `resourceGapLines`, so a house is short exactly where the Resources tab says "No … reaches the …" of it.
+ * @param {object | null | undefined} settlement
+ * @returns {ReadonlyMap<string, string>} house name -> the input ("grapes", "clay", "glass sand")
+ */
+export function housesShortOfInput(settlement) {
+  if (!settlement || typeof settlement !== 'object') return new Map();
+  const cached = SHORT_HOUSES.get(settlement);
+  if (cached) return cached;
+  const s = /** @type {{ resourceAnalysis?: { gaps?: unknown } | null }} */ (settlement);
+  const gaps = Array.isArray(s.resourceAnalysis?.gaps) ? /** @type {Array<{ institution?: unknown }>} */ (s.resourceAnalysis.gaps) : [];
+  /** @type {Map<string, string>} */
+  const out = new Map();
+  const houses = [...new Set(gaps.map((g) => (g && typeof g.institution === 'string' ? g.institution : '')).filter(Boolean))];
+  for (const house of houses) {
+    if (Object.prototype.hasOwnProperty.call(INPUT_GAP_HELD_EVERYWHERE, house)) continue; // S7: the record's fault, not the town's state
+    const own = gaps.filter((g) => g?.institution === house);
+    const lines = resourceGapLines(/** @type {Parameters<typeof resourceGapLines>[0]} */ ({ ...settlement, resourceAnalysis: { ...s.resourceAnalysis, gaps: own } }));
+    const said = lines.map((l) => SHORT_LINE.exec(String(l?.impact ?? ''))).find(Boolean);
+    if (said) out.set(house, said[1]);
+  }
+  SHORT_HOUSES.set(settlement, out);
+  return out;
+}
+
+/**
+ * The input this row's house is short of, or null: a row declared `input` whose house the page says no input reaches.
+ * @param {object | null | undefined} settlement
+ * @param {'service' | 'house'} kind
+ * @param {Record<string, unknown> | null | undefined} row a service row ({ name, desc, institution }) or a house
+ * @returns {string | null}
+ */
+export function rowShortOf(settlement, kind, row) {
+  if (!row || typeof row !== 'object' || isCustom(row)) return null;
+  const deps = kind === 'house' ? houseDependenceOf(row) : kind === 'service' ? serviceDependenceOf(row) : NONE;
+  if (!deps.includes(INPUT)) return null;
+  const house = kind === 'house' ? row.name : row.institution;
+  if (typeof house !== 'string' || !house) return null;
+  return housesShortOfInput(settlement).get(house) ?? null;
+}
+
+/**
+ * The mark for a row short of its input. Four words at most (a mark repeats on a house's rows: X-50 counts a sentence
+ * at five): an input the line names in more words is "its materials". VETOABLE wording.
+ * @param {string | null} input
+ * @returns {string | null}
+ */
+export function shortMarkText(input) {
+  if (!input) return null;
+  return input.split(/\s+/).length <= 2 ? `Short of ${input}.` : 'Short of its materials.';
+}
+
+/** The same, as one word after a service's name where no description prints (the Institutions tab's doors). VETOABLE. */
+export const SHORT_WORD = 'short';
+
+/**
+ * Every mark a row takes, in order: its crisis's, then its input's; null where it takes none.
+ * @param {object | null | undefined} settlement
+ * @param {'service' | 'house'} kind
+ * @param {Record<string, unknown> | null | undefined} row
+ * @param {string[]} [crises]
+ * @returns {string | null}
+ */
+export function rowMarkText(settlement, kind, row, crises) {
+  const marks = [stoppedRowMark(settlement, kind, row, crises), shortMarkText(rowShortOf(settlement, kind, row))].filter(Boolean);
+  return marks.length ? marks.join(' ') : null;
+}
+

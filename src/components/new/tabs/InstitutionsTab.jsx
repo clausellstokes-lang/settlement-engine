@@ -67,7 +67,7 @@ import EntityLink from '../../primitives/EntityLink.jsx';
 import InfoPill from '../../primitives/InfoPill.jsx';
 import { SECTION_HELP } from '../../../copy/sectionHelp.js';
 import { FLUSH, FLUSH_PAGE, FLUSH_STACK } from '../../../design/flush.js';
-import { stoppingCrisesOf, rowStoppedBy, crisisMarkText, STOPPED_WORD, markedDescription, ordinaryTimesLine } from '../../../domain/display/crisisStoppedRow.js';
+import { stoppingCrisesOf, rowStoppedBy, rowShortOf, rowMarkText, STOPPED_WORD, SHORT_WORD, markedDescription, ordinaryTimesLine } from '../../../domain/display/crisisStoppedRow.js';
 
 // ── The institution provenance badge (R-5b item #10), moved from OverviewTab ──────────
 // The badge reads the ONE derived provenance record (domain/provenance/rosterProvenance.js),
@@ -251,7 +251,7 @@ function BacksEditor({ label, powers, selected, authored, onDone, onRevert, onCl
  * is the house's list from `houseBacksOf`; `canAuthor` and `index` arm the editor. `fabric` (X-46
  * car 3) marks the place rather than a house: no Backs line and no editor.
  */
-export function InstitutionCard({ inst, category, label, services, sets, backs = [], authored = false, canAuthor = false, index = -1, powers = [], fabric = false, face = null, seatFaced: seatFacedRow = false, settlement = null, crisisMark = null, serviceStoppedBy = null }) {
+export function InstitutionCard({ inst, category, label, services, sets, backs = [], authored = false, canAuthor = false, index = -1, powers = [], fabric = false, face = null, seatFaced: seatFacedRow = false, settlement = null, crisisMark = null, serviceStoppedBy = null, serviceShortBy = null }) {
   const mobile = useIsMobile();
   // COHERENCE-POWERS: a face that is not this house's own (the seat's house, faced by the dual-hat leader)
   const seatFaced = seatFacedRow && !!face && !!cardOfficeOf(face);
@@ -346,7 +346,7 @@ export function InstitutionCard({ inst, category, label, services, sets, backs =
             return (
               <span key={`${entity.id}-${j}`} data-testid="institution-service" style={{ fontSize: FS['12.5'] }}>
                 <EntityLink id={entityIdFor('service', entity)} type="service" fallback={institutionHouseLabel(svc.name)} style={{ color: swatch.inkMag, fontWeight: 600 }} />
-                {serviceStoppedBy?.get(svc) && <span data-testid="institution-service-stopped" style={{ color: MUTED, fontStyle: 'italic' }}> ({STOPPED_WORD[serviceStoppedBy.get(svc)]})</span>}
+                {(serviceStoppedBy?.get(svc) || serviceShortBy?.get(svc)) && <span data-testid="institution-service-stopped" style={{ color: MUTED, fontStyle: 'italic' }}> ({[serviceStoppedBy?.get(svc) ? STOPPED_WORD[serviceStoppedBy.get(svc)] : null, serviceShortBy?.get(svc) ? SHORT_WORD : null].filter(Boolean).join(', ')})</span>}
               </span>
             );
           })}
@@ -375,8 +375,11 @@ export default function InstitutionsTab({ settlement, canAuthor = false }) {
     const crises = stoppingCrisesOf(settlement);
     return new Map(entries.flatMap(({ services }) => services.map((svc) => [svc, rowStoppedBy(settlement, 'service', svc, crises)])));
   }, [entries, settlement]);
-  const markOf = (inst) => crisisMarkText(settlement, stoppedBy.get(inst) || null);
-  const ordinaryLine = ordinaryTimesLine([...stoppedBy.values(), ...serviceStoppedBy.values()].filter(Boolean));
+  // TAIL-SERVICES-2 (ruling S5): the leaf's second cause, a house (or a service door) short of the input the page says never reaches it.
+  const shortBy = useMemo(() => new Map(entries.map(({ inst }) => [inst, rowShortOf(settlement, 'house', inst)])), [entries, settlement]);
+  const serviceShortBy = useMemo(() => new Map(entries.flatMap(({ services }) => services.map((svc) => [svc, rowShortOf(settlement, 'service', svc)]))), [entries, settlement]);
+  const markOf = (inst) => (stoppedBy.get(inst) || shortBy.get(inst) ? rowMarkText(settlement, 'house', inst) : null);
+  const ordinaryLine = ordinaryTimesLine([...stoppedBy.values(), ...serviceStoppedBy.values()].filter(Boolean), [...shortBy.values(), ...serviceShortBy.values()].some(Boolean));
   if (!entries.length) return <Empty message="No institutions are recorded for this settlement." />;
 
   return (
@@ -393,7 +396,7 @@ export default function InstitutionsTab({ settlement, canAuthor = false }) {
       <div data-testid="institutions-stack" style={FLUSH_STACK}>
         {houses.map(({ inst, category, label, services, backs, authored, face, seatFaced }, i) => (
           <InstitutionCard key={`${inst.name}-${i}`} inst={inst} category={category} label={label} services={services} backs={backs} authored={authored} sets={sets}
-            canAuthor={canAuthor} index={roster.indexOf(inst)} powers={powers} face={face} seatFaced={seatFaced} settlement={settlement} crisisMark={markOf(inst)} serviceStoppedBy={serviceStoppedBy} />
+            canAuthor={canAuthor} index={roster.indexOf(inst)} powers={powers} face={face} seatFaced={seatFaced} settlement={settlement} crisisMark={markOf(inst)} serviceStoppedBy={serviceStoppedBy} serviceShortBy={serviceShortBy} />
         ))}
       </div>
       {/* THE FABRIC OF THE PLACE (X-46 car 3): the dwellings, the well, the church walk — the place
@@ -403,7 +406,7 @@ export default function InstitutionsTab({ settlement, canAuthor = false }) {
           <div data-testid="institutions-fabric-heading" style={{ ...literaryTitle(FS.sm), color: MUTED, padding: '10px 12px 4px' }}>The fabric of the place</div>
           <div style={FLUSH_STACK}>
             {fabric.map(({ inst, category, label, services }, i) => (
-              <InstitutionCard key={`fabric-${i}`} inst={inst} category={category} label={label} services={services} sets={sets} fabric crisisMark={markOf(inst)} serviceStoppedBy={serviceStoppedBy} />
+              <InstitutionCard key={`fabric-${i}`} inst={inst} category={category} label={label} services={services} sets={sets} fabric crisisMark={markOf(inst)} serviceStoppedBy={serviceStoppedBy} serviceShortBy={serviceShortBy} />
             ))}
           </div>
         </section>
