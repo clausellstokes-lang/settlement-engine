@@ -36,6 +36,9 @@ describe('textOf', () => {
     // for a merchant and the oath on the scales (market), and the timber planks waiting for carts (no crisis: under_siege).
     // → 115 at THE JOIN (JOIN-2, 2026-11-14, lane/join-2026-11-14): MEASURED by this assertion's own count at the joined tree,
     // re-keyed by identity: R2-CODE-A's six rows and W2-FIX-DATA's ten (six and the history's four) are disjoint rows.
-    expect(rows.filter((r) => typeof r === 'object').length).toBe(115);
+    // 115 → 119 (TAIL-HISTORY batch 1, 2026-11-15, the chair's Y4, Y7; re-keyed by identity): four bare people lines declare —
+    // the arabic broker, the east-asian clerk and the mesoamerican porters (no crisis: under_siege), the south-asian food
+    // handed out (no crisis: hunger). The fair, the flapping fish and the baking were objects already.
+    expect(rows.filter((r) => typeof r === 'object').length).toBe(119);
   });
 });
