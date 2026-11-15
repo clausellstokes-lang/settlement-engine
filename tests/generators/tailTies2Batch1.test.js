@@ -43,10 +43,13 @@ describe('TAIL-TIES-2 batch 1', () => {
 
   it('NOT (powerSiblings): the occupied hamlets\' seat lines claim no lord-free elders and no headman\'s orders; KEEP: a free hamlet\'s elders', () => {
     const elders = govDesc(town('r2s-occupied-hamlet-2'));
-    expect(elders).toBe('The elders of the hamlet decide things together, and none of them rules alone.');
+    // RE-KEYED BY IDENTITY (TAIL-CLOSE-TESTS-C): the powers' DECLARED MOVE a708f0cf (TAIL-POWERS-2 batch 1, P4: under an
+    // occupation the seat does not govern; governingStressVignettes.js :: occupiedSeatLine) gives an occupied town's seat line
+    // its twin, so both occupied hamlets print it; the NOT arms keep what must not print there
+    expect(elders).toBe("Free Elder Council keeps the seat, but under the occupation nothing it decides stands without the occupiers' approval.");
     expect(elders).not.toMatch(/no lord stands over them/); // anchored: the line above asserts the same line's exact value
     const headman = govDesc(town('r2s-occupied-hamlet-1'));
-    expect(headman).toBe('A headman settles disputes and speaks for the community.');
+    expect(headman).toBe("Headman's Authority keeps the seat, but under the occupation nothing it decides stands without the occupiers' approval.");
     expect(headman).not.toMatch(/gives the orders here/); // anchored: the line above asserts the same line's exact value
     expect(govDesc(town('r2r-hamlet-21'))).toBe('The elders of the hamlet decide things together, and none of them rules alone.');
   });

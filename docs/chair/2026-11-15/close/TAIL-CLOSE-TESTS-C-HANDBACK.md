@@ -56,8 +56,10 @@ The MUST NOT loop now asserts its liveness anchor before the negative. For a twi
 - `sovereigntyLightingContract` (the lighting census): RED on its first executed figure, "the estate's file count moved": 3603 against the frozen 3448. That moved with the builders' new test files, not these edits. Re-freezing it is the census's own regeneration (CONTRIBUTING: `docs/LANE_LAW_ADDENDUM_EFF1.md` §3) and is outside this brief. Its parked-count assertion runs after the file count, so whether the two parked tables cleared it is not yet readable. Named to the chair.
 
 ## Not mine, red at the base, named
-- `tailTies2Batch1` "NOT (powerSiblings)", line 46.
 - `tailHistoryBatch6` MUST NOT, case `r2s-plague_onset-village-0`.
 - `corpusEcoTailGuards`: three DS-ECO-12 rows.
 - `displayEconRelianceFoodWords`: KEEP `r2s-famine-town-1`, as of batch 1. Its numbers were re-keyed by the builder since.
 - `tailDisplayCivic3V1` `r2r-metropolis-50`, as of batch 1.
+
+## TC1: `tailTies2Batch1` "NOT (powerSiblings)": a DECLARED MOVE, re-keyed by identity
+The turn is a708f0cf (TAIL-POWERS-2 batch 1, P4, which joined the line at 475506bf): under an occupation the seat does not govern, and its line takes the twin (`governingStressVignettes.js :: occupiedSeatLine`). I found it with `git log -S` on the new line, not by a bisect. Both occupied hamlets print the twin: r2s-occupied-hamlet-2 (Free Elder Council) and r2s-occupied-hamlet-1 (Headman's Authority, whose pin the first red had hidden). The positive arms now read the twin's exact line. The NOT arms (`no lord stands over them`, `gives the orders here`) and the KEEP (r2r-hamlet-21) are unchanged, and the move is named on the row. The file is 5 of 5 green; it was red at its base text. The walkers stay green, and eslint is clean.
