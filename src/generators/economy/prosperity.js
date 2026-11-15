@@ -405,9 +405,14 @@ export const computeBaseProsperity = (tier, tradeRoute, institutions, config, _i
  * (that prose desk stays out of the generators' first-paint graph, so the cut is read here, and
  * `tests/generators/tailDefeconBatch3Lines.test.js` pins the two to agree). */
 export const INCOME_LEADER_FROM = 20;
+/** BAR2-LABELS LB3: the share at which one source is half the income. */
+export const INCOME_HALF_FROM = 50;
 export const deriveEconomicComplexity = (tier, incomeSourceCount, exportCount, hasMarketInst, foodRecord = null, incomeSources = null) => {
   const spread = !incomeSources || incomeSources.every((row) => !(Number(row?.percentage) >= INCOME_LEADER_FROM));
-  const label = complexityByExports(tier, spread ? incomeSourceCount : Math.min(incomeSourceCount, 8), exportCount, hasMarketInst);
+  // BAR2-LABELS LB3 (C4306): where one source is half the income or more, the label reads that concentration too: the
+  // count is held below every "diversified" cut (a city reads Concentrated; a town, at most Specialized).
+  const half = Array.isArray(incomeSources) && incomeSources.some((row) => Number(row?.percentage) >= INCOME_HALF_FROM);
+  const label = complexityByExports(tier, half ? Math.min(incomeSourceCount, 5) : spread ? incomeSourceCount : Math.min(incomeSourceCount, 8), exportCount, hasMarketInst);
   if (!foodRecord || foodRecord.growsMoreThanEats || !/surplus/i.test(label)) return label;
   // The small-place ladder's own no-surplus rung (no exports to sell, nothing over).
   return complexityByExports('hamlet', incomeSourceCount, 0, false);

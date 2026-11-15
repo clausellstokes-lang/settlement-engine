@@ -12,6 +12,9 @@ import { lineText } from '../domain/facts/drawDeclared.js';
 import { CRIMINAL_GOVERNANCE_TYPE, criminalSeatGoverns, gangHousesOf } from '../domain/crimeSignal.js';
 
 /** The census's small places (a district, a military command); TINY: streets too. */
+/** BAR2-LABELS LB5 (the chair's ruling of 2026-11-15, vetoable by the owner): the siege's order clause where no force stands
+ * (`safetyProfile.js` prints it in place of "Those holding the place keep order, and more harshly as the food runs down"). */
+export const SIEGE_NO_FORCE_ORDER = 'No one is set to keep order here, and it frays as the food runs down';
 export const SMALL_PLACES = Object.freeze(['thorp', 'hamlet', 'village']);
 export const TINY_PLACES = Object.freeze(['thorp', 'hamlet']);
 
