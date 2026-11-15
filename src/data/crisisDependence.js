@@ -17,7 +17,7 @@
  *
  * EVERY KEY IS DECLARED: every service name of `institutionServices.js :: INSTITUTION_SERVICES` and of the informal rows
  * `servicesGenerator.js` writes, and every catalogue id of `institutionalCatalog.js` (the walker,
- * tests/domain/display/crisisStoppedRow.test.js, fails on a key missing here or a key here that names nothing).
+ * tests/components/crisisStoppedRows.test.jsx, fails on a key missing here or a key here that names nothing).
  * A new service or house takes its line here, NONE when it lives on none of these.
  *
  * A service NAME can mean different things in different menus ("Burial" at a graveyard and at a ground beyond the
@@ -1209,4 +1209,161 @@ export const HOUSE_DEPENDENCE = Object.freeze({
   "woodcarver": NONE,
   "woodcutter_s_camp": NONE,
   "workhouse": NONE,
+});
+
+/*
+ * THE CHAINS AND THE INCOME SHARES (the chair's ruling S6 of 2026-11-15; vetoable by the owner). The same declaration
+ * for the two other rows the economy prints under a crisis: a supply chain's row ("Strategic Crossroads » Toll bridge +
+ * Coaching inn + Customs house » Transit trade profit") and an income source's share ("Toll Revenue: 22%").
+ *   CHAIN_DEPENDENCE   keyed by the chain's id: `data/supplyChainData.js :: SUPPLY_CHAIN_NEEDS[*].chains[*].id`, which
+ *                      the record carries as `economicState.activeChains[].chainId`.
+ *   INCOME_DEPENDENCE  keyed by the income source's title: the record's `economicState.incomeSources[].source`, every
+ *                      title the economy writes (`economy/economicState.js`, `economy/tradeGoods.js`,
+ *                      `economy/incomeLineSiblings.js :: GOOD_SOLD_TITLES, HOUSE_OF_WORK_LABEL`, the five criminal
+ *                      labels of `worldPulse/treasury.js :: CRIMINAL_INCOME_LABELS`). A custom good's row
+ *                      ("<good> Trade", from the caller's own toggles) is not a title of the economy's: it takes NONE.
+ * A chain or a source lives on the same words as a row above. The work of the land and of the town's own houses (the
+ * forge, the quarry, the forest, rents, tithes, fees, the court) lives on none of them: a siege does not stop it here.
+ * The food chains and food sales live on their food (a famine fails it); the road, the gate, the river and the sea's
+ * trade live on travellers and goods (a siege stops them); a show, a game, a market's crowd lives on gatherings.
+ */
+
+/** Chain id -> what the chain lives on. @type {Readonly<Record<string, ReadonlyArray<string>>>} */
+export const CHAIN_DEPENDENCE = Object.freeze({
+  // food_security
+  "grain": Object.freeze([GRAIN]),
+  "livestock": Object.freeze([LIVESTOCK]),
+  "salt": NONE,
+  "forage": NONE,
+  "fishing": Object.freeze([FISH]),
+  "river_fishing": Object.freeze([FISH]),
+  "hunting": Object.freeze([GAME]),
+  "brewing": Object.freeze([GRAIN]),
+  "animal_husbandry": Object.freeze([LIVESTOCK]),
+  // raw_extraction
+  "timber": NONE,
+  "iron": NONE,
+  "stone": NONE,
+  "fuel": NONE,
+  "clay": NONE,
+  "smelting": NONE,
+  "reed_marsh": NONE,
+  "shipbuilding": NONE,
+  "precious_metals_mining": NONE,
+  "petty_mining": NONE,
+  "harbour_trade": Object.freeze([TRAVELLERS, GOODS]),
+  "coastal_shipbuilding": NONE,
+  "river_milling": Object.freeze([GRAIN]),
+  "floodplain_agriculture": Object.freeze([GRAIN]),
+  "mountain_timber_harvest": NONE,
+  "alpine_wool": Object.freeze([LIVESTOCK]),
+  "oasis_agriculture": NONE,
+  "date_palm_harvest": NONE,
+  "desert_glasswork": NONE,
+  // manufacturing
+  "textiles": NONE,
+  "leather": NONE,
+  "food_processing": Object.freeze([GRAIN]),
+  "weapons_armor": NONE,
+  "luxury_goods": NONE,
+  "glass_print": NONE,
+  "bowyer_fletcher": NONE,
+  "textile_finishing": NONE,
+  "leather_goods": NONE,
+  "ceramics_brick": NONE,
+  "beekeeping_wax": NONE,
+  // trade_entrepot
+  "spices_dyes": Object.freeze([GOODS]),
+  "silk_luxury_textiles": Object.freeze([GOODS]),
+  "transit_finance": NONE,
+  "warehouse_logistics": Object.freeze([GOODS]),
+  "furs_north": Object.freeze([GOODS]),
+  "wine_spirits": Object.freeze([GOODS]),
+  "caravan_trade": Object.freeze([TRAVELLERS, GOODS]),
+  "crossroads_trade": Object.freeze([TRAVELLERS, GOODS]),
+  "camel_caravan": Object.freeze([TRAVELLERS, GOODS]),
+  "mountain_pass_trade": Object.freeze([TRAVELLERS, GOODS]),
+  // defense_security
+  "garrison": NONE,
+  "fortification": NONE,
+  "mercenary": NONE,
+  "adventuring_escort": NONE,
+  // healing_medicine
+  "herbalism": NONE,
+  "hospital": NONE,
+  "divine_healing": NONE,
+  // knowledge_information
+  "cartography": NONE,
+  "scholarship": NONE,
+  "intelligence": NONE,
+  "news_information": NONE,
+  // arcane_magical
+  "alchemy": NONE,
+  "spellcasting": NONE,
+  "magical_goods": NONE,
+  "planar": NONE,
+  // religion_civic
+  "parish": NONE,
+  "law_governance": NONE,
+  "pilgrimage": Object.freeze([TRAVELLERS]),
+  // entertainment_culture
+  "tavern_social": NONE,
+  "performance": Object.freeze([GATHERINGS]),
+  "gambling_arena": Object.freeze([GATHERINGS]),
+  // criminal_economy
+  "smuggling": Object.freeze([GOODS]),
+  "black_market": NONE,
+  "guild_crime": NONE,
+  "slave_trade": NONE,
+});
+
+/** Income source title -> what the share lives on. @type {Readonly<Record<string, ReadonlyArray<string>>>} */
+export const INCOME_DEPENDENCE = Object.freeze({
+  "Agricultural Rents": NONE,
+  "Apothecary & Alchemy": NONE,
+  "Arcane Economy": NONE,
+  "Arcane Industry": NONE,
+  "Banking Fees": NONE,
+  "Black Market Revenue": NONE,
+  "Building Stone Sales": NONE,
+  "Church Tithes": NONE,
+  "Church Tithes & Rents": NONE,
+  "Clay Sales": NONE,
+  "Coal Sales": NONE,
+  "Court Fees & Fines": NONE,
+  "Criminal Syndicate Revenue": NONE,
+  "Enchanted Goods Premium": NONE,
+  "Entrepôt Trade": Object.freeze([GOODS]),
+  "Financial Services": NONE,
+  "Fish & Maritime Produce": Object.freeze([FISH]),
+  "Fish & Preserved Produce": Object.freeze([FISH]),
+  "Gate Tolls": Object.freeze([TRAVELLERS, GOODS]),
+  "Grain Sales": Object.freeze([GRAIN]),
+  "Guild Fees": NONE,
+  "Guild Licensing": NONE,
+  "Herbalist & Apothecary": NONE,
+  "International Commerce": Object.freeze([GOODS]),
+  "Iron & Metalwork": NONE,
+  "Iron Ore Sales": NONE,
+  "Local Trades": NONE,
+  "Magical Trade Revenue": Object.freeze([GOODS]),
+  "Market Taxes": Object.freeze([GATHERINGS]),
+  "Military Extraction": NONE,
+  "Military Levy": NONE,
+  "Pilgrim Trade": Object.freeze([TRAVELLERS]),
+  "Port Duties": Object.freeze([TRAVELLERS, GOODS]),
+  "Precious Metal Sales": NONE,
+  "Property Rents": NONE,
+  "River Tolls": Object.freeze([TRAVELLERS, GOODS]),
+  "Salt Sales": NONE,
+  "Security Contracts": NONE,
+  "Shadow Economy (untaxed)": NONE,
+  "Smuggling Network Revenue": Object.freeze([GOODS]),
+  "Spellcasting Services": NONE,
+  "Stone Quarrying": NONE,
+  "Subsistence Production": Object.freeze([GRAIN]),
+  "Thieves' Guild Revenue": NONE,
+  "Timber Trade": NONE,
+  "Toll Revenue": Object.freeze([TRAVELLERS, GOODS]),
+  "Wool & Textile Trade": NONE,
 });
