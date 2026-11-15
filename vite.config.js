@@ -425,6 +425,19 @@ export const FIRSTPAINT2_LAZY_DOMAIN = [
   // (FP-G11).
   '/src/domain/display/prosperityInCrisis.js',
   '/src/domain/crisis/crisisNoun.js',
+  // TAIL-TIES-10 (2026-11-15; the chair's ruling T29 (1), vetoable by the owner): the crime fact's leaf
+  // facts/criminalStructureKey.js (the key ladder moved verbatim out of display/defenseDisplay.js by T28, so that
+  // facts/factsOf.js no longer imports the display) is generator-reached (generators/safetyProfile.js ->
+  // defenseDisplay.js -> it), so the derivation put it in EAGER engine-core, where its static import of crimeSignal.js
+  // (pinned here) was an engine-core -> coherence-lazy edge (tests/architecture/engineCoreLazyEdge.test.js, plain and
+  // flagged). Its two importers, factsOf.js and defenseDisplay.js, are both pinned here; its other import, corruption.js
+  // (rivalRingsOf), rides engine-core, which defenseDisplay.js already imported it from, so coherence-lazy gains no edge.
+  // Before the cut its code rode this chunk inside defenseDisplay.js. MEASURED (npm run build, VERIFY_DIST=1
+  // vendorPdfLazy, the merge point b805b1de before, this pin after): first paint 1,164,962 -> 1,164,956 B raw, gzip
+  // 371,025 -> 371,019; Brotli 310,890 -> 311,052 is the minifier's renaming, not code (the entry chunk's raw bytes are
+  // identical, one mangled import name apart; engine-core 277,921 -> 277,915 B keeps its 425 exports and none of the
+  // key's strings); the engine chunk 860,445 -> 860,445 B. Pinned here, never left unpinned (FP-G11).
+  '/src/domain/facts/criminalStructureKey.js',
 ];
 for (const frag of ENGINE_SHARED_DOMAIN_EXCISIONS) ENGINE_SHARED_DOMAIN.delete(frag);
 for (const frag of FIRSTPAINT2_LAZY_DOMAIN) ENGINE_SHARED_DOMAIN.delete(frag);
