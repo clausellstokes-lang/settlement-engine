@@ -59,6 +59,16 @@ worklist's count: none was struck "gone at the base".
 - (X9, restated 00:15) the exports' rows of these files with a batch of the same writer, measured with
   `SURFACES=PDF,Journal python3 inventory.py`; check that read's rows against the record first (no seats in its header,
   no `history.currentTensions`).
+- (D14, 2026-11-15 00:39) THE PILGRIM GATE (#15707, X9 20913): (a) GRANTED, the arrival re-draw accepted as a DECLARED
+  MOVE: Pilgrim Trade leaves the income rows of the 26 towns that stand no shrine, cathedral, monastery or abbey; the
+  field diff by family on the 720, in the commit, shows the income row in those 26 and the arrival scene in the 14 AND
+  NOTHING ELSE (anything else: stop again); every new arrival line in the 14 READ against its town's record and listed in
+  the commit body with its town, a false one NAMED for the history seat (the arrival writer's group), not cured here. Its
+  own commit, apart from the batch; X9 20913 with it.
+- (D17, 00:43) `src/generators/resourceGenerator.js` is SHARED: its GAP LOGIC (whether an input reaches a house; the gaps
+  and priority notes it writes) is TAIL-DEFECON-R's (lane/tail-defecon-r-2026-11-14). This seat keeps ONLY the income
+  label's key near line 46 (D10's reader, done in batch 2) and row 15458 if its writer is not the gap logic; if 15458 or
+  the file's other row IS the gap logic, it is named for that seat.
 - And BRIEF-TAIL's laws (silence is true; a mute state takes a twin; no draw moved; siege/famine; agreement; one home;
   no new vocabulary word; no `src/pdf/` or `src/foundry/`; every new line listed for the veto).
 
@@ -245,9 +255,27 @@ Batch 1:
 
 - The page-census grid's register: two falls (r2r-city-0 P7a, r2s-insurgency-metropolis-0 P7a) — stale low, NAMED, not re-taken (re-derived at the close).
 
-## What is left (TAIL-DEFECON-2, after batch 2, 2026-11-15)
+## What is left (TAIL-DEFECON-2, HANDED BACK by time after batch 2, 2026-11-15 ~01:15 UTC)
 
-Batch 2 is DONE but the parked gate (15707 / X9 20913, the chair's ruling awaited). By D9 the rows of
+The seat handed back by time (about 62 minutes; the brief's 250,000 in about eighty) before a batch it could not finish.
+
+FIRST: THE PILGRIM GATE (D14), MEASURED AND HELD: a SECOND STOP sent to the chair at ~01:10. The gate is one condition on
+the Pilgrim Trade push in `economicState.js :: generateEconomicState` (the line `if (ecoInstFlags.religionInfluence > 68
+&& (tradeRoute === 'crossroads' || tradeRoute === 'road')) {` takes `&& hasInst('shrine', 'cathedral', 'monaster',
+'abbey', 'relic')`, the words in a frozen array beside the income lines). Its census, measured at the batch-2 tree: the
+field diff on the 720 shows `economicState.incomeSources` in the 26 (the row leaves; the rest re-shared), `arrivalScene` in
+the 14 AND `coherenceNotes` in 3 siege towns (r2s-under_siege-village-0, -town-1, -city-1): `narrativeGenerator.js:597`
+(not this group's) writes "Settlement is under active siege. Trade income above reflects pre-siege operations. Current
+effective trade is likely zero or severely restricted." wherever, under a siege, an income source's name contains
+"trade"; there Pilgrim Trade was the only one, so the note leaves the page (2 prints each). D14 says anything else is a
+stop: the chair's ruling on the 3 notes is awaited. The 14 arrival towns and what they lose and gain (to be READ, per
+D14, when the gate is committed): r2r-village-3, r2r-village-9, r2r-village-19, r2r-town-16, r2r-town-24,
+r2s-under_siege-city-1, r2s-infiltrated-village-2, r2s-infiltrated-town-1, r2s-plague_onset-village-0,
+r2s-plague_onset-village-1, r2s-monster_pressure-town-0, r2s-slave_revolt-city-2, r2s-wartime-village-1,
+r2s-wartime-village-2 (the guard's GONE pairs for it: r2r-village-3 and r2r-village-9 lose "Pilgrim Trade", Church Tithes
+prints; KEEP r2r-village-13, a cathedral town).
+
+THEN: batch 2's other rows are DONE. By D9 the rows of
 `computeActiveChains.js` (03905, 28528; D6/D7) and of `defenseDisplay.js`, `dossierViewModel.js` are the other two seats'.
 NEXT, in this seat's order: `incomeLineSiblings.js` with the fish rows (B07361 B07357 B07355, this writer's B07356
 B07359; X9 10219 06426 06427; D5: the fish row of UPKEEP-HANDBACK's "WHAT IS LEFT"), the alchemy line (03703, X9 03932),
