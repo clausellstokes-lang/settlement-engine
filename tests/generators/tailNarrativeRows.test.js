@@ -377,9 +377,10 @@ describe('B6 the founder agrees with the Origin row in place and purpose (TAIL-N
     expectNoSeedFailures(collectSeedFailures(CURED, ([seed, refused, founder, row]) => {
       const f = born(seed).history?.founding || {};
       expect(String(f.foundedBy), `${seed}: the founder now`).toMatch(founder);
+      // anchored: the line above asserts this same foundedBy prints the founder now
+      if (refused.source !== founder.source) expect(String(f.foundedBy), `${seed}: the refused founder`).not.toMatch(refused);
       expect(String(f.reason), `${seed}: the Origin row now`).toMatch(row);
       expect(founderAgrees(f.reason ?? null, String(f.foundedBy)), `${seed}: the pair agrees`).toBe(true);
-      if (refused.source !== founder.source) expect(String(f.foundedBy), `${seed}: the refused founder`).not.toMatch(refused);
     }), 'the founder and the Origin row agree');
   });
   it('the pair read tonight (escaped serfs beside a coastal trading port) is refused by the table', () => {
@@ -431,6 +432,7 @@ describe('B7 the notes, the wartime arrival and the accretion read the founding 
     expectNoSeedFailures(collectSeedFailures(CURED, ([id, seed, where, gone, instead]) => {
       const text = READ5[where](born(seed));
       expect(text, `${id} ${seed}: what prints instead`).toMatch(instead);
+      // anchored: the line above asserts this same text prints what stands instead
       expect(text, `${id} ${seed}: the flagged line`).not.toMatch(gone);
     }), 'the batch-6 lines claim no founding and no purse the record lacks');
   });
@@ -445,6 +447,7 @@ describe('B7 the notes, the wartime arrival and the accretion read the founding 
     expectNoSeedFailures(collectSeedFailures(STROKE, ([seed, row]) => {
       const f = born(seed).history?.founding || {};
       expect(String(f.reason), `${seed}: the Origin row now`).toMatch(row);
+      // anchored: the line above asserts this same reason prints the Origin row now
       if (/slow accretion/.test(String(f.foundedBy))) expect(String(f.reason), `${seed}: the accretion beside a row at a stroke`).not.toMatch(/^(was founded|was established)/);
       expect(founderAgrees(f.reason ?? null, String(f.foundedBy)), `${seed}: the pair agrees`).toBe(true);
     }), 'the accretion beside no row founded at a stroke');

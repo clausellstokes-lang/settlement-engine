@@ -21,6 +21,7 @@ import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { computeFactionRelationships, criminalMilitaryRelation } from '../../src/generators/factionDynamics.js';
 import { CAPTURE_LINES } from '../../src/data/people/dmPowerLines.js';
 import { dmPowerViewOf } from '../../src/domain/people/patronage.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const P = (/** @type {string} */ faction, /** @type {number} */ power, gov = false) => ({ faction, power, isGoverning: gov, category: gov ? 'government' : '' });
 const LEG = { isLegitimacyCrisis: false, isContested: false, isEndorsed: false };
@@ -56,7 +57,8 @@ function born(seed) {
 const BIRTHS = /** @type {Array<[string, string, string]>} */ ([
   ['r2r-hamlet-3', "Headman's Authority gives the orders and Military/Guard carries them out", "Headman's Authority gives the orders and The Guard carries them out"],
   ['r2r-hamlet-5', "the commander's agreement", 'is now about as strong as'],
-  ['r2s-occupied-town-2', 'keeps order and collects the taxes', 'holds the seat and collects the taxes'],
+  // RE-KEYED BY IDENTITY 2026-11-15 (TAIL-POWERS-B-4, P31 (5), a declared move): under an occupation no taxes are said
+  ['r2s-occupied-town-2', 'keeps order and collects the taxes', 'Guild Council holds the seat; Religious Authorities tell people'],
   ['r2r-metropolis-39', 'Noble Houses live under the rule of', 'Noble Houses still have their titles'],
 ]);
 /** @type {Record<string, any>} */
@@ -71,7 +73,7 @@ describe('TAIL-POWERS-B batch 1 · the relation lines say what the record holds'
     it(what, () => {
       const text = line();
       expect(text, `prints instead: ${instead}`).toContain(instead);
-      expect(text).not.toContain(refused);
+      expectAbsentWithAnchor(text, refused, instead, what);
     });
   }
   for (const [seed, refused, instead] of BIRTHS) {
@@ -79,7 +81,7 @@ describe('TAIL-POWERS-B batch 1 · the relation lines say what the record holds'
       const s = births[seed];
       const text = [...(s.powerStructure.factionRelationships || []).map((/** @type {any} */ r) => r.narrative), dmPowerViewOf(s)?.hall?.line || ''].join(' ');
       expect(text, `prints instead: ${instead}`).toContain(instead);
-      expect(text).not.toContain(refused);
+      expectAbsentWithAnchor(text, refused, instead, seed);
     });
   }
 });

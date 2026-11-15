@@ -80,8 +80,17 @@ const NO_SAY = 'have no say in the hall';
 /** The beer towns: grain rows with no brewer standing (an occupied town among them), and towns whose brewer stands. */
 const NO_BREWER_TOWNS = ['r2r-town-24', 'r2r-town-2', 'r2s-occupied-town-1', 'rr3-town-wartime-rand-5', 'rr3p-city-calm-rand-0'];
 const BREWER_TOWNS = ['r2r-town-39', 'r2r-city-1', 'r2r-metropolis-3'];
-/** n15's towns: Shankou, and towns whose only competitive tie with the hall is the adversarial criminal rung. */
-const HUNTED_TOWNS = ['bar0-metropolis-calm-rand-1', 'r2r-town-58', 'r2r-city-12', 'r2r-metropolis-10'];
+/**
+ * n15's towns: Shankou, and towns whose only competitive tie with the hall is the adversarial criminal rung.
+ * TAIL-POWERS-B-5, RE-KEYED BY IDENTITY: r2r-town-58 (Ainkarez) left the arm by a DECLARED MOVE of the defence record,
+ * 07ebe8bdc (COHERENCE-UPKEEP: the five upkeep gates read keepOf(prosperity), "86 readiness labels move"; landed by
+ * 33b12cbef, JOIN-1 · 9): its weaker defence moves the legitimacy multipliers, the Merchant Council 36 Dominant -> 29
+ * Strong and the Thieves' Guild 14 -> 17 Minor, and the hall's rung adversarial -> equilibrium (the tie "tense"), so it
+ * hunts no rival and its account names none (holdAlone false, no "no longer takes its orders"). The town-size seat is
+ * taken by r2s-slave_revolt-town-3 (Zhongba: the Church Council's ONE tie, the Thieves' Guild, competitive at the
+ * adversarial rung), the census's town whose only tie with the hall is that rung.
+ */
+const HUNTED_TOWNS = ['bar0-metropolis-calm-rand-1', 'r2s-slave_revolt-town-3', 'r2r-city-12', 'r2r-metropolis-10'];
 const HOLD_ALONE = /make its orders hold alone|can no longer make them hold alone/;
 /** @param {any} s */
 const brewerStands = (s) => (s.institutions || []).some((/** @type {any} */ i) => /^brew/i.test(String(i?.name || '')));

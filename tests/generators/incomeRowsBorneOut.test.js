@@ -12,6 +12,8 @@ import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { GOOD_SOLD_TITLES, RESOURCE_ROW_TRADES, keepRowsThePageBearsOut } from '../../src/generators/economy/incomeLineSiblings.js';
 import { INCOME_SOURCE_FORMS } from '../../src/domain/worldPulse/treasury.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 /** The census's birth: r2r-<size>-<i>, or r2s-<stress>-<size>-<i> (TAIL-DEFECON-C-2, D25: the Salt Sales pin's town is an r2s). @param {string} seed */
@@ -41,20 +43,21 @@ beforeAll(async () => {
 
 describe('(o) re-ruled, D: an income row is borne out by the page', () => {
   it('no born town keeps a resource row the page does not bear out, and the shares sum to 100', () => {
-    for (const [seed, s] of Object.entries(S)) {
+    const failures = collectSeedFailures(Object.entries(S), ([seed, s]) => {
       expect(falseRows(s), seed).toEqual([]);
       expect(s.economicState.incomeSources.reduce((/** @type {number} */ n, /** @type {any} */ e) => n + e.percentage, 0), seed).toBe(100);
-    }
+    });
+    expectNoSeedFailures(failures, 'every born town keeps only rows the page bears out, its shares summing to 100');
   });
   it('r2r-hamlet-14: the Iron & Metalwork row with no house and nothing sold is taken off', () => {
-    expect(S['r2r-hamlet-14'].economicState.incomeSources.map((/** @type {any} */ e) => e.source)).not.toContain('Iron & Metalwork');
+    expectAbsentWithAnchor(S['r2r-hamlet-14'].economicState.incomeSources.map((/** @type {any} */ e) => e.source), 'Iron & Metalwork', 'Agricultural Rents');
   });
   it('r2r-city-10: the Stone Quarrying row with no house and no stone sold is taken off', () => {
-    expect(S['r2r-city-10'].economicState.incomeSources.map((/** @type {any} */ e) => e.source)).not.toContain('Stone Quarrying');
+    expectAbsentWithAnchor(S['r2r-city-10'].economicState.incomeSources.map((/** @type {any} */ e) => e.source), 'Stone Quarrying', 'Market Taxes');
   });
   it('r2r-thorp-16: coal sold under "Iron & Metalwork" with no house of the trade is titled "Coal Sales", its line silent', () => {
     const rows = S['r2r-thorp-16'].economicState.incomeSources;
-    expect(rows.map((/** @type {any} */ e) => e.source)).not.toContain('Iron & Metalwork');
+    expectAbsentWithAnchor(rows.map((/** @type {any} */ e) => e.source), 'Iron & Metalwork', 'Coal Sales');
     const coal = rows.find((/** @type {any} */ e) => e.source === 'Coal Sales');
     expect(coal, 'the coal sale is kept').toBeTruthy();
     expect(coal.desc).toBe('');
@@ -68,7 +71,7 @@ describe('(o) re-ruled, D: an income row is borne out by the page', () => {
   it('r2r-thorp-24: no salt works, no salt sold: neither a Salt Sales row nor a Fish row', () => {
     const sources = S['r2r-thorp-24'].economicState.incomeSources.map((/** @type {any} */ e) => e.source);
     expect(sources, 'anchored: the rents stand').toContain('Agricultural Rents');
-    expect(sources).not.toContain('Salt Sales');
+    expectAbsentWithAnchor(sources, 'Salt Sales', 'Agricultural Rents');
     expect(sources.filter((/** @type {string} */ t) => /^Fish & /.test(t))).toEqual([]);
   });
   it('r2s-succession_void-town-0: sea salt sold under a Fish title with no fisher is titled "Salt Sales"', () => {

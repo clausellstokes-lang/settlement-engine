@@ -169,7 +169,7 @@ export function incomeDependenceOf(income) {
   return Object.prototype.hasOwnProperty.call(INCOME_DEPENDENCE, source) ? INCOME_DEPENDENCE[source] : NONE;
 }
 
-/** Each kind of row's reader of the table. @type {Readonly<Record<string, (row: any) => ReadonlyArray<string>>>} */
+/** Each kind of row's reader of the table. @type {Readonly<Record<string, (row: Record<string, unknown>) => ReadonlyArray<string>>>} */
 const DEPENDENCE_OF = Object.freeze({ service: serviceDependenceOf, house: houseDependenceOf, chain: chainDependenceOf, income: incomeDependenceOf });
 
 /**

@@ -16,6 +16,8 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { rulingBodyOf } from '../../src/domain/facts/rulingBody.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 /** The reader's births (`births.mjs :: cfgFor`), verbatim. @param {string} seed @returns {any} */
@@ -55,31 +57,34 @@ describe('TAIL-TIES batch 1: the council lines need a ruling body (T1/T5); one s
   beforeAll(async () => { await loadGenerationLawPayloads(); });
 
   it('NOT: under one ruler no tie names the council; the tie keeps its archetype with a line of its own pool', () => {
-    for (const [seed, frag, key] of COUNCIL_NOT) {
+    const failures = collectSeedFailures(COUNCIL_NOT, ([seed, frag, key]) => {
       const s = born(seed);
       expect(rulingBodyOf(s), seed).toBe(false);
       expect(ties(s).filter((t) => text(t).includes(frag)).map(text), `${seed}: ${frag}`).toEqual([]);
       expect(ties(s).some((t) => t.archetypeKey === key), `${seed}: a ${key} tie still stands`).toBe(true);
       expect(ties(s).filter((t) => /\bcouncil/i.test(text(t))).map(text), seed).toEqual([]);
-    }
+    });
+    expectNoSeedFailures(failures, 'under one ruler no tie names the council, and the tie keeps its archetype');
   });
 
   it('KEEP: where a body rules, the council line still prints', () => {
-    for (const [seed, frag] of COUNCIL_KEEP) {
+    const failures = collectSeedFailures(COUNCIL_KEEP, ([seed, frag]) => {
       const s = born(seed);
       expect(rulingBodyOf(s), seed).toBe(true);
       expect(ties(s).some((t) => text(t).includes(frag)), `${seed}: ${frag}`).toBe(true);
-    }
+    });
+    expectNoSeedFailures(failures, 'where a body rules, the council line still prints');
   });
 
   it('NOT (T2): "repaid in small amounts ever since" never sits beside "has started repaying"; KEEP: the debt line prints with its sibling', () => {
-    for (const seed of DEBT_SEEDS) {
+    const failures = collectSeedFailures(DEBT_SEEDS, (seed) => {
       const debt = ties(born(seed)).filter((t) => /repaid in small amounts ever since/.test(t.description));
       expect(debt.length, `${seed}: the desc[4] debt tie still prints`).toBeGreaterThan(0);
       for (const t of debt) {
-        expect(t.tension, seed).not.toMatch(/has started repaying the debt in coin/);
+        expectAbsentWithAnchor(t.tension, 'has started repaying the debt in coin', 'has offered to clear what is left of the debt in one payment', seed);
         expect(t.tension, seed).toMatch(/has offered to clear what is left of the debt in one payment/);
       }
-    }
+    });
+    expectNoSeedFailures(failures, 'the desc[4] debt tie prints with its sibling second beat, never the started repaying');
   });
 });

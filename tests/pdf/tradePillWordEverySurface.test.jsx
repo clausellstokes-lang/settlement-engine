@@ -32,6 +32,7 @@ import { resourceDisplayName } from '../../src/domain/display/resourceDisplayNam
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true,
   selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -69,23 +70,29 @@ describe('a trade pill prints one word on the tab, the PDF and the journal (SURF
   beforeAll(async () => { await loadGenerationLawPayloads(); for (const s of SEEDS) TOWNS[s] = birth(s); }, 120000);
   afterEach(cleanup);
 
-  test.each(SEEDS)('%s: the tab\'s pills, the PDF\'s columns and the journal\'s rows print the same words', (seed) => {
-    const town = TOWNS[seed];
-    const trade = tradeListsAsPrinted({ ...town, economicState: town.economicState });
-    const want = { exports: trade.exports.map((x) => tradePillWord(x, 'exports')), imports: trade.imports.map((x) => tradePillWord(x, 'imports')) };
-    expect(want.exports.some((w) => w !== resourceDisplayName(w)), `${seed}: a town whose export the seam re-spells`).toBe(true);
-    // the tab: every pill's first text is its word
-    const { container } = render(<EconomicsTab settlement={town} narrativeNote={null} />);
-    const pillWords = [...container.querySelectorAll('span')].map((sp) => sp.firstChild?.nodeType === 3 ? String(sp.firstChild.nodeValue) : null);
-    for (const w of want.exports) expect(pillWords, `${seed}: the tab's export pill "${w}"`).toContain(w);
-    // the PDF
-    const cols = find(EconomicsTrade({ settlement: town, narrativeMode: false, vm: buildViewModel({ settlement: town }), stateProse: null }), (n) => n.type === ThreeCol)[0]?.props;
-    expect(column(cols.a), `${seed}: the PDF's EXPORTS`).toEqual(want.exports);
-    if (!trade.tradeStopped) expect(column(cols.b), `${seed}: the PDF's IMPORTS`).toEqual(want.imports);
-    // the journal
-    const md = String(buildJournalPages(buildViewModel({ settlement: town }), { settlement: town }).find((p) => p.name === 'Economics & Trade')?.markdown || '');
-    const row = (/** @type {string} */ k) => (md.split('\n').find((l) => l.startsWith(`- **${k}:** `)) || '').slice(`- **${k}:** `.length).replace(/\\(.)/g, '$1').replace(/&amp;/g, '&');
-    expect(row('Exports'), `${seed}: the journal's Exports`).toBe(want.exports.join(', '));
+  test('every seed: the tab\'s pills, the PDF\'s columns and the journal\'s rows print the same words', () => {
+    expectNoSeedFailures(collectSeedFailures(SEEDS, (seed) => {
+      try {
+        const town = TOWNS[seed];
+        const trade = tradeListsAsPrinted({ ...town, economicState: town.economicState });
+        const want = { exports: trade.exports.map((x) => tradePillWord(x, 'exports')), imports: trade.imports.map((x) => tradePillWord(x, 'imports')) };
+        expect(want.exports.some((w) => w !== resourceDisplayName(w)), `${seed}: a town whose export the seam re-spells`).toBe(true);
+        // the tab: every pill's first text is its word
+        const { container } = render(<EconomicsTab settlement={town} narrativeNote={null} />);
+        const pillWords = [...container.querySelectorAll('span')].map((sp) => sp.firstChild?.nodeType === 3 ? String(sp.firstChild.nodeValue) : null);
+        for (const w of want.exports) expect(pillWords, `${seed}: the tab's export pill "${w}"`).toContain(w);
+        // the PDF
+        const cols = find(EconomicsTrade({ settlement: town, narrativeMode: false, vm: buildViewModel({ settlement: town }), stateProse: null }), (n) => n.type === ThreeCol)[0]?.props;
+        expect(column(cols.a), `${seed}: the PDF's EXPORTS`).toEqual(want.exports);
+        if (!trade.tradeStopped) expect(column(cols.b), `${seed}: the PDF's IMPORTS`).toEqual(want.imports);
+        // the journal
+        const md = String(buildJournalPages(buildViewModel({ settlement: town }), { settlement: town }).find((p) => p.name === 'Economics & Trade')?.markdown || '');
+        const row = (/** @type {string} */ k) => (md.split('\n').find((l) => l.startsWith(`- **${k}:** `)) || '').slice(`- **${k}:** `.length).replace(/\\(.)/g, '$1').replace(/&amp;/g, '&');
+        expect(row('Exports'), `${seed}: the journal's Exports`).toBe(want.exports.join(', '));
+      } finally {
+        cleanup();
+      }
+    }), 'each town prints one word per trade pill on the tab, the PDF and the journal');
   });
 
   test('guard: an import keeps the seam (a raw resource key prints its label)', () => {

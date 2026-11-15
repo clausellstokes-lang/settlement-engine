@@ -13,6 +13,7 @@
 import React from 'react';
 import { afterEach, beforeAll, describe, expect, test, vi } from 'vitest';
 import { cleanup, fireEvent, render } from '@testing-library/react';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 vi.mock('../../src/store/index.js', () => {
   const data = { campaigns: [] };
@@ -70,11 +71,19 @@ const KEEP = /** @type {const} */ ([
 ]);
 
 describe('TAIL-DISPLAY-ECON-5 (X32): the economic role reads the food record\'s provision', () => {
-  test.each(NOT)('%s: %s does not print', (seed, gone, instead) => {
-    const text = textOf(town(seed));
-    expectAbsentWithAnchor(text, gone, instead, `${seed}: the economic role reads the food record's provision`);
+  test('every NOT row: the occasional role does not print (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(NOT, ([seed, gone, instead]) => {
+      try {
+        const text = textOf(town(seed));
+        expectAbsentWithAnchor(text, gone, instead, `${seed}: the economic role reads the food record's provision`);
+      } finally { cleanup(); }
+    }), 'X32: no NOT row prints its gone economic role, and each prints its band instead');
   }, 60000);
-  test.each(KEEP)('%s: %s still prints', (seed, kept) => {
-    expect(textOf(town(seed))).toContain(kept);
+  test('every KEEP row: the role still prints (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(KEEP, ([seed, kept]) => {
+      try {
+        expect(textOf(town(seed)), `${seed}: ${kept} still prints`).toContain(kept);
+      } finally { cleanup(); }
+    }), 'X32: every KEEP row still prints its economic role');
   }, 60000);
 });

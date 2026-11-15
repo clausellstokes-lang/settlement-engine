@@ -24,7 +24,7 @@ import { hasLocalAgriculturalSupply } from './localSupplyEvidence.js';
 import { generateFoodSecurity } from '../foodGenerator.js'; import { defenseFactsOf } from '../../domain/defense/defenseFacts.js'; // F1: one line, the file sits at its line cap
 import { goodsHeldByFoodRecord } from './foodBalance.js';
 import { liveMaterialFor } from './localMaterials.js'; import { hasMarketInstitution } from '../../domain/facts/market.js';
-import { GRAIN_OWN_FIELDS_LINE, GRAIN_SURPLUS_LINE, LOCAL_COAL_LINE, LOCAL_COAL_SOLD_LINE, FORGE_HOUSE_WORDS, ALCHEMY_TRADE_LINE, ALCHEMIST_SUPPLEMENTS_LINE, GRAIN_BOUGHT_LINE, WOOL_LOCAL_LINE, WOOL_BOUGHT_LINE, LOCAL_ORE_LINE, IRON_IMPORTED_LINE, FISH_EXPORT_LINE, QUARRY_LINE, MASONS_LINE, TIMBER_LINE, TIMBER_BOUGHT_LINE, trueIncomeDesc, houseOfWorkLine, keepRowsThePageBearsOut, OWN_HARVEST_LINE, PILGRIM_HOUSE_WORDS } from './incomeLineSiblings.js'; import { offersFoodSurplus } from '../../domain/foodSurplus.js';
+import { GRAIN_OWN_FIELDS_LINE, GRAIN_SURPLUS_LINE, LOCAL_COAL_LINE, LOCAL_COAL_SOLD_LINE, FORGE_HOUSE_WORDS, ALCHEMY_TRADE_LINE, ALCHEMIST_SUPPLEMENTS_LINE, GRAIN_BOUGHT_LINE, WOOL_LOCAL_LINE, WOOL_BOUGHT_LINE, LOCAL_ORE_LINE, IRON_IMPORTED_LINE, FISH_EXPORT_LINE, QUARRY_LINE, MASONS_LINE, TIMBER_LINE, TIMBER_BOUGHT_LINE, trueIncomeDesc, houseOfWorkLine, keepRowsThePageBearsOut, shareIncomeRows, OWN_HARVEST_LINE, PILGRIM_HOUSE_WORDS } from './incomeLineSiblings.js'; import { offersFoodSurplus } from '../../domain/foodSurplus.js';
 
 
 export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggles = {}, config = {}) => {
@@ -540,21 +540,9 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
   } { const work = houseOfWorkLine(tier, incomeBuild, instNamesLower, (config.stressTypes || []).includes('under_siege')); if (work) incomeBuild.push(work); } // #93 (UPKEEP-8): a small place's house of work earns too. ── Stage 3: Income normalization ──
   const incomeMultiplier = priorityToMultiplier(ecoInstFlags.economyOutput);
   const incomeWeighted = incomeBuild.map((entry) => ({ ...entry, weight: entry.percentage * incomeMultiplier }));
-  const incomeTotalWeight = incomeWeighted.reduce((sum, entry) => sum + entry.weight, 0) || 1;
-  const incomeNormalized = incomeWeighted.map((entry) => ({
-    ...entry,
-    percentage: Math.round((entry.weight / incomeTotalWeight) * 100),
-    priorityNote: null,
-  }));
-  // (legacy alias block removed)
-  const percentageSum = incomeNormalized.reduce((sum, entry) => sum + entry.percentage, 0);
-  if (incomeNormalized.length > 0 && percentageSum !== 100) {
-    const largestIdx = incomeNormalized.reduce(
-      (bestIdx, entry, idx) => (entry.percentage > incomeNormalized[bestIdx].percentage ? idx : bestIdx),
-      0
-    );
-    incomeNormalized[largestIdx].percentage += 100 - percentageSum;
-  }
+  // ONE SHADOW FIGURE (TAIL-DEFECON-5, ruling R2): the criminal row is held at the capture it was pushed with (`shareIncomeRows`).
+  const incomeNormalized = incomeWeighted.map((entry) => ({ ...entry, priorityNote: null }));
+  shareIncomeRows(incomeNormalized, Math.max(0, Math.min(100, Math.round(incomeWeighted.find((entry) => 'isCriminal' in entry && entry.isCriminal)?.percentage ?? 0))));
   const stressTypes = config.stressTypes || [];
   // The pre-chain trade lists (necessity imports, the stress-shaped exports and imports, the goods toggles):
   // economy/primaryTradeLists.js, extracted verbatim for the cohesion ceiling (LANDING-3).

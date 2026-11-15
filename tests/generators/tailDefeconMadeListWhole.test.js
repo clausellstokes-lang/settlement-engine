@@ -26,6 +26,8 @@ import { madeListTerrainAllowsRaw } from '../../src/generators/computeActiveChai
 import { terrainAllowsResource } from '../../src/generators/resourceGenerator.js';
 import { TERRAIN_DATA } from '../../src/data/geographyData.js';
 import { RESOURCE_CHAINS } from '../../src/data/goods/chains.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true,
   selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -91,17 +93,23 @@ const KEEP_B = [
 ];
 
 describe('D30 (b): a gathered or herded good is listed only where the record\'s exploitation works it', () => {
-  test.each(GONE_B)('%s lists no "%s"; it still makes "%s"', (seed, gone, still) => {
-    const list = madeIn(seed);
-    expect(list).not.toContain(gone);
-    expect(list).toContain(still);
+  test('each GONE_B town lists no unworked raw; it still makes its own (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(GONE_B, ([seed, gone, still]) => {
+      const list = madeIn(seed);
+      expectAbsentWithAnchor(list, gone, still, `${seed}: the unworked raw, beside a good the town makes`);
+      expect(list, `${seed} lists no "${gone}"; it still makes "${still}"`).toContain(still);
+    }), 'D30 (b): no GONE_B town lists the unworked raw, and each still makes its own');
   });
-  test.each(EMPTIED_B)('%s lists no "%s", and nothing else (silent by design)', (seed, gone) => {
-    expect(madeIn(seed)).toEqual([]);
-    expect(gone).toBeTruthy();
+  test('each EMPTIED_B town lists no raw, and nothing else (silent by design) (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(EMPTIED_B, ([seed, gone]) => {
+      expect(madeIn(seed), `${seed} lists no "${gone}", and nothing else (silent by design)`).toEqual([]);
+      expect(gone, `${seed}: the row names its raw`).toBeTruthy();
+    }), 'D30 (b): every EMPTIED_B town lists nothing');
   });
-  test.each(KEEP_B)('%s still lists "%s" (a house works its chain)', (seed, good) => {
-    expect(madeIn(seed)).toContain(good);
+  test('each KEEP_B town still lists its raw (a house works its chain) (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(KEEP_B, ([seed, good]) => {
+      expect(madeIn(seed), `${seed} still lists "${good}" (a house works its chain)`).toContain(good);
+    }), 'D30 (b): every KEEP_B town still lists the raw a house of it works');
   });
 });
 
@@ -117,13 +125,17 @@ test('D30 (b): the made list\'s terrain check is the exploitation record\'s own,
 });
 
 describe('D30 (a): a made good is listed only where a house of the whole table makes or works it', () => {
-  test.each(GONE_A)('%s lists no "%s"; it still makes "%s"', (seed, gone, still) => {
-    const list = madeIn(seed);
-    expect(list).not.toContain(gone);
-    expect(list).toContain(still);
+  test('each GONE_A town lists no unmade good; it still makes its own (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(GONE_A, ([seed, gone, still]) => {
+      const list = madeIn(seed);
+      expectAbsentWithAnchor(list, gone, still, `${seed}: the unmade good, beside a good the town makes`);
+      expect(list, `${seed} lists no "${gone}"; it still makes "${still}"`).toContain(still);
+    }), 'D30 (a): no GONE_A town lists the unmade good, and each still makes its own');
   });
-  test.each(KEEP_A)('%s still lists "%s" (its %s stands)', (seed, good, house) => {
-    expect(madeIn(seed)).toContain(good);
-    expect(birth(seed).institutions.map((/** @type {any} */ i) => String(i.name)).some((n) => n.includes(house))).toBe(true);
+  test('each KEEP_A town still lists the good its house makes (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(KEEP_A, ([seed, good, house]) => {
+      expect(madeIn(seed), `${seed} still lists "${good}"`).toContain(good);
+      expect(birth(seed).institutions.map((/** @type {any} */ i) => String(i.name)).some((n) => n.includes(house)), `${seed}: its ${house} stands`).toBe(true);
+    }), 'D30 (a): every KEEP_A town still lists the good, and its house stands');
   });
 });

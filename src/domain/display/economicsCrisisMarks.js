@@ -18,40 +18,40 @@ import { stoppingCrisesOf, rowStoppedBy, crisisMarkText, markedDescription, ordi
 
 /**
  * The marks of the flow cards (keyed by the card's chain as shown) and the reading of the share a card names.
- * @param {unknown} town the settlement
- * @param {ReadonlyArray<object>} records `economicState.activeChains`, in the record's order
+ * @param {object | null | undefined} town the settlement
+ * @param {ReadonlyArray<Record<string, unknown>>} records `economicState.activeChains`, in the record's order
  * @param {ReadonlyArray<object>} shown the same chains as the cards print them (`chainAsShown`), index for index
- * @returns {{ chain: Map<object, string>, incomeStopped: (income: object) => boolean }}
+ * @returns {{ chain: Map<object, string>, incomeStopped: (income: Record<string, unknown>) => boolean }}
  */
 export function flowCrisisMarks(town, records, shown) {
-  const crises = stoppingCrisesOf(/** @type {any} */ (town));
+  const crises = stoppingCrisesOf(town);
   const chain = new Map();
   shown.forEach((c, i) => {
-    const mark = crisisMarkText(/** @type {any} */ (town), rowStoppedBy(/** @type {any} */ (town), 'chain', /** @type {any} */ (records[i]), crises));
+    const mark = crisisMarkText(town, rowStoppedBy(town, 'chain', records[i], crises));
     if (mark) chain.set(c, mark);
   });
-  return { chain, incomeStopped: (income) => rowStoppedBy(/** @type {any} */ (town), 'income', /** @type {any} */ (income), crises) !== null };
+  return { chain, incomeStopped: (income) => rowStoppedBy(town, 'income', income, crises) !== null };
 }
 
 /**
  * An income share's description as the tab prints it: the leaf's mark, then the description of ordinary times.
- * @param {unknown} town @param {{ source?: unknown, desc?: unknown }} src `economicState.incomeSources[]`
+ * @param {object | null | undefined} town @param {{ source?: unknown, desc?: unknown }} src `economicState.incomeSources[]`
  * @returns {string}
  */
 export function incomeDescShown(town, src) {
-  return markedDescription(crisisMarkText(/** @type {any} */ (town), rowStoppedBy(/** @type {any} */ (town), 'income', /** @type {any} */ (src))), src?.desc);
+  return markedDescription(crisisMarkText(town, rowStoppedBy(town, 'income', src)), src?.desc);
 }
 
 /**
  * The tab's one head line, where the leaf marks an income share or a supply chain; else null.
- * @param {unknown} town
- * @param {{ incomeSources?: ReadonlyArray<object>, activeChains?: ReadonlyArray<object> } | null | undefined} eco
+ * @param {object | null | undefined} town
+ * @param {{ incomeSources?: ReadonlyArray<Record<string, unknown>>, activeChains?: ReadonlyArray<Record<string, unknown>> } | null | undefined} eco
  * @returns {string | null}
  */
 export function econOrdinaryTimesLine(town, eco) {
-  const crises = stoppingCrisesOf(/** @type {any} */ (town));
+  const crises = stoppingCrisesOf(town);
   if (crises.length === 0) return null;
-  const income = (eco?.incomeSources || []).map((src) => rowStoppedBy(/** @type {any} */ (town), 'income', /** @type {any} */ (src), crises));
-  const chains = (eco?.activeChains || []).map((c) => rowStoppedBy(/** @type {any} */ (town), 'chain', /** @type {any} */ (c), crises));
+  const income = (eco?.incomeSources || []).map((src) => rowStoppedBy(town, 'income', src, crises));
+  const chains = (eco?.activeChains || []).map((c) => rowStoppedBy(town, 'chain', c, crises));
   return ordinaryTimesLine(/** @type {string[]} */ ([...income, ...chains].filter(Boolean)));
 }

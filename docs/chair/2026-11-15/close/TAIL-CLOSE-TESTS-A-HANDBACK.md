@@ -94,6 +94,9 @@ so the cure is in the test files alone. Nothing under src/ changed.
    `LIVENESS ANCHOR [r2s-famine-town-1 (economics)]: the anchor sibling is missing`; the anchor is that town's own KEEP line "Contributes to Entrepôt
    Trade - 13% of income" (the tab now prints 14%; its KEEP row was already red at the base).
    In 2-4 the negative was passing over a page that no longer printed what the test says stands in the line's place.
+   **4 is CLOSED (06:04Z, on the chair's word, the joined line at 92fcc4fc5):** the Economics tab's seat had re-keyed that card's KEEP
+   13% -> 14% (declared moves of the economy generators) and my anchor still read 13%; brought to 14% (the file's only 13 of that card).
+   Measured by the test itself at the merged tree: 23 of 23 pass.
 
 ## Pre-existing reds in touched files (unchanged, the builders' breaks)
 corpusCureGuards 12, journalMarksCrisisRows 2, journalPrintsTheTabsLeaf 1, tailDisplayCivic3V1 1, hallDecidesUnderOccupation 1,

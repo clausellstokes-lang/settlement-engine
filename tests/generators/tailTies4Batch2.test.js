@@ -13,6 +13,7 @@
  * @enforced-by npx vitest run tests/generators/tailTies4Batch2.test.js
  */
 import { beforeAll, describe, expect, it } from 'vitest';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
@@ -64,13 +65,17 @@ describe('TAIL-TIES-4 batch 2: a tie gives its military end no office its house 
   beforeAll(async () => { await loadGenerationLawPayloads(); });
 
   it('NOT: the line that gave the card an office no longer prints; INSTEAD: the same tie prints the reworded line', () => {
-    for (const [seed, old, house, now] of NOT) {
+    const failures = collectSeedFailures(NOT, ([seed, old, house, now]) => {
       expect(ties(seed).filter((t) => t.includes(old)), `${seed}: ${old} (${house})`).toEqual([]);
       expect(ties(seed).some((t) => t.includes(now)), `${seed}: instead, ${now}`).toBe(true);
-    }
+    });
+    expectNoSeedFailures(failures, 'NOT: every old office line is gone and its tie prints the reworded line');
   });
 
   it('KEEP: the archetype\'s unchanged lines still print', () => {
-    for (const [seed, line] of KEEP) expect(ties(seed).some((t) => t.includes(line)), `${seed}: ${line}`).toBe(true);
+    const failures = collectSeedFailures(KEEP, ([seed, line]) => {
+      expect(ties(seed).some((t) => t.includes(line)), `${seed}: ${line}`).toBe(true);
+    });
+    expectNoSeedFailures(failures, "KEEP: every archetype's unchanged line still prints");
   });
 });

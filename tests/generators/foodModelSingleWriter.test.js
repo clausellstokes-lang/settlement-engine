@@ -24,6 +24,7 @@ import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 // a corpus edit moves the row here instead of silently selecting a different settlement.
 import { goldenCorpus, keyOf } from '../helpers/goldenMasterCorpus.js';
 import { recordInvariants } from '../../src/domain/edit/recordInvariants.js';
+import { foodRowShown } from '../../src/domain/display/foodRowShown.js';
 
 const gen = (config, seed) => generateSettlementPipeline(config, null, { seed, customContent: {} });
 
@@ -53,9 +54,12 @@ describe('generators-domain-4 — single-writer food model', () => {
       const fb = s.economicViability?.metrics?.foodBalance;
       if (!fs || !fb) continue;
       compared++;
-      // Sign: deficitPct > 0 on foodSecurity ⇔ deficit > 0 on foodBalance.
-      expect((fb.deficit || 0) > 0, `${settType}|${terrainOverride}|${tradeRouteAccess} deficit-sign disagreement`)
-        .toBe((fs.deficitPct || 0) > 0);
+      // Sign AND magnitude: RE-KEYED BY IDENTITY (TAIL-DEFECON-5, ruling R3, one food ledger). The view READS the writer's
+      // split, so its shortfall is the Economics tab's own remainder (`foodRowShown.js`), pound for pound. It was keyed to
+      // the writer's per cent, which the writer itself lets read 0 beside a few pounds of a large need (STOP-1 below).
+      const row = foodRowShown(s, true);
+      expect(fb.deficit || 0, `${settType}|${terrainOverride}|${tradeRouteAccess} deficit disagreement with the tab's row`)
+        .toBe(row?.fb.deficit ?? 0);
       // Magnitude: foodBalance is a view — production & need equal foodSecurity's.
       expect(fb.dailyProduction).toBe(fs.dailyProduction);
       expect(fb.dailyNeed).toBe(fs.dailyNeed);
