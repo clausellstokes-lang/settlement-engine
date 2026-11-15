@@ -1138,3 +1138,106 @@ key-order-only moves counted apart); `probes/k21.mjs` (the insurgency and monste
 `factsOf`/`atomHolds` on each record). Variant trees for the plant (the declaration without the late pass) and for this
 seat's late pass alone. The census as before (`census3.sh <tree> <out> 4 --count-only`), the before run from `wt` at the
 base, the after run from a tree detached at the K22 commit.
+
+# TAIL-CRISIS-6 · the sixth seat's batch (2026-11-15)
+
+Seat TAIL-CRISIS-6, successor of TAIL-CRISIS-5, on the same branch from its tip **aa78d1ec9** (read back from origin; nothing
+later there). Scratch worktrees outside the main checkout: `wt` (pristine at the base: the before census), `dev` (the work,
+detached, pushed with an explicit refspec), `base` (the base again, for red-first runs), `tag` (a probe tree, never pushed:
+`rulingStructure.js` tags every power `applyStressEventFactions` pushes or amends), `after` (detached at the tip: the after
+census).
+
+## The chair's rulings since (2026-11-15 04:08 UTC; each vetoable by the owner)
+
+- **(K24) A POWER THE CRISIS ITSELF RAISED HAS THE STAKE ITS NAME SAYS.** The Grain Holders in a famine (10 towns), the
+  Quarantine Council in a plague (9), The Inquiry in a betrayal (8): each takes its stake in K22's form (holds the grain; is
+  charged with the sickness; leads the inquiry): a declared move of the stored stake only, its own commit, measured by the
+  field diff (no family but the stake).
+- **(K25) "<POWER> HAS NO STAKE YET"** (`crisisPage.js :: CRISIS_PAGE_COPY`, LENT): measure over the 720, of every power the
+  line is printed for, (a) a party the crisis raised or names, (b) a power K12's reading gives a stake under another row,
+  (c) truly untouched. THE CURE: (a) takes its stake at the source (K24's law carried to every crisis that raises a party:
+  list them all); (b) is the page's fault: one power, one stake row; (c) THE ROW IS NOT PRINTED: silence is true (write the
+  count: it is accepted in advance).
+- **(K26)** A power named in a stake row takes its form from the one leaf where the row is a sentence ("Military/Guard has no
+  stake yet", "…is already at odds", "…gains", "…split": 35, 26, 21 and 24 towns): `powerSentenceName.js` ("The Guard"); a
+  bare chip keeps the roster's label.
+- **(K27)** The iron hook under a grain famine (`outlookHookSiblings.js` PEACE_IRON_HOOKS, this seat's by K17): "What iron
+  there is goes out in rations, and work waits on mended tools." (30 towns) with no iron shortage on the record: the hook needs
+  an iron shortage (measure it).
+- **(U1)** carried. THEN hand back: everything else is under five towns or parked.
+
+## K25 measured first (probe `k25b.mjs`: the base's own `composeCrisisPage` over the base corpus, each row classed by the tag tree)
+
+**470 printings of "has/have no stake yet" in 193 towns** (the tabs' inventory: 468 in 47 folds): **(a) 165** — 124 a party
+the crisis raised, 41 a standing power the crisis wrote its own sentence into (its description, appended under that kind);
+**(b) 0** (no power has two rows in one section, and none printed untouched in one crisis holds a stake in the town's other);
+**(c) 305** (272, and 33 whose power the crisis moved silently by a multiplier, with no sentence: untouched by any text).
+Standing of the (c) powers: Minor 154, Suppressed 116, Significant 32, Strong 3.
+
+**Every crisis that raises a party** (by the tag tree over the 720; stored untouched / on the roster): politically_fractured
+the claimant 23/44 and the neutrals 4/5 · indebted the creditor's agent 23/23 (+1 under the town's other crisis) and the
+crown creditors 2/2 · infiltrated the infiltrator 12/13 · succession_void four claimants 12/14, 6/6, 2/2, 2/2 · plague_onset
+the Quarantine Council 11/11 · famine the Grain Holders 10/10 · insurgency its two movements 8/11, 1/14 · recently_betrayed The
+Inquiry 8/10 · mass_migration the newcomers 6/6 · slave_revolt the abolitionists 3/3 and the leadership (re-drawn as "The
+Independent Bloc") 1/11. **Never stored untouched (another rule already gives a stake):** the Occupation Authority and the
+Resistance (occupied), the War Council (wartime, under_siege), the Peace Movement, the conversion's four bodies, the Monster
+Hunters, the Departure Committee. **The crisis's sentences on standing powers, stored untouched:** the migration's guild
+sentence 39/42, the succession's noble sentence 9/12, wartime's three (pastoral 8/10, contracts 8/10, disruption 6/11), the
+slave revolt's two (labour 7/12, the church 1/13), the debt's crown-debt 3/3, the occupation's accommodations 1/1.
+
+## Batch 8: the commits (K24, K25 a, K25 c, the walker)
+
+- **c6852f7e2 (K24)** `crisisCast.js :: RAISED_BY_CRISIS` (kind, the description the crisis gave the power, reason), read in
+  `deriveStakes`' last branch only: the stake keeps the waverer's `split` (K22's form: no cast role moves). Read by the
+  DESCRIPTION, not the name: the label close re-draws names (the Quarantine Council prints as "The Establishment" and "The
+  Administrative Circle" in two metropolises). **Field diff: stress/stressors, 27 records, only `cast.stakes[].reason`.**
+- **6716dfceb (K25 a)** the table to 26 rows: `opens` (the description opens with the crisis's literal) and `adds` (the crisis
+  appended its sentence). An `adds` row skips a criminal power and the governing power (K12: it answers). **Field diff against
+  K24: 108 records, only `cast.stakes[].reason` (173 stakes).** K22's name row stays; the re-drawn leadership takes its reason
+  by description.
+- **7a2b36543 (K25 c)** `crisisPage.js :: composeCrisisPage`: a stake shown untouched prints NO ROW (the tab, the PDF and the
+  journal read this one composition). Display only. **The silence: 312 printings in 145 towns at 6716dfceb** (305 (c), and 7
+  left of (a): 6 criminal powers the migration's guild sentence was written onto by name, 1 creditor's agent under the town's
+  other crisis): ACCEPTED IN ADVANCE (K25).
+- **b54be3eca (the walker)** the presumed-things walker rose by 11 at 7a2b36543 (five reasons named a war, a market, an
+  occupation; six match keys quoted the descriptions' clergy, succession, war, market, occupation). New lines are never banked:
+  the reasons say it in other words and each key is the shortest stretch that is the crisis's alone. `--check` is now
+  identical to the base's (149 lines). **Against aa78d1ec9 the batch's record move is 135 records, only `cast.stakes[].reason`.**
+- **Test** `tests/domain/tailCrisisBatch8.test.js` (58): 45 FALSE pairs (the stored stake), the table pinned to
+  `stressFactions.js` segment by segment, 8 SILENT pairs (K25 c; the record keeps its split); KEEP 4 (a power the crisis did not
+  raise; K22's row; a criminal power under the guild sentence; a section's other rows). **54 red at aa78d1ec9, 4 green; 58 of
+  58 at the tree.** Re-keyed by identity: `crisisPage.test.js` (two assertions: the untouched row prints none; every other
+  stake its row), `tailCrisisBatch4.test.js` r2r-hamlet-32 (the creditor's agent's stake) and r2r-village-57 (silent by design;
+  the section's Merchant Guilds row prints).
+
+## THE VETO LIST (batch 8): every new line, as the page prints it (`<P> split · <reason>`; towns by the record, `stress` entries)
+
+| new line | towns | smallest | largest | a crisis town |
+|---|---|---|---|---|
+| <P> split · it holds what is left of the food stores (`holdsFood`; e.g. Grain Holders, famine) | 10 | r2r-village-58 | r2s-famine-metropolis-0 | r2s-famine-village-2 |
+| <P> split · it holds the emergency powers against the sickness (`chargedWithSickness`; e.g. Quarantine Council, plague_onset) | 9 | r2r-town-37 | r2s-plague_onset-metropolis-3 | r2s-plague_onset-town-1 |
+| <P> split · it leads the inquiry into the betrayal (`leadsInquiry`; e.g. The Inquiry, recently_betrayed) | 8 | r2s-recently_betrayed-village-0 | r2s-recently_betrayed-metropolis-1 | r2s-recently_betrayed-village-0 |
+| <P> split · it claims the right to govern by other means (`claimsToGovern`; e.g. The Independent Bloc, politically_fractured) | 18 | r2r-village-25 | r2s-politically_fractured-metropolis-2 | r2s-politically_fractured-town-0 |
+| <P> split · both sides are courting it, for a price (`courted`; e.g. Third Bloc (Neutrals), politically_fractured) | 4 | r2s-politically_fractured-town-3 | r2s-politically_fractured-metropolis-2 | r2s-politically_fractured-town-3 |
+| <P> split · it speaks for the creditor the town owes (`creditorAgent`; e.g. Creditor's Representative, indebted) | 19 | r2r-hamlet-32 | r2r-metropolis-58 | r2s-indebted-village-3 |
+| <P> split · its houses hold the crown's debt (`holdsDebt`; e.g. Crown Creditors (Noble Coalition), indebted) | 2 | r2r-metropolis-33 | r2s-indebted-metropolis-3 | r2s-indebted-metropolis-3 |
+| <P> split · it is the outside interest with its own people placed here (`infiltrator`; e.g. The Independent Bloc, infiltrated) | 9 | r2s-infiltrated-village-0 | r2s-infiltrated-metropolis-0 | r2s-infiltrated-village-0 |
+| <P> split · it presses its own claim to the succession (`claimsSuccession`; e.g. The Highborn Circle, succession_void) | 13 | r2s-succession_void-village-0 | r2r-metropolis-8 | r2s-succession_void-village-0 |
+| <P> split · it leads the challenge to the government (`leadsChallenge`; e.g. Reform Movement, insurgency) | 9 | r2r-town-11 | r2r-metropolis-51 | r2s-insurgency-town-0 |
+| <P> split · it speaks for the newcomers (`speaksForNewcomers`; e.g. Newcomers' Settlement, mass_migration) | 6 | r2s-mass_migration-hamlet-2 | r2s-mass_migration-metropolis-1 | r2s-mass_migration-hamlet-2 |
+| <P> split · it has been aiding the revolt in secret (`aidsRevolt`; e.g. Abolitionist Network, slave_revolt) | 3 | r2s-slave_revolt-metropolis-0 | r2s-slave_revolt-metropolis-2 | r2s-slave_revolt-metropolis-0 |
+| <P> split · newcomers working outside the guilds threaten its hold on the trades (`guildsThreatened`; e.g. Merchant Guilds, mass_migration) | 14 | r2r-town-36 | r2s-mass_migration-metropolis-3 | r2s-mass_migration-town-2 |
+| <P> split · every claimant needs its backing (`claimantsNeedIt`; e.g. Landed Gentry, succession_void) | 8 | r2s-succession_void-town-3 | r2s-succession_void-metropolis-3 | r2s-succession_void-town-3 |
+| <P> split · the call-up and the grieving have made it indispensable (`warNeedsIt`; e.g. Religious Authorities, wartime) | 5 | r2s-wartime-city-3 | r2s-wartime-metropolis-0 | r2s-wartime-city-3 |
+| <P> split · contracts have made some of it rich while others have lost their trade routes (`warDivides`; e.g. Merchant Guilds, wartime) | 4 | r2s-wartime-city-1 | r2s-wartime-metropolis-0 | r2s-wartime-city-1 |
+| <P> split · the revolt has cut into its labour and its trade (`revoltCutsLabour`; e.g. Merchant Guilds, slave_revolt) | 4 | r2s-slave_revolt-city-3 | r2s-slave_revolt-metropolis-2 | r2s-slave_revolt-city-3 |
+| <P> split · trade disruption and requisitions are costing it (`warCostsIt`; e.g. Merchant Guilds, wartime) | 4 | r2s-wartime-village-0 | r2s-wartime-metropolis-2 | r2s-wartime-village-0 |
+| <P> split · some of its houses hold the crown's debt (`someHoldDebt`; e.g. Noble Houses, indebted) | 2 | r2r-metropolis-33 | r2s-indebted-metropolis-3 | r2s-indebted-metropolis-3 |
+| <P> split · some of its families have made private terms with the new authority (`termsWithOccupier`; e.g. Noble Houses, occupied) | 1 | r2s-occupied-metropolis-1 | r2s-occupied-metropolis-1 | r2s-occupied-metropolis-1 |
+| <P> split · both sides press it to call the revolt just or sacrilegious (`pressedToJudge`; e.g. Religious Authorities, slave_revolt) | 1 | r2s-slave_revolt-metropolis-2 | r2s-slave_revolt-metropolis-2 | r2s-slave_revolt-metropolis-2 |
+| (K25 c) the row "<P> has/have no stake yet · it/they could side with either camp": NOT PRINTED | 312 → 0 printings | | | |
+
+Read for the hazard: "it holds what is left of the food stores" is the Grain Holders' own description ("whoever controls the
+remaining food reserves"), the claim ROUND THREE item 4 refused for `gainsHolds` where the granary's face sits in another power:
+the chair ruled it (K24, "holds the grain"); it stays on this list for the owner. "the town" in `creditorAgent` is spoken in
+the place's noun on the page ("the hamlet owes").
