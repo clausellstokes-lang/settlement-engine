@@ -63,6 +63,7 @@ THE CHAIR'S RULINGS TO JOIN-9 (each vetoable by the owner):
 - **06:03 UTC:** point 9's composed red: the tests-a seat re-keys that anchor on its branch; it lands again ON THE CHAIR'S WORD. The new rule stands (a test file both sides moved stops at the merge, before the commit). FOUR CLOSE BRANCHES LAND ONLY ON THE CHAIR'S WORD, in this order, each after its seat has merged the line and settled the shared test files on its own branch: tests-a (its fix), tests-b, tail-close-display, tests-c: OUT OF THE RUNNING SWEEP. Then: houses, the line, then tail-close-src (5d99786c5 or later), corpus-def, defecon, powers-b, crisis (each at the tip read), then the sweep's end line.
 - **06:09 UTC:** "LAND lane/tail-close-tests-a-2026-11-15 at a269fc3f" AS THE NEXT POINT after the one in hand (its fix: the anchor reads 14), then ONE LINE with the tip; then the sweep as ordered.
 - **06:25 UTC:** "LAND lane/tail-close-tests-b-2026-11-15 at 68649d65" AS THE NEXT POINT after the one in hand (its seat merged the line at 80a2d0c5d and settled ten shared test files on its own branch): ONE LINE with the tip; then go on.
+- **06:37 UTC:** NO MORE LANDS: HAND BACK NOW, the hand-back's last section current (the list for the close; every pin where the joined side was kept, by file). A fresh seat settles the crisis row on its branch. JOIN-10 takes the line from f714fb6a5.
 
 ## 2. The landings
 
@@ -287,8 +288,13 @@ A worktree at origin's tip (`git worktree add /home/user/j9wt -b join9 <tip>`, `
 
 ## 9. WHAT IS LEFT
 
-At the count line (208,382 at 06:28 UTC, read after point 16; the mark is 250,000). Landed code tip **3880756f1** (point 16); origin holds this hand-back's commit on it.
+HANDED BACK on the chair's 06:37 word (the count 208,382 at 06:28 UTC, read after point 16; the mark is 250,000). JOIN-10 takes the line from f714fb6a5. Landed code tip **3880756f1** (point 16); origin holds this hand-back's commit on it.
 1. DONE: points 1-16 (the table), each pushed with the hook's three gates; (g) after the ties point (§5: the wiring census re-taken by its own door in f468495d9, the corpus door's `--check` exit 0); the chair's words of 05:32, 05:53, 06:09 and 06:25 each landed as the next point and answered in one line.
 2. STOPPED: point 17, crisis at 325de5153 (§6): waits for its seat and the chair's word.
 3. NOT DONE, for the next merge seat: the chair's words still to come: tail-close-display, tests-c (and any later tests-a/-b tip) ON THE CHAIR'S WORD ONLY (06:03 ruling), each after its seat has settled the shared test files on its own branch; crisis again on its word; "FINAL SWEEP" by §1's laws. The instruments are in §8 (worktree `/home/user/j9wt`, branch `join9`; `/home/user/j9out`: `auto.sh`, which since point 9 STOPS before the commit on any test file both sides moved, so it can be read and measured in the probe worktree `/home/user/j9probe`, and resumes with `RESUME=1 READ=1 ./auto.sh <n> <branch> <short>` once read; `verify.sh` intersects over every merge base, for branches that hold a merge of the line).
 4. For the close (not this seat's): every row of §4 by its door, once, on the final tree; the whole check once, by the close's seat.
+5. EVERY PIN WHERE THE JOINED SIDE WAS KEPT (law d), by file, all at point 3 (corpus-eco a8ea5ef8e against corpus-def on the line), each red composed on the final tree until re-keyed by identity at the close (§3, §4 [J9]):
+   - `tests/domain/composeStateProse.test.js`: SHIPPED_POOLS variants: kept 2953 (corpus-eco 2954); composed 2956.
+   - `tests/lint/proseEntryContradiction.walker.test.js` (five hunks): leaves+causal kept 3421 (lane 3422; composed 3424); joined.length kept 2716 (lane 2717; composed 2719); leafLines.size kept 2716 (lane 2717; composed 2719); the row at line 6162 (both 6162: comments only); the row at 2418 kept (lane 2419; "did not load", red at the line before as well).
+   - `tests/lint/proseMoveGrammar.walker.test.js`: uniformSegments kept 570 (lane 569; composed 571), the ratio kept 0.666 (lane 0.665); CONTROL 4's second half (515, a clean hunk) composed 516.
+   No other pin was kept by side: points 10 and 15 were test-file conflicts composed with both sides standing (§3); point 16's and 13's both-moved test files merged clean and were measured.
