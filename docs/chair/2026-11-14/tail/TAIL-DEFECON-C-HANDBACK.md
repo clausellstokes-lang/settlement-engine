@@ -147,9 +147,89 @@ processed here". Making them one is the next cure's: gate those goods by exploit
 - CARRIED reds (red at 345f13157, the same after): generatorGoldenMaster, worldFactRederive A7, coherenceAgreeCures x2
   (the gate tally), urbanBandInstitutions G3 (flaky; it passed in one of three runs)/G5, recordRegisterTotality A7 x2.
 
+## TAIL-DEFECON-C-2 (the successor seat, 2026-11-15, from fb341090c): D18 and D19 DONE
+
+Same branch, same files. Worked to D18 and D19 (the chair's, 2026-11-15; each vetoable by the owner) and to the chair's
+02:03 notice (push each batch with WHAT IS LEFT current; hand back at the mark; one line at the hand-back).
+
+| commit | what | record move (births-only field diff on the 720, over the commit before) |
+|---|---|---|
+| **a10a457e2** C1-E (D18) | a good is exported only where a house that digs, makes or works it stands | 166 primaryExports, 8 arrivalScene, 7 economicComplexity; NO income, prosperity, import, chain, made-list or trace field (the measuring seat's figures exactly) |
+| **e6700483b** D19 | an air dock's docks: "Airship freight services (cargo, mooring)" | 11 primaryExports, 11 institutionalServices (output and exportLabel only) |
+
+### C1-E (a10a457e2)
+
+- ONE TABLE, `GOOD_WORKING_HOUSES` (good to the houses that work it), read id-first through `institutionMatchesGate` on the
+  town's own houses (`isFabricInstitution` rows left out), by all three export steps of `deriveExportsFromChains` AND
+  by the made list: C1-A's `MADE_HERE_OUTPUT_HOUSES` (boots, precious metals) moved into it unchanged. The made list
+  asks the table only for the outputs the export gates by a house, as before, so it does not move. Coal and peat are
+  not named. The defended pass's goods are not asked (the pass is its toll's house). Step 3 asks the table only for a
+  toll (a transit good passes untouched; a toll on it is earned).
+- Against the patch's regexes, the keywords match the same catalog houses, with two exceptions: "sage" no longer
+  matches "Message network (high magic)", and flour's "mill" is the export's own mill gate, which also admits a
+  sawmill (no town on the 720 exports flour by a sawmill alone).
+- classes.mjs / c1members.mjs: **export side 316 -> 193 (208 -> 57 w/o coal/peat)**; c1 442 -> 372; made side 343
+  unmoved; b2 12 -> 11. Left (the measuring seat's reading: worked): jewelry 34, beams/planks 12, the pass's toll 11,
+  books 2.
+- Lost: Toll revenue 57, Barrels 28, Pilgrim hospitality 26, Sea salt 21, Bows 9 / Arrows 7, arms 7+7, Flour 7,
+  Toll income (transit) 7, Glassware 6, Glass blanks 5, Dyed cloth 5, ships 4, Camel leather 1, Fine textiles 1.
+- THE INHERITORS, every one read: 48 goods in 41 towns (the commit body's "45 in 39" is a miscount; this is the
+  figure). They are true where read (the house stands), with two exceptions, NAMED:
+  - **"Salt for preservation" in 21 towns** takes Sea salt's place: the flats' second trade good, the same salt, and
+    no salt works stands. Gating it too (tried, not committed) moves `incomeSources` in 4 towns (Salt Sales) and
+    re-draws `history.founding`'s reason in 7 ("grew around salt workings …"), which is a stop under D18. TOLD TO THE
+    CHAIR (01:5x), not answered at this writing. If granted: add `'Salt for preservation': ['salt']` to the table
+    (a declared move into income and founding).
+  - **"Beer (barrel)" in r2r-town-53**: the brewing chain is processed there by a Cooper. Its sibling "Ale (barrel)"
+    was already exported at the base. This is the chain-processor class, not the table's.
+- Guard: `tests/generators/tailDefeconExportSide.test.js` (18 GONE rows red at fb341090c, each naming a good still
+  exported; 11 KEEP rows and a coal row green before and after; a plant that removes the pass's exemption reds its
+  KEEP row). Re-keyed BY IDENTITY: `economicsGoodsPillsBorneOut.test.jsx` "books by Glassmakers alone …": its anchor
+  now anchors the glass and the spices, and that the record no longer exports the books.
+
+### D19 (e6700483b)
+
+- The 11 towns (all metropolises): r2r-metropolis-9, -12, -41, -43, -44, -51, -56; r2s-occupied-metropolis-0,
+  r2s-politically_fractured-metropolis-1, r2s-succession_void-metropolis-2, r2s-monster_pressure-metropolis-2. Each
+  holds "Airship docking (high magic)" and has no water (`factsOf(...).water.kind`). The airship override in
+  `steps/cascadePass.js` seats "Docks/port facilities" there, which is how the air dock reaches the row's 'docks/port'
+  pattern.
+- The twin applies where an airship dock stands and no house works water but the docks and the harbour master (no
+  ferry, barge, shipyard, boatyard, fisher's landing or fishing community). On the 720 that is EXACTLY the
+  water-none set. The 8 airship metropolises on a river or a sea keep the water's word.
+- "Port Revenue", the income row, is NOT renamed: an air dock is a port, and a rename would move the income family.
+- WHAT ELSE READS THE SERVICE'S NAME: the export list (the Exports pills, the PDF's and the journal's trade lists);
+  EconomicsTab's Economic Flows card (output and export label); generationCoherence.js's refusal check through
+  `serviceGoodOfExportLabel` (the twin now maps to its output); recordRegister (keys by `label`, unchanged);
+  institutionRename (by `institutions[]`, unchanged). No other source spells the literal.
+- Guard: the D19 block of the same test file (3 AIR rows red at a10a457e2; 3 WATER rows green before and after).
+
+### The veto list (successor's)
+
+- "Airship freight services (cargo, mooring)" (an export pill; the service card's output "Airship freight services"):
+  11 metropolises, e.g. r2r-metropolis-9, r2s-occupied-metropolis-0 (an occupation), r2s-monster_pressure-metropolis-2.
+  D19 reaches only metropolises; no siege or famine is among the 11. C1-E adds no line (it only removes goods).
+
+### Gates (both commits)
+
+Focused files (45 files, 712 tests, before and after C1-E; 14 files, 205 tests for D19): the one new red re-keyed.
+Carried at the base: worldFactRederive A7, coherenceAgreeCures x2, urbanBandInstitutions G3/G5. domain-strict
+1113/1113; type ratchet 167/167; eslint clean; presumed-things `--check` as at the base (fresh 148, first-register
+stale 2, exit 1 at the base too); grid 2 falls as at the base. The golden master moves (the owner's door): not re-taken.
+
+### THE PAGE (one census before at fb341090c, one after at e6700483b)
+
+PENDING at this push (the after census was running): see the next push of this file.
+
 ## What is left of this file's rows (HANDED BACK at the budget, 2026-11-15 ~01:25 UTC, by time: ~70 minutes)
 
-FIRST, the chair's two rulings that arrived at 00:45 (not begun):
+(UPDATED by TAIL-DEFECON-C-2: items 1 and 2 are DONE, a10a457e2 and e6700483b, above. WHAT IS LEFT NOW: the chair's
+answer on "Salt for preservation" (above); 28528 and the WORKLIST3 export rows (other files); D15's remainder; the
+made list read by the whole table (barrels 44, flour 37, bows 17, textiles 16, dyed cloth 15: the measuring seat's
+"natural gate", a localProduction move the chair has not granted); the chain-processor class (a Cooper's beer); the
+gathered and herded goods left ungated.)
+
+FIRST, the chair's two rulings that arrived at 00:45:
 1. **(D18) C1-E IS GRANTED: THE EXPORT SIDE** of a good with no house: ONE TABLE of good to the houses that work it,
    read by all three export steps of `deriveExportsFromChains`; coal and peat left ungated; the defended pass's toll
    revenue KEPT. Build from `lane/record-measure-2-2026-11-14 :: docs/chair/2026-11-14/probes/RECORD-MEASURE-2/c1e.patch`
