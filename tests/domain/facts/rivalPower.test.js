@@ -45,10 +45,12 @@ describe('THE HAZARD (K10): true of the SETTLED record; a line rendered before t
     expect(rivalPowerOf(early)).toBe(true);
     expect(rivalPowerOf(settled)).toBe(false);
   });
-  it('the insurgency summary (rendered at assembly, before the powers settle) is not keyed by it', async () => {
+  // TAIL-CRISIS-5 (K21): the insurgency summary IS keyed by it, and the line stored is the assembly's LATE RE-READ, after the
+  // last roster write (tests/generators/stressLateReRead.test.js holds the births and the source order).
+  it('the insurgency summary is keyed by it: the strong line with a rival of standing, the plain line without', async () => {
     const { renderStressSummary } = await import('../../../src/generators/stressNarrative.js');
-    const text = renderStressSummary('insurgency', 'Dioneia', null, null, factsOf(rival));
-    expect(text).toBe('Some in Dioneia have stopped obeying the government. They stall, their taxes go unpaid, and they wait.');
+    expect(renderStressSummary('insurgency', 'Dioneia', null, null, factsOf(rival))).toBe('A strong power in Dioneia has stopped obeying the government. Its people stall, its taxes go unpaid, and it waits.');
+    expect(renderStressSummary('insurgency', 'Dioneia', null, null, factsOf(alone))).toBe('Some in Dioneia have stopped obeying the government. They stall, their taxes go unpaid, and they wait.');
   });
 });
 
