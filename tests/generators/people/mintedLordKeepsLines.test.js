@@ -34,9 +34,9 @@ const SIX = Object.freeze([
   // POWERS-9 (re-keyed by identity, the cause): this tailor is third of the Elder Council (a government power), in no old
   // family's body, so "Belongs to a lesser family behind the leading one" was false of him; he reads no row (BODY_KINDS)
   ['r2s-succession_void-village-3', 'village', 'succession_void', 'npc_tailor', null],
-  ['r2s-succession_void-town-0', 'town', 'succession_void', 'npc_town_watch', 'Leads a squad whose members are being pulled toward one side or the other in the fight for the seat.'],
+  ['r2s-succession_void-town-0', 'town', 'succession_void', 'npc_town_watch', 'Leads a squad whose members are split over whether the seat deserves obeying.'], // TAIL-TIES-3 (T11): the contested rows claim no rival, re-keyed by identity
   ['r2s-succession_void-town-2', 'town', 'succession_void', 'npc_mills_2_5', 'Belongs to a lesser family behind the leading one while the seat fails.'],
-  ['r2s-succession_void-town-2', 'town', 'succession_void', 'npc_vintner', 'Runs a smaller house behind the leading one in the trade while the seat fails.'],
+  ['r2s-succession_void-town-2', 'town', 'succession_void', 'npc_vintner', null], // TAIL-TIES-3 (T11): no power of the trade stands in the town (two noble bodies and a church), so no house leads it: the card claims no position (it keeps its own goal)
 ]);
 
 /** A minted lord: a power's own face under the lord's title, literals. @param {any} c */
