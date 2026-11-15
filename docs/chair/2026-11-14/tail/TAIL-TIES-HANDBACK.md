@@ -116,6 +116,19 @@ the chair); the presumed-things widened register shrunk through its door (three 
 - tests/property/espionageDormancyFence.test.js's driven golden: red at the base (50011ad3…), moved by batch 1
   (→ bab4e09c…).
 
+## Rulings that arrived after the work stopped (read at hand-back, not acted on: the budget)
+
+- **(T6)** (the chair, 00:07 UTC): `src/generators/power/relationshipArchetypes.js` IS THIS GROUP'S WHOLE: 01167 / 00699
+  (the reversed mentor twin as a second tie, 4 and 9 towns) are cured there, NO TIE RE-DRAWN (the slot keeps its draw;
+  the false form takes a twin or a condition). THE VOTE ROWS 00669 / 01204 / 22432 (and the other bare vote lines,
+  "Parked" below) take `needs: ['ruling body']`, with a twin true under one ruler where the slot would fall mute.
+  Both are OPEN for the next seat: the measures are above; the batch-1 guard (tests/generators/tailTiesBatch1.test.js)
+  is the form.
+- **X9** (the chair, 00:00 UTC): the exports' own rows of these files, docs/chair/2026-11-14/read-all-3/WORKLIST3-TIES.md
+  / .json on the chair's lane (29 rows, 1 HIGH: a hook's dragon demanding tribute where no dragon is on the roster):
+  NOT READ; measure with `SURFACES=PDF,Journal python3 inventory.py <out-dir> x.json`. `ruling body` sits apart from the
+  end of the vocabulary list (before `priest`), clear of TAIL-CRISIS's `rival power`.
+
 ## What is left of the worklist (not reached: the budget)
 
 - npcData.js tie rows by role (mil_crim_corruption 7, mil_crim_suppression 4, econ_mil_contract 7, econ_crim_blur 4,
