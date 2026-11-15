@@ -15,7 +15,7 @@
  * The Economics tab calls this leaf, and the Resources tab its `fullCardWordUnderSiege` (BAR3-LABELS-3 L3b). Pure: no
  * randomness, no clock, no write.
  */
-import { stoppingCrisesOf, rowStoppedBy, crisisMarkText, markedDescription, ordinaryTimesLine } from './crisisStoppedRow.js';
+import { stoppingCrisesOf, rowStoppedBy, crisisMarkText, crisisOfMarkKind, markedDescription, ordinaryTimesLine } from './crisisStoppedRow.js';
 import { liveHouseOf } from '../facts/presence.js'; // BAR3-LABELS-2 L3: the roster house a chain's catalogue house answers to
 
 /** The states a flow card prints as working (`chainStateShown.js`'s own set). */
@@ -28,6 +28,11 @@ const CARD_WORKING = new Set(['running', 'operational', 'entrepot']);
  * marks stopped itself (the card's own mark), printed a working word ("Running" over a harbour whose harbour master and
  * docks are stopped, the wide read's city-under_siege+famine-rand-15; "Entrepôt" for a besieged metropolis's smuggling;
  * "Running" for a tavern trade whose taverns are shut: 4 of the census's 720 at 8b45191a5): the card prints "impaired". Any other card is the one it was given (`chainStateShown.js :: chainAsShown`).
+ * RULING SW1 (the chair, 2026-11-15 22:55 UTC; vetoable by the owner; BAR3-CLOSE-SWEEP-A): a house the siege CURTAILS
+ * (the leaf's partial kind, `under_siege:curtailed`, SV7/SV7b/SV8) carries the siege's mark as a stopped one does: a card
+ * whose every live house is stopped or curtailed prints "impaired" (1 card of the census's 720 at 98363cb84,
+ * r2s-under_siege-village-0's tavern trade beside its curtailed inn). The partial kind is read through the leaf's own
+ * `crisisOfMarkKind`, never a copy of its table.
  * @template {{ status?: unknown }} C
  * @param {object | null | undefined} town the settlement
  * @param {Record<string, unknown>} record the chain as the record holds it (`economicState.activeChains[]`)
@@ -39,7 +44,9 @@ export function chainCardUnderSiege(town, record, shown) {
   if (rowStoppedBy(town, 'chain', record, ['under_siege']) === 'under_siege') return { ...shown, status: 'impaired' }; // the card's own mark
   const houses = (Array.isArray(record?.processingInstitutions) ? /** @type {unknown[]} */ (record.processingInstitutions) : [])
     .map((h) => liveHouseOf(town, h)).filter(Boolean);
-  const stopped = houses.length > 0 && houses.every((h) => rowStoppedBy(town, 'house', /** @type {Record<string, unknown>} */ (h), ['under_siege']) === 'under_siege');
+  // SW1: a house the siege stops or curtails (its partial kind, `under_siege:curtailed`) carries the siege's mark
+  const marked = (/** @type {string | null} */ kind) => kind !== null && crisisOfMarkKind(kind) === 'under_siege';
+  const stopped = houses.length > 0 && houses.every((h) => marked(rowStoppedBy(town, 'house', /** @type {Record<string, unknown>} */ (h), ['under_siege'])));
   return stopped ? { ...shown, status: 'impaired' } : shown;
 }
 
