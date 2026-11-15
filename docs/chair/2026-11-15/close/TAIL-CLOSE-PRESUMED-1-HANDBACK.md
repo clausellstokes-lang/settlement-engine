@@ -144,6 +144,7 @@ The close found three more reader gaps that the next round should rule on:
 - **After PT2 and the merge of `2ff8ab7ee`: 43 of 43** (the walker alone, exit 0).
 - **At the join `e047ef2b6`, after the CORRECTION and the landing rows: 43 of 43** (the walker alone, exit 0); door `--check` exit 0.
 - **At the join `b855354d2`** (JOIN-12 points 1–2: TAIL-CLOSE-SWEEP-B, TAIL-CLOSE-SRC-5) merged in: no fresh or stale row; door `--check` exit 0; **the walker 43 of 43**.
+- **At the join `e172d6d62`** (JOIN-12 point 3: TAIL-CLOSE-SWEEP-C, no `src` change) merged in: door `--check` exit 0; **the walker 43 of 43**.
 - **After my branch landed (JOIN-11 point 2) and the join moved to `061db1367`** (TAIL-CLOSE-SRC-3 landed): a fast-forward. The door's `--check` read 1 fresh and 1 stale.
   - **Stale:** `priorityHelpers.js` `house: criminal faction`, a line SRC-3 reworded. Removed by `--shrink` in its own commit.
   - **Fresh:** `src/domain/facts/magic.js` `house: academy`, the literal `'academy of magic'`. It is a house-name entry of `ARCANE_GUILD_HOUSES`, which SRC-3 moved verbatim from `economy/economicState.js` (`e28552112`), so in `magic.js` it is the round's (B).
