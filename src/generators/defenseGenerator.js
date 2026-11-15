@@ -42,6 +42,8 @@ import { hasTradeRouteConnection } from '../domain/tradeRouteSemantics.js';
 import { partitionDefenseInstitutions, defenseTraditionNamesOf, defenseWallOf, defenceHeldOf } from '../domain/institutions/defenseInstitutionBuckets.js';
 import { resolveGenerationWorldLaw } from './generationContext.js';
 import { readinessBandOf } from '../data/bandLadders.js';
+import { SCORE_BAND_CUTS } from '../domain/display/defenseScoreBands.js';
+import { prosperityRank } from '../data/constants.js';
 import { deriveMagicReliance } from '../domain/magicReliance.js';
 import { keepOf, keepOfRecord, fundedGate } from '../domain/facts/keep.js';
 import { DEFENCE_TUNING as W, DEFENCE_WORDS, WATCH_IN_STEAD } from '../data/defenceWeights.js';
@@ -612,6 +614,14 @@ const listOf = (r) => {
   return { list: rows.map((x, i) => ({ ...x.line, points: shares[i] / 10 })), score: target / 10 };
 };
 
+/** The highest rung of the canonical prosperity ladder (`PROSPERITY_TIERS`) that cannot speak of money in hand. */
+const POOR_RANK = prosperityRank('Poor');
+/** Subsistence, Struggling or Poor, ranked on the canonical ladder (never a hand-typed match). @param {unknown} prosperity */
+const isBelowMeansProsperity = (prosperity) => {
+  const rank = prosperityRank(/** @type {any} */ (prosperity));
+  return rank >= 0 && rank <= POOR_RANK;
+};
+
 // ─── generateDefenseProfile ───────────────────────────────────────────────────
 /**
  * Assemble the complete defense profile for a settlement. Pure in the record and `upkeep`.
@@ -654,6 +664,14 @@ export function generateDefenseProfile(settlement, upkeep = keepOf(undefined)) {
     ...Object.fromEntries(SCORE_KEYS.map((d) => [SCORE_NAMES[d], Math.round(Math.round((r.full[d] ?? 0) * 100) / 100)])),
     magicDependency, traditions, ...(disasterScore !== undefined ? { disaster: disasterScore } : {}),
   };
+  // THE RATING CAPPED BY THE WORD (RECORD-MEASURE-3 row 1e, the chair's ruling R1, candidate c1b). The Economic Survival
+  // score is mostly the stores, and its readers speak of money ("money in hand"; the guard line's purse word). A town whose
+  // printed prosperity is Subsistence, Struggling or Poor (the canonical ladder's three lowest rungs) does not rate it
+  // STRONG: its score is held one point below the band's own cut. The ONE home of the rule; the readiness and the parts
+  // read the arithmetic (`r.full`, `defenceExactOf`), not this whole-point score, so they do not move.
+  if (isBelowMeansProsperity(s.economicState?.prosperity) && scores.economic >= SCORE_BAND_CUTS.strong) {
+    scores.economic = SCORE_BAND_CUTS.strong - 1;
+  }
 
   // THE LABEL READS THE ROSTER (UPKEEP-12, ruling (a)): walls or a force are never "Undefended".
   const defenceInstitutions = getDefenseInstitutions(s.institutions || []);
