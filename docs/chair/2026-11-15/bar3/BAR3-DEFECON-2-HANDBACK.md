@@ -114,20 +114,45 @@ sibling): its fixture town must import timber (`mustImport: ['timber']`) but its
 the cure reads; the fixture's record now lists the import it presumes (`economicState.primaryImports: ['Timber']`, a dated
 note); the arms are unchanged: 8 of 8 green. FOR THE CHAIR'S VETO.
 
+## Batch 2 (the chair's word, 21:27 UTC): a good brought in as a shortage is not also exported
+| row | state | false / printing (720) | cure |
+|---|---|---|---|
+| the wide read's dates header flag (bar0-city-wartime-rand-12: "Dates and fruit" exported while "Dates and desert produce (local orchards unproductive)" is imported) | a depleted ground's shortage import names a good an export names (its lead words, whole) | 2 of the 720 (r2r-city-39, r2s-famine-city-1) and the read town | `economicState.js :: dropExportsImportedShort`, called on the existing line 800 (no line moved); the chain's card keeps its output |
+DECLARED MOVE: 2 towns move, `economicState.primaryExports[]` only (births of the 720, batch 1 -> batch 2); no draw; the
+economic complexity (which counts exports) moves in neither. In the read town the export list loses "Dates and fruit" and
+nothing else. No new line prints (a good leaves a list): nothing for the veto list but the rule itself.
+Guard: `bar3Defecon2Lines.test.js`'s dates arm (r2r-city-39; red by a plant, the rule's call disabled; the chain card's
+dates kept). BOOK MOVED, NAMED, NOT RE-TAKEN: `tests/lint/tradeListWriters.walker.test.js`'s F2 arm "a classed file holds no
+more writer lines than its row": `src/generators/economy/economicState.js` 8 -> 9 (the rule's one splice line, a TAKES_AWAY
+writer: it adds no good); its door re-classes the row.
+NOT TAKEN (the chair's "no further rows", 21:27): the corpus seat's C47622 (MODERATE_GAP_TWIN's "cannot pay in coin" beside a
+STRONG economic survival, 3 of 78 by its count): not measured by me; left, in order, below.
+
 ## Item 0: what my predecessor owed
 - Its eight law suites not run: run above (each alone at my tree, which holds its cures): all GREEN but `proseWiringCensus`
   (its stored figure, NAMED) and `presumedThings` (its five fresh hits, as it named them).
-- Its inventory diff: the census's 720 rendered at 8b45191a5 (its `before`, re-made: its files were gone) and at 7a4b48a84
-  (its tip): IN FLIGHT at this push (see the next push of this file).
+- Its inventory diff, RE-MADE BY ME (its `before` at 8b45191a5 re-rendered; its tip 7a4b48a84), read whole: 30,017 -> 30,008
+  sentences; gone 15, new 6, fewer 10, more 3, moved 0. Every cured row fell by exactly its measure (the stores note 31 -> 0;
+  the quarrel 72 -> 54; the gates 20 -> 12; the monster drill 13 -> 5; the few-ways 8 -> 0; no-dominant 29 -> 28; the
+  theocratic note and its siblings gone or fewer: "Whoever controls trade and tithes…" 16 -> 1, "A merchant arriving … the
+  religious house has the last word" 5 -> 1). The inheritors are its six twins and two knock-ons:
+  (a) THE "Patron deity" / premium religion block 717 -> 716 the predecessor's run saw DOES NOT REPRODUCE in my two runs (no
+  such sentence among the fewer): a render flake of that run, not a cure's move.
+  (b) "Its Underground network works below its streets…" -> "<the town>'s Underground network…" in r2s-insurgency-city-1 and
+  r2s-slave_revolt-metropolis-3: TRUE. Read in both dumps: "Its" leaned on the theocratic sentence before it on the same
+  line ("The clergy have more say over Qaracaravansarai's market…"; "A merchant arriving at Anoarion soon learns…"); with
+  that sentence gone (the flag false there by the record), the Underground line leads and names its town. The same house,
+  the same fact: nothing to narrow.
 
 ## Registrations owed
 None: no new test file under `tests/generators` (my guard is `tests/domain/bar3Defecon2Lines.test.js`); no new import of a
 goods module; no new module.
 
 ## What is left, IN ORDER
-1. The predecessor's inventory diff (item 0), if this file's next push does not carry it: `inventory.py` over the two census
-   outs, `inventory_diff.py before.json after.json`, read whole (the inheritors).
-2. My batch's inventory diff: the census's render at my tip against 7a4b48a84 (the record diff above is by births only; the
+1. (item 0's diff: done, above.)
+2. My batches' inventory diff: the census's render at my tip against 7a4b48a84 (the record diff above is by births only; the
    page lines it moves are the 52 crime lines, the 20 hooks and the 6 towns' ring note).
-3. For the chair: the dates collision (item 3, named above: imported as a shortage and exported by the oasis chain, 2 of
-   the 720); and T28b's wider reading ("more than one criminal house", 120 of 149 organized towns: not taken).
+3. C47622 (named to me by the chair at 21:04, then "no further rows" at 21:27): MODERATE_GAP_TWIN's "…at a price the
+   settlement cannot pay in coin." beside a STRONG economic survival: measure on the 720, then a twin that reads the
+   survival band or the purse.
+(T28b: the chair's word at 21:27 holds my reading; do not widen it. The dates: cured, batch 2.)

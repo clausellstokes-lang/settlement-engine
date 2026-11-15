@@ -6,7 +6,8 @@
  *     settleCrimeWaveLines`): the twin prints in their place;
  *   · C30870 (ruling T28b): no "one ring" note where the live houses hold several gangs (`crimeSignal.js :: gangHousesOf`):
  *     the Defense tab's crime structure prints the rival-gangs note; the key stays organized;
- *   · C48585: the timber hooks' carts and rafts that stopped, where the record's import list holds no timber: the twin.
+ *   · C48585: the timber hooks' carts and rafts that stopped, where the record's import list holds no timber: the twin;
+ *   · the dates (the chair's word, 21:27 UTC): a good brought in as a shortage is not also exported; the chain keeps it.
  * Births of the census's own seeds (CENSUS-3 seedcfg.mjs: the r2r- and r2s- arms). Each NOT pair is red at the batch's
  * base (7a4b48a84); each KEEP pair is green before and after. The words are read from the source's own constants.
  */
@@ -108,5 +109,16 @@ describe('BAR3-DEFECON-2: the crime lines read the crime wave and the rival gang
 
   test('KEEP C48585: beside a timber import the carts line still prints', () => {
     expect(hooks(town(TIMBER_KEEP))).toContain(CARTS);
+  }, 300_000);
+
+  test('NOT the dates: a good imported as a shortage is not also exported; the oasis chain keeps it on its own card', () => {
+    const t = town('r2r-city-39');
+    const imports = /** @type {string[]} */ (t.economicState.primaryImports);
+    const shortage = imports.find((x) => /^Dates\b.*\(local /.test(x));
+    expect(shortage, 'r2r-city-39 imports dates as a shortage').toBeTypeOf('string');
+    const card = (t.economicState.activeChains || []).find((/** @type {any} */ c) => c?.chainId === 'oasis_agriculture');
+    const good = (card?.outputs || []).find((/** @type {string} */ o) => /^Dates\b/.test(o));
+    expect(good, 'the chain card still names its dates').toBeTypeOf('string');
+    expectAbsentWithAnchor(t.economicState.primaryExports, good, 'Water trade', 'r2r-city-39 exports');
   }, 300_000);
 });
