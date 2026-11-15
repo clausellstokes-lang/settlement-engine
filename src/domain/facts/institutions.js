@@ -61,3 +61,12 @@ export function hasInstitution(record, kind) {
   if (!re) throw new Error(`hasInstitution: unknown institution kind '${kind}'`);
   return liveInstitutionNames(record).some((n) => !ACCESS_ONLY.test(n) && re.test(n));
 }
+
+/**
+ * A GRAIN mill's name, lower-cased (a Mill, Mills (2-5)): a sawmill saws and a maltster malts, and neither grinds flour;
+ * an "access to external" row is a neighbour's (TAIL-CLOSE-SRC-4: moved verbatim from `generators/computeActiveChains.js
+ * :: gateKeywordPredicate`'s 'grain mill' row, TAIL-DEFECON-C-4 D33, into the institutions home; the `mill` kind above is
+ * the wider "a mill of any kind").
+ * @param {string} n an institution's name, lower-cased @returns {boolean}
+ */
+export const namesGrainMill = (n) => (n === 'mill' || n.startsWith('mills (')) && !n.includes('access to external');
