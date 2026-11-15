@@ -43,6 +43,22 @@ nowhere better to be". The row is removed with a RE-KEYED comment naming the com
 the red alone 1 failed → 13/13 passed; eslint clean; no other file names the specimen. MOVING: the file differs on no
 `lane/tail-*` branch.
 
+### Red 6 — outlookIssuesSayTheWorld.test.js, "#823 #824 #825 rr2s-city-famine-rand-1: the bank row"
+
+**(ii) re-keyed by identity; the town is right.** Turning commit: **2ac50c55** (TAIL-DEFECON-3 batch 3, a DECLARED MOVE of
+the economy family: "the banks' 'does little trade' … only where exports are short"), merged at 1b672cbe (JOIN-7 · 25,
+defecon at 21e578caa). This town has banks beside a merchant guild and **exports 17 goods**, so "Banks stand here, but the city
+does little trade" would be false, and the row is rightly gone (`viability.js`: `primaryExports.length < 4`). The guard now
+reads the record: a merchant guild and banks stand, four or more exports, no machinery in any row (#823 #825), no
+"without a merchant class" (#824), and the bank row is absent beside its sibling warning "Trade Dependencies"
+(`expectAbsentWithAnchor`). The claim stays where it was and nothing is loosened.
+**Named, not cured (not this seat's file):** the row's printed words now have **no birth witness**: 0 of 240 reader-shaped
+births (town/city × famine/calm × 60) print it, and the economy-at-0 law births of village to metropolis (144) stand no bank
+at all. A guard of the row's own words needs a unit-level birth of `viability.js` (the economy lane's).
+Proof: the red alone 1 failed → 6/6 passed; eslint clean; the negative-anchor walker shows the same 4 pre-existing
+offenders at base and after (crisisTab, tailHistoryBatch6, tailCrisisBatch4, tailCrisisBatch8: other seats'), none from this
+file. MOVING: none.
+
 ## Declared moves (for the owner's veto list)
 
 - none yet.
