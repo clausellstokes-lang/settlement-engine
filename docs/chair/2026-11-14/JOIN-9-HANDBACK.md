@@ -61,6 +61,7 @@ THE CHAIR'S RULINGS TO JOIN-9 (each vetoable by the owner):
 - **05:36 UTC:** houses has ended (0907dccf2): land it with history (now 45e88f9aa), corpus-eco (read back: one last text-only commit after a8ea5ef8e) and tests-a, BEFORE the line with the tip.
 - **05:53 UTC:** THE BOOT IS GREEN ON ITS BRANCH: "LAND lane/tail-ties-2026-11-14 at d247d8a3" (or the later tip read back) AS THE NEXT POINT after the one in hand, then one line with the tip; then the first group as ordered and the line, then the rest. The economy generators' seat has ended (887ff8eec); a close seat is on that branch now: it lands as any moving branch.
 - **06:03 UTC:** point 9's composed red: the tests-a seat re-keys that anchor on its branch; it lands again ON THE CHAIR'S WORD. The new rule stands (a test file both sides moved stops at the merge, before the commit). FOUR CLOSE BRANCHES LAND ONLY ON THE CHAIR'S WORD, in this order, each after its seat has merged the line and settled the shared test files on its own branch: tests-a (its fix), tests-b, tail-close-display, tests-c: OUT OF THE RUNNING SWEEP. Then: houses, the line, then tail-close-src (5d99786c5 or later), corpus-def, defecon, powers-b, crisis (each at the tip read), then the sweep's end line.
+- **06:09 UTC:** "LAND lane/tail-close-tests-a-2026-11-15 at a269fc3f" AS THE NEXT POINT after the one in hand (its fix: the anchor reads 14), then ONE LINE with the tip; then the sweep as ordered.
 
 ## 2. The landings
 
@@ -78,6 +79,7 @@ THE CHAIR'S RULINGS TO JOIN-9 (each vetoable by the owner):
 | 9 | lane/tail-close-tests-a-2026-11-15 | 432b0330c (05:59) | 7efc76861 | e3c393377 | none | 58 files outside docs/; declared-move commits: none (golden carried); merged clean though both moved: tests/components/displayEconRelianceFoodWords.test.jsx  |
 | 10 | lane/tail-houses-2026-11-14 | 0907dccf2 (06:03) | 3e482b329 | 329f324a0 | **CODE (test)**: `w2FixData6Rows.test.js` row 4, close-tests-a against houses: composed, both stand (§3) | clean-both `tailHouses1Gaps`, `tailHouses4CoastCrown` (5/5 green), `presumedThings.widened.register.json`; DECLARED MOVES 61648f2a2 99438070f 6510d746b 36bcb60b5 5d906f6e4: golden carried |
 | 11 | lane/tail-close-src-2026-11-15 | 5d99786c5 (06:08) | 0be927178 | 8fe1dc904 | none | 9 files outside docs/; declared-move commits: none (golden carried) |
+| 12 | lane/tail-close-tests-a-2026-11-15 | a269fc3f8 (06:11) | 92fcc4fc5 | 06a27ccc8 | none | 1 files outside docs/; declared-move commits: a269fc3f8  (golden carried) |
 
 ## 3. Every code resolution
 
@@ -235,6 +237,7 @@ Merged clean though both sides moved them (for the close to re-derive or measure
 | `tests/components/displayEconRelianceFoodWords.test.jsx` (r2s-famine-town-1 NOT row: the anchor) | close-tests-a (9) against display-econ (TAIL-DISPLAY-ECON-5) on the line | COMPOSED RED (§6): the anchor 13% vs the re-keyed 14%; for the tests-a seat on the chair's word, else re-keyed at the close |
 | `tests/data/w2FixData6Rows.test.js` (rows 3 ww-1416 and the chair's ww-924) | houses (10) | red at the branch's own tip and at the line, carried: the houses seat's |
 | golden | houses (10) | DECLARED MOVE commits 61648f2a2 99438070f 6510d746b 36bcb60b5 5d906f6e4 (field diffs in their bodies) |
+| golden | close-tests-a (12) | DECLARED MOVE commits a269fc3f8  (field diffs in their bodies) |
 
 ## 5. Item 2 at the landed tip
 
