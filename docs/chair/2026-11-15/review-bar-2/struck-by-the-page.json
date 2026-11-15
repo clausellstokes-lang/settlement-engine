@@ -1,0 +1,46 @@
+[
+{
+"id": "C13905",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"b: Alehouse offers 'Meals and drink' (food and ale) unmarked while under siege, road cut, rations cut, food deficit 41%, 'settlement is starving'; lodging and relay are marked stopped"
+],
+"packets": [
+"bar1"
+],
+"readers": "b",
+"text": "Meals and drink",
+"town": "bar0-hamlet-under_siege-rand-3",
+"sections": [
+"Systems/Institutions"
+],
+"fold": "Meals and drink",
+"n": 417,
+"struck": "MARK ADJACENT: the row carries its mark on the line beside the flagged one"
+},
+{
+"id": "C2203",
+"sev": "LOW",
+"kinds": [
+"STATE"
+],
+"whys": [
+"a: 'Trade that never closes' row unmarked under siege+famine; C2006 says trade has stopped, Services tab marks it Impaired"
+],
+"packets": [
+"bar1"
+],
+"readers": "a",
+"text": "Daily markets",
+"town": "bar0-city-under_siege+famine-rand-4",
+"sections": [
+"Systems/Institutions"
+],
+"fold": "Daily markets",
+"n": 120,
+"struck": "MARK ADJACENT: the row carries its mark on the line beside the flagged one"
+}
+]

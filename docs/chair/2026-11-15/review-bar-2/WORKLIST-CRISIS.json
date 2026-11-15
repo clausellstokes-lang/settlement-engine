@@ -1,0 +1,38 @@
+[
+{
+"id": "C5821",
+"sev": "MED",
+"n": 4,
+"town": "bar0-city-wartime-rand-3",
+"section": "Summary/Crisis",
+"fold": "<N> is in a kingdom at war and doing well out of it: army contracts pay, prices are high, and merchants with the right friends are getting rich.",
+"text": "Balworth is in a kingdom at war and doing well out of it: army contracts pay, prices are high, and merchants with the right friends are getting rich.",
+"why": "says the city does well out of the war; page says prosperity was higher before the war and is Moderate while it lasts, and the Overview says it is losing",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/stressNarrative.js",
+"line": 310,
+"fn": "WARTIME_VARIANTS"
+}
+},
+{
+"id": "C28756",
+"sev": "MED",
+"n": 1,
+"town": "bar0-town-occupied-rand-4",
+"section": "Summary/Plot Hooks",
+"fold": "War has taken the iron: the metal suppliers sell to the armies first, and the iron for tools and repairs stops arriving.",
+"text": "War has taken the iron: the metal suppliers sell to the armies first, and the iron for tools and repairs stops arriving.",
+"why": "'War has taken the iron... sell to the armies': no war in CRISIS, QUARRELS, TENSIONS or PAST; iron is just depleted locally",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/economy/outlookHookSiblings.js",
+"line": 31,
+"fn": "WAR_IRON_HOOK"
+}
+}
+]

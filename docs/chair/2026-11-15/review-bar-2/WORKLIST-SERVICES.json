@@ -1,0 +1,417 @@
+[
+{
+"id": "C0253",
+"sev": "MED",
+"n": 248,
+"town": "bar0-city-under_siege+famine-rand-3",
+"section": "Systems/Institutions",
+"fold": "Military/Guard",
+"text": "Military/Guard",
+"why": "slash label 'Military/Guard' used as one power's name beside 'Backs' verb",
+"kinds": [
+"BROKEN"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "C18444",
+"sev": "MED",
+"n": 248,
+"town": "bar0-metropolis-calm-rand-4",
+"section": "Systems/Institutions",
+"fold": "Military/Guard",
+"text": "Military/Guard",
+"why": "slash label 'Military/Guard' used as one power's name beside 'Backs' verb (brief's own example fault)",
+"kinds": [
+"BROKEN"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "C24598",
+"sev": "MED",
+"n": 248,
+"town": "bar0-town-calm-rand-3",
+"section": "Systems/Institutions",
+"fold": "Military/Guard",
+"text": "Military/Guard",
+"why": "'Backs Military/Guard': slash-joined roster label used as one power's name beside the verb Backs (also at C24628)",
+"kinds": [
+"BROKEN"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "C26553",
+"sev": "MED",
+"n": 248,
+"town": "bar0-town-calm-rand-5",
+"section": "Systems/Institutions",
+"fold": "Military/Guard",
+"text": "Military/Guard",
+"why": "slash label 'Military/Guard' used as one power's name beside 'Backs' on the charter hall row",
+"kinds": [
+"BROKEN"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "C5979",
+"sev": "MED",
+"n": 248,
+"town": "bar0-city-wartime-rand-3",
+"section": "Systems/Institutions",
+"fold": "Military/Guard",
+"text": "Military/Guard",
+"why": "slash roster label Military/Guard used as a power's name beside the verb Backs",
+"kinds": [
+"BROKEN"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "C33684",
+"sev": "MED",
+"n": 237,
+"town": "bar0-village-famine-rand-4",
+"section": "Systems/Institutions",
+"fold": "ServicesLumber milling",
+"text": "ServicesLumber milling",
+"why": "Sawmill offers 'Lumber milling' unmarked, but LAND gaps say the Sawmill lacks access to timber; the brickmaker row is marked short; also C33729",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "C10654",
+"sev": "MED",
+"n": 214,
+"town": "bar0-city-wartime-rand-5",
+"section": "Systems/Services",
+"fold": "Jewellery, fine clothing, rare spices, and luxury goods from across the world.",
+"text": "Jewellery, fine clothing, rare spices, and luxury goods from across the world.",
+"why": "luxury quarter sells rare spices from across the world; the town's own necessity line says spices are needed and not brought in, and TRADE imports list no spices",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 1072,
+"fn": "INSTITUTION_SERVICES.High-end retail"
+}
+},
+{
+"id": "C0365",
+"sev": "MED",
+"n": 192,
+"town": "bar0-city-under_siege+famine-rand-3",
+"section": "Systems/Institutions",
+"fold": "BacksMilitary/Guard",
+"text": "BacksMilitary/Guard",
+"why": "slash label 'Military/Guard' beside verb 'Backs' (same fault as C0253)",
+"kinds": [
+"BROKEN"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "C6106",
+"sev": "MED",
+"n": 192,
+"town": "bar0-city-wartime-rand-3",
+"section": "Systems/Institutions",
+"fold": "BacksMilitary/Guard",
+"text": "BacksMilitary/Guard",
+"why": "slash roster label Military/Guard used as a power's name beside the verb Backs (Garrison row)",
+"kinds": [
+"BROKEN"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "C4138",
+"sev": "MED",
+"n": 143,
+"town": "bar0-city-under_siege+famine-rand-5",
+"section": "Systems/Services",
+"fold": "Pastries",
+"text": "Pastries",
+"why": "Pastries offered unmarked, 'available to those who can afford it', while the grain failed (famine, grain failed source) and Bakers' bread is marked scarce.",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "C23813",
+"sev": "MED",
+"n": 142,
+"town": "bar0-thorp-calm-rand-4",
+"section": "Systems/Services",
+"fold": "Fish sold daily from the morning catch.",
+"text": "Fish sold daily from the morning catch.",
+"why": "fish sold daily from morning catch; LAND gives Fishing Grounds as depleted",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 952,
+"fn": "INSTITUTION_SERVICES.Fresh fish retail"
+}
+},
+{
+"id": "C8434",
+"sev": "MED",
+"n": 142,
+"town": "bar0-city-wartime-rand-4",
+"section": "Systems/Services",
+"fold": "Fish sold daily from the morning catch.",
+"text": "Fish sold daily from the morning catch.",
+"why": "fish 'sold daily from the morning catch'; C8598 says fishery fished out, fish salted and bought in; LAND Fishing Grounds depleted",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 952,
+"fn": "INSTITUTION_SERVICES.Fresh fish retail"
+}
+},
+{
+"id": "C13957",
+"sev": "MED",
+"n": 141,
+"town": "bar0-hamlet-under_siege-rand-3",
+"section": "Systems/Services",
+"fold": "Cut stone",
+"text": "Cut stone",
+"why": "Cut stone service printed unmarked while the quarry row says 'Stopped by the siege'; same for rubble C13965",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "C3997",
+"sev": "MED",
+"n": 139,
+"town": "bar0-city-under_siege+famine-rand-5",
+"section": "Systems/Services",
+"fold": "Major performances, competitions, and public spectacles.",
+"text": "Major performances, competitions, and public spectacles.",
+"why": "Unmarked row: major performances and public spectacles from Major annual fairs, which Institutions marks 'Stopped by the siege' (foreign traders cannot come); siege closes roads",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 1086,
+"fn": "INSTITUTION_SERVICES.Entertainment and spectacle"
+}
+},
+{
+"id": "C13360",
+"sev": "MED",
+"n": 123,
+"town": "bar0-hamlet-calm-rand-5",
+"section": "Systems/Institutions",
+"fold": "ServicesCharcoal supply",
+"text": "ServicesCharcoal supply",
+"why": "offers charcoal supply as a service with no mark; LAND gaps say the Charcoal burner lacks access to its timber input (also C13401-C13403)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "C10682",
+"sev": "MED",
+"n": 96,
+"town": "bar0-city-wartime-rand-5",
+"section": "Systems/Services",
+"fold": "Ore cut underground by the crews and brought out by cart for sorting.",
+"text": "Ore cut underground by the crews and brought out by cart for sorting.",
+"why": "mine row shows ore cut and carted with no mark; LAND gives iron ore deposits absent and the mining chain vulnerable",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 1817,
+"fn": "SERVICE_DESC_SIBLINGS"
+}
+},
+{
+"id": "C16282",
+"sev": "MED",
+"n": 94,
+"town": "bar0-metropolis-calm-rand-3",
+"section": "Systems/Services",
+"fold": "Salt production",
+"text": "Salt production",
+"why": "offers unmarked 'Salt production'; LAND gives Salt Flats depleted, Salt & Preservation impaired, and TRADE imports salt because local flats are exhausted",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 655,
+"fn": "INSTITUTION_SERVICES.Salt production"
+}
+},
+{
+"id": "C16054",
+"sev": "MED",
+"n": 73,
+"town": "bar0-metropolis-calm-rand-3",
+"section": "Systems/Institutions",
+"fold": "Connection: Lord Chancellor <N>",
+"text": "Connection: Lord Chancellor Dogshin Ghurid",
+"why": "'Lord Chancellor' for Dogshin Ghurid, who PEOPLE gives as female (f), the chancellor; title does not fit sex",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "C31592",
+"sev": "MED",
+"n": 68,
+"town": "bar0-village-calm-rand-4",
+"section": "Systems/Services",
+"fold": "Caravan organization",
+"text": "Caravan organization",
+"why": "Caravan organization (and Route planning) offered unmarked; LAND gaps say the Caravanserai lacks camels, chain vulnerable, access isolated, nothing leaves for trade",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 12,
+"fn": "CARAVAN_ORGANIZATION"
+}
+},
+{
+"id": "C23436",
+"sev": "MED",
+"n": 30,
+"town": "bar0-thorp-calm-rand-3",
+"section": "Systems/Services",
+"fold": "Slow but broadly legitimate.",
+"text": "Slow but broadly legitimate.",
+"why": "says 'broadly legitimate'; GOVERNMENT legitimacy is Contested (score 39), and C23376 prints Contested",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 1487,
+"fn": "INSTITUTION_SERVICES.Family decisions"
+}
+},
+{
+"id": "C24226",
+"sev": "MED",
+"n": 30,
+"town": "bar0-thorp-calm-rand-5",
+"section": "Systems/Services",
+"fold": "Slow but broadly legitimate.",
+"text": "Slow but broadly legitimate.",
+"why": "says 'broadly legitimate'; GOVERNMENT legitimacy is Contested (score 39), C24160 prints Contested",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 1487,
+"fn": "INSTITUTION_SERVICES.Family decisions"
+}
+},
+{
+"id": "C16005",
+"sev": "MED",
+"n": 2,
+"town": "bar0-metropolis-calm-rand-3",
+"section": "Systems/Institutions",
+"fold": "Connection: Lord Mayor <N>",
+"text": "Connection: Lord Mayor Dokuz Tayichi'ud",
+"why": "'Lord Mayor' for Dokuz Tayichi'ud, who PEOPLE gives as female (f), the mayor; title does not fit sex",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "C23820",
+"sev": "MED",
+"n": 1,
+"town": "bar0-thorp-calm-rand-4",
+"section": "Systems/Services",
+"fold": "Bulk purchase by households, institutions, and inland traders.",
+"text": "Bulk purchase by households, institutions, and inland traders.",
+"why": "bulk sales to inland traders; TRADE exports none, made here none, INCOME Harvest only",
+"kinds": [
+"STATE",
+"LACKS"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 1839,
+"fn": "SERVICE_DESC_SIBLINGS"
+}
+}
+]

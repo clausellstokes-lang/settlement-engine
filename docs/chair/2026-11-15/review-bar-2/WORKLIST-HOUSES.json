@@ -1,0 +1,200 @@
+[
+{
+"id": "C13357",
+"sev": "MED",
+"n": 60,
+"town": "bar0-hamlet-calm-rand-5",
+"section": "Systems/Institutions",
+"fold": "Charcoal kilns, tended day and night while a burn lasts, whenever wood can be had.",
+"text": "Charcoal kilns, tended day and night while a burn lasts, whenever wood can be had.",
+"why": "charcoal burner shown at work producing charcoal (also C13402); LAND gaps say it lacks access to its timber input and the page marks no shortage",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescVariants.js",
+"line": 1948,
+"fn": "DESC_VARIANT_SIBLINGS"
+}
+},
+{
+"id": "C27929",
+"sev": "MED",
+"n": 41,
+"town": "bar0-town-occupied-rand-3",
+"section": "Systems/Institutions",
+"fold": "Each congregation keeps its own ground beside its house of worship, and # that has filled its ground buries beyond the gate instead.",
+"text": "Each congregation keeps its own ground beside its house of worship, and one that has filled its ground buries beyond the gate instead.",
+"why": "burials 'beyond the gate'; DEFENCE walls none, so no gate",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/institutionalCatalog.js",
+"line": 948,
+"fn": "INSTITUTION_FAMILIES.town"
+}
+},
+{
+"id": "C26642",
+"sev": "MED",
+"n": 8,
+"town": "bar0-town-calm-rand-5",
+"section": "Systems/Institutions",
+"fold": "Connection: Captain-Mayor <N>, the watch captain",
+"text": "Connection: Captain-Mayor Zorana Pavlov, the watch captain",
+"why": "titles Zorana Pavlov 'Captain-Mayor'; PEOPLE gives only 'the watch captain' (first of Military Council); GOVERNMENT lists no mayoralty",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/institutionalCatalog.js",
+"line": 1260,
+"fn": "INSTITUTION_FAMILIES.town"
+}
+},
+{
+"id": "C15795",
+"sev": "MED",
+"n": 6,
+"town": "bar0-metropolis-calm-rand-3",
+"section": "Systems/Institutions",
+"fold": "The ruling criminal syndicate, suffered because open gang war would be worse.",
+"text": "The ruling criminal syndicate, suffered because open gang war would be worse.",
+"why": "calls Thieves' Guild 'the ruling criminal syndicate'; GOVERNMENT has Shadow Senate Dominant and Thieves' Guild only Minor (corrupted by the Senate)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 492,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "C34394",
+"sev": "MED",
+"n": 6,
+"town": "bar0-village-famine-rand-5",
+"section": "Systems/Institutions",
+"fold": "The hamlet benefits from fees paid in kind.",
+"text": "The hamlet benefits from fees paid in kind.",
+"why": "calls the place 'The hamlet'; the town is a village of 251",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionalCatalog.js",
+"line": 1469,
+"fn": "INSTITUTION_FAMILIES.shared"
+}
+},
+{
+"id": "C6173",
+"sev": "MED",
+"n": 6,
+"town": "bar0-city-wartime-rand-3",
+"section": "Systems/Institutions",
+"fold": "Connection: Lord Mayor <N>, the senior guild master",
+"text": "Connection: Lord Mayor Declan O'Neill, the senior guild master",
+"why": "calls Declan O'Neill Lord Mayor; GOVERNMENT lists only City Council, and PEOPLE gives his title as senior guild master, first of City Council",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/institutionalCatalog.js",
+"line": 322,
+"fn": "INSTITUTION_FAMILIES.shared"
+}
+},
+{
+"id": "C13894",
+"sev": "MED",
+"n": 3,
+"town": "bar0-hamlet-under_siege-rand-3",
+"section": "Systems/Institutions",
+"fold": "It needs grain to spare before it can work at all.",
+"text": "It needs grain to spare before it can work at all.",
+"why": "maltster row unmarked and 'needs grain to spare' yet FOOD is Deficit (grown 32%, gap 40%) under siege; no grain can be spare",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionDescVariants.js",
+"line": 187,
+"fn": "PAIRS"
+}
+},
+{
+"id": "C2149",
+"sev": "MED",
+"n": 2,
+"town": "bar0-city-under_siege+famine-rand-4",
+"section": "Systems/Institutions",
+"fold": "Connection: Lord Mayor <N>, the senior craft-guild master",
+"text": "Connection: Lord Mayor Maroula Mosele, the senior craft-guild master",
+"why": "'Lord Mayor' for Maroula Mosele, who is (f) in PEOPLE; GOVERNMENT is City Council, no lord mayor office",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionalCatalog.js",
+"line": 899,
+"fn": "INSTITUTION_FAMILIES.shared"
+}
+},
+{
+"id": "C2828",
+"sev": "MED",
+"n": 1,
+"town": "bar0-city-under_siege+famine-rand-4",
+"section": "Systems/Outlook",
+"fold": "Population of # with only # craft institution.",
+"text": "Population of 2,338 with only 1 craft institution.",
+"why": "'Only 1 craft institution': HOUSES has Carpenters, Sawmill, Tanners, Bakers, Chandler, Craft guilds, Alchemist quarter; 'Add craft guilds' though Craft guilds (30-80) exist",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/geographyData.js",
+"line": 560,
+"fn": "TERRAIN_DATA.institutionModifiers"
+}
+},
+{
+"id": "C0434",
+"sev": "MED",
+"n": 0,
+"town": "bar0-city-under_siege+famine-rand-3",
+"section": "Systems/Institutions",
+"fold": "In trade, a power in their own right.",
+"text": "In trade, a power in their own right.",
+"why": "calls merchant guilds 'a power in their own right'; GOVERNMENT lists no merchant power (Religious, Noble, Military/Guard, War Council, Shield Compact)",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/institutionDescColour.js",
+"line": 351,
+"fn": "DESC_VARIANT_COLOUR_DECLARATIONS"
+}
+},
+{
+"id": "C25669",
+"sev": "MED",
+"n": 0,
+"town": "bar0-town-calm-rand-4",
+"section": "Systems/Institutions",
+"fold": "Connection: Mayor <N>, the senior craft-guild master",
+"text": "Connection: Mayor Zenobia Flavius, the senior craft-guild master",
+"why": "calls Zenobia Flavius 'Mayor'; PEOPLE gives her only 'the senior craft-guild master'; GOVERNMENT lists no mayor, only a Town Council",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionalCatalog.js",
+"line": 899,
+"fn": "INSTITUTION_FAMILIES.shared"
+}
+}
+]
