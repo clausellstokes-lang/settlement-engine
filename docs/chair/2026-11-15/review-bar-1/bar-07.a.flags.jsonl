@@ -1,0 +1,12 @@
+{"id":"C11863","town":"bar0-village-famine-rand-2","sev":"MED","kind":"STATE","why":"racks of drying fish and the smell of catch everywhere, yet FOOD failed source is fish (famine cut 65%); fishing has failed","other":""}
+{"id":"C11864","town":"bar0-village-famine-rand-2","sev":"LOW","kind":"PAIR","why":"a caravan broker haggling over a line of laden animals reads as busy trade; the town has no market and little trade stops under famine","other":"C12113"}
+{"id":"C12024","town":"bar0-village-famine-rand-2","sev":"LOW","kind":"STATE","why":"'Ferryman' for Dolgorsüren Qonggirad, who is (f) and listed as the ferry keeper","other":""}
+{"id":"C12074","town":"bar0-village-famine-rand-2","sev":"MED","kind":"PAIR","why":"Salted fish offered with no famine mark, though the fish failed and the row is marked scarce in the other tab","other":"C12015"}
+{"id":"C12150","town":"bar0-village-famine-rand-2","sev":"MED","kind":"STATE","why":"says all food raised here goes back to fishing; Farmland, common grazing and Harvest 69% of income show grain and livestock are raised too","other":""}
+{"id":"C12186","town":"bar0-village-famine-rand-2","sev":"LOW","kind":"PAIR","why":"shadow economy printed as 22% capture; INCOME gives it as 23%","other":"C12118"}
+{"id":"C12304","town":"bar0-village-famine-rand-2","sev":"MED","kind":"LACKS","why":"speaks of the guards' rations; DEFENCE has garrison none, watch none, hired none: only a citizen militia","other":""}
+{"id":"C12320","town":"bar0-village-famine-rand-2","sev":"MED","kind":"LACKS","why":"defenders paid late or not at all, a pay book; DEFENCE has hired none, garrison none, watch none: only unpaid citizen militia","other":""}
+{"id":"C12343","town":"bar0-village-famine-rand-2","sev":"MED","kind":"PAIR","why":"calls the defences sound; STATE defence is Vulnerable and the same page says they could not survive a serious attack and are underfunded","other":"C12357"}
+{"id":"C12458","town":"bar0-village-famine-rand-2","sev":"MED","kind":"PAIR","why":"Saikhan Ongut is printed temperament/disposition incorruptible, yet his secret is secretly directing a fencing operation","other":"C12462"}
+{"id":"C12578","town":"bar0-village-famine-rand-2","sev":"LOW","kind":"STATE","why":"calls the religious conflict a generation old; PAST puts it 49 years ago","other":""}
+{"id":"DONE","lines":798,"blocks":1,"flags":11}
