@@ -720,6 +720,44 @@ B14388 (26), 02783 (26), B03373 (18), 20218 (15): City administration "less form
 4. **WAITS (H13)**: H9 "(powerful)" (15 towns, H11's two cures); 12014 the brewery (banked text) for the close; every row printing in fewer than five towns, and the rows false in fewer than five ordinary towns listed above (B17798 3, B09671 2, 09333/28847/11393 1 each, 12702 1, B22199 1, B02583 1, 16366 2).
 5. **The X9 rows H5 answered by the leaf or sent to the services seat**: as H5 lists them (no cure here).
 
+## TAIL-HOUSES-5 · the chair's ruling (2026-11-15 04:42 UTC; vetoable by the owner)
+
+- **(H20)** (1) THE GOVERNANCE ROWS (about twenty-five, 5 to 38 towns: a house's description that claims who governs or what standing a power has, DRAWN BEFORE THE POWERS EXIST): each takes ONE of two cures, by its measure: (i) a rewording true in every printing town that claims the house's own trade and standing; (ii) A DECLARED NEED RESOLVED AT THE LATE RE-READ, with a twin: the description is drawn as today (no draw moves) and the late pass swaps in the twin where the settled record does not bear the claim. FIRST MAKE THE LATE PASS REACH A HOUSE'S DESCRIPTION if it does not yet (say what it took; the pass must stay BYTE-IDENTICAL on the 720 until a description declares: show it); one row built end to end and measured before the rest. A row whose twin would be false somewhere too is reworded or silenced instead. (2) THE HEDGED LINES MAY TAKE THEIR PLAIN LINE BACK where the record bears it (the fisher's landing, 64 true towns hedged; the fish market, 72; the ferry, 109): ONLY if (1) is done and the count allows: a declared need on the input, the plain line kept where the record bears it, the hedge as the twin. Else name it. (3) TWO ROWS FROM TONIGHT'S READ OF THE NEWEST LINES (`institutionDescColour.js`): "Timber and the hauling of it keep the place alive." and "The settlement's living is timber and the carting of it." (9 towns each) where the harvest is nine tenths of the income: the line needs timber among the income sources or the exports (measure), by the same late pass if the income is not settled at the draw. THEN the three rows the predecessor left; THEN HAND BACK.
+- **(U1)** stands: commit and push every batch the moment it holds, WHAT IS LEFT current in the same push; hand back at 250,000 (or about seventy minutes); one line to the chair at the hand-back, a stop, or a question.
+
+THE MERGE (the only one): the joined line at **3e482b329** (the late re-read cd0b1ab7b; both atoms), merge commit **01714675f** on this branch. The BEFORE census at that merged tree: 720 births, 0 errors; the tabs' inventory 29,945 sentences, the exports' 36,850.
+
+## TAIL-HOUSES-5 · Batch 8 (H20 (ii)): THE LATE RE-READ REACHES A HOUSE'S DESCRIPTION; the Household elder and the Merchant oligarchy read the settled powers
+
+WHAT IT TOOK (`src/generators/steps/assembleSettlement.js`, LENT; the crisis seat's hunks untouched): ONE call after the stress late re-read (which stands after `resolveFactionLabelsAtClose`, the last roster write), skipped where the DM holds the institutions, and ONE function at the file's end, `readHouseDescsLate`: for each institution whose stored `desc` is a key of `institutionDescVariants.js :: DESC_LATE_SIBLINGS` (keyed by the WHOLE description, matched in the tier noun the draw spoke it in: `speakTierNoun(key, tierNounFor(tier))`), `resolveSibling` against `factsOf(settlement)` (the settled record) stores the twin where the original is refused. The draw never reads the table (the description is drawn and resolved at the draw exactly as before). The crisis seat's two hazards: (1) the late pass resolves the ORIGINAL KEY, never a text a first resolve left (a late key is a text the draw stores unresolved by any late need); (2) every new late declaration is a declared move, measured by the births-only field diff below. THE WINDOW: between the draw (assembleInstitutions) and the late pass no writer reads a house's `desc` for a fact the late table keys (the receipt and the render read after).
+
+BYTE-IDENTITY: with the table empty, births on the 720 against the merged base: **720 of 720 records identical**.
+
+THE ROWS (each measured on the record at the merged base):
+| row | texts | towns | refused by | twin prints |
+|---|---|---|---|---|
+| the Household elder (03029, 00186, 14950; the catalogue line with them) | 3 | 37 (13, 13, 11) | needs `ruler: elder`, excludes `ruling body` (one elder ruler: a headman) | 37 of 37 (every census Household elder sits under an Elder or a Household Council) |
+| the Merchant oligarchy (X9 16785; its two siblings) | 3 | 37 (14, 14, 9) | excludes `rival power` (another power at Significant or above) | 23 of 37; 14 keep the original |
+
+| old (original, kept where the settled record admits it) | twin (stored where it refuses) |
+|---|---|
+| One household head acts as de facto voice for the settlement. No formal appointment, no title. Just the person everyone goes to when something needs deciding. | One household head is the person everyone goes to first when something needs deciding. No formal appointment, no title. |
+| A single household head speaks for the settlement without ever being chosen to. No office, no title, no vote. Simply the door people knock on when a thing has to be settled. | A single household head, never chosen to anything, is the door people knock on first when a thing has to be settled. No office, no title, no vote. |
+| One head of household carries the settlement's voice by common habit, with no appointment behind it. Nobody named them to it; everybody defers to it anyway. | One head of household is heard first on the settlement's common matters, by habit rather than appointment. Nobody named them to it. |
+| Wealthy merchant families hold exclusive civic power; political office is effectively purchased. | Wealthy merchant families hold the civic offices; political office is effectively purchased. |
+| Civic power belongs solely to the wealthy merchant families, and office is bought in all but name. | Civic power rests with the wealthy merchant families, and office is bought in all but name. |
+| A handful of rich merchant houses monopolise power here; a political post is, in practice, something one purchases. | A handful of rich merchant houses hold the seat of power here; a political post is, in practice, something one purchases. |
+
+DECLARED MOVE, births on the 720: **60 records, `institutions[].desc` only** (37 + 23). The colour marks of the late-declared variant keys and their ledger rows are taken off (a late-declared text is not a colour line). Guard: `tests/generators/houseDescLateReRead.test.js` (12 red pairs: red 12 of 12 under the plant that drops the late call, which is the base's behaviour; 3 KEEP pairs; the headman unit; the table; the pass's place in the source).
+
+MEASURE (before = the merged base 01714675f; after = this batch's tree 5d906f6e4): THE INVENTORY DIFF (tabs): 29,945 -> 29,946; gone 6 (the Household elder's six sentences: 13, 13, 13, 13, 11, 11), new 7 (the twins, the same towns), IN FEWER TOWNS 3 (the oligarchy's three originals: 14 -> 5, 14 -> 6, 9 -> 3: by exactly the 23 refused), in more towns 3 ("Patron deity", "Assign a patron god ...", "Upgrade to premium ..." 716 -> 717: the premium prompt's render flake that batches 3, 4 and 7 also saw; no house of this batch there). The exports: 36,850 -> 36,854; gone 9, new 13, in fewer 6 (the same three, each with its "Merchant oligarchy: " journal line), in more 0. Rows: 03029 13 -> 0, 00186 13 -> 0, 14950 13 -> 0; X9 16785 14 -> 6 (the 8 refused). THE INHERITORS: the seven twin sentences only (tabs), read in place (r2r-thorp-12, r2r-thorp-10, r2r-thorp-28, r2r-city-43, r2r-city-39, r2r-city-30).
+
+Gates (this tree): eslint 0 on the touched files; typecheck:domain:strict 0; typecheck:ratchet OK (167, ceiling 167); presumed-things `--check` the same output as the merged base (fresh 145, stale 3: the base's).
+
+## WHAT IS LEFT (TAIL-HOUSES-5, at batch 8's push)
+
+Batches 9 (the Town council, the Village elder, the Mayor and council: rewordings), 10 (the merchant guilds' politics and the woodcutter's camp: rewordings; 76 true lines, told to the chair) and 11 (the Hunter's lodge's hedge; the customs house's isolated twin, late) are committed on the seat's tree and in their census; they are pushed with their measure. Then: H20 (2) is NAMED (no atom reads a live input); 17954 is the size class's; the rest as TAIL-HOUSES-4's list below.
+
 ## TAIL-HOUSES-4 · instruments and tips
 
 - Tips: batch 6 ba3af4202; batch 7 and this hand-back are the tip. Handed back by time (about seventy minutes of this seat), after batch 7.
