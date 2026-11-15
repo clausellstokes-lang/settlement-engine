@@ -355,7 +355,11 @@ describe('THE TIME BANDS — no digits, and the predicate-only sixth', () => {
     const lines = ['LEGACY-RECOVERED', 'LEGACY-UNRESOLVED', 'LEGACY-SHIFTED']
       .flatMap((poolKey) => poolMemberTexts({ leaf: 'general', blockId: 'DS-GEN-16', poolKey, slots }));
     expect(lines.length).toBeGreaterThan(0);
-    expect(lines.filter((line) => !line.toLowerCase().includes(`the siege, ${age}`))).toEqual([]);
+    // re-keyed by identity (TAIL-CLOSE-DISPLAY-1; the move 4a01b319, W2-WRITE-4 item 3: DS-GEN-16's legacy lines say
+    // the band as a PREDICATE, never the appositive "the {calamity}, {timeband_age}"; dba1a16c, W2-WRITE-SIDE-13 M1:
+    // "that legacy is {timeband_age}", the {calamity} the subject of no verb):
+    // every legacy mold names the siege and says the band after a verb
+    expect(lines.filter((line) => !(line.toLowerCase().includes('the siege') && line.includes(` is ${age}`)))).toEqual([]);
   });
 
   test('no band word carries a numeral of any kind', () => {

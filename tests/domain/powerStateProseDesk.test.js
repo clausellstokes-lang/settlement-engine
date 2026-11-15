@@ -740,9 +740,12 @@ describe('DS-POW-6 — the capture pools are COVERT, and that is the kernel work
     expect(capturePoolKey('equilibrium', { safety: -12, prosperity: -10 })).toBe('capture pressure ADVANCING (weak security, poor prosperity)');
     expect(capturePoolKey('adversarial', { safety: -12, prosperity: -10 })).toBe('capture pressure ADVANCING (weak security, poor prosperity)');
     expect(capturePoolKey(undefined, { safety: -12, prosperity: -10 })).toBe('capture pressure ADVANCING (weak security, poor prosperity)');
-    // the DM's desk at none, with no official in a criminal's pay, prints the one ADVANCING line that presumes none
+    // the DM's desk at none, with no official in a criminal's pay, prints an ADVANCING line (re-keyed by identity,
+    // TAIL-CLOSE-DISPLAY-1: the move 91592cbf re-said the pool's two lines that had officials already bought, so every
+    // ADVANCING line now presumes none and none is struck there)
     const drawn = powerStateProse(underside(BREAK({ prosperity: -10, safety: -12 }), 'none'), {}, { seed: 'a', audience: 'dm' });
-    expect(drawn.captureReading?.sentence).toMatch(/^Each season it gets easier to buy an official/);
+    expect(typeof drawn.captureReading?.sentence).toBe('string');
+    expect(drawn.captureReading.provenance.poolKey).toBe('capture pressure ADVANCING (weak security, poor prosperity)');
   });
 });
 

@@ -76,10 +76,13 @@ THE CHAIR'S RULINGS TO JOIN-10 (each vetoable by the owner):
 |---|---|---|---|---|---|---|
 | 1 | lane/tail-crisis-2026-11-14 | 573c92b6d (06:50) | f714fb6a5 | b5e508ea9 | none | 11 files outside docs/; declared-move commits: 573c92b6d c08dbb65a fca2cf259 ab49049c8 375a55474 39dd18406 (golden carried) |
 | 2 | lane/tail-close-tests-c-2026-11-15 | 39af70713 (06:54) | f714fb6a5 | 92414b166 | none | 8 files outside docs/; declared-move commits: none (golden carried) |
+| 3 | lane/tail-close-display-2026-11-15 | 71ac99969 (06:57) | 17e38c547 | 64b5afc31 | none | 12 files outside docs/; declared-move commits: 036e82437 45c0b621a 96eaeff30 c3788c2bc (golden carried); merged clean though both moved: tests/components/displayEconRelianceFoodWords.test.jsx |
+| 4 | lane/tail-corpus-def-2026-11-14 | 922cfa66c (07:00) | f714fb6a5 | b7e861258 | none | 2 files outside docs/; declared-move commits: none (golden carried) |
+| 5 | lane/tail-crisis-2026-11-14 | b75ca93c7 (07:04) | 573c92b6d | 7a4229837 | none | 1 files outside docs/; declared-move commits: none (golden carried) |
 
 ## 3. Every code resolution
 
-None yet.
+**Point 3, the both-moved test file read** (close-display 71ac99969, holding the line at 17e38c547, against the line): `tests/components/displayEconRelianceFoodWords.test.jsx` merged clean; run alone at the merged tree: 5/5 green (`/home/user/j10out/t3.m.log`); the chair named it red on the line before this point (the reliance guard's 14 against the record's 4 and 13 per cent): the branch's side cures it. Both stand.
 
 ## 4. THE LIST FOR THE CLOSE
 
@@ -248,6 +251,8 @@ Merged clean though both sides moved them (for the close to re-derive or measure
 | file / test | branch (JOIN-10 point #) | why |
 |---|---|---|
 | golden | crisis (1) | DECLARED MOVE commits 573c92b6d c08dbb65a fca2cf259 ab49049c8 375a55474 39dd18406 (field diffs in their bodies) |
+| golden | close-display (3) | DECLARED MOVE commits 036e82437 45c0b621a 96eaeff30 c3788c2bc (field diffs in their bodies) |
+| tests/components/displayEconRelianceFoodWords.test.jsx | close-display (3) | merged clean though both sides moved them: the test files among them run alone at the merged tree, green ; read at the close |
 
 **[J10] every pin where the joined side was kept, by file (for the doors' seat to read each once):**
 
@@ -286,4 +291,4 @@ A worktree at origin's tip (`git worktree add /home/user/j10wt -b join10 <tip>`,
 
 ## 8. WHAT IS LEFT
 
-Landed through point 2 (see the table); waiting on the chair's LAND words. JOIN-9's stop at its point 17 (crisis) ANSWERED by point 1 (573c92b6d, settled on its branch).
+Landed through point 5 (see the table); waiting on the chair's LAND words.
