@@ -34,6 +34,7 @@ import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { deriveMagicRelianceView } from '../../src/domain/display/dossierViewModel.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const SIZE = '(thorp|hamlet|village|town|city|metropolis)';
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -107,8 +108,7 @@ describe('BAR3-LABELS batch 1: the magic words and the Foundations labels say wh
     const failures = collectSeedFailures([...new Set(ROLES.map((r) => r[0]))], (seed) => {
       const rows = roleRows(town(seed));
       for (const [, not, instead] of ROLES.filter((r) => r[0] === seed)) {
-        expect(rows, `${seed}: not "${not}"`).not.toContain(not);
-        expect(rows, `${seed}: "${instead}" prints`).toContain(instead);
+        expectAbsentWithAnchor(rows, not, instead, `${seed}: "${instead}" prints, not "${not}"`);
       }
     });
     expectNoSeedFailures(failures, 'the role rows read the record');
@@ -128,8 +128,7 @@ describe('BAR3-LABELS batch 1: the magic words and the Foundations labels say wh
     const failures = collectSeedFailures([...new Set(FOUNDATIONS.map((r) => r[0]))], (seed) => {
       const rows = foundations(town(seed));
       for (const [, not, instead] of FOUNDATIONS.filter((r) => r[0] === seed)) {
-        expect(rows, `${seed}: not "${not}"`).not.toContain(not);
-        expect(rows, `${seed}: "${instead}" prints`).toContain(instead);
+        expectAbsentWithAnchor(rows, not, instead, `${seed}: "${instead}" prints, not "${not}"`);
       }
     });
     expectNoSeedFailures(failures, 'the Foundations rows read the page');

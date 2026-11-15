@@ -107,6 +107,15 @@ F2 and amendment 2 (52 files). RED AT MY TIP, each run alone at 59185b62a too, t
 Everything else green. THE BOOKS MY CURES MOVE: none. No stored figure moved (display only); the presumed-things
 door's `--check` reads the same rows at both trees (fresh 3, stale 3, none in my files); the grid: 0 falls at both.
 Goods roster: no new import of a goods module in any file I touched (no roster row owed).
+The chair's four laws of the test corpus (19:50 UTC), for my guard `tests/components/bar3LabelWords.test.jsx`:
+`negativeAssertionAnchor` flagged its two negatives (lines 110, 131): cured in my test, each now
+`expectAbsentWithAnchor(rows, not, instead)` (the row that prints instead is the anchor, on the same path);
+`seedLoopTotality` and `proseDrawnAnchors` name no line of mine (the guard collects through `collectSeedFailures` and
+anchors no state-prose sentence). The three walkers' remaining reds name only the last round's `bar2*` files (the
+chair's sweep). Manifest entry owed: none (no new test file under `tests/generators`).
+A FILE I DID NOT TOUCH: the repository's main checkout shows `src/domain/facts/crisisKind.js` emptied (225 lines
+deleted, uncommitted, mtime 19:42:38 UTC, while my law runs were in flight in the scratch trees). Not restored, not
+committed: told to the chair at once (its restore is the chair's word).
 
 ## THE 525
 0 of the 525 move: no file under `src/generators/`, `src/data/` or any record writer changed (display only); and the
