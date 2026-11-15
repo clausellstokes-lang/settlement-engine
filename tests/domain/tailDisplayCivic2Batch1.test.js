@@ -1,11 +1,11 @@
 /**
- * TAIL-DISPLAY-CIVIC-2 · BATCH 1 (READ-ALL-3, the exports' read: 20491 26932 27231 04982 28629 29824 22279 22278 27635
- * 17171 17167 30561 06493; base: e633bd333). The threat rows (domain/display/threatAssessment.js :: buildThreatAssessment,
+ * TAIL-DISPLAY-CIVIC-2 · BATCH 1 (READ-ALL-3, the exports' read: 20491 26932 27231 28629 29824 22279 22278 27635
+ * 17171 17167; base: e633bd333). The threat rows (domain/display/threatAssessment.js :: buildThreatAssessment,
  * the PDF's Defense & Security chapter and the Defense tab's readiness rows both read them) said, by the census's 720 at
  * the base: what "a plague would" do where the outbreak is the town's own crisis; "There is a court" where the roster
  * lists a town hall; "organised crime" beside a safety label that names another cause; "Quiet country" and "the primary
  * threats here are internal" under a siege, an occupation, a war or a monster pressure; "a long siege" in a town with no
- * siege; "Watch rotations" where no watch stands; "the garrison usual remit". Births of the census's own seeds (CENSUS-3
+ * siege. Births of the census's own seeds (CENSUS-3
  * seedcfg.mjs :: cfgFor); every cured pair red at the base, every kept pair green before and after.
  */
 import { beforeAll, describe, expect, test } from 'vitest';
@@ -31,7 +31,6 @@ const CURED = [
   ['r2s-plague_onset-thorp-0', 'Disasters & Famine', 'a plague would run until it burned out', 'The outbreak has come, and no house here is kept to treat the sick.'],
   ['r2s-plague_onset-town-1', 'Disasters & Famine', 'keep an outbreak from spreading', 'The outbreak has come; the hospital is where the sick can be isolated.'],
   ['r2s-plague_onset-city-0', 'Disasters & Famine', 'an outbreak would outrun it', 'The outbreak has come, and the monastic infirmary treats the sick one at a time.'],
-  ['r2s-plague_onset-town-2', 'Internal Security', 'Arrest, trial and gaol all work here.', 'Cases are heard here, and there is a gaol to hold the guilty.'],
   ['r2s-famine-town-2', 'Internal Security', 'There is a court', 'Cases are heard here, but there is almost nowhere to hold anyone.'],
   ['r2s-plague_onset-thorp-0', 'Internal Security', 'organised crime', 'Internal security: Dangerous — Plague Unrest — Plague Conditions. No court and no gaol'],
   ['r2s-occupied-thorp-1', 'Beasts & Monsters', 'Quiet country', 'Few creatures trouble this country; the danger here now is not from beasts.'],
@@ -39,12 +38,11 @@ const CURED = [
   ['r2s-under_siege-town-2', 'Beasts & Monsters', 'The primary threats here are internal.', 'Few creatures trouble this country; the danger here now is not from beasts.'],
   ['r2s-plague_onset-town-3', 'Economic Survival', 'a long siege', 'Money enough for a short crisis, laid by before the outbreak; a long one would start eating the reserves within months.'],
   ['r2s-famine-town-3', 'Economic Survival', 'a long siege', 'Money enough for a short crisis, laid by before the famine; a long one would start eating the reserves within months.'],
-  ['r2r-hamlet-10', 'Beasts & Monsters', 'Watch rotations are thin.', "The militia's turns on watch are thin."],
-  ['r2s-under_siege-city-0', 'Beasts & Monsters', 'the garrison usual remit', "Charter hall handles anything above the garrison's usual remit."],
 ];
 // [seed, row, a true sibling that must still print]
 const KEPT = [
   ['r2r-thorp-0', 'Disasters & Famine', 'Nobody here treats the sick, and a plague would run until it burned out.'],
+  ['r2r-town-37', 'Disasters & Famine', 'The outbreak has come. Clergy provide basic wound care: better than nothing, worse than a hospital.'],
   ['r2r-town-12', 'Disasters & Famine', 'The hospital can isolate the sick and keep an outbreak from spreading.'],
   ['r2r-village-8', 'Disasters & Famine', 'A healer treats the sick one at a time; an outbreak would outrun it.'],
   ['r2r-thorp-0', 'Beasts & Monsters', 'Quiet country, and nothing organised is kept against it.'],

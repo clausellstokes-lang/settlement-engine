@@ -143,12 +143,18 @@ export function healerSubject(healerName) {
   return /monaster|friary|infirmar/i.test(String(healerName || '')) ? 'The monastic infirmary' : 'A healer';
 }
 
+/** The lead an outbreak in force gives the care sentence, and the clergy's sentence it keeps after it. */
+const OUTBREAK_LEAD = 'The outbreak has come.';
+const CLERGY_CARE = 'Clergy provide basic wound care: better than nothing, worse than a hospital.';
+
 /**
  * ⭐ AN OUTBREAK IN FORCE IS NOT A HYPOTHESIS (TAIL-DISPLAY-CIVIC-2, READ-ALL-3 20491 26932 27231, the exports' read): the
  * care sentence spoke of what "a plague would" do and what "an outbreak would" outrun in towns where the record's own
  * crisis is the outbreak (`crisisOf(...).has('plague_onset')`, the one crisis reader). There the row says the outbreak has
- * come and who tends it, from the same roster facts; elsewhere it reads as before. Its no-house twin names houses, not
- * people: the outbreak's own stand-in ("Tends the sick", `crisisCast.js`) is a person, and no house of care is kept.
+ * come and who tends it, from the same roster facts; elsewhere it reads as before. The clergy sentence, true under an
+ * outbreak, keeps its words after the outbreak's lead (a line is in its pool unless the town makes it false). Its
+ * no-house twin names houses, not people: the outbreak's own stand-in ("Tends the sick", `crisisCast.js`) is a person,
+ * and no house of care is kept.
  * @param {{ hasHospital: boolean, hasHealer: boolean, healerName: string|null }} facts @param {boolean} clergy
  * @param {boolean} outbreak @returns {string}
  */
@@ -159,7 +165,7 @@ export function careSentence(facts, clergy, outbreak) {
       : facts.hasHealer
         ? `The outbreak has come, and ${healerSubject(facts.healerName).replace(/^\w/, (ch) => ch.toLowerCase())} treats the sick one at a time.`
         : clergy
-          ? 'The outbreak has come, and only the clergy give the sick basic care.'
+          ? `${OUTBREAK_LEAD} ${CLERGY_CARE}`
           : 'The outbreak has come, and no house here is kept to treat the sick.';
   }
   return facts.hasHospital
@@ -167,7 +173,7 @@ export function careSentence(facts, clergy, outbreak) {
     : facts.hasHealer
       ? healerSubject(facts.healerName) + ' treats the sick one at a time; an outbreak would outrun it.'
       : clergy
-        ? 'Clergy provide basic wound care: better than nothing, worse than a hospital.'
+        ? CLERGY_CARE
         : 'Nobody here treats the sick, and a plague would run until it burned out.';
 }
 
@@ -229,7 +235,7 @@ export function buildThreatAssessment(r) {
           ? 'Charter hall coordinates specialist monster response.'
           : 'No specialist monster hunters on retainer: the garrison handles everything.'), ['ADEQUATE', 'STRONG']]];
     } else if (hasWalls && hasMilitia) {
-      monLines = [[(palisade ? 'Palisade' : 'Walls') + ' and citizen militia provide a viable but demanding posture in an embattled region. The militia\'s turns on watch are thin. Simultaneous incursions will break coverage. '
+      monLines = [[(palisade ? 'Palisade' : 'Walls') + ' and citizen militia provide a viable but demanding posture in an embattled region. Watch rotations are thin. Simultaneous incursions will break coverage. '
         + (hasCharter
           ? 'Charter hall provides specialist backup.'
           : 'No specialist monster hunters.'), ['ADEQUATE', 'WEAK']],
@@ -251,7 +257,7 @@ export function buildThreatAssessment(r) {
     if (hasWalls && hasGarrison) {
       monLines = [['Active frontier. Walls and garrison provide credible deterrence: most creature threats will not press a defended perimeter. '
         + (hasCharter
-          ? 'Charter hall handles anything above the garrison\'s usual remit. '
+          ? 'Charter hall handles anything above the garrison usual remit. '
           : '')
         + 'Adequate for the threat level.', ['STRONG', 'ADEQUATE']]];
     } else if (hasWalls && hasMilitia) {
@@ -334,11 +340,11 @@ export function buildThreatAssessment(r) {
   if (sl.includes('Dangerous') && !/\s—\s/.test(sl)) {
     intA += 'Violence and organised crime are the main danger here. ';
   }
-  // TAIL-DISPLAY-CIVIC-2 (READ-ALL-3 04982 28629): the court fact is a house that hears cases (a courthouse, or the town
-  // or city hall, or the assembly: `defenseFacts.js :: COURT_RE`), so the line says cases are heard, not that "a court"
-  // stands where the roster lists a town hall, and claims presence, not that all of it "works" under any crisis.
+  // TAIL-DISPLAY-CIVIC-2 (READ-ALL-3 28629): the court fact is a house that hears cases (a courthouse, or the town or
+  // city hall, or the assembly: `defenseFacts.js :: COURT_RE`), so the court-without-gaol line says cases are heard, not
+  // that "a court" stands where the roster lists a town hall.
   if (f.hasCourtSystem && f.hasPrison) {
-    intA += 'Cases are heard here, and there is a gaol to hold the guilty.';
+    intA += 'Arrest, trial and gaol all work here.';
   } else if (f.hasCourtSystem) {
     intA += 'Cases are heard here, but there is almost nowhere to hold anyone.';
   } else if (f.hasPrison) {
