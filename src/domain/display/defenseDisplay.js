@@ -762,17 +762,7 @@ function navalRowStandsOn(settlement) {
 import { recordNamesAMage as arcaneNamedHere } from '../facts/magic.js';
 
 // ─── W2-C-LEAVES-SIDE (the chair's #575): THE LEGAL ROW NAMES A COURT ONLY WHERE A HOUSE HOLDS ONE (at the end of the file) ───
-import { liveInstitutions } from '../institutions/institutionRoster.js';
-
-/** A house that is a court by its name: the courthouse, the court buildings. */
-const COURT_HOUSE = /courthouse|court buildings/i;
-/**
- * The catalogue's court services (`data/institutionServices.js`): a hall, a council or an administration holds a court
- * only where the town drew one of these for it ("Dispute adjudication: hears civil pleas in the town court", "Dispute
- * arbitration … before a magistrate", "Appeals court", "Courts and adjudication", the courthouse's own rows).
- */
-const COURT_SERVICES = new Set(['Civil disputes', 'Criminal trials', 'Civil litigation', 'Criminal proceedings', 'Appeals',
-  'Dispute arbitration', 'Appeals court', 'Dispute adjudication', 'Courts and adjudication', 'Legal appeals', 'Civic law enforcement']);
+import { courtBenchOf, courtHoldersOf } from '../facts/defence.js'; // TAIL-CLOSE-SRC-4 (SR1): the court's holders and its bench, read in the defence home
 
 /**
  * WHETHER A HOUSE ON THE LIVE ROSTER HOLDS A COURT (W2-C-LEAVES-SIDE, 2026-11-13; the chair's ruling on the cut's #575:
@@ -787,42 +777,6 @@ const COURT_SERVICES = new Set(['Civil disputes', 'Criminal trials', 'Civil liti
  */
 function courtOnRoster(settlement) {
   return courtHoldersOf(settlement).length > 0;
-}
-
-/**
- * THE HOUSES THAT HOLD THE TOWN'S COURT on the live roster: 'Courthouse' where a courthouse or court buildings stand,
- * else each live house that drew a court service (its roster name).
- * @param {DefenseDisplaySettlement} settlement
- * @returns {string[]}
- */
-function courtHoldersOf(settlement) {
-  const live = liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (/** @type {unknown} */ (settlement)))
-    .map((i) => String(/** @type {{ name?: unknown } | null} */ (i)?.name ?? '')).filter(Boolean);
-  if (live.some((n) => COURT_HOUSE.test(n))) return ['Courthouse'];
-  const drawn = /** @type {{ availableServices?: unknown }} */ (settlement)?.availableServices;
-  const rows = drawn && typeof drawn === 'object' ? Object.values(drawn).flat() : [];
-  /** @type {string[]} */
-  const holders = [];
-  for (const row of rows) {
-    const sv = /** @type {{ name?: unknown, institution?: unknown } | null} */ (row);
-    const inst = String(sv?.institution ?? '');
-    if (typeof sv?.name === 'string' && COURT_SERVICES.has(sv.name) && live.includes(inst) && !holders.includes(inst)) holders.push(inst);
-  }
-  return holders;
-}
-
-/**
- * V6 (TAIL-DISPLAY-CIVIC-4): THE BENCH THAT HEARS THE CASES where no courthouse stands: a council's ("Council bench") or
- * a town hall's ("Town hall bench"); null where a courthouse stands or the court's holder is another house (a city
- * administration's courts, a city hall's appeals court: courts by their own service rows).
- * @param {DefenseDisplaySettlement} settlement
- * @returns {string | null}
- */
-function courtBenchOf(settlement) {
-  const holders = courtHoldersOf(settlement);
-  if (holders.length === 0 || holders.includes('Courthouse')) return null;
-  if (holders.some((h) => !/council|town hall/i.test(h))) return null;
-  return holders.some((h) => /council/i.test(h)) ? 'Council bench' : 'Town hall bench';
 }
 
 // ─── W2-C-LEAVES-9: THE RING'S VANTAGES PASS THE LIST DOOR (at the end of the file, so no line above moves) ───
