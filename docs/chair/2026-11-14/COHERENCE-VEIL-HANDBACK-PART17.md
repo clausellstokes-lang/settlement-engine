@@ -7,7 +7,7 @@ checksums as the brief states them, proved). Brief: `lane/chair-2026-11-08 :: do
 `listen_addresses = ''`). No hosted database, no production credential, no `supabase db push`, no `migration repair`, no
 deploy, no golden's door, no pull request. **Nothing is applied anywhere but those local databases.**
 
-**TIP:** the commit carrying the latest copy of this file, read back from origin.
+**TIP:** the commit carrying the latest copy of this file, read back from origin (V8-3 at 93216d808; the census at 1f7f75a3f).
 
 ## 0. The rulings this seat works to (each vetoable by the owner)
 
@@ -132,3 +132,46 @@ arrived); this seat finishes V8-3, pushes it with 212's pair, and hands back the
 ## 6. The seat's own execution (not the builder's)
 
 - The first act: d0afa93dd read back from origin (equal); the four checksums proved (section 1).
+- The base measured first (section 2), pushed at 19017348f with this file begun (the chair's message of 02:03 UTC:
+  push every part the moment it holds).
+- V8-3 (93216d808, the builder's, to `veil-probe-16/briefs/SUB-BRIEF-V8-3.md`): THE SEAT READ THE DIFF LINE BY LINE
+  (212's header entry (26) and section 4c; `_gallery_veil_name_ready`'s A-Z by `lower()` in the C collation;
+  `_gallery_veil_name_json`, its escapes paired left to right, every reverse solidus of a JSON text starting one;
+  `_gallery_veil_name_hits`, the two splits paired by ordinal, a mismatch failing closed to every token; the
+  separators-only names by JSON spelling (an odd alignment inside a run of U+0001 cannot answer differently from an
+  even one); `_gallery_veil_name_hit` and `_named` as look-ups; `_gallery_veil_name_tokens`; the re-signed
+  `_gallery_veil_name_near` (two `width_bucket`s over the ascending places); the sweep's window offsets, computed over
+  every entry before the floor filter; the rollback's three drops by signature; both new guard arms). EVERY CALLER of
+  the look-ups asks a value of the same `s` the hits were read from, only shortened in between (filters, key
+  removals in `_gallery_veil_second_homes`): no string outside the document is asked, so no look-up can miss. Nothing
+  found to cure. Executed by the seat: the six guard files 119 of 119 (galleryVeilHandRows 17); the acceptance run exit
+  1, a07 and d06 the only FAIL rows, e06 PASS, the twin 15 of 15, V7-10 PASS (x211 30, x212 38 ms), V7-6 PASS twice
+  (354 / 302, 1119 / 1175 ms); on the tree's chain no `_gallery_veil*` helper executable by anon or authenticated (the
+  three new signatures among them); the four checksums at 93216d808 (section 1). The twin and src/ unchanged (no
+  typecheck owed). THE HOLDERS (by content, section 5's bare repository): 212, its rollback and
+  `galleryVeilHandRows.pglite.test.js` exist on no lane but this one: nothing FOR THE JOIN.
+- THE LIGHTING CENSUS: the walker red for this lane's own file alone (titles 29269 -> 29271, the two V8-3 arms);
+  re-taken through its door at the clean tip 93216d808 in its own commit (1f7f75a3f); the ordinary walker after it 34 of
+  34, exit 0.
+- THE WORKER RESTARTED at about 03:25 UTC after the seat's own runs had finished (their outputs survived under
+  `/var/tmp/v16/out/seat/`); the scratch cluster's process died with it (its data directory `/var/tmp/v16pg` remains:
+  `pg_ctl ... start` re-opens it). Nothing was lost: 93216d808 was committed, and pushed after the restart.
+
+## 7. HANDED BACK (2026-11-15, after V8-3, at the chair's ruling of 02:03 UTC)
+
+The count, read by `get_session` after V8-3 and the census: **283,960**, under the mark of 300,000; the chair ruled the
+hand-back after the item in hand, so no further item was started. Nothing is running; every commit is pushed.
+
+**DONE:** the first act (d0afa93dd read back, the four checksums proved); the base measured (19017348f); V8-3
+(93216d808: the name walk in one pass; every cost-law row under twice the frozen 211: the V8-3 row 1.14 x, Langengrund's
+link 1.64 to 1.80 x, the large rows 1.11 and 1.16 x; the answers unmoved on 1,152 born reads and every plant); the
+lighting census (1f7f75a3f, +2 titles); this file. 212 is now `46389052…941bce0b`, down `5b3eb697…df694f` (section
+1). 211's two files untouched, proved at the first commit and at the last.
+**WHAT IS LEFT:** section 4, from V8-9, in order: V8-9 (the drafted sub-brief `veil-probe-16/briefs/SUB-BRIEF-V8-9.md`:
+bring `<TIP>` to the tip it is built on; the base's V8-9 rows are section 2's: 600 x 145, 1,000 x 80 and 1,500 x 145 raise
+on 212 where 211 serves; THE COST row nearest the law after V8-3 is cost8's 50 houses, 500 + 500: 174 against x211 92 ms,
+1.89 x, the alternation's own pass, V8-9's habitat); then V8-2, V8-4, V8-5; then B, C, D; E; F and G after the chair
+answers E.
+**FOR THE NEXT SEAT:** the instruments of section 5 are this container's and go with it; every script that made a number
+here is in `veil-probe-16/measure`; the acceptance run at 93216d808 is section 6's (exit 1, a07 and d06 the only FAIL
+rows, twin 15 of 15); the guard set is six files, 119 of 119; the mutex's shared tier takes two workers.
