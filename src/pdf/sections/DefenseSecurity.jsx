@@ -108,7 +108,7 @@ export function DefenseSecurity({ settlement, narrativeMode, vm, stateProse }) {
         THREAT ASSESSMENT
       </Text>
       <Text style={{ ...type.caption, fontSize: pt['7.5'], color: palette.muted, fontStyle: 'italic', marginBottom: 4 }}>
-        Each bar shows how ready the settlement is for that threat, as judged at the first survey; Disasters & Famine is re-judged as the campaign advances. A longer bar is safer.
+        Each bar shows how ready the settlement is for that threat, as judged at the first survey; Disasters & Famine is re-judged as your campaign goes on. A longer bar is safer.
       </Text>
       {d.threatReadiness.map((row, i) => (
         <View
