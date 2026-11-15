@@ -65,7 +65,9 @@ const NOT = /** @type {const} */ ([
   ['r2s-famine-town-2', 'economics', 'Law enforcement, patrol and gate control here depend on iron', 'Law enforcement and patrol here depend on iron (no gate, no wall)'],
   ['r2s-under_siege-town-1', 'economics', 'Law enforcement, patrol and gate control here depend on iron from outside', 'Law enforcement and patrol here depend on iron from outside'],
   ['r2s-under_siege-town-0', 'economics', 'Contributes to Entrepôt Trade - 11% of income', 'silent: the siege stopped the card'],
-  ['r2s-famine-town-1', 'economics', 'Contributes to Grain Sales - 4% of income', 'silent: the famine failed the grain'],
+  // re-keyed by identity (TAIL-CLOSE-DISPLAY-1): the same card, its share moved 4 -> 5 by the DECLARED MOVES that moved the
+  // Entrepôt keep below (TAIL-DEFECON-2 5f67f382d, TAIL-DEFECON-3 2ac50c55d); the famine still silences it
+  ['r2s-famine-town-1', 'economics', 'Contributes to Grain Sales - 5% of income', 'silent: the famine failed the grain'],
 ]);
 /** [seed, tab, the twin true in the state that made the old line false] (new or newly reached lines: red at the base by design) */
 const TWIN = /** @type {const} */ ([

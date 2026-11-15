@@ -56,8 +56,13 @@ const textOf = (t) => { const v = page(t); const out = v.container.textContent |
 const NOT = /** @type {const} */ ([
   ['r2r-town-37', 'Port Duties Import and export taxes', 'Port Duties Curtailed by the outbreak. Import and export taxes'],
   ['r2r-town-37', 'Market Taxes Market day stall fees', 'Market Taxes Curtailed by the outbreak. Market day stall fees'],
-  ['r2s-famine-hamlet-0', 'Fish & Maritime Produce Catch landed', 'Fish & Maritime Produce Scarce in the famine. Catch landed'],
-  ['r2s-under_siege-town-1', 'Pilgrim Trade Offerings, hospitality fees', 'Pilgrim Trade Stopped by the siege. Offerings, hospitality fees'],
+  // RE-KEYED BY IDENTITY (TAIL-CLOSE-DISPLAY-1) to the nearest town of the same shape that still shows the claim (a row
+  // the crisis marks, then its description): the economy family's DECLARED MOVES on the joined line left both rows
+  // with no description (TAIL-DEFECON-3 2ac50c55d: the fish row's line where the record holds none, in every famine birth
+  // of the census's r2s- arm; TAIL-DEFECON-2 5f67f382d: Pilgrim Trade only where a house of pilgrimage stands, its line
+  // off under a siege): the famine's grain row in a town, the siege's magical trade row in a town
+  ['r2s-famine-town-5', 'Grain Sales Grain purchased from farming regions', 'Grain Sales Scarce in the famine. Grain purchased from farming regions'],
+  ['r2s-under_siege-town-2', 'Magical Trade Revenue Magical trade conduits generate modest fees', 'Magical Trade Revenue Stopped by the siege. Magical trade conduits generate modest fees'],
   ['r2s-plague_onset-thorp-2', 'Toll Revenue Tolls taken on the roads', 'Toll Revenue Curtailed by the outbreak. Tolls taken on the roads'],
 ]);
 /** [seed, the twin true in the state that made the unmarked row false] (red at the base by design) */
@@ -72,7 +77,9 @@ const TWIN = /** @type {const} */ ([
 const KEEP = /** @type {const} */ ([
   ['r2s-under_siege-town-1', 'Iron & Metalwork Metal is smelted or worked here.'], // the siege stops no forge (the leaf's table)
   ['r2r-town-37', 'Guild Fees Annual licensing fees'],
-  ['r2s-famine-hamlet-0', 'Agricultural Rents Payments in kind or coin from tenant farmers'],
+  // re-keyed by identity (TAIL-CLOSE-DISPLAY-1): the same claim in a famine hamlet that still holds the rents row (TAIL-DEFECON-2
+  // df2fa5ca: r2s-famine-hamlet-0's own-fields share is "Harvest" now, the rents row only where a lord's steward or reeve stands)
+  ['r2s-famine-hamlet-2', 'Agricultural Rents Payments in kind or coin from tenant farmers'],
 ]);
 /** Towns whose flow cards the leaf marks: the cards print exactly the leaf's count of marks. */
 const CARD_TOWNS = ['r2r-town-37', 'r2s-famine-hamlet-0', 'r2s-under_siege-town-1', 'r2r-metropolis-14'];
