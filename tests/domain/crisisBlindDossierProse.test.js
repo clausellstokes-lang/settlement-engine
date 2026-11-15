@@ -264,7 +264,8 @@ describe('F12 · the crisis dimensions on the state-prose desks', () => {
     // 38a21278 (corpus-eco), 17 at 31a6f72e (corpus-def). Re-measured 17 at TAIL-CRISIS-7's tip (the joined line at 74688857c). No planted case holds it, so
     // more cures can take it to zero: the pin then needs a plant, not a floor (the hand-back says so).
     // 16 at BAR2-CORPUS batch 1 (2026-11-15, measured on the merged tree af120bdd4): a calm claim cured at the source.
-    expect(claims).toBeGreaterThanOrEqual(16);
+    // 15 at BAR3-CORPUS batch 1 (2026-11-15, measured on lane/bar3-corpus-2026-11-15 over 59185b62a): a calm claim cured at the source.
+    expect(claims).toBeGreaterThanOrEqual(15);
   });
 
   it('a pool the marks partition is never mute under a crisis, and never draws a calm claim there', () => {

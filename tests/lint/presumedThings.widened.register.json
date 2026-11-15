@@ -2175,18 +2175,6 @@
     "80efc1377cbf9c25"
    ],
    [
-    "armedForce",
-    "family",
-    "The supply book for {settlement}'s defenders runs short: the trades that should feed and equip them are failing, so the ",
-    "d50d6422ac7025a9"
-   ],
-   [
-    "armedForce",
-    "family",
-    "{settlement}'s defenders are a little worse off every month the trades behind them keep failing.",
-    "df3a81bf57efa9dc"
-   ],
-   [
     "clergy",
     "family",
     "There is food stored at {settlement} and there are clergy who tend the sick: reserves against hunger, and against diseas",
@@ -2631,30 +2619,6 @@
     "word",
     "A merchant arriving at {settlement} soon learns that the religious house has the last word on who trades here and on wha",
     "06577da4a386b68b"
-   ],
-   [
-    "religiousHouses",
-    "word",
-    "Faith carries real weight in {settlement}'s money. What the religious houses take in and spend is a large part of the to",
-    "466f760246b3b205"
-   ],
-   [
-    "religiousHouses",
-    "word",
-    "The religious houses at {settlement} are among its biggest buyers and employers, and a bad year for them is a bad year f",
-    "d66f2b242f0fa38c"
-   ],
-   [
-    "practitioner",
-    "word",
-    "Magic carries real weight in {settlement}'s money. What the town's practitioners charge for, and what they buy, is a lar",
-    "151068ab1621e1f5"
-   ],
-   [
-    "practitioner",
-    "word",
-    "The people who work magic at {settlement} are among its biggest buyers and employers, and much of the town's trade turns",
-    "c57381a52d12dac4"
    ],
    [
     "granary",

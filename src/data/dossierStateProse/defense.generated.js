@@ -1663,7 +1663,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "CHAIN: defence short": [
         {
           "angle": "ledger",
-          "text": "The supply book for {settlement}'s defenders runs short: the trades that should feed and equip them are failing, so the defence is weaker than its numbers suggest.",
+          "text": "The trades that feed and equip {settlement}'s defenders are not on a sure footing, so the defence is a little weaker than its numbers suggest.",
           "slots": [
             "settlement"
           ],
@@ -1671,7 +1671,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The trades that should supply {settlement}'s defence are struggling, and its food and gear are the first things at risk.",
+          "text": "The trades that supply {settlement}'s defence are not secure, and its food and gear are the first things at risk.",
           "slots": [
             "settlement"
           ],
@@ -1679,7 +1679,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "The workshops that should feed and equip {settlement}'s defence are failing, and the defence will feel it before long.",
+          "text": "The workshops behind {settlement}'s defence are not on a sure footing, and the defence counts for a little less for it.",
           "slots": [
             "settlement"
           ],
@@ -1687,7 +1687,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "{settlement}'s defenders are a little worse off every month the trades behind them keep failing.",
+          "text": "{settlement}'s defenders are a little worse off for the trades behind them, which are not on a sure footing.",
           "slots": [
             "settlement"
           ],
@@ -1794,7 +1794,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no crisis: under_siege"
           ],
-          "text": "{settlement}'s food trades are failing, and each season they fail the town has less put by to fall back on if it is cut off.",
+          "text": "{settlement}'s food trades are failing, and what they fail to put by is food the town would miss if it were cut off.",
           "slots": [
             "settlement"
           ],
@@ -2798,7 +2798,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "Organized criminals at {settlement} now outweigh the law outright, and nothing in the town gets done without someone's permission and someone's cut.",
+          "text": "Crime at {settlement} now outweighs the law outright, and nothing in the town is safe from it.",
           "slots": [
             "settlement"
           ],
@@ -3817,7 +3817,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "street",
           "marks": [
-            "no unrest"
+            "no unrest",
+            "no crisis: famine"
           ],
           "text": "Crime at {settlement} has an order to it. What is permitted is permitted by somebody, random violence is put down because it draws attention, and the arrangement is stable enough to negotiate with.",
           "slots": [
@@ -3839,7 +3840,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "visitor",
           "marks": [
-            "colour"
+            "no crisis: famine"
           ],
           "text": "Visitors at {settlement} are not robbed; someone quietly explains how things are run here and who runs them.",
           "slots": [
@@ -3850,7 +3851,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "counterforce",
           "marks": [
-            "no unrest"
+            "no unrest",
+            "no crisis: famine"
           ],
           "text": "There is very little street violence at {settlement}, and the watch is not the reason: the people who run the town's crime put down anything that would bring the law on them.",
           "slots": [
@@ -4410,7 +4412,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "gate",
             "no crisis: under_siege"
           ],
-          "text": "There is a line around {settlement} and it is kept: the gates shut, the works are repaired, and a stranger enters where the town intends him to.",
+          "text": "There is a line around {settlement} and it is kept: the gates shut, the works are repaired, and a stranger who comes by the road enters where the town intends.",
           "slots": [
             "settlement"
           ],
@@ -4424,7 +4426,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "no port",
             "no crisis: under_siege"
           ],
-          "text": "{settlement} is walled, and every arrival goes through a gate and into the gate tally; trouble can only get in where the town decides.",
+          "text": "{settlement} is walled, and every arrival by road goes through a gate and into the gate tally.",
           "slots": [
             "settlement"
           ],
@@ -4858,7 +4860,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no crisis: under_siege"
           ],
-          "text": "Traffic in and out of {settlement} goes through its gates, and that is where anyone arriving is first seen.",
+          "text": "Road traffic in and out of {settlement} goes through its gates, and that is where anyone arriving by road is first seen.",
           "slots": [
             "settlement"
           ],
@@ -4880,7 +4882,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no crisis: under_siege"
           ],
-          "text": "You come into {settlement} by a gate, and someone at the gate sees you come.",
+          "text": "Come to {settlement} by the road and you come in by a gate, where someone sees you come.",
           "slots": [
             "settlement"
           ],
@@ -4891,7 +4893,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no crisis: under_siege"
           ],
-          "text": "Whatever reaches {settlement} by road reaches it at a gate, and the town can close them against it.",
+          "text": "Whatever reaches {settlement} by road reaches it at a gate, and the gates can be closed against it.",
           "slots": [
             "settlement"
           ],

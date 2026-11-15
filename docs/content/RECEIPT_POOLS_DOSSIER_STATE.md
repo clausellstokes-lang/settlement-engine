@@ -1240,7 +1240,7 @@ contradict** it (R-DST-C).
 
 **MODERATE** — *steady, thin margin* {crisis-scoped}
 1. `[ledger · crisis: any]` {settlement}'s treasury takes in a little more than it pays out each year. It is enough, and no more.
-2. `[street · no crisis]` Things are fine. Not comfortable, not tight: fine, and fine is what people here expect.
+2. `[street · no crisis]` Money at {settlement} is neither comfortable nor tight, and that is what people here expect of it.
 3. `[visitor · no crisis]` Nothing about {settlement}'s condition asks to be remarked on. The town pays its own way and has a little in hand.
 4. `[visitor · crisis · crisis: any]` {settlement}'s accounts still balance, and that is the one thing about the town the crisis has not yet reached.
 
@@ -1777,8 +1777,8 @@ shape.
 3. `[threshold · no hunger · prosperity: ≥ moderate]` {settlement} lives on one trade. It is doing well enough now, but if that trade has a bad year, the whole town has a bad year.
 
 **INCOME MIX: two or three sources between them**
-1. `[ledger]` {settlement} earns most of its living from two or three trades, and none of them could carry the place alone.
-2. `[street]` Ask what {settlement} lives on and you will hear two or three trades named, not one.
+1. `[ledger]` {settlement}'s biggest trade earns a real portion of its living, but none of its trades could carry the place alone.
+2. `[street]` Ask what {settlement} lives on and you will hear more than one trade named.
 3. `[counterforce]` No one trade earns half of what {settlement} makes, so a bad year in any one of them would hurt without ruining it.
 
 **INCOME MIX: a broad spread, no leader**
@@ -1833,14 +1833,14 @@ shape.
 3. `[ledger · no imports]` The country around {settlement} does not give the town enough {good}, so the town must look elsewhere for the rest.
 
 **INCOME WEIGHT: the religious houses** *(`compound.religionInfluence` high)*
-1. `[ledger · sacredHouse · tier: ≥ village]` Faith carries real weight in {settlement}'s money. What the religious houses take in and spend is a large part of the town's business.
-2. `[street · sacredHouse · tier: ≥ village]` The religious houses at {settlement} are among its biggest buyers and employers, and a bad year for them is a bad year for the town.
+1. `[ledger · sacredHouse · tier: ≥ village]` Faith carries real weight at {settlement}: what the religious houses say is heard in the town's dealings, whatever their own share of its money.
+2. `[street · sacredHouse · tier: ≥ village]` The religious houses at {settlement} are heard in its dealings, and a quarrel with them is one the town's traders feel.
 3. `[ledger · no sacredHouse · no crisis: under_siege]` {settlement} keeps no house for its faith, so none of the town's money passes through one.
 4. `[street · no sacredHouse · no crisis: under_siege]` Whatever {settlement}'s people give for their faith is given elsewhere, or not at all: the place keeps no house to take it.
 
 **INCOME WEIGHT: the practice of magic** *(`compound.magicInfluence` high)*
-1. `[ledger · colour]` Magic carries real weight in {settlement}'s money. What the town's practitioners charge for, and what they buy, is a large part of its business.
-2. `[street · colour]` The people who work magic at {settlement} are among its biggest buyers and employers, and much of the town's trade turns on their custom.
+1. `[ledger · colour]` Magic carries real weight at {settlement}: what it can do is reckoned with in the town's dealings, whatever its own share of the town's money.
+2. `[street · colour]` Magic is reckoned with in {settlement}'s dealings, whatever it earns.
 
 ---
 
@@ -2382,10 +2382,10 @@ and never an assertion that the feared thing is happening.
 **PDF PARITY:** parity (`viewModel.js` power slice).
 
 **`autocrat`** {colour}
-1. `[ledger · no crisis: succession]` One person decides at {settlement} and decides quickly; what comes out of the {seat} arrives whole and can change entirely between one season and the next.
-2. `[street · no crisis: succession]` At {settlement} one person gives the answer, and gives it quickly, and there is nobody to ask for a different one.
-3. `[unfolding · no crisis: succession]` The {seat} at {settlement} answers to one person, and if that person falls it will be at the hands of someone close to them.
-4. `[visitor · no crisis: succession]` At {settlement} one audience with the {seat} gets a decision, good or bad, and there is nobody to appeal to afterwards.
+1. `[ledger · no crisis: succession]` Decisions at {settlement} come quickly; what comes out of the {seat} arrives whole and can change entirely between one season and the next.
+2. `[street · no crisis: succession]` At {settlement} the answer comes quickly, and asking again seldom gets a different one.
+3. `[unfolding · no crisis: succession]` If the {seat} at {settlement} falls, it will be at the hands of someone close to it.
+4. `[visitor · no crisis: succession]` At {settlement} one audience with the {seat} gets a decision, good or bad, and it comes quickly.
 5. `[unfolding · crisis: succession]` Who speaks for the {seat} at {settlement} is an open question now, and until it is settled, nothing that comes out of the {seat} is sure to stand.
 
 **`council`** {colour}
@@ -2976,10 +2976,10 @@ in about two towns in five that keep a force.
 5. `[street · crisis: hunger]` Food is short at {settlement}, but the trades behind its defence still do it more good than harm.
 
 **CHAIN: defence short** {colour}
-1. `[ledger]` The supply book for {settlement}'s defenders runs short: the trades that should feed and equip them are failing, so the defence is weaker than its numbers suggest.
-2. `[street]` The trades that should supply {settlement}'s defence are struggling, and its food and gear are the first things at risk.
-3. `[visitor]` The workshops that should feed and equip {settlement}'s defence are failing, and the defence will feel it before long.
-4. `[unfolding]` {settlement}'s defenders are a little worse off every month the trades behind them keep failing.
+1. `[ledger]` The trades that feed and equip {settlement}'s defenders are not on a sure footing, so the defence is a little weaker than its numbers suggest.
+2. `[street]` The trades that supply {settlement}'s defence are not secure, and its food and gear are the first things at risk.
+3. `[visitor]` The workshops behind {settlement}'s defence are not on a sure footing, and the defence counts for a little less for it.
+4. `[unfolding]` {settlement}'s defenders are a little worse off for the trades behind them, which are not on a sure footing.
 
 **CHAIN: food trades working** {colour}
 1. `[ledger · no crisis: under_siege · no crisis: famine]` {settlement}'s food trades are working, and what they put by means the town would not run short at once if it were cut off.
@@ -2992,7 +2992,7 @@ in about two towns in five that keep a force.
 **CHAIN: food trades failing** {colour}
 1. `[ledger · no crisis: under_siege]` {settlement}'s food trades are failing, so less food is being put by than should be; if the town were cut off, it would have less to fall back on than it ought.
 2. `[street · no crisis: under_siege]` The food trades at {settlement} are struggling to keep up, and less is being put by against the town being cut off than ought to be.
-3. `[unfolding · no crisis: under_siege]` {settlement}'s food trades are failing, and each season they fail the town has less put by to fall back on if it is cut off.
+3. `[unfolding · no crisis: under_siege]` {settlement}'s food trades are failing, and what they fail to put by is food the town would miss if it were cut off.
 4. `[ledger · crisis: under_siege]` {settlement} is cut off now, and its food trades were failing before the siege began, so less was put by than there should have been.
 5. `[street · crisis: under_siege]` With {settlement} cut off, people count the stores every week, and the food trades that should have filled them were failing before the siege began.
 
@@ -3076,7 +3076,7 @@ reading rather than a settled one.
 
 **`Dangerous`**
 1. `[street · watch]` The watch at {settlement} has been overwhelmed. What happens in this town is decided by whoever is present when it happens.
-2. `[ledger · colour]` Organized criminals at {settlement} now outweigh the law outright, and nothing in the town gets done without someone's permission and someone's cut.
+2. `[ledger · colour]` Crime at {settlement} now outweighs the law outright, and nothing in the town is safe from it.
 3. `[visitor · colour]` Nobody at {settlement} warns visitors about particular streets, because the warning would cover all of them.
 
 **COMPOUND override (a crisis stress has rewritten the label)**
@@ -3212,10 +3212,10 @@ the leash is the state, not a fate.
 `corrupted` and above (the print chapter carries no audience gate of its own).
 
 **structure `organized`**
-1. `[street · no unrest]` Crime at {settlement} has an order to it. What is permitted is permitted by somebody, random violence is put down because it draws attention, and the arrangement is stable enough to negotiate with.
+1. `[street · no unrest · no crisis: famine]` Crime at {settlement} has an order to it. What is permitted is permitted by somebody, random violence is put down because it draws attention, and the arrangement is stable enough to negotiate with.
 2. `[ledger · colour]` The criminal interest at {settlement} is a hierarchy rather than a nuisance: predictable, rule-bound, and extracting steadily from the same places every season.
-3. `[visitor · colour]` Visitors at {settlement} are not robbed; someone quietly explains how things are run here and who runs them.
-4. `[counterforce · no unrest]` There is very little street violence at {settlement}, and the watch is not the reason: the people who run the town's crime put down anything that would bring the law on them.
+3. `[visitor · no crisis: famine]` Visitors at {settlement} are not robbed; someone quietly explains how things are run here and who runs them.
+4. `[counterforce · no unrest · no crisis: famine]` There is very little street violence at {settlement}, and the watch is not the reason: the people who run the town's crime put down anything that would bring the law on them.
 
 **structure `semi-organized`** {colour}
 1. `[ledger]` Criminal work at {settlement} is coordinated enough to hold routes and territories, though not yet tight enough to run the whole town.
@@ -3303,8 +3303,8 @@ may not say the contract is failing unless the economic arm supplies that.
 **PDF PARITY:** parity.
 
 **walls PRESENT**
-1. `[visitor · gate · no crisis: under_siege]` There is a line around {settlement} and it is kept: the gates shut, the works are repaired, and a stranger enters where the town intends him to.
-2. `[ledger · gate · guardPresence · no port · no crisis: under_siege]` {settlement} is walled, and every arrival goes through a gate and into the gate tally; trouble can only get in where the town decides.
+1. `[visitor · gate · no crisis: under_siege]` There is a line around {settlement} and it is kept: the gates shut, the works are repaired, and a stranger who comes by the road enters where the town intends.
+2. `[ledger · gate · guardPresence · no port · no crisis: under_siege]` {settlement} is walled, and every arrival by road goes through a gate and into the gate tally.
 3. `[street · gate · no crisis: under_siege]` The town has a wall and arranges its day around the gates without noticing that it does.
 4. `[visitor · no gate · no crisis: under_siege]` {settlement} has a wall but no proper gate in it: people come and go by gaps everyone knows, and the wall slows trouble more than it stops it.
 5. `[street · no gate · no crisis: under_siege]` The wall around {settlement} turns back a wandering beast and slows a raid; nobody counts who comes in, because there is no gate to count them at.
@@ -3376,10 +3376,10 @@ bucket), beside the force line. The fixture pools never print alone. Description
 lines.
 
 **FIXTURE: gates** {colour}
-1. `[street · no crisis: under_siege]` Traffic in and out of {settlement} goes through its gates, and that is where anyone arriving is first seen.
+1. `[street · no crisis: under_siege]` Road traffic in and out of {settlement} goes through its gates, and that is where anyone arriving by road is first seen.
 2. `[ledger · no crisis: under_siege]` The wall at {settlement} is entered by its gates, and the gate tolls are counted there; a gate left unwatched is a toll lost.
-3. `[visitor · no crisis: under_siege]` You come into {settlement} by a gate, and someone at the gate sees you come.
-4. `[unfolding · no crisis: under_siege]` Whatever reaches {settlement} by road reaches it at a gate, and the town can close them against it.
+3. `[visitor · no crisis: under_siege]` Come to {settlement} by the road and you come in by a gate, where someone sees you come.
+4. `[unfolding · no crisis: under_siege]` Whatever reaches {settlement} by road reaches it at a gate, and the gates can be closed against it.
 5. `[visitor · crisis: under_siege]` {settlement}'s gates are shut and barred, and nothing has come through them since the siege began.
 
 **FIXTURE: charter hall** {colour}
@@ -6894,7 +6894,7 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 **PROVENANCE:** The accretion mechanism (stalls crowd where the traffic is) is engine-native at the habit level, and this block speaks it as ORIENTATION and CUSTOM only, never as map geometry: which gate, which square and which frontage are the map engine's facts, not the dossier's, and none of them exists here. `DS-ECO-4` owns prices and `DS-ECO-12` owns the trade-profile rows; this block owns why the town's exchange has the shape it has at all. The one-value extension of `DS-ECO-1`'s narrow convention is recorded above rather than made silently.
 
 **`MARKET-OPEN`** {crisis-scoped · market}
-1. `[street · no crisis: under_siege · no crisis: plague_onset · no crisis: wartime · crisis: any · tier: ≤ town]` Market day is when {settlement} fills: the roads bring buyers, and the stalls are there for them.
+1. `[street · no crisis: under_siege · no crisis: plague_onset · no crisis: wartime · no crisis: famine · crisis: any · tier: ≤ town]` Market day is when {settlement} fills: the roads bring buyers, and the stalls are there for them.
 2. `[ledger · crisis: any · no crisis: under_siege · no crisis: plague_onset · no crisis: wartime]` {settlement}'s market lives off through-traffic; the town sells to the road as much as to itself.
 3. `[visitor · market · crisis: any · no crisis: under_siege · no crisis: plague_onset]` Visitors find {settlement}'s market without asking; the main road leads straight to it.
 4. `[elder · crisis: any · no crisis: under_siege]` The market stands where carts always stopped; stalls followed the carts, and {settlement} grew around them.
@@ -6927,7 +6927,7 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 
 **`COMMERCE: a merchant guild, no bank`** *(`hasMerchantGuild`, not `hasBank`)*
 1. `[visitor · no crisis: under_siege]` A merchant who wants to sell at {settlement} goes first to its merchant guild to learn where, when and for what fee.
-2. `[ledger · no crisis: under_siege]` {settlement}'s merchant guild sets the terms of trade and its members carry the town's dealings outward.
+2. `[ledger · no crisis: under_siege · no crisis: occupied]` {settlement}'s merchant guild sets the terms of trade and its members carry the town's dealings outward.
 3. `[street · colour]` Members of {settlement}'s merchant guild do most of the buying and selling that matters.
 4. `[threshold · no crisis: under_siege]` An outside trader at {settlement} either accepts its merchant guild's terms or sells to the guild's members at their price.
 
@@ -6938,7 +6938,7 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 4. `[threshold · no crisis: under_siege]` A newcomer with a trade at {settlement} must be taken on by its guild before they can work here.
 
 **`COMMERCE: a market, no guild`** *(`hasMarket`, none of the other three)*
-1. `[visitor · no guild]` Anyone with goods and the stall fee can sell at {settlement}'s market without a guild's leave.
+1. `[visitor · no guild · no crisis: under_siege]` Anyone with goods and the stall fee can sell at {settlement}'s market without a guild's leave.
 2. `[ledger · market · no guild]` No guild keeps a house at {settlement}'s market: the town's own hold on trade there is the stall fee.
 3. `[street · no guild]` Buying and selling at {settlement} is done face to face at the market with no guild between seller and buyer.
 4. `[threshold · no guild · no crisis: under_siege · no crisis: occupied]` A stranger can set up and sell at {settlement} on the next market day with nobody's leave but the stall-keeper's.

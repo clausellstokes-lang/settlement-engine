@@ -9400,6 +9400,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
             "no crisis: under_siege",
             "no crisis: plague_onset",
             "no crisis: wartime",
+            "no crisis: famine",
             "crisis: any",
             "tier: ≤ town"
           ],
@@ -9680,7 +9681,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "no crisis: under_siege"
+            "no crisis: under_siege",
+            "no crisis: occupied"
           ],
           "text": "{settlement}'s merchant guild sets the terms of trade and its members carry the town's dealings outward.",
           "slots": [
@@ -9761,7 +9763,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "visitor",
           "marks": [
-            "no guild"
+            "no guild",
+            "no crisis: under_siege"
           ],
           "text": "Anyone with goods and the stall fee can sell at {settlement}'s market without a guild's leave.",
           "slots": [
