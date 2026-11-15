@@ -10,7 +10,8 @@
  *   (ii) the tab says once, at its head, that its descriptions are of ordinary times (`ordinaryTimesLine`).
  *
  * WHAT EACH CRISIS STOPS (the record's own crisis kinds, `facts/crisisKind.js :: crisisOf`):
- *   under_siege   nothing comes in or goes out by road, gate or water: travellers and goods, and the work beyond the gates
+ *   under_siege   nothing comes in or goes out by road, gate or water: travellers and goods, and the work beyond the gates;
+ *                 the land the town still works is curtailed, not stopped (SV8, `CURTAILED_BY`: "Curtailed by the siege.")
  *   plague_onset  travel is discouraged and people do not gather: travellers and gatherings (curtailed, not stopped)
  *   famine        the food the famine failed (`economicState.foodSecurity.foodRecord.failedSource`; a failed mill is
  *                 the grain's, and a record naming no source failed the crops, the grain): that food grows scarce
@@ -63,7 +64,7 @@ import { SERVICE_DESC_SIBLINGS } from '../../data/institutionServices.js';
 import { serviceRowsOf } from '../dossier/entityLinks.js';
 import {
   SERVICE_DEPENDENCE, SERVICE_DEPENDENCE_BY_DESC, HOUSE_DEPENDENCE, CHAIN_DEPENDENCE, INCOME_DEPENDENCE, INPUT_GAP_HELD_EVERYWHERE, SERVICE_FREE_OF_HOUSE, SPENT_GROUND_YIELD, SPENT_GROUND_WORKERS, GROUNDS_WORKED_OFF_CHAIN,
-  TRAVELLERS, GOODS, GATHERINGS, GRAIN, LIVESTOCK, FISH, GAME, INPUT, GATES, NONE,
+  SIEGE_TWINS_ON_OFFER, TRAVELLERS, GOODS, GATHERINGS, GRAIN, LIVESTOCK, FISH, GAME, INPUT, GATES, FIELD_WORK, NONE,
 } from '../../data/crisisDependence.js';
 
 /** The crises this leaf reads, in the order a row's mark takes them. @type {ReadonlyArray<string>} */
@@ -96,6 +97,16 @@ const MARK_LINES = Object.freeze([
  * @type {Readonly<Record<string, string>>}
  */
 const PARTLY_STOPPED_KIND = Object.freeze({ under_siege: 'under_siege:curtailed' });
+
+/**
+ * WHAT A CRISIS CURTAILS AND DOES NOT STOP (BAR3-SERVICES-3, the chair's ruling SV8 of 2026-11-15; vetoable by the owner):
+ * under a siege, the town's own land worked (`crisisDependence.js :: FIELD_WORK`: the fields, herds, hives, woods, pits and
+ * pans), by the record's own reading of the siege (a third of the yield kept; every own-ground chain "impaired"). A row
+ * living on it alone takes the siege's partial kind, "Curtailed by the siege."; a row living on what the siege stops as
+ * well is stopped.
+ * @type {Readonly<Record<string, ReadonlyArray<string>>>}
+ */
+export const CURTAILED_BY = Object.freeze({ under_siege: Object.freeze([FIELD_WORK]) });
 
 /** A partial kind's crisis, a crisis's itself. @param {string} kind @returns {string} */
 export function crisisOfMarkKind(kind) {
@@ -280,14 +291,21 @@ export function rowStoppedBy(settlement, kind, row, crises = stoppingCrisesOf(se
   const deps = read(row, settlement);
   if (deps.length === 0) return null;
   const desc = typeof row.desc === 'string' ? row.desc : '';
+  /** @type {string | null} */
+  let curtailed = null;
   for (const crisis of crises) {
     if (kind === 'service' && isCrisisTwin(desc, crisis)) continue;
     const stops = stoppedBy(crisis, settlement);
-    if (!deps.some((d) => stops.includes(d))) continue;
+    if (!deps.some((d) => stops.includes(d))) {
+      // SV8: what the crisis curtails and does not stop; a later crisis that stops the row marks it before this
+      const curtails = Object.prototype.hasOwnProperty.call(CURTAILED_BY, crisis) ? CURTAILED_BY[crisis] : NONE;
+      if (!curtailed && deps.some((d) => curtails.includes(d))) curtailed = PARTLY_STOPPED_KIND[crisis] ?? null;
+      continue;
+    }
     if (kind === 'house' && Object.prototype.hasOwnProperty.call(PARTLY_STOPPED_KIND, crisis) && houseRowGoesOn(settlement, row, crisis, crises)) return PARTLY_STOPPED_KIND[crisis];
     return crisis;
   }
-  return null;
+  return curtailed;
 }
 
 /** Each record's service rows by their house's roster name, read once a record. @type {WeakMap<object, ReadonlyMap<string, ReadonlyArray<Record<string, unknown>>>>} */
@@ -315,7 +333,9 @@ function houseRowGoesOn(settlement, house, crisis, crises) {
     ROWS_BY_HOUSE.set(settlement, byHouse);
   }
   const rows = byHouse.get(house.name) || [];
-  return rows.some((svc) => !isCustom(svc) && !isCrisisTwin(typeof svc.desc === 'string' ? svc.desc : '', crisis) && rowStoppedBy(settlement, 'service', svc, crises) === null);
+  // SV7b: a siege twin whose words say the service goes on, thinly, is a row on offer (`SIEGE_TWINS_ON_OFFER`)
+  const onOffer = (/** @type {string} */ desc) => !isCrisisTwin(desc, crisis) || (crisis === 'under_siege' && SIEGE_TWINS_ON_OFFER.includes(desc));
+  return rows.some((svc) => !isCustom(svc) && onOffer(typeof svc.desc === 'string' ? svc.desc : '') && rowStoppedBy(settlement, 'service', svc, crises) === null);
 }
 
 /**

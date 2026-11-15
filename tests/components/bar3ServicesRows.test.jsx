@@ -24,6 +24,17 @@
  *     not "Curtailed by the siege.";
  *   · its free row stops printing on offer (no door word), or a house every row of which is stopped (its rows the siege's
  *     own twins) stops reading "Stopped by the siege." (KEEP_STOPPED).
+ *
+ * BATCH 3 (BAR3-SERVICES-3, the chair's rulings SV8 and SV7b of 2026-11-15; each vetoable by the owner). It reds when
+ * (each FIELD and ON_OFFER pair red at 52f0a1684)
+ *   · (SV8) a house that works the town's own land (fields, herds, hives, woods, pits, pans: `crisisDependence.js ::
+ *     FIELD_WORK`) prints unmarked under a siege, on the Institutions tab, the PDF or the Journal, or its row prints
+ *     unmarked on the Services tab: the record keeps a third of the yield and prints the chain "impaired", so the house
+ *     reads "Curtailed by the siege.";
+ *   · (SV7b) the coaching inn, whose "Lodging" is the siege's twin that goes on ("the rooms stand mostly empty"), reads
+ *     "Stopped by the siege." and not "Curtailed by the siege.";
+ *   · a KEEP pair stops: the same field houses unmarked in a calm town and under an outbreak, the famine's own mark on
+ *     farmland, and the external mill (its one row the siege's twin that stops: "ground by hand at home") "Stopped".
  */
 import { beforeAll, describe, expect, test, vi } from 'vitest';
 import { cleanup, render } from '@testing-library/react';
@@ -35,6 +46,8 @@ import { buildViewModel } from '../../src/pdf/lib/viewModel.js';
 import { buildJournalPages } from '../../src/foundry/journalPages.js';
 import { markedOnPage } from '../../src/pdf/lib/crisisMarksOnPage.js';
 import { institutionDescription } from '../../src/components/new/tabs/InstitutionsTab.jsx';
+import { catalogIdForName } from '../../src/data/institutionalCatalog.js';
+import { serviceRowsOf } from '../../src/domain/dossier/entityLinks.js';
 
 window.matchMedia = window.matchMedia || vi.fn((query) => ({ media: query, matches: false, addEventListener() {}, removeEventListener() {}, addListener() {}, removeListener() {} }));
 
@@ -200,6 +213,92 @@ describe('BAR3-SERVICES-2 batch 2 (SV7): a house is "Stopped" only if every row 
       if (!desc) { failures.push(`${seed}: ${name} has no description to mark`); continue; }
       if (!(await institutionsText(seed)).includes(`${SIEGE} ${desc}`)) failures.push(`${seed}: ${name} does not read "${SIEGE}" on the tab`);
       if (markedOnPage(town(seed), 'house', inst, desc) !== `${SIEGE} ${desc}`) failures.push(`${seed}: ${name} does not read "${SIEGE}" in the PDF`);
+    }
+    expect(failures).toEqual([]);
+  }, 600_000);
+});
+
+/** (seed, the field house's catalogue id, its row on the Services tab or null where it has none). Smallest to largest. */
+const FIELD = [
+  ['r2s-under_siege-thorp-0', 'subsistence_farming', null],
+  ['r2s-under_siege-thorp-3', 'woodcutter_s_camp', null],
+  ['r2s-under_siege-hamlet-1', 'dairy_farmer', 'Fresh milk'],
+  ['r2s-under_siege-hamlet-2', 'shepherd', 'Livestock management'],
+  ['r2s-under_siege-village-2', 'beekeeper', 'Honey'],
+  ['r2s-under_siege-village-0', 'farmland', 'Grain at harvest'],
+  ['r2s-under_siege-city-0', 'salt_works', 'Salt production'],
+  ['r2s-under_siege-city-3', 'mine', 'Raw extraction'],
+  ['r2s-under_siege-metropolis-0', 'charcoal_burner', 'Charcoal supply'],
+];
+/** (seed, a coaching inn whose "Lodging" is the siege twin that goes on). */
+const ON_OFFER = [
+  ['r2s-under_siege-town-0', 'Coaching inn'],
+  ['r2r-metropolis-14', 'Coaching inn'],
+];
+/** (seed, catalogue id, the mark the house keeps: null for none). */
+const KEEP_FIELD = [
+  ['r2r-village-3', 'mine', null],
+  ['r2s-plague_onset-village-0', 'farmland', null],
+  ['r2s-famine-village-0', 'farmland', 'Scarce in the famine.'],
+  ['r2r-thorp-45', 'access_to_external_mill', SIEGE],
+];
+
+/** The siege's partial mark before a description, a short mark (S5) between them where the house is short too. @param {string} text @param {string} desc */
+const curtailedBefore = (text, desc) => new RegExp(`${esc(CURTAILED)}( Short of [^.]*\\.)? ${esc(desc)}`).test(text);
+/** @param {string} seed @param {string} id */
+const houseById = (seed, id) => (town(seed).institutions || []).find((i) => i && (i.catalogId || catalogIdForName(i.name)) === id);
+/** @param {string} seed @param {string} house @param {string} name */
+const rowOf = (seed, house, name) => serviceRowsOf(town(seed).availableServices).map((x) => x.svc).find((v) => v.institution === house && v.name === name);
+
+describe('BAR3-SERVICES-3 batch 3 (SV8, SV7b): the land worked under a siege is curtailed; a twin that goes on is on offer', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); }, 120_000);
+
+  test('FIELD: the house reads "Curtailed by the siege." on the tab, the PDF and the Journal, and its row on the Services tab', async () => {
+    const failures = [];
+    for (const [seed, id, row] of FIELD) {
+      const inst = houseById(seed, id);
+      if (!inst) { failures.push(`${seed}: no ${id} on the roster`); continue; }
+      const desc = String(institutionDescription(inst) || '').trim();
+      if (!desc) { failures.push(`${seed}: ${id} has no description to mark`); continue; }
+      if (!curtailedBefore(await institutionsText(seed), desc)) failures.push(`${seed}: the Institutions tab does not print "${CURTAILED} ${desc}" (${id})`);
+      const pdf = String(markedOnPage(town(seed), 'house', inst, desc));
+      if (!curtailedBefore(pdf, desc) || !pdf.startsWith(CURTAILED)) failures.push(`${seed}: the PDF prints "${pdf}" (${id})`);
+      if (!curtailedBefore(journalInstitutions(seed), desc)) failures.push(`${seed}: the Journal does not print "${CURTAILED} ${desc}" (${id})`);
+      if (row) {
+        const svc = rowOf(seed, inst.name, row);
+        if (!svc) { failures.push(`${seed}: no "${row}" row of ${inst.name}`); continue; }
+        if (!curtailedBefore(await servicesText(seed), String(svc.desc))) failures.push(`${seed}: the Services tab does not print "${CURTAILED} ${svc.desc}" (${row})`);
+      }
+    }
+    expect(failures).toEqual([]);
+  }, 600_000);
+
+  test('ON_OFFER: the coaching inn reads "Curtailed by the siege."; its Lodging twin prints on offer, no door word', async () => {
+    const failures = [];
+    for (const [seed, name] of ON_OFFER) {
+      const inst = houseOf(seed, name);
+      if (!inst) { failures.push(`${seed}: no ${name} on the roster`); continue; }
+      const desc = String(institutionDescription(inst) || '').trim();
+      const tab = await institutionsText(seed);
+      if (!tab.includes(`${CURTAILED} ${desc}`)) failures.push(`${seed}: the Institutions tab does not print "${CURTAILED} ${desc}"`);
+      if (!tab.includes('Lodging') || tab.includes('Lodging (stopped)')) failures.push(`${seed}: "Lodging" does not print on offer`);
+      if (markedOnPage(town(seed), 'house', inst, desc) !== `${CURTAILED} ${desc}`) failures.push(`${seed}: the PDF does not print "${CURTAILED}"`);
+      if (!journalInstitutions(seed).includes(`${CURTAILED} ${desc}`)) failures.push(`${seed}: the Journal does not print "${CURTAILED}"`);
+    }
+    expect(failures).toEqual([]);
+  }, 600_000);
+
+  test('KEEP_FIELD: the same houses unmarked in a calm town and under an outbreak; the famine and the mill keep their marks', async () => {
+    const failures = [];
+    for (const [seed, id, mark] of KEEP_FIELD) {
+      const inst = houseById(seed, id);
+      if (!inst) { failures.push(`${seed}: no ${id} on the roster`); continue; }
+      const desc = String(institutionDescription(inst) || '').trim();
+      const want = mark ? `${mark} ${desc}` : desc;
+      if (markedOnPage(town(seed), 'house', inst, desc) !== want) failures.push(`${seed}: the PDF does not print "${want}" (${id})`);
+      const tab = await institutionsText(seed);
+      if (!tab.includes(want)) failures.push(`${seed}: the Institutions tab does not print "${want}" (${id})`);
+      if (!mark && tab.includes(`${CURTAILED} ${desc}`)) failures.push(`${seed}: ${id} reads "${CURTAILED}" with no siege`);
     }
     expect(failures).toEqual([]);
   }, 600_000);
