@@ -20,6 +20,8 @@ import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { institutionalCatalog } from '../../src/data/institutionalCatalog.js';
+import { INSTITUTION_DESC_VARIANTS } from '../../src/data/institutionDescVariants.js';
 
 const dials = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 
@@ -37,6 +39,12 @@ const textOf = (t, house) => (t.institutions || []).find((/** @type {any} */ i) 
 const TC = 'Town council';
 const VE = 'Village elder';
 const MC = 'Mayor and council';
+/**
+ * The Village elder's pool as the draw reads it ([catalogue desc, ...variants], index-stable), so its anchors are computed,
+ * not spelt: TAIL-CLOSE-POOLS-3 reworded two of its members under the style law (`rather-than` struck) and the anchors moved
+ * with them. @type {string[]}
+ */
+const VE_POOL = [String(institutionalCatalog.village.Government[VE].desc), ...INSTITUTION_DESC_VARIANTS[`village|Government|${VE}`]];
 
 /** [seed, house, the old words (must not print), the rewording's words (print instead)] */
 const RED = [
@@ -46,9 +54,9 @@ const RED = [
   ['r2r-town-16', TC, 'Where nothing official exists', 'settle its common business by consensus'],
   ['r2s-famine-town-3', TC, 'in the absence of formal authority', 'sees to the town\'s common affairs'],
   ['r2s-occupied-town-0', TC, 'in the absence of formal authority', 'sees to the town\'s common affairs'],
-  ['r2r-village-4', VE, 'in the absence of formal authority', 'by standing rather than by office'],
-  ['r2r-village-15', VE, 'Where no formal authority exists', 'an authority of regard, not of office'],
-  ['r2r-village-19', VE, 'In the want of any formal power', 'by standing rather than office'],
+  ['r2r-village-4', VE, 'in the absence of formal authority', VE_POOL[0]],
+  ['r2r-village-15', VE, 'Where no formal authority exists', VE_POOL[2]],
+  ['r2r-village-19', VE, 'In the want of any formal power', VE_POOL[1]],
   ['r2r-city-0', MC, 'An elected council', 'A civic council backed by a complete administrative staff'],
   ['r2r-city-12', MC, 'An elected council', 'A civic council backed by a complete administrative staff'],
   ['r2r-city-6', MC, 'Elected civic council', 'Civic council with full administrative apparatus'],
