@@ -19,6 +19,18 @@
  * item 1 held a false line as correct and are re-keyed by identity with that cause: the unit's Apothecary district
  * ("no alchemist shop finishes it" beside the apothecary that finishes the herbs) and the cold list's
  * rw3-city-infiltrated-1, whose Cobbler's guild and Furrier's district finish the leather its Tanners tan.
+ *
+ * H23 (2026-11-15, the chair's ruling on TAIL-CLOSE-POOLS-3's stop; vetoable by the owner): THE BIRTHS ARM RE-SHAPED TO
+ * THE INVARIANT THE CURE NOW HOLDS. The gap rows are read by kind upstream (`resourceGenerator.js ::
+ * evaluateInstitutionChain`, a missing house is one "no house of the same kind stands for", the family of fcf4cae69), so
+ * no gap row of the census names as missing a house the roster holds by family: 0 of the 720 and 0 of 2,880 (the plan at
+ * four times its scale). The arm's seven per-town pins needed that dead state (each asserted the town's gap row DID name
+ * a house the roster holds) and are RETIRED BY NAME, for the owner's veto list: r2r-town-31, r2r-town-39, r2r-town-49,
+ * r2r-city-27, r2r-city-32, r2r-city-55, r2s-insurgency-city-2 ("the gap row names a house its roster holds by
+ * family"). In their place, over the same seven towns, every town run: NO gap row (`resourceAnalysis.gaps[].missing`)
+ * and NO half-way line names as missing a house the live roster holds by family or by ladder; anchored on the gap rows
+ * and half-way lines the towns hold between them (counted, not spelt). The unit arm on made records is the page
+ * writer's guard and stands as it was.
  */
 import { beforeAll, describe, expect, test } from 'vitest';
 import { generateSettlementPipeline } from '../../../src/generators/generateSettlementPipeline.js';
@@ -27,6 +39,8 @@ import { DEFAULT_CONFIG } from '../../../src/store/configSlice.js';
 import { configOf } from '../../components/pageCensusWalk.shared.mjs';
 import { resourceGapLines } from '../../../src/domain/display/validationOnPage.js';
 import { familyOfInstitution } from '../../../src/data/institutionalCatalog.js';
+import { institutionLadderEvicts } from '../../../src/data/institutionLadders.js';
+import { liveInstitutions } from '../../../src/domain/institutions/institutionRoster.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../../helpers/seedFailures.js';
 
 /** The app's own shape (the stress panel with Random off), as the reader REVIEW-W2A-3 born its towns. @param {string} seed */
@@ -83,17 +97,29 @@ describe('the half-way line names only the houses the roster lacks by kind (item
     expect(halfWay(birthCensus('r2r-hamlet-16'))).toEqual(["Work on the stone here stops half-way: no stonemasons' guild finishes it."]);
   }, 60000);
 
-  test('on the census\'s towns that printed a named house beside it, no half-way line names a house of a kind the roster holds', () => {
+  test('H23: on the census\'s towns, no gap row and no half-way line names as missing a house the roster holds by family or by ladder', () => {
     const seeds = ['r2r-town-31', 'r2r-town-39', 'r2r-town-49', 'r2r-city-27', 'r2r-city-32', 'r2r-city-55', 'r2s-insurgency-city-2'];
+    /** The live roster holds a house of the named one's kind: the catalogue's family, or the ladder either way. @param {any} town @param {string} name */
+    const heldByKind = (town, name) => {
+      const want = familyOfInstitution({ name })?.key;
+      return liveInstitutions(town).some((/** @type {{ name: string }} */ i) => (want && familyOfInstitution(i)?.key === want)
+        || institutionLadderEvicts(i.name, name) || institutionLadderEvicts(name, i.name));
+    };
+    const read = { gapNames: 0, halfWayLines: 0 };
     expectNoSeedFailures(collectSeedFailures(seeds, (seed) => {
       const town = birthCensus(seed);
       const named = (town.resourceAnalysis?.gaps || []).flatMap((/** @type {{ institution?: string, missing?: string[] }} */ g) => (g.institution ? [] : g.missing || []));
-      const families = new Set(town.institutions.map((/** @type {{ name: string }} */ i) => familyOfInstitution(i)?.key).filter(Boolean));
-      const heldByKind = named.filter((n) => families.has(familyOfInstitution({ name: n })?.key));
-      expect(heldByKind.length, `anchored: ${seed}'s gap row names a house its roster holds by family`).toBeGreaterThan(0);
-      const lines = halfWay(town).join(' ').toLowerCase();
-      expect(heldByKind.filter((n) => lines.includes(n.toLowerCase())), seed).toEqual([]);
-    }), 'a half-way line names a house the roster holds by kind');
+      const lines = halfWay(town);
+      read.gapNames += named.length; read.halfWayLines += lines.length;
+      expect(named.filter((n) => heldByKind(town, n)), `${seed}: a gap row names as missing a house the roster holds by kind`).toEqual([]);
+      const text = lines.join(' ').toLowerCase();
+      const everyMissing = (town.resourceAnalysis?.gaps || []).flatMap((/** @type {{ missing?: string[] }} */ g) => g.missing || []);
+      expect(everyMissing.filter((n) => heldByKind(town, n) && text.includes(n.toLowerCase())), `${seed}: a half-way line names a house the roster holds by kind`).toEqual([]);
+    }), 'a gap row or a half-way line names a house the roster holds by kind');
+    // ANCHORED: the arm read live gap rows and a live half-way line (at this tip 13 missing houses across six of the towns, and
+    // r2r-town-49's hides line), so its silences are the record's, not an empty read.
+    expect(read.gapNames, 'anchored: the towns hold gap rows naming missing houses').toBeGreaterThan(0);
+    expect(read.halfWayLines, 'anchored: the towns hold a half-way line').toBeGreaterThan(0);
   }, 240000);
 });
 

@@ -90,6 +90,8 @@ THE CHAIR'S RULINGS TO JOIN-10 (each vetoable by the owner):
 | 14 | lane/tail-corpus-def-2026-11-14 | c358b4832 (07:38) | 922cfa66c | 355bfc1b2 | none | 0 files outside docs/; declared-move commits: none (golden carried) |
 | 15 | lane/tail-ties-2026-11-14 | 319362b0a (07:41) | 2f8ffcaa3 02de38883 | 7d6d807ec | none | 0 files outside docs/; declared-move commits: none (golden carried) |
 | 16 | lane/tail-close-people-2026-11-15 | 5a751f365 (07:44) | 0b1248dbf | 90733e58e | none | 9 files outside docs/; declared-move commits: e81dea035 fc9772001 1ec823d12 8a7183589 42747ad8b 0d6ef7e93 (golden carried) |
+| 17 | lane/tail-close-pools-2-2026-11-15 | b3a319b12 (07:47) | 29b9795e4 1c9ff3933 | 1dac12238 | none | 6 files outside docs/; declared-move commits: b45f1047c (golden carried) |
+| 18 | lane/close-trim-first-paint-2026-11-15 | e44d42aaf (07:54) | 02de38883 | f74910e18 | none | 1 files outside docs/; declared-move commits: none (golden carried) |
 
 ## 3. Every code resolution
 
@@ -100,6 +102,10 @@ THE CHAIR'S RULINGS TO JOIN-10 (each vetoable by the owner):
 **CONFLICT IN A TEST FILE, RULED BEFOREHAND (C31), point 11** (close-pools 0711a6a39 against crisis b75ca93c7, landed at point 5): `tests/domain/coherence/crisisBlindProse.test.js`, the soak1k-4800 case, moved by both sides through the chair's own double assignment (crisis TAIL-CRISIS-8 retired it by name; close-pools 0711a6a39 re-shaped the same case: +13/-2). THE JOINED SIDE STANDS WHOLE (`git checkout --ours` inside the merge); THE BRANCH'S EDIT TO THAT FILE IS DROPPED (its commit 0711a6a39's hunk in that file). Measured: the file alone at the merged tree 8/8 green (`/home/user/j10out/t11.m.log`). Every other file of the branch is its own.
 
 **Point 13, the files the chair named run alone** (close-pools 1d3fef703 over its point 11; two merge bases 0711a6a39 and 4e58ed8ba; the branch took the joined side of `crisisBlindProse.test.js` itself, C31 done on the branch): staged only `tests/lint/factLayers.poolTable.json` (one row) and the seat's hand-back; `crisisBlindProse.test.js` and `tests/domain/corpusCureGuards.test.js` (the chair wrote tests/lint/: the file lives under tests/domain/) alone at the merged tree: 126/126 green (`/home/user/j10out/t13.m.log`).
+
+**Point 17, the files the chair named run alone** (close-pools-2 b3a319b12, holding the line at e36318ac1; bases 29b9795e4 and 1c9ff3933; no both-moved file): `styleLaw.walker`, `gapLineHousesByKind`, `r3c10FoodLinesTrue`, `houseLabelEverySurface`, `tailHistoryBatch6` alone at the merged tree: 42/42 green (`/home/user/j10out/t17.m.log`).
+
+**Point 18, on the chair's word citing the owner's answer** (07:54 UTC: the owner's 07:50 deferral to the chair, DECIDED option A: the prepared trim lands, the budget raised only by what is still over): lane/close-trim-first-paint-2026-11-15 at e44d42aaf, one commit, `vite.config.js` only (22 lines at the end of `ENGINE_SHARED_DOMAIN_EXCISIONS`); merged clean; `tests/architecture/engineCoreLazyEdge.test.js` alone at the merged tree 3/3 green (`/home/user/j10out/t18.m.log`).
 
 ## 4. THE LIST FOR THE CLOSE
 
@@ -278,6 +284,8 @@ Merged clean though both sides moved them (for the close to re-derive or measure
 | tests/domain/coherence/crisisBlindProse.test.js | close-pools (11) | merged clean though both sides moved them: the test files among them run alone at the merged tree, green ; read at the close |
 | golden | close-display (12) | DECLARED MOVE commits 6cd5f374f adbe29e11 9a13dd0a4 (field diffs in their bodies) |
 | golden | close-people (16) | DECLARED MOVE commits e81dea035 fc9772001 1ec823d12 8a7183589 42747ad8b 0d6ef7e93 (field diffs in their bodies) |
+| golden | close-pools-2 (17) | DECLARED MOVE commits b45f1047c (field diffs in their bodies) |
+| `tests/build/vendorPdfLazy.test.js` (its size arms) | close-trim-first-paint (18) | red until the doors' final seat re-records the two figures at the final tree (the chair, 07:54): this seat re-recorded nothing |
 
 **[J10] every pin where the joined side was kept, by file (for the doors' seat to read each once):**
 
@@ -295,7 +303,7 @@ JOIN-10's (by point):
 
 ## 5. Stops
 
-None yet.
+None: every point the chair named landed (1-18); no abort. JOIN-9's stop at its point 17 (crisis) answered by point 1.
 
 ## 6. Hazards
 
@@ -316,4 +324,8 @@ A worktree at origin's tip (`git worktree add /home/user/j10wt -b join10 <tip>`,
 
 ## 8. WHAT IS LEFT
 
-Landed through point 16 (see the table); count 192,380 at 07:40 UTC after point 15; waiting on the chair's LAND words.
+HANDED BACK on the chair's 07:54 word, after point 18 (the count: get_session read 192,380, stamped 07:44 at a turn's start; the true count near the 250,000 mark). Landed: points 1-18 (the table), each at the hash the chair named, each pushed with the hook's three gates and this file current; code tip is point 18's merge.
+1. DONE: points 1-18. Conflicts: point 8 (`tailHistoryBatch6.test.js`, both blocks verbatim, 3/3), point 11 (`crisisBlindProse.test.js`, the joined side whole by C31, the branch's edit dropped, 8/8). Both-moved test files read and measured: point 3. Files the chair named run alone: points 13, 17, 18.
+2. ORIGIN HELD LATER TIPS THAN THE HASH NAMED, NOT LANDED BY THIS SEAT unless a later point says so: tests-c 85cefdba5 (later 2ef97b6e9 landed at 8), pools-2 1c9ff3933 (landed at 7) and later tips (b3a319b12 landed at 17), ties 21ce8da11 (319362b0a landed at 15), close-pools 1d3fef703 (landed at 13). The next seat reads each branch's tip against the line before its LAND.
+3. NOT DONE, for the next merge seat: the chair's words still to come (the layer cut's branch, presumed, reach, src, doors LAST). The instruments are in §7 (worktree `/home/user/j10wt`, branch `join10`; `/home/user/j10out`: `auto.sh`; `merge.sh` now fetches again after reading origin's tip, a race met at point 11).
+4. For the close (not this seat's): every row of §4 by its door, once, on the final tree; the whole check once, by the close's seat.
