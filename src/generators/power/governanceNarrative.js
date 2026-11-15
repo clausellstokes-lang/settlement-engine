@@ -500,7 +500,7 @@ const deriveBaselineConflict = ({
   }
   if (monsterThreat === 'plagued') {
     if (hasMilitaryInstitution) {
-      return 'A monster incursion last season destroyed outlying farms. The garrison is stretched thin and the council cannot agree on whether to raise a levy or hire mercenaries.';
+      return 'Monsters prowl near the outlying farms, and no one here can agree whether to raise a levy or pay others to drive them off.'; // TAIL-POWERS-4 (B02757): no raid the record lacks, no force "stretched thin" beside a Safe order
     }
     if (hasCivicInstitution) {
       return 'Monster attacks on the outlying farms have not stopped. The village is debating whether to build proper defences or petition the nearest lord for help.';
@@ -568,7 +568,7 @@ const buildSlaveRevoltNarrative = (institutionNames) => {
   return (
     `The revolt began ${revoltOrigin} and has not been put down. ` +
     'Those in charge were slow to act, because nobody wanted to admit how organised the rebels were. ' +
-    "The rebels' buildings are marked, and some streets are contested. " +
+    "The rebels' buildings are marked, and parts of the settlement are contested. " + // TAIL-POWERS-4 (21621): a thorp has no streets
     'In public, those in charge say it is being handled; in private, they are scrambling.'
   );
 };
@@ -767,7 +767,7 @@ export const buildGovernanceLabels = ({
   );
   let recentConflict = baselineOverridden
     ? baselineConflict
-    : resolveSibling(baselineConflict, BASELINE_CONFLICT_SIBLINGS, { facts: () => factsOf({ institutions: (institutionNames || []).map((name) => ({ name })) }), poolId: 'governanceNarrative:BASELINE_CONFLICT_SIBLINGS', surface: 'power', drawKind: 'T' });
+    : resolveSibling(baselineConflict, BASELINE_CONFLICT_SIBLINGS, { facts: () => factsOf({ institutions: (institutionNames || []).map((name) => ({ name })), tier }), poolId: 'governanceNarrative:BASELINE_CONFLICT_SIBLINGS', surface: 'power', drawKind: 'T' });
   stressNarratives.infiltrated = recentConflict;
 
   if (recentConflict) {

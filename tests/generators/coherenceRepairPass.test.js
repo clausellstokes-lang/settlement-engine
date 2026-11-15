@@ -149,8 +149,10 @@ describe('deterministic generation coherence repair', () => {
       trace => trace.step === 'generatePower',
     );
 
+    // TAIL-POWERS-4 batch 1: re-keyed by identity — the monster rung's military branch (a force stands, so the repaired
+    // roster was read) now reads "... raise a levy or pay others to drive them off" (it claimed the force stretched thin)
     expect(settlement.powerStructure.recentConflict).toMatch(
-      /militia is stretched thin/i,
+      /raise a levy or pay others to drive them off/i,
     );
     // A missing, emptied, or renamed recentConflict reds on the positive pin
     // above, so this negative is only ever reached with live repaired prose.
