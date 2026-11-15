@@ -1701,15 +1701,15 @@ A composed page draws one of each grain, never two.
 6. `[counterforce · colour]` {settlement}'s position is worth watching over: whoever holds the ground holds what the assessment below names.
 
 **EXPLOITATION: `unexploited`, `exportValue: high`**
-1. `[ledger]` There is {resource} in {settlement}'s country worth real money and nothing in the town works it.
-2. `[visitor]` Around {settlement} the {resource} lies unworked, and anyone who knows its price elsewhere will want to change that.
-3. `[street]` Everybody in this town can point at the {resource}, and nobody in this town is working it.
-4. `[threshold]` {settlement} has the {resource}; what it lacks is {institution} to start the work.
+1. `[ledger]` There is {resource} in {settlement}'s country worth real money elsewhere, and none of it leaves the town for sale.
+2. `[visitor]` None of the {resource} around {settlement} is sold beyond the town, and anyone who knows its price elsewhere will want to change that.
+3. `[street]` Everybody in this town can point at the {resource}, and nobody in this town is selling it outside.
+4. `[threshold]` {settlement} has the {resource}; to make a trade of it, it lacks one {institution}.
 
 **EXPLOITATION: `unexploited`, `exportValue: medium` or `low`**
-1. `[ledger]` {settlement} leaves its {resource} unworked. It would fetch barely enough to pay for the work.
-2. `[street]` There is {resource} out there and nobody has ever thought it worth the trouble, which is the town's considered opinion rather than an oversight.
-3. `[counterforce]` For as long as {settlement} has stood, its {resource} has been there to take, and nobody has found it worth the trouble.
+1. `[ledger]` {settlement} sells none of its {resource} beyond the town. It would fetch barely enough to pay for the work.
+2. `[street]` There is {resource} out there and nobody has ever thought it worth selling beyond the town, which is the town's considered opinion rather than an oversight.
+3. `[counterforce]` For as long as {settlement} has stood, its {resource} has been there to take, and nobody has found it worth selling beyond the town.
 
 **EXPLOITATION: `partiallyExploited`**
 1. `[ledger · no crisis: under_siege]` {settlement} works part of the line that {resource} could support: the raw material moves, and it moves before it has been made into anything worth more.
@@ -1733,7 +1733,7 @@ their surface does render.
 
 **RESOURCE CONDITION: worked out, recovers in time** *(`resourceConditions[]` with condition `depleted` and recoveryMode `natural`; `conditionNotes` holds the same fact as the generator's sentence)*
 1. `[ledger · colour]` {settlement} has worked out its {resource}. Left alone, the ground will come back in time; until it does, the town buys what it used to take, or goes without.
-2. `[street · colour]` Nobody at {settlement} bothers with the {resource} this year: there is nothing left worth taking, and the people who lived off the {resource} have turned to other work until the ground recovers.
+2. `[street · colour]` The {resource} at {settlement} is worked out this year: there is little left worth taking until the ground recovers.
 
 **RESOURCE CONDITION: worked out, recovers only with work** *(condition `depleted`, recoveryMode `manual`)*
 1. `[ledger · colour]` {settlement} has worked out its {resource}, and it will not come back on its own: someone has to put labour and money into it before it yields again.
@@ -7318,7 +7318,7 @@ no compass word, no real-world place, no named analogy.*
 1. `[ledger · no crisis: under_siege]` {settlement} brings in {good} from outside.
 2. `[visitor · market · no crisis: under_siege]` {settlement} buys in what it cannot make, and the trading keeps as many people busy as the making would.
 3. `[street]` {institution} at {settlement} eats what the carts bring; the town's crafts begin at the weighbeam, not the field.
-4. `[trade · no crisis: under_siege]` Ask where {settlement} gets its {good} and you are pointed at the carts, not at anyone in the town.
+4. `[trade · no crisis: under_siege]` Ask where {settlement} gets its {good} and somebody will point you at the carts.
 5. `[local · guild · tier: ≥ village · no crisis: under_siege]` Much of the work in {settlement}'s workshops begins with unloading a cart.
 6. `[newcomer · market · no crisis: under_siege · no crisis: famine]` Anyone looking for work at {settlement} finds it in carrying, weighing and selling as often as in making.
 7. `[ledger · crisis: under_siege]` {settlement} bought its {good} from outside, and since the siege nothing has come in; what is left is being made to last.
@@ -7326,7 +7326,7 @@ no compass word, no real-world place, no named analogy.*
 9. `[trade · no crisis: under_siege]` Some of what changes hands at {settlement} came from somewhere else first.
 
 **`UNWORKED`** {colour}
-1. `[counterforce]` The {resource} around {settlement} goes unworked; no house takes it up.
+1. `[counterforce]` No house at {settlement} makes a trade of the {resource} around it.
 2. `[visitor]` There is more to be had in the country around {settlement} than the town takes, and an outsider with money could make use of it.
 
 ---

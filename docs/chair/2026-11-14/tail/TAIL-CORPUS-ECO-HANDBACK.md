@@ -1,8 +1,9 @@
 # TAIL-CORPUS-ECO · hand-back (kept current after every batch) · TAIL-CORPUS-ECO-3 keeps it from batch 5
 
-Tip: the commit carrying this file. TAIL-CORPUS-ECO-3 (the second successor) from 81cd76883: batch 5 (the chair's ruling C13, the
-faults in this group's own new lines, and two worklist rows) PUSHED. Rows: 148 · cured 67 (40 + 24 + batch 5's 3: 01563 B01502 07396,
-07397 with them: 4) · struck 24 · parked 5 (C6) · named 3 · left 48 (the 52 less batch 5's 4).
+Tip: the commit carrying this file. TAIL-CORPUS-ECO-3 (the second successor) from 81cd76883: batch 5 (the chair's ruling C13: the
+faults in this group's own new lines, and three worklist rows) and batch 6 (the "unworked" lines: 23 rows) PUSHED. Rows: 148 · cured
+90 (40 + 24 + batch 5's 3: 01563 07396 07397 + batch 6's 23) · struck 25 (B01502) · parked 5 (C6) · named 5 (3 + 14837 14846) ·
+left 23 (the 52 less batch 5's 4 and batch 6's 25), every one read and named the record's below.
 
 Seat: TAIL-CORPUS-ECO, builder. Branch `lane/tail-corpus-eco-2026-11-14`, cut from the joined line `lane/join-2026-11-14`
 at **48fedbe98** (read back from origin at the start). Worklist: `docs/chair/2026-11-14/read-all/WORKLIST-CORPUS-ECO.{md,json}`
@@ -297,7 +298,7 @@ lands on a line of the same pool; no state left mute (the siege state of DS-ECO-
 | 01563 B01502 | DS-GEN-13 ENTREPOT v1 "market handles more than the town could ever use" | 2 plague towns (a quarantine) of 53 | + `no crisis: plague_onset` | v1 53 -> 51: -> v2 2 |
 | 07396 07397 | DS-GEN-14 FOUNDED-YOUNG v2 "the town still does the job it began with" (v1 "still lives by its first reason", the same claim) | the founding purpose has no atom (a stronghold, now undefended and occupied) | REWORDED both to claim only the age (YOUNG = under `older_than_bearers`): v1 "is young, and the reason it was started is still in living memory"; v2 "Everything in {settlement} looks recently built, because most of it was." | unmoved |
 
-STRUCK (C13 C, true by the record): DS-ECO-6 significant "Goods change hands ... without anyone writing them down" beside a customs
+STRUCK: B01502 (DS-GEN-13 ENTREPOT v1 at an occupied metropolis: below, the after run). STRUCK (C13 C, true by the record): DS-ECO-6 significant "Goods change hands ... without anyone writing them down" beside a customs
 house and a harbour master (r2r-metropolis-51, r2s-insurgency-city-0 and most of the 39 towns printing the two lines stand beside a customs
 house: unrecorded trade past a customs house is the tier's own claim, the record's `blackMarketCapture` ≥ 15).
 THE INHERITORS READ (each where it lands): entrepot v1 "sells on goods it never made" (the bar's #275, the record's) and v3 "The
@@ -317,8 +318,31 @@ significant v0 declares `guild · no crisis: under_siege`.
 Doors: generator --check 0; presumed --check identical to the base (148 rows, the same 148); the grid 2 falls (= base: r2r-city-0,
 r2s-insurgency-metropolis-0 P7a); strict-domain 0 (1113 = ceiling), the type ratchet 0 (167), eslint 0 on the touched files; the 67
 test files naming the leaves: the base's 33 reds exactly, none new.
-THE AFTER RUN: not yet taken when this was pushed (U1): the next before run reads it.
+THE AFTER RUN of batch 5 (at 84a41a687, the census of the 720; inventory_diff over its rows): 29,889 -> 29,872 distinct sentences;
+gone 46, new 29, in fewer towns 9, in more towns 20. Every C13 line GONE (land v1 v2's tier folds, the reworded) or in FEWER towns by
+exactly the replay's measure (COMMERCE v2 13 -> 4 of the village fold; entrepot v2 16 -> 14, 11 -> 10, 3 -> 1; DS-ECO-6 v4 24 -> 21,
+v6 16 -> 14, v0 15 -> 14; PROSPEROUS v1 9 -> 8: the chair's "9" is this city fold; ENTREPOT v1 20 -> 18). The worklist rows: 07396
+07397 GONE; 01563 FEWER; B01502 18 -> 18, still in the town read (r2s-occupied-metropolis-1): STRUCK, an occupation levies the
+transit trade (its exports "taxed by occupation") and does not stop it, and the line claims the volume, not the purse. No line
+outside the batch was silenced (the nine in fewer towns are all the batch's). THE INHERITORS (50 sentences): the reworded lines in
+the same towns, then exactly the replay's inheritors (entrepot v1 v3 +4 to +7 in hamlets and thorps; COMMERCE v1 v3 v4; DS-ECO-6
+v8 +4, v1 +2; PROSPEROUS v2 +1; ENTREPOT v2 +2), each read in the table above.
 
+### Batch 6 · DS-ECO-11 EXPLOITATION unexploited (both pools), RESOURCE CONDITION worked out v2; DS-GEN-18 UNWORKED v1, BOUGHT-IN v4 · REWORDED, no draw moved
+
+MEASURED BY THE RECORD over every printing town of the before run (the vid unchanged, so no draw moves; text only):
+
+| row(s) | line | prints | false by the record | the cure |
+|---|---|---|---|---|
+| 09301 09302 09300 22666 22662 22667 22668 22664 22619 22669 22663 (+ v1, unflagged, the same claim) | EXPLOITATION unexploited medium/low v1 "leaves its {resource} unworked", v2 "nobody has ever thought it worth the trouble", v3 "nobody has found it worth the trouble" | 26 / 27 / 26 | 79 of 79: the resource is in the trade list's "made here" (`localProduction`) in every one, and in no town's exports | "sells none of its {resource} beyond the town" / "worth selling beyond the town" |
+| 22626 03916 03918 07347 (+ v4, the same claim) | EXPLOITATION unexploited high v1 "nothing in the town works it", v2 "lies unworked", v3 "nobody ... is working it", v4 "what it lacks is {institution} to start the work" | 2 / 8 / 8 / 3 | made here in the towns read; the line's resource exported in none of the 21 | "none of it leaves the town for sale" / "None of the {resource} around X is sold beyond the town" / "nobody ... is selling it outside" / "to make a trade of it, it lacks one {institution}" (also mends "lacks is Smelter", the bare slot, in partiallyExploited v3's form) |
+| 22267 20984 20909 | DS-GEN-18 UNWORKED v1 "The {resource} around X goes unworked; no house takes it up" | 12 | made here in 11 of 12 (the gemstone thorp is not); "medicinal herbs ... goes" disagreed | "No house at {settlement} makes a trade of the {resource} around it." |
+| 04027 04020 04025 04037 | DS-GEN-18 BOUGHT-IN v4 "pointed at the carts, not at anyone in the town" | 81 | 1 at this base (r2r-thorp-41: herbs made here and imported; the other three towns read no longer make the good) | "Ask where {settlement} gets its {good} and somebody will point you at the carts." (the good is on the import list in all 81) |
+| 14849 (14837 14846 named) | RESOURCE CONDITION worked out, recovers in time v2 "Nobody ... bothers with the {resource} this year ... the people who lived off it have turned to other work" | 140 | beside a working house on the resource (a Fisher's landing on worked-out river fisheries); 14837 14846 name a resource the resource list lacks: the condition record's (`resourceConditions` against `availableResources`), NAMED | "The {resource} at {settlement} is worked out this year: there is little left worth taking until the ground recovers." (the record's `depleted`, `natural`, alone) |
+
+Rows cured: 19 (09301 09302 09300 22666 22662 22667 22668 22664 22619 22669 22663 22626 03916 03918 07347 22267 20984 20909 14849);
+rows cured with BOUGHT-IN v4: 04027 04020 04025 04037 (4); NAMED: 14837 14846 (the condition record).
+GUARD: GONE rows (each red at the base: the old wording drawn) and KEEP rows (the stems) added to `corpusEcoTailGuards.test.js`.
 ## The veto list (every new or reworded line, with the towns it was read in)
 
 Batch 1 (DS-ECO-12; read where the old line printed, the reword in its place; smallest / largest / a crisis):
@@ -394,6 +418,28 @@ Batch 5 (TAIL-CORPUS-ECO-3; smallest / largest / a crisis, where the line printe
 - DS-GEN-14 FOUNDED-YOUNG v2: "Everything in {settlement} looks recently built, because most of it was." — r2r-thorp-6,
   r2r-village-47, r2s-occupied-hamlet-0 (an occupation).
 
+Batch 6 (TAIL-CORPUS-ECO-3; smallest / largest / a crisis, where the line printed at the before run):
+- EXPLOITATION unexploited medium/low v1: "{settlement} sells none of its {resource} beyond the town. It would fetch barely enough to
+  pay for the work." — r2r-thorp-22, r2r-city-50, r2s-under_siege-thorp-1 (a siege).
+- … v2: "There is {resource} out there and nobody has ever thought it worth selling beyond the town, which is the town's considered
+  opinion rather than an oversight." — r2s-mass_migration-thorp-1, r2r-metropolis-11, r2r-village-58.
+- … v3: "For as long as {settlement} has stood, its {resource} has been there to take, and nobody has found it worth selling beyond
+  the town." — r2s-occupied-thorp-2 (an occupation), r2s-plague_onset-city-1 (a plague), r2r-city-44.
+- EXPLOITATION unexploited high v1: "There is {resource} in {settlement}'s country worth real money elsewhere, and none of it leaves
+  the town for sale." — r2s-famine-thorp-2 (a famine), r2r-hamlet-7.
+- … v2: "None of the {resource} around {settlement} is sold beyond the town, and anyone who knows its price elsewhere will want to
+  change that." — r2r-thorp-21, r2s-insurgency-village-3, r2s-wartime-thorp-1 (a war).
+- … v3: "Everybody in this town can point at the {resource}, and nobody in this town is selling it outside." — r2r-thorp-4,
+  r2s-succession_void-town-1, r2s-plague_onset-village-3 (a plague).
+- … v4: "{settlement} has the {resource}; to make a trade of it, it lacks one {institution}." — r2r-thorp-18,
+  r2s-religious_conversion-hamlet-1, r2s-wartime-hamlet-1 (a war).
+- DS-GEN-18 UNWORKED v1: "No house at {settlement} makes a trade of the {resource} around it." — r2r-thorp-22,
+  r2s-under_siege-village-2 (a siege), r2s-occupied-thorp-1 (an occupation).
+- DS-GEN-18 BOUGHT-IN v4: "Ask where {settlement} gets its {good} and somebody will point you at the carts." —
+  r2s-monster_pressure-thorp-2, r2r-metropolis-20, r2s-famine-town-1 (a famine; salt, not the food that failed).
+- RESOURCE CONDITION worked out, recovers in time v2: "The {resource} at {settlement} is worked out this year: there is little left
+  worth taking until the ground recovers." — r2s-mass_migration-thorp-3, r2r-metropolis-43, r2s-under_siege-village-1 (a siege).
+
 ## Rows struck (true by the record), with why
 
 - AT THE BASE, no longer printing where read and true where they print: 23470 (HIGH) DS-GEN-13 MARKET-OPEN v3 (71 towns, none a
@@ -434,7 +480,7 @@ Batch 5 (TAIL-CORPUS-ECO-3; smallest / largest / a crisis, where the line printe
 
 ## What is left of the worklist
 
-TAIL-CORPUS-ECO-3 (after batch 5): 48 rows, every one read by this seat against its why. NO POOL CURE FOUND for these (the record's
+TAIL-CORPUS-ECO-3 (after batch 6: 23 cured, 2 named, so 23 left of these 48): 48 rows, every one read by this seat against its why. NO POOL CURE FOUND for these (the record's
 own disagreements, named below, each a row of a record writer): the FOOD SOURCES one-source and several rows (20541 38, 21004 10,
 00743 9, 01591 7, 01600 5, 01599 4, 01603 3, 01601 2, 12082 12087 2, 20750 22386 22387 B00718 B11498 1: `foodSources` names one
 source where the houses and the trade list name others); DS-ECO-11 EXPLOITATION unexploited and RESOURCE CONDITION worked out (09301
@@ -442,9 +488,7 @@ source where the houses and the trade list name others); DS-ECO-11 EXPLOITATION 
 22619 22669 22663 20778 1: the exploitation record against the trade list's "made here" and the resource list); DS-GEN-18 UNWORKED
 v1 / BOUGHT-IN v4 (22267 5, 20984 3, 20909 04027 04020 04025 04037 1); DS-SUP-2 UPSTREAM WEAK 18251 5, 23280 2 (the chain's own
 `upstreamWeak`); DS-GEN-13 merchant guild v2 12095 6 (a guild power Suppressed: no atom), bank v1 03133 1; DS-SUP-3 07394 18 (the
-catalog's counter). A REWORD THAT MAY HOLD, not begun: DS-ECO-11 unexploited medium/low v2 v3 ("nobody has found it worth the
-trouble") where the trade list's "made here" holds the resource: a wording claiming no work FOR SALE would hold if the resource is
-in `localProduction` and never in `primaryExports` (to measure: the 17 + 7 + 5 + 5 + 4 rows).
+catalog's counter). BATCH 6 TOOK the DS-ECO-11 exploitation rows, DS-GEN-18 UNWORKED and BOUGHT-IN v4, and RESOURCE CONDITION v2 14849 (above): what is left of the paragraph above is the FOOD SOURCES rows, DS-SUP-2, DS-SUP-3, the guild and the bank (each the record's, or wanting an atom), and DS-ECO-11 RESOURCE CONDITION 14837 14846 21008 20758 (named: the condition record).
 
 THE PREDECESSORS' ORDER (kept for its reasons):
 

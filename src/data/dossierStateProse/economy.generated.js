@@ -5514,7 +5514,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "EXPLOITATION: unexploited, exportValue: high": [
         {
           "angle": "ledger",
-          "text": "There is {resource} in {settlement}'s country worth real money and nothing in the town works it.",
+          "text": "There is {resource} in {settlement}'s country worth real money elsewhere, and none of it leaves the town for sale.",
           "slots": [
             "resource",
             "settlement"
@@ -5523,16 +5523,16 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "Around {settlement} the {resource} lies unworked, and anyone who knows its price elsewhere will want to change that.",
+          "text": "None of the {resource} around {settlement} is sold beyond the town, and anyone who knows its price elsewhere will want to change that.",
           "slots": [
-            "settlement",
-            "resource"
+            "resource",
+            "settlement"
           ],
           "vid": 2
         },
         {
           "angle": "street",
-          "text": "Everybody in this town can point at the {resource}, and nobody in this town is working it.",
+          "text": "Everybody in this town can point at the {resource}, and nobody in this town is selling it outside.",
           "slots": [
             "resource"
           ],
@@ -5540,7 +5540,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
-          "text": "{settlement} has the {resource}; what it lacks is {institution} to start the work.",
+          "text": "{settlement} has the {resource}; to make a trade of it, it lacks one {institution}.",
           "slots": [
             "settlement",
             "resource",
@@ -5552,7 +5552,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "EXPLOITATION: unexploited, exportValue: medium or low": [
         {
           "angle": "ledger",
-          "text": "{settlement} leaves its {resource} unworked. It would fetch barely enough to pay for the work.",
+          "text": "{settlement} sells none of its {resource} beyond the town. It would fetch barely enough to pay for the work.",
           "slots": [
             "settlement",
             "resource"
@@ -5561,7 +5561,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "There is {resource} out there and nobody has ever thought it worth the trouble, which is the town's considered opinion rather than an oversight.",
+          "text": "There is {resource} out there and nobody has ever thought it worth selling beyond the town, which is the town's considered opinion rather than an oversight.",
           "slots": [
             "resource"
           ],
@@ -5569,7 +5569,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
-          "text": "For as long as {settlement} has stood, its {resource} has been there to take, and nobody has found it worth the trouble.",
+          "text": "For as long as {settlement} has stood, its {resource} has been there to take, and nobody has found it worth selling beyond the town.",
           "slots": [
             "settlement",
             "resource"
@@ -5716,10 +5716,10 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "Nobody at {settlement} bothers with the {resource} this year: there is nothing left worth taking, and the people who lived off the {resource} have turned to other work until the ground recovers.",
+          "text": "The {resource} at {settlement} is worked out this year: there is little left worth taking until the ground recovers.",
           "slots": [
-            "settlement",
-            "resource"
+            "resource",
+            "settlement"
           ],
           "vid": 2
         }
