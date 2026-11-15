@@ -386,9 +386,7 @@ const deriveInstitutionSignals = (institutionNames, magicWorks, estate = { insti
     institutionNames,
     ['church', 'cathedral', 'monastery', 'temple', 'parish', 'shrine'],
   ),
-  // TAIL-CLOSE-SRC-3: a church of its own is the vocabulary's `church` atom (`factsOf(...).faith.hasChurch`, the faith
-  // reading's one answer: a house of worship that is a church; a wayside shrine or an access row is not one).
-  hasOwnChurch: factsOf(estate).faith.hasChurch,
+  hasOwnChurch: factsOf(estate).faith.hasChurch, // TAIL-CLOSE-SRC-3: the vocabulary's `church` atom (a wayside shrine or an access row is not one)
 });
 
 /**
