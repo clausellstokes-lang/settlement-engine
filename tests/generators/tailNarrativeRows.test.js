@@ -12,6 +12,7 @@ import { PRESSURE_SENTENCES, POLITICAL_FLAVOR } from '../../src/generators/narra
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { founderAgrees } from '../../src/generators/narrative/foundingRowAdmits.js';
 
 const dials = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 /** The census's own configuration for its two seed families (CENSUS-3 seedcfg.mjs, r2r- and r2s-). @param {string} seed */
@@ -109,25 +110,27 @@ describe('B1 the narrative text rows read the town (TAIL-NARRATIVE batch 1)', ()
  */
 describe('B2 the Origin row\'s group agrees with the founder (TAIL-NARRATIVE FA)', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
-  /** [seed, the founder, the refused row, the row now (null: no Origin row)] */
-  const CURED = /** @type {Array<[string, RegExp, RegExp, RegExp | null]>} */ ([
-    ['r2r-thorp-2', /^a healer who stopped/, /customs post/, /rest stop for traveling caravans/],
-    ['r2r-town-9', /^merchants recognising/, /frontier outpost/, /valuable resource deposit/],
-    ['r2s-famine-town-3', /^religious authorities/, /toll collection point/, /major overland trade route/],
-    ['r2s-under_siege-village-2', /^refugees fleeing war/, /two rival mining operations/, /pass could only be crossed safely/],
-    ['r2s-occupied-hamlet-0', /^a household that settled first/, /defensive stronghold/, /mining camp that became permanent/],
-    ['r2s-monster_pressure-metropolis-3', /^the slow accretion/, /defensive stronghold/, /mining camp that became permanent/],
-    ['r2s-politically_fractured-thorp-2', /^a discharged soldier/, /herders gathered/, null],
-    ['r2r-city-36', /^a merchant coalition/, /sacred grove/, null],
+  /** [seed, the founder refused beside the row, the refused row, the founder now, the row now (null: no Origin row)]
+   * TAIL-NARRATIVE-4 (FB, ruling N17) re-keyed BY IDENTITY: the same towns and the same refused pairs; where the tier's
+   * table holds a founder that agrees, the FOUNDER now resolves (the drawn Origin row kept), else FA moves the row. */
+  const CURED = /** @type {Array<[string, RegExp, RegExp, RegExp, RegExp | null]>} */ ([
+    ['r2r-thorp-2', /^a healer who stopped/, /customs post/, /^a discharged soldier/, /customs post where trade roads crossed/],
+    ['r2r-town-9', /^merchants recognising/, /frontier outpost/, /^a noble granted lands/, /frontier outpost/],
+    ['r2s-famine-town-3', /^religious authorities/, /toll collection point/, /^merchants recognising/, /toll collection point/],
+    ['r2s-under_siege-village-2', /^refugees fleeing war/, /two rival mining operations/, /^a community of tradespeople/, /two rival mining operations/],
+    ['r2s-occupied-hamlet-0', /^a household that settled first/, /defensive stronghold/, /^a household that settled first/, /mining camp that became permanent/],
+    ['r2s-monster_pressure-metropolis-3', /^the slow accretion/, /defensive stronghold/, /^imperial decree/, /defensive stronghold/],
+    ['r2s-politically_fractured-thorp-2', /^a discharged soldier/, /herders gathered/, /^a discharged soldier/, null],
+    ['r2r-city-36', /^a merchant coalition/, /sacred grove/, /^a merchant coalition/, null],
   ]);
-  it('the row the founder cannot be is gone; the slot holds an agreeing row or none (every row)', () => {
-    expectNoSeedFailures(collectSeedFailures(CURED, ([seed, founder, gone, now]) => {
+  it('the founder and the row that cannot both be never print together; the slot holds an agreeing pair or no row (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(CURED, ([seed, refusedFounder, refusedRow, founder, now]) => {
       const f = born(seed).history?.founding || {};
       expect(String(f.foundedBy), `${seed}: the founder`).toMatch(founder);
       if (now) expect(String(f.reason), `${seed}: the row now`).toMatch(now);
       else expect(f.reason ?? null, `${seed}: no Origin row`).toBeNull();
-      expect(String(f.reason), `${seed}: the refused row`).not.toMatch(gone); // anchored: the two lines above assert the founding printed
-    }), 'the row the founder cannot be is gone');
+      expect(refusedFounder.test(String(f.foundedBy)) && refusedRow.test(String(f.reason)), `${seed}: the refused pair`).toBe(false);
+    }), 'the founder and the row that cannot both be never print together');
   });
   const KEEP = /** @type {Array<[string, RegExp, RegExp]>} */ ([
     ['r2r-thorp-37', /^a pair of siblings/, /herders gathered/],
@@ -343,5 +346,56 @@ describe('B5 the founding notes, the arrival lines and the secrets name only wha
     expectNoSeedFailures(collectSeedFailures(KEEP, ([seed, where, kept]) => {
       expect(READ5[where](born(seed)), seed).toMatch(kept);
     }), 'the true siblings still print');
+  });
+});
+
+/**
+ * BATCH FB — `foundingRowAdmits.js :: founderForOrigin` (TAIL-NARRATIVE-4; the chair's ruling (N17): THE FOUNDER AGAINST
+ * THE ORIGIN; RECORD-MEASURE-1's candidate FB, FA's table turned the other way). The founder row that names THIS
+ * CROSSROADS stands only where the route is one; a founder that states its own founding purpose (a refuge beyond reach, a
+ * religious centre or community, a fortification) does not stand beside an Origin row that states another (a trading
+ * port, a harbour or a deposit worked, a market, a waystation, a mill); the founder resolves draw-free onward through its
+ * tier's table to one that agrees, the drawn Origin row kept.
+ */
+describe('B6 the founder agrees with the Origin row in place and purpose (TAIL-NARRATIVE-4 FB)', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  /** [seed, the founder that cannot be, the founder now, the Origin row now] */
+  const CURED = /** @type {Array<[string, RegExp, RegExp, RegExp]>} */ ([
+    ['r2s-famine-metropolis-3', /this crossroads/, /^the slow accretion/, /important river ford/], // the worklist's 09374 town, under a famine
+    ['r2r-metropolis-11', /this crossroads/, /^the slow accretion/, /riverside mill settlement/], // the smallest it reached (16,770)
+    ['r2r-metropolis-13', /this crossroads/, /^the slow accretion/, /natural harbour that fish seemed to prefer/], // the largest (328,486)
+    ['r2s-wartime-metropolis-1', /this crossroads/, /^the slow accretion/, /ferry crossing that became the first bridge/],
+    ['r2s-under_siege-metropolis-0', /this crossroads/, /^the slow accretion/, /exploit rich mineral deposits/],
+    ['r2r-hamlet-4', /^a small religious community/, /^three or four families/, /exploit the natural harbour/],
+    ['r2r-town-52', /^religious authorities/, /^a noble granted lands/, /naval base protecting the coast/],
+    ['r2r-city-20', /^a military command/, /^a military command/, /strategic mountain pass/], // no city founder agrees with the mine: FA moves the row
+    ['r2s-plague_onset-city-3', /^a military command/, /^a military command/, /strategic mountain pass/],
+    ['r2s-monster_pressure-city-3', /^a military command/, /^royal decree/, /riverside mill settlement/],
+    ['r2s-mass_migration-village-2', /^escaped serfs/, /^a community of tradespeople/, /waystation for travelers/],
+  ]);
+  it('the founder and the Origin row agree; the founder that could not be is gone or its row moved (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(CURED, ([seed, refused, founder, row]) => {
+      const f = born(seed).history?.founding || {};
+      expect(String(f.foundedBy), `${seed}: the founder now`).toMatch(founder);
+      expect(String(f.reason), `${seed}: the Origin row now`).toMatch(row);
+      expect(founderAgrees(f.reason ?? null, String(f.foundedBy)), `${seed}: the pair agrees`).toBe(true);
+      if (refused.source !== founder.source) expect(String(f.foundedBy), `${seed}: the refused founder`).not.toMatch(refused);
+    }), 'the founder and the Origin row agree');
+  });
+  it('the pair read tonight (escaped serfs beside a coastal trading port) is refused by the table', () => {
+    expect(founderAgrees('was founded as a coastal trading port', 'escaped serfs seeking a place beyond the reach of their former masters')).toBe(false);
+    expect(founderAgrees('was founded as a coastal trading port', 'a group of settlers seeking new opportunities')).toBe(true);
+  });
+  const KEEP = /** @type {Array<[string, RegExp, RegExp]>} */ ([
+    ['r2s-religious_conversion-metropolis-0', /this crossroads/, /intersection of two major trade routes/],
+    ['r2s-occupied-metropolis-2', /this crossroads/, /market metropolis where merchants could meet/],
+    ['r2r-village-50', /^escaped serfs/, /mining camp that became permanent/],
+  ]);
+  it('a founder beside a row it agrees with still prints (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(KEEP, ([seed, founder, row]) => {
+      const f = born(seed).history?.founding || {};
+      expect(String(f.foundedBy), `${seed}: the founder`).toMatch(founder);
+      expect(String(f.reason), `${seed}: the row`).toMatch(row);
+    }), 'a founder beside a row it agrees with still prints');
   });
 });
