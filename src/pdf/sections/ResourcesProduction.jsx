@@ -21,7 +21,7 @@ import { Pill } from '../primitives/Pill.jsx';
 import { Callout } from '../primitives/Callout.jsx';
 import { EditableText, EditableProse } from '../primitives/Editable.jsx';
 import { type, palette, space, pt, swatch, factionColors } from '../theme.js';
-import { resourceDisplayName } from '../../domain/display/resourceDisplayName.js';
+import { resourceDisplayName, RESOURCE_DISPLAY_LABELS } from '../../domain/display/resourceDisplayName.js';
 import { cap, label, humanize } from '../lib/format.js';
 import { StateProse } from '../primitives/StateProse.jsx';
 import { criticalImportsShown } from '../../domain/display/criticalImportsShown.js'; // TAIL-EXPORTS-PDF batch 1 (ruling E1)
@@ -456,7 +456,7 @@ function ResourceRow({ kicker, hint, tone, items, customNames = [] }) {
               </View>
             );
           }
-          return <Tag key={`r-${kicker}-${i}`} tone={tone}>{humanize(label(it))}</Tag>;
+          return <Tag key={`r-${kicker}-${i}`} tone={tone}>{Object.hasOwn(RESOURCE_DISPLAY_LABELS, it) ? RESOURCE_DISPLAY_LABELS[it] : humanize(label(it))}</Tag>; // TAIL-DISPLAY-CIVIC-4 (V11): the catalogue's label, as the tab prints it
         })}
       </View>
     </View>

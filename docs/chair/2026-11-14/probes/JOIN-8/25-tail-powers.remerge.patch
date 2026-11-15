@@ -1,0 +1,70 @@
+commit 475506bf7968fc8601c25a8aaf327f00c32349bc
+Merge: f7afd958f 01ddaba28
+Author: Claude <noreply@anthropic.com>
+Date:   Sun Nov 15 04:57:27 2026 +0000
+
+    join(JOIN-8 · 25): merge lane/tail-powers-2026-11-14 at 01ddaba28
+    
+    Sweep point 25 (JOIN-8), LAST of this sweep by ruling P30; the tip read back at 04:52 UTC (holds its holder's merge of the line at d817736d8 and the P28 resolution); merge base d817736d8.
+    CODE CONFLICT, src/domain/display/governanceAccount.js, resolved by ruling P30 (one cure written twice): display-civic V1 1f030877d against powers 0b1b41459. Hunk 1 (the imports, powerNameInProse): V1's body stands (the leaf's powerNameAfterArticle), ONE import line of powerSentenceName (powers' second import dropped); powers' new imports (resolveDeclared, factsOf, textOf) and OCCUPIED_SEAT (P4) merged clean and stand. Hunk 2 (governanceAccountOf, section 3+4): BOTH STAND, V1's comment and P4's lineOf helper.
+    Checks before the push (P30): the 18 test files naming governanceAccount or powerSentenceName: 6 red, the same 6 as at the line's 5f3c2c138 (classed in the probe worktree; none new); eslint on the file exit 0; over the twelve-birth grid, governanceAccountOf's sentences (text, fallback) hold no "Military/Guard", "The The" or "the The" (the one "Military/Guard" is the roster name in the estranged data field, r2s-succession_void-city-0).
+    Declared moves of the branch (P4 twin, DA, the headman's name): the golden moves with them, carried, the owner's door.
+    
+    Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_01ACmDYWYGv69LkUTu63yeLk
+
+diff --git a/src/domain/display/governanceAccount.js b/src/domain/display/governanceAccount.js
+remerge CONFLICT (content): Merge conflict in src/domain/display/governanceAccount.js
+index 2aa10ebb3..e43244e1f 100644
+--- a/src/domain/display/governanceAccount.js
++++ b/src/domain/display/governanceAccount.js
+@@ -30,7 +30,6 @@ import { seatKeeperOf } from '../people/seatKeeper.js';
+ import { resolveDeclared } from '../facts/drawDeclared.js';
+ import { factsOf } from '../facts/factsOf.js';
+ import { textOf } from '../facts/textOf.js';
+-import { powerSentenceName } from './powerSentenceName.js';
+ 
+ /** THE SEAT UNDER AN OCCUPATION (TAIL-POWERS-2, P4): the twins of the seat sentences, by draw (0-2), and of the headless
+  *  (3) and unnamed (4) seat; each declared on the vocabulary's crisis atom, so it prints only where the record is occupied. */
+@@ -46,7 +45,6 @@ const OCCUPIED_SEAT = Object.freeze([
+ const text = (v) => (typeof v === 'string' ? v.trim() : '');
+ 
+ /**
+-<<<<<<< f7afd958f (docs(JOIN-8): the hand-back after point 24)
+  * A power's name as a sentence carries it: a trailing parenthetical qualifier ("Merchant Guilds
+  * (dominant)") is the roster's annotation, not the name, and a catalogue label takes its prose form
+  * (`powerSentenceName.js`); a name that opens on "The" keeps it, lowered mid-sentence; every other name takes "the".
+@@ -57,17 +55,6 @@ export function powerNameInProse(name, start = false) {
+   // struck for the article this sentence sets ("Military/Guard" -> "the Guard", never "the Military/Guard")
+   const body = powerNameAfterArticle(text(name));
+   if (!body) return '';
+-=======
+- * A power's name as a sentence carries it: its prose form from the one leaf (powerSentenceName, P3: "Military/Guard"
+- * reads "the Guard"; a trailing parenthetical qualifier, "Merchant Guilds (dominant)", is the roster's annotation, not
+- * the name); a name that opens on "The" keeps it, lowered mid-sentence; every other name takes "the".
+- * @param {string} name @param {boolean} [start] @returns {string}
+- */
+-export function powerNameInProse(name, start = false) {
+-  const bare = text(name) ? powerSentenceName(text(name)) : '';
+-  if (!bare) return '';
+-  const body = /^the\s/i.test(bare) ? bare.replace(/^the\s/i, '') : bare;
+->>>>>>> 01ddaba28 (docs(TAIL-POWERS-4): the hand-back: batch 3 measured, P28's merge measured, what is left, the close)
+   return `${start ? 'The' : 'the'} ${body}`;
+ }
+ 
+@@ -379,15 +366,12 @@ export function governanceAccountOf(settlement, opts = {}) {
+ 
+   // 3 + 4. THE POWERS THAT HAVE BROKEN WITH IT, AND WHAT THAT COSTS THE HALL.
+   const estranged = estrangedPowersOf(s, governing);
+-<<<<<<< f7afd958f (docs(JOIN-8): the hand-back after point 24)
+   // TAIL-DISPLAY-CIVIC-3 V1: each name's number is read off the form the sentence prints ("Third Bloc (Neutrals)" -> "The
+   // Neutrals": "their"), here and in the fracture's blocs
+-=======
+   // TAIL-POWERS-2 (P4): the occupier never took the hall's orders, so it is not among those who "take its orders no
+   // longer"; a rival occupier is at odds with the hall (the tense line), its tie and the consequence below unchanged.
+   /** @param {{ name: string, tie: string }} e */
+   const lineOf = (e) => (e.tie === 'competitive' && e.name === 'Occupation Authority' ? 'tense' : e.tie);
+->>>>>>> 01ddaba28 (docs(TAIL-POWERS-4): the hand-back: batch 3 measured, P28's merge measured, what is left, the close)
+   /** @param {string} tie @returns {{ names: string, plural: boolean } | null} */
+   const named = (tie) => {
+     const of = estranged.filter((e) => lineOf(e) === tie);
