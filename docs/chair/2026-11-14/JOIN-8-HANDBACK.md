@@ -48,6 +48,7 @@ THE CHAIR'S RULINGS TO JOIN-8 (each vetoable by the owner):
 | 8 | tail-crisis-2026-11-14 | aa78d1ec9 (03:53) | 572cd48e0 (JOIN-7 19) | 1b095cd0a | none | `assembleSettlement.js` hunks lent (K21); DECLARED MOVES c97caccd9 K20, cd0b1ab7b K21, 07ab77b03 K22: golden carried |
 | 9 | tail-defecon-c-2026-11-14 | 4d6d95761 (03:58) | ea788e17c (JOIN-7 26) | bc7ce511a | none | clean-both CODE `economicState.js` (lane 743; joined 27-413, 825-877: apart, both stand); DECLARED MOVE 6ce176aff D30 (b) (localProduction, 123 towns): golden carried |
 | 10 | tail-display-civic-2026-11-14 | 6cf555801 (04:02; handed back) | cb4ae58f0 (JOIN-7 17) | 412938baf | none | clean-both CODE `ResourcesTab.jsx` (lane 77-200; display-econ 13/208/237: apart, both stand); safety files lent (D26), PDF line (V4); DECLARED MOVE 89326e707 V3 (safetyProfile, 30 + 12 towns): golden carried |
+| 11 | tail-history-2026-11-14 | d7921a40c (04:05) | 5ed2900cd (JOIN-7 16) | 2824cad0a | none | DECLARED MOVES 6f7786a78 Y13, a9abf55e2 Y14, d7921a40c Y16: golden carried; pins re-keyed in the lane (textOf 124): code |
 
 ## 3. Every code resolution
 
@@ -167,6 +168,7 @@ Merged clean though both sides moved them (for the close to re-derive or measure
 | golden | crisis (8) | DECLARED MOVES c97caccd9 K20 (stress[].cast.roles[].reason), cd0b1ab7b K21 (stress/stressors summary, 21 records; the lane measured 0 of 525 golden keys), 07ab77b03 K22 (cast.stakes[].reason, 8 records) |
 | golden; `economicState.js` (read at the close) | defecon-c (9) | DECLARED MOVE 6ce176aff D30 (b) (economicState.localProduction, 123 towns); economicState.js merged clean though both moved it (apart) |
 | golden | display-civic (10) | DECLARED MOVE 89326e707 V3 (economicState.safetyProfile.guardEffectivenessDesc 30 towns, crimeTypes[] 12); `ResourcesTab.jsx` merged clean though display-econ (2) moved it too |
+| golden | history (11) | DECLARED MOVES 6f7786a78 Y13 (currentTensions[] description/factions/plotHooks; siegeNarrative 42 towns), a9abf55e2 Y14 (arrival pool), d7921a40c Y16 (historicalEvents[].lastingEffects 178, currentTensions[].lastingEffects 124) |
 
 ## 5. Item 2 at the landed tip
 
@@ -199,6 +201,6 @@ A worktree at origin's tip (`git worktree add /home/user/j8wt -b join8 <tip>`, `
 
 ## 9. WHAT IS LEFT
 
-1. IN HAND: the sweep (the prompt's order). Landed so far: points 1-6 (the finished branches), 7-10; the chair's 03:40 "LAND lane/tail-powers-2026-11-14" (eb5e2ab0d or later, in the order with the moving branches) received.
+1. IN HAND: the sweep (the prompt's order). Landed so far: points 1-6 (the finished branches), 7-11; the chair's 03:40 "LAND lane/tail-powers-2026-11-14" (eb5e2ab0d or later, in the order with the moving branches) received.
 2. lane/tail-powers-2026-11-14: waits for the chair's "LAND" (P28).
 3. For the close (not this seat's): every row of §4 by its door, once, on the final tree.
