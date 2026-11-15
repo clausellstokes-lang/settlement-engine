@@ -1926,7 +1926,14 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
       // the four `factionName on stressors` reads and the one `settlementIds on stressors` read at
       // src/components/map/WorldPulseData.js LEFT the CLEARED set and are two of the rung's NEW rows (dead fallbacks, admitted
       // by cause): exactly −2 identities / −5 counts on the gap, the file count unmoved; the filtered cohort 129 → 131.
-      files: 0, identities: 16, counts: 42,
+      // ⭐ 0/16/42 → 0/18/47 AT THE CLOSE OF THE ROUND BAR3 (2026-11-15, BAR3-CLOSE-DOORS-1, measured at the joined tree
+      // 98363cb84), RE-DERIVED AND NAMED: the schema-38 story again. No filter's CODE moved, its INPUT did: the round's
+      // declared record moves (BAR3-PEOPLE-2's table of books names the cohort 131 → 129, 195 → 190; the walker corpus's
+      // shapes digest 0f7925ef → 2a3b4727) re-deal the year, which carries a writer of the two keys in the `stressors` family
+      // again, so the four `factionName on stressors` reads and the one `settlementIds on stressors` read at
+      // src/components/map/WorldPulseData.js RE-ENTER the CLEARED set: exactly +2 identities / +5 counts on the gap, the file
+      // count unmoved; the filtered cohort 131 → 129. No reader file of the cohort was touched by either round.
+      files: 0, identities: 18, counts: 47,
     });
     expect(UNREVIEWED_UI_COHORT.tag).toBe('UNREVIEWED-UI');
     expect(UNREVIEWED_UI_COHORT.scopes).toEqual([...EXACT_SCAN_EXCLUDED_SCOPE]);
