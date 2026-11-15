@@ -37,7 +37,8 @@ export const OTHER_SHAPES = Object.freeze({
   'src/components/compendium/FactionEventBanner.jsx': 'the compendium palette',
   'src/components/home/HomeSampleDossier.jsx': 'a static sample dossier',
   'src/components/map/NpcTrailSection.jsx': 'the ladder record',
-  'src/components/new/SummaryTab.jsx:36': 'w = powerStructure', 'src/components/new/SummaryTab.jsx:48': 'FactionBar(ps.factions)',
+  // SummaryTab.jsx's two rows (:36 'w = powerStructure', :48 'FactionBar(ps.factions)') LEFT at TAIL-CLOSE-SRC-1 item 3: the
+  // character sentence reads its powers as `ps` (POWERS_RECEIVER) and FactionBar takes them as `powers`; no site remains.
   'src/components/new/tabs/HistoryTab.jsx': 'a tension\'s faction names', 'src/components/new/tabs/OverviewTab.jsx': 'a tension\'s faction names',
   'src/components/new/tabs/PowerTab.jsx': 'r = powerStructure',
   'src/components/settlement/EventComposer.jsx:179': 'the DM\'s custom powers',
