@@ -56,7 +56,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
   const defence = defenceOf({ institutions });
   // COHERENCE-AGREE: the mercenary atom is the home's too (priorityHelpers' own list of names named
   // "a mercenary company" in towns whose defence record lists none).
-  const inst    = { ...flags.inst, hasWalls: defence.walls, hasWatch: defence.watch, hasGarrison: defence.garrison, hasGates: defence.gate, hasMilitia: defence.militia, hasMercenary: defence.mercenary }, courthouse = defenseFactsOf({ institutions }).hasCourthouse, small = SMALL_PLACES.includes(tier), tiny = TINY_PLACES.includes(tier); // UPKEEP-8: the home's narrower court fact; the census's small places
+  const inst    = { ...flags.inst, hasWalls: defence.walls, hasWatch: defence.watch, hasGarrison: defence.garrison, hasGates: defence.gate, hasMilitia: defence.militia, hasMercenary: defence.mercenary }, courthouse = defenseFactsOf({ institutions }).hasCourthouse, small = SMALL_PLACES.includes(tier), tiny = TINY_PLACES.includes(tier), rosterRecord = { institutions }; // UPKEEP-8: the home's narrower court fact; the census's small places
   // CENSUS-1e unit 2 (Appendix B item 23, the inline T branches): each line CENSUS-5b declared in
   // SAFETY_LINE_SIBLINGS (below) resolves at the branch that prints it, against the live roster's
   // facts — the original where the record holds its atom, else its twin. Draw-free.
@@ -305,10 +305,10 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
             ? 'militia'
             : 'local guard';
     // COHERENCE-AGREE-3 (F5): the gates are the gate home's (defence.gate), not the walls'; a palisade has no gate of record.
-    const wallNote   = inst.hasWalls ? said(' Everyone comes in by the gates, where the guard sees them.') : '';
+    const wallNote   = !inst.hasWalls ? '' : inst.hasGates && beneathTheWalls(institutions) ? GATES_KEPT_SMUGGLERS_BENEATH : said(' Everyone comes in by the gates, where the guard sees them.'); // BAR3-DEFECON (C20212 C26238): safetyLineTruth.js
     const charNote   = inst.hasCharterHall ? said(" The adventurers' charter hall handles threats the watch cannot.") : ''; // F12: the watch, where it stands
     // Canonical threat vocabulary is heartland/frontier/plagued ('embattled' was never emitted).
-    const threatNote = threat === 'plagued' ? ' The constant monster threat keeps the guard exceptionally well-drilled and alert.' : '';
+    const threatNote = threat !== 'plagued' ? '' : inst.hasGarrison || inst.hasWatch ? ' The constant monster threat keeps the guard exceptionally well-drilled and alert.' : MONSTER_THREAT_NO_DRILL; // BAR3-DEFECON (C55188): no drilled guard where only volunteers stand
     const seesTo = lawRef === 'local guard' ? '' : `; the ${lawRef} sees to that`; // TAIL-DEFECON (#23466): no garrison, watch or militia, no force named
     safetyDesc = `Visitors can walk anywhere at any hour, and there is little crime${seesTo}.` +
       `${wallNote}${charNote}${threatNote}`;
@@ -424,7 +424,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
   } else {
     const noWatch = voiceOf('noWatchSmall', NO_WATCH_SMALL);
     guardEffectivenessDesc = ['thorp', 'hamlet', 'village'].includes(tier)
-      ? (hasStress('occupied') && noWatch === NO_WATCH_SMALL[2] ? NO_WATCH_OCCUPIED : noWatch) // SW-B5 FRAMES: the original is index 0; TAIL-DEFECON (#B14103): the occupiers keep order
+      ? quarrelUnderViolence(hasStress('occupied') && noWatch === NO_WATCH_SMALL[2] ? NO_WATCH_OCCUPIED : noWatch, safetyLabel) // SW-B5 FRAMES: the original is index 0; TAIL-DEFECON (#B14103): the occupiers keep order; BAR3-DEFECON (C25320): safetyLineTruth.js
         /* the old families' line and its vantages: NO_WATCH_SMALL at the end of this file */
       : 'There is no watch and nobody in charge of order; people look after themselves and their own.';
   }
@@ -462,13 +462,8 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     });
   }
   if (stress.religiousFraud) {
-    const coverClause = inst.hasChurch
-      ? "The church's moral authority provides cover"
-      : 'Religious structures provide cover';
-    crimeTypes.push({
-      type: 'Religious fraud',
-      desc: `${coverClause} for sophisticated fraud. Fake relics, forged dispensations, and corrupt clergy who treat their position as a commercial opportunity.`,
-    });
+    // BAR3-DEFECON (C14930): the cover and the clergy are a church of the place's own (the temple leaf), not access to a neighbour's
+    crimeTypes.push({ type: 'Religious fraud', desc: hasInstitution(rosterRecord, 'temple') ? "The church's moral authority provides cover for sophisticated fraud. Fake relics, forged dispensations, and corrupt clergy who treat their position as a commercial opportunity." : RELIGIOUS_FRAUD_NO_CHURCH });
   }
   if (stress.merchantCriminalBlur) {
     const tradeRef = inst.hasMerchantGuild ? 'Guild merchants' : 'Wealthy traders';
@@ -804,6 +799,10 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
  * @returns {E}
  */
 export function settleCrimeLinesToSignal(economicState, lists) {
+  return settleCrimeLinesOnly(settleTheocraticFlag(economicState, lists?.seats), lists); // BAR3-DEFECON: the theocratic flag, read at the same late point
+}
+/** @param {any} economicState @param {Parameters<typeof settleCrimeLinesToSignal>[1]} lists */
+function settleCrimeLinesOnly(economicState, lists) {
   const safetyProfile = economicState?.safetyProfile;
   const crimes = safetyProfile?.crimeTypes;
   if (!Array.isArray(crimes) || !crimes.length) return economicState;
@@ -818,7 +817,7 @@ export function settleCrimeLinesToSignal(economicState, lists) {
     const desc = lineFor[/** @type {keyof typeof lineFor} */ (String(entry?.type))];
     return desc !== undefined && entry.desc !== desc ? { ...entry, desc } : entry;
   });
-  settled = settleRosterCrimeLines(settled, lists?.seats, crimeSignalOf(lists).seated); // TAIL-DEFECON (#15308, #14654); TAIL-CLOSE-SRC-2: the signal's own answer, not its powers list read here
+  settled = settleRosterCrimeLines(settled, lists?.seats, crimeSignalOf(lists).seated || oneRingRules(economicState, lists)); // TAIL-DEFECON (#15308, #14654); TAIL-CLOSE-SRC-2: the signal's own answer, not its powers list read here; BAR3-DEFECON (C12387): or the one ring the Defense tab names
   if (hunger) settled = settleDesertersUnfed(settled); // TAIL-DISPLAY-CIVIC-3 V3: under hunger no line offers food
   if (infrastructure && settled.some((entry) => entry?.type === 'Survival crime')) {
     settled = settled.filter((entry) => !(entry?.type === 'desperation theft' && entry.desc === DESPERATION_THEFT_DESC));
@@ -897,7 +896,7 @@ export const SAFETY_LINE_SIBLINGS = Object.freeze({
   // has no gate of record. Measured on the 2,866-birth L2 corpus at 65ce74ce6: printed with no gate 15.
   ' Everyone comes in by the gates, where the guard sees them.': declaredSet(
     ' Everyone comes in by the gates, where the guard sees them.', ['gate'],
-    ' The walls leave few ways in, and the guard watches them.'),
+    ' The walls leave few ways in.'), // BAR3-DEFECON (C55187): no gate, and in every town it printed in no watch or garrison to watch one
   // COHERENCE-AGREE-3 (REVIEW-AGREE F12): the charter hall's line names the watch, so it needs the watch; the
   // twin names no force. Measured on the 2,866-birth L2 corpus at 65ce74ce6: printed with no watch 11.
   " The adventurers' charter hall handles threats the watch cannot.": declaredSet(
@@ -1116,3 +1115,7 @@ const ENFORCEMENT_STRUGGLES = ' Enforcement struggles to distinguish survival cr
  *  corners belong to a village or larger; a small place is Moderate by its community order (`communityOrderBonus`), and
  *  this line says that, naming no force. */
 const TINY_MODERATE_LINE = 'The neighbours keep an eye on one another, and what trouble there is, everyone soon hears of.';
+
+// ─── BAR3-DEFECON (2026-11-15): the safety lines against the page's own state (at the end, so no line above moves) ───
+import { hasInstitution } from '../domain/facts/institutions.js';
+import { beneathTheWalls, GATES_KEPT_SMUGGLERS_BENEATH, MONSTER_THREAT_NO_DRILL, oneRingRules, quarrelUnderViolence, RELIGIOUS_FRAUD_NO_CHURCH, settleTheocraticFlag } from './safetyLineTruth.js';

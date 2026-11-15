@@ -18,6 +18,7 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { DefenseTab } from '../../src/components/new/tabs/DefenseTab.jsx';
 import { factsOf } from '../../src/domain/facts/factsOf.js';
 import { NO_WATCH_SMALL } from '../../src/generators/safetyProfile.js';
+import { quarrelUnderViolence } from '../../src/generators/safetyLineTruth.js';
 
 const STRESSES = [
   'mass_migration', 'famine', 'under_siege', 'occupied', 'politically_fractured', 'indebted',
@@ -69,7 +70,11 @@ describe('one reader of the watch fact on the Defense tab', () => {
     // STOP 2's LEFTOVER, CLOSED at the style wave's final tip (STYLE-2-MERGE-7, closing act 6, 2026-11-11): membership ALONE
     // reads 103 of 109 (0.945 > 0.9), measured at 2cbe72ca1, so the phrase path (/There is no watch/) is dropped; the arm
     // counts the guard assessment by its pool's members only.
-    const saying = TABS.filter(({ text }) => NO_WATCH_SMALL.some((member) => text.includes(member))).length;
+    // RE-KEYED BY IDENTITY (BAR3-DEFECON, 2026-11-15, C25320): where the safety label reads violence, the third vantage takes
+    // its declared twin ("…though many come to blows first", `safetyLineTruth.js :: quarrelUnderViolence`), which says the
+    // same absence; the pool's members and their twins are the members.
+    const members = [...new Set(NO_WATCH_SMALL.flatMap((member) => [member, quarrelUnderViolence(member, 'Dangerous')]))];
+    const saying = TABS.filter(({ text }) => members.some((member) => text.includes(member))).length;
     expect(saying, 'the guard assessment no longer reads the absence').toBeGreaterThan(TABS.length * 0.9);
   });
 

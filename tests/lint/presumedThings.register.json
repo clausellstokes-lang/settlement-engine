@@ -889,7 +889,6 @@
    ["militia", "after-release", "The militia musters for emergencies only; day-to-day crime is uncontested.", "56fa869ca3eb8adb"],
    ["prison", "after-release", " A functioning court and prison mean crimes carry real consequences.", "269d54d08e6175bc"],
    ["prison", "after-release", " catches are tried at the court and held in the prison.", "59194299b3e865f5"],
-   ["temple", "after-release", "The church's moral authority provides cover", "a82d186d1edd7690"],
    ["walls", "after-release", " Even the walls provide limited protection. The threat is within.", "c6578d887e273250"],
    ["walls", "after-release", " The walls keep most trouble outside.", "add29d4ea7aa57b1"],
    ["walls", "after-release", " The walls keep the trouble inside, off the roads beyond.", "af447c7e12c252f7"],

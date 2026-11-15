@@ -19,7 +19,7 @@ import {
 } from '../../domain/content/customContentSemanticAuthority.js';
 import { availableNativeResourceKeys } from '../../domain/resourceSemantics.js';
 import { resolveTerrain } from '../../domain/resolveTerrain.js';
-import { resolveSibling } from '../../domain/facts/drawDeclared.js'; import { isGrainFoodSource } from '../../domain/facts/institutions.js'; // TAIL-CLOSE-SRC-4: one line
+import { resolveSibling } from '../../domain/facts/drawDeclared.js'; import { isGrainFoodSource } from '../../domain/facts/institutions.js'; import * as institutionsHome from '../../domain/facts/institutions.js'; // TAIL-CLOSE-SRC-4: one line
 import {
   hasTradeRouteConnection,
   isTradeRouteDisconnected,
@@ -224,7 +224,7 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
   if (stresses.includes('under_siege')) {
     productionMult *= SIEGE_PRODUCTION_KEPT;
     routeOverride = 'isolated';
-    stressNotes.push('The siege has cut every road in, and the outlying farms are abandoned or burned. What is already in store is all there will be until it lifts.');
+    stressNotes.push(SIEGE_STORES_NOTE);
   }
   if (stresses.includes('plague_onset')) {
     productionMult *= 0.75;
@@ -440,6 +440,11 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
     }
   }
 
+  // BAR3-DEFECON (C20434): under a siege nothing comes in but by a port's own ships (`domain/display/foodCarrier.js ::
+  // carriersOf`, the Food Security row's own rule), so the gap the verdict names is what the place's own food leaves.
+  const rosterRecord = { institutions };
+  const siegeShut = stresses.includes('under_siege') && !(waterAccessKind(config?.terrainType, config?.tradeRouteAccess) === 'maritime' && tradeRouteTier(config?.tradeRouteAccess) === 'major' && institutionsHome.hasInstitution(rosterRecord, 'docks'));
+  const siegeGap = (/** @type {number} */ lb) => Math.round(siegeShut && importCoverageFinal > 0 ? lb + importCoverageFinal : lb);
   // The viability verdicts cut the gap at the band's own points (FOOD-1: one set of cut-offs;
   // these were a private 50 and 20).
   if (surplusFinal < 0) {
@@ -454,7 +459,7 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
           severity: SEVERITY.CRITICAL,
           category: 'Food Production',
           title: UNCOVERED_LOCAL_FOOD_DEFICIT,
-          description: `Settlement cannot cover ~${Math.round(deficit)} lbs of food per day (${Math.round(deficitPercent)}% of needs) and has no dependable trade route.`,
+          description: `Settlement cannot cover ~${siegeGap(deficit)} lbs of food per day (${siegeGap(deficit) === Math.round(deficit) ? Math.round(deficitPercent) : Math.max(1, Math.round((siegeGap(deficit) / Math.max(1, dailyNeedFinal)) * 100))}% of needs) and has no dependable trade route.`, // BAR3-DEFECON (C20434)
           impact: 'The current population cannot survive this provisioning gap without a new support path.',
           suggestedFixes: [
             'Strengthen the local foodshed or reduce the supported population',
@@ -500,7 +505,7 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
           severity: SEVERITY.CRITICAL,
           category: 'Food Production',
           title: UNCOVERED_LOCAL_FOOD_DEFICIT,
-          description: `Settlement cannot cover ~${Math.round(deficit)} lbs of food per day (${Math.round(deficitPercent)}% of needs) and has no dependable trade route.`,
+          description: `Settlement cannot cover ~${siegeGap(deficit)} lbs of food per day (${siegeGap(deficit) === Math.round(deficit) ? Math.round(deficitPercent) : Math.max(1, Math.round((siegeGap(deficit) / Math.max(1, dailyNeedFinal)) * 100))}% of needs) and has no dependable trade route.`, // BAR3-DEFECON (C20434)
           impact: 'The current population is not viable without another provisioning path.',
           suggestedFixes: [
             'Strengthen the local foodshed',
@@ -570,7 +575,8 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
   // Stress food impact notes
   if (stressNotes.length > 0) {
     const isCritical = stresses.includes('famine') || stresses.includes('under_siege');
-    stressNotes.forEach((note) => {
+    stressNotes.forEach((stated) => {
+      const note = stated === SIEGE_STORES_NOTE ? siegeStoresNote(Math.round(dailyProductionFinal) > 0, Math.round(magicFoodOffset) > 0) : stated; // BAR3-DEFECON (C10009 C19458)
       issues.push({
         type: 'stress_consequence',
         category: 'Food Supply',
@@ -868,3 +874,22 @@ function moderateGapGrade(facts) {
   return { category: FOOD_SECURITY_BANDS[/** @type {keyof typeof FOOD_SECURITY_BANDS} */ (band)].label, severity };
 }
 /** R2-CODE-A-8 item 7 (the chair's ruling: a line names an import or a source only where the record holds it): does the record's import list (`factsOf(…).imports`, the economic state's `primaryImports`) hold a good this pattern names? No facts (a direct caller): held, as resolveSibling keeps a line it cannot read. @param {object | (() => object) | null} facts @param {RegExp} pattern @returns {boolean} */ function importHeld(facts, pattern) { const f = /** @type {any} */ (typeof facts === 'function' ? facts() : facts); if (!f) return true; const list = Array.isArray(f.imports) ? f.imports : []; return list.some((/** @type {unknown} */ x) => typeof x === 'string' && pattern.test(x)); } const GRAIN_IMPORT = /grain/i; /** R2-CODE-A-8 item 7b: does the roster's resource list (`availableNativeResourceKeys`: present and not depleted) hold a stand of timber, the forest the timber line names? A config with no resource list (a direct caller): held. @param {any} config @returns {boolean} */ function timberStandHeld(config) { return !Array.isArray(config?.nearbyResources) || availableNativeResourceKeys(config).some((k) => TIMBER_STAND.test(k)); } const TIMBER_STAND = /^(managed_forest|shipbuilding_timber|mountain_timber)$/; import { MODERATE_GAP_TWIN, OUTLOOK_HOOK_SIBLINGS } from './outlookHookSiblings.js'; import { liveMaterialFor } from './localMaterials.js'; export { OUTLOOK_HOOK_SIBLINGS }; // LANDING-R2 (ODQ §934.105): the outlook hooks' declared siblings moved verbatim to economy/outlookHookSiblings.js, re-exported; below every cited line, so none moves
+
+// ─── BAR3-DEFECON (2026-11-15; REVIEW-WIDE C10009 C19458): THE SIEGE'S STORES LINE READS WHAT IS STILL GROWN OR MADE ───
+/** The siege's food note as drawn. Its last sentence, "What is already in store is all there will be", was false in every
+ * one of its 31 towns on the census's 720 at 8b45191a5: each still grows food inside (the siege keeps a share of the
+ * harvest, `SIEGE_PRODUCTION_KEPT`), 14 with food made by magic as well. */
+const SIEGE_STORES_NOTE = 'The siege has cut every road in, and the outlying farms are abandoned or burned. What is already in store is all there will be until it lifts.';
+const SIEGE_CUT = 'The siege has cut every road in, and the outlying farms are abandoned or burned.';
+/**
+ * The note as the food record holds it: what is still grown here, what magic makes, and the store are all there will be.
+ * @param {boolean} grown the record's own production is above nothing @param {boolean} magic the record's magic provision is
+ * @returns {string}
+ */
+export function siegeStoresNote(grown, magic) {
+  if (grown && magic) return `${SIEGE_CUT} What is still grown here, what magic makes, and what is already in store are all there will be until it lifts.`;
+  if (grown) return `${SIEGE_CUT} What is still grown here and what is already in store are all there will be until it lifts.`;
+  if (magic) return `${SIEGE_CUT} What magic makes and what is already in store are all there will be until it lifts.`;
+  return SIEGE_STORES_NOTE;
+}
+import { tradeRouteTier } from '../../domain/tradeRouteSemantics.js'; // BAR3-DEFECON (C20434): the sea route, read as its tier and its water

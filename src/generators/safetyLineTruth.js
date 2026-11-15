@@ -10,6 +10,7 @@ import { scoreBand } from '../domain/display/defenseScoreBands.js';
 import { partitionDefenseInstitutions } from '../domain/institutions/defenseInstitutionBuckets.js';
 import { lineText } from '../domain/facts/drawDeclared.js';
 import { CRIMINAL_GOVERNANCE_TYPE, criminalSeatGoverns, gangHousesOf } from '../domain/crimeSignal.js';
+import { criminalStructureKeyOf } from '../domain/facts/criminalStructureKey.js';
 
 /** The census's small places (a district, a military command); TINY: streets too. */
 /** BAR2-LABELS LB5 (the chair's ruling of 2026-11-15, vetoable by the owner): the siege's order clause where no force stands
@@ -242,3 +243,73 @@ const SMUGGLING_HOOK_SIEGE_TWINS = Object.freeze({
   'A smuggled load went missing on the way in, and the people who paid for it are asking questions.':
     lineText({ text: 'The last smuggled load before the siege went missing, and the people who paid for it are asking questions.', needs: ['crisis: siege'] }),
 });
+
+// ─── BAR3-DEFECON (2026-11-15; REVIEW-BAR-3 and REVIEW-WIDE, the DEFECON rows): the safety lines against the page's state ───
+/** Does a house on the roster move goods beneath the walls (the gates line's own reading, V7 above). @param {ReadonlyArray<{ name?: unknown } | null | undefined>} institutions @returns {boolean} */
+export function beneathTheWalls(institutions) {
+  return (institutions || []).some((i) => BENEATH_THE_WALLS.test(String(i?.name ?? '')));
+}
+/** C20212 C26238: the Very Safe line's "Everyone comes in by the gates, where the guard sees them" where smugglers have ways in
+ * beneath the walls (8 of its 20 towns on the census's 720 at 8b45191a5): the twin. */
+export const GATES_KEPT_SMUGGLERS_BENEATH = lineText({ text: ' The guard keeps the gates, but smugglers have ways in beneath the walls.', needs: ['gate', 'walls'] });
+/** C55188: "keeps the guard exceptionally well-drilled" where no garrison or watch stands, only volunteers or no one (8 of its
+ * 13 towns): the threat, and no drill claimed. */
+export const MONSTER_THREAT_NO_DRILL = ' The constant monster threat keeps everyone here on their guard.';
+/** C14930: the religious-fraud line where the place has no church of its own (`facts/institutions.js :: hasInstitution(record,
+ * 'temple')`; an "Access to parish church" row is a neighbour's): no cover of its own church, no clergy of its own. */
+export const RELIGIOUS_FRAUD_NO_CHURCH = 'Fake relics and forged dispensations are sold here in the faith\'s name, by people who treat it as a commercial opportunity.';
+
+const SETTLED_BEFORE_BLOWS = 'and most are settled before they come to blows.';
+/**
+ * C25320: "A quarrel goes to the heads of the oldest families, and most are settled before they come to blows" where the
+ * safety label reads violence (Dangerous, Critical, Desperate: 18 of its 72 towns on the census's 720 at 8b45191a5, the
+ * read town's "Violence and theft are routine … quarrels are settled with fists and knives" among them): its twin.
+ * @param {string} line the drawn no-watch line @param {unknown} safetyLabel @returns {string}
+ */
+export function quarrelUnderViolence(line, safetyLabel) {
+  if (!/^(?:Dangerous|Critical|Desperate)\b/.test(String(safetyLabel ?? '')) || !String(line).endsWith(SETTLED_BEFORE_BLOWS)) return line;
+  return `${String(line).slice(0, -SETTLED_BEFORE_BLOWS.length)}though many come to blows first.`;
+}
+
+/** The tithes rows of the income record (`economy/economicState.js`). */
+const TITHES_SOURCE = /^Church Tithes/;
+/**
+ * WHETHER THE CHURCH HOLDS THE ECONOMY (the theocratic flag's claim: "Economic activity flows through religious institutions …
+ * Whoever controls trade and tithes holds more practical power"): the tithes row is the income record's largest (its own
+ * "dominating the local economy" cut, `economy/incomeLineSiblings.js :: trueIncomeDesc`) and a religious power stands at Strong
+ * or Dominant (the Power tab's own word). Measured on the census's 720 at 8b45191a5: 20 towns carry the flag; the read
+ * town's Minor power and 7% tithes is the class.
+ * @param {unknown} incomeSources @param {unknown} seats @returns {boolean}
+ */
+export function theocraticEconomyStands(incomeSources, seats) {
+  const rows = /** @type {Array<{ source?: unknown, percentage?: unknown }>} */ (Array.isArray(incomeSources) ? incomeSources : []);
+  const pct = (/** @type {{ percentage?: unknown }} */ r) => (typeof r?.percentage === 'number' ? r.percentage : 0);
+  const tithes = rows.filter((r) => TITHES_SOURCE.test(String(r?.source ?? ''))).reduce((m, r) => Math.max(m, pct(r)), 0);
+  const top = rows.reduce((m, r) => Math.max(m, pct(r)), 0);
+  const strong = (Array.isArray(seats) ? seats : []).some((f) => f?.category === 'religious' && ['Strong', 'Dominant'].includes(String(f?.powerLabel ?? '')));
+  return tithes > 0 && tithes >= top && strong;
+}
+
+/**
+ * C12387: the background-crime line's "No single dominant organisation" beside the Defense tab's one ring: the crime
+ * structure's own key (`facts/criminalStructureKey.js`, the tab's reader) answers "organized" from the final roster
+ * (read at assembly by `safetyProfile.js :: settleCrimeLinesToSignal`).
+ * @param {unknown} economicState @param {{ seats?: unknown, estate?: unknown } | null | undefined} lists @returns {boolean}
+ */
+export function oneRingRules(economicState, lists) {
+  return criminalStructureKeyOf(/** @type {never} */ ({ powerStructure: { factions: lists?.seats }, institutions: lists?.estate, economicState })) === 'organized';
+}
+
+/**
+ * The theocratic-economy flag (`safetyProfile.flags.theocraticEconomy`, the birth's stress draw, kept as drawn at the economy
+ * step, where neither the power roster nor the final income stands) as stored on the record: settled at assembly
+ * (`safetyProfile.js :: settleCrimeLinesToSignal`), it stands only where `theocraticEconomyStands`. Draw-free; the economy is
+ * copied only when the flag changes.
+ * @template E @param {E} economicState @param {unknown} seats @returns {E}
+ */
+export function settleTheocraticFlag(economicState, seats) {
+  const es = /** @type {any} */ (economicState);
+  const sp = es?.safetyProfile;
+  if (sp?.flags?.theocraticEconomy !== true || theocraticEconomyStands(es?.incomeSources, seats)) return economicState;
+  return /** @type {E} */ ({ ...es, safetyProfile: { ...sp, flags: { ...sp.flags, theocraticEconomy: false } } });
+}
