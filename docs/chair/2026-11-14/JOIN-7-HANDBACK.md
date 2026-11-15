@@ -49,6 +49,7 @@ THE CHAIR'S RULINGS TO JOIN-7 (each vetoable by the owner):
 | 14 | tail-exports-journal-2026-11-14 | 0d2529c5a (01:59; holds a merge of the line at b6c64d36c) | b6c64d36c | d817736d8 | none | clean-both `census2dTables.test.js` (with history 2; 11/11 on the merged tree); lane-only `SPATIAL_TEXT.json`; DECLARED MOVE 26e9210a0 (spatialLayout.layout, 57 towns): golden carried |
 | 15 | tail-services-2026-11-14 (SWEEP) | e35851db1 (02:12) | 8df172bf0 (1) | b75b08c35 | none | clean-both `institutionProseDeclared.test.js` (4/4 merged), the two presumed registers (parse); lane-only `INSTITUTION_SERVICES.json`; DECLARED MOVE e35851db1 (availableServices, 239 births): golden carried |
 | 16 | tail-history-2026-11-14 (SWEEP) | 5ed2900cd (02:16) | 3da34c70b (2) | 3f3d9c880 | none | DECLARED MOVE 7bef72cbc (currentTensions 131 towns, siegeNarrative 4): golden carried |
+| 17 | tail-display-civic-2026-11-14 (SWEEP) | cb4ae58f0 (02:20; holds a merge of the line at d817736d8) | d817736d8 (14) | 6e4650375 | none | — (6 files, display only) |
 
 ## 3. Every code resolution
 
