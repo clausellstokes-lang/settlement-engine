@@ -35,6 +35,8 @@ import { composeCrisisPage, CRISIS_PAGE_COPY } from '../domain/crisis/crisisPage
 // ⛔ ONE HOME PER SENTENCE (STYLE-0 §3's keep-on rules, applied by STYLE-RULINGS-2 B4, 2026-11-09):
 // the crisis page's two print rules are the PDF's, from one module.
 import { stakeLines, unprintedFacts } from '../pdf/lib/crisisPrint.js';
+// TAIL-CRISIS-7 (K26): a stake row is a sentence; its power takes its name from the one leaf ("The Guard split").
+import { powerSentenceName } from '../domain/display/powerSentenceName.js';
 // ROUND THREE, ruling (a): every house this journal prints is printed by its label, the one display leaf.
 import { houseLabelsInText, institutionHouseLabel } from '../domain/display/institutionDisplayName.js';
 import { tradeListsAsPrinted, revenuesOffTheLists, plainGoodName } from '../domain/display/tradeListDisplay.js';
@@ -186,7 +188,7 @@ function crisisJournalPage(settlement) {
     '', `### ${CRISIS_PAGE_COPY.cast}`,
     s.cast.length ? s.cast.map(r => `- **${esc(r.roleLabel)}**: ${esc(r.kind === 'institution' ? institutionHouseLabel(r.name) : r.name)} · ${esc(r.reason)}`) : `- ${CRISIS_PAGE_COPY.nobody}`,
     s.stakes.length ? md('', `### ${CRISIS_PAGE_COPY.stakes}`,
-      s.stakeLines.rows.map(k => `- **${esc(k.factionId)}** ${CRISIS_PAGE_COPY.stake[k.stake]}: ${esc(k.reason)}.`),
+      s.stakeLines.rows.map(k => `- **${esc(powerSentenceName(k.factionId))}** ${CRISIS_PAGE_COPY.stake[k.stake]}: ${esc(k.reason)}.`),
       s.stakeLines.untouched ? `- ${esc(s.stakeLines.untouched)}` : null) : null,
     '', `### ${CRISIS_PAGE_COPY.levers}`,
     s.levers.length ? s.levers.map(l => `- ${esc(institutionHouseLabel(l.institution))}${l.holderName ? `, held by ${esc(l.holderName)}` : ''}`) : `- ${CRISIS_PAGE_COPY.noLevers}`,
