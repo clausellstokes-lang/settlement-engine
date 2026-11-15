@@ -22,6 +22,7 @@ import { rulingChainOf } from '../../../src/domain/dossier/powerStrata.js';
 import { backingArchetypeOf } from '../../../src/domain/dossier/powerSupport.js';
 import { stressPowerRowOf } from '../../../src/domain/people/stressPowerFaces.js';
 import { governingFactionOf, nameOf } from '../../../src/domain/rulingPower.js';
+import { faceOfRole, titleForHolder } from '../../../src/data/holderTitleForms.js';
 
 const DIALS = Object.freeze({
   tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat',
@@ -41,6 +42,11 @@ const ORDER = Object.freeze({ low: 0, moderate: 1, high: 2 });
 /** The seat a claimant claims: an Elder below the village (low), a Mayor or Governor above (high), literals. */
 const SEAT_BAND = Object.freeze({ thorp: 'low', hamlet: 'low', village: 'high', town: 'high', city: 'high', metropolis: 'high' });
 
+/** RE-KEYED BY IDENTITY 2026-11-15 (TAIL-CLOSE-PEOPLE-1): TAIL-TITLES K-C's DECLARED MOVE 1036bf94 prints a face in its holder's
+ *  form ("the lord" -> "the lady" for a woman; M-1b: the role is that title). The guard reads the card's FACE through the move's
+ *  own reader (faceOfRole), and only where the printed title IS that face's holder form, so a wrong word still reds.
+ *  @param {any} c */
+const faceOf = (c) => { const f = faceOfRole(c); return c && c.title === titleForHolder(f, c.gender) ? f : c?.title; };
 /** @param {any} s @param {string} power */
 const firstOf = (s, power) => (s.npcs || []).find((c) => (c.memberships || []).some((m) => m.power === power && m.rank === 1)) || null;
 
@@ -57,8 +63,8 @@ function missesOf(s, key) {
     const first = firstOf(s, power);
     if (!first) { out.push(`${key}: ${power} has no one on the page`); continue; }
     const minted = first.institution?.kind === 'power' && first.institution?.key === power;
-    if (minted && first.title !== 'the lord') out.push(`${key}: ${power}'s minted face is "${first.title}"`);
-    if (!minted && !LANDED_FACES.includes(first.title)) out.push(`${key}: ${power} is faced by ${first.name}, ${first.title} (${first.institution?.key})`);
+    if (minted && faceOf(first) !== 'the lord') out.push(`${key}: ${power}'s minted face is "${first.title}"`);
+    if (!minted && !LANDED_FACES.includes(faceOf(first))) out.push(`${key}: ${power} is faced by ${first.name}, ${first.title} (${first.institution?.key})`);
     const least = row?.claimant && minted ? SEAT_BAND[s.tier] : STANDING_BAND[f.powerLabel];
     if (least && !(ORDER[first.influence] >= ORDER[least])) out.push(`${key}: ${power} (${f.powerLabel}) is faced at ${first.influence}, below ${least}`);
     // styled a claimant only where the power itself claims
@@ -85,7 +91,7 @@ describe('COHERENCE-POWERS-6 item 1: a noble power is faced by a noble', () => {
     const s = born('city', 'rvw-city-20');
     const first = firstOf(s, 'Noble Families');
     expect(first?.title).toBe('the governor');
-    expect(firstOf(s, 'The Old Houses')?.title).toBe('the lord');
+    expect(faceOf(firstOf(s, 'The Old Houses'))).toBe('the lord');
   });
 
   it('on fresh births at every size, calm and in crisis: every noble body is faced by a noble at its standing', () => {
