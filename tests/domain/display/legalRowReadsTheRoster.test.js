@@ -32,7 +32,7 @@ describe('the Legal Infrastructure row names a court only where a house holds on
   test('the unit: a Town hall that draws permits and taxes holds no court; one that draws dispute arbitration does; a courthouse does', () => {
     expect(legal(town(['Town hall'], [{ name: 'Permit applications', institution: 'Town hall' }]))?.status).toBe('None');
     expect(legal(town(['Town hall'], [], true))?.status).toBe('Prison only');
-    expect(legal(town(['Town hall'], [{ name: 'Dispute arbitration', institution: 'Town hall' }]))?.status).toBe('Court only');
+    expect(legal(town(['Town hall'], [{ name: 'Dispute arbitration', institution: 'Town hall' }]))?.status).toBe('Town hall bench only'); // TAIL-DISPLAY-CIVIC-4 V6: the bench that stands, re-keyed by identity
     expect(legal(town(['Courthouse'], [], true))?.status).toBe('Court + Prison');
     expect(legal(town(['Town hall'], [{ name: 'Dispute arbitration', institution: 'Town council' }]))?.status, 'a service of a house not here').toBe('None');
   });
