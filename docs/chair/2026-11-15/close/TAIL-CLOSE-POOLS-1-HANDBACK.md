@@ -135,7 +135,7 @@ line at `4e58ed8ba` the file is taken whole from the line (`git checkout 4e58ed8
 Run alone at `34f7adbeb` (this branch with the line at `4e58ed8ba`, which holds the display's close branch): 59/59.
 Nothing changed.
 
-## The sixth (DS-GEN-13 "a market, no guild", `tests/lint/factLayers.walker.test.js`): NAMED
+## The sixth (DS-GEN-13 "a market, no guild", `tests/lint/factLayers.walker.test.js`): RE-LAYERED by C30 (named first)
 
 The walker's POOLS arm reds on `DS-GEN-13::COMMERCE: a market, no guild` → "declares guild (layer 3)": the pool's
 table row is layer 3 (`factLayers.poolTable.json`), and the economy corpus's batch 7 (`4467cd7d6`, ruling C19) gave
