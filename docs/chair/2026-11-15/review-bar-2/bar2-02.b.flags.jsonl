@@ -1,0 +1,7 @@
+{"id":"C2572","town":"bar0-city-under_siege+famine-rand-4","sev":"MED","kind":"STATE","why":"'Fully exploited' medicinal herbs drawn on herb gathering areas; LAND gives Wild Foraging Areas depleted, herbalism chain vulnerable, herbs imported","other":""}
+{"id":"C2705","town":"bar0-city-under_siege+famine-rand-4","sev":"MED","kind":"PAIR","why":"says decisions that matter are made by Religious Authorities; City Council governs, Council gives orders, relation with Religious is tense/stable","other":"C2652"}
+{"id":"C2828","town":"bar0-city-under_siege+famine-rand-4","sev":"MED","kind":"STATE","why":"says only 1 craft institution; HOUSES lists Craft guilds, Carpenters, Tanners, Bakers, Chandler, Sawmill, Furrier, Alchemist and the page marks them Crafts","other":"C2424"}
+{"id":"C2831","town":"bar0-city-under_siege+famine-rand-4","sev":"LOW","kind":"STATE","why":"advises adding craft guilds; HOUSES already has Craft guilds (30-80)","other":"C2411"}
+{"id":"C2149","town":"bar0-city-under_siege+famine-rand-4","sev":"LOW","kind":"STATE","why":"'Lord Mayor' title for Maroula Mosele, who is female (PEOPLE f)","other":""}
+{"id":"C1928","town":"bar0-city-under_siege+famine-rand-4","sev":"LOW","kind":"LACKS","why":"stands drinks at a wine shop; HOUSES has no wine shop and inns/taverns are marked stopped by the siege, every coin going on food","other":"C2213"}
+{"id":"DONE","lines":1411,"blocks":1,"flags":6}
