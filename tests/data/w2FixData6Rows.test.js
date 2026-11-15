@@ -13,6 +13,7 @@ import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailur
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { INCOME_SOURCE_FORMS } from '../../src/domain/worldPulse/treasury.js';
 
 const dials = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 
@@ -104,8 +105,14 @@ describe('W2-FIX-DATA-8: the census writers in the data lane\'s files (the eight
     expect((late.institutions || []).find((/** @type {any} */ i) => i.name === 'Brewer').desc).toBe('Makes ale in bulk from malted grain. The second-greatest draw on the grain supply after bread. The households are stocked from here.');
   }, 240_000);
 
-  test('HANDBACK-6 row 3 (ww-1416): the brewer sells barrels to alehouses only where one stands; where none does, to the households (r2s-monster_pressure-village-1); a village with an alehouse keeps the line (r2r-village-15)', () => {
-    expectNoSeedFailures(collectSeedFailures(['r2s-monster_pressure-village-1'], (seed) => {
+  // RE-KEYED BY IDENTITY (TAIL-CLOSE-POOLS-2, 2026-11-15): COHERENCE-UPKEEP (c19e96e23, "services are kept as far as the place
+  // can pay"; landed at JOIN-1 · 9, 33b12cbef) keeps none of r2s-monster_pressure-village-1's barrel trade (a Struggling village):
+  // the row is gone, not false. No census town of the 720 keeps a brewer's barrel row where no alehouse stands now; r2r-village-138
+  // (the census's plan at four times its scale) does, and prints the twin: the row's identity.
+  test('HANDBACK-6 row 3 (ww-1416): the brewer sells barrels to alehouses only where one stands; where none does, to the households (r2r-village-138); a village with an alehouse keeps the line (r2r-village-15)', async () => {
+    const { hasInstitution } = await import('../../src/domain/facts/institutions.js');
+    expectNoSeedFailures(collectSeedFailures(['r2r-village-138'], (seed) => {
+      expect(hasInstitution(bornCensus(seed), 'tavern'), seed).toBe(false);
       const barrel = servicesOf(bornCensus(seed), 'Brewer').filter((/** @type {any} */ v) => v.name === 'Ale (barrel)').map((/** @type {any} */ v) => String(v.desc));
       expect(barrel, seed).toEqual(['Ale by the barrel, for households laying in a stock. Priced by barrel.']);
     }), 'no tavern, inn or alehouse: no barrels go to one');
@@ -127,7 +134,10 @@ describe('W2-FIX-DATA-8: the census writers in the data lane\'s files (the eight
     expectNoSeedFailures(collectSeedFailures(['r2r-thorp-0', 'r2r-thorp-30', 'r2r-thorp-50', 'r2r-hamlet-4', 'r2r-village-8'], (seed) => {
       const town = bornCensus(seed);
       const top = [...(town.economicState.incomeSources || [])].sort((/** @type {any} */ a, /** @type {any} */ b) => b.percentage - a.percentage)[0];
-      expect(top.source, seed).toBe('Agricultural Rents');
+      // RE-KEYED BY IDENTITY (TAIL-CLOSE-POOLS-2, 2026-11-15): TAIL-DEFECON-2 batch 2 (df2fa5ca9, a declared move of the income
+      // family, D10) titles the rents row "Harvest" where no lord's man stands; the treasury's own table names the two one row
+      // (INCOME_SOURCE_FORMS: both `land_rents`, "the same home"). The pin reads the row by that identity.
+      expect(INCOME_SOURCE_FORMS[top.source], `${seed}: ${top.source}`).toBe(INCOME_SOURCE_FORMS['Agricultural Rents']);
       const said = (town.institutions || []).map((/** @type {any} */ i) => String(i.desc)).filter((/** @type {string} */ d) => /inseparable from the water|lives by the water|whole of the economy|lives on timber|what the hamlet lives on/.test(d));
       expect(said, seed).toEqual([]);
     }), 'another line carries the income: no trade is the whole of it');

@@ -9,7 +9,8 @@
  * The fixtures are the §3c seeds' own lines: `soak1k-5404` (city, under siege) printed
  * DS-DEF-1 `readiness STRONG` v4, `soak1k-4800` (thorp, succession void) printed DS-POW-4
  * `riskLabel: Stable (no challengers)` v1, `soak1k-0` (thorp, mass migration, an influx) printed
- * the governance narrative's "families left" line. State-prose anchors are computed through
+ * the governance narrative's "families left" line (soak1k-4800's case RETIRED BY NAME, TAIL-CRISIS-8, below).
+ * State-prose anchors are computed through
  * the shipped read path (`tests/helpers/drawnProse.js`), never quoted
  * (`tests/lint/proseDrawnAnchors.walker.test.js`).
  */
@@ -29,7 +30,7 @@ const nothingPresses = speakTierNoun(variantByVid({
   leaf: 'defense', blockId: 'DS-DEF-1', poolKey: 'readiness STRONG', vid: 4, slots: { settlement: 'Rundfeld' },
 }), 'city');
 
-/** DS-POW-4 `riskLabel: Stable (no challengers)` v1, as soak1k-4800 printed it. */
+/** DS-POW-4 `riskLabel: Stable (no challengers)` v1 (soak1k-4800 printed it; reworded at 51217c0e). */
 const noRival = speakTierNoun(variantByVid({
   leaf: 'power', blockId: 'DS-POW-4', poolKey: 'riskLabel: Stable (no challengers)', vid: 1,
   slots: { settlement: 'Grudets', seat: 'headman', faction: "Headman's Authority" },
@@ -62,10 +63,16 @@ describe('F12 · coh:crisis-blind-prose, the instrument', () => {
     expect(crisisBlindFindings(placeUnder('under_siege'), { overview: siegeNamed })).toEqual([]);
   });
 
-  it('soak1k-4800: "the succession question is not a live one" in a succession void is a finding', () => {
-    const found = crisisBlindFindings(placeUnder('succession_void'), { power: noRival });
-    expect(found.map((f) => f.family)).toEqual(['succession']);
-  });
+  // RETIRED BY NAME (TAIL-CRISIS-8, on the chair's word of 2026-11-15; listed for the owner's veto): the case
+  // 'soak1k-4800: "the succession question is not a live one" in a succession void is a finding' can find nothing any
+  // more. TAIL-CORPUS-DEF-2 batch 3 (51217c0e, landed at 31a6f72e, JOIN-7 · 29) CURED THE LINE AT THE SOURCE: DS-POW-4
+  // `riskLabel: Stable (no challengers)` v1 v2 v3 v6 reworded ("Nobody at {settlement} is in a position to take the
+  // {seat}'s place …"), every line marked `succession settled`. The finder is not blind (a regression it is not): its
+  // three succession phrases ("is asking who comes next", "does not come up, because there is nobody the …", "is safe
+  // in the hall") occur in the corpus 3 times at d817736d8 and 0 times from 51217c0e on; the two goals its other
+  // succession rows read (npcStructure.js, government and other `stable`) are tagged CALM_ONLY, so none prints under
+  // a crisis. The family stays covered live by crisisBlindWidened's soak1k-3005 (the governor's want under a
+  // succession void). `noRival` stays below as the famine case's calm line.
 
   it('soak1k-0: families leaving under a mass-migration influx is a finding (counted; the cure is the migration lane\'s)', () => {
     const found = crisisBlindFindings(placeUnder('mass_migration'), { power: 'Three families left this week. Two more last week.' });

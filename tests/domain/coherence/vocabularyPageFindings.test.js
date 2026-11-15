@@ -13,6 +13,7 @@ import { RESOURCE_DATA } from '../../../src/data/resourceData.js';
 import { parseAtom } from '../../../src/domain/facts/factVocabulary.js';
 import { factsOf } from '../../../src/domain/facts/factsOf.js';
 import { variantByVid } from '../../helpers/drawnProse.js';
+import { ALCHEMIST_SUPPLEMENTS_LINE } from '../../../src/generators/economy/incomeLineSiblings.js';
 
 const thorp = { tier: 'thorp', population: 40, config: {}, stress: [], institutions: [{ name: 'Chapel' }], powerStructure: { factions: [{ faction: 'A' }, { faction: 'B' }] } };
 const city = {
@@ -85,8 +86,13 @@ describe('F1 — the generated vocabulary', () => {
     powerStructure: { factions: [{ faction: 'Town council' }] },
   };
   const lines = [
-    // computed, not a literal state-prose anchor (proseDrawnAnchors): DS-DEF-5 'ARCANE: alchemists' v1
-    variantByVid({ leaf: 'defense', blockId: 'DS-DEF-5', poolKey: 'ARCANE: alchemists', vid: 1, slots: { settlement: 'Ford' } }),
+    // TAIL-CORPUS-DEF-5 (the chair's C28), THE PLANT MOVED: it was DS-DEF-5 'ARCANE: alchemists' v1 ("comes from its
+    // alchemists"); 91592cbf1 (W2-WRITE round 1) and 3f5da151e (W2-WRITE-7 B) reworded both lines of that pool off the
+    // house ("Alchemy is practised at …", "Alchemical preparations made at …"), and no line of any state-prose leaf
+    // names the alchemists' house now (every leaf scanned with the kept phrase). The one page line that still names it
+    // is the Economics income line, imported by its declared constant (computed, not a literal):
+    // incomeLineSiblings.js :: ALCHEMIST_SUPPLEMENTS_LINE ("… The local alchemist supplements conventional trade.").
+    ALCHEMIST_SUPPLEMENTS_LINE,
     'Funeral rites and burial. The priest manages the graveyard.',
     'The military command has taken charge of the streets, and more harshly as the food runs down.',
     'Carts bring the town what its workshops need, and carry the goods away again.',
@@ -104,7 +110,7 @@ describe('F1 — the generated vocabulary', () => {
   test('planted: each family is a finding where the town makes it false, and none where it is true', () => {
     // the house and resource families left the page list at the third seat's precision read (item 1; the walker still reads them)
     // F7 of the second read: DS-DEF-5's "comes from its alchemists" is the kept alchemist phrase, false in a hamlet with
-    // no alchemist (the cold list's c26 and c30 lines)
+    // no alchemist (the cold list's c26 and c30 lines); since C28 the income line's "The local alchemist" carries it
     // re-keyed at the sixth seat (REVIEW-W2B-3, finding 1): `smith` left the page list with the seven role words (read 7
     // of 19), so "Iron ore deposits feed the forges here." is the walker's, no longer a page finding
     // re-keyed again by the chair's ruling on the third read (the role family withdrawn WHOLE): `clergy` and `armedForce`
@@ -114,8 +120,13 @@ describe('F1 — the generated vocabulary', () => {
   });
 
   test('planted: a famine written as a risk to come is false while a famine is in force', () => {
-    // computed, not a literal state-prose anchor (proseDrawnAnchors): DS-ECO-9 'FOOD SOURCES: one source' v1
-    const risk = { 'Systems/Economics': [variantByVid({ leaf: 'economy', blockId: 'DS-ECO-9', poolKey: 'FOOD SOURCES: one source', vid: 1, slots: { settlement: 'Ford', good: 'grain' } })] };
+    // computed, not a literal state-prose anchor (proseDrawnAnchors). TAIL-CORPUS-DEF-5 (the chair's C29), THE PLANT
+    // MOVED: it was DS-ECO-9 'FOOD SOURCES: one source' v1, which a8ea5ef8 (TAIL-CORPUS-ECO-4 batch 8, C20) rewrote from a
+    // risk to come ("would cost the whole town dear") to the present ("is felt across the whole town"). Every leaf scanned
+    // with the family's words and context: the nearest member that still speaks of a famine to come, with no mark or pool
+    // declaration that keeps it out of a famine town, is DS-DEF-12 'CAPACITY: short' v2 ("… so a bad harvest there would
+    // mean going without.").
+    const risk = { 'Systems/Defense': [variantByVid({ leaf: 'defense', blockId: 'DS-DEF-12', poolKey: 'CAPACITY: short', vid: 2, slots: { settlement: 'Ford' } })] };
     expect(vocabularyPageFindings({ ...town, stress: [{ type: 'famine' }] }, risk).map((f) => f.word)).toEqual(['famineToCome']);
     expect(vocabularyPageFindings(town, risk)).toEqual([]);
   });

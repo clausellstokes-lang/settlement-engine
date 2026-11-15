@@ -14,6 +14,7 @@ import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { powerDeskRead, powerDeskReadings, governanceAccountRead, powerLadderRead } from '../../src/components/new/powerDeskRead.js';
 import { powerNameAfterArticle, powerSentenceName } from '../../src/domain/display/powerSentenceName.js';
+import { variantByVid } from '../helpers/drawnProse.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
@@ -39,14 +40,28 @@ const textOf = (seed) => {
   return strings([powerDeskRead(s, { readings: powerDeskReadings(s) }), governanceAccountRead(s), ladders]).join('\n');
 };
 
+/**
+ * Two of the pairs are drawn power-desk sentences: COMPUTED through tests/helpers/drawnProse.js (TAIL-CLOSE-TESTS-C), each
+ * vid filled once with the roster's raw label (what must not print) and once with the leaf's form (what prints), so a
+ * rewording moves the member and the anchor together. The slots ahead of the named power are a sentinel and the anchor is
+ * the clause after it: the pair's claim is the power's form, not the town's name or seat.
+ * @param {string} blockId @param {string} poolKey @param {number} vid @param {Record<string, string>} slots
+ */
+const clauseAfterSentinel = (blockId, poolKey, vid, slots) => {
+  const text = variantByVid({ leaf: 'power', blockId, poolKey, vid, slots });
+  return text.slice(text.lastIndexOf('\u0000') + 1).trim();
+};
+const S0 = '\u0000';
+const POW6 = /** @param {string} f */ (f) => clauseAfterSentinel('DS-POW-6', 'GM ADVISORY: the commander is a political actor', 4, { seat: S0, settlement: S0, faction: f });
+const POW4 = /** @param {string} c */ (c) => clauseAfterSentinel('DS-POW-4', 'riskLabel: Contested', 4, { settlement: S0, counterpart: c, faction: 'Merchant Guild Council' });
 // [seed, the sentence that must not print, what prints instead]
 const CURED = [
   ['r2r-city-44', 'The Military/Guard takes its orders no longer.', 'The Guard takes its orders no longer.'],
   ['r2r-hamlet-18', 'The Military/Guard is at odds with it.', 'The Guard is at odds with it.'],
   ['r2r-city-37', 'The hall is at odds with the Military/Guard.', 'The hall is at odds with the Guard.'],
   ['r2r-village-50', 'The hall is at odds with the Military/Guard and the Religious Authorities.', 'The hall is at odds with the Guard and the Religious Authorities.'],
-  ['r2r-town-27', 'goes ahead if Military/Guard refuses it', 'goes ahead if The Guard refuses it, and whoever can win The Guard over can steer the place.'],
-  ['r2r-city-37', 'stay polite to Military/Guard as well as to', 'stay polite to The Guard as well as to Merchant Guild Council'],
+  ['r2r-town-27', POW6('Military/Guard'), POW6(powerSentenceName('Military/Guard'))],
+  ['r2r-city-37', POW4('Military/Guard'), POW4(powerSentenceName('Military/Guard'))],
   ['r2r-metropolis-50', 'Military/Guard has the strength', 'The Guard has the strength, and the Grand Council has only the office.'],
   ['r2r-hamlet-27', 'Military/Guard answers to the Elder Council', 'The Guard answers to the Elder Council'],
   ['r2r-metropolis-8', 'Noble Claimant (Senior Line) and Noble Claimant (Reform Line) contend for it.', 'The Senior Line and the Reform Line contend for it.'],

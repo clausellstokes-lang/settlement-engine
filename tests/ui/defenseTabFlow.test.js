@@ -42,6 +42,9 @@ import { buildPrintProse } from '../../src/domain/display/stateProse/printProse.
 import { collectPlotHooks } from '../../src/domain/dossier/plotHooks.js';
 import { toPublicSafe } from '../../src/domain/display/publicSafe.js';
 import { projectShareVeil, writeShareVeil, isVeiled } from '../../src/domain/display/galleryVeil.js';
+import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
+import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { magicWorksAt } from '../../src/domain/worldPulse/magicWorksAt.js';
 
 const e = React.createElement;
 const HERE = dirname(fileURLToPath(import.meta.url));
@@ -398,11 +401,26 @@ describe('T2-24 — magic does not function: no arcane provision, no magic-depen
     expect(container.querySelector('[data-testid="magic-dependence"]')).toBeNull();
   });
 
-  test('STOP-2: no "Arcane defense" force group (screen or print) in a dead-magic world, alchemist or not', () => {
-    const s = deadMagicTown();
-    expect(s.defenseProfile.institutions.magicDef.length, 'fixture premise: the roster files an alchemist as arcane defense').toBeGreaterThan(0);
+  // TAIL-CORPUS-DEF-5, RE-KEYED BY IDENTITY (the chair's C25): 83883baaa (UPKEEP-CAPACITY C6, the chair's G5, a DECLARED
+  // MOVE) took 'alchemist' out of DEFENSE_BUCKET_KEYWORDS.magicDef: the alchemist's shop and quarter are a trade, not
+  // retained casters. The dead-magic city above holds an alchemist and nothing the roster files as arcane defence now,
+  // and no dead-magic birth read for this seat does (nomagic-a..z; r2r-town/city/metropolis-0..19 with the magic dial
+  // off). So the premise is a house the roster STILL files as arcane defence: r2r-city-0 of the 720's configuration (a
+  // Scroll scribe and an Enchanter's shop), read in a world where magic does not function (its own record, the magic
+  // dial off: `magicWorksAt` false). Its live record is the anchor: there the group prints.
+  test('STOP-2: no "Arcane defense" force group (screen or print) in a dead-magic world, alchemist or not', async () => {
+    await loadGenerationLawPayloads();
+    const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
+    const live = generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...DIALS, settType: 'city' }), null, { seed: 'r2r-city-0', customContent: {} });
+    const s = { ...live, config: { ...live.config, magicExists: false } };
+    expect(s.defenseProfile.institutions.magicDef.length, 'fixture premise: the roster files a house as arcane defense').toBeGreaterThan(0);
+    expect([magicWorksAt(live), magicWorksAt(s)], 'fixture premise: magic works in the live record, not in the dead one').toEqual([true, false]);
+    expect(deriveArmedForces(live).arcane.length, 'anchored: the live record reads the group').toBeGreaterThan(0);
     expect(deriveArmedForces(s).arcane, 'the PDF Defense chapter reads this group').toEqual([]);
+    const liveText = render(e(DefenseTab, { settlement: live, narrativeNote: null })).container.textContent;
+    cleanup();
     const { container } = render(e(DefenseTab, { settlement: s, narrativeNote: null }));
+    expectPresentThenAbsent(liveText, container.textContent, 'Arcane defense', 'the arcane force group where magic does not function');
     const toggle = [...container.querySelectorAll('button')].find((b) => /Armed Forces & Fortifications/.test(b.textContent));
     expect(toggle.textContent).toContain('Armed Forces & Fortifications');
     expect(toggle.textContent).not.toMatch(/\d+ arcane/); // anchored: the forces header is on this render

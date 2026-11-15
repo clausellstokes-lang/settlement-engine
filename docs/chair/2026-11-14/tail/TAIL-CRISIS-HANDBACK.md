@@ -1355,3 +1355,166 @@ read 0). None is begun; nothing was changed for them.
   literal state-prose sentence as an anchor (`tests/helpers/drawnProse.js`); never edit `scripts/mutation-coverage-manifest.json`.
   This seat's `tailCrisisBatch8.test.js` predates that note: its `not.toContain`/`not.toBe` negatives each sit beside the
   positive they are anchored to, but are not routed through `anchoredNegatives.js`: the next seat should route them.
+
+# TAIL-CRISIS-7 · the seventh seat (2026-11-15)
+
+Seat TAIL-CRISIS-7, successor of TAIL-CRISIS-6, on the same branch from its tip **0f506cd93** (read back from origin;
+fast-forward of a885da881). Scratch worktrees outside the main checkout: `tc` (the work, its own `npm ci`), `bis` (the
+bisects and the base runs, `node_modules` linked). FIRST ACT: the joined line merged at **475506bf7** (9b6544c8).
+Every red run ALONE through `gate-tail.sh` at the merged tree first. Bisects by the test file over the joined line's
+first parents, then inside the landing lane. NOTE: f663a2699 is NOT green for reds 1-3: they were already red there;
+their good point is 705577ac (11-09), and all three turned at **ba4cc210b** (JOIN-1 · 6, lane/w2-write at 6fdff4abd).
+
+## The reds
+
+| # | test | turned at | inside | verdict | commit |
+|---|---|---|---|---|---|
+| 1 | `crisisBlindDossierProse` (2) | ba4cc210b | 35acb779 (first of the lane's) | **NAMED, not this group's** (below) | none |
+| 2 | `crisisBlindWidened` 5402 (1) | ba4cc210b | 5132da377 (DS-ECO-10 v1 re-said, #309) | RE-KEYED: the claim cured at the source, both halves asserted (the file's form for a cured row) | 375a5547 |
+| 3 | `facts/composeBareCrisis` (1) | ba4cc210b | 9d0f258f3 (DS-DEF-2 STRONG v3 re-said, the 19:35 ruling) | RE-KEYED to v3's new text (same vid, `crisis` kept) | 39dd1840 |
+| 4 | `crisisStoppedRows` (2) | (a) b75b08c37 (the S6 walker landed on D10's 'Harvest'); (b) d5ec9c7f3 | (a) df2fa5ca (TAIL-DEFECON-2 D10); b40f795b (TAIL-DEFECON-4, line 838); (b) ba3af420 (TAIL-HOUSES-4 H17) | (a) CURED: `"Harvest": [GRAIN, LIVESTOCK]`; the scrape bounded at `;` (3 false titles); (b) RE-KEYED to the house's hedged description | ab49049c |
+| 5 | `journalMarksCrisisRows` (2) | d817736d (red at its own landing) | 5f67f382d (TAIL-DEFECON-2 D14, Pilgrim Trade) | RE-KEYED: Grain Sales 4 -> 5 %, Toll Revenue 14 -> 15 % (the same rows and mark) | fca2cf25 |
+| 6 | `styleLaw.walker` (crisisDependence.js:354) | 73291c8e (born with the table) | | CURED: the key read from `institutionServices.js` (a computed key); the table's exports byte-identical | fdb23220 |
+
+**Red 1, named.** Two causes, neither in a crisis file, the table or the leaf: (i) five pools MUTE under a siege on
+their own record, all arriving at ba4cc210b (lane/w2-write's state-prose leaves): DS-POW-6 `operation role duty
+evasion`, DS-GEN-13 `ENTREPOT`, DS-ECO-10 `POSTURE: vulnerable`, and two reading a compound fact the test says to set
+aside by name (DS-ECO-12 `INCOME WEIGHT: the religious houses`, `sacredHouse`; DS-DEF-2 `Beasts & Monsters: settled,
+nothing organized`, `no guardPresence`); the cure is a crisis-safe line in each leaf (the writing seat's) or the
+set-aside by ruling; (ii) the non-vacuity floor 29 (measured at the cure) falls as the writing seats cure calm claims
+at the source: 23 (by JOIN-4 · 6) -> 22 (9eb08470, corpus-def) -> 21 (38a21278, corpus-eco) -> 17 (31a6f72e,
+corpus-def). The test's text gives the floor no door, so it is not re-measured here.
+
+**THE VETO LIST (red 4, a declared move of display).** "Harvest (scarce): n%" / "Scarce in the famine." now prints in
+**22 of the 329** census towns that hold the Harvest row (smallest r2r-thorp-38, largest r2s-famine-village-0, a crisis
+town r2s-famine-thorp-1 with livestock failed): every one a famine of grain, of livestock or of no named source; no
+siege or outbreak marks it (the land's own work, the table's rule for rents).
+
+**Named for other seats.** `styleLaw.walker` stays red on three lines not this group's: historyData.js:1601 'the
+record' and :1511 'a stranger' (7bef72cb, TAIL-HISTORY batch 2), narrativeData.js:431 'faction' (6a369299,
+TAIL-NARRATIVE-3 batch 5). `displayEconCrisisMarks.test.jsx` (3, display-econ's) red at the base and the tree alike:
+its pins read 'Agricultural Rents' (now 'Harvest', D10) and 'Pilgrim Trade' (D14) where the record no longer holds them.
+
+## The proof (at the tree against the merged base 9b6544c8)
+
+- Each red alone: red before, green after (2 -> 10/10, 3 -> 2/2, 4 -> 11/11, 5 -> 16/16; 6 leaves the rise list).
+- The 37 test files naming crisisDependence, crisisStoppedRow or institutionServices: base 7 files red, tree 5, the
+  same tests (none new). The walkers the edits could reach (negativeAssertionAnchor, presumedThings, proseDrawnAnchors,
+  seedLoopTotality, styleLaw): 10 red at both, the same names.
+- eslint on the touched files 0; typecheck:domain:strict 1113 (ceiling 1113); typecheck:ratchet 167 (ceiling 167).
+- The twelve-birth grid `page-census.mjs --grid`: 2 falls at both (r2r-city-0 P7a, r2s-insurgency-metropolis-0 P7a).
+- K28: the chair's 05:45 word: the merge seat runs the door; closed without a change unless "THE DOOR STILL CRASHES".
+
+## The chair's seventh and eighth (after the joined line merged at 74688857c, the chair's named tip: e5f66a5f)
+
+- **Red 7, `tonightOwnGoal` (1): RE-KEYED BY IDENTITY, e4799144.** "toMatch() … got undefined" (line 67): Drusilla
+  Pacuvius is off rpf-city-succession_void+politically_fractured-13's sheet. Bisected from the test's landing (9618e031,
+  green): turned at **65dc92af9** (JOIN-4 · point 2, lane/upkeep-monotone at 0ca0bbe94, the defence rating's rebuild;
+  its merge declares its moves shift pins and LISTS them). The town is re-cast: its instigator is now Publicola Maximus,
+  who prints his card's own goal; the pin follows the role in the same town. Not goalFamilies.js. 1 failed of 7 -> 7/7.
+- **The eighth, `tailCrisisIronHooks` on r2r-hamlet-35 and -30: A PREMISE THE TWO TOWNS NO LONGER MEET (for the test
+  seat to re-key), not a hole in the cure.** Since **2ac50c55** (TAIL-DEFECON-3 D8, #20893, landed at 1b672cbe8, JOIN-7 ·
+  25) the iron hooks print only where the record's import list holds iron (`foodBalance.js`, `importHeld`); both hamlets
+  import only salt and incense (iron is a critical import by the roster, not an import held), so NO iron hook prints
+  there, neither the false words nor the reworded line (their stored hooks are empty). The same bisect reads the
+  branch's own weaker form red there since 1b672cbe8 (it stops at hamlet-35). No calm hamlet of the census prints
+  either line now; the nearest of the same shape: "Iron has doubled in price … mended with scrap." r2r-town-20 (and
+  r2r-town-48, then cities and metropolises, 18 in all); "What iron there is goes out in rations …" r2r-town-1 (and
+  r2r-town-45, 12 in all). The test file is not committed here (its branch carries the stronger form).
+- **K28:** closed without a change (the chair's 05:45: the merge seat runs the door).
+
+## K26: DONE, c08dbb65 (a declared move of display; the three surfaces lent)
+
+The PDF (`CrisisSections.jsx`) and the journal (`journalPages.js :: crisisJournalPage`) print
+`powerSentenceName(k.factionId)`; the tab (`CrisisTab.jsx`) gives the link the leaf's form as its fallback and sets
+`verbatim` only where the leaf re-forms the label (every other power keeps the link's live name; the door still opens the
+power). THE VETO LIST, on the 720 at e4799144: **125 rows in 122 towns** now print the prose form: Military/Guard -> The
+Guard 116 (loses 45, already at odds 26, split 24, gains 21; smallest r2r-hamlet-10, a crisis town r2s-occupied-city-2),
+Third Bloc (Neutrals) -> The Neutrals 4, Crown Creditors (Noble Coalition) -> Crown Creditors 2, the two Noble Claimant
+lines 1 each (r2r-metropolis-8), Monster Hunters / Adventurers -> Monster Hunters 1. Test `tailCrisisK26.test.jsx`
+(seven census towns, each surface anchored; red 7 of 7 at e4799144, green). The 53 files naming the four touched files
+and the four walkers: the same 10 red at base and tree. **Vetoable by the owner:** a DM rename of a re-formed power
+(e.g. renaming "Military/Guard") would show the leaf's form on the stake row, not the new name (the other rows keep it).
+
+## Registers named stale (this seat)
+
+- The sovereignty walker (`sovereigntyLightingContract`, red at the base already, the same two tests at the tree): one more
+  test file (`tests/components/tailCrisisK26.test.jsx`). Re-taken at the close.
+
+## What is left (after this seat)
+
+- **Red 1 under the chair's K30 (2026-11-15 05:48, vetoable by the owner).** (a) THE FLOOR, DONE (7eea6a515): 29 ->
+  17, the measured count at this tip, the curing commits named in the test (23 by JOIN-4 · 6, 1c01bdda, the earlier fall
+  not located; 22 at 9eb08470a; 21 at 38a21278; 17 at 31a6f72e). No planted case holds it: MORE CURES CAN TAKE IT TO
+  ZERO, and the pin then needs a plant, not a floor. That arm is green; the file stays red on the mute arm only.
+  (b) THE FIVE MUTE POOLS, READ, NOT CHANGED (the count ran out): four commits inside ba4cc210b DECLARE their pool's
+  every line false under a siege, by the siege ruling (nothing comes in or goes out by road): DS-POW-6 `operation role
+  duty evasion` f8e7326c (v1-v3), DS-GEN-13 `ENTREPOT` 32ab37da (v1 among the siege Overview's road lines), DS-ECO-10
+  `POSTURE: vulnerable` c21abdd5 (v1-v3), DS-DEF-2 `Beasts & Monsters: settled, nothing organized` 35acb779 (v4-v6, `no
+  crisis: under_siege · no crisis: occupied · no guardPresence`); DS-ECO-12 `INCOME WEIGHT: the religious houses` not
+  located (58aaaed2 reworded its no-house case; it reads the compound `sacredHouse`, which the test says to set aside by
+  name). So the silence is DECLARED; the re-key K30 (b) names is the next seat's, and it needs a mechanism the test does
+  not have: `SET_ASIDE` is keyed by POOL and reds if the pool speaks under ANY family it denies, so a pool silent under
+  a siege by design but speaking under a famine needs a set-aside keyed by pool AND family (`… :: threat`), each with its
+  declaring commit, the arm still red if a listed cell speaks. That shape is the chair's to approve.
+- The eighth: the test seat re-keys `tailCrisisIronHooks`' two hamlets (r2r-town-20, r2r-town-1 the nearest).
+- The style walker's three lines (TAIL-HISTORY, TAIL-NARRATIVE); `displayEconCrisisMarks` (display-econ's, D10 and D14).
+- K27 parked (the chair's word for an `iron short` atom); TAIL-CRISIS-6's under-five list unchanged.
+
+# TAIL-CRISIS-8 · the eighth seat (2026-11-15)
+
+Seat TAIL-CRISIS-8, successor of TAIL-CRISIS-7, on the same branch from its tip **325de5153** (read back from origin;
+nothing later there). Scratch worktrees outside the main checkout: `wt` (the work, its own `npm ci`; package files
+identical across the merge), `bis` (the bisects and the base runs, `node_modules` linked). FIRST ACT: the joined line
+merged at **f714fb6a5** (one merge commit, 188e0dd3a, no conflict). Every run alone through `gate-tail.sh`, to a file.
+
+## The one red that stopped the landing: `journalMarksCrisisRows` (3 failed of 16 -> 16/16)
+
+Bisected by the town's printed shares over the joined line's first parents from 74688857c (this branch's last join),
+then inside the landing lane: all three rows turned at **26c3dc45** (JOIN-9 · 14, lane/tail-defecon at ad5720386),
+inside at **9cc8c6821** (TAIL-DEFECON-5 R2, "one shadow figure": the criminal income row held at the capture in both
+normalisers; a DECLARED MOVE of `economicState.incomeSources` in 229 towns; good at e1577f2cd). Not a crisis file. Each
+RE-KEYED BY IDENTITY (the same towns, rows and marks; the figure the merged tree prints, read by the test itself):
+
+| town | row | was | now |
+|---|---|---|---|
+| r2s-famine-town-1 | RED "Grain Sales" / "Grain Sales (scarce)" | 5% | 4% |
+| r2s-under_siege-town-3 | RED "Gate Tolls" / "Gate Tolls (stopped)" | 8% | 7% |
+| r2s-under_siege-town-3 | KEEP "Property Rents" | 8% | 7% |
+
+(r2s-under_siege-town-3's Shadow Economy row prints 39%; r2s-famine-town-1's KEEP "Toll Revenue: 15%" holds unmoved.)
+The anchored negative (`expectAbsentWithAnchor`) holds with each: the unmarked line absent, the marked line present.
+
+## The files TAIL-CRISIS-7 touched, each alone at the merged tree
+
+`crisisBlindWidened` 10/10, `facts/composeBareCrisis` 2/2, `crisisStoppedRows` 11/11, `tonightOwnGoal` 7/7,
+`tailCrisisK26` 1/1: green, nothing moved. `crisisBlindDossierProse` 1 failed of 5: the mute arm only, the same five
+pools TAIL-CRISIS-7 named (arrived at ba4cc210b; DS-POW-6, DS-GEN-13, DS-ECO-10, DS-ECO-12, DS-DEF-2, each `:: threat`);
+the blind arm (with its floor) green. The set-aside table left as it is (another close seat's).
+
+## The proof
+
+- eslint on the touched file 0. The twelve-birth grid `page-census.mjs --grid`: 2 falls at base (f714fb6a5) and tree
+  alike (r2r-city-0 P7a, r2s-insurgency-metropolis-0 P7a): no rise.
+- PUSHED at 573c92b6d.
+
+## The chair's one more (after the landing line): `coherence/crisisBlindProse` (1 failed of 9 -> 8/8), RETIRED BY NAME
+
+The case 'soak1k-4800: "the succession question is not a live one" in a succession void is a finding' found nothing.
+Bisected by the file over the joined line's first parents from d817736d8 (green): green at 31a6f72e^1, red at
+**31a6f72e** (JOIN-7 · 29, lane/tail-corpus-def at cff6cd098), inside at **51217c0e** (TAIL-CORPUS-DEF-2 batch 3: DS-POW-4
+`riskLabel: Stable (no challengers)` v1 v2 v3 v6 reworded, every line marked `succession settled`). Verdict (i), A CURE:
+the fixture's v1 now reads "Nobody at Grudets is in a position to take the headman's place: … no contender stands ready
+to try." and the finder's three succession phrases occur in the corpus 3 times at d817736d8 and 0 from 51217c0e on (`git
+grep` over src/data). Not the finder gone blind. No corpus line can be blind that way now: the finder's other succession
+rows read two npcStructure.js goals (government and other `stable`) tagged CALM_ONLY, so none prints under a crisis.
+(A sweep of 72 births of succession_void and politically_fractured, the record's strings and the journal, found 0 at the
+tree and 0 at d817736d8: it does not reach the state-prose desks, so it is no proof; the proof is the grep and the
+CALM_ONLY tags.) So the case is RETIRED BY NAME in the file, the curing commit named. **Owner's veto list:** the case
+retired. The succession family stays covered live by crisisBlindWidened's soak1k-3005. Named, not changed: the famine
+case's `power: noRival` half (line 58) now holds a line that makes no claim, so that half asserts nothing. The finder's three
+DS-POW-4 succession phrases are dead (51217c0e named them; the finder is lent, not cured here).
+
+- eslint 0 on the file; negativeAssertionAnchor and proseDrawnAnchors red at base 573c92b6d and tree alike (the same
+  three tests; the file named in neither).
+- HANDED BACK after the push.

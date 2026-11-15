@@ -7,10 +7,17 @@ import { describe, expect, test } from 'vitest';
 import { PAGE_CENSUS_ROWS, RETIRED_PAGE_CENSUS_ROWS, pageCensusFindings, viewsOfSurfaces } from '../../../src/domain/coherence/pageCensusFindings.js';
 import { coherenceBattery } from '../../../src/domain/coherence/coherenceBattery.js';
 import { poolMemberTexts } from '../../helpers/drawnProse.js';
+import { CRIME_LINE_DISQUALIFIERS } from '../../../src/domain/display/stateProse/crimeLineDisqualifiers.js';
 
 /** A corpus line, computed (never typed): the pool's first member with the town's name in its slots. */
 const corpusLine = (leaf, blockId, poolKey) => poolMemberTexts({ leaf, blockId, poolKey, slots: { settlement: 'Brindle', seat: 'hall' } })[0];
-const CAPTURE = corpusLine('power', 'DS-POW-6', 'capture pressure ADVANCING (weak security, poor prosperity)');
+/** A crime line the table declares false where no official is in pay, found by its declaration (re-keyed by identity,
+ * TAIL-CLOSE-DISPLAY-1: the move 91592cbf re-said ADVANCING's lines so none presumes a bought official, and the table
+ * declares none of them; RECOVERING's line that the criminals own officials carries the declaration). */
+const REC_POOL = 'capture pressure RECOVERING (strong security, prosperity)';
+const OWNS_OFFICIALS = Object.values(CRIME_LINE_DISQUALIFIERS[`DS-POW-6::${REC_POOL}`]).find((d) => d.falseWhere === 'no official in pay');
+const CAPTURE = poolMemberTexts({ leaf: 'power', blockId: 'DS-POW-6', poolKey: REC_POOL, slots: { settlement: 'Brindle', seat: 'hall' } })
+  .find((t) => OWNS_OFFICIALS && t.startsWith(OWNS_OFFICIALS.opens.replace('{settlement}', 'Brindle')));
 /** ADVANCING's line that presumes no buyer ("each season it gets easier to buy an official"), found, not typed. */
 const CAPTURE_TRUE = poolMemberTexts({ leaf: 'power', blockId: 'DS-POW-6', poolKey: 'capture pressure ADVANCING (weak security, poor prosperity)', slots: { settlement: 'Brindle', seat: 'hall' } })
   .find((t) => !/one at a time|never paid/.test(t));
@@ -18,10 +25,7 @@ const CAPTURE_TRUE = poolMemberTexts({ leaf: 'power', blockId: 'DS-POW-6', poolK
 const OFFICIAL = { name: 'Panayot Pavlov', allegiance: { house: 'Smuggling network', vector: 'greed', via: 'office' } };
 const HOUSES = corpusLine('economy', 'DS-ECO-12', 'INCOME WEIGHT: the religious houses');
 const MAGIC = corpusLine('economy', 'DS-ECO-12', 'INCOME WEIGHT: the practice of magic');
-const SECURE = poolMemberTexts({ leaf: 'economy', blockId: 'DS-ECO-9', poolKey: 'SECURE', slots: { settlement: 'Brindle' } });
-// the SECURE pool's members the arm's 1a and 1b rows read, found by the rows themselves (no sentence typed here)
-const ONLY_JUST = SECURE.find((t) => pageCensusFindings({}, { 'Systems/Economics': [t, 'It grows more than it eats.'] }).some((f) => f.row === 'P1a'));
-const SMALL_MARGIN = SECURE.find((t) => pageCensusFindings({ economicState: { foodSecurity: { foodRecord: { normalImportPct: 40 } } } }, { 'Systems/Economics': [t] }).some((f) => f.row === 'P1b'));
+// rows 1a and 1b RETIRED (the chair's ruling V13, 2026-11-15): the SECURE pool no longer prints either sentence (e056fbfb)
 const SETTLED = corpusLine('defense', 'DS-DEF-2', 'Beasts & Monsters: settled, defenses beyond the need');
 
 const NO_ARCANE = 'Arcane Support None · No arcane practitioners on the rolls';
@@ -31,8 +35,6 @@ const ENDURANCE = (sentence) => `Food endurance: ${sentence}`;
 const NEEDS_CLAY = { economicState: { primaryImports: ['Iron'] }, resourceAnalysis: { imports: { critical: ['clay'] } } };
 /** @type {Record<string, { views: Record<string, string[]>, record?: Record<string, unknown> }>} */
 const PLANTS = {
-  P1a: { views: { 'Systems/Economics': [ONLY_JUST, 'It grows more than it eats.'] } },
-  P1b: { views: { 'Systems/Economics': [SMALL_MARGIN] }, record: { economicState: { foodSecurity: { foodRecord: { normalImportPct: 40 } } } } },
   P2siege: { views: { 'Systems/Defense': [ENDURANCE('the granary carries the town for about three months at full rations.')] }, record: { economicState: { foodSecurity: { hasSiege: false } } } },
   P3source: { views: { 'Systems/Defense': [NO_ARCANE], 'Systems/Magic': ['Reliance on magic: Relied upon'] } },
   P4: { views: { 'Systems/Power': ['Three powers stand almost level in Brindle.'] }, record: { powerStructure: { factions: [{ power: 80 }, { power: 30 }, { power: 25 }] } } },
@@ -60,7 +62,7 @@ const PLANTS = {
 
 describe('the rendered-dossier arm: one planted fault per row', () => {
   test('every row has a plant, and every plant reds its own row and no other', () => {
-    for (const line of [CAPTURE, CAPTURE_TRUE, HOUSES, MAGIC, SETTLED, ONLY_JUST, SMALL_MARGIN]) expect(typeof line).toBe('string');
+    for (const line of [CAPTURE, CAPTURE_TRUE, HOUSES, MAGIC, SETTLED]) expect(typeof line).toBe('string');
     expect(Object.keys(PLANTS).sort()).toEqual(Object.keys(PAGE_CENSUS_ROWS).sort());
     for (const [row, plant] of Object.entries(PLANTS)) {
       const rows = pageCensusFindings({ tier: 'town', ...(plant.record || {}) }, plant.views).map((f) => f.row);
@@ -69,7 +71,6 @@ describe('the rendered-dossier arm: one planted fault per row', () => {
   });
   test('the controls: each plant with its contradicting half removed reads nothing', () => {
     const halves = {
-      P1a: { 'Systems/Economics': [ONLY_JUST] },
       P5false: { 'Systems/Power': ['Free of the criminals'] },
       P10: { 'World/Institutions': ['The watch hold the gates at night.'] },
       NEW2: { 'Systems/Economics': PLANTS.NEW2.views['Systems/Economics'] },
@@ -93,12 +94,18 @@ describe('the rendered-dossier arm: one planted fault per row', () => {
     })).toEqual([]);
   });
   test('a re-defined row is RETIRED BY NAME with its reason, never reported, and its replacement is a row (the chair, 2026-11-12)', () => {
-    expect(Object.keys(RETIRED_PAGE_CENSUS_ROWS)).toEqual(['P2', 'P3any', 'P6', 'P5a']);
+    expect(Object.keys(RETIRED_PAGE_CENSUS_ROWS)).toEqual(['P2', 'P3any', 'P6', 'P5a', 'P1a', 'P1b']);
     for (const [id, [pattern, reason, replacedBy]] of Object.entries(RETIRED_PAGE_CENSUS_ROWS)) {
       expect(PAGE_CENSUS_ROWS[id]).toBeUndefined();
-      expect(PAGE_CENSUS_ROWS[replacedBy]).toBeTruthy();
       expect(pattern.length).toBeGreaterThan(0);
-      expect(reason).toMatch(/the chair's ruling of 2026-11-1[23]/);
+      if (replacedBy === null) {
+        // a row retired with NO replacement: only where the cure made its falsehood impossible (the chair's V13)
+        expect(reason).toMatch(/the chair's ruling of 2026-11-15, V13/);
+        expect(reason).toMatch(/no line of the corpus says/);
+      } else {
+        expect(PAGE_CENSUS_ROWS[replacedBy]).toBeTruthy();
+        expect(reason).toMatch(/the chair's ruling of 2026-11-1[23]/);
+      }
     }
     // row 6's retired shape: a true gap beside an Imports line that does not print its good reads nothing; the gap
     // beside its good on the Imports line is now read as the IMPORT's fault (P6need), from the record's need list

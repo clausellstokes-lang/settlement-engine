@@ -195,7 +195,9 @@ describe('B3 the origin line says where the place stands and what the record hol
     ['port.coastal[1]', 'r2r-town-51', /^A seaport\. The tide sets the working day/],
     ['unsupplied[0] at an 8% gap', 'r2r-thorp-23', /^Isolated from major trade routes\. The settlement cannot fully feed itself, and no food comes in from outside: /],
     ['the magic path the receipt holds', 'r2r-town-12', /through carriage by magic or the tracks in a good season — or not at all\.$/],
-    ['the country around it', 'r2r-village-0', /through carts from the country around it or the tracks in a good season — or not at all\.$/],
+    // the row's TITLE names the path by its key in settlementOriginProse.js (TAIL-CLOSE-TESTS-C): the old title quoted the
+    // generator's phrase, which the drawn-anchor walker aligned against DS-GEN-3 by coincidence; the assertion is unchanged
+    ['the hinterland path (carts)', 'r2r-village-0', /through carts from the country around it or the tracks in a good season — or not at all\.$/],
   ]);
   it('the true sibling still prints where the record bears it out (every row)', () => {
     expectNoSeedFailures(collectSeedFailures(KEEP, ([id, seed, kept]) => {
