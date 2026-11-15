@@ -1,0 +1,5 @@
+{"id":"C31880","town":"bar0-town-occupied-rand-8","sev":"LOW","kind":"STATE","why":"market day filling with buyers by road reads as ordinary trade, under Occupation with monsters on the roads and a curfew","other":""}
+{"id":"C32446","town":"bar0-town-occupied-rand-8","sev":"LOW","kind":"PAIR","why":"says the off-book trade does little harm, while the page calls the town run by criminals in all but name and the hall a criminal concern","other":"C32528"}
+{"id":"C33211","town":"bar0-village-calm-rand-6","sev":"MED","kind":"STATE","why":"hook on Eochaidh Walsh, a stable keeper on the Elder Council, gives him a church hierarchy and a theology; PEOPLE has no clergy title for him","other":""}
+{"id":"C32481","town":"bar0-town-occupied-rand-8","sev":"LOW","kind":"PAIR","why":"says the hall must bargain with the Occupation Authority first; the power section says the Authority does not bargain and the Council carries out what it decides","other":"C32517"}
+{"id":"DONE","lines":1997,"blocks":2,"flags":4}
