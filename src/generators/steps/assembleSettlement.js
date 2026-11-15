@@ -210,20 +210,33 @@ registerStep('assembleSettlement', {
   // (stress + stressors — same object refs) and both shapes (bare object vs
   // array). Entries WITHOUT an own summaryRoll (custom-authored stressors that
   // carry their own summary) are left untouched.
+  // TAIL-CRISIS-5 (the chair's ruling K21; ORDER-MEASURE-1's cure C1b): each entry's roll and its CATALOGUE hook and note
+  // (the text as resolveStress stored it, before this pass resolves it) are kept here, so that THE LATE RE-READ below,
+  // after the last roster write, renders the same roll and resolves the same originals against the SETTLED record.
+  // Kept in the closure, never on the record: nothing of it persists or enters the golden hash.
+  /** @type {Map<object, { roll: unknown, crisisHook: unknown, viabilityNote: unknown }>} */
+  const stressLateReads = new Map();
+  /** One entry's summary, hook and note, rendered from its roll and its originals against the record as it stands. */
+  const readStressEntry = (/** @type {any} */ e, /** @type {{ roll: unknown, crisisHook: unknown, viabilityNote: unknown }} */ kept) => {
+    const facts = factsOf(settlement);
+    e.summary = renderStressSummary(e.type, settlement.name, kept.roll, e.direction, facts); // WIRING-W0: the entry's own direction; CENSUS-2c: declared sentences resolve (stressNarrative.js :: STRESS_SUMMARY_SIBLINGS) — MERGE-R2: both
+    // W2-FIX-DATA-7 (CENSUS-2 kind a; brief 5's ruling: this function only): the catalogue's own hook and note, stored
+    // on the entry, resolve through their declared sets (stressTypes.js :: STRESS_TYPE_SIBLINGS), draw-free. A hook
+    // with no admitted twin is kept and noted (the template the cast fills); a note with none is left off (nothing
+    // false is printed in its place). The hook stays the template: a twin carries no holder's name.
+    const cellOpts = { facts, poolId: 'stressTypes:STRESS_TYPE_SIBLINGS', surface: 'crisis', drawKind: /** @type {'T'} */ ('T') };
+    if (typeof kept.crisisHook === 'string') e.crisisHook = resolveSibling(kept.crisisHook, STRESS_TYPE_SIBLINGS, cellOpts);
+    if (typeof kept.viabilityNote === 'string') { const note = resolveSibling(kept.viabilityNote, STRESS_TYPE_SIBLINGS, { ...cellOpts, dropRefused: true }); if (note == null) delete e.viabilityNote; else e.viabilityNote = note; }
+  };
   const rerenderStressSummary = (container) => {
     if (!container) return;
     const entries = Array.isArray(container) ? container : [container];
     for (const e of entries) {
       if (e && typeof e === 'object'
           && Object.prototype.hasOwnProperty.call(e, 'summaryRoll')) {
-        e.summary = renderStressSummary(e.type, settlement.name, e.summaryRoll, e.direction, factsOf(settlement)); // WIRING-W0: the entry's own direction; CENSUS-2c: declared sentences resolve (stressNarrative.js :: STRESS_SUMMARY_SIBLINGS) — MERGE-R2: both
-        // W2-FIX-DATA-7 (CENSUS-2 kind a; brief 5's ruling: this function only): the catalogue's own hook and note, stored
-        // on the entry, resolve through their declared sets (stressTypes.js :: STRESS_TYPE_SIBLINGS), draw-free. A hook
-        // with no admitted twin is kept and noted (the template the cast fills); a note with none is left off (nothing
-        // false is printed in its place). The hook stays the template: a twin carries no holder's name.
-        const cellOpts = { facts: factsOf(settlement), poolId: 'stressTypes:STRESS_TYPE_SIBLINGS', surface: 'crisis', drawKind: /** @type {'T'} */ ('T') };
-        if (typeof e.crisisHook === 'string') e.crisisHook = resolveSibling(e.crisisHook, STRESS_TYPE_SIBLINGS, cellOpts);
-        if (typeof e.viabilityNote === 'string') { const note = resolveSibling(e.viabilityNote, STRESS_TYPE_SIBLINGS, { ...cellOpts, dropRefused: true }); if (note == null) delete e.viabilityNote; else e.viabilityNote = note; }
+        const kept = { roll: e.summaryRoll, crisisHook: e.crisisHook, viabilityNote: e.viabilityNote };
+        stressLateReads.set(e, kept);
+        readStressEntry(e, kept);
         delete e.summaryRoll;
       }
     }
@@ -431,6 +444,16 @@ registerStep('assembleSettlement', {
     if (npcs !== settlement.npcs) settlement.npcs = npcs;
   }
   if (chooseOrPin(pins, 'powerStructure', () => UNPINNED) === UNPINNED) resolveFactionLabelsAtClose(settlement); // CENSUS-1i R-AW: a label whose fact settles late resolves here, against the final roster, after every roster writer (MERGE-CAR: after the people car's true-hook pass; the rename cascades through `memberships[].power` and a minted card's `institution.key`) (no roll); a HELD powerStructure is the DM's and is not renamed (EM-R3, LANDING-R2)
+  // ── THE LATE RE-READ (TAIL-CRISIS-5, the chair's ruling K21; ORDER-MEASURE-1 C1b, the cure-(b) shape of A6/A8/A12/A13).
+  // ⛔ AFTER THE LAST ROSTER WRITE (the resize, the reconcile, the label close above): each stress entry the name's pass (F8)
+  // rendered is rendered again from its KEPT roll, and its CATALOGUE hook and note (the originals, not the text the
+  // first pass left: a twin that is not itself a key, and a note the first pass dropped, are re-decided here) are resolved
+  // again, against the SETTLED record. Draw-free (the slot keeps its roll). A declaration whose needs read the powers
+  // (`rival power`, `shared power`, `ruling body`) is true here and nowhere earlier: the stored text is this pass's.
+  // THE WINDOW: between the first pass and this one (the arrival scene to the label close) the entry holds the first
+  // pass's text; no writer in that window reads a stress entry's summary, hook or note (TAIL-CRISIS-5, by grep), and
+  // whatever is added there must not, or must read it here. @enforced-by tests/generators/stressLateReRead.test.js
+  for (const [e, kept] of stressLateReads) readStressEntry(e, kept);
 
   // Propagate the in-pipeline causal trace onto the settlement so
   // downstream consumers (PipelineRail, AI overlay, PDF) can read it.
