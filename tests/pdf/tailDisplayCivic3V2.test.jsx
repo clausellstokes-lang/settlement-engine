@@ -12,6 +12,7 @@
 import React from 'react';
 import { afterEach, beforeAll, describe, expect, test, vi } from 'vitest';
 import { cleanup, render } from '@testing-library/react';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 vi.mock('../../src/store/index.js', () => {
   const data = { campaigns: [] };
@@ -74,13 +75,14 @@ describe('V2: the food a famine failed is shown failed, on the tab and on every 
   test.each(CURED)('%s: %s is not "Fully exploited"; it prints "Failed this year"', (seed, res, cell) => {
     const town = BORN.get(seed);
     const g = exploitationGroupsShown(town);
-    expect(g.full.map((x) => String(x.card.rawResource))).not.toContain(res);
+    const placed = Object.entries(g).flatMap(([stage, group]) => group.map((x) => `${stage}|${String(x.card.rawResource)}`));
+    expectAbsentWithAnchor(placed, `full|${res}`, `failed|${res}`, 'the exploitation groups');
     expect(g.failed.map((x) => String(x.card.rawResource))).toContain(res);
     expect(tabText(town)).toContain(`✗ Failed this year${cell}`);
     const { pdf, journal } = exportsOf(town);
-    expect(pdf).not.toContain(`${res}|full`);
+    expectAbsentWithAnchor(pdf, `${res}|full`, `${res}|failed`, 'the PDF chain rows');
     expect(pdf).toContain(`${res}|failed`);
-    expect(journal).not.toContain(`| ${cell} | full |`);
+    expectAbsentWithAnchor(journal, `| ${cell} | full |`, `| ${cell} | failed | — | — |`, 'the journal table');
     expect(journal).toContain(`| ${cell} | failed | — | — |`);
   });
   test.each(KEPT)('%s: %s still prints full', (seed, res, cell) => {

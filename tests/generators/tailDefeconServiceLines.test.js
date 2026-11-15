@@ -12,6 +12,7 @@
  * Born as the census born its 720 (the r2r- arm). GONE pairs red at 345f13157; KEEP pairs green before and after.
  */
 import { beforeAll, describe, expect, test } from 'vitest';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
@@ -46,8 +47,8 @@ describe('the hire service needs a company for hire (row 03905)', () => {
     ['r2r-city-7', 'Legal services (contracts, notarial)'],
   ])('%s (a city watch, no company for hire): no mercenary hire; "%s" is still exported', (seed, keep) => {
     const town = birth(seed);
-    expect(serviceOutputs(town), 'GONE').not.toContain('Armed escort & mercenary hire');
-    expect(exportsOf(town), 'GONE').not.toContain('Military contract services');
+    expectAbsentWithAnchor(serviceOutputs(town), 'Armed escort & mercenary hire', 'Legal services', 'GONE');
+    expectAbsentWithAnchor(exportsOf(town), 'Military contract services', keep, 'GONE');
     expect(exportsOf(town), 'KEEP').toContain(keep);
   }, 60000);
 
@@ -63,7 +64,9 @@ describe('the external-mill note says only what every town that prints it bears 
 
   test.each([['r2r-thorp-12'], ['r2r-thorp-13'], ['r2r-thorp-19']])('%s: no lord, no "food security", no "no flour at all"; the plain line prints', (seed) => {
     const notes = millNotes(birth(seed));
-    expect(notes.join(' '), 'GONE').not.toMatch(/lord's mill|food security is maintained|no flour at all/);
+    expectAbsentWithAnchor(notes.join(' '), "lord's mill", MILL_NOTE, 'GONE');
+    expectAbsentWithAnchor(notes.join(' '), 'food security is maintained', MILL_NOTE, 'GONE');
+    expectAbsentWithAnchor(notes.join(' '), 'no flour at all', MILL_NOTE, 'GONE');
     expect(notes, 'what prints instead').toContain(MILL_NOTE);
   }, 60000);
 });

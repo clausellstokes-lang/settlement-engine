@@ -11,6 +11,7 @@
  * RED AT THE BASE (4ff449a7b): every refused pair, each naming what prints instead. KEEP pairs green before and after.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
@@ -59,7 +60,7 @@ const card = (/** @type {string} */ seed, /** @type {string} */ name) => String(
 describe('TAIL-POWERS-B-3 batch 7 · a standing line reads the rival it read and the strength of its own card', () => {
   for (const [seed, name, refused, instead] of PAIRS) {
     it(`${seed} (${name}): "${refused.slice(0, 50)}" does not print; "${instead.slice(0, 60)}" prints instead`, () => {
-      expect(card(seed, name)).not.toContain(refused);
+      expectAbsentWithAnchor(card(seed, name), refused, instead, `${seed} (${name})`);
       expect(card(seed, name)).toContain(instead);
     });
   }

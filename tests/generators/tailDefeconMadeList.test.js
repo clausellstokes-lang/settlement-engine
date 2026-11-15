@@ -14,6 +14,7 @@
  * its maker stands (a cobbler's boots, a jeweller's or metalworker's precious metals are worked goods).
  */
 import { beforeAll, describe, expect, test } from 'vitest';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
@@ -83,9 +84,14 @@ describe('the made list names what the town\'s own houses make (C1-A)', () => {
 
   test.each(C1A)('%s: "%s" is not listed as made; "%s" still is', (seed, gone, keep) => {
     const list = madeIn(seed);
-    expect(list, 'GONE').not.toContain(gone);
-    if (keep === EMPTY) expect(list, 'KEEP: the list is empty').toEqual([]);
-    else expect(list, 'KEEP').toContain(keep);
+    if (keep === EMPTY) {
+      expect(list, 'KEEP: the list is empty').toEqual([]);
+      // anchored: the line above pins this same list's exact value (empty, the row silent by design)
+      expect(list, 'GONE').not.toContain(gone);
+    } else {
+      expectAbsentWithAnchor(list, gone, keep, 'GONE');
+      expect(list, 'KEEP').toContain(keep);
+    }
   }, 60000);
 
   test.each(WORKED)('%s: "%s" stays, worked by its %s', (seed, keep, house) => {
@@ -99,7 +105,7 @@ describe('the made list names goods (C2-A)', () => {
 
   test.each(C2A)('%s: "%s" is not listed as made; "%s" still is', (seed, gone, keep) => {
     const list = madeIn(seed);
-    expect(list, 'GONE').not.toContain(gone);
+    expectAbsentWithAnchor(list, gone, keep, 'GONE');
     expect(list, 'KEEP').toContain(keep);
   }, 60000);
 

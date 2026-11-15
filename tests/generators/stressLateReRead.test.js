@@ -17,6 +17,7 @@
  */
 import fs from 'node:fs';
 import { beforeAll, describe, expect, it } from 'vitest';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { renderStressSummary } from '../../src/generators/stressNarrative.js';
 import { factsOf } from '../../src/domain/facts/factsOf.js';
 import { rivalPowerOf } from '../../src/domain/facts/rivalPower.js';
@@ -102,13 +103,14 @@ describe('THE GUARD: a declaration that reads a late fact is resolved after the 
     expect(late, 'the late re-read before the receipt').toBeLessThan(at('buildGenerationCoherenceReceipt('));
   });
   it('every stored summary is the one its renderer gives against the FINAL record (insurgency and monster towns)', () => {
-    for (const seed of [...RIVAL, ...LOST_IN_RESIZE, ...NEVER, ...DEFENDED, ...UNDEFENDED]) {
+    const failures = collectSeedFailures([...RIVAL, ...LOST_IN_RESIZE, ...NEVER, ...DEFENDED, ...UNDEFENDED], (seed) => {
       const s = birth(seed);
       for (const e of [].concat(s.stress || [])) {
         const /** @type {any} */ x = e;
         if (!x || x.type === 'wartime') continue; // wartime's roll is not kept on the record; its two texts are checked by its own tests
         expect(x.summary, `${seed} ${x.type}`).toBe(renderStressSummary(x.type, s.name, null, x.direction, factsOf(s)));
       }
-    }
+    });
+    expectNoSeedFailures(failures, 'every stored stress summary is the one its renderer gives against the FINAL record');
   });
 });

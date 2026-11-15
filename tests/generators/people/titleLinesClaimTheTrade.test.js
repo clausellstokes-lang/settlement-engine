@@ -8,6 +8,7 @@
  * RED AT THE BASE (700ba76cf): every refused pair; KEEP pairs green before and after.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
+import { expectAbsentWithAnchor } from '../../helpers/anchoredNegatives.js';
 import { generateSettlementPipeline } from '../../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../../src/store/configSlice.js';
@@ -52,7 +53,7 @@ beforeAll(async () => {
 describe('TAIL-POWERS-B-2 batch 5 · a title line claims the trade, not an input the record may deny', () => {
   for (const [seed, refused, instead] of ROWS) {
     it(`${seed}: not "${refused.slice(0, 48)}…"; the same card prints the hedge`, () => {
-      expect(cards[seed]).not.toContain(refused);
+      expectAbsentWithAnchor(cards[seed], refused, instead, `${seed}: the refused line; the same card prints the hedge`);
       expect(cards[seed]).toContain(instead);
     });
   }

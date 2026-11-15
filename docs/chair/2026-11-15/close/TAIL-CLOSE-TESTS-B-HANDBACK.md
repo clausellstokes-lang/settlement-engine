@@ -11,8 +11,8 @@ file's frozen ceiling.
 
 | | at 7efc7686 (before) | now |
 |---|---|---|
-| negative walker: files / un-anchored sites over ceiling | 54 / 103 | (batch 1) see below |
-| seed walker: files / bare seed loops over ceiling | 18 / 37 | (batch 1) see below |
+| negative walker: files / un-anchored sites over ceiling | 54 / 103 | 1 / 1 (the moving file, held back) |
+| seed walker: files / bare seed loops over ceiling | 18 / 37 | 0 / 0 |
 
 Whole corpus at 7efc7686: negatives over ceiling 112 files / 203 sites, generation-facing population 53
 (quarantine 3); seed loops over ceiling 31 files / 60 loops, generation-facing population 20 (quarantine 1).
@@ -29,6 +29,31 @@ Whole corpus at 7efc7686: negatives over ceiling 112 files / 203 sites, generati
   (an added `toContain` of a phrase the history really prints); tailTies2Batch1 ×2 (the exact `toBe` of the
   same line now sits directly above it); pdf/tailExportsPdfBatch1 ×1 (an added per-surface `toContain`).
 
+- **Batch 2 (17 files):** economicHistoryRecent, layoutNamesWhatStands, power/seatNamedAsItSits,
+  power/tailPowers4Batch2, prosperityStanding, safetyForceLines, tailDefeconBatch4Lines,
+  tailDefeconCatalogueCommodities, tailDefeconIncomeRows, tailDefeconMadeListWhole, tailTies4Batch1, tailTiesBatch1,
+  tensionTemplateDeclaration, timberManagedFelling, w2FixData5OccupationTension, pdf/restoredSubsections (6 sites against
+  ceiling 5: the newest site, line 212, is anchored; the row stays 5, since nothing was banked below it),
+  pdf/tailExportsPdf3Batch3. NEG 23→0, SEED 7→0. 199 pass / 2 fail before, and the same after. Markers, each with an added
+  positive on the same subject: safetyForceLines (corpus-wide), tensionTemplateDeclaration (regex with `i`),
+  tailExportsPdf3Batch3 ×2 (multiline regexes; each surface's own heading asserted above).
+- **Batch 3 (13 files):** harvestHookFamineHere, houseOfWorkEarns, power/tailPowers3Labels, rosterUnderworldNoName,
+  tailCrisisIronHooks, tailDefeconMadeListTableRows, tailTies3Batch1, tailTies4Batch3, tailTiesBatch2,
+  w2FixDataHistoryItems, pdf/cultureBlockTwoSurfaces, pdf/tailExportsPdf2Batch2, pdf/threatAssessmentTwoSurfaces.
+  NEG 30→0, SEED 13→0. 120 pass / 1 fail before, and the same after. Markers, each with an added positive:
+  w2FixDataHistoryItems ×2 (regexes with `i`), tailExportsPdf2Batch2 ×1 (`^$/m`).
+- **Batch 4 (20 files):** founderHamletNoMill, foundingRowsRead, gangLineNeedsAGang, people/titleLinesClaimTheTrade,
+  people/titleLinesNeedWhatTheyOffer, power/standingReadsTheNamedPower, power/tailPowers3Conflict,
+  power/tailPowers4Batch3, standingReadsTheRivalItRead, stressLateReRead, tailDefeconBatch3Lines, tailDefeconMadeList,
+  tailDefeconSafetyLines, tailDefeconServiceLines, tailTies4Batch2, upkeepVocation, warContractsSecretProsperity,
+  pdf/defenseReadinessWord, pdf/foodWordEverySurface, pdf/tailDisplayCivic3V2. NEG 22→0, SEED 8→0. 207 pass / 1 fail
+  before, and the same after. Markers: foundingRowsRead ×2 (the row's own printed phrase, or its exact `null`, asserted
+  above), tailDefeconMadeList ×1 (`toEqual([])` on the same list above), warContractsSecretProsperity ×1 (the
+  prosperity band asserted above).
+- How regexes were converted: a `not.toMatch` became helper calls only where the regex was a plain literal or a literal
+  alternation with no flags (one call per alternative, which is exactly equivalent). Every other regex is kept, with a
+  positive on the same subject directly above it and a one-line marker. eslint is clean on all 65 files.
+
 ## Findings (the stronger form red, left red and true)
 
 1. `tests/generators/tailTies2Batch1.test.js` › "NOT (T6): under one ruler no tie line is about a vote; …":
@@ -36,7 +61,22 @@ Whole corpus at 7efc7686: negatives over ceiling 112 files / 203 sites, generati
    be false" on `rulingBodyOf`). The bare loop stopped at r2r-hamlet-4 and hid r2r-village-16. It was already
    red at the join on one seed.
 
+2. `tests/generators/tailCrisisIronHooks.test.js` › "no FALSE words print, and the reworded line prints in their
+   place": the collected loop reports **2 of 4** failing (r2r-hamlet-35, r2r-hamlet-30; the reworded line is missing
+   in both, and r2r-hamlet-35's hooks text is empty). The bare loop showed only r2r-hamlet-35. It was already red at
+   the join.
+
+Observation (not red): `tests/generators/foundingRowsRead.test.js` A3 › r2r-thorp-8. Its negative was vacuous, because
+the Origin reason is `null` (silent by design, per A5), so the old assertion matched the string "null". That silence is
+now pinned exactly with `toBeNull()`.
+
 ## Already red at the join, not mine, unchanged
+
+- `tests/generators/economicHistoryRecent.test.js` › "rw3-hamlet-calm-1 (#181)" (the Economic Divide event is not
+  found; TypeError on `divide?.yearsAgo`).
+- `tests/generators/tailTiesBatch1.test.js` › "NOT: under one ruler no tie names the council…": collected, it reads
+  1 of 8 (r2r-village-50), the same seed the bare loop showed.
+- `tests/generators/upkeepVocation.test.jsx` › "RED-FIRST, the page".
 
 - `tests/generators/incomeRowsBorneOut.test.js` › "r2r-thorp-24: …" (expected [ 'Harvest' ] to include
   'Agricultural Rents').
@@ -49,4 +89,6 @@ Whole corpus at 7efc7686: negatives over ceiling 112 files / 203 sites, generati
 
 ## What is left
 
-Batches 2–4 are in progress (the rest of my half), then the moving file after the sweep.
+Only the moving file is left (1 negative, at line 382 of tailNarrativeRows). It waits for the chair's "SWEPT <tip>":
+then I merge the joined line at that tip, re-measure, and cure what is left and what arrived. The other half's rows
+(paths at or before conflictRelationsTwin) are TAIL-CLOSE-TESTS-A's, and both walkers stay red on them.

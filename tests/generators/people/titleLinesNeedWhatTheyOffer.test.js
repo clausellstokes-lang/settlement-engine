@@ -15,6 +15,7 @@
  */
 import { beforeAll, describe, expect, it } from 'vitest';
 import { collectSeedFailures, expectNoSeedFailures } from '../../helpers/seedFailures.js';
+import { expectAbsentWithAnchor } from '../../helpers/anchoredNegatives.js';
 import { generateSettlementPipeline } from '../../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../../src/store/configSlice.js';
@@ -71,7 +72,7 @@ describe('TAIL-POWERS batch 1 · a title line needs what it offers (P2): the dec
     }
   });
   it('the brewer\'s grain secret names no bakers a town may not have', () => {
-    expect(TITLE_SECRETS['the brewer'].map((r) => r.secret).join(' ')).not.toMatch(/bakers/);
+    expectAbsentWithAnchor(TITLE_SECRETS['the brewer'].map((r) => r.secret).join(' '), 'bakers', 'Buys up grain that was meant for bread', "the brewer's secrets");
     expect(TITLE_SECRETS['the brewer'][1].secret).toBe('Buys up grain that was meant for bread in the lean months, at a price no household can match');
   });
 });
@@ -165,7 +166,7 @@ describe('TAIL-POWERS batch 1 · the towns read: what each prints instead (birth
     expectNoSeedFailures(collectSeedFailures(Object.keys(TOWNS), (seed) => {
       const [title, gone, kept] = TOWNS[seed];
       const lines = born(seed).npcs.filter((c) => c.title === title).flatMap((c) => [c.presentation?.behaviour, c.secret?.what]);
-      if (gone) expect(lines, `${seed}: ${title} no longer deals "${gone}"`).not.toContain(gone);
+      if (gone) expectAbsentWithAnchor(lines, gone, kept, `${seed}: ${title} no longer deals "${gone}"`);
       expect(lines, `${seed}: ${title} deals "${kept}"`).toContain(kept);
     }), 'every town of the batch prints the line its state admits');
   }, 600_000);
