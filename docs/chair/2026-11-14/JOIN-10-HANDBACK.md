@@ -79,6 +79,7 @@ THE CHAIR'S RULINGS TO JOIN-10 (each vetoable by the owner):
 | 3 | lane/tail-close-display-2026-11-15 | 71ac99969 (06:57) | 17e38c547 | 64b5afc31 | none | 12 files outside docs/; declared-move commits: 036e82437 45c0b621a 96eaeff30 c3788c2bc (golden carried); merged clean though both moved: tests/components/displayEconRelianceFoodWords.test.jsx |
 | 4 | lane/tail-corpus-def-2026-11-14 | 922cfa66c (07:00) | f714fb6a5 | b7e861258 | none | 2 files outside docs/; declared-move commits: none (golden carried) |
 | 5 | lane/tail-crisis-2026-11-14 | b75ca93c7 (07:04) | 573c92b6d | 7a4229837 | none | 1 files outside docs/; declared-move commits: none (golden carried) |
+| 6 | lane/tail-close-pools-2-2026-11-15 | af1e78989 (07:07) | f714fb6a5 | f2e8cb1a3 | none | 4 files outside docs/; declared-move commits: none (golden carried) |
 
 ## 3. Every code resolution
 
@@ -291,4 +292,4 @@ A worktree at origin's tip (`git worktree add /home/user/j10wt -b join10 <tip>`,
 
 ## 8. WHAT IS LEFT
 
-Landed through point 5 (see the table); waiting on the chair's LAND words.
+Landed through point 6 (see the table); waiting on the chair's LAND words.
