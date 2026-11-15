@@ -341,7 +341,7 @@
     },
     {
      "lineId": "STRESS_DESCS.occupied[4]",
-     "text": "{name}'s street signs have been repainted in two languages, the local one second. The new lettering is neat, official, and everywhere, which is how you learn the occupation intends to stay.",
+     "text": "{name}'s notices are posted in two languages now, the local one second. The new lettering is neat, official, and on every door that matters, which is how you learn the occupation intends to stay.",
      "needs": [],
      "excludes": [],
      "crisis": [
@@ -369,7 +369,7 @@
     },
     {
      "lineId": "STRESS_DESCS.occupied[6]",
-     "text": "Strangers in foreign colours stand where the roads meet in {name}, and the locals walk around them as if they were furniture nobody wanted.",
+     "text": "Strangers in foreign colours stand about in the middle of {name}, and the locals walk around them as if they were furniture nobody wanted.",
      "needs": [],
      "excludes": [],
      "crisis": [
@@ -1501,9 +1501,10 @@
     },
     {
      "lineId": "STRESS_DESCS.wartime[3]",
-     "text": "{name} is prosperous in a way that feels wrong. The forges work past dark, the warehouses are full, the coin is moving, and all of it points one direction, toward a war that is not fought here but is paid for here.",
+     "text": "{name} is busy in a way that feels wrong. The forge fires burn past dark, the coin is moving, and all of it points one direction, toward a war that is not fought here but is paid for here.",
      "needs": [
-      "institution: smith"
+      "institution: smith",
+      "prosperity: ≥ moderate"
      ],
      "excludes": [
       "crisis: hunger",
@@ -1543,6 +1544,24 @@
      "stop": [
       "crown"
      ]
+    },
+    {
+     "lineId": "STRESS_DESCS.wartime[6]",
+     "text": "{name} is busy in a way that feels wrong for a place this poor. The forge fires burn past dark, but the coin they earn leaves with the carts, and all of it points one direction, toward a war that is not fought here but is paid for here.",
+     "needs": [
+      "institution: smith"
+     ],
+     "excludes": [
+      "prosperity: ≥ moderate",
+      "crisis: hunger",
+      "crisis: under_siege",
+      "war: front"
+     ],
+     "crisis": [
+      "wartime"
+     ],
+     "colour": false,
+     "stop": []
     }
    ]
   },
@@ -1593,7 +1612,7 @@
     },
     {
      "lineId": "STRESS_DESCS.religious_conversion[2]",
-     "text": "{name} is observing a holy day, and you cannot tell which one. Some shops are shut and draped; others are pointedly open. Two processions are forming in different quarters, and the people watching each are counting who watches the other.",
+     "text": "{name} is observing a holy day, and you cannot tell which one. Some shops are shut and draped; others are pointedly open. Two processions are forming at opposite ends of the settlement, and the people watching each are counting who watches the other.",
      "needs": [
       "population: ≥ middling"
      ],
@@ -1742,7 +1761,7 @@
     },
     {
      "lineId": "STRESS_DESCS.slave_revolt[5]",
-     "text": "{name}'s field gangs work without overseers today, or the overseers have dressed like the gangs. From the road you cannot tell which, and that is the whole story of the settlement this season.",
+     "text": "{name}'s field hands work without overseers today, or the overseers have dressed like the hands. From the road you cannot tell which, and that is the whole story of the settlement this season.",
      "needs": [],
      "excludes": [],
      "crisis": [

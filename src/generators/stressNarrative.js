@@ -188,15 +188,18 @@ const RENDERERS = {
   // dead branch removed; this is exactly that else-branch text.
   // TAIL-CRISIS K3 (READ-ALL 03091 12113, the reader's HIGH: "A strong power in Dioneia has stopped obeying the government"
   // where the government is the only power on the record; at bcad1a358, 10 of the census's 37 insurgencies, every hamlet
-  // and six of the eight thorps). The vocabulary holds no atom for a second power, so the line claims no more than every
-  // insurgency bears: some in the place, never "a power", and no singular "it" for them.
-  insurgency: (name) => {
+  // and six of the eight thorps). The plain line claims no more than every insurgency bears: some in the place, never "a
+  // power", and no singular "it" for them.
+  // TAIL-CRISIS-5 (the chair's ruling K21; K6's atom, K10's hazard answered): the strong line is a pool of two checked
+  // here, at its print site: it needs a rival of standing (`rival power`: a power other than the governing one at
+  // Significant or above, TRUE OF THE SETTLED RECORD ONLY). It is settled where the line is stored: the assembly's late
+  // re-read renders this again after the last roster write (assembleSettlement.js, THE LATE RE-READ). Anything else
+  // (refused, unanswered, no facts) keeps the plain line, true in every insurgency. No draw.
+  insurgency: (name, _roll, facts) => {
     const h = name || "the settlement";
-    return (
-      "Some in " +
-      h +
-      " have stopped obeying the government. They stall, their taxes go unpaid, and they wait."
-    );
+    return facts && atomHolds('rival power', facts) === true
+      ? "A strong power in " + h + " has stopped obeying the government. Its people stall, its taxes go unpaid, and it waits."
+      : "Some in " + h + " have stopped obeying the government. They stall, their taxes go unpaid, and they wait.";
   },
 
   // religious_conversion: three wordings, picked by the name's length (an H modulus). Variants 0

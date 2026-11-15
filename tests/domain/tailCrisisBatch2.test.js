@@ -53,7 +53,7 @@ const FALSE = [
   // under an occupation: who holds the place (09628 B03858 18585 18583 18459 12540 10066 10049 10048)
   ['r2s-occupied-village-0', 'run by its estates', 'built in timber and stone, held, for now, by another power.'],
   ['r2s-occupied-city-0', 'run by guild and estate', 'held, for now, by another power.'],
-  ['r2s-occupied-hamlet-0', 'held by clan and caravan', 'half-moving, held, for now, by another power.'],
+  ['r2s-occupied-hamlet-0', 'held by clan and caravan', 'built on clan lines, held, for now, by another power.'], // TAIL-CRISIS-4 (K19): re-keyed by identity (no herds, no pasture)
   ['r2s-occupied-metropolis-2', 'held by clan and caravan', 'built on clan lines, held, for now, by another power.'],
   ['r2s-occupied-metropolis-3', 'under temple and guild', 'in quarters by trade, held, for now, by another power.'],
   ['r2r-thorp-24', 'run by patronage and law', 'Latin-inspired, and it shows: held, for now, by another power.'],

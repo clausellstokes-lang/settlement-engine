@@ -252,7 +252,8 @@ const generatePowerDynamics = (population, institutions, economicState, config =
         suggestedFixes: water.buffered
           ? ['Develop local resource base to reduce trade dependency']
           : [
-              'Add craft guilds: smiths, weavers, tanners, etc.',
+              // TAIL-DEFECON-3 (#30890): the advice names only the crafts the roster lacks
+              `Add craft guilds${((absent) => (absent.length ? `: ${absent.join(', ')}, etc.` : ''))([['smiths', 'smith'], ['weavers', 'weav'], ['tanners', 'tann']].filter(([, w]) => !instNames.some((n) => n.includes(w))).map(([c]) => c))}`,
               'Improve trade access and economy for trade-sustained crafts',
             ],
       });
@@ -412,7 +413,10 @@ const generatePowerDynamics = (population, institutions, economicState, config =
   // Banking without economy
   if (
     priorityToCategory(pri.economy) === 'very_low' &&
-    instNames.some((n) => n.includes('bank') || n.includes('money'))
+    instNames.some((n) => n.includes('bank') || n.includes('money')) &&
+    // TAIL-DEFECON-3 (#04271, #B04151, #B10921): "does little trade" only where the record's export list is short (fewer
+    // than the four goods the complexity ladder reads as a place that trades); a city exporting seventeen goods does not
+    (economicState?.primaryExports ?? []).length < 4
   ) {
     warnings.push({
       severity: SEVERITY.INEFFICIENCY,

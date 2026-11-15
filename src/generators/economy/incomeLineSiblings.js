@@ -63,7 +63,15 @@ export const CLOTH_WORKED_LINE = 'Cloth is woven or finished here.';
 export const FISH_EXPORT_LINE = 'Catch landed and sold fresh or preserved; salt fish are a major regional export commodity.';
 export const FISH_LANDED_LINE = 'Catch landed here and sold fresh or preserved.';
 export const FISH_SOLD_LINE = 'Fish is sold here, fresh or preserved.';
+/** The fish lines' twin where every fishery near the place is fished out and salted fish is bought in (D5; #77). */
+export const FISH_BOUGHT_LINE = 'The fishery here is fished out; the fish sold now is salted and bought in.';
+/** The entrepôt row's line (tradeGoods.js prints it) and its twin where no warehouse, toll, customs or caravan house
+ * stands (TAIL-DEFECON-3, #07231, X9 29522): goods still pass through the crossroads; no house collects a duty on them. */
+export const ENTREPOT_LINE = 'Transit duties, warehouse fees, and re-export premiums from goods passing through the crossroads.';
+export const ENTREPOT_PLAIN_LINE = 'Goods passing through the crossroads, and what their traders spend while they stop.';
 export const QUARRY_LINE = 'Local quarry provides dressed stone to regional builders: reliable income with low transport overhead.';
+/** The quarry line's twin where the place sells no stone (TAIL-DEFECON-3, #18655): the quarry stands, its stone stays. */
+export const QUARRY_OWN_LINE = 'Stone is quarried here for the place\'s own building.';
 export const MASONS_LINE = 'Stone masons work imported material; the quarrying income notation reflects processing margin only.';
 /** The tithes line declared on its own text (it names the faith's house), then its constant. */
 const TITHES_RENTS_SET = Object.freeze([
@@ -89,7 +97,7 @@ export const PILGRIM_HOUSE_WORDS = Object.freeze(['shrine', 'cathedral', 'monast
 /** The sources whose every line is trade coming in or going out (road tolls, gate tolls, customs, transit): none under a siege. */
 // TAIL-DEFECON-2: under a siege no river traffic, no pilgrim, no outside customer and no trade comes in: those rows print
 // their label and share alone.
-export const SIEGE_CLOSED_SOURCES = Object.freeze(['Toll Revenue', 'Gate Tolls', 'Port Duties', 'Entrepôt Trade', 'River Tolls', 'Pilgrim Trade', 'Security Contracts', 'Spellcasting Services']);
+export const SIEGE_CLOSED_SOURCES = Object.freeze(['Toll Revenue', 'Gate Tolls', 'Port Duties', 'Entrepôt Trade', 'River Tolls', 'Pilgrim Trade', 'Security Contracts', 'Spellcasting Services', 'International Commerce']);
 
 const SIEGE = 'crisis: under_siege';
 /** The originals and their twins, keyed by the original's text (the GRAIN pattern above). '' twins are not texts. */
@@ -120,8 +128,16 @@ export const INCOME_STATE_SIBLINGS = Object.freeze({
     Object.freeze({ text: FISH_EXPORT_LINE, needs: Object.freeze(['exports']), excludes: Object.freeze([SIEGE]) }),
     Object.freeze({ text: FISH_LANDED_LINE, twinOf: FISH_EXPORT_LINE, excludes: Object.freeze([SIEGE]) }),
     Object.freeze({ text: FISH_SOLD_LINE, twinOf: FISH_EXPORT_LINE, excludes: Object.freeze([SIEGE]) }),
+    Object.freeze({ text: FISH_BOUGHT_LINE, twinOf: FISH_EXPORT_LINE, needs: Object.freeze(['imports']), excludes: Object.freeze([SIEGE]) }),
   ]),
-  [QUARRY_LINE]: Object.freeze([Object.freeze({ text: QUARRY_LINE, needs: Object.freeze(['institution: quarry']), excludes: Object.freeze([SIEGE]) })]),
+  [ENTREPOT_LINE]: Object.freeze([
+    Object.freeze({ text: ENTREPOT_LINE, needs: Object.freeze(['institution: warehouse']), excludes: Object.freeze([SIEGE]) }),
+    Object.freeze({ text: ENTREPOT_PLAIN_LINE, twinOf: ENTREPOT_LINE, excludes: Object.freeze([SIEGE]) }),
+  ]),
+  [QUARRY_LINE]: Object.freeze([
+    Object.freeze({ text: QUARRY_LINE, needs: Object.freeze(['institution: quarry', 'exports']), excludes: Object.freeze([SIEGE]) }),
+    Object.freeze({ text: QUARRY_OWN_LINE, twinOf: QUARRY_LINE, needs: Object.freeze(['institution: quarry']), excludes: Object.freeze([SIEGE]) }),
+  ]),
   [MASONS_LINE]: Object.freeze([Object.freeze({ text: MASONS_LINE, needs: Object.freeze(['imports']), excludes: Object.freeze([SIEGE]) })]),
   [TITHES_RENTS_LINE]: Object.freeze([TITHES_RENTS_SET[0], Object.freeze({ text: TITHES_RENTS_PLAIN_LINE, twinOf: TITHES_RENTS_LINE })]),
   [TIMBER_LINE]: Object.freeze([
@@ -138,10 +154,11 @@ export const INCOME_STATE_SIBLINGS = Object.freeze({
  * @param {string} desc the line the branch printed
  * @param {{ roster: ReadonlyArray<string>, besieged: boolean, imports: ReadonlyArray<unknown>, exports: ReadonlyArray<unknown>,
  *   chains: ReadonlyArray<{ chainId?: unknown, status?: unknown }>, top: boolean, source?: string, managedForest?: boolean,
- *   grainFailed?: boolean }} f the roster's names lower-cased; the siege; the final trade lists; the chains with their
+ *   grainFailed?: boolean, fishFailed?: boolean, fisheryExhausted?: boolean }} f the roster's names lower-cased; the siege; the final trade lists; the chains with their
  *   states; whether the row is the largest source; its source label; whether the felling is managed (a managed forest,
  *   or a shipbuilding stand a woodcutter works: UPKEEP-16, the chair's ruling (b));
- *   whether the food record names grain as the source a famine failed
+ *   whether the food record names grain as the source a famine failed; the same of fish; whether every fishery near
+ *   the place is depleted
  * @returns {string}
  */
 export function trueIncomeDesc(desc, f) {
@@ -175,10 +192,15 @@ export function trueIncomeDesc(desc, f) {
       if (!f.besieged && bought(/\bwool\b/i)) return desc;
       return has(/weav|fuller/) ? CLOTH_WORKED_LINE : '';
     case FISH_EXPORT_LINE:
-      if (f.besieged) return '';
+      // TAIL-DEFECON-3: under a famine whose failed source is fish no line offers fish; where every fishery near the
+      // place is fished out, the catch is not landed: the salted fish bought in, or no sentence (D5, #77).
+      if (f.besieged || f.fishFailed) return '';
+      if (f.fisheryExhausted) return bought(/\bsalt(?:ed)? fish\b/i) ? FISH_BOUGHT_LINE : '';
       if (has(/fisher|fishing/)) return sold(/\bsalt(?:ed)? fish\b/i) ? desc : FISH_LANDED_LINE;
       return has(/\bfish/) ? FISH_SOLD_LINE : '';
-    case QUARRY_LINE: return has(/quarr/) && !f.besieged ? desc : '';
+    case ENTREPOT_LINE: return has(/warehouse|toll|customs|caravan|depot/) ? desc : ENTREPOT_PLAIN_LINE;
+    // TAIL-DEFECON-3 (#18655, X9 15745): "to regional builders" only where the place sells stone; else its own building.
+    case QUARRY_LINE: return !has(/quarr/) || f.besieged ? '' : sold(/stone|marble|granite|slate/i) ? desc : QUARRY_OWN_LINE;
     case MASONS_LINE: return has(/mason|stonecut/) && !f.besieged && bought(/stone|masonry|marble/i) ? desc : '';
     case TITHES_RENTS_LINE: return f.top ? desc : TITHES_RENTS_PLAIN_LINE;
     case TIMBER_LINE: return has(/sawmill|lumber/) ? desc : f.managedForest ? TIMBER_MANAGED_LINE : TIMBER_PLAIN_LINE;

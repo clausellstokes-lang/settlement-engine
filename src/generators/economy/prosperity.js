@@ -396,10 +396,18 @@ export const computeBaseProsperity = (tier, tradeRoute, institutions, config, _i
 /**
  * @param {string} tier @param {number} incomeSourceCount @param {number} exportCount
  * @param {boolean} hasMarketInst @param {{ growsMoreThanEats?: boolean } | null} [foodRecord]
+ * @param {ReadonlyArray<{ percentage?: unknown }> | null} [incomeSources] the income rows: "Highly diversified" only where
+ *   the income mix reads a broad spread (no row at INCOME_LEADER_FROM or over: `incomeMixPoolKey`'s own cut) (TAIL-DEFECON-3, D2, #10700: ONE HOME for the
+ *   fact the Economics tab states as "two or three sources between them"); without them, the count decides, as before
  * @returns {string}
  */
-export const deriveEconomicComplexity = (tier, incomeSourceCount, exportCount, hasMarketInst, foodRecord = null) => {
-  const label = complexityByExports(tier, incomeSourceCount, exportCount, hasMarketInst);
+/** The income mix's leader cut, the same number as `LEADER_FROM` in `src/domain/display/stateProse/economyStateProse.js`
+ * (that prose desk stays out of the generators' first-paint graph, so the cut is read here, and
+ * `tests/generators/tailDefeconBatch3Lines.test.js` pins the two to agree). */
+export const INCOME_LEADER_FROM = 20;
+export const deriveEconomicComplexity = (tier, incomeSourceCount, exportCount, hasMarketInst, foodRecord = null, incomeSources = null) => {
+  const spread = !incomeSources || incomeSources.every((row) => !(Number(row?.percentage) >= INCOME_LEADER_FROM));
+  const label = complexityByExports(tier, spread ? incomeSourceCount : Math.min(incomeSourceCount, 8), exportCount, hasMarketInst);
   if (!foodRecord || foodRecord.growsMoreThanEats || !/surplus/i.test(label)) return label;
   // The small-place ladder's own no-surplus rung (no exports to sell, nothing over).
   return complexityByExports('hamlet', incomeSourceCount, 0, false);

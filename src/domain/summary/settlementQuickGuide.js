@@ -15,6 +15,7 @@
 import { crisisHookFor } from '../crisis/crisisHooks.js';
 import { resolveSibling } from '../facts/drawDeclared.js';
 import { factsOf } from '../facts/factsOf.js';
+import { atomHolds } from '../facts/factVocabulary.js';
 import { collectPlotHooks } from '../dossier/plotHooks.js';
 import { formatCount } from '../formatNumber.js';
 import { institutionDisplayName } from '../display/institutionDisplayName.js';
@@ -273,6 +274,30 @@ function scopeAgainstRecord(phrase, source) {
     out = out.replace('built for a pastoral life half-settled and half-moving', 'built on clan lines')
       .replace(', on pasture and earthwork', '');
   }
+  // TAIL-CRISIS-4 (K19, the layout line's law J1 carried to the quick guide): A CULTURE PHRASE NAMES ONLY WHAT STANDS.
+  // The tank is a water work on the roster (WATERWORKS_HOUSE, or a metropolis's water infrastructure; a village's wells
+  // and springs are not one), the bazaar a market (the market fact): each is struck where the record holds none
+  // (r2r-town-7: "Multiple water sources", wells and fountains, and no tank). A record with no roster is unread.
+  if (roster && out.includes('built around the tank and the bazaar')) {
+    const tank = rosterHolds(source, WATERWORKS_HOUSE) || rosterHolds(source, WATER_INFRASTRUCTURE);
+    const bazaar = factsOf(/** @type {Parameters<typeof factsOf>[0]} */ (source)).market !== false;
+    if (!tank || !bazaar) {
+      out = tank ? out.replace('the tank and the bazaar', 'the tank')
+        : bazaar ? out.replace('the tank and the bazaar', 'the bazaar')
+          : out.replace(/built around the tank and the bazaar, (?:in quarters by trade, )?/, '');
+    }
+  }
+  // TAIL-CRISIS-4 (K19): a pastoral life needs herds on the food record (the vocabulary's `livestock`) or pasture among
+  // the resources (`grazing_land`); where the record holds neither, the small place takes the large tiers' own twin
+  // (r2r-hamlet-41, a coastal port fed by its fish). An unanswered record (no food sources, no resources) keeps it.
+  if (out.includes('built for a pastoral life half-settled and half-moving')) {
+    const herds = atomHolds('livestock', /** @type {Parameters<typeof atomHolds>[1]} */ (factsOf(/** @type {Parameters<typeof factsOf>[0]} */ (source))));
+    const land = /** @type {{ nearbyResources?: unknown }} */ (config || {}).nearbyResources;
+    const pasture = Array.isArray(land) ? land.includes('grazing_land') : undefined;
+    if (herds !== true && pasture !== true && (herds === false || pasture === false)) {
+      out = out.replace('built for a pastoral life half-settled and half-moving', 'built on clan lines');
+    }
+  }
   // the guild: "guild and estate" only where the roster holds a guild
   // R2-CODE-B-SIDE item 5: the guild is a HOUSE on the roster, never a power that only contends (rosterHolds below).
   if (roster && out.includes('run by guild and estate') && !rosterHolds(source, GUILD_HOUSE)) {
@@ -371,6 +396,8 @@ function scopeAtSize(phrase, source) {
   return roster ? scopeAgainstRoster(out, source) : out;
 }
 
+/** A metropolis's water work (`institutionalCatalog.js`: "Multiple aqueducts, cisterns, and distributed fountains"). */
+const WATER_INFRASTRUCTURE = /\bwater infrastructure\b/i;
 /** A house that is waterworks: a conduit, a cistern, a fountain or a bathhouse (a well or a spring is not). */
 const WATERWORKS_HOUSE = /\baqueduct|\bcistern|\bwater system|\bwaterworks|\bfountain|\bbath(?:s|house)?\b/i;
 /** A house a gift endows: a church, a temple, a religious house, a school, a hospital or an almshouse (a shrine is not). */
@@ -494,7 +521,8 @@ function scopeAgainstRule(phrase, source, facts) {
     else if (!holds) out = out.replace(clause, twin);
   }
   if (occupied) out = out.replace(', under temple and guild', `, ${OCCUPIED_RULE}`).replace(', under the temple', `, ${OCCUPIED_RULE}`);
-  return out;
+  // TAIL-CRISIS-4 (K19): the clan twin already says the clan; its rule clause is not said twice
+  return out.replace(/built on clan lines, held by clan(?! and)/, 'built on clan lines');
 }
 
 /**

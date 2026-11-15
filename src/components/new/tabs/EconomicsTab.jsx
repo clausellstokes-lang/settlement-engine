@@ -116,7 +116,7 @@ function EconomicFlowsSection({ chains: chainsAsRead, institutionalServices = []
   // and white-screen the whole tab — in the live generate flow this section is
   // rendered without an error boundary around it. Filter to entries we can
   // safely .toLowerCase() before the .some/.find matching below.
-  const safeIncome = incomeSources.filter(inc => typeof inc?.source === 'string'); const chains = chainsAsRead.map(c => chainAsShown(c, town)); /* W2-C-LEAVES item 4(c): the state a crisis left (chainStateShown.js) */ const stoppedByCrisis = new Set(chains.filter((c, i) => c.status === 'impaired' && chainCrisisStateShown({ ...chainsAsRead[i], status: 'running' }, town) === 'impaired')); // TAIL-DISPLAY-ECON-2 (05779, 05780): a card the crisis stops (a famine's failed ground, a siege's stopped trade: chainStateShown.js) contributes nothing now
+  const safeIncome = incomeSources.filter(inc => typeof inc?.source === 'string'); const chains = chainsAsRead.map(c => chainAsShown(c, town)); /* W2-C-LEAVES item 4(c): the state a crisis left (chainStateShown.js) */ const crisisMarks = flowCrisisMarks(town, chainsAsRead, chains); // TAIL-DISPLAY-ECON-4 (X25.1): a card's mark and its income line read the crisis leaf (crisisStoppedRow.js), the journal's one voice
   const impairedCount   = chains.filter(c => c.status === 'impaired').length;
   const vulnerableCount = chains.filter(c => c.status === 'vulnerable').length;
   const entrepotCount   = chains.filter(c => c.entrepot).length;
@@ -216,7 +216,7 @@ function EconomicFlowsSection({ chains: chainsAsRead, institutionalServices = []
                 <p style={{fontSize:proseFontSize(FS.xxs, mobile),color:swatch.inkMag3,fontStyle:'italic',margin:'4px 0 0',lineHeight:1.3}}>{facts.upstreamNote}</p>
               )}
 
-              {/* Impairment detail */}
+              {crisisMarks.chain.get(chain) && <div data-testid="flow-crisis-mark" style={{fontSize:proseFontSize(FS.xs, mobile),color:swatch.inkMag2,fontStyle:'italic',marginTop:4,lineHeight:1.4}}>{crisisMarks.chain.get(chain)}</div>}{/* Impairment detail */}
               {needLine && (
                 <div style={{fontSize:proseFontSize(FS.xs, mobile),color:st.color,background:`${st.color}08`,padding:'4px 8px',marginTop:4,lineHeight:1.4}}>
                   {needLine}
@@ -241,7 +241,7 @@ function EconomicFlowsSection({ chains: chainsAsRead, institutionalServices = []
               )}
 
               {/* Income contribution */}
-              {incomeEntry && !stoppedByCrisis.has(chain) && (
+              {incomeEntry && !crisisMarks.incomeStopped(incomeEntry) && (
                 <div style={{fontSize:proseFontSize(FS.xxs, mobile),color:swatch.inkMag3,marginTop:4}}>
                   Contributes to <strong>{incomeEntry.source}</strong> - {incomeEntry.percentage}% of income
                 </div>
@@ -301,7 +301,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
   // null ⇒ NO live-flow section ⇒ the generation baseline below renders byte-identically.
   const campaigns = useStore(st => st.campaigns);
   const eco = economicState || s?.economicState;
-  const storesLine = eco?.foodSecurity?.foodRecord ? foodStoresWords(eco.foodSecurity.foodRecord) : '';
+  const storesLine = eco?.foodSecurity?.foodRecord ? foodStoresWords(eco.foodSecurity.foodRecord, s ? factsOf(s).crisis : null) : ''; // TAIL-DISPLAY-ECON-3 (X21, K7 · 18671's kin): the crisis handed in, the Tonight sheet's own call: one home
   // FOOD-4: the foodways line is the food record's, read through the one reader; never composed here.
   const foodwaysLine = foodwaysLineOf({ economicState: eco });
   // The derivation is deskHostArgs.js's, shared with the public prose composer (SW-B7b).
@@ -406,11 +406,11 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
       <EconomicsGlance eco={eco} settlement={s} prosColor={prosColor} tradeLabel={tradeLabel} ecoScore={ecoScore}
         headerRung={deskProse.prosperityHeader} economyRung={deskProse.prosperityRung} />
 
-      {/* ── INCOME SOURCES ──────────────────────────────────────────────── */}
+      {econOrdinaryTimesLine(s, eco)&&<p data-testid="economics-ordinary-times" style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch['#5A3A10'],fontStyle:'italic',margin:'0 0 10px',lineHeight:1.5}}>{econOrdinaryTimesLine(s, eco)}</p>}{/* ── INCOME SOURCES ──────────────────────────────────────────────── */}
       {eco.incomeSources?.length>0&&<Section title="Income Sources" collapsible defaultOpen>
         <div style={{display:'flex',flexDirection:'column',gap:5}}>
           {eco.incomeSources.map((src,i)=>{
-            const isCrim = src.isCriminal;
+            const isCrim = src.isCriminal; const shownDesc = incomeDescShown(s, src); // TAIL-DISPLAY-ECON-4 (X25.1): the share's mark, the Services tab's form (economicsCrisisMarks.js)
             const _barColor = isCrim ? '#4a1a4a' : `linear-gradient(to right,${prosColor},#b8860b)`;
             // ⛔ AUTHORED TEXT IS NEVER CLAMPED ON THE DOSSIER (owner, ODQ §934.23). The
             // 2026-09-18 car cured the PHONE, where a prose floor inside a clamp showed the
@@ -439,7 +439,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
               </div>
               <div style={{fontSize:proseFontSize(FS.xs, mobile),color:MUTED,lineHeight:1.45}}>
                 {isCrim&&<span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:swatch['#4A1A4A'],background:swatch['#F0E0F0'],padding:'0 4px',marginRight:4}}>Criminal</span>}
-                <strong style={{fontWeight:700,color:isCrim?'#4a1a4a':'#1c1409'}}>{src.source}</strong>{src.desc?` ${src.desc}`:''}
+                <strong style={{fontWeight:700,color:isCrim?'#4a1a4a':'#1c1409'}}>{src.source}</strong>{shownDesc?` ${shownDesc}`:''}
               </div>
             </div>
             );
@@ -623,11 +623,11 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
       {/* ── SHADOW ECONOMY ───────────────────────────────────────────────────── */}
       {(()=>{
         const sp = s?.economicState?.safetyProfile;
-        const bmc = sp?.blackMarketCapture || 0;
+        const bmc = shadowCaptureShown(sp) ?? 0; // TAIL-DISPLAY-ECON-5 (X30): the leaf the PDF prints through; silent where the record holds no illicit money
         const dragDesc = sp?.economicDragDesc;
         const crimChains = (s?.economicState?.activeChains||[]).filter(c=>c.needKey==='criminal_economy');
         const crimeTypes = sp?.crimeTypes || [];
-        if (!sp || bmc < 3) return null;
+        if (!sp || !bmc) return null;
 
         const sevColor = bmc>=30?'#8b1a1a':bmc>=15?'#8a3010':'#7a5010';
         const sevBg    = bmc>=30?'#fdf4f4':bmc>=15?'#fdf0e8':'#faf8e8';
@@ -660,7 +660,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
             ONE speaking position reached a first-paint reader on under two percent of the
             worlds this generator builds. The scale note travels WITH it, so nothing is
             doubled and the fold's own reader loses nothing. */}
-        <Section title={`Shadow Economy: ${bmc}% capture`} collapsible defaultOpen={bmc>=15}>
+        <Section title={`Shadow Economy: ${bmc}% of trade unrecorded`} collapsible defaultOpen={bmc>=15}>
           <div style={{display:'flex',flexDirection:'column',gap:10}}>
 
             {/* Capture rate + scale context */}
@@ -762,9 +762,9 @@ const BROUGHT_BANDS = GROWN_BANDS.map(([under, w]) => [under, w === 'about half'
  * @param {boolean} [famine] a famine in force (`facts/famine.js :: famineOf`), or a siege that has stopped the trade
  * (`chainStateShown.js :: tradeStoppedHere`): the bad season is not ahead, it is here (W2-C-LEAVES item 4(a); the cold
  * list REVIEW-W2A-3 #161: "a bad season would bring real hunger" under a famine; TAIL-DISPLAY-ECON-2, row 12961: the
- * same under a siege with nothing brought in)
+ * same under a siege with nothing brought in) @param {unknown} [band] the food record's band (`foodRecord.band`): Secure takes its own twin (TAIL-DISPLAY-ECON-5, X31: "go short" beside Secure in 177 of 720)
  */
-const shortWords = (pct, famine = false) => (pct <= 0 ? 'Between them, nobody goes short.'
+const shortWords = (pct, famine = false, band = null) => (pct <= 0 ? 'Between them, nobody goes short.' : band === 'secure' ? (famine ? 'Between them, nearly every household is fed for now.' : 'Between them, nearly every household is fed, and a bad season would leave some of them short.')
   : pct <= 5 ? (famine ? 'A few households still go short, and hunger is already here.' : 'A few households still go short, and a bad season would leave more of them hungry.')
   : pct <= 15 ? (famine ? 'Some households still go short, and hunger is already here.' : 'Some households still go short, and a bad season would leave more of them hungry.')
   : pct <= 35 ? (famine ? 'Many households go short, and hunger is already here.' : 'Many households go short, and a bad season would bring real hunger.')
@@ -786,7 +786,7 @@ function foodSentence(s, eco, fb, fbal, foodBar, foodDeficit, foodSurplus) {
     const over = fb.surplus / Math.max(1, fb.dailyNeed);
     return `${name} grows ${over < 0.1 ? 'a little more than it eats' : over < 0.3 ? 'more than it eats' : 'far more than it eats'}, with some to put by against a bad year.`;
   }
-  const short = shortWords(fbal.deficitPct, famineOf(s).famine || tradeStoppedHere(s)); // 12961: a siege's hunger is here too
+  const short = shortWords(fbal.deficitPct, famineOf(s).famine || tradeStoppedHere(s), eco?.foodSecurity?.foodRecord?.band); // 12961: a siege's hunger is here too; X31: the record's band
   if (!(fb.importCoverage > 0) || !carriers) return `No food comes into ${name} by trade.${magic} ${short}`;
   const grown = shareWords(fb.dailyProduction / Math.max(1, fb.dailyNeed), GROWN_BANDS, 'nearly all');
   const brought = shareWords(fb.importCoverage / (fb.rawDeficit || fb.importCoverage), BROUGHT_BANDS, 'nearly all the rest');
@@ -838,7 +838,7 @@ function NeedsNotMet({ needs, mobile }) {
  * the carrier, the food record) and the Institutions tab's impaired houses (`tabHelpers.js :: computeChainSets`); the
  * record is not touched. At the end of the file, so no line-keyed row above moves.
  */
-import { chainAsShown, chainCrisisStateShown, serviceStateShown } from '../../../domain/display/chainStateShown.js'; // W2-C-LEAVES-7 item 9: the card's reader lives in the leaf
+import { chainAsShown, serviceStateShown } from '../../../domain/display/chainStateShown.js'; // W2-C-LEAVES-7 item 9: the card's reader lives in the leaf
 import { chainNeedLine } from '../../../domain/display/chainNeedShown.js'; // W2-C-LEAVES-6 item 6
 import { computeChainSets } from '../tabHelpers.js';
 /** @param {unknown} town @returns {Set<string>} the houses the Institutions tab marks impaired, lower case */
@@ -855,7 +855,7 @@ function impairedHousesOf(town) {
  * in the present; it is LEFT OUT beside the page's own siege note (the Imports header, its goods and its empty-state
  * line). The record's imports are untouched; the needs line stands. At the end of the file, so no line-keyed row moves.
  */
-import { tradeStoppedHere } from '../../../domain/display/chainStateShown.js';
+import { tradeStoppedHere } from '../../../domain/display/chainStateShown.js'; import { shadowCaptureShown } from '../../../domain/display/shadowEconomyShown.js'; // X30: the Shadow Economy block's one floor, the PDF's too
 
 /**
  * THE ECONOMIC FLOWS HEADER COUNTS WHAT THE CARDS UNDER IT SHOW (TAIL-DISPLAY-ECON, the chair's ruling X2, 2026-11-14; the
@@ -877,3 +877,5 @@ function flowHeaderCount(chains, services, impairedHouses) {
   const words = active > 0 ? ` (${active} active${impaired > 0 ? ` · ${impaired} impaired` : ''})` : impaired > 0 ? ` (${impaired} impaired)` : '';
   return { active, impaired, words };
 }
+
+import { factsOf } from '../../../domain/facts/factsOf.js'; import { flowCrisisMarks, econOrdinaryTimesLine, incomeDescShown } from '../../../domain/display/economicsCrisisMarks.js'; // TAIL-DISPLAY-ECON-3 (X21): the stores sentence takes the town's crisis, as the Tonight sheet's call does; TAIL-DISPLAY-ECON-4 (X25.1): the income rows and the flow cards read the crisis leaf

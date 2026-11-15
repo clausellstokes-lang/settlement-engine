@@ -88,5 +88,46 @@ function foodNoteAsWorded(note, chain, record) {
     const ground = /** @type {{ resourceInputKey?: unknown } | null} */ (chain)?.resourceInputKey;
     return FARMLAND.has(String(ground)) ? note : 'Druidic cultivation supplements the depleted ground';
   }
+  // TAIL-DISPLAY-ECON-3 (23037): the timber branch's note claims a "sustainable yield" on a ground the record holds
+  // depleted (48 of the 49 cards that print it: the woodland cleared and timber bought in, or a marsh cut over); there
+  // the druids speed its regrowth, and a marsh is not a forest. An available ground keeps the note.
+  if (note === 'Druidic forest management accelerates regrowth and sustainable yield') {
+    const ground = String(/** @type {{ resourceInputKey?: unknown } | null} */ (chain)?.resourceInputKey ?? '');
+    if (!groundDepleted(record, ground)) return note;
+    return WOODLAND.has(ground) ? 'Druidic forest management speeds the regrowth of the cleared woodland' : 'Druidic tending speeds the regrowth of the depleted ground';
+  }
   return note;
+}
+
+/** The timber grounds (`data/resourceData.js`: the managed, coastal and mountain stands). */
+const WOODLAND = new Set(['managed_forest', 'shipbuilding_timber', 'mountain_timber']);
+
+/**
+ * Whether the record holds a ground depleted (`resourceAnalysis.resourceConditions`, the Resources tab's own reading).
+ * @param {unknown} record @param {string} ground
+ * @returns {boolean}
+ */
+function groundDepleted(record, ground) {
+  const rows = /** @type {{ resourceAnalysis?: { resourceConditions?: unknown } | null } | null} */ (record)?.resourceAnalysis?.resourceConditions;
+  return (Array.isArray(rows) ? rows : []).some((r) => {
+    const row = /** @type {{ key?: unknown, resourceKey?: unknown, condition?: unknown } | null} */ (r);
+    return (row?.key ?? row?.resourceKey) === ground && row?.condition === 'depleted';
+  });
+}
+
+/**
+ * THE ECONOMIC ROLE BESIDE THE FOOD RECORD'S PROVISION (TAIL-DISPLAY-ECON-5, the chair's ruling X32, 2026-11-15; vetoable
+ * by the owner). The magic profile's economic role (`magicProfile.js :: role`) is drawn from the arcane powers and the
+ * practitioners and never reads the food; the reliance reading above it on the Magic tab counts the food record's own
+ * provision (`foodMagicShare`, X10). So "Economic role: occasional" printed under "Reliance on magic: Relied upon" in 63
+ * of the census's 720 towns whose food record has magic making part of each day's food (a thorp fed a quarter by
+ * magic among them). A provision made every day is not occasional: the row prints the ladder's smallest word true of
+ * it ("common": regular, not foundational). A band of "common" or above, and every town without such a provision, keep
+ * the profile's word. The record is not touched.
+ * @param {unknown} record the settlement record
+ * @param {unknown} band the magic profile's economic band
+ * @returns {unknown} the band the row prints
+ */
+export function economicRoleBandShown(record, band) {
+  return (band === 'absent' || band === 'occasional') && foodMagicShare(record) > 0 ? 'common' : band;
 }

@@ -738,6 +738,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
     nativeNearbyResources,
     depletedResources,
     institutions || [], // TAIL-DEFECON-C (C1-A): the made list asks this town's own houses
+    config?.terrainType || null, // TAIL-DEFECON-C-3 (D30 (b)): a gathered good asks the record's own exploitation
   );
   const instServices = deriveInstitutionalServices(institutions || []);
   const serviceExports = deriveServiceExports(instServices, goodsOnlyRefusedChainsMake(activeChainsList)); // COHERENCE-AGREE-8 (F2's fifth writer): the services ask the leaf too
@@ -820,7 +821,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
   // must resolve identically across devices/locales — must be LAST
   keepRowsThePageBearsOut(incomeNormalized, { roster: instNamesLower, ground: nativeAvailableResources, exports: primaryExports }); // UPKEEP-16 (o re-ruled, D): an income row is borne out by the page
   incomeNormalized.sort((a, b) => b.percentage - a.percentage || compareCodepoint(a.source, b.source));
-  for (const entry of incomeNormalized) entry.desc = trueIncomeDesc(entry.desc, { roster: instNamesLower, besieged: stressArr.includes('under_siege'), imports: primaryImports, exports: primaryExports, chains: activeChainsList, top: entry === incomeNormalized[0], source: entry.source, managedForest: hasResource(['managed_forest']) || (hasResource(['shipbuilding_timber']) && hasInst('woodcutter')), grainFailed: _foodRecord?.failedSource === 'grain' }); // UPKEEP-8: each income line says only what the finished record holds
+  for (const entry of incomeNormalized) entry.desc = trueIncomeDesc(entry.desc, { roster: instNamesLower, besieged: stressArr.includes('under_siege'), imports: primaryImports, exports: primaryExports, chains: activeChainsList, top: entry === incomeNormalized[0], source: entry.source, managedForest: hasResource(['managed_forest']) || (hasResource(['shipbuilding_timber']) && hasInst('woodcutter')), grainFailed: _foodRecord?.failedSource === 'grain', fishFailed: _foodRecord?.failedSource === 'fish', fisheryExhausted: depletedResources.some((r) => /fish/.test(r)) && !hasResource(['fish']) }); // UPKEEP-8: each income line says only what the finished record holds
   const { label: baseProsperity } = computeBaseProsperity(
     tier,
     tradeRoute,
@@ -831,6 +832,10 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
     _foodSec,
   );
   const { prosperity, prosperityStanding } = deriveProsperityLabels(baseProsperity, standingBaseProsperity(tier, tradeRoute, institutions, config, instNames, incomeNormalized), config, institutions); // COHERENCE-UPKEEP-5 (R3): beside the printed label, the label with no crisis in force, the one draw replayed
+  // TAIL-DEFECON-4 (03703, X9 03932): a trade that 'thrives' and 'draws customers from surrounding settlements' is not
+  // said of a place whose own label is Subsistence, Struggling or Poor; it keeps the alchemist's existing plain line.
+  // The label is derived AFTER trueIncomeDesc (above), and nothing between reads a desc. No draw.
+  if (['Subsistence', 'Struggling', 'Poor'].includes(prosperity)) for (const entry of incomeNormalized) if (entry.desc === ALCHEMY_TRADE_LINE) entry.desc = ALCHEMIST_SUPPLEMENTS_LINE;
   // COHERENCE-UPKEEP (ruling 7): the guard assessment says what the place can pay for its hired force. Since
   // COHERENCE-UPKEEP-6 (the chair's ruling A) that is written AFTER the defence profile, which it reads
   // (steps/assembleSettlement.js, beside generateDefenseProfile): one home for pay on every surface.
@@ -872,7 +877,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
         incomeNormalized.length,
         primaryExports.length,
         hasInst('market', 'trading', 'merchant', 'guild'),
-        _foodSec?.foodRecord ?? null,
+        _foodSec?.foodRecord ?? null, incomeNormalized,
       ),
     };
 };

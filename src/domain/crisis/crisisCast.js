@@ -161,12 +161,16 @@ export const CAST_REASONS = Object.freeze({
     criminal_opportunity: 'its streets are where the crime lands',
   })),
   // SW-6 CRISIS-SURFACES (STYLE-RULINGS-2 A1, R1–R3): the fragments in the cast's own voice, no gender, no unread noun.
-  bruntLeast: 'the one with the least say in the house the crisis hits',
+  // TAIL-CRISIS-4 (K20, the chair's ruling of 2026-11-15, vetoable by the owner; a DECLARED MOVE of stored text): "the
+  // house the crisis hits" read as a household, and a famine hits the whole town. The reason says in plain words what the
+  // record holds: the person's place in a power whose stake is a loss (bruntCandidates' `losers`). The words name no
+  // power, so a rename never reaches them (factionRename.js's law for this vocabulary).
+  bruntLeast: 'the one with the least say in a power that loses by the crisis',
   // ROUND THREE, ruling (c) (the chair, 2026-11-13; the cut's #11 #13 #53 #55): "the least say" presumes a house of
   // several. In a house of ONE the person is named as its only member; a person who also holds the crisis's lever
   // (the cut's #268) is named as one of the house, never as the one with the least say.
-  bruntOnly: 'the only one in the house the crisis hits',
-  bruntMember: 'one of the house the crisis hits',
+  bruntOnly: 'the only one named here of a power that loses by the crisis',
+  bruntMember: 'one of a power that loses by the crisis',
   leverRuns: 'runs the office that decides how the crisis goes',
   leverInstitution: 'whoever runs it decides how the crisis goes, and nobody named here runs it',
   leverTemporary: 'nobody here could, so this one stepped in for the crisis',
@@ -238,7 +242,95 @@ export const STAKE_REASONS = Object.freeze({
   losesSeat: 'the seat bears the blame',
   split: 'gains and loses by it at once',
   untouched: 'it could side with either camp', // SW-6 (B3 A·C4): the page's label says "no stake yet"
+  leadsRevolt: 'it leads the revolt, and rises or falls with it', // TAIL-CRISIS-5 (K22): the power the revolt raised (RAISED_TO_LEAD)
+  // TAIL-CRISIS-6 (K24): the powers a crisis raises, each its stake by its own record (RAISED_BY_CRISIS)
+  holdsFood: 'it holds what is left of the food stores',
+  chargedWithSickness: 'it holds the emergency powers against the sickness',
+  leadsInquiry: 'it leads the inquiry into the betrayal',
+  // TAIL-CRISIS-6 (K25 (a)): K24's law carried to every party a crisis raises, and every power a crisis writes into
+  claimsToGovern: 'it claims the right to govern by other means',
+  courted: 'both sides are courting it, for a price',
+  creditorAgent: 'it speaks for the creditor the town owes',
+  holdsDebt: "its houses hold the crown's debt",
+  infiltrator: 'it is the outside interest with its own people placed here',
+  claimsSuccession: 'it presses its own claim to the succession',
+  leadsChallenge: 'it leads the challenge to the government',
+  speaksForNewcomers: 'it speaks for the newcomers',
+  aidsRevolt: 'it has been aiding the revolt in secret',
+  guildsThreatened: 'newcomers working outside the guilds threaten its hold on the trades',
+  claimantsNeedIt: 'every claimant needs its backing',
+  warNeedsIt: 'the call-up and the grieving have made it indispensable',
+  warDivides: 'contracts have made some of it rich while others have lost their trade routes',
+  revoltCutsLabour: 'the revolt has cut into its labour and its trade',
+  warCostsIt: 'trade disruption and requisitions are costing it',
+  someHoldDebt: "some of its houses hold the crown's debt",
+  termsWithOccupier: 'some of its families have made private terms with the new authority',
+  pressedToJudge: 'both sides press it to call the revolt just or sacrilegious',
 });
+
+/**
+ * THE POWER A CRISIS RAISES TO LEAD IT (TAIL-CRISIS-5, the chair's ruling K22 of 2026-11-15, vetoable by the owner; READ-ALL
+ * X9 22718: "Revolt Leadership has no stake yet · it could side with either camp", 8 towns). The slave revolt's own
+ * leadership is pushed onto the roster by the crisis itself (`generators/power/stressFactions.js`, under slave_revolt), so
+ * it is never untouched by it: where no other rule gives it a stake, its stake keeps the waverer's `split` (no cast role
+ * moves) and says what the record holds, that it leads the revolt. One row a kind; the name is the roster's own literal
+ * (tests/domain/tailCrisisBatch7.test.js pins it to stressFactions.js).
+ */
+export const RAISED_TO_LEAD = Object.freeze({ slave_revolt: 'Revolt Leadership' });
+
+/**
+ * THE POWERS A CRISIS RAISES, AND THE STAKE EACH ONE'S OWN RECORD SAYS (TAIL-CRISIS-6, the chair's ruling K24 of 2026-11-15,
+ * vetoable by the owner: "a power the crisis itself raised has the stake its name says"). `generators/power/stressFactions.js`
+ * pushes each onto the roster under its crisis with its own description; the name can be re-drawn at the label close (the
+ * Quarantine Council prints as "The Establishment" in one town of the 720), so a row reads the DESCRIPTION's opening, the
+ * roster's own literal (tests/domain/tailCrisisBatch8.test.js pins each to stressFactions.js), under that one kind only.
+ * Where no earlier rule gives such a power a stake it keeps the waverer's `split` (K22's form: no cast role moves), and its
+ * reason says what the record holds, never "it could side with either camp".
+ * K25 (a) (TAIL-CRISIS-6, the chair's ruling of 2026-11-15, vetoable by the owner): the same law for every party a crisis
+ * raises (`opens`: the description opens with the crisis's literal) and every standing power the crisis writes into (`adds`:
+ * the crisis appended its sentence to the power's description: "The arrival of skilled workers outside guild structures…").
+ * Each `text` is the shortest stretch of the crisis's literal that is the crisis's alone (the presumed-things walker reads a
+ * literal here as a line: a match key names no war, market, clergy, succession or occupation of its own).
+ * An `adds` row never speaks for a criminal power: stressFactions.js writes its merchants' sentences onto any name holding
+ * "guild" ("Thieves' Guild"), and that slip is its seat's (named in the hand-back), not a stake. Nor for the governing power,
+ * which answers for the crisis (K12: the page's `stakeShown`, "must answer for it · it governs here").
+ */
+export const RAISED_BY_CRISIS = /** @type {ReadonlyArray<readonly [kind: string, text: string, reason: keyof typeof STAKE_REASONS, how: 'opens' | 'adds']>} */ (Object.freeze(/** @type {Array<[string, string, keyof typeof STAKE_REASONS, 'opens' | 'adds']>} */ ([
+  ['famine', 'Whoever controls the remaining food reserves', 'holdsFood', 'opens'],
+  ['plague_onset', 'Healers, ', 'chargedWithSickness', 'opens'],
+  ['recently_betrayed', 'Informal coalition demanding answers', 'leadsInquiry', 'opens'],
+  ['politically_fractured', 'Claims legitimate authority through different means', 'claimsToGovern', 'opens'],
+  ['politically_fractured', 'Would support stability, if a price can be agreed.', 'courted', 'opens'],
+  ['indebted', 'Resident agent of the external creditor', 'creditorAgent', 'opens'],
+  ['indebted', "A coalition of noble houses that hold the crown's debt.", 'holdsDebt', 'opens'],
+  ['infiltrated', 'An external interest with its own people placed inside the settlement.', 'infiltrator', 'opens'],
+  ['succession_void', 'Hereditary or institutional claim; has legal arguments', 'claimsSuccession', 'opens'],
+  ['succession_void', 'Popular support; questionable legitimacy; moving fast.', 'claimsSuccession', 'opens'],
+  ['succession_void', 'A noble house with a plausible hereditary claim', 'claimsSuccession', 'opens'],
+  ['succession_void', 'A rival noble house backed by popular sentiment', 'claimsSuccession', 'opens'],
+  ['insurgency', 'A group of the well-off who have concluded the current governing arrangement is no longer viable.', 'leadsChallenge', 'opens'],
+  ['insurgency', "Organised common-population movement challenging the governing authority's legitimacy.", 'leadsChallenge', 'opens'],
+  ['mass_migration', 'The incoming population has begun self-organising.', 'speaksForNewcomers', 'opens'],
+  ['slave_revolt', 'Free citizens, ', 'aidsRevolt', 'opens'],
+  ['slave_revolt', 'Organised leadership of the enslaved population', 'leadsRevolt', 'opens'],
+  ['mass_migration', 'The arrival of skilled workers outside guild structures', 'guildsThreatened', 'adds'],
+  ['succession_void', 'latent noble power into active leverage.', 'claimantsNeedIt', 'adds'],
+  ['wartime', 'The pastoral burden of', 'warNeedsIt', 'adds'],
+  ['wartime', 'War contracts have made the well-connected wealthy.', 'warDivides', 'adds'],
+  ['wartime', 'Trade disruption and requisition are hurting the bottom line.', 'warCostsIt', 'adds'],
+  ['slave_revolt', 'The revolt has disrupted labour supply', 'revoltCutsLabour', 'adds'],
+  ['slave_revolt', 'Under pressure from both sides to publicly declare the revolt either just or sacrilegious.', 'pressedToJudge', 'adds'],
+  ['indebted', 'Several of these houses hold crown debt', 'someHoldDebt', 'adds'],
+  ['occupied', 'several noble families have made private accommodations with the new authority', 'termsWithOccupier', 'adds'],
+]).map((row) => Object.freeze(row))));
+
+/** The stake reason the crisis's own record gives a power it raised or wrote into, or null. @param {string} kind @param {CastFaction} f @param {boolean} isGov @returns {string | null} */
+function raisedReasonOf(kind, f, isGov) {
+  const desc = typeof (/** @type {{ desc?: unknown }} */ (f)).desc === 'string' ? String((/** @type {{ desc?: unknown }} */ (f)).desc) : '';
+  const row = RAISED_BY_CRISIS.find(([k, text, , how]) => k === kind
+    && (how === 'opens' ? desc.startsWith(text) : desc.includes(text) && !isGov && factionArchetype(f) !== A.CRIMINAL));
+  return row ? STAKE_REASONS[row[2]] : null;
+}
 
 // ── The levers: the houses each kind turns on, and the faces that run them ─────────────────
 
@@ -549,7 +641,7 @@ export function deriveStakes(s, kind) {
     else if (gains) stake = { factionId: name, stake: 'gains', reason: gains };
     else if (loses) stake = { factionId: name, stake: 'loses', reason: STAKE_REASONS.loses };
     else if (losesSeat) stake = { factionId: name, stake: 'loses', reason: STAKE_REASONS.losesSeat };
-    else stake = { factionId: name, stake: 'split', reason: STAKE_REASONS.untouched };
+    else stake = { factionId: name, stake: 'split', reason: /** @type {Record<string, string>} */ (RAISED_TO_LEAD)[kind] === name ? STAKE_REASONS.leadsRevolt : (raisedReasonOf(kind, f, isGov) || STAKE_REASONS.untouched) };
     return stake;
   });
 }

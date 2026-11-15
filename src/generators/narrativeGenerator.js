@@ -40,7 +40,7 @@ import { cardInstitutionVeilOf } from '../domain/people/cardPowers.js';
 import { drawTies } from './people/ties.js';
 import { dealGoals } from './people/goals.js';
 import { pickVariant } from '../kernel/proseHash.js';
-import { selectOriginBody, supportChannelsOf } from './narrative/settlementOriginProse.js'; import { FOUNDER_ADMITS, FOUNDING_REASON_ADMITS, NAMES_A_FOUNDER, admittedRow, foundingStateOf, oneFounderRow } from './narrative/foundingRowAdmits.js'; // R2-CODE-A-5: one line, so no cited line moves
+import { selectOriginBody, supportChannelsOf } from './narrative/settlementOriginProse.js'; import { FOUNDER_ADMITS, FOUNDING_REASON_ADMITS, NAMES_A_FOUNDER, admittedRow, foundingStateOf, founderForOrigin, oneFounderRow } from './narrative/foundingRowAdmits.js'; // R2-CODE-A-5: one line, so no cited line moves
 import { resolvePrimaryStress } from './stressPriority.js';
 import { migrationDirectionOfStress, migrationDirectionOfConfig } from '../domain/migrationDirection.js';
 import { pick, pickRandom, pickRandom2, random01 } from './helpers.js';
@@ -418,9 +418,9 @@ export const genArrivalDetail = (
   // canonical index-0 note, byte-identical to the old behaviour.
   // STRESS_NOTES (now variant pools, canonical-at-zero) lives in src/data/narrativeData.js.
 
-  const foundingState = foundingStateOf(config, economicContext, worldLaw), founders = FOUNDERS_BY_TIER[tier] || FOUNDERS_BY_TIER.village, drawnReason = pick(reasonPool), foundedBy = admittedRow(founders, pick(founders), FOUNDER_ADMITS, foundingState); return { // R2-CODE-A-5 (#488 #594 #845, #571/#916): a refused row resolves draw-free to the next admitted one; R2-CODE-A-13: the two picks in their order
+  const foundingState = foundingStateOf(config, economicContext, worldLaw), founders = FOUNDERS_BY_TIER[tier] || FOUNDERS_BY_TIER.village, drawnReason = pick(reasonPool), admittedReason = admittedRow(reasonPool, drawnReason, FOUNDING_REASON_ADMITS, foundingState, NAMES_A_FOUNDER), foundedBy = founderForOrigin(founders, admittedRow(founders, pick(founders), FOUNDER_ADMITS, foundingState), admittedReason, foundingState); return { // FB (ruling N17): the founder resolves draw-free to one the Origin row agrees with, before FA moves the row // R2-CODE-A-5 (#488 #594 #845, #571/#916): a refused row resolves draw-free to the next admitted one; R2-CODE-A-13: the two picks in their order
     age: null, // filled in by historyGenerator
-    reason: oneFounderRow(reasonPool, admittedRow(reasonPool, drawnReason, FOUNDING_REASON_ADMITS, foundingState, NAMES_A_FOUNDER), foundedBy, FOUNDING_REASON_ADMITS, foundingState), // R2-CODE-A-9: a refused row resolves onto no second founder; R2-CODE-A-13 (ruling (4)): a founder row stands only beside its own founder
+    reason: oneFounderRow(reasonPool, admittedReason, foundedBy, FOUNDING_REASON_ADMITS, foundingState), // R2-CODE-A-9: a refused row resolves onto no second founder; R2-CODE-A-13 (ruling (4)): a founder row stands only beside its own founder
     foundedBy,
     initialChallenge: pick(
       CHALLENGES_BY_ROUTE[challengeRoute] || CHALLENGES_BY_ROUTE.road,

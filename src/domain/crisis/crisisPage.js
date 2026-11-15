@@ -27,6 +27,9 @@ import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { speakTierNoun } from '../display/stateProse/tierVoice.js';
 import { tierNounFor } from '../display/stateProse/weaveBlock.js';
 import { migrationDirectionOf } from './migrationDirection.js';
+import { governingFactionOf } from '../rulingPower.js';
+import { pluralPowerName } from '../display/governanceAccount.js';
+import { powerSentenceName } from '../display/powerSentenceName.js';
 
 /** The page's one copy constant, on every surface that prints it. */
 export const CRISIS_PAGE_COPY = Object.freeze({
@@ -55,7 +58,17 @@ export const CRISIS_PAGE_COPY = Object.freeze({
   begunByYou: 'begun by your event',
   // SW-6 CRISIS-SURFACES (B3, A·C4: "split. not touched yet" contradicted itself on every untouched row): a power
   // the crisis has not touched prints as having no stake yet, never as split.
-  stake: Object.freeze({ gains: 'gains', loses: 'loses', split: 'split', untouched: 'no stake yet' }),
+  // TAIL-CRISIS batch 4 (the chair's ruling K12; READ-ALL B12521 B13860 B18039 13199 06464 13370: "Merchant Guilds no stake
+  // yet" where the record has Merchant Guilds in an open quarrel, and "City-State Council no stake yet" in a migration whose
+  // own text names the council's choice): the label has its verb, agreeing with the name (`pluralPowerName`); a power the
+  // record's quarrels name is said to be at odds already, and the governing power, which the crisis's choice falls on, to
+  // answer for it (`stakeShown`). The record's stakes are untouched: the page reads them.
+  stake: Object.freeze({
+    gains: 'gains', loses: 'loses', split: 'split',
+    untouched: 'has no stake yet', untouchedMany: 'have no stake yet',
+    atOdds: 'is already at odds', atOddsMany: 'are already at odds',
+    answers: 'must answer for it',
+  }),
   // STYLE-AUDIT row 21 (W4 PEOPLE, second seat, 2026-11-07): the event line prints the kind as its
   // heading; the cast's classification (natural, social, engineered, external) is machinery and is
   // no longer printed. A migration says which way it runs (WAVE-RULINGS item 8: both sets).
@@ -80,7 +93,7 @@ export const CRISIS_PAGE_COPY = Object.freeze({
  * @typedef {Object} CrisisPageStake
  * @property {string} factionId
  * @property {string} doorId
- * @property {'gains' | 'loses' | 'split' | 'untouched'} stake  'untouched': the record's split stake with the untouched reason
+ * @property {StakeShown} stake  'untouched': the record's split stake with the untouched reason (and its twins: `stakeShown`)
  * @property {string} reason
  *
  * @typedef {Object} CrisisPageLever
@@ -169,14 +182,48 @@ function eventLine(label, entry, noun) {
   return speakTierNoun(`${parts.join(', ')}.`, noun);
 }
 
+/** @typedef {'gains' | 'loses' | 'split' | 'untouched' | 'untouchedMany' | 'atOdds' | 'atOddsMany' | 'answers'} StakeShown */
+
 /**
- * The stake the page prints: the record's own, except a split that is the untouched power's (the record keeps
- * `split` for the waverer's rule; the reader is told the power has no stake yet).
- * @param {{ stake: 'gains' | 'loses' | 'split', reason: string }} k
- * @returns {'gains' | 'loses' | 'split' | 'untouched'}
+ * The others a power is in an open quarrel with, by the record's own quarrels (`powerStructure.conflicts`, the settled
+ * list the page's Tensions block prints), each by its prose form; [] where the record names none.
+ * @param {PageSettlement} s @param {string} name @returns {string[]}
  */
-function stakeShown(k) {
-  return k.stake === 'split' && k.reason === STAKE_REASONS.untouched ? 'untouched' : k.stake;
+function quarrelsOf(s, name) {
+  const rows = /** @type {{ powerStructure?: { conflicts?: unknown } }} */ (s).powerStructure?.conflicts;
+  /** @type {string[]} */
+  const out = [];
+  for (const c of Array.isArray(rows) ? rows : []) {
+    const parties = Array.isArray(c?.parties) ? c.parties.map(str) : [];
+    if (!parties.includes(name)) continue;
+    for (const p of parties) if (p && p !== name && !out.includes(powerSentenceName(p))) out.push(powerSentenceName(p));
+  }
+  return out;
+}
+
+/** The shown stakes of a power the crisis has not touched: printed as no row (K25 (c)). */
+const UNTOUCHED_SHOWN = new Set(['untouched', 'untouchedMany']);
+
+/** @param {string[]} names @returns {string} "A", "A and B", "A, B and C" */
+const andList = (names) => (names.length < 2 ? names.join('') : `${names.slice(0, -1).join(', ')} and ${names[names.length - 1]}`);
+
+/**
+ * The stake the page prints, and its reason: the record's own, except a split that is the untouched power's (the record
+ * keeps `split` for the waverer's rule; the reader is told the power has no stake yet). TAIL-CRISIS batch 4 (K12): an
+ * untouched power is not said to have no stake where the record makes that false. The governing power answers for the
+ * crisis (its choice is the one the crisis text names: "City-State Council, which can neither turn people away nor keep
+ * them fed"); a power the record's quarrels name is already at odds, with whom. Display only: no record moves, no draw.
+ * @param {PageSettlement} s @param {string} govName the governing power's name, or ''
+ * @param {{ factionId: string, stake: 'gains' | 'loses' | 'split', reason: string }} k
+ * @returns {{ stake: StakeShown, reason: string }}
+ */
+function stakeShown(s, govName, k) {
+  if (!(k.stake === 'split' && k.reason === STAKE_REASONS.untouched)) return { stake: k.stake, reason: k.reason };
+  const many = pluralPowerName(k.factionId);
+  if (govName && k.factionId === govName) return { stake: 'answers', reason: many ? 'they govern here' : 'it governs here' };
+  const others = quarrelsOf(s, k.factionId);
+  if (others.length) return { stake: many ? 'atOddsMany' : 'atOdds', reason: `in ${many ? 'their' : 'its'} own quarrel with ${andList(others)}` };
+  return many ? { stake: 'untouchedMany', reason: k.reason.replace(/^it\b/, 'they') } : { stake: 'untouched', reason: k.reason };
 }
 
 /**
@@ -197,6 +244,8 @@ export function composeCrisisPage(settlement) {
   // identity. The record's own sentences (summary, hook, the viability note) are their
   // writers' business and are not re-spoken here.
   const noun = tierNounFor(typeof s.tier === 'string' ? s.tier : '');
+  const governing = /** @type {{ faction?: unknown, name?: unknown } | null} */ (governingFactionOf(/** @type {never} */ (s)));
+  const govName = governing ? str(governing.faction) || str(governing.name) : '';
   /** @template T @param {T} text @returns {T} a non-string passes through untouched */
   const speak = (text) => /** @type {T} */ (typeof text === 'string' ? speakTierNoun(text, noun) : text);
   const sections = entries.map(({ entry, index }) => {
@@ -226,7 +275,14 @@ export function composeCrisisPage(settlement) {
       })),
       absent: (cast?.absent || []).map((a) => ({ role: a.role, roleLabel: CRISIS_ROLE_LABEL[a.role] || a.role, reason: speak(a.reason) })),
       edited,
-      stakes: (entry.cast?.stakes || []).map((k) => ({ factionId: k.factionId, doorId: castDoorId(s, 'faction', k.factionId), stake: stakeShown(k), reason: speak(k.reason) })),
+      // TAIL-CRISIS-6 (the chair's ruling K25 (c), 2026-11-15, vetoable by the owner): a power the crisis has truly not
+      // touched (no stake of its own, no quarrel the record names, not the governing power) takes NO ROW: "has no stake yet"
+      // claims a future nobody knows, and silence is true. Its record keeps its `split` for the waverer's rule.
+      stakes: (entry.cast?.stakes || []).flatMap((k) => {
+        const shown = stakeShown(s, govName, k);
+        if (UNTOUCHED_SHOWN.has(shown.stake)) return [];
+        return [{ factionId: k.factionId, doorId: castDoorId(s, 'faction', k.factionId), stake: shown.stake, reason: speak(shown.reason) }];
+      }),
       levers: (entry.cast?.levers || []).map((l) => ({
         institution: l.institution,
         doorId: castDoorId(s, 'institution', l.institution),

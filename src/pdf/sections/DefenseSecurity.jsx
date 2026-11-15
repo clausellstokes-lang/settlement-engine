@@ -108,7 +108,7 @@ export function DefenseSecurity({ settlement, narrativeMode, vm, stateProse }) {
         THREAT ASSESSMENT
       </Text>
       <Text style={{ ...type.caption, fontSize: pt['7.5'], color: palette.muted, fontStyle: 'italic', marginBottom: 4 }}>
-        Each bar shows how ready the settlement is for that threat, as judged at the first survey; Disasters & Famine is re-judged as the campaign advances. A longer bar is safer.
+        Each bar shows how ready the settlement is for that threat, as judged at the first survey; Disasters & Famine is re-judged as your campaign goes on. A longer bar is safer.
       </Text>
       {d.threatReadiness.map((row, i) => (
         <View
@@ -269,7 +269,10 @@ export function DefenseSecurity({ settlement, narrativeMode, vm, stateProse }) {
                   }}
                 >
                   <Text style={{ ...type.body_em, fontSize: pt['9.5'], color: palette.bad, marginBottom: 1 }}>
-                    {label(op)}
+                    {/* TAIL-EXPORTS-PDF-2 (the chair's ruling E18): the house by its label, the one display leaf
+                        (institutionDisplayName.js :: institutionHouseLabel): no catalogue grade ("(Powerful)") beside
+                        a power the record calls Minor or Suppressed. */}
+                    {typeof op?.name === 'string' ? institutionHouseLabel(op.name) : label(op)}
                   </Text>
                   {op?.note && (
                     <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.muted, lineHeight: 1.35 }}>
@@ -368,3 +371,4 @@ export function DefenseSecurity({ settlement, narrativeMode, vm, stateProse }) {
 
 export default DefenseSecurity;
 import { NO_FORCE_LEAD, NO_FORCE_REST } from '../../domain/display/noForceLine.js'; // TAIL-EXPORTS-PDF batch 1 (ruling E1)
+import { institutionHouseLabel } from '../../domain/display/institutionDisplayName.js'; // TAIL-EXPORTS-PDF-2 (E18)

@@ -122,7 +122,7 @@ function overviewPage(vm, { historyPrinted = true } = {}) {
       `- **${esc(x.label || 'Crisis')}**: ${esc(x.summary || '')}${x.hook ? ` *Hook: ${esc(x.hook)}*` : ''}`)) : null,
     o.arrivalScene ? md('', '## Arrival', `> ${esc(o.arrivalScene)}`) : null,
     o.pressureSentence ? md('', `*${esc(o.pressureSentence)}*`) : null,
-    o.settlementReason ? md('', '## Why this place exists', esc(o.settlementReason)) : null,
+    o.settlementReason ? md('', '## Settlement Origin', esc(o.settlementReason)) /* TAIL-EXPORTS-PDF-3 (ruling E23, the heading lent): the Overview tab's heading over the same line */ : null,
     // The historical character prints once per journal: on the History page where the variant has
     // one, else here (the keep-on rule; the chair's B4 ruling (2), 2026-11-09).
     !historyPrinted && o.character ? md('', '## Character', esc(o.character)) : null,
@@ -377,8 +377,8 @@ function resourcesPage(vm) {
     '',
     kv('Terrain', r.terrain),
     kv('Strategic value', typeof r.strategicValue === 'object' ? (r.strategicValue?.label ?? r.strategicValue?.value) : r.strategicValue),
-    kv('Nearby resources', (r.nearbyAbundant || []).map(x => humanize(label(x) || x)).join(', ')),
-    kv('Depleted', (r.nearbyDepleted || []).map(x => humanize(label(x) || x)).join(', ')),
+    kv('Nearby resources', (r.nearbyAbundant || []).map(nearbyResourceName).join(', ')),
+    kv('Depleted', (r.nearbyDepleted || []).map(nearbyResourceName).join(', ')),
     (r.chainRows || []).length ? md('', '## Exploitation',
       '| Resource | Status | Processing | Output |',
       '| --- | --- | --- | --- |',
@@ -593,3 +593,14 @@ export function buildJournalPages(vm, { variant = 'canon_dossier', faithUnlocked
 }
 
 export default buildJournalPages;
+
+/**
+ * TAIL-DISPLAY-CIVIC-4 (V11, the chair's ruling of 2026-11-15 03:17 UTC): a nearby resource's name has one home, the
+ * catalogue's label (`resourceDisplayName.js :: RESOURCE_DISPLAY_LABELS`, which the Resources tab prints): "Mountain Pass",
+ * not the key through a formatter ("Defended Pass"). A key the table does not hold keeps the old words.
+ * @param {string} x @returns {string}
+ */
+function nearbyResourceName(x) {
+  return Object.hasOwn(RESOURCE_DISPLAY_LABELS, x) ? RESOURCE_DISPLAY_LABELS[x] : humanize(label(x) || x);
+}
+import { RESOURCE_DISPLAY_LABELS } from '../domain/display/resourceDisplayName.js';

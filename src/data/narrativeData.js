@@ -24,7 +24,7 @@ export const ARRIVAL_SCENES = {
   ],
   river: [
     (r) =>
-      "The smell of the river reaches you before the settlement does: clean water, reeds, the particular mud of a working waterfront.",
+      "The smell of the river reaches you before the settlement does: clean water, reeds, the particular mud of a bank that people use every day.",
     (r) =>
       `${r} runs along the water the way settlements do when water is the reason they exist: practical, a little chaotic at the waterfront, tidier as you move inland.`,
     { text: (r) =>
@@ -70,7 +70,7 @@ export const ARRIVAL_SCENES = {
     (r) =>
       `${r} is ordinary in the best sense: a place where people live and work and argue and sleep, which is most of what places are for.`,
     { text: (r) =>
-      `The road into ${r} becomes a street at a point you can't precisely identify. The settlement grows around you gradually.`, crisis: ['any'] },
+      `The road into ${r} becomes part of the settlement at a point you can't precisely identify. The houses gather around you gradually.`, crisis: ['any'] },
     (r) =>
       `${r} is neither impressive nor disappointing from the approach. It is what it is, which is a working settlement of reasonable size doing reasonable things.`,
     { text: (r) =>
@@ -207,12 +207,12 @@ export const STRESS_DESCS = {
     { text: r =>
       `${r} is going about its business. The market is open, the streets are busy, the gates are attended by soldiers whose armour is not local. Everyone is doing what they are supposed to be doing, which is the point.`, needs: ['market', 'gate'] },
     r =>
-      `${r}'s street signs have been repainted in two languages, the local one second. The new lettering is neat, official, and everywhere, which is how you learn the occupation intends to stay.`,
+      `${r}'s notices are posted in two languages now, the local one second. The new lettering is neat, official, and on every door that matters, which is how you learn the occupation intends to stay.`,
     { text: r =>
       `At ${r}'s gate the queue divides in two: residents with papers, and everyone else. The residents' line is longer and moves slower, and no one in it complains where the soldiers can hear.`, needs: ['gate'] },
     // The Voice Program wave 4 (2026-10-02): structure-free, so a settlement with no wall, gate, market or guard
     // still opens on its stress (src/generators/narrative/arrivalScene.js draws only the vignettes whose structures it holds).
-    (n) => `Strangers in foreign colours stand where the roads meet in ${n}, and the locals walk around them as if they were furniture nobody wanted.`,
+    (n) => `Strangers in foreign colours stand about in the middle of ${n}, and the locals walk around them as if they were furniture nobody wanted.`,
   ],
   politically_fractured: [
     { text: r =>
@@ -373,11 +373,17 @@ export const STRESS_DESCS = {
     { text: r =>
       `There are more soldiers than citizens visible on ${r}'s main street, and the citizens are the ones stepping aside. A requisition column is being loaded in the square: grain, cloth, iron, and the settlement's own carts to carry it away.`, needs: ['market', 'soldiers'] },
     { text: r =>
-      `${r} is prosperous in a way that feels wrong. The forges work past dark, the warehouses are full, the coin is moving, and all of it points one direction, toward a war that is not fought here but is paid for here.`, needs: ['institution: smith'], excludes: ['crisis: hunger', 'crisis: under_siege', 'war: front'] },
+      `${r} is busy in a way that feels wrong. The forge fires burn past dark, the coin is moving, and all of it points one direction, toward a war that is not fought here but is paid for here.`, needs: ['institution: smith', 'prosperity: ≥ moderate'], excludes: ['crisis: hunger', 'crisis: under_siege', 'war: front'] }, // TAIL-NARRATIVE-5 (N18 (1)): the coin moves only where the record's prosperity is not below moderate
     r =>
       `${r}'s noticeboard is a wall of requisition orders, each stamped, each superseding the last. At its foot, a smaller paper, hand-lettered: prayers offered nightly, all welcome.`,
     r =>
       `The horses in ${r}'s paddocks are old, or lame, or foals. Every sound animal of working age has a receipt where it used to be, and the receipts do not say when the crown returns them.`,
+    // TAIL-NARRATIVE-5 (N18 (1)): THE SLOT IS KEPT: a poor town at war takes the twin that says what the war takes, reached
+    // only by resolution where [3] is drawn and refused (arrivalScene.js :: drawAdmitted), so no draw moves.
+    { text: r =>
+      `${r} is busy in a way that feels wrong for a place this poor. The forge fires burn past dark, but the coin they earn leaves with the carts, and all of it points one direction, toward a war that is not fought here but is paid for here.`,
+    twinOf: '{name} is busy in a way that feels wrong. The forge fires burn past dark, the coin is moving, and all of it points one direction, toward a war that is not fought here but is paid for here.',
+    needs: ['institution: smith'], excludes: ['prosperity: ≥ moderate', 'crisis: hunger', 'crisis: under_siege', 'war: front'] },
   ],
   religious_conversion: [
     { text: r =>
@@ -385,7 +391,7 @@ export const STRESS_DESCS = {
     { text: r =>
       `The shrine at ${r}'s gate has been recently altered: one symbol chiselled away, another set in its place, the old outline still faintly visible beneath the new. Someone did this carefully. Someone else has been scratching at the replacement.`, needs: ['institution: temple', 'gate'] },
     { text: r =>
-      `${r} is observing a holy day, and you cannot tell which one. Some shops are shut and draped; others are pointedly open. Two processions are forming in different quarters, and the people watching each are counting who watches the other.`, needs: ['population: ≥ middling'] }, // R2-CODE-A-4 (CENSUS-2 c/quarters): shops and quarters are a size error below the middling band (ruling (f))
+      `${r} is observing a holy day, and you cannot tell which one. Some shops are shut and draped; others are pointedly open. Two processions are forming at opposite ends of the settlement, and the people watching each are counting who watches the other.`, needs: ['population: ≥ middling'] }, // R2-CODE-A-4 (CENSUS-2 c/quarters): shops and quarters are a size error below the middling band (ruling (f))
     { text: r =>
       `The bells of ${r} ring twice for every hour: one set of chimes, then another from a different quarter, a beat later and out of tune. Nobody in the street looks up.`, needs: ['institution: temple', 'population: ≥ middling'] }, // R2-CODE-A-4 (CENSUS-2 c/quarters): a different quarter, at the middling band
     { text: r =>
@@ -405,30 +411,30 @@ export const STRESS_DESCS = {
     r =>
       `One building in ${r} is shuttered and scorched, the only burned one in sight, which tells you the fire was a statement, not an accident.`, // R2-CODE-A-4 (record 386 (3)/(4)): no manacle-maker's shop the roster cannot name; read where it prints, a hamlet of 48 up
     r =>
-      `${r}'s field gangs work without overseers today, or the overseers have dressed like the gangs. From the road you cannot tell which, and that is the whole story of the settlement this season.`,
+      `${r}'s field hands work without overseers today, or the overseers have dressed like the hands. From the road you cannot tell which, and that is the whole story of the settlement this season.`,
   ],
 };
 
 export const STRESS_NOTES = {
     under_siege: [
-      'The founders chose this place for its trade, water and good ground. Now it is under siege, and none of that matters until the siege is broken.',
-      'The site was chosen for trade, water, and good ground, none of which matters to the people now deciding whether its walls can hold.',
-      'The founders built walls in case they were ever needed. They are needed now.',
+      'Whatever the settlement was built for, it is under siege now, and nothing else matters until the siege is broken.',
+      'Whatever the site was chosen for matters little to the people now deciding whether its walls can hold.',
+      'These walls were built in case they were ever needed. They are needed now.', // TAIL-NARRATIVE-5 (N18 (2)): a note claims nothing of the founding; who built the walls is not on the record
     ],
     famine: [
-      'The settlers chose this land because it fed them well. Now the harvests are failing and families are going hungry.',
-      'This ground fed the founders well enough to make them stay. This year it has not fed their grandchildren.',
-      'The land that drew the first families here is the same land, but the harvests have come in short, and the winter ahead will be hard.',
+      'This place has fed its people well enough in other years. Now its food is failing and families are going hungry.', // TAIL-NARRATIVE-5 (N18 (2)): no founding cause; no harvest where the failed source may be the catch or the herds
+      'Whatever fed the settlement in other years has failed it this year, and its children are going hungry.',
+      'The country around the settlement looks the same as ever, but the food has come in short, and the winter ahead will be hard.',
     ],
     occupied: [
-      'The founders governed themselves. Now foreign officers give the orders, and the settlement\'s own rulers answer to them.',
-      "The founders came here to be far from other people's rule. Other people rule it now.",
-      'The founders assumed the settlement would always make its own decisions. Under occupation, it no longer does.',
+      'The settlement\'s own rulers used to give the orders. Now foreign officers give them, and those rulers answer to them.', // TAIL-NARRATIVE-5 (N18 (2)): no founding claimed: a crown's or a consortium's founding did not govern itself
+      "Nobody here chose the people who rule it now, and they answer to someone far away.",
+      'The settlement always made its own decisions, or believed it did. Under occupation, it no longer does.',
     ],
     politically_fractured: [
-      'The settlement was founded by people who agreed on its purpose. That consensus no longer exists.',
-      'The founders pulled together in one direction. Their descendants work as hard, but no longer agree on where they are going.',
-      'A shared purpose held the founders together. Their descendants remember that purpose differently, and the settlement has split along those lines.',
+      'The people of the settlement no longer agree on what it is for, and nobody expects them to agree again soon.',
+      'Its people work as hard as they ever did, but no longer agree on where the settlement is going.',
+      'Every power here tells the settlement\'s story its own way, and the settlement has split along those lines.', // TAIL-NARRATIVE-5 (the chair's style-law red): the retired word's word; every printing town holds two powers or more
     ],
     indebted: [
       'The first settlers built something worth having. Their descendants have borrowed against it until the settlement owes more than it owns.',
@@ -436,19 +442,19 @@ export const STRESS_NOTES = {
       'What the founders built was solid enough to borrow against, and it has been, again and again; the lenders now own much of it.',
     ],
     recently_betrayed: [
-      'The settlement was founded by a few families who trusted each other. One of their own has just broken that trust.',
-      'This settlement began as a promise between a few families, and someone inside has just broken it.',
-      'The founders survived by trusting each other because they had no alternative. Their descendants had an alternative, and one of them took it.',
+      'The settlement runs on trust between its households, and one of its own has just broken that trust.',
+      'Life here rests on promises kept between neighbours, and someone inside has just broken one.',
+      'People here trusted each other without thinking about it. Someone inside has just made them think about it.',
     ],
     infiltrated: [
-      'The founders all knew each other, and the settlement still trusts familiar faces. Someone living here now is using that trust to hide.',
+      'The settlement has always trusted familiar faces, and it still does. Someone living here now is using that trust to hide.', // TAIL-NARRATIVE-5 (N18 (2)): no founders who all knew each other beside a consortium, a decree or three merged places
       'A place this size still trusts faces it knows, and one of those faces is not what it seems.',
-      'The founding families could name every soul inside the walls, and the settlement still assumes it can. That is how someone who does not belong goes unnoticed.',
+      'The settlement still believes it knows who lives inside its walls. That is how someone who does not belong goes unnoticed.',
     ],
     plague_onset: [
-      'The settlers chose this place for its roads and water. The sickness came in the same way.',
-      'The roads and river that made this a good place to settle are the ones the sickness travelled.',
-      'The site was picked so trade could reach it easily. The sickness reached it just as easily.',
+      'The sickness came in the way everything else here comes in: from outside, and before anyone thought to stop it.',
+      'Whatever made this a good place to settle, the sickness found its way here all the same.',
+      'The sickness reached it as easily as news does, and faster than anyone could shut a door against it.',
     ],
     succession_void: [
       'The founding generation is gone, and nobody agrees who should lead now.',
@@ -466,14 +472,14 @@ export const STRESS_NOTES = {
       'The rules the founders set have outlived the reasons for them, and people have stopped obeying.',
     ],
     mass_migration: [
-      'The founders built for a few families who knew each other. Now newcomers crowd in, and half the faces are strangers.', // R2-CODE-A-4 (CENSUS-2 c/streets): no streets said of a thorp or a hamlet; true at every size
-      'The settlement was laid out for the families that founded it. Its houses and its water were never meant for this many people.', // R2-CODE-A-4 (CENSUS-2 c/streets): as above
-      'The founders knew every name inside the walls. Now no one does: too many have arrived too fast.',
+      'The settlement was never built for this many. Now newcomers crowd in, and half the faces are strangers.', // TAIL-NARRATIVE-5 (N18 (2)): no founding of a few families beside a decree, a consortium or a noble's grant; R2-CODE-A-4 (CENSUS-2 c/streets): no streets said of a thorp or a hamlet; true at every size
+      'The settlement was laid out for the people it used to hold. Its houses and its water were never meant for this many.', // R2-CODE-A-4 (CENSUS-2 c/streets): as above
+      'The settlement once knew the faces inside its walls. Now it does not: too many have arrived too fast.',
     ],
     wartime: [
-      'The settlement was founded for trade and quiet growth. Now it feeds and arms a war.',
-      'Everything here was chosen for peace: the site, the trades, the debts. Now there is a war, and the settlement is paying for it.',
-      'The founders built a place to trade. Now the army takes what the settlement used to sell.', // R2-CODE-A-4 (CENSUS-2 a/market): no market said where the roster holds none; true at every size
+      'The settlement grew up in quieter years. Now it feeds and arms a war.',
+      'Whatever the settlement was built for, it is paying for a war now, and the bill grows every season.',
+      'Now the army takes what the settlement used to sell, and pays what the army thinks fair.', // R2-CODE-A-4 (CENSUS-2 a/market): no market said where the roster holds none; true at every size
     ],
     religious_conversion: [
       'The founding was blessed under a faith that is no longer ascendant here. The oaths and endowments made in its name are now contested ground.',
@@ -481,9 +487,9 @@ export const STRESS_NOTES = {
       'The settlement was consecrated in a faith now out of favour, and nobody agrees what that old blessing still binds them to.',
     ],
     slave_revolt: [
-      'The settlement was built by slaves it never counted as its own people. Now they have risen.',
-      'From its first season this place ran on enslaved hands. Those hands have turned against it.',
-      'The founders built with slaves and kept the profits. The slaves have risen, and they mean to take back both.',
+      'The settlement ran on slaves it never counted as its own people. Now they have risen.',
+      'For years this place has run on enslaved hands. Those hands have turned against it.',
+      'Its masters worked it with slaves and kept the profits. The slaves have risen, and they mean to take back what was taken from them.',
     ],
   };
 
@@ -495,7 +501,7 @@ export const STRESS_NOTES = {
  * as one that is crowding. Same register and length as the arrivals set; index 0 is canonical.
  */
 export const MASS_MIGRATION_DEPARTURE_NOTES = [
-  'The founders built for the families that would stay. Now those families are leaving, and houses stand empty on every street.',
-  'The settlement was laid out for more people than it now holds; whole rows the founders filled are shuttered.',
-  'The founders knew every name in the settlement. Fewer names are left each season, as household after household takes the road.',
+  'The settlement was built for families that would stay. Now those families are leaving, and houses stand empty on every street.', // TAIL-NARRATIVE-5 (N18 (2)): as the arrivals set: no founding claimed
+  'The settlement was laid out for more people than it now holds; whole rows that were once full are shuttered.',
+  'The settlement once knew its households by name. Fewer names are left each season, as household after household takes the road.',
 ];

@@ -147,10 +147,17 @@ describe('the trade lists print the same pills on the tab, the PDF and the journ
     expect(fold(jr.imports)).toBe(asJournalRow(tab.imports || [], jr.imports));
   }, 120000);
 
-  test('the local production: what no one here works is not made here (r2r-thorp-0)', () => {
-    const { town, tab, pdf } = threeSurfaces('r2r-thorp-0');
+  // RE-KEYED BY IDENTITY (TAIL-DEFECON-C-3, D30 (b)): r2r-thorp-0's record listed only its medicinal herbs, which no
+  // house there works (the record's exploitation names them unexploited): the record now lists nothing, and neither
+  // surface prints a local good. The agreement claim moves to r2r-thorp-9 (it lost the same herbs, keeps its honey).
+  test('the local production: what no one here works is not made here (r2r-thorp-9; r2r-thorp-0 lists nothing)', () => {
+    const { town, tab, pdf } = threeSurfaces('r2r-thorp-9');
     expect(town.economicState.localProduction.length, 'anchored: the record lists local goods').toBeGreaterThan(0);
     expect(sorted(pdf.local.items)).toEqual(sorted(tab.local || []));
+    const empty = threeSurfaces('r2r-thorp-0');
+    expect(empty.town.economicState.localProduction, 'D30 (b): the thorp makes nothing listed').toEqual([]);
+    expect(empty.pdf.local.items, 'the PDF prints no local good').toEqual([]);
+    expect(empty.tab.local || [], 'the tab prints no local good').toEqual([]);
   }, 120000);
 
   test('the guard town: where the three already agreed every pill still prints on every surface (r2r-city-0)', () => {

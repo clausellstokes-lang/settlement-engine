@@ -82,7 +82,7 @@ describe('TAIL-POWERS batch 1 · the towns read: what each prints instead (birth
   const TOWNS = /** @type {Record<string, [string, string, string]>} */ ({
     "r2s-under_siege-town-0": [
         "the bowyer",
-        "Talks about the woods, the game and the best places to hunt; easy to fall into talk with.",
+        "Talks about the woods, the game and where the hunting has been best; easy to fall into talk with.",
         "Asks what the bow is for before agreeing to make it, and remembers the answer."
     ],
     "r2s-under_siege-hamlet-0": [
@@ -127,7 +127,7 @@ describe('TAIL-POWERS batch 1 · the towns read: what each prints instead (birth
     ],
     "r2s-under_siege-metropolis-3": [
         "the mine captain",
-        "Has been keeping back ore from the tally and selling it to a smelter elsewhere",
+        "Has kept back from the tally what ore the workings still give, and sold it to a smelter elsewhere",
         "Covered up a cave-in that killed three men by sealing the gallery and reporting them as run off"
     ],
     "r2s-politically_fractured-hamlet-0": [

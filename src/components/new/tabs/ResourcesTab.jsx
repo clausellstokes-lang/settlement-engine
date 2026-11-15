@@ -10,7 +10,7 @@ import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 // THE TWO LABEL SEAMS (§934.13 / §934.22). `rawResource` is a catalogue key on a desert
 // town ('desert_salt', 'glass_sand', 'mountain_timber') and the processing names are
 // institution keys; both are PRINTS here, and nothing on this tab matches on them.
-import { resourceDisplayName } from '../../../domain/display/resourceDisplayName.js';
+import { resourceDisplayName, RESOURCE_DISPLAY_LABELS } from '../../../domain/display/resourceDisplayName.js';
 import { institutionDisplayName } from '../../../domain/display/institutionDisplayName.js';
 // READER-R1 ruling 3: the gap rows the DM reads are the record-read lines, in the house voice.
 import { resourceGapLines, housesStillNeeded, exploitationGroupsShown } from '../../../domain/display/validationOnPage.js';
@@ -72,6 +72,16 @@ export function ResourceChainCard({ chain, stage, settlement = null, moved = fal
         Needs: {needs.map((n) => institutionDisplayName(n) || n).join(', ')}
       </div>}
       {!moved&&<DrawsOn deps={chain.dependsOn} mobile={mobile} />}
+    </div>
+  );
+  // V2 (TAIL-DISPLAY-CIVIC-3): the food a famine in force failed (validationOnPage.js :: famineFailedResourceOf), the
+  // resource alone, in the famine's own words ("The fishing failed this year", foodBalance.js): no flow and no grade of working
+  if (stage === 'failed') return (
+    <div style={{background:swatch['#FDF8E8'],border:'1px solid #e0c060',borderLeft:'3px solid #8a2a1a',padding:'8px 14px'}}>
+      <div style={{display:'flex',alignItems:'center',gap:8,flexWrap:'wrap'}}>
+        <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:swatch['#7A5010'],background:swatch['#F5E8C0'],padding:'1px 6px',letterSpacing:'0.05em',textTransform:'uppercase'}}>✗ Failed this year</span>
+        <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{plainGoodName(resourceDisplayName(chain.rawResource))}</span>
+      </div>
     </div>
   );
   if (stage === 'partial') return (
@@ -144,6 +154,7 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
   const unexploited    = [...shown.unexploited].sort(byRes);
   const partExploited  = [...shown.partial].sort(byRes);
   const fullExploited  = [...shown.full].sort(byRes);
+  const famineFailed   = [...shown.failed].sort(byRes);
 
   // Terrain accent color
   const terrainColor = {
@@ -175,7 +186,7 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
       </div>
 
       {/* ── CRITICAL IMPORTS (what they can't produce) ───────────────────── */}
-      {(unexploited.length>0||partExploited.length>0||fullExploited.length>0)&&<Section title="Resource Exploitation" collapsible defaultOpen>
+      {(unexploited.length>0||partExploited.length>0||fullExploited.length>0||famineFailed.length>0)&&<Section title="Resource Exploitation" collapsible defaultOpen>
         <div style={{display:'flex',flexDirection:'column',gap:8}}>
 
           {/* Unexploited — most interesting for DMs */}
@@ -186,6 +197,9 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
 
           {/* Fully exploited */}
           {fullExploited.map((x,i)=><ResourceChainCard key={i} chain={x.card} stage="full"/>)}
+
+          {/* The food the famine failed (V2: the record's failed source) */}
+          {famineFailed.map((x,i)=><ResourceChainCard key={i} chain={x.card} stage="failed"/>)}
         </div>
       </Section>}
 
@@ -205,7 +219,7 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
           const depleted = [...(r?.config?.nearbyResourcesDepleted || [])].sort();
           const abundant = allRes.filter(rk => !depleted.includes(rk));
           const customSet = new Set(r?.config?.nearbyResourcesCustom || []);
-          const fmtKey = rk => rk.replace(/_/g,' ').replace(/\b./g,c=>c.toUpperCase());
+          const fmtKey = rk => (!customSet.has(rk) && Object.hasOwn(RESOURCE_DISPLAY_LABELS, rk)) ? RESOURCE_DISPLAY_LABELS[rk] : rk.replace(/_/g,' ').replace(/\b./g,c=>c.toUpperCase()); // TAIL-DISPLAY-ECON-4 (X26): A RESOURCE'S NAME HAS ONE HOME, the catalogue's own label (RESOURCE_DATA[k].label, through the seam's verbatim table); a custom ground keeps its key's words
           // W2-C-LEAVES-SIDE (the cut's #937): under a siege in force the grounds around the walls are not called
           // "Abundant" (the tab's own food line says the siege has taken the outlying fields): the word of plenty is
           // left out and the grounds print first, unlabelled, under the section's own title (never under "Depleted").
@@ -234,7 +248,7 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
             {res.availableResources?.length>0&&<div style={{paddingTop:6,borderTop:'1px solid #e8dcc8'}}>
               <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:MUTED,letterSpacing:'0.06em',marginBottom:4}}>Commodities available</div>
               <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
-                {res.availableResources.map((r2,i)=><span key={i} style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],border:'1px solid #d8c890',padding:'2px 9px',textTransform:'capitalize'}}>{r2.replace(/_/g,' ')}</span>)}
+                {res.availableResources.map((r2,i)=><span key={i} style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],border:'1px solid #d8c890',padding:'2px 9px',textTransform:'capitalize'}}>{Object.hasOwn(RESOURCE_DISPLAY_LABELS, r2) ? RESOURCE_DISPLAY_LABELS[r2] : r2.replace(/_/g,' ')}</span>)}
               </div>
             </div>}
           </>;

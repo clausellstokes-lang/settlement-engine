@@ -10,7 +10,8 @@
  *    word); it prints the record's own label (`powerStructure.publicLegitimacy.label`).
  *  - UNDER AN OCCUPATION THE HALL DOES NOT GOVERN ALONE (19252 19466 19516 19333 19240): the governance account's seat
  *    sentence said "The Elder Council governs Amarkota." beside the Occupation Authority the occupied stress adds; it
- *    says the hall governs under it (28 towns).
+ *    says the hall governs under it (28 towns). RE-KEYED BY IDENTITY at the merge into lane/tail-powers (the chair's ruling
+ *    P28): the declared twin of P4 (TAIL-POWERS-2) stands in those sentences: "<the hall> answers to the occupiers of <place>."
  *  - THE SAFETY CAUSE IS NAMED BY WHAT LOWERED IT (B05826 B05840 06098 06102 B05843 06101 06043): "crime" named as the
  *    legitimacy's cause where the safety label names a crisis ("Strained — Mass Migration"); it reads "insecurity", or
  *    "the curfew" under an occupation's curfew alone. A plain label keeps "crime".
@@ -48,9 +49,9 @@ function foundationsWord(s, label) {
 
 // [seed, the sentence that must not print, what prints in its place]
 const ACCOUNT_CURED = [
-  ['r2s-occupied-thorp-1', 'The Elder Council governs Amarkota.', 'The Elder Council governs Amarkota under the Occupation Authority.'],
-  ['r2s-occupied-metropolis-0', 'Chrissopetra is governed by the Grand Guild Consortium.', 'Chrissopetra is governed by the Grand Guild Consortium under the Occupation Authority.'],
-  ['r2r-thorp-24', 'The Household Council governs Sanctaminus.', 'The Household Council governs Sanctaminus under the Occupation Authority.'],
+  ['r2s-occupied-thorp-1', 'The Elder Council governs Amarkota.', 'The Elder Council answers to the occupiers of Amarkota.'],
+  ['r2s-occupied-metropolis-0', 'Chrissopetra is governed by the Grand Guild Consortium.', 'The Grand Guild Consortium answers to the occupiers of Chrissopetra.'],
+  ['r2r-thorp-24', 'The Household Council governs Sanctaminus.', 'The Household Council answers to the occupiers of Sanctaminus.'],
   ['r2s-mass_migration-town-0', 'Crime is the reason.', 'Insecurity is the reason.'],
   ['r2r-city-3', 'Crime is the reason.', 'Insecurity is the reason.'],
   ['r2s-occupied-thorp-1', 'Poverty and crime have cost the Elder Council its standing.', 'Poverty and insecurity have cost the Elder Council its standing.'],

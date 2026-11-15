@@ -88,7 +88,7 @@ describe('G5 first-survey framing — OverviewTab', () => {
     expect(src).toMatch(/help=\{SECTION_HELP\.systemsHealth\}/);
     expect(src).not.toMatch(/>As judged at the first survey/); // anchored: the help prop is asserted on this same source one line above
     const copy = read('src/copy/sectionHelp.js');
-    expect(copy).toMatch(/As judged at the first survey · Food Security is re-judged as the campaign advances\./);
+    expect(copy).toMatch(/As judged at the first survey · Food Security is re-judged as your campaign goes on\./);
     expect(src).not.toMatch(/See Viability tab/); // anchored: the same source carries the help prop matched above
   });
 

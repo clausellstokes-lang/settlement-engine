@@ -48,25 +48,34 @@ const C2A = [
   ['r2r-city-2', 'maritime access', 'Salted fish'],
 ];
 
+/** The KEEP of a town whose made list is now empty: no good is listed, and the row is silent by design. */
+const EMPTY = '(the list is empty)';
 /** (seed, the good no house of the town makes, a good the town still makes) */
 const C1A = [
-  ['r2r-thorp-0', 'stone', 'medicinal herbs'],              // a quarry's land, no quarry or mason
-  ['r2r-thorp-0', 'game meat', 'medicinal herbs'],          // hunting grounds, no hunter, wildfowler, warden or furrier
+  // RE-KEYED BY IDENTITY (TAIL-DEFECON-C-3, D30 (b)): r2r-thorp-0's one good was its medicinal herbs, which no house works
+  // (the record's exploitation names the herbs unexploited): its list is now EMPTY, and the Produced-locally row silent.
+  ['r2r-thorp-0', 'stone', EMPTY],                          // a quarry's land, no quarry or mason
+  ['r2r-thorp-0', 'game meat', EMPTY],                      // hunting grounds, no hunter, wildfowler, warden or furrier
   ['r2r-thorp-1', 'iron', 'honey'],                         // iron in the ground, no mine, smelter or smith
   ['r2r-thorp-4', 'gems', 'dates'],                         // no mine, no jeweller
   ['r2r-thorp-6', 'Religious services', 'honey'],           // only "Access to parish church"
   ['r2r-thorp-7', 'timber', 'wool'],                        // no sawmill, woodcutter, charcoal burner or carpenter
   ['r2r-thorp-12', 'Baked goods', 'grain'],                 // only "Access to external mill"
   ['r2r-hamlet-2', 'Leather goods', 'iron'],                // no tanner; THE SMITH'S IRON STAYS (D7)
-  ['r2r-hamlet-18', 'Milled lumber', 'clay'],               // no mill, no sawmill
-  ['r2r-hamlet-18', 'Hospitality for travellers', 'pottery'], // the pilgrims' chain, run by the neighbour's church
+  // RE-KEYED BY IDENTITY (TAIL-DEFECON-C-4, D34): hamlet-18's last good was the hot springs' herbs; the springs give none,
+  // so its list is EMPTY and the Produced-locally row silent by design.
+  ['r2r-hamlet-18', 'Milled lumber', EMPTY],                // no mill, no sawmill
+  ['r2r-hamlet-18', 'Hospitality for travellers', EMPTY],   // the pilgrims' chain, run by the neighbour's church
+  // RE-KEYED BY IDENTITY (D34): this was a WORKED row ("gems" stays by its Jeweller). A precious-metal vein gives no gems,
+  // and no resource's commodities name gems now (the gem deposit's hold only "luxury": NAMED for the data's holder), so
+  // the jeweller's gems leave; its gold and silver stay (the WORKED row below).
+  ['r2s-recently_betrayed-town-0', 'gems', 'Precious metals'],
 ];
 /** (seed, a worked good that stays, the house that works it) — green before and after */
 const WORKED = [
   ['r2r-hamlet-2', 'metalwork', 'Resident smith (part-time)'],
   ['r2r-town-0', 'Boots and shoes', "Cobbler's guild"],
   ['r2s-recently_betrayed-town-0', 'Precious metals', 'Jeweller'],
-  ['r2s-recently_betrayed-town-0', 'gems', 'Jeweller'],
 ];
 
 describe('the made list names what the town\'s own houses make (C1-A)', () => {
@@ -75,7 +84,8 @@ describe('the made list names what the town\'s own houses make (C1-A)', () => {
   test.each(C1A)('%s: "%s" is not listed as made; "%s" still is', (seed, gone, keep) => {
     const list = madeIn(seed);
     expect(list, 'GONE').not.toContain(gone);
-    expect(list, 'KEEP').toContain(keep);
+    if (keep === EMPTY) expect(list, 'KEEP: the list is empty').toEqual([]);
+    else expect(list, 'KEEP').toContain(keep);
   }, 60000);
 
   test.each(WORKED)('%s: "%s" stays, worked by its %s', (seed, keep, house) => {

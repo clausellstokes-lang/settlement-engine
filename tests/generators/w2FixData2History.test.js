@@ -89,7 +89,9 @@ describe('W2-FIX-DATA-2 item 1: the fixture towns print no false place word', ()
       const texts = [...s.history.historicalEvents, ...s.history.currentTensions].map((e) => String(e.description));
       expect(texts.length).toBeGreaterThan(0);
       expect(texts.filter((d) => d.includes(t.text))).toEqual([]);
-      expect(texts.some((d) => /Waters rose|surge of magic/.test(d)), 'the flood or the surge still prints').toBe(true);
+      // RE-KEYED BY IDENTITY (TAIL-HISTORY batch 2, the chair's Y5, 2026-11-15): c01's flood is a current tension with no
+      // flood on its timeline, now told as a live quarrel (`byMemory.unanchored`): its flood still prints, in those words.
+      expect(texts.some((d) => /Waters rose|surge of magic|Rising water is the settlement's standing fear|Strange flares of magic/.test(d)), 'the flood or the surge still prints').toBe(true);
     }, 60_000);
   }
 });
