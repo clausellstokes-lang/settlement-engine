@@ -37,8 +37,9 @@ How the rows were verified: by script over the before census's `corpus.ndjson.gz
 - **LB6 rest**: C26982 (chainNeedShown "grain brought in"), C2572 (herbs "Fully exploited"), C23858 ("The table rests on salted fish."), C3396 ("exploits it:"), and C23849 (fold 0) are not yet verified or cured.
 
 ## THE BOOKS MY CURES MOVE (F2: partial; the merge has not come)
-- Sweep of 106 test files (the close's 22 partial reds, the patch's own test, and every test naming a file I touched), run at base and at tip, one file at a time: **incomplete at hand-back (65 and 62 files run)**.
-  - Five reds carried at base, the same at tip: editWorldFactResources, mergeLadderHeldKeys, recordMerge, townCartographyCalibration, worldFactRederive.
+- Sweep of 106 test files (the close's 22 partial reds, the patch's own test, and every test naming a file I touched), run at base and at tip, one file at a time: **93 files at base and 87 at tip had run by 15:10 UTC**.
+  - Reds at both (carried from the joined line, not mine): editWorldFactResources, mergeLadderHeldKeys, recordMerge, townCartographyCalibration, worldFactRederive, generationForkCensus, institutionBudgetPromise, nameHeldThroughAssembly, pipelinePinnedChoosers, pipelinePinnedMode, powerEconomyFreshness, rosterFinalUnderHeldRoster, x46NpcBand.
+  - **A LAW my batch 2 turned red, cured** (commit after d1e7b3f9e): `tests/lint/chainPrintSites.walker.test.js` (no file reads a chain's name outside the lists). My new leaf read `chain.label` for counting. It now reads `chainId`: the dependents are counted and never printed. Medical parity was checked on the 720: no chain's label says "heal" where its id does not.
   - Three new reds at the tip, all caused by my ruled cures. They are re-keyed in the pins commit with dated notes:
     - `tests/components/displayEconFlowsMagicFood.test.jsx` r2r-village-25: KEEP and anchor "Reliance on magic: Relied upon" → "…: None". The reliance rested on the very note that test says the card does not print.
     - `tests/components/displayEconRelianceFoodWords.test.jsx`: the same row.

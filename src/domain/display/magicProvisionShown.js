@@ -171,14 +171,14 @@ function notesShown(record) {
  * what the page shows: an active chain that needs magic, a chain whose magic note prints, and the food supply where
  * magic makes part of it. A note the card does not print (a tradition the town does not hold) is not a dependent here.
  * @param {unknown} record the settlement record
- * @returns {string[]} chain labels, then the food supply
+ * @returns {string[]} chain ids, then the food supply
  */
 export function magicDependentsShown(record) {
   const chains = activeChainsOf(record).filter((c) => {
     if (chainNeedsMagic(c)) return true;
     const shown = magicNoteShown(c, record);
     return typeof shown === 'string' && shown !== '';
-  }).map((c) => String(c.label ?? c.chainId ?? 'a supply chain'));
+  }).map((c) => String(c.chainId ?? 'a supply chain')); // counted, never printed: the chain's id, not its name
   return [...chains, ...(foodMagicShare(record) > 0 ? [FOOD_SUPPLY_DEPENDENT] : [])];
 }
 
@@ -211,7 +211,7 @@ export function magicRoleHeld(record, role) {
   const notes = notesShown(record);
   if (role === 'economic') return economyShowsMagic(record) || magicServiceMade(record) || notes.length > 0 || foodMagicShare(record) > 0;
   if (role === 'military') return magicAmongDefences(record);
-  if (role === 'medical') return activeChainsOf(record).some((c) => chainNeedsMagic(c) && /heal/i.test(String(c.label ?? c.chainId ?? '')))
+  if (role === 'medical') return activeChainsOf(record).some((c) => chainNeedsMagic(c) && /heal/i.test(String(c.chainId ?? '')))
     || notes.some((n) => MEDICAL_NOTES.has(n));
   if (role === 'infrastructure') return notes.some((n) => WORKS_NOTES.has(n));
   return false;
