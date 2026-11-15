@@ -135,3 +135,34 @@ tree and both sets were dumped. The census register was never refrozen or touche
   displayEconRelianceFoodWords, resourcesCatalogueLabel) and magicRoleFoodProvision sit in TESTS-A's half of the
   negative walker and still carry TESTS-A's un-anchored negatives, moved but unchanged. TESTS-A will be editing the
   same files.
+
+## The merge of the joined line at 80a2d0c5d (the chair's "MERGE 80a2d0c5d")
+
+One merge commit, 6747ed79. Ten files conflicted, the five named plus five more that both sides edited:
+displayEconShadowFloor, displayEconShortWords, displayEconStoresFacetTimber, tailDisplayCivic3V1 and
+economicHistoryRecent. Every one is settled with BOTH EDITS STANDING. My park cures keep their structure (plain
+parameterless row loops, collected seed loops), and the other half's work sits inside them: its anchored negatives
+(helper calls and markers), new anchor columns, and re-keyed rows and values (displayEconRelianceFoodWords KEEP
+13%→14%; economicHistoryRecent #181 re-keyed to "the Shortage", whose negative is now anchored on the prefix that
+side asserts). After the merge, every file that differs from 80a2d0c5d is one of mine; no other seat's file was
+touched.
+
+- **Each of the ten, run alone:** green, except displayEconCrisisMarks (3 red: the NOT, TWIN and KEEP rows of
+  r2s-famine-hamlet-0 and r2s-under_siege-town-1) and tailDisplayCivic3V1 (1 red row: r2r-metropolis-50). Each red
+  is EXACTLY what the joined line's own version reds when run alone in this tree, so these are not mine and not new.
+- **All ten are CREDITED by the lighting census.** Both walkers print nothing for any of them.
+- **tailNarrativeRows** (no longer moving: its branch is on this tip): it had 3 sites at the merge (382, 434, 448),
+  all regex negatives. Each now carries a one-line marker naming a positive on the same subject on the line directly
+  above it (for 382, the founder's own toMatch was moved up beside it; the claim, rows and values are unchanged).
+  19/19 pass, before and after.
+- **Two new files arrived parked on `each`:** tests/domain/tailDisplayCivic4BatchA and tailDisplayCivic4BatchB (the
+  estate read 109 against the 108 ceiling). Both are cured the same way.
+- **Still held as moving:** tests/domain/tailCrisisBatch8.test.js (it has its own commit on lane/tail-crisis, not
+  yet on 80a2d0c5d). (tail-corpus-def's three-dot diff flags these files only because that branch has multiple merge
+  bases; it has no commit of its own on any of them.)
+- **Measured at the merged tip, before my post-merge edits (6747ed79) → after:**
+  - Negative walker, my half: 1 file / 3 sites → 0 / 0. Whole corpus: 8 files / 10 sites → 7 / 7, all in TESTS-A's half
+    or the held file.
+  - Seed walker, my half: 0 → 0. Whole corpus: 1 file / 2 loops (tests/domain/tailCrisisBatch4, TESTS-A's half).
+  - Lighting census: each-only parked files 109 → 107 (ceiling 108); literal-table still parked 49 (ceiling 50).
+  - Both walkers stay red, only on rows outside my half.
