@@ -25,6 +25,12 @@ const dials = { tradeRouteAccess: 'random_trade', culture: 'random_culture', mon
 const cfgFor = (seed) => {
   let m = seed.match(/^r2r-(thorp|hamlet|village|town|city|metropolis)-\d+$/);
   if (m) return birthConfig({ ...DEFAULT_CONFIG, ...dials, settType: m[1] });
+  // the bar's own read (REVIEW-BAR-0 render.bar0.jsx's cfgFor, its bar0- arm, as CENSUS-3 seedcfg.mjs copies it)
+  m = seed.match(/^bar0-(thorp|hamlet|village|town|city|metropolis)-([a-z_+]+)-([a-z_]+)-\d+$/);
+  if (m) {
+    const st = m[2] === 'calm' ? [] : m[2].split('+'); const route = m[3] === 'rand' ? {} : { tradeRouteAccess: m[3] };
+    return birthConfig({ ...DEFAULT_CONFIG, ...route, settType: m[1], selectedStressesRandom: false, selectedStresses: st, _randomizePriorities: true });
+  }
   m = /** @type {RegExpMatchArray} */ (seed.match(/^r2s-(\w+)-(thorp|hamlet|village|town|city|metropolis)-\d+$/));
   return birthConfig({ ...DEFAULT_CONFIG, ...dials, selectedStresses: [m[1]], selectedStressesRandom: false, settType: m[2] });
 };
@@ -63,6 +69,10 @@ describe('BAR2-PLACES: the rows read the town', () => {
     ['C34394 the village is a village', 'r2r-village-4', /The hamlet benefits from fees/, /The village benefits from fees paid in kind\./],
     ['C27929 no gate presumed', 'r2r-town-9', /buries beyond the gate/, /Each congregation keeps its own burial ground, and one that has filled its ground buries beyond the town's edge instead\./],
     ['C5767 no hollowed-out workforce', 'r2s-wartime-thorp-0', /Conscription has hollowed out/, /Conscription has taken some of its skilled hands\./],
+    // batch 2 (the chair's grant VW2: the atoms `patrol` and `iron at hand`), on the towns the bar's readers met
+    ['C3297 no blades without iron', 'bar0-city-under_siege+famine-rand-5', /sound of blades being made/, /The forges of \S+ stand cold: there is no iron left to make blades from\./],
+    ['C34238 no enforced order without a patrol', 'bar0-village-famine-rand-5', /orderly in the way that a settlement is orderly/, /is quiet in the way a hungry settlement is quiet\. The rationing markers are painted on the doors, and people keep to their own thresholds\./],
+    ['C34241 no guard patrol with a militia alone', 'bar0-village-famine-rand-5', /A guard patrol passes/, /people keep to their own thresholds\. Curls of shavings and chips of bark blow across the lane\./],
   ]);
   it('the flagged line no longer prints, and its slot says what the record bears (every row)', () => {
     expectNoSeedFailures(collectSeedFailures(CURED, ([id, seed, gone, instead]) => {
@@ -75,6 +85,9 @@ describe('BAR2-PLACES: the rows read the town', () => {
   /** [row, seed, the true sibling that must still print] */
   const KEEP = /** @type {Array<[string, string, RegExp]>} */ ([
     ['the river: the water was the only road', 'r2r-thorp-0', /Sited at the water's edge, where the river was the only road worth having/],
+    ['VW2: blades where the iron is at hand (local)', 'r2r-town-59', /The hammering echoes throughout \S+, and most of it is the sound of blades being made\./],
+    ['VW2: blades where the iron is at hand (imported, no siege)', 'r2r-metropolis-41', /most of it is the sound of blades being made\./],
+    ['VW2: the patrol where a garrison stands', 'r2r-city-44', /A guard patrol passes and everyone steps aside\./],
   ]);
   it('the true siblings still print (every row)', () => {
     expectNoSeedFailures(collectSeedFailures(KEEP, ([id, seed, kept]) => {

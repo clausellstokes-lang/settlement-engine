@@ -188,7 +188,7 @@ export const STRESS_DESCS = {
     { text: r =>
       `The queue at the granary gate is the first thing you see in ${r}. Not a market queue, not a water queue: the organised, patient, daily queue of people who are waiting to receive what they are owed and are not certain they will receive it.`, needs: ['institution: granary'] },
     { text: r =>
-      `${r} is orderly in the way that a settlement is orderly when order is being enforced. The streets are clear. The rationing markers are painted on the doors. A guard patrol passes and everyone steps aside.`, needs: ['guardPresence'] },
+      `${r} is orderly in the way that a settlement is orderly when order is being enforced. The streets are clear. The rationing markers are painted on the doors. A guard patrol passes and everyone steps aside.`, needs: ['patrol'] }, // BAR2-PLACES (the chair's grant VW2; REVIEW-BAR-2 C34238, C34241): order enforced and a patrol passing need a force that keeps patrol (a watch or a garrison); a militia alone "cannot maintain consistent patrol"
     r =>
       `The dogs of ${r} are gone. It takes a while to notice and longer to stop noticing, and nobody in the settlement will discuss it with a stranger.`,
     { text: r =>
@@ -196,6 +196,8 @@ export const STRESS_DESCS = {
     // The Voice Program wave 4 (2026-10-02): structure-free, so a settlement with no wall, gate, market or guard
     // still opens on its stress (src/generators/narrative/arrivalScene.js draws only the vignettes whose structures it holds).
     (n) => `The smoke from ${n}'s chimneys is thin. People here look at your pack before they look at your face, and then look away, ashamed of having looked.`,
+    { text: r =>
+      `${r} is quiet in the way a hungry settlement is quiet. The rationing markers are painted on the doors, and people keep to their own thresholds.`, twinOf: '{name} is orderly in the way that a settlement is orderly when order is being enforced. The streets are clear. The rationing markers are painted on the doors. A guard patrol passes and everyone steps aside.', excludes: ['patrol'] }, // BAR2-PLACES (VW2): its twin where no force keeps patrol (the slot keeps its draw)
   ],
   occupied: [
     { text: r =>

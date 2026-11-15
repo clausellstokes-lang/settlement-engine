@@ -46,6 +46,8 @@ describe('textOf', () => {
     // (the fish family's six catch lines, each under `crisis: hunger`; the steppe caravan broker's, where no market stands,
     // under a siege or where no route reaches; the greek money changer's and the cloth looms' under a siege). Every
     // original among them was an object already.
-    expect(rows.filter((r) => typeof r === 'object').length).toBe(133);
+    // 133 → 134 (BAR2-PLACES batch 2, 2026-11-15, the chair's grant VW2; re-keyed by identity): one twin joins (the arms
+    // key's blades line, where the iron is not at hand). Its original was an object already.
+    expect(rows.filter((r) => typeof r === 'object').length).toBe(134);
   });
 });

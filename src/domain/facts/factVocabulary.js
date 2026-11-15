@@ -211,7 +211,7 @@ export const ROUTE_WORDS = Object.freeze(['road', 'river', 'port', 'crossroads',
  * @property {boolean} [rulingBody]
  * @property {boolean} [soldiers] @property {boolean} [commander]
  * @property {Readonly<import('../dossier/faithReading.js').FaithReading>} [faith] @property {boolean} [guardPresence]
- * @property {boolean} [guild] @property {boolean} [sacredHouse] @property {boolean} [rivalPower]
+ * @property {boolean} [guild] @property {boolean} [sacredHouse] @property {boolean} [rivalPower] @property {boolean} [ironAtHand]
  * @property {ReadonlyArray<string>} [foodSources] @property {ReadonlyArray<unknown>} [imports]
  * @property {ReadonlyArray<unknown>} [exports] @property {string|null} [culture] @property {string} [crime]
  * @property {string} [prosperity]
@@ -292,6 +292,15 @@ export const FACT_DIMENSIONS = Object.freeze({
   // own label, one leaf). A line naming "a strong power" that defies the government needs one. The family (shared
   // power, ruling body, rival power) is named: no fourth without the chair.
   'rival power': dim({ shape: 'presence', home: 'rivalPower', reader: (f) => bool(f.rivalPower) }),
+  // ── BAR2-PLACES, THE CHAIR'S GRANT VW2 of 2026-11-15 (vetoable by the owner; on the veto list as new vocabulary): two atoms ──
+  // `patrol`: a force that keeps patrol stands: a watch or a garrison (the defence home's own atoms). A militia is not one:
+  // the record's own guard reading says the citizen militia "musters when needed but cannot maintain consistent patrol"
+  // (REVIEW-BAR-2 C34241, bar0-village-famine-rand-5: a militia alone, "A guard patrol passes").
+  // Homed on the defence record (no getter of its own: the defence object is the layer map's bundled leaf, and its atoms are
+  // read there); the defence walker knows it by the words of its two parts (`defenceFactReaders.shared.mjs`).
+  patrol: dim({ shape: 'presence', home: 'defence', reader: (f) => (f.defence ? bool(f.defence.watch === true || f.defence.garrison === true) : undefined) }),
+  // `iron at hand`: the town's smiths have iron to work: worked here, or brought in where no siege stops it (`ironAtHand.js`).
+  'iron at hand': dim({ shape: 'presence', home: 'ironAtHand', reader: (f) => bool(f.ironAtHand) }),
   famine: dim({ shape: 'presence', home: 'famine', reader: (f) => bool(f.famine?.famine) }),
   starving: dim({ shape: 'presence', home: 'famine', reader: (f) => bool(f.famine?.starvingAllowed) }),
   'other npc': dim({ shape: 'presence', home: 'hasOtherNpc', needsContext: 'npc',

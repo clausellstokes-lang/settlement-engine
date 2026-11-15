@@ -37,7 +37,7 @@ const PARKED = Object.freeze({
   'STRESS_DESCS.under_siege[1]': 'guardPresence',
   'STRESS_DESCS.under_siege[2]': 'guardPresence',
   'STRESS_DESCS.famine[1]': 'guardPresence',
-  'STRESS_DESCS.famine[3]': 'guardPresence',
+  'STRESS_DESCS.famine[3]': 'patrol', // BAR2-PLACES (the chair's grant VW2, 2026-11-15; re-keyed by identity): order enforced and a patrol passing need a watch or a garrison
   'STRESS_DESCS.occupied[1]': 'guardPresence',
   'STRESS_DESCS.politically_fractured[1]': 'guardPresence',
   'STRESS_DESCS.recently_betrayed[0]': 'guardPresence',

@@ -48,11 +48,27 @@ Measured on the census's 720 at the base (record fields and `before.json`): town
 - **C2149** ("Lord Mayor" for a woman): the Connection line and the office title (`officeTitles.js`) are BAR2-SERVICES's: the form by the holder's sex.
 - **C2828** ("Population of 2,338 with only 1 craft institution."): the writer is `src/generators/economy/viability.js` (the tracer placed it on geographyData.js): the count should read the roster's craft houses by one home (`domain/capacityModel.js`'s craft reading); for the seat holding viability.js.
 - **C28756** ("War has taken the iron…" with no war): the declaration already refuses `war: peace` (`outlookHookSiblings.js`); it prints where the record's war state is not peace (an occupation): the fault is the war-state fact or the site (`foodBalance.js`), not this seat's file.
-- **C3297** ("…the sound of blades being made" where the siege took the iron): PARKED: no vocabulary atom says the iron is gone; the admit "a smith with iron" needs one (a word for the chair).
+- **C3297**: parked at batch 1 (no atom); cured in batch 2.
 
-### Parked
+### Parked (at batch 1; cured in batch 2)
 
-- **C34238, C34241** (famine: "orderly … when order is being enforced", "A guard patrol passes"): 2 towns print at the base; the line needs `guardPresence` (watch ∨ garrison ∨ militia ∨ hired company); a militia that cannot patrol and a collapsed law-and-order reading need an atom the vocabulary lacks (a patrolling force; order held). For the chair.
+- C3297, C34238, C34241: the atoms they lacked were granted by the chair (VW2); see batch 2.
+
+## Batch 2 (one commit): the chair's grant VW2, two atoms, and the three parked rows
+
+THE CHAIR'S GRANT VW2 (2026-11-15, vetoable by the owner; NEW VOCABULARY, on the veto list): declare the two atoms the parked rows lack, in the vocabulary's own form, homed with their getters.
+
+- **`patrol`** (factVocabulary.js, homed on the defence record: `defence.watch || defence.garrison`). THE RULING'S PREMISE MEASURED AND NOT FOLLOWED IN ONE PART: the chair wrote "a watch, a garrison or a militia"; the reader's town (bar0-village-famine-rand-5) holds a militia alone, and its own guard reading says "The citizen militia musters when needed but cannot maintain consistent patrol": with the militia in it the atom would admit the false line. So a militia is not a patrol. Reuse first: `guardPresence` (watch ∨ garrison ∨ militia ∨ hired company) is the wider composite, and is the reason the row printed. Homed on `defence` (no getter of its own: the layer register is shrink-only and the defence object is its bundled leaf); the defence walker is taught it by the words of its two parts (`tests/lint/defenceFactReaders.shared.mjs`: `watch`, `garrison`, so it reads nothing new).
+- **`iron at hand`** (factVocabulary.js; getter `factsOf.ironAtHand`; home `src/domain/facts/ironAtHand.js`, new; layer 2 in factLayers.js). True where a chain works `iron_deposits` here (its input held and its state working, the states of `chainWorking.js`, spelled in the leaf because that leaf rides a lazy chunk); else where iron is imported, unless a siege is in force (`crisisOf`, the same reading `tradeStoppedHere` uses); else false. Reuse first: `institution: smith` says a smith stands, not that iron reaches it; the crisis leaf says a siege stops trade, not whether the iron is local. Measured on the 720 at f8042b61a: all seven towns that print the blades line have iron at hand (local or imported, none under a siege).
+
+| id | writer | cure | read in |
+|---|---|---|---|
+| C3297 | arrivalProse.js :: ARRIVAL_SENSES arms.dominant | "…the sound of blades being made." needs `iron at hand`; its TWIN where the iron is not at hand: "The forges of {n} stand cold: there is no iron left to make blades from." (the slot keeps its draw) | bar0-city-under_siege+famine-rand-5 prints the twin; r2r-town-59 (local iron) and r2r-metropolis-41 (imported, no siege) keep the original |
+| C34238, C34241 | narrativeData.js :: STRESS_DESCS.famine[3] | needs `patrol` (was `guardPresence`); its TWIN where no force keeps patrol, placed at the pool's end so no ledger index moves: "{n} is quiet in the way a hungry settlement is quiet. The rationing markers are painted on the doors, and people keep to their own thresholds." | bar0-village-famine-rand-5 prints the twin, and its other arrival beats are unchanged (measured at base and tip: without the twin a redraw had moved its sense beat); r2r-city-44 and r2s-famine-town-2 (a garrison) keep the original |
+
+Veto list (new lines): the two twins above, and the two atoms.
+
+Re-keyed by identity: `tests/domain/facts/textOf.test.js` (the arrival's object rows 133 → 134: the blades twin), `tests/domain/facts/census2dTables.test.js` (PARKED: famine[3] declares `patrol`).
 
 ## Every new or changed line (the veto list), with three towns it is read in (smallest; largest; a crisis)
 
