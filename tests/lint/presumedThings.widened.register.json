@@ -22545,6 +22545,54 @@
     "after-base: close-unprinted",
     "built on tribute and market",
     "65d8643284a6d901"
+   ],
+   [
+    "streets",
+    "after-base: close-true",
+    "built in masonry around a civic square, and run by",
+    "572bca5c0a5feef9"
+   ],
+   [
+    "docks",
+    "after-base: close-true",
+    "built around the agora and the harbour",
+    "7e2692648afeb175"
+   ],
+   [
+    "streets",
+    "after-base: close-true",
+    "built around the agora and the harbour",
+    "7e2692648afeb175"
+   ],
+   [
+    "streets",
+    "after-base: close-true",
+    "built around the agora, ",
+    "0f395a5a7ed7958b"
+   ],
+   [
+    "quarters",
+    "after-base: close-true",
+    "built around kin districts and an assembly ground",
+    "dfd49d19123694a3"
+   ],
+   [
+    "streets",
+    "after-base: close-true",
+    ", in quarters by trade,",
+    "c3105f78db3c9213"
+   ],
+   [
+    "market",
+    "after-base: close-true",
+    "tribute, and market-and-waterworks",
+    "0a7c913c886807b1"
+   ],
+   [
+    "temple",
+    "after-base: close-true",
+    ", under temple and guild",
+    "9cac0021c265738c"
    ]
   ],
   "src/domain/summary/tonightSheet.js": [
@@ -27077,6 +27125,36 @@
     "after-base: close-false",
     "Being on the right side of it keeps the forges of ",
     "b41ab4ca684010d7"
+   ],
+   [
+    "walls",
+    "after-base: close-true",
+    "The walls of ",
+    "a7bbc93356f774bd"
+   ],
+   [
+    "granary",
+    "after-base: close-true",
+    " is being run, for the moment, by whoever holds the keys, the seals, and the granary: three things that used to be held ",
+    "51c413ce8935c971"
+   ],
+   [
+    "mill",
+    "after-base: close-true",
+    " has drawn its edges inward (fields left unworked, a mill ",
+    "8fab5ca3e25b4060"
+   ],
+   [
+    "walls",
+    "after-base: close-true",
+    " has learned the settlement's patterns (when the patrols pass, where the walls are thin) which is not something a beast ",
+    "b451dfbb1b47849f"
+   ],
+   [
+    "war",
+    "after-base: close-true",
+    " could spare, and several it could not, has gone to the war; what remains is losing people and resources by attrition (",
+    "dab22a2ed49e260e"
    ]
   ],
   "src/generators/neighbourGenerator.js": [
