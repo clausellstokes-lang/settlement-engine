@@ -1,0 +1,7 @@
+{"id":"C10849","town":"bar0-city-wartime-rand-8","sev":"MED","kind":"STATE","why":"'Relied upon' for magic, but magic is low, food by magic 0%, DEFENCE magic none; no magic reliance in the record","other":""}
+{"id":"C11454","town":"bar0-city-wartime-rand-8","sev":"LOW","kind":"BROKEN","why":"subject-verb disagreement: 'its herds comes first' (plural subject, singular verb)","other":""}
+{"id":"C11669","town":"bar0-city-wartime-rand-8","sev":"MED","kind":"PAIR","why":"Military/Guard power called 'undermanned and underfunded' while garrison is reinforced and crown paying, and STATE defence Well-Defended","other":"C10834"}
+{"id":"C12419","town":"bar0-hamlet-calm-rand-6","sev":"MED","kind":"STATE","why":"devout households quarrel over who may trade; QUARRELS none, TENSIONS only disputed land, no market or trade house here","other":""}
+{"id":"C12446","town":"bar0-hamlet-calm-rand-6","sev":"LOW","kind":"BROKEN","why":"'Ruling authority: Surplus' uses a food-band word for a rating of authority; Council is Dominant, legitimacy Approved","other":""}
+{"id":"C12602","town":"bar0-hamlet-calm-rand-6","sev":"LOW","kind":"BROKEN","why":"subject-verb disagreement: 'its herds comes first' (plural subject, singular verb)","other":""}
+{"id":"DONE","lines":2183,"blocks":2,"flags":6}
