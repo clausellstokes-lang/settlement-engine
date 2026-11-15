@@ -732,7 +732,9 @@ export const buildGovernanceLabels = ({
     hasNoblePower,
     theocraticSeat,
     seatIsReligious: RELIGIOUS.test(String(governingFactionName || '')),
-    seatIsMilitary: /military|garrison|war council/i.test(String(governingFactionName || '')),
+    // TAIL-CLOSE-SRC-2 (the defence walker's first member): the seat is the commanders' own by the governing power's KIND
+    // (its record's `category`, factionCategories.js), not its name sniffed for "garrison"; measured equal over the 720
+    seatIsMilitary: factions.find((faction) => faction.isGoverning)?.category === 'military',
   });
 
   const primaryStress = selectPrimaryStress(
