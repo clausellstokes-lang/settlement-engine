@@ -1,0 +1,79 @@
+sentences: before 29813 after 29872 · gone 26 · new 85 · in fewer towns 90 · in more towns 38 · moved 4
+ GONE (widest):
+      5 ->    0  PartialFine glass sandhigh value
+      5 ->    0  Fine glass sand
+      5 ->    0  Rigid (militant theocracy)
+      2 ->    0  Healing waters (bottled)Pilgrim hospitality
+      2 ->    0  Sea saltRecovered artefacts
+      2 ->    0  Rigid (militant theocracy); monsters on the roads
+      2 ->    0  Connection: Headman <N>, the alewife
+      2 ->    0  The seat<N>, the alewife and Headman
+      1 ->    0  Sea salt (taxed by occupation)Recovered artefacts (taxed by occupation)
+      1 ->    0  Healing waters (bottled) (taxed by occupation)Pilgrim hospitality (taxed by occupation)
+      1 ->    0  <N>, the boat-headman (Fisher's landing)
+      1 ->    0  <N>, the alewife and Elder, holds the seat of the Free Elder Council.
+ IN FEWER TOWNS (largest loss):
+    189 ->   93  Connection: Frontman <N>
+    189 ->   93  Frontman
+    189 ->   95  the front man
+    132 ->   52  the district madam
+    119 ->   58  Connection: Ferryman <N>
+    119 ->   58  Ferryman
+    119 ->   61  the ferryman
+    103 ->   49  <N>, the boat-headman
+    107 ->   55  the madam
+     88 ->   43  Still the boat-headman as well.
+     81 ->   37  handled by <N>, the front man (Front businesses)
+     56 ->   27  Connection: Elder <N>, the boat-headman
+ NEW (widest):
+      0 ->   96  Connection: Proprietor <N>
+      0 ->   96  Proprietor
+      0 ->   96  the nominal owner
+      0 ->   80  the district brothel keeper
+      0 ->   61  Connection: Ferry-Keeper <N>
+      0 ->   61  Ferry-Keeper
+      0 ->   61  the ferry keeper
+      0 ->   54  <N>, the boat-master
+      0 ->   52  the brothel keeper
+      0 ->   45  Still the boat-master as well.
+      0 ->   44  handled by <N>, the nominal owner (Front businesses)
+      0 ->   29  Connection: Elder <N>, the boat-master
+ IN MORE TOWNS (largest gain):
+    279 ->  309  Strong▲
+    422 ->  446  Strong▼
+     76 ->   99  Boat-Master
+     29 ->   46  Overseer
+     29 ->   38  Connection: Overseer <N>
+    181 ->  188  Subsistence — survival economy
+     35 ->   41  The powerElder Council (strong)
+      2 ->    7  UnexploitedFine glass sandhigh value
+      2 ->    7  Fine glass sand→glass→windows→bottles
+      2 ->    7  Needs: Glassblower
+      2 ->    7  Fine glass sand→glass→coloured glass→blown glass→windows
+      2 ->    7  Needs: Glassblower, Artisan workshop
+ THE INHERITORS (print now, and did not, in a town that lost a sentence): 124 sentences
+   + 96 towns (e.g. r2r-city-0)  Connection: Proprietor <N>
+   + 96 towns (e.g. r2r-city-0)  Proprietor
+   + 96 towns (e.g. r2r-city-0)  the nominal owner
+   + 80 towns (e.g. r2r-city-10)  the district brothel keeper
+   + 61 towns (e.g. r2r-city-13)  Connection: Ferry-Keeper <N>
+   + 61 towns (e.g. r2r-city-13)  Ferry-Keeper
+   + 61 towns (e.g. r2r-city-13)  the ferry keeper
+   + 54 towns (e.g. r2r-hamlet-10)  <N>, the boat-master
+   + 52 towns (e.g. r2r-city-1)  the brothel keeper
+   + 45 towns (e.g. r2r-hamlet-11)  Still the boat-master as well.
+   + 44 towns (e.g. r2r-city-0)  handled by <N>, the nominal owner (Front businesses)
+   + 29 towns (e.g. r2r-hamlet-13)  Connection: Elder <N>, the boat-master
+   + 29 towns (e.g. r2r-hamlet-13)  The seat<N>, the boat-master and Elder
+   + 25 towns (e.g. r2r-hamlet-1)  the brewster
+   + 23 towns (e.g. r2r-thorp-22)  Boat-Master
+   + 21 towns (e.g. r2r-hamlet-18)  Strong▲
+   + 19 towns (e.g. r2r-hamlet-1)  <N>, the brewster
+   + 18 towns (e.g. r2r-city-3)  Connection: Keeper <N>
+   + 18 towns (e.g. r2r-city-3)  Keeper
+   + 18 towns (e.g. r2r-city-3)  the foundling-keeper
+   + 17 towns (e.g. r2r-hamlet-12)  Overseer
+   + 17 towns (e.g. r2r-city-38)  Salt for preservation
+   + 15 towns (e.g. r2r-hamlet-18)  Strong▼
+   + 15 towns (e.g. r2r-hamlet-11)  Connection: Household Elder <N>, the boat-master
+   + 15 towns (e.g. r2r-hamlet-11)  The seat<N>, the boat-master and Household Elder

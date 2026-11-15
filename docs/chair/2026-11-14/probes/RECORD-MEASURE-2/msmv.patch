@@ -1,0 +1,47 @@
+--- a/src/generators/resourceGenerator.js
++++ b/src/generators/resourceGenerator.js
+@@ -496,15 +496,20 @@
+     .map((entry) => String(entry || '').replace(/\([^)]*\)/g, ' '))
+     .some((entry) => goods.some((good) => tokensReconcile(entry, good)));
+ };
++const TRADE_FED_INPUTS = new Set(['grapes', 'glass sand']); // RECORD-MEASURE-2 M-V
+ const supplyOfInput = (rawResource, institutions, evidence = {}) => {
+   if (
+-    recordHoldsGood(evidence.availableResources, rawResource)
++    terrainSynonymsFor(rawResource).some((t) => recordHoldsGood(evidence.availableResources, t)) // RECORD-MEASURE-2 M-S: 'copper ore' is the record's 'copper'
++    || recordHoldsGood(evidence.availableResources, rawResource)
+     || recordHoldsGood(evidence.localProduction, rawResource)
+     || localInstitutionSupplies(rawResource, institutions)
+   ) return 'local';
+   if (
+     recordHoldsGood(evidence.primaryImports, rawResource)
+     || (FOOD_STAPLE_INPUTS.has(normalizeToken(rawResource)) && Number(evidence.foodImportPct) > 0)
++    // RECORD-MEASURE-2 M-V (candidate): the vintner's must and the glassblower's sand travel by trade (the houses' own desc:
++    // "grapes grown near or must brought in"); a town on a route is fed by it, an isolated one is not
++    || (TRADE_FED_INPUTS.has(normalizeToken(rawResource)) && !['isolated', 'none', '', 'undefined'].includes(String(evidence.tradeAccess)))
+   ) return 'imported';
+   return 'missing';
+ };
+@@ -552,6 +557,14 @@
+       if (alreadyInGaps) return;
+       const kind = supplyOfInput(chain.rawResource, institutions, evidence);
+       if (kind === 'local') return; // the place holds the input: an inactive chain is not a gap
++      // RECORD-MEASURE-2 M-S (candidate): a house that works several inputs (the Smelter: iron, copper, precious ore) is not
++      // short of one while another of its inputs reaches it
++      const fedElsewhere = Object.values(RESOURCE_CHAINS || {}).some((other) => other !== chain
++        && other.processingInstitutions?.includes(institution.name)
++        && (exploitation.fullyExploited?.some(c => c.rawResource === other.rawResource)
++          || exploitation.partiallyExploited?.some(c => c.rawResource === other.rawResource)
++          || supplyOfInput(other.rawResource, institutions, evidence) !== 'missing'));
++      if (fedElsewhere) return;
+       const name = institutionDisplayName(institution.name);
+       gaps.push({
+         chain:       chain.rawResource,
+@@ -649,6 +662,7 @@
+       localProduction:    economicState?.localProduction,
+       primaryImports:     economicState?.primaryImports,
+       foodImportPct:      economicState?.foodSecurity?.importPct,
++      tradeAccess:        config.tradeRouteAccess, // RECORD-MEASURE-2 M-V
+     },
+   );
+   const resourceConditions = nativeResourceConditionRecords(config);

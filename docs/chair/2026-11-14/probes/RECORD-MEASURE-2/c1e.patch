@@ -45,7 +45,7 @@
        const requiredInst = gatesForResource[g];
        if (requiredInst && !_hasInstForGate(requiredInst)) return; // institution not present
        if (refusedOnly.has(g.toLowerCase())) return; // the card says the chain does not yield it now
-+      if (!exportGoodWorkedHere(g, institutions)) return; // RECORD-MEASURE-2 C1-E
++      if (rk !== 'defended_pass' && !exportGoodWorkedHere(g, institutions)) return; // RECORD-MEASURE-2 C1-E (the pass is the toll's own house: the chair, 2026-11-15)
        exports.add(g);
      });
    });
