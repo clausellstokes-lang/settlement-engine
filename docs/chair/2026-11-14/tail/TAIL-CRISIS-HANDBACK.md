@@ -1423,6 +1423,27 @@ its pins read 'Agricultural Rents' (now 'Harvest', D10) and 'Pilgrim Trade' (D14
   r2r-town-45, 12 in all). The test file is not committed here (its branch carries the stronger form).
 - **K28:** closed without a change (the chair's 05:45: the merge seat runs the door).
 
-## What is left (this seat)
+## K26: DONE, c08dbb65 (a declared move of display; the three surfaces lent)
 
-- K26 (the slash label in the stake rows through `powerSentenceName`), only if the count allows; K27 stays parked.
+The PDF (`CrisisSections.jsx`) and the journal (`journalPages.js :: crisisJournalPage`) print
+`powerSentenceName(k.factionId)`; the tab (`CrisisTab.jsx`) gives the link the leaf's form as its fallback and sets
+`verbatim` only where the leaf re-forms the label (every other power keeps the link's live name; the door still opens the
+power). THE VETO LIST, on the 720 at e4799144: **125 rows in 122 towns** now print the prose form: Military/Guard -> The
+Guard 116 (loses 45, already at odds 26, split 24, gains 21; smallest r2r-hamlet-10, a crisis town r2s-occupied-city-2),
+Third Bloc (Neutrals) -> The Neutrals 4, Crown Creditors (Noble Coalition) -> Crown Creditors 2, the two Noble Claimant
+lines 1 each (r2r-metropolis-8), Monster Hunters / Adventurers -> Monster Hunters 1. Test `tailCrisisK26.test.jsx`
+(seven census towns, each surface anchored; red 7 of 7 at e4799144, green). The 53 files naming the four touched files
+and the four walkers: the same 10 red at base and tree. **Vetoable by the owner:** a DM rename of a re-formed power
+(e.g. renaming "Military/Guard") would show the leaf's form on the stake row, not the new name (the other rows keep it).
+
+## Registers named stale (this seat)
+
+- The sovereignty walker (`sovereigntyLightingContract`, red at the base already, the same two tests at the tree): one more
+  test file (`tests/components/tailCrisisK26.test.jsx`). Re-taken at the close.
+
+## What is left (after this seat)
+
+- Red 1 (`crisisBlindDossierProse`): the writing seats' leaves (five mute pools under a siege) and the floor's door.
+- The eighth: the test seat re-keys `tailCrisisIronHooks`' two hamlets (r2r-town-20, r2r-town-1 the nearest).
+- The style walker's three lines (TAIL-HISTORY, TAIL-NARRATIVE); `displayEconCrisisMarks` (display-econ's, D10 and D14).
+- K27 parked (the chair's word for an `iron short` atom); TAIL-CRISIS-6's under-five list unchanged.
