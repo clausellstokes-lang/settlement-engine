@@ -1,0 +1,8 @@
+{"id":"C11008","town":"bar0-city-under_siege+famine-rand-15","sev":"LOW","kind":"STATE","why":"fishmonger Dietrich Engel 'has food' to sell under famine; FOOD gives fish as the failed source and stores 0.1 months","other":""}
+{"id":"C11041","town":"bar0-city-under_siege+famine-rand-15","sev":"LOW","kind":"STATE","why":"hook has garrison commander Ingrid Steinberg (PEOPLE: garrison commander, War Council) leading weekly prayers; no clerical title","other":""}
+{"id":"C12020","town":"bar0-city-under_siege+famine-rand-15","sev":"MED","kind":"PAIR","why":"Harbour and Maritime chain printed Running under siege while its harbour master, docks and mooring rows are all 'Stopped by the siege'","other":"C11400"}
+{"id":"C12334","town":"bar0-city-under_siege+famine-rand-15","sev":"LOW","kind":"PAIR","why":"says there is 'little room to hold' offenders; the page elsewhere says courts have no detention, fines and exile only","other":"C12428"}
+{"id":"C12387","town":"bar0-city-under_siege+famine-rand-15","sev":"MED","kind":"PAIR","why":"says 'no single dominant organisation' in crime; page says one syndicate controls the criminal hierarchy and decides what crime is allowed","other":"C12370"}
+{"id":"C12393","town":"bar0-city-under_siege+famine-rand-15","sev":"MED","kind":"PAIR","why":"'very little street violence' contradicts 'opportunistic violence are persistent', people robbed or worse, and hungry stealing under the famine","other":"C12386"}
+{"id":"C13264","town":"bar0-city-under_siege+famine-rand-15","sev":"LOW","kind":"STATE","why":"calls the succession crisis's legacy 'a decade old'; PAST gives The Succession Crisis as 15 years ago","other":""}
+{"id":"DONE","lines":2469,"blocks":1,"flags":7}
