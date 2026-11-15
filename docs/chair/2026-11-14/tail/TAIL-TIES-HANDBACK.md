@@ -767,3 +767,54 @@ claim, the towns, the office check and the other cases did not move; the generat
   r2s-recently_betrayed-hamlet-2: Anna Choniates; both `temporary: true`, `temporaryKind: 'grain'`, 0 hooks; the other
   faces of those two towns hold one hook each). The other five towns were not counted face by face.
 - The file alone: 3/3 green (was 1 red test, 2 of 7 rows). eslint 0.
+
+**T25 (a), option 2: STOPPED (a test would have to change), measured in scratch, not committed.** The ruled shape was
+built as written in a scratch tree. The derivation's body and the helpers only it reads moved verbatim to a new
+`src/domain/display/criminalStructure.js :: criminalStructureOf(settlement, facts)`, which does not import `factsOf`:
+`CRIM_STRUCTURE_DATA`, `runningCriminalChains` (re-exported by the display), the ring vantages (their list door handed
+`facts: () => facts`), `rivalRingsHere`, `oneOrganisationRules`, `ringNoteUnderStreetFighting`, `ringWithoutSeat`,
+`streetsNotQuiet` and `headedPowerAmongRivals`. The facts' `crime` getter calls it with its own facts; `defenseDisplay.js`
+keeps the one-argument `deriveCriminalStructure(s)`, which hands it `factsOf(s)`.
+- **What held:** births byte-identical (`991c330f…a9`, 720, 0 errors), `layerBoundaries` green, eslint 0 on the 3 files.
+- **What it broke.** The set is every test naming `defenseDisplay` / `deriveCriminalStructure` / `factsOf` / `crimeSignal`,
+  plus `tests/lint` and `tests/architecture`: 386 files, 4,971 tests. Against the merge tip's own run it has 7 NEW reds,
+  each needing a test or register edit:
+  - `tests/components/dossierLabelCase.test.jsx`: it reads the three structure labels out of `defenseDisplay.js`'s source.
+  - `tests/lint/chainPrintSites.walker.test.js`: "every listed reader is still there".
+  - `tests/lint/ruinFilterRoster.walker.test.js` ×2: an `.institutions` reader in the new file.
+  - `tests/lint/sourceCitationIntegrity.walker.test.js`: past-EOF citations of `defenseDisplay.js` lines.
+  - `tests/architecture/engineCoreLazyEdge.test.js` ×2: the new module's chunk edge, plain and flagged.
+  - In the factLayers walker, already red, the READERS arm gains 6 rows under the new file: the name ladder's market and
+    crime lines, banked under `defenseDisplay.js`. `scripts/fact-layers-door.mjs` has only `--shrink`, which refuses a
+    born row. There is no door for a move.
+- **Walker (i), `defenceFactReaders`:** the ×4 are the second member's (court and gate) reads at `defenseDisplay.js`
+  883, 905, 906 and 907 (`courtHoldersOf` / `courtBenchOf`), made by `d5839e51` (TAIL-DISPLAY-CIVIC-4 · V6). They are not
+  on the criminal structure's path and do not move with the cut. They are not this cut's doing.
+- **Walker (ii), `factLayers`:** the crime leaf touches `_seed, economicState, economicState.safetyProfile, institutions,
+  npcs, powerStructure, tier`, with `npcs` undeclared. It is the SAME before and after the move (CONFIRMED by the walker's
+  own `leafArm` on both trees), because `headedPowerAmongRivals` moves with the body.
+- **Told to the chair; PLAUSIBLE, not measured:**
+  - The fact reads only `.key`. The key is settled before any note helper runs, and no note helper reads the facts.
+  - So a getter that computes only the key would read no facts, no `_seed` and no `npcs`.
+  - But the name ladder's banked lines still leave `defenseDisplay.js` in that shape, so it meets the same register door
+    (and `dossierLabelCase` only if the table moves).
+
+**T26: PREPARED, NOT LANDED.** `lane/close-trim-first-paint-2026-11-15` at `e44d42aa`, cut from `02de3888` (after B; A
+did not land). It is one commit: the 16 riders as FP-G7 rows at the end of `ENGINE_SHARED_DOMAIN_EXCISIONS`. The budget
+numbers were not touched.
+
+| | before | after | change |
+|---|---:|---:|---:|
+| first paint, raw | 1,164,962 | 1,130,124 | −34,838 (still +8,864 over) |
+| first paint, gzip | 371,006 | 360,028 | −10,978 (still +2,803 over) |
+| first paint, Brotli | 310,944 | 302,231 | −8,713 (still +2,246 over) |
+| engine chunk | 860,445 | 867,416 | +6,971 |
+
+- The boot smoke PASSES plain (602/602 chunks) and FLAGGED (600/600).
+- `engineCoreLazyEdge` 3/3, `engineChunkLazy` 19/19, `cultureProfilesLazy` 5/5 and `bootSmoke` 11/11 are green.
+- `vendorPdfLazy`: only its 4 size arms are red.
+- Births byte-identical; eslint 0.
+
+**Scratch (this seat's, removable):** the trees `tt8`, `tt8a` (the ruled shape, uncommitted) and `tt8c`, the instruments
+`instr/` and the run files, all in this session's scratchpad. The baseline run's red list is `t0.fails` and the ruled
+shape's is `tA.fails`.
