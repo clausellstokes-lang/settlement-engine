@@ -15,6 +15,7 @@ import { beforeAll, describe, expect, it } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 /** the census's 720 shape @param {string} seed */
@@ -82,14 +83,12 @@ beforeAll(async () => {
 describe('TAIL-POWERS-B-4 batch 8 (P31) · the powers lines read the roster, the conflicts and the land', () => {
   for (const [seed, refused, instead] of ROWS) {
     it(`${seed}: not "${refused.slice(0, 48)}…"; prints "${instead.slice(0, 40)}…"`, () => {
-      expect(pages[seed]).not.toContain(refused);
-      expect(pages[seed]).toContain(instead);
+      expectAbsentWithAnchor(pages[seed], refused, instead, `${seed}: the cured line`);
     });
   }
   for (const [seed, card, refused, instead] of CARD_ROWS) {
     it(`${seed}: the ${card}'s card does not say "${refused.slice(0, 40)}…"; it says "${instead.slice(0, 40)}…"`, () => {
-      expect(cards[seed][card]).not.toContain(refused);
-      expect(cards[seed][card]).toContain(instead);
+      expectAbsentWithAnchor(cards[seed][card], refused, instead, `${seed}: the ${card}'s card`);
     });
   }
   for (const [seed, kept] of KEEP) {

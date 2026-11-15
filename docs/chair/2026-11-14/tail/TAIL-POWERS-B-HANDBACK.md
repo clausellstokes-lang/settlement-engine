@@ -419,7 +419,20 @@ A1 and A6, the same 2 red at the base: CARRIED.
   line (dmPowerLines.js, patronage.js's variant pick) reads that fact and prints the none rung's first line, true there. For the
   defence display's seat: is "Multiple criminal factions" with no criminal power rival rings, and the pins re-keyed with it.
 - tests/generators/captureBirthScale.test.js "statistical floor 372 > 326": (iii): hallCapture.js and the capture state are not in
-  these files; green at fd4db104e (2026-11-12), red at 40238d3ab (before this seat): a first-parent bisect of fd4db104e..40238d3ab (231 merges of the joined line) was started in scratch and not finished at this hand-back: the commit is NOT YET NAMED; re-run: `git bisect start --first-parent 40238d3ab fd4db104e; git bisect run <the -t "overwhelming criminal presence" run>`.
+  these files; green at fd4db104e (2026-11-12), red at 40238d3ab (before this seat): a first-parent bisect of fd4db104e..40238d3ab (231 merges of the joined line) was started in scratch and NOT FINISHED at this
+  hand-back: the commit is NOT YET NAMED; narrowed to good bfab7bdd8, bad 4f24025c2 (JOIN-2 · 0.6, the merge of lane/w2-write-2026-11-13 at
+  fdae163f3, or a merge before it); re-run: `git bisect start --first-parent 4f24025c2 bfab7bdd8; git bisect run <a script that runs
+  captureBirthScale.test.js -t "overwhelming criminal presence">`.
+
+- tests/joins/labelJoins.test.js (the chair's P33, a sixth red): "no file gains a label-join site": claimStanding.js holds ONE
+  instNamesScan site, `instNames.some((n) => String(n).includes('warehouse'))` (TAIL-POWERS-B batch 2's warehouse condition on the
+  trade nexus's "control warehousing", cc834166f; the habitat frozen at 0 for this file). NOT CURED HERE: its one home would be a
+  catalog id the caller (rulingStructure.js, not this seat's) passes in place of the lower-cased names, or a `warehouse` atom of
+  the fact vocabulary (no new word without the chair). ASKED of the chair; renaming the variable to slip the scan is not a cure.
+- THE CHAIR'S RULE FOR NEW TESTS (05:06): this seat's guard (powersReadTheRosterP31.test.js) asserts every negative through
+  tests/helpers/anchoredNegatives.js :: expectAbsentWithAnchor (the twin as the anchor); no seed loop; no state-prose anchor.
+- (P32, 05:12) src/data/people/dmPowerLines.js line 27 (the powerSentenceName import) is lent to TAIL-TIES-5 (its path only):
+  not edited here.
 
 ## EVERY NEW OR CHANGED LINE (the owner's veto), with towns it was read in
 - BATCH 8 (P31): "The faith holds no office in the hall, but its moral authority is real and its word carries political
