@@ -10,6 +10,10 @@ Every run went to a file in the seat's scratch tree; the search is one script ov
 | `tests/domain/defenseInvasionWithinACriticalBand.test.js` | 2 of 3 | **07ebe8bdc** (COHERENCE-UPKEEP, "the five upkeep gates read the one home", a DECLARED move of the readiness labels; landed at 33b12cbef, JOIN-1 · 9) | (ii) re-keyed by identity | 3 of 3 |
 | item 3: `captureBirthScale`, `tierInertiaEnvelope` | — | — | waiting on the chair's word "THE ENVELOPES AT <tip>" | — |
 
+**After the record cures landed** (lane/tail-record at 7ac689418, JOIN-11 point 8): the joined line at ffdd541a0 merged
+into this branch (d5c5b922f, a merge, no rebase); both files re-run alone there: 139 of 139 green. The economic
+rating's cap and the rounded magic share move none of the five re-keyed towns out of their case.
+
 ## How each turning commit was found
 
 - **corpusEcoTailGuards** — bisect of the three rows over the line's first-parent points from the file's landing
