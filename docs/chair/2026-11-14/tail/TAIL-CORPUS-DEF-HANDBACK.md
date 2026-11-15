@@ -18,6 +18,20 @@ edited through their source `docs/content/RECEIPT_POOLS_DOSSIER_STATE.md` (DS-DE
 - BRIEF-TAIL's laws (silence is true; a line in its pool unless the town makes it false; a draw is not moved outside its
   pool; siege / famine / clip laws; one home for one fact; no new vocabulary word; no `src/pdf` or `src/foundry`).
 
+- (C7, the chair 2026-11-15 00:00-00:30 UTC) THE POWERS' FAMILY OF ATOMS IS NAMED AND CLOSED FOR NOW: `shared power` (on
+  this branch), `ruling body` (built; the ties seat's branch) and `rival power` (built; the crisis seat's branch; true of
+  the SETTLED record only). THE COUNCIL ROWS (C5) WAIT until the chair names a tip of the joined line that holds
+  `ruling body`: then merge origin/lane/join-2026-11-14 AT THAT TIP (the only merge this seat may make) and key them (a
+  line about a council of many `needs: ['ruling body']`, with a twin true under one ruler where the slot falls mute).
+  A fourth atom is asked of the chair with every line that would use it and their measures.
+- (C9) THE MAGIC-DEPENDENCY ROWS (a chain said to be sustained by magic beside a food ledger that holds none) stay named,
+  with their towns: a measuring seat takes the class.
+- (C8) A CLASS BEING MEASURED, not this seat's: prose written before its facts are final (true when drawn, false because
+  the record moved afterwards): a row found to be that is NAMED with that reason.
+- (X9) THE EXPORTS' READ: one row of these pools only the PDF and the journal print (read-all-3/WORKLIST3-CORPUS-DEF.md:
+  **26310**, DS-DEF-2 Internal Security court without detention v1, "money and exile" under a siege, 18 towns): taken
+  with its pool's batch, measured by `SURFACES=PDF,Journal python3 inventory.py <out-dir> x.json`.
+
 ## The base (the first act)
 - Census at 48fedbe98 (CENSUS-3's one command, its render extended to also write each pool's eligible/drawn lists and each
   town's record: `render.census3d.jsx`, see "instruments"). 720 towns, 29,876 distinct sentences.
@@ -114,3 +128,58 @@ Declared (no new words): walls ABSENT v2, walls PRESENT v2, viability intact v2.
   matches, 0 misses at the base), then `replay.mjs <tree> <dir>` and `moved.mjs <dir> <dir>.replay.json '.'`.
 - (all three in `docs/chair/2026-11-14/probes/TAIL-CORPUS-DEF/`; `mkrender.py <CENSUS-3 dir>` writes render.census3d.jsx) `facts.mjs <tree> <records> <out.json>` (factsOf of every town, compact) and `verify.py` (a row's towns from the
   inventory, the predicate that makes it false).
+
+---
+
+# TAIL-CORPUS-DEF-2 (the successor seat, session_01ACmDYWhPqWyyegu9YVWWef, a child of the chair session_01ACmDYZrFEVXyZEUg1NDxxC; 2026-11-15)
+
+Continues on the same branch from **c66510264** (read back from origin). Scratch worktree, its own `npm ci`. The base
+census (CENSUS-3's one command with `render.census3d.jsx`, re-made by `mkrender.py`) at c66510264: 720 towns, 29,875
+distinct sentences on the tabs, 35,778 on PDF+Journal (`SURFACES=PDF,Journal`). Replay probe 54,144 matches, 0 misses.
+The test files that name the touched files: now 67 (the grep of `dossierStateProse|RECEIPT_POOLS_DOSSIER_STATE|<desk>.generated`);
+33 reds at the base, carried (the same 33 as the predecessor's).
+
+INSTRUMENT ADDED: `replay2.mjs` = W2-WRITE-13's `replay.mjs` with `NEWV='<pool>:<vid>,…'`: a NEW vid (a twin, absent from
+the base render's recorded eligible lists) is eligible where its declaration admits it. Without it a declared pool's twin
+replays as "silent". (In `docs/chair/2026-11-14/probes/TAIL-CORPUS-DEF/`.)
+
+## Batch 2 — the capacity lines with a food twin; the autocrat under a succession (as the predecessor verified it)
+
+| row(s) | pool · line | false in (by the record) | cure | towns before → after (replay) |
+|---|---|---|---|---|
+| 23220 23219 | DS-DEF-12 CAPACITY: ample v1–v3 ("more than enough to get through a hard year") | 2 of the 4 printing towns (r2s-famine-village-3 famine; r2s-under_siege-town-2 food deficit) | DECLARED `food: ≥ pressured` on v1–v3; TWIN v4 `food: ≤ importDependent` | v3 2→0; v4 0→2 |
+| 00333 (+ its class) | DS-POW-5 autocrat v1–v4 ("one person decides … quickly") | 2 of 36 (r2s-succession_void-town-0, r2s-politically_fractured-town-2: no stable governing authority) | DECLARED `no crisis: succession` on v1–v4; TWIN v5 `crisis: succession` | v1 9→7; v5 0→2 |
+
+MEASURED BY REPLAY: exactly those four towns move (ample v3→v4 2; autocrat v1→v5 2); NO OTHER POOL MOVED.
+GUARD: `tests/domain/tailCorpusDefGuards.test.js` +4 DECLARED (each with its `instead` twin) +2 KEEP (r2r-town-54 ample
+v3, a secure isolated town; r2r-town-17 autocrat v1, a Feudal Appointee at peace): the 4 red at the base leaves, the 2
+keeps green; all 20 green after.
+PINS re-keyed by identity (+2 variants, +2 source lines): `composeStateProse` variants 2951→2953;
+`proseEntryContradiction` 3419→3421, 2714→2716 (twice), the `economicBase: extraction` row 2417→2418 and the annex row
+"the same trades exempt" 6160→6162 (re-addressed by their text); `proseWaveGate` units 626→627. (A first wording of the
+ample twin moved the trailing-coordinate pin and the move-grammar repeated-opener pin by one each; it was reworded so
+both stand at the base's figures, not re-keyed.)
+GATES: generator 0 / `--check` 0; strict 0; type ratchet 0; eslint 0 on the touched files; presumed-things `--check`
+fresh 147 stale 0 (exit 1, the same as the base); grid 2 falls (r2r-city-0, r2s-insurgency-metropolis-0 P7a), the same as
+the base; the 67 named files: 33 reds at the base, the same 33 after.
+
+### New lines (the owner's veto list)
+7. DS-DEF-12 CAPACITY: ample v4 `[ledger · food: ≤ importDependent]`: "In an ordinary year {settlement} would not miss
+   the road, river or port it lacks, but this is not an ordinary year: the town is not raising the food it needs." —
+   2 towns: r2s-famine-village-3 (a famine, the smallest) · r2s-under_siege-town-2 (a siege, the largest).
+8. DS-POW-5 autocrat v5 `[unfolding · crisis: succession]`: "Who speaks for the {seat} at {settlement} is an open question
+   now, and until it is settled, nothing that comes out of the {seat} is sure to stand." — 2 towns (both towns):
+   r2s-succession_void-town-0 · r2s-politically_fractured-town-2 (no siege, famine or occupation reaches the pool's
+   succession state at the base). It claims no plurality.
+
+### Verified in batch 2 and NOT cured (named)
+- THE AUTOCRAT LINES UNDER A COUNCIL OF MANY (the `ruling body` family, C7): 22 of the 36 towns that print DS-POW-5
+  autocrat v1–v4 ("One person decides …") hold a seat named "Military Council" / "Military City Council" / "Grand
+  Military Council" (`ruler: council`); row **00335** (r2s-under_siege-metropolis-1, a ruling three named on the page) is
+  one. PARKED with the C5 council rows: the line about one ruler takes `no ruling body` (or its atom's excludes form) and
+  a twin true under a body, when the chair names the tip. Measure 22 towns (v1 5, v2 7, v3 4, v4 6 by draw).
+- THE SEAT ECLIPSED (the `rival power` family, C7): row **00334** (r2s-under_siege-town-2): the page says "Feudal
+  Appointee keeps the title; Military/Guard makes the decisions that matter" beside autocrat v1. That state ("X keeps the
+  title; Y makes the decisions", 22 towns across every kind of seat at the base) has no atom on this branch: PARKED for `rival
+  power`.
+
