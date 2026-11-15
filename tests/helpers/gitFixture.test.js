@@ -3,12 +3,12 @@
  * exported, proved against a decoy.
  *
  * ── WHAT IS PROVED, AND AGAINST WHAT ─────────────────────────────────────────────────────
- * Every arm below builds its own DECOY repository in a temp directory — a main checkout
- * and a linked worktree, because the linked worktree is where git exports an absolute
- * GIT_DIR to a hook — and then points the hook's variables at it. Nothing here names the
- * checkout this suite belongs to, and no arm can reach it: every environment that carries a
- * hostile variable is built from `withoutRepositoryEnv()` first, so even a worker that had
- * inherited a real GIT_DIR could only ever hand git a decoy's.
+ * Every arm that points a hook's variables at a repository builds its own DECOY in a temp
+ * directory — a main checkout and a linked worktree, because the linked worktree is where
+ * git exports an absolute GIT_DIR to a hook. No arm can reach the checkout this suite belongs
+ * to with a mutating git: every environment that carries a hostile variable is built from
+ * `withoutRepositoryEnv()` first, so even a worker that had inherited a real GIT_DIR could
+ * only ever hand git a decoy's.
  *
  * ── EVERY "UNCHANGED" IS PAIRED WITH A "CHANGED" ─────────────────────────────────────────
  * "The decoy is byte-identical" is true of a guard that works and of a decoy nothing ever
@@ -22,7 +22,7 @@
  * This file drives real, mutating git. Its first cut trusted the module under test to put
  * those verbs in a temp directory, and when a probe broke the module they ran in the
  * checkout the probe was started from. The module now refuses that by itself (see its
- * header), and the last arm injects exactly that fault — aimed at a decoy — to prove it.
+ * header), and the arm marked ⛔ injects exactly that fault — aimed at a decoy — to prove it.
  * ⇒ PLANT A REGRESSION IN tests/helpers/gitFixture.js ONLY IN A COPY OF THE TREE THAT IS
  *   OUTSIDE EVERY REPOSITORY (`git archive <sha> | tar -x`, node_modules linked in).
  *
@@ -78,8 +78,8 @@ const DECOY_IDENTITY = Object.freeze({
 });
 
 /**
- * A throw-away repository shaped like the real one: a main checkout with a commit, a tag
- * and a second branch, plus a linked worktree on a branch of its own.
+ * A throw-away repository shaped like the real one: a main checkout with a commit and a
+ * tag, plus a linked worktree on a branch of its own.
  */
 function buildDecoy() {
   const home = tempDir('git-fixture-decoy-');

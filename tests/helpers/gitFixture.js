@@ -2,8 +2,8 @@
  * tests/helpers/gitFixture.js — the one door a test opens a throw-away git repository through.
  *
  * ── THE HAZARD (measured 2026-11-15 on git 2.43.0, against a decoy repository) ──────────
- * Git exports its own repository to every hook it runs. From a LINKED WORKTREE — where
- * every lane works — a `pre-push` hook receives `GIT_DIR=<main>/.git/worktrees/<lane>`;
+ * Git exports the repository it is working on to the hooks it runs. From a LINKED WORKTREE —
+ * where every lane works — a `pre-push` hook receives `GIT_DIR=<main>/.git/worktrees/<lane>`;
  * invoked as `git --git-dir=… --work-tree=…` it receives both variables; and `pre-commit`
  * adds `GIT_INDEX_FILE` and the author's `GIT_AUTHOR_*`. Those variables OUTRANK the working
  * directory, so a fixture's `git init` / `git config` / `git commit` — spawned with `cwd` on a
@@ -257,7 +257,7 @@ function assertAnswersForItself(physical) {
   if (answer !== null && answer !== own) {
     throw new Error(`fixtureGit REFUSED: git, started for the fixture root ${physical}, would`
       + ` use the repository at ${answer}`
-      + (own === null ? ' — and that directory is not a repository at all.' : ` instead of its own (${own}).`)
+      + (own === null ? ', while the fixture root is not a repository at all.' : ` instead of its own (${own}).`)
       + ' Nothing was run. A fixture git that reaches another repository is the leak this'
       + ' module exists to prevent: tests/helpers/gitFixture.js lost its `cwd`/`-C`, its'
       + ' ceiling, or its environment scrub.');
