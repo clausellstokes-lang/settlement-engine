@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "08bd47df54e67ea65bfdf1bc774266137883bd73",
-  "measuredBy": "TAIL-CLOSE-DOORS-4",
+  "measuredAtSha": "ab222b0cbcdb83a6636841e818c0021c36291d16",
+  "measuredBy": "BAR3-CLOSE-DOORS-1",
   "date": "2026-11-15",
-  "note": "the close's final tree",
+  "note": "the close of the round BAR3 (2026-11-15): FAMINE_HELD_STORE_MONTHS gains a dependent, src/generators/power/governanceNarrative.js, which now imports foodBalance.js for FAILED_SOURCE_WORDS (lane BAR3-POWERS batch 1, its table of books)",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -8466,7 +8466,8 @@
         "src/generators/foodGenerator.js",
         "src/generators/foodLand.js",
         "src/generators/narrativeText.js",
-        "src/generators/npcGenerator.js"
+        "src/generators/npcGenerator.js",
+        "src/generators/power/governanceNarrative.js"
       ],
       "namedDependents": []
     },
