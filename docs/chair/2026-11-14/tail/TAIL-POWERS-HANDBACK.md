@@ -124,6 +124,12 @@ A5 passed: timing), and two new reds, both cured before the commit (the claim pi
   ("Crime has left ... contested" with no crime, 7 rows), governingStressVignettes (7), stressFactions (4), handlerTieLines (2),
   settlementNarrative TIE_GLOSS (2), factionProfile (2), powerStrata (2), conflictIssues (1), stressPowerFaces (1).
 - Guards owed: the one-member council's plural lines (above).
+- THE EXPORTS' ROWS (the chair's note X9, 00:00 UTC, read after this seat's last batch): docs/chair/2026-11-14/read-all-3/WORKLIST3-
+  POWERS.md and .json on the chair's lane, 32 rows (1 HIGH) that only the PDF and the journal print: NOT READ by this seat, LEFT whole
+  for the next. Measure with `SURFACES=PDF,Journal python3 inventory.py <out-dir> x.json` (re-fetch the instrument); check NO-SEAT
+  and currentTensions rows against `npcs[].memberships` and `history.currentTensions` first. Batches 1 and 2 were measured on the
+  tabs only; their writers print on every surface, so their export rows (if any of the 32) may already be fewer.
+- `powerSentenceName`: this seat did not change its signature (or call it anew).
 
 ## How the instruments are re-made
 The census: `git archive origin/lane/census-3-2026-11-14 docs/chair/2026-11-14/probes/CENSUS-3 | tar -x -C <dir>`;
