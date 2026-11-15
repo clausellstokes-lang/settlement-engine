@@ -301,7 +301,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
   // null ⇒ NO live-flow section ⇒ the generation baseline below renders byte-identically.
   const campaigns = useStore(st => st.campaigns);
   const eco = economicState || s?.economicState;
-  const storesLine = eco?.foodSecurity?.foodRecord ? foodStoresWords(eco.foodSecurity.foodRecord) : '';
+  const storesLine = eco?.foodSecurity?.foodRecord ? foodStoresWords(eco.foodSecurity.foodRecord, s ? factsOf(s).crisis : null) : ''; // TAIL-DISPLAY-ECON-3 (X21, K7 · 18671's kin): the crisis handed in, the Tonight sheet's own call: one home
   // FOOD-4: the foodways line is the food record's, read through the one reader; never composed here.
   const foodwaysLine = foodwaysLineOf({ economicState: eco });
   // The derivation is deskHostArgs.js's, shared with the public prose composer (SW-B7b).
@@ -877,3 +877,5 @@ function flowHeaderCount(chains, services, impairedHouses) {
   const words = active > 0 ? ` (${active} active${impaired > 0 ? ` · ${impaired} impaired` : ''})` : impaired > 0 ? ` (${impaired} impaired)` : '';
   return { active, impaired, words };
 }
+
+import { factsOf } from '../../../domain/facts/factsOf.js'; // TAIL-DISPLAY-ECON-3 (X21): the stores sentence takes the town's crisis, as the Tonight sheet's call does
