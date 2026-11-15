@@ -482,6 +482,8 @@ green.
   not the town's state); the tabs print them unmarked. Struck here; NAMED for the record (the gap held everywhere).
 - 01055 "<N> Trade" (3 towns), 31610 (3), 17282 (4), 01241 (1), 29786 (1): each prints in fewer than five towns at the
   tip: NAMED as left (the chair's rule); the PDF's worklist is done.
+- 04297 "Agricultural Rents" (REST): STRUCK AS NAMED (the chair, 2026-11-15 02:15 UTC): the PDF prints the record's
+  income source; its name is cured at the source by the seat that holds `economicState.js` ("Harvest"). No PDF change.
 
 ### Every new or changed line (the owner's veto list)
 
