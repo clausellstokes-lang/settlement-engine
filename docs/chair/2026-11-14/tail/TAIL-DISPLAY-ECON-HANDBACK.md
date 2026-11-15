@@ -514,3 +514,94 @@ As above (`git archive` of READ-ALL and CENSUS-3 to the seat's scratch). Worktre
 ## Hand-back (TAIL-DISPLAY-ECON-4)
 
 The worklist is finished inside the count (X24): batch 4 (X25.1) and X26 are pushed, and every row of five towns or more is verified. The branch tip is the hand-back commit after 9abfb1553. The after census of X26 (at 29deff376, the same code as 9abfb1553) is the next seat's before only if it renders that tree. It was written to this seat's scratch, which does not outlive the container: re-make it with the commands above.
+
+# TAIL-DISPLAY-ECON-5 · the fifth seat's jobs (X30 to X32)
+
+Seat: TAIL-DISPLAY-ECON-5 (builder), succeeding TAIL-DISPLAY-ECON-4 on the same branch from its tip **7beec164d**. First act: the joined line at **5d1e3096b** merged (merge commit **1322e7d0a**, the only merge). Scratch worktrees, detached; pushed by explicit refspec. The hand-back is this seat's to keep current.
+
+## The chair's rulings for this seat (2026-11-15 04:02 UTC; each vetoable by the owner)
+
+- **(X30)** THE SHADOW ECONOMY'S FIGURE (the Economics tab's "Shadow Economy: N% capture", 476 towns): measure where the figure comes from, where a capture stands with no criminal income source, and where it differs from the income's share and why (if they count different things the row says what it counts, in three words). Cure at the display: the row prints through the leaf the PDF already uses (`shadowEconomyShown`; the export prints what the tab prints), silent where the record holds no illicit money. A capture with no source: one line to the chair with the count.
+- **(X31)** "A few households still go short, and a bad season would leave more of them hungry." (`EconomicsTab.jsx :: shortWords`, 183 towns) printed where the food record shows no gap and the band is Secure: the words read the food record's own band.
+- **(X32)** THE MAGIC WORDS AGAINST THE FOOD RECORD: "Reliance on magic: None" (720 print the label, 366 the word), "Nothing structural at <N> depends on arcane work." (122) and "Economic role: occasional" (338) in towns whose food record shows food made by magic. Measure where the label reads None beside a record share above nothing; the label and the lines read the record's share (the smallest true word for a trace), in one home; where the record's share is the doubtful thing, one line to the chair.
+- **(X33)** STRUCK by the chair (not this seat's): the "Production … imported" figures; "Fully exploited" on a failed fishery (cured on another branch).
+- (U1) The usage warning is on: push every job the moment it holds; hand back at 250,000 or about seventy minutes; one line to the chair at the hand-back, a stop, or for the two counts X30 and X32 ask for.
+
+## The measures before (census at 1322e7d0a, 720 towns, by script over `corpus.ndjson.gz` and `dumps/`)
+
+- **X30.** The figure is `economicState.safetyProfile.blackMarketCapture` (`safetyProfile.js`: the criminal effect less 25, over 3, plus a stress bonus scaled by size). The record adds its criminal income share (`economicState.js`: "Black Market Revenue" and its kin, `isCriminal`, weighted by the capture) only where the capture is ABOVE 10. Of the **476** towns that print the row, **240** (capture 3 to 10, exactly) hold **no criminal income source**: 169 of them no criminal house either, 53 neither a house nor a crime pattern; 71 do hold a criminal house and 79 a criminal-economy chain (the record's capture without its money: TOLD TO THE CHAIR for the record's measuring seat). In all **236** towns above 10 the source stands; in **228** of them its share differs from the capture, because the two count different things: the capture is the trade that goes unrecorded (the block's own scale notes say so); the income row is the criminal take's share of all the town's income, normalized with the other sources (33 beside 19).
+- **X31.** The line prints in exactly **183** towns: the record's band is **Secure in 177** (33 with a record gap of 0%, the leaf rounding a few pounds up to 1%; 144 with 1 to 5%, inside the band's own cut), **Pressured in 6**.
+- **X32.** "Reliance on magic: None" (on the Magic tab and the Overview's substrate line) beside a record share above nothing: **4 towns** (r2s-occupied-thorp-0, r2s-occupied-thorp-2, r2s-indebted-thorp-2, r2s-insurgency-thorp-2). In all four `foodRecord.magicPct` is 1 while `foodSecurity.magicOffset` is 0 (no pound of provision) and no practitioner stands ("No arcane practitioners on the rolls"): a sub-pound trace (`foodGenerator.js` hands `deriveFoodRecord` the unrounded offset and publishes the rounded one) rounded into the record's share. THE RECORD'S SHARE IS THE DOUBTFUL THING: TOLD TO THE CHAIR; the label is true by the pounds and is not changed. The foodways sentence "some of what the thorp eats is provided by spell or by prayer" reads that 1% (`domain/foodways.js`, not this seat's). "Nothing structural …" beside a record share: **2** (two of those four). "Economic role: occasional" beside the food record's own provision (`foodMagicShare` > 0, under "Reliance on magic: Relied upon"): **63** (50 food alone, 13 food and a magic chain; a thorp fed 26% by magic among them).
+
+## The cures (one commit a job; pushed at 756ba4bda)
+
+- **X30, commit 1f41c23dc.** `shadowEconomyShown.js :: SHADOW_CAPTURE_FLOOR` 3 → **11**, the record's own floor for its criminal income share. The tab's block reads `shadowCaptureShown` (as the PDF already did), and the row reads **"Shadow Economy: N% of trade unrecorded"**. Every EconomicsTab edit in place (no line moved); the prose-numerics row at line 663 re-keyed by identity; `economicsTabFlow.test.js`'s anchor re-keyed to the new words.
+- **X31, commit a4cd78c81.** `shortWords` takes the record's band (`foodRecord.band`): Secure prints **"Between them, nearly every household is fed, and a bad season would leave some of them short."** (under a crisis that brings the hunger here: "Between them, nearly every household is fed for now.", printed nowhere in the census). Every other band keeps its words.
+- **X32, commit 756ba4bda.** `magicProvisionShown.js :: economicRoleBandShown` (new; only the Magic tab calls it): an economic band of absent or occasional beside the food record's own provision prints **"common"**, the ladder's smallest word true of a provision made every day ("regular, not foundational"). `MagicTab.jsx`: the role line and its gate read it. No export prints the role.
+
+## The inventory diff (census before 1322e7d0a, after 756ba4bda)
+
+Tabs: `sentences: before 29899 after 29899 · gone 2 · new 2 · in fewer towns 41 · in more towns 4 · moved 0`.
+- "Shadow Economy: #% capture" 476 → 0; NEW "Shadow Economy: #% of trade unrecorded" 236. X30's 240 silenced exactly.
+- "A few households still go short, …" 183 → **6** (the Pressured six); "Some households still go short, …" 40 → 39 (r2r-hamlet-12, band Secure); NEW twin 178 (177 + 1). X31's measure exactly.
+- "Economic role: occasional" 338 → 275 and "Economic role: common" 151 → 214: X32's 63 exactly.
+- **EVERY OTHER LINE IN FEWER TOWNS IS IN THE 240 (each lost town is one of them), explained:**
+  - The block's own lines, unsupported where the record holds no illicit money: "Off-book" 476 → 236; the drag lines ("Some goods change hands here without a licence or a duty paid." 172 → 68, "It is noticed, …" 136 → 52, "A little changes hands here quietly, …" 70 → 18); the scale note and DS-ECO-6's desk lines of a small shadow trade ("Some petty theft goes on here, …" 45 → 7, "The shadow trade at <N> is small, but it is not casual …" 69 → 23, "Little of <N>'s trade goes unrecorded, …" 54 → 18, "There is some thieving …" 48 → 7, "There is unlicensed trade …" 43 → 9, "What passes for a shadow economy …" 43 → 9, "A little of <N>'s trade is done out of sight, …" 18 + 15 + 14 + 8 → 3 + 1 + 1 + 5, "Every <size> this size has both." 17 + 17 + 11 + 3 → 4 + 1 + 1 + 1).
+  - **TRUE LINES SILENCED, the fact still on the page:** the "Criminal supply chains" pills ("Criminal supply chains" 236 → 157, "Operational" 224 → 149, "Black market" 189 → 147, "Guild crime", "Transhipment hub", "Smuggling" 168 → 166): **79 towns**; each chain still prints as its own Economic Flows card on the same tab ("Black market · Criminal economy · Operational", checked in all 79).
+  - **TRUE LINES SILENCED, told to the chair before the push (X30's silence):** DS-ECO-6's hidden-house and theocratic lenses (the `DeskLines` under the block): "<N>'s Underground network / city / Black market bazaar works below its streets, …" and "The way into <N>'s Underground … is through a cellar, …" (about 28 towns), "A merchant arriving at <N> soon learns that the religious house has the last word …" 9 → 5 and "The clergy have more say over <N>'s market …" 5 → 3. The houses print on the Defense tab. NARROWING, for the next seat if the chair wants it: draw `DeskLines` where the block is silent but the raw capture was 3 or more (an edit in place on line 630; its own census).
+- "Patron deity" and its two lines 716 → 717: the render warm-up flake batch 3 named (no file of this seat renders that panel).
+- **THE INHERITORS, read where they print:** "Shadow Economy: #% of trade unrecorded" (236, e.g. r2r-city-0: "16% of trade unrecorded" beside "Black Market Revenue"), the Secure twin (178, e.g. r2r-city-12), "Economic role: common" (63, e.g. r2r-city-38, beside "Reliance on magic: Relied upon"): each is true by the record where it prints.
+
+Exports (`SURFACES=PDF,Journal`): `before 36746 after 36746 · gone 0 · new 0 · in fewer towns 4 · in more towns 1`. The PDF follows the leaf: "Black market capture: #% of economy" 476 → 236; "SHADOW ECONOMY" 573 → 522 (it still prints where the record holds crime patterns or criminal chains); the enforcement line ("The criminals outmatch those who keep order." 217 → 209; "Those who keep order roughly match the criminals." 83 → 76) gives way in **15 towns** to "No criminal infrastructure has been identified." (62 → 77): towns with no criminal house, no crime pattern and now no shadow share (`criminalsStandHere`): true there.
+
+## THE VETO LIST (this seat): every new or changed line, with the towns it was read in (smallest … largest · a crisis town)
+
+1. "Shadow Economy: N% of trade unrecorded" (236): r2r-thorp-10 … r2s-wartime-metropolis-3 · r2s-famine-hamlet-3.
+2. The Shadow Economy block SILENT where the capture is 3 to 10 (240): r2r-thorp-8 … r2s-wartime-metropolis-1 · r2r-thorp-58 (a siege), r2r-thorp-17 (a famine), r2r-thorp-27 (an occupation). The PDF's capture line silent in the same 240; its enforcement line reads "No criminal infrastructure has been identified." in 15 (r2r-thorp-13 … r2s-succession_void-town-3 · r2s-infiltrated-thorp-3).
+3. "Between them, nearly every household is fed, and a bad season would leave some of them short." (178): r2r-thorp-10 … r2s-wartime-metropolis-3 · r2s-occupied-thorp-2.
+4. "Economic role: common" where the profile said occasional (63): r2r-thorp-16 … r2s-plague_onset-city-3 · r2s-occupied-thorp-1.
+
+## The tests
+
+- `tests/components/displayEconShadowFloor.test.jsx` (X30): 4 NOT pairs (three silent by design, one naming the new words) and the one-home check (the leaf prints a capture exactly where the record holds a criminal income share), red at the base; 1 KEEP green.
+- `tests/components/displayEconShortWords.test.jsx` (X31): 3 NOT pairs red at the base, each naming the twin; 2 KEEP (Pressured) green.
+- `tests/components/magicRoleFoodProvision.test.jsx` (X32): 3 NOT pairs red at the base, each naming "common"; 3 KEEP green (occasional with no provision, common, integral).
+- **11 red at the base 1322e7d0a, 6 green; all 17 green on the cure.** The base run is the plant.
+
+## Gates (the cured tree 756ba4bda)
+
+- strict domain: 1113 against 1113. Type ratchet: 167 against 167. eslint on the touched files: clean.
+- presumed-things walker `--check`: 34 fresh at the base and 34 after, the same set (its exit 1 is the base's own).
+- twelve-birth grid: exit 0, 2 falls (P7a: r2r-city-0, r2s-insurgency-metropolis-0), no rise.
+- the 82 test files naming the touched files: green but nine. Six are the reds batch 4 named as carried (`dossierPhoneFloorAllViews`, `phoneChromeFloor.census`, `observedShapeReaders.walker`, `proseNumerics`, `rawColorLiteral`, `dossierProseManifest`). Three more fail the same 5 tests, by name, at the base 1322e7d0a: CARRIED FROM THE JOINED LINE (its record cures moved those births), not this seat's: `displayEconCrisisMarks` (3: r2s-famine-hamlet-0's fish line, r2s-under_siege-town-1), `displayEconRelianceFoodWords` (1), `defenseTabFlow` (1: T2-24 STOP-2). The two of this group's own files are NAMED for the next seat: re-key their pins by identity at the joined births.
+
+**Registers:** the prose-numerics row re-keyed by identity (line 663's snippet). None stale. **Declared moves:** none (no generator or data file touched; the record is unchanged).
+
+## Named for other seats
+
+- **The EXPORTS seats:** the PDF's capture line says "Black market capture: N% of economy"; the tab now says "N% of trade unrecorded" (the same figure; the PDF's words are its own). The floor is already shared through the leaf.
+- **The record's measuring seat (told to the chair):** X30's capture without its money (240 towns; 71 with a criminal house, 79 with a criminal chain); X32's magic trace (4 towns: `foodRecord.magicPct` 1 beside `magicOffset` 0, no practitioner).
+- **`domain/foodways.js`:** "some of what the <size> eats is provided by spell or by prayer" reads the same 1% (4 towns).
+- **Not cured, the same shape on this group's tab (a candidate for the chair):** "Economic role: occasional" under "Reliance on magic: Relied upon" where the reliance is a CHAIN that needs magic, not the food (36 towns), and "Economic role: absent" beside it (8). X32 was the food's; this would read the whole reliance reading.
+
+## What is left (as at 756ba4bda)
+
+- X30, X31 and X32 are cured and pushed; X33 was struck by the chair.
+- The rows under five towns still wait, as the last seat left them: B28006/B28222's one town (r2r-hamlet-48); 14395, 14400, 14242 (1 each, `tradeListDisplay.js :: importsAsPrinted`); B28459 (1).
+- The two carried pins of this group's own tests (`displayEconCrisisMarks`, `displayEconRelianceFoodWords`), re-keyed by identity at the joined births.
+- The candidates above: the desk lenses' narrowing (X30) and the chain-reliance role rows (X32's shape).
+
+## How the instruments were re-made
+
+`git archive` of `docs/chair/2026-11-14/probes/READ-ALL` (lane/chair-2026-11-08) and `CENSUS-3` (lane/census-3-2026-11-14) into the seat's scratch. Worktrees: `wt` (the cure, its own `npm ci`), `base` (1322e7d0a) and `after` (756ba4bda), each `node_modules` linked to `wt`'s; one census at a time (`census3.sh <tree> <out> 4`, about 22 minutes), then `inventory.py` (and `SURFACES=PDF,Journal inventory.py` for the exports) and `inventory_diff.py`. The record probes (scratch, not kept): `x30.mjs` (the capture against the income sources), `x31.mjs` (the short words against the band, through the tree's own `foodRowShown` and `carriersOf`), `x32*.mjs` (the reliance word, the role rows and the Magic view against `foodMagicShare` and `foodRecord.magicPct`).
+
+## The chair's ruling U2 (received after the hand-back): the three red files of this area, each run alone at 76450d5f8
+
+- `tests/components/displayEconRelianceFoodWords.test.jsx` (1 red): (ii) A PIN A DECLARED MOVE EXPLAINS. The KEEP pair's card still prints in r2s-famine-town-1; the record's Entrepôt share moved 13 → 14 under the economy family's declared moves on the joined line (TAIL-DEFECON-2 5f67f382d, TAIL-DEFECON-3 2ac50c55d; which of the two is not isolated). RE-KEYED BY IDENTITY to "… 14% of income"; 23 of 23 green.
+- `tests/joins/fieldManifest.test.js` (1 red at this tip, `magicRecovery`; the `magicNote` read the chair saw is green here): (iii) the cause is not in this seat's files. `src/domain/fieldManifest.js` lists `EconomicsTab.jsx` as a consumer of `activeChains[].magicRecovery`; the tab's read left with the recovery chip at **56f73d7ec** (W2-C-LEAVES-5 item 5), already on the joined line. The field keeps its reader (`supplyChainState.js`); the manifest's consumer list is stale, and the manifest is outside this group's files: for its own door.
+- `tests/joins/labelJoins.test.js` (1 red): (iii) not this seat's: `src/generators/power/claimStanding.js` gains one label-join site (`instNamesScan`), last touched by **cc834166f** (TAIL-POWERS-B batch 2) on the joined line.
+- Still red and carried (named above): `displayEconCrisisMarks` (3, the joined births moved its pins: for the next seat to re-key by identity, as this one was).
+
+## Hand-back (TAIL-DISPLAY-ECON-5)
+
+Handed back after X30 to X32, inside the count. The branch tip is the hand-back commit after 756ba4bda. The after census (at 756ba4bda) was written to this seat's scratch, which does not outlive the container: re-make it with the commands above.
