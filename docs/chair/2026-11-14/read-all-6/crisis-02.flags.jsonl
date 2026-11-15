@@ -1,0 +1,17 @@
+{"id":"00147","town":"r2s-occupied-hamlet-0","sev":"MED","kind":"STATE","why":"says a little trade is done out of sight; INCOME is Harvest 100%, TRADE exports/imports none, isolated: no hidden trade in the record","other":""}
+{"id":"00281","town":"r2s-occupied-hamlet-0","sev":"LOW","kind":"STATE","why":"says everything looks recently built; the hamlet is 55 years old, founded as a mining camp","other":""}
+{"id":"00070","town":"r2s-occupied-hamlet-1","sev":"MED","kind":"LACKS","why":"presumes a road that brings the hamlet something; trade access isolated, imports none, exports none","other":""}
+{"id":"00608","town":"r2s-occupied-hamlet-2","sev":"LOW","kind":"STATE","why":"elders decide and none rules alone, stated flat; the town is occupied, Occupation Authority Strong, stability Suppressed","other":""}
+{"id":"00512","town":"r2s-occupied-village-3","sev":"LOW","kind":"BROKEN","why":"'will not be abandoned in one.' ends on a dangling 'one'; reads as cut mid-clause","other":""}
+{"id":"00699","town":"r2s-occupied-village-1","sev":"MED","kind":"STATE","why":"timber and its hauling 'keep the place alive'; INCOME is Harvest 87%, exports none, isolated, timber chain cannot make final goods","other":""}
+{"id":"00150","town":"r2s-occupied-village-2","sev":"MED","kind":"STATE","why":"says a little trade is done out of sight; INCOME lists no black market or smuggling, only Harvest, Market Taxes, Tolls","other":""}
+{"id":"00323","town":"r2s-occupied-town-2","sev":"MED","kind":"STATE","why":"Guild Council 'collects the taxes' flat; under occupation with vassal extraction the Occupation Authority (equal strength) takes the levy","other":""}
+{"id":"00009","town":"r2s-occupied-metropolis-0","sev":"MED","kind":"STATE","why":"'Three powers stand almost level, no one leads'; GOVERNMENT has only two at Significant (Consortium, Occupation Authority), the rest Minor/Suppressed, and names the Consortium as governing","other":""}
+{"id":"00275","town":"r2s-plague_onset-village-1","sev":"MED","kind":"STATE","why":"describes goods passing the crossroads and traders stopping and spending as running trade; the town is under plague (Plague Unrest): people do not travel or gather as usual","other":""}
+{"id":"00615","town":"r2r-village-50","sev":"LOW","kind":"STATE","why":"'less and less is decided without it' says a trend; QUARRELS gives Elder Council ~ Military/Guard as tense, stable. Also names 'the hall'; HOUSES has none","other":""}
+{"id":"00410","town":"r2s-plague_onset-city-0","sev":"MED","kind":"BROKEN","why":"slash label 'Military/Guard' used as a name beside a verb ('has no stake yet')","other":""}
+{"id":"00411","town":"r2s-plague_onset-city-1","sev":"MED","kind":"BROKEN","why":"slash label 'Military/Guard' used as a name beside a verb ('is already at odds')","other":""}
+{"id":"00037","town":"r2s-occupied-village-0","sev":"LOW","kind":"LACKS","why":"says carts bring in food; trade access isolated, TRADE imports only incense, so no cart route in the record","other":""}
+{"id":"00038","town":"r2s-occupied-village-1","sev":"LOW","kind":"LACKS","why":"says carts bring in a fifth of the rest; trade access isolated, so no road or cart route for the town","other":""}
+{"id":"00461","town":"r2s-plague_onset-metropolis-3","sev":"LOW","kind":"BROKEN","why":"'whoever set it' has no antecedent and reads as a fire or arson hook under a plague header","other":""}
+{"id":"DONE","lines":1555,"blocks":47,"flags":16}
