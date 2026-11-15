@@ -75,8 +75,10 @@ stream": the raw runner's record lacks the entry's final-record pass `withConfli
 sentence); the roster is the same 28 on both sides. And `generationForkCensus` A5's third `food.cropFortune` mint is 7ac689418 (the
 food record's magic share, lane/tail-record), named in its note (eb201d433).
 
-**A CEILING, NOT RAISED**: `generationForkCensus` A1 "total mints is row-dependent but bounded": 141 against `<= 139` (unmasked by
-FC1); sent to the chair.
+**FC2** (e20666215): `generationForkCensus` A1's mint bound 139 -> 141 (left unraised by me and sent; the chair ruled): the row's
+mints listed at fce41f2b7 (134) and at the tree (141) and diffed: beyond the five npc_power_landed_gentry mints already named, ONE
+label: `food.cropFortune` [fork] 1 -> 3, by 05ec9b601 (the stores' second call, lane/coherence-upkeep, JOIN-1·9) and 7ac689418 (the
+food record's magic share, lane/tail-record, JOIN-11·8). 7/7 GREEN.
 
 ## THE MERGES (on the chair's words; no conflict)
 
@@ -91,10 +93,30 @@ lane/tail-close-presumed-2026-11-15 at 8972a8564. After them: `presumed-things-d
 `townCartographyCalibration`, `dossierProseManifest`, `presetLightingWitness`: the owner's door, waiting on the owner's own
 explicit word (asked 13:58 and 14:08 UTC); `worldFactRederive`'s dossier pin stays (green with the old manifest).
 
+## PART C AND D AGAIN, AT THE TREE OF THE THREE MERGES (e20666215)
+
+Both refreezes ran and measured NOTHING MOVED (tuning 280/541/6877; lighting files 3607, parked 454, credited 3153, titles 30536,
+suiteTitles 8422): each wrote only its stamp, which I did not keep. Part D: `presumed-things-door --check` exit 0 (fresh 0 · stale
+0 · banked 4689); `check-writer-reach` exit 0 (judged 12661 · LIT 691 · LIT-NAME 10563 · DARK 1407, unmoved); `check-observed-shape-readers`
+exit 0. These are to be taken again after MERGE WORDS 4 and 5 (the repair and the worker's ceiling), with the edge bundles, the
+fourteen non-test steps, the build and `verify:dist`.
+
+## PART E · THE RECEIPT (each file alone, at e20666215)
+
+GREEN: recordMerge 8/8, institutionBudgetPromise 1/1, powerEconomyFreshness 10/10, pipelinePinnedChoosers 7/7, x46NpcBand 24/24,
+mundaneRealmAcceptance 21/21, rosterDuplicateDraws 3/3, hookThemeDraws 13/13, generationForkCensus 7/7, intentAtlasSoakDistiller 7/7,
+mergeLadderHeldKeys 8/8, proseFamilyContract.walker 8/8, generatorGoldenMaster 3/3, espionageDormancyFence 21/21, goldenViewModel 4/4,
+heraldKnowledgeDeskGolden 3/3, worldFactRederive 7/7, editWorldFactResources 6/6, sourceCitationIntegrity.walker 18/18,
+upkeepVocation 2/2, proseComposed.walker 87/87, proseEntryContradiction.walker 29/29, proseWiringCensus.walker 79/79,
+proseMoveGrammar.walker 54/54, composeStateProse 51/51, observedShapeReaders.walker 47/47, tuningRegister.walker 76/76,
+sovereigntyLightingContract.walker 34/34, editCorpusRatchet 8/8, pipelinePinnedMode 15/15.
+WAITING ON THE OWNER'S DOOR (not failures of this seat): townCartographyCalibration 30/32, dossierProseManifest 14/17,
+presetLightingWitness 6/7. goldenFreeze.walker once more after the last merge.
+
 ## WHAT IS LEFT, IN ORDER
 
-The two refreezes again on the clean final tree; Part D's three readings again; Part E whole (also the prose seat's four files,
-`proseMoveGrammar.walker`, `composeStateProse`); one line with the tip.
+MERGE WORD 4 (lane/tail-close-sweep-d) and MERGE WORD 5 (lane/tail-close-worker); then `npm run build:edge-shared`; the fourteen
+non-test steps; `npm run build` and `verify:dist`; the two refreezes; Part D; Part E; one line with the tip.
 
 ## FOR THE OWNER, IN PLAIN WORDS
 
