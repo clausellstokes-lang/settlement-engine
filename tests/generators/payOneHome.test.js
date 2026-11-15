@@ -118,7 +118,13 @@ describe('the money laid by before the crisis (1b-M3)', () => {
     const cfg = birthConfig({ ...DEFAULT_CONFIG, settType: 'city', selectedStresses: ['famine'], selectedStressesRandom: false });
     const s = generateSettlementPipeline(cfg, null, { seed: 'rv2-famine-city-0', customContent: {} });
     expect(prosperityInCrisisLine(s), 'anchored: the two words differ in this famine').not.toBeNull();
+    // 2026-11-15 (TAIL-CLOSE-SWEEP-D item 2, at the doors' tip 73090ee9e): re-keyed from the STRONG clause ("Money enough to
+    // ride out a long crisis, laid by before the famine: emergency measures can be paid for, and the garrison kept paid while
+    // it lasts.") to the ADEQUATE one by the close's declared record cure R1 (b8a82cf4, the Economic Survival rating capped
+    // by the prosperity word: tests/generators/economicRatingCappedByProsperity.test.js). Read on this birth: prosperity
+    // Struggling; scores.economic 77 before the cap, 64 after (SCORE_BAND_CUTS.strong 65); with the cap alone switched
+    // off at the same tip the line reads the STRONG clause again, and nothing else in the assessment moves.
     expect(buildThreatAssessment(s).find((row) => row.label === 'Economic Survival').assess)
-      .toBe('Money enough to ride out a long crisis, laid by before the famine: emergency measures can be paid for, and the garrison kept paid while it lasts.');
+      .toBe('Money enough for a short crisis, laid by before the famine; a long one would start eating the reserves within months.');
   });
 });
