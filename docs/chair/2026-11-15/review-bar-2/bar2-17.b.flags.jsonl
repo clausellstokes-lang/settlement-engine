@@ -1,0 +1,6 @@
+{"id":"C34242","town":"bar0-village-famine-rand-5","sev":"MED","kind":"LACKS","why":"a carpenter's bench; HOUSES lists no carpenter or joiner (only woodcutter's camp, thatcher)","other":""}
+{"id":"C34241","town":"bar0-village-famine-rand-5","sev":"LOW","kind":"LACKS","why":"a guard patrol; DEFENCE has no watch or garrison, only a citizen militia; Law & order is Collapsed","other":"C34315"}
+{"id":"C34394","town":"bar0-village-famine-rand-5","sev":"MED","kind":"STATE","why":"calls the settlement 'the hamlet'; TOWN size word is village (population 251)","other":""}
+{"id":"C34673","town":"bar0-village-famine-rand-5","sev":"LOW","kind":"PAIR","why":"'Free of the criminals' while Elder Council's head holds half of Grain Holders, which backs the criminal Smuggling waypoint; and 'easy to buy an official'","other":"C34660"}
+{"id":"C34814","town":"bar0-village-famine-rand-5","sev":"LOW","kind":"STATE","why":"'Offers food and talk' under an active famine (stores 0.1 months, deficit 43%); the NPC line offers food as ordinary hospitality","other":"C34301"}
+{"id":"DONE","lines":827,"blocks":1,"flags":5}
