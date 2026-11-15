@@ -69,6 +69,13 @@ worklist's count: none was struck "gone at the base".
   and priority notes it writes) is TAIL-DEFECON-R's (lane/tail-defecon-r-2026-11-14). This seat keeps ONLY the income
   label's key near line 46 (D10's reader, done in batch 2) and row 15458 if its writer is not the gap logic; if 15458 or
   the file's other row IS the gap logic, it is named for that seat.
+- (D21, 01:12) The three siege notes are ACCEPTED into D14's move: its terms read the income row in the 26, the arrival
+  scene in the 14, the note "Settlement is under active siege. Trade income above reflects pre-siege operations…" in those
+  3, AND NOTHING ELSE. The gate is committed as its own commit, the fourteen arrival scenes' new lines read and listed.
+- (D22, 01:13) Two rows named for `economicState.js` by TAIL-DEFECON-C (at e44627128): (1) the mercenary hire's inheritor
+  near line 587, "garrison contracts and armed escort" (8 towns): read where it prints (a garrison or an escort?), cure
+  if false; (2) row 28528 (waterborne freight under a siege: false in 1 of the 3 towns that print it). With a batch of
+  that file, after the fish rows.
 - And BRIEF-TAIL's laws (silence is true; a mute state takes a twin; no draw moved; siege/famine; agreement; one home;
   no new vocabulary word; no `src/pdf/` or `src/foundry/`; every new line listed for the veto).
 
@@ -259,7 +266,19 @@ Batch 1:
 
 The seat handed back by time (about 62 minutes; the brief's 250,000 in about eighty) before a batch it could not finish.
 
-FIRST: THE PILGRIM GATE (D14), MEASURED AND HELD: a SECOND STOP sent to the chair at ~01:10. The gate is one condition on
+THE PILGRIM GATE (D14, D21): DONE, its own commit (the one after the batch-2 hand-back). Measured: tabs 29,894 -> 29,897;
+15707 78 -> 56 on the tabs (the 22 that print it whole; the siege label alone 5 -> 2; r2r-town-34 prints it folded as
+"<N> Trade": the 26), X9 20913 80 -> 57; field diff (the batch-2 tree with and without the gate, on the 720): ONLY
+incomeSources in the 26, arrivalScene in the 14, coherenceNotes in the 3. THE ARRIVAL INHERITORS, READ (NAMED for the
+history seat, `src/generators/narrative/arrivalScene.js`, the false ones; not cured here): FALSE in r2r-village-19 "Someone has
+left fresh flowers at a small shrine set into a wall." (no shrine stands); r2s-under_siege-city-1 "The smell of horses and
+hay comes from the stables." (no stable stands, and a siege); r2s-infiltrated-town-1 "Bolts of cloth and bales of wool
+fill the carts waiting on the road out." (no weaver; neither cloth nor wool is exported); r2s-plague_onset-village-0
+"Horse traders show their animals at the edge of the settlement, where herders and townsfolk meet." (no horse trader
+stands; only common grazing). TRUE: the other 10 towns' new lines (grain and mills, flour, looms, ovens and bakers, malt
+and an ale house, a market, a mine's spoil heaps, a moneylender among banking houses, a church bell).
+
+(The gate as measured before D21, for the record:) A SECOND STOP sent to the chair at ~01:10. The gate is one condition on
 the Pilgrim Trade push in `economicState.js :: generateEconomicState` (the line `if (ecoInstFlags.religionInfluence > 68
 && (tradeRoute === 'crossroads' || tradeRoute === 'road')) {` takes `&& hasInst('shrine', 'cathedral', 'monaster',
 'abbey', 'relic')`, the words in a frozen array beside the income lines). Its census, measured at the batch-2 tree: the

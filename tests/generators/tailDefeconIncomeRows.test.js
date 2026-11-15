@@ -26,6 +26,8 @@ const SILENT = null;
 const GONE = [
   ['03348', 'r2r-thorp-0', 'Agricultural Rents', 'Harvest :: What the households grow and raise on their holdings; the main living at this scale.'],
   ['03348', 'r2r-village-3', 'from tenant farmers', 'Harvest :: What the households grow and raise on their holdings'],
+  ['15707', 'r2r-village-3', 'Pilgrim Trade', 'Church Tithes :: '], // D14: no shrine, cathedral, monastery or abbey
+  ['15707', 'r2r-village-9', 'visiting pilgrims', 'Church Tithes :: '],
   ['00386', 'r2s-under_siege-town-0', 'visiting pilgrims', 'Pilgrim Trade :: '],
   ['11426', 'r2r-town-6', 'contract-grade enchanting brings steady coin', 'contract-grade enchanting bring steady coin.'],
   ['B17543', 'r2s-under_siege-city-0', 'A busy market for spell services', 'Spellcasting Services :: '],
@@ -38,6 +40,7 @@ const GONE = [
 /** [row, seed, a true sibling that must still print] */
 const KEEP = [
   ['03348', 'r2r-thorp-4', 'Agricultural Rents :: Payments in kind or coin from tenant farmers'],
+  ['15707', 'r2r-village-13', 'Pilgrim Trade :: Offerings, hospitality fees, relic sales'], // a cathedral town
   ['B17543', 'r2r-city-1', 'Spellcasting Services :: A busy market for spell services.'],
   ['16644', 'r2r-town-17', 'River Tolls :: Tolls on river traffic, dock fees, and ferry rights.'],
   ['17619', 'r2r-city-13', 'Security Contracts :: Guild-funded private security surcharges'],

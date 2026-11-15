@@ -83,6 +83,9 @@ export const MARKET_DAY_LINE = MARKET_DAY_SET[0].text;
 // TAIL-DEFECON-2 (D10, the chair's ruling of 2026-11-15): a small place that stands no lord's steward or reeve pays no
 // rent to anyone: its row is its own harvest (the name and the line claim no rent and no tenant).
 export const OWN_HARVEST_LINE = 'What the households grow and raise on their holdings; the main living at this scale.';
+// TAIL-DEFECON-2 (D14, the chair's ruling of 2026-11-15): pilgrims come to a house of pilgrimage: a shrine, a cathedral,
+// a monastery or an abbey, not to a parish church alone. Pilgrim Trade stands only where one does.
+export const PILGRIM_HOUSE_WORDS = Object.freeze(['shrine', 'cathedral', 'monaster', 'abbey', 'relic']);
 /** The sources whose every line is trade coming in or going out (road tolls, gate tolls, customs, transit): none under a siege. */
 // TAIL-DEFECON-2: under a siege no river traffic, no pilgrim, no outside customer and no trade comes in: those rows print
 // their label and share alone.
