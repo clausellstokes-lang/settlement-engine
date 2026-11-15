@@ -750,3 +750,20 @@ and `/home/user/tt7-measure` (B's builds and scripts). All three are this seat's
   roots, and Trial 1's bytes, cover `institutionLadders`, `houseScale` and `faceHonorifics` (via `seatKeeper`): all three
   are riders, and all leave first paint in the measured −34,844 B trial (excise-and-pin). They were not measured one at a
   time.
+
+## TAIL-TIES-8 (2026-11-15): T25 (a) option 2 (STOPPED, measured), T27 (done), T26 (prepared on its own branch)
+
+**The merge.** The joined line `lane/join-2026-11-14` at `ae50369d4`, one merge commit (`a25aa28d`), clean. All work ran in
+scratch worktrees outside the main checkout (detached, `npm ci` once, the others symlinked). The births at the merge
+(RECORD-MEASURE-1 `births-only.sh` over CENSUS-3's `seeds.txt`, sha256 of the uncompressed corpus):
+`991c330f7e97730d2f0e7ee0ab5d4884274cc49ef7d3b69d45821b41068a47a9`, 720 rows, 0 errors.
+
+**T27: DONE (CONFIRMED).** `tests/generators/clerkHookSmallPlace.test.js`: "each keeps one hook" now holds only where the
+face's hook count is not one AND it is not the crisis cast's minted temporary stand-in, read by the record's own mark
+(`temporary === true`, `resolveCrisisCast.js :: mintTemporary`, `ef0b6208` / `3a6de5c7` named beside it). An ordinary
+face left without exactly one hook still reds (the assertion is `expect(n.temporary).toBe(true)` on every such face). The
+claim, the towns, the office check and the other cases did not move; the generator is unchanged.
+- The exemption is not vacuous: it fires on exactly the two faces traced by TAIL-TIES-7 (r2r-thorp-17: Ehecatl Chel;
+  r2s-recently_betrayed-hamlet-2: Anna Choniates; both `temporary: true`, `temporaryKind: 'grain'`, 0 hooks; the other
+  faces of those two towns hold one hook each). The other five towns were not counted face by face.
+- The file alone: 3/3 green (was 1 red test, 2 of 7 rows). eslint 0.

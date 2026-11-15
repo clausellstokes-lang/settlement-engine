@@ -47,7 +47,12 @@ describe('the clerk line needs a place large enough to keep an office', () => {
       expect(['thorp', 'hamlet'], `${seed}: a thorp or a hamlet`).toContain(s.tier);
       for (const n of s.npcs) {
         expect((n.plotHooks || []).some((/** @type {string} */ h) => CLERK.test(h) || ADVISOR.test(h) || DISTRICT.test(h)), `${seed}: ${n.role}`).toBe(false);
-        expect((n.plotHooks || []).length, `${seed}: ${n.role} keeps one hook`).toBe(1);
+        // T27 (the chair's ruling, vetoable by the owner): "each keeps one hook" is about the faces the hook draw covered.
+        // The crisis cast's MINTED TEMPORARY stand-in (`resolveCrisisCast.js :: mintTemporary`, R2-CODE-B-9 ef0b6208 and
+        // R2-CODE-B-12 3a6de5c7) is made after the hook draw and never held one, so it is exempt BY IDENTITY: by the
+        // record's own mark (`temporary: true`), never by its name or role text. Only that face is exempt: an ordinary
+        // face left without exactly one hook still reds here.
+        if ((n.plotHooks || []).length !== 1) expect(n.temporary, `${seed}: ${n.role} keeps one hook (only a minted temporary stand-in is exempt)`).toBe(true);
       }
     }), 'no one in a thorp or a hamlet has an office with staff, and each keeps one hook');
   });
