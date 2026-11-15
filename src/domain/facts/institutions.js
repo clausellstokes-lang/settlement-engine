@@ -70,3 +70,11 @@ export function hasInstitution(record, kind) {
  * @param {string} n an institution's name, lower-cased @returns {boolean}
  */
 export const namesGrainMill = (n) => (n === 'mill' || n.startsWith('mills (')) && !n.includes('access to external');
+
+/**
+ * A food record's source that keeps GRAIN: a grain field, or a mill (the food record's own key for the mill it grinds
+ * at). TAIL-CLOSE-SRC-4: moved verbatim from `generators/economy/foodBalance.js :: foodStoreWord` (R2-CODE-A item 1)
+ * into the institutions home, the mill's.
+ * @param {unknown} s a food record's source key @returns {boolean}
+ */
+export const isGrainFoodSource = (s) => s === 'grain' || s === 'mill';
