@@ -6,7 +6,7 @@ page line cured, no test written, no test skipped or weakened. Authority: the ow
 chair's chat, as the signed record `docs/shift-records/2026-11-15-the-close-of-the-tail-round.json` carries it (commit trailer
 `Owner-Signed: §934.105`).
 
-STATUS: **IN PROGRESS** (A, the chair's rulings, the three merges, OR3 done; C again, D again, E to come; this file is current at each push).
+STATUS: **DONE** at the final tree (every part of the assignment and every chair's word taken; red only: the owner's three door files, waiting).
 
 ## PART A · THE GENERATOR PINS AND COUNTS
 
@@ -67,13 +67,13 @@ First reading: each of the 17 files run alone at 8c11f73ea (`npx vitest run <fil
 | PM2 | `pipelinePinnedMode` EM-B2a2 A2 | by identity: the step's cast reaches the record whole; the one card beyond it is a power's minted face (`OTHER_CARD_PREFIX`, npc_power_landed_gentry) | e90236c32 | 15/15 GREEN |
 | HK1 | `hookThemeDraws` pin:no-hook-is-lost | by identity: the two temporary crisis stand-ins (npc_temp_healer, npc_temp_grain; `resolveCrisisCast`) are not cards of the cast; every other card holds its hook; `total === npcTotal - standIns` | 4e99584a1 | 13/13 GREEN |
 | FC1 | `generationForkCensus` A1 | the reproduction claim on the entry's record (checked first: it holds on PIN_ROW) | 72db657a5 | A1 then reds on a CEILING, below |
-| ER1 | `editCorpusRatchet` A8 | by identity: V-BAND-READINESS reads a third path `defenseProfile.institutions` (ffe0750d4, UPKEEP-12 H1, landed JOIN-4·9): two-path rows 19 -> 18, shared leaves [13,10] -> [14,11]; NON_CASCADED +`defenseProfile.institutions.garrison[].catalogId` (f78522bf6, UPKEEP-9 step 7, landed JOIN-1·9): [32,32] -> [33,33] | 4184bec70 | A8 GREEN |
+| ER1 | `editCorpusRatchet` A8 | by identity: V-BAND-READINESS reads a third path `defenseProfile.institutions` (ffe0750d4, UPKEEP-12 H1, landed JOIN-4·9): two-path rows 19 -> 18, shared leaves [13,10] -> [14,11]; NON_CASCADED +`defenseProfile.institutions.garrison[].catalogId` (f78522bf6, UPKEEP-9 step 7, landed JOIN-1·9): [32,32] -> [33,33] | eb201d433 | A8 GREEN |
 | OR3 | `scripts/.observed-shape-readers-baseline.json` | `node scripts/check-observed-shape-readers.mjs --write` once at the final tree: no reader row moved; the input and source stamps and scanStats only | 126b057e0 | plain exit 0; walker 47/47 |
 
 A correction to my own earlier reading (the chair's PM1): `pipelinePinnedMode`'s round trip did not fail because "a mint shifts the
 stream": the raw runner's record lacks the entry's final-record pass `withConflictRelations` (one relationship's direction and its
 sentence); the roster is the same 28 on both sides. And `generationForkCensus` A5's third `food.cropFortune` mint is 7ac689418 (the
-food record's magic share, lane/tail-record), named in its note (eb201d433).
+food record's magic share, lane/tail-record), named in its note (4184bec70).
 
 **FC2** (e20666215): `generationForkCensus` A1's mint bound 139 -> 141 (left unraised by me and sent; the chair ruled): the row's
 mints listed at fce41f2b7 (134) and at the tree (141) and diffed: beyond the five npc_power_landed_gentry mints already named, ONE
@@ -113,12 +113,42 @@ sovereigntyLightingContract.walker 34/34, editCorpusRatchet 8/8, pipelinePinnedM
 WAITING ON THE OWNER'S DOOR (not failures of this seat): townCartographyCalibration 30/32, dossierProseManifest 14/17,
 presetLightingWitness 6/7. goldenFreeze.walker once more after the last merge.
 
-## WHAT IS LEFT, IN ORDER
+## THE FINAL TREE (after MERGE WORDS 4 and 5)
 
-MERGE WORD 4 (lane/tail-close-sweep-d) and MERGE WORD 5 (lane/tail-close-worker); then `npm run build:edge-shared`; the fourteen
-non-test steps; `npm run build` and `verify:dist`; the two refreezes; Part D; Part E; one line with the tip.
+| step | command (each to a file) | result | commit |
+|---|---|---|---|
+| merge 5 | lane/tail-close-worker-2026-11-15 at 03642fea2 | no conflict | ed8f0735b |
+| merge 4 | lane/tail-close-sweep-d-2026-11-15 at dbbee9cc7 | no conflict | (the merge) |
+| edge bundles | `npm run build:edge-shared` | the engine bundle moved (sourceHash 1260f344 -> 7e46e7ee: the cure and the repair's source); the other metas restamped | 64f2ee689 |
+| the fourteen non-test steps | `sh scripts/gate-tail.sh npm run <step>`: validate:hazard-registry, :premortem, :packets, :data, :custom-content-manifest, :migration-head, :edge, :map, :tuning-bands, :foundry-module, :mcp-server, typecheck:ratchet, typecheck:domain:strict, lint | ALL 14 EXIT 0 | |
+| build + ruling B2 | `npm run build`; `VERIFY_DIST=1 npx vitest run tests/build/vendorPdfLazy.test.js tests/build/generationWorkerLazy.test.js` | engine chunk 867,294 (ceiling 867_093 -> 867_295, +202: the cure b778c3f9a in castPowers.js); first paint gzip 360,054 (360_052 -> 360_054), Brotli 302,175 (302_161 -> 302_175): the re-grounded landing paragraph; raw closure under 1,130,209 (held); the worker bundle 2,303,278 = its ceiling (unchanged). 66/66 | 08bd47df5 |
+| verify:dist | `sh scripts/gate-tail.sh npm run verify:dist` | exit 0: STRICT DIST OK, 67 files, 603 tests | |
+| tuning refreeze | rows 8a | ONE row's address moved: `stressFactions.js#MIGRATION_GOVERNING_DAMP` line 52 -> 55 (span digest and value unchanged: the repair's three import lines unpacked); 280/541/6877 held; receipt 76/76 | b5e6cafd4 (my line to the chair said 54cd4b4ba: wrong; b5e6cafd4 is right) |
+| lighting refreeze | rows 8b | unmoved (files 3607, parked 454, credited 3153, titles 30536, suiteTitles 8422): stamp only, not kept | |
+| Part D | `presumed-things-door --check`; `check-writer-reach`; `check-observed-shape-readers` | all three exit 0 ("fresh 0 · stale 0 · banked 4689"; "WRWALKER HOLD — judged 12661 · LIT 691 · LIT-NAME 10563 · DARK 1407"; "2210 finding(s), exactly matching the frozen inventory"): no OR3 write needed | |
+
+## PART E · THE RECEIPT AT THE FINAL TREE (b5e6cafd4, each file alone)
+
+GREEN: recordMerge 8/8, institutionBudgetPromise 1/1, powerEconomyFreshness 10/10, pipelinePinnedChoosers 7/7, x46NpcBand 24/24,
+mundaneRealmAcceptance 21/21, rosterDuplicateDraws 3/3, hookThemeDraws 13/13, generationForkCensus 7/7, intentAtlasSoakDistiller 7/7,
+mergeLadderHeldKeys 8/8, proseFamilyContract.walker 8/8, editCorpusRatchet 8/8, pipelinePinnedMode 15/15, generatorGoldenMaster 3/3,
+espionageDormancyFence 21/21, goldenViewModel 4/4, heraldKnowledgeDeskGolden 3/3, worldFactRederive 7/7, editWorldFactResources 6/6,
+sourceCitationIntegrity.walker 18/18, upkeepVocation 2/2, proseComposed.walker 87/87, proseEntryContradiction.walker 29/29,
+proseWiringCensus.walker 79/79, proseMoveGrammar.walker 54/54, composeStateProse 51/51, observedShapeReaders.walker 47/47,
+tuningRegister.walker 76/76, sovereigntyLightingContract.walker 34/34, landingProseGrounding 12/12, payOneHome 6/6, powerStructure
+5/5, mutationCoverageManifest 10/10, generationWorkerLazy and vendorPdfLazy 66/66 (VERIFY_DIST), domainAnyCastBaseline 19/19 (*),
+and LAST, after the last door: goldenFreeze.walker 90/90.
+(*) red 18/19 at first in my scratch clone ONLY BECAUSE IT IS SHALLOW: its attribution arm resolves old `introducedAt` commits
+(d7ea69a4b, 172e5f225 …, from 2026-08) that a shallow history lacks; with those commits fetched (`git fetch --depth=1 origin <sha>`,
+objects only, no file changed) it reads 19/19. A full clone reads it green.
+STILL RED, BY NAME, AND WHY: `townCartographyCalibration` 30/32, `dossierProseManifest` 14/17, `presetLightingWitness` 6/7: the
+owner's door, waiting on the owner's own explicit word (asked 13:58 and 14:08 UTC); not failures of this seat.
 
 ## FOR THE OWNER, IN PLAIN WORDS
+
+Last, under your word of 07:50 UTC and the chair's decision A: two download-size budgets were set to the final build's measured
+size, a few bytes up (the engine's lazy part +202 bytes for the fix that keeps two people of one town from sharing a secret; the
+first page +2 / +14 compressed bytes for the re-worded landing paragraph). Each change below is on the veto list.
 
 Refreshed under your "Yes" of 06:00 UTC: the stored counts and digest lists the tests compare freshly generated towns against
 (how many sample towns carry two income entries, the two sixty-town digest lists of the scale work, economy-receipt counts, the
