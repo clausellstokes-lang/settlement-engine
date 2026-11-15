@@ -10,7 +10,7 @@ import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
-import { settleCrimeLinesToSignal } from '../../src/generators/safetyProfile.js';
+import { settleCrimeLinesToSignal, NO_WATCH_SMALL } from '../../src/generators/safetyProfile.js';
 
 // The census's 720 configuration (SECOND-WAVE-CENSUS births.mjs): every random dial on.
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -27,6 +27,13 @@ function safetyText(s) {
 }
 
 const SILENT = null;
+/**
+ * The no-watch line's opening sentence, COMPUTED from the generator's own pool (safetyProfile.js :: NO_WATCH_SMALL, its
+ * third member) rather than spelled here (TAIL-CLOSE-TESTS-C). It is generator text, never drawn from a state leaf (the
+ * anchor walker aligns it against DS-DEF-3 Moderate vid 5 by coincidence), so drawnProse.js would assert the wrong
+ * sentence; taking it from the shipped pool keeps the same town and the same claim, and a rewording moves both.
+ */
+const NOBODY_PAID = NO_WATCH_SMALL[2].split('. ')[0];
 /** [row, seed, the sentence that must NOT print, what prints instead (SILENT: the slot is silent by design)] */
 const GONE = [
   ['23466', 'r2r-village-49', 'the local guard sees to that', 'Visitors can walk anywhere at any hour, and there is little crime.'],
@@ -36,7 +43,7 @@ const GONE = [
   ['20612', 'r2s-wartime-city-1', 'The garrison and city watch is well paid', 'The garrison and city watch are well paid, well equipped and patrol properly.'],
   ['20616', 'r2r-city-38', 'The garrison and city watch walks the usual rounds', 'The garrison and city watch walk the usual rounds.'],
   ['18786', 'r2s-mass_migration-village-1', 'enforcers who can be bought', "The adventurers' charter hall takes bounty work against threats"],
-  ['B14103', 'r2s-occupied-thorp-1', 'Nobody here is paid to keep order', 'No one of the place is paid to keep order; the occupiers keep their own.'],
+  ['B14103', 'r2s-occupied-thorp-1', NOBODY_PAID, 'No one of the place is paid to keep order; the occupiers keep their own.'],
   ['02876', 'r2s-wartime-town-2', "A part from the wizard's tower", SILENT],
   ['B03371', 'r2s-under_siege-metropolis-2', 'smuggling operation moves contraband through the settlement', 'The siege has shut the roads, so what contraband is already inside is hoarded and sold dear'],
   // TAIL-CORPUS-DEF-5: the twin re-keyed to its cure's words (no stored food on the Defense tab: defenseWordsFindings)
@@ -67,7 +74,7 @@ const KEEP = [
   ['20612', 'r2s-famine-town-1', 'The town watch is well paid and well equipped, but hunger is eroding the order it keeps.'], // TAIL-DISPLAY-CIVIC-3 V3, re-keyed by identity: the famine's twin
   ['20616', 'r2s-recently_betrayed-town-3', 'The town watch walks the usual rounds'],
   ['18786', 'r2s-religious_conversion-town-0', 'exists on paper'],
-  ['B14103', 'r2s-under_siege-thorp-2', 'Nobody here is paid to keep order'],
+  ['B14103', 'r2s-under_siege-thorp-2', NOBODY_PAID],
   ['02876', 'r2r-town-51', "A part from the wizard's tower"],
   ['B03371', 'r2s-infiltrated-town-2', 'smuggling operation moves contraband through the settlement'],
   ['05801', 'r2r-village-58', 'Controlled goods (grain, salt, preserved meat)'],

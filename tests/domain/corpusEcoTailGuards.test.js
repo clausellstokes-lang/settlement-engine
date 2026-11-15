@@ -13,6 +13,7 @@
 // A town that no longer reads the pool reds by name, and the row is re-keyed to a town of the case (by identity, with
 // the cause), never dropped.
 import { beforeAll, describe, expect, it, vi } from 'vitest';
+import { STATE_LEAVES, variantByVid } from '../helpers/drawnProse.js';
 
 const seen = vi.hoisted(() => ({ cur: /** @type {Record<string, {e: Set<number>, d: Map<number, string>}>|null} */ (null) }));
 
@@ -36,6 +37,23 @@ vi.mock('../../src/domain/display/stateProse/stateProseKernel.js', async (import
  * @typedef {{seed: string, pool: string, gone: RegExp, prints: number|number[]|null, why: string}} GoneRow
  * @typedef {{seed: string, pool: string, keep: number, text: RegExp, why: string}} KeepRow
  */
+/**
+ * A member's own authored text, as the kernel's draw record holds it (its {slots} unfilled), COMPUTED through
+ * tests/helpers/drawnProse.js (TAIL-CLOSE-TESTS-C) rather than spelled as a literal: a rewording moves the member and the
+ * anchor together, and the row's claim (which vid is, or is not, drawn in that town) is unchanged.
+ * @param {string} pool `<blockId>::<poolKey>` @param {number} vid @returns {RegExp} the whole member, exactly
+ */
+function memberRe(pool, vid) {
+  const at = pool.indexOf('::');
+  const blockId = pool.slice(0, at);
+  const poolKey = pool.slice(at + 2);
+  const leaf = /** @type {Record<string, string>} */ ({ GEN: 'general', ECO: 'economy' })[blockId.split('-')[1]];
+  const member = (STATE_LEAVES[leaf][blockId].pools[poolKey] || []).find((/** @type {any} */ v) => v.vid === vid);
+  const slots = Object.fromEntries((member?.slots || []).map((/** @type {string} */ name) => [name, `{${name}}`]));
+  const text = variantByVid({ leaf, blockId, poolKey, vid, slots });
+  return new RegExp(`^${text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`);
+}
+const MARKET_NO_GUILD = 'DS-GEN-13::COMMERCE: a market, no guild';
 /** @type {ReadonlyArray<GoneRow>} */
 const GONE = [
   // ── BATCH 1 · DS-ECO-12 (the income mix and the critical imports): REWORDED, the draw unmoved (each row prints the same vid) ──
@@ -117,9 +135,9 @@ const GONE = [
   { seed: 'r2s-occupied-town-3', pool: 'DS-ECO-1::COMBINATION C4: a low rung on a working approach', gone: /little of what passes leaves its money/, prints: 3, why: 'river tolls the first income: "little of what passes leaves its money here" (C19; v3 now claims the busy route and the poverty only)' },
   { seed: 'r2s-indebted-city-1', pool: 'DS-ECO-1::COMBINATION C1: a high rung on a working approach', gone: /money to spare/, prints: 4, why: 'indebted to an outside power: "ends each year with money to spare" (C19; v2 + `no crisis: indebted`, the twin v4)' },
   { seed: 'r2r-thorp-11', pool: 'DS-ECO-10::POSTURE: entrepot', gone: /living is the road/, prints: 3, why: 'farm rents 76% of the income: "The town\'s living is the road" (C19; v3 now claims the goods passing and the town\'s part)' },
-  { seed: 'r2r-hamlet-15', pool: 'DS-GEN-13::COMMERCE: a market, no guild', gone: /no guild between seller and buyer/, prints: 5, why: 'a Merchant Guilds power, Dominant: "no guild between seller and buyer" (C19; v3 + `no guild`, the twin v5)' },
-  { seed: 'r2r-village-0', pool: 'DS-GEN-13::COMMERCE: a market, no guild', gone: /without a guild's leave/, prints: 5, why: 'a guild power stands: "without a guild\'s leave" (C19; v1 + `no guild`, the twin v5)' },
-  { seed: 'r2s-occupied-village-2', pool: 'DS-GEN-13::COMMERCE: a market, no guild', gone: /nobody's leave but the stall-keeper's/, prints: 5, why: 'an occupation and a guild power: "with nobody\'s leave but the stall-keeper\'s" (C19; v4 + `no guild · no crisis: occupied`, the twin v5)' },
+  { seed: 'r2r-hamlet-15', pool: MARKET_NO_GUILD, gone: memberRe(MARKET_NO_GUILD, 3), prints: 5, why: 'a Merchant Guilds power, Dominant: "no guild between seller and buyer" (C19; v3 + `no guild`, the twin v5)' },
+  { seed: 'r2r-village-0', pool: MARKET_NO_GUILD, gone: memberRe(MARKET_NO_GUILD, 1), prints: 5, why: 'a guild power stands: "without a guild\'s leave" (C19; v1 + `no guild`, the twin v5)' },
+  { seed: 'r2s-occupied-village-2', pool: MARKET_NO_GUILD, gone: memberRe(MARKET_NO_GUILD, 4), prints: 5, why: 'an occupation and a guild power: "with nobody\'s leave but the stall-keeper\'s" (C19; v4 + `no guild · no crisis: occupied`, the twin v5)' },
   // ── BATCH 8 (ruling C20: a lone food source is not "the whole" beside a farm house or a harvest income; no atom reads that gate, so the family is REWORDED to the twin's claim, "first") ──
   { seed: 'r2r-thorp-3', pool: 'DS-ECO-9::FOOD SOURCES: one source', gone: /and little else/, prints: 1, why: 'a farm house or a harvest income beside the one named source: "comes from its {good} and little else" (C20; v1 now "comes first of all from its {good}")' },
   { seed: 'r2r-thorp-9', pool: 'DS-ECO-9::FOOD SOURCES: one source', gone: /all goes back to the/, prints: 2, why: 'the same: "all goes back to the {good}" (C20; v2 now "its {good} comes first")' },
@@ -135,7 +153,7 @@ const KEEP = [
   { seed: 'r2s-wartime-city-1', pool: 'DS-ECO-12::CRITICAL IMPORT: the land cannot give it', keep: 1, text: /^The country around \{settlement\}/, why: 'a city at war' },
   { seed: 'r2r-thorp-12', pool: 'DS-ECO-12::CRITICAL IMPORT: the land cannot give it', keep: 2, text: /^Not enough of the \{good\} .*comes from the country here/, why: 'the smallest it reaches' },
   { seed: 'r2s-wartime-hamlet-3', pool: 'DS-ECO-12::CRITICAL IMPORT: the land cannot give it', keep: 3, text: /so the town must look elsewhere/, why: 'a hamlet at war, no imports' },
-  { seed: 'r2s-occupied-town-0', pool: 'DS-ECO-12::CRITICAL IMPORT: a house needs what the land lacks', keep: 1, text: /^Some of \{settlement\}'s work cannot go on without \{good\}/, why: 'an occupied town' },
+  { seed: 'r2s-occupied-town-0', pool: 'DS-ECO-12::CRITICAL IMPORT: a house needs what the land lacks', keep: 1, text: memberRe('DS-ECO-12::CRITICAL IMPORT: a house needs what the land lacks', 1), why: 'an occupied town' },
   { seed: 'r2s-wartime-metropolis-1', pool: 'DS-ECO-12::CRITICAL IMPORT: a house needs what the land lacks', keep: 2, text: /must come from elsewhere; when none comes, that work stands idle/, why: 'a metropolis at war' },
   // ── BATCH 2 · the declared lines still draw where their towns bear them; the reworded keep their stem ──
   { seed: 'r2r-metropolis-7', pool: 'DS-GEN-13::WAREHOUSES', keep: 3, text: /fill after the harvest/, why: 'no famine' },
@@ -189,9 +207,9 @@ const KEEP = [
   { seed: 'r2r-hamlet-31', pool: 'DS-ECO-11::RESOURCE CONDITION: worked out, recovers in time', keep: 2, text: /^Little is left worth taking from the \{resource\}/, why: 'the stem (RE-KEYED by identity, batch 7: v2 reworded so the {resource} slot, often plural, is not the subject of "is")' },
   // ── BATCH 7 ──
   { seed: 'r2r-hamlet-15', pool: 'DS-ECO-1::COMBINATION C1: a high rung on a working approach', keep: 2, text: /money to spare/, why: 'a prosperous crossroads hamlet, no debt: v2 still draws' },
-  { seed: 'r2r-hamlet-11', pool: 'DS-GEN-13::COMMERCE: a market, no guild', keep: 1, text: /without a guild's leave/, why: 'no guild at all: v1 still draws' },
-  { seed: 'r2r-village-7', pool: 'DS-GEN-13::COMMERCE: a market, no guild', keep: 3, text: /no guild between seller and buyer/, why: 'no guild at all: v3 still draws' },
-  { seed: 'r2r-hamlet-51', pool: 'DS-GEN-13::COMMERCE: a market, no guild', keep: 4, text: /nobody's leave but the stall-keeper's/, why: 'no guild, no occupation: v4 still draws' },
+  { seed: 'r2r-hamlet-11', pool: MARKET_NO_GUILD, keep: 1, text: memberRe(MARKET_NO_GUILD, 1), why: 'no guild at all: v1 still draws' },
+  { seed: 'r2r-village-7', pool: MARKET_NO_GUILD, keep: 3, text: memberRe(MARKET_NO_GUILD, 3), why: 'no guild at all: v3 still draws' },
+  { seed: 'r2r-hamlet-51', pool: MARKET_NO_GUILD, keep: 4, text: memberRe(MARKET_NO_GUILD, 4), why: 'no guild, no occupation: v4 still draws' },
 ];
 
 /** CENSUS-3 seedcfg.mjs's r2r-/r2s- arms, verbatim in shape. @param {string} seed */
@@ -240,8 +258,9 @@ describe('a cured sentence is not drawn in the census town that made it false; w
       const pools = READ.get(g.seed) || {};
       expect(Object.keys(pools), `${g.seed} no longer reads ${g.pool}: re-key the row to a town of the case`).toContain(g.pool);
       const drawn = [...pools[g.pool].d.entries()];
-      for (const [vid, text] of drawn) expect(text, `${g.pool} v${vid} at ${g.seed}`).not.toMatch(g.gone);
       expect(drawn.map(([vid]) => vid), `what ${g.pool} draws at ${g.seed}`).toEqual(g.prints === null ? [] : [g.prints].flat());
+      // anchored: the line above pins exactly which vids the town draws in this pool (the row's named instead), so the read is live
+      for (const [vid, text] of drawn) expect(text, `${g.pool} v${vid} at ${g.seed}`).not.toMatch(g.gone);
     });
   }
 });
