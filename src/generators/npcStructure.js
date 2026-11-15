@@ -534,7 +534,7 @@ function holderHouseLineOf(npc) {
 // it. The cut is taken over the cast less those lords (each card's place among the others); a lord keeps the lines it reads
 // within the whole cast's cut, as before. Draw-free.
 /** @param {Record<string, any>} npc */
-const isMintedLord = (npc) => npc?.institution?.kind === 'power' && npc?.title === CLAIMANT_FACE.title;
+const isMintedLord = (npc) => npc?.institution?.kind === 'power' && (npc?.institution?.title ?? npc?.title) === CLAIMANT_FACE.title; // TAIL-TITLES K-C: the face, not the holder's form
 /** The enrichment cut over a cast of `n`. @param {number} n */
 const cutOf = (n) => Math.min(5, Math.max(2, Math.floor(n * 0.45)));
 

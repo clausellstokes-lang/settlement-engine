@@ -56,6 +56,7 @@ import { hookPoolFor, poolFor, seatPoolFor, settleTitleLines } from './poolMap.j
 
 import { resolveGenerationContentProfile } from '../../domain/generationContentProfile.js';
 import { seatMintTitleFor } from './mintTitles.js';
+import { titleForHolder } from '../../data/holderTitleForms.js'; // TAIL-TITLES K-C
 import { CIVIC_OFFICE_BY_SIZE, OFFICE_TITLES } from '../../data/officeTitles.js';
 import { backingArchetypeOf, RULER_KINDS } from '../../domain/dossier/powerSupport.js';
 import { isHideableHouse, isVeiledPower, veiledCardIdFor } from '../../domain/people/cardVeil.js';
@@ -559,6 +560,9 @@ export function generateRepresentatives(settlement, culture = 'germanic', config
   // tied to the seat so the social graph reaches it.
   // ONE HOOK PER CARD (PEOPLE-3 HOOKS), in roster order, each on its own keyed fork.
   drawCardHooks(cards, (card) => hookPools.get(card.id) || 'other', root.fork(HOOKS_FORK_LABEL), npcConfig, hookRegistry, { worldLaw, institutions, tier });
+  // TAIL-TITLES K-C: the face's word in its holder's drawn form, after every draw the face keys; the role with it (M-1b:
+  // role and title stay one word); `institution.title` keeps the face (data/holderTitleForms.js :: faceOfRole)
+  for (const card of cards) { const t = titleForHolder(card.title, card.gender); if (t !== card.title) { card.title = t; if (card.role === card.institution?.title) card.role = t; } }
 
   // Draw-free: a name shared by two cards takes a role qualifier, never a second draw.
   return disambiguateNPCDisplayNames(cards);
