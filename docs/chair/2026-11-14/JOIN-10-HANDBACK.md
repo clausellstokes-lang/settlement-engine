@@ -81,10 +81,13 @@ THE CHAIR'S RULINGS TO JOIN-10 (each vetoable by the owner):
 | 5 | lane/tail-crisis-2026-11-14 | b75ca93c7 (07:04) | 573c92b6d | 7a4229837 | none | 1 files outside docs/; declared-move commits: none (golden carried) |
 | 6 | lane/tail-close-pools-2-2026-11-15 | af1e78989 (07:07) | f714fb6a5 | f2e8cb1a3 | none | 4 files outside docs/; declared-move commits: none (golden carried) |
 | 7 | lane/tail-close-pools-2-2026-11-15 | 1c9ff3933 (07:11) | af1e78989 | f1a47b790 | none | 0 files outside docs/; declared-move commits: none (golden carried) |
+| 8 | lane/tail-close-tests-c-2026-11-15 | 2ef97b6e9 (07:14) | 0b1248dbf | a6b22f58b | `tailHistoryBatch6.test.js` (test), close-tests-c against close-pools-2: both blocks stand verbatim, 3/3 green (§3) | 5 files outside docs/; declared-move commits: 85cefdba5 (golden carried); merged clean though both moved: tests/data/tailHistoryBatch6.test.js |
 
 ## 3. Every code resolution
 
 **Point 3, the both-moved test file read** (close-display 71ac99969, holding the line at 17e38c547, against the line): `tests/components/displayEconRelianceFoodWords.test.jsx` merged clean; run alone at the merged tree: 5/5 green (`/home/user/j10out/t3.m.log`); the chair named it red on the line before this point (the reliance guard's 14 against the record's 4 and 13 per cent): the branch's side cures it. Both stand.
+
+**CODE CONFLICT IN A TEST FILE, point 8** (close-tests-c 2ef97b6e9, holding the line at 0b1248dbf, against close-pools-2 1c9ff3933 landed at points 6-7): `tests/data/tailHistoryBatch6.test.js`, the MUST NOT test's per-row body (one hunk). close-pools-2 (bb7b3ede3, TAIL-CLOSE-POOLS-2 red 3): the twin row through `expectAbsentWithAnchor`, the SILENT row through `expectPresentThenAbsent` against its KEEP witness. close-tests-c (2f3e3a21e): the liveness anchor first (the twin matches, or the silent row's hooks print), then the plain negative. BOTH STAND, verbatim: close-pools-2's block, then close-tests-c's block after it (every name each uses is defined in the file; nothing of either side dropped or reworded). Measured: the file alone at the merged tree 3/3 green (`/home/user/j10out/t8.m.log`); eslint on the file exit 0. Remerge patch `probes/JOIN-10/08-tail-close-tests-c-2026-11-15.remerge.patch`.
 
 ## 4. THE LIST FOR THE CLOSE
 
@@ -255,6 +258,9 @@ Merged clean though both sides moved them (for the close to re-derive or measure
 | golden | crisis (1) | DECLARED MOVE commits 573c92b6d c08dbb65a fca2cf259 ab49049c8 375a55474 39dd18406 (field diffs in their bodies) |
 | golden | close-display (3) | DECLARED MOVE commits 036e82437 45c0b621a 96eaeff30 c3788c2bc (field diffs in their bodies) |
 | tests/components/displayEconRelianceFoodWords.test.jsx | close-display (3) | merged clean though both sides moved them: the test files among them run alone at the merged tree, green ; read at the close |
+| `tests/data/tailHistoryBatch6.test.js` (MUST NOT body) | close-tests-c (8) against close-pools-2 (6-7) | CODE CONFLICT in a test file, both blocks stand verbatim (§3), 3/3 green at the merged tree: nothing for the close unless the doors re-key it |
+| golden | close-tests-c (8) | DECLARED MOVE commits 85cefdba5 (field diffs in their bodies) |
+| tests/data/tailHistoryBatch6.test.js | close-tests-c (8) | merged clean though both sides moved them: the test files among them run alone at the merged tree, green ; read at the close |
 
 **[J10] every pin where the joined side was kept, by file (for the doors' seat to read each once):**
 
@@ -293,4 +299,4 @@ A worktree at origin's tip (`git worktree add /home/user/j10wt -b join10 <tip>`,
 
 ## 8. WHAT IS LEFT
 
-Landed through point 7 (see the table); count 153,836 at 07:11 UTC after point 6; waiting on the chair's LAND words.
+Landed through point 8 (see the table); count 153,836 at 07:11 UTC after point 6; waiting on the chair's LAND words.
