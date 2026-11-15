@@ -110,6 +110,11 @@ The close found three more reader gaps that the next round should rule on:
 
 - Before PT2, at `91efe4aba` and `0d18473a8`: 42 of 43, the strip red.
 - **After PT2 and the merge of `2ff8ab7ee`: 43 of 43** (the walker alone, exit 0).
+- **After my branch landed (JOIN-11 point 2) and the join moved to `061db1367`** (TAIL-CLOSE-SRC-3 landed): a fast-forward. The door's `--check` read 1 fresh and 1 stale.
+  - **Stale:** `priorityHelpers.js` `house: criminal faction`, a line SRC-3 reworded. Removed by `--shrink` in its own commit.
+  - **Fresh:** `src/domain/facts/magic.js` `house: academy`, the literal `'academy of magic'`. It is a house-name entry of `ARCANE_GUILD_HOUSES`, which SRC-3 moved verbatim from `economy/economicState.js` (`e28552112`), so in `magic.js` it is the round's (B).
+  - Measured by the same script (`measure-061db1367.json`): printed in 58 of 1,080 births, against in 0. The "printed" towns are towns whose prose names the house, and the house stands in each. Banked **close-true** in its own commit. Its table is the second one at the end.
+  - After it: door `--check` exit 0 (all zero), and **the walker 43 of 43** (exit 0).
 
 ## THE TABLE (every fresh row)
 
@@ -268,3 +273,11 @@ Measured at `b75d2a049` over 1080 births (base for "stood at": `origin/master`).
 | 147 | domain/summary/settlementQuickGuide.js | market | names | "built on tribute and market" | B (the round wrote or reworded it) | 0 | 0 |  | the word's reader: factsOf (the thing's own reader) | after-base: close-unprinted |
 | 148 | domain/summary/settlementQuickGuide.js | temple | names | ", under temple and guild" | B (stood at master; no widening: the round re-shaped the line or its declaration) | 35 | 0 |  | the word's reader: faithReading.js :: faithReadingOf (hasChurch: a wayside shrine is not a | after-base: close-true |
 | 149 | domain/summary/settlementQuickGuide.js | temple | names | ", under the temple" | B (the round wrote or reworded it) | 7 | 0 |  | the word's reader: faithReading.js :: faithReadingOf (hasChurch: a wayside shrine is not a | after-base: close-true |
+
+### Re-run at `061db1367`
+
+Measured at `d7baa0621` over 1080 births (base for "stood at": `origin/master`).
+
+| # | file | thing | side | the line's first words | case | printed in | against in | towns against (first three) | reading | reason |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | domain/facts/magic.js | house: academy | names | "academy of magic" | B (the round wrote or reworded it) | 58 | 0 |  | the record: the live roster or a power, by the house's stem | after-base: close-true |
