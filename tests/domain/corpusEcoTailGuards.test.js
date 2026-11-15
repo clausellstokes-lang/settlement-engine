@@ -99,6 +99,17 @@ const GONE = [
   { seed: 'r2s-under_siege-town-0', pool: 'DS-ECO-6::TIER: significant off-book activity (≥15)', gone: /merchants who pay their duties and guild fees are undersold/, prints: [8, 2], why: 'a siege (C13 C; v0 + `no crisis: under_siege`)' },
   { seed: 'r2s-plague_onset-city-0', pool: 'DS-GEN-13::ENTREPOT', gone: /handles more than the town could ever use/, prints: 2, why: 'a quarantine: the market "handles more than the city could ever use" (01563; v1 + `no crisis: plague_onset`)' },
   { seed: 'r2s-occupied-hamlet-0', pool: 'DS-GEN-14::FOUNDED-YOUNG', gone: /still does the job it began with/, prints: 2, why: 'founded a stronghold, now undefended and occupied: "still does the job it began with" (07396; v2 reworded, v1 with it)' },
+  // ── BATCH 6 · DS-ECO-11 EXPLOITATION unexploited, DS-GEN-18 UNWORKED: REWORDED (the same vid): every printing town lists the resource as made here and exports none ──
+  { seed: 'r2r-city-44', pool: 'DS-ECO-11::EXPLOITATION: unexploited, exportValue: medium or low', gone: /nobody has found it worth the trouble/, prints: 3, why: 'stone made here and walls of local stone: "nobody has found it worth the trouble" (09301; v3 now "worth selling beyond the town")' },
+  { seed: 'r2r-village-58', pool: 'DS-ECO-11::EXPLOITATION: unexploited, exportValue: medium or low', gone: /nobody has ever thought it worth the trouble/, prints: 2, why: 'stone made here: "nobody has ever thought it worth the trouble" (22666)' },
+  { seed: 'r2r-city-14', pool: 'DS-ECO-11::EXPLOITATION: unexploited, exportValue: medium or low', gone: /leaves its \{resource\} unworked/, prints: 1, why: 'stone made here: "leaves its stone unworked" (v1, the same claim)' },
+  { seed: 'r2s-famine-thorp-2', pool: 'DS-ECO-11::EXPLOITATION: unexploited, exportValue: high', gone: /nothing in the town works it/, prints: 1, why: 'iron ore made here: "nothing in the thorp works it" (22626)' },
+  { seed: 'r2r-village-30', pool: 'DS-ECO-11::EXPLOITATION: unexploited, exportValue: high', gone: /lies unworked/, prints: 2, why: 'iron ore made here: "lies unworked" (03918)' },
+  { seed: 'r2s-plague_onset-village-3', pool: 'DS-ECO-11::EXPLOITATION: unexploited, exportValue: high', gone: /nobody in this town is working it/, prints: 3, why: 'iron ore made here: "nobody in this village is working it" (07347)' },
+  { seed: 'r2r-thorp-18', pool: 'DS-ECO-11::EXPLOITATION: unexploited, exportValue: high', gone: /to start the work/, prints: 4, why: 'iron ore made here: "what it lacks is a house to start the work" (v4, the same claim)' },
+  { seed: 'r2s-occupied-thorp-1', pool: 'DS-GEN-18::UNWORKED', gone: /goes unworked/, prints: 1, why: 'timber made here: "The timber around X goes unworked" (22267; v1 now "No house at X makes a trade of the timber around it")' },
+  { seed: 'r2r-thorp-41', pool: 'DS-GEN-18::BOUGHT-IN', gone: /not at anyone in the town/, prints: 4, why: 'medicinal herbs made here and bought in: "pointed at the carts, not at anyone in the thorp" (04027; v4 reworded)' },
+  { seed: 'r2s-under_siege-village-1', pool: 'DS-ECO-11::RESOURCE CONDITION: worked out, recovers in time', gone: /bothers with the/, prints: 2, why: 'a working Fisher\'s landing: "Nobody bothers with the river fisheries ... turned to other work" (14849; v2 now claims the record\'s depletion alone)' },
 ];
 /** @type {ReadonlyArray<KeepRow>} */
 const KEEP = [
@@ -155,6 +166,13 @@ const KEEP = [
   { seed: 'r2r-city-26', pool: 'DS-ECO-6::TIER: significant off-book activity (≥15)', keep: 4, text: /without anyone writing them down/, why: 'no siege' },
   { seed: 'r2r-city-10', pool: 'DS-GEN-13::ENTREPOT', keep: 1, text: /handles more than the town could ever use/, why: 'no plague' },
   { seed: 'r2r-hamlet-17', pool: 'DS-GEN-14::FOUNDED-YOUNG', keep: 2, text: /^Everything in \{settlement\} looks recently built/, why: 'the stem, old and new' },
+  // ── BATCH 6 ──
+  { seed: 'r2r-city-50', pool: 'DS-ECO-11::EXPLOITATION: unexploited, exportValue: medium or low', keep: 1, text: /It would fetch barely enough to pay for the work/, why: 'the stem, old and new' },
+  { seed: 'r2r-hamlet-7', pool: 'DS-ECO-11::EXPLOITATION: unexploited, exportValue: high', keep: 1, text: /in \{settlement\}'s country worth real money/, why: 'the stem, old and new' },
+  { seed: 'r2s-occupied-hamlet-1', pool: 'DS-ECO-11::EXPLOITATION: unexploited, exportValue: high', keep: 2, text: /anyone who knows its price elsewhere will want to change that/, why: 'the stem, old and new' },
+  { seed: 'r2r-thorp-22', pool: 'DS-GEN-18::UNWORKED', keep: 1, text: /the \{resource\} around/i, why: 'the stem, old and new' },
+  { seed: 'r2r-city-14', pool: 'DS-GEN-18::BOUGHT-IN', keep: 4, text: /^Ask where \{settlement\} gets its \{good\}/, why: 'the stem, old and new' },
+  { seed: 'r2r-hamlet-31', pool: 'DS-ECO-11::RESOURCE CONDITION: worked out, recovers in time', keep: 2, text: /this year: there is (nothing|little) left worth taking/, why: 'the stem, old and new' },
 ];
 
 /** CENSUS-3 seedcfg.mjs's r2r-/r2s- arms, verbatim in shape. @param {string} seed */

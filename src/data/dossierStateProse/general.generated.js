@@ -11505,7 +11505,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no crisis: under_siege"
           ],
-          "text": "Ask where {settlement} gets its {good} and you are pointed at the carts, not at anyone in the town.",
+          "text": "Ask where {settlement} gets its {good} and somebody will point you at the carts.",
           "slots": [
             "settlement",
             "good"
@@ -11576,10 +11576,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "UNWORKED": [
         {
           "angle": "counterforce",
-          "text": "The {resource} around {settlement} goes unworked; no house takes it up.",
+          "text": "No house at {settlement} makes a trade of the {resource} around it.",
           "slots": [
-            "resource",
-            "settlement"
+            "settlement",
+            "resource"
           ],
           "vid": 1
         },
