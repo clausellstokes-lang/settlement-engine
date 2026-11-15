@@ -29,6 +29,7 @@ import { seatKeeperOf } from '../people/seatKeeper.js';
 import { resolveDeclared } from '../facts/drawDeclared.js';
 import { factsOf } from '../facts/factsOf.js';
 import { textOf } from '../facts/textOf.js';
+import { powerSentenceName } from './powerSentenceName.js';
 
 /** THE SEAT UNDER AN OCCUPATION (TAIL-POWERS-2, P4): the twins of the seat sentences, by draw (0-2), and of the headless
  *  (3) and unnamed (4) seat; each declared on the vocabulary's crisis atom, so it prints only where the record is occupied. */
@@ -44,13 +45,13 @@ const OCCUPIED_SEAT = Object.freeze([
 const text = (v) => (typeof v === 'string' ? v.trim() : '');
 
 /**
- * A power's name as a sentence carries it: a trailing parenthetical qualifier ("Merchant Guilds
- * (dominant)") is the roster's annotation, not the name; a name that opens on "The" keeps it, lowered
- * mid-sentence; every other name takes "the".
+ * A power's name as a sentence carries it: its prose form from the one leaf (powerSentenceName, P3: "Military/Guard"
+ * reads "the Guard"; a trailing parenthetical qualifier, "Merchant Guilds (dominant)", is the roster's annotation, not
+ * the name); a name that opens on "The" keeps it, lowered mid-sentence; every other name takes "the".
  * @param {string} name @param {boolean} [start] @returns {string}
  */
 export function powerNameInProse(name, start = false) {
-  const bare = text(name).replace(/\s*\([^)]*\)\s*$/, '');
+  const bare = text(name) ? powerSentenceName(text(name)) : '';
   if (!bare) return '';
   const body = /^the\s/i.test(bare) ? bare.replace(/^the\s/i, '') : bare;
   return `${start ? 'The' : 'the'} ${body}`;
@@ -96,11 +97,11 @@ export function legitimacyCausesOf(breakdown, adverse) {
 
 /**
  * Whether a power's name reads as plural ("Religious Authorities", "Noble Houses"): its head noun, the
- * last word before any parenthetical, ends in a single s ("Guild", "Gentry", "Circle" do not).
+ * last word of its prose form (powerSentenceName: "Third Bloc (Neutrals)" reads "The Neutrals"), ends in a single s ("Guild", "Gentry", "Circle" do not).
  * @param {string} name @returns {boolean}
  */
 export function pluralPowerName(name) {
-  const words = text(name).replace(/\s*\([^)]*\)\s*$/, '').split(/[\s/]+/).filter(Boolean);
+  const words = (text(name) ? powerSentenceName(text(name)) : '').split(/[\s/]+/).filter(Boolean);
   const head = (words[words.length - 1] || '').replace(/[^A-Za-z']/g, '');
   return /[^s']s$/i.test(head);
 }
