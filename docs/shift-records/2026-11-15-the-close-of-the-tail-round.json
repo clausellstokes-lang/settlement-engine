@@ -11,6 +11,12 @@
       "action": "re-record",
       "predictedRows": 525,
       "proofForm": "settlement-hash"
+    },
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant"
     }
   ]
 }
