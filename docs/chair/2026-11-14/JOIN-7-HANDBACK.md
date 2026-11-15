@@ -52,6 +52,7 @@ THE CHAIR'S RULINGS TO JOIN-7 (each vetoable by the owner):
 | 17 | tail-display-civic-2026-11-14 (SWEEP) | cb4ae58f0 (02:20; holds a merge of the line at d817736d8) | d817736d8 (14) | 6e4650375 | none | — (6 files, display only) |
 | 18 | tail-display-econ-2026-11-14 (SWEEP) | fcab8b63d (02:23; holds a merge of the line at eb054d53f) | eb054d53f | d077b9c22 | none | — (5 files, batch 3, no declared move) |
 | 19 | tail-crisis-2026-11-14 (SWEEP) | 572cd48e0 (02:27; handed back) | 6a3d98d4c (K2) | 420e8fd09 | none | clean-both `hookTablesDeclared.test.js` (3/3 merged), `presumedThings.widened.register.json` (parses; 2 rows named stale by the lane); DECLARED MOVE f20ce3151 (economicViability.plotHooks): golden carried |
+| 20 | tail-houses-2026-11-14 (SWEEP) | 9525e011b (02:31; handed back) | 2c10ddefe (5) | 794a00cc5 | none | lane-only `INSTITUTION_DESC_VARIANTS.json`; DECLARED MOVE e5a24fd85 (institutions[].desc): golden carried |
 
 ## 3. Every code resolution
 
@@ -142,6 +143,7 @@ Merged clean though both sides moved them (for the close to re-derive or measure
 | golden; `INSTITUTION_SERVICES.json`; presumed registers | services (15) | DECLARED MOVE e35851db1 (availableServices, 239 births); the declaration lane-only; the registers clean-both: each by its door at the close |
 | golden | history (16) | DECLARED MOVE 7bef72cbc (history.currentTensions, 135 in 131 towns; siegeNarrative 4) |
 | golden; `presumedThings.widened.register.json` | crisis (19) | DECLARED MOVE f20ce3151 (economicViability.plotHooks, iron hooks); two market rows of the widened register named stale by the lane |
+| golden; `INSTITUTION_DESC_VARIANTS.json` | houses (20) | DECLARED MOVE e5a24fd85 (institutions[].desc); the declaration lane-only |
 
 ## 5. Item 2 at the landed tip d817736d8 (each run to a file in /home/user/j7out, read by its tail through `scripts/gate-tail.sh`)
 
