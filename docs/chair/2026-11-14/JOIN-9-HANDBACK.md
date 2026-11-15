@@ -60,6 +60,7 @@ THE CHAIR'S RULINGS TO JOIN-9 (each vetoable by the owner):
 - **05:35 UTC:** THE ORDER FROM HERE: after ties and (g): history (8799101fd), corpus-eco (a8ea5ef8e), close-tests-a (432b0330), THEN ONE LINE with the tip; then close-tests-b (1b386d3f or later), close-tests-c (957152178), close-display (451d5c39 or later), close-src (f1e2a777e or later), corpus-def (b284cbe44 or later), then the moving builders (defecon, houses, powers-b) and the sweep's end line.
 - **05:36 UTC:** houses has ended (0907dccf2): land it with history (now 45e88f9aa), corpus-eco (read back: one last text-only commit after a8ea5ef8e) and tests-a, BEFORE the line with the tip.
 - **05:53 UTC:** THE BOOT IS GREEN ON ITS BRANCH: "LAND lane/tail-ties-2026-11-14 at d247d8a3" (or the later tip read back) AS THE NEXT POINT after the one in hand, then one line with the tip; then the first group as ordered and the line, then the rest. The economy generators' seat has ended (887ff8eec); a close seat is on that branch now: it lands as any moving branch.
+- **06:03 UTC:** point 9's composed red: the tests-a seat re-keys that anchor on its branch; it lands again ON THE CHAIR'S WORD. The new rule stands (a test file both sides moved stops at the merge, before the commit). FOUR CLOSE BRANCHES LAND ONLY ON THE CHAIR'S WORD, in this order, each after its seat has merged the line and settled the shared test files on its own branch: tests-a (its fix), tests-b, tail-close-display, tests-c: OUT OF THE RUNNING SWEEP. Then: houses, the line, then tail-close-src (5d99786c5 or later), corpus-def, defecon, powers-b, crisis (each at the tip read), then the sweep's end line.
 
 ## 2. The landings
 
@@ -76,6 +77,7 @@ THE CHAIR'S RULINGS TO JOIN-9 (each vetoable by the owner):
 | 8 | lane/tail-ties-2026-11-14 | d247d8a32 (05:55) | 4ec61102f | 6587c20df | none | 6 files outside docs/; declared-move commits: none (golden carried) |
 | 9 | lane/tail-close-tests-a-2026-11-15 | 432b0330c (05:59) | 7efc76861 | e3c393377 | none | 58 files outside docs/; declared-move commits: none (golden carried); merged clean though both moved: tests/components/displayEconRelianceFoodWords.test.jsx  |
 | 10 | lane/tail-houses-2026-11-14 | 0907dccf2 (06:03) | 3e482b329 | 329f324a0 | **CODE (test)**: `w2FixData6Rows.test.js` row 4, close-tests-a against houses: composed, both stand (§3) | clean-both `tailHouses1Gaps`, `tailHouses4CoastCrown` (5/5 green), `presumedThings.widened.register.json`; DECLARED MOVES 61648f2a2 99438070f 6510d746b 36bcb60b5 5d906f6e4: golden carried |
+| 11 | lane/tail-close-src-2026-11-15 | 5d99786c5 (06:08) | 0be927178 | 8fe1dc904 | none | 9 files outside docs/; declared-move commits: none (golden carried) |
 
 ## 3. Every code resolution
 
