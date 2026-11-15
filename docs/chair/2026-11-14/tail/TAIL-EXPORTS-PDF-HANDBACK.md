@@ -107,6 +107,18 @@ start of that panel; no file of this batch is in its closure. No tab sentence mo
 The residual's share in the economics slice keeps the canon's 0 where no gap is left (`parityContract.js` SHARED_FIELDS);
 that change follows the after run and prints nothing (every reader of the share prints it only under a deficit).
 
+### The three silences told to the chair before the push (not vetoed, 2026-11-15 01:04)
+
+| silenced line | towns | why |
+|---|---|---|
+| "Black market capture: N% of economy" where N is under 3 | 244 (720 -> 476) | the Economics tab's floor (`shadowEconomyShown.js`) |
+| the terrain-critical goods the tab does not print (Metals 219 -> 130, gold/silver ore 200 -> 78, Mountain Timber 168 -> 128, luxury goods 420 -> 115, and the rest above) | 44 lose the CRITICAL DEPENDENCIES block whole (702 -> 658); 62 the IMPORT DEPENDENCIES · CRITICAL block (698 -> 636) | `criticalImportsShown.js` |
+| the economics headline's "transit trade" export clause | 25 | it names the first export the tab's Exports print (`tradeListsAsPrinted`) |
+
+The chair's reason (for the record): E1 is fact by fact. Where the tab has a leaf for a fact, that leaf is the page's one
+voice on it, and a second voice in the PDF that says more than the leaf was the readers' flag. It does NOT mean the PDF
+may print nothing the tabs lack: a chapter's own content with no tab leaf stays and is judged by the record.
+
 ## Rows named for other groups
 
 - The Economics tab's switch to `shadowEconomyShown.js` and `criticalImportsShown.js` (its inline `bmc < 3` and
@@ -148,3 +160,18 @@ Batch 1 reached the P1 rows and the power headline. Left, by shape (ids in the w
 - Guards owed: the tabs' switches to the three new leaves (DISPLAY-ECON, DEFECON) and a guard that the tab and the PDF
   read one leaf for each (a walker, once the tabs read them).
 
+## For the successor (handed back at the budget line, 2026-11-15 01:08)
+
+- FIRST ACT (the chair's E9/E10/E15-era notes): merge origin/lane/join-2026-11-14 AT eeaa06816 into this branch (a merge
+  commit of its own, the only merge this seat makes), `npm ci` if the lockfile moved, and re-take the BEFORE census at
+  the merged tree. The crisis leaf is whole there: `crisisStoppedRow.js :: rowStoppedBy(settlement, 'service' | 'house' |
+  'chain' | 'income', row)`, `crisisMarkText`, `markedDescription`, `ordinaryTimesLine`, `STOPPED_WORD`; table
+  `src/data/crisisDependence.js` (a chain by `activeChains[].chainId`, an income share by `incomeSources[].source`). Call it
+  for the E3 rows listed above, and for REST 25077, 25075 (transit trade under a siege or a plague) and 04297.
+- Chair note E15 (1): row 29296, the PDF cover's "Top export: Salted fish (naval route only)" in r2r-village-21 (no sea
+  access, imports nothing on the record): the cover's route note is to read the town's own trade access, or the tab's
+  leaf for it.
+- Chair note E15 (2): STRIKE any row saying a chain prints "(impaired)" where the header said running under a siege:
+  `chainStateOnPage.js` reads the Economics tab's `chainAsShown`, and under a siege the page's state is Impaired. (None
+  of this batch's rows had that shape.)
+- Instruments as above; this seat's runs were at /tmp (scratch) and are not carried: re-take them.
