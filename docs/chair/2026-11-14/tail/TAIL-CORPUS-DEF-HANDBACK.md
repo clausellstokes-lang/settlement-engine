@@ -667,6 +667,9 @@ lane/tail-close-src-2026-11-15 (three-dot diff) when each was taken.
    vocabularyPageFindings "a famine written as a risk to come" (expected ['famineToCome'], got []): its plant is DS-ECO-9
    'FOOD SOURCES: one source' v1, which a8ea5ef8 (TAIL-CORPUS-ECO-4 batch 8, C20) rewrote from a risk to come ("would
    cost the whole town dear") to a present one ("is felt across the whole town"). The same shape as C28: for the chair.
+   C29 (the chair lent it): case (i): every leaf scanned with the family's words and context; the plant MOVED to DS-DEF-12
+   'CAPACITY: short' v2 ("… so a bad harvest there would mean going without.", no mark or pool declaration keeps it out of
+   a famine town), computed through variantByVid. Plant reds it. 34/34: the ten files 131 of 131.
 2. Seen, not chased (not lent): rv2-wartime-hamlet-5 (walls, no force, 60 Adequate) prints the Invasion line "has walls
    and nobody to put on them. A determined attacker takes this town …" beside an Adequate bar; threatRowsTrueUnderBand's
    FALSE_UNDER holds "A determined attacker" false under ADEQUATE on the readiness rows (its law's births are rv2-calm and
