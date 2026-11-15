@@ -604,3 +604,27 @@ The merge of d817736d8 (7ccad225e), batch 6 (C18: 9 flags, 7 cured, 1 struck, 1 
 its before census at this branch's tip (CENSUS-3's command with `render.census3d.jsx`, made by `mkrender.py`); for twins
 replay with `replay2.mjs` and NEWV=<pool key>:<vid>. A census after U2 was NOT taken: replay shows no draw of the 720
 moved by the one twin, and the rest are test edits.
+
+---
+
+# TAIL-CORPUS-DEF-5 (the fifth seat, session_01ACmDYaqwQpDn5da47f5sjx, a child of the chair session_01ACmDYZrFEVXyZEUg1NDxxC; 2026-11-15)
+
+THE BASE: lane/join-2026-11-14 at 7163b309 (holds 9d3d177a0) merged as fb591934. Each named red run ALONE there (logs
+in the seat's scratch): 10 failing tests in 7 files. No cause file differed on lane/tail-defecon-2026-11-14 or
+lane/tail-close-src-2026-11-15 (three-dot diff) when each was taken.
+
+## U2's named reds (each: its commit, and what was done)
+- **defenseWatchIsNotTheLevy** (1 of 2 red): 7509b3794 (UPKEEP-13 P4, declared: people.milPerHead 1) holds
+  rr3-thorp-famine-rand-0 (14 people) to 14, Critical, where withinTheBar rightly silences the citizen-militia pool.
+  RE-KEYED (ii): the keeper is rr3-thorp-famine-rand-7 (27 people, walls + militia, draws the pool). 2/2.
+- **threatRowsTrueUnderBand** (1 of 2): 7509b3794 (declared) holds rv2-calm-hamlet-1 (34) to Weak, where "not enough
+  against an army" is true. RE-KEYED (ii): rv2-calm-hamlet-12 (88, Strong, the twin prints). 2/2.
+- **defenceTraditionReaders** (1 of 2): 42d82c775 (UPKEEP-CAPACITY C4a, declared: the walk to another's church opens no
+  tradition). No thorp or hamlet of r2r-thorp-0..29 / r2r-hamlet-0..11 holds the divine tradition now. RE-KEYED (ii):
+  the holder is r2r-village-1 (Parish church, resident Priest); r2r-thorp-1 still does not hold it. 2/2.
+- **defenseWithinTheBar** (2 of 3): 07ebe8bdc / 94c5d408f / 7509b3794 (all declared) took three hamlets off a Strong bar
+  (rv2-wartime-hamlet-5 60 Adequate, rv2-calm-hamlet-27 29 Weak, rv2-calm-hamlet-30 59 Adequate). RE-KEYED (ii): the
+  nearest Strong hamlet of each crisis: rv2-wartime-hamlet-7, rv2-calm-hamlet-20, rv2-calm-hamlet-50. 3/3.
+
+## What is left (TAIL-CORPUS-DEF-5's list, current)
+1. defensePostureAgainstItsFacts (3 of 10 red), defensePostureReadsBadge (1 of 5, C24), defenseWordsFindings (1 of 12).
