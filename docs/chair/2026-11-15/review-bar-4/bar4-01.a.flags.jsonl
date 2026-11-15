@@ -1,0 +1,8 @@
+{"id":"C0543","town":"bar0-city-under_siege+famine-rand-21","sev":"MED","kind":"STATE","why":"Iron refining offered unmarked; LAND: Smelter runs on imported iron ore, siege stops all imports; blacksmith rows needing iron are marked Impaired","other":"C0519"}
+{"id":"C0978","town":"bar0-city-under_siege+famine-rand-21","sev":"MED","kind":"BROKEN","why":"Heading says 29 institutions; Systems/Power card section shows every line and lists only 25 (22 held plus 3 with no power of own kind)","other":""}
+{"id":"C1014","town":"bar0-city-under_siege+famine-rand-21","sev":"MED","kind":"BROKEN","why":"Heading says 15 institutions behind Grain Holders; card lists only 12 (markets through Luxury goods quarter)","other":""}
+{"id":"C0286","town":"bar0-city-under_siege+famine-rand-21","sev":"LOW","kind":"PAIR","why":"Blacksmiths row printed on offer with no mark, yet C1170 lists Blacksmiths as critically impaired by siege and Services marks their rows Impaired","other":"C1170"}
+{"id":"C0393","town":"bar0-city-under_siege+famine-rand-21","sev":"LOW","kind":"PAIR","why":"Daily markets 'open every day', Fresh produce, unmarked under siege and famine; C1170 lists Daily markets critically impaired; C0038 says market sells only to city's own","other":"C1170"}
+{"id":"C0233","town":"bar0-city-under_siege+famine-rand-21","sev":"LOW","kind":"BROKEN","why":"'the city granaries ... if it gives way': singular pronoun and verb for plural 'granaries'; same template in famine line C0236","other":"C0236"}
+{"id":"C2020","town":"bar0-city-under_siege+famine-rand-21","sev":"MED","kind":"PAIR","why":"Says besiegers 'have not moved'; Summary says they draw closer each week","other":"C0017"}
+{"id":"DONE","lines":2089,"blocks":1,"flags":7}
