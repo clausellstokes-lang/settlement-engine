@@ -1,5 +1,25 @@
 # TAIL-POWERS-B · the hand-back (kept current after every batch)
 
+FIFTH SEAT (2026-11-15, from 05:35 UTC): TAIL-POWERS-B-5 (session_01ACmDYY1oQE2u8QUySxACvr) holds this file and this branch
+since c6399e488, a CLOSE seat: the four reds of the first whole check in the powers' area. Merged the joined line at 03466231
+(holds 9d3d177a0) as 4442e1d4d. Pushed from a scratch worktree (local branch `tpb5-work`) by explicit refspec, fast-forward only;
+the main checkout was never staged, committed or reset.
+
+## TAIL-POWERS-B-5 · the four reds (each run alone at the merge 4442e1d4d first)
+- RED 1, THE HALL'S THREE (hallDecidesUnderOccupation 1 of 7, hallLineReadsCrime 1 of 1 (the collected 1 of 8),
+  criminalSwayReadsHall 1 of 6): RE-KEYED BY IDENTITY, a1351a7e6. A DECLARED MOVE of the display the hall's pins did not
+  follow: 82e8fab6e (W2-C-LEAVES-3) and 0044e4f84 (W2-C-LEAVES-11, ruling (1)) read "Multiple criminal factions" with no
+  criminal seat and no thieves' guild as rival rings (semi-organized); 0044e4f84 keeps r2r-city-3 as its own guard. Probed:
+  none of the three towns stands a criminal power or a thieves' guild; the none rung's first line prints, TRUE beside rival
+  rings (POWERS-14's own reading). Not a regression: the hall reads the structure; the structure moved, declared. No src
+  touched; 0 of the 720 prints move. After: 7/7, 1/1, 6/6; eslint 0; typecheck:ratchet 0; grid 2 falls = the base.
+- RED 2, labelJoins (P33/P34): in progress.
+- RED 3, captureBirthScale ("floor 372 > 326"): the first-parent bisect bfab7bdd8..4f24025c2 running in scratch.
+- RED 4, r3c9ReaderLinesTrue (Ainkarez): not yet started.
+- MOVING CHECK: src/generators/power/claimStanding.js and rulingStructure.js show a three-dot diff on
+  lane/tail-corpus-def-2026-11-14, but the two-dot diff of that tip against the joined line is EMPTY for both (the criss-cross
+  merge bases make the three-dot diff carry this branch's own batch 7, already joined): not another seat's unmerged change.
+
 FOURTH SEAT (2026-11-15, from 04:47 UTC): TAIL-POWERS-B-4 (session_01ACmDYaigqvGezgaSa8oP58) holds this file and this branch
 since cce57ff35: batch 8 (P31) and the U2 reds below are its. Pushed from scratch worktrees by explicit refspec, fast-forward
 only; the main checkout was never staged, committed or reset.
