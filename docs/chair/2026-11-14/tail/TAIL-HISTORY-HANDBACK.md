@@ -105,6 +105,19 @@ The presumed-things walker and the twelve-birth grid were NOT run this batch (th
 
 ### WHAT IS LEFT (TAIL-HISTORY-5's hand-back, widest first; supersedes every list below)
 
+0. **FIRST, THE CHAIR'S RULING U2** (05:06 UTC, received after this seat's budget ran out; vetoable by the owner): the first whole check of the joined line found 198 failing tests, and the line must pass. Before the next batch, run each file alone at the tip (`sh scripts/gate-tail.sh npx vitest run <file>`):
+   - (a) `tests/lint/styleLaw.walker.test.js`: two struck phrases rose in `src/data/historyData.js`. One is "…and keeps the record of it locked away" (`the-record`, about line 1601); the other is "…swears it came in with a stranger, and wants the stranger found" (`a-stranger`, about line 1511). REWRITE both lines as the style law's own text says, keeping the claim, with their declarations. The baseline is not raised.
+   - (b) `tests/generators/hookTruthAtBirth.test.js`, 2 of 13:
+     - rww-thorp-calm-1, "the sealed-walls hook is not stored where no walls stand, and its event keeps a hook" (TypeError: undefined, not a number);
+     - rww-city-insurgency-1, "the poisoning hook is not stored" (an array of 1 where [] was expected).
+     - A regression in this group's files: cure it. A pin a declared move explains: re-key BY IDENTITY, naming the move. A cause outside these files: one line here with the commit (`git log -S`). Never a test skipped or weakened.
+   - EVERY NEW TEST from now on:
+     - anchored negatives (`tests/helpers/anchoredNegatives.js`);
+     - seed loops through the totality helper;
+     - no literal state-prose sentence as an anchor (`tests/helpers/drawnProse.js`);
+     - `scripts/mutation-coverage-manifest.json` is NOT edited (its one writer is a close seat).
+     - Batch 6's guard predates this. It loops through `collectSeedFailures`, but its KEEP and MUST-NOT anchors are literal lines, so bring it to the helpers.
+   - Then Y17 as written, the HIGH first. Y17's four rows and 03015 are cured (batch 6); what is left of Y17 is items 2 and 3 below.
 1. **OWED for batch 6:** the presumed-things walker (`--check`) and the twelve-birth grid (`node scripts/census/page-census.mjs --grid`) at the tip. Neither was run.
 2. **The chair's named singles** (04:08 note, not owed): the horse traders meeting under a quarantine (Y8's form); the carts of cloth and wool where none is made or sold; the reagent stalls where no alchemist or apothecary stands. Measure each first: the arrival scene is on the record (`arrivalScene`), and a script over `corpus.ndjson.gz` is enough.
 3. **The worklist's rows in five towns or more**, as TAIL-HISTORY-3 listed them:
