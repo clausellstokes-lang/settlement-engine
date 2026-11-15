@@ -59,6 +59,7 @@ THE CHAIR'S RULINGS TO JOIN-7 (each vetoable by the owner):
 | 24 | tail-powers-b-2026-11-14 (SWEEP) | f4eab4088 (02:42) | f89c0d7c1 (6) | 6ad86c138 | none | DECLARED MOVES cddbc3274 (factions[].powerLabel), 42f7f68c2 (factionRelationships[].direction 15): golden carried |
 | 25 | tail-defecon-2026-11-14 (SWEEP) | 21e578caa (02:45; holds a merge of the line at d817736d8) | d817736d8 (14) | 1b672cbe8 | none | clean-both CODE `foodBalance.js` :: deriveSupplyRiskAnalysis (crisis 19's hook words at 851, this lane's condition at 848: both stand), `presumedThings.widened.register.json` (parses); DECLARED MOVE 2ac50c55d: golden carried |
 | 26 | tail-defecon-c-2026-11-14 (SWEEP) | ea788e17c (02:49) | fb341090c (8) | 390168d6b | none | DECLARED MOVES a10a457e2 C1-E, e6700483b D19, 28f86423c D25, ea788e17c D30(a): golden carried |
+| 27 | tail-defecon-r-2026-11-14 (SWEEP) | a515e1b54 (02:52) | 5a446d29b (10) | 4b19b7446 | none | clean-both CODE `resourceGenerator.js` (defecon's line 46, this lane's five hunks: do not meet, both stand); DECLARED MOVE fcf4cae69 M-V (gaps): golden carried |
 
 ## 3. Every code resolution
 
@@ -155,6 +156,7 @@ Merged clean though both sides moved them (for the close to re-derive or measure
 | golden | powers-b (24) | DECLARED MOVES cddbc3274 (powerStructure.factions[].powerLabel), 42f7f68c2 (factionRelationships[].direction, 15 towns) |
 | golden; `foodBalance.js` (read at the close); `coherenceAgreeCures.test.js` | defecon (25), crisis (19) | DECLARED MOVE 2ac50c55d (economicComplexity 196, incomeSources 57, plotHooks 14 ...); foodBalance.js moved by two seats in adjacent hunks, merged clean |
 | golden | defecon-c (26) | DECLARED MOVES a10a457e2 (C1-E, primaryExports), e6700483b (D19), 28f86423c (D25), ea788e17c (D30 a, the made list) |
+| golden | defecon-r (27) | DECLARED MOVE fcf4cae69 M-V (resourceAnalysis.gaps) |
 
 ## 5. Item 2 at the landed tip d817736d8 (each run to a file in /home/user/j7out, read by its tail through `scripts/gate-tail.sh`)
 
