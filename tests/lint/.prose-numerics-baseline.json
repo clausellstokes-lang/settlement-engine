@@ -381,7 +381,7 @@
     "path": "src/components/new/tabs/EconomicsTab.jsx",
     "line": 663,
     "category": "percentToken",
-    "snippet": "`Shadow Economy: ${bmc}% capture`"
+    "snippet": "`Shadow Economy: ${bmc}% of trade unrecorded`"
   },
   {
     "path": "src/components/new/tabs/EconomicsTab.jsx",

@@ -623,11 +623,11 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
       {/* ── SHADOW ECONOMY ───────────────────────────────────────────────────── */}
       {(()=>{
         const sp = s?.economicState?.safetyProfile;
-        const bmc = sp?.blackMarketCapture || 0;
+        const bmc = shadowCaptureShown(sp) ?? 0; // TAIL-DISPLAY-ECON-5 (X30): the leaf the PDF prints through; silent where the record holds no illicit money
         const dragDesc = sp?.economicDragDesc;
         const crimChains = (s?.economicState?.activeChains||[]).filter(c=>c.needKey==='criminal_economy');
         const crimeTypes = sp?.crimeTypes || [];
-        if (!sp || bmc < 3) return null;
+        if (!sp || !bmc) return null;
 
         const sevColor = bmc>=30?'#8b1a1a':bmc>=15?'#8a3010':'#7a5010';
         const sevBg    = bmc>=30?'#fdf4f4':bmc>=15?'#fdf0e8':'#faf8e8';
@@ -660,7 +660,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
             ONE speaking position reached a first-paint reader on under two percent of the
             worlds this generator builds. The scale note travels WITH it, so nothing is
             doubled and the fold's own reader loses nothing. */}
-        <Section title={`Shadow Economy: ${bmc}% capture`} collapsible defaultOpen={bmc>=15}>
+        <Section title={`Shadow Economy: ${bmc}% of trade unrecorded`} collapsible defaultOpen={bmc>=15}>
           <div style={{display:'flex',flexDirection:'column',gap:10}}>
 
             {/* Capture rate + scale context */}
@@ -855,7 +855,7 @@ function impairedHousesOf(town) {
  * in the present; it is LEFT OUT beside the page's own siege note (the Imports header, its goods and its empty-state
  * line). The record's imports are untouched; the needs line stands. At the end of the file, so no line-keyed row moves.
  */
-import { tradeStoppedHere } from '../../../domain/display/chainStateShown.js';
+import { tradeStoppedHere } from '../../../domain/display/chainStateShown.js'; import { shadowCaptureShown } from '../../../domain/display/shadowEconomyShown.js'; // X30: the Shadow Economy block's one floor, the PDF's too
 
 /**
  * THE ECONOMIC FLOWS HEADER COUNTS WHAT THE CARDS UNDER IT SHOW (TAIL-DISPLAY-ECON, the chair's ruling X2, 2026-11-14; the
